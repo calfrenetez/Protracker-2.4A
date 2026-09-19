@@ -11,6 +11,9 @@
 #include "../src/native/paula.h"
 static void *allocate(void *ctx,size_t n) {(void)ctx;return malloc(n);}
 static void release(void *ctx,void *p) {(void)ctx;free(p);}
+extern volatile uint8_t pt_replay_voices[];
+static uintptr_t voice_start(void)
+{return ((uintptr_t)pt_replay_voices[4]<<24)|((uintptr_t)pt_replay_voices[5]<<16)|((uintptr_t)pt_replay_voices[6]<<8)|pt_replay_voices[7];}
 static ULONG dummy_interrupt(void) {return 0;}
 #define CHECK(c) do {if(!(c)) {printf("FAIL line %u: %s\n",__LINE__,#c);goto done;}}while(0)
 static int claim(struct Library *resource,unsigned bit,struct Interrupt *server)
@@ -76,6 +79,24 @@ int main(int argc,char **argv)
     for(i=0;i<100 && a.started;++i) {Delay(1);pt_paula_poll(&a,&state);}
     CHECK(!a.started && (*(volatile UWORD *)0xdff002 & 15)==0);
     CHECK(pt_document_load(&doc,input,length,SIZE_MAX)==PT_PROJECT_OK);
+    /* Empty instruments and initial instrument-zero notes use an owned word,
+       never a zero-length DMA transfer or a pointer beyond the allocation. */
+    for(i=0;i<2;++i) {
+        doc.project.events[0].instrument=i?0:2;
+        doc.project.events[0].effect=12;doc.project.events[0].parameter=64;
+        CHECK(!pt_paula_play(&a,&doc.project,0,0,0));Delay(10);
+        CHECK(voice_start()==(uintptr_t)(a.data+a.bytes));
+        CHECK(pt_replay_voices[20]==0 && pt_replay_voices[21]==1);
+        CHECK(a.data[a.bytes]==0 && a.data[a.bytes+1]==0);pt_paula_stop(&a);
+    }
+    CHECK(pt_document_load(&doc,input,length,SIZE_MAX)==PT_PROJECT_OK);
+    /* Optional preserved MOD headers cannot smuggle an out-of-range one-word
+       repeat through the project format into the hardware snapshot. */
+    {uint8_t *header=(uint8_t *)doc.project.extensions[0].data;
+        header[20+30+26]=0x7f;header[20+30+27]=0xff;
+        CHECK(pt_paula_play(&a,&doc.project,0,0,0)!=NULL && !a.started);
+    }
+    CHECK(pt_document_load(&doc,input,length,SIZE_MAX)==PT_PROJECT_OK);
     /* Force CIA fallback and total failure. Never replace an existing vector. */
     ciab=OpenResource("ciab.resource");ciaa=OpenResource("ciaa.resource");CHECK(ciab && ciaa);
     own_b=claim(ciab,0,&holdb);CHECK(own_b);
@@ -89,7 +110,7 @@ int main(int argc,char **argv)
         puts("CIA fallback/vector-release PASS");
     } else puts("CIA fallback execution NOT RUN: Workbench already owns CIAA timer B; existing vector preserved");
     CHECK(!claim(ciab,0,&holda)); /* Unrelated held timer A was preserved. */
-    puts("PAULA PASS: playback periods, busy audio refusal, DMA stop, immutable project, repeated restart, live edit, audition, speed/tempo/volume/cut, unsupported refusal, CIA exhaustion and unrelated-vector preservation");rc=0;
+    puts("PAULA PASS: playback periods, busy audio refusal, DMA stop, immutable project, repeated restart, live edit, audition, speed/tempo/volume/cut, unsupported refusal, owned empty-sample DMA, CIA exhaustion and unrelated-vector preservation");rc=0;
 done:
     pt_paula_stop(&b);pt_paula_stop(&a);
     if(own_a)unclaim(ciaa,1,&holda);

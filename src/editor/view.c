@@ -25,22 +25,40 @@ static void rect(struct pt_canvas *c,int x,int y,int w,int h,unsigned pen)
    Avoid calling a rectangle renderer once per set pixel on a 68030. */
 static void glyph_row(struct pt_canvas *c,int x,int y,unsigned bits,unsigned pen,int scale)
 {
-    unsigned p,k,r,width=scale==3?12:(unsigned)scale*8;uint32_t mask,v=bits;
-    if(scale==3) {v=0;for(k=0;k<8;++k) {unsigned n=(k+1)*3/2-k*3/2;v=(v<<n)|((bits&(128U>>k))?((1U<<n)-1):0);}}
+    static const uint8_t stretch[16]={0,3,4,7,24,27,28,31,32,35,36,39,56,59,60,63};
+    unsigned p,k,width=scale==3?12:(unsigned)scale*8,count;uint32_t mask,v=bits;
+    uint8_t m0,m1,m2;size_t offset;
+    /* Four source bits become six destination bits. This replaces eight
+       variable shifts per row without changing the 1,2,1,2 pixel spacing. */
+    if(scale==3)v=((unsigned)stretch[bits>>4]<<6)|stretch[bits&15];
     if(scale==2) {v=(v|(v<<4))&0x0f0f;v=(v|(v<<2))&0x3333;v=(v|(v<<1))&0x5555;v|=v<<1;}
     if(x<0 || x+(int)width>640 || y<0 || y+1>=512) {
-        for(k=0;k<8;++k)if(bits&(128U>>k))rect(c,x+(int)k*scale,y,scale,2,pen);
+        for(k=0;k<8;++k)if(bits&(128U>>k)) {
+            int start=scale==3?(int)k*3/2:(int)k*scale;
+            int end=scale==3?(int)(k+1)*3/2:(int)(k+1)*scale;
+            rect(c,x+start,y,end-start,2,pen);
+        }
         return;
     }
-    mask=v<<(24-width-(x&7));
-    for(p=0;p<4;++p)for(r=0;r<2;++r) {
-        uint8_t *dest=c->planes[p]+(y+(int)r)*80+x/8;
-        for(k=0;k<(width+(x&7)+7)/8;++k) {
-            uint8_t m=(uint8_t)(mask>>(16-k*8));
-            if(pen&(1U<<p))dest[k]|=m;else dest[k]&=(uint8_t)~m;
+    mask=v<<(24-width-(x&7));count=(width+(x&7)+7)/8;
+    m0=(uint8_t)(mask>>16);m1=(uint8_t)(mask>>8);m2=(uint8_t)mask;
+    offset=(size_t)y*80+x/8;
+    /* Both scanlines share these masks. Avoid recomputing/shifting a mask
+       for every byte of every plane on the 68000-compatible build. */
+    for(p=0;p<4;++p) {
+        uint8_t *d=c->planes[p]+offset;
+        if(pen&(1U<<p)) {
+            d[0]|=m0;d[80]|=m0;
+            if(count>1) {d[1]|=m1;d[81]|=m1;}
+            if(count>2) {d[2]|=m2;d[82]|=m2;}
+        } else {
+            d[0]&=(uint8_t)~m0;d[80]&=(uint8_t)~m0;
+            if(count>1) {d[1]&=(uint8_t)~m1;d[81]&=(uint8_t)~m1;}
+            if(count>2) {d[2]&=(uint8_t)~m2;d[82]&=(uint8_t)~m2;}
         }
     }
 }
+
 static void letters(struct pt_canvas *c,const uint8_t *font,int x,int y,const char *s,unsigned pen,int scale)
 {
     unsigned ch,row;

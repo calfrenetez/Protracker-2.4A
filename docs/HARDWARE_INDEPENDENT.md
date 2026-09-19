@@ -227,3 +227,25 @@ This supersedes the earlier "playback disabled" prototype status. It does not
 certify every 2.3F effect combination, physical sound quality, phase-accurate
 quadrascopes, full mixed backend dispatch or physical UI performance. Full-frame
 redraws are still slow in the test profile; CIA replay continues independently.
+
+## Native file requesters and renderer, 19 September 2026
+
+The Enhanced editor can now start with a blank song, load a MOD/PTG with LOAD or
+Control-O, and select a new save path with DISK OP. > SAVE NEW or Control-Shift-S.
+Control-S uses a supplied command-line destination or opens the requester. Dirty
+loads need a second Load action; other input cancels that confirmation. Cancelled
+or invalid loads preserve the current document/history. Existing destinations are
+still refused, and successful saves still use staging/readback verification.
+
+The native workflow test verified blank start, dialog load, an independently
+checked D-2 note and CRC, new save, overwrite refusal, dirty confirmation/cancel,
+invalid load, loading the saved file, playing its changed note and byte-identical
+resaving to another name. The renderer optimization produced identical pixels
+and cut measured three-frame draw time from 224 to 151 50-Hz ticks in the same
+emulator configuration. Full-frame refresh remains a performance limitation.
+
+Replay also now gives empty samples and initial instrument-zero notes an owned
+Chip RAM silence word and a nonzero DMA length, and rejects out-of-range one-word
+sample-loop metadata. Native checks exercise these boundary cases alongside the
+previous playback/ownership/effect tests. Vendor replay code is still untouched;
+the generated ABI/setup adapter supplies the safe initial state.

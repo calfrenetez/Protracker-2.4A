@@ -45,6 +45,8 @@ PT2.4G is the four-channel assembler derivative (dev2), with loader/input guards
 PT24GEdit is a separate native Enhanced editor prototype with project editing,
 paging, undo, verified new-file saves and classic four-channel Paula playback.
 F8 plays, F9 loops the pattern and F10 stops. SAMPLE auditions a classic sample.
+LOAD/Control-O opens a MOD/project. Control-Shift-S selects a new save path.
+Starting PT24GEdit without arguments creates a blank song.
 Mixed AmiGUS/MIDI replay and other unfinished controls remain unavailable.
 PT24GConvert inspects projects and performs strict lossless MOD/project conversion.
 This is not the finished sixteen-channel tracker or a hardware-qualified release.

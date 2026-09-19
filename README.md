@@ -11,7 +11,9 @@ verified new-file project saves and strict lossless classic MOD round trips.
 A separate native Enhanced editor prototype now connects project loading, note
 entry, four-column paging, pattern undo and verified saving. Its first replay
 path adds classic four-channel Paula song/pattern playback, sample audition and
-live pattern edits; [mixed-backend playback remains open](docs/PAULA_REPLAY.md). The
+live pattern edits; [mixed-backend playback remains open](docs/PAULA_REPLAY.md).
+Native Load/Save New dialogs now support the workflow from a blank song through
+load, edit, play, save and reopen, with cancelled/invalid loads preserving edits. The
 Enhanced screen now follows the owner's full classic reference after the
 earlier simplified layout was rejected. See the
 [editor guide](docs/ENHANCED_EDITOR.md) and retained native UI evidence. Physical AmiGUS tests await the owner's Mini.

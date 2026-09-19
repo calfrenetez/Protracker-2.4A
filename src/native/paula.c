@@ -5,8 +5,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "mod_project.h"
+#include "mod_inspect.h"
 #include "paula.h"
-extern int pt_replay_start(void *,unsigned long);
+extern int pt_replay_start(void *,unsigned long,void *);
 extern void pt_replay_stop(void);
 extern volatile uint32_t pt_replay_ticks;
 extern volatile uint16_t pt_replay_rowbytes,pt_replay_tempo;
@@ -27,24 +28,33 @@ void pt_paula_stop(struct pt_paula *a)
     if(a->lock)DeleteIORequest((struct IORequest *)a->lock);
     if(a->audio)DeleteIORequest((struct IORequest *)a->audio);
     if(a->port)DeleteMsgPort(a->port);
-    if(a->data)FreeMem(a->data,a->bytes);
+    if(a->data)FreeMem(a->data,a->bytes+2);
     free(a->staging);memset(a,0,sizeof(*a));
 }
 const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned mode,unsigned position,unsigned pattern)
 {
-    struct pt_mod_export_report report;size_t written;UBYTE channels=15;
+    struct pt_mod_export_report report;struct pt_mod_info info;size_t written;unsigned i;UBYTE channels=15;
     const char *error="PLAY: OUT OF CHIP MEMORY";
     if(mode>1 || position>=p->order_count || pattern>=p->pattern_count)return "PLAY: INVALID POSITION";
     if(pt_mod_export_analyse(p,&report)!=PT_PROJECT_OK || report.issues)
         return "PLAY: REQUIRES CLASSIC FOUR-CHANNEL PAULA PROJECT";
     pt_paula_stop(a);a->bytes=report.bytes;a->pattern_bytes=(size_t)p->pattern_count*1024;
     a->mode=mode;a->pattern=pattern;
-    a->data=AllocMem(a->bytes,MEMF_CHIP|MEMF_PUBLIC);
+    a->data=AllocMem(a->bytes+2,MEMF_CHIP|MEMF_PUBLIC);
     a->staging=malloc(a->bytes);
     if(!a->data || !a->staging)goto failed;
     if(pt_mod_export_direct(p,a->data,a->bytes,&written)!=PT_PROJECT_OK || written!=a->bytes) {
         error="PLAY: SNAPSHOT ENCODE FAILED";goto failed;
     }
+    error="PLAY: UNSAFE CLASSIC SAMPLE METADATA";
+    if(pt_mod_inspect(a->data,a->bytes,&info)!=PT_MOD_OK || info.warnings)goto failed;
+    for(i=0;i<31;++i) {
+        const uint8_t *h=a->data+20+i*30;
+        unsigned length=be16(h+22),start=be16(h+26),repeat=be16(h+28);
+        /* Even a one-word ProTracker loop must remain inside its sample. */
+        if(start && start+(repeat?repeat:1)>length)goto failed;
+    }
+    a->data[a->bytes]=0;a->data[a->bytes+1]=0; /* Owned empty-sample DMA word. */
     if(mode) {
         a->data[950]=1;a->data[952]=(uint8_t)pattern;
         /* Keep sample-data offset correct even when order zero was the only
@@ -73,7 +83,7 @@ const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned
     SendIO((struct IORequest *)a->lock);a->locked=1;
     if(CheckIO((struct IORequest *)a->lock)) {WaitIO((struct IORequest *)a->lock);a->locked=0;goto failed;}
     error="PLAY: CIA TIMER UNAVAILABLE";
-    if(!pt_replay_start(a->data,mode?0:position))goto failed;
+    if(!pt_replay_start(a->data,mode?0:position,a->data+a->bytes))goto failed;
     a->started=1;return NULL;
 failed:
     pt_paula_stop(a);return error;

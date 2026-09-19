@@ -19,6 +19,18 @@ _pt_replay_start
 pt_clearvoices
 	CLR.L (A0)+
 	DBRA D0,pt_clearvoices
+	; An instrument-zero note before any sample must never read address zero.
+	MOVE.L 56(SP),A1
+	LEA mt_audchan1temp(PC),A0
+	MOVEQ #3,D0
+pt_init_silence
+	MOVE.L A1,n_start(A0)
+	MOVE.L A1,n_loopstart(A0)
+	MOVE.L A1,n_wavestart(A0)
+	MOVE.W #1,n_length(A0)
+	MOVE.W #1,n_replen(A0)
+	LEA 44(A0),A0
+	DBRA D0,pt_init_silence
 	MOVE.W #1,mt_audchan1temp+n_dmabit
 	MOVE.W #2,mt_audchan2temp+n_dmabit
 	MOVE.W #4,mt_audchan3temp+n_dmabit
@@ -39,6 +51,24 @@ pt_clearvoices
 	TST.L CIAAbase
 	BEQ.B pt_startfailed
 	BSR.W mt_init
+	; Resolve empty samples after mt_init has calculated real data offsets.
+	; AUDxLEN=0 means 65536 words, so publish the owned two-byte guard instead.
+	MOVE.L _pt_replay_data(PC),A0
+	LEA 42(A0),A0
+	LEA mt_SampleStarts(PC),A1
+	MOVE.L 56(SP),D1
+	MOVEQ #30,D0
+pt_empty_samples
+	TST.W (A0)
+	BNE.B pt_sample_present
+	MOVE.W #1,(A0)
+	CLR.W 4(A0)
+	MOVE.W #1,6(A0)
+	MOVE.L D1,(A1)
+pt_sample_present
+	ADDQ.L #4,A1
+	LEA 30(A0),A0
+	DBRA D0,pt_empty_samples
 	MOVE.L 52(SP),D0
 	MOVE.B D0,mt_SongPos
 	MOVE.B D0,_pt_replay_order

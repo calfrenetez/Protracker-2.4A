@@ -1,4 +1,5 @@
 from pathlib import Path
+import hashlib
 import subprocess
 import tempfile
 import unittest
@@ -14,3 +15,6 @@ class Editor(unittest.TestCase):
                             '-fsanitize=address,undefined', '-Isrc/core', *SOURCES, '-o', binary], cwd=ROOT, check=True)
             subprocess.run([binary, str(ROOT/'tests/fixtures/project-v1/mixed.ptg'),
                             str(ROOT/'vendor/pt23f/raw/ptfont.raw'), str(Path(tmp)/'editor.ppm')], check=True)
+            # Golden pixels were captured with the pre-optimization renderer.
+            self.assertEqual(hashlib.sha256((Path(tmp)/'editor.ppm').read_bytes()).hexdigest(),
+                             'b34905893d4d58612dfced2acf7f67649387c9a184bfcbbecdeb059526d2b9af')

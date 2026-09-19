@@ -14,6 +14,7 @@
 #include "../platform/file_save.h"
 #include "pt_font.h"
 #include "paula.h"
+#include "file_request.h"
 struct IntuitionBase *IntuitionBase;
 struct GfxBase *GfxBase;
 static void *allocate(void *ctx,size_t n) {(void)ctx;return malloc(n);}
@@ -25,9 +26,18 @@ static int load(struct pt_document *d,const char *path)
     if(fseek(f,0,SEEK_END) || (n=ftell(f))<0 || n>64L*1024*1024)goto done;
     rewind(f);bytes=malloc(n?(size_t)n:1);if(!bytes)goto done;
     if(fread(bytes,1,(size_t)n,f)!=(size_t)n || ferror(f))goto done;
+    if(fclose(f)) {f=NULL;goto done;}f=NULL;
     ok=pt_document_load(d,bytes,(size_t)n,SIZE_MAX)==PT_PROJECT_OK;
 done:
-    free(bytes);if(fclose(f))ok=0;return ok;
+    free(bytes);if(f)fclose(f);return ok;
+}
+static int blank(struct pt_document *d)
+{
+    uint8_t *bytes=calloc(2108,1);unsigned i;int ok;
+    if(!bytes)return 0;
+    for(i=0;i<31;++i)bytes[49+i*30]=1;
+    bytes[950]=1;bytes[951]=127;memcpy(bytes+1080,"M.K.",4);
+    ok=pt_document_load(d,bytes,2108,SIZE_MAX)==PT_PROJECT_OK;free(bytes);return ok;
 }
 static void save(struct pt_editor *e,const char *path)
 {
@@ -46,15 +56,17 @@ static void save(struct pt_editor *e,const char *path)
 }
 int main(int argc,char **argv)
 {
-    struct pt_paula audio={0};
+    struct pt_paula audio={0};char load_path[1024]="",save_path[1024]="new-project.ptg",chosen_path[1024];
     struct pt_allocator allocator={NULL,allocate,release};struct pt_document doc;
     struct pt_editor *editor=NULL;struct Screen *screen=NULL;struct Window *window=NULL;
     struct BitMap bitmap;struct pt_canvas canvas;unsigned plane;uint8_t *pixels=NULL;int rc=20,running=1,redraw=1;
     memset(&bitmap,0,sizeof(bitmap));memset(&canvas,0,sizeof(canvas));pt_document_init(&doc,&allocator);
-    if(argc<2 || argc>3) {puts("Usage: PT24GEdit INPUT [NEW_OUTPUT]\nDevelopment editor; classic Paula playback; existing output is never replaced.");goto done;}
-    if(!load(&doc,argv[1]) || !(editor=malloc(sizeof(*editor))) || !pt_editor_init(editor,&doc.project)) {
+    if(argc<1 || argc>3) {puts("Usage: PT24GEdit [INPUT [NEW_OUTPUT]]\nDevelopment editor; classic Paula playback; existing output is never replaced.");goto done;}
+    if((argc>1?!load(&doc,argv[1]):!blank(&doc)) || !(editor=malloc(sizeof(*editor))) || !pt_editor_init(editor,&doc.project)) {
         puts("EDITOR: input invalid or allocation failed");goto done;
     }
+    if(argc>1)snprintf(load_path,sizeof(load_path),"%s",argv[1]);
+    if(argc==3)snprintf(save_path,sizeof(save_path),"%s",argv[2]);
     IntuitionBase=(struct IntuitionBase *)OpenLibrary("intuition.library",36);
     GfxBase=(struct GfxBase *)OpenLibrary("graphics.library",36);
     if(!IntuitionBase || !GfxBase)goto done;
@@ -120,7 +132,7 @@ int main(int argc,char **argv)
             if(kind==IDCMP_RAWKEY)action=pt_editor_key(editor,code,qualifier);
             else if(kind==IDCMP_MOUSEBUTTONS && code==SELECTDOWN)action=pt_editor_click(editor,mx,my);
             else if(kind==IDCMP_REFRESHWINDOW) {BeginRefresh(window);EndRefresh(window,TRUE);}
-            else if(kind==IDCMP_INACTIVEWINDOW)editor->quit_pending=0;
+            else if(kind==IDCMP_INACTIVEWINDOW) {editor->quit_pending=0;editor->load_pending=0;}
             if(action==PT_UI_PLAY || action==PT_UI_PATTERN) {
                 error=pt_paula_play(&audio,editor->project,action==PT_UI_PATTERN,editor->position,editor->pattern);
                 pt_editor_status(editor,error?error:action==PT_UI_PATTERN?"PLAYING PATTERN - PAULA CIA":"PLAYING SONG - PAULA CIA");
@@ -135,7 +147,28 @@ int main(int argc,char **argv)
             }
             if(error || action==PT_UI_PLAY || action==PT_UI_PATTERN || action==PT_UI_AUDITION || action==PT_UI_STOP)
                 pt_paula_poll(&audio,&editor->playback);
-            if(action==PT_UI_SAVE)save(editor,argc==3?argv[2]:NULL);
+            if(action==PT_UI_SAVE || action==PT_UI_SAVE_AS) {
+                if(action==PT_UI_SAVE && argc==3)save(editor,argv[2]);
+                else {
+                    int selected;printf("EDITOR REQUEST save\n");fflush(stdout);
+                    selected=pt_file_request(window,1,save_path,chosen_path,sizeof(chosen_path));
+                    if(selected==1) {strcpy(save_path,chosen_path);save(editor,save_path);}
+                    else pt_editor_status(editor,selected==0?"SAVE CANCELLED - EDITS PRESERVED":"SAVE REQUESTER UNAVAILABLE OR PATH TOO LONG");
+                }
+            }
+            if(action==PT_UI_LOAD) {
+                {
+                    int selected;printf("EDITOR REQUEST load\n");fflush(stdout);
+                    selected=pt_file_request(window,0,load_path,chosen_path,sizeof(chosen_path));
+                    if(selected==1) {
+                        if(load(&doc,chosen_path)) {
+                            pt_paula_stop(&audio);pt_editor_init(editor,&doc.project);strcpy(load_path,chosen_path);
+                            pt_editor_status(editor,"PROJECT LOADED");
+                            printf("EDITOR LOAD success channels=%u patterns=%u\n",doc.project.channels.count,doc.project.pattern_count);fflush(stdout);
+                        } else pt_editor_status(editor,"LOAD FAILED - CURRENT PROJECT AND EDITS PRESERVED");
+                    } else pt_editor_status(editor,selected==0?"LOAD CANCELLED - EDITS PRESERVED":"LOAD REQUESTER UNAVAILABLE OR PATH TOO LONG");
+                }
+            }
             if(action==PT_UI_QUIT)running=0;
             redraw=1;
         }

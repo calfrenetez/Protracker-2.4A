@@ -1,0 +1,31 @@
+{
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Isrc/core",
+    "-Ibuild/dev",
+    "-fbbb=-"
+  ],
+  "compiler": "m68k-amigaos-gcc (GCC) 6.5.0b 20260807212032",
+  "compiler_sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+  "binary_sha256": "472ff611f1d388df3dd983ff446fff0a65b416941987444a4fb908e518a027ba",
+  "sources": {
+    "tests/native_view_bench.c": "878f37ce45e1c841df99582bebb6b223676d51cda8bcee8c6beffb71a9f5049a",
+    "src/editor/editor.c": "62ca77785e9a9b7212d545406f835843392ea24431882740320d32105a89046a",
+    "build/dev/view-before.c": "cec539d3fd3b1f0132b195e94eea6f4385113b728d0479a8d142e261831908f1",
+    "src/core/document.c": "02a22f80a87d45850c6491cd1d1e56768468e4bae669eccd42e7f288ffde0a8f",
+    "src/core/pattern.c": "642858f5d0c9bccf39d06a0dc121cf55d92203e22ec3d393efb769a8ae95e5d9",
+    "src/core/project.c": "37882eb33b39a7639a7fc15932abb555f035761ded72956844cd7b8e5ad1901b",
+    "src/core/mod_project.c": "1f6e356b1d05a312d8d73158d3e5d6e6a48dba1d9a441cb8cd3b2f64b7a09ba4",
+    "src/core/mod_inspect.c": "ae2511f3d501bccd512390113428e58af88c3267dc57342378fa707f6653d803",
+    "src/core/channels.c": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+    "src/core/pcm.c": "c1dcea85e047413448bf5664dc551bcbd6d27e7cfd646fb8ea5049bbb780786b"
+  },
+  "renderer_original_commit": "8b290957fd7128cc828d2424736af34225b003af"
+}

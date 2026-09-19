@@ -60,8 +60,13 @@ int main(int argc,char **argv)
     pt_editor_click(e,198,30);assert(e->pattern==0);
     pt_editor_click(e,218,88);assert(e->sample==2);
     pt_editor_click(e,198,88);assert(e->sample==1);
-    pt_editor_click(e,400,70);assert(e->panel==2 && pt_editor_click(e,300,40)==PT_UI_SAVE);
+    pt_editor_click(e,400,70);assert(e->panel==2 && pt_editor_click(e,300,40)==PT_UI_SAVE_AS);
     pt_editor_click(e,400,80);assert(e->panel==0);
+    assert(pt_editor_click(e,600,180)==PT_UI_NONE && e->load_pending);
+    pt_editor_key(e,0x4c,0);assert(!e->load_pending);
+    assert(pt_editor_key(e,0x18,8)==PT_UI_NONE && e->load_pending);
+    assert(pt_editor_key(e,0x18,8)==PT_UI_LOAD && !e->load_pending);
+    assert(pt_editor_key(e,0x21,9)==PT_UI_SAVE_AS);
     assert(pt_editor_click(e,250,10)==PT_UI_PLAY);
     assert(pt_editor_click(e,400,10)==PT_UI_STOP);
     assert(pt_editor_click(e,250,30)==PT_UI_PATTERN);

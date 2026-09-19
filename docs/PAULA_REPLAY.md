@@ -50,6 +50,11 @@ with individually checked anchors and the following limited adaptations:
   to timer A immediately before `RemICRVector`.
 - Initialise the acquired timer to continuous E-clock operation, clearing inherited
   CNT/one-shot modes while retaining unrelated TOD/serial control bits.
+- Give empty samples and notes before the first instrument an owned two-byte
+  Chip RAM guard, with a one-word DMA length. The original zero length would
+  request 65,536 words; no address-zero or past-allocation sample reads are used.
+  Empty headers are adjusted only in the private snapshot after sample offsets
+  have been resolved.
 - Reset persistent voice/effect state on each start, preserve C callee-saved registers,
   and expose tick/current-row data without calling C from the interrupt.
 
@@ -77,3 +82,8 @@ the saved change, verify byte-identical resaving, and exit normally. It requires
 an explicitly reserved emulator window and guards the exact private profile.
 Physical audio quality, complete effects parity, CAMD, AmiGUS and real-device
 performance remain separate acceptance gates.
+
+The snapshot is preflighted before hardware allocation, including repeat bounds
+for one-word loops. Empty-sample safety tests inspect the native voice pointer and
+length to confirm the owned guard is used for both an empty instrument and an
+instrument-zero note before any sample has played. The source project is unchanged.

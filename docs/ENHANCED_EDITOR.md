@@ -24,15 +24,29 @@ Build with `AMIGA_CC=/path/to/m68k-amigaos-gcc make core-tests`, then on Amiga:
 
 ```
 Stack 65536
+PT24GEdit
+; or preselect input/output:
 PT24GEdit song.ptg edited-new.ptg
 ```
 
 The input may be a supported classic MOD or version 1 project. The optional output
 path must be new. The editor and converter share the same staging/readback/new-file
 publication adapter. Existing files are refused and current edits remain dirty.
-A file requester, ordinary replacement saves and recovery remain to be integrated.
-This first editor can make one successful save to the command-line destination;
-launch it with a different new path for another saved version.
+Starting from the Shell with no arguments creates a blank four-channel song.
+LOAD / Control-O opens a native Amiga ASL requester for a MOD or project.
+Control-S opens Save New when no command-line output was supplied. DISK OP. >
+SAVE NEW or Control-Shift-S always lets you choose another new filename. A supplied
+command-line output remains the Control-S destination; existing files are refused.
+Ordinary replacement saves and recovery remain to be integrated.
+
+A dirty project requires LOAD / Control-O twice before the requester opens. Any
+other editor action cancels that confirmation. Cancelling a requester or selecting
+an invalid file preserves the project and its undo history. Input files are fully
+read and closed successfully before the transactional project loader commits.
+Successful loading stops the private replay snapshot and resets editor/history
+state to the newly loaded document. ASL requires asl.library V39 or later; failure
+to allocate/open a requester leaves the document intact. The dialogs follow the
+[native ASL file-requester interface](https://wiki.amigaos.net/wiki/ASL_File_Requester).
 
 - EDIT toggles note entry. Space toggles entry when stopped and stops playback when playing.
 - F8 / Return / PLAY starts the song; F9 / Shift-Return / PATTERN loops the selected
@@ -50,8 +64,8 @@ launch it with a different new path for another saved version.
   arrows select an existing order. Other parameter arrows are not wired yet.
 - Control-Z / Control-Shift-Z use the bounded pattern journal. EDIT OP. opens
   the UNDO/REDO secondary panel; BACK returns to the reference main screen.
-- Control-S or DISK OP. > SAVE NEW writes and verifies the project at the new
-  output path. DISK OP. also contains QUIT and BACK.
+- Control-S saves to the command-line output or opens Save New. Control-Shift-S
+  and DISK OP. > SAVE NEW always open the requester. DISK OP. also contains QUIT and BACK.
 - Escape / QUIT exits. Dirty edits require a second Escape or QUIT; another
   key/click cancels that discard confirmation.
 
@@ -69,6 +83,11 @@ own bitmap. The current bounded editor/history structure uses about 51 KiB on
 is assumed; allocation failure unwinds all owned resources.
 
 Whole-window updates occur on UI input; font stamps operate on bitmap bytes.
+The nibble lookup/unrolled stamp optimization reduced three-frame drawing from
+224 to 151 PAL timer ticks (4.48 to 3.02 seconds) in the same private 68030 emulator
+profile, with matching native pixel hashes and byte-identical host PPM output.
+Full-frame drawing remains costly; these are emulator measurements, not ACA1234
+performance results.
 The screen is PAL high-resolution interlaced. A suitable display/flicker handling
 and physical ACA1234/Chip-RAM performance still need testing. No 50 Hz redraw or
 physical responsiveness result is implied by a successful emulator run.
@@ -84,7 +103,7 @@ full browser/AmiConnect transport remain separate UI checks.
 
 Still open: full mixed-channel backend dispatch, comprehensive effect parity, pattern
 block-operation UI, route/metadata editing and its history, sample editing UI,
-file requesters, capture, CAMD, renderer/export strategies and hardware acceptance.
+replacement saves/recovery, capture, CAMD, renderer/export strategies and hardware acceptance.
 
 
 ## Reference correction, 19 September 2026

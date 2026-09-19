@@ -1,0 +1,39 @@
+{
+  "run_id": "dev1789817823350977000",
+  "cases": [
+    {
+      "name": "PTChannelsTest",
+      "rc": 0,
+      "log": "CHANNELS PASS: 1-16 pages, exclusive routes, stable Paula slots, absence, mute/solo, undo/redo\n",
+      "pass": true,
+      "binary_sha256": "caff4f283260260dfa97c4dec539e4a9bbeb3a130cd62b329412df0c728f6285"
+    },
+    {
+      "name": "PTPcmTest",
+      "rc": 0,
+      "log": "PCM/WAV PASS: 8/16/24-bit precision, stereo edits, conversion, resampling, bounds and round trips\n",
+      "pass": true,
+      "binary_sha256": "b8196286aa4048b42ecefca50f7679e6a0c39a4735afe8a14c285fa6b81982f5"
+    },
+    {
+      "name": "PTGuardTest",
+      "rc": 0,
+      "log": "GUARD case=000 result=PASS\nGUARD case=001 result=PASS\nGUARD case=002 result=PASS\nGUARD case=003 result=PASS\nGUARD case=004 result=PASS\nGUARD case=005 result=PASS\nGUARD case=006 result=PASS\nGUARD case=007 result=PASS\nGUARD case=008 result=PASS\nGUARD case=009 result=PASS\nGUARD case=010 result=PASS\nGUARD case=011 result=PASS\nGUARD case=012 result=PASS\nGUARD case=013 result=PASS\nGUARD case=014 result=PASS\n",
+      "pass": true,
+      "binary_sha256": "908722556a4bc3033b1dcc107b9b8ba28c5dfc44f75195b00336828e0e292a0b"
+    },
+    {
+      "name": "PTInputProbe",
+      "rc": 0,
+      "log": "INPUT PROBE PASS CIA before=64 down=64 after=64; inspect Disk Op screenshot\n",
+      "pass": true,
+      "binary_sha256": "130a522f4c2082fe447c381f1f4c08f85dc496b0aee6a4aa3f086a5f3255d812"
+    }
+  ],
+  "environment": {
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

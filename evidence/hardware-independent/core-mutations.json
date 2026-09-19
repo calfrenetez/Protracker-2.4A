@@ -1,0 +1,13 @@
+{
+  "command": "sh tools/test_core_mutations.sh",
+  "completed_on": "2026-09-19",
+  "seed": "0x24a",
+  "iterations": 100000,
+  "sanitizers": [
+    "AddressSanitizer",
+    "UndefinedBehaviorSanitizer"
+  ],
+  "stdout": "CORE MUTATIONS PASS seed=0x24a iterations=100000 decoded_wav=31939 route_and_pcm_sequences=100000",
+  "binary_sha256": "c62bc130739f2c9ea7933175fbd8935b7e7d2d7cd9a19cd6713ecdc0c2a28957",
+  "record_note": "Result transcribed from the successful tool output of this development session."
+}

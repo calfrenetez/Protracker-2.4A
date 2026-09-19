@@ -5,6 +5,16 @@ and initial emulator smoke checks are complete; the broader compatibility and
 hardware gates remain pending. See [BASELINE_BUILD.md](BASELINE_BUILD.md) for
 current evidence. Product naming is tracked in [HANDOVER_REVIEW.md](HANDOVER_REVIEW.md).
 
+## Current priority while the Mini is in transit
+
+On 19 September the owner requested all development that does not depend on
+physical AmiGUS tests. Independent software portions of stages 1, 3–5 and 7–10
+can therefore proceed before the physical gate in stage 2. Hardware evidence is
+still required before those backends are accepted. The native loader/input and
+portable channel/PCM/WAV checkpoint is documented in
+[HARDWARE_INDEPENDENT.md](HARDWARE_INDEPENDENT.md); its scope and missing UI/replay
+integration are explicit. No duplicate diagnostic profile is being created.
+
 ## First build milestone
 
 1. Pin native [2.3F source](https://github.com/8bitbubsy/pt23f) by full commit and

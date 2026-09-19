@@ -3,19 +3,21 @@
 Build preparation for a native Amiga tracker with 1–16 channels, classic
 ProTracker workflow, and exclusive Paula, AmiGUS or MIDI routing per channel.
 
-**Status: native 2.3F builds reproducibly and passes an initial AmiBerry smoke
-test.** The first native AmiGUSTest diagnostic is built and its absent-library
-behavior is verified. Enhanced tracker features and positive physical AmiGUS
-tests remain pending. See the [baseline report](docs/BASELINE_BUILD.md) and
-[diagnostic evidence](docs/AMIGUS_DIAGNOSTIC.md).
-An independent [MOD preflight tool](docs/MOD_PREFLIGHT.md) now covers malformed
-file bounds on the host; integration into the tracker loader remains pending.
+**Status: native 2.4G dev2 builds and runs in the isolated Amiberry test setup.**
+This increment integrates classic MOD preflight and input.device mouse support.
+The portable 1–16 channel, metadata undo/redo, 8/16/24-bit sample-processing and
+WAV cores pass host and native Amiga tests; their enhanced editor/replay
+integration is still pending. Physical AmiGUS tests await the owner's Mini.
+See the [development checkpoint](docs/HARDWARE_INDEPENDENT.md),
+[baseline report](docs/BASELINE_BUILD.md), [diagnostic evidence](docs/AMIGUS_DIAGNOSTIC.md)
+and [MOD preflight](docs/MOD_PREFLIGHT.md).
 
 With Git, Python 3, Make and a host C compiler installed:
 
 ```sh
 make bootstrap
 make baseline
+make dev
 make test
 ```
 
@@ -45,7 +47,8 @@ implementation, deployment, firmware changes or background monitoring. Direct
 user instructions control the work. After handover processing, the user
 authorized proceeding with the baseline build and verification.
 
-The next milestone is broader compatibility/hardening coverage and integration
-with AmiConnect's forthcoming authenticated upload/exec capabilities before
-enhanced tracker changes. A duplicate hard-coded diagnostic profile is deferred.
+The owner's 19 September instruction authorises independent software development
+while the ordered Mini is in transit. The next work is project/pattern persistence
+and integration of the tested channel/sample cores into the native editor.
+AmiConnect upload/exec and real card tests remain separate acceptance gates.
 Initial smoke results do not certify all effects or physical hardware.

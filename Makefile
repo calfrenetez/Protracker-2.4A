@@ -1,13 +1,22 @@
 PYTHON ?= python3
 VASM ?= $(CURDIR)/local/vasm/vasmm68k_mot
 
-.PHONY: bootstrap baseline diagnostic modcheck modcheck-amiga test fixture
+.PHONY: bootstrap baseline dev diagnostic modcheck modcheck-amiga core-tests core-mutations test fixture
 
 bootstrap:
 	sh tools/bootstrap_vasm.sh
 
 baseline:
 	$(PYTHON) tools/build_baseline.py --vasm "$(VASM)"
+
+dev:
+	$(PYTHON) tools/build_dev.py --vasm "$(VASM)"
+
+core-tests:
+	$(PYTHON) tools/build_core_tests.py
+
+core-mutations:
+	sh tools/test_core_mutations.sh
 
 diagnostic:
 	$(PYTHON) tools/build_diagnostic.py

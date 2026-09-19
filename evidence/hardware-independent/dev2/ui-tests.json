@@ -1,0 +1,16 @@
+{
+  "tracker_sha256": "ff676717282c0f2e7115787a59c0fbf79b152f62db28b2277437151b6a2f9ce6",
+  "saved_title": "pt input preserved",
+  "bytes": 2172,
+  "payload_after_title_identical": true,
+  "saved_sha256": "a68d90898eb430e379219404d637fdfe07c093efb00c7021e29ea698ba8b17e8",
+  "os_injected_diskop": {
+    "observed": true,
+    "physical_CIA_values": [
+      64,
+      64,
+      64
+    ]
+  },
+  "playback_audio_state": "OK\tch0_dma=1\tch1_dma=1\tch2_dma=1\tch3_dma=1\tmaster=1\tsndbuf=1333\tsndbuf_status=0"
+}

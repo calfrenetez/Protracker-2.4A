@@ -1,0 +1,147 @@
+{
+  "compiler": "m68k-amigaos-gcc (GCC) 6.5.0b 20260807212032",
+  "compiler_sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+  "runtime_inputs": {
+    "ncrt0.o": "6fe4b6088899bd53efae1ea1e4783b7deab07b13f3d40cff7b46285907f19804",
+    "libnix20.a": "0731c54ad32272f5ab0d5ecd3f1f93d7aa4fc7c6ac0a5923eb26125633556e8c",
+    "libnixmain.a": "ad54158e95516aa6f3b04a8b3d835a48ecbaaea962cd178d5fb66995dcef19df",
+    "libnix.a": "d64619bc74933ac5312ef6db0f8d4cd62b3918f9f4a5805863e7d15536fcb144",
+    "libstubs.a": "55dbd0626cb472d89ab5d1bd234e6013df178f2cd3b83266bf4b82c68f1a79de",
+    "libamiga.a": "10d78b6d303a99677c0bf29a8e1653d62669f69f395691646393020325084021",
+    "libgcc.a": "8bed858c8a5797471c3bc130df341824121c5d0f0908345dfe6ce0ceccc3569b"
+  },
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Isrc/core"
+  ],
+  "binaries": {
+    "PTInputProbe": {
+      "sha256": "130a522f4c2082fe447c381f1f4c08f85dc496b0aee6a4aa3f086a5f3255d812",
+      "bytes": 14660
+    },
+    "PTChannelsTest": {
+      "sha256": "caff4f283260260dfa97c4dec539e4a9bbeb3a130cd62b329412df0c728f6285",
+      "bytes": 17304
+    },
+    "PTPcmTest": {
+      "sha256": "b8196286aa4048b42ecefca50f7679e6a0c39a4735afe8a14c285fa6b81982f5",
+      "bytes": 29304
+    },
+    "PTGuardTest": {
+      "sha256": "908722556a4bc3033b1dcc107b9b8ba28c5dfc44f75195b00336828e0e292a0b",
+      "bytes": 1660
+    }
+  },
+  "sources": {
+    "src/core/channels.c": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+    "src/core/channels.h": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+    "src/core/pcm.c": "c1dcea85e047413448bf5664dc551bcbd6d27e7cfd646fb8ea5049bbb780786b",
+    "src/core/pcm.h": "084aed32633307241e35429cb83b13d01086dcc6c10910805f8eb45c36ba7662",
+    "src/core/wav.c": "c57b71388479d43f50945167f950bae4f16aae52fab09af4262704779ff1c794",
+    "src/core/wav.h": "42a07f0ce535f8c0f3cc64c26b947a54e0808f111a2c038a939f0267c94e5f7a",
+    "src/native/mod_guard.s": "0e0511b3963abd10bae30d591a4e93b62263b2780c54cf2ffab889aa8bf02aeb",
+    "tests/channels_test.c": "87ac7f7de1191306ccf297cea5a62e7923dac28533a714795dd47343ea0b0cf4",
+    "tests/native_guard_harness.s": "a1c0a0196c5a541f97e5c7b43f7206b22cd93971676bbace16c325a182616c63",
+    "tests/native_input_probe.c": "750de10e70621d4fd2418403242880608ef4028c6343372d46849e19a2fc9940",
+    "tests/pcm_test.c": "867984bbc14ec80a9bda20483781d5862f36993c645d70a8c74d29f1caa0835b"
+  },
+  "guard_cases": [
+    {
+      "index": 0,
+      "case": "valid-1",
+      "expected_guard_result": 0,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 1,
+      "case": "valid-64",
+      "expected_guard_result": 0,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 2,
+      "case": "valid-100",
+      "expected_guard_result": 0,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 3,
+      "case": "valid-inactive-order",
+      "expected_guard_result": 0,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 4,
+      "case": "invalid-short-header",
+      "expected_guard_result": -1,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 5,
+      "case": "invalid-short-pattern",
+      "expected_guard_result": -1,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 6,
+      "case": "invalid-short-sample",
+      "expected_guard_result": -1,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 7,
+      "case": "invalid-256-patterns",
+      "expected_guard_result": -1,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 8,
+      "case": "invalid-order-count-0",
+      "expected_guard_result": -1,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 9,
+      "case": "invalid-order-count-129",
+      "expected_guard_result": -1,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 10,
+      "case": "invalid-instrument-32",
+      "expected_guard_result": -1,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 11,
+      "case": "unsupported-8-channel",
+      "expected_guard_result": 0,
+      "scope": "legacy-dispatch-only"
+    },
+    {
+      "index": 12,
+      "case": "warning-trailing-data",
+      "expected_guard_result": 0,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 13,
+      "case": "warning-volume",
+      "expected_guard_result": 0,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 14,
+      "case": "warning-loop",
+      "expected_guard_result": 0,
+      "scope": "classic-preflight"
+    }
+  ]
+}

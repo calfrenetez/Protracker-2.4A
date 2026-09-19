@@ -1,0 +1,20 @@
+{
+  "upstream_commit": "4e9df4ada0e55869477e1e45d00227719010e0ea",
+  "stage": "2.4G dev2",
+  "assembler_sha256": "260b71e38335935dd232506270838adbf78e7e5b31de53020ee13b8efc05a936",
+  "flags": [
+    "-devpac",
+    "-m68020",
+    "-no-fpu",
+    "-Fhunkexe",
+    "-kick1hunks",
+    "-hunkpad=0",
+    "-nosym"
+  ],
+  "guard_sha256": "0e0511b3963abd10bae30d591a4e93b62263b2780c54cf2ffab889aa8bf02aeb",
+  "input_sha256": "a31c7f9b9a00d5ff1f32408ca5d9af7695aad130c894c6c41d592f57ea91234c",
+  "preparer_sha256": "3bcc2c7dedf71d94083e5bfad39331d20369e5936e4dbd7f8d25dcfa48eefe50",
+  "generated_source_sha256": "d4bdc0dae4f41dfcb0af6549c94447510664fd8c1dfbb3c4e0c8a991f020395c",
+  "binary_bytes": 202280,
+  "binary_sha256": "ff676717282c0f2e7115787a59c0fbf79b152f62db28b2277437151b6a2f9ce6"
+}

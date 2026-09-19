@@ -1,0 +1,130 @@
+# Hardware-independent development checkpoint — 19 September 2026
+
+The owner has ordered an AmiGUS Mini, expected in approximately five days, and
+explicitly requested continued development of everything that can be built and
+checked without the card. This changes the implementation order in the supplied
+handover: physical hardware acceptance remains required, but is not a gate on
+independent editor, format, processing and input work.
+
+## Native tracker increment
+
+`make dev` builds **ProTracker 2.4G dev2** from the locked native 2.3F source.
+The vendor snapshot is unchanged; narrowly anchored edits apply to a generated
+copy and fail if the expected baseline changes. The known-good 2.3F target is
+still independently reproducible.
+
+The classic MOD load path now performs a bounded preflight before clearing the
+current song. Recognised `M.K.`/`M!K!` files are checked for song length, every order,
+pattern count, truncated patterns/samples and invalid sample-number high bits.
+It uses 2,108 bytes of workspace rather than copying all sample data. The actual
+loader also checks read lengths and its allocated pattern capacity.
+
+The in-tracker compatibility policy accepts M.K. files with up to 100 patterns,
+matching the inherited extended load option; the separate strict PTModCheck
+continues to distinguish standard 64-pattern M.K. from 100-pattern `M!K!`.
+
+This is **not a complete transactional loader**. Preflight failures preserve the
+current work, as verified by subsequent save comparison. Allocation failures,
+files changed after preflight and late I/O failures do not yet have full rollback.
+Unknown signatures and PP20/PX20 retain their legacy dispatch paths; those paths,
+15-sample modules and Load Song still need their own hardening and regression
+coverage. Passing legacy dispatch is not a validity claim for such files.
+
+The input boundary now tracks RAWMOUSE left/right transitions and uses that
+shared state at all 112 original button-polling sites. It consumes absolute
+NEWPOINTERPOS/PIXEL events addressed to its own screen, clamps coordinates and
+clears fractional movement. Button releases are processed even while disk
+movement is suppressed, and focus loss clears both button states. Relative
+RAWMOUSE retains the original movement behaviour. Unrelated CIA/filter accesses
+remain unchanged. TABLET/NEWTABLET, relative PIXEL events and pointers addressed
+to other screens continue through the OS chain; they are not claimed as supported
+tracker pointer paths. The retained integration probe covers the left button;
+right-button modifiers, drag and focus/disconnect scenarios need broader UI
+regression before input compatibility is accepted.
+
+The native guest injector opens input.device and submits pointer/button events
+with IND_WRITEEVENT. Its click opened Disk Op while CIA's physical left-button bit
+remained released (64) before, during and after the injected press. This verifies
+the tracker input path, not the complete browser/AmiConnect transport. AmiConnect
+must separately recognise this derivative's capture layout. The tracker owns a
+320x12 one-bit Intuition shell and draws its 320x256 display via private copper
+and bitplanes; generic screen dimensions do not describe its visible surface.
+
+Program/status version strings are 2.4G. The inherited bitmap logo still says
+2.3F and awaits a matching classic-style asset update. The native editor and
+replayer still use their original four-channel song representation.
+
+## Reusable software cores
+
+The following C99 components run on both the host and the Amiga. They do not
+allocate internally, have caller-supplied bounded storage and use no FPU.
+They are **not yet connected to the native tracker UI/replay path**.
+
+| Component | Implemented and tested | Integration still required |
+| --- | --- | --- |
+| Channels | 1–16 channels, four-column page selection, wrapping navigation, names/pan/group/MIDI metadata, exclusive P/A/M routes, atomic fifth-Paula rejection and stable allocation of four Paula slots | Expanded pattern/event model, editor pages, backend dispatch, live audition and replay |
+| Mute/solo and history | Availability-aware audibility without route substitution; bounded undo/redo snapshots for channel metadata, redo invalidation and oldest-snapshot eviction | Pattern/sample undo, UI commands, persistent recovery |
+| PCM editing | Signed 8/16/24-bit mono/stereo samples; reverse, saturation gain, shared-peak normalize, fades and per-channel DC removal; validation before mutation | Sampler UI, loop/slice metadata, selection and undo wiring |
+| Conversion | Explicit precision conversion with rounding/clipping; offline integer linear resampling | Antialias filtering and quality qualification; shared renderer/converter integration |
+| WAV | Bounded RIFF PCM parsing and canonical writing; 8/16/24-bit mono/stereo, odd-chunk padding, byte/block-rate checks and full low-eight-bit retention | Float/extensible WAV, loop metadata, sample-load UI, file I/O transaction and large-file policies |
+
+The linear resampler does **not** yet provide an antialias filter for high-quality
+downsampling. The 24-bit path preserves stored PCM precision; it does not prove
+real-time Studio performance, hardware output precision or an achievable voice
+count. There is no claim of sixteen software-mixed voices on the 030.
+
+## Verification and reproduction
+
+```sh
+make bootstrap
+make baseline
+make dev
+make test
+make core-mutations
+AMIGA_CC=/path/to/complete/m68k-amigaos-gcc make core-tests
+```
+
+Thirteen Python test groups exercise baseline integrity, host sanitized channel
+and PCM/WAV cases, ownership failure handling, MOD bounds, exact emulator profile
+guarding and native source preparation. The core mutation run passed 100,000
+iterations under AddressSanitizer/UndefinedBehaviorSanitizer, including malformed
+WAV parsing, route changes and PCM edit sequences. Its deterministic seed is
+0x24a. The earlier MOD preflight mutation run covers another 200,000 cases and is
+documented separately in MOD_PREFLIGHT.md.
+
+The native core binaries target `-m68000 -msoft-float`. A complete GCC 6.5/nix20
+toolchain supplied the required 64-bit integer division helpers. The previously
+used local GCC 13.4 installation had an empty libgcc archive and could not link
+these operations; that other installation was not changed. Compiler, archive,
+source and executable hashes are recorded in core-build.json. This establishes
+native execution under the configured emulated 68030 without FPU, not physical
+68000 performance. The tracker keeps its baseline assembler flags, including
+`-m68020` for the original guarded 32-bit instructions.
+
+Native evidence covers channel and PCM/WAV suites, 15 cases using the exact
+assembly preflight with real DOS reads/seeks, OS-only injected Disk Op selection,
+ordinary mouse/keyboard operation, classic fixture playback and rejected-load
+save preservation. Screenshots, logs and hashes are under
+`evidence/hardware-independent/`. Dev1 and dev2 are kept separate so earlier
+evidence is not silently attributed to a changed executable.
+
+Amiberry access was explicitly handed off by the AmiConnect task. Only the exact
+`Config=ProTracker isolated baseline` instance, private disk copy and disposable
+PTDEV files were used. Licensed OS/ROM files are excluded from the repository and
+development package. No physical Amiga, AmiGUS library ownership or firmware was
+changed by this work.
+
+## Continuing software work
+
+Next are the versioned project/event/sample representation, extended patterns
+and persistence, then integration of the tested channel and sample cores into
+the classic editing workflow. Effects/replay traces, undo/recovery, save-failure
+handling, renderer/converter, MIDI logic and Enhanced screen work remain open.
+The full supplied scope still applies; this checkpoint does not complete any
+stage whose UI, replay or hardware acceptance remains missing.
+
+When the Mini arrives, run the bounded diagnostic first and record its driver,
+firmware and machine configuration. Positive detect/reserve/free, interrupt
+lifecycle, sample transfer, 1/4/8/16 voices, audible quality, PCM/capture and
+endurance remain **NOT RUN on hardware**. No user decision is needed to continue
+the independent software work.

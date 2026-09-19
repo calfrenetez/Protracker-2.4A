@@ -1,7 +1,7 @@
 PYTHON ?= python3
 VASM ?= $(CURDIR)/local/vasm/vasmm68k_mot
 
-.PHONY: bootstrap baseline dev diagnostic modcheck modcheck-amiga core-tests core-mutations test fixture
+.PHONY: bootstrap baseline dev diagnostic modcheck modcheck-amiga core-tests core-mutations project-mutations converter test fixture
 
 bootstrap:
 	sh tools/bootstrap_vasm.sh
@@ -17,6 +17,13 @@ core-tests:
 
 core-mutations:
 	sh tools/test_core_mutations.sh
+
+project-mutations:
+	sh tools/test_project_mutations.sh
+
+converter:
+	mkdir -p build/host
+	$(CC) -std=c99 -O2 -Wall -Wextra -Werror -Isrc/core tools/pt24g_convert.c src/core/document.c src/core/safe_save.c src/core/mod_project.c src/core/mod_inspect.c src/core/project.c src/core/channels.c src/core/pcm.c -o build/host/PT24GConvert
 
 diagnostic:
 	$(PYTHON) tools/build_diagnostic.py

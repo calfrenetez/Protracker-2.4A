@@ -1,0 +1,2 @@
+PROJECT PASS: exact mixed-route round trip, 24-bit stereo, OFF, loops, slices, MIDI endpoints, extensions, CRC, bounds, transactional decode
+PROJECT MUTATIONS PASS seed=0x24f iterations=5000 accepted_roundtrips=48

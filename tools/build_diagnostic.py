@@ -15,6 +15,12 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def compiler_safety_flags(cc):
+    """Disable the custom late optimizer with a verified field-address bug."""
+    target_help = subprocess.check_output([cc, '--help=target'], text=True)
+    return ['-fbbb=-'] if '-fbbb=' in target_help else []
+
+
 def runtime_inputs(cc):
     """Record the actual startup object and archives selected by this CRT."""
     names = ['ncrt0.o', 'libnix20.a', 'libnixmain.a', 'libnix.a',
@@ -39,7 +45,7 @@ def main():
     if not cc:
         p.error('Set AMIGA_CC to the m68k-amigaos-gcc compiler path')
     flags = ['-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os',
-             '-Wall', '-Wextra', '-Werror', '-Ivendor/amigus-sdk']
+             '-Wall', '-Wextra', '-Werror', *compiler_safety_flags(cc), '-Ivendor/amigus-sdk']
     inputs = ['src/diagnostic/main.c', 'src/diagnostic/ownership.c']
     headers = ['src/diagnostic/amigus_calls.h', 'src/diagnostic/ownership.h']
     if args.tool == 'PTModCheck':

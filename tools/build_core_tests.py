@@ -6,7 +6,7 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
-from build_diagnostic import digest, runtime_inputs, ROOT
+from build_diagnostic import digest, runtime_inputs, compiler_safety_flags, ROOT
 from make_mod_corpus import cases
 
 
@@ -20,12 +20,19 @@ def main():
     out = ROOT / 'build/dev'
     out.mkdir(parents=True, exist_ok=True)
     inputs = {
+        'PTPatternTest': ['tests/pattern_test.c', 'src/core/pattern.c', 'src/core/project.c', 'src/core/channels.c', 'src/core/pcm.c'],
+        'PTSlicesTest': ['tests/slices_test.c', 'src/core/slices.c', 'src/core/pcm.c'],
+        'PTFileSafetyTest': ['tests/native_file_test.c'],
+        'PTProjectTest': ['tests/project_test.c', 'src/core/project.c', 'src/core/channels.c', 'src/core/pcm.c'],
+        'PTModProjectTest': ['tests/mod_project_test.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/project.c', 'src/core/channels.c', 'src/core/pcm.c'],
+        'PTDocumentTest': ['tests/document_test.c', 'src/core/document.c', 'src/core/safe_save.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/project.c', 'src/core/channels.c', 'src/core/pcm.c'],
+        'PT24GConvert': ['tools/pt24g_convert.c', 'src/core/document.c', 'src/core/safe_save.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/project.c', 'src/core/channels.c', 'src/core/pcm.c'],
         'PTInputProbe': ['tests/native_input_probe.c'],
         'PTChannelsTest': ['tests/channels_test.c', 'src/core/channels.c'],
         'PTPcmTest': ['tests/pcm_test.c', 'src/core/pcm.c', 'src/core/wav.c'],
     }
     flags = ['-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os',
-             '-Wall', '-Wextra', '-Werror', '-Isrc/core']
+             '-Wall', '-Wextra', '-Werror', '-Isrc/core', *compiler_safety_flags(cc)]
     for name, sources in inputs.items():
         subprocess.run([cc, *flags, *sources, '-o', str(out / name)], cwd=ROOT, check=True)
     corpus = ROOT / 'local/share/guard'
@@ -52,7 +59,7 @@ def main():
                            for name in [*inputs, 'PTGuardTest']},
               'sources': {name: digest(ROOT / name) for name in
                           sorted(set(sum(inputs.values(), [])) | {'src/core/channels.h', 'src/core/pcm.h',
-                          'src/core/wav.h', 'src/native/mod_guard.s', 'tests/native_guard_harness.s'})},
+                          'src/core/wav.h', 'src/core/project.h', 'src/core/mod_project.h', 'src/core/document.h', 'src/core/safe_save.h', 'src/core/pattern.h', 'src/core/slices.h', 'src/core/mod_inspect.h', 'src/native/mod_guard.s', 'tests/native_guard_harness.s'})},
               'guard_cases': manifest}
     (out / 'core-build.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report['binaries'], indent=2))

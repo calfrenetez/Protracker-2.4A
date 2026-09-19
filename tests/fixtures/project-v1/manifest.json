@@ -1,0 +1,10 @@
+{
+  "version": "1.0 development",
+  "native_host_mixed_byte_identity": true,
+  "classic_mod_roundtrip_byte_identity": true,
+  "files": {
+    "roundtrip.mod": "813ccf02b367047a72ae5bfacf33593acd7879bc43e151de02a8deeb217325bf",
+    "mixed.ptg": "e373b2abdfd931d86727672ce31a8fea890edcdb53b254a93b8b03b7a7b6a831",
+    "song.ptg": "c1de3e61ef286cb71dcd5be570f179d6bc960b804e965d2b937111886b067377"
+  }
+}

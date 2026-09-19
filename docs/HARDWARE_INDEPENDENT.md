@@ -84,7 +84,7 @@ make core-mutations
 AMIGA_CC=/path/to/complete/m68k-amigaos-gcc make core-tests
 ```
 
-Thirteen Python test groups exercise baseline integrity, host sanitized channel
+Nineteen Python test groups exercise baseline integrity, host sanitized channel
 and PCM/WAV cases, ownership failure handling, MOD bounds, exact emulator profile
 guarding and native source preparation. The core mutation run passed 100,000
 iterations under AddressSanitizer/UndefinedBehaviorSanitizer, including malformed
@@ -116,9 +116,8 @@ changed by this work.
 
 ## Continuing software work
 
-Next are the versioned project/event/sample representation, extended patterns
-and persistence, then integration of the tested channel and sample cores into
-the classic editing workflow. Effects/replay traces, undo/recovery, save-failure
+Versioned projects, extended patterns, persistence and bounded pattern undo are
+now implemented as shared cores. Next is their native editor integration. Effects/replay traces, undo/recovery, save-failure
 handling, renderer/converter, MIDI logic and Enhanced screen work remain open.
 The full supplied scope still applies; this checkpoint does not complete any
 stage whose UI, replay or hardware acceptance remains missing.
@@ -128,3 +127,45 @@ firmware and machine configuration. Positive detect/reserve/free, interrupt
 lifecycle, sample transfer, 1/4/8/16 voices, audible quality, PCM/capture and
 endurance remain **NOT RUN on hardware**. No user decision is needed to continue
 the independent software work.
+
+## Project, editing and converter increment
+
+The version 1.0 [project format](PROJECT_FORMAT.md) stores 1–16 channels, raw MOD
+periods or MIDI notes, explicit OFF, one effect column, 8/16/24-bit mono/stereo PCM,
+loop/slice metadata and MIDI endpoint settings. CRC, required capabilities,
+versioned chunks and preserved optional extensions make unsupported input explicit.
+Staged document loads preserve the old project and dirty flag through corruption,
+capacity rejection and allocation failure. The strict MOD importer preserves an
+optional original header so an eligible MOD can export byte-for-byte unchanged.
+
+Pattern edits use a bounded command/change journal with undo/redo, dirty/save
+revisions, conflict detection, block copy/paste, pattern clone and checked
+transpose. Slicing provides non-destructive transient proposals, manual markers
+and an explicit offline crossfade operation. None of these new core operations
+is yet integrated with native tracker playback or its sampler interface.
+
+`make converter` builds the host utility; `make core-tests` also builds native
+`PT24GConvert`. Commands are `inspect INPUT`, `project INPUT NEW_OUTPUT` and
+`mod INPUT NEW_OUTPUT`. MOD analysis identifies the required conversion strategy;
+only lossless direct export is implemented. Conversion, bounce, MIDI audio capture,
+normal overwrite saves and recovery are still open. Existing destinations are
+refused. Output is staged, closed and read back before new-file publication.
+Native DOS uses an exclusively created staging directory and Rename; the native
+file test verifies that an existing destination is preserved. This does not
+establish power-loss durability or a safe replacement policy.
+
+Evidence in `evidence/project-v1/` records 19 host test groups, 5,000 project parser
+mutations under ASan/UBSan (including CRC-repaired semantic mutations), and 14
+native test/CLI cases. The native cases cover pattern undo, slices, channel/PCM
+regression, file safety, project round trips, document allocation/save faults,
+converter output, refusal to replace existing files and refusal of lossy export.
+The classic fixture round trip is byte-identical. Golden project fixtures are in
+`tests/fixtures/project-v1/`. These are software/emulator results, not card tests.
+
+The native allocation-failure test exposed incorrect structure-field addressing
+from this local GCC 6.5 toolchain's extra late optimizer. A retained minimal
+reproducer and before/after assembly are in the same evidence directory. Native
+C builds now pass `-fbbb=-` when that option is available. All 14 cases passed with
+that mitigation; compiler/source/executable hashes and flags are retained. This
+is a targeted mitigation, not a certification of the compiler. The unchanged
+assembler build does not use that compiler pass.

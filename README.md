@@ -5,9 +5,10 @@ ProTracker workflow, and exclusive Paula, AmiGUS or MIDI routing per channel.
 
 **Status: native 2.4G dev2 builds and runs in the isolated Amiberry test setup.**
 This increment integrates classic MOD preflight and input.device mouse support.
-The portable 1–16 channel, metadata undo/redo, 8/16/24-bit sample-processing and
-WAV cores pass host and native Amiga tests; their enhanced editor/replay
-integration is still pending. Physical AmiGUS tests await the owner's Mini.
+The portable channel, PCM/WAV, extended-project, transactional document, pattern
+undo and slicing cores pass host and native Amiga tests. PT24GConvert now supports
+verified new-file project saves and strict lossless classic MOD round trips.
+Enhanced editor/replay integration is still pending. Physical AmiGUS tests await the owner's Mini.
 See the [development checkpoint](docs/HARDWARE_INDEPENDENT.md),
 [baseline report](docs/BASELINE_BUILD.md), [diagnostic evidence](docs/AMIGUS_DIAGNOSTIC.md)
 and [MOD preflight](docs/MOD_PREFLIGHT.md).
@@ -48,7 +49,7 @@ user instructions control the work. After handover processing, the user
 authorized proceeding with the baseline build and verification.
 
 The owner's 19 September instruction authorises independent software development
-while the ordered Mini is in transit. The next work is project/pattern persistence
-and integration of the tested channel/sample cores into the native editor.
+while the ordered Mini is in transit. Project/pattern persistence and bounded editing cores are implemented. The next
+work connects them to the enhanced native editor.
 AmiConnect upload/exec and real card tests remain separate acceptance gates.
 Initial smoke results do not certify all effects or physical hardware.

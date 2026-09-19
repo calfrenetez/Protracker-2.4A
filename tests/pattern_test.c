@@ -54,6 +54,47 @@ int main(void)
     assert(pt_pattern_undo(&p,&h,-1)==PT_EDIT_END && events[63].pitch==36);
     assert(pt_pattern_copy(&p,0,0,1,0,1,&block)==PT_EDIT_OK);
     block.events=events;assert(pt_pattern_copy(&p,0,0,1,0,1,&block)==PT_EDIT_ALIAS);
+    /* Metadata shares chronological history with notes, without spending event slots. */
+    pt_channels_init(&p.channels);assert(pt_channels_resize(&p.channels,16)==PT_CHANNEL_OK);
+    assert(pt_pattern_history_init(&h,&p,commands,3,changes,8)==PT_EDIT_OK);
+    {
+        struct pt_channel v=p.channels.track[0];struct pt_channels channel_snapshot;
+        v.route=PT_MIDI;
+        assert(pt_pattern_channel_apply(&p,&h,0,&v)==PT_EDIT_OK && h.used==0);
+        updates[0].index=63;updates[0].event=events[63];updates[0].event.pitch=70;
+        assert(pt_pattern_apply(&p,&h,updates,1)==PT_EDIT_OK);
+        v.muted=1;v.solo=1;
+        assert(pt_pattern_channel_apply(&p,&h,0,&v)==PT_EDIT_OK && h.used==1);
+        pt_pattern_mark_saved(&h);p.channels.selected=15;
+        assert(pt_pattern_undo(&p,&h,-1)==PT_EDIT_OK && !p.channels.track[0].muted && pt_pattern_dirty(&h));
+        assert(pt_pattern_undo(&p,&h,-1)==PT_EDIT_OK && events[63].pitch==36);
+        assert(pt_pattern_undo(&p,&h,-1)==PT_EDIT_OK && p.channels.track[0].route==PT_PAULA);
+        assert(p.channels.selected==15);
+        before=h;channel_snapshot=p.channels;v=p.channels.track[4];v.route=PT_PAULA;
+        assert(pt_pattern_channel_apply(&p,&h,4,&v)==PT_EDIT_PAULA_LIMIT);
+        assert(!memcmp(&h,&before,sizeof(h)) && !memcmp(&p.channels,&channel_snapshot,sizeof(channel_snapshot)));
+        assert(pt_pattern_channel_apply(&p,&h,0,&p.channels.track[0])==PT_EDIT_OK && !memcmp(&h,&before,sizeof(h)));
+        for(i=0;i<3;++i)assert(pt_pattern_undo(&p,&h,1)==PT_EDIT_OK);
+        assert(!pt_pattern_dirty(&h) && p.channels.track[0].muted && events[63].pitch==70);
+        /* Conflicts do not advance history or alter unrelated channels. */
+        before=h;p.channels.track[0].muted=0;
+        assert(pt_pattern_undo(&p,&h,-1)==PT_EDIT_CONFLICT && !memcmp(&h,&before,sizeof(h)));
+        p.channels.track[0].muted=1;
+        for(i=0;i<10;++i) {
+            v=p.channels.track[0];v.muted^=1;
+            assert(pt_pattern_channel_apply(&p,&h,0,&v)==PT_EDIT_OK);
+        }
+        assert(h.count==3 && !h.used);
+        for(i=0;i<3;++i)assert(pt_pattern_undo(&p,&h,-1)==PT_EDIT_OK);
+        assert(pt_pattern_undo(&p,&h,-1)==PT_EDIT_END);
+        /* Undo cannot make a fifth Paula route after an outside edit. */
+        assert(pt_pattern_history_init(&h,&p,commands,3,changes,8)==PT_EDIT_OK);
+        v=p.channels.track[1];v.route=PT_AMIGUS;
+        assert(pt_pattern_channel_apply(&p,&h,1,&v)==PT_EDIT_OK);
+        p.channels.track[4].route=PT_PAULA;p.channels.track[5].route=PT_PAULA;
+        before=h;assert(pt_pattern_undo(&p,&h,-1)==PT_EDIT_CONFLICT && !memcmp(&h,&before,sizeof(h)));
+        p.channels.count=15;assert(pt_pattern_undo(&p,&h,-1)==PT_EDIT_INVALID);p.channels.count=16;
+    }
     p.events=snapshot;assert(pt_pattern_undo(&p,&h,1)==PT_EDIT_INVALID);
     puts("PATTERN PASS: 16-channel block edits, exact period/MIDI transpose, OFF retention, clone, bounded undo/redo, dirty tracking, eviction and conflict/no-op safety");return 0;
 }

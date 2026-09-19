@@ -7,14 +7,40 @@
 #include "mod_project.h"
 #include "mod_inspect.h"
 #include "paula.h"
-extern int pt_replay_start(void *,unsigned long,void *);
+extern int pt_replay_start(void *,unsigned long,void *,unsigned long);
 extern void pt_replay_stop(void);
 extern volatile uint32_t pt_replay_ticks;
-extern volatile uint16_t pt_replay_rowbytes,pt_replay_tempo;
-extern volatile uint8_t pt_replay_order,pt_replay_speed,pt_replay_voices[],pt_replay_enabled;
+extern volatile uint16_t pt_replay_rowbytes,pt_replay_tempo,pt_replay_audible;
+extern volatile uint8_t pt_replay_order,pt_replay_speed,pt_replay_voices[],pt_replay_enabled,pt_replay_rawvol[4],pt_replay_outputvol[4];
 static unsigned be16(const uint8_t *p) {return ((unsigned)p[0]<<8)|p[1];}
 static uintptr_t be32(const uint8_t *p)
 {return ((uintptr_t)p[0]<<24)|((uintptr_t)p[1]<<16)|((uintptr_t)p[2]<<8)|p[3];}
+/* Playback can represent mute/solo at the owned output stage. Strict disk
+   export still rejects these properties instead of silently discarding them. */
+static int playback_project(const struct pt_project *p,struct pt_project *copy)
+{
+    unsigned i;
+    if(pt_project_validate(p,NULL)!=PT_PROJECT_OK)return 0;
+    *copy=*p;
+    for(i=0;i<copy->channels.count;++i) {copy->channels.track[i].muted=0;copy->channels.track[i].solo=0;}
+    return 1;
+}
+static unsigned audible_mask(const struct pt_project *p)
+{
+    unsigned i,mask=0;
+    for(i=0;i<4;++i)if(pt_channel_audible(&p->channels,i,PT_PAULA))mask|=1U<<i;
+    return mask;
+}
+static void set_audible(struct pt_paula *a,unsigned mask)
+{
+    unsigned i;
+    Disable();pt_replay_audible=(uint16_t)mask;a->audible=mask;
+    for(i=0;i<4;++i) {
+        uint8_t volume=(mask&(1U<<i))?pt_replay_rawvol[i]:0;
+        pt_replay_outputvol[i]=volume;*(volatile UWORD *)(0xdff0a8+i*16)=volume;
+    }
+    Enable();
+}
 void pt_paula_stop(struct pt_paula *a)
 {
     if(a->started) {pt_replay_stop();a->started=0;}
@@ -33,17 +59,17 @@ void pt_paula_stop(struct pt_paula *a)
 }
 const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned mode,unsigned position,unsigned pattern)
 {
-    struct pt_mod_export_report report;struct pt_mod_info info;size_t written;unsigned i;UBYTE channels=15;
+    struct pt_project playback;struct pt_mod_export_report report;struct pt_mod_info info;size_t written;unsigned i;UBYTE channels=15;
     const char *error="PLAY: OUT OF CHIP MEMORY";
     if(mode>1 || position>=p->order_count || pattern>=p->pattern_count)return "PLAY: INVALID POSITION";
-    if(pt_mod_export_analyse(p,&report)!=PT_PROJECT_OK || report.issues)
+    if(!playback_project(p,&playback) || pt_mod_export_analyse(&playback,&report)!=PT_PROJECT_OK || report.issues)
         return "PLAY: REQUIRES CLASSIC FOUR-CHANNEL PAULA PROJECT";
     pt_paula_stop(a);a->bytes=report.bytes;a->pattern_bytes=(size_t)p->pattern_count*1024;
     a->mode=mode;a->pattern=pattern;
     a->data=AllocMem(a->bytes+2,MEMF_CHIP|MEMF_PUBLIC);
     a->staging=malloc(a->bytes);
     if(!a->data || !a->staging)goto failed;
-    if(pt_mod_export_direct(p,a->data,a->bytes,&written)!=PT_PROJECT_OK || written!=a->bytes) {
+    if(pt_mod_export_direct(&playback,a->data,a->bytes,&written)!=PT_PROJECT_OK || written!=a->bytes) {
         error="PLAY: SNAPSHOT ENCODE FAILED";goto failed;
     }
     error="PLAY: UNSAFE CLASSIC SAMPLE METADATA";
@@ -83,18 +109,19 @@ const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned
     SendIO((struct IORequest *)a->lock);a->locked=1;
     if(CheckIO((struct IORequest *)a->lock)) {WaitIO((struct IORequest *)a->lock);a->locked=0;goto failed;}
     error="PLAY: CIA TIMER UNAVAILABLE";
-    if(!pt_replay_start(a->data,mode?0:position,a->data+a->bytes))goto failed;
+    a->audible=audible_mask(p);
+    if(!pt_replay_start(a->data,mode?0:position,a->data+a->bytes,a->audible))goto failed;
     a->started=1;return NULL;
 failed:
     pt_paula_stop(a);return error;
 }
 const char *pt_paula_sync(struct pt_paula *a,const struct pt_project *p)
 {
-    struct pt_mod_export_report report;size_t n,offset;
+    struct pt_project playback;struct pt_mod_export_report report;size_t n,offset;
     if(!a->started)return NULL;
-    if(pt_mod_export_analyse(p,&report)!=PT_PROJECT_OK || report.issues || report.bytes!=a->bytes ||
+    if(!playback_project(p,&playback) || pt_mod_export_analyse(&playback,&report)!=PT_PROJECT_OK || report.issues || report.bytes!=a->bytes ||
        (size_t)p->pattern_count*1024!=a->pattern_bytes ||
-       pt_mod_export_direct(p,a->staging,a->bytes,&n)!=PT_PROJECT_OK || n!=a->bytes) {
+       pt_mod_export_direct(&playback,a->staging,a->bytes,&n)!=PT_PROJECT_OK || n!=a->bytes) {
         pt_paula_stop(a);return "STOPPED: EDIT REQUIRES ENHANCED REPLAY BACKEND";
     }
     /* Publish only changed rows, with short interrupt exclusion. Do not copy
@@ -103,22 +130,24 @@ const char *pt_paula_sync(struct pt_paula *a,const struct pt_project *p)
         if(memcmp(a->data+offset,a->staging+offset,16)) {
             Disable();CopyMem(a->staging+offset,a->data+offset,16);Enable();
         }
+    set_audible(a,audible_mask(p));
     return NULL;
 }
 void pt_paula_poll(struct pt_paula *a,struct pt_playback *s)
 {
-    uint8_t voices[176];unsigned i,j;memset(s,0,sizeof(*s));
+    uint8_t voices[176],volumes[4];unsigned i,j;memset(s,0,sizeof(*s));
     if(!a->started)return;
     if(!pt_replay_enabled || CheckIO((struct IORequest *)a->lock)) {pt_paula_stop(a);return;}
     Disable();
     s->ticks=pt_replay_ticks;s->order=pt_replay_order;s->row=pt_replay_rowbytes/16;
     s->speed=pt_replay_speed;s->bpm=pt_replay_tempo;
     CopyMem((const void *)pt_replay_voices,voices,sizeof(voices));
+    for(i=0;i<4;++i)volumes[i]=pt_replay_outputvol[i];
     Enable();s->active=1;s->pattern=a->data[952+s->order];
     for(i=0;i<4;++i) {
         const uint8_t *v=voices+i*44;uintptr_t address=be32(v+4),base=(uintptr_t)a->data;
         size_t length=(size_t)be16(v+20)*2;
-        s->volume[i]=v[31];s->period[i]=(uint16_t)be16(v+24);
+        s->volume[i]=volumes[i];s->period[i]=(uint16_t)be16(v+24);
         if(address<base || address-base>=a->bytes || length>a->bytes-(address-base) || !length)continue;
         for(j=0;j<81;++j)s->wave[i][j]=(int8_t)a->data[address-base+(size_t)j*length/81];
     }

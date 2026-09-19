@@ -3,6 +3,7 @@
 	EVEN
 	XDEF _pt_replay_start,_pt_replay_stop
 	XDEF _pt_replay_data,_pt_replay_ticks,_pt_replay_order,_pt_replay_rowbytes
+	XDEF _pt_replay_audible,_pt_replay_rawvol,_pt_replay_outputvol
 	XDEF _pt_replay_voices,_pt_replay_speed,_pt_replay_tempo,_pt_replay_enabled
 _pt_replay_enabled EQU mt_Enable
 _pt_replay_voices EQU mt_audchan1temp
@@ -11,6 +12,10 @@ _pt_replay_tempo EQU RealTempo
 _pt_replay_start
 	MOVEM.L D2-D7/A2-A6,-(SP)
 	MOVE.L 48(SP),_pt_replay_data
+	MOVE.L 60(SP),D0
+	MOVE.W D0,_pt_replay_audible
+	CLR.L _pt_replay_outputvol
+	CLR.L _pt_replay_rawvol
 	CLR.L _pt_replay_ticks
 	CLR.B _pt_replay_order
 	CLR.W _pt_replay_rowbytes
@@ -87,6 +92,32 @@ _pt_replay_stop
 	BSR.W mt_end
 	MOVEM.L (SP)+,D2-D7/A2-A6
 	RTS
+	; Preserve registers and the MOVE.W condition codes at each replaced write.
+	; Raw volume retains tremolo/slide/cut output even while inaudible.
+pt_write_volume
+	MOVEM.L D0-D1/A0,-(SP)
+	MOVE.L A5,A0
+	SUBA.L #$DFF0A0,A0
+	MOVE.L A0,D1
+	ROR.L #4,D1
+	LEA _pt_replay_rawvol(PC),A0
+	MOVE.B D0,0(A0,D1.W)
+	LEA _pt_replay_outputvol(PC),A0
+	ADDA.W D1,A0
+	MOVE.W n_dmabit(A6),D1
+	AND.W _pt_replay_audible(PC),D1
+	BNE.B pt_volume_audible
+	MOVEQ #0,D0
+pt_volume_audible
+	MOVE.B D0,(A0)
+	MOVE.W D0,8(A5)
+	MOVEM.L (SP)+,D0-D1/A0
+	TST.W D0
+	RTS
+	CNOP 0,4
+_pt_replay_outputvol dc.l 0
+_pt_replay_rawvol dc.l 0
+_pt_replay_audible dc.w 15
 	CNOP 0,4
 _pt_replay_data dc.l 0
 _pt_replay_ticks dc.l 0

@@ -11,8 +11,9 @@ that they are not connected.
 
 The interface follows the supplied four-column reference: the original pinned
 2.3F bitmap font, grey raised controls, a black pattern area, twenty visible rows,
-four channel-page buttons and permanent P/A/M route letters. Routing is displayed;
-route changes, mute/solo and channel-count changes are not yet wired to this UI.
+four channel-page buttons and permanent P/A/M route letters. Clicking a route
+letter or Control-R opens CHANNEL settings. Route, mute and solo changes share
+chronological undo with note/block edits and are saved in the project.
 Four quadrascope panes occupy the reference position. During Paula playback they
 show current voice sample waveforms scaled by volume; stopped traces are flat.
 They are not captured audio or phase-accurate DMA scopes. MIDI labels indicate project routes;
@@ -77,7 +78,19 @@ to allocate/open a requester leaves the document intact. The dialogs follow the
 - Minus/equal decrease/increase the selected sample; the paired arrows on the
   SAMPLE row do the same. PATTERN arrows select an existing pattern, and POS
   arrows select an existing order. Other parameter arrows are not wired yet.
-- Control-Z / Control-Shift-Z undo/redo one complete event or block command.
+- Control-Z / Control-Shift-Z undo/redo one complete event, block or channel change.
+- CHANNEL / Control-R: select PAULA, AMIGUS or MIDI; routes are exclusive and a
+  fifth Paula assignment is refused. P/A/M select the route while this page is
+  open. U toggles MUTE and S toggles SOLO; highlighted buttons show saved state.
+  Multiple solos are allowed and mute takes precedence. PREV/NEXT, Tab/Shift-Tab,
+  left/right and page buttons select the channel. BACK/Escape closes the page.
+  Note-entry keys are isolated from pattern entry while the page is open.
+  Header M/S indicators show active flags; the rightmost P/A/M is the route.
+  Route changes preserve existing notes, samples, panning and MIDI settings;
+  they do not translate pitches or set up a hardware connection. An unsupported
+  route change during classic playback stops that backend. Classic four-channel
+  Paula playback supports live mute/solo and undo/redo; mixed replay is pending.
+  Saved mute/solo are enhanced metadata, so strict MOD export refuses them.
 - EDIT OP. / Control-E opens the block-editing panel; BACK / Control-E returns.
   MARK / Control-B starts a rectangle at the cursor. Move with arrows, Tab and
   page buttons, then COPY / Control-C freezes and copies the highlighted block.
@@ -107,7 +120,7 @@ not an assertion about an external instrument's octave naming.
 
 The renderer uses 163,840 bytes for a four-plane software canvas, preferring Fast
 RAM, plus 163,840 bytes of Chip RAM for a blitter source. The OS display has its
-own bitmap. The current bounded editor/history structure uses about 75 KiB on
+own bitmap. The current bounded editor/history structure uses about 81 KiB on
 68k. Loaded project/sample storage is additional. No fixed available-RAM amount
 is assumed; allocation failure unwinds all owned resources.
 

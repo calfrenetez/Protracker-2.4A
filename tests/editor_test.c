@@ -114,6 +114,42 @@ static void blocks(struct pt_editor *e)
     pt_editor_click(e,400,87);assert(e->panel==0);
     assert(pt_editor_init(e,p));pt_editor_key(e,0x34,8);assert(!e->clipboard.rows && strstr(e->status,"EMPTY") && !pt_editor_dirty(e));
 }
+static void channel_controls(struct pt_editor *e)
+{
+    struct pt_project *p=e->project;struct pt_channel initial;struct pt_event event;
+    struct pt_allocator a={NULL,allocate,release};struct pt_document reopened;uint8_t *bytes;size_t n,written;unsigned i;
+    pt_channels_init(&p->channels);assert(pt_channels_resize(&p->channels,16)==PT_CHANNEL_OK);
+    assert(pt_editor_init(e,p));initial=p->channels.track[0];event=p->events[0];
+    pt_editor_key(e,0x13,8);assert(e->panel==4 && !pt_editor_dirty(e));
+    assert(pt_editor_key(e,0x44,1)==PT_UI_PATTERN);
+    e->editing=1;pt_editor_key(e,0x20,0);assert(p->channels.track[0].route==PT_AMIGUS);
+    pt_editor_click(e,500,30);assert(p->channels.track[0].route==PT_MIDI);
+    pt_editor_click(e,250,50);pt_editor_key(e,0x21,0);
+    assert(p->channels.track[0].muted && p->channels.track[0].solo && e->history.count==4);
+    assert(!memcmp(&event,&p->events[0],sizeof(event)) && e->row==0);
+    assert(pt_editor_key(e,0x21,8)==PT_UI_SAVE);pt_editor_saved(e);
+    assert(pt_project_size(p,&n)==PT_PROJECT_OK);bytes=malloc(n);assert(bytes);
+    assert(pt_project_encode(p,bytes,n,&written)==PT_PROJECT_OK && written==n);
+    pt_document_init(&reopened,&a);assert(pt_document_load(&reopened,bytes,n,SIZE_MAX)==PT_PROJECT_OK);
+    assert(!memcmp(&reopened.project.channels,&p->channels,sizeof(p->channels)));free(bytes);pt_document_release(&reopened);
+    pt_editor_click(e,500,65);assert(p->channels.selected==1);
+    pt_editor_key(e,0x31,8);assert(!p->channels.track[0].solo && p->channels.selected==1 && pt_editor_dirty(e));
+    pt_editor_key(e,0x31,9);assert(!pt_editor_dirty(e) && p->channels.track[0].solo);
+    for(i=0;i<4;++i)pt_editor_key(e,0x31,8);
+    assert(!memcmp(&initial,&p->channels.track[0],sizeof(initial)));
+    pt_editor_key(e,0x51,0);assert(p->channels.selected==4);
+    pt_editor_key(e,0x19,0);assert(strstr(e->status,"PAULA LIMIT") && !e->history.cursor && e->history.count==4);
+    pt_editor_key(e,0x31,9);assert(p->channels.track[0].route==PT_AMIGUS);
+    pt_editor_key(e,0x19,0);assert(p->channels.track[4].route==PT_PAULA && e->history.count==2);
+    pt_editor_key(e,0x45,0);assert(!e->panel && !e->quit_pending);
+    pt_editor_click(e,38+130,PT_EDITOR_HEADER_Y+3);assert(e->panel==4 && p->channels.selected==4);
+    pt_editor_key(e,0x13,8);assert(!e->panel);
+    /* Pattern entry and channel changes undo in their actual order. */
+    e->field=0;pt_editor_key(e,0x32,0);assert(e->history.count==3);
+    pt_editor_key(e,0x13,8);pt_editor_key(e,0x16,0);assert(e->history.count==4);
+    pt_editor_key(e,0x31,8);assert(!p->channels.track[4].muted);
+    pt_editor_key(e,0x31,8);assert(e->history.cursor==2);
+}
 int main(int argc,char **argv)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_document doc;struct pt_editor *e;
@@ -219,6 +255,13 @@ int main(int argc,char **argv)
             if(step==81)pt_editor_key(e,0x0b,0);
             if(step==82)pt_editor_key(e,0x44,0);
             if(step==84)pt_editor_key(e,0x45,0);
+            if(step==85)pt_editor_key(e,0x13,8);
+            if(step==86)pt_editor_key(e,0x16,0);
+            if(step==87)pt_editor_key(e,0x21,0);
+            if(step==88)pt_editor_key(e,0x42,0);
+            if(step==90)pt_editor_key(e,0x37,0);
+            if(step==93)pt_editor_key(e,0x31,8);
+            if(step==95)pt_editor_key(e,0x45,0);
             pt_editor_draw(e,&canvas,font);n=pt_editor_draw_update(e,&incremental,font,&cache,areas);assert(n<=PT_VIEW_DIRTY_MAX);
             for(j=0;j<n;++j) {
                 const struct pt_view_rect *a=&areas[j];assert(a->x+a->width<=640 && a->y+a->height<=512);
@@ -249,7 +292,7 @@ int main(int argc,char **argv)
         for(p=0;p<4;++p) {free(incremental.planes[p]);free(shown.planes[p]);}
     }
 
-    blocks(e);
+    blocks(e);channel_controls(e);
     for(i=0;i<4;++i)free(canvas.planes[i]);
     free(font);free(e);pt_document_release(&doc);
     puts("EDITOR PASS: bank/wrap/scroll, guarded note and nibble edits, OFF, undo/redo, save state, discard confirmation, atomic block copy/paste/clear/transpose/clone, all-page planar render");return 0;

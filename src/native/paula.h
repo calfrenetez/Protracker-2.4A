@@ -9,7 +9,7 @@ struct pt_paula {
     struct IOAudio *audio,*lock;
     uint8_t *data,*staging;
     size_t bytes,pattern_bytes;
-    unsigned opened,locked,started,mode,pattern;
+    unsigned opened,locked,started,mode,pattern,audible;
 };
 /* Zero-initialize once. 0=song, 1=selected pattern. No channel stealing. */
 const char *pt_paula_play(struct pt_paula *,const struct pt_project *,unsigned mode,unsigned position,unsigned pattern);

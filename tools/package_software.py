@@ -50,6 +50,9 @@ Starting PT24GEdit without arguments creates a blank song.
 CLEAR/Control-N creates a new song with 1-16 channels; dirty edits need confirmation.
 EDIT OP./Control-E provides mark/copy/paste/clear/transpose and whole-block undo.
 DISK OP. > SAVE MOD / Control-Shift-M exports strictly lossless classic MODs.
+Control-R or a P/A/M header letter opens CHANNEL: routes, mute and solo share undo
+and project saves. P/A/M chooses route, U mute, S solo, Escape closes the page.
+Classic Paula playback applies mute/solo live; MOD export refuses saved flags.
 Mixed AmiGUS/MIDI replay and other unfinished controls remain unavailable.
 PT24GConvert inspects projects and performs strict lossless MOD/project conversion.
 This is not the finished sixteen-channel tracker or a hardware-qualified release.

@@ -41,6 +41,27 @@ int main(int argc,char **argv)
     roundtrip=malloc(report.bytes);CHECK(roundtrip);
     CHECK(pt_mod_export_direct(&doc.project,roundtrip,report.bytes,&written)==PT_PROJECT_OK);
     CHECK(written==(size_t)length && !memcmp(input,roundtrip,written));
+    /* Saved mute/solo gates actual output without erasing effect state.
+       Strict MOD export still refuses to discard these settings. */
+    doc.project.channels.track[0].muted=1;
+    CHECK(pt_mod_export_analyse(&doc.project,&report)==PT_PROJECT_OK && report.issues);
+    CHECK(!pt_paula_play(&a,&doc.project,0,0,0));Delay(15);pt_paula_poll(&a,&state);
+    CHECK(state.active && !state.volume[0] && state.volume[1] && state.period[0]==428);
+    CHECK(pt_paula_play(&b,&doc.project,0,0,0)!=NULL && !b.started);
+    doc.project.channels.track[0].muted=0;CHECK(!pt_paula_sync(&a,&doc.project));pt_paula_poll(&a,&state);
+    CHECK(state.volume[0]==24);
+    doc.project.channels.track[1].solo=1;CHECK(!pt_paula_sync(&a,&doc.project));Delay(10);pt_paula_poll(&a,&state);
+    CHECK(!state.volume[0] && state.volume[1] && !state.volume[2] && !state.volume[3]);
+    doc.project.channels.track[0].solo=1;CHECK(!pt_paula_sync(&a,&doc.project));pt_paula_poll(&a,&state);
+    CHECK(state.volume[0]==24 && state.volume[1]);
+    doc.project.channels.track[0].muted=1;CHECK(!pt_paula_sync(&a,&doc.project));pt_paula_poll(&a,&state);
+    CHECK(!state.volume[0] && state.volume[1]);
+    doc.project.channels.track[0].muted=0;doc.project.channels.track[0].solo=0;doc.project.channels.track[1].solo=0;
+    CHECK(!pt_paula_sync(&a,&doc.project));pt_paula_poll(&a,&state);
+    CHECK(state.volume[0]==24 && state.volume[1] && state.volume[2] && state.volume[3]);pt_paula_stop(&a);
+    CHECK(pt_mod_export_direct(&doc.project,roundtrip,(size_t)length,&written)==PT_PROJECT_OK);
+    CHECK(written==(size_t)length && !memcmp(input,roundtrip,written));
+    puts("CHANNEL AUDIO PASS: muted start, live unmute, solo, shared solo, mute wins, immutable notes/samples, strict export refusal");
     /* Repeated starts reset all persistent voice/effect state. */
     for(i=0;i<3;++i) {CHECK(!pt_paula_play(&a,&doc.project,0,0,0));Delay(10);pt_paula_poll(&a,&state);CHECK(state.period[0]==428 && state.ticks>=6);pt_paula_stop(&a);}
     /* Live row publishing changes future replay without replacing DMA sample memory. */

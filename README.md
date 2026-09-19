@@ -21,7 +21,10 @@ native mouse controls and keyboard/file workflows pass. EDIT OP. now adds marked
 block copy/paste/clear/transpose, whole-pattern copying and atomic undo.
 CLEAR / Control-N creates blank songs with 1–16 channels through a staged,
 non-destructive failure path. SAVE MOD exports eligible projects losslessly through a native dialog; enhanced
-projects are refused without dropping their data. See the
+projects are refused without dropping their data. CHANNEL / Control-R now exposes
+exclusive routing plus mute/solo, with chronological note/channel undo and exact
+project persistence. Classic Paula playback applies mute/solo live; mixed
+AmiGUS/MIDI replay is still pending. See the
 [editor guide](docs/ENHANCED_EDITOR.md) and retained native UI evidence. Physical AmiGUS tests await the owner's Mini.
 MIDI note ownership and quantised recording into undoable pattern events now
 pass host/native sink tests; CAMD and live transport remain unconnected.

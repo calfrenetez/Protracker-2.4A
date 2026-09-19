@@ -23,6 +23,11 @@ def prepare_replay(raw, wrapper):
     source = once(source, '\tLEA\tmt_data,A0', '\tMOVE.L\t_pt_replay_data(PC),A0')
     source = once(source, '\nmt_GetNewNote\n', '\nmt_GetNewNote\n\tMOVE.B\tmt_SongPos(PC),_pt_replay_order\n\tMOVE.W\tmt_PatternPos(PC),_pt_replay_rowbytes\n')
     source = once(source, '\tADDQ.B\t#1,mt_Counter', '\tADDQ.L\t#1,_pt_replay_ticks\n\tADDQ.B\t#1,mt_Counter')
+    # Preserve all effect state; gate only final hardware volume writes.
+    volume = '\tMOVE.W\tD0,8(A5)'
+    if source.count(volume) != 6:
+        raise ValueError('Replay volume anchors changed')
+    source = source.replace(volume, '\tBSR.W\tpt_write_volume')
     source = once(source, '\tSECTION music,DATA_C\n\n\tCNOP 0,4\nmt_data INCBIN "music.mod"', wrapper.decode('ascii'))
     return prepare(source.encode('latin1'))[0]
 

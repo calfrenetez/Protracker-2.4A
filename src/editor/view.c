@@ -222,6 +222,8 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
         if(ch<p->channels.count) {
             const struct pt_channel *channel=&p->channels.track[ch];char route=channel->route==PT_PAULA?'P':channel->route==PT_AMIGUS?'A':'M';
             snprintf(s,sizeof(s),"%u",ch+1);medium(c,font,x+64,PT_EDITOR_HEADER_Y+3,s,BLACK);snprintf(s,sizeof(s),"%c",route);small(c,font,x+130,PT_EDITOR_HEADER_Y+3,s,NAVY);
+            if(channel->muted)small(c,font,x+8,PT_EDITOR_HEADER_Y+3,"M",NAVY);
+            if(channel->solo)small(c,font,x+24,PT_EDITOR_HEADER_Y+3,"S",NAVY);
         }
     }
     for(i=0;i<5;++i) {
@@ -235,7 +237,20 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
     panel(c,476,PT_EDITOR_BOTTOM_Y,18,21,GREY);rect(c,482,498,6,9,WHITE);label(c,font,494,PT_EDITOR_BOTTOM_Y,58,21,"STOP",0);
     panel(c,552,PT_EDITOR_BOTTOM_Y,86,21,GREY);small(c,font,557,497,"PATTERN",WHITE);snprintf(s,sizeof(s),"%02X",e->pattern);small(c,font,618,497,s,NAVY);
     pt_editor_draw_playback(e,c,font);
-    if(e->panel==3) {
+    if(e->panel==4) {
+        const struct pt_channel *channel=&p->channels.track[p->channels.selected];
+        snprintf(s,sizeof(s),"CHANNEL %02u",p->channels.selected+1);label(c,font,230,2,369,19,s,0);
+        label(c,font,230,21,123,19,"PAULA",channel->route==PT_PAULA);
+        label(c,font,353,21,123,19,"AMIGUS",channel->route==PT_AMIGUS);
+        label(c,font,476,21,123,19,"MIDI",channel->route==PT_MIDI);
+        label(c,font,230,40,123,19,"MUTE",channel->muted);
+        label(c,font,353,40,123,19,"SOLO",channel->solo);
+        label(c,font,476,40,123,19,"",0);
+        label(c,font,230,59,123,19,"PREV",0);
+        snprintf(s,sizeof(s),"%02u / %02u",p->channels.selected+1,p->channels.count);label(c,font,353,59,123,19,s,0);
+        label(c,font,476,59,123,19,"NEXT",0);
+        label(c,font,230,78,123,19,"UNDO",0);label(c,font,353,78,123,19,"REDO",0);label(c,font,476,78,123,19,"BACK",0);
+    } else if(e->panel==3) {
         label(c,font,230,2,369,19,"NEW SONG",0);
         label(c,font,230,21,123,19,"-",0);snprintf(s,sizeof(s),"%02u CH",e->new_channels);
         label(c,font,353,21,123,19,s,0);label(c,font,476,21,123,19,"+",0);
@@ -297,7 +312,7 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
         bytes+=(size_t)pcm->frames*pcm->channels*(pcm->bits/8);
     }
     full=!old->valid || old->page!=page || old->pattern!=e->pattern || old->first_row!=e->first_row ||
-         old->position!=e->position || old->sample!=e->sample || old->editing!=e->editing || old->panel!=e->panel || (e->panel==1 && old->selection.active!=selection.active) ||
+         old->position!=e->position || old->sample!=e->sample || old->editing!=e->editing || old->panel!=e->panel || (e->panel==4 && old->selected!=e->project->channels.selected) || (e->panel==1 && old->selection.active!=selection.active) ||
          old->sample_bytes!=bytes || memcmp(&metadata,&old->project,sizeof(metadata)) || memcmp(&sample,&old->sample_meta,sizeof(sample));
     playback_changed=!old->valid || memcmp(&e->playback,&old->playback,sizeof(e->playback));
     if(full) {pt_editor_draw(e,c,font);areas[count++]=(struct pt_view_rect){0,0,640,512};}

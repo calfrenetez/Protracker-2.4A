@@ -1,0 +1,23 @@
+19 September 2026: AmiConnect task 01a02122-c34e-72f0-95cc-e36ce3d73629 explicitly
+released the exclusive window before testing. Fresh launch checks found no
+Amiberry process, no holder of local/baseline.hdf and no /tmp/amiberry.sock.
+
+Final PT24GEdit SHA-256:
+1de96d740890f64bc2573b68148123714428ba40e2b2fbf3ef0fa67eae86ef2c
+
+Final retained runs:
+playback1789852003119511000
+channels1789852043521963000
+
+Both harnesses used GET_STATUS exact Config=ProTracker isolated baseline guards,
+recorded CPU/memory identity, restored the private launch script, and issued
+profile-guarded QUIT. Native programs exited successfully; all four DMA bits
+were off after Stop/unsupported route changes.
+
+Fresh release checks after the final harness:
+ps ax -o pid=,comm= filtered for /Amiberry$ or /amiberry$: no match
+lsof local/baseline.hdf: no holder
+/tmp/amiberry.sock: absent
+
+Explicit release and binary/test identity sent back to the AmiConnect task.
+No further launch is authorized by this reservation; request a new handover.

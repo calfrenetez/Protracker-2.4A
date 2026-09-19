@@ -170,8 +170,10 @@ int main(int argc,char **argv)
                 pt_editor_status(editor,error?error:"SAMPLE AUDITION - PAULA; STOP TO RELEASE");
             }
             if(action==PT_UI_STOP) {pt_paula_stop(&audio);pt_editor_status(editor,"STOPPED - AUDIO RELEASED");}
-            if(editor->history.revision!=revision && audio.started && audio.mode!=2) {
-                error=pt_paula_sync(&audio,editor->project);if(error)pt_editor_status(editor,error);
+            if(editor->history.revision!=revision && audio.started) {
+                if(audio.mode==2)pt_paula_stop(&audio);
+                else {error=pt_paula_sync(&audio,editor->project);if(error)pt_editor_status(editor,error);}
+                pt_paula_poll(&audio,&editor->playback);
             }
             if(error || action==PT_UI_PLAY || action==PT_UI_PATTERN || action==PT_UI_AUDITION || action==PT_UI_STOP)
                 pt_paula_poll(&audio,&editor->playback);

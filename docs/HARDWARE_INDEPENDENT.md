@@ -58,12 +58,13 @@ replayer still use their original four-channel song representation.
 
 The following C99 components run on both the host and the Amiga. They do not
 allocate internally, have caller-supplied bounded storage and use no FPU.
-They are **not yet connected to the native tracker UI/replay path**.
+Selected components are connected to the separate Enhanced editor as described
+below; they do not replace the original assembler tracker representation.
 
 | Component | Implemented and tested | Integration still required |
 | --- | --- | --- |
-| Channels | 1–16 channels, four-column page selection, wrapping navigation, names/pan/group/MIDI metadata, exclusive P/A/M routes, atomic fifth-Paula rejection and stable allocation of four Paula slots | Expanded pattern/event model, editor pages, backend dispatch, live audition and replay |
-| Mute/solo and history | Availability-aware audibility without route substitution; bounded undo/redo snapshots for channel metadata, redo invalidation and oldest-snapshot eviction | Pattern/sample undo, UI commands, persistent recovery |
+| Channels | 1–16 channels, four-column page selection, wrapping navigation, names/pan/group/MIDI metadata, exclusive P/A/M routes, atomic fifth-Paula rejection and stable allocation of four Paula slots | Existing-song resizing, names/pan/group/MIDI setup UI, mixed backend dispatch |
+| Mute/solo and history | Channel page and saved settings; shared chronological note/block/channel undo; fifth-Paula rejection; classic Paula live mute/solo and undo/redo | Mixed backend playback, sample undo, persistent recovery |
 | PCM editing | Signed 8/16/24-bit mono/stereo samples; reverse, saturation gain, shared-peak normalize, fades and per-channel DC removal; validation before mutation | Sampler UI, loop/slice metadata, selection and undo wiring |
 | Conversion | Explicit precision conversion with rounding/clipping; offline integer linear resampling | Antialias filtering and quality qualification; shared renderer/converter integration |
 | WAV | Bounded RIFF PCM parsing and canonical writing; 8/16/24-bit mono/stereo, odd-chunk padding, byte/block-rate checks and full low-eight-bit retention | Float/extensible WAV, loop metadata, sample-load UI, file I/O transaction and large-file policies |

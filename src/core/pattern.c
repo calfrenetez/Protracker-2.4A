@@ -18,13 +18,16 @@ static int equal(const struct pt_event *a,const struct pt_event *b)
 static int valid(const struct pt_project *p,const struct pt_pattern_history *h)
 {
     size_t i,used=0;
-    if(!shape(p) || !h || h->bound_events!=p->events || !h->commands || !h->changes ||
+    if(!shape(p) || !h || h->bound_events!=p->events || h->bound_channels!=p->channels.count || h->bound_patterns!=p->pattern_count || !h->commands || !h->changes ||
        !h->command_capacity || !h->change_capacity || h->count>h->command_capacity ||
        h->cursor>h->count || h->used>h->change_capacity || !h->next_revision ||
        h->command_capacity>SIZE_MAX/sizeof(*h->commands) || h->change_capacity>SIZE_MAX/sizeof(*h->changes))return 0;
     for(i=0;i<h->count;++i) {
         const struct pt_pattern_command *c=&h->commands[i];
-        if(c->offset!=used || !c->count || c->count>h->used-used)return 0;
+        if(c->offset!=used || c->count>h->used-used)return 0;
+        if(c->kind==PT_COMMAND_EVENTS) {if(!c->count)return 0;}
+        else if(c->kind==PT_COMMAND_CHANNEL) {if(c->count || c->channel>=p->channels.count)return 0;}
+        else return 0;
         used+=c->count;
     }
     return used==h->used;
@@ -45,8 +48,27 @@ enum pt_edit_result pt_pattern_history_init(struct pt_pattern_history *h,const s
     if(overlap(commands,cb,changes,eb) || overlap(h,sizeof(*h),commands,cb) || overlap(h,sizeof(*h),changes,eb) ||
        overlap(commands,cb,p->events,pb) || overlap(changes,eb,p->events,pb) || overlap(h,sizeof(*h),p->events,pb) ||
        overlap(commands,cb,p,sizeof(*p)) || overlap(changes,eb,p,sizeof(*p)) || overlap(h,sizeof(*h),p,sizeof(*p)))return PT_EDIT_ALIAS;
-    memset(h,0,sizeof(*h));h->bound_events=p->events;h->commands=commands;h->changes=changes;
+    memset(h,0,sizeof(*h));h->bound_events=p->events;h->bound_channels=p->channels.count;h->bound_patterns=p->pattern_count;h->commands=commands;h->changes=changes;
     h->command_capacity=command_capacity;h->change_capacity=change_capacity;h->next_revision=1;return PT_EDIT_OK;
+}
+static struct pt_pattern_command *reserve(struct pt_pattern_history *h,size_t needed)
+{
+    size_t i;
+    /* All validation precedes this mutation of the journal. */
+    if(h->cursor<h->count) {
+        h->used=h->cursor?h->commands[h->cursor-1].offset+h->commands[h->cursor-1].count:0;
+        h->count=h->cursor;
+    }
+    while(h->count==h->command_capacity || needed>h->change_capacity-h->used) {
+        size_t drop=h->commands[0].count;
+        memmove(h->changes,h->changes+drop,(h->used-drop)*sizeof(*h->changes));h->used-=drop;
+        --h->count;--h->cursor;
+        for(i=0;i<h->count;++i) {h->commands[i]=h->commands[i+1];h->commands[i].offset-=drop;}
+    }
+    memset(&h->commands[h->count],0,sizeof(*h->commands));
+    h->commands[h->count].offset=h->used;h->commands[h->count].count=needed;
+    h->commands[h->count].before_revision=h->revision;h->commands[h->count].after_revision=h->next_revision++;
+    return &h->commands[h->count];
 }
 enum pt_edit_result pt_pattern_apply(struct pt_project *p,struct pt_pattern_history *h,
     const struct pt_event_update *updates,size_t count)
@@ -62,24 +84,28 @@ enum pt_edit_result pt_pattern_apply(struct pt_project *p,struct pt_pattern_hist
     }
     if(!needed)return PT_EDIT_OK;
     if(needed>h->change_capacity || h->next_revision==UINT32_MAX)return PT_EDIT_CAPACITY;
-    /* No fallible work remains; abandon redo, evict oldest commands as needed. */
-    if(h->cursor<h->count) {
-        h->used=h->cursor?h->commands[h->cursor-1].offset+h->commands[h->cursor-1].count:0;
-        h->count=h->cursor;
-    }
-    while(h->count==h->command_capacity || needed>h->change_capacity-h->used) {
-        size_t drop=h->commands[0].count;
-        memmove(h->changes,h->changes+drop,(h->used-drop)*sizeof(*h->changes));h->used-=drop;
-        --h->count;--h->cursor;
-        for(i=0;i<h->count;++i) {h->commands[i]=h->commands[i+1];h->commands[i].offset-=drop;}
-    }
-    h->commands[h->count].offset=h->used;h->commands[h->count].count=needed;
-    h->commands[h->count].before_revision=h->revision;h->commands[h->count].after_revision=h->next_revision++;
+    reserve(h,needed);
     for(i=0;i<count;++i)if(!equal(&updates[i].event,&p->events[updates[i].index])) {
         struct pt_event_change *c=&h->changes[h->used++];c->index=updates[i].index;
         c->before=p->events[c->index];c->after=updates[i].event;p->events[c->index]=c->after;
     }
     h->revision=h->commands[h->count++].after_revision;h->cursor=h->count;return PT_EDIT_OK;
+}
+enum pt_edit_result pt_pattern_channel_apply(struct pt_project *p,struct pt_pattern_history *h,
+    unsigned index,const struct pt_channel *candidate)
+{
+    struct pt_channels next;struct pt_channel value;struct pt_pattern_command *command;
+    enum pt_channel_result result;
+    if(!valid(p,h) || !candidate || index>=p->channels.count)return PT_EDIT_INVALID;
+    value=*candidate;next=p->channels;next.track[index]=value;
+    result=pt_channels_validate(&next);
+    if(result!=PT_CHANNEL_OK)return result==PT_CHANNEL_PAULA_LIMIT?PT_EDIT_PAULA_LIMIT:PT_EDIT_INVALID;
+    if(!memcmp(&value,&p->channels.track[index],sizeof(value)))return PT_EDIT_OK;
+    if(h->next_revision==UINT32_MAX)return PT_EDIT_CAPACITY;
+    command=reserve(h,0);command->kind=PT_COMMAND_CHANNEL;command->channel=(uint8_t)index;
+    command->channel_before=p->channels.track[index];command->channel_after=value;
+    p->channels.track[index]=value;h->revision=command->after_revision;++h->count;h->cursor=h->count;
+    return PT_EDIT_OK;
 }
 enum pt_edit_result pt_pattern_undo(struct pt_project *p,struct pt_pattern_history *h,int direction)
 {
@@ -87,6 +113,15 @@ enum pt_edit_result pt_pattern_undo(struct pt_project *p,struct pt_pattern_histo
     if(!valid(p,h) || (direction!=-1 && direction!=1))return PT_EDIT_INVALID;
     if((direction<0 && !h->cursor) || (direction>0 && h->cursor==h->count))return PT_EDIT_END;
     command=&h->commands[direction<0?h->cursor-1:h->cursor];n=event_count(p);
+    if(command->kind==PT_COMMAND_CHANNEL) {
+        struct pt_channels next=p->channels;
+        const struct pt_channel *expected=direction<0?&command->channel_after:&command->channel_before;
+        const struct pt_channel *replacement=direction<0?&command->channel_before:&command->channel_after;
+        if(memcmp(&p->channels.track[command->channel],expected,sizeof(*expected)))return PT_EDIT_CONFLICT;
+        next.track[command->channel]=*replacement;
+        if(pt_channels_validate(&next)!=PT_CHANNEL_OK)return PT_EDIT_CONFLICT;
+        p->channels.track[command->channel]=*replacement;
+    }
     for(i=0;i<command->count;++i) {
         struct pt_event_change *c=&h->changes[command->offset+i];
         const struct pt_event *expected=direction<0?&c->after:&c->before,*replacement=direction<0?&c->before:&c->after;

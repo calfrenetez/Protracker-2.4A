@@ -4,9 +4,15 @@
 
 struct pt_event_update { uint32_t index; struct pt_event event; };
 struct pt_event_change { uint32_t index; struct pt_event before,after; };
-struct pt_pattern_command {size_t offset,count;uint32_t before_revision,after_revision;};
+enum pt_command_kind {PT_COMMAND_EVENTS,PT_COMMAND_CHANNEL};
+struct pt_pattern_command {
+    size_t offset,count;uint32_t before_revision,after_revision;
+    uint8_t kind,channel;
+    struct pt_channel channel_before,channel_after;
+};
 struct pt_pattern_history {
     struct pt_event *bound_events;
+    unsigned bound_channels,bound_patterns;
     struct pt_pattern_command *commands;
     struct pt_event_change *changes;
     size_t command_capacity,change_capacity,count,cursor,used;
@@ -14,7 +20,7 @@ struct pt_pattern_history {
 };
 struct pt_block {struct pt_event *events;size_t capacity;uint8_t rows,channels;};
 enum pt_edit_result {PT_EDIT_OK,PT_EDIT_INVALID,PT_EDIT_CAPACITY,PT_EDIT_END,
-                     PT_EDIT_CONFLICT,PT_EDIT_UNSUPPORTED,PT_EDIT_ALIAS};
+                     PT_EDIT_CONFLICT,PT_EDIT_UNSUPPORTED,PT_EDIT_ALIAS,PT_EDIT_PAULA_LIMIT};
 
 /* Bind history to one validated project's event storage. The caller serializes
  * editor/replayer access. Budgets are caller-owned memory, not a RAM assumption.
@@ -24,6 +30,10 @@ enum pt_edit_result pt_pattern_history_init(struct pt_pattern_history *,const st
     struct pt_pattern_command *,size_t,struct pt_event_change *,size_t);
 enum pt_edit_result pt_pattern_apply(struct pt_project *,struct pt_pattern_history *,
     const struct pt_event_update *,size_t);
+/* Channel settings share chronological undo and dirty revisions with notes.
+ * The candidate is copied before journal eviction; project fields may alias it. */
+enum pt_edit_result pt_pattern_channel_apply(struct pt_project *,struct pt_pattern_history *,
+    unsigned,const struct pt_channel *);
 enum pt_edit_result pt_pattern_undo(struct pt_project *,struct pt_pattern_history *,int);
 void pt_pattern_mark_saved(struct pt_pattern_history *);
 int pt_pattern_dirty(const struct pt_pattern_history *);

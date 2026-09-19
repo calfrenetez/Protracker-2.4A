@@ -14,8 +14,13 @@ class ReplayAdapter(unittest.TestCase):
         self.assertIn(b'RemInt\tLEA\tMusicIntServer(PC),A1\n\tJSR\tRemICRVector',adapted)
         from prepare_asm import prepare
         # The effect/timing implementation, including the finetune tables, is
-        # unchanged apart from explicit equivalent immediate opcode spelling.
+        # unchanged apart from equivalent opcode spelling and the final volume
+        # output hooks. Neither tracker volume nor effect state is gated.
         original=raw[raw.index(b'\nmt_PlayVoice\n'):raw.index(b'\n\tCNOP 0,4\nmt_audchan1temp')]
-        self.assertIn(prepare(original)[0],adapted)
+        self.assertEqual(raw.count(b'\tMOVE.W\tD0,8(A5)'),6)
+        self.assertEqual(adapted.count(b'BSR.W\tpt_write_volume'),6)
+        self.assertIn(prepare(original.replace(b'\tMOVE.W\tD0,8(A5)',b'\tBSR.W\tpt_write_volume'))[0],adapted)
+        with self.assertRaises(ValueError):
+            prepare_replay(raw.replace(b'\tMOVE.W\tD0,8(A5)',b'CHANGED',1),wrapper)
         for anchor in [b'RemInt\tLEA',b'\tLEA\tmt_data,A0',b'\nmt_GetNewNote\n']:
             with self.assertRaises(ValueError):prepare_replay(raw.replace(anchor,b'CHANGED',1),wrapper)

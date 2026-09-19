@@ -1,0 +1,39 @@
+Take ownership of **ProTracker 2.4G — AmiGUS Edition**.
+
+Read `README_FIRST.md` and then every file in the order it specifies.
+`FINAL_SCOPE_2.4G.md` is the single authoritative scope and supersedes all
+previous handovers/chats where they conflict.
+
+Key first actions:
+1. pin and reproduce the latest exact ProTracker 2.3F native 68k baseline,
+2. audit/diff 2.3FC where source/licensing permits,
+3. establish the 2.3F compatibility + fuzz/hardening baseline,
+4. establish automated AmiBerry testing,
+5. inspect and establish the existing AmiConnect automated real-A1200 upload/run/result loop,
+6. document clean tracker/effect, audio routing, Paula, AmiGUS, MIDI, project/file,
+   input/remote, rendering and converter boundaries,
+7. build AmiGUSTest and prove hardware operation progressively.
+
+Primary enhanced machine: A1200 + ACA1234 68030/50 + 128 MB Fast RAM + AmiGUS mini.
+Preserve the 68000-compatible Paula/AmiGUS hardware-voice path and support full-size Zorro AmiGUS.
+
+UI: preserve classic ProTracker 2.x identity. Use the supplied preferred 640x512
+visual reference concept for Enhanced mode and retain 320x256 Classic mode.
+
+Routing: each of the 16 tracker channels selects exactly ONE of PAULA, AMIGUS or
+MIDI; maximum four Paula-routed channels.
+
+Compatibility: track official AmiGUS core/library/driver releases at defined
+checkpoints, maintain known-good matrices, but NEVER automatically flash FPGA firmware.
+
+Classic export: architect the shared portable PT2.3F down-conversion engine from
+the outset. The Amiga must be able to export/convert locally; macOS is an optional
+later front end using the same core.
+
+Benchmark claims rather than guessing. Distinguish AmiBerry results from real
+hardware. Do not add excluded brainstormed features.
+
+
+LATEST AGREED ADDITIONS: `FINAL_SCOPE_2.4G.md` now includes Recent Projects,
+an explicit MIDI OFF pattern event, and CAMD input/output endpoint selection.
+Read `OCTAMED8_ADDITIONS.md` for the concise checklist.

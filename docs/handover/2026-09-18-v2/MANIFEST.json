@@ -1,0 +1,58 @@
+{
+  "archive": "ProTracker-2.4G-FINAL-FINAL-Definitive-Codex-Handover-v2-2026-09-18.zip",
+  "archive_sha256": "ba1a6578049116d411571907e5b6aeceb119b4e391d8333909e942aba469a963",
+  "processed_on": "2026-09-19",
+  "zip_integrity": "passed",
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 878,
+      "sha256": "7057eff6edb20654de7ae866ce86d922789fad5931870a973bd2e3a910eb26e7"
+    },
+    {
+      "path": "CODEX_KICKOFF.txt",
+      "bytes": 1975,
+      "sha256": "8020cf4480583128660b00eced42822fddc02b7eb56286393b7e7d8d472c2c8c"
+    },
+    {
+      "path": "COMPATIBILITY_AND_FUTURE_PROOFING.md",
+      "bytes": 826,
+      "sha256": "2eb47c3915c8ca0c9f093709bedc22a11220349f5b203d58a5004d873b77c846"
+    },
+    {
+      "path": "FINAL_SCOPE_2.4G.md",
+      "bytes": 32089,
+      "sha256": "84c0e939087470804369c45de334ae0abfef7293450e160be0db7630a7b9e0ff"
+    },
+    {
+      "path": "HANDOVER.md",
+      "bytes": 883,
+      "sha256": "ba23795d5a73da4b7554fbe56987db8836083d9d26520309d65747a84ca6c74f"
+    },
+    {
+      "path": "OCTAMED8_ADDITIONS.md",
+      "bytes": 486,
+      "sha256": "1665eb675b203c29bfc22572be0ff60c6f8ba7ef3394d0b0ef1ceaa91bdc70c4"
+    },
+    {
+      "path": "PT23F_CONVERTER_REQUIREMENTS.md",
+      "bytes": 630,
+      "sha256": "992880341de268e06fc7670db6dad55310edb837e3b5d9c75f9e9e2a3bc34468"
+    },
+    {
+      "path": "README_FIRST.md",
+      "bytes": 804,
+      "sha256": "584440fd2b8f1bde2827d99b582d06044b6106790ce4766c33ffa7798fc942dd"
+    },
+    {
+      "path": "TEST_STRATEGY.md",
+      "bytes": 989,
+      "sha256": "3af8f6d71c58d5a6f20e3b2e8730f9012b85c483735c48906fbbaf196241bb3a"
+    },
+    {
+      "path": "VISUAL_REFERENCE_640x512.png",
+      "bytes": 1723330,
+      "sha256": "7ec14b16071584af64f5c28b7aff81f716edebef760903a88c241d1f8eff8dff"
+    }
+  ]
+}

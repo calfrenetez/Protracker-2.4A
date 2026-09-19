@@ -19,15 +19,14 @@
     "-Wall",
     "-Wextra",
     "-Werror",
-    "-Ivendor/amigus-sdk"
+    "-Isrc/core"
   ],
   "inputs": {
-    "src/diagnostic/main.c": "efb534e525c79c80c483c54d2e75530afd9556688b2dea4e1ac4aa708b752407",
-    "src/diagnostic/ownership.c": "dfe648e80b658866a5eeda2251b7b6e227ca2463d11bab6e2b6e0c0f60956e09",
-    "src/diagnostic/amigus_calls.h": "3d89320a926989c3cd80c420ca5e06cb7016b21a2beea630cdcab45c28dda94d",
-    "src/diagnostic/ownership.h": "51baadd0cf9a2ccbd61a94060e7be495d73aa1143513b965f7c1b547e102aaba"
+    "tools/modcheck.c": "ec5d15e7d12c3269d6e3322fc2d4df2169d3d49c30fa2b3161a3ea482b45127d",
+    "src/core/mod_inspect.c": "ae2511f3d501bccd512390113428e58af88c3267dc57342378fa707f6653d803",
+    "src/core/mod_inspect.h": "4829c32e498a4602321fda3ab357c4f237ecd96b903f348ec81fea1f5ab0930a"
   },
-  "sdk_lock_sha256": "4925be2f6ce1db4bd683629a850c3045cea55aa089d1fbeea721eb9e0ac304d1",
-  "binary_bytes": 13952,
-  "binary_sha256": "404fd515011cfb739bd611d881af9fabb7e1cde6b6e831ee464e5c2ca3dad501"
+  "sdk_lock_sha256": null,
+  "binary_bytes": 16024,
+  "binary_sha256": "b4a38ac0406cdcc23ed42a117bb6fa956c129671d3f4d516bb7c0076c934c1b6"
 }

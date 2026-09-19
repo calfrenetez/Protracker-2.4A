@@ -1,0 +1,16 @@
+python3 -m unittest discover -s tests -v
+test_fixture_is_bounded_classic_mod (test_baseline_tools.BaselineTools.test_fixture_is_bounded_classic_mod) ... ok
+test_out_of_bounds_relocation_rejected (test_baseline_tools.BaselineTools.test_out_of_bounds_relocation_rejected) ... ok
+test_preparation_is_idempotent (test_baseline_tools.BaselineTools.test_preparation_is_idempotent) ... ok
+test_preparation_preserves_other_operands_and_comments (test_baseline_tools.BaselineTools.test_preparation_preserves_other_operands_and_comments) ... ok
+test_relocation_difference_rejected (test_baseline_tools.BaselineTools.test_relocation_difference_rejected) ... ok
+test_same_layout_is_not_enough (test_baseline_tools.BaselineTools.test_same_layout_is_not_enough) ... ok
+test_truncated_and_trailing_hunks_rejected (test_baseline_tools.BaselineTools.test_truncated_and_trailing_hunks_rejected) ... ok
+test_exact_profile_required (test_emulator_guard.EmulatorGuard.test_exact_profile_required) ... ok
+test_bounds_and_truncation (test_mod_inspect.ModInspect.test_bounds_and_truncation) ... ok
+test_driver_failure_and_cleanup (test_ownership.Ownership.test_driver_failure_and_cleanup) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.869s
+
+OK

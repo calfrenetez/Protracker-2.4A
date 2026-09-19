@@ -1,0 +1,167 @@
+[
+  {
+    "file": "mod.valid-1",
+    "bytes": 2172,
+    "sha256": "813ccf02b367047a72ae5bfacf33593acd7879bc43e151de02a8deeb217325bf",
+    "expected_return_code": 0,
+    "expected_status": "ok",
+    "actual_return_code": 0,
+    "stdout": "MODCHECK schema=1 result=ok orders=1 patterns=1 sample_offset=2108 sample_bytes=64 required_bytes=2172 warnings=0x0\n",
+    "stderr": "",
+    "pass": true
+  },
+  {
+    "file": "mod.valid-64",
+    "bytes": 66684,
+    "sha256": "94900b28f624a54d31639872a0ddee5f245f19a07a0488d62a78c4025d83950d",
+    "expected_return_code": 0,
+    "expected_status": "ok",
+    "actual_return_code": 0,
+    "stdout": "MODCHECK schema=1 result=ok orders=1 patterns=64 sample_offset=66620 sample_bytes=64 required_bytes=66684 warnings=0x0\n",
+    "stderr": "",
+    "pass": true
+  },
+  {
+    "file": "mod.valid-100",
+    "bytes": 103548,
+    "sha256": "07a564e41349f5baaf707ce0c1ef266b2ded46bdb5e5b11d824d2165ce8714c1",
+    "expected_return_code": 0,
+    "expected_status": "ok",
+    "actual_return_code": 0,
+    "stdout": "MODCHECK schema=1 result=ok orders=1 patterns=100 sample_offset=103484 sample_bytes=64 required_bytes=103548 warnings=0x0\n",
+    "stderr": "",
+    "pass": true
+  },
+  {
+    "file": "mod.valid-inactive-order",
+    "bytes": 3196,
+    "sha256": "6228ac79f5318c502ad79acbb639b0064fdf2258ff17b8ab51ecaf8f9a6953fc",
+    "expected_return_code": 0,
+    "expected_status": "ok",
+    "actual_return_code": 0,
+    "stdout": "MODCHECK schema=1 result=ok orders=1 patterns=2 sample_offset=3132 sample_bytes=64 required_bytes=3196 warnings=0x0\n",
+    "stderr": "",
+    "pass": true
+  },
+  {
+    "file": "mod.invalid-short-header",
+    "bytes": 1083,
+    "sha256": "e245c669d311f43a32c5eb77e02b6b0538ae9d24549773f01d53e2158341e16c",
+    "expected_return_code": 20,
+    "expected_status": "short-header",
+    "actual_return_code": 20,
+    "stdout": "MODCHECK schema=1 result=short-header\n",
+    "stderr": "",
+    "pass": true
+  },
+  {
+    "file": "mod.invalid-short-pattern",
+    "bytes": 2107,
+    "sha256": "4bd4696e2509800e2b0700c95dba71cabcfbad12cb2a5be2ca710b8bb090860d",
+    "expected_return_code": 20,
+    "expected_status": "short-patterns",
+    "actual_return_code": 20,
+    "stdout": "MODCHECK schema=1 result=short-patterns\n",
+    "stderr": "",
+    "pass": true
+  },
+  {
+    "file": "mod.invalid-short-sample",
+    "bytes": 2171,
+    "sha256": "2116ab56072dd80441cde38cfc2a65a58a3f6f15c8e0fb9d9a812b73ba5c02ef",
+    "expected_return_code": 20,
+    "expected_status": "short-samples",
+    "actual_return_code": 20,
+    "stdout": "MODCHECK schema=1 result=short-samples\n",
+    "stderr": "",
+    "pass": true
+  },
+  {
+    "file": "mod.invalid-256-patterns",
+    "bytes": 263292,
+    "sha256": "42262f0394a5098d32617be8855bd47438f824b2458922b0bcb54ef9b2edc315",
+    "expected_return_code": 20,
+    "expected_status": "pattern-limit",
+    "actual_return_code": 20,
+    "stdout": "MODCHECK schema=1 result=pattern-limit\n",
+    "stderr": "",
+    "pass": true
+  },
+  {
+    "file": "mod.invalid-order-count-0",
+    "bytes": 2172,
+    "sha256": "938d81ac49d60f33a77be7a2eb46d81d0990812cc7bc3e1ba5d07c84cc31a486",
+    "expected_return_code": 20,
+    "expected_status": "bad-song-length",
+    "actual_return_code": 20,
+    "stdout": "MODCHECK schema=1 result=bad-song-length\n",
+    "stderr": "",
+    "pass": true
+  },
+  {
+    "file": "mod.invalid-order-count-129",
+    "bytes": 2172,
+    "sha256": "a869d01c7ee01a0271b40ee689214d7fa46a6cd00a5887e78fb26b216fe1a130",
+    "expected_return_code": 20,
+    "expected_status": "bad-song-length",
+    "actual_return_code": 20,
+    "stdout": "MODCHECK schema=1 result=bad-song-length\n",
+    "stderr": "",
+    "pass": true
+  },
+  {
+    "file": "mod.invalid-instrument-32",
+    "bytes": 2172,
+    "sha256": "d04b53c5922fb5719966c88105a6b88e437baf72836e6093fefd04301d89e3f2",
+    "expected_return_code": 20,
+    "expected_status": "bad-instrument",
+    "actual_return_code": 20,
+    "stdout": "MODCHECK schema=1 result=bad-instrument\n",
+    "stderr": "",
+    "pass": true
+  },
+  {
+    "file": "mod.unsupported-8-channel",
+    "bytes": 2172,
+    "sha256": "39e8a581577c2da8bf6ed90abc4609b377f4965d1935eb8f7107acec7227d25c",
+    "expected_return_code": 20,
+    "expected_status": "unsupported-format",
+    "actual_return_code": 20,
+    "stdout": "MODCHECK schema=1 result=unsupported-format\n",
+    "stderr": "",
+    "pass": true
+  },
+  {
+    "file": "mod.warning-trailing-data",
+    "bytes": 2195,
+    "sha256": "09199dc9acc701c6626041893c5bcdc9332480a460e7c8ab6d292ea39994cd5d",
+    "expected_return_code": 5,
+    "expected_status": "ok",
+    "actual_return_code": 5,
+    "stdout": "MODCHECK schema=1 result=ok orders=1 patterns=1 sample_offset=2108 sample_bytes=64 required_bytes=2172 warnings=0x1\n",
+    "stderr": "",
+    "pass": true
+  },
+  {
+    "file": "mod.warning-volume",
+    "bytes": 2172,
+    "sha256": "47e62e104a7cbc836e3bdde26899fb11090ce2cf5f3e7e4a0f569ce597c62721",
+    "expected_return_code": 5,
+    "expected_status": "ok",
+    "actual_return_code": 5,
+    "stdout": "MODCHECK schema=1 result=ok orders=1 patterns=1 sample_offset=2108 sample_bytes=64 required_bytes=2172 warnings=0x2\n",
+    "stderr": "",
+    "pass": true
+  },
+  {
+    "file": "mod.warning-loop",
+    "bytes": 2172,
+    "sha256": "a38b85a723866be9047e0d66dbfdb9c4603fbe3f065c7c3f387d284f05c0f010",
+    "expected_return_code": 5,
+    "expected_status": "ok",
+    "actual_return_code": 5,
+    "stdout": "MODCHECK schema=1 result=ok orders=1 patterns=1 sample_offset=2108 sample_bytes=64 required_bytes=2172 warnings=0x8\n",
+    "stderr": "",
+    "pass": true
+  }
+]

@@ -1,0 +1,10 @@
+MODFUZZ seed=0x24 iterations=200000
+ok=66001
+short-header=33306
+unsupported-format=1265
+bad-song-length=141
+pattern-limit=28021
+short-patterns=30653
+short-samples=12066
+bad-instrument=28547
+invalid-argument=0

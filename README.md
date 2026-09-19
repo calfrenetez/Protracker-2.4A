@@ -8,6 +8,8 @@ test.** The first native AmiGUSTest diagnostic is built and its absent-library
 behavior is verified. Enhanced tracker features and positive physical AmiGUS
 tests remain pending. See the [baseline report](docs/BASELINE_BUILD.md) and
 [diagnostic evidence](docs/AMIGUS_DIAGNOSTIC.md).
+An independent [MOD preflight tool](docs/MOD_PREFLIGHT.md) now covers malformed
+file bounds on the host; integration into the tracker loader remains pending.
 
 With Git, Python 3, Make and a host C compiler installed:
 

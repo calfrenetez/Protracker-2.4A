@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build AmiGUSTest and record the actual compiler, flags and binary digest."""
+"""Build native diagnostic tools and record compiler/runtime/input digests."""
 import argparse
 import hashlib
 import json
@@ -15,9 +15,25 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def runtime_inputs(cc):
+    """Record the actual startup object and archives selected by this CRT."""
+    names = ['ncrt0.o', 'libnix20.a', 'libnixmain.a', 'libnix.a',
+             'libstubs.a', 'libamiga.a', 'libgcc.a']
+    result = {}
+    for name in names:
+        path = Path(subprocess.check_output(
+            [cc, '-m68000', '-msoft-float', '-mcrt=nix20', '-print-file-name=' + name],
+            text=True).strip())
+        if not path.is_file():
+            raise SystemExit('Cannot resolve runtime input: ' + name)
+        result[name] = digest(path)
+    return result
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--cc', default=os.environ.get('AMIGA_CC', 'm68k-amigaos-gcc'))
+    p.add_argument('--tool', choices=['AmiGUSTest', 'PTModCheck'], default='AmiGUSTest')
     args = p.parse_args()
     cc = shutil.which(args.cc)
     if not cc:
@@ -25,29 +41,38 @@ def main():
     flags = ['-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os',
              '-Wall', '-Wextra', '-Werror', '-Ivendor/amigus-sdk']
     inputs = ['src/diagnostic/main.c', 'src/diagnostic/ownership.c']
+    headers = ['src/diagnostic/amigus_calls.h', 'src/diagnostic/ownership.h']
+    if args.tool == 'PTModCheck':
+        flags[-1] = '-Isrc/core'
+        inputs = ['tools/modcheck.c', 'src/core/mod_inspect.c']
+        headers = ['src/core/mod_inspect.h']
     out = ROOT / 'build/diagnostic'
     out.mkdir(parents=True, exist_ok=True)
-    lock = json.loads((ROOT / 'amigus-sdk.lock.json').read_text())
-    for name, expected in lock['files'].items():
-        if digest(ROOT / 'vendor/amigus-sdk' / name) != expected:
-            raise SystemExit('SDK input changed: ' + name)
-    result = subprocess.run([cc, *flags, *inputs, '-o', str(out / 'AmiGUSTest')],
+    sdk_digest = None
+    if args.tool == 'AmiGUSTest':
+        lock = json.loads((ROOT / 'amigus-sdk.lock.json').read_text())
+        for name, expected in lock['files'].items():
+            if digest(ROOT / 'vendor/amigus-sdk' / name) != expected:
+                raise SystemExit('SDK input changed: ' + name)
+        sdk_digest = digest(ROOT / 'amigus-sdk.lock.json')
+    result = subprocess.run([cc, *flags, *inputs, '-o', str(out / args.tool)],
                             cwd=ROOT, text=True, stdout=subprocess.PIPE,
                             stderr=subprocess.STDOUT)
-    (out / 'build.log').write_text(result.stdout)
+    stem = 'build' if args.tool == 'AmiGUSTest' else 'modcheck-build'
+    (out / (stem + '.log')).write_text(result.stdout)
     print(result.stdout, end='')
     result.check_returncode()
     report = {
         'compiler': subprocess.check_output([cc, '--version'], text=True).splitlines()[0],
         'compiler_sha256': digest(Path(cc)),
+        'runtime_inputs': runtime_inputs(cc),
         'flags': flags,
-        'inputs': {str(f.relative_to(ROOT)): digest(f)
-                   for f in sorted((ROOT / 'src/diagnostic').glob('*.[ch]'))},
-        'sdk_lock_sha256': digest(ROOT / 'amigus-sdk.lock.json'),
-        'binary_bytes': (out / 'AmiGUSTest').stat().st_size,
-        'binary_sha256': digest(out / 'AmiGUSTest'),
+        'inputs': {name: digest(ROOT / name) for name in inputs + headers},
+        'sdk_lock_sha256': sdk_digest,
+        'binary_bytes': (out / args.tool).stat().st_size,
+        'binary_sha256': digest(out / args.tool),
     }
-    (out / 'build.json').write_text(json.dumps(report, indent=2) + '\n')
+    (out / (stem + '.json')).write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report, indent=2))
 
 

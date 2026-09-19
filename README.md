@@ -12,7 +12,9 @@ A separate native Enhanced editor prototype now connects project loading, note
 entry, four-column paging, pattern undo and verified saving. Replay integration
 is still pending; its playback controls are disabled. See the
 [editor guide](docs/ENHANCED_EDITOR.md) and retained native UI evidence. Physical AmiGUS tests await the owner's Mini.
-See the [development checkpoint](docs/HARDWARE_INDEPENDENT.md),
+MIDI note ownership and quantised recording into undoable pattern events now
+pass host/native sink tests; CAMD and live transport remain unconnected.
+See the [MIDI/recording design](docs/MIDI_RECORDING_CORE.md) and [development checkpoint](docs/HARDWARE_INDEPENDENT.md),
 [baseline report](docs/BASELINE_BUILD.md), [diagnostic evidence](docs/AMIGUS_DIAGNOSTIC.md)
 and [MOD preflight](docs/MOD_PREFLIGHT.md).
 

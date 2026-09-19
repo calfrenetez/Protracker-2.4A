@@ -188,3 +188,20 @@ reopen/resave and two normal exits were checked. The optimized host renderer was
 pixel-identical to the initial renderer. Completed-frame waits replaced an early
 screenshot taken before the first redraw. Human visual/UI acceptance, native
 mouse interaction and physical display-performance checks are still pending.
+
+
+## MIDI ownership and recording increment
+
+[MIDI_RECORDING_CORE.md](MIDI_RECORDING_CORE.md) records the monophonic-per-track
+output policy, shared-note co-ownership, stable endpoint identities, reconnect
+cleanup and recording collision policy. The recorder implements Hold Record,
+whole-row quantisation, velocity and explicit OFF. Its pattern adapter maps
+through the song order list and uses the existing undo journal while preserving
+current effects and refusing to overwrite existing notes. These cores remain
+unconnected to the native editor controls, CAMD and the sequencer clock.
+
+`evidence/midi-recording/dev1/` retains 22 passing host groups and the expanded
+16-case native suite, including MIDI sink/ownership and recording/undo tests.
+No external MIDI messages or physical audio were used. The editor executable is
+byte-identical to the one with retained Enhanced UI evidence. These additions
+therefore do not imply external MIDI, recording feel or replay acceptance.

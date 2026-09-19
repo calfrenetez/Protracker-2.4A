@@ -1,0 +1,176 @@
+{
+  "run_id": "project1789823347724749000",
+  "elapsed_seconds": 45.313,
+  "cases": [
+    {
+      "case": "midi-ownership",
+      "program": "PTMidiTest",
+      "args": "",
+      "expected": 0,
+      "actual": 0,
+      "log": "MIDI PASS: exclusive track ownership, shared-note releases, replacement ordering, endpoint loss/reconnect, sustain cleanup, failed sends, controller/program/bend/clock bytes and 100 lifecycle cycles\n",
+      "pass": true,
+      "binary_sha256": "bb7789471bdb8cebb4539bc5f499fb5f9d3ae64eb062470e1ddad4dd40f8de45"
+    },
+    {
+      "case": "record-quantization",
+      "program": "PTRecordTest",
+      "args": "",
+      "expected": 0,
+      "actual": 0,
+      "log": "RECORD PASS: Hold Record, staged start, velocity, grid rounding, short-note OFF, collisions, stale release, monotonic time, capacity, retryable stop and undoable project-pattern recording with effect retention\n",
+      "pass": true,
+      "binary_sha256": "2268544373fa826c3def357a9d7d7bd9cf2289b962e3c50811cbd18537f8d5b6"
+    },
+    {
+      "case": "pattern-edit",
+      "program": "PTPatternTest",
+      "args": "",
+      "expected": 0,
+      "actual": 0,
+      "log": "PATTERN PASS: 16-channel block edits, exact period/MIDI transpose, OFF retention, clone, bounded undo/redo, dirty tracking, eviction and conflict/no-op safety\n",
+      "pass": true,
+      "binary_sha256": "e6cb1d39ea32c2ca664e401804e1081550771f13768758fe0a2737b2837a37ed"
+    },
+    {
+      "case": "slices",
+      "program": "PTSlicesTest",
+      "args": "",
+      "expected": 0,
+      "actual": 0,
+      "log": "SLICES PASS: deterministic non-destructive stereo transient proposals, minimum spacing, manual markers, silence, capacity/alias safety and full-precision crossfade loops\n",
+      "pass": true,
+      "binary_sha256": "f4c7af9ef24fafcfe8ebdbe5fd20026f75f2d32524109010e6509fa0c38e1296"
+    },
+    {
+      "case": "channels",
+      "program": "PTChannelsTest",
+      "args": "",
+      "expected": 0,
+      "actual": 0,
+      "log": "CHANNELS PASS: 1-16 pages, exclusive routes, stable Paula slots, absence, mute/solo, undo/redo\n",
+      "pass": true,
+      "binary_sha256": "6ffb1ff65dc031246024b2f2fa82197ce6b6d9c93e329102c6c2e65020c4f76f"
+    },
+    {
+      "case": "pcm",
+      "program": "PTPcmTest",
+      "args": "",
+      "expected": 0,
+      "actual": 0,
+      "log": "PCM/WAV PASS: 8/16/24-bit precision, stereo edits, conversion, resampling, bounds and round trips\n",
+      "pass": true,
+      "binary_sha256": "28d8ddfb0ac9fa446b9993d19ef31cc22760b1c2deebfab0843175c95c96cb46"
+    },
+    {
+      "case": "file-safety",
+      "program": "PTFileSafetyTest",
+      "args": "",
+      "expected": 0,
+      "actual": 0,
+      "log": "FILE SAFETY PASS: exclusive-directory reservation and DOS Rename refuse existing destinations without modifying them\n",
+      "pass": true,
+      "binary_sha256": "f1be65564a0782b2d214232e06a682d54dc886fe379452d36dc56ca1e024b33b"
+    },
+    {
+      "case": "project",
+      "program": "PTProjectTest",
+      "args": "mixed.ptg",
+      "expected": 0,
+      "actual": 0,
+      "log": "PROJECT PASS: exact mixed-route round trip, 24-bit stereo, OFF, loops, slices, MIDI endpoints, extensions, CRC, bounds, transactional decode\n",
+      "pass": true,
+      "binary_sha256": "45b75a21ec240222f78a02a06e763403bd2419bd8b1cafbbdc53d9c674bf2ae2"
+    },
+    {
+      "case": "mod-roundtrip",
+      "program": "PTModProjectTest",
+      "args": "mod.good",
+      "expected": 0,
+      "actual": 0,
+      "log": "MOD PROJECT PASS: MOD -> project -> MOD byte identity, strict validation, staged import, explicit loss reports and no silent downgrade\n",
+      "pass": true,
+      "binary_sha256": "1dc38cb09a6ae32ce53eac5b1f1766e99a37dbe41ce8685c85b9e00e78070dd5"
+    },
+    {
+      "case": "document-faults",
+      "program": "PTDocumentTest",
+      "args": "mod.good",
+      "expected": 0,
+      "actual": 0,
+      "log": "ALLOC initial calls=6 live=6 bytes=6148\nALLOC failure-case=1 live=6\nALLOC failure-case=2 live=6\nALLOC failure-case=3 live=6\nALLOC failure-case=4 live=6\nALLOC failure-case=5 live=6\nALLOC failure-case=6 live=6\nALLOC budget live=6\nALLOC replacement live=6\nALLOC reload loop\nALLOC final release live=6\nDOCUMENT/SAVE PASS: every staging allocation failure, memory budget, corrupt input, 200 reloads, partial writes and all save failure phases preserve prior state\n",
+      "pass": true,
+      "binary_sha256": "f802f136105b115ff90ef8d43772beb3014b392d8a8fd3f2d73d40c6645271d3"
+    },
+    {
+      "case": "write-project",
+      "program": "PT24GConvert",
+      "args": "project mod.good song.ptg",
+      "expected": 0,
+      "actual": 0,
+      "log": "PROJECT channels=4 patterns=1 orders=1 samples=31\nMOD_ANALYSIS required_strategy=LOSSLESS issues=0x0 direct_bytes=2172\nSAVED format=PT24G-v1 bytes=6780 verified=1 new_file=1\n",
+      "pass": true,
+      "binary_sha256": "0d20eac0196aacadb1562662aebe526b3dff94919917280f55f8fb37f68ec1a4"
+    },
+    {
+      "case": "write-mod",
+      "program": "PT24GConvert",
+      "args": "mod song.ptg roundtrip.mod",
+      "expected": 0,
+      "actual": 0,
+      "log": "PROJECT channels=4 patterns=1 orders=1 samples=31\nMOD_ANALYSIS required_strategy=LOSSLESS issues=0x0 direct_bytes=2172\nSAVED format=MOD bytes=2172 verified=1 new_file=1\n",
+      "pass": true,
+      "binary_sha256": "0d20eac0196aacadb1562662aebe526b3dff94919917280f55f8fb37f68ec1a4"
+    },
+    {
+      "case": "refuse-existing-project",
+      "program": "PT24GConvert",
+      "args": "project mod.good song.ptg",
+      "expected": 20,
+      "actual": 20,
+      "log": "PROJECT channels=4 patterns=1 orders=1 samples=31\nMOD_ANALYSIS required_strategy=LOSSLESS issues=0x0 direct_bytes=2172\n",
+      "pass": true,
+      "binary_sha256": "0d20eac0196aacadb1562662aebe526b3dff94919917280f55f8fb37f68ec1a4"
+    },
+    {
+      "case": "refuse-existing-mod",
+      "program": "PT24GConvert",
+      "args": "mod song.ptg mod.good",
+      "expected": 20,
+      "actual": 20,
+      "log": "PROJECT channels=4 patterns=1 orders=1 samples=31\nMOD_ANALYSIS required_strategy=LOSSLESS issues=0x0 direct_bytes=2172\n",
+      "pass": true,
+      "binary_sha256": "0d20eac0196aacadb1562662aebe526b3dff94919917280f55f8fb37f68ec1a4"
+    },
+    {
+      "case": "inspect-mixed",
+      "program": "PT24GConvert",
+      "args": "inspect mixed.ptg",
+      "expected": 0,
+      "actual": 0,
+      "log": "PROJECT channels=16 patterns=2 orders=2 samples=3\nMOD_ANALYSIS required_strategy=INCOMPLETE issues=0x39ff direct_bytes=0\nREQUIRES more-than-four-channels\nREQUIRES non-Paula-routes\nREQUIRES sample-precision\nREQUIRES stereo-samples\nREQUIRES sample-rate\nREQUIRES sample-slices\nREQUIRES enhanced-loops\nREQUIRES external-MIDI-audio-missing\nREQUIRES explicit-OFF-events\nREQUIRES enhanced-metadata\nREQUIRES explicit-velocity\nREQUIRES MIDI-note-values\n",
+      "pass": true,
+      "binary_sha256": "0d20eac0196aacadb1562662aebe526b3dff94919917280f55f8fb37f68ec1a4"
+    },
+    {
+      "case": "refuse-loss",
+      "program": "PT24GConvert",
+      "args": "mod mixed.ptg forbidden.mod",
+      "expected": 20,
+      "actual": 20,
+      "log": "PROJECT channels=16 patterns=2 orders=2 samples=3\nMOD_ANALYSIS required_strategy=INCOMPLETE issues=0x39ff direct_bytes=0\nREQUIRES more-than-four-channels\nREQUIRES non-Paula-routes\nREQUIRES sample-precision\nREQUIRES stereo-samples\nREQUIRES sample-rate\nREQUIRES sample-slices\nREQUIRES enhanced-loops\nREQUIRES external-MIDI-audio-missing\nREQUIRES explicit-OFF-events\nREQUIRES enhanced-metadata\nREQUIRES explicit-velocity\nREQUIRES MIDI-note-values\n",
+      "pass": true,
+      "binary_sha256": "0d20eac0196aacadb1562662aebe526b3dff94919917280f55f8fb37f68ec1a4"
+    }
+  ],
+  "roundtrip_byte_identity": true,
+  "original_intact": true,
+  "lossy_output_not_created": true,
+  "temporary_files_cleaned": true,
+  "environment": {
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

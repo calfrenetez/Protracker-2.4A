@@ -22,6 +22,9 @@ def main():
         if path:
             name=path.decode();files['source/'+name]=(ROOT/name).read_bytes()
     core=json.loads((ROOT/'build/dev/core-build.json').read_text())
+    for name,expected in core['sources'].items():
+        if hashlib.sha256((ROOT/name).read_bytes()).hexdigest()!=expected:
+            parser.error('source changed after the native build: '+name)
     for name in ['PT24GEdit','PT24GConvert']:
         data=(ROOT/'build/dev'/name).read_bytes()
         if hashlib.sha256(data).hexdigest()!=core['binaries'][name]['sha256']:
@@ -29,6 +32,9 @@ def main():
         files['Amiga/'+name]=data
     for name in ['PT2.4G','PT.HELP','LICENSE-2.3F.txt']:
         files['Amiga/'+name]=(ROOT/'build/dev'/name).read_bytes()
+    classic=json.loads((ROOT/'build/dev/build.json').read_text())
+    if hashlib.sha256(files['Amiga/PT2.4G']).hexdigest()!=classic['binary_sha256']:
+        parser.error('classic tracker does not match its build manifest')
     files['Amiga/examples/mixed.ptg']=(ROOT/'tests/fixtures/project-v1/mixed.ptg').read_bytes()
     files['Amiga/examples/classic.mod']=(ROOT/'evidence/baseline/mod.baseline').read_bytes()
     files['Amiga/core-build.json']=(ROOT/'build/dev/core-build.json').read_bytes()

@@ -21,6 +21,8 @@ def main():
     share = Path(env['share']); launch = share / 'launch'; original = launch.read_bytes()
     nonce = 'project' + str(time.time_ns()); run = share / nonce; run.mkdir()
     cases = [
+        ('midi-ownership', 'PTMidiTest', '', 0),
+        ('record-quantization', 'PTRecordTest', '', 0),
         ('pattern-edit', 'PTPatternTest', '', 0),
         ('slices', 'PTSlicesTest', '', 0),
         ('channels', 'PTChannelsTest', '', 0),
@@ -86,7 +88,7 @@ def main():
             if (run / name).exists(): shutil.copyfile(run / name, ROOT / 'build/dev' / name)
         if not all(x['pass'] for x in results) or not all([roundtrip, original_intact, no_forbidden, no_temporary]):
             raise RuntimeError('Native project suite failed: inspect build/dev/project-native-tests.json')
-        print('PASS: 14 native project/conversion/file-safety cases; MOD byte identity and existing-file preservation')
+        print('PASS: 16 native MIDI/record/project/conversion/file-safety cases; MOD byte identity and existing-file preservation')
     finally:
         launch.write_bytes(original)
         if process and process.poll() is None:

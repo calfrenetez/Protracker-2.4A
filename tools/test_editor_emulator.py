@@ -56,7 +56,7 @@ def main():
         if len(matches)!=1: raise RuntimeError('Ambiguous emulator')
         emu=Emulator(matches[0])
         wait_for(lambda: (run/'editor.log').exists() and 'EDITOR READY' in (run/'editor.log').read_text(),45)
-        frame('editor.log','revision=0 dirty=0 status=EDITOR DEVELOPMENT'); capture('01-native-page4.png')
+        frame('editor.log','revision=0 dirty=0 status=READY -'); capture('01-native-page4.png')
         emu.tap(0x50); emu.tap(0x40); emu.tap(0x31)  # F1, edit, Z
         chord(0x21); wait_for(lambda: (run/'saved.ptg').exists())
         saved=(run/'saved.ptg').read_bytes()
@@ -86,7 +86,7 @@ def main():
         assert (run/'reopened.ptg').read_bytes()==saved
         frame('reopened.log','revision=0 dirty=0 status=PROJECT SAVED');capture('07-native-project-reopened.png');emu.tap(0x45)
         if args.layout_fixture:
-            frame('layout.log','revision=0 dirty=0 status=EDITOR DEVELOPMENT');capture('09-reference-layout-native.png');emu.tap(0x45)
+            frame('layout.log','revision=0 dirty=0 status=READY -');capture('09-reference-layout-native.png');emu.tap(0x45)
             wait_for(lambda:(run/'layout.rc').exists());assert (run/'layout.rc').read_text().strip()=='0'
         wait_for(lambda:(run/'done').exists())
         assert (run/'reopened.rc').read_text().strip()=='0'

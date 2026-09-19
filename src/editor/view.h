@@ -8,4 +8,5 @@
 struct pt_canvas {uint8_t *planes[4];};
 extern const uint16_t pt_view_palette[16];
 void pt_editor_draw(const struct pt_editor *,struct pt_canvas *,const uint8_t font[580]);
+void pt_editor_draw_playback(const struct pt_editor *,struct pt_canvas *,const uint8_t font[580]);
 #endif

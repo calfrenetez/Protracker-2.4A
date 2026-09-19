@@ -205,3 +205,25 @@ unconnected to the native editor controls, CAMD and the sequencer clock.
 No external MIDI messages or physical audio were used. The editor executable is
 byte-identical to the one with retained Enhanced UI evidence. These additions
 therefore do not imply external MIDI, recording feel or replay acceptance.
+
+## Enhanced Paula replay integration, 19 September 2026
+
+The Enhanced editor now has a first owned four-channel Paula/CIA backend, using
+the pinned 2.3F standalone replay effect code. Song playback, pattern looping,
+sample audition, future-row live edits, Stop/F00 resource cleanup, playback row,
+current tempo and voice sample waveforms are connected. Unsupported mixed-route
+or enhanced sample projects are refused explicitly. See [replay details](PAULA_REPLAY.md).
+
+The native replay harness verified note periods/volumes, busy-owner refusal,
+DMA shutdown, immutable source data, repeated restarts, live edits, audition,
+speed/tempo/volume/cut effects, F00 and CIA exhaustion without removing another
+owner's vector. Alternate CIA-A timer-B execution remains NOT RUN on this
+Workbench profile because the OS already owns it; source-level removal checks
+pass. The real editor input test played a MOD, changed C-2 to D-2, played the
+changed pattern, saved, reopened, played D-2 and resaved byte-identically, with
+four DMA channels enabled during playback and zero after Stop.
+
+This supersedes the earlier "playback disabled" prototype status. It does not
+certify every 2.3F effect combination, physical sound quality, phase-accurate
+quadrascopes, full mixed backend dispatch or physical UI performance. Full-frame
+redraws are still slow in the test profile; CIA replay continues independently.

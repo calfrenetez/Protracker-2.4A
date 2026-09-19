@@ -4,16 +4,18 @@
 extended-project and pattern-undo cores. It is a separate development executable
 while the original assembler tracker/replayer is being integrated. It is not the
 finished 16-channel tracker and does not replace the known-good four-channel
-`PT2.4G` executable. The classic control grid is retained; playback and other unfinished actions
-report that they are not connected. No audio backend is called.
+`PT2.4G` executable. The classic control grid is retained. A first owned Paula/CIA
+path connects classic four-channel song/pattern playback and sample audition;
+see [playback scope and validation](PAULA_REPLAY.md). Unfinished actions report
+that they are not connected.
 
 The interface follows the supplied four-column reference: the original pinned
 2.3F bitmap font, grey raised controls, a black pattern area, twenty visible rows,
 four channel-page buttons and permanent P/A/M route letters. Routing is displayed;
 route changes, mute/solo and channel-count changes are not yet wired to this UI.
-Four quadrascope panes occupy the reference position. Their stopped traces stay
-flat until an actual playback scope feed is connected; no waveform activity is
-fabricated. MIDI labels indicate project routes;
+Four quadrascope panes occupy the reference position. During Paula playback they
+show current voice sample waveforms scaled by volume; stopped traces are flat.
+They are not captured audio or phase-accurate DMA scopes. MIDI labels indicate project routes;
 CAMD transmission is not yet connected.
 
 ## Start and controls
@@ -32,7 +34,9 @@ A file requester, ordinary replacement saves and recovery remain to be integrate
 This first editor can make one successful save to the command-line destination;
 launch it with a different new path for another saved version.
 
-- Space or EDIT toggles note entry. The initial state is edit off.
+- EDIT toggles note entry. Space toggles entry when stopped and stops playback when playing.
+- F8 / Return / PLAY starts the song; F9 / Shift-Return / PATTERN loops the selected
+  pattern. F10 / STOP releases audio. SAMPLE auditions the selected classic sample.
 - Z–M and Q–U enter tracker notes; the Amiga key positions follow the classic
   chromatic arrangement. F5/F6/F7 select the three classic entry octaves.
 - Left/right select note, instrument and the three effect digits; hexadecimal
@@ -78,7 +82,7 @@ sanitizer tests cover controller navigation, editing/history/discard handling,
 and every page of the same planar renderer. Native mouse interaction and the
 full browser/AmiConnect transport remain separate UI checks.
 
-Still open: classic and enhanced frontends sharing the replay engine, pattern
+Still open: full mixed-channel backend dispatch, comprehensive effect parity, pattern
 block-operation UI, route/metadata editing and its history, sample editing UI,
 file requesters, capture, CAMD, renderer/export strategies and hardware acceptance.
 

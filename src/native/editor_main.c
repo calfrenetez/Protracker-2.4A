@@ -1,5 +1,4 @@
-/* Native enhanced editor integration. Playback is deliberately unavailable
- * until the shared event/replay/backend boundary is implemented and tested. */
+/* Native enhanced editor and owned classic Paula replay integration. */
 #include <exec/memory.h>
 #include <graphics/gfxbase.h>
 #include <graphics/modeid.h>
@@ -14,6 +13,7 @@
 #include "../editor/view.h"
 #include "../platform/file_save.h"
 #include "pt_font.h"
+#include "paula.h"
 struct IntuitionBase *IntuitionBase;
 struct GfxBase *GfxBase;
 static void *allocate(void *ctx,size_t n) {(void)ctx;return malloc(n);}
@@ -46,11 +46,12 @@ static void save(struct pt_editor *e,const char *path)
 }
 int main(int argc,char **argv)
 {
+    struct pt_paula audio={0};
     struct pt_allocator allocator={NULL,allocate,release};struct pt_document doc;
     struct pt_editor *editor=NULL;struct Screen *screen=NULL;struct Window *window=NULL;
     struct BitMap bitmap;struct pt_canvas canvas;unsigned plane;uint8_t *pixels=NULL;int rc=20,running=1,redraw=1;
     memset(&bitmap,0,sizeof(bitmap));memset(&canvas,0,sizeof(canvas));pt_document_init(&doc,&allocator);
-    if(argc<2 || argc>3) {puts("Usage: PT24GEdit INPUT [NEW_OUTPUT]\nDevelopment editor; audio unavailable; existing output is never replaced.");goto done;}
+    if(argc<2 || argc>3) {puts("Usage: PT24GEdit INPUT [NEW_OUTPUT]\nDevelopment editor; classic Paula playback; existing output is never replaced.");goto done;}
     if(!load(&doc,argv[1]) || !(editor=malloc(sizeof(*editor))) || !pt_editor_init(editor,&doc.project)) {
         puts("EDITOR: input invalid or allocation failed");goto done;
     }
@@ -73,7 +74,7 @@ int main(int argc,char **argv)
     window=OpenWindowTags(NULL,WA_CustomScreen,(ULONG)screen,WA_Left,0,WA_Top,0,
         WA_Width,640,WA_Height,512,WA_Borderless,TRUE,WA_Backdrop,TRUE,WA_Activate,TRUE,
         WA_RMBTrap,TRUE,WA_SimpleRefresh,TRUE,
-        WA_IDCMP,IDCMP_RAWKEY|IDCMP_MOUSEBUTTONS|IDCMP_REFRESHWINDOW|IDCMP_INACTIVEWINDOW,TAG_DONE);
+        WA_IDCMP,IDCMP_RAWKEY|IDCMP_MOUSEBUTTONS|IDCMP_REFRESHWINDOW|IDCMP_INACTIVEWINDOW|IDCMP_INTUITICKS,TAG_DONE);
     if(!window)goto done;
     printf("EDITOR READY channels=%u patterns=%u bitmap_bytes=%lu history_bytes=%lu\n",
         doc.project.channels.count,doc.project.pattern_count,4UL*PT_VIEW_PLANE_BYTES,(unsigned long)sizeof(*editor));fflush(stdout);
@@ -90,12 +91,50 @@ int main(int argc,char **argv)
         while((message=(struct IntuiMessage *)GetMsg(window->UserPort))) {
             ULONG kind=message->Class;UWORD code=message->Code,qualifier=message->Qualifier;
             WORD mx=message->MouseX,my=message->MouseY;enum pt_editor_action action=PT_UI_NONE;
+            unsigned long revision=editor->history.revision;const char *error=NULL;
             ReplyMsg((struct Message *)message);
+            if(kind==IDCMP_INTUITICKS) {
+                unsigned was_active=editor->playback.active;
+                pt_paula_poll(&audio,&editor->playback);
+                if(was_active && !editor->playback.active) {pt_editor_status(editor,"PLAYBACK ENDED - AUDIO RELEASED");redraw=1;}
+                if(was_active || editor->playback.active) {
+                    pt_editor_draw_playback(editor,&canvas,pt_font);
+                    for(plane=0;plane<4;++plane) {
+                        CopyMem(canvas.planes[plane]+116*80,bitmap.Planes[plane]+116*80,39*80);
+                        CopyMem(canvas.planes[plane]+216*80,bitmap.Planes[plane]+216*80,21*80);
+                        CopyMem(canvas.planes[plane]+495*80,bitmap.Planes[plane]+495*80,17*80);
+                    }
+                    BltBitMapRastPort(&bitmap,230,116,window->RPort,230,116,408,39,0xc0);
+                    BltBitMapRastPort(&bitmap,14,216,window->RPort,14,216,80,18,0xc0);
+                    BltBitMapRastPort(&bitmap,610,227,window->RPort,610,227,24,10,0xc0);
+                    BltBitMapRastPort(&bitmap,248,495,window->RPort,248,495,168,17,0xc0);WaitBlit();
+                    printf("EDITOR REPLAY active=%u ticks=%lu order=%u pattern=%u row=%u bpm=%u speed=%u period=%u,%u,%u,%u volume=%u,%u,%u,%u\n",
+                        editor->playback.active,(unsigned long)editor->playback.ticks,editor->playback.order,editor->playback.pattern,
+                        editor->playback.row,editor->playback.bpm,editor->playback.speed,
+                        editor->playback.period[0],editor->playback.period[1],editor->playback.period[2],editor->playback.period[3],
+                        editor->playback.volume[0],editor->playback.volume[1],editor->playback.volume[2],editor->playback.volume[3]);fflush(stdout);
+                }
+                continue;
+            }
             if(kind==IDCMP_RAWKEY && (code&0x80 || code>=0x60))continue;
             if(kind==IDCMP_RAWKEY)action=pt_editor_key(editor,code,qualifier);
             else if(kind==IDCMP_MOUSEBUTTONS && code==SELECTDOWN)action=pt_editor_click(editor,mx,my);
             else if(kind==IDCMP_REFRESHWINDOW) {BeginRefresh(window);EndRefresh(window,TRUE);}
             else if(kind==IDCMP_INACTIVEWINDOW)editor->quit_pending=0;
+            if(action==PT_UI_PLAY || action==PT_UI_PATTERN) {
+                error=pt_paula_play(&audio,editor->project,action==PT_UI_PATTERN,editor->position,editor->pattern);
+                pt_editor_status(editor,error?error:action==PT_UI_PATTERN?"PLAYING PATTERN - PAULA CIA":"PLAYING SONG - PAULA CIA");
+            }
+            if(action==PT_UI_AUDITION) {
+                error=pt_paula_audition(&audio,editor->project,editor->sample,856U>>editor->octave);
+                pt_editor_status(editor,error?error:"SAMPLE AUDITION - PAULA; STOP TO RELEASE");
+            }
+            if(action==PT_UI_STOP) {pt_paula_stop(&audio);pt_editor_status(editor,"STOPPED - AUDIO RELEASED");}
+            if(editor->history.revision!=revision && audio.started && audio.mode!=2) {
+                error=pt_paula_sync(&audio,editor->project);if(error)pt_editor_status(editor,error);
+            }
+            if(error || action==PT_UI_PLAY || action==PT_UI_PATTERN || action==PT_UI_AUDITION || action==PT_UI_STOP)
+                pt_paula_poll(&audio,&editor->playback);
             if(action==PT_UI_SAVE)save(editor,argc==3?argv[2]:NULL);
             if(action==PT_UI_QUIT)running=0;
             redraw=1;
@@ -103,6 +142,7 @@ int main(int argc,char **argv)
     }
     puts("EDITOR EXIT clean");rc=0;
 done:
+    pt_paula_stop(&audio);
     if(window)CloseWindow(window);
     if(screen)CloseScreen(screen);
     if(GfxBase) {WaitBlit();for(plane=0;plane<4;++plane)if(bitmap.Planes[plane])FreeRaster(bitmap.Planes[plane],640,512);}

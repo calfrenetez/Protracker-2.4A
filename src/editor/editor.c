@@ -26,7 +26,7 @@ int pt_editor_init(struct pt_editor *e,struct pt_project *p)
     if(!e || pt_project_validate(p,NULL)!=PT_PROJECT_OK)return 0;
     memset(e,0,sizeof(*e));e->project=p;e->sample=p->sample_count?1:0;e->octave=1;
     if(pt_pattern_history_init(&e->history,p,e->commands,128,e->changes,2048)!=PT_EDIT_OK)return 0;
-    pt_editor_status(e,"EDITOR DEVELOPMENT - AUDIO NOT CONNECTED");return 1;
+    pt_editor_status(e,"READY - F8 PLAY / F9 PATTERN / F10 STOP");return 1;
 }
 int pt_editor_dirty(const struct pt_editor *e) {return pt_pattern_dirty(&e->history);}
 void pt_editor_saved(struct pt_editor *e)
@@ -78,7 +78,11 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
         return PT_UI_NONE;
     }
     switch(raw) {
-        case 0x40:e->editing=!e->editing;pt_editor_status(e,e->editing?"EDIT ON - NOTES Z-M/Q-U; DELETE CLEARS; BACKSPACE OFF":"EDIT OFF");break;
+        case 0x57:return PT_UI_PLAY;
+        case 0x58:return PT_UI_PATTERN;
+        case 0x59:return PT_UI_STOP;
+        case 0x44:return (qualifier&3)?PT_UI_PATTERN:PT_UI_PLAY;
+        case 0x40:if(e->playback.active)return PT_UI_STOP;e->editing=!e->editing;pt_editor_status(e,e->editing?"EDIT ON - NOTES Z-M/Q-U; DELETE CLEARS; BACKSPACE OFF":"EDIT OFF");break;
         case 0x4c:e->row=(e->row+63)%64;visible(e);break;
         case 0x4d:e->row=(e->row+1)%64;visible(e);break;
         case 0x4e:if(++e->field==6) {e->field=0;pt_channels_step(&p->channels,1);}break;
@@ -144,7 +148,11 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
         if(c<e->project->channels.count)e->project->channels.selected=(uint8_t)c;
     } else if(x>=230 && x<599 && y>=2 && y<97) {
         r=(unsigned)(y-2)/19;c=(unsigned)(x-230)/123;
-        if(r==2 && c==0) {e->editing=!e->editing;pt_editor_status(e,e->editing?"EDIT ON":"EDIT OFF");}
+        if(r==0 && c==0)return PT_UI_PLAY;
+        else if(r==0 && c==1)return PT_UI_STOP;
+        else if(r==1 && c==0)return PT_UI_PATTERN;
+        else if(r==4 && c==0)return PT_UI_AUDITION;
+        else if(r==2 && c==0) {e->editing=!e->editing;pt_editor_status(e,e->editing?"EDIT ON":"EDIT OFF");}
         else if(r==2 && c==1)e->panel=1;
         else if(r==3 && c==1)e->panel=2;
         else pt_editor_status(e,"THIS CONTROL IS NOT YET CONNECTED");
@@ -157,7 +165,9 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
         } else if(r==1)pattern_step(e,direction);
         else if(r==4) {if(direction<0 && e->sample)--e->sample;if(direction>0 && e->sample<e->project->sample_count)++e->sample;}
         else pt_editor_status(e,"SAMPLE/SONG PARAMETER EDITING NOT YET CONNECTED");
-    } else if((y>=495 && x>=416 && x<552) || (x>=599 && y<97) || (x>=590 && y>=174 && y<193))
+    } else if(y>=495 && x>=416 && x<476)return PT_UI_PLAY;
+    else if(y>=495 && x>=476 && x<552)return PT_UI_STOP;
+    else if((y>=495 && x>=416 && x<552) || (x>=599 && y<97) || (x>=590 && y>=174 && y<193))
         pt_editor_status(e,"THIS CONTROL IS NOT YET CONNECTED");
     return PT_UI_NONE;
 }

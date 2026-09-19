@@ -9,8 +9,9 @@ The portable channel, PCM/WAV, extended-project, transactional document, pattern
 undo and slicing cores pass host and native Amiga tests. PT24GConvert now supports
 verified new-file project saves and strict lossless classic MOD round trips.
 A separate native Enhanced editor prototype now connects project loading, note
-entry, four-column paging, pattern undo and verified saving. Replay integration
-is still pending; unfinished controls report that they are not connected. The
+entry, four-column paging, pattern undo and verified saving. Its first replay
+path adds classic four-channel Paula song/pattern playback, sample audition and
+live pattern edits; [mixed-backend playback remains open](docs/PAULA_REPLAY.md). The
 Enhanced screen now follows the owner's full classic reference after the
 earlier simplified layout was rejected. See the
 [editor guide](docs/ENHANCED_EDITOR.md) and retained native UI evidence. Physical AmiGUS tests await the owner's Mini.
@@ -57,7 +58,7 @@ authorized proceeding with the baseline build and verification.
 
 The owner's 19 September instruction authorises independent software development
 while the ordered Mini is in transit. Project/pattern persistence and bounded editing cores are implemented. The first
-native Enhanced editor integration is working; sampler/routing pages and replay
-integration remain open.
+native Enhanced editor integration is working; sampler/routing pages and mixed
+AmiGUS/MIDI replay integration remain open.
 AmiConnect upload/exec and real card tests remain separate acceptance gates.
 Initial smoke results do not certify all effects or physical hardware.

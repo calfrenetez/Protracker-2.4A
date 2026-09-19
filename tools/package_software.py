@@ -43,14 +43,15 @@ def main():
 
 PT2.4G is the four-channel assembler derivative (dev2), with loader/input guards.
 PT24GEdit is a separate native Enhanced editor prototype with project editing,
-paging, undo and verified new-file saves. Audio is not connected; unfinished
-classic controls report that status.
+paging, undo, verified new-file saves and classic four-channel Paula playback.
+F8 plays, F9 loops the pattern and F10 stops. SAMPLE auditions a classic sample.
+Mixed AmiGUS/MIDI replay and other unfinished controls remain unavailable.
 PT24GConvert inspects projects and performs strict lossless MOD/project conversion.
 This is not the finished sixteen-channel tracker or a hardware-qualified release.
 
 Amiga Shell, from the Amiga directory:
   Stack 65536
-  PT24GEdit examples/mixed.ptg my-new-project.ptg
+  PT24GEdit examples/classic.mod my-new-project.ptg
   PT24GConvert inspect my-new-project.ptg
 
 Output paths must be new. Existing files are never replaced. Read

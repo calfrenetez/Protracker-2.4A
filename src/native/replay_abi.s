@@ -1,0 +1,65 @@
+; C ABI, caller owns all four Paula channels and serialized Chip RAM MOD.
+; Engine disabled throughout setup. All persistent state reset on each start.
+	EVEN
+	XDEF _pt_replay_start,_pt_replay_stop
+	XDEF _pt_replay_data,_pt_replay_ticks,_pt_replay_order,_pt_replay_rowbytes
+	XDEF _pt_replay_voices,_pt_replay_speed,_pt_replay_tempo,_pt_replay_enabled
+_pt_replay_enabled EQU mt_Enable
+_pt_replay_voices EQU mt_audchan1temp
+_pt_replay_speed EQU mt_Speed
+_pt_replay_tempo EQU RealTempo
+_pt_replay_start
+	MOVEM.L D2-D7/A2-A6,-(SP)
+	MOVE.L 48(SP),_pt_replay_data
+	CLR.L _pt_replay_ticks
+	CLR.B _pt_replay_order
+	CLR.W _pt_replay_rowbytes
+	LEA mt_audchan1temp(PC),A0
+	MOVE.W #43,D0
+pt_clearvoices
+	CLR.L (A0)+
+	DBRA D0,pt_clearvoices
+	MOVE.W #1,mt_audchan1temp+n_dmabit
+	MOVE.W #2,mt_audchan2temp+n_dmabit
+	MOVE.W #4,mt_audchan3temp+n_dmabit
+	MOVE.W #8,mt_audchan4temp+n_dmabit
+	; Period lookup must be valid even for effects before the first instrument.
+	LEA mt_ftune0(PC),A0
+	MOVE.L A0,mt_audchan1temp+n_peroffset
+	MOVE.L A0,mt_audchan2temp+n_peroffset
+	MOVE.L A0,mt_audchan3temp+n_peroffset
+	MOVE.L A0,mt_audchan4temp+n_peroffset
+	CLR.W mt_DMACONtemp
+	CLR.B mt_PBreakPos
+	CLR.B mt_PosJumpFlag
+	CLR.B mt_PBreakFlag
+	MOVE.B #$FF,mt_LowMask
+	SF mt_Enable
+	BSR.W SetCIAInt
+	TST.L CIAAbase
+	BEQ.B pt_startfailed
+	BSR.W mt_init
+	MOVE.L 52(SP),D0
+	MOVE.B D0,mt_SongPos
+	MOVE.B D0,_pt_replay_order
+	ST mt_Enable
+	MOVEQ #1,D0
+	BRA.B pt_startdone
+pt_startfailed
+	MOVEQ #0,D0
+pt_startdone
+	MOVEM.L (SP)+,D2-D7/A2-A6
+	RTS
+_pt_replay_stop
+	MOVEM.L D2-D7/A2-A6,-(SP)
+	SF mt_Enable
+	BSR.W ResetCIAInt
+	BSR.W mt_end
+	MOVEM.L (SP)+,D2-D7/A2-A6
+	RTS
+	CNOP 0,4
+_pt_replay_data dc.l 0
+_pt_replay_ticks dc.l 0
+_pt_replay_rowbytes dc.w 0
+_pt_replay_order dc.b 0
+	EVEN

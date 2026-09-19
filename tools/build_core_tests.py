@@ -8,6 +8,7 @@ import shutil
 import subprocess
 from build_diagnostic import digest, runtime_inputs, compiler_safety_flags, ROOT
 from make_mod_corpus import cases
+from prepare_replay import prepare_replay
 
 
 def main():
@@ -22,7 +23,8 @@ def main():
     font = (ROOT / 'vendor/pt23f/raw/ptfont.raw').read_bytes()
     (out / 'pt_font.h').write_text('/* Pinned ProTracker 2.3F bitmap font; see vendor/pt23f license. */\nstatic const unsigned char pt_font[580] = {' + ','.join(str(b) for b in font) + '};\n')
     inputs = {
-        'PT24GEdit': ['src/native/editor_main.c', 'src/editor/editor.c', 'src/editor/view.c', 'src/platform/file_save.c', 'src/core/safe_save.c', 'src/core/document.c', 'src/core/pattern.c', 'src/core/project.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/channels.c', 'src/core/pcm.c'],
+        'PT24GEdit': ['src/native/editor_main.c', 'src/native/paula.c', 'src/editor/editor.c', 'src/editor/view.c', 'src/platform/file_save.c', 'src/core/safe_save.c', 'src/core/document.c', 'src/core/pattern.c', 'src/core/project.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/channels.c', 'src/core/pcm.c'],
+        'PTPaulaTest': ['tests/native_paula_test.c', 'src/native/paula.c', 'src/core/document.c', 'src/core/project.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/channels.c', 'src/core/pcm.c'],
         'PTMidiTest': ['tests/midi_test.c', 'src/core/midi.c'],
         'PTRecordTest': ['tests/record_test.c', 'src/core/record.c', 'src/core/record_pattern.c', 'src/core/pattern.c', 'src/core/project.c', 'src/core/channels.c', 'src/core/pcm.c'],
         'PTPatternTest': ['tests/pattern_test.c', 'src/core/pattern.c', 'src/core/project.c', 'src/core/channels.c', 'src/core/pcm.c'],
@@ -38,8 +40,11 @@ def main():
     }
     flags = ['-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os',
              '-Wall', '-Wextra', '-Werror', '-Isrc/core', '-Ibuild/dev', *compiler_safety_flags(cc)]
+    replay_source=out/'replay.s'
+    replay_source.write_bytes(prepare_replay((ROOT/'vendor/pt23f/replayer/PT2.3F_replay_cia.s').read_bytes(),(ROOT/'src/native/replay_abi.s').read_bytes()))
+    subprocess.run([str(ROOT/'local/vasm/vasmm68k_mot'), '-devpac', '-m68000', '-no-fpu', '-Fhunk', '-o', str(out/'replay.o'), str(replay_source)], check=True)
     for name, sources in inputs.items():
-        subprocess.run([cc, *flags, *sources, '-o', str(out / name)], cwd=ROOT, check=True)
+        subprocess.run([cc, *flags, *sources, *([str(out/'replay.o')] if name in ('PT24GEdit','PTPaulaTest') else []), '-o', str(out / name)], cwd=ROOT, check=True)
     corpus = ROOT / 'local/share/guard'
     corpus.mkdir(parents=True, exist_ok=True)
     rows, manifest = [], []
@@ -63,7 +68,7 @@ def main():
               'binaries': {name: {'sha256': digest(out / name), 'bytes': (out / name).stat().st_size}
                            for name in [*inputs, 'PTGuardTest']},
               'sources': {name: digest(ROOT / name) for name in
-                          sorted(set(sum(inputs.values(), [])) | {'src/core/channels.h', 'src/core/pcm.h',
+                          sorted(set(sum(inputs.values(), [])) | {'src/core/playback.h', 'src/native/paula.h', 'src/native/replay_abi.s', 'tools/prepare_replay.py', 'vendor/pt23f/replayer/PT2.3F_replay_cia.s', 'src/core/channels.h', 'src/core/pcm.h',
                           'src/core/wav.h', 'src/core/midi.h', 'src/core/record.h', 'src/core/record_pattern.h', 'src/editor/editor.h', 'src/editor/view.h', 'src/platform/file_save.h', 'vendor/pt23f/raw/ptfont.raw', 'src/core/project.h', 'src/core/mod_project.h', 'src/core/document.h', 'src/core/safe_save.h', 'src/core/pattern.h', 'src/core/slices.h', 'src/core/mod_inspect.h', 'src/native/mod_guard.s', 'tests/native_guard_harness.s'})},
               'guard_cases': manifest}
     (out / 'core-build.json').write_text(json.dumps(report, indent=2) + '\n')

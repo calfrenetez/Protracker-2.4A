@@ -1,0 +1,4 @@
+REPLAY initial ticks=20 row=2 periods=428,339,285,214
+REPLAY effects speed/tempo/volume/cut observed mask=15 ticks=16
+CIA fallback execution NOT RUN: Workbench already owns CIAA timer B; existing vector preserved
+PAULA PASS: playback periods, busy audio refusal, DMA stop, immutable project, repeated restart, live edit, audition, speed/tempo/volume/cut, unsupported refusal, CIA exhaustion and unrelated-vector preservation

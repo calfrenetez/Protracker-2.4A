@@ -1,0 +1,237 @@
+{
+  "compiler": "m68k-amigaos-gcc (GCC) 6.5.0b 20260807212032",
+  "compiler_sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+  "runtime_inputs": {
+    "ncrt0.o": "6fe4b6088899bd53efae1ea1e4783b7deab07b13f3d40cff7b46285907f19804",
+    "libnix20.a": "0731c54ad32272f5ab0d5ecd3f1f93d7aa4fc7c6ac0a5923eb26125633556e8c",
+    "libnixmain.a": "ad54158e95516aa6f3b04a8b3d835a48ecbaaea962cd178d5fb66995dcef19df",
+    "libnix.a": "d64619bc74933ac5312ef6db0f8d4cd62b3918f9f4a5805863e7d15536fcb144",
+    "libstubs.a": "55dbd0626cb472d89ab5d1bd234e6013df178f2cd3b83266bf4b82c68f1a79de",
+    "libamiga.a": "10d78b6d303a99677c0bf29a8e1653d62669f69f395691646393020325084021",
+    "libgcc.a": "8bed858c8a5797471c3bc130df341824121c5d0f0908345dfe6ce0ceccc3569b"
+  },
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Isrc/core",
+    "-Ibuild/dev",
+    "-fbbb=-"
+  ],
+  "binaries": {
+    "PT24GEdit": {
+      "sha256": "bac86ba5e51d5089e00fdd5931e4f0816504b4214d7d6f2d47d68cd54413eb86",
+      "bytes": 76356
+    },
+    "PTPaulaTest": {
+      "sha256": "20541aa38c4bdcfe4951c1d65b54cf33331623c9e671ea8f296b8a10c8b77361",
+      "bytes": 57992
+    },
+    "PTMidiTest": {
+      "sha256": "bb7789471bdb8cebb4539bc5f499fb5f9d3ae64eb062470e1ddad4dd40f8de45",
+      "bytes": 19884
+    },
+    "PTRecordTest": {
+      "sha256": "2268544373fa826c3def357a9d7d7bd9cf2289b962e3c50811cbd18537f8d5b6",
+      "bytes": 44564
+    },
+    "PTPatternTest": {
+      "sha256": "e6cb1d39ea32c2ca664e401804e1081550771f13768758fe0a2737b2837a37ed",
+      "bytes": 41692
+    },
+    "PTSlicesTest": {
+      "sha256": "f4c7af9ef24fafcfe8ebdbe5fd20026f75f2d32524109010e6509fa0c38e1296",
+      "bytes": 29348
+    },
+    "PTFileSafetyTest": {
+      "sha256": "f1be65564a0782b2d214232e06a682d54dc886fe379452d36dc56ca1e024b33b",
+      "bytes": 16388
+    },
+    "PTProjectTest": {
+      "sha256": "45b75a21ec240222f78a02a06e763403bd2419bd8b1cafbbdc53d9c674bf2ae2",
+      "bytes": 40632
+    },
+    "PTModProjectTest": {
+      "sha256": "1dc38cb09a6ae32ce53eac5b1f1766e99a37dbe41ce8685c85b9e00e78070dd5",
+      "bytes": 44332
+    },
+    "PTDocumentTest": {
+      "sha256": "f802f136105b115ff90ef8d43772beb3014b392d8a8fd3f2d73d40c6645271d3",
+      "bytes": 49304
+    },
+    "PT24GConvert": {
+      "sha256": "0d20eac0196aacadb1562662aebe526b3dff94919917280f55f8fb37f68ec1a4",
+      "bytes": 48716
+    },
+    "PTInputProbe": {
+      "sha256": "53cacd4c767cf8f37c257118154968c8055b5ebdefedb1ac01f7b79d348805c0",
+      "bytes": 14664
+    },
+    "PTChannelsTest": {
+      "sha256": "6ffb1ff65dc031246024b2f2fa82197ce6b6d9c93e329102c6c2e65020c4f76f",
+      "bytes": 17364
+    },
+    "PTPcmTest": {
+      "sha256": "28d8ddfb0ac9fa446b9993d19ef31cc22760b1c2deebfab0843175c95c96cb46",
+      "bytes": 29384
+    },
+    "PTGuardTest": {
+      "sha256": "908722556a4bc3033b1dcc107b9b8ba28c5dfc44f75195b00336828e0e292a0b",
+      "bytes": 1660
+    }
+  },
+  "sources": {
+    "src/core/channels.c": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+    "src/core/channels.h": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+    "src/core/document.c": "02a22f80a87d45850c6491cd1d1e56768468e4bae669eccd42e7f288ffde0a8f",
+    "src/core/document.h": "0fde6920827d70f91a537edfe1fa8945062d13ef0d5775b352f57d9c15a9c2c7",
+    "src/core/midi.c": "128612f5b7111e64f7656e7376a33136d985db9720cdf5b87b4797f9ac7aa28f",
+    "src/core/midi.h": "0d1cf918cef5a9f53ef2f097e84648be7b753f150e662953db71108025065056",
+    "src/core/mod_inspect.c": "ae2511f3d501bccd512390113428e58af88c3267dc57342378fa707f6653d803",
+    "src/core/mod_inspect.h": "4829c32e498a4602321fda3ab357c4f237ecd96b903f348ec81fea1f5ab0930a",
+    "src/core/mod_project.c": "1f6e356b1d05a312d8d73158d3e5d6e6a48dba1d9a441cb8cd3b2f64b7a09ba4",
+    "src/core/mod_project.h": "861831a6c488a22abbbf78c58e0c41128bebc7dada4f3d4e93d573877e6bd4ea",
+    "src/core/pattern.c": "642858f5d0c9bccf39d06a0dc121cf55d92203e22ec3d393efb769a8ae95e5d9",
+    "src/core/pattern.h": "a84eea8664621a82ef9d3d203f84a1c16853594a8ab6a957652ac8692c5f45c2",
+    "src/core/pcm.c": "c1dcea85e047413448bf5664dc551bcbd6d27e7cfd646fb8ea5049bbb780786b",
+    "src/core/pcm.h": "084aed32633307241e35429cb83b13d01086dcc6c10910805f8eb45c36ba7662",
+    "src/core/playback.h": "64224efffbb2469067b5b148251a1d2c09e8e092b7380970c540d3925cdcae8c",
+    "src/core/project.c": "37882eb33b39a7639a7fc15932abb555f035761ded72956844cd7b8e5ad1901b",
+    "src/core/project.h": "edab3c0542c1be954c85de119968d4fd90dfccfeecb1ca978b111c19eba8b76d",
+    "src/core/record.c": "891dca6c8ec9f3159ccd0a6ed08f04cf2900b977d95211d257771b9346ae0890",
+    "src/core/record.h": "04576dd8ce3d6437c141d689d6aed88a5754738aac8972f5104abf4b0278369f",
+    "src/core/record_pattern.c": "b7ff69d4a7c34baa7f33b06734064b5be82f3e3d7bb3792ed2453b0cc6521165",
+    "src/core/record_pattern.h": "305e23411b91d9c10de377d046adb9661ef94bf2ab4b6eae947eda87b3d34233",
+    "src/core/safe_save.c": "2643e37743d34aa3e77c0e76ef0edab90b7c0f0dff030f4b9668dcb5db7b6568",
+    "src/core/safe_save.h": "7e581323e8311fe365aae6aeb1a61808e32263cd248c95b223d76d240f4f5908",
+    "src/core/slices.c": "cc13030936d4a427f0aff7cf56834c67938f0bd70f4d4099de75cceded802db9",
+    "src/core/slices.h": "d6e650e67a1c23d3afa413e40150ca747ea0c9412b0a2366bb4ec6facbc4a3c7",
+    "src/core/wav.c": "c57b71388479d43f50945167f950bae4f16aae52fab09af4262704779ff1c794",
+    "src/core/wav.h": "42a07f0ce535f8c0f3cc64c26b947a54e0808f111a2c038a939f0267c94e5f7a",
+    "src/editor/editor.c": "4f07464d6c12e6c8d95005293f26134f29748fceb365b111311f8188e66659f1",
+    "src/editor/editor.h": "e629ad5c6dbbe957b65f5cd1e935f40d922d0caad45eb2bbe4434157cc8fd346",
+    "src/editor/view.c": "cec539d3fd3b1f0132b195e94eea6f4385113b728d0479a8d142e261831908f1",
+    "src/editor/view.h": "2da56ec18ee0160564eb729509376c37d68558a1d6939911b160249368fdbb4c",
+    "src/native/editor_main.c": "e8612afcfc425314733af6928d88f9cbb33a411b7a99be5de463d4c4c3dfa2c5",
+    "src/native/mod_guard.s": "0e0511b3963abd10bae30d591a4e93b62263b2780c54cf2ffab889aa8bf02aeb",
+    "src/native/paula.c": "c0356b4729373cb154484ed37410e1728680a6053415fd7f5b75356ea22c18ea",
+    "src/native/paula.h": "264a2658b2866b92b6bc0f64f7d62a559ff75c7d8cab9c4d7c62d54088fe19ef",
+    "src/native/replay_abi.s": "1cacf9d38d36c05b8944d4b6a8fec712f921e730902349a71e3a75a31b24f42c",
+    "src/platform/file_save.c": "260550bd48f6cec89d17fa7bb86b140535c0708a6da9527aac26fbf8b6475baf",
+    "src/platform/file_save.h": "4b408b05de7a0a535682f3d6b320570b1cadb85eafd0f50aaa478a0a768ac4ab",
+    "tests/channels_test.c": "87ac7f7de1191306ccf297cea5a62e7923dac28533a714795dd47343ea0b0cf4",
+    "tests/document_test.c": "a9342060f7b4ace4ff07dd5c540d47d707ed7117d8b76440935ba78fbb5a580d",
+    "tests/midi_test.c": "c1a8478759bdf722b1335de2800c5773e1dd5ee7a040842428153ebfbbcb2a59",
+    "tests/mod_project_test.c": "21a3c1eb2838f042240e6092368d501246719225dddb09f61a85a372fd090035",
+    "tests/native_file_test.c": "66b81a1f71c92773fb0ec41ec9d1179e9c538ab62e2fb7cd9f5da0f14b7b3e13",
+    "tests/native_guard_harness.s": "a1c0a0196c5a541f97e5c7b43f7206b22cd93971676bbace16c325a182616c63",
+    "tests/native_input_probe.c": "750de10e70621d4fd2418403242880608ef4028c6343372d46849e19a2fc9940",
+    "tests/native_paula_test.c": "9c1baead0cd91efa60f5a19319c94d62187fbaec7aeb830f7366477089564f82",
+    "tests/pattern_test.c": "5097d5da6e003b0b4802719d3a069e9edc5b659b5b472228e7933bbbdddf0012",
+    "tests/pcm_test.c": "867984bbc14ec80a9bda20483781d5862f36993c645d70a8c74d29f1caa0835b",
+    "tests/project_test.c": "8d908e98d13fcfb1f3c23745a05ee97c88d8964edfb6ee720bebd87030e95546",
+    "tests/record_test.c": "4a4af7d56c508e618c8e71a235500e7a9acb03ff277236e48bf25e78b2f606f2",
+    "tests/slices_test.c": "e9d4728d8b8f64efa371154fa1ac8972f32c2b1cbedcc196d48a803c2d988c9d",
+    "tools/prepare_replay.py": "81d393715078e5b2c90b093a423ef4f4cbb6e12746ac1afc2e8d210d72ea918b",
+    "tools/pt24g_convert.c": "c7ff9d6b60ef0cfe45544573b7c76459feaa05377f0ae8ca49023656f29b7a09",
+    "vendor/pt23f/raw/ptfont.raw": "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091",
+    "vendor/pt23f/replayer/PT2.3F_replay_cia.s": "b5dba561016ae6939f35dbf3147f9671c09fc6d515d5a834215c7355f95e365c"
+  },
+  "guard_cases": [
+    {
+      "index": 0,
+      "case": "valid-1",
+      "expected_guard_result": 0,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 1,
+      "case": "valid-64",
+      "expected_guard_result": 0,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 2,
+      "case": "valid-100",
+      "expected_guard_result": 0,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 3,
+      "case": "valid-inactive-order",
+      "expected_guard_result": 0,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 4,
+      "case": "invalid-short-header",
+      "expected_guard_result": -1,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 5,
+      "case": "invalid-short-pattern",
+      "expected_guard_result": -1,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 6,
+      "case": "invalid-short-sample",
+      "expected_guard_result": -1,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 7,
+      "case": "invalid-256-patterns",
+      "expected_guard_result": -1,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 8,
+      "case": "invalid-order-count-0",
+      "expected_guard_result": -1,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 9,
+      "case": "invalid-order-count-129",
+      "expected_guard_result": -1,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 10,
+      "case": "invalid-instrument-32",
+      "expected_guard_result": -1,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 11,
+      "case": "unsupported-8-channel",
+      "expected_guard_result": 0,
+      "scope": "legacy-dispatch-only"
+    },
+    {
+      "index": 12,
+      "case": "warning-trailing-data",
+      "expected_guard_result": 0,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 13,
+      "case": "warning-volume",
+      "expected_guard_result": 0,
+      "scope": "classic-preflight"
+    },
+    {
+      "index": 14,
+      "case": "warning-loop",
+      "expected_guard_result": 0,
+      "scope": "classic-preflight"
+    }
+  ]
+}

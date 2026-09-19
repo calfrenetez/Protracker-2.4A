@@ -1,0 +1,79 @@
+# Enhanced editor: owned classic Paula replay
+
+The first Enhanced replay path uses the pinned `PT2.3F_replay_cia.s`. It plays
+strictly representable four-channel Paula projects from a separate Chip RAM MOD
+snapshot. It does not discard AmiGUS/MIDI tracks, downconvert samples or substitute
+Paula for other routes. Such projects remain editable and saveable, but this
+backend refuses playback. Full mixed 1–16-channel dispatch remains open.
+
+## Controls and display
+
+PLAY / Return / F8 starts at the selected song position. PATTERN / Shift-Return /
+F9 loops the selected pattern. STOP / F10 releases sound and timer resources;
+Space also stops during playback. EDIT still toggles note entry. SAMPLE auditions
+the selected sample at C in the chosen entry octave on a Paula channel, until
+Stop. The audition is a temporary single-note project and never edits the song.
+
+The edit cursor stays independent of the playback position. The lower bar shows
+the sounding order and row, and the tempo fields report live speed/BPM. The four
+wave panes show each active voice's current sample data scaled by its volume.
+They are **sample waveform views**, not captured audio or phase-accurate DMA
+oscilloscopes. They go flat when stopped or on other channel pages. GUI refresh
+uses Intuition tick messages and bounded bitmap regions; replay runs on its CIA
+interrupt independently. This does not claim a 50 Hz GUI or physical performance.
+
+Pattern edits, undo and redo publish changed 16-byte MOD rows under short interrupt
+exclusion. Playback sees those edits on subsequent reads; already-triggered notes
+are not retriggered. An edit requiring an unsupported backend stops playback with
+a clear message. Sample data is not republished during pattern edits: effects
+such as EFx may modify only the private replay copy. Stop/restart recreates it.
+
+## Ownership and adapter changes
+
+`audio.device` allocates all four channels at the lowest precedence so existing
+owners are never displaced. After successful allocation the bridge raises
+precedence, checks ownership, then submits `ADCMD_LOCK` before touching Paula.
+Stop disables replay, removes its CIA vector, stops DMA, restores the LED-filter
+state, frees/unlocks the audio allocation, waits for its lock reply, closes the
+device and releases memory. Failure unwinds only acquired resources.
+
+This follows the [audio allocation documentation](https://wiki.amigaos.net/wiki/Audio_Device)
+and the original [ADCMD_LOCK autodoc](https://d0.se/autodocs/audio.device/ADCMD_LOCK).
+
+The vendor source remains unchanged. `tools/prepare_replay.py` generates a copy
+with individually checked anchors and the following limited adaptations:
+
+- Remove the standalone demo and embedded MOD; provide a C ABI and snapshot pointer.
+- Refuse CIA setup cleanly when graphics.library cannot be opened, without removing
+  a vector that was never acquired.
+- Preserve the timer-B vector number on removal; the source unconditionally reset it
+  to timer A immediately before `RemICRVector`.
+- Initialise the acquired timer to continuous E-clock operation, clearing inherited
+  CNT/one-shot modes while retaining unrelated TOD/serial control bits.
+- Reset persistent voice/effect state on each start, preserve C callee-saved registers,
+  and expose tick/current-row data without calling C from the interrupt.
+
+The effect implementation and finetune tables are unchanged, apart from the
+assembler's explicit equivalent immediate-opcode spelling. This is source
+continuity, not blanket runtime certification of every effect combination.
+
+## Validation
+
+Host tests assert the effect body remains identical after spelling adaptation,
+reject changed patch anchors, and exercise transport hit regions and playback
+rendering under address/undefined-behaviour sanitizers.
+
+`PTPaulaTest` exercises actual native replay periods/volumes, competing audio
+allocation refusal, DMA stop, source-project preservation, restart, future-row
+edits, sample audition, speed/tempo/volume/cut effects, F00 cleanup,
+unsupported-project refusal and complete CIA exhaustion. CIA-A timer-B fallback
+and vector release are tested only if that timer is initially free; an existing
+OS owner is preserved and the unavailable execution path is recorded as NOT RUN. It holds only timers it can
+acquire through the OS and releases them on every tested failure path.
+
+`tools/test_playback_emulator.py` runs that test, then sends actual editor keys to
+play a classic MOD, change a note, play the changed pattern, save, reopen and play
+the saved change, verify byte-identical resaving, and exit normally. It requires
+an explicitly reserved emulator window and guards the exact private profile.
+Physical audio quality, complete effects parity, CAMD, AmiGUS and real-device
+performance remain separate acceptance gates.

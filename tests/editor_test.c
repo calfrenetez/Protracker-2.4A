@@ -62,9 +62,18 @@ int main(int argc,char **argv)
     pt_editor_click(e,198,88);assert(e->sample==1);
     pt_editor_click(e,400,70);assert(e->panel==2 && pt_editor_click(e,300,40)==PT_UI_SAVE);
     pt_editor_click(e,400,80);assert(e->panel==0);
+    assert(pt_editor_click(e,250,10)==PT_UI_PLAY);
+    assert(pt_editor_click(e,400,10)==PT_UI_STOP);
+    assert(pt_editor_click(e,250,30)==PT_UI_PATTERN);
+    assert(pt_editor_click(e,250,87)==PT_UI_AUDITION);
+    assert(pt_editor_key(e,0x57,0)==PT_UI_PLAY && pt_editor_key(e,0x58,0)==PT_UI_PATTERN);
+    e->playback.active=1;assert(pt_editor_key(e,0x40,0)==PT_UI_STOP);e->playback.active=0;
     for(i=0;i<4;++i) {canvas.planes[i]=malloc(PT_VIEW_PLANE_BYTES);assert(canvas.planes[i]);}
     pt_editor_status(e,"EDITOR DEVELOPMENT - AUDIO NOT CONNECTED");e->quit_pending=0;e->panel=0;
     for(i=0;i<4;++i) {pt_editor_key(e,0x50+i,0);pt_editor_draw(e,&canvas,font);}
+    e->playback.active=1;e->playback.speed=6;e->playback.bpm=150;
+    for(i=0;i<4;++i) {unsigned j;e->playback.volume[i]=64;for(j=0;j<81;++j)e->playback.wave[i][j]=j%2?-128:127;}
+    pt_editor_key(e,0x50,0);pt_editor_draw(e,&canvas,font);pt_editor_draw_playback(e,&canvas,font);
     ppm(argv[3],&canvas);
     for(i=0;i<4;++i)free(canvas.planes[i]);
     free(font);free(e);pt_document_release(&doc);

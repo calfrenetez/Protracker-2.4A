@@ -149,6 +149,7 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
     panel(c,248,495,168,17,GREY);label(c,font,416,495,60,17,"PLAY",0);
     panel(c,476,495,18,17,GREY);rect(c,482,500,6,7,WHITE);label(c,font,494,495,58,17,"STOP",0);
     panel(c,552,495,86,17,GREY);small(c,font,557,499,"PATTERN",WHITE);snprintf(s,sizeof(s),"%02X",e->pattern);small(c,font,618,499,s,NAVY);
+    pt_editor_draw_playback(e,c,font);
     if(e->panel) {
         panel(c,230,2,369,95,GREY);
         label(c,font,230,2,369,19,e->panel==1?"EDIT OP.":"DISK OP.",0);
@@ -156,4 +157,29 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
         label(c,font,414,21,185,38,e->panel==1?"REDO":"QUIT",0);
         label(c,font,230,59,369,38,"BACK",0);
     }
+}
+
+/* Small refresh region: CIA timing never waits for the display. Waveforms are
+   current voice sample data scaled by current volume, not an audio capture. */
+void pt_editor_draw_playback(const struct pt_editor *e,struct pt_canvas *c,const uint8_t font[580])
+{
+    unsigned i,j,first=pt_channels_page(&e->project->channels)*4;char s[32];
+    for(i=0;i<4;++i) {
+        int x=248+(int)i*102,previous=135;
+        rect(c,x,117,81,37,BLACK);
+        if(first+i>=e->project->channels.count)continue;
+        for(j=0;j<81;++j) {
+            int y=135;
+            if(e->playback.active && !first)y-=(int)e->playback.wave[i][j]*e->playback.volume[i]/512;
+            rect(c,x+(int)j,y<previous?y:previous,1,(y<previous?previous-y:y-previous)+1,YELLOW);previous=y;
+        }
+    }
+    panel(c,248,495,168,17,GREY);
+    if(e->playback.active) {
+        snprintf(s,sizeof(s),"POS %03u ROW %02u",e->playback.order,e->playback.row);small(c,font,253,499,s,NAVY);
+    }
+    panel(c,14,216,42,18,MID);
+    snprintf(s,sizeof(s),"%02u",e->playback.active?e->playback.speed:e->project->speed);medium(c,font,22,220,s,NAVY);
+    rect(c,70,216,24,10,GREY);snprintf(s,sizeof(s),"%03u",e->playback.active?e->playback.bpm:e->project->bpm);small(c,font,70,216,s,NAVY);
+    rect(c,610,227,24,10,GREY);small(c,font,610,227,e->playback.active?"CIA":"---",NAVY);
 }

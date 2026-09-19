@@ -180,3 +180,15 @@ acceptance. The 2.4G title, route letters, actual project contents and actual te
 remain. Scope traces continue to reflect playback and stay flat when stopped.
 The test fixture is unchanged musical data, not a recreation of the pictured
 song. Hardware acceptance remains separate and has not been run.
+
+### Button typography and relief, 19 September 2026
+
+Following the owner's request for better fonts and pseudo-3D controls, labels now
+use twelve-pixel spacing for the original twelve-pixel bitmap glyphs, with a
+bounded eleven/ten-pixel fallback only for narrow controls. This separates adjacent
+letters and their shadows. Raised labels have a consistent two-level lower-right
+shadow. Buttons and arrow controls gain paired highlight/shadow edges and subtle
+face shading. Selected buttons reverse the bevel and inset their lettering by one
+pixel. Surrounding information strips keep their flatter treatment, so controls
+read as raised surfaces. Layout, hit regions, project data and font source remain
+unchanged. Existing full/incremental pixel tests include selected controls.

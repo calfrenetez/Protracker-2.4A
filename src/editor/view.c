@@ -2,7 +2,7 @@
 #include <string.h>
 #include "view.h"
 enum {BLACK,GREY,WHITE,DARK,BLUE,YELLOW,NAVY,MID};
-const uint16_t pt_view_palette[16]={0x000,0x777,0xddd,0x444,0x5ae,0xff5,0x014,0xaaa,0x222,0xbbb,0x666,0x999,0x555,0x777,0xccc,0xfff};
+const uint16_t pt_view_palette[16]={0x000,0x777,0xddd,0x444,0x5ae,0xff5,0x014,0xaaa,0x222,0xbbb,0x666,0x999,0x555,0x888,0xccc,0xfff};
 static void rect(struct pt_canvas *c,int x,int y,int w,int h,unsigned pen)
 {
     int row,first,last;unsigned p;uint8_t left,right;
@@ -86,18 +86,47 @@ static void panel(struct pt_canvas *c,int x,int y,int w,int h,unsigned pen)
 }
 static void medium(struct pt_canvas *c,const uint8_t *font,int x,int y,const char *s,unsigned pen)
 {letters(c,font,x,y,s,pen,3);}
+/* A two-step bevel belongs on controls; the surrounding strips stay flatter.
+   Selected controls reverse the light direction and move the lettering inward. */
+static void button(struct pt_canvas *c,int x,int y,int w,int h,unsigned active)
+{
+    unsigned light=active?DARK:WHITE,shade=active?WHITE:DARK;
+    rect(c,x,y,w,h,active?YELLOW:13);
+    if(!active) {
+        rect(c,x+2,y+2,w-4,2,11);
+        rect(c,x+2,y+h-4,w-4,2,GREY);
+    }
+    rect(c,x,y,w,1,light);rect(c,x,y,1,h,light);
+    rect(c,x+1,y+1,w-2,1,active?10:14);rect(c,x+1,y+1,1,h-2,active?10:14);
+    rect(c,x+1,y+h-2,w-2,1,active?MID:10);rect(c,x+w-2,y+1,1,h-2,active?MID:10);
+    rect(c,x,y+h-1,w,1,shade);rect(c,x+w-1,y,1,h,shade);
+}
 static void label(struct pt_canvas *c,const uint8_t *font,int x,int y,int w,int h,const char *s,unsigned active)
 {
-    int tx=x+(w-(int)strlen(s)*10)/2;
-    panel(c,x,y,w,h,active?YELLOW:GREY);
-    if(!active)spaced(c,font,tx+1,y+(h-10)/2+1,s,DARK,10);
-    spaced(c,font,tx,y+(h-10)/2,s,active?BLACK:WHITE,10);
+    int n=(int)strlen(s),advance=12,tx,ty=y+(h-10)/2-1;
+    /* The old ten-pixel step crowded twelve-pixel glyphs and their shadows.
+       Only narrow bank buttons need tighter spacing. Keep the original font. */
+    if(n*advance+4>w)advance=11;
+    if(n*advance+4>w)advance=10;
+    tx=x+(w-(n?n*advance:0))/2;
+    button(c,x,y,w,h,active);
+    if(active) {++tx;++ty;}
+    else {
+        spaced(c,font,tx+1,ty+2,s,8,advance);
+        spaced(c,font,tx+1,ty+1,s,DARK,advance);
+    }
+    spaced(c,font,tx,ty,s,active?BLACK:WHITE,advance);
+}
+static void arrow_shape(struct pt_canvas *c,int x,int y,int up,unsigned pen)
+{
+    int r;
+    for(r=0;r<5;++r)rect(c,x+9-r,y+(up?4+r:12-r),r*2+1,1,pen);
+    rect(c,x+7,y+(up?8:4),5,7,pen);
 }
 static void arrow(struct pt_canvas *c,int x,int y,int up)
 {
-    int r;panel(c,x,y,20,19,GREY);
-    for(r=0;r<5;++r)rect(c,x+9-r,y+(up?4+r:12-r),r*2+1,1,WHITE);
-    rect(c,x+7,y+(up?8:4),5,7,WHITE);
+    button(c,x,y,20,19,0);
+    arrow_shape(c,x+1,y+1,up,DARK);arrow_shape(c,x,y,up,WHITE);
 }
 static void draw_status(const struct pt_editor *e,struct pt_canvas *c,const uint8_t *font,size_t bytes)
 {

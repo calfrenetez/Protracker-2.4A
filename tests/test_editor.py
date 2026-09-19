@@ -17,4 +17,4 @@ class Editor(unittest.TestCase):
                             str(ROOT/'vendor/pt23f/raw/ptfont.raw'), str(Path(tmp)/'editor.ppm')], check=True)
             # Reference-refinement golden; incremental redraws must match it exactly.
             self.assertEqual(hashlib.sha256((Path(tmp)/'editor.ppm').read_bytes()).hexdigest(),
-                             '895e473896ad2c43b5fc1c1b8d4a894de42c7277c978d3799f39585854ff085c')
+                             '1bda65e83cceb972ef2947cc4e00ce0259827e55e0e5929ea902152cebd3d17c')

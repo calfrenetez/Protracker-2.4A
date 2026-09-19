@@ -1,0 +1,26 @@
+{
+  "original_23f_binary_sha256": "df8d615f3c38c79240a8c736c29b4ab1a53ffb18406c6814adf470e764b31a08",
+  "exported_mod_sha256": "c4a387e3c6f66317885b4b6f5b7b52a43525613e44c66f76212195025e25f1a3",
+  "original_23f_resave_sha256": "c4a387e3c6f66317885b4b6f5b7b52a43525613e44c66f76212195025e25f1a3",
+  "run_id": "classicexport1789835462416987000",
+  "load_display_D2_observed": true,
+  "play_audio": "OK\tch0_dma=1\tch1_dma=1\tch2_dma=1\tch3_dma=1\tmaster=1\tsndbuf=500\tsndbuf_status=0",
+  "stop_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=666\tsndbuf_status=0",
+  "original_23f_resave_byte_identity": true,
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true"
+  },
+  "actions": [
+    "Open Disk Op at 200,35",
+    "Edit path at 40,38; clear with Left/Delete; enter PTMOD:",
+    "Load MOD.EXPORT at 100,55",
+    "Play 150,5; Stop 210,5; verify four DMA channels on/off",
+    "Disk Op; Save Module 280,5; confirm Y",
+    "Compare mod.pt baseline smoke byte-for-byte with exported MOD",
+    "Quit at 0,0; confirm Y; capture Workbench"
+  ],
+  "normal_exit_workbench_observed": true,
+  "guarded_emulator_shutdown_and_disk_socket_release": true
+}

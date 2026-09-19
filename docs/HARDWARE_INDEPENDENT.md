@@ -286,3 +286,22 @@ saved exactly the independently specified event bytes and CRC. Reload/resave was
 byte-identical; a reopened document had an empty clipboard. A separate classic
 MOD was transposed through the same controls, replayed at period 404 and stopped
 with all DMA channels off. All three editor instances exited normally.
+
+## Native MOD export and original tracker compatibility
+
+DISK OP. > SAVE MOD / Control-Shift-M now exports eligible classic songs from the
+Enhanced editor through a native new-file dialog. It shares the converter's
+lossless analysis/writer and verified publication adapter. Unsupported extended
+state is refused before the dialog; no channel or precision is silently dropped.
+Export does not mark the project saved or reset undo history. The shared analyser
+also refuses out-of-range one-word loop pointers in preserved MOD headers, so
+those pointers cannot be emitted by the converter or passed to replay.
+
+`evidence/enhanced-editor/dev7/` records 23 passing host groups, native export and
+Paula ownership tests, exact unchanged/edited MOD exports, cancellation and
+existing-file preservation, unchanged project dirty/history state, enhanced
+refusal with an exact richer-project save, and reopen/play/reexport identity.
+The resulting edited MOD was loaded in the pinned original 2.3F, displayed its
+D-2 note, played with four DMA channels, stopped with none, and resaved exactly
+byte-for-byte. Normal exit returned to Workbench. Broader effect compatibility,
+physical listening quality and hardware acceptance remain open.

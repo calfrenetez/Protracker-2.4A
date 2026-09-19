@@ -48,6 +48,7 @@ F8 plays, F9 loops the pattern and F10 stops. SAMPLE auditions a classic sample.
 LOAD/Control-O opens a MOD/project. Control-Shift-S selects a new save path.
 Starting PT24GEdit without arguments creates a blank song.
 EDIT OP./Control-E provides mark/copy/paste/clear/transpose and whole-block undo.
+DISK OP. > SAVE MOD / Control-Shift-M exports strictly lossless classic MODs.
 Mixed AmiGUS/MIDI replay and other unfinished controls remain unavailable.
 PT24GConvert inspects projects and performs strict lossless MOD/project conversion.
 This is not the finished sixteen-channel tracker or a hardware-qualified release.

@@ -37,6 +37,12 @@ LOAD / Control-O opens a native Amiga ASL requester for a MOD or project.
 Control-S opens Save New when no command-line output was supplied. DISK OP. >
 SAVE NEW or Control-Shift-S always lets you choose another new filename. A supplied
 command-line output remains the Control-S destination; existing files are refused.
+DISK OP. > SAVE MOD / Control-Shift-M opens a separate native MOD export dialog.
+The shared converter accepts only lossless classic projects. Extra channels,
+MIDI, enhanced samples/notes/loops/panning or metadata are refused before a file
+requester is opened. No track is dropped and no sample is downconverted. Export
+uses the same verified new-file publication, preserves undo history, and does
+not mark the richer project saved. Existing MOD files are refused.
 Ordinary replacement saves and recovery remain to be integrated.
 
 A dirty project requires LOAD / Control-O twice before the requester opens. Any

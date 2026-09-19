@@ -190,7 +190,8 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
         label(c,font,230,2,369,19,e->panel==1?"EDIT OP.":"DISK OP.",0);
         label(c,font,230,21,184,38,e->panel==1?"UNDO":"SAVE NEW",0);
         label(c,font,414,21,185,38,e->panel==1?"REDO":"QUIT",0);
-        label(c,font,230,59,369,38,"BACK",0);
+        label(c,font,230,59,369,19,"SAVE MOD",0);
+        label(c,font,230,78,369,19,"BACK",0);
     }
 }
 

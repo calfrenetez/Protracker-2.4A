@@ -124,6 +124,10 @@ int main(int argc,char **argv)
     assert(pt_editor_key(e,0x18,8)==PT_UI_NONE && e->load_pending);
     assert(pt_editor_key(e,0x18,8)==PT_UI_LOAD && !e->load_pending);
     assert(pt_editor_key(e,0x21,9)==PT_UI_SAVE_AS);
+    assert(pt_editor_key(e,0x37,9)==PT_UI_EXPORT_MOD);
+    pt_editor_click(e,400,70);assert(e->panel==2);
+    assert(pt_editor_click(e,400,65)==PT_UI_EXPORT_MOD);
+    pt_editor_click(e,400,85);assert(e->panel==0);
     assert(pt_editor_click(e,250,10)==PT_UI_PLAY);
     assert(pt_editor_click(e,400,10)==PT_UI_STOP);
     assert(pt_editor_click(e,250,30)==PT_UI_PATTERN);

@@ -1,0 +1,29 @@
+{
+  "run_id": "modexport1789835327007746000",
+  "elapsed_seconds": 63.538,
+  "binaries": {
+    "PT24GEdit": "198c62d50a0a1036280954861b9fbc5fd6a76dbfe5cbcb4c9070ca4e0ad974b1",
+    "PTModProjectTest": "357c3dbd151a4938545f034c6a655dd111d54a456d28ffd61250bc489b315ecf",
+    "PTPaulaTest": "196c91a9dd170593c99cd4019a18049d59b423df7e499f7a6358ebd4d6abc63a"
+  },
+  "classic_unedited_byte_identity": true,
+  "edited_mod_exact_period_381": true,
+  "cancel_and_existing_destination_preserved": true,
+  "export_preserves_project_dirty_and_undo": true,
+  "export_reopen_play_and_reexport_identity": true,
+  "enhanced_refusal_before_dialog_with_exact_project_save": true,
+  "normal_exits": 3,
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0",
+  "logs": {
+    "editor.log": "EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=76354\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR REQUEST mod\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=MOD EXPORT CANCELLED - PROJECT PRESERVED panel=0\nEDITOR REQUEST mod\nEDITOR MOD result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=MOD EXPORTED AND VERIFIED panel=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=EDIT ON - NOTES Z-M/Q-U; DELETE CLEARS; BACKSPACE OFF panel=0\nEDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=PATTERN EDITED panel=0\nEDITOR REQUEST mod\nEDITOR MOD result=6 dirty=1\nEDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=MOD EXPORT REFUSED: DESTINATION EXISTS OR CANNOT BE PUBLISHED panel=0\nEDITOR REQUEST mod\nEDITOR MOD result=0 dirty=1\nEDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=MOD EXPORTED AND VERIFIED - PROJECT STILL UNSAVED panel=0\nEDITOR FRAME row=1 channel=0 revision=0 dirty=0 status=UNDO panel=0\nEDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=REDO panel=0\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=1 channel=0 revision=1 dirty=0 status=PROJECT SAVED AND VERIFIED panel=0\nEDITOR EXIT clean\n",
+    "reopened.log": "EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=76354\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PLAYING SONG - PAULA CIA panel=0\nEDITOR REPLAY active=1 ticks=7 order=0 pattern=0 row=0 bpm=125 speed=6 period=381,339,285,214 volume=24,24,24,24\nEDITOR REPLAY active=1 ticks=11 order=0 pattern=0 row=0 bpm=125 speed=6 period=381,339,285,214 volume=24,24,24,24\nEDITOR REPLAY active=1 ticks=15 order=0 pattern=0 row=1 bpm=125 speed=6 period=381,339,285,214 volume=24,24,24,24\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=STOPPED - AUDIO RELEASED panel=0\nEDITOR REQUEST mod\nEDITOR MOD result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=MOD EXPORTED AND VERIFIED panel=0\nEDITOR EXIT clean\n",
+    "mixed.log": "EDITOR READY channels=16 patterns=2 bitmap_bytes=163840 history_bytes=76354\nEDITOR FRAME row=0 channel=15 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR MOD refused issues=0x39ff dirty=0\nEDITOR FRAME row=0 channel=15 revision=0 dirty=0 status=MOD EXPORT REFUSED: EXTERNAL MIDI AUDIO IS NOT IN A MOD panel=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=MOD EXPORT REFUSED: EXTERNAL MIDI AUDIO IS NOT IN A MOD panel=0\nEDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=PATTERN EDITED panel=0\nEDITOR MOD refused issues=0x39ff dirty=1\nEDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=MOD EXPORT REFUSED: EXTERNAL MIDI AUDIO IS NOT IN A MOD panel=0\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=1 channel=0 revision=1 dirty=0 status=PROJECT SAVED AND VERIFIED panel=0\nEDITOR EXIT clean\n",
+    "mod-core.log": "MOD PROJECT PASS: MOD -> project -> MOD byte identity, strict validation, staged import, explicit loss reports and no silent downgrade\n",
+    "paula.log": "REPLAY initial ticks=20 row=2 periods=428,339,285,214\nREPLAY effects speed/tempo/volume/cut observed mask=15 ticks=16\nCIA fallback execution NOT RUN: Workbench already owns CIAA timer B; existing vector preserved\nPAULA PASS: playback periods, busy audio refusal, DMA stop, immutable project, repeated restart, live edit, audition, speed/tempo/volume/cut, unsupported refusal, owned empty-sample DMA, CIA exhaustion and unrelated-vector preservation\n"
+  },
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true"
+  }
+}

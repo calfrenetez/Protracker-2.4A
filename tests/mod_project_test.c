@@ -36,6 +36,19 @@ int main(int argc,char **argv)
     assert(pt_project_probe(project,n,&need)==PT_PROJECT_OK);
     assert(pt_project_decode(project,n,&s,&p)==PT_PROJECT_OK);
     assert(pt_mod_export_direct(&p,roundtrip,(size_t)length,&w)==PT_PROJECT_OK && !memcmp(mod,roundtrip,w));
+    /* Preserved one-word/zero-length loop headers must not export pointers
+       outside their sample, even though the project has no enabled loop. */
+    {
+        uint8_t *h=s.extension_data+20+30;uint8_t before[4];memcpy(before,h+26,4);
+        assert(p.samples[1].loop==PT_LOOP_NONE);h[26]=0x7f;h[27]=0xff;h[28]=0;h[29]=1;
+        assert(pt_mod_export_analyse(&p,&report)==PT_PROJECT_OK && (report.issues&PT_EXPORT_LOOPS));
+        memset(roundtrip,0xa5,(size_t)length);w=123;
+        assert(pt_mod_export_direct(&p,roundtrip,(size_t)length,&w)==PT_PROJECT_UNSUPPORTED && w==123);
+        for(n=0;n<(size_t)length;++n)assert(roundtrip[n]==0xa5);
+        h[29]=0;assert(pt_mod_export_analyse(&p,&report)==PT_PROJECT_OK && (report.issues&PT_EXPORT_LOOPS));
+        memcpy(h+26,before,4);
+        assert(pt_mod_export_direct(&p,roundtrip,(size_t)length,&w)==PT_PROJECT_OK && !memcmp(mod,roundtrip,w));
+    }
     /* Potential transformations are reported; direct writer never makes them. */
     p.channels.track[0].route=PT_MIDI;
     assert(pt_mod_export_analyse(&p,&report)==PT_PROJECT_OK && (report.issues&PT_EXPORT_MIDI_AUDIO));

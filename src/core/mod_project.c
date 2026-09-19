@@ -99,6 +99,13 @@ enum pt_project_result pt_mod_export_analyse(const struct pt_project *p,struct p
         if(s->pcm.rate!=PT_CLASSIC_RATE)r.issues|=PT_EXPORT_RATE;
         if(s->pcm.frames>131070 || (s->pcm.frames&1))r.issues|=PT_EXPORT_LIMITS;
         if(s->slice_count)r.issues|=PT_EXPORT_SLICES;
+        /* A preserved header can contain a one-word loop start which is not
+           represented by PT_LOOP_NONE. Never emit an out-of-sample DMA range
+           from untrusted CMOD metadata or after shortening that sample. */
+        if(old && i<31 && s->loop==PT_LOOP_NONE) {
+            uint32_t start=u16(old+20+i*30+26),repeat=u16(old+20+i*30+28);
+            if(repeat<=1 && start && start+1>s->pcm.frames/2)r.issues|=PT_EXPORT_LOOPS;
+        }
         if(s->loop>PT_LOOP_FORWARD || (s->loop_start&1) || (s->loop_end&1) ||
            (s->loop==PT_LOOP_FORWARD && s->loop_end-s->loop_start<=2))r.issues|=PT_EXPORT_LOOPS;
         if((!memchr(s->name,0,23) && s->name[22]) || s->interpolation)r.issues|=PT_EXPORT_METADATA;

@@ -148,6 +148,7 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
     if(qualifier&8) {
         if(raw==0x31)undo(e,(qualifier&3)?1:-1);
         else if(raw==0x21)return (qualifier&3)?PT_UI_SAVE_AS:PT_UI_SAVE;
+        else if(raw==0x37 && (qualifier&3))return PT_UI_EXPORT_MOD;
         else if(raw==0x12)e->panel=e->panel==1?0:1; /* Control-E */
         else if(raw==0x35)mark(e); /* Control-B */
         else if(raw==0x20)select_all(e);
@@ -222,7 +223,8 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
         return PT_UI_NONE;
     }
     if(e->panel==2 && x>=230 && x<599 && y>=2 && y<97) {
-        if(y>=59)e->panel=0;
+        if(y>=78)e->panel=0;
+        else if(y>=59)return PT_UI_EXPORT_MOD;
         else if(y>=21) {if(e->panel==2)return PT_UI_SAVE_AS;undo(e,x<414?-1:1);}
         return PT_UI_NONE;
     }

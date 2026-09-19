@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Requires an explicitly reserved emulator window; tests the real IDCMP UI."""
+import argparse
 import json
 from pathlib import Path
 import shutil
@@ -12,6 +13,7 @@ from emulator_ipc import Emulator
 
 
 def main():
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument("--layout-fixture",type=Path);args=parser.parse_args()
     if matching_socket() or Path('/tmp/amiberry.sock').exists():
         raise SystemExit('An emulator socket exists; acquire exclusive ownership first')
     env = json.loads((ROOT/'local/environment.json').read_text())
@@ -21,6 +23,7 @@ def main():
     shutil.copyfile(ROOT/'build/dev/PT24GEdit', run/'PT24GEdit')
     source = (ROOT/'tests/fixtures/project-v1/mixed.ptg').read_bytes()
     (run/'input.ptg').write_bytes(source)
+    if args.layout_fixture:shutil.copyfile(args.layout_fixture,run/'layout.ptg')
     process = emu = None
     start = time.monotonic()
     def wait_for(condition, seconds=30):
@@ -45,7 +48,7 @@ def main():
     try:
         launch.write_text('\n'.join(['FailAt 21','Wait 5','Stack 65536','CD PTDEV:'+run.name,
             'PT24GEdit input.ptg saved.ptg >editor.log','Echo $RC >editor.rc',
-            'PT24GEdit saved.ptg reopened.ptg >reopened.log','Echo $RC >reopened.rc','Echo done >done'])+'\n')
+            'PT24GEdit saved.ptg reopened.ptg >reopened.log','Echo $RC >reopened.rc'] + (['PT24GEdit layout.ptg >layout.log','Echo $RC >layout.rc'] if args.layout_fixture else []) + ['Echo done >done'])+'\n')
         with (run/'emulator.log').open('wb') as log:
             process=subprocess.Popen([env['emulator_binary'],'--config',env['profile'],'-G','-m','PTDEV:'+str(share),'--log'],
                 stdin=subprocess.DEVNULL,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
@@ -82,6 +85,9 @@ def main():
         chord(0x21);wait_for(lambda:(run/'reopened.ptg').exists())
         assert (run/'reopened.ptg').read_bytes()==saved
         frame('reopened.log','revision=0 dirty=0 status=PROJECT SAVED');capture('07-native-project-reopened.png');emu.tap(0x45)
+        if args.layout_fixture:
+            frame('layout.log','revision=0 dirty=0 status=EDITOR DEVELOPMENT');capture('09-reference-layout-native.png');emu.tap(0x45)
+            wait_for(lambda:(run/'layout.rc').exists());assert (run/'layout.rc').read_text().strip()=='0'
         wait_for(lambda:(run/'done').exists())
         assert (run/'reopened.rc').read_text().strip()=='0'
         capture('08-return-to-workbench.png')
@@ -92,7 +98,7 @@ def main():
         report={'run_id':run.name,'elapsed_seconds':round(time.monotonic()-start,3),
             'binary_sha256':digest(run/'PT24GEdit'),'saved_sha256':digest(run/'saved.ptg'),
             'native_edit_exact_expected_bytes':True,'existing_destination_preserved':True,
-            'reopen_save_byte_identity':True,'normal_exit_twice':True,'logs':logs,
+            'reopen_save_byte_identity':True,'normal_exit_twice':True,'layout_fixture_captured':bool(args.layout_fixture),'logs':logs,
             'environment':{c:emu.command(c) for c in ['GET_VERSION','GET_STATUS','GET_CPU_MODEL','GET_MEMORY_CONFIG']}}
         (out/'native-editor.json').write_text(json.dumps(report,indent=2)+'\n')
         shutil.copyfile(run/'saved.ptg',out/'saved.ptg')

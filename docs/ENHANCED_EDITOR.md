@@ -4,14 +4,16 @@
 extended-project and pattern-undo cores. It is a separate development executable
 while the original assembler tracker/replayer is being integrated. It is not the
 finished 16-channel tracker and does not replace the known-good four-channel
-`PT2.4G` executable. PLAY and STOP are visibly disabled; no audio backend is called.
+`PT2.4G` executable. The classic control grid is retained; playback and other unfinished actions
+report that they are not connected. No audio backend is called.
 
 The interface follows the supplied four-column reference: the original pinned
 2.3F bitmap font, grey raised controls, a black pattern area, twenty visible rows,
 four channel-page buttons and permanent P/A/M route letters. Routing is displayed;
 route changes, mute/solo and channel-count changes are not yet wired to this UI.
-The sample waveform is a static preview of the selected sample's first channel,
-not a running scope or an audio-output claim. MIDI labels indicate project routes;
+Four quadrascope panes occupy the reference position. Their stopped traces stay
+flat until an actual playback scope feed is connected; no waveform activity is
+fabricated. MIDI labels indicate project routes;
 CAMD transmission is not yet connected.
 
 ## Start and controls
@@ -39,10 +41,13 @@ launch it with a different new path for another saved version.
 - Tab/Shift-Tab select the next/previous channel and wrap over the project count.
 - F1–F4 or the page buttons select channels 1–4, 5–8, 9–12 or 13–16.
 - Backspace in the note field inserts explicit OFF. Delete clears the event.
-- Minus/equal decrease/increase the selected sample; the left/right halves of
-  the sample value do the same. Pattern buttons select an existing pattern.
-- Control-Z / Control-Shift-Z or UNDO/REDO use the bounded pattern journal.
-- Control-S / SAVE NEW writes and verifies a project at the new output path.
+- Minus/equal decrease/increase the selected sample; the paired arrows on the
+  SAMPLE row do the same. PATTERN arrows select an existing pattern, and POS
+  arrows select an existing order. Other parameter arrows are not wired yet.
+- Control-Z / Control-Shift-Z use the bounded pattern journal. EDIT OP. opens
+  the UNDO/REDO secondary panel; BACK returns to the reference main screen.
+- Control-S or DISK OP. > SAVE NEW writes and verifies the project at the new
+  output path. DISK OP. also contains QUIT and BACK.
 - Escape / QUIT exits. Dirty edits require a second Escape or QUIT; another
   key/click cancels that discard confirmation.
 
@@ -76,3 +81,27 @@ full browser/AmiConnect transport remain separate UI checks.
 Still open: classic and enhanced frontends sharing the replay engine, pattern
 block-operation UI, route/metadata editing and its history, sample editing UI,
 file requesters, capture, CAMD, renderer/export strategies and hardware acceptance.
+
+
+## Reference correction, 19 September 2026
+
+The owner rejected the earlier simplified layout and supplied the full ProTracker
+reference again. That rejection supersedes the dev1 visual direction. The main
+screen now restores the nine-row parameter table, POS I/D cells, paired arrows,
+three-column command grid and numbered buttons, quadrascope/title band, distinct
+song/sample-name strips, tempo/status/tune area, twenty-row pattern view and lower
+bank/transport/pattern bar. Route letters remain small identifiers in channel
+headers. Undo/save move behind EDIT OP. and DISK OP.; they do not replace the
+classic main controls. The original font is rendered with wider body spacing.
+
+This is implemented in the actual shared/native renderer, not a pasted reference
+image. The layout fixture contains synthetic, editable project events solely to
+make spacing and typography easy to review. Its scope traces are stopped. Use
+`tools/editor_preview.c` with a fixture, the pinned font, an output PTG and a PPM
+path to regenerate it. `tools/test_editor_emulator.py --layout-fixture PATH`
+also opens that project in the native app and captures the actual display.
+
+The inherited control labels do not imply completed rendering, sampler, live
+recording or replay features. Unconnected actions report their status. Native
+keyboard editing, transactional new-file saves and history retain their working
+paths. Mouse hit regions now match the revised layout and secondary panels.

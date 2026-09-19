@@ -8,7 +8,7 @@ struct pt_editor {
     struct pt_pattern_history history;
     struct pt_pattern_command commands[128];
     struct pt_event_change changes[2048];
-    unsigned pattern,row,first_row,field,sample,octave,editing,quit_pending;
+    unsigned pattern,row,first_row,field,sample,octave,editing,quit_pending,position,panel;
     char status[76];
 };
 /* Initialize only after a complete project load; no audio backend is invoked. */

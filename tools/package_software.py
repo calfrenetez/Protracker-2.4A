@@ -43,7 +43,8 @@ def main():
 
 PT2.4G is the four-channel assembler derivative (dev2), with loader/input guards.
 PT24GEdit is a separate native Enhanced editor prototype with project editing,
-paging, undo and verified new-file saves. Its audio controls are disabled.
+paging, undo and verified new-file saves. Audio is not connected; unfinished
+classic controls report that status.
 PT24GConvert inspects projects and performs strict lossless MOD/project conversion.
 This is not the finished sixteen-channel tracker or a hardware-qualified release.
 

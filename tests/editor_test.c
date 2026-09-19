@@ -40,22 +40,30 @@ int main(int argc,char **argv)
     pt_editor_key(e,0x31,8);assert(!memcmp(&old,&doc.project.events[0],sizeof(old)) && !pt_editor_dirty(e));
     pt_editor_key(e,0x31,9);assert(pt_editor_dirty(e));
     pt_editor_saved(e);assert(!pt_editor_dirty(e));
-    pt_editor_click(e,305,500);assert(doc.project.channels.selected==12);
+    pt_editor_click(e,200,500);assert(doc.project.channels.selected==12);
     for(i=0;i<3;++i)pt_editor_key(e,0x42,0);assert(doc.project.channels.selected==15);
-    pt_editor_click(e,490,250);assert(e->row==0 && e->field==0);
+    pt_editor_click(e,494,258);assert(e->row==0 && e->field==0);
     pt_editor_key(e,0x31,0);assert(doc.project.events[15].kind==PT_NOTE_MIDI && doc.project.events[15].pitch==24);
     pt_editor_key(e,0x41,0);assert(doc.project.events[31].kind==PT_NOTE_OFF);
     pt_editor_key(e,0x4c,0);pt_editor_key(e,0x46,0);assert(doc.project.events[31].kind==PT_NOTE_NONE);
     /* A sample above the available count is refused without changing event. */
-    pt_editor_click(e,36+3*150+53,250);assert(e->field==1);old=doc.project.events[15];
+    pt_editor_click(e,38+3*150+65,258);assert(e->field==1);old=doc.project.events[15];
     pt_editor_key(e,1,0);assert(!memcmp(&old,&doc.project.events[15],sizeof(old)));
     assert(pt_editor_key(e,0x21,8)==PT_UI_SAVE);
-    assert(pt_editor_click(e,580,500)==PT_UI_NONE && e->quit_pending);
+    pt_editor_click(e,400,70);assert(e->panel==2);
+    assert(pt_editor_click(e,500,40)==PT_UI_NONE && e->quit_pending);
     pt_editor_key(e,0x4d,0);assert(!e->quit_pending);
     assert(pt_editor_key(e,0x45,0)==PT_UI_NONE && pt_editor_key(e,0x45,0)==PT_UI_QUIT);
-    e->quit_pending=0;assert(pt_editor_click(e,580,500)==PT_UI_NONE && pt_editor_click(e,580,500)==PT_UI_QUIT);
+    e->quit_pending=0;assert(pt_editor_click(e,500,40)==PT_UI_NONE && pt_editor_click(e,500,40)==PT_UI_QUIT);
+    pt_editor_click(e,400,80);assert(e->panel==0); /* Disk Op Back */
+    pt_editor_click(e,218,30);assert(e->pattern==1);
+    pt_editor_click(e,198,30);assert(e->pattern==0);
+    pt_editor_click(e,218,88);assert(e->sample==2);
+    pt_editor_click(e,198,88);assert(e->sample==1);
+    pt_editor_click(e,400,70);assert(e->panel==2 && pt_editor_click(e,300,40)==PT_UI_SAVE);
+    pt_editor_click(e,400,80);assert(e->panel==0);
     for(i=0;i<4;++i) {canvas.planes[i]=malloc(PT_VIEW_PLANE_BYTES);assert(canvas.planes[i]);}
-    pt_editor_status(e,"EDITOR DEVELOPMENT - AUDIO NOT CONNECTED");e->quit_pending=0;
+    pt_editor_status(e,"EDITOR DEVELOPMENT - AUDIO NOT CONNECTED");e->quit_pending=0;e->panel=0;
     for(i=0;i<4;++i) {pt_editor_key(e,0x50+i,0);pt_editor_draw(e,&canvas,font);}
     ppm(argv[3],&canvas);
     for(i=0;i<4;++i)free(canvas.planes[i]);

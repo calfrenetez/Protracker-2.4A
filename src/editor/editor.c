@@ -123,29 +123,41 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
 {
     unsigned c,r,f;
     if(x<0 || x>=640 || y<0 || y>=512)return PT_UI_NONE;
-    if(y>=488 && x>=536)return quit(e);
+    if(e->panel==2 && x>=414 && x<599 && y>=21 && y<59)return quit(e);
     e->quit_pending=0;
-    if(y>=488 && x>=4 && x<404) {c=(unsigned)(x-4)/100*4;if(c<e->project->channels.count)e->project->channels.selected=(uint8_t)c;}
-    else if(y>=246 && y<486 && x>=36 && x<636) {
-        c=(unsigned)(x-36)/150+pt_channels_page(&e->project->channels)*4;
-        r=(unsigned)(y-246)/12+e->first_row;
+    if(e->panel && x>=230 && x<599 && y>=2 && y<97) {
+        if(y>=59)e->panel=0;
+        else if(y>=21) {if(e->panel==2)return PT_UI_SAVE;undo(e,x<414?-1:1);}
+        return PT_UI_NONE;
+    }
+    if(y>=495 && x>=4 && x<248) {c=(unsigned)(x-4)/61*4;if(c<e->project->channels.count)e->project->channels.selected=(uint8_t)c;}
+    else if(y>=254 && y<494 && x>=38 && x<638) {
+        c=(unsigned)(x-38)/150+pt_channels_page(&e->project->channels)*4;
+        r=(unsigned)(y-254)/12+e->first_row;
         if(c<e->project->channels.count && r<64) {
             e->project->channels.selected=(uint8_t)c;e->row=r;
-            f=(unsigned)(x-36)%150;
-            e->field=f<50?0:f<68?1:f<90?2:f<108?3:f<124?4:5;
+            f=(unsigned)(x-38)%150;
+            e->field=f<60?0:f<76?1:f<94?2:f<112?3:f<124?4:5;
         }
-    } else if(y>=222 && y<244 && x>=36 && x<636) {
-        c=(unsigned)(x-36)/150+pt_channels_page(&e->project->channels)*4;
+    } else if(y>=238 && y<254 && x>=38 && x<638) {
+        c=(unsigned)(x-38)/150+pt_channels_page(&e->project->channels)*4;
         if(c<e->project->channels.count)e->project->channels.selected=(uint8_t)c;
-    } else if(x>=240 && x<636 && y>=28 && y<124) {
-        r=(unsigned)(y-28)/24;c=x>=438;
-        if(r==0)pt_editor_status(e,"AUDIO BACKEND NOT CONNECTED IN THIS EDITOR BUILD");
-        if(r==1) {if(c)return PT_UI_SAVE;e->editing=!e->editing;pt_editor_status(e,e->editing?"EDIT ON":"EDIT OFF");}
-        if(r==2)undo(e,c?1:-1);
-        if(r==3)pattern_step(e,c?1:-1);
-    } else if(y>=100 && y<124 && x>=128 && x<236) {
-        if(x<182) {if(e->sample)--e->sample;}
-        else if(e->sample<e->project->sample_count)++e->sample;
-    }
+    } else if(x>=230 && x<599 && y>=2 && y<97) {
+        r=(unsigned)(y-2)/19;c=(unsigned)(x-230)/123;
+        if(r==2 && c==0) {e->editing=!e->editing;pt_editor_status(e,e->editing?"EDIT ON":"EDIT OFF");}
+        else if(r==2 && c==1)e->panel=1;
+        else if(r==3 && c==1)e->panel=2;
+        else pt_editor_status(e,"THIS CONTROL IS NOT YET CONNECTED");
+    } else if(x>=190 && x<230 && y>=2 && y<173) {
+        int direction=x<210?-1:1;r=(unsigned)(y-2)/19;
+        if(r==0) {
+            if(direction>0 && e->position+1<e->project->order_count)++e->position;
+            if(direction<0 && e->position)--e->position;
+            e->pattern=e->project->orders[e->position];
+        } else if(r==1)pattern_step(e,direction);
+        else if(r==4) {if(direction<0 && e->sample)--e->sample;if(direction>0 && e->sample<e->project->sample_count)++e->sample;}
+        else pt_editor_status(e,"SAMPLE/SONG PARAMETER EDITING NOT YET CONNECTED");
+    } else if((y>=495 && x>=416 && x<552) || (x>=599 && y<97) || (x>=590 && y>=174 && y<193))
+        pt_editor_status(e,"THIS CONTROL IS NOT YET CONNECTED");
     return PT_UI_NONE;
 }

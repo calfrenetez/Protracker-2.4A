@@ -67,6 +67,20 @@ static void blocks(struct pt_editor *e)
     pt_editor_key(e,0x31,8);assert(!memcmp(p->events,p->events+1024,1024*sizeof(saved)));
     pt_editor_key(e,0x31,8);assert(!pt_editor_dirty(e));
     for(i=1024;i<2048;++i)assert(p->events[i].kind==PT_NOTE_NONE);
+    /* New-song controls are non-destructive until the caller commits a
+       staged document. Other input cancels dirty-discard confirmation. */
+    pt_editor_key(e,0x31,9);assert(pt_editor_dirty(e));
+    pt_editor_key(e,0x36,8);assert(e->panel==3 && e->new_channels==16);
+    assert(pt_editor_key(e,0x44,0)==PT_UI_NONE && e->new_pending);
+    pt_editor_key(e,0x0b,0);assert(!e->new_pending && e->new_channels==15);
+    assert(pt_editor_key(e,0x44,0)==PT_UI_NONE && e->new_pending);
+    assert(pt_editor_key(e,0x44,0)==PT_UI_NEW && !e->new_pending);
+    assert(pt_editor_key(e,0x45,0)==PT_UI_NONE && e->panel==0 && pt_editor_dirty(e));
+    pt_editor_click(e,400,30);assert(e->panel==3);
+    for(i=0;i<20;++i)pt_editor_click(e,250,28);assert(e->new_channels==1);
+    for(i=0;i<20;++i)pt_editor_click(e,520,28);assert(e->new_channels==16);
+    assert(pt_editor_click(e,250,70)==PT_UI_NONE && e->new_pending);
+    pt_editor_click(e,520,70);assert(e->panel==0 && !e->new_pending);
     /* Native panel hit targets use the same actions, and loaded documents
        reset both the clipboard and selection. */
     assert(pt_editor_init(e,p));pt_editor_click(e,400,50);assert(e->panel==1);
@@ -160,6 +174,10 @@ int main(int argc,char **argv)
             if(step==70)pt_editor_click(e,400,50);
             if(step==74)pt_editor_click(e,250,87);
             if(step==76)pt_editor_click(e,400,87);
+            if(step==80)pt_editor_key(e,0x36,8);
+            if(step==81)pt_editor_key(e,0x0b,0);
+            if(step==82)pt_editor_key(e,0x44,0);
+            if(step==84)pt_editor_key(e,0x45,0);
             pt_editor_draw(e,&canvas,font);n=pt_editor_draw_update(e,&incremental,font,&cache,areas);assert(n<=PT_VIEW_DIRTY_MAX);
             for(j=0;j<n;++j) {
                 const struct pt_view_rect *a=&areas[j];assert(a->x+a->width<=640 && a->y+a->height<=512);

@@ -47,6 +47,7 @@ paging, undo, verified new-file saves and classic four-channel Paula playback.
 F8 plays, F9 loops the pattern and F10 stops. SAMPLE auditions a classic sample.
 LOAD/Control-O opens a MOD/project. Control-Shift-S selects a new save path.
 Starting PT24GEdit without arguments creates a blank song.
+CLEAR/Control-N creates a new song with 1-16 channels; dirty edits need confirmation.
 EDIT OP./Control-E provides mark/copy/paste/clear/transpose and whole-block undo.
 DISK OP. > SAVE MOD / Control-Shift-M exports strictly lossless classic MODs.
 Mixed AmiGUS/MIDI replay and other unfinished controls remain unavailable.

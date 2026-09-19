@@ -24,7 +24,7 @@ void pt_editor_status(struct pt_editor *e,const char *s)
 int pt_editor_init(struct pt_editor *e,struct pt_project *p)
 {
     if(!e || pt_project_validate(p,NULL)!=PT_PROJECT_OK)return 0;
-    memset(e,0,sizeof(*e));e->project=p;e->sample=p->sample_count?1:0;e->octave=1;
+    memset(e,0,sizeof(*e));e->project=p;e->sample=p->sample_count?1:0;e->octave=1;e->new_channels=p->channels.count;
     if(pt_pattern_history_init(&e->history,p,e->commands,128,e->changes,2048)!=PT_EDIT_OK)return 0;
     e->clipboard.events=e->clipboard_events;e->clipboard.capacity=1024;
     pt_editor_status(e,"READY - F8 PLAY / F9 PATTERN / F10 STOP");return 1;
@@ -116,6 +116,18 @@ static enum pt_editor_action quit(struct pt_editor *e)
     if(!pt_editor_dirty(e) || e->quit_pending)return PT_UI_QUIT;
     e->quit_pending=1;pt_editor_status(e,"UNSAVED EDITS: ESC AGAIN TO DISCARD; OTHER KEY CANCELS");return PT_UI_NONE;
 }
+static void new_panel(struct pt_editor *e)
+{
+    e->panel=3;e->new_channels=e->project->channels.count;e->new_pending=0;
+    pt_editor_status(e,"NEW SONG: CHOOSE CHANNELS; CREATE OR ENTER TO CONTINUE");
+}
+static enum pt_editor_action request_new(struct pt_editor *e)
+{
+    if(pt_editor_dirty(e) && !e->new_pending) {
+        e->new_pending=1;pt_editor_status(e,"UNSAVED EDITS: CREATE AGAIN TO DISCARD; OTHER INPUT CANCELS");return PT_UI_NONE;
+    }
+    e->new_pending=0;return PT_UI_NEW;
+}
 static enum pt_editor_action request_load(struct pt_editor *e)
 {
     e->quit_pending=0;
@@ -139,15 +151,25 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
     static const unsigned keys[24]={0x31,0x21,0x32,0x22,0x33,0x34,0x24,0x35,0x25,0x36,0x26,0x37,
         0x10,0x02,0x11,0x03,0x12,0x13,0x05,0x14,0x06,0x15,0x07,0x16};
     if(raw&0x80)return PT_UI_NONE;
+    if(e->panel==3 && raw==0x44)return request_new(e);
+    if(e->new_pending)pt_editor_status(e,"NEW SONG CANCELLED - EDITS PRESERVED");
+    e->new_pending=0;
     if((qualifier&8) && raw==0x18)return request_load(e);
     if(e->load_pending)pt_editor_status(e,"LOAD CANCELLED - EDITS PRESERVED");
     e->load_pending=0;
+    if(raw==0x45 && e->panel==3) {e->panel=0;pt_editor_status(e,"NEW SONG CANCELLED - EDITS PRESERVED");return PT_UI_NONE;}
     if(raw==0x45)return quit(e);
     e->quit_pending=0;
+    if(e->panel==3) {
+        if(raw==0x0b && e->new_channels>1)--e->new_channels;
+        if(raw==0x0c && e->new_channels<16)++e->new_channels;
+        return PT_UI_NONE;
+    }
     /* Raw Amiga qualifiers: either Shift=bits0/1, Control=bit3. */
     if(qualifier&8) {
         if(raw==0x31)undo(e,(qualifier&3)?1:-1);
         else if(raw==0x21)return (qualifier&3)?PT_UI_SAVE_AS:PT_UI_SAVE;
+        else if(raw==0x36)new_panel(e); /* Control-N */
         else if(raw==0x37 && (qualifier&3))return PT_UI_EXPORT_MOD;
         else if(raw==0x12)e->panel=e->panel==1?0:1; /* Control-E */
         else if(raw==0x35)mark(e); /* Control-B */
@@ -209,11 +231,21 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
 {
     unsigned c,r,f;
     if(x<0 || x>=640 || y<0 || y>=512)return PT_UI_NONE;
+    if(e->panel==3 && x>=230 && x<414 && y>=59 && y<97)return request_new(e);
+    if(e->new_pending)pt_editor_status(e,"NEW SONG CANCELLED - EDITS PRESERVED");
+    e->new_pending=0;
     if(x>=590 && y>=174 && y<193)return request_load(e);
     if(e->load_pending)pt_editor_status(e,"LOAD CANCELLED - EDITS PRESERVED");
     e->load_pending=0;
     if(e->panel==2 && x>=414 && x<599 && y>=21 && y<59)return quit(e);
     e->quit_pending=0;
+    if(e->panel==3) {
+        if(x>=230 && x<599 && y>=21 && y<40) {
+            if(x<353 && e->new_channels>1)--e->new_channels;
+            if(x>=476 && e->new_channels<16)++e->new_channels;
+        } else if(x>=414 && x<599 && y>=59 && y<97) {e->panel=0;pt_editor_status(e,"NEW SONG CANCELLED - EDITS PRESERVED");}
+        return PT_UI_NONE;
+    }
     if(e->panel==1 && x>=230 && x<599 && y>=2 && y<97) {
         r=(unsigned)(y-2)/19;c=(unsigned)(x-230)/123;
         if(r==1) {if(c<2)undo(e,c==0?-1:1);else mark(e);}
@@ -245,6 +277,7 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
         if(r==0 && c==0)return PT_UI_PLAY;
         else if(r==0 && c==1)return PT_UI_STOP;
         else if(r==1 && c==0)return PT_UI_PATTERN;
+        else if(r==1 && c==1)new_panel(e);
         else if(r==4 && c==0)return PT_UI_AUDITION;
         else if(r==2 && c==0) {e->editing=!e->editing;pt_editor_status(e,e->editing?"EDIT ON":"EDIT OFF");}
         else if(r==2 && c==1)e->panel=1;

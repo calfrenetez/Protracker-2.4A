@@ -57,3 +57,31 @@ enum pt_project_result pt_document_load(struct pt_document *d,const uint8_t *dat
     next.loaded=1;next.allocated_bytes=total;
     pt_document_release(d);*d=next;return PT_PROJECT_OK;
 }
+
+enum pt_project_result pt_document_new(struct pt_document *d,unsigned channels,size_t budget)
+{
+    struct pt_document next;size_t events,bytes;unsigned i;
+    if(!d || !d->allocator.allocate || !d->allocator.release || !channels || channels>PT_CHANNEL_LIMIT)return PT_PROJECT_INVALID;
+    events=(size_t)64*channels;bytes=sizeof(uint16_t)+events*sizeof(struct pt_event)+31*sizeof(struct pt_sample);
+    if(bytes>budget)return PT_PROJECT_CAPACITY;
+    pt_document_init(&next,&d->allocator);
+    next.storage.orders=d->allocator.allocate(d->allocator.context,sizeof(uint16_t));
+    if(!next.storage.orders)goto failed;
+    next.storage.events=d->allocator.allocate(d->allocator.context,events*sizeof(struct pt_event));
+    if(!next.storage.events)goto failed;
+    next.storage.samples=d->allocator.allocate(d->allocator.context,31*sizeof(struct pt_sample));
+    if(!next.storage.samples)goto failed;
+    *next.storage.orders=0;memset(next.storage.events,0,events*sizeof(struct pt_event));
+    memset(next.storage.samples,0,31*sizeof(struct pt_sample));
+    next.storage.order_capacity=1;next.storage.event_capacity=events;next.storage.sample_capacity=31;
+    next.project.orders=next.storage.orders;next.project.events=next.storage.events;next.project.samples=next.storage.samples;
+    next.project.order_count=1;next.project.pattern_count=1;next.project.sample_count=31;next.project.bpm=125;next.project.speed=6;
+    pt_channels_init(&next.project.channels);pt_channels_resize(&next.project.channels,channels);
+    for(i=0;i<31;++i) {
+        next.project.samples[i].pcm.bits=8;next.project.samples[i].pcm.channels=1;next.project.samples[i].pcm.rate=PT_CLASSIC_RATE;
+    }
+    next.loaded=1;next.allocated_bytes=bytes;
+    pt_document_release(d);*d=next;return PT_PROJECT_OK;
+failed:
+    pt_document_release(&next);return PT_PROJECT_CAPACITY;
+}

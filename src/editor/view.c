@@ -180,7 +180,14 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
     panel(c,476,495,18,17,GREY);rect(c,482,500,6,7,WHITE);label(c,font,494,495,58,17,"STOP",0);
     panel(c,552,495,86,17,GREY);small(c,font,557,499,"PATTERN",WHITE);snprintf(s,sizeof(s),"%02X",e->pattern);small(c,font,618,499,s,NAVY);
     pt_editor_draw_playback(e,c,font);
-    if(e->panel==1) {
+    if(e->panel==3) {
+        label(c,font,230,2,369,19,"NEW SONG",0);
+        label(c,font,230,21,123,19,"-",0);snprintf(s,sizeof(s),"%02u CH",e->new_channels);
+        label(c,font,353,21,123,19,s,0);label(c,font,476,21,123,19,"+",0);
+        label(c,font,230,40,369,19,"FIRST 4 PAULA; REST AMIGUS",0);
+        label(c,font,230,59,184,38,"CREATE",e->new_pending);
+        label(c,font,414,59,185,38,"CANCEL",0);
+    } else if(e->panel==1) {
         static const char *ops[3][3]={{"UNDO","REDO","MARK"},{"COPY","PASTE","CLEAR"},{"SEMI -","SEMI +","ALL"}};
         label(c,font,230,2,369,19,"EDIT OP.",0);
         for(r=0;r<3;++r)for(i=0;i<3;++i)label(c,font,230+(int)i*123,21+(int)r*19,123,19,ops[r][i],r==0 && i==2 && e->selection.active);
@@ -240,6 +247,13 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
     playback_changed=!old->valid || memcmp(&e->playback,&old->playback,sizeof(e->playback));
     if(full) {pt_editor_draw(e,c,font);areas[count++]=(struct pt_view_rect){0,0,640,512};}
     else {
+        if(e->panel==3 && old->new_channels!=e->new_channels) {
+            char count_text[16];snprintf(count_text,sizeof(count_text),"%02u CH",e->new_channels);
+            label(c,font,353,21,123,19,count_text,0);areas[count++]=(struct pt_view_rect){353,21,123,19};
+        }
+        if(e->panel==3 && old->new_pending!=e->new_pending) {
+            label(c,font,230,59,184,38,"CREATE",e->new_pending);areas[count++]=(struct pt_view_rect){230,59,184,38};
+        }
         if(strcmp(old->status,e->status) || old->dirty!=(unsigned)pt_editor_dirty(e)) {
             draw_status(e,c,font,bytes);areas[count++]=(struct pt_view_rect){2,212,636,26};
         }
@@ -264,6 +278,7 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
     }
     memcpy(&old->project,&metadata,sizeof(metadata));memcpy(&old->sample_meta,&sample,sizeof(sample));
     memcpy(&old->playback,&e->playback,sizeof(e->playback));strcpy(old->status,e->status);
+    old->new_channels=e->new_channels;old->new_pending=e->new_pending;
     old->selection=selection;
     old->valid=1;old->page=page;old->pattern=e->pattern;old->first_row=e->first_row;old->position=e->position;
     old->sample=e->sample;old->editing=e->editing;old->panel=e->panel;old->row=e->row;old->field=e->field;

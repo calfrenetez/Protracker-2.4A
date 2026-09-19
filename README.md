@@ -19,7 +19,8 @@ earlier simplified layout was rejected. Incremental redraws preserve identical
 pixels while reducing six-cursor drawing time by about 95% in the private emulator;
 native mouse controls and keyboard/file workflows pass. EDIT OP. now adds marked
 block copy/paste/clear/transpose, whole-pattern copying and atomic undo.
-SAVE MOD exports eligible projects losslessly through a native dialog; enhanced
+CLEAR / Control-N creates blank songs with 1–16 channels through a staged,
+non-destructive failure path. SAVE MOD exports eligible projects losslessly through a native dialog; enhanced
 projects are refused without dropping their data. See the
 [editor guide](docs/ENHANCED_EDITOR.md) and retained native UI evidence. Physical AmiGUS tests await the owner's Mini.
 MIDI note ownership and quantised recording into undoable pattern events now

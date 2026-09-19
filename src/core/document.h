@@ -15,6 +15,10 @@ struct pt_document {
 };
 void pt_document_init(struct pt_document *,const struct pt_allocator *);
 void pt_document_release(struct pt_document *);
+/* Create a staged empty song, 1..16 channels, one order/pattern and 31 empty
+ * classic sample slots. First four routes are Paula; extra routes are AmiGUS.
+ * Failure preserves the existing document and all of its storage. */
+enum pt_project_result pt_document_new(struct pt_document *,unsigned channels,size_t budget);
 /* Validates, budgets and allocates a separate complete candidate. Only success
  * releases the old project and swaps it in. budget is caller policy, not an
  * assumption about installed/free RAM; allocation failure is always handled. */

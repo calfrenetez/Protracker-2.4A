@@ -45,6 +45,30 @@ int main(int argc,char **argv)
     assert(pt_document_load(&doc,project,length,SIZE_MAX)==PT_PROJECT_OK && !doc.dirty && a.live==live);
     puts("ALLOC reload loop");
     for(i=0;i<200;++i)assert(pt_document_load(&doc,data,(size_t)n,SIZE_MAX)==PT_PROJECT_OK && a.live==live);
+    /* New-song allocation/budget failures leave the loaded dirty document
+       intact; all 1..16 channel counts encode/decode with empty events/samples. */
+    doc.dirty=1;before=doc;live=a.live;
+    for(i=1;i<=3;++i) {
+        a.calls=0;a.fail=i;assert(pt_document_new(&doc,16,SIZE_MAX)==PT_PROJECT_CAPACITY);
+        assert(!memcmp(&doc,&before,sizeof(doc)) && a.live==live);
+    }
+    a.calls=0;a.fail=0;
+    assert(pt_document_new(&doc,16,1)==PT_PROJECT_CAPACITY && !a.calls && !memcmp(&doc,&before,sizeof(doc)));
+    assert(pt_document_new(&doc,0,SIZE_MAX)==PT_PROJECT_INVALID && !a.calls && !memcmp(&doc,&before,sizeof(doc)));
+    assert(pt_document_new(&doc,17,SIZE_MAX)==PT_PROJECT_INVALID && !a.calls && !memcmp(&doc,&before,sizeof(doc)));
+    for(i=1;i<=16;++i) {
+        size_t j,blank_size;uint8_t *blank;
+        assert(pt_document_new(&doc,i,SIZE_MAX)==PT_PROJECT_OK && a.live==3 && !doc.dirty);
+        assert(doc.project.channels.count==i && doc.project.channels.selected==0 && doc.project.pattern_count==1 && doc.project.order_count==1);
+        assert(doc.storage.event_capacity==64*i && doc.project.sample_count==31 && !doc.project.extension_count);
+        assert(pt_project_validate(&doc.project,NULL)==PT_PROJECT_OK);
+        for(j=0;j<i;++j)assert(doc.project.channels.track[j].route==(j<4?PT_PAULA:PT_AMIGUS));
+        for(j=0;j<64*i;++j)assert(doc.project.events[j].kind==PT_NOTE_NONE && !doc.project.events[j].instrument);
+        assert(pt_project_size(&doc.project,&blank_size)==PT_PROJECT_OK);blank=malloc(blank_size);assert(blank);
+        assert(pt_project_encode(&doc.project,blank,blank_size,&w)==PT_PROJECT_OK && w==blank_size);
+        assert(pt_document_load(&doc,blank,blank_size,SIZE_MAX)==PT_PROJECT_OK && a.live==3 && doc.project.channels.count==i);
+        free(blank);
+    }
     printf("ALLOC final release live=%u\n",a.live);pt_document_release(&doc);assert(!a.live && !doc.loaded);pt_document_release(&doc);assert(!a.live);
     for(i=0;i<=5;++i) {
         struct file f;struct pt_save_ops ops={&f,begin,write_part,finish,verify,publish,abort_save};
@@ -53,6 +77,6 @@ int main(int argc,char **argv)
         else {assert(pt_safe_save(&ops,"NEW GOOD",8)==PT_SAVE_OK);assert(!memcmp(f.previous,"NEW GOOD",8) && !f.aborts);}
     }
     free(data);free(project);
-    puts("DOCUMENT/SAVE PASS: every staging allocation failure, memory budget, corrupt input, 200 reloads, partial writes and all save failure phases preserve prior state");
+    puts("DOCUMENT/SAVE PASS: every staging allocation failure, memory budget, corrupt input, 200 reloads, staged new songs for 1..16 channels, partial writes and all save failure phases preserve prior state");
     return 0;
 }

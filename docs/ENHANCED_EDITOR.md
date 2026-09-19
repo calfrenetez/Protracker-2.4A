@@ -33,6 +33,15 @@ The input may be a supported classic MOD or version 1 project. The optional outp
 path must be new. The editor and converter share the same staging/readback/new-file
 publication adapter. Existing files are refused and current edits remain dirty.
 Starting from the Shell with no arguments creates a blank four-channel song.
+CLEAR / Control-N opens NEW SONG. Choose 1–16 channels with +/- and select CREATE
+or press Return. The first four channels default to Paula and additional channels
+to AmiGUS. New songs contain one empty pattern, one order and 31 empty classic
+sample slots; sample loading/editing still needs integration. Cancel/Escape
+preserves the current song. Dirty replacement needs CREATE/Return twice; changing
+the count or any other input cancels the discard confirmation. Allocation failure
+preserves the old song, history, clipboard and playback. Successful creation stops
+old playback and resets the editor/history/clipboard after the staged song commits.
+This creates a new song; resizing an existing song remains separate work.
 LOAD / Control-O opens a native Amiga ASL requester for a MOD or project.
 Control-S opens Save New when no command-line output was supplied. DISK OP. >
 SAVE NEW or Control-Shift-S always lets you choose another new filename. A supplied

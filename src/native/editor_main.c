@@ -32,14 +32,6 @@ static int load(struct pt_document *d,const char *path)
 done:
     free(bytes);if(f)fclose(f);return ok;
 }
-static int blank(struct pt_document *d)
-{
-    uint8_t *bytes=calloc(2108,1);unsigned i;int ok;
-    if(!bytes)return 0;
-    for(i=0;i<31;++i)bytes[49+i*30]=1;
-    bytes[950]=1;bytes[951]=127;memcpy(bytes+1080,"M.K.",4);
-    ok=pt_document_load(d,bytes,2108,SIZE_MAX)==PT_PROJECT_OK;free(bytes);return ok;
-}
 static void save(struct pt_editor *e,const char *path)
 {
     size_t n,w;uint8_t *bytes;enum pt_save_result result;
@@ -93,7 +85,7 @@ int main(int argc,char **argv)
     struct BitMap bitmap;struct pt_canvas canvas;unsigned plane;uint8_t *pixels=NULL;int rc=20,running=1,redraw=1;
     memset(&bitmap,0,sizeof(bitmap));memset(&canvas,0,sizeof(canvas));pt_document_init(&doc,&allocator);
     if(argc<1 || argc>3) {puts("Usage: PT24GEdit [INPUT [NEW_OUTPUT]]\nDevelopment editor; classic Paula playback; existing output is never replaced.");goto done;}
-    if((argc>1?!load(&doc,argv[1]):!blank(&doc)) || !(editor=malloc(sizeof(*editor))) || !pt_editor_init(editor,&doc.project)) {
+    if((argc>1?!load(&doc,argv[1]):pt_document_new(&doc,4,SIZE_MAX)!=PT_PROJECT_OK) || !(editor=malloc(sizeof(*editor))) || !pt_editor_init(editor,&doc.project)) {
         puts("EDITOR: input invalid or allocation failed");goto done;
     }
     if(argc>1)snprintf(load_path,sizeof(load_path),"%s",argv[1]);
@@ -201,6 +193,14 @@ int main(int argc,char **argv)
                     if(selected==1) {strcpy(mod_path,chosen_path);save_mod(editor,mod_path,report.bytes);}
                     else pt_editor_status(editor,selected==0?"MOD EXPORT CANCELLED - PROJECT PRESERVED":"MOD REQUESTER UNAVAILABLE OR PATH TOO LONG");
                 }
+            }
+            if(action==PT_UI_NEW) {
+                unsigned channels=editor->new_channels;
+                if(pt_document_new(&doc,channels,SIZE_MAX)==PT_PROJECT_OK) {
+                    pt_paula_stop(&audio);pt_editor_init(editor,&doc.project);load_path[0]=0;
+                    pt_editor_status(editor,"NEW SONG READY - EMPTY SAMPLE SLOTS");view_cache.valid=0;
+                    printf("EDITOR NEW channels=%u patterns=%u\n",doc.project.channels.count,doc.project.pattern_count);fflush(stdout);
+                } else pt_editor_status(editor,"NEW SONG FAILED - CURRENT PROJECT AND EDITS PRESERVED");
             }
             if(action==PT_UI_LOAD) {
                 {

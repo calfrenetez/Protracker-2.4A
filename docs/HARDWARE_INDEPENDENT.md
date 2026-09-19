@@ -305,3 +305,22 @@ The resulting edited MOD was loaded in the pinned original 2.3F, displayed its
 D-2 note, played with four DMA channels, stopped with none, and resaved exactly
 byte-for-byte. Normal exit returned to Workbench. Broader effect compatibility,
 physical listening quality and hardware acceptance remain open.
+
+## Staged new songs with 1–16 channels
+
+CLEAR / Control-N opens a classic-style NEW SONG panel with a bounded channel
+selector. Counts 1–16 create one empty pattern/order and 31 empty classic sample
+slots; the first four routes default to Paula and additional routes to AmiGUS.
+The shared document core allocates a complete candidate before replacing the old
+song. Every allocation failure and budget refusal preserves the prior document.
+Dirty replacement needs a second Create/Return, with other input cancelling the
+confirmation. Successful creation stops old playback and resets the editor,
+history and clipboard. Existing-song resizing and sample-load UI remain open.
+
+Host and native document checks exercise all sixteen counts, exact round trips
+and every new-song allocation failure. Native UI checks create a 16-channel song
+while replacing a playing classic MOD, verify old DMA stops, enter/save a channel
+16 note, cancel a dirty replacement and undo/redo it, confirm creation of a
+single-channel song, and reopen/resave the 16-channel project byte-identically.
+Saved fields, empty sample slots, event dimensions, default routes and CRC are
+checked independently. Count/confirmation changes redraw only their controls.

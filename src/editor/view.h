@@ -6,10 +6,10 @@
 #define PT_VIEW_PLANE_BYTES (80UL*512)
 /* Four ordinary non-interleaved 640x512 bitplanes, 80 bytes per row. */
 struct pt_canvas {uint8_t *planes[4];};
-#define PT_VIEW_DIRTY_MAX 26
+#define PT_VIEW_DIRTY_MAX 28
 struct pt_view_rect {unsigned x,y,width,height;};
 struct pt_view_cache {
-    unsigned valid,page,pattern,first_row,position,sample,editing,panel,row,field,selected,dirty;
+    unsigned valid,page,pattern,first_row,position,sample,editing,panel,row,field,selected,dirty,new_channels,new_pending;
     size_t sample_bytes;
     struct pt_project project;
     struct pt_sample sample_meta;

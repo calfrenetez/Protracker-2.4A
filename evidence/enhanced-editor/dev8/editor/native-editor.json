@@ -1,0 +1,21 @@
+{
+  "run_id": "editor1789836671591824000",
+  "elapsed_seconds": 42.538,
+  "binary_sha256": "f9283774a815253f359b102ef18f1ea0097aa28cf1a8be494705733c07a09783",
+  "saved_sha256": "ce4ea9a970c8f45869de1aafc4e57498db57b002835418b3401acb0efa160c9c",
+  "native_edit_exact_expected_bytes": true,
+  "existing_destination_preserved": true,
+  "reopen_save_byte_identity": true,
+  "normal_exit_twice": true,
+  "layout_fixture_captured": true,
+  "logs": {
+    "editor.log": "EDITOR READY channels=16 patterns=2 bitmap_bytes=163840 history_bytes=76362\nEDITOR FRAME row=0 channel=15 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=1 channel=0 revision=1 dirty=0 status=PROJECT SAVED AND VERIFIED panel=0\nEDITOR FRAME row=1 channel=0 revision=0 dirty=1 status=UNDO panel=0\nEDITOR FRAME row=1 channel=0 revision=1 dirty=0 status=REDO panel=0\nEDITOR FRAME row=1 channel=12 revision=1 dirty=0 status=REDO panel=0\nEDITOR FRAME row=2 channel=15 revision=2 dirty=1 status=PATTERN EDITED panel=0\nEDITOR SAVE result=6 dirty=1\nEDITOR FRAME row=2 channel=15 revision=2 dirty=1 status=SAVE REFUSED: DESTINATION EXISTS OR CANNOT BE PUBLISHED panel=0\nEDITOR FRAME row=2 channel=15 revision=2 dirty=1 status=UNSAVED EDITS: ESC AGAIN TO DISCARD; OTHER KEY CANCELS panel=0\nEDITOR EXIT clean\n",
+    "reopened.log": "EDITOR READY channels=16 patterns=2 bitmap_bytes=163840 history_bytes=76362\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PROJECT SAVED AND VERIFIED panel=0\nEDITOR EXIT clean\n"
+  },
+  "environment": {
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

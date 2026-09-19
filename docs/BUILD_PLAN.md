@@ -1,8 +1,9 @@
 # Build preparation and acceptance plan
 
-This plan organises the updated supplied scope. All implementation gates below
-are pending. The handover-processing task establishes documentation and provenance
-only. Product naming is tracked in [HANDOVER_REVIEW.md](HANDOVER_REVIEW.md).
+This plan organises the updated supplied scope. The reproducible baseline build
+and initial emulator smoke checks are complete; the broader compatibility and
+hardware gates remain pending. See [BASELINE_BUILD.md](BASELINE_BUILD.md) for
+current evidence. Product naming is tracked in [HANDOVER_REVIEW.md](HANDOVER_REVIEW.md).
 
 ## First build milestone
 

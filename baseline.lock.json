@@ -1,0 +1,232 @@
+{
+  "upstream_url": "https://github.com/8bitbubsy/pt23f",
+  "upstream_commit": "4e9df4ada0e55869477e1e45d00227719010e0ea",
+  "source_last_changed_commit": "3cbdf515318a097c050588c25b58a02b08fa74cd",
+  "assembler_source_url": "https://github.com/AmigaPorts/vasm",
+  "assembler_source_commit": "291f6f08226c8843711e1319864526e6cd57ce06",
+  "assembler_flags": [
+    "-devpac",
+    "-m68020",
+    "-no-fpu",
+    "-Fhunkexe",
+    "-kick1hunks",
+    "-hunkpad=0",
+    "-nosym"
+  ],
+  "expected_binary_sha256": "df8d615f3c38c79240a8c736c29b4ab1a53ffb18406c6814adf470e764b31a08",
+  "files": [
+    {
+      "path": ".editorconfig",
+      "sha256": "614fe6e481d2d1f69e82c334b9ecdb5908296d353962d4abade7b6775de968e2"
+    },
+    {
+      "path": ".gitattributes",
+      "sha256": "c4042030258da4470484957074751237678aad9eec3f42363218ffc54fbb8831"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "2ab4a93576ea590777d89788db17056306b4cf5e04723624c57795ed25494993"
+    },
+    {
+      "path": "PT2.3F.s",
+      "sha256": "f59eafc00bc79d1e3730d99f8e9a7d45483e0ab7d6ae94a749e703c69bf680ca"
+    },
+    {
+      "path": "README.md",
+      "sha256": "254ee53ad19840b576832a2296e0828b7976e2d175906c8b13117ce6ec1cbb0e"
+    },
+    {
+      "path": "bin/dotinfo.bin",
+      "sha256": "261f571047d92be5f78823b88ba3bde8fdc3a8c6d1bef819cbaa49de31ecf504"
+    },
+    {
+      "path": "bin/exereplay.bin",
+      "sha256": "24d45282249b278bd9488cb860ce7d68cb1ec7dabc9a9f935df31c3468221a05"
+    },
+    {
+      "path": "bin/reloc32hunk.bin",
+      "sha256": "87b2e9f1ab2588e890f42a362c438f2612e857de97148ed8e2702234b545ee61"
+    },
+    {
+      "path": "docs/HOW_TO_EDIT_GFX.txt",
+      "sha256": "3487b61da33655fe71837eb698ed864adcaafd89f7a3f6af517b944a615a9589"
+    },
+    {
+      "path": "docs/undocumented_pt_features.txt",
+      "sha256": "0de117f998db5b0634982c7cf9032751850c38fc99b6c37fc5a4f997b3f8643f"
+    },
+    {
+      "path": "pak/ptaboutbox.pak",
+      "sha256": "c5e1b754d786fb92399e07490a4bd3f7656621e0661b75cc21349b0ae4848d1d"
+    },
+    {
+      "path": "pak/ptedit1.pak",
+      "sha256": "95a2343d9a805f1f9ca50dbd99f39ab9767eddf192b215f053411845c19acdda"
+    },
+    {
+      "path": "pak/ptedit2.pak",
+      "sha256": "55fa9b0de5912a47ed1ae48f68015e66386cd666adc58eb6c928a09918297b78"
+    },
+    {
+      "path": "pak/ptedit3.pak",
+      "sha256": "f4002c139e3fc44e73b948e6f38543e125e730020a0ab4a2d39561b7b090897a"
+    },
+    {
+      "path": "pak/ptedit4.pak",
+      "sha256": "013e9a5d73ece35309d1fa362ebe0bc498ea3cf8c95000400996a6b94bf7bb76"
+    },
+    {
+      "path": "pak/ptfilereq.pak",
+      "sha256": "a0f7b35eba96dfa8a132613443dee10593d18ab4967f103d440e78ebe4e42c2c"
+    },
+    {
+      "path": "pak/ptfilereq2.pak",
+      "sha256": "07464db0fcea761cb5055876c3ce44f18d08498eb31e7ae7ecf852d7b0c4c166"
+    },
+    {
+      "path": "pak/pthelpscreen.pak",
+      "sha256": "65f4b8210a7abf85c59ed8a5c2ff03b981c08249c46d6d2826ac39c40e10bc7f"
+    },
+    {
+      "path": "pak/ptmonitor.pak",
+      "sha256": "8bc5b240db04fcfa14f3af5f916e754090a2fdf33bc520a24a6bb47f5a6c70d3"
+    },
+    {
+      "path": "pak/ptplst.pak",
+      "sha256": "16b852b3c89c9a5ddabd0764a03ecafb76315dcf0cf5f687ffa4059e0c55be4c"
+    },
+    {
+      "path": "pak/ptposed.pak",
+      "sha256": "29d1a4efc60aede5586d9187d68343905b0f751f1f67ed18bb852f209d80fbcb"
+    },
+    {
+      "path": "pak/ptpreseted.pak",
+      "sha256": "fb7cadcc9f7e26ca49d5ecbf1c3af2c715fb2fc04e9bfe921ff37346dec9ac33"
+    },
+    {
+      "path": "pak/ptsampler.pak",
+      "sha256": "1f397c7d4cfa8c6b068cd39b296bac0caf6a6550e2535ce89060ee48f3a49c26"
+    },
+    {
+      "path": "pak/ptscope.pak",
+      "sha256": "b7d30019107db6fd478c6af2340e1a25ddca58280ae5270ffbad43a3091eff0c"
+    },
+    {
+      "path": "pak/ptsetup.pak",
+      "sha256": "139980e064dc093b9bfa5f5e3a0a163fa7087c5ac800faf12dee3e48e2825b69"
+    },
+    {
+      "path": "pak/ptsetup2.pak",
+      "sha256": "7c49a60042c5f1bf0980343401cda48bb9d89f69f84b8419c01f659e0815f595"
+    },
+    {
+      "path": "pak/ptspectrumana.pak",
+      "sha256": "d91c4fc101935253c3e107a38a54e8fa68397dcb13ed81e9b2ff9237480e12e2"
+    },
+    {
+      "path": "pak/win32 tools/ptpack.c",
+      "sha256": "a161651b21884c081e186b4d3cbd6c3b778c5f47c3f83767ae213d63bdc8df87"
+    },
+    {
+      "path": "pak/win32 tools/ptpack.exe",
+      "sha256": "d5078367d8c2f25d123e37ef13141bc85fe6fa6ce6f4cb3c331911e7fcd80161"
+    },
+    {
+      "path": "pak/win32 tools/ptunpack.c",
+      "sha256": "0fe1cad74efbcff927948b55cd6c53930c97cd8e314739779441ce375a826c15"
+    },
+    {
+      "path": "pak/win32 tools/ptunpack.exe",
+      "sha256": "bfa13b570dca97aa9aba0a218bb3c079f26ddcd0f68408274f73d60b208bb181"
+    },
+    {
+      "path": "pak/win32 tools/readme.txt",
+      "sha256": "c4cf0e79fd28de13ec8de6f980f24159982996f055372c1674aa3a2c8e565bed"
+    },
+    {
+      "path": "raw/ptclearbox.raw",
+      "sha256": "d88021bb0b89677f6444161a6457c518c8d26c851c619c8944e51f4bce2fc8f9"
+    },
+    {
+      "path": "raw/ptcrunchbox.raw",
+      "sha256": "550dc1cae490a6948a592a0fff3a727096d32ab8081343e7ffdc7d95def0fb44"
+    },
+    {
+      "path": "raw/ptfont.raw",
+      "sha256": "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091"
+    },
+    {
+      "path": "raw/ptformatbox.raw",
+      "sha256": "c50bb5f327abf3bb8e4a4615fe2f61a99eae9ef2ab3c1e01b48340dff6c3de2e"
+    },
+    {
+      "path": "raw/ptletters.raw",
+      "sha256": "eee6b4048cbf97cf8a47e4102f40dc517d4bb9f9cb2787e63425dda56d0a028f"
+    },
+    {
+      "path": "raw/ptmainscreen.raw",
+      "sha256": "f5b41d2610fc115e6fcf37d047bfe59c4e00fa9fa53c6960dbf6e152b2a7c938"
+    },
+    {
+      "path": "raw/ptsetup2toggles.raw",
+      "sha256": "65943ed000ba225f302dc6e0b514b9f27171c02a123c93d589a67298a89fa7d9"
+    },
+    {
+      "path": "raw/ptsurebox.raw",
+      "sha256": "cbf75fdbc301706d18d95e06a73c0f70b51dfa0ad1c93840325103337542313d"
+    },
+    {
+      "path": "raw/pttoggleoff.raw",
+      "sha256": "111db9de0f9de69656171061bf3bc4fd3da4d595e18f9623a70b27c7b8995473"
+    },
+    {
+      "path": "raw/pttoggleon.raw",
+      "sha256": "ad5edbdcafedd634b2cbd9223f9beda89c308bff66c29d2717554c456a150a24"
+    },
+    {
+      "path": "raw/pttrknamebox.raw",
+      "sha256": "9da93af367ff6404ddf855a0e47e37b761f58c0141eb4248b5e9192aa07a27aa"
+    },
+    {
+      "path": "raw/ptvolbox.raw",
+      "sha256": "1df71a23de6815bb541f0b24a798516066aed126632bb7e31f092aa28590e860"
+    },
+    {
+      "path": "release/PT23F.info",
+      "sha256": "442ea6026a1a394e1fd90aa33bfbd27dadf2c5a5868ecbdc4de66e824c9b92bb"
+    },
+    {
+      "path": "release/PT23F/PT.HELP",
+      "sha256": "4b4d9d4ab4c021bdc2766c942fb222529119dd49659d900fd8a2b61a32572a26"
+    },
+    {
+      "path": "release/PT23F/PT2.3F.info",
+      "sha256": "04b6a7c71cab4a87206b74c3d07303b5febcf8c77e8d4a62df8ee66db2613791"
+    },
+    {
+      "path": "release/PT23F/ReadMe.txt",
+      "sha256": "e0f7910b047dc6ace25fc30dfcc4f5fa4322b631bad117b5e08a1506b8538f76"
+    },
+    {
+      "path": "release/PT23F/ReadMe.txt.info",
+      "sha256": "d010610e302a41df687b39cd7126ff527399a8c85c3cc25cfada0555e019dc16"
+    },
+    {
+      "path": "replayer/PT2.3F_replay_cia.s",
+      "sha256": "b5dba561016ae6939f35dbf3147f9671c09fc6d515d5a834215c7355f95e365c"
+    },
+    {
+      "path": "replayer/PT2.3F_replay_vblank.s",
+      "sha256": "c3b02b50ef7994989374cedc35a7549c2c61ee992a547e0bf7bd4c89fc1a8ccd"
+    }
+  ],
+  "immediate_spelling_counts": {
+    "AND": 195,
+    "CMP": 968,
+    "ADD": 103,
+    "SUB": 43,
+    "OR": 9
+  },
+  "official_release_url": "https://16-bits.org/PT23F.LHA",
+  "official_executable_sha256": "6b77d26b886c988af9816ed1710bab397848490cf7ec1f9085956fe103b2eb2e"
+}

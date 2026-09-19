@@ -1,0 +1,12 @@
+[
+  {
+    "archive": "PT23F-upstream.LHA",
+    "bytes": 121971,
+    "sha256": "c341adc8318cd19a295bae21ffa597f22ff7a9559369604669c80eabea23d5d0"
+  },
+  {
+    "archive": "PT2.3FC.lha",
+    "bytes": 221778,
+    "sha256": "33c1b14d59cd99f2b5b9a43474a2410c8093415d588577f02414373faa2f00ad"
+  }
+]

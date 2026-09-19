@@ -1,0 +1,11 @@
+# ProTracker 2.3F
+Continuation of the ProTracker 2 series for Amiga 68k, based on a disassembly and re-source of ProTracker 2.3D. \
+Download: https://16-bits.org/PT23F.LHA \
+Bootable ADF: https://16-bits.org/PT23F.ADF \
+\
+Some new changes worthy of a mention:
+1) It has been bugfixed to play modules correctly on fast Amigas
+2) It has been modified to fully support 128kB samples (the >64kB (>$FFFE) limits/bugs are gone, both in the player and GUI)
+3) A ton of other bugs have been fixed
+
+The asm syntax is AsmOne/AsmPro, and it may not be compatible with other assemblers.

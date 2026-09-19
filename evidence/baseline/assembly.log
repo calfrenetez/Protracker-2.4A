@@ -1,0 +1,10 @@
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+ptrunback(acrx2):	         182 bytes
+ptcode(acrx4):	      156248 bytes
+ptdata(adrw4):	       24728 bytes
+ptbssc(aurw4):	       27400 bytes
+ptbss(aurw4):	       12574 bytes

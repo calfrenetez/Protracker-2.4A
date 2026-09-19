@@ -1,0 +1,42 @@
+{
+  "date": "2026-09-19",
+  "scope": "initial baseline, not full compatibility release gate",
+  "binary_sha256": "df8d615f3c38c79240a8c736c29b4ab1a53ffb18406c6814adf470e764b31a08",
+  "checks": {
+    "source_integrity": "PASS",
+    "fresh_toolchain_build": "PASS",
+    "repeat_binary_hash": "PASS",
+    "official_loaded_bytes_and_relocations": "PASS",
+    "host_tool_tests": "PASS (7 tests)",
+    "emulator_launch": "PASS",
+    "synthetic_mod_load": "PASS",
+    "four_paula_channels_playing": "PASS (emulator registers/scopes/row progression; no listening-quality claim)",
+    "metadata_edit_save": "PASS",
+    "saved_bytes_after_title_identical": "PASS",
+    "saved_mod_reopen_play": "PASS",
+    "normal_exit": "PASS (Workbench observed)",
+    "cold_relaunch": "PASS (fresh tracker screen observed)",
+    "pattern_and_sample_edit_regression": "NOT RUN",
+    "full_effect_timing_and_fuzz_corpus": "NOT RUN",
+    "physical_amiconnect_health": "PASS (read-only status=ok)",
+    "physical_upload_execute_result_loop": "NOT RUN (no dedicated tracker/diagnostic profile in inspected implementation)",
+    "amigus_card_and_audio_tests": "NOT RUN",
+    "68000_runtime": "NOT RUN"
+  },
+  "fixture_input_sha256": "813ccf02b367047a72ae5bfacf33593acd7879bc43e151de02a8deeb217325bf",
+  "fixture_output_sha256": "7505af32125eb6de3b0ba824807535d68a99122929d33073ee37f180ea54eccd",
+  "input_fixture_unchanged": true,
+  "evidence_files": {
+    "assembly.log": "572403993cfe17863f42419560b6682ec41a0de5599361622de6a5b8a81786d3",
+    "playing.png": "11014dc7a44e49dd6d82766d3b427d0f9e371459a374c34bf3b54da945cd6303",
+    "reloaded.png": "dfc10746c7c2498ae19d936a5bfbd66bef35c3ac667853645c95d40d183cdfa2",
+    "relaunched.png": "2fe8666767a0ead591ee59b2804bd797e36e625987a016483b027bbf4b0ab811",
+    "emulator-profile.json": "d921cec9b24a7c3db3120b4e7d0d653696bf439005791de79f8af99dc6e9f759",
+    "mod.baseline": "813ccf02b367047a72ae5bfacf33593acd7879bc43e151de02a8deeb217325bf",
+    "downloads.json": "08899ddc71bb99875c1f0165a4905ba1eb592347de73a02c6e2c89ed0eb7296e",
+    "host-tests.log": "7b2293f777d0adec5d9ef882de0d30a2494664806c518e6f905b1e52a75637d3",
+    "upstream-comparison.json": "1e3501fbdc2129c2a4ca5626b2a11cbe906b001acafa1e0b3ca99cb0d4f5b947",
+    "mod.edited": "7505af32125eb6de3b0ba824807535d68a99122929d33073ee37f180ea54eccd",
+    "build.json": "718c339edd6b9ecfb187be610fd006a75eb8ae34a0c1a6ff1066ee393a312ead"
+  }
+}

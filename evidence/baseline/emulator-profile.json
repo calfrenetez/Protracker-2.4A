@@ -1,0 +1,8 @@
+{
+  "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+  "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+  "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+  "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB",
+  "GET_CHIPSET": "OK\t7\tAGA",
+  "GET_AUDIO_STATE": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=333\tsndbuf_status=0"
+}

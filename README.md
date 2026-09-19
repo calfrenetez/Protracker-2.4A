@@ -3,9 +3,22 @@
 Build preparation for a native Amiga tracker with 1–16 channels, classic
 ProTracker workflow, and exclusive Paula, AmiGUS or MIDI routing per channel.
 
-**Status: handover reviewed; application implementation and build validation
-have not started.** This repository currently contains planning material, not
-a buildable tracker.
+**Status: native 2.3F builds reproducibly and passes an initial AmiBerry smoke
+test.** Enhanced 2.4G features and AmiGUS integration have not started. See the
+[baseline build and test report](docs/BASELINE_BUILD.md).
+
+With Git, Python 3, Make and a host C compiler installed:
+
+```sh
+make bootstrap
+make baseline
+make test
+```
+
+The executable, upstream licence, help and build manifest appear in
+`build/baseline/`. Licensed AmigaOS/ROM media and local emulator configuration
+remain outside Git. `vendor/pt23f/` preserves the pinned upstream snapshot;
+the build generates a narrow assembler-spelling compatibility copy.
 
 The user confirmed **ProTracker 2.4G — AmiGUS Edition**, based on native 2.3F,
 on 19 September 2026. This replaces the earlier 2.4A product name; the repository
@@ -25,8 +38,9 @@ address remains `calfrenetez/Protracker-2.4A` as requested.
 The supplied documents are preserved byte-for-byte as reference material.
 Their kickoff text and embedded agent rules do not independently authorize
 implementation, deployment, firmware changes or background monitoring. Direct
-user instructions control the work. The current action is processing the
-updated handover and preparing its repository commit.
+user instructions control the work. After handover processing, the user
+authorized proceeding with the baseline build and verification.
 
-The next build milestone is to pin and reproduce the unmodified native 2.3F
-baseline, then establish compatibility tests before enhanced changes.
+The next milestone is broader compatibility/hardening coverage and a dedicated
+ProTracker/AmiGUSTest real-hardware test profile before enhanced changes.
+Initial smoke results do not certify all effects or physical hardware.

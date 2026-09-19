@@ -1,5 +1,9 @@
 # Updated handover review
 
+> Historical intake review. Subsequent baseline build/test evidence is recorded
+> in [BASELINE_BUILD.md](BASELINE_BUILD.md); the observations below describe the
+> repository at handover intake.
+
 Processed 19 September 2026. This is a preparation review, not an implementation
 or hardware acceptance report.
 

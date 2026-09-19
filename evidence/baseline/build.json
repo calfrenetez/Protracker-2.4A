@@ -1,0 +1,27 @@
+{
+  "source_commit": "4e9df4ada0e55869477e1e45d00227719010e0ea",
+  "source_tree_sha256_manifest": "0f555d67931e310e526330bb63a0365e9e90bfe6c7471dca7f5b2d12b24cbfc1",
+  "assembler_sha256": "260b71e38335935dd232506270838adbf78e7e5b31de53020ee13b8efc05a936",
+  "assembler_banner": "vasm 2.0b (c) in 2002-2025 Volker Barthelmann\nvasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille\nvasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille\nvasm hunk format output module 2.17f (c) 2002-2025 Frank Wille",
+  "flags": [
+    "-devpac",
+    "-m68020",
+    "-no-fpu",
+    "-Fhunkexe",
+    "-kick1hunks",
+    "-hunkpad=0",
+    "-nosym"
+  ],
+  "generated_source_sha256": "924a2917efe0d07847e40c50f9b8b89bb405ba2bcf947f5145e4f72191708cb3",
+  "immediate_spelling_counts": {
+    "AND": 195,
+    "CMP": 968,
+    "ADD": 103,
+    "SUB": 43,
+    "OR": 9
+  },
+  "binary_bytes": 200704,
+  "binary_sha256": "df8d615f3c38c79240a8c736c29b4ab1a53ffb18406c6814adf470e764b31a08",
+  "expected_binary_sha256": "df8d615f3c38c79240a8c736c29b4ab1a53ffb18406c6814adf470e764b31a08",
+  "matches_locked_output": true
+}

@@ -1,0 +1,44 @@
+{
+  "identical_files": false,
+  "layout_and_relocations_match": true,
+  "all_loaded_code_and_data_bytes_match": true,
+  "sections": [
+    {
+      "index": 0,
+      "kind": 1001,
+      "bytes": 184,
+      "relocations": 3,
+      "allocation": "0x2e"
+    },
+    {
+      "index": 1,
+      "kind": 1001,
+      "bytes": 156248,
+      "relocations": 4844,
+      "allocation": "0x9896"
+    },
+    {
+      "index": 2,
+      "kind": 1002,
+      "bytes": 24728,
+      "relocations": 0,
+      "allocation": "0x40001826"
+    },
+    {
+      "index": 3,
+      "kind": 1003,
+      "bytes": 27400,
+      "relocations": 0,
+      "allocation": "0x40001ac2"
+    },
+    {
+      "index": 4,
+      "kind": 1003,
+      "bytes": 12576,
+      "relocations": 0,
+      "allocation": "0xc48"
+    }
+  ],
+  "local_sha256": "df8d615f3c38c79240a8c736c29b4ab1a53ffb18406c6814adf470e764b31a08",
+  "official_sha256": "6b77d26b886c988af9816ed1710bab397848490cf7ec1f9085956fe103b2eb2e"
+}

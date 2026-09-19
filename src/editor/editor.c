@@ -260,20 +260,20 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
         else if(y>=21) {if(e->panel==2)return PT_UI_SAVE_AS;undo(e,x<414?-1:1);}
         return PT_UI_NONE;
     }
-    if(y>=495 && x>=4 && x<248) {c=(unsigned)(x-4)/61*4;if(c<e->project->channels.count)e->project->channels.selected=(uint8_t)c;}
-    else if(y>=254 && y<494 && x>=38 && x<638) {
+    if(y>=PT_EDITOR_BOTTOM_Y && x>=4 && x<248) {c=(unsigned)(x-4)/61*4;if(c<e->project->channels.count)e->project->channels.selected=(uint8_t)c;}
+    else if(y>=PT_EDITOR_PATTERN_Y && y<PT_EDITOR_PATTERN_Y+240 && x>=38 && x<638) {
         c=(unsigned)(x-38)/150+pt_channels_page(&e->project->channels)*4;
-        r=(unsigned)(y-254)/12+e->first_row;
+        r=(unsigned)(y-PT_EDITOR_PATTERN_Y)/12+e->first_row;
         if(c<e->project->channels.count && r<64) {
             e->project->channels.selected=(uint8_t)c;e->row=r;
             f=(unsigned)(x-38)%150;
-            e->field=f<60?0:f<76?1:f<94?2:f<112?3:f<124?4:5;
+            e->field=f<60?0:f<78?1:f<98?2:f<114?3:f<128?4:5;
         }
-    } else if(y>=238 && y<254 && x>=38 && x<638) {
+    } else if(y>=PT_EDITOR_HEADER_Y && y<PT_EDITOR_PATTERN_Y && x>=38 && x<638) {
         c=(unsigned)(x-38)/150+pt_channels_page(&e->project->channels)*4;
         if(c<e->project->channels.count)e->project->channels.selected=(uint8_t)c;
-    } else if(x>=230 && x<599 && y>=2 && y<97) {
-        r=(unsigned)(y-2)/19;c=(unsigned)(x-230)/123;
+    } else if(x>=230 && x<599 && y>=2 && y<92) {
+        r=(unsigned)(y-2)/18;c=(unsigned)(x-230)/123;
         if(r==0 && c==0)return PT_UI_PLAY;
         else if(r==0 && c==1)return PT_UI_STOP;
         else if(r==1 && c==0)return PT_UI_PATTERN;
@@ -292,9 +292,9 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
         } else if(r==1)pattern_step(e,direction);
         else if(r==4) {if(direction<0 && e->sample)--e->sample;if(direction>0 && e->sample<e->project->sample_count)++e->sample;}
         else pt_editor_status(e,"SAMPLE/SONG PARAMETER EDITING NOT YET CONNECTED");
-    } else if(y>=495 && x>=416 && x<476)return PT_UI_PLAY;
-    else if(y>=495 && x>=476 && x<552)return PT_UI_STOP;
-    else if((y>=495 && x>=416 && x<552) || (x>=599 && y<97) || (x>=590 && y>=174 && y<193))
+    } else if(y>=PT_EDITOR_BOTTOM_Y && x>=416 && x<476)return PT_UI_PLAY;
+    else if(y>=PT_EDITOR_BOTTOM_Y && x>=476 && x<552)return PT_UI_STOP;
+    else if((y>=PT_EDITOR_BOTTOM_Y && x>=416 && x<552) || (x>=599 && y<97) || (x>=590 && y>=174 && y<193))
         pt_editor_status(e,"THIS CONTROL IS NOT YET CONNECTED");
     return PT_UI_NONE;
 }

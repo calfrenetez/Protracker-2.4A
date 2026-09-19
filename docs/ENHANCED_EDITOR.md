@@ -161,3 +161,22 @@ The inherited control labels do not imply completed rendering, sampler, live
 recording or replay features. Unconnected actions report their status. Native
 keyboard editing, transactional new-file saves and history retain their working
 paths. Mouse hit regions now match the revised layout and secondary panels.
+
+### Second reference refinement, 19 September 2026
+
+The owner described the restored layout as nearly there and supplied the same
+reference again. This pass adjusts the actual renderer: shorter main command
+rows make room for deeper scopes; the pattern begins four pixels higher and the
+bottom controls are taller. Shared layout constants keep the relocated pattern,
+channel headers and bottom mouse targets aligned. The original bitmap glyphs
+remain, with separate spacing for command labels, numeric fields and pattern
+notes/digits. Grey panels are darker, blue notes brighter, and raised edges and
+vertical channel dividers are more pronounced. Song/sample labels and the status,
+tempo and tune fields follow the reference spacing. The ready status displays
+`ALL RIGHT`; detailed action/error messages still use the available two lines.
+
+This is a visual refinement, not a claim of identical photo pixels or owner
+acceptance. The 2.4G title, route letters, actual project contents and actual tempo
+remain. Scope traces continue to reflect playback and stay flat when stopped.
+The test fixture is unchanged musical data, not a recreation of the pictured
+song. Hardware acceptance remains separate and has not been run.

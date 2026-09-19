@@ -2,7 +2,7 @@
 #include <string.h>
 #include "view.h"
 enum {BLACK,GREY,WHITE,DARK,BLUE,YELLOW,NAVY,MID};
-const uint16_t pt_view_palette[16]={0x000,0x888,0xddd,0x444,0x49d,0xff5,0x013,0xaaa,0x222,0xbbb,0x666,0x999,0x555,0x777,0xccc,0xfff};
+const uint16_t pt_view_palette[16]={0x000,0x777,0xddd,0x444,0x5ae,0xff5,0x014,0xaaa,0x222,0xbbb,0x666,0x999,0x555,0x777,0xccc,0xfff};
 static void rect(struct pt_canvas *c,int x,int y,int w,int h,unsigned pen)
 {
     int row,first,last;unsigned p;uint8_t left,right;
@@ -67,21 +67,31 @@ static void letters(struct pt_canvas *c,const uint8_t *font,int x,int y,const ch
         for(row=0;row<5;++row)glyph_row(c,x,y+(int)row*2,font[(ch-32)*8+row],pen,scale);
     }
 }
+/* Keep the pinned glyph shapes, with spacing matched to each classic field. */
+static void spaced(struct pt_canvas *c,const uint8_t *font,int x,int y,const char *s,unsigned pen,int advance)
+{
+    unsigned ch,row;
+    for(;*s && x<640;++s,x+=advance) {
+        ch=(unsigned char)*s;if(ch>='a' && ch<='z')ch-=32;if(ch<32 || ch>95)ch='?';
+        for(row=0;row<5;++row)glyph_row(c,x,y+(int)row*2,font[(ch-32)*8+row],pen,3);
+    }
+}
 static void small(struct pt_canvas *c,const uint8_t *font,int x,int y,const char *s,unsigned pen)
 {letters(c,font,x,y,s,pen,1);}
 static void panel(struct pt_canvas *c,int x,int y,int w,int h,unsigned pen)
 {
     rect(c,x,y,w,h,pen);rect(c,x,y,w,1,WHITE);rect(c,x,y,1,h,WHITE);
     rect(c,x,y+h-1,w,1,DARK);rect(c,x+w-1,y,1,h,DARK);
+    if(w>4 && h>4) {rect(c,x+1,y+1,w-2,1,MID);rect(c,x+1,y+1,1,h-2,MID);}
 }
 static void medium(struct pt_canvas *c,const uint8_t *font,int x,int y,const char *s,unsigned pen)
 {letters(c,font,x,y,s,pen,3);}
 static void label(struct pt_canvas *c,const uint8_t *font,int x,int y,int w,int h,const char *s,unsigned active)
 {
-    int tx=x+(w-(int)strlen(s)*12)/2;
+    int tx=x+(w-(int)strlen(s)*10)/2;
     panel(c,x,y,w,h,active?YELLOW:GREY);
-    if(!active)medium(c,font,tx+1,y+(h-10)/2+1,s,DARK);
-    medium(c,font,tx,y+(h-10)/2,s,active?BLACK:WHITE);
+    if(!active)spaced(c,font,tx+1,y+(h-10)/2+1,s,DARK,10);
+    spaced(c,font,tx,y+(h-10)/2,s,active?BLACK:WHITE,10);
 }
 static void arrow(struct pt_canvas *c,int x,int y,int up)
 {
@@ -92,20 +102,25 @@ static void arrow(struct pt_canvas *c,int x,int y,int up)
 static void draw_status(const struct pt_editor *e,struct pt_canvas *c,const uint8_t *font,size_t bytes)
 {
     const struct pt_project *p=e->project;char s[80];
-    panel(c,2,212,636,26,GREY);panel(c,14,216,42,18,MID);snprintf(s,sizeof(s),"%02u",e->playback.active?e->playback.speed:p->speed);medium(c,font,22,220,s,NAVY);
-    snprintf(s,sizeof(s),"%03u",e->playback.active?e->playback.bpm:p->bpm);small(c,font,70,216,s,NAVY);small(c,font,66,227,"TEMPO",WHITE);
-    small(c,font,106,216,"STATUS:",WHITE);snprintf(s,sizeof(s),"%.45s",e->status);small(c,font,162,216,s,NAVY);
-    if(strlen(e->status)>45)small(c,font,106,227,e->status+45,NAVY);
-    small(c,font,528,216,"TUNE",WHITE);snprintf(s,sizeof(s),"%06lu",(unsigned long)bytes);small(c,font,586,216,s,NAVY);
-    small(c,font,528,227,"TIMING",WHITE);small(c,font,610,227,e->playback.active?"CIA":"---",NAVY);
-    if(pt_editor_dirty(e))small(c,font,512,216,"*",YELLOW);
+    const char *status=strncmp(e->status,"READY -",7)?e->status:"ALL RIGHT";
+    panel(c,2,211,636,23,GREY);panel(c,14,214,46,17,MID);
+    snprintf(s,sizeof(s),"%02u",e->playback.active?e->playback.speed:p->speed);spaced(c,font,22,218,s,NAVY,14);
+    panel(c,76,211,42,13,GREY);snprintf(s,sizeof(s),"%03u",e->playback.active?e->playback.bpm:p->bpm);spaced(c,font,79,213,s,NAVY,10);
+    spaced(c,font,73,224,"TEMPO",WHITE,10);
+    small(c,font,130,strlen(status)>30?213:218,"STATUS:",WHITE);
+    snprintf(s,sizeof(s),"%.30s",status);spaced(c,font,190,strlen(status)>30?213:218,s,NAVY,10);
+    if(strlen(status)>30) {snprintf(s,sizeof(s),"%.45s",status+30);small(c,font,126,223,s,NAVY);}
+    spaced(c,font,498,213,"TUNE",WHITE,10);snprintf(s,sizeof(s),"%06lu",(unsigned long)bytes);
+    if(strlen(s)>6)small(c,font,636-(int)strlen(s)*8,213,s,NAVY);else spaced(c,font,568,213,s,NAVY,10);
+    spaced(c,font,498,223,"TIMING",WHITE,10);spaced(c,font,598,223,e->playback.active?"CIA":"---",NAVY,10);
+    if(pt_editor_dirty(e))small(c,font,120,213,"*",YELLOW);
 }
 static void draw_pattern_row(const struct pt_editor *e,struct pt_canvas *c,const uint8_t *font,unsigned r)
 {
     const struct pt_project *p=e->project;unsigned i,ch,first=pt_channels_page(&p->channels)*4,row=r+e->first_row;
-    int x,y=254+(int)r*12;char s[16],note[4];struct pt_editor_selection selection;
+    int x,y=PT_EDITOR_PATTERN_Y+(int)r*12;char s[16],note[4];struct pt_editor_selection selection;
     int selected=pt_editor_selection(e,&selection);
-    static const int field_x[6]={6,64,76,100,112,124};
+    static const int field_x[6]={10,64,78,100,114,128};
     if(r>=PT_EDITOR_ROWS)return;
     rect(c,3,y,33,12,BLACK);
     if(row<64) {snprintf(s,sizeof(s),"%02u",row);medium(c,font,8,y+1,s,WHITE);}
@@ -115,11 +130,11 @@ static void draw_pattern_row(const struct pt_editor *e,struct pt_canvas *c,const
             const struct pt_event *event=&p->events[(e->pattern*64+row)*p->channels.count+ch];
             unsigned highlight=ch==p->channels.selected && row==e->row;
             pt_editor_note(event,note);
-            medium(c,font,x+6,y+1,note,highlight && !e->field?YELLOW:BLUE);
-            snprintf(s,sizeof(s),"%02X",event->instrument);medium(c,font,x+64,y+1,s,BLUE);
-            snprintf(s,sizeof(s),"%X%02X",event->effect,event->parameter);medium(c,font,x+100,y+1,s,highlight?YELLOW:BLUE);
+            spaced(c,font,x+10,y+1,note,highlight && !e->field?YELLOW:BLUE,14);
+            snprintf(s,sizeof(s),"%02X",event->instrument);spaced(c,font,x+64,y+1,s,BLUE,14);
+            snprintf(s,sizeof(s),"%X%02X",event->effect,event->parameter);spaced(c,font,x+100,y+1,s,highlight?YELLOW:BLUE,14);
             if(highlight) {
-                int fx=x+field_x[e->field]-1,fw=e->field?13:37;
+                int fx=x+field_x[e->field]-1,fw=e->field?15:43;
                 rect(c,fx,y,fw,1,YELLOW);rect(c,fx,y+11,fw,1,YELLOW);rect(c,fx,y,1,12,YELLOW);rect(c,fx+fw-1,y,1,12,YELLOW);
             }
     }
@@ -140,45 +155,50 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
     for(i=0;i<p->sample_count;++i)bytes+=(size_t)p->samples[i].pcm.frames*p->samples[i].pcm.channels*(p->samples[i].pcm.bits/8);
     panel(c,0,0,640,512,GREY);
     for(i=0;i<9;++i) {
-        y=2+(int)i*19;label(c,font,2,y,116,19,fields[i],0);panel(c,118,y,72,19,GREY);
+        y=2+(int)i*19;label(c,font,2,y,i?116:80,19,fields[i],0);panel(c,118,y,72,19,GREY);
         if(i==3)snprintf(s,sizeof(s),"%ld",sample?(long)sample->finetune:0L);
         else snprintf(s,sizeof(s),i>=6?"%05lX":i==5?"%04lX":"%04lu",values[i]);
         /* Extended sample lengths are shown exactly if they fit; wider values
            belong in the sampler detail view, never silently wrap. */
         if(strlen(s)>5)strcpy(s,"LARGE");
-        medium(c,font,185-(int)strlen(s)*12,y+5,s,BLACK);arrow(c,190,y,0);arrow(c,210,y,1);
+        spaced(c,font,188-(int)strlen(s)*14,y+5,s,BLACK,14);arrow(c,190,y,0);arrow(c,210,y,1);
     }
     label(c,font,82,2,18,19,"I",0);label(c,font,100,2,18,19,"D",0);
-    for(r=0;r<5;++r)for(i=0;i<3;++i)label(c,font,230+(int)i*123,2+(int)r*19,123,19,buttons[r][i],r==2 && i==0 && e->editing);
-    for(i=0;i<5;++i) {if(i<4)snprintf(s,sizeof(s),"%u",i+1);else s[0]=0;label(c,font,599,2+(int)i*19,39,19,s,0);}
-    label(c,font,230,97,408,19,"QUADRASCOPE",0);
+    for(r=0;r<5;++r)for(i=0;i<3;++i)label(c,font,230+(int)i*123,2+(int)r*18,123,18,buttons[r][i],r==2 && i==0 && e->editing);
+    for(i=0;i<5;++i) {if(i<4)snprintf(s,sizeof(s),"%u",i+1);else s[0]=0;label(c,font,599,2+(int)i*18,39,18,s,0);}
+    label(c,font,230,92,408,19,"QUADRASCOPE",0);
     for(i=0;i<4;++i) {
-        x=230+(int)i*102;panel(c,x,116,102,39,GREY);rect(c,x+17,117,84,37,BLACK);
-        snprintf(s,sizeof(s),"%u",first+i+1);small(c,font,x+1,120,s,WHITE);
+        x=230+(int)i*102;panel(c,x,111,102,44,GREY);rect(c,x+17,112,84,42,BLACK);
+        snprintf(s,sizeof(s),"%u",first+i+1);
+        if(first+i+1<10)medium(c,font,x+1,114,s,WHITE);else small(c,font,x+1,114,s,WHITE);
         /* Stopped scopes: no invented waveform or implied audio activity. */
-        if(first+i<p->channels.count)rect(c,x+18,135,81,1,YELLOW);
+        if(first+i<p->channels.count)rect(c,x+18,133,81,1,YELLOW);
     }
-    panel(c,230,155,408,18,GREY);medium(c,font,240,159,"PROTRACKER 2.4G",WHITE);
-    small(c,font,492,159,"2.3F: 8BITBUBSY",WHITE);
-    panel(c,2,174,636,19,GREY);medium(c,font,12,179,"SONGNAME:",WHITE);
-    snprintf(s,sizeof(s),"%.32s",p->title);medium(c,font,146,179,s,NAVY);label(c,font,590,174,48,19,"LOAD",0);
-    panel(c,2,193,636,19,GREY);medium(c,font,12,198,"SAMPLENAME:",WHITE);
-    snprintf(s,sizeof(s),"%.32s",sample?sample->name:"");medium(c,font,146,198,s,NAVY);
-    panel(c,590,193,48,19,GREY);snprintf(s,sizeof(s),"%luK",(unsigned long)((bytes+1023)/1024));small(c,font,596,198,s,NAVY);
+    panel(c,230,155,408,18,GREY);spaced(c,font,248,159,"PROTRACKER 2.4G",WHITE,10);
+    spaced(c,font,456,159,"2.3F: 8BITBUBSY",WHITE,10);
+    panel(c,2,174,636,19,GREY);spaced(c,font,26,179,"SONGNAME:",WHITE,10);
+    snprintf(s,sizeof(s),"%.32s",p->title);spaced(c,font,128,179,s,NAVY,12);label(c,font,590,174,48,19,"LOAD",0);
+    panel(c,2,193,636,19,GREY);spaced(c,font,16,198,"SAMPLENAME:",WHITE,10);
+    snprintf(s,sizeof(s),"%.32s",sample?sample->name:"");spaced(c,font,128,198,s,NAVY,12);
+    panel(c,590,193,48,19,GREY);snprintf(s,sizeof(s),"%luK",(unsigned long)((bytes+1023)/1024));
+    if(strlen(s)>3)small(c,font,636-(int)strlen(s)*8,198,s,WHITE);else spaced(c,font,636-(int)strlen(s)*10,198,s,WHITE,10);
     draw_status(e,c,font,bytes);
     for(i=0;i<4;++i) {
-        ch=first+i;x=38+(int)i*150;panel(c,x,238,150,16,GREY);
+        ch=first+i;x=38+(int)i*150;panel(c,x,PT_EDITOR_HEADER_Y,150,16,GREY);
         if(ch<p->channels.count) {
             const struct pt_channel *channel=&p->channels.track[ch];char route=channel->route==PT_PAULA?'P':channel->route==PT_AMIGUS?'A':'M';
-            snprintf(s,sizeof(s),"%u",ch+1);medium(c,font,x+64,241,s,BLACK);snprintf(s,sizeof(s),"%c",route);small(c,font,x+130,241,s,NAVY);
+            snprintf(s,sizeof(s),"%u",ch+1);medium(c,font,x+64,PT_EDITOR_HEADER_Y+3,s,BLACK);snprintf(s,sizeof(s),"%c",route);small(c,font,x+130,PT_EDITOR_HEADER_Y+3,s,NAVY);
         }
     }
-    panel(c,2,238,35,16,GREY);
+    panel(c,2,PT_EDITOR_HEADER_Y,35,16,GREY);
+    for(i=0;i<5;++i) {
+        x=36+(int)i*150;rect(c,x,PT_EDITOR_PATTERN_Y,1,240,WHITE);rect(c,x+1,PT_EDITOR_PATTERN_Y,1,240,DARK);
+    }
     for(r=0;r<PT_EDITOR_ROWS;++r)draw_pattern_row(e,c,font,r);
-    for(i=0;i<4;++i) {snprintf(s,sizeof(s),"%u-%u",i*4+1,i*4+4);label(c,font,4+(int)i*61,495,61,17,s,page==i);}
-    panel(c,248,495,168,17,GREY);label(c,font,416,495,60,17,"PLAY",0);
-    panel(c,476,495,18,17,GREY);rect(c,482,500,6,7,WHITE);label(c,font,494,495,58,17,"STOP",0);
-    panel(c,552,495,86,17,GREY);small(c,font,557,499,"PATTERN",WHITE);snprintf(s,sizeof(s),"%02X",e->pattern);small(c,font,618,499,s,NAVY);
+    for(i=0;i<4;++i) {snprintf(s,sizeof(s),"%u-%u",i*4+1,i*4+4);label(c,font,4+(int)i*61,PT_EDITOR_BOTTOM_Y,61,21,s,page==i);}
+    panel(c,248,PT_EDITOR_BOTTOM_Y,168,21,GREY);label(c,font,416,PT_EDITOR_BOTTOM_Y,60,21,"PLAY",0);
+    panel(c,476,PT_EDITOR_BOTTOM_Y,18,21,GREY);rect(c,482,498,6,9,WHITE);label(c,font,494,PT_EDITOR_BOTTOM_Y,58,21,"STOP",0);
+    panel(c,552,PT_EDITOR_BOTTOM_Y,86,21,GREY);small(c,font,557,497,"PATTERN",WHITE);snprintf(s,sizeof(s),"%02X",e->pattern);small(c,font,618,497,s,NAVY);
     pt_editor_draw_playback(e,c,font);
     if(e->panel==3) {
         label(c,font,230,2,369,19,"NEW SONG",0);
@@ -208,23 +228,23 @@ void pt_editor_draw_playback(const struct pt_editor *e,struct pt_canvas *c,const
 {
     unsigned i,j,first=pt_channels_page(&e->project->channels)*4;char s[32];
     for(i=0;i<4;++i) {
-        int x=248+(int)i*102,previous=135;
-        rect(c,x,117,81,37,BLACK);
+        int x=248+(int)i*102,previous=133;
+        rect(c,x,112,81,42,BLACK);
         if(first+i>=e->project->channels.count)continue;
         for(j=0;j<81;++j) {
-            int y=135;
+            int y=133;
             if(e->playback.active && !first)y-=(int)e->playback.wave[i][j]*e->playback.volume[i]/512;
             rect(c,x+(int)j,y<previous?y:previous,1,(y<previous?previous-y:y-previous)+1,YELLOW);previous=y;
         }
     }
-    panel(c,248,495,168,17,GREY);
+    panel(c,248,PT_EDITOR_BOTTOM_Y,168,21,GREY);
     if(e->playback.active) {
-        snprintf(s,sizeof(s),"POS %03u ROW %02u",e->playback.order,e->playback.row);small(c,font,253,499,s,NAVY);
+        snprintf(s,sizeof(s),"POS %03u ROW %02u",e->playback.order,e->playback.row);small(c,font,253,497,s,NAVY);
     }
-    panel(c,14,216,42,18,MID);
-    snprintf(s,sizeof(s),"%02u",e->playback.active?e->playback.speed:e->project->speed);medium(c,font,22,220,s,NAVY);
-    rect(c,70,216,24,10,GREY);snprintf(s,sizeof(s),"%03u",e->playback.active?e->playback.bpm:e->project->bpm);small(c,font,70,216,s,NAVY);
-    rect(c,610,227,24,10,GREY);small(c,font,610,227,e->playback.active?"CIA":"---",NAVY);
+    panel(c,14,214,46,17,MID);
+    snprintf(s,sizeof(s),"%02u",e->playback.active?e->playback.speed:e->project->speed);spaced(c,font,22,218,s,NAVY,14);
+    rect(c,79,213,30,10,GREY);snprintf(s,sizeof(s),"%03u",e->playback.active?e->playback.bpm:e->project->bpm);spaced(c,font,79,213,s,NAVY,10);
+    rect(c,598,223,32,10,GREY);spaced(c,font,598,223,e->playback.active?"CIA":"---",NAVY,10);
 }
 
 unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,const uint8_t font[580],
@@ -255,14 +275,14 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
             label(c,font,230,59,184,38,"CREATE",e->new_pending);areas[count++]=(struct pt_view_rect){230,59,184,38};
         }
         if(strcmp(old->status,e->status) || old->dirty!=(unsigned)pt_editor_dirty(e)) {
-            draw_status(e,c,font,bytes);areas[count++]=(struct pt_view_rect){2,212,636,26};
+            draw_status(e,c,font,bytes);areas[count++]=(struct pt_view_rect){2,211,636,23};
         }
         if(playback_changed) {
             pt_editor_draw_playback(e,c,font);
-            areas[count++]=(struct pt_view_rect){230,116,408,39};
-            areas[count++]=(struct pt_view_rect){14,216,80,18};
-            areas[count++]=(struct pt_view_rect){610,227,24,10};
-            areas[count++]=(struct pt_view_rect){248,495,168,17};
+            areas[count++]=(struct pt_view_rect){230,111,408,44};
+            areas[count++]=(struct pt_view_rect){14,211,110,23};
+            areas[count++]=(struct pt_view_rect){598,223,32,10};
+            areas[count++]=(struct pt_view_rect){248,PT_EDITOR_BOTTOM_Y,168,21};
         }
     }
     for(r=0;r<PT_EDITOR_ROWS;++r) {
@@ -273,7 +293,7 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
         changed=memcmp(events,old->events[r],sizeof(events))!=0;
         if((row==old->row || row==e->row) && (old->row!=e->row || old->field!=e->field || old->selected!=e->project->channels.selected))changed=1;
         if(selection_changed)changed=1;
-        if(!full && changed) {draw_pattern_row(e,c,font,r);areas[count++]=(struct pt_view_rect){3,254+r*12,635,12};}
+        if(!full && changed) {draw_pattern_row(e,c,font,r);areas[count++]=(struct pt_view_rect){3,PT_EDITOR_PATTERN_Y+r*12,635,12};}
         memcpy(old->events[r],events,sizeof(events));
     }
     memcpy(&old->project,&metadata,sizeof(metadata));memcpy(&old->sample_meta,&sample,sizeof(sample));

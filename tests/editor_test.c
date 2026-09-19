@@ -148,6 +148,18 @@ int main(int argc,char **argv)
     assert(pt_editor_click(e,250,87)==PT_UI_AUDITION);
     assert(pt_editor_key(e,0x57,0)==PT_UI_PLAY && pt_editor_key(e,0x58,0)==PT_UI_PATTERN);
     e->playback.active=1;assert(pt_editor_key(e,0x40,0)==PT_UI_STOP);e->playback.active=0;
+    /* The reference-aligned view and mouse cells share the same row origin.
+       Exercise the relocated bottom edge and every widened digit cell. */
+    e->first_row=0;e->project->channels.selected=0;
+    {
+        static const int cell_x[6]={49,103,117,139,153,167};
+        for(i=0;i<6;++i) {pt_editor_click(e,cell_x[i],PT_EDITOR_PATTERN_Y+1);assert(e->row==0 && e->field==i);}
+        pt_editor_click(e,49,PT_EDITOR_PATTERN_Y+239);assert(e->row==19);
+        pt_editor_click(e,200,PT_EDITOR_HEADER_Y+1);assert(e->row==19 && e->project->channels.selected==1);
+        assert(pt_editor_click(e,430,PT_EDITOR_BOTTOM_Y)==PT_UI_PLAY);
+        assert(pt_editor_click(e,510,PT_EDITOR_BOTTOM_Y)==PT_UI_STOP);
+        pt_editor_click(e,49,PT_EDITOR_PATTERN_Y+1);
+    }
     for(i=0;i<4;++i) {canvas.planes[i]=malloc(PT_VIEW_PLANE_BYTES);assert(canvas.planes[i]);}
     pt_editor_status(e,"EDITOR DEVELOPMENT - AUDIO NOT CONNECTED");e->quit_pending=0;e->panel=0;
     for(i=0;i<4;++i) {pt_editor_key(e,0x50+i,0);pt_editor_draw(e,&canvas,font);}

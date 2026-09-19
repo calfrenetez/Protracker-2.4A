@@ -3,6 +3,9 @@
 #include "pattern.h"
 #include "playback.h"
 #define PT_EDITOR_ROWS 20
+#define PT_EDITOR_HEADER_Y 234
+#define PT_EDITOR_PATTERN_Y 250
+#define PT_EDITOR_BOTTOM_Y 491
 enum pt_editor_action {PT_UI_NONE,PT_UI_SAVE,PT_UI_QUIT,PT_UI_PLAY,PT_UI_PATTERN,PT_UI_STOP,PT_UI_AUDITION,PT_UI_LOAD,PT_UI_SAVE_AS,PT_UI_EXPORT_MOD,PT_UI_NEW};
 struct pt_editor_selection {unsigned active,marking,pattern,r0,r1,c0,c1,anchor_row,anchor_channel;};
 struct pt_editor {

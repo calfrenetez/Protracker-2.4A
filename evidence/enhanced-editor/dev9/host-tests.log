@@ -1,0 +1,48 @@
+python3 -m unittest discover -s tests -v
+test_fixture_is_bounded_classic_mod (test_baseline_tools.BaselineTools.test_fixture_is_bounded_classic_mod) ... ok
+test_out_of_bounds_relocation_rejected (test_baseline_tools.BaselineTools.test_out_of_bounds_relocation_rejected) ... ok
+test_preparation_is_idempotent (test_baseline_tools.BaselineTools.test_preparation_is_idempotent) ... ok
+test_preparation_preserves_other_operands_and_comments (test_baseline_tools.BaselineTools.test_preparation_preserves_other_operands_and_comments) ... ok
+test_relocation_difference_rejected (test_baseline_tools.BaselineTools.test_relocation_difference_rejected) ... ok
+test_same_layout_is_not_enough (test_baseline_tools.BaselineTools.test_same_layout_is_not_enough) ... ok
+test_truncated_and_trailing_hunks_rejected (test_baseline_tools.BaselineTools.test_truncated_and_trailing_hunks_rejected) ... ok
+test_navigation_routing_and_history (test_channels.Channels.test_navigation_routing_and_history) ... ok
+test_new_file_publication_round_trip_and_existing_destination (test_convert_cli.ConvertCLI.test_new_file_publication_round_trip_and_existing_destination) ... ok
+test_allocation_and_save_faults (test_document.Document.test_allocation_and_save_faults) ... ALLOC initial calls=6 live=6 bytes=6902
+ALLOC failure-case=1 live=6
+ALLOC failure-case=2 live=6
+ALLOC failure-case=3 live=6
+ALLOC failure-case=4 live=6
+ALLOC failure-case=5 live=6
+ALLOC failure-case=6 live=6
+ALLOC budget live=6
+ALLOC replacement live=6
+ALLOC reload loop
+ALLOC final release live=3
+DOCUMENT/SAVE PASS: every staging allocation failure, memory budget, corrupt input, 200 reloads, staged new songs for 1..16 channels, partial writes and all save failure phases preserve prior state
+ok
+test_native_shared_controller_and_planar_display (test_editor.Editor.test_native_shared_controller_and_planar_display) ... EDITOR PASS: bank/wrap/scroll, guarded note and nibble edits, OFF, undo/redo, save state, discard confirmation, atomic block copy/paste/clear/transpose/clone, all-page planar render
+ok
+test_exact_profile_required (test_emulator_guard.EmulatorGuard.test_exact_profile_required) ... ok
+test_note_ownership_and_endpoint_lifecycle (test_midi.Midi.test_note_ownership_and_endpoint_lifecycle) ... MIDI PASS: exclusive track ownership, shared-note releases, replacement ordering, endpoint loss/reconnect, sustain cleanup, failed sends, controller/program/bend/clock bytes and 100 lifecycle cycles
+ok
+test_bounds_and_truncation (test_mod_inspect.ModInspect.test_bounds_and_truncation) ... ok
+test_lossless_classic_round_trip_and_loss_reports (test_mod_project.ModProject.test_lossless_classic_round_trip_and_loss_reports) ... MOD PROJECT PASS: MOD -> project -> MOD byte identity, strict validation, staged import, explicit loss reports and no silent downgrade
+ok
+test_driver_failure_and_cleanup (test_ownership.Ownership.test_driver_failure_and_cleanup) ... ok
+test_block_edits_and_history (test_pattern.Pattern.test_block_edits_and_history) ... PATTERN PASS: 16-channel block edits, exact period/MIDI transpose, OFF retention, clone, bounded undo/redo, dirty tracking, eviction and conflict/no-op safety
+ok
+test_precision_operations_and_wav (test_pcm.Pcm.test_precision_operations_and_wav) ... ok
+test_guard_precedes_destructive_load_and_changed_anchors_fail (test_prepare_dev.NativePreparation.test_guard_precedes_destructive_load_and_changed_anchors_fail) ... ok
+test_adapter_ownership_and_unchanged_effect_routines (test_prepare_replay.ReplayAdapter.test_adapter_ownership_and_unchanged_effect_routines) ... ok
+test_round_trip_bounds_and_staging (test_project.Project.test_round_trip_bounds_and_staging) ... PROJECT PASS: exact mixed-route round trip, 24-bit stereo, OFF, loops, slices, MIDI endpoints, extensions, CRC, bounds, transactional decode
+ok
+test_quantization_hold_and_releases (test_record.Recording.test_quantization_hold_and_releases) ... RECORD PASS: Hold Record, staged start, velocity, grid rounding, short-note OFF, collisions, stale release, monotonic time, capacity, retryable stop and undoable project-pattern recording with effect retention
+ok
+test_transients_markers_and_crossfade (test_slices.Slices.test_transients_markers_and_crossfade) ... SLICES PASS: deterministic non-destructive stereo transient proposals, minimum spacing, manual markers, silence, capacity/alias safety and full-precision crossfade loops
+ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 12.039s
+
+OK

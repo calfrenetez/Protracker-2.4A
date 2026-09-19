@@ -62,8 +62,22 @@ to allocate/open a requester leaves the document intact. The dialogs follow the
 - Minus/equal decrease/increase the selected sample; the paired arrows on the
   SAMPLE row do the same. PATTERN arrows select an existing pattern, and POS
   arrows select an existing order. Other parameter arrows are not wired yet.
-- Control-Z / Control-Shift-Z use the bounded pattern journal. EDIT OP. opens
-  the UNDO/REDO secondary panel; BACK returns to the reference main screen.
+- Control-Z / Control-Shift-Z undo/redo one complete event or block command.
+- EDIT OP. / Control-E opens the block-editing panel; BACK / Control-E returns.
+  MARK / Control-B starts a rectangle at the cursor. Move with arrows, Tab and
+  page buttons, then COPY / Control-C freezes and copies the highlighted block.
+  MARK again or UNMARK clears the selection. Copy does not change the song.
+- PASTE / Control-V replaces events starting at the cursor. It refuses to cross
+  row 63 or the last channel; it never clips or spills into another pattern.
+- CLEAR / Control-Delete clears the marked block. SEMI - / SEMI + or Control-minus
+  / Control-equal transpose it one semitone. Transpose preserves instrument,
+  effect, velocity and slice fields; an unsupported raw period or out-of-range
+  note refuses the whole operation. Copy, clear and transpose freeze the range.
+- ALL / Control-A selects the whole current pattern. To clone it, copy, select
+  an existing destination pattern with its arrows, move to row 00/channel 1,
+  and paste. One Undo restores the entire previous destination. Pattern/order
+  changes clear selection but retain the clipboard. Successful document loads
+  reset both; cancelled/invalid loads preserve both.
 - Control-S saves to the command-line output or opens Save New. Control-Shift-S
   and DISK OP. > SAVE NEW always open the requester. DISK OP. also contains QUIT and BACK.
 - Escape / QUIT exits. Dirty edits require a second Escape or QUIT; another
@@ -78,7 +92,7 @@ not an assertion about an external instrument's octave naming.
 
 The renderer uses 163,840 bytes for a four-plane software canvas, preferring Fast
 RAM, plus 163,840 bytes of Chip RAM for a blitter source. The OS display has its
-own bitmap. The current bounded editor/history structure uses about 51 KiB on
+own bitmap. The current bounded editor/history structure uses about 75 KiB on
 68k. Loaded project/sample storage is additional. No fixed available-RAM amount
 is assumed; allocation failure unwinds all owned resources.
 
@@ -106,7 +120,7 @@ start/stop song playback and audition/stop a sample while the physical CIA butto
 bit remains released. The full browser/AmiConnect transport is a separate check.
 
 Still open: full mixed-channel backend dispatch, comprehensive effect parity, pattern
-block-operation UI, route/metadata editing and its history, sample editing UI,
+route/metadata editing and its history, sample editing UI,
 replacement saves/recovery, capture, CAMD, renderer/export strategies and hardware acceptance.
 
 

@@ -26,6 +26,7 @@ int pt_editor_init(struct pt_editor *e,struct pt_project *p)
     if(!e || pt_project_validate(p,NULL)!=PT_PROJECT_OK)return 0;
     memset(e,0,sizeof(*e));e->project=p;e->sample=p->sample_count?1:0;e->octave=1;
     if(pt_pattern_history_init(&e->history,p,e->commands,128,e->changes,2048)!=PT_EDIT_OK)return 0;
+    e->clipboard.events=e->clipboard_events;e->clipboard.capacity=1024;
     pt_editor_status(e,"READY - F8 PLAY / F9 PATTERN / F10 STOP");return 1;
 }
 int pt_editor_dirty(const struct pt_editor *e) {return pt_pattern_dirty(&e->history);}
@@ -49,6 +50,67 @@ static int apply(struct pt_editor *e,struct pt_event event)
     pt_editor_status(e,r==PT_EDIT_OK?"PATTERN EDITED":r==PT_EDIT_CAPACITY?"UNDO BUDGET EXCEEDED - NO CHANGE":"INVALID EVENT - NO CHANGE");
     return r==PT_EDIT_OK;
 }
+int pt_editor_selection(const struct pt_editor *e,struct pt_editor_selection *s)
+{
+    *s=e->selection;
+    if(!s->active || s->pattern!=e->pattern) {memset(s,0,sizeof(*s));return 0;}
+    if(s->marking) {
+        unsigned c=e->project->channels.selected;
+        s->r0=e->row<s->anchor_row?e->row:s->anchor_row;
+        s->r1=(e->row>s->anchor_row?e->row:s->anchor_row)+1;
+        s->c0=c<s->anchor_channel?c:s->anchor_channel;
+        s->c1=(c>s->anchor_channel?c:s->anchor_channel)+1;
+    }
+    return 1;
+}
+static void unmark(struct pt_editor *e)
+{memset(&e->selection,0,sizeof(e->selection));pt_editor_status(e,"BLOCK UNMARKED");}
+static void mark(struct pt_editor *e)
+{
+    if(e->selection.active) {unmark(e);return;}
+    e->selection.active=1;e->selection.marking=1;e->selection.pattern=e->pattern;
+    e->selection.anchor_row=e->row;e->selection.anchor_channel=e->project->channels.selected;
+    pt_editor_status(e,"MARKING BLOCK - MOVE CURSOR; COPY FREEZES SELECTION");
+}
+static void select_all(struct pt_editor *e)
+{
+    memset(&e->selection,0,sizeof(e->selection));e->selection.active=1;e->selection.pattern=e->pattern;
+    e->selection.r1=64;e->selection.c1=e->project->channels.count;
+    pt_editor_status(e,"WHOLE PATTERN SELECTED - COPY TO CLONE AT ROW 00 CH 1");
+}
+/* op: 0 copy, 1 paste, 2 clear, -1/+3 transpose down/up. */
+static void block_edit(struct pt_editor *e,int op)
+{
+    struct pt_editor_selection s;enum pt_edit_result result;unsigned r,c,n=0;
+    uint32_t revision=e->history.revision;char status[76];
+    if(op!=1 && !pt_editor_selection(e,&s)) {pt_editor_status(e,"MARK A BLOCK FIRST - CONTROL-B OR EDIT OP. > MARK");return;}
+    if(op==0) {
+        result=pt_pattern_copy(e->project,e->pattern,s.r0,s.r1,s.c0,s.c1,&e->clipboard);
+        if(result==PT_EDIT_OK) {
+            s.marking=0;e->selection=s;
+            snprintf(status,sizeof(status),"COPIED %u ROWS X %u CHANNELS - PASTE AT CURSOR",e->clipboard.rows,e->clipboard.channels);
+            pt_editor_status(e,status);return;
+        }
+    } else if(op==1) {
+        if(!e->clipboard.rows) {pt_editor_status(e,"CLIPBOARD EMPTY - COPY A BLOCK FIRST");return;}
+        if(e->row+e->clipboard.rows>64 || e->project->channels.selected+e->clipboard.channels>e->project->channels.count) {
+            pt_editor_status(e,"PASTE WOULD CROSS PATTERN EDGE - NO CHANGE");return;
+        }
+        result=pt_pattern_paste(e->project,&e->history,e->pattern,e->row,e->project->channels.selected,&e->clipboard,e->scratch,1024);
+    } else if(op==2) {
+        for(r=s.r0;r<s.r1;++r)for(c=s.c0;c<s.c1;++c) {
+            e->scratch[n].index=(e->pattern*64+r)*e->project->channels.count+c;
+            memset(&e->scratch[n].event,0,sizeof(e->scratch[n].event));++n;
+        }
+        result=pt_pattern_apply(e->project,&e->history,e->scratch,n);
+    } else result=pt_pattern_transpose(e->project,&e->history,e->pattern,s.r0,s.r1,s.c0,s.c1,op<0?-1:1,e->scratch,1024);
+    if(result==PT_EDIT_OK) {
+        if(op!=1) {s.marking=0;e->selection=s;}
+        pt_editor_status(e,e->history.revision==revision?"BLOCK ALREADY MATCHES - NO CHANGE":
+            op==1?"BLOCK PASTED - CONTROL-Z TO UNDO":op==2?"BLOCK CLEARED - CONTROL-Z TO UNDO":"BLOCK TRANSPOSED - CONTROL-Z TO UNDO");
+    } else pt_editor_status(e,result==PT_EDIT_UNSUPPORTED?"TRANSPOSE OUT OF RANGE OR RAW PERIOD - NO CHANGE":
+        result==PT_EDIT_CAPACITY?"UNDO BUDGET EXCEEDED - NO CHANGE":"BLOCK EDIT REFUSED - NO CHANGE");
+}
 static enum pt_editor_action quit(struct pt_editor *e)
 {
     if(!pt_editor_dirty(e) || e->quit_pending)return PT_UI_QUIT;
@@ -63,7 +125,7 @@ static enum pt_editor_action request_load(struct pt_editor *e)
     e->load_pending=0;return PT_UI_LOAD;
 }
 static void pattern_step(struct pt_editor *e,int d)
-{e->pattern=(e->pattern+e->project->pattern_count+d)%e->project->pattern_count;}
+{e->pattern=(e->pattern+e->project->pattern_count+d)%e->project->pattern_count;memset(&e->selection,0,sizeof(e->selection));}
 static int hexkey(unsigned raw)
 {
     if(raw>=1 && raw<=9)return (int)raw;
@@ -86,6 +148,14 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
     if(qualifier&8) {
         if(raw==0x31)undo(e,(qualifier&3)?1:-1);
         else if(raw==0x21)return (qualifier&3)?PT_UI_SAVE_AS:PT_UI_SAVE;
+        else if(raw==0x12)e->panel=e->panel==1?0:1; /* Control-E */
+        else if(raw==0x35)mark(e); /* Control-B */
+        else if(raw==0x20)select_all(e);
+        else if(raw==0x33)block_edit(e,0);
+        else if(raw==0x34)block_edit(e,1);
+        else if(raw==0x46)block_edit(e,2);
+        else if(raw==0x0b)block_edit(e,-1);
+        else if(raw==0x0c)block_edit(e,3);
         return PT_UI_NONE;
     }
     switch(raw) {
@@ -143,7 +213,15 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
     e->load_pending=0;
     if(e->panel==2 && x>=414 && x<599 && y>=21 && y<59)return quit(e);
     e->quit_pending=0;
-    if(e->panel && x>=230 && x<599 && y>=2 && y<97) {
+    if(e->panel==1 && x>=230 && x<599 && y>=2 && y<97) {
+        r=(unsigned)(y-2)/19;c=(unsigned)(x-230)/123;
+        if(r==1) {if(c<2)undo(e,c==0?-1:1);else mark(e);}
+        else if(r==2)block_edit(e,(int)c);
+        else if(r==3) {if(c==2)select_all(e);else block_edit(e,c==0?-1:3);}
+        else if(r==4) {if(c==0)unmark(e);else e->panel=0;}
+        return PT_UI_NONE;
+    }
+    if(e->panel==2 && x>=230 && x<599 && y>=2 && y<97) {
         if(y>=59)e->panel=0;
         else if(y>=21) {if(e->panel==2)return PT_UI_SAVE_AS;undo(e,x<414?-1:1);}
         return PT_UI_NONE;
@@ -175,7 +253,7 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
         if(r==0) {
             if(direction>0 && e->position+1<e->project->order_count)++e->position;
             if(direction<0 && e->position)--e->position;
-            e->pattern=e->project->orders[e->position];
+            e->pattern=e->project->orders[e->position];memset(&e->selection,0,sizeof(e->selection));
         } else if(r==1)pattern_step(e,direction);
         else if(r==4) {if(direction<0 && e->sample)--e->sample;if(direction>0 && e->sample<e->project->sample_count)++e->sample;}
         else pt_editor_status(e,"SAMPLE/SONG PARAMETER EDITING NOT YET CONNECTED");

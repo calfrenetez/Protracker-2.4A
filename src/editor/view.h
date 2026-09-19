@@ -15,6 +15,7 @@ struct pt_view_cache {
     struct pt_sample sample_meta;
     struct pt_event events[PT_EDITOR_ROWS][4];
     struct pt_playback playback;
+    struct pt_editor_selection selection;
     char status[76];
 };
 /* Zero-initialize cache, and invalidate it after exposure/modal dialogs.

@@ -103,13 +103,14 @@ static void draw_status(const struct pt_editor *e,struct pt_canvas *c,const uint
 static void draw_pattern_row(const struct pt_editor *e,struct pt_canvas *c,const uint8_t *font,unsigned r)
 {
     const struct pt_project *p=e->project;unsigned i,ch,first=pt_channels_page(&p->channels)*4,row=r+e->first_row;
-    int x,y=254+(int)r*12;char s[16],note[4];
+    int x,y=254+(int)r*12;char s[16],note[4];struct pt_editor_selection selection;
+    int selected=pt_editor_selection(e,&selection);
     static const int field_x[6]={6,64,76,100,112,124};
     if(r>=PT_EDITOR_ROWS)return;
     rect(c,3,y,33,12,BLACK);
     if(row<64) {snprintf(s,sizeof(s),"%02u",row);medium(c,font,8,y+1,s,WHITE);}
     for(i=0;i<4;++i) {
-        ch=first+i;x=38+(int)i*150;rect(c,x,y,148,12,BLACK);
+        ch=first+i;x=38+(int)i*150;rect(c,x,y,148,12,selected && row>=selection.r0 && row<selection.r1 && ch>=selection.c0 && ch<selection.c1?8:BLACK);
         if(ch>=p->channels.count || row>=64)continue;
             const struct pt_event *event=&p->events[(e->pattern*64+row)*p->channels.count+ch];
             unsigned highlight=ch==p->channels.selected && row==e->row;
@@ -179,7 +180,12 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
     panel(c,476,495,18,17,GREY);rect(c,482,500,6,7,WHITE);label(c,font,494,495,58,17,"STOP",0);
     panel(c,552,495,86,17,GREY);small(c,font,557,499,"PATTERN",WHITE);snprintf(s,sizeof(s),"%02X",e->pattern);small(c,font,618,499,s,NAVY);
     pt_editor_draw_playback(e,c,font);
-    if(e->panel) {
+    if(e->panel==1) {
+        static const char *ops[3][3]={{"UNDO","REDO","MARK"},{"COPY","PASTE","CLEAR"},{"SEMI -","SEMI +","ALL"}};
+        label(c,font,230,2,369,19,"EDIT OP.",0);
+        for(r=0;r<3;++r)for(i=0;i<3;++i)label(c,font,230+(int)i*123,21+(int)r*19,123,19,ops[r][i],r==0 && i==2 && e->selection.active);
+        label(c,font,230,78,123,19,"UNMARK",0);label(c,font,353,78,246,19,"BACK",0);
+    } else if(e->panel==2) {
         panel(c,230,2,369,95,GREY);
         label(c,font,230,2,369,19,e->panel==1?"EDIT OP.":"DISK OP.",0);
         label(c,font,230,21,184,38,e->panel==1?"UNDO":"SAVE NEW",0);
@@ -217,7 +223,9 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
                               struct pt_view_cache *old,struct pt_view_rect areas[PT_VIEW_DIRTY_MAX])
 {
     struct pt_project metadata;struct pt_sample sample;unsigned i,r,count=0,page=pt_channels_page(&e->project->channels);
-    size_t bytes=0;int full,playback_changed;
+    size_t bytes=0;int full,playback_changed,selection_changed;struct pt_editor_selection selection;
+    pt_editor_selection(e,&selection);
+    selection_changed=memcmp(&selection,&old->selection,sizeof(selection))!=0;
     memcpy(&metadata,e->project,sizeof(metadata));metadata.channels.selected=0;
     memset(&sample,0,sizeof(sample));
     if(e->sample && e->sample<=e->project->sample_count)memcpy(&sample,&e->project->samples[e->sample-1],sizeof(sample));
@@ -226,7 +234,7 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
         bytes+=(size_t)pcm->frames*pcm->channels*(pcm->bits/8);
     }
     full=!old->valid || old->page!=page || old->pattern!=e->pattern || old->first_row!=e->first_row ||
-         old->position!=e->position || old->sample!=e->sample || old->editing!=e->editing || old->panel!=e->panel ||
+         old->position!=e->position || old->sample!=e->sample || old->editing!=e->editing || old->panel!=e->panel || (e->panel==1 && old->selection.active!=selection.active) ||
          old->sample_bytes!=bytes || memcmp(&metadata,&old->project,sizeof(metadata)) || memcmp(&sample,&old->sample_meta,sizeof(sample));
     playback_changed=!old->valid || memcmp(&e->playback,&old->playback,sizeof(e->playback));
     if(full) {pt_editor_draw(e,c,font);areas[count++]=(struct pt_view_rect){0,0,640,512};}
@@ -249,11 +257,13 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
             memcpy(&events[i],&e->project->events[(e->pattern*64+row)*e->project->channels.count+page*4+i],sizeof(events[i]));
         changed=memcmp(events,old->events[r],sizeof(events))!=0;
         if((row==old->row || row==e->row) && (old->row!=e->row || old->field!=e->field || old->selected!=e->project->channels.selected))changed=1;
+        if(selection_changed)changed=1;
         if(!full && changed) {draw_pattern_row(e,c,font,r);areas[count++]=(struct pt_view_rect){3,254+r*12,635,12};}
         memcpy(old->events[r],events,sizeof(events));
     }
     memcpy(&old->project,&metadata,sizeof(metadata));memcpy(&old->sample_meta,&sample,sizeof(sample));
     memcpy(&old->playback,&e->playback,sizeof(e->playback));strcpy(old->status,e->status);
+    old->selection=selection;
     old->valid=1;old->page=page;old->pattern=e->pattern;old->first_row=e->first_row;old->position=e->position;
     old->sample=e->sample;old->editing=e->editing;old->panel=e->panel;old->row=e->row;old->field=e->field;
     old->selected=e->project->channels.selected;old->dirty=pt_editor_dirty(e);old->sample_bytes=bytes;

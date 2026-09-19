@@ -20,6 +20,63 @@ static void ppm(const char *path,const struct pt_canvas *canvas)
     }
     assert(!fclose(f));
 }
+static void blocks(struct pt_editor *e)
+{
+    struct pt_project *p=e->project;struct pt_editor_selection s;struct pt_event original[4],saved;
+    size_t total=(size_t)p->pattern_count*64*p->channels.count,i;uint32_t revision;
+    assert(p->channels.count==16 && p->pattern_count>=2);
+    memset(p->events,0,total*sizeof(*p->events));p->channels.selected=0;
+    for(i=0;i<4;++i) {
+        struct pt_event *v=&p->events[(i/2)*16+i%2];v->kind=PT_NOTE_PERIOD;v->pitch=428;v->instrument=1;
+        v->effect=12;v->parameter=(uint8_t)(24+i);original[i]=*v;
+    }
+    assert(pt_editor_init(e,p));
+    /* Reverse marking across rows/channels, copy freezes the rectangle and
+       navigation after copy leaves it intact. Clipboard is not a dirty edit. */
+    e->row=1;p->channels.selected=1;pt_editor_key(e,0x35,8);
+    pt_editor_key(e,0x4c,0);pt_editor_key(e,0x42,1);
+    assert(pt_editor_selection(e,&s) && s.r0==0 && s.r1==2 && s.c0==0 && s.c1==2);
+    pt_editor_key(e,0x33,8);assert(e->clipboard.rows==2 && e->clipboard.channels==2 && !e->selection.marking);
+    assert(!pt_editor_dirty(e));for(i=0;i<4;++i)assert(!memcmp(&original[i],&e->clipboard.events[i],sizeof(saved)));
+    e->row=10;p->channels.selected=4;assert(pt_editor_selection(e,&s) && s.r0==0 && s.c0==0 && s.r1==2);
+    pt_editor_key(e,0x34,8);assert(e->history.count==1 && pt_editor_dirty(e));
+    for(i=0;i<4;++i)assert(!memcmp(&original[i],&p->events[(10+i/2)*16+4+i%2],sizeof(saved)));
+    pt_editor_key(e,0x31,8);assert(!pt_editor_dirty(e));for(i=0;i<4;++i)assert(p->events[(10+i/2)*16+4+i%2].kind==PT_NOTE_NONE);
+    pt_editor_key(e,0x31,9);assert(pt_editor_dirty(e));revision=e->history.revision;
+    e->row=63;pt_editor_key(e,0x34,8);assert(e->history.revision==revision && strstr(e->status,"EDGE"));
+    e->row=10;p->channels.selected=15;pt_editor_key(e,0x34,8);assert(e->history.revision==revision);
+    /* Frozen selection, not the destination cursor, drives transpose/clear. */
+    pt_editor_key(e,0x0c,8);assert(p->events[0].pitch==404 && p->events[16].pitch==404);
+    assert(p->events[10*16+4].pitch==428 && p->events[0].parameter==24);
+    pt_editor_key(e,0x46,8);assert(p->events[0].kind==PT_NOTE_NONE && p->events[16].instrument==0);
+    pt_editor_key(e,0x31,8);assert(p->events[0].pitch==404);
+    pt_editor_key(e,0x31,8);assert(p->events[0].pitch==428);
+    /* One unsupported event refuses the complete transpose without history. */
+    p->events[0].pitch=113;assert(pt_editor_init(e,p));pt_editor_key(e,0x20,8);revision=e->history.revision;
+    pt_editor_key(e,0x0c,8);assert(p->events[0].pitch==113 && p->events[1].pitch==428 && e->history.revision==revision);
+    p->events[0].pitch=123;pt_editor_key(e,0x0b,8);assert(p->events[0].pitch==123 && p->events[1].pitch==428 && !pt_editor_dirty(e));
+    /* Whole 16-channel patterns fit bounded storage and one undo transaction.
+       Copy + explicitly selecting another pattern implements cloning. */
+    for(i=0;i<1024;++i) {p->events[i]=original[i%4];p->events[1024+i]=(struct pt_event){0};}
+    p->channels.selected=0;assert(pt_editor_init(e,p));pt_editor_key(e,0x20,8);pt_editor_key(e,0x33,8);
+    assert(e->clipboard.rows==64 && e->clipboard.channels==16);
+    pt_editor_key(e,0x5b,0);assert(e->pattern==1 && !e->selection.active);
+    pt_editor_key(e,0x34,8);assert(!memcmp(p->events,p->events+1024,1024*sizeof(saved)) && e->history.count==1);
+    pt_editor_key(e,0x20,8);pt_editor_key(e,0x46,8);assert(e->history.count==2 && e->history.used==2048);
+    for(i=1024;i<2048;++i)assert(p->events[i].kind==PT_NOTE_NONE);
+    pt_editor_key(e,0x31,8);assert(!memcmp(p->events,p->events+1024,1024*sizeof(saved)));
+    pt_editor_key(e,0x31,8);assert(!pt_editor_dirty(e));
+    for(i=1024;i<2048;++i)assert(p->events[i].kind==PT_NOTE_NONE);
+    /* Native panel hit targets use the same actions, and loaded documents
+       reset both the clipboard and selection. */
+    assert(pt_editor_init(e,p));pt_editor_click(e,400,50);assert(e->panel==1);
+    pt_editor_click(e,520,28);assert(e->selection.active && e->selection.marking);
+    pt_editor_click(e,250,50);assert(e->clipboard.rows==1 && !e->selection.marking);
+    pt_editor_click(e,520,70);assert(e->selection.r1==64 && e->selection.c1==16);
+    pt_editor_click(e,250,87);assert(!e->selection.active);
+    pt_editor_click(e,400,87);assert(e->panel==0);
+    assert(pt_editor_init(e,p));pt_editor_key(e,0x34,8);assert(!e->clipboard.rows && strstr(e->status,"EMPTY") && !pt_editor_dirty(e));
+}
 int main(int argc,char **argv)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_document doc;struct pt_editor *e;
@@ -93,6 +150,12 @@ int main(int argc,char **argv)
             if(step==30) {pt_editor_click(e,400,70);cache.valid=0;}
             if(step==31)pt_editor_click(e,400,80);
             if(step%17==0)pt_editor_key(e,0x31,8);
+            if(step%19==0)pt_editor_key(e,0x35,8);
+            if(step%23==0)pt_editor_key(e,0x33,8);
+            if(step==68)pt_editor_key(e,0x20,8);
+            if(step==70)pt_editor_click(e,400,50);
+            if(step==74)pt_editor_click(e,250,87);
+            if(step==76)pt_editor_click(e,400,87);
             pt_editor_draw(e,&canvas,font);n=pt_editor_draw_update(e,&incremental,font,&cache,areas);assert(n<=PT_VIEW_DIRTY_MAX);
             for(j=0;j<n;++j) {
                 const struct pt_view_rect *a=&areas[j];assert(a->x+a->width<=640 && a->y+a->height<=512);
@@ -107,7 +170,8 @@ int main(int argc,char **argv)
         for(p=0;p<4;++p) {free(incremental.planes[p]);free(shown.planes[p]);}
     }
 
+    blocks(e);
     for(i=0;i<4;++i)free(canvas.planes[i]);
     free(font);free(e);pt_document_release(&doc);
-    puts("EDITOR PASS: bank/wrap/scroll, guarded note and nibble edits, OFF, undo/redo, save state, discard confirmation, all-page planar render");return 0;
+    puts("EDITOR PASS: bank/wrap/scroll, guarded note and nibble edits, OFF, undo/redo, save state, discard confirmation, atomic block copy/paste/clear/transpose/clone, all-page planar render");return 0;
 }

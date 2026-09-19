@@ -265,3 +265,24 @@ input events to open/back out of Disk Op, play/stop and audition/stop, with the
 physical CIA button bit released throughout. This does not test the complete
 AmiConnect browser transport. All four DMA channels were off after Stop and the
 editor exited normally. Amiberry ownership was released after guarded shutdown.
+
+## Native block editing
+
+EDIT OP. now provides marking across rows/channel pages, copy/paste, clear,
+semitone transpose, select-all and unmark. Copy freezes the selection. Paste is
+atomic and refuses pattern-edge overflow; transpose rejects the whole selection
+if any note has an unsupported raw period or leaves its pitch range. Effects,
+instruments, velocity and slice fields survive transpose. Whole-pattern copy into
+an explicitly selected existing pattern provides cloning. Each modifying action
+uses one pattern-journal command, including all 1,024 events of a 16-channel pattern.
+The heap editor now occupies 76,354 bytes on 68k, including bounded clipboard and
+scratch space; no 24 KiB temporary pattern buffer is placed on the Amiga stack.
+
+Host checks cover reverse selection, cross-page copy, frozen selection, edge and
+pitch refusal, full-pattern undo/redo, clipboard reset and byte-identical partial
+rendering. The native UI run copied/transposed a block into another channel page,
+cleared and undid/redid it, refused edge overflow, cloned a whole pattern, and
+saved exactly the independently specified event bytes and CRC. Reload/resave was
+byte-identical; a reopened document had an empty clipboard. A separate classic
+MOD was transposed through the same controls, replayed at period 404 and stopped
+with all DMA channels off. All three editor instances exited normally.

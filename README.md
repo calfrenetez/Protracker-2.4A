@@ -17,7 +17,8 @@ load, edit, play, save and reopen, with cancelled/invalid loads preserving edits
 Enhanced screen now follows the owner's full classic reference after the
 earlier simplified layout was rejected. Incremental redraws preserve identical
 pixels while reducing six-cursor drawing time by about 95% in the private emulator;
-native mouse controls and keyboard/file workflows pass. See the
+native mouse controls and keyboard/file workflows pass. EDIT OP. now adds marked
+block copy/paste/clear/transpose, whole-pattern copying and atomic undo. See the
 [editor guide](docs/ENHANCED_EDITOR.md) and retained native UI evidence. Physical AmiGUS tests await the owner's Mini.
 MIDI note ownership and quantised recording into undoable pattern events now
 pass host/native sink tests; CAMD and live transport remain unconnected.

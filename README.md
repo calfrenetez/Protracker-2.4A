@@ -8,7 +8,10 @@ This increment integrates classic MOD preflight and input.device mouse support.
 The portable channel, PCM/WAV, extended-project, transactional document, pattern
 undo and slicing cores pass host and native Amiga tests. PT24GConvert now supports
 verified new-file project saves and strict lossless classic MOD round trips.
-Enhanced editor/replay integration is still pending. Physical AmiGUS tests await the owner's Mini.
+A separate native Enhanced editor prototype now connects project loading, note
+entry, four-column paging, pattern undo and verified saving. Replay integration
+is still pending; its playback controls are disabled. See the
+[editor guide](docs/ENHANCED_EDITOR.md) and retained native UI evidence. Physical AmiGUS tests await the owner's Mini.
 See the [development checkpoint](docs/HARDWARE_INDEPENDENT.md),
 [baseline report](docs/BASELINE_BUILD.md), [diagnostic evidence](docs/AMIGUS_DIAGNOSTIC.md)
 and [MOD preflight](docs/MOD_PREFLIGHT.md).
@@ -49,7 +52,8 @@ user instructions control the work. After handover processing, the user
 authorized proceeding with the baseline build and verification.
 
 The owner's 19 September instruction authorises independent software development
-while the ordered Mini is in transit. Project/pattern persistence and bounded editing cores are implemented. The next
-work connects them to the enhanced native editor.
+while the ordered Mini is in transit. Project/pattern persistence and bounded editing cores are implemented. The first
+native Enhanced editor integration is working; sampler/routing pages and replay
+integration remain open.
 AmiConnect upload/exec and real card tests remain separate acceptance gates.
 Initial smoke results do not certify all effects or physical hardware.

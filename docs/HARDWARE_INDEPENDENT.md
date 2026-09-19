@@ -169,3 +169,22 @@ C builds now pass `-fbbb=-` when that option is available. All 14 cases passed w
 that mitigation; compiler/source/executable hashes and flags are retained. This
 is a targeted mitigation, not a certification of the compiler. The unchanged
 assembler build does not use that compiler pass.
+
+
+## Enhanced editor integration
+
+The separate `PT24GEdit` development executable now connects extended project
+loading, note/instrument/effect entry, OFF, page navigation, bounded pattern
+undo/redo and verified new-file saving to a native 640x512 Intuition interface.
+It uses the original bitmap font and the supplied four-column visual direction.
+[ENHANCED_EDITOR.md](ENHANCED_EDITOR.md) describes its commands and limitations.
+Playback is disabled; the original assembler tracker/replayer remains separate.
+
+`evidence/enhanced-editor/dev1/` retains 20 host groups, the rerun 14-case native
+core/converter suite after sharing the save adapter, and actual editor UI runs.
+Native keyboard edits produced exactly the independently specified saved bytes
+and CRC. Undo/redo, dirty-state retention after overwrite refusal, byte-identical
+reopen/resave and two normal exits were checked. The optimized host renderer was
+pixel-identical to the initial renderer. Completed-frame waits replaced an early
+screenshot taken before the first redraw. Human visual/UI acceptance, native
+mouse interaction and physical display-performance checks are still pending.

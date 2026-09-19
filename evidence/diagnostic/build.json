@@ -1,0 +1,24 @@
+{
+  "compiler": "m68k-amigaos-gcc (GCC) 13.4.0b 20260811114005",
+  "compiler_sha256": "3e67363948198e5e8aaf8424f4dc18b897ea5da204fbf939931c5ce2f432c632",
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Ivendor/amigus-sdk"
+  ],
+  "inputs": {
+    "src/diagnostic/amigus_calls.h": "3d89320a926989c3cd80c420ca5e06cb7016b21a2beea630cdcab45c28dda94d",
+    "src/diagnostic/main.c": "efb534e525c79c80c483c54d2e75530afd9556688b2dea4e1ac4aa708b752407",
+    "src/diagnostic/ownership.c": "dfe648e80b658866a5eeda2251b7b6e227ca2463d11bab6e2b6e0c0f60956e09",
+    "src/diagnostic/ownership.h": "51baadd0cf9a2ccbd61a94060e7be495d73aa1143513b965f7c1b547e102aaba"
+  },
+  "sdk_lock_sha256": "4925be2f6ce1db4bd683629a850c3045cea55aa089d1fbeea721eb9e0ac304d1",
+  "binary_bytes": 13952,
+  "binary_sha256": "404fd515011cfb739bd611d881af9fabb7e1cde6b6e831ee464e5c2ca3dad501"
+}

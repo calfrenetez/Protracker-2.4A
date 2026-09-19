@@ -1,0 +1,104 @@
+{
+  "binary_sha256": "404fd515011cfb739bd611d881af9fabb7e1cde6b6e831ee464e5c2ca3dad501",
+  "scope": "CLI/absent-library only; no physical AmiGUS acceptance",
+  "run_id": "diag1789814701864713000",
+  "cases": [
+    {
+      "case": "discover",
+      "mode": "--discover",
+      "return_code": 5,
+      "log": "AMIGUSTEST schema=1 version=0.1 mode=discover\nSCOPE audio=NOT_TESTED interrupts=NOT_TESTED firmware_write=NO\nSUMMARY result=SKIP reason=library-unavailable cards=0 passed=0 skipped=0 failed=0 rc=5\n",
+      "expectation_met": true
+    },
+    {
+      "case": "ownership",
+      "mode": "--ownership",
+      "return_code": 5,
+      "log": "AMIGUSTEST schema=1 version=0.1 mode=ownership\nSCOPE audio=NOT_TESTED interrupts=NOT_TESTED firmware_write=NO\nSUMMARY result=SKIP reason=library-unavailable cards=0 passed=0 skipped=0 failed=0 rc=5\n",
+      "expectation_met": true
+    },
+    {
+      "case": "invalid",
+      "mode": "--invalid",
+      "return_code": 20,
+      "log": "usage: AmiGUSTest [--discover|--ownership]\n",
+      "expectation_met": true
+    },
+    {
+      "case": "repeat0",
+      "mode": "--discover",
+      "return_code": 5,
+      "log": "AMIGUSTEST schema=1 version=0.1 mode=discover\nSCOPE audio=NOT_TESTED interrupts=NOT_TESTED firmware_write=NO\nSUMMARY result=SKIP reason=library-unavailable cards=0 passed=0 skipped=0 failed=0 rc=5\n",
+      "expectation_met": true
+    },
+    {
+      "case": "repeat1",
+      "mode": "--discover",
+      "return_code": 5,
+      "log": "AMIGUSTEST schema=1 version=0.1 mode=discover\nSCOPE audio=NOT_TESTED interrupts=NOT_TESTED firmware_write=NO\nSUMMARY result=SKIP reason=library-unavailable cards=0 passed=0 skipped=0 failed=0 rc=5\n",
+      "expectation_met": true
+    },
+    {
+      "case": "repeat2",
+      "mode": "--discover",
+      "return_code": 5,
+      "log": "AMIGUSTEST schema=1 version=0.1 mode=discover\nSCOPE audio=NOT_TESTED interrupts=NOT_TESTED firmware_write=NO\nSUMMARY result=SKIP reason=library-unavailable cards=0 passed=0 skipped=0 failed=0 rc=5\n",
+      "expectation_met": true
+    },
+    {
+      "case": "repeat3",
+      "mode": "--discover",
+      "return_code": 5,
+      "log": "AMIGUSTEST schema=1 version=0.1 mode=discover\nSCOPE audio=NOT_TESTED interrupts=NOT_TESTED firmware_write=NO\nSUMMARY result=SKIP reason=library-unavailable cards=0 passed=0 skipped=0 failed=0 rc=5\n",
+      "expectation_met": true
+    },
+    {
+      "case": "repeat4",
+      "mode": "--discover",
+      "return_code": 5,
+      "log": "AMIGUSTEST schema=1 version=0.1 mode=discover\nSCOPE audio=NOT_TESTED interrupts=NOT_TESTED firmware_write=NO\nSUMMARY result=SKIP reason=library-unavailable cards=0 passed=0 skipped=0 failed=0 rc=5\n",
+      "expectation_met": true
+    },
+    {
+      "case": "repeat5",
+      "mode": "--discover",
+      "return_code": 5,
+      "log": "AMIGUSTEST schema=1 version=0.1 mode=discover\nSCOPE audio=NOT_TESTED interrupts=NOT_TESTED firmware_write=NO\nSUMMARY result=SKIP reason=library-unavailable cards=0 passed=0 skipped=0 failed=0 rc=5\n",
+      "expectation_met": true
+    },
+    {
+      "case": "repeat6",
+      "mode": "--discover",
+      "return_code": 5,
+      "log": "AMIGUSTEST schema=1 version=0.1 mode=discover\nSCOPE audio=NOT_TESTED interrupts=NOT_TESTED firmware_write=NO\nSUMMARY result=SKIP reason=library-unavailable cards=0 passed=0 skipped=0 failed=0 rc=5\n",
+      "expectation_met": true
+    },
+    {
+      "case": "repeat7",
+      "mode": "--discover",
+      "return_code": 5,
+      "log": "AMIGUSTEST schema=1 version=0.1 mode=discover\nSCOPE audio=NOT_TESTED interrupts=NOT_TESTED firmware_write=NO\nSUMMARY result=SKIP reason=library-unavailable cards=0 passed=0 skipped=0 failed=0 rc=5\n",
+      "expectation_met": true
+    },
+    {
+      "case": "repeat8",
+      "mode": "--discover",
+      "return_code": 5,
+      "log": "AMIGUSTEST schema=1 version=0.1 mode=discover\nSCOPE audio=NOT_TESTED interrupts=NOT_TESTED firmware_write=NO\nSUMMARY result=SKIP reason=library-unavailable cards=0 passed=0 skipped=0 failed=0 rc=5\n",
+      "expectation_met": true
+    },
+    {
+      "case": "repeat9",
+      "mode": "--discover",
+      "return_code": 5,
+      "log": "AMIGUSTEST schema=1 version=0.1 mode=discover\nSCOPE audio=NOT_TESTED interrupts=NOT_TESTED firmware_write=NO\nSUMMARY result=SKIP reason=library-unavailable cards=0 passed=0 skipped=0 failed=0 rc=5\n",
+      "expectation_met": true
+    }
+  ],
+  "emulator": {
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

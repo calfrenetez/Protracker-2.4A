@@ -1,0 +1,14 @@
+{
+  "upstream": "https://github.com/necronomfive/AmiGUS-pub",
+  "commit": "d8c9a0429f41cd5f3dbadae34ef438e45c9c3718",
+  "latest_release_checked": "rc-6",
+  "release_commit": "f17648d63346bab932bca5b48da922a78289f7dc",
+  "checked_date": "2026-09-19",
+  "license": "LGPL-3.0-only for public header; upstream driver COPYING and COPYING.LESSER retained",
+  "files": {
+    "COPYING": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+    "COPYING.LESSER": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118",
+    "amigus/amigus.h": "615bbcf8b314bafe1b3eb53d605c0e82d4ff4619e1b06e25f2f0cd7ddf4654c4",
+    "sfd/amigus_lib.sfd": "f2a07a7f60ce5a2f8639b27e7a396f1c8070a07aac62bb57e671aa7cfebf2e70"
+  }
+}

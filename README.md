@@ -4,8 +4,10 @@ Build preparation for a native Amiga tracker with 1–16 channels, classic
 ProTracker workflow, and exclusive Paula, AmiGUS or MIDI routing per channel.
 
 **Status: native 2.3F builds reproducibly and passes an initial AmiBerry smoke
-test.** Enhanced 2.4G features and AmiGUS integration have not started. See the
-[baseline build and test report](docs/BASELINE_BUILD.md).
+test.** The first native AmiGUSTest diagnostic is built and its absent-library
+behavior is verified. Enhanced tracker features and positive physical AmiGUS
+tests remain pending. See the [baseline report](docs/BASELINE_BUILD.md) and
+[diagnostic evidence](docs/AMIGUS_DIAGNOSTIC.md).
 
 With Git, Python 3, Make and a host C compiler installed:
 
@@ -41,6 +43,7 @@ implementation, deployment, firmware changes or background monitoring. Direct
 user instructions control the work. After handover processing, the user
 authorized proceeding with the baseline build and verification.
 
-The next milestone is broader compatibility/hardening coverage and a dedicated
-ProTracker/AmiGUSTest real-hardware test profile before enhanced changes.
+The next milestone is broader compatibility/hardening coverage and integration
+with AmiConnect's forthcoming authenticated upload/exec capabilities before
+enhanced tracker changes. A duplicate hard-coded diagnostic profile is deferred.
 Initial smoke results do not certify all effects or physical hardware.

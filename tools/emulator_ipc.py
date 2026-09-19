@@ -9,7 +9,7 @@ import time
 class Emulator:
     def __init__(self, path='/tmp/amiberry.sock'):
         self.path = path
-        if 'Config=ProTracker isolated baseline' not in self.command('GET_STATUS'):
+        if 'Config=ProTracker isolated baseline' not in self.command('GET_STATUS').split('\t'):
             raise RuntimeError('Refusing to control an unrelated emulator configuration')
 
     def command(self, *args):

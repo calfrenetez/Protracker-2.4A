@@ -24,9 +24,10 @@ current evidence. Product naming is tracked in [HANDOVER_REVIEW.md](HANDOVER_REV
    Establish effect/timing traces and loader/edit/lifecycle hardening fixtures;
    freeze a known-good clean baseline after its acceptance checks.
 
-The source URL and [AmiGUS upstream](https://github.com/necronomfive/AmiGUS-pub)
-are discovery references, not revision pins. No source/SDK revision is locked by
-this documentation commit.
+Current source and public SDK pins are in `baseline.lock.json` and
+`amigus-sdk.lock.json`. The first diagnostic's evidence and the developing
+AmiConnect upload/exec dependency are recorded in
+[AMIGUS_DIAGNOSTIC.md](AMIGUS_DIAGNOSTIC.md).
 
 ## Staged implementation
 

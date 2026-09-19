@@ -247,7 +247,7 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
         return PT_UI_NONE;
     }
     if(e->panel==1 && x>=230 && x<599 && y>=2 && y<97) {
-        r=(unsigned)(y-2)/19;c=(unsigned)(x-230)/123;
+        r=(unsigned)(y-PT_EDITOR_CONTROL_Y)/PT_EDITOR_CONTROL_HEIGHT;c=(unsigned)(x-230)/123;
         if(r==1) {if(c<2)undo(e,c==0?-1:1);else mark(e);}
         else if(r==2)block_edit(e,(int)c);
         else if(r==3) {if(c==2)select_all(e);else block_edit(e,c==0?-1:3);}
@@ -272,8 +272,8 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
     } else if(y>=PT_EDITOR_HEADER_Y && y<PT_EDITOR_PATTERN_Y && x>=38 && x<638) {
         c=(unsigned)(x-38)/150+pt_channels_page(&e->project->channels)*4;
         if(c<e->project->channels.count)e->project->channels.selected=(uint8_t)c;
-    } else if(x>=230 && x<599 && y>=2 && y<92) {
-        r=(unsigned)(y-2)/18;c=(unsigned)(x-230)/123;
+    } else if(x>=230 && x<599 && y>=PT_EDITOR_CONTROL_Y && y<PT_EDITOR_COMMAND_BOTTOM) {
+        r=(unsigned)(y-PT_EDITOR_CONTROL_Y)/PT_EDITOR_CONTROL_HEIGHT;c=(unsigned)(x-230)/123;
         if(r==0 && c==0)return PT_UI_PLAY;
         else if(r==0 && c==1)return PT_UI_STOP;
         else if(r==1 && c==0)return PT_UI_PATTERN;
@@ -284,7 +284,7 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
         else if(r==3 && c==1)e->panel=2;
         else pt_editor_status(e,"THIS CONTROL IS NOT YET CONNECTED");
     } else if(x>=190 && x<230 && y>=2 && y<173) {
-        int direction=x<210?-1:1;r=(unsigned)(y-2)/19;
+        int direction=x<210?-1:1;r=(unsigned)(y-PT_EDITOR_CONTROL_Y)/PT_EDITOR_CONTROL_HEIGHT;
         if(r==0) {
             if(direction>0 && e->position+1<e->project->order_count)++e->position;
             if(direction<0 && e->position)--e->position;

@@ -8,6 +8,9 @@
 struct pt_canvas {uint8_t *planes[4];};
 #define PT_VIEW_DIRTY_MAX 28
 struct pt_view_rect {unsigned x,y,width,height;};
+#define PT_VIEW_PLAYBACK_AREAS 4
+/* Shared by cached redraws and the native live-playback presenter. */
+extern const struct pt_view_rect pt_view_playback_areas[PT_VIEW_PLAYBACK_AREAS];
 struct pt_view_cache {
     unsigned valid,page,pattern,first_row,position,sample,editing,panel,row,field,selected,dirty,new_channels,new_pending;
     size_t sample_bytes;

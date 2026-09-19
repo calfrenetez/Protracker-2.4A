@@ -1,0 +1,17 @@
+EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=76362
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PLAYING SONG - PAULA CIA panel=0
+EDITOR REPLAY active=1 ticks=8 order=0 pattern=0 row=0 bpm=125 speed=6 period=428,339,285,214 volume=24,24,24,24
+EDITOR REPLAY active=1 ticks=14 order=0 pattern=0 row=1 bpm=125 speed=6 period=428,339,285,214 volume=24,24,24,24
+EDITOR REPLAY active=1 ticks=20 order=0 pattern=0 row=2 bpm=125 speed=6 period=428,339,285,214 volume=24,24,24,24
+EDITOR REPLAY active=1 ticks=26 order=0 pattern=0 row=3 bpm=125 speed=6 period=428,339,285,214 volume=24,24,24,24
+EDITOR REPLAY active=1 ticks=32 order=0 pattern=0 row=4 bpm=125 speed=6 period=428,339,285,214 volume=24,24,24,24
+EDITOR REPLAY active=1 ticks=38 order=0 pattern=0 row=5 bpm=125 speed=6 period=428,339,285,214 volume=24,24,24,24
+EDITOR REPLAY active=1 ticks=44 order=0 pattern=0 row=6 bpm=125 speed=6 period=428,339,285,214 volume=24,24,24,24
+EDITOR REPLAY active=1 ticks=50 order=0 pattern=0 row=7 bpm=125 speed=6 period=428,339,285,214 volume=24,24,24,24
+EDITOR REPLAY active=1 ticks=56 order=0 pattern=0 row=8 bpm=150 speed=6 period=428,339,285,214 volume=24,24,24,24
+EDITOR REPLAY active=1 ticks=63 order=0 pattern=0 row=9 bpm=150 speed=6 period=428,339,285,214 volume=24,24,24,24
+EDITOR REPLAY active=1 ticks=70 order=0 pattern=0 row=10 bpm=150 speed=6 period=428,339,285,214 volume=24,24,24,24
+EDITOR REPLAY active=1 ticks=78 order=0 pattern=0 row=12 bpm=150 speed=6 period=428,339,285,214 volume=24,24,24,24
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=STOPPED - AUDIO RELEASED panel=0
+EDITOR EXIT clean

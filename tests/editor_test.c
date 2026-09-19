@@ -20,6 +20,29 @@ static void ppm(const char *path,const struct pt_canvas *canvas)
     }
     assert(!fclose(f));
 }
+static unsigned pixel_pen(const struct pt_canvas *c,unsigned x,unsigned y)
+{
+    unsigned p,pen=0;
+    for(p=0;p<4;++p)if(c->planes[p][y*80+x/8]&(128>>(x&7)))pen|=1U<<p;
+    return pen;
+}
+static void aligned_borders(const struct pt_canvas *c)
+{
+    static const unsigned columns[]={16,140,200,245,370,490,618};
+    unsigned row,i,y;
+    /* Independently fixed screen coordinates: shared parameter/command seams,
+       uninterrupted header-to-pattern rails, and two distinct strip edges. */
+    for(row=0;row<9;++row)if(row!=7)for(i=0;i<sizeof(columns)/sizeof(columns[0]);++i)
+        assert(pixel_pen(c,columns[i],2+row*19)==2 ||
+               (row==2 && i==3 && pixel_pen(c,columns[i],2+row*19)==3));
+    for(i=0;i<5;++i)for(y=234;y<491;++y) {
+        assert(pixel_pen(c,36+i*150,y)==2);
+        assert(pixel_pen(c,37+i*150,y)==3);
+    }
+    assert(pixel_pen(c,580,210)==3 && pixel_pen(c,580,211)==2);
+    for(row=6;row<9;++row)for(y=2+row*19+2;y<2+row*19+18;++y)
+        assert(pixel_pen(c,119,y)==7); /* Five digits must not paint the bevel. */
+}
 static void blocks(struct pt_editor *e)
 {
     struct pt_project *p=e->project;struct pt_editor_selection s;struct pt_event original[4],saved;
@@ -146,6 +169,11 @@ int main(int argc,char **argv)
     assert(pt_editor_click(e,400,10)==PT_UI_STOP);
     assert(pt_editor_click(e,250,30)==PT_UI_PATTERN);
     assert(pt_editor_click(e,250,87)==PT_UI_AUDITION);
+    assert(pt_editor_click(e,250,20)==PT_UI_PLAY);
+    assert(pt_editor_click(e,250,21)==PT_UI_PATTERN);
+    assert(pt_editor_click(e,250,39)==PT_UI_PATTERN);
+    assert(pt_editor_click(e,250,96)==PT_UI_AUDITION);
+    assert(pt_editor_click(e,250,97)==PT_UI_NONE);
     assert(pt_editor_key(e,0x57,0)==PT_UI_PLAY && pt_editor_key(e,0x58,0)==PT_UI_PATTERN);
     e->playback.active=1;assert(pt_editor_key(e,0x40,0)==PT_UI_STOP);e->playback.active=0;
     /* The reference-aligned view and mouse cells share the same row origin.
@@ -166,6 +194,7 @@ int main(int argc,char **argv)
     e->playback.active=1;e->playback.speed=6;e->playback.bpm=150;
     for(i=0;i<4;++i) {unsigned j;e->playback.volume[i]=64;for(j=0;j<81;++j)e->playback.wave[i][j]=j%2?-128:127;}
     pt_editor_key(e,0x50,0);pt_editor_draw(e,&canvas,font);pt_editor_draw_playback(e,&canvas,font);
+    aligned_borders(&canvas);
     ppm(argv[3],&canvas);
     /* Incremental updates must produce the full renderer's exact pixels, and
        the reported rectangles must cover every changed byte/pixel. */
@@ -201,6 +230,22 @@ int main(int argc,char **argv)
             for(p=0;p<4;++p) {assert(!memcmp(canvas.planes[p],incremental.planes[p],PT_VIEW_PLANE_BYTES));assert(!memcmp(canvas.planes[p],shown.planes[p],PT_VIEW_PLANE_BYTES));}
         }
         n=pt_editor_draw_update(e,&incremental,font,&cache,areas);assert(!n);
+        /* Native ticks present only these shared rectangles, without a full
+           editor redraw. Check glyph-edge erasure as tempo digits change. */
+        e->playback.active=1;e->playback.bpm=125;pt_editor_draw(e,&incremental,font);
+        for(p=0;p<4;++p)memcpy(shown.planes[p],incremental.planes[p],PT_VIEW_PLANE_BYTES);
+        for(step=0;step<4;++step) {
+            static const unsigned tempos[]={150,111,200,125};e->playback.bpm=tempos[step];
+            pt_editor_draw_playback(e,&incremental,font);pt_editor_draw(e,&canvas,font);
+            for(j=0;j<PT_VIEW_PLAYBACK_AREAS;++j) {
+                const struct pt_view_rect *a=&pt_view_playback_areas[j];
+                for(y=a->y;y<a->y+a->height;++y)for(x=a->x;x<a->x+a->width;++x)for(p=0;p<4;++p) {
+                    uint8_t mask=(uint8_t)(128>>(x&7));size_t offset=y*80+x/8;
+                    shown.planes[p][offset]=(shown.planes[p][offset]&~mask)|(incremental.planes[p][offset]&mask);
+                }
+            }
+            for(p=0;p<4;++p)assert(!memcmp(canvas.planes[p],shown.planes[p],PT_VIEW_PLANE_BYTES));
+        }
         for(p=0;p<4;++p) {free(incremental.planes[p]);free(shown.planes[p]);}
     }
 

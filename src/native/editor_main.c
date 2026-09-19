@@ -139,16 +139,15 @@ int main(int argc,char **argv)
                 pt_paula_poll(&audio,&editor->playback);
                 if(was_active && !editor->playback.active) {pt_editor_status(editor,"PLAYBACK ENDED - AUDIO RELEASED");redraw=1;}
                 if(was_active || editor->playback.active) {
+                    unsigned i;
                     pt_editor_draw_playback(editor,&canvas,pt_font);
-                    for(plane=0;plane<4;++plane) {
-                        CopyMem(canvas.planes[plane]+116*80,bitmap.Planes[plane]+116*80,39*80);
-                        CopyMem(canvas.planes[plane]+216*80,bitmap.Planes[plane]+216*80,21*80);
-                        CopyMem(canvas.planes[plane]+495*80,bitmap.Planes[plane]+495*80,17*80);
+                    for(i=0;i<PT_VIEW_PLAYBACK_AREAS;++i) {
+                        const struct pt_view_rect *area=&pt_view_playback_areas[i];
+                        for(plane=0;plane<4;++plane)CopyMem(canvas.planes[plane]+area->y*80,
+                            bitmap.Planes[plane]+area->y*80,area->height*80);
+                        BltBitMapRastPort(&bitmap,area->x,area->y,window->RPort,
+                            area->x,area->y,area->width,area->height,0xc0);WaitBlit();
                     }
-                    BltBitMapRastPort(&bitmap,230,116,window->RPort,230,116,408,39,0xc0);
-                    BltBitMapRastPort(&bitmap,14,216,window->RPort,14,216,80,18,0xc0);
-                    BltBitMapRastPort(&bitmap,610,227,window->RPort,610,227,24,10,0xc0);
-                    BltBitMapRastPort(&bitmap,248,495,window->RPort,248,495,168,17,0xc0);WaitBlit();
                     printf("EDITOR REPLAY active=%u ticks=%lu order=%u pattern=%u row=%u bpm=%u speed=%u period=%u,%u,%u,%u volume=%u,%u,%u,%u\n",
                         editor->playback.active,(unsigned long)editor->playback.ticks,editor->playback.order,editor->playback.pattern,
                         editor->playback.row,editor->playback.bpm,editor->playback.speed,

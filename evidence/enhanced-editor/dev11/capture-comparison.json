@@ -1,0 +1,17 @@
+{
+  "native_crop": [
+    76,
+    39,
+    716,
+    551
+  ],
+  "native_host_difference_bounds": [
+    0,
+    0,
+    22,
+    22
+  ],
+  "outside_pointer_exact": true,
+  "host_ppm_sha256": "99d01307f92eacd626aef30d3c1446c603144f1b0b4bfcafe6c324203796d343",
+  "editor_binary_sha256": "b0266d9ea7320ac7b5384d0d8ac9b2d7ea83a953b78d58a355b118dad318dd09"
+}

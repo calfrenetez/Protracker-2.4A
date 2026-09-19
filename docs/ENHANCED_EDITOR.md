@@ -192,3 +192,21 @@ face shading. Selected buttons reverse the bevel and inset their lettering by on
 pixel. Surrounding information strips keep their flatter treatment, so controls
 read as raised surfaces. Layout, hit regions, project data and font source remain
 unchanged. Existing full/incremental pixel tests include selected controls.
+
+### Shared border grid, 19 September 2026
+
+The owner's alignment feedback exposed a 19-pixel parameter grid beside an
+18-pixel command grid. Both now use the same 19-pixel rows and mouse boundaries.
+The scope title, two-row scope area and version strip share those row boundaries;
+secondary command panels no longer overlap the scope title. A single pattern
+header and uninterrupted rails replace the two-pixel jog at the channel headings.
+Rails reach the bottom bar, the sample/status strips have separate edges, and
+five-digit parameter values stay inside their numeric-field bevels.
+
+Native playback also used stale presentation rectangles after earlier layout
+changes. Cached rendering and native live ticks now use one shared rectangle
+list. The BPM clear area includes the last glyph column, preventing remnants as
+tempo digits change. Host checks assert actual border pixels and button boundary
+behaviour, then compare both cached and tick-only updates with full rendering.
+The optional `--playback-check` native editor test verifies a real MOD F96 tempo
+change to 150 BPM against independently drawn font pixels without requesting a full redraw.

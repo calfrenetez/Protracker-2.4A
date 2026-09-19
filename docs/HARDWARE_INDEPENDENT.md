@@ -64,10 +64,10 @@ below; they do not replace the original assembler tracker representation.
 | Component | Implemented and tested | Integration still required |
 | --- | --- | --- |
 | Channels | 1–16 channels, four-column page selection, wrapping navigation, names/pan/group/MIDI metadata, exclusive P/A/M routes, atomic fifth-Paula rejection and stable allocation of four Paula slots | Existing-song resizing, names/pan/group/MIDI setup UI, mixed backend dispatch |
-| Mute/solo and history | Channel page and saved settings; shared chronological note/block/channel undo; fifth-Paula rejection; classic Paula live mute/solo and undo/redo | Mixed backend playback, sample undo, persistent recovery |
-| PCM editing | Signed 8/16/24-bit mono/stereo samples; reverse, saturation gain, shared-peak normalize, fades and per-channel DC removal; validation before mutation | Sampler UI, loop/slice metadata, selection and undo wiring |
+| Mute/solo and history | Channel page and saved settings; shared chronological note/block/channel undo; fifth-Paula rejection; classic Paula live mute/solo and undo/redo | Mixed backend playback and persistent recovery |
+| PCM editing | Sampler waveform/range UI; signed 8/16/24-bit mono/stereo reverse, saturation gain, shared-peak normalize, fades and per-channel DC removal; staged shared undo and allocation rollback | Loop/slice UI, resampling/conversion UI and additional import formats |
 | Conversion | Explicit precision conversion with rounding/clipping; offline integer linear resampling | Antialias filtering and quality qualification; shared renderer/converter integration |
-| WAV | Bounded RIFF PCM parsing and canonical writing; 8/16/24-bit mono/stereo, odd-chunk padding, byte/block-rate checks and full low-eight-bit retention | Float/extensible WAV, loop metadata, sample-load UI, file I/O transaction and large-file policies |
+| WAV | Bounded RIFF PCM parsing and canonical writing; 8/16/24-bit mono/stereo, odd-chunk padding, byte/block-rate checks and full low-eight-bit retention | Float/extensible WAV and loop metadata; integer PCM native import/export with verified new-file publication is connected |
 
 The linear resampler does **not** yet provide an antialias filter for high-quality
 downsampling. The 24-bit path preserves stored PCM precision; it does not prove

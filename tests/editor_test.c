@@ -150,6 +150,34 @@ static void channel_controls(struct pt_editor *e)
     pt_editor_key(e,0x31,8);assert(!p->channels.track[4].muted);
     pt_editor_key(e,0x31,8);assert(e->history.cursor==2);
 }
+static void sampler_controls(struct pt_editor *e)
+{
+    struct pt_project *p=e->project;const struct pt_pcm *pcm;int32_t *before;size_t count;unsigned i,c;
+    assert(pt_editor_init(e,p));pcm=&p->samples[0].pcm;count=(size_t)pcm->frames*pcm->channels;
+    assert(count);before=malloc(count*sizeof(*before));assert(before);memcpy(before,pcm->data,count*sizeof(*before));
+    pt_editor_click(e,500,70);assert(e->panel==5);
+    assert(pt_editor_click(e,250,30)==PT_UI_SAMPLE_LOAD);
+    e->load_pending=1;e->quit_pending=1;
+    assert(pt_editor_key(e,0x18,9)==PT_UI_SAMPLE_LOAD && !e->load_pending && !e->quit_pending);
+    assert(pt_editor_click(e,400,30)==PT_UI_SAMPLE_SAVE);
+    assert(pt_editor_click(e,500,30)==PT_UI_AUDITION);
+    e->editing=1;pt_editor_key(e,0x31,0);assert(!pt_editor_dirty(e));
+    pt_editor_click(e,10,260);assert(e->sample_marking);
+    pt_editor_key(e,0x13,0);assert(!pt_editor_dirty(e) && strstr(e->status,"FINISH"));
+    pt_editor_click(e,629,260);assert(!e->sample_marking && !e->sample_start && e->sample_end==pcm->frames);
+    pt_editor_click(e,250,50);assert(pt_editor_dirty(e));pcm=&p->samples[0].pcm;
+    for(i=0;i<pcm->frames;++i)for(c=0;c<pcm->channels;++c)
+        assert(pcm->data[(size_t)i*pcm->channels+c]==before[(size_t)(pcm->frames-1-i)*pcm->channels+c]);
+    pt_editor_key(e,0x31,8);assert(!memcmp(pcm->data,before,count*sizeof(*before)) && !pt_editor_dirty(e));
+    pt_editor_key(e,0x31,9);pt_editor_saved(e);assert(!pt_editor_dirty(e));
+    pt_editor_click(e,250,88);assert(pt_editor_dirty(e));
+    pt_editor_key(e,0x31,8);assert(!pt_editor_dirty(e));
+    pt_editor_click(e,10,260);assert(e->sample_marking);
+    pt_editor_click(e,218,88);assert(e->sample==2 && e->sample_range_slot==2 && !e->sample_marking);
+    pt_editor_key(e,0x0b,0);assert(e->sample==1 && e->sample_end==pcm->frames);
+    pt_editor_key(e,0x45,0);assert(!e->panel && !e->quit_pending);
+    free(before);
+}
 int main(int argc,char **argv)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_document doc;struct pt_editor *e;
@@ -262,6 +290,10 @@ int main(int argc,char **argv)
             if(step==90)pt_editor_key(e,0x37,0);
             if(step==93)pt_editor_key(e,0x31,8);
             if(step==95)pt_editor_key(e,0x45,0);
+            if(step==96)pt_editor_key(e,0x28,8);
+            if(step==97)pt_editor_click(e,50,260);
+            if(step==98)pt_editor_click(e,400,260);
+            if(step==99)pt_editor_key(e,0x0c,0);
             pt_editor_draw(e,&canvas,font);n=pt_editor_draw_update(e,&incremental,font,&cache,areas);assert(n<=PT_VIEW_DIRTY_MAX);
             for(j=0;j<n;++j) {
                 const struct pt_view_rect *a=&areas[j];assert(a->x+a->width<=640 && a->y+a->height<=512);
@@ -292,8 +324,8 @@ int main(int argc,char **argv)
         for(p=0;p<4;++p) {free(incremental.planes[p]);free(shown.planes[p]);}
     }
 
-    blocks(e);channel_controls(e);
+    blocks(e);channel_controls(e);sampler_controls(e);
     for(i=0;i<4;++i)free(canvas.planes[i]);
-    free(font);free(e);pt_document_release(&doc);
+    free(font);pt_editor_dispose(e);free(e);pt_document_release(&doc);
     puts("EDITOR PASS: bank/wrap/scroll, guarded note and nibble edits, OFF, undo/redo, save state, discard confirmation, atomic block copy/paste/clear/transpose/clone, all-page planar render");return 0;
 }

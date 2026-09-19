@@ -24,7 +24,10 @@ non-destructive failure path. SAVE MOD exports eligible projects losslessly thro
 projects are refused without dropping their data. CHANNEL / Control-R now exposes
 exclusive routing plus mute/solo, with chronological note/channel undo and exact
 project persistence. Classic Paula playback applies mute/solo live; mixed
-AmiGUS/MIDI replay is still pending. See the
+AmiGUS/MIDI replay is still pending. SAMPLER / Control-L now adds waveform range
+selection, exact integer PCM WAV import/export and undoable reverse, normalize,
+gain, fades and DC removal. High-resolution samples remain editable/saveable;
+classic Paula audition still requires compatible samples. See the
 [editor guide](docs/ENHANCED_EDITOR.md) and retained native UI evidence. Physical AmiGUS tests await the owner's Mini.
 MIDI note ownership and quantised recording into undoable pattern events now
 pass host/native sink tests; CAMD and live transport remain unconnected.

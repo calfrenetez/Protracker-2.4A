@@ -37,7 +37,7 @@ Starting from the Shell with no arguments creates a blank four-channel song.
 CLEAR / Control-N opens NEW SONG. Choose 1–16 channels with +/- and select CREATE
 or press Return. The first four channels default to Paula and additional channels
 to AmiGUS. New songs contain one empty pattern, one order and 31 empty classic
-sample slots; sample loading/editing still needs integration. Cancel/Escape
+sample slots. The SAMPLER page imports WAV into a selected slot. Cancel/Escape
 preserves the current song. Dirty replacement needs CREATE/Return twice; changing
 the count or any other input cancels the discard confirmation. Allocation failure
 preserves the old song, history, clipboard and playback. Successful creation stops
@@ -78,7 +78,7 @@ to allocate/open a requester leaves the document intact. The dialogs follow the
 - Minus/equal decrease/increase the selected sample; the paired arrows on the
   SAMPLE row do the same. PATTERN arrows select an existing pattern, and POS
   arrows select an existing order. Other parameter arrows are not wired yet.
-- Control-Z / Control-Shift-Z undo/redo one complete event, block or channel change.
+- Control-Z / Control-Shift-Z undo/redo one complete event, block, channel or sample change.
 - CHANNEL / Control-R: select PAULA, AMIGUS or MIDI; routes are exclusive and a
   fifth Paula assignment is refused. P/A/M select the route while this page is
   open. U toggles MUTE and S toggles SOLO; highlighted buttons show saved state.
@@ -116,11 +116,59 @@ remain preserved until explicitly edited. MIDI notes use C-0 for note zero;
 notes 120–127 display their numeric MIDI value. This is a display convention,
 not an assertion about an external instrument's octave naming.
 
+## Sampler page
+
+SAMPLER / Control-L opens a sample waveform page in the existing classic screen.
+The pattern view returns on BACK/Escape. +/- and the SAMPLE arrows choose the
+sample slot. A mono waveform uses one pane; stereo uses separate left/right panes.
+Each horizontal pixel displays its minimum/maximum sample values. This is stored
+sample data, not live captured audio. Two clicks select a half-open frame range;
+the yellow marker shows a pending first endpoint. Edits are refused until that
+range is completed or reset. ALL / A selects the full sample.
+Undo/redo of a sample change resets the range to the full current sample.
+
+LOAD WAV / L (also Control-Shift-O while this page is open) uses the native file
+requester. It accepts integer PCM WAV, 8/16/24-bit, mono/stereo, up to 192 kHz.
+Import retains exact decoded precision, rate and channels; no downmix, resampling
+or precision conversion occurs. The selected slot is replaced with volume 64,
+finetune zero and no loop/slice metadata. Undo restores the complete old sample.
+A replacement is refused if any event references its existing slices. WAV loop,
+cue and other ancillary metadata are not imported. RAW/IFF/MOD sample import,
+recording and adding sample slots beyond the existing document remain open.
+
+REVERSE / R, NORMALIZE / N, DC OFFS / D, GAIN X2 / G, GAIN /2 / H, FADE IN / I
+and FADE OUT / O act on the selected range. Stereo frames stay paired. Normalize
+uses a shared peak, gain saturates at the declared precision, fades reach zero,
+and DC removal calculates each channel independently. Existing sample loop/slice
+positions are preserved during these length-preserving edits. Loop/marker editing,
+resampling and explicit precision conversion UI remain open.
+
+Each change joins the same chronological undo/redo as notes and channel settings.
+Staged immutable sample versions are reference-counted; command eviction or redo
+truncation cannot release the active sample. Retained/staged sample versions have
+a 32 MiB policy budget, additional to loaded document storage and the input file.
+Temporary input files are limited to 64 MiB. Allocation/budget/validation failure
+preserves the project and journal. The budget is a ceiling, not an assumption
+about available RAM. Native allocations may fail below it. Project replacement
+and normal exit release all editor-owned versions.
+
+SAVE WAV / W exports the entire selected sample, retaining PCM precision, channels
+and rate. It uses verified new-file publication and never replaces an existing
+file. WAV export does not mark the project saved. Control-S still saves the full
+project, including edited samples, and Control-Z/Control-Shift-Z undo/redo.
+
+AUDITION / Return / F8 uses the existing classic Paula audition backend. It only
+accepts compatible classic samples on a Paula route; high-resolution/stereo/rate
+conversion and AmiGUS preview remain pending. Successful sample imports, edits
+and sample undo/redo stop existing song/audition playback before another action
+can use its old private copy. Failed/cancelled/no-op operations preserve playback.
+Pattern edits and channel settings keep their previously documented behaviour.
+
 ## Display and acceptance boundaries
 
 The renderer uses 163,840 bytes for a four-plane software canvas, preferring Fast
 RAM, plus 163,840 bytes of Chip RAM for a blitter source. The OS display has its
-own bitmap. The current bounded editor/history structure uses about 81 KiB on
+own bitmap. The current bounded editor/history structure uses about 83 KiB on
 68k. Loaded project/sample storage is additional. No fixed available-RAM amount
 is assumed; allocation failure unwinds all owned resources.
 

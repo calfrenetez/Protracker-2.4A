@@ -172,6 +172,35 @@ static void draw_pattern_row(const struct pt_editor *e,struct pt_canvas *c,const
             }
     }
 }
+static void draw_sample(const struct pt_editor *e,struct pt_canvas *c,const uint8_t *font)
+{
+    const struct pt_sample *sample=e->sample && e->sample<=e->project->sample_count?&e->project->samples[e->sample-1]:NULL;
+    const struct pt_pcm *pcm=sample?&sample->pcm:NULL;char text[80];unsigned channel,x;
+    uint32_t start=e->sample_range_slot==e->sample?e->sample_start:0;
+    uint32_t end=e->sample_range_slot==e->sample?e->sample_end:pcm?pcm->frames:0;
+    panel(c,2,PT_EDITOR_HEADER_Y,636,PT_EDITOR_BOTTOM_Y-PT_EDITOR_HEADER_Y,GREY);
+    if(!pcm) {label(c,font,2,PT_EDITOR_HEADER_Y,636,19,"SELECT A SAMPLE SLOT",0);return;}
+    snprintf(text,sizeof(text),"SAMPLE %02u  %u BIT  %s  %lu HZ",e->sample,pcm->bits,pcm->channels==2?"STEREO":"MONO",(unsigned long)pcm->rate);
+    label(c,font,2,PT_EDITOR_HEADER_Y,636,19,text,0);
+    for(channel=0;channel<pcm->channels;++channel) {
+        int top=254+(int)channel*(216/pcm->channels),height=216/pcm->channels-4,mid=top+height/2;
+        rect(c,10,top,620,height,BLACK);
+        if(pcm->frames)for(x=0;x<620;++x) {
+            uint32_t first=(uint32_t)((uint64_t)x*pcm->frames/620),last=(uint32_t)((uint64_t)(x+1)*pcm->frames/620),f;
+            int32_t low=0,high=0;int y0,y1;
+            if(last==first)last=first+1;
+            for(f=first;f<last && f<pcm->frames;++f) {int32_t value=pcm->data[(size_t)f*pcm->channels+channel];if(value<low)low=value;if(value>high)high=value;}
+            if(first>=start && first<end)rect(c,10+(int)x,top,1,height,8);
+            y0=mid-(int)((int64_t)high*(height/2-2)/((int32_t)1<<(pcm->bits-1)));
+            y1=mid-(int)((int64_t)low*(height/2-2)/((int32_t)1<<(pcm->bits-1)));
+            rect(c,10+(int)x,y0,1,y1-y0+1,BLUE);
+        }
+        else rect(c,10,mid,620,1,BLUE);
+        if(e->sample_range_slot==e->sample && e->sample_marking && pcm->frames)rect(c,10+(int)((uint64_t)e->sample_anchor*619/pcm->frames),top,1,height,YELLOW);
+    }
+    snprintf(text,sizeof(text),"RANGE %lu - %lu / %lu FRAMES",(unsigned long)start,(unsigned long)end,(unsigned long)pcm->frames);
+    small(c,font,12,478,text,NAVY);
+}
 void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t font[580])
 {
     const struct pt_project *p=e->project;unsigned i,r,ch,page=pt_channels_page(&p->channels),first=page*4;
@@ -237,7 +266,12 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
     panel(c,476,PT_EDITOR_BOTTOM_Y,18,21,GREY);rect(c,482,498,6,9,WHITE);label(c,font,494,PT_EDITOR_BOTTOM_Y,58,21,"STOP",0);
     panel(c,552,PT_EDITOR_BOTTOM_Y,86,21,GREY);small(c,font,557,497,"PATTERN",WHITE);snprintf(s,sizeof(s),"%02X",e->pattern);small(c,font,618,497,s,NAVY);
     pt_editor_draw_playback(e,c,font);
-    if(e->panel==4) {
+    if(e->panel==5) {
+        static const char *ops[4][3]={{"LOAD WAV","SAVE WAV","AUDITION"},{"REVERSE","NORMALIZE","DC OFFS"},{"GAIN /2","GAIN X2","BACK"},{"FADE IN","FADE OUT","ALL"}};
+        label(c,font,230,2,369,19,"SAMPLER",0);
+        for(r=0;r<4;++r)for(i=0;i<3;++i)label(c,font,230+(int)i*123,21+(int)r*19,123,19,ops[r][i],0);
+        draw_sample(e,c,font);
+    } else if(e->panel==4) {
         const struct pt_channel *channel=&p->channels.track[p->channels.selected];
         snprintf(s,sizeof(s),"CHANNEL %02u",p->channels.selected+1);label(c,font,230,2,369,19,s,0);
         label(c,font,230,21,123,19,"PAULA",channel->route==PT_PAULA);
@@ -311,7 +345,7 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
         const struct pt_pcm *pcm=&e->project->samples[i].pcm;
         bytes+=(size_t)pcm->frames*pcm->channels*(pcm->bits/8);
     }
-    full=!old->valid || old->page!=page || old->pattern!=e->pattern || old->first_row!=e->first_row ||
+    full=(e->panel==5 && (old->sample_start!=e->sample_start || old->sample_end!=e->sample_end || old->sample_marking!=e->sample_marking || old->sample_anchor!=e->sample_anchor || old->sample_range_slot!=e->sample_range_slot)) || !old->valid || old->page!=page || old->pattern!=e->pattern || old->first_row!=e->first_row ||
          old->position!=e->position || old->sample!=e->sample || old->editing!=e->editing || old->panel!=e->panel || (e->panel==4 && old->selected!=e->project->channels.selected) || (e->panel==1 && old->selection.active!=selection.active) ||
          old->sample_bytes!=bytes || memcmp(&metadata,&old->project,sizeof(metadata)) || memcmp(&sample,&old->sample_meta,sizeof(sample));
     playback_changed=!old->valid || memcmp(&e->playback,&old->playback,sizeof(e->playback));
@@ -340,7 +374,7 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
         changed=memcmp(events,old->events[r],sizeof(events))!=0;
         if((row==old->row || row==e->row) && (old->row!=e->row || old->field!=e->field || old->selected!=e->project->channels.selected))changed=1;
         if(selection_changed)changed=1;
-        if(!full && changed) {draw_pattern_row(e,c,font,r);areas[count++]=(struct pt_view_rect){3,PT_EDITOR_PATTERN_Y+r*12,635,12};}
+        if(!full && changed && e->panel!=5) {draw_pattern_row(e,c,font,r);areas[count++]=(struct pt_view_rect){3,PT_EDITOR_PATTERN_Y+r*12,635,12};}
         memcpy(old->events[r],events,sizeof(events));
     }
     memcpy(&old->project,&metadata,sizeof(metadata));memcpy(&old->sample_meta,&sample,sizeof(sample));
@@ -348,6 +382,7 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
     old->new_channels=e->new_channels;old->new_pending=e->new_pending;
     old->selection=selection;
     old->valid=1;old->page=page;old->pattern=e->pattern;old->first_row=e->first_row;old->position=e->position;
+    old->sample_start=e->sample_start;old->sample_end=e->sample_end;old->sample_marking=e->sample_marking;old->sample_anchor=e->sample_anchor;old->sample_range_slot=e->sample_range_slot;
     old->sample=e->sample;old->editing=e->editing;old->panel=e->panel;old->row=e->row;old->field=e->field;
     old->selected=e->project->channels.selected;old->dirty=pt_editor_dirty(e);old->sample_bytes=bytes;
     return count;

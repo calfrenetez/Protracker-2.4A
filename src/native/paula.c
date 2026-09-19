@@ -159,9 +159,13 @@ const char *pt_paula_audition(struct pt_paula *a,const struct pt_project *p,unsi
     struct pt_sample selected;const char *error;
     if(!sample || sample>p->sample_count || period<113 || period>856)return "SAMPLE: SELECT A VALID SAMPLE";
     if(p->channels.track[p->channels.selected].route!=PT_PAULA)return "SAMPLE: SELECT A PAULA CHANNEL FOR THIS BACKEND";
+    selected=p->samples[sample-1];
+    if(selected.pcm.bits!=8 || selected.pcm.channels!=1 || selected.pcm.rate!=PT_CLASSIC_RATE ||
+       (selected.loop!=PT_LOOP_NONE && selected.loop!=PT_LOOP_FORWARD))
+        return "SAMPLE: FORMAT NEEDS ENHANCED PREVIEW OR CONVERSION";
     memset(&q,0,sizeof(q));pt_channels_init(&q.channels);q.order_count=1;q.pattern_count=1;
     q.sample_count=1;q.orders=&order;q.speed=6;q.bpm=125;
-    selected=p->samples[sample-1];q.samples=&selected;
+    q.samples=&selected;
     events=calloc(256,sizeof(*events));if(!events)return "SAMPLE: OUT OF MEMORY";
     q.events=events;events[0].kind=PT_NOTE_PERIOD;events[0].pitch=(uint16_t)period;events[0].instrument=1;
     error=pt_paula_play(a,&q,0,0,0);free(events);

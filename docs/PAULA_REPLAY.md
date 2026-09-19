@@ -29,7 +29,8 @@ Pattern edits, undo and redo publish changed 16-byte MOD rows under short interr
 exclusion. Playback sees those edits on subsequent reads; already-triggered notes
 are not retriggered. An edit requiring an unsupported backend stops playback with
 a clear message. Sample data is not republished during pattern edits: effects
-such as EFx may modify only the private replay copy. Stop/restart recreates it.
+such as EFx may modify only the private replay copy. Stop/restart recreates it. Sample imports, edits and sample undo/redo stop the
+existing snapshot; restart/audition then constructs a fresh one from current data.
 
 The CHANNEL page applies mute/solo live, including undo and redo. Muted voices
 continue their note/effect progression, so unmuting restores current output volume

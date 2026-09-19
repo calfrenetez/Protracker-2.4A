@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "document.h"
+#include "wav.h"
 #include "mod_project.h"
 #include "../editor/view.h"
 #include "../platform/file_save.h"
@@ -31,6 +32,32 @@ static int load(struct pt_document *d,const char *path)
     ok=pt_document_load(d,bytes,(size_t)n,SIZE_MAX)==PT_PROJECT_OK;
 done:
     free(bytes);if(f)fclose(f);return ok;
+}
+static enum pt_edit_result load_sample(struct pt_editor *e,const char *path)
+{
+    FILE *f=fopen(path,"rb");long n;uint8_t *bytes=NULL;enum pt_edit_result result=PT_EDIT_INVALID;
+    const char *name=path,*part;
+    if(!f || !e->sample) {if(f)fclose(f);return PT_EDIT_INVALID;}
+    if(fseek(f,0,SEEK_END) || (n=ftell(f))<=0 || n>64L*1024*1024)goto done;
+    rewind(f);bytes=malloc((size_t)n);if(!bytes) {result=PT_EDIT_CAPACITY;goto done;}
+    if(fread(bytes,1,(size_t)n,f)!=(size_t)n || ferror(f))goto done;
+    if(fclose(f)) {f=NULL;goto done;}f=NULL;
+    for(part=path;*part;++part)if(*part=='/' || *part==':')name=part+1;
+    result=pt_sampler_import(&e->sampler,e->project,&e->history,e->sample-1,bytes,(size_t)n,name);
+done:
+    if(f)fclose(f);
+    free(bytes);return result;
+}
+static void save_sample(struct pt_editor *e,const char *path)
+{
+    size_t n,w;uint8_t *bytes;enum pt_save_result result;
+    const struct pt_pcm *pcm=e->sample && e->sample<=e->project->sample_count?&e->project->samples[e->sample-1].pcm:NULL;
+    if(!pcm || !pcm->frames || pt_wav_size(pcm,&n)!=PT_WAV_OK) {pt_editor_status(e,"WAV EXPORT: SELECT A NONEMPTY SAMPLE");return;}
+    bytes=malloc(n);if(!bytes) {pt_editor_status(e,"WAV EXPORT: OUT OF MEMORY");return;}
+    if(pt_wav_encode(pcm,bytes,n,&w)!=PT_WAV_OK || w!=n) {free(bytes);pt_editor_status(e,"WAV EXPORT FAILED - SAMPLE PRESERVED");return;}
+    result=pt_file_save_new(path,bytes,n);free(bytes);
+    pt_editor_status(e,result==PT_SAVE_OK?"WAV EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED":"WAV EXPORT REFUSED OR FAILED - DESTINATION PRESERVED");
+    printf("EDITOR WAV result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
 }
 static void save(struct pt_editor *e,const char *path)
 {
@@ -79,13 +106,13 @@ static void save_mod(struct pt_editor *e,const char *path,size_t n)
 int main(int argc,char **argv)
 {
     struct pt_view_cache view_cache={0};
-    struct pt_paula audio={0};char load_path[1024]="",save_path[1024]="new-project.ptg",mod_path[1024]="new-module.mod",chosen_path[1024];
+    struct pt_paula audio={0};char load_path[1024]="",save_path[1024]="new-project.ptg",mod_path[1024]="new-module.mod",sample_path[1024]="",wav_path[1024]="new-sample.wav",chosen_path[1024];
     struct pt_allocator allocator={NULL,allocate,release};struct pt_document doc;
     struct pt_editor *editor=NULL;struct Screen *screen=NULL;struct Window *window=NULL;
     struct BitMap bitmap;struct pt_canvas canvas;unsigned plane;uint8_t *pixels=NULL;int rc=20,running=1,redraw=1;
     memset(&bitmap,0,sizeof(bitmap));memset(&canvas,0,sizeof(canvas));pt_document_init(&doc,&allocator);
     if(argc<1 || argc>3) {puts("Usage: PT24GEdit [INPUT [NEW_OUTPUT]]\nDevelopment editor; classic Paula playback; existing output is never replaced.");goto done;}
-    if((argc>1?!load(&doc,argv[1]):pt_document_new(&doc,4,SIZE_MAX)!=PT_PROJECT_OK) || !(editor=malloc(sizeof(*editor))) || !pt_editor_init(editor,&doc.project)) {
+    if((argc>1?!load(&doc,argv[1]):pt_document_new(&doc,4,SIZE_MAX)!=PT_PROJECT_OK) || !(editor=calloc(1,sizeof(*editor))) || !pt_editor_init(editor,&doc.project)) {
         puts("EDITOR: input invalid or allocation failed");goto done;
     }
     if(argc>1)snprintf(load_path,sizeof(load_path),"%s",argv[1]);
@@ -132,6 +159,7 @@ int main(int argc,char **argv)
         while((message=(struct IntuiMessage *)GetMsg(window->UserPort))) {
             ULONG kind=message->Class;UWORD code=message->Code,qualifier=message->Qualifier;
             WORD mx=message->MouseX,my=message->MouseY;enum pt_editor_action action=PT_UI_NONE;
+            unsigned generation=editor->sampler.generation;
             unsigned long revision=editor->history.revision;const char *error=NULL;
             ReplyMsg((struct Message *)message);
             if(kind==IDCMP_INTUITICKS) {
@@ -171,7 +199,7 @@ int main(int argc,char **argv)
             }
             if(action==PT_UI_STOP) {pt_paula_stop(&audio);pt_editor_status(editor,"STOPPED - AUDIO RELEASED");}
             if(editor->history.revision!=revision && audio.started) {
-                if(audio.mode==2)pt_paula_stop(&audio);
+                if(audio.mode==2 || editor->sampler.generation!=generation)pt_paula_stop(&audio);
                 else {error=pt_paula_sync(&audio,editor->project);if(error)pt_editor_status(editor,error);}
                 pt_paula_poll(&audio,&editor->playback);
             }
@@ -195,10 +223,26 @@ int main(int argc,char **argv)
                     else pt_editor_status(editor,selected==0?"MOD EXPORT CANCELLED - PROJECT PRESERVED":"MOD REQUESTER UNAVAILABLE OR PATH TOO LONG");
                 }
             }
+            if(action==PT_UI_SAMPLE_LOAD || action==PT_UI_SAMPLE_SAVE) {
+                int importing=action==PT_UI_SAMPLE_LOAD,selected;
+                printf("EDITOR REQUEST %s\n",importing?"sample":"wav");fflush(stdout);
+                selected=pt_file_request(window,importing?3:4,importing?sample_path:wav_path,chosen_path,sizeof(chosen_path));view_cache.valid=0;
+                if(selected==1) {
+                    if(importing) {
+                        enum pt_edit_result result=load_sample(editor,chosen_path);
+                        pt_editor_sample_result(editor,result);
+                        if(result==PT_EDIT_OK) {
+                            strcpy(sample_path,chosen_path);pt_editor_sample_all(editor);
+                            if(editor->sampler.generation!=generation) {pt_paula_stop(&audio);pt_paula_poll(&audio,&editor->playback);}
+                        }
+                        printf("EDITOR SAMPLE result=%u revision=%lu dirty=%u\n",result,(unsigned long)editor->history.revision,pt_editor_dirty(editor));fflush(stdout);
+                    } else {strcpy(wav_path,chosen_path);save_sample(editor,chosen_path);}
+                } else pt_editor_status(editor,selected==0?"SAMPLE FILE REQUEST CANCELLED - EDITS PRESERVED":"SAMPLE FILE REQUEST FAILED - EDITS PRESERVED");
+            }
             if(action==PT_UI_NEW) {
                 unsigned channels=editor->new_channels;
                 if(pt_document_new(&doc,channels,SIZE_MAX)==PT_PROJECT_OK) {
-                    pt_paula_stop(&audio);pt_editor_init(editor,&doc.project);load_path[0]=0;
+                    pt_paula_stop(&audio);pt_editor_dispose(editor);pt_editor_init(editor,&doc.project);load_path[0]=0;
                     pt_editor_status(editor,"NEW SONG READY - EMPTY SAMPLE SLOTS");view_cache.valid=0;
                     printf("EDITOR NEW channels=%u patterns=%u\n",doc.project.channels.count,doc.project.pattern_count);fflush(stdout);
                 } else pt_editor_status(editor,"NEW SONG FAILED - CURRENT PROJECT AND EDITS PRESERVED");
@@ -209,7 +253,7 @@ int main(int argc,char **argv)
                     selected=pt_file_request(window,0,load_path,chosen_path,sizeof(chosen_path));view_cache.valid=0;
                     if(selected==1) {
                         if(load(&doc,chosen_path)) {
-                            pt_paula_stop(&audio);pt_editor_init(editor,&doc.project);strcpy(load_path,chosen_path);
+                            pt_paula_stop(&audio);pt_editor_dispose(editor);pt_editor_init(editor,&doc.project);strcpy(load_path,chosen_path);
                             pt_editor_status(editor,"PROJECT LOADED");
                             printf("EDITOR LOAD success channels=%u patterns=%u\n",doc.project.channels.count,doc.project.pattern_count);fflush(stdout);
                         } else pt_editor_status(editor,"LOAD FAILED - CURRENT PROJECT AND EDITS PRESERVED");
@@ -229,5 +273,5 @@ done:
     if(pixels)FreeMem(pixels,4UL*PT_VIEW_PLANE_BYTES);
     if(GfxBase)CloseLibrary((struct Library *)GfxBase);
     if(IntuitionBase)CloseLibrary((struct Library *)IntuitionBase);
-    free(editor);pt_document_release(&doc);return rc;
+    pt_editor_dispose(editor);free(editor);pt_document_release(&doc);return rc;
 }

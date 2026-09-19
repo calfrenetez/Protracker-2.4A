@@ -1,0 +1,21 @@
+19 September 2026: sampler windows were explicitly coordinated with AmiConnect
+(task 01a02122-c34e-72f0-95cc-e36ce3d73629). No emulator was launched during its
+config-helper window or without its explicit release. Fresh process/private-disk/
+socket checks preceded the final claim.
+
+Final retained run: sampler1789854846276505000
+Elapsed native workflow: 137.683 seconds
+PT24GEdit: 104600 bytes
+SHA-256: ba93681a3c878dc5a95b38dcb36114cb4e842519de0cc62d494510860bade4b9
+
+PTSamplerTest and both editor invocations exited 0. All four DMA bits were off.
+The harness guarded exact Config=ProTracker isolated baseline, recorded CPU/RAM,
+restored the private launch script and issued profile-guarded QUIT.
+
+Fresh checks after final shutdown:
+ps ax -o pid=,comm= filtered for /Amiberry$ or /amiberry$: no match
+lsof local/baseline.hdf: no holder
+/tmp/amiberry.sock: absent
+
+Explicit release, test results and final binary identity sent to AmiConnect.
+No more launch under this reservation; obtain a fresh handover first.

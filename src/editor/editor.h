@@ -2,6 +2,7 @@
 #define PT_EDITOR_H
 #include "pattern.h"
 #include "playback.h"
+#include "sampler.h"
 #define PT_EDITOR_ROWS 20
 /* One grid for parameter rows, command rows and their mouse targets. */
 #define PT_EDITOR_CONTROL_Y 2
@@ -12,11 +13,14 @@
 #define PT_EDITOR_HEADER_Y 234
 #define PT_EDITOR_PATTERN_Y 250
 #define PT_EDITOR_BOTTOM_Y 491
-enum pt_editor_action {PT_UI_NONE,PT_UI_SAVE,PT_UI_QUIT,PT_UI_PLAY,PT_UI_PATTERN,PT_UI_STOP,PT_UI_AUDITION,PT_UI_LOAD,PT_UI_SAVE_AS,PT_UI_EXPORT_MOD,PT_UI_NEW};
+enum pt_editor_action {PT_UI_NONE,PT_UI_SAVE,PT_UI_QUIT,PT_UI_PLAY,PT_UI_PATTERN,PT_UI_STOP,PT_UI_AUDITION,PT_UI_LOAD,PT_UI_SAVE_AS,PT_UI_EXPORT_MOD,PT_UI_NEW,PT_UI_SAMPLE_LOAD,PT_UI_SAMPLE_SAVE};
 struct pt_editor_selection {unsigned active,marking,pattern,r0,r1,c0,c1,anchor_row,anchor_channel;};
 struct pt_editor {
     struct pt_project *project;
     struct pt_pattern_history history;
+    struct pt_sampler sampler;
+    unsigned sample_range_slot,sample_marking;
+    uint32_t sample_start,sample_end,sample_anchor;
     struct pt_pattern_command commands[128];
     struct pt_event_change changes[2048];
     unsigned pattern,row,first_row,field,sample,octave,editing,quit_pending,position,panel,load_pending,new_pending,new_channels;
@@ -31,6 +35,11 @@ struct pt_editor {
 };
 /* Initialize only after a complete project load; no audio backend is invoked. */
 int pt_editor_init(struct pt_editor *,struct pt_project *);
+/* Dispose before reinitializing or freeing a live editor. Does not touch project
+   storage; release/destroy its document separately. */
+void pt_editor_dispose(struct pt_editor *);
+void pt_editor_sample_all(struct pt_editor *);
+void pt_editor_sample_result(struct pt_editor *,enum pt_edit_result);
 enum pt_editor_action pt_editor_key(struct pt_editor *,unsigned raw,unsigned qualifier);
 enum pt_editor_action pt_editor_click(struct pt_editor *,int x,int y);
 void pt_editor_status(struct pt_editor *,const char *);

@@ -27,6 +27,7 @@ static int valid(const struct pt_project *p,const struct pt_pattern_history *h)
         if(c->offset!=used || c->count>h->used-used)return 0;
         if(c->kind==PT_COMMAND_EVENTS) {if(!c->count)return 0;}
         else if(c->kind==PT_COMMAND_CHANNEL) {if(c->count || c->channel>=p->channels.count)return 0;}
+        else if(c->kind==PT_COMMAND_RESOURCE) {if(c->count || !c->resource.context || !c->resource.apply || !c->resource.discard)return 0;}
         else return 0;
         used+=c->count;
     }
@@ -51,16 +52,25 @@ enum pt_edit_result pt_pattern_history_init(struct pt_pattern_history *h,const s
     memset(h,0,sizeof(*h));h->bound_events=p->events;h->bound_channels=p->channels.count;h->bound_patterns=p->pattern_count;h->commands=commands;h->changes=changes;
     h->command_capacity=command_capacity;h->change_capacity=change_capacity;h->next_revision=1;return PT_EDIT_OK;
 }
+static void discard(struct pt_pattern_command *c)
+{if(c->kind==PT_COMMAND_RESOURCE)c->resource.discard(c->resource.context);}
+void pt_pattern_history_release(struct pt_pattern_history *h)
+{
+    size_t i;if(!h)return;
+    for(i=0;i<h->count;++i)discard(&h->commands[i]);
+    memset(h,0,sizeof(*h));
+}
 static struct pt_pattern_command *reserve(struct pt_pattern_history *h,size_t needed)
 {
     size_t i;
     /* All validation precedes this mutation of the journal. */
     if(h->cursor<h->count) {
+        for(i=h->cursor;i<h->count;++i)discard(&h->commands[i]);
         h->used=h->cursor?h->commands[h->cursor-1].offset+h->commands[h->cursor-1].count:0;
         h->count=h->cursor;
     }
     while(h->count==h->command_capacity || needed>h->change_capacity-h->used) {
-        size_t drop=h->commands[0].count;
+        size_t drop=h->commands[0].count;discard(&h->commands[0]);
         memmove(h->changes,h->changes+drop,(h->used-drop)*sizeof(*h->changes));h->used-=drop;
         --h->count;--h->cursor;
         for(i=0;i<h->count;++i) {h->commands[i]=h->commands[i+1];h->commands[i].offset-=drop;}
@@ -107,6 +117,16 @@ enum pt_edit_result pt_pattern_channel_apply(struct pt_project *p,struct pt_patt
     p->channels.track[index]=value;h->revision=command->after_revision;++h->count;h->cursor=h->count;
     return PT_EDIT_OK;
 }
+enum pt_edit_result pt_pattern_resource_apply(struct pt_project *p,struct pt_pattern_history *h,const struct pt_edit_resource *r)
+{
+    struct pt_pattern_command *command;struct pt_edit_resource copy;
+    if(!valid(p,h) || !r || !r->context || !r->apply || !r->discard)return PT_EDIT_INVALID;
+    if(h->next_revision==UINT32_MAX)return PT_EDIT_CAPACITY;
+    copy=*r;
+    if(!copy.apply(copy.context,p,1))return PT_EDIT_CONFLICT;
+    command=reserve(h,0);command->kind=PT_COMMAND_RESOURCE;command->resource=copy;
+    h->revision=command->after_revision;++h->count;h->cursor=h->count;return PT_EDIT_OK;
+}
 enum pt_edit_result pt_pattern_undo(struct pt_project *p,struct pt_pattern_history *h,int direction)
 {
     struct pt_pattern_command *command;size_t i,n;
@@ -122,6 +142,7 @@ enum pt_edit_result pt_pattern_undo(struct pt_project *p,struct pt_pattern_histo
         if(pt_channels_validate(&next)!=PT_CHANNEL_OK)return PT_EDIT_CONFLICT;
         p->channels.track[command->channel]=*replacement;
     }
+    if(command->kind==PT_COMMAND_RESOURCE && !command->resource.apply(command->resource.context,p,direction))return PT_EDIT_CONFLICT;
     for(i=0;i<command->count;++i) {
         struct pt_event_change *c=&h->changes[command->offset+i];
         const struct pt_event *expected=direction<0?&c->after:&c->before,*replacement=direction<0?&c->before:&c->after;

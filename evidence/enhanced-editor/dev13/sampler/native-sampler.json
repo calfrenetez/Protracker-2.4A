@@ -1,0 +1,28 @@
+{
+  "run_id": "sampler1789854846276505000",
+  "elapsed_seconds": 137.683,
+  "binaries": {
+    "PT24GEdit": "ba93681a3c878dc5a95b38dcb36114cb4e842519de0cc62d494510860bade4b9",
+    "PTSamplerTest": "e6fc8e96d48034339bcb111530b8f41a8685c88df33d8341135c13e17f88f3f4"
+  },
+  "exact_mono_import_reverse_export": true,
+  "exact_stereo24_import_export_and_project_bytes": true,
+  "unsupported_high_resolution_audition_refused": true,
+  "bad_and_cancelled_import_preserve_redo": true,
+  "existing_wav_preserved": true,
+  "edit_and_import_stop_owned_audio": true,
+  "reopened_project_and_wav_byte_identity": true,
+  "normal_exits": 2,
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0",
+  "logs": {
+    "sampler.log": "SAMPLER PASS: exact stereo24 import/range edit, unified history, dirty state, no-op redo, allocation rollback, bounded memory, eviction, save/reopen and release\n",
+    "editor.log": "EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=84858\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PLAYING SONG - PAULA CIA panel=0\nEDITOR REPLAY active=1 ticks=7 order=0 pattern=0 row=0 bpm=125 speed=6 period=428,339,285,214 volume=24,24,24,24\nEDITOR REPLAY active=1 ticks=12 order=0 pattern=0 row=1 bpm=125 speed=6 period=428,339,285,214 volume=24,24,24,24\nEDITOR REPLAY active=1 ticks=16 order=0 pattern=0 row=1 bpm=125 speed=6 period=428,339,285,214 volume=24,24,24,24\nEDITOR REPLAY active=1 ticks=21 order=0 pattern=0 row=2 bpm=125 speed=6 period=428,339,285,214 volume=24,24,24,24\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO panel=5\nEDITOR REPLAY active=1 ticks=220 order=0 pattern=0 row=35 bpm=125 speed=6 period=428,339,285,214 volume=24,24,24,24\nEDITOR REQUEST sample\nEDITOR SAMPLE result=0 revision=1 dirty=1\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=SAMPLE UPDATED - CONTROL-Z TO UNDO panel=5\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=SAMPLE AUDITION - PAULA; STOP TO RELEASE panel=5\nEDITOR REPLAY active=1 ticks=8 order=0 pattern=0 row=0 bpm=125 speed=6 period=428,0,0,0 volume=64,0,0,0\nEDITOR REPLAY active=1 ticks=12 order=0 pattern=0 row=1 bpm=125 speed=6 period=428,0,0,0 volume=64,0,0,0\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=SAMPLE UPDATED - CONTROL-Z TO UNDO panel=5\nEDITOR FRAME row=0 channel=0 revision=3 dirty=1 status=SAMPLE UPDATED - CONTROL-Z TO UNDO panel=5\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=UNDO panel=5\nEDITOR REQUEST sample\nEDITOR SAMPLE result=5 revision=2 dirty=1\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=WAV FORMAT OR SLICE REFERENCES UNSUPPORTED - NO CHANGE panel=5\nEDITOR REQUEST sample\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=SAMPLE FILE REQUEST CANCELLED - EDITS PRESERVED panel=5\nEDITOR FRAME row=0 channel=0 revision=3 dirty=1 status=REDO panel=5\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=UNDO panel=5\nEDITOR REQUEST wav\nEDITOR WAV result=0 dirty=1\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=WAV EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED panel=5\nEDITOR REQUEST wav\nEDITOR WAV result=6 dirty=1\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=WAV EXPORT REFUSED OR FAILED - DESTINATION PRESERVED panel=5\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=WAV EXPORT REFUSED OR FAILED - DESTINATION PRESERVED panel=5\nEDITOR REQUEST sample\nEDITOR SAMPLE result=0 revision=4 dirty=1\nEDITOR FRAME row=0 channel=0 revision=4 dirty=1 status=SAMPLE UPDATED - CONTROL-Z TO UNDO panel=5\nEDITOR FRAME row=0 channel=0 revision=5 dirty=1 status=SAMPLE UPDATED - CONTROL-Z TO UNDO panel=5\nEDITOR FRAME row=0 channel=0 revision=4 dirty=1 status=UNDO panel=5\nEDITOR FRAME row=0 channel=0 revision=4 dirty=1 status=SAMPLE: FORMAT NEEDS ENHANCED PREVIEW OR CONVERSION panel=5\nEDITOR REQUEST wav\nEDITOR WAV result=0 dirty=1\nEDITOR FRAME row=0 channel=0 revision=4 dirty=1 status=WAV EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED panel=5\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=4 dirty=0 status=PROJECT SAVED AND VERIFIED panel=5\nEDITOR FRAME row=0 channel=0 revision=4 dirty=0 status=SETTINGS CLOSED panel=0\nEDITOR EXIT clean\n",
+    "reopened.log": "EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=84858\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO panel=5\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO panel=5\nEDITOR REQUEST wav\nEDITOR WAV result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=WAV EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED panel=5\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PROJECT SAVED AND VERIFIED panel=5\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SETTINGS CLOSED panel=0\nEDITOR EXIT clean\n"
+  },
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

@@ -80,6 +80,33 @@ int main(int argc,char **argv)
     for(i=0;i<4;++i) {unsigned j;e->playback.volume[i]=64;for(j=0;j<81;++j)e->playback.wave[i][j]=j%2?-128:127;}
     pt_editor_key(e,0x50,0);pt_editor_draw(e,&canvas,font);pt_editor_draw_playback(e,&canvas,font);
     ppm(argv[3],&canvas);
+    /* Incremental updates must produce the full renderer's exact pixels, and
+       the reported rectangles must cover every changed byte/pixel. */
+    {
+        struct pt_view_cache cache={0};struct pt_canvas incremental,shown;
+        struct pt_view_rect areas[PT_VIEW_DIRTY_MAX];unsigned step,p,j,y,x,n;
+        static const unsigned actions[]={0x4d,0x4e,0x4f,0x42,0x4c,0x50,0x51,0x52,0x53,0x40,0x31,0x32,0x46,0x0c,0x0b,0x5a,0x5b};
+        for(p=0;p<4;++p) {incremental.planes[p]=calloc(1,PT_VIEW_PLANE_BYTES);shown.planes[p]=calloc(1,PT_VIEW_PLANE_BYTES);assert(incremental.planes[p] && shown.planes[p]);}
+        for(step=0;step<100;++step) {
+            if(step)pt_editor_key(e,actions[(step-1)%(sizeof(actions)/sizeof(actions[0]))],0);
+            if(step%13==0) {e->playback.row=step%64;e->playback.bpm=125+step;e->playback.wave[0][step%81]=(int8_t)step;}
+            if(step==30) {pt_editor_click(e,400,70);cache.valid=0;}
+            if(step==31)pt_editor_click(e,400,80);
+            if(step%17==0)pt_editor_key(e,0x31,8);
+            pt_editor_draw(e,&canvas,font);n=pt_editor_draw_update(e,&incremental,font,&cache,areas);assert(n<=PT_VIEW_DIRTY_MAX);
+            for(j=0;j<n;++j) {
+                const struct pt_view_rect *a=&areas[j];assert(a->x+a->width<=640 && a->y+a->height<=512);
+                for(y=a->y;y<a->y+a->height;++y)for(x=a->x;x<a->x+a->width;++x)for(p=0;p<4;++p) {
+                    uint8_t mask=(uint8_t)(128>>(x&7));size_t offset=y*80+x/8;
+                    shown.planes[p][offset]=(shown.planes[p][offset]&~mask)|(incremental.planes[p][offset]&mask);
+                }
+            }
+            for(p=0;p<4;++p) {assert(!memcmp(canvas.planes[p],incremental.planes[p],PT_VIEW_PLANE_BYTES));assert(!memcmp(canvas.planes[p],shown.planes[p],PT_VIEW_PLANE_BYTES));}
+        }
+        n=pt_editor_draw_update(e,&incremental,font,&cache,areas);assert(!n);
+        for(p=0;p<4;++p) {free(incremental.planes[p]);free(shown.planes[p]);}
+    }
+
     for(i=0;i<4;++i)free(canvas.planes[i]);
     free(font);free(e);pt_document_release(&doc);
     puts("EDITOR PASS: bank/wrap/scroll, guarded note and nibble edits, OFF, undo/redo, save state, discard confirmation, all-page planar render");return 0;

@@ -82,12 +82,15 @@ own bitmap. The current bounded editor/history structure uses about 51 KiB on
 68k. Loaded project/sample storage is additional. No fixed available-RAM amount
 is assumed; allocation failure unwinds all owned resources.
 
-Whole-window updates occur on UI input; font stamps operate on bitmap bytes.
-The nibble lookup/unrolled stamp optimization reduced three-frame drawing from
-224 to 151 PAL timer ticks (4.48 to 3.02 seconds) in the same private 68030 emulator
-profile, with matching native pixel hashes and byte-identical host PPM output.
+Cursor moves and event edits now redraw and copy only affected rows and status
+regions. Page/scroll/panel changes and returning from file dialogs redraw the
+whole scene. Incremental output and its reported dirty rectangles match complete
+rendering byte-for-byte through navigation, editing, undo and playback changes.
+Six cursor redraws took 14 PAL ticks against 311 for full drawing in the same
+private 68030 emulator, with identical pixel hashes: about 95.5% less drawing time.
+Three full frames took 155 ticks, compared with 224 before font optimization.
 Full-frame drawing remains costly; these are emulator measurements, not ACA1234
-performance results.
+performance or end-to-end input-latency results.
 The screen is PAL high-resolution interlaced. A suitable display/flicker handling
 and physical ACA1234/Chip-RAM performance still need testing. No 50 Hz redraw or
 physical responsiveness result is implied by a successful emulator run.
@@ -98,8 +101,9 @@ CRC, checks refusal to replace an existing file, reloads/resaves byte-identicall
 and exits normally twice. Screenshots require completed-frame acknowledgements;
 an early capture before the first draw is not accepted as UI evidence. Host
 sanitizer tests cover controller navigation, editing/history/discard handling,
-and every page of the same planar renderer. Native mouse interaction and the
-full browser/AmiConnect transport remain separate UI checks.
+and every page of the same planar renderer. Native input.device mouse tests also open Disk Op, return to the main screen,
+start/stop song playback and audition/stop a sample while the physical CIA button
+bit remains released. The full browser/AmiConnect transport is a separate check.
 
 Still open: full mixed-channel backend dispatch, comprehensive effect parity, pattern
 block-operation UI, route/metadata editing and its history, sample editing UI,

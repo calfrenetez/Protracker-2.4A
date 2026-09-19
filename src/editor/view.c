@@ -89,12 +89,45 @@ static void arrow(struct pt_canvas *c,int x,int y,int up)
     for(r=0;r<5;++r)rect(c,x+9-r,y+(up?4+r:12-r),r*2+1,1,WHITE);
     rect(c,x+7,y+(up?8:4),5,7,WHITE);
 }
+static void draw_status(const struct pt_editor *e,struct pt_canvas *c,const uint8_t *font,size_t bytes)
+{
+    const struct pt_project *p=e->project;char s[80];
+    panel(c,2,212,636,26,GREY);panel(c,14,216,42,18,MID);snprintf(s,sizeof(s),"%02u",e->playback.active?e->playback.speed:p->speed);medium(c,font,22,220,s,NAVY);
+    snprintf(s,sizeof(s),"%03u",e->playback.active?e->playback.bpm:p->bpm);small(c,font,70,216,s,NAVY);small(c,font,66,227,"TEMPO",WHITE);
+    small(c,font,106,216,"STATUS:",WHITE);snprintf(s,sizeof(s),"%.45s",e->status);small(c,font,162,216,s,NAVY);
+    if(strlen(e->status)>45)small(c,font,106,227,e->status+45,NAVY);
+    small(c,font,528,216,"TUNE",WHITE);snprintf(s,sizeof(s),"%06lu",(unsigned long)bytes);small(c,font,586,216,s,NAVY);
+    small(c,font,528,227,"TIMING",WHITE);small(c,font,610,227,e->playback.active?"CIA":"---",NAVY);
+    if(pt_editor_dirty(e))small(c,font,512,216,"*",YELLOW);
+}
+static void draw_pattern_row(const struct pt_editor *e,struct pt_canvas *c,const uint8_t *font,unsigned r)
+{
+    const struct pt_project *p=e->project;unsigned i,ch,first=pt_channels_page(&p->channels)*4,row=r+e->first_row;
+    int x,y=254+(int)r*12;char s[16],note[4];
+    static const int field_x[6]={6,64,76,100,112,124};
+    if(r>=PT_EDITOR_ROWS)return;
+    rect(c,3,y,33,12,BLACK);
+    if(row<64) {snprintf(s,sizeof(s),"%02u",row);medium(c,font,8,y+1,s,WHITE);}
+    for(i=0;i<4;++i) {
+        ch=first+i;x=38+(int)i*150;rect(c,x,y,148,12,BLACK);
+        if(ch>=p->channels.count || row>=64)continue;
+            const struct pt_event *event=&p->events[(e->pattern*64+row)*p->channels.count+ch];
+            unsigned highlight=ch==p->channels.selected && row==e->row;
+            pt_editor_note(event,note);
+            medium(c,font,x+6,y+1,note,highlight && !e->field?YELLOW:BLUE);
+            snprintf(s,sizeof(s),"%02X",event->instrument);medium(c,font,x+64,y+1,s,BLUE);
+            snprintf(s,sizeof(s),"%X%02X",event->effect,event->parameter);medium(c,font,x+100,y+1,s,highlight?YELLOW:BLUE);
+            if(highlight) {
+                int fx=x+field_x[e->field]-1,fw=e->field?13:37;
+                rect(c,fx,y,fw,1,YELLOW);rect(c,fx,y+11,fw,1,YELLOW);rect(c,fx,y,1,12,YELLOW);rect(c,fx+fw-1,y,1,12,YELLOW);
+            }
+    }
+}
 void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t font[580])
 {
     const struct pt_project *p=e->project;unsigned i,r,ch,page=pt_channels_page(&p->channels),first=page*4;
     const struct pt_sample *sample=e->sample && e->sample<=p->sample_count?&p->samples[e->sample-1]:NULL;
-    char s[80],note[4];int x,y;
-    static const int field_x[6]={6,64,76,100,112,124};
+    char s[80];int x,y;
     static const char *fields[9]={"POS","PATTERN","LENGTH","FINETUNE","SAMPLE","VOLUME","LENGTH","REPEAT","REPLEN"};
     static const char *buttons[5][3]={{"PLAY","STOP","MOD2WAV"},{"PATTERN","CLEAR","PAT2SMP"},
         {"EDIT","EDIT OP.","POS ED."},{"RECORD","DISK OP.","SAMPLER"},{"SAMPLE","SAMPLER",""}};
@@ -131,38 +164,16 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
     panel(c,2,193,636,19,GREY);medium(c,font,12,198,"SAMPLENAME:",WHITE);
     snprintf(s,sizeof(s),"%.32s",sample?sample->name:"");medium(c,font,146,198,s,NAVY);
     panel(c,590,193,48,19,GREY);snprintf(s,sizeof(s),"%luK",(unsigned long)((bytes+1023)/1024));small(c,font,596,198,s,NAVY);
-    panel(c,2,212,636,26,GREY);panel(c,14,216,42,18,MID);snprintf(s,sizeof(s),"%02u",p->speed);medium(c,font,22,220,s,NAVY);
-    snprintf(s,sizeof(s),"%03u",p->bpm);small(c,font,70,216,s,NAVY);small(c,font,66,227,"TEMPO",WHITE);
-    small(c,font,106,216,"STATUS:",WHITE);snprintf(s,sizeof(s),"%.45s",e->status);small(c,font,162,216,s,NAVY);
-    if(strlen(e->status)>45)small(c,font,106,227,e->status+45,NAVY);
-    small(c,font,528,216,"TUNE",WHITE);snprintf(s,sizeof(s),"%06lu",(unsigned long)bytes);small(c,font,586,216,s,NAVY);
-    small(c,font,528,227,"TIMING",WHITE);small(c,font,610,227,"---",NAVY);
-    if(pt_editor_dirty(e))small(c,font,512,216,"*",YELLOW);
+    draw_status(e,c,font,bytes);
     for(i=0;i<4;++i) {
         ch=first+i;x=38+(int)i*150;panel(c,x,238,150,16,GREY);
         if(ch<p->channels.count) {
             const struct pt_channel *channel=&p->channels.track[ch];char route=channel->route==PT_PAULA?'P':channel->route==PT_AMIGUS?'A':'M';
             snprintf(s,sizeof(s),"%u",ch+1);medium(c,font,x+64,241,s,BLACK);snprintf(s,sizeof(s),"%c",route);small(c,font,x+130,241,s,NAVY);
         }
-        rect(c,x,254,148,240,BLACK);
-        if(ch>=p->channels.count)continue;
-        for(r=0;r<PT_EDITOR_ROWS && r+e->first_row<64;++r) {
-            const struct pt_event *event=&p->events[(e->pattern*64+r+e->first_row)*p->channels.count+ch];
-            unsigned highlight=ch==p->channels.selected && r+e->first_row==e->row;
-            y=254+(int)r*12;pt_editor_note(event,note);
-            medium(c,font,x+6,y+1,note,highlight && !e->field?YELLOW:BLUE);
-            snprintf(s,sizeof(s),"%02X",event->instrument);medium(c,font,x+64,y+1,s,BLUE);
-            snprintf(s,sizeof(s),"%X%02X",event->effect,event->parameter);medium(c,font,x+100,y+1,s,highlight?YELLOW:BLUE);
-            if(highlight) {
-                int fx=x+field_x[e->field]-1,fw=e->field?13:37;
-                rect(c,fx,y,fw,1,YELLOW);rect(c,fx,y+11,fw,1,YELLOW);rect(c,fx,y,1,12,YELLOW);rect(c,fx+fw-1,y,1,12,YELLOW);
-            }
-        }
     }
-    panel(c,2,238,35,16,GREY);rect(c,3,254,33,240,BLACK);
-    for(r=0;r<PT_EDITOR_ROWS && r+e->first_row<64;++r) {
-        snprintf(s,sizeof(s),"%02u",r+e->first_row);medium(c,font,8,255+(int)r*12,s,WHITE);
-    }
+    panel(c,2,238,35,16,GREY);
+    for(r=0;r<PT_EDITOR_ROWS;++r)draw_pattern_row(e,c,font,r);
     for(i=0;i<4;++i) {snprintf(s,sizeof(s),"%u-%u",i*4+1,i*4+4);label(c,font,4+(int)i*61,495,61,17,s,page==i);}
     panel(c,248,495,168,17,GREY);label(c,font,416,495,60,17,"PLAY",0);
     panel(c,476,495,18,17,GREY);rect(c,482,500,6,7,WHITE);label(c,font,494,495,58,17,"STOP",0);
@@ -200,4 +211,51 @@ void pt_editor_draw_playback(const struct pt_editor *e,struct pt_canvas *c,const
     snprintf(s,sizeof(s),"%02u",e->playback.active?e->playback.speed:e->project->speed);medium(c,font,22,220,s,NAVY);
     rect(c,70,216,24,10,GREY);snprintf(s,sizeof(s),"%03u",e->playback.active?e->playback.bpm:e->project->bpm);small(c,font,70,216,s,NAVY);
     rect(c,610,227,24,10,GREY);small(c,font,610,227,e->playback.active?"CIA":"---",NAVY);
+}
+
+unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,const uint8_t font[580],
+                              struct pt_view_cache *old,struct pt_view_rect areas[PT_VIEW_DIRTY_MAX])
+{
+    struct pt_project metadata;struct pt_sample sample;unsigned i,r,count=0,page=pt_channels_page(&e->project->channels);
+    size_t bytes=0;int full,playback_changed;
+    memcpy(&metadata,e->project,sizeof(metadata));metadata.channels.selected=0;
+    memset(&sample,0,sizeof(sample));
+    if(e->sample && e->sample<=e->project->sample_count)memcpy(&sample,&e->project->samples[e->sample-1],sizeof(sample));
+    for(i=0;i<e->project->sample_count;++i) {
+        const struct pt_pcm *pcm=&e->project->samples[i].pcm;
+        bytes+=(size_t)pcm->frames*pcm->channels*(pcm->bits/8);
+    }
+    full=!old->valid || old->page!=page || old->pattern!=e->pattern || old->first_row!=e->first_row ||
+         old->position!=e->position || old->sample!=e->sample || old->editing!=e->editing || old->panel!=e->panel ||
+         old->sample_bytes!=bytes || memcmp(&metadata,&old->project,sizeof(metadata)) || memcmp(&sample,&old->sample_meta,sizeof(sample));
+    playback_changed=!old->valid || memcmp(&e->playback,&old->playback,sizeof(e->playback));
+    if(full) {pt_editor_draw(e,c,font);areas[count++]=(struct pt_view_rect){0,0,640,512};}
+    else {
+        if(strcmp(old->status,e->status) || old->dirty!=(unsigned)pt_editor_dirty(e)) {
+            draw_status(e,c,font,bytes);areas[count++]=(struct pt_view_rect){2,212,636,26};
+        }
+        if(playback_changed) {
+            pt_editor_draw_playback(e,c,font);
+            areas[count++]=(struct pt_view_rect){230,116,408,39};
+            areas[count++]=(struct pt_view_rect){14,216,80,18};
+            areas[count++]=(struct pt_view_rect){610,227,24,10};
+            areas[count++]=(struct pt_view_rect){248,495,168,17};
+        }
+    }
+    for(r=0;r<PT_EDITOR_ROWS;++r) {
+        struct pt_event events[4];unsigned row=r+e->first_row;int changed;
+        memset(events,0,sizeof(events));
+        for(i=0;i<4 && row<64;++i)if(page*4+i<e->project->channels.count)
+            memcpy(&events[i],&e->project->events[(e->pattern*64+row)*e->project->channels.count+page*4+i],sizeof(events[i]));
+        changed=memcmp(events,old->events[r],sizeof(events))!=0;
+        if((row==old->row || row==e->row) && (old->row!=e->row || old->field!=e->field || old->selected!=e->project->channels.selected))changed=1;
+        if(!full && changed) {draw_pattern_row(e,c,font,r);areas[count++]=(struct pt_view_rect){3,254+r*12,635,12};}
+        memcpy(old->events[r],events,sizeof(events));
+    }
+    memcpy(&old->project,&metadata,sizeof(metadata));memcpy(&old->sample_meta,&sample,sizeof(sample));
+    memcpy(&old->playback,&e->playback,sizeof(e->playback));strcpy(old->status,e->status);
+    old->valid=1;old->page=page;old->pattern=e->pattern;old->first_row=e->first_row;old->position=e->position;
+    old->sample=e->sample;old->editing=e->editing;old->panel=e->panel;old->row=e->row;old->field=e->field;
+    old->selected=e->project->channels.selected;old->dirty=pt_editor_dirty(e);old->sample_bytes=bytes;
+    return count;
 }

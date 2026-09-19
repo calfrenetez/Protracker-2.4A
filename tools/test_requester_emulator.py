@@ -52,7 +52,7 @@ def main():
         launch.write_text('\n'.join(['FailAt 21','Wait 5','Stack 65536','CD PTDEV:'+run.name,'PTViewBench a.mod >view-after.log']+(['PTViewBefore a.mod >view-before.log'] if args.previous_view_binary else [])+['PT24GEdit >editor.log','Echo $RC >editor.rc','Echo done >done'])+'\n')
         with (run/'emulator.log').open('wb') as f:process=subprocess.Popen([env['emulator_binary'],'--config',env['profile'],'-G','-m','PTDEV:'+str(share),'--log'],stdin=subprocess.DEVNULL,stdout=f,stderr=subprocess.STDOUT,start_new_session=True)
         wait(lambda:bool(matching_socket()),45);matches=matching_socket();assert len(matches)==1;emu=Emulator(matches[0])
-        frame('status=READY -');capture('01-blank-song.png')
+        wait(lambda:'EDITOR FRAME' in log() and 'status=READY -' in log(),90);capture('01-blank-song.png')
         request('load');capture('02-load-requester.png');filename('a.mod');offset=len(log());emu.tap(0x44);frame('status=PROJECT LOADED',offset)
         emu.tap(0x40);emu.tap(0x32);frame('revision=1 dirty=1');request('save');capture('03-save-requester.png')
         offset=len(log());emu.tap(0x44);frame('revision=1 dirty=0 status=PROJECT SAVED',offset)
@@ -76,8 +76,11 @@ def main():
         emu.tap(0x45);wait(lambda:(run/'done').exists());assert (run/'editor.rc').read_text().strip()=='0'
         benchmarks={name:(run/name).read_text() for name in ['view-after.log','view-before.log'] if (run/name).exists()}
         assert all('VIEW PASS' in value for value in benchmarks.values())
+        assert 'identical=1' in benchmarks['view-after.log']
+        cursor=dict(item.split('=') for item in benchmarks['view-after.log'].splitlines()[1].split()[2:])
+        assert int(cursor['partial_ticks50'])<int(cursor['full_ticks50'])
         if args.previous_view_binary:
-            assert benchmarks['view-after.log'].split('pixel_fnv=')[1]==benchmarks['view-before.log'].split('pixel_fnv=')[1]
+            assert benchmarks['view-after.log'].splitlines()[0].split('pixel_fnv=')[1]==benchmarks['view-before.log'].splitlines()[0].split('pixel_fnv=')[1]
         report={'view_benchmarks':benchmarks,'view_binaries':{name:digest(run/name) for name in ['PTViewBench','PTViewBefore'] if (run/name).exists()},'run_id':run.name,'binary_sha256':digest(run/'PT24GEdit'),'elapsed_seconds':round(time.monotonic()-start,3),'log':log(),
             'no_argument_blank_start':True,'native_load_save_dialogs':True,'saved_D2_and_crc_verified':True,'existing_file_preserved':True,
             'dirty_load_other_key_cancels_confirmation':True,'cancel_and_invalid_load_preserve_dirty_edits':True,'reloaded_playback_period_381':True,'resaved_byte_identity':True,'normal_exit':True,

@@ -56,6 +56,7 @@ static void save(struct pt_editor *e,const char *path)
 }
 int main(int argc,char **argv)
 {
+    struct pt_view_cache view_cache={0};
     struct pt_paula audio={0};char load_path[1024]="",save_path[1024]="new-project.ptg",chosen_path[1024];
     struct pt_allocator allocator={NULL,allocate,release};struct pt_document doc;
     struct pt_editor *editor=NULL;struct Screen *screen=NULL;struct Window *window=NULL;
@@ -93,11 +94,17 @@ int main(int argc,char **argv)
     while(running) {
         struct IntuiMessage *message;
         if(redraw) {
-            pt_editor_draw(editor,&canvas,pt_font);
-            for(plane=0;plane<4;++plane)CopyMem(canvas.planes[plane],bitmap.Planes[plane],PT_VIEW_PLANE_BYTES);
-            BltBitMapRastPort(&bitmap,0,0,window->RPort,0,0,640,512,0xc0);WaitBlit();WaitTOF();WaitTOF();redraw=0;
-            printf("EDITOR FRAME row=%u channel=%u revision=%lu dirty=%u status=%s\n",editor->row,
-                doc.project.channels.selected,(unsigned long)editor->history.revision,pt_editor_dirty(editor),editor->status);fflush(stdout);
+            struct pt_view_rect areas[PT_VIEW_DIRTY_MAX];unsigned i,n;
+            n=pt_editor_draw_update(editor,&canvas,pt_font,&view_cache,areas);
+            for(i=0;i<n;++i) {
+                struct pt_view_rect *area=&areas[i];
+                for(plane=0;plane<4;++plane)CopyMem(canvas.planes[plane]+area->y*80,
+                    bitmap.Planes[plane]+area->y*80,area->height*80);
+                BltBitMapRastPort(&bitmap,area->x,area->y,window->RPort,area->x,area->y,area->width,area->height,0xc0);WaitBlit();
+            }
+            if(n) {WaitTOF();WaitTOF();}redraw=0;
+            printf("EDITOR FRAME row=%u channel=%u revision=%lu dirty=%u status=%s panel=%u\n",editor->row,
+                doc.project.channels.selected,(unsigned long)editor->history.revision,pt_editor_dirty(editor),editor->status,editor->panel);fflush(stdout);
         }
         WaitPort(window->UserPort);
         while((message=(struct IntuiMessage *)GetMsg(window->UserPort))) {
@@ -131,7 +138,7 @@ int main(int argc,char **argv)
             if(kind==IDCMP_RAWKEY && (code&0x80 || code>=0x60))continue;
             if(kind==IDCMP_RAWKEY)action=pt_editor_key(editor,code,qualifier);
             else if(kind==IDCMP_MOUSEBUTTONS && code==SELECTDOWN)action=pt_editor_click(editor,mx,my);
-            else if(kind==IDCMP_REFRESHWINDOW) {BeginRefresh(window);EndRefresh(window,TRUE);}
+            else if(kind==IDCMP_REFRESHWINDOW) {BeginRefresh(window);EndRefresh(window,TRUE);view_cache.valid=0;}
             else if(kind==IDCMP_INACTIVEWINDOW) {editor->quit_pending=0;editor->load_pending=0;}
             if(action==PT_UI_PLAY || action==PT_UI_PATTERN) {
                 error=pt_paula_play(&audio,editor->project,action==PT_UI_PATTERN,editor->position,editor->pattern);
@@ -151,7 +158,7 @@ int main(int argc,char **argv)
                 if(action==PT_UI_SAVE && argc==3)save(editor,argv[2]);
                 else {
                     int selected;printf("EDITOR REQUEST save\n");fflush(stdout);
-                    selected=pt_file_request(window,1,save_path,chosen_path,sizeof(chosen_path));
+                    selected=pt_file_request(window,1,save_path,chosen_path,sizeof(chosen_path));view_cache.valid=0;
                     if(selected==1) {strcpy(save_path,chosen_path);save(editor,save_path);}
                     else pt_editor_status(editor,selected==0?"SAVE CANCELLED - EDITS PRESERVED":"SAVE REQUESTER UNAVAILABLE OR PATH TOO LONG");
                 }
@@ -159,7 +166,7 @@ int main(int argc,char **argv)
             if(action==PT_UI_LOAD) {
                 {
                     int selected;printf("EDITOR REQUEST load\n");fflush(stdout);
-                    selected=pt_file_request(window,0,load_path,chosen_path,sizeof(chosen_path));
+                    selected=pt_file_request(window,0,load_path,chosen_path,sizeof(chosen_path));view_cache.valid=0;
                     if(selected==1) {
                         if(load(&doc,chosen_path)) {
                             pt_paula_stop(&audio);pt_editor_init(editor,&doc.project);strcpy(load_path,chosen_path);

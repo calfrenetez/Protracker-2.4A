@@ -249,3 +249,19 @@ Chip RAM silence word and a nonzero DMA length, and rejects out-of-range one-wor
 sample-loop metadata. Native checks exercise these boundary cases alongside the
 previous playback/ownership/effect tests. Vendor replay code is still untouched;
 the generated ABI/setup adapter supplies the safe initial state.
+
+## Incremental display and native mouse controls
+
+The current Enhanced editor updates affected rows/status regions for ordinary
+editing and retains full redraws for page, scroll, panel and dialog changes.
+Host tests compare complete images and simulated dirty-rectangle copies against
+the full renderer. Six cursor redraws measured 14 PAL ticks versus 311 for full
+frames in the private emulator, with matching hashes. Full frames remain costly;
+physical responsiveness and 50 Hz display acceptance remain untested.
+
+`evidence/enhanced-editor/dev5/` retains matching executable hashes for native
+file-dialog, mouse and keyboard/history/save/reopen tests. Mouse tests use OS
+input events to open/back out of Disk Op, play/stop and audition/stop, with the
+physical CIA button bit released throughout. This does not test the complete
+AmiConnect browser transport. All four DMA channels were off after Stop and the
+editor exited normally. Amiberry ownership was released after guarded shutdown.

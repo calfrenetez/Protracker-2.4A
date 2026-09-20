@@ -60,6 +60,7 @@ def main():
     inputs['PTFlowCoreTest'] = ['tests/flow_test.c','src/core/flow.c', *inputs['PTPaulaTest'][2:]]
     inputs['PTFrameClockTest'] = ['tests/frame_clock_test.c','src/core/frame_clock.c']
     inputs['PTTimelineTest'] = ['tests/timeline_test.c','src/core/timeline.c','src/core/frame_clock.c','src/core/flow.c','src/core/project.c','src/core/channels.c','src/core/pcm.c']
+    inputs['PTVoiceSegmentTest'] = ['tests/voice_segment_test.c','src/core/voice.c','src/core/pcm.c']
     inputs['PTVoiceTest'] = ['tests/voice_test.c','src/core/voice.c','src/core/pcm.c']
     render_sources = ['src/core/render.c','src/core/pitch.c','src/core/timeline.c','src/core/frame_clock.c','src/core/flow.c','src/core/voice.c','src/core/project.c','src/core/channels.c','src/core/pcm.c']
     inputs['PT24GEdit'] += [s for s in ['src/platform/render_file.c',*render_sources] if s not in inputs['PT24GEdit']]

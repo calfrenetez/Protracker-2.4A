@@ -382,3 +382,23 @@ will need an initial segment that can hand off to a loop outside that segment.
 The new trace/model tests establish classic range semantics only. Shipping 9xx
 remains refused until range state, loop handoff and PCM integration are tested.
 Enhanced precision/slice offset policy and real hardware behavior are not implied.
+
+## Independent initial segment and repeat loop (dev40)
+
+`pt_voice_init_segment` plays one nonempty half-open PCM range, then repeats a
+separately bounded forward-loop range in the same sample. Either range may be
+before, after or overlapping the other. Unlike the ordinary initializer, it does
+not enter the loop early at loop_start. It carries fractional overshoot across
+the initial end and reduces large steps modulo the repeat length without overflow.
+Linear interpolation joins the last initial frame to repeat_start, then follows
+normal forward-loop seams. The original initial endpoint no longer affects
+interpolation after the repeat loop has begun.
+
+Validation reuses the existing PCM/alias checks and preserves state on error.
+Empty initial segments or empty repeat ranges are refused. The new mode retains
+immutable PCM and bounded, allocation-free mixing. The ordinary initializer
+keeps its original selected-range and contained-loop policy.
+
+This supplies a prerequisite for the offset ranges established by dev39; it does
+not yet enable 9xx. Remaining work is per-track offset memory/range interpretation,
+renderer preflight, and a PCM oracle driven by the native trigger/loop snapshots.

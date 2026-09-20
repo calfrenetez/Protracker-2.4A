@@ -645,3 +645,17 @@ integration; it does not enable that effect yet. Range state and initial-segment
 loop handoff must be implemented and checked before removing the refusal. See
 `evidence/enhanced-editor/dev39/`. Guarded emulator release was verified; no
 physical hardware was accessed.
+
+
+## Initial-segment/repeat-loop voice primitive (dev40)
+
+The reference voice core can now play an initial segment and then repeat a
+separately bounded forward loop, including earlier, later or overlapping ranges.
+Interpolation and fractional overshoot cross that handoff correctly. The original
+initializer and existing rendering policy remain unchanged.
+
+All 50 host checks and two native test executions pass. New trajectory hashes
+match an independent unbounded-integer oracle; the original native mix hash
+remains `990c42f0` with clipped40. Evidence is in `evidence/enhanced-editor/dev40/`.
+9xx integration remains unfinished and the renderer still refuses it. No physical
+hardware acceptance is implied; Amiberry was explicitly released after cleanup.

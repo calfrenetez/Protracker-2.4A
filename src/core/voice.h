@@ -6,7 +6,7 @@ struct pt_voice {
     const struct pt_pcm *pcm;
     uint64_t phase,step,cycle;
     uint32_t start,end,loop_start,loop_end;
-    uint8_t loop,looped,linear,active;
+    uint8_t loop,looped,linear,active,segment;
 };
 /* Borrowed immutable PCM; no allocation or sample writes. Step is positive Q32
  * source frames per output frame. Bounds are half-open; loops must be contained
@@ -18,6 +18,14 @@ enum pt_pcm_result pt_voice_init(struct pt_voice *,const struct pt_pcm *,
                                 uint32_t start,uint32_t end,enum pt_voice_loop,
                                 uint32_t loop_start,uint32_t loop_end,
                                 uint64_t step,unsigned linear);
+/* Play a nonempty initial segment once, then repeat an independently bounded
+ * forward-loop range in the same PCM. The two ranges may overlap or be disjoint.
+ * Interpolation crosses from the initial end to repeat_start. Other validation,
+ * lifetime, alias and no-mutation-on-error rules match pt_voice_init. */
+enum pt_pcm_result pt_voice_init_segment(struct pt_voice *,const struct pt_pcm *,
+                                        uint32_t start,uint32_t end,
+                                        uint32_t repeat_start,uint32_t repeat_end,
+                                        uint64_t step,unsigned linear);
 /* Returns normalized signed 24-bit stereo; mono is duplicated. Nearest uses the
  * current frame; linear uses the next frame with loop-aware endpoint mapping.
  * Outputs and state are unchanged on error. An inactive voice returns silence. */

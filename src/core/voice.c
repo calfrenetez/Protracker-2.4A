@@ -31,6 +31,17 @@ enum pt_pcm_result pt_voice_init(struct pt_voice *v,const struct pt_pcm *p,
     }
     *v=next;return PT_PCM_OK;
 }
+enum pt_pcm_result pt_voice_init_segment(struct pt_voice *v,const struct pt_pcm *p,
+                                        uint32_t start,uint32_t end,uint32_t a,uint32_t b,
+                                        uint64_t step,unsigned linear)
+{
+    enum pt_pcm_result result;
+    if(!p || start>=end || end>p->frames)return PT_PCM_INVALID;
+    result=pt_voice_init(v,p,0,p->frames,PT_VOICE_FORWARD,a,b,step,linear);
+    if(result!=PT_PCM_OK)return result;
+    v->start=start;v->end=end;v->phase=(uint64_t)start<<32;v->looped=0;v->segment=1;
+    return PT_PCM_OK;
+}
 static void advance(struct pt_voice *v)
 {
     uint64_t distance,amount;
@@ -39,7 +50,7 @@ static void advance(struct pt_voice *v)
         if(v->step>=distance) {v->active=0;v->phase=(uint64_t)v->end<<32;}
         else v->phase+=v->step;
     } else if(!v->looped) {
-        distance=((uint64_t)v->loop_start<<32)-v->phase;
+        distance=((uint64_t)(v->segment?v->end:v->loop_start)<<32)-v->phase;
         if(v->step<distance)v->phase+=v->step;
         else {v->looped=1;v->phase=v->cycle?(v->step-distance)%v->cycle:0;}
     } else if(v->cycle) {
@@ -56,8 +67,9 @@ static void frame(struct pt_voice *v,int32_t out[2])
         phase+=((uint64_t)v->loop_start<<32);
     }
     index=(uint32_t)(phase>>32);fraction=(uint32_t)phase;next=index+1;
-    if(v->loop && next==v->loop_end)next=v->loop==PT_VOICE_FORWARD?v->loop_start:index;
-    else if(next==v->end)next=index;
+    if(v->segment && !v->looped) {if(next==v->end)next=v->loop_start;}
+    else if(v->loop && next==v->loop_end)next=v->loop==PT_VOICE_FORWARD?v->loop_start:index;
+    else if(!v->loop && next==v->end)next=index;
     for(side=0;side<2;++side) {
         unsigned channel=v->pcm->channels==1?0:side;
         int32_t scale=(int32_t)1<<(24-v->pcm->bits);

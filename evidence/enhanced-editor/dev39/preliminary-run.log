@@ -1,0 +1,27 @@
+Native captures: 0/17
+Native captures: 1/17
+Native captures: 2/17
+Native captures: 3/17
+Native captures: 4/17
+Native captures: 5/17
+Native captures: 6/17
+Native captures: 7/17
+Native captures: 8/17
+Native captures: 9/17
+Native captures: 10/17
+Native captures: 11/17
+Native captures: 12/17
+Native captures: 13/17
+Native captures: 14/17
+Native captures: 15/17
+Native captures: 16/17
+Native captures: 17/17
+Sample capture released: /Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/local/share/offset1789929578644846000
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/test_offset_emulator.py", line 73, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/test_offset_emulator.py", line 48, in main
+    assert (run/'done').read_text().strip()==run.name
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

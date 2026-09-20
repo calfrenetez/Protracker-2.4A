@@ -350,3 +350,35 @@ parameters. Zero output on a sounding voice remains a preflight refusal.
 The unchanged native 52-byte diagnostic supplies the output-period oracle;
 reference ramp PCM uses those writes with native volume and fresh DMA starts.
 This does not model Paula sample timing or analogue output.
+
+## Sample-range oracle for offset work (dev39)
+
+Before enabling 9xx, a separate 140-byte diagnostic extends the 52-byte pitch
+record with four 22-byte channel records. Each contains stored start pointer
+(relative to the serialized MOD), length in words, loop pointer, replen in
+words, offset memory byte, zero padding byte, last trigger pointer, last trigger
+length and trigger count. Null/owned silence pointers become FFFFFFFF so captures
+are reproducible across allocation addresses. Existing first52 fields are kept.
+
+Only the two native writes of n_start to AUDxLC are wrapped, capturing n_length
+at that exact point. The wrapper retains registers and MOVE.L flags, including
+X; trigger-count increment uses address arithmetic without changing X. Stored
+ranges are captured later, at the completed tick. Diagnostic code is separately
+linked and does not enter any shipping executable.
+
+The pinned replay applies 9xx twice on a note row: once before loading the initial
+DMA range and once after that range has been written. The stored range therefore
+differs from the initial playback range. A no-note 9xx applies once, only on the
+fresh row. Delayed passes do not apply it again. Parameter 900 reuses the offset;
+instrument reload resets the range but keeps offset memory. A normal inherited
+note can consequently start from a previously modified stored range.
+
+Offset amount is parameter times128 words (256 bytes). If it is at least the
+current word length, length becomes one word and start does not advance. It does
+not simply silence the note. A nonzero loop start initially sets length to loop
+end; subsequent offsets leave loop/replen untouched. Correct reference playback
+will need an initial segment that can hand off to a loop outside that segment.
+
+The new trace/model tests establish classic range semantics only. Shipping 9xx
+remains refused until range state, loop handoff and PCM integration are tested.
+Enhanced precision/slice offset policy and real hardware behavior are not implied.

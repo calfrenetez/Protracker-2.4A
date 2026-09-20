@@ -1,0 +1,7 @@
+test_native_sample_ranges_and_triggers (test_sample_offset.SampleOffset.test_native_sample_ranges_and_triggers) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.006s
+
+OK
+OFFSET: eight repeated native traces verify stored ranges, initial trigger ranges, loops, memory, bounds, delayed rows and four independent tracks; shipping 9xx still refused

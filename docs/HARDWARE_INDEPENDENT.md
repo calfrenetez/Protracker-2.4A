@@ -630,3 +630,18 @@ match native writes. Host boundaries cover all 16 tracks. Native diagnostics
 and the accepted screen remain unchanged. Evidence and limitations are in
 `evidence/enhanced-editor/dev38/`. Amiberry was explicitly released after guarded
 cleanup. No physical hardware or analogue-audio acceptance is claimed.
+
+
+## Sample-offset range evidence (dev39)
+
+A separate native diagnostic now captures saved sample ranges, loop ranges,
+offset memory and actual trigger ranges. Eight repeated fixtures establish the
+original double-application behavior on 9xx note rows, single no-note changes,
+900 memory, reloads, out-of-range fallback and delayed rows. 49 host checks and
+17 final native captures pass; baseline first52 fields remain exact.
+
+Every pre-existing binary is unchanged. This evidence prepares reference 9xx
+integration; it does not enable that effect yet. Range state and initial-segment
+loop handoff must be implemented and checked before removing the refusal. See
+`evidence/enhanced-editor/dev39/`. Guarded emulator release was verified; no
+physical hardware was accessed.

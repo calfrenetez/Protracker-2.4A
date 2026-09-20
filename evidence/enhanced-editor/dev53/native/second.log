@@ -1,0 +1,19 @@
+EDITOR RECENT loaded=4 prefix=RAM:recentui1789943869571091000/prefs
+EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=104108
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=RECENT: SELECT THEN OPEN panel=2
+EDITOR REQUEST load
+EDITOR RECENT saved=1 count=4
+EDITOR LOAD success channels=4 patterns=1
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PROJECT LOADED panel=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=RECENT: SELECT THEN OPEN panel=2
+EDITOR RECENT saved=1 count=3
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=RECENT LIST UPDATED panel=2
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=RECENT LIST UPDATED panel=2
+EDITOR RECENT saved=1 count=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=RECENT LIST UPDATED panel=2
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=RECENT LIST UPDATED panel=2
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=DISK OPERATIONS panel=2
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=DISK OPERATIONS panel=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=DISK OPERATIONS panel=0
+EDITOR EXIT clean

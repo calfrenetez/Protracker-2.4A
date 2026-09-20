@@ -595,6 +595,18 @@ static enum pt_editor_action request_load(struct pt_editor *e)
     }
     e->load_pending=0;return PT_UI_LOAD;
 }
+static enum pt_editor_action recent_open(struct pt_editor *e)
+{
+    if(!e->recent || e->recent_selected>=e->recent->count) {
+        pt_editor_status(e,"RECENT LIST IS EMPTY");return PT_UI_NONE;
+    }
+    return request_load(e)==PT_UI_LOAD?PT_UI_RECENT_LOAD:PT_UI_NONE;
+}
+static void recent_panel(struct pt_editor *e)
+{
+    e->recent_details=1;e->render_details=0;e->recent_selected=0;
+    e->load_pending=0;++e->sample_ui;pt_editor_status(e,"RECENT: SELECT THEN OPEN");
+}
 static void pattern_step(struct pt_editor *e,int d)
 {e->pattern=(e->pattern+e->project->pattern_count+d)%e->project->pattern_count;memset(&e->selection,0,sizeof(e->selection));}
 static int hexkey(unsigned raw)
@@ -612,6 +624,14 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
     if(raw&0x80)return PT_UI_NONE;
     if(e->number_field) {if(!(qualifier&8))number_key(e,raw);return PT_UI_NONE;}
     if(e->name_entry) {if(!(qualifier&8))name_key(e,raw);return PT_UI_NONE;}
+    if(e->panel==2 && e->recent_details) {
+        if(raw==0x44)return recent_open(e);
+        e->load_pending=0;
+        if(raw==0x45) {e->recent_details=0;++e->sample_ui;pt_editor_status(e,"DISK OPERATIONS");}
+        else if(raw==0x4c && e->recent_selected) {--e->recent_selected;++e->sample_ui;}
+        else if(raw==0x4d && e->recent && e->recent_selected+1<e->recent->count) {++e->recent_selected;++e->sample_ui;}
+        return PT_UI_NONE;
+    }
     if(e->panel==11) {
         if(raw==0x45 || raw==0x42 || ((qualifier&8) && raw==0x28)) {source_close(e);pt_editor_status(e,"MOD SOURCE CLOSED - APPLIED IMPORTS KEPT");}
         else if((qualifier&8) && raw==0x31)undo(e,(qualifier&3)?1:-1);
@@ -653,6 +673,7 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
         else if(raw==0x14 && (qualifier&3))name_begin(e,3); /* Control-Shift-T */
         else if(raw==0x37 && (qualifier&3))return PT_UI_EXPORT_MOD;
         else if(raw==0x19) {if(e->panel==1 && e->song_details) {e->song_details=0;e->panel=0;++e->sample_ui;}else song_panel(e);} /* Control-P */
+        else if(raw==0x13 && (qualifier&3)) {e->panel=2;recent_panel(e);}
         else if(raw==0x13) {if(e->panel==4)e->panel=0;else channel_panel(e);} /* Control-R */
         else if(raw==0x17) {if(e->panel==1 && e->note_details) {e->note_details=0;++e->sample_ui;}else note_panel(e);} /* Control-I */
         else if(raw==0x28) {if(e->panel>=5)e->panel=0;else sampler_panel(e);} /* Control-L */
@@ -853,6 +874,18 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
     unsigned c,r,f;
     if(x<0 || x>=640 || y<0 || y>=512)return PT_UI_NONE;
     if(e->number_field || e->name_entry) {pt_editor_status(e,"FINISH ENTRY WITH RETURN OR ESC FIRST");return PT_UI_NONE;}
+    if(e->panel==2 && e->recent_details) {
+        if(x>=230 && x<414 && y>=21 && y<59)return recent_open(e);
+        e->load_pending=0;
+        if(x>=414 && x<599 && y>=21 && y<59)return PT_UI_RECENT_REMOVE;
+        if(x>=230 && x<414 && y>=59 && y<97)return PT_UI_RECENT_CLEAR;
+        if(x>=414 && x<599 && y>=59 && y<97) {e->recent_details=0;++e->sample_ui;pt_editor_status(e,"DISK OPERATIONS");}
+        if(x>=2 && x<638 && y>=250 && y<490 && e->recent) {
+            r=(unsigned)(y-250)/24;
+            if(r<e->recent->count) {e->recent_selected=r;++e->sample_ui;}
+        }
+        return PT_UI_NONE;
+    }
     if(e->panel==11) {
         if(x>=230 && x<599 && y>=21 && y<97) {
             r=(unsigned)(y-2)/19;c=(unsigned)(x-230)/123;
@@ -987,7 +1020,7 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
         return PT_UI_NONE;
     }
     if(e->panel==2 && x>=230 && x<599 && y>=2 && y<97) {
-        if(y>=78)e->panel=0;
+        if(y>=78) {if(x<414)e->panel=0;else recent_panel(e);}
         else if(y>=59) {if(x<414)return PT_UI_EXPORT_MOD;render_panel(e);}
         else if(y>=21) {if(e->panel==2)return PT_UI_SAVE_AS;undo(e,x<414?-1:1);}
         return PT_UI_NONE;
@@ -1015,7 +1048,7 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
         else if(r==2 && c==0) {e->editing=!e->editing;pt_editor_status(e,e->editing?"EDIT ON":"EDIT OFF");}
         else if(r==2 && c==1) {e->panel=1;e->note_details=0;e->song_details=0;}
         else if(r==2 && c==2)song_panel(e);
-        else if(r==3 && c==1) {e->panel=2;e->render_details=0;}
+        else if(r==3 && c==1) {e->panel=2;e->render_details=0;e->recent_details=0;}
         else if((r==3 && c==2) || (r==4 && c==1))sampler_panel(e);
         else pt_editor_status(e,"THIS CONTROL IS NOT YET CONNECTED");
     } else if(x>=190 && x<230 && y>=2 && y<173) {

@@ -1,0 +1,36 @@
+{
+  "run_id": "recentui1789943869571091000",
+  "core_tests_run": false,
+  "native_mouse_delivery_verified": true,
+  "elapsed_seconds": 72.385,
+  "first_preferences": [
+    4,
+    [
+      "RAM Disk:recentui1789943869571091000/saved.ptg",
+      "RAM Disk:recentui1789943869571091000/input.mod",
+      "RAM:recentui1789943869571091000/missing.mod",
+      "RAM:recentui1789943869571091000/bad.ptg"
+    ]
+  ],
+  "cleared_preferences": [
+    7,
+    []
+  ],
+  "missing_corrupt_open_preserves_dirty_project": true,
+  "saved_project_exact_baseline": true,
+  "failed_save_excluded": true,
+  "relaunch_and_recent_open": true,
+  "binaries": {
+    "PT24GEdit": "630766291113eb2e2c8dcb021ff0d0d4ef9343ac41053fbedddbae33f229d6c9",
+    "PT24GConvert": "8c6568aed1de05eeb8f784f2faaee988a2b42d87dccd12662dacde2ed1ddf8fd",
+    "PTEditorClick": "b265c06a53667722f1e71cfae23c6adf48604d343747bef4a4a6df40981c8540",
+    "PTRecentTest": "016723f53162e48269351d6086378d446eb1786e41bb9445d7d55d5549daa93d",
+    "PTRecentFileTest": "159e385c8dda1e67cebfcdc200cc0daa54c746e78e58f95485d0d22bdc9f7a5c"
+  },
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

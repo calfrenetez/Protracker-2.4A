@@ -404,6 +404,22 @@ int main(int argc,char **argv)
     pt_editor_click(e,198,88);assert(e->sample==1);
     pt_editor_click(e,400,70);assert(e->panel==2 && pt_editor_click(e,300,40)==PT_UI_SAVE_AS);
     pt_editor_click(e,400,80);assert(e->panel==0);
+    {
+        static struct pt_recent recent;
+        strcpy(recent.path[0],"Work:first.mod");strcpy(recent.path[1],"Work:second.ptg");recent.count=2;e->recent=&recent;
+        pt_editor_click(e,400,70);pt_editor_click(e,500,85);
+        assert(e->panel==2 && e->recent_details && !e->render_details);
+        assert(pt_editor_key(e,0x44,0)==PT_UI_NONE && e->load_pending);
+        pt_editor_key(e,0x4d,0);assert(e->recent_selected==1 && !e->load_pending);
+        assert(pt_editor_click(e,300,40)==PT_UI_NONE && e->load_pending);
+        assert(pt_editor_click(e,300,40)==PT_UI_RECENT_LOAD && !e->load_pending);
+        assert(pt_editor_click(e,500,40)==PT_UI_RECENT_REMOVE);
+        assert(pt_editor_click(e,300,75)==PT_UI_RECENT_CLEAR);
+        pt_editor_click(e,50,260);assert(!e->recent_selected);
+        recent.count=0;assert(pt_editor_key(e,0x44,0)==PT_UI_NONE && !e->load_pending);
+        pt_editor_key(e,0x45,0);assert(!e->recent_details && e->panel==2);
+        pt_editor_click(e,300,85);assert(!e->panel);e->recent=NULL;
+    }
     assert(pt_editor_click(e,600,180)==PT_UI_NONE && e->load_pending);
     pt_editor_key(e,0x4c,0);assert(!e->load_pending);
     assert(pt_editor_key(e,0x18,8)==PT_UI_NONE && e->load_pending);

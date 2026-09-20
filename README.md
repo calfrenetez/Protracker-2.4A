@@ -45,7 +45,10 @@ NEW SAMPLE / U now bounces into a new sample slot with shared undo.
 Fine volume slides, note cut, normal/fine pitch slides and tone portamento with
 volume sliding are checked against repeated pinned native traces, including
 stored-period wrap, delayed passes and sample continuity.
-Complete effects, selected-row bounce and batch stems remain unfinished.
+Selected-row WAV/bounce and track/group stems are implemented. Full effect
+compatibility remains unfinished.
+DISK OP. → RECENT provides a persistent ten-project history; see
+[Recent Projects](docs/RECENT_PROJECTS.md).
 See [renderer usage and limits](docs/REFERENCE_RENDERER.md) and
 [replay design and evidence](docs/OFFLINE_REPLAY_DESIGN.md).
 

@@ -293,7 +293,19 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
     panel(c,476,PT_EDITOR_BOTTOM_Y,18,21,GREY);rect(c,482,498,6,9,WHITE);label(c,font,494,PT_EDITOR_BOTTOM_Y,58,21,"STOP",0);
     panel(c,552,PT_EDITOR_BOTTOM_Y,86,21,GREY);small(c,font,557,497,"PATTERN",WHITE);snprintf(s,sizeof(s),"%02X",e->pattern);small(c,font,618,497,s,NAVY);
     pt_editor_draw_playback(e,c,font);
-    if(e->panel>=5) {
+    if(e->panel==2 && e->recent_details) {
+        label(c,font,230,2,369,19,"RECENT PROJECTS",0);
+        label(c,font,230,21,184,38,"OPEN",0);label(c,font,414,21,185,38,"REMOVE",0);
+        label(c,font,230,59,184,38,"CLEAR LIST",0);label(c,font,414,59,185,38,"BACK",0);
+        label(c,font,2,234,636,16,"SELECT A PROJECT - RETURN TO OPEN",0);
+        for(i=0;i<PT_RECENT_LIMIT;++i) {
+            const char *path=e->recent && i<e->recent->count?e->recent->path[i]:"";
+            size_t len=strlen(path);const char *tail=len>72?path+len-72:path;
+            panel(c,2,250+(int)i*24,636,24,i==e->recent_selected?YELLOW:GREY);
+            snprintf(s,sizeof(s),"%02u %s%s",i+1,len>72?"...":"",tail);
+            small(c,font,8,258+(int)i*24,s,BLACK);
+        }
+    } else if(e->panel>=5) {
         static const char *tabs[4]={"SAMPLER","LOOPS","SLICES","RANGE"};
         static const char *ops[7][4][3]={
             {{"LOAD SMP","SAVE WAV","AUDITION"},{"REVERSE","NORMALIZE","DC OFFS"},{"GAIN /2","GAIN X2","FORMAT"},{"FADE IN","FADE OUT","RAW"}},
@@ -415,7 +427,7 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
         label(c,font,230,21,184,38,e->panel==1?"UNDO":"SAVE NEW",0);
         label(c,font,414,21,185,38,e->panel==1?"REDO":"QUIT",0);
         label(c,font,230,59,184,19,"SAVE MOD",0);label(c,font,414,59,185,19,"RENDER WAV",0);
-        label(c,font,230,78,369,19,"BACK",0);
+        label(c,font,230,78,184,19,"BACK",0);label(c,font,414,78,185,19,"RECENT",0);
     }
 }
 

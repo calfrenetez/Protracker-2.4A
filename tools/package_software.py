@@ -60,6 +60,9 @@ S enters a hex ordinal, +/- steps, C clears, U attaches selected sample, [/] sel
 that sample slot, L opens its sampler. Slice0000 is whole; 0001 is first marker.
 Slice references share note/sample undo and PTG saves; slice playback is pending.
 DISK OP. > SAVE MOD / Control-Shift-M exports strictly lossless classic MODs.
+DISK OP. > RECENT / Control-Shift-R opens the ten most recent successful projects.
+Select a row, then OPEN/Return; dirty edits need a second confirmation. REMOVE
+and CLEAR LIST change only the list. Preferences persist in ENVARC:ProTracker2.4G.
 Control-R or a P/A/M header letter opens CHANNEL: routes, mute and solo share undo
 and project saves. P/A/M chooses route, U mute, S solo, Escape closes the page.
 DETAILS/D opens P pan (hex00-FF), G group (hex00-0F), M MIDI channel (decimal1-16),

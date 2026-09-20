@@ -1,0 +1,7 @@
+RECENT PASS: ten-item MRU, case-folded dedup, alias promotion, bounds, removal, CRC/truncation refusal and atomic decode
+.RECENT FILE PASS: alternating generations, interrupted/corrupt write recovery, persisted clear, invalid-save refusal
+.
+----------------------------------------------------------------------
+Ran 2 tests in 1.074s
+
+OK

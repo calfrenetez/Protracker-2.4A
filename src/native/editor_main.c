@@ -6,6 +6,8 @@
 #include <proto/exec.h>
 #include <proto/graphics.h>
 #include <proto/intuition.h>
+#include <proto/dos.h>
+#include <dos/var.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -20,8 +22,26 @@
 #include "../platform/render_file.h"
 #include "../platform/stem_file.h"
 #include "../editor/bounce.h"
+#include "../platform/recent_file.h"
 struct IntuitionBase *IntuitionBase;
 struct GfxBase *GfxBase;
+static struct pt_recent recent_projects;
+static char recent_override[PT_RECENT_PATH];
+static const char *recent_prefix="ENVARC:ProTracker2.4G/recent";
+static void recent_persist(struct pt_editor *e)
+{
+    int ok=pt_recent_file_save(recent_prefix,&recent_projects);
+    if(!ok)pt_editor_status(e,"RECENTS: SESSION ONLY");
+    ++e->sample_ui;
+    printf("EDITOR RECENT saved=%u count=%u\n",ok,recent_projects.count);fflush(stdout);
+}
+static void recent_success(struct pt_editor *e,const char *path)
+{
+    char resolved[PT_RECENT_PATH];BPTR lock=Lock((STRPTR)path,ACCESS_READ);int ok=0;
+    if(lock) {ok=NameFromLock(lock,(STRPTR)resolved,sizeof(resolved));UnLock(lock);}
+    if(ok && pt_recent_remember(&recent_projects,resolved)==PT_RECENT_OK)recent_persist(e);
+    else {pt_editor_status(e,"RECENT PATH UNAVAILABLE");puts("EDITOR RECENT path unavailable");fflush(stdout);}
+}
 static void *allocate(void *ctx,size_t n) {(void)ctx;return malloc(n);}
 static void release(void *ctx,void *p) {(void)ctx;free(p);}
 static int load(struct pt_document *d,const char *path)
@@ -118,7 +138,7 @@ static void save(struct pt_editor *e,const char *path)
         free(bytes);pt_editor_status(e,"SAVE: ENCODE FAILED; CURRENT EDITS PRESERVED");return;
     }
     result=pt_file_save_new(path,bytes,n);free(bytes);
-    if(result==PT_SAVE_OK)pt_editor_saved(e);
+    if(result==PT_SAVE_OK) {pt_editor_saved(e);recent_success(e,path);}
     else pt_editor_status(e,result==PT_SAVE_PUBLISH?"SAVE REFUSED: DESTINATION EXISTS OR CANNOT BE PUBLISHED":"SAVE FAILED: CURRENT EDITS AND DESTINATION PRESERVED");
     printf("EDITOR SAVE result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
 }
@@ -146,7 +166,7 @@ static void save_mod(struct pt_editor *e,const char *path,size_t n)
         free(bytes);pt_editor_status(e,"MOD EXPORT FAILED - PROJECT PRESERVED");return;
     }
     result=pt_file_save_new(path,bytes,n);free(bytes);
-    if(result==PT_SAVE_OK)pt_editor_status(e,pt_editor_dirty(e)?"MOD EXPORTED AND VERIFIED - PROJECT STILL UNSAVED":"MOD EXPORTED AND VERIFIED");
+    if(result==PT_SAVE_OK) {pt_editor_status(e,pt_editor_dirty(e)?"MOD EXPORTED AND VERIFIED - PROJECT STILL UNSAVED":"MOD EXPORTED AND VERIFIED");recent_success(e,path);}
     else pt_editor_status(e,result==PT_SAVE_PUBLISH?"MOD EXPORT REFUSED: DESTINATION EXISTS OR CANNOT BE PUBLISHED":"MOD EXPORT FAILED: PROJECT AND DESTINATION PRESERVED");
     /* Export does not mark the richer project saved or consume undo history. */
     printf("EDITOR MOD result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
@@ -305,6 +325,14 @@ int main(int argc,char **argv)
     if((argc>1?!load(&doc,argv[1]):pt_document_new(&doc,4,SIZE_MAX)!=PT_PROJECT_OK) || !(editor=calloc(1,sizeof(*editor))) || !pt_editor_init(editor,&doc.project)) {
         puts("EDITOR: input invalid or allocation failed");goto done;
     }
+    {
+        LONG override=GetVar((STRPTR)"PT24G_RECENT_PREFIX",(STRPTR)recent_override,sizeof(recent_override),GVF_GLOBAL_ONLY);BPTR directory;
+        if(override>0 && override<(LONG)sizeof(recent_override))recent_prefix=recent_override;
+        else {directory=CreateDir((STRPTR)"ENVARC:ProTracker2.4G");if(directory)UnLock(directory);}
+        pt_recent_file_load(recent_prefix,&recent_projects);editor->recent=&recent_projects;
+        printf("EDITOR RECENT loaded=%u prefix=%s\n",recent_projects.count,recent_prefix);fflush(stdout);
+        if(argc>1)recent_success(editor,argv[1]);
+    }
     if(argc>1)snprintf(load_path,sizeof(load_path),"%s",argv[1]);
     if(argc==3)snprintf(save_path,sizeof(save_path),"%s",argv[2]);
     IntuitionBase=(struct IntuitionBase *)OpenLibrary("intuition.library",36);
@@ -460,19 +488,28 @@ int main(int argc,char **argv)
             if(action==PT_UI_NEW) {
                 unsigned channels=editor->new_channels;
                 if(pt_document_new(&doc,channels,SIZE_MAX)==PT_PROJECT_OK) {
-                    pt_paula_stop(&audio);pt_editor_dispose(editor);pt_editor_init(editor,&doc.project);load_path[0]=0;
+                    pt_paula_stop(&audio);pt_editor_dispose(editor);pt_editor_init(editor,&doc.project);editor->recent=&recent_projects;load_path[0]=0;
                     pt_editor_status(editor,"NEW SONG READY - EMPTY SAMPLE SLOTS");view_cache.valid=0;
                     printf("EDITOR NEW channels=%u patterns=%u\n",doc.project.channels.count,doc.project.pattern_count);fflush(stdout);
                 } else pt_editor_status(editor,"NEW SONG FAILED - CURRENT PROJECT AND EDITS PRESERVED");
             }
-            if(action==PT_UI_LOAD) {
+            if(action==PT_UI_RECENT_REMOVE || action==PT_UI_RECENT_CLEAR) {
+                if(action==PT_UI_RECENT_CLEAR)pt_recent_init(&recent_projects);
+                else pt_recent_remove(&recent_projects,editor->recent_selected);
+                if(editor->recent_selected>=recent_projects.count)editor->recent_selected=recent_projects.count?recent_projects.count-1:0;
+                pt_editor_status(editor,"RECENT LIST UPDATED");recent_persist(editor);
+            }
+            if(action==PT_UI_LOAD || action==PT_UI_RECENT_LOAD) {
                 {
                     int selected;printf("EDITOR REQUEST load\n");fflush(stdout);
-                    selected=pt_file_request(window,0,load_path,chosen_path,sizeof(chosen_path));view_cache.valid=0;
+                    if(action==PT_UI_RECENT_LOAD && editor->recent_selected<recent_projects.count) {
+                        strcpy(chosen_path,recent_projects.path[editor->recent_selected]);selected=1;
+                    } else selected=pt_file_request(window,0,load_path,chosen_path,sizeof(chosen_path));
+                    view_cache.valid=0;
                     if(selected==1) {
                         if(load(&doc,chosen_path)) {
-                            pt_paula_stop(&audio);pt_editor_dispose(editor);pt_editor_init(editor,&doc.project);strcpy(load_path,chosen_path);
-                            pt_editor_status(editor,"PROJECT LOADED");
+                            pt_paula_stop(&audio);pt_editor_dispose(editor);pt_editor_init(editor,&doc.project);editor->recent=&recent_projects;strcpy(load_path,chosen_path);
+                            pt_editor_status(editor,"PROJECT LOADED");recent_success(editor,chosen_path);
                             printf("EDITOR LOAD success channels=%u patterns=%u\n",doc.project.channels.count,doc.project.pattern_count);fflush(stdout);
                         } else pt_editor_status(editor,"LOAD FAILED - CURRENT PROJECT AND EDITS PRESERVED");
                     } else pt_editor_status(editor,selected==0?"LOAD CANCELLED - EDITS PRESERVED":"LOAD REQUESTER UNAVAILABLE OR PATH TOO LONG");

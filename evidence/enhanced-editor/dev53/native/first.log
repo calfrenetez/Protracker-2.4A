@@ -1,0 +1,28 @@
+EDITOR RECENT loaded=2 prefix=RAM:recentui1789943869571091000/prefs
+EDITOR RECENT saved=1 count=3
+EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=104108
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=EDIT ON - NOTES Z-M/Q-U; DELETE CLEARS; BACKSPACE OFF panel=0
+EDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=PATTERN EDITED panel=0
+EDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=RECENT: SELECT THEN OPEN panel=2
+EDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=RECENT: SELECT THEN OPEN panel=2
+EDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=UNSAVED EDITS: LOAD AGAIN TO DISCARD; OTHER KEY CANCELS panel=2
+EDITOR REQUEST load
+EDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=LOAD FAILED - CURRENT PROJECT AND EDITS PRESERVED panel=2
+EDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=LOAD FAILED - CURRENT PROJECT AND EDITS PRESERVED panel=2
+EDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=UNSAVED EDITS: LOAD AGAIN TO DISCARD; OTHER KEY CANCELS panel=2
+EDITOR REQUEST load
+EDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=LOAD FAILED - CURRENT PROJECT AND EDITS PRESERVED panel=2
+EDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=LOAD FAILED - CURRENT PROJECT AND EDITS PRESERVED panel=2
+EDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=LOAD FAILED - CURRENT PROJECT AND EDITS PRESERVED panel=2
+EDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=UNSAVED EDITS: LOAD AGAIN TO DISCARD; OTHER KEY CANCELS panel=2
+EDITOR REQUEST load
+EDITOR RECENT saved=1 count=3
+EDITOR LOAD success channels=4 patterns=1
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PROJECT LOADED panel=0
+EDITOR RECENT saved=1 count=4
+EDITOR SAVE result=0 dirty=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PROJECT SAVED AND VERIFIED panel=0
+EDITOR SAVE result=6 dirty=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAVE REFUSED: DESTINATION EXISTS OR CANNOT BE PUBLISHED panel=0
+EDITOR EXIT clean

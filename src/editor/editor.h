@@ -5,6 +5,7 @@
 #include "sampler.h"
 #include "song.h"
 #include "render.h"
+#include "recent.h"
 #define PT_EDITOR_ROWS 20
 /* One grid for parameter rows, command rows and their mouse targets. */
 #define PT_EDITOR_CONTROL_Y 2
@@ -15,13 +16,15 @@
 #define PT_EDITOR_HEADER_Y 234
 #define PT_EDITOR_PATTERN_Y 250
 #define PT_EDITOR_BOTTOM_Y 491
-enum pt_editor_action {PT_UI_NONE,PT_UI_SAVE,PT_UI_QUIT,PT_UI_PLAY,PT_UI_PATTERN,PT_UI_STOP,PT_UI_AUDITION,PT_UI_LOAD,PT_UI_SAVE_AS,PT_UI_EXPORT_MOD,PT_UI_NEW,PT_UI_SAMPLE_LOAD,PT_UI_SAMPLE_SAVE,PT_UI_SAMPLE_SVX,PT_UI_RAW_LOAD,PT_UI_RAW_SAVE,PT_UI_SOURCE_LOAD,PT_UI_RENDER,PT_UI_BOUNCE,PT_UI_STEMS};
+enum pt_editor_action {PT_UI_NONE,PT_UI_SAVE,PT_UI_QUIT,PT_UI_PLAY,PT_UI_PATTERN,PT_UI_STOP,PT_UI_AUDITION,PT_UI_LOAD,PT_UI_SAVE_AS,PT_UI_EXPORT_MOD,PT_UI_NEW,PT_UI_SAMPLE_LOAD,PT_UI_SAMPLE_SAVE,PT_UI_SAMPLE_SVX,PT_UI_RAW_LOAD,PT_UI_RAW_SAVE,PT_UI_SOURCE_LOAD,PT_UI_RENDER,PT_UI_BOUNCE,PT_UI_STEMS,PT_UI_RECENT_LOAD,PT_UI_RECENT_REMOVE,PT_UI_RECENT_CLEAR};
 struct pt_editor_selection {unsigned active,marking,pattern,r0,r1,c0,c1,anchor_row,anchor_channel;};
 struct pt_editor {
     struct pt_project *project;
     struct pt_pattern_history history;
     struct pt_sampler sampler;
     struct pt_song song;
+    const struct pt_recent *recent; /* Owned by native application, survives project replacement. */
+    unsigned recent_details,recent_selected;
     unsigned song_details,song_tools;
     unsigned render_details,render_pattern,render_bits,render_lead_in,render_groups;
     uint32_t render_rate,render_gain;

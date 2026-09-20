@@ -105,7 +105,8 @@ PT24GRender INPUT NEW.wav exports a bounded reference song, with optional --patt
 --rate 44100|48000, --bits 16|24, --tracks HEX, --gain 0..65536 and --lead-in.
 Default: 48kHz/stereo24, all tracks, gain32768, trimmed startup, 30-minute limit.
 This uses ideal BPM timing and sample-rate-at-period-428 scaling, not captured hardware.
-Supported effects: 0xy..7xy, 9xx, Axx..Dxx, E1x..E7x, E9x..EEx and Fxx.
+Supported effects: 0xy..Dxx, E1x..EEx and Fxx. The pinned2.3F unused8xx restores
+stored pitch (not panning); E8x is a no-op (no Karplus-Strong processing).
 All16 finetunes, E5 overrides and native note quantization are supported. 3xx/5xx
 retain sample phase and glide-speed memory; E3 controls glissando. Arpeggio follows
 native nibble phases and adjacent-table values without restarting PCM. Vibrato

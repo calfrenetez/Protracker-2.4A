@@ -49,8 +49,8 @@ int main(void)
         assert(pt_sampler_bounce(&s,p,&h,&o,"BOUNCE",cancel,&mode,&report,&detail)==PT_EDIT_CANCELLED && detail==PT_RENDER_CANCELLED);
         assert(!s.bytes && !s.table && live==base && !h.count && p->samples==original && p->sample_count==31 && !memcmp(&before,&report,sizeof(report)));
     }
-    p->events[0].effect=8;
-    assert(pt_sampler_bounce(&s,p,&h,&o,"BOUNCE",NULL,NULL,&report,&detail)==PT_EDIT_UNSUPPORTED && detail==PT_RENDER_EFFECT && live==base);p->events[0].effect=0;
+    p->events[0].effect=14;p->events[0].parameter=0xf1;
+    assert(pt_sampler_bounce(&s,p,&h,&o,"BOUNCE",NULL,NULL,&report,&detail)==PT_EDIT_UNSUPPORTED && detail==PT_RENDER_EFFECT && live==base);p->events[0].effect=0;p->events[0].parameter=0;
     h.next_revision=UINT32_MAX;
     assert(pt_sampler_bounce(&s,p,&h,&o,"BOUNCE",NULL,NULL,&report,&detail)==PT_EDIT_CAPACITY && !s.bytes && !s.table && live==base);h.next_revision=1;
     assert(pt_sampler_append_generated(&s,p,&h,&p->samples[0].pcm,"BAD",bad_fill,NULL)==PT_EDIT_INVALID && !s.bytes && live==base);

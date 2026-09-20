@@ -80,8 +80,8 @@ static enum pt_render_result preflight(const struct pt_project *p,const struct p
         if(!(o->tracks&(1U<<ch)))continue;
         if(e->kind==PT_NOTE_MIDI || (e->instrument && e->kind!=PT_NOTE_PERIOD && e->kind!=PT_NOTE_NONE) ||
            (e->kind==PT_NOTE_NONE && e->slice))return PT_RENDER_EFFECT;
-        if(!(e->effect==0 || e->effect==1 || e->effect==2 || e->effect==3 || e->effect==4 || e->effect==5 || e->effect==6 || e->effect==7 || e->effect==9 || (e->effect>=10 && e->effect<=13) || e->effect==15 ||
-             (e->effect==14 && ((e->parameter>>4)==1 || (e->parameter>>4)==2 || (e->parameter>>4)==3 || (e->parameter>>4)==4 || (e->parameter>>4)==5 || (e->parameter>>4)==6 || (e->parameter>>4)==7 || (e->parameter>>4)==9 || ((e->parameter>>4)>=10 && (e->parameter>>4)<=13) ||
+        if(!(e->effect==0 || e->effect==1 || e->effect==2 || e->effect==3 || e->effect==4 || e->effect==5 || e->effect==6 || e->effect==7 || e->effect==8 || e->effect==9 || (e->effect>=10 && e->effect<=13) || e->effect==15 ||
+             (e->effect==14 && ((e->parameter>>4)==1 || (e->parameter>>4)==2 || (e->parameter>>4)==3 || (e->parameter>>4)==4 || (e->parameter>>4)==5 || (e->parameter>>4)==6 || (e->parameter>>4)==7 || (e->parameter>>4)==8 || (e->parameter>>4)==9 || ((e->parameter>>4)>=10 && (e->parameter>>4)<=13) ||
                                (e->parameter>>4)==14))))return PT_RENDER_EFFECT;
         if((e->effect==3 || e->effect==5) && e->slice)return PT_RENDER_EFFECT;
         if((offsets&(1U<<ch)) && e->slice)return PT_RENDER_EFFECT;

@@ -92,7 +92,7 @@ void pt_pitch_tick(struct pt_pitch *s,const struct pt_flow *flow,uint16_t tracks
                 }
             }
             v->empty=e->kind==PT_NOTE_NONE && !e->instrument && !effect && !param;
-            if(effect<=7 || effect==10)v->output=v->period; /* mt_PerNop */
+            if(effect<=8 || effect==10)v->output=v->period; /* mt_PerNop */
         } else {
             if(!effect && param)arpeggio(v,param,flow->counter);
             else if(effect==1 || effect==2)slide(v,param,effect==2);
@@ -101,7 +101,7 @@ void pt_pitch_tick(struct pt_pitch *s,const struct pt_flow *flow,uint16_t tracks
                 tone(v);
             }
             else if(effect==4 || effect==6)vibrato(v,param,effect==4);
-            else if((effect>=9 && effect<=13) || effect==15)v->output=v->period; /* SetBack */
+            else if((effect>=8 && effect<=13) || effect==15)v->output=v->period; /* SetBack */
         }
         if(effect==14 && (param>>4)==9 && (param&15) && v->instrument) {
             const struct pt_event *e=flow->project->events+

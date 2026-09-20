@@ -90,7 +90,14 @@ is an error, never silently classified as a completed song.
 Supported: ordinary native-table-quantized notes (including instrument-zero inheritance),
 explicit note-off and velocity; mono/stereo 8/16/24-bit samples; nearest/linear
 interpolation; forward/ping-pong loops; sample slices; track selection; global
-mute/solo; and effects `0xy`, `1xx`, `2xx`, `3xx`, `4xy`, `5xx`, `6xy`, `7xy`, `9xx`, `Axx`, `Bxx`, `Cxx`, `Dxx`, `E1x`, `E2x`, `E3x`, `E4x`, `E5x`, `E6x`, `E7x`, `E9x`, `EAx`, `EBx`, `ECx`, `EDx`, `EEx`, `Fxx`.
+mute/solo; and effects `0xy`, `1xx`, `2xx`, `3xx`, `4xy`, `5xx`, `6xy`, `7xy`, `8xx`, `9xx`, `Axx`, `Bxx`, `Cxx`, `Dxx`, `E1x`, `E2x`, `E3x`, `E4x`, `E5x`, `E6x`, `E7x`, `E8x`, `E9x`, `EAx`, `EBx`, `ECx`, `EDx`, `EEx`, `Fxx`.
+The reference treats `8xx` as unused: its parameter does not pan audio, but the
+replay restores the stored pitch on fresh and effect ticks. `E8x` is a true
+no-op because the pinned2.3F replay removed Karplus-Strong processing. It can
+retain the final vibrato/slide output period until a later register write; it
+must not be replaced with a generic period restore. Neither changes sample data.
+Filter `E0x` and invert-loop `EFx` remain refused.
+
 Arpeggio 0xy changes the output period on effect passes while preserving the
 stored base and PCM phase. Its tick cycle uses the original masked counter;
 zero nibbles still perform table lookup, whereas command 000 does not run an

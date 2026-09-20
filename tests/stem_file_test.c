@@ -60,7 +60,7 @@ int main(int argc,char **argv)
     snprintf(batch,sizeof(batch),"%s/race",argv[1]);c.mode=2;c.destination=batch;
     assert(pt_stem_file_new(batch,&p,&o,0,progress,&c,&report,&detail)==PT_RENDER_FILE_PUBLISH && c.created && !access(batch,F_OK));
     assert(!memcmp(&report,&before,sizeof(report)));
-    snprintf(batch,sizeof(batch),"%s/refused",argv[1]);events[3].effect=8;
+    snprintf(batch,sizeof(batch),"%s/refused",argv[1]);events[3].effect=14;events[3].parameter=0xf1;
     assert(pt_stem_file_new(batch,&p,&o,0,NULL,NULL,&report,&detail)==PT_RENDER_FILE_RENDER && detail==PT_RENDER_EFFECT && access(batch,F_OK));
     assert(!memcmp(&report,&before,sizeof(report)));
     puts("STEMS files PASS: grouped PCM equals individual export, global tempo alignment, cancellation, preflight refusal and no-replace race");return 0;

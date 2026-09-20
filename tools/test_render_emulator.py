@@ -16,7 +16,7 @@ def main():
     binaries=['PTRenderTest','PTRenderFileTest','PT24GRender']
     for binary in binaries:shutil.copyfile(ROOT/'build/dev'/binary,run/binary)
     fixture=ROOT/'evidence/enhanced-editor/dev28/native/speed.mod';shutil.copyfile(fixture,run/'input.mod')
-    unsupported=bytearray(fixture.read_bytes());unsupported[1086]=(unsupported[1086]&0xf0)|9;(run/'unsupported.mod').write_bytes(unsupported)
+    unsupported=bytearray(fixture.read_bytes());unsupported[1086]=(unsupported[1086]&0xf0)|14;unsupported[1087]=0xf1;(run/'unsupported.mod').write_bytes(unsupported)
     subprocess.run(['make','renderer'],cwd=ROOT,check=True)
     oracle=out/'host.wav'
     host_log=subprocess.check_output([str(ROOT/'build/host/PT24GRender'),str(fixture),str(oracle),'--rate','44100','--bits','16','--gain','65536'],text=True)

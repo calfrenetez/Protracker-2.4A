@@ -17,7 +17,7 @@ def main():
     binaries=['PTStemsTest','PTStemFileTest','PT24GRender']
     for n in binaries:shutil.copyfile(ROOT/'build/dev'/n,run/n)
     fixture=ROOT/'evidence/enhanced-editor/dev48/native/fine_00.mod';shutil.copyfile(fixture,run/'input.mod')
-    data=bytearray(fixture.read_bytes());data[1086]=(data[1086]&240)|8;(run/'bad.mod').write_bytes(data)
+    data=bytearray(fixture.read_bytes());data[1086]=(data[1086]&240)|14;data[1087]=0xf1;(run/'bad.mod').write_bytes(data)
     host_log=subprocess.check_output([str(ROOT/'build/host/PT24GRender'),str(fixture),str(out/'host'),'--stems','--tracks','3'],text=True)
     (out/'host.log').write_text(host_log)
     cases=[('plan','PTStemsTest',0),('files','PTStemFileTest PTDEV:'+run.name,0),

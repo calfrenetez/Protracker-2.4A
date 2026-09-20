@@ -34,7 +34,8 @@ typedef int (*pt_render_sink)(void *,const struct pt_pcm *,uint64_t offset);
  * sample changes/slices on tone-portamento notes,
  * zero playback periods and unsupported
  * effects. Supported
- * effects: 0xy..7xy, 9xx, Axx..Dxx, E1x..E7x, E9x..EEx and Fxx.
+ * effects: 0xy..Dxx, E1x..EEx and Fxx. 8xx restores stored pitch
+ * without panning; E8x does nothing, matching the pinned2.3F replay.
  * Instrument-only rows can preload silently or reload the same whole sample
  * without restarting phase. Different active sample/slice handoffs are refused.
  * Pitch slides retain native stored-word wrap and register-write semantics.

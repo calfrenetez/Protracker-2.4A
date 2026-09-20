@@ -1,0 +1,7 @@
+PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.678s
+
+OK
+UNUSED: six repeated native traces match host/m68k stored/output words and PCM for8xx/E8x

@@ -60,7 +60,7 @@ int main(int argc,char **argv)
         else assert(access(failure.path,F_OK)!=0);
         if(i==1 || i==4)assert(detail==PT_RENDER_CANCELLED);
     }
-    path_for(path,sizeof(path),dir,"unsupported.wav");events[0].effect=8;
+    path_for(path,sizeof(path),dir,"unsupported.wav");events[0].effect=14;events[0].parameter=0xf1;
     assert(pt_render_file_new(path,&p,&o,NULL,NULL,&report,&detail)==PT_RENDER_FILE_RENDER && detail==PT_RENDER_EFFECT && access(path,F_OK)!=0);
     assert(pcm[0]==0x123456 && pcm[1]==-0x345678);
     puts("RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt staging refusal and cleanup");return 0;

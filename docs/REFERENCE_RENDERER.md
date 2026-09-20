@@ -276,3 +276,21 @@ periods still fail before publication. Six dev42 fixtures independently check
 63360 reference frames, including offsets, forward loops and pattern delays.
 Additional state checks cover delayed pitch writes, retained vibrato phase and
 refusal of cross-sample delay. No analogue or physical acceptance is implied.
+
+## Tremolo diagnostic preparation (dev45)
+
+7xy/E7x are not yet enabled in the reference renderer. The separate 76-byte
+PTVolumeTraceTest retains the exact existing 52-byte prefix. Prefix bytes32..35
+already contain the final output volume before mute gating, captured by the
+existing pt_write_volume wrapper at every volume write. New bytes52..59 contain
+four big-endian stored-volume words; bytes60..75 contain command, tremolo phase,
+full wave control and vibrato phase for each channel. No shipping playback hooks
+are changed, and no additional volume-write wrapper is required.
+
+The pinned replay updates nonzero speed/depth nibbles independently on nonfresh
+7xy passes, clamps output to 0..64 without changing stored volume, and advances
+tremolo phase by speed*4. Sine, ramp and both square selectors are distinct test
+cases. The ramp magnitude chooses its branch using vibrato phase, while the
+volume addition/subtraction sign uses tremolo phase. Preserve this native
+cross-effect behavior. Wave control bit6 suppresses note-trigger phase reset;
+pattern delays retain commands and execute nonfresh passes at counter zero.

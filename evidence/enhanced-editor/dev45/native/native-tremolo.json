@@ -1,0 +1,418 @@
+{
+  "schema": 1,
+  "record_bytes": 76,
+  "run_id": "tremolo1789935441990802000",
+  "elapsed_seconds": 44.18,
+  "diagnostic_sha256": "c209f8099fe33a25d9352237b861735738e4ccac4ad40cbf79a6303925e71ba3",
+  "baseline_first52": "EXACT DEV38 MATCH",
+  "cases": {
+    "trem_sine": {
+      "focus": "trem_sine",
+      "events": [
+        [
+          0,
+          0,
+          428,
+          1,
+          7,
+          143
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          7,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 18,
+      "fixture_sha256": "72d63cc088adb7891003e2483d0b6d1cdfdde3859105d45538c2675e029e45b4",
+      "trace_sha256": "0b935d27ec234c7e54bfc05a03a8de71d291ecc676138fcba69e70199a4d7750"
+    },
+    "trem_memory": {
+      "focus": "trem_memory",
+      "events": [
+        [
+          0,
+          0,
+          428,
+          1,
+          7,
+          67
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          7,
+          8
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          7,
+          144
+        ],
+        [
+          3,
+          0,
+          0,
+          0,
+          7,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 30,
+      "fixture_sha256": "7402d171090c0d080fc66897edeb8c783a4a3170c77d620792cf443c70b50b43",
+      "trace_sha256": "6b6a808157fe194f39695a65e83f89c3d2fb8937dfbe96791491f662a4b85cec"
+    },
+    "trem_waves": {
+      "focus": "trem_waves",
+      "events": [
+        [
+          0,
+          0,
+          428,
+          1,
+          14,
+          112
+        ],
+        [
+          0,
+          1,
+          428,
+          1,
+          14,
+          113
+        ],
+        [
+          0,
+          2,
+          428,
+          1,
+          14,
+          114
+        ],
+        [
+          0,
+          3,
+          428,
+          1,
+          14,
+          115
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          7,
+          143
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          7,
+          143
+        ],
+        [
+          1,
+          2,
+          0,
+          0,
+          7,
+          143
+        ],
+        [
+          1,
+          3,
+          0,
+          0,
+          7,
+          143
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          7,
+          0
+        ],
+        [
+          2,
+          1,
+          0,
+          0,
+          7,
+          0
+        ],
+        [
+          2,
+          2,
+          0,
+          0,
+          7,
+          0
+        ],
+        [
+          2,
+          3,
+          0,
+          0,
+          7,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "3791bdd53f9681b9e83eacc591bd9e86ebfe5db42a2fa9de38a6aab3f95fb68d",
+      "trace_sha256": "684147dc36276d2217e6e295592cc6e2393ac3a9503ab6724ec3b5743dbf2713"
+    },
+    "trem_reset": {
+      "focus": "trem_reset",
+      "events": [
+        [
+          0,
+          0,
+          428,
+          1,
+          7,
+          67
+        ],
+        [
+          1,
+          0,
+          428,
+          1,
+          7,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 18,
+      "fixture_sha256": "2ae41b58d8d5639b107f674f759426b842724dccc3e015937fd5135e5a8aad47",
+      "trace_sha256": "4586e1b054957419488e37fc2cc90441fb0eb932aea902b3044ab12858a7cc3e"
+    },
+    "trem_keep": {
+      "focus": "trem_keep",
+      "events": [
+        [
+          0,
+          0,
+          428,
+          1,
+          14,
+          116
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          7,
+          67
+        ],
+        [
+          2,
+          0,
+          428,
+          1,
+          7,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "a2b025287fa0b592f851c2761bb561bb98044ecbe5e115d2093603270ab80f89",
+      "trace_sha256": "df3cd0e2218fd002dd6e789be5ab81217c3d10cd43ca899824df20168cee7a33"
+    },
+    "trem_delay": {
+      "focus": "trem_delay",
+      "events": [
+        [
+          0,
+          0,
+          428,
+          1,
+          7,
+          143
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          14,
+          226
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "ff557798617cd0a6523bcff82afc5896ef4ad0c2ebd16e8c2884597e9bab8d24",
+      "trace_sha256": "9863dfc5784a2e29e872c7b7ac3b1b4b7bcafb5762329d2905d162eddcf2f170"
+    },
+    "trem_ramp_vib": {
+      "focus": "trem_ramp_vib",
+      "events": [
+        [
+          0,
+          0,
+          428,
+          1,
+          4,
+          129
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          14,
+          113
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          7,
+          143
+        ],
+        [
+          3,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "467e012dc038497864842a270a12f4d895c0de80db2b499b5566d1dbc65538f5",
+      "trace_sha256": "b5076e42af97ce4dbf5e11631390b124487a33a983b5bf69d2ef0a121ec867df"
+    },
+    "trem_restore": {
+      "focus": "trem_restore",
+      "events": [
+        [
+          0,
+          0,
+          428,
+          1,
+          7,
+          143
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          7,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "d146570c00514ce811ee57186bcbe3cdfdb039cbd96871229296ff0a62009c57",
+      "trace_sha256": "d66e3e76b04ad0fd7bd13d787d40840d7c5817f84a77a49dc1a348f8fe71a9ba"
+    }
+  },
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=750\tsndbuf_status=0",
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  },
+  "scope": "7xy/E7x stored/output volume and waveform state only. Renderer enablement and physical acceptance remain open."
+}

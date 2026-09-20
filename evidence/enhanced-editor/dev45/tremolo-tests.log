@@ -1,0 +1,7 @@
+test_native_volume_and_memory (test_tremolo_trace.TremoloTrace.test_native_volume_and_memory) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.005s
+
+OK
+TREMOLO: eight repeated native traces verify output/stored volume, waveforms, nibble memory, reset control, delay and vibrato-phase ramp dependency; renderer support remains open

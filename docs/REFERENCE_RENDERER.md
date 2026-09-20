@@ -87,7 +87,12 @@ is an error, never silently classified as a completed song.
 Supported: ordinary raw-period notes (including instrument-zero inheritance),
 explicit note-off and velocity; mono/stereo 8/16/24-bit samples; nearest/linear
 interpolation; forward/ping-pong loops; sample slices; track selection; global
-mute/solo; and effects `000`, `1xx`, `2xx`, `3xx`, `5xx`, `Axx`, `Bxx`, `Cxx`, `Dxx`, `E1x`, `E2x`, `E6x`, `EAx`, `EBx`, `ECx`, `EEx`, `Fxx`.
+mute/solo; and effects `0xy`, `1xx`, `2xx`, `3xx`, `5xx`, `Axx`, `Bxx`, `Cxx`, `Dxx`, `E1x`, `E2x`, `E6x`, `EAx`, `EBx`, `ECx`, `EEx`, `Fxx`.
+Arpeggio 0xy changes the output period on effect passes while preserving the
+stored base and PCM phase. Its tick cycle uses the original masked counter;
+zero nibbles still perform table lookup, whereas command 000 does not run an
+effect. High offsets retain the original adjacent tuning-table values. A
+sounding zero result is refused during measurement, before output.
 Axx applies on effect passes, including delayed passes. Fine volume slides EAx/EBx
 apply only at tick zero, including delayed tick-zero passes, and saturate at 0/64.
 ECx cuts volume when the current tick equals x; EC0 is immediate and an x outside

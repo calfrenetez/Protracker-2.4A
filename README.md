@@ -3,6 +3,10 @@
 Build preparation for a native Amiga tracker with 1–16 channels, classic
 ProTracker workflow, and exclusive Paula, AmiGUS or MIDI routing per channel.
 
+The shared WAV/sample-bounce renderer now includes reference arpeggio (0xy),
+pitch slides and tone portamento. Full classic-effect compatibility remains in
+progress; see [reference renderer limits](docs/REFERENCE_RENDERER.md).
+
 **Development status: the native editor, sampler and song arrangement work;
 full mixed-backend playback is unfinished.** Two Amiga executables are retained:
 

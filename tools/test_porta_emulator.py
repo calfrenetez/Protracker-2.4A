@@ -24,15 +24,15 @@ def decode_trace(log,budget):
     _,reason=decode_flow(control,budget)
     return b''.join(records),reason
 
-def main():
+def main(factory=fixtures,suite="porta",scope=None):
     if matching_socket() or Path('/tmp/amiberry.sock').exists():raise SystemExit('Emulator already owned')
     env=json.loads((ROOT/'local/environment.json').read_text());share=Path(env['share']);launch=share/'launch';original=launch.read_bytes()
-    run=share/('porta'+str(time.time_ns()));run.mkdir()
-    out=ROOT/'build/dev/porta-evidence'/run.name;out.mkdir(parents=True,exist_ok=False)
+    run=share/(suite+str(time.time_ns()));run.mkdir()
+    out=ROOT/'build/dev'/(suite+'-evidence')/run.name;out.mkdir(parents=True,exist_ok=False)
     shutil.copyfile(ROOT/'build/dev/PTPitchTraceTest',run/'PTPitchTraceTest')
     shutil.copyfile(ROOT/'build/dev/PTPortaRenderTest',run/'PTPortaRenderTest')
     shutil.copyfile(ROOT/'build/dev/PTPitchTest',run/'PTPitchTest')
-    cases=list(fixtures());script=['FailAt 21','Wait 5','Stack 65536','CD PTDEV:'+run.name]
+    cases=list(factory());script=['FailAt 21','Wait 5','Stack 65536','CD PTDEV:'+run.name]
     baseline=ROOT/'evidence/enhanced-editor/dev28/native/speed.mod'
     shutil.copyfile(baseline,run/'baseline.mod')
     script += ['PTPitchTraceTest baseline.mod 160 >baseline.log','Echo $RC >baseline.rc']
@@ -97,9 +97,9 @@ def main():
         audio=emu.command('GET_AUDIO_STATE');assert all('ch%d_dma=0'%i in audio.split('\t') for i in range(4))
         report={'schema':1,'record_bytes':52,'run_id':run.name,'elapsed_seconds':round(time.monotonic()-start,3),
                 'baseline_fixture_sha256':digest(baseline),'baseline_first36':'EXACT DEV28 MATCH','diagnostic_sha256':digest(run/'PTPitchTraceTest'),'pitch_test_sha256':digest(run/'PTPitchTest'),'renderer_test_sha256':digest(run/'PTPortaRenderTest'),'cases':results,'stopped_audio':audio,
-                'scope':'Pinned native stored/output periods captured twice; m68k pitch state matches every tick and rendered ramp PCM follows captured periods. Tone targets preserve DMA/phase and speed memory; combined volume and inactive voice behavior checked; cross-sample and slice glide targets refused before output. Reference rate/timing only; no hardware sound claim.',
+                'scope':scope or 'Pinned native stored/output periods captured twice; m68k pitch state matches every tick and rendered ramp PCM follows captured periods. Tone targets preserve DMA/phase and speed memory; combined volume and inactive voice behavior checked; cross-sample and slice glide targets refused before output. Reference rate/timing only; no hardware sound claim.',
                 'environment':{c:emu.command(c) for c in ['GET_STATUS','GET_VERSION','GET_CPU_MODEL','GET_MEMORY_CONFIG']}}
-        (out/'native-porta.json').write_text(json.dumps(report,indent=2)+'\n')
+        (out/('native-'+suite+'.json')).write_text(json.dumps(report,indent=2)+'\n')
         print(f'PASS: {len(cases)} repeated native pitch traces and exact renderer PCM checks; '+str(out),flush=True)
     finally:
         launch.write_bytes(original)
@@ -108,5 +108,5 @@ def main():
                 if emu:Emulator(emu.path).command('QUIT')
                 else:process.terminate()
             finally:process.wait(timeout=10)
-        print('Portamento capture released:',run,flush=True)
+        print('Pitch capture released:',run,flush=True)
 if __name__=='__main__':main()

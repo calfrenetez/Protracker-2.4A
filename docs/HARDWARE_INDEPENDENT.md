@@ -600,3 +600,18 @@ Native stored/output-period, volume and DMA-start-mask fixtures are retained in
 `evidence/enhanced-editor/dev36/`, with host/native PCM and 16-track state checks.
 The tests include a non-aligned sample phase to expose an unwanted restart.
 No main-screen changes or physical hardware acceptance are implied.
+
+
+## Reference arpeggio (dev37)
+
+The shared WAV/bounce renderer accepts 0xy with native nibble phases, delayed-row
+behavior and stored/output period separation. High offsets retain the adjacent
+native tuning-table values through a bounded explicit table. Zero output while
+sounding is still refused during measurement. PCM phase is preserved.
+
+47 host checks and 39 native executions passed. Nine fixtures (153 ticks each
+capture pass) were repeated exactly; host/m68k state and reference ramp PCM
+match native period writes. All 16 tracks receive independent host boundary
+coverage. The original diagnostic and accepted screen remain unchanged.
+Evidence and limitations are in `evidence/enhanced-editor/dev37/`. Amiberry was
+explicitly released after guarded cleanup. No physical hardware was accessed.

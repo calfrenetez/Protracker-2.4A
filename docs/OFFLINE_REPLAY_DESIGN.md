@@ -299,3 +299,27 @@ writes and rate from output-period writes. It checks the reference PCM policy,
 not actual Paula sample timing. Same-instrument glide coverage starts at period404
 so the sample is between loop boundaries at the glide; a forced-retrigger mutant
 must fail that oracle. Old fixture evidence is retained unchanged.
+
+
+## Arpeggio register behavior (dev37)
+
+0xy runs only on effect passes and only with a nonzero parameter. The replay's
+32-byte phase table is equivalent to `(counter & 31) % 3`: phase zero writes the
+stored word, phase one uses the high nibble and phase two uses the low nibble.
+Lookup finds the first zero-finetune period less than or equal to the unsigned
+stored word, then adds the nibble offset. The stored word is never changed.
+A zero nibble still performs lookup, which matters after a non-table pitch slide.
+Fresh rows perform the ordinary PerNop write; delayed tick zero runs the effect.
+
+The zero-finetune table includes a zero sentinel at index36, and native arpeggio
+can read up to index51. These reads intentionally reach the following tuning+1
+table. The portable implementation explicitly stores those 15 adjacent words;
+it neither clamps the index nor reads beyond a C array. Finetune itself is still
+unsupported. A sounding zero output period fails measurement before sink or
+sample mutation. An inactive voice remains silent despite period writes.
+
+The unchanged 52-byte native diagnostic and shared dev36 DMA/phase PCM oracle
+cover nibble order, blank-command transition, delayed rows, maximum speed,
+adjacent-table reads, zero refusal, prior slide/wrap and all four native tracks.
+Host boundary checks also cover independent parameters on all 16 tracks and
+track-mask isolation. Ordinary reference notes still retain raw periods.

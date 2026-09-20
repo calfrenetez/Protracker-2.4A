@@ -1,0 +1,12 @@
+test_native_range_driven_pcm (test_retrigger_render.RetriggerRender.test_native_range_driven_pcm) ... OFFSET safety PASS: isolated track16 PCM, non-byte/stereo/odd/pingpong/slice refusal before output/report changes
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 2.583s
+
+OK

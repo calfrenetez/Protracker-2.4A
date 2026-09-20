@@ -222,7 +222,7 @@ against native range/trigger snapshots, not analogue Paula output.
 
 ## Retrigger and note-delay reference evidence (dev42)
 
-E9x/EDx remain refused by renderer preflight. The separate native sample diagnostic
+At dev42, E9x/EDx remained refused by renderer preflight. The separate native sample diagnostic
 now has ten repeated fixtures covering their trigger counts and initial/loop ranges.
 E90 never retriggers. E9x with x nonzero triggers when the counter is divisible by
 x, except counter zero with a packed note; that note already takes the ordinary
@@ -242,3 +242,20 @@ register/trigger captures are not rendered-PCM or physical listening acceptance.
 Next: integrate trigger scheduling into both measurement and streaming, handle
 EDx stored-period versus hardware-period timing and vibrato reset semantics, and
 compare PCM against these retained native triggers before enabling either effect.
+
+## Retrigger rendering subset (dev43)
+
+E9x is now enabled in the shared WAV and new-sample renderer. Nonzero x restarts
+the saved sample segment on divisible counters, excluding counter zero when the
+retained row contains a note. E90 has no additional trigger. Fresh notes retain
+ordinary trigger behavior; no-note retriggers preserve velocity and volume.
+Retriggers restore the stored period without resetting vibrato phase. Offset
+memory and independent loop ranges are retained. Measurement checks the same
+ranges and zero-period restrictions before any output is published.
+
+Selected tracks containing E9x use the same bounded mono8/even-length/no-slice
+subset as 9xx, including E90. Higher-precision, stereo and pingpong retrigger
+semantics remain unsupported. EDx note delay is still refused. Five retained
+dev42 fixtures check 46080 rendered frames against native trigger/range evidence
+on the host; channel16 and offset-then-retrigger cases have additional checks.
+This does not establish physical playback or complete classic compatibility.

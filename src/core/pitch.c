@@ -90,6 +90,13 @@ void pt_pitch_tick(struct pt_pitch *s,const struct pt_flow *flow,uint16_t tracks
             else if(effect==4 || effect==6)vibrato(v,param,effect==4);
             else if((effect>=9 && effect<=13) || effect==15)v->output=v->period; /* SetBack */
         }
+        if(effect==14 && (param>>4)==9 && (param&15) && v->instrument) {
+            const struct pt_event *e=flow->project->events+
+                ((size_t)flow->project->orders[flow->played_order]*64+flow->played_row)*flow->project->channels.count+ch;
+            if(!(!flow->counter && e->kind==PT_NOTE_PERIOD) && !(flow->counter%(param&15))) {
+                v->output=v->period;v->sounding=1;
+            }
+        }
         if(effect==14 && (param>>4)==4)v->vib_control=(uint8_t)(param&15);
         if(effect==14 && !flow->counter && ((param>>4)==1 || (param>>4)==2))slide(v,param&15,(param>>4)==2);
     }

@@ -40,6 +40,22 @@ static void safety(void)
     o.rate=48000;o.bits=24;o.gain_q16=65536;o.tracks=0x8000;o.tick_limit=100;o.frame_limit=200000;
     memset(&c,0,sizeof(c));c.ticks=1;c.start[0]=256;c.length[0]=768;c.active[0]=c.reset[0]=1;c.volume[0]=64;
     assert(pt_render_stream(&p,&o,receive,&c,NULL,NULL,&result)==PT_RENDER_OK && result.frames==960);
+    p.speed=6;events[15].effect=14;events[15].parameter=0x92;
+    memset(&c,0,sizeof(c));c.ticks=6;
+    for(i=0;i<6;++i) {c.length[i]=1024;c.active[i]=1;c.reset[i]=(uint8_t)(i%2==0);c.volume[i]=64;}
+    assert(pt_render_stream(&p,&o,receive,&c,NULL,NULL,&result)==PT_RENDER_OK && result.frames==5760);
+    events[15].effect=9;events[15].parameter=1;events[16].effect=0;
+    events[31].effect=14;events[31].parameter=0x92;events[32].effect=15;
+    memset(&c,0,sizeof(c));c.ticks=12;
+    for(i=0;i<12;++i) {
+        c.start[i]=i<6?256:512;c.length[i]=i<6?768:512;c.active[i]=1;
+        c.reset[i]=(uint8_t)(i==0 || (i>=6 && i%2==0));c.volume[i]=64;
+    }
+    assert(pt_render_stream(&p,&o,receive,&c,NULL,NULL,&result)==PT_RENDER_OK && result.frames==11520);
+    memset(events+31,0,2*sizeof(*events));events[16].effect=15;events[15].effect=14;events[15].parameter=0x92;
+    sample.pcm.bits=16;calls=0;memset(&result,0x55,sizeof(result));before=result;
+    assert(pt_render_stream(&p,&o,counted,&calls,NULL,NULL,&result)==PT_RENDER_SAMPLE && !calls && !memcmp(&before,&result,sizeof(result)));
+    p.speed=1;events[15].effect=9;events[15].parameter=1;
     memset(&result,0x55,sizeof(result));before=result;sample.pcm.bits=16;
     assert(pt_render_stream(&p,&o,counted,&calls,NULL,NULL,&result)==PT_RENDER_SAMPLE && !calls && !memcmp(&before,&result,sizeof(result)));
     sample.pcm.bits=8;sample.pcm.frames=1023;

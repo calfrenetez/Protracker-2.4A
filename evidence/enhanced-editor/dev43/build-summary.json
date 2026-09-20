@@ -1,0 +1,14 @@
+{
+  "PT24GEdit": {
+    "sha256": "ad85d830d8e9f530c0def0893ed16a97e1511f1c5f1d622d44879519e4b1f92a",
+    "bytes": 188940
+  },
+  "PT24GRender": {
+    "sha256": "895c4e14d108c1401949ecf1fe40a6f36e50919c077d293d9925591203754d11",
+    "bytes": 64224
+  },
+  "PTOffsetRenderTest": {
+    "sha256": "a14fb3ee1b9c165b986ee355bfad7d782e906a8bb3322b0ae712ea33d1ab9978",
+    "bytes": 65952
+  }
+}

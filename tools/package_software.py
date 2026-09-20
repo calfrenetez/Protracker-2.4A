@@ -49,6 +49,10 @@ LOAD/Control-O opens a MOD/project, including structurally validated PP20 MODs. 
 Starting PT24GEdit without arguments creates a blank song.
 CLEAR/Control-N creates a new song with 1-16 channels; dirty edits need confirmation.
 EDIT OP./Control-E provides mark/copy/paste/clear/transpose and whole-block undo.
+EDIT OP. > NOTE / Control-I assigns existing sample slices to normal pattern notes:
+S enters a hex ordinal, +/- steps, C clears, U attaches selected sample, [/] selects
+that sample slot, L opens its sampler. Slice0000 is whole; 0001 is first marker.
+Slice references share note/sample undo and PTG saves; slice playback is pending.
 DISK OP. > SAVE MOD / Control-Shift-M exports strictly lossless classic MODs.
 Control-R or a P/A/M header letter opens CHANNEL: routes, mute and solo share undo
 and project saves. P/A/M chooses route, U mute, S solo, Escape closes the page.

@@ -494,3 +494,36 @@ or replacing the source never invalidates imported data or undo resources. Proje
 load/creation/exit also releases source storage. Enhanced PTG files are not accepted
 as MOD donors. The input buffer and original current-song storage remain additional
 allocations, as described under sampler memory limits.
+
+## Assign a slice to a pattern note
+
+EDIT OP. > NOTE or Control-I opens the selected pattern event's slice page while
+retaining the four-column pattern grid. The title identifies pattern/row in hex,
+channel in decimal and the note's explicit sample instrument in hex. Select a
+normal sample note first. The middle control shows the assigned slice and total
+marker count in hex: 0000 means the whole sample; 0001 is its first marker.
+A slice runs from that marker to the next marker, or the sample end. The displayed
+frame range is half-open: its end frame is excluded. PCM is never split or copied
+by assigning a slice.
+
+SLICE -/+ or -/+ steps the assignment; click the middle value or press S for exact
+hexadecimal entry. Return applies one pattern undo command; Escape cancels and
+preserves redo. A nonzero slice requires a normal sample note, explicit sample
+instrument and existing marker. Invalid assignments leave the note unchanged.
+NO SLICE / C clears only the slice reference. Other note fields, effects, velocity
+and PCM remain unchanged. This UI does not assign slices to MIDI notes or OFF.
+
+USE SMP / U explicitly attaches the currently selected sample slot to an existing
+sample note, including an instrument-zero note. The target must have markers and
+must accommodate any existing slice reference; otherwise the change is refused.
+Use [/] or the main SAMPLE arrows to choose the slot. There is no inference from
+an earlier note's instrument. SAMPLER / L opens the note's sample for marker work;
+Control-I returns to the note page. Up/down selects rows; Tab/Shift-Tab, left/right
+and F1–F4 select channels. These controls cannot change the target during numeric
+entry. Other note-entry keys are isolated while this settings page is open.
+
+UNDO/REDO and Control-Z/Control-Shift-Z follow the same chronological journal as
+marker edits. Referenced marker removal or start retargeting is refused until the
+note references are cleared. PTG stores these assignments exactly. BACK/Escape or
+Control-I returns to EDIT OP. Slice playback through AmiGUS/enhanced preview is
+still pending; classic Paula playback and direct MOD export refuse sliced data.

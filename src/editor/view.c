@@ -342,7 +342,7 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
         if(e->channel_details) {
             static const char *names[3]={"PAN","GROUP","MIDI"};
             for(i=0;i<3;++i) {
-                if(e->number_field==5+i)snprintf(s,sizeof(s),"%s %.6s_",names[i],e->number_text);
+                if(e->number_field==5+i)snprintf(s,sizeof(s),"%s %.4s_",names[i],e->number_text);
                 else if(i==2)snprintf(s,sizeof(s),"MIDI %02u",channel->midi_channel);
                 else snprintf(s,sizeof(s),"%s %02X",names[i],i==0?channel->pan:channel->group);
                 label(c,font,230+(int)i*123,21,123,19,s,e->number_field==5+i);
@@ -368,11 +368,25 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
         label(c,font,230,40,369,19,"FIRST 4 PAULA; REST AMIGUS",0);
         label(c,font,230,59,184,38,"CREATE",e->new_pending);
         label(c,font,414,59,185,38,"CANCEL",0);
+    } else if(e->panel==1 && e->note_details) {
+        const struct pt_event *event=&p->events[(e->pattern*64+e->row)*p->channels.count+p->channels.selected];
+        const struct pt_sample *source=event->instrument?&p->samples[event->instrument-1]:NULL;
+        snprintf(s,sizeof(s),"NOTE P%02X R%02X C%02u SMP%02X",e->pattern,e->row,p->channels.selected+1,event->instrument);label(c,font,230,2,369,19,s,0);
+        label(c,font,230,21,123,19,"SLICE -",0);label(c,font,476,21,123,19,"SLICE +",0);
+        if(e->number_field==8)snprintf(s,sizeof(s),"%.5s_",e->number_text);
+        else snprintf(s,sizeof(s),"%04X/%04X",event->slice,source?source->slice_count:0);
+        label(c,font,353,21,123,19,s,e->number_field==8);
+        snprintf(s,sizeof(s),"USE SMP %02X",e->sample);label(c,font,230,40,123,19,s,0);
+        label(c,font,353,40,123,19,"NO SLICE",0);label(c,font,476,40,123,19,"SAMPLER",0);
+        if(event->slice && source)snprintf(s,sizeof(s),"FRAMES %lu-%lu",(unsigned long)source->slices[event->slice-1],(unsigned long)(event->slice<source->slice_count?source->slices[event->slice]:source->pcm.frames));
+        else snprintf(s,sizeof(s),"%s",source?"WHOLE SAMPLE":"SET A SAMPLE INSTRUMENT");
+        label(c,font,230,59,369,19,s,0);
+        label(c,font,230,78,123,19,"UNDO",0);label(c,font,353,78,123,19,"REDO",0);label(c,font,476,78,123,19,"BACK",0);
     } else if(e->panel==1) {
         static const char *ops[3][3]={{"UNDO","REDO","MARK"},{"COPY","PASTE","CLEAR"},{"SEMI -","SEMI +","ALL"}};
         label(c,font,230,2,369,19,"EDIT OP.",0);
         for(r=0;r<3;++r)for(i=0;i<3;++i)label(c,font,230+(int)i*123,21+(int)r*19,123,19,ops[r][i],r==0 && i==2 && e->selection.active);
-        label(c,font,230,78,123,19,"UNMARK",0);label(c,font,353,78,246,19,"BACK",0);
+        label(c,font,230,78,123,19,"UNMARK",0);label(c,font,353,78,123,19,"BACK",0);label(c,font,476,78,123,19,"NOTE",0);
     } else if(e->panel==2) {
         panel(c,230,2,369,95,GREY);
         label(c,font,230,2,369,19,e->panel==1?"EDIT OP.":"DISK OP.",0);
@@ -422,7 +436,7 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
         const struct pt_pcm *pcm=&e->project->samples[i].pcm;
         bytes+=(size_t)pcm->frames*pcm->channels*(pcm->bits/8);
     }
-    full=(e->panel>=4 && (old->sample_ui!=e->sample_ui || old->sample_start!=e->sample_start || old->sample_end!=e->sample_end || old->sample_marking!=e->sample_marking || old->sample_anchor!=e->sample_anchor || old->sample_range_slot!=e->sample_range_slot)) || !old->valid || old->page!=page || old->pattern!=e->pattern || old->first_row!=e->first_row ||
+    full=(e->panel==1 && (old->note_details!=e->note_details || (e->note_details && (old->history_revision!=e->history.revision || old->row!=e->row || old->selected!=e->project->channels.selected)))) || ((e->panel>=4 || (e->panel==1 && e->note_details)) && (old->sample_ui!=e->sample_ui || old->sample_start!=e->sample_start || old->sample_end!=e->sample_end || old->sample_marking!=e->sample_marking || old->sample_anchor!=e->sample_anchor || old->sample_range_slot!=e->sample_range_slot)) || !old->valid || old->page!=page || old->pattern!=e->pattern || old->first_row!=e->first_row ||
          old->position!=e->position || old->sample!=e->sample || old->editing!=e->editing || old->panel!=e->panel || (e->panel==4 && old->selected!=e->project->channels.selected) || (e->panel==1 && old->selection.active!=selection.active) ||
          old->sample_bytes!=bytes || memcmp(&metadata,&old->project,sizeof(metadata)) || memcmp(&sample,&old->sample_meta,sizeof(sample));
     playback_changed=!old->valid || memcmp(&e->playback,&old->playback,sizeof(e->playback));
@@ -456,6 +470,7 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
     }
     memcpy(&old->project,&metadata,sizeof(metadata));memcpy(&old->sample_meta,&sample,sizeof(sample));
     memcpy(&old->playback,&e->playback,sizeof(e->playback));strcpy(old->status,e->status);
+    old->note_details=e->note_details;old->history_revision=e->history.revision;
     old->new_channels=e->new_channels;old->new_pending=e->new_pending;
     old->selection=selection;
     old->valid=1;old->page=page;old->pattern=e->pattern;old->first_row=e->first_row;old->position=e->position;

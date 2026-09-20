@@ -1,0 +1,113 @@
+python3 tools/build_core_tests.py
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        5700 bytes
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+Harness(acrx2):	         874 bytes
+PTGGuard(acrx2):	         518 bytes
+PTGGuardData(aurw1):	        2108 bytes
+{
+  "PT24GEdit": {
+    "sha256": "08778d69a7108c806991184b4238217a95685a061d8b48ef7faf10f2d425b01c",
+    "bytes": 156776
+  },
+  "PTPaulaTest": {
+    "sha256": "2d63f39bea86e8d2fc922f2a2448d48ec66c7e3b287b7c6e16ed5a3936f97ab9",
+    "bytes": 64068
+  },
+  "PTViewBench": {
+    "sha256": "00838ece684043600c4112b83873fb952115922b2043d00ab32d68d58616efcf",
+    "bytes": 127108
+  },
+  "PTSourceTest": {
+    "sha256": "eeeafba7aa2868ea09a235e618b13d270204f6f339ea58a8600e96fb010e6e9b",
+    "bytes": 112720
+  },
+  "PTNoteSliceTest": {
+    "sha256": "12add1dccafc7c5f1f8a023378d3325d4b62a211b20d976059e1e6540c85a57b",
+    "bytes": 110580
+  },
+  "PTSamplerTest": {
+    "sha256": "914e64508459ddcdbde06a6328c0de565cbca104290a58f6fe1fe9a83abeb9dc",
+    "bytes": 104748
+  },
+  "PTPp20Test": {
+    "sha256": "799c38d0e9162182b327799fa5ccb83c2ae4840aaa189301854ee0119d0ba2d1",
+    "bytes": 48096
+  },
+  "PTRawTest": {
+    "sha256": "95ae56a333a6b79132c0eef1e8c3fbf85caa9e532c44fc318602adab92d079ef",
+    "bytes": 27788
+  },
+  "PTSvxTest": {
+    "sha256": "93c829b259e9f351948b99a7d36d891c6a94b75813f085d801d9403eafca8c77",
+    "bytes": 31436
+  },
+  "PTFilterTest": {
+    "sha256": "935dbb58f9f01b288fbaf0f81767eebdfd5c2e6b0cb98d97e6223ea21cfe9458",
+    "bytes": 47284
+  },
+  "PTMidiTest": {
+    "sha256": "bb7789471bdb8cebb4539bc5f499fb5f9d3ae64eb062470e1ddad4dd40f8de45",
+    "bytes": 19884
+  },
+  "PTRecordTest": {
+    "sha256": "ff05666b3b4c4b81a054e44a3953c4494c75f028fcfb13b5051bb202cf78eb91",
+    "bytes": 45900
+  },
+  "PTPatternTest": {
+    "sha256": "2a54409ae0c9a32bb2d1996af7af4cd73c2cbbedcc997f158967dbe582b692b1",
+    "bytes": 45468
+  },
+  "PTSlicesTest": {
+    "sha256": "f4c7af9ef24fafcfe8ebdbe5fd20026f75f2d32524109010e6509fa0c38e1296",
+    "bytes": 29348
+  },
+  "PTFileSafetyTest": {
+    "sha256": "f1be65564a0782b2d214232e06a682d54dc886fe379452d36dc56ca1e024b33b",
+    "bytes": 16388
+  },
+  "PTProjectTest": {
+    "sha256": "45b75a21ec240222f78a02a06e763403bd2419bd8b1cafbbdc53d9c674bf2ae2",
+    "bytes": 40632
+  },
+  "PTModProjectTest": {
+    "sha256": "9a1b7a2ac57b6cc445ce458094666a0109a98a5c0bcbc99a9e88d5a021abff29",
+    "bytes": 45272
+  },
+  "PTDocumentTest": {
+    "sha256": "f8187a5316bc5ec2ad25b728f62a58e9b6b5d8b130980f826c1fca91e159d380",
+    "bytes": 53152
+  },
+  "PT24GConvert": {
+    "sha256": "8c6568aed1de05eeb8f784f2faaee988a2b42d87dccd12662dacde2ed1ddf8fd",
+    "bytes": 50544
+  },
+  "PTEditorClick": {
+    "sha256": "b265c06a53667722f1e71cfae23c6adf48604d343747bef4a4a6df40981c8540",
+    "bytes": 16356
+  },
+  "PTInputProbe": {
+    "sha256": "53cacd4c767cf8f37c257118154968c8055b5ebdefedb1ac01f7b79d348805c0",
+    "bytes": 14664
+  },
+  "PTChannelsTest": {
+    "sha256": "6ffb1ff65dc031246024b2f2fa82197ce6b6d9c93e329102c6c2e65020c4f76f",
+    "bytes": 17364
+  },
+  "PTPcmTest": {
+    "sha256": "d814a690129b307d79321905390263977517f98b8a5943a276ec54fd15756f03",
+    "bytes": 33012
+  },
+  "PTGuardTest": {
+    "sha256": "908722556a4bc3033b1dcc107b9b8ba28c5dfc44f75195b00336828e0e292a0b",
+    "bytes": 1660
+  }
+}

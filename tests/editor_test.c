@@ -386,7 +386,7 @@ int main(int argc,char **argv)
         struct pt_view_rect areas[PT_VIEW_DIRTY_MAX];unsigned step,p,j,y,x,n;
         static const unsigned actions[]={0x4d,0x4e,0x4f,0x42,0x4c,0x50,0x51,0x52,0x53,0x40,0x31,0x32,0x46,0x0c,0x0b,0x5a,0x5b};
         for(p=0;p<4;++p) {incremental.planes[p]=calloc(1,PT_VIEW_PLANE_BYTES);shown.planes[p]=calloc(1,PT_VIEW_PLANE_BYTES);assert(incremental.planes[p] && shown.planes[p]);}
-        for(step=0;step<190;++step) {
+        for(step=0;step<211;++step) {
             if(step && step<100)pt_editor_key(e,actions[(step-1)%(sizeof(actions)/sizeof(actions[0]))],0);
             if(step==156) {size_t size;uint8_t *bytes=readfile(argv[4],&size);assert(pt_editor_source_load(e,bytes,size)==PT_EDIT_OK);free(bytes);}
             if(step==157)pt_editor_click(e,520,30);
@@ -422,6 +422,27 @@ int main(int argc,char **argv)
             if(step==187)pt_editor_key(e,0x45,0);
             if(step==188)pt_editor_key(e,0x45,0);
             if(step==189)pt_editor_key(e,0x45,0);
+            if(step==190)pt_editor_key(e,0x17,8);
+            if(step==191)pt_editor_key(e,0x21,0);
+            if(step==192)pt_editor_key(e,1,0);
+            if(step==193)pt_editor_key(e,0x44,0);
+            if(step==194)pt_editor_key(e,0x45,0);
+            if(step==195)pt_editor_key(e,0x33,0);
+            if(step==196)pt_editor_key(e,0x31,8);
+            if(step==197)pt_editor_key(e,0x4d,0);
+            if(step==198)pt_editor_key(e,0x42,0);
+            if(step==199)pt_editor_key(e,0x0c,0);
+            if(step==200)pt_editor_key(e,0x1b,0);
+            if(step==201)pt_editor_key(e,0x16,0);
+            if(step==202)pt_editor_click(e,520,87);
+            if(step==203)pt_editor_click(e,520,87);
+            if(step==204)pt_editor_key(e,0x28,0);
+            if(step==205)pt_editor_key(e,0x17,8);
+            if(step==206)pt_editor_key(e,0x21,0);
+            if(step==207)pt_editor_key(e,0x0a,0);
+            if(step==208)pt_editor_key(e,0x44,0);
+            if(step==209)pt_editor_key(e,0x45,0);
+            if(step==210)pt_editor_click(e,400,87);
             if(step==143) {e->panel=5;pt_editor_key(e,0x32,0);}
             if(step==144)pt_editor_key(e,3,0);
             if(step==145)pt_editor_key(e,0x21,0);

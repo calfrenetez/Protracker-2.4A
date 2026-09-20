@@ -406,3 +406,14 @@ replay accepts organisation metadata in its private snapshot while disk export
 remains strict; changed pan still needs the enhanced backend. Final source,
 binary, screenshot and test evidence is in `evidence/enhanced-editor/dev21/`.
 This adds saved settings, not physical panning, CAMD transmission or group stems.
+
+## Pattern slice assignment milestone (dev22)
+
+EDIT OP. > NOTE / Control-I connects the existing sample markers to normal
+pattern notes through explicit one-based slice references and sample assignment.
+The page displays exact marker frame bounds, preserves other note fields and
+uses the shared note/sample undo journal. Host and native workflows cover bounds,
+modal entry, instrument-zero attachment, forbidden referenced-marker deletion,
+correct undo ordering and complete PTG byte/CRC identity outside the intended
+note edits. Evidence is retained in `evidence/enhanced-editor/dev22/`. This is
+slice editing/persistence; enhanced slice playback and MIDI triggering remain open.

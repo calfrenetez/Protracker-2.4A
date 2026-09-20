@@ -13,6 +13,7 @@ struct pt_view_rect {unsigned x,y,width,height;};
 extern const struct pt_view_rect pt_view_playback_areas[PT_VIEW_PLAYBACK_AREAS];
 struct pt_view_cache {
     unsigned valid,page,pattern,first_row,position,sample,editing,panel,row,field,selected,dirty,new_channels,new_pending;
+    unsigned note_details,history_revision;
     unsigned sample_ui,sample_start,sample_end,sample_marking,sample_anchor,sample_range_slot;
     size_t sample_bytes;
     struct pt_project project;

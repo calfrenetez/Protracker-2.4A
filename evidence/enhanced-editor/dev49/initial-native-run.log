@@ -1,0 +1,11 @@
+Native stems checks 0/5
+Native stems checks 1/5
+Stem emulator released: /Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/local/share/stems1789938907747605000
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/test_stems_emulator.py", line 72, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/test_stems_emulator.py", line 36, in main
+    if process.poll() is not None:raise RuntimeError('Emulator exited')
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Emulator exited

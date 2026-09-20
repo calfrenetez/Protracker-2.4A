@@ -1,0 +1,2 @@
+assertion "pt_stem_file_new(batch,&p,&o,1,NULL,NULL,&report,&detail)==PT_RENDER_FILE_OK && report.plan.count==3" failed: file "tests/stem_file_test.c", line 46, function: main
+Program aborted

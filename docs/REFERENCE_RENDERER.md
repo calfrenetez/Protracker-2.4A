@@ -65,8 +65,8 @@ A cancelled or failed render leaves the project intact and removes its own stagi
 Existing destination files are never replaced. Exporting does not mark unsaved
 project edits saved. Successful clipped output is reported with advice to lower gain.
 
-This is supported-subset offline rendering. Batch stems, complete classic effects
-and hardware-equivalent audio remain unfinished.
+This is supported-subset offline rendering. The editor batch-stem controls, complete classic effects
+and hardware-equivalent audio remain unfinished. CLI batch stems are described below.
 
 ## Defined reference behavior
 
@@ -334,3 +334,32 @@ target correction. Arpeggio includes adjacent-table overflow and the15 explicit
 overflow words after tuning -1. The generated table is checked byte-for-byte
 against the pinned assembly. Zero output periods and cross-sample/slice handoff
 limits remain; this does not change the reference sample-rate/ideal-BPM policy.
+
+## Batch stems (dev49)
+
+```text
+PT24GRender input.ptg NEW-DIRECTORY --stems
+PT24GRender input.ptg NEW-DIRECTORY --groups --tracks 00FF --bits 24
+```
+
+`--stems` writes one stereo WAV per selected track (`track-01.wav` etc.).
+`--groups` combines selected members of each nonzero logical group into
+`group-01.wav` etc.; group0 tracks remain individual. Selection never expands to
+unselected group members. Order follows the first selected track in each stem.
+The output argument is an entirely new directory, not a WAV filename.
+
+All outputs keep global pattern/song flow, tempo, mute/solo, pan, gain and the
+same start/end timing. A muted track therefore produces an aligned silent stem.
+Selected MIDI routes are refused, including muted MIDI tracks; exclude them
+explicitly or supply captured audio through a separate workflow. Separate
+quantization/clipping means summing exported stems need not reproduce a master
+bit-for-bit. The tool reports each stem's mask, frame count and clipped values.
+
+Every selected stem is preflighted before staging begins. WAVs are individually
+re-rendered and byte-verified inside an exclusively created temporary folder.
+The whole folder is published with a no-replace rename only after all outputs
+succeed. Failure/cancellation cleans up owned staging; an existing destination
+or one created during the render remains intact. Cleanup failures are reported
+with the retained staging path. A crash can leave an unpublished staging folder.
+The project and source samples remain immutable, and memory use is bounded
+independently of batch duration. Native editor controls are the next integration.

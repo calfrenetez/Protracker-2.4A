@@ -1,0 +1,13 @@
+{
+  "run_id": "stems1789939207429747000",
+  "elapsed_seconds": 124.224,
+  "checks": 5,
+  "binaries": {
+    "PTStemsTest": "37963201adfee5b2fc501221ebd8c3ff58308b99f92397ba9e175e70706aff16",
+    "PTStemFileTest": "33b623dd14d1ea0129a546dd07c948840e5c20f877f6255da3618a213925e09f",
+    "PT24GRender": "c3e8e5ba66f033afaf3d726d66bb847fb1e61088a9a2466a21599e4f68c05431"
+  },
+  "fixture_sha256": "e3114ca74663c6f481c699952bcd322b575778e4405d98655d66667fb6fc4e98",
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0",
+  "scope": "Exact native/host reference WAV parity, grouped export equivalence, global timing, no-replace directory publication and cancellation cleanup. No physical or analogue sound claim."
+}

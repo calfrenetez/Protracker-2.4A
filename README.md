@@ -105,3 +105,5 @@ native Enhanced editor, sampler and routing pages are working; enhanced preview,
 slice-trigger playback and mixed AmiGUS/MIDI replay integration remain open.
 AmiConnect upload/exec and real card tests remain separate acceptance gates.
 Initial smoke results do not certify all effects or physical hardware.
+
+Batch track/group WAV export is available through `PT24GRender --stems` or `--groups`; see [reference renderer](docs/REFERENCE_RENDERER.md). Native editor integration is pending.

@@ -196,3 +196,46 @@ PAL/NTSC/CIA selector: modeling native timer-latch quantization, reload latency
 and measured clocks still requires separate evidence. A future renderer must
 record this profile in its output/provenance; it must not present it as captured
 Paula/AmiGUS audio. The next stage is voice/sample mixing on the shared timeline.
+
+
+## Immutable reference voice and mixer (dev30)
+
+`voice.c` is an allocation-free PCM voice primitive, independent of tracker-effect
+interpretation. It borrows validated immutable mono/stereo 8/16/24-bit PCM and an
+explicit half-open playback range. A positive Q32 step specifies source frames
+per output frame. The caller is responsible for deriving that step from pitch,
+sample rate, finetune and the chosen clock policy; those tracker semantics are
+not supplied by this primitive.
+
+One-shot playback becomes silent at the range end. Forward loops wrap to their
+start. Ping-pong loops reflect continuously between their first and last frames,
+without duplicating endpoints; a one-frame loop remains constant. Loops must be
+wholly contained in the selected range. The voice plays any prefix before the
+loop and then stays in the loop. Whole/fractional steps, including steps spanning
+many loops, use bounded modular arithmetic. Ping-pong loop size is limited to
+2^31 frames to keep the doubled Q32 cycle representable. The normal document and
+memory policies are far smaller.
+
+Nearest-frame and optional linear interpolation are explicit policies. Linear
+interpolation follows forward-loop seams and mirrored ping-pong positions,
+clamping the final one-shot endpoint. It rounds to signed24, ties away from zero.
+Mono is duplicated into two sides; stereo order is retained. Eight- and sixteen-bit
+inputs are scaled exactly into the signed24 domain. Linear interpolation here
+is not the filtered offline resampler and does not provide antialias filtering.
+
+The block mixer supports up to sixteen initialized voices (zeroed unused slots
+are silent). Independent Q16 left/right gains are supplied by its caller. It does
+not guess a pan law, routing, mute/solo or group policy; setting a gain to zero
+still advances that voice. Products accumulate in signed64, with one final
+round/quantize/saturate step into stereo16 or stereo24. Output clipping counts
+clipped sample values. There is no automatic normalization or dither. PCM remains
+untouched, and failed capacity/gain/alias preflight preserves voices and outputs.
+
+Tests use hand-calculated traversal/interpolation/format/clipping cases and an
+independent Python unbounded-integer trajectory oracle. A UINT64_MAX phase step,
+large forward and ping-pong skips, asymmetric stereo, 16-voice accumulation,
+block partitioning and mixed inactive/muted voices are covered. This primitive
+provides software sample traversal/mixing evidence, not complete ProTracker
+period/effect parity or hardware AmiGUS sound. Sample slices can use explicit
+range bounds, but a renderer still has to resolve project slice ordinals and
+apply the agreed loop/trigger policy before calling it.

@@ -1,0 +1,17 @@
+{
+  "run_id": "voice1789911318607653000",
+  "elapsed_seconds": 27.405,
+  "binaries": {
+    "PTVoiceTest": "ffe54a63d3a86094a6759d63d8806ff87da8b2790362a877492e0a228d2f839d"
+  },
+  "log": "VOICE traversal PASS: selected ranges, forward/pingpong seams, fractional steps, one-frame loops and large steps\nVOICE mix PASS: true24 stereo, single quantization, clipping, 16 voices, mute progression, capacity and alias refusal\nVOICE partition PASS hash=990c42f0 clips=40\n",
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=916\tsndbuf_status=0",
+  "reference_pcm_hash": "990c42f0",
+  "scope": "Reference voice/mix arithmetic only; hardware audio and full tracker-effect parity NOT TESTED",
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

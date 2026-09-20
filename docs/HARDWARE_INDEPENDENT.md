@@ -490,3 +490,16 @@ frame span, including startup and F00 boundaries. Host exact-rational tests boun
 the specified truncation error and cover four output rates. Evidence is retained
 in `evidence/enhanced-editor/dev29/`. This is deterministic reference arithmetic,
 not CIA timer parity, an audio mixer, completed render UI or physical acceptance.
+
+
+## Reference PCM voice and mixer (dev30)
+
+Immutable mono/stereo 8/16/24-bit voices now support explicit ranges, fractional
+playback steps, forward/ping-pong loops and nearest/linear interpolation. The
+sixteen-voice block mixer retains signed24 source values, accumulates in signed64
+and quantizes/clips once into stereo16/24 output. Tests check loop endpoints,
+large steps, muted progression, exact block partition identity and failure
+preservation against independent expected trajectories. Evidence is retained in
+`evidence/enhanced-editor/dev30/`. Tracker pitch/effect interpretation, final
+routing/pan policy and render/bounce UI are subsequent work; no physical audio
+acceptance or completed song rendering is implied.

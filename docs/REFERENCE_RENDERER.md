@@ -219,3 +219,26 @@ The immutable reference policy remains in force: nonloops stop after their
 initial segment, and sample data is not rewritten. Native replay's first-word
 clearing and repeated silent guard are not emulated. Reference PCM is checked
 against native range/trigger snapshots, not analogue Paula output.
+
+## Retrigger and note-delay reference evidence (dev42)
+
+E9x/EDx remain refused by renderer preflight. The separate native sample diagnostic
+now has ten repeated fixtures covering their trigger counts and initial/loop ranges.
+E90 never retriggers. E9x with x nonzero triggers when the counter is divisible by
+x, except counter zero with a packed note; that note already takes the ordinary
+trigger path. A no-note E9x does retrigger at zero. Pattern-delay passes retain the
+packed note, so the counter-zero exception also applies on repeated passes.
+
+EDx suppresses the ordinary note trigger. It triggers only with a packed note and
+a counter equal to x: ED0 triggers at zero; an amount at/above speed never fires.
+Pattern delays can fire the retained note again. Both effects use the saved start
+and word length, including the second saved offset application from a prior 9xx
+note, and preserve the independent loop range. Explicit expected trigger ticks
+and an independent range model check every 140-byte native record.
+
+Evidence is under evidence/enhanced-editor/dev42. The existing first52 diagnostic
+fields retain exact baseline parity. No shipping code or layout changed. These
+register/trigger captures are not rendered-PCM or physical listening acceptance.
+Next: integrate trigger scheduling into both measurement and streaming, handle
+EDx stored-period versus hardware-period timing and vibrato reset semantics, and
+compare PCM against these retained native triggers before enabling either effect.

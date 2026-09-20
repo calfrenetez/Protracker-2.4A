@@ -1,0 +1,8 @@
+{
+  "time": "2026-09-20T19:30:17.120568+00:00",
+  "processes": [],
+  "hdf_holders": "",
+  "socket": false,
+  "launcher_sha256": "9c801b94c85b06cd124fe2d611f185bfe135c8c7442f8263a761c79102f8ddf3",
+  "limitation": "Initial process/HDF preflight denied by sandbox; orchestration erroneously continued. Socket absence checked by runner. Owner confirmed availability. Running PID 93100 and sole private-HDF holder verified exact ProTracker profile afterward. Runner now fails closed on process/HDF inspection errors before launcher mutation."
+}

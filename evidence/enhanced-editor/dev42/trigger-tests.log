@@ -1,0 +1,8 @@
+test_native_runner_preflight_fails_closed (test_sample_triggers.SampleTriggers.test_native_runner_preflight_fails_closed) ... ok
+test_native_trigger_timing (test_sample_triggers.SampleTriggers.test_native_trigger_timing) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.013s
+
+OK
+TRIGGERS: ten repeated native fixtures verify E9x/EDx counter timing, retained notes, pattern delay and offset/loop ranges; renderer enablement remains open

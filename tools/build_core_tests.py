@@ -66,7 +66,7 @@ def main():
     inputs['PTVoiceSegmentTest'] = ['tests/voice_segment_test.c','src/core/voice.c','src/core/pcm.c']
     inputs['PTVoiceTest'] = ['tests/voice_test.c','src/core/voice.c','src/core/pcm.c']
     render_sources = ['src/core/render.c','src/core/pitch.c','src/core/timeline.c','src/core/frame_clock.c','src/core/flow.c','src/core/voice.c','src/core/project.c','src/core/channels.c','src/core/pcm.c']
-    inputs['PT24GEdit'] += [s for s in ['src/platform/render_file.c',*render_sources] if s not in inputs['PT24GEdit']]
+    inputs['PT24GEdit'] += [s for s in ['src/platform/render_file.c','src/platform/stem_file.c','src/core/stems.c',*render_sources] if s not in inputs['PT24GEdit']]
     inputs['PT24GEdit'] += ['src/editor/bounce.c']
     inputs['PTBounceTest'] = ['tests/bounce_test.c','src/editor/bounce.c',*dict.fromkeys([*inputs['PTSamplerTest'][1:],*render_sources])]
     inputs['PTTremoloRenderTest'] = ['tests/render_tremolo_test.c',*render_sources,'src/core/document.c','src/core/pp20.c','src/core/mod_project.c','src/core/mod_inspect.c']

@@ -1,0 +1,11 @@
+mkdir -p build/host
+cc -std=c99 -O2 -Wall -Wextra -Werror -Isrc/core tools/pt24g_render.c src/platform/stem_file.c src/core/stems.c src/platform/render_file.c src/core/render.c src/core/pitch.c src/core/timeline.c src/core/frame_clock.c src/core/flow.c src/core/voice.c src/core/document.c src/core/pp20.c src/core/project.c src/core/mod_project.c src/core/mod_inspect.c src/core/channels.c src/core/pcm.c -o build/host/PT24GRender
+Render UI test released: /Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/local/share/stemsui1789939642601284000
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/test_stems_ui_emulator.py", line 100, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/test_stems_ui_emulator.py", line 79, in main
+    assert not list(run.glob('*.ptstems-*'));audio_off()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

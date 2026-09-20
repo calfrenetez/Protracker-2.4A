@@ -49,6 +49,8 @@ The main tracker layout is unchanged.
 | LEAD IN | L | Retain or trim initial speed-count silence |
 | WAV FILE | W / Return | Preflight, choose a new destination, render and verify |
 | NEW SAMPLE | U | Render into a new assignable sample slot as one undo step |
+| STEMS | S | Export selected track/group WAVs to a new folder |
+| TRACK / GROUP STEMS | O | Toggle individual tracks or nonzero logical groups |
 | BACK | Escape | Return to disk operations |
 
 Defaults match the CLI: song, all tracks, 48 kHz, 24 bit, 50% gain, trimmed
@@ -65,8 +67,8 @@ A cancelled or failed render leaves the project intact and removes its own stagi
 Existing destination files are never replaced. Exporting does not mark unsaved
 project edits saved. Successful clipped output is reported with advice to lower gain.
 
-This is supported-subset offline rendering. The editor batch-stem controls, complete classic effects
-and hardware-equivalent audio remain unfinished. CLI batch stems are described below.
+This is supported-subset offline rendering. Complete classic effects and hardware-equivalent audio remain unfinished.
+Batch stems are described below.
 
 ## Defined reference behavior
 
@@ -362,4 +364,17 @@ succeed. Failure/cancellation cleans up owned staging; an existing destination
 or one created during the render remains intact. Cleanup failures are reported
 with the retained staging path. A crash can leave an unpublished staging folder.
 The project and source samples remain immutable, and memory use is bounded
-independently of batch duration. Native editor controls are the next integration.
+independently of batch duration. The native render panel exposes the same batch operation through STEMS (S).
+TRACK STEMS / GROUP STEMS (O) chooses the grouping mode; settings are transient
+and do not alter project data or undo history. Enter a new folder name in the
+requester. Escape cancels before publication and preserves unsaved edits.
+
+### Emulator filesystem validation boundary
+
+The editor stem workflow passes on native Amiga RAM: under the pinned emulator,
+including cancellation cleanup and exact WAV/project checks. On its PTDEV host
+shared folder, empty cancelled staging directories can reappear during a later
+batch despite native and host checks initially reporting deletion. Correct WAV
+output was verified, but shared-folder cleanup acceptance remains open. The
+cause is not established; evidence is retained in dev50. No forced cleanup or
+product workaround is applied. This is distinct from real-device acceptance.

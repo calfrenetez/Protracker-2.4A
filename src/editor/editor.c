@@ -242,6 +242,7 @@ static void render_setting(struct pt_editor *e,unsigned setting)
     else if(setting==4)e->render_gain=e->render_gain==32768?65536:e->render_gain==65536?16384:32768;
     else if(setting==5)e->render_lead_in^=1;
     else if(setting==6)e->render_tracks=all;
+    else if(setting==9)e->render_groups^=1;
     else if(setting==7)e->render_tracks=(uint16_t)(1U<<e->project->channels.selected);
     else e->render_tracks=e->render_tracks==all?(uint16_t)(1U<<e->project->channels.selected):all;
     ++e->sample_ui;pt_editor_status(e,"RENDER SETTINGS UPDATED");
@@ -655,6 +656,8 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
         else if(raw==0x28)render_setting(e,5);
         else if(raw==0x20)render_setting(e,6);
         else if(raw==0x14)render_setting(e,7);
+        else if(raw==0x18)render_setting(e,9);
+        else if(raw==0x21)return PT_UI_STEMS;
         else if(raw==0x16)return PT_UI_BOUNCE;
         else if(raw==0x11 || raw==0x44)return PT_UI_RENDER;
         else if(raw==0x59 || raw==0x40)return PT_UI_STOP;
@@ -848,8 +851,9 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
             r=(unsigned)(y-2)/19;c=(unsigned)(x-230)/123;
             if(r==1)render_setting(e,c==0?0:c==1?1:8);
             else if(r==2)render_setting(e,2+c);
-            else if(r==3)return x<414?PT_UI_RENDER:PT_UI_BOUNCE;
-            else if(x<414)render_setting(e,5);
+            else if(r==3)return c==0?PT_UI_RENDER:c==1?PT_UI_BOUNCE:PT_UI_STEMS;
+            else if(c==0)render_setting(e,5);
+            else if(c==1)render_setting(e,9);
             else {e->render_details=0;++e->sample_ui;pt_editor_status(e,"DISK OPERATIONS");}
         }
         return PT_UI_NONE;

@@ -18,6 +18,7 @@
 #include "paula.h"
 #include "file_request.h"
 #include "../platform/render_file.h"
+#include "../platform/stem_file.h"
 #include "../editor/bounce.h"
 struct IntuitionBase *IntuitionBase;
 struct GfxBase *GfxBase;
@@ -238,6 +239,31 @@ static void render_wav(struct conversion_ui *display,struct pt_paula *audio)
     else pt_editor_status(e,result==PT_RENDER_FILE_BEGIN || result==PT_RENDER_FILE_PUBLISH?"WAV REFUSED: TARGET EXISTS OR CANNOT BE CREATED":"WAV FAILED - PROJECT AND DESTINATION PRESERVED");
     printf("EDITOR RENDER result=%u detail=%u dirty=%u frames=%lu\n",result,detail,pt_editor_dirty(e),result==PT_RENDER_FILE_OK?(unsigned long)report.frames:0UL);fflush(stdout);
 }
+static void render_stems(struct conversion_ui *display,struct pt_paula *audio)
+{
+    struct pt_editor *e=display->editor;struct pt_render_options options;struct pt_render_report plan;
+    struct pt_stem_report report;struct pt_stem_plan stems;struct render_ui ui={*display,0,~0U,"STEMS"};
+    enum pt_render_result detail;enum pt_render_file_result result;enum pt_stem_result planned;
+    char path[1024],status[76];int selected;unsigned i,clipped=0;
+    pt_paula_stop(audio);pt_paula_poll(audio,&e->playback);pt_editor_render_options(e,&options);
+    planned=pt_stems_plan(&e->project->channels,options.tracks,e->render_groups,&stems);
+    if(planned!=PT_STEM_OK) {pt_editor_status(e,render_error(planned==PT_STEM_MIDI?PT_RENDER_ROUTE:PT_RENDER_INVALID));return;}
+    detail=pt_render_measure(e->project,&options,render_progress,&ui,&plan);
+    if(detail!=PT_RENDER_OK) {pt_editor_status(e,render_error(detail));return;}
+    ui.total=plan.frames;puts("EDITOR REQUEST stems");fflush(stdout);
+    selected=pt_file_request(display->window,10,"new-stems",path,sizeof(path));display->cache->valid=0;
+    if(selected!=1) {pt_editor_status(e,selected==0?"STEMS REQUEST CANCELLED - EDITS PRESERVED":"STEMS REQUEST FAILED - EDITS PRESERVED");return;}
+    result=pt_stem_file_new(path,e->project,&options,e->render_groups,render_progress,&ui,&report,&detail);
+    if(result==PT_RENDER_FILE_OK) {
+        for(i=0;i<report.plan.count;++i)if(report.audio[i].clipped)++clipped;
+        if(clipped)snprintf(status,sizeof(status),"%u STEMS VERIFIED - %u CLIPPED; REDUCE GAIN",report.plan.count,clipped);
+        else snprintf(status,sizeof(status),"%u STEMS VERIFIED - PROJECT %s",report.plan.count,pt_editor_dirty(e)?"STILL UNSAVED":"UNCHANGED");
+        pt_editor_status(e,status);
+    } else if(detail==PT_RENDER_CANCELLED)pt_editor_status(e,"STEMS CANCELLED - EDITS PRESERVED");
+    else if(detail!=PT_RENDER_OK)pt_editor_status(e,render_error(detail));
+    else pt_editor_status(e,"STEMS REFUSED - TARGET EXISTS OR FOLDER CANNOT BE CREATED");
+    printf("EDITOR STEMS result=%u detail=%u dirty=%u count=%u\n",result,detail,pt_editor_dirty(e),result==PT_RENDER_FILE_OK?report.plan.count:0);fflush(stdout);
+}
 static void bounce_sample(struct conversion_ui *display,struct pt_paula *audio)
 {
     struct pt_editor *e=display->editor;struct pt_render_options options;struct pt_render_report plan,report;
@@ -389,6 +415,7 @@ int main(int argc,char **argv)
                 }
             }
             if(action==PT_UI_RENDER)render_wav(&conversion,&audio);
+            if(action==PT_UI_STEMS)render_stems(&conversion,&audio);
             if(action==PT_UI_BOUNCE)bounce_sample(&conversion,&audio);
             if(action==PT_UI_RAW_LOAD || (action==PT_UI_RAW_SAVE && raw_eligible(editor))) {
                 int importing=action==PT_UI_RAW_LOAD,selected;printf("EDITOR REQUEST %s\n",importing?"rawload":"rawsave");fflush(stdout);

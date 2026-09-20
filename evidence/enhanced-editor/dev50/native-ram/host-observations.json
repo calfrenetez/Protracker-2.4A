@@ -1,0 +1,22 @@
+[
+  {
+    "stage": "after-cancel",
+    "elapsed": 44.373,
+    "staging": []
+  },
+  {
+    "stage": "next-requester-open",
+    "elapsed": 45.491,
+    "staging": []
+  },
+  {
+    "stage": "after-export",
+    "elapsed": 98.643,
+    "staging": []
+  },
+  {
+    "stage": "before-guarded-cleanup",
+    "elapsed": 98.749,
+    "staging": []
+  }
+]

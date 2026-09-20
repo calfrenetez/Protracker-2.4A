@@ -1,0 +1,28 @@
+[
+  {
+    "stage": "after-cancel",
+    "elapsed": 44.873,
+    "staging": []
+  },
+  {
+    "stage": "next-requester-open",
+    "elapsed": 46.019,
+    "staging": []
+  },
+  {
+    "stage": "after-export",
+    "elapsed": 91.781,
+    "staging": [
+      "cancel.ptstems-1074481792-0",
+      "cancel.ptstems-1074481792-0/track-01.wav.pttmp-1074481792-0"
+    ]
+  },
+  {
+    "stage": "before-guarded-cleanup",
+    "elapsed": 92.026,
+    "staging": [
+      "cancel.ptstems-1074481792-0",
+      "cancel.ptstems-1074481792-0/track-01.wav.pttmp-1074481792-0"
+    ]
+  }
+]

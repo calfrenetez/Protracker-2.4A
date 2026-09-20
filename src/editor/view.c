@@ -403,9 +403,10 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
         label(c,font,230,40,123,19,e->render_rate==48000?"48 KHZ":"44.1 KHZ",0);
         label(c,font,353,40,123,19,e->render_bits==24?"24 BIT":"16 BIT",0);
         snprintf(s,sizeof(s),"GAIN %lu%%",(unsigned long)e->render_gain*100/65536);label(c,font,476,40,123,19,s,0);
-        label(c,font,230,59,184,19,"WAV FILE",0);label(c,font,414,59,185,19,"NEW SAMPLE",0);
-        label(c,font,230,78,184,19,e->render_lead_in?"LEAD IN ON":"LEAD IN OFF",e->render_lead_in);
-        label(c,font,414,78,185,19,"BACK",0);
+        label(c,font,230,59,123,19,"WAV FILE",0);label(c,font,353,59,123,19,"NEW SAMPLE",0);label(c,font,476,59,123,19,"STEMS",0);
+        label(c,font,230,78,123,19,e->render_lead_in?"LEAD IN ON":"LEAD IN OFF",e->render_lead_in);
+        label(c,font,353,78,123,19,e->render_groups?"GROUP STEMS":"TRACK STEMS",e->render_groups);
+        label(c,font,476,78,123,19,"BACK",0);
     } else if(e->panel==2) {
         panel(c,230,2,369,95,GREY);
         label(c,font,230,2,369,19,e->panel==1?"EDIT OP.":"DISK OP.",0);

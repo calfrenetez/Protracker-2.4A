@@ -71,6 +71,7 @@ static void sample_tab(struct pt_editor *e,unsigned page)
     pt_editor_status(e,page==6?"LOOPS: F FORWARD / P PINGPONG / O OFF / B BAKE FADE":
         page==7?"SLICES: M ADD / D DELETE / T AUTO / P APPLY / X CANCEL":
         page==8?"RANGE: I/O ZOOM; F FIT; V SELECTION; S/E ENTER FRAMES":
+        page==10?"RAW: SET BITS/CHANNELS/SIGN/ORDER/RATE BEFORE L OR W":
         page==9?"FORMAT: 1/2/3 BITS; R RATE; F FILTER; P APPLY":
         "SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO");
 }
@@ -106,9 +107,9 @@ static void range_nudge(struct pt_editor *e,unsigned field,int direction)
 }
 static void number_begin(struct pt_editor *e,unsigned field)
 {
-    if(!sample_range(e))return;
+    if(field!=4 && !sample_range(e))return;
     e->number_field=field;e->number_fresh=1;
-    snprintf(e->number_text,sizeof(e->number_text),"%lu",(unsigned long)(field==1?e->sample_start:field==2?e->sample_end:e->format_rate));++e->sample_ui;
+    snprintf(e->number_text,sizeof(e->number_text),"%lu",(unsigned long)(field==1?e->sample_start:field==2?e->sample_end:field==4?e->raw_format.rate:e->format_rate));++e->sample_ui;
     pt_editor_status(e,field==1?"ENTER START FRAME: DIGITS / RETURN APPLY / ESC CANCEL":field==2?"ENTER END FRAME: DIGITS / RETURN APPLY / ESC CANCEL":"ENTER TARGET RATE 1-192000 HZ / RETURN / ESC CANCEL");
 }
 static void number_key(struct pt_editor *e,unsigned raw)
@@ -121,10 +122,10 @@ static void number_key(struct pt_editor *e,unsigned raw)
             if(value>(UINT32_MAX-digit)/10)break;
             value=value*10+digit;
         }
-        frames=e->project->samples[e->sample-1].pcm.frames;
-        if(!length || i!=length || (e->number_field==1?value>=e->sample_end:e->number_field==2?value<=e->sample_start || value>frames:!value || value>192000)) {pt_editor_status(e,e->number_field==3?"INVALID RATE - ENTER 1 TO 192000 HZ OR ESC CANCEL":"INVALID FRAME RANGE - CORRECT VALUE OR ESC CANCEL");return;}
-        if(e->number_field==1)e->sample_start=value;else if(e->number_field==2)e->sample_end=value;else e->format_rate=value;
-        pt_editor_status(e,e->number_field==3?"TARGET RATE SET - APPLY TO CONVERT WHOLE SAMPLE":"EXACT FRAME RANGE SET");
+        frames=e->sample && e->sample<=e->project->sample_count?e->project->samples[e->sample-1].pcm.frames:0;
+        if(!length || i!=length || (e->number_field==1?value>=e->sample_end:e->number_field==2?value<=e->sample_start || value>frames:!value || value>192000)) {pt_editor_status(e,e->number_field>=3?"INVALID RATE - ENTER 1 TO 192000 HZ OR ESC CANCEL":"INVALID FRAME RANGE - CORRECT VALUE OR ESC CANCEL");return;}
+        if(e->number_field==1)e->sample_start=value;else if(e->number_field==2)e->sample_end=value;else if(e->number_field==4)e->raw_format.rate=value;else e->format_rate=value;
+        pt_editor_status(e,e->number_field==4?"RAW RATE SET - HEADERLESS FILES CONTAIN NO RATE":e->number_field==3?"TARGET RATE SET - APPLY TO CONVERT WHOLE SAMPLE":"EXACT FRAME RANGE SET");
         e->number_field=0;++e->sample_ui;return;
     }
     if(raw==0x41 || raw==0x46) {if(e->number_fresh)e->number_text[0]=0;else if(length)e->number_text[length-1]=0;e->number_fresh=0;++e->sample_ui;return;}
@@ -227,6 +228,7 @@ int pt_editor_init(struct pt_editor *e,struct pt_project *p)
     memset(e,0,sizeof(*e));e->project=p;e->sample=p->sample_count?1:0;e->octave=1;e->new_channels=p->channels.count;
     if(pt_pattern_history_init(&e->history,p,e->commands,128,e->changes,2048)!=PT_EDIT_OK)return 0;
     {struct pt_allocator a={NULL,sample_allocate,sample_release};pt_sampler_init(&e->sampler,&a,32UL*1024*1024);}
+    e->raw_format=(struct pt_raw_format){8287,8,1,0,0};
     e->format_filtered=1;e->loop_fade=32;e->slice_threshold=500;e->slice_gap_ms=50;e->slice_zero=1;
     pt_editor_sample_all(e);
     e->clipboard.events=e->clipboard_events;e->clipboard.capacity=1024;
@@ -416,6 +418,20 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
         else if(raw==0x57 || raw==0x44)return PT_UI_AUDITION;
         else if(raw==0x59 || raw==0x40)return PT_UI_STOP;
         else if(raw==0x33 && (e->panel==5 || e->panel==8))sample_tab(e,9);
+        else if(e->panel==5 && raw==0x32)sample_tab(e,10);
+        else if(e->panel==10) {
+            if(raw==0x28)return PT_UI_RAW_LOAD;
+            if(raw==0x11)return PT_UI_RAW_SAVE;
+            if(raw==0x13)number_begin(e,4);
+            else {
+                if(raw>=1 && raw<=3) {e->raw_format.bits=(uint8_t)(raw*8);if(raw!=1)e->raw_format.unsigned8=0;}
+                else if(raw==0x37)e->raw_format.channels=1;
+                else if(raw==0x21)e->raw_format.channels=2;
+                else if(raw==0x16 && e->raw_format.bits==8)e->raw_format.unsigned8^=1;
+                else if(raw==0x12)e->raw_format.little_endian^=1;
+                ++e->sample_ui;pt_editor_status(e,"RAW SETTINGS ONLY - SAMPLE AND HISTORY UNCHANGED");
+            }
+        }
         else if(e->panel==9) {
             if(raw>=1 && raw<=3)format_setting(e,raw*8,0);
             else if(raw==0x13)number_begin(e,3);
@@ -543,6 +559,13 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
     if(e->panel>=5 && x>=230 && x<599 && y>=2 && y<97) {
         r=(unsigned)(y-PT_EDITOR_CONTROL_Y)/PT_EDITOR_CONTROL_HEIGHT;c=(unsigned)(x-230)/123;
         if(r==0) {sample_tab(e,5+((unsigned)(x-230+1)*4-1)/369);return PT_UI_NONE;}
+        if(e->panel==10) {
+            if(r==1) {if(c<2)return c==0?PT_UI_RAW_LOAD:PT_UI_RAW_SAVE;sample_tab(e,5);}
+            else if(r==2) {e->raw_format.bits=(uint8_t)((c+1)*8);if(c)e->raw_format.unsigned8=0;}
+            else if(r==3) {if(c<2)e->raw_format.channels=(uint8_t)(c+1);else if(e->raw_format.bits==8)e->raw_format.unsigned8^=1;}
+            else if(r==4) {if(c<2)e->raw_format.little_endian=(uint8_t)c;else number_begin(e,4);}
+            ++e->sample_ui;return PT_UI_NONE;
+        }
         if(e->panel==9) {
             if(r==1)format_setting(e,(c+1)*8,0);
             else if(r==2)format_setting(e,0,c==0?8287:c==1?22050:44100);
@@ -573,7 +596,7 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
         if(r==1)return c==0?PT_UI_SAMPLE_LOAD:c==1?PT_UI_SAMPLE_SAVE:PT_UI_AUDITION;
         if(r==2)sample_edit(e,c==0?PT_PCM_REVERSE:c==1?PT_PCM_NORMALIZE:PT_PCM_REMOVE_DC,0);
         if(r==3) {if(c==2)sample_tab(e,9);else sample_edit(e,PT_PCM_GAIN,c==0?500:2000);}
-        if(r==4) {if(c==2) {pt_editor_sample_all(e);pt_editor_status(e,"WHOLE SAMPLE SELECTED");}else sample_edit(e,c==0?PT_PCM_FADE_IN:PT_PCM_FADE_OUT,0);}
+        if(r==4) {if(c==2)sample_tab(e,10);else sample_edit(e,c==0?PT_PCM_FADE_IN:PT_PCM_FADE_OUT,0);}
         return PT_UI_NONE;
     }
     if(e->panel>=5 && y>=PT_EDITOR_HEADER_Y && y<PT_EDITOR_BOTTOM_Y) {

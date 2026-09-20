@@ -198,3 +198,17 @@ enum pt_svx_result pt_sampler_svx_encode(const struct pt_sample *sample,uint8_t 
     info.loop_end=sample->loop_end;info.volume=(uint32_t)sample->volume*1024;
     return pt_svx_encode(&sample->pcm,&info,bytes,capacity,written);
 }
+
+enum pt_edit_result pt_sampler_import_raw(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const uint8_t *bytes,size_t length,const char *name,const struct pt_raw_format *format)
+{
+    struct pt_sample sample={0};struct pt_sample_version *v;size_t i,count;uint32_t frames;
+    if(!s || !s->allocator.allocate || !s->allocator.release || pt_project_validate(p,NULL)!=PT_PROJECT_OK || slot>=p->sample_count)return PT_EDIT_INVALID;
+    if(!bytes || pt_raw_frames(length,format,&frames)!=PT_RAW_OK || !frames)return PT_EDIT_UNSUPPORTED;
+    count=(size_t)p->pattern_count*64*p->channels.count;
+    for(i=0;i<count;++i)if(p->events[i].instrument==slot+1 && p->events[i].slice)return PT_EDIT_UNSUPPORTED;
+    sample.volume=64;snprintf(sample.name,sizeof(sample.name),"%s",name?name:"IMPORTED RAW");
+    sample.pcm.frames=frames;sample.pcm.rate=format->rate;sample.pcm.bits=format->bits;sample.pcm.channels=format->channels;
+    v=version(s,&sample);if(!v)return PT_EDIT_CAPACITY;
+    if(pt_raw_decode(bytes,length,format,&v->sample.pcm)!=PT_RAW_OK) {release_version(v);return PT_EDIT_INVALID;}
+    return commit(s,p,h,slot,v);
+}

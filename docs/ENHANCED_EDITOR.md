@@ -134,7 +134,7 @@ Import retains exact decoded precision, rate and channels; no downmix, resamplin
 or precision conversion occurs. A WAV replaces the selected slot with volume 64,
 finetune zero and no loop/slice metadata. Undo restores the complete old sample.
 A replacement is refused if any event references its existing slices. WAV loop,
-cue and other ancillary metadata are not imported. RAW/MOD sample import,
+cue and other ancillary metadata are not imported. MOD sample import,
 recording and adding sample slots beyond the existing document remain open.
 
 REVERSE / R, NORMALIZE / N, DC OFFS / D, GAIN X2 / G, GAIN /2 / H, FADE IN / I
@@ -397,5 +397,29 @@ explicit FORMAT conversion first where appropriate. WAV export remains W on
 SAMPLER and contains PCM only. Neither export removes project metadata.
 
 The bounded parser follows the [AmigaOS 8SVX specification](https://wiki.amigaos.net/wiki/8SVX_IFF_8-Bit_Sampled_Voice).
-IFF imports do not imply enhanced playback is available. RAW and selecting a
-sample from another MOD remain subsequent work.
+IFF imports do not imply enhanced playback is available. Selecting a sample from another MOD remains subsequent work.
+
+
+## Explicit headerless RAW interchange
+
+RAW on SAMPLER, or X, opens an additional page without changing PCM or history.
+The visible defaults are signed 8-bit mono, big endian, 8287 Hz. Choose 8/16/24-bit
+(1/2/3), MONO / M or STEREO / S, byte order (buttons or E), signed/unsigned8 (U)
+and rate (R / numeric value). Unsigned is available only at 8 bits; selecting
+16/24 bits sets signed representation. Rate can be entered before loading an
+empty slot. Return validates 1–192000 Hz; Escape cancels number entry. Tab/BACK
+returns to SAMPLER. A still selects the whole sample on sampler pages.
+
+LOAD RAW / L requires these explicit settings. Ordinary LOAD SMP never guesses
+RAW from unknown bytes. File length must be frame-aligned; stereo is interleaved.
+Import retains exact signed 8/16/24-bit values, replaces the chosen slot with
+volume 64 and no loop/finetune/slices, and shares the atomic sample undo journal.
+Existing referenced slices prevent replacement. Invalid input, allocation failure
+and cancellation preserve the project and redo.
+
+SAVE RAW / W writes the complete sample as headerless PCM, using the selected
+signedness/byte order. Bits, channels and rate must exactly match the current
+sample; mismatches refuse before opening a requester. Use FORMAT for explicit
+conversion first. RAW has no name/rate/loop/slice metadata; keep the PTG project
+and remember the displayed settings for reimport. Export does not mutate or mark
+the project saved. The verified new-file writer refuses existing destinations.

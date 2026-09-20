@@ -13,7 +13,7 @@
 #define PT_EDITOR_HEADER_Y 234
 #define PT_EDITOR_PATTERN_Y 250
 #define PT_EDITOR_BOTTOM_Y 491
-enum pt_editor_action {PT_UI_NONE,PT_UI_SAVE,PT_UI_QUIT,PT_UI_PLAY,PT_UI_PATTERN,PT_UI_STOP,PT_UI_AUDITION,PT_UI_LOAD,PT_UI_SAVE_AS,PT_UI_EXPORT_MOD,PT_UI_NEW,PT_UI_SAMPLE_LOAD,PT_UI_SAMPLE_SAVE,PT_UI_SAMPLE_SVX};
+enum pt_editor_action {PT_UI_NONE,PT_UI_SAVE,PT_UI_QUIT,PT_UI_PLAY,PT_UI_PATTERN,PT_UI_STOP,PT_UI_AUDITION,PT_UI_LOAD,PT_UI_SAVE_AS,PT_UI_EXPORT_MOD,PT_UI_NEW,PT_UI_SAMPLE_LOAD,PT_UI_SAMPLE_SAVE,PT_UI_SAMPLE_SVX,PT_UI_RAW_LOAD,PT_UI_RAW_SAVE};
 struct pt_editor_selection {unsigned active,marking,pattern,r0,r1,c0,c1,anchor_row,anchor_channel;};
 struct pt_editor {
     struct pt_project *project;
@@ -24,6 +24,7 @@ struct pt_editor {
     uint32_t wave_start,wave_end,wave_frames;
     unsigned wave_slot,number_field,number_fresh;
     char number_text[11];
+    struct pt_raw_format raw_format;
     unsigned format_slot,format_bits,format_filtered;
     uint32_t format_rate;
     uint32_t loop_fade,slice_markers[4096];

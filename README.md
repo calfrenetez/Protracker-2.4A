@@ -25,7 +25,7 @@ projects are refused without dropping their data. CHANNEL / Control-R now expose
 exclusive routing plus mute/solo, with chronological note/channel undo and exact
 project persistence. Classic Paula playback applies mute/solo live; mixed
 AmiGUS/MIDI replay is still pending. SAMPLER / Control-L now adds waveform range
-selection, exact integer PCM WAV/IFF import/export and undoable reverse, normalize,
+selection, exact integer PCM WAV/IFF/explicit RAW import/export and undoable reverse, normalize,
 gain, fades and DC removal. LOOPS/SLICES tabs add undoable forward/pingpong
 metadata, baked crossfade and editable manual/AUTO SLICE proposals; marker changes
 cannot silently retarget existing slice-note ordinals. RANGE provides zoom/pan and

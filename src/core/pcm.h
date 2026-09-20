@@ -21,7 +21,7 @@ enum pt_pcm_result pt_pcm_edit(struct pt_pcm *, enum pt_pcm_edit, uint32_t, uint
 /* Explicit bit conversion; reduction rounds nearest, ties away from zero. */
 enum pt_pcm_result pt_pcm_convert(const struct pt_pcm *, struct pt_pcm *);
 /* Offline linear resampling, ceil(frames * new_rate / old_rate).
- * Requires disjoint source/destination buffers; no antialias filter yet. */
+ * Requires disjoint source/destination buffers; no antialias filtering in this linear path. */
 enum pt_pcm_result pt_pcm_resampled_frames(const struct pt_pcm *, uint32_t, uint32_t *);
 enum pt_pcm_result pt_pcm_resample(const struct pt_pcm *, struct pt_pcm *);
 /* Offline integer windowed-sinc conversion with antialias filtering. Source

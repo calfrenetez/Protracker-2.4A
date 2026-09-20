@@ -364,3 +364,12 @@ Explicit IFF export retains supported metadata and refuses unsupported sample
 formats, pingpong, slices and finetune. Shared undo, allocation failures, malformed
 input and new-file saves preserve existing state. See the editor guide and
 `evidence/enhanced-editor/dev17/` for acceptance evidence and format boundaries.
+
+## Explicit RAW interchange milestone (dev18)
+
+A separate RAW page exposes rate, bit depth, channels, signed8/unsigned8 and byte
+order. The codec retains signed16/24 precision with either endian order and
+interleaved stereo. Unknown files are never implicitly treated as RAW. Shared
+undo and verified exports retain prior guarantees; mismatched export settings
+require explicit FORMAT conversion. Host/native evidence is retained under
+`evidence/enhanced-editor/dev18/`; no physical hardware acceptance is implied.

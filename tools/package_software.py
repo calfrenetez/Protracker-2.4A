@@ -53,7 +53,7 @@ DISK OP. > SAVE MOD / Control-Shift-M exports strictly lossless classic MODs.
 Control-R or a P/A/M header letter opens CHANNEL: routes, mute and solo share undo
 and project saves. P/A/M chooses route, U mute, S solo, Escape closes the page.
 Classic Paula playback applies mute/solo live; MOD export refuses saved flags.
-SAMPLER/Control-L opens WAV/IFF import/export, waveform selection and undoable edits.
+SAMPLER/Control-L opens WAV/IFF/explicit RAW import/export, waveform selection and undoable edits.
 In SAMPLER: L load WAV/IFF, W export WAV, Shift-W export IFF, R reverse, N normalize, D DC removal, G/H gain
 x2 or /2, I/O fades, A all. Two clicks select a frame range. Control-S saves the
 project. High-resolution samples retain their precision; Paula audition requires
@@ -68,6 +68,10 @@ FORMAT (C from SAMPLER/RANGE): 1/2/3 selects 8/16/24 bits, R enters rate, P appl
 Conversion covers the whole sample, scales loops/markers, and shares undo.
 Filtered conversion is default; F toggles linear mode. Filter progress accepts Escape
 to cancel without losing the source or redo. Bit reduction currently has no dither.
+RAW / X from SAMPLER opens explicit headerless import/export settings: 1/2/3 bits,
+M/S mono/stereo, U unsigned8, E byte order, R rate, L load and W save RAW.
+RAW export contains PCM only and requires matching sample bits/channels/rate.
+Tab returns to SAMPLER; A selects all. Unknown files are never auto-loaded as RAW.
 Mixed AmiGUS/MIDI replay and other unfinished controls remain unavailable.
 PT24GConvert inspects projects and performs strict lossless MOD/project conversion.
 This is not the finished sixteen-channel tracker or a hardware-qualified release.

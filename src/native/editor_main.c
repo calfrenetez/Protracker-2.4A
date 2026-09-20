@@ -33,7 +33,7 @@ static int load(struct pt_document *d,const char *path)
 done:
     free(bytes);if(f)fclose(f);return ok;
 }
-static enum pt_edit_result load_sample(struct pt_editor *e,const char *path)
+static enum pt_edit_result load_sample(struct pt_editor *e,const char *path,int raw)
 {
     FILE *f=fopen(path,"rb");long n;uint8_t *bytes=NULL;enum pt_edit_result result=PT_EDIT_INVALID;
     const char *name=path,*part;
@@ -43,7 +43,7 @@ static enum pt_edit_result load_sample(struct pt_editor *e,const char *path)
     if(fread(bytes,1,(size_t)n,f)!=(size_t)n || ferror(f))goto done;
     if(fclose(f)) {f=NULL;goto done;}f=NULL;
     for(part=path;*part;++part)if(*part=='/' || *part==':')name=part+1;
-    result=pt_sampler_import(&e->sampler,e->project,&e->history,e->sample-1,bytes,(size_t)n,name);
+    result=raw?pt_sampler_import_raw(&e->sampler,e->project,&e->history,e->sample-1,bytes,(size_t)n,name,&e->raw_format):pt_sampler_import(&e->sampler,e->project,&e->history,e->sample-1,bytes,(size_t)n,name);
 done:
     if(f)fclose(f);
     free(bytes);return result;
@@ -58,6 +58,25 @@ static void save_sample(struct pt_editor *e,const char *path)
     result=pt_file_save_new(path,bytes,n);free(bytes);
     pt_editor_status(e,result==PT_SAVE_OK?"WAV EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED":"WAV EXPORT REFUSED OR FAILED - DESTINATION PRESERVED");
     printf("EDITOR WAV result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
+}
+static int raw_eligible(struct pt_editor *e)
+{
+    size_t n;
+    if(!e->sample || e->sample>e->project->sample_count || !e->project->samples[e->sample-1].pcm.frames ||
+        pt_raw_size(&e->project->samples[e->sample-1].pcm,&e->raw_format,&n)!=PT_RAW_OK) {
+        pt_editor_status(e,"RAW EXPORT NEEDS MATCHING BITS/CHANNELS/RATE; USE FORMAT");return 0;
+    }
+    return 1;
+}
+static void save_raw(struct pt_editor *e,const char *path)
+{
+    size_t n,w;uint8_t *bytes;enum pt_save_result result;
+    if(!raw_eligible(e) || pt_raw_size(&e->project->samples[e->sample-1].pcm,&e->raw_format,&n)!=PT_RAW_OK)return;
+    bytes=malloc(n);if(!bytes) {pt_editor_status(e,"RAW EXPORT: OUT OF MEMORY");return;}
+    if(pt_raw_encode(&e->project->samples[e->sample-1].pcm,&e->raw_format,bytes,n,&w)!=PT_RAW_OK || n!=w) {free(bytes);pt_editor_status(e,"RAW EXPORT FAILED - SAMPLE PRESERVED");return;}
+    result=pt_file_save_new(path,bytes,n);free(bytes);
+    pt_editor_status(e,result==PT_SAVE_OK?"RAW PCM EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED":"RAW EXPORT REFUSED OR FAILED - DESTINATION PRESERVED");
+    printf("EDITOR RAW result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
 }
 static int svx_eligible(struct pt_editor *e)
 {
@@ -155,7 +174,7 @@ static int conversion_progress(void *context,uint32_t done,uint32_t total)
 int main(int argc,char **argv)
 {
     struct pt_view_cache view_cache={0};
-    struct pt_paula audio={0};char load_path[1024]="",save_path[1024]="new-project.ptg",mod_path[1024]="new-module.mod",sample_path[1024]="",wav_path[1024]="new-sample.wav",svx_path[1024]="new-sample.iff",chosen_path[1024];
+    struct pt_paula audio={0};char load_path[1024]="",save_path[1024]="new-project.ptg",mod_path[1024]="new-module.mod",sample_path[1024]="",wav_path[1024]="new-sample.wav",svx_path[1024]="new-sample.iff",raw_path[1024]="new-sample.raw",raw_input[1024]="",chosen_path[1024];
     struct pt_allocator allocator={NULL,allocate,release};struct pt_document doc;
     struct pt_editor *editor=NULL;struct Screen *screen=NULL;struct Window *window=NULL;
     struct BitMap bitmap;struct pt_canvas canvas;unsigned plane;uint8_t *pixels=NULL;int rc=20,running=1,redraw=1;
@@ -275,6 +294,21 @@ int main(int argc,char **argv)
                     else pt_editor_status(editor,selected==0?"MOD EXPORT CANCELLED - PROJECT PRESERVED":"MOD REQUESTER UNAVAILABLE OR PATH TOO LONG");
                 }
             }
+            if(action==PT_UI_RAW_LOAD || (action==PT_UI_RAW_SAVE && raw_eligible(editor))) {
+                int importing=action==PT_UI_RAW_LOAD,selected;printf("EDITOR REQUEST %s\n",importing?"rawload":"rawsave");fflush(stdout);
+                selected=pt_file_request(window,importing?6:7,importing?raw_input:raw_path,chosen_path,sizeof(chosen_path));view_cache.valid=0;
+                if(selected==1) {
+                    if(importing) {
+                        unsigned generation=editor->sampler.generation;enum pt_edit_result result=load_sample(editor,chosen_path,1);
+                        pt_editor_sample_result(editor,result);
+                        if(result==PT_EDIT_OK) {
+                            strcpy(raw_input,chosen_path);pt_editor_sample_all(editor);
+                            if(editor->sampler.generation!=generation) {pt_paula_stop(&audio);pt_paula_poll(&audio,&editor->playback);}
+                        }
+                        printf("EDITOR RAWLOAD result=%u revision=%lu dirty=%u\n",result,(unsigned long)editor->history.revision,pt_editor_dirty(editor));fflush(stdout);
+                    } else {strcpy(raw_path,chosen_path);save_raw(editor,chosen_path);}
+                } else pt_editor_status(editor,selected==0?"RAW REQUEST CANCELLED - EDITS PRESERVED":"RAW REQUEST FAILED - EDITS PRESERVED");
+            }
             if(action==PT_UI_SAMPLE_SVX && svx_eligible(editor)) {
                 int selected;printf("EDITOR REQUEST iff\n");fflush(stdout);
                 selected=pt_file_request(window,5,svx_path,chosen_path,sizeof(chosen_path));view_cache.valid=0;
@@ -287,7 +321,7 @@ int main(int argc,char **argv)
                 selected=pt_file_request(window,importing?3:4,importing?sample_path:wav_path,chosen_path,sizeof(chosen_path));view_cache.valid=0;
                 if(selected==1) {
                     if(importing) {
-                        enum pt_edit_result result=load_sample(editor,chosen_path);
+                        enum pt_edit_result result=load_sample(editor,chosen_path,0);
                         pt_editor_sample_result(editor,result);
                         if(result==PT_EDIT_OK) {
                             strcpy(sample_path,chosen_path);pt_editor_sample_all(editor);

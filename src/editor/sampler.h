@@ -4,6 +4,7 @@
 #include "document.h"
 #include "slices.h"
 #include "svx.h"
+#include "raw.h"
 struct pt_sample_version;
 struct pt_sampler {
     struct pt_sample_version *current[PT_PROJECT_SAMPLES];
@@ -32,4 +33,5 @@ enum pt_edit_result pt_sampler_convert_quality(struct pt_sampler *,struct pt_pro
    precision, stereo, loop kinds, slices and finetune refuse without conversion. */
 enum pt_svx_result pt_sampler_svx_size(const struct pt_sample *,size_t *);
 enum pt_svx_result pt_sampler_svx_encode(const struct pt_sample *,uint8_t *,size_t,size_t *);
+enum pt_edit_result pt_sampler_import_raw(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,const uint8_t *,size_t,const char *,const struct pt_raw_format *);
 #endif

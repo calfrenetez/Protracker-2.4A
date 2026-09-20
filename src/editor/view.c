@@ -186,6 +186,7 @@ static void draw_sample(const struct pt_editor *e,struct pt_canvas *c,const uint
     if(e->panel==6)snprintf(text,sizeof(text),"%s LOOP %lu - %lu  /  FADE %lu FRAMES",sample->loop==PT_LOOP_NONE?"NO":sample->loop==PT_LOOP_FORWARD?"FORWARD":sample->loop==PT_LOOP_PINGPONG?"PINGPONG":"CROSSFADE",(unsigned long)sample->loop_start,(unsigned long)sample->loop_end,(unsigned long)e->loop_fade);
     if(e->panel==7)snprintf(text,sizeof(text),"SLICES %u / %s %lu  -  %s",sample->slice_count,e->slice_pending?"PROPOSED":"SAVED",(unsigned long)(e->slice_pending?e->slice_count:sample->slice_count),e->slice_pending?"APPLY OR CANCEL":"MARKERS ONLY");
     if(e->panel==9)snprintf(text,sizeof(text),"FORMAT %u BIT %lu HZ > %u BIT %lu HZ / %s",pcm->bits,(unsigned long)pcm->rate,e->format_bits,(unsigned long)e->format_rate,e->format_filtered?"FILTER":"LINEAR");
+    if(e->panel==10)snprintf(text,sizeof(text),"RAW %u BIT %s %s %s %lu HZ / PCM ONLY",e->raw_format.bits,e->raw_format.channels==2?"STEREO":"MONO",e->raw_format.unsigned8?"UNSIGNED":"SIGNED",e->raw_format.little_endian?"LE":"BE",(unsigned long)e->raw_format.rate);
     label(c,font,2,PT_EDITOR_HEADER_Y,636,19,text,0);
     for(channel=0;channel<pcm->channels;++channel) {
         int top=254+(int)channel*(216/pcm->channels),height=216/pcm->channels-4,mid=top+height/2;
@@ -290,12 +291,13 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
     pt_editor_draw_playback(e,c,font);
     if(e->panel>=5) {
         static const char *tabs[4]={"SAMPLER","LOOPS","SLICES","RANGE"};
-        static const char *ops[5][4][3]={
-            {{"LOAD SMP","SAVE WAV","AUDITION"},{"REVERSE","NORMALIZE","DC OFFS"},{"GAIN /2","GAIN X2","FORMAT"},{"FADE IN","FADE OUT","ALL"}},
+        static const char *ops[6][4][3]={
+            {{"LOAD SMP","SAVE WAV","AUDITION"},{"REVERSE","NORMALIZE","DC OFFS"},{"GAIN /2","GAIN X2","FORMAT"},{"FADE IN","FADE OUT","RAW"}},
             {{"FORWARD","PINGPONG","OFF"},{"FADE -","","FADE +"},{"BAKE FADE","USE LOOP","SAVE IFF"},{"ALL","UNDO","REDO"}},
             {{"ADD START","DELETE","CLEAR"},{"AUTO","APPLY","CANCEL"},{"THRESH -","","THRESH +"},{"GAP -","","GAP +"}},
             {{"ZOOM IN","ZOOM OUT","FIT ALL"},{"PAN <","ZOOM SEL","PAN >"},{"START -","","START +"},{"END -","","END +"}},
-            {{"8 BIT","16 BIT","24 BIT"},{"8287 HZ","22050 HZ","44100 HZ"},{"48000 HZ","","BACK"},{"APPLY","UNDO","REDO"}}};
+            {{"8 BIT","16 BIT","24 BIT"},{"8287 HZ","22050 HZ","44100 HZ"},{"48000 HZ","","BACK"},{"APPLY","UNDO","REDO"}},
+            {{"LOAD RAW","SAVE RAW","BACK"},{"8 BIT","16 BIT","24 BIT"},{"MONO","STEREO","SIGNED"},{"BIG ENDIAN","LIL ENDIAN","RATE"}}};
         for(i=0;i<4;++i)label(c,font,230+(int)(i*369/4),2,(int)((i+1)*369/4-i*369/4),19,tabs[i],e->panel==5+i);
         for(r=0;r<4;++r)for(i=0;i<3;++i)label(c,font,230+(int)i*123,21+(int)r*19,123,19,ops[e->panel-5][r][i],
             (e->panel==6 && r==0 && sample && sample->loop==(i==2?PT_LOOP_NONE:i+1)) || (e->panel==9 && r==0 && e->format_bits==(i+1)*8));
@@ -309,6 +311,14 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
             else snprintf(s,sizeof(s),"%lu HZ",(unsigned long)e->format_rate);
             label(c,font,353,59,123,19,s,e->number_field==3);
             label(c,font,476,59,123,19,e->format_filtered?"FILTERED":"LINEAR",e->format_filtered);
+        }
+        if(e->panel==10) {
+            for(i=0;i<3;++i)label(c,font,230+(int)i*123,40,123,19,ops[5][1][i],e->raw_format.bits==(i+1)*8);
+            label(c,font,230,59,123,19,"MONO",e->raw_format.channels==1);label(c,font,353,59,123,19,"STEREO",e->raw_format.channels==2);
+            label(c,font,476,59,123,19,e->raw_format.unsigned8?"UNSIGNED":"SIGNED",e->raw_format.unsigned8);
+            label(c,font,230,78,123,19,"BIG ENDIAN",!e->raw_format.little_endian);label(c,font,353,78,123,19,"LIL ENDIAN",e->raw_format.little_endian);
+            if(e->number_field==4)snprintf(s,sizeof(s),"%s_",e->number_text);else snprintf(s,sizeof(s),"%lu HZ",(unsigned long)e->raw_format.rate);
+            label(c,font,476,78,123,19,s,e->number_field==4);
         }
         if(e->panel==8)for(i=1;i<=2;++i) {
             if(e->number_field==i)snprintf(s,sizeof(s),"%s_",e->number_text);

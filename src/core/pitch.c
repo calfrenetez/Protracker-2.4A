@@ -35,7 +35,7 @@ static void tone(struct pt_pitch_channel *s)
     if(s->up?signed_word(s->target)>=signed_word(s->period):signed_word(s->target)<=signed_word(s->period)) {
         s->period=s->target;s->target=0;
     }
-    s->output=s->period;
+    s->output=s->gliss?tone_target(s->period):s->period;
 }
 static void vibrato(struct pt_pitch_channel *s,unsigned param,unsigned update)
 {
@@ -106,6 +106,7 @@ void pt_pitch_tick(struct pt_pitch *s,const struct pt_flow *flow,uint16_t tracks
                 ((size_t)flow->project->orders[flow->played_order]*64+flow->played_row)*flow->project->channels.count+ch;
             if(e->kind==PT_NOTE_PERIOD) {v->output=v->period;v->sounding=1;}
         }
+        if(effect==14 && (param>>4)==3)v->gliss=(uint8_t)(param&15);
         if(effect==14 && (param>>4)==4)v->vib_control=(uint8_t)(param&15);
         if(effect==14 && !flow->counter && ((param>>4)==1 || (param>>4)==2))slide(v,param&15,(param>>4)==2);
     }

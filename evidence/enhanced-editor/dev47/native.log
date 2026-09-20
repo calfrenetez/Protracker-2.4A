@@ -1,0 +1,33 @@
+Native trace runs complete: 0/31
+Native trace runs complete: 2/31
+Native trace runs complete: 3/31
+Native trace runs complete: 4/31
+Native trace runs complete: 5/31
+Native trace runs complete: 6/31
+Native trace runs complete: 7/31
+Native trace runs complete: 8/31
+Native trace runs complete: 9/31
+Native trace runs complete: 10/31
+Native trace runs complete: 11/31
+Native trace runs complete: 12/31
+Native trace runs complete: 13/31
+Native trace runs complete: 14/31
+Native trace runs complete: 15/31
+Native trace runs complete: 16/31
+Native trace runs complete: 17/31
+Native trace runs complete: 18/31
+Native trace runs complete: 19/31
+Native trace runs complete: 20/31
+Native trace runs complete: 21/31
+Native trace runs complete: 22/31
+Native trace runs complete: 23/31
+Native trace runs complete: 24/31
+Native trace runs complete: 25/31
+Native trace runs complete: 26/31
+Native trace runs complete: 27/31
+Native trace runs complete: 28/31
+Native trace runs complete: 29/31
+Native trace runs complete: 30/31
+Native trace runs complete: 31/31
+PASS: 7 repeated native pitch traces and exact renderer PCM checks; /Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/gliss-evidence/gliss1789937078446641000
+Pitch capture released: /Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/local/share/gliss1789937078446641000

@@ -1,0 +1,7 @@
+test_native_stored_output_periods_and_pcm (test_gliss_native.GlissNative.test_native_stored_output_periods_and_pcm) ... PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 5.040s
+
+OK

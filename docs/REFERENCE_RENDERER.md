@@ -309,3 +309,13 @@ immutable 2048-frame source ramp extended into a full-sample reference loop at
 48 kHz so later effect ticks remain audible. All four waveform channels are
 checked independently. This compares reference PCM policy against native control
 state; it is not an analogue Paula waveform comparison or physical acceptance.
+
+## Glissando rendering (dev47)
+
+E3x controls stepped pitch output during 3xx/5xx portamento. Any nonzero low
+nibble enables glissando; E30 disables it. The stored period still moves smoothly,
+retaining slide speed and target; only each portamento pitch write is quantized
+against the pinned zero-finetune table. Reaching the target preserves native
+arrival behavior. Control changes do not immediately rewrite the period register.
+Finetuned samples remain refused, and undefined zero-output periods are still
+rejected during measurement before any sink or publication.

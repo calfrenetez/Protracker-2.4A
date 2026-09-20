@@ -74,4 +74,3 @@ enum pt_pcm_result pt_pcm_resample_filtered_progress(const struct pt_pcm *source
 }
 enum pt_pcm_result pt_pcm_resample_filtered(const struct pt_pcm *source,struct pt_pcm *dest)
 {return pt_pcm_resample_filtered_progress(source,dest,NULL,NULL);}
-

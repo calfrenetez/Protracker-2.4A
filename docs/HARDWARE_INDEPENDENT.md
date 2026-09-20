@@ -355,3 +355,12 @@ the old project/history intact while a destination is staged. Host/native tone,
 stereo precision, boundary and cancellation evidence is retained under
 `evidence/enhanced-editor/dev16/`. Physical sound-quality and performance acceptance
 are still separate; dither and complete classic-song conversion remain open.
+
+## IFF/8SVX interchange milestone (dev17)
+
+The sampler autodetects PCM WAV and bounded FORM 8SVX. Single-octave mono signed8
+and Fibonacci compression import with name, rate, rounded volume and forward loop.
+Explicit IFF export retains supported metadata and refuses unsupported sample
+formats, pingpong, slices and finetune. Shared undo, allocation failures, malformed
+input and new-file saves preserve existing state. See the editor guide and
+`evidence/enhanced-editor/dev17/` for acceptance evidence and format boundaries.

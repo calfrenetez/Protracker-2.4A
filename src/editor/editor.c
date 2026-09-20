@@ -50,7 +50,7 @@ void pt_editor_sample_result(struct pt_editor *e,enum pt_edit_result result)
     pt_editor_status(e,result==PT_EDIT_OK?"SAMPLE UPDATED - CONTROL-Z TO UNDO":
         result==PT_EDIT_CANCELLED?"CONVERSION CANCELLED - SAMPLE AND HISTORY PRESERVED":
         result==PT_EDIT_CAPACITY?"SAMPLE MEMORY BUDGET OR ALLOCATION FAILED - NO CHANGE":
-        result==PT_EDIT_UNSUPPORTED?"WAV FORMAT OR SLICE REFERENCES UNSUPPORTED - NO CHANGE":"SAMPLE EDIT REFUSED - NO CHANGE");
+        result==PT_EDIT_UNSUPPORTED?"SAMPLE FORMAT OR SLICE REFERENCES UNSUPPORTED - NO CHANGE":"SAMPLE EDIT REFUSED - NO CHANGE");
 }
 static void sample_edit(struct pt_editor *e,enum pt_pcm_edit op,unsigned gain)
 {
@@ -432,7 +432,8 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
             else if(raw==0x1a || raw==0x1b)range_nudge(e,(qualifier&3)?2:1,raw==0x1a?-1:1);
         }
         else if(e->panel==6) {
-            if(raw==0x23)loop_edit(e,PT_LOOP_FORWARD);
+            if(raw==0x11)return PT_UI_SAMPLE_SVX;
+            else if(raw==0x23)loop_edit(e,PT_LOOP_FORWARD);
             else if(raw==0x19)loop_edit(e,PT_LOOP_PINGPONG);
             else if(raw==0x18)loop_edit(e,PT_LOOP_NONE);
             else if(raw==0x35)loop_edit(e,PT_LOOP_CROSSFADE);
@@ -450,7 +451,7 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
             else if(raw==0x4c || raw==0x4d)sample_setting(e,2,raw==0x4c?1:-1);
         }
         else if(raw==0x28)return PT_UI_SAMPLE_LOAD;
-        else if(raw==0x11)return PT_UI_SAMPLE_SAVE;
+        else if(raw==0x11)return (qualifier&3)?PT_UI_SAMPLE_SVX:PT_UI_SAMPLE_SAVE;
         else if(raw==0x13)sample_edit(e,PT_PCM_REVERSE,0);
         else if(raw==0x36)sample_edit(e,PT_PCM_NORMALIZE,0);
         else if(raw==0x22)sample_edit(e,PT_PCM_REMOVE_DC,0);
@@ -558,7 +559,7 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
         if(e->panel==6) {
             if(r==1)loop_edit(e,c==0?PT_LOOP_FORWARD:c==1?PT_LOOP_PINGPONG:PT_LOOP_NONE);
             else if(r==2 && c!=1)sample_setting(e,0,c==0?-1:1);
-            else if(r==3) {if(c==2)e->panel=0;else loop_edit(e,c==0?PT_LOOP_CROSSFADE:4);}
+            else if(r==3) {if(c==2)return PT_UI_SAMPLE_SVX;else loop_edit(e,c==0?PT_LOOP_CROSSFADE:4);}
             else if(r==4) {if(c==0)pt_editor_sample_all(e);else undo(e,c==1?-1:1);}
             return PT_UI_NONE;
         }

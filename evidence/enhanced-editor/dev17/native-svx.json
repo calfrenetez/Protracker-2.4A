@@ -1,0 +1,30 @@
+{
+  "run_id": "svx1789899621066223000",
+  "elapsed_seconds": 126.773,
+  "binaries": {
+    "PT24GEdit": "10393af5d798b158d6c40953fa8e777ae9631176541c44d81118d1993fb17d5e",
+    "PTSamplerTest": "49245e25f28a5ffe65cf07d67249fcf47c5abe4bac5a4a4e327af5d4ae18f1bf",
+    "PTSvxTest": "96e4ba39d31a912c586c58b24efbf7c9f5a1a93da3702e63a29c74dae9b644ad"
+  },
+  "native_codec_and_sampler_tests": true,
+  "exact_name_volume_forward_loop_pcm": true,
+  "fibonacci_import_exact_wav": true,
+  "malformed_import_preserves_redo": true,
+  "unsupported_export_refuses_before_requester": true,
+  "existing_destination_preserved": true,
+  "exact_project_crc_and_reopen_identity": true,
+  "normal_exits": 2,
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0",
+  "logs": {
+    "svx.log": "8SVX PASS: independent signed PCM fixture, odd chunks, loops, Fibonacci wrap, malformed bounds, alias and capacity\n",
+    "sampler.log": "LOOP/SLICE PASS: metadata, atomic bake undo, proposal commit, non-destructive PCM, retarget refusal, undo/redo conflicts, allocation rollback and exact persistence\nCONVERSION PASS: stereo precision/rate, scaled loops and referenced slice ordinals, exact undo, collapse refusal, allocation rollback, redo and persistence\nIFF SAMPLER PASS: name/volume/loop/PCM, compressed import, exact export, allocation rollback, unsupported refusal, redo and project persistence\nSAMPLER PASS: exact stereo24 import/range edit, unified history, dirty state, no-op redo, allocation rollback, bounded memory, eviction, save/reopen and release\n",
+    "editor.log": "EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=101338\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO panel=5\nEDITOR REQUEST sample\nEDITOR SAMPLE result=0 revision=1 dirty=1\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=SAMPLE UPDATED - CONTROL-Z TO UNDO panel=5\nEDITOR REQUEST iff\nEDITOR IFF result=0 dirty=1\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=IFF EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED panel=5\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=LOOPS: F FORWARD / P PINGPONG / O OFF / B BAKE FADE panel=6\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=LOOP UPDATED - CONTROL-Z TO UNDO panel=6\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=IFF NEEDS MONO8 <=65535HZ; NO SLICES/FINE/PINGPONG panel=6\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=UNDO panel=6\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=SLICES: M ADD / D DELETE / T AUTO / P APPLY / X CANCEL panel=7\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=RANGE: I/O ZOOM; F FIT; V SELECTION; S/E ENTER FRAMES panel=8\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO panel=5\nEDITOR REQUEST sample\nEDITOR SAMPLE result=5 revision=1 dirty=1\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=SAMPLE FORMAT OR SLICE REFERENCES UNSUPPORTED - NO CHANGE panel=5\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=REDO panel=5\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=UNDO panel=5\nEDITOR REQUEST sample\nEDITOR SAMPLE result=0 revision=3 dirty=1\nEDITOR FRAME row=0 channel=0 revision=3 dirty=1 status=SAMPLE UPDATED - CONTROL-Z TO UNDO panel=5\nEDITOR REQUEST wav\nEDITOR WAV result=0 dirty=1\nEDITOR FRAME row=0 channel=0 revision=3 dirty=1 status=WAV EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED panel=5\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=UNDO panel=5\nEDITOR REQUEST iff\nEDITOR IFF result=6 dirty=1\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=IFF EXPORT REFUSED OR FAILED - DESTINATION PRESERVED panel=5\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=1 dirty=0 status=PROJECT SAVED AND VERIFIED panel=5\nEDITOR FRAME row=0 channel=0 revision=1 dirty=0 status=SETTINGS CLOSED panel=0\nEDITOR EXIT clean\n",
+    "reopened.log": "EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=101338\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PROJECT SAVED AND VERIFIED panel=0\nEDITOR EXIT clean\n"
+  },
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

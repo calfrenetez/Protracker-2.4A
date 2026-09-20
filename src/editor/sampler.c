@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "sampler.h"
 #include "wav.h"
+#include "svx.h"
 struct pt_sample_version {
     struct pt_sample sample;
     struct pt_sampler *owner;
@@ -91,17 +92,26 @@ enum pt_edit_result pt_sampler_edit(struct pt_sampler *s,struct pt_project *p,st
 }
 enum pt_edit_result pt_sampler_import(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const uint8_t *bytes,size_t length,const char *name)
 {
-    struct pt_wav_info info;struct pt_sample sample;struct pt_sample_version *v;size_t i,count;
+    struct pt_wav_info info;struct pt_svx_info svx;int iff;struct pt_sample sample;struct pt_sample_version *v;size_t i,count;
     if(!s || !s->allocator.allocate || !s->allocator.release || pt_project_validate(p,NULL)!=PT_PROJECT_OK || slot>=p->sample_count)return PT_EDIT_INVALID;
-    if(pt_wav_inspect(bytes,length,&info)!=PT_WAV_OK || !info.frames)return PT_EDIT_UNSUPPORTED;
+    iff=bytes && length>=12 && !memcmp(bytes,"FORM",4) && !memcmp(bytes+8,"8SVX",4);
+    if(iff) {
+        if(pt_svx_inspect(bytes,length,&svx)!=PT_SVX_OK || !svx.frames)return PT_EDIT_UNSUPPORTED;
+        info.frames=svx.frames;info.rate=svx.rate;info.channels=1;info.bits=8;
+    } else if(pt_wav_inspect(bytes,length,&info)!=PT_WAV_OK || !info.frames)return PT_EDIT_UNSUPPORTED;
     /* A replacement cannot invalidate saved slice references in any pattern. */
     count=(size_t)p->pattern_count*64*p->channels.count;
     for(i=0;i<count;++i)if(p->events[i].instrument==slot+1 && p->events[i].slice)return PT_EDIT_UNSUPPORTED;
     memset(&sample,0,sizeof(sample));sample.volume=64;
-    snprintf(sample.name,sizeof(sample.name),"%s",name?name:"IMPORTED WAV");
+    snprintf(sample.name,sizeof(sample.name),"%s",iff && svx.name[0]?svx.name:name?name:"IMPORTED SAMPLE");
+    if(iff) {
+        sample.volume=(uint8_t)((svx.volume*64+32768)/65536);
+        sample.loop=svx.loop_end?PT_LOOP_FORWARD:PT_LOOP_NONE;
+        sample.loop_start=svx.loop_start;sample.loop_end=svx.loop_end;
+    }
     sample.pcm.frames=info.frames;sample.pcm.rate=info.rate;sample.pcm.channels=info.channels;sample.pcm.bits=info.bits;
     v=version(s,&sample);if(!v)return PT_EDIT_CAPACITY;
-    if(pt_wav_decode(bytes,length,&v->sample.pcm)!=PT_WAV_OK) {release_version(v);return PT_EDIT_INVALID;}
+    if(iff?pt_svx_decode(bytes,length,&v->sample.pcm)!=PT_SVX_OK:pt_wav_decode(bytes,length,&v->sample.pcm)!=PT_WAV_OK) {release_version(v);return PT_EDIT_INVALID;}
     return commit(s,p,h,slot,v);
 }
 enum pt_edit_result pt_sampler_loop(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,enum pt_loop_kind kind,uint32_t start,uint32_t end,uint32_t fade)
@@ -171,3 +181,20 @@ enum pt_edit_result pt_sampler_convert_quality(struct pt_sampler *s,struct pt_pr
 
 enum pt_edit_result pt_sampler_convert(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,unsigned bits,uint32_t rate)
 {return pt_sampler_convert_quality(s,p,h,slot,bits,rate,0);}
+
+enum pt_svx_result pt_sampler_svx_size(const struct pt_sample *sample,size_t *size)
+{
+    struct pt_svx_info info={0};
+    if(!sample || !sample->pcm.frames)return PT_SVX_INVALID;
+    if(sample->loop>PT_LOOP_FORWARD || sample->slice_count || sample->finetune)return PT_SVX_UNSUPPORTED;
+    info.loop_start=sample->loop_start;info.loop_end=sample->loop_end;info.volume=(uint32_t)sample->volume*1024;
+    return pt_svx_size(&sample->pcm,&info,size);
+}
+enum pt_svx_result pt_sampler_svx_encode(const struct pt_sample *sample,uint8_t *bytes,size_t capacity,size_t *written)
+{
+    size_t size;struct pt_svx_info info={0};enum pt_svx_result result=pt_sampler_svx_size(sample,&size);
+    if(result!=PT_SVX_OK)return result;
+    memcpy(info.name,sample->name,sizeof(info.name));info.loop_start=sample->loop_start;
+    info.loop_end=sample->loop_end;info.volume=(uint32_t)sample->volume*1024;
+    return pt_svx_encode(&sample->pcm,&info,bytes,capacity,written);
+}

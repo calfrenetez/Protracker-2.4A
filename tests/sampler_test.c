@@ -137,6 +137,53 @@ static void conversion(void)
     pt_pattern_history_release(&h);pt_sampler_release(&s);assert(!s.bytes);pt_document_release(&d);pt_document_release(&reopened);assert(!live);
     puts("CONVERSION PASS: stereo precision/rate, scaled loops and referenced slice ordinals, exact undo, collapse refusal, allocation rollback, redo and persistence");
 }
+static void iff_samples(void)
+{
+    struct pt_allocator a={NULL,allocate,release};struct pt_document d,reopened;struct pt_sampler s;
+    struct pt_pattern_history h;struct pt_pattern_command commands[8];struct pt_event_change changes[8];
+    int32_t values[5]={-128,-7,0,12,127};struct pt_pcm pcm={values,5,5,8287,1,8};
+    struct pt_svx_info info={0};uint8_t bytes[100],out[100],*project;size_t n,w,i,allocated;uint32_t revision;
+    struct pt_sample *sample;struct pt_event_update event={0};uint32_t marker=0;
+    info.loop_start=1;info.loop_end=4;info.volume=32768;strcpy(info.name,"IFF NAME");
+    assert(pt_svx_encode(&pcm,&info,bytes,sizeof(bytes),&n)==PT_SVX_OK);
+    pt_document_init(&d,&a);pt_document_init(&reopened,&a);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
+    pt_sampler_init(&s,&a,1024*1024);assert(pt_pattern_history_init(&h,&d.project,commands,8,changes,8)==PT_EDIT_OK);
+    for(i=1;i<=3;++i) {
+        allocated=live;fail=calls+i;
+        assert(pt_sampler_import(&s,&d.project,&h,0,bytes,n,"fallback")==PT_EDIT_CAPACITY);
+        assert(live==allocated && !s.bytes && !h.revision && !d.project.samples[0].pcm.frames);
+    }
+    fail=0;assert(pt_sampler_import(&s,&d.project,&h,0,bytes,n,"fallback")==PT_EDIT_OK);sample=&d.project.samples[0];
+    assert(!strcmp(sample->name,"IFF NAME") && sample->volume==32 && sample->loop==PT_LOOP_FORWARD && sample->loop_start==1 && sample->loop_end==4);
+    assert(!memcmp(sample->pcm.data,values,sizeof(values)));
+    revision=h.revision;allocated=live;assert(pt_sampler_svx_encode(sample,out,sizeof(out),&w)==PT_SVX_OK && w==n && !memcmp(bytes,out,n));
+    assert(revision==h.revision && allocated==live);
+    assert(pt_pattern_undo(&d.project,&h,-1)==PT_EDIT_OK && !sample->pcm.frames);
+    bytes[35]=2;assert(pt_sampler_import(&s,&d.project,&h,0,bytes,n,"bad")==PT_EDIT_UNSUPPORTED && !sample->pcm.frames);
+    bytes[35]=0;assert(pt_pattern_undo(&d.project,&h,1)==PT_EDIT_OK && h.revision==revision);
+    assert(pt_sampler_loop(&s,&d.project,&h,0,PT_LOOP_PINGPONG,1,4,0)==PT_EDIT_OK);
+    assert(pt_sampler_svx_encode(sample,out,sizeof(out),&w)==PT_SVX_UNSUPPORTED);
+    assert(pt_pattern_undo(&d.project,&h,-1)==PT_EDIT_OK);
+    assert(pt_sampler_slices(&s,&d.project,&h,0,&marker,1)==PT_EDIT_OK);
+    assert(pt_sampler_svx_encode(sample,out,sizeof(out),&w)==PT_SVX_UNSUPPORTED);
+    event.event.kind=PT_NOTE_PERIOD;event.event.pitch=428;event.event.instrument=1;event.event.slice=1;
+    assert(pt_pattern_apply(&d.project,&h,&event,1)==PT_EDIT_OK);revision=h.revision;allocated=live;
+    assert(pt_sampler_import(&s,&d.project,&h,0,bytes,n,"replace")==PT_EDIT_UNSUPPORTED && h.revision==revision && allocated==live);
+    assert(pt_pattern_undo(&d.project,&h,-1)==PT_EDIT_OK);assert(pt_pattern_undo(&d.project,&h,-1)==PT_EDIT_OK);
+    assert(pt_project_size(&d.project,&n)==PT_PROJECT_OK);project=malloc(n);assert(project);
+    assert(pt_project_encode(&d.project,project,n,&w)==PT_PROJECT_OK && w==n);
+    assert(pt_document_load(&reopened,project,n,SIZE_MAX)==PT_PROJECT_OK);free(project);
+    assert(pt_sampler_svx_encode(&reopened.project.samples[0],out,sizeof(out),&w)==PT_SVX_OK && w==94 && !memcmp(bytes,out,w));
+    assert(pt_pattern_undo(&d.project,&h,-1)==PT_EDIT_OK && !sample->pcm.frames);
+    /* Compressed import: seed 120 then +21,+21,-34,0 with defined signed wrap. */
+    bytes[4]=bytes[5]=bytes[6]=0;bytes[7]=84;bytes[20]=bytes[21]=bytes[22]=0;bytes[23]=4;memset(bytes+24,0,4);bytes[35]=1;bytes[87]=4;
+    bytes[88]=0;bytes[89]=120;bytes[90]=255;bytes[91]=8;
+    assert(pt_sampler_import(&s,&d.project,&h,0,bytes,92,"compressed")==PT_EDIT_OK);
+    assert(sample->pcm.frames==4 && sample->pcm.data[0]==-115 && sample->pcm.data[1]==-94 && sample->pcm.data[2]==-128 && sample->pcm.data[3]==-128);
+    pt_pattern_history_release(&h);pt_sampler_release(&s);pt_document_release(&d);pt_document_release(&reopened);assert(!live);
+    puts("IFF SAMPLER PASS: name/volume/loop/PCM, compressed import, exact export, allocation rollback, unsupported refusal, redo and project persistence");
+}
+
 int main(void)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_document d,reopened;struct pt_sampler s;
@@ -216,6 +263,6 @@ int main(void)
         pt_pattern_history_release(&h);pt_sampler_release(&s);assert(!s.bytes);
     }
     pt_document_release(&d);pt_document_release(&reopened);assert(!live);
-    loops_and_slices();conversion();
+    loops_and_slices();conversion();iff_samples();
     puts("SAMPLER PASS: exact stereo24 import/range edit, unified history, dirty state, no-op redo, allocation rollback, bounded memory, eviction, save/reopen and release");return 0;
 }

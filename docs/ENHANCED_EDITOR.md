@@ -119,7 +119,7 @@ not an assertion about an external instrument's octave naming.
 ## Sampler page
 
 SAMPLER / Control-L opens a sample waveform page in the existing classic screen.
-The pattern view returns on BACK/Escape. +/- and the SAMPLE arrows choose the
+The pattern view returns on Escape. +/- and the SAMPLE arrows choose the
 sample slot. A mono waveform uses one pane; stereo uses separate left/right panes.
 Each horizontal pixel displays its minimum/maximum sample values. This is stored
 sample data, not live captured audio. Two clicks select a half-open frame range;
@@ -127,13 +127,14 @@ the yellow marker shows a pending first endpoint. Edits are refused until that
 range is completed or reset. ALL / A selects the full sample.
 Undo/redo of a sample change resets the range to the full current sample.
 
-LOAD WAV / L (also Control-Shift-O while this page is open) uses the native file
-requester. It accepts integer PCM WAV, 8/16/24-bit, mono/stereo, up to 192 kHz.
+LOAD SMP / L (also Control-Shift-O while this page is open) uses the native file
+requester. It accepts integer PCM WAV, 8/16/24-bit, mono/stereo, up to 192 kHz,
+and single-octave mono IFF/8SVX as described below.
 Import retains exact decoded precision, rate and channels; no downmix, resampling
-or precision conversion occurs. The selected slot is replaced with volume 64,
+or precision conversion occurs. A WAV replaces the selected slot with volume 64,
 finetune zero and no loop/slice metadata. Undo restores the complete old sample.
 A replacement is refused if any event references its existing slices. WAV loop,
-cue and other ancillary metadata are not imported. RAW/IFF/MOD sample import,
+cue and other ancillary metadata are not imported. RAW/MOD sample import,
 recording and adding sample slots beyond the existing document remain open.
 
 REVERSE / R, NORMALIZE / N, DC OFFS / D, GAIN X2 / G, GAIN /2 / H, FADE IN / I
@@ -158,8 +159,7 @@ file. WAV export does not mark the project saved. Control-S still saves the full
 project, including edited samples, and Control-Z/Control-Shift-Z undo/redo.
 
 AUDITION / Return / F8 uses the existing classic Paula audition backend. It only
-accepts compatible classic samples on a Paula route; high-resolution/stereo/rate
-conversion and AmiGUS preview remain pending. Successful sample imports, edits
+accepts compatible classic samples on a Paula route; high-resolution/stereo audition and AmiGUS preview remain pending. Successful sample imports, edits
 and sample undo/redo stop existing song/audition playback before another action
 can use its old private copy. Failed/cancelled/no-op operations preserve playback.
 Pattern edits and channel settings keep their previously documented behaviour.
@@ -300,7 +300,7 @@ start/stop song playback and audition/stop a sample while the physical CIA butto
 bit remains released. The full browser/AmiConnect transport is a separate check.
 
 Still open: full mixed-channel backend dispatch, comprehensive effect parity, pattern
-route/metadata editing and its history, sample editing UI,
+slice assignment, track names/groups and existing-song resizing,
 replacement saves/recovery, capture, CAMD, renderer/export strategies and hardware acceptance.
 
 
@@ -375,3 +375,27 @@ tempo digits change. Host checks assert actual border pixels and button boundary
 behaviour, then compare both cached and tick-only updates with full rendering.
 The optional `--playback-check` native editor test verifies a real MOD F96 tempo
 change to 150 BPM against independently drawn font pixels without requesting a full redraw.
+
+
+## IFF/8SVX sample interchange
+
+LOAD SMP / L autodetects PCM WAV or FORM 8SVX from content. IFF accepts a single
+mono octave, signed 8-bit PCM or Fibonacci-delta compression. NAME, sample rate,
+forward-loop start/end and volume are imported with the PCM in one undo command.
+BODY data after the loop is retained, matching the pinned 2.3F writer. Names are
+bounded to 31 bytes; 16.16 IFF volume is rounded to the nearest project value 0–64.
+Multi-octave files, stereo CHAN=6, other compression and malformed chunk/loop
+bounds are refused. Mono CHAN=2/4 is accepted as mono; channel-side hints, octave
+pitch hints, envelopes and annotations are not represented in the project.
+
+SAVE IFF on LOOPS / W, or Shift-W on SAMPLER, exports a new uncompressed FORM 8SVX
+file with name, rate, volume and forward loop. It uses the existing verified
+new-file writer and never marks the richer project saved. Export requires a
+nonempty mono 8-bit sample at 1–65535 Hz, no slice markers, no finetune and either
+no loop or a forward loop. Other settings refuse before a requester opens; use
+explicit FORMAT conversion first where appropriate. WAV export remains W on
+SAMPLER and contains PCM only. Neither export removes project metadata.
+
+The bounded parser follows the [AmigaOS 8SVX specification](https://wiki.amigaos.net/wiki/8SVX_IFF_8-Bit_Sampled_Voice).
+IFF imports do not imply enhanced playback is available. RAW and selecting a
+sample from another MOD remain subsequent work.

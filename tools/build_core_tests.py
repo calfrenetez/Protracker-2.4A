@@ -23,10 +23,11 @@ def main():
     font = (ROOT / 'vendor/pt23f/raw/ptfont.raw').read_bytes()
     (out / 'pt_font.h').write_text('/* Pinned ProTracker 2.3F bitmap font; see vendor/pt23f license. */\nstatic const unsigned char pt_font[580] = {' + ','.join(str(b) for b in font) + '};\n')
     inputs = {
-        'PT24GEdit': ['src/native/editor_main.c', 'src/native/file_request.c', 'src/native/paula.c', 'src/editor/editor.c', 'src/editor/view.c', 'src/editor/sampler.c', 'src/core/pcm_filtered.c', 'src/core/slices.c', 'src/core/wav.c', 'src/platform/file_save.c', 'src/core/safe_save.c', 'src/core/document.c', 'src/core/pattern.c', 'src/core/project.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/channels.c', 'src/core/pcm.c'],
+        'PT24GEdit': ['src/native/editor_main.c', 'src/native/file_request.c', 'src/native/paula.c', 'src/editor/editor.c', 'src/editor/view.c', 'src/editor/sampler.c', 'src/core/pcm_filtered.c', 'src/core/slices.c', 'src/core/wav.c', 'src/core/svx.c', 'src/platform/file_save.c', 'src/core/safe_save.c', 'src/core/document.c', 'src/core/pattern.c', 'src/core/project.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/channels.c', 'src/core/pcm.c'],
         'PTPaulaTest': ['tests/native_paula_test.c', 'src/native/paula.c', 'src/core/document.c', 'src/core/project.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/channels.c', 'src/core/pcm.c'],
-        'PTViewBench': ['tests/native_view_bench.c', 'src/editor/editor.c', 'src/editor/view.c', 'src/editor/sampler.c', 'src/core/pcm_filtered.c', 'src/core/slices.c', 'src/core/wav.c', 'src/core/document.c', 'src/core/pattern.c', 'src/core/project.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/channels.c', 'src/core/pcm.c'],
-        'PTSamplerTest': ['tests/sampler_test.c','src/editor/sampler.c', 'src/core/pcm_filtered.c', 'src/core/slices.c','src/core/pattern.c','src/core/document.c','src/core/project.c','src/core/mod_project.c','src/core/mod_inspect.c','src/core/channels.c','src/core/pcm.c','src/core/wav.c'],
+        'PTViewBench': ['tests/native_view_bench.c', 'src/editor/editor.c', 'src/editor/view.c', 'src/editor/sampler.c', 'src/core/pcm_filtered.c', 'src/core/slices.c', 'src/core/wav.c', 'src/core/svx.c', 'src/core/document.c', 'src/core/pattern.c', 'src/core/project.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/channels.c', 'src/core/pcm.c'],
+        'PTSamplerTest': ['tests/sampler_test.c','src/editor/sampler.c', 'src/core/pcm_filtered.c', 'src/core/slices.c','src/core/pattern.c','src/core/document.c','src/core/project.c','src/core/mod_project.c','src/core/mod_inspect.c','src/core/channels.c','src/core/pcm.c','src/core/wav.c', 'src/core/svx.c'],
+        'PTSvxTest': ['tests/svx_test.c','src/core/svx.c','src/core/pcm.c'],
         'PTFilterTest': ['tests/filter_test.c','src/core/pcm_filtered.c','src/core/pcm.c'],
         'PTMidiTest': ['tests/midi_test.c', 'src/core/midi.c'],
         'PTRecordTest': ['tests/record_test.c', 'src/core/record.c', 'src/core/record_pattern.c', 'src/core/pattern.c', 'src/core/project.c', 'src/core/channels.c', 'src/core/pcm.c'],
@@ -40,7 +41,7 @@ def main():
         'PTEditorClick': ['tests/native_editor_click.c'],
         'PTInputProbe': ['tests/native_input_probe.c'],
         'PTChannelsTest': ['tests/channels_test.c', 'src/core/channels.c'],
-        'PTPcmTest': ['tests/pcm_test.c', 'src/core/pcm.c', 'src/core/wav.c'],
+        'PTPcmTest': ['tests/pcm_test.c', 'src/core/pcm.c', 'src/core/wav.c', 'src/core/svx.c'],
     }
     flags = ['-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os',
              '-Wall', '-Wextra', '-Werror', '-Isrc/core', '-Ibuild/dev', *compiler_safety_flags(cc)]
@@ -73,7 +74,7 @@ def main():
                            for name in [*inputs, 'PTGuardTest']},
               'sources': {name: digest(ROOT / name) for name in
                           sorted(set(sum(inputs.values(), [])) | {'src/native/file_request.h', 'src/core/playback.h', 'src/native/paula.h', 'src/native/replay_abi.s', 'tools/prepare_replay.py', 'vendor/pt23f/replayer/PT2.3F_replay_cia.s', 'src/core/channels.h', 'src/core/pcm.h',
-                          'src/core/sinc_kernel.h', 'tools/generate_sinc_kernel.py', 'src/core/wav.h', 'src/core/midi.h', 'src/core/record.h', 'src/core/record_pattern.h', 'src/editor/editor.h', 'src/editor/sampler.h', 'src/editor/view.h', 'src/platform/file_save.h', 'vendor/pt23f/raw/ptfont.raw', 'src/core/project.h', 'src/core/mod_project.h', 'src/core/document.h', 'src/core/safe_save.h', 'src/core/pattern.h', 'src/core/slices.h', 'src/core/mod_inspect.h', 'src/native/mod_guard.s', 'tests/native_guard_harness.s'})},
+                          'src/core/sinc_kernel.h', 'tools/generate_sinc_kernel.py', 'src/core/wav.h', 'src/core/svx.h', 'src/core/midi.h', 'src/core/record.h', 'src/core/record_pattern.h', 'src/editor/editor.h', 'src/editor/sampler.h', 'src/editor/view.h', 'src/platform/file_save.h', 'vendor/pt23f/raw/ptfont.raw', 'src/core/project.h', 'src/core/mod_project.h', 'src/core/document.h', 'src/core/safe_save.h', 'src/core/pattern.h', 'src/core/slices.h', 'src/core/mod_inspect.h', 'src/native/mod_guard.s', 'tests/native_guard_harness.s'})},
               'guard_cases': manifest}
     (out / 'core-build.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report['binaries'], indent=2))

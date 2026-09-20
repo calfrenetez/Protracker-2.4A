@@ -53,8 +53,8 @@ DISK OP. > SAVE MOD / Control-Shift-M exports strictly lossless classic MODs.
 Control-R or a P/A/M header letter opens CHANNEL: routes, mute and solo share undo
 and project saves. P/A/M chooses route, U mute, S solo, Escape closes the page.
 Classic Paula playback applies mute/solo live; MOD export refuses saved flags.
-SAMPLER/Control-L opens WAV import/export, waveform selection and undoable edits.
-In SAMPLER: L load, W export WAV, R reverse, N normalize, D DC removal, G/H gain
+SAMPLER/Control-L opens WAV/IFF import/export, waveform selection and undoable edits.
+In SAMPLER: L load WAV/IFF, W export WAV, Shift-W export IFF, R reverse, N normalize, D DC removal, G/H gain
 x2 or /2, I/O fades, A all. Two clicks select a frame range. Control-S saves the
 project. High-resolution samples retain their precision; Paula audition requires
 compatible classic samples. Sample changes stop the old playback snapshot.
@@ -62,7 +62,7 @@ Tab cycles SAMPLER/LOOPS/SLICES/RANGE. LOOPS: F forward, P pingpong, O off, B ba
 crossfade, U select loop, [/] fade length. SLICES: M add range start, D delete,
 C clear, T auto proposal, P apply, X cancel; [/] threshold, up/down gap, Z zero
 crossing. Proposals do not change the project until applied. Loop/slice edits
-share undo and persist in PTG. Pingpong and slice-trigger playback remain pending.
+share undo and persist in PTG. LOOPS SAVE IFF / W exports compatible mono8 samples. Pingpong and slice-trigger playback remain pending.
 RANGE: I/O zoom, left/right pan, F fit, V zoom selection, S/E exact frame entry.
 FORMAT (C from SAMPLER/RANGE): 1/2/3 selects 8/16/24 bits, R enters rate, P applies.
 Conversion covers the whole sample, scales loops/markers, and shares undo.

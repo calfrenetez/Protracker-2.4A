@@ -160,6 +160,12 @@ static void sampler_controls(struct pt_editor *e)
     e->load_pending=1;e->quit_pending=1;
     assert(pt_editor_key(e,0x18,9)==PT_UI_SAMPLE_LOAD && !e->load_pending && !e->quit_pending);
     assert(pt_editor_click(e,400,30)==PT_UI_SAMPLE_SAVE);
+    assert(pt_editor_key(e,0x11,1)==PT_UI_SAMPLE_SVX);
+    assert(pt_editor_key(e,0x11,0)==PT_UI_SAMPLE_SAVE);
+    pt_editor_key(e,0x42,0);assert(e->panel==6);
+    assert(pt_editor_click(e,520,65)==PT_UI_SAMPLE_SVX && e->panel==6);
+    assert(pt_editor_key(e,0x11,0)==PT_UI_SAMPLE_SVX);
+    pt_editor_click(e,250,10);assert(e->panel==5);
     assert(pt_editor_click(e,500,30)==PT_UI_AUDITION);
     e->editing=1;pt_editor_key(e,0x31,0);assert(!pt_editor_dirty(e));
     pt_editor_click(e,10,260);assert(e->sample_marking);

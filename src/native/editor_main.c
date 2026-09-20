@@ -59,6 +59,24 @@ static void save_sample(struct pt_editor *e,const char *path)
     pt_editor_status(e,result==PT_SAVE_OK?"WAV EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED":"WAV EXPORT REFUSED OR FAILED - DESTINATION PRESERVED");
     printf("EDITOR WAV result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
 }
+static int svx_eligible(struct pt_editor *e)
+{
+    size_t size;
+    if(!e->sample || e->sample>e->project->sample_count || pt_sampler_svx_size(&e->project->samples[e->sample-1],&size)!=PT_SVX_OK) {
+        pt_editor_status(e,"IFF NEEDS MONO8 <=65535HZ; NO SLICES/FINE/PINGPONG");return 0;
+    }
+    return 1;
+}
+static void save_svx(struct pt_editor *e,const char *path)
+{
+    size_t n,w;uint8_t *bytes;enum pt_save_result result;const struct pt_sample *sample=&e->project->samples[e->sample-1];
+    if(!svx_eligible(e) || pt_sampler_svx_size(sample,&n)!=PT_SVX_OK)return;
+    bytes=malloc(n);if(!bytes) {pt_editor_status(e,"IFF EXPORT: OUT OF MEMORY");return;}
+    if(pt_sampler_svx_encode(sample,bytes,n,&w)!=PT_SVX_OK || w!=n) {free(bytes);pt_editor_status(e,"IFF EXPORT FAILED - SAMPLE PRESERVED");return;}
+    result=pt_file_save_new(path,bytes,n);free(bytes);
+    pt_editor_status(e,result==PT_SAVE_OK?"IFF EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED":"IFF EXPORT REFUSED OR FAILED - DESTINATION PRESERVED");
+    printf("EDITOR IFF result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
+}
 static void save(struct pt_editor *e,const char *path)
 {
     size_t n,w;uint8_t *bytes;enum pt_save_result result;
@@ -137,7 +155,7 @@ static int conversion_progress(void *context,uint32_t done,uint32_t total)
 int main(int argc,char **argv)
 {
     struct pt_view_cache view_cache={0};
-    struct pt_paula audio={0};char load_path[1024]="",save_path[1024]="new-project.ptg",mod_path[1024]="new-module.mod",sample_path[1024]="",wav_path[1024]="new-sample.wav",chosen_path[1024];
+    struct pt_paula audio={0};char load_path[1024]="",save_path[1024]="new-project.ptg",mod_path[1024]="new-module.mod",sample_path[1024]="",wav_path[1024]="new-sample.wav",svx_path[1024]="new-sample.iff",chosen_path[1024];
     struct pt_allocator allocator={NULL,allocate,release};struct pt_document doc;
     struct pt_editor *editor=NULL;struct Screen *screen=NULL;struct Window *window=NULL;
     struct BitMap bitmap;struct pt_canvas canvas;unsigned plane;uint8_t *pixels=NULL;int rc=20,running=1,redraw=1;
@@ -256,6 +274,12 @@ int main(int argc,char **argv)
                     if(selected==1) {strcpy(mod_path,chosen_path);save_mod(editor,mod_path,report.bytes);}
                     else pt_editor_status(editor,selected==0?"MOD EXPORT CANCELLED - PROJECT PRESERVED":"MOD REQUESTER UNAVAILABLE OR PATH TOO LONG");
                 }
+            }
+            if(action==PT_UI_SAMPLE_SVX && svx_eligible(editor)) {
+                int selected;printf("EDITOR REQUEST iff\n");fflush(stdout);
+                selected=pt_file_request(window,5,svx_path,chosen_path,sizeof(chosen_path));view_cache.valid=0;
+                if(selected==1) {strcpy(svx_path,chosen_path);save_svx(editor,chosen_path);}
+                else pt_editor_status(editor,selected==0?"IFF EXPORT CANCELLED - EDITS PRESERVED":"IFF REQUESTER UNAVAILABLE OR PATH TOO LONG");
             }
             if(action==PT_UI_SAMPLE_LOAD || action==PT_UI_SAMPLE_SAVE) {
                 int importing=action==PT_UI_SAMPLE_LOAD,selected;

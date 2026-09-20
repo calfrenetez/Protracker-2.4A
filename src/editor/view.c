@@ -291,8 +291,8 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
     if(e->panel>=5) {
         static const char *tabs[4]={"SAMPLER","LOOPS","SLICES","RANGE"};
         static const char *ops[5][4][3]={
-            {{"LOAD WAV","SAVE WAV","AUDITION"},{"REVERSE","NORMALIZE","DC OFFS"},{"GAIN /2","GAIN X2","FORMAT"},{"FADE IN","FADE OUT","ALL"}},
-            {{"FORWARD","PINGPONG","OFF"},{"FADE -","","FADE +"},{"BAKE FADE","USE LOOP","BACK"},{"ALL","UNDO","REDO"}},
+            {{"LOAD SMP","SAVE WAV","AUDITION"},{"REVERSE","NORMALIZE","DC OFFS"},{"GAIN /2","GAIN X2","FORMAT"},{"FADE IN","FADE OUT","ALL"}},
+            {{"FORWARD","PINGPONG","OFF"},{"FADE -","","FADE +"},{"BAKE FADE","USE LOOP","SAVE IFF"},{"ALL","UNDO","REDO"}},
             {{"ADD START","DELETE","CLEAR"},{"AUTO","APPLY","CANCEL"},{"THRESH -","","THRESH +"},{"GAP -","","GAP +"}},
             {{"ZOOM IN","ZOOM OUT","FIT ALL"},{"PAN <","ZOOM SEL","PAN >"},{"START -","","START +"},{"END -","","END +"}},
             {{"8 BIT","16 BIT","24 BIT"},{"8287 HZ","22050 HZ","44100 HZ"},{"48000 HZ","","BACK"},{"APPLY","UNDO","REDO"}}};

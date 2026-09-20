@@ -23,7 +23,7 @@ static int playback_project(const struct pt_project *p,struct pt_project *copy)
 {
     unsigned i;
     if(pt_project_validate(p,NULL)!=PT_PROJECT_OK)return 0;
-    *copy=*p;
+    *copy=*p;copy->title[20]=0; /* Display text never changes classic replay audio. */
     for(i=0;i<copy->channels.count;++i) {
         copy->channels.track[i].muted=0;copy->channels.track[i].solo=0;
         copy->channels.track[i].group=0;copy->channels.track[i].midi_channel=(uint8_t)(i+1);

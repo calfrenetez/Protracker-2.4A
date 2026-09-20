@@ -74,6 +74,17 @@ int main(int argc,char **argv)
     memset(doc.project.channels.track[0].name,0,sizeof(doc.project.channels.track[0].name));
     CHECK(pt_mod_export_direct(&doc.project,roundtrip,(size_t)length,&written)==PT_PROJECT_OK && !memcmp(input,roundtrip,written));
     puts("CHANNEL DETAILS AUDIO PASS: saved names/groups/MIDI assignment preserve Paula replay, strict export refuses metadata, enhanced pan still refused");
+    {char original_title[32];memcpy(original_title,doc.project.title,32);
+        strcpy(doc.project.title,"LONG SONG TITLE OVER MOD LIMIT");
+        CHECK(pt_mod_export_analyse(&doc.project,&report)==PT_PROJECT_OK && report.issues==PT_EXPORT_METADATA);
+        CHECK(!pt_paula_play(&a,&doc.project,0,0,0));Delay(10);pt_paula_poll(&a,&state);
+        CHECK(state.active && state.period[0]==428);
+        strcpy(doc.project.title,"ANOTHER LONG TITLE FOR THE SONG");CHECK(!pt_paula_sync(&a,&doc.project));
+        CHECK(!strcmp(doc.project.title,"ANOTHER LONG TITLE FOR THE SONG"));pt_paula_stop(&a);
+        memcpy(doc.project.title,original_title,32);
+        CHECK(pt_mod_export_direct(&doc.project,roundtrip,(size_t)length,&written)==PT_PROJECT_OK && !memcmp(input,roundtrip,written));
+        puts("TITLE AUDIO PASS: long titles preserve playback and source metadata; strict export remains lossless");
+    }
     /* Repeated starts reset all persistent voice/effect state. */
     for(i=0;i<3;++i) {CHECK(!pt_paula_play(&a,&doc.project,0,0,0));Delay(10);pt_paula_poll(&a,&state);CHECK(state.period[0]==428 && state.ticks>=6);pt_paula_stop(&a);}
     /* Live row publishing changes future replay without replacing DMA sample memory. */

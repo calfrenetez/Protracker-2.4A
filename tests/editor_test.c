@@ -194,6 +194,12 @@ static void sampler_controls(struct pt_editor *e)
     assert(count);before=malloc(count*sizeof(*before));assert(before);memcpy(before,pcm->data,count*sizeof(*before));
     {
         char name[32];unsigned i,volume=p->samples[0].volume;int fine=p->samples[0].finetune;
+        {char title[32];memcpy(title,p->title,sizeof(title));pt_editor_click(e,200,180);assert(e->name_entry==3);
+            for(i=0;i<40;++i)pt_editor_key(e,0x31,0);assert(strlen(e->name_text)==31);
+            pt_editor_key(e,0x45,0);assert(!memcmp(title,p->title,32) && !pt_editor_dirty(e));
+            pt_editor_key(e,0x14,9);pt_editor_key(e,0x36,0);pt_editor_key(e,0x12,0);pt_editor_key(e,0x11,0);pt_editor_key(e,0x44,0);
+            assert(!strcmp(p->title,"NEW") && pt_editor_dirty(e));pt_editor_key(e,0x31,8);assert(!memcmp(title,p->title,32));
+        }
         memcpy(name,p->samples[0].name,sizeof(name));pt_editor_click(e,200,200);assert(e->name_entry==2);
         for(i=0;i<40;++i)pt_editor_key(e,0x32,0);assert(strlen(e->name_text)==31);
         pt_editor_click(e,520,65);pt_editor_key(e,0x42,0);assert(e->sample==1 && e->name_entry==2);
@@ -400,7 +406,7 @@ int main(int argc,char **argv)
         struct pt_view_rect areas[PT_VIEW_DIRTY_MAX];unsigned step,p,j,y,x,n;
         static const unsigned actions[]={0x4d,0x4e,0x4f,0x42,0x4c,0x50,0x51,0x52,0x53,0x40,0x31,0x32,0x46,0x0c,0x0b,0x5a,0x5b};
         for(p=0;p<4;++p) {incremental.planes[p]=calloc(1,PT_VIEW_PLANE_BYTES);shown.planes[p]=calloc(1,PT_VIEW_PLANE_BYTES);assert(incremental.planes[p] && shown.planes[p]);}
-        for(step=0;step<225;++step) {
+        for(step=0;step<239;++step) {
             if(step && step<100)pt_editor_key(e,actions[(step-1)%(sizeof(actions)/sizeof(actions[0]))],0);
             if(step==156) {size_t size;uint8_t *bytes=readfile(argv[4],&size);assert(pt_editor_source_load(e,bytes,size)==PT_EDIT_OK);free(bytes);}
             if(step==157)pt_editor_click(e,520,30);
@@ -471,6 +477,20 @@ int main(int argc,char **argv)
             if(step==222)pt_editor_key(e,0x45,0);
             if(step==223)pt_editor_key(e,0x31,8);
             if(step==224)pt_editor_key(e,0x31,9);
+            if(step==225)pt_editor_click(e,200,180);
+            if(step==226)pt_editor_key(e,0x36,0);
+            if(step==227)pt_editor_key(e,0x12,0);
+            if(step==228)pt_editor_key(e,0x11,0);
+            if(step==229)pt_editor_key(e,0x44,0);
+            if(step==230)pt_editor_key(e,0x31,8);
+            if(step==231)pt_editor_key(e,0x31,9);
+            if(step==232)pt_editor_key(e,0x14,9);
+            if(step==233)pt_editor_key(e,0x46,0);
+            if(step==234)pt_editor_key(e,0x45,0);
+            if(step==235)pt_editor_key(e,0x14,9);
+            if(step==236)pt_editor_key(e,0x46,0);
+            if(step==237)pt_editor_key(e,0x44,0);
+            if(step==238)pt_editor_key(e,0x31,8);
             if(step==143) {e->panel=5;pt_editor_key(e,0x32,0);}
             if(step==144)pt_editor_key(e,3,0);
             if(step==145)pt_editor_key(e,0x21,0);

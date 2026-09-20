@@ -49,6 +49,13 @@ int main(int argc,char **argv)
         memcpy(h+26,before,4);
         assert(pt_mod_export_direct(&p,roundtrip,(size_t)length,&w)==PT_PROJECT_OK && !memcmp(mod,roundtrip,w));
     }
+    /* Full enhanced titles survive PTG; strict MOD export does not truncate. */
+    {char title[32],long_title[32];memcpy(title,p.title,32);memset(long_title,'T',31);long_title[31]=0;memcpy(p.title,long_title,32);
+        assert(pt_mod_export_analyse(&p,&report)==PT_PROJECT_OK && report.issues==PT_EXPORT_METADATA);
+        assert(pt_project_size(&p,&n)==PT_PROJECT_OK && pt_project_encode(&p,project,n,&w)==PT_PROJECT_OK);
+        assert(pt_project_decode(project,n,&s,&p)==PT_PROJECT_OK && !memcmp(p.title,long_title,32));
+        memcpy(p.title,title,32);assert(pt_mod_export_direct(&p,roundtrip,(size_t)length,&w)==PT_PROJECT_OK && !memcmp(mod,roundtrip,w));
+    }
     /* A saved MIDI assignment is metadata even before its route becomes MIDI. */
     p.channels.track[0].midi_channel=16;
     assert(pt_mod_export_analyse(&p,&report)==PT_PROJECT_OK && report.issues==PT_EXPORT_METADATA);

@@ -6,6 +6,31 @@ static struct pt_event events[2048],snapshot[2048],clip_events[1024];
 static struct pt_event_update updates[1024];
 static struct pt_event_change changes[32];
 static struct pt_pattern_command commands[3];
+static void titles(void)
+{
+    struct pt_project p;struct pt_pattern_history h,before;struct pt_channel channel;char invalid[32],title[32];unsigned i;
+    memset(&p,0,sizeof(p));pt_channels_init(&p.channels);p.events=events;p.pattern_count=1;
+    memset(events,0,256*sizeof(*events));assert(pt_pattern_history_init(&h,&p,commands,3,changes,8)==PT_EDIT_OK);
+    memset(invalid,'X',sizeof(invalid));assert(pt_pattern_title_apply(&p,&h,invalid)==PT_EDIT_INVALID && !h.count);
+    assert(pt_pattern_title_apply(&p,&h,"FIRST")==PT_EDIT_OK && !h.used);
+    channel=p.channels.track[0];channel.muted=1;assert(pt_pattern_channel_apply(&p,&h,0,&channel)==PT_EDIT_OK);
+    assert(pt_pattern_title_apply(&p,&h,"SECOND")==PT_EDIT_OK && !h.used);pt_pattern_mark_saved(&h);
+    before=h;memcpy(title,p.title,sizeof(title));strcpy(p.title,"OUTSIDE");
+    assert(pt_pattern_undo(&p,&h,-1)==PT_EDIT_CONFLICT && !memcmp(&before,&h,sizeof(h)));memcpy(p.title,title,sizeof(title));
+    assert(pt_pattern_undo(&p,&h,-1)==PT_EDIT_OK && !strcmp(p.title,"FIRST"));before=h;
+    assert(pt_pattern_title_apply(&p,&h,p.title)==PT_EDIT_OK && !memcmp(&before,&h,sizeof(h)));
+    assert(pt_pattern_undo(&p,&h,1)==PT_EDIT_OK && !pt_pattern_dirty(&h));
+    for(i=0;i<3;++i)assert(pt_pattern_undo(&p,&h,-1)==PT_EDIT_OK);
+    assert(!p.title[0] && !p.channels.track[0].muted);
+    /* The input may reside in a redo command which reserve will discard. */
+    assert(pt_pattern_title_apply(&p,&h,commands[2].data.titles[1])==PT_EDIT_OK && !strcmp(p.title,"SECOND") && h.count==1);
+    for(i=0;i<10;++i) {snprintf(title,sizeof(title),"TITLE %u",i);assert(pt_pattern_title_apply(&p,&h,title)==PT_EDIT_OK);}
+    assert(h.count==3 && !h.used);for(i=0;i<3;++i)assert(pt_pattern_undo(&p,&h,-1)==PT_EDIT_OK);
+    assert(!strcmp(p.title,"TITLE 6") && pt_pattern_undo(&p,&h,-1)==PT_EDIT_END);
+    h.next_revision=UINT32_MAX;before=h;assert(pt_pattern_title_apply(&p,&h,"FULL")==PT_EDIT_CAPACITY && !memcmp(&before,&h,sizeof(h)));
+    memset(commands[0].data.titles[1],'X',32);assert(pt_pattern_undo(&p,&h,1)==PT_EDIT_INVALID && !strcmp(p.title,"TITLE 6"));
+    pt_pattern_history_release(&h);
+}
 int main(void)
 {
     struct pt_project p;struct pt_pattern_history h,before;struct pt_block block={clip_events,1024,0,0};unsigned i;
@@ -96,5 +121,6 @@ int main(void)
         p.channels.count=15;assert(pt_pattern_undo(&p,&h,-1)==PT_EDIT_INVALID);p.channels.count=16;
     }
     p.events=snapshot;assert(pt_pattern_undo(&p,&h,1)==PT_EDIT_INVALID);
+    titles();
     puts("PATTERN PASS: 16-channel block edits, exact period/MIDI transpose, OFF retention, clone, bounded undo/redo, dirty tracking, eviction and conflict/no-op safety");return 0;
 }

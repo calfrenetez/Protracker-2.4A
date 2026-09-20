@@ -266,7 +266,7 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
     panel(c,230,PT_EDITOR_SCOPE_BOTTOM,408,PT_EDITOR_CONTROL_HEIGHT,GREY);spaced(c,font,248,159,"PROTRACKER 2.4G",WHITE,10);
     spaced(c,font,456,159,"2.3F: 8BITBUBSY",WHITE,10);
     panel(c,2,174,636,19,GREY);spaced(c,font,26,179,"SONGNAME:",WHITE,10);
-    snprintf(s,sizeof(s),"%.32s",p->title);spaced(c,font,128,179,s,NAVY,12);label(c,font,590,174,48,19,"LOAD",0);
+    snprintf(s,sizeof(s),"%.31s%s",e->name_entry==3?e->name_text:p->title,e->name_entry==3?"_":"");spaced(c,font,128,179,s,e->name_entry==3?YELLOW:NAVY,12);label(c,font,590,174,48,19,"LOAD",0);
     panel(c,2,193,636,18,GREY);spaced(c,font,16,198,"SAMPLENAME:",WHITE,10);
     snprintf(s,sizeof(s),"%.31s%s",e->name_entry==2?e->name_text:sample?sample->name:"",e->name_entry==2?"_":"");spaced(c,font,128,198,s,e->name_entry==2?YELLOW:NAVY,12);
     panel(c,590,193,48,18,GREY);snprintf(s,sizeof(s),"%luK",(unsigned long)((bytes+1023)/1024));

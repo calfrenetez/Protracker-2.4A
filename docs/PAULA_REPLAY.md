@@ -123,3 +123,8 @@ project and saved PTG; strict MOD disk export refuses their loss. Native tests
 cover initial and live playback with these properties and preservation of the
 original project. Non-default pan remains unsupported by this fixed-placement
 Paula backend and is still refused/stopped rather than silently approximated.
+
+Song titles (dev24): the private MOD replay snapshot truncates only its display
+name to 20 characters. The project's complete 31-character title remains intact,
+and strict disk export continues to refuse titles exceeding MOD's limit. Changing
+a title cannot alter audio parameters or interrupt otherwise compatible playback.

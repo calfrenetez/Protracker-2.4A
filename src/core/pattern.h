@@ -11,12 +11,15 @@ struct pt_edit_resource {
     int (*apply)(void *,struct pt_project *,int);
     void (*discard)(void *);
 };
-enum pt_command_kind {PT_COMMAND_EVENTS,PT_COMMAND_CHANNEL,PT_COMMAND_RESOURCE};
+enum pt_command_kind {PT_COMMAND_EVENTS,PT_COMMAND_CHANNEL,PT_COMMAND_RESOURCE,PT_COMMAND_TITLE};
 struct pt_pattern_command {
     size_t offset,count;uint32_t before_revision,after_revision;
     uint8_t kind,channel;
-    struct pt_channel channel_before,channel_after;
-    struct pt_edit_resource resource;
+    union {
+        struct pt_channel channels[2]; /* before, after */
+        struct pt_edit_resource resource;
+        char titles[2][PT_PROJECT_NAME];
+    } data;
 };
 struct pt_pattern_history {
     struct pt_event *bound_events;
@@ -42,6 +45,8 @@ enum pt_edit_result pt_pattern_apply(struct pt_project *,struct pt_pattern_histo
  * The candidate is copied before journal eviction; project fields may alias it. */
 enum pt_edit_result pt_pattern_channel_apply(struct pt_project *,struct pt_pattern_history *,
     unsigned,const struct pt_channel *);
+/* Project titles share the fixed-capacity journal, without allocating PCM. */
+enum pt_edit_result pt_pattern_title_apply(struct pt_project *,struct pt_pattern_history *,const char *);
 enum pt_edit_result pt_pattern_undo(struct pt_project *,struct pt_pattern_history *,int);
 /* Ownership transfers only on success. apply returns nonzero on success. */
 enum pt_edit_result pt_pattern_resource_apply(struct pt_project *,struct pt_pattern_history *,const struct pt_edit_resource *);

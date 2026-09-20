@@ -558,3 +558,18 @@ A sample metadata change stops an active old audio snapshot, as other sample
 edits do. Replay/audition can then start with the updated attributes. Native
 validation verifies the attributes and exported files; physical pitch, audio
 quality and enhanced playback remain separate acceptance gates.
+
+
+## Song-title editing
+
+Click the song-name strip or press Control-Shift-T to edit a title of up to 31
+characters. Return applies one shared undo command; Escape cancels without losing
+redo. The text input and modal target rules match sample-name editing. Empty titles
+are allowed. Titles join note, channel and sample changes in chronological undo;
+they do not allocate or copy PCM. The fixed-capacity command payload uses a union
+for channel, title and external-resource commands.
+
+PTG retains all 31 characters. Strict MOD export refuses titles longer than its
+20-character field; it never silently truncates the saved song. The private Paula
+replay snapshot limits its unused display title to 20 characters so a long project
+title cannot interrupt compatible audio. The live project title remains intact.

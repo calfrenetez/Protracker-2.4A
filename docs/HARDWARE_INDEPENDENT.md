@@ -428,3 +428,11 @@ trips and complete release. Actual native editing exports a MOD differing only
 in the expected name/volume/finetune header bytes. Evidence is retained under
 `evidence/enhanced-editor/dev23/`. This proves ownership and software behaviour;
 large-sample 68030 latency, physical audio and enhanced audition remain untested.
+
+## Song-title milestone (dev24)
+
+SONGNAME / Control-Shift-T edits a 31-character title through the common journal.
+Host and native tests cover mixed undo, bounds, cancellation, conflicts, exact
+file changes and reopen identity. Long titles keep playing through the private
+Paula snapshot while strict MOD disk export refuses metadata loss. Evidence is
+retained in `evidence/enhanced-editor/dev24/`; the main-screen layout is unchanged.

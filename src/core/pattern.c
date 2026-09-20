@@ -27,7 +27,8 @@ static int valid(const struct pt_project *p,const struct pt_pattern_history *h)
         if(c->offset!=used || c->count>h->used-used)return 0;
         if(c->kind==PT_COMMAND_EVENTS) {if(!c->count)return 0;}
         else if(c->kind==PT_COMMAND_CHANNEL) {if(c->count || c->channel>=p->channels.count)return 0;}
-        else if(c->kind==PT_COMMAND_RESOURCE) {if(c->count || !c->resource.context || !c->resource.apply || !c->resource.discard)return 0;}
+        else if(c->kind==PT_COMMAND_TITLE) {if(c->count || !memchr(c->data.titles[0],0,PT_PROJECT_NAME) || !memchr(c->data.titles[1],0,PT_PROJECT_NAME))return 0;}
+        else if(c->kind==PT_COMMAND_RESOURCE) {if(c->count || !c->data.resource.context || !c->data.resource.apply || !c->data.resource.discard)return 0;}
         else return 0;
         used+=c->count;
     }
@@ -53,7 +54,7 @@ enum pt_edit_result pt_pattern_history_init(struct pt_pattern_history *h,const s
     h->command_capacity=command_capacity;h->change_capacity=change_capacity;h->next_revision=1;return PT_EDIT_OK;
 }
 static void discard(struct pt_pattern_command *c)
-{if(c->kind==PT_COMMAND_RESOURCE)c->resource.discard(c->resource.context);}
+{if(c->kind==PT_COMMAND_RESOURCE)c->data.resource.discard(c->data.resource.context);}
 void pt_pattern_history_release(struct pt_pattern_history *h)
 {
     size_t i;if(!h)return;
@@ -113,9 +114,22 @@ enum pt_edit_result pt_pattern_channel_apply(struct pt_project *p,struct pt_patt
     if(!memcmp(&value,&p->channels.track[index],sizeof(value)))return PT_EDIT_OK;
     if(h->next_revision==UINT32_MAX)return PT_EDIT_CAPACITY;
     command=reserve(h,0);command->kind=PT_COMMAND_CHANNEL;command->channel=(uint8_t)index;
-    command->channel_before=p->channels.track[index];command->channel_after=value;
+    command->data.channels[0]=p->channels.track[index];command->data.channels[1]=value;
     p->channels.track[index]=value;h->revision=command->after_revision;++h->count;h->cursor=h->count;
     return PT_EDIT_OK;
+}
+enum pt_edit_result pt_pattern_title_apply(struct pt_project *p,struct pt_pattern_history *h,const char *name)
+{
+    char value[PT_PROJECT_NAME];size_t length=0;struct pt_pattern_command *command;
+    if(!valid(p,h) || !name || !memchr(p->title,0,sizeof(p->title)))return PT_EDIT_INVALID;
+    while(length<sizeof(value) && name[length])++length;
+    if(length==sizeof(value))return PT_EDIT_INVALID;
+    if(!strcmp(p->title,name))return PT_EDIT_OK;
+    if(h->next_revision==UINT32_MAX)return PT_EDIT_CAPACITY;
+    memset(value,0,sizeof(value));memcpy(value,name,length);
+    command=reserve(h,0);command->kind=PT_COMMAND_TITLE;
+    memcpy(command->data.titles[0],p->title,sizeof(p->title));memcpy(command->data.titles[1],value,sizeof(value));
+    memcpy(p->title,value,sizeof(value));h->revision=command->after_revision;++h->count;h->cursor=h->count;return PT_EDIT_OK;
 }
 enum pt_edit_result pt_pattern_resource_apply(struct pt_project *p,struct pt_pattern_history *h,const struct pt_edit_resource *r)
 {
@@ -124,7 +138,7 @@ enum pt_edit_result pt_pattern_resource_apply(struct pt_project *p,struct pt_pat
     if(h->next_revision==UINT32_MAX)return PT_EDIT_CAPACITY;
     copy=*r;
     if(!copy.apply(copy.context,p,1))return PT_EDIT_CONFLICT;
-    command=reserve(h,0);command->kind=PT_COMMAND_RESOURCE;command->resource=copy;
+    command=reserve(h,0);command->kind=PT_COMMAND_RESOURCE;command->data.resource=copy;
     h->revision=command->after_revision;++h->count;h->cursor=h->count;return PT_EDIT_OK;
 }
 enum pt_edit_result pt_pattern_undo(struct pt_project *p,struct pt_pattern_history *h,int direction)
@@ -135,14 +149,19 @@ enum pt_edit_result pt_pattern_undo(struct pt_project *p,struct pt_pattern_histo
     command=&h->commands[direction<0?h->cursor-1:h->cursor];n=event_count(p);
     if(command->kind==PT_COMMAND_CHANNEL) {
         struct pt_channels next=p->channels;
-        const struct pt_channel *expected=direction<0?&command->channel_after:&command->channel_before;
-        const struct pt_channel *replacement=direction<0?&command->channel_before:&command->channel_after;
+        const struct pt_channel *expected=direction<0?&command->data.channels[1]:&command->data.channels[0];
+        const struct pt_channel *replacement=direction<0?&command->data.channels[0]:&command->data.channels[1];
         if(memcmp(&p->channels.track[command->channel],expected,sizeof(*expected)))return PT_EDIT_CONFLICT;
         next.track[command->channel]=*replacement;
         if(pt_channels_validate(&next)!=PT_CHANNEL_OK)return PT_EDIT_CONFLICT;
         p->channels.track[command->channel]=*replacement;
     }
-    if(command->kind==PT_COMMAND_RESOURCE && !command->resource.apply(command->resource.context,p,direction))return PT_EDIT_CONFLICT;
+    if(command->kind==PT_COMMAND_TITLE) {
+        const char *expected=command->data.titles[direction<0?1:0],*replacement=command->data.titles[direction<0?0:1];
+        if(memcmp(p->title,expected,sizeof(p->title)))return PT_EDIT_CONFLICT;
+        memcpy(p->title,replacement,sizeof(p->title));
+    }
+    if(command->kind==PT_COMMAND_RESOURCE && !command->data.resource.apply(command->data.resource.context,p,direction))return PT_EDIT_CONFLICT;
     for(i=0;i<command->count;++i) {
         struct pt_event_change *c=&h->changes[command->offset+i];
         const struct pt_event *expected=direction<0?&c->after:&c->before,*replacement=direction<0?&c->before:&c->after;

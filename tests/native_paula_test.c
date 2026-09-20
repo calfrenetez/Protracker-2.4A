@@ -62,6 +62,18 @@ int main(int argc,char **argv)
     CHECK(pt_mod_export_direct(&doc.project,roundtrip,(size_t)length,&written)==PT_PROJECT_OK);
     CHECK(written==(size_t)length && !memcmp(input,roundtrip,written));
     puts("CHANNEL AUDIO PASS: muted start, live unmute, solo, shared solo, mute wins, immutable notes/samples, strict export refusal");
+    /* Organisation metadata never stops classic audio or leaks into its song. */
+    strcpy(doc.project.channels.track[0].name,"BASS");doc.project.channels.track[0].group=15;doc.project.channels.track[0].midi_channel=16;
+    CHECK(pt_mod_export_analyse(&doc.project,&report)==PT_PROJECT_OK && report.issues==PT_EXPORT_METADATA);
+    CHECK(!pt_paula_play(&a,&doc.project,0,0,0));Delay(10);pt_paula_poll(&a,&state);
+    CHECK(state.active && state.period[0]==428 && state.volume[0]==24);
+    strcpy(doc.project.channels.track[0].name,"BASS TWO");CHECK(!pt_paula_sync(&a,&doc.project));
+    CHECK(doc.project.channels.track[0].group==15 && doc.project.channels.track[0].midi_channel==16 && !strcmp(doc.project.channels.track[0].name,"BASS TWO"));
+    doc.project.channels.track[0].pan=128;CHECK(pt_paula_sync(&a,&doc.project)!=NULL);pt_paula_stop(&a);
+    doc.project.channels.track[0].pan=0;doc.project.channels.track[0].group=0;doc.project.channels.track[0].midi_channel=1;
+    memset(doc.project.channels.track[0].name,0,sizeof(doc.project.channels.track[0].name));
+    CHECK(pt_mod_export_direct(&doc.project,roundtrip,(size_t)length,&written)==PT_PROJECT_OK && !memcmp(input,roundtrip,written));
+    puts("CHANNEL DETAILS AUDIO PASS: saved names/groups/MIDI assignment preserve Paula replay, strict export refuses metadata, enhanced pan still refused");
     /* Repeated starts reset all persistent voice/effect state. */
     for(i=0;i<3;++i) {CHECK(!pt_paula_play(&a,&doc.project,0,0,0));Delay(10);pt_paula_poll(&a,&state);CHECK(state.period[0]==428 && state.ticks>=6);pt_paula_stop(&a);}
     /* Live row publishing changes future replay without replacing DMA sample memory. */

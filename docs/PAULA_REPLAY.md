@@ -116,3 +116,10 @@ of redo, exact saved CHAN bytes/CRC with unrelated data unchanged, byte-identica
 reopening, live mute/solo/undo/redo, and saved mute applied after playback restart.
 Native register-output observations remain distinct from captured/listened audio
 or physical hardware acceptance.
+
+Channel details (dev21): names, groups and dormant MIDI-channel assignments are
+removed only from the private classic replay snapshot. They remain in the live
+project and saved PTG; strict MOD disk export refuses their loss. Native tests
+cover initial and live playback with these properties and preservation of the
+original project. Non-default pan remains unsupported by this fixed-placement
+Paula backend and is still refused/stopped rather than silently approximated.

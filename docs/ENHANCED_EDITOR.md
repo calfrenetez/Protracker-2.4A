@@ -91,6 +91,22 @@ to allocate/open a requester leaves the document intact. The dialogs follow the
   route change during classic playback stops that backend. Classic four-channel
   Paula playback supports live mute/solo and undo/redo; mixed replay is pending.
   Saved mute/solo are enhanced metadata, so strict MOD export refuses them.
+  DETAILS / D opens channel pan, group, MIDI-channel and name controls. P enters
+  hexadecimal pan 00–FF (left–right); G enters group 00–0F (00 ungrouped); M enters
+  decimal MIDI channel 1–16; N edits the 15-character track name. Click the matching
+  button or name row for the same action. Return applies one shared undo command;
+  Escape cancels without disturbing redo. A new first character replaces the old
+  value; Backspace/Delete clears the initial value or removes the final character.
+  Names accept uppercase A–Z, digits, space, hyphen and period using Amiga raw-key
+  positions. Input is modal: navigation, transport, clicks and shortcuts cannot
+  change the selected channel until Return/Escape. Details BACK/Escape returns to
+  the routing page; a second closes it. Names, groups, pan and MIDI assignment
+  persist in PTG, with chronological undo/redo. Group is organisational metadata;
+  enhanced pan and MIDI assignment are not yet connected to an audio/MIDI backend.
+  Classic Paula playback accepts names/groups/dormant MIDI assignment and retains
+  its physical stereo placement; changed pan still requires enhanced replay.
+  Strict MOD export refuses these
+  non-default enhanced values, including MIDI assignment on a Paula-routed track.
 - EDIT OP. / Control-E opens the block-editing panel; BACK / Control-E returns.
   MARK / Control-B starts a rectangle at the cursor. Move with arrows, Tab and
   page buttons, then COPY / Control-C freezes and copies the highlighted block.

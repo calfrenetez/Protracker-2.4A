@@ -150,6 +150,43 @@ static void channel_controls(struct pt_editor *e)
     pt_editor_key(e,0x31,8);assert(!p->channels.track[4].muted);
     pt_editor_key(e,0x31,8);assert(e->history.cursor==2);
 }
+static void channel_details(struct pt_editor *e)
+{
+    struct pt_project *p=e->project;struct pt_channel initial;unsigned i,selected;
+    struct pt_allocator a={NULL,allocate,release};struct pt_document reopened;uint8_t *bytes;size_t n,written;
+    assert(pt_editor_init(e,p));selected=p->channels.selected;initial=p->channels.track[selected];
+    pt_editor_key(e,0x13,8);pt_editor_click(e,500,50);assert(e->channel_details && !pt_editor_dirty(e));
+    pt_editor_key(e,0x19,0);assert(e->number_field==5);
+    pt_editor_key(e,0x23,0);pt_editor_key(e,0x23,0);pt_editor_key(e,0x23,0);
+    pt_editor_key(e,0x44,0);assert(e->number_field==5 && !pt_editor_dirty(e));
+    pt_editor_click(e,520,65);pt_editor_key(e,0x42,0);assert(p->channels.selected==selected);
+    pt_editor_key(e,0x41,0);pt_editor_key(e,0x44,0);assert(!e->number_field && p->channels.track[selected].pan==255);
+    pt_editor_click(e,400,30);assert(e->number_field==6);pt_editor_key(e,0x23,0);pt_editor_key(e,0x44,0);assert(p->channels.track[selected].group==15);
+    pt_editor_key(e,0x37,0);pt_editor_key(e,0x0a,0);pt_editor_key(e,0x44,0);assert(e->number_field==7);
+    pt_editor_key(e,0x41,0);pt_editor_key(e,1,0);pt_editor_key(e,7,0);pt_editor_key(e,0x44,0);assert(e->number_field==7);
+    pt_editor_key(e,0x41,0);pt_editor_key(e,6,0);pt_editor_key(e,0x44,0);assert(p->channels.track[selected].midi_channel==16);
+    pt_editor_click(e,250,50);assert(e->name_entry);pt_editor_key(e,0x21,8);assert(e->name_fresh);
+    pt_editor_key(e,0x35,0);pt_editor_key(e,0x20,0);pt_editor_key(e,0x21,0);pt_editor_key(e,0x21,0);
+    pt_editor_key(e,0x42,0);pt_editor_click(e,520,65);assert(p->channels.selected==selected);
+    pt_editor_key(e,0x44,0);assert(!strcmp(p->channels.track[selected].name,"BASS") && !e->name_entry);
+    assert(e->history.count==4);pt_editor_saved(e);
+    assert(pt_project_size(p,&n)==PT_PROJECT_OK);bytes=malloc(n);assert(bytes);
+    assert(pt_project_encode(p,bytes,n,&written)==PT_PROJECT_OK && written==n);
+    pt_document_init(&reopened,&a);assert(pt_document_load(&reopened,bytes,n,SIZE_MAX)==PT_PROJECT_OK);
+    assert(!memcmp(&reopened.project.channels,&p->channels,sizeof(p->channels)));free(bytes);pt_document_release(&reopened);
+    pt_editor_key(e,0x36,0);for(i=0;i<20;++i)pt_editor_key(e,0x32,0);assert(strlen(e->name_text)==15);
+    pt_editor_key(e,0x45,0);assert(!strcmp(p->channels.track[selected].name,"BASS") && !pt_editor_dirty(e));
+    pt_editor_key(e,0x36,0);pt_editor_key(e,0x46,0);pt_editor_key(e,0x44,0);assert(!p->channels.track[selected].name[0]);
+    pt_editor_key(e,0x31,8);assert(!pt_editor_dirty(e) && !strcmp(p->channels.track[selected].name,"BASS"));
+    for(i=0;i<4;++i)pt_editor_key(e,0x31,8);
+    assert(!memcmp(&p->channels.track[selected],&initial,sizeof(initial)));
+    for(i=0;i<4;++i)pt_editor_key(e,0x31,9);
+    assert(!pt_editor_dirty(e));
+    pt_editor_key(e,0x19,0);pt_editor_key(e,0x45,0);assert(!pt_editor_dirty(e));
+    pt_editor_key(e,0x45,0);assert(e->panel==4 && !e->channel_details);
+    pt_editor_key(e,0x22,0);assert(e->channel_details);pt_editor_click(e,520,87);assert(!e->channel_details);
+    pt_editor_key(e,0x45,0);assert(!e->panel);
+}
 static void sampler_controls(struct pt_editor *e)
 {
     struct pt_project *p=e->project;const struct pt_pcm *pcm;int32_t *before;size_t count;unsigned i,c;
@@ -349,7 +386,7 @@ int main(int argc,char **argv)
         struct pt_view_rect areas[PT_VIEW_DIRTY_MAX];unsigned step,p,j,y,x,n;
         static const unsigned actions[]={0x4d,0x4e,0x4f,0x42,0x4c,0x50,0x51,0x52,0x53,0x40,0x31,0x32,0x46,0x0c,0x0b,0x5a,0x5b};
         for(p=0;p<4;++p) {incremental.planes[p]=calloc(1,PT_VIEW_PLANE_BYTES);shown.planes[p]=calloc(1,PT_VIEW_PLANE_BYTES);assert(incremental.planes[p] && shown.planes[p]);}
-        for(step=0;step<169;++step) {
+        for(step=0;step<190;++step) {
             if(step && step<100)pt_editor_key(e,actions[(step-1)%(sizeof(actions)/sizeof(actions[0]))],0);
             if(step==156) {size_t size;uint8_t *bytes=readfile(argv[4],&size);assert(pt_editor_source_load(e,bytes,size)==PT_EDIT_OK);free(bytes);}
             if(step==157)pt_editor_click(e,520,30);
@@ -364,6 +401,27 @@ int main(int argc,char **argv)
             if(step==166)pt_editor_key(e,0x45,0);
             if(step==167)pt_editor_key(e,0x31,8);
             if(step==168)pt_editor_key(e,0x31,9);
+            if(step==169)pt_editor_key(e,0x13,8);
+            if(step==170)pt_editor_click(e,520,50);
+            if(step==171)pt_editor_click(e,250,30);
+            if(step==172)pt_editor_key(e,8,0);
+            if(step==173)pt_editor_key(e,0x0a,0);
+            if(step==174)pt_editor_key(e,0x44,0);
+            if(step==175)pt_editor_key(e,0x36,0);
+            if(step==176)pt_editor_key(e,0x35,0);
+            if(step==177)pt_editor_key(e,0x20,0);
+            if(step==178)pt_editor_key(e,0x21,0);
+            if(step==179)pt_editor_key(e,0x21,0);
+            if(step==180)pt_editor_key(e,0x44,0);
+            if(step==181)pt_editor_key(e,0x31,8);
+            if(step==182)pt_editor_key(e,0x31,9);
+            if(step==183)pt_editor_key(e,0x24,0);
+            if(step==184)pt_editor_key(e,0x23,0);
+            if(step==185)pt_editor_key(e,0x44,0);
+            if(step==186)pt_editor_key(e,0x37,0);
+            if(step==187)pt_editor_key(e,0x45,0);
+            if(step==188)pt_editor_key(e,0x45,0);
+            if(step==189)pt_editor_key(e,0x45,0);
             if(step==143) {e->panel=5;pt_editor_key(e,0x32,0);}
             if(step==144)pt_editor_key(e,3,0);
             if(step==145)pt_editor_key(e,0x21,0);
@@ -479,7 +537,7 @@ int main(int argc,char **argv)
        independent workflows on a freshly loaded fixture. */
     pt_editor_dispose(e);input=readfile(argv[1],&n);
     assert(pt_document_load(&doc,input,n,SIZE_MAX)==PT_PROJECT_OK);free(input);
-    blocks(e);channel_controls(e);sampler_controls(e);
+    blocks(e);channel_controls(e);channel_details(e);sampler_controls(e);
     for(i=0;i<4;++i)free(canvas.planes[i]);
     free(font);pt_editor_dispose(e);free(e);pt_document_release(&doc);
     puts("EDITOR PASS: bank/wrap/scroll, guarded note and nibble edits, OFF, undo/redo, save state, discard confirmation, atomic block copy/paste/clear/transpose/clone, all-page planar render");return 0;

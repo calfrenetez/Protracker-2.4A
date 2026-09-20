@@ -52,7 +52,11 @@ EDIT OP./Control-E provides mark/copy/paste/clear/transpose and whole-block undo
 DISK OP. > SAVE MOD / Control-Shift-M exports strictly lossless classic MODs.
 Control-R or a P/A/M header letter opens CHANNEL: routes, mute and solo share undo
 and project saves. P/A/M chooses route, U mute, S solo, Escape closes the page.
-Classic Paula playback applies mute/solo live; MOD export refuses saved flags.
+DETAILS/D opens P pan (hex00-FF), G group (hex00-0F), M MIDI channel (decimal1-16),
+N track name. Return applies, Escape cancels; these settings share undo and PTG saves.
+Paula stays fixed-pan; enhanced pan/MIDI playback and group stems remain pending.
+Classic Paula playback applies mute/solo live; MOD export refuses saved flags and
+non-default names/groups/pan/MIDI-channel metadata.
 SAMPLER/Control-L opens WAV/IFF/explicit RAW import/export, waveform selection and undoable edits.
 In SAMPLER: L load WAV/IFF or browse instruments in a MOD/PP20 source, W export WAV, Shift-W export IFF, R reverse, N normalize, D DC removal, G/H gain
 x2 or /2, I/O fades, A all. Two clicks select a frame range. Control-S saves the

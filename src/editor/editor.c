@@ -142,33 +142,80 @@ static void range_nudge(struct pt_editor *e,unsigned field,int direction)
     else {if(direction<0 && e->sample_end>e->sample_start+1)--e->sample_end;else if(direction>0 && e->sample_end<frames)++e->sample_end;}
     ++e->sample_ui;pt_editor_status(e,"RANGE ADJUSTED BY ONE FRAME");
 }
+static int hexkey(unsigned raw);
+static void channel_value(struct pt_editor *e,const struct pt_channel *value)
+{
+    enum pt_edit_result result=pt_pattern_channel_apply(e->project,&e->history,e->project->channels.selected,value);
+    pt_editor_status(e,result==PT_EDIT_OK?"CHANNEL UPDATED - CONTROL-Z TO UNDO":
+        result==PT_EDIT_PAULA_LIMIT?"PAULA LIMIT: CHANGE ANOTHER PAULA ROUTE FIRST":
+        result==PT_EDIT_CAPACITY?"UNDO BUDGET EXCEEDED - NO CHANGE":"CHANNEL CHANGE REFUSED");
+}
 static void number_begin(struct pt_editor *e,unsigned field)
 {
-    if(field!=4 && !sample_range(e))return;
+    const struct pt_channel *channel=&e->project->channels.track[e->project->channels.selected];
+    unsigned long value;
+    if(field<4 && !sample_range(e))return;
     e->number_field=field;e->number_fresh=1;
-    snprintf(e->number_text,sizeof(e->number_text),"%lu",(unsigned long)(field==1?e->sample_start:field==2?e->sample_end:field==4?e->raw_format.rate:e->format_rate));++e->sample_ui;
-    pt_editor_status(e,field==1?"ENTER START FRAME: DIGITS / RETURN APPLY / ESC CANCEL":field==2?"ENTER END FRAME: DIGITS / RETURN APPLY / ESC CANCEL":"ENTER TARGET RATE 1-192000 HZ / RETURN / ESC CANCEL");
+    value=field==1?e->sample_start:field==2?e->sample_end:field==3?e->format_rate:field==4?e->raw_format.rate:field==5?channel->pan:field==6?channel->group:channel->midi_channel;
+    snprintf(e->number_text,sizeof(e->number_text),field==5 || field==6?"%02lX":"%lu",value);++e->sample_ui;
+    pt_editor_status(e,field==1?"ENTER START FRAME: DIGITS / RETURN APPLY / ESC CANCEL":field==2?"ENTER END FRAME: DIGITS / RETURN APPLY / ESC CANCEL":
+        field==5?"PAN 00 LEFT TO FF RIGHT (HEX) / RETURN / ESC CANCEL":field==6?"GROUP 00 NONE TO 0F (HEX) / RETURN / ESC CANCEL":field==7?"MIDI CHANNEL 1-16 (DECIMAL) / RETURN / ESC CANCEL":"ENTER TARGET RATE 1-192000 HZ / RETURN / ESC CANCEL");
 }
 static void number_key(struct pt_editor *e,unsigned raw)
 {
-    size_t length=strlen(e->number_text);unsigned digit;uint32_t value=0,frames;size_t i;
+    size_t length=strlen(e->number_text),i;unsigned digit,base=e->number_field==5 || e->number_field==6?16:10;uint32_t value=0,frames;int input;
     if(raw==0x45) {e->number_field=0;++e->sample_ui;pt_editor_status(e,"NUMBER ENTRY CANCELLED - VALUES PRESERVED");return;}
     if(raw==0x44) {
         for(i=0;i<length;++i) {
-            digit=(unsigned)(e->number_text[i]-'0');
-            if(value>(UINT32_MAX-digit)/10)break;
-            value=value*10+digit;
+            digit=e->number_text[i]>='A'?(unsigned)(e->number_text[i]-'A'+10):(unsigned)(e->number_text[i]-'0');
+            if(digit>=base || value>(UINT32_MAX-digit)/base)break;
+            value=value*base+digit;
         }
         frames=e->sample && e->sample<=e->project->sample_count?e->project->samples[e->sample-1].pcm.frames:0;
-        if(!length || i!=length || (e->number_field==1?value>=e->sample_end:e->number_field==2?value<=e->sample_start || value>frames:!value || value>192000)) {pt_editor_status(e,e->number_field>=3?"INVALID RATE - ENTER 1 TO 192000 HZ OR ESC CANCEL":"INVALID FRAME RANGE - CORRECT VALUE OR ESC CANCEL");return;}
-        if(e->number_field==1)e->sample_start=value;else if(e->number_field==2)e->sample_end=value;else if(e->number_field==4)e->raw_format.rate=value;else e->format_rate=value;
-        pt_editor_status(e,e->number_field==4?"RAW RATE SET - HEADERLESS FILES CONTAIN NO RATE":e->number_field==3?"TARGET RATE SET - APPLY TO CONVERT WHOLE SAMPLE":"EXACT FRAME RANGE SET");
+        if(!length || i!=length || (e->number_field==1?value>=e->sample_end:e->number_field==2?value<=e->sample_start || value>frames:
+            e->number_field==5?value>255:e->number_field==6?value>15:e->number_field==7?!value || value>16:!value || value>192000)) {
+            pt_editor_status(e,e->number_field>=5?"INVALID CHANNEL VALUE - CORRECT OR ESC CANCEL":e->number_field>=3?"INVALID RATE - ENTER 1 TO 192000 HZ OR ESC CANCEL":"INVALID FRAME RANGE - CORRECT VALUE OR ESC CANCEL");return;
+        }
+        if(e->number_field>=5) {
+            struct pt_channel channel=e->project->channels.track[e->project->channels.selected];
+            if(e->number_field==5)channel.pan=(uint8_t)value;else if(e->number_field==6)channel.group=(uint8_t)value;else channel.midi_channel=(uint8_t)value;
+            channel_value(e,&channel);
+        } else {
+            if(e->number_field==1)e->sample_start=value;else if(e->number_field==2)e->sample_end=value;else if(e->number_field==4)e->raw_format.rate=value;else e->format_rate=value;
+            pt_editor_status(e,e->number_field==4?"RAW RATE SET - HEADERLESS FILES CONTAIN NO RATE":e->number_field==3?"TARGET RATE SET - APPLY TO CONVERT WHOLE SAMPLE":"EXACT FRAME RANGE SET");
+        }
         e->number_field=0;++e->sample_ui;return;
     }
     if(raw==0x41 || raw==0x46) {if(e->number_fresh)e->number_text[0]=0;else if(length)e->number_text[length-1]=0;e->number_fresh=0;++e->sample_ui;return;}
-    if(raw>=1 && raw<=0x0a) {
+    input=hexkey(raw);
+    if(input>=0 && (unsigned)input<base) {
         if(e->number_fresh) {length=0;e->number_fresh=0;}
-        if(length<10) {e->number_text[length]=(char)('0'+raw%10);e->number_text[length+1]=0;++e->sample_ui;}
+        if(length<10) {e->number_text[length]="0123456789ABCDEF"[input];e->number_text[length+1]=0;++e->sample_ui;}
+    }
+}
+static void name_begin(struct pt_editor *e)
+{
+    memcpy(e->name_text,e->project->channels.track[e->project->channels.selected].name,sizeof(e->name_text));
+    e->name_entry=1;e->name_fresh=1;++e->sample_ui;
+    pt_editor_status(e,"TRACK NAME: 15 CHARS / RETURN APPLY / ESC CANCEL");
+}
+static void name_key(struct pt_editor *e,unsigned raw)
+{
+    static const unsigned keys[26]={0x20,0x35,0x33,0x22,0x12,0x23,0x24,0x25,0x17,0x26,0x27,0x28,0x37,0x36,0x18,0x19,0x10,0x13,0x21,0x14,0x16,0x34,0x11,0x32,0x15,0x31};
+    size_t length=strlen(e->name_text);unsigned i;char ch=0;
+    if(raw==0x45) {e->name_entry=0;++e->sample_ui;pt_editor_status(e,"TRACK NAME CANCELLED - NAME PRESERVED");return;}
+    if(raw==0x44) {
+        struct pt_channel channel=e->project->channels.track[e->project->channels.selected];
+        memset(channel.name,0,sizeof(channel.name));memcpy(channel.name,e->name_text,length);
+        channel_value(e,&channel);e->name_entry=0;++e->sample_ui;return;
+    }
+    if(raw==0x41 || raw==0x46) {if(e->name_fresh)e->name_text[0]=0;else if(length)e->name_text[length-1]=0;e->name_fresh=0;++e->sample_ui;return;}
+    for(i=0;i<26;++i)if(raw==keys[i])ch=(char)('A'+i);
+    if(raw>=1 && raw<=10)ch=(char)('0'+raw%10);
+    if(raw==0x40)ch=' ';else if(raw==0x0b)ch='-';else if(raw==0x39)ch='.';
+    if(ch) {
+        if(e->name_fresh) {length=0;e->name_fresh=0;}
+        if(length<sizeof(e->name_text)-1) {e->name_text[length]=ch;e->name_text[length+1]=0;++e->sample_ui;}
     }
 }
 static void format_setting(struct pt_editor *e,unsigned bits,uint32_t rate)
@@ -288,20 +335,17 @@ static void undo(struct pt_editor *e,int direction)
 }
 static void channel_panel(struct pt_editor *e)
 {
-    e->panel=4;pt_editor_status(e,"CHANNEL: P/A/M ROUTE; U MUTE; S SOLO; TAB NEXT; ESC BACK");
+    e->panel=4;e->channel_details=0;++e->sample_ui;pt_editor_status(e,"CHANNEL: P/A/M ROUTE; U MUTE; S SOLO; D DETAILS");
 }
 /* Route is exclusive; mute and solo are independent saved channel properties. */
 static void channel_edit(struct pt_editor *e,unsigned setting)
 {
     unsigned selected=e->project->channels.selected;
-    struct pt_channel value=e->project->channels.track[selected];enum pt_edit_result result;
+    struct pt_channel value=e->project->channels.track[selected];
     if(setting==8)value.muted^=1;
     else if(setting==16)value.solo^=1;
     else value.route=(uint8_t)setting;
-    result=pt_pattern_channel_apply(e->project,&e->history,selected,&value);
-    pt_editor_status(e,result==PT_EDIT_OK?"CHANNEL UPDATED - CONTROL-Z TO UNDO":
-        result==PT_EDIT_PAULA_LIMIT?"PAULA LIMIT: CHANGE ANOTHER PAULA ROUTE FIRST":
-        result==PT_EDIT_CAPACITY?"UNDO BUDGET EXCEEDED - NO CHANGE":"CHANNEL CHANGE REFUSED");
+    channel_value(e,&value);
 }
 static int apply(struct pt_editor *e,struct pt_event event)
 {
@@ -412,7 +456,8 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
     static const unsigned keys[24]={0x31,0x21,0x32,0x22,0x33,0x34,0x24,0x35,0x25,0x36,0x26,0x37,
         0x10,0x02,0x11,0x03,0x12,0x13,0x05,0x14,0x06,0x15,0x07,0x16};
     if(raw&0x80)return PT_UI_NONE;
-    if(e->number_field) {number_key(e,raw);return PT_UI_NONE;}
+    if(e->number_field) {if(!(qualifier&8))number_key(e,raw);return PT_UI_NONE;}
+    if(e->name_entry) {if(!(qualifier&8))name_key(e,raw);return PT_UI_NONE;}
     if(e->panel==11) {
         if(raw==0x45 || raw==0x42 || ((qualifier&8) && raw==0x28)) {source_close(e);pt_editor_status(e,"MOD SOURCE CLOSED - APPLIED IMPORTS KEPT");}
         else if((qualifier&8) && raw==0x31)undo(e,(qualifier&3)?1:-1);
@@ -432,6 +477,7 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
     if(e->load_pending)pt_editor_status(e,"LOAD CANCELLED - EDITS PRESERVED");
     e->load_pending=0;
     if(raw==0x45 && e->panel==3) {e->panel=0;pt_editor_status(e,"NEW SONG CANCELLED - EDITS PRESERVED");return PT_UI_NONE;}
+    if(raw==0x45 && e->panel==4 && e->channel_details) {channel_panel(e);return PT_UI_NONE;}
     if(raw==0x45 && (e->panel==4 || e->panel>=5)) {e->panel=0;pt_editor_status(e,"SETTINGS CLOSED");return PT_UI_NONE;}
     if(raw==0x45)return quit(e);
     e->quit_pending=0;
@@ -526,8 +572,13 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
         return PT_UI_NONE;
     }
     if(e->panel==4) {
-        if(raw==0x19)channel_edit(e,PT_PAULA);
-        else if(raw==0x20)channel_edit(e,PT_AMIGUS);
+        if(raw==0x22) {e->channel_details^=1;++e->sample_ui;pt_editor_status(e,e->channel_details?"DETAILS: P PAN / G GROUP / M MIDI CHANNEL / N NAME":"CHANNEL: P/A/M ROUTE; U MUTE; S SOLO; D DETAILS");}
+        else if(e->channel_details && raw==0x19)number_begin(e,5);
+        else if(e->channel_details && raw==0x24)number_begin(e,6);
+        else if(e->channel_details && raw==0x37)number_begin(e,7);
+        else if(e->channel_details && raw==0x36)name_begin(e);
+        else if(raw==0x19)channel_edit(e,PT_PAULA);
+        else if(!e->channel_details && raw==0x20)channel_edit(e,PT_AMIGUS);
         else if(raw==0x37)channel_edit(e,PT_MIDI);
         else if(raw==0x16)channel_edit(e,8);
         else if(raw==0x21)channel_edit(e,16);
@@ -589,7 +640,7 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
 {
     unsigned c,r,f;
     if(x<0 || x>=640 || y<0 || y>=512)return PT_UI_NONE;
-    if(e->number_field) {pt_editor_status(e,"FINISH FRAME ENTRY WITH RETURN OR ESC FIRST");return PT_UI_NONE;}
+    if(e->number_field || e->name_entry) {pt_editor_status(e,"FINISH ENTRY WITH RETURN OR ESC FIRST");return PT_UI_NONE;}
     if(e->panel==11) {
         if(x>=230 && x<599 && y>=21 && y<97) {
             r=(unsigned)(y-2)/19;c=(unsigned)(x-230)/123;
@@ -677,10 +728,12 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
     }
     if(e->panel==4 && x>=230 && x<599 && y>=2 && y<97) {
         r=(unsigned)(y-PT_EDITOR_CONTROL_Y)/PT_EDITOR_CONTROL_HEIGHT;c=(unsigned)(x-230)/123;
-        if(r==1)channel_edit(e,c==0?PT_PAULA:c==1?PT_AMIGUS:PT_MIDI);
-        else if(r==2 && c<2)channel_edit(e,c==0?8:16);
+        if(e->channel_details && r==1)number_begin(e,5+c);
+        else if(e->channel_details && r==2)name_begin(e);
+        else if(r==1)channel_edit(e,c==0?PT_PAULA:c==1?PT_AMIGUS:PT_MIDI);
+        else if(r==2) {if(c<2)channel_edit(e,c==0?8:16);else {e->channel_details=1;++e->sample_ui;pt_editor_status(e,"DETAILS: P PAN / G GROUP / M MIDI CHANNEL / N NAME");}}
         else if(r==3 && c!=1)pt_channels_step(&e->project->channels,c==0?-1:1);
-        else if(r==4) {if(c<2)undo(e,c==0?-1:1);else e->panel=0;}
+        else if(r==4) {if(c<2)undo(e,c==0?-1:1);else if(e->channel_details)channel_panel(e);else e->panel=0;}
         return PT_UI_NONE;
     }
     if(e->panel==1 && x>=230 && x<599 && y>=2 && y<97) {

@@ -393,3 +393,16 @@ volume, loop and PCM while preserving the current song. Source storage is reserv
 against the sampler policy budget and released independently from imported versions.
 Host/native ownership, failure, preview, round-trip and full-song comparison evidence
 is in `evidence/enhanced-editor/dev20/`. Source audition remains unavailable.
+
+## Channel details milestone (dev21)
+
+CHANNEL > DETAILS edits pan, logical group, MIDI-channel assignment and track
+name without changing the main-screen layout. Entry is modal, bounded and saved
+as shared chronological undo commands. Host controller/render/round-trip tests
+and a native keyboard/save/reopen workflow verify exact metadata and unrelated
+song preservation. Strict MOD export now also refuses a non-default MIDI-channel
+assignment on a Paula route instead of silently discarding it. Native Paula
+replay accepts organisation metadata in its private snapshot while disk export
+remains strict; changed pan still needs the enhanced backend. Final source,
+binary, screenshot and test evidence is in `evidence/enhanced-editor/dev21/`.
+This adds saved settings, not physical panning, CAMD transmission or group stems.

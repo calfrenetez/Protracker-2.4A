@@ -339,12 +339,24 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
     } else if(e->panel==4) {
         const struct pt_channel *channel=&p->channels.track[p->channels.selected];
         snprintf(s,sizeof(s),"CHANNEL %02u",p->channels.selected+1);label(c,font,230,2,369,19,s,0);
-        label(c,font,230,21,123,19,"PAULA",channel->route==PT_PAULA);
-        label(c,font,353,21,123,19,"AMIGUS",channel->route==PT_AMIGUS);
-        label(c,font,476,21,123,19,"MIDI",channel->route==PT_MIDI);
-        label(c,font,230,40,123,19,"MUTE",channel->muted);
-        label(c,font,353,40,123,19,"SOLO",channel->solo);
-        label(c,font,476,40,123,19,"",0);
+        if(e->channel_details) {
+            static const char *names[3]={"PAN","GROUP","MIDI"};
+            for(i=0;i<3;++i) {
+                if(e->number_field==5+i)snprintf(s,sizeof(s),"%s %.6s_",names[i],e->number_text);
+                else if(i==2)snprintf(s,sizeof(s),"MIDI %02u",channel->midi_channel);
+                else snprintf(s,sizeof(s),"%s %02X",names[i],i==0?channel->pan:channel->group);
+                label(c,font,230+(int)i*123,21,123,19,s,e->number_field==5+i);
+            }
+            snprintf(s,sizeof(s),"NAME: %s%s",e->name_entry?e->name_text:channel->name,e->name_entry?"_":"");
+            label(c,font,230,40,369,19,s,e->name_entry);
+        } else {
+            label(c,font,230,21,123,19,"PAULA",channel->route==PT_PAULA);
+            label(c,font,353,21,123,19,"AMIGUS",channel->route==PT_AMIGUS);
+            label(c,font,476,21,123,19,"MIDI",channel->route==PT_MIDI);
+            label(c,font,230,40,123,19,"MUTE",channel->muted);
+            label(c,font,353,40,123,19,"SOLO",channel->solo);
+            label(c,font,476,40,123,19,"DETAILS",0);
+        }
         label(c,font,230,59,123,19,"PREV",0);
         snprintf(s,sizeof(s),"%02u / %02u",p->channels.selected+1,p->channels.count);label(c,font,353,59,123,19,s,0);
         label(c,font,476,59,123,19,"NEXT",0);
@@ -410,7 +422,7 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
         const struct pt_pcm *pcm=&e->project->samples[i].pcm;
         bytes+=(size_t)pcm->frames*pcm->channels*(pcm->bits/8);
     }
-    full=(e->panel>=5 && (old->sample_ui!=e->sample_ui || old->sample_start!=e->sample_start || old->sample_end!=e->sample_end || old->sample_marking!=e->sample_marking || old->sample_anchor!=e->sample_anchor || old->sample_range_slot!=e->sample_range_slot)) || !old->valid || old->page!=page || old->pattern!=e->pattern || old->first_row!=e->first_row ||
+    full=(e->panel>=4 && (old->sample_ui!=e->sample_ui || old->sample_start!=e->sample_start || old->sample_end!=e->sample_end || old->sample_marking!=e->sample_marking || old->sample_anchor!=e->sample_anchor || old->sample_range_slot!=e->sample_range_slot)) || !old->valid || old->page!=page || old->pattern!=e->pattern || old->first_row!=e->first_row ||
          old->position!=e->position || old->sample!=e->sample || old->editing!=e->editing || old->panel!=e->panel || (e->panel==4 && old->selected!=e->project->channels.selected) || (e->panel==1 && old->selection.active!=selection.active) ||
          old->sample_bytes!=bytes || memcmp(&metadata,&old->project,sizeof(metadata)) || memcmp(&sample,&old->sample_meta,sizeof(sample));
     playback_changed=!old->valid || memcmp(&e->playback,&old->playback,sizeof(e->playback));

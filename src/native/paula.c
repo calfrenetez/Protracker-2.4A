@@ -15,14 +15,20 @@ extern volatile uint8_t pt_replay_order,pt_replay_speed,pt_replay_voices[],pt_re
 static unsigned be16(const uint8_t *p) {return ((unsigned)p[0]<<8)|p[1];}
 static uintptr_t be32(const uint8_t *p)
 {return ((uintptr_t)p[0]<<24)|((uintptr_t)p[1]<<16)|((uintptr_t)p[2]<<8)|p[3];}
-/* Playback can represent mute/solo at the owned output stage. Strict disk
-   export still rejects these properties instead of silently discarding them. */
+/* Playback represents mute/solo at the owned output stage. Names/groups and
+   dormant MIDI assignments do not alter Paula audio. Clear them in the private
+   replay snapshot only; strict disk export still refuses their loss. Panning,
+   routes, sample format and all other audio requirements remain validated. */
 static int playback_project(const struct pt_project *p,struct pt_project *copy)
 {
     unsigned i;
     if(pt_project_validate(p,NULL)!=PT_PROJECT_OK)return 0;
     *copy=*p;
-    for(i=0;i<copy->channels.count;++i) {copy->channels.track[i].muted=0;copy->channels.track[i].solo=0;}
+    for(i=0;i<copy->channels.count;++i) {
+        copy->channels.track[i].muted=0;copy->channels.track[i].solo=0;
+        copy->channels.track[i].group=0;copy->channels.track[i].midi_channel=(uint8_t)(i+1);
+        memset(copy->channels.track[i].name,0,sizeof(copy->channels.track[i].name));
+    }
     return 1;
 }
 static unsigned audible_mask(const struct pt_project *p)

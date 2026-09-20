@@ -90,7 +90,7 @@ enum pt_project_result pt_mod_export_analyse(const struct pt_project *p,struct p
         if(c->route!=PT_PAULA)r.issues|=PT_EXPORT_ROUTING;
         if(c->route==PT_MIDI)r.issues|=PT_EXPORT_MIDI_AUDIO;
         if(c->pan!=((i%4==0 || i%4==3)?0:255))r.issues|=PT_EXPORT_PANNING;
-        if(c->muted || c->solo || c->group || c->name[0] || p->midi_output[i][0])r.issues|=PT_EXPORT_METADATA;
+        if(c->muted || c->solo || c->group || c->name[0] || c->midi_channel!=i+1 || p->midi_output[i][0])r.issues|=PT_EXPORT_METADATA;
     }
     for(i=0;i<p->sample_count;++i) {
         const struct pt_sample *s=&p->samples[i];

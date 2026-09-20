@@ -49,6 +49,14 @@ int main(int argc,char **argv)
         memcpy(h+26,before,4);
         assert(pt_mod_export_direct(&p,roundtrip,(size_t)length,&w)==PT_PROJECT_OK && !memcmp(mod,roundtrip,w));
     }
+    /* A saved MIDI assignment is metadata even before its route becomes MIDI. */
+    p.channels.track[0].midi_channel=16;
+    assert(pt_mod_export_analyse(&p,&report)==PT_PROJECT_OK && report.issues==PT_EXPORT_METADATA);
+    memset(roundtrip,0xa5,(size_t)length);w=123;
+    assert(pt_mod_export_direct(&p,roundtrip,(size_t)length,&w)==PT_PROJECT_UNSUPPORTED && w==123);
+    for(n=0;n<(size_t)length;++n)assert(roundtrip[n]==0xa5);
+    p.channels.track[0].midi_channel=1;
+    assert(pt_mod_export_direct(&p,roundtrip,(size_t)length,&w)==PT_PROJECT_OK && !memcmp(mod,roundtrip,w));
     /* Potential transformations are reported; direct writer never makes them. */
     p.channels.track[0].route=PT_MIDI;
     assert(pt_mod_export_analyse(&p,&report)==PT_PROJECT_OK && (report.issues&PT_EXPORT_MIDI_AUDIO));

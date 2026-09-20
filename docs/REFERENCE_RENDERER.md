@@ -87,9 +87,14 @@ is an error, never silently classified as a completed song.
 Supported: ordinary raw-period notes (including instrument-zero inheritance),
 explicit note-off and velocity; mono/stereo 8/16/24-bit samples; nearest/linear
 interpolation; forward/ping-pong loops; sample slices; track selection; global
-mute/solo; and effects `000`, `Axx`, `Bxx`, `Cxx`, `Dxx`, `E6x`, `EEx`, `Fxx`.
-Axx applies on effect passes, including delayed passes. Global flow commands on
-tracks excluded from audio still control the song. Selected slice ranges use
+mute/solo; and effects `000`, `Axx`, `Bxx`, `Cxx`, `Dxx`, `E6x`, `EAx`, `EBx`, `ECx`, `EEx`, `Fxx`.
+Axx applies on effect passes, including delayed passes. Fine volume slides EAx/EBx
+apply only at tick zero, including delayed tick-zero passes, and saturate at 0/64.
+ECx cuts volume when the current tick equals x; EC0 is immediate and an x outside
+the row speed never fires. Cutting preserves voice phase, so later Cxx or a volume
+slide can restore the continuing sample. These semantics are checked against
+repeated raw-volume traces from the pinned 2.3F replay code (dev34).
+Global flow commands on tracks excluded from audio still control the song. Selected slice ranges use
 one-shot playback unless the complete sample loop lies within that slice.
 
 Mono pan uses a linear left/right split over 0..255. Stereo pan uses balance:

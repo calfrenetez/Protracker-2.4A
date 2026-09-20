@@ -550,3 +550,18 @@ PCM against host WAV bytes, append-only project changes, cancellation preserving
 redo, chronological undo and exact PTG save/reopen. No enhanced live audition or
 physical hardware acceptance is implied. Evidence is in
 `evidence/enhanced-editor/dev33/`.
+
+## Reference volume-effect compatibility (dev34)
+
+The shared WAV/bounce renderer now accepts EAx fine volume up, EBx fine volume
+down and ECx note cut. Fine slides run on tick zero, including delayed passes,
+and clamp at 0/64. Cuts retain the advancing voice; later volume commands can
+restore it without retriggering. Remaining unsupported effects still fail
+preflight before a file or sample is published.
+
+Seven synthetic MODs exercise saturation, zero parameters, effect-only rows,
+immediate/later/unreachable cuts, delayed tick-zero slides, delayed cuts and
+speed one. The separate pinned 2.3F trace diagnostic is unchanged from dev28.
+Native traces, host/m68k PCM comparisons and all-track phase tests are retained
+in `evidence/enhanced-editor/dev34/`. These isolate volume semantics; they do
+not claim analogue Paula sound, full effects or real-hardware acceptance.

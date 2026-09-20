@@ -24,7 +24,7 @@ typedef int (*pt_render_sink)(void *,const struct pt_pcm *,uint64_t offset);
  * Default (include_lead_in=0) omits the silent initial speed-count lead-in.
  * Preflight rejects selected MIDI routes, MIDI pitches, nonzero finetune,
  * crossfade metadata, instrument-only events and unsupported effects. Supported
- * effects: 000, Axx, Bxx, Cxx, Dxx, E6x, EEx, Fxx. Never silently drops them.
+ * effects: 000, Axx, Bxx, Cxx, Dxx, E6x, EAx, EBx, ECx, EEx, Fxx. Never silently drops them.
  * Selected slice ranges loop only if the complete loop lies within the slice.
  * Mono pan is linear L/R; stereo pan is balance with unity at centre128.
  * Muting/solo remain global project settings. Voices advance at zero output gain.

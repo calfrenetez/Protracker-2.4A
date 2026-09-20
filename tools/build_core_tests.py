@@ -60,6 +60,7 @@ def main():
     inputs['PT24GEdit'] += [s for s in ['src/platform/render_file.c',*render_sources] if s not in inputs['PT24GEdit']]
     inputs['PT24GEdit'] += ['src/editor/bounce.c']
     inputs['PTBounceTest'] = ['tests/bounce_test.c','src/editor/bounce.c',*dict.fromkeys([*inputs['PTSamplerTest'][1:],*render_sources])]
+    inputs['PTVolumeRenderTest'] = ['tests/render_volume_test.c',*render_sources,'src/core/document.c','src/core/pp20.c','src/core/mod_project.c','src/core/mod_inspect.c']
     inputs['PTRenderTest'] = ['tests/render_test.c',*render_sources]
     inputs['PTRenderFileTest'] = ['tests/render_file_test.c','src/platform/render_file.c','src/core/wav.c',*render_sources]
     inputs['PT24GRender'] = ['tools/pt24g_render.c','src/platform/render_file.c','src/core/document.c','src/core/pp20.c','src/core/mod_project.c','src/core/mod_inspect.c',*render_sources]

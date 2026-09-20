@@ -38,6 +38,7 @@ host and emulated 68030. The reference timeline and high-resolution mixer now
 power `PT24GRender`, a bounded, supported-subset WAV utility with verified new-file
 publication, now available from DISK OP. → RENDER WAV or Control-Shift-W.
 NEW SAMPLE / U now bounces into a new sample slot with shared undo.
+Fine volume slides and note cut now match repeated pinned native volume traces.
 Complete effects, selected-row bounce and batch stems remain unfinished.
 See [renderer usage and limits](docs/REFERENCE_RENDERER.md) and
 [replay design and evidence](docs/OFFLINE_REPLAY_DESIGN.md).

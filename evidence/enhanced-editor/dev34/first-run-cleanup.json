@@ -1,0 +1,9 @@
+{
+  "time_utc": "2026-09-20T16:54:45.162066+00:00",
+  "amiberry_processes": [],
+  "hdf_lsof_rc": 1,
+  "socket_exists": false,
+  "launcher_restored": true,
+  "outcome": "First run deliberately interrupted after exhaustive per-track phase test passed, to shorten harness repetition. Not a completed fixture run.",
+  "phase_test_sha256": "08df6db53a0ea10bca97282cbbd6be6fb42ad7fed8757d295acbba1afbcab0f0"
+}

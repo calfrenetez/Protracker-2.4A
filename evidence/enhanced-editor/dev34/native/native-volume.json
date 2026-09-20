@@ -1,0 +1,299 @@
+{
+  "schema": 1,
+  "record_bytes": 36,
+  "run_id": "volume1789923338464833000",
+  "elapsed_seconds": 141.895,
+  "diagnostic_sha256": "1d46a0c94937ea67b9bd442f86885e36ba933e8c3e2c3b04782f985b5f0618ca",
+  "renderer_test_sha256": "f47dfb89c2461a5aa1ee3dd07b93ede7b25def98d7b90ffffb30eac3ab0f8d68",
+  "cases": {
+    "fine_up": {
+      "focus": "fine_up",
+      "events": [
+        [
+          0,
+          0,
+          14,
+          175
+        ],
+        [
+          1,
+          0,
+          14,
+          175
+        ],
+        [
+          2,
+          0,
+          14,
+          175
+        ],
+        [
+          3,
+          0,
+          14,
+          160
+        ],
+        [
+          4,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 30,
+      "fixture_sha256": "e8b6fd4408a5637a99c271ecb731cc9ae5f088905e7e7da01048b98670dc5231",
+      "trace_sha256": "5d3c64a052fb7d2b39e08d55864031d046dbd24f8d491523ef8b16a0d5b5d837"
+    },
+    "fine_down": {
+      "focus": "fine_down",
+      "events": [
+        [
+          0,
+          0,
+          14,
+          191
+        ],
+        [
+          1,
+          0,
+          14,
+          191
+        ],
+        [
+          2,
+          0,
+          14,
+          176
+        ],
+        [
+          3,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "fd8358f24b700e7ea91903569ce03e270153bc926df90967b2df9e6a552fb69f",
+      "trace_sha256": "82b2f3e2cb780533968f304c0292d00057eba468c0ae22894f29663bf0d0b34b"
+    },
+    "cut_restore": {
+      "focus": "cut_restore",
+      "events": [
+        [
+          0,
+          0,
+          14,
+          194
+        ],
+        [
+          1,
+          0,
+          12,
+          64
+        ],
+        [
+          2,
+          0,
+          14,
+          192
+        ],
+        [
+          3,
+          0,
+          12,
+          32
+        ],
+        [
+          4,
+          0,
+          14,
+          207
+        ],
+        [
+          5,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 36,
+      "fixture_sha256": "ac89cad2e0e5ffabfb2bc80b7b11ad88b4e02168380d2fffb9a4b0599c4b9468",
+      "trace_sha256": "a220d8339d25b732c6418e591ea73c3c4144638c5f69af6456758625b07f8545"
+    },
+    "delay_up": {
+      "focus": "delay_up",
+      "events": [
+        [
+          0,
+          0,
+          14,
+          175
+        ],
+        [
+          0,
+          1,
+          14,
+          226
+        ],
+        [
+          0,
+          2,
+          15,
+          3
+        ],
+        [
+          1,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 15,
+      "fixture_sha256": "83a188b835d4312a10de93f10d8d8d3bc7eda672c74e81d3c6a2e91d1379c752",
+      "trace_sha256": "4a3c6a0c44b06469544826ce592249514d4494a3d954f4deea63137e3b909327"
+    },
+    "delay_down": {
+      "focus": "delay_down",
+      "events": [
+        [
+          0,
+          0,
+          14,
+          191
+        ],
+        [
+          0,
+          1,
+          14,
+          226
+        ],
+        [
+          0,
+          2,
+          15,
+          3
+        ],
+        [
+          1,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 15,
+      "fixture_sha256": "d190023d53048358fcc7c8bfb99e7dbe4b94d9ddb9ac3a5cc28b30671bb66e29",
+      "trace_sha256": "5397e363c2b2cb9037846c07108780842e81b22894ff9e0f8dff570b7fb5a70d"
+    },
+    "delay_cut": {
+      "focus": "delay_cut",
+      "events": [
+        [
+          0,
+          0,
+          14,
+          193
+        ],
+        [
+          0,
+          1,
+          14,
+          226
+        ],
+        [
+          0,
+          2,
+          15,
+          3
+        ],
+        [
+          1,
+          0,
+          12,
+          32
+        ],
+        [
+          2,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 18,
+      "fixture_sha256": "ff38d5340afa5ffc889ce28bfe1e1ef637f2b6746b0438ede0ee2517d5a881dd",
+      "trace_sha256": "9b17d0e53a3cb5bd69cea3f2dbe431eb180b2cd6134dcf11d81e27ea4ddd13d1"
+    },
+    "speed_one": {
+      "focus": "speed_one",
+      "events": [
+        [
+          0,
+          0,
+          14,
+          161
+        ],
+        [
+          0,
+          1,
+          15,
+          1
+        ],
+        [
+          1,
+          0,
+          14,
+          193
+        ],
+        [
+          2,
+          0,
+          14,
+          192
+        ],
+        [
+          3,
+          0,
+          12,
+          64
+        ],
+        [
+          4,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 10,
+      "fixture_sha256": "7c82805f0a75f5d050f0743dac962f95619520457cdbb4a1ef1ac4130f0a902f",
+      "trace_sha256": "0ac4d3fdfc90d0aab308dabf27f6aa7dfa7c50abea68ed07d77b68890f89cdb9"
+    }
+  },
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=1750\tsndbuf_status=0",
+  "scope": "Pinned native volume traces captured twice; every constant-source PCM frame checked against raw native volume by the m68k reference renderer; silent phase continuity on 16 tracks. No hardware or analogue sound validation.",
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

@@ -1,0 +1,8 @@
+test_pinned_native_volume_and_silent_phase (test_render_volume.VolumeRender.test_pinned_native_volume_and_silent_phase) ... VOLUME boundaries PASS: EC0 and Cxx restore retain silent phase across 16 voices and isolated track 16
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 2.309s
+
+OK
+VOLUME: seven repeated pinned native traces match every host/m68k rendered PCM frame

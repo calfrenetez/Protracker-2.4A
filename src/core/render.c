@@ -23,7 +23,8 @@ static enum pt_render_result preflight(const struct pt_project *p,const struct p
         if(!(o->tracks&(1U<<ch)))continue;
         if(e->kind==PT_NOTE_MIDI || (e->instrument && e->kind!=PT_NOTE_PERIOD))return PT_RENDER_EFFECT;
         if(!((e->effect==0 && !e->parameter) || (e->effect>=10 && e->effect<=13) || e->effect==15 ||
-             (e->effect==14 && ((e->parameter>>4)==6 || (e->parameter>>4)==14))))return PT_RENDER_EFFECT;
+             (e->effect==14 && ((e->parameter>>4)==6 || ((e->parameter>>4)>=10 && (e->parameter>>4)<=12) ||
+                               (e->parameter>>4)==14))))return PT_RENDER_EFFECT;
         if(e->instrument) {
             const struct pt_sample *s=p->samples+e->instrument-1;
             if(s->finetune || s->loop==PT_LOOP_CROSSFADE)return PT_RENDER_SAMPLE;
@@ -117,6 +118,15 @@ static enum pt_render_result commands(const struct pt_project *p,const struct pt
             unsigned param=flow->parameter[ch],up=param>>4,down=param&15;
             if(up)volume[ch]=(uint8_t)(volume[ch]+up>64?64:volume[ch]+up);
             else volume[ch]=(uint8_t)(volume[ch]<down?0:volume[ch]-down);
+        }
+        /* Extended volume commands also run on delayed tick zero, without
+           fetching the instrument or restarting the sample. ECx changes only
+           volume; a later Cxx must reveal the continuing voice phase. */
+        if(flow->effect[ch]==14) {
+            unsigned command=flow->parameter[ch]>>4,amount=flow->parameter[ch]&15;
+            if(command==10 && !flow->counter)volume[ch]=(uint8_t)(volume[ch]+amount>64?64:volume[ch]+amount);
+            else if(command==11 && !flow->counter)volume[ch]=(uint8_t)(volume[ch]<amount?0:volume[ch]-amount);
+            else if(command==12 && flow->counter==amount)volume[ch]=0;
         }
     }
     return PT_RENDER_OK;

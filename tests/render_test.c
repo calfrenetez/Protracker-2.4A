@@ -90,7 +90,10 @@ int main(void)
     p.channels.track[0].route=PT_MIDI;
     assert(pt_render_stream(&p,&o,receive,&c,NULL,NULL,&report)==PT_RENDER_ROUTE && !c.calls && !memcmp(&report,&before,sizeof(report)));p.channels.track[0].route=PT_PAULA;
     events[0].kind=PT_NOTE_NONE;events[0].pitch=0;
-    assert(pt_render_stream(&p,&o,receive,&c,NULL,NULL,&report)==PT_RENDER_EFFECT && !c.calls);events[0].kind=PT_NOTE_PERIOD;events[0].pitch=428;
+    /* Loading an instrument without a note now succeeds and stays silent. */
+    reset_capture(&c,pcm);c.muted=1;
+    assert(pt_render_stream(&p,&o,receive,&c,NULL,NULL,&report)==PT_RENDER_OK && c.frames==960);
+    reset_capture(&c,pcm);report=before;events[0].kind=PT_NOTE_PERIOD;events[0].pitch=428;
     o.tick_limit=1;
     assert(pt_render_stream(&p,&o,receive,&c,NULL,NULL,&report)==PT_RENDER_TICK_LIMIT && !c.calls && !memcmp(&report,&before,sizeof(report)));o.tick_limit=1000;
     o.frame_limit=1919;

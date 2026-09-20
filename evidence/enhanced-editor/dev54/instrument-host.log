@@ -1,0 +1,12 @@
+INSTRUMENT PASS: track16 true24 phase/volume reload, silent preload, cross-sample and slice refusal before output
+OFFSET PCM PASS: channel=0 ticks=18 frames=17280
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=18 frames=17280
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+.
+----------------------------------------------------------------------
+Ran 1 test in 5.220s
+
+OK

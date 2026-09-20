@@ -8,7 +8,7 @@ struct run {
     uint16_t order;
     struct pt_timeline timeline;
     struct pt_pitch pitch;
-    uint16_t tracks,offset_tracks;
+    uint16_t tracks,offset_tracks,sliced_tracks;
     struct sample_range range[16];
     uint64_t frames;
     uint8_t started,pending_end,capturing,emit,row_range,row_first,row_end;
@@ -78,7 +78,8 @@ static enum pt_render_result preflight(const struct pt_project *p,const struct p
     for(pat=0;pat<p->pattern_count;++pat)if(used[pat])for(row=0;row<64;++row)for(ch=0;ch<p->channels.count;++ch) {
         const struct pt_event *e=p->events+((size_t)pat*64+row)*p->channels.count+ch;
         if(!(o->tracks&(1U<<ch)))continue;
-        if(e->kind==PT_NOTE_MIDI || (e->instrument && e->kind!=PT_NOTE_PERIOD))return PT_RENDER_EFFECT;
+        if(e->kind==PT_NOTE_MIDI || (e->instrument && e->kind!=PT_NOTE_PERIOD && e->kind!=PT_NOTE_NONE) ||
+           (e->kind==PT_NOTE_NONE && e->slice))return PT_RENDER_EFFECT;
         if(!(e->effect==0 || e->effect==1 || e->effect==2 || e->effect==3 || e->effect==4 || e->effect==5 || e->effect==6 || e->effect==7 || e->effect==9 || (e->effect>=10 && e->effect<=13) || e->effect==15 ||
              (e->effect==14 && ((e->parameter>>4)==1 || (e->parameter>>4)==2 || (e->parameter>>4)==3 || (e->parameter>>4)==4 || (e->parameter>>4)==5 || (e->parameter>>4)==6 || (e->parameter>>4)==7 || (e->parameter>>4)==9 || ((e->parameter>>4)>=10 && (e->parameter>>4)<=13) ||
                                (e->parameter>>4)==14))))return PT_RENDER_EFFECT;
@@ -125,7 +126,24 @@ static enum pt_render_result next_tick(struct run *r,struct pt_tick_span *span,u
     }
     if(*end && r->row_range && !r->capturing)return PT_RENDER_EMPTY_RANGE;
     if(!*end) {
-        unsigned ch;pt_pitch_tick(&r->pitch,&r->timeline.flow,r->tracks);
+        unsigned ch;
+        if(r->timeline.flow.fresh)for(ch=0;ch<r->view.channels.count;++ch)if(r->tracks&(1U<<ch)) {
+            const struct pt_flow *f=&r->timeline.flow;
+            const struct pt_event *e=r->view.events+((size_t)r->view.orders[f->played_order]*64+f->played_row)*r->view.channels.count+ch;
+            const struct pt_pitch_channel *v=r->pitch.channel+ch;
+            /* Instrument-only rows reload stored sample/volume/finetune, but
+               do not restart DMA. Cross-sample or sliced active voices need a
+               separate pending repeat-source model; refuse before any output. */
+            if(e->kind==PT_NOTE_NONE && e->instrument && v->sounding &&
+               (e->instrument!=v->instrument || (r->sliced_tracks&(1U<<ch))))return PT_RENDER_EFFECT;
+            if(e->kind==PT_NOTE_OFF)r->sliced_tracks&=(uint16_t)~(1U<<ch);
+            else if(e->kind==PT_NOTE_PERIOD && e->effect!=3 && e->effect!=5 &&
+                    !(e->effect==14 && (e->parameter>>4)==13)) {
+                if(e->slice)r->sliced_tracks|=(uint16_t)(1U<<ch);
+                else r->sliced_tracks&=(uint16_t)~(1U<<ch);
+            }
+        }
+        pt_pitch_tick(&r->pitch,&r->timeline.flow,r->tracks);
         if(!ranges_tick(r))return PT_RENDER_SAMPLE;
         /* A zero register period has no defined reference PCM rate yet.
            Reject it in measurement, before sinks, staging or bounce commit. */

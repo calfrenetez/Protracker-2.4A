@@ -30,10 +30,13 @@ typedef int (*pt_render_sink)(void *,const struct pt_pcm *,uint64_t offset);
  * Tick/frame budgets include pre-roll; report frames/clips count only output.
  * Preflight still validates the whole selected pattern.
  * Preflight rejects selected MIDI routes, MIDI pitches,
- * crossfade metadata, instrument-only events, sample changes/slices on tone-portamento notes,
+ * crossfade metadata, active cross-sample/slice instrument-only handoffs,
+ * sample changes/slices on tone-portamento notes,
  * zero playback periods and unsupported
  * effects. Supported
  * effects: 0xy..7xy, 9xx, Axx..Dxx, E1x..E7x, E9x..EEx and Fxx.
+ * Instrument-only rows can preload silently or reload the same whole sample
+ * without restarting phase. Different active sample/slice handoffs are refused.
  * Pitch slides retain native stored-word wrap and register-write semantics.
  * Ordinary notes and tone targets follow pinned tables for all16 tunings.
  * 3xx/5xx retain voice phase; explicit velocity may change without retriggering.

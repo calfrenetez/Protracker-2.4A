@@ -76,6 +76,7 @@ def main():
     inputs['PTPortaRenderTest'] = ['tests/render_porta_test.c',*render_sources,'src/core/document.c','src/core/pp20.c','src/core/mod_project.c','src/core/mod_inspect.c']
     inputs['PTPitchRenderTest'] = ['tests/render_pitch_test.c',*render_sources,'src/core/document.c','src/core/pp20.c','src/core/mod_project.c','src/core/mod_inspect.c']
     inputs['PTVolumeRenderTest'] = ['tests/render_volume_test.c',*render_sources,'src/core/document.c','src/core/pp20.c','src/core/mod_project.c','src/core/mod_inspect.c']
+    inputs['PTInstrumentRenderTest'] = ['tests/render_instrument_test.c',*render_sources]
     inputs['PTRangeRenderTest'] = ['tests/render_range_test.c',*render_sources]
     inputs['PTRenderTest'] = ['tests/render_test.c',*render_sources]
     inputs['PTStemFileTest'] = ['tests/stem_file_test.c','src/platform/stem_file.c','src/core/stems.c','src/platform/render_file.c',*render_sources]

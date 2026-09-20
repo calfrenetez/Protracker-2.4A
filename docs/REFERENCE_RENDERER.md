@@ -139,6 +139,15 @@ finetune; the reference rate policy still does not model PAL clock/analogue beha
 Separate stored/output register traces and ramp PCM comparisons are in dev35
 and dev36; dev36 also checks native DMA-trigger continuity and glide memory.
 
+Instrument-only rows can preload a sample before any note sounds, or reload the
+same whole sample's stored volume/finetune without restarting its voice phase.
+Offset range memory reload, explicit E9 retrigger and delayed-row volume changes
+retain their native ordering. A different sample on an active voice, or reloading
+an active slice, still requires a separate pending DMA/repeat-source model and is
+refused during measurement before output. Instrument-only slice selection and
+instrument-bearing OFF events remain refused. Native dev54 fixtures and true24
+track16 boundary tests cover the supported phase/volume behavior.
+
 Mono pan uses a linear left/right split over 0..255. Stereo pan uses balance:
 centre128 leaves both sides at unity, and each endpoint silences the opposite
 side. Gains are Q16, sample products accumulate in signed64 and final output is
@@ -146,7 +155,7 @@ rounded/quantized/saturated. Muting or zero gain does not stop voice progression
 Sample data is never modified, including across file verification passes.
 
 Preflight refuses selected MIDI routes (external audio is absent), MIDI pitches,
-crossfade-loop metadata, instrument-only events and other
+crossfade-loop metadata, active cross-sample/slice instrument-only handoffs and other
 effects. These are explicit implementation limits. It checks all order-referenced
 patterns conservatively (or only the selected pattern in pattern mode), before
 creating staging or calling the output sink. Excluded audio tracks still retain

@@ -1,0 +1,260 @@
+{
+  "schema": 1,
+  "record_bytes": 140,
+  "run_id": "instrument1789944314385955000",
+  "elapsed_seconds": 41.463,
+  "diagnostic_sha256": "79fac7cf4bf97ac61966a1fd0d2af960efa76ea4e50d58a1191cab4bf1eb79ee",
+  "baseline_first52": "EXACT DEV38 MATCH",
+  "cases": {
+    "instrument_preload": {
+      "focus": "instrument_preload",
+      "events": [
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          428,
+          0,
+          12,
+          32
+        ],
+        [
+          2,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "f5fc5bcedcc52bbfdafa5907f4eb7295f9655293241932efe2302c8a30afccb4",
+      "trace_sha256": "7d9526b0cbe07267d028efeb455c4a24466c609e3e16e2acf9fa4b23274c2db8"
+    },
+    "instrument_reload": {
+      "focus": "instrument_reload",
+      "events": [
+        [
+          0,
+          0,
+          428,
+          1,
+          12,
+          16
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 18,
+      "fixture_sha256": "8754561aa8794fd218b32777e202261b2abc1d14c3e9a0b8f85029ee99fc2a94",
+      "trace_sha256": "28bfe4a13e96234279032846c5f2276bcbaeee2cd206ec759616dec126101f54"
+    },
+    "instrument_offset": {
+      "focus": "instrument_offset",
+      "events": [
+        [
+          0,
+          0,
+          428,
+          1,
+          9,
+          1
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          9,
+          0
+        ],
+        [
+          2,
+          0,
+          428,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "17233e2c9e7224c200b571744e588e7945ded1e0280e25bb858d0ea7a217236c",
+      "trace_sha256": "a53a4a37d07d55633e110464fb82a412b35792a62255e5d1d9f71959c0dffc24"
+    },
+    "instrument_delay": {
+      "focus": "instrument_delay",
+      "events": [
+        [
+          0,
+          0,
+          428,
+          1,
+          12,
+          64
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          15,
+          2
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          14,
+          161
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          14,
+          225
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 12,
+      "fixture_sha256": "ab3f42fd738fed85b37b99ed7762dc37779a5dfccf6454f08df92e866354b0c7",
+      "trace_sha256": "4092757ff05c241fd21b9629ef2d832e9a6341d74c69cf4eda703cdfd6866e52"
+    },
+    "instrument_retrig": {
+      "focus": "instrument_retrig",
+      "events": [
+        [
+          0,
+          0,
+          428,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          14,
+          146
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 18,
+      "fixture_sha256": "324f15799e6b2e966d0a8d7b9cf19f0009737fddb47d6552044c203d7adc6231",
+      "trace_sha256": "55e218b649b70d87ae4e3e216fa5d1291f7c34bc23609c0b3f1fb01213dd29ef"
+    },
+    "instrument_noed": {
+      "focus": "instrument_noed",
+      "events": [
+        [
+          0,
+          0,
+          428,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          14,
+          211
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 18,
+      "fixture_sha256": "16018ea826df5d01f015bac2eb674f59bd1eb64d515777e70a39b7f48c0e867a",
+      "trace_sha256": "e742a099e49a8d7d08f8fd1281f53dc66a8faf0863be8b008122ca2092b1c6a5"
+    }
+  },
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0",
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  },
+  "scope": "Instrument-only stored/output period, volume, sample ranges and DMA trigger snapshots. Renderer acceptance requires separate parity checks; no physical acceptance."
+}

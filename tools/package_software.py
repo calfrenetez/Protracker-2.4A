@@ -104,13 +104,15 @@ PT24GConvert inspects projects and performs strict lossless MOD/project conversi
 PT24GRender INPUT NEW.wav exports a bounded reference song, with optional --pattern N,
 --rate 44100|48000, --bits 16|24, --tracks HEX, --gain 0..65536 and --lead-in.
 Default: 48kHz/stereo24, all tracks, gain32768, trimmed startup, 30-minute limit.
-This uses ideal BPM timing and sample-rate-at-C-2 period scaling, not captured hardware.
-Supported effects: 0xy/1/2/3/4/5/6/9/A/B/C/D/E1/E2/E4/E6/EA/EB/EC/EE/F. MIDI audio/pitches, nonzero finetune,
-instrument-only events, cross-sample/slice glide targets, zero playback periods and other effects
-are refused before output is created. Tone-portamento targets use the zero-finetune table;
-3xx/5xx retain sample phase and glide-speed memory. Arpeggio follows native nibble phases
-and adjacent-table values without restarting PCM. Vibrato 4xy/6xy retains separate speed/depth
-memory; E4x selects waveform and phase reset. Ordinary notes retain raw periods.
+This uses ideal BPM timing and sample-rate-at-period-428 scaling, not captured hardware.
+Supported effects: 0xy..7xy, 9xx, Axx..Dxx, E1x..E7x, E9x..EEx and Fxx.
+All16 finetunes, E5 overrides and native note quantization are supported. 3xx/5xx
+retain sample phase and glide-speed memory; E3 controls glissando. Arpeggio follows
+native nibble phases and adjacent-table values without restarting PCM. Vibrato
+4xy/6xy and tremolo7xy retain their native memory and waveform controls.
+Instrument-only rows can preload silently or reload the same whole sample without
+restarting phase. MIDI audio/pitches, active cross-sample/slice handoffs, zero
+playback periods, filter/funk and other unsupported effects are refused before output.
 9xx tracks require mono8 samples of even length 2..131070, even forward loops or no
 loop, and no slice notes. 900 remembers offsets; native double-application and saved
 range behavior are retained. Nonloops stop; source PCM is never rewritten.
@@ -119,7 +121,8 @@ Editor: DISK OP. > RENDER WAV or Control-Shift-W. P scope, M track mask, A all, 
 R rate, B bits, G gain, L lead-in, W/Return WAV file, U new sample, S stems, O track/group mode, E marked rows. Escape cancels rendering.
 WAV export preserves project undo/dirty state. NEW SAMPLE / U creates one undoable stereo16/24
 sample at the chosen rate, within the sampler memory budget. Cancellation preserves redo.
-Complete effects, selected-row bounce and batch stems remain unfinished.
+Selected-row WAV/bounce and track/group stems are implemented; full effect compatibility
+and mixed-backend live playback remain unfinished.
 This is not the finished sixteen-channel tracker or a hardware-qualified release.
 
 Amiga Shell, from the Amiga directory:
@@ -127,7 +130,7 @@ Amiga Shell, from the Amiga directory:
   PT24GEdit examples/classic.mod my-new-project.ptg
   PT24GConvert inspect my-new-project.ptg
 
-Output paths must be new. Existing files are never replaced. Read
+Song/audio output paths must be new. Existing song/audio files are never replaced. Read
 source/docs/ENHANCED_EDITOR.md and source/docs/HARDWARE_INDEPENDENT.md for commands,
 current limitations and separate emulator/hardware acceptance boundaries.
 The synthetic mixed fixture exercises routes and precision; it is not a demo song.

@@ -1,9 +1,12 @@
 #include "render.h"
+#include "pitch.h"
 #include <string.h>
 struct run {
     struct pt_project view;
     uint16_t order;
     struct pt_timeline timeline;
+    struct pt_pitch pitch;
+    uint16_t tracks;
     uint64_t frames;
     uint8_t started,pending_end;
 };
@@ -22,8 +25,8 @@ static enum pt_render_result preflight(const struct pt_project *p,const struct p
         const struct pt_event *e=p->events+((size_t)pat*64+row)*p->channels.count+ch;
         if(!(o->tracks&(1U<<ch)))continue;
         if(e->kind==PT_NOTE_MIDI || (e->instrument && e->kind!=PT_NOTE_PERIOD))return PT_RENDER_EFFECT;
-        if(!((e->effect==0 && !e->parameter) || (e->effect>=10 && e->effect<=13) || e->effect==15 ||
-             (e->effect==14 && ((e->parameter>>4)==6 || ((e->parameter>>4)>=10 && (e->parameter>>4)<=12) ||
+        if(!((e->effect==0 && !e->parameter) || e->effect==1 || e->effect==2 || (e->effect>=10 && e->effect<=13) || e->effect==15 ||
+             (e->effect==14 && ((e->parameter>>4)==1 || (e->parameter>>4)==2 || (e->parameter>>4)==6 || ((e->parameter>>4)>=10 && (e->parameter>>4)<=12) ||
                                (e->parameter>>4)==14))))return PT_RENDER_EFFECT;
         if(e->instrument) {
             const struct pt_sample *s=p->samples+e->instrument-1;
@@ -35,6 +38,7 @@ static enum pt_render_result preflight(const struct pt_project *p,const struct p
 static int start_run(struct run *r,const struct pt_project *p,const struct pt_render_options *o)
 {
     memset(r,0,sizeof(*r));r->view=*p;r->started=o->include_lead_in;
+    r->tracks=o->tracks;pt_pitch_init(&r->pitch);
     if(o->pattern_only) {r->order=o->pattern;r->view.orders=&r->order;r->view.order_count=1;}
     return pt_timeline_init(&r->timeline,&r->view,PT_FLOW_EXTENDED256,o->pattern_only?0:o->start_order,
                             o->rate,o->tick_limit,o->frame_limit)==PT_TIMELINE_TICK;
@@ -53,6 +57,13 @@ static enum pt_render_result next_tick(struct run *r,struct pt_tick_span *span,u
     if(!r->timeline.flow.active)*end=1; /* F00. */
     else if(r->pending_end && r->timeline.flow.fresh)*end=2;
     if(r->timeline.flow.returns!=returned)r->pending_end=1;
+    if(!*end) {
+        unsigned ch;pt_pitch_tick(&r->pitch,&r->timeline.flow,r->tracks);
+        /* A zero register period has no defined reference PCM rate yet.
+           Reject it in measurement, before sinks, staging or bounce commit. */
+        for(ch=0;ch<r->view.channels.count;++ch)
+            if(r->pitch.channel[ch].sounding && !r->pitch.channel[ch].output)return PT_RENDER_EFFECT;
+    }
     return PT_RENDER_OK;
 }
 static void report_run(const struct run *r,unsigned end,uint64_t clips,struct pt_render_report *out)
@@ -94,7 +105,7 @@ static void gains_for(const struct pt_project *p,const struct pt_render_options 
     }
 }
 static enum pt_render_result commands(const struct pt_project *p,const struct pt_render_options *o,
-                                      const struct pt_flow *flow,struct pt_voice *voice,
+                                      const struct pt_flow *flow,const struct pt_pitch *pitch,struct pt_voice *voice,
                                       uint8_t *instrument,uint8_t *volume,uint8_t *velocity)
 {
     unsigned ch;
@@ -119,6 +130,8 @@ static enum pt_render_result commands(const struct pt_project *p,const struct pt
             if(up)volume[ch]=(uint8_t)(volume[ch]+up>64?64:volume[ch]+up);
             else volume[ch]=(uint8_t)(volume[ch]<down?0:volume[ch]-down);
         }
+        if(voice[ch].pcm && pitch->channel[ch].output)
+            voice[ch].step=step(p->samples+instrument[ch]-1,pitch->channel[ch].output,o->rate);
         /* Extended volume commands also run on delayed tick zero, without
            fetching the instrument or restarting the sample. ECx changes only
            volume; a later Cxx must reveal the continuing voice phase. */
@@ -154,7 +167,7 @@ enum pt_render_result pt_render_stream(const struct pt_project *p,const struct p
             if(!sink(sink_ctx,&block,offset))return PT_RENDER_SINK;
             clips+=clipped;offset+=block.frames;remaining-=block.frames;
         }
-        if(!end) {result=commands(p,o,&r.timeline.flow,voice,instrument,volume,velocity);if(result!=PT_RENDER_OK)return result;}
+        if(!end) {result=commands(p,o,&r.timeline.flow,&r.pitch,voice,instrument,volume,velocity);if(result!=PT_RENDER_OK)return result;}
     } while(!end);
     if(offset!=planned.frames || r.timeline.flow.ticks!=planned.ticks)return PT_RENDER_INVALID;
     report_run(&r,end,clips,out);return PT_RENDER_OK;

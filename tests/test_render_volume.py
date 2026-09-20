@@ -9,7 +9,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'tools'))
 from make_volume_fixtures import fixtures
 from test_flow_emulator import decode_trace
-SOURCES=['tests/render_volume_test.c','src/core/render.c','src/core/timeline.c','src/core/frame_clock.c','src/core/flow.c','src/core/voice.c','src/core/project.c','src/core/channels.c','src/core/pcm.c','src/core/document.c','src/core/pp20.c','src/core/mod_project.c','src/core/mod_inspect.c']
+SOURCES=['tests/render_volume_test.c','src/core/render.c','src/core/pitch.c','src/core/timeline.c','src/core/frame_clock.c','src/core/flow.c','src/core/voice.c','src/core/project.c','src/core/channels.c','src/core/pcm.c','src/core/document.c','src/core/pp20.c','src/core/mod_project.c','src/core/mod_inspect.c']
 class VolumeRender(unittest.TestCase):
     def test_pinned_native_volume_and_silent_phase(self):
         evidence=ROOT/'evidence/enhanced-editor/dev34/native'

@@ -5,7 +5,7 @@ import subprocess
 import tempfile
 import unittest
 ROOT=Path(__file__).resolve().parents[1]
-RENDER=['src/platform/render_file.c','src/core/render.c','src/core/timeline.c','src/core/frame_clock.c','src/core/flow.c','src/core/voice.c','src/core/project.c','src/core/channels.c','src/core/pcm.c']
+RENDER=['src/platform/render_file.c','src/core/render.c','src/core/pitch.c','src/core/timeline.c','src/core/frame_clock.c','src/core/flow.c','src/core/voice.c','src/core/project.c','src/core/channels.c','src/core/pcm.c']
 class RenderFile(unittest.TestCase):
     def test_verified_stream_publication_and_io_failure(self):
         with tempfile.TemporaryDirectory() as tmp:

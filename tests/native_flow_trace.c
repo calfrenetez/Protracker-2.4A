@@ -5,7 +5,9 @@
 #include <proto/dos.h>
 #include "document.h"
 #include "../src/native/paula.h"
+#ifndef RECORD_BYTES
 #define RECORD_BYTES 36U
+#endif
 uint8_t *pt_flow_data;
 volatile uint16_t pt_flow_count,pt_flow_fetches,pt_flow_limited;
 uint16_t pt_flow_capacity;

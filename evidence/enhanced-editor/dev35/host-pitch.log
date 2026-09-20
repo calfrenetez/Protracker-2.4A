@@ -1,0 +1,8 @@
+test_native_stored_output_periods_and_pcm (test_pitch.Pitch.test_native_stored_output_periods_and_pcm) ... PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 3.692s
+
+OK
+PITCH: seven repeated native traces match host/m68k state, PCM and zero-period refusal

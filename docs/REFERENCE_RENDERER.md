@@ -87,7 +87,7 @@ is an error, never silently classified as a completed song.
 Supported: ordinary raw-period notes (including instrument-zero inheritance),
 explicit note-off and velocity; mono/stereo 8/16/24-bit samples; nearest/linear
 interpolation; forward/ping-pong loops; sample slices; track selection; global
-mute/solo; and effects `000`, `Axx`, `Bxx`, `Cxx`, `Dxx`, `E6x`, `EAx`, `EBx`, `ECx`, `EEx`, `Fxx`.
+mute/solo; and effects `000`, `1xx`, `2xx`, `Axx`, `Bxx`, `Cxx`, `Dxx`, `E1x`, `E2x`, `E6x`, `EAx`, `EBx`, `ECx`, `EEx`, `Fxx`.
 Axx applies on effect passes, including delayed passes. Fine volume slides EAx/EBx
 apply only at tick zero, including delayed tick-zero passes, and saturate at 0/64.
 ECx cuts volume when the current tick equals x; EC0 is immediate and an x outside
@@ -96,6 +96,20 @@ slide can restore the continuing sample. These semantics are checked against
 repeated raw-volume traces from the pinned 2.3F replay code (dev34).
 Global flow commands on tracks excluded from audio still control the song. Selected slice ranges use
 one-shot playback unless the complete sample loop lies within that slice.
+
+Pitch slides 1xx/2xx run on effect passes, including delayed passes; a zero
+parameter is literal zero, not effect memory. Fine slides E1x/E2x run only on
+tick zero, including delayed tick zero. The interpreter retains the stored
+16-bit word and the last playback-period write separately. It preserves the
+original replay's wrapping arithmetic, 12-bit masking on slide writes, low-12
+limits of 113/856, and later full-word writes from PerNop/SetBack. Slide updates
+change the rate without restarting the voice or resetting its fractional phase.
+
+Measurement refuses a triggered voice whose period becomes zero, before any sink,
+WAV staging or sample append. Zero-period playback is an explicit remaining
+reference limitation. Notes still use their raw project periods; this does not
+add native note-table quantization, finetune or PAL clock/analogue behavior.
+Separate stored/output register traces and ramp PCM comparisons are in dev35.
 
 Mono pan uses a linear left/right split over 0..255. Stereo pan uses balance:
 centre128 leaves both sides at unity, and each endpoint silences the opposite

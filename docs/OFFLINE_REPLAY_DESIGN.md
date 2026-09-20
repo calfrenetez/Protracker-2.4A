@@ -251,3 +251,28 @@ The renderer preserves the outgoing row interval and ends at the next fresh row
 boundary after a position return, or at F00. File output is bounded, streaming,
 re-rendered for byte comparison and atomically published with no replacement.
 This does not turn the remaining voice/effect and physical gates into passes.
+
+
+## Pitch-register reference extension (dev35)
+
+`pitch.c` consumes the completed shared flow tick for selected tracks. It keeps
+stored words and output writes separate; deriving every output from a clamped
+base period loses the original replay's wrap/PerNop/SetBack behavior. Fresh rows
+also retain the original previous-empty-event check. Raw project-note periods
+remain the reference input policy; this is not native note-table quantization.
+
+`prepare_pitch_trace.py` creates a separate 52-byte diagnostic record. The first
+36 bytes preserve the flow diagnostic schema; offsets36..43 contain four stored
+period words and offsets44..51 the last four hardware period writes. All words
+are big-endian. Ten period-write sites are guarded by an exact anchor count.
+Wrappers preserve registers and MOVE.W flags, including X, then perform the
+original hardware write. ISR buffers are allocated before playback; publication
+of the record count still occurs last. The diagnostic never enters PT24GEdit.
+The baseline fixture's original 36 fields remain identical to retained dev28
+records. No previous traces are rewritten.
+
+The renderer runs pitch interpretation in measurement as well as streaming.
+A triggered zero output period fails measurement with PT_RENDER_EFFECT before
+any file staging, sink calls or sample append. Remaining classic effects and
+zero-period sound semantics require further evidence; no hardware sound model
+is inferred from these register traces.

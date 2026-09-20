@@ -10,6 +10,7 @@ from build_diagnostic import digest, runtime_inputs, compiler_safety_flags, ROOT
 from make_mod_corpus import cases
 from prepare_replay import prepare_replay
 from prepare_flow_trace import prepare_flow_trace
+from prepare_pitch_trace import prepare_pitch_trace
 
 
 def main():
@@ -52,14 +53,17 @@ def main():
         'PTPcmTest': ['tests/pcm_test.c', 'src/core/pcm.c', 'src/core/wav.c', 'src/core/svx.c', 'src/core/raw.c'],
     }
     inputs['PTFlowTraceTest'] = ['tests/native_flow_trace.c', *inputs['PTPaulaTest'][1:]]
+    inputs['PTPitchTraceTest'] = inputs['PTFlowTraceTest']
+    inputs['PTPitchTest'] = ['tests/pitch_test.c','src/core/pitch.c','src/core/flow.c', *inputs['PTPaulaTest'][2:]]
     inputs['PTFlowCoreTest'] = ['tests/flow_test.c','src/core/flow.c', *inputs['PTPaulaTest'][2:]]
     inputs['PTFrameClockTest'] = ['tests/frame_clock_test.c','src/core/frame_clock.c']
     inputs['PTTimelineTest'] = ['tests/timeline_test.c','src/core/timeline.c','src/core/frame_clock.c','src/core/flow.c','src/core/project.c','src/core/channels.c','src/core/pcm.c']
     inputs['PTVoiceTest'] = ['tests/voice_test.c','src/core/voice.c','src/core/pcm.c']
-    render_sources = ['src/core/render.c','src/core/timeline.c','src/core/frame_clock.c','src/core/flow.c','src/core/voice.c','src/core/project.c','src/core/channels.c','src/core/pcm.c']
+    render_sources = ['src/core/render.c','src/core/pitch.c','src/core/timeline.c','src/core/frame_clock.c','src/core/flow.c','src/core/voice.c','src/core/project.c','src/core/channels.c','src/core/pcm.c']
     inputs['PT24GEdit'] += [s for s in ['src/platform/render_file.c',*render_sources] if s not in inputs['PT24GEdit']]
     inputs['PT24GEdit'] += ['src/editor/bounce.c']
     inputs['PTBounceTest'] = ['tests/bounce_test.c','src/editor/bounce.c',*dict.fromkeys([*inputs['PTSamplerTest'][1:],*render_sources])]
+    inputs['PTPitchRenderTest'] = ['tests/render_pitch_test.c',*render_sources,'src/core/document.c','src/core/pp20.c','src/core/mod_project.c','src/core/mod_inspect.c']
     inputs['PTVolumeRenderTest'] = ['tests/render_volume_test.c',*render_sources,'src/core/document.c','src/core/pp20.c','src/core/mod_project.c','src/core/mod_inspect.c']
     inputs['PTRenderTest'] = ['tests/render_test.c',*render_sources]
     inputs['PTRenderFileTest'] = ['tests/render_file_test.c','src/platform/render_file.c','src/core/wav.c',*render_sources]
@@ -72,8 +76,11 @@ def main():
     trace_source=out/'replay_trace.s'
     trace_source.write_bytes(prepare_flow_trace((ROOT/'vendor/pt23f/replayer/PT2.3F_replay_cia.s').read_bytes(),(ROOT/'src/native/replay_abi.s').read_bytes()))
     subprocess.run([str(ROOT/'local/vasm/vasmm68k_mot'), '-devpac', '-m68000', '-no-fpu', '-Fhunk', '-o', str(out/'replay_trace.o'), str(trace_source)], check=True)
+    pitch_source=out/'replay_pitch.s'
+    pitch_source.write_bytes(prepare_pitch_trace((ROOT/'vendor/pt23f/replayer/PT2.3F_replay_cia.s').read_bytes(),(ROOT/'src/native/replay_abi.s').read_bytes()))
+    subprocess.run([str(ROOT/'local/vasm/vasmm68k_mot'), '-devpac', '-m68000', '-no-fpu', '-Fhunk', '-o', str(out/'replay_pitch.o'), str(pitch_source)], check=True)
     for name, sources in inputs.items():
-        subprocess.run([cc, *flags, *sources, *([str(out/'replay.o')] if name in ('PT24GEdit','PTPaulaTest') else [str(out/'replay_trace.o')] if name=='PTFlowTraceTest' else []), '-o', str(out / name)], cwd=ROOT, check=True)
+        subprocess.run([cc, *flags, *(['-DRECORD_BYTES=52U'] if name=='PTPitchTraceTest' else []), *sources, *([str(out/'replay.o')] if name in ('PT24GEdit','PTPaulaTest') else [str(out/'replay_trace.o')] if name=='PTFlowTraceTest' else [str(out/'replay_pitch.o')] if name=='PTPitchTraceTest' else []), '-o', str(out / name)], cwd=ROOT, check=True)
     corpus = ROOT / 'local/share/guard'
     corpus.mkdir(parents=True, exist_ok=True)
     rows, manifest = [], []
@@ -97,7 +104,7 @@ def main():
               'binaries': {name: {'sha256': digest(out / name), 'bytes': (out / name).stat().st_size}
                            for name in [*inputs, 'PTGuardTest']},
               'sources': {name: digest(ROOT / name) for name in
-                          sorted(set(sum(inputs.values(), [])) | {'src/native/file_request.h', 'src/core/playback.h', 'src/core/flow.h', 'src/core/frame_clock.h', 'src/core/timeline.h', 'src/core/voice.h', 'src/core/render.h', 'src/platform/render_file.h', 'tools/build_core_tests.py', 'src/native/paula.h', 'src/native/replay_abi.s', 'tools/prepare_replay.py', 'tools/prepare_flow_trace.py', 'vendor/pt23f/replayer/PT2.3F_replay_cia.s', 'src/core/channels.h', 'src/core/pcm.h',
+                          sorted(set(sum(inputs.values(), [])) | {'src/native/file_request.h', 'src/core/playback.h', 'src/core/flow.h', 'src/core/frame_clock.h', 'src/core/timeline.h', 'src/core/voice.h', 'src/core/render.h', 'src/core/pitch.h', 'src/platform/render_file.h', 'tools/build_core_tests.py', 'src/native/paula.h', 'src/native/replay_abi.s', 'tools/prepare_replay.py', 'tools/prepare_flow_trace.py', 'tools/prepare_pitch_trace.py', 'vendor/pt23f/replayer/PT2.3F_replay_cia.s', 'src/core/channels.h', 'src/core/pcm.h',
                           'src/core/sinc_kernel.h', 'tools/generate_sinc_kernel.py', 'src/core/wav.h', 'src/core/svx.h', 'src/core/raw.h', 'src/core/midi.h', 'src/core/record.h', 'src/core/record_pattern.h', 'src/editor/editor.h', 'src/editor/song.h', 'src/editor/sampler.h', 'src/editor/bounce.h', 'src/editor/view.h', 'src/platform/file_save.h', 'vendor/pt23f/raw/ptfont.raw', 'src/core/project.h', 'src/core/mod_project.h', 'src/core/document.h', 'src/core/pp20.h', 'src/core/safe_save.h', 'src/core/pattern.h', 'src/core/slices.h', 'src/core/mod_inspect.h', 'src/native/mod_guard.s', 'tests/native_guard_harness.s'})},
               'guard_cases': manifest}
     (out / 'core-build.json').write_text(json.dumps(report, indent=2) + '\n')

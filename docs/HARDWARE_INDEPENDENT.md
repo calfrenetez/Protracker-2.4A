@@ -565,3 +565,22 @@ speed one. The separate pinned 2.3F trace diagnostic is unchanged from dev28.
 Native traces, host/m68k PCM comparisons and all-track phase tests are retained
 in `evidence/enhanced-editor/dev34/`. These isolate volume semantics; they do
 not claim analogue Paula sound, full effects or real-hardware acceptance.
+
+## Reference pitch-slide compatibility (dev35)
+
+The shared WAV/bounce renderer supports 1xx/2xx pitch slides and E1x/E2x fine
+slides. A separate allocation-free interpreter retains the original 16-bit
+stored word and latest output-period write. Native wrap, masked slide writes,
+later full-word restores and delayed-row passes are preserved. Voice phase
+continues when the pitch changes. Zero playback periods are refused during
+measurement before output or sample publication; finetune and native note-table
+quantization remain outside this reference profile.
+
+45 host checks pass. Seven original-replay fixtures were captured twice with
+identical 52-byte records, and both host and m68k match their stored/output
+periods and every rendered ramp frame. Zero-period refusal preserves the sink
+and report. The original 36 fields of a baseline trace remain byte-identical to
+dev28; the new diagnostic is separately linked, leaving shipping replay and old
+trace evidence intact. The emulator was released after guarded cleanup. See
+`evidence/enhanced-editor/dev35/`; no physical hardware or analogue-sound
+acceptance is claimed.

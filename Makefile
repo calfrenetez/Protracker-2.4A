@@ -43,4 +43,4 @@ fixture:
 
 renderer:
 	mkdir -p build/host
-	$(CC) -std=c99 -O2 -Wall -Wextra -Werror -Isrc/core tools/pt24g_render.c src/platform/render_file.c src/core/render.c src/core/timeline.c src/core/frame_clock.c src/core/flow.c src/core/voice.c src/core/document.c src/core/pp20.c src/core/project.c src/core/mod_project.c src/core/mod_inspect.c src/core/channels.c src/core/pcm.c -o build/host/PT24GRender
+	$(CC) -std=c99 -O2 -Wall -Wextra -Werror -Isrc/core tools/pt24g_render.c src/platform/render_file.c src/core/render.c src/core/pitch.c src/core/timeline.c src/core/frame_clock.c src/core/flow.c src/core/voice.c src/core/document.c src/core/pp20.c src/core/project.c src/core/mod_project.c src/core/mod_inspect.c src/core/channels.c src/core/pcm.c -o build/host/PT24GRender

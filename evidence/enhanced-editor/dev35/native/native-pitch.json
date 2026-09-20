@@ -1,0 +1,332 @@
+{
+  "schema": 1,
+  "record_bytes": 52,
+  "run_id": "pitch1789925188600209000",
+  "elapsed_seconds": 102.024,
+  "baseline_fixture_sha256": "fd566e6dd8163ab98e16960079fdc5075bdec2c6a812ae2c0ad853fd399a1686",
+  "baseline_first36": "EXACT DEV28 MATCH",
+  "diagnostic_sha256": "0417460e44bc436b7bca0547f75af8b90c05fe57fb29e52235e257a87f85b6fa",
+  "pitch_test_sha256": "f97e931da5b212be49b3e4f3a7618946ada8ade7adaf8ea09f472ef560bb1f7b",
+  "renderer_test_sha256": "359a78a822ac174067f82db1eda9e6bbbfed1c5fd4e4dd9d8e288c3a58c67bae",
+  "cases": {
+    "slides": {
+      "focus": "slides",
+      "events": [
+        [
+          0,
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          1,
+          15,
+          3
+        ],
+        [
+          1,
+          0,
+          2,
+          5
+        ],
+        [
+          2,
+          0,
+          1,
+          0
+        ],
+        [
+          3,
+          0,
+          2,
+          0
+        ],
+        [
+          4,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 18,
+      "fixture_sha256": "04178108de845602014dec2641b512f4ca15ce32ec784ead55f7b9882cd93832",
+      "trace_sha256": "64bf2a679189e94883e75f76bb2d0bc761e14a037e0a659947e3f6158744ca5e"
+    },
+    "bounds": {
+      "focus": "bounds",
+      "events": [
+        [
+          0,
+          0,
+          1,
+          15
+        ],
+        [
+          0,
+          1,
+          15,
+          3
+        ],
+        [
+          1,
+          0,
+          2,
+          255
+        ],
+        [
+          2,
+          0,
+          2,
+          255
+        ],
+        [
+          3,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 15,
+      "fixture_sha256": "fc2b4bcf17c152456a45d00d6acced2bacfa96a9cad5bdd60b781f49c7d3f1ad",
+      "trace_sha256": "4cb52df4062ce68318f0960f03c914f6b95b571c51b309f741807aefdf15b48f"
+    },
+    "fine": {
+      "focus": "fine",
+      "events": [
+        [
+          0,
+          0,
+          14,
+          31
+        ],
+        [
+          0,
+          1,
+          15,
+          3
+        ],
+        [
+          1,
+          0,
+          14,
+          47
+        ],
+        [
+          2,
+          0,
+          14,
+          16
+        ],
+        [
+          3,
+          0,
+          14,
+          32
+        ],
+        [
+          4,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 18,
+      "fixture_sha256": "3d7e99cba8a073097537b2788cf7305a2a9d234305df0a9aa1b72b2ba2ec0b6f",
+      "trace_sha256": "21eb49d7db3255cdf8fbf172e06e5a5fcfb3adf801a0733fa7eadf5363a15a96"
+    },
+    "fine_delay": {
+      "focus": "fine_delay",
+      "events": [
+        [
+          0,
+          0,
+          14,
+          31
+        ],
+        [
+          0,
+          1,
+          14,
+          226
+        ],
+        [
+          0,
+          2,
+          15,
+          2
+        ],
+        [
+          1,
+          0,
+          14,
+          47
+        ],
+        [
+          1,
+          1,
+          14,
+          226
+        ],
+        [
+          2,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 18,
+      "fixture_sha256": "dc0a3910a7606036a01b4a6e9f04e48bbc89ee9f4f296e9db731b1747ed75575",
+      "trace_sha256": "2218ab6519ddb1a81f7b806afd9857def5c3f6835ec6a79746298fa9cb42b427"
+    },
+    "slide_delay": {
+      "focus": "slide_delay",
+      "events": [
+        [
+          0,
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          1,
+          14,
+          226
+        ],
+        [
+          0,
+          2,
+          15,
+          2
+        ],
+        [
+          1,
+          0,
+          2,
+          5
+        ],
+        [
+          1,
+          1,
+          14,
+          225
+        ],
+        [
+          2,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 16,
+      "fixture_sha256": "4c04bf324d4196485886064a4cf79252a02955199eaa002e6edc2a3ae799f758",
+      "trace_sha256": "eaf92a7bdff5a75b1d2e0ba51f82fbdbf2d2ca1e748d95e024176b6ffdea2a89"
+    },
+    "wrap_restore": {
+      "focus": "wrap_restore",
+      "events": [
+        [
+          0,
+          0,
+          1,
+          255
+        ],
+        [
+          0,
+          1,
+          15,
+          2
+        ],
+        [
+          1,
+          0,
+          12,
+          32
+        ],
+        [
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          14,
+          33
+        ],
+        [
+          4,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 14,
+      "fixture_sha256": "a406e9bc076ce0016b604dd8dcd8bf3b1b843fae4482ac4069e1c7b24a139d44",
+      "trace_sha256": "47096c76b0ebbd7b8b3784ef8ac37fa7c9082f6b19f4f0312a8f6bdd7492449c"
+    },
+    "zero_refused": {
+      "focus": "zero_refused",
+      "events": [
+        [
+          0,
+          0,
+          1,
+          255
+        ],
+        [
+          0,
+          1,
+          15,
+          2
+        ],
+        [
+          1,
+          0,
+          2,
+          142
+        ],
+        [
+          2,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 10,
+      "fixture_sha256": "14f89a2beebe223068ba2a1c6bd2bf681798acc41a1ccea9881dcd90ac7727cb",
+      "trace_sha256": "db5df0e2b2acabbc708835c31887751c32f2fc3acf7638c4da2a5f78e904fafb"
+    }
+  },
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0",
+  "scope": "Pinned native stored/output periods captured twice; m68k pitch state matches every tick and rendered ramp PCM follows captured periods. Zero period refused before output. Reference rate/timing only; no hardware sound claim.",
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

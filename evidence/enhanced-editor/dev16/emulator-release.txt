@@ -1,0 +1,6 @@
+AmiConnect explicitly released Amiberry before this private window.
+Profile: ProTracker isolated baseline.
+First attempt filter1789898215794065000 exceeded the 180-second native-test deadline; no pass recorded. Exact-profile guarded QUIT cleaned it up.
+Optimized attempt filter1789898641876801000 passed all native checks and exited with exact-profile guarded QUIT.
+Fresh release checks: no Amiberry process; no open local/baseline.hdf handle; /tmp/amiberry.sock absent.
+Release sent to AmiConnect thread 01a02122-c34e-72f0-95cc-e36ce3d73629.

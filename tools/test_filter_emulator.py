@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Native range/format workflow; reserve the private Amiberry window first."""
+"""Native filtered-resampling and cancellation workflow; reserve the private Amiberry window first."""
 import io
+import math
 import json
 from pathlib import Path
 import shutil
@@ -23,12 +24,14 @@ def wav(channels,width,rate,data):
 def main():
     if matching_socket() or Path('/tmp/amiberry.sock').exists():raise SystemExit('Emulator already owned')
     env=json.loads((ROOT/'local/environment.json').read_text());share=Path(env['share']);launch=share/'launch';original=launch.read_bytes()
-    run=share/('format'+str(time.time_ns()));run.mkdir();out=ROOT/'build/dev/range-format-evidence';out.mkdir(exist_ok=True)
-    for name in ['PT24GEdit','PTSamplerTest']:shutil.copyfile(ROOT/'build/dev'/name,run/name)
-    shutil.copyfile(ROOT/'evidence/enhanced-editor/dev14/loops-slices/saved.ptg',run/'input.ptg')
+    run=share/('filter'+str(time.time_ns()));run.mkdir();out=ROOT/'build/dev/filter-evidence';out.mkdir(exist_ok=True)
+    for name in ['PT24GEdit','PTSamplerTest','PTFilterTest']:shutil.copyfile(ROOT/'build/dev'/name,run/name)
+    shutil.copyfile(ROOT/'evidence/baseline/mod.baseline',run/'input.mod')
+    values=[round(12000*math.sin(2*math.pi*1000*i/32000)+12000*math.sin(2*math.pi*6000*i/32000)) for i in range(8192)]
+    source=wav(1,2,32000,b''.join(v.to_bytes(2,'little',signed=True) for v in values));(run/'a.wav').write_bytes(source)
     process=emu=None;start=time.monotonic();current='editor.log'
     def log():return (run/current).read_text() if (run/current).exists() else ''
-    def wait(check,seconds=50):
+    def wait(check,seconds=180):
         end=time.monotonic()+seconds
         while time.monotonic()<end:
             if check():return
@@ -71,57 +74,49 @@ def main():
         raise AssertionError('Missing sample chunk')
     try:
         launch.write_text('\n'.join(['FailAt 21','Wait 5','Stack 65536','CD PTDEV:'+run.name,
-            'PTSamplerTest >sampler.log','Echo $RC >sampler.rc',
-            'PT24GEdit input.ptg saved.ptg >editor.log','Echo $RC >editor.rc',
+            'PTFilterTest >filter.log','Echo $RC >filter.rc','PTSamplerTest >sampler.log','Echo $RC >sampler.rc',
+            'PT24GEdit input.mod saved.ptg >editor.log','Echo $RC >editor.rc',
             'PT24GEdit saved.ptg reopened.ptg >reopened.log','Echo $RC >reopened.rc','Echo done >done'])+'\n')
         with (run/'emulator.log').open('wb') as f:process=subprocess.Popen([env['emulator_binary'],'--config',env['profile'],'-G','-m','PTDEV:'+str(share),'--log'],stdin=subprocess.DEVNULL,stdout=f,stderr=subprocess.STDOUT,start_new_session=True)
         wait(lambda:bool(matching_socket()));matches=matching_socket();assert len(matches)==1;emu=Emulator(matches[0])
-        frame('status=READY -');assert (run/'sampler.rc').read_text().strip()=='0'
-        assert 'CONVERSION PASS' in (run/'sampler.log').read_text()
-        key(0x28,True);key(0x42);key(0x42);key(0x42);frame('panel=8')
-        key(0x21);number(123);key(0x12);number(456);frame('revision=0 dirty=0 status=EXACT FRAME RANGE SET')
-        key(0x34);capture('01-exact-selection-zoom.png')
-        key(0x17);key(0x4e);capture('02-zoom-and-pan.png');key(0x18)
-        key(0x21);number(2048);frame('INVALID FRAME RANGE');key(0x45)
-        key(0x12);number(4294967295);frame('INVALID FRAME RANGE');key(0x45)
-        key(0x34);key(0x42);key(0x42);frame('panel=6');key(0x23);frame('revision=1 dirty=1 status=LOOP UPDATED')
-        capture('03-exact-loop.png');key(0x42);key(0x42);key(0x33);frame('panel=9');key(0x23) # Explicit linear regression mode.
-        key(2);key(0x13);number(192001);frame('INVALID RATE');key(0x45)
-        key(0x13);number(16574);capture('04-format-target.png')
-        key(0x19);frame('revision=2 dirty=1 status=SAMPLE UPDATED');capture('05-converted.png')
-        key(0x31,True);frame('revision=1 dirty=1 status=UNDO')
-        key(0x13);number(1);key(0x19);frame('revision=1 dirty=1 status=CONVERSION WOULD COLLAPSE')
-        key(0x31,True,True);frame('revision=2 dirty=1 status=REDO');key(0x42);key(0x33)
-        key(0x21,True);frame('dirty=0 status=PROJECT SAVED');saved=(run/'saved.ptg').read_bytes()
-        src=samples((run/'input.ptg').read_bytes());dst=samples(saved)
-        assert dst[40:46]==bytes([16,1,64,0,1,0])
-        assert int.from_bytes(dst[32:36],'big')==16574 and int.from_bytes(dst[36:40],'big')==4096
-        assert int.from_bytes(dst[48:52],'big')==246 and int.from_bytes(dst[52:56],'big')==912
-        count=int.from_bytes(dst[46:48],'big');assert count==4
-        markers=[int.from_bytes(dst[64+i*4:68+i*4],'big') for i in range(count)];assert markers==[0,1024,2048,3072]
-        old=[int.from_bytes(src[i:i+1],'big',signed=True) for i in range(80,80+2048)]
-        expected=[]
-        for i in range(4096):
-            a=old[i//2];b=old[min(i//2+1,2047)]
-            expected.append((a if i%2==0 else int((a+b)/2))*256)
-        actual=[int.from_bytes(dst[i:i+2],'big',signed=True) for i in range(80,80+4096*2,2)]
-        assert actual==expected
+        frame('status=READY -');assert all((run/(n+'.rc')).read_text().strip()=='0' for n in ['filter','sampler'])
+        key(0x28,True);request(True);filename('a.wav');key(0x44);frame('revision=1 dirty=1 status=SAMPLE UPDATED')
+        key(0x33);key(3);key(0x19);frame('revision=2 dirty=1 status=SAMPLE UPDATED');key(0x31,True)
+        key(2);key(0x13);number(8000);capture('01-filter-target.png')
+        offset=key(0x19,ack=False);wait(lambda:'EDITOR CONVERSION progress=0' in log()[offset:])
+        key(0x45);frame('revision=1 dirty=1 status=CONVERSION CANCELLED',offset);capture('02-cancelled.png')
+        assert 'EDITOR CONVERSION cancelled=' in log()[offset:]
+        key(0x42);request(False);filename('cancel.wav');key(0x44);frame('WAV EXPORTED AND VERIFIED')
+        assert (run/'cancel.wav').read_bytes()==source
+        key(0x31,True,True);frame('revision=2 dirty=1 status=REDO');key(0x31,True)
+        key(0x33);key(0x13);number(8000)
+        filtering_start=time.monotonic();offset=key(0x19,ack=False)
+        wait(lambda:'EDITOR CONVERSION progress=0' in log()[offset:]);capture('03-filter-progress.png')
+        frame('revision=3 dirty=1 status=SAMPLE UPDATED',offset);elapsed_filter=round(time.monotonic()-filtering_start,3)
+        capture('04-filtered-waveform.png');assert 'EDITOR CONVERSION progress=100' in log()[offset:]
+        key(0x42);request(False);filename('out.wav');key(0x44);frame('WAV EXPORTED AND VERIFIED')
+        key(0x21,True);frame('dirty=0 status=PROJECT SAVED');saved=(run/'saved.ptg').read_bytes();dst=samples(saved)
+        assert dst[40:44]==bytes([16,1,64,0]) and int.from_bytes(dst[32:36],'big')==8000 and int.from_bytes(dst[36:40],'big')==2048
+        assert int.from_bytes(dst[46:48],'big')==0
+        actual=[int.from_bytes(dst[i:i+2],'big',signed=True) for i in range(64,64+4096,2)]
+        errors=[abs(actual[i]-round(12000*math.sin(2*math.pi*1000*i/8000))) for i in range(32,2016)]
+        assert max(errors)<=8,max(errors)
+        assert (run/'out.wav').read_bytes()==wav(1,2,8000,b''.join(v.to_bytes(2,'little',signed=True) for v in actual))
         key(0x45);key(0x45);current='reopened.log';frame('status=READY -')
-        key(0x28,True);key(0x33);capture('06-reopened-format.png')
         key(0x21,True);frame('dirty=0 status=PROJECT SAVED');assert (run/'reopened.ptg').read_bytes()==saved
-        key(0x45);key(0x45);wait(lambda:(run/'done').exists())
+        key(0x45);wait(lambda:(run/'done').exists())
         assert all((run/(n+'.rc')).read_text().strip()=='0' for n in ['editor','reopened'])
-        audio=audio_off();capture('07-normal-exit.png')
-        report={'run_id':run.name,'elapsed_seconds':round(time.monotonic()-start,3),'binaries':{n:digest(run/n) for n in ['PT24GEdit','PTSamplerTest']},
-            'zoom_pan_and_exact_numeric_range':True,'view_changes_leave_project_clean':True,'invalid_range_and_rate_preserved':True,
-            'exact_scaled_loops_markers_and_linear_pcm':True,'collapse_refusal_preserves_redo':True,
-            'project_crc_and_reopen_identity':True,'markers':markers,'normal_exits':2,'stopped_audio':audio,
-            'input':'real raw-key events; mouse targets and zoomed selection covered by shared controller host tests',
-            'logs':{n:(run/n).read_text() for n in ['sampler.log','editor.log','reopened.log']},
+        audio=audio_off();capture('05-normal-exit.png')
+        report={'run_id':run.name,'elapsed_seconds':round(time.monotonic()-start,3),'filter_workflow_seconds':elapsed_filter,
+            'binaries':{n:digest(run/n) for n in ['PT24GEdit','PTSamplerTest','PTFilterTest']},
+            'native_filter_tones_precision_boundaries':True,'escape_cancels_preserving_exact_source_and_redo':True,
+            'progress_updates':True,'mixed_tone_output_max_error_lsb':max(errors),
+            'exact_project_wav_and_reopen_identity':True,'normal_exits':2,'stopped_audio':audio,
+            'logs':{n:(run/n).read_text() for n in ['filter.log','sampler.log','editor.log','reopened.log']},
             'environment':{c:emu.command(c) for c in ['GET_STATUS','GET_VERSION','GET_CPU_MODEL','GET_MEMORY_CONFIG']}}
-        (out/'native-range-format.json').write_text(json.dumps(report,indent=2)+'\n')
-        for n in ['input.ptg','saved.ptg','reopened.ptg']:shutil.copyfile(run/n,out/n)
-        print('PASS: native zoom/exact ranges, rate/precision conversion, scaled markers/loops, refusal/redo and exact save-reopen')
+        (out/'native-filter.json').write_text(json.dumps(report,indent=2)+'\n')
+        for n in ['a.wav','cancel.wav','out.wav','saved.ptg','reopened.ptg']:shutil.copyfile(run/n,out/n)
+        print('PASS: native filter quality, cancellable progress, exact source/redo preservation, verified WAV/project and reopen')
     finally:
         launch.write_bytes(original)
         if process and process.poll() is None:
@@ -129,5 +124,5 @@ def main():
                 if emu:Emulator(emu.path).command('QUIT')
                 else:process.terminate()
             finally:process.wait(timeout=10)
-        print('Range/format test released:',run)
+        print('Filtered conversion test released:',run)
 if __name__=='__main__':main()

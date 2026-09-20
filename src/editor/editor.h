@@ -24,7 +24,7 @@ struct pt_editor {
     uint32_t wave_start,wave_end,wave_frames;
     unsigned wave_slot,number_field,number_fresh;
     char number_text[11];
-    unsigned format_slot,format_bits;
+    unsigned format_slot,format_bits,format_filtered;
     uint32_t format_rate;
     uint32_t loop_fade,slice_markers[4096];
     size_t slice_count;

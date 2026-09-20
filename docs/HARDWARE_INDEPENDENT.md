@@ -65,7 +65,7 @@ below; they do not replace the original assembler tracker representation.
 | --- | --- | --- |
 | Channels | 1–16 channels, four-column page selection, wrapping navigation, names/pan/group/MIDI metadata, exclusive P/A/M routes, atomic fifth-Paula rejection and stable allocation of four Paula slots | Existing-song resizing, names/pan/group/MIDI setup UI, mixed backend dispatch |
 | Mute/solo and history | Channel page and saved settings; shared chronological note/block/channel undo; fifth-Paula rejection; classic Paula live mute/solo and undo/redo | Mixed backend playback and persistent recovery |
-| PCM editing | Sampler waveform/range UI; signed 8/16/24-bit mono/stereo reverse, saturation gain, shared-peak normalize, fades and per-channel DC removal; staged shared undo and allocation rollback | High-quality filtered/dithered conversion and additional import formats |
+| PCM editing | Sampler waveform/range UI; signed 8/16/24-bit mono/stereo reverse, saturation gain, shared-peak normalize, fades and per-channel DC removal; staged shared undo and allocation rollback | Dithered conversion and additional import formats |
 | Conversion | Explicit precision conversion with rounding/clipping; offline integer linear resampling | Antialias filtering and quality qualification; shared renderer/converter integration |
 | WAV | Bounded RIFF PCM parsing and canonical writing; 8/16/24-bit mono/stereo, odd-chunk padding, byte/block-rate checks and full low-eight-bit retention | Float/extensible WAV and loop metadata; integer PCM native import/export with verified new-file publication is connected |
 
@@ -346,3 +346,12 @@ Collapsed markers are refused. High-quality antialias filtering and dither remai
 separate work; no automatic conversion or implicit stereo downmix is performed.
 See `evidence/enhanced-editor/dev15/` for source/binary identities and host/native
 range, conversion, rollback, persistence and display evidence.
+
+## Filtered conversion milestone (dev16)
+
+A bounded integer windowed-sinc path is now the default sample-rate converter;
+linear is an explicit alternative. Native progress and Escape cancellation keep
+the old project/history intact while a destination is staged. Host/native tone,
+stereo precision, boundary and cancellation evidence is retained under
+`evidence/enhanced-editor/dev16/`. Physical sound-quality and performance acceptance
+are still separate; dither and complete classic-song conversion remain open.

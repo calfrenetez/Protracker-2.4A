@@ -76,6 +76,8 @@ static void loops_and_slices(void)
     pt_document_release(&d);pt_document_release(&reopened);assert(!live);
     puts("LOOP/SLICE PASS: metadata, atomic bake undo, proposal commit, non-destructive PCM, retarget refusal, undo/redo conflicts, allocation rollback and exact persistence");
 }
+static int cancel_conversion(void *context,uint32_t done,uint32_t total)
+{(void)total;return done<*(uint32_t *)context;}
 static void conversion(void)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_document d,reopened;struct pt_sampler s;
@@ -115,6 +117,23 @@ static void conversion(void)
     assert(!memcmp(reopened.project.samples[0].pcm.data,expected,sizeof(expected)) && reopened.project.samples[0].slices[1]==4);
     assert(pt_sampler_convert(&s,&d.project,&h,0,8,88200)==PT_EDIT_OK && d.project.samples[0].pcm.data[0]==-128 && d.project.samples[0].pcm.data[1]==127);
     assert(pt_pattern_undo(&d.project,&h,-1)==PT_EDIT_OK && !pt_pattern_dirty(&h));
+    {uint32_t cancel_at=0;
+        revision=h.revision;allocations=live;s.progress=cancel_conversion;s.progress_context=&cancel_at;
+        assert(pt_sampler_convert_quality(&s,&d.project,&h,0,16,44100,1)==PT_EDIT_CANCELLED);
+        assert(h.revision==revision && live==allocations && !memcmp(d.project.samples[0].pcm.data,expected,sizeof(expected)));
+        cancel_at=1;
+        assert(pt_sampler_convert_quality(&s,&d.project,&h,0,16,44100,1)==PT_EDIT_CANCELLED);
+        assert(h.revision==revision && live==allocations && !memcmp(d.project.samples[0].pcm.data,expected,sizeof(expected)));
+        s.progress=NULL;s.progress_context=NULL;
+    }
+    assert(pt_sampler_convert_quality(&s,&d.project,&h,0,16,44100,1)==PT_EDIT_OK);
+    assert(d.project.samples[0].pcm.frames==4 && d.project.samples[0].slices[1]==2 && d.project.samples[0].loop_start==1 && d.project.events[0].slice==2);
+    assert(pt_pattern_undo(&d.project,&h,-1)==PT_EDIT_OK && !pt_pattern_dirty(&h));
+    assert(!memcmp(d.project.samples[0].pcm.data,expected,sizeof(expected)));
+    revision=h.revision;allocations=live;
+    assert(pt_sampler_convert_quality(&s,&d.project,&h,0,16,1,1)==PT_EDIT_UNSUPPORTED);
+    assert(pt_sampler_convert_quality(&s,&d.project,&h,0,16,44100,2)==PT_EDIT_INVALID);
+    assert(h.revision==revision && live==allocations && pt_pattern_undo(&d.project,&h,1)==PT_EDIT_OK);
     pt_pattern_history_release(&h);pt_sampler_release(&s);assert(!s.bytes);pt_document_release(&d);pt_document_release(&reopened);assert(!live);
     puts("CONVERSION PASS: stereo precision/rate, scaled loops and referenced slice ordinals, exact undo, collapse refusal, allocation rollback, redo and persistence");
 }

@@ -230,7 +230,8 @@ static void sampler_controls(struct pt_editor *e)
         pt_editor_click(e,250,87);assert(p->samples[0].pcm.bits==(bits==16?8:16) && p->samples[0].pcm.rate==rate);
         pt_editor_key(e,0x31,8);assert(p->samples[0].pcm.bits==bits);
         pt_editor_key(e,0x31,9);assert(p->samples[0].pcm.bits==(bits==16?8:16));
-        pt_editor_click(e,500,70);assert(e->panel==5);
+        assert(e->format_filtered);pt_editor_click(e,500,70);assert(e->panel==9 && !e->format_filtered);
+        pt_editor_key(e,0x23,0);assert(e->format_filtered);pt_editor_key(e,0x42,0);assert(e->panel==5);
     }
     pt_editor_key(e,0x45,0);assert(!e->panel && !e->quit_pending);
     free(before);

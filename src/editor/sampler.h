@@ -9,6 +9,8 @@ struct pt_sampler {
     struct pt_allocator allocator;
     size_t bytes,budget;
     unsigned generation;
+    pt_pcm_progress progress;
+    void *progress_context;
 };
 void pt_sampler_init(struct pt_sampler *,const struct pt_allocator *,size_t);
 /* Release journal first, then sampler, before destroying/reinitializing editor.
@@ -24,4 +26,5 @@ enum pt_edit_result pt_sampler_slices(struct pt_sampler *,struct pt_project *,st
 /* Explicit whole-sample conversion. Linear rate conversion preserves marker
    ordinals by scaling frames; collapsed markers/invalid loop geometry refuse. */
 enum pt_edit_result pt_sampler_convert(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,unsigned,uint32_t);
+enum pt_edit_result pt_sampler_convert_quality(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,unsigned,uint32_t,unsigned);
 #endif

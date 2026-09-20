@@ -3,7 +3,7 @@ import subprocess
 import tempfile
 import unittest
 ROOT=Path(__file__).resolve().parents[1]
-SOURCES=['tests/sampler_test.c','src/editor/sampler.c', 'src/core/slices.c','src/core/pattern.c','src/core/document.c','src/core/project.c','src/core/mod_project.c','src/core/mod_inspect.c','src/core/channels.c','src/core/pcm.c','src/core/wav.c']
+SOURCES=['tests/sampler_test.c','src/editor/sampler.c', 'src/core/pcm_filtered.c', 'src/core/slices.c','src/core/pattern.c','src/core/document.c','src/core/project.c','src/core/mod_project.c','src/core/mod_inspect.c','src/core/channels.c','src/core/pcm.c','src/core/wav.c']
 class Sampler(unittest.TestCase):
     def test_owned_versions_and_journal(self):
         with tempfile.TemporaryDirectory() as tmp:

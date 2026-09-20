@@ -185,7 +185,7 @@ static void draw_sample(const struct pt_editor *e,struct pt_canvas *c,const uint
     snprintf(text,sizeof(text),"SAMPLE %02u  %u BIT  %s  %lu HZ",e->sample,pcm->bits,pcm->channels==2?"STEREO":"MONO",(unsigned long)pcm->rate);
     if(e->panel==6)snprintf(text,sizeof(text),"%s LOOP %lu - %lu  /  FADE %lu FRAMES",sample->loop==PT_LOOP_NONE?"NO":sample->loop==PT_LOOP_FORWARD?"FORWARD":sample->loop==PT_LOOP_PINGPONG?"PINGPONG":"CROSSFADE",(unsigned long)sample->loop_start,(unsigned long)sample->loop_end,(unsigned long)e->loop_fade);
     if(e->panel==7)snprintf(text,sizeof(text),"SLICES %u / %s %lu  -  %s",sample->slice_count,e->slice_pending?"PROPOSED":"SAVED",(unsigned long)(e->slice_pending?e->slice_count:sample->slice_count),e->slice_pending?"APPLY OR CANCEL":"MARKERS ONLY");
-    if(e->panel==9)snprintf(text,sizeof(text),"FORMAT %u BIT %lu HZ > %u BIT %lu HZ / LINEAR",pcm->bits,(unsigned long)pcm->rate,e->format_bits,(unsigned long)e->format_rate);
+    if(e->panel==9)snprintf(text,sizeof(text),"FORMAT %u BIT %lu HZ > %u BIT %lu HZ / %s",pcm->bits,(unsigned long)pcm->rate,e->format_bits,(unsigned long)e->format_rate,e->format_filtered?"FILTER":"LINEAR");
     label(c,font,2,PT_EDITOR_HEADER_Y,636,19,text,0);
     for(channel=0;channel<pcm->channels;++channel) {
         int top=254+(int)channel*(216/pcm->channels),height=216/pcm->channels-4,mid=top+height/2;
@@ -308,6 +308,7 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
             if(e->number_field==3)snprintf(s,sizeof(s),"%s_",e->number_text);
             else snprintf(s,sizeof(s),"%lu HZ",(unsigned long)e->format_rate);
             label(c,font,353,59,123,19,s,e->number_field==3);
+            label(c,font,476,59,123,19,e->format_filtered?"FILTERED":"LINEAR",e->format_filtered);
         }
         if(e->panel==8)for(i=1;i<=2;++i) {
             if(e->number_field==i)snprintf(s,sizeof(s),"%s_",e->number_text);

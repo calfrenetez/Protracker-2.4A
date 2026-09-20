@@ -48,6 +48,7 @@ void pt_editor_sample_result(struct pt_editor *e,enum pt_edit_result result)
 {
     if(e->slice_pending && e->slice_generation!=e->sampler.generation) {e->slice_pending=0;++e->sample_ui;}
     pt_editor_status(e,result==PT_EDIT_OK?"SAMPLE UPDATED - CONTROL-Z TO UNDO":
+        result==PT_EDIT_CANCELLED?"CONVERSION CANCELLED - SAMPLE AND HISTORY PRESERVED":
         result==PT_EDIT_CAPACITY?"SAMPLE MEMORY BUDGET OR ALLOCATION FAILED - NO CHANGE":
         result==PT_EDIT_UNSUPPORTED?"WAV FORMAT OR SLICE REFERENCES UNSUPPORTED - NO CHANGE":"SAMPLE EDIT REFUSED - NO CHANGE");
 }
@@ -70,7 +71,7 @@ static void sample_tab(struct pt_editor *e,unsigned page)
     pt_editor_status(e,page==6?"LOOPS: F FORWARD / P PINGPONG / O OFF / B BAKE FADE":
         page==7?"SLICES: M ADD / D DELETE / T AUTO / P APPLY / X CANCEL":
         page==8?"RANGE: I/O ZOOM; F FIT; V SELECTION; S/E ENTER FRAMES":
-        page==9?"FORMAT: 1/2/3 BITS; R RATE; P APPLY; LINEAR RESAMPLING":
+        page==9?"FORMAT: 1/2/3 BITS; R RATE; F FILTER; P APPLY":
         "SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO");
 }
 static int sample_range(struct pt_editor *e)
@@ -137,13 +138,14 @@ static void format_setting(struct pt_editor *e,unsigned bits,uint32_t rate)
     if(bits)e->format_bits=bits;
     if(rate)e->format_rate=rate;
     ++e->sample_ui;
-    pt_editor_status(e,bits?"TARGET BITS SET - REDUCTION LOSES PRECISION; APPLY":"TARGET RATE SET - LINEAR RESAMPLE HAS NO ANTIALIAS FILTER");
+    pt_editor_status(e,bits?"TARGET BITS SET - REDUCTION LOSES PRECISION; APPLY":e->format_filtered?"TARGET RATE SET - FILTERED RESAMPLING; APPLY":"TARGET RATE SET - LINEAR RESAMPLE HAS NO ANTIALIAS FILTER");
 }
 static void format_apply(struct pt_editor *e)
 {
     enum pt_edit_result result;unsigned generation=e->sampler.generation;
     if(!sample_range(e))return;
-    result=pt_sampler_convert(&e->sampler,e->project,&e->history,e->sample-1,e->format_bits,e->format_rate);
+    if(e->format_filtered && (uint64_t)e->format_rate*128<e->project->samples[e->sample-1].pcm.rate) {pt_editor_status(e,"FILTER LIMIT: USE INTERMEDIATE RATE OR LINEAR MODE");return;}
+    result=pt_sampler_convert_quality(&e->sampler,e->project,&e->history,e->sample-1,e->format_bits,e->format_rate,e->format_filtered);
     if(result==PT_EDIT_UNSUPPORTED)pt_editor_status(e,"CONVERSION WOULD COLLAPSE MARKERS OR LOOP - REFUSED");
     else pt_editor_sample_result(e,result);
     if(generation!=e->sampler.generation)pt_editor_sample_all(e);
@@ -225,7 +227,7 @@ int pt_editor_init(struct pt_editor *e,struct pt_project *p)
     memset(e,0,sizeof(*e));e->project=p;e->sample=p->sample_count?1:0;e->octave=1;e->new_channels=p->channels.count;
     if(pt_pattern_history_init(&e->history,p,e->commands,128,e->changes,2048)!=PT_EDIT_OK)return 0;
     {struct pt_allocator a={NULL,sample_allocate,sample_release};pt_sampler_init(&e->sampler,&a,32UL*1024*1024);}
-    e->loop_fade=32;e->slice_threshold=500;e->slice_gap_ms=50;e->slice_zero=1;
+    e->format_filtered=1;e->loop_fade=32;e->slice_threshold=500;e->slice_gap_ms=50;e->slice_zero=1;
     pt_editor_sample_all(e);
     e->clipboard.events=e->clipboard_events;e->clipboard.capacity=1024;
     pt_editor_status(e,"READY - F8 PLAY / F9 PATTERN / F10 STOP");return 1;
@@ -418,6 +420,7 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
             if(raw>=1 && raw<=3)format_setting(e,raw*8,0);
             else if(raw==0x13)number_begin(e,3);
             else if(raw==0x19)format_apply(e);
+            else if(raw==0x23) {e->format_filtered^=1;++e->sample_ui;format_setting(e,0,e->format_rate);}
         }
         else if(e->panel==8) {
             if(raw==0x17)wave_view(e,0);
@@ -542,7 +545,7 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
         if(e->panel==9) {
             if(r==1)format_setting(e,(c+1)*8,0);
             else if(r==2)format_setting(e,0,c==0?8287:c==1?22050:44100);
-            else if(r==3) {if(c==0)format_setting(e,0,48000);else if(c==1)number_begin(e,3);else sample_tab(e,5);}
+            else if(r==3) {if(c==0)format_setting(e,0,48000);else if(c==1)number_begin(e,3);else {e->format_filtered^=1;++e->sample_ui;format_setting(e,0,e->format_rate);}}
             else if(r==4) {if(c==0)format_apply(e);else undo(e,c==1?-1:1);}
             return PT_UI_NONE;
         }

@@ -229,15 +229,24 @@ other actions cannot edit the project or open a requester. All ranges are half-o
 
 SAMPLER > FORMAT, or C on SAMPLER/RANGE, opens conversion targets. Choose 8/16/24
 bits (keys 1/2/3), a rate preset (8287, 22050, 44100 or 48000 Hz), or click the
-rate value / R to enter 1–192000 Hz. These are proposals until APPLY / P; choosing
+rate value / R to enter 1–192000 Hz. FILTERED / LINEAR or F switches quality;
+filtered is the default. Tab returns to SAMPLER. These are proposals until APPLY / P; choosing
 or cancelling values does not edit the sample. Conversion always covers the
 whole selected sample, independent of the waveform selection. Precision reduction
 rounds to nearest with ties away from zero and saturates; widening retains exact
 values at the new scale. There is no dither in this conversion path.
 
-Rate conversion currently uses the portable linear interpolator, explicitly
-labelled LINEAR; it has no antialias filter and is not a high-quality downsampling
-or finished classic-song conversion claim. PCM remains mono/stereo as supplied.
+Filtered rate conversion uses an integer, 16-zero-crossing Blackman-windowed
+sinc with antialias filtering. A generated Q24 kernel table and integer arithmetic
+avoid any runtime FPU dependency. A bounded 16 KiB stack workspace caches a
+phase kernel; repeated phases reuse it. Q14 table interpolation and rational phase
+accumulation avoid 64-bit division per tap. The documented 64 KiB Shell stack
+remains required. Stereo channels share phase/coefficients;
+normalization retains exact DC gain, endpoints extend the nearest source frame,
+and output saturates to the declared precision. Filtered reduction is bounded to
+128:1 per operation; larger ratios are refused before staging. LINEAR remains an
+explicit faster mode without an antialias filter. PCM remains mono/stereo as supplied.
+The complete classic-song conversion/bounce engine is still separate work.
 The frame count rounds up, loop starts and slice frames round down, and exclusive
 loop ends round up. Slice ordinals remain attached to the corresponding scaled
 markers. Collapsed markers or invalid crossfade geometry refuse the whole change.
@@ -249,6 +258,15 @@ redo restores the converted version. Failures and unchanged targets preserve red
 and current playback. Successful conversion stops the old audio snapshot, clears
 stale marker proposals and selects the complete result. Project/WAV saves retain
 the converted values; hardware/backend limits on audition still apply.
+
+Native filtered conversion shows percentage progress and accepts Escape to cancel.
+The original sample remains live while a private destination is computed. Cancelling
+at any progress point releases that destination without changing project data,
+dirty state, redo or playback. Other editor inputs are ignored while conversion
+is modal; window events are drained/replied and refreshes are handled. The progress
+callback is polled in bounded work chunks (at most 32 output frames or roughly
+4096 filter taps). Progress redraws occur in 5% steps. This is a software mechanism,
+not a physical ACA1234 timing or responsiveness measurement.
 
 ## Display and acceptance boundaries
 

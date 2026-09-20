@@ -66,7 +66,8 @@ share undo and persist in PTG. Pingpong and slice-trigger playback remain pendin
 RANGE: I/O zoom, left/right pan, F fit, V zoom selection, S/E exact frame entry.
 FORMAT (C from SAMPLER/RANGE): 1/2/3 selects 8/16/24 bits, R enters rate, P applies.
 Conversion covers the whole sample, scales loops/markers, and shares undo.
-Rate conversion is linear without an antialias filter; bit reduction has no dither.
+Filtered conversion is default; F toggles linear mode. Filter progress accepts Escape
+to cancel without losing the source or redo. Bit reduction currently has no dither.
 Mixed AmiGUS/MIDI replay and other unfinished controls remain unavailable.
 PT24GConvert inspects projects and performs strict lossless MOD/project conversion.
 This is not the finished sixteen-channel tracker or a hardware-qualified release.

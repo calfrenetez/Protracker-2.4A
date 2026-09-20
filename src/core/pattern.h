@@ -28,7 +28,7 @@ struct pt_pattern_history {
 };
 struct pt_block {struct pt_event *events;size_t capacity;uint8_t rows,channels;};
 enum pt_edit_result {PT_EDIT_OK,PT_EDIT_INVALID,PT_EDIT_CAPACITY,PT_EDIT_END,
-                     PT_EDIT_CONFLICT,PT_EDIT_UNSUPPORTED,PT_EDIT_ALIAS,PT_EDIT_PAULA_LIMIT};
+                     PT_EDIT_CONFLICT,PT_EDIT_UNSUPPORTED,PT_EDIT_ALIAS,PT_EDIT_PAULA_LIMIT,PT_EDIT_CANCELLED};
 
 /* Bind history to one validated project's event storage. The caller serializes
  * editor/replayer access. Budgets are caller-owned memory, not a RAM assumption.

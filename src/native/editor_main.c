@@ -103,6 +103,37 @@ static void save_mod(struct pt_editor *e,const char *path,size_t n)
     /* Export does not mark the richer project saved or consume undo history. */
     printf("EDITOR MOD result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
 }
+struct conversion_ui {
+    struct pt_editor *editor;struct Window *window;struct pt_canvas *canvas;
+    struct BitMap *bitmap;struct pt_view_cache *cache;
+    unsigned percent;
+};
+static int conversion_progress(void *context,uint32_t done,uint32_t total)
+{
+    struct conversion_ui *ui=context;struct IntuiMessage *message;unsigned percent=total?(unsigned)((uint64_t)done*100/total):100;
+    int cancelled=0;
+    /* Conversion is modal. Drain/reply events so the window stays responsive,
+       accepting Escape only; never mutate the project while staging PCM. */
+    while((message=(struct IntuiMessage *)GetMsg(ui->window->UserPort))) {
+        ULONG kind=message->Class;UWORD code=message->Code;
+        ReplyMsg((struct Message *)message);
+        if(kind==IDCMP_RAWKEY && code==0x45)cancelled=1;
+        if(kind==IDCMP_REFRESHWINDOW) {BeginRefresh(ui->window);EndRefresh(ui->window,TRUE);ui->cache->valid=0;}
+    }
+    if(cancelled) {printf("EDITOR CONVERSION cancelled=%lu/%lu\n",(unsigned long)done,(unsigned long)total);fflush(stdout);return 0;}
+    if(!done || percent/5!=ui->percent/5 || !ui->cache->valid) {
+        struct pt_view_rect areas[PT_VIEW_DIRTY_MAX];unsigned i,n,plane;char status[76];
+        snprintf(status,sizeof(status),"FILTERING %u%% - ESC CANCEL; ORIGINAL SAMPLE PRESERVED",percent);
+        pt_editor_status(ui->editor,status);n=pt_editor_draw_update(ui->editor,ui->canvas,pt_font,ui->cache,areas);
+        for(i=0;i<n;++i) {
+            struct pt_view_rect *area=&areas[i];
+            for(plane=0;plane<4;++plane)CopyMem(ui->canvas->planes[plane]+area->y*80,ui->bitmap->Planes[plane]+area->y*80,area->height*80);
+            BltBitMapRastPort(ui->bitmap,area->x,area->y,ui->window->RPort,area->x,area->y,area->width,area->height,0xc0);WaitBlit();
+        }
+        ui->percent=percent;printf("EDITOR CONVERSION progress=%u\n",percent);fflush(stdout);
+    }
+    return 1;
+}
 int main(int argc,char **argv)
 {
     struct pt_view_cache view_cache={0};
@@ -159,6 +190,7 @@ int main(int argc,char **argv)
         while((message=(struct IntuiMessage *)GetMsg(window->UserPort))) {
             ULONG kind=message->Class;UWORD code=message->Code,qualifier=message->Qualifier;
             WORD mx=message->MouseX,my=message->MouseY;enum pt_editor_action action=PT_UI_NONE;
+            struct conversion_ui conversion={editor,window,&canvas,&bitmap,&view_cache,0};
             unsigned generation=editor->sampler.generation;
             unsigned long revision=editor->history.revision;const char *error=NULL;
             ReplyMsg((struct Message *)message);
@@ -185,10 +217,12 @@ int main(int argc,char **argv)
                 continue;
             }
             if(kind==IDCMP_RAWKEY && (code&0x80 || code>=0x60))continue;
+            editor->sampler.progress=conversion_progress;editor->sampler.progress_context=&conversion;
             if(kind==IDCMP_RAWKEY)action=pt_editor_key(editor,code,qualifier);
             else if(kind==IDCMP_MOUSEBUTTONS && code==SELECTDOWN)action=pt_editor_click(editor,mx,my);
             else if(kind==IDCMP_REFRESHWINDOW) {BeginRefresh(window);EndRefresh(window,TRUE);view_cache.valid=0;}
             else if(kind==IDCMP_INACTIVEWINDOW) {editor->quit_pending=0;editor->load_pending=0;}
+            editor->sampler.progress=NULL;editor->sampler.progress_context=NULL;
             if(action==PT_UI_PLAY || action==PT_UI_PATTERN) {
                 error=pt_paula_play(&audio,editor->project,action==PT_UI_PATTERN,editor->position,editor->pattern);
                 pt_editor_status(editor,error?error:action==PT_UI_PATTERN?"PLAYING PATTERN - PAULA CIA":"PLAYING SONG - PAULA CIA");

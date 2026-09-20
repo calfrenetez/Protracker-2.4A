@@ -138,14 +138,15 @@ enum pt_edit_result pt_sampler_slices(struct pt_sampler *s,struct pt_project *p,
 
 static uint32_t scale_frame(uint32_t frame,uint32_t rate,uint32_t old_rate,int ceil)
 {return (uint32_t)(((uint64_t)frame*rate+(ceil?old_rate-1:0))/old_rate);}
-enum pt_edit_result pt_sampler_convert(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,unsigned bits,uint32_t rate)
+enum pt_edit_result pt_sampler_convert_quality(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,unsigned bits,uint32_t rate,unsigned filtered)
 {
-    struct pt_sample sample;const struct pt_sample *source;struct pt_sample_version *v;struct pt_pcm from;uint32_t frames;unsigned i,resampled;
+    struct pt_sample sample;const struct pt_sample *source;struct pt_sample_version *v;struct pt_pcm from;uint32_t frames;unsigned i,resampled;enum pt_pcm_result result;
     if(!s || !s->allocator.allocate || !s->allocator.release || pt_project_validate(p,NULL)!=PT_PROJECT_OK || slot>=p->sample_count ||
-        (bits!=8 && bits!=16 && bits!=24) || !rate || rate>192000)return PT_EDIT_INVALID;
+        (bits!=8 && bits!=16 && bits!=24) || !rate || rate>192000 || filtered>1)return PT_EDIT_INVALID;
     source=&p->samples[slot];sample=*source;
     if(!sample.pcm.frames)return PT_EDIT_INVALID;
     if(bits==sample.pcm.bits && rate==sample.pcm.rate)return PT_EDIT_OK;
+    if(filtered && (uint64_t)rate*128<sample.pcm.rate)return PT_EDIT_UNSUPPORTED;
     if(pt_pcm_resampled_frames(&sample.pcm,rate,&frames)!=PT_PCM_OK)return PT_EDIT_CAPACITY;
     resampled=rate!=sample.pcm.rate;
     if(resampled && sample.loop) {
@@ -161,8 +162,12 @@ enum pt_edit_result pt_sampler_convert(struct pt_sampler *s,struct pt_project *p
         v->sample.slices[i]=scale_frame(source->slices[i],rate,source->pcm.rate,0);
         if(v->sample.slices[i]>=frames || (i && v->sample.slices[i]<=v->sample.slices[i-1])) {release_version(v);return PT_EDIT_UNSUPPORTED;}
     }
-    if((resampled?pt_pcm_resample(&source->pcm,&v->sample.pcm):pt_pcm_convert(&source->pcm,&v->sample.pcm))!=PT_PCM_OK) {release_version(v);return PT_EDIT_INVALID;}
+    result=resampled?(filtered?pt_pcm_resample_filtered_progress(&source->pcm,&v->sample.pcm,s->progress,s->progress_context):pt_pcm_resample(&source->pcm,&v->sample.pcm)):pt_pcm_convert(&source->pcm,&v->sample.pcm);
+    if(result!=PT_PCM_OK) {release_version(v);return result==PT_PCM_CANCELLED?PT_EDIT_CANCELLED:PT_EDIT_INVALID;}
     from=v->sample.pcm;v->sample.pcm.bits=(uint8_t)bits;
     if(pt_pcm_convert(&from,&v->sample.pcm)!=PT_PCM_OK) {release_version(v);return PT_EDIT_INVALID;}
     return commit_kind(s,p,h,slot,v,resampled);
 }
+
+enum pt_edit_result pt_sampler_convert(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,unsigned bits,uint32_t rate)
+{return pt_sampler_convert_quality(s,p,h,slot,bits,rate,0);}

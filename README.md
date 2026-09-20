@@ -30,8 +30,8 @@ gain, fades and DC removal. LOOPS/SLICES tabs add undoable forward/pingpong
 metadata, baked crossfade and editable manual/AUTO SLICE proposals; marker changes
 cannot silently retarget existing slice-note ordinals. RANGE provides zoom/pan and
 exact frame entry; FORMAT adds explicit whole-sample precision/rate conversion with
-scaled metadata and atomic undo. The current rate converter is linear without an
-antialias filter. High-resolution samples remain editable/saveable;
+scaled metadata and atomic undo. The default integer filter suppresses downsampling aliases and supports native
+progress/Escape cancellation; linear mode remains an explicit faster option. High-resolution samples remain editable/saveable;
 classic Paula audition still requires compatible samples. See the
 [editor guide](docs/ENHANCED_EDITOR.md) and retained native UI evidence. Physical AmiGUS tests await the owner's Mini.
 MIDI note ownership and quantised recording into undoable pattern events now

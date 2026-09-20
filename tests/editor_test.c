@@ -192,6 +192,20 @@ static void sampler_controls(struct pt_editor *e)
     struct pt_project *p=e->project;const struct pt_pcm *pcm;int32_t *before;size_t count;unsigned i,c;
     assert(pt_editor_init(e,p));pcm=&p->samples[0].pcm;count=(size_t)pcm->frames*pcm->channels;
     assert(count);before=malloc(count*sizeof(*before));assert(before);memcpy(before,pcm->data,count*sizeof(*before));
+    {
+        char name[32];unsigned i,volume=p->samples[0].volume;int fine=p->samples[0].finetune;
+        memcpy(name,p->samples[0].name,sizeof(name));pt_editor_click(e,200,200);assert(e->name_entry==2);
+        for(i=0;i<40;++i)pt_editor_key(e,0x32,0);assert(strlen(e->name_text)==31);
+        pt_editor_click(e,520,65);pt_editor_key(e,0x42,0);assert(e->sample==1 && e->name_entry==2);
+        pt_editor_key(e,0x45,0);assert(!strcmp(p->samples[0].name,name) && !pt_editor_dirty(e));
+        pt_editor_key(e,0x36,9);assert(e->name_entry==2);pt_editor_key(e,0x35,0);pt_editor_key(e,0x20,0);pt_editor_key(e,0x21,0);pt_editor_key(e,0x21,0);pt_editor_key(e,0x44,0);
+        assert(!strcmp(p->samples[0].name,"BASS") && !memcmp(p->samples[0].pcm.data,before,count*sizeof(*before)));
+        pt_editor_key(e,0x31,8);assert(!strcmp(p->samples[0].name,name));
+        pt_editor_click(e,volume?200:220,104);assert(p->samples[0].volume==(volume?volume-1:1));
+        pt_editor_key(e,0x31,8);assert(p->samples[0].volume==volume);
+        pt_editor_click(e,fine==7?200:220,65);assert(p->samples[0].finetune==(fine==7?6:fine+1));
+        pt_editor_key(e,0x31,8);assert(p->samples[0].finetune==fine && !pt_editor_dirty(e));
+    }
     pt_editor_click(e,500,70);assert(e->panel==5);
     assert(pt_editor_click(e,250,30)==PT_UI_SAMPLE_LOAD);
     e->load_pending=1;e->quit_pending=1;
@@ -386,7 +400,7 @@ int main(int argc,char **argv)
         struct pt_view_rect areas[PT_VIEW_DIRTY_MAX];unsigned step,p,j,y,x,n;
         static const unsigned actions[]={0x4d,0x4e,0x4f,0x42,0x4c,0x50,0x51,0x52,0x53,0x40,0x31,0x32,0x46,0x0c,0x0b,0x5a,0x5b};
         for(p=0;p<4;++p) {incremental.planes[p]=calloc(1,PT_VIEW_PLANE_BYTES);shown.planes[p]=calloc(1,PT_VIEW_PLANE_BYTES);assert(incremental.planes[p] && shown.planes[p]);}
-        for(step=0;step<211;++step) {
+        for(step=0;step<225;++step) {
             if(step && step<100)pt_editor_key(e,actions[(step-1)%(sizeof(actions)/sizeof(actions[0]))],0);
             if(step==156) {size_t size;uint8_t *bytes=readfile(argv[4],&size);assert(pt_editor_source_load(e,bytes,size)==PT_EDIT_OK);free(bytes);}
             if(step==157)pt_editor_click(e,520,30);
@@ -443,6 +457,20 @@ int main(int argc,char **argv)
             if(step==208)pt_editor_key(e,0x44,0);
             if(step==209)pt_editor_key(e,0x45,0);
             if(step==210)pt_editor_click(e,400,87);
+            if(step==211)pt_editor_click(e,200,200);
+            if(step==212)pt_editor_key(e,0x35,0);
+            if(step==213)pt_editor_key(e,0x20,0);
+            if(step==214)pt_editor_key(e,0x21,0);
+            if(step==215)pt_editor_key(e,0x21,0);
+            if(step==216)pt_editor_key(e,0x44,0);
+            if(step==217)pt_editor_key(e,0x31,8);
+            if(step==218)pt_editor_click(e,220,65);
+            if(step==219)pt_editor_click(e,200,104);
+            if(step==220)pt_editor_key(e,0x36,9);
+            if(step==221)pt_editor_key(e,0x46,0);
+            if(step==222)pt_editor_key(e,0x45,0);
+            if(step==223)pt_editor_key(e,0x31,8);
+            if(step==224)pt_editor_key(e,0x31,9);
             if(step==143) {e->panel=5;pt_editor_key(e,0x32,0);}
             if(step==144)pt_editor_key(e,3,0);
             if(step==145)pt_editor_key(e,0x21,0);

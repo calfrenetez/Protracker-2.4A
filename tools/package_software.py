@@ -58,6 +58,9 @@ Control-R or a P/A/M header letter opens CHANNEL: routes, mute and solo share un
 and project saves. P/A/M chooses route, U mute, S solo, Escape closes the page.
 DETAILS/D opens P pan (hex00-FF), G group (hex00-0F), M MIDI channel (decimal1-16),
 N track name. Return applies, Escape cancels; these settings share undo and PTG saves.
+Sample FINETUNE/VOLUME arrows and Alt-up/down or Alt-right/left edit metadata.
+Click the sample name or Control-Shift-N to rename; Return applies, Escape cancels.
+Metadata shares immutable PCM storage, bounded history and project/MOD saves.
 Paula stays fixed-pan; enhanced pan/MIDI playback and group stems remain pending.
 Classic Paula playback applies mute/solo live; MOD export refuses saved flags and
 non-default names/groups/pan/MIDI-channel metadata.

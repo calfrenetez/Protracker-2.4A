@@ -268,7 +268,7 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
     panel(c,2,174,636,19,GREY);spaced(c,font,26,179,"SONGNAME:",WHITE,10);
     snprintf(s,sizeof(s),"%.32s",p->title);spaced(c,font,128,179,s,NAVY,12);label(c,font,590,174,48,19,"LOAD",0);
     panel(c,2,193,636,18,GREY);spaced(c,font,16,198,"SAMPLENAME:",WHITE,10);
-    snprintf(s,sizeof(s),"%.32s",sample?sample->name:"");spaced(c,font,128,198,s,NAVY,12);
+    snprintf(s,sizeof(s),"%.31s%s",e->name_entry==2?e->name_text:sample?sample->name:"",e->name_entry==2?"_":"");spaced(c,font,128,198,s,e->name_entry==2?YELLOW:NAVY,12);
     panel(c,590,193,48,18,GREY);snprintf(s,sizeof(s),"%luK",(unsigned long)((bytes+1023)/1024));
     if(strlen(s)>3)small(c,font,636-(int)strlen(s)*8,198,s,WHITE);else spaced(c,font,636-(int)strlen(s)*10,198,s,WHITE,10);
     draw_status(e,c,font,bytes);
@@ -347,8 +347,8 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
                 else snprintf(s,sizeof(s),"%s %02X",names[i],i==0?channel->pan:channel->group);
                 label(c,font,230+(int)i*123,21,123,19,s,e->number_field==5+i);
             }
-            snprintf(s,sizeof(s),"NAME: %s%s",e->name_entry?e->name_text:channel->name,e->name_entry?"_":"");
-            label(c,font,230,40,369,19,s,e->name_entry);
+            snprintf(s,sizeof(s),"NAME: %s%s",e->name_entry==1?e->name_text:channel->name,e->name_entry==1?"_":"");
+            label(c,font,230,40,369,19,s,e->name_entry==1);
         } else {
             label(c,font,230,21,123,19,"PAULA",channel->route==PT_PAULA);
             label(c,font,353,21,123,19,"AMIGUS",channel->route==PT_AMIGUS);
@@ -436,7 +436,7 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
         const struct pt_pcm *pcm=&e->project->samples[i].pcm;
         bytes+=(size_t)pcm->frames*pcm->channels*(pcm->bits/8);
     }
-    full=(e->panel==1 && (old->note_details!=e->note_details || (e->note_details && (old->history_revision!=e->history.revision || old->row!=e->row || old->selected!=e->project->channels.selected)))) || ((e->panel>=4 || (e->panel==1 && e->note_details)) && (old->sample_ui!=e->sample_ui || old->sample_start!=e->sample_start || old->sample_end!=e->sample_end || old->sample_marking!=e->sample_marking || old->sample_anchor!=e->sample_anchor || old->sample_range_slot!=e->sample_range_slot)) || !old->valid || old->page!=page || old->pattern!=e->pattern || old->first_row!=e->first_row ||
+    full=old->sample_ui!=e->sample_ui || (e->panel==1 && (old->note_details!=e->note_details || (e->note_details && (old->history_revision!=e->history.revision || old->row!=e->row || old->selected!=e->project->channels.selected)))) || ((e->panel>=4 || (e->panel==1 && e->note_details)) && (old->sample_ui!=e->sample_ui || old->sample_start!=e->sample_start || old->sample_end!=e->sample_end || old->sample_marking!=e->sample_marking || old->sample_anchor!=e->sample_anchor || old->sample_range_slot!=e->sample_range_slot)) || !old->valid || old->page!=page || old->pattern!=e->pattern || old->first_row!=e->first_row ||
          old->position!=e->position || old->sample!=e->sample || old->editing!=e->editing || old->panel!=e->panel || (e->panel==4 && old->selected!=e->project->channels.selected) || (e->panel==1 && old->selection.active!=selection.active) ||
          old->sample_bytes!=bytes || memcmp(&metadata,&old->project,sizeof(metadata)) || memcmp(&sample,&old->sample_meta,sizeof(sample));
     playback_changed=!old->valid || memcmp(&e->playback,&old->playback,sizeof(e->playback));

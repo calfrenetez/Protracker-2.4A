@@ -25,7 +25,7 @@ struct pt_editor {
     unsigned wave_slot,number_field,number_fresh;
     char number_text[11];
     unsigned channel_details,note_details,name_entry,name_fresh;
-    char name_text[PT_CHANNEL_NAME];
+    char name_text[PT_PROJECT_NAME];
     struct pt_document sample_source;
     unsigned source_selected;
     struct pt_raw_format raw_format;

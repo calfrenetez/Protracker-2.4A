@@ -228,21 +228,29 @@ static void number_key(struct pt_editor *e,unsigned raw)
         if(length<10) {e->number_text[length]="0123456789ABCDEF"[input];e->number_text[length+1]=0;++e->sample_ui;}
     }
 }
-static void name_begin(struct pt_editor *e)
+static void name_begin(struct pt_editor *e,unsigned kind)
 {
-    memcpy(e->name_text,e->project->channels.track[e->project->channels.selected].name,sizeof(e->name_text));
-    e->name_entry=1;e->name_fresh=1;++e->sample_ui;
-    pt_editor_status(e,"TRACK NAME: 15 CHARS / RETURN APPLY / ESC CANCEL");
+    if(kind==2 && !e->sample) {pt_editor_status(e,"SELECT A SAMPLE SLOT FIRST");return;}
+    memset(e->name_text,0,sizeof(e->name_text));
+    if(kind==1)memcpy(e->name_text,e->project->channels.track[e->project->channels.selected].name,PT_CHANNEL_NAME);
+    else memcpy(e->name_text,e->project->samples[e->sample-1].name,PT_PROJECT_NAME);
+    e->name_entry=kind;e->name_fresh=1;++e->sample_ui;
+    pt_editor_status(e,kind==1?"TRACK NAME: 15 CHARS / RETURN APPLY / ESC CANCEL":"SAMPLE NAME: 31 CHARS / RETURN APPLY / ESC CANCEL");
 }
 static void name_key(struct pt_editor *e,unsigned raw)
 {
     static const unsigned keys[26]={0x20,0x35,0x33,0x22,0x12,0x23,0x24,0x25,0x17,0x26,0x27,0x28,0x37,0x36,0x18,0x19,0x10,0x13,0x21,0x14,0x16,0x34,0x11,0x32,0x15,0x31};
     size_t length=strlen(e->name_text);unsigned i;char ch=0;
-    if(raw==0x45) {e->name_entry=0;++e->sample_ui;pt_editor_status(e,"TRACK NAME CANCELLED - NAME PRESERVED");return;}
+    if(raw==0x45) {e->name_entry=0;++e->sample_ui;pt_editor_status(e,"NAME ENTRY CANCELLED - NAME PRESERVED");return;}
     if(raw==0x44) {
-        struct pt_channel channel=e->project->channels.track[e->project->channels.selected];
-        memset(channel.name,0,sizeof(channel.name));memcpy(channel.name,e->name_text,length);
-        channel_value(e,&channel);e->name_entry=0;++e->sample_ui;return;
+        if(e->name_entry==1) {
+            struct pt_channel channel=e->project->channels.track[e->project->channels.selected];
+            memset(channel.name,0,sizeof(channel.name));memcpy(channel.name,e->name_text,length);channel_value(e,&channel);
+        } else {
+            const struct pt_sample *sample=&e->project->samples[e->sample-1];
+            pt_editor_sample_result(e,pt_sampler_attributes(&e->sampler,e->project,&e->history,e->sample-1,e->name_text,sample->volume,sample->finetune));
+        }
+        e->name_entry=0;++e->sample_ui;return;
     }
     if(raw==0x41 || raw==0x46) {if(e->name_fresh)e->name_text[0]=0;else if(length)e->name_text[length-1]=0;e->name_fresh=0;++e->sample_ui;return;}
     for(i=0;i<26;++i)if(raw==keys[i])ch=(char)('A'+i);
@@ -250,8 +258,17 @@ static void name_key(struct pt_editor *e,unsigned raw)
     if(raw==0x40)ch=' ';else if(raw==0x0b)ch='-';else if(raw==0x39)ch='.';
     if(ch) {
         if(e->name_fresh) {length=0;e->name_fresh=0;}
-        if(length<sizeof(e->name_text)-1) {e->name_text[length]=ch;e->name_text[length+1]=0;++e->sample_ui;}
+        if(length<(e->name_entry==1?PT_CHANNEL_NAME:PT_PROJECT_NAME)-1) {e->name_text[length]=ch;e->name_text[length+1]=0;++e->sample_ui;}
     }
+}
+static void sample_attribute_step(struct pt_editor *e,unsigned row,int direction)
+{
+    const struct pt_sample *sample;int volume,finetune;
+    if(!e->sample) {pt_editor_status(e,"SELECT A SAMPLE SLOT FIRST");return;}
+    sample=&e->project->samples[e->sample-1];volume=sample->volume;finetune=sample->finetune;
+    if(row==3) {finetune+=direction;if(finetune< -8)finetune=-8;if(finetune>7)finetune=7;}
+    else {volume+=direction;if(volume<0)volume=0;if(volume>64)volume=64;}
+    pt_editor_sample_result(e,pt_sampler_attributes(&e->sampler,e->project,&e->history,e->sample-1,sample->name,(unsigned)volume,finetune));
 }
 static void format_setting(struct pt_editor *e,unsigned bits,uint32_t rate)
 {
@@ -526,7 +543,7 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
     if(qualifier&8) {
         if(raw==0x31)undo(e,(qualifier&3)?1:-1);
         else if(raw==0x21)return (qualifier&3)?PT_UI_SAVE_AS:PT_UI_SAVE;
-        else if(raw==0x36)new_panel(e); /* Control-N */
+        else if(raw==0x36) {if(qualifier&3)name_begin(e,2);else new_panel(e);} /* Control-N / Control-Shift-N */
         else if(raw==0x37 && (qualifier&3))return PT_UI_EXPORT_MOD;
         else if(raw==0x13) {if(e->panel==4)e->panel=0;else channel_panel(e);} /* Control-R */
         else if(raw==0x17) {if(e->panel==1 && e->note_details) {e->note_details=0;++e->sample_ui;}else note_panel(e);} /* Control-I */
@@ -542,6 +559,9 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
         else if(raw==0x0b)block_edit(e,-1);
         else if(raw==0x0c)block_edit(e,3);
         return PT_UI_NONE;
+    }
+    if((qualifier&0x30) && raw>=0x4c && raw<=0x4f) {
+        sample_attribute_step(e,raw<=0x4d?3:5,raw==0x4c || raw==0x4e?1:-1);return PT_UI_NONE;
     }
     if(e->panel==1 && e->note_details) {
         if(raw==0x21)number_begin(e,8);
@@ -628,7 +648,7 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
         else if(e->channel_details && raw==0x19)number_begin(e,5);
         else if(e->channel_details && raw==0x24)number_begin(e,6);
         else if(e->channel_details && raw==0x37)number_begin(e,7);
-        else if(e->channel_details && raw==0x36)name_begin(e);
+        else if(e->channel_details && raw==0x36)name_begin(e,1);
         else if(raw==0x19)channel_edit(e,PT_PAULA);
         else if(!e->channel_details && raw==0x20)channel_edit(e,PT_AMIGUS);
         else if(raw==0x37)channel_edit(e,PT_MIDI);
@@ -778,10 +798,11 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
         }
         return PT_UI_NONE;
     }
+    if(x>=128 && x<590 && y>=193 && y<211) {name_begin(e,2);return PT_UI_NONE;}
     if(e->panel==4 && x>=230 && x<599 && y>=2 && y<97) {
         r=(unsigned)(y-PT_EDITOR_CONTROL_Y)/PT_EDITOR_CONTROL_HEIGHT;c=(unsigned)(x-230)/123;
         if(e->channel_details && r==1)number_begin(e,5+c);
-        else if(e->channel_details && r==2)name_begin(e);
+        else if(e->channel_details && r==2)name_begin(e,1);
         else if(r==1)channel_edit(e,c==0?PT_PAULA:c==1?PT_AMIGUS:PT_MIDI);
         else if(r==2) {if(c<2)channel_edit(e,c==0?8:16);else {e->channel_details=1;++e->sample_ui;pt_editor_status(e,"DETAILS: P PAN / G GROUP / M MIDI CHANNEL / N NAME");}}
         else if(r==3 && c!=1)pt_channels_step(&e->project->channels,c==0?-1:1);
@@ -840,6 +861,7 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
             if(direction<0 && e->position)--e->position;
             e->pattern=e->project->orders[e->position];memset(&e->selection,0,sizeof(e->selection));
         } else if(r==1)pattern_step(e,direction);
+        else if(r==3 || r==5)sample_attribute_step(e,r,direction);
         else if(r==4) {if(direction<0 && e->sample)--e->sample;if(direction>0 && e->sample<e->project->sample_count)++e->sample;pt_editor_sample_all(e);}
         else pt_editor_status(e,"SAMPLE/SONG PARAMETER EDITING NOT YET CONNECTED");
     } else if(y>=PT_EDITOR_BOTTOM_Y && x>=416 && x<476)return PT_UI_PLAY;

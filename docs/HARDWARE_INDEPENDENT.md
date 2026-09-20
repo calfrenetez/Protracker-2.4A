@@ -417,3 +417,14 @@ modal entry, instrument-zero attachment, forbidden referenced-marker deletion,
 correct undo ordering and complete PTG byte/CRC identity outside the intended
 note edits. Evidence is retained in `evidence/enhanced-editor/dev22/`. This is
 slice editing/persistence; enhanced slice playback and MIDI triggering remain open.
+
+## Sample attributes and shared PCM milestone (dev23)
+
+Sample volume, finetune and name controls now use the shared journal. Metadata
+versions share an immutable PCM/marker owner instead of duplicating the sample
+for every adjustment. Host/native fault tests cover initial snapshots, subsequent
+header allocation, history eviction, mixed PCM/metadata undo, exact file round
+trips and complete release. Actual native editing exports a MOD differing only
+in the expected name/volume/finetune header bytes. Evidence is retained under
+`evidence/enhanced-editor/dev23/`. This proves ownership and software behaviour;
+large-sample 68030 latency, physical audio and enhanced audition remain untested.

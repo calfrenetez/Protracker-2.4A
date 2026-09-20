@@ -76,8 +76,10 @@ to allocate/open a requester leaves the document intact. The dialogs follow the
 - F1–F4 or the page buttons select channels 1–4, 5–8, 9–12 or 13–16.
 - Backspace in the note field inserts explicit OFF. Delete clears the event.
 - Minus/equal decrease/increase the selected sample; the paired arrows on the
-  SAMPLE row do the same. PATTERN arrows select an existing pattern, and POS
-  arrows select an existing order. Other parameter arrows are not wired yet.
+  SAMPLE row do the same. FINETUNE arrows adjust -8–7 and VOLUME arrows adjust
+  00–40 hexadecimal (0–64). Alt-up/down changes finetune; Alt-right/left changes
+  volume. PATTERN arrows select an existing pattern, and POS arrows select an
+  existing order. Other parameter arrows are not wired yet.
 - Control-Z / Control-Shift-Z undo/redo one complete event, block, channel or sample change.
 - CHANNEL / Control-R: select PAULA, AMIGUS or MIDI; routes are exclusive and a
   fifth Paula assignment is refused. P/A/M select the route while this page is
@@ -527,3 +529,32 @@ marker edits. Referenced marker removal or start retargeting is refused until th
 note references are cleared. PTG stores these assignments exactly. BACK/Escape or
 Control-I returns to EDIT OP. Slice playback through AmiGUS/enhanced preview is
 still pending; classic Paula playback and direct MOD export refuse sliced data.
+
+
+## Sample names, volume and finetune
+
+Click the sample-name strip or press Control-Shift-N to edit up to 31 characters.
+Return applies and Escape cancels without losing redo. Names use the same raw-key
+uppercase letters, digits, spaces, hyphen and period as track names. Entry is
+modal: the selected sample cannot change until it is completed or cancelled.
+FINETUNE/VOLUME arrows and the Alt-arrow shortcuts edit bounded metadata, with
+no wraparound. These edits share chronological undo with PCM, loops, slices,
+notes and channel settings. Project saves preserve all 31 name characters;
+strict MOD export refuses names longer than its 22-character sample-name field.
+Compatible volume/finetune/name changes export without changing PCM or patterns.
+
+Metadata versions share one immutable owned PCM/marker allocation. For a sample
+still backed by the initially loaded document, the first metadata edit captures
+one owned baseline; subsequent name/volume/finetune versions need only a small
+header. Existing owned sampler versions need no initial PCM copy. History uses
+flat backing references, so repeated metadata edits do not build recursive
+ownership chains or duplicate a large sample. PCM edits still create independent
+versions. Allocation/budget failure leaves the sample and redo intact. The
+32 MiB sampler policy ceiling remains in force; small journal resources and the
+original document remain additional memory as previously documented. Validation
+still examines PCM; these tests do not establish large-sample 68030 UI latency.
+
+A sample metadata change stops an active old audio snapshot, as other sample
+edits do. Replay/audition can then start with the updated attributes. Native
+validation verifies the attributes and exported files; physical pitch, audio
+quality and enhanced playback remain separate acceptance gates.

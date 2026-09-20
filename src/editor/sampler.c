@@ -6,6 +6,7 @@
 struct pt_sample_version {
     struct pt_sample sample;
     struct pt_sampler *owner;
+    struct pt_sample_version *backing; /* Flat owner of shared PCM/markers, or NULL. */
     size_t bytes;
     unsigned references;
 };
@@ -16,7 +17,8 @@ static void retain(struct pt_sample_version *v) {++v->references;}
 static void release_version(struct pt_sample_version *v)
 {
     if(v && !--v->references) {
-        struct pt_sampler *s=v->owner;s->bytes-=v->bytes;s->allocator.release(s->allocator.context,v);
+        struct pt_sampler *s=v->owner;struct pt_sample_version *backing=v->backing;
+        s->bytes-=v->bytes;s->allocator.release(s->allocator.context,v);release_version(backing);
     }
 }
 void pt_sampler_release(struct pt_sampler *s)
@@ -45,8 +47,8 @@ static int same(const struct pt_sample *a,const struct pt_sample *b)
         a->pcm.channels==b->pcm.channels && a->pcm.bits==b->pcm.bits && a->loop_start==b->loop_start &&
         a->loop_end==b->loop_end && a->crossfade==b->crossfade && a->slice_count==b->slice_count &&
         a->loop==b->loop && a->volume==b->volume && a->interpolation==b->interpolation && a->finetune==b->finetune &&
-        (!a->pcm.frames || !memcmp(a->pcm.data,b->pcm.data,(size_t)a->pcm.frames*a->pcm.channels*sizeof(int32_t))) &&
-        (!a->slice_count || !memcmp(a->slices,b->slices,(size_t)a->slice_count*sizeof(uint32_t)));
+        (!a->pcm.frames || a->pcm.data==b->pcm.data || !memcmp(a->pcm.data,b->pcm.data,(size_t)a->pcm.frames*a->pcm.channels*sizeof(int32_t))) &&
+        (!a->slice_count || a->slices==b->slices || !memcmp(a->slices,b->slices,(size_t)a->slice_count*sizeof(uint32_t)));
 }
 static int apply(void *context,struct pt_project *p,int direction)
 {
@@ -73,7 +75,9 @@ static enum pt_edit_result commit_kind(struct pt_sampler *s,struct pt_project *p
     c=s->allocator.allocate(s->allocator.context,sizeof(*c));
     if(!c) {release_version(after);return PT_EDIT_CAPACITY;}
     c->owner=s;c->slot=slot;c->resampled=resampled;c->after=after;c->before=s->current[slot];
-    if(c->before)retain(c->before);else c->before=version(s,&p->samples[slot]);
+    if(c->before)retain(c->before);
+    else if(after->backing && same(&p->samples[slot],&after->backing->sample)) {c->before=after->backing;retain(c->before);}
+    else c->before=version(s,&p->samples[slot]);
     if(!c->before) {release_version(after);s->allocator.release(s->allocator.context,c);return PT_EDIT_CAPACITY;}
     resource.context=c;resource.apply=apply;resource.discard=discard;
     result=pt_pattern_resource_apply(p,h,&resource);if(result!=PT_EDIT_OK)discard(c);
@@ -81,6 +85,28 @@ static enum pt_edit_result commit_kind(struct pt_sampler *s,struct pt_project *p
 }
 static enum pt_edit_result commit(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,struct pt_sample_version *after)
 {return commit_kind(s,p,h,slot,after,0);}
+enum pt_edit_result pt_sampler_attributes(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const char *name,unsigned volume,int finetune)
+{
+    struct pt_sample_version *base,*v;size_t length=0;int owned;
+    if(!s || !s->allocator.allocate || !s->allocator.release || pt_project_validate(p,NULL)!=PT_PROJECT_OK || slot>=p->sample_count || !name || volume>64 || finetune< -8 || finetune>7)return PT_EDIT_INVALID;
+    while(length<PT_PROJECT_NAME && name[length])++length;
+    if(length==PT_PROJECT_NAME)return PT_EDIT_INVALID;
+    if(!strcmp(p->samples[slot].name,name) && p->samples[slot].volume==volume && p->samples[slot].finetune==finetune)return PT_EDIT_OK;
+    base=s->current[slot];owned=base==NULL;
+    if(base && !same(&base->sample,&p->samples[slot]))return PT_EDIT_CONFLICT;
+    if(!base)base=version(s,&p->samples[slot]);
+    if(!base)return PT_EDIT_CAPACITY;
+    if(s->bytes>s->budget || sizeof(*v)>s->budget-s->bytes) {if(owned)release_version(base);return PT_EDIT_CAPACITY;}
+    v=s->allocator.allocate(s->allocator.context,sizeof(*v));
+    if(!v) {if(owned)release_version(base);return PT_EDIT_CAPACITY;}
+    memset(v,0,sizeof(*v));v->sample=base->sample;v->owner=s;v->bytes=sizeof(*v);v->references=1;
+    v->backing=base->backing?base->backing:base;retain(v->backing);s->bytes+=v->bytes;
+    /* Copy possibly aliased input before releasing the temporary source owner. */
+    memset(v->sample.name,0,sizeof(v->sample.name));memcpy(v->sample.name,name,length);
+    v->sample.volume=(uint8_t)volume;v->sample.finetune=(int8_t)finetune;
+    if(owned)release_version(base);
+    return commit(s,p,h,slot,v);
+}
 enum pt_edit_result pt_sampler_edit(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,enum pt_pcm_edit op,uint32_t start,uint32_t end,unsigned gain)
 {
     struct pt_sample_version *v;

@@ -1,0 +1,28 @@
+{
+  "run_id": "attributes1789904593735370000",
+  "elapsed_seconds": 117.057,
+  "binaries": {
+    "PT24GEdit": "2bbcd802b40194ecd7c243698539516bc13653478e13265288c13cd4950fec87",
+    "PTSampleAttributesTest": "19bdd2ca9d287352ae49cc9771ef7f6a5c9445acd92bf2c882da0d6cc9168a2c"
+  },
+  "native_allocation_failure_and_200_metadata_edits": true,
+  "name_volume_finetune_controls": true,
+  "sample_edit_stops_old_audio_snapshot": true,
+  "mixed_pcm_and_metadata_undo": true,
+  "cancel_preserves_redo": true,
+  "exact_mod_only_attribute_changes": true,
+  "exact_project_crc_and_reopen_identity": true,
+  "normal_exits": 2,
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0",
+  "logs": {
+    "attributes.log": "SAMPLE ATTRIBUTES PASS: bounds, every allocation failure, shared 24-bit stereo PCM, bounded metadata history, marker preservation, mixed PCM/metadata undo and exact reopen\n",
+    "editor.log": "EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=102978\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PLAYING SONG - PAULA CIA panel=0\nEDITOR REPLAY active=1 ticks=7 order=0 pattern=0 row=0 bpm=125 speed=6 period=428,339,285,214 volume=24,24,24,24\nEDITOR REPLAY active=1 ticks=12 order=0 pattern=0 row=1 bpm=125 speed=6 period=428,339,285,214 volume=24,24,24,24\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=SAMPLE UPDATED - CONTROL-Z TO UNDO panel=0\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=SAMPLE UPDATED - CONTROL-Z TO UNDO panel=0\nEDITOR FRAME row=0 channel=0 revision=3 dirty=1 status=SAMPLE UPDATED - CONTROL-Z TO UNDO panel=0\nEDITOR FRAME row=0 channel=0 revision=3 dirty=1 status=SAMPLE NAME: 31 CHARS / RETURN APPLY / ESC CANCEL panel=0\nEDITOR FRAME row=0 channel=0 revision=3 dirty=1 status=SAMPLE NAME: 31 CHARS / RETURN APPLY / ESC CANCEL panel=0\nEDITOR FRAME row=0 channel=0 revision=3 dirty=1 status=SAMPLE NAME: 31 CHARS / RETURN APPLY / ESC CANCEL panel=0\nEDITOR FRAME row=0 channel=0 revision=3 dirty=1 status=SAMPLE NAME: 31 CHARS / RETURN APPLY / ESC CANCEL panel=0\nEDITOR FRAME row=0 channel=0 revision=3 dirty=1 status=SAMPLE NAME: 31 CHARS / RETURN APPLY / ESC CANCEL panel=0\nEDITOR FRAME row=0 channel=0 revision=4 dirty=1 status=SAMPLE UPDATED - CONTROL-Z TO UNDO panel=0\nEDITOR FRAME row=0 channel=0 revision=4 dirty=1 status=SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO panel=5\nEDITOR FRAME row=0 channel=0 revision=5 dirty=1 status=SAMPLE UPDATED - CONTROL-Z TO UNDO panel=5\nEDITOR FRAME row=0 channel=0 revision=5 dirty=1 status=SAMPLE NAME: 31 CHARS / RETURN APPLY / ESC CANCEL panel=5\nEDITOR FRAME row=0 channel=0 revision=5 dirty=1 status=SAMPLE NAME: 31 CHARS / RETURN APPLY / ESC CANCEL panel=5\nEDITOR FRAME row=0 channel=0 revision=5 dirty=1 status=SAMPLE NAME: 31 CHARS / RETURN APPLY / ESC CANCEL panel=5\nEDITOR FRAME row=0 channel=0 revision=5 dirty=1 status=SAMPLE NAME: 31 CHARS / RETURN APPLY / ESC CANCEL panel=5\nEDITOR FRAME row=0 channel=0 revision=6 dirty=1 status=SAMPLE UPDATED - CONTROL-Z TO UNDO panel=5\nEDITOR FRAME row=0 channel=0 revision=5 dirty=1 status=UNDO panel=5\nEDITOR FRAME row=0 channel=0 revision=4 dirty=1 status=UNDO panel=5\nEDITOR FRAME row=0 channel=0 revision=4 dirty=1 status=SAMPLE NAME: 31 CHARS / RETURN APPLY / ESC CANCEL panel=5\nEDITOR FRAME row=0 channel=0 revision=4 dirty=1 status=SAMPLE NAME: 31 CHARS / RETURN APPLY / ESC CANCEL panel=5\nEDITOR FRAME row=0 channel=0 revision=4 dirty=1 status=NAME ENTRY CANCELLED - NAME PRESERVED panel=5\nEDITOR FRAME row=0 channel=0 revision=5 dirty=1 status=REDO panel=5\nEDITOR FRAME row=0 channel=0 revision=4 dirty=1 status=UNDO panel=5\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=4 dirty=0 status=PROJECT SAVED AND VERIFIED panel=5\nEDITOR REQUEST mod\nEDITOR MOD result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=4 dirty=0 status=MOD EXPORTED AND VERIFIED panel=5\nEDITOR FRAME row=0 channel=0 revision=4 dirty=0 status=SETTINGS CLOSED panel=0\nEDITOR EXIT clean\n",
+    "reopened.log": "EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=102978\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PROJECT SAVED AND VERIFIED panel=0\nEDITOR EXIT clean\n"
+  },
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

@@ -57,7 +57,7 @@ def main():
         key(0x36);key(0x35);key(0x20);key(0x21);key(0x21);key(0x44);frame('revision=4 dirty=1 status=CHANNEL UPDATED')
         capture('01-channel-details.png')
         key(0x31,True);frame('revision=3 dirty=1 status=UNDO')
-        key(0x36);key(0x32);key(0x45);frame('revision=3 dirty=1 status=TRACK NAME CANCELLED')
+        key(0x36);key(0x32);key(0x45);frame('revision=3 dirty=1 status=NAME ENTRY CANCELLED')
         key(0x31,True,True);frame('revision=4 dirty=1 status=REDO')
         key(0x51);key(0x36);key(0x19);key(0x20);key(0x22);key(0x44);frame('revision=5 dirty=1 status=CHANNEL UPDATED')
         key(0x50);key(0x21,True);frame('revision=5 dirty=0 status=PROJECT SAVED')

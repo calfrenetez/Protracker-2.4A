@@ -1,0 +1,12 @@
+{
+  "run_id": "range1789941193603618000",
+  "elapsed_seconds": 77.04,
+  "checks": 5,
+  "binaries": {
+    "PTRangeRenderTest": "c6b8422b461ce5da137b15cdcb668821b57da37c7aea8853453effde78662b55",
+    "PT24GRender": "0cab17a9121cc48de86523ada8e224a92c775c76077c84b8d82c5f9e113c36ca"
+  },
+  "fixture_sha256": "55705d5ab753af34e6f7068ca6d9f0e16a813fd98ba5ee2d3f62771fe74aa121",
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=1000\tsndbuf_status=0",
+  "scope": "Native selected-row pre-roll/crop/loop/cancellation core checks; exact host/native WAV, existing and empty/invalid range refusal. Reference policy only; no physical acceptance."
+}

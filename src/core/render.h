@@ -4,14 +4,14 @@
 #include "voice.h"
 enum pt_render_result { PT_RENDER_OK, PT_RENDER_INVALID, PT_RENDER_ROUTE,
                         PT_RENDER_EFFECT, PT_RENDER_SAMPLE, PT_RENDER_TICK_LIMIT,
-                        PT_RENDER_FRAME_LIMIT, PT_RENDER_CANCELLED, PT_RENDER_SINK };
-enum pt_render_end { PT_RENDER_F00, PT_RENDER_POSITION_RETURN };
+                        PT_RENDER_FRAME_LIMIT, PT_RENDER_CANCELLED, PT_RENDER_SINK, PT_RENDER_EMPTY_RANGE };
+enum pt_render_end { PT_RENDER_F00, PT_RENDER_POSITION_RETURN, PT_RENDER_ROW_EXIT };
 enum pt_render_phase { PT_RENDER_ANALYSE, PT_RENDER_MIX, PT_RENDER_VERIFY };
 struct pt_render_options {
     uint64_t frame_limit;
     uint32_t tick_limit,rate,gain_q16;
     uint16_t tracks,start_order,pattern;
-    uint8_t bits,pattern_only,include_lead_in;
+    uint8_t bits,pattern_only,include_lead_in,row_range,row_first,row_end;
 };
 struct pt_render_report {uint64_t frames,clipped;uint32_t ticks;enum pt_render_end end;};
 typedef int (*pt_render_progress)(void *,enum pt_render_phase,uint32_t ticks,uint64_t frames);
@@ -22,6 +22,13 @@ typedef int (*pt_render_sink)(void *,const struct pt_pcm *,uint64_t offset);
  * End at F00 or the first backwards/same-order position transition, after the
  * outgoing row duration. E6 row loops are retained. Pattern mode uses one order.
  * Default (include_lead_in=0) omits the silent initial speed-count lead-in.
+ * Optional row_range requires pattern_only, no lead-in, and
+ * 0 <= row_first < row_end <= 64 (half-open). Pre-roll from row0 advances
+ * voices/effects silently; capture begins at first fetched row in range and
+ * stops before the first subsequent fresh row outside it. Retained/delayed
+ * rows and loops wholly within range remain. Unreached range is refused.
+ * Tick/frame budgets include pre-roll; report frames/clips count only output.
+ * Preflight still validates the whole selected pattern.
  * Preflight rejects selected MIDI routes, MIDI pitches,
  * crossfade metadata, instrument-only events, sample changes/slices on tone-portamento notes,
  * zero playback periods and unsupported

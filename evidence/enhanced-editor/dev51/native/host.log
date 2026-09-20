@@ -1,0 +1,2 @@
+RENDERED profile=IDEAL_BPM_Q32 pitch=PCM_RATE_PERIOD428 rate=48000 bits=24 tracks=000f gain_q16=32768 lead_in=0
+WAV frames=5760 ticks=18 clipped_values=0 end=row-range-exit verified=1 new_file=1

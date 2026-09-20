@@ -11,7 +11,7 @@ struct run {
     uint16_t tracks,offset_tracks;
     struct sample_range range[16];
     uint64_t frames;
-    uint8_t started,pending_end;
+    uint8_t started,pending_end,capturing,emit,row_range,row_first,row_end;
 };
 static uint16_t offset_tracks(const struct pt_project *p,const struct pt_render_options *o)
 {
@@ -68,7 +68,8 @@ static enum pt_render_result preflight(const struct pt_project *p,const struct p
     if(!p || !o || pt_project_validate(p,NULL)!=PT_PROJECT_OK || !o->tick_limit || !o->frame_limit ||
        (o->rate!=44100 && o->rate!=48000) || (o->bits!=16 && o->bits!=24) ||
        !o->tracks || (o->tracks>>p->channels.count) || o->gain_q16>65536 ||
-       o->pattern_only>1 || o->include_lead_in>1 ||
+       o->pattern_only>1 || o->include_lead_in>1 || o->row_range>1 ||
+       (o->row_range && (!o->pattern_only || o->include_lead_in || o->row_first>=o->row_end || o->row_end>64)) ||
        (o->pattern_only?o->pattern>=p->pattern_count:o->start_order>=p->order_count))return PT_RENDER_INVALID;
     offsets=offset_tracks(p,o);
     for(ch=0;ch<p->channels.count;++ch)if((o->tracks&(1U<<ch)) && p->channels.track[ch].route==PT_MIDI)return PT_RENDER_ROUTE;
@@ -96,6 +97,7 @@ static enum pt_render_result preflight(const struct pt_project *p,const struct p
 static int start_run(struct run *r,const struct pt_project *p,const struct pt_render_options *o)
 {
     memset(r,0,sizeof(*r));r->view=*p;r->started=o->include_lead_in;
+    r->capturing=!o->row_range;r->row_range=o->row_range;r->row_first=o->row_first;r->row_end=o->row_end;
     r->tracks=o->tracks;r->offset_tracks=offset_tracks(p,o);pt_pitch_init(&r->pitch);
     if(o->pattern_only) {r->order=o->pattern;r->view.orders=&r->order;r->view.order_count=1;}
     return pt_timeline_init(&r->timeline,&r->view,PT_FLOW_EXTENDED256,o->pattern_only?0:o->start_order,
@@ -111,10 +113,17 @@ static enum pt_render_result next_tick(struct run *r,struct pt_tick_span *span,u
         span->frames=0;
         if(r->timeline.flow.fresh)r->started=1;
     }
-    r->frames+=span->frames;
+    r->emit=r->capturing;
+    if(r->emit)r->frames+=span->frames;
     if(!r->timeline.flow.active)*end=1; /* F00. */
     else if(r->pending_end && r->timeline.flow.fresh)*end=2;
     if(r->timeline.flow.returns!=returned)r->pending_end=1;
+    if(!*end && r->row_range && r->timeline.flow.fresh) {
+        unsigned row=r->timeline.flow.played_row;
+        if(row>=r->row_first && row<r->row_end)r->capturing=1;
+        else if(r->capturing)*end=3;
+    }
+    if(*end && r->row_range && !r->capturing)return PT_RENDER_EMPTY_RANGE;
     if(!*end) {
         unsigned ch;pt_pitch_tick(&r->pitch,&r->timeline.flow,r->tracks);
         if(!ranges_tick(r))return PT_RENDER_SAMPLE;
@@ -128,7 +137,7 @@ static enum pt_render_result next_tick(struct run *r,struct pt_tick_span *span,u
 static void report_run(const struct run *r,unsigned end,uint64_t clips,struct pt_render_report *out)
 {
     struct pt_render_report result;memset(&result,0,sizeof(result));result.frames=r->frames;
-    result.ticks=r->timeline.flow.ticks;result.clipped=clips;result.end=end==1?PT_RENDER_F00:PT_RENDER_POSITION_RETURN;*out=result;
+    result.ticks=r->timeline.flow.ticks;result.clipped=clips;result.end=end==1?PT_RENDER_F00:end==3?PT_RENDER_ROW_EXIT:PT_RENDER_POSITION_RETURN;*out=result;
 }
 enum pt_render_result pt_render_measure(const struct pt_project *p,const struct pt_render_options *o,
                                        pt_render_progress progress,void *ctx,struct pt_render_report *out)
@@ -262,8 +271,11 @@ enum pt_render_result pt_render_stream(const struct pt_project *p,const struct p
             if(progress && !progress(progress_ctx,PT_RENDER_MIX,r.timeline.flow.ticks,offset))return PT_RENDER_CANCELLED;
             block.frames=remaining>256?256:remaining;
             if(pt_voice_mix(voice,p->channels.count,gain,&block,&clipped)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
-            if(!sink(sink_ctx,&block,offset))return PT_RENDER_SINK;
-            clips+=clipped;offset+=block.frames;remaining-=block.frames;
+            if(r.emit) {
+                if(!sink(sink_ctx,&block,offset))return PT_RENDER_SINK;
+                clips+=clipped;offset+=block.frames;
+            }
+            remaining-=block.frames;
         }
         if(!end) {result=commands(p,o,&r.timeline.flow,&r.pitch,r.range,r.offset_tracks,voice,instrument,volume,velocity,output_volume,trem);if(result!=PT_RENDER_OK)return result;}
     } while(!end);

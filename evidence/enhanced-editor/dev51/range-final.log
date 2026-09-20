@@ -1,0 +1,7 @@
+RANGE PASS: exact full-render crop with pre-roll pitch/phase, delays, loop boundaries, cancellation, empty/invalid refusal and full-range identity
+RANGE PASS: exact full-render crop with pre-roll pitch/phase, delays, loop boundaries, cancellation, empty/invalid refusal and full-range identity
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.224s
+
+OK

@@ -107,3 +107,5 @@ AmiConnect upload/exec and real card tests remain separate acceptance gates.
 Initial smoke results do not certify all effects or physical hardware.
 
 Batch track/group WAV export is available through `PT24GRender --stems` or `--groups`; see [reference renderer](docs/REFERENCE_RENDERER.md). The native RENDER WAV panel also provides STEMS (S) and track/group mode (O).
+
+CLI pattern-row excerpts use `--pattern N --from-row FIRST --to-row END` with silent state-preserving pre-roll; editor range controls are pending.

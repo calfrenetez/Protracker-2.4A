@@ -378,3 +378,28 @@ batch despite native and host checks initially reporting deletion. Correct WAV
 output was verified, but shared-folder cleanup acceptance remains open. The
 cause is not established; evidence is retained in dev50. No forced cleanup or
 product workaround is applied. This is distinct from real-device acceptance.
+
+## Selected rows in a pattern (dev51)
+
+```text
+PT24GRender input.ptg rows.wav --pattern 0 --from-row 8 --to-row 16
+```
+
+Row arguments are decimal; the interval includes row8 and excludes row16.
+`--from-row` alone defaults the end to64; `--to-row` alone starts at0.
+Bounds require0 <= first < end <=64, explicit pattern mode and no lead-in.
+These options also apply to CLI stems. Native editor selection controls and
+selected-range sample-bounce integration remain pending.
+
+Playback pre-rolls from row0, advancing samples and effects before retaining any
+output. Capture begins at the first fetched row within the interval, preserving
+inherited sample, phase and effect memory. It ends before the first subsequent
+fresh row outside the interval, or at the normal F00/position-return boundary.
+Delays and loops wholly inside the interval remain; a jump below its start ends
+the selection. Rows skipped by flow are not invented. If playback never reaches
+a selected row, rendering refuses before any sink or file creation.
+
+Pre-roll consumes the normal tick/frame budget and remains cancellable, while
+reported output frames and clipping count only the captured interval. Preflight
+still checks the entire selected pattern, including unused later rows. Source
+patterns are immutable; this is a timed excerpt, not a rewritten pattern.

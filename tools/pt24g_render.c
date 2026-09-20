@@ -30,6 +30,8 @@ int main(int argc,char **argv)
         if(!strcmp(argv[i],"--lead-in")) {o.include_lead_in=1;continue;}
         if(i+1>=argc || !number(argv[i+1],!strcmp(argv[i],"--tracks")?16:10,&value))goto usage;
         if(!strcmp(argv[i],"--pattern") && value<256) {o.pattern_only=1;o.pattern=(uint16_t)value;}
+        else if(!strcmp(argv[i],"--from-row") && value<64) {o.row_range=1;o.row_first=(uint8_t)value;if(!o.row_end)o.row_end=64;}
+        else if(!strcmp(argv[i],"--to-row") && value>0 && value<=64) {o.row_range=1;o.row_end=(uint8_t)value;}
         else if(!strcmp(argv[i],"--rate") && (value==44100 || value==48000))o.rate=value;
         else if(!strcmp(argv[i],"--bits") && (value==16 || value==24))o.bits=(uint8_t)value;
         else if(!strcmp(argv[i],"--gain") && value<=65536)o.gain_q16=value;
@@ -59,9 +61,9 @@ int main(int argc,char **argv)
     printf("RENDERED profile=IDEAL_BPM_Q32 pitch=PCM_RATE_PERIOD428 rate=%lu bits=%u tracks=%04x gain_q16=%lu lead_in=%u\n",
            (unsigned long)o.rate,o.bits,o.tracks,(unsigned long)o.gain_q16,o.include_lead_in);
     printf("WAV frames=%lu ticks=%lu clipped_values=%lu end=%s verified=1 new_file=1\n",(unsigned long)report.frames,
-           (unsigned long)report.ticks,(unsigned long)report.clipped,report.end==PT_RENDER_F00?"F00":"first-position-return");rc=0;goto done;
+           (unsigned long)report.ticks,(unsigned long)report.clipped,report.end==PT_RENDER_F00?"F00":report.end==PT_RENDER_ROW_EXIT?"row-range-exit":"first-position-return");rc=0;goto done;
 usage:
-    fprintf(stderr,"Usage: PT24GRender INPUT NEW.wav [--pattern N] [--rate 44100|48000] [--bits 16|24] [--tracks HEX] [--gain 0..65536] [--lead-in] [--stems|--groups]\n");
+    fprintf(stderr,"Usage: PT24GRender INPUT NEW.wav [--pattern N] [--rate 44100|48000] [--bits 16|24] [--tracks HEX] [--gain 0..65536] [--lead-in] [--stems|--groups] [--from-row N --to-row N]\n");
     fprintf(stderr,"Reference renderer; bounded classic-effect subset including finetune/E5. Instrument-only events and MIDI audio unsupported. See docs/REFERENCE_RENDERER.md. Default gain32768, 30-minute bound.\n");
 done:
     if(f)fclose(f);

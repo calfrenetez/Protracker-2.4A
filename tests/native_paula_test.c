@@ -123,6 +123,17 @@ int main(int argc,char **argv)
     for(i=0;i<100 && a.started;++i) {Delay(1);pt_paula_poll(&a,&state);}
     CHECK(!a.started && (*(volatile UWORD *)0xdff002 & 15)==0);
     CHECK(pt_document_load(&doc,input,length,SIZE_MAX)==PT_PROJECT_OK);
+    /* A changed order list must never keep playing an obsolete snapshot. */
+    {uint16_t orders[2]={0,0},*original=doc.project.orders;
+        CHECK(!pt_paula_play(&a,&doc.project,0,0,0));Delay(5);
+        doc.project.orders=orders;doc.project.order_count=2;
+        CHECK(pt_paula_sync(&a,&doc.project)!=NULL && !a.started);
+        CHECK((*(volatile UWORD *)0xdff002 & 15)==0);
+        CHECK(!pt_paula_play(&a,&doc.project,0,1,0));Delay(10);pt_paula_poll(&a,&state);
+        CHECK(state.active && state.order==1);pt_paula_stop(&a);
+        doc.project.orders=original;doc.project.order_count=1;
+        puts("SONG AUDIO PASS: position changes stop stale replay; restart uses the new order list");
+    }
     /* Empty instruments and initial instrument-zero notes use an owned word,
        never a zero-length DMA transfer or a pointer beyond the allocation. */
     for(i=0;i<2;++i) {

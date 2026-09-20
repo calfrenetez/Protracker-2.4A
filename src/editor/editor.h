@@ -3,6 +3,7 @@
 #include "pattern.h"
 #include "playback.h"
 #include "sampler.h"
+#include "song.h"
 #define PT_EDITOR_ROWS 20
 /* One grid for parameter rows, command rows and their mouse targets. */
 #define PT_EDITOR_CONTROL_Y 2
@@ -19,6 +20,8 @@ struct pt_editor {
     struct pt_project *project;
     struct pt_pattern_history history;
     struct pt_sampler sampler;
+    struct pt_song song;
+    unsigned song_details;
     unsigned sample_range_slot,sample_marking;
     uint32_t sample_start,sample_end,sample_anchor;
     uint32_t wave_start,wave_end,wave_frames;
@@ -48,8 +51,8 @@ struct pt_editor {
 };
 /* Initialize only after a complete project load; no audio backend is invoked. */
 int pt_editor_init(struct pt_editor *,struct pt_project *);
-/* Dispose before reinitializing or freeing a live editor. Does not touch project
-   storage; release/destroy its document separately. */
+/* Dispose before reinitializing or freeing a live editor. Releases editor-owned replacement arrays;
+   the project must no longer be used. Release/destroy its document separately. */
 void pt_editor_dispose(struct pt_editor *);
 void pt_editor_sample_all(struct pt_editor *);
 enum pt_edit_result pt_editor_source_load(struct pt_editor *,const uint8_t *,size_t);

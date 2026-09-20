@@ -70,7 +70,7 @@ const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned
     if(mode>1 || position>=p->order_count || pattern>=p->pattern_count)return "PLAY: INVALID POSITION";
     if(!playback_project(p,&playback) || pt_mod_export_analyse(&playback,&report)!=PT_PROJECT_OK || report.issues)
         return "PLAY: REQUIRES CLASSIC FOUR-CHANNEL PAULA PROJECT";
-    pt_paula_stop(a);a->bytes=report.bytes;a->pattern_bytes=(size_t)p->pattern_count*1024;
+    pt_paula_stop(a);a->order_count=p->order_count;memcpy(a->orders,p->orders,p->order_count*sizeof(*p->orders));a->bytes=report.bytes;a->pattern_bytes=(size_t)p->pattern_count*1024;
     a->mode=mode;a->pattern=pattern;
     a->data=AllocMem(a->bytes+2,MEMF_CHIP|MEMF_PUBLIC);
     a->staging=malloc(a->bytes);
@@ -125,6 +125,9 @@ const char *pt_paula_sync(struct pt_paula *a,const struct pt_project *p)
 {
     struct pt_project playback;struct pt_mod_export_report report;size_t n,offset;
     if(!a->started)return NULL;
+    if(!p || !p->orders || p->order_count!=a->order_count || memcmp(p->orders,a->orders,p->order_count*sizeof(*p->orders))) {
+        pt_paula_stop(a);return "STOPPED: SONG POSITIONS CHANGED - PRESS PLAY TO RESTART";
+    }
     if(!playback_project(p,&playback) || pt_mod_export_analyse(&playback,&report)!=PT_PROJECT_OK || report.issues || report.bytes!=a->bytes ||
        (size_t)p->pattern_count*1024!=a->pattern_bytes ||
        pt_mod_export_direct(&playback,a->staging,a->bytes,&n)!=PT_PROJECT_OK || n!=a->bytes) {

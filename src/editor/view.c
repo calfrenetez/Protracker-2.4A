@@ -368,6 +368,11 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
         label(c,font,230,40,369,19,"FIRST 4 PAULA; REST AMIGUS",0);
         label(c,font,230,59,184,38,"CREATE",e->new_pending);
         label(c,font,414,59,185,38,"CANCEL",0);
+    } else if(e->panel==1 && e->song_details) {
+        static const char *buttons[4][3]={{"PREV POS","PAT -","PAT +"},{"NEXT POS","ADD POS","NEW PAT"},{"UNDO","REDO",""},{"BACK","PLAY","STOP"}};
+        snprintf(s,sizeof(s),"POS %03u / %03u : PAT %03u / %03u",e->position,p->order_count-1,p->orders[e->position],p->pattern_count-1);
+        label(c,font,230,2,369,19,s,0);
+        for(r=0;r<4;++r)for(i=0;i<3;++i)label(c,font,230+(int)i*123,21+(int)r*19,123,19,buttons[r][i],0);
     } else if(e->panel==1 && e->note_details) {
         const struct pt_event *event=&p->events[(e->pattern*64+e->row)*p->channels.count+p->channels.selected];
         const struct pt_sample *source=event->instrument?&p->samples[event->instrument-1]:NULL;

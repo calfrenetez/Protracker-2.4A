@@ -573,3 +573,25 @@ PTG retains all 31 characters. Strict MOD export refuses titles longer than its
 20-character field; it never silently truncates the saved song. The private Paula
 replay snapshot limits its unused display title to 20 characters so a long project
 title cannot interrupt compatible audio. The live project title remains intact.
+
+## Song positions and new patterns
+
+POS ED. or Control-P opens the position editor. Up/down selects a position;
+left/right changes its assigned pattern. ADD POS / A appends a position using
+the currently displayed pattern. NEW PAT / N appends one empty 64-row pattern
+and a position referencing it, then selects that position. Return, Escape or
+BACK returns to the main screen. The main PATTERN arrows still browse patterns
+without changing the order list. Pattern indices and position indices are zero
+based; the page header shows the final valid index for each.
+
+These operations share Control-Z / Control-Shift-Z history with notes, sample
+edits and metadata. Undo refuses unexpected changes to the appended pattern or
+surviving references rather than deleting them. The project format permits up
+to 256 patterns and positions; strict MOD export retains its separate classic
+limits. Growth uses reference-counted arrays with geometric capacity, subject
+to an 8 MiB editor song-storage budget plus original document storage. History
+eviction releases unused versions. Allocation failures preserve project/history.
+
+Position-list changes stop the running Paula snapshot; press Play to restart
+with the new song order. Removing/reordering positions, deleting patterns and
+changing an existing song's channel/sample-slot count are still separate work.

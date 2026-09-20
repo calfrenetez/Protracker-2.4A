@@ -128,3 +128,9 @@ Song titles (dev24): the private MOD replay snapshot truncates only its display
 name to 20 characters. The project's complete 31-character title remains intact,
 and strict disk export continues to refuse titles exceeding MOD's limit. Changing
 a title cannot alter audio parameters or interrupt otherwise compatible playback.
+
+Song position edits stop the current immutable replay snapshot and request a
+Play restart. This includes order-count and pattern-assignment changes, even
+when the sample/pattern byte sizes remain identical. Restart validates the new
+song and starts at the editor's selected position. Dynamic order mutation inside
+the running assembler engine is not used.

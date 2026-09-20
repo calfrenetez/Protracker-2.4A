@@ -436,3 +436,13 @@ Host and native tests cover mixed undo, bounds, cancellation, conflicts, exact
 file changes and reopen identity. Long titles keep playing through the private
 Paula snapshot while strict MOD disk export refuses metadata loss. Evidence is
 retained in `evidence/enhanced-editor/dev24/`; the main-screen layout is unchanged.
+
+## Song construction milestone (dev25)
+
+POS ED. / Control-P now assigns patterns, appends positions and creates empty
+patterns with shared chronological undo and bounded, reference-counted storage.
+Host tests reach 256 patterns/positions at 16 channels; bounded native tests and
+an editor save/export/reopen workflow pass. Position edits stop a stale Paula
+snapshot and Play restarts with the new order list. Exact file/audio-state/source
+and screenshot evidence is in `evidence/enhanced-editor/dev25/`. This is software
+acceptance; no physical-hardware acceptance is implied.

@@ -47,6 +47,8 @@ paging, undo, verified new-file saves and classic four-channel Paula playback.
 F8 plays, F9 loops the pattern and F10 stops. SAMPLE auditions a classic sample.
 LOAD/Control-O opens a MOD/project, including structurally validated PP20 MODs. Control-Shift-S selects a new save path.
 Starting PT24GEdit without arguments creates a blank song.
+POS ED./Control-P edits positions; A appends a position, N adds a blank pattern.
+Song edits share undo; changed positions stop Paula until Play is restarted.
 CLEAR/Control-N creates a new song with 1-16 channels; dirty edits need confirmation.
 EDIT OP./Control-E provides mark/copy/paste/clear/transpose and whole-block undo.
 EDIT OP. > NOTE / Control-I assigns existing sample slices to normal pattern notes:

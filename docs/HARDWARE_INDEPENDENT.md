@@ -584,3 +584,19 @@ dev28; the new diagnostic is separately linked, leaving shipping replay and old
 trace evidence intact. The emulator was released after guarded cleanup. See
 `evidence/enhanced-editor/dev35/`; no physical hardware or analogue-sound
 acceptance is claimed.
+
+## Reference tone portamento (dev36)
+
+3xx tone portamento and 5xx tone portamento plus volume slide share the reference
+pitch/mix path. Glide notes preserve voice phase, targets use the pinned zero-
+finetune table, speed memory is independent per track, and target arrival stops
+the glide without erasing its speed. Delayed effect passes and native signed
+word comparisons are retained. Repeating the same sample resets volume without
+restarting it; a glide before a normal note leaves the voice inactive.
+
+Cross-sample glide handoff and slice-target glides fail before output publication.
+Nonzero finetune, glissando and other unimplemented effects remain refused.
+Native stored/output-period, volume and DMA-start-mask fixtures are retained in
+`evidence/enhanced-editor/dev36/`, with host/native PCM and 16-track state checks.
+The tests include a non-aligned sample phase to expose an unwanted restart.
+No main-screen changes or physical hardware acceptance are implied.

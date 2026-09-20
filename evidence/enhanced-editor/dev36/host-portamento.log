@@ -1,0 +1,9 @@
+test_native_stored_output_periods_and_pcm (test_portamento.Portamento.test_native_stored_output_periods_and_pcm) ... PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 5.925s
+
+OK
+PORTAMENTO phase oracle rejects forced retrigger on the same-instrument glide
+PORTAMENTO: nine repeated native traces match host/m68k pitch, volume and DMA-driven phase; 16-track state and refusal checks pass

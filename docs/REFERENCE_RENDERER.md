@@ -87,7 +87,7 @@ is an error, never silently classified as a completed song.
 Supported: ordinary raw-period notes (including instrument-zero inheritance),
 explicit note-off and velocity; mono/stereo 8/16/24-bit samples; nearest/linear
 interpolation; forward/ping-pong loops; sample slices; track selection; global
-mute/solo; and effects `000`, `1xx`, `2xx`, `Axx`, `Bxx`, `Cxx`, `Dxx`, `E1x`, `E2x`, `E6x`, `EAx`, `EBx`, `ECx`, `EEx`, `Fxx`.
+mute/solo; and effects `000`, `1xx`, `2xx`, `3xx`, `5xx`, `Axx`, `Bxx`, `Cxx`, `Dxx`, `E1x`, `E2x`, `E6x`, `EAx`, `EBx`, `ECx`, `EEx`, `Fxx`.
 Axx applies on effect passes, including delayed passes. Fine volume slides EAx/EBx
 apply only at tick zero, including delayed tick-zero passes, and saturate at 0/64.
 ECx cuts volume when the current tick equals x; EC0 is immediate and an x outside
@@ -105,11 +105,26 @@ original replay's wrapping arithmetic, 12-bit masking on slide writes, low-12
 limits of 113/856, and later full-word writes from PerNop/SetBack. Slide updates
 change the rate without restarting the voice or resetting its fractional phase.
 
+Tone portamento 3xx sets a target without restarting the voice. Its nonzero speed
+parameter is remembered on effect passes; 300 reuses that speed. 5xx keeps the
+remembered glide speed and adds normal volume sliding, including high-nibble
+priority and clamping. Delayed effect passes retain this behavior. Arrival clears
+the target while retaining speed memory. Normal note triggers do not clear a
+pending target. Target selection and comparisons follow the pinned zero-finetune
+period table and signed 16-bit replay arithmetic, including wrapped stored words.
+
+Repeating the current sample number on a glide note resets its volume without
+retriggering. A glide before the first ordinary note does not start a voice.
+Explicit project velocity on a glide note updates velocity without retriggering.
+Cross-sample glide handoff and slice targets are refused before output; their
+playback/loop handoff is not approximated. These are current implementation limits.
+
 Measurement refuses a triggered voice whose period becomes zero, before any sink,
 WAV staging or sample append. Zero-period playback is an explicit remaining
 reference limitation. Notes still use their raw project periods; this does not
-add native note-table quantization, finetune or PAL clock/analogue behavior.
-Separate stored/output register traces and ramp PCM comparisons are in dev35.
+add ordinary-note table quantization, finetune or PAL clock/analogue behavior.
+Separate stored/output register traces and ramp PCM comparisons are in dev35
+and dev36; dev36 also checks native DMA-trigger continuity and glide memory.
 
 Mono pan uses a linear left/right split over 0..255. Stereo pan uses balance:
 centre128 leaves both sides at unity, and each endpoint silences the opposite

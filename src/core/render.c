@@ -25,9 +25,10 @@ static enum pt_render_result preflight(const struct pt_project *p,const struct p
         const struct pt_event *e=p->events+((size_t)pat*64+row)*p->channels.count+ch;
         if(!(o->tracks&(1U<<ch)))continue;
         if(e->kind==PT_NOTE_MIDI || (e->instrument && e->kind!=PT_NOTE_PERIOD))return PT_RENDER_EFFECT;
-        if(!((e->effect==0 && !e->parameter) || e->effect==1 || e->effect==2 || (e->effect>=10 && e->effect<=13) || e->effect==15 ||
+        if(!((e->effect==0 && !e->parameter) || e->effect==1 || e->effect==2 || e->effect==3 || e->effect==5 || (e->effect>=10 && e->effect<=13) || e->effect==15 ||
              (e->effect==14 && ((e->parameter>>4)==1 || (e->parameter>>4)==2 || (e->parameter>>4)==6 || ((e->parameter>>4)>=10 && (e->parameter>>4)<=12) ||
                                (e->parameter>>4)==14))))return PT_RENDER_EFFECT;
+        if((e->effect==3 || e->effect==5) && e->slice)return PT_RENDER_EFFECT;
         if(e->instrument) {
             const struct pt_sample *s=p->samples+e->instrument-1;
             if(s->finetune || s->loop==PT_LOOP_CROSSFADE)return PT_RENDER_SAMPLE;
@@ -62,7 +63,7 @@ static enum pt_render_result next_tick(struct run *r,struct pt_tick_span *span,u
         /* A zero register period has no defined reference PCM rate yet.
            Reject it in measurement, before sinks, staging or bounce commit. */
         for(ch=0;ch<r->view.channels.count;++ch)
-            if(r->pitch.channel[ch].sounding && !r->pitch.channel[ch].output)return PT_RENDER_EFFECT;
+            if(r->pitch.channel[ch].unsupported || (r->pitch.channel[ch].sounding && !r->pitch.channel[ch].output))return PT_RENDER_EFFECT;
     }
     return PT_RENDER_OK;
 }
@@ -114,7 +115,7 @@ static enum pt_render_result commands(const struct pt_project *p,const struct pt
             const struct pt_event *e=flow->project->events+((size_t)flow->project->orders[flow->played_order]*64+flow->played_row)*p->channels.count+ch;
             if(e->instrument) {instrument[ch]=e->instrument;volume[ch]=p->samples[e->instrument-1].volume;}
             if(e->kind==PT_NOTE_OFF)voice[ch].active=0;
-            else if(e->kind==PT_NOTE_PERIOD && instrument[ch]) {
+            else if(e->kind==PT_NOTE_PERIOD && instrument[ch] && e->effect!=3 && e->effect!=5) {
                 const struct pt_sample *s=p->samples+instrument[ch]-1;uint32_t a=0,b=s->pcm.frames,la=0,lb=0;
                 enum pt_voice_loop loop=PT_VOICE_ONCE;
                 if(e->slice) {a=s->slices[e->slice-1];if(e->slice<s->slice_count)b=s->slices[e->slice];}
@@ -124,8 +125,9 @@ static enum pt_render_result commands(const struct pt_project *p,const struct pt
                 if(pt_voice_init(voice+ch,&s->pcm,a,b,loop,la,lb,step(s,e->pitch,o->rate),s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
                 velocity[ch]=(e->flags&1)?e->velocity:127;
             }
+            if(e->kind==PT_NOTE_PERIOD && (e->effect==3 || e->effect==5) && (e->flags&1))velocity[ch]=e->velocity;
             if(e->effect==12)volume[ch]=e->parameter>64?64:e->parameter;
-        } else if(flow->effect[ch]==10) {
+        } else if(flow->effect[ch]==10 || flow->effect[ch]==5) {
             unsigned param=flow->parameter[ch],up=param>>4,down=param&15;
             if(up)volume[ch]=(uint8_t)(volume[ch]+up>64?64:volume[ch]+up);
             else volume[ch]=(uint8_t)(volume[ch]<down?0:volume[ch]-down);

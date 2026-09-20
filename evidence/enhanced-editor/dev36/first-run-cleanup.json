@@ -1,0 +1,8 @@
+{
+  "time_utc": "2026-09-20T17:46:32.067229+00:00",
+  "amiberry_processes": [],
+  "hdf_lsof_rc": 1,
+  "socket_exists": false,
+  "launcher_restored": true,
+  "outcome": "Deliberately interrupted first run to strengthen same-instrument non-retrigger fixture. Production/test binaries unchanged; this is not a completed fixture run."
+}

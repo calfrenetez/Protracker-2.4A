@@ -102,8 +102,10 @@ PT24GRender INPUT NEW.wav exports a bounded reference song, with optional --patt
 --rate 44100|48000, --bits 16|24, --tracks HEX, --gain 0..65536 and --lead-in.
 Default: 48kHz/stereo24, all tracks, gain32768, trimmed startup, 30-minute limit.
 This uses ideal BPM timing and sample-rate-at-C-2 period scaling, not captured hardware.
-Supported effects: 000/1/2/A/B/C/D/E1/E2/E6/EA/EB/EC/EE/F. MIDI audio/pitches, nonzero finetune,
-instrument-only events, zero playback periods and other effects are refused before output is created.
+Supported effects: 000/1/2/3/5/A/B/C/D/E1/E2/E6/EA/EB/EC/EE/F. MIDI audio/pitches, nonzero finetune,
+instrument-only events, cross-sample/slice glide targets, zero playback periods and other effects
+are refused before output is created. Tone-portamento targets use the zero-finetune table;
+3xx/5xx retain sample phase and glide-speed memory. Ordinary notes retain raw periods.
 Staged WAV bytes are verified by a second render; existing paths are never replaced.
 Editor: DISK OP. > RENDER WAV or Control-Shift-W. P scope, M track mask, A all, T one,
 R rate, B bits, G gain, L lead-in, W/Return WAV file, U new sample. Escape cancels rendering.

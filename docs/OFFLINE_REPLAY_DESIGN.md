@@ -276,3 +276,26 @@ A triggered zero output period fails measurement with PT_RENDER_EFFECT before
 any file staging, sink calls or sample append. Remaining classic effects and
 zero-period sound semantics require further evidence; no hardware sound model
 is inferred from these register traces.
+
+
+## Tone-portamento state (dev36)
+
+3xx remembers its speed on an effect pass, including a delayed pass; a parameter
+on a fresh speed-one row can therefore go unused. 5xx invokes the remembered
+glide independently of its volume parameter. Target arrival clears the target,
+not speed memory. A subsequent ordinary note does not clear the stored target.
+Target direction and arrival tests use native signed-word comparisons even if
+an earlier slide wrapped the stored period into the upper half of the word.
+
+Tone-note targets use the pinned zero-finetune table, including its zero sentinel.
+Ordinary reference notes still retain raw periods. A glide note never creates or
+restarts a PCM voice; repeating its current instrument resets sample volume.
+Different-instrument and slice-target handoffs are explicit preflight refusals
+until their playback/loop semantics are implemented.
+
+The existing 52-byte diagnostic is unchanged. The dev36 ramp oracle derives
+trigger/reset decisions from fresh-row DMA-start masks, volume from raw volume
+writes and rate from output-period writes. It checks the reference PCM policy,
+not actual Paula sample timing. Same-instrument glide coverage starts at period404
+so the sample is between loop boundaries at the glide; a forced-retrigger mutant
+must fail that oracle. Old fixture evidence is retained unchanged.

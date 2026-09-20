@@ -196,6 +196,42 @@ static void sampler_controls(struct pt_editor *e)
         pt_editor_key(e,0x37,0);assert(e->slice_count==1);
         pt_editor_key(e,0x0c,0);assert(!e->slice_pending && !e->sample_marking);
     }
+    pt_editor_key(e,0x0b,0);assert(e->sample==1);
+    {uint32_t revision=e->history.revision,start,end,frames=p->samples[0].pcm.frames;unsigned j;
+        pt_editor_click(e,321,10);assert(e->panel==5);
+        pt_editor_click(e,322,10);assert(e->panel==6);
+        pt_editor_click(e,414,10);assert(e->panel==7);
+        pt_editor_click(e,506,10);assert(e->panel==8);
+        pt_editor_key(e,0x21,0);assert(e->number_field==1);
+        assert(pt_editor_click(e,590,180)==PT_UI_NONE); /* Modal entry cannot open Load. */
+        pt_editor_key(e,1,0);pt_editor_key(e,0x44,0);assert(!e->number_field && e->sample_start==1);
+        pt_editor_key(e,0x12,0);pt_editor_key(e,0x0a,0);pt_editor_key(e,0x44,0);
+        assert(e->number_field==2 && e->sample_end==frames && strstr(e->status,"INVALID"));
+        pt_editor_key(e,0x45,0);assert(!e->number_field && e->panel==8);
+        pt_editor_key(e,0x12,0);for(j=0;j<10;++j)pt_editor_key(e,9,0);pt_editor_key(e,0x44,0);
+        assert(e->number_field==2 && e->sample_end==frames);pt_editor_key(e,0x45,0);
+        pt_editor_click(e,400,87);pt_editor_key(e,2,0);pt_editor_key(e,0x44,0);assert(e->sample_end==2);
+        pt_editor_key(e,0x34,0);pt_editor_wave_bounds(e,&start,&end);assert(start==1 && end==2);
+        pt_editor_click(e,10,260);pt_editor_click(e,629,260);assert(e->sample_start==1 && e->sample_end==2);
+        pt_editor_key(e,0x1b,0);pt_editor_key(e,0x1a,1);assert(e->sample_start==1 && e->sample_end==2);
+        for(j=0;j<40;++j)pt_editor_key(e,0x4e,0);pt_editor_wave_bounds(e,&start,&end);assert(start==frames-1 && end==frames);
+        for(j=0;j<40;++j)pt_editor_key(e,0x4f,0);pt_editor_wave_bounds(e,&start,&end);assert(!start && end==1);
+        pt_editor_key(e,0x23,0);pt_editor_wave_bounds(e,&start,&end);assert(!start && end==frames);
+        pt_editor_key(e,0x17,0);pt_editor_wave_bounds(e,&start,&end);assert(end-start==frames/2+frames%2);
+        pt_editor_key(e,0x18,0);assert(e->sample_start==1 && e->sample_end==2 && e->history.revision==revision);
+        pt_editor_key(e,0x0c,0);pt_editor_wave_bounds(e,&start,&end);assert(!start && end==p->samples[1].pcm.frames);
+    }
+    pt_editor_key(e,0x0b,0);
+    {unsigned bits=p->samples[0].pcm.bits;uint32_t rate=p->samples[0].pcm.rate,revision=e->history.revision;
+        pt_editor_key(e,0x33,0);assert(e->panel==9 && e->format_bits==bits && e->format_rate==rate);
+        pt_editor_key(e,bits==16?1:2,0);assert(e->history.revision==revision && p->samples[0].pcm.bits==bits);
+        pt_editor_key(e,0x13,0);pt_editor_key(e,0x0a,0);pt_editor_key(e,0x44,0);
+        assert(e->number_field==3 && e->format_rate==rate);pt_editor_key(e,0x45,0);
+        pt_editor_click(e,250,87);assert(p->samples[0].pcm.bits==(bits==16?8:16) && p->samples[0].pcm.rate==rate);
+        pt_editor_key(e,0x31,8);assert(p->samples[0].pcm.bits==bits);
+        pt_editor_key(e,0x31,9);assert(p->samples[0].pcm.bits==(bits==16?8:16));
+        pt_editor_click(e,500,70);assert(e->panel==5);
+    }
     pt_editor_key(e,0x45,0);assert(!e->panel && !e->quit_pending);
     free(before);
 }
@@ -288,7 +324,7 @@ int main(int argc,char **argv)
         struct pt_view_rect areas[PT_VIEW_DIRTY_MAX];unsigned step,p,j,y,x,n;
         static const unsigned actions[]={0x4d,0x4e,0x4f,0x42,0x4c,0x50,0x51,0x52,0x53,0x40,0x31,0x32,0x46,0x0c,0x0b,0x5a,0x5b};
         for(p=0;p<4;++p) {incremental.planes[p]=calloc(1,PT_VIEW_PLANE_BYTES);shown.planes[p]=calloc(1,PT_VIEW_PLANE_BYTES);assert(incremental.planes[p] && shown.planes[p]);}
-        for(step=0;step<115;++step) {
+        for(step=0;step<143;++step) {
             if(step && step<100)pt_editor_key(e,actions[(step-1)%(sizeof(actions)/sizeof(actions[0]))],0);
             if(step%13==0) {e->playback.row=step%64;e->playback.bpm=125+step;e->playback.wave[0][step%81]=(int8_t)step;}
             if(step==30) {pt_editor_click(e,400,70);cache.valid=0;}
@@ -329,7 +365,35 @@ int main(int argc,char **argv)
             if(step==111)pt_editor_key(e,0x32,0);
             if(step==112)pt_editor_key(e,0x14,0);
             if(step==113)pt_editor_key(e,0x0c,0);
-            if(step==114)pt_editor_key(e,0x45,0);
+            if(step==114)pt_editor_click(e,550,10);
+            if(step==115)pt_editor_key(e,0x0b,0);
+            if(step==116)pt_editor_key(e,0x17,0);
+            if(step==117)pt_editor_key(e,0x4e,0);
+            if(step==118)pt_editor_key(e,0x21,0);
+            if(step==119)pt_editor_key(e,1,0);
+            if(step==120)pt_editor_key(e,0x44,0);
+            if(step==121)pt_editor_key(e,0x12,0);
+            if(step==122)pt_editor_key(e,2,0);
+            if(step==123)pt_editor_key(e,0x44,0);
+            if(step==124)pt_editor_key(e,0x34,0);
+            if(step==125)pt_editor_key(e,0x21,0);
+            if(step==126)pt_editor_key(e,0x45,0);
+            if(step==127)pt_editor_click(e,10,260);
+            if(step==128)pt_editor_click(e,629,260);
+            if(step==129)pt_editor_key(e,0x23,0);
+            if(step==130)pt_editor_key(e,0x42,0);
+            if(step==131)pt_editor_key(e,0x33,0);
+            if(step==132)pt_editor_key(e,2,0);
+            if(step==133)pt_editor_key(e,0x13,0);
+            if(step==134)pt_editor_key(e,0x0a,0);
+            if(step==135)pt_editor_key(e,0x44,0);
+            if(step==136)pt_editor_key(e,0x45,0);
+            if(step==137)pt_editor_click(e,250,70);
+            if(step==138)pt_editor_key(e,0x13,0);
+            if(step==139)pt_editor_key(e,4,0);
+            if(step==140)pt_editor_key(e,0x44,0);
+            if(step==141)pt_editor_key(e,0x42,0);
+            if(step==142)pt_editor_key(e,0x45,0);
             pt_editor_draw(e,&canvas,font);n=pt_editor_draw_update(e,&incremental,font,&cache,areas);assert(n<=PT_VIEW_DIRTY_MAX);
             for(j=0;j<n;++j) {
                 const struct pt_view_rect *a=&areas[j];assert(a->x+a->width<=640 && a->y+a->height<=512);

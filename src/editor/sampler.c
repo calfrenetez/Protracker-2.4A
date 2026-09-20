@@ -8,7 +8,7 @@ struct pt_sample_version {
     size_t bytes;
     unsigned references;
 };
-struct sample_change {struct pt_sampler *owner;unsigned slot;struct pt_sample_version *before,*after;};
+struct sample_change {struct pt_sampler *owner;unsigned slot,resampled;struct pt_sample_version *before,*after;};
 void pt_sampler_init(struct pt_sampler *s,const struct pt_allocator *a,size_t budget)
 {memset(s,0,sizeof(*s));s->allocator=*a;s->budget=budget;}
 static void retain(struct pt_sample_version *v) {++v->references;}
@@ -55,7 +55,7 @@ static int apply(void *context,struct pt_project *p,int direction)
     count=(size_t)p->pattern_count*64*p->channels.count;
     for(i=0;i<count;++i)if(p->events[i].instrument==c->slot+1 && p->events[i].slice) {
         unsigned slice=p->events[i].slice;
-        if(slice>replacement->sample.slice_count || expected->sample.slices[slice-1]!=replacement->sample.slices[slice-1])return 0;
+        if(slice>replacement->sample.slice_count || (!c->resampled && expected->sample.slices[slice-1]!=replacement->sample.slices[slice-1]))return 0;
     }
     retain(replacement);release_version(s->current[c->slot]);s->current[c->slot]=replacement;
     p->samples[c->slot]=replacement->sample;++s->generation;return 1;
@@ -65,19 +65,21 @@ static void discard(void *context)
     struct sample_change *c=context;struct pt_sampler *s=c->owner;
     release_version(c->before);release_version(c->after);s->allocator.release(s->allocator.context,c);
 }
-static enum pt_edit_result commit(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,struct pt_sample_version *after)
+static enum pt_edit_result commit_kind(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,struct pt_sample_version *after,unsigned resampled)
 {
     struct sample_change *c;struct pt_edit_resource resource;enum pt_edit_result result;
     if(same(&p->samples[slot],&after->sample)) {release_version(after);return PT_EDIT_OK;}
     c=s->allocator.allocate(s->allocator.context,sizeof(*c));
     if(!c) {release_version(after);return PT_EDIT_CAPACITY;}
-    c->owner=s;c->slot=slot;c->after=after;c->before=s->current[slot];
+    c->owner=s;c->slot=slot;c->resampled=resampled;c->after=after;c->before=s->current[slot];
     if(c->before)retain(c->before);else c->before=version(s,&p->samples[slot]);
     if(!c->before) {release_version(after);s->allocator.release(s->allocator.context,c);return PT_EDIT_CAPACITY;}
     resource.context=c;resource.apply=apply;resource.discard=discard;
     result=pt_pattern_resource_apply(p,h,&resource);if(result!=PT_EDIT_OK)discard(c);
     return result;
 }
+static enum pt_edit_result commit(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,struct pt_sample_version *after)
+{return commit_kind(s,p,h,slot,after,0);}
 enum pt_edit_result pt_sampler_edit(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,enum pt_pcm_edit op,uint32_t start,uint32_t end,unsigned gain)
 {
     struct pt_sample_version *v;
@@ -132,4 +134,35 @@ enum pt_edit_result pt_sampler_slices(struct pt_sampler *s,struct pt_project *p,
     sample.slices=(uint32_t *)markers;sample.slice_count=(uint16_t)count;
     v=version(s,&sample);if(!v)return PT_EDIT_CAPACITY;
     return commit(s,p,h,slot,v);
+}
+
+static uint32_t scale_frame(uint32_t frame,uint32_t rate,uint32_t old_rate,int ceil)
+{return (uint32_t)(((uint64_t)frame*rate+(ceil?old_rate-1:0))/old_rate);}
+enum pt_edit_result pt_sampler_convert(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,unsigned bits,uint32_t rate)
+{
+    struct pt_sample sample;const struct pt_sample *source;struct pt_sample_version *v;struct pt_pcm from;uint32_t frames;unsigned i,resampled;
+    if(!s || !s->allocator.allocate || !s->allocator.release || pt_project_validate(p,NULL)!=PT_PROJECT_OK || slot>=p->sample_count ||
+        (bits!=8 && bits!=16 && bits!=24) || !rate || rate>192000)return PT_EDIT_INVALID;
+    source=&p->samples[slot];sample=*source;
+    if(!sample.pcm.frames)return PT_EDIT_INVALID;
+    if(bits==sample.pcm.bits && rate==sample.pcm.rate)return PT_EDIT_OK;
+    if(pt_pcm_resampled_frames(&sample.pcm,rate,&frames)!=PT_PCM_OK)return PT_EDIT_CAPACITY;
+    resampled=rate!=sample.pcm.rate;
+    if(resampled && sample.loop) {
+        sample.loop_start=scale_frame(sample.loop_start,rate,sample.pcm.rate,0);
+        sample.loop_end=scale_frame(sample.loop_end,rate,sample.pcm.rate,1);
+        sample.crossfade=scale_frame(sample.crossfade,rate,sample.pcm.rate,0);
+        if(sample.loop_start>=sample.loop_end || sample.loop_end>frames ||
+            (sample.loop==PT_LOOP_CROSSFADE && (!sample.crossfade || sample.crossfade>(sample.loop_end-sample.loop_start)/2)))return PT_EDIT_UNSUPPORTED;
+    }
+    sample.pcm.data=NULL;sample.pcm.frames=frames;sample.pcm.rate=rate;
+    v=version(s,&sample);if(!v)return PT_EDIT_CAPACITY;
+    if(resampled)for(i=0;i<sample.slice_count;++i) {
+        v->sample.slices[i]=scale_frame(source->slices[i],rate,source->pcm.rate,0);
+        if(v->sample.slices[i]>=frames || (i && v->sample.slices[i]<=v->sample.slices[i-1])) {release_version(v);return PT_EDIT_UNSUPPORTED;}
+    }
+    if((resampled?pt_pcm_resample(&source->pcm,&v->sample.pcm):pt_pcm_convert(&source->pcm,&v->sample.pcm))!=PT_PCM_OK) {release_version(v);return PT_EDIT_INVALID;}
+    from=v->sample.pcm;v->sample.pcm.bits=(uint8_t)bits;
+    if(pt_pcm_convert(&from,&v->sample.pcm)!=PT_PCM_OK) {release_version(v);return PT_EDIT_INVALID;}
+    return commit_kind(s,p,h,slot,v,resampled);
 }

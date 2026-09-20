@@ -176,6 +176,8 @@ static void draw_sample(const struct pt_editor *e,struct pt_canvas *c,const uint
 {
     const struct pt_sample *sample=e->sample && e->sample<=e->project->sample_count?&e->project->samples[e->sample-1]:NULL;
     const struct pt_pcm *pcm=sample?&sample->pcm:NULL;char text[80];unsigned channel,x;
+    uint32_t view_start,view_end,span;
+    pt_editor_wave_bounds(e,&view_start,&view_end);span=view_end-view_start;
     uint32_t start=e->sample_range_slot==e->sample?e->sample_start:0;
     uint32_t end=e->sample_range_slot==e->sample?e->sample_end:pcm?pcm->frames:0;
     panel(c,2,PT_EDITOR_HEADER_Y,636,PT_EDITOR_BOTTOM_Y-PT_EDITOR_HEADER_Y,GREY);
@@ -183,12 +185,13 @@ static void draw_sample(const struct pt_editor *e,struct pt_canvas *c,const uint
     snprintf(text,sizeof(text),"SAMPLE %02u  %u BIT  %s  %lu HZ",e->sample,pcm->bits,pcm->channels==2?"STEREO":"MONO",(unsigned long)pcm->rate);
     if(e->panel==6)snprintf(text,sizeof(text),"%s LOOP %lu - %lu  /  FADE %lu FRAMES",sample->loop==PT_LOOP_NONE?"NO":sample->loop==PT_LOOP_FORWARD?"FORWARD":sample->loop==PT_LOOP_PINGPONG?"PINGPONG":"CROSSFADE",(unsigned long)sample->loop_start,(unsigned long)sample->loop_end,(unsigned long)e->loop_fade);
     if(e->panel==7)snprintf(text,sizeof(text),"SLICES %u / %s %lu  -  %s",sample->slice_count,e->slice_pending?"PROPOSED":"SAVED",(unsigned long)(e->slice_pending?e->slice_count:sample->slice_count),e->slice_pending?"APPLY OR CANCEL":"MARKERS ONLY");
+    if(e->panel==9)snprintf(text,sizeof(text),"FORMAT %u BIT %lu HZ > %u BIT %lu HZ / LINEAR",pcm->bits,(unsigned long)pcm->rate,e->format_bits,(unsigned long)e->format_rate);
     label(c,font,2,PT_EDITOR_HEADER_Y,636,19,text,0);
     for(channel=0;channel<pcm->channels;++channel) {
         int top=254+(int)channel*(216/pcm->channels),height=216/pcm->channels-4,mid=top+height/2;
         rect(c,10,top,620,height,BLACK);
         if(pcm->frames)for(x=0;x<620;++x) {
-            uint32_t first=(uint32_t)((uint64_t)x*pcm->frames/620),last=(uint32_t)((uint64_t)(x+1)*pcm->frames/620),f;
+            uint32_t first=view_start+(uint32_t)((uint64_t)x*span/620),last=view_start+(uint32_t)((uint64_t)(x+1)*span/620),f;
             int32_t low=0,high=0;int y0,y1;
             if(last==first)last=first+1;
             for(f=first;f<last && f<pcm->frames;++f) {int32_t value=pcm->data[(size_t)f*pcm->channels+channel];if(value<low)low=value;if(value>high)high=value;}
@@ -202,17 +205,22 @@ static void draw_sample(const struct pt_editor *e,struct pt_canvas *c,const uint
             unsigned marker;const uint32_t *markers=e->panel==7 && e->slice_pending?e->slice_markers:sample->slices;
             size_t count=e->panel==7 && e->slice_pending?e->slice_count:sample->slice_count;
             for(marker=0;marker<count;++marker) {
-                int mx=10+(int)((uint64_t)markers[marker]*619/pcm->frames);
+                int mx;
+                if(markers[marker]<view_start || markers[marker]>=view_end)continue;
+                mx=10+(int)((uint64_t)(markers[marker]-view_start)*619/span);
                 rect(c,mx,top,1,height,e->panel==7 && e->slice_pending?YELLOW:WHITE);
             }
-            if(sample->loop) {
-                int lx=10+(int)((uint64_t)sample->loop_start*619/pcm->frames),rx=10+(int)((uint64_t)sample->loop_end*619/pcm->frames);
-                rect(c,lx,top,1,height,YELLOW);rect(c,rx,top,1,height,YELLOW);rect(c,lx,top,rx-lx+1,2,YELLOW);
+            if(sample->loop && sample->loop_start<view_end && sample->loop_end>view_start) {
+                uint32_t a=sample->loop_start<view_start?view_start:sample->loop_start,b=sample->loop_end>view_end?view_end:sample->loop_end;
+                int lx=10+(int)((uint64_t)(a-view_start)*619/span),rx=10+(int)((uint64_t)(b-view_start)*619/span);
+                if(sample->loop_start>=view_start)rect(c,lx,top,1,height,YELLOW);
+                if(sample->loop_end<=view_end)rect(c,rx,top,1,height,YELLOW);
+                rect(c,lx,top,rx-lx+1,2,YELLOW);
             }
         }
-        if(e->sample_range_slot==e->sample && e->sample_marking && pcm->frames)rect(c,10+(int)((uint64_t)e->sample_anchor*619/pcm->frames),top,1,height,YELLOW);
+        if(e->sample_range_slot==e->sample && e->sample_marking && pcm->frames && e->sample_anchor>=view_start && e->sample_anchor<=view_end)rect(c,10+(int)((uint64_t)(e->sample_anchor-view_start)*619/span),top,1,height,YELLOW);
     }
-    snprintf(text,sizeof(text),"RANGE %lu - %lu / %lu FRAMES",(unsigned long)start,(unsigned long)end,(unsigned long)pcm->frames);
+    snprintf(text,sizeof(text),"RANGE %lu-%lu  VIEW %lu-%lu / %lu",(unsigned long)start,(unsigned long)end,(unsigned long)view_start,(unsigned long)view_end,(unsigned long)pcm->frames);
     small(c,font,12,478,text,NAVY);
 }
 void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t font[580])
@@ -281,18 +289,30 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
     panel(c,552,PT_EDITOR_BOTTOM_Y,86,21,GREY);small(c,font,557,497,"PATTERN",WHITE);snprintf(s,sizeof(s),"%02X",e->pattern);small(c,font,618,497,s,NAVY);
     pt_editor_draw_playback(e,c,font);
     if(e->panel>=5) {
-        static const char *tabs[3]={"SAMPLER","LOOPS","SLICES"};
-        static const char *ops[3][4][3]={
-            {{"LOAD WAV","SAVE WAV","AUDITION"},{"REVERSE","NORMALIZE","DC OFFS"},{"GAIN /2","GAIN X2","BACK"},{"FADE IN","FADE OUT","ALL"}},
+        static const char *tabs[4]={"SAMPLER","LOOPS","SLICES","RANGE"};
+        static const char *ops[5][4][3]={
+            {{"LOAD WAV","SAVE WAV","AUDITION"},{"REVERSE","NORMALIZE","DC OFFS"},{"GAIN /2","GAIN X2","FORMAT"},{"FADE IN","FADE OUT","ALL"}},
             {{"FORWARD","PINGPONG","OFF"},{"FADE -","","FADE +"},{"BAKE FADE","USE LOOP","BACK"},{"ALL","UNDO","REDO"}},
-            {{"ADD START","DELETE","CLEAR"},{"AUTO","APPLY","CANCEL"},{"THRESH -","","THRESH +"},{"GAP -","","GAP +"}}};
-        for(i=0;i<3;++i)label(c,font,230+(int)i*123,2,123,19,tabs[i],e->panel==5+i);
+            {{"ADD START","DELETE","CLEAR"},{"AUTO","APPLY","CANCEL"},{"THRESH -","","THRESH +"},{"GAP -","","GAP +"}},
+            {{"ZOOM IN","ZOOM OUT","FIT ALL"},{"PAN <","ZOOM SEL","PAN >"},{"START -","","START +"},{"END -","","END +"}},
+            {{"8 BIT","16 BIT","24 BIT"},{"8287 HZ","22050 HZ","44100 HZ"},{"48000 HZ","","BACK"},{"APPLY","UNDO","REDO"}}};
+        for(i=0;i<4;++i)label(c,font,230+(int)(i*369/4),2,(int)((i+1)*369/4-i*369/4),19,tabs[i],e->panel==5+i);
         for(r=0;r<4;++r)for(i=0;i<3;++i)label(c,font,230+(int)i*123,21+(int)r*19,123,19,ops[e->panel-5][r][i],
-            e->panel==6 && r==0 && sample && sample->loop==(i==2?PT_LOOP_NONE:i+1));
+            (e->panel==6 && r==0 && sample && sample->loop==(i==2?PT_LOOP_NONE:i+1)) || (e->panel==9 && r==0 && e->format_bits==(i+1)*8));
         if(e->panel==6) {snprintf(s,sizeof(s),"%lu FR",(unsigned long)e->loop_fade);label(c,font,353,40,123,19,s,0);}
         if(e->panel==7) {
             snprintf(s,sizeof(s),"%u / 1000",e->slice_threshold);label(c,font,353,59,123,19,s,0);
             snprintf(s,sizeof(s),"%uMS Z:%s",e->slice_gap_ms,e->slice_zero?"ON":"OFF");label(c,font,353,78,123,19,s,e->slice_zero);
+        }
+        if(e->panel==9) {
+            if(e->number_field==3)snprintf(s,sizeof(s),"%s_",e->number_text);
+            else snprintf(s,sizeof(s),"%lu HZ",(unsigned long)e->format_rate);
+            label(c,font,353,59,123,19,s,e->number_field==3);
+        }
+        if(e->panel==8)for(i=1;i<=2;++i) {
+            if(e->number_field==i)snprintf(s,sizeof(s),"%s_",e->number_text);
+            else snprintf(s,sizeof(s),"%lu",(unsigned long)(i==1?e->sample_start:e->sample_end));
+            label(c,font,353,40+(int)i*19,123,19,s,e->number_field==i);
         }
         draw_sample(e,c,font);
     } else if(e->panel==4) {

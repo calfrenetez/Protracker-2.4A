@@ -21,4 +21,7 @@ enum pt_edit_result pt_sampler_edit(struct pt_sampler *,struct pt_project *,stru
 enum pt_edit_result pt_sampler_loop(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,enum pt_loop_kind,uint32_t,uint32_t,uint32_t);
 /* Replace non-destructive markers. Never silently retarget a referenced ordinal. */
 enum pt_edit_result pt_sampler_slices(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,const uint32_t *,size_t);
+/* Explicit whole-sample conversion. Linear rate conversion preserves marker
+   ordinals by scaling frames; collapsed markers/invalid loop geometry refuse. */
+enum pt_edit_result pt_sampler_convert(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,unsigned,uint32_t);
 #endif

@@ -65,7 +65,7 @@ below; they do not replace the original assembler tracker representation.
 | --- | --- | --- |
 | Channels | 1–16 channels, four-column page selection, wrapping navigation, names/pan/group/MIDI metadata, exclusive P/A/M routes, atomic fifth-Paula rejection and stable allocation of four Paula slots | Existing-song resizing, names/pan/group/MIDI setup UI, mixed backend dispatch |
 | Mute/solo and history | Channel page and saved settings; shared chronological note/block/channel undo; fifth-Paula rejection; classic Paula live mute/solo and undo/redo | Mixed backend playback and persistent recovery |
-| PCM editing | Sampler waveform/range UI; signed 8/16/24-bit mono/stereo reverse, saturation gain, shared-peak normalize, fades and per-channel DC removal; staged shared undo and allocation rollback | Resampling/conversion UI and additional import formats |
+| PCM editing | Sampler waveform/range UI; signed 8/16/24-bit mono/stereo reverse, saturation gain, shared-peak normalize, fades and per-channel DC removal; staged shared undo and allocation rollback | High-quality filtered/dithered conversion and additional import formats |
 | Conversion | Explicit precision conversion with rounding/clipping; offline integer linear resampling | Antialias filtering and quality qualification; shared renderer/converter integration |
 | WAV | Bounded RIFF PCM parsing and canonical writing; 8/16/24-bit mono/stereo, odd-chunk padding, byte/block-rate checks and full low-eight-bit retention | Float/extensible WAV and loop metadata; integer PCM native import/export with verified new-file publication is connected |
 
@@ -336,3 +336,13 @@ See [controls and remaining playback boundaries](ENHANCED_EDITOR.md#loop-and-sli
 Host tests cover rollback, persistence, proposal controls and cached/full display.
 Native evidence and exact binary/source manifests are retained under
 `evidence/enhanced-editor/dev14/`. This remains software/emulator evidence only.
+
+## Zoom and format milestone (dev15)
+
+RANGE adds independent waveform zoom/pan and exact validated frame endpoints.
+FORMAT exposes explicit whole-sample 8/16/24-bit conversion and linear rate
+conversion, with scaled loop/marker metadata in one sample-history transaction.
+Collapsed markers are refused. High-quality antialias filtering and dither remain
+separate work; no automatic conversion or implicit stereo downmix is performed.
+See `evidence/enhanced-editor/dev15/` for source/binary identities and host/native
+range, conversion, rollback, persistence and display evidence.

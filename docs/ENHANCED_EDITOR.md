@@ -140,8 +140,8 @@ REVERSE / R, NORMALIZE / N, DC OFFS / D, GAIN X2 / G, GAIN /2 / H, FADE IN / I
 and FADE OUT / O act on the selected range. Stereo frames stay paired. Normalize
 uses a shared peak, gain saturates at the declared precision, fades reach zero,
 and DC removal calculates each channel independently. Existing sample loop/slice
-positions are preserved during these length-preserving edits. Resampling and
-explicit precision conversion UI remain open.
+positions are preserved during these length-preserving edits. FORMAT provides
+explicit whole-sample rate and precision conversion.
 
 Each change joins the same chronological undo/redo as notes and channel settings.
 Staged immutable sample versions are reference-counted; command eviction or redo
@@ -166,7 +166,7 @@ Pattern edits and channel settings keep their previously documented behaviour.
 
 ## Loop and slice tabs
 
-The sampler heading now contains SAMPLER, LOOPS and SLICES tabs; Tab cycles them.
+The sampler heading contains SAMPLER, LOOPS, SLICES and RANGE tabs; Tab cycles them.
 The same two-click range, A/Control-A for all, +/- sample selection, audition,
 Control-S and shared undo remain available. Escape closes all sample pages.
 The accepted main-screen grid and bitmap font are unchanged.
@@ -208,6 +208,47 @@ remapping, pattern slice assignment controls, slice-trigger playback and MIDI
 slice triggering remain pending. The current milestone is editing and persistence,
 not a claim that enhanced playback is connected. Metadata-only edits still keep
 immutable PCM snapshots within the existing sample-history memory budget.
+
+## Waveform zoom, exact ranges and format conversion
+
+RANGE separates the waveform viewport from the edit selection. ZOOM IN / I and
+ZOOM OUT / O halve/double the visible span; PAN </> or left/right move half a
+viewport and stop at sample boundaries. FIT ALL / F shows the full sample.
+ZOOM SEL / V shows exactly the selected range, down to one frame. Selection,
+PCM, dirty state and undo history do not change when navigating. Waveform clicks,
+loop brackets and saved/proposed slice markers use the same zoomed frame range;
+markers outside the viewport are clipped rather than clamped onto a false edge.
+Changing sample slots or changing frame count restores the full viewport.
+
+START/END -/+ adjust one frame; [/] adjust start, Shift-[ / Shift-] adjust end.
+Click a numeric value or press S/E to enter an exact decimal endpoint. The first
+digit replaces the old value, Backspace/Delete removes digits, Return validates,
+and Escape cancels just the entry. Invalid, inverted, empty, overflowing and
+out-of-sample ranges retain the old selection. While a number is being entered,
+other actions cannot edit the project or open a requester. All ranges are half-open.
+
+SAMPLER > FORMAT, or C on SAMPLER/RANGE, opens conversion targets. Choose 8/16/24
+bits (keys 1/2/3), a rate preset (8287, 22050, 44100 or 48000 Hz), or click the
+rate value / R to enter 1–192000 Hz. These are proposals until APPLY / P; choosing
+or cancelling values does not edit the sample. Conversion always covers the
+whole selected sample, independent of the waveform selection. Precision reduction
+rounds to nearest with ties away from zero and saturates; widening retains exact
+values at the new scale. There is no dither in this conversion path.
+
+Rate conversion currently uses the portable linear interpolator, explicitly
+labelled LINEAR; it has no antialias filter and is not a high-quality downsampling
+or finished classic-song conversion claim. PCM remains mono/stereo as supplied.
+The frame count rounds up, loop starts and slice frames round down, and exclusive
+loop ends round up. Slice ordinals remain attached to the corresponding scaled
+markers. Collapsed markers or invalid crossfade geometry refuse the whole change.
+No marker is silently removed and no implicit downmix occurs.
+
+PCM, precision, rate and all scaled metadata publish as one bounded shared undo
+command. Undo restores original full-precision PCM and exact old frame positions;
+redo restores the converted version. Failures and unchanged targets preserve redo
+and current playback. Successful conversion stops the old audio snapshot, clears
+stale marker proposals and selects the complete result. Project/WAV saves retain
+the converted values; hardware/backend limits on audition still apply.
 
 ## Display and acceptance boundaries
 

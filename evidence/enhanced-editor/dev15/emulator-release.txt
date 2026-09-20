@@ -1,0 +1,11 @@
+2026-09-20: AmiConnect explicitly relinquished emulator ownership before this
+window. Fresh process/private-HDF/socket checks were clear before launch.
+Run format1789897271677986000 passed in 291.684 seconds.
+PT24GEdit d6e7b658a22ef2ae41fe5fc4616cbe01b6a7f5cad7ba01222135ce68a279584a
+PTSamplerTest 64742770053db4e116fdbedb736a5ffda2e5636a30c10df49f07d33529513147
+
+The harness restored its launch script, used Emulator() to require exact
+Config=ProTracker isolated baseline, issued guarded QUIT and waited for launcher
+completion. Fresh final checks: no Amiberry process, no local/baseline.hdf holder,
+/tmp/amiberry.sock absent. Explicit release sent to AmiConnect thread
+01a02122-c34e-72f0-95cc-e36ce3d73629. No physical hardware accessed.

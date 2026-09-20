@@ -21,6 +21,11 @@ struct pt_editor {
     struct pt_sampler sampler;
     unsigned sample_range_slot,sample_marking;
     uint32_t sample_start,sample_end,sample_anchor;
+    uint32_t wave_start,wave_end,wave_frames;
+    unsigned wave_slot,number_field,number_fresh;
+    char number_text[11];
+    unsigned format_slot,format_bits;
+    uint32_t format_rate;
     uint32_t loop_fade,slice_markers[4096];
     size_t slice_count;
     unsigned slice_pending,slice_slot,slice_generation,slice_threshold,slice_gap_ms,slice_zero,sample_ui;
@@ -42,6 +47,7 @@ int pt_editor_init(struct pt_editor *,struct pt_project *);
    storage; release/destroy its document separately. */
 void pt_editor_dispose(struct pt_editor *);
 void pt_editor_sample_all(struct pt_editor *);
+void pt_editor_wave_bounds(const struct pt_editor *,uint32_t *,uint32_t *);
 void pt_editor_sample_result(struct pt_editor *,enum pt_edit_result);
 enum pt_editor_action pt_editor_key(struct pt_editor *,unsigned raw,unsigned qualifier);
 enum pt_editor_action pt_editor_click(struct pt_editor *,int x,int y);

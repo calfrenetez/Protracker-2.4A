@@ -615,3 +615,18 @@ match native period writes. All 16 tracks receive independent host boundary
 coverage. The original diagnostic and accepted screen remain unchanged.
 Evidence and limitations are in `evidence/enhanced-editor/dev37/`. Amiberry was
 explicitly released after guarded cleanup. No physical hardware was accessed.
+
+
+## Reference vibrato and waveform control (dev38)
+
+The shared WAV/bounce renderer accepts 4xy, 6xy and E4x. Speed/depth memory,
+sine/ramp/square selection, byte-phase progression, note reset ordering and
+word output wrap follow the pinned replay. Combined volume sliding retains
+vibrato memory, and modulation preserves stored pitch and PCM phase.
+
+48 host checks and 47 native executions passed. Eleven fixtures (286 ticks each
+capture pass) repeated exactly; host/m68k period words and reference ramp PCM
+match native writes. Host boundaries cover all 16 tracks. Native diagnostics
+and the accepted screen remain unchanged. Evidence and limitations are in
+`evidence/enhanced-editor/dev38/`. Amiberry was explicitly released after guarded
+cleanup. No physical hardware or analogue-audio acceptance is claimed.

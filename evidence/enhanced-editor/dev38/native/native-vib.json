@@ -1,0 +1,662 @@
+{
+  "schema": 1,
+  "record_bytes": 52,
+  "run_id": "vib1789928528667825000",
+  "elapsed_seconds": 304.231,
+  "baseline_fixture_sha256": "fd566e6dd8163ab98e16960079fdc5075bdec2c6a812ae2c0ad853fd399a1686",
+  "baseline_first36": "EXACT DEV28 MATCH",
+  "diagnostic_sha256": "0417460e44bc436b7bca0547f75af8b90c05fe57fb29e52235e257a87f85b6fa",
+  "pitch_test_sha256": "1d70a0c1ac30ca25b4a9a1470e0802bc8b9d8d2adfdc08bf76e2423ae73e9431",
+  "renderer_test_sha256": "f3a8ba2b7198d4a249f4f75f445295548868e187a25914fd138e016cf713eabc",
+  "cases": {
+    "vib_sine": {
+      "focus": "vib_sine",
+      "events": [
+        [
+          0,
+          0,
+          404,
+          1,
+          4,
+          255
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          15,
+          16
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          4,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 38,
+      "fixture_sha256": "1f0187ec42afc74b765f0b95c552200d7964ca3cf0a86e90e677da1c99ab5c61",
+      "trace_sha256": "aa84b9a5e321ab1889216fcc6b50a713df4ff7f01b29b322abab59a1029074b4"
+    },
+    "vib_memory": {
+      "focus": "vib_memory",
+      "events": [
+        [
+          0,
+          0,
+          404,
+          1,
+          4,
+          71
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          15,
+          4
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          4,
+          144
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          4,
+          3
+        ],
+        [
+          3,
+          0,
+          0,
+          0,
+          4,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          5,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 26,
+      "fixture_sha256": "2e301570104e0558e16f083d8f0d3a867a658ca9d6526694846e1f88731f1be7",
+      "trace_sha256": "c32b7a2da0b7edabd9e08b601fe54d1e3a4dceb7725d3f72c2fd711ed9c55f53"
+    },
+    "vib_volume": {
+      "focus": "vib_volume",
+      "events": [
+        [
+          0,
+          0,
+          404,
+          1,
+          4,
+          143
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          15,
+          4
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          6,
+          3
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          6,
+          18
+        ],
+        [
+          3,
+          0,
+          0,
+          0,
+          6,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 22,
+      "fixture_sha256": "3088851343b7ca06b12dc4df9860b806d604d7e5277f15731d31765d6f6feb7f",
+      "trace_sha256": "d8f94d3a5d7b3542cc3ef066e104985df106b381a51dfb2bccbe4518ed266010"
+    },
+    "vib_ramp": {
+      "focus": "vib_ramp",
+      "events": [
+        [
+          0,
+          0,
+          404,
+          1,
+          14,
+          65
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          15,
+          16
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          4,
+          255
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          4,
+          0
+        ],
+        [
+          3,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 54,
+      "fixture_sha256": "66a03025cb14430d6e67bf4166982c71b2f6af76d0a5eff17587d821ae701c03",
+      "trace_sha256": "b212da8a9163dbfaad0783a11c6f90c6e9e0ca99167e893a0f08c2fc949518bf"
+    },
+    "vib_square": {
+      "focus": "vib_square",
+      "events": [
+        [
+          0,
+          0,
+          404,
+          1,
+          14,
+          66
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          15,
+          4
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          4,
+          255
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          14,
+          67
+        ],
+        [
+          3,
+          0,
+          0,
+          0,
+          4,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 22,
+      "fixture_sha256": "620139ce6954df2c99c483c0bd11a583c5917e5e47a74c0824b6092356aa80a8",
+      "trace_sha256": "f3581addd90b434ee14ca30dc0a7964d5e15a28f0520361684f439fd27e25858"
+    },
+    "vib_reset": {
+      "focus": "vib_reset",
+      "events": [
+        [
+          0,
+          0,
+          404,
+          1,
+          4,
+          255
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          15,
+          4
+        ],
+        [
+          1,
+          0,
+          428,
+          1,
+          4,
+          0
+        ],
+        [
+          2,
+          0,
+          214,
+          0,
+          3,
+          16
+        ],
+        [
+          3,
+          0,
+          0,
+          0,
+          4,
+          0
+        ],
+        [
+          4,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 22,
+      "fixture_sha256": "9ff09a9738ec298f6497e3a4d7de275453523691064bcd36f7208d629432de19",
+      "trace_sha256": "55846fe481d6f90e526bcdb68d6e2670986e092ce1eca59335fe8c63af0a6e6e"
+    },
+    "vib_noreset": {
+      "focus": "vib_noreset",
+      "events": [
+        [
+          0,
+          0,
+          404,
+          1,
+          14,
+          68
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          15,
+          4
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          4,
+          255
+        ],
+        [
+          2,
+          0,
+          428,
+          1,
+          4,
+          0
+        ],
+        [
+          3,
+          0,
+          404,
+          1,
+          14,
+          64
+        ],
+        [
+          4,
+          0,
+          0,
+          0,
+          4,
+          0
+        ],
+        [
+          5,
+          0,
+          428,
+          1,
+          4,
+          0
+        ],
+        [
+          6,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 30,
+      "fixture_sha256": "987a5e57bbee07014cd5724e403f452b7cb8769dbda44c831003955661ff9957",
+      "trace_sha256": "a9fa397dd329e5d4e1845a90cb7ce85fbaa999bc783ec108459e41c718ccc63c"
+    },
+    "vib_delay": {
+      "focus": "vib_delay",
+      "events": [
+        [
+          0,
+          0,
+          404,
+          1,
+          4,
+          247
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          15,
+          2
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          4,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          14,
+          226
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          6,
+          1
+        ],
+        [
+          2,
+          1,
+          0,
+          0,
+          14,
+          225
+        ],
+        [
+          3,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 18,
+      "fixture_sha256": "cd4713162096bc72c8cc11fe99950670e25bcd1b7e504990b66a45cf2af4d456",
+      "trace_sha256": "cc6742445bd9d531b0e16aaebaf5550fdb14e236347a808b54e6893ae9df17c3"
+    },
+    "vib_speed_one": {
+      "focus": "vib_speed_one",
+      "events": [
+        [
+          0,
+          0,
+          404,
+          1,
+          4,
+          255
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          15,
+          1
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          6,
+          1
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          15,
+          3
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          4,
+          80
+        ],
+        [
+          3,
+          0,
+          0,
+          0,
+          4,
+          7
+        ],
+        [
+          4,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 16,
+      "fixture_sha256": "ea4ad95decf8ce4219541bacb8420279c2c24f1b0228eaf3daaf821d3294aa4d",
+      "trace_sha256": "adde9fb6fad471503f5281aa108a03a7e4596bd8ee1c72400b07fab6cde58b2a"
+    },
+    "vib_inactive": {
+      "focus": "vib_inactive",
+      "events": [
+        [
+          0,
+          0,
+          0,
+          0,
+          4,
+          255
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          15,
+          4
+        ],
+        [
+          1,
+          0,
+          404,
+          1,
+          4,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 14,
+      "fixture_sha256": "83480a4d1129cd17e13532afaf7f51d1f2a5aee1bd0ad0bde71b3ef0da7ee5d7",
+      "trace_sha256": "3cfe406a232c4c73eddc8351f8616f656420dede761cbdc126927839e5f3f07d"
+    },
+    "vib_wrapped": {
+      "focus": "vib_wrapped",
+      "events": [
+        [
+          0,
+          0,
+          113,
+          1,
+          1,
+          255
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          15,
+          2
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          4,
+          255
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          15,
+          16
+        ],
+        [
+          2,
+          0,
+          0,
+          0,
+          15,
+          0
+        ]
+      ],
+      "max_ticks": 100,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "48419af3ea5b4c10a57e1d381aa99187887a840294c939dd08eeb0645d03cdf9",
+      "trace_sha256": "be3f7e6a3dc7f5e5281caf9729ba7549e16db886a201cc11d542975e4fd78f49"
+    }
+  },
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=2666\tsndbuf_status=0",
+  "scope": "Pinned native vibrato period writes captured twice, with host/m68k stored/output word and PCM parity. Covers waveform selection, independent speed/depth memory, reset/no-reset, tone interaction, volume slides, delayed passes and wrapped periods. Reference rate/timing only; no physical sound claim.",
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

@@ -26,7 +26,7 @@ typedef int (*pt_render_sink)(void *,const struct pt_pcm *,uint64_t offset);
  * crossfade metadata, instrument-only events, sample changes/slices on tone-portamento notes,
  * zero playback periods and unsupported
  * effects. Supported
- * effects: 0xy, 1xx, 2xx, 3xx, 5xx, Axx, Bxx, Cxx, Dxx, E1x, E2x, E6x, EAx, EBx, ECx, EEx, Fxx.
+ * effects: 0xy, 1xx, 2xx, 3xx, 4xy, 5xx, 6xy, Axx, Bxx, Cxx, Dxx, E1x, E2x, E4x, E6x, EAx, EBx, ECx, EEx, Fxx.
  * Pitch slides retain native stored-word wrap and register-write semantics.
  * Ordinary notes retain raw periods; tone targets use the zero-finetune table.
  * 3xx/5xx retain voice phase; explicit velocity may change without retriggering.

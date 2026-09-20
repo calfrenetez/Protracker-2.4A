@@ -323,3 +323,30 @@ cover nibble order, blank-command transition, delayed rows, maximum speed,
 adjacent-table reads, zero refusal, prior slide/wrap and all four native tracks.
 Host boundary checks also cover independent parameters on all 16 tracks and
 track-mask isolation. Ordinary reference notes still retain raw periods.
+
+
+## Vibrato output modulation (dev38)
+
+4xy latches each nonzero nibble on effect passes: high for speed and low for
+depth. Zero nibbles retain prior memory. 6xy calls the same modulation with that
+memory unchanged, then applies its own volume-slide parameter. Fresh speed-one
+rows can therefore leave a new 4xy parameter unused. Delayed tick-zero passes
+execute modulation and advance phase just like other effect passes.
+
+Vibrato phase is an unsigned wrapping byte, advanced by four times speed after
+the period write. The low five bits of phase shifted right two index the pinned
+32-entry sine table. E4x low bits select sine (0), ramp (1) or square (2 and 3).
+The signed phase half determines addition/subtraction. Native ramp negative-half
+magnitude is 255 minus eight times the index; square magnitude is 255. Multiply
+by depth, shift right seven, then add/subtract with 16-bit wrap. The stored base
+period is never modified and the PCM voice is never restarted by an effect pass.
+
+E4x stores its low nibble on every visit. Bit2 inhibits vibrato phase reset on
+ordinary notes, bit3 has no vibrato effect. A note checks the *previous* control
+before its same-row E4 command runs. Tone-portamento targets do not reset phase.
+Fresh 4xy/6xy rows restore the base period without modulating or latching their
+parameters. Zero output on a sounding voice remains a preflight refusal.
+
+The unchanged native 52-byte diagnostic supplies the output-period oracle;
+reference ramp PCM uses those writes with native volume and fresh DMA starts.
+This does not model Paula sample timing or analogue output.

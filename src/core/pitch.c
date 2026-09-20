@@ -37,6 +37,22 @@ static void tone(struct pt_pitch_channel *s)
     }
     s->output=s->period;
 }
+static void vibrato(struct pt_pitch_channel *s,unsigned param,unsigned update)
+{
+    static const uint8_t sine[]={0,24,49,74,97,120,141,161,180,197,212,224,235,244,250,253,
+        255,253,250,244,235,224,212,197,180,161,141,120,97,74,49,24};
+    unsigned index=(s->vib_phase>>2)&31,wave=s->vib_control&3,amount;
+    if(update) {
+        if(param&15)s->vib_command=(uint8_t)((s->vib_command&240)|(param&15));
+        if(param&240)s->vib_command=(uint8_t)((s->vib_command&15)|(param&240));
+    }
+    if(!wave)amount=sine[index];
+    else if(wave==1)amount=(s->vib_phase&128)?255-index*8:index*8;
+    else amount=255; /* Both native controls 2 and 3 select square. */
+    amount=amount*(s->vib_command&15)>>7;
+    s->output=(uint16_t)((s->vib_phase&128)?s->period-amount:s->period+amount);
+    s->vib_phase=(uint8_t)(s->vib_phase+((s->vib_command>>2)&60));
+}
 void pt_pitch_tick(struct pt_pitch *s,const struct pt_flow *flow,uint16_t tracks)
 {
     unsigned ch;
@@ -57,10 +73,13 @@ void pt_pitch_tick(struct pt_pitch *s,const struct pt_flow *flow,uint16_t tracks
                 if(effect==3 || effect==5) {
                     v->target=tone_target(e->pitch);v->up=signed_word(v->target)<signed_word(v->period);
                     if(v->target==v->period)v->target=0;
-                } else {v->period=v->output=e->pitch;v->sounding=v->instrument!=0;}
+                } else {
+                    v->period=v->output=e->pitch;v->sounding=v->instrument!=0;
+                    if(!(v->vib_control&4))v->vib_phase=0;
+                }
             }
             v->empty=e->kind==PT_NOTE_NONE && !e->instrument && !effect && !param;
-            if(effect<=3 || effect==5 || effect==10)v->output=v->period; /* mt_PerNop */
+            if(effect<=6 || effect==10)v->output=v->period; /* mt_PerNop */
         } else {
             if(!effect && param)arpeggio(v,param,flow->counter);
             else if(effect==1 || effect==2)slide(v,param,effect==2);
@@ -68,8 +87,10 @@ void pt_pitch_tick(struct pt_pitch *s,const struct pt_flow *flow,uint16_t tracks
                 if(effect==3 && param)v->speed=(uint8_t)param;
                 tone(v);
             }
+            else if(effect==4 || effect==6)vibrato(v,param,effect==4);
             else if((effect>=10 && effect<=13) || effect==15)v->output=v->period; /* SetBack */
         }
+        if(effect==14 && (param>>4)==4)v->vib_control=(uint8_t)(param&15);
         if(effect==14 && !flow->counter && ((param>>4)==1 || (param>>4)==2))slide(v,param&15,(param>>4)==2);
     }
 }

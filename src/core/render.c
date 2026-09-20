@@ -25,8 +25,8 @@ static enum pt_render_result preflight(const struct pt_project *p,const struct p
         const struct pt_event *e=p->events+((size_t)pat*64+row)*p->channels.count+ch;
         if(!(o->tracks&(1U<<ch)))continue;
         if(e->kind==PT_NOTE_MIDI || (e->instrument && e->kind!=PT_NOTE_PERIOD))return PT_RENDER_EFFECT;
-        if(!(e->effect==0 || e->effect==1 || e->effect==2 || e->effect==3 || e->effect==5 || (e->effect>=10 && e->effect<=13) || e->effect==15 ||
-             (e->effect==14 && ((e->parameter>>4)==1 || (e->parameter>>4)==2 || (e->parameter>>4)==6 || ((e->parameter>>4)>=10 && (e->parameter>>4)<=12) ||
+        if(!(e->effect==0 || e->effect==1 || e->effect==2 || e->effect==3 || e->effect==4 || e->effect==5 || e->effect==6 || (e->effect>=10 && e->effect<=13) || e->effect==15 ||
+             (e->effect==14 && ((e->parameter>>4)==1 || (e->parameter>>4)==2 || (e->parameter>>4)==4 || (e->parameter>>4)==6 || ((e->parameter>>4)>=10 && (e->parameter>>4)<=12) ||
                                (e->parameter>>4)==14))))return PT_RENDER_EFFECT;
         if((e->effect==3 || e->effect==5) && e->slice)return PT_RENDER_EFFECT;
         if(e->instrument) {
@@ -127,7 +127,7 @@ static enum pt_render_result commands(const struct pt_project *p,const struct pt
             }
             if(e->kind==PT_NOTE_PERIOD && (e->effect==3 || e->effect==5) && (e->flags&1))velocity[ch]=e->velocity;
             if(e->effect==12)volume[ch]=e->parameter>64?64:e->parameter;
-        } else if(flow->effect[ch]==10 || flow->effect[ch]==5) {
+        } else if(flow->effect[ch]==10 || flow->effect[ch]==5 || flow->effect[ch]==6) {
             unsigned param=flow->parameter[ch],up=param>>4,down=param&15;
             if(up)volume[ch]=(uint8_t)(volume[ch]+up>64?64:volume[ch]+up);
             else volume[ch]=(uint8_t)(volume[ch]<down?0:volume[ch]-down);

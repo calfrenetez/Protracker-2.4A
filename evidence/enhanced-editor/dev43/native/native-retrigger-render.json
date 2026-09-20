@@ -1,0 +1,33 @@
+{
+  "run_id": "retrigpcm1789933684230733000",
+  "elapsed_seconds": 117.384,
+  "binary_sha256": "a14fb3ee1b9c165b986ee355bfad7d782e906a8bb3322b0ae712ea33d1ab9978",
+  "input_sha256": {
+    "retrig_note.mod": "518c99d5e88e7fd4361712d195a6aa33cbb2125ae7908b082f3b4a463ba05ef8",
+    "retrig_note0.log": "5d2d8b114db3526a4202d32ce2ab5e8e44e19b8ffc4431b2fa631283c0b56c9d",
+    "retrig_empty.mod": "cfb5d966b65891f21b8a1f948142f2e5e186a4d5dbfd39fb20821a6942b2a580",
+    "retrig_empty0.log": "61527a2bf6935a58f6f169b43995bf35ee00533ab8f222130f5ba4fd1948805c",
+    "retrig_zero.mod": "2c6fc0cfa66afce7204171ccaa18f27661e8b57d65f4dfbf9353589f3cf3b164",
+    "retrig_zero0.log": "594f100e9c2743344a9b07fa4900209b70f71a428f4fbab16c38e20251eecc2f",
+    "retrig_every.mod": "72f1fee7f4d8f1d992aaf6b2c0f23a4ed9f9852241ea00430f91e9ce6018f6e6",
+    "retrig_every0.log": "105212a933f0f846c61bc15a4c7391b498013b78956eb143668b4dd9a7332fc4",
+    "trigger_repeat.mod": "534670fd2b60a840d1f083936a2f9d25d849088077a616702c0b226019d5a152",
+    "trigger_repeat0.log": "9d5b5086c4560777367f8093db7e64d470d9dd3da7079057a34f54270fa5aa7e"
+  },
+  "logs": {
+    "safety": "OFFSET safety PASS: isolated track16 PCM, non-byte/stereo/odd/pingpong/slice refusal before output/report changes\n",
+    "retrig_note-ch0": "OFFSET PCM PASS: channel=0 ticks=6 frames=5760\n",
+    "retrig_empty-ch0": "OFFSET PCM PASS: channel=0 ticks=12 frames=11520\n",
+    "retrig_zero-ch0": "OFFSET PCM PASS: channel=0 ticks=12 frames=11520\n",
+    "retrig_every-ch0": "OFFSET PCM PASS: channel=0 ticks=6 frames=5760\n",
+    "trigger_repeat-ch0": "OFFSET PCM PASS: channel=0 ticks=12 frames=11520\n"
+  },
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0",
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  },
+  "scope": "Reference immutable PCM at 48k/rate428 against dev42 native retrigger ranges; nonloops stop after initial segment. No native sample-word mutation, analogue audio or physical acceptance."
+}

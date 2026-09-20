@@ -8,11 +8,7 @@ refusal before sink/report mutation. Full regression: 54 tests, 91.021 seconds;
 final targeted retrigger test also passed after adding offset inheritance coverage.
 Native executables rebuilt and manifest/source hashes verified. Screen unchanged.
 
-Native execution of these new binaries is PENDING: AmiConnect owns the emulator
-window. tools/test_retrigger_render_emulator.py is prepared for six bounded checks
-and performs process/HDF/socket preflight before launcher mutation. No emulator
-or physical claim taken. Prior dev42 native traces are reference inputs, not proof
-that this new renderer binary executed on Amiga. No physical tests were performed.
+Native run `retrigpcm1789933684230733000` passed all six checks in 117.384 seconds, matching host output exactly. Stopped audio and CPU/memory/profile details are retained in native/native-retrigger-render.json. Guarded QUIT and fresh process/HDF/socket checks at 19:50:29 UTC verified release and exact launcher restoration; AmiConnect was explicitly notified. No physical tests performed.
 
 User now authorizes physical A1200 testing after feasible emulator checks for the
 relevant milestone are exhausted, excluding AmiGUS. Emulator contention alone is

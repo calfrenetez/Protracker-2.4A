@@ -257,5 +257,5 @@ Selected tracks containing E9x use the same bounded mono8/even-length/no-slice
 subset as 9xx, including E90. Higher-precision, stereo and pingpong retrigger
 semantics remain unsupported. EDx note delay is still refused. Five retained
 dev42 fixtures check 46080 rendered frames against native trigger/range evidence
-on the host; channel16 and offset-then-retrigger cases have additional checks.
+on the host and native emulator; channel16 and offset-then-retrigger cases have additional checks. All six native checks match host output.
 This does not establish physical playback or complete classic compatibility.

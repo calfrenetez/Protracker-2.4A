@@ -50,7 +50,7 @@ int main(int argc,char **argv)
            (unsigned long)report.ticks,(unsigned long)report.clipped,report.end==PT_RENDER_F00?"F00":"first-position-return");rc=0;goto done;
 usage:
     fprintf(stderr,"Usage: PT24GRender INPUT NEW.wav [--pattern N] [--rate 44100|48000] [--bits 16|24] [--tracks HEX] [--gain 0..65536] [--lead-in]\n");
-    fprintf(stderr,"Reference renderer; effects 000/A/B/C/D/E6/EE/F only, no finetune/instrument-only/MIDI audio. Default gain32768, 30-minute bound.\n");
+    fprintf(stderr,"Reference renderer; bounded classic-effect subset including finetune/E5. Instrument-only events and MIDI audio unsupported. See docs/REFERENCE_RENDERER.md. Default gain32768, 30-minute bound.\n");
 done:
     if(f)fclose(f);
     free(input);pt_document_release(&doc);return rc;

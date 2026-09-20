@@ -84,10 +84,10 @@ loops are not position transitions and retain their repetitions. Pattern mode
 uses a one-entry order list pointing at the selected pattern. Budget exhaustion
 is an error, never silently classified as a completed song.
 
-Supported: ordinary raw-period notes (including instrument-zero inheritance),
+Supported: ordinary native-table-quantized notes (including instrument-zero inheritance),
 explicit note-off and velocity; mono/stereo 8/16/24-bit samples; nearest/linear
 interpolation; forward/ping-pong loops; sample slices; track selection; global
-mute/solo; and effects `0xy`, `1xx`, `2xx`, `3xx`, `4xy`, `5xx`, `6xy`, `9xx`, `Axx`, `Bxx`, `Cxx`, `Dxx`, `E1x`, `E2x`, `E4x`, `E6x`, `EAx`, `EBx`, `ECx`, `EEx`, `Fxx`.
+mute/solo; and effects `0xy`, `1xx`, `2xx`, `3xx`, `4xy`, `5xx`, `6xy`, `7xy`, `9xx`, `Axx`, `Bxx`, `Cxx`, `Dxx`, `E1x`, `E2x`, `E3x`, `E4x`, `E5x`, `E6x`, `E7x`, `E9x`, `EAx`, `EBx`, `ECx`, `EDx`, `EEx`, `Fxx`.
 Arpeggio 0xy changes the output period on effect passes while preserving the
 stored base and PCM phase. Its tick cycle uses the original masked counter;
 zero nibbles still perform table lookup, whereas command 000 does not run an
@@ -120,7 +120,7 @@ parameter is remembered on effect passes; 300 reuses that speed. 5xx keeps the
 remembered glide speed and adds normal volume sliding, including high-nibble
 priority and clamping. Delayed effect passes retain this behavior. Arrival clears
 the target while retaining speed memory. Normal note triggers do not clear a
-pending target. Target selection and comparisons follow the pinned zero-finetune
+pending target. Target selection and comparisons follow the active pinned finetune
 period table and signed 16-bit replay arithmetic, including wrapped stored words.
 
 Repeating the current sample number on a glide note resets its volume without
@@ -131,8 +131,8 @@ playback/loop handoff is not approximated. These are current implementation limi
 
 Measurement refuses a triggered voice whose period becomes zero, before any sink,
 WAV staging or sample append. Zero-period playback is an explicit remaining
-reference limitation. Notes still use their raw project periods; this does not
-add ordinary-note table quantization, finetune or PAL clock/analogue behavior.
+reference limitation. Ordinary notes now use native table quantization and
+finetune; the reference rate policy still does not model PAL clock/analogue behavior.
 Separate stored/output register traces and ramp PCM comparisons are in dev35
 and dev36; dev36 also checks native DMA-trigger continuity and glide memory.
 
@@ -143,7 +143,7 @@ rounded/quantized/saturated. Muting or zero gain does not stop voice progression
 Sample data is never modified, including across file verification passes.
 
 Preflight refuses selected MIDI routes (external audio is absent), MIDI pitches,
-nonzero sample finetune, crossfade-loop metadata, instrument-only events and other
+crossfade-loop metadata, instrument-only events and other
 effects. These are explicit implementation limits. It checks all order-referenced
 patterns conservatively (or only the selected pattern in pattern mode), before
 creating staging or calling the output sink. Excluded audio tracks still retain
@@ -317,5 +317,20 @@ nibble enables glissando; E30 disables it. The stored period still moves smoothl
 retaining slide speed and target; only each portamento pitch write is quantized
 against the pinned zero-finetune table. Reaching the target preserves native
 arrival behavior. Control changes do not immediately rewrite the period register.
-Finetuned samples remain refused, and undefined zero-output periods are still
+At dev47 finetuned samples were refused; dev48 adds tuning. Undefined zero-output periods are still
 rejected during measurement before any sink or publication.
+
+## Finetune and ordinary-note quantization (dev48)
+
+All16 sample tunings and E5x use the pinned native tables. Ordinary packed periods
+first select an index in the zero-tuning table, then read that index in the active
+tuning table; raw non-table periods are no longer passed through unchanged.
+Sample reload restores its header tuning. E5x overrides tuning before a same-row
+note and can change tuning without a note, without rewriting the current period.
+
+Tone targets scan the active table and apply the native one-entry correction for
+negative tuning. Glissando quantizes output against the active table without that
+target correction. Arpeggio includes adjacent-table overflow and the15 explicit
+overflow words after tuning -1. The generated table is checked byte-for-byte
+against the pinned assembly. Zero output periods and cross-sample/slice handoff
+limits remain; this does not change the reference sample-rate/ideal-BPM policy.

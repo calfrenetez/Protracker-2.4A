@@ -1,0 +1,12 @@
+test_bounded_reference_render_and_failure_boundaries (test_render.Render.test_bounded_reference_render_and_failure_boundaries) ... RENDER PASS: planned/streamed stereo16/24 PCM, startup trim, delayed voice continuity, pattern/song endings, slice bounds, selection, preflight refusal, cancellation and sink failures
+ok
+test_verified_stream_publication_and_io_failure (test_render_file.RenderFile.test_verified_stream_publication_and_io_failure) ... RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt staging refusal and cleanup
+ok
+test_pinned_native_volume_and_silent_phase (test_render_volume.VolumeRender.test_pinned_native_volume_and_silent_phase) ... VOLUME boundaries PASS: EC0 and Cxx restore retain silent phase across 16 voices and isolated track 16
+ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 10.103s
+
+OK
+VOLUME: seven repeated pinned native traces match every host/m68k rendered PCM frame

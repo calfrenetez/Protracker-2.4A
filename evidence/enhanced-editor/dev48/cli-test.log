@@ -1,0 +1,6 @@
+RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt staging refusal and cleanup
+.
+----------------------------------------------------------------------
+Ran 1 test in 5.250s
+
+OK

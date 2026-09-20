@@ -83,7 +83,10 @@ int main(void)
     memset(&report,0x55,sizeof(report));before=report;reset_capture(&c,pcm);
     assert(pt_render_stream(&p,&o,receive,&c,NULL,NULL,&report)==PT_RENDER_EFFECT && !c.calls && !memcmp(&report,&before,sizeof(report)));events[0].effect=0;
     sample.finetune=1;
-    assert(pt_render_stream(&p,&o,receive,&c,NULL,NULL,&report)==PT_RENDER_SAMPLE && !c.calls && !memcmp(&report,&before,sizeof(report)));sample.finetune=0;
+    assert(pt_render_measure(&p,&o,NULL,NULL,&report)==PT_RENDER_OK && report.frames==960);sample.finetune=0;report=before;
+    sample.loop=PT_LOOP_CROSSFADE;sample.crossfade=1;
+    assert(pt_render_stream(&p,&o,receive,&c,NULL,NULL,&report)==PT_RENDER_SAMPLE && !c.calls && !memcmp(&report,&before,sizeof(report)));
+    sample.loop=PT_LOOP_FORWARD;sample.crossfade=0;
     p.channels.track[0].route=PT_MIDI;
     assert(pt_render_stream(&p,&o,receive,&c,NULL,NULL,&report)==PT_RENDER_ROUTE && !c.calls && !memcmp(&report,&before,sizeof(report)));p.channels.track[0].route=PT_PAULA;
     events[0].kind=PT_NOTE_NONE;events[0].pitch=0;

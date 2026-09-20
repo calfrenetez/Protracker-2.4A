@@ -22,15 +22,15 @@ typedef int (*pt_render_sink)(void *,const struct pt_pcm *,uint64_t offset);
  * End at F00 or the first backwards/same-order position transition, after the
  * outgoing row duration. E6 row loops are retained. Pattern mode uses one order.
  * Default (include_lead_in=0) omits the silent initial speed-count lead-in.
- * Preflight rejects selected MIDI routes, MIDI pitches, nonzero finetune,
+ * Preflight rejects selected MIDI routes, MIDI pitches,
  * crossfade metadata, instrument-only events, sample changes/slices on tone-portamento notes,
  * zero playback periods and unsupported
  * effects. Supported
- * effects: 0xy, 1xx, 2xx, 3xx, 4xy, 5xx, 6xy, 9xx, Axx, Bxx, Cxx, Dxx, E1x, E2x, E4x, E6x, EAx, EBx, ECx, EEx, Fxx.
+ * effects: 0xy..7xy, 9xx, Axx..Dxx, E1x..E7x, E9x..EEx and Fxx.
  * Pitch slides retain native stored-word wrap and register-write semantics.
- * Ordinary notes retain raw periods; tone targets use the zero-finetune table.
+ * Ordinary notes and tone targets follow pinned tables for all16 tunings.
  * 3xx/5xx retain voice phase; explicit velocity may change without retriggering.
- * Finetune remains unsupported.
+ * E5x overrides tuning; E3x quantizes tone-portamento output.
  * Selected slice ranges loop only if the complete loop lies within the slice.
  * Mono pan is linear L/R; stereo pan is balance with unity at centre128.
  * Muting/solo remain global project settings. Voices advance at zero output gain.

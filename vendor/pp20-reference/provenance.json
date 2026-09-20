@@ -1,0 +1,12 @@
+{
+  "upstream": "https://github.com/libxmp/libxmp",
+  "commit": "1e0812137e4f9e15cc026c0c75af82d71d3cb5ad",
+  "path": "src/depackers/ppdepack.c",
+  "sha256": "45be9b8d66a4c5fc3e2c75ba0d55bd687d6a6655b2e56138d8468fd911bde33c",
+  "file_license": "Public Domain, explicit file header",
+  "genuine_fixture": "test-dev/data/mod.loving_is_easy.pp",
+  "fixture_sha256": "1c97a8363ff0b8ddeba05e76e87409f5f56a9e6af83b07b7150402bec4e52a7f",
+  "decoded_md5": "80ba11ca20f7ffef184a58c1fc619c18",
+  "decoded_bytes": 49798,
+  "fixture_distribution": "local only; no music included in package"
+}

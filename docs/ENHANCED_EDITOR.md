@@ -423,3 +423,29 @@ sample; mismatches refuse before opening a requester. Use FORMAT for explicit
 conversion first. RAW has no name/rate/loop/slice metadata; keep the PTG project
 and remember the displayed settings for reimport. Export does not mutate or mark
 the project saved. The verified new-file writer refuses existing destinations.
+
+
+## PowerPacker PP20 module loading
+
+LOAD / Control-O and the initial PT24GEdit input detect PP20 by content, independent
+of filename. PT24GConvert uses the same loader. The whole compressed bitstream is
+structurally checked before decoding: backwards input bounds, efficiency widths,
+skipped bits, literal/match lengths and references to already produced bytes.
+Decoded output is a separate allocation and passes strict normal-MOD preflight
+before it can replace the current project. Invalid input, insufficient peak
+memory or allocation failure retains the song and editor history. Temporary
+unpacked storage counts against the caller's memory budget and is always released.
+
+A genuine upstream packed MOD is checked against its published decoded checksum,
+then round-tripped through both converter and native editor to exact ordinary MOD
+bytes. PP20 has no integrity checksum: structural validation cannot detect every
+bit change that still describes a valid stream and valid MOD. The maximum decoded
+length is the format's 24-bit size field. Encryption (PX20), nested compression,
+packed enhanced projects and PP20 saving are unsupported. Save compatible songs
+as ordinary MOD, or retain enhanced data in PTG.
+
+The native 2.3F assembler's separate powerpacker.library path is unchanged. The
+Enhanced editor uses a bounded adaptation of the explicitly public-domain PP20
+algorithm in libxmp, with pinned source and notices in `vendor/pp20-reference/`.
+No runtime library installation is required for this path. Musical third-party
+regression input remains local and is not redistributed in development packages.

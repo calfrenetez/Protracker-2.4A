@@ -1,0 +1,30 @@
+{
+  "run_id": "pp201789900877608053000",
+  "elapsed_seconds": 129.851,
+  "binaries": {
+    "PT24GEdit": "0a886b66022fb37440db55e896abdb5f1f72520297e2bf6b919125f8d64e6233",
+    "PT24GConvert": "a0629a2e5eadb99b3e481fe81e8b16096c27193415f70158013cebe041e595db",
+    "PTPp20Test": "e5cc38db2cc790cd2ac39e6b7ca1e67613a08d4386a886a345bbc1e221754bc5"
+  },
+  "native_pp20_atomic_tests": true,
+  "genuine_fixture_sha256": "1c97a8363ff0b8ddeba05e76e87409f5f56a9e6af83b07b7150402bec4e52a7f",
+  "expected_decoded_md5": "80ba11ca20f7ffef184a58c1fc619c18",
+  "decoded_bytes": 49798,
+  "native_converter_and_editor_exact_mod": true,
+  "corrupt_load_preserves_redo": true,
+  "exact_project_crc_and_reopen_identity": true,
+  "normal_exits": 2,
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0",
+  "logs": {
+    "pp20.log": "PP20 PASS: exact unpack, malformed bounds, unchanged failed output, atomic MOD import, all allocation failures, peak budget and lossless MOD roundtrip\n",
+    "convert.log": "PROJECT channels=4 patterns=8 orders=8 samples=31\nMOD_ANALYSIS required_strategy=LOSSLESS issues=0x0 direct_bytes=49798\nSAVED format=MOD bytes=49798 verified=1 new_file=1\n",
+    "editor.log": "EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=101346\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=EDIT ON - NOTES Z-M/Q-U; DELETE CLEARS; BACKSPACE OFF panel=0\nEDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=PATTERN EDITED panel=0\nEDITOR FRAME row=1 channel=0 revision=0 dirty=0 status=UNDO panel=0\nEDITOR REQUEST load\nEDITOR FRAME row=1 channel=0 revision=0 dirty=0 status=LOAD FAILED - CURRENT PROJECT AND EDITS PRESERVED panel=0\nEDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=REDO panel=0\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=1 channel=0 revision=1 dirty=0 status=PROJECT SAVED AND VERIFIED panel=0\nEDITOR REQUEST load\nEDITOR LOAD success channels=4 patterns=8\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PROJECT LOADED panel=0\nEDITOR REQUEST mod\nEDITOR MOD result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=MOD EXPORTED AND VERIFIED panel=0\nEDITOR REQUEST save\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PROJECT SAVED AND VERIFIED panel=0\nEDITOR EXIT clean\n",
+    "reopened.log": "EDITOR READY channels=4 patterns=8 bitmap_bytes=163840 history_bytes=101346\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PROJECT SAVED AND VERIFIED panel=0\nEDITOR EXIT clean\n"
+  },
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

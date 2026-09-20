@@ -23,7 +23,7 @@ project-mutations:
 
 converter:
 	mkdir -p build/host
-	$(CC) -std=c99 -O2 -Wall -Wextra -Werror -Isrc/core tools/pt24g_convert.c src/platform/file_save.c src/core/document.c src/core/safe_save.c src/core/mod_project.c src/core/mod_inspect.c src/core/project.c src/core/channels.c src/core/pcm.c -o build/host/PT24GConvert
+	$(CC) -std=c99 -O2 -Wall -Wextra -Werror -Isrc/core tools/pt24g_convert.c src/platform/file_save.c src/core/document.c src/core/pp20.c src/core/safe_save.c src/core/mod_project.c src/core/mod_inspect.c src/core/project.c src/core/channels.c src/core/pcm.c -o build/host/PT24GConvert
 
 diagnostic:
 	$(PYTHON) tools/build_diagnostic.py

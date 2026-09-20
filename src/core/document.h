@@ -21,6 +21,8 @@ void pt_document_release(struct pt_document *);
 enum pt_project_result pt_document_new(struct pt_document *,unsigned channels,size_t budget);
 /* Validates, budgets and allocates a separate complete candidate. Only success
  * releases the old project and swaps it in. budget is caller policy, not an
- * assumption about installed/free RAM; allocation failure is always handled. */
+ * assumption about installed/free RAM; allocation failure is always handled.
+ * PP20 is detected by content, fully validated/decompressed, then strict MOD
+ * validation is applied. Budget includes temporary decompressed bytes. */
 enum pt_project_result pt_document_load(struct pt_document *,const uint8_t *,size_t,size_t);
 #endif

@@ -1,6 +1,7 @@
 #include <string.h>
 #include "document.h"
 #include "mod_project.h"
+#include "pp20.h"
 void pt_document_init(struct pt_document *d,const struct pt_allocator *a)
 { memset(d,0,sizeof(*d));if(a)d->allocator=*a; }
 void pt_document_release(struct pt_document *d)
@@ -14,7 +15,7 @@ void pt_document_release(struct pt_document *d)
     }
     pt_document_init(d,&a);
 }
-enum pt_project_result pt_document_load(struct pt_document *d,const uint8_t *data,size_t length,size_t budget)
+static enum pt_project_result load_unpacked(struct pt_document *d,const uint8_t *data,size_t length,size_t budget)
 {
     struct pt_project_requirements need;struct pt_document next;enum pt_project_result r;
     size_t count[7],width[7],bytes[7],total=0;void *p[7]={0};unsigned i;int enhanced;
@@ -56,6 +57,25 @@ enum pt_project_result pt_document_load(struct pt_document *d,const uint8_t *dat
     if(r!=PT_PROJECT_OK) {pt_document_release(&next);return r;}
     next.loaded=1;next.allocated_bytes=total;
     pt_document_release(d);*d=next;return PT_PROJECT_OK;
+}
+
+enum pt_project_result pt_document_load(struct pt_document *d,const uint8_t *data,size_t length,size_t budget)
+{
+    uint8_t *plain;size_t size,written;enum pt_project_result result;struct pt_project_requirements need;
+    if(!d || !data || !d->allocator.allocate || !d->allocator.release)return PT_PROJECT_INVALID;
+    if(length>=4 && !memcmp(data,"PX20",4))return PT_PROJECT_UNSUPPORTED;
+    if(length<4 || memcmp(data,"PP20",4))return load_unpacked(d,data,length,budget);
+    if(pt_pp20_probe(data,length,&size)!=PT_PP20_OK)return PT_PROJECT_INVALID;
+    if(size>budget)return PT_PROJECT_CAPACITY;
+    plain=d->allocator.allocate(d->allocator.context,size);if(!plain)return PT_PROJECT_CAPACITY;
+    if(pt_pp20_decode(data,length,plain,size,&written)!=PT_PP20_OK || written!=size)result=PT_PROJECT_INVALID;
+    else {
+        /* Packed MOD only: do not recurse into nested compression or accept a
+           packed enhanced project under a legacy MOD compatibility promise. */
+        result=pt_mod_project_probe(plain,size,&need);
+        if(result==PT_PROJECT_OK)result=load_unpacked(d,plain,size,budget-size);
+    }
+    d->allocator.release(d->allocator.context,plain);return result;
 }
 
 enum pt_project_result pt_document_new(struct pt_document *d,unsigned channels,size_t budget)

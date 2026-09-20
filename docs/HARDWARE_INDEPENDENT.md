@@ -373,3 +373,13 @@ interleaved stereo. Unknown files are never implicitly treated as RAW. Shared
 undo and verified exports retain prior guarantees; mismatched export settings
 require explicit FORMAT conversion. Host/native evidence is retained under
 `evidence/enhanced-editor/dev18/`; no physical hardware acceptance is implied.
+
+## PP20 loading milestone (dev19)
+
+The common document loader now detects PP20 by content, validates its full bitstream
+without writing, decompresses into bounded separate storage and applies the strict
+MOD preflight before committing a replacement. It preserves old documents on every
+failure, budgets temporary decompressed memory and rejects PX20/nested containers.
+Pinned public-domain source provenance, synthetic/genuine regression identities,
+allocation/bounds tests and native workflows are recorded in the dev19 evidence.
+The separate assembler powerpacker.library path is unchanged.

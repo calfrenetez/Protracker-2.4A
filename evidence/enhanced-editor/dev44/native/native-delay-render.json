@@ -1,0 +1,36 @@
+{
+  "run_id": "delaypcm1789934387278909000",
+  "elapsed_seconds": 134.362,
+  "binary_sha256": "67dc9accf4caf375c988ce867597eaa4cf7afad787dcd780e02ea822255e871c",
+  "input_sha256": {
+    "delay_note.mod": "68760bda3f2c330aef0c0e5e010ce5e94a20bf652983b326ab4cf6747fba07d9",
+    "delay_note0.log": "6b5d322eeeebc2a6bdddaa2ac1e13a49d401d695fbd1b034a0dfcb5e17f8477a",
+    "delay_zero.mod": "aa492b9315cd41ecd754dc3c6765d79b5842d568ee98c87187cd278d14e4cea5",
+    "delay_zero0.log": "a0fd48bf16f0c69e4e80f691099a0cbd576e8247a51cc4a2d03457bc18ac2ad6",
+    "delay_past.mod": "da71a58937265024400d2f2203477caec5c46cbbb82f430437326a587e11321d",
+    "delay_past0.log": "30653b0e6ec7f41381e63a52a6fb96e129dd385979d77b6516abd424cbcff28c",
+    "trigger_repeat.mod": "534670fd2b60a840d1f083936a2f9d25d849088077a616702c0b226019d5a152",
+    "trigger_repeat0.log": "9d5b5086c4560777367f8093db7e64d470d9dd3da7079057a34f54270fa5aa7e",
+    "trigger_offset.mod": "d7498d2f3b2779bb9ffa411d2d997ef59ebd7b9f2067f75e0551f322265442c4",
+    "trigger_offset0.log": "86c9160b7e56974a3b083b50b2fd3de8064b820dd2cfd349398bcd2942d029af",
+    "trigger_loop.mod": "8b52c407760dffd0633904c054aee54ac6e1e74b4889540ecbf4591fe11853c3",
+    "trigger_loop0.log": "d4986d25b7e05397bda2242c1bdd30c3e0332a2ef574b7d479edc3deebae9ce1"
+  },
+  "logs": {
+    "safety": "OFFSET safety PASS: isolated track16 PCM, non-byte/stereo/odd/pingpong/slice refusal before output/report changes\n",
+    "delay_note-ch0": "OFFSET PCM PASS: channel=0 ticks=6 frames=5760\n",
+    "delay_zero-ch0": "OFFSET PCM PASS: channel=0 ticks=12 frames=11520\n",
+    "delay_past-ch0": "OFFSET PCM PASS: channel=0 ticks=6 frames=5760\n",
+    "trigger_repeat-ch1": "OFFSET PCM PASS: channel=1 ticks=12 frames=11520\n",
+    "trigger_offset-ch0": "OFFSET PCM PASS: channel=0 ticks=18 frames=17280\n",
+    "trigger_loop-ch0": "OFFSET PCM PASS: channel=0 ticks=12 frames=11520\n"
+  },
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=1583\tsndbuf_status=0",
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  },
+  "scope": "Reference immutable PCM at 48k/rate428 against dev42 native delayed-trigger ranges; nonloops stop after initial segment. No native sample-word mutation, analogue audio or physical acceptance."
+}

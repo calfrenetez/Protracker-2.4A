@@ -65,7 +65,7 @@ void pt_pitch_tick(struct pt_pitch *s,const struct pt_flow *flow,uint16_t tracks
             /* mt_PlayVoice tests the previous packed event before replacing it. */
             if(v->empty)v->output=v->period;
             if(e->instrument) {
-                if((effect==3 || effect==5) && v->sounding && v->instrument!=e->instrument)v->unsupported=1;
+                if((effect==3 || effect==5 || (effect==14 && (param>>4)==13)) && v->sounding && v->instrument!=e->instrument)v->unsupported=1;
                 v->instrument=e->instrument;
             }
             if(e->kind==PT_NOTE_OFF)v->sounding=0;
@@ -73,6 +73,10 @@ void pt_pitch_tick(struct pt_pitch *s,const struct pt_flow *flow,uint16_t tracks
                 if(effect==3 || effect==5) {
                     v->target=tone_target(e->pitch);v->up=signed_word(v->target)<signed_word(v->period);
                     if(v->target==v->period)v->target=0;
+                } else if(effect==14 && (param>>4)==13) {
+                    /* SetPeriod stores the table note, but EDx bypasses the
+                       hardware write and vibrato reset until DoRetrig. */
+                    v->period=tone_target(e->pitch);
                 } else {
                     v->period=v->output=e->pitch;v->sounding=v->instrument!=0;
                     if(!(v->vib_control&4))v->vib_phase=0;
@@ -96,6 +100,11 @@ void pt_pitch_tick(struct pt_pitch *s,const struct pt_flow *flow,uint16_t tracks
             if(!(!flow->counter && e->kind==PT_NOTE_PERIOD) && !(flow->counter%(param&15))) {
                 v->output=v->period;v->sounding=1;
             }
+        }
+        if(effect==14 && (param>>4)==13 && flow->counter==(param&15) && v->instrument) {
+            const struct pt_event *e=flow->project->events+
+                ((size_t)flow->project->orders[flow->played_order]*64+flow->played_row)*flow->project->channels.count+ch;
+            if(e->kind==PT_NOTE_PERIOD) {v->output=v->period;v->sounding=1;}
         }
         if(effect==14 && (param>>4)==4)v->vib_control=(uint8_t)(param&15);
         if(effect==14 && !flow->counter && ((param>>4)==1 || (param>>4)==2))slide(v,param&15,(param>>4)==2);

@@ -255,7 +255,24 @@ ranges and zero-period restrictions before any output is published.
 
 Selected tracks containing E9x use the same bounded mono8/even-length/no-slice
 subset as 9xx, including E90. Higher-precision, stereo and pingpong retrigger
-semantics remain unsupported. EDx note delay is still refused. Five retained
+semantics remain unsupported. EDx note delay was still refused at dev43. Five retained
 dev42 fixtures check 46080 rendered frames against native trigger/range evidence
 on the host and native emulator; channel16 and offset-then-retrigger cases have additional checks. All six native checks match host output.
 This does not establish physical playback or complete classic compatibility.
+
+## Note-delay rendering subset (dev44)
+
+EDx now defers the sample trigger until counter x. ED0 starts at counter zero;
+no-note EDx never triggers, and a delay beyond the row speed never fires. Pattern
+delay retains the note and can trigger it again. Fresh EDx stores the native
+zero-finetune table period, keeps the previous hardware-output period until the
+trigger, and does not reset vibrato phase. Instrument volume updates on row fetch;
+explicit note velocity takes effect on the delayed trigger.
+
+The same selected-track mono8/even/no-slice restrictions as 9xx/E9x apply. A delayed
+change to a different sample while a voice is sounding is refused during measure,
+before output; old/new sample handoff is not yet supported. Unsupported zero
+periods still fail before publication. Six dev42 fixtures independently check
+63360 reference frames, including offsets, forward loops and pattern delays.
+Additional state checks cover delayed pitch writes, retained vibrato phase and
+refusal of cross-sample delay. No analogue or physical acceptance is implied.

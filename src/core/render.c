@@ -20,7 +20,7 @@ static uint16_t offset_tracks(const struct pt_project *p,const struct pt_render_
     for(pat=0;pat<p->pattern_count;++pat)if(used[pat])for(row=0;row<64;++row)for(ch=0;ch<p->channels.count;++ch)
         {
             const struct pt_event *e=p->events+((size_t)pat*64+row)*p->channels.count+ch;
-            if(e->effect==9 || (e->effect==14 && (e->parameter>>4)==9))mask|=(uint16_t)(1U<<ch);
+            if(e->effect==9 || (e->effect==14 && ((e->parameter>>4)==9 || (e->parameter>>4)==13)))mask|=(uint16_t)(1U<<ch);
         }
     return mask&o->tracks;
 }
@@ -42,14 +42,16 @@ static int ranges_tick(struct run *r)
                 const struct pt_sample *s=r->view.samples+e->instrument-1;
                 v->start=0;v->length=s->loop && s->loop_start?s->loop_end:s->pcm.frames;v->loaded=1;
             }
-            if(e->kind==PT_NOTE_PERIOD && e->effect!=3 && e->effect!=5) {
+            if(e->kind==PT_NOTE_PERIOD && e->effect!=3 && e->effect!=5 && !(e->effect==14 && (e->parameter>>4)==13)) {
                 if(e->effect==9)apply_offset(v,e->parameter);
                 v->trigger_start=v->start;v->trigger_length=v->length;
             }
             if(e->effect==9)apply_offset(v,e->parameter);
         }
-        if(f->effect[ch]==14 && (f->parameter[ch]>>4)==9 && (f->parameter[ch]&15) &&
-           !(!f->counter && e->kind==PT_NOTE_PERIOD) && !(f->counter%(f->parameter[ch]&15)) && v->loaded) {
+        if(v->loaded && f->effect[ch]==14 &&
+           (((f->parameter[ch]>>4)==9 && (f->parameter[ch]&15) &&
+             !(!f->counter && e->kind==PT_NOTE_PERIOD) && !(f->counter%(f->parameter[ch]&15))) ||
+            ((f->parameter[ch]>>4)==13 && e->kind==PT_NOTE_PERIOD && f->counter==(f->parameter[ch]&15)))) {
             v->retrigger=1;v->trigger_start=v->start;v->trigger_length=v->length;
         }
         if(v->loaded) {
@@ -76,7 +78,7 @@ static enum pt_render_result preflight(const struct pt_project *p,const struct p
         if(!(o->tracks&(1U<<ch)))continue;
         if(e->kind==PT_NOTE_MIDI || (e->instrument && e->kind!=PT_NOTE_PERIOD))return PT_RENDER_EFFECT;
         if(!(e->effect==0 || e->effect==1 || e->effect==2 || e->effect==3 || e->effect==4 || e->effect==5 || e->effect==6 || e->effect==9 || (e->effect>=10 && e->effect<=13) || e->effect==15 ||
-             (e->effect==14 && ((e->parameter>>4)==1 || (e->parameter>>4)==2 || (e->parameter>>4)==4 || (e->parameter>>4)==6 || (e->parameter>>4)==9 || ((e->parameter>>4)>=10 && (e->parameter>>4)<=12) ||
+             (e->effect==14 && ((e->parameter>>4)==1 || (e->parameter>>4)==2 || (e->parameter>>4)==4 || (e->parameter>>4)==6 || (e->parameter>>4)==9 || ((e->parameter>>4)>=10 && (e->parameter>>4)<=13) ||
                                (e->parameter>>4)==14))))return PT_RENDER_EFFECT;
         if((e->effect==3 || e->effect==5) && e->slice)return PT_RENDER_EFFECT;
         if((offsets&(1U<<ch)) && e->slice)return PT_RENDER_EFFECT;
@@ -170,7 +172,7 @@ static enum pt_render_result commands(const struct pt_project *p,const struct pt
             const struct pt_event *e=flow->project->events+((size_t)flow->project->orders[flow->played_order]*64+flow->played_row)*p->channels.count+ch;
             if(e->instrument) {instrument[ch]=e->instrument;volume[ch]=p->samples[e->instrument-1].volume;}
             if(e->kind==PT_NOTE_OFF)voice[ch].active=0;
-            else if(e->kind==PT_NOTE_PERIOD && instrument[ch] && e->effect!=3 && e->effect!=5) {
+            else if(e->kind==PT_NOTE_PERIOD && instrument[ch] && e->effect!=3 && e->effect!=5 && !(e->effect==14 && (e->parameter>>4)==13)) {
                 const struct pt_sample *s=p->samples+instrument[ch]-1;uint32_t a=0,b=s->pcm.frames,la=0,lb=0;
                 enum pt_voice_loop loop=PT_VOICE_ONCE;
                 if(e->slice) {a=s->slices[e->slice-1];if(e->slice<s->slice_count)b=s->slices[e->slice];}
@@ -196,6 +198,10 @@ static enum pt_render_result commands(const struct pt_project *p,const struct pt
             const struct pt_sample *s=p->samples+instrument[ch]-1;
             uint32_t a=ranges[ch].trigger_start,b=a+ranges[ch].trigger_length;
             uint64_t rate=step(s,pitch->channel[ch].output,o->rate);
+            if(flow->effect[ch]==14 && (flow->parameter[ch]>>4)==13) {
+                const struct pt_event *e=flow->project->events+((size_t)flow->project->orders[flow->played_order]*64+flow->played_row)*p->channels.count+ch;
+                velocity[ch]=(e->flags&1)?e->velocity:127;
+            }
             if(s->loop) {
                 if(pt_voice_init_segment(voice+ch,&s->pcm,a,b,s->loop_start,s->loop_end,rate,s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
             } else if(pt_voice_init(voice+ch,&s->pcm,a,b,PT_VOICE_ONCE,0,0,rate,s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;

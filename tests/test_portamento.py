@@ -36,7 +36,7 @@ class Portamento(unittest.TestCase):
                     self.assertEqual(result,(evidence/(name+'-'+kind+'.log')).read_text())
             # Prove the non-retrigger oracle can detect a plausible regression.
             product=(ROOT/'src/core/render.c').read_text()
-            guard='else if(e->kind==PT_NOTE_PERIOD && instrument[ch] && e->effect!=3 && e->effect!=5)'
+            guard='else if(e->kind==PT_NOTE_PERIOD && instrument[ch] && e->effect!=3 && e->effect!=5 && !(e->effect==14 && (e->parameter>>4)==13))'
             self.assertEqual(product.count(guard),1)
             mutant=Path(tmp)/'retrigger.c';mutant.write_text(product.replace(guard,'else if(e->kind==PT_NOTE_PERIOD && instrument[ch])'))
             oracle=(ROOT/'tests/render_porta_test.c').read_text()

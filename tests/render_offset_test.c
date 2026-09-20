@@ -4,6 +4,7 @@
 #include <string.h>
 #include "render.h"
 #include "document.h"
+#include "pitch.h"
 static void *allocate(void *c,size_t n) {(void)c;return malloc(n);}
 static void release(void *c,void *p) {(void)c;free(p);}
 static unsigned word(const unsigned char *p) {return (unsigned)p[0]*256+p[1];}
@@ -67,6 +68,16 @@ static void safety(void)
     sample.pcm.channels=1;sample.pcm.frames=1024;
     {uint32_t marker=0;sample.slices=&marker;sample.slice_count=1;events[15].slice=1;
      assert(pt_render_measure(&p,&o,NULL,NULL,&result)==PT_RENDER_EFFECT && !memcmp(&before,&result,sizeof(result)));}
+    {
+        struct pt_pitch pitch;struct pt_flow flow;struct pt_pitch_channel *v;
+        memset(&flow,0,sizeof(flow));pt_pitch_init(&pitch);flow.project=&p;flow.fresh=1;
+        flow.effect[15]=14;flow.parameter[15]=0xd2;events[15].effect=14;events[15].parameter=0xd2;events[15].pitch=214;
+        v=pitch.channel+15;v->instrument=1;v->sounding=1;v->empty=0;v->period=428;v->output=450;v->vib_phase=16;
+        pt_pitch_tick(&pitch,&flow,0x8000);assert(v->period==214 && v->output==450 && v->vib_phase==16);
+        flow.fresh=0;flow.counter=1;pt_pitch_tick(&pitch,&flow,0x8000);assert(v->output==450 && v->vib_phase==16);
+        flow.counter=2;pt_pitch_tick(&pitch,&flow,0x8000);assert(v->output==214 && v->vib_phase==16);
+        flow.fresh=1;flow.counter=0;events[15].instrument=2;pt_pitch_tick(&pitch,&flow,0x8000);assert(v->unsupported);
+    }
     puts("OFFSET safety PASS: isolated track16 PCM, non-byte/stereo/odd/pingpong/slice refusal before output/report changes");
 }
 int main(int argc,char **argv)

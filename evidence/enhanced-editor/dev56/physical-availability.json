@@ -1,0 +1,7 @@
+{
+  "result": "connect-timeout",
+  "connect_timeout_seconds": 3,
+  "authentication_attempted": false,
+  "deployment_attempted": false,
+  "physical_tested": false
+}

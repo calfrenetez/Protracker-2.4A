@@ -54,6 +54,7 @@ def main():
         'PTChannelsTest': ['tests/channels_test.c', 'src/core/channels.c'],
         'PTPcmTest': ['tests/pcm_test.c', 'src/core/pcm.c', 'src/core/wav.c', 'src/core/svx.c', 'src/core/raw.c'],
     }
+    inputs['PTViewProbe'] = ['tests/native_view_probe.c', *inputs['PTViewBench'][1:]]
     inputs['PTFlowTraceTest'] = ['tests/native_flow_trace.c', *inputs['PTPaulaTest'][1:]]
     inputs['PTPitchTraceTest'] = inputs['PTFlowTraceTest']
     inputs['PTSampleTraceTest'] = inputs['PTFlowTraceTest']

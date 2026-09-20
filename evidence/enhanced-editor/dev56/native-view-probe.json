@@ -1,0 +1,16 @@
+{
+  "run_id": "viewprobe1789946580643871000",
+  "elapsed_seconds": 63.089,
+  "binary": {
+    "sha256": "6172d178ea74c92e5979b27ad3debfcdf112728a7c6fae4599e4c6434c537200",
+    "bytes": 138872
+  },
+  "rc": "0",
+  "log": "PT24G VIEW steps=24 full_ticks50=1472 partial_ticks50=356 identical=1\nPT24G VIEW PASS\n",
+  "physical_hardware_tested": false,
+  "environment": {
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

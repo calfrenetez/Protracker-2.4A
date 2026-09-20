@@ -1,6 +1,7 @@
 # Shared sequencer and offline replay: implementation boundary
 
 The row/tick flow core and native trace comparison are implemented in dev28.
+Dev29 adds the explicit ideal-BPM reference frame clock and transactional timeline.
 The remaining sections describe the next implementation boundary, not an
 implemented renderer or an audio acceptance claim. It uses the pinned local 2.3F CIA replay source at
 `vendor/pt23f/replayer/PT2.3F_replay_cia.s` (upstream commit recorded in
@@ -163,3 +164,35 @@ Native booleans are 0/255; portable booleans are 0/1. The comparison explicitly
 normalizes them. Poll scheduling, wall-clock times and pointers are excluded from
 the oracle. Exact repeats prove deterministic state capture for this corpus,
 not all possible effects, real-hardware performance or cycle-accurate audio.
+
+
+## Ideal reference frame clock and timeline (dev29)
+
+`frame_clock.c` implements an explicitly idealized `2.5 / BPM` tick interval at a
+chosen integer output rate. It carries unsigned Q32 fractional frames across all
+ticks and tempo changes; each interval truncates less than 2^-32 of one frame.
+Consequently the accumulated fixed-point value is below the exact rational total
+by less than `tick_count / 2^32` frames. Integer frame totals are the floor of that
+fixed-point accumulator. At an exact rational integer boundary they may be one
+frame below an exact-rational implementation; this is a specified deterministic
+reference policy, not a claim of mathematically exact rational accumulation.
+
+Rates 1..192000 and tempos 32..255 are accepted. Zero-frame intervals are valid at
+low rates. The caller supplies a nonzero total-frame budget; invalid input, alias,
+limit and overflow refusals leave both clock and output unchanged. No floating
+point, allocation, dependency on host word size or wall time is used.
+
+`timeline.c` binds this clock to the flow core as one transaction. A successful
+step returns the frame span **before** the completed tick. A renderer must produce
+that span with its previous voice state, then apply the tick's commands at the
+span's end. The old BPM times the elapsed interval, and a newly encountered Fxx
+applies to the next interval. This preserves the initial speed-tick lead-in and
+locates the final F00 at an explicit output boundary. A frame-limit refusal does
+not consume a row or alter loop/tempo/clock state. Stop, tick-limit and frame-limit
+outcomes are distinct and do not replace the previous returned span.
+
+This profile is named `IDEAL_BPM_Q32` in retained evidence. It intentionally has no
+PAL/NTSC/CIA selector: modeling native timer-latch quantization, reload latency
+and measured clocks still requires separate evidence. A future renderer must
+record this profile in its output/provenance; it must not present it as captured
+Paula/AmiGUS audio. The next stage is voice/sample mixing on the shared timeline.

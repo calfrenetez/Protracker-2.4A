@@ -479,3 +479,14 @@ layout remain unchanged. See `docs/OFFLINE_REPLAY_DESIGN.md` and
 `evidence/enhanced-editor/dev28/` for source, trace and build evidence. This is
 row/tick control flow, not completed mixed replay, measured CIA timer parity,
 PCM rendering, physical AmiGUS acceptance or a duration/rendering UI.
+
+
+## Reference frame clock and timeline (dev29)
+
+The portable flow core now has an explicit ideal-BPM Q32 frame clock and an atomic
+timeline. Fractional frames survive tempo changes; limits preserve both row and
+clock state. The renderer contract places the completed tick after its preceding
+frame span, including startup and F00 boundaries. Host exact-rational tests bound
+the specified truncation error and cover four output rates. Evidence is retained
+in `evidence/enhanced-editor/dev29/`. This is deterministic reference arithmetic,
+not CIA timer parity, an audio mixer, completed render UI or physical acceptance.

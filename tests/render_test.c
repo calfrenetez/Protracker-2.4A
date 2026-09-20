@@ -78,7 +78,7 @@ int main(void)
     events[4].effect=0;events[5].effect=15;reset_capture(&c,pcm);
     assert(pt_render_stream(&p,&o,receive,&c,NULL,NULL,&report)==PT_RENDER_OK && c.frames==960);events[5].effect=0;events[4].effect=15;
     /* Pattern selection does not reject an unsupported unused pattern. */
-    memcpy(events+64*4,events,64*4*sizeof(*events));events[0].effect=9;o.pattern_only=1;o.pattern=1;reset_capture(&c,pcm);
+    memcpy(events+64*4,events,64*4*sizeof(*events));events[0].effect=8;o.pattern_only=1;o.pattern=1;reset_capture(&c,pcm);
     assert(pt_render_stream(&p,&o,receive,&c,NULL,NULL,&report)==PT_RENDER_OK && c.frames==960);o.pattern_only=0;
     memset(&report,0x55,sizeof(report));before=report;reset_capture(&c,pcm);
     assert(pt_render_stream(&p,&o,receive,&c,NULL,NULL,&report)==PT_RENDER_EFFECT && !c.calls && !memcmp(&report,&before,sizeof(report)));events[0].effect=0;

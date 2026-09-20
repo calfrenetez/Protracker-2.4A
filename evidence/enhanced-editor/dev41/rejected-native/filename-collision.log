@@ -1,0 +1,2 @@
+assertion "f && fgets(line,sizeof(line),f) && strstr(line,"bytes=140")" failed: file "tests/render_offset_test.c", line 64, function: main
+Program aborted

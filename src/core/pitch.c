@@ -88,7 +88,7 @@ void pt_pitch_tick(struct pt_pitch *s,const struct pt_flow *flow,uint16_t tracks
                 tone(v);
             }
             else if(effect==4 || effect==6)vibrato(v,param,effect==4);
-            else if((effect>=10 && effect<=13) || effect==15)v->output=v->period; /* SetBack */
+            else if((effect>=9 && effect<=13) || effect==15)v->output=v->period; /* SetBack */
         }
         if(effect==14 && (param>>4)==4)v->vib_control=(uint8_t)(param&15);
         if(effect==14 && !flow->counter && ((param>>4)==1 || (param>>4)==2))slide(v,param&15,(param>>4)==2);

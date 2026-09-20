@@ -87,7 +87,7 @@ is an error, never silently classified as a completed song.
 Supported: ordinary raw-period notes (including instrument-zero inheritance),
 explicit note-off and velocity; mono/stereo 8/16/24-bit samples; nearest/linear
 interpolation; forward/ping-pong loops; sample slices; track selection; global
-mute/solo; and effects `0xy`, `1xx`, `2xx`, `3xx`, `4xy`, `5xx`, `6xy`, `Axx`, `Bxx`, `Cxx`, `Dxx`, `E1x`, `E2x`, `E4x`, `E6x`, `EAx`, `EBx`, `ECx`, `EEx`, `Fxx`.
+mute/solo; and effects `0xy`, `1xx`, `2xx`, `3xx`, `4xy`, `5xx`, `6xy`, `9xx`, `Axx`, `Bxx`, `Cxx`, `Dxx`, `E1x`, `E2x`, `E4x`, `E6x`, `EAx`, `EBx`, `ECx`, `EEx`, `Fxx`.
 Arpeggio 0xy changes the output period on effect passes while preserving the
 stored base and PCM phase. Its tick cycle uses the original masked counter;
 zero nibbles still perform table lookup, whereas command 000 does not run an
@@ -196,3 +196,26 @@ its note assignment first. PCM remains owned when its append command is evicted.
 Control-L opens the selected bounced sample for editing/export. High-resolution
 Paula audition remains unsupported; bouncing does not imply AmiGUS live playback
 or physical audio acceptance. Selected row-range bounce is not yet implemented.
+
+
+## Sample offset subset (dev41)
+
+9xx uses per-track offset memory in 256-byte units. A note row applies the offset
+before capturing its initial playback range and again to its saved range, matching
+the pinned replay. 900 reuses memory. No-note 9xx changes only the saved range,
+once on fresh fetch; delay passes do not repeat it. Instrument reload restores
+ranges but keeps offset memory. At/beyond remaining length, the saved length
+becomes two frames without advancing start. Initial segments can hand off to
+forward loops outside their range. Later inherited notes use the saved range.
+
+For each selected track containing 9xx in the chosen song/pattern scope, all
+referenced samples must be mono8, nonempty even lengths from 2 to 131070 frames,
+and have no loop or an even-boundary forward loop. Slice-trigger notes on those
+tracks are refused. Stereo, higher precision, odd lengths and pingpong offset
+semantics remain unsupported and fail preflight before sinks or publication.
+Unselected tracks and unused patterns do not impose this audio restriction.
+
+The immutable reference policy remains in force: nonloops stop after their
+initial segment, and sample data is not rewritten. Native replay's first-word
+clearing and repeated silent guard are not emulated. Reference PCM is checked
+against native range/trigger snapshots, not analogue Paula output.

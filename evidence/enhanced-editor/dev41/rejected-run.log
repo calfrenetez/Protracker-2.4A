@@ -1,0 +1,11 @@
+Native checks: 0/12
+Native checks: 1/12
+Offset renderer released: /Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/local/share/offsetpcm1789931254017926000
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/test_offset_render_emulator.py", line 56, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/test_offset_render_emulator.py", line 40, in main
+    time.sleep(.3)
+    ~~~~~~~~~~^^^^
+KeyboardInterrupt

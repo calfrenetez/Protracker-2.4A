@@ -4,7 +4,7 @@
 /* Reference PCM pitch: raw ordinary-note periods; tone targets use the native zero-finetune table.
  * Retain the original replay's 16-bit stored word separately from its latest
  * period-register write (slides mask that write to 12 bits; PerNop does not).
- * Only 0xy, 1xx, 2xx, 3xx, 4xy, 5xx, 6xy, A/B/C/D, E1/E2/E4/E6/EA/EB/EC/EE and F are supported by
+ * Only 0xy, 1xx, 2xx, 3xx, 4xy, 5xx, 6xy, 9xx, A/B/C/D, E1/E2/E4/E6/EA/EB/EC/EE and F are supported by
  * the renderer. Call once after each completed flow tick, including delays. */
 struct pt_pitch_channel {uint16_t period,output,target;uint8_t instrument,sounding,empty,speed,up,unsupported,vib_command,vib_phase,vib_control;};
 struct pt_pitch {struct pt_pitch_channel channel[PT_CHANNEL_LIMIT];};

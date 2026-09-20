@@ -1,0 +1,45 @@
+{
+  "run_id": "offsetpcm1789931520000733000",
+  "elapsed_seconds": 150.299,
+  "binary_sha256": "d2237415db3ae9296897a8da8feef2452de0eadd6a8f80f740382ee595d659b6",
+  "input_sha256": {
+    "offset_double.mod": "053a80d53d942ea86ed1da7cc103f33dfe47b5b09b520dedb976411cd7c992a3",
+    "offset_double0.log": "4c0b36bc84c9ce5650829c526e9caeb290aa8b5f5a13fcdb32e7c971fc96edef",
+    "offset_memory.mod": "c1619fbc7292728f77c89cf6deb28e57efdf7a2082d49c22cf7e7d95978438b3",
+    "offset_memory0.log": "c8e98e01d001b7d7b55142d449a2d2ef60d27aed76f724863bfde7645952887f",
+    "offset_command.mod": "36da73d63e8b4c8b1b2e1c0c7f97b015c9adecd07508e9fca6d40b5c45f56038",
+    "offset_command0.log": "b3982f9ba1e368eb3a9ff03219f0317c9bbf34b6d06c312fd33b7beae5d7f3a1",
+    "offset_reload.mod": "7a3bb128f2922306f3d4d18e1a31ef3e947233addb95c9899476751075333102",
+    "offset_reload0.log": "d444b0e27111121dd31be78cacd1d517c05680b95c36357fe009338ecdbf2112",
+    "offset_bounds.mod": "a869cf483612f14c0d287e8f3a2ed30644e91f5547cd485baa4be787990b9917",
+    "offset_bounds0.log": "9e324a4e3c3db454ec78192c5542b4fa8697385c1b607ce129e46d0077fd8bab",
+    "offset_loop.mod": "2816a3a9b26807ff670c921f58613e8d460c87062830b12c6c7a6d231c38cb6d",
+    "offset_loop0.log": "7d9ab5b429c4b21bbda27d477d8117cb1ab83fc15de14e06f5a0584396aff151",
+    "offset_delay.mod": "f817f622f19a9aa750a28325b3303a936ac9d1e70a750396847b51a632c7d582",
+    "offset_delay0.log": "5f881b9e263074e54de47ac9f70269bee5914d4004421608cc905b91d59e68a0",
+    "offset_four.mod": "6e6093b13a9fe16697295b9bfb2733fd93dc20ab7e39fdeea536a1ea54997fbf",
+    "offset_four0.log": "c35f274c7c8f45c186358e5ac1cb0e2feceddd1016af242b326972b85f134d8e"
+  },
+  "logs": {
+    "safety": "OFFSET safety PASS: isolated track16 PCM, non-byte/stereo/odd/pingpong/slice refusal before output/report changes\n",
+    "offset_double-ch0": "OFFSET PCM PASS: channel=0 ticks=6 frames=5760\n",
+    "offset_memory-ch0": "OFFSET PCM PASS: channel=0 ticks=18 frames=17280\n",
+    "offset_command-ch0": "OFFSET PCM PASS: channel=0 ticks=18 frames=17280\n",
+    "offset_reload-ch0": "OFFSET PCM PASS: channel=0 ticks=12 frames=11520\n",
+    "offset_bounds-ch0": "OFFSET PCM PASS: channel=0 ticks=24 frames=23040\n",
+    "offset_loop-ch0": "OFFSET PCM PASS: channel=0 ticks=12 frames=11520\n",
+    "offset_delay-ch0": "OFFSET PCM PASS: channel=0 ticks=8 frames=7680\n",
+    "offset_four-ch0": "OFFSET PCM PASS: channel=0 ticks=6 frames=5760\n",
+    "offset_four-ch1": "OFFSET PCM PASS: channel=1 ticks=6 frames=5760\n",
+    "offset_four-ch2": "OFFSET PCM PASS: channel=2 ticks=6 frames=5760\n",
+    "offset_four-ch3": "OFFSET PCM PASS: channel=3 ticks=6 frames=5760\n"
+  },
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0",
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  },
+  "scope": "Reference immutable PCM at 48k/rate428 against dev39 native ranges; nonloops stop after initial segment. No native sample-word mutation, analogue audio or physical acceptance."
+}

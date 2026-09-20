@@ -659,3 +659,18 @@ match an independent unbounded-integer oracle; the original native mix hash
 remains `990c42f0` with clipped40. Evidence is in `evidence/enhanced-editor/dev40/`.
 9xx integration remains unfinished and the renderer still refuses it. No physical
 hardware acceptance is implied; Amiberry was explicitly released after cleanup.
+
+
+## Reference sample-offset subset (dev41)
+
+9xx now works in shared WAV export and sample bounce for mono8 samples with even
+lengths from2 to131070 frames, ordinary/forward-loop playback and no slice notes.
+Native offset memory, double note-row application, saved-range inheritance,
+reloads and boundary fallback are preserved. Unsupported offset formats fail
+preflight. Immutable reference PCM and nonloop one-shot policy remain explicit.
+
+All 51 host checks and 12 final native executions pass. The native-range-driven
+oracle verifies 117120 fixture frames plus isolated track16/safety behavior.
+Evidence and the separately retained rejected harness run are in
+`evidence/enhanced-editor/dev41/`. The accepted screen is unchanged. Amiberry was
+released after guarded cleanup; no physical hardware acceptance is claimed.

@@ -402,3 +402,20 @@ keeps its original selected-range and contained-loop policy.
 This supplies a prerequisite for the offset ranges established by dev39; it does
 not yet enable 9xx. Remaining work is per-track offset memory/range interpretation,
 renderer preflight, and a PCM oracle driven by the native trigger/loop snapshots.
+
+
+## Offset renderer integration (dev41)
+
+The run state carries saved and last-trigger ranges plus offset memory per track.
+Measurement and streaming share fresh-row interpretation. Tracks using 9xx in
+selected scope receive conservative byte-sample preflight; other tracks retain
+the established enhanced PCM policy. Range arithmetic runs before any sink or
+publication, including bounds checks after each update. Actual voice triggers
+consume the captured first range; later 9xx mutation affects only saved state.
+Nonfresh 9xx restores the stored period like native SetBack.
+
+Forward-loop playback uses the independent segment initializer. Nonloops use
+one-shot reference playback and retain immutable sample bytes, including the
+first word. This explicitly differs from native Paula's cleared silence word.
+Dev39 pointer/length snapshots drive a separate per-frame oracle, without using
+the renderer's offset interpreter to compute expected sample positions.

@@ -16,6 +16,14 @@ struct pt_sampler {
     pt_pcm_progress progress;
     void *progress_context;
 };
+/* Fill a newly allocated PCM buffer without changing the borrowed project.
+ * Appending the filled sample is one undo resource. Format.data/capacity are
+ * ignored; PCM metadata must stay unchanged during fill. Failure preserves
+ * project/history and releases staging; the sampler budget includes all PCM.
+ */
+typedef enum pt_edit_result (*pt_sample_fill)(void *,struct pt_pcm *);
+enum pt_edit_result pt_sampler_append_generated(struct pt_sampler *,struct pt_project *,
+    struct pt_pattern_history *,const struct pt_pcm *,const char *,pt_sample_fill,void *);
 void pt_sampler_init(struct pt_sampler *,const struct pt_allocator *,size_t);
 /* Release journal first, then sampler, before destroying/reinitializing editor.
    Versions are immutable and must never be edited through project pointers.

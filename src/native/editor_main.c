@@ -18,6 +18,7 @@
 #include "paula.h"
 #include "file_request.h"
 #include "../platform/render_file.h"
+#include "../editor/bounce.h"
 struct IntuitionBase *IntuitionBase;
 struct GfxBase *GfxBase;
 static void *allocate(void *ctx,size_t n) {(void)ctx;return malloc(n);}
@@ -180,7 +181,7 @@ static int conversion_progress(void *context,uint32_t done,uint32_t total)
     }
     return 1;
 }
-struct render_ui {struct conversion_ui display;uint64_t total;unsigned phase;};
+struct render_ui {struct conversion_ui display;uint64_t total;unsigned phase;const char *target;};
 static int render_progress(void *context,enum pt_render_phase phase,uint32_t ticks,uint64_t frames)
 {
     struct render_ui *ui=context;struct conversion_ui *d=&ui->display;struct IntuiMessage *message;
@@ -194,8 +195,8 @@ static int render_progress(void *context,enum pt_render_phase phase,uint32_t tic
     if(ui->phase!=(unsigned)phase || (phase!=PT_RENDER_ANALYSE && percent/5!=d->percent/5) || !d->cache->valid) {
         struct pt_view_rect areas[PT_VIEW_DIRTY_MAX];unsigned i,n,plane;char status[76];
         const char *name=phase==PT_RENDER_ANALYSE?"CHECKING":phase==PT_RENDER_MIX?"RENDERING":"VERIFYING";
-        if(phase==PT_RENDER_ANALYSE)snprintf(status,sizeof(status),"%s WAV - ESC CANCEL",name);
-        else snprintf(status,sizeof(status),"%s WAV %u%% - ESC CANCEL",name,percent);
+        if(phase==PT_RENDER_ANALYSE)snprintf(status,sizeof(status),"%s %s - ESC CANCEL",name,ui->target);
+        else snprintf(status,sizeof(status),"%s %s %u%% - ESC CANCEL",name,ui->target,percent);
         pt_editor_status(d->editor,status);n=pt_editor_draw_update(d->editor,d->canvas,pt_font,d->cache,areas);
         for(i=0;i<n;++i) {
             struct pt_view_rect *a=&areas[i];
@@ -221,7 +222,7 @@ static const char *render_error(enum pt_render_result result)
 static void render_wav(struct conversion_ui *display,struct pt_paula *audio)
 {
     struct pt_editor *e=display->editor;struct pt_render_options options;struct pt_render_report plan,report;
-    struct render_ui ui={*display,0,~0U};enum pt_render_result detail;enum pt_render_file_result result;
+    struct render_ui ui={*display,0,~0U,"WAV"};enum pt_render_result detail;enum pt_render_file_result result;
     char path[1024],status[76];int selected;
     pt_paula_stop(audio);pt_paula_poll(audio,&e->playback);pt_editor_render_options(e,&options);
     detail=pt_render_measure(e->project,&options,render_progress,&ui,&plan);
@@ -236,6 +237,33 @@ static void render_wav(struct conversion_ui *display,struct pt_paula *audio)
     } else if(detail!=PT_RENDER_OK)pt_editor_status(e,render_error(detail));
     else pt_editor_status(e,result==PT_RENDER_FILE_BEGIN || result==PT_RENDER_FILE_PUBLISH?"WAV REFUSED: TARGET EXISTS OR CANNOT BE CREATED":"WAV FAILED - PROJECT AND DESTINATION PRESERVED");
     printf("EDITOR RENDER result=%u detail=%u dirty=%u frames=%lu\n",result,detail,pt_editor_dirty(e),result==PT_RENDER_FILE_OK?(unsigned long)report.frames:0UL);fflush(stdout);
+}
+static void bounce_sample(struct conversion_ui *display,struct pt_paula *audio)
+{
+    struct pt_editor *e=display->editor;struct pt_render_options options;struct pt_render_report plan,report;
+    struct render_ui ui={*display,0,~0U,"SAMPLE"};enum pt_render_result detail;enum pt_edit_result result;
+    char name[PT_PROJECT_NAME],status[76];
+    pt_paula_stop(audio);pt_paula_poll(audio,&e->playback);pt_editor_render_options(e,&options);
+    detail=pt_render_measure(e->project,&options,render_progress,&ui,&plan);
+    if(detail!=PT_RENDER_OK)result=detail==PT_RENDER_CANCELLED?PT_EDIT_CANCELLED:PT_EDIT_UNSUPPORTED;
+    else {
+        ui.total=plan.frames;
+        if(options.pattern_only)snprintf(name,sizeof(name),"BOUNCE PATTERN %03u",options.pattern);
+        else strcpy(name,"BOUNCE SONG");
+        result=pt_sampler_bounce(&e->sampler,e->project,&e->history,&options,name,render_progress,&ui,&report,&detail);
+    }
+    if(result==PT_EDIT_OK) {
+        e->sample=e->project->sample_count;pt_editor_sample_all(e);
+        if(report.clipped)snprintf(status,sizeof(status),"BOUNCED TO SAMPLE %03u - %lu CLIPS; LOWER GAIN",e->sample,(unsigned long)report.clipped);
+        else snprintf(status,sizeof(status),"BOUNCED TO SAMPLE %03u - CONTROL-Z UNDO",e->sample);
+        pt_editor_status(e,status);
+    } else pt_editor_status(e,result==PT_EDIT_CANCELLED?"BOUNCE CANCELLED - PROJECT AND REDO PRESERVED":
+        result==PT_EDIT_CAPACITY?"BOUNCE REFUSED: SAMPLE LIMIT OR MEMORY/HISTORY BUDGET":
+        result==PT_EDIT_UNSUPPORTED?"BOUNCE REFUSED: CHECK EFFECTS, ROUTES AND FINETUNE":
+        "BOUNCE REFUSED - PROJECT AND REDO PRESERVED");
+    printf("EDITOR BOUNCE result=%u detail=%u revision=%lu dirty=%u samples=%u frames=%lu\n",
+        result,detail,(unsigned long)e->history.revision,pt_editor_dirty(e),e->project->sample_count,
+        result==PT_EDIT_OK?(unsigned long)report.frames:0UL);fflush(stdout);
 }
 int main(int argc,char **argv)
 {
@@ -361,6 +389,7 @@ int main(int argc,char **argv)
                 }
             }
             if(action==PT_UI_RENDER)render_wav(&conversion,&audio);
+            if(action==PT_UI_BOUNCE)bounce_sample(&conversion,&audio);
             if(action==PT_UI_RAW_LOAD || (action==PT_UI_RAW_SAVE && raw_eligible(editor))) {
                 int importing=action==PT_UI_RAW_LOAD,selected;printf("EDITOR REQUEST %s\n",importing?"rawload":"rawsave");fflush(stdout);
                 selected=pt_file_request(window,importing?6:7,importing?raw_input:raw_path,chosen_path,sizeof(chosen_path));view_cache.valid=0;

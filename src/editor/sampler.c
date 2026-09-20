@@ -51,6 +51,73 @@ static int same(const struct pt_sample *a,const struct pt_sample *b)
         (!a->pcm.frames || a->pcm.data==b->pcm.data || !memcmp(a->pcm.data,b->pcm.data,(size_t)a->pcm.frames*a->pcm.channels*sizeof(int32_t))) &&
         (!a->slice_count || a->slices==b->slices || !memcmp(a->slices,b->slices,(size_t)a->slice_count*sizeof(uint32_t)));
 }
+struct appended_sample {
+    struct pt_sampler *owner;
+    struct pt_sample *before,*after;
+    struct pt_sample_version *value;
+    unsigned count;
+};
+static int append_apply(void *context,struct pt_project *p,int direction)
+{
+    struct appended_sample *c=context;struct pt_sampler *s=c->owner;struct pt_project probe;
+    struct pt_sample *from=direction>0?c->before:c->after,*to=direction>0?c->after:c->before;
+    if(p->samples!=from || p->sample_count!=c->count+(direction<0?1U:0U) ||
+       pt_project_validate(p,NULL)!=PT_PROJECT_OK || (s->table && s->table!=c->after))return 0;
+    if(direction<0) {
+        if(!same(&p->samples[c->count],&c->value->sample))return 0;
+        probe=*p;probe.sample_count=(uint16_t)c->count;
+        if(pt_project_validate(&probe,NULL)!=PT_PROJECT_OK)return 0;
+    }
+    if(to!=from && c->count)memcpy(to,from,c->count*sizeof(*to));
+    if(direction>0) {retain(c->value);to[c->count]=c->value->sample;}
+    release_version(s->current[c->count]);s->current[c->count]=direction>0?c->value:NULL;
+    if(!s->table) {s->table=c->after;s->table_original=c->before;s->table_bytes=PT_PROJECT_SAMPLES*sizeof(struct pt_sample);}
+    p->samples=to;p->sample_count=(uint16_t)(c->count+(direction>0?1U:0U));++s->generation;return 1;
+}
+static void append_discard(void *context)
+{
+    struct appended_sample *c=context;struct pt_sampler *s=c->owner;
+    release_version(c->value);s->bytes-=sizeof(*c);s->allocator.release(s->allocator.context,c);
+}
+enum pt_edit_result pt_sampler_append_generated(struct pt_sampler *s,struct pt_project *p,
+    struct pt_pattern_history *h,const struct pt_pcm *format,const char *name,pt_sample_fill fill,void *context)
+{
+    struct appended_sample *c;struct pt_sample sample;struct pt_sample *table;
+    struct pt_pcm target;struct pt_edit_resource resource;enum pt_edit_result result;
+    size_t table_bytes,needed,length=0;
+    if(!s || !s->allocator.allocate || !s->allocator.release || !h || !format || !name || !fill ||
+       pt_project_validate(p,NULL)!=PT_PROJECT_OK || !format->frames || !format->rate || format->rate>192000 ||
+       (format->channels!=1 && format->channels!=2) || (format->bits!=8 && format->bits!=16 && format->bits!=24))return PT_EDIT_INVALID;
+    while(length<PT_PROJECT_NAME && name[length])++length;
+    if(length==PT_PROJECT_NAME)return PT_EDIT_INVALID;
+    if(p->sample_count==PT_PROJECT_SAMPLES)return PT_EDIT_CAPACITY;
+    if(s->table && p->samples!=s->table && p->samples!=s->table_original)return PT_EDIT_CONFLICT;
+    table_bytes=s->table?0:PT_PROJECT_SAMPLES*sizeof(struct pt_sample);needed=sizeof(*c)+table_bytes;
+    if(s->bytes>s->budget || needed>s->budget-s->bytes)return PT_EDIT_CAPACITY;
+    c=s->allocator.allocate(s->allocator.context,sizeof(*c));if(!c)return PT_EDIT_CAPACITY;
+    memset(c,0,sizeof(*c));c->owner=s;s->bytes+=sizeof(*c);
+    table=s->table;
+    if(!table) {
+        table=s->allocator.allocate(s->allocator.context,table_bytes);
+        if(!table) {append_discard(c);return PT_EDIT_CAPACITY;}
+        s->bytes+=table_bytes;
+    }
+    memset(&sample,0,sizeof(sample));sample.pcm=*format;sample.pcm.data=NULL;sample.pcm.capacity=0;
+    sample.volume=64;memcpy(sample.name,name,length);c->value=version(s,&sample);
+    result=PT_EDIT_CAPACITY;if(!c->value)goto fail;
+    c->before=p->samples;c->after=table;c->count=p->sample_count;
+    target=c->value->sample.pcm;
+    result=fill(context,&target);if(result!=PT_EDIT_OK)goto fail;
+    if(target.data!=c->value->sample.pcm.data || target.capacity!=c->value->sample.pcm.capacity ||
+       target.frames!=format->frames || target.rate!=format->rate || target.channels!=format->channels || target.bits!=format->bits ||
+       pt_pcm_validate(&c->value->sample.pcm)!=PT_PCM_OK) {result=PT_EDIT_INVALID;goto fail;}
+    resource=(struct pt_edit_resource){c,append_apply,append_discard};
+    result=pt_pattern_resource_apply(p,h,&resource);if(result==PT_EDIT_OK)return result;
+fail:
+    append_discard(c);
+    if(table_bytes) {s->bytes-=table_bytes;s->allocator.release(s->allocator.context,table);}
+    return result;
+}
 static int apply(void *context,struct pt_project *p,int direction)
 {
     struct sample_change *c=context;struct pt_sampler *s=c->owner;size_t i,count;

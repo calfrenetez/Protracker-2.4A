@@ -1,4 +1,4 @@
-# Bounded reference WAV renderer (dev31–32)
+# Bounded reference renderer and sample bounce (dev31–33)
 
 `PT24GRender` is a native/host command-line renderer built from the shared portable
 flow, frame-clock and voice/mix cores. It accepts validated MOD, PP20 MOD and PTG
@@ -47,7 +47,8 @@ The main tracker layout is unchanged.
 | 16 / 24 BIT | B | Output precision |
 | GAIN | G | Cycle 50%, 100%, 25% master gain |
 | LEAD IN | L | Retain or trim initial speed-count silence |
-| RENDER NEW WAV | W / Return | Preflight, choose a new destination, render and verify |
+| WAV FILE | W / Return | Preflight, choose a new destination, render and verify |
+| NEW SAMPLE | U | Render into a new assignable sample slot as one undo step |
 | BACK | Escape | Return to disk operations |
 
 Defaults match the CLI: song, all tracks, 48 kHz, 24 bit, 50% gain, trimmed
@@ -64,8 +65,8 @@ A cancelled or failed render leaves the project intact and removes its own stagi
 Existing destination files are never replaced. Exporting does not mark unsaved
 project edits saved. Successful clipped output is reported with advice to lower gain.
 
-This is supported-subset offline WAV export. It does not yet implement bounce into
-sample slots, batch stems, complete classic effects or hardware-equivalent audio.
+This is supported-subset offline rendering. Batch stems, complete classic effects
+and hardware-equivalent audio remain unfinished.
 
 ## Defined reference behavior
 
@@ -127,3 +128,27 @@ volume/velocity/note-off, global mute/solo, excluded-track flow commands, unsupp
 preflight, capacity, cancellation, corrupt staging, partial file writes, destination
 races and staging cleanup. No physical A1200/AmiGUS is involved. Native provenance
 and current acceptance are retained under `evidence/enhanced-editor/dev31/`.
+
+
+## Render to a new sample (dev33)
+
+On the render page, **NEW SAMPLE / U** uses the displayed song/pattern, track mask,
+rate, precision, gain and lead-in settings. The result becomes the selected new
+sample, named BOUNCE SONG or BOUNCE PATTERN nnn. Existing instruments and events
+are preserved. The sample retains stereo16/24 PCM at 44.1/48 kHz, volume 64,
+finetune zero, and no automatic loop or slices. Assignment to a note is explicit.
+
+Rendering uses one new PCM allocation directly, without an intermediate WAV or a
+second full PCM copy. This allocation, sample metadata, undo ownership and table
+growth are charged to the existing 32 MiB sampler budget. Available memory or the
+255-slot limit can refuse a bounce. No automatic precision/rate reduction is made.
+
+Adding the completed sample is one shared undo command. Escape during checking or
+mixing—including the final callback before commit—leaves the project, sample
+count and existing redo branch unchanged. Later edits to the bounced sample join
+the same chronological history. Undo cannot remove a still-referenced slot; undo
+its note assignment first. PCM remains owned when its append command is evicted.
+
+Control-L opens the selected bounced sample for editing/export. High-resolution
+Paula audition remains unsupported; bouncing does not imply AmiGUS live playback
+or physical audio acceptance. Selected row-range bounce is not yet implemented.

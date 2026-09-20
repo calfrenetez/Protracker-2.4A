@@ -639,3 +639,14 @@ and displays cancellable checking/mixing/verification progress. Modal rendering
 accepts Escape and refresh events without allowing edits to borrowed project data.
 Export retains shared undo and dirty state; it never marks the project saved.
 The accepted main-screen font, bevel/grid and golden image remain unchanged.
+
+
+## Undoable sample bounce (dev33)
+
+The render page now offers WAV FILE and NEW SAMPLE. NEW SAMPLE / U renders the
+chosen song or pattern and tracks directly into a new sample slot. Explicit
+rate/precision/gain settings remain in force; the new selected instrument has
+volume 64 and no automatic loop/slices. The result can be assigned using existing
+note/instrument controls and edited in the sampler. A completed bounce is one
+undo step; cancellation, allocation failure and capacity refusal preserve project
+state and redo. See [rendering limits and ownership](REFERENCE_RENDERER.md).

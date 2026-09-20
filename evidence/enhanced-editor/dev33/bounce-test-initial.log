@@ -1,0 +1,7 @@
+test_atomic_generated_sample_and_shared_history (test_bounce.Bounce.test_atomic_generated_sample_and_shared_history) ... BOUNCE PASS: exact true24 PCM, atomic new slot, allocation/budget/cancellation rollback, redo preservation, mixed undo, references, table reuse, eviction and PTG identity
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 3.093s
+
+OK

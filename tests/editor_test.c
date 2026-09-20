@@ -339,6 +339,7 @@ static void render_controls(struct pt_editor *e)
     pt_editor_render_options(e,&o);assert(!o.pattern_only && o.rate==48000 && o.bits==24 && o.gain_q16==16384 && !o.include_lead_in);
     pt_editor_key(e,0x24,0);assert(e->render_gain==32768);
     assert(pt_editor_key(e,0x11,0)==PT_UI_RENDER && pt_editor_key(e,0x44,0)==PT_UI_RENDER && pt_editor_click(e,250,70)==PT_UI_RENDER);
+    assert(pt_editor_key(e,0x16,0)==PT_UI_BOUNCE && pt_editor_click(e,500,70)==PT_UI_BOUNCE);
     assert(pt_editor_key(e,0x59,0)==PT_UI_STOP && pt_editor_key(e,0x40,0)==PT_UI_STOP);
     pt_editor_key(e,0x4c,0x10);pt_editor_key(e,0x31,0);pt_editor_click(e,200,88);
     assert(e->history.revision==revision && pt_editor_dirty(e)==dirty && e->sample==sample && e->row==row);

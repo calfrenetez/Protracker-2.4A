@@ -655,6 +655,7 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
         else if(raw==0x28)render_setting(e,5);
         else if(raw==0x20)render_setting(e,6);
         else if(raw==0x14)render_setting(e,7);
+        else if(raw==0x16)return PT_UI_BOUNCE;
         else if(raw==0x11 || raw==0x44)return PT_UI_RENDER;
         else if(raw==0x59 || raw==0x40)return PT_UI_STOP;
         return PT_UI_NONE;
@@ -847,7 +848,7 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
             r=(unsigned)(y-2)/19;c=(unsigned)(x-230)/123;
             if(r==1)render_setting(e,c==0?0:c==1?1:8);
             else if(r==2)render_setting(e,2+c);
-            else if(r==3)return PT_UI_RENDER;
+            else if(r==3)return x<414?PT_UI_RENDER:PT_UI_BOUNCE;
             else if(x<414)render_setting(e,5);
             else {e->render_details=0;++e->sample_ui;pt_editor_status(e,"DISK OPERATIONS");}
         }

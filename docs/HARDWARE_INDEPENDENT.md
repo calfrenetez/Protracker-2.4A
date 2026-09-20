@@ -534,3 +534,19 @@ existing-target and write-failure preservation coverage. See
 `evidence/enhanced-editor/dev32/` and `docs/REFERENCE_RENDERER.md`.
 Complete effect interpretation, sample-slot bounce, batch stems and physical
 AmiGUS audio acceptance remain open.
+
+
+## Atomic render to new sample (dev33)
+
+NEW SAMPLE / U on the render page uses the same supported reference renderer and
+explicit output settings to create a new assignable sample. Rendering fills one
+owned PCM allocation directly. The sampler budget includes staging, metadata and
+table growth; the completed append is one shared undo resource. Allocation
+failure and checking/mixing/final-callback cancellation leave the project, slot
+count and redo branch unchanged. Active PCM remains owned after history eviction.
+
+43 host checks pass. Native core and editor tests verify exact stereo24/48 kHz
+PCM against host WAV bytes, append-only project changes, cancellation preserving
+redo, chronological undo and exact PTG save/reopen. No enhanced live audition or
+physical hardware acceptance is implied. Evidence is in
+`evidence/enhanced-editor/dev33/`.

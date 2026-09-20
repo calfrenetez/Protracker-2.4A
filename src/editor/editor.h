@@ -21,6 +21,9 @@ struct pt_editor {
     struct pt_sampler sampler;
     unsigned sample_range_slot,sample_marking;
     uint32_t sample_start,sample_end,sample_anchor;
+    uint32_t loop_fade,slice_markers[4096];
+    size_t slice_count;
+    unsigned slice_pending,slice_slot,slice_generation,slice_threshold,slice_gap_ms,slice_zero,sample_ui;
     struct pt_pattern_command commands[128];
     struct pt_event_change changes[2048];
     unsigned pattern,row,first_row,field,sample,octave,editing,quit_pending,position,panel,load_pending,new_pending,new_channels;

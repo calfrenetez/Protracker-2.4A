@@ -181,6 +181,8 @@ static void draw_sample(const struct pt_editor *e,struct pt_canvas *c,const uint
     panel(c,2,PT_EDITOR_HEADER_Y,636,PT_EDITOR_BOTTOM_Y-PT_EDITOR_HEADER_Y,GREY);
     if(!pcm) {label(c,font,2,PT_EDITOR_HEADER_Y,636,19,"SELECT A SAMPLE SLOT",0);return;}
     snprintf(text,sizeof(text),"SAMPLE %02u  %u BIT  %s  %lu HZ",e->sample,pcm->bits,pcm->channels==2?"STEREO":"MONO",(unsigned long)pcm->rate);
+    if(e->panel==6)snprintf(text,sizeof(text),"%s LOOP %lu - %lu  /  FADE %lu FRAMES",sample->loop==PT_LOOP_NONE?"NO":sample->loop==PT_LOOP_FORWARD?"FORWARD":sample->loop==PT_LOOP_PINGPONG?"PINGPONG":"CROSSFADE",(unsigned long)sample->loop_start,(unsigned long)sample->loop_end,(unsigned long)e->loop_fade);
+    if(e->panel==7)snprintf(text,sizeof(text),"SLICES %u / %s %lu  -  %s",sample->slice_count,e->slice_pending?"PROPOSED":"SAVED",(unsigned long)(e->slice_pending?e->slice_count:sample->slice_count),e->slice_pending?"APPLY OR CANCEL":"MARKERS ONLY");
     label(c,font,2,PT_EDITOR_HEADER_Y,636,19,text,0);
     for(channel=0;channel<pcm->channels;++channel) {
         int top=254+(int)channel*(216/pcm->channels),height=216/pcm->channels-4,mid=top+height/2;
@@ -196,6 +198,18 @@ static void draw_sample(const struct pt_editor *e,struct pt_canvas *c,const uint
             rect(c,10+(int)x,y0,1,y1-y0+1,BLUE);
         }
         else rect(c,10,mid,620,1,BLUE);
+        if(pcm->frames) {
+            unsigned marker;const uint32_t *markers=e->panel==7 && e->slice_pending?e->slice_markers:sample->slices;
+            size_t count=e->panel==7 && e->slice_pending?e->slice_count:sample->slice_count;
+            for(marker=0;marker<count;++marker) {
+                int mx=10+(int)((uint64_t)markers[marker]*619/pcm->frames);
+                rect(c,mx,top,1,height,e->panel==7 && e->slice_pending?YELLOW:WHITE);
+            }
+            if(sample->loop) {
+                int lx=10+(int)((uint64_t)sample->loop_start*619/pcm->frames),rx=10+(int)((uint64_t)sample->loop_end*619/pcm->frames);
+                rect(c,lx,top,1,height,YELLOW);rect(c,rx,top,1,height,YELLOW);rect(c,lx,top,rx-lx+1,2,YELLOW);
+            }
+        }
         if(e->sample_range_slot==e->sample && e->sample_marking && pcm->frames)rect(c,10+(int)((uint64_t)e->sample_anchor*619/pcm->frames),top,1,height,YELLOW);
     }
     snprintf(text,sizeof(text),"RANGE %lu - %lu / %lu FRAMES",(unsigned long)start,(unsigned long)end,(unsigned long)pcm->frames);
@@ -266,10 +280,20 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
     panel(c,476,PT_EDITOR_BOTTOM_Y,18,21,GREY);rect(c,482,498,6,9,WHITE);label(c,font,494,PT_EDITOR_BOTTOM_Y,58,21,"STOP",0);
     panel(c,552,PT_EDITOR_BOTTOM_Y,86,21,GREY);small(c,font,557,497,"PATTERN",WHITE);snprintf(s,sizeof(s),"%02X",e->pattern);small(c,font,618,497,s,NAVY);
     pt_editor_draw_playback(e,c,font);
-    if(e->panel==5) {
-        static const char *ops[4][3]={{"LOAD WAV","SAVE WAV","AUDITION"},{"REVERSE","NORMALIZE","DC OFFS"},{"GAIN /2","GAIN X2","BACK"},{"FADE IN","FADE OUT","ALL"}};
-        label(c,font,230,2,369,19,"SAMPLER",0);
-        for(r=0;r<4;++r)for(i=0;i<3;++i)label(c,font,230+(int)i*123,21+(int)r*19,123,19,ops[r][i],0);
+    if(e->panel>=5) {
+        static const char *tabs[3]={"SAMPLER","LOOPS","SLICES"};
+        static const char *ops[3][4][3]={
+            {{"LOAD WAV","SAVE WAV","AUDITION"},{"REVERSE","NORMALIZE","DC OFFS"},{"GAIN /2","GAIN X2","BACK"},{"FADE IN","FADE OUT","ALL"}},
+            {{"FORWARD","PINGPONG","OFF"},{"FADE -","","FADE +"},{"BAKE FADE","USE LOOP","BACK"},{"ALL","UNDO","REDO"}},
+            {{"ADD START","DELETE","CLEAR"},{"AUTO","APPLY","CANCEL"},{"THRESH -","","THRESH +"},{"GAP -","","GAP +"}}};
+        for(i=0;i<3;++i)label(c,font,230+(int)i*123,2,123,19,tabs[i],e->panel==5+i);
+        for(r=0;r<4;++r)for(i=0;i<3;++i)label(c,font,230+(int)i*123,21+(int)r*19,123,19,ops[e->panel-5][r][i],
+            e->panel==6 && r==0 && sample && sample->loop==(i==2?PT_LOOP_NONE:i+1));
+        if(e->panel==6) {snprintf(s,sizeof(s),"%lu FR",(unsigned long)e->loop_fade);label(c,font,353,40,123,19,s,0);}
+        if(e->panel==7) {
+            snprintf(s,sizeof(s),"%u / 1000",e->slice_threshold);label(c,font,353,59,123,19,s,0);
+            snprintf(s,sizeof(s),"%uMS Z:%s",e->slice_gap_ms,e->slice_zero?"ON":"OFF");label(c,font,353,78,123,19,s,e->slice_zero);
+        }
         draw_sample(e,c,font);
     } else if(e->panel==4) {
         const struct pt_channel *channel=&p->channels.track[p->channels.selected];
@@ -345,7 +369,7 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
         const struct pt_pcm *pcm=&e->project->samples[i].pcm;
         bytes+=(size_t)pcm->frames*pcm->channels*(pcm->bits/8);
     }
-    full=(e->panel==5 && (old->sample_start!=e->sample_start || old->sample_end!=e->sample_end || old->sample_marking!=e->sample_marking || old->sample_anchor!=e->sample_anchor || old->sample_range_slot!=e->sample_range_slot)) || !old->valid || old->page!=page || old->pattern!=e->pattern || old->first_row!=e->first_row ||
+    full=(e->panel>=5 && (old->sample_ui!=e->sample_ui || old->sample_start!=e->sample_start || old->sample_end!=e->sample_end || old->sample_marking!=e->sample_marking || old->sample_anchor!=e->sample_anchor || old->sample_range_slot!=e->sample_range_slot)) || !old->valid || old->page!=page || old->pattern!=e->pattern || old->first_row!=e->first_row ||
          old->position!=e->position || old->sample!=e->sample || old->editing!=e->editing || old->panel!=e->panel || (e->panel==4 && old->selected!=e->project->channels.selected) || (e->panel==1 && old->selection.active!=selection.active) ||
          old->sample_bytes!=bytes || memcmp(&metadata,&old->project,sizeof(metadata)) || memcmp(&sample,&old->sample_meta,sizeof(sample));
     playback_changed=!old->valid || memcmp(&e->playback,&old->playback,sizeof(e->playback));
@@ -374,7 +398,7 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
         changed=memcmp(events,old->events[r],sizeof(events))!=0;
         if((row==old->row || row==e->row) && (old->row!=e->row || old->field!=e->field || old->selected!=e->project->channels.selected))changed=1;
         if(selection_changed)changed=1;
-        if(!full && changed && e->panel!=5) {draw_pattern_row(e,c,font,r);areas[count++]=(struct pt_view_rect){3,PT_EDITOR_PATTERN_Y+r*12,635,12};}
+        if(!full && changed && e->panel<5) {draw_pattern_row(e,c,font,r);areas[count++]=(struct pt_view_rect){3,PT_EDITOR_PATTERN_Y+r*12,635,12};}
         memcpy(old->events[r],events,sizeof(events));
     }
     memcpy(&old->project,&metadata,sizeof(metadata));memcpy(&old->sample_meta,&sample,sizeof(sample));
@@ -382,7 +406,7 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
     old->new_channels=e->new_channels;old->new_pending=e->new_pending;
     old->selection=selection;
     old->valid=1;old->page=page;old->pattern=e->pattern;old->first_row=e->first_row;old->position=e->position;
-    old->sample_start=e->sample_start;old->sample_end=e->sample_end;old->sample_marking=e->sample_marking;old->sample_anchor=e->sample_anchor;old->sample_range_slot=e->sample_range_slot;
+    old->sample_ui=e->sample_ui;old->sample_start=e->sample_start;old->sample_end=e->sample_end;old->sample_marking=e->sample_marking;old->sample_anchor=e->sample_anchor;old->sample_range_slot=e->sample_range_slot;
     old->sample=e->sample;old->editing=e->editing;old->panel=e->panel;old->row=e->row;old->field=e->field;
     old->selected=e->project->channels.selected;old->dirty=pt_editor_dirty(e);old->sample_bytes=bytes;
     return count;

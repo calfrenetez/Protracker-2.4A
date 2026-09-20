@@ -65,7 +65,7 @@ below; they do not replace the original assembler tracker representation.
 | --- | --- | --- |
 | Channels | 1–16 channels, four-column page selection, wrapping navigation, names/pan/group/MIDI metadata, exclusive P/A/M routes, atomic fifth-Paula rejection and stable allocation of four Paula slots | Existing-song resizing, names/pan/group/MIDI setup UI, mixed backend dispatch |
 | Mute/solo and history | Channel page and saved settings; shared chronological note/block/channel undo; fifth-Paula rejection; classic Paula live mute/solo and undo/redo | Mixed backend playback and persistent recovery |
-| PCM editing | Sampler waveform/range UI; signed 8/16/24-bit mono/stereo reverse, saturation gain, shared-peak normalize, fades and per-channel DC removal; staged shared undo and allocation rollback | Loop/slice UI, resampling/conversion UI and additional import formats |
+| PCM editing | Sampler waveform/range UI; signed 8/16/24-bit mono/stereo reverse, saturation gain, shared-peak normalize, fades and per-channel DC removal; staged shared undo and allocation rollback | Resampling/conversion UI and additional import formats |
 | Conversion | Explicit precision conversion with rounding/clipping; offline integer linear resampling | Antialias filtering and quality qualification; shared renderer/converter integration |
 | WAV | Bounded RIFF PCM parsing and canonical writing; 8/16/24-bit mono/stereo, odd-chunk padding, byte/block-rate checks and full low-eight-bit retention | Float/extensible WAV and loop metadata; integer PCM native import/export with verified new-file publication is connected |
 
@@ -325,3 +325,14 @@ while replacing a playing classic MOD, verify old DMA stops, enter/save a channe
 single-channel song, and reopen/resave the 16-channel project byte-identically.
 Saved fields, empty sample slots, event dimensions, default routes and CRC are
 checked independently. Count/confirmation changes redraw only their controls.
+
+## Loop and slice editor milestone (dev14)
+
+The native sampler now has LOOPS and SLICES tabs. Forward/pingpong metadata,
+atomic baked crossfade, manual marker proposals and configurable offline AUTO
+SLICE use the common sample-version journal. Proposals can be edited/cancelled
+before application; referenced ordinals cannot silently change meaning.
+See [controls and remaining playback boundaries](ENHANCED_EDITOR.md#loop-and-slice-tabs).
+Host tests cover rollback, persistence, proposal controls and cached/full display.
+Native evidence and exact binary/source manifests are retained under
+`evidence/enhanced-editor/dev14/`. This remains software/emulator evidence only.

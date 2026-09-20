@@ -140,8 +140,8 @@ REVERSE / R, NORMALIZE / N, DC OFFS / D, GAIN X2 / G, GAIN /2 / H, FADE IN / I
 and FADE OUT / O act on the selected range. Stereo frames stay paired. Normalize
 uses a shared peak, gain saturates at the declared precision, fades reach zero,
 and DC removal calculates each channel independently. Existing sample loop/slice
-positions are preserved during these length-preserving edits. Loop/marker editing,
-resampling and explicit precision conversion UI remain open.
+positions are preserved during these length-preserving edits. Resampling and
+explicit precision conversion UI remain open.
 
 Each change joins the same chronological undo/redo as notes and channel settings.
 Staged immutable sample versions are reference-counted; command eviction or redo
@@ -164,11 +164,56 @@ and sample undo/redo stop existing song/audition playback before another action
 can use its old private copy. Failed/cancelled/no-op operations preserve playback.
 Pattern edits and channel settings keep their previously documented behaviour.
 
+## Loop and slice tabs
+
+The sampler heading now contains SAMPLER, LOOPS and SLICES tabs; Tab cycles them.
+The same two-click range, A/Control-A for all, +/- sample selection, audition,
+Control-S and shared undo remain available. Escape closes all sample pages.
+The accepted main-screen grid and bitmap font are unchanged.
+
+LOOPS sets FORWARD / F or PINGPONG / P from the selected half-open frame range.
+OFF / O clears loop metadata. USE LOOP / U selects the current loop range.
+Yellow brackets show saved loop boundaries. FADE -/+ or [/] halve/double the
+crossfade length (1–65536 frames, initially 32). BAKE FADE / B crossfades the
+selected tail with its head, then sets a forward loop starting after the consumed
+head. It changes PCM and metadata together in one undo command. The fade must
+fit within half the selection; it is never silently shortened. Baking does not
+also enable runtime crossfade. Pingpong is stored correctly but enhanced pingpong
+playback remains unavailable; classic audition refuses it. Forward audition still
+requires all existing classic format/alignment constraints.
+
+SLICES edits marker proposals without chopping or changing PCM. ADD START / M
+adds the selected range start. DELETE / D removes the last marker at or before
+that start; CLEAR / C proposes an empty set. AUTO / T replaces the proposal with
+an offline transient analysis. Defaults: threshold 500/1000 of peak, minimum
+spacing 50 ms, exponential envelope shift 4 and optional nearest shared-channel
+zero crossing within 32 frames. THRESH -/+ or [/] adjust the threshold by 50
+(50–1000; lower is more sensitive). GAP -/+ or down/up adjust spacing by 10 ms
+(10–1000). Click the middle GAP value or Z to toggle zero-crossing refinement.
+Changing options requires AUTO again. There are at most 4096 sorted markers;
+nonempty AUTO results begin at frame zero, including silent samples.
+
+Proposed markers appear yellow and saved markers white; the heading explicitly
+identifies proposals. Manual edits also work on the AUTO proposal. APPLY / P
+publishes all markers as one undo command; CANCEL / X preserves the sample,
+dirty state and redo. Proposals are previews, not saved project data. Changing
+sample slots, importing/replacing the sample, or undoing a sample change discards
+stale proposals. A failed apply retains the proposal for correction. Final loops
+and markers survive project save/reopen; WAV export still contains PCM only.
+
+Existing pattern slice references are 1-based ordinals. Applying, undoing or
+redoing a marker change must preserve the frame addressed by each referenced
+ordinal. A change that would remove or retarget one is refused. Automatic note
+remapping, pattern slice assignment controls, slice-trigger playback and MIDI
+slice triggering remain pending. The current milestone is editing and persistence,
+not a claim that enhanced playback is connected. Metadata-only edits still keep
+immutable PCM snapshots within the existing sample-history memory budget.
+
 ## Display and acceptance boundaries
 
 The renderer uses 163,840 bytes for a four-plane software canvas, preferring Fast
 RAM, plus 163,840 bytes of Chip RAM for a blitter source. The OS display has its
-own bitmap. The current bounded editor/history structure uses about 83 KiB on
+own bitmap. The current bounded editor/history structure uses about 99 KiB on
 68k. Loaded project/sample storage is additional. No fixed available-RAM amount
 is assumed; allocation failure unwinds all owned resources.
 

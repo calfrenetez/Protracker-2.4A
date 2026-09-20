@@ -26,7 +26,9 @@ exclusive routing plus mute/solo, with chronological note/channel undo and exact
 project persistence. Classic Paula playback applies mute/solo live; mixed
 AmiGUS/MIDI replay is still pending. SAMPLER / Control-L now adds waveform range
 selection, exact integer PCM WAV import/export and undoable reverse, normalize,
-gain, fades and DC removal. High-resolution samples remain editable/saveable;
+gain, fades and DC removal. LOOPS/SLICES tabs add undoable forward/pingpong
+metadata, baked crossfade and editable manual/AUTO SLICE proposals; marker changes
+cannot silently retarget existing slice-note ordinals. High-resolution samples remain editable/saveable;
 classic Paula audition still requires compatible samples. See the
 [editor guide](docs/ENHANCED_EDITOR.md) and retained native UI evidence. Physical AmiGUS tests await the owner's Mini.
 MIDI note ownership and quantised recording into undoable pattern events now
@@ -72,7 +74,7 @@ authorized proceeding with the baseline build and verification.
 
 The owner's 19 September instruction authorises independent software development
 while the ordered Mini is in transit. Project/pattern persistence and bounded editing cores are implemented. The first
-native Enhanced editor integration is working; sampler/routing pages and mixed
-AmiGUS/MIDI replay integration remain open.
+native Enhanced editor, sampler and routing pages are working; enhanced preview,
+slice-trigger playback and mixed AmiGUS/MIDI replay integration remain open.
 AmiConnect upload/exec and real card tests remain separate acceptance gates.
 Initial smoke results do not certify all effects or physical hardware.

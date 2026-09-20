@@ -1,0 +1,35 @@
+{
+  "run_id": "loops1789888704489860000",
+  "elapsed_seconds": 144.769,
+  "binaries": {
+    "PT24GEdit": "4d5bcad0af17d37e483f0f868370cc5f5310996d66b077aac63e64d1acc297c4",
+    "PTSamplerTest": "4dc6a3cf6f885bba512990a8537d0ff7fc6ea3e78f105d71584c1e0d035b2376"
+  },
+  "loop_modes_and_baked_crossfade_undo_redo": true,
+  "proposal_manual_edit_apply_cancel": true,
+  "cancel_preserves_redo": true,
+  "exact_forward_loop_and_baked_pcm_and_marker_bytes": true,
+  "markers": [
+    0,
+    512,
+    1024,
+    1536
+  ],
+  "pingpong_preview_refused": true,
+  "sample_metadata_change_stops_audio": true,
+  "project_crc_and_reopen_identity": true,
+  "input": "real raw-key events; mouse targets covered by shared controller host tests",
+  "normal_exits": 2,
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=416\tsndbuf_status=0",
+  "logs": {
+    "sampler.log": "LOOP/SLICE PASS: metadata, atomic bake undo, proposal commit, non-destructive PCM, retarget refusal, undo/redo conflicts, allocation rollback and exact persistence\nSAMPLER PASS: exact stereo24 import/range edit, unified history, dirty state, no-op redo, allocation rollback, bounded memory, eviction, save/reopen and release\n",
+    "editor.log": "EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=101278\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO panel=5\nEDITOR REQUEST sample\nEDITOR SAMPLE result=0 revision=1 dirty=1\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=SAMPLE UPDATED - CONTROL-Z TO UNDO panel=5\nEDITOR REPLAY active=1 ticks=0 order=0 pattern=0 row=0 bpm=125 speed=6 period=0,0,0,0 volume=0,0,0,0\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=SAMPLE AUDITION - PAULA; STOP TO RELEASE panel=5\nEDITOR REPLAY active=1 ticks=11 order=0 pattern=0 row=0 bpm=125 speed=6 period=428,0,0,0 volume=64,0,0,0\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=LOOPS: F FORWARD / P PINGPONG / O OFF / B BAKE FADE panel=6\nEDITOR REPLAY active=1 ticks=206 order=0 pattern=0 row=33 bpm=125 speed=6 period=428,0,0,0 volume=64,0,0,0\nEDITOR REPLAY active=1 ticks=211 order=0 pattern=0 row=34 bpm=125 speed=6 period=428,0,0,0 volume=64,0,0,0\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=LOOP UPDATED - CONTROL-Z TO UNDO panel=6\nEDITOR FRAME row=0 channel=0 revision=3 dirty=1 status=LOOP UPDATED - CONTROL-Z TO UNDO panel=6\nEDITOR FRAME row=0 channel=0 revision=3 dirty=1 status=SAMPLE: FORMAT NEEDS ENHANCED PREVIEW OR CONVERSION panel=6\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=UNDO panel=6\nEDITOR FRAME row=0 channel=0 revision=3 dirty=1 status=REDO panel=6\nEDITOR FRAME row=0 channel=0 revision=4 dirty=1 status=LOOP UPDATED - CONTROL-Z TO UNDO panel=6\nEDITOR FRAME row=0 channel=0 revision=3 dirty=1 status=UNDO panel=6\nEDITOR FRAME row=0 channel=0 revision=5 dirty=1 status=CROSSFADE BAKED; FORWARD LOOP SKIPS BLENDED HEAD panel=6\nEDITOR FRAME row=0 channel=0 revision=3 dirty=1 status=UNDO panel=6\nEDITOR FRAME row=0 channel=0 revision=5 dirty=1 status=REDO panel=6\nEDITOR FRAME row=0 channel=0 revision=5 dirty=1 status=SLICES: M ADD / D DELETE / T AUTO / P APPLY / X CANCEL panel=7\nEDITOR FRAME row=0 channel=0 revision=5 dirty=1 status=SLICE PROPOSAL: EDIT MARKERS THEN APPLY; PCM UNCHANGED panel=7\nEDITOR FRAME row=0 channel=0 revision=5 dirty=1 status=SLICE PROPOSAL: EDIT MARKERS THEN APPLY; PCM UNCHANGED panel=7\nEDITOR FRAME row=0 channel=0 revision=6 dirty=1 status=SLICE MARKERS APPLIED - CONTROL-Z TO UNDO panel=7\nEDITOR FRAME row=0 channel=0 revision=5 dirty=1 status=UNDO panel=7\nEDITOR FRAME row=0 channel=0 revision=5 dirty=1 status=SLICE PROPOSAL: EDIT MARKERS THEN APPLY; PCM UNCHANGED panel=7\nEDITOR FRAME row=0 channel=0 revision=5 dirty=1 status=SLICE PROPOSAL CANCELLED - SAMPLE UNCHANGED panel=7\nEDITOR FRAME row=0 channel=0 revision=6 dirty=1 status=REDO panel=7\nEDITOR FRAME row=0 channel=0 revision=6 dirty=1 status=SLICE PROPOSAL: EDIT MARKERS THEN APPLY; PCM UNCHANGED panel=7\nEDITOR FRAME row=0 channel=0 revision=6 dirty=1 status=SLICE PROPOSAL: EDIT MARKERS THEN APPLY; PCM UNCHANGED panel=7\nEDITOR FRAME row=0 channel=0 revision=6 dirty=1 status=SLICE PROPOSAL: EDIT MARKERS THEN APPLY; PCM UNCHANGED panel=7\nEDITOR FRAME row=0 channel=0 revision=7 dirty=1 status=SLICE MARKERS APPLIED - CONTROL-Z TO UNDO panel=7\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=7 dirty=0 status=PROJECT SAVED AND VERIFIED panel=7\nEDITOR FRAME row=0 channel=0 revision=7 dirty=0 status=SETTINGS CLOSED panel=0\nEDITOR EXIT clean\n",
+    "reopened.log": "EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=101278\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO panel=5\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=LOOPS: F FORWARD / P PINGPONG / O OFF / B BAKE FADE panel=6\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SLICES: M ADD / D DELETE / T AUTO / P APPLY / X CANCEL panel=7\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PROJECT SAVED AND VERIFIED panel=7\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SETTINGS CLOSED panel=0\nEDITOR EXIT clean\n"
+  },
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

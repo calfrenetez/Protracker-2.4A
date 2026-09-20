@@ -53,7 +53,10 @@ static int apply(void *context,struct pt_project *p,int direction)
     struct pt_sample_version *expected=direction>0?c->before:c->after,*replacement=direction>0?c->after:c->before;
     if(pt_project_validate(p,NULL)!=PT_PROJECT_OK || c->slot>=p->sample_count || !same(&p->samples[c->slot],&expected->sample))return 0;
     count=(size_t)p->pattern_count*64*p->channels.count;
-    for(i=0;i<count;++i)if(p->events[i].instrument==c->slot+1 && p->events[i].slice>replacement->sample.slice_count)return 0;
+    for(i=0;i<count;++i)if(p->events[i].instrument==c->slot+1 && p->events[i].slice) {
+        unsigned slice=p->events[i].slice;
+        if(slice>replacement->sample.slice_count || expected->sample.slices[slice-1]!=replacement->sample.slices[slice-1])return 0;
+    }
     retain(replacement);release_version(s->current[c->slot]);s->current[c->slot]=replacement;
     p->samples[c->slot]=replacement->sample;++s->generation;return 1;
 }
@@ -97,5 +100,36 @@ enum pt_edit_result pt_sampler_import(struct pt_sampler *s,struct pt_project *p,
     sample.pcm.frames=info.frames;sample.pcm.rate=info.rate;sample.pcm.channels=info.channels;sample.pcm.bits=info.bits;
     v=version(s,&sample);if(!v)return PT_EDIT_CAPACITY;
     if(pt_wav_decode(bytes,length,&v->sample.pcm)!=PT_WAV_OK) {release_version(v);return PT_EDIT_INVALID;}
+    return commit(s,p,h,slot,v);
+}
+enum pt_edit_result pt_sampler_loop(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,enum pt_loop_kind kind,uint32_t start,uint32_t end,uint32_t fade)
+{
+    struct pt_sample_version *v;
+    if(!s || !s->allocator.allocate || !s->allocator.release || pt_project_validate(p,NULL)!=PT_PROJECT_OK || slot>=p->sample_count)return PT_EDIT_INVALID;
+    if(kind<PT_LOOP_NONE || kind>PT_LOOP_CROSSFADE)return PT_EDIT_INVALID;
+    if(kind==PT_LOOP_NONE) {if(start || end || fade)return PT_EDIT_INVALID;}
+    else if(start>=end || end>p->samples[slot].pcm.frames ||
+        (kind==PT_LOOP_CROSSFADE?(!fade || fade>(end-start)/2):fade!=0))return PT_EDIT_INVALID;
+    v=version(s,&p->samples[slot]);if(!v)return PT_EDIT_CAPACITY;
+    if(kind==PT_LOOP_CROSSFADE) {
+        if(pt_pcm_crossfade_loop(&v->sample.pcm,start,end,fade,&start)!=PT_PCM_OK) {release_version(v);return PT_EDIT_INVALID;}
+        kind=PT_LOOP_FORWARD;
+    }
+    v->sample.loop=(uint8_t)kind;v->sample.loop_start=start;v->sample.loop_end=end;v->sample.crossfade=0;
+    return commit(s,p,h,slot,v);
+}
+enum pt_edit_result pt_sampler_slices(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const uint32_t *markers,size_t count)
+{
+    struct pt_sample sample;struct pt_sample_version *v;size_t i,events;
+    if(!s || !s->allocator.allocate || !s->allocator.release || pt_project_validate(p,NULL)!=PT_PROJECT_OK || slot>=p->sample_count)return PT_EDIT_INVALID;
+    sample=p->samples[slot];
+    if(!pt_slices_valid(sample.pcm.frames,markers,count))return PT_EDIT_INVALID;
+    events=(size_t)p->pattern_count*64*p->channels.count;
+    for(i=0;i<events;++i)if(p->events[i].instrument==slot+1 && p->events[i].slice) {
+        unsigned slice=p->events[i].slice;
+        if(slice>count || sample.slices[slice-1]!=markers[slice-1])return PT_EDIT_UNSUPPORTED;
+    }
+    sample.slices=(uint32_t *)markers;sample.slice_count=(uint16_t)count;
+    v=version(s,&sample);if(!v)return PT_EDIT_CAPACITY;
     return commit(s,p,h,slot,v);
 }

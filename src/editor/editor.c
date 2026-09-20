@@ -28,11 +28,13 @@ void pt_editor_dispose(struct pt_editor *e)
 {if(e) {pt_pattern_history_release(&e->history);pt_sampler_release(&e->sampler);}}
 void pt_editor_sample_all(struct pt_editor *e)
 {
+    if(e->slice_pending && (e->slice_slot!=e->sample || e->slice_generation!=e->sampler.generation)) {e->slice_pending=0;++e->sample_ui;}
     e->sample_range_slot=e->sample;e->sample_start=0;e->sample_marking=0;
     e->sample_end=e->sample && e->sample<=e->project->sample_count?e->project->samples[e->sample-1].pcm.frames:0;
 }
 void pt_editor_sample_result(struct pt_editor *e,enum pt_edit_result result)
 {
+    if(e->slice_pending && e->slice_generation!=e->sampler.generation) {e->slice_pending=0;++e->sample_ui;}
     pt_editor_status(e,result==PT_EDIT_OK?"SAMPLE UPDATED - CONTROL-Z TO UNDO":
         result==PT_EDIT_CAPACITY?"SAMPLE MEMORY BUDGET OR ALLOCATION FAILED - NO CHANGE":
         result==PT_EDIT_UNSUPPORTED?"WAV FORMAT OR SLICE REFERENCES UNSUPPORTED - NO CHANGE":"SAMPLE EDIT REFUSED - NO CHANGE");
@@ -48,12 +50,99 @@ static void sample_edit(struct pt_editor *e,enum pt_pcm_edit op,unsigned gain)
 }
 static void sampler_panel(struct pt_editor *e)
 {e->panel=5;pt_editor_sample_all(e);pt_editor_status(e,"SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO");}
+/* All sample detail pages use the same range and immutable-version journal. */
+static void sample_tab(struct pt_editor *e,unsigned page)
+{
+    e->panel=page;
+    pt_editor_status(e,page==6?"LOOPS: F FORWARD / P PINGPONG / O OFF / B BAKE FADE":
+        page==7?"SLICES: M ADD / D DELETE / T AUTO / P APPLY / X CANCEL":
+        "SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO");
+}
+static int sample_range(struct pt_editor *e)
+{
+    if(e->sample_range_slot!=e->sample)pt_editor_sample_all(e);
+    if(e->sample_marking) {pt_editor_status(e,"FINISH THE SAMPLE RANGE OR SELECT ALL FIRST");return 0;}
+    if(!e->sample || !e->sample_end) {pt_editor_status(e,"SELECT A NONEMPTY SAMPLE FIRST");return 0;}
+    return 1;
+}
+static void loop_edit(struct pt_editor *e,unsigned op)
+{
+    struct pt_sample *sample;enum pt_edit_result result;
+    if(!sample_range(e))return;
+    sample=&e->project->samples[e->sample-1];
+    if(op==4) {
+        if(!sample->loop) {pt_editor_status(e,"NO LOOP TO SELECT");return;}
+        e->sample_start=sample->loop_start;e->sample_end=sample->loop_end;
+        pt_editor_status(e,"CURRENT LOOP RANGE SELECTED");return;
+    }
+    result=pt_sampler_loop(&e->sampler,e->project,&e->history,e->sample-1,(enum pt_loop_kind)op,
+        op?e->sample_start:0,op?e->sample_end:0,op==PT_LOOP_CROSSFADE?e->loop_fade:0);
+    if(result==PT_EDIT_OK) {
+        e->slice_pending=0;++e->sample_ui;
+        pt_editor_status(e,op==PT_LOOP_CROSSFADE?"CROSSFADE BAKED; FORWARD LOOP SKIPS BLENDED HEAD":"LOOP UPDATED - CONTROL-Z TO UNDO");
+    } else if(result==PT_EDIT_INVALID)pt_editor_status(e,"LOOP REFUSED: FADE MUST FIT IN HALF THE SELECTED RANGE");
+    else pt_editor_sample_result(e,result);
+}
+static void slice_edit(struct pt_editor *e,unsigned op)
+{
+    struct pt_sample *sample;enum pt_edit_result result;size_t index;enum pt_slice_result sliced;
+    if(op==5) {e->slice_pending=0;++e->sample_ui;pt_editor_status(e,"SLICE PROPOSAL CANCELLED - SAMPLE UNCHANGED");return;}
+    if(!sample_range(e))return;
+    sample=&e->project->samples[e->sample-1];
+    if(e->slice_pending && (e->slice_slot!=e->sample || e->slice_generation!=e->sampler.generation))e->slice_pending=0;
+    if(op==4) {
+        if(!e->slice_pending) {pt_editor_status(e,"NO SLICE PROPOSAL TO APPLY");return;}
+        result=pt_sampler_slices(&e->sampler,e->project,&e->history,e->sample-1,e->slice_markers,e->slice_count);
+        if(result==PT_EDIT_OK) {e->slice_pending=0;pt_editor_status(e,"SLICE MARKERS APPLIED - CONTROL-Z TO UNDO");}
+        else if(result==PT_EDIT_UNSUPPORTED || result==PT_EDIT_CONFLICT)pt_editor_status(e,"SLICE CHANGE WOULD RETARGET PATTERN NOTES - REFUSED");
+        else pt_editor_sample_result(e,result);
+        ++e->sample_ui;return;
+    }
+    if(op==3) {
+        struct pt_slice_options options;
+        options.minimum_spacing=(uint32_t)((uint64_t)sample->pcm.rate*e->slice_gap_ms/1000);
+        if(!options.minimum_spacing)options.minimum_spacing=1;
+        options.zero_radius=e->slice_zero?32:0;options.threshold_per_mille=(uint16_t)e->slice_threshold;options.envelope_shift=4;
+        sliced=pt_auto_slice(&sample->pcm,&options,e->slice_markers,4096,&e->slice_count);
+        if(sliced!=PT_SLICE_OK) {pt_editor_status(e,"AUTO SLICE REFUSED - INCREASE GAP OR THRESHOLD");return;}
+    } else {
+        if(!e->slice_pending) {
+            e->slice_count=sample->slice_count;
+            if(e->slice_count)memcpy(e->slice_markers,sample->slices,e->slice_count*sizeof(uint32_t));
+        }
+        if(op==0) {
+            if(pt_slice_insert(sample->pcm.frames,e->slice_markers,&e->slice_count,4096,e->sample_start)!=PT_SLICE_OK) {pt_editor_status(e,"SLICE MARKER LIMIT - NO CHANGE");return;}
+        } else if(op==1) {
+            for(index=0;index<e->slice_count && e->slice_markers[index]<=e->sample_start;++index) {}
+            if(!index) {pt_editor_status(e,"NO MARKER AT OR BEFORE RANGE START");return;}
+            (void)pt_slice_remove(sample->pcm.frames,e->slice_markers,&e->slice_count,index-1);
+        } else e->slice_count=0;
+    }
+    e->slice_pending=1;e->slice_slot=e->sample;e->slice_generation=e->sampler.generation;++e->sample_ui;
+    pt_editor_status(e,"SLICE PROPOSAL: EDIT MARKERS THEN APPLY; PCM UNCHANGED");
+}
+static void sample_setting(struct pt_editor *e,unsigned setting,int direction)
+{
+    if(setting==0) {
+        if(direction<0 && e->loop_fade>1)e->loop_fade/=2;
+        if(direction>0 && e->loop_fade<65536)e->loop_fade*=2;
+    } else if(setting==1) {
+        if(direction<0 && e->slice_threshold>50)e->slice_threshold-=50;
+        if(direction>0 && e->slice_threshold<1000)e->slice_threshold+=50;
+    } else if(setting==2) {
+        if(direction<0 && e->slice_gap_ms>10)e->slice_gap_ms-=10;
+        if(direction>0 && e->slice_gap_ms<1000)e->slice_gap_ms+=10;
+    } else e->slice_zero^=1;
+    ++e->sample_ui;
+    pt_editor_status(e,setting==0?"FADE LENGTH IN FRAMES; BAKE USES SELECTED RANGE":"AUTO OPTIONS CHANGED - RUN AUTO TO GENERATE PROPOSAL");
+}
 int pt_editor_init(struct pt_editor *e,struct pt_project *p)
 {
     if(!e || pt_project_validate(p,NULL)!=PT_PROJECT_OK)return 0;
     memset(e,0,sizeof(*e));e->project=p;e->sample=p->sample_count?1:0;e->octave=1;e->new_channels=p->channels.count;
     if(pt_pattern_history_init(&e->history,p,e->commands,128,e->changes,2048)!=PT_EDIT_OK)return 0;
     {struct pt_allocator a={NULL,sample_allocate,sample_release};pt_sampler_init(&e->sampler,&a,32UL*1024*1024);}
+    e->loop_fade=32;e->slice_threshold=500;e->slice_gap_ms=50;e->slice_zero=1;
     pt_editor_sample_all(e);
     e->clipboard.events=e->clipboard_events;e->clipboard.capacity=1024;
     pt_editor_status(e,"READY - F8 PLAY / F9 PATTERN / F10 STOP");return 1;
@@ -202,11 +291,11 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
     if(e->panel==3 && raw==0x44)return request_new(e);
     if(e->new_pending)pt_editor_status(e,"NEW SONG CANCELLED - EDITS PRESERVED");
     e->new_pending=0;
-    if((qualifier&8) && raw==0x18) {if((qualifier&3) && e->panel==5) {e->load_pending=0;e->quit_pending=0;return PT_UI_SAMPLE_LOAD;}return request_load(e);}
+    if((qualifier&8) && raw==0x18) {if((qualifier&3) && e->panel>=5) {e->load_pending=0;e->quit_pending=0;return PT_UI_SAMPLE_LOAD;}return request_load(e);}
     if(e->load_pending)pt_editor_status(e,"LOAD CANCELLED - EDITS PRESERVED");
     e->load_pending=0;
     if(raw==0x45 && e->panel==3) {e->panel=0;pt_editor_status(e,"NEW SONG CANCELLED - EDITS PRESERVED");return PT_UI_NONE;}
-    if(raw==0x45 && (e->panel==4 || e->panel==5)) {e->panel=0;pt_editor_status(e,"SETTINGS CLOSED");return PT_UI_NONE;}
+    if(raw==0x45 && (e->panel==4 || e->panel>=5)) {e->panel=0;pt_editor_status(e,"SETTINGS CLOSED");return PT_UI_NONE;}
     if(raw==0x45)return quit(e);
     e->quit_pending=0;
     if(e->panel==3) {
@@ -221,9 +310,9 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
         else if(raw==0x36)new_panel(e); /* Control-N */
         else if(raw==0x37 && (qualifier&3))return PT_UI_EXPORT_MOD;
         else if(raw==0x13) {if(e->panel==4)e->panel=0;else channel_panel(e);} /* Control-R */
-        else if(raw==0x28) {if(e->panel==5)e->panel=0;else sampler_panel(e);} /* Control-L */
-        else if(e->panel==5 && raw==0x20) {pt_editor_sample_all(e);pt_editor_status(e,"WHOLE SAMPLE SELECTED");}
-        else if(e->panel==4 || e->panel==5)return PT_UI_NONE;
+        else if(raw==0x28) {if(e->panel>=5)e->panel=0;else sampler_panel(e);} /* Control-L */
+        else if(e->panel>=5 && raw==0x20) {pt_editor_sample_all(e);pt_editor_status(e,"WHOLE SAMPLE SELECTED");}
+        else if(e->panel==4 || e->panel>=5)return PT_UI_NONE;
         else if(raw==0x12)e->panel=e->panel==1?0:1; /* Control-E */
         else if(raw==0x35)mark(e); /* Control-B */
         else if(raw==0x20)select_all(e);
@@ -234,8 +323,30 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
         else if(raw==0x0c)block_edit(e,3);
         return PT_UI_NONE;
     }
-    if(e->panel==5) {
+    if(e->panel>=5) {
         if(raw==0x0b || raw==0x0c) {if(raw==0x0b && e->sample>1)--e->sample;else if(raw==0x0c && e->sample<p->sample_count)++e->sample;pt_editor_sample_all(e);}
+        else if(raw==0x42)sample_tab(e,e->panel==7?5:e->panel+1);
+        else if(raw==0x20) {pt_editor_sample_all(e);pt_editor_status(e,"WHOLE SAMPLE SELECTED");}
+        else if(raw==0x57 || raw==0x44)return PT_UI_AUDITION;
+        else if(raw==0x59 || raw==0x40)return PT_UI_STOP;
+        else if(e->panel==6) {
+            if(raw==0x23)loop_edit(e,PT_LOOP_FORWARD);
+            else if(raw==0x19)loop_edit(e,PT_LOOP_PINGPONG);
+            else if(raw==0x18)loop_edit(e,PT_LOOP_NONE);
+            else if(raw==0x35)loop_edit(e,PT_LOOP_CROSSFADE);
+            else if(raw==0x16)loop_edit(e,4);
+            else if(raw==0x1a || raw==0x1b)sample_setting(e,0,raw==0x1a?-1:1);
+        } else if(e->panel==7) {
+            if(raw==0x37)slice_edit(e,0);
+            else if(raw==0x22)slice_edit(e,1);
+            else if(raw==0x33)slice_edit(e,2);
+            else if(raw==0x14)slice_edit(e,3);
+            else if(raw==0x19)slice_edit(e,4);
+            else if(raw==0x32)slice_edit(e,5);
+            else if(raw==0x31)sample_setting(e,3,0);
+            else if(raw==0x1a || raw==0x1b)sample_setting(e,1,raw==0x1a?-1:1);
+            else if(raw==0x4c || raw==0x4d)sample_setting(e,2,raw==0x4c?1:-1);
+        }
         else if(raw==0x28)return PT_UI_SAMPLE_LOAD;
         else if(raw==0x11)return PT_UI_SAMPLE_SAVE;
         else if(raw==0x13)sample_edit(e,PT_PCM_REVERSE,0);
@@ -244,9 +355,6 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
         else if(raw==0x17)sample_edit(e,PT_PCM_FADE_IN,0);
         else if(raw==0x18)sample_edit(e,PT_PCM_FADE_OUT,0);
         else if(raw==0x24 || raw==0x25)sample_edit(e,PT_PCM_GAIN,raw==0x24?2000:500);
-        else if(raw==0x20) {pt_editor_sample_all(e);pt_editor_status(e,"WHOLE SAMPLE SELECTED");}
-        else if(raw==0x57 || raw==0x44)return PT_UI_AUDITION;
-        else if(raw==0x59 || raw==0x40)return PT_UI_STOP;
         return PT_UI_NONE;
     }
     if(e->panel==4) {
@@ -328,15 +436,30 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
         } else if(x>=414 && x<599 && y>=59 && y<97) {e->panel=0;pt_editor_status(e,"NEW SONG CANCELLED - EDITS PRESERVED");}
         return PT_UI_NONE;
     }
-    if(e->panel==5 && x>=230 && x<599 && y>=2 && y<97) {
+    if(e->panel>=5 && x>=230 && x<599 && y>=2 && y<97) {
         r=(unsigned)(y-PT_EDITOR_CONTROL_Y)/PT_EDITOR_CONTROL_HEIGHT;c=(unsigned)(x-230)/123;
+        if(r==0) {sample_tab(e,5+c);return PT_UI_NONE;}
+        if(e->panel==6) {
+            if(r==1)loop_edit(e,c==0?PT_LOOP_FORWARD:c==1?PT_LOOP_PINGPONG:PT_LOOP_NONE);
+            else if(r==2 && c!=1)sample_setting(e,0,c==0?-1:1);
+            else if(r==3) {if(c==2)e->panel=0;else loop_edit(e,c==0?PT_LOOP_CROSSFADE:4);}
+            else if(r==4) {if(c==0)pt_editor_sample_all(e);else undo(e,c==1?-1:1);}
+            return PT_UI_NONE;
+        }
+        if(e->panel==7) {
+            if(r==1)slice_edit(e,c);
+            else if(r==2)slice_edit(e,3+c);
+            else if(r==3 && c!=1)sample_setting(e,1,c==0?-1:1);
+            else if(r==4)sample_setting(e,c==1?3:2,c==0?-1:1);
+            return PT_UI_NONE;
+        }
         if(r==1)return c==0?PT_UI_SAMPLE_LOAD:c==1?PT_UI_SAMPLE_SAVE:PT_UI_AUDITION;
         if(r==2)sample_edit(e,c==0?PT_PCM_REVERSE:c==1?PT_PCM_NORMALIZE:PT_PCM_REMOVE_DC,0);
         if(r==3) {if(c==2)e->panel=0;else sample_edit(e,PT_PCM_GAIN,c==0?500:2000);}
         if(r==4) {if(c==2) {pt_editor_sample_all(e);pt_editor_status(e,"WHOLE SAMPLE SELECTED");}else sample_edit(e,c==0?PT_PCM_FADE_IN:PT_PCM_FADE_OUT,0);}
         return PT_UI_NONE;
     }
-    if(e->panel==5 && y>=PT_EDITOR_HEADER_Y && y<PT_EDITOR_BOTTOM_Y) {
+    if(e->panel>=5 && y>=PT_EDITOR_HEADER_Y && y<PT_EDITOR_BOTTOM_Y) {
         if(e->sample && e->sample<=e->project->sample_count && x>=10 && x<630 && y>=254 && y<470) {
             uint32_t frames=e->project->samples[e->sample-1].pcm.frames;
             uint32_t point=(uint32_t)((uint64_t)(x-10)*frames/619);

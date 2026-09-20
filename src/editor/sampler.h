@@ -2,6 +2,7 @@
 #define PT_SAMPLER_H
 #include "pattern.h"
 #include "document.h"
+#include "slices.h"
 struct pt_sample_version;
 struct pt_sampler {
     struct pt_sample_version *current[PT_PROJECT_SAMPLES];
@@ -15,4 +16,9 @@ void pt_sampler_init(struct pt_sampler *,const struct pt_allocator *,size_t);
 void pt_sampler_release(struct pt_sampler *);
 enum pt_edit_result pt_sampler_import(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,const uint8_t *,size_t,const char *);
 enum pt_edit_result pt_sampler_edit(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,enum pt_pcm_edit,uint32_t,uint32_t,unsigned);
+/* Loop metadata and baked crossfade are each a single shared undo command.
+   Baking produces a forward loop with the consumed head skipped. */
+enum pt_edit_result pt_sampler_loop(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,enum pt_loop_kind,uint32_t,uint32_t,uint32_t);
+/* Replace non-destructive markers. Never silently retarget a referenced ordinal. */
+enum pt_edit_result pt_sampler_slices(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,const uint32_t *,size_t);
 #endif

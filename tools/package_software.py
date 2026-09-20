@@ -58,6 +58,11 @@ In SAMPLER: L load, W export WAV, R reverse, N normalize, D DC removal, G/H gain
 x2 or /2, I/O fades, A all. Two clicks select a frame range. Control-S saves the
 project. High-resolution samples retain their precision; Paula audition requires
 compatible classic samples. Sample changes stop the old playback snapshot.
+Tab cycles SAMPLER/LOOPS/SLICES. LOOPS: F forward, P pingpong, O off, B bake
+crossfade, U select loop, [/] fade length. SLICES: M add range start, D delete,
+C clear, T auto proposal, P apply, X cancel; [/] threshold, up/down gap, Z zero
+crossing. Proposals do not change the project until applied. Loop/slice edits
+share undo and persist in PTG. Pingpong and slice-trigger playback remain pending.
 Mixed AmiGUS/MIDI replay and other unfinished controls remain unavailable.
 PT24GConvert inspects projects and performs strict lossless MOD/project conversion.
 This is not the finished sixteen-channel tracker or a hardware-qualified release.

@@ -1,0 +1,20 @@
+2026-09-20: AmiConnect explicitly released its private simulator after guarded
+QUIT and process/disk/socket checks. ProTracker freshly verified no Amiberry
+process, no local/baseline.hdf holder and SOCKET_ABSENT before starting.
+
+Reserved ProTracker isolated baseline only:
+loops1789888704489860000 — PASS, 144.769 seconds
+sampler1789888878388321000 — PASS, 138.217 seconds
+PT24GEdit SHA256 4d5bcad0af17d37e483f0f868370cc5f5310996d66b077aac63e64d1acc297c4
+PTSamplerTest SHA256 4dc6a3cf6f885bba512990a8537d0ff7fc6ea3e78f105d71584c1e0d035b2376
+
+Both harnesses restored the private launch script and issued guarded QUIT through
+Emulator(), which requires exact Config=ProTracker isolated baseline. Both
+launcher processes completed. Fresh checks between runs and after the final run:
+ps ax -o pid=,comm= | rg '/Amiberry$|/amiberry$' — no match
+lsof local/baseline.hdf — no holder
+/tmp/amiberry.sock — SOCKET_ABSENT
+
+Explicit release sent to AmiConnect thread
+01a02122-c34e-72f0-95cc-e36ce3d73629 after the final checks.
+No physical A1200/AmiGUS device was controlled. No further emulator reservation.

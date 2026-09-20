@@ -342,6 +342,19 @@ static void render_controls(struct pt_editor *e)
     assert(pt_editor_key(e,0x16,0)==PT_UI_BOUNCE && pt_editor_click(e,400,70)==PT_UI_BOUNCE);
     assert(pt_editor_key(e,0x21,0)==PT_UI_STEMS && pt_editor_click(e,500,70)==PT_UI_STEMS);
     assert(!e->render_groups);pt_editor_key(e,0x18,0);assert(e->render_groups);pt_editor_click(e,400,85);assert(!e->render_groups);
+    {
+        struct pt_editor_selection previous=e->selection;unsigned pattern=e->pattern;
+        memset(&e->selection,0,sizeof(e->selection));pt_editor_key(e,0x12,0);assert(!e->render_range);
+        e->selection.active=1;e->selection.pattern=pattern+1;e->selection.r0=8;e->selection.r1=16;e->selection.c0=1;e->selection.c1=3;
+        pt_editor_key(e,0x12,0);assert(!e->render_range);
+        e->selection.pattern=pattern;e->render_lead_in=1;pt_editor_click(e,500,10);
+        pt_editor_render_options(e,&o);assert(o.row_range && o.row_first==8 && o.row_end==16 && o.tracks==6 && o.pattern_only && !o.include_lead_in);
+        pt_editor_key(e,0x28,0);assert(!e->render_lead_in);
+        memset(&e->selection,0,sizeof(e->selection));pt_editor_render_options(e,&o);assert(o.row_end==16); /* Frozen selection. */
+        ++e->pattern;pt_editor_render_options(e,&o);assert(o.row_range && !o.row_end);e->pattern=pattern;
+        pt_editor_key(e,0x12,0);assert(!e->render_range);pt_editor_key(e,0x19,0);assert(!e->render_pattern);
+        e->selection=previous;pt_editor_key(e,0x20,0);
+    }
     assert(pt_editor_key(e,0x59,0)==PT_UI_STOP && pt_editor_key(e,0x40,0)==PT_UI_STOP);
     pt_editor_key(e,0x4c,0x10);pt_editor_key(e,0x31,0);pt_editor_click(e,200,88);
     assert(e->history.revision==revision && pt_editor_dirty(e)==dirty && e->sample==sample && e->row==row);

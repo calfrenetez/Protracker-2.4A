@@ -235,14 +235,31 @@ static void render_panel(struct pt_editor *e)
 static void render_setting(struct pt_editor *e,unsigned setting)
 {
     uint16_t all=(uint16_t)((1UL<<e->project->channels.count)-1);
-    if(setting==0)e->render_pattern^=1;
+    if(setting==0) {e->render_pattern^=1;e->render_range=0;}
     else if(setting==1) {number_begin(e,9);return;}
     else if(setting==2)e->render_rate=e->render_rate==48000?44100:48000;
     else if(setting==3)e->render_bits=e->render_bits==24?16:24;
     else if(setting==4)e->render_gain=e->render_gain==32768?65536:e->render_gain==65536?16384:32768;
-    else if(setting==5)e->render_lead_in^=1;
+    else if(setting==5) {
+        if(e->render_range) {pt_editor_status(e,"ROW RANGE: LEAD IN OFF");return;}
+        e->render_lead_in^=1;
+    }
     else if(setting==6)e->render_tracks=all;
     else if(setting==9)e->render_groups^=1;
+    else if(setting==10) {
+        struct pt_editor_selection selection;
+        if(e->render_range)e->render_range=0;
+        else {
+            if(!pt_editor_selection(e,&selection) || selection.r0>=selection.r1 || selection.r1>64 ||
+               selection.c0>=selection.c1 || selection.c1>e->project->channels.count) {
+                pt_editor_status(e,"MARK A BLOCK HERE FIRST");return;
+            }
+            e->render_range=1;e->render_pattern=1;e->render_lead_in=0;
+            e->render_first=selection.r0;e->render_end=selection.r1;e->render_range_pattern=e->pattern;
+            e->render_tracks=(uint16_t)(((1UL<<selection.c1)-1)^((1UL<<selection.c0)-1));
+            ++e->sample_ui;pt_editor_status(e,"MARKED ROWS READY");return;
+        }
+    }
     else if(setting==7)e->render_tracks=(uint16_t)(1U<<e->project->channels.selected);
     else e->render_tracks=e->render_tracks==all?(uint16_t)(1U<<e->project->channels.selected):all;
     ++e->sample_ui;pt_editor_status(e,"RENDER SETTINGS UPDATED");
@@ -252,6 +269,10 @@ void pt_editor_render_options(const struct pt_editor *e,struct pt_render_options
     memset(o,0,sizeof(*o));o->rate=e->render_rate;o->bits=(uint8_t)e->render_bits;
     o->gain_q16=e->render_gain;o->tracks=e->render_tracks;o->pattern=(uint16_t)e->pattern;
     o->pattern_only=(uint8_t)e->render_pattern;o->include_lead_in=(uint8_t)e->render_lead_in;
+    if(e->render_range) {
+        o->row_range=1;o->row_first=(uint8_t)e->render_first;
+        o->row_end=e->render_range_pattern==e->pattern?(uint8_t)e->render_end:0;
+    }
     o->tick_limit=1000000;o->frame_limit=(uint64_t)o->rate*30*60;
 }
 static void name_begin(struct pt_editor *e,unsigned kind)
@@ -657,6 +678,7 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
         else if(raw==0x20)render_setting(e,6);
         else if(raw==0x14)render_setting(e,7);
         else if(raw==0x18)render_setting(e,9);
+        else if(raw==0x12)render_setting(e,10);
         else if(raw==0x21)return PT_UI_STEMS;
         else if(raw==0x16)return PT_UI_BOUNCE;
         else if(raw==0x11 || raw==0x44)return PT_UI_RENDER;
@@ -847,6 +869,7 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
     if(e->load_pending)pt_editor_status(e,"LOAD CANCELLED - EDITS PRESERVED");
     e->load_pending=0;
     if(e->panel==2 && e->render_details) {
+        if(x>=476 && x<599 && y>=2 && y<21) {render_setting(e,10);return PT_UI_NONE;}
         if(x>=230 && x<599 && y>=21 && y<97) {
             r=(unsigned)(y-2)/19;c=(unsigned)(x-230)/123;
             if(r==1)render_setting(e,c==0?0:c==1?1:8);

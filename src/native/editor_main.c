@@ -212,6 +212,7 @@ static int render_progress(void *context,enum pt_render_phase phase,uint32_t tic
 static const char *render_error(enum pt_render_result result)
 {
     switch(result) {
+    case PT_RENDER_EMPTY_RANGE:return "NO SELECTED ROWS REACHED - NOTHING RENDERED";
     case PT_RENDER_ROUTE:return "WAV REFUSED: SELECTED MIDI TRACK NEEDS SUPPLIED AUDIO";
     case PT_RENDER_EFFECT:return "WAV REFUSED: NOTE OR EFFECT NOT SUPPORTED BY REFERENCE RENDERER";
     case PT_RENDER_SAMPLE:return "WAV REFUSED: SAMPLE FORMAT OR LOOP NOT SUPPORTED";
@@ -274,7 +275,8 @@ static void bounce_sample(struct conversion_ui *display,struct pt_paula *audio)
     if(detail!=PT_RENDER_OK)result=detail==PT_RENDER_CANCELLED?PT_EDIT_CANCELLED:PT_EDIT_UNSUPPORTED;
     else {
         ui.total=plan.frames;
-        if(options.pattern_only)snprintf(name,sizeof(name),"BOUNCE PATTERN %03u",options.pattern);
+        if(options.row_range)snprintf(name,sizeof(name),"BOUNCE ROWS %02X-%02X",options.row_first,options.row_end-1);
+        else if(options.pattern_only)snprintf(name,sizeof(name),"BOUNCE PATTERN %03u",options.pattern);
         else strcpy(name,"BOUNCE SONG");
         result=pt_sampler_bounce(&e->sampler,e->project,&e->history,&options,name,render_progress,&ui,&report,&detail);
     }

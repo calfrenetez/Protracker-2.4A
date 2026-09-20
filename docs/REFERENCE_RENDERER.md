@@ -40,7 +40,8 @@ The main tracker layout is unchanged.
 
 | Control | Key | Meaning |
 | --- | --- | --- |
-| SONG / PATTERN | P | Full song from order zero, or the current pattern |
+| SONG / PATTERN | P | Full song from order zero, or the current pattern; clears marked-row mode |
+| MARKED ROWS | E | Snapshot marked rows/tracks from the current pattern |
 | TRACKS | M | Nonzero hexadecimal mask of available tracks |
 | ALL / ONE | A / T | All tracks, or the currently selected track |
 | 44.1 / 48 KHZ | R | Output rate |
@@ -388,8 +389,7 @@ PT24GRender input.ptg rows.wav --pattern 0 --from-row 8 --to-row 16
 Row arguments are decimal; the interval includes row8 and excludes row16.
 `--from-row` alone defaults the end to64; `--to-row` alone starts at0.
 Bounds require0 <= first < end <=64, explicit pattern mode and no lead-in.
-These options also apply to CLI stems. Native editor selection controls and
-selected-range sample-bounce integration remain pending.
+These options also apply to CLI stems. The native render panel also supports marked-row WAV, stem and sample-bounce output.
 
 Playback pre-rolls from row0, advancing samples and effects before retaining any
 output. Capture begins at the first fetched row within the interval, preserving
@@ -403,3 +403,20 @@ Pre-roll consumes the normal tick/frame budget and remains cancellable, while
 reported output frames and clipping count only the captured interval. Preflight
 still checks the entire selected pattern, including unused later rows. Source
 patterns are immutable; this is a timed excerpt, not a rewritten pattern.
+
+## Editor marked rows (dev52)
+
+Mark a block in the pattern editor (Control-B, then move the cursor). Open
+RENDER WAV and press E or click MARKED ROWS. The panel snapshots the normalized
+half-open rows and tracks, switches to pattern scope and turns lead-in off.
+Its heading displays the inclusive hexadecimal row bounds. The track mask can
+then be refined using M, A or T. WAV FILE, STEMS and NEW SAMPLE all use this same
+selection and state-preserving pre-roll. Bounced samples are named for the rows.
+
+A missing selection or one from another pattern is refused without changing
+settings. Cursor/mark movement after activation does not change the snapshot.
+Changing to a different pattern makes the stored range invalid rather than
+silently exporting different content. E disables range mode; P switches normal
+song/pattern scope and clears it. Lead-in cannot be enabled while range mode is
+active. Settings consume no undo history; a completed bounce remains one shared
+undo step, and a cancelled bounce preserves the redo branch.

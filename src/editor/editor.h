@@ -26,6 +26,7 @@ struct pt_editor {
     unsigned render_details,render_pattern,render_bits,render_lead_in,render_groups;
     uint32_t render_rate,render_gain;
     uint16_t render_tracks;
+    unsigned render_range,render_first,render_end,render_range_pattern;
     unsigned sample_range_slot,sample_marking;
     uint32_t sample_start,sample_end,sample_anchor;
     uint32_t wave_start,wave_end,wave_frames;

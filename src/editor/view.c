@@ -395,7 +395,9 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
         for(r=0;r<3;++r)for(i=0;i<3;++i)label(c,font,230+(int)i*123,21+(int)r*19,123,19,ops[r][i],r==0 && i==2 && e->selection.active);
         label(c,font,230,78,123,19,"UNMARK",0);label(c,font,353,78,123,19,"BACK",0);label(c,font,476,78,123,19,"NOTE",0);
     } else if(e->panel==2 && e->render_details) {
-        label(c,font,230,2,369,19,"REFERENCE WAV",0);
+        if(e->render_range)snprintf(s,sizeof(s),"ROWS %02X-%02X",e->render_first,e->render_end-1);
+        else snprintf(s,sizeof(s),"REFERENCE WAV");
+        label(c,font,230,2,246,19,s,0);label(c,font,476,2,123,19,"MARKED ROWS",e->render_range);
         snprintf(s,sizeof(s),e->render_pattern?"PATTERN %03u":"SONG",e->pattern);label(c,font,230,21,123,19,s,e->render_pattern);
         if(e->number_field==9)snprintf(s,sizeof(s),"%s",e->number_text);
         else snprintf(s,sizeof(s),"TRACKS %04X",e->render_tracks);

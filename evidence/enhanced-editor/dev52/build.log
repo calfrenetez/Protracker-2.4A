@@ -1,0 +1,237 @@
+python3 tools/build_core_tests.py
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        5700 bytes
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        5888 bytes
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        6416 bytes
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        6792 bytes
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        6512 bytes
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+Harness(acrx2):	         874 bytes
+PTGGuard(acrx2):	         518 bytes
+PTGGuardData(aurw1):	        2108 bytes
+{
+  "PT24GEdit": {
+    "sha256": "4beb0996ca0fd7ea9d602ba301cab095f1ef1dbf2605bac9d8b538b2de4679f7",
+    "bytes": 194656
+  },
+  "PTPaulaTest": {
+    "sha256": "31fe3c93c324cd5d261d4d95b5ece8a98602e60ae1d81c8b34532d6b428bc8a8",
+    "bytes": 65548
+  },
+  "PTViewBench": {
+    "sha256": "6c9caf6fbd29a55ca0f0fe69bd820cf17ef7f74def4f6e19e13822ee245371e0",
+    "bytes": 141236
+  },
+  "PTSlotsTest": {
+    "sha256": "b0791bdcfec7ebfe501d4cea234582ea25e904a116b65f9f0874d803253eeab0",
+    "bytes": 123204
+  },
+  "PTSongTest": {
+    "sha256": "8dc351a1a815695705050326a2c85d41ec1bff6c2e12e592d6ba0f9ae1c5df6f",
+    "bytes": 127060
+  },
+  "PTSourceTest": {
+    "sha256": "23368263f993676d5ce2583be88876f20a2e6dac7e6ca4aad1306d6ec2e78916",
+    "bytes": 125136
+  },
+  "PTNoteSliceTest": {
+    "sha256": "9b9aecf098c490a70b8308a97cf6b3554529dfc927d438795de546eaeb87c8bc",
+    "bytes": 123116
+  },
+  "PTSamplerTest": {
+    "sha256": "efbb22c1db6f4342b509b235a8cdeef10dc5afd2fe70bdfd8368cc07480537fc",
+    "bytes": 107864
+  },
+  "PTSampleAttributesTest": {
+    "sha256": "18c103905ad6f6ff56dc7633979d99c19e8ebd9c3d28d543865d0413feed1535",
+    "bytes": 88076
+  },
+  "PTPp20Test": {
+    "sha256": "799c38d0e9162182b327799fa5ccb83c2ae4840aaa189301854ee0119d0ba2d1",
+    "bytes": 48096
+  },
+  "PTRawTest": {
+    "sha256": "95ae56a333a6b79132c0eef1e8c3fbf85caa9e532c44fc318602adab92d079ef",
+    "bytes": 27788
+  },
+  "PTSvxTest": {
+    "sha256": "93c829b259e9f351948b99a7d36d891c6a94b75813f085d801d9403eafca8c77",
+    "bytes": 31436
+  },
+  "PTFilterTest": {
+    "sha256": "935dbb58f9f01b288fbaf0f81767eebdfd5c2e6b0cb98d97e6223ea21cfe9458",
+    "bytes": 47284
+  },
+  "PTMidiTest": {
+    "sha256": "bb7789471bdb8cebb4539bc5f499fb5f9d3ae64eb062470e1ddad4dd40f8de45",
+    "bytes": 19884
+  },
+  "PTRecordTest": {
+    "sha256": "43bbb41c352ee7b18691186b5f5bc44cc2d6a0f2fc49dc60c25ee3bb7ee99ab9",
+    "bytes": 46504
+  },
+  "PTPatternTest": {
+    "sha256": "07180c7d8997fe68ae4cad488ebae361f14ea932aba367b86976f6c9fccd0576",
+    "bytes": 51572
+  },
+  "PTSlicesTest": {
+    "sha256": "f4c7af9ef24fafcfe8ebdbe5fd20026f75f2d32524109010e6509fa0c38e1296",
+    "bytes": 29348
+  },
+  "PTFileSafetyTest": {
+    "sha256": "f1be65564a0782b2d214232e06a682d54dc886fe379452d36dc56ca1e024b33b",
+    "bytes": 16388
+  },
+  "PTProjectTest": {
+    "sha256": "45b75a21ec240222f78a02a06e763403bd2419bd8b1cafbbdc53d9c674bf2ae2",
+    "bytes": 40632
+  },
+  "PTModProjectTest": {
+    "sha256": "fc0e9d2963112c45a200ee60d4e4281857fd94b6cdd6334ffe40ccee8dc9a6df",
+    "bytes": 45776
+  },
+  "PTDocumentTest": {
+    "sha256": "f8187a5316bc5ec2ad25b728f62a58e9b6b5d8b130980f826c1fca91e159d380",
+    "bytes": 53152
+  },
+  "PT24GConvert": {
+    "sha256": "8c6568aed1de05eeb8f784f2faaee988a2b42d87dccd12662dacde2ed1ddf8fd",
+    "bytes": 50544
+  },
+  "PTEditorClick": {
+    "sha256": "b265c06a53667722f1e71cfae23c6adf48604d343747bef4a4a6df40981c8540",
+    "bytes": 16356
+  },
+  "PTInputProbe": {
+    "sha256": "53cacd4c767cf8f37c257118154968c8055b5ebdefedb1ac01f7b79d348805c0",
+    "bytes": 14664
+  },
+  "PTChannelsTest": {
+    "sha256": "6ffb1ff65dc031246024b2f2fa82197ce6b6d9c93e329102c6c2e65020c4f76f",
+    "bytes": 17364
+  },
+  "PTPcmTest": {
+    "sha256": "d814a690129b307d79321905390263977517f98b8a5943a276ec54fd15756f03",
+    "bytes": 33012
+  },
+  "PTFlowTraceTest": {
+    "sha256": "dc22e06080076c08042b2cf1c09b4aee0e8ec9f329263d4d49ae15a11d080b53",
+    "bytes": 60148
+  },
+  "PTPitchTraceTest": {
+    "sha256": "0417460e44bc436b7bca0547f75af8b90c05fe57fb29e52235e257a87f85b6fa",
+    "bytes": 60764
+  },
+  "PTSampleTraceTest": {
+    "sha256": "79fac7cf4bf97ac61966a1fd0d2af960efa76ea4e50d58a1191cab4bf1eb79ee",
+    "bytes": 61208
+  },
+  "PTVolumeTraceTest": {
+    "sha256": "c209f8099fe33a25d9352237b861735738e4ccac4ad40cbf79a6303925e71ba3",
+    "bytes": 60860
+  },
+  "PTPitchTest": {
+    "sha256": "8bb9e56e6ef37931d26eaf21ecdcb6401688078c0e266090a0d8ad900fa02c11",
+    "bytes": 55400
+  },
+  "PTFlowCoreTest": {
+    "sha256": "8d6d90b7afdbe093c09dedff4c5ec1e52ae91d88947d1144cf468ec39cfee8ae",
+    "bytes": 54988
+  },
+  "PTStemsTest": {
+    "sha256": "37963201adfee5b2fc501221ebd8c3ff58308b99f92397ba9e175e70706aff16",
+    "bytes": 15676
+  },
+  "PTFrameClockTest": {
+    "sha256": "f54baa7615502790abec33b2f805e038e560bd04b6656e94972a947fb0d97829",
+    "bytes": 23636
+  },
+  "PTTimelineTest": {
+    "sha256": "9dfa68b65d122d2245aa85532f2ec078ca526108bf0ad42d170bcd1385e6394c",
+    "bytes": 38316
+  },
+  "PTVoiceSegmentTest": {
+    "sha256": "57d1f408466fd080cd96c44506815ba42f965c2b5c102c6fadf11fb0f18860b8",
+    "bytes": 32216
+  },
+  "PTVoiceTest": {
+    "sha256": "afc6626ac6042563f0ac60aa38b0a3e618ddffd6cb61fc88bfa0a6bacb85b9a3",
+    "bytes": 37096
+  },
+  "PTBounceTest": {
+    "sha256": "2a7f4be768c5fae954c81aebbd7e87190fa39c25d8d0bc8fe9f38eec1e2edbe6",
+    "bytes": 104376
+  },
+  "PTTremoloRenderTest": {
+    "sha256": "eec9d85b09e6f4eb7deefbd11a3bdcac9f49141c2cd907166c432efcc3bba0cd",
+    "bytes": 65392
+  },
+  "PTOffsetRenderTest": {
+    "sha256": "be9d3787edc1c1961f7142e92694455a0c67f65f496cfd5e650b3d8292f52be5",
+    "bytes": 68824
+  },
+  "PTPortaRenderTest": {
+    "sha256": "968b79fceb0d5bda79418eee9f826d1e1bc8181ddbfc8df174eff1b6260aeb50",
+    "bytes": 68596
+  },
+  "PTPitchRenderTest": {
+    "sha256": "5ae8de61a12edcd7a09bbe661fe69666672dcc832a018e570b00bd2403935bca",
+    "bytes": 65832
+  },
+  "PTVolumeRenderTest": {
+    "sha256": "eb0109edd3e45301423c3335599dc3d3aa56690fdd51c181b6c950fb61a43e12",
+    "bytes": 66668
+  },
+  "PTRangeRenderTest": {
+    "sha256": "c6b8422b461ce5da137b15cdcb668821b57da37c7aea8853453effde78662b55",
+    "bytes": 50224
+  },
+  "PTRenderTest": {
+    "sha256": "e91ec0cc91e40012e790abee31f1e447b78949b513c5dd81181354069bffc140",
+    "bytes": 53452
+  },
+  "PTStemFileTest": {
+    "sha256": "0b928940b90500723c67b3cff03c5e7367d9f7c2e059e030d7a2c96fc7be3649",
+    "bytes": 60380
+  },
+  "PTRenderFileTest": {
+    "sha256": "606035ab41861cd1ff71ccb368de9ffb6584010bfe9b02aaca559996b000865e",
+    "bytes": 61584
+  },
+  "PT24GRender": {
+    "sha256": "0cab17a9121cc48de86523ada8e224a92c775c76077c84b8d82c5f9e113c36ca",
+    "bytes": 68856
+  },
+  "PTGuardTest": {
+    "sha256": "908722556a4bc3033b1dcc107b9b8ba28c5dfc44f75195b00336828e0e292a0b",
+    "bytes": 1660
+  }
+}

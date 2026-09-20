@@ -113,7 +113,7 @@ loop, and no slice notes. 900 remembers offsets; native double-application and s
 range behavior are retained. Nonloops stop; source PCM is never rewritten.
 Staged WAV bytes are verified by a second render; existing paths are never replaced.
 Editor: DISK OP. > RENDER WAV or Control-Shift-W. P scope, M track mask, A all, T one,
-R rate, B bits, G gain, L lead-in, W/Return WAV file, U new sample, S stems, O track/group mode. Escape cancels rendering.
+R rate, B bits, G gain, L lead-in, W/Return WAV file, U new sample, S stems, O track/group mode, E marked rows. Escape cancels rendering.
 WAV export preserves project undo/dirty state. NEW SAMPLE / U creates one undoable stereo16/24
 sample at the chosen rate, within the sampler memory budget. Cancellation preserves redo.
 Complete effects, selected-row bounce and batch stems remain unfinished.

@@ -65,13 +65,39 @@ int main(int argc,char **argv)
     assert(pt_mod_export_analyse(p,&report)==PT_PROJECT_OK && !report.issues);encoded=malloc(report.bytes);assert(encoded);
     assert(pt_mod_export_direct(p,encoded,report.bytes,&w)==PT_PROJECT_OK && w==report.bytes);
     assert(pt_document_load(&reopened,encoded,w,SIZE_MAX)==PT_PROJECT_OK && reopened.project.order_count==5 && reopened.project.pattern_count==4 && reopened.project.events[256].pitch==428);free(encoded);
+    /* Position insertion/removal/move keeps every pattern and all note data. */
+    {uint16_t initial[5]={3,1,2,3,1},arranged[5]={1,3,2,3,2};unsigned count;
+        assert(!memcmp(p->orders,initial,sizeof(initial)));second=p->events;
+        fail=calls+1;allocated=live;revision=h.revision;
+        assert(pt_song_insert(&s,p,&h,0,2)==PT_EDIT_CAPACITY && live==allocated && h.revision==revision && p->order_count==5);
+        fail=0;
+        assert(pt_song_insert(&s,p,&h,0,2)==PT_EDIT_OK && p->order_count==6 && p->orders[0]==2 && p->orders[1]==3);
+        assert(pt_song_remove(&s,p,&h,2)==PT_EDIT_OK && p->order_count==5);
+        assert(pt_song_move(&s,p,&h,4,1)==PT_EDIT_OK);
+        assert(pt_song_move(&s,p,&h,0,4)==PT_EDIT_OK && !memcmp(p->orders,arranged,sizeof(arranged)));
+        assert(p->events==second && p->pattern_count==4 && p->events[256].pitch==428);
+        for(i=0;i<4;++i)assert(pt_pattern_undo(p,&h,-1)==PT_EDIT_OK);
+        assert(!memcmp(p->orders,initial,sizeof(initial)));cursor=h.cursor;revision=h.revision;
+        assert(pt_song_move(&s,p,&h,0,0)==PT_EDIT_OK && h.cursor==cursor && h.revision==revision);
+        p->orders[3]=0;assert(pt_pattern_undo(p,&h,1)==PT_EDIT_CONFLICT);p->orders[3]=3;
+        for(i=0;i<4;++i)assert(pt_pattern_undo(p,&h,1)==PT_EDIT_OK);
+        assert(!memcmp(p->orders,arranged,sizeof(arranged)));
+        assert(pt_song_insert(&s,p,&h,6,0)==PT_EDIT_INVALID && pt_song_insert(&s,p,&h,0,4)==PT_EDIT_INVALID);
+        assert(pt_song_remove(&s,p,&h,5)==PT_EDIT_INVALID && pt_song_move(&s,p,&h,5,0)==PT_EDIT_INVALID && pt_song_move(&s,p,&h,0,5)==PT_EDIT_INVALID);
+        while(p->order_count>1)assert(pt_song_remove(&s,p,&h,p->order_count-1)==PT_EDIT_OK);
+        revision=h.revision;count=(unsigned)h.count;
+        assert(pt_song_remove(&s,p,&h,0)==PT_EDIT_UNSUPPORTED && h.revision==revision && h.count==count && p->pattern_count==4);
+        assert(pt_song_insert(&s,p,&h,1,p->orders[0])==PT_EDIT_OK);revision=h.revision;
+        assert(pt_song_move(&s,p,&h,0,1)==PT_EDIT_OK && h.revision==revision);
+        assert(p->events==second && p->events[256].pitch==428);
+    }
     /* Eviction and capacity stay bounded even at the 16-channel maximum. */
     reset(&d,&s,&h,16);
     for(i=1;i<limit;++i) {
         assert(pt_song_append(&s,p,&h,0,1)==PT_EDIT_OK && p->order_count==i+1 && p->pattern_count==i+1);
         assert(s.bytes<6UL*1024*1024 && h.count<=128);
     }
-    if(limit==256)assert(pt_song_append(&s,p,&h,0,1)==PT_EDIT_CAPACITY && pt_song_append(&s,p,&h,0,0)==PT_EDIT_CAPACITY);
+    if(limit==256)assert(pt_song_append(&s,p,&h,0,1)==PT_EDIT_CAPACITY && pt_song_append(&s,p,&h,0,0)==PT_EDIT_CAPACITY && pt_song_insert(&s,p,&h,128,0)==PT_EDIT_CAPACITY);
     kept=limit>128?128:limit-1;
     for(i=0;i<kept;++i)assert(pt_pattern_undo(p,&h,-1)==PT_EDIT_OK);
     assert(p->pattern_count==limit-kept && pt_pattern_undo(p,&h,-1)==PT_EDIT_END);
@@ -99,6 +125,15 @@ int main(int argc,char **argv)
     assert(p->pattern_count==2 && p->order_count==3 && p->orders[2]==0);
     pt_editor_key(e,0x45,0);assert(e->panel==0);
     pt_editor_key(e,0x19,8);assert(e->song_details && e->panel==1);
+    e->position=1;e->pattern=1;
+    pt_editor_key(e,0x17,0);assert(p->order_count==4 && p->orders[1]==1 && e->position==1);
+    pt_editor_key(e,0x4d,1);assert(e->position==2 && p->order_count==4); /* equal adjacent patterns: no-op history, navigation follows */
+    pt_editor_key(e,0x4d,1);assert(e->position==3 && p->orders[2]==0 && p->orders[3]==1);
+    pt_editor_key(e,0x22,0);assert(p->order_count==3 && e->position==2 && e->pattern==0 && p->pattern_count==2);
+    pt_editor_key(e,0x31,8);assert(p->order_count==4 && p->orders[3]==1);
+    pt_editor_key(e,0x37,0);assert(e->song_tools);
+    pt_editor_click(e,500,50);assert(e->position==3); /* MOVE DN */
+    pt_editor_click(e,500,31);assert(p->order_count==3 && e->position==2); /* REMOVE */
     pt_editor_dispose(e);free(e);pt_document_release(&d);pt_document_release(&reopened);assert(!live);
-    puts("SONG PASS: bounded growth, assignments, allocation rollback, mixed note undo, conflicts, eviction, limits, round trips, controller and complete release");return 0;
+    puts("SONG PASS: bounded growth, insert/remove/move, assignments, allocation rollback, mixed note undo, conflicts, eviction, limits, round trips, controller and complete release");return 0;
 }

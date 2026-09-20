@@ -406,7 +406,7 @@ int main(int argc,char **argv)
         struct pt_view_rect areas[PT_VIEW_DIRTY_MAX];unsigned step,p,j,y,x,n;
         static const unsigned actions[]={0x4d,0x4e,0x4f,0x42,0x4c,0x50,0x51,0x52,0x53,0x40,0x31,0x32,0x46,0x0c,0x0b,0x5a,0x5b};
         for(p=0;p<4;++p) {incremental.planes[p]=calloc(1,PT_VIEW_PLANE_BYTES);shown.planes[p]=calloc(1,PT_VIEW_PLANE_BYTES);assert(incremental.planes[p] && shown.planes[p]);}
-        for(step=0;step<252;++step) {
+        for(step=0;step<266;++step) {
             if(step && step<100)pt_editor_key(e,actions[(step-1)%(sizeof(actions)/sizeof(actions[0]))],0);
             if(step==156) {size_t size;uint8_t *bytes=readfile(argv[4],&size);assert(pt_editor_source_load(e,bytes,size)==PT_EDIT_OK);free(bytes);}
             if(step==157)pt_editor_click(e,520,30);
@@ -504,6 +504,20 @@ int main(int argc,char **argv)
             if(step==249)pt_editor_click(e,400,70);
             if(step==250)pt_editor_click(e,250,87);
             if(step==251)pt_editor_click(e,500,50);
+            if(step==252)pt_editor_key(e,0x37,0);
+            if(step==253)pt_editor_key(e,0x17,0);
+            if(step==254)pt_editor_key(e,0x4d,1);
+            if(step==255)pt_editor_key(e,0x22,0);
+            if(step==256)pt_editor_key(e,0x31,8);
+            if(step==257)pt_editor_key(e,0x31,9);
+            if(step==258)pt_editor_click(e,400,31);
+            if(step==259)pt_editor_click(e,400,50);
+            if(step==260)pt_editor_click(e,500,50);
+            if(step==261)pt_editor_click(e,500,31);
+            if(step==262)pt_editor_click(e,500,70);
+            if(step==263)pt_editor_click(e,500,70);
+            if(step==264)pt_editor_key(e,0x45,0);
+            if(step==265)pt_editor_key(e,0x19,8);
             if(step==143) {e->panel=5;pt_editor_key(e,0x32,0);}
             if(step==144)pt_editor_key(e,3,0);
             if(step==145)pt_editor_key(e,0x21,0);

@@ -21,7 +21,7 @@ struct pt_editor {
     struct pt_pattern_history history;
     struct pt_sampler sampler;
     struct pt_song song;
-    unsigned song_details;
+    unsigned song_details,song_tools;
     unsigned sample_range_slot,sample_marking;
     uint32_t sample_start,sample_end,sample_anchor;
     uint32_t wave_start,wave_end,wave_frames;

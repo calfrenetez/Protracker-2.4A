@@ -19,4 +19,9 @@ void pt_song_release(struct pt_song *);
  * pattern and a position referencing it. All share chronological note undo. */
 enum pt_edit_result pt_song_append(struct pt_song *,struct pt_project *,struct pt_pattern_history *,unsigned,int);
 enum pt_edit_result pt_song_assign(struct pt_song *,struct pt_project *,struct pt_pattern_history *,unsigned,unsigned);
+/* Position-only changes retain all patterns and sample data. The last position
+ * cannot be removed. Move uses final destination index, without duplication. */
+enum pt_edit_result pt_song_insert(struct pt_song *,struct pt_project *,struct pt_pattern_history *,unsigned,unsigned);
+enum pt_edit_result pt_song_remove(struct pt_song *,struct pt_project *,struct pt_pattern_history *,unsigned);
+enum pt_edit_result pt_song_move(struct pt_song *,struct pt_project *,struct pt_pattern_history *,unsigned,unsigned);
 #endif

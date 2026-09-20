@@ -49,6 +49,8 @@ LOAD/Control-O opens a MOD/project, including structurally validated PP20 MODs. 
 Starting PT24GEdit without arguments creates a blank song.
 POS ED./Control-P edits positions; A appends a position, N adds a blank pattern.
 Song edits share undo; changed positions stop Paula until Play is restarted.
+POS ED. MORE: I inserts, D removes a position, Shift-Up/Down moves it.
+Removing a position retains all patterns; the last position cannot be removed.
 CLEAR/Control-N creates a new song with 1-16 channels; dirty edits need confirmation.
 EDIT OP./Control-E provides mark/copy/paste/clear/transpose and whole-block undo.
 EDIT OP. > NOTE / Control-I assigns existing sample slices to normal pattern notes:

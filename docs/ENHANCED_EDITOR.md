@@ -593,5 +593,14 @@ to an 8 MiB editor song-storage budget plus original document storage. History
 eviction releases unused versions. Allocation failures preserve project/history.
 
 Position-list changes stop the running Paula snapshot; press Play to restart
-with the new song order. Removing/reordering positions, deleting patterns and
-changing an existing song's channel/sample-slot count are still separate work.
+with the new song order. MORE / M opens position tools. INSERT / I inserts the displayed pattern before
+the selected position; REMOVE / D or Delete removes that position while retaining
+all patterns and samples. At least one position must remain. MOVE UP / MOVE DN
+or Shift-Up / Shift-Down moves the selected position and follows it. Changes are
+single undo commands. Moving equal adjacent patterns preserves redo because the
+song is unchanged. Existing Bxx effect parameters remain numeric position targets;
+arranging positions does not rewrite pattern effects. Loaded songs initially
+show the pattern assigned to position 0.
+
+Deleting patterns and changing an existing song's channel/sample-slot count are
+still separate work.

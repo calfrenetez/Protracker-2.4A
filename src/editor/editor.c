@@ -365,7 +365,7 @@ static void sample_setting(struct pt_editor *e,unsigned setting,int direction)
 int pt_editor_init(struct pt_editor *e,struct pt_project *p)
 {
     if(!e || pt_project_validate(p,NULL)!=PT_PROJECT_OK)return 0;
-    memset(e,0,sizeof(*e));e->project=p;e->sample=p->sample_count?1:0;e->octave=1;e->new_channels=p->channels.count;
+    memset(e,0,sizeof(*e));e->project=p;e->pattern=p->orders[0];e->sample=p->sample_count?1:0;e->octave=1;e->new_channels=p->channels.count;
     if(pt_pattern_history_init(&e->history,p,e->commands,128,e->changes,2048)!=PT_EDIT_OK)return 0;
     {struct pt_allocator a={NULL,sample_allocate,sample_release};pt_sampler_init(&e->sampler,&a,32UL*1024*1024);pt_document_init(&e->sample_source,&a);pt_song_init(&e->song,&a,8UL*1024*1024);}
     e->raw_format=(struct pt_raw_format){8287,8,1,0,0};
@@ -395,7 +395,7 @@ static void undo(struct pt_editor *e,int direction)
     pt_editor_status(e,r==PT_EDIT_OK?(direction<0?"UNDO":"REDO"):r==PT_EDIT_END?"NO MORE HISTORY":"UNDO CONFLICT - EDIT PRESERVED");
 }
 static void song_panel(struct pt_editor *e)
-{e->panel=1;e->song_details=1;e->note_details=0;++e->sample_ui;pt_editor_status(e,"POSITION: ARROWS SELECT / ASSIGN; A ADD POS; N NEW PATTERN");}
+{e->panel=1;e->song_details=1;e->song_tools=0;e->note_details=0;++e->sample_ui;pt_editor_status(e,"POS: ARROWS; A ADD; N NEW; M MORE");}
 static void song_position(struct pt_editor *e,int direction)
 {
     if(direction<0 && e->position)--e->position;
@@ -415,6 +415,24 @@ static void song_edit(struct pt_editor *e,int action)
     }
     pt_editor_status(e,r==PT_EDIT_OK?"SONG UPDATED - CONTROL-Z TO UNDO":r==PT_EDIT_CAPACITY?"SONG OR MEMORY LIMIT - NO CHANGE":"SONG EDIT REFUSED - NO CHANGE");
 }
+static void song_arrange(struct pt_editor *e,unsigned action)
+{
+    unsigned position=e->position,next=position;enum pt_edit_result r;
+    if(action==0)r=pt_song_insert(&e->song,e->project,&e->history,position,e->pattern);
+    else if(action==1)r=pt_song_remove(&e->song,e->project,&e->history,position);
+    else {
+        if((action==2 && !position) || (action==3 && position+1==e->project->order_count)) {pt_editor_status(e,"POSITION LIMIT - NO CHANGE");return;}
+        next=action==2?position-1:position+1;
+        r=pt_song_move(&e->song,e->project,&e->history,position,next);
+    }
+    if(r==PT_EDIT_OK) {
+        e->position=next<e->project->order_count?next:e->project->order_count-1U;
+        e->pattern=e->project->orders[e->position];memset(&e->selection,0,sizeof(e->selection));++e->sample_ui;
+    }
+    pt_editor_status(e,r==PT_EDIT_OK?"POSITIONS UPDATED - CTRL-Z UNDO":r==PT_EDIT_CAPACITY?"SONG OR MEMORY LIMIT - NO CHANGE":r==PT_EDIT_UNSUPPORTED?"KEEP AT LEAST ONE POSITION":"POSITION EDIT REFUSED - NO CHANGE");
+}
+static void song_tools(struct pt_editor *e)
+{e->song_tools=!e->song_tools;++e->sample_ui;pt_editor_status(e,e->song_tools?"I INSERT; D REMOVE; SHIFT ARROWS MOVE":"POS: ARROWS; A ADD; N NEW; M MORE");}
 static void channel_panel(struct pt_editor *e)
 {
     e->panel=4;e->channel_details=0;++e->sample_ui;pt_editor_status(e,"CHANNEL: P/A/M ROUTE; U MUTE; S SOLO; D DETAILS");
@@ -597,7 +615,11 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
         sample_attribute_step(e,raw<=0x4d?3:5,raw==0x4c || raw==0x4e?1:-1);return PT_UI_NONE;
     }
     if(e->panel==1 && e->song_details) {
-        if(raw==0x4c || raw==0x4d)song_position(e,raw==0x4c?-1:1);
+        if((qualifier&3) && (raw==0x4c || raw==0x4d))song_arrange(e,raw==0x4c?2:3);
+        else if(raw==0x4c || raw==0x4d)song_position(e,raw==0x4c?-1:1);
+        else if(raw==0x17)song_arrange(e,0);
+        else if(raw==0x22 || raw==0x46)song_arrange(e,1);
+        else if(raw==0x37)song_tools(e);
         else if(raw==0x4f || raw==0x4e)song_edit(e,raw==0x4f?0:1);
         else if(raw==0x20)song_edit(e,2);
         else if(raw==0x36)song_edit(e,3);
@@ -856,9 +878,9 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
     }
     if(e->panel==1 && e->song_details && x>=230 && x<599 && y>=2 && y<97) {
         r=(unsigned)(y-2)/19;c=(unsigned)(x-230)/123;
-        if(r==1) {if(c==0)song_position(e,-1);else song_edit(e,(int)c-1);}
-        else if(r==2) {if(c==0)song_position(e,1);else song_edit(e,(int)c+1);}
-        else if(r==3 && c<2)undo(e,c==0?-1:1);
+        if(r==1) {if(c==0)song_position(e,-1);else if(e->song_tools)song_arrange(e,c-1);else song_edit(e,(int)c-1);}
+        else if(r==2) {if(c==0)song_position(e,1);else if(e->song_tools)song_arrange(e,c+1);else song_edit(e,(int)c+1);}
+        else if(r==3) {if(c<2)undo(e,c==0?-1:1);else song_tools(e);}
         else if(r==4) {if(c==0) {e->panel=0;e->song_details=0;++e->sample_ui;}else return c==1?PT_UI_PLAY:PT_UI_STOP;}
         return PT_UI_NONE;
     }

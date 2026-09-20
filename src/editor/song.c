@@ -11,7 +11,7 @@ struct change {
     struct pt_song *owner;
     struct pt_pattern_history *history;
     struct state state[2];
-    unsigned position,before,after;
+    uint16_t orders[2][PT_PROJECT_ORDERS];
 };
 static void *allocate(struct pt_song *s,size_t n)
 {
@@ -45,9 +45,10 @@ static int apply(void *context,struct pt_project *p,int direction)
 {
     struct change *c=context;struct pt_song *s=c->owner;struct pt_project probe;
     const struct state *from=&c->state[direction<0?1:0],*to=&c->state[direction<0?0:1];
-    size_t common;unsigned i,value=direction<0?c->before:c->after;
+    size_t common;unsigned i;const uint16_t *orders=c->orders[direction<0?0:1];
     if(!matches(p,from) || (s->current && s->current!=from->storage) || pt_project_validate(p,NULL)!=PT_PROJECT_OK)return 0;
-    if(c->position<from->orders && p->orders[c->position]!=(direction<0?c->after:c->before))return 0;
+    if(memcmp(p->orders,c->orders[direction<0?1:0],from->orders*sizeof(uint16_t)))return 0;
+    for(i=0;i<to->orders;++i)if(orders[i]>=to->patterns)return 0;
     if(to->patterns<from->patterns) {
         struct pt_event empty;memset(&empty,0,sizeof(empty));
         for(i=to->patterns*64*p->channels.count;i<from->patterns*64*p->channels.count;++i)
@@ -55,15 +56,14 @@ static int apply(void *context,struct pt_project *p,int direction)
     }
     /* Validate surviving references before removing a pattern. No failed
      * callback may change an array, active owner, history binding or revision. */
-    probe=*p;probe.pattern_count=(uint16_t)to->patterns;probe.order_count=(uint16_t)(to->orders<from->orders?to->orders:from->orders);
+    probe=*p;probe.pattern_count=(uint16_t)to->patterns;probe.order_count=(uint16_t)to->orders;probe.orders=(uint16_t *)orders;
     if(to->patterns<from->patterns && pt_project_validate(&probe,NULL)!=PT_PROJECT_OK)return 0;
     common=(size_t)(to->patterns<from->patterns?to->patterns:from->patterns)*64*p->channels.count;
     if(to->storage!=from->storage) {
         memcpy(to->storage->event,from->storage->event,common*sizeof(struct pt_event));
-        memcpy(to->storage->order,from->storage->order,(to->orders<from->orders?to->orders:from->orders)*sizeof(uint16_t));
     }
     if(to->patterns>from->patterns)memset(to->storage->event+common,0,(size_t)64*p->channels.count*sizeof(struct pt_event));
-    if(c->position<to->orders)to->storage->order[c->position]=(uint16_t)value;
+    memcpy(to->storage->order,orders,to->orders*sizeof(uint16_t));
     retain(to->storage);drop(s,s->current);s->current=to->storage;
     p->orders=to->storage->order;p->events=to->storage->event;p->order_count=(uint16_t)to->orders;p->pattern_count=(uint16_t)to->patterns;
     c->history->bound_events=p->events;c->history->bound_patterns=p->pattern_count;++s->generation;return 1;
@@ -73,33 +73,71 @@ static void discard(void *context)
     struct change *c=context;struct pt_song *s=c->owner;
     drop(s,c->state[0].storage);drop(s,c->state[1].storage);release(s,c,sizeof(*c));
 }
-static enum pt_edit_result edit(struct pt_song *s,struct pt_project *p,struct pt_pattern_history *h,unsigned pos,unsigned value,int append,int pattern)
+static enum pt_edit_result edit(struct pt_song *s,struct pt_project *p,struct pt_pattern_history *h,const uint16_t *orders,unsigned count,unsigned patterns)
 {
-    struct pt_song_storage *before,*after;struct change *c;struct pt_edit_resource r;enum pt_edit_result result;
-    if(!s || !s->allocator.allocate || !s->allocator.release || !h || pt_project_validate(p,NULL)!=PT_PROJECT_OK ||
-       (append?pos!=p->order_count:pos>=p->order_count) || (pattern?value!=p->pattern_count:value>=p->pattern_count))return PT_EDIT_INVALID;
-    if((append && p->order_count==PT_PROJECT_ORDERS) || (pattern && p->pattern_count==PT_PROJECT_PATTERNS))return PT_EDIT_CAPACITY;
+    struct pt_song_storage *before,*after;struct change *c;struct pt_edit_resource r;enum pt_edit_result result;unsigned i;
+    if(!s || !s->allocator.allocate || !s->allocator.release || !h || !orders ||
+       !count || patterns<p->pattern_count || patterns>p->pattern_count+1U)return PT_EDIT_INVALID;
+    if(count>PT_PROJECT_ORDERS || patterns>PT_PROJECT_PATTERNS)return PT_EDIT_CAPACITY;
+    for(i=0;i<count;++i)if(orders[i]>=patterns)return PT_EDIT_INVALID;
     if(s->current && (s->current->event!=p->events || s->current->order!=p->orders || s->current->channels!=p->channels.count))return PT_EDIT_CONFLICT;
-    if(!append && p->orders[pos]==value)return PT_EDIT_OK;
+    if(count==p->order_count && patterns==p->pattern_count && !memcmp(orders,p->orders,count*sizeof(uint16_t)))return PT_EDIT_OK;
     c=allocate(s,sizeof(*c));if(!c)return PT_EDIT_CAPACITY;
     before=s->current;if(before)retain(before);else before=storage(s,p,p->pattern_count,1);
     if(!before) {release(s,c,sizeof(*c));return PT_EDIT_CAPACITY;}
     after=before;
-    if(before->patterns<p->pattern_count+(unsigned)pattern || before->orders<p->order_count+(unsigned)append)
-        after=storage(s,p,p->pattern_count+(unsigned)pattern,0);
+    if(before->patterns<patterns || before->orders<count)after=storage(s,p,patterns,0);
     else retain(after);
     if(!after) {drop(s,before);release(s,c,sizeof(*c));return PT_EDIT_CAPACITY;}
     c->owner=s;c->history=h;c->state[0]=(struct state){before,p->pattern_count,p->order_count};
-    c->state[1]=(struct state){after,p->pattern_count+(unsigned)pattern,p->order_count+(unsigned)append};
-    c->position=pos;c->before=append?0:p->orders[pos];c->after=value;
+    c->state[1]=(struct state){after,patterns,count};
+    memcpy(c->orders[0],p->orders,p->order_count*sizeof(uint16_t));memcpy(c->orders[1],orders,count*sizeof(uint16_t));
     r=(struct pt_edit_resource){c,apply,discard};result=pt_pattern_resource_apply(p,h,&r);
     if(result!=PT_EDIT_OK)discard(c);
     return result;
 }
+static int valid(const struct pt_project *p)
+{return pt_project_validate(p,NULL)==PT_PROJECT_OK;}
 enum pt_edit_result pt_song_append(struct pt_song *s,struct pt_project *p,struct pt_pattern_history *h,unsigned pattern,int empty)
 {
-    if(!p || (empty!=0 && empty!=1))return PT_EDIT_INVALID;
-    return edit(s,p,h,p->order_count,empty?p->pattern_count:pattern,1,empty);
+    uint16_t orders[PT_PROJECT_ORDERS];
+    if(!valid(p) || (empty!=0 && empty!=1) || (!empty && pattern>=p->pattern_count))return PT_EDIT_INVALID;
+    if(p->order_count==PT_PROJECT_ORDERS || (empty && p->pattern_count==PT_PROJECT_PATTERNS))return PT_EDIT_CAPACITY;
+    memcpy(orders,p->orders,p->order_count*sizeof(uint16_t));orders[p->order_count]=(uint16_t)(empty?p->pattern_count:pattern);
+    return edit(s,p,h,orders,p->order_count+1,p->pattern_count+(unsigned)empty);
 }
 enum pt_edit_result pt_song_assign(struct pt_song *s,struct pt_project *p,struct pt_pattern_history *h,unsigned position,unsigned pattern)
-{return edit(s,p,h,position,pattern,0,0);}
+{
+    uint16_t orders[PT_PROJECT_ORDERS];
+    if(!valid(p) || position>=p->order_count || pattern>=p->pattern_count)return PT_EDIT_INVALID;
+    memcpy(orders,p->orders,p->order_count*sizeof(uint16_t));orders[position]=(uint16_t)pattern;
+    return edit(s,p,h,orders,p->order_count,p->pattern_count);
+}
+enum pt_edit_result pt_song_insert(struct pt_song *s,struct pt_project *p,struct pt_pattern_history *h,unsigned position,unsigned pattern)
+{
+    uint16_t orders[PT_PROJECT_ORDERS];unsigned i;
+    if(!valid(p) || position>p->order_count || pattern>=p->pattern_count)return PT_EDIT_INVALID;
+    if(p->order_count==PT_PROJECT_ORDERS)return PT_EDIT_CAPACITY;
+    for(i=0;i<position;++i)orders[i]=p->orders[i];
+    orders[position]=(uint16_t)pattern;
+    for(i=position;i<p->order_count;++i)orders[i+1]=p->orders[i];
+    return edit(s,p,h,orders,p->order_count+1,p->pattern_count);
+}
+enum pt_edit_result pt_song_remove(struct pt_song *s,struct pt_project *p,struct pt_pattern_history *h,unsigned position)
+{
+    uint16_t orders[PT_PROJECT_ORDERS];unsigned i;
+    if(!valid(p) || position>=p->order_count)return PT_EDIT_INVALID;
+    if(p->order_count==1)return PT_EDIT_UNSUPPORTED;
+    for(i=0;i<position;++i)orders[i]=p->orders[i];
+    for(i=position+1;i<p->order_count;++i)orders[i-1]=p->orders[i];
+    return edit(s,p,h,orders,p->order_count-1,p->pattern_count);
+}
+enum pt_edit_result pt_song_move(struct pt_song *s,struct pt_project *p,struct pt_pattern_history *h,unsigned position,unsigned destination)
+{
+    uint16_t orders[PT_PROJECT_ORDERS],value;
+    if(!valid(p) || position>=p->order_count || destination>=p->order_count)return PT_EDIT_INVALID;
+    memcpy(orders,p->orders,p->order_count*sizeof(uint16_t));value=orders[position];
+    if(position<destination)memmove(orders+position,orders+position+1,(destination-position)*sizeof(uint16_t));
+    else if(position>destination)memmove(orders+destination+1,orders+destination,(position-destination)*sizeof(uint16_t));
+    orders[destination]=value;return edit(s,p,h,orders,p->order_count,p->pattern_count);
+}

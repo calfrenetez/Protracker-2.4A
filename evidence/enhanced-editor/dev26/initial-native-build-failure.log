@@ -1,0 +1,24 @@
+python3 tools/build_core_tests.py
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        5700 bytes
+src/editor/editor.c: In function 'song_arrange':
+src/editor/editor.c:429:54: error: signed and unsigned type in conditional expression [-Werror=sign-compare]
+         e->position=next<e->project->order_count?next:e->project->order_count-1;
+                                                      ^
+cc1: all warnings being treated as errors
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/build_core_tests.py", line 90, in <module>
+    main()
+    ~~~~^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/build_core_tests.py", line 58, in main
+    subprocess.run([cc, *flags, *sources, *([str(out/'replay.o')] if name in ('PT24GEdit','PTPaulaTest') else []), '-o', str(out / name)], cwd=ROOT, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc', '-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os', '-Wall', '-Wextra', '-Werror', '-Isrc/core', '-Ibuild/dev', '-fbbb=-', 'src/native/editor_main.c', 'src/native/file_request.c', 'src/native/paula.c', 'src/editor/editor.c', 'src/editor/song.c', 'src/editor/view.c', 'src/editor/sampler.c', 'src/core/pcm_filtered.c', 'src/core/slices.c', 'src/core/wav.c', 'src/core/svx.c', 'src/core/raw.c', 'src/platform/file_save.c', 'src/core/safe_save.c', 'src/core/document.c', 'src/core/pp20.c', 'src/core/pattern.c', 'src/core/project.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/channels.c', 'src/core/pcm.c', '/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/replay.o', '-o', '/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/PT24GEdit']' returned non-zero exit status 1.
+make: *** [core-tests] Error 1

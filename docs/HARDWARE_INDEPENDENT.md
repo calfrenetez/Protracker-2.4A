@@ -446,3 +446,12 @@ an editor save/export/reopen workflow pass. Position edits stop a stale Paula
 snapshot and Play restarts with the new order list. Exact file/audio-state/source
 and screenshot evidence is in `evidence/enhanced-editor/dev25/`. This is software
 acceptance; no physical-hardware acceptance is implied.
+
+## Position arrangement milestone (dev26)
+
+POS ED. > MORE inserts, removes and moves positions through the shared journal.
+All patterns and sample data are retained, the final position is protected and
+unchanged moves preserve redo. Native/host evidence verifies exact reordered MOD
+output, PTG identity and stopping stale playback after same-length reorders.
+Loading now initially shows the first position's assigned pattern. See
+`evidence/enhanced-editor/dev26/` for limits, provenance and acceptance evidence.

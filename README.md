@@ -33,6 +33,11 @@ PCM for metadata history, and explicit precision/rate conversion. Filtered
 conversion provides progress and cancellation. High-resolution samples are
 editable/saveable; Paula audition requires compatible sample formats.
 
+A portable row/tick flow core now matches 16 pinned native replay traces on the
+host and emulated 68030. It is the foundation for enhanced sequencing and offline
+rendering; PCM effects, mixing and rendering UI remain unfinished. See
+[replay design and evidence](docs/OFFLINE_REPLAY_DESIGN.md).
+
 Host sanitizer tests and native emulator workflows retain source/binary IDs,
 exact file comparisons, allocation-failure and undo checks, screenshots and
 clean-exit evidence. MIDI ownership and quantised-recording cores also pass

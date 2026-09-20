@@ -9,6 +9,7 @@ import subprocess
 from build_diagnostic import digest, runtime_inputs, compiler_safety_flags, ROOT
 from make_mod_corpus import cases
 from prepare_replay import prepare_replay
+from prepare_flow_trace import prepare_flow_trace
 
 
 def main():
@@ -50,13 +51,18 @@ def main():
         'PTChannelsTest': ['tests/channels_test.c', 'src/core/channels.c'],
         'PTPcmTest': ['tests/pcm_test.c', 'src/core/pcm.c', 'src/core/wav.c', 'src/core/svx.c', 'src/core/raw.c'],
     }
+    inputs['PTFlowTraceTest'] = ['tests/native_flow_trace.c', *inputs['PTPaulaTest'][1:]]
+    inputs['PTFlowCoreTest'] = ['tests/flow_test.c','src/core/flow.c', *inputs['PTPaulaTest'][2:]]
     flags = ['-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os',
              '-Wall', '-Wextra', '-Werror', '-Isrc/core', '-Ibuild/dev', *compiler_safety_flags(cc)]
     replay_source=out/'replay.s'
     replay_source.write_bytes(prepare_replay((ROOT/'vendor/pt23f/replayer/PT2.3F_replay_cia.s').read_bytes(),(ROOT/'src/native/replay_abi.s').read_bytes()))
     subprocess.run([str(ROOT/'local/vasm/vasmm68k_mot'), '-devpac', '-m68000', '-no-fpu', '-Fhunk', '-o', str(out/'replay.o'), str(replay_source)], check=True)
+    trace_source=out/'replay_trace.s'
+    trace_source.write_bytes(prepare_flow_trace((ROOT/'vendor/pt23f/replayer/PT2.3F_replay_cia.s').read_bytes(),(ROOT/'src/native/replay_abi.s').read_bytes()))
+    subprocess.run([str(ROOT/'local/vasm/vasmm68k_mot'), '-devpac', '-m68000', '-no-fpu', '-Fhunk', '-o', str(out/'replay_trace.o'), str(trace_source)], check=True)
     for name, sources in inputs.items():
-        subprocess.run([cc, *flags, *sources, *([str(out/'replay.o')] if name in ('PT24GEdit','PTPaulaTest') else []), '-o', str(out / name)], cwd=ROOT, check=True)
+        subprocess.run([cc, *flags, *sources, *([str(out/'replay.o')] if name in ('PT24GEdit','PTPaulaTest') else [str(out/'replay_trace.o')] if name=='PTFlowTraceTest' else []), '-o', str(out / name)], cwd=ROOT, check=True)
     corpus = ROOT / 'local/share/guard'
     corpus.mkdir(parents=True, exist_ok=True)
     rows, manifest = [], []
@@ -80,7 +86,7 @@ def main():
               'binaries': {name: {'sha256': digest(out / name), 'bytes': (out / name).stat().st_size}
                            for name in [*inputs, 'PTGuardTest']},
               'sources': {name: digest(ROOT / name) for name in
-                          sorted(set(sum(inputs.values(), [])) | {'src/native/file_request.h', 'src/core/playback.h', 'src/native/paula.h', 'src/native/replay_abi.s', 'tools/prepare_replay.py', 'vendor/pt23f/replayer/PT2.3F_replay_cia.s', 'src/core/channels.h', 'src/core/pcm.h',
+                          sorted(set(sum(inputs.values(), [])) | {'src/native/file_request.h', 'src/core/playback.h', 'src/core/flow.h', 'src/native/paula.h', 'src/native/replay_abi.s', 'tools/prepare_replay.py', 'tools/prepare_flow_trace.py', 'vendor/pt23f/replayer/PT2.3F_replay_cia.s', 'src/core/channels.h', 'src/core/pcm.h',
                           'src/core/sinc_kernel.h', 'tools/generate_sinc_kernel.py', 'src/core/wav.h', 'src/core/svx.h', 'src/core/raw.h', 'src/core/midi.h', 'src/core/record.h', 'src/core/record_pattern.h', 'src/editor/editor.h', 'src/editor/song.h', 'src/editor/sampler.h', 'src/editor/view.h', 'src/platform/file_save.h', 'vendor/pt23f/raw/ptfont.raw', 'src/core/project.h', 'src/core/mod_project.h', 'src/core/document.h', 'src/core/pp20.h', 'src/core/safe_save.h', 'src/core/pattern.h', 'src/core/slices.h', 'src/core/mod_inspect.h', 'src/native/mod_guard.s', 'tests/native_guard_harness.s'})},
               'guard_cases': manifest}
     (out / 'core-build.json').write_text(json.dumps(report, indent=2) + '\n')

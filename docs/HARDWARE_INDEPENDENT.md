@@ -465,4 +465,17 @@ failure, references, mixed slot/sample/note history and full capacity. Actual
 native slot-32 import/audition and exact project save/reopen pass; strict MOD
 export refuses extra slots. Evidence and screenshot-integrity checks are retained
 under `evidence/enhanced-editor/dev27/`. An offline-replay design and validated
-synthetic input corpus are also prepared; native flow traces remain NOT RUN.
+synthetic input corpus are also prepared; native traces are added by dev28 below.
+
+
+## Portable replay flow milestone (dev28)
+
+A separate native diagnostic records every completed tick of sixteen synthetic
+speed/tempo/jump/break/loop/delay cases. Two captures of each match exactly. The
+allocation-free portable core matches the captured control-flow fields and adds
+explicit 1..16-track/256-position behavior, bounded runs and separate stop/limit
+outcomes. The diagnostic is not linked into the editor; its binary and accepted
+layout remain unchanged. See `docs/OFFLINE_REPLAY_DESIGN.md` and
+`evidence/enhanced-editor/dev28/` for source, trace and build evidence. This is
+row/tick control flow, not completed mixed replay, measured CIA timer parity,
+PCM rendering, physical AmiGUS acceptance or a duration/rendering UI.

@@ -1,0 +1,33 @@
+{
+  "run_id": "flowcore1789910145095272000",
+  "elapsed_seconds": 28.254,
+  "diagnostic_sha256": "b99040d2461d1c2b32dbab68ef3d97fd15aa1149e548cdd2c955f4e8c9e70175",
+  "native_reference_sha256": "8572875a70f8d614ac6db0622abb3939755927b67141b11ba34255bc8f292030",
+  "logs": {
+    "bounds": "FLOW boundaries PASS: atomic init, stop/limit, 1..16 tracks, 128/256 positions, order wrap and ordered globals\n",
+    "speed": "FLOW parity PASS ticks=44 reason=native-stop\n",
+    "tempo": "FLOW parity PASS ticks=18 reason=native-stop\n",
+    "two_speed": "FLOW parity PASS ticks=24 reason=native-stop\n",
+    "stop_then_speed": "FLOW parity PASS ticks=6 reason=native-stop\n",
+    "jump_then_break": "FLOW parity PASS ticks=12 reason=native-stop\n",
+    "break_then_jump": "FLOW parity PASS ticks=12 reason=native-stop\n",
+    "break_range": "FLOW parity PASS ticks=12 reason=native-stop\n",
+    "break_low_nibble": "FLOW parity PASS ticks=12 reason=native-stop\n",
+    "loop": "FLOW parity PASS ticks=60 reason=native-stop\n",
+    "two_loops": "FLOW parity PASS ticks=126 reason=native-stop\n",
+    "delay": "FLOW parity PASS ticks=24 reason=native-stop\n",
+    "delay_break": "FLOW parity PASS ticks=24 reason=native-stop\n",
+    "last_row_loop": "FLOW parity PASS ticks=72 reason=native-stop\n",
+    "cross_order_loop": "FLOW parity PASS ticks=20 reason=native-stop\n",
+    "natural_wrap": "FLOW parity PASS ticks=180 reason=tick-budget\n",
+    "backward_jump": "FLOW parity PASS ticks=120 reason=tick-budget\n"
+  },
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=750\tsndbuf_status=0",
+  "scope": "Portable 68k row/tick flow parity; audio mixing and physical hardware NOT TESTED",
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

@@ -1,7 +1,8 @@
 # Shared sequencer and offline replay: implementation boundary
 
-This is the next implementation design, not an implemented renderer or an audio
-acceptance claim. It uses the pinned local 2.3F CIA replay source at
+The row/tick flow core and native trace comparison are implemented in dev28.
+The remaining sections describe the next implementation boundary, not an
+implemented renderer or an audio acceptance claim. It uses the pinned local 2.3F CIA replay source at
 `vendor/pt23f/replayer/PT2.3F_replay_cia.s` (upstream commit recorded in
 `baseline.lock.json`) as the classic compatibility reference. The existing native
 Paula wrapper and MIDI ownership/recording cores remain separate working pieces.
@@ -52,9 +53,10 @@ native trace fixtures before wiring a duration display or rendering UI.
 The input corpus is prepared by `tools/make_replay_flow_fixtures.py NEW_DIRECTORY`.
 It generates sixteen reproducible, synthetic two-pattern MODs plus exact hashes,
 event locations and tick budgets. Host preflight checks every fixture with the
-shared strict MOD parser. These are **input fixtures only**: native traces and
-portable-sequencer parity are NOT RUN, and the generated manifest says so. The
-tool refuses an existing output directory so it cannot replace prior evidence.
+shared strict MOD parser. This generator produces **input fixtures only**, so its manifest always says
+NOT RUN. Separately captured native traces and portable control-flow comparisons
+are retained under `evidence/enhanced-editor/dev28/`. The generator refuses an
+existing output directory so it cannot replace prior evidence.
 
 ## Subsequent PCM and export boundary
 
@@ -99,3 +101,65 @@ fixture/source/compiler/binary identities and stop reason. These captured traces
 then become the oracle for the portable flow core. Capturing a repeatable trace
 alone is not a claim that a new sequencer matches it, or that all audio effects
 have been implemented.
+
+## Implemented control-flow core (dev28)
+
+`src/core/flow.c` is an allocation-free state machine over a validated immutable
+project. It handles startup ticks, speed/tempo state, Bxx/Dxx order and break
+interaction, per-track E6 loops, EEx delayed passes and F00 stops. It identifies
+fresh row fetches separately from delayed tick-zero passes and retains both the
+played cursor and the next cursor. This is only control flow: ignoring voice
+commands here does not mean they can be ignored by an audio renderer.
+
+Classic mode explicitly requires four tracks, at most 128 positions and initial
+6/125 timing. Extended mode accepts the project's 1..16 tracks, up to 256 positions
+and initial timing; it traverses all tracks in ascending order and wraps order
+indices at 256. Global effects still run on muted/MIDI tracks. Bxx continues to
+address its literal byte-valued position. Callers supply a nonzero tick budget;
+STOPPED and LIMIT are distinct, stable outcomes. The native F00 tick is emitted
+before STOPPED, even if later tracks on that row change speed. The first row is
+fetched after the initial speed-count lead-in, matching the pinned native ABI.
+
+Sixteen native synthetic cases were captured twice with exactly matching 36-byte
+records. All first 30 bytes (flow state) match the portable core on both the
+host and emulated 68030 (766 ticks). The
+remaining six bytes hold native DMA/raw-volume observations and are not treated
+as portable audio parity. Tests also exercise extended channel/order boundaries
+and failure-atomic initialization. Native trace clocks record tick counts and BPM,
+not measured elapsed CIA cycles; timer latch latency, fractional output frames
+and PCM effects remain subsequent work. No duration estimate or rendering UI is
+wired to this core yet.
+
+The oracle includes source-specific details worth preserving: B01 then D12 enters
+order 1, row 12; reversing them enters row 0. D0A enters row 10. F00 then F06 still
+stops after processing that row. EE2 with D03 preserves delayed processing and
+the next fresh fetch is order 1, row 4. E6 loop start state persists across orders.
+These are observed reference results, not assumptions from a generic MOD player.
+
+The diagnostic is built as `PTFlowTraceTest` with a separate `replay_trace.o`.
+`PT24GEdit` and `PTPaulaTest` keep the uninstrumented replay object. Every record
+is published at ISR exit into preallocated memory, disabled setup interrupts
+bypass the recorder, and reaching capacity disables further diagnostic ticks.
+A simultaneous F00 retains the native-stop reason. No printing/allocation occurs
+in the ISR; the task removes the interrupt and stops DMA before reading/freeing.
+
+Trace format schema 1, big endian, 36 bytes per completed tick:
+
+| Offset | Bytes | Field |
+| --- | --- | --- |
+| 0 | 4 | Tick number, starting at 1 |
+| 4, 5 | 1 each | Played order, next order |
+| 6, 8 | 2 each | Played row bytes, next row bytes (divide by 16) |
+| 10, 11 | 1 each | Tick counter, speed |
+| 12 | 2 | Real BPM |
+| 14..19 | 1 each | Enabled, pending delay, active delay, break row, jump flag, loop-break flag |
+| 20 | 4 | Per-track loop start rows |
+| 24 | 4 | Per-track loop counts |
+| 28 | 2 | Fresh row fetch count |
+| 30 | 2 | Native DMA command mask |
+| 32 | 4 | Native raw output volumes |
+
+Native booleans are 0/255; portable booleans are 0/1. The comparison explicitly
+normalizes them. Poll scheduling, wall-clock times and pointers are excluded from
+the oracle. Exact repeats prove deterministic state capture for this corpus,
+not all possible effects, real-hardware performance or cycle-accurate audio.

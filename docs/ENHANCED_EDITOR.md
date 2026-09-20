@@ -625,3 +625,17 @@ Strict MOD export refuses projects with more than 31 slots, including empty
 extra slots. Classic-compatible individual samples can still use Paula audition;
 full-song enhanced replay and high-resolution audition remain separate work.
 General deletion/reordering of populated sample slots is not implemented.
+
+
+## Reference WAV export (dev32)
+
+DISK OP. now opens RENDER WAV alongside SAVE MOD. Control-Shift-W reaches the
+same settings page. Song/current-pattern scope, track mask, 44.1/48 kHz,
+16/24 bit, gain and startup lead-in use the existing bounded reference renderer.
+See [settings, supported effects and limits](REFERENCE_RENDERER.md).
+
+Native export stops playback, checks support before requesting a new filename,
+and displays cancellable checking/mixing/verification progress. Modal rendering
+accepts Escape and refresh events without allowing edits to borrowed project data.
+Export retains shared undo and dirty state; it never marks the project saved.
+The accepted main-screen font, bevel/grid and golden image remain unchanged.

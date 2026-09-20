@@ -1,0 +1,21 @@
+mkdir -p build/host
+cc -std=c99 -O2 -Wall -Wextra -Werror -Isrc/core tools/pt24g_render.c src/platform/render_file.c src/core/render.c src/core/timeline.c src/core/frame_clock.c src/core/flow.c src/core/voice.c src/core/document.c src/core/pp20.c src/core/project.c src/core/mod_project.c src/core/mod_inspect.c src/core/channels.c src/core/pcm.c -o build/host/PT24GRender
+PASS: cancelled mixing and exact dirty-project WAV
+Render UI test released: /Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/local/share/renderui1789914156009286000
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/test_render_ui_emulator.py", line 102, in <module>
+    print('Render UI test released:',run,flush=True)
+                    ^^^^^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/test_render_ui_emulator.py", line 79, in main
+    assert (run/'pattern.wav').read_bytes()==(run/'render.wav').read_bytes();audio_off()
+    ^^^^^^^^^^^^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/test_render_ui_emulator.py", line 55, in close_panel
+    key(0x45);offset=len(log());emu.click(400,85);frame('panel=0',offset)
+                                                  ~~~~~^^^^^^^^^^^^^^^^^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/test_render_ui_emulator.py", line 31, in frame
+    def frame(text,after=0):wait(lambda:any('EDITOR FRAME' in s and text in s for s in log()[after:].splitlines()))
+                            ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/test_render_ui_emulator.py", line 29, in wait
+    time.sleep(.1)
+    ~~~~~~~~~~^^^^
+KeyboardInterrupt

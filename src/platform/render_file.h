@@ -9,7 +9,8 @@ enum pt_render_file_result { PT_RENDER_FILE_OK, PT_RENDER_FILE_INVALID,
  * Project/options stay immutable during all passes. Up to signed32 file size.
  * Failure removes only owned staging. Report changes only on OK; detail gives
  * the render result (including cancellation) independently of filesystem phase.
- * Progress VERIFY also runs before opening the staged file for verification. */
+ * Progress VERIFY reports bytes already compared as PCM frames (monotonic),
+ * and also runs before opening the staged file for verification. */
 enum pt_render_file_result pt_render_file_new(const char *,const struct pt_project *,
     const struct pt_render_options *,pt_render_progress,void *,struct pt_render_report *,enum pt_render_result *detail);
 #endif

@@ -1,0 +1,27 @@
+test_native_shared_controller_and_planar_display (test_editor.Editor.test_native_shared_controller_and_planar_display) ... tests/editor_test.c:344:63: error: comparison of integers of different signs: 'int' and 'unsigned int' [-Werror,-Wsign-compare]
+  344 |     assert(e->history.revision==revision && pt_editor_dirty(e)==dirty && e->sample==sample && e->row==row);
+      |                                             ~~~~~~~~~~~~~~~~~~^ ~~~~~
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/assert.h:72:25: note: expanded from macro 'assert'
+   72 |     (__builtin_expect(!(e), 0) ? __assert_rtn(__func__, __ASSERT_FILE_NAME, __LINE__, #e) : (void)0)
+      |                         ^
+1 error generated.
+ERROR
+
+======================================================================
+ERROR: test_native_shared_controller_and_planar_display (test_editor.Editor.test_native_shared_controller_and_planar_display)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/test_editor.py", line 15, in test_native_shared_controller_and_planar_display
+    subprocess.run(['cc', '-std=c99', '-O1', '-g', '-Wall', '-Wextra', '-Werror',
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    '-fsanitize=address,undefined', '-Isrc/core', *SOURCES, '-o', binary], cwd=ROOT, check=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['cc', '-std=c99', '-O1', '-g', '-Wall', '-Wextra', '-Werror', '-fsanitize=address,undefined', '-Isrc/core', 'tests/editor_test.c', 'src/editor/editor.c', 'src/editor/song.c', 'src/editor/view.c', 'src/editor/sampler.c', 'src/editor/slots.c', 'src/core/pcm_filtered.c', 'src/core/slices.c', 'src/core/wav.c', 'src/core/svx.c', 'src/core/raw.c', 'src/core/document.c', 'src/core/pp20.c', 'src/core/pattern.c', 'src/core/project.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/channels.c', 'src/core/pcm.c', '-o', '/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpw0ksxayr/editor-test']' returned non-zero exit status 1.
+
+----------------------------------------------------------------------
+Ran 1 test in 3.518s
+
+FAILED (errors=1)

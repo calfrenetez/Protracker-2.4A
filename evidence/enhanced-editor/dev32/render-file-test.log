@@ -1,0 +1,7 @@
+test_verified_stream_publication_and_io_failure (test_render_file.RenderFile.test_verified_stream_publication_and_io_failure) ... RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt staging refusal and cleanup
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 4.018s
+
+OK

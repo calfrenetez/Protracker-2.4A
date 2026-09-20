@@ -4,6 +4,7 @@
 #include "playback.h"
 #include "sampler.h"
 #include "song.h"
+#include "render.h"
 #define PT_EDITOR_ROWS 20
 /* One grid for parameter rows, command rows and their mouse targets. */
 #define PT_EDITOR_CONTROL_Y 2
@@ -14,7 +15,7 @@
 #define PT_EDITOR_HEADER_Y 234
 #define PT_EDITOR_PATTERN_Y 250
 #define PT_EDITOR_BOTTOM_Y 491
-enum pt_editor_action {PT_UI_NONE,PT_UI_SAVE,PT_UI_QUIT,PT_UI_PLAY,PT_UI_PATTERN,PT_UI_STOP,PT_UI_AUDITION,PT_UI_LOAD,PT_UI_SAVE_AS,PT_UI_EXPORT_MOD,PT_UI_NEW,PT_UI_SAMPLE_LOAD,PT_UI_SAMPLE_SAVE,PT_UI_SAMPLE_SVX,PT_UI_RAW_LOAD,PT_UI_RAW_SAVE,PT_UI_SOURCE_LOAD};
+enum pt_editor_action {PT_UI_NONE,PT_UI_SAVE,PT_UI_QUIT,PT_UI_PLAY,PT_UI_PATTERN,PT_UI_STOP,PT_UI_AUDITION,PT_UI_LOAD,PT_UI_SAVE_AS,PT_UI_EXPORT_MOD,PT_UI_NEW,PT_UI_SAMPLE_LOAD,PT_UI_SAMPLE_SAVE,PT_UI_SAMPLE_SVX,PT_UI_RAW_LOAD,PT_UI_RAW_SAVE,PT_UI_SOURCE_LOAD,PT_UI_RENDER};
 struct pt_editor_selection {unsigned active,marking,pattern,r0,r1,c0,c1,anchor_row,anchor_channel;};
 struct pt_editor {
     struct pt_project *project;
@@ -22,6 +23,9 @@ struct pt_editor {
     struct pt_sampler sampler;
     struct pt_song song;
     unsigned song_details,song_tools;
+    unsigned render_details,render_pattern,render_bits,render_lead_in;
+    uint32_t render_rate,render_gain;
+    uint16_t render_tracks;
     unsigned sample_range_slot,sample_marking;
     uint32_t sample_start,sample_end,sample_anchor;
     uint32_t wave_start,wave_end,wave_frames;
@@ -50,6 +54,7 @@ struct pt_editor {
     char status[76];
 };
 /* Initialize only after a complete project load; no audio backend is invoked. */
+void pt_editor_render_options(const struct pt_editor *,struct pt_render_options *);
 int pt_editor_init(struct pt_editor *,struct pt_project *);
 /* Dispose before reinitializing or freeing a live editor. Releases editor-owned replacement arrays;
    the project must no longer be used. Release/destroy its document separately. */

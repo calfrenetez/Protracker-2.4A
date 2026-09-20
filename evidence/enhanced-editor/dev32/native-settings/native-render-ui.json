@@ -1,0 +1,23 @@
+{
+  "run_id": "renderui1789914697963312000",
+  "elapsed_seconds": 67.235,
+  "binaries": {
+    "PT24GEdit": "85577631413d1e77ca822ece2b0ae91348c056d48056275f5a63e78650f83096",
+    "PT24GConvert": "8c6568aed1de05eeb8f784f2faaee988a2b42d87dccd12662dacde2ed1ddf8fd",
+    "PTRenderFileTest": "e076ce7ded83cce4c8d9a137478ca019d39d3e381cdf07d8b478c784acd3d4d5"
+  },
+  "fixture_sha256": "fd566e6dd8163ab98e16960079fdc5075bdec2c6a812ae2c0ad853fd399a1686",
+  "settings_only": true,
+  "full_render_workflow_validated": false,
+  "mask_overflow_refused": true,
+  "exact_project_identity": true,
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=416\tsndbuf_status=0",
+  "editor_log": "EDITOR READY channels=4 patterns=2 bitmap_bytes=163840 history_bytes=104076\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=REFERENCE WAV - W RENDER / P SCOPE / M TRACKS / ESC BACK panel=2\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=TRACK MASK HEX - NONZERO AVAILABLE TRACKS / RETURN / ESC panel=2\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=TRACK MASK HEX - NONZERO AVAILABLE TRACKS / RETURN / ESC panel=2\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=TRACK MASK HEX - NONZERO AVAILABLE TRACKS / RETURN / ESC panel=2\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=TRACK MASK HEX - NONZERO AVAILABLE TRACKS / RETURN / ESC panel=2\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=TRACK MASK HEX - NONZERO AVAILABLE TRACKS / RETURN / ESC panel=2\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=TRACK MASK HEX - NONZERO AVAILABLE TRACKS / RETURN / ESC panel=2\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=TRACK MASK HEX - NONZERO AVAILABLE TRACKS / RETURN / ESC panel=2\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=TRACK MASK HEX - NONZERO AVAILABLE TRACKS / RETURN / ESC panel=2\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=TRACK MASK HEX - NONZERO AVAILABLE TRACKS / RETURN / ESC panel=2\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=TRACK MASK HEX - NONZERO AVAILABLE TRACKS / RETURN / ESC panel=2\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=TRACK MASK HEX - NONZERO AVAILABLE TRACKS / RETURN / ESC panel=2\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=INVALID TRACK MASK - USE AVAILABLE TRACKS / ESC CANCEL panel=2\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=NUMBER ENTRY CANCELLED - VALUES PRESERVED panel=2\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=TRACK MASK HEX - NONZERO AVAILABLE TRACKS / RETURN / ESC panel=2\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=TRACK MASK HEX - NONZERO AVAILABLE TRACKS / RETURN / ESC panel=2\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=RENDER TRACK MASK SET - PROJECT UNCHANGED panel=2\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PROJECT SAVED AND VERIFIED panel=2\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=DISK OPERATIONS panel=2\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=DISK OPERATIONS panel=1\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=DISK OPERATIONS panel=0\nEDITOR EXIT clean\n",
+  "file_log": "RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt staging refusal and cleanup\n",
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

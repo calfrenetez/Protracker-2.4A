@@ -515,3 +515,22 @@ corruption, cancellation and partial writes preserve source and prior files.
 See `docs/REFERENCE_RENDERER.md` for exact profiles, supported commands, gain/pan,
 end conditions and limits. This is a supported-subset reference export path;
 complete effects, editor render/bounce UI and hardware audio acceptance remain open.
+
+
+## Native reference-render controls (dev32)
+
+DISK OP. → RENDER WAV and Control-Shift-W expose song/current-pattern scope,
+selected tracks, output rate/precision, gain and lead-in. Native preflight runs
+before filename selection; rendering stops Paula and accepts Escape during
+checking, mixing and verification. It preserves project dirty state and shared
+undo. Song/pattern WAVs matched the host byte for byte; cancellation at the
+requester, mix and verify stages left no output/staging. Unsupported finetune
+was refused before opening a requester, and undo/save restored the exact input
+project. The accepted main-screen golden remains unchanged.
+
+Verification progress now counts frames actually compared, remains monotonic and
+reaches 100% before publication. Core file tests retain corruption, late-target,
+existing-target and write-failure preservation coverage. See
+`evidence/enhanced-editor/dev32/` and `docs/REFERENCE_RENDERER.md`.
+Complete effect interpretation, sample-slot bounce, batch stems and physical
+AmiGUS audio acceptance remain open.

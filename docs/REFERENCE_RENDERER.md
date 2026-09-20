@@ -1,4 +1,4 @@
-# Bounded reference WAV renderer (dev31)
+# Bounded reference WAV renderer (dev31–32)
 
 `PT24GRender` is a native/host command-line renderer built from the shared portable
 flow, frame-clock and voice/mix cores. It accepts validated MOD, PP20 MOD and PTG
@@ -31,6 +31,41 @@ signed32 file length; the time/tick budgets can refuse earlier. The frame budget
 includes the internal startup lead-in even when that silence is trimmed from the
 published WAV. Real 68000/68030 completion time and memory headroom need physical
 measurement; native emulator success is not a performance guarantee.
+
+## Editor controls (dev32)
+
+Open **DISK OP. → RENDER WAV**, or press **Control-Shift-W**. This uses the
+same reference renderer and verified new-file publication as `PT24GRender`.
+The main tracker layout is unchanged.
+
+| Control | Key | Meaning |
+| --- | --- | --- |
+| SONG / PATTERN | P | Full song from order zero, or the current pattern |
+| TRACKS | M | Nonzero hexadecimal mask of available tracks |
+| ALL / ONE | A / T | All tracks, or the currently selected track |
+| 44.1 / 48 KHZ | R | Output rate |
+| 16 / 24 BIT | B | Output precision |
+| GAIN | G | Cycle 50%, 100%, 25% master gain |
+| LEAD IN | L | Retain or trim initial speed-count silence |
+| RENDER NEW WAV | W / Return | Preflight, choose a new destination, render and verify |
+| BACK | Escape | Return to disk operations |
+
+Defaults match the CLI: song, all tracks, 48 kHz, 24 bit, 50% gain, trimmed
+lead-in. Settings are transient preferences and do not change the project or
+consume undo history. Global mute/solo still apply to selected tracks; selection
+does not bypass unsupported MIDI routes. A zero or out-of-range mask is refused.
+
+Rendering stops Paula playback before preflight. Unsupported data is refused
+before opening the file requester. During checking, mixing and byte verification,
+Escape cancels; other editor input is ignored while the renderer borrows immutable
+project/sample data. The window continues to process refresh messages. Progress
+shows the active stage and, for mixing/verification, percentage of measured frames.
+A cancelled or failed render leaves the project intact and removes its own staging.
+Existing destination files are never replaced. Exporting does not mark unsaved
+project edits saved. Successful clipped output is reported with advice to lower gain.
+
+This is supported-subset offline WAV export. It does not yet implement bounce into
+sample slots, batch stems, complete classic effects or hardware-equivalent audio.
 
 ## Defined reference behavior
 

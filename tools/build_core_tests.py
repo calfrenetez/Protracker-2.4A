@@ -57,6 +57,7 @@ def main():
     inputs['PTTimelineTest'] = ['tests/timeline_test.c','src/core/timeline.c','src/core/frame_clock.c','src/core/flow.c','src/core/project.c','src/core/channels.c','src/core/pcm.c']
     inputs['PTVoiceTest'] = ['tests/voice_test.c','src/core/voice.c','src/core/pcm.c']
     render_sources = ['src/core/render.c','src/core/timeline.c','src/core/frame_clock.c','src/core/flow.c','src/core/voice.c','src/core/project.c','src/core/channels.c','src/core/pcm.c']
+    inputs['PT24GEdit'] += [s for s in ['src/platform/render_file.c',*render_sources] if s not in inputs['PT24GEdit']]
     inputs['PTRenderTest'] = ['tests/render_test.c',*render_sources]
     inputs['PTRenderFileTest'] = ['tests/render_file_test.c','src/platform/render_file.c','src/core/wav.c',*render_sources]
     inputs['PT24GRender'] = ['tools/pt24g_render.c','src/platform/render_file.c','src/core/document.c','src/core/pp20.c','src/core/mod_project.c','src/core/mod_inspect.c',*render_sources]

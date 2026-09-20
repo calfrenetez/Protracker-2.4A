@@ -1,0 +1,186 @@
+EDITOR READY channels=4 patterns=2 bitmap_bytes=163840 history_bytes=104076
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SONG TITLE: 31 CHARS / RETURN APPLY / ESC CANCEL panel=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SONG TITLE: 31 CHARS / RETURN APPLY / ESC CANCEL panel=0
+EDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=SONG TITLE UPDATED - CONTROL-Z TO UNDO panel=0
+EDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=PLAYING SONG - PAULA CIA panel=0
+EDITOR REPLAY active=1 ticks=8 order=0 pattern=0 row=1 bpm=125 speed=6 period=428,0,0,0 volume=24,0,0,0
+EDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=REFERENCE WAV - W RENDER / P SCOPE / M TRACKS / ESC BACK panel=2
+EDITOR REPLAY active=0 ticks=0 order=0 pattern=0 row=0 bpm=0 speed=0 period=0,0,0,0 volume=0,0,0,0
+EDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=PLAYBACK ENDED - AUDIO RELEASED panel=2
+EDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=RENDER SETTINGS CHANGED - PROJECT UNCHANGED panel=2
+EDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=RENDER SETTINGS CHANGED - PROJECT UNCHANGED panel=2
+EDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=RENDER SETTINGS CHANGED - PROJECT UNCHANGED panel=2
+EDITOR RENDER progress=CHECKING percent=0 ticks=0
+EDITOR REQUEST render
+EDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=WAV REQUEST CANCELLED - EDITS PRESERVED panel=2
+EDITOR RENDER progress=CHECKING percent=0 ticks=0
+EDITOR REQUEST render
+EDITOR RENDER progress=CHECKING percent=0 ticks=0
+EDITOR RENDER progress=RENDERING percent=0 ticks=7
+EDITOR RENDER cancelled
+EDITOR RENDER result=2 detail=7 dirty=1 frames=0
+EDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=WAV CANCELLED - EDITS PRESERVED panel=2
+EDITOR RENDER progress=CHECKING percent=0 ticks=0
+EDITOR REQUEST render
+EDITOR RENDER progress=CHECKING percent=0 ticks=0
+EDITOR RENDER progress=RENDERING percent=0 ticks=7
+EDITOR RENDER progress=RENDERING percent=5 ticks=9
+EDITOR RENDER progress=RENDERING percent=10 ticks=10
+EDITOR RENDER progress=RENDERING percent=15 ticks=12
+EDITOR RENDER progress=RENDERING percent=20 ticks=14
+EDITOR RENDER progress=RENDERING percent=25 ticks=16
+EDITOR RENDER progress=RENDERING percent=30 ticks=18
+EDITOR RENDER progress=RENDERING percent=35 ticks=20
+EDITOR RENDER progress=RENDERING percent=40 ticks=22
+EDITOR RENDER progress=RENDERING percent=45 ticks=24
+EDITOR RENDER progress=RENDERING percent=50 ticks=26
+EDITOR RENDER progress=RENDERING percent=55 ticks=28
+EDITOR RENDER progress=RENDERING percent=60 ticks=29
+EDITOR RENDER progress=RENDERING percent=65 ticks=31
+EDITOR RENDER progress=RENDERING percent=70 ticks=33
+EDITOR RENDER progress=RENDERING percent=75 ticks=35
+EDITOR RENDER progress=RENDERING percent=80 ticks=37
+EDITOR RENDER progress=RENDERING percent=85 ticks=39
+EDITOR RENDER progress=RENDERING percent=90 ticks=41
+EDITOR RENDER progress=RENDERING percent=95 ticks=43
+EDITOR RENDER progress=VERIFYING percent=0 ticks=0
+EDITOR RENDER progress=VERIFYING percent=5 ticks=8
+EDITOR RENDER progress=VERIFYING percent=10 ticks=10
+EDITOR RENDER progress=VERIFYING percent=15 ticks=12
+EDITOR RENDER progress=VERIFYING percent=21 ticks=14
+EDITOR RENDER progress=VERIFYING percent=26 ticks=16
+EDITOR RENDER progress=VERIFYING percent=31 ticks=18
+EDITOR RENDER progress=VERIFYING percent=36 ticks=20
+EDITOR RENDER progress=VERIFYING percent=42 ticks=22
+EDITOR RENDER progress=VERIFYING percent=47 ticks=24
+EDITOR RENDER progress=VERIFYING percent=50 ticks=25
+EDITOR RENDER progress=VERIFYING percent=55 ticks=27
+EDITOR RENDER progress=VERIFYING percent=60 ticks=29
+EDITOR RENDER progress=VERIFYING percent=65 ticks=31
+EDITOR RENDER progress=VERIFYING percent=71 ticks=33
+EDITOR RENDER progress=VERIFYING percent=76 ticks=35
+EDITOR RENDER progress=VERIFYING percent=81 ticks=37
+EDITOR RENDER progress=VERIFYING percent=86 ticks=39
+EDITOR RENDER progress=VERIFYING percent=92 ticks=41
+EDITOR RENDER progress=VERIFYING percent=97 ticks=43
+EDITOR RENDER progress=VERIFYING percent=0 ticks=7
+EDITOR RENDER progress=VERIFYING percent=5 ticks=9
+EDITOR RENDER progress=VERIFYING percent=10 ticks=10
+EDITOR RENDER progress=VERIFYING percent=15 ticks=12
+EDITOR RENDER progress=VERIFYING percent=20 ticks=14
+EDITOR RENDER progress=VERIFYING percent=25 ticks=16
+EDITOR RENDER progress=VERIFYING percent=30 ticks=18
+EDITOR RENDER progress=VERIFYING percent=35 ticks=20
+EDITOR RENDER progress=VERIFYING percent=40 ticks=22
+EDITOR RENDER progress=VERIFYING percent=45 ticks=24
+EDITOR RENDER progress=VERIFYING percent=50 ticks=26
+EDITOR RENDER progress=VERIFYING percent=55 ticks=28
+EDITOR RENDER progress=VERIFYING percent=60 ticks=29
+EDITOR RENDER progress=VERIFYING percent=65 ticks=31
+EDITOR RENDER progress=VERIFYING percent=70 ticks=33
+EDITOR RENDER progress=VERIFYING percent=75 ticks=35
+EDITOR RENDER progress=VERIFYING percent=80 ticks=37
+EDITOR RENDER progress=VERIFYING percent=85 ticks=39
+EDITOR RENDER progress=VERIFYING percent=90 ticks=41
+EDITOR RENDER progress=VERIFYING percent=95 ticks=43
+EDITOR RENDER result=0 detail=0 dirty=1 frames=33516
+EDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=WAV VERIFIED - PROJECT STILL UNSAVED panel=2
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=UNDO panel=2
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=RENDER SETTINGS CHANGED - PROJECT UNCHANGED panel=2
+EDITOR RENDER progress=CHECKING percent=0 ticks=0
+EDITOR REQUEST render
+EDITOR RENDER progress=CHECKING percent=0 ticks=0
+EDITOR RENDER progress=RENDERING percent=0 ticks=7
+EDITOR RENDER progress=RENDERING percent=5 ticks=9
+EDITOR RENDER progress=RENDERING percent=10 ticks=10
+EDITOR RENDER progress=RENDERING percent=15 ticks=12
+EDITOR RENDER progress=RENDERING percent=20 ticks=14
+EDITOR RENDER progress=RENDERING percent=25 ticks=16
+EDITOR RENDER progress=RENDERING percent=30 ticks=18
+EDITOR RENDER progress=RENDERING percent=35 ticks=20
+EDITOR RENDER progress=RENDERING percent=40 ticks=22
+EDITOR RENDER progress=RENDERING percent=45 ticks=24
+EDITOR RENDER progress=RENDERING percent=50 ticks=26
+EDITOR RENDER progress=RENDERING percent=55 ticks=28
+EDITOR RENDER progress=RENDERING percent=60 ticks=29
+EDITOR RENDER progress=RENDERING percent=65 ticks=31
+EDITOR RENDER progress=RENDERING percent=70 ticks=33
+EDITOR RENDER progress=RENDERING percent=75 ticks=35
+EDITOR RENDER progress=RENDERING percent=80 ticks=37
+EDITOR RENDER progress=RENDERING percent=85 ticks=39
+EDITOR RENDER progress=RENDERING percent=90 ticks=41
+EDITOR RENDER progress=RENDERING percent=95 ticks=43
+EDITOR RENDER progress=VERIFYING percent=0 ticks=0
+EDITOR RENDER progress=VERIFYING percent=5 ticks=8
+EDITOR RENDER cancelled
+EDITOR RENDER result=6 detail=7 dirty=0 frames=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=WAV CANCELLED - EDITS PRESERVED panel=2
+EDITOR RENDER progress=CHECKING percent=0 ticks=0
+EDITOR REQUEST render
+EDITOR RENDER progress=CHECKING percent=0 ticks=0
+EDITOR RENDER progress=RENDERING percent=0 ticks=7
+EDITOR RENDER progress=RENDERING percent=5 ticks=9
+EDITOR RENDER progress=RENDERING percent=10 ticks=10
+EDITOR RENDER progress=RENDERING percent=15 ticks=12
+EDITOR RENDER progress=RENDERING percent=20 ticks=14
+EDITOR RENDER progress=RENDERING percent=25 ticks=16
+EDITOR RENDER progress=RENDERING percent=30 ticks=18
+EDITOR RENDER progress=RENDERING percent=35 ticks=20
+EDITOR RENDER progress=RENDERING percent=40 ticks=22
+EDITOR RENDER progress=RENDERING percent=45 ticks=24
+EDITOR RENDER progress=RENDERING percent=50 ticks=26
+EDITOR RENDER progress=RENDERING percent=55 ticks=28
+EDITOR RENDER progress=RENDERING percent=60 ticks=29
+EDITOR RENDER progress=RENDERING percent=65 ticks=31
+EDITOR RENDER progress=RENDERING percent=70 ticks=33
+EDITOR RENDER progress=RENDERING percent=75 ticks=35
+EDITOR RENDER progress=RENDERING percent=80 ticks=37
+EDITOR RENDER progress=RENDERING percent=85 ticks=39
+EDITOR RENDER progress=RENDERING percent=90 ticks=41
+EDITOR RENDER progress=RENDERING percent=95 ticks=43
+EDITOR RENDER progress=VERIFYING percent=0 ticks=0
+EDITOR RENDER progress=VERIFYING percent=5 ticks=8
+EDITOR RENDER progress=VERIFYING percent=10 ticks=10
+EDITOR RENDER progress=VERIFYING percent=15 ticks=12
+EDITOR RENDER progress=VERIFYING percent=21 ticks=14
+EDITOR RENDER progress=VERIFYING percent=26 ticks=16
+EDITOR RENDER progress=VERIFYING percent=31 ticks=18
+EDITOR RENDER progress=VERIFYING percent=36 ticks=20
+EDITOR RENDER progress=VERIFYING percent=42 ticks=22
+EDITOR RENDER progress=VERIFYING percent=47 ticks=24
+EDITOR RENDER progress=VERIFYING percent=50 ticks=25
+EDITOR RENDER progress=VERIFYING percent=55 ticks=27
+EDITOR RENDER progress=VERIFYING percent=60 ticks=29
+EDITOR RENDER progress=VERIFYING percent=65 ticks=31
+EDITOR RENDER progress=VERIFYING percent=71 ticks=33
+EDITOR RENDER progress=VERIFYING percent=76 ticks=35
+EDITOR RENDER progress=VERIFYING percent=81 ticks=37
+EDITOR RENDER progress=VERIFYING percent=86 ticks=39
+EDITOR RENDER progress=VERIFYING percent=92 ticks=41
+EDITOR RENDER progress=VERIFYING percent=97 ticks=43
+EDITOR RENDER progress=VERIFYING percent=0 ticks=7
+EDITOR RENDER progress=VERIFYING percent=5 ticks=9
+EDITOR RENDER progress=VERIFYING percent=10 ticks=10
+EDITOR RENDER progress=VERIFYING percent=15 ticks=12
+EDITOR RENDER progress=VERIFYING percent=20 ticks=14
+EDITOR RENDER progress=VERIFYING percent=25 ticks=16
+EDITOR RENDER progress=VERIFYING percent=30 ticks=18
+EDITOR RENDER progress=VERIFYING percent=35 ticks=20
+EDITOR RENDER progress=VERIFYING percent=40 ticks=22
+EDITOR RENDER progress=VERIFYING percent=45 ticks=24
+EDITOR RENDER progress=VERIFYING percent=50 ticks=26
+EDITOR RENDER progress=VERIFYING percent=55 ticks=28
+EDITOR RENDER progress=VERIFYING percent=60 ticks=29
+EDITOR RENDER progress=VERIFYING percent=65 ticks=31
+EDITOR RENDER progress=VERIFYING percent=70 ticks=33
+EDITOR RENDER progress=VERIFYING percent=75 ticks=35
+EDITOR RENDER progress=VERIFYING percent=80 ticks=37
+EDITOR RENDER progress=VERIFYING percent=85 ticks=39
+EDITOR RENDER progress=VERIFYING percent=90 ticks=41
+EDITOR RENDER progress=VERIFYING percent=95 ticks=43
+EDITOR RENDER result=0 detail=0 dirty=0 frames=33516
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=WAV VERIFIED - PROJECT UNCHANGED panel=2
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=DISK OPERATIONS panel=2
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=DISK OPERATIONS panel=2
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=DISK OPERATIONS panel=2

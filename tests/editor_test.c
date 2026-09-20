@@ -317,6 +317,35 @@ static void sampler_controls(struct pt_editor *e)
     pt_editor_key(e,0x45,0);assert(!e->panel && !e->quit_pending);
     free(before);
 }
+static void render_controls(struct pt_editor *e)
+{
+    struct pt_render_options o;unsigned long revision=e->history.revision;int dirty=pt_editor_dirty(e);unsigned sample=e->sample,row=e->row;
+    uint16_t all=(uint16_t)((1UL<<e->project->channels.count)-1);
+    e->panel=0;pt_editor_key(e,0x11,9);assert(e->panel==2 && e->render_details);
+    pt_editor_render_options(e,&o);assert(o.rate==48000 && o.bits==24 && o.gain_q16==32768 && o.tracks==all && !o.pattern_only && !o.include_lead_in && !o.start_order);
+    assert(o.tick_limit==1000000 && o.frame_limit==86400000);
+    pt_editor_key(e,0x19,0);pt_editor_key(e,0x13,0);pt_editor_key(e,0x35,0);pt_editor_key(e,0x24,0);pt_editor_key(e,0x28,0);
+    pt_editor_render_options(e,&o);assert(o.rate==44100 && o.bits==16 && o.gain_q16==65536 && o.pattern_only && o.pattern==e->pattern && o.include_lead_in);
+    pt_editor_key(e,0x14,0);assert(e->render_tracks==(1U<<e->project->channels.selected));
+    pt_editor_key(e,0x20,0);assert(e->render_tracks==all);
+    pt_editor_key(e,0x37,0);assert(e->number_field==9);
+    pt_editor_key(e,10,0);pt_editor_key(e,0x44,0);assert(e->number_field==9 && e->render_tracks==all);
+    pt_editor_key(e,0x45,0);assert(!e->number_field && e->render_tracks==all);
+    pt_editor_click(e,400,30);pt_editor_key(e,1,0);pt_editor_key(e,0x44,0);assert(!e->number_field && e->render_tracks==1);
+    pt_editor_click(e,400,30);for(unsigned j=0;j<5;++j)pt_editor_key(e,0x23,0);
+    pt_editor_key(e,0x44,0);assert(e->number_field==9 && e->render_tracks==1);pt_editor_key(e,0x45,0);
+    pt_editor_click(e,520,30);assert(e->render_tracks==all && !e->quit_pending);
+    pt_editor_click(e,250,30);pt_editor_click(e,250,50);pt_editor_click(e,400,50);pt_editor_click(e,520,50);pt_editor_click(e,250,85);
+    pt_editor_render_options(e,&o);assert(!o.pattern_only && o.rate==48000 && o.bits==24 && o.gain_q16==16384 && !o.include_lead_in);
+    pt_editor_key(e,0x24,0);assert(e->render_gain==32768);
+    assert(pt_editor_key(e,0x11,0)==PT_UI_RENDER && pt_editor_key(e,0x44,0)==PT_UI_RENDER && pt_editor_click(e,250,70)==PT_UI_RENDER);
+    assert(pt_editor_key(e,0x59,0)==PT_UI_STOP && pt_editor_key(e,0x40,0)==PT_UI_STOP);
+    pt_editor_key(e,0x4c,0x10);pt_editor_key(e,0x31,0);pt_editor_click(e,200,88);
+    assert(e->history.revision==revision && pt_editor_dirty(e)==dirty && e->sample==sample && e->row==row);
+    pt_editor_key(e,0x45,0);assert(!e->render_details && e->panel==2 && !e->quit_pending);
+    pt_editor_click(e,500,65);assert(e->render_details);pt_editor_click(e,500,85);assert(!e->render_details && e->panel==2);
+    pt_editor_click(e,400,85);assert(e->panel==0);
+}
 int main(int argc,char **argv)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_document doc;struct pt_editor *e;
@@ -368,6 +397,7 @@ int main(int argc,char **argv)
     pt_editor_click(e,400,70);assert(e->panel==2);
     assert(pt_editor_click(e,400,65)==PT_UI_EXPORT_MOD);
     pt_editor_click(e,400,85);assert(e->panel==0);
+    render_controls(e);
     assert(pt_editor_click(e,250,10)==PT_UI_PLAY);
     assert(pt_editor_click(e,400,10)==PT_UI_STOP);
     assert(pt_editor_click(e,250,30)==PT_UI_PATTERN);
@@ -406,7 +436,7 @@ int main(int argc,char **argv)
         struct pt_view_rect areas[PT_VIEW_DIRTY_MAX];unsigned step,p,j,y,x,n;
         static const unsigned actions[]={0x4d,0x4e,0x4f,0x42,0x4c,0x50,0x51,0x52,0x53,0x40,0x31,0x32,0x46,0x0c,0x0b,0x5a,0x5b};
         for(p=0;p<4;++p) {incremental.planes[p]=calloc(1,PT_VIEW_PLANE_BYTES);shown.planes[p]=calloc(1,PT_VIEW_PLANE_BYTES);assert(incremental.planes[p] && shown.planes[p]);}
-        for(step=0;step<274;++step) {
+        for(step=0;step<291;++step) {
             if(step && step<100)pt_editor_key(e,actions[(step-1)%(sizeof(actions)/sizeof(actions[0]))],0);
             if(step==156) {size_t size;uint8_t *bytes=readfile(argv[4],&size);assert(pt_editor_source_load(e,bytes,size)==PT_EDIT_OK);free(bytes);}
             if(step==157)pt_editor_click(e,520,30);
@@ -526,6 +556,23 @@ int main(int argc,char **argv)
             if(step==271)pt_editor_key(e,0x31,9);
             if(step==272)pt_editor_click(e,615,87);
             if(step==273)pt_editor_key(e,0x45,0);
+            if(step==274)pt_editor_key(e,0x11,9);
+            if(step==275)pt_editor_key(e,0x19,0);
+            if(step==276)pt_editor_key(e,0x13,0);
+            if(step==277)pt_editor_key(e,0x35,0);
+            if(step==278)pt_editor_key(e,0x24,0);
+            if(step==279)pt_editor_key(e,0x28,0);
+            if(step==280)pt_editor_key(e,0x14,0);
+            if(step==281)pt_editor_key(e,0x37,0);
+            if(step==282)pt_editor_key(e,1,0);
+            if(step==283)pt_editor_key(e,0x44,0);
+            if(step==284)pt_editor_click(e,500,30);
+            if(step==285)pt_editor_click(e,250,30);
+            if(step==286)pt_editor_click(e,500,50);
+            if(step==287)pt_editor_click(e,500,85);
+            if(step==288)pt_editor_click(e,500,65);
+            if(step==289)pt_editor_key(e,0x45,0);
+            if(step==290)pt_editor_click(e,400,85);
             if(step==143) {e->panel=5;pt_editor_key(e,0x32,0);}
             if(step==144)pt_editor_key(e,3,0);
             if(step==145)pt_editor_key(e,0x21,0);

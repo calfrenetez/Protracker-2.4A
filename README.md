@@ -36,7 +36,8 @@ editable/saveable; Paula audition requires compatible sample formats.
 A portable row/tick flow core now matches 16 pinned native replay traces on the
 host and emulated 68030. The reference timeline and high-resolution mixer now
 power `PT24GRender`, a bounded, supported-subset WAV utility with verified new-file
-publication. Complete effects and editor render/bounce controls remain unfinished.
+publication, now available from DISK OP. → RENDER WAV or Control-Shift-W.
+Complete effects, sample-slot bounce and batch stems remain unfinished.
 See [renderer usage and limits](docs/REFERENCE_RENDERER.md) and
 [replay design and evidence](docs/OFFLINE_REPLAY_DESIGN.md).
 

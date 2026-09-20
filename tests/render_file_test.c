@@ -4,10 +4,11 @@
 #include <unistd.h>
 #include "../src/platform/render_file.h"
 #include "wav.h"
-struct failure {char path[1024];unsigned mode,done;};
+struct failure {char path[1024];unsigned mode,done,verify_calls;uint64_t verified;};
 static int progress(void *ctx,enum pt_render_phase phase,uint32_t ticks,uint64_t frames)
 {
     struct failure *f=ctx;FILE *file;char path[1200];(void)ticks;
+    if(phase==PT_RENDER_VERIFY) {assert(frames>=f->verified);f->verified=frames;++f->verify_calls;}
     if(f->mode==1 && phase==PT_RENDER_MIX && frames>=256)return 0;
     if(phase!=PT_RENDER_VERIFY || f->done)return 1;
     f->done=1;
@@ -40,7 +41,9 @@ int main(int argc,char **argv)
     events[0].kind=PT_NOTE_PERIOD;events[0].pitch=428;events[0].instrument=1;events[4].effect=15;
     o.rate=48000;o.bits=24;o.tracks=1;o.gain_q16=65536;o.tick_limit=100;o.frame_limit=100000;
     path_for(path,sizeof(path),dir,"saved.wav");
-    assert(pt_render_file_new(path,&p,&o,NULL,NULL,&report,&detail)==PT_RENDER_FILE_OK && detail==PT_RENDER_OK && report.frames==960 && !report.clipped);
+    memset(&failure,0,sizeof(failure));
+    assert(pt_render_file_new(path,&p,&o,progress,&failure,&report,&detail)==PT_RENDER_FILE_OK && detail==PT_RENDER_OK && report.frames==960 && !report.clipped);
+    assert(failure.verify_calls>1 && failure.verified==960);
     n=read_file(path,data,sizeof(data));assert(n==5804 && pt_wav_inspect(data,n,&wav)==PT_WAV_OK && wav.bits==24 && wav.channels==2 && wav.rate==48000 && wav.frames==960);
     for(i=0;i<960*2;++i)for(j=0;j<3;++j)assert(data[44+i*3+j]==(uint8_t)((uint32_t)pcm[i%2]>>(8*j)));
     memcpy(original,data,n);before=report;

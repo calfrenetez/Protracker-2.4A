@@ -105,7 +105,9 @@ This uses ideal BPM timing and sample-rate-at-C-2 period scaling, not captured h
 Supported effects: 000/A/B/C/D/E6/EE/F. MIDI audio/pitches, nonzero finetune,
 instrument-only events and other effects are refused before output is created.
 Staged WAV bytes are verified by a second render; existing paths are never replaced.
-It is a reference export utility; editor render/bounce controls remain unfinished.
+Editor: DISK OP. > RENDER WAV or Control-Shift-W. P scope, M track mask, A all, T one,
+R rate, B bits, G gain, L lead-in, W/Return render. Escape cancels checking/mixing/verification.
+Export preserves project undo/dirty state. Complete effects, sample bounce and batch stems remain unfinished.
 This is not the finished sixteen-channel tracker or a hardware-qualified release.
 
 Amiga Shell, from the Amiga directory:

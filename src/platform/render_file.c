@@ -65,7 +65,7 @@ static int sink(void *ctx,const struct pt_pcm *p,uint64_t offset)
 }
 static int progress(void *ctx,enum pt_render_phase phase,uint32_t ticks,uint64_t frames)
 {
-    struct file *f=ctx;return !f->progress || f->progress(f->progress_ctx,f->verifying?PT_RENDER_VERIFY:phase,ticks,frames);
+    struct file *f=ctx;return !f->progress || f->progress(f->progress_ctx,f->verifying?PT_RENDER_VERIFY:phase,ticks,f->verifying?f->frames:frames);
 }
 static void abort_file(struct file *f)
 {
@@ -106,6 +106,7 @@ enum pt_render_file_result pt_render_file_new(const char *path,const struct pt_p
     result=pt_render_stream(p,o,sink,&f,progress,&f,&checked);*detail=result;
     if(result!=PT_RENDER_OK || checked.frames!=rendered.frames || checked.ticks!=rendered.ticks || checked.clipped!=rendered.clipped ||
        checked.end!=rendered.end || fgetc(f.reader)!=EOF || ferror(f.reader))goto fail;
+    if(!progress(&f,PT_RENDER_VERIFY,checked.ticks,f.frames)) {*detail=PT_RENDER_CANCELLED;goto fail;}
     ok=fclose(f.reader);f.reader=NULL;if(ok)goto fail;
     failure=PT_RENDER_FILE_PUBLISH;
 #ifdef __amigaos__

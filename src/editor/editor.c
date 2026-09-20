@@ -191,14 +191,14 @@ static void number_begin(struct pt_editor *e,unsigned field)
     unsigned long value;
     if(field<4 && !sample_range(e))return;
     e->number_field=field;e->number_fresh=1;
-    value=field==1?e->sample_start:field==2?e->sample_end:field==3?e->format_rate:field==4?e->raw_format.rate:field==5?channel->pan:field==6?channel->group:field==7?channel->midi_channel:current_event(e)->slice;
-    snprintf(e->number_text,sizeof(e->number_text),field==8?"%04lX":field==5 || field==6?"%02lX":"%lu",value);++e->sample_ui;
-    pt_editor_status(e,field==1?"ENTER START FRAME: DIGITS / RETURN APPLY / ESC CANCEL":field==2?"ENTER END FRAME: DIGITS / RETURN APPLY / ESC CANCEL":
+    value=field==9?e->render_tracks:field==1?e->sample_start:field==2?e->sample_end:field==3?e->format_rate:field==4?e->raw_format.rate:field==5?channel->pan:field==6?channel->group:field==7?channel->midi_channel:current_event(e)->slice;
+    snprintf(e->number_text,sizeof(e->number_text),field==8 || field==9?"%04lX":field==5 || field==6?"%02lX":"%lu",value);++e->sample_ui;
+    pt_editor_status(e,field==9?"TRACK MASK HEX - NONZERO AVAILABLE TRACKS / RETURN / ESC":field==1?"ENTER START FRAME: DIGITS / RETURN APPLY / ESC CANCEL":field==2?"ENTER END FRAME: DIGITS / RETURN APPLY / ESC CANCEL":
         field==8?"SLICE HEX 0000 WHOLE / 0001 FIRST MARKER / RETURN APPLY":field==5?"PAN 00 LEFT TO FF RIGHT (HEX) / RETURN / ESC CANCEL":field==6?"GROUP 00 NONE TO 0F (HEX) / RETURN / ESC CANCEL":field==7?"MIDI CHANNEL 1-16 (DECIMAL) / RETURN / ESC CANCEL":"ENTER TARGET RATE 1-192000 HZ / RETURN / ESC CANCEL");
 }
 static void number_key(struct pt_editor *e,unsigned raw)
 {
-    size_t length=strlen(e->number_text),i;unsigned digit,base=e->number_field==5 || e->number_field==6 || e->number_field==8?16:10;uint32_t value=0,frames;int input;
+    size_t length=strlen(e->number_text),i;unsigned digit,base=e->number_field==5 || e->number_field==6 || e->number_field==8 || e->number_field==9?16:10;uint32_t value=0,frames;int input;
     if(raw==0x45) {e->number_field=0;++e->sample_ui;pt_editor_status(e,"NUMBER ENTRY CANCELLED - VALUES PRESERVED");return;}
     if(raw==0x44) {
         for(i=0;i<length;++i) {
@@ -208,10 +208,11 @@ static void number_key(struct pt_editor *e,unsigned raw)
         }
         frames=e->sample && e->sample<=e->project->sample_count?e->project->samples[e->sample-1].pcm.frames:0;
         if(!length || i!=length || (e->number_field==1?value>=e->sample_end:e->number_field==2?value<=e->sample_start || value>frames:
-            e->number_field==8?value>PT_PROJECT_SLICES:e->number_field==5?value>255:e->number_field==6?value>15:e->number_field==7?!value || value>16:!value || value>192000)) {
-            pt_editor_status(e,e->number_field==8?"INVALID SLICE NUMBER - CORRECT OR ESC CANCEL":e->number_field>=5?"INVALID CHANNEL VALUE - CORRECT OR ESC CANCEL":e->number_field>=3?"INVALID RATE - ENTER 1 TO 192000 HZ OR ESC CANCEL":"INVALID FRAME RANGE - CORRECT VALUE OR ESC CANCEL");return;
+            e->number_field==9?!value || value>((1UL<<e->project->channels.count)-1):e->number_field==8?value>PT_PROJECT_SLICES:e->number_field==5?value>255:e->number_field==6?value>15:e->number_field==7?!value || value>16:!value || value>192000)) {
+            pt_editor_status(e,e->number_field==9?"INVALID TRACK MASK - USE AVAILABLE TRACKS / ESC CANCEL":e->number_field==8?"INVALID SLICE NUMBER - CORRECT OR ESC CANCEL":e->number_field>=5?"INVALID CHANNEL VALUE - CORRECT OR ESC CANCEL":e->number_field>=3?"INVALID RATE - ENTER 1 TO 192000 HZ OR ESC CANCEL":"INVALID FRAME RANGE - CORRECT VALUE OR ESC CANCEL");return;
         }
-        if(e->number_field==8) {if(!note_slice(e,value))return;}
+        if(e->number_field==9) {e->render_tracks=(uint16_t)value;pt_editor_status(e,"RENDER TRACK MASK SET - PROJECT UNCHANGED");}
+        else if(e->number_field==8) {if(!note_slice(e,value))return;}
         else if(e->number_field>=5) {
             struct pt_channel channel=e->project->channels.track[e->project->channels.selected];
             if(e->number_field==5)channel.pan=(uint8_t)value;else if(e->number_field==6)channel.group=(uint8_t)value;else channel.midi_channel=(uint8_t)value;
@@ -228,6 +229,29 @@ static void number_key(struct pt_editor *e,unsigned raw)
         if(e->number_fresh) {length=0;e->number_fresh=0;}
         if(length<10) {e->number_text[length]="0123456789ABCDEF"[input];e->number_text[length+1]=0;++e->sample_ui;}
     }
+}
+static void render_panel(struct pt_editor *e)
+{e->panel=2;e->render_details=1;e->quit_pending=0;++e->sample_ui;pt_editor_status(e,"REFERENCE WAV - W RENDER / P SCOPE / M TRACKS / ESC BACK");}
+static void render_setting(struct pt_editor *e,unsigned setting)
+{
+    uint16_t all=(uint16_t)((1UL<<e->project->channels.count)-1);
+    if(setting==0)e->render_pattern^=1;
+    else if(setting==1) {number_begin(e,9);return;}
+    else if(setting==2)e->render_rate=e->render_rate==48000?44100:48000;
+    else if(setting==3)e->render_bits=e->render_bits==24?16:24;
+    else if(setting==4)e->render_gain=e->render_gain==32768?65536:e->render_gain==65536?16384:32768;
+    else if(setting==5)e->render_lead_in^=1;
+    else if(setting==6)e->render_tracks=all;
+    else if(setting==7)e->render_tracks=(uint16_t)(1U<<e->project->channels.selected);
+    else e->render_tracks=e->render_tracks==all?(uint16_t)(1U<<e->project->channels.selected):all;
+    ++e->sample_ui;pt_editor_status(e,"RENDER SETTINGS UPDATED");
+}
+void pt_editor_render_options(const struct pt_editor *e,struct pt_render_options *o)
+{
+    memset(o,0,sizeof(*o));o->rate=e->render_rate;o->bits=(uint8_t)e->render_bits;
+    o->gain_q16=e->render_gain;o->tracks=e->render_tracks;o->pattern=(uint16_t)e->pattern;
+    o->pattern_only=(uint8_t)e->render_pattern;o->include_lead_in=(uint8_t)e->render_lead_in;
+    o->tick_limit=1000000;o->frame_limit=(uint64_t)o->rate*30*60;
 }
 static void name_begin(struct pt_editor *e,unsigned kind)
 {
@@ -375,6 +399,7 @@ int pt_editor_init(struct pt_editor *e,struct pt_project *p)
     memset(e,0,sizeof(*e));e->project=p;e->pattern=p->orders[0];e->sample=p->sample_count?1:0;e->octave=1;e->new_channels=p->channels.count;
     if(pt_pattern_history_init(&e->history,p,e->commands,128,e->changes,2048)!=PT_EDIT_OK)return 0;
     {struct pt_allocator a={NULL,sample_allocate,sample_release};pt_sampler_init(&e->sampler,&a,32UL*1024*1024);pt_document_init(&e->sample_source,&a);pt_song_init(&e->song,&a,8UL*1024*1024);}
+    e->render_rate=48000;e->render_bits=24;e->render_gain=32768;e->render_tracks=(uint16_t)((1UL<<p->channels.count)-1);
     e->raw_format=(struct pt_raw_format){8287,8,1,0,0};
     e->format_filtered=1;e->loop_fade=32;e->slice_threshold=500;e->slice_gap_ms=50;e->slice_zero=1;
     pt_editor_sample_all(e);
@@ -583,6 +608,7 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
     if((qualifier&8) && raw==0x18) {if((qualifier&3) && e->panel>=5) {e->load_pending=0;e->quit_pending=0;return PT_UI_SAMPLE_LOAD;}return request_load(e);}
     if(e->load_pending)pt_editor_status(e,"LOAD CANCELLED - EDITS PRESERVED");
     e->load_pending=0;
+    if(raw==0x45 && e->panel==2 && e->render_details) {e->render_details=0;++e->sample_ui;pt_editor_status(e,"DISK OPERATIONS");return PT_UI_NONE;}
     if(raw==0x45 && e->panel==3) {e->panel=0;pt_editor_status(e,"NEW SONG CANCELLED - EDITS PRESERVED");return PT_UI_NONE;}
     if(raw==0x45 && e->panel==1 && e->song_details) {e->song_details=0;e->panel=0;++e->sample_ui;pt_editor_status(e,"POSITION EDITOR CLOSED");return PT_UI_NONE;}
     if(raw==0x45 && e->panel==1 && e->note_details) {e->note_details=0;++e->sample_ui;pt_editor_status(e,"EDIT OPERATIONS");return PT_UI_NONE;}
@@ -599,6 +625,7 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
     if(qualifier&8) {
         if(raw==0x31)undo(e,(qualifier&3)?1:-1);
         else if(raw==0x21)return (qualifier&3)?PT_UI_SAVE_AS:PT_UI_SAVE;
+        else if(raw==0x11 && (qualifier&3))render_panel(e);
         else if(raw==0x36) {if(qualifier&3)name_begin(e,2);else new_panel(e);} /* Control-N / Control-Shift-N */
         else if((qualifier&3) && raw==0x0c && e->panel>=5 && e->panel<=10)sample_add(e);
         else if(raw==0x14 && (qualifier&3))name_begin(e,3); /* Control-Shift-T */
@@ -617,6 +644,19 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
         else if(raw==0x46)block_edit(e,2);
         else if(raw==0x0b)block_edit(e,-1);
         else if(raw==0x0c)block_edit(e,3);
+        return PT_UI_NONE;
+    }
+    if(e->panel==2 && e->render_details) {
+        if(raw==0x19)render_setting(e,0);
+        else if(raw==0x37)render_setting(e,1);
+        else if(raw==0x13)render_setting(e,2);
+        else if(raw==0x35)render_setting(e,3);
+        else if(raw==0x24)render_setting(e,4);
+        else if(raw==0x28)render_setting(e,5);
+        else if(raw==0x20)render_setting(e,6);
+        else if(raw==0x14)render_setting(e,7);
+        else if(raw==0x11 || raw==0x44)return PT_UI_RENDER;
+        else if(raw==0x59 || raw==0x40)return PT_UI_STOP;
         return PT_UI_NONE;
     }
     if((qualifier&0x30) && raw>=0x4c && raw<=0x4f) {
@@ -802,6 +842,17 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
     if(x>=590 && y>=174 && y<193)return request_load(e);
     if(e->load_pending)pt_editor_status(e,"LOAD CANCELLED - EDITS PRESERVED");
     e->load_pending=0;
+    if(e->panel==2 && e->render_details) {
+        if(x>=230 && x<599 && y>=21 && y<97) {
+            r=(unsigned)(y-2)/19;c=(unsigned)(x-230)/123;
+            if(r==1)render_setting(e,c==0?0:c==1?1:8);
+            else if(r==2)render_setting(e,2+c);
+            else if(r==3)return PT_UI_RENDER;
+            else if(x<414)render_setting(e,5);
+            else {e->render_details=0;++e->sample_ui;pt_editor_status(e,"DISK OPERATIONS");}
+        }
+        return PT_UI_NONE;
+    }
     if(e->panel==2 && x>=414 && x<599 && y>=21 && y<59)return quit(e);
     e->quit_pending=0;
     if(e->panel==3) {
@@ -909,7 +960,7 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
     }
     if(e->panel==2 && x>=230 && x<599 && y>=2 && y<97) {
         if(y>=78)e->panel=0;
-        else if(y>=59)return PT_UI_EXPORT_MOD;
+        else if(y>=59) {if(x<414)return PT_UI_EXPORT_MOD;render_panel(e);}
         else if(y>=21) {if(e->panel==2)return PT_UI_SAVE_AS;undo(e,x<414?-1:1);}
         return PT_UI_NONE;
     }
@@ -936,7 +987,7 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
         else if(r==2 && c==0) {e->editing=!e->editing;pt_editor_status(e,e->editing?"EDIT ON":"EDIT OFF");}
         else if(r==2 && c==1) {e->panel=1;e->note_details=0;e->song_details=0;}
         else if(r==2 && c==2)song_panel(e);
-        else if(r==3 && c==1)e->panel=2;
+        else if(r==3 && c==1) {e->panel=2;e->render_details=0;}
         else if((r==3 && c==2) || (r==4 && c==1))sampler_panel(e);
         else pt_editor_status(e,"THIS CONTROL IS NOT YET CONNECTED");
     } else if(x>=190 && x<230 && y>=2 && y<173) {

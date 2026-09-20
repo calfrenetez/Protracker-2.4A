@@ -17,6 +17,7 @@
 #include "pt_font.h"
 #include "paula.h"
 #include "file_request.h"
+#include "../platform/render_file.h"
 struct IntuitionBase *IntuitionBase;
 struct GfxBase *GfxBase;
 static void *allocate(void *ctx,size_t n) {(void)ctx;return malloc(n);}
@@ -179,6 +180,63 @@ static int conversion_progress(void *context,uint32_t done,uint32_t total)
     }
     return 1;
 }
+struct render_ui {struct conversion_ui display;uint64_t total;unsigned phase;};
+static int render_progress(void *context,enum pt_render_phase phase,uint32_t ticks,uint64_t frames)
+{
+    struct render_ui *ui=context;struct conversion_ui *d=&ui->display;struct IntuiMessage *message;
+    unsigned percent=ui->total?(unsigned)(frames*100/ui->total):0;int cancelled=0;
+    while((message=(struct IntuiMessage *)GetMsg(d->window->UserPort))) {
+        ULONG kind=message->Class;UWORD code=message->Code;ReplyMsg((struct Message *)message);
+        if(kind==IDCMP_RAWKEY && code==0x45)cancelled=1;
+        if(kind==IDCMP_REFRESHWINDOW) {BeginRefresh(d->window);EndRefresh(d->window,TRUE);d->cache->valid=0;}
+    }
+    if(cancelled) {puts("EDITOR RENDER cancelled");fflush(stdout);return 0;}
+    if(ui->phase!=(unsigned)phase || (phase!=PT_RENDER_ANALYSE && percent/5!=d->percent/5) || !d->cache->valid) {
+        struct pt_view_rect areas[PT_VIEW_DIRTY_MAX];unsigned i,n,plane;char status[76];
+        const char *name=phase==PT_RENDER_ANALYSE?"CHECKING":phase==PT_RENDER_MIX?"RENDERING":"VERIFYING";
+        if(phase==PT_RENDER_ANALYSE)snprintf(status,sizeof(status),"%s WAV - ESC CANCEL",name);
+        else snprintf(status,sizeof(status),"%s WAV %u%% - ESC CANCEL",name,percent);
+        pt_editor_status(d->editor,status);n=pt_editor_draw_update(d->editor,d->canvas,pt_font,d->cache,areas);
+        for(i=0;i<n;++i) {
+            struct pt_view_rect *a=&areas[i];
+            for(plane=0;plane<4;++plane)CopyMem(d->canvas->planes[plane]+a->y*80,d->bitmap->Planes[plane]+a->y*80,a->height*80);
+            BltBitMapRastPort(d->bitmap,a->x,a->y,d->window->RPort,a->x,a->y,a->width,a->height,0xc0);WaitBlit();
+        }
+        ui->phase=(unsigned)phase;d->percent=percent;
+        printf("EDITOR RENDER progress=%s percent=%u ticks=%lu\n",name,percent,(unsigned long)ticks);fflush(stdout);
+    }
+    return 1;
+}
+static const char *render_error(enum pt_render_result result)
+{
+    switch(result) {
+    case PT_RENDER_ROUTE:return "WAV REFUSED: SELECTED MIDI TRACK NEEDS SUPPLIED AUDIO";
+    case PT_RENDER_EFFECT:return "WAV REFUSED: NOTE OR EFFECT NOT SUPPORTED BY REFERENCE RENDERER";
+    case PT_RENDER_SAMPLE:return "WAV REFUSED: FINETUNE OR SAMPLE LOOP NOT SUPPORTED";
+    case PT_RENDER_TICK_LIMIT:case PT_RENDER_FRAME_LIMIT:return "WAV LIMIT REACHED - NO FILE PUBLISHED";
+    case PT_RENDER_CANCELLED:return "WAV CANCELLED - EDITS PRESERVED";
+    default:return "WAV REFUSED - CHECK SETTINGS; PROJECT PRESERVED";
+    }
+}
+static void render_wav(struct conversion_ui *display,struct pt_paula *audio)
+{
+    struct pt_editor *e=display->editor;struct pt_render_options options;struct pt_render_report plan,report;
+    struct render_ui ui={*display,0,~0U};enum pt_render_result detail;enum pt_render_file_result result;
+    char path[1024],status[76];int selected;
+    pt_paula_stop(audio);pt_paula_poll(audio,&e->playback);pt_editor_render_options(e,&options);
+    detail=pt_render_measure(e->project,&options,render_progress,&ui,&plan);
+    if(detail!=PT_RENDER_OK) {pt_editor_status(e,render_error(detail));printf("EDITOR RENDER preflight=%u dirty=%u\n",detail,pt_editor_dirty(e));fflush(stdout);return;}
+    ui.total=plan.frames;puts("EDITOR REQUEST render");fflush(stdout);
+    selected=pt_file_request(display->window,9,"new-render.wav",path,sizeof(path));display->cache->valid=0;
+    if(selected!=1) {pt_editor_status(e,selected==0?"WAV REQUEST CANCELLED - EDITS PRESERVED":"WAV REQUEST FAILED - EDITS PRESERVED");return;}
+    result=pt_render_file_new(path,e->project,&options,render_progress,&ui,&report,&detail);
+    if(result==PT_RENDER_FILE_OK) {
+        if(report.clipped) {snprintf(status,sizeof(status),"WAV VERIFIED - %lu CLIPS; REDUCE GAIN",(unsigned long)report.clipped);pt_editor_status(e,status);}
+        else pt_editor_status(e,pt_editor_dirty(e)?"WAV VERIFIED - PROJECT STILL UNSAVED":"WAV VERIFIED - PROJECT UNCHANGED");
+    } else if(detail!=PT_RENDER_OK)pt_editor_status(e,render_error(detail));
+    else pt_editor_status(e,result==PT_RENDER_FILE_BEGIN || result==PT_RENDER_FILE_PUBLISH?"WAV REFUSED: TARGET EXISTS OR CANNOT BE CREATED":"WAV FAILED - PROJECT AND DESTINATION PRESERVED");
+    printf("EDITOR RENDER result=%u detail=%u dirty=%u frames=%lu\n",result,detail,pt_editor_dirty(e),result==PT_RENDER_FILE_OK?(unsigned long)report.frames:0UL);fflush(stdout);
+}
 int main(int argc,char **argv)
 {
     struct pt_view_cache view_cache={0};
@@ -302,6 +360,7 @@ int main(int argc,char **argv)
                     else pt_editor_status(editor,selected==0?"MOD EXPORT CANCELLED - PROJECT PRESERVED":"MOD REQUESTER UNAVAILABLE OR PATH TOO LONG");
                 }
             }
+            if(action==PT_UI_RENDER)render_wav(&conversion,&audio);
             if(action==PT_UI_RAW_LOAD || (action==PT_UI_RAW_SAVE && raw_eligible(editor))) {
                 int importing=action==PT_UI_RAW_LOAD,selected;printf("EDITOR REQUEST %s\n",importing?"rawload":"rawsave");fflush(stdout);
                 selected=pt_file_request(window,importing?6:7,importing?raw_input:raw_path,chosen_path,sizeof(chosen_path));view_cache.valid=0;

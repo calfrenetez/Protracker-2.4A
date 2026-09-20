@@ -54,7 +54,7 @@ Control-R or a P/A/M header letter opens CHANNEL: routes, mute and solo share un
 and project saves. P/A/M chooses route, U mute, S solo, Escape closes the page.
 Classic Paula playback applies mute/solo live; MOD export refuses saved flags.
 SAMPLER/Control-L opens WAV/IFF/explicit RAW import/export, waveform selection and undoable edits.
-In SAMPLER: L load WAV/IFF, W export WAV, Shift-W export IFF, R reverse, N normalize, D DC removal, G/H gain
+In SAMPLER: L load WAV/IFF or browse instruments in a MOD/PP20 source, W export WAV, Shift-W export IFF, R reverse, N normalize, D DC removal, G/H gain
 x2 or /2, I/O fades, A all. Two clicks select a frame range. Control-S saves the
 project. High-resolution samples retain their precision; Paula audition requires
 compatible classic samples. Sample changes stop the old playback snapshot.
@@ -72,6 +72,9 @@ RAW / X from SAMPLER opens explicit headerless import/export settings: 1/2/3 bit
 M/S mono/stereo, U unsigned8, E byte order, R rate, L load and W save RAW.
 RAW export contains PCM only and requires matching sample bits/channels/rate.
 Tab returns to SAMPLER; A selects all. Unknown files are never auto-loaded as RAW.
+MOD source page: left/right choose source, -/+ choose destination, I/Return imports.
+Escape/Tab closes source; imported PCM/name/finetune/volume/loop share undo.
+Browsing a MOD never replaces the current song. Shift-L selects a MOD source directly.
 Mixed AmiGUS/MIDI replay and other unfinished controls remain unavailable.
 PP20 loads through the shared bounded decoder; PX20 and PP20 saving are unsupported.
 PT24GConvert inspects projects and performs strict lossless MOD/project conversion.

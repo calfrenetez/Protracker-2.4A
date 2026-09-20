@@ -1,5 +1,6 @@
 from pathlib import Path
 import hashlib
+import importlib.util
 import subprocess
 import tempfile
 import unittest
@@ -13,8 +14,10 @@ class Editor(unittest.TestCase):
             binary = str(Path(tmp) / 'editor-test')
             subprocess.run(['cc', '-std=c99', '-O1', '-g', '-Wall', '-Wextra', '-Werror',
                             '-fsanitize=address,undefined', '-Isrc/core', *SOURCES, '-o', binary], cwd=ROOT, check=True)
+            spec=importlib.util.spec_from_file_location('donor',ROOT/'tools/make_mod_sample_fixture.py');maker=importlib.util.module_from_spec(spec);spec.loader.exec_module(maker)
+            donor=Path(tmp)/'donor.mod';donor.write_bytes(maker.make((ROOT/'evidence/baseline/mod.baseline').read_bytes()))
             subprocess.run([binary, str(ROOT/'tests/fixtures/project-v1/mixed.ptg'),
-                            str(ROOT/'vendor/pt23f/raw/ptfont.raw'), str(Path(tmp)/'editor.ppm')], check=True)
+                            str(ROOT/'vendor/pt23f/raw/ptfont.raw'), str(Path(tmp)/'editor.ppm'),str(donor)], check=True)
             # Reference-refinement golden; incremental redraws must match it exactly.
             self.assertEqual(hashlib.sha256((Path(tmp)/'editor.ppm').read_bytes()).hexdigest(),
                              '87ebf44ea470be133f7d47931f04210e5b883b90e3b882a256f1f641bd7450eb')

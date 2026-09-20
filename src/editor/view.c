@@ -175,11 +175,13 @@ static void draw_pattern_row(const struct pt_editor *e,struct pt_canvas *c,const
 static void draw_sample(const struct pt_editor *e,struct pt_canvas *c,const uint8_t *font)
 {
     const struct pt_sample *sample=e->sample && e->sample<=e->project->sample_count?&e->project->samples[e->sample-1]:NULL;
+    if(e->panel==11)sample=e->sample_source.loaded && e->source_selected?&e->sample_source.project.samples[e->source_selected-1]:NULL;
     const struct pt_pcm *pcm=sample?&sample->pcm:NULL;char text[80];unsigned channel,x;
     uint32_t view_start,view_end,span;
     pt_editor_wave_bounds(e,&view_start,&view_end);span=view_end-view_start;
     uint32_t start=e->sample_range_slot==e->sample?e->sample_start:0;
     uint32_t end=e->sample_range_slot==e->sample?e->sample_end:pcm?pcm->frames:0;
+    if(e->panel==11) {view_start=start=0;span=view_end=end=pcm?pcm->frames:0;}
     panel(c,2,PT_EDITOR_HEADER_Y,636,PT_EDITOR_BOTTOM_Y-PT_EDITOR_HEADER_Y,GREY);
     if(!pcm) {label(c,font,2,PT_EDITOR_HEADER_Y,636,19,"SELECT A SAMPLE SLOT",0);return;}
     snprintf(text,sizeof(text),"SAMPLE %02u  %u BIT  %s  %lu HZ",e->sample,pcm->bits,pcm->channels==2?"STEREO":"MONO",(unsigned long)pcm->rate);
@@ -187,6 +189,7 @@ static void draw_sample(const struct pt_editor *e,struct pt_canvas *c,const uint
     if(e->panel==7)snprintf(text,sizeof(text),"SLICES %u / %s %lu  -  %s",sample->slice_count,e->slice_pending?"PROPOSED":"SAVED",(unsigned long)(e->slice_pending?e->slice_count:sample->slice_count),e->slice_pending?"APPLY OR CANCEL":"MARKERS ONLY");
     if(e->panel==9)snprintf(text,sizeof(text),"FORMAT %u BIT %lu HZ > %u BIT %lu HZ / %s",pcm->bits,(unsigned long)pcm->rate,e->format_bits,(unsigned long)e->format_rate,e->format_filtered?"FILTER":"LINEAR");
     if(e->panel==10)snprintf(text,sizeof(text),"RAW %u BIT %s %s %s %lu HZ / PCM ONLY",e->raw_format.bits,e->raw_format.channels==2?"STEREO":"MONO",e->raw_format.unsigned8?"UNSIGNED":"SIGNED",e->raw_format.little_endian?"LE":"BE",(unsigned long)e->raw_format.rate);
+    if(e->panel==11)snprintf(text,sizeof(text),"SOURCE %02X %.31s > SAMPLE %02X",e->source_selected,sample->name,e->sample);
     label(c,font,2,PT_EDITOR_HEADER_Y,636,19,text,0);
     for(channel=0;channel<pcm->channels;++channel) {
         int top=254+(int)channel*(216/pcm->channels),height=216/pcm->channels-4,mid=top+height/2;
@@ -219,9 +222,10 @@ static void draw_sample(const struct pt_editor *e,struct pt_canvas *c,const uint
                 rect(c,lx,top,rx-lx+1,2,YELLOW);
             }
         }
-        if(e->sample_range_slot==e->sample && e->sample_marking && pcm->frames && e->sample_anchor>=view_start && e->sample_anchor<=view_end)rect(c,10+(int)((uint64_t)(e->sample_anchor-view_start)*619/span),top,1,height,YELLOW);
+        if(e->panel!=11 && e->sample_range_slot==e->sample && e->sample_marking && pcm->frames && e->sample_anchor>=view_start && e->sample_anchor<=view_end)rect(c,10+(int)((uint64_t)(e->sample_anchor-view_start)*619/span),top,1,height,YELLOW);
     }
     snprintf(text,sizeof(text),"RANGE %lu-%lu  VIEW %lu-%lu / %lu",(unsigned long)start,(unsigned long)end,(unsigned long)view_start,(unsigned long)view_end,(unsigned long)pcm->frames);
+    if(e->panel==11)snprintf(text,sizeof(text),"SOURCE %lu FRAMES / READ ONLY - IMPORT TO COPY",(unsigned long)pcm->frames);
     small(c,font,12,478,text,NAVY);
 }
 void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t font[580])
@@ -291,13 +295,14 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
     pt_editor_draw_playback(e,c,font);
     if(e->panel>=5) {
         static const char *tabs[4]={"SAMPLER","LOOPS","SLICES","RANGE"};
-        static const char *ops[6][4][3]={
+        static const char *ops[7][4][3]={
             {{"LOAD SMP","SAVE WAV","AUDITION"},{"REVERSE","NORMALIZE","DC OFFS"},{"GAIN /2","GAIN X2","FORMAT"},{"FADE IN","FADE OUT","RAW"}},
             {{"FORWARD","PINGPONG","OFF"},{"FADE -","","FADE +"},{"BAKE FADE","USE LOOP","SAVE IFF"},{"ALL","UNDO","REDO"}},
             {{"ADD START","DELETE","CLEAR"},{"AUTO","APPLY","CANCEL"},{"THRESH -","","THRESH +"},{"GAP -","","GAP +"}},
             {{"ZOOM IN","ZOOM OUT","FIT ALL"},{"PAN <","ZOOM SEL","PAN >"},{"START -","","START +"},{"END -","","END +"}},
             {{"8 BIT","16 BIT","24 BIT"},{"8287 HZ","22050 HZ","44100 HZ"},{"48000 HZ","","BACK"},{"APPLY","UNDO","REDO"}},
-            {{"LOAD RAW","SAVE RAW","BACK"},{"8 BIT","16 BIT","24 BIT"},{"MONO","STEREO","SIGNED"},{"BIG ENDIAN","LIL ENDIAN","RATE"}}};
+            {{"LOAD RAW","SAVE RAW","BACK"},{"8 BIT","16 BIT","24 BIT"},{"MONO","STEREO","SIGNED"},{"BIG ENDIAN","LIL ENDIAN","RATE"}},
+            {{"LOAD MOD","SOURCE <","SOURCE >"},{"","",""},{"DEST <","","DEST >"},{"IMPORT","CLOSE","STOP"}}};
         for(i=0;i<4;++i)label(c,font,230+(int)(i*369/4),2,(int)((i+1)*369/4-i*369/4),19,tabs[i],e->panel==5+i);
         for(r=0;r<4;++r)for(i=0;i<3;++i)label(c,font,230+(int)i*123,21+(int)r*19,123,19,ops[e->panel-5][r][i],
             (e->panel==6 && r==0 && sample && sample->loop==(i==2?PT_LOOP_NONE:i+1)) || (e->panel==9 && r==0 && e->format_bits==(i+1)*8));
@@ -311,6 +316,11 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
             else snprintf(s,sizeof(s),"%lu HZ",(unsigned long)e->format_rate);
             label(c,font,353,59,123,19,s,e->number_field==3);
             label(c,font,476,59,123,19,e->format_filtered?"FILTERED":"LINEAR",e->format_filtered);
+        }
+        if(e->panel==11) {
+            label(c,font,230,2,369,19,"IMPORT INSTRUMENT FROM MOD",0);
+            snprintf(s,sizeof(s),"SOURCE %02X OF %02X",e->source_selected,e->sample_source.project.sample_count);label(c,font,230,40,369,19,s,0);
+            snprintf(s,sizeof(s),"SAMPLE %02X",e->sample);label(c,font,353,59,123,19,s,0);
         }
         if(e->panel==10) {
             for(i=0;i<3;++i)label(c,font,230+(int)i*123,40,123,19,ops[5][1][i],e->raw_format.bits==(i+1)*8);

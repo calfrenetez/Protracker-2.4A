@@ -212,3 +212,17 @@ enum pt_edit_result pt_sampler_import_raw(struct pt_sampler *s,struct pt_project
     if(pt_raw_decode(bytes,length,format,&v->sample.pcm)!=PT_RAW_OK) {release_version(v);return PT_EDIT_INVALID;}
     return commit(s,p,h,slot,v);
 }
+
+enum pt_edit_result pt_sampler_import_slot(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const struct pt_project *source,unsigned selected)
+{
+    struct pt_sample_version *v;size_t i,count;const struct pt_sample *sample;
+    if(!s || !s->allocator.allocate || !s->allocator.release || pt_project_validate(p,NULL)!=PT_PROJECT_OK || pt_project_validate(source,NULL)!=PT_PROJECT_OK || slot>=p->sample_count || selected>=source->sample_count)return PT_EDIT_INVALID;
+    sample=&source->samples[selected];if(!sample->pcm.frames)return PT_EDIT_INVALID;
+    count=(size_t)p->pattern_count*64*p->channels.count;
+    for(i=0;i<count;++i)if(p->events[i].instrument==slot+1 && p->events[i].slice) {
+        unsigned slice=p->events[i].slice;
+        if(slice>sample->slice_count || sample->slices[slice-1]!=p->samples[slot].slices[slice-1])return PT_EDIT_UNSUPPORTED;
+    }
+    v=version(s,sample);if(!v)return PT_EDIT_CAPACITY;
+    return commit(s,p,h,slot,v);
+}

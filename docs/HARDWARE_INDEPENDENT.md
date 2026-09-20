@@ -383,3 +383,13 @@ failure, budgets temporary decompressed memory and rejects PX20/nested container
 Pinned public-domain source provenance, synthetic/genuine regression identities,
 allocation/bounds tests and native workflows are recorded in the dev19 evidence.
 The separate assembler powerpacker.library path is unchanged.
+
+## Selected MOD instrument import milestone (dev20)
+
+The sampler loads ordinary and PP20 MODs into a separate bounded source document,
+shows a read-only instrument waveform/name, and copies the selected instrument into
+an existing destination slot as one shared undo action. It retains exact finetune,
+volume, loop and PCM while preserving the current song. Source storage is reserved
+against the sampler policy budget and released independently from imported versions.
+Host/native ownership, failure, preview, round-trip and full-song comparison evidence
+is in `evidence/enhanced-editor/dev20/`. Source audition remains unavailable.

@@ -134,8 +134,7 @@ Import retains exact decoded precision, rate and channels; no downmix, resamplin
 or precision conversion occurs. A WAV replaces the selected slot with volume 64,
 finetune zero and no loop/slice metadata. Undo restores the complete old sample.
 A replacement is refused if any event references its existing slices. WAV loop,
-cue and other ancillary metadata are not imported. MOD sample import,
-recording and adding sample slots beyond the existing document remain open.
+cue and other ancillary metadata are not imported. Recording and adding sample slots beyond the existing document remain open.
 
 REVERSE / R, NORMALIZE / N, DC OFFS / D, GAIN X2 / G, GAIN /2 / H, FADE IN / I
 and FADE OUT / O act on the selected range. Stereo frames stay paired. Normalize
@@ -397,7 +396,7 @@ explicit FORMAT conversion first where appropriate. WAV export remains W on
 SAMPLER and contains PCM only. Neither export removes project metadata.
 
 The bounded parser follows the [AmigaOS 8SVX specification](https://wiki.amigaos.net/wiki/8SVX_IFF_8-Bit_Sampled_Voice).
-IFF imports do not imply enhanced playback is available. Selecting a sample from another MOD remains subsequent work.
+IFF imports do not imply enhanced playback is available. Selected-instrument MOD import is described below.
 
 
 ## Explicit headerless RAW interchange
@@ -449,3 +448,33 @@ Enhanced editor uses a bounded adaptation of the explicitly public-domain PP20
 algorithm in libxmp, with pinned source and notices in `vendor/pp20-reference/`.
 No runtime library installation is required for this path. Musical third-party
 regression input remains local and is not redistributed in development packages.
+
+
+## Import one instrument from another MOD
+
+LOAD SMP / L on SAMPLER now recognises a normal MOD or PP20 MOD and opens a separate
+read-only source page. Shift-L requests a MOD source directly. The current song,
+selected destination and undo journal remain unchanged while loading/browsing.
+The source waveform and name are labelled SOURCE; the main song/parameter strips
+still describe the destination project. Source storage is separate from the song.
+
+SOURCE </> / left/right selects instrument 01–1F; DEST </> / -/+ selects the
+existing destination slot. IMPORT / I / Return copies PCM, name, rate, volume,
+finetune and loop as one shared undo command. Empty source instruments refuse.
+The current song's orders, patterns, channels and other sample slots are preserved.
+Referenced destination slices cannot be removed or retargeted by an import.
+
+LOAD MOD / L changes source; cancellation or invalid input retains the previous
+source and selection. CLOSE / Escape / Tab releases source storage and returns
+to SAMPLER. Applied imports remain in the song and can still be undone/redone.
+Control-Z / Control-Shift-Z work while the source page is open. Control-S saves
+the current song, not the donor. STOP / Space / F10 stops existing playback;
+source audition is not connected. Preview clicks cannot edit source PCM.
+
+The loaded donor document reserves space from the sampler's existing 32 MiB policy
+budget until closed. Temporary PP20 storage is also budgeted during load; allocation
+failure preserves both documents. Imports deep-copy the selected sample, so closing
+or replacing the source never invalidates imported data or undo resources. Project
+load/creation/exit also releases source storage. Enhanced PTG files are not accepted
+as MOD donors. The input buffer and original current-song storage remain additional
+allocations, as described under sampler memory limits.

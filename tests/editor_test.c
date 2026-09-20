@@ -264,7 +264,7 @@ int main(int argc,char **argv)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_document doc;struct pt_editor *e;
     struct pt_canvas canvas;struct pt_event old;uint8_t *input,*font;size_t n,fn;unsigned i;
-    assert(argc==4);input=readfile(argv[1],&n);font=readfile(argv[2],&fn);assert(fn==580);
+    assert(argc==5);input=readfile(argv[1],&n);font=readfile(argv[2],&fn);assert(fn==580);
     pt_document_init(&doc,&a);assert(pt_document_load(&doc,input,n,SIZE_MAX)==PT_PROJECT_OK);free(input);
     e=malloc(sizeof(*e));assert(e && pt_editor_init(e,&doc.project));assert(!pt_editor_dirty(e));
     /* Bank selection, wrap, row scrolling and classic/MIDI note entry use the
@@ -349,8 +349,21 @@ int main(int argc,char **argv)
         struct pt_view_rect areas[PT_VIEW_DIRTY_MAX];unsigned step,p,j,y,x,n;
         static const unsigned actions[]={0x4d,0x4e,0x4f,0x42,0x4c,0x50,0x51,0x52,0x53,0x40,0x31,0x32,0x46,0x0c,0x0b,0x5a,0x5b};
         for(p=0;p<4;++p) {incremental.planes[p]=calloc(1,PT_VIEW_PLANE_BYTES);shown.planes[p]=calloc(1,PT_VIEW_PLANE_BYTES);assert(incremental.planes[p] && shown.planes[p]);}
-        for(step=0;step<156;++step) {
+        for(step=0;step<169;++step) {
             if(step && step<100)pt_editor_key(e,actions[(step-1)%(sizeof(actions)/sizeof(actions[0]))],0);
+            if(step==156) {size_t size;uint8_t *bytes=readfile(argv[4],&size);assert(pt_editor_source_load(e,bytes,size)==PT_EDIT_OK);free(bytes);}
+            if(step==157)pt_editor_click(e,520,30);
+            if(step==158)pt_editor_key(e,0x4e,0);
+            if(step==159)pt_editor_key(e,0x44,0);
+            if(step==160)pt_editor_key(e,0x4f,0);
+            if(step==161)pt_editor_click(e,520,65);
+            if(step==162)pt_editor_key(e,0x0b,0);
+            if(step==163)pt_editor_key(e,0x44,0);
+            if(step==164)pt_editor_key(e,0x31,8);
+            if(step==165)pt_editor_key(e,0x31,9);
+            if(step==166)pt_editor_key(e,0x45,0);
+            if(step==167)pt_editor_key(e,0x31,8);
+            if(step==168)pt_editor_key(e,0x31,9);
             if(step==143) {e->panel=5;pt_editor_key(e,0x32,0);}
             if(step==144)pt_editor_key(e,3,0);
             if(step==145)pt_editor_key(e,0x21,0);
@@ -462,6 +475,10 @@ int main(int argc,char **argv)
         for(p=0;p<4;++p) {free(incremental.planes[p]);free(shown.planes[p]);}
     }
 
+    /* Rendering exercised owned sample versions. Release them before starting
+       independent workflows on a freshly loaded fixture. */
+    pt_editor_dispose(e);input=readfile(argv[1],&n);
+    assert(pt_document_load(&doc,input,n,SIZE_MAX)==PT_PROJECT_OK);free(input);
     blocks(e);channel_controls(e);sampler_controls(e);
     for(i=0;i<4;++i)free(canvas.planes[i]);
     free(font);pt_editor_dispose(e);free(e);pt_document_release(&doc);

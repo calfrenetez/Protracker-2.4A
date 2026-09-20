@@ -20,7 +20,7 @@ static enum pt_project_result load_unpacked(struct pt_document *d,const uint8_t 
     struct pt_project_requirements need;struct pt_document next;enum pt_project_result r;
     size_t count[7],width[7],bytes[7],total=0;void *p[7]={0};unsigned i;int enhanced;
     if(!d || !data || !d->allocator.allocate || !d->allocator.release)return PT_PROJECT_INVALID;
-    enhanced=length>=5 && !memcmp(data,"PT24G",5);
+    enhanced=length>=8 && !memcmp(data,"PT24G\r\n\032",8);
     r=enhanced?pt_project_probe(data,length,&need):pt_mod_project_probe(data,length,&need);
     if(r!=PT_PROJECT_OK)return r;
     count[0]=need.orders;width[0]=sizeof(uint16_t);

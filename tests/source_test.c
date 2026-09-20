@@ -22,6 +22,13 @@ int main(int argc,char **argv)
     }
     fail=0;assert(pt_editor_source_load(e,bytes,n)==PT_EDIT_OK && e->panel==11 && e->source_selected==1 && !e->history.revision);
     assert(e->sampler.budget+e->sample_source.allocated_bytes==budget && !strcmp(d.project.title,"KEEP THIS SONG"));
+    {
+        uint8_t title[20];memcpy(title,bytes,20);memcpy(bytes,"PT24G SOURCE CHECK",17);
+        assert(pt_editor_source_load(e,bytes,n)==PT_EDIT_OK);
+        assert(!strncmp(e->sample_source.project.title,"PT24G SOURCE CHECK",17));
+        memcpy(bytes,title,20);
+        assert(pt_editor_source_load(e,bytes,n)==PT_EDIT_OK);
+    }
     source_before=e->sample_source;available=e->sampler.budget;allocated=live;
     assert(pt_editor_source_load(e,(const uint8_t *)"PT24G",5)==PT_EDIT_UNSUPPORTED);
     assert(pt_editor_source_load(e,bytes,n-1)==PT_EDIT_UNSUPPORTED && !memcmp(&source_before,&e->sample_source,sizeof(source_before)));

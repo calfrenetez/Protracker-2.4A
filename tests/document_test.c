@@ -45,6 +45,14 @@ int main(int argc,char **argv)
     assert(pt_document_load(&doc,project,length,SIZE_MAX)==PT_PROJECT_OK && !doc.dirty && a.live==live);
     puts("ALLOC reload loop");
     for(i=0;i<200;++i)assert(pt_document_load(&doc,data,(size_t)n,SIZE_MAX)==PT_PROJECT_OK && a.live==live);
+    /* A MOD title beginning with the product name is not a PTG signature. */
+    {
+        uint8_t title[20];memcpy(title,data,20);memcpy(data,"PT24G TITLE CHECK",16);
+        assert(pt_document_load(&doc,data,(size_t)n,SIZE_MAX)==PT_PROJECT_OK);
+        assert(!strncmp(doc.project.title,"PT24G TITLE CHECK",16));
+        memcpy(data,title,20);
+        assert(pt_document_load(&doc,data,(size_t)n,SIZE_MAX)==PT_PROJECT_OK);
+    }
     /* New-song allocation/budget failures leave the loaded dirty document
        intact; all 1..16 channel counts encode/decode with empty events/samples. */
     doc.dirty=1;before=doc;live=a.live;

@@ -47,3 +47,12 @@ Do not update AmiConnect, retarget its MCP connection, evict a browser owner, or
 retry an uncertain launch. Recover the same run ID and explicitly release access.
 AmiConnect's fixed profile-1 executable name is `IDSCoreTest`; this diagnostic
 makes no IDS acceptance claim.
+
+The dev56 emulator run retained in `evidence/enhanced-editor/dev56` passed exact
+pixel comparison (1472 full ticks, 356 incremental ticks). The first fixture was
+rejected because its title began `PT24G`; the successful fixture uses `VIEW`.
+That exposed a separate loader bug, corrected in dev57 by comparing the entire
+eight-byte project signature. `--title-checks` runs the native document and MOD
+sample-source regression binaries in the same guarded runner without timing the
+view probe. Physical health was unreachable during preparation; no physical run,
+authentication or deployment occurred.

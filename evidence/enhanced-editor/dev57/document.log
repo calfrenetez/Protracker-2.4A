@@ -1,0 +1,12 @@
+ALLOC initial calls=6 live=6 bytes=6148
+ALLOC failure-case=1 live=6
+ALLOC failure-case=2 live=6
+ALLOC failure-case=3 live=6
+ALLOC failure-case=4 live=6
+ALLOC failure-case=5 live=6
+ALLOC failure-case=6 live=6
+ALLOC budget live=6
+ALLOC replacement live=6
+ALLOC reload loop
+ALLOC final release live=3
+DOCUMENT/SAVE PASS: every staging allocation failure, memory budget, corrupt input, 200 reloads, staged new songs for 1..16 channels, partial writes and all save failure phases preserve prior state

@@ -35,7 +35,7 @@ void pt_editor_dispose(struct pt_editor *e)
 enum pt_edit_result pt_editor_source_load(struct pt_editor *e,const uint8_t *bytes,size_t length)
 {
     struct pt_document next;enum pt_project_result result;size_t available;
-    if(!e || !bytes || (length>=5 && !memcmp(bytes,"PT24G",5)))return PT_EDIT_UNSUPPORTED;
+    if(!e || !bytes || (length>=8 && !memcmp(bytes,"PT24G\r\n\032",8)))return PT_EDIT_UNSUPPORTED;
     if(e->sampler.bytes>e->sampler.budget)return PT_EDIT_CAPACITY;
     available=e->sampler.budget-e->sampler.bytes;pt_document_init(&next,&e->sampler.allocator);
     result=pt_document_load(&next,bytes,length,available);

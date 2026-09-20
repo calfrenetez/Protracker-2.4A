@@ -147,3 +147,11 @@ inside that directory, then uses DOS Rename, which the native test must prove
 refuses an existing destination. It does not rely on the local C library's
 O_EXCL/errno behaviour. Editor overwrite/recovery adapters remain to be built;
 there is no power-loss durability claim from these ordinary failure tests.
+
+## Format recognition and MOD titles
+
+Document loading and MOD sample-source import compare all eight project-magic
+bytes, including CR, LF and byte 26. The five printable characters `PT24G` alone
+are a legitimate start to a MOD song title and do not identify an enhanced
+project. Truncated or corrupt input still passes through the selected format's
+full validation before the current document or sample source is replaced.

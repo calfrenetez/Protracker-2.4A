@@ -1,0 +1,31 @@
+{
+  "run_id": "viewprobe1789946841848049000",
+  "elapsed_seconds": 37.604,
+  "binaries": {
+    "PTDocumentTest": {
+      "sha256": "4e0a5b80e4bbb1014d6672721762adb59a2e5e0c4511978839d7a316fb45d920",
+      "bytes": 53732
+    },
+    "PTSourceTest": {
+      "sha256": "2870d055cafdf81a92d277da55e970890a10fbc276d0c80f6a3101b7e0455b27",
+      "bytes": 126608
+    }
+  },
+  "cases": {
+    "document": {
+      "rc": "0",
+      "log": "ALLOC initial calls=6 live=6 bytes=6148\nALLOC failure-case=1 live=6\nALLOC failure-case=2 live=6\nALLOC failure-case=3 live=6\nALLOC failure-case=4 live=6\nALLOC failure-case=5 live=6\nALLOC failure-case=6 live=6\nALLOC budget live=6\nALLOC replacement live=6\nALLOC reload loop\nALLOC final release live=3\nDOCUMENT/SAVE PASS: every staging allocation failure, memory budget, corrupt input, 200 reloads, staged new songs for 1..16 channels, partial writes and all save failure phases preserve prior state\n"
+    },
+    "source": {
+      "rc": "0",
+      "log": "MOD SOURCE PASS: separate preview, source/destination selection, failed allocation/budget preservation, exact metadata/PCM import, shared undo, retained song and source release\n"
+    }
+  },
+  "title_checks": true,
+  "physical_hardware_tested": false,
+  "environment": {
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

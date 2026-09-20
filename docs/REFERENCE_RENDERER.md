@@ -436,3 +436,22 @@ silently exporting different content. E disables range mode; P switches normal
 song/pattern scope and clears it. Lead-in cannot be enabled while range mode is
 active. Settings consume no undo history; a completed bounce remains one shared
 undo step, and a cancelled bounce preserves the redo branch.
+
+## Full native render workflow refresh (dev58)
+
+The complete editor workflow now tests a supported finetuned sample rather than
+expecting the pre-dev48 finetune refusal. The retained run
+`renderui1789947391737397000` passed in 294.651 seconds: file-request cancellation,
+cancellation during mixing and verification, exact song/pattern WAV agreement,
+finetune +1 producing a different WAV that exactly matches the host reference,
+stopped Paula DMA, and undo/save restoring the original PTG bytes. Finetune
+export preserves the unsaved-edit state until explicitly undone or saved.
+
+Evidence is under `evidence/enhanced-editor/dev58`. The retained-native host test
+rebuilds the current renderer with sanitizers and compares the complete WAV bytes
+for both original and tuned fixtures, plus saved-project identity. This extends
+software/emulator workflow evidence; it is not physical A1200 or AmiGUS proof.
+The native program code is unchanged from dev57. The runner checks source/binary
+hashes before launch and uses guarded cleanup even when initial socket discovery
+fails. The package readme no longer describes already-implemented group stems as
+pending; enhanced live MIDI/panning remains unfinished.

@@ -73,7 +73,8 @@ Click the song title or Control-Shift-T to edit its 31-character PTG title with 
 Strict MOD export refuses titles longer than 20 characters; Paula replay retains
 normal audio while the full title remains in the project.
 Metadata shares immutable PCM storage, bounded history and project/MOD saves.
-Paula stays fixed-pan; enhanced pan/MIDI playback and group stems remain pending.
+Paula stays fixed-pan; enhanced live pan/MIDI playback remains pending.
+Offline track/group stems are available from the render panel.
 Classic Paula playback applies mute/solo live; MOD export refuses saved flags and
 non-default names/groups/pan/MIDI-channel metadata.
 SAMPLER/Control-L opens WAV/IFF/explicit RAW import/export, waveform selection and undoable edits.

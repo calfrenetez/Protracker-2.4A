@@ -15,6 +15,10 @@ def main():
     settings_only=sys.argv[1:]==['--settings-only']
     if sys.argv[1:] and not settings_only:raise SystemExit('Usage: test_render_ui_emulator.py [--settings-only]')
     if matching_socket() or Path('/tmp/amiberry.sock').exists():raise SystemExit('Emulator already owned')
+    manifest=json.loads((ROOT/'build/dev/core-build.json').read_text())
+    assert all(digest(ROOT/p)==h for p,h in manifest['sources'].items())
+    for name in ['PT24GEdit','PT24GConvert','PTRenderFileTest']:
+        assert digest(ROOT/'build/dev'/name)==manifest['binaries'][name]['sha256']
     env=json.loads((ROOT/'local/environment.json').read_text());share=Path(env['share']);launch=share/'launch';original=launch.read_bytes()
     run=share/('renderui'+str(time.time_ns()));run.mkdir();out=ROOT/'build/dev/render-ui-evidence'/run.name;out.mkdir(parents=True)
     for name in ['PT24GEdit','PT24GConvert','PTRenderFileTest']:shutil.copyfile(ROOT/'build/dev'/name,run/name)
@@ -22,6 +26,11 @@ def main():
     subprocess.run(['make','renderer'],cwd=ROOT,check=True)
     host=subprocess.check_output([str(ROOT/'build/host/PT24GRender'),str(fixture),str(out/'host.wav'),'--rate','44100','--bits','16','--gain','65536'],text=True)
     (out/'host.log').write_text(host)
+    tuned=bytearray(fixture.read_bytes());assert tuned[44]==0;tuned[44]=1
+    (out/'finetune.mod').write_bytes(tuned)
+    tuned_log=subprocess.check_output([str(ROOT/'build/host/PT24GRender'),str(out/'finetune.mod'),str(out/'finetune-host.wav'),'--rate','44100','--bits','16','--gain','65536'],text=True)
+    (out/'finetune-host.log').write_text(tuned_log)
+    assert (out/'finetune-host.wav').read_bytes()!=(out/'host.wav').read_bytes()
     process=emu=None;start=time.monotonic()
     def log():return (run/'editor.log').read_text() if (run/'editor.log').exists() else ''
     def wait(check,seconds=180):
@@ -92,26 +101,30 @@ def main():
             offset=request();filename('pattern.wav');key(0x44,ack=False);frame('revision=0 dirty=0 status=WAV VERIFIED - PROJECT UNCHANGED',offset)
             assert (run/'pattern.wav').read_bytes()==(run/'render.wav').read_bytes();audio_off()
             close_panel();key(0x4c,alt=True);frame('revision=2 dirty=1 status=')
-            key(0x11,True,True);offset=key(0x11);frame('WAV REFUSED: FINETUNE',offset)
-            assert 'EDITOR REQUEST render' not in log()[offset:];audio_off()
+            key(0x11,True,True);offset=request();filename('finetune.wav');key(0x44,ack=False)
+            frame('revision=2 dirty=1 status=WAV VERIFIED - PROJECT STILL UNSAVED',offset)
+            assert (run/'finetune.wav').read_bytes()==(out/'finetune-host.wav').read_bytes();audio_off()
             key(0x31,True);key(0x21,True);frame('dirty=0 status=PROJECT SAVED')
             assert (run/'saved.ptg').read_bytes()==(run/'baseline.ptg').read_bytes()
             close_panel();key(0x45);wait(lambda:(run/'done').exists());assert (run/'editor.rc').read_text().strip()=='0'
         report={'run_id':run.name,'elapsed_seconds':round(time.monotonic()-start,3),
             'binaries':{n:digest(run/n) for n in ['PT24GEdit','PT24GConvert','PTRenderFileTest']},'fixture_sha256':digest(fixture),
             'settings_only':settings_only,
-            'full_render_workflow_validated':not settings_only,'mask_overflow_refused':settings_only,
+            'full_render_workflow_validated':not settings_only,'mask_overflow_refused':settings_only,'finetune_export_exact':not settings_only,
             'exact_project_identity':True,'stopped_audio':audio_off(),'editor_log':log(),'file_log':(run/'files.log').read_text(),
             'environment':{c:emu.command(c) for c in ['GET_STATUS','GET_VERSION','GET_CPU_MODEL','GET_MEMORY_CONFIG']}}
-        for n in (['baseline.ptg','saved.ptg'] if settings_only else ['render.wav','pattern.wav','baseline.ptg','saved.ptg']):shutil.copyfile(run/n,out/n)
+        for n in (['baseline.ptg','saved.ptg'] if settings_only else ['render.wav','pattern.wav','finetune.wav','baseline.ptg','saved.ptg']):shutil.copyfile(run/n,out/n)
         (out/'native-render-ui.json').write_text(json.dumps(report,indent=2)+'\n')
-        print('PASS: native '+('mask entry/overflow display and exact project preservation' if settings_only else 'render settings, request/mix/verify cancellation, song/pattern parity, refusal and project preservation')+'; '+str(out),flush=True)
+        print('PASS: native '+('mask entry/overflow display and exact project preservation' if settings_only else 'render settings, request/mix/verify cancellation, song/pattern parity, finetune export and project preservation')+'; '+str(out),flush=True)
     finally:
         launch.write_bytes(original)
         if process and process.poll() is None:
             try:
                 if emu:Emulator(emu.path).command('QUIT')
-                else:process.terminate()
+                else:
+                    matches=matching_socket()
+                    if len(matches)!=1:raise RuntimeError('No guarded socket; retain claim for recovery')
+                    Emulator(matches[0]).command('QUIT')
             finally:process.wait(timeout=10)
         print('Render UI test released:',run,flush=True)
 if __name__=='__main__':main()

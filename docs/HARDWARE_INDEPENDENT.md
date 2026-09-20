@@ -117,9 +117,10 @@ changed by this work.
 
 ## Continuing software work
 
-Versioned projects, extended patterns, persistence and bounded pattern undo are
-now implemented as shared cores. Next is their native editor integration. Effects/replay traces, undo/recovery, save-failure
-handling, renderer/converter, MIDI logic and Enhanced screen work remain open.
+Versioned projects, extended patterns, persistence and bounded shared undo are
+integrated into the native editor. The milestones below record sampler, channel,
+metadata and song-structure work. Mixed replay, recovery/replacement saves,
+rendering/bounce, CAMD/live recording and remaining workflow integration are open.
 The full supplied scope still applies; this checkpoint does not complete any
 stage whose UI, replay or hardware acceptance remains missing.
 
@@ -455,3 +456,13 @@ unchanged moves preserve redo. Native/host evidence verifies exact reordered MOD
 output, PTG identity and stopping stale playback after same-length reorders.
 Loading now initially shows the first position's assigned pattern. See
 `evidence/enhanced-editor/dev26/` for limits, provenance and acceptance evidence.
+
+## Additional sample slots milestone (dev27)
+
+Sampler +SMP / Control-Shift-Plus adds empty slots up to 255 with shared undo,
+without copying existing PCM. Native and host tests cover ownership, allocation
+failure, references, mixed slot/sample/note history and full capacity. Actual
+native slot-32 import/audition and exact project save/reopen pass; strict MOD
+export refuses extra slots. Evidence and screenshot-integrity checks are retained
+under `evidence/enhanced-editor/dev27/`. An offline-replay design and validated
+synthetic input corpus are also prepared; native flow traces remain NOT RUN.

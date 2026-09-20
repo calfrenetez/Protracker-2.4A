@@ -1,0 +1,28 @@
+{
+  "run_id": "slots1789908716130085000",
+  "elapsed_seconds": 110.794,
+  "binaries": {
+    "PT24GEdit": "dfa0b3c42c4099705650a0a279711b6e25e7ef0e3e791870c56bac1ab9685888",
+    "PTSlotsTest": "f082afa9208103c3415a3321dfcf0e87148d44a6e890f77681b62d474f3f865d",
+    "PT24GConvert": "8c6568aed1de05eeb8f784f2faaee988a2b42d87dccd12662dacde2ed1ddf8fd"
+  },
+  "native_slot_ownership_tests": true,
+  "slot_32_import_and_classic_audition": true,
+  "mixed_slot_sample_and_note_undo": true,
+  "strict_mod_refuses_extra_slot": true,
+  "exact_project_chunk_changes_and_reopen_identity": true,
+  "normal_exits": 2,
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0",
+  "logs": {
+    "slots.log": "SLOTS PASS: 0..255 slots, allocation rollback, metadata/PCM/reference preservation, mixed undo, eviction, strict MOD refusal, exact PTG, selection clamp and complete release\n",
+    "convert.log": "PROJECT channels=4 patterns=1 orders=1 samples=31\nMOD_ANALYSIS required_strategy=LOSSLESS issues=0x0 direct_bytes=2172\nSAVED format=PT24G-v1 bytes=6780 verified=1 new_file=1\n",
+    "editor.log": "EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=104050\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR REPLAY active=1 ticks=0 order=0 pattern=0 row=0 bpm=125 speed=6 period=0,0,0,0 volume=0,0,0,0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PLAYING SONG - PAULA CIA panel=0\nEDITOR REPLAY active=1 ticks=11 order=0 pattern=0 row=0 bpm=125 speed=6 period=428,339,285,214 volume=24,24,24,24\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO panel=5\nEDITOR REPLAY active=1 ticks=209 order=0 pattern=0 row=33 bpm=125 speed=6 period=428,339,285,214 volume=24,24,24,24\nEDITOR REPLAY active=1 ticks=215 order=0 pattern=0 row=34 bpm=125 speed=6 period=428,339,285,214 volume=24,24,24,24\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=SAMPLE SLOT ADDED - CTRL-Z UNDO panel=5\nEDITOR REQUEST sample\nEDITOR SAMPLE result=0 revision=1 dirty=1 preview=1\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=MOD SOURCE READY - CHOOSE INSTRUMENT AND IMPORT panel=11\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=SOURCE INSTRUMENT IMPORTED - CONTROL-Z TO UNDO panel=11\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=MOD SOURCE CLOSED - APPLIED IMPORTS KEPT panel=5\nEDITOR REPLAY active=1 ticks=0 order=0 pattern=0 row=0 bpm=125 speed=6 period=0,0,0,0 volume=0,0,0,0\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=SAMPLE AUDITION - PAULA; STOP TO RELEASE panel=5\nEDITOR REPLAY active=1 ticks=13 order=0 pattern=0 row=1 bpm=125 speed=6 period=428,0,0,0 volume=24,0,0,0\nEDITOR REPLAY active=1 ticks=17 order=0 pattern=0 row=1 bpm=125 speed=6 period=428,0,0,0 volume=24,0,0,0\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=UNDO panel=5\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=UNDO panel=5\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=REDO panel=5\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=REDO panel=5\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=REDO panel=5\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=SETTINGS CLOSED panel=0\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=EDIT ON - NOTES Z-M/Q-U; DELETE CLEARS; BACKSPACE OFF panel=0\nEDITOR FRAME row=1 channel=0 revision=3 dirty=1 status=PATTERN EDITED panel=0\nEDITOR FRAME row=1 channel=0 revision=2 dirty=1 status=UNDO panel=0\nEDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=UNDO panel=0\nEDITOR FRAME row=1 channel=0 revision=0 dirty=0 status=UNDO panel=0\nEDITOR FRAME row=1 channel=0 revision=1 dirty=1 status=REDO panel=0\nEDITOR FRAME row=1 channel=0 revision=2 dirty=1 status=REDO panel=0\nEDITOR FRAME row=1 channel=0 revision=3 dirty=1 status=REDO panel=0\nEDITOR MOD refused issues=0x200 dirty=1\nEDITOR FRAME row=1 channel=0 revision=3 dirty=1 status=MOD EXPORT REFUSED: ENHANCED DATA OR CLASSIC FORMAT LIMITS panel=0\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=1 channel=0 revision=3 dirty=0 status=PROJECT SAVED AND VERIFIED panel=0\nEDITOR FRAME row=1 channel=0 revision=3 dirty=0 status=SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO panel=5\nEDITOR FRAME row=1 channel=0 revision=3 dirty=0 status=SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO panel=5\nEDITOR FRAME row=1 channel=0 revision=3 dirty=0 status=SETTINGS CLOSED panel=0\nEDITOR EXIT clean\n",
+    "reopened.log": "EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=104050\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PROJECT SAVED AND VERIFIED panel=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=NOTE SLICE: S NUMBER / +/- STEP / U SAMPLE / C CLEAR panel=1\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO panel=5\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SETTINGS CLOSED panel=0\nEDITOR EXIT clean\n"
+  },
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

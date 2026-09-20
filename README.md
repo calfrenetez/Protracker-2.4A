@@ -3,42 +3,50 @@
 Build preparation for a native Amiga tracker with 1–16 channels, classic
 ProTracker workflow, and exclusive Paula, AmiGUS or MIDI routing per channel.
 
-**Status: native 2.4G dev2 builds and runs in the isolated Amiberry test setup.**
-This increment integrates classic MOD preflight and input.device mouse support.
-The portable channel, PCM/WAV, extended-project, transactional document, pattern
-undo and slicing cores pass host and native Amiga tests. PT24GConvert now supports
-verified new-file project saves and strict lossless classic MOD round trips.
-A separate native Enhanced editor prototype now connects project loading, note
-entry, four-column paging, pattern undo and verified saving. Its first replay
-path adds classic four-channel Paula song/pattern playback, sample audition and
-live pattern edits; [mixed-backend playback remains open](docs/PAULA_REPLAY.md).
-Native Load/Save New dialogs now support the workflow from a blank song through
-load, edit, play, save and reopen, with cancelled/invalid loads preserving edits. The
-Enhanced screen now follows the owner's full classic reference after the
-earlier simplified layout was rejected. Incremental redraws preserve identical
-pixels while reducing six-cursor drawing time by about 95% in the private emulator;
-native mouse controls and keyboard/file workflows pass. EDIT OP. now adds marked
-block copy/paste/clear/transpose, whole-pattern copying and atomic undo.
-CLEAR / Control-N creates blank songs with 1–16 channels through a staged,
-non-destructive failure path. SAVE MOD exports eligible projects losslessly through a native dialog; enhanced
-projects are refused without dropping their data. CHANNEL / Control-R now exposes
-exclusive routing plus mute/solo, with chronological note/channel undo and exact
-project persistence. Classic Paula playback applies mute/solo live; mixed
-AmiGUS/MIDI replay is still pending. SAMPLER / Control-L now adds waveform range
-selection, exact integer PCM WAV/IFF/explicit RAW import/export and bounded PP20 MOD loading and selected-instrument import and undoable reverse, normalize,
-gain, fades and DC removal. LOOPS/SLICES tabs add undoable forward/pingpong
-metadata, baked crossfade and editable manual/AUTO SLICE proposals; marker changes
-cannot silently retarget existing slice-note ordinals. RANGE provides zoom/pan and
-exact frame entry; FORMAT adds explicit whole-sample precision/rate conversion with
-scaled metadata and atomic undo. The default integer filter suppresses downsampling aliases and supports native
-progress/Escape cancellation; linear mode remains an explicit faster option. High-resolution samples remain editable/saveable;
-classic Paula audition still requires compatible samples. See the
-[editor guide](docs/ENHANCED_EDITOR.md) and retained native UI evidence. Physical AmiGUS tests await the owner's Mini.
-MIDI note ownership and quantised recording into undoable pattern events now
-pass host/native sink tests; CAMD and live transport remain unconnected.
-See the [MIDI/recording design](docs/MIDI_RECORDING_CORE.md) and [development checkpoint](docs/HARDWARE_INDEPENDENT.md),
-[baseline report](docs/BASELINE_BUILD.md), [diagnostic evidence](docs/AMIGUS_DIAGNOSTIC.md)
-and [MOD preflight](docs/MOD_PREFLIGHT.md).
+**Development status: the native editor, sampler and song arrangement work;
+full mixed-backend playback is unfinished.** Two Amiga executables are retained:
+
+- `PT24GEdit` is the enhanced native prototype: the accepted classic screen/font,
+  1–16-channel projects, four-column paging, note/block editing, shared undo,
+  channel settings, sampler and song-position editing.
+- `PT2.4G` is the separate four-channel assembler derivative (dev2), with MOD
+  preflight and input.device mouse support. It remains the classic baseline.
+
+The enhanced editor loads ordinary/PP20 MODs and versioned projects, creates new
+songs, edits titles and channel/sample metadata, and saves verified new files.
+POS ED. adds blank patterns and inserts/removes/reorders positions. Undo includes
+notes, song structure, channel settings and sample edits. Supported classic songs
+export losslessly to MOD; incompatible enhanced data is explicitly refused.
+
+Classic four-channel Paula song/pattern playback, compatible sample audition,
+live note edits and mute/solo work in the private Amiberry setup. Position changes
+stop the old snapshot and Play restarts with the new sequence. P/A/M routing,
+pan, groups, MIDI assignments and slices are saved settings; enhanced panning,
+slice playback and mixed AmiGUS/MIDI output are still open.
+
+Sampler +SMP adds slots up to 255 through the shared undo journal.
+The sampler imports/exports PCM WAV, supported IFF/8SVX and explicitly configured
+RAW, and imports selected instruments from ordinary/PP20 MODs. It offers range
+selection, zoom, exact frame entry, reverse/normalize/gain/fades/DC removal,
+loop metadata, baked crossfade, manual/AUTO SLICE proposals, shared immutable
+PCM for metadata history, and explicit precision/rate conversion. Filtered
+conversion provides progress and cancellation. High-resolution samples are
+editable/saveable; Paula audition requires compatible sample formats.
+
+Host sanitizer tests and native emulator workflows retain source/binary IDs,
+exact file comparisons, allocation-failure and undo checks, screenshots and
+clean-exit evidence. MIDI ownership and quantised-recording cores also pass
+host/native sink tests, but CAMD and live recording transport are unconnected.
+Physical AmiGUS and ACA1234 performance/audio acceptance remain untested while
+the owner's Mini is in transit. No emulator result substitutes for that gate.
+
+See the [editor guide](docs/ENHANCED_EDITOR.md),
+[software milestones](docs/HARDWARE_INDEPENDENT.md),
+[Paula replay boundaries](docs/PAULA_REPLAY.md),
+[MIDI/recording design](docs/MIDI_RECORDING_CORE.md),
+[baseline report](docs/BASELINE_BUILD.md),
+[diagnostic evidence](docs/AMIGUS_DIAGNOSTIC.md) and
+[MOD preflight](docs/MOD_PREFLIGHT.md).
 
 With Git, Python 3, Make and a host C compiler installed:
 

@@ -46,6 +46,8 @@ PT24GEdit is a separate native Enhanced editor prototype with project editing,
 paging, undo, verified new-file saves and classic four-channel Paula playback.
 F8 plays, F9 loops the pattern and F10 stops. SAMPLE auditions a classic sample.
 LOAD/Control-O opens a MOD/project, including structurally validated PP20 MODs. Control-Shift-S selects a new save path.
+Sampler +SMP or Control-Shift-Plus adds a sample slot, up to 255; shares undo.
+Projects with more than 31 slots require the enhanced project format.
 Starting PT24GEdit without arguments creates a blank song.
 POS ED./Control-P edits positions; A appends a position, N adds a blank pattern.
 Song edits share undo; changed positions stop Paula until Play is restarted.

@@ -1,0 +1,18 @@
+{
+  "01-sample-slot-32.png": {
+    "sha256": "5b7b9625616d94e3ff79f22b70b614987fa3bb8e4f71a5101c5981c7ae7fdbd6",
+    "width": 756,
+    "height": 574,
+    "rgb8": true,
+    "nonblack_pixel_delta_bytes": 27127,
+    "complete_png": true
+  },
+  "02-reopened-slot-32.png": {
+    "sha256": "5b7b9625616d94e3ff79f22b70b614987fa3bb8e4f71a5101c5981c7ae7fdbd6",
+    "width": 756,
+    "height": 574,
+    "rgb8": true,
+    "nonblack_pixel_delta_bytes": 27127,
+    "complete_png": true
+  }
+}

@@ -604,3 +604,24 @@ show the pattern assigned to position 0.
 
 Deleting patterns and changing an existing song's channel/sample-slot count are
 still separate work.
+
+## Additional sample slots
+
+On the sampler pages, +SMP (the small right-hand button) or Control-Shift-Plus
+appends an empty slot and selects it. Enhanced projects support up to 255 slots;
+the SAMPLE counter uses decimal (0032), while pattern instrument fields use
+hexadecimal (20 for slot 32). The original 31
+slots and their PCM/markers are retained. Import a WAV/IFF/RAW sample or a MOD
+instrument into the new slot through the existing sampler controls.
+
+Slot creation shares undo with sample imports, attributes and pattern notes.
+Undo removes an appended slot only after dependent edits have been undone; an
+unexpected remaining instrument reference or changed sample refuses removal.
+The selected sample clamps back into range. The expanded metadata table is
+allocated once within the sampler's existing memory budget and contains no PCM
+copies. Original document storage remains separately owned until replacement.
+
+Strict MOD export refuses projects with more than 31 slots, including empty
+extra slots. Classic-compatible individual samples can still use Paula audition;
+full-song enhanced replay and high-resolution audition remain separate work.
+General deletion/reordering of populated sample slots is not implemented.

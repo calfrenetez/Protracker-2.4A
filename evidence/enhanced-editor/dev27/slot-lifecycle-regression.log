@@ -1,0 +1,6 @@
+SLOTS PASS: 0..255 slots, allocation rollback, metadata/PCM/reference preservation, mixed undo, eviction, strict MOD refusal, exact PTG, selection clamp and complete release
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.425s
+
+OK

@@ -24,6 +24,7 @@ static void release_version(struct pt_sample_version *v)
 void pt_sampler_release(struct pt_sampler *s)
 {
     unsigned i;for(i=0;i<PT_PROJECT_SAMPLES;++i) {release_version(s->current[i]);s->current[i]=NULL;}
+    if(s->table) {s->bytes-=s->table_bytes;s->allocator.release(s->allocator.context,s->table);s->table=NULL;s->table_original=NULL;s->table_bytes=0;}
 }
 static struct pt_sample_version *version(struct pt_sampler *s,const struct pt_sample *sample)
 {

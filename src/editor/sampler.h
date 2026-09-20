@@ -8,6 +8,8 @@
 struct pt_sample_version;
 struct pt_sampler {
     struct pt_sample_version *current[PT_PROJECT_SAMPLES];
+    struct pt_sample *table,*table_original;
+    size_t table_bytes;
     struct pt_allocator allocator;
     size_t bytes,budget;
     unsigned generation;
@@ -16,10 +18,14 @@ struct pt_sampler {
 };
 void pt_sampler_init(struct pt_sampler *,const struct pt_allocator *,size_t);
 /* Release journal first, then sampler, before destroying/reinitializing editor.
-   Versions are immutable and must never be edited through project pointers. */
+   Versions are immutable and must never be edited through project pointers.
+   Release also invalidates an expanded sample table; do not use the project
+   afterwards except to release/replace its separately owned document. */
 void pt_sampler_release(struct pt_sampler *);
 /* Names (at most 31 characters), volume 0..64 and finetune -8..7 share immutable
    PCM/marker storage with the current version and one chronological undo entry. */
+/* Append an empty classic-format slot, up to 255, without moving PCM. */
+enum pt_edit_result pt_sampler_add_slot(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *);
 enum pt_edit_result pt_sampler_attributes(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,const char *,unsigned,int);
 enum pt_edit_result pt_sampler_import(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,const uint8_t *,size_t,const char *);
 enum pt_edit_result pt_sampler_edit(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,enum pt_pcm_edit,uint32_t,uint32_t,unsigned);

@@ -303,6 +303,7 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
             {{"8 BIT","16 BIT","24 BIT"},{"8287 HZ","22050 HZ","44100 HZ"},{"48000 HZ","","BACK"},{"APPLY","UNDO","REDO"}},
             {{"LOAD RAW","SAVE RAW","BACK"},{"8 BIT","16 BIT","24 BIT"},{"MONO","STEREO","SIGNED"},{"BIG ENDIAN","LIL ENDIAN","RATE"}},
             {{"LOAD MOD","SOURCE <","SOURCE >"},{"","",""},{"DEST <","","DEST >"},{"IMPORT","CLOSE","STOP"}}};
+        if(e->panel<=10)label(c,font,599,78,39,19,"+SMP",0);
         for(i=0;i<4;++i)label(c,font,230+(int)(i*369/4),2,(int)((i+1)*369/4-i*369/4),19,tabs[i],e->panel==5+i);
         for(r=0;r<4;++r)for(i=0;i<3;++i)label(c,font,230+(int)i*123,21+(int)r*19,123,19,ops[e->panel-5][r][i],
             (e->panel==6 && r==0 && sample && sample->loop==(i==2?PT_LOOP_NONE:i+1)) || (e->panel==9 && r==0 && e->format_bits==(i+1)*8));

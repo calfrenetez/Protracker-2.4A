@@ -52,6 +52,7 @@ void pt_editor_wave_bounds(const struct pt_editor *e,uint32_t *start,uint32_t *e
 }
 void pt_editor_sample_all(struct pt_editor *e)
 {
+    if(e->sample>e->project->sample_count)e->sample=e->project->sample_count;
     if(e->slice_pending && (e->slice_slot!=e->sample || e->slice_generation!=e->sampler.generation)) {e->slice_pending=0;++e->sample_ui;}
     e->sample_range_slot=e->sample;e->sample_start=0;e->sample_marking=0;
     e->sample_end=e->sample && e->sample<=e->project->sample_count?e->project->samples[e->sample-1].pcm.frames:0;
@@ -273,6 +274,12 @@ static void sample_attribute_step(struct pt_editor *e,unsigned row,int direction
     if(row==3) {finetune+=direction;if(finetune< -8)finetune=-8;if(finetune>7)finetune=7;}
     else {volume+=direction;if(volume<0)volume=0;if(volume>64)volume=64;}
     pt_editor_sample_result(e,pt_sampler_attributes(&e->sampler,e->project,&e->history,e->sample-1,sample->name,(unsigned)volume,finetune));
+}
+static void sample_add(struct pt_editor *e)
+{
+    enum pt_edit_result result=pt_sampler_add_slot(&e->sampler,e->project,&e->history);
+    if(result==PT_EDIT_OK) {e->sample=e->project->sample_count;pt_editor_sample_all(e);++e->sample_ui;}
+    pt_editor_status(e,result==PT_EDIT_OK?"SAMPLE SLOT ADDED - CTRL-Z UNDO":result==PT_EDIT_CAPACITY?"SLOT OR MEMORY LIMIT - NO CHANGE":"SLOT ADD REFUSED - NO CHANGE");
 }
 static void format_setting(struct pt_editor *e,unsigned bits,uint32_t rate)
 {
@@ -593,6 +600,7 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
         if(raw==0x31)undo(e,(qualifier&3)?1:-1);
         else if(raw==0x21)return (qualifier&3)?PT_UI_SAVE_AS:PT_UI_SAVE;
         else if(raw==0x36) {if(qualifier&3)name_begin(e,2);else new_panel(e);} /* Control-N / Control-Shift-N */
+        else if((qualifier&3) && raw==0x0c && e->panel>=5 && e->panel<=10)sample_add(e);
         else if(raw==0x14 && (qualifier&3))name_begin(e,3); /* Control-Shift-T */
         else if(raw==0x37 && (qualifier&3))return PT_UI_EXPORT_MOD;
         else if(raw==0x19) {if(e->panel==1 && e->song_details) {e->song_details=0;e->panel=0;++e->sample_ui;}else song_panel(e);} /* Control-P */
@@ -803,6 +811,7 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
         } else if(x>=414 && x<599 && y>=59 && y<97) {e->panel=0;pt_editor_status(e,"NEW SONG CANCELLED - EDITS PRESERVED");}
         return PT_UI_NONE;
     }
+    if(e->panel>=5 && e->panel<=10 && x>=599 && x<638 && y>=78 && y<97) {sample_add(e);return PT_UI_NONE;}
     if(e->panel>=5 && x>=230 && x<599 && y>=2 && y<97) {
         r=(unsigned)(y-PT_EDITOR_CONTROL_Y)/PT_EDITOR_CONTROL_HEIGHT;c=(unsigned)(x-230)/123;
         if(r==0) {sample_tab(e,5+((unsigned)(x-230+1)*4-1)/369);return PT_UI_NONE;}

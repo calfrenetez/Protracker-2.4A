@@ -1,7 +1,7 @@
 PYTHON ?= python3
 VASM ?= $(CURDIR)/local/vasm/vasmm68k_mot
 
-.PHONY: bootstrap baseline dev diagnostic modcheck modcheck-amiga core-tests core-mutations project-mutations converter test fixture
+.PHONY: bootstrap baseline dev diagnostic modcheck modcheck-amiga core-tests core-mutations project-mutations converter renderer test fixture
 
 bootstrap:
 	sh tools/bootstrap_vasm.sh
@@ -40,3 +40,7 @@ test:
 
 fixture:
 	$(PYTHON) tools/make_fixture.py build/fixtures/mod.baseline
+
+renderer:
+	mkdir -p build/host
+	$(CC) -std=c99 -O2 -Wall -Wextra -Werror -Isrc/core tools/pt24g_render.c src/platform/render_file.c src/core/render.c src/core/timeline.c src/core/frame_clock.c src/core/flow.c src/core/voice.c src/core/document.c src/core/pp20.c src/core/project.c src/core/mod_project.c src/core/mod_inspect.c src/core/channels.c src/core/pcm.c -o build/host/PT24GRender

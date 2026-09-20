@@ -1,0 +1,33 @@
+python3 tools/build_core_tests.py
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        5700 bytes
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        5888 bytes
+tools/pt24g_render.c: In function 'main':
+tools/pt24g_render.c:55:5: error: this 'if' clause does not guard... [-Werror=misleading-indentation]
+     if(f)fclose(f);free(input);pt_document_release(&doc);return rc;
+     ^~
+tools/pt24g_render.c:55:20: note: ...this statement, but the latter is misleadingly indented as if it is guarded by the 'if'
+     if(f)fclose(f);free(input);pt_document_release(&doc);return rc;
+                    ^~~~
+cc1: all warnings being treated as errors
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/build_core_tests.py", line 104, in <module>
+    main()
+    ~~~~^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/build_core_tests.py", line 72, in main
+    subprocess.run([cc, *flags, *sources, *([str(out/'replay.o')] if name in ('PT24GEdit','PTPaulaTest') else [str(out/'replay_trace.o')] if name=='PTFlowTraceTest' else []), '-o', str(out / name)], cwd=ROOT, check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc', '-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os', '-Wall', '-Wextra', '-Werror', '-Isrc/core', '-Ibuild/dev', '-fbbb=-', 'tools/pt24g_render.c', 'src/platform/render_file.c', 'src/core/document.c', 'src/core/pp20.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/render.c', 'src/core/timeline.c', 'src/core/frame_clock.c', 'src/core/flow.c', 'src/core/voice.c', 'src/core/project.c', 'src/core/channels.c', 'src/core/pcm.c', '-o', '/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/PT24GRender']' returned non-zero exit status 1.
+make: *** [core-tests] Error 1

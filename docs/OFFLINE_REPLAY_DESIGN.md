@@ -239,3 +239,15 @@ provides software sample traversal/mixing evidence, not complete ProTracker
 period/effect parity or hardware AmiGUS sound. Sample slices can use explicit
 range bounds, but a renderer still has to resolve project slice ordinals and
 apply the agreed loop/trigger policy before calling it.
+
+
+## Streaming reference integration (dev31)
+
+The first integration is now `render.c`, `platform/render_file.c` and the native
+`PT24GRender` utility. See [its contract](REFERENCE_RENDERER.md) for the exact
+supported subset and profiles. The flow core additionally counts order transitions
+and returns to the same/lower order. E6 row loops do not increment these counters.
+The renderer preserves the outgoing row interval and ends at the next fresh row
+boundary after a position return, or at F00. File output is bounded, streaming,
+re-rendered for byte comparison and atomically published with no replacement.
+This does not turn the remaining voice/effect and physical gates into passes.

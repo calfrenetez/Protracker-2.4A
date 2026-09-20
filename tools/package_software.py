@@ -25,7 +25,7 @@ def main():
     for name,expected in core['sources'].items():
         if hashlib.sha256((ROOT/name).read_bytes()).hexdigest()!=expected:
             parser.error('source changed after the native build: '+name)
-    for name in ['PT24GEdit','PT24GConvert']:
+    for name in ['PT24GEdit','PT24GConvert','PT24GRender']:
         data=(ROOT/'build/dev'/name).read_bytes()
         if hashlib.sha256(data).hexdigest()!=core['binaries'][name]['sha256']:
             parser.error('native binary does not match manifest: '+name)
@@ -98,6 +98,14 @@ Browsing a MOD never replaces the current song. Shift-L selects a MOD source dir
 Mixed AmiGUS/MIDI replay and other unfinished controls remain unavailable.
 PP20 loads through the shared bounded decoder; PX20 and PP20 saving are unsupported.
 PT24GConvert inspects projects and performs strict lossless MOD/project conversion.
+PT24GRender INPUT NEW.wav exports a bounded reference song, with optional --pattern N,
+--rate 44100|48000, --bits 16|24, --tracks HEX, --gain 0..65536 and --lead-in.
+Default: 48kHz/stereo24, all tracks, gain32768, trimmed startup, 30-minute limit.
+This uses ideal BPM timing and sample-rate-at-C-2 period scaling, not captured hardware.
+Supported effects: 000/A/B/C/D/E6/EE/F. MIDI audio/pitches, nonzero finetune,
+instrument-only events and other effects are refused before output is created.
+Staged WAV bytes are verified by a second render; existing paths are never replaced.
+It is a reference export utility; editor render/bounce controls remain unfinished.
 This is not the finished sixteen-channel tracker or a hardware-qualified release.
 
 Amiga Shell, from the Amiga directory:

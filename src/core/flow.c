@@ -47,20 +47,21 @@ static void new_effect(struct pt_flow *s,unsigned ch)
     }
 }
 
-static void next_position(struct pt_flow *s)
+static void next_position(struct pt_flow *s,unsigned from)
 {
     s->row=s->break_row;s->break_row=s->jump=0;
     s->order=(uint16_t)((s->order+1)&(s->mode==PT_FLOW_CLASSIC128?127:255));
     if(s->order>=s->project->order_count)s->order=0;
+    ++s->positions;if(s->order<=from)++s->returns;
 }
 
 enum pt_flow_result pt_flow_tick(struct pt_flow *s)
 {
-    const struct pt_project *p;unsigned ch;int row_tick;
+    const struct pt_project *p;unsigned ch,from;int row_tick;
     if(!s || !s->project || !s->limit)return PT_FLOW_INVALID;
     if(!s->active)return PT_FLOW_STOPPED;
     if(s->ticks>=s->limit)return PT_FLOW_LIMIT;
-    p=s->project;++s->ticks;s->fresh=s->delayed=0;
+    p=s->project;from=s->order;++s->ticks;s->fresh=s->delayed=0;
     ++s->counter;row_tick=s->counter>=s->speed;
     if(row_tick)s->counter=0;
     if(row_tick && !s->delay) {
@@ -79,8 +80,8 @@ enum pt_flow_result pt_flow_tick(struct pt_flow *s)
         if(s->pending_delay) {s->delay=s->pending_delay;s->pending_delay=0;}
         if(s->delay && --s->delay)--s->row;
         if(s->loop_break) {s->loop_break=0;s->row=s->break_row;s->break_row=0;}
-        if(s->row>=64)next_position(s);
+        if(s->row>=64)next_position(s,from);
     }
-    if(s->jump)next_position(s);
+    if(s->jump)next_position(s,from);
     return PT_FLOW_TICK;
 }

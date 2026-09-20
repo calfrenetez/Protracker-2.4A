@@ -10,7 +10,9 @@ enum pt_flow_mode { PT_FLOW_CLASSIC128, PT_FLOW_EXTENDED256 };
 enum pt_flow_result { PT_FLOW_TICK, PT_FLOW_STOPPED, PT_FLOW_LIMIT, PT_FLOW_INVALID };
 struct pt_flow {
     const struct pt_project *project;
-    uint32_t ticks,fetches,limit;
+    /* positions counts order transitions; returns counts destinations <= the
+       order at tick entry. E6 row loops do not count as order transitions. */
+    uint32_t ticks,fetches,limit,positions,returns;
     uint16_t order,played_order,row,played_row,bpm;
     uint8_t counter,speed,active,fresh,delayed,pending_delay,delay;
     uint8_t break_row,jump,loop_break,mode;

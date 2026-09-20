@@ -1,0 +1,8 @@
+test_native_trace_parity_and_extended_boundaries (test_flow.Flow.test_native_trace_parity_and_extended_boundaries) ... FLOW boundaries PASS: atomic init, stop/limit, 1..16 tracks, 128/256 positions, order wrap and ordered globals
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 2.018s
+
+OK
+FLOW: all 16 native trace fixtures match portable control flow

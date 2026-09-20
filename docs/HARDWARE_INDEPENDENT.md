@@ -503,3 +503,15 @@ preservation against independent expected trajectories. Evidence is retained in
 `evidence/enhanced-editor/dev30/`. Tracker pitch/effect interpretation, final
 routing/pan policy and render/bounce UI are subsequent work; no physical audio
 acceptance or completed song rendering is implied.
+
+
+## First streaming reference WAV export (dev31)
+
+`PT24GRender` now combines the portable flow/timeline/mixer into a bounded
+song/pattern/selected-track WAV utility. It streams stereo16/24 at 44.1/48 kHz,
+preflights unsupported routes/effects, verifies every staged byte through a
+second render and publishes only to a new filename. Existing/racing destinations,
+corruption, cancellation and partial writes preserve source and prior files.
+See `docs/REFERENCE_RENDERER.md` for exact profiles, supported commands, gain/pan,
+end conditions and limits. This is a supported-subset reference export path;
+complete effects, editor render/bounce UI and hardware audio acceptance remain open.

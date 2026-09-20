@@ -37,14 +37,14 @@ static void boundaries(void)
     events[0].effect=11;events[0].parameter=128;events[15].effect=13;events[15].parameter=0x0a;
     assert(pt_flow_init(&s,&p,PT_FLOW_CLASSIC128,0,20)==PT_FLOW_INVALID);
     assert(pt_flow_init(&s,&p,PT_FLOW_EXTENDED256,0,20)==PT_FLOW_TICK);tick_n(&s,6);
-    assert(s.order==128 && s.row==10 && s.played_order==0 && s.played_row==0);tick_n(&s,6);
+    assert(s.order==128 && s.row==10 && s.played_order==0 && s.played_row==0 && s.positions==1 && !s.returns);tick_n(&s,6);
     assert(s.played_order==128 && s.played_row==10);
     events[0].parameter=255;events[15].parameter=63; /* D3F = 45 decimal. */
     assert(pt_flow_init(&s,&p,PT_FLOW_EXTENDED256,0,20)==PT_FLOW_TICK);tick_n(&s,6);
     assert(s.order==255 && s.row==45);
     memset(events,0,sizeof(events));p.speed=1;
     assert(pt_flow_init(&s,&p,PT_FLOW_EXTENDED256,255,100)==PT_FLOW_TICK);tick_n(&s,64);
-    assert(s.order==0 && s.row==0 && s.fetches==64 && s.played_order==255 && s.played_row==63);
+    assert(s.order==0 && s.row==0 && s.fetches==64 && s.played_order==255 && s.played_row==63 && s.positions==1 && s.returns==1);
     /* Last track wins speed, but cannot undo an earlier stop. */
     p.speed=6;events[0].effect=15;events[0].parameter=0;events[15].effect=15;events[15].parameter=31;
     assert(pt_flow_init(&s,&p,PT_FLOW_EXTENDED256,0,10)==PT_FLOW_TICK);tick_n(&s,6);
@@ -59,7 +59,7 @@ static void boundaries(void)
     assert(pt_channels_resize(&p.channels,4)==PT_CHANNEL_OK);p.order_count=128;
     events[0].effect=15;events[0].parameter=1;
     assert(pt_flow_init(&s,&p,PT_FLOW_CLASSIC128,127,100)==PT_FLOW_TICK);tick_n(&s,69);
-    assert(s.order==0 && s.row==0 && s.played_order==127 && s.played_row==63);
+    assert(s.order==0 && s.row==0 && s.played_order==127 && s.played_row==63 && s.positions==1 && s.returns==1);
     p.order_count=129;assert(pt_flow_init(&s,&p,PT_FLOW_CLASSIC128,0,100)==PT_FLOW_INVALID);
     puts("FLOW boundaries PASS: atomic init, stop/limit, 1..16 tracks, 128/256 positions, order wrap and ordered globals");
 }

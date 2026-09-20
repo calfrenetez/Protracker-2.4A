@@ -1,0 +1,94 @@
+# Bounded reference WAV renderer (dev31)
+
+`PT24GRender` is a native/host command-line renderer built from the shared portable
+flow, frame-clock and voice/mix cores. It accepts validated MOD, PP20 MOD and PTG
+projects and writes a new stereo PCM WAV. It uses bounded streaming storage and
+never requires a full rendered song in RAM. This is the first supported subset,
+not complete classic-effect playback or a model of analogue/hardware sound.
+
+## Commands
+
+```text
+Stack 65536
+PT24GRender input.mod new-song.wav
+PT24GRender input.ptg new-pattern.wav --pattern 0 --bits 24 --rate 48000
+PT24GRender input.ptg selected.wav --tracks 000F --gain 65536 --bits 16 --rate 44100
+```
+
+Host build: `make renderer`, then use `build/host/PT24GRender` with the same
+arguments (without the Amiga `Stack` command).
+
+Defaults are 48000 Hz, stereo24, all tracks, Q16 master gain 32768 (one half),
+startup silence trimmed, a 30-minute internal frame budget and one million ticks.
+`--gain 65536` selects unity; zero is allowed. The tool reports clipped output
+sample values. It does not normalize automatically or apply dither. Track masks
+are hexadecimal, with bit 0 selecting channel 1. `--lead-in` retains the initial
+speed-count silence. Existing output paths are always refused.
+
+Input files and decoded document storage each have a 64 MiB policy. Allocation
+failure remains possible and fails before publication. Output size is bounded to
+signed32 file length; the time/tick budgets can refuse earlier. The frame budget
+includes the internal startup lead-in even when that silence is trimmed from the
+published WAV. Real 68000/68030 completion time and memory headroom need physical
+measurement; native emulator success is not a performance guarantee.
+
+## Defined reference behavior
+
+Timing is `IDEAL_BPM_Q32`, the deterministic 2.5/BPM clock described in
+[the offline replay design](OFFLINE_REPLAY_DESIGN.md). Pitch policy is
+`PCM_RATE_PERIOD428`: sample PCM rate plays at period 428 (display C-2), and other
+periods scale by 428/period. This preserves high-resolution sample-rate intent;
+it is not a PAL/NTSC Paula clock, CIA timer latch or analogue filter model. The
+CLI prints these profiles and selected rate/precision/tracks/gain/lead-in policy.
+
+The first F00 ends rendering. Otherwise one pass ends on the first position
+transition to the same or a lower order, after the outgoing row has played its
+full duration. This includes a normal song wrap or backward Bxx restart. E6 row
+loops are not position transitions and retain their repetitions. Pattern mode
+uses a one-entry order list pointing at the selected pattern. Budget exhaustion
+is an error, never silently classified as a completed song.
+
+Supported: ordinary raw-period notes (including instrument-zero inheritance),
+explicit note-off and velocity; mono/stereo 8/16/24-bit samples; nearest/linear
+interpolation; forward/ping-pong loops; sample slices; track selection; global
+mute/solo; and effects `000`, `Axx`, `Bxx`, `Cxx`, `Dxx`, `E6x`, `EEx`, `Fxx`.
+Axx applies on effect passes, including delayed passes. Global flow commands on
+tracks excluded from audio still control the song. Selected slice ranges use
+one-shot playback unless the complete sample loop lies within that slice.
+
+Mono pan uses a linear left/right split over 0..255. Stereo pan uses balance:
+centre128 leaves both sides at unity, and each endpoint silences the opposite
+side. Gains are Q16, sample products accumulate in signed64 and final output is
+rounded/quantized/saturated. Muting or zero gain does not stop voice progression.
+Sample data is never modified, including across file verification passes.
+
+Preflight refuses selected MIDI routes (external audio is absent), MIDI pitches,
+nonzero sample finetune, crossfade-loop metadata, instrument-only events and other
+effects. These are explicit implementation limits. It checks all order-referenced
+patterns conservatively (or only the selected pattern in pattern mode), before
+creating staging or calling the output sink. Excluded audio tracks still retain
+their supported global flow behavior. Unfinished commands are not approximated.
+
+## Publication and cancellation
+
+The utility measures the bounded render, creates a uniquely owned temporary file
+on the destination filesystem, streams WAV bytes and closes it. It then renders
+again and compares every staged byte, including the header and exact file end.
+Only after success does it publish through the established POSIX link/Amiga DOS
+Rename no-replace policy. Cancellation, short writes, malformed output, failure to
+close/read/verify, and destination races remove only this operation's staging.
+A file that appears at the destination during rendering is preserved.
+
+The library progress callback distinguishes analysis, mixing and verification;
+returning zero cancels. Streaming blocks are at most 256 stereo frames and their
+pointers are temporary. The project, PCM and options must remain immutable for
+all passes. The result report is replaced only after successful completion. The
+CLI currently has no interactive cancel key; editor progress/cancel controls and
+render-to-sample journal integration remain subsequent work.
+
+Tests cover exact true24 WAV bytes, host/native reference parity, startup trimming,
+complete row endings, delayed phase continuity, slice bounds, 16-bit rounding,
+volume/velocity/note-off, global mute/solo, excluded-track flow commands, unsupported
+preflight, capacity, cancellation, corrupt staging, partial file writes, destination
+races and staging cleanup. No physical A1200/AmiGUS is involved. Native provenance
+and current acceptance are retained under `evidence/enhanced-editor/dev31/`.

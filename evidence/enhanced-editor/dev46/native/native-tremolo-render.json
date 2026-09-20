@@ -1,0 +1,44 @@
+{
+  "run_id": "tremolopcm1789936129546357000",
+  "elapsed_seconds": 263.328,
+  "binary_sha256": "5d7370994516f563230118a12e59b5c1b3e15e6609908ef09a66ba81c2ae38ed",
+  "input_sha256": {
+    "trem_sine.mod": "72d63cc088adb7891003e2483d0b6d1cdfdde3859105d45538c2675e029e45b4",
+    "trem_sine0.log": "8f8b32301fac7a7ade47cdbf90ec7c6a1c5b382ea46a797ca5118f99d7bca9eb",
+    "trem_memory.mod": "7402d171090c0d080fc66897edeb8c783a4a3170c77d620792cf443c70b50b43",
+    "trem_memory0.log": "2b3220351512b29b8f574f0965c67edce8771c409757f8736cc5ac17cdb62d55",
+    "trem_waves.mod": "3791bdd53f9681b9e83eacc591bd9e86ebfe5db42a2fa9de38a6aab3f95fb68d",
+    "trem_waves0.log": "f668b252b72ab2db3c5d3a4fa8dd1168a26558045f7e670f08b41e6d38f7467d",
+    "trem_reset.mod": "2ae41b58d8d5639b107f674f759426b842724dccc3e015937fd5135e5a8aad47",
+    "trem_reset0.log": "864e02197f73a160f66e2194a16007c11840fb3c1a948365cb6b220ecfb618b5",
+    "trem_keep.mod": "a2b025287fa0b592f851c2761bb561bb98044ecbe5e115d2093603270ab80f89",
+    "trem_keep0.log": "93c8ca36a84c4907ab59bbd9cba6a6411999818b4dad2dc32d22e654a6c19005",
+    "trem_delay.mod": "ff557798617cd0a6523bcff82afc5896ef4ad0c2ebd16e8c2884597e9bab8d24",
+    "trem_delay0.log": "8ce4ba3babe43609417c1b8ae01b3f8cfc7b8d88ee4070593eb78c1d8ffff451",
+    "trem_ramp_vib.mod": "467e012dc038497864842a270a12f4d895c0de80db2b499b5566d1dbc65538f5",
+    "trem_ramp_vib0.log": "b2a4519c404d08301401b552b88d00dd4c7ec0d84f3826e22f28f91b884273ef",
+    "trem_restore.mod": "d146570c00514ce811ee57186bcbe3cdfdb039cbd96871229296ff0a62009c57",
+    "trem_restore0.log": "a6f5e20434a3fe2671869a453f2a89c01f46fd0cacb3c8eafde7610bd3d90eca"
+  },
+  "logs": {
+    "trem_sine-ch0": "TREMOLO PCM PASS: channel=0 ticks=12 frames=11520\n",
+    "trem_memory-ch0": "TREMOLO PCM PASS: channel=0 ticks=24 frames=23040\n",
+    "trem_waves-ch0": "TREMOLO PCM PASS: channel=0 ticks=18 frames=17280\n",
+    "trem_waves-ch1": "TREMOLO PCM PASS: channel=1 ticks=18 frames=17280\n",
+    "trem_waves-ch2": "TREMOLO PCM PASS: channel=2 ticks=18 frames=17280\n",
+    "trem_waves-ch3": "TREMOLO PCM PASS: channel=3 ticks=18 frames=17280\n",
+    "trem_reset-ch0": "TREMOLO PCM PASS: channel=0 ticks=12 frames=11520\n",
+    "trem_keep-ch0": "TREMOLO PCM PASS: channel=0 ticks=18 frames=17280\n",
+    "trem_delay-ch0": "TREMOLO PCM PASS: channel=0 ticks=18 frames=17280\n",
+    "trem_ramp_vib-ch0": "TREMOLO PCM PASS: channel=0 ticks=18 frames=17280\n",
+    "trem_restore-ch0": "TREMOLO PCM PASS: channel=0 ticks=18 frames=17280\n"
+  },
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=416\tsndbuf_status=0",
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  },
+  "scope": "Reference immutable PCM at 48k/rate428 against dev45 native volume/pitch events; source ramp extended into a full-sample reference loop. No native sample-word mutation, analogue audio or physical acceptance."
+}

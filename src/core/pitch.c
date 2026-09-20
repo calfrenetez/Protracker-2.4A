@@ -83,7 +83,7 @@ void pt_pitch_tick(struct pt_pitch *s,const struct pt_flow *flow,uint16_t tracks
                 }
             }
             v->empty=e->kind==PT_NOTE_NONE && !e->instrument && !effect && !param;
-            if(effect<=6 || effect==10)v->output=v->period; /* mt_PerNop */
+            if(effect<=7 || effect==10)v->output=v->period; /* mt_PerNop */
         } else {
             if(!effect && param)arpeggio(v,param,flow->counter);
             else if(effect==1 || effect==2)slide(v,param,effect==2);

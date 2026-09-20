@@ -279,7 +279,7 @@ refusal of cross-sample delay. No analogue or physical acceptance is implied.
 
 ## Tremolo diagnostic preparation (dev45)
 
-7xy/E7x are not yet enabled in the reference renderer. The separate 76-byte
+At dev45, 7xy/E7x were not yet enabled in the reference renderer. The separate 76-byte
 PTVolumeTraceTest retains the exact existing 52-byte prefix. Prefix bytes32..35
 already contain the final output volume before mute gating, captured by the
 existing pt_write_volume wrapper at every volume write. New bytes52..59 contain
@@ -294,3 +294,18 @@ cases. The ramp magnitude chooses its branch using vibrato phase, while the
 volume addition/subtraction sign uses tremolo phase. Preserve this native
 cross-effect behavior. Wave control bit6 suppresses note-trigger phase reset;
 pattern delays retain commands and execute nonfresh passes at counter zero.
+
+## Tremolo rendering (dev46)
+
+7xy/E7x now modulate a separate output-volume value, preserving stored sample
+volume for subsequent commands. Nonzero parameter nibbles update independently;
+700 memory, sine/ramp/square controls, phase reset suppression and pattern-delay
+passes follow the captured native behavior. The ramp uses vibrato phase for its
+magnitude branch and tremolo phase for volume addition/subtraction. Fresh7 restores
+the stored pitch through PerNop; nonfresh tremolo does not write pitch.
+
+The PCM oracle uses dev45 volume/pitch events and note-trigger flags, with the
+immutable 2048-frame source ramp extended into a full-sample reference loop at
+48 kHz so later effect ticks remain audible. All four waveform channels are
+checked independently. This compares reference PCM policy against native control
+state; it is not an analogue Paula waveform comparison or physical acceptance.

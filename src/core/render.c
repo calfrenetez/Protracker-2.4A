@@ -1,6 +1,7 @@
 #include "render.h"
 #include "pitch.h"
 #include <string.h>
+struct tremolo {uint8_t command,phase,control;};
 struct sample_range {uint32_t start,length,trigger_start,trigger_length;uint8_t offset,loaded,retrigger;};
 struct run {
     struct pt_project view;
@@ -77,8 +78,8 @@ static enum pt_render_result preflight(const struct pt_project *p,const struct p
         const struct pt_event *e=p->events+((size_t)pat*64+row)*p->channels.count+ch;
         if(!(o->tracks&(1U<<ch)))continue;
         if(e->kind==PT_NOTE_MIDI || (e->instrument && e->kind!=PT_NOTE_PERIOD))return PT_RENDER_EFFECT;
-        if(!(e->effect==0 || e->effect==1 || e->effect==2 || e->effect==3 || e->effect==4 || e->effect==5 || e->effect==6 || e->effect==9 || (e->effect>=10 && e->effect<=13) || e->effect==15 ||
-             (e->effect==14 && ((e->parameter>>4)==1 || (e->parameter>>4)==2 || (e->parameter>>4)==4 || (e->parameter>>4)==6 || (e->parameter>>4)==9 || ((e->parameter>>4)>=10 && (e->parameter>>4)<=13) ||
+        if(!(e->effect==0 || e->effect==1 || e->effect==2 || e->effect==3 || e->effect==4 || e->effect==5 || e->effect==6 || e->effect==7 || e->effect==9 || (e->effect>=10 && e->effect<=13) || e->effect==15 ||
+             (e->effect==14 && ((e->parameter>>4)==1 || (e->parameter>>4)==2 || (e->parameter>>4)==4 || (e->parameter>>4)==6 || (e->parameter>>4)==7 || (e->parameter>>4)==9 || ((e->parameter>>4)>=10 && (e->parameter>>4)<=13) ||
                                (e->parameter>>4)==14))))return PT_RENDER_EFFECT;
         if((e->effect==3 || e->effect==5) && e->slice)return PT_RENDER_EFFECT;
         if((offsets&(1U<<ch)) && e->slice)return PT_RENDER_EFFECT;
@@ -162,15 +163,32 @@ static void gains_for(const struct pt_project *p,const struct pt_render_options 
         }
     }
 }
+static uint8_t tremolo_volume(struct tremolo *t,unsigned volume,unsigned parameter,unsigned vib_phase)
+{
+    static const uint8_t sine[]={0,24,49,74,97,120,141,161,180,197,212,224,235,244,250,253,
+        255,253,250,244,235,224,212,197,180,161,141,120,97,74,49,24};
+    unsigned index=(t->phase>>2)&31,wave=t->control&3,amount;int output;
+    if(parameter&15)t->command=(uint8_t)((t->command&240)|(parameter&15));
+    if(parameter&240)t->command=(uint8_t)((t->command&15)|(parameter&240));
+    if(!wave)amount=sine[index];
+    else if(wave==1)amount=(vib_phase&128)?255-index*8:index*8;
+    else amount=255;
+    amount=amount*(t->command&15)>>6;
+    output=(int)volume+((t->phase&128)?-(int)amount:(int)amount);
+    t->phase=(uint8_t)(t->phase+((t->command>>4)*4));
+    return (uint8_t)(output<0?0:output>64?64:output);
+}
 static enum pt_render_result commands(const struct pt_project *p,const struct pt_render_options *o,
                                       const struct pt_flow *flow,const struct pt_pitch *pitch,const struct sample_range *ranges,uint16_t offsets,struct pt_voice *voice,
-                                      uint8_t *instrument,uint8_t *volume,uint8_t *velocity)
+                                      uint8_t *instrument,uint8_t *volume,uint8_t *velocity,uint8_t *output_volume,struct tremolo *trem)
 {
     unsigned ch;
     for(ch=0;ch<p->channels.count;++ch)if(o->tracks&(1U<<ch)) {
         if(flow->fresh) {
             const struct pt_event *e=flow->project->events+((size_t)flow->project->orders[flow->played_order]*64+flow->played_row)*p->channels.count+ch;
             if(e->instrument) {instrument[ch]=e->instrument;volume[ch]=p->samples[e->instrument-1].volume;}
+            if(e->kind==PT_NOTE_PERIOD && e->effect!=3 && e->effect!=5 &&
+               !(e->effect==14 && (e->parameter>>4)==13) && !(trem[ch].control&4))trem[ch].phase=0;
             if(e->kind==PT_NOTE_OFF)voice[ch].active=0;
             else if(e->kind==PT_NOTE_PERIOD && instrument[ch] && e->effect!=3 && e->effect!=5 && !(e->effect==14 && (e->parameter>>4)==13)) {
                 const struct pt_sample *s=p->samples+instrument[ch]-1;uint32_t a=0,b=s->pcm.frames,la=0,lb=0;
@@ -217,6 +235,9 @@ static enum pt_render_result commands(const struct pt_project *p,const struct pt
             else if(command==11 && !flow->counter)volume[ch]=(uint8_t)(volume[ch]<amount?0:volume[ch]-amount);
             else if(command==12 && flow->counter==amount)volume[ch]=0;
         }
+        if(flow->effect[ch]==14 && (flow->parameter[ch]>>4)==7)trem[ch].control=flow->parameter[ch]&15;
+        output_volume[ch]=(!flow->fresh && flow->effect[ch]==7)?
+            tremolo_volume(trem+ch,volume[ch],flow->parameter[ch],pitch->channel[ch].vib_phase):volume[ch];
     }
     return PT_RENDER_OK;
 }
@@ -225,7 +246,8 @@ enum pt_render_result pt_render_stream(const struct pt_project *p,const struct p
                                       struct pt_render_report *out)
 {
     struct pt_render_report planned;struct run r;struct pt_tick_span span;
-    struct pt_voice voice[16];uint32_t gain[16][2];uint8_t instrument[16]={0},volume[16]={0},velocity[16];
+    struct pt_voice voice[16];uint32_t gain[16][2];uint8_t instrument[16]={0},volume[16]={0},velocity[16],output_volume[16]={0};
+    struct tremolo trem[16]={{0}};
     int32_t samples[512];struct pt_pcm block;uint64_t offset=0,clips=0;unsigned end;enum pt_render_result result;
     if(!sink || !out)return PT_RENDER_INVALID;
     result=pt_render_measure(p,o,progress,progress_ctx,&planned);if(result!=PT_RENDER_OK)return result;
@@ -234,7 +256,7 @@ enum pt_render_result pt_render_stream(const struct pt_project *p,const struct p
     block.data=samples;block.capacity=512;block.channels=2;block.bits=o->bits;block.rate=o->rate;
     do {
         uint32_t remaining;result=next_tick(&r,&span,&end);if(result!=PT_RENDER_OK)return result;remaining=span.frames;
-        gains_for(p,o,voice,volume,velocity,gain);
+        gains_for(p,o,voice,output_volume,velocity,gain);
         while(remaining) {
             uint64_t clipped;
             if(progress && !progress(progress_ctx,PT_RENDER_MIX,r.timeline.flow.ticks,offset))return PT_RENDER_CANCELLED;
@@ -243,7 +265,7 @@ enum pt_render_result pt_render_stream(const struct pt_project *p,const struct p
             if(!sink(sink_ctx,&block,offset))return PT_RENDER_SINK;
             clips+=clipped;offset+=block.frames;remaining-=block.frames;
         }
-        if(!end) {result=commands(p,o,&r.timeline.flow,&r.pitch,r.range,r.offset_tracks,voice,instrument,volume,velocity);if(result!=PT_RENDER_OK)return result;}
+        if(!end) {result=commands(p,o,&r.timeline.flow,&r.pitch,r.range,r.offset_tracks,voice,instrument,volume,velocity,output_volume,trem);if(result!=PT_RENDER_OK)return result;}
     } while(!end);
     if(offset!=planned.frames || r.timeline.flow.ticks!=planned.ticks)return PT_RENDER_INVALID;
     report_run(&r,end,clips,out);return PT_RENDER_OK;

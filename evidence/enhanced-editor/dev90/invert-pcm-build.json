@@ -1,0 +1,13 @@
+{
+  "scope": "Cross-build only; no native execution or EF renderer integration",
+  "binary": {
+    "sha256": "9da9d157ca45e83354ee7b9d1b90e397aaea232ce4e2c29242d462cd3e998f61",
+    "bytes": 26648
+  },
+  "source_sha256": {
+    "src/core/invert_pcm.c": "a1e56ecf05ed87135b12479232e42befd84562f08eed3e810b0f9e55029d2ed9",
+    "src/core/invert_pcm.h": "9ef305f441aa66bdab0725588c5dd4cd5f60543341d8e3c5dce40fcead328bd5",
+    "src/core/invert_loop.c": "3df53bcdf5851e16aae2bdd34d2ee97c7c0b4ae4fd1333c53b4994f0a3c0e852",
+    "tests/invert_pcm_test.c": "385e809367ca856b953697233d9e0adb6b05efec88ae5793e449147a00986095"
+  }
+}

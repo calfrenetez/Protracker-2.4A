@@ -79,3 +79,31 @@ The new retained-evidence regression passed in 0.005 seconds; the previous
 72-test suite remains the product-code baseline (no product changes here).
 Evidence is under `evidence/enhanced-editor/dev66`. Emulator resources were
 verified released and AmiConnect was notified. No physical acceptance claimed.
+
+## Bounded renderer integration (dev67)
+
+The renderer now accepts plain instrument-only changes between active mono8
+forward-loop samples with equal rates, even classic sample/loop bounds, loops
+of at least four frames and no interpolation. The current source iteration
+finishes before the new repeat starts; volume changes at the row immediately.
+Returning to the prior instrument follows the same rule.
+
+Simultaneous effects on the handoff row, tracks containing 9xx/E9x/EDx, sliced
+voices, non-looping targets, high-resolution/stereo sources, mismatched rates
+and other unsupported combinations still fail in measurement before sink calls
+or output-report mutation. These boundaries avoid implying support for untested
+retrigger, sample-word-silence or format-conversion behavior.
+
+A separate PCM oracle reads the pinned dev66 trace's loop/volume values and
+walks the original MOD's signed bytes, holding the current iteration boundary
+until reached. The renderer is checked sample-by-sample against it for handoff
+and return fixtures; non-looping and ED3 variants remain refusals. The oracle
+uses a declared one-source-frame-per-output-frame rate to isolate phase and
+repeat behavior. This is reference-derived PCM, not captured analogue audio.
+
+Dev67 validation: 74 host tests passed in 129.321 seconds, including the new
+sanitized PCM oracle and existing main-screen golden and renderer refusal tests.
+Final cross-build passed. Native run `handoffrender1789954937398364000` passed
+four cases in 51.989 seconds: exact handoff/return PCM plus nonloop/ED refusal
+before sink output. Stopped DMA and guarded release were verified. Evidence
+is in `evidence/enhanced-editor/dev67`; physical acceptance remains outstanding.

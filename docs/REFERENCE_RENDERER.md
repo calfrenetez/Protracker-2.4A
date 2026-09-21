@@ -162,7 +162,7 @@ rounded/quantized/saturated. Muting or zero gain does not stop voice progression
 Sample data is never modified, including across file verification passes.
 
 Preflight refuses selected MIDI routes (external audio is absent), MIDI pitches,
-crossfade-loop metadata, active cross-sample/slice instrument-only handoffs and other
+crossfade-loop metadata, unsupported active cross-sample/slice instrument-only handoffs and other
 effects. These are explicit implementation limits. It checks all order-referenced
 patterns conservatively (or only the selected pattern in pattern mode), before
 creating staging or calling the output sink. Excluded audio tracks still retain
@@ -455,3 +455,17 @@ The native program code is unchanged from dev57. The runner checks source/binary
 hashes before launch and uses guarded cleanup even when initial socket discovery
 fails. The package readme no longer describes already-implemented group stems as
 pending; enhanced live MIDI/panning remains unfinished.
+
+### Looped instrument-only handoff (dev67)
+
+Plain instrument-only changes between compatible mono8 forward-loop samples now
+update the next repeat source while preserving the current iteration and phase.
+The row's new volume applies immediately. The supported path requires equal
+sample rates, even classic ranges, at least four loop frames, no interpolation,
+no simultaneous effect, no slices and no 9xx/E9x/EDx commands on the track.
+Unsupported combinations still fail during measurement before output.
+
+Pinned two-sample reference traces and an independent byte-walking PCM oracle
+cover handoff and return. See `VOICE_REPEAT_UPDATES.md` and dev66/dev67 evidence.
+This extends reference rendering, including callers using it for bounce/stems;
+it does not establish live Paula or physical acceptance.

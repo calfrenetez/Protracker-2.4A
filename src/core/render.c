@@ -62,6 +62,12 @@ static int ranges_tick(struct run *r)
     }
     return 1;
 }
+static int handoff_sample(const struct pt_sample *s)
+{
+    return s->pcm.bits==8 && s->pcm.channels==1 && s->pcm.frames>=2 &&
+        s->pcm.frames<=131070 && !(s->pcm.frames&1) && s->loop==PT_LOOP_FORWARD &&
+        s->loop_end-s->loop_start>=4 && !((s->loop_start|s->loop_end)&1) && !s->interpolation;
+}
 static enum pt_render_result preflight(const struct pt_project *p,const struct pt_render_options *o)
 {
     unsigned ch,pat,row;uint8_t used[256]={0};uint16_t offsets;
@@ -131,11 +137,17 @@ static enum pt_render_result next_tick(struct run *r,struct pt_tick_span *span,u
             const struct pt_flow *f=&r->timeline.flow;
             const struct pt_event *e=r->view.events+((size_t)r->view.orders[f->played_order]*64+f->played_row)*r->view.channels.count+ch;
             const struct pt_pitch_channel *v=r->pitch.channel+ch;
-            /* Instrument-only rows reload stored sample/volume/finetune, but
-               do not restart DMA. Cross-sample or sliced active voices need a
-               separate pending repeat-source model; refuse before any output. */
-            if(e->kind==PT_NOTE_NONE && e->instrument && v->sounding &&
-               (e->instrument!=v->instrument || (r->sliced_tracks&(1U<<ch))))return PT_RENDER_EFFECT;
+            /* A bounded classic looped handoff changes the next repeat source,
+               not the current iteration. Unsupported combinations fail here
+               during measurement, before any output is published. */
+            if(e->kind==PT_NOTE_NONE && e->instrument && v->sounding) {
+                if(r->sliced_tracks&(1U<<ch))return PT_RENDER_EFFECT;
+                if(e->instrument!=v->instrument) {
+                    const struct pt_sample *a=r->view.samples+v->instrument-1,*b=r->view.samples+e->instrument-1;
+                    if(e->effect || (r->offset_tracks&(1U<<ch)) || !handoff_sample(a) || !handoff_sample(b) ||
+                       a->pcm.rate!=b->pcm.rate)return PT_RENDER_EFFECT;
+                }
+            }
             if(e->kind==PT_NOTE_OFF)r->sliced_tracks&=(uint16_t)~(1U<<ch);
             else if(e->kind==PT_NOTE_PERIOD && e->effect!=3 && e->effect!=5 &&
                     !(e->effect==14 && (e->parameter>>4)==13)) {
@@ -213,6 +225,10 @@ static enum pt_render_result commands(const struct pt_project *p,const struct pt
     for(ch=0;ch<p->channels.count;++ch)if(o->tracks&(1U<<ch)) {
         if(flow->fresh) {
             const struct pt_event *e=flow->project->events+((size_t)flow->project->orders[flow->played_order]*64+flow->played_row)*p->channels.count+ch;
+            if(e->kind==PT_NOTE_NONE && e->instrument && e->instrument!=instrument[ch] && voice[ch].active) {
+                const struct pt_sample *next=p->samples+e->instrument-1;
+                if(pt_voice_set_repeat_source(voice+ch,&next->pcm,next->loop_start,next->loop_end)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
+            }
             if(e->instrument) {instrument[ch]=e->instrument;volume[ch]=p->samples[e->instrument-1].volume;}
             if(e->kind==PT_NOTE_PERIOD && e->effect!=3 && e->effect!=5 &&
                !(e->effect==14 && (e->parameter>>4)==13) && !(trem[ch].control&4))trem[ch].phase=0;

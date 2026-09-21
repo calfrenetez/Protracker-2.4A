@@ -490,3 +490,7 @@ frames repeat. Nonzero first words are refused; source PCM is never rewritten.
 Dev73 adds compatible instrument-only handoffs carrying 1xx/2xx/E1x/E2x pitch
 slides. Reference-derived PCM checks include fractional phase through source
 changes. Other simultaneous pitch/modulation combinations remain guarded.
+
+Dev74 validates active sample handoffs with 0xy/4xy/6xy/7xy modulation, including
+vibrato memory across the instrument change. Reference-derived PCM checks use
+captured periods and volumes; this is not live Paula audio acceptance.

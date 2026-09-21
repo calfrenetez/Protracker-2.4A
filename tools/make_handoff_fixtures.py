@@ -56,3 +56,12 @@ def pitch_fixtures():
         data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
         data[1102]=0x20|effect;data[1103]=param
         yield name,bytes(data),{'max_ticks':100,'focus':name,'effect':effect,'parameter':param}
+
+def modulation_fixtures():
+    base=next(fixtures())[1]
+    for name,effect,param in [('handoff_arp',0,0x37),('handoff_vib',4,0x47),('handoff_trem',7,0x47),('handoff_vibvol',6,0x01)]:
+        assert len(name)<=20
+        data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
+        data[1102]=0x20|effect;data[1103]=param
+        if effect==6:data[1086]=0x14;data[1087]=0x47
+        yield name,bytes(data),{'max_ticks':100,'focus':name,'effect':effect,'parameter':param}

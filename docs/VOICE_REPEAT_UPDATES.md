@@ -240,3 +240,21 @@ with duplicate/baseline matches. Native renderer
 checks in 74.477 seconds. Final fresh release was 03:05:26 UTC, with no emulator
 claim retained. Evidence: `evidence/enhanced-editor/dev73`. No physical or
 analogue audio acceptance is claimed; the clock remains ideal BPM/Q32.
+
+## Modulation during handoff (dev74)
+
+Compatible instrument-only handoffs support arpeggio, vibrato, vibrato with
+volume slide and tremolo (0xy/4xy/6xy/7xy). Playback phase continues across the
+queued source change while period and volume follow the pinned reference.
+The 6xy fixture establishes vibrato memory before changing instrument, checking
+continued modulation rather than a reset. Existing format/rate, sliced voice,
+offset/retrigger and actual delayed-note refusal boundaries remain.
+
+Dev74 validation: 80 host tests passed in 137.212 seconds; targeted sanitized
+trace/PCM checks passed in 0.861 seconds; cross-build passed. Pinned reference
+`instrument1789960433603404000` passed nine executions in 36.856 seconds with
+identical duplicate traces and baseline. Native renderer
+`handoffrender1789960553310914000` passed all four exact PCM cases and
+negative checks in 75.324 seconds. Both windows were separately coordinated,
+guarded and released; final fresh release 03:17:41 UTC. Evidence lives in
+`evidence/enhanced-editor/dev74`. No physical or analogue acceptance is claimed.

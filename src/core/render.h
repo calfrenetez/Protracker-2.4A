@@ -39,7 +39,7 @@ typedef int (*pt_render_sink)(void *,const struct pt_pcm *,uint64_t offset);
  * Instrument-only rows can preload silently or reload the same whole sample
  * without restarting phase. Different active samples may hand off their next
  * repeat when both are mono8 forward loops, even bounded classic ranges,
- * matching rates, no interpolation, no simultaneous effect except 1xx/2xx/E1x/E2x/Axy/Cxx/EAx/EBx/ECx or EDx without
+ * matching rates, no interpolation, no simultaneous effect except 0xy/1xx/2xx/4xy/6xy/7xy/E1x/E2x/Axy/Cxx/EAx/EBx/ECx or EDx without
  * a note, and no 9xx/E9x or delayed-note EDx commands on the track. Other cross-sample and sliced handoffs are refused.
  * A looped source may also hand off to mono8 non-looping PCM whose first
  * word is already zero; it repeats those two silent frames without source edits.

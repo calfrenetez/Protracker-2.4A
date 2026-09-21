@@ -1,0 +1,16 @@
+{
+  "run_id": "handoffrender1789960553310914000",
+  "elapsed_seconds": 75.324,
+  "binary": {
+    "sha256": "89f4864417e27fcdec9fc43a49d71b1f35f5cc951915a6eb86104dceb4817d3e",
+    "bytes": 64320
+  },
+  "cases": [
+    "arp",
+    "vib",
+    "trem",
+    "vibvol"
+  ],
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=666\tsndbuf_status=0",
+  "scope": "Reference-derived PCM, not live Paula capture or physical acceptance"
+}

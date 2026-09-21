@@ -13,6 +13,7 @@ int main(int argc,char **argv)
     uint8_t *input,*out,*before;size_t bytes,w=99;unsigned bits,i;
     int32_t pcm[16],saved[16];
     static const int32_t values[16]={-32768,-32767,-32640,-384,-383,-128,-127,0,127,128,129,383,384,32512,32639,32767};
+    static const int8_t dithered[16]={-128,-128,-128,-1,-1,0,-1,0,0,0,0,1,2,127,127,127};
     static const int8_t expected[16]={-128,-128,-128,-2,-1,-1,0,0,0,1,1,1,2,127,127,127};
     assert(argc==2 || argc==3);f=fopen(argv[1],"rb");assert(f && !fseek(f,0,SEEK_END));n=ftell(f);assert(n>0);rewind(f);
     input=malloc(n);assert(input && fread(input,1,n,f)==(size_t)n && !fclose(f));
@@ -45,6 +46,21 @@ int main(int argc,char **argv)
             assert(pt_project_encode(&d.project,project,size,&w)==PT_PROJECT_OK);
             snprintf(path,sizeof(path),"%s/high.ptg",argv[2]);f=fopen(path,"wb");assert(f && fwrite(project,1,size,f)==size && !fclose(f));free(project);
             snprintf(path,sizeof(path),"%s/expected.mod",argv[2]);f=fopen(path,"wb");assert(f && fwrite(out,1,bytes,f)==bytes && !fclose(f));
+        }
+        memset(out,0xa5,bytes);memcpy(before,out,bytes);w=99;
+        assert(pt_mod_export_tpdf8(&d.project,out,bytes-1,&w)==PT_PROJECT_CAPACITY && w==99 && !memcmp(out,before,bytes));
+        d.project.samples[0].pcm.rate++;
+        assert(pt_mod_export_tpdf8(&d.project,out,bytes,&w)==PT_PROJECT_UNSUPPORTED && w==99 && !memcmp(out,before,bytes));
+        d.project.samples[0].pcm.rate--;
+        assert(pt_mod_export_tpdf8(&d.project,(uint8_t *)pcm,bytes,&w)==PT_PROJECT_ALIAS && w==99 && !memcmp(pcm,saved,sizeof(pcm)));
+        assert(pt_mod_export_tpdf8(&d.project,out,bytes,&w)==PT_PROJECT_OK && w==bytes && !memcmp(pcm,saved,sizeof(pcm)));
+        assert(pt_mod_export_tpdf8(&d.project,before,bytes,&w)==PT_PROJECT_OK && !memcmp(out,before,bytes));
+        assert(pt_document_load(&reopened,out,bytes,SIZE_MAX)==PT_PROJECT_OK);
+        for(i=0;i<16;i++)assert(reopened.project.samples[0].pcm.data[i]==dithered[i]);
+        assert(pt_mod_export_tpdf8(&reopened.project,before,bytes,&w)==PT_PROJECT_OK && !memcmp(out,before,bytes));
+        if(argc==3 && bits==24) {
+            char path[1024];snprintf(path,sizeof(path),"%s/dithered.mod",argv[2]);
+            f=fopen(path,"wb");assert(f && fwrite(out,1,bytes,f)==bytes && !fclose(f));
         }
         free(before);free(out);w=99;
     }

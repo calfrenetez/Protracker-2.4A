@@ -27,7 +27,7 @@ preserved; their existing classic constraints still apply.
 
 Stereo, changed sample rates, extra tracks, slices, enhanced loops, MIDI,
 panning, metadata and other classic-format conflicts remain explicit refusals.
-This is not a complete enhanced-project down-converter. Dithering, resampling,
+This is not a complete enhanced-project down-converter. Resampling,
 voice allocation, slice expansion and bounce-based reduction remain subsequent
 work. Native editor selection of the precision policy is described below. The editor's SAVE
 MOD command is still lossless; it never implicitly enables this policy.
@@ -102,3 +102,40 @@ This closes the original GUI interoperability check for this conversion fixture.
 It does not establish physical A1200/AmiGUS acceptance, arbitrary-song coverage,
 or support for the other enhanced-project conversion requirements. No product
 code or accepted main-screen layout changed in this evidence milestone.
+
+## Optional deterministic dither (dev62)
+
+`PT24GConvert mod8tpdf INPUT.ptg NEW_OUTPUT.mod` explicitly adds triangular
+dither when reducing otherwise classic-compatible mono 16/24-bit samples to
+8-bit. Ordinary `mod8` and the editor conversion panel retain their no-dither
+policy. The editor does not yet expose this additional option.
+
+The portable `pt_mod_export_tpdf8` entry point shares the precision-only
+analysis and all capacity, alias, format and source-preservation checks. Two
+uniform draws are subtracted before the existing nearest/ties-away rounding
+and saturation. Noise spans just under plus/minus one output LSB (two LSB
+peak-to-peak), without noise shaping. Clipping remains possible at full scale.
+Dither deliberately adds low-level noise, including to exact silence; select
+`mod8` when that is unwanted. No resampling or normalization is implied.
+
+The integer xorshift32 generator starts at `0x243f6a88` for every export and
+uses shifts 13,17,5. Each draw takes the upper 8 bits for 16-bit input or upper
+16 bits for 24-bit input. Samples and frames consume draws in stored order;
+8-bit samples consume none and remain unchanged. This defines reproducible
+output across host and Amiga runs, including retries. It is not a security
+random generator. Reports state `dither=tpdf-fixed`; conversion remains explicit
+and output publication never replaces an existing file.
+
+Fixed 16/24-bit boundary vectors, repeated-export equality, strict reopening,
+8-bit identity, immutable input, capacity/rate/alias refusal and CLI existing-file
+refusal extend the existing sanitized conversion checks. Native validation uses
+the same fixtures and compares the entire MOD with independently run host output.
+
+Dev62 validation: all 72 host tests passed; native run
+`round81789951762282568000` passed nine executions in 34.816 seconds.
+Dithered MOD bytes matched the fixed boundary fixture on both host and Amiga;
+repeated publication was refused and the original high-resolution project was
+unchanged. The pinned replay diagnostic accepted both converted outputs and
+Paula DMA was stopped afterward. Evidence is in `evidence/enhanced-editor/dev62`.
+The emulator was explicitly released after guarded cleanup and fresh resource
+checks. No physical or original-GUI test of the dithered variant is claimed.

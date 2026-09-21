@@ -34,4 +34,10 @@ enum pt_project_result pt_mod_export_direct(const struct pt_project *,uint8_t *,
  * Export preflight/alias/capacity failure preserves output and written. */
 enum pt_project_result pt_mod_export_analyse_round8(const struct pt_project *,struct pt_mod_export_report *);
 enum pt_project_result pt_mod_export_round8(const struct pt_project *,uint8_t *,size_t,size_t *);
+/* Optional deterministic TPDF dither before precision reduction. Difference of
+ * two uniform draws spans just under +/- one output LSB; fixed xorshift32 seed
+ * 0x243f6a88 per export, in sample/frame order. Only >8-bit samples draw noise.
+ * Same analysis, refusal and immutable-source contract as round8. Existing
+ * 8-bit samples stay byte-identical. No noise shaping or resampling. */
+enum pt_project_result pt_mod_export_tpdf8(const struct pt_project *,uint8_t *,size_t,size_t *);
 #endif

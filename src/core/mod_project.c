@@ -150,10 +150,15 @@ enum pt_project_result pt_mod_export_analyse_round8(const struct pt_project *p,s
     }
     *out=report;return PT_PROJECT_OK;
 }
+/* Fixed-width xorshift32: repeatable on both host and 680x0. */
+static uint32_t dither_random(uint32_t *state)
+{
+    uint32_t x=*state;x^=x<<13;x^=x>>17;x^=x<<5;*state=x;return x;
+}
 static enum pt_project_result export_mod(const struct pt_project *p,uint8_t *out,size_t capacity,size_t *written,unsigned round8)
 {
     struct pt_mod_export_report report;enum pt_project_result r=round8?pt_mod_export_analyse_round8(p,&report):pt_mod_export_analyse(p,&report);
-    const uint8_t *old;unsigned i,j,maxorder=0;size_t pos,count;
+    const uint8_t *old;unsigned i,j,maxorder=0;size_t pos,count;uint32_t noise=0x243f6a88UL;
     if(r!=PT_PROJECT_OK)return r;
     if(report.issues & ~(round8?PT_EXPORT_PRECISION:0U))return PT_PROJECT_UNSUPPORTED;
     if(!out || !written)return PT_PROJECT_INVALID;
@@ -192,6 +197,12 @@ static enum pt_project_result export_mod(const struct pt_project *p,uint8_t *out
                 int32_t value=s->pcm.data[j];
                 if(s->pcm.bits>8) {
                     int32_t divisor=1L<<(s->pcm.bits-8),half=divisor/2;
+                    if(round8==2) {
+                        unsigned shift=32-(s->pcm.bits-8);
+                        int32_t a=(int32_t)(dither_random(&noise)>>shift);
+                        int32_t b=(int32_t)(dither_random(&noise)>>shift);
+                        value+=a-b;
+                    }
                     value=value<0?-((-value+half)/divisor):(value+half)/divisor;
                     if(value>127)value=127;
                     if(value< -128)value=-128;
@@ -207,3 +218,6 @@ enum pt_project_result pt_mod_export_direct(const struct pt_project *p,uint8_t *
 {return export_mod(p,out,capacity,written,0);}
 enum pt_project_result pt_mod_export_round8(const struct pt_project *p,uint8_t *out,size_t capacity,size_t *written)
 {return export_mod(p,out,capacity,written,1);}
+
+enum pt_project_result pt_mod_export_tpdf8(const struct pt_project *p,uint8_t *out,size_t capacity,size_t *written)
+{return export_mod(p,out,capacity,written,2);}

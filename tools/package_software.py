@@ -64,6 +64,8 @@ DISK OP. > CONVERT MOD or Control-Alt-M opens an explicit 8-bit conversion panel
 It states rounding/no dither/source preservation; EXPORT opens a new MOD path.
 Standalone PT24GConvert mod8 INPUT NEW_OUTPUT explicitly rounds otherwise-classic
 16/24-bit mono samples to 8-bit (no dither); reports CONVERTED and preserves input.
+Standalone mod8tpdf selects deterministic triangular dither for this reduction.
+It adds low-level noise; the editor conversion panel still uses no dither.
 DISK OP. > RECENT / Control-Shift-R opens the ten most recent successful projects.
 Select a row, then OPEN/Return; dirty edits need a second confirmation. REMOVE
 and CLEAR LIST change only the list. Preferences persist in ENVARC:ProTracker2.4G.

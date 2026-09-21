@@ -1,0 +1,4 @@
+PROJECT channels=4 patterns=1 orders=1 samples=31
+MOD_ANALYSIS required_strategy=CONVERTED issues=0x4 direct_bytes=0
+REQUIRES sample-precision
+MOD_POLICY precision=round8 dither=none result=CONVERTED remaining_issues=0x0

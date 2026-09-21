@@ -25,7 +25,10 @@ def main():
         'PT24GConvert mod8 high.ptg output.mod >converted.log','Echo $RC >converted.rc',
         'PT24GConvert mod8 high.ptg output.mod >existing.log','Echo $RC >existing.rc',
         'PT24GConvert project output.mod reopened.ptg >reopen.log','Echo $RC >reopen.rc',
-        'PTSampleTraceTest output.mod 64 >trace.log','Echo $RC >trace.rc']
+        'PTSampleTraceTest output.mod 64 >trace.log','Echo $RC >trace.rc',
+        'PT24GConvert mod8tpdf high.ptg tpdf.mod >tpdf.log','Echo $RC >tpdf.rc',
+        'PT24GConvert mod8tpdf high.ptg tpdf.mod >tpdfexisting.log','Echo $RC >tpdfexisting.rc',
+        'PTSampleTraceTest tpdf.mod 64 >tpdftrace.log','Echo $RC >tpdftrace.rc']
     try:
         launch.write_text('\n'.join(['FailAt 21','Wait 5','Stack 65536','CD PTDEV:'+run.name,*commands,'Echo '+run.name+' >done'])+'\n')
         with (run/'emulator.log').open('wb') as log:process=subprocess.Popen([env['emulator_binary'],'--config',env['profile'],'-G','-m','PTDEV:'+str(share),'--log'],stdin=subprocess.DEVNULL,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
@@ -40,17 +43,19 @@ def main():
         else:raise RuntimeError('Native conversion deadline: '+str(run))
         assert (run/'done').read_text().strip()==run.name
         cases={}
-        for n,expected in [('core',0),('strict',20),('converted',0),('existing',20),('reopen',0),('trace',0)]:
+        for n,expected in [('core',0),('strict',20),('converted',0),('existing',20),('reopen',0),('trace',0),('tpdf',0),('tpdfexisting',20),('tpdftrace',0)]:
             rc=int((run/(n+'.rc')).read_text().strip());log=(run/(n+'.log')).read_text();assert rc==expected,(n,rc,log)
             cases[n]={'rc':rc,'log':log};shutil.copyfile(run/(n+'.log'),out/(n+'.log'))
         assert 'result=CONVERTED remaining_issues=0x0' in cases['converted']['log']
         assert (run/'output.mod').read_bytes()==(run/'expected.mod').read_bytes()==(out/'expected.mod').read_bytes()
+        assert 'dither=tpdf-fixed result=CONVERTED' in cases['tpdf']['log']
+        assert (run/'tpdf.mod').read_bytes()==(run/'dithered.mod').read_bytes()==(out/'dithered.mod').read_bytes()
         assert (run/'high.ptg').read_bytes()==(out/'high.ptg').read_bytes()
         assert not (run/'refused.mod').exists() and not list(run.glob('*.pttmp-*'))
         audio=emu.command('GET_AUDIO_STATE');assert all('ch%d_dma=0'%i in audio.split('\t') for i in range(4))
         report={'run_id':run.name,'elapsed_seconds':round(time.monotonic()-start,3),'binaries':{n:manifest['binaries'][n] for n in programs},'cases':cases,'source_preserved':True,'host_native_exact':True,'stopped_audio':audio,'original_tracker_gui_tested':False,'physical_tested':False}
         (out/'native-round8.json').write_text(json.dumps(report,indent=2)+'\n')
-        for n in ['output.mod','reopened.ptg']:shutil.copyfile(run/n,out/n)
+        for n in ['output.mod','tpdf.mod','reopened.ptg']:shutil.copyfile(run/n,out/n)
         print('PASS: '+str(out),flush=True)
     finally:
         launch.write_bytes(original)

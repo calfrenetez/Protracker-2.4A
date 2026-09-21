@@ -107,3 +107,24 @@ Final cross-build passed. Native run `handoffrender1789954937398364000` passed
 four cases in 51.989 seconds: exact handoff/return PCM plus nonloop/ED refusal
 before sink output. Stopped DMA and guarded release were verified. Evidence
 is in `evidence/enhanced-editor/dev67`; physical acceptance remains outstanding.
+
+## Instrument-only EDx handoff (dev68)
+
+An EDx command on a row with an instrument but no note now follows the pinned
+no-retrigger behavior during a compatible looped sample handoff. It changes
+the next repeat source and immediate volume exactly like the plain handoff.
+The captured ED3 fixture now passes the same independent PCM oracle as the
+plain and return fixtures.
+
+Only EDx with an actual period note participates in delayed-trigger range
+tracking and the cross-sample delayed-note refusal. A note-free EDx cannot
+trigger sample playback, so it no longer imposes that unrelated range limit.
+Adding an actual delayed note to each fixture still refuses before any sink
+call or report mutation. Depending on preflight order, the refusal may report
+an effect or sample-range limitation; tests check both allowed refusal reasons.
+The initial negative test expected only the effect code and was corrected to
+include the existing sample-range refusal, without weakening the no-output and
+no-mutation requirements. Non-looping handoffs and other unsupported combinations
+remain refused.
+
+Dev68 validation: 74 host tests passed in 131.955 seconds; final targeted sanitized PCM test passed in 0.789 seconds. Cross-build passed. Native run `handoffrender1789955548868698000` passed four cases in 61.766 seconds, including exact ED3 handoff PCM and actual delayed-note refusal on every fixture. Stopped DMA and guarded release verified; evidence is in `evidence/enhanced-editor/dev68`. No physical acceptance is claimed.

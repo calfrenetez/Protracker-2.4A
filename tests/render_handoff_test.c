@@ -45,5 +45,13 @@ int main(int argc,char **argv)
         memset(&report,0xa5,sizeof(report));before=report;
         assert(pt_render_stream(&d.project,&options,count,&calls,NULL,NULL,&report)==PT_RENDER_EFFECT && !calls && !memcmp(&report,&before,sizeof(report)));
     }
+    /* Adding a real delayed note must still refuse the cross-sample switch. */
+    d.project.events[4].kind=PT_NOTE_PERIOD;d.project.events[4].pitch=428;
+    d.project.events[4].effect=14;d.project.events[4].parameter=0xd3;
+    calls=0;memset(&report,0xa5,sizeof(report));before=report;
+    {
+        enum pt_render_result refused=pt_render_stream(&d.project,&options,count,&calls,NULL,NULL,&report);
+        assert((refused==PT_RENDER_EFFECT || refused==PT_RENDER_SAMPLE) && !calls && !memcmp(&report,&before,sizeof(report)));
+    }
     pt_document_release(&d);free(o.data);puts("HANDOFF renderer PASS");return 0;
 }

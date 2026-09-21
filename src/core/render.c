@@ -21,7 +21,7 @@ static uint16_t offset_tracks(const struct pt_project *p,const struct pt_render_
     for(pat=0;pat<p->pattern_count;++pat)if(used[pat])for(row=0;row<64;++row)for(ch=0;ch<p->channels.count;++ch)
         {
             const struct pt_event *e=p->events+((size_t)pat*64+row)*p->channels.count+ch;
-            if(e->effect==9 || (e->effect==14 && ((e->parameter>>4)==9 || (e->parameter>>4)==13)))mask|=(uint16_t)(1U<<ch);
+            if(e->effect==9 || (e->effect==14 && ((e->parameter>>4)==9 || ((e->parameter>>4)==13 && e->kind==PT_NOTE_PERIOD))))mask|=(uint16_t)(1U<<ch);
         }
     return mask&o->tracks;
 }
@@ -144,7 +144,7 @@ static enum pt_render_result next_tick(struct run *r,struct pt_tick_span *span,u
                 if(r->sliced_tracks&(1U<<ch))return PT_RENDER_EFFECT;
                 if(e->instrument!=v->instrument) {
                     const struct pt_sample *a=r->view.samples+v->instrument-1,*b=r->view.samples+e->instrument-1;
-                    if(e->effect || (r->offset_tracks&(1U<<ch)) || !handoff_sample(a) || !handoff_sample(b) ||
+                    if((e->effect && !(e->effect==14 && (e->parameter>>4)==13)) || (r->offset_tracks&(1U<<ch)) || !handoff_sample(a) || !handoff_sample(b) ||
                        a->pcm.rate!=b->pcm.rate)return PT_RENDER_EFFECT;
                 }
             }

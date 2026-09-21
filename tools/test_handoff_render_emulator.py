@@ -15,7 +15,7 @@ def main():
     for case in cases:
         base=ROOT/'evidence/enhanced-editor/dev66/native'/('handoff_'+case)
         shutil.copyfile(str(base)+'.mod',run/(case+'.mod'));shutil.copyfile(str(base)+'0.log',run/(case+'.trace'))
-        script += [name+' '+case+'.mod '+case+'.trace '+('1' if case in ['loop','return'] else '0')+' >'+case+'.log','Echo $RC >'+case+'.rc']
+        script += [name+' '+case+'.mod '+case+'.trace '+('1' if case in ['loop','return','ed'] else '0')+' >'+case+'.log','Echo $RC >'+case+'.rc']
     script+=['Echo '+run.name+' >done'];process=emu=None;start=time.monotonic()
     try:
         launch.write_text('\n'.join(script)+'\n')

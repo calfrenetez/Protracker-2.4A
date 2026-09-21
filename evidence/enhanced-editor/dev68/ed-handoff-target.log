@@ -1,0 +1,18 @@
+Assertion failed: (pt_render_stream(&d.project,&options,count,&calls,NULL,NULL,&report)==PT_RENDER_EFFECT && !calls && !memcmp(&report,&before,sizeof(report))), function main, file render_handoff_test.c, line 52.
+E
+======================================================================
+ERROR: test_reference_pcm_and_refusal (test_handoff_render.HandoffRender.test_reference_pcm_and_refusal)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/test_handoff_render.py", line 12, in test_reference_pcm_and_refusal
+    subprocess.run([str(exe),str(base)+'.mod',str(base)+'0.log','1' if name in ['loop','return','ed'] else '0'],check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmp52bta48v/test', '/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/dev66/native/handoff_loop.mod', '/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/dev66/native/handoff_loop0.log', '1']' died with <Signals.SIGABRT: 6>.
+
+----------------------------------------------------------------------
+Ran 1 test in 0.864s
+
+FAILED (errors=1)

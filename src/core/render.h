@@ -39,8 +39,8 @@ typedef int (*pt_render_sink)(void *,const struct pt_pcm *,uint64_t offset);
  * Instrument-only rows can preload silently or reload the same whole sample
  * without restarting phase. Different active samples may hand off their next
  * repeat when both are mono8 forward loops, even bounded classic ranges,
- * matching rates, no interpolation, no simultaneous effect, and the track has
- * no 9xx/E9x/EDx commands. Other cross-sample and sliced handoffs are refused.
+ * matching rates, no interpolation, no simultaneous effect except EDx without
+ * a note, and no 9xx/E9x or delayed-note EDx commands on the track. Other cross-sample and sliced handoffs are refused.
  * Pitch slides retain native stored-word wrap and register-write semantics.
  * Ordinary notes and tone targets follow pinned tables for all16 tunings.
  * 3xx/5xx retain voice phase; explicit velocity may change without retriggering.

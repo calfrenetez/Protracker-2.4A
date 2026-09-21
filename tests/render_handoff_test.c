@@ -44,11 +44,12 @@ int main(int argc,char **argv)
         while(fgets(line,sizeof(line),f) && line[0]=='T') {
             unsigned char r[140];for(i=0;i<140;++i){char hex[3]={line[2+i*2],line[3+i*2],0};r[i]=(unsigned char)strtoul(hex,NULL,16);}
             if(!r[14] || !word(r+28))continue;
+            if(!o.ticks){o.phase=(uint64_t)lng(r+66)<<32;o.end=(unsigned)lng(r+66)+word(r+70)*2;}
             assert(o.ticks<100);o.loop[o.ticks]=(unsigned)lng(r+58);o.length[o.ticks]=word(r+62)*2;o.volume[o.ticks]=r[32];o.period[o.ticks]=word(r+44);
             assert(word(r+12)>=32);o.time_q32+=(120000ULL<<32)/word(r+12);
             o.tick_end[o.ticks++]=o.time_q32>>32;
         }
-        fclose(f);o.phase=2108ULL<<32;o.end=3132;
+        fclose(f);
         assert(pt_render_stream(&d.project,&options,receive,&o,NULL,NULL,&report)==PT_RENDER_OK);
         assert(report.frames==o.frames && o.frames==o.tick_end[o.ticks-1]);
     } else {

@@ -363,3 +363,21 @@ identical duplicate/baseline traces. Native renderer
 refusal checks in 44.830 seconds. Both windows separately coordinated, guarded
 and released; final fresh release 04:30:18 UTC. Evidence is retained in
 `evidence/enhanced-editor/dev80`. No physical or analogue acceptance claimed.
+
+## Position jumps and pattern breaks (dev81)
+
+Compatible instrument-only handoffs may carry Bxx or Dxx. Two-pattern fixtures
+cover a position jump and a nonzero-row pattern break; skipped rows contain
+notes that must not trigger. The PCM oracle now obtains the initial sample
+address and length from the captured trigger, so it handles different pattern
+counts without fixed file offsets. Existing sample/rate/slice/offset/retrigger
+and actual delayed-note restrictions remain.
+
+Dev81 validation: 87 host tests passed in 140.077 seconds; targeted sanitized
+trace/PCM checks passed in 0.843 seconds; cross-build passed. Pinned capture
+`instrument1789965541348045000` passed five executions in 32.348 seconds with
+identical duplicate/baseline traces. Native renderer
+`handoffrender1789965640105631000` passed both PCM cases and delayed-note
+refusal checks in 48.233 seconds. Both windows separately coordinated, guarded
+and released; final fresh release 04:41:50 UTC. Evidence is retained in
+`evidence/enhanced-editor/dev81`. No physical or analogue acceptance claimed.

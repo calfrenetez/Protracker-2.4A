@@ -515,3 +515,6 @@ continuous PCM through delayed ticks and a repeated pattern-loop section.
 Dev80 admits Fxx on compatible instrument-only handoffs. The PCM oracle uses
 captured tempo with fractional tick-frame boundaries, covering speed3 and
 137 BPM while retaining the ideal BPM/Q32 timing acceptance boundary.
+
+Dev81 admits Bxx/Dxx on compatible handoff rows. Two-pattern reference fixtures
+verify continuous sample phase across position jumps and nonzero-row breaks.

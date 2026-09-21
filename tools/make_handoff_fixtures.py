@@ -118,3 +118,15 @@ def tempo_fixtures():
         data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
         data[1102]=0x2f;data[1103]=value
         yield name,bytes(data),{'max_ticks':100,'focus':name,'value':value}
+
+def jump_fixtures():
+    base=next(fixtures())[1]
+    for name,effect,param,row in [('handoff_jump',11,1,0),('handoff_break',13,3,3)]:
+        data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
+        data[950]=2;data[953]=1
+        data[1102]=0x20|effect;data[1103]=param
+        pattern=bytearray(1024)
+        for skipped in range(row):pattern[skipped*16:skipped*16+4]=bytes([1,172,0x10,0])
+        pattern[row*16+2]=15
+        data[2108:2108]=pattern
+        yield name,bytes(data),{'max_ticks':100,'focus':name,'effect':effect,'destination_row':row}

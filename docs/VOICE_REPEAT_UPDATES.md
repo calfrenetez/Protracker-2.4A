@@ -345,3 +345,21 @@ identical duplicate/baseline traces. Native renderer
 refusal checks in 75.457 seconds. Both windows separately coordinated, guarded
 and released; final fresh release 04:19:25 UTC. Evidence is retained in
 `evidence/enhanced-editor/dev79`. No physical or analogue acceptance claimed.
+
+## Speed and tempo during handoff (dev80)
+
+Compatible instrument-only handoffs may carry Fxx speed/tempo changes. The PCM
+oracle now maps each captured tick to a frame interval using the reference BPM
+and the documented ideal BPM/Q32 clock. The tempo fixture uses 137 BPM so
+fractional frame carry is exercised; the speed fixture uses three ticks per row.
+Sample phase remains continuous. This does not claim physical CIA timing or
+analogue output equivalence. Existing sample/rate/offset/retrigger guards remain.
+
+Dev80 validation: 86 host tests passed in 139.638 seconds; targeted sanitized
+trace/PCM checks passed in 0.842 seconds; cross-build passed. Pinned capture
+`instrument1789964853181987000` passed five executions in 31.480 seconds with
+identical duplicate/baseline traces. Native renderer
+`handoffrender1789964951455613000` passed both PCM cases and delayed-note
+refusal checks in 44.830 seconds. Both windows separately coordinated, guarded
+and released; final fresh release 04:30:18 UTC. Evidence is retained in
+`evidence/enhanced-editor/dev80`. No physical or analogue acceptance claimed.

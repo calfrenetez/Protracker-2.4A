@@ -150,7 +150,7 @@ static enum pt_render_result next_tick(struct run *r,struct pt_tick_span *span,u
                 if(r->sliced_tracks&(1U<<ch))return PT_RENDER_EFFECT;
                 if(e->instrument!=v->instrument) {
                     const struct pt_sample *a=r->view.samples+v->instrument-1,*b=r->view.samples+e->instrument-1;
-                    if((e->effect && e->effect!=1 && e->effect!=2 && e->effect!=3 && e->effect!=5 && e->effect!=4 && e->effect!=6 && e->effect!=7 && e->effect!=12 && e->effect!=10 && !(e->effect==14 && ((e->parameter>>4)==1 || (e->parameter>>4)==2 || (e->parameter>>4)==3 || (e->parameter>>4)==6 || (e->parameter>>4)==14 || (e->parameter>>4)==5 || (e->parameter>>4)==4 || (e->parameter>>4)==7 || (e->parameter>>4)==13 || (e->parameter>>4)==10 || (e->parameter>>4)==11 || (e->parameter>>4)==12))) || (r->offset_tracks&(1U<<ch)) || !handoff_sample(a) || (!handoff_sample(b) && !silent_handoff_sample(b)) ||
+                    if((e->effect && e->effect!=1 && e->effect!=2 && e->effect!=3 && e->effect!=5 && e->effect!=4 && e->effect!=6 && e->effect!=7 && e->effect!=12 && e->effect!=10 && e->effect!=15 && !(e->effect==14 && ((e->parameter>>4)==1 || (e->parameter>>4)==2 || (e->parameter>>4)==3 || (e->parameter>>4)==6 || (e->parameter>>4)==14 || (e->parameter>>4)==5 || (e->parameter>>4)==4 || (e->parameter>>4)==7 || (e->parameter>>4)==13 || (e->parameter>>4)==10 || (e->parameter>>4)==11 || (e->parameter>>4)==12))) || (r->offset_tracks&(1U<<ch)) || !handoff_sample(a) || (!handoff_sample(b) && !silent_handoff_sample(b)) ||
                        a->pcm.rate!=b->pcm.rate)return PT_RENDER_EFFECT;
                 }
             }

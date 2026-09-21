@@ -40,6 +40,8 @@ def main():
         from make_handoff_fixtures import slide_fixtures as source
     if '--cut-handoff' in sys.argv:
         from make_handoff_fixtures import cut_fixtures as source
+    if '--tempo-handoff' in sys.argv:
+        from make_handoff_fixtures import tempo_fixtures as source
     if '--flow-handoff' in sys.argv:
         from make_handoff_fixtures import flow_fixtures as source
     if '--tuning-handoff' in sys.argv:

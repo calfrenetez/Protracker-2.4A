@@ -511,3 +511,7 @@ subsequent glissando and finetuned arpeggio against pinned reference PCM.
 
 Dev79 admits E6x/EEx on compatible instrument-only handoff rows, validating
 continuous PCM through delayed ticks and a repeated pattern-loop section.
+
+Dev80 admits Fxx on compatible instrument-only handoffs. The PCM oracle uses
+captured tempo with fractional tick-frame boundaries, covering speed3 and
+137 BPM while retaining the ideal BPM/Q32 timing acceptance boundary.

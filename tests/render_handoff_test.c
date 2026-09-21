@@ -8,12 +8,14 @@ static void *alloc(void *c,size_t n){(void)c;return malloc(n);}
 static void drop(void *c,void *p){(void)c;free(p);}
 static unsigned word(const unsigned char *p){return p[0]*256U+p[1];}
 static unsigned long lng(const unsigned char *p){return (unsigned long)word(p)*65536+word(p+2);}
-struct oracle {unsigned char *data;unsigned loop[100],length[100],volume[100],period[100],ticks,end;uint64_t phase,frames;};
+struct oracle {unsigned char *data;unsigned loop[100],length[100],volume[100],period[100],ticks,end,cursor;uint64_t phase,frames,tick_end[100],time_q32;};
 static int receive(void *ctx,const struct pt_pcm *pcm,uint64_t offset)
 {
     struct oracle *o=ctx;unsigned i;assert(offset==o->frames);
     for(i=0;i<pcm->frames;++i) {
-        unsigned tick=(unsigned)((offset+i)/960);int value;assert(tick<o->ticks);
+        unsigned tick;int value;
+        while(o->cursor<o->ticks && offset+i>=o->tick_end[o->cursor])++o->cursor;
+        tick=o->cursor;assert(tick<o->ticks);
         value=o->data[o->phase>>32];if(value>127)value-=256;
         assert(pcm->data[2*i]==value*1024*(int)o->volume[tick] && pcm->data[2*i+1]==0);
         assert(o->period[tick]);o->phase+=(428ULL<<32)/o->period[tick];
@@ -42,11 +44,13 @@ int main(int argc,char **argv)
         while(fgets(line,sizeof(line),f) && line[0]=='T') {
             unsigned char r[140];for(i=0;i<140;++i){char hex[3]={line[2+i*2],line[3+i*2],0};r[i]=(unsigned char)strtoul(hex,NULL,16);}
             if(!r[14] || !word(r+28))continue;
-            assert(o.ticks<100);o.loop[o.ticks]=(unsigned)lng(r+58);o.length[o.ticks]=word(r+62)*2;o.volume[o.ticks]=r[32];o.period[o.ticks++]=word(r+44);
+            assert(o.ticks<100);o.loop[o.ticks]=(unsigned)lng(r+58);o.length[o.ticks]=word(r+62)*2;o.volume[o.ticks]=r[32];o.period[o.ticks]=word(r+44);
+            assert(word(r+12)>=32);o.time_q32+=(120000ULL<<32)/word(r+12);
+            o.tick_end[o.ticks++]=o.time_q32>>32;
         }
         fclose(f);o.phase=2108ULL<<32;o.end=3132;
         assert(pt_render_stream(&d.project,&options,receive,&o,NULL,NULL,&report)==PT_RENDER_OK);
-        assert(report.frames==o.frames && o.frames==(uint64_t)o.ticks*960);
+        assert(report.frames==o.frames && o.frames==o.tick_end[o.ticks-1]);
     } else {
         memset(&report,0xa5,sizeof(report));before=report;
         assert(pt_render_stream(&d.project,&options,count,&calls,NULL,NULL,&report)==PT_RENDER_EFFECT && !calls && !memcmp(&report,&before,sizeof(report)));

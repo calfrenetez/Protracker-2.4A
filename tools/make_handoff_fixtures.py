@@ -111,3 +111,10 @@ def flow_fixtures():
         data[1102]=0x2e;data[1103]=control
         if control==0x60:data[1118]=14;data[1119]=0x61;data[1134]=15
         yield name,bytes(data),{'max_ticks':100,'focus':name,'control':control}
+
+def tempo_fixtures():
+    base=next(fixtures())[1]
+    for name,value in [('handoff_speed',3),('handoff_tempo',137)]:
+        data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
+        data[1102]=0x2f;data[1103]=value
+        yield name,bytes(data),{'max_ticks':100,'focus':name,'value':value}

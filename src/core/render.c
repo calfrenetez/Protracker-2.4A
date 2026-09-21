@@ -68,6 +68,12 @@ static int handoff_sample(const struct pt_sample *s)
         s->pcm.frames<=131070 && !(s->pcm.frames&1) && s->loop==PT_LOOP_FORWARD &&
         s->loop_end-s->loop_start>=4 && !((s->loop_start|s->loop_end)&1) && !s->interpolation;
 }
+static int silent_handoff_sample(const struct pt_sample *s)
+{
+    return s->pcm.bits==8 && s->pcm.channels==1 && s->pcm.frames>=2 &&
+        s->pcm.frames<=131070 && !(s->pcm.frames&1) && s->loop==PT_LOOP_NONE &&
+        !s->interpolation && s->pcm.data[0]==0 && s->pcm.data[1]==0;
+}
 static enum pt_render_result preflight(const struct pt_project *p,const struct pt_render_options *o)
 {
     unsigned ch,pat,row;uint8_t used[256]={0};uint16_t offsets;
@@ -144,7 +150,7 @@ static enum pt_render_result next_tick(struct run *r,struct pt_tick_span *span,u
                 if(r->sliced_tracks&(1U<<ch))return PT_RENDER_EFFECT;
                 if(e->instrument!=v->instrument) {
                     const struct pt_sample *a=r->view.samples+v->instrument-1,*b=r->view.samples+e->instrument-1;
-                    if((e->effect && e->effect!=12 && e->effect!=10 && !(e->effect==14 && ((e->parameter>>4)==13 || (e->parameter>>4)==10 || (e->parameter>>4)==11 || (e->parameter>>4)==12))) || (r->offset_tracks&(1U<<ch)) || !handoff_sample(a) || !handoff_sample(b) ||
+                    if((e->effect && e->effect!=12 && e->effect!=10 && !(e->effect==14 && ((e->parameter>>4)==13 || (e->parameter>>4)==10 || (e->parameter>>4)==11 || (e->parameter>>4)==12))) || (r->offset_tracks&(1U<<ch)) || !handoff_sample(a) || (!handoff_sample(b) && !silent_handoff_sample(b)) ||
                        a->pcm.rate!=b->pcm.rate)return PT_RENDER_EFFECT;
                 }
             }
@@ -227,7 +233,7 @@ static enum pt_render_result commands(const struct pt_project *p,const struct pt
             const struct pt_event *e=flow->project->events+((size_t)flow->project->orders[flow->played_order]*64+flow->played_row)*p->channels.count+ch;
             if(e->kind==PT_NOTE_NONE && e->instrument && e->instrument!=instrument[ch] && voice[ch].active) {
                 const struct pt_sample *next=p->samples+e->instrument-1;
-                if(pt_voice_set_repeat_source(voice+ch,&next->pcm,next->loop_start,next->loop_end)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
+                if(pt_voice_set_repeat_source(voice+ch,&next->pcm,next->loop?next->loop_start:0,next->loop?next->loop_end:2)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
             }
             if(e->instrument) {instrument[ch]=e->instrument;volume[ch]=p->samples[e->instrument-1].volume;}
             if(e->kind==PT_NOTE_PERIOD && e->effect!=3 && e->effect!=5 &&

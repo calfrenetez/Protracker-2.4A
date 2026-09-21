@@ -189,3 +189,28 @@ matching duplicates and baseline. Native renderer
 56.656 seconds, including delayed-note refusal checks. Separate guarded releases
 and stopped DMA passed. Evidence is in `evidence/enhanced-editor/dev71`.
 No physical or analogue acceptance is claimed.
+
+## Canonical non-looping target (dev72)
+
+A compatible active looped voice may now hand off to a mono8 non-looping sample
+whose first two frames are already zero. The current iteration finishes, then
+the original one-word repeat becomes silence. The renderer borrows those two
+zero frames; it does not clear, rewrite or copy source PCM. This models the
+canonical first-word condition established by original ProTracker loading.
+
+Nonzero first words remain refused, as do unsupported formats, rates and effects.
+A subsequent instrument-only handoff from the non-looping source also remains
+refused pending a separate continuation model. A new ordinary note can still
+trigger normally. The fixture deliberately retains audible later frames in the
+non-looping sample: the PCM oracle checks that they are never started by the
+instrument-only change. Old nonzero-first-word refusal tests remain in the suite.
+
+Dev72 validation: all 78 host tests passed, including sanitized reference-derived
+PCM and the retained nonzero-first-word refusal. The targeted test passed in
+0.798 seconds; the cross-build passed. Pinned capture
+`instrument1789958877274244000` passed three executions in 29.848 seconds with
+identical duplicate traces and the unchanged baseline. Native renderer
+`handoffrender1789958981703646000` passed exact PCM and delayed-note refusal in
+35.801 seconds. Both windows ended with guarded cleanup, restored launcher and
+fresh release checks. Evidence is in `evidence/enhanced-editor/dev72`.
+This is software/emulator evidence, not live Paula audio or physical acceptance.

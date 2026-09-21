@@ -11,11 +11,11 @@ def main():
     name='PTHandoffTest';assert digest(ROOT/'build/dev'/name)==m['binaries'][name]['sha256']
     env=json.loads((ROOT/'local/environment.json').read_text());share=Path(env['share']);launch=share/'launch';original=launch.read_bytes()
     run=share/('handoffrender'+str(time.time_ns()));run.mkdir();out=ROOT/'build/dev/handoff-render-evidence'/run.name;out.mkdir(parents=True)
-    shutil.copyfile(ROOT/'build/dev'/name,run/name);cases=['cut0','cut3'] if '--cuts' in sys.argv else ['up','down','fineup','finedown'] if '--slides' in sys.argv else ['volume','clamp'] if '--volume' in sys.argv else ['loop','return','noloop','ed'];script=['FailAt 21','Wait 5','Stack 65536','CD PTDEV:'+run.name]
+    shutil.copyfile(ROOT/'build/dev'/name,run/name);cases=['silent'] if '--silent' in sys.argv else ['cut0','cut3'] if '--cuts' in sys.argv else ['up','down','fineup','finedown'] if '--slides' in sys.argv else ['volume','clamp'] if '--volume' in sys.argv else ['loop','return','noloop','ed'];script=['FailAt 21','Wait 5','Stack 65536','CD PTDEV:'+run.name]
     for case in cases:
-        base=ROOT/('evidence/enhanced-editor/dev71/native-reference' if '--cuts' in sys.argv else 'evidence/enhanced-editor/dev70/native-reference' if '--slides' in sys.argv else 'evidence/enhanced-editor/dev69/native-reference' if '--volume' in sys.argv else 'evidence/enhanced-editor/dev66/native')/('handoff_'+case)
+        base=ROOT/('evidence/enhanced-editor/dev72/native-reference' if '--silent' in sys.argv else 'evidence/enhanced-editor/dev71/native-reference' if '--cuts' in sys.argv else 'evidence/enhanced-editor/dev70/native-reference' if '--slides' in sys.argv else 'evidence/enhanced-editor/dev69/native-reference' if '--volume' in sys.argv else 'evidence/enhanced-editor/dev66/native')/('handoff_'+case)
         shutil.copyfile(str(base)+'.mod',run/(case+'.mod'));shutil.copyfile(str(base)+'0.log',run/(case+'.trace'))
-        script += [name+' '+case+'.mod '+case+'.trace '+('1' if case in ['loop','return','ed','volume','clamp','up','down','fineup','finedown','cut0','cut3'] else '0')+' >'+case+'.log','Echo $RC >'+case+'.rc']
+        script += [name+' '+case+'.mod '+case+'.trace '+('1' if case in ['loop','return','ed','volume','clamp','up','down','fineup','finedown','cut0','cut3','silent'] else '0')+' >'+case+'.log','Echo $RC >'+case+'.rc']
     script+=['Echo '+run.name+' >done'];process=emu=None;start=time.monotonic()
     try:
         launch.write_text('\n'.join(script)+'\n')

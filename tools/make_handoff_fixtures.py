@@ -43,3 +43,9 @@ def cut_fixtures():
         data[1102]=0x2e;data[1103]=0xc0|cut
         data[1118]=12;data[1119]=64;data[1134]=15
         yield name,bytes(data),{'max_ticks':100,'focus':name,'cut':cut}
+
+def silent_tail_fixtures():
+    for name,data,meta in fixtures():
+        if name=='handoff_noloop':
+            out=bytearray(data);out[:20]=b'handoff_silent'.ljust(20,b'\0');out[4156:4158]=bytes(2)
+            yield 'handoff_silent',bytes(out),{'max_ticks':100,'focus':'canonical zero first word non-looping repeat'}

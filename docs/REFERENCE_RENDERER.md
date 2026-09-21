@@ -482,3 +482,7 @@ looped handoffs, checked against four repeated pinned-reference fixtures.
 
 Dev71 adds ECx on compatible looped handoffs; EC0/EC3 fixtures restore C40
 afterward to verify that voice phase continued during the cut.
+
+Dev72 permits a looped voice to hand off to canonical mono8 non-looping PCM
+with an already-zero first word. After the current iteration, its two zero
+frames repeat. Nonzero first words are refused; source PCM is never rewritten.

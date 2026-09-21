@@ -41,6 +41,8 @@ typedef int (*pt_render_sink)(void *,const struct pt_pcm *,uint64_t offset);
  * repeat when both are mono8 forward loops, even bounded classic ranges,
  * matching rates, no interpolation, no simultaneous effect except Axy/Cxx/EAx/EBx/ECx or EDx without
  * a note, and no 9xx/E9x or delayed-note EDx commands on the track. Other cross-sample and sliced handoffs are refused.
+ * A looped source may also hand off to mono8 non-looping PCM whose first
+ * word is already zero; it repeats those two silent frames without source edits.
  * Pitch slides retain native stored-word wrap and register-write semantics.
  * Ordinary notes and tone targets follow pinned tables for all16 tunings.
  * 3xx/5xx retain voice phase; explicit velocity may change without retriggering.

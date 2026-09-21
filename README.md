@@ -22,6 +22,8 @@ songs, edits titles and channel/sample metadata, and saves verified new files.
 POS ED. adds blank patterns and inserts/removes/reorders positions. Undo includes
 notes, song structure, channel settings and sample edits. Supported classic songs
 export losslessly to MOD; incompatible enhanced data is explicitly refused.
+The standalone converter also offers explicit [precision-only 8-bit conversion](docs/CLASSIC_PRECISION_CONVERSION.md)
+for otherwise-classic 16/24-bit mono projects, preserving the source.
 
 Classic four-channel Paula song/pattern playback, compatible sample audition,
 live note edits and mute/solo work in the private Amiberry setup. Position changes

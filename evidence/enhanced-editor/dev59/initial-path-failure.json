@@ -1,0 +1,7 @@
+{
+  "run_id": "round81789948493764760000",
+  "cause": "Fixture-output directory dot created invalid Amiga DOS ./high.ptg; corrected runner to explicit PTDEV run path",
+  "binary_sha256": "e5d4999852d986daad3a6c8c15dde635003cb1b8e261ea85786479ad08beec45",
+  "passed": false,
+  "guarded_cleanup_verified": true
+}

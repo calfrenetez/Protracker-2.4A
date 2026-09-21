@@ -43,10 +43,10 @@ int main(int argc,char **argv)
     uint8_t *input=NULL,*output=NULL;FILE *file=NULL;long input_size;size_t n=0,w=0;int rc=20,mode;
     enum pt_project_result result;
     pt_document_init(&d,&allocator);
-    if(argc<3 || argc>4 || (strcmp(argv[1],"inspect") && strcmp(argv[1],"project") && strcmp(argv[1],"mod"))) {
-        fprintf(stderr,"Usage: PT24GConvert inspect INPUT | project INPUT NEW_OUTPUT | mod INPUT NEW_OUTPUT\n");goto done;
+    if(argc<3 || argc>4 || (strcmp(argv[1],"inspect") && strcmp(argv[1],"project") && strcmp(argv[1],"mod") && strcmp(argv[1],"mod8"))) {
+        fprintf(stderr,"Usage: PT24GConvert inspect INPUT | project INPUT NEW_OUTPUT | mod INPUT NEW_OUTPUT | mod8 INPUT NEW_OUTPUT\n");goto done;
     }
-    mode=!strcmp(argv[1],"inspect")?0:!strcmp(argv[1],"project")?1:2;
+    mode=!strcmp(argv[1],"inspect")?0:!strcmp(argv[1],"project")?1:!strcmp(argv[1],"mod8")?3:2;
     if((mode==0 && argc!=3) || (mode && argc!=4)) {fprintf(stderr,"Wrong argument count\n");goto done;}
     file=fopen(argv[2],"rb");if(!file) {fprintf(stderr,"Cannot open input\n");goto done;}
     if(fseek(file,0,SEEK_END) || (input_size=ftell(file))<0 || input_size>64L*1024*1024) {
@@ -59,11 +59,15 @@ int main(int argc,char **argv)
     if(result!=PT_PROJECT_OK) {fprintf(stderr,"Input rejected result=%d; no output created\n",result);goto done;}
     result=pt_mod_export_analyse(&d.project,&report);if(result!=PT_PROJECT_OK)goto done;print_report(&d.project,&report);
     if(!mode) {rc=0;goto done;}
+    if(mode==3) {
+        result=pt_mod_export_analyse_round8(&d.project,&report);if(result!=PT_PROJECT_OK)goto done;
+        printf("MOD_POLICY precision=round8 dither=none result=%s remaining_issues=0x%lx\n",classification(report.classification),(unsigned long)(report.issues&~PT_EXPORT_PRECISION));
+    }
     if(mode==1)result=pt_project_size(&d.project,&n);
-    else {result=report.issues?PT_PROJECT_UNSUPPORTED:PT_PROJECT_OK;n=report.bytes;}
+    else {result=(report.issues&~(mode==3?PT_EXPORT_PRECISION:0U))?PT_PROJECT_UNSUPPORTED:PT_PROJECT_OK;n=report.bytes;}
     if(result!=PT_PROJECT_OK) {fprintf(stderr,"Direct MOD export refused; transformations require explicit policy and implementation\n");goto done;}
     output=malloc(n);if(!output)goto done;
-    result=mode==1?pt_project_encode(&d.project,output,n,&w):pt_mod_export_direct(&d.project,output,n,&w);
+    result=mode==1?pt_project_encode(&d.project,output,n,&w):mode==3?pt_mod_export_round8(&d.project,output,n,&w):pt_mod_export_direct(&d.project,output,n,&w);
     if(result!=PT_PROJECT_OK || w!=n)goto done;
     {
         enum pt_save_result saved=pt_file_save_new(argv[3],output,n);

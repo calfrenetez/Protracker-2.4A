@@ -26,4 +26,12 @@ enum pt_project_result pt_mod_export_analyse(const struct pt_project *,struct pt
 /* Direct, lossless path only. Any reported issue leaves output untouched and
  * returns UNSUPPORTED. Future transformations require explicit caller policy. */
 enum pt_project_result pt_mod_export_direct(const struct pt_project *,uint8_t *,size_t,size_t *);
+/* Explicit precision-only conversion: signed 16/24-bit mono PCM is rounded to
+ * nearest 8-bit, ties away from zero, then saturated. No dither/resampling.
+ * All other classic constraints still apply. Source PCM is never modified.
+ * The policy analysis retains issue bits but supplies bytes when precision is
+ * the only issue. Classification stays CONVERTED whenever precision changes.
+ * Export preflight/alias/capacity failure preserves output and written. */
+enum pt_project_result pt_mod_export_analyse_round8(const struct pt_project *,struct pt_mod_export_report *);
+enum pt_project_result pt_mod_export_round8(const struct pt_project *,uint8_t *,size_t,size_t *);
 #endif

@@ -60,6 +60,8 @@ S enters a hex ordinal, +/- steps, C clears, U attaches selected sample, [/] sel
 that sample slot, L opens its sampler. Slice0000 is whole; 0001 is first marker.
 Slice references share note/sample undo and PTG saves; slice playback is pending.
 DISK OP. > SAVE MOD / Control-Shift-M exports strictly lossless classic MODs.
+Standalone PT24GConvert mod8 INPUT NEW_OUTPUT explicitly rounds otherwise-classic
+16/24-bit mono samples to 8-bit (no dither); reports CONVERTED and preserves input.
 DISK OP. > RECENT / Control-Shift-R opens the ten most recent successful projects.
 Select a row, then OPEN/Return; dirty edits need a second confirmation. REMOVE
 and CLEAR LIST change only the list. Preferences persist in ENVARC:ProTracker2.4G.
@@ -101,7 +103,8 @@ Escape/Tab closes source; imported PCM/name/finetune/volume/loop share undo.
 Browsing a MOD never replaces the current song. Shift-L selects a MOD source directly.
 Mixed AmiGUS/MIDI replay and other unfinished controls remain unavailable.
 PP20 loads through the shared bounded decoder; PX20 and PP20 saving are unsupported.
-PT24GConvert inspects projects and performs strict lossless MOD/project conversion.
+PT24GConvert inspects projects, performs strict lossless MOD/project conversion,
+and offers explicit precision-only mod8 conversion as described above.
 PT24GRender INPUT NEW.wav exports a bounded reference song, with optional --pattern N,
 --rate 44100|48000, --bits 16|24, --tracks HEX, --gain 0..65536 and --lead-in.
 Default: 48kHz/stereo24, all tracks, gain32768, trimmed startup, 30-minute limit.

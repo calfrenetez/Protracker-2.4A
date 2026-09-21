@@ -118,13 +118,16 @@ legacy non-loop header values while editable fields remain in the shared model.
 The nominal sample-rate metadata for PAL period 428 is 8287 Hz; raw event periods
 and finetune remain separate. Sample bytes are not resampled on import.
 
-PT24GConvert currently provides direct export only when the analysis finds no
+PT24GConvert `mod` provides direct export only when the analysis finds no
 loss. MIDI audio, OFF, extended precision/rates/stereo, slices/loop types,
 nonclassic panning, metadata and classic limits are reported. CONVERTED, BOUNCED
 and INCOMPLETE in analysis are the **required strategies**, not claims that those
 transformations have already been performed. A nonzero issue mask prevents the
-direct writer from modifying its output. Transforming/bouncing strategies and
-in-editor export remain subsequent work.
+direct writer from modifying its output. The editor SAVE MOD uses this strict
+path. Explicit standalone `mod8` additionally permits precision-only 16/24-to-8
+bit rounding and reports CONVERTED; it preserves the source and refuses every
+other issue. See [precision conversion](CLASSIC_PRECISION_CONVERSION.md). Other
+transforming/bouncing strategies and editor selection of mod8 remain subsequent work.
 
 ## Loading and save transactions
 

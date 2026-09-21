@@ -138,12 +138,24 @@ enum pt_project_result pt_mod_export_analyse(const struct pt_project *p,struct p
     }
     *out=r;return PT_PROJECT_OK;
 }
-enum pt_project_result pt_mod_export_direct(const struct pt_project *p,uint8_t *out,size_t capacity,size_t *written)
+enum pt_project_result pt_mod_export_analyse_round8(const struct pt_project *p,struct pt_mod_export_report *out)
 {
-    struct pt_mod_export_report report;enum pt_project_result r=pt_mod_export_analyse(p,&report);
+    struct pt_mod_export_report report;unsigned i;
+    enum pt_project_result r=pt_mod_export_analyse(p,&report);
+    if(r!=PT_PROJECT_OK)return r;
+    if(!out)return PT_PROJECT_INVALID;
+    if(report.issues==PT_EXPORT_PRECISION) {
+        report.bytes=1084+(size_t)p->pattern_count*1024;
+        for(i=0;i<p->sample_count;++i)report.bytes+=p->samples[i].pcm.frames;
+    }
+    *out=report;return PT_PROJECT_OK;
+}
+static enum pt_project_result export_mod(const struct pt_project *p,uint8_t *out,size_t capacity,size_t *written,unsigned round8)
+{
+    struct pt_mod_export_report report;enum pt_project_result r=round8?pt_mod_export_analyse_round8(p,&report):pt_mod_export_analyse(p,&report);
     const uint8_t *old;unsigned i,j,maxorder=0;size_t pos,count;
     if(r!=PT_PROJECT_OK)return r;
-    if(report.issues)return PT_PROJECT_UNSUPPORTED;
+    if(report.issues & ~(round8?PT_EXPORT_PRECISION:0U))return PT_PROJECT_UNSUPPORTED;
     if(!out || !written)return PT_PROJECT_INVALID;
     if(capacity<report.bytes)return PT_PROJECT_CAPACITY;
     count=(size_t)p->pattern_count*64*p->channels.count;
@@ -176,8 +188,22 @@ enum pt_project_result pt_mod_export_direct(const struct pt_project *p,uint8_t *
             q[24]=(uint8_t)s->finetune&15;q[25]=s->volume;
             if(s->loop==PT_LOOP_FORWARD) {w16(q+26,s->loop_start/2);w16(q+28,(s->loop_end-s->loop_start)/2);}
             else if(!old || u16(q+28)>1) {w16(q+26,0);w16(q+28,1);}
-            for(j=0;j<s->pcm.frames;++j)out[pos++]=(uint8_t)s->pcm.data[j];
+            for(j=0;j<s->pcm.frames;++j) {
+                int32_t value=s->pcm.data[j];
+                if(s->pcm.bits>8) {
+                    int32_t divisor=1L<<(s->pcm.bits-8),half=divisor/2;
+                    value=value<0?-((-value+half)/divisor):(value+half)/divisor;
+                    if(value>127)value=127;
+                    if(value< -128)value=-128;
+                }
+                out[pos++]=(uint8_t)value;
+            }
         } else {memset(q,0,30);w16(q+28,1);}
     }
     *written=report.bytes;return PT_PROJECT_OK;
 }
+
+enum pt_project_result pt_mod_export_direct(const struct pt_project *p,uint8_t *out,size_t capacity,size_t *written)
+{return export_mod(p,out,capacity,written,0);}
+enum pt_project_result pt_mod_export_round8(const struct pt_project *p,uint8_t *out,size_t capacity,size_t *written)
+{return export_mod(p,out,capacity,written,1);}

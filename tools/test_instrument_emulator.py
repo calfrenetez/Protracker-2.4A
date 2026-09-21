@@ -40,6 +40,8 @@ def main():
         from make_handoff_fixtures import slide_fixtures as source
     if '--cut-handoff' in sys.argv:
         from make_handoff_fixtures import cut_fixtures as source
+    if '--retrigger-handoff' in sys.argv:
+        from make_handoff_fixtures import retrigger_fixtures as source
     if '--jump-handoff' in sys.argv:
         from make_handoff_fixtures import jump_fixtures as source
     if '--tempo-handoff' in sys.argv:

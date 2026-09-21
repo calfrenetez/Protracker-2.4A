@@ -130,3 +130,10 @@ def jump_fixtures():
         pattern[row*16+2]=15
         data[2108:2108]=pattern
         yield name,bytes(data),{'max_ticks':100,'focus':name,'effect':effect,'destination_row':row}
+
+def retrigger_fixtures():
+    base=next(fixtures())[1]
+    for name,interval in [('handoff_retrig2',2),('handoff_retrig3',3)]:
+        data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
+        data[1102]=0x2e;data[1103]=0x90|interval
+        yield name,bytes(data),{'max_ticks':100,'focus':name,'interval':interval}

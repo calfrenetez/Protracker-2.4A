@@ -381,3 +381,21 @@ identical duplicate/baseline traces. Native renderer
 refusal checks in 48.233 seconds. Both windows separately coordinated, guarded
 and released; final fresh release 04:41:50 UTC. Evidence is retained in
 `evidence/enhanced-editor/dev81`. No physical or analogue acceptance claimed.
+
+## Cross-sample retrigger rows (dev82)
+
+A compatible instrument-only E9x row with a nonzero interval may change sample
+and retrigger it. This exception is restricted to tracks without 9xx offsets or
+actual delayed-note EDx; E90 and other offset-track handoffs retain their guards.
+The PCM oracle follows captured trigger counts, addresses and lengths at tick
+boundaries, resetting phase only when the reference records another trigger.
+E92/E93 fixtures exercise the tick-zero switch and subsequent retriggers.
+
+Dev82 validation: 88 host tests passed; targeted sanitized PCM and E90/9xx
+refusal checks passed in 0.983 seconds; cross-build passed. Pinned capture
+`instrument1789966260399087000` passed five executions in 32.381 seconds with
+identical duplicate/baseline traces. Native renderer
+`handoffrender1789966411091541000` passed both retrigger PCM cases and delayed-
+note refusal checks in 47.956 seconds. Both windows separately coordinated,
+guarded and released; final fresh release 04:54:46 UTC. Evidence is retained in
+`evidence/enhanced-editor/dev82`. No physical or analogue acceptance claimed.

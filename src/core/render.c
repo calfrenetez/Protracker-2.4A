@@ -8,12 +8,12 @@ struct run {
     uint16_t order;
     struct pt_timeline timeline;
     struct pt_pitch pitch;
-    uint16_t tracks,offset_tracks,sliced_tracks;
+    uint16_t tracks,offset_tracks,handoff_blocked,sliced_tracks;
     struct sample_range range[16];
     uint64_t frames;
     uint8_t started,pending_end,capturing,emit,row_range,row_first,row_end;
 };
-static uint16_t offset_tracks(const struct pt_project *p,const struct pt_render_options *o)
+static uint16_t offset_tracks(const struct pt_project *p,const struct pt_render_options *o,unsigned retriggers)
 {
     uint8_t used[256]={0};unsigned pat,row,ch;uint16_t mask=0;
     if(o->pattern_only)used[o->pattern]=1;
@@ -21,7 +21,7 @@ static uint16_t offset_tracks(const struct pt_project *p,const struct pt_render_
     for(pat=0;pat<p->pattern_count;++pat)if(used[pat])for(row=0;row<64;++row)for(ch=0;ch<p->channels.count;++ch)
         {
             const struct pt_event *e=p->events+((size_t)pat*64+row)*p->channels.count+ch;
-            if(e->effect==9 || (e->effect==14 && ((e->parameter>>4)==9 || ((e->parameter>>4)==13 && e->kind==PT_NOTE_PERIOD))))mask|=(uint16_t)(1U<<ch);
+            if(e->effect==9 || (e->effect==14 && (((e->parameter>>4)==9 && retriggers) || ((e->parameter>>4)==13 && e->kind==PT_NOTE_PERIOD))))mask|=(uint16_t)(1U<<ch);
         }
     return mask&o->tracks;
 }
@@ -83,7 +83,7 @@ static enum pt_render_result preflight(const struct pt_project *p,const struct p
        o->pattern_only>1 || o->include_lead_in>1 || o->row_range>1 ||
        (o->row_range && (!o->pattern_only || o->include_lead_in || o->row_first>=o->row_end || o->row_end>64)) ||
        (o->pattern_only?o->pattern>=p->pattern_count:o->start_order>=p->order_count))return PT_RENDER_INVALID;
-    offsets=offset_tracks(p,o);
+    offsets=offset_tracks(p,o,1);
     for(ch=0;ch<p->channels.count;++ch)if((o->tracks&(1U<<ch)) && p->channels.track[ch].route==PT_MIDI)return PT_RENDER_ROUTE;
     if(o->pattern_only)used[o->pattern]=1;
     else for(pat=0;pat<p->order_count;++pat)used[p->orders[pat]]=1;
@@ -111,7 +111,7 @@ static int start_run(struct run *r,const struct pt_project *p,const struct pt_re
 {
     memset(r,0,sizeof(*r));r->view=*p;r->started=o->include_lead_in;
     r->capturing=!o->row_range;r->row_range=o->row_range;r->row_first=o->row_first;r->row_end=o->row_end;
-    r->tracks=o->tracks;r->offset_tracks=offset_tracks(p,o);pt_pitch_init(&r->pitch);
+    r->tracks=o->tracks;r->offset_tracks=offset_tracks(p,o,1);r->handoff_blocked=offset_tracks(p,o,0);pt_pitch_init(&r->pitch);
     if(o->pattern_only) {r->order=o->pattern;r->view.orders=&r->order;r->view.order_count=1;}
     return pt_timeline_init(&r->timeline,&r->view,PT_FLOW_EXTENDED256,o->pattern_only?0:o->start_order,
                             o->rate,o->tick_limit,o->frame_limit)==PT_TIMELINE_TICK;
@@ -150,7 +150,7 @@ static enum pt_render_result next_tick(struct run *r,struct pt_tick_span *span,u
                 if(r->sliced_tracks&(1U<<ch))return PT_RENDER_EFFECT;
                 if(e->instrument!=v->instrument) {
                     const struct pt_sample *a=r->view.samples+v->instrument-1,*b=r->view.samples+e->instrument-1;
-                    if((e->effect && e->effect!=1 && e->effect!=2 && e->effect!=3 && e->effect!=5 && e->effect!=4 && e->effect!=6 && e->effect!=7 && e->effect!=12 && e->effect!=11 && e->effect!=13 && e->effect!=10 && e->effect!=15 && !(e->effect==14 && ((e->parameter>>4)==1 || (e->parameter>>4)==2 || (e->parameter>>4)==3 || (e->parameter>>4)==6 || (e->parameter>>4)==14 || (e->parameter>>4)==5 || (e->parameter>>4)==4 || (e->parameter>>4)==7 || (e->parameter>>4)==13 || (e->parameter>>4)==10 || (e->parameter>>4)==11 || (e->parameter>>4)==12))) || (r->offset_tracks&(1U<<ch)) || !handoff_sample(a) || (!handoff_sample(b) && !silent_handoff_sample(b)) ||
+                    if((e->effect && e->effect!=1 && e->effect!=2 && e->effect!=3 && e->effect!=5 && e->effect!=4 && e->effect!=6 && e->effect!=7 && e->effect!=12 && e->effect!=11 && e->effect!=13 && e->effect!=10 && e->effect!=15 && !(e->effect==14 && (((e->parameter>>4)==9 && (e->parameter&15)) || (e->parameter>>4)==1 || (e->parameter>>4)==2 || (e->parameter>>4)==3 || (e->parameter>>4)==6 || (e->parameter>>4)==14 || (e->parameter>>4)==5 || (e->parameter>>4)==4 || (e->parameter>>4)==7 || (e->parameter>>4)==13 || (e->parameter>>4)==10 || (e->parameter>>4)==11 || (e->parameter>>4)==12))) || ((r->offset_tracks&(1U<<ch)) && !(e->effect==14 && (e->parameter>>4)==9 && (e->parameter&15) && !(r->handoff_blocked&(1U<<ch)))) || !handoff_sample(a) || (!handoff_sample(b) && !silent_handoff_sample(b)) ||
                        a->pcm.rate!=b->pcm.rate)return PT_RENDER_EFFECT;
                 }
             }

@@ -41,6 +41,8 @@ typedef int (*pt_render_sink)(void *,const struct pt_pcm *,uint64_t offset);
  * repeat when both are mono8 forward loops, even bounded classic ranges,
  * matching rates, no interpolation, no simultaneous effect except 0xy/1xx/2xx/3xx/5xy/4xy/6xy/7xy/E1x/E2x/E3x/E4x/E5x/E6x/E7x/EEx/Fxx/Axy/Bxx/Cxx/Dxx/EAx/EBx/ECx or EDx without
  * a note, and no 9xx/E9x or delayed-note EDx commands on the track. Other cross-sample and sliced handoffs are refused.
+ * Nonzero instrument-only E9x may retrigger a compatible sample on tracks
+ * without 9xx or actual delayed-note EDx. E90 is not opened by this exception.
  * The same guarded handoff applies to 3xx/5xy rows with target notes.
  * A looped source may also hand off to mono8 non-looping PCM whose first
  * word is already zero; it repeats those two silent frames without source edits.

@@ -518,3 +518,7 @@ captured tempo with fractional tick-frame boundaries, covering speed3 and
 
 Dev81 admits Bxx/Dxx on compatible handoff rows. Two-pattern reference fixtures
 verify continuous sample phase across position jumps and nonzero-row breaks.
+
+Dev82 adds a bounded nonzero instrument-only E9x cross-sample exception on
+tracks without 9xx/actual EDx notes. The PCM oracle now follows native trigger
+counts/ranges as well as periods, volumes and tempo.

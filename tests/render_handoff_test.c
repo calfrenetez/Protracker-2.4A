@@ -8,7 +8,7 @@ static void *alloc(void *c,size_t n){(void)c;return malloc(n);}
 static void drop(void *c,void *p){(void)c;free(p);}
 static unsigned word(const unsigned char *p){return p[0]*256U+p[1];}
 static unsigned long lng(const unsigned char *p){return (unsigned long)word(p)*65536+word(p+2);}
-struct oracle {unsigned char *data;unsigned loop[100],length[100],volume[100],period[100],ticks,end,cursor;uint64_t phase,frames,tick_end[100],time_q32;};
+struct oracle {unsigned char *data;unsigned loop[100],length[100],volume[100],period[100],ticks,end,cursor,triggers[100],starts[100],sizes[100],last_trigger;uint64_t phase,frames,tick_end[100],time_q32;};
 static int receive(void *ctx,const struct pt_pcm *pcm,uint64_t offset)
 {
     struct oracle *o=ctx;unsigned i;assert(offset==o->frames);
@@ -16,6 +16,7 @@ static int receive(void *ctx,const struct pt_pcm *pcm,uint64_t offset)
         unsigned tick;int value;
         while(o->cursor<o->ticks && offset+i>=o->tick_end[o->cursor])++o->cursor;
         tick=o->cursor;assert(tick<o->ticks);
+        if(o->triggers[tick]!=o->last_trigger){o->phase=(uint64_t)o->starts[tick]<<32;o->end=o->starts[tick]+o->sizes[tick];o->last_trigger=o->triggers[tick];}
         value=o->data[o->phase>>32];if(value>127)value-=256;
         assert(pcm->data[2*i]==value*1024*(int)o->volume[tick] && pcm->data[2*i+1]==0);
         assert(o->period[tick]);o->phase+=(428ULL<<32)/o->period[tick];
@@ -44,7 +45,7 @@ int main(int argc,char **argv)
         while(fgets(line,sizeof(line),f) && line[0]=='T') {
             unsigned char r[140];for(i=0;i<140;++i){char hex[3]={line[2+i*2],line[3+i*2],0};r[i]=(unsigned char)strtoul(hex,NULL,16);}
             if(!r[14] || !word(r+28))continue;
-            if(!o.ticks){o.phase=(uint64_t)lng(r+66)<<32;o.end=(unsigned)lng(r+66)+word(r+70)*2;}
+            o.triggers[o.ticks]=word(r+72);o.starts[o.ticks]=(unsigned)lng(r+66);o.sizes[o.ticks]=word(r+70)*2;
             assert(o.ticks<100);o.loop[o.ticks]=(unsigned)lng(r+58);o.length[o.ticks]=word(r+62)*2;o.volume[o.ticks]=r[32];o.period[o.ticks]=word(r+44);
             assert(word(r+12)>=32);o.time_q32+=(120000ULL<<32)/word(r+12);
             o.tick_end[o.ticks++]=o.time_q32>>32;

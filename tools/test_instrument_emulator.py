@@ -40,6 +40,8 @@ def main():
         from make_handoff_fixtures import slide_fixtures as source
     if '--cut-handoff' in sys.argv:
         from make_handoff_fixtures import cut_fixtures as source
+    if '--tone-note-handoff' in sys.argv:
+        from make_handoff_fixtures import tone_note_fixtures as source
     if '--tone-handoff' in sys.argv:
         from make_handoff_fixtures import tone_fixtures as source
     if '--modulation-handoff' in sys.argv:

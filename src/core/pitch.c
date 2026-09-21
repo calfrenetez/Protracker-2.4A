@@ -70,7 +70,7 @@ void pt_pitch_tick(struct pt_pitch *s,const struct pt_flow *flow,uint16_t tracks
             /* mt_PlayVoice tests the previous packed event before replacing it. */
             if(v->empty)v->output=v->period;
             if(e->instrument) {
-                if(((effect==3 || effect==5 || (effect==14 && (param>>4)==13)) && e->kind==PT_NOTE_PERIOD) && v->sounding && v->instrument!=e->instrument)v->unsupported=1;
+                if((effect==14 && (param>>4)==13 && e->kind==PT_NOTE_PERIOD) && v->sounding && v->instrument!=e->instrument)v->unsupported=1;
                 v->instrument=e->instrument;
                 if(e->instrument<=flow->project->sample_count)
                     v->finetune=(uint8_t)flow->project->samples[e->instrument-1].finetune&15;

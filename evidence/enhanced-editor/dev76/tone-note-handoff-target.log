@@ -1,0 +1,10 @@
+test_pinned_volume_and_pcm (test_tone_note_handoff.ToneNoteHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.733s
+
+OK

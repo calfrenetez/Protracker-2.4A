@@ -498,3 +498,7 @@ captured periods and volumes; this is not live Paula audio acceptance.
 Dev75 permits compatible instrument-only 3xx/5xy handoffs with existing target
 and speed memory. New-note cross-sample portamento remains refused pending
 separate reference validation.
+
+Dev76 extends the guarded 3xx/5xy handoff to rows with target notes, preserving
+phase while changing the target and next sample repeat. Earlier dev75 target-note
+refusal is superseded for compatible samples; other handoff restrictions remain.

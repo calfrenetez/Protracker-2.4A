@@ -146,7 +146,7 @@ static enum pt_render_result next_tick(struct run *r,struct pt_tick_span *span,u
             /* A bounded classic looped handoff changes the next repeat source,
                not the current iteration. Unsupported combinations fail here
                during measurement, before any output is published. */
-            if(e->kind==PT_NOTE_NONE && e->instrument && v->sounding) {
+            if((e->kind==PT_NOTE_NONE || (e->kind==PT_NOTE_PERIOD && (e->effect==3 || e->effect==5))) && e->instrument && v->sounding) {
                 if(r->sliced_tracks&(1U<<ch))return PT_RENDER_EFFECT;
                 if(e->instrument!=v->instrument) {
                     const struct pt_sample *a=r->view.samples+v->instrument-1,*b=r->view.samples+e->instrument-1;
@@ -231,7 +231,7 @@ static enum pt_render_result commands(const struct pt_project *p,const struct pt
     for(ch=0;ch<p->channels.count;++ch)if(o->tracks&(1U<<ch)) {
         if(flow->fresh) {
             const struct pt_event *e=flow->project->events+((size_t)flow->project->orders[flow->played_order]*64+flow->played_row)*p->channels.count+ch;
-            if(e->kind==PT_NOTE_NONE && e->instrument && e->instrument!=instrument[ch] && voice[ch].active) {
+            if((e->kind==PT_NOTE_NONE || (e->kind==PT_NOTE_PERIOD && (e->effect==3 || e->effect==5))) && e->instrument && e->instrument!=instrument[ch] && voice[ch].active) {
                 const struct pt_sample *next=p->samples+e->instrument-1;
                 if(pt_voice_set_repeat_source(voice+ch,&next->pcm,next->loop?next->loop_start:0,next->loop?next->loop_end:2)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
             }

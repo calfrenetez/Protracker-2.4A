@@ -74,3 +74,12 @@ def tone_fixtures():
         data[1100:1104]=bytes([target>>8,target&255,0x13,3])
         data[1116:1120]=bytes([0,0,0x20|effect,param]);data[1134]=15
         yield name,bytes(data),{'max_ticks':100,'focus':name,'effect':effect,'target':target}
+
+def tone_note_fixtures():
+    base=next(fixtures())[1]
+    for name,target,effect,param in [('handoff_noteup',381,3,3),('handoff_notedown',480,3,3),('handoff_notevolup',381,5,1),('handoff_notevoldown',480,5,1)]:
+        assert len(name)<=20
+        data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
+        data[1100:1104]=bytes([1,172,0x13,3])
+        data[1116:1120]=bytes([target>>8,target&255,0x20|effect,param]);data[1134]=15
+        yield name,bytes(data),{'max_ticks':100,'focus':name,'effect':effect,'target':target}

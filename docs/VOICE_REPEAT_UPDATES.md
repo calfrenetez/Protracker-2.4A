@@ -276,3 +276,21 @@ identical duplicates and baseline. Native renderer
 refusal checks in 99.975 seconds. Both emulator windows were separately
 coordinated and released; final fresh release 03:30:13 UTC. Evidence is in
 `evidence/enhanced-editor/dev75`. No physical or analogue acceptance claimed.
+
+## Tone targets on cross-sample rows (dev76)
+
+The bounded handoff also applies when a 3xx/5xy row supplies a new target note.
+It queues the new sample repeat, applies the target and retains current voice
+phase rather than triggering that note. Four fixtures establish speed first,
+then combine upward/downward target notes with a sample change, optionally
+sliding volume. The same classic-format/rate/slice/offset/retrigger guards apply
+before rendering; actual delayed-note EDx remains refused.
+
+Dev76 validation: 82 host tests passed in 138.885 seconds; targeted sanitized
+trace/PCM checks passed in 0.733 seconds; cross-build passed. Pinned capture
+`instrument1789961911775418000` passed nine executions in 39.222 seconds with
+identical duplicate/baseline traces. Native renderer
+`handoffrender1789962021177207000` passed four PCM cases and delayed-note
+refusal checks in 101.019 seconds. Both windows were separately coordinated,
+guarded and released; final fresh release 03:42:27 UTC. Evidence is in
+`evidence/enhanced-editor/dev76`. No physical or analogue acceptance claimed.

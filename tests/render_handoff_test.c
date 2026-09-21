@@ -52,7 +52,7 @@ int main(int argc,char **argv)
         assert(pt_render_stream(&d.project,&options,count,&calls,NULL,NULL,&report)==PT_RENDER_EFFECT && !calls && !memcmp(&report,&before,sizeof(report)));
     }
     /* Adding a real delayed note must still refuse the cross-sample switch. */
-    for(i=0;i<64*4;++i)if(d.project.events[i].kind==PT_NOTE_NONE && d.project.events[i].instrument==2)break;
+    for(i=0;i<64*4;++i)if(d.project.events[i].instrument==2)break;
     assert(i<64*4);
     d.project.events[i].kind=PT_NOTE_PERIOD;d.project.events[i].pitch=428;
     d.project.events[i].effect=14;d.project.events[i].parameter=0xd3;

@@ -1,0 +1,13 @@
+{
+  "scope": "Cross-build only; no native execution or EF renderer integration",
+  "binary": {
+    "sha256": "3f6ae18139ca2bcdcc205bb9a3e77859b0a7e4ab975ff7b791228232029427e0",
+    "bytes": 16500
+  },
+  "source_sha256": {
+    "src/core/invert_loop.c": "3df53bcdf5851e16aae2bdd34d2ee97c7c0b4ae4fd1333c53b4994f0a3c0e852",
+    "src/core/invert_loop.h": "bce84104f8850fa8272ab20f614be7fa226e51be5ea243ec7d7c32afdae9d90a",
+    "tests/invert_loop_test.c": "d61d49ac9efe8a33d632e8857612679abe9a115f7ce3881db085262d81238077",
+    "vendor/pt23f/replayer/PT2.3F_replay_cia.s": "b5dba561016ae6939f35dbf3147f9671c09fc6d515d5a834215c7355f95e365c"
+  }
+}

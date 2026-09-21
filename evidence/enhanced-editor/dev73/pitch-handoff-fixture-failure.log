@@ -1,0 +1,17 @@
+Native captures: 0/9
+Native captures: 1/9
+Native captures: 2/9
+Native captures: 3/9
+Native captures: 4/9
+Native captures: 5/9
+Native captures: 6/9
+Native captures: 9/9
+Instrument capture released: /Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/local/share/instrument1789959579859355000
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/test_instrument_emulator.py", line 95, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/test_instrument_emulator.py", line 78, in main
+    stem=name+str(repeat);log=(run/(stem+'.log')).read_text();assert (run/(stem+'.rc')).read_text().strip()=='0',(stem,log)
+                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('handoff_finepitchdown0', 'FAIL line 28: pt_document_load(&doc,input,(size_t)length,SIZE_MAX)==PT_PROJECT_OK\n')

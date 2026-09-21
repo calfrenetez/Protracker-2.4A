@@ -486,3 +486,7 @@ afterward to verify that voice phase continued during the cut.
 Dev72 permits a looped voice to hand off to canonical mono8 non-looping PCM
 with an already-zero first word. After the current iteration, its two zero
 frames repeat. Nonzero first words are refused; source PCM is never rewritten.
+
+Dev73 adds compatible instrument-only handoffs carrying 1xx/2xx/E1x/E2x pitch
+slides. Reference-derived PCM checks include fractional phase through source
+changes. Other simultaneous pitch/modulation combinations remain guarded.

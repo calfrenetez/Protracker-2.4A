@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/test_instrument_emulator.py", line 95, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/test_instrument_emulator.py", line 27, in main
+    assert all(digest(ROOT/p)==h for p,h in manifest['sources'].items())
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

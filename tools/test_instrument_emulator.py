@@ -40,6 +40,8 @@ def main():
         from make_handoff_fixtures import slide_fixtures as source
     if '--cut-handoff' in sys.argv:
         from make_handoff_fixtures import cut_fixtures as source
+    if '--pitch-handoff' in sys.argv:
+        from make_handoff_fixtures import pitch_fixtures as source
     if '--silent-handoff' in sys.argv:
         from make_handoff_fixtures import silent_tail_fixtures as source
     cases=list(source());script=['FailAt 21','Wait 5','Stack 65536','CD PTDEV:'+run.name]

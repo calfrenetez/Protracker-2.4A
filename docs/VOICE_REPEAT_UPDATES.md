@@ -214,3 +214,29 @@ identical duplicate traces and the unchanged baseline. Native renderer
 35.801 seconds. Both windows ended with guarded cleanup, restored launcher and
 fresh release checks. Evidence is in `evidence/enhanced-editor/dev72`.
 This is software/emulator evidence, not live Paula audio or physical acceptance.
+
+## Pitch slides during handoff (dev73)
+
+Compatible instrument-only sample changes may carry 1xx, 2xx, E1x or E2x.
+The new repeat source is queued while pitch changes retain the current playback
+position and fractional phase. Existing sample/rate/offset/retrigger restrictions
+remain. The reference PCM oracle now consumes captured output periods and walks
+sample bytes using Q32 phase, including fractional overshoot at repeat boundaries.
+The four fixtures distinguish tick slides from tick-zero fine slides in both
+directions and assert that no extra sample trigger occurs.
+
+The first capture attempt was stopped before launch by the build-manifest guard
+while the build was still completing. A subsequent capture exposed an overlong
+fixture title that shifted MOD bytes; the native loader refused it. The title
+was shortened, fixture byte lengths/signatures checked, and the corrected
+capture rerun in a separately coordinated window. Neither failed attempt is
+counted as validation success; failure logs and release evidence are retained.
+
+Dev73 validation: 79 host tests passed; targeted sanitized trace/PCM checks
+passed in 0.842 seconds. The cross-build passed. Corrected pinned capture
+`instrument1789959714164034000` passed nine executions in 36.882 seconds,
+with duplicate/baseline matches. Native renderer
+`handoffrender1789959823678263000` passed all four PCM cases and negative
+checks in 74.477 seconds. Final fresh release was 03:05:26 UTC, with no emulator
+claim retained. Evidence: `evidence/enhanced-editor/dev73`. No physical or
+analogue audio acceptance is claimed; the clock remains ideal BPM/Q32.

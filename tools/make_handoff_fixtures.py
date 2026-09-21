@@ -49,3 +49,10 @@ def silent_tail_fixtures():
         if name=='handoff_noloop':
             out=bytearray(data);out[:20]=b'handoff_silent'.ljust(20,b'\0');out[4156:4158]=bytes(2)
             yield 'handoff_silent',bytes(out),{'max_ticks':100,'focus':'canonical zero first word non-looping repeat'}
+
+def pitch_fixtures():
+    base=next(fixtures())[1]
+    for name,effect,param in [('handoff_pitchup',1,3),('handoff_pitchdown',2,3),('handoff_finepup',14,0x13),('handoff_finepdown',14,0x23)]:
+        data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
+        data[1102]=0x20|effect;data[1103]=param
+        yield name,bytes(data),{'max_ticks':100,'focus':name,'effect':effect,'parameter':param}

@@ -8,15 +8,21 @@ static void *alloc(void *c,size_t n){(void)c;return malloc(n);}
 static void drop(void *c,void *p){(void)c;free(p);}
 static unsigned word(const unsigned char *p){return p[0]*256U+p[1];}
 static unsigned long lng(const unsigned char *p){return (unsigned long)word(p)*65536+word(p+2);}
-struct oracle {unsigned char *data;unsigned loop[100],length[100],volume[100],ticks,pos,end;uint64_t frames;};
+struct oracle {unsigned char *data;unsigned loop[100],length[100],volume[100],period[100],ticks,end;uint64_t phase,frames;};
 static int receive(void *ctx,const struct pt_pcm *pcm,uint64_t offset)
 {
     struct oracle *o=ctx;unsigned i;assert(offset==o->frames);
     for(i=0;i<pcm->frames;++i) {
         unsigned tick=(unsigned)((offset+i)/960);int value;assert(tick<o->ticks);
-        value=o->data[o->pos];if(value>127)value-=256;
+        value=o->data[o->phase>>32];if(value>127)value-=256;
         assert(pcm->data[2*i]==value*1024*(int)o->volume[tick] && pcm->data[2*i+1]==0);
-        if(++o->pos==o->end){o->pos=o->loop[tick];o->end=o->pos+o->length[tick];}
+        assert(o->period[tick]);o->phase+=(428ULL<<32)/o->period[tick];
+        if((o->phase>>32)>=o->end) {
+            o->phase-=(uint64_t)o->end<<32;
+            o->phase%=((uint64_t)o->length[tick]<<32);
+            o->phase+=(uint64_t)o->loop[tick]<<32;
+            o->end=o->loop[tick]+o->length[tick];
+        }
     }
     o->frames+=pcm->frames;return 1;
 }
@@ -36,9 +42,9 @@ int main(int argc,char **argv)
         while(fgets(line,sizeof(line),f) && line[0]=='T') {
             unsigned char r[140];for(i=0;i<140;++i){char hex[3]={line[2+i*2],line[3+i*2],0};r[i]=(unsigned char)strtoul(hex,NULL,16);}
             if(!r[14] || !word(r+28))continue;
-            assert(o.ticks<100);o.loop[o.ticks]=(unsigned)lng(r+58);o.length[o.ticks]=word(r+62)*2;o.volume[o.ticks++]=r[32];
+            assert(o.ticks<100);o.loop[o.ticks]=(unsigned)lng(r+58);o.length[o.ticks]=word(r+62)*2;o.volume[o.ticks]=r[32];o.period[o.ticks++]=word(r+44);
         }
-        fclose(f);o.pos=2108;o.end=3132;
+        fclose(f);o.phase=2108ULL<<32;o.end=3132;
         assert(pt_render_stream(&d.project,&options,receive,&o,NULL,NULL,&report)==PT_RENDER_OK);
         assert(report.frames==o.frames && o.frames==(uint64_t)o.ticks*960);
     } else {

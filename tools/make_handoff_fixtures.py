@@ -137,3 +137,12 @@ def retrigger_fixtures():
         data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
         data[1102]=0x2e;data[1103]=0x90|interval
         yield name,bytes(data),{'max_ticks':100,'focus':name,'interval':interval}
+
+def repeat_track_fixtures():
+    base=next(fixtures())[1]
+    for name,zero in [('handoff_retrigzero',True),('handoff_retriglater',False)]:
+        assert len(name)<=20
+        data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
+        if zero:data[1102]=0x2e;data[1103]=0x90
+        else:data[1118]=14;data[1119]=0x92;data[1134]=15
+        yield name,bytes(data),{'max_ticks':100,'focus':name,'zero':zero}

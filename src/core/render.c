@@ -2,7 +2,7 @@
 #include "pitch.h"
 #include <string.h>
 struct tremolo {uint8_t command,phase,control;};
-struct sample_range {uint32_t start,length,trigger_start,trigger_length;uint8_t offset,loaded,retrigger;};
+struct sample_range {uint32_t start,length,trigger_start,trigger_length,trigger_frames;uint8_t offset,loaded,retrigger;};
 struct run {
     struct pt_project view;
     uint16_t order;
@@ -46,6 +46,7 @@ static int ranges_tick(struct run *r)
             if(e->kind==PT_NOTE_PERIOD && e->effect!=3 && e->effect!=5 && !(e->effect==14 && (e->parameter>>4)==13)) {
                 if(e->effect==9)apply_offset(v,e->parameter);
                 v->trigger_start=v->start;v->trigger_length=v->length;
+                v->trigger_frames=v->loaded?r->view.samples[r->pitch.channel[ch].instrument-1].pcm.frames:0;
             }
             if(e->effect==9)apply_offset(v,e->parameter);
         }
@@ -54,10 +55,11 @@ static int ranges_tick(struct run *r)
              !(!f->counter && e->kind==PT_NOTE_PERIOD) && !(f->counter%(f->parameter[ch]&15))) ||
             ((f->parameter[ch]>>4)==13 && e->kind==PT_NOTE_PERIOD && f->counter==(f->parameter[ch]&15)))) {
             v->retrigger=1;v->trigger_start=v->start;v->trigger_length=v->length;
+                v->trigger_frames=v->loaded?r->view.samples[r->pitch.channel[ch].instrument-1].pcm.frames:0;
         }
         if(v->loaded) {
             uint32_t frames=r->view.samples[r->pitch.channel[ch].instrument-1].pcm.frames;
-            if(v->start>frames || v->length>frames-v->start || v->trigger_start>frames || v->trigger_length>frames-v->trigger_start)return 0;
+            if(v->start>frames || v->length>frames-v->start || v->trigger_start>v->trigger_frames || v->trigger_length>v->trigger_frames-v->trigger_start)return 0;
         }
     }
     return 1;
@@ -67,6 +69,12 @@ static int handoff_sample(const struct pt_sample *s)
     return s->pcm.bits==8 && s->pcm.channels==1 && s->pcm.frames>=2 &&
         s->pcm.frames<=131070 && !(s->pcm.frames&1) && s->loop==PT_LOOP_FORWARD &&
         s->loop_end-s->loop_start>=4 && !((s->loop_start|s->loop_end)&1) && !s->interpolation;
+}
+static int handoff_effect(const struct pt_event *e)
+{
+    unsigned sub=e->parameter>>4;
+    if(e->effect==14)return (sub>=1 && sub<=7) || (sub>=9 && sub<=14);
+    return e->effect<=7 || (e->effect>=10 && e->effect<=15);
 }
 static int silent_handoff_sample(const struct pt_sample *s)
 {
@@ -150,7 +158,7 @@ static enum pt_render_result next_tick(struct run *r,struct pt_tick_span *span,u
                 if(r->sliced_tracks&(1U<<ch))return PT_RENDER_EFFECT;
                 if(e->instrument!=v->instrument) {
                     const struct pt_sample *a=r->view.samples+v->instrument-1,*b=r->view.samples+e->instrument-1;
-                    if((e->effect && e->effect!=1 && e->effect!=2 && e->effect!=3 && e->effect!=5 && e->effect!=4 && e->effect!=6 && e->effect!=7 && e->effect!=12 && e->effect!=11 && e->effect!=13 && e->effect!=10 && e->effect!=15 && !(e->effect==14 && (((e->parameter>>4)==9 && (e->parameter&15)) || (e->parameter>>4)==1 || (e->parameter>>4)==2 || (e->parameter>>4)==3 || (e->parameter>>4)==6 || (e->parameter>>4)==14 || (e->parameter>>4)==5 || (e->parameter>>4)==4 || (e->parameter>>4)==7 || (e->parameter>>4)==13 || (e->parameter>>4)==10 || (e->parameter>>4)==11 || (e->parameter>>4)==12))) || ((r->offset_tracks&(1U<<ch)) && !(e->effect==14 && (e->parameter>>4)==9 && (e->parameter&15) && !(r->handoff_blocked&(1U<<ch)))) || !handoff_sample(a) || (!handoff_sample(b) && !silent_handoff_sample(b)) ||
+                    if(!handoff_effect(e) || (r->handoff_blocked&(1U<<ch)) || !handoff_sample(a) || (!handoff_sample(b) && !silent_handoff_sample(b)) ||
                        a->pcm.rate!=b->pcm.rate)return PT_RENDER_EFFECT;
                 }
             }

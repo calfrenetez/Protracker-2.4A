@@ -399,3 +399,23 @@ identical duplicate/baseline traces. Native renderer
 note refusal checks in 47.956 seconds. Both windows separately coordinated,
 guarded and released; final fresh release 04:54:46 UTC. Evidence is retained in
 `evidence/enhanced-editor/dev82`. No physical or analogue acceptance claimed.
+
+## Continuing voices on retrigger tracks (dev83)
+
+Range validation now retains the frame bounds of the sample that last triggered,
+separately from the newly selected instrument. This allows compatible E90 and
+plain handoffs on E9x tracks to finish the old iteration safely before later
+retriggers. Fixtures cover E90 with no new trigger and a plain sample change
+followed by E92. Tracks containing 9xx or actual EDx notes remain refused.
+The handoff effect guard is factored into a named predicate; E0/EF and unused
+8xx/E8x combinations remain outside its accepted set.
+
+Dev83 validation: 89 host tests passed; targeted sanitized PCM checks passed in
+0.792 seconds; cross-build passed. Pinned capture
+`instrument1789966995853118000` passed five executions in 32.899 seconds with
+identical duplicate/baseline traces. Native renderer
+`handoffrender1789967101765195000` passed both PCM cases and delayed-note
+refusal checks in 53.799 seconds. Existing 9xx refusal coverage remains active;
+E90 is now covered as an accepted case. Both windows separately coordinated,
+guarded and released; final fresh release 05:06:19 UTC. Evidence is retained in
+`evidence/enhanced-editor/dev83`. No physical or analogue acceptance claimed.

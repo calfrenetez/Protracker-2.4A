@@ -522,3 +522,7 @@ verify continuous sample phase across position jumps and nonzero-row breaks.
 Dev82 adds a bounded nonzero instrument-only E9x cross-sample exception on
 tracks without 9xx/actual EDx notes. The PCM oracle now follows native trigger
 counts/ranges as well as periods, volumes and tempo.
+
+Dev83 extends handoffs on E9x tracks to E90 and ordinary compatible commands.
+Old trigger bounds are retained independently of the selected sample. Earlier
+E90 refusal is superseded; 9xx/actual EDx restrictions remain.

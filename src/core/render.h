@@ -39,11 +39,12 @@ typedef int (*pt_render_sink)(void *,const struct pt_pcm *,uint64_t offset);
  * Instrument-only rows can preload silently or reload the same whole sample
  * without restarting phase. Different active samples may hand off their next
  * repeat when both are mono8 forward loops, even bounded classic ranges,
- * matching rates, no interpolation, no simultaneous effect except 0xy/1xx/2xx/3xx/5xy/4xy/6xy/7xy/E1x/E2x/E3x/E4x/E5x/E6x/E7x/EEx/Fxx/Axy/Bxx/Cxx/Dxx/EAx/EBx/ECx or EDx without
- * a note, and no 9xx/E9x or delayed-note EDx commands on the track. Other cross-sample and sliced handoffs are refused.
- * Instrument-only handoffs on E9x tracks retain the old trigger source bounds;
- * E90 preserves phase and nonzero E9x retriggers. 9xx/actual EDx tracks are refused.
- * The same guarded handoff applies to 3xx/5xy rows with target notes.
+ * matching rates and no interpolation. Supported handoff effects are 0xx-7xx,
+ * Axx-Fxx except E0x/E8x/EFx; 8xx/9xx and sliced handoffs are refused.
+ * Tracks containing 9xx remain excluded from cross-sample handoffs.
+ * E90 preserves phase; nonzero E9x retriggers. Old trigger bounds are retained.
+ * 3xx/5xy target notes and actual EDx delayed notes use the same guarded handoff.
+ * EDx queues repeats immediately and triggers only on its tick.
  * A looped source may also hand off to mono8 non-looping PCM whose first
  * word is already zero; it repeats those two silent frames without source edits.
  * Pitch slides retain native stored-word wrap and register-write semantics.

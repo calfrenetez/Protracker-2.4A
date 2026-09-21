@@ -526,3 +526,7 @@ counts/ranges as well as periods, volumes and tempo.
 Dev83 extends handoffs on E9x tracks to E90 and ordinary compatible commands.
 Old trigger bounds are retained independently of the selected sample. Earlier
 E90 refusal is superseded; 9xx/actual EDx restrictions remain.
+
+Dev84 admits compatible actual cross-sample EDx notes, with repeat handoff at
+row start and a trigger only at the selected tick. ED0/ED3/ED6 are reference
+fixtures; 9xx tracks and unsupported sample formats remain refused.

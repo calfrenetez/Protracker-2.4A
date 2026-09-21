@@ -419,3 +419,22 @@ refusal checks in 53.799 seconds. Existing 9xx refusal coverage remains active;
 E90 is now covered as an accepted case. Both windows separately coordinated,
 guarded and released; final fresh release 05:06:19 UTC. Evidence is retained in
 `evidence/enhanced-editor/dev83`. No physical or analogue acceptance claimed.
+
+## Actual delayed cross-sample notes (dev84)
+
+Compatible EDx note rows queue the new repeat immediately while old playback
+continues until the requested trigger tick. ED0, ED3 and ED6 fixtures cover
+immediate, delayed and out-of-row trigger times. The old trigger bounds remain
+valid until a new trigger occurs. 9xx tracks retain the refusal boundary; the
+previous blanket actual-EDx refusal is superseded for compatible handoffs.
+
+Dev84 validation: 90 host tests passed; targeted sanitized PCM checks passed in
+0.801 seconds; cross-build passed. Pinned capture
+`instrument1789967765075422000` passed seven executions in 34.598 seconds with
+identical duplicate/baseline traces. Native renderer
+`handoffrender1789967886543992000` passed all three PCM cases and 9xx-track
+refusal checks in 59.736 seconds. Earlier blanket EDx negative tests are replaced
+by refusal on 9xx tracks; compatible EDx has direct positive reference coverage.
+Both windows separately coordinated, guarded and released; final fresh release
+05:19:28 UTC. Evidence is retained in `evidence/enhanced-editor/dev84`.
+No physical or analogue acceptance claimed.

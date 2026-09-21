@@ -146,3 +146,10 @@ def repeat_track_fixtures():
         if zero:data[1102]=0x2e;data[1103]=0x90
         else:data[1118]=14;data[1119]=0x92;data[1134]=15
         yield name,bytes(data),{'max_ticks':100,'focus':name,'zero':zero}
+
+def delayed_handoff_fixtures():
+    base=next(fixtures())[1]
+    for name,delay in [('handoff_delayed0',0),('handoff_delayed3',3),('handoff_delayed6',6)]:
+        data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
+        data[1100:1104]=bytes([1,125,0x2e,0xd0|delay])
+        yield name,bytes(data),{'max_ticks':100,'focus':name,'delay':delay}

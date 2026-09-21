@@ -21,7 +21,7 @@ static uint16_t offset_tracks(const struct pt_project *p,const struct pt_render_
     for(pat=0;pat<p->pattern_count;++pat)if(used[pat])for(row=0;row<64;++row)for(ch=0;ch<p->channels.count;++ch)
         {
             const struct pt_event *e=p->events+((size_t)pat*64+row)*p->channels.count+ch;
-            if(e->effect==9 || (e->effect==14 && (((e->parameter>>4)==9 && retriggers) || ((e->parameter>>4)==13 && e->kind==PT_NOTE_PERIOD))))mask|=(uint16_t)(1U<<ch);
+            if(e->effect==9 || (e->effect==14 && (((e->parameter>>4)==9 && retriggers) || ((e->parameter>>4)==13 && e->kind==PT_NOTE_PERIOD && retriggers))))mask|=(uint16_t)(1U<<ch);
         }
     return mask&o->tracks;
 }
@@ -55,7 +55,7 @@ static int ranges_tick(struct run *r)
              !(!f->counter && e->kind==PT_NOTE_PERIOD) && !(f->counter%(f->parameter[ch]&15))) ||
             ((f->parameter[ch]>>4)==13 && e->kind==PT_NOTE_PERIOD && f->counter==(f->parameter[ch]&15)))) {
             v->retrigger=1;v->trigger_start=v->start;v->trigger_length=v->length;
-                v->trigger_frames=v->loaded?r->view.samples[r->pitch.channel[ch].instrument-1].pcm.frames:0;
+            v->trigger_frames=v->loaded?r->view.samples[r->pitch.channel[ch].instrument-1].pcm.frames:0;
         }
         if(v->loaded) {
             uint32_t frames=r->view.samples[r->pitch.channel[ch].instrument-1].pcm.frames;
@@ -154,7 +154,7 @@ static enum pt_render_result next_tick(struct run *r,struct pt_tick_span *span,u
             /* A bounded classic looped handoff changes the next repeat source,
                not the current iteration. Unsupported combinations fail here
                during measurement, before any output is published. */
-            if((e->kind==PT_NOTE_NONE || (e->kind==PT_NOTE_PERIOD && (e->effect==3 || e->effect==5))) && e->instrument && v->sounding) {
+            if((e->kind==PT_NOTE_NONE || (e->kind==PT_NOTE_PERIOD && (e->effect==3 || e->effect==5 || (e->effect==14 && (e->parameter>>4)==13)))) && e->instrument && v->sounding) {
                 if(r->sliced_tracks&(1U<<ch))return PT_RENDER_EFFECT;
                 if(e->instrument!=v->instrument) {
                     const struct pt_sample *a=r->view.samples+v->instrument-1,*b=r->view.samples+e->instrument-1;
@@ -239,7 +239,7 @@ static enum pt_render_result commands(const struct pt_project *p,const struct pt
     for(ch=0;ch<p->channels.count;++ch)if(o->tracks&(1U<<ch)) {
         if(flow->fresh) {
             const struct pt_event *e=flow->project->events+((size_t)flow->project->orders[flow->played_order]*64+flow->played_row)*p->channels.count+ch;
-            if((e->kind==PT_NOTE_NONE || (e->kind==PT_NOTE_PERIOD && (e->effect==3 || e->effect==5))) && e->instrument && e->instrument!=instrument[ch] && voice[ch].active) {
+            if((e->kind==PT_NOTE_NONE || (e->kind==PT_NOTE_PERIOD && (e->effect==3 || e->effect==5 || (e->effect==14 && (e->parameter>>4)==13)))) && e->instrument && e->instrument!=instrument[ch] && voice[ch].active) {
                 const struct pt_sample *next=p->samples+e->instrument-1;
                 if(pt_voice_set_repeat_source(voice+ch,&next->pcm,next->loop?next->loop_start:0,next->loop?next->loop_end:2)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
             }

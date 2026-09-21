@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Capture instrument-only semantics without changing shipping replay; reserve Amiberry first."""
-import hashlib,json,re,shutil,subprocess,time
+import hashlib,json,re,shutil,subprocess,time,sys
 from pathlib import Path
 from build_diagnostic import ROOT,digest
 from emulator_ipc import Emulator
@@ -29,8 +29,12 @@ def main():
     env=json.loads((ROOT/'local/environment.json').read_text());share=Path(env['share']);launch=share/'launch';original=launch.read_bytes()
     assert digest(launch)=='9c801b94c85b06cd124fe2d611f185bfe135c8c7442f8263a761c79102f8ddf3'
     run=share/('instrument'+str(time.time_ns()));run.mkdir();out=ROOT/'build/dev/instrument-evidence'/run.name;out.mkdir(parents=True)
+    assert digest(ROOT/'build/dev/PTSampleTraceTest')==manifest['binaries']['PTSampleTraceTest']['sha256']
     shutil.copyfile(ROOT/'build/dev/PTSampleTraceTest',run/'PTSampleTraceTest')
-    cases=list(fixtures());script=['FailAt 21','Wait 5','Stack 65536','CD PTDEV:'+run.name]
+    source=fixtures
+    if '--handoff' in sys.argv:
+        from make_handoff_fixtures import fixtures as source
+    cases=list(source());script=['FailAt 21','Wait 5','Stack 65536','CD PTDEV:'+run.name]
     baseline=ROOT/'evidence/enhanced-editor/dev28/native/speed.mod';shutil.copyfile(baseline,run/'baseline.mod')
     script+=['PTSampleTraceTest baseline.mod 160 >baseline.log','Echo $RC >baseline.rc']
     for name,data,meta in cases:
@@ -72,9 +76,10 @@ def main():
     finally:
         launch.write_bytes(original)
         if process and process.poll() is None:
-            try:
-                if emu:Emulator(emu.path).command('QUIT')
-                else:process.terminate()
-            finally:process.wait(timeout=10)
+            if emu is None:
+                matches=matching_socket()
+                if len(matches)==1:emu=Emulator(matches[0])
+            if emu is None:raise RuntimeError('Retain claim: guarded socket unavailable')
+            Emulator(emu.path).command('QUIT');process.wait(timeout=10)
         print('Instrument capture released:',run,flush=True)
 if __name__=='__main__':main()

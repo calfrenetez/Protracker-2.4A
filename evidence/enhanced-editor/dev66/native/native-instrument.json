@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "record_bytes": 140,
+  "run_id": "instrument1789954169827287000",
+  "elapsed_seconds": 37.299,
+  "diagnostic_sha256": "0a039a72921a28bc5fb13db72afbfd56ebb1808e20b2dca5657ec88cf8c3132e",
+  "baseline_first52": "EXACT DEV38 MATCH",
+  "cases": {
+    "handoff_loop": {
+      "max_ticks": 100,
+      "focus": "handoff_loop",
+      "changes": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "second_loop": true,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 18,
+      "fixture_sha256": "dc494cf1bca113bdf49f49dbdf783c5f27e92d935ff2c53ac3c7d6158eb19341",
+      "trace_sha256": "94a9c30b98bcb42706d194fa51683a1229b5c45631dc1f124621e53ed7ea6264"
+    },
+    "handoff_return": {
+      "max_ticks": 100,
+      "focus": "handoff_return",
+      "changes": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "second_loop": true,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "fc7afbe69a42d076aeba93b3400317688c7a08ffbd9146e4139d0cb74abf2850",
+      "trace_sha256": "99142cefdd8287414edbe22e918b0d94628ba708c2d9f88d7db4e75033055c41"
+    },
+    "handoff_noloop": {
+      "max_ticks": 100,
+      "focus": "handoff_noloop",
+      "changes": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "second_loop": false,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 18,
+      "fixture_sha256": "219ff70ded9aaef6d4bf2df5ff11c5f1400e8d05d9bce140f72bb5e66af3ce34",
+      "trace_sha256": "5cb78697e982a9dddd584e6f79b8141104233af50b4255ac5e8f5d8cfebd25b6"
+    },
+    "handoff_ed": {
+      "max_ticks": 100,
+      "focus": "handoff_ed",
+      "changes": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "second_loop": true,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 18,
+      "fixture_sha256": "4c680e9aafe622948dbdcaa406a543bb2e283623107ca59515e515e59e22d1ca",
+      "trace_sha256": "94a9c30b98bcb42706d194fa51683a1229b5c45631dc1f124621e53ed7ea6264"
+    }
+  },
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=666\tsndbuf_status=0",
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  },
+  "scope": "Instrument-only stored/output period, volume, sample ranges and DMA trigger snapshots. Renderer acceptance requires separate parity checks; no physical acceptance."
+}

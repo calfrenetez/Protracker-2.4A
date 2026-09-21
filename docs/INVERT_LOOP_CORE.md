@@ -88,3 +88,30 @@ No physical or analogue acceptance. Evidence: evidence/enhanced-editor/dev91.
 Dev91 validation: all 97 host tests passed in 144.623 seconds; targeted byte
 snapshot assertions passed in 0.003 seconds. Cross-build and source manifest
 checks passed; existing PTSampleTraceTest binary remains identical to dev88.
+
+## Flow-driven mutation sequencer (dev92)
+
+invert_sequence connects the private PCM and channel clocks to tracker flow.
+On fresh rows it binds a newly selected instrument's loop without clearing the
+channel's speed or accumulator. Ordinary effect passes update before command
+dispatch; EFx at counter 0 sets speed and invokes the immediate update when
+nonzero. Channels run in ascending tracker order and share instrument-indexed
+workspace entries. Slice, unsupported loop/interpolation and missing workspace
+bindings fail the staging run. Errors may follow earlier channel mutations;
+callers must discard that staging run rather than publish its output.
+
+The C test consumes every dev91 pinned byte snapshot for EFF, EF8 and EF0,
+comparing cursor, accumulator, speed and all 16 mutable bytes while checking
+source immutability. This validates the C sequencer, not merely a second Python
+model. Production render_stream does not yet invoke it; EFx remains refused
+until the workspace bank is wired through measurement and rendering. Delayed
+rows, shared-channel mutation and sample reloads need extended native fixtures.
+
+Dev92 native core validation: invertsequence1789973857232346000 passed all
+three cases in 27.079 seconds. PTInvertSequenceTest is 30,724 bytes, SHA256
+2459ea9cf8833720adce56c061b7fd21e7899deaaa4b2bad9e4e88fe5395bfab.
+Targeted sanitized host parity passed in 0.258 seconds; cross-build passed.
+The emulator window was coordinated and guarded, with fresh release 06:58:37
+UTC. Evidence: evidence/enhanced-editor/dev92. No physical or analogue acceptance.
+
+All 98 host tests passed in 154.831 seconds.

@@ -1,0 +1,15 @@
+{
+  "run_id": "invertsequence1789973857232346000",
+  "elapsed_seconds": 27.079,
+  "binary": {
+    "sha256": "2459ea9cf8833720adce56c061b7fd21e7899deaaa4b2bad9e4e88fe5395bfab",
+    "bytes": 30724
+  },
+  "cases": [
+    "fast",
+    "slow",
+    "disable"
+  ],
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=750\tsndbuf_status=0",
+  "scope": "Core sequence parity with pinned byte snapshots; not renderer or physical acceptance"
+}

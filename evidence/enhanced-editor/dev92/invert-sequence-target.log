@@ -1,0 +1,9 @@
+test_c_sequence_matches_pinned_mutations (test_invert_sequence.InvertSequence.test_c_sequence_matches_pinned_mutations) ... INVERT sequence native parity PASS
+INVERT sequence native parity PASS
+INVERT sequence native parity PASS
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.258s
+
+OK

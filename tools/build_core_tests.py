@@ -28,6 +28,7 @@ def main():
     font = (ROOT / 'vendor/pt23f/raw/ptfont.raw').read_bytes()
     (out / 'pt_font.h').write_text('/* Pinned ProTracker 2.3F bitmap font; see vendor/pt23f license. */\nstatic const unsigned char pt_font[580] = {' + ','.join(str(b) for b in font) + '};\n')
     inputs = {
+        'PTInvertSequenceTest': ['tests/invert_sequence_test.c', 'src/core/invert_sequence.c', 'src/core/invert_pcm.c', 'src/core/invert_loop.c', 'src/core/pcm.c'],
         'PTInvertPCMTest': ['tests/invert_pcm_test.c', 'src/core/invert_pcm.c', 'src/core/invert_loop.c', 'src/core/pcm.c'],
         'PTInvertTest': ['tests/invert_loop_test.c', 'src/core/invert_loop.c'],
         'PT24GEdit': ['src/native/editor_main.c', 'src/native/file_request.c', 'src/native/paula.c', 'src/editor/editor.c','src/editor/song.c', 'src/editor/view.c', 'src/editor/sampler.c','src/editor/slots.c', 'src/core/pcm_filtered.c', 'src/core/slices.c', 'src/core/wav.c', 'src/core/svx.c', 'src/core/raw.c', 'src/platform/file_save.c', 'src/core/safe_save.c', 'src/core/document.c', 'src/core/pp20.c', 'src/core/pattern.c', 'src/core/project.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/channels.c', 'src/core/pcm.c'],

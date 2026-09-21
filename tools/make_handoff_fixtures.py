@@ -21,3 +21,10 @@ def fixtures():
             data[pos:pos+4]=bytes([period>>8,period&255,(inst<<4)|effect,param])
         stop=max(row for row,_ in events)+1;data[1084+stop*16+2]=15
         yield name,bytes(data),{'max_ticks':100,'focus':name,'changes':events,'second_loop':loop}
+
+def volume_fixtures():
+    base=next(fixtures())[1]
+    for name,volume in [('handoff_volume',16),('handoff_clamp',127)]:
+        data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
+        data[1102]=0x2c;data[1103]=volume
+        yield name,bytes(data),{'max_ticks':100,'focus':name,'changes':[(0,1),(1,2)],'second_loop':True,'volume':min(volume,64)}

@@ -1,5 +1,5 @@
 """Bounded reference-derived PCM tests; reserve private emulator first."""
-import json,shutil,subprocess,time
+import json,shutil,subprocess,time,sys
 from pathlib import Path
 from build_diagnostic import ROOT,digest
 from emulator_ipc import Emulator
@@ -11,11 +11,11 @@ def main():
     name='PTHandoffTest';assert digest(ROOT/'build/dev'/name)==m['binaries'][name]['sha256']
     env=json.loads((ROOT/'local/environment.json').read_text());share=Path(env['share']);launch=share/'launch';original=launch.read_bytes()
     run=share/('handoffrender'+str(time.time_ns()));run.mkdir();out=ROOT/'build/dev/handoff-render-evidence'/run.name;out.mkdir(parents=True)
-    shutil.copyfile(ROOT/'build/dev'/name,run/name);cases=['loop','return','noloop','ed'];script=['FailAt 21','Wait 5','Stack 65536','CD PTDEV:'+run.name]
+    shutil.copyfile(ROOT/'build/dev'/name,run/name);cases=['volume','clamp'] if '--volume' in sys.argv else ['loop','return','noloop','ed'];script=['FailAt 21','Wait 5','Stack 65536','CD PTDEV:'+run.name]
     for case in cases:
-        base=ROOT/'evidence/enhanced-editor/dev66/native'/('handoff_'+case)
+        base=ROOT/('evidence/enhanced-editor/dev69/native-reference' if '--volume' in sys.argv else 'evidence/enhanced-editor/dev66/native')/('handoff_'+case)
         shutil.copyfile(str(base)+'.mod',run/(case+'.mod'));shutil.copyfile(str(base)+'0.log',run/(case+'.trace'))
-        script += [name+' '+case+'.mod '+case+'.trace '+('1' if case in ['loop','return','ed'] else '0')+' >'+case+'.log','Echo $RC >'+case+'.rc']
+        script += [name+' '+case+'.mod '+case+'.trace '+('1' if case in ['loop','return','ed','volume','clamp'] else '0')+' >'+case+'.log','Echo $RC >'+case+'.rc']
     script+=['Echo '+run.name+' >done'];process=emu=None;start=time.monotonic()
     try:
         launch.write_text('\n'.join(script)+'\n')

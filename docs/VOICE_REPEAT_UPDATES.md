@@ -128,3 +128,27 @@ no-mutation requirements. Non-looping handoffs and other unsupported combination
 remain refused.
 
 Dev68 validation: 74 host tests passed in 131.955 seconds; final targeted sanitized PCM test passed in 0.789 seconds. Cross-build passed. Native run `handoffrender1789955548868698000` passed four cases in 61.766 seconds, including exact ED3 handoff PCM and actual delayed-note refusal on every fixture. Stopped DMA and guarded release verified; evidence is in `evidence/enhanced-editor/dev68`. No physical acceptance is claimed.
+
+## Explicit volume on handoff rows (dev69)
+
+Compatible looped instrument-only handoffs may also carry Cxx. The new sample's
+repeat source is queued without restarting the current iteration, while Cxx
+overrides the sample's default volume on that same row. Values above 64 clamp
+to 64, following the pinned tracker. Other unimplemented simultaneous effects
+retain their existing refusal boundaries.
+
+Two new pinned fixtures combine a sample handoff with C10 and C7F. The retained
+trace regression checks immediate volume (16 and clamped 64), unchanged trigger
+count and repeatable captures. The separate PCM oracle checks every rendered
+sample using those reference volume values, including the tail of the previous
+sample before its boundary. The existing real delayed-note refusal assertions
+run against these fixtures too.
+
+Dev69 validation: 75 host tests passed in 131.520 seconds; targeted sanitized
+trace/PCM validation passed in 0.947 seconds. Pinned capture run
+`instrument1789956475324568000` passed five executions in 32.080 seconds,
+with exact duplicate traces and baseline compatibility. Native renderer run
+`handoffrender1789956573827654000` passed both PCM fixtures in 45.058 seconds,
+including actual delayed-note refusal checks. Stopped DMA and separate guarded
+release checks passed. Evidence is in `evidence/enhanced-editor/dev69`.
+No physical or analogue acceptance is claimed.

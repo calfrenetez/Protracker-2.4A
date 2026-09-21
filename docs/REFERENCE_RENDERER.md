@@ -530,3 +530,9 @@ E90 refusal is superseded; 9xx/actual EDx restrictions remain.
 Dev84 admits compatible actual cross-sample EDx notes, with repeat handoff at
 row start and a trigger only at the selected tick. ED0/ED3/ED6 are reference
 fixtures; 9xx tracks and unsupported sample formats remain refused.
+
+Dev85 admits compatible handoffs on 9xx tracks, preserving offset memory and
+new sample range reloads through later E9x/EDx triggers. Reference fixtures
+cover plain reload, remembered 900 and explicit 901; the prior 9xx refusal is
+superseded. Format/rate/slice guards remain, with an interpolated-format
+negative check proving refusal before output.

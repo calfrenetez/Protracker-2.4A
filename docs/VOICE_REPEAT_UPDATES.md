@@ -438,3 +438,21 @@ by refusal on 9xx tracks; compatible EDx has direct positive reference coverage.
 Both windows separately coordinated, guarded and released; final fresh release
 05:19:28 UTC. Evidence is retained in `evidence/enhanced-editor/dev84`.
 No physical or analogue acceptance claimed.
+
+## Sample offsets across handoffs (dev85)
+
+Compatible 9xx tracks now retain offset memory and stored start/length updates
+across sample changes. Fixtures cover sample reload after an initial 901,
+remembered 900 on the new instrument followed by E92, and explicit 901 followed
+by ED3. The reference distinguishes the still-playing old trigger from the
+new instrument's stored range and repeat; the PCM oracle follows each trigger.
+This supersedes the blanket 9xx handoff refusal. Unsupported interpolated sample
+formats still fail before output, with the report preserved.
+
+Pinned capture `instrument1789968666664428000` passed seven executions in
+36.339 seconds with exact duplicate/baseline traces. Native renderer
+`handoffrender1789968785631336000` passed all three PCM cases and format-refusal
+checks in 77.196 seconds. Targeted sanitized checks passed in 0.685 seconds;
+cross-build and all 91 host tests passed (143.495 seconds). Both windows were separately coordinated and released;
+final fresh release 05:34:48 UTC. Evidence: `evidence/enhanced-editor/dev85`.
+No physical, analogue audio or CIA-timing acceptance is claimed.

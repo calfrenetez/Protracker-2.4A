@@ -153,3 +153,14 @@ def delayed_handoff_fixtures():
         data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
         data[1100:1104]=bytes([1,125,0x2e,0xd0|delay])
         yield name,bytes(data),{'max_ticks':100,'focus':name,'delay':delay}
+
+def offset_handoff_fixtures():
+    base=next(fixtures())[1]
+    for name,effect,param,delay in [('handoff_offsetload',0,0,False),('handoff_offsetmem',9,0,False),('handoff_offseted',9,1,True)]:
+        assert len(name)<=20
+        data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
+        data[1086]=0x19;data[1087]=1
+        data[1102]=0x20|effect;data[1103]=param
+        data[1116:1120]=bytes([1,125,14,0xd3]) if delay else bytes([0,0,14,0x92])
+        data[1134]=15
+        yield name,bytes(data),{'max_ticks':100,'focus':name,'delay':delay}

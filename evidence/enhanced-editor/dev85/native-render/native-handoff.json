@@ -1,0 +1,15 @@
+{
+  "run_id": "handoffrender1789968785631336000",
+  "elapsed_seconds": 77.196,
+  "binary": {
+    "sha256": "05ad4dc84a9eecdfed067e3b93b65bf1ad6499880d3de1040b5d44b93f60d413",
+    "bytes": 64692
+  },
+  "cases": [
+    "offsetload",
+    "offsetmem",
+    "offseted"
+  ],
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0",
+  "scope": "Reference-derived PCM, not live Paula capture or physical acceptance"
+}

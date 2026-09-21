@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "record_bytes": 140,
+  "run_id": "instrument1789968666664428000",
+  "elapsed_seconds": 36.339,
+  "diagnostic_sha256": "0a039a72921a28bc5fb13db72afbfd56ebb1808e20b2dca5657ec88cf8c3132e",
+  "baseline_first52": "EXACT DEV38 MATCH",
+  "cases": {
+    "handoff_offsetload": {
+      "max_ticks": 100,
+      "focus": "handoff_offsetload",
+      "delay": false,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "0f0dd2c3255c4e80305326424b8f4557971b414b04f43a13ad685c27d44cca27",
+      "trace_sha256": "debbf39baff5a02a8e531ab2a69796d60ae32978047f656673e35a60b920208f"
+    },
+    "handoff_offsetmem": {
+      "max_ticks": 100,
+      "focus": "handoff_offsetmem",
+      "delay": false,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "bbe85c271987486e8f4e68b5119cd7a512e220f62ffedbd70244909b3a8c9728",
+      "trace_sha256": "fbce5010aa43406b85dd171745e136a8bb61c77a1ca6cda4ddc03ae83d075039"
+    },
+    "handoff_offseted": {
+      "max_ticks": 100,
+      "focus": "handoff_offseted",
+      "delay": true,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "faab8858aae4ecf0dab18837960fcaf172d04005d8668359dbba5b3f3e72ea13",
+      "trace_sha256": "8861e1f9c4627b44c18732b719cde85500711981535cb30b7488d6240d71137c"
+    }
+  },
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0",
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  },
+  "scope": "Instrument-only stored/output period, volume, sample ranges and DMA trigger snapshots. Renderer acceptance requires separate parity checks; no physical acceptance."
+}

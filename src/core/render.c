@@ -144,7 +144,7 @@ static enum pt_render_result next_tick(struct run *r,struct pt_tick_span *span,u
                 if(r->sliced_tracks&(1U<<ch))return PT_RENDER_EFFECT;
                 if(e->instrument!=v->instrument) {
                     const struct pt_sample *a=r->view.samples+v->instrument-1,*b=r->view.samples+e->instrument-1;
-                    if((e->effect && e->effect!=12 && e->effect!=10 && !(e->effect==14 && ((e->parameter>>4)==13 || (e->parameter>>4)==10 || (e->parameter>>4)==11))) || (r->offset_tracks&(1U<<ch)) || !handoff_sample(a) || !handoff_sample(b) ||
+                    if((e->effect && e->effect!=12 && e->effect!=10 && !(e->effect==14 && ((e->parameter>>4)==13 || (e->parameter>>4)==10 || (e->parameter>>4)==11 || (e->parameter>>4)==12))) || (r->offset_tracks&(1U<<ch)) || !handoff_sample(a) || !handoff_sample(b) ||
                        a->pcm.rate!=b->pcm.rate)return PT_RENDER_EFFECT;
                 }
             }

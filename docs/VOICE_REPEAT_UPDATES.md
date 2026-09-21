@@ -171,3 +171,21 @@ seconds, including actual delayed-note refusal assertions. Separate guarded
 release checks and stopped DMA passed. Evidence is in `evidence/enhanced-editor/dev70`.
 Physical availability remains unknown: AmiConnect reported no newer observation
 since the earlier connection timeout. No physical contact or test occurred.
+
+## Note cuts with phase recovery (dev71)
+
+Compatible looped instrument-only handoffs may carry ECx. It cuts volume at
+the requested tick without stopping or resetting the old iteration or new
+repeat source. EC0 and EC3 reference fixtures restore volume with C40 on the
+following row so the PCM comparison can detect a stopped or restarted voice,
+including changes hidden while output was muted. Unsupported formats and
+cross-sample actual delayed-note cases retain their refusal boundaries.
+
+Dev71 validation: 77 host tests passed in 133.291 seconds; targeted sanitized
+trace/PCM validation passed in 0.938 seconds. Pinned capture
+`instrument1789957942754781000` passed five executions in 33.603 seconds with
+matching duplicates and baseline. Native renderer
+`handoffrender1789958061971517000` passed both cut/recovery PCM cases in
+56.656 seconds, including delayed-note refusal checks. Separate guarded releases
+and stopped DMA passed. Evidence is in `evidence/enhanced-editor/dev71`.
+No physical or analogue acceptance is claimed.

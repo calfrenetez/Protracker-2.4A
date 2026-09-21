@@ -152,3 +152,22 @@ with exact duplicate traces and baseline compatibility. Native renderer run
 including actual delayed-note refusal checks. Stopped DMA and separate guarded
 release checks passed. Evidence is in `evidence/enhanced-editor/dev69`.
 No physical or analogue acceptance is claimed.
+
+## Volume slides on handoff rows (dev70)
+
+Compatible looped instrument-only handoffs now also permit Axy, EAx and EBx.
+The existing volume engine applies ordinary slides on later ticks and fine
+slides on tick zero, while the queued sample repeat preserves the current
+iteration. Four new pinned fixtures cover upward/downward ordinary and fine
+slides. Trace assertions check each tick's volume and unchanged trigger count;
+the independent PCM oracle checks the old-source tail and new repeat at those
+volumes. Other format, offset/retrigger and unsupported-effect boundaries remain.
+
+Dev70 validation: all 76 host tests passed. Targeted sanitized trace/PCM checks
+passed in 0.863 seconds. Pinned capture `instrument1789957204222876000` passed
+nine executions in 36.855 seconds; duplicates and the baseline matched. Native
+renderer `handoffrender1789957330074380000` passed four PCM cases in 66.796
+seconds, including actual delayed-note refusal assertions. Separate guarded
+release checks and stopped DMA passed. Evidence is in `evidence/enhanced-editor/dev70`.
+Physical availability remains unknown: AmiConnect reported no newer observation
+since the earlier connection timeout. No physical contact or test occurred.

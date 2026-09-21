@@ -28,3 +28,10 @@ def volume_fixtures():
         data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
         data[1102]=0x2c;data[1103]=volume
         yield name,bytes(data),{'max_ticks':100,'focus':name,'changes':[(0,1),(1,2)],'second_loop':True,'volume':min(volume,64)}
+
+def slide_fixtures():
+    base=next(fixtures())[1]
+    for name,effect,param in [('handoff_up',10,0x10),('handoff_down',10,1),('handoff_fineup',14,0xa1),('handoff_finedown',14,0xb1)]:
+        data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
+        data[1102]=0x20|effect;data[1103]=param
+        yield name,bytes(data),{'max_ticks':100,'focus':name,'effect':effect,'parameter':param}

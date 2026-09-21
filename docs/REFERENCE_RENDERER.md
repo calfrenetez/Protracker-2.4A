@@ -462,7 +462,7 @@ Plain instrument-only changes between compatible mono8 forward-loop samples now
 update the next repeat source while preserving the current iteration and phase.
 The row's new volume applies immediately. The supported path requires equal
 sample rates, even classic ranges, at least four loop frames, no interpolation,
-no simultaneous effect except Cxx or note-free EDx, no slices and no 9xx/E9x or
+no simultaneous effect except Axy/Cxx/EAx/EBx or note-free EDx, no slices and no 9xx/E9x or
 actual delayed-note EDx commands on the track.
 Unsupported combinations still fail during measurement before output.
 
@@ -476,3 +476,6 @@ Actual cross-sample delayed notes remain refused before output.
 
 Dev69 adds Cxx on compatible looped instrument-only handoff rows. Immediate
 volume override and above-64 clamping are checked against pinned C10/C7F fixtures.
+
+Dev70 adds ordinary and fine volume slides on compatible instrument-only
+looped handoffs, checked against four repeated pinned-reference fixtures.

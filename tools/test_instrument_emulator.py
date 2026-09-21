@@ -36,6 +36,8 @@ def main():
         from make_handoff_fixtures import fixtures as source
     if '--volume-handoff' in sys.argv:
         from make_handoff_fixtures import volume_fixtures as source
+    if '--slide-handoff' in sys.argv:
+        from make_handoff_fixtures import slide_fixtures as source
     cases=list(source());script=['FailAt 21','Wait 5','Stack 65536','CD PTDEV:'+run.name]
     baseline=ROOT/'evidence/enhanced-editor/dev28/native/speed.mod';shutil.copyfile(baseline,run/'baseline.mod')
     script+=['PTSampleTraceTest baseline.mod 160 >baseline.log','Echo $RC >baseline.rc']

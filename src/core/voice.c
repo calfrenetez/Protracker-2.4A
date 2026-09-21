@@ -42,6 +42,20 @@ enum pt_pcm_result pt_voice_init_segment(struct pt_voice *v,const struct pt_pcm 
     v->start=start;v->end=end;v->phase=(uint64_t)start<<32;v->looped=0;v->segment=1;
     return PT_PCM_OK;
 }
+enum pt_pcm_result pt_voice_set_repeat(struct pt_voice *v,uint32_t start,uint32_t end)
+{
+    struct pt_voice next;
+    if(!v || !v->pcm || !v->active || v->loop==PT_VOICE_PINGPONG ||
+       start>=end || end>v->pcm->frames)return PT_PCM_INVALID;
+    next=*v;
+    if(next.looped) {
+        next.phase+=((uint64_t)next.loop_start<<32);
+        next.end=next.loop_end;
+    } else if(next.loop && !next.segment)next.end=next.loop_start;
+    next.looped=0;next.segment=1;next.loop=PT_VOICE_FORWARD;
+    next.loop_start=start;next.loop_end=end;next.cycle=(uint64_t)(end-start)<<32;
+    *v=next;return PT_PCM_OK;
+}
 static void advance(struct pt_voice *v)
 {
     uint64_t distance,amount;

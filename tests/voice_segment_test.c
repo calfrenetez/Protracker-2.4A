@@ -23,6 +23,26 @@ int main(void)
     assert(pt_voice_init_segment(&v,&p,5,7,2,4,Q/2,1)==PT_PCM_OK);check(&v,blend,9);
     assert(pt_voice_init_segment(&v,&p,6,8,1,2,Q,0)==PT_PCM_OK);check(&v,single,5);
     assert(pt_voice_init_segment(&v,&p,1,3,2,6,Q/2,1)==PT_PCM_OK);check(&v,overlap_blend,13);
+    /* Updating a repeat must not jump the live phase or shorten the current
+       DMA-like iteration, even if updated again before its boundary. */
+    assert(pt_voice_init_segment(&v,&p,4,8,0,2,Q,0)==PT_PCM_OK);
+    check(&v,(const int32_t[]){400},1);
+    assert(pt_voice_set_repeat(&v,1,3)==PT_PCM_OK);
+    assert(pt_voice_set_repeat(&v,2,4)==PT_PCM_OK);
+    check(&v,(const int32_t[]){500,600,700,200,300,200},6);
+    assert(pt_voice_set_repeat(&v,5,7)==PT_PCM_OK);
+    check(&v,(const int32_t[]){300,500,600,500},4);
+    assert(pt_voice_init(&v,&p,0,8,PT_VOICE_ONCE,0,0,Q/2,1)==PT_PCM_OK);
+    check(&v,(const int32_t[]){0,50},2);
+    assert(pt_voice_set_repeat(&v,2,4)==PT_PCM_OK);
+    check(&v,(const int32_t[]){100,150,200,250,300,350,400,450,500,550,600,650,700,450,200},15);
+    before=v;
+    assert(pt_voice_set_repeat(&v,3,3)==PT_PCM_INVALID && !memcmp(&v,&before,sizeof(v)));
+    assert(pt_voice_set_repeat(&v,0,9)==PT_PCM_INVALID && !memcmp(&v,&before,sizeof(v)));
+    assert(pt_voice_init(&v,&p,0,8,PT_VOICE_PINGPONG,1,4,Q,0)==PT_PCM_OK);
+    before=v;assert(pt_voice_set_repeat(&v,2,4)==PT_PCM_INVALID && !memcmp(&v,&before,sizeof(v)));
+    v.active=0;before=v;assert(pt_voice_set_repeat(&v,2,4)==PT_PCM_INVALID && !memcmp(&v,&before,sizeof(v)));
+    assert(pt_voice_init_segment(&v,&p,1,3,2,6,Q/2,1)==PT_PCM_OK);
     before=v;
     assert(pt_voice_init_segment(&v,&p,3,3,1,2,Q,0)==PT_PCM_INVALID && !memcmp(&v,&before,sizeof(v)));
     assert(pt_voice_init_segment(&v,&p,1,9,1,2,Q,0)==PT_PCM_INVALID && !memcmp(&v,&before,sizeof(v)));

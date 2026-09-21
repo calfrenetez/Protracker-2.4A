@@ -26,6 +26,12 @@ enum pt_pcm_result pt_voice_init_segment(struct pt_voice *,const struct pt_pcm *
                                         uint32_t start,uint32_t end,
                                         uint32_t repeat_start,uint32_t repeat_end,
                                         uint64_t step,unsigned linear);
+/* Reprogram a live forward/one-shot voice's next repeat in the same PCM.
+ * The current segment/iteration finishes at its existing end; position, step,
+ * interpolation and source remain unchanged. Next boundary enters [start,end).
+ * Repeated calls replace the pending range. Inactive/pingpong voices and invalid
+ * ranges are refused without mutation. No allocation or sample writes. */
+enum pt_pcm_result pt_voice_set_repeat(struct pt_voice *,uint32_t start,uint32_t end);
 /* Returns normalized signed 24-bit stereo; mono is duplicated. Nearest uses the
  * current frame; linear uses the next frame with loop-aware endpoint mapping.
  * Outputs and state are unchanged on error. An inactive voice returns silence. */

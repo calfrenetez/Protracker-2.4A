@@ -12,10 +12,14 @@ from test_diagnostic_emulator import matching_socket
 
 def main():
     if matching_socket() or Path('/tmp/amiberry.sock').exists():raise SystemExit('Emulator already owned')
+    manifest=json.loads((ROOT/'build/dev/core-build.json').read_text())
+    assert all(digest(ROOT/p)==h for p,h in manifest['sources'].items())
     env=json.loads((ROOT/'local/environment.json').read_text());share=Path(env['share']);launch=share/'launch';original=launch.read_bytes()
     run=share/('segment'+str(time.time_ns()));run.mkdir();out=ROOT/'build/dev/segment-evidence';out.mkdir(exist_ok=True)
     binaries=['PTVoiceSegmentTest','PTVoiceTest']
-    for binary in binaries:shutil.copyfile(ROOT/'build/dev'/binary,run/binary)
+    for binary in binaries:
+        assert digest(ROOT/'build/dev'/binary)==manifest['binaries'][binary]['sha256']
+        shutil.copyfile(ROOT/'build/dev'/binary,run/binary)
     with tempfile.TemporaryDirectory() as tmp:
         host=Path(tmp)/'voice'
         subprocess.run(['cc','-std=c99','-O1','-Wall','-Wextra','-Werror','-fsanitize=address,undefined','-Isrc/core','tests/voice_segment_test.c','src/core/voice.c','src/core/pcm.c','-o',str(host)],cwd=ROOT,check=True)
@@ -52,9 +56,10 @@ def main():
     finally:
         launch.write_bytes(original)
         if process and process.poll() is None:
-            try:
-                if emu:Emulator(emu.path).command('QUIT')
-                else:process.terminate()
-            finally:process.wait(timeout=10)
+            if emu is None:
+                matches=matching_socket()
+                if len(matches)==1:emu=Emulator(matches[0])
+            if emu is None:raise RuntimeError('Retain claim: guarded emulator socket unavailable')
+            Emulator(emu.path).command('QUIT');process.wait(timeout=10)
         print('Voice test released:',run,flush=True)
 if __name__=='__main__':main()

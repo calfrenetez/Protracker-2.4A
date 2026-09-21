@@ -40,7 +40,7 @@ typedef int (*pt_render_sink)(void *,const struct pt_pcm *,uint64_t offset);
  * without restarting phase. Different active samples may hand off their next
  * repeat when both are mono8 forward loops, even bounded classic ranges,
  * matching rates and no interpolation. Supported handoff effects are 0xx-7xx,
- * 9xx-Fxx except E0x/E8x/EFx; 8xx and sliced handoffs are refused.
+ * 8xx-Fxx except E0x/EFx; sliced handoffs are refused.
  * 9xx retains offset memory and stored range updates across sample changes.
  * E90 preserves phase; nonzero E9x retriggers. Old trigger bounds are retained.
  * 3xx/5xy target notes and actual EDx delayed notes use the same guarded handoff.

@@ -73,8 +73,8 @@ static int handoff_sample(const struct pt_sample *s)
 static int handoff_effect(const struct pt_event *e)
 {
     unsigned sub=e->parameter>>4;
-    if(e->effect==14)return (sub>=1 && sub<=7) || (sub>=9 && sub<=14);
-    return e->effect<=7 || (e->effect>=9 && e->effect<=15);
+    if(e->effect==14)return sub>=1 && sub<=14;
+    return e->effect<=15;
 }
 static int silent_handoff_sample(const struct pt_sample *s)
 {

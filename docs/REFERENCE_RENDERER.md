@@ -536,3 +536,8 @@ new sample range reloads through later E9x/EDx triggers. Reference fixtures
 cover plain reload, remembered 900 and explicit 901; the prior 9xx refusal is
 superseded. Format/rate/slice guards remain, with an interpolated-format
 negative check proving refusal before output.
+
+Dev86 admits unused 8xx/E8x on compatible sample handoffs. Fixtures put
+vibrato on the preceding note to distinguish 8xx stored-pitch restoration
+from E8x retaining the previous output period. Neither command adds panning.
+All existing format/rate/slice guards and E0x/EFx refusals remain.

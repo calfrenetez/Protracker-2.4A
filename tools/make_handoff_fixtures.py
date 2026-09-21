@@ -164,3 +164,11 @@ def offset_handoff_fixtures():
         data[1116:1120]=bytes([1,125,14,0xd3]) if delay else bytes([0,0,14,0x92])
         data[1134]=15
         yield name,bytes(data),{'max_ticks':100,'focus':name,'delay':delay}
+
+def unused_handoff_fixtures():
+    base=next(fixtures())[1]
+    for name,effect,param in [('handoff_unused8',8,255),('handoff_unusede8',14,143)]:
+        data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
+        data[1086]=0x14;data[1087]=0x47
+        data[1102]=0x20|effect;data[1103]=param
+        yield name,bytes(data),{'max_ticks':100,'focus':name,'effect':effect}

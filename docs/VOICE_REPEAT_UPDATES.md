@@ -456,3 +456,24 @@ checks in 77.196 seconds. Targeted sanitized checks passed in 0.685 seconds;
 cross-build and all 91 host tests passed (143.495 seconds). Both windows were separately coordinated and released;
 final fresh release 05:34:48 UTC. Evidence: `evidence/enhanced-editor/dev85`.
 No physical, analogue audio or CIA-timing acceptance is claimed.
+
+## Unused effects during handoffs (dev86)
+
+Compatible instrument-only 8xx/E8x handoffs now follow pinned replay behavior.
+Both fixtures first apply vibrato: 8FF restores the stored period 428 while
+E8F leaves the prior output period 441. Neither pans the voice. Full PCM checks
+cover phase-preserving repeat replacement, volume reload and these distinct
+pitch outcomes. This supersedes the unused-effect handoff restriction; E0x,
+EFx, unsupported formats/rates and sliced handoffs remain refused.
+
+Pinned capture `instrument1789969440265829000` passed five executions in
+32.040 seconds with exact duplicate/baseline traces. Targeted sanitized checks
+passed in 0.681 seconds; cross-build passed. Evidence: dev86.
+
+Separate native renderer `handoffrender1789969551855815000` passed both PCM
+cases and format-refusal checks in 47.321 seconds. Both windows were separately
+coordinated, guarded and released; final fresh release 05:46:59 UTC. Evidence
+is retained in `evidence/enhanced-editor/dev86`. No physical or analogue audio
+acceptance is claimed.
+
+All 92 host tests passed in 143.101 seconds.

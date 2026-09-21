@@ -505,3 +505,6 @@ refusal is superseded for compatible samples; other handoff restrictions remain.
 
 Dev77 allows E4x/E7x on compatible instrument-only handoff rows. Subsequent
 ramp/square vibrato and tremolo are checked against pinned reference PCM.
+
+Dev78 admits E3x/E5x on compatible instrument-only handoff rows, checking
+subsequent glissando and finetuned arpeggio against pinned reference PCM.

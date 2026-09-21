@@ -311,3 +311,20 @@ identical duplicate/baseline traces. Native renderer
 refusal checks in 100.354 seconds. Both windows separately coordinated, guarded
 and released; final fresh release 03:55:37 UTC. Evidence is retained in
 `evidence/enhanced-editor/dev77`. No physical or analogue acceptance claimed.
+
+## Tuning controls on handoff rows (dev78)
+
+Compatible instrument-only handoffs may carry E3x glissando control or E5x
+finetune selection. Their state persists into subsequent tone portamento or
+arpeggio while the current sample iteration completes normally. Four fixtures
+cover glissando on/off and positive/negative finetune overrides. Existing
+format/rate/slice/offset/retrigger/delayed-note restrictions remain.
+
+Dev78 validation: 84 host tests passed in 140.723 seconds; targeted sanitized
+trace/PCM checks passed in 0.939 seconds; cross-build passed. Pinned capture
+`instrument1789963436633238000` passed nine executions in 39.398 seconds with
+identical duplicate/baseline traces. Native renderer
+`handoffrender1789963542968838000` passed four PCM cases and delayed-note
+refusal checks in 100.682 seconds. Both windows separately coordinated, guarded
+and released; final fresh release 04:07:52 UTC. Evidence is retained in
+`evidence/enhanced-editor/dev78`. No physical or analogue acceptance claimed.

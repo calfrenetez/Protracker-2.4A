@@ -1,0 +1,6 @@
+test_pinned_byte_mutations (test_invert_trace.InvertTrace.test_pinned_byte_mutations) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.003s
+
+OK

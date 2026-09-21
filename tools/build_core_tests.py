@@ -12,6 +12,7 @@ from prepare_replay import prepare_replay
 from prepare_flow_trace import prepare_flow_trace
 from prepare_pitch_trace import prepare_pitch_trace
 from prepare_sample_trace import prepare_sample_trace
+from prepare_invert_trace import prepare_invert_trace
 from prepare_volume_trace import prepare_volume_trace
 
 
@@ -61,6 +62,7 @@ def main():
     inputs['PTFlowTraceTest'] = ['tests/native_flow_trace.c', *inputs['PTPaulaTest'][1:]]
     inputs['PTPitchTraceTest'] = inputs['PTFlowTraceTest']
     inputs['PTSampleTraceTest'] = inputs['PTFlowTraceTest']
+    inputs['PTInvertTraceTest'] = inputs['PTFlowTraceTest']
     inputs['PTVolumeTraceTest'] = inputs['PTFlowTraceTest']
     inputs['PTPitchTest'] = ['tests/pitch_test.c','src/core/pitch.c','src/core/flow.c', *inputs['PTPaulaTest'][2:]]
     inputs['PTFlowCoreTest'] = ['tests/flow_test.c','src/core/flow.c', *inputs['PTPaulaTest'][2:]]
@@ -101,11 +103,14 @@ def main():
     sample_source=out/'replay_sample.s'
     sample_source.write_bytes(prepare_sample_trace((ROOT/'vendor/pt23f/replayer/PT2.3F_replay_cia.s').read_bytes(),(ROOT/'src/native/replay_abi.s').read_bytes()))
     subprocess.run([str(ROOT/'local/vasm/vasmm68k_mot'), '-devpac', '-m68000', '-no-fpu', '-Fhunk', '-o', str(out/'replay_sample.o'), str(sample_source)], check=True)
+    invert_source=out/'replay_invert.s'
+    invert_source.write_bytes(prepare_invert_trace((ROOT/'vendor/pt23f/replayer/PT2.3F_replay_cia.s').read_bytes(),(ROOT/'src/native/replay_abi.s').read_bytes()))
+    subprocess.run([str(ROOT/'local/vasm/vasmm68k_mot'), '-devpac', '-m68000', '-no-fpu', '-Fhunk', '-o', str(out/'replay_invert.o'), str(invert_source)], check=True)
     volume_source=out/'replay_volume.s'
     volume_source.write_bytes(prepare_volume_trace((ROOT/'vendor/pt23f/replayer/PT2.3F_replay_cia.s').read_bytes(),(ROOT/'src/native/replay_abi.s').read_bytes()))
     subprocess.run([str(ROOT/'local/vasm/vasmm68k_mot'), '-devpac', '-m68000', '-no-fpu', '-Fhunk', '-o', str(out/'replay_volume.o'), str(volume_source)], check=True)
     for name, sources in inputs.items():
-        subprocess.run([cc, *flags, *(['-DRECORD_BYTES=52U'] if name=='PTPitchTraceTest' else ['-DRECORD_BYTES=76U'] if name=='PTVolumeTraceTest' else ['-DRECORD_BYTES=140U'] if name=='PTSampleTraceTest' else []), *sources, *([str(out/'replay.o')] if name in ('PT24GEdit','PTPaulaTest') else [str(out/'replay_trace.o')] if name=='PTFlowTraceTest' else [str(out/'replay_pitch.o')] if name=='PTPitchTraceTest' else [str(out/'replay_volume.o')] if name=='PTVolumeTraceTest' else [str(out/'replay_sample.o')] if name=='PTSampleTraceTest' else []), '-o', str(out / name)], cwd=ROOT, check=True)
+        subprocess.run([cc, *flags, *(['-DRECORD_BYTES=52U'] if name=='PTPitchTraceTest' else ['-DRECORD_BYTES=76U'] if name=='PTVolumeTraceTest' else ['-DRECORD_BYTES=164U'] if name=='PTInvertTraceTest' else ['-DRECORD_BYTES=140U'] if name=='PTSampleTraceTest' else []), *sources, *([str(out/'replay.o')] if name in ('PT24GEdit','PTPaulaTest') else [str(out/'replay_trace.o')] if name=='PTFlowTraceTest' else [str(out/'replay_pitch.o')] if name=='PTPitchTraceTest' else [str(out/'replay_volume.o')] if name=='PTVolumeTraceTest' else [str(out/'replay_invert.o')] if name=='PTInvertTraceTest' else [str(out/'replay_sample.o')] if name=='PTSampleTraceTest' else []), '-o', str(out / name)], cwd=ROOT, check=True)
     corpus = ROOT / 'local/share/guard'
     corpus.mkdir(parents=True, exist_ok=True)
     rows, manifest = [], []
@@ -129,7 +134,7 @@ def main():
               'binaries': {name: {'sha256': digest(out / name), 'bytes': (out / name).stat().st_size}
                            for name in [*inputs, 'PTGuardTest']},
               'sources': {name: digest(ROOT / name) for name in
-                          sorted(set(sum(inputs.values(), [])) | {'src/core/recent.h', 'src/platform/recent_file.h', 'src/native/file_request.h', 'src/core/playback.h', 'src/core/flow.h', 'src/core/frame_clock.h', 'src/core/timeline.h', 'src/core/voice.h', 'src/core/render.h', 'src/core/stems.h', 'src/platform/stem_file.h', 'src/core/pitch.h', 'src/core/pitch_tables.h', 'tools/generate_pitch_tables.py', 'src/platform/render_file.h', 'tools/build_core_tests.py', 'src/native/paula.h', 'src/native/replay_abi.s', 'tools/prepare_replay.py', 'tools/prepare_flow_trace.py', 'tools/prepare_pitch_trace.py', 'tools/prepare_sample_trace.py', 'tools/prepare_volume_trace.py', 'vendor/pt23f/replayer/PT2.3F_replay_cia.s', 'src/core/channels.h', 'src/core/pcm.h',
+                          sorted(set(sum(inputs.values(), [])) | {'src/core/recent.h', 'src/platform/recent_file.h', 'src/native/file_request.h', 'src/core/playback.h', 'src/core/flow.h', 'src/core/frame_clock.h', 'src/core/timeline.h', 'src/core/voice.h', 'src/core/render.h', 'src/core/stems.h', 'src/platform/stem_file.h', 'src/core/pitch.h', 'src/core/pitch_tables.h', 'tools/generate_pitch_tables.py', 'src/platform/render_file.h', 'tools/build_core_tests.py', 'src/native/paula.h', 'src/native/replay_abi.s', 'tools/prepare_replay.py', 'tools/prepare_flow_trace.py', 'tools/prepare_pitch_trace.py', 'tools/prepare_sample_trace.py', 'tools/prepare_invert_trace.py', 'tools/prepare_volume_trace.py', 'vendor/pt23f/replayer/PT2.3F_replay_cia.s', 'src/core/channels.h', 'src/core/pcm.h',
                           'src/core/sinc_kernel.h', 'tools/generate_sinc_kernel.py', 'src/core/wav.h', 'src/core/svx.h', 'src/core/raw.h', 'src/core/midi.h', 'src/core/record.h', 'src/core/record_pattern.h', 'src/editor/editor.h', 'src/editor/song.h', 'src/editor/sampler.h', 'src/editor/bounce.h', 'src/editor/view.h', 'src/platform/file_save.h', 'vendor/pt23f/raw/ptfont.raw', 'src/core/project.h', 'src/core/mod_project.h', 'src/core/document.h', 'src/core/pp20.h', 'src/core/safe_save.h', 'src/core/pattern.h', 'src/core/slices.h', 'src/core/mod_inspect.h', 'src/native/mod_guard.s', 'tests/native_guard_harness.s'})},
               'guard_cases': manifest}
     (out / 'core-build.json').write_text(json.dumps(report, indent=2) + '\n')

@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "record_bytes": 164,
+  "run_id": "instrument1789973006252295000",
+  "elapsed_seconds": 37.488,
+  "diagnostic_sha256": "b02f948ea7da819d2cbc3aa6121a5aacd3be9ddd20aebf1b22e6bb913e277cd8",
+  "baseline_first52": "EXACT DEV38 MATCH",
+  "cases": {
+    "invert_fast": {
+      "max_ticks": 100,
+      "speed": 15,
+      "disable": false,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "657461af2982477da35e7765d1827bc586d5762d179497b505671fe04e81988c",
+      "trace_sha256": "35f81b0627bb3c61628cd7ababc5842c2bcf331d1a1888667cde99a30f283436"
+    },
+    "invert_slow": {
+      "max_ticks": 100,
+      "speed": 8,
+      "disable": false,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "1286318e565400e7ecc5cac5d3d0980f8d368cf87d8e45843a5ddf4444a06f53",
+      "trace_sha256": "a726a50bd6a4ed758e2959d48ebd8a56f6536c90c0b5b54808d632545cf231c0"
+    },
+    "invert_disable": {
+      "max_ticks": 100,
+      "speed": 15,
+      "disable": true,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "389df71a5f1ecb838007a62fc3efae9089f49944f5b84e17b70fbb11ea9d19f5",
+      "trace_sha256": "1f7527e858dcd023f38722bc5af0bbb9d9b3c6d1b3b0393e79c807efb9f7cd7c"
+    }
+  },
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=750\tsndbuf_status=0",
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  },
+  "scope": "EFx channel0 cursor, accumulator and first16 loop bytes plus sample/register snapshots. Renderer acceptance requires separate parity checks; no physical acceptance."
+}

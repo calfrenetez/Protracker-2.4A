@@ -61,3 +61,30 @@ Dev90 validation: all 96 host tests passed in 143.912 seconds; targeted sanitize
 workspace tests passed in 0.274 seconds. PTInvertPCMTest cross-build passed
 (26,648 bytes); build source hashes verified. No emulator or physical access
 was made. Evidence: evidence/enhanced-editor/dev90.
+
+## Pinned mutation snapshots (dev91)
+
+PTInvertTraceTest is a separate 164-byte diagnostic based on the sample trace.
+It retains the original 140-byte prefix, then records channel 0 wave cursor,
+shared gliss/funk byte, accumulator, two reserved bytes and the first 16 loop
+bytes. The byte snapshot is zeroed unless a non-null loop has at least 16 bytes.
+The pinned replay still performs the mutation; the diagnostic only observes.
+Shipping replay and existing trace binaries retain their prior formats.
+
+EFF, EF8 and EFF followed by EF0 fixtures use a 16-byte loop, covering full-speed
+inversion, accumulated slower updates, cursor wrap and disabling. Capture
+instrument1789973006252295000 passed seven executions in 37.488 seconds. Duplicate
+traces match exactly and the first 52 baseline bytes match dev38. Host assertions
+check every captured cursor, speed, accumulator and mutated byte against expected
+row/effect-pass sequencing. In particular, an ordinary fresh row does not add
+an UpdateFunk call, while effect ticks continue the stored speed.
+
+This establishes reference mutation evidence for these cases. Pattern delays,
+multiple mutating channels and sample reloads still need capture coverage before
+complete renderer acceptance. EFx remains refused in the production renderer.
+The emulator window was coordinated and guarded; fresh release 06:44:33 UTC.
+No physical or analogue acceptance. Evidence: evidence/enhanced-editor/dev91.
+
+Dev91 validation: all 97 host tests passed in 144.623 seconds; targeted byte
+snapshot assertions passed in 0.003 seconds. Cross-build and source manifest
+checks passed; existing PTSampleTraceTest binary remains identical to dev88.

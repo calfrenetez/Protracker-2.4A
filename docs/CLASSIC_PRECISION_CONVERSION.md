@@ -74,3 +74,31 @@ including an unsaved finetune edit, existing-destination refusal, preserved dirt
 state and undo, exact original PTG after undo/save, and refusal of external MIDI
 and remaining enhanced metadata before a requester. The final panel screenshot
 was visually checked. Evidence is under `evidence/enhanced-editor/dev60`.
+
+## Original ProTracker GUI interoperability (dev61)
+
+The pinned original 2.3F executable now passes a scripted GUI load/edit/save
+round trip for the MOD exported by the dev60 precision-conversion panel. The
+script loads that exact file, changes the first note from C-2 (period 428) to
+D-2 (381), saves a new module, and compares every output byte. It also verifies
+that the input file remains unchanged. Screenshots of loading, editing and
+saving are retained under `evidence/enhanced-editor/dev61/native`.
+
+Original 2.3F clears the first two bytes of non-looping samples when loading
+(`vendor/pt23f/PT2.3F.s`, LoadModule, the PT2.3D anti-beep change). This fixture
+therefore has exactly three changed bytes: the edited note's low period byte
+and the first sample word. Every other byte is preserved. This is an explicit
+upstream behavior, not a claim that original-tracker saving preserves all PCM.
+
+The final bounded run passed in 84.26 seconds using the hash-locked
+original executable. An earlier exploratory run produced the expected saved
+file but exceeded the harness deadline before verification; its failure log
+and guarded release are retained and are not counted as a passing run. Both
+runs restored the launcher and released the emulator. The tracker detaches
+from its launcher: its CLI return code is not an application-exit claim. The
+final run uses guarded emulator shutdown after verifying the saved file.
+
+This closes the original GUI interoperability check for this conversion fixture.
+It does not establish physical A1200/AmiGUS acceptance, arbitrary-song coverage,
+or support for the other enhanced-project conversion requirements. No product
+code or accepted main-screen layout changed in this evidence milestone.

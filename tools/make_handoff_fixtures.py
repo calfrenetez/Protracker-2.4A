@@ -65,3 +65,12 @@ def modulation_fixtures():
         data[1102]=0x20|effect;data[1103]=param
         if effect==6:data[1086]=0x14;data[1087]=0x47
         yield name,bytes(data),{'max_ticks':100,'focus':name,'effect':effect,'parameter':param}
+
+def tone_fixtures():
+    base=next(fixtures())[1]
+    for name,target,effect,param in [('handoff_toneup',381,3,0),('handoff_tonedown',480,3,0),('handoff_tonevolup',381,5,1),('handoff_tonevoldown',480,5,1)]:
+        assert len(name)<=20
+        data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
+        data[1100:1104]=bytes([target>>8,target&255,0x13,3])
+        data[1116:1120]=bytes([0,0,0x20|effect,param]);data[1134]=15
+        yield name,bytes(data),{'max_ticks':100,'focus':name,'effect':effect,'target':target}

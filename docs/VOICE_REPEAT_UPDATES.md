@@ -258,3 +258,21 @@ identical duplicate traces and baseline. Native renderer
 negative checks in 75.324 seconds. Both windows were separately coordinated,
 guarded and released; final fresh release 03:17:41 UTC. Evidence lives in
 `evidence/enhanced-editor/dev74`. No physical or analogue acceptance is claimed.
+
+## Instrument-only tone portamento handoffs (dev75)
+
+Compatible instrument-only 3xx/5xy rows may switch the queued repeat source
+while retaining an established tone target and speed. Four fixtures establish
+an upward/downward target before switching sample, with and without volume
+slide. Cross-sample tone rows containing a new note remain refused; only the
+instrument-only case has been opened. Existing rate/format/slice/offset and
+retrigger restrictions still apply.
+
+Dev75 validation: 81 host tests passed in 138.468 seconds; targeted sanitized
+trace/PCM validation passed in 0.709 seconds; cross-build passed. Pinned capture
+`instrument1789961169027320000` passed nine executions in 39.697 seconds with
+identical duplicates and baseline. Native renderer
+`handoffrender1789961281700759000` passed four PCM cases and delayed-note
+refusal checks in 99.975 seconds. Both emulator windows were separately
+coordinated and released; final fresh release 03:30:13 UTC. Evidence is in
+`evidence/enhanced-editor/dev75`. No physical or analogue acceptance claimed.

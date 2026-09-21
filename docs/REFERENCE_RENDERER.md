@@ -494,3 +494,7 @@ changes. Other simultaneous pitch/modulation combinations remain guarded.
 Dev74 validates active sample handoffs with 0xy/4xy/6xy/7xy modulation, including
 vibrato memory across the instrument change. Reference-derived PCM checks use
 captured periods and volumes; this is not live Paula audio acceptance.
+
+Dev75 permits compatible instrument-only 3xx/5xy handoffs with existing target
+and speed memory. New-note cross-sample portamento remains refused pending
+separate reference validation.

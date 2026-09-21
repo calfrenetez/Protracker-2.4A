@@ -328,3 +328,20 @@ identical duplicate/baseline traces. Native renderer
 refusal checks in 100.682 seconds. Both windows separately coordinated, guarded
 and released; final fresh release 04:07:52 UTC. Evidence is retained in
 `evidence/enhanced-editor/dev78`. No physical or analogue acceptance claimed.
+
+## Pattern flow during handoff (dev79)
+
+Compatible instrument-only handoffs may carry E6x loop control or EEx pattern
+delay. The current voice continues through delayed ticks and revisited rows;
+there is no added sample trigger. Fixtures cover a delayed handoff row and a
+loop-start handoff revisited by E61. Existing format/rate/slice/offset/retrigger
+and actual delayed-note restrictions remain.
+
+Dev79 validation: all 85 host tests passed; targeted sanitized trace/PCM checks
+passed in 0.871 seconds; cross-build passed. Pinned capture
+`instrument1789964160255651000` passed five executions in 34.779 seconds with
+identical duplicate/baseline traces. Native renderer
+`handoffrender1789964267718032000` passed both PCM cases and delayed-note
+refusal checks in 75.457 seconds. Both windows separately coordinated, guarded
+and released; final fresh release 04:19:25 UTC. Evidence is retained in
+`evidence/enhanced-editor/dev79`. No physical or analogue acceptance claimed.

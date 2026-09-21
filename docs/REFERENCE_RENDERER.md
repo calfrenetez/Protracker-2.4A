@@ -508,3 +508,6 @@ ramp/square vibrato and tremolo are checked against pinned reference PCM.
 
 Dev78 admits E3x/E5x on compatible instrument-only handoff rows, checking
 subsequent glissando and finetuned arpeggio against pinned reference PCM.
+
+Dev79 admits E6x/EEx on compatible instrument-only handoff rows, validating
+continuous PCM through delayed ticks and a repeated pattern-loop section.

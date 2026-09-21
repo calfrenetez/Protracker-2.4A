@@ -102,3 +102,12 @@ def tuning_fixtures():
         data[1116:1120]=bytes([1,125,3,7]) if control<0x40 else bytes([0,0,0,0x37])
         data[1134]=15
         yield name,bytes(data),{'max_ticks':100,'focus':name,'control':control}
+
+def flow_fixtures():
+    base=next(fixtures())[1]
+    for name,control in [('handoff_delay',0xe1),('handoff_loopflow',0x60)]:
+        assert len(name)<=20
+        data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
+        data[1102]=0x2e;data[1103]=control
+        if control==0x60:data[1118]=14;data[1119]=0x61;data[1134]=15
+        yield name,bytes(data),{'max_ticks':100,'focus':name,'control':control}

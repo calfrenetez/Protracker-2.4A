@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "record_bytes": 140,
+  "run_id": "instrument1789964160255651000",
+  "elapsed_seconds": 34.779,
+  "diagnostic_sha256": "0a039a72921a28bc5fb13db72afbfd56ebb1808e20b2dca5657ec88cf8c3132e",
+  "baseline_first52": "EXACT DEV38 MATCH",
+  "cases": {
+    "handoff_delay": {
+      "max_ticks": 100,
+      "focus": "handoff_delay",
+      "control": 225,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "6c78bf38b41fc30db5e42df79a2c6e9f24259ae81df0d98d189f688f08e7a0fa",
+      "trace_sha256": "c91789f2b026dc39b184fc5f6699900047804fb5d2129e9d1c36aefe913562c2"
+    },
+    "handoff_loopflow": {
+      "max_ticks": 100,
+      "focus": "handoff_loopflow",
+      "control": 96,
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 36,
+      "fixture_sha256": "e2f8ddb90ca51a114b38a5fe0c7fbd79083df4d7c2283e24a344156506e9b952",
+      "trace_sha256": "1f65d482cf9952c0e647501c1d1ff77bce0b141d8f5c0e6f447635796cc7df81"
+    }
+  },
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0",
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  },
+  "scope": "Instrument-only stored/output period, volume, sample ranges and DMA trigger snapshots. Renderer acceptance requires separate parity checks; no physical acceptance."
+}

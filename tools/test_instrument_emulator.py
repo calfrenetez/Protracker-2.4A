@@ -40,6 +40,8 @@ def main():
         from make_handoff_fixtures import slide_fixtures as source
     if '--cut-handoff' in sys.argv:
         from make_handoff_fixtures import cut_fixtures as source
+    if '--nonloop-source' in sys.argv:
+        from make_handoff_fixtures import nonloop_source_fixtures as source
     if '--unused-handoff' in sys.argv:
         from make_handoff_fixtures import unused_handoff_fixtures as source
     if '--offset-handoff' in sys.argv:

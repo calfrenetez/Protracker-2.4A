@@ -45,8 +45,9 @@ typedef int (*pt_render_sink)(void *,const struct pt_pcm *,uint64_t offset);
  * E90 preserves phase; nonzero E9x retriggers. Old trigger bounds are retained.
  * 3xx/5xy target notes and actual EDx delayed notes use the same guarded handoff.
  * EDx queues repeats immediately and triggers only on its tick.
- * A looped source may also hand off to mono8 non-looping PCM whose first
- * word is already zero; it repeats those two silent frames without source edits.
+ * Either source may also be mono8 non-looping PCM whose first word is
+ * already zero. Whole-sample playback retains that silent two-frame repeat
+ * so later instrument handoffs work after the initial fetch has ended.
  * Pitch slides retain native stored-word wrap and register-write semantics.
  * Ordinary notes and tone targets follow pinned tables for all16 tunings.
  * 3xx/5xx retain voice phase; explicit velocity may change without retriggering.

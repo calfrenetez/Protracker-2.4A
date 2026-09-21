@@ -172,3 +172,11 @@ def unused_handoff_fixtures():
         data[1086]=0x14;data[1087]=0x47
         data[1102]=0x20|effect;data[1103]=param
         yield name,bytes(data),{'max_ticks':100,'focus':name,'effect':effect}
+
+def nonloop_source_fixtures():
+    base=next(fixtures())[1]
+    for name,early in [('handoff_onceearly',True),('handoff_oncelate',False)]:
+        data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
+        data[46:50]=bytes([0,0,0,1]);data[2108:2110]=bytes(2)
+        if early:data[1086]=0x1f;data[1087]=1;data[1118]=0;data[1134]=15
+        yield name,bytes(data),{'max_ticks':100,'focus':name,'early':early}

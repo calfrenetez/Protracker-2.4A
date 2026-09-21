@@ -477,3 +477,23 @@ is retained in `evidence/enhanced-editor/dev86`. No physical or analogue audio
 acceptance is claimed.
 
 All 92 host tests passed in 143.101 seconds.
+
+## Nonlooping source continuation (dev87)
+
+Canonical mono8 nonlooping whole samples now retain their silent first-word
+repeat after the initial fetch, instead of becoming inactive. Compatible
+instrument changes can therefore replace the repeat before or after that
+initial fetch finishes. Source PCM is immutable and the first word must
+already be zero; noncanonical sources remain refused before output.
+
+Fixtures use speed 1 for an early handoff and speed 6 for a late handoff,
+checking continuous reference-derived PCM and no extra trigger. Pinned capture
+`instrument1789970178129596000` passed five executions in 31.325 seconds with
+exact duplicate/baseline traces. Targeted sanitized tests, including nonzero
+first-word refusal mutants, passed in 0.681 seconds.
+
+Final cross-build and all 93 host tests passed (144.898 seconds). Separate
+native renderer `handoffrender1789970332449328000` passed both PCM cases and
+format-refusal checks in 39.944 seconds. Both windows separately coordinated
+and guarded; final fresh release 06:00:07 UTC. Evidence is retained in
+`evidence/enhanced-editor/dev87`. No physical or analogue acceptance claimed.

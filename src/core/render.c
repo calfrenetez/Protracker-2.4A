@@ -158,7 +158,7 @@ static enum pt_render_result next_tick(struct run *r,struct pt_tick_span *span,u
                 if(r->sliced_tracks&(1U<<ch))return PT_RENDER_EFFECT;
                 if(e->instrument!=v->instrument) {
                     const struct pt_sample *a=r->view.samples+v->instrument-1,*b=r->view.samples+e->instrument-1;
-                    if(!handoff_effect(e) || !handoff_sample(a) || (!handoff_sample(b) && !silent_handoff_sample(b)) ||
+                    if(!handoff_effect(e) || (!handoff_sample(a) && !silent_handoff_sample(a)) || (!handoff_sample(b) && !silent_handoff_sample(b)) ||
                        a->pcm.rate!=b->pcm.rate)return PT_RENDER_EFFECT;
                 }
             }
@@ -258,7 +258,11 @@ static enum pt_render_result commands(const struct pt_project *p,const struct pt
                     a=ranges[ch].trigger_start;b=a+ranges[ch].trigger_length;
                     if(s->loop) {
                         if(pt_voice_init_segment(voice+ch,&s->pcm,a,b,s->loop_start,s->loop_end,step(s,e->pitch,o->rate),s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
+                    } else if(silent_handoff_sample(s)) {
+                        if(pt_voice_init_segment(voice+ch,&s->pcm,a,b,0,2,step(s,e->pitch,o->rate),0)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
                     } else if(pt_voice_init(voice+ch,&s->pcm,a,b,PT_VOICE_ONCE,0,0,step(s,e->pitch,o->rate),s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
+                } else if(!e->slice && silent_handoff_sample(s)) {
+                    if(pt_voice_init_segment(voice+ch,&s->pcm,a,b,0,2,step(s,e->pitch,o->rate),0)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
                 } else if(pt_voice_init(voice+ch,&s->pcm,a,b,loop,la,lb,step(s,e->pitch,o->rate),s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
                 velocity[ch]=(e->flags&1)?e->velocity:127;
             }
@@ -279,6 +283,8 @@ static enum pt_render_result commands(const struct pt_project *p,const struct pt
             }
             if(s->loop) {
                 if(pt_voice_init_segment(voice+ch,&s->pcm,a,b,s->loop_start,s->loop_end,rate,s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
+            } else if(silent_handoff_sample(s)) {
+                if(pt_voice_init_segment(voice+ch,&s->pcm,a,b,0,2,rate,0)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
             } else if(pt_voice_init(voice+ch,&s->pcm,a,b,PT_VOICE_ONCE,0,0,rate,s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
         }
         if(voice[ch].pcm && pitch->channel[ch].output)

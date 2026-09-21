@@ -541,3 +541,10 @@ Dev86 admits unused 8xx/E8x on compatible sample handoffs. Fixtures put
 vibrato on the preceding note to distinguish 8xx stored-pitch restoration
 from E8x retaining the previous output period. Neither command adds panning.
 All existing format/rate/slice guards and E0x/EFx refusals remain.
+
+Dev87 admits canonical nonlooping sources in compatible handoffs. Mono8
+whole samples whose first word is already zero retain a two-frame silent
+repeat after their initial fetch. This preserves the active repeat path for
+a later instrument change; it does not modify project PCM. Reference fixtures
+cover handoff before and after initial playback ends. Noncanonical first words
+remain refused as sources; format/rate/slice constraints remain.

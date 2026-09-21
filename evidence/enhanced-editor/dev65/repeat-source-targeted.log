@@ -1,0 +1,11 @@
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.590s
+
+OK
+SEGMENT trajectory 0 hash=2a50eba5
+SEGMENT trajectory 1 hash=295ede49
+SEGMENT trajectory 2 hash=ac5189f5
+SEGMENT trajectory 3 hash=e5165089
+SEGMENT trajectory 4 hash=594e0cb9
+VOICE segment PASS: independent initial/repeat ranges, interpolation handoff, huge steps, one-frame repeats and invalid-range preservation

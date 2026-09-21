@@ -3,7 +3,7 @@
 #include "pcm.h"
 enum pt_voice_loop { PT_VOICE_ONCE, PT_VOICE_FORWARD, PT_VOICE_PINGPONG };
 struct pt_voice {
-    const struct pt_pcm *pcm;
+    const struct pt_pcm *pcm,*repeat_pcm;
     uint64_t phase,step,cycle;
     uint32_t start,end,loop_start,loop_end;
     uint8_t loop,looped,linear,active,segment;
@@ -32,6 +32,10 @@ enum pt_pcm_result pt_voice_init_segment(struct pt_voice *,const struct pt_pcm *
  * Repeated calls replace the pending range. Inactive/pingpong voices and invalid
  * ranges are refused without mutation. No allocation or sample writes. */
 enum pt_pcm_result pt_voice_set_repeat(struct pt_voice *,uint32_t start,uint32_t end);
+/* As set_repeat, but borrow another PCM for the next boundary. Both sources
+ * must remain immutable/alive until handoff; format, channels and rate must
+ * match. Output alias checks protect both. No cross-format conversion. */
+enum pt_pcm_result pt_voice_set_repeat_source(struct pt_voice *,const struct pt_pcm *,uint32_t start,uint32_t end);
 /* Returns normalized signed 24-bit stereo; mono is duplicated. Nearest uses the
  * current frame; linear uses the next frame with loop-aware endpoint mapping.
  * Outputs and state are unchanged on error. An inactive voice returns silence. */

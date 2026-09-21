@@ -1,0 +1,18 @@
+{
+  "run_id": "segment1789953593091072000",
+  "elapsed_seconds": 27.764,
+  "binaries": {
+    "PTVoiceSegmentTest": "f857a89b0e0463367771fbc7acaa54711ae5da2490afa95a90a4c2920dd47650",
+    "PTVoiceTest": "6870ee8bd6df908cdb73b4116578f7a6ff374957d5692964c2f7064e96df1d48"
+  },
+  "log": "SEGMENT trajectory 0 hash=2a50eba5\nSEGMENT trajectory 1 hash=295ede49\nSEGMENT trajectory 2 hash=ac5189f5\nSEGMENT trajectory 3 hash=e5165089\nSEGMENT trajectory 4 hash=594e0cb9\nVOICE segment PASS: independent initial/repeat ranges, interpolation handoff, huge steps, one-frame repeats and invalid-range preservation\n",
+  "legacy_log": "VOICE traversal PASS: selected ranges, forward/pingpong seams, fractional steps, one-frame loops and large steps\nVOICE mix PASS: true24 stereo, single quantization, clipping, 16 voices, mute progression, capacity and alias refusal\nVOICE partition PASS hash=990c42f0 clips=40\n",
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0",
+  "scope": "Reference voice/mix arithmetic only; hardware audio and full tracker-effect parity NOT TESTED",
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

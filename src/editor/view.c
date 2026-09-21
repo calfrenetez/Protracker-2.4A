@@ -421,10 +421,18 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
         label(c,font,230,78,123,19,e->render_lead_in?"LEAD IN ON":"LEAD IN OFF",e->render_lead_in);
         label(c,font,353,78,123,19,e->render_groups?"GROUP STEMS":"TRACK STEMS",e->render_groups);
         label(c,font,476,78,123,19,"BACK",0);
+    } else if(e->panel==2 && e->export_details) {
+        panel(c,230,2,369,95,GREY);
+        label(c,font,230,2,369,19,"CLASSIC MOD CONVERSION",0);
+        label(c,font,230,21,369,19,"8 BIT ROUND / NO DITHER",0);
+        label(c,font,230,40,369,19,"SOURCE PROJECT KEPT",0);
+        label(c,font,230,59,369,19,"OTHER LIMITS STILL APPLY",0);
+        label(c,font,230,78,184,19,"EXPORT",0);label(c,font,414,78,185,19,"BACK",0);
     } else if(e->panel==2) {
         panel(c,230,2,369,95,GREY);
         label(c,font,230,2,369,19,e->panel==1?"EDIT OP.":"DISK OP.",0);
-        label(c,font,230,21,184,38,e->panel==1?"UNDO":"SAVE NEW",0);
+        label(c,font,230,21,184,19,"SAVE NEW",0);
+        label(c,font,230,40,184,19,"CONVERT MOD",0);
         label(c,font,414,21,185,38,e->panel==1?"REDO":"QUIT",0);
         label(c,font,230,59,184,19,"SAVE MOD",0);label(c,font,414,59,185,19,"RENDER WAV",0);
         label(c,font,230,78,184,19,"BACK",0);label(c,font,414,78,185,19,"RECENT",0);

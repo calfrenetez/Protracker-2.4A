@@ -142,31 +142,32 @@ static void save(struct pt_editor *e,const char *path)
     else pt_editor_status(e,result==PT_SAVE_PUBLISH?"SAVE REFUSED: DESTINATION EXISTS OR CANNOT BE PUBLISHED":"SAVE FAILED: CURRENT EDITS AND DESTINATION PRESERVED");
     printf("EDITOR SAVE result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
 }
-static int mod_eligible(struct pt_editor *e,struct pt_mod_export_report *r)
+static int mod_eligible(struct pt_editor *e,struct pt_mod_export_report *r,unsigned round8)
 {
-    const char *reason;
-    if(pt_mod_export_analyse(e->project,r)!=PT_PROJECT_OK) {pt_editor_status(e,"MOD EXPORT REFUSED: INVALID PROJECT");return 0;}
-    if(!r->issues)return 1;
-    if(r->issues&PT_EXPORT_MIDI_AUDIO)reason="MOD EXPORT REFUSED: EXTERNAL MIDI AUDIO IS NOT IN A MOD";
-    else if(r->issues&PT_EXPORT_CHANNELS)reason="MOD EXPORT REFUSED: MORE THAN FOUR CHANNELS; SAVE PROJECT";
-    else if(r->issues&PT_EXPORT_ROUTING)reason="MOD EXPORT REFUSED: NEEDS CLASSIC PAULA ROUTING";
-    else if(r->issues&(PT_EXPORT_PRECISION|PT_EXPORT_STEREO|PT_EXPORT_RATE))reason="MOD EXPORT REFUSED: SAMPLE FORMAT NEEDS CONVERSION";
-    else if(r->issues&(PT_EXPORT_LOOPS|PT_EXPORT_SLICES))reason="MOD EXPORT REFUSED: UNSUPPORTED SAMPLE LOOPS OR SLICES";
-    else if(r->issues&(PT_EXPORT_OFF|PT_EXPORT_NOTES|PT_EXPORT_VELOCITY))reason="MOD EXPORT REFUSED: ENHANCED NOTES; SAVE PROJECT TO KEEP THEM";
-    else if(r->issues&PT_EXPORT_TEMPO)reason="MOD EXPORT REFUSED: INITIAL TEMPO NEEDS CONVERSION";
-    else if(r->issues&PT_EXPORT_PANNING)reason="MOD EXPORT REFUSED: ENHANCED PANNING; SAVE PROJECT";
+    const char *reason;uint32_t issues;
+    if((round8?pt_mod_export_analyse_round8(e->project,r):pt_mod_export_analyse(e->project,r))!=PT_PROJECT_OK) {pt_editor_status(e,"MOD EXPORT REFUSED: INVALID PROJECT");return 0;}
+    issues=r->issues&~(round8?PT_EXPORT_PRECISION:0U);
+    if(!issues)return 1;
+    if(issues&PT_EXPORT_MIDI_AUDIO)reason="MOD EXPORT REFUSED: EXTERNAL MIDI AUDIO IS NOT IN A MOD";
+    else if(issues&PT_EXPORT_CHANNELS)reason="MOD EXPORT REFUSED: MORE THAN FOUR CHANNELS; SAVE PROJECT";
+    else if(issues&PT_EXPORT_ROUTING)reason="MOD EXPORT REFUSED: NEEDS CLASSIC PAULA ROUTING";
+    else if(issues&(PT_EXPORT_PRECISION|PT_EXPORT_STEREO|PT_EXPORT_RATE))reason="MOD EXPORT REFUSED: SAMPLE FORMAT NEEDS CONVERSION";
+    else if(issues&(PT_EXPORT_LOOPS|PT_EXPORT_SLICES))reason="MOD EXPORT REFUSED: UNSUPPORTED SAMPLE LOOPS OR SLICES";
+    else if(issues&(PT_EXPORT_OFF|PT_EXPORT_NOTES|PT_EXPORT_VELOCITY))reason="MOD EXPORT REFUSED: ENHANCED NOTES; SAVE PROJECT TO KEEP THEM";
+    else if(issues&PT_EXPORT_TEMPO)reason="MOD EXPORT REFUSED: INITIAL TEMPO NEEDS CONVERSION";
+    else if(issues&PT_EXPORT_PANNING)reason="MOD EXPORT REFUSED: ENHANCED PANNING; SAVE PROJECT";
     else reason="MOD EXPORT REFUSED: ENHANCED DATA OR CLASSIC FORMAT LIMITS";
     pt_editor_status(e,reason);printf("EDITOR MOD refused issues=0x%lx dirty=%u\n",(unsigned long)r->issues,pt_editor_dirty(e));fflush(stdout);return 0;
 }
-static void save_mod(struct pt_editor *e,const char *path,size_t n)
+static void save_mod(struct pt_editor *e,const char *path,size_t n,unsigned round8,unsigned converted)
 {
     uint8_t *bytes=malloc(n);size_t written;enum pt_save_result result;
     if(!bytes) {pt_editor_status(e,"MOD EXPORT: OUT OF MEMORY - PROJECT PRESERVED");return;}
-    if(pt_mod_export_direct(e->project,bytes,n,&written)!=PT_PROJECT_OK || written!=n) {
+    if((round8?pt_mod_export_round8(e->project,bytes,n,&written):pt_mod_export_direct(e->project,bytes,n,&written))!=PT_PROJECT_OK || written!=n) {
         free(bytes);pt_editor_status(e,"MOD EXPORT FAILED - PROJECT PRESERVED");return;
     }
     result=pt_file_save_new(path,bytes,n);free(bytes);
-    if(result==PT_SAVE_OK) {pt_editor_status(e,pt_editor_dirty(e)?"MOD EXPORTED AND VERIFIED - PROJECT STILL UNSAVED":"MOD EXPORTED AND VERIFIED");recent_success(e,path);}
+    if(result==PT_SAVE_OK) {pt_editor_status(e,converted?(pt_editor_dirty(e)?"MOD CONVERTED - UNSAVED":"MOD CONVERTED - SOURCE KEPT"):(pt_editor_dirty(e)?"MOD EXPORTED AND VERIFIED - PROJECT STILL UNSAVED":"MOD EXPORTED AND VERIFIED"));recent_success(e,path);}
     else pt_editor_status(e,result==PT_SAVE_PUBLISH?"MOD EXPORT REFUSED: DESTINATION EXISTS OR CANNOT BE PUBLISHED":"MOD EXPORT FAILED: PROJECT AND DESTINATION PRESERVED");
     /* Export does not mark the richer project saved or consume undo history. */
     printf("EDITOR MOD result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
@@ -435,12 +436,13 @@ int main(int argc,char **argv)
                     else pt_editor_status(editor,selected==0?"SAVE CANCELLED - EDITS PRESERVED":"SAVE REQUESTER UNAVAILABLE OR PATH TOO LONG");
                 }
             }
-            if(action==PT_UI_EXPORT_MOD) {
+            if(action==PT_UI_EXPORT_MOD || action==PT_UI_EXPORT_MOD8) {
                 struct pt_mod_export_report report;
-                if(mod_eligible(editor,&report)) {
-                    int selected;printf("EDITOR REQUEST mod\n");fflush(stdout);
+                unsigned round8=action==PT_UI_EXPORT_MOD8;
+                if(mod_eligible(editor,&report,round8)) {
+                    int selected;printf("EDITOR REQUEST %s\n",round8?"mod8":"mod");fflush(stdout);
                     selected=pt_file_request(window,2,mod_path,chosen_path,sizeof(chosen_path));view_cache.valid=0;
-                    if(selected==1) {strcpy(mod_path,chosen_path);save_mod(editor,mod_path,report.bytes);}
+                    if(selected==1) {strcpy(mod_path,chosen_path);save_mod(editor,mod_path,report.bytes,round8,(report.issues&PT_EXPORT_PRECISION)!=0);}
                     else pt_editor_status(editor,selected==0?"MOD EXPORT CANCELLED - PROJECT PRESERVED":"MOD REQUESTER UNAVAILABLE OR PATH TOO LONG");
                 }
             }

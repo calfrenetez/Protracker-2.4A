@@ -124,10 +124,10 @@ nonclassic panning, metadata and classic limits are reported. CONVERTED, BOUNCED
 and INCOMPLETE in analysis are the **required strategies**, not claims that those
 transformations have already been performed. A nonzero issue mask prevents the
 direct writer from modifying its output. The editor SAVE MOD uses this strict
-path. Explicit standalone `mod8` additionally permits precision-only 16/24-to-8
+path. Explicit standalone `mod8` and DISK OP -> CONVERT MOD additionally permit precision-only 16/24-to-8
 bit rounding and reports CONVERTED; it preserves the source and refuses every
 other issue. See [precision conversion](CLASSIC_PRECISION_CONVERSION.md). Other
-transforming/bouncing strategies and editor selection of mod8 remain subsequent work.
+transforming/bouncing strategies remain subsequent work.
 
 ## Loading and save transactions
 

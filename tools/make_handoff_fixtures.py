@@ -180,3 +180,12 @@ def nonloop_source_fixtures():
         data[46:50]=bytes([0,0,0,1]);data[2108:2110]=bytes(2)
         if early:data[1086]=0x1f;data[1087]=1;data[1118]=0;data[1134]=15
         yield name,bytes(data),{'max_ticks':100,'focus':name,'early':early}
+
+def nonloop_effect_fixtures():
+    base=list(nonloop_source_fixtures())[1][1]
+    for name,kind in [('handoff_onceoffset','offset'),('handoff_onceretrig','retrigger'),('handoff_oncereturn','return')]:
+        data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
+        if kind=='offset':data[1086]=0x19;data[1087]=1;data[1102]=0x29;data[1103]=0
+        if kind=='retrigger':data[1102]=0x2e;data[1103]=0x92
+        if kind=='return':data[1118]=0x10;data[1134]=15
+        yield name,bytes(data),{'max_ticks':100,'focus':name,'kind':kind}

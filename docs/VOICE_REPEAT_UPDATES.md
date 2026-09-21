@@ -497,3 +497,22 @@ native renderer `handoffrender1789970332449328000` passed both PCM cases and
 format-refusal checks in 39.944 seconds. Both windows separately coordinated
 and guarded; final fresh release 06:00:07 UTC. Evidence is retained in
 `evidence/enhanced-editor/dev87`. No physical or analogue acceptance claimed.
+
+## Nonlooping offset, retrigger and return coverage (dev88)
+
+Three pinned fixtures extend the nonlooping-source gate: initial 901 followed
+by remembered 900 on the new sample, E92 on the handoff row, and a later return
+to the original sample's silent repeat. Tests check full PCM, native trigger
+counts, volumes and stored offset ranges. Noncanonical first-word mutants
+continue to prove refusal before output. No production code change was needed.
+
+Pinned capture `instrument1789970906470419000` passed seven executions in
+35.052 seconds with exact duplicate/baseline traces. Targeted sanitized checks
+passed in 0.733 seconds. The existing dev87 cross-build remains source-matched.
+
+Separate native renderer `handoffrender1789971023325320000` passed all three
+PCM cases and format-refusal checks in 66.001 seconds. Both windows separately
+coordinated and guarded; final fresh release 06:11:57 UTC. Evidence is retained
+in `evidence/enhanced-editor/dev88`. No physical or analogue acceptance claimed.
+
+All 94 host tests passed in 146.413 seconds.

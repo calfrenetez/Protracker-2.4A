@@ -548,3 +548,7 @@ repeat after their initial fetch. This preserves the active repeat path for
 a later instrument change; it does not modify project PCM. Reference fixtures
 cover handoff before and after initial playback ends. Noncanonical first words
 remain refused as sources; format/rate/slice constraints remain.
+
+Dev88 extends pinned-reference coverage for canonical nonlooping sources to
+9xx offset memory, E92 retriggers and a return handoff back to the original
+silent repeat. Each fixture retains a noncanonical first-word refusal mutant.

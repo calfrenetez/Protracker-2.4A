@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "record_bytes": 140,
+  "run_id": "instrument1789970906470419000",
+  "elapsed_seconds": 35.052,
+  "diagnostic_sha256": "0a039a72921a28bc5fb13db72afbfd56ebb1808e20b2dca5657ec88cf8c3132e",
+  "baseline_first52": "EXACT DEV38 MATCH",
+  "cases": {
+    "handoff_onceoffset": {
+      "max_ticks": 100,
+      "focus": "handoff_onceoffset",
+      "kind": "offset",
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 18,
+      "fixture_sha256": "d971a77771e1e4fec9a2e5e35b565316c3462269da726f08ca2ab0836d7ff5d0",
+      "trace_sha256": "da6be117e61647146aa10bd53d290e846e50405a6a82e1e9607225a1ff75de82"
+    },
+    "handoff_onceretrig": {
+      "max_ticks": 100,
+      "focus": "handoff_onceretrig",
+      "kind": "retrigger",
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 18,
+      "fixture_sha256": "b16b83b65937714ef2fdd4cb02764a0af43bf7989f826a826089882752cdcbd6",
+      "trace_sha256": "ee1fc8dc009e3beeb8dbacf8db4db855dba34f02bf54a6d1cd19a4c44c3d8b10"
+    },
+    "handoff_oncereturn": {
+      "max_ticks": 100,
+      "focus": "handoff_oncereturn",
+      "kind": "return",
+      "native_trace": "CAPTURED TWICE - EXACT MATCH",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "a22e62945f666d20264de18ef9bcbc88190ff5d5cf943feb7d8c1de8bbe16175",
+      "trace_sha256": "b7c294c1db921bf76eb331ddf7bcecc205a148ae3c992ff513b083d46bfa5d66"
+    }
+  },
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=416\tsndbuf_status=0",
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=ProTracker isolated baseline",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  },
+  "scope": "Instrument-only stored/output period, volume, sample ranges and DMA trigger snapshots. Renderer acceptance requires separate parity checks; no physical acceptance."
+}

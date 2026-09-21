@@ -435,8 +435,12 @@ int main(int argc,char **argv)
         assert(pt_editor_key(e,0x31,8)==PT_UI_NONE && e->history.revision==revision);
         assert(pt_editor_key(e,0x44,0)==PT_UI_EXPORT_MOD8);
         assert(pt_editor_click(e,300,85)==PT_UI_EXPORT_MOD8);
+        assert(!e->export_dither);
+        assert(pt_editor_key(e,0x22,0)==PT_UI_NONE && e->export_dither);
+        assert(pt_editor_click(e,300,30)==PT_UI_NONE && !e->export_dither);
+        assert(pt_editor_key(e,0x22,0)==PT_UI_NONE && e->export_dither);
         assert(pt_editor_click(e,500,85)==PT_UI_NONE && !e->export_details);
-        assert(pt_editor_key(e,0x37,0x28)==PT_UI_NONE && e->export_details);
+        assert(pt_editor_key(e,0x37,0x28)==PT_UI_NONE && e->export_details && !e->export_dither);
         assert(pt_editor_key(e,0x45,0)==PT_UI_NONE && !e->export_details && e->panel==2);
         assert(e->history.revision==revision && !memcmp(&before,e->project,sizeof(before)));
     }

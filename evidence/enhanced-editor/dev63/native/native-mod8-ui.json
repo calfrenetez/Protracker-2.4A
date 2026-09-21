@@ -1,0 +1,19 @@
+{
+  "run_id": "mod8ui1789952354682390000",
+  "elapsed_seconds": 79.065,
+  "binary": {
+    "sha256": "31b8a958ec5c59ee8c860f8a7cc298090d45a2cf6ded85069f7565976497cdab",
+    "bytes": 202272
+  },
+  "source_sha256": "6e70a9db53ff428c54a0895e247e97f4d77cddcbd6763492ff2ccdfde20bdc65",
+  "exact_converted_output": true,
+  "cancel_existing_destination_dirty_undo_preserved": true,
+  "strict_MIDI_and_remaining_metadata_refused": true,
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=416\tsndbuf_status=0",
+  "physical_tested": false,
+  "logs": {
+    "editor.log": "EDITOR RECENT loaded=10 prefix=ENVARC:ProTracker2.4G/recent\nEDITOR RECENT saved=1 count=10\nEDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=104116\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=SAMPLE UPDATED - CONTROL-Z TO UNDO panel=0\nEDITOR MOD refused issues=0x4 dirty=1\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=MOD EXPORT REFUSED: SAMPLE FORMAT NEEDS CONVERSION panel=0\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=8 BIT ROUND / NO DITHER panel=2\nEDITOR REQUEST mod8\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=MOD EXPORT CANCELLED - PROJECT PRESERVED panel=2\nEDITOR REQUEST mod8\nEDITOR RECENT saved=1 count=10\nEDITOR MOD result=0 dirty=1 dither=none\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=MOD CONVERTED - UNSAVED panel=2\nEDITOR REQUEST mod8\nEDITOR MOD result=6 dirty=1 dither=none\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=MOD EXPORT REFUSED: DESTINATION EXISTS OR CANNOT BE PUBLISHED panel=2\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=TPDF DITHER - ADDS NOISE panel=2\nEDITOR REQUEST mod8\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=MOD EXPORT CANCELLED - PROJECT PRESERVED panel=2\nEDITOR REQUEST mod8\nEDITOR RECENT saved=1 count=10\nEDITOR MOD result=0 dirty=1 dither=tpdf-fixed\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=MOD CONVERTED - UNSAVED panel=2\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=DISK OPERATIONS panel=2\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=8 BIT ROUND / NO DITHER panel=2\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=DISK OPERATIONS panel=2\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=UNDO panel=2\nEDITOR RECENT saved=1 count=10\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PROJECT SAVED AND VERIFIED panel=2\nEDITOR EXIT clean\n",
+    "mixed.log": "EDITOR RECENT loaded=10 prefix=ENVARC:ProTracker2.4G/recent\nEDITOR RECENT saved=1 count=10\nEDITOR READY channels=16 patterns=2 bitmap_bytes=163840 history_bytes=104116\nEDITOR FRAME row=0 channel=15 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR FRAME row=0 channel=15 revision=0 dirty=0 status=8 BIT ROUND / NO DITHER panel=2\nEDITOR MOD refused issues=0x39ff dirty=0\nEDITOR FRAME row=0 channel=15 revision=0 dirty=0 status=MOD EXPORT REFUSED: EXTERNAL MIDI AUDIO IS NOT IN A MOD panel=2\nEDITOR FRAME row=0 channel=15 revision=0 dirty=0 status=DISK OPERATIONS panel=2\nEDITOR EXIT clean\n",
+    "metadata.log": "EDITOR RECENT loaded=10 prefix=ENVARC:ProTracker2.4G/recent\nEDITOR RECENT saved=1 count=10\nEDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=104116\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=8 BIT ROUND / NO DITHER panel=2\nEDITOR MOD refused issues=0x804 dirty=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=MOD EXPORT REFUSED: ENHANCED DATA OR CLASSIC FORMAT LIMITS panel=2\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=DISK OPERATIONS panel=2\nEDITOR EXIT clean\n"
+  }
+}

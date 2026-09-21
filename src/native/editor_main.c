@@ -163,14 +163,14 @@ static void save_mod(struct pt_editor *e,const char *path,size_t n,unsigned roun
 {
     uint8_t *bytes=malloc(n);size_t written;enum pt_save_result result;
     if(!bytes) {pt_editor_status(e,"MOD EXPORT: OUT OF MEMORY - PROJECT PRESERVED");return;}
-    if((round8?pt_mod_export_round8(e->project,bytes,n,&written):pt_mod_export_direct(e->project,bytes,n,&written))!=PT_PROJECT_OK || written!=n) {
+    if((round8==2?pt_mod_export_tpdf8(e->project,bytes,n,&written):round8?pt_mod_export_round8(e->project,bytes,n,&written):pt_mod_export_direct(e->project,bytes,n,&written))!=PT_PROJECT_OK || written!=n) {
         free(bytes);pt_editor_status(e,"MOD EXPORT FAILED - PROJECT PRESERVED");return;
     }
     result=pt_file_save_new(path,bytes,n);free(bytes);
     if(result==PT_SAVE_OK) {pt_editor_status(e,converted?(pt_editor_dirty(e)?"MOD CONVERTED - UNSAVED":"MOD CONVERTED - SOURCE KEPT"):(pt_editor_dirty(e)?"MOD EXPORTED AND VERIFIED - PROJECT STILL UNSAVED":"MOD EXPORTED AND VERIFIED"));recent_success(e,path);}
     else pt_editor_status(e,result==PT_SAVE_PUBLISH?"MOD EXPORT REFUSED: DESTINATION EXISTS OR CANNOT BE PUBLISHED":"MOD EXPORT FAILED: PROJECT AND DESTINATION PRESERVED");
     /* Export does not mark the richer project saved or consume undo history. */
-    printf("EDITOR MOD result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
+    printf("EDITOR MOD result=%u dirty=%u dither=%s\n",result,pt_editor_dirty(e),round8==2?"tpdf-fixed":"none");fflush(stdout);
 }
 struct conversion_ui {
     struct pt_editor *editor;struct Window *window;struct pt_canvas *canvas;
@@ -438,7 +438,7 @@ int main(int argc,char **argv)
             }
             if(action==PT_UI_EXPORT_MOD || action==PT_UI_EXPORT_MOD8) {
                 struct pt_mod_export_report report;
-                unsigned round8=action==PT_UI_EXPORT_MOD8;
+                unsigned round8=action==PT_UI_EXPORT_MOD8?(editor->export_dither?2:1):0;
                 if(mod_eligible(editor,&report,round8)) {
                     int selected;printf("EDITOR REQUEST %s\n",round8?"mod8":"mod");fflush(stdout);
                     selected=pt_file_request(window,2,mod_path,chosen_path,sizeof(chosen_path));view_cache.valid=0;

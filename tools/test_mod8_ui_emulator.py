@@ -65,7 +65,13 @@ def main():
         offset=request();filename('converted.mod');key(0x44,ack=False);frame('revision=1 dirty=1 status=MOD CONVERTED - UNSAVED',offset)
         assert (run/'converted.mod').read_bytes()==expected
         offset=request();key(0x44,ack=False);frame('MOD EXPORT REFUSED: DESTINATION EXISTS',offset);assert (run/'converted.mod').read_bytes()==expected
-        key(0x45);key(0x31,control=True);frame('revision=0 dirty=0 status=UNDO');key(0x21,control=True);frame('PROJECT SAVED')
+        key(0x22);frame('TPDF DITHER - ADDS NOISE')
+        offset=request();key(0x45);frame('revision=1 dirty=1 status=MOD EXPORT CANCELLED',offset)
+        offset=request();filename('dithered.mod');key(0x44,ack=False);frame('revision=1 dirty=1 status=MOD CONVERTED - UNSAVED',offset)
+        dithered=bytearray((ROOT/'evidence/enhanced-editor/dev62/native/tpdf.mod').read_bytes());dithered[44]=1
+        assert (run/'dithered.mod').read_bytes()==dithered and dithered!=expected
+        shot=out/'dither-panel.png';emu.command('SCREENSHOT',shot);wait(lambda:shot.exists() and shot.read_bytes().endswith(b'\0\0\0\0IEND\xaeB`\x82'))
+        key(0x45);key(0x37,control=True,alt=True);frame('8 BIT ROUND / NO DITHER');key(0x45);key(0x31,control=True);frame('revision=0 dirty=0 status=UNDO');key(0x21,control=True);frame('PROJECT SAVED')
         assert (run/'saved.ptg').read_bytes()==source.read_bytes();key(0x45)
         current='mixed.log';frame('status=READY -');key(0x37,control=True,alt=True);offset=key(0x44);frame('MOD EXPORT REFUSED: EXTERNAL MIDI',offset)
         assert 'EDITOR REQUEST mod8' not in log();key(0x45);key(0x45)
@@ -76,7 +82,7 @@ def main():
         assert not list(run.glob('*.pttmp-*'))
         audio=emu.command('GET_AUDIO_STATE');assert all('ch%d_dma=0'%i in audio.split('\t') for i in range(4))
         report={'run_id':run.name,'elapsed_seconds':round(time.monotonic()-start,3),'binary':manifest['binaries']['PT24GEdit'],'source_sha256':digest(source),'exact_converted_output':True,'cancel_existing_destination_dirty_undo_preserved':True,'strict_MIDI_and_remaining_metadata_refused':True,'stopped_audio':audio,'physical_tested':False,'logs':{n:(run/n).read_text() for n in ['editor.log','mixed.log','metadata.log']}}
-        for n in ['converted.mod','saved.ptg']:shutil.copyfile(run/n,out/n)
+        for n in ['converted.mod','dithered.mod','saved.ptg']:shutil.copyfile(run/n,out/n)
         (out/'native-mod8-ui.json').write_text(json.dumps(report,indent=2)+'\n');print('PASS: '+str(out),flush=True)
     finally:
         launch.write_bytes(original)

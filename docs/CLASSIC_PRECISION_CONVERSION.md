@@ -107,8 +107,8 @@ code or accepted main-screen layout changed in this evidence milestone.
 
 `PT24GConvert mod8tpdf INPUT.ptg NEW_OUTPUT.mod` explicitly adds triangular
 dither when reducing otherwise classic-compatible mono 16/24-bit samples to
-8-bit. Ordinary `mod8` and the editor conversion panel retain their no-dither
-policy. The editor does not yet expose this additional option.
+8-bit. Ordinary `mod8` retains its no-dither policy. The editor defaults to no dither
+and exposes the additional option starting with dev63.
 
 The portable `pt_mod_export_tpdf8` entry point shares the precision-only
 analysis and all capacity, alias, format and source-preservation checks. Two
@@ -139,3 +139,28 @@ unchanged. The pinned replay diagnostic accepted both converted outputs and
 Paula DMA was stopped afterward. Evidence is in `evidence/enhanced-editor/dev62`.
 The emulator was explicitly released after guarded cleanup and fresh resource
 checks. No physical or original-GUI test of the dithered variant is claimed.
+
+## Native editor dither selector (dev63)
+
+The conversion panel opens with `DITHER: NONE (D)`. Click this row or press D
+to select `DITHER: TPDF (D)`; the status line warns `TPDF DITHER - ADDS NOISE`.
+EXPORT uses the displayed policy. Canceling the filename requester keeps the
+current selection for retry. Leaving and reopening the conversion panel resets
+to no dither, so an earlier export does not silently change the next policy.
+Ordinary lossless SAVE MOD ignores the conversion setting.
+
+Both policies preserve dirty status, source precision and undo history. The
+native export log records `dither=tpdf-fixed` or `dither=none`. No preference is
+written and the accepted main screen remains unchanged. Controller checks cover
+keyboard/mouse toggling and default reset; the native workflow compares both
+outputs against prior core fixtures and verifies cancellation plus undo/save
+identity of the original high-resolution project.
+
+Dev63 validation: 72 host tests passed in 130.315 seconds, including controller
+and unchanged main-screen golden checks. Native run `mod8ui1789952354682390000`
+passed in 79.065 seconds: both export policies match prior core fixtures, dither
+requester cancellation retains the unsaved project, reopening resets the policy,
+and undo/save recovers the exact source PTG. Existing-file and unsupported-content
+refusals still pass; three normal editor exits and stopped DMA were checked.
+The selected-policy screenshot was visually checked. Evidence is retained in
+`evidence/enhanced-editor/dev63`; no physical acceptance is implied.

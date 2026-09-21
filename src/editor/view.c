@@ -424,7 +424,7 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
     } else if(e->panel==2 && e->export_details) {
         panel(c,230,2,369,95,GREY);
         label(c,font,230,2,369,19,"CLASSIC MOD CONVERSION",0);
-        label(c,font,230,21,369,19,"8 BIT ROUND / NO DITHER",0);
+        label(c,font,230,21,369,19,e->export_dither?"DITHER: TPDF (D)":"DITHER: NONE (D)",e->export_dither);
         label(c,font,230,40,369,19,"SOURCE PROJECT KEPT",0);
         label(c,font,230,59,369,19,"OTHER LIMITS STILL APPLY",0);
         label(c,font,230,78,184,19,"EXPORT",0);label(c,font,414,78,185,19,"BACK",0);

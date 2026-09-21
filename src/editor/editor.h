@@ -24,7 +24,7 @@ struct pt_editor {
     struct pt_sampler sampler;
     struct pt_song song;
     const struct pt_recent *recent; /* Owned by native application, survives project replacement. */
-    unsigned recent_details,recent_selected,export_details;
+    unsigned recent_details,recent_selected,export_details,export_dither;
     unsigned song_details,song_tools;
     unsigned render_details,render_pattern,render_bits,render_lead_in,render_groups;
     uint32_t render_rate,render_gain;

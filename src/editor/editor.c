@@ -618,9 +618,14 @@ static int hexkey(unsigned raw)
 }
 static void export_panel(struct pt_editor *e)
 {
-    e->panel=2;e->export_details=1;e->render_details=0;e->recent_details=0;
+    e->panel=2;e->export_details=1;e->export_dither=0;e->render_details=0;e->recent_details=0;
     e->load_pending=e->quit_pending=0;++e->sample_ui;
     pt_editor_status(e,"8 BIT ROUND / NO DITHER");
+}
+static void export_toggle(struct pt_editor *e)
+{
+    e->export_dither=!e->export_dither;++e->sample_ui;
+    pt_editor_status(e,e->export_dither?"TPDF DITHER - ADDS NOISE":"8 BIT ROUND / NO DITHER");
 }
 static void export_back(struct pt_editor *e)
 {e->export_details=0;++e->sample_ui;pt_editor_status(e,"DISK OPERATIONS");}
@@ -634,6 +639,7 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
     if(e->name_entry) {if(!(qualifier&8))name_key(e,raw);return PT_UI_NONE;}
     if(e->panel==2 && e->export_details) {
         if(raw==0x45)export_back(e);
+        else if(raw==0x22 && !(qualifier&8))export_toggle(e);
         else if(raw==0x44 && !(qualifier&8))return PT_UI_EXPORT_MOD8;
         else if(raw==0x59 || raw==0x40)return PT_UI_STOP;
         return PT_UI_NONE;
@@ -890,6 +896,7 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
     if(x<0 || x>=640 || y<0 || y>=512)return PT_UI_NONE;
     if(e->number_field || e->name_entry) {pt_editor_status(e,"FINISH ENTRY WITH RETURN OR ESC FIRST");return PT_UI_NONE;}
     if(e->panel==2 && e->export_details) {
+        if(x>=230 && x<599 && y>=21 && y<40)export_toggle(e);
         if(x>=230 && x<599 && y>=78 && y<97) {
             if(x<414)return PT_UI_EXPORT_MOD8;
             export_back(e);

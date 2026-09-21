@@ -294,3 +294,20 @@ identical duplicate/baseline traces. Native renderer
 refusal checks in 101.019 seconds. Both windows were separately coordinated,
 guarded and released; final fresh release 03:42:27 UTC. Evidence is in
 `evidence/enhanced-editor/dev76`. No physical or analogue acceptance claimed.
+
+## Waveform controls on handoff rows (dev77)
+
+Compatible instrument-only handoffs may carry E4x or E7x waveform controls.
+The sample repeat is queued while modulation control changes persist into the
+following vibrato/tremolo row. Four fixtures cover ramp and square control for
+both effects, retaining the existing borrowed-PCM and no-retrigger behavior.
+Other handoff format/rate/slice/offset/delayed-note restrictions remain.
+
+Dev77 validation: 83 host tests passed in 139.521 seconds; targeted sanitized
+trace/PCM checks passed in 0.890 seconds; cross-build passed. Pinned capture
+`instrument1789962687260468000` passed nine executions in 39.310 seconds with
+identical duplicate/baseline traces. Native renderer
+`handoffrender1789962814838554000` passed four PCM cases and delayed-note
+refusal checks in 100.354 seconds. Both windows separately coordinated, guarded
+and released; final fresh release 03:55:37 UTC. Evidence is retained in
+`evidence/enhanced-editor/dev77`. No physical or analogue acceptance claimed.

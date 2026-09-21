@@ -83,3 +83,12 @@ def tone_note_fixtures():
         data[1100:1104]=bytes([1,172,0x13,3])
         data[1116:1120]=bytes([target>>8,target&255,0x20|effect,param]);data[1134]=15
         yield name,bytes(data),{'max_ticks':100,'focus':name,'effect':effect,'target':target}
+
+def waveform_fixtures():
+    base=next(fixtures())[1]
+    for name,control,effect in [('handoff_vibramp',0x41,4),('handoff_vibsquare',0x42,4),('handoff_tremramp',0x71,7),('handoff_tremsquare',0x72,7)]:
+        assert len(name)<=20
+        data=bytearray(base);data[:20]=name.encode().ljust(20,b'\0')
+        data[1102]=0x2e;data[1103]=control
+        data[1118]=effect;data[1119]=0x47;data[1134]=15
+        yield name,bytes(data),{'max_ticks':100,'focus':name,'effect':effect,'control':control}

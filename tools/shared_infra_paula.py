@@ -32,10 +32,12 @@ def main():
         result = {'passed': False, 'scope': 'shared emulator Paula regression', 'guest_directory': str(run)}
         try:
             for source, name in [(ROOT / 'build/dev/PTPaulaTest', 'PTPaulaTest'),
+                                 (ROOT / 'build/dev/PTSampleCacheTest', 'PTSampleCacheTest'),
                                  (ROOT / 'evidence/baseline/mod.baseline', 'input.mod')]:
                 shutil.copyfile(source, run / name)
                 result[name + '_sha256'] = hashlib.sha256((run / name).read_bytes()).hexdigest()
             guest.launch.write_text('\n'.join(['FailAt 21', 'Stack 65536', 'CD ' + guest.device + run.name,
+                                              'PTSampleCacheTest >cache.log', 'Echo $RC >cache.rc',
                                               'PTPaulaTest input.mod >paula.log', 'Echo $RC >paula.rc']) + '\n')
             guest.start()
             end = time.monotonic() + 60
@@ -46,8 +48,13 @@ def main():
             finished = True
             log = (run / 'paula.log').read_text()
             (out / 'native-paula.log').write_text(log)
+            cache_log = (run / 'cache.log').read_text()
+            (out / 'native-cache.log').write_text(cache_log)
+            result['cache_returncode'] = (run / 'cache.rc').read_text().strip()
             result['returncode'] = (run / 'paula.rc').read_text().strip()
             result['audio_after'] = guest.command('GET_AUDIO_STATE')
+            assert result['cache_returncode'] == '0' and 'SAMPLE CACHE PASS:' in cache_log, cache_log
+            assert 'CACHE REUSE PASS:' in log, log
             assert result['returncode'] == '0' and 'CACHE PASS:' in log and 'PAULA PASS:' in log, log
             assert all('ch%d_dma=0' % i in result['audio_after'].split('\t') for i in range(4)), result['audio_after']
             result['passed'] = True

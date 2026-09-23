@@ -3,6 +3,7 @@
 #include "project.h"
 #include "playback.h"
 #include "scope.h"
+#include "sample_cache.h"
 #include "master_memory.h"
 struct IOAudio;
 struct MsgPort;
@@ -12,6 +13,9 @@ struct pt_paula {
     uint8_t *data,*staging,*check,*silence;
     uint8_t *sample_data[31];
     size_t sample_bytes[31],chip_bytes;
+    struct pt_sample_cache cache;
+    struct pt_cache_lease lease[31];
+    uint64_t cache_version;
     struct pt_master_memory memory;
     size_t source_bytes;
     uint32_t cached_instruments;

@@ -177,6 +177,20 @@ int main(int argc,char **argv)
     CHECK(pt_paula_sync(&a,&doc.project)!=NULL && !a.started);
     CHECK(pt_document_load(&doc,input,length,SIZE_MAX)==PT_PROJECT_OK);
     puts("CACHE PASS: independent Chip samples, Fast metadata, unused payload omitted, Chip/Fast placement, new instrument and changed master stop/rebuild");
+    /* Restart may reuse storage, but must refill EF-mutated bytes from master. */
+    CHECK(!pt_paula_play(&a,&doc.project,0,0,0));
+    {uint8_t *buffer=a.sample_data[0];uint64_t version=a.cache_version;
+        CHECK(a.sample_bytes[0]>2);buffer[2]^=0x7f;
+        CHECK(!pt_paula_play(&a,&doc.project,0,0,0));
+        CHECK(a.sample_data[0]==buffer && a.cache_version==version+1);
+        CHECK(buffer[2]==(uint8_t)doc.project.samples[0].pcm.data[2]);
+        doc.project.samples[0].pcm.data[2]^=1;
+        CHECK(!pt_paula_play(&a,&doc.project,0,0,0));
+        CHECK(a.sample_data[0]==buffer && buffer[2]==(uint8_t)doc.project.samples[0].pcm.data[2]);
+    }
+    pt_paula_stop(&a);CHECK(!a.cache.bytes);
+    CHECK(pt_document_load(&doc,input,length,SIZE_MAX)==PT_PROJECT_OK);
+    puts("CACHE REUSE PASS: restart reuses allocation, refreshes EF-mutated/master-edited bytes and explicit stop releases cache");
     /* Repeated partial Chip allocation failure must release every owned buffer.
        This bounded pressure fixture is only for a Fast-equipped 2 MiB guest. */
     if(AvailMem(MEMF_FAST)>12UL*1024*1024 && AvailMem(MEMF_CHIP|MEMF_TOTAL)<=2UL*1024*1024) {

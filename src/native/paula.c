@@ -50,9 +50,13 @@ static void set_audible(struct pt_paula *a,unsigned mask)
     }
     Enable();
 }
-void pt_paula_stop(struct pt_paula *a)
+static void *chip_allocate(void *context,size_t bytes)
+{(void)context;return AllocMem(bytes,MEMF_CHIP|MEMF_PUBLIC);}
+static void chip_release(void *context,void *data,size_t bytes)
+{(void)context;FreeMem(data,bytes);}
+static void halt(struct pt_paula *a,int retain)
 {
-    unsigned i;
+    unsigned i;struct pt_sample_cache cache;uint64_t version;
     if(a->started) {pt_replay_stop();a->started=0;}
     if(a->opened) {
         a->audio->ioa_Request.io_Command=ADCMD_FREE;
@@ -64,11 +68,15 @@ void pt_paula_stop(struct pt_paula *a)
     if(a->lock)DeleteIORequest((struct IORequest *)a->lock);
     if(a->audio)DeleteIORequest((struct IORequest *)a->audio);
     if(a->port)DeleteMsgPort(a->port);
-    for(i=0;i<31;++i)if(a->sample_bytes[i])FreeMem(a->sample_data[i],a->sample_bytes[i]);
+    for(i=0;i<31;++i)if(a->sample_bytes[i])pt_cache_unpin(&a->cache,a->lease[i]);
     if(a->silence)FreeMem(a->silence,2);
     pt_master_release(&a->memory,a->data);
-    pt_master_release(&a->memory,a->staging);pt_master_release(&a->memory,a->check);memset(a,0,sizeof(*a));
+    pt_master_release(&a->memory,a->staging);pt_master_release(&a->memory,a->check);
+    if(!retain)pt_cache_clear(&a->cache);
+    cache=a->cache;version=a->cache_version;memset(a,0,sizeof(*a));
+    if(retain) {a->cache=cache;a->cache_version=version;}
 }
+void pt_paula_stop(struct pt_paula *a) {halt(a,0);}
 const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned mode,unsigned position,unsigned pattern)
 {
     struct pt_project playback;struct pt_mod_export_report report;struct pt_paula_cache_plan plan;size_t written,offset;unsigned i;UBYTE channels=15;
@@ -76,7 +84,11 @@ const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned
     if(mode>1 || position>=p->order_count || pattern>=p->pattern_count)return "PLAY: INVALID POSITION";
     if(!playback_project(p,&playback) || pt_mod_export_analyse(&playback,&report)!=PT_PROJECT_OK || report.issues)
         return "PLAY: REQUIRES CLASSIC FOUR-CHANNEL PAULA PROJECT";
-    pt_paula_stop(a);a->order_count=p->order_count;memcpy(a->orders,p->orders,p->order_count*sizeof(*p->orders));a->source_bytes=report.bytes;a->pattern_bytes=(size_t)p->pattern_count*1024;
+    halt(a,1);
+    if(!a->cache.allocate)pt_cache_init(&a->cache,NULL,chip_allocate,chip_release,AvailMem(MEMF_CHIP));
+    if(a->cache_version==UINT64_MAX) {pt_paula_stop(a);return "PLAY: CACHE GENERATION EXHAUSTED";}
+    ++a->cache_version;
+    a->order_count=p->order_count;memcpy(a->orders,p->orders,p->order_count*sizeof(*p->orders));a->source_bytes=report.bytes;a->pattern_bytes=(size_t)p->pattern_count*1024;
     a->mode=mode;a->pattern=pattern;
     pt_master_memory_init(&a->memory);
     error="PLAY: OUT OF REPLAY WORKSPACE MEMORY";
@@ -106,10 +118,11 @@ const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned
         if(start && start+(repeat?repeat:1)>length/2)goto failed;
         if(length && (plan.instruments&(UINT32_C(1)<<i))) {
             error="PLAY: OUT OF CHIP MEMORY";
-            a->sample_data[i]=AllocMem(length,MEMF_CHIP|MEMF_PUBLIC);
-            if(!a->sample_data[i])goto failed;
+            if(pt_cache_take(&a->cache,i,a->cache_version,length,a->lease+i)!=PT_CACHE_LOAD)goto failed;
+            a->sample_data[i]=pt_cache_data(&a->cache,a->lease[i]);
             a->sample_bytes[i]=length;a->chip_bytes+=length;
             memcpy(a->sample_data[i],a->staging+offset,length);
+            pt_cache_publish(&a->cache,a->lease[i]);
         } else {h[22]=h[23]=h[26]=h[27]=h[28]=0;h[29]=1;}
         offset+=length;
     }

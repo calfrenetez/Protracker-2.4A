@@ -73,9 +73,25 @@ The scope renderer bounds reads against owned sample buffers, not Fast metadata.
 All partial allocations are released on failure; replay is stopped before any
 buffer is freed.
 
-Cache lifetimes still follow a playback session: individual blocks are released
-at stop, not retained as a reusable LRU across sessions. Active voices pin all
-loaded samples, so evicting an active cache under pressure is not yet supported.
+`sample_cache` provides a bounded versioned resource pool. A successful acquire
+pins a resource; newly loaded or converted data stays unpublished until the
+caller confirms completion. Invalidation retires pinned versions without freeing
+voice-owned memory; the final release discards them. Unpinned allocations are
+evicted in least-recently-acquired order under budget or backend allocation
+pressure. Stale handles cannot release a newly assigned slot. Retired leases
+cannot republish invalidated content. Clear refuses to claim complete disposal
+while a voice still holds a pin. Calls belong on the owning control thread, not
+inside an audio interrupt.
+
+Paula uses that pool for its independent Chip sample blocks. Direct Play/Pattern
+restarts stop voices, unpin the previous set and reuse matching slot allocations
+when sizes agree. Every restart uses a new generation and reloads all referenced
+PCM from the immutable export before the replay's first-word fixes. This avoids
+carrying EFx mutation or a previous project's contents into a new session. Unused
+old blocks can be evicted during allocation. Explicit Stop, invalidation and any
+failed start still release the entire pool; there is no idle Chip-RAM retention
+across an explicit Stop. Long-lived live voices remain pinned.
+
 The bridge still requires a classic-compatible four-channel project; implicit
 conversion of enhanced samples has not been added. AmiGUS cache eviction and
 Studio streaming remain incomplete. Native render/stem helper allocations and
@@ -101,3 +117,10 @@ contains native assertions for memory placement, unused payload omission and
 stopped rebuild after new instruments or changed masters. Cross-compiling these
 assertions does not mean they have run; consult the current checkpoint for guest
 evidence.
+
+`PTSampleCacheTest`/`tests/test_sample_cache.py` exercise publication, pinned old
+versions coexisting with new revisions, cancellation, LRU eviction, resource
+shortage below the nominal budget, stale handles, overflow and complete release.
+The same portable core is intended for other playback backends; an AmiGUS driver
+must still supply and validate card allocation/upload/release and generation
+rules. A passing resource-pool test is not AmiGUS implementation or acceptance.

@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131126232 reserve=262144 flags=4
+BOUNCE PASS: exact true24 PCM, atomic new slot, allocation/budget/cancellation rollback, redo preservation, mixed undo, references, table reuse, eviction and PTG identity
+EXEC MEMORY PASS: 69 Fast allocations, zero owned bytes, budget refusal without Chip fallback

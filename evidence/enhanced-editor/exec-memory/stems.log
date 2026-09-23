@@ -1,0 +1,4 @@
+EXEC MEMORY pool_limit=131228720 reserve=262144 flags=4
+STEMS first export phase=0 detail=0
+STEMS files PASS: grouped PCM equals individual export, global tempo alignment, cancellation, preflight refusal and no-replace race
+EXEC MEMORY PASS: 54 Fast allocations, zero owned bytes, budget refusal without Chip fallback

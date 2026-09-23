@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131231216 reserve=262144 flags=4
+RENDER MEMORY PASS: all4 WAV and11 stem allocation failures preserve masters/reports and remove owned staging
+EXEC MEMORY PASS: 61 Fast allocations, zero owned bytes, budget refusal without Chip fallback

@@ -101,6 +101,10 @@ def main():
                          ('PTRenderFileTest','tests/render_file_alloc_test.c'),
                          ('PTStemFileTest','tests/stem_file_alloc_test.c')]:
         inputs[name.replace('Test','AllocTest')] = [source, *inputs[name][1:]]
+    for target, base, source in [('PTExecBounceTest','PTBounceTest','tests/native_exec_bounce_test.c'),
+                                 ('PTExecStemsTest','PTStemFileTest','tests/native_exec_stems_test.c'),
+                                 ('PTExecFailureTest','PTRenderMemoryTest','tests/native_exec_failures_test.c')]:
+        inputs[target] = [source, *inputs[base][1:]]
     flags = ['-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os',
              '-Wall', '-Wextra', '-Werror', '-Isrc/core', '-Ibuild/dev', *compiler_safety_flags(cc)]
     replay_source=out/'replay.s'

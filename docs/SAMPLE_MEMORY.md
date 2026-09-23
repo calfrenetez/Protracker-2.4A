@@ -402,3 +402,18 @@ All eleven allocation refusals for two stems are tested, including initial batch
 allocation. WAV still has four failure points. Small helper locals and runtime
 file/library allocations remain outside this explicit workspace policy; actual
 hardware memory pressure/performance and live Studio output remain unqualified.
+
+## Exec-backed emulator memory fixtures
+
+Native-only wrappers reuse the bounce, allocated-stem and export-failure fixtures
+with the production `master_memory.h` allocator. Every explicit fixture allocation
+is checked using `TypeOfMem`: Fast must be set and Chip absent. The pool starts
+from current Exec memory queries; completion requires owned-byte accounting back
+to zero. A zero pool ceiling briefly tests real allocator budget refusal without
+exhausting the shared emulator. Existing injected failures remain deterministic.
+
+These wrappers qualify explicit document/sampler/export workspace allocations on
+the shared030 guest. They do not instrument C-library internal allocations, prove
+physical A1200 fragmentation behavior or measure whole-machine memory recovery.
+Fixture source arrays may be on the stack; no claim that every fixture byte is
+Fast RAM. Physical performance/listening and AmiGUS remain separate acceptance.

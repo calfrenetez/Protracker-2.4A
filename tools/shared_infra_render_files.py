@@ -7,6 +7,7 @@ INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     group=parser.add_mutually_exclusive_group()
+    group.add_argument('--exec-memory',choices=['bounce','stems','failures'],help='Run one native Exec-backed memory fixture')
     group.add_argument('--stems-only',action='store_true',help='Run the allocated stem export test only')
     group.add_argument('--wav-only',action='store_true',help='Run the allocated WAV export test only')
     group.add_argument('--memory-failures-only',action='store_true',help='Run all WAV/stem allocation-failure checks only')
@@ -26,8 +27,11 @@ def main():
                ('render-allocated','PTRenderFileAllocTest','RENDER FILE PASS:'),
                ('stems-allocated','PTStemFileAllocTest','STEMS files PASS:'),
                ('bounce','PTBounceTest','BOUNCE PASS:'),
-               ('memory-failures','PTRenderMemoryTest','RENDER MEMORY PASS:')]
-        cases=cases[4:5] if args.stems_only else cases[3:4] if args.wav_only else cases[6:] if args.memory_failures_only else cases[5:6] if args.bounce_only else cases[2:5] if args.allocated_only else cases[:2]
+               ('memory-failures','PTRenderMemoryTest','RENDER MEMORY PASS:'),
+               ('exec-bounce','PTExecBounceTest','BOUNCE PASS:'),
+               ('exec-stems','PTExecStemsTest','STEMS files PASS:'),
+               ('exec-failures','PTExecFailureTest','RENDER MEMORY PASS:')]
+        cases=[cases[7+['bounce','stems','failures'].index(args.exec_memory)]] if args.exec_memory else cases[4:5] if args.stems_only else cases[3:4] if args.wav_only else cases[6:7] if args.memory_failures_only else cases[5:6] if args.bounce_only else cases[2:5] if args.allocated_only else cases[:2]
         try:
             commands=['FailAt 21','Stack 65536']
             for name,binary,marker in cases:
@@ -45,6 +49,7 @@ def main():
                 log=(run/name/'test.log').read_text();(out/(name+'.log')).write_text(log)
                 result[name+'_returncode']=(run/name/'test.rc').read_text().strip()
                 assert result[name+'_returncode']=='0' and marker in log,log
+                if args.exec_memory:assert 'EXEC MEMORY PASS:' in log,log
             result['passed']=True
         finally:
             if finished:

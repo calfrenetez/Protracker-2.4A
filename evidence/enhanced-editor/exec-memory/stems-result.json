@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "scope": "shared030 native render/stem file checks",
+  "PTExecStemsTest_sha256": "16797805389a6ccf996569bcc12a606251517d43fe49be26e8df3c6115851d2f",
+  "exec-stems_returncode": "0",
+  "run_files_cleaned": true
+}

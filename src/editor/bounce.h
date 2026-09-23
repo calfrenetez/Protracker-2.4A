@@ -4,7 +4,10 @@
 #include "render.h"
 /* Render a new assignable sample without intermediate files or copying the
  * rendered PCM. Project/options/PCM remain immutable until the single append
- * transaction commits. All staging is charged to the sampler's memory budget.
+ * transaction commits. Output/history staging is charged to the sampler budget.
+ * Measurement/mixer workspace uses its allocator and is released before commit;
+ * the caller allocator must bound total memory, including temporary workspace.
+ * Workspace refusal reports MEMORY/CAPACITY without changing samples or redo.
  * Report changes only on success; detail identifies render errors/cancellation.
  * The new slot keeps explicit output bits/rate, full volume and no loop/slices.
  * Progress accepts cancellation through final validation before publication.

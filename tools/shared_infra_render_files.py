@@ -6,7 +6,9 @@ ROOT=Path(__file__).resolve().parents[1]
 INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--allocated-only',action='store_true',help='Run the three allocated-path tests instead of the two legacy file tests')
+    group=parser.add_mutually_exclusive_group()
+    group.add_argument('--bounce-only',action='store_true',help='Run the sample-bounce allocation regression only')
+    group.add_argument('--allocated-only',action='store_true',help='Run the three allocated-path tests instead of the two legacy file tests')
     args=parser.parse_args()
     sys.path.insert(0,str(INFRA/'scripts'))
     from shared_guest import Guest
@@ -19,8 +21,9 @@ def main():
         cases=[('render','PTRenderFileTest','RENDER FILE PASS:'),('stems','PTStemFileTest','STEMS files PASS:'),
                ('core-allocated','PTRenderAllocTest','RENDER PASS:'),
                ('render-allocated','PTRenderFileAllocTest','RENDER FILE PASS:'),
-               ('stems-allocated','PTStemFileAllocTest','STEMS files PASS:')]
-        cases=cases[2:] if args.allocated_only else cases[:2]
+               ('stems-allocated','PTStemFileAllocTest','STEMS files PASS:'),
+               ('bounce','PTBounceTest','BOUNCE PASS:')]
+        cases=cases[5:] if args.bounce_only else cases[2:5] if args.allocated_only else cases[:2]
         try:
             commands=['FailAt 21','Stack 65536']
             for name,binary,marker in cases:

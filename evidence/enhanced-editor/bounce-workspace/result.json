@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "scope": "shared030 native render/stem file checks",
+  "PTBounceTest_sha256": "6d9ff2980623950e5f98e58e3210674c5e3c63b9dc30e4faf3e4d64da775da4d",
+  "bounce_returncode": "0",
+  "run_files_cleaned": true
+}

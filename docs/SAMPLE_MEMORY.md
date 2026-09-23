@@ -338,10 +338,26 @@ owned file staging is removed and the old destination/master is preserved.
 
 File/path/encoding/comparison buffers and helper locals still use stack space;
 this does not qualify every stack byte or runtime file-descriptor allocation.
-Bounce preflight uses the allocator but its internal legacy stream path is
-still open work. Live Studio streaming is not implemented by these offline APIs.
+Bounce also uses the allocated measurement/stream path described below.
+Live Studio streaming is not implemented by these offline APIs.
 
 Pinned m68k `-Os -fstack-usage` inspection reports the allocated measurement and
 stream entry frames as64 and72 bytes, versus2364 and5532 for legacy wrappers.
 Their shared measure/stream helper frames are336/488 bytes. These are compiler
 per-function figures, not whole-call-stack peaks or physical runtime proof.
+
+## Bounded sample-bounce workspace
+
+Sample bounce now uses the sampler allocator for both measurement and mixer
+workspace. Native sampler allocations already share the bounded Fast-first
+master pool, so the output version, undo resources and temporary mixer compete
+within that pool. Temporary workspace is released before the new sample/history
+entry is committed. It is not retained as undo data or counted in persistent
+sampler-history bytes; the allocator's shared ceiling still applies.
+
+Allocation failure during measurement or after staging the output PCM reports
+`PT_RENDER_MEMORY`/`PT_EDIT_CAPACITY`. The existing append transaction discards
+only its own provisional resources. Master samples, slot table, report and
+existing undo/redo remain unchanged. Tests inject failure at every allocation
+in a fresh bounce and with existing redo, then successfully replay the preserved
+redo. Cancellation and exact24-bit project round trips remain covered.

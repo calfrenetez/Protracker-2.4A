@@ -106,6 +106,7 @@ def main():
                                  ('PTExecFailureTest','PTRenderMemoryTest','tests/native_exec_failures_test.c')]:
         inputs[target] = [source, *inputs[base][1:]]
     inputs['PT24GEdit'].append('src/platform/file_load.c')
+    inputs['PTSamplerStudioTest'] = ['tests/sampler_studio_test.c','src/editor/sampler_studio.c','src/core/studio_mix.c','src/core/voice.c',*inputs['PTSamplerTest'][1:]]
     inputs['PTStudioMixTest'] = ['tests/studio_mix_test.c','src/core/studio_mix.c','src/core/voice.c','src/core/pcm.c']
     inputs['PTExecImportTest'] = ['tests/native_exec_import_test.c','src/platform/file_load.c']
     inputs['PTExecRecentTest'] = ['tests/native_exec_recent_test.c','src/platform/recent_file.c','src/core/recent.c']

@@ -469,3 +469,23 @@ Tracker tick scheduling, output queue/device transport, underrun recovery and
 empirical 68030 capacity remain unimplemented here. Sixteen slots are a bound,
 not a claim of16 real-time voices. There is no allocation/acquire in block reads,
 but completed voices call release; do not invoke from an audio interrupt.
+
+## Sampler-to-Studio master pins
+
+`pt_sampler_pin/unpin` now retains the sampler's immutable version independently
+of current-slot and undo-journal ownership. The Studio provider maps slot+1 and
+sampler generation to a pin; stale generations refuse new triggers. Existing
+voices retain their exact version across edits, undo/redo and history eviction.
+
+For a document-backed sample without an owned sampler version, the first pin
+promotes PCM/metadata into a bounded sampler allocation and updates the project
+slot to that authoritative version. Precision/content and undo state are unchanged;
+the original document allocation lives until document release. This temporary
+duplication is budgeted and can fail gracefully; subsequent pins share the owned
+version. It is not a degraded playback cache.
+
+Pins can outlive release of current/history ownership, but the sampler structure
+and allocator context must remain alive and must not be reinitialized until final
+unpin. Normal integration must close mixer sessions before editor/document reset.
+The provider is implemented and lifecycle-tested; native editor scheduling and
+AmiGUS output remain unwired. No real-time performance acceptance is implied.

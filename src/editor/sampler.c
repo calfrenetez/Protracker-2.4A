@@ -1,4 +1,5 @@
 #include <string.h>
+#include <limits.h>
 #include <stdio.h>
 #include "sampler.h"
 #include "wav.h"
@@ -51,6 +52,22 @@ static int same(const struct pt_sample *a,const struct pt_sample *b)
         (!a->pcm.frames || a->pcm.data==b->pcm.data || !memcmp(a->pcm.data,b->pcm.data,(size_t)a->pcm.frames*a->pcm.channels*sizeof(int32_t))) &&
         (!a->slice_count || a->slices==b->slices || !memcmp(a->slices,b->slices,(size_t)a->slice_count*sizeof(uint32_t)));
 }
+enum pt_edit_result pt_sampler_pin(struct pt_sampler *s,struct pt_project *p,unsigned slot,
+    unsigned generation,struct pt_pcm *pcm,struct pt_sample_version **token)
+{
+    struct pt_sample_version *v;
+    if(!s || !pcm || !token || !s->allocator.allocate || !s->allocator.release ||
+       pt_project_validate(p,NULL)!=PT_PROJECT_OK || slot>=p->sample_count)return PT_EDIT_INVALID;
+    if(generation!=s->generation)return PT_EDIT_CONFLICT;
+    v=s->current[slot];
+    if(v && (!same(&v->sample,&p->samples[slot]) || v->references==UINT_MAX))return PT_EDIT_CONFLICT;
+    if(!v) {
+        v=version(s,&p->samples[slot]);if(!v)return PT_EDIT_CAPACITY;
+        s->current[slot]=v;p->samples[slot]=v->sample;
+    }
+    retain(v);*pcm=v->sample.pcm;*token=v;return PT_EDIT_OK;
+}
+void pt_sampler_unpin(struct pt_sample_version *v) {release_version(v);}
 struct appended_sample {
     struct pt_sampler *owner;
     struct pt_sample *before,*after;

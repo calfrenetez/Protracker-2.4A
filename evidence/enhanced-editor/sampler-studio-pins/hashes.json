@@ -1,0 +1,8 @@
+{
+  "src/editor/sampler.c": "376638a24351576ef92354d1f5c2f5c0459e14a21bb5280dd978c560108a4d51",
+  "src/editor/sampler.h": "26ef802d87bd9c82fb99c95f0449453a5ff2563536c15b64606dc4991d691dfb",
+  "src/editor/sampler_studio.c": "33849a9ebd51025135c25f0e96f5d31a3f5a9d507176e343a02dbe973439fbab",
+  "src/editor/sampler_studio.h": "894dc0198f7c1f01f1be82eae671efb6e2f6abaeeb6bd1bb25415b6114108874",
+  "tests/sampler_studio_test.c": "7e3632576b86822cfe6504360c45c55b6806372ebd863daaef1739874dcbddfe",
+  "build/dev/PTSamplerStudioTest": "1fca67c5f5bf47c6a3eb5887de6c101abb8a9147c13e233e65eb84361a8fc6ba"
+}

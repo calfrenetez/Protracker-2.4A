@@ -30,6 +30,15 @@ void pt_sampler_init(struct pt_sampler *,const struct pt_allocator *,size_t);
    Release also invalidates an expanded sample table; do not use the project
    afterwards except to release/replace its separately owned document. */
 void pt_sampler_release(struct pt_sampler *);
+/* Pin current immutable master revision. generation must equal sampler generation.
+ * Initial document-backed PCM is promoted once into a budgeted owned version;
+ * samples/precision are unchanged and no undo command is added. Failure leaves
+ * outputs/project unchanged. Release each successful pin exactly once. Sampler
+ * and allocator context must remain alive (not reinitialized) until final unpin,
+ * even after history/current ownership is released. */
+enum pt_edit_result pt_sampler_pin(struct pt_sampler *,struct pt_project *,unsigned slot,
+    unsigned generation,struct pt_pcm *,struct pt_sample_version **);
+void pt_sampler_unpin(struct pt_sample_version *);
 /* Names (at most 31 characters), volume 0..64 and finetune -8..7 share immutable
    PCM/marker storage with the current version and one chronological undo entry. */
 /* Append an empty classic-format slot, up to 255, without moving PCM. */

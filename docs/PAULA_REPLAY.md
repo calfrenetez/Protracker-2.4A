@@ -144,3 +144,11 @@ Play restart. This includes order-count and pattern-assignment changes, even
 when the sample/pattern byte sizes remain identical. Restart validates the new
 song and starts at the editor's selected position. Dynamic order mutation inside
 the running assembler engine is not used.
+
+
+Mono sample audition can now filter non-looping8/16/24-bit masters at other rates
+into a private classic-rate8-bit representation. Original PCM stays unchanged;
+workspace uses bounded Fast-first allocation and is released after the owned
+playback copy exists. Changed-rate loops and stereo remain refused. Native
+assertions for a half-rate preview have been added; consult the checkpoint for
+whether those assertions have executed, rather than treating a build as proof.

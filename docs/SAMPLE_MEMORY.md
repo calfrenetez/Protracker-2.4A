@@ -94,10 +94,10 @@ across an explicit Stop. Long-lived live voices remain pinned.
 
 Song playback still requires a classic-compatible four-channel project.
 Sample audition can now derive an 8-bit Paula representation of mono 8/16/24-bit
-masters at the classic rate. The source stays unchanged; an odd final byte is
+masters, including filtered conversion of non-looping samples to the classic rate. The source stays unchanged; an odd final byte is
 padded with silence for DMA, without changing the master's frame count. The
-existing classic length and loop restrictions still apply. Stereo/rate conversion
-and enhanced song dispatch have not been enabled by this preview change. AmiGUS cache eviction and
+existing classic length and loop restrictions still apply. Stereo conversion,
+rate-changing loop relocation and enhanced song dispatch are still unsupported. AmiGUS cache eviction and
 Studio streaming remain incomplete. Native render/stem helper allocations and
 remaining generic utility buffers also need their own allocation audit.
 
@@ -206,3 +206,20 @@ The upload test sweeps 8/16-bit, both source channels, both byte orders, padding
 settings and buffer sizes from one frame to eleven bytes. It compares every
 assembled device image against whole-sample conversion, checks staging canaries,
 and injects a failure on the second chunk followed by a full retry.
+
+### Filtered mono Paula preview
+
+`paula_preview.h` plans the derived frame count before allocation and refuses
+output longer than the classic131070-byte sample limit. The native audition path
+allocates only the planned int32 workspace from its bounded Fast-first allocator.
+For a changed rate it applies the existing integer antialias filter at source
+precision, then rounds/clips that workspace to8-bit. An odd last frame gets a
+silent DMA pad. Same-rate previews use direct precision conversion. The source
+buffer must not overlap the output; original PCM metadata and data stay intact.
+The replay owns its separate Chip copy before this workspace is released.
+
+This currently enables mono non-looping rate conversion only. A looped master at
+a different rate still returns the existing unsupported-preview message; there
+is no implicit loop rounding or loss. Stereo, slice playback and enhanced song
+routing are unchanged. Filtering is synchronous; long conversion responsiveness
+and target performance still require emulator/hardware validation.

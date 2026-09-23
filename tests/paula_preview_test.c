@@ -1,0 +1,29 @@
+#include <assert.h>
+#include <stdio.h>
+#include <string.h>
+#include "paula_preview.h"
+int main(void)
+{
+    int32_t master[8]={8388607,-8388608,32768,-32768,1,-1,65536,-65536},original[8];
+    int32_t data[32],reference[32];struct pt_pcm source={master,8,8,48000,1,24};
+    struct pt_pcm dest={data,32,0,24000,1,8},expected={reference,32,4,24000,1,24},from;
+    uint32_t n;memcpy(original,master,sizeof(master));
+    assert(pt_paula_preview_frames(&source,dest.rate,&n)==PT_PCM_OK && n==4);dest.frames=n;
+    assert(pt_paula_preview_prepare(&source,&dest)==PT_PCM_OK);
+    assert(pt_pcm_resample_filtered(&source,&expected)==PT_PCM_OK);
+    from=expected;expected.bits=8;assert(pt_pcm_convert(&from,&expected)==PT_PCM_OK);
+    assert(!memcmp(data,reference,n*sizeof(int32_t)) && !memcmp(master,original,sizeof(master)));
+    source.frames=5;source.rate=24000;
+    assert(pt_paula_preview_frames(&source,24000,&n)==PT_PCM_OK && n==6);dest.frames=n;
+    assert(pt_paula_preview_prepare(&source,&dest)==PT_PCM_OK && data[5]==0 && data[0]==127 && data[1]==-128);
+    assert(!memcmp(master,original,sizeof(master)));
+    dest.data=master;assert(pt_paula_preview_prepare(&source,&dest)==PT_PCM_ALIAS);
+    dest.data=data;dest.capacity=5;data[0]=42;
+    assert(pt_paula_preview_prepare(&source,&dest)==PT_PCM_CAPACITY && data[0]==42);
+    dest.capacity=32;source.channels=2;source.frames=4;
+    assert(pt_paula_preview_frames(&source,24000,&n)==PT_PCM_INVALID);
+    source.channels=1;source.frames=8;source.rate=1;
+    assert(pt_paula_preview_frames(&source,192000,&n)==PT_PCM_CAPACITY);
+    source.rate=192000;assert(pt_paula_preview_frames(&source,1,&n)==PT_PCM_CAPACITY);
+    puts("PAULA PREVIEW PASS: filtered mono rate conversion, precision, padding, bounds and master preservation");return 0;
+}

@@ -22,5 +22,20 @@ int main(void)
     for(i=0;i<81;++i)assert(a[i]==0);
     pt_scope_wave(&phase,a,data,18,0,16,4,7,5,0,0,0,125,1000);
     for(i=0;i<81;++i)assert(a[i]==0);
+    /* Compare loop stepping with direct indexing across arbitrary loop sizes,
+       short repeat words and steps larger than the loop. */
+    {
+        unsigned repeat,period,tick,j;
+        for(repeat=1;repeat<=16;++repeat)for(period=1;period<900;period+=31)for(tick=0;tick<40;tick+=3) {
+            uint64_t pos=((uint64_t)tick*3546895*5*65536)/(250UL*period);
+            uint64_t step=((uint64_t)3546895<<16)/(period*16000UL);
+            struct pt_scope_phase fresh={0};
+            pt_scope_wave(&fresh,a,data,18,0,16,1,repeat,1,0,tick,period,125,3546895);
+            for(j=0;j<81;++j,pos+=step) {
+                unsigned offset=pos<(16UL<<16)?(unsigned)(pos>>16):1+(unsigned)(((pos-(16UL<<16))%((uint64_t)repeat<<16))>>16);
+                assert(a[j]==data[offset]);
+            }
+        }
+    }
     return 0;
 }

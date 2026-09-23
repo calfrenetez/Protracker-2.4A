@@ -441,34 +441,50 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
 
 /* Small refresh region: CIA timing never waits for the display. Waveforms are
    current voice sample data scaled by current volume, not an audio capture. */
-void pt_editor_draw_playback(const struct pt_editor *e,struct pt_canvas *c,const uint8_t font[580])
+static void draw_scopes(const struct pt_editor *e,struct pt_canvas *c)
 {
-    unsigned i,j,first=pt_channels_page(&e->project->channels)*4;char s[32];
+    unsigned i,j,first=pt_channels_page(&e->project->channels)*4;
     for(i=0;i<4;++i) {
         int x=248+(int)i*102,previous=(PT_EDITOR_SCOPE_Y+PT_EDITOR_SCOPE_BOTTOM)/2;
         rect(c,x,PT_EDITOR_SCOPE_Y+1,81,PT_EDITOR_SCOPE_BOTTOM-PT_EDITOR_SCOPE_Y-2,BLACK);
         if(first+i>=e->project->channels.count)continue;
         for(j=0;j<81;++j) {
-            int y=(PT_EDITOR_SCOPE_Y+PT_EDITOR_SCOPE_BOTTOM)/2;
+            int y=(PT_EDITOR_SCOPE_Y+PT_EDITOR_SCOPE_BOTTOM)/2,top,bottom;
+            unsigned offset;uint8_t mask;
             if(e->playback.active && !first)y-=(int)e->playback.wave[i][j]*e->playback.volume[i]/512;
-            rect(c,x+(int)j,y<previous?y:previous,1,(y<previous?previous-y:y-previous)+1,YELLOW);previous=y;
+            top=y<previous?y:previous;bottom=y>previous?y:previous;
+            mask=(uint8_t)(128>>((x+(int)j)&7));offset=(unsigned)top*80+(x+j)/8;
+            /* The scope background is already black. Yellow uses just planes
+               zero and two; no generic four-plane rectangle per point. */
+            while(top++<=bottom) {c->planes[0][offset]|=mask;c->planes[2][offset]|=mask;offset+=80;}
+            previous=y;
         }
     }
-    panel(c,248,PT_EDITOR_BOTTOM_Y,168,21,GREY);
+}
+static void draw_playback_position(const struct pt_editor *e,struct pt_canvas *c,const uint8_t *font)
+{
+    char s[32];panel(c,248,PT_EDITOR_BOTTOM_Y,168,21,GREY);
     if(e->playback.active) {
         snprintf(s,sizeof(s),"POS %03u ROW %02u",e->playback.order,e->playback.row);small(c,font,253,497,s,NAVY);
     }
-    panel(c,14,214,46,17,MID);
+}
+static void draw_playback_tempo(const struct pt_editor *e,struct pt_canvas *c,const uint8_t *font)
+{
+    char s[32];panel(c,14,214,46,17,MID);
     snprintf(s,sizeof(s),"%02u",e->playback.active?e->playback.speed:e->project->speed);spaced(c,font,22,218,s,NAVY,14);
     rect(c,79,213,32,10,GREY);snprintf(s,sizeof(s),"%03u",e->playback.active?e->playback.bpm:e->project->bpm);spaced(c,font,79,213,s,NAVY,10);
     rect(c,598,223,32,10,GREY);spaced(c,font,598,223,e->playback.active?"CIA":"---",NAVY,10);
+}
+void pt_editor_draw_playback(const struct pt_editor *e,struct pt_canvas *c,const uint8_t font[580])
+{
+    draw_scopes(e,c);draw_playback_position(e,c,font);draw_playback_tempo(e,c,font);
 }
 
 unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,const uint8_t font[580],
                               struct pt_view_cache *old,struct pt_view_rect areas[PT_VIEW_DIRTY_MAX])
 {
     struct pt_project metadata;struct pt_sample sample;unsigned i,r,count=0,page=pt_channels_page(&e->project->channels);
-    size_t bytes=0;int full,playback_changed,selection_changed;struct pt_editor_selection selection;
+    size_t bytes=0;int full,playback_changed,selection_changed,scroll;struct pt_editor_selection selection;
     pt_editor_selection(e,&selection);
     selection_changed=memcmp(&selection,&old->selection,sizeof(selection))!=0;
     memcpy(&metadata,e->project,sizeof(metadata));metadata.channels.selected=0;
@@ -478,12 +494,24 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
         const struct pt_pcm *pcm=&e->project->samples[i].pcm;
         bytes+=(size_t)pcm->frames*pcm->channels*(pcm->bits/8);
     }
-    full=old->sample_ui!=e->sample_ui || (e->panel==1 && (old->note_details!=e->note_details || (e->note_details && (old->history_revision!=e->history.revision || old->row!=e->row || old->selected!=e->project->channels.selected)))) || ((e->panel>=4 || (e->panel==1 && e->note_details)) && (old->sample_ui!=e->sample_ui || old->sample_start!=e->sample_start || old->sample_end!=e->sample_end || old->sample_marking!=e->sample_marking || old->sample_anchor!=e->sample_anchor || old->sample_range_slot!=e->sample_range_slot)) || !old->valid || old->page!=page || old->pattern!=e->pattern || old->first_row!=e->first_row ||
+    full=old->sample_ui!=e->sample_ui || (e->panel==1 && (old->note_details!=e->note_details || (e->note_details && (old->history_revision!=e->history.revision || old->row!=e->row || old->selected!=e->project->channels.selected)))) || ((e->panel>=4 || (e->panel==1 && e->note_details)) && (old->sample_ui!=e->sample_ui || old->sample_start!=e->sample_start || old->sample_end!=e->sample_end || old->sample_marking!=e->sample_marking || old->sample_anchor!=e->sample_anchor || old->sample_range_slot!=e->sample_range_slot)) || !old->valid || old->page!=page || old->pattern!=e->pattern ||
          old->position!=e->position || old->sample!=e->sample || old->editing!=e->editing || old->panel!=e->panel || (e->panel==4 && old->selected!=e->project->channels.selected) || (e->panel==1 && old->selection.active!=selection.active) ||
          old->sample_bytes!=bytes || memcmp(&metadata,&old->project,sizeof(metadata)) || memcmp(&sample,&old->sample_meta,sizeof(sample));
     playback_changed=!old->valid || memcmp(&e->playback,&old->playback,sizeof(e->playback));
+    scroll=(int)e->first_row-(int)old->first_row;
     if(full) {pt_editor_draw(e,c,font);areas[count++]=(struct pt_view_rect){0,0,640,512};}
     else {
+        if(scroll && e->panel<5) {
+            /* Retain already rendered rows, including channel dividers.
+               The presenter copies the pattern rectangle only. */
+            int rows=PT_EDITOR_ROWS-(scroll<0?-scroll:scroll);
+            if(rows>0)for(i=0;i<4;++i) {
+                uint8_t *base=c->planes[i]+PT_EDITOR_PATTERN_Y*80;
+                memmove(base+(scroll<0?-scroll:0)*12*80,
+                        base+(scroll>0?scroll:0)*12*80,(size_t)rows*12*80);
+            }
+            areas[count++]=(struct pt_view_rect){0,PT_EDITOR_PATTERN_Y,640,PT_EDITOR_ROWS*12};
+        }
         if(e->panel==3 && old->new_channels!=e->new_channels) {
             char count_text[16];snprintf(count_text,sizeof(count_text),"%02u CH",e->new_channels);
             label(c,font,353,21,123,19,count_text,0);areas[count++]=(struct pt_view_rect){353,21,123,19};
@@ -495,8 +523,16 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
             draw_status(e,c,font,bytes);areas[count++]=(struct pt_view_rect){2,211,636,23};
         }
         if(playback_changed) {
-            pt_editor_draw_playback(e,c,font);
-            for(i=0;i<PT_VIEW_PLAYBACK_AREAS;++i)areas[count++]=pt_view_playback_areas[i];
+            if(old->playback.active!=e->playback.active || memcmp(old->playback.wave,e->playback.wave,sizeof(e->playback.wave)) ||
+               memcmp(old->playback.volume,e->playback.volume,sizeof(e->playback.volume))) {
+                draw_scopes(e,c);areas[count++]=pt_view_playback_areas[0];
+            }
+            if(old->playback.active!=e->playback.active || old->playback.row!=e->playback.row || old->playback.order!=e->playback.order) {
+                draw_playback_position(e,c,font);areas[count++]=pt_view_playback_areas[3];
+            }
+            if(old->playback.active!=e->playback.active || old->playback.bpm!=e->playback.bpm || old->playback.speed!=e->playback.speed) {
+                draw_playback_tempo(e,c,font);areas[count++]=pt_view_playback_areas[1];areas[count++]=pt_view_playback_areas[2];
+            }
         }
     }
     for(r=0;r<PT_EDITOR_ROWS;++r) {
@@ -504,12 +540,21 @@ unsigned pt_editor_draw_update(const struct pt_editor *e,struct pt_canvas *c,con
         memset(events,0,sizeof(events));
         for(i=0;i<4 && row<64;++i)if(page*4+i<e->project->channels.count)
             memcpy(&events[i],&e->project->events[(e->pattern*64+row)*e->project->channels.count+page*4+i],sizeof(events[i]));
-        changed=memcmp(events,old->events[r],sizeof(events))!=0;
+        int previous=(int)r+scroll;
+        changed=previous<0 || previous>=PT_EDITOR_ROWS ||
+            memcmp(events,old->events[previous],sizeof(events))!=0;
         if((row==old->row || row==e->row) && (old->row!=e->row || old->field!=e->field || old->selected!=e->project->channels.selected))changed=1;
         if(selection_changed)changed=1;
-        if(!full && changed && e->panel<5) {draw_pattern_row(e,c,font,r);areas[count++]=(struct pt_view_rect){3,PT_EDITOR_PATTERN_Y+r*12,635,12};}
-        memcpy(old->events[r],events,sizeof(events));
+        if(!full && changed && e->panel<5) {
+            draw_pattern_row(e,c,font,r);
+            areas[count++]=(struct pt_view_rect){3,PT_EDITOR_PATTERN_Y+r*12,635,12};
+        }
     }
+    /* Cache after comparing all rows: downward scrolling reads earlier rows. */
+    memset(old->events,0,sizeof(old->events));
+    for(r=0;r<PT_EDITOR_ROWS && r+e->first_row<64;++r)
+        for(i=0;i<4 && page*4+i<e->project->channels.count;++i)
+            old->events[r][i]=e->project->events[(e->pattern*64+r+e->first_row)*e->project->channels.count+page*4+i];
     memcpy(&old->project,&metadata,sizeof(metadata));memcpy(&old->sample_meta,&sample,sizeof(sample));
     memcpy(&old->playback,&e->playback,sizeof(e->playback));strcpy(old->status,e->status);
     old->note_details=e->note_details;old->history_revision=e->history.revision;

@@ -1,5 +1,6 @@
 /* Native enhanced editor and owned classic Paula replay integration. */
 #include <exec/memory.h>
+#include <devices/timer.h>
 #include <graphics/gfxbase.h>
 #include <graphics/modeid.h>
 #include <intuition/intuitionbase.h>
@@ -18,6 +19,7 @@
 #include "../platform/file_save.h"
 #include "pt_font.h"
 #include "paula.h"
+#include "present.h"
 #include "file_request.h"
 #include "../platform/render_file.h"
 #include "../platform/stem_file.h"
@@ -320,6 +322,9 @@ int main(int argc,char **argv)
     struct pt_paula audio={0};char load_path[1024]="",save_path[1024]="new-project.ptg",mod_path[1024]="new-module.mod",sample_path[1024]="",wav_path[1024]="new-sample.wav",svx_path[1024]="new-sample.iff",raw_path[1024]="new-sample.raw",raw_input[1024]="",chosen_path[1024];
     struct pt_allocator allocator={NULL,allocate,release};struct pt_document doc;
     struct pt_editor *editor=NULL;struct Screen *screen=NULL;struct Window *window=NULL;
+    struct MsgPort *clock_port=NULL;struct timerequest *clock_request=NULL;
+    int clock_open=0,clock_pending=0;unsigned frame_log=1,frames=0,peak_gap=0;
+    struct DateStamp frame_start,frame_last;
     struct BitMap bitmap;struct pt_canvas canvas;unsigned plane;uint8_t *pixels=NULL;int rc=20,running=1,redraw=1;
     memset(&bitmap,0,sizeof(bitmap));memset(&canvas,0,sizeof(canvas));pt_document_init(&doc,&allocator);
     if(argc<1 || argc>3) {puts("Usage: PT24GEdit [INPUT [NEW_OUTPUT]]\nDevelopment editor; classic Paula playback; existing output is never replaced.");goto done;}
@@ -355,26 +360,62 @@ int main(int argc,char **argv)
     window=OpenWindowTags(NULL,WA_CustomScreen,(ULONG)screen,WA_Left,0,WA_Top,0,
         WA_Width,640,WA_Height,512,WA_Borderless,TRUE,WA_Backdrop,TRUE,WA_Activate,TRUE,
         WA_RMBTrap,TRUE,WA_SimpleRefresh,TRUE,
-        WA_IDCMP,IDCMP_RAWKEY|IDCMP_MOUSEBUTTONS|IDCMP_REFRESHWINDOW|IDCMP_INACTIVEWINDOW|IDCMP_INTUITICKS,TAG_DONE);
+        WA_IDCMP,IDCMP_RAWKEY|IDCMP_MOUSEBUTTONS|IDCMP_REFRESHWINDOW|IDCMP_INACTIVEWINDOW,TAG_DONE);
     if(!window)goto done;
+    clock_port=CreateMsgPort();if(!clock_port)goto done;
+    clock_request=(struct timerequest *)CreateIORequest(clock_port,sizeof(*clock_request));
+    if(!clock_request || OpenDevice(TIMERNAME,UNIT_VBLANK,(struct IORequest *)clock_request,0))goto done;
+    clock_open=1;DateStamp(&frame_start);frame_last=frame_start;
     printf("EDITOR READY channels=%u patterns=%u bitmap_bytes=%lu history_bytes=%lu\n",
         doc.project.channels.count,doc.project.pattern_count,4UL*PT_VIEW_PLANE_BYTES,(unsigned long)sizeof(*editor));fflush(stdout);
     while(running) {
         struct IntuiMessage *message;
-        if(redraw) {
-            struct pt_view_rect areas[PT_VIEW_DIRTY_MAX];unsigned i,n;
-            n=pt_editor_draw_update(editor,&canvas,pt_font,&view_cache,areas);
-            for(i=0;i<n;++i) {
-                struct pt_view_rect *area=&areas[i];
-                for(plane=0;plane<4;++plane)CopyMem(canvas.planes[plane]+area->y*80,
-                    bitmap.Planes[plane]+area->y*80,area->height*80);
-                BltBitMapRastPort(&bitmap,area->x,area->y,window->RPort,area->x,area->y,area->width,area->height,0xc0);WaitBlit();
-            }
-            if(n) {WaitTOF();WaitTOF();}redraw=0;
-            printf("EDITOR FRAME row=%u channel=%u revision=%lu dirty=%u status=%s panel=%u\n",editor->row,
-                doc.project.channels.selected,(unsigned long)editor->history.revision,pt_editor_dirty(editor),editor->status,editor->panel);fflush(stdout);
+        /* Rearm before drawing so rendering consumes the interval instead of
+           adding to it. Never queue catch-up frames or busy-wait. */
+        if(!clock_pending) {
+            clock_request->tr_node.io_Command=TR_ADDREQUEST;
+            clock_request->tr_time.tv_secs=0;clock_request->tr_time.tv_micro=1;
+            SendIO((struct IORequest *)clock_request);clock_pending=1;
         }
-        WaitPort(window->UserPort);
+        if(redraw) {
+            struct pt_view_rect areas[PT_VIEW_DIRTY_MAX];unsigned n;
+            int scroll=(int)editor->first_row-(int)view_cache.first_row;
+            n=pt_editor_draw_update(editor,&canvas,pt_font,&view_cache,areas);
+            pt_native_present(&canvas,&bitmap,window->RPort,areas,n,scroll);
+            redraw=0;
+            if(n && editor->playback.active) {
+                struct DateStamp now;long span,gap;DateStamp(&now);
+                span=(now.ds_Days-frame_start.ds_Days)*4320000L+(now.ds_Minute-frame_start.ds_Minute)*3000L+now.ds_Tick-frame_start.ds_Tick;
+                gap=(now.ds_Days-frame_last.ds_Days)*4320000L+(now.ds_Minute-frame_last.ds_Minute)*3000L+now.ds_Tick-frame_last.ds_Tick;
+                if(frames && gap>0 && (unsigned long)gap>peak_gap)peak_gap=(unsigned)gap;
+                frame_last=now;++frames;
+                if(span>=100) {
+                    printf("EDITOR CADENCE frames=%u ticks50=%ld peak_gap_ticks50=%u\n",frames,span,peak_gap);fflush(stdout);
+                    frame_start=now;frames=peak_gap=0;
+                }
+            } else if(!editor->playback.active) {DateStamp(&frame_start);frame_last=frame_start;frames=peak_gap=0;}
+            if(frame_log) {
+                printf("EDITOR FRAME row=%u channel=%u revision=%lu dirty=%u status=%s panel=%u\n",editor->row,
+                    doc.project.channels.selected,(unsigned long)editor->history.revision,pt_editor_dirty(editor),editor->status,editor->panel);fflush(stdout);
+                frame_log=0;
+            }
+        }
+        Wait((1UL<<window->UserPort->mp_SigBit)|(1UL<<clock_port->mp_SigBit));
+        if(CheckIO((struct IORequest *)clock_request)) {
+            unsigned was_active=editor->playback.active,old_row=editor->playback.row;
+            WaitIO((struct IORequest *)clock_request);clock_pending=0;
+            pt_paula_poll(&audio,&editor->playback);pt_editor_follow_playback(editor);
+            if(was_active && !editor->playback.active)pt_editor_status(editor,"PLAYBACK ENDED - AUDIO RELEASED");
+            if(was_active || editor->playback.active)redraw=1;
+            if(was_active!=editor->playback.active || old_row!=editor->playback.row) {
+                frame_log=1;
+                printf("EDITOR REPLAY active=%u ticks=%lu order=%u pattern=%u row=%u bpm=%u speed=%u period=%u,%u,%u,%u volume=%u,%u,%u,%u\n",
+                    editor->playback.active,(unsigned long)editor->playback.ticks,editor->playback.order,editor->playback.pattern,
+                    editor->playback.row,editor->playback.bpm,editor->playback.speed,
+                    editor->playback.period[0],editor->playback.period[1],editor->playback.period[2],editor->playback.period[3],
+                    editor->playback.volume[0],editor->playback.volume[1],editor->playback.volume[2],editor->playback.volume[3]);fflush(stdout);
+            }
+        }
         while((message=(struct IntuiMessage *)GetMsg(window->UserPort))) {
             ULONG kind=message->Class;UWORD code=message->Code,qualifier=message->Qualifier;
             WORD mx=message->MouseX,my=message->MouseY;enum pt_editor_action action=PT_UI_NONE;
@@ -382,23 +423,6 @@ int main(int argc,char **argv)
             unsigned generation=editor->sampler.generation;
             unsigned long revision=editor->history.revision;const char *error=NULL;
             ReplyMsg((struct Message *)message);
-            if(kind==IDCMP_INTUITICKS) {
-                unsigned was_active=editor->playback.active;
-                pt_paula_poll(&audio,&editor->playback);
-                pt_editor_follow_playback(editor);
-                if(was_active && !editor->playback.active) {pt_editor_status(editor,"PLAYBACK ENDED - AUDIO RELEASED");redraw=1;}
-                if(was_active || editor->playback.active) {
-                    /* Use the shared dirty renderer so pattern rows and scope
-                       pixels are presented together and its cache stays valid. */
-                    redraw=1;
-                    printf("EDITOR REPLAY active=%u ticks=%lu order=%u pattern=%u row=%u bpm=%u speed=%u period=%u,%u,%u,%u volume=%u,%u,%u,%u\n",
-                        editor->playback.active,(unsigned long)editor->playback.ticks,editor->playback.order,editor->playback.pattern,
-                        editor->playback.row,editor->playback.bpm,editor->playback.speed,
-                        editor->playback.period[0],editor->playback.period[1],editor->playback.period[2],editor->playback.period[3],
-                        editor->playback.volume[0],editor->playback.volume[1],editor->playback.volume[2],editor->playback.volume[3]);fflush(stdout);
-                }
-                continue;
-            }
             if(kind==IDCMP_RAWKEY && (code&0x80 || code>=0x60))continue;
             editor->sampler.progress=conversion_progress;editor->sampler.progress_context=&conversion;
             if(kind==IDCMP_RAWKEY)action=pt_editor_key(editor,code,qualifier);
@@ -513,12 +537,16 @@ int main(int argc,char **argv)
                 }
             }
             if(action==PT_UI_QUIT)running=0;
-            redraw=1;
+            redraw=1;frame_log=1;
         }
     }
     puts("EDITOR EXIT clean");rc=0;
 done:
     pt_paula_stop(&audio);
+    if(clock_pending) {AbortIO((struct IORequest *)clock_request);WaitIO((struct IORequest *)clock_request);}
+    if(clock_open)CloseDevice((struct IORequest *)clock_request);
+    if(clock_request)DeleteIORequest((struct IORequest *)clock_request);
+    if(clock_port)DeleteMsgPort(clock_port);
     if(window)CloseWindow(window);
     if(screen)CloseScreen(screen);
     if(GfxBase) {WaitBlit();for(plane=0;plane<4;++plane)if(bitmap.Planes[plane])FreeRaster(bitmap.Planes[plane],640,512);}

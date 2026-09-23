@@ -733,6 +733,35 @@ int main(int argc,char **argv)
             for(p=0;p<4;++p) {assert(!memcmp(canvas.planes[p],incremental.planes[p],PT_VIEW_PLANE_BYTES));assert(!memcmp(canvas.planes[p],shown.planes[p],PT_VIEW_PLANE_BYTES));}
         }
         n=pt_editor_draw_update(e,&incremental,font,&cache,areas);assert(!n);
+        /* Both scroll directions, multi-row jumps and wrap must present the
+           same pixels as a full redraw, including the vacated cursor. */
+        for(step=0;step<260;++step) {
+            unsigned at=step%130;
+            e->panel=0;e->pattern=0;e->first_row=at<65?at%45:(129-at)%45;
+            e->row=e->first_row+(step%PT_EDITOR_ROWS);
+            if(step>=130) {
+                e->playback.active=step%17!=0;e->playback.row=step%64;
+                e->playback.speed=step%31?6:3;e->playback.bpm=step%23?125:150;
+                for(i=0;i<4;++i) {
+                    e->playback.volume[i]=(step+i)%65;
+                    for(j=0;j<81;++j)e->playback.wave[i][j]=(int8_t)((step*3+j*7+i*11)%256-128);
+                }
+            }
+            pt_editor_draw(e,&canvas,font);n=pt_editor_draw_update(e,&incremental,font,&cache,areas);
+            assert(n<=PT_VIEW_DIRTY_MAX);
+            if(step)for(j=0;j<n;++j)assert(areas[j].height<512);
+            for(j=0;j<n;++j) {
+                const struct pt_view_rect *a=&areas[j];
+                for(y=a->y;y<a->y+a->height;++y)for(x=a->x;x<a->x+a->width;++x)for(p=0;p<4;++p) {
+                    uint8_t mask=(uint8_t)(128>>(x&7));size_t offset=y*80+x/8;
+                    shown.planes[p][offset]=(shown.planes[p][offset]&~mask)|(incremental.planes[p][offset]&mask);
+                }
+            }
+            for(p=0;p<4;++p) {
+                assert(!memcmp(canvas.planes[p],incremental.planes[p],PT_VIEW_PLANE_BYTES));
+                assert(!memcmp(canvas.planes[p],shown.planes[p],PT_VIEW_PLANE_BYTES));
+            }
+        }
         /* Native ticks present only these shared rectangles, without a full
            editor redraw. Check glyph-edge erasure as tempo digits change. */
         e->playback.active=1;e->playback.bpm=125;pt_editor_draw(e,&incremental,font);

@@ -11,7 +11,7 @@ static inline void pt_scope_wave(struct pt_scope_phase *phase,int8_t wave[81],
     uint32_t loop,uint32_t repeat,uint32_t generation,uint32_t trigger_tick,
     uint32_t tick,unsigned period,unsigned bpm,uint32_t clock)
 {
-    uint64_t step,position,first=(uint64_t)length<<16,cycle=(uint64_t)repeat<<16;
+    uint64_t step,loop_step,position,first=(uint64_t)length<<16,cycle=(uint64_t)repeat<<16;
     unsigned j;
     for(j=0;j<81;++j)wave[j]=0;
     if(!generation || !length || !repeat || start>bytes || length>bytes-start ||
@@ -24,10 +24,20 @@ static inline void pt_scope_wave(struct pt_scope_phase *phase,int8_t wave[81],
     phase->position=position;phase->tick=tick;
     /* Fixed time window: pitch changes alter the spacing between wave peaks. */
     step=((uint64_t)clock<<16)/((uint32_t)period*16000);
-    for(j=0;j<81;++j,position+=step) {
+    loop_step=step%cycle;
+    for(j=0;j<81;++j) {
         uint32_t offset=position<first?start+(uint32_t)(position>>16):
-            loop+(uint32_t)(((position-first)%cycle)>>16);
+            loop+(uint32_t)((position-first)>>16);
         wave[j]=data[offset];
+        /* Divide once per voice, not once per scope pixel on a 68000.
+           Preserve the initial attack and arbitrary (non-power-of-two) loops. */
+        if(position<first) {
+            position+=step;
+            if(position>=first)position=first+(position-first)%cycle;
+        } else {
+            position+=loop_step;
+            if(position>=first+cycle)position-=cycle;
+        }
     }
 }
 #endif

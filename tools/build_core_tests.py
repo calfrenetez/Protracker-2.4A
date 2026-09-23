@@ -63,6 +63,8 @@ def main():
     inputs['PTPaulaTest'] += ['src/core/sample_cache.c', 'src/core/playback_pcm.c', 'src/core/pcm_filtered.c']
     inputs['PT24GEdit'] += ['src/core/sample_cache.c', 'src/core/playback_pcm.c']
     inputs['PTPlaybackPCMTest'] = ['tests/playback_pcm_test.c', 'src/core/playback_pcm.c', 'src/core/sample_cache.c', 'src/core/pcm.c']
+    inputs['PTPlaybackUploadTest'] = ['tests/playback_upload_test.c', 'src/core/playback_pcm.c', 'src/core/sample_cache.c', 'src/core/pcm.c']
+    inputs['PTPreviewPCMTest'] = ['tests/paula_preview_test.c', 'src/core/pcm_filtered.c', 'src/core/pcm.c']
     inputs['PTSampleCacheTest'] = ['tests/sample_cache_test.c', 'src/core/sample_cache.c']
     inputs['PTFlowTraceTest'] = ['tests/native_flow_trace.c', *inputs['PTPaulaTest'][1:]]
     inputs['PTPitchTraceTest'] = inputs['PTFlowTraceTest']

@@ -34,12 +34,16 @@ def main():
             for source, name in [(ROOT / 'build/dev/PTPaulaTest', 'PTPaulaTest'),
                                  (ROOT / 'build/dev/PTSampleCacheTest', 'PTSampleCacheTest'),
                                  (ROOT / 'build/dev/PTPlaybackPCMTest', 'PTPlaybackPCMTest'),
+                                 (ROOT / 'build/dev/PTPlaybackUploadTest', 'PTPlaybackUploadTest'),
+                                 (ROOT / 'build/dev/PTPreviewPCMTest', 'PTPreviewPCMTest'),
                                  (ROOT / 'evidence/baseline/mod.baseline', 'input.mod')]:
                 shutil.copyfile(source, run / name)
                 result[name + '_sha256'] = hashlib.sha256((run / name).read_bytes()).hexdigest()
             guest.launch.write_text('\n'.join(['FailAt 21', 'Stack 65536', 'CD ' + guest.device + run.name,
                                               'PTSampleCacheTest >cache.log', 'Echo $RC >cache.rc',
                                               'PTPlaybackPCMTest >pcm.log', 'Echo $RC >pcm.rc',
+                                              'PTPlaybackUploadTest >upload.log', 'Echo $RC >upload.rc',
+                                              'PTPreviewPCMTest >preview.log', 'Echo $RC >preview.rc',
                                               'PTPaulaTest input.mod >paula.log', 'Echo $RC >paula.rc']) + '\n')
             guest.start()
             end = time.monotonic() + 60
@@ -54,6 +58,11 @@ def main():
             (out / 'native-cache.log').write_text(cache_log)
             pcm_log = (run / 'pcm.log').read_text()
             (out / 'native-pcm.log').write_text(pcm_log)
+            for stem, marker in [('upload', 'PLAYBACK UPLOAD PASS:'), ('preview', 'PAULA PREVIEW PASS:')]:
+                text = (run / (stem + '.log')).read_text()
+                (out / ('native-' + stem + '.log')).write_text(text)
+                result[stem + '_returncode'] = (run / (stem + '.rc')).read_text().strip()
+                assert result[stem + '_returncode'] == '0' and marker in text, text
             result['pcm_returncode'] = (run / 'pcm.rc').read_text().strip()
             result['cache_returncode'] = (run / 'cache.rc').read_text().strip()
             result['returncode'] = (run / 'paula.rc').read_text().strip()

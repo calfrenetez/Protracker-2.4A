@@ -268,3 +268,14 @@ modal conversion UI: Escape cancels, refresh events are handled, editing input i
 not applied during conversion. This reuses the existing status/progress display;
 there is no layout change. Full interactive Escape/refresh acceptance and real
 A1200 latency remain distinct from callback-level tests and cross-compilation.
+
+## Repeatable native memory suite
+
+The native build now registers `PTPlaybackUploadTest` and `PTPreviewPCMTest`.
+`tools/shared_infra_paula.py` runs them with the existing cache, PCM and Paula
+regressions after shared emulator ownership/target checks. Every binary has its
+own return code, log and hash; upload/preview assertion markers are required.
+The first five-binary emulator pass is recorded in
+`evidence/enhanced-editor/native-memory-suite/`. Upload resources in that test
+are simulated descriptors, not AmiGUS RAM. This closes portable-core execution
+coverage on68030, not driver/hardware acceptance or interactive UI qualification.

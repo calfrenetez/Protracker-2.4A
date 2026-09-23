@@ -9,8 +9,9 @@
 #endif
 #include <stdint.h>
 #include "file_save.h"
+#include "document.h"
 
-struct output_file {const char *destination;char temporary[1536],directory[1500];int fd,owned;};
+struct output_file {const char *destination;char temporary[1536],directory[1500];int fd,owned;uint8_t buffer[4096];};
 static int begin(void *ctx)
 {
     struct output_file *f=ctx;unsigned i;size_t n=strlen(f->destination);
@@ -51,18 +52,26 @@ static int finish(void *ctx)
 #endif
     rc=close(f->fd);f->fd=-1;return rc==0;
 }
+static long read_retry(int fd,void *buffer,size_t n)
+{
+    long count;do {count=(long)read(fd,buffer,n);} while(count<0 && errno==EINTR);return count;
+}
 static int verify(void *ctx,const void *data,size_t n)
 {
-    struct output_file *f=ctx;FILE *file=fopen(f->temporary,"rb");uint8_t buffer[4096];
+    struct output_file *f=ctx;int fd=open(f->temporary,O_RDONLY);
     const uint8_t *bytes=data;size_t pos=0;int ok=1;
-    if(!file)return 0;
+    if(fd<0)return 0;
     while(pos<n) {
-        size_t count=n-pos;if(count>sizeof(buffer))count=sizeof(buffer);
-        if(fread(buffer,1,count,file)!=count || memcmp(bytes+pos,buffer,count)) {ok=0;break;}
+        size_t count=n-pos,have=0;if(count>sizeof(f->buffer))count=sizeof(f->buffer);
+        while(have<count) {
+            long got=read_retry(fd,f->buffer+have,count-have);
+            if(got<=0) {ok=0;break;}have+=(size_t)got;
+        }
+        if(!ok || memcmp(bytes+pos,f->buffer,count)) {ok=0;break;}
         pos+=count;
     }
-    if(ok && (fgetc(file)!=EOF || ferror(file)))ok=0;
-    if(fclose(file))ok=0;
+    if(ok && read_retry(fd,f->buffer,1)!=0)ok=0;
+    if(close(fd))ok=0;
     return ok;
 }
 static int publish(void *ctx)
@@ -92,12 +101,25 @@ static void abort_output(void *ctx)
         f->owned=0;
     }
 }
-enum pt_save_result pt_file_save_new(const char *path,const void *bytes,size_t n)
+static enum pt_save_result save_new(const char *path,const void *bytes,size_t n,struct output_file *f)
 {
-    struct output_file f;struct pt_save_ops ops;
+    struct pt_save_ops ops;
     if(!path || !*path || (!bytes && n))return PT_SAVE_BEGIN;
-    memset(&f,0,sizeof(f));f.destination=path;f.fd=-1;
-    ops.context=&f;ops.begin=begin;ops.write=write_bytes;ops.finish=finish;
+    memset(f,0,sizeof(*f));f->destination=path;f->fd=-1;
+    ops.context=f;ops.begin=begin;ops.write=write_bytes;ops.finish=finish;
     ops.verify=verify;ops.publish=publish;ops.abort=abort_output;
     return pt_safe_save(&ops,bytes,n);
+}
+
+enum pt_save_result pt_file_save_new(const char *path,const void *bytes,size_t n)
+{
+    struct output_file f;return save_new(path,bytes,n,&f);
+}
+enum pt_save_result pt_file_save_new_allocated(const char *path,const void *bytes,size_t n,const struct pt_allocator *a)
+{
+    struct output_file *f;enum pt_save_result result;
+    if(!a)return pt_file_save_new(path,bytes,n);
+    if(!path || !*path || strlen(path)>1400 || (!bytes && n) || !a->allocate || !a->release)return PT_SAVE_INVALID;
+    f=a->allocate(a->context,sizeof(*f));if(!f)return PT_SAVE_MEMORY;
+    result=save_new(path,bytes,n,f);a->release(a->context,f);return result;
 }

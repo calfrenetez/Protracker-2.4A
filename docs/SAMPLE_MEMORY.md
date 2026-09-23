@@ -417,3 +417,14 @@ the shared030 guest. They do not instrument C-library internal allocations, prov
 physical A1200 fragmentation behavior or measure whole-machine memory recovery.
 Fixture source arrays may be on the stack; no claim that every fixture byte is
 Fast RAM. Physical performance/listening and AmiGUS remain separate acceptance.
+
+## Project and sample save workspace
+
+Native PTG/MOD/WAV/raw/IFF saves now supply the shared bounded allocator for file
+paths/state and the4096-byte verification buffer. Descriptor reads replace stdio
+read-ahead and handle short reads/EINTR; expected bytes, exact EOF and no-replace
+publication remain required. Workspace refusal returns `PT_SAVE_MEMORY`, shown
+as SAVE: OUT OF MEMORY, with edits/destination preserved. Legacy callers retain
+a stack workspace. The file runtime itself is not claimed allocation-free.
+
+See `MEMORY_AUDIT.md` for remaining import/recent-file/runtime/display boundaries.

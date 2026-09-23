@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131268464 reserve=262144 flags=4
+FILE SAVE MEMORY PASS: exact multi-block bytes, allocation refusal, existing destination and zero-length preservation
+EXEC MEMORY PASS: 3 Fast allocations, zero owned bytes, budget refusal without Chip fallback

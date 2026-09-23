@@ -105,6 +105,7 @@ def main():
                                  ('PTExecStemsTest','PTStemFileTest','tests/native_exec_stems_test.c'),
                                  ('PTExecFailureTest','PTRenderMemoryTest','tests/native_exec_failures_test.c')]:
         inputs[target] = [source, *inputs[base][1:]]
+    inputs['PTExecSaveTest'] = ['tests/native_exec_save_test.c','src/platform/file_save.c','src/core/safe_save.c']
     flags = ['-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os',
              '-Wall', '-Wextra', '-Werror', '-Isrc/core', '-Ibuild/dev', *compiler_safety_flags(cc)]
     replay_source=out/'replay.s'

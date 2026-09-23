@@ -1,0 +1,9 @@
+file_save.c:15:12:begin	52	dynamic,bounded
+file_save.c:41:15:write_bytes	12	dynamic,bounded
+file_save.c:47:12:finish	8	dynamic,bounded
+file_save.c:59:12:verify	52	dynamic,bounded
+file_save.c:77:12:publish	28	dynamic,bounded
+file_save.c:92:13:abort_output	24	dynamic,bounded
+file_save.c:114:21:pt_file_save_new	7160	dynamic,bounded
+file_save.c:118:21:pt_file_save_new_allocated	40	dynamic,bounded
+file_save.c:104:28:save_new.part.0	68	dynamic,bounded

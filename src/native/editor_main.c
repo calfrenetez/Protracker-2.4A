@@ -101,8 +101,8 @@ static void save_sample(struct pt_editor *e,const char *path)
     if(!pcm || !pcm->frames || pt_wav_size(pcm,&n)!=PT_WAV_OK) {pt_editor_status(e,"WAV EXPORT: SELECT A NONEMPTY SAMPLE");return;}
     bytes=pt_master_allocate(&master_memory,n);if(!bytes) {pt_editor_status(e,"WAV EXPORT: OUT OF MEMORY");return;}
     if(pt_wav_encode(pcm,bytes,n,&w)!=PT_WAV_OK || w!=n) {pt_master_release(&master_memory,bytes);pt_editor_status(e,"WAV EXPORT FAILED - SAMPLE PRESERVED");return;}
-    result=pt_file_save_new(path,bytes,n);pt_master_release(&master_memory,bytes);
-    pt_editor_status(e,result==PT_SAVE_OK?"WAV EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED":"WAV EXPORT REFUSED OR FAILED - DESTINATION PRESERVED");
+    result=pt_file_save_new_allocated(path,bytes,n,&render_allocator);pt_master_release(&master_memory,bytes);
+    pt_editor_status(e,result==PT_SAVE_MEMORY?"SAVE: OUT OF MEMORY":result==PT_SAVE_OK?"WAV EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED":"WAV EXPORT REFUSED OR FAILED - DESTINATION PRESERVED");
     printf("EDITOR WAV result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
 }
 static int raw_eligible(struct pt_editor *e)
@@ -120,8 +120,8 @@ static void save_raw(struct pt_editor *e,const char *path)
     if(!raw_eligible(e) || pt_raw_size(&e->project->samples[e->sample-1].pcm,&e->raw_format,&n)!=PT_RAW_OK)return;
     bytes=pt_master_allocate(&master_memory,n);if(!bytes) {pt_editor_status(e,"RAW EXPORT: OUT OF MEMORY");return;}
     if(pt_raw_encode(&e->project->samples[e->sample-1].pcm,&e->raw_format,bytes,n,&w)!=PT_RAW_OK || n!=w) {pt_master_release(&master_memory,bytes);pt_editor_status(e,"RAW EXPORT FAILED - SAMPLE PRESERVED");return;}
-    result=pt_file_save_new(path,bytes,n);pt_master_release(&master_memory,bytes);
-    pt_editor_status(e,result==PT_SAVE_OK?"RAW PCM EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED":"RAW EXPORT REFUSED OR FAILED - DESTINATION PRESERVED");
+    result=pt_file_save_new_allocated(path,bytes,n,&render_allocator);pt_master_release(&master_memory,bytes);
+    pt_editor_status(e,result==PT_SAVE_MEMORY?"SAVE: OUT OF MEMORY":result==PT_SAVE_OK?"RAW PCM EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED":"RAW EXPORT REFUSED OR FAILED - DESTINATION PRESERVED");
     printf("EDITOR RAW result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
 }
 static int svx_eligible(struct pt_editor *e)
@@ -138,8 +138,8 @@ static void save_svx(struct pt_editor *e,const char *path)
     if(!svx_eligible(e) || pt_sampler_svx_size(sample,&n)!=PT_SVX_OK)return;
     bytes=pt_master_allocate(&master_memory,n);if(!bytes) {pt_editor_status(e,"IFF EXPORT: OUT OF MEMORY");return;}
     if(pt_sampler_svx_encode(sample,bytes,n,&w)!=PT_SVX_OK || w!=n) {pt_master_release(&master_memory,bytes);pt_editor_status(e,"IFF EXPORT FAILED - SAMPLE PRESERVED");return;}
-    result=pt_file_save_new(path,bytes,n);pt_master_release(&master_memory,bytes);
-    pt_editor_status(e,result==PT_SAVE_OK?"IFF EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED":"IFF EXPORT REFUSED OR FAILED - DESTINATION PRESERVED");
+    result=pt_file_save_new_allocated(path,bytes,n,&render_allocator);pt_master_release(&master_memory,bytes);
+    pt_editor_status(e,result==PT_SAVE_MEMORY?"SAVE: OUT OF MEMORY":result==PT_SAVE_OK?"IFF EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED":"IFF EXPORT REFUSED OR FAILED - DESTINATION PRESERVED");
     printf("EDITOR IFF result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
 }
 static void save(struct pt_editor *e,const char *path)
@@ -152,9 +152,9 @@ static void save(struct pt_editor *e,const char *path)
     if(pt_project_encode(e->project,bytes,n,&w)!=PT_PROJECT_OK || w!=n) {
         pt_master_release(&master_memory,bytes);pt_editor_status(e,"SAVE: ENCODE FAILED; CURRENT EDITS PRESERVED");return;
     }
-    result=pt_file_save_new(path,bytes,n);pt_master_release(&master_memory,bytes);
+    result=pt_file_save_new_allocated(path,bytes,n,&render_allocator);pt_master_release(&master_memory,bytes);
     if(result==PT_SAVE_OK) {pt_editor_saved(e);recent_success(e,path);}
-    else pt_editor_status(e,result==PT_SAVE_PUBLISH?"SAVE REFUSED: DESTINATION EXISTS OR CANNOT BE PUBLISHED":"SAVE FAILED: CURRENT EDITS AND DESTINATION PRESERVED");
+    else pt_editor_status(e,result==PT_SAVE_MEMORY?"SAVE: OUT OF MEMORY":result==PT_SAVE_PUBLISH?"SAVE REFUSED: DESTINATION EXISTS OR CANNOT BE PUBLISHED":"SAVE FAILED: CURRENT EDITS AND DESTINATION PRESERVED");
     printf("EDITOR SAVE result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
 }
 static int mod_eligible(struct pt_editor *e,struct pt_mod_export_report *r,unsigned round8)
@@ -181,9 +181,9 @@ static void save_mod(struct pt_editor *e,const char *path,size_t n,unsigned roun
     if((round8==2?pt_mod_export_tpdf8(e->project,bytes,n,&written):round8?pt_mod_export_round8(e->project,bytes,n,&written):pt_mod_export_direct(e->project,bytes,n,&written))!=PT_PROJECT_OK || written!=n) {
         pt_master_release(&master_memory,bytes);pt_editor_status(e,"MOD EXPORT FAILED - PROJECT PRESERVED");return;
     }
-    result=pt_file_save_new(path,bytes,n);pt_master_release(&master_memory,bytes);
+    result=pt_file_save_new_allocated(path,bytes,n,&render_allocator);pt_master_release(&master_memory,bytes);
     if(result==PT_SAVE_OK) {pt_editor_status(e,converted?(pt_editor_dirty(e)?"MOD CONVERTED - UNSAVED":"MOD CONVERTED - SOURCE KEPT"):(pt_editor_dirty(e)?"MOD EXPORTED AND VERIFIED - PROJECT STILL UNSAVED":"MOD EXPORTED AND VERIFIED"));recent_success(e,path);}
-    else pt_editor_status(e,result==PT_SAVE_PUBLISH?"MOD EXPORT REFUSED: DESTINATION EXISTS OR CANNOT BE PUBLISHED":"MOD EXPORT FAILED: PROJECT AND DESTINATION PRESERVED");
+    else pt_editor_status(e,result==PT_SAVE_MEMORY?"SAVE: OUT OF MEMORY":result==PT_SAVE_PUBLISH?"MOD EXPORT REFUSED: DESTINATION EXISTS OR CANNOT BE PUBLISHED":"MOD EXPORT FAILED: PROJECT AND DESTINATION PRESERVED");
     /* Export does not mark the richer project saved or consume undo history. */
     printf("EDITOR MOD result=%u dirty=%u dither=%s\n",result,pt_editor_dirty(e),round8==2?"tpdf-fixed":"none");fflush(stdout);
 }

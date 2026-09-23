@@ -2,7 +2,7 @@
 #define PT_SAFE_SAVE_H
 #include <stddef.h>
 enum pt_save_result { PT_SAVE_OK, PT_SAVE_INVALID, PT_SAVE_BEGIN, PT_SAVE_WRITE,
-                      PT_SAVE_FINISH, PT_SAVE_VERIFY, PT_SAVE_PUBLISH };
+                      PT_SAVE_FINISH, PT_SAVE_VERIFY, PT_SAVE_PUBLISH, PT_SAVE_MEMORY };
 /* Adapter owns one uniquely created staging file on the destination filesystem.
  * Only publish may change the destination. It must atomically publish or fail
  * with the prior destination intact. abort removes only this operation's temp.

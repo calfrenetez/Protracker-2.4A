@@ -7,6 +7,7 @@ INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     group=parser.add_mutually_exclusive_group()
+    group.add_argument('--input-memory',choices=['import','recent'],help='Run one import or recent-file memory fixture')
     group.add_argument('--exec-memory',choices=['bounce','stems','failures','save'],help='Run one native Exec-backed memory fixture')
     group.add_argument('--stems-only',action='store_true',help='Run the allocated stem export test only')
     group.add_argument('--wav-only',action='store_true',help='Run the allocated WAV export test only')
@@ -33,12 +34,15 @@ def main():
                ('exec-failures','PTExecFailureTest','RENDER MEMORY PASS:'),
                ('exec-save','PTExecSaveTest','FILE SAVE MEMORY PASS:')]
         cases=[cases[7+['bounce','stems','failures','save'].index(args.exec_memory)]] if args.exec_memory else cases[4:5] if args.stems_only else cases[3:4] if args.wav_only else cases[6:7] if args.memory_failures_only else cases[5:6] if args.bounce_only else cases[2:5] if args.allocated_only else cases[:2]
+        if args.input_memory:
+            cases=[('import','PTFileLoadTest','FILE LOAD PASS')] if args.input_memory=='import' else [('recent','PTRecentMemoryTest','RECENT MEMORY PASS')]
+            result['scope']='shared030 native import/recent file checks'
         try:
             commands=['FailAt 21','Stack 65536']
             for name,binary,marker in cases:
                 sub=run/name;sub.mkdir();shutil.copyfile(ROOT/'build/dev'/binary,sub/binary)
                 result[binary+'_sha256']=hashlib.sha256((sub/binary).read_bytes()).hexdigest()
-                commands+=['CD '+guest.device+run.name+'/'+name,binary+' '+guest.device+run.name+'/'+name+' >test.log','Echo $RC >test.rc']
+                commands+=['CD '+guest.device+run.name+'/'+name,binary+' '+guest.device+run.name+'/'+name+('/recent' if args.input_memory=='recent' else '')+' >test.log','Echo $RC >test.rc']
             commands+=['Echo done >'+guest.device+run.name+'/done']
             guest.launch.write_text('\n'.join(commands)+'\n');guest.start()
             deadline=time.monotonic()+90

@@ -1,0 +1,2 @@
+assertion "f" failed: file "tests/file_load_test.c", line 11, function: write_source
+Program aborted

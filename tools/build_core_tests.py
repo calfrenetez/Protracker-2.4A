@@ -106,6 +106,7 @@ def main():
                                  ('PTExecFailureTest','PTRenderMemoryTest','tests/native_exec_failures_test.c')]:
         inputs[target] = [source, *inputs[base][1:]]
     inputs['PT24GEdit'].append('src/platform/file_load.c')
+    inputs['PTRecentMemoryTest'] = ['tests/recent_memory_test.c','src/platform/recent_file.c','src/core/recent.c']
     inputs['PTFileLoadTest'] = ['tests/file_load_test.c','src/platform/file_load.c']
     inputs['PTExecSaveTest'] = ['tests/native_exec_save_test.c','src/platform/file_save.c','src/core/safe_save.c']
     flags = ['-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os',

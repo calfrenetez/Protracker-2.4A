@@ -29,12 +29,14 @@
 #include "../platform/recent_file.h"
 struct IntuitionBase *IntuitionBase;
 struct GfxBase *GfxBase;
+static struct pt_master_memory master_memory;
+static const struct pt_allocator render_allocator={&master_memory,pt_master_allocate,pt_master_release};
 static struct pt_recent recent_projects;
 static char recent_override[PT_RECENT_PATH];
 static const char *recent_prefix="ENVARC:ProTracker2.4G/recent";
 static void recent_persist(struct pt_editor *e)
 {
-    int ok=pt_recent_file_save(recent_prefix,&recent_projects);
+    int ok=pt_recent_file_save_allocated(recent_prefix,&recent_projects,&render_allocator);
     if(!ok)pt_editor_status(e,"RECENTS: SESSION ONLY");
     ++e->sample_ui;
     printf("EDITOR RECENT saved=%u count=%u\n",ok,recent_projects.count);fflush(stdout);
@@ -46,8 +48,6 @@ static void recent_success(struct pt_editor *e,const char *path)
     if(ok && pt_recent_remember(&recent_projects,resolved)==PT_RECENT_OK)recent_persist(e);
     else {pt_editor_status(e,"RECENT PATH UNAVAILABLE");puts("EDITOR RECENT path unavailable");fflush(stdout);}
 }
-static struct pt_master_memory master_memory;
-static const struct pt_allocator render_allocator={&master_memory,pt_master_allocate,pt_master_release};
 static int editor_init_memory(struct pt_editor *e,struct pt_project *p)
 {
     struct pt_allocator a={&master_memory,pt_master_allocate,pt_master_release};
@@ -345,7 +345,7 @@ int main(int argc,char **argv)
         LONG override=GetVar((STRPTR)"PT24G_RECENT_PREFIX",(STRPTR)recent_override,sizeof(recent_override),GVF_GLOBAL_ONLY);BPTR directory;
         if(override>0 && override<(LONG)sizeof(recent_override))recent_prefix=recent_override;
         else {directory=CreateDir((STRPTR)"ENVARC:ProTracker2.4G");if(directory)UnLock(directory);}
-        pt_recent_file_load(recent_prefix,&recent_projects);editor->recent=&recent_projects;
+        pt_recent_file_load_allocated(recent_prefix,&recent_projects,&render_allocator);editor->recent=&recent_projects;
         printf("EDITOR RECENT loaded=%u prefix=%s\n",recent_projects.count,recent_prefix);fflush(stdout);
         if(argc>1)recent_success(editor,argv[1]);
     }

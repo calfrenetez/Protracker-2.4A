@@ -435,3 +435,10 @@ returns ownership only after complete reads, exact EOF and successful close;
 allocation failure or changing length releases the temporary data before decode.
 Short reads and EINTR are handled. Same-size concurrent modification is not
 detected, and runtime descriptor allocation remains outside this accounting.
+
+Recent-files persistence now accepts a required allocator in its allocated APIs;
+the native editor supplies the shared master pool for its two lists, record and
+path workspace. Every exit releases this workspace. Descriptor I/O retries short
+transfers/EINTR; alternating generations and verification retain the last valid
+list on an interrupted write. Allocation refusal leaves caller/persisted data
+unchanged. Legacy APIs retain heap allocation; no whole-runtime claim is made.

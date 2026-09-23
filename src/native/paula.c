@@ -245,7 +245,7 @@ const char *pt_paula_audition_progress(struct pt_paula *a,const struct pt_projec
     conversion=pt_paula_preview_prepare_progress(&selected[0].pcm,&preview,progress,context);
     if(conversion!=PT_PCM_OK) {
         pt_master_release(&workspace,converted);
-        return conversion==PT_PCM_CANCELLED?"SAMPLE: PREVIEW CANCELLED; MASTER PRESERVED":"SAMPLE: PLAYBACK CONVERSION FAILED";
+        return conversion==PT_PCM_CANCELLED?"PREVIEW CANCELLED":"SAMPLE: PLAYBACK CONVERSION FAILED";
     }
     selected[0].pcm=preview;
     if(channels==2) {

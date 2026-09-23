@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "scope": "interactive emulator preview cancellation",
+  "guest_directory": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/preview-cancel-ui-1790199004892567000",
+  "PT24GEdit_sha256": "074c0e401cce16b009ef7c6d25f8a6f85cc779b7e0f06d4cec177f1d1a5ce5ab",
+  "input.ptg_sha256": "bded9af952d9fbb167b6114174b4bb75bbfd8106f2ca691d882c2e16a72d2464",
+  "audio_after_cancel": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=666\tsndbuf_status=0",
+  "exact_master_project_preserved": true,
+  "isolated_recents": true,
+  "recent_environment_restored": true,
+  "returncode": "0",
+  "audio_after_exit": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=333\tsndbuf_status=0",
+  "run_files_cleaned": true
+}

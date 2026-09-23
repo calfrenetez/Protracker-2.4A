@@ -69,11 +69,11 @@ def main():
             tap(0x57)  # F8 sample audition.
             wait(lambda: 'EDITOR CONVERSION progress=' in log()[offset:])
             tap(0x45)  # Escape is handled inside the modal conversion callback.
-            wait(lambda: 'PREVIEW CANCELLED; MASTER PRESERVED' in log()[offset:])
+            wait(lambda: 'PREVIEW CANCELLED' in log()[offset:])
             assert 'EDITOR CONVERSION cancelled=' in log()[offset:]
             result['audio_after_cancel'] = guest.command('GET_AUDIO_STATE')
             assert all('ch%d_dma=0' % i in result['audio_after_cancel'].split('\t') for i in range(4))
-            assert 'revision=0 dirty=0 status=SAMPLE: PREVIEW CANCELLED' in log()[offset:]
+            assert 'revision=0 dirty=0 status=PREVIEW CANCELLED' in log()[offset:]
             time.sleep(.8)
             guest.command('SCREENSHOT', out / 'cancelled.png')
             tap(0x21, True)

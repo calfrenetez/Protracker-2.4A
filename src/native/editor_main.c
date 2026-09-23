@@ -206,7 +206,7 @@ static int conversion_progress(void *context,uint32_t done,uint32_t total)
     if(cancelled) {printf("EDITOR CONVERSION cancelled=%lu/%lu\n",(unsigned long)done,(unsigned long)total);fflush(stdout);return 0;}
     if(!done || percent/5!=ui->percent/5 || !ui->cache->valid) {
         struct pt_view_rect areas[PT_VIEW_DIRTY_MAX];unsigned i,n,plane;char status[76];
-        snprintf(status,sizeof(status),"FILTERING %u%% - ESC CANCEL; ORIGINAL SAMPLE PRESERVED",percent);
+        snprintf(status,sizeof(status),"FILTERING %u%% - ESC CANCEL",percent);
         pt_editor_status(ui->editor,status);n=pt_editor_draw_update(ui->editor,ui->canvas,pt_font,ui->cache,areas);
         for(i=0;i<n;++i) {
             struct pt_view_rect *area=&areas[i];

@@ -296,3 +296,9 @@ corruption is absent in the committed build while functional cancellation and
 project-byte identity pass in both. The uncommitted display changes remain
 preserved and unqualified. Long cancellation/status text is crowded in both;
 visual readability and deliberate refresh testing remain open.
+
+The compact preview messages are qualified in
+`evidence/enhanced-editor/status-fit/`: cancellation fits the existing single-line
+status area on a committed-source candidate. No master or layout behavior changed.
+Progress wording fits the same character bound but was not separately captured.
+Uncommitted display work and deliberate refresh-event acceptance remain open.

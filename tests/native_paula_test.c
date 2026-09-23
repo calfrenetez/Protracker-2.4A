@@ -118,7 +118,15 @@ int main(int argc,char **argv)
         for(i=0;i<20;++i) {Delay(1);pt_paula_poll(&a,&state);if(state.period[0])break;}
         CHECK(state.active && state.period[0]==428 && a.sample_bytes[0]==4);
         CHECK(!memcmp(values,original,sizeof(values)) && master->pcm.rate==PT_CLASSIC_RATE*2 && master->pcm.frames==5);
+        pt_paula_stop(&a);
+        master->pcm.rate=4000;master->loop=PT_LOOP_FORWARD;master->loop_start=1;master->loop_end=5;
+        CHECK(!pt_paula_audition(&a,&doc.project,1,428));
+        for(i=0;i<20;++i) {Delay(1);pt_paula_poll(&a,&state);if(state.period[0])break;}
+        CHECK(state.active && state.period[0]==428 && a.sample_bytes[0]==12);
+        CHECK(a.data[46]==0 && a.data[47]==1 && a.data[48]==0 && a.data[49]==4);
+        CHECK(!memcmp(values,original,sizeof(values)) && master->pcm.rate==4000 && master->loop_start==1 && master->loop_end==5);
         pt_paula_stop(&a);doc.project.samples[0]=saved;
+        puts("PREVIEW LOOP PASS: derived loop word alignment preserves master endpoints");
         puts("PREVIEW RATE PASS: filtered derived half-rate preview preserves true24 master");
         puts("PREVIEW PCM PASS: 24-bit master auditions via rounded/padded 8-bit Chip copy without changing master bytes or precision");
     }

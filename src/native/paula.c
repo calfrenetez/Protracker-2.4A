@@ -226,11 +226,14 @@ const char *pt_paula_audition(struct pt_paula *a,const struct pt_project *p,unsi
     if(p->channels.track[p->channels.selected].route!=PT_PAULA)return "SAMPLE: SELECT A PAULA CHANNEL FOR THIS BACKEND";
     selected=p->samples[sample-1];
     if(selected.pcm.channels!=1 ||
-       (selected.pcm.rate!=PT_CLASSIC_RATE && selected.loop!=PT_LOOP_NONE) ||
        (selected.loop!=PT_LOOP_NONE && selected.loop!=PT_LOOP_FORWARD))
         return "SAMPLE: FORMAT NEEDS ENHANCED PREVIEW OR CONVERSION";
     if(pt_paula_preview_frames(&selected.pcm,PT_CLASSIC_RATE,&frames)!=PT_PCM_OK)
         return "SAMPLE: INVALID OR TOO LARGE FOR PAULA PREVIEW";
+    if(selected.loop==PT_LOOP_FORWARD &&
+       pt_paula_preview_loop(&selected.pcm,PT_CLASSIC_RATE,selected.loop_start,selected.loop_end,
+                             &selected.loop_start,&selected.loop_end)!=PT_PCM_OK)
+        return "SAMPLE: LOOP TOO SHORT FOR PAULA PREVIEW";
     pt_master_memory_init(&workspace);
     preview=selected.pcm;preview.rate=PT_CLASSIC_RATE;preview.frames=frames;
     preview.bits=8;preview.capacity=frames;preview.data=NULL;

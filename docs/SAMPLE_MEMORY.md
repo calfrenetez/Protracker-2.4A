@@ -96,8 +96,7 @@ Song playback still requires a classic-compatible four-channel project.
 Sample audition can now derive an 8-bit Paula representation of mono 8/16/24-bit
 masters, including filtered conversion of non-looping samples to the classic rate. The source stays unchanged; an odd final byte is
 padded with silence for DMA, without changing the master's frame count. The
-existing classic length and loop restrictions still apply. Stereo conversion,
-rate-changing loop relocation and enhanced song dispatch are still unsupported. AmiGUS cache eviction and
+existing classic length and loop restrictions still apply. Stereo conversion and enhanced song dispatch are still unsupported. AmiGUS cache eviction and
 Studio streaming remain incomplete. Native render/stem helper allocations and
 remaining generic utility buffers also need their own allocation audit.
 
@@ -218,8 +217,20 @@ silent DMA pad. Same-rate previews use direct precision conversion. The source
 buffer must not overlap the output; original PCM metadata and data stay intact.
 The replay owns its separate Chip copy before this workspace is released.
 
-This currently enables mono non-looping rate conversion only. A looped master at
-a different rate still returns the existing unsupported-preview message; there
-is no implicit loop rounding or loss. Stereo, slice playback and enhanced song
-routing are unchanged. Filtering is synchronous; long conversion responsiveness
+Mono forward loops now use the derived-only mapping policy below. Stereo,
+slice playback and enhanced song routing are unchanged. Filtering is synchronous; long conversion responsiveness
 and target performance still require emulator/hardware validation.
+
+### Forward-loop preview coordinates
+
+Forward-loop start/end are scaled from master rate to preview rate, then rounded
+to the nearest two-frame Paula DMA boundary; exact ties advance. The end is
+clamped to the last complete word of real converted audio, excluding any silent
+padding. Collapsed loops and loops of only one word are refused explicitly.
+This applies to same-rate odd endpoints as well as rate conversion. All mapping
+is performed on the local playback sample; stored loop points never change.
+
+The conversion filter still uses the source endpoint extension used by existing
+offline conversion. It is not loop-aware filtering or a promise of seamless
+loop audio. Ping-pong/crossfade loops remain unsupported in this Paula bridge.
+Listening and physical performance validation remain separate requirements.

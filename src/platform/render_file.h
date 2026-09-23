@@ -15,7 +15,10 @@ enum pt_render_file_result { PT_RENDER_FILE_OK, PT_RENDER_FILE_INVALID,
  * and also runs before opening the staged file for verification. */
 enum pt_render_file_result pt_render_file_new(const char *,const struct pt_project *,
     const struct pt_render_options *,pt_render_progress,void *,struct pt_render_report *,enum pt_render_result *detail);
-/* Optional bounded allocator for render working state; NULL uses legacy stack. */
+/* Optional bounded allocator for file paths/state, WAV header, encoding/compare
+ * buffers and render working state; NULL uses legacy stack. File workspace stays
+ * alive alongside one render workspace; both count against the caller budget.
+ * All allocations are released on every return, after owned-file cleanup. */
 enum pt_render_file_result pt_render_file_new_allocated(const char *,const struct pt_project *,
     const struct pt_render_options *,pt_render_progress,void *,struct pt_render_report *,enum pt_render_result *detail,const struct pt_allocator *);
 #endif

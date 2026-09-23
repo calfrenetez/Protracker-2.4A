@@ -6,11 +6,11 @@
 static unsigned allocated_live,allocation_refused;
 static void *file_allocate(void *ctx,size_t bytes)
 {
-    void *p;(void)ctx;assert(!allocated_live && bytes && bytes<65536);
+    void *p;(void)ctx;assert(allocated_live<2 && bytes && bytes<65536);
     if(allocation_refused)return NULL;
-    p=malloc(bytes);assert(p);allocated_live=1;memset(p,0xa5,bytes);return p;
+    p=malloc(bytes);assert(p);++allocated_live;memset(p,0xa5,bytes);return p;
 }
-static void file_release(void *ctx,void *p) {(void)ctx;assert(allocated_live==1 && p);allocated_live=0;free(p);}
+static void file_release(void *ctx,void *p) {(void)ctx;assert(allocated_live && p);--allocated_live;free(p);}
 static const struct pt_allocator file_allocator={NULL,file_allocate,file_release};
 #ifdef PT_TEST_STEMS
 static enum pt_render_file_result allocated_file(const char *path,const struct pt_project *p,

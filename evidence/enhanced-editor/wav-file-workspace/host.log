@@ -1,0 +1,18 @@
+RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt/truncated/trailing staging refusal and cleanup
+RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt/truncated/trailing staging refusal and cleanup
+RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt/truncated/trailing staging refusal and cleanup
+.STEMS first export phase=0 detail=0
+STEMS files PASS: grouped PCM equals individual export, global tempo alignment, cancellation, preflight refusal and no-replace race
+STEMS first export phase=0 detail=0
+STEMS files PASS: grouped PCM equals individual export, global tempo alignment, cancellation, preflight refusal and no-replace race
+.
+----------------------------------------------------------------------
+Ran 2 tests in 17.350s
+
+OK
+RENDER MEMORY PASS: all4 WAV and10 stem allocation failures preserve masters/reports and remove owned staging
+.
+----------------------------------------------------------------------
+Ran 1 test in 2.668s
+
+OK

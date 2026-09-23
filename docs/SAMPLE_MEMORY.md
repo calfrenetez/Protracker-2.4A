@@ -308,16 +308,15 @@ Uncommitted display work and deliberate refresh-event acceptance remain open.
 The offline mixer already reads immutable master PCM directly, retaining true
 24-bit values for 24-bit WAV output. Render and stem file verification now uses
 bounded descriptor reads instead of stdio read-ahead buffers. Each comparison
-uses at most1536 stack bytes; encoding uses a separate1536-byte stack block and
+uses at most1536 bytes; encoding uses a separate1536-byte block and
 the mixer emits at most256 stereo frames. Short reads and EINTR are handled;
 truncated, corrupted or trailing bytes prevent publication. Master PCM is never
 replaced by these output blocks. Stem export reuses the same verification path.
 
 This removes the verification stream's implicit stdio buffer, not all library
-allocation. File descriptors/runtime internals and stack placement still require
-native memory/performance qualification. These stack blocks are not claimed to
-be explicitly allocated Fast RAM. A caller-owned bounded Fast workspace for
-render state remains open, as does live24-bit Studio transport to AmiGUS.
+allocation. File descriptors/runtime internals and remaining stack placement still require
+native memory/performance qualification. The allocated render and WAV workspaces
+are described below; live24-bit Studio transport to AmiGUS remains open.
 
 ## Allocator-backed reference renderer
 
@@ -336,7 +335,7 @@ Sequential measure/render/verify calls allocate and release their workspace
 independently; memory can become unavailable between passes, in which case
 owned file staging is removed and the old destination/master is preserved.
 
-File/path/encoding/comparison buffers and helper locals still use stack space;
+Stem batch-level path/report arrays and helper locals still use stack space;
 this does not qualify every stack byte or runtime file-descriptor allocation.
 Bounce also uses the allocated measurement/stream path described below.
 Live Studio streaming is not implemented by these offline APIs.
@@ -364,11 +363,26 @@ redo. Cancellation and exact24-bit project round trips remain covered.
 
 ## Export memory-pressure rollback
 
-The allocation-failure regression covers all three WAV workspace allocations
-(measure, render, verification) and all eight for a two-stem export (two global
-preflights, then measure/render/verification for each stem). Every refusal must
+The allocation-failure regression covers all four WAV workspace allocations
+(file, measure, render, verification) and all ten for a two-stem export (two global
+preflights, then file/measure/render/verification for each stem). Every refusal must
 report `PT_RENDER_MEMORY`, release working allocations, preserve the output
 report and all master/project bytes, and remove every owned staging candidate.
 Failures in the second stem also remove the already verified first staged stem.
 This tests the allocated export path, not real Fast-RAM fragmentation or filesystem
 hardware failure. Existing destination/race and cancellation tests remain separate.
+
+## Native WAV file workspace
+
+Allocated WAV export now owns its path/state,44-byte WAV header,1536-byte encoded
+PCM block and separate1536-byte verification block in one caller allocation.
+Native WAV and each stem's WAV therefore use the same bounded Fast master pool
+as the mixer. The file block remains pinned for the synchronous export while a
+measurement/mixer block is temporarily live. Both compete with masters/undo;
+no fallback to Chip occurs on Fast-equipped systems. Failure cleans owned files
+before releasing file storage. Source master PCM remains untouched.
+
+The portable legacy WAV entry retains a stack workspace; NULL allocator retains
+that behavior. Stem batch-level path/report arrays and runtime library internals
+still need a separate audit. This change does not claim all stack use eliminated
+or qualify live Studio/card transport.

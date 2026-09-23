@@ -1,0 +1,7 @@
+render_file.c:19:13:le32	0	static
+render_file.c:56:12:bytes	48	dynamic,bounded
+render_file.c:76:12:sink	68	dynamic,bounded
+render_file.c:84:12:progress	28	dynamic,bounded
+render_file.c:100:35:file_new	144	dynamic,bounded
+render_file.c:142:28:pt_render_file_new	6244	dynamic,bounded
+render_file.c:147:28:pt_render_file_new_allocated	76	dynamic,bounded

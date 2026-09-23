@@ -7,6 +7,7 @@ INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     group=parser.add_mutually_exclusive_group()
+    group.add_argument('--wav-only',action='store_true',help='Run the allocated WAV export test only')
     group.add_argument('--memory-failures-only',action='store_true',help='Run all WAV/stem allocation-failure checks only')
     group.add_argument('--bounce-only',action='store_true',help='Run the sample-bounce allocation regression only')
     group.add_argument('--allocated-only',action='store_true',help='Run the three allocated-path tests instead of the two legacy file tests')
@@ -25,7 +26,7 @@ def main():
                ('stems-allocated','PTStemFileAllocTest','STEMS files PASS:'),
                ('bounce','PTBounceTest','BOUNCE PASS:'),
                ('memory-failures','PTRenderMemoryTest','RENDER MEMORY PASS:')]
-        cases=cases[6:] if args.memory_failures_only else cases[5:6] if args.bounce_only else cases[2:5] if args.allocated_only else cases[:2]
+        cases=cases[3:4] if args.wav_only else cases[6:] if args.memory_failures_only else cases[5:6] if args.bounce_only else cases[2:5] if args.allocated_only else cases[:2]
         try:
             commands=['FailAt 21','Stack 65536']
             for name,binary,marker in cases:

@@ -61,3 +61,26 @@ void pt_playback_pcm_invalidate(struct pt_sample_cache *c,uint32_t identity)
     unsigned i;for(i=0;i<PT_CACHE_SLOTS;++i)if(c->entry[i].data && (c->entry[i].key>>8)==identity)
         pt_cache_invalidate(c,c->entry[i].key);
 }
+
+enum pt_cache_result pt_playback_pcm_upload(struct pt_sample_cache *c,const struct pt_pcm *p,
+    uint32_t identity,uint64_t version,const struct pt_playback_format *f,
+    uint8_t *staging,size_t capacity,void *context,
+    int (*upload)(void *,void *,const uint8_t *,size_t),struct pt_cache_lease *out)
+{
+    size_t bytes;struct pt_cache_lease lease;enum pt_cache_result result;enum pt_pcm_result r;
+    if(!c || !out || !upload)return PT_CACHE_INVALID;
+    r=pt_playback_pcm_size(p,f,&bytes);
+    if(r!=PT_PCM_OK || !bytes)return r==PT_PCM_CAPACITY?PT_CACHE_CAPACITY:PT_CACHE_INVALID;
+    result=pt_cache_take(c,key(identity,f),version,bytes,&lease);
+    if(result==PT_CACHE_LOAD) {
+        r=pt_playback_pcm_pack(p,f,staging,capacity);
+        if(r!=PT_PCM_OK) {
+            pt_cache_unpin(c,lease);return r==PT_PCM_CAPACITY?PT_CACHE_CAPACITY:PT_CACHE_INVALID;
+        }
+        if(!upload(context,pt_cache_data(c,lease),staging,bytes) || !pt_cache_publish(c,lease)) {
+            pt_cache_unpin(c,lease);return PT_CACHE_TRANSFER;
+        }
+    }
+    if(result==PT_CACHE_LOAD || result==PT_CACHE_HIT)*out=lease;
+    return result;
+}

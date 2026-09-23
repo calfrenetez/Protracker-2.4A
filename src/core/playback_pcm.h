@@ -14,5 +14,17 @@ enum pt_pcm_result pt_playback_pcm_pack(const struct pt_pcm *,const struct pt_pl
  * edit (including undo). Format fields are encoded in the cache key. */
 enum pt_cache_result pt_playback_pcm_acquire(struct pt_sample_cache *,const struct pt_pcm *,
     uint32_t identity,uint64_t version,const struct pt_playback_format *,struct pt_cache_lease *);
+/* Device-backed pool: allocate/release manage opaque non-NULL resource handles,
+ * not CPU-writable PCM. upload must synchronously consume staging and return 1
+ * only after completion. No callback reentry; never call from an interrupt.
+ * Caller supplies bounded Fast-RAM staging, disjoint from master and resources.
+ * HIT requires no staging/upload. Failed LOAD releases unpublished resources;
+ * eviction may already have occurred. Output lease changes only on success.
+ * Keep the lease pinned until every device voice using the resource has stopped.
+ * This is a driver seam, not an AmiGUS register or library implementation. */
+enum pt_cache_result pt_playback_pcm_upload(struct pt_sample_cache *,const struct pt_pcm *,
+    uint32_t identity,uint64_t version,const struct pt_playback_format *,
+    uint8_t *staging,size_t capacity,void *context,
+    int (*upload)(void *,void *resource,const uint8_t *,size_t),struct pt_cache_lease *);
 void pt_playback_pcm_invalidate(struct pt_sample_cache *,uint32_t identity);
 #endif

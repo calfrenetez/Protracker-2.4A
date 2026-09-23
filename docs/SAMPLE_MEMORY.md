@@ -149,3 +149,36 @@ then releases that workspace after the owned playback snapshot is built. Its
 master remains 16/24-bit for saving, editing and Studio use. The 8/16-bit packer
 and cache helper are available for an AmiGUS adapter, but card allocation/upload
 and live Studio streaming remain separate unfinished work.
+
+## Device upload boundary
+
+`pt_playback_pcm_upload` now uses a dedicated device-backed cache pool whose
+allocator returns opaque resource descriptors, not CPU-writable sample pointers.
+The caller supplies bounded Fast-RAM staging. Conversion reads the master;
+a synchronous driver callback transfers the bytes. Only a completed transfer is
+published. Failed or partial transfers release unpublished device resources and
+leave the output lease unchanged. Cache hits skip staging and upload. Capacity
+or conversion failures may follow eviction, but never discard master samples.
+
+A successful lease must stay pinned until all device voices using it have
+stopped. Master invalidation retires old pinned resources; they cannot be reused
+for new triggers and are freed on final release. Clear cannot free active leases.
+The driver must account for actual device allocation constraints and provide a
+stable non-NULL descriptor even if the card address is zero. Each pool belongs
+to one backend/session; it must be cleared and all voices released before its
+driver context is destroyed. Callbacks are synchronous and must not reenter the
+cache or mutate the master. Asynchronous DMA upload needs a separate completion
+protocol and is not enabled by this interface.
+
+The pinned `amigus_lib.sfd` provides discovery, reservation and interrupt calls;
+it does **not** provide sample allocation/upload functions. No invented library
+vectors or hardware registers have been added. This implemented driver boundary
+and its fake-device tests are preparation for AmiGUS integration, not a working
+AmiGUS allocator, uploader, voice dispatcher or physical acceptance. The native
+editor does not call this device upload path yet.
+
+`tests/playback_upload_test.c` verifies descriptor-backed transfers, 24-bit master
+preservation, cache hits without transfer, format coexistence, pinned invalidation,
+shortage refusal, partial-transfer failure/retry, staging capacity and alias
+refusal. Host tests use ASan/UBSan; cross-building does not mean execution on the
+emulator or a card.

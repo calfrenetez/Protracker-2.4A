@@ -217,11 +217,11 @@ void pt_paula_poll(struct pt_paula *a,struct pt_playback *s)
     }
 }
 
-const char *pt_paula_audition(struct pt_paula *a,const struct pt_project *p,unsigned sample,unsigned period)
+const char *pt_paula_audition_progress(struct pt_paula *a,const struct pt_project *p,unsigned sample,unsigned period,pt_pcm_progress progress,void *context)
 {
     struct pt_project q;struct pt_event *events;uint16_t order=0;
     struct pt_sample selected[2];const char *error;struct pt_master_memory workspace;
-    uint32_t frames,i;unsigned channels,ch;int32_t *converted=NULL;struct pt_pcm preview;
+    uint32_t frames,i;unsigned channels,ch;int32_t *converted=NULL;struct pt_pcm preview;enum pt_pcm_result conversion;
     if(!sample || sample>p->sample_count || period<113 || period>856)return "SAMPLE: SELECT A VALID SAMPLE";
     if(p->channels.track[p->channels.selected].route!=PT_PAULA)return "SAMPLE: SELECT A PAULA CHANNEL FOR THIS BACKEND";
     selected[0]=p->samples[sample-1];
@@ -242,8 +242,10 @@ const char *pt_paula_audition(struct pt_paula *a,const struct pt_project *p,unsi
         if(!converted)return "SAMPLE: OUT OF CONVERSION MEMORY";
         preview.data=converted;
     }
-    if(pt_paula_preview_prepare(&selected[0].pcm,&preview)!=PT_PCM_OK) {
-        pt_master_release(&workspace,converted);return "SAMPLE: PLAYBACK CONVERSION FAILED";
+    conversion=pt_paula_preview_prepare_progress(&selected[0].pcm,&preview,progress,context);
+    if(conversion!=PT_PCM_OK) {
+        pt_master_release(&workspace,converted);
+        return conversion==PT_PCM_CANCELLED?"SAMPLE: PREVIEW CANCELLED; MASTER PRESERVED":"SAMPLE: PLAYBACK CONVERSION FAILED";
     }
     selected[0].pcm=preview;
     if(channels==2) {
@@ -269,3 +271,6 @@ const char *pt_paula_audition(struct pt_paula *a,const struct pt_project *p,unsi
     if(!error)a->mode=2;
     return error;
 }
+
+const char *pt_paula_audition(struct pt_paula *a,const struct pt_project *p,unsigned sample,unsigned period)
+{return pt_paula_audition_progress(a,p,sample,period,NULL,NULL);}

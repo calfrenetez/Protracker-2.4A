@@ -2,6 +2,25 @@
 #include <stdio.h>
 #include <string.h>
 #include "paula_preview.h"
+struct cancellation {unsigned calls,stop;};
+static int progress(void *ctx,uint32_t done,uint32_t total)
+{struct cancellation *c=ctx;assert(done<=total);return ++c->calls<c->stop;}
+static void cancellation_tests(void)
+{
+    int32_t source_data[128],original[128],data[256];unsigned i;struct cancellation c;
+    struct pt_pcm source={source_data,128,64,24000,2,24},out={data,256,128,48000,2,8};
+    for(i=0;i<128;++i)source_data[i]=(int32_t)i*1000;
+    memcpy(original,source_data,sizeof(original));data[0]=12345;
+    c=(struct cancellation){0,1};
+    assert(pt_paula_preview_prepare_progress(&source,&out,progress,&c)==PT_PCM_CANCELLED && data[0]==12345);
+    c=(struct cancellation){0,2};
+    assert(pt_paula_preview_prepare_progress(&source,&out,progress,&c)==PT_PCM_CANCELLED && c.calls==2);
+    assert(!memcmp(original,source_data,sizeof(original)));
+    c=(struct cancellation){0,999};assert(pt_paula_preview_prepare_progress(&source,&out,progress,&c)==PT_PCM_OK);
+    out.rate=source.rate;out.frames=source.frames;c=(struct cancellation){0,2};
+    assert(pt_paula_preview_prepare_progress(&source,&out,progress,&c)==PT_PCM_CANCELLED);
+    assert(!memcmp(original,source_data,sizeof(original)));
+}
 int main(void)
 {
     int32_t master[8]={8388607,-8388608,32768,-32768,1,-1,65536,-65536},original[8];
@@ -49,5 +68,5 @@ int main(void)
     source.channels=1;source.frames=8;source.rate=1;
     assert(pt_paula_preview_frames(&source,192000,&n)==PT_PCM_CAPACITY);
     source.rate=192000;assert(pt_paula_preview_frames(&source,1,&n)==PT_PCM_CAPACITY);
-    puts("PAULA PREVIEW PASS: filtered mono rate conversion, precision, padding, bounds and master preservation");return 0;
+    cancellation_tests();puts("PAULA PREVIEW PASS: filtered mono rate conversion, precision, padding, bounds and master preservation");return 0;
 }

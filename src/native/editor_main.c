@@ -448,7 +448,7 @@ int main(int argc,char **argv)
                 pt_editor_status(editor,error?error:action==PT_UI_PATTERN?"PLAYING PATTERN - PAULA CIA":"PLAYING SONG - PAULA CIA");
             }
             if(action==PT_UI_AUDITION) {
-                error=pt_paula_audition(&audio,editor->project,editor->sample,856U>>editor->octave);
+                error=pt_paula_audition_progress(&audio,editor->project,editor->sample,856U>>editor->octave,conversion_progress,&conversion);
                 pt_editor_status(editor,error?error:"SAMPLE AUDITION - PAULA; STOP TO RELEASE");
             }
             if(action==PT_UI_STOP) {pt_paula_stop(&audio);pt_editor_status(editor,"STOPPED - AUDIO RELEASED");}

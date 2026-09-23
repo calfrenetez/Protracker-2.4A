@@ -14,6 +14,8 @@ static void release(void *ctx,void *p) {(void)ctx;free(p);}
 extern volatile uint8_t pt_replay_voices[];
 static uintptr_t voice_start(void)
 {return ((uintptr_t)pt_replay_voices[4]<<24)|((uintptr_t)pt_replay_voices[5]<<16)|((uintptr_t)pt_replay_voices[6]<<8)|pt_replay_voices[7];}
+static int cancel_preview(void *ctx,uint32_t done,uint32_t total)
+{unsigned *calls=ctx;(void)done;(void)total;++*calls;return 0;}
 static ULONG dummy_interrupt(void) {return 0;}
 #define CHECK(c) do {if(!(c)) {printf("FAIL line %u: %s\n",__LINE__,#c);goto done;}}while(0)
 static int claim(struct Library *resource,unsigned bit,struct Interrupt *server)
@@ -143,6 +145,17 @@ int main(int argc,char **argv)
         CHECK(a.sample_data[0][2]==1 && a.sample_data[1][2]==255 && !a.sample_data[0][3] && !a.sample_data[1][3]);
         CHECK(!memcmp(values,original,sizeof(values)) && master->pcm.channels==2 && master->pcm.bits==24 && master->pcm.frames==3);
         pt_paula_stop(&a);doc.project.samples[0]=saved;
+        {unsigned calls=0;
+            CHECK(pt_paula_audition_progress(&a,&doc.project,1,428,cancel_preview,&calls)!=NULL && calls==1 && !a.started);
+            CHECK(!pt_paula_audition(&a,&doc.project,1,428));
+            {uint8_t *owned=a.data;uint64_t generation=a.cache_version;
+                calls=0;
+                CHECK(pt_paula_audition_progress(&a,&doc.project,1,428,cancel_preview,&calls)!=NULL && calls==1);
+                CHECK(a.started && a.data==owned && a.cache_version==generation);
+            }
+            pt_paula_stop(&a);
+            puts("PREVIEW CANCEL PASS: cancelled staging never starts or replaces playback");
+        }
         puts("PREVIEW STEREO PASS: separate left/right Chip copies preserve interleaved true24 master");
     }
     doc.project.events[0].kind=PT_NOTE_OFF;doc.project.events[0].pitch=0;

@@ -218,8 +218,8 @@ buffer must not overlap the output; original PCM metadata and data stay intact.
 The replay owns its separate Chip copy before this workspace is released.
 
 Forward loops use the derived-only mapping policy below.
-Slice playback and enhanced song routing are unchanged. Filtering is synchronous; long conversion responsiveness
-and target performance still require emulator/hardware validation.
+Slice playback and enhanced song routing are unchanged. Filtering is synchronous with progress/cancellation callbacks; target latency
+and performance still require separate validation.
 
 ### Forward-loop preview coordinates
 
@@ -251,3 +251,20 @@ Each channel gets its own owned Chip playback copy; allocation failure follows
 the existing replay cleanup path. The Fast workspace is freed after replay owns
 its snapshot. This is sample audition only, not mixed16-channel song routing.
 Pinning, explicit Stop and no-stealing backend ownership remain unchanged.
+
+### Preview cancellation
+
+`pt_paula_preview_prepare_progress` forwards progress to the existing bounded
+filter callback, with cancellation before conversion and before successful
+completion. Same-rate conversion polls at entry/completion; it does not claim
+interruptible per-sample precision conversion. Validation scans and the final
+stereo split also remain synchronous. Callbacks must not edit the master or
+reenter playback APIs. Partial staging is disposable, never a valid playback copy.
+
+`pt_paula_audition_progress` releases workspace on cancellation and reports it
+without starting new replay or replacing currently active playback. The original
+non-cancellable API remains as a wrapper. The native editor connects the existing
+modal conversion UI: Escape cancels, refresh events are handled, editing input is
+not applied during conversion. This reuses the existing status/progress display;
+there is no layout change. Full interactive Escape/refresh acceptance and real
+A1200 latency remain distinct from callback-level tests and cross-compilation.

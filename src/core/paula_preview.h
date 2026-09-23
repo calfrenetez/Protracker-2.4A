@@ -31,8 +31,8 @@ static inline enum pt_pcm_result pt_paula_preview_loop(const struct pt_pcm *sour
     if(a>=b || b-a<=2)return PT_PCM_CAPACITY;
     *mapped_start=a;*mapped_end=b;return PT_PCM_OK;
 }
-static inline enum pt_pcm_result pt_paula_preview_prepare(const struct pt_pcm *source,
-                                                         struct pt_pcm *out)
+static inline enum pt_pcm_result pt_paula_preview_prepare_progress(const struct pt_pcm *source,
+    struct pt_pcm *out,pt_pcm_progress progress,void *context)
 {
     struct pt_pcm converted,from;uint32_t padded,n;enum pt_pcm_result r;
     uintptr_t a,b;size_t src_bytes,dst_bytes;
@@ -45,14 +45,21 @@ static inline enum pt_pcm_result pt_paula_preview_prepare(const struct pt_pcm *s
     if(dst_bytes && (!out->data || (a<=b?b-a<src_bytes:a-b<dst_bytes)))return PT_PCM_ALIAS;
     r=pt_pcm_resampled_frames(source,out->rate,&n);if(r!=PT_PCM_OK)return r;
     converted=*out;converted.frames=n;
-    if(source->rate==out->rate)r=pt_pcm_convert(source,&converted);
+    if(source->rate==out->rate) {
+        if(progress && !progress(context,0,n))return PT_PCM_CANCELLED;
+        r=pt_pcm_convert(source,&converted);
+    }
     else {
         converted.bits=source->bits;
-        r=pt_pcm_resample_filtered(source,&converted);
+        r=pt_pcm_resample_filtered_progress(source,&converted,progress,context);
         if(r==PT_PCM_OK) {from=converted;converted.bits=8;r=pt_pcm_convert(&from,&converted);}
     }
     if(r!=PT_PCM_OK)return r;
     if(padded>n) {unsigned ch;for(ch=0;ch<source->channels;++ch)out->data[(size_t)n*source->channels+ch]=0;}
+    if(progress && !progress(context,n,n))return PT_PCM_CANCELLED;
     return PT_PCM_OK;
 }
+/* Cancellation may leave partial staging; never publish it or overwrite master. */
+static inline enum pt_pcm_result pt_paula_preview_prepare(const struct pt_pcm *source,struct pt_pcm *out)
+{return pt_paula_preview_prepare_progress(source,out,NULL,NULL);}
 #endif

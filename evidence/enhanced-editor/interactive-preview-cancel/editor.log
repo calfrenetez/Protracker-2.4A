@@ -1,0 +1,14 @@
+EDITOR RECENT loaded=0 prefix=Dev:Tests/preview-cancel-ui-1790197756414462000/recent
+EDITOR RECENT saved=1 count=1
+EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=104120
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO panel=5
+EDITOR CONVERSION progress=0
+EDITOR CONVERSION cancelled=5/4144
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLE: PREVIEW CANCELLED; MASTER PRESERVED panel=5
+EDITOR RECENT saved=1 count=2
+EDITOR SAVE result=0 dirty=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PROJECT SAVED AND VERIFIED panel=5
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SETTINGS CLOSED panel=0
+EDITOR PREPARED rows=64 pointer_updates=2
+EDITOR EXIT clean

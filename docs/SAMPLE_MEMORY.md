@@ -279,3 +279,13 @@ The first five-binary emulator pass is recorded in
 `evidence/enhanced-editor/native-memory-suite/`. Upload resources in that test
 are simulated descriptors, not AmiGUS RAM. This closes portable-core execution
 coverage on68030, not driver/hardware acceptance or interactive UI qualification.
+
+## Interactive cancellation evidence
+
+`evidence/enhanced-editor/interactive-preview-cancel/` records keyboard Escape
+cancellation, unchanged project bytes after saving, stopped DMA and normal exit
+on the shared030 emulator. The repeatable fixture uses stereo24-bit192000Hz PCM.
+The runner isolates recent-file storage and verifies restoration of its prior
+ENV override. The initial run's default-recents side effect is documented.
+Captured display artefacts are unresolved; this is functional cancellation
+acceptance, not clean visual/refresh acceptance or a release candidate.

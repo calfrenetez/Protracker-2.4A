@@ -1,0 +1,11 @@
+{
+  "scope": "later completion after 90-second observer timeout",
+  "deadline_passed": false,
+  "all_guest_tests_completed": true,
+  "render_returncode": "0",
+  "stems_returncode": "0",
+  "core-allocated_returncode": "0",
+  "render-allocated_returncode": "0",
+  "stems-allocated_returncode": "0",
+  "guarded_cleanup": true
+}

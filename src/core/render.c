@@ -1,5 +1,6 @@
 #include "render.h"
 #include "pitch.h"
+#include "document.h"
 #include <string.h>
 struct tremolo {uint8_t command,phase,control;};
 struct sample_range {uint32_t start,length,trigger_start,trigger_length,trigger_frames;uint8_t offset,loaded,retrigger;};
@@ -183,18 +184,31 @@ static void report_run(const struct run *r,unsigned end,uint64_t clips,struct pt
     struct pt_render_report result;memset(&result,0,sizeof(result));result.frames=r->frames;
     result.ticks=r->timeline.flow.ticks;result.clipped=clips;result.end=end==1?PT_RENDER_F00:end==3?PT_RENDER_ROW_EXIT:PT_RENDER_POSITION_RETURN;*out=result;
 }
-enum pt_render_result pt_render_measure(const struct pt_project *p,const struct pt_render_options *o,
-                                       pt_render_progress progress,void *ctx,struct pt_render_report *out)
+static enum pt_render_result measure(const struct pt_project *p,const struct pt_render_options *o,
+                                       pt_render_progress progress,void *ctx,struct pt_render_report *out,struct run *r)
 {
-    struct run r;struct pt_tick_span span;unsigned end;enum pt_render_result result=preflight(p,o);
+    struct pt_tick_span span;unsigned end;enum pt_render_result result=preflight(p,o);
     if(!out)return PT_RENDER_INVALID;
     if(result!=PT_RENDER_OK)return result;
-    if(!start_run(&r,p,o))return PT_RENDER_INVALID;
+    if(!start_run(r,p,o))return PT_RENDER_INVALID;
     do {
-        if(progress && !progress(ctx,PT_RENDER_ANALYSE,r.timeline.flow.ticks,r.frames))return PT_RENDER_CANCELLED;
-        result=next_tick(&r,&span,&end);if(result!=PT_RENDER_OK)return result;
+        if(progress && !progress(ctx,PT_RENDER_ANALYSE,r->timeline.flow.ticks,r->frames))return PT_RENDER_CANCELLED;
+        result=next_tick(r,&span,&end);if(result!=PT_RENDER_OK)return result;
     } while(!end);
-    report_run(&r,end,0,out);return PT_RENDER_OK;
+    report_run(r,end,0,out);return PT_RENDER_OK;
+}
+enum pt_render_result pt_render_measure(const struct pt_project *p,const struct pt_render_options *o,
+    pt_render_progress progress,void *ctx,struct pt_render_report *out)
+{
+    struct run r;return measure(p,o,progress,ctx,out,&r);
+}
+enum pt_render_result pt_render_measure_allocated(const struct pt_project *p,const struct pt_render_options *o,
+    pt_render_progress progress,void *ctx,struct pt_render_report *out,const struct pt_allocator *a)
+{
+    struct run *r;enum pt_render_result result;
+    if(!a || !a->allocate || !a->release || !out)return PT_RENDER_INVALID;
+    r=a->allocate(a->context,sizeof(*r));if(!r)return PT_RENDER_MEMORY;
+    result=measure(p,o,progress,ctx,out,r);a->release(a->context,r);return result;
 }
 static uint64_t step(const struct pt_sample *s,unsigned period,unsigned rate)
 {return ((uint64_t)s->pcm.rate*428<<32)/((uint64_t)rate*period);}
@@ -304,35 +318,57 @@ static enum pt_render_result commands(const struct pt_project *p,const struct pt
     }
     return PT_RENDER_OK;
 }
-enum pt_render_result pt_render_stream(const struct pt_project *p,const struct pt_render_options *o,
+struct workspace {
+    struct run run;struct pt_voice voice[16];uint32_t gain[16][2];
+    uint8_t instrument[16],volume[16],velocity[16],output_volume[16];
+    struct tremolo trem[16];int32_t samples[512];
+};
+static enum pt_render_result stream(const struct pt_project *p,const struct pt_render_options *o,
                                       pt_render_sink sink,void *sink_ctx,pt_render_progress progress,void *progress_ctx,
-                                      struct pt_render_report *out)
+                                      struct pt_render_report *out,struct workspace *w)
 {
-    struct pt_render_report planned;struct run r;struct pt_tick_span span;
-    struct pt_voice voice[16];uint32_t gain[16][2];uint8_t instrument[16]={0},volume[16]={0},velocity[16],output_volume[16]={0};
-    struct tremolo trem[16]={{0}};
-    int32_t samples[512];struct pt_pcm block;uint64_t offset=0,clips=0;unsigned end;enum pt_render_result result;
+    struct pt_render_report planned;struct run *r=&w->run;struct pt_tick_span span;
+    struct pt_voice *voice=w->voice;uint32_t (*gain)[2]=w->gain;
+    uint8_t *instrument=w->instrument,*volume=w->volume,*velocity=w->velocity,*output_volume=w->output_volume;
+    struct tremolo *trem=w->trem;
+    struct pt_pcm block;uint64_t offset=0,clips=0;unsigned end;enum pt_render_result result;
     if(!sink || !out)return PT_RENDER_INVALID;
-    result=pt_render_measure(p,o,progress,progress_ctx,&planned);if(result!=PT_RENDER_OK)return result;
-    if(!start_run(&r,p,o))return PT_RENDER_INVALID;
-    memset(voice,0,sizeof(voice));memset(velocity,127,sizeof(velocity));memset(&block,0,sizeof(block));
-    block.data=samples;block.capacity=512;block.channels=2;block.bits=o->bits;block.rate=o->rate;
+    result=measure(p,o,progress,progress_ctx,&planned,r);if(result!=PT_RENDER_OK)return result;
+    memset(w,0,sizeof(*w));
+    if(!start_run(r,p,o))return PT_RENDER_INVALID;
+    memset(velocity,127,sizeof(w->velocity));memset(&block,0,sizeof(block));
+    block.data=w->samples;block.capacity=512;block.channels=2;block.bits=o->bits;block.rate=o->rate;
     do {
-        uint32_t remaining;result=next_tick(&r,&span,&end);if(result!=PT_RENDER_OK)return result;remaining=span.frames;
+        uint32_t remaining;result=next_tick(r,&span,&end);if(result!=PT_RENDER_OK)return result;remaining=span.frames;
         gains_for(p,o,voice,output_volume,velocity,gain);
         while(remaining) {
             uint64_t clipped;
-            if(progress && !progress(progress_ctx,PT_RENDER_MIX,r.timeline.flow.ticks,offset))return PT_RENDER_CANCELLED;
+            if(progress && !progress(progress_ctx,PT_RENDER_MIX,r->timeline.flow.ticks,offset))return PT_RENDER_CANCELLED;
             block.frames=remaining>256?256:remaining;
             if(pt_voice_mix(voice,p->channels.count,gain,&block,&clipped)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
-            if(r.emit) {
+            if(r->emit) {
                 if(!sink(sink_ctx,&block,offset))return PT_RENDER_SINK;
                 clips+=clipped;offset+=block.frames;
             }
             remaining-=block.frames;
         }
-        if(!end) {result=commands(p,o,&r.timeline.flow,&r.pitch,r.range,r.offset_tracks,voice,instrument,volume,velocity,output_volume,trem);if(result!=PT_RENDER_OK)return result;}
+        if(!end) {result=commands(p,o,&r->timeline.flow,&r->pitch,r->range,r->offset_tracks,voice,instrument,volume,velocity,output_volume,trem);if(result!=PT_RENDER_OK)return result;}
     } while(!end);
-    if(offset!=planned.frames || r.timeline.flow.ticks!=planned.ticks)return PT_RENDER_INVALID;
-    report_run(&r,end,clips,out);return PT_RENDER_OK;
+    if(offset!=planned.frames || r->timeline.flow.ticks!=planned.ticks)return PT_RENDER_INVALID;
+    report_run(r,end,clips,out);return PT_RENDER_OK;
+}
+
+enum pt_render_result pt_render_stream(const struct pt_project *p,const struct pt_render_options *o,
+    pt_render_sink sink,void *sink_ctx,pt_render_progress progress,void *progress_ctx,struct pt_render_report *out)
+{
+    struct workspace w;return stream(p,o,sink,sink_ctx,progress,progress_ctx,out,&w);
+}
+enum pt_render_result pt_render_stream_allocated(const struct pt_project *p,const struct pt_render_options *o,
+    pt_render_sink sink,void *sink_ctx,pt_render_progress progress,void *progress_ctx,
+    struct pt_render_report *out,const struct pt_allocator *a)
+{
+    struct workspace *w;enum pt_render_result result;
+    if(!a || !a->allocate || !a->release || !sink || !out)return PT_RENDER_INVALID;
+    w=a->allocate(a->context,sizeof(*w));if(!w)return PT_RENDER_MEMORY;
+    result=stream(p,o,sink,sink_ctx,progress,progress_ctx,out,w);a->release(a->context,w);return result;
 }

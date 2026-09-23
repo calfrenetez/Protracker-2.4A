@@ -1,0 +1,12 @@
+render.c:17:17:offset_tracks	312	dynamic,bounded
+render.c:68:12:handoff_sample	12	static
+render.c:80:12:silent_handoff_sample	0	static
+render.c:119:12:start_run	48	dynamic,bounded
+render.c:128:30:next_tick	60	dynamic,bounded
+render.c:182:13:report_run	44	static
+render.c:187:30:measure	336	dynamic,bounded
+render.c:200:23:pt_render_measure	2364	dynamic,bounded
+render.c:205:23:pt_render_measure_allocated	64	dynamic,bounded
+render.c:326:30:stream	488	dynamic,bounded
+render.c:361:23:pt_render_stream	5532	dynamic,bounded
+render.c:366:23:pt_render_stream_allocated	72	dynamic,bounded

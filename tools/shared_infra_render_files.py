@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """Native file regressions; requires a separately coordinated shared030 window."""
-import fcntl, hashlib, json, shutil, sys, time
+import argparse, fcntl, hashlib, json, shutil, sys, time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--allocated-only',action='store_true',help='Run the three allocated-path tests instead of the two legacy file tests')
+    args=parser.parse_args()
     sys.path.insert(0,str(INFRA/'scripts'))
     from shared_guest import Guest
     out=ROOT/'build/dev'/('render-files-'+str(time.time_ns()));out.mkdir()
@@ -13,7 +16,11 @@ def main():
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         guest=Guest(INFRA,out);run=guest.share/out.name;run.mkdir()
         finished=False
-        cases=[('render','PTRenderFileTest','RENDER FILE PASS:'),('stems','PTStemFileTest','STEMS files PASS:')]
+        cases=[('render','PTRenderFileTest','RENDER FILE PASS:'),('stems','PTStemFileTest','STEMS files PASS:'),
+               ('core-allocated','PTRenderAllocTest','RENDER PASS:'),
+               ('render-allocated','PTRenderFileAllocTest','RENDER FILE PASS:'),
+               ('stems-allocated','PTStemFileAllocTest','STEMS files PASS:')]
+        cases=cases[2:] if args.allocated_only else cases[:2]
         try:
             commands=['FailAt 21','Stack 65536']
             for name,binary,marker in cases:

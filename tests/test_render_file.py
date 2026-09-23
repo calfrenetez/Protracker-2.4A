@@ -14,6 +14,10 @@ class RenderFile(unittest.TestCase):
             subprocess.run([*flags,'tests/render_file_test.c','src/core/wav.c',*RENDER,'-o',str(binary)],cwd=ROOT,check=True)
             subprocess.run([str(binary),str(out)],check=True)
             self.assertEqual(sorted(p.name for p in out.iterdir()),['race.wav','saved.wav'])
+            allocated_out=tmp/'allocated';allocated_out.mkdir()
+            subprocess.run([*flags,'tests/render_file_alloc_test.c','src/core/wav.c',*RENDER,'-o',str(binary)],cwd=ROOT,check=True)
+            subprocess.run([str(binary),str(allocated_out)],check=True)
+            self.assertEqual(sorted(p.name for p in allocated_out.iterdir()),['race.wav','saved.wav'])
             fault_out=tmp/'read-faults';fault_out.mkdir()
             fault_binary=tmp/'read-faults-test'
             subprocess.run([*flags,'-Dread=pt_test_read','tests/render_file_test.c','tests/render_read_faults.c',

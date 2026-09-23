@@ -95,20 +95,20 @@ static void abort_file(struct file *f)
         f->owned=0;
     }
 }
-enum pt_render_file_result pt_render_file_new(const char *path,const struct pt_project *p,
-    const struct pt_render_options *o,pt_render_progress notify,void *ctx,struct pt_render_report *out,enum pt_render_result *detail)
+enum pt_render_file_result pt_render_file_new_allocated(const char *path,const struct pt_project *p,
+    const struct pt_render_options *o,pt_render_progress notify,void *ctx,struct pt_render_report *out,enum pt_render_result *detail,const struct pt_allocator *allocator)
 {
     struct file f;struct pt_render_report plan,rendered,checked;uint8_t wav[44];
     enum pt_render_result result;enum pt_render_file_result failure=PT_RENDER_FILE_RENDER;int ok;
     if(detail)*detail=PT_RENDER_INVALID;
     if(!path || !*path || strlen(path)>1400 || !out || !detail)return PT_RENDER_FILE_INVALID;
     memset(&f,0,sizeof(f));f.path=path;f.fd=-1;f.reader=-1;f.progress=notify;f.progress_ctx=ctx;
-    result=pt_render_measure(p,o,notify,ctx,&plan);*detail=result;if(result!=PT_RENDER_OK)return failure;
+    result=(allocator?pt_render_measure_allocated(p,o,notify,ctx,&plan,allocator):pt_render_measure(p,o,notify,ctx,&plan));*detail=result;if(result!=PT_RENDER_OK)return failure;
     if(plan.frames>(0x7fffffffUL-44)/(o->bits/4)) {*detail=PT_RENDER_FRAME_LIMIT;return failure;}
     f.bits=o->bits;f.rate=o->rate;header(wav,o,(uint32_t)plan.frames);
     failure=PT_RENDER_FILE_BEGIN;if(!begin(&f))goto fail;
     failure=PT_RENDER_FILE_WRITE;if(!bytes(&f,wav,sizeof(wav)))goto fail;
-    result=pt_render_stream(p,o,sink,&f,progress,&f,&rendered);*detail=result;
+    result=(allocator?pt_render_stream_allocated(p,o,sink,&f,progress,&f,&rendered,allocator):pt_render_stream(p,o,sink,&f,progress,&f,&rendered));*detail=result;
     if(result!=PT_RENDER_OK) {if(result!=PT_RENDER_SINK)failure=PT_RENDER_FILE_RENDER;goto fail;}
     if(rendered.frames!=plan.frames || rendered.ticks!=plan.ticks || rendered.end!=plan.end) {failure=PT_RENDER_FILE_RENDER;*detail=PT_RENDER_INVALID;goto fail;}
     failure=PT_RENDER_FILE_FINISH;
@@ -119,7 +119,7 @@ enum pt_render_file_result pt_render_file_new(const char *path,const struct pt_p
     failure=PT_RENDER_FILE_VERIFY;f.verifying=1;f.frames=0;
     if(!progress(&f,PT_RENDER_VERIFY,0,0)) {*detail=PT_RENDER_CANCELLED;goto fail;}
     f.reader=open(f.temporary,O_RDONLY);if(f.reader<0 || !bytes(&f,wav,sizeof(wav)))goto fail;
-    result=pt_render_stream(p,o,sink,&f,progress,&f,&checked);*detail=result;
+    result=(allocator?pt_render_stream_allocated(p,o,sink,&f,progress,&f,&checked,allocator):pt_render_stream(p,o,sink,&f,progress,&f,&checked));*detail=result;
     if(result!=PT_RENDER_OK || checked.frames!=rendered.frames || checked.ticks!=rendered.ticks || checked.clipped!=rendered.clipped ||
        checked.end!=rendered.end || read_retry(f.reader,wav,1)!=0)goto fail;
     if(!progress(&f,PT_RENDER_VERIFY,checked.ticks,f.frames)) {*detail=PT_RENDER_CANCELLED;goto fail;}
@@ -135,4 +135,10 @@ enum pt_render_file_result pt_render_file_new(const char *path,const struct pt_p
     f.owned=0;*out=rendered;return PT_RENDER_FILE_OK;
 fail:
     abort_file(&f);return failure;
+}
+
+enum pt_render_file_result pt_render_file_new(const char *path,const struct pt_project *p,
+    const struct pt_render_options *o,pt_render_progress notify,void *ctx,struct pt_render_report *out,enum pt_render_result *detail)
+{
+    return pt_render_file_new_allocated(path,p,o,notify,ctx,out,detail,NULL);
 }

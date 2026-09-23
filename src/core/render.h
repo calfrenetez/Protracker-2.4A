@@ -4,7 +4,7 @@
 #include "voice.h"
 enum pt_render_result { PT_RENDER_OK, PT_RENDER_INVALID, PT_RENDER_ROUTE,
                         PT_RENDER_EFFECT, PT_RENDER_SAMPLE, PT_RENDER_TICK_LIMIT,
-                        PT_RENDER_FRAME_LIMIT, PT_RENDER_CANCELLED, PT_RENDER_SINK, PT_RENDER_EMPTY_RANGE };
+                        PT_RENDER_FRAME_LIMIT, PT_RENDER_CANCELLED, PT_RENDER_SINK, PT_RENDER_EMPTY_RANGE, PT_RENDER_MEMORY };
 enum pt_render_end { PT_RENDER_F00, PT_RENDER_POSITION_RETURN, PT_RENDER_ROW_EXIT };
 enum pt_render_phase { PT_RENDER_ANALYSE, PT_RENDER_MIX, PT_RENDER_VERIFY };
 struct pt_render_options {
@@ -66,4 +66,15 @@ enum pt_render_result pt_render_measure(const struct pt_project *,const struct p
  * No project writes, allocation, filesystem access or hardware use. */
 enum pt_render_result pt_render_stream(const struct pt_project *,const struct pt_render_options *,
                                       pt_render_sink,void *,pt_render_progress,void *,struct pt_render_report *);
+/* Allocated variants move timeline/voice/PCM working state off the stack.
+ * Exactly one caller allocation per call, released on every return. Allocator
+ * must provide ordinary C object alignment and remain valid through callbacks.
+ * Failure returns MEMORY without sink calls or changing report/master data.
+ * No retained allocation or pointer; callbacks must not free the workspace.
+ * Legacy variants above retain their stack-based, allocation-free behavior. */
+struct pt_allocator;
+enum pt_render_result pt_render_measure_allocated(const struct pt_project *,const struct pt_render_options *,
+    pt_render_progress,void *,struct pt_render_report *,const struct pt_allocator *);
+enum pt_render_result pt_render_stream_allocated(const struct pt_project *,const struct pt_render_options *,
+    pt_render_sink,void *,pt_render_progress,void *,struct pt_render_report *,const struct pt_allocator *);
 #endif

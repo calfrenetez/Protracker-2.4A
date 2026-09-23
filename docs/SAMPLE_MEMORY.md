@@ -318,3 +318,30 @@ allocation. File descriptors/runtime internals and stack placement still require
 native memory/performance qualification. These stack blocks are not claimed to
 be explicitly allocated Fast RAM. A caller-owned bounded Fast workspace for
 render state remains open, as does live24-bit Studio transport to AmiGUS.
+
+## Allocator-backed reference renderer
+
+The native editor now routes render preflight, WAV render/verification and all
+stem passes through its shared bounded master-memory allocator. Timeline/pitch,
+voice state and the512-element int32 PCM block use one allocation per stream
+call, released on success, cancellation, sink failure or preflight refusal.
+Measurement uses one smaller timeline allocation. On Fast-equipped systems the
+existing allocator refuses Fast exhaustion rather than spilling into Chip RAM;
+`PT_RENDER_MEMORY` is reported as RENDER: OUT OF MEMORY. No master edits occur.
+
+Portable allocated APIs require an allocator; original stack-based APIs remain
+available. File/stem allocated entry points accept NULL for legacy behavior.
+Source lifetime/immutability and callback non-reentrancy obligations remain.
+Sequential measure/render/verify calls allocate and release their workspace
+independently; memory can become unavailable between passes, in which case
+owned file staging is removed and the old destination/master is preserved.
+
+File/path/encoding/comparison buffers and helper locals still use stack space;
+this does not qualify every stack byte or runtime file-descriptor allocation.
+Bounce preflight uses the allocator but its internal legacy stream path is
+still open work. Live Studio streaming is not implemented by these offline APIs.
+
+Pinned m68k `-Os -fstack-usage` inspection reports the allocated measurement and
+stream entry frames as64 and72 bytes, versus2364 and5532 for legacy wrappers.
+Their shared measure/stream helper frames are336/488 bytes. These are compiler
+per-function figures, not whole-call-stack peaks or physical runtime proof.

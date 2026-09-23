@@ -1,0 +1,10 @@
+{
+  "passed": false,
+  "scope": "shared030 native render/stem file checks",
+  "PTRenderFileTest_sha256": "35cea0c00bc6c5cfd7cc6bc74214602c3f472c4c6676bf54a6d466d54eb27b8d",
+  "PTStemFileTest_sha256": "699fca9bf08ec58b82412791b405fde53f594d16b10cb31a113a42f4d8804683",
+  "PTRenderAllocTest_sha256": "232ea3f75f12f3d962d5e5f910ee30abe8b664b2d262591d91571be3a330e782",
+  "PTRenderFileAllocTest_sha256": "48b3bcddd152132f2bf70692d92b13ed01c6c15ad54cdc73cf96657bfa0bd149",
+  "PTStemFileAllocTest_sha256": "8f1015bf316a43c0832f6697bf6158ba7cd523cb4b0e823e7783528aaf296b51",
+  "run_files_cleaned": false
+}

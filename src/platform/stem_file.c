@@ -48,9 +48,9 @@ static void filename(char *out,size_t size,const char *dir,const struct pt_stem 
 {
     snprintf(out,size,"%s/%s-%02u.wav",dir,stem->group?"group":"track",stem->group?stem->group:stem->channel+1);
 }
-enum pt_render_file_result pt_stem_file_new(const char *path,const struct pt_project *project,
+enum pt_render_file_result pt_stem_file_new_allocated(const char *path,const struct pt_project *project,
     const struct pt_render_options *options,unsigned grouped,pt_render_progress notify,void *ctx,
-    struct pt_stem_report *out,enum pt_render_result *detail)
+    struct pt_stem_report *out,enum pt_render_result *detail,const struct pt_allocator *allocator)
 {
     struct pt_stem_report report;struct pt_render_options one;struct pt_render_report measured[16];
     enum pt_stem_result planned;enum pt_render_file_result result=PT_RENDER_FILE_RENDER;
@@ -62,7 +62,7 @@ enum pt_render_file_result pt_stem_file_new(const char *path,const struct pt_pro
     one=*options;
     /* Validate all stems before creating any staging; global flow stays intact. */
     for(i=0;i<report.plan.count;++i) {
-        one.tracks=report.plan.item[i].tracks;*detail=pt_render_measure(project,&one,notify,ctx,measured+i);
+        one.tracks=report.plan.item[i].tracks;*detail=(allocator?pt_render_measure_allocated(project,&one,notify,ctx,measured+i,allocator):pt_render_measure(project,&one,notify,ctx,measured+i));
         if(*detail!=PT_RENDER_OK)return result;
         if(i && (measured[i].frames!=measured[0].frames || measured[i].ticks!=measured[0].ticks || measured[i].end!=measured[0].end)) {*detail=PT_RENDER_INVALID;return result;}
     }
@@ -74,7 +74,7 @@ enum pt_render_file_result pt_stem_file_new(const char *path,const struct pt_pro
     if(made!=1)return PT_RENDER_FILE_BEGIN;
     for(i=0;i<report.plan.count;++i) {
         one.tracks=report.plan.item[i].tracks;filename(file,sizeof(file),stage,report.plan.item+i);
-        result=pt_render_file_new(file,project,&one,notify,ctx,report.audio+i,detail);
+        result=pt_render_file_new_allocated(file,project,&one,notify,ctx,report.audio+i,detail,allocator);
         if(result!=PT_RENDER_FILE_OK)goto fail;
         ++owned;
         if(report.audio[i].frames!=measured[i].frames || report.audio[i].ticks!=measured[i].ticks || report.audio[i].end!=measured[i].end) {
@@ -87,4 +87,11 @@ enum pt_render_file_result pt_stem_file_new(const char *path,const struct pt_pro
 fail:
     for(i=0;i<owned;++i) {filename(file,sizeof(file),stage,report.plan.item+i);if(unlink(file))fprintf(stderr,"Stem WAV retained: %s\n",file);}
     directory_remove(stage);return result;
+}
+
+enum pt_render_file_result pt_stem_file_new(const char *path,const struct pt_project *project,
+    const struct pt_render_options *options,unsigned grouped,pt_render_progress notify,void *ctx,
+    struct pt_stem_report *out,enum pt_render_result *detail)
+{
+    return pt_stem_file_new_allocated(path,project,options,grouped,notify,ctx,out,detail,NULL);
 }

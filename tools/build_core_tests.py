@@ -96,6 +96,10 @@ def main():
     inputs['PTStemFileTest'] = ['tests/stem_file_test.c','src/platform/stem_file.c','src/core/stems.c','src/platform/render_file.c',*render_sources]
     inputs['PTRenderFileTest'] = ['tests/render_file_test.c','src/platform/render_file.c','src/core/wav.c',*render_sources]
     inputs['PT24GRender'] = ['tools/pt24g_render.c','src/platform/stem_file.c','src/core/stems.c','src/platform/render_file.c','src/core/document.c','src/core/pp20.c','src/core/mod_project.c','src/core/mod_inspect.c',*render_sources]
+    for name, source in [('PTRenderTest','tests/render_alloc_test.c'),
+                         ('PTRenderFileTest','tests/render_file_alloc_test.c'),
+                         ('PTStemFileTest','tests/stem_file_alloc_test.c')]:
+        inputs[name.replace('Test','AllocTest')] = [source, *inputs[name][1:]]
     flags = ['-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os',
              '-Wall', '-Wextra', '-Werror', '-Isrc/core', '-Ibuild/dev', *compiler_safety_flags(cc)]
     replay_source=out/'replay.s'

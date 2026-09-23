@@ -10,3 +10,8 @@ class StemFile(unittest.TestCase):
             subprocess.run([str(exe),str(out)],check=True)
             self.assertEqual(sorted(p.name for p in out.iterdir()),['batch','race','single-0.wav','single-1.wav','single-2.wav'])
             self.assertEqual(list((out/'race').iterdir()),[])
+
+            allocated_out=tmp/'allocated';allocated_out.mkdir()
+            subprocess.run(['cc','-std=c99','-O1','-g','-Wall','-Wextra','-Werror','-fsanitize=address,undefined','-Isrc/core','tests/stem_file_alloc_test.c',*RENDER,'-o',str(exe)],cwd=ROOT,check=True)
+            subprocess.run([str(exe),str(allocated_out)],check=True)
+            self.assertEqual(sorted(p.name for p in allocated_out.iterdir()),['batch','race','single-0.wav','single-1.wav','single-2.wav'])

@@ -2,6 +2,9 @@
 
 The first Enhanced replay path uses the pinned `PT2.3F_replay_cia.s`. It plays
 classic four-channel Paula projects from a separate Chip RAM MOD snapshot.
+The selective sample cache omits instrument payloads unused by all stored
+patterns; its immutable export and edit-comparison workspaces prefer Fast RAM.
+See [sample ownership and memory policy](SAMPLE_MEMORY.md).
 Saved mute/solo are applied at the volume output; all other strict classic
 representability checks remain in place. It does not discard AmiGUS/MIDI tracks,
 downconvert samples or substitute

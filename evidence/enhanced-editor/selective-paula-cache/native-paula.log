@@ -1,0 +1,10 @@
+SCOPE/DMA PASS: enabled hardware channels and time-varying sample preview
+REPLAY initial ticks=40 row=5 periods=428,339,285,214
+CHANNEL AUDIO PASS: muted start, live unmute, solo, shared solo, mute wins, immutable notes/samples, strict export refusal
+CHANNEL DETAILS AUDIO PASS: saved names/groups/MIDI assignment preserve Paula replay, strict export refuses metadata, enhanced pan still refused
+TITLE AUDIO PASS: long titles preserve playback and source metadata; strict export remains lossless
+REPLAY effects speed/tempo/volume/cut observed mask=15 ticks=17
+SONG AUDIO PASS: position changes stop stale replay; restart uses the new order list
+CACHE PASS: unused payload omitted, Chip/Fast placement, new instrument and changed master stop/rebuild
+CIA fallback execution NOT RUN: Workbench already owns CIAA timer B; existing vector preserved
+PAULA PASS: playback periods, busy audio refusal, DMA stop, immutable project, repeated restart, live edit, audition, speed/tempo/volume/cut, unsupported refusal, owned empty-sample DMA, CIA exhaustion and unrelated-vector preservation

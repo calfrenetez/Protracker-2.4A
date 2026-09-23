@@ -51,12 +51,27 @@ already implemented:
   Do not discard masters to make room for caches. Report a shortage if no safe
   eviction/allocation is possible.
 
-The current classic Paula bridge still allocates a whole private Chip-RAM MOD
-snapshot per playback session and frees it after stopping replay. It protects
-masters from EFx mutation, but is **not yet a selective per-sample cache**.
-AmiGUS cache eviction and Studio streaming are not completed by the master
-allocator change. Native render/stem helper allocations and remaining generic
-utility buffers also need their own allocation audit.
+The classic Paula bridge now omits payloads of instruments unreferenced by any
+stored pattern from its private Chip-RAM snapshot. Instrument-only events count;
+all stored patterns are scanned conservatively so pattern selection is safe.
+Referenced samples remain pinned together until replay stops. Sample numbers,
+pattern rows and source/master data are preserved. Empty and omitted samples
+receive safe empty headers and the existing owned silent DMA word.
+
+The immutable full export and live-edit comparison workspace use bounded Fast
+RAM when available. Live row edits among cached instruments remain supported.
+A changed instrument working set, sample header or PCM stops replay and releases
+the cache before a subsequent play rebuilds it. Comparison uses the immutable
+export, so EFx mutations of private Chip data do not corrupt the master or create
+false invalidations. This intentionally stops even on an unused master change.
+
+This is a session-level selective cache, not yet independent per-sample LRU
+allocation. Pattern/header storage still accompanies it in Chip RAM; moving
+that to Fast RAM needs replay pointer/initialization and scope integration.
+The bridge still requires a classic-compatible four-channel project; implicit
+conversion of enhanced samples has not been added. AmiGUS cache eviction and
+Studio streaming remain incomplete. Native render/stem helper allocations and
+remaining generic utility buffers also need their own allocation audit.
 
 ## Persistence and evidence
 
@@ -70,3 +85,11 @@ failure, live memory pressure, installed-but-exhausted Fast RAM, no Chip spill,
 Chip-only reserve, exact release sizes and overflow rejection. This is host
 policy evidence. Cross-compilation is not emulator or physical acceptance;
 real memory-placement and playback-pressure checks remain required.
+
+`tests/test_paula_cache.py` checks selective payload packing, instrument-only and
+inactive-pattern references, source preservation, capacity/alias/malformed input
+refusal, and live-edit invalidation under ASan/UBSan. `PTPaulaTest` additionally
+contains native assertions for memory placement, unused payload omission and
+stopped rebuild after new instruments or changed masters. Cross-compiling these
+assertions does not mean they have run; consult the current checkpoint for guest
+evidence.

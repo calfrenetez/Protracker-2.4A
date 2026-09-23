@@ -7,6 +7,7 @@
 #include "mod_project.h"
 #include "mod_inspect.h"
 #include "paula.h"
+#include "paula_cache.h"
 extern int pt_replay_start(void *,unsigned long,void *,unsigned long);
 extern void pt_replay_stop(void);
 extern volatile uint32_t pt_replay_ticks;
@@ -63,23 +64,33 @@ void pt_paula_stop(struct pt_paula *a)
     if(a->audio)DeleteIORequest((struct IORequest *)a->audio);
     if(a->port)DeleteMsgPort(a->port);
     if(a->data)FreeMem(a->data,a->bytes+2);
-    free(a->staging);memset(a,0,sizeof(*a));
+    pt_master_release(&a->memory,a->staging);pt_master_release(&a->memory,a->check);memset(a,0,sizeof(*a));
 }
 const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned mode,unsigned position,unsigned pattern)
 {
-    struct pt_project playback;struct pt_mod_export_report report;struct pt_mod_info info;size_t written;unsigned i;UBYTE channels=15;
+    struct pt_project playback;struct pt_mod_export_report report;struct pt_mod_info info;struct pt_paula_cache_plan plan;size_t written;unsigned i;UBYTE channels=15;
     const char *error="PLAY: OUT OF CHIP MEMORY";
     if(mode>1 || position>=p->order_count || pattern>=p->pattern_count)return "PLAY: INVALID POSITION";
     if(!playback_project(p,&playback) || pt_mod_export_analyse(&playback,&report)!=PT_PROJECT_OK || report.issues)
         return "PLAY: REQUIRES CLASSIC FOUR-CHANNEL PAULA PROJECT";
-    pt_paula_stop(a);a->order_count=p->order_count;memcpy(a->orders,p->orders,p->order_count*sizeof(*p->orders));a->bytes=report.bytes;a->pattern_bytes=(size_t)p->pattern_count*1024;
+    pt_paula_stop(a);a->order_count=p->order_count;memcpy(a->orders,p->orders,p->order_count*sizeof(*p->orders));a->source_bytes=report.bytes;a->pattern_bytes=(size_t)p->pattern_count*1024;
     a->mode=mode;a->pattern=pattern;
-    a->data=AllocMem(a->bytes+2,MEMF_CHIP|MEMF_PUBLIC);
-    a->staging=malloc(a->bytes);
-    if(!a->data || !a->staging)goto failed;
-    if(pt_mod_export_direct(&playback,a->data,a->bytes,&written)!=PT_PROJECT_OK || written!=a->bytes) {
+    pt_master_memory_init(&a->memory);
+    error="PLAY: OUT OF REPLAY WORKSPACE MEMORY";
+    a->staging=pt_master_allocate(&a->memory,a->source_bytes);
+    a->check=pt_master_allocate(&a->memory,a->source_bytes);
+    if(!a->staging || !a->check)goto failed;
+    if(pt_mod_export_direct(&playback,a->staging,a->source_bytes,&written)!=PT_PROJECT_OK || written!=a->source_bytes) {
         error="PLAY: SNAPSHOT ENCODE FAILED";goto failed;
     }
+    error="PLAY: UNSAFE CLASSIC SAMPLE METADATA";
+    if(!pt_paula_cache_plan(a->staging,a->source_bytes,&plan))goto failed;
+    a->bytes=plan.bytes;a->cached_instruments=plan.instruments;
+    error="PLAY: OUT OF CHIP MEMORY";
+    a->data=AllocMem(a->bytes+2,MEMF_CHIP|MEMF_PUBLIC);
+    if(!a->data)goto failed;
+    error="PLAY: SAMPLE CACHE BUILD FAILED";
+    if(!pt_paula_cache_copy(a->staging,a->source_bytes,a->data,a->bytes))goto failed;
     error="PLAY: UNSAFE CLASSIC SAMPLE METADATA";
     if(pt_mod_inspect(a->data,a->bytes,&info)!=PT_MOD_OK || info.warnings)goto failed;
     for(i=0;i<31;++i) {
@@ -130,16 +141,20 @@ const char *pt_paula_sync(struct pt_paula *a,const struct pt_project *p)
     if(!p || !p->orders || p->order_count!=a->order_count || memcmp(p->orders,a->orders,p->order_count*sizeof(*p->orders))) {
         pt_paula_stop(a);return "STOPPED: SONG POSITIONS CHANGED - PRESS PLAY TO RESTART";
     }
-    if(!playback_project(p,&playback) || pt_mod_export_analyse(&playback,&report)!=PT_PROJECT_OK || report.issues || report.bytes!=a->bytes ||
+    if(!playback_project(p,&playback) || pt_mod_export_analyse(&playback,&report)!=PT_PROJECT_OK || report.issues || report.bytes!=a->source_bytes ||
        (size_t)p->pattern_count*1024!=a->pattern_bytes ||
-       pt_mod_export_direct(&playback,a->staging,a->bytes,&n)!=PT_PROJECT_OK || n!=a->bytes) {
+       pt_mod_export_direct(&playback,a->check,a->source_bytes,&n)!=PT_PROJECT_OK || n!=a->source_bytes) {
         pt_paula_stop(a);return "STOPPED: EDIT REQUIRES ENHANCED REPLAY BACKEND";
+    }
+    /* Compare with immutable export, not EFx-mutated Chip playback bytes. */
+    if(!pt_paula_cache_compatible(a->staging,a->check,a->source_bytes)) {
+        pt_paula_stop(a);return "STOPPED: SAMPLE CACHE CHANGED - PRESS PLAY TO REBUILD";
     }
     /* Publish only changed rows, with short interrupt exclusion. Do not copy
        samples: EFx intentionally modifies the private replay snapshot. */
     for(offset=1084;offset<1084+a->pattern_bytes;offset+=16)
-        if(memcmp(a->data+offset,a->staging+offset,16)) {
-            Disable();CopyMem(a->staging+offset,a->data+offset,16);Enable();
+        if(memcmp(a->data+offset,a->check+offset,16)) {
+            Disable();CopyMem(a->check+offset,a->data+offset,16);Enable();
         }
     set_audible(a,audible_mask(p));
     return NULL;

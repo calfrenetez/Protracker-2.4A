@@ -158,6 +158,22 @@ int main(int argc,char **argv)
         CHECK(pt_paula_play(&a,&doc.project,0,0,0)!=NULL && !a.started);
     }
     CHECK(pt_document_load(&doc,input,length,SIZE_MAX)==PT_PROJECT_OK);
+    /* A large unused slot must remain a master, not consume Chip playback RAM. */
+    CHECK(doc.project.sample_count==31 && doc.project.samples[0].pcm.frames>0);
+    doc.project.samples[30]=doc.project.samples[0];
+    CHECK(!pt_paula_play(&a,&doc.project,0,0,0));
+    CHECK(a.source_bytes>=a.bytes+doc.project.samples[30].pcm.frames);
+    CHECK(TypeOfMem(a.data)&MEMF_CHIP);
+    if(AvailMem(MEMF_FAST|MEMF_TOTAL))CHECK(TypeOfMem(a.staging)&MEMF_FAST);
+    CHECK(!(a.cached_instruments&(1UL<<30)));
+    doc.project.events[0].instrument=31;
+    CHECK(pt_paula_sync(&a,&doc.project)!=NULL && !a.started && !a.data && !a.staging && !a.check);
+    CHECK(!pt_paula_play(&a,&doc.project,0,0,0));
+    CHECK(a.cached_instruments&(1UL<<30));
+    doc.project.samples[0].pcm.data[0]^=1;
+    CHECK(pt_paula_sync(&a,&doc.project)!=NULL && !a.started);
+    CHECK(pt_document_load(&doc,input,length,SIZE_MAX)==PT_PROJECT_OK);
+    puts("CACHE PASS: unused payload omitted, Chip/Fast placement, new instrument and changed master stop/rebuild");
     /* Force CIA fallback and total failure. Never replace an existing vector. */
     ciab=OpenResource("ciab.resource");ciaa=OpenResource("ciaa.resource");CHECK(ciab && ciaa);
     own_b=claim(ciab,0,&holdb);CHECK(own_b);

@@ -3,12 +3,16 @@
 #include "project.h"
 #include "playback.h"
 #include "scope.h"
+#include "master_memory.h"
 struct IOAudio;
 struct MsgPort;
 struct pt_paula {
     struct MsgPort *port;
     struct IOAudio *audio,*lock;
-    uint8_t *data,*staging;
+    uint8_t *data,*staging,*check;
+    struct pt_master_memory memory;
+    size_t source_bytes;
+    uint32_t cached_instruments;
     size_t bytes,pattern_bytes;
     uint16_t order_count,orders[PT_PROJECT_ORDERS];
     unsigned opened,locked,started,mode,pattern,audible;

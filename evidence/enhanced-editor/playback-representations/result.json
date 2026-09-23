@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "scope": "shared emulator Paula regression",
+  "guest_directory": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/paula-cache-1790192210627820000",
+  "PTPaulaTest_sha256": "5e1b81256e8033c7ef3fcbcc9f81d3ec474b42a05c985bf46b097f79473ec215",
+  "PTSampleCacheTest_sha256": "ef8ba449181c759df891eb66727e18a668844c88b1a62cb8f1fe4ef91f21fcae",
+  "PTPlaybackPCMTest_sha256": "0701093c2f1d0043a865bd95b859efa62799e4df676e2ebfd736045aac2e299e",
+  "input.mod_sha256": "813ccf02b367047a72ae5bfacf33593acd7879bc43e151de02a8deeb217325bf",
+  "pcm_returncode": "0",
+  "cache_returncode": "0",
+  "returncode": "0",
+  "audio_after": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=333\tsndbuf_status=0",
+  "run_files_cleaned": true
+}

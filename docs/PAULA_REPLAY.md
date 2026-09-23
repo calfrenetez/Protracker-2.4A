@@ -20,6 +20,11 @@ F9 loops the selected pattern. STOP / F10 releases sound and timer resources;
 Space also stops during playback. EDIT still toggles note entry. SAMPLE auditions
 the selected sample at C in the chosen entry octave on a Paula channel, until
 Stop. The audition is a temporary single-note project and never edits the song.
+For mono samples at the classic rate, audition derives an 8-bit playback copy
+from 8/16/24-bit masters, with rounding and silent word padding; it leaves the
+master's precision and frame count intact. Other rates/stereo still require an
+explicit conversion or another preview backend. Full song playback retains its
+strict classic compatibility requirement.
 Any song edit stops this independent audition. It does not inherit song mute/solo.
 
 The edit cursor stays independent of the playback position. The lower bar shows

@@ -33,11 +33,13 @@ def main():
         try:
             for source, name in [(ROOT / 'build/dev/PTPaulaTest', 'PTPaulaTest'),
                                  (ROOT / 'build/dev/PTSampleCacheTest', 'PTSampleCacheTest'),
+                                 (ROOT / 'build/dev/PTPlaybackPCMTest', 'PTPlaybackPCMTest'),
                                  (ROOT / 'evidence/baseline/mod.baseline', 'input.mod')]:
                 shutil.copyfile(source, run / name)
                 result[name + '_sha256'] = hashlib.sha256((run / name).read_bytes()).hexdigest()
             guest.launch.write_text('\n'.join(['FailAt 21', 'Stack 65536', 'CD ' + guest.device + run.name,
                                               'PTSampleCacheTest >cache.log', 'Echo $RC >cache.rc',
+                                              'PTPlaybackPCMTest >pcm.log', 'Echo $RC >pcm.rc',
                                               'PTPaulaTest input.mod >paula.log', 'Echo $RC >paula.rc']) + '\n')
             guest.start()
             end = time.monotonic() + 60
@@ -50,9 +52,14 @@ def main():
             (out / 'native-paula.log').write_text(log)
             cache_log = (run / 'cache.log').read_text()
             (out / 'native-cache.log').write_text(cache_log)
+            pcm_log = (run / 'pcm.log').read_text()
+            (out / 'native-pcm.log').write_text(pcm_log)
+            result['pcm_returncode'] = (run / 'pcm.rc').read_text().strip()
             result['cache_returncode'] = (run / 'cache.rc').read_text().strip()
             result['returncode'] = (run / 'paula.rc').read_text().strip()
             result['audio_after'] = guest.command('GET_AUDIO_STATE')
+            assert result['pcm_returncode'] == '0' and 'PLAYBACK PCM PASS:' in pcm_log, pcm_log
+            assert 'PREVIEW PCM PASS:' in log, log
             assert result['cache_returncode'] == '0' and 'SAMPLE CACHE PASS:' in cache_log, cache_log
             assert 'CACHE REUSE PASS:' in log, log
             assert result['returncode'] == '0' and 'CACHE PASS:' in log and 'PAULA PASS:' in log, log

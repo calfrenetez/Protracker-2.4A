@@ -60,8 +60,9 @@ def main():
     }
     inputs['PTModRound8Test'] = ['tests/mod_round8_test.c', *inputs['PTDocumentTest'][1:]]
     inputs['PTViewProbe'] = ['tests/native_view_probe.c', *inputs['PTViewBench'][1:]]
-    inputs['PTPaulaTest'].append('src/core/sample_cache.c')
-    inputs['PT24GEdit'].append('src/core/sample_cache.c')
+    inputs['PTPaulaTest'] += ['src/core/sample_cache.c', 'src/core/playback_pcm.c']
+    inputs['PT24GEdit'] += ['src/core/sample_cache.c', 'src/core/playback_pcm.c']
+    inputs['PTPlaybackPCMTest'] = ['tests/playback_pcm_test.c', 'src/core/playback_pcm.c', 'src/core/sample_cache.c', 'src/core/pcm.c']
     inputs['PTSampleCacheTest'] = ['tests/sample_cache_test.c', 'src/core/sample_cache.c']
     inputs['PTFlowTraceTest'] = ['tests/native_flow_trace.c', *inputs['PTPaulaTest'][1:]]
     inputs['PTPitchTraceTest'] = inputs['PTFlowTraceTest']
@@ -139,7 +140,7 @@ def main():
                            for name in [*inputs, 'PTGuardTest']},
               'sources': {name: digest(ROOT / name) for name in
                           sorted(set(sum(inputs.values(), [])) | {'src/core/recent.h', 'src/platform/recent_file.h', 'src/native/file_request.h', 'src/core/playback.h', 'src/core/scope.h', 'src/core/flow.h', 'src/core/frame_clock.h', 'src/core/timeline.h', 'src/core/voice.h', 'src/core/render.h', 'src/core/stems.h', 'src/platform/stem_file.h', 'src/core/pitch.h', 'src/core/pitch_tables.h', 'tools/generate_pitch_tables.py', 'src/platform/render_file.h', 'tools/build_core_tests.py', 'src/native/paula.h', 'src/native/replay_abi.s', 'tools/prepare_replay.py', 'tools/prepare_flow_trace.py', 'tools/prepare_pitch_trace.py', 'tools/prepare_sample_trace.py', 'tools/prepare_invert_trace.py', 'tools/prepare_volume_trace.py', 'vendor/pt23f/replayer/PT2.3F_replay_cia.s', 'src/core/channels.h', 'src/core/pcm.h',
-                          'src/core/sinc_kernel.h', 'tools/generate_sinc_kernel.py', 'src/core/wav.h', 'src/core/svx.h', 'src/core/raw.h', 'src/core/midi.h', 'src/core/record.h', 'src/core/record_pattern.h', 'src/editor/editor.h', 'src/editor/song.h', 'src/editor/sampler.h', 'src/editor/bounce.h', 'src/editor/view.h', 'src/platform/file_save.h', 'vendor/pt23f/raw/ptfont.raw', 'src/core/project.h', 'src/core/mod_project.h', 'src/core/document.h', 'src/core/pp20.h', 'src/core/safe_save.h', 'src/core/pattern.h', 'src/core/slices.h', 'src/core/mod_inspect.h', 'src/native/present.h', 'src/native/master_memory.h', 'src/core/paula_cache.h', 'src/core/sample_cache.h', 'src/native/mod_guard.s', 'tests/native_guard_harness.s'})},
+                          'src/core/sinc_kernel.h', 'tools/generate_sinc_kernel.py', 'src/core/wav.h', 'src/core/svx.h', 'src/core/raw.h', 'src/core/midi.h', 'src/core/record.h', 'src/core/record_pattern.h', 'src/editor/editor.h', 'src/editor/song.h', 'src/editor/sampler.h', 'src/editor/bounce.h', 'src/editor/view.h', 'src/platform/file_save.h', 'vendor/pt23f/raw/ptfont.raw', 'src/core/project.h', 'src/core/mod_project.h', 'src/core/document.h', 'src/core/pp20.h', 'src/core/safe_save.h', 'src/core/pattern.h', 'src/core/slices.h', 'src/core/mod_inspect.h', 'src/native/present.h', 'src/native/master_memory.h', 'src/core/paula_cache.h', 'src/core/sample_cache.h', 'src/core/playback_pcm.h', 'src/native/mod_guard.s', 'tests/native_guard_harness.s'})},
               'guard_cases': manifest}
     (out / 'core-build.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report['binaries'], indent=2))

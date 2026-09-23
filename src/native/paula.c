@@ -8,6 +8,7 @@
 #include "mod_inspect.h"
 #include "paula.h"
 #include "paula_cache.h"
+#include "playback_pcm.h"
 extern int pt_replay_start(void *,unsigned long,void *,unsigned long,void *);
 extern void pt_replay_stop(void);
 extern volatile uint32_t pt_replay_ticks;
@@ -219,19 +220,37 @@ void pt_paula_poll(struct pt_paula *a,struct pt_playback *s)
 const char *pt_paula_audition(struct pt_paula *a,const struct pt_project *p,unsigned sample,unsigned period)
 {
     struct pt_project q;struct pt_event *events;uint16_t order=0;
-    struct pt_sample selected;const char *error;
+    struct pt_sample selected;const char *error;struct pt_master_memory workspace;
+    struct pt_playback_format format={8,0,0,1};size_t bytes,i;int32_t *converted=NULL;
     if(!sample || sample>p->sample_count || period<113 || period>856)return "SAMPLE: SELECT A VALID SAMPLE";
     if(p->channels.track[p->channels.selected].route!=PT_PAULA)return "SAMPLE: SELECT A PAULA CHANNEL FOR THIS BACKEND";
     selected=p->samples[sample-1];
-    if(selected.pcm.bits!=8 || selected.pcm.channels!=1 || selected.pcm.rate!=PT_CLASSIC_RATE ||
+    if(selected.pcm.channels!=1 || selected.pcm.rate!=PT_CLASSIC_RATE ||
        (selected.loop!=PT_LOOP_NONE && selected.loop!=PT_LOOP_FORWARD))
         return "SAMPLE: FORMAT NEEDS ENHANCED PREVIEW OR CONVERSION";
+    if(pt_playback_pcm_size(&selected.pcm,&format,&bytes)!=PT_PCM_OK || bytes>131070)
+        return "SAMPLE: INVALID OR TOO LARGE FOR PAULA PREVIEW";
+    pt_master_memory_init(&workspace);
+    if(bytes) {
+        uint8_t *packed;
+        converted=pt_master_allocate(&workspace,bytes*(sizeof(*converted)+1));
+        if(!converted)return "SAMPLE: OUT OF CONVERSION MEMORY";
+        packed=(uint8_t *)(converted+bytes);
+        if(pt_playback_pcm_pack(&selected.pcm,&format,packed,bytes)!=PT_PCM_OK) {
+            pt_master_release(&workspace,converted);return "SAMPLE: PLAYBACK CONVERSION FAILED";
+        }
+        for(i=0;i<bytes;++i)converted[i]=packed[i]<128?packed[i]:(int32_t)packed[i]-256;
+        selected.pcm.data=converted;selected.pcm.frames=(uint32_t)bytes;selected.pcm.capacity=bytes;
+    }
+    selected.pcm.bits=8;
     memset(&q,0,sizeof(q));pt_channels_init(&q.channels);q.order_count=1;q.pattern_count=1;
-    q.sample_count=1;q.orders=&order;q.speed=6;q.bpm=125;
-    q.samples=&selected;
-    events=calloc(256,sizeof(*events));if(!events)return "SAMPLE: OUT OF MEMORY";
+    q.sample_count=1;q.orders=&order;q.speed=6;q.bpm=125;q.samples=&selected;
+    events=pt_master_allocate(&workspace,256*sizeof(*events));
+    if(!events) {pt_master_release(&workspace,converted);return "SAMPLE: OUT OF MEMORY";}
+    memset(events,0,256*sizeof(*events));
     q.events=events;events[0].kind=PT_NOTE_PERIOD;events[0].pitch=(uint16_t)period;events[0].instrument=1;
-    error=pt_paula_play(a,&q,0,0,0);free(events);
+    error=pt_paula_play(a,&q,0,0,0);
+    pt_master_release(&workspace,events);pt_master_release(&workspace,converted);
     if(!error)a->mode=2;
     return error;
 }

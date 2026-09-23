@@ -92,8 +92,12 @@ old blocks can be evicted during allocation. Explicit Stop, invalidation and any
 failed start still release the entire pool; there is no idle Chip-RAM retention
 across an explicit Stop. Long-lived live voices remain pinned.
 
-The bridge still requires a classic-compatible four-channel project; implicit
-conversion of enhanced samples has not been added. AmiGUS cache eviction and
+Song playback still requires a classic-compatible four-channel project.
+Sample audition can now derive an 8-bit Paula representation of mono 8/16/24-bit
+masters at the classic rate. The source stays unchanged; an odd final byte is
+padded with silence for DMA, without changing the master's frame count. The
+existing classic length and loop restrictions still apply. Stereo/rate conversion
+and enhanced song dispatch have not been enabled by this preview change. AmiGUS cache eviction and
 Studio streaming remain incomplete. Native render/stem helper allocations and
 remaining generic utility buffers also need their own allocation audit.
 
@@ -124,3 +128,24 @@ shortage below the nominal budget, stale handles, overflow and complete release.
 The same portable core is intended for other playback backends; an AmiGUS driver
 must still supply and validate card allocation/upload/release and generation
 rules. A passing resource-pool test is not AmiGUS implementation or acceptance.
+
+## Derived PCM representations
+
+`playback_pcm` packs a selected master channel into signed 8- or 16-bit bytes.
+16-bit byte order and even-byte padding are explicit settings. Reduction rounds
+nearest with ties away from zero, then clips to the target range; there is no
+implicit dither, resampling, downmix or loop relocation. The master data and its
+format/metadata are never overwritten. Empty hardware slots use backend-owned
+silence guards rather than zero-byte cache allocations.
+
+The cache helper keys each identity by format/channel/order/padding and requires
+a changed revision for every master or relevant metadata edit, including undo.
+Different representations can coexist. Invalidation retires every representation
+of that identity while active leases remain pinned. Use separate pools for each
+backend/memory domain: a Chip allocation is not a card-RAM upload.
+
+Paula audition uses bounded Fast workspace to prepare its derived 8-bit sample,
+then releases that workspace after the owned playback snapshot is built. Its
+master remains 16/24-bit for saving, editing and Studio use. The 8/16-bit packer
+and cache helper are available for an AmiGUS adapter, but card allocation/upload
+and live Studio streaming remain separate unfinished work.

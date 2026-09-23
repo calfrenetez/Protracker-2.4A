@@ -100,6 +100,21 @@ int main(int argc,char **argv)
     Delay(55);pt_paula_poll(&a,&state);CHECK(state.row>=8 && state.period[0]==214);pt_paula_stop(&a);
     doc.project.events[8*4].pitch=428;
     CHECK(!pt_paula_audition(&a,&doc.project,1,285));Delay(10);pt_paula_poll(&a,&state);CHECK(state.period[0]==285 && !state.period[1]);pt_paula_stop(&a);
+    {struct pt_sample saved=doc.project.samples[0];
+        int32_t values[5]={8388607,-8388608,32768,-32768,1},original[5];
+        struct pt_sample *master=doc.project.samples;
+        memcpy(original,values,sizeof(values));master->pcm.data=values;master->pcm.capacity=master->pcm.frames=5;
+        master->pcm.channels=1;master->pcm.bits=24;master->pcm.rate=PT_CLASSIC_RATE;
+        master->loop=PT_LOOP_NONE;master->loop_start=master->loop_end=master->crossfade=0;
+        CHECK(!pt_paula_audition(&a,&doc.project,1,428));
+        for(i=0;i<20;++i) {Delay(1);pt_paula_poll(&a,&state);if(state.period[0])break;}
+        printf("PREVIEW PCM state active=%u ticks=%lu period=%u bytes=%lu\n",state.active,(unsigned long)state.ticks,state.period[0],(unsigned long)a.sample_bytes[0]);
+        CHECK(state.active && state.period[0]==428 && a.sample_bytes[0]==6);
+        CHECK(a.sample_data[0][2]==1 && a.sample_data[0][3]==255 && a.sample_data[0][4]==0 && a.sample_data[0][5]==0);
+        CHECK(!memcmp(values,original,sizeof(values)) && master->pcm.bits==24 && master->pcm.frames==5);
+        pt_paula_stop(&a);doc.project.samples[0]=saved;
+        puts("PREVIEW PCM PASS: 24-bit master auditions via rounded/padded 8-bit Chip copy without changing master bytes or precision");
+    }
     doc.project.events[0].kind=PT_NOTE_OFF;doc.project.events[0].pitch=0;
     CHECK(pt_paula_play(&a,&doc.project,0,0,0)!=NULL && !a.started);
     doc.project.events[0].kind=PT_NOTE_PERIOD;doc.project.events[0].pitch=428;

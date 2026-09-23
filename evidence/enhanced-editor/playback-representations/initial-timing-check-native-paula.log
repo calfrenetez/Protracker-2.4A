@@ -1,0 +1,6 @@
+SCOPE/DMA PASS: enabled hardware channels and time-varying sample preview
+REPLAY initial ticks=40 row=5 periods=428,339,285,214
+CHANNEL AUDIO PASS: muted start, live unmute, solo, shared solo, mute wins, immutable notes/samples, strict export refusal
+CHANNEL DETAILS AUDIO PASS: saved names/groups/MIDI assignment preserve Paula replay, strict export refuses metadata, enhanced pan still refused
+TITLE AUDIO PASS: long titles preserve playback and source metadata; strict export remains lossless
+FAIL line 110: state.active && state.period[0]==428 && a.sample_bytes[0]==6

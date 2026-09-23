@@ -96,7 +96,7 @@ Song playback still requires a classic-compatible four-channel project.
 Sample audition can now derive an 8-bit Paula representation of mono 8/16/24-bit
 masters, including filtered conversion of non-looping samples to the classic rate. The source stays unchanged; an odd final byte is
 padded with silence for DMA, without changing the master's frame count. The
-existing classic length and loop restrictions still apply. Stereo conversion and enhanced song dispatch are still unsupported. AmiGUS cache eviction and
+existing classic length and loop restrictions still apply. Enhanced song dispatch remains unsupported. AmiGUS cache eviction and
 Studio streaming remain incomplete. Native render/stem helper allocations and
 remaining generic utility buffers also need their own allocation audit.
 
@@ -217,8 +217,8 @@ silent DMA pad. Same-rate previews use direct precision conversion. The source
 buffer must not overlap the output; original PCM metadata and data stay intact.
 The replay owns its separate Chip copy before this workspace is released.
 
-Mono forward loops now use the derived-only mapping policy below. Stereo,
-slice playback and enhanced song routing are unchanged. Filtering is synchronous; long conversion responsiveness
+Forward loops use the derived-only mapping policy below.
+Slice playback and enhanced song routing are unchanged. Filtering is synchronous; long conversion responsiveness
 and target performance still require emulator/hardware validation.
 
 ### Forward-loop preview coordinates
@@ -234,3 +234,20 @@ The conversion filter still uses the source endpoint extension used by existing
 offline conversion. It is not loop-aware filtering or a promise of seamless
 loop audio. Ping-pong/crossfade loops remain unsupported in this Paula bridge.
 Listening and physical performance validation remain separate requirements.
+
+### Stereo Paula audition
+
+Stereo8/16/24-bit masters now retain both channels in sample preview. Conversion
+and antialias filtering use interleaved Fast workspace; the derived8-bit values
+are split into two mono playback samples. Both trigger on the same row using
+classic Paula voices0 (left) and1 (right), with the same period, volume, finetune
+and mapped forward-loop coordinates. There is no downmix or change to the master.
+Odd-frame silence padding is applied independently to both channels.
+
+Stereo workspace is bounded to four int32 elements per padded output frame:
+two interleaved conversion values plus separate left/right planes. The existing
+per-channel131070-frame limit and current Fast-memory budget apply before use.
+Each channel gets its own owned Chip playback copy; allocation failure follows
+the existing replay cleanup path. The Fast workspace is freed after replay owns
+its snapshot. This is sample audition only, not mixed16-channel song routing.
+Pinning, explicit Stop and no-stealing backend ownership remain unchanged.

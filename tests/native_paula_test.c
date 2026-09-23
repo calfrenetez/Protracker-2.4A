@@ -130,6 +130,21 @@ int main(int argc,char **argv)
         puts("PREVIEW RATE PASS: filtered derived half-rate preview preserves true24 master");
         puts("PREVIEW PCM PASS: 24-bit master auditions via rounded/padded 8-bit Chip copy without changing master bytes or precision");
     }
+    {struct pt_sample saved=doc.project.samples[0];
+        int32_t values[6]={8388607,-8388608,65536,-65536,32768,-32768},original[6];
+        struct pt_sample *master=doc.project.samples;
+        memcpy(original,values,sizeof(values));master->pcm.data=values;master->pcm.capacity=6;master->pcm.frames=3;
+        master->pcm.channels=2;master->pcm.bits=24;master->pcm.rate=PT_CLASSIC_RATE;
+        master->loop=PT_LOOP_NONE;master->loop_start=master->loop_end=master->crossfade=0;
+        CHECK(!pt_paula_audition(&a,&doc.project,1,428));
+        for(i=0;i<20;++i) {Delay(1);pt_paula_poll(&a,&state);if(state.period[0] && state.period[1])break;}
+        CHECK(state.active && state.period[0]==428 && state.period[1]==428 && !state.period[2] && !state.period[3]);
+        CHECK(a.sample_bytes[0]==4 && a.sample_bytes[1]==4 && a.sample_data[0]!=a.sample_data[1]);
+        CHECK(a.sample_data[0][2]==1 && a.sample_data[1][2]==255 && !a.sample_data[0][3] && !a.sample_data[1][3]);
+        CHECK(!memcmp(values,original,sizeof(values)) && master->pcm.channels==2 && master->pcm.bits==24 && master->pcm.frames==3);
+        pt_paula_stop(&a);doc.project.samples[0]=saved;
+        puts("PREVIEW STEREO PASS: separate left/right Chip copies preserve interleaved true24 master");
+    }
     doc.project.events[0].kind=PT_NOTE_OFF;doc.project.events[0].pitch=0;
     CHECK(pt_paula_play(&a,&doc.project,0,0,0)!=NULL && !a.started);
     doc.project.events[0].kind=PT_NOTE_PERIOD;doc.project.events[0].pitch=428;

@@ -220,38 +220,50 @@ void pt_paula_poll(struct pt_paula *a,struct pt_playback *s)
 const char *pt_paula_audition(struct pt_paula *a,const struct pt_project *p,unsigned sample,unsigned period)
 {
     struct pt_project q;struct pt_event *events;uint16_t order=0;
-    struct pt_sample selected;const char *error;struct pt_master_memory workspace;
-    uint32_t frames;int32_t *converted=NULL;struct pt_pcm preview;
+    struct pt_sample selected[2];const char *error;struct pt_master_memory workspace;
+    uint32_t frames,i;unsigned channels,ch;int32_t *converted=NULL;struct pt_pcm preview;
     if(!sample || sample>p->sample_count || period<113 || period>856)return "SAMPLE: SELECT A VALID SAMPLE";
     if(p->channels.track[p->channels.selected].route!=PT_PAULA)return "SAMPLE: SELECT A PAULA CHANNEL FOR THIS BACKEND";
-    selected=p->samples[sample-1];
-    if(selected.pcm.channels!=1 ||
-       (selected.loop!=PT_LOOP_NONE && selected.loop!=PT_LOOP_FORWARD))
+    selected[0]=p->samples[sample-1];
+    if(selected[0].loop!=PT_LOOP_NONE && selected[0].loop!=PT_LOOP_FORWARD)
         return "SAMPLE: FORMAT NEEDS ENHANCED PREVIEW OR CONVERSION";
-    if(pt_paula_preview_frames(&selected.pcm,PT_CLASSIC_RATE,&frames)!=PT_PCM_OK)
+    if(pt_paula_preview_frames(&selected[0].pcm,PT_CLASSIC_RATE,&frames)!=PT_PCM_OK)
         return "SAMPLE: INVALID OR TOO LARGE FOR PAULA PREVIEW";
-    if(selected.loop==PT_LOOP_FORWARD &&
-       pt_paula_preview_loop(&selected.pcm,PT_CLASSIC_RATE,selected.loop_start,selected.loop_end,
-                             &selected.loop_start,&selected.loop_end)!=PT_PCM_OK)
+    if(selected[0].loop==PT_LOOP_FORWARD &&
+       pt_paula_preview_loop(&selected[0].pcm,PT_CLASSIC_RATE,selected[0].loop_start,selected[0].loop_end,
+                             &selected[0].loop_start,&selected[0].loop_end)!=PT_PCM_OK)
         return "SAMPLE: LOOP TOO SHORT FOR PAULA PREVIEW";
+    channels=selected[0].pcm.channels;
     pt_master_memory_init(&workspace);
-    preview=selected.pcm;preview.rate=PT_CLASSIC_RATE;preview.frames=frames;
-    preview.bits=8;preview.capacity=frames;preview.data=NULL;
+    preview=selected[0].pcm;preview.rate=PT_CLASSIC_RATE;preview.frames=frames;
+    preview.bits=8;preview.capacity=(size_t)frames*channels;preview.data=NULL;
     if(frames) {
-        converted=pt_master_allocate(&workspace,(size_t)frames*sizeof(*converted));
+        converted=pt_master_allocate(&workspace,(size_t)frames*(channels==2?4:1)*sizeof(*converted));
         if(!converted)return "SAMPLE: OUT OF CONVERSION MEMORY";
         preview.data=converted;
     }
-    if(pt_paula_preview_prepare(&selected.pcm,&preview)!=PT_PCM_OK) {
+    if(pt_paula_preview_prepare(&selected[0].pcm,&preview)!=PT_PCM_OK) {
         pt_master_release(&workspace,converted);return "SAMPLE: PLAYBACK CONVERSION FAILED";
     }
-    selected.pcm=preview;
+    selected[0].pcm=preview;
+    if(channels==2) {
+        selected[1]=selected[0];
+        for(ch=0;ch<2;++ch) {
+            selected[ch].pcm.channels=1;selected[ch].pcm.capacity=frames;
+            selected[ch].pcm.data=frames?converted+(size_t)frames*(2+ch):NULL;
+            for(i=0;i<frames;++i)selected[ch].pcm.data[i]=converted[(size_t)i*2+ch];
+        }
+    }
     memset(&q,0,sizeof(q));pt_channels_init(&q.channels);q.order_count=1;q.pattern_count=1;
-    q.sample_count=1;q.orders=&order;q.speed=6;q.bpm=125;q.samples=&selected;
+    q.sample_count=(uint16_t)channels;q.orders=&order;q.speed=6;q.bpm=125;q.samples=selected;
     events=pt_master_allocate(&workspace,256*sizeof(*events));
     if(!events) {pt_master_release(&workspace,converted);return "SAMPLE: OUT OF MEMORY";}
     memset(events,0,256*sizeof(*events));
-    q.events=events;events[0].kind=PT_NOTE_PERIOD;events[0].pitch=(uint16_t)period;events[0].instrument=1;
+    q.events=events;
+    /* Classic voices 0/1 are hard left/right, triggered on the same row. */
+    for(ch=0;ch<channels;++ch) {
+        events[ch].kind=PT_NOTE_PERIOD;events[ch].pitch=(uint16_t)period;events[ch].instrument=(uint8_t)(ch+1);
+    }
     error=pt_paula_play(a,&q,0,0,0);
     pt_master_release(&workspace,events);pt_master_release(&workspace,converted);
     if(!error)a->mode=2;

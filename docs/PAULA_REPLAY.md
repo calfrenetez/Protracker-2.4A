@@ -146,10 +146,11 @@ song and starts at the editor's selected position. Dynamic order mutation inside
 the running assembler engine is not used.
 
 
-Mono sample audition can now filter mono8/16/24-bit masters at other rates
+Sample audition can now filter mono/stereo8/16/24-bit masters at other rates
 into a private classic-rate8-bit representation. Original PCM stays unchanged;
 workspace uses bounded Fast-first allocation and is released after the owned
 playback copy exists. Forward loops map only in the playback copy to nearest DMA word boundaries;
-loops that collapse to one word or less are refused. Stereo remains refused. Native
+loops that collapse to one word or less are refused. Stereo uses separate derived mono samples on the left/right Paula voices,
+triggered together; no master downmix occurs. Native
 assertions for a half-rate preview have been added; consult the checkpoint for
 whether those assertions have executed, rather than treating a build as proof.

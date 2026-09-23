@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "document.h"
+#include "master_memory.h"
 #include "wav.h"
 #include "mod_project.h"
 #include "../editor/view.h"
@@ -44,19 +45,30 @@ static void recent_success(struct pt_editor *e,const char *path)
     if(ok && pt_recent_remember(&recent_projects,resolved)==PT_RECENT_OK)recent_persist(e);
     else {pt_editor_status(e,"RECENT PATH UNAVAILABLE");puts("EDITOR RECENT path unavailable");fflush(stdout);}
 }
-static void *allocate(void *ctx,size_t n) {(void)ctx;return malloc(n);}
-static void release(void *ctx,void *p) {(void)ctx;free(p);}
+static struct pt_master_memory master_memory;
+static int editor_init_memory(struct pt_editor *e,struct pt_project *p)
+{
+    struct pt_allocator a={&master_memory,pt_master_allocate,pt_master_release};
+    size_t available;
+    memset(e,0,sizeof(*e));
+    if(!pt_editor_init(e,p))return 0;
+    available=pt_master_memory_available(&master_memory);
+    pt_sampler_init(&e->sampler,&a,available/2);
+    pt_document_init(&e->sample_source,&a);
+    pt_song_init(&e->song,&a,available/4);
+    return 1;
+}
 static int load(struct pt_document *d,const char *path)
 {
     FILE *f=fopen(path,"rb");long n;uint8_t *bytes=NULL;int ok=0;
     if(!f)return 0;
     if(fseek(f,0,SEEK_END) || (n=ftell(f))<0 || n>64L*1024*1024)goto done;
-    rewind(f);bytes=malloc(n?(size_t)n:1);if(!bytes)goto done;
+    rewind(f);bytes=pt_master_allocate(&master_memory,n?(size_t)n:1);if(!bytes)goto done;
     if(fread(bytes,1,(size_t)n,f)!=(size_t)n || ferror(f))goto done;
     if(fclose(f)) {f=NULL;goto done;}f=NULL;
     ok=pt_document_load(d,bytes,(size_t)n,SIZE_MAX)==PT_PROJECT_OK;
 done:
-    free(bytes);if(f)fclose(f);return ok;
+    pt_master_release(&master_memory,bytes);if(f)fclose(f);return ok;
 }
 static enum pt_edit_result load_sample(struct pt_editor *e,const char *path,int raw,int source_only,int *preview)
 {
@@ -65,7 +77,7 @@ static enum pt_edit_result load_sample(struct pt_editor *e,const char *path,int 
     if(preview)*preview=0;
     if(!f || !e->sample) {if(f)fclose(f);return PT_EDIT_INVALID;}
     if(fseek(f,0,SEEK_END) || (n=ftell(f))<=0 || n>64L*1024*1024)goto done;
-    rewind(f);bytes=malloc((size_t)n);if(!bytes) {result=PT_EDIT_CAPACITY;goto done;}
+    rewind(f);bytes=pt_master_allocate(&master_memory,(size_t)n);if(!bytes) {result=PT_EDIT_CAPACITY;goto done;}
     if(fread(bytes,1,(size_t)n,f)!=(size_t)n || ferror(f))goto done;
     if(fclose(f)) {f=NULL;goto done;}f=NULL;
     for(part=path;*part;++part)if(*part=='/' || *part==':')name=part+1;
@@ -79,16 +91,16 @@ static enum pt_edit_result load_sample(struct pt_editor *e,const char *path,int 
     result=raw?pt_sampler_import_raw(&e->sampler,e->project,&e->history,e->sample-1,bytes,(size_t)n,name,&e->raw_format):pt_sampler_import(&e->sampler,e->project,&e->history,e->sample-1,bytes,(size_t)n,name);
 done:
     if(f)fclose(f);
-    free(bytes);return result;
+    pt_master_release(&master_memory,bytes);return result;
 }
 static void save_sample(struct pt_editor *e,const char *path)
 {
     size_t n,w;uint8_t *bytes;enum pt_save_result result;
     const struct pt_pcm *pcm=e->sample && e->sample<=e->project->sample_count?&e->project->samples[e->sample-1].pcm:NULL;
     if(!pcm || !pcm->frames || pt_wav_size(pcm,&n)!=PT_WAV_OK) {pt_editor_status(e,"WAV EXPORT: SELECT A NONEMPTY SAMPLE");return;}
-    bytes=malloc(n);if(!bytes) {pt_editor_status(e,"WAV EXPORT: OUT OF MEMORY");return;}
-    if(pt_wav_encode(pcm,bytes,n,&w)!=PT_WAV_OK || w!=n) {free(bytes);pt_editor_status(e,"WAV EXPORT FAILED - SAMPLE PRESERVED");return;}
-    result=pt_file_save_new(path,bytes,n);free(bytes);
+    bytes=pt_master_allocate(&master_memory,n);if(!bytes) {pt_editor_status(e,"WAV EXPORT: OUT OF MEMORY");return;}
+    if(pt_wav_encode(pcm,bytes,n,&w)!=PT_WAV_OK || w!=n) {pt_master_release(&master_memory,bytes);pt_editor_status(e,"WAV EXPORT FAILED - SAMPLE PRESERVED");return;}
+    result=pt_file_save_new(path,bytes,n);pt_master_release(&master_memory,bytes);
     pt_editor_status(e,result==PT_SAVE_OK?"WAV EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED":"WAV EXPORT REFUSED OR FAILED - DESTINATION PRESERVED");
     printf("EDITOR WAV result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
 }
@@ -105,9 +117,9 @@ static void save_raw(struct pt_editor *e,const char *path)
 {
     size_t n,w;uint8_t *bytes;enum pt_save_result result;
     if(!raw_eligible(e) || pt_raw_size(&e->project->samples[e->sample-1].pcm,&e->raw_format,&n)!=PT_RAW_OK)return;
-    bytes=malloc(n);if(!bytes) {pt_editor_status(e,"RAW EXPORT: OUT OF MEMORY");return;}
-    if(pt_raw_encode(&e->project->samples[e->sample-1].pcm,&e->raw_format,bytes,n,&w)!=PT_RAW_OK || n!=w) {free(bytes);pt_editor_status(e,"RAW EXPORT FAILED - SAMPLE PRESERVED");return;}
-    result=pt_file_save_new(path,bytes,n);free(bytes);
+    bytes=pt_master_allocate(&master_memory,n);if(!bytes) {pt_editor_status(e,"RAW EXPORT: OUT OF MEMORY");return;}
+    if(pt_raw_encode(&e->project->samples[e->sample-1].pcm,&e->raw_format,bytes,n,&w)!=PT_RAW_OK || n!=w) {pt_master_release(&master_memory,bytes);pt_editor_status(e,"RAW EXPORT FAILED - SAMPLE PRESERVED");return;}
+    result=pt_file_save_new(path,bytes,n);pt_master_release(&master_memory,bytes);
     pt_editor_status(e,result==PT_SAVE_OK?"RAW PCM EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED":"RAW EXPORT REFUSED OR FAILED - DESTINATION PRESERVED");
     printf("EDITOR RAW result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
 }
@@ -123,9 +135,9 @@ static void save_svx(struct pt_editor *e,const char *path)
 {
     size_t n,w;uint8_t *bytes;enum pt_save_result result;const struct pt_sample *sample=&e->project->samples[e->sample-1];
     if(!svx_eligible(e) || pt_sampler_svx_size(sample,&n)!=PT_SVX_OK)return;
-    bytes=malloc(n);if(!bytes) {pt_editor_status(e,"IFF EXPORT: OUT OF MEMORY");return;}
-    if(pt_sampler_svx_encode(sample,bytes,n,&w)!=PT_SVX_OK || w!=n) {free(bytes);pt_editor_status(e,"IFF EXPORT FAILED - SAMPLE PRESERVED");return;}
-    result=pt_file_save_new(path,bytes,n);free(bytes);
+    bytes=pt_master_allocate(&master_memory,n);if(!bytes) {pt_editor_status(e,"IFF EXPORT: OUT OF MEMORY");return;}
+    if(pt_sampler_svx_encode(sample,bytes,n,&w)!=PT_SVX_OK || w!=n) {pt_master_release(&master_memory,bytes);pt_editor_status(e,"IFF EXPORT FAILED - SAMPLE PRESERVED");return;}
+    result=pt_file_save_new(path,bytes,n);pt_master_release(&master_memory,bytes);
     pt_editor_status(e,result==PT_SAVE_OK?"IFF EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED":"IFF EXPORT REFUSED OR FAILED - DESTINATION PRESERVED");
     printf("EDITOR IFF result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
 }
@@ -133,13 +145,13 @@ static void save(struct pt_editor *e,const char *path)
 {
     size_t n,w;uint8_t *bytes;enum pt_save_result result;
     if(!path) {pt_editor_status(e,"START WITH INPUT AND NEW_OUTPUT PATH TO ENABLE SAVE");return;}
-    if(pt_project_size(e->project,&n)!=PT_PROJECT_OK || !(bytes=malloc(n))) {
+    if(pt_project_size(e->project,&n)!=PT_PROJECT_OK || !(bytes=pt_master_allocate(&master_memory,n))) {
         pt_editor_status(e,"SAVE: INVALID PROJECT OR OUT OF MEMORY");return;
     }
     if(pt_project_encode(e->project,bytes,n,&w)!=PT_PROJECT_OK || w!=n) {
-        free(bytes);pt_editor_status(e,"SAVE: ENCODE FAILED; CURRENT EDITS PRESERVED");return;
+        pt_master_release(&master_memory,bytes);pt_editor_status(e,"SAVE: ENCODE FAILED; CURRENT EDITS PRESERVED");return;
     }
-    result=pt_file_save_new(path,bytes,n);free(bytes);
+    result=pt_file_save_new(path,bytes,n);pt_master_release(&master_memory,bytes);
     if(result==PT_SAVE_OK) {pt_editor_saved(e);recent_success(e,path);}
     else pt_editor_status(e,result==PT_SAVE_PUBLISH?"SAVE REFUSED: DESTINATION EXISTS OR CANNOT BE PUBLISHED":"SAVE FAILED: CURRENT EDITS AND DESTINATION PRESERVED");
     printf("EDITOR SAVE result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
@@ -163,12 +175,12 @@ static int mod_eligible(struct pt_editor *e,struct pt_mod_export_report *r,unsig
 }
 static void save_mod(struct pt_editor *e,const char *path,size_t n,unsigned round8,unsigned converted)
 {
-    uint8_t *bytes=malloc(n);size_t written;enum pt_save_result result;
+    uint8_t *bytes=pt_master_allocate(&master_memory,n);size_t written;enum pt_save_result result;
     if(!bytes) {pt_editor_status(e,"MOD EXPORT: OUT OF MEMORY - PROJECT PRESERVED");return;}
     if((round8==2?pt_mod_export_tpdf8(e->project,bytes,n,&written):round8?pt_mod_export_round8(e->project,bytes,n,&written):pt_mod_export_direct(e->project,bytes,n,&written))!=PT_PROJECT_OK || written!=n) {
-        free(bytes);pt_editor_status(e,"MOD EXPORT FAILED - PROJECT PRESERVED");return;
+        pt_master_release(&master_memory,bytes);pt_editor_status(e,"MOD EXPORT FAILED - PROJECT PRESERVED");return;
     }
-    result=pt_file_save_new(path,bytes,n);free(bytes);
+    result=pt_file_save_new(path,bytes,n);pt_master_release(&master_memory,bytes);
     if(result==PT_SAVE_OK) {pt_editor_status(e,converted?(pt_editor_dirty(e)?"MOD CONVERTED - UNSAVED":"MOD CONVERTED - SOURCE KEPT"):(pt_editor_dirty(e)?"MOD EXPORTED AND VERIFIED - PROJECT STILL UNSAVED":"MOD EXPORTED AND VERIFIED"));recent_success(e,path);}
     else pt_editor_status(e,result==PT_SAVE_PUBLISH?"MOD EXPORT REFUSED: DESTINATION EXISTS OR CANNOT BE PUBLISHED":"MOD EXPORT FAILED: PROJECT AND DESTINATION PRESERVED");
     /* Export does not mark the richer project saved or consume undo history. */
@@ -320,15 +332,16 @@ int main(int argc,char **argv)
 {
     struct pt_view_cache view_cache={0};
     struct pt_paula audio={0};char load_path[1024]="",save_path[1024]="new-project.ptg",mod_path[1024]="new-module.mod",sample_path[1024]="",wav_path[1024]="new-sample.wav",svx_path[1024]="new-sample.iff",raw_path[1024]="new-sample.raw",raw_input[1024]="",chosen_path[1024];
-    struct pt_allocator allocator={NULL,allocate,release};struct pt_document doc;
+    struct pt_allocator allocator={&master_memory,pt_master_allocate,pt_master_release};struct pt_document doc;
     struct pt_editor *editor=NULL;struct Screen *screen=NULL;struct Window *window=NULL;
     struct MsgPort *clock_port=NULL;struct timerequest *clock_request=NULL;
     int clock_open=0,clock_pending=0;unsigned frame_log=1,frames=0,peak_gap=0;
     struct DateStamp frame_start,frame_last;
     struct BitMap bitmap;struct pt_canvas canvas;unsigned plane;uint8_t *pixels=NULL;int rc=20,running=1,redraw=1;
+    pt_master_memory_init(&master_memory);
     memset(&bitmap,0,sizeof(bitmap));memset(&canvas,0,sizeof(canvas));pt_document_init(&doc,&allocator);
     if(argc<1 || argc>3) {puts("Usage: PT24GEdit [INPUT [NEW_OUTPUT]]\nDevelopment editor; classic Paula playback; existing output is never replaced.");goto done;}
-    if((argc>1?!load(&doc,argv[1]):pt_document_new(&doc,4,SIZE_MAX)!=PT_PROJECT_OK) || !(editor=calloc(1,sizeof(*editor))) || !pt_editor_init(editor,&doc.project)) {
+    if((argc>1?!load(&doc,argv[1]):pt_document_new(&doc,4,SIZE_MAX)!=PT_PROJECT_OK) || !(editor=pt_master_allocate(&master_memory,sizeof(*editor))) || !editor_init_memory(editor,&doc.project)) {
         puts("EDITOR: input invalid or allocation failed");goto done;
     }
     {
@@ -509,7 +522,7 @@ int main(int argc,char **argv)
             if(action==PT_UI_NEW) {
                 unsigned channels=editor->new_channels;
                 if(pt_document_new(&doc,channels,SIZE_MAX)==PT_PROJECT_OK) {
-                    pt_paula_stop(&audio);pt_editor_dispose(editor);pt_editor_init(editor,&doc.project);editor->recent=&recent_projects;load_path[0]=0;
+                    pt_paula_stop(&audio);pt_editor_dispose(editor);editor_init_memory(editor,&doc.project);editor->recent=&recent_projects;load_path[0]=0;
                     pt_editor_status(editor,"NEW SONG READY - EMPTY SAMPLE SLOTS");view_cache.valid=0;
                     printf("EDITOR NEW channels=%u patterns=%u\n",doc.project.channels.count,doc.project.pattern_count);fflush(stdout);
                 } else pt_editor_status(editor,"NEW SONG FAILED - CURRENT PROJECT AND EDITS PRESERVED");
@@ -529,7 +542,7 @@ int main(int argc,char **argv)
                     view_cache.valid=0;
                     if(selected==1) {
                         if(load(&doc,chosen_path)) {
-                            pt_paula_stop(&audio);pt_editor_dispose(editor);pt_editor_init(editor,&doc.project);editor->recent=&recent_projects;strcpy(load_path,chosen_path);
+                            pt_paula_stop(&audio);pt_editor_dispose(editor);editor_init_memory(editor,&doc.project);editor->recent=&recent_projects;strcpy(load_path,chosen_path);
                             pt_editor_status(editor,"PROJECT LOADED");recent_success(editor,chosen_path);
                             printf("EDITOR LOAD success channels=%u patterns=%u\n",doc.project.channels.count,doc.project.pattern_count);fflush(stdout);
                         } else pt_editor_status(editor,"LOAD FAILED - CURRENT PROJECT AND EDITS PRESERVED");
@@ -553,5 +566,5 @@ done:
     if(pixels)FreeMem(pixels,4UL*PT_VIEW_PLANE_BYTES);
     if(GfxBase)CloseLibrary((struct Library *)GfxBase);
     if(IntuitionBase)CloseLibrary((struct Library *)IntuitionBase);
-    pt_editor_dispose(editor);free(editor);pt_document_release(&doc);return rc;
+    pt_editor_dispose(editor);pt_master_release(&master_memory,editor);pt_document_release(&doc);return rc;
 }

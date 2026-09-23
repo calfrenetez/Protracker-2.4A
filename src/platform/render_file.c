@@ -10,7 +10,7 @@
 #include "render_file.h"
 struct file {
     const char *path;char temporary[1536],directory[1500];int fd,owned,verifying;
-    FILE *reader;uint64_t frames;uint32_t rate;uint8_t bits;
+    int reader;uint64_t frames;uint32_t rate;uint8_t bits;
     pt_render_progress progress;void *progress_ctx;
 };
 static void le16(uint8_t *b,unsigned value) {b[0]=(uint8_t)value;b[1]=(uint8_t)(value>>8);}
@@ -43,10 +43,26 @@ static int begin(struct file *f)
     }
     return 0;
 }
+/* No stdio read-ahead allocation: verification uses only caller-sized blocks.
+ * Short reads and interrupted syscalls are normal, including at EOF. */
+static long read_retry(int fd,uint8_t *data,size_t n)
+{
+    long count;
+    do {count=(long)read(fd,data,n);} while(count<0 && errno==EINTR);
+    return count;
+}
 static int bytes(struct file *f,const uint8_t *data,size_t n)
 {
     size_t pos=0;uint8_t check[1536];
-    if(f->verifying)return n<=sizeof(check) && fread(check,1,n,f->reader)==n && !memcmp(check,data,n);
+    if(f->verifying) {
+        if(n>sizeof(check))return 0;
+        while(pos<n) {
+            long count=read_retry(f->reader,check+pos,n-pos);
+            if(count<=0)return 0;
+            pos+=(size_t)count;
+        }
+        return !memcmp(check,data,n);
+    }
     while(pos<n) {
         long count=(long)write(f->fd,data+pos,n-pos);
         if(count<0 && errno==EINTR)continue;
@@ -69,7 +85,7 @@ static int progress(void *ctx,enum pt_render_phase phase,uint32_t ticks,uint64_t
 }
 static void abort_file(struct file *f)
 {
-    if(f->reader) {fclose(f->reader);f->reader=NULL;}
+    if(f->reader>=0) {close(f->reader);f->reader=-1;}
     if(f->fd>=0) {close(f->fd);f->fd=-1;}
     if(f->owned) {
         if(unlink(f->temporary) && errno!=ENOENT)fprintf(stderr,"Render staging retained: %s\n",f->temporary);
@@ -86,7 +102,7 @@ enum pt_render_file_result pt_render_file_new(const char *path,const struct pt_p
     enum pt_render_result result;enum pt_render_file_result failure=PT_RENDER_FILE_RENDER;int ok;
     if(detail)*detail=PT_RENDER_INVALID;
     if(!path || !*path || strlen(path)>1400 || !out || !detail)return PT_RENDER_FILE_INVALID;
-    memset(&f,0,sizeof(f));f.path=path;f.fd=-1;f.progress=notify;f.progress_ctx=ctx;
+    memset(&f,0,sizeof(f));f.path=path;f.fd=-1;f.reader=-1;f.progress=notify;f.progress_ctx=ctx;
     result=pt_render_measure(p,o,notify,ctx,&plan);*detail=result;if(result!=PT_RENDER_OK)return failure;
     if(plan.frames>(0x7fffffffUL-44)/(o->bits/4)) {*detail=PT_RENDER_FRAME_LIMIT;return failure;}
     f.bits=o->bits;f.rate=o->rate;header(wav,o,(uint32_t)plan.frames);
@@ -102,12 +118,12 @@ enum pt_render_file_result pt_render_file_new(const char *path,const struct pt_p
     ok=close(f.fd);f.fd=-1;if(ok)goto fail;
     failure=PT_RENDER_FILE_VERIFY;f.verifying=1;f.frames=0;
     if(!progress(&f,PT_RENDER_VERIFY,0,0)) {*detail=PT_RENDER_CANCELLED;goto fail;}
-    f.reader=fopen(f.temporary,"rb");if(!f.reader || !bytes(&f,wav,sizeof(wav)))goto fail;
+    f.reader=open(f.temporary,O_RDONLY);if(f.reader<0 || !bytes(&f,wav,sizeof(wav)))goto fail;
     result=pt_render_stream(p,o,sink,&f,progress,&f,&checked);*detail=result;
     if(result!=PT_RENDER_OK || checked.frames!=rendered.frames || checked.ticks!=rendered.ticks || checked.clipped!=rendered.clipped ||
-       checked.end!=rendered.end || fgetc(f.reader)!=EOF || ferror(f.reader))goto fail;
+       checked.end!=rendered.end || read_retry(f.reader,wav,1)!=0)goto fail;
     if(!progress(&f,PT_RENDER_VERIFY,checked.ticks,f.frames)) {*detail=PT_RENDER_CANCELLED;goto fail;}
-    ok=fclose(f.reader);f.reader=NULL;if(ok)goto fail;
+    ok=close(f.reader);f.reader=-1;if(ok)goto fail;
     failure=PT_RENDER_FILE_PUBLISH;
 #ifdef __amigaos__
     if(!Rename((STRPTR)f.temporary,(STRPTR)path))goto fail;

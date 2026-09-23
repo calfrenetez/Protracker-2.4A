@@ -302,3 +302,19 @@ The compact preview messages are qualified in
 status area on a committed-source candidate. No master or layout behavior changed.
 Progress wording fits the same character bound but was not separately captured.
 Uncommitted display work and deliberate refresh-event acceptance remain open.
+
+## Render/stem verification buffers
+
+The offline mixer already reads immutable master PCM directly, retaining true
+24-bit values for 24-bit WAV output. Render and stem file verification now uses
+bounded descriptor reads instead of stdio read-ahead buffers. Each comparison
+uses at most1536 stack bytes; encoding uses a separate1536-byte stack block and
+the mixer emits at most256 stereo frames. Short reads and EINTR are handled;
+truncated, corrupted or trailing bytes prevent publication. Master PCM is never
+replaced by these output blocks. Stem export reuses the same verification path.
+
+This removes the verification stream's implicit stdio buffer, not all library
+allocation. File descriptors/runtime internals and stack placement still require
+native memory/performance qualification. These stack blocks are not claimed to
+be explicitly allocated Fast RAM. A caller-owned bounded Fast workspace for
+render state remains open, as does live24-bit Studio transport to AmiGUS.

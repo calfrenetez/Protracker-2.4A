@@ -14,6 +14,12 @@ class RenderFile(unittest.TestCase):
             subprocess.run([*flags,'tests/render_file_test.c','src/core/wav.c',*RENDER,'-o',str(binary)],cwd=ROOT,check=True)
             subprocess.run([str(binary),str(out)],check=True)
             self.assertEqual(sorted(p.name for p in out.iterdir()),['race.wav','saved.wav'])
+            fault_out=tmp/'read-faults';fault_out.mkdir()
+            fault_binary=tmp/'read-faults-test'
+            subprocess.run([*flags,'-Dread=pt_test_read','tests/render_file_test.c','tests/render_read_faults.c',
+                            'src/core/wav.c',*RENDER,'-o',str(fault_binary)],cwd=ROOT,check=True)
+            subprocess.run([str(fault_binary),str(fault_out)],check=True)
+            self.assertEqual(sorted(p.name for p in fault_out.iterdir()),['race.wav','saved.wav'])
             subprocess.run([*flags,'tools/pt24g_render.c','src/core/document.c','src/core/pp20.c','src/core/mod_project.c','src/core/mod_inspect.c',*RENDER,'-o',str(cli)],cwd=ROOT,check=True)
             fixture=ROOT/'evidence/enhanced-editor/dev28/native/speed.mod';wav=out/'cli.wav'
             args=[str(cli),str(fixture),str(wav),'--rate','44100','--bits','16','--gain','65536']

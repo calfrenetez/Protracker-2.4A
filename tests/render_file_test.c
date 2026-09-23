@@ -12,13 +12,13 @@ static int progress(void *ctx,enum pt_render_phase phase,uint32_t ticks,uint64_t
     if(f->mode==1 && phase==PT_RENDER_MIX && frames>=256)return 0;
     if(phase!=PT_RENDER_VERIFY || f->done)return 1;
     f->done=1;
-    if(f->mode==2) {
+    if(f->mode==2 || f->mode==5 || f->mode==6) {
 #ifdef __amigaos__
         snprintf(path,sizeof(path),"%s.pttmp-%lu-0/data",f->path,(unsigned long)getpid());
 #else
         snprintf(path,sizeof(path),"%s.pttmp-%lu-0",f->path,(unsigned long)getpid());
 #endif
-        file=fopen(path,"r+b");assert(file);assert(fputc('X',file)!=EOF);assert(!fclose(file));
+        file=fopen(path,f->mode==5?"wb":f->mode==6?"ab":"r+b");assert(file);assert(fputc('X',file)!=EOF);assert(!fclose(file));
     } else if(f->mode==3) {
         file=fopen(f->path,"wb");assert(file);assert(fwrite("PRESERVE",1,8,file)==8);assert(!fclose(file));
     } else if(f->mode==4)return 0;
@@ -49,8 +49,8 @@ int main(int argc,char **argv)
     memcpy(original,data,n);before=report;
     assert(pt_render_file_new(path,&p,&o,NULL,NULL,&report,&detail)==PT_RENDER_FILE_BEGIN && !memcmp(&report,&before,sizeof(report)));
     assert(read_file(path,data,sizeof(data))==n && !memcmp(data,original,n));
-    for(i=1;i<=4;++i) {
-        static const char *names[]={"","cancel.wav","corrupt.wav","race.wav","verifycancel.wav"};
+    for(i=1;i<=6;++i) {
+        static const char *names[]={"","cancel.wav","corrupt.wav","race.wav","verifycancel.wav","truncated.wav","trailing.wav"};
         enum pt_render_file_result result;
         memset(&failure,0,sizeof(failure));failure.mode=i;path_for(failure.path,sizeof(failure.path),dir,names[i]);
         result=pt_render_file_new(failure.path,&p,&o,progress,&failure,&report,&detail);
@@ -63,5 +63,5 @@ int main(int argc,char **argv)
     path_for(path,sizeof(path),dir,"unsupported.wav");events[0].effect=14;events[0].parameter=0xf1;
     assert(pt_render_file_new(path,&p,&o,NULL,NULL,&report,&detail)==PT_RENDER_FILE_RENDER && detail==PT_RENDER_EFFECT && access(path,F_OK)!=0);
     assert(pcm[0]==0x123456 && pcm[1]==-0x345678);
-    puts("RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt staging refusal and cleanup");return 0;
+    puts("RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt/truncated/trailing staging refusal and cleanup");return 0;
 }

@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "scope": "shared030 native render/stem file checks",
+  "PTRenderFileTest_sha256": "3dfee4a0e86a7c0a969b923e227721a60613caa6973b61e48128e7d829f77cde",
+  "PTStemFileTest_sha256": "b7787ae62f4d017c32464babf35d878cb240605821f612f68e1ed40fc14db10c",
+  "render_returncode": "0",
+  "stems_returncode": "0",
+  "run_files_cleaned": true
+}

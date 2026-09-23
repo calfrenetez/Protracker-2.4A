@@ -5,6 +5,8 @@
 	XDEF _pt_replay_data,_pt_replay_ticks,_pt_replay_order,_pt_replay_rowbytes
 	XDEF _pt_replay_audible,_pt_replay_rawvol,_pt_replay_outputvol
 	XDEF _pt_replay_voices,_pt_replay_speed,_pt_replay_tempo,_pt_replay_enabled
+	XDEF _pt_replay_scopes,_pt_replay_clock
+_pt_replay_clock EQU TimerValue
 _pt_replay_enabled EQU mt_Enable
 _pt_replay_voices EQU mt_audchan1temp
 _pt_replay_speed EQU mt_Speed
@@ -17,6 +19,11 @@ _pt_replay_start
 	CLR.L _pt_replay_outputvol
 	CLR.L _pt_replay_rawvol
 	CLR.L _pt_replay_ticks
+	LEA _pt_replay_scopes(PC),A0
+	MOVEQ #19,D0
+pt_clearscopes
+	CLR.L (A0)+
+	DBRA D0,pt_clearscopes
 	CLR.B _pt_replay_order
 	CLR.W _pt_replay_rowbytes
 	LEA mt_audchan1temp(PC),A0
@@ -92,6 +99,31 @@ _pt_replay_stop
 	BSR.W mt_end
 	MOVEM.L (SP)+,D2-D7/A2-A6
 	RTS
+	; Record the sample actually triggered, not later instrument-only changes.
+	; Preserve registers; the original DMA write still supplies condition codes.
+pt_start_dma
+	MOVEM.L D0-D1/A0-A1,-(SP)
+	LEA mt_audchan1temp(PC),A0
+	LEA _pt_replay_scopes(PC),A1
+	MOVEQ #0,D1
+pt_scope_channel
+	BTST D1,D0
+	BEQ.B pt_scope_next
+	ADDQ.L #1,(A1)
+	MOVE.L _pt_replay_ticks(PC),4(A1)
+	MOVE.L n_start(A0),8(A1)
+	MOVE.L n_loopstart(A0),12(A1)
+	MOVE.W n_length(A0),16(A1)
+	MOVE.W n_replen(A0),18(A1)
+pt_scope_next
+	LEA 44(A0),A0
+	LEA 20(A1),A1
+	ADDQ.W #1,D1
+	CMP.W #4,D1
+	BNE.B pt_scope_channel
+	MOVEM.L (SP)+,D0-D1/A0-A1
+	MOVE.W D0,$DFF096
+	RTS
 	; Preserve registers and the MOVE.W condition codes at each replaced write.
 	; Raw volume retains tremolo/slide/cut output even while inaudible.
 pt_write_volume
@@ -117,6 +149,8 @@ pt_volume_audible
 	CNOP 0,4
 _pt_replay_outputvol dc.l 0
 _pt_replay_rawvol dc.l 0
+	CNOP 0,4
+_pt_replay_scopes ds.b 80
 _pt_replay_audible dc.w 15
 	CNOP 0,4
 _pt_replay_data dc.l 0

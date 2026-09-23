@@ -470,6 +470,25 @@ int main(int argc,char **argv)
         assert(pt_editor_click(e,510,PT_EDITOR_BOTTOM_Y)==PT_UI_STOP);
         pt_editor_click(e,49,PT_EDITOR_PATTERN_Y+1);
     }
+    /* Listening follows the replay; editing and sample audition do not move
+       the user's cursor. Position-only navigation cannot dirty the project. */
+    {
+        unsigned row=e->row,first=e->first_row,pattern=e->pattern,position=e->position,editing=e->editing;
+        unsigned long revision=e->history.revision;
+        e->editing=0;e->playback.active=1;e->playback.mode=0;
+        e->playback.order=0;e->playback.pattern=0;e->playback.row=39;
+        pt_editor_follow_playback(e);assert(e->row==39 && e->first_row==20 && e->pattern==0 && e->position==0);
+        e->playback.row=63;pt_editor_follow_playback(e);assert(e->row==63 && e->first_row==44);
+        e->playback.row=0;pt_editor_follow_playback(e);assert(e->row==0 && e->first_row==0);
+        e->editing=1;e->playback.row=8;pt_editor_follow_playback(e);assert(e->row==0);
+        e->editing=0;e->playback.mode=2;pt_editor_follow_playback(e);assert(e->row==0);
+        e->playback.mode=1;e->position=position;pt_editor_follow_playback(e);assert(e->row==8 && e->position==position);
+        e->playback.row=64;pt_editor_follow_playback(e);assert(e->row==8);
+        e->playback.row=12;e->playback.active=0;pt_editor_follow_playback(e);assert(e->row==8);
+        assert(e->history.revision==revision);
+        memset(&e->playback,0,sizeof(e->playback));
+        e->row=row;e->first_row=first;e->pattern=pattern;e->position=position;e->editing=editing;
+    }
     for(i=0;i<4;++i) {canvas.planes[i]=malloc(PT_VIEW_PLANE_BYTES);assert(canvas.planes[i]);}
     pt_editor_status(e,"EDITOR DEVELOPMENT - AUDIO NOT CONNECTED");e->quit_pending=0;e->panel=0;
     for(i=0;i<4;++i) {pt_editor_key(e,0x50+i,0);pt_editor_draw(e,&canvas,font);}

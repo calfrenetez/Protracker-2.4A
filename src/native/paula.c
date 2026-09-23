@@ -10,6 +10,8 @@
 extern int pt_replay_start(void *,unsigned long,void *,unsigned long);
 extern void pt_replay_stop(void);
 extern volatile uint32_t pt_replay_ticks;
+extern volatile uint32_t pt_replay_clock;
+extern volatile uint8_t pt_replay_scopes[];
 extern volatile uint16_t pt_replay_rowbytes,pt_replay_tempo,pt_replay_audible;
 extern volatile uint8_t pt_replay_order,pt_replay_speed,pt_replay_voices[],pt_replay_enabled,pt_replay_rawvol[4],pt_replay_outputvol[4];
 static unsigned be16(const uint8_t *p) {return ((unsigned)p[0]<<8)|p[1];}
@@ -144,21 +146,24 @@ const char *pt_paula_sync(struct pt_paula *a,const struct pt_project *p)
 }
 void pt_paula_poll(struct pt_paula *a,struct pt_playback *s)
 {
-    uint8_t voices[176],volumes[4];unsigned i,j;memset(s,0,sizeof(*s));
+    uint8_t voices[176],volumes[4],scopes[80];uint32_t clock;unsigned i;memset(s,0,sizeof(*s));
     if(!a->started)return;
     if(!pt_replay_enabled || CheckIO((struct IORequest *)a->lock)) {pt_paula_stop(a);return;}
     Disable();
     s->ticks=pt_replay_ticks;s->order=pt_replay_order;s->row=pt_replay_rowbytes/16;
     s->speed=pt_replay_speed;s->bpm=pt_replay_tempo;
     CopyMem((const void *)pt_replay_voices,voices,sizeof(voices));
+    CopyMem((const void *)pt_replay_scopes,scopes,sizeof(scopes));clock=pt_replay_clock*2;
     for(i=0;i<4;++i)volumes[i]=pt_replay_outputvol[i];
-    Enable();s->active=1;s->pattern=a->data[952+s->order];
+    Enable();s->active=1;s->mode=a->mode;s->pattern=a->data[952+s->order];
     for(i=0;i<4;++i) {
-        const uint8_t *v=voices+i*44;uintptr_t address=be32(v+4),base=(uintptr_t)a->data;
-        size_t length=(size_t)be16(v+20)*2;
+        const uint8_t *v=voices+i*44,*scope=scopes+i*20;
+        uintptr_t address=be32(scope+8),loop=be32(scope+12),base=(uintptr_t)a->data;
         s->volume[i]=volumes[i];s->period[i]=(uint16_t)be16(v+24);
-        if(address<base || address-base>=a->bytes || length>a->bytes-(address-base) || !length)continue;
-        for(j=0;j<81;++j)s->wave[i][j]=(int8_t)a->data[address-base+(size_t)j*length/81];
+        if(address<base || loop<base || address-base>a->bytes || loop-base>a->bytes)continue;
+        pt_scope_wave(&a->scope[i],s->wave[i],(const int8_t *)a->data,a->bytes+2,
+            (uint32_t)(address-base),be16(scope+16)*2,(uint32_t)(loop-base),be16(scope+18)*2,
+            (uint32_t)be32(scope),(uint32_t)be32(scope+4),s->ticks,s->period[i],s->bpm,clock);
     }
 }
 

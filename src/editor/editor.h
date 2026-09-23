@@ -72,6 +72,8 @@ enum pt_editor_action pt_editor_click(struct pt_editor *,int x,int y);
 void pt_editor_status(struct pt_editor *,const char *);
 void pt_editor_saved(struct pt_editor *);
 int pt_editor_dirty(const struct pt_editor *);
+/* Follow normal playback without moving an active edit cursor or audition. */
+void pt_editor_follow_playback(struct pt_editor *);
 /* Current half-open selection, normalized across reverse/cross-page marking. */
 int pt_editor_selection(const struct pt_editor *,struct pt_editor_selection *);
 void pt_editor_note(const struct pt_event *,char out[4]);

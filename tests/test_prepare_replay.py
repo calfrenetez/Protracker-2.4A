@@ -15,11 +15,11 @@ class ReplayAdapter(unittest.TestCase):
         from prepare_asm import prepare
         # The effect/timing implementation, including the finetune tables, is
         # unchanged apart from equivalent opcode spelling and the final volume
-        # output hooks. Neither tracker volume nor effect state is gated.
+        # and DMA observation hooks. Neither tracker volume nor effect state is gated.
         original=raw[raw.index(b'\nmt_PlayVoice\n'):raw.index(b'\n\tCNOP 0,4\nmt_audchan1temp')]
         self.assertEqual(raw.count(b'\tMOVE.W\tD0,8(A5)'),6)
         self.assertEqual(adapted.count(b'BSR.W\tpt_write_volume'),6)
-        self.assertIn(prepare(original.replace(b'\tMOVE.W\tD0,8(A5)',b'\tBSR.W\tpt_write_volume'))[0],adapted)
+        self.assertIn(prepare(original.replace(b'\tMOVE.W\tD0,8(A5)',b'\tBSR.W\tpt_write_volume').replace(b'\tMOVE.W\tD0,$DFF096',b'\tBSR.W\tpt_start_dma'))[0],adapted)
         with self.assertRaises(ValueError):
             prepare_replay(raw.replace(b'\tMOVE.W\tD0,8(A5)',b'CHANGED',1),wrapper)
         for anchor in [b'RemInt\tLEA',b'\tLEA\tmt_data,A0',b'\nmt_GetNewNote\n']:

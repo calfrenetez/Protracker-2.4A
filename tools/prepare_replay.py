@@ -28,6 +28,10 @@ def prepare_replay(raw, wrapper):
     if source.count(volume) != 6:
         raise ValueError('Replay volume anchors changed')
     source = source.replace(volume, '\tBSR.W\tpt_write_volume')
+    dma = '\tMOVE.W\tD0,$DFF096'
+    if source.count(dma) != 2:
+        raise ValueError('Replay DMA trigger anchors changed')
+    source = source.replace(dma, '\tBSR.W\tpt_start_dma')
     source = once(source, '\tSECTION music,DATA_C\n\n\tCNOP 0,4\nmt_data INCBIN "music.mod"', wrapper.decode('ascii'))
     return prepare(source.encode('latin1'))[0]
 

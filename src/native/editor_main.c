@@ -385,17 +385,12 @@ int main(int argc,char **argv)
             if(kind==IDCMP_INTUITICKS) {
                 unsigned was_active=editor->playback.active;
                 pt_paula_poll(&audio,&editor->playback);
+                pt_editor_follow_playback(editor);
                 if(was_active && !editor->playback.active) {pt_editor_status(editor,"PLAYBACK ENDED - AUDIO RELEASED");redraw=1;}
                 if(was_active || editor->playback.active) {
-                    unsigned i;
-                    pt_editor_draw_playback(editor,&canvas,pt_font);
-                    for(i=0;i<PT_VIEW_PLAYBACK_AREAS;++i) {
-                        const struct pt_view_rect *area=&pt_view_playback_areas[i];
-                        for(plane=0;plane<4;++plane)CopyMem(canvas.planes[plane]+area->y*80,
-                            bitmap.Planes[plane]+area->y*80,area->height*80);
-                        BltBitMapRastPort(&bitmap,area->x,area->y,window->RPort,
-                            area->x,area->y,area->width,area->height,0xc0);WaitBlit();
-                    }
+                    /* Use the shared dirty renderer so pattern rows and scope
+                       pixels are presented together and its cache stays valid. */
+                    redraw=1;
                     printf("EDITOR REPLAY active=%u ticks=%lu order=%u pattern=%u row=%u bpm=%u speed=%u period=%u,%u,%u,%u volume=%u,%u,%u,%u\n",
                         editor->playback.active,(unsigned long)editor->playback.ticks,editor->playback.order,editor->playback.pattern,
                         editor->playback.row,editor->playback.bpm,editor->playback.speed,

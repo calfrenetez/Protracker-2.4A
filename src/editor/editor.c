@@ -436,6 +436,15 @@ static void visible(struct pt_editor *e)
     if(e->row<e->first_row)e->first_row=e->row;
     if(e->row>=e->first_row+PT_EDITOR_ROWS)e->first_row=e->row-PT_EDITOR_ROWS+1;
 }
+void pt_editor_follow_playback(struct pt_editor *e)
+{
+    const struct pt_playback *s=&e->playback;
+    if(!s->active || s->mode==2 || e->editing || s->row>=64 ||
+       s->pattern>=e->project->pattern_count || s->order>=e->project->order_count)return;
+    e->row=s->row;e->pattern=s->pattern;
+    if(!s->mode)e->position=s->order;
+    visible(e);
+}
 static void undo(struct pt_editor *e,int direction)
 {
     unsigned generation=e->sampler.generation,song_generation=e->song.generation;

@@ -34,6 +34,12 @@ int main(int argc,char **argv)
     CHECK(pt_mod_export_analyse(&doc.project,&report)==PT_PROJECT_OK && !report.issues);
     CHECK(!pt_paula_play(&a,&doc.project,0,0,0));Delay(20);pt_paula_poll(&a,&state);
     CHECK(state.active && state.ticks>=6 && state.period[0]==428 && state.period[1]==339 && state.volume[0]==24);
+    CHECK((*(volatile UWORD *)0xdff002 & 0x20f)==0x20f);
+    CHECK((*(volatile UWORD *)0xdff010 & 0xff)==0);
+    {struct pt_playback previous=state;unsigned changed=0;
+        for(i=0;i<10;++i) {Delay(1);pt_paula_poll(&a,&state);if(memcmp(state.wave,previous.wave,sizeof(state.wave)))changed=1;previous=state;}
+        CHECK(changed);puts("SCOPE/DMA PASS: enabled hardware channels and time-varying sample preview");
+    }
     printf("REPLAY initial ticks=%lu row=%u periods=%u,%u,%u,%u\n",(unsigned long)state.ticks,state.row,state.period[0],state.period[1],state.period[2],state.period[3]);
     CHECK(pt_paula_play(&b,&doc.project,0,0,0)!=NULL && !b.started);
     pt_paula_poll(&a,&state);CHECK(state.active);pt_paula_stop(&a);

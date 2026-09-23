@@ -2,6 +2,7 @@
 #define PT_NATIVE_PAULA_H
 #include "project.h"
 #include "playback.h"
+#include "scope.h"
 struct IOAudio;
 struct MsgPort;
 struct pt_paula {
@@ -11,6 +12,7 @@ struct pt_paula {
     size_t bytes,pattern_bytes;
     uint16_t order_count,orders[PT_PROJECT_ORDERS];
     unsigned opened,locked,started,mode,pattern,audible;
+    struct pt_scope_phase scope[4];
 };
 /* Zero-initialize once. 0=song, 1=selected pattern. No channel stealing. */
 const char *pt_paula_play(struct pt_paula *,const struct pt_project *,unsigned mode,unsigned position,unsigned pattern);

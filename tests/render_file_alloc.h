@@ -6,7 +6,7 @@
 static unsigned allocated_live,allocation_refused;
 static void *file_allocate(void *ctx,size_t bytes)
 {
-    void *p;(void)ctx;assert(allocated_live<2 && bytes && bytes<65536);
+    void *p;(void)ctx;assert(allocated_live<3 && bytes && bytes<65536);
     if(allocation_refused)return NULL;
     p=malloc(bytes);assert(p);++allocated_live;memset(p,0xa5,bytes);return p;
 }

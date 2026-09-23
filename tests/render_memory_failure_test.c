@@ -8,7 +8,7 @@
 static unsigned calls,fail_at,live;
 static void *allocate(void *ctx,size_t n)
 {
-    void *p;(void)ctx;assert(live<2 && n && n<65536);
+    void *p;(void)ctx;assert(live<3 && n && n<65536);
     if(++calls==fail_at)return NULL;
     p=malloc(n);assert(p);++live;return p;
 }
@@ -50,16 +50,16 @@ int main(int argc,char **argv)
         absent(path,"pttmp");
     }
     snprintf(path,sizeof(path),"%s/memory-stems",argv[1]);
-    /* Two stem preflights then file/measure/mix/verify per stem. Later failures must
+    /* Batch workspace, two stem preflights then file/measure/mix/verify per stem. Later failures must
        remove already verified earlier stems along with the owned staging tree. */
-    for(i=1;i<=10;++i) {
+    for(i=1;i<=11;++i) {
         calls=0;fail_at=i;
         result=pt_stem_file_new_allocated(path,&p,&options,0,NULL,NULL,&stems,&detail,&a);
-        assert(result==((i==6 || i==10)?PT_RENDER_FILE_VERIFY:PT_RENDER_FILE_RENDER));
+        assert(result==((i==7 || i==11)?PT_RENDER_FILE_VERIFY:PT_RENDER_FILE_RENDER));
         assert(detail==PT_RENDER_MEMORY && calls==i && !live && !memcmp(&stems,&stems_before,sizeof(stems)));
         absent(path,"ptstems");
     }
     assert(!memcmp(&p,&original,sizeof(p)) && !memcmp(&sample,&original_sample,sizeof(sample)));
     assert(!memcmp(events,original_events,sizeof(events)) && order==0 && pcm[0]==0x123457 && pcm[1]==-0x345679);
-    puts("RENDER MEMORY PASS: all4 WAV and10 stem allocation failures preserve masters/reports and remove owned staging");return 0;
+    puts("RENDER MEMORY PASS: all4 WAV and11 stem allocation failures preserve masters/reports and remove owned staging");return 0;
 }

@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "scope": "shared030 native render/stem file checks",
+  "PTRenderMemoryTest_sha256": "761a351b1a948c97f76f3a3b591292aea8c541d7941be4d1a5a0cba2a36a34a7",
+  "memory-failures_returncode": "0",
+  "run_files_cleaned": true
+}

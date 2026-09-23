@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "scope": "shared030 native render/stem file checks",
+  "PTStemFileAllocTest_sha256": "b5f1f3a9348b6a1022fa8dca11323fbb1f19ff19a08b64e2e71a898aaafacf87",
+  "stems-allocated_returncode": "0",
+  "run_files_cleaned": true
+}

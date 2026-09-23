@@ -335,7 +335,7 @@ Sequential measure/render/verify calls allocate and release their workspace
 independently; memory can become unavailable between passes, in which case
 owned file staging is removed and the old destination/master is preserved.
 
-Stem batch-level path/report arrays and helper locals still use stack space;
+Small helper locals still use stack space;
 this does not qualify every stack byte or runtime file-descriptor allocation.
 Bounce also uses the allocated measurement/stream path described below.
 Live Studio streaming is not implemented by these offline APIs.
@@ -364,7 +364,7 @@ redo. Cancellation and exact24-bit project round trips remain covered.
 ## Export memory-pressure rollback
 
 The allocation-failure regression covers all four WAV workspace allocations
-(file, measure, render, verification) and all ten for a two-stem export (two global
+(file, measure, render, verification) and all eleven for a two-stem export (batch workspace, two global
 preflights, then file/measure/render/verification for each stem). Every refusal must
 report `PT_RENDER_MEMORY`, release working allocations, preserve the output
 report and all master/project bytes, and remove every owned staging candidate.
@@ -383,6 +383,22 @@ no fallback to Chip occurs on Fast-equipped systems. Failure cleans owned files
 before releasing file storage. Source master PCM remains untouched.
 
 The portable legacy WAV entry retains a stack workspace; NULL allocator retains
-that behavior. Stem batch-level path/report arrays and runtime library internals
+that behavior. Runtime library internals
 still need a separate audit. This change does not claim all stack use eliminated
 or qualify live Studio/card transport.
+
+## Native stem batch workspace
+
+Allocated stem export now owns its batch report,16 measurement reports, working
+render options and staging/file path arrays in one bounded block. This remains
+live while one WAV file block and one mixer/measurement block are nested, for a
+maximum of three simultaneous workspace allocations. The native editor supplies
+the same shared Fast-first allocator to all three. Each is released after its
+own cleanup; failure in a later stem removes already completed staged stems
+before the batch workspace is freed. Legacy entry and NULL allocator retain
+stack-based behavior. Master/source data remain immutable through all passes.
+
+All eleven allocation refusals for two stems are tested, including initial batch
+allocation. WAV still has four failure points. Small helper locals and runtime
+file/library allocations remain outside this explicit workspace policy; actual
+hardware memory pressure/performance and live Studio output remain unqualified.

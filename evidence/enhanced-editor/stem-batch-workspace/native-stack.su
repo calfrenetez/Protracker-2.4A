@@ -1,0 +1,3 @@
+stem_file.c:56:35:batch_new	116	dynamic,bounded
+stem_file.c:96:28:pt_stem_file_new	3624	dynamic,bounded
+stem_file.c:102:28:pt_stem_file_new_allocated	84	dynamic,bounded

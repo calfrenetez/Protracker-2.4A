@@ -21,6 +21,11 @@ def prepare_replay(raw, wrapper):
         source = once(source, '\tBSET\t#0,'+register+'(A5)',
                       '\tMOVE.B\t'+register+'(A5),D0\n\tANDI.B\t#'+mask+',D0\n\tORI.B\t#$11,D0\n\tMOVE.B\tD0,'+register+'(A5)')
     source = once(source, '\tLEA\tmt_data,A0', '\tMOVE.L\t_pt_replay_data(PC),A0')
+    # Keep the reference first-word/loop initialization, but load each DMA
+    # pointer from caller-owned Chip buffers rather than contiguous MOD PCM.
+    source = once(source, '\tLEA\tmt_SampleStarts(PC),A1\n\tMOVEQ\t#31-1,D3',
+                  '\tLEA\tmt_SampleStarts(PC),A1\n\tMOVE.L\t_pt_replay_samples(PC),A3\n\tMOVEQ\t#31-1,D3')
+    source = once(source, 'mtloop3\tMOVEQ\t#0,D0', 'mtloop3\tMOVE.L\t(A3)+,A2\n\tMOVEQ\t#0,D0')
     source = once(source, '\nmt_GetNewNote\n', '\nmt_GetNewNote\n\tMOVE.B\tmt_SongPos(PC),_pt_replay_order\n\tMOVE.W\tmt_PatternPos(PC),_pt_replay_rowbytes\n')
     source = once(source, '\tADDQ.B\t#1,mt_Counter', '\tADDQ.L\t#1,_pt_replay_ticks\n\tADDQ.B\t#1,mt_Counter')
     # Preserve all effect state; gate only final hardware volume writes.

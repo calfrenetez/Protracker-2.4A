@@ -54,7 +54,7 @@ already implemented:
 The classic Paula bridge now omits payloads of instruments unreferenced by any
 stored pattern from its private Chip-RAM snapshot. Instrument-only events count;
 all stored patterns are scanned conservatively so pattern selection is safe.
-Referenced samples remain pinned together until replay stops. Sample numbers,
+Referenced samples have independent Chip allocations, pinned until replay stops. Sample numbers,
 pattern rows and source/master data are preserved. Empty and omitted samples
 receive safe empty headers and the existing owned silent DMA word.
 
@@ -65,9 +65,17 @@ the cache before a subsequent play rebuilds it. Comparison uses the immutable
 export, so EFx mutations of private Chip data do not corrupt the master or create
 false invalidations. This intentionally stops even on an unused master change.
 
-This is a session-level selective cache, not yet independent per-sample LRU
-allocation. Pattern/header storage still accompanies it in Chip RAM; moving
-that to Fast RAM needs replay pointer/initialization and scope integration.
+Pattern/header storage now uses bounded Fast RAM when available. The native
+replay adapter takes an explicit 31-entry Chip sample pointer table; the pinned
+engine still performs its original loop and first-word initialization on those
+private sample copies. Empty slots share a separate owned silent Chip word.
+The scope renderer bounds reads against owned sample buffers, not Fast metadata.
+All partial allocations are released on failure; replay is stopped before any
+buffer is freed.
+
+Cache lifetimes still follow a playback session: individual blocks are released
+at stop, not retained as a reusable LRU across sessions. Active voices pin all
+loaded samples, so evicting an active cache under pressure is not yet supported.
 The bridge still requires a classic-compatible four-channel project; implicit
 conversion of enhanced samples has not been added. AmiGUS cache eviction and
 Studio streaming remain incomplete. Native render/stem helper allocations and

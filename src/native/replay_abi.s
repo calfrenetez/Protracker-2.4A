@@ -1,4 +1,4 @@
-; C ABI, caller owns all four Paula channels and serialized Chip RAM MOD.
+; C ABI, caller owns all four Paula channels and Fast metadata and 31 owned Chip sample pointers.
 ; Engine disabled throughout setup. All persistent state reset on each start.
 	EVEN
 	XDEF _pt_replay_start,_pt_replay_stop
@@ -14,6 +14,7 @@ _pt_replay_tempo EQU RealTempo
 _pt_replay_start
 	MOVEM.L D2-D7/A2-A6,-(SP)
 	MOVE.L 48(SP),_pt_replay_data
+	MOVE.L 64(SP),_pt_replay_samples
 	MOVE.L 60(SP),D0
 	MOVE.W D0,_pt_replay_audible
 	CLR.L _pt_replay_outputvol
@@ -154,6 +155,7 @@ _pt_replay_scopes ds.b 80
 _pt_replay_audible dc.w 15
 	CNOP 0,4
 _pt_replay_data dc.l 0
+_pt_replay_samples dc.l 0
 _pt_replay_ticks dc.l 0
 _pt_replay_rowbytes dc.w 0
 _pt_replay_order dc.b 0

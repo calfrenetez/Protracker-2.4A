@@ -8,7 +8,7 @@
 #include "mod_inspect.h"
 #include "paula.h"
 #include "paula_cache.h"
-extern int pt_replay_start(void *,unsigned long,void *,unsigned long);
+extern int pt_replay_start(void *,unsigned long,void *,unsigned long,void *);
 extern void pt_replay_stop(void);
 extern volatile uint32_t pt_replay_ticks;
 extern volatile uint32_t pt_replay_clock;
@@ -52,6 +52,7 @@ static void set_audible(struct pt_paula *a,unsigned mask)
 }
 void pt_paula_stop(struct pt_paula *a)
 {
+    unsigned i;
     if(a->started) {pt_replay_stop();a->started=0;}
     if(a->opened) {
         a->audio->ioa_Request.io_Command=ADCMD_FREE;
@@ -63,12 +64,14 @@ void pt_paula_stop(struct pt_paula *a)
     if(a->lock)DeleteIORequest((struct IORequest *)a->lock);
     if(a->audio)DeleteIORequest((struct IORequest *)a->audio);
     if(a->port)DeleteMsgPort(a->port);
-    if(a->data)FreeMem(a->data,a->bytes+2);
+    for(i=0;i<31;++i)if(a->sample_bytes[i])FreeMem(a->sample_data[i],a->sample_bytes[i]);
+    if(a->silence)FreeMem(a->silence,2);
+    pt_master_release(&a->memory,a->data);
     pt_master_release(&a->memory,a->staging);pt_master_release(&a->memory,a->check);memset(a,0,sizeof(*a));
 }
 const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned mode,unsigned position,unsigned pattern)
 {
-    struct pt_project playback;struct pt_mod_export_report report;struct pt_mod_info info;struct pt_paula_cache_plan plan;size_t written;unsigned i;UBYTE channels=15;
+    struct pt_project playback;struct pt_mod_export_report report;struct pt_paula_cache_plan plan;size_t written,offset;unsigned i;UBYTE channels=15;
     const char *error="PLAY: OUT OF CHIP MEMORY";
     if(mode>1 || position>=p->order_count || pattern>=p->pattern_count)return "PLAY: INVALID POSITION";
     if(!playback_project(p,&playback) || pt_mod_export_analyse(&playback,&report)!=PT_PROJECT_OK || report.issues)
@@ -85,21 +88,31 @@ const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned
     }
     error="PLAY: UNSAFE CLASSIC SAMPLE METADATA";
     if(!pt_paula_cache_plan(a->staging,a->source_bytes,&plan))goto failed;
-    a->bytes=plan.bytes;a->cached_instruments=plan.instruments;
-    error="PLAY: OUT OF CHIP MEMORY";
-    a->data=AllocMem(a->bytes+2,MEMF_CHIP|MEMF_PUBLIC);
+    a->bytes=plan.mod.sample_offset;a->cached_instruments=plan.instruments;
+    error="PLAY: OUT OF REPLAY WORKSPACE MEMORY";
+    a->data=pt_master_allocate(&a->memory,a->bytes);
     if(!a->data)goto failed;
-    error="PLAY: SAMPLE CACHE BUILD FAILED";
-    if(!pt_paula_cache_copy(a->staging,a->source_bytes,a->data,a->bytes))goto failed;
-    error="PLAY: UNSAFE CLASSIC SAMPLE METADATA";
-    if(pt_mod_inspect(a->data,a->bytes,&info)!=PT_MOD_OK || info.warnings)goto failed;
+    memcpy(a->data,a->staging,a->bytes);
+    error="PLAY: OUT OF CHIP MEMORY";
+    a->silence=AllocMem(2,MEMF_CHIP|MEMF_PUBLIC|MEMF_CLEAR);
+    if(!a->silence)goto failed;
+    a->chip_bytes=2;offset=plan.mod.sample_offset;
     for(i=0;i<31;++i) {
-        const uint8_t *h=a->data+20+i*30;
-        unsigned length=be16(h+22),start=be16(h+26),repeat=be16(h+28);
-        /* Even a one-word ProTracker loop must remain inside its sample. */
-        if(start && start+(repeat?repeat:1)>length)goto failed;
+        uint8_t *h=a->data+20+i*30;
+        size_t length=be16(h+22)*2;
+        unsigned start=be16(h+26),repeat=be16(h+28);
+        a->sample_data[i]=a->silence;
+        error="PLAY: UNSAFE CLASSIC SAMPLE METADATA";
+        if(start && start+(repeat?repeat:1)>length/2)goto failed;
+        if(length && (plan.instruments&(UINT32_C(1)<<i))) {
+            error="PLAY: OUT OF CHIP MEMORY";
+            a->sample_data[i]=AllocMem(length,MEMF_CHIP|MEMF_PUBLIC);
+            if(!a->sample_data[i])goto failed;
+            a->sample_bytes[i]=length;a->chip_bytes+=length;
+            memcpy(a->sample_data[i],a->staging+offset,length);
+        } else {h[22]=h[23]=h[26]=h[27]=h[28]=0;h[29]=1;}
+        offset+=length;
     }
-    a->data[a->bytes]=0;a->data[a->bytes+1]=0; /* Owned empty-sample DMA word. */
     if(mode) {
         a->data[950]=1;a->data[952]=(uint8_t)pattern;
         /* Keep sample-data offset correct even when order zero was the only
@@ -129,7 +142,7 @@ const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned
     if(CheckIO((struct IORequest *)a->lock)) {WaitIO((struct IORequest *)a->lock);a->locked=0;goto failed;}
     error="PLAY: CIA TIMER UNAVAILABLE";
     a->audible=audible_mask(p);
-    if(!pt_replay_start(a->data,mode?0:position,a->data+a->bytes,a->audible))goto failed;
+    if(!pt_replay_start(a->data,mode?0:position,a->silence,a->audible,a->sample_data))goto failed;
     a->started=1;return NULL;
 failed:
     pt_paula_stop(a);return error;
@@ -173,10 +186,18 @@ void pt_paula_poll(struct pt_paula *a,struct pt_playback *s)
     Enable();s->active=1;s->mode=a->mode;s->pattern=a->data[952+s->order];
     for(i=0;i<4;++i) {
         const uint8_t *v=voices+i*44,*scope=scopes+i*20;
-        uintptr_t address=be32(scope+8),loop=be32(scope+12),base=(uintptr_t)a->data;
+        uintptr_t address=be32(scope+8),loop=be32(scope+12),base=(uintptr_t)a->silence;
+        size_t bytes=2;unsigned sample;
         s->volume[i]=volumes[i];s->period[i]=(uint16_t)be16(v+24);
-        if(address<base || loop<base || address-base>a->bytes || loop-base>a->bytes)continue;
-        pt_scope_wave(&a->scope[i],s->wave[i],(const int8_t *)a->data,a->bytes+2,
+        for(sample=0;sample<31;++sample)if(a->sample_bytes[sample]) {
+            uintptr_t candidate=(uintptr_t)a->sample_data[sample];
+            size_t length=a->sample_bytes[sample];
+            if(address>=candidate && loop>=candidate && address-candidate<=length && loop-candidate<=length) {
+                base=candidate;bytes=length;break;
+            }
+        }
+        if(address<base || loop<base || address-base>bytes || loop-base>bytes)continue;
+        pt_scope_wave(&a->scope[i],s->wave[i],(const int8_t *)base,bytes,
             (uint32_t)(address-base),be16(scope+16)*2,(uint32_t)(loop-base),be16(scope+18)*2,
             (uint32_t)be32(scope),(uint32_t)be32(scope+4),s->ticks,s->period[i],s->bpm,clock);
     }

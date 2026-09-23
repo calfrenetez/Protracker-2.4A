@@ -25,6 +25,7 @@ int main(int argc,char **argv)
     struct pt_allocator allocator={NULL,allocate,release};struct pt_document doc;
     struct pt_paula a={0},b={0};struct pt_playback state;struct pt_mod_export_report report;
     struct Library *ciaa=NULL,*ciab=NULL;struct Interrupt holda,holdb;
+    int32_t *pressure_pcm=NULL;
     FILE *f=NULL;uint8_t *input=NULL,*roundtrip=NULL;long length;size_t written;unsigned own_a=0,own_b=0,i;int rc=20;
     pt_document_init(&doc,&allocator);memset(&holda,0,sizeof(holda));memset(&holdb,0,sizeof(holdb));
     holda.is_Node.ln_Type=NT_INTERRUPT;holda.is_Node.ln_Name="PT24G ownership test";holda.is_Code=(void (*)())dummy_interrupt;holdb=holda;
@@ -146,9 +147,9 @@ int main(int argc,char **argv)
         doc.project.events[0].instrument=i?0:2;
         doc.project.events[0].effect=12;doc.project.events[0].parameter=64;
         CHECK(!pt_paula_play(&a,&doc.project,0,0,0));Delay(10);
-        CHECK(voice_start()==(uintptr_t)(a.data+a.bytes));
+        CHECK(voice_start()==(uintptr_t)a.silence);
         CHECK(pt_replay_voices[20]==0 && pt_replay_voices[21]==1);
-        CHECK(a.data[a.bytes]==0 && a.data[a.bytes+1]==0);pt_paula_stop(&a);
+        CHECK(a.silence[0]==0 && a.silence[1]==0);pt_paula_stop(&a);
     }
     CHECK(pt_document_load(&doc,input,length,SIZE_MAX)==PT_PROJECT_OK);
     /* Optional preserved MOD headers cannot smuggle an out-of-range one-word
@@ -163,8 +164,10 @@ int main(int argc,char **argv)
     doc.project.samples[30]=doc.project.samples[0];
     CHECK(!pt_paula_play(&a,&doc.project,0,0,0));
     CHECK(a.source_bytes>=a.bytes+doc.project.samples[30].pcm.frames);
-    CHECK(TypeOfMem(a.data)&MEMF_CHIP);
-    if(AvailMem(MEMF_FAST|MEMF_TOTAL))CHECK(TypeOfMem(a.staging)&MEMF_FAST);
+    CHECK(TypeOfMem(a.silence)&MEMF_CHIP);
+    for(i=0;i<31;++i)if(a.sample_bytes[i])CHECK(TypeOfMem(a.sample_data[i])&MEMF_CHIP);
+    CHECK(a.chip_bytes+ a.bytes<=a.source_bytes-doc.project.samples[30].pcm.frames+2);
+    if(AvailMem(MEMF_FAST|MEMF_TOTAL)) {CHECK(TypeOfMem(a.staging)&MEMF_FAST);CHECK(TypeOfMem(a.data)&MEMF_FAST);}
     CHECK(!(a.cached_instruments&(1UL<<30)));
     doc.project.events[0].instrument=31;
     CHECK(pt_paula_sync(&a,&doc.project)!=NULL && !a.started && !a.data && !a.staging && !a.check);
@@ -173,7 +176,35 @@ int main(int argc,char **argv)
     doc.project.samples[0].pcm.data[0]^=1;
     CHECK(pt_paula_sync(&a,&doc.project)!=NULL && !a.started);
     CHECK(pt_document_load(&doc,input,length,SIZE_MAX)==PT_PROJECT_OK);
-    puts("CACHE PASS: unused payload omitted, Chip/Fast placement, new instrument and changed master stop/rebuild");
+    puts("CACHE PASS: independent Chip samples, Fast metadata, unused payload omitted, Chip/Fast placement, new instrument and changed master stop/rebuild");
+    /* Repeated partial Chip allocation failure must release every owned buffer.
+       This bounded pressure fixture is only for a Fast-equipped 2 MiB guest. */
+    if(AvailMem(MEMF_FAST)>12UL*1024*1024 && AvailMem(MEMF_CHIP|MEMF_TOTAL)<=2UL*1024*1024) {
+        struct pt_project q=doc.project;struct pt_sample samples[31];
+        struct pt_event events[256];uint16_t order=0;ULONG before,after;unsigned attempt;
+        pressure_pcm=AllocMem(131070UL*sizeof(*pressure_pcm),MEMF_FAST|MEMF_PUBLIC|MEMF_CLEAR);CHECK(pressure_pcm);
+        memset(events,0,sizeof(events));q.samples=samples;q.sample_count=31;q.events=events;
+        q.orders=&order;q.order_count=q.pattern_count=1;q.extensions=NULL;q.extension_count=0;
+        for(i=0;i<31;++i) {
+            samples[i]=doc.project.samples[0];samples[i].pcm.data=pressure_pcm;
+            samples[i].pcm.frames=samples[i].pcm.capacity=131070;
+            samples[i].loop=PT_LOOP_NONE;samples[i].loop_start=samples[i].loop_end=samples[i].crossfade=0;
+            samples[i].slice_count=0;samples[i].slices=NULL;
+            events[i].instrument=(uint8_t)(i+1);
+        }
+        for(attempt=0;attempt<2;++attempt) {
+            const char *error;
+            before=AvailMem(MEMF_CHIP);error=pt_paula_play(&a,&q,0,0,0);after=AvailMem(MEMF_CHIP);
+            CHECK(error && !strcmp(error,"PLAY: OUT OF CHIP MEMORY"));
+            CHECK(!a.started && !a.data && !a.silence && !a.memory.used);
+            CHECK(after+4096>=before); /* Allow unrelated system bookkeeping. */
+            for(i=0;i<31;++i)CHECK(!a.sample_data[i] && !a.sample_bytes[i]);
+            CHECK(pressure_pcm[0]==0 && pressure_pcm[131069]==0);
+        }
+        FreeMem(pressure_pcm,131070UL*sizeof(*pressure_pcm));pressure_pcm=NULL;
+        CHECK(!pt_paula_play(&a,&doc.project,0,0,0));pt_paula_stop(&a);
+        puts("CACHE PRESSURE PASS: two partial allocation failures release Chip buffers, preserve source and permit restart");
+    } else puts("CACHE PRESSURE NOT RUN: requires Fast-equipped 2 MiB Chip target");
     /* Force CIA fallback and total failure. Never replace an existing vector. */
     ciab=OpenResource("ciab.resource");ciaa=OpenResource("ciaa.resource");CHECK(ciab && ciaa);
     own_b=claim(ciab,0,&holdb);CHECK(own_b);
@@ -193,5 +224,6 @@ done:
     if(own_a)unclaim(ciaa,1,&holda);
     if(own_b)unclaim(ciab,0,&holdb);
     if(f)fclose(f);
+    if(pressure_pcm)FreeMem(pressure_pcm,131070UL*sizeof(*pressure_pcm));
     free(input);free(roundtrip);pt_document_release(&doc);return rc;
 }

@@ -1,0 +1,20 @@
+STUDIO MIX PASS: pinned versions, transactional trigger, block continuity, true24, alias refusal and cleanup
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.671s
+
+OK
+..
+----------------------------------------------------------------------
+Ran 2 tests in 1.255s
+
+OK
+VOICE traversal PASS: selected ranges, forward/pingpong seams, fractional steps, one-frame loops and large steps
+VOICE mix PASS: true24 stereo, single quantization, clipping, 16 voices, mute progression, capacity and alias refusal
+VOICE partition PASS hash=990c42f0 clips=40
+SEGMENT trajectory 0 hash=2a50eba5
+SEGMENT trajectory 1 hash=295ede49
+SEGMENT trajectory 2 hash=ac5189f5
+SEGMENT trajectory 3 hash=e5165089
+SEGMENT trajectory 4 hash=594e0cb9
+VOICE segment PASS: independent initial/repeat ranges, interpolation handoff, huge steps, one-frame repeats and invalid-range preservation

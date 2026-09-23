@@ -452,3 +452,20 @@ Exec-backed variants of the import/recent fixtures now pass on shared030 using
 the production master allocator: 2 and534 explicit Fast/not-Chip allocations,
 respectively, with zero pool-owned bytes at exit and zero-budget refusal without
 Chip fallback. Runtime-library allocation and physical pressure remain unmeasured.
+
+## Incremental Studio voice ownership core
+
+`studio_mix` adds an allocator-owned session of up to16 voices. A caller-provided
+master-version acquire/release interface pins immutable source PCM for each voice.
+The session copies only PCM descriptors, reads master samples directly and pulls
+1..256 stereo24 frames at48kHz into caller storage, preserving voice phase across
+blocks. New triggers pin/validate first; failure preserves the old voice. Stop,
+replacement, natural completion and session close release exact pins.
+
+This is a control-thread mixer building block, not an interrupt handler or a
+finished Studio mode. The source provider must keep pinned revisions immutable
+and alive; integration with document/sampler version ownership remains required.
+Tracker tick scheduling, output queue/device transport, underrun recovery and
+empirical 68030 capacity remain unimplemented here. Sixteen slots are a bound,
+not a claim of16 real-time voices. There is no allocation/acquire in block reads,
+but completed voices call release; do not invoke from an audio interrupt.

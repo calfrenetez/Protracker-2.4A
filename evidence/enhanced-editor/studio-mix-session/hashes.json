@@ -1,0 +1,6 @@
+{
+  "src/core/studio_mix.h": "aa951c4bf844d82f6c9d4819f440f16f955bf20f601ec1ef81a071b5935c28d0",
+  "src/core/studio_mix.c": "195a19dace48c2b4bccf76dffeb3d4385934ca492553b5fc300b6eada9ef3e9b",
+  "tests/studio_mix_test.c": "2babcd3d9ef149faf2552e773363c82b8a9acee7c01564e65f04aa38e7ff1ba8",
+  "build/dev/PTStudioMixTest": "af35a1a6c58dde0f3bdfa5eaae75117b099cdd2c2db1ce5fe6cb0c0fcacdbe42"
+}

@@ -428,3 +428,10 @@ as SAVE: OUT OF MEMORY, with edits/destination preserved. Legacy callers retain
 a stack workspace. The file runtime itself is not claimed allocation-free.
 
 See `MEMORY_AUDIT.md` for remaining import/recent-file/runtime/display boundaries.
+
+Project/sample imports now read directly into the bounded master-pool payload
+through descriptors, with a64MiB ceiling and no FILE/read-ahead buffer. The helper
+returns ownership only after complete reads, exact EOF and successful close;
+allocation failure or changing length releases the temporary data before decode.
+Short reads and EINTR are handled. Same-size concurrent modification is not
+detected, and runtime descriptor allocation remains outside this accounting.

@@ -18,6 +18,7 @@
 #include "mod_project.h"
 #include "../editor/view.h"
 #include "../platform/file_save.h"
+#include "../platform/file_load.h"
 #include "pt_font.h"
 #include "paula.h"
 #include "present.h"
@@ -61,26 +62,21 @@ static int editor_init_memory(struct pt_editor *e,struct pt_project *p)
 }
 static int load(struct pt_document *d,const char *path)
 {
-    FILE *f=fopen(path,"rb");long n;uint8_t *bytes=NULL;int ok=0;
-    if(!f)return 0;
-    if(fseek(f,0,SEEK_END) || (n=ftell(f))<0 || n>64L*1024*1024)goto done;
-    rewind(f);bytes=pt_master_allocate(&master_memory,n?(size_t)n:1);if(!bytes)goto done;
-    if(fread(bytes,1,(size_t)n,f)!=(size_t)n || ferror(f))goto done;
-    if(fclose(f)) {f=NULL;goto done;}f=NULL;
-    ok=pt_document_load(d,bytes,(size_t)n,SIZE_MAX)==PT_PROJECT_OK;
-done:
-    pt_master_release(&master_memory,bytes);if(f)fclose(f);return ok;
+    size_t n;uint8_t *bytes;int ok;
+    if(pt_file_load(path,64UL*1024*1024,&render_allocator,&bytes,&n)!=PT_LOAD_OK)return 0;
+    ok=pt_document_load(d,bytes,n,SIZE_MAX)==PT_PROJECT_OK;
+    pt_master_release(&master_memory,bytes);return ok;
 }
 static enum pt_edit_result load_sample(struct pt_editor *e,const char *path,int raw,int source_only,int *preview)
 {
-    FILE *f=fopen(path,"rb");long n;uint8_t *bytes=NULL;enum pt_edit_result result=PT_EDIT_INVALID;
+    size_t n;uint8_t *bytes=NULL;enum pt_edit_result result=PT_EDIT_INVALID;
+    enum pt_load_result loaded;
     const char *name=path,*part;
     if(preview)*preview=0;
-    if(!f || !e->sample) {if(f)fclose(f);return PT_EDIT_INVALID;}
-    if(fseek(f,0,SEEK_END) || (n=ftell(f))<=0 || n>64L*1024*1024)goto done;
-    rewind(f);bytes=pt_master_allocate(&master_memory,(size_t)n);if(!bytes) {result=PT_EDIT_CAPACITY;goto done;}
-    if(fread(bytes,1,(size_t)n,f)!=(size_t)n || ferror(f))goto done;
-    if(fclose(f)) {f=NULL;goto done;}f=NULL;
+    if(!e->sample)return PT_EDIT_INVALID;
+    loaded=pt_file_load(path,64UL*1024*1024,&render_allocator,&bytes,&n);
+    if(loaded!=PT_LOAD_OK)return loaded==PT_LOAD_MEMORY?PT_EDIT_CAPACITY:PT_EDIT_INVALID;
+    if(!n)goto done;
     for(part=path;*part;++part)if(*part=='/' || *part==':')name=part+1;
     if(!raw) {
         struct pt_project_requirements need;
@@ -91,7 +87,6 @@ static enum pt_edit_result load_sample(struct pt_editor *e,const char *path,int 
     }
     result=raw?pt_sampler_import_raw(&e->sampler,e->project,&e->history,e->sample-1,bytes,(size_t)n,name,&e->raw_format):pt_sampler_import(&e->sampler,e->project,&e->history,e->sample-1,bytes,(size_t)n,name);
 done:
-    if(f)fclose(f);
     pt_master_release(&master_memory,bytes);return result;
 }
 static void save_sample(struct pt_editor *e,const char *path)

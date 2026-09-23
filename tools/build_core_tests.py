@@ -105,6 +105,8 @@ def main():
                                  ('PTExecStemsTest','PTStemFileTest','tests/native_exec_stems_test.c'),
                                  ('PTExecFailureTest','PTRenderMemoryTest','tests/native_exec_failures_test.c')]:
         inputs[target] = [source, *inputs[base][1:]]
+    inputs['PT24GEdit'].append('src/platform/file_load.c')
+    inputs['PTFileLoadTest'] = ['tests/file_load_test.c','src/platform/file_load.c']
     inputs['PTExecSaveTest'] = ['tests/native_exec_save_test.c','src/platform/file_save.c','src/core/safe_save.c']
     flags = ['-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os',
              '-Wall', '-Wextra', '-Werror', '-Isrc/core', '-Ibuild/dev', *compiler_safety_flags(cc)]
@@ -152,7 +154,7 @@ def main():
                            for name in [*inputs, 'PTGuardTest']},
               'sources': {name: digest(ROOT / name) for name in
                           sorted(set(sum(inputs.values(), [])) | {'src/core/recent.h', 'src/platform/recent_file.h', 'src/native/file_request.h', 'src/core/playback.h', 'src/core/scope.h', 'src/core/flow.h', 'src/core/frame_clock.h', 'src/core/timeline.h', 'src/core/voice.h', 'src/core/render.h', 'src/core/stems.h', 'src/platform/stem_file.h', 'src/core/pitch.h', 'src/core/pitch_tables.h', 'tools/generate_pitch_tables.py', 'src/platform/render_file.h', 'tools/build_core_tests.py', 'src/native/paula.h', 'src/native/replay_abi.s', 'tools/prepare_replay.py', 'tools/prepare_flow_trace.py', 'tools/prepare_pitch_trace.py', 'tools/prepare_sample_trace.py', 'tools/prepare_invert_trace.py', 'tools/prepare_volume_trace.py', 'vendor/pt23f/replayer/PT2.3F_replay_cia.s', 'src/core/channels.h', 'src/core/pcm.h',
-                          'src/core/sinc_kernel.h', 'tools/generate_sinc_kernel.py', 'src/core/wav.h', 'src/core/svx.h', 'src/core/raw.h', 'src/core/midi.h', 'src/core/record.h', 'src/core/record_pattern.h', 'src/editor/editor.h', 'src/editor/song.h', 'src/editor/sampler.h', 'src/editor/bounce.h', 'src/editor/view.h', 'src/platform/file_save.h', 'vendor/pt23f/raw/ptfont.raw', 'src/core/project.h', 'src/core/mod_project.h', 'src/core/document.h', 'src/core/pp20.h', 'src/core/safe_save.h', 'src/core/pattern.h', 'src/core/slices.h', 'src/core/mod_inspect.h', 'src/native/present.h', 'src/native/master_memory.h', 'src/core/paula_cache.h', 'src/core/sample_cache.h', 'src/core/playback_pcm.h', 'src/core/paula_preview.h', 'src/native/mod_guard.s', 'tests/native_guard_harness.s'})},
+                          'src/core/sinc_kernel.h', 'tools/generate_sinc_kernel.py', 'src/core/wav.h', 'src/core/svx.h', 'src/core/raw.h', 'src/core/midi.h', 'src/core/record.h', 'src/core/record_pattern.h', 'src/editor/editor.h', 'src/editor/song.h', 'src/editor/sampler.h', 'src/editor/bounce.h', 'src/editor/view.h', 'src/platform/file_save.h', 'src/platform/file_load.h', 'vendor/pt23f/raw/ptfont.raw', 'src/core/project.h', 'src/core/mod_project.h', 'src/core/document.h', 'src/core/pp20.h', 'src/core/safe_save.h', 'src/core/pattern.h', 'src/core/slices.h', 'src/core/mod_inspect.h', 'src/native/present.h', 'src/native/master_memory.h', 'src/core/paula_cache.h', 'src/core/sample_cache.h', 'src/core/playback_pcm.h', 'src/core/paula_preview.h', 'src/native/mod_guard.s', 'tests/native_guard_harness.s'})},
               'guard_cases': manifest}
     (out / 'core-build.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report['binaries'], indent=2))

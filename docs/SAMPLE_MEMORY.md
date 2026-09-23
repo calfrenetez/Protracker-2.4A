@@ -182,3 +182,27 @@ preservation, cache hits without transfer, format coexistence, pinned invalidati
 shortage refusal, partial-transfer failure/retry, staging capacity and alias
 refusal. Host tests use ASan/UBSan; cross-building does not mean execution on the
 emulator or a card.
+
+### Bounded upload staging
+
+`pt_playback_pcm_upload_chunks` removes the requirement for a full-sample staging
+buffer. The caller can provide a small Fast-RAM buffer (minimum one output frame:
+one byte for 8-bit, two for 16-bit). The converter validates the complete master
+once, then emits ordered chunks without allocation or repeated full-source
+validation. Each 16-bit frame stays intact; an odd staging capacity leaves its
+last byte unused for 16-bit output. Optional 8-bit DMA padding appears only at the
+end of the entire representation, including when it requires its own chunk.
+
+The device writer receives byte offsets, a borrowed buffer and byte count. It
+must finish consuming each chunk before returning nonzero; the buffer is reused
+immediately. The resource stays unpublished until every write completes. Any
+failure releases the entire partial resource, keeps the caller's output lease
+unchanged and allows a clean retry from offset zero. Existing cache hits need no
+staging. The driver remains responsible for hardware-specific transfer alignment,
+address constraints and completion; these generic byte writes do not assert an
+AmiGUS transfer protocol. Calls and source ownership remain single-threaded.
+
+The upload test sweeps 8/16-bit, both source channels, both byte orders, padding
+settings and buffer sizes from one frame to eleven bytes. It compares every
+assembled device image against whole-sample conversion, checks staging canaries,
+and injects a failure on the second chunk followed by a full retry.

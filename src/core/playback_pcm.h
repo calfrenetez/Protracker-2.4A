@@ -26,5 +26,14 @@ enum pt_cache_result pt_playback_pcm_upload(struct pt_sample_cache *,const struc
     uint32_t identity,uint64_t version,const struct pt_playback_format *,
     uint8_t *staging,size_t capacity,void *context,
     int (*upload)(void *,void *resource,const uint8_t *,size_t),struct pt_cache_lease *);
+/* Bounded staging variant: ordered byte offsets, complete signed frames per
+ * write (plus optional final 8-bit pad). Minimum staging is one output frame.
+ * Driver write consumes each chunk synchronously; nonzero means completed.
+ * No publication until ALL chunks finish. Failure frees the partial resource.
+ * The master must remain immutable throughout; no callback reentry. */
+enum pt_cache_result pt_playback_pcm_upload_chunks(struct pt_sample_cache *,const struct pt_pcm *,
+    uint32_t identity,uint64_t version,const struct pt_playback_format *,
+    uint8_t *staging,size_t capacity,void *context,
+    int (*write)(void *,void *resource,size_t offset,const uint8_t *,size_t),struct pt_cache_lease *);
 void pt_playback_pcm_invalidate(struct pt_sample_cache *,uint32_t identity);
 #endif

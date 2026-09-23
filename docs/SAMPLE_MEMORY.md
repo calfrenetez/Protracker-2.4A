@@ -289,3 +289,10 @@ The runner isolates recent-file storage and verifies restoration of its prior
 ENV override. The initial run's default-recents side effect is documented.
 Captured display artefacts are unresolved; this is functional cancellation
 acceptance, not clean visual/refresh acceptance or a release candidate.
+
+A settled A/B run in `evidence/enhanced-editor/display-isolation/` compares the
+current uncommitted display build to an isolated351a8ca build. Lower sampler/footer
+corruption is absent in the committed build while functional cancellation and
+project-byte identity pass in both. The uncommitted display changes remain
+preserved and unqualified. Long cancellation/status text is crowded in both;
+visual readability and deliberate refresh testing remain open.

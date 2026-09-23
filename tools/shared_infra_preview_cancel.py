@@ -4,6 +4,7 @@
 Uses existing shared Guest guards/lock. No lifecycle, configuration or hardware
 operations. Build PT24GEdit and generate preview-cancel.ptg before running.
 """
+import argparse
 import fcntl
 import hashlib
 import json
@@ -16,6 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 INFRA = Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--editor', type=Path, default=ROOT / 'build/dev/PT24GEdit')
+    args = parser.parse_args()
     sys.path.insert(0, str(INFRA / 'scripts'))
     from shared_guest import Guest
     out = ROOT / 'build/dev' / ('preview-cancel-ui-' + str(time.time_ns()))
@@ -43,7 +47,7 @@ def main():
                 if control: guest.command('SEND_KEY', 0x63, 0)
         try:
             for src, name in [('PT24GEdit', 'PT24GEdit'), ('preview-cancel.ptg', 'input.ptg')]:
-                shutil.copyfile(ROOT / 'build/dev' / src, run / name)
+                shutil.copyfile(args.editor if name == 'PT24GEdit' else ROOT / 'build/dev' / src, run / name)
                 result[name + '_sha256'] = hashlib.sha256((run / name).read_bytes()).hexdigest()
             guest.launch.write_text('\n'.join(['FailAt 21', 'Stack 65536', 'CD ' + guest.device + run.name,
                  'If EXISTS ENV:PT24G_RECENT_PREFIX',
@@ -59,6 +63,8 @@ def main():
             wait(lambda: 'status=READY -' in log())
             tap(0x28, True)  # Sampler panel.
             wait(lambda: 'panel=5' in log())
+            time.sleep(.8)
+            guest.command('SCREENSHOT', out / 'before.png')
             offset = len(log())
             tap(0x57)  # F8 sample audition.
             wait(lambda: 'EDITOR CONVERSION progress=' in log()[offset:])
@@ -68,6 +74,7 @@ def main():
             result['audio_after_cancel'] = guest.command('GET_AUDIO_STATE')
             assert all('ch%d_dma=0' % i in result['audio_after_cancel'].split('\t') for i in range(4))
             assert 'revision=0 dirty=0 status=SAMPLE: PREVIEW CANCELLED' in log()[offset:]
+            time.sleep(.8)
             guest.command('SCREENSHOT', out / 'cancelled.png')
             tap(0x21, True)
             wait(lambda: 'PROJECT SAVED' in log())

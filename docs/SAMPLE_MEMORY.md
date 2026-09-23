@@ -442,3 +442,8 @@ path workspace. Every exit releases this workspace. Descriptor I/O retries short
 transfers/EINTR; alternating generations and verification retain the last valid
 list on an interrupted write. Allocation refusal leaves caller/persisted data
 unchanged. Legacy APIs retain heap allocation; no whole-runtime claim is made.
+
+Shared030 import and recent-memory behavior fixtures now pass individually with
+owned cleanup. Concurrent import shrink/growth remains host-only: AmigaDOS denies
+the simultaneous write reopen. These two fixtures use tracking heap allocators;
+Exec-backed Fast-RAM pointer accounting for them remains a separate next check.

@@ -33,11 +33,17 @@ int main(int argc,char **argv)
     assert(p==&sentinel && n==123 && !live);
     assert(pt_file_load(path,70000,&a,&p,&n)==PT_LOAD_OK);
     assert(n==70000 && !memcmp(p,source,n));release(NULL,p);p=&sentinel;n=123;
+#ifndef __amigaos__
+    /* AmigaDOS refuses reopening the input for writing while its descriptor is
+       open. Keep concurrent size-change coverage on hosts that permit it. */
     for(mutation=1;mutation<=2;++mutation) {
         write_source(70000);
         assert(pt_file_load(path,70000,&a,&p,&n)==PT_LOAD_IO);
         assert(p==&sentinel && n==123 && !live);
     }
+#else
+    puts("FILE LOAD: concurrent rewrite cases host-only (AmigaDOS sharing)");
+#endif
     mutation=0;write_source(0);
     assert(pt_file_load(path,0,&a,&p,&n)==PT_LOAD_OK && !n);release(NULL,p);
     assert(!remove(path));p=&sentinel;n=123;

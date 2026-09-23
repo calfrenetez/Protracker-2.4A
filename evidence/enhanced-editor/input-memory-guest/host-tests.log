@@ -1,0 +1,18 @@
+FILE LOAD PASS
+FILE LOAD PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.738s
+
+OK
+RECENT PASS: ten-item MRU, case-folded dedup, alias promotion, bounds, removal, CRC/truncation refusal and atomic decode
+.RECENT FILE PASS: alternating generations, interrupted/corrupt write recovery, persisted clear, invalid-save refusal
+.RECENT FILE PASS: alternating generations, interrupted/corrupt write recovery, persisted clear, invalid-save refusal
+RECENT MEMORY PASS
+RECENT FILE PASS: alternating generations, interrupted/corrupt write recovery, persisted clear, invalid-save refusal
+RECENT MEMORY PASS
+.
+----------------------------------------------------------------------
+Ran 3 tests in 2.014s
+
+OK

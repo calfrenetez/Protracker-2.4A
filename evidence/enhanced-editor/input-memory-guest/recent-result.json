@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "scope": "shared030 native import/recent file checks",
+  "PTRecentMemoryTest_sha256": "15feea1d076b9888bcb44ab1798fa5ccc9cf6e2275fe7d005b727e284c854c87",
+  "recent_returncode": "0",
+  "run_files_cleaned": true
+}

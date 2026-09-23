@@ -361,3 +361,14 @@ only its own provisional resources. Master samples, slot table, report and
 existing undo/redo remain unchanged. Tests inject failure at every allocation
 in a fresh bounce and with existing redo, then successfully replay the preserved
 redo. Cancellation and exact24-bit project round trips remain covered.
+
+## Export memory-pressure rollback
+
+The allocation-failure regression covers all three WAV workspace allocations
+(measure, render, verification) and all eight for a two-stem export (two global
+preflights, then measure/render/verification for each stem). Every refusal must
+report `PT_RENDER_MEMORY`, release working allocations, preserve the output
+report and all master/project bytes, and remove every owned staging candidate.
+Failures in the second stem also remove the already verified first staged stem.
+This tests the allocated export path, not real Fast-RAM fragmentation or filesystem
+hardware failure. Existing destination/race and cancellation tests remain separate.

@@ -7,6 +7,35 @@
 static size_t live,calls,fail;
 static void *allocate(void *c,size_t n) {(void)c;if(++calls==fail)return NULL;void *p=malloc(n);if(p)++live;return p;}
 static void release(void *c,void *p) {(void)c;if(p) {assert(live);--live;free(p);}}
+/* Exercise full-scale clipping through the transactional sampler, not only
+   the PCM primitive. Undo must retain the asymmetric signed-24-bit extrema. */
+static void stereo24_gain_history(void)
+{
+    struct pt_allocator a={NULL,allocate,release};struct pt_document d;struct pt_sampler s;
+    struct pt_pattern_history h;struct pt_pattern_command commands[4];struct pt_event_change changes[4];
+    int32_t source[8]={123,-456,-8388608,8388607,-1,1,789,-987};
+    const int32_t expected[8]={123,-456,-8388608,8388607,-2,2,789,-987};
+    struct pt_pcm pcm={source,8,4,44100,2,24};uint8_t wav[100],exported[100];size_t n,w;unsigned i;
+    pt_document_init(&d,&a);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
+    pt_sampler_init(&s,&a,1024*1024);
+    assert(pt_pattern_history_init(&h,&d.project,commands,4,changes,4)==PT_EDIT_OK);
+    assert(pt_wav_encode(&pcm,wav,sizeof(wav),&n)==PT_WAV_OK);
+    assert(pt_sampler_import(&s,&d.project,&h,0,wav,n,"gain-boundary")==PT_EDIT_OK);
+    pt_pattern_mark_saved(&h);
+    assert(pt_sampler_edit(&s,&d.project,&h,0,PT_PCM_GAIN,1,3,2000)==PT_EDIT_OK);
+    assert(!memcmp(d.project.samples[0].pcm.data,expected,sizeof(expected)) && pt_pattern_dirty(&h));
+    for(i=0;i<3;++i) {
+        assert(pt_pattern_undo(&d.project,&h,-1)==PT_EDIT_OK && !pt_pattern_dirty(&h));
+        assert(!memcmp(d.project.samples[0].pcm.data,source,sizeof(source)));
+        assert(pt_wav_encode(&d.project.samples[0].pcm,exported,sizeof(exported),&w)==PT_WAV_OK);
+        assert(w==n && !memcmp(exported,wav,n));
+        assert(pt_pattern_undo(&d.project,&h,1)==PT_EDIT_OK && pt_pattern_dirty(&h));
+        assert(!memcmp(d.project.samples[0].pcm.data,expected,sizeof(expected)));
+    }
+    pt_pattern_history_release(&h);pt_sampler_release(&s);assert(!s.bytes);
+    pt_document_release(&d);assert(!live);
+    puts("STEREO24 GAIN HISTORY PASS: clipped extrema, untouched boundary frames, three exact undo/redo cycles and WAV identity");
+}
 static void loops_and_slices(void)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_document d,reopened;struct pt_sampler s;
@@ -299,6 +328,6 @@ int main(void)
         pt_pattern_history_release(&h);pt_sampler_release(&s);assert(!s.bytes);
     }
     pt_document_release(&d);pt_document_release(&reopened);assert(!live);
-    loops_and_slices();conversion();iff_samples();raw_samples();
+    loops_and_slices();conversion();iff_samples();raw_samples();stereo24_gain_history();
     puts("SAMPLER PASS: exact stereo24 import/range edit, unified history, dirty state, no-op redo, allocation rollback, bounded memory, eviction, save/reopen and release");return 0;
 }

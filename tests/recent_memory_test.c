@@ -16,7 +16,10 @@ static int save_bounded(const char *path,const struct pt_recent *r)
 #define main fixture_main
 #include "recent_file_test.c"
 #undef main
-int main(int argc,char **argv)
+#ifndef PT_RECENT_MEMORY_MAIN
+#define PT_RECENT_MEMORY_MAIN main
+#endif
+int PT_RECENT_MEMORY_MAIN(int argc,char **argv)
 {
     struct pt_recent expected;unsigned was;int result=fixture_main(argc,argv);
     assert(!live && calls);assert(load_bounded(argv[1],&expected));

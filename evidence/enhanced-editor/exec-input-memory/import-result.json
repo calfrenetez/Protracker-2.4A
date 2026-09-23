@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "scope": "shared030 native import/recent file checks",
+  "PTExecImportTest_sha256": "9a0625618a21972b0e14e26a0470b3c216aa4a8a9219483c5817ca39713e685b",
+  "import_returncode": "0",
+  "run_files_cleaned": true
+}

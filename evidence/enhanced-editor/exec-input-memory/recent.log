@@ -1,0 +1,4 @@
+EXEC MEMORY pool_limit=131213824 reserve=262144 flags=4
+RECENT FILE PASS: alternating generations, interrupted/corrupt write recovery, persisted clear, invalid-save refusal
+RECENT MEMORY PASS
+EXEC MEMORY PASS: 534 Fast allocations, zero owned bytes, budget refusal without Chip fallback

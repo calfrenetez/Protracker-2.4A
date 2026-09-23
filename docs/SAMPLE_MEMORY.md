@@ -447,3 +447,8 @@ Shared030 import and recent-memory behavior fixtures now pass individually with
 owned cleanup. Concurrent import shrink/growth remains host-only: AmigaDOS denies
 the simultaneous write reopen. These two fixtures use tracking heap allocators;
 Exec-backed Fast-RAM pointer accounting for them remains a separate next check.
+
+Exec-backed variants of the import/recent fixtures now pass on shared030 using
+the production master allocator: 2 and534 explicit Fast/not-Chip allocations,
+respectively, with zero pool-owned bytes at exit and zero-budget refusal without
+Chip fallback. Runtime-library allocation and physical pressure remain unmeasured.

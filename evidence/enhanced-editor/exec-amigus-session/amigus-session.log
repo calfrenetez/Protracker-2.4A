@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131249880 reserve=262144 flags=4
+AMIGUS SESSION PASS: tail flush, drain acknowledgement, no-lease Stop, failed-open/reset recovery and safe detach
+EXEC MEMORY PASS: 6 Fast allocations, zero owned bytes, budget refusal without Chip fallback

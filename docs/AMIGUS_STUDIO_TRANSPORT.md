@@ -103,3 +103,17 @@ delayed drain, drain error, held/no-lease Stop, failed initial reset and repeate
 reset failure/recovery. Native compilation passes; emulator session execution is
 pending. The native port must actually disable playback and reset FIFO, not merely
 report that the request was issued. Physical silence/timing remain unqualified.
+
+## Mini map reconciliation and native session evidence
+
+Pinned `Documentation/AmiGUS_mini/AmiGUS_mini_Register_Map.xlsx`, sheet
+`Main Register`: F28 documents format101 as24-bit stereo; B47:F47 lists reset
+strobe at0x08; B49:F49 lists16-bit data ports0x0c/0x0e; B50:F50 lists pending
+FIFO words at0x10. This supports the format and word-unit interpretation, but
+not FIFO depth or a promise that one CPU long write is atomic on PCMCIA. Native
+access ordering, capacity bound and stop/reset acknowledgement remain to verify.
+Source digest/cell evidence: `evidence/enhanced-editor/exec-amigus-session/mini-map-review.json`.
+
+Session fixture now passes shared030 under production allocator: six tracked
+Fast allocations, zero final owned bytes and budget refusal. This closes the
+session emulator gap, not native port/physical audio acceptance.

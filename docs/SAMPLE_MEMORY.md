@@ -840,3 +840,7 @@ Session stop must reset device FIFO separately even with no outstanding lease.
 and confirmed disable/reset before detach. Stop resets even without a lease;
 failed reset retains ownership. Host/compile evidence only for this session layer;
 producer stop and native device callback implementation remain caller obligations.
+
+Session ownership now passes shared030 with6 tracked Fast allocations and zero
+final owned bytes. Mini map confirms24-bit stereo and16-bit FIFO data ports;
+capacity/native bus ordering still need verification before MMIO implementation.

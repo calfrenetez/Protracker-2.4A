@@ -111,11 +111,9 @@ static int raw_eligible(struct pt_editor *e)
 }
 static void save_raw(struct pt_editor *e,const char *path)
 {
-    size_t n,w;uint8_t *bytes;enum pt_save_result result;
+    size_t n;enum pt_save_result result;
     if(!raw_eligible(e) || pt_raw_size(&e->project->samples[e->sample-1].pcm,&e->raw_format,&n)!=PT_RAW_OK)return;
-    bytes=pt_master_allocate(&master_memory,n);if(!bytes) {pt_editor_status(e,"RAW EXPORT: OUT OF MEMORY");return;}
-    if(pt_raw_encode(&e->project->samples[e->sample-1].pcm,&e->raw_format,bytes,n,&w)!=PT_RAW_OK || n!=w) {pt_master_release(&master_memory,bytes);pt_editor_status(e,"RAW EXPORT FAILED - SAMPLE PRESERVED");return;}
-    result=pt_file_save_new_allocated(path,bytes,n,&render_allocator);pt_master_release(&master_memory,bytes);
+    result=pt_sample_raw_save(path,&e->project->samples[e->sample-1].pcm,&e->raw_format,&render_allocator);
     pt_editor_status(e,result==PT_SAVE_MEMORY?"SAVE: OUT OF MEMORY":result==PT_SAVE_OK?"RAW PCM EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED":"RAW EXPORT REFUSED OR FAILED - DESTINATION PRESERVED");
     printf("EDITOR RAW result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
 }

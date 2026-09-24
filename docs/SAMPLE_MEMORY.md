@@ -948,3 +948,24 @@ Streamed master WAV export now passes shared030 using the production Exec pool:
 refusal. All six precision/channel combinations and failure cleanup pass; no
 staging remains. Evidence: `evidence/enhanced-editor/exec-sample-wav-stream/`.
 This is native file/allocator evidence, not physical storage or UI acceptance.
+
+## Bounded native RAW sample export
+
+RAW sample export now uses `pt_sample_raw_save` and the same fixed-budget
+generated-file transaction as WAV. It encodes directly from the immutable
+master, with explicit big/little endian and signed8/unsigned8 options. The
+settings must match source bits/channels/rate; mismatches fail before staging.
+No resampling or precision conversion occurs. Native RAW export no longer
+allocates a whole encoded payload. IFF and enhanced-project saves remain
+separate work.
+
+Host sanitizer checks match the established RAW encoder across16 format
+combinations and block boundaries, preserve all PCM values, confirm constant
+workspace, allocation refusal and existing destination protection. The shared
+generated-file layer supplies the previously tested failure/readback cleanup.
+Native compile evidence and emulator runtime evidence are tracked separately.
+
+RAW streaming now passes shared030 across16 formats: fixed11240-byte workspace,
+35 tracked Fast/not-Chip allocations, zero owned bytes, budget refusal and clean
+staging. Evidence: `evidence/enhanced-editor/exec-sample-raw-stream/`. Native editor
+handler is connected; no physical storage or visual UI acceptance is implied.

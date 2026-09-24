@@ -60,6 +60,8 @@ def main():
     }
     inputs['PT24GEdit'] += ['src/platform/sample_file.c']
     inputs['PTSampleFileTest'] = ['tests/sample_file_test.c', 'src/platform/sample_file.c', 'src/platform/file_save.c', 'src/core/safe_save.c', 'src/core/wav.c', 'src/core/pcm.c']
+    inputs['PT24GEdit'] += ['src/platform/sample_raw_file.c']
+    inputs['PTSampleRawFileTest'] = ['tests/sample_raw_file_test.c', 'src/platform/sample_raw_file.c', 'src/platform/file_save.c', 'src/core/safe_save.c', 'src/core/raw.c', 'src/core/pcm.c']
     inputs['PTModRound8Test'] = ['tests/mod_round8_test.c', *inputs['PTDocumentTest'][1:]]
     inputs['PTViewProbe'] = ['tests/native_view_probe.c', *inputs['PTViewBench'][1:]]
     inputs['PTPaulaTest'] += ['src/core/sample_cache.c', 'src/core/playback_pcm.c', 'src/core/pcm_filtered.c']
@@ -141,6 +143,7 @@ def main():
     inputs['PTExecRecentTest'] = ['tests/native_exec_recent_test.c','src/platform/recent_file.c','src/core/recent.c']
     inputs['PTRecentMemoryTest'] = ['tests/recent_memory_test.c','src/platform/recent_file.c','src/core/recent.c']
     inputs['PTFileLoadTest'] = ['tests/file_load_test.c','src/platform/file_load.c']
+    inputs['PTExecSampleRawFileTest'] = ['tests/native_exec_sample_raw_file_test.c', *inputs['PTSampleRawFileTest'][1:]]
     inputs['PTExecSampleFileTest'] = ['tests/native_exec_sample_file_test.c', *inputs['PTSampleFileTest'][1:]]
     inputs['PTExecSaveTest'] = ['tests/native_exec_save_test.c','src/platform/file_save.c','src/core/safe_save.c']
     flags = ['-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os',

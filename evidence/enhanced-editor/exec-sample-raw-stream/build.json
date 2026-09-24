@@ -1,0 +1,17 @@
+{
+  "scope": "full native build plus directly compiled Exec fixture; editor includes unrelated display work",
+  "editor": {
+    "sha256": "b1d48141d3f9dc1cd2a803fa67864a94a4b60e71e5f2206a0a3cff73112966c7",
+    "bytes": 223072
+  },
+  "fixture_sha256": "67f7e059fb5e69d211665065c54a719f1ab4cdcec271b6ec599c93d2cf97c973",
+  "sources": {
+    "tests/native_exec_sample_raw_file_test.c": "468501086efdc858e75ddd69d87b132c7552a4b2f08bc599a5f7e393601ea90c",
+    "tests/sample_raw_file_test.c": "918c61168e87f44bb5b01cd92908397d2556e9f452da774662460ab5612a44fd",
+    "src/platform/sample_raw_file.c": "13c7ac94119e6857625615b30e022aa20e5f336cd8afc1a0c687c66c526efcae",
+    "src/platform/sample_file.h": "b33c1ed48551868948353153dfa4009915d277512456ebd69ca3f0dfd9ed689b",
+    "src/platform/file_save.c": "0f5ccbcbd9fb6a09eee389fcee487b5a7a856bc768c1977b7a69864e914c40c8",
+    "src/core/raw.c": "4e157a6efb0b6991b0c269e1fe319125505b4d28801b9761c2829b9ec22d1ba8",
+    "src/native/master_memory.h": "ac898368849ec2d1892717d425b90c398da37a8799d536366a898e2e219e184a"
+  }
+}

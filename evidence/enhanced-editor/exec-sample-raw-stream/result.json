@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 streamed master RAW export and Exec Fast allocator",
+  "PTExecSampleRawFileTest_sha256": "67f7e059fb5e69d211665065c54a719f1ab4cdcec271b6ec599c93d2cf97c973",
+  "sample-raw_returncode": "0",
+  "sample_staging_clean": true,
+  "run_files_cleaned": true
+}

@@ -1,0 +1,7 @@
+{
+  "src/editor/editor_studio.c": "ace2a4cffdaee27a974aae1afe73252f8664b120ff0fb7a0d022785b5abdcc06",
+  "src/editor/editor_studio.h": "119d8564080f96e6494586b3e88719c4d0153089e86fc11fb971191029e95e34",
+  "tests/editor_studio_test.c": "60154498f0527177e2cc31443dccefdf4e718da02915272d383c883cc9f2577d",
+  "tests/test_editor_studio.py": "3425899a8f5f308664e09fca4500251b14c928c6c2b0220ae0bae753930d78b4",
+  "build/dev/PTEditorStudioTest": "742e2026dffd62e8d2292c45ef3f35f5aab9b7fbe9501c60dd534c67a1095ff9"
+}

@@ -703,3 +703,18 @@ entry points remain responsible for calling prepare_change before modifying data
 The callback is an integration boundary, not an enabled Studio backend. No native
 Studio session or device output is started by it. Host checks verify callback
 ordering against pre-edit note data, undo and disposal, and navigation preservation.
+
+## Editor Studio session owner
+
+`pt_editor_studio` is a small caller-owned attachment that installs the editor's
+change guard and closes its `pt_sampler_song` synchronously when the guard fires.
+It refuses an existing guard, starts with the editor sampler allocator, and closes
+completed/failed playback. Stop and detach are idempotent; detach removes only its
+own hook. Detach before freeing or reinitializing editor memory. Editor disposal
+may run first because its guard stops playback before releasing sample owners.
+
+The owner exposes explicit start/pull calls for a future output driver; it does
+not change native PLAY behavior or create a device queue. The native application
+has not instantiated it yet. Tests exercise actual pinned song playback through
+note edits, undo and disposal, prove navigation leaves the session running, and
+verify guard ownership plus zero remaining tracked allocations at final cleanup.

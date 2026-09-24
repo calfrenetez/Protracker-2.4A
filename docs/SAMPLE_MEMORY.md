@@ -516,3 +516,18 @@ It adds one bounded allocation; closing it does not close the borrowed mixer.
 Do not bypass it by reading the mixer directly while an interval is pending.
 CIA timing, effect-to-voice mapping, device output buffering and deadline/underrun
 handling remain separate work. The native editor is not yet wired to this API.
+
+## Pinned repeat-source handoff
+
+The renderer audit identified instrument-only/delayed-note repeat-source changes
+as a prerequisite for faithful tracker dispatch. `pt_studio_repeat` now pins a
+second master version and schedules its bounded forward repeat without restarting
+the current segment. Format/channels/rate must match. Pending replacement is
+transactional; failure preserves current/pending voices and pins. After a successful
+block crosses the boundary, the mixer transfers descriptor ownership and releases
+the old pin; no PCM copy or conversion occurs. Stop/retrigger/close release both
+current and pending pins. Pending data participates in output-alias checks.
+
+This closes a mixer capability gap; it does not yet wire tracker events or the
+AmiGUS transport. Independent initial/repeat segment triggers and complete audited
+effect dispatch still need integration before enhanced song playback is enabled.

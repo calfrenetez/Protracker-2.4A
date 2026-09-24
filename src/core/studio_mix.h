@@ -25,6 +25,11 @@ struct pt_studio_mix *pt_studio_open(const struct pt_allocator *,const struct pt
 /* Failed trigger retains the old voice/pin. Successful replacement releases it
  * only after the new version has been pinned and validated. */
 enum pt_pcm_result pt_studio_trigger(struct pt_studio_mix *,unsigned,const struct pt_studio_note *);
+/* Pin a new source for the next forward-loop boundary without retriggering.
+ * Same format/channels/rate required. Replaces a pending handoff transactionally;
+ * old source stays pinned until a successful read crosses the boundary. */
+enum pt_pcm_result pt_studio_repeat(struct pt_studio_mix *,unsigned channel,
+    uint64_t key,uint64_t version,uint32_t start,uint32_t end);
 struct pt_studio_control {uint64_t step;uint32_t gain[2];};
 /* Apply one tick's pitch/gain changes atomically to selected active voices.
  * controls is indexed by channel. Positive Q32 step; Q16 gains0..65536.

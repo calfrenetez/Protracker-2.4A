@@ -45,6 +45,29 @@ static void controls_test(void)
     pt_studio_stop(s,1);assert(pt_studio_control(s,2,ctl)==PT_PCM_INVALID);
     pt_studio_close(s);assert(!allocations && !masters[0].pins);
 }
+static void handoff_test(void)
+{
+    struct pt_allocator a={NULL,allocate,release};struct pt_studio_source src={NULL,acquire,unpin};
+    struct pt_studio_mix *s=pt_studio_open(&a,&src,1);
+    struct pt_studio_note note={1,1,1ULL<<32,0,4,0,4,{65536,65536},PT_VOICE_FORWARD,0};
+    int32_t values[8];struct pt_pcm out={values,8,2,48000,2,24};uint64_t clips=77;
+    assert(s && pt_studio_trigger(s,0,&note)==PT_PCM_OK);
+    assert(pt_studio_read(s,&out,&clips)==PT_PCM_OK && values[0]==1 && values[2]==257);
+    assert(pt_studio_repeat(s,0,1,2,1,3)==PT_PCM_OK);
+    assert(masters[0].pins==1 && masters[1].pins==1);
+    assert(pt_studio_repeat(s,0,1,2,1,5)==PT_PCM_INVALID && masters[1].pins==1);
+    assert(pt_studio_repeat(s,0,1,2,1,3)==PT_PCM_OK && masters[1].pins==1);
+    out.data=data2;out.capacity=4;clips=77;
+    assert(pt_studio_read(s,&out,&clips)==PT_PCM_ALIAS && clips==77);
+    out.data=values;out.capacity=8;
+    assert(pt_studio_read(s,&out,&clips)==PT_PCM_OK && values[0]==-513 && values[2]==8388607);
+    assert(!masters[0].pins && masters[1].pins==1);
+    assert(pt_studio_read(s,&out,&clips)==PT_PCM_OK && values[0]==65537 && values[2]==-23);
+    /* Closing before another handoff releases both independent pins. */
+    assert(pt_studio_repeat(s,0,1,1,0,4)==PT_PCM_OK);
+    assert(masters[0].pins==1 && masters[1].pins==1);
+    pt_studio_close(s);assert(!allocations && !masters[0].pins && !masters[1].pins);
+}
 int main(void)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_studio_source source={NULL,acquire,unpin};
@@ -82,6 +105,6 @@ int main(void)
     pt_studio_close(s);
     assert(!allocations && !masters[0].pins && !masters[1].pins);
     assert(data1[1]==257 && data2[1]==65537);
-    controls_test();
-    puts("STUDIO MIX PASS: pinned versions, atomic controls, mute progression, block continuity, true24 and cleanup");return 0;
+    controls_test();handoff_test();
+    puts("STUDIO MIX PASS: pinned versions, atomic controls, pinned handoffs, block continuity, true24 and cleanup");return 0;
 }

@@ -4,11 +4,11 @@ struct pt_studio_mix {
     struct pt_allocator allocator;
     struct pt_studio_source source;
     struct pt_voice voice[16];
-    struct pt_pcm pcm[16];
-    void *token[16];
+    struct pt_pcm pcm[16],pending_pcm[16];
+    void *token[16],*pending_token[16];
     uint32_t gain[16][2];
     unsigned count;
-    uint8_t pinned[16];
+    uint8_t pinned[16],pending[16];
 };
 struct pt_studio_mix *pt_studio_open(const struct pt_allocator *a,const struct pt_studio_source *source,unsigned count)
 {
@@ -24,6 +24,10 @@ void pt_studio_stop(struct pt_studio_mix *s,unsigned channel)
     if(s->pinned[channel]) {
         s->pinned[channel]=0;s->source.release(s->source.context,s->token[channel]);
     }
+    if(s->pending[channel]) {
+        s->pending[channel]=0;s->source.release(s->source.context,s->pending_token[channel]);
+    }
+    s->pending_token[channel]=NULL;
     s->token[channel]=NULL;memset(&s->pcm[channel],0,sizeof(s->pcm[channel]));
 }
 void pt_studio_close(struct pt_studio_mix *s)
@@ -46,6 +50,19 @@ enum pt_pcm_result pt_studio_trigger(struct pt_studio_mix *s,unsigned channel,co
     s->token[channel]=token;s->pinned[channel]=1;
     s->gain[channel][0]=note->gain[0];s->gain[channel][1]=note->gain[1];return PT_PCM_OK;
 }
+enum pt_pcm_result pt_studio_repeat(struct pt_studio_mix *s,unsigned channel,
+    uint64_t key,uint64_t version,uint32_t start,uint32_t end)
+{
+    struct pt_pcm pcm;struct pt_voice voice;void *token=NULL;enum pt_pcm_result result;
+    if(!s || channel>=s->count || !s->voice[channel].active)return PT_PCM_INVALID;
+    memset(&pcm,0,sizeof(pcm));
+    if(!s->source.acquire(s->source.context,key,version,&pcm,&token))return PT_PCM_CAPACITY;
+    voice=s->voice[channel];result=pt_voice_set_repeat_source(&voice,&pcm,start,end);
+    if(result!=PT_PCM_OK) {s->source.release(s->source.context,token);return result;}
+    if(s->pending[channel])s->source.release(s->source.context,s->pending_token[channel]);
+    s->pending_pcm[channel]=pcm;s->pending_token[channel]=token;s->pending[channel]=1;
+    s->voice[channel]=voice;s->voice[channel].repeat_pcm=&s->pending_pcm[channel];return PT_PCM_OK;
+}
 enum pt_pcm_result pt_studio_control(struct pt_studio_mix *s,uint16_t tracks,
     const struct pt_studio_control *control)
 {
@@ -65,6 +82,15 @@ enum pt_pcm_result pt_studio_read(struct pt_studio_mix *s,struct pt_pcm *output,
     enum pt_pcm_result result;unsigned i;
     if(!s || !output || !clipped || output->rate!=48000 || output->bits!=24 || output->channels!=2 || !output->frames || output->frames>256)return PT_PCM_INVALID;
     result=pt_voice_mix(s->voice,s->count,(const uint32_t (*)[2])s->gain,output,clipped);
-    if(result==PT_PCM_OK)for(i=0;i<s->count;++i)if(!s->voice[i].active)pt_studio_stop(s,i);
+    if(result==PT_PCM_OK)for(i=0;i<s->count;++i) {
+        if(!s->voice[i].active)pt_studio_stop(s,i);
+        else if(s->pending[i] && s->voice[i].pcm==&s->pending_pcm[i]) {
+            /* The entire block has completed, so no sample read still borrows
+               the old source. Move descriptor ownership without copying PCM. */
+            s->source.release(s->source.context,s->token[i]);
+            s->pcm[i]=s->pending_pcm[i];s->token[i]=s->pending_token[i];
+            s->voice[i].pcm=&s->pcm[i];s->pending[i]=0;s->pending_token[i]=NULL;
+        }
+    }
     return result;
 }

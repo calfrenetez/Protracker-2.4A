@@ -1285,3 +1285,12 @@ verify a1MiB invalid input causes no explicit allocation, exact stereo24-bit
 import and retained redo after refusal, with zero owned bytes at disposal.
 See evidence/enhanced-editor/sample-dispatch. Native build passes; unrelated
 display edits and physical behavior are not qualified by this non-UI fixture.
+
+## Native stereo24 sampler roundtrip
+
+Clean1d0e0ab shared030 UI qualification now verifies true24-bit stereo import,
+reverse/undo/redo, malformed replacement preserving redo, byte-identical WAV
+export, exact saved master PCM and CRC, project reopen, identical re-export
+and project save. Low sample bits remain intact throughout. Evidence is in
+evidence/enhanced-editor/stereo24-shared-qualified. This is native editor/file
+workflow acceptance, not live Studio/AmiGUS output or physical performance.

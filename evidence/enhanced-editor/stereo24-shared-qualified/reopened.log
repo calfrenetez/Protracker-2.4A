@@ -1,0 +1,13 @@
+EDITOR RECENT loaded=2 prefix=Dev:Tests/source-shared-1790246487270528000/recent
+EDITOR RECENT saved=1 count=2
+EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=104128
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO panel=5
+EDITOR REQUEST wav
+EDITOR WAV result=0 dirty=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=WAV EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED panel=5
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SETTINGS CLOSED panel=0
+EDITOR RECENT saved=1 count=3
+EDITOR SAVE result=0 dirty=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PROJECT SAVED AND VERIFIED panel=0
+EDITOR EXIT clean

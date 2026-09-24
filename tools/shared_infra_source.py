@@ -6,6 +6,8 @@ create request-NN-pointer-approved beside it within 120 seconds. This is a
 harness operator check, not a request for another user approval.
 """
 import argparse
+import io
+import wave
 import fcntl
 import subprocess
 import sys
@@ -21,6 +23,7 @@ from build_diagnostic import ROOT,digest
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--precision',action='store_true',help='Exercise exact stereo24 sample import/edit/export/reopen')
     parser.add_argument('--build-dir',type=Path,default=ROOT/'build/dev')
     args=parser.parse_args()
     infra=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
@@ -36,6 +39,12 @@ def main():
     baseline=(run/'input.mod').read_bytes();donor=make(baseline);(run/'donor.mod').write_bytes(donor);(run/'donor.pp').write_bytes(literal(donor))
     bad=bytearray(literal(donor));bad[4]=1;(run/'bad.pp').write_bytes(bad)
     expected_mod=bytearray(baseline);expected_mod[80:110]=donor[50:80];expected_mod.extend(donor[-32:])
+    values=[((i*76543)%16777216)-8388608 for i in range(256)]
+    pcm=b''.join(v.to_bytes(3,'little',signed=True) for v in values)
+    stream=io.BytesIO()
+    with wave.open(stream,'wb') as w:
+        w.setnchannels(2);w.setsampwidth(3);w.setframerate(44100);w.writeframes(pcm)
+    high=stream.getvalue();(run/'high.wav').write_bytes(high);(run/'bad.wav').write_bytes(b'invalid sample')
     emu=guest;start=time.monotonic();current='editor.log'
     def log():return (run/current).read_text() if (run/current).exists() else ''
     def wait(check,seconds=30):
@@ -56,7 +65,7 @@ def main():
         if ack:wait(lambda:'EDITOR FRAME' in log()[offset:] or 'EDITOR EXIT clean' in log()[offset:])
         return offset
     def request(kind):
-        offset=key(0x37 if kind=='mod' else 0x28,control=kind=='mod',shift=kind=='mod',ack=False)
+        offset=key(0x37 if kind=='mod' else 0x11 if kind=='wav' else 0x28,control=kind=='mod',shift=kind=='mod',ack=False)
         wait(lambda:('EDITOR REQUEST '+kind) in log()[offset:]);time.sleep(.8)
     def filename(text):
         nonlocal requests
@@ -129,26 +138,44 @@ def main():
             'Execute restore-env','Echo done >done'])+'\n')
         launched=True;guest.start()
         frame('status=READY -');assert all((run/(n+'.rc')).read_text().strip()=='0' for n in ['source'])
-        key(0x28,True);request('sample');filename('donor.pp');submit_request();frame('revision=0 dirty=0 status=MOD SOURCE READY')
-        capture('01-packed-mod-source.png')
-        request('source');offset=key(0x45);frame('SAMPLE FILE REQUEST CANCELLED',offset)
-        request('source');filename('donor.mod');submit_request();frame('revision=0 dirty=0 status=MOD SOURCE READY')
-        key(0x4e);key(0x4e);key(0x44);frame('revision=0 dirty=0 status=SELECT A NONEMPTY SOURCE')
-        key(0x4f);key(0x0c);key(0x0c);capture('02-selected-source-and-destination.png')
-        key(0x17);frame('revision=1 dirty=1 status=SOURCE INSTRUMENT IMPORTED')
-        key(0x31,True);frame('revision=0 dirty=0 status=UNDO')
-        request('source');filename('bad.pp');submit_request();frame('revision=0 dirty=0 status=SAMPLE FORMAT OR SLICE')
-        key(0x31,True,True);frame('revision=1 dirty=1 status=REDO');key(0x45);frame('MOD SOURCE CLOSED')
-        capture('03-imported-sample.png')
-        key(0x21,True);frame('dirty=0 status=PROJECT SAVED');saved=(run/'saved.ptg').read_bytes();dst=samples(saved)
-        pos=0;records=[]
-        for index in range(31):
-            frames=int.from_bytes(dst[pos+36:pos+40],'big');count=int.from_bytes(dst[pos+46:pos+48],'big');size=64+count*4+frames*dst[pos+41]*(dst[pos+40]//8)
-            records.append(dst[pos:pos+size]);pos+=size+(-size%4)
-        record=records[2];assert record[:32]==b'SOURCE TWO'+bytes(22) and record[40:46]==bytes([8,1,48,253,1,0])
-        assert record[48:56]==(8).to_bytes(4,'big')+(24).to_bytes(4,'big') and record[64:]==donor[-32:]
-        request('mod');filename('exact.mod');submit_request();frame('MOD EXPORTED AND VERIFIED');assert (run/'exact.mod').read_bytes()==expected_mod
+        if args.precision:
+            key(0x28,True);request('sample');filename('high.wav');submit_request()
+            frame('revision=1 dirty=1 status=SAMPLE UPDATED')
+            key(0x13);frame('revision=2 dirty=1');key(0x31,True);frame('revision=1 dirty=1 status=UNDO')
+            request('sample');filename('bad.wav');submit_request();frame('revision=1 dirty=1 status=SAMPLE FORMAT OR SLICE')
+            key(0x31,True,True);frame('revision=2 dirty=1 status=REDO');key(0x31,True)
+            capture('01-stereo24-master.png')
+            request('wav');filename('exact.wav');submit_request();frame('WAV EXPORTED AND VERIFIED')
+            assert (run/'exact.wav').read_bytes()==high
+            key(0x21,True);frame('dirty=0 status=PROJECT SAVED');saved=(run/'saved.ptg').read_bytes()
+            record=samples(saved)
+            assert record[36:42]==(128).to_bytes(4,'big')+bytes([24,2])
+            assert record[64:64+len(pcm)]==b''.join(v.to_bytes(3,'big',signed=True) for v in values)
+        else:
+            key(0x28,True);request('sample');filename('donor.pp');submit_request();frame('revision=0 dirty=0 status=MOD SOURCE READY')
+            capture('01-packed-mod-source.png')
+            request('source');offset=key(0x45);frame('SAMPLE FILE REQUEST CANCELLED',offset)
+            request('source');filename('donor.mod');submit_request();frame('revision=0 dirty=0 status=MOD SOURCE READY')
+            key(0x4e);key(0x4e);key(0x44);frame('revision=0 dirty=0 status=SELECT A NONEMPTY SOURCE')
+            key(0x4f);key(0x0c);key(0x0c);capture('02-selected-source-and-destination.png')
+            key(0x17);frame('revision=1 dirty=1 status=SOURCE INSTRUMENT IMPORTED')
+            key(0x31,True);frame('revision=0 dirty=0 status=UNDO')
+            request('source');filename('bad.pp');submit_request();frame('revision=0 dirty=0 status=SAMPLE FORMAT OR SLICE')
+            key(0x31,True,True);frame('revision=1 dirty=1 status=REDO');key(0x45);frame('MOD SOURCE CLOSED')
+            capture('03-imported-sample.png')
+            key(0x21,True);frame('dirty=0 status=PROJECT SAVED');saved=(run/'saved.ptg').read_bytes();dst=samples(saved)
+            pos=0;records=[]
+            for index in range(31):
+                frames=int.from_bytes(dst[pos+36:pos+40],'big');count=int.from_bytes(dst[pos+46:pos+48],'big');size=64+count*4+frames*dst[pos+41]*(dst[pos+40]//8)
+                records.append(dst[pos:pos+size]);pos+=size+(-size%4)
+            record=records[2];assert record[:32]==b'SOURCE TWO'+bytes(22) and record[40:46]==bytes([8,1,48,253,1,0])
+            assert record[48:56]==(8).to_bytes(4,'big')+(24).to_bytes(4,'big') and record[64:]==donor[-32:]
+            request('mod');filename('exact.mod');submit_request();frame('MOD EXPORTED AND VERIFIED');assert (run/'exact.mod').read_bytes()==expected_mod
         key(0x45);key(0x45);current='reopened.log';frame('status=READY -')
+        if args.precision:
+            key(0x28,True);request('wav');filename('copy.wav');submit_request();frame('WAV EXPORTED AND VERIFIED')
+            assert (run/'copy.wav').read_bytes()==high
+            capture('04-reopened-stereo24.png');key(0x45)
         key(0x21,True);frame('dirty=0 status=PROJECT SAVED');assert (run/'reopened.ptg').read_bytes()==saved
         key(0x45);wait(lambda:(run/'done').exists())
         assert all((run/(n+'.rc')).read_text().strip()=='0' for n in ['editor','reopened'])
@@ -158,15 +185,19 @@ def main():
         audio=audio_off();finished=True;capture('05-normal-exit.png')
         report={'run_id':run.name,'elapsed_seconds':round(time.monotonic()-start,3),
             'binaries':{n:digest(run/n) for n in ['PT24GEdit','PTSourceTest']},
-            'isolated_recents_restored':True,'native_source_ownership_fault_tests':True,'plain_and_pp20_source_preview':True,
-            'browse_and_cancel_preserve_song':True,'empty_source_refused':True,
-            'selected_source2_to_destination3_exact':True,'invalid_source_preserves_preview_and_redo':True,
-            'whole_song_exact_mod_comparison':True,'exact_project_crc_and_reopen_identity':True,'normal_exits':2,'stopped_audio':audio,
+            'isolated_recents_restored':True,'native_source_ownership_fault_tests':True,
+            'workflow':'stereo24' if args.precision else 'donor',
+            'exact_project_crc_and_reopen_identity':True,'normal_exits':2,'stopped_audio':audio,
             'logs':{n:(run/n).read_text() for n in ['source.log','editor.log','reopened.log']},
             'environment':{c:emu.command(c) for c in ['GET_STATUS','GET_VERSION','GET_CPU_MODEL','GET_MEMORY_CONFIG']}}
+        report.update({'exact_stereo24_import_export':True,'master_precision_preserved_through_undo_redo':True,
+            'unsupported_import_preserves_redo':True,'reopened_wav_byte_identity':True} if args.precision else {
+            'plain_and_pp20_source_preview':True,'browse_and_cancel_preserve_song':True,'empty_source_refused':True,
+            'selected_source2_to_destination3_exact':True,'invalid_source_preserves_preview_and_redo':True,
+            'whole_song_exact_mod_comparison':True})
         (out/'native-source.json').write_text(json.dumps(report,indent=2)+'\n')
-        for n in ['donor.mod','donor.pp','saved.ptg','reopened.ptg','exact.mod']:shutil.copyfile(run/n,out/n)
-        print('PASS: native MOD/PP20 source preview, selected instrument import, exact metadata/PCM, song preservation, undo and reopen')
+        for n in (['high.wav','exact.wav','copy.wav','saved.ptg','reopened.ptg'] if args.precision else ['donor.mod','donor.pp','saved.ptg','reopened.ptg','exact.mod']):shutil.copyfile(run/n,out/n)
+        print('PASS: native '+report['workflow']+' import, exact master PCM, undo/redo, export and reopen')
     finally:
         if not launched:
             execute('restore-env')

@@ -1,0 +1,29 @@
+{
+  "run_id": "source-shared-1790246487270528000",
+  "elapsed_seconds": 194.014,
+  "binaries": {
+    "PT24GEdit": "e7c7af1cc512101f83156f57c7e0582027af11018ec00044e1de826de9bf912b",
+    "PTSourceTest": "b2839945e7e78c68c06b7664148503bf08053c828f6a7baf010ec4b411629faa"
+  },
+  "isolated_recents_restored": true,
+  "native_source_ownership_fault_tests": true,
+  "workflow": "stereo24",
+  "exact_project_crc_and_reopen_identity": true,
+  "normal_exits": 2,
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=666\tsndbuf_status=0",
+  "logs": {
+    "source.log": "MOD SOURCE PASS: separate preview, source/destination selection, failed allocation/budget preservation, exact metadata/PCM import, shared undo, retained song and source release\n",
+    "editor.log": "EDITOR RECENT loaded=0 prefix=Dev:Tests/source-shared-1790246487270528000/recent\nEDITOR RECENT saved=1 count=1\nEDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=104128\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO panel=5\nEDITOR REQUEST sample\nEDITOR SAMPLE result=0 revision=1 dirty=1 preview=0\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=SAMPLE UPDATED - CONTROL-Z TO UNDO panel=5\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=SAMPLE UPDATED - CONTROL-Z TO UNDO panel=5\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=UNDO panel=5\nEDITOR REQUEST sample\nEDITOR SAMPLE result=5 revision=1 dirty=1 preview=0\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=SAMPLE FORMAT OR SLICE REFERENCES UNSUPPORTED - NO CHANGE panel=5\nEDITOR FRAME row=0 channel=0 revision=2 dirty=1 status=REDO panel=5\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=UNDO panel=5\nEDITOR REQUEST wav\nEDITOR WAV result=0 dirty=1\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=WAV EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED panel=5\nEDITOR RECENT saved=1 count=2\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=1 dirty=0 status=PROJECT SAVED AND VERIFIED panel=5\nEDITOR FRAME row=0 channel=0 revision=1 dirty=0 status=SETTINGS CLOSED panel=0\nEDITOR EXIT clean\n",
+    "reopened.log": "EDITOR RECENT loaded=2 prefix=Dev:Tests/source-shared-1790246487270528000/recent\nEDITOR RECENT saved=1 count=2\nEDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=104128\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO panel=5\nEDITOR REQUEST wav\nEDITOR WAV result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=WAV EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED panel=5\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SETTINGS CLOSED panel=0\nEDITOR RECENT saved=1 count=3\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PROJECT SAVED AND VERIFIED panel=0\nEDITOR EXIT clean\n"
+  },
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=autosave",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  },
+  "exact_stereo24_import_export": true,
+  "master_precision_preserved_through_undo_redo": true,
+  "unsupported_import_preserves_redo": true,
+  "reopened_wav_byte_identity": true
+}

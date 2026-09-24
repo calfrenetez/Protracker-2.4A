@@ -9,7 +9,7 @@ class ModRound8(unittest.TestCase):
             flags=['cc','-std=c99','-O1','-g','-Wall','-Wextra','-Werror','-fsanitize=address,undefined','-Isrc/core']
             subprocess.run([*flags,'tests/mod_round8_test.c',*SOURCES,'-o',str(test)],cwd=ROOT,check=True)
             subprocess.run([str(test),str(ROOT/'evidence/baseline/mod.baseline'),str(d)],check=True)
-            subprocess.run([*flags,'tools/pt24g_convert.c','src/platform/file_save.c',*SOURCES,'-o',str(cli)],cwd=ROOT,check=True)
+            subprocess.run([*flags,'tools/pt24g_convert.c','src/platform/file_load.c', 'src/platform/project_file.c', 'src/platform/mod_file.c', 'src/platform/file_save.c',*SOURCES,'-o',str(cli)],cwd=ROOT,check=True)
             original=(d/'high.ptg').read_bytes();output=d/'output.mod'
             args=[str(cli),'mod',str(d/'high.ptg'),str(output)]
             result=subprocess.run(args,capture_output=True,text=True)

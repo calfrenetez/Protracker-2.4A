@@ -1,0 +1,6 @@
+MOD ROUND8 PASS: 16/24-bit signed ties and saturation, exact reopen, source preservation, strict/rate/capacity/alias refusal, 8-bit identity
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.869s
+
+OK

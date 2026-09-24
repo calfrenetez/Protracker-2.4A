@@ -1027,3 +1027,20 @@ policies, legacy/no-legacy headers, interrupted/short readback, sink failure,
 allocation refusal, destination protection and unchanged masters. Native build
 and runtime qualification are reported separately. Emulator availability is
 currently unverified after an identity-guard refusal; no bypass or restart.
+
+## Converter utility memory
+
+`PT24GConvert` now uses the bounded platform input reader and releases the
+encoded input immediately after transactional document decode. Project and all
+MOD export policies reuse the verified streaming save paths; no whole encoded
+output allocation is retained. The input-size limit remains64 MiB. Native builds
+use the production master allocator, querying current Fast RAM and sharing the
+ceiling across input, decoded master storage and save workspace. Fast exhaustion
+does not spill into Chip; existing Chip-only fallback/reserves still apply.
+
+Host sanitizer tests cover exact MOD/project roundtrip, unchanged destinations,
+invalid input, explicit rounded/TPDF policies and a700000-byte allocation limit
+with a maximum-length classic sample. All owned memory is released. Native
+cross-build passes; native runtime and physical performance are not yet proven.
+Import still requires encoded input alongside decoded staging while validating;
+this change reduces lifetime and export peak, not streaming decode.

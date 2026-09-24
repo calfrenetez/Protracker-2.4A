@@ -52,7 +52,7 @@ def main():
         'PTProjectTest': ['tests/project_test.c', 'src/core/project.c', 'src/core/channels.c', 'src/core/pcm.c'],
         'PTModProjectTest': ['tests/mod_project_test.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/project.c', 'src/core/channels.c', 'src/core/pcm.c'],
         'PTDocumentTest': ['tests/document_test.c', 'src/core/document.c', 'src/core/pp20.c', 'src/core/safe_save.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/project.c', 'src/core/channels.c', 'src/core/pcm.c'],
-        'PT24GConvert': ['tools/pt24g_convert.c', 'src/platform/file_save.c', 'src/core/document.c', 'src/core/pp20.c', 'src/core/safe_save.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/project.c', 'src/core/channels.c', 'src/core/pcm.c'],
+        'PT24GConvert': ['tools/pt24g_convert.c', 'src/platform/file_load.c', 'src/platform/project_file.c', 'src/platform/mod_file.c',  'src/platform/file_save.c', 'src/core/document.c', 'src/core/pp20.c', 'src/core/safe_save.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/project.c', 'src/core/channels.c', 'src/core/pcm.c'],
         'PTEditorClick': ['tests/native_editor_click.c'],
         'PTInputProbe': ['tests/native_input_probe.c'],
         'PTChannelsTest': ['tests/channels_test.c', 'src/core/channels.c'],

@@ -3,7 +3,7 @@ import subprocess
 import tempfile
 import unittest
 ROOT = Path(__file__).resolve().parents[1]
-SOURCES = ['tools/pt24g_convert.c', 'src/platform/file_save.c', 'src/core/document.c', 'src/core/pp20.c', 'src/core/safe_save.c',
+SOURCES = ['tools/pt24g_convert.c','src/platform/file_load.c', 'src/platform/project_file.c', 'src/platform/mod_file.c',  'src/platform/file_save.c', 'src/core/document.c', 'src/core/pp20.c', 'src/core/safe_save.c',
            'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/project.c',
            'src/core/channels.c', 'src/core/pcm.c']
 class ConvertCLI(unittest.TestCase):
@@ -29,4 +29,24 @@ class ConvertCLI(unittest.TestCase):
             result = subprocess.run([binary, 'mod', str(project), str(d / 'invalid.mod')], capture_output=True)
             self.assertEqual(result.returncode, 20)
             self.assertFalse((d / 'invalid.mod').exists())
+            self.assertFalse(list(d.glob('*.pttmp-*')))
+
+    def test_conversion_with_bounded_peak_memory(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            d=Path(tmp);binary=d/'limited'
+            sources=['tests/convert_memory_test.c',*SOURCES[1:]]
+            subprocess.run(['cc','-std=c99','-O1','-g','-Wall','-Wextra','-Werror',
+                '-fsanitize=address,undefined','-Isrc/core',*sources,'-o',str(binary)],cwd=ROOT,check=True)
+            data=bytearray(1084+1024+131070)
+            data[42:44]=(65535).to_bytes(2,'big');data[45]=64;data[950]=1;data[951]=127;data[1080:1084]=b'M.K.'
+            for i in range(31):data[20+i*30+28:20+i*30+30]=(1).to_bytes(2,'big')
+            for i in range(131070):data[2108+i]=(i*37)&255
+            source=d/'source.mod';source.write_bytes(data)
+            for mode,suffix in [('mod','.mod'),('project','.ptg')]:
+                output=d/(mode+suffix)
+                result=subprocess.run([str(binary),mode,str(source),str(output)],capture_output=True,text=True,check=True)
+                self.assertIn('final=0',result.stdout)
+                print(mode+': '+result.stdout.splitlines()[-1])
+                if mode=='mod':self.assertEqual(output.read_bytes(),data)
+                self.assertEqual(source.read_bytes(),data)
             self.assertFalse(list(d.glob('*.pttmp-*')))

@@ -9,15 +9,19 @@
 #include <string.h>
 #include <unistd.h>
 #ifdef __amigaos__
-#include <proto/dos.h>
+#include "../src/native/master_memory.h"
 #endif
 #include "document.h"
 #include "mod_project.h"
 #include "safe_save.h"
 
-#include "../src/platform/file_save.h"
+#include "../src/platform/file_load.h"
+#include "../src/platform/project_file.h"
+#include "../src/platform/mod_file.h"
+#ifndef __amigaos__
 static void *allocate(void *ctx,size_t n) {(void)ctx;return malloc(n);}
 static void release(void *ctx,void *p) {(void)ctx;free(p);}
+#endif
 static const char *classification(enum pt_conversion_class c)
 {
     switch(c) {case PT_CONVERSION_LOSSLESS:return "LOSSLESS";case PT_CONVERSION_CONVERTED:return "CONVERTED";
@@ -39,23 +43,30 @@ static void print_report(const struct pt_project *p,const struct pt_mod_export_r
 }
 int main(int argc,char **argv)
 {
-    struct pt_allocator allocator={NULL,allocate,release};struct pt_document d;struct pt_mod_export_report report;
-    uint8_t *input=NULL,*output=NULL;FILE *file=NULL;long input_size;size_t n=0,w=0;int rc=20,mode;
+#ifdef __amigaos__
+    struct pt_master_memory memory;
+    struct pt_allocator allocator={&memory,pt_master_allocate,pt_master_release};
+#else
+    struct pt_allocator allocator={NULL,allocate,release};
+#endif
+    struct pt_document d;struct pt_mod_export_report report;
+    uint8_t *input=NULL;size_t input_size,n=0;int rc=20,mode;
     enum pt_project_result result;
+#ifdef __amigaos__
+    pt_master_memory_init(&memory);
+#endif
     pt_document_init(&d,&allocator);
     if(argc<3 || argc>4 || (strcmp(argv[1],"inspect") && strcmp(argv[1],"project") && strcmp(argv[1],"mod") && strcmp(argv[1],"mod8") && strcmp(argv[1],"mod8tpdf"))) {
         fprintf(stderr,"Usage: PT24GConvert inspect INPUT | project INPUT NEW_OUTPUT | mod INPUT NEW_OUTPUT | mod8 INPUT NEW_OUTPUT | mod8tpdf INPUT NEW_OUTPUT\n");goto done;
     }
     mode=!strcmp(argv[1],"inspect")?0:!strcmp(argv[1],"project")?1:!strcmp(argv[1],"mod8")?3:!strcmp(argv[1],"mod8tpdf")?4:2;
     if((mode==0 && argc!=3) || (mode && argc!=4)) {fprintf(stderr,"Wrong argument count\n");goto done;}
-    file=fopen(argv[2],"rb");if(!file) {fprintf(stderr,"Cannot open input\n");goto done;}
-    if(fseek(file,0,SEEK_END) || (input_size=ftell(file))<0 || input_size>64L*1024*1024) {
-        fprintf(stderr,"Input size invalid or above this utility's 64 MiB file limit\n");goto done;
+    {
+        enum pt_load_result loaded=pt_file_load(argv[2],64UL*1024*1024,&allocator,&input,&input_size);
+        if(loaded!=PT_LOAD_OK) {fprintf(stderr,"Input read failed phase=%d (64 MiB limit); no output created\n",loaded);goto done;}
     }
-    rewind(file);input=malloc(input_size?(size_t)input_size:1);if(!input)goto done;
-    if(fread(input,1,(size_t)input_size,file)!=(size_t)input_size)goto done;
-    if(fclose(file)) {file=NULL;goto done;}file=NULL;
     result=pt_document_load(&d,input,(size_t)input_size,SIZE_MAX);
+    allocator.release(allocator.context,input);input=NULL;
     if(result!=PT_PROJECT_OK) {fprintf(stderr,"Input rejected result=%d; no output created\n",result);goto done;}
     result=pt_mod_export_analyse(&d.project,&report);if(result!=PT_PROJECT_OK)goto done;print_report(&d.project,&report);
     if(!mode) {rc=0;goto done;}
@@ -66,15 +77,13 @@ int main(int argc,char **argv)
     if(mode==1)result=pt_project_size(&d.project,&n);
     else {result=(report.issues&~(mode>=3?PT_EXPORT_PRECISION:0U))?PT_PROJECT_UNSUPPORTED:PT_PROJECT_OK;n=report.bytes;}
     if(result!=PT_PROJECT_OK) {fprintf(stderr,"Direct MOD export refused; transformations require explicit policy and implementation\n");goto done;}
-    output=malloc(n);if(!output)goto done;
-    result=mode==1?pt_project_encode(&d.project,output,n,&w):mode==4?pt_mod_export_tpdf8(&d.project,output,n,&w):mode==3?pt_mod_export_round8(&d.project,output,n,&w):pt_mod_export_direct(&d.project,output,n,&w);
-    if(result!=PT_PROJECT_OK || w!=n)goto done;
     {
-        enum pt_save_result saved=pt_file_save_new(argv[3],output,n);
+        enum pt_save_result saved=mode==1?pt_project_file_save(argv[3],&d.project,&allocator):
+            pt_mod_file_save(argv[3],&d.project,mode==4?2:mode==3?1:0,&allocator);
         if(saved!=PT_SAVE_OK) {fprintf(stderr,"Save failed phase=%d; destination was not replaced\n",saved);goto done;}
     }
     printf("SAVED format=%s bytes=%lu verified=1 new_file=1\n",mode==1?"PT24G-v1":"MOD",(unsigned long)n);rc=0;
  done:
-    if(file)fclose(file);
-    free(input);free(output);pt_document_release(&d);return rc;
+    if(input)allocator.release(allocator.context,input);
+    pt_document_release(&d);return rc;
 }

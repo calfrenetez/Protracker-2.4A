@@ -1,0 +1,7 @@
+{
+  "scope": "Pinned m68000 native converter cross-build only; runtime not run",
+  "binary": {
+    "sha256": "d8f009673d96a5d62c7683fcd79d6a3620056931892ffc98957dfc066634a6e5",
+    "bytes": 54860
+  }
+}

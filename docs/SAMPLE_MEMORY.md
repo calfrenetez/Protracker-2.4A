@@ -744,3 +744,23 @@ Host tests cover exact24-bit extrema/low bits, source-buffer independence, repea
 ring wrap, full/backpressure, wrong/stale release, busy close, finish/drain and
 abort-held-block cleanup. Producer/song integration and device consumers are still
 unfinished; the queue alone does not make live AmiGUS output available.
+
+## Bounded producer pump
+
+`pt_studio_pump` connects a pull/stop producer (including `pt_studio_song`) to the
+output queue. Caller-owned state includes one private pending256-frame block;
+there are no pump allocations. Each step makes at most one producer pull or one
+pending retry. Full queues preserve the pending copy and prevent any further song
+advancement until it is enqueued. Source scratch can therefore change only after
+its data is safe. Producer end finishes the queue for draining, then stops source
+ownership; stop/failure abort unleased queue audio while preserving held leases.
+
+Producer/queue contexts must outlive the pump. Operations remain serialized owner
+thread calls, with no device cancellation or concurrent/interrupt guarantee. A
+consumer must explicitly release its device-held lease before queue destruction.
+The pump does not create a native PLAY route or claim an available AmiGUS device.
+
+Tests verify exact ordered24-bit frames under repeated stalls and held leases,
+provider failure with a lease held, and full queued-song output against reference
+at block sizes1/17/256 including lead-in and pre-roll. No dropped/duplicated frames
+were observed in those deterministic cases. Hardware deadlines remain unqualified.

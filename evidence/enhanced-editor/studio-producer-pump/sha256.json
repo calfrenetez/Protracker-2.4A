@@ -1,0 +1,8 @@
+{
+  "src/core/studio_pump.c": "c62e46bbff6556ef89197f75383c885c81a96bd9dc8b393b1a1e9539f38d2d4d",
+  "src/core/studio_pump.h": "679d0b48d09696c11cfdfd5fe4033fb7c2f4ea8784073fadb13604d0331aae16",
+  "tests/studio_pump_test.c": "0b1b8c6526bcf14dbb787c5ea37c7f41466f14a1978d49e3814c1e17d865e03a",
+  "tests/studio_queued_song_test.c": "620977d9eec4c709a41e627ff47e01c18ee184a7f03fc06b11666e60c35a3745",
+  "build/dev/PTStudioPumpTest": "c01c0ab79dc8a0756094ec7af00aecb84c695182d355988c6def17be422a40b6",
+  "build/dev/PTQueuedSongTest": "f3e857a8dd82731bc8f2162e14f1dbcaf49598bc09f183a83406bc436986e6bc"
+}

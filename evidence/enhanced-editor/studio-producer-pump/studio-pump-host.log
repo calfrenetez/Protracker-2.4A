@@ -1,0 +1,12 @@
+STUDIO MIX PASS: pinned versions, atomic controls, pinned handoffs/segments, block continuity, true24 and cleanup
+.Studio dispatch PASS: 16-channel true24 audio equivalence, source binding, partial acquisition failure cleanup
+.STUDIO PUMP PASS: stalled consumers, exact ordered true24 frames, bounded progress, failure lease retention
+.STUDIO QUEUE PASS: true24 copies, bounded pressure, lease retention, stale refusal, drain and abort cleanup
+.QUEUED SONG PASS: reference audio, tempo/delay, pre-roll, partition invariance, protocol and allocation refusal
+.SONG SESSION PASS: reference audio, tempo/delay, pre-roll, partition invariance, protocol and allocation refusal
+.STUDIO TICK PASS: tempo carry, partition hash=cbdaeaff, refusal and cleanup
+.
+----------------------------------------------------------------------
+Ran 7 tests in 10.518s
+
+OK

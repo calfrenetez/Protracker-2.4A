@@ -1,0 +1,14 @@
+AMIGUS CHAIN PASS: queue consumer packed byte equivalence, odd partitions, explicit tail finish, failed reset lease retention
+.AMIGUS FIFO PASS: bounded triplets, capacity stalls, odd tail, explicit pad, uncertain writes blocked until confirmed reset
+.AMIGUS PACK PASS: true24 MSB words, stereo order, partition tails, explicit final padding, atomic refusal
+.AMIGUS REGISTER PASS: owned access, word capacity, ordered triplets, bounded reset/readback, partial-write poison
+.AMIGUS REGISTER SESSION PASS: exact packed stream, IRQ bit isolation, drain wait, partial-write/reset delays, ownership loss cleanup
+.amigus reservation lifecycle: PASS (fake library, no hardware)
+.amigus reservation lifecycle: PASS (fake library, no hardware)
+AMIGUS RESERVED SESSION PASS: failed open, leased Stop and natural tail retain card through reset recovery
+.AMIGUS SESSION PASS: tail flush, drain acknowledgement, no-lease Stop, failed-open/reset recovery and safe detach
+.
+----------------------------------------------------------------------
+Ran 8 tests in 4.616s
+
+OK

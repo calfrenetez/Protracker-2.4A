@@ -223,3 +223,11 @@ the coordinated shared harness with `--studio-memory reserved-session`. Evidence
 `evidence/enhanced-editor/exec-amigus-reserved-session/`. Native playback remains
 unwired; native absent-library runtime and verified device capabilities remain
 separate unfinished work.
+
+The discovery-only native adapter probe now handles unavailable amigus.library
+on shared030 (two attempts, library=0, closed=1, rc0). Core discovery bounds
+enumeration to16 cards, detects cycles and reports known PCM descriptors without
+reserving or exposing card pointers. It closes every successfully opened library
+reference. Host absent/empty/unsupported/cycle checks pass; positive library/card
+and playback behavior remain untested. A discovered PCM descriptor is not a
+verified Studio capability. Evidence: `evidence/enhanced-editor/amigus-discovery/`.

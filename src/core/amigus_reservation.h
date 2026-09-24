@@ -37,4 +37,10 @@ int pt_amigus_reservation_end(struct pt_amigus_reservation *);
  * FreeCard has no acknowledgement: success means calls issued, not hardware proof.
  * Idempotent. Failed open already unwinds its library reference. */
 int pt_amigus_reservation_close(struct pt_amigus_reservation *);
+/* Discovery only: never calls reserve/release, exports no card pointers. Context
+ * must not be in concurrent use. Available means library opened, NOT playable.
+ * Status 1 completed (including absent library), 0 invalid API, -1 bad/bounded
+ * enumeration. Counts on error are partial. Every successful open is closed. */
+struct pt_amigus_discovery {unsigned available, cards, pcm_cards;};
+int pt_amigus_discover(const struct pt_amigus_reservation_api *, struct pt_amigus_discovery *);
 #endif

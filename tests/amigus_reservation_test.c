@@ -87,6 +87,26 @@ int main(void)
     assert(pt_amigus_reservation_close(&r));
     api.release=0;
     assert(pt_amigus_reservation_open(&r,&api,0)==PT_AMIGUS_INVALID);
+    /* Discovery must work with reservation callbacks absent. */
+    api.reserve=0;api.release=0;
+    {
+        struct pt_amigus_discovery d;
+        int closes=f.closes,reserves=f.reserves,releases=f.releases;
+        f.available=0;
+        assert(pt_amigus_discover(&api,&d)==1 && !d.available && !d.cards);
+        assert(f.closes==closes);
+        f.available=1;f.count=0;
+        assert(pt_amigus_discover(&api,&d)==1 && d.available && !d.cards);
+        f.count=16;
+        assert(pt_amigus_discover(&api,&d)==1 && d.cards==16 && d.pcm_cards==16);
+        f.supported=0;
+        assert(pt_amigus_discover(&api,&d)==1 && d.cards==16 && !d.pcm_cards);
+        f.cycle=1;
+        assert(pt_amigus_discover(&api,&d)==-1 && d.cards==1);
+        assert(!f.library && f.closes==closes+4);
+        assert(f.reserves==reserves && f.releases==releases);
+        assert(pt_amigus_discover(0,&d)==0 && !d.cards);
+    }
     puts("amigus reservation lifecycle: PASS (fake library, no hardware)");
     return 0;
 }

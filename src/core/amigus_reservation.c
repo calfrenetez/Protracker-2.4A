@@ -64,3 +64,27 @@ int pt_amigus_reservation_end(struct pt_amigus_reservation *r)
     r->access = 0;
     return 1;
 }
+
+int pt_amigus_discover(const struct pt_amigus_reservation_api *api,
+                       struct pt_amigus_discovery *result)
+{
+    void *seen[16], *card = 0;
+    unsigned i;
+    int status = 1;
+    if (!result) return 0;
+    memset(result, 0, sizeof(*result));
+    if (!api || !api->open || !api->close || !api->find || !api->supported) return 0;
+    if (api->open(api->context) != 1) return 1;
+    result->available = 1;
+    for (;;) {
+        card = api->find(api->context, card);
+        if (!card) break;
+        if (result->cards == 16) {status = -1;break;}
+        for (i = 0; i < result->cards; ++i) if (seen[i] == card) break;
+        if (i != result->cards) {status = -1;break;}
+        seen[result->cards++] = card;
+        if (api->supported(api->context, card) == 1) ++result->pcm_cards;
+    }
+    api->close(api->context);
+    return status;
+}

@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "scope": "shared030 discovery-only native amigus.library probe; no reservation or MMIO",
+  "PTAmiGusDiscovery_sha256": "7421aa83c497a5e1ee0df98fde69fe3502d4f8e16eeb67eead6024c27472de40",
+  "amigus-discovery_returncode": "0",
+  "run_files_cleaned": true
+}

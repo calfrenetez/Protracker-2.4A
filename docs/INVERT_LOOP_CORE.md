@@ -115,3 +115,27 @@ The emulator window was coordinated and guarded, with fresh release 06:58:37
 UTC. Evidence: evidence/enhanced-editor/dev92. No physical or analogue acceptance.
 
 All 98 host tests passed in 154.831 seconds.
+
+## Extended ordering reference (2026-09-24)
+
+Shared030 capture `invert-shared-1790247850357441000` adds EE2 pattern delay,
+EFf/EF8 channels sharing sample 1, and instrument-only reload. Each ran twice;
+the flow-driven C sequencer matches every active channel-0 cursor, speed,
+accumulator and all 16 shared loop bytes (30/18/18 checked ticks per run).
+Master PCM remains byte-identical throughout. Sanitized host parity and prior
+fast/slow/disable regressions pass. Evidence: `enhanced-editor/invert-ordering`.
+
+Selective Chip allocation exposed an obsolete assumption in the diagnostic:
+its pointer fields subtract the metadata address, although sample PCM now lives
+in a separate allocation. The first duplicate comparison therefore failed.
+That failure is retained. For these sample-1-only, no-offset fixtures, comparison
+now applies one fixed relocation delta per entire capture to the 13 explicit
+pointer fields. All other bytes compare exactly; cursor movement and pointer
+relationships remain observable. Raw logs are retained before any comparison.
+This normalization is deliberately not a general mapping for arbitrary MODs.
+
+Completion, all four DMA-off checks and exact owned cleanup passed; the window
+was explicitly released. This is emulator/reference and host-sequencer evidence.
+Production EFx rendering remains refused pending private workspace integration,
+allocation-failure/cancellation coverage and rendered-output validation. No
+physical or analogue acceptance is claimed.

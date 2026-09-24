@@ -1,0 +1,8 @@
+{
+  "passed": false,
+  "scope": "pinned EFx ordering captures; no renderer/physical acceptance",
+  "diagnostic_sha256": "773b91766ab938438bfc9b3fc6a63ec1225d22b8cefd35381b3c0bb4fff1c68a",
+  "cases": {},
+  "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0",
+  "owned_files_cleaned": true
+}

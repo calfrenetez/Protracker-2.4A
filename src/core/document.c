@@ -129,3 +129,22 @@ enum pt_project_result pt_document_new(struct pt_document *d,unsigned channels,s
 failed:
     pt_document_release(&next);return PT_PROJECT_CAPACITY;
 }
+
+/* PP20 back-references require unpacked scratch. Packed bytes stay in the
+ * positional source; budget still includes scratch plus candidate masters. */
+enum pt_project_result pt_document_load_pp20_reader(struct pt_document *d,pt_pp20_read read,void *context,size_t length,size_t budget,int (*finish)(void *))
+{
+    uint8_t *plain;size_t size,written;enum pt_pp20_result packed;enum pt_project_result result;
+    struct pt_project_requirements need;
+    if(!d || !read || !finish || !d->allocator.allocate || !d->allocator.release)return PT_PROJECT_INVALID;
+    packed=pt_pp20_probe_reader(read,context,length,&size);
+    if(packed!=PT_PP20_OK)return packed==PT_PP20_UNSUPPORTED?PT_PROJECT_UNSUPPORTED:PT_PROJECT_INVALID;
+    if(size>budget)return PT_PROJECT_CAPACITY;
+    plain=d->allocator.allocate(d->allocator.context,size);if(!plain)return PT_PROJECT_CAPACITY;
+    if(pt_pp20_decode_reader(read,context,length,plain,size,&written)!=PT_PP20_OK || written!=size || finish(context)!=1)result=PT_PROJECT_INVALID;
+    else {
+        result=pt_mod_project_probe(plain,size,&need);
+        if(result==PT_PROJECT_OK)result=load_unpacked(d,plain,size,budget-size);
+    }
+    d->allocator.release(d->allocator.context,plain);return result;
+}

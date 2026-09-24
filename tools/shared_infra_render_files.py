@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """Native file regressions; requires a separately coordinated shared030 window."""
-import argparse, fcntl, hashlib, json, shutil, sys, time
+import argparse, fcntl, hashlib, importlib.util, json, shutil, sys, time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     group=parser.add_mutually_exclusive_group()
+    group.add_argument('--pp20-import',action='store_true',help='Run native converter bounded packed MOD import')
     group.add_argument('--project-import',action='store_true',help='Run native converter enhanced-project load/save roundtrip')
     group.add_argument('--mod-import',action='store_true',help='Run bounded MOD document load with native Fast allocator')
     group.add_argument('--sample-import',choices=['raw','wav','svx'],help='Run streamed sample import with native Fast allocator')
@@ -72,6 +73,9 @@ def main():
         if args.sample_svx:
             cases=[('sample-svx','PTExecSampleSvxFileTest','SAMPLE SVX STREAM PASS:')]
             result['scope']='shared030 streamed master IFF export and Exec Fast allocator'
+        if args.pp20_import:
+            cases=[('pp20-import','PT24GConvert','SAVED format=MOD')]
+            result['scope']='shared030 bounded PP20 converter load and exact MOD export'
         if args.project_import:
             cases=[('project-import','PT24GConvert','SAVED format=PT24G-v1')]
             result['scope']='shared030 bounded enhanced-project converter load/save; exact mixed master roundtrip'
@@ -100,6 +104,12 @@ def main():
                 sub=run/'project-import';shutil.copyfile(ROOT/'tests/fixtures/project-v1/mixed.ptg',sub/'source.ptg')
                 commands=['FailAt 21','Stack 65536','CD '+guest.device+run.name+'/project-import',
                           'PT24GConvert project source.ptg copy.ptg >test.log','Echo $RC >test.rc']
+            if args.pp20_import:
+                spec=importlib.util.spec_from_file_location('packer',ROOT/'tools/make_pp20_fixture.py')
+                packer=importlib.util.module_from_spec(spec);spec.loader.exec_module(packer)
+                sub=run/'pp20-import';(sub/'source.pp').write_bytes(packer.literal((ROOT/'evidence/baseline/mod.baseline').read_bytes()))
+                commands=['FailAt 21','Stack 65536','CD '+guest.device+run.name+'/pp20-import',
+                          'PT24GConvert mod source.pp copy.mod >test.log','Echo $RC >test.rc']
             commands+=['Echo done >'+guest.device+run.name+'/done']
             guest.launch.write_text('\n'.join(commands)+'\n');guest.start()
             deadline=time.monotonic()+90
@@ -121,6 +131,13 @@ def main():
                 sub=run/'project-import';expected=(ROOT/'tests/fixtures/project-v1/mixed.ptg').read_bytes()
                 assert (sub/'copy.ptg').read_bytes()==expected and (sub/'source.ptg').read_bytes()==expected
                 assert sorted(p.name for p in sub.iterdir())==['PT24GConvert','copy.ptg','source.ptg','test.log','test.rc']
+                result['exact_master_roundtrip']=True
+                result['fixture_sha256']=hashlib.sha256(expected).hexdigest()
+            if args.pp20_import:
+                sub=run/'pp20-import';expected=(ROOT/'evidence/baseline/mod.baseline').read_bytes()
+                assert (sub/'copy.mod').read_bytes()==expected
+                assert (sub/'source.pp').read_bytes()==packer.literal(expected)
+                assert sorted(p.name for p in sub.iterdir())==['PT24GConvert','copy.mod','source.pp','test.log','test.rc']
                 result['exact_master_roundtrip']=True
                 result['fixture_sha256']=hashlib.sha256(expected).hexdigest()
             result['passed']=True

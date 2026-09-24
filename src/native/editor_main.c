@@ -24,6 +24,7 @@
 #include "../platform/raw_import.h"
 #include "../platform/mod_import.h"
 #include "../platform/project_import.h"
+#include "../platform/pp20_import.h"
 #include "../platform/file_load.h"
 #include "pt_font.h"
 #include "paula.h"
@@ -69,6 +70,7 @@ static int editor_init_memory(struct pt_editor *e,struct pt_project *p)
 static int load(struct pt_document *d,const char *path)
 {
     size_t n;uint8_t *bytes;int ok;
+    if(pt_pp20_file_candidate(path))return pt_pp20_file_load(d,path,64UL*1024*1024,SIZE_MAX)==PT_PROJECT_OK;
     if(pt_project_file_candidate(path))return pt_project_file_load(d,path,64UL*1024*1024,SIZE_MAX)==PT_PROJECT_OK;
     if(pt_mod_file_candidate(path))return pt_mod_file_load(d,path,64UL*1024*1024,SIZE_MAX)==PT_PROJECT_OK;
     if(pt_file_load(path,64UL*1024*1024,&render_allocator,&bytes,&n)!=PT_LOAD_OK)return 0;
@@ -76,7 +78,7 @@ static int load(struct pt_document *d,const char *path)
     pt_master_release(&master_memory,bytes);return ok;
 }
 static enum pt_project_result load_mod_source(void *context,struct pt_document *d,size_t budget)
-{return pt_mod_file_load(d,(const char *)context,64UL*1024*1024,budget);}
+{return pt_pp20_file_candidate((const char *)context)?pt_pp20_file_load(d,(const char *)context,64UL*1024*1024,budget):pt_mod_file_load(d,(const char *)context,64UL*1024*1024,budget);}
 static enum pt_edit_result load_sample(struct pt_editor *e,const char *path,int raw,int source_only,int *preview)
 {
     size_t n;uint8_t *bytes=NULL;enum pt_edit_result result=PT_EDIT_INVALID;
@@ -99,7 +101,7 @@ static enum pt_edit_result load_sample(struct pt_editor *e,const char *path,int 
         pt_editor_prepare_change(e);
         return pt_svx_file_import(path,64UL*1024*1024,&e->sampler,e->project,&e->history,e->sample-1,name);
     }
-    if(pt_mod_file_candidate(path)) {
+    if(pt_mod_file_candidate(path) || pt_pp20_file_candidate(path)) {
         if(preview)*preview=1;
         return pt_editor_source_load_with(e,load_mod_source,(void *)path);
     }

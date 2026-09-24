@@ -4,12 +4,15 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
+#ifndef PT_CONVERT_LIMIT
+#define PT_CONVERT_LIMIT 550000
+#endif
 static size_t live,peak;
 union allocation_header {size_t bytes;long double alignment;void *pointer;};
 static void *limited_allocate(size_t n)
 {
     union allocation_header *p;
-    if(n>550000-live)return NULL;
+    if(n>PT_CONVERT_LIMIT-live)return NULL;
     p=malloc(sizeof(*p)+n);if(!p)return NULL;p->bytes=n;live+=n;if(live>peak)peak=live;return p+1;
 }
 static void limited_release(void *value)
@@ -24,5 +27,5 @@ static void limited_release(void *value)
 int main(int argc,char **argv)
 {
     int rc=convert_main(argc,argv);assert(!live);
-    printf("CONVERTER MEMORY: peak=%lu limit=550000 final=0\n",(unsigned long)peak);return rc;
+    printf("CONVERTER MEMORY: peak=%lu limit=%lu final=0\n",(unsigned long)peak,(unsigned long)PT_CONVERT_LIMIT);return rc;
 }

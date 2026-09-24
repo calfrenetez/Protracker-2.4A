@@ -3,13 +3,18 @@
 #include <stdlib.h>
 #include <string.h>
 #include "pp20.h"
+#include "../src/platform/pp20_import.h"
 #include "document.h"
 #include "mod_project.h"
-static unsigned calls,fail,live;
+static unsigned calls,fail,live,finish_fail;
+static int finish(void *context) {(void)context;return !finish_fail;}
 static void *allocate(void *ctx,size_t n) {(void)ctx;void *p;if(++calls==fail)return NULL;p=malloc(n);if(p)++live;return p;}
 static void release(void *ctx,void *p) {(void)ctx;assert(live);--live;free(p);}
 static uint8_t *read_file(const char *name,size_t *n)
 {FILE *f=fopen(name,"rb");long size;uint8_t *p;assert(f && !fseek(f,0,SEEK_END));size=ftell(f);assert(size>0);rewind(f);p=malloc((size_t)size);assert(p && fread(p,1,(size_t)size,f)==(size_t)size && !fclose(f));*n=(size_t)size;return p;}
+struct reader {const uint8_t *data;size_t length,calls,fail;};
+static int reader(void *context,size_t pos,uint8_t *out,size_t n)
+{struct reader *r=context;assert(n<=256 && pos<=r->length && n<=r->length-pos);if(++r->calls==r->fail)return 0;memcpy(out,r->data+pos,n);return 1;}
 int main(int argc,char **argv)
 {
     uint8_t *packed,*plain,*out,*copy,*mod;size_t n,size,needed,w,i,bytes;uint32_t random=1;enum pt_pp20_result result;
@@ -17,6 +22,13 @@ int main(int argc,char **argv)
     assert(argc==3);packed=read_file(argv[1],&n);plain=read_file(argv[2],&size);out=malloc(size);copy=malloc(n);mod=malloc(size);assert(out && copy && mod);
     assert(pt_pp20_probe(packed,n,&needed)==PT_PP20_OK && needed==size);
     assert(pt_pp20_decode(packed,n,out,size,&w)==PT_PP20_OK && w==size && !memcmp(out,plain,size));
+    {
+        struct reader r={packed,n,0,0};size_t count;
+        assert(pt_pp20_probe_reader(reader,&r,n,&needed)==PT_PP20_OK && needed==size);
+        r.calls=0;assert(pt_pp20_decode_reader(reader,&r,n,out,size,&w)==PT_PP20_OK && w==size && !memcmp(out,plain,size));count=r.calls;
+        for(i=1;i<=count;++i) {r.calls=0;r.fail=i;w=99;assert(pt_pp20_decode_reader(reader,&r,n,out,size,&w)!=PT_PP20_OK && w==99);}
+        r.fail=0;r.calls=0;assert(pt_pp20_decode_reader(reader,&r,n,out,size-1,&w)==PT_PP20_CAPACITY && w==99);
+    }
     memset(out,0x55,size);w=99;assert(pt_pp20_decode(packed,n,out,size-1,&w)==PT_PP20_CAPACITY && w==99);
     assert(pt_pp20_decode(packed,n,packed,size,&w)==PT_PP20_ALIAS);
     for(i=0;i<n && i<64;++i) {needed=99;result=pt_pp20_probe(packed,i,&needed);if(result!=PT_PP20_OK)assert(needed==99);}
@@ -28,6 +40,9 @@ int main(int argc,char **argv)
     /* Mutations may remain structurally valid; failures must never write output. */
     for(i=0;i<256;++i) {
         size_t j;memcpy(copy,packed,n);random=random*1664525u+1013904223u;copy[random%n]^=(uint8_t)((random>>24)|1);
+        {struct reader r={copy,n,0,0};size_t old_size=99,new_size=99;
+         enum pt_pp20_result a=pt_pp20_probe(copy,n,&old_size),b=pt_pp20_probe_reader(reader,&r,n,&new_size);
+         assert(a==b && old_size==new_size);}
         memset(out,0x55,size);w=99;result=pt_pp20_decode(copy,n,out,size,&w);
         if(result!=PT_PP20_OK) {assert(w==99);for(j=0;j<size;++j)assert(out[j]==0x55);}
         else assert(w<=size);
@@ -37,6 +52,20 @@ int main(int argc,char **argv)
     for(i=1;i<=7;++i) {
         calls=0;fail=(unsigned)i;assert(pt_document_load(&d,packed,n,SIZE_MAX)==PT_PROJECT_CAPACITY);
         assert(live==allocated && !memcmp(&d,&before,sizeof(d)));
+    }
+    {
+        struct reader r={packed,n,0,0};size_t count;fail=0;
+        assert(pt_document_load_pp20_reader(&d,reader,&r,n,SIZE_MAX,finish)==PT_PROJECT_OK);
+        count=r.calls;assert(pt_pp20_file_candidate(argv[1]));
+        assert(pt_pp20_file_load(&d,argv[1],n,SIZE_MAX)==PT_PROJECT_OK);
+        before=d;allocated=live;
+        assert(pt_pp20_file_load(&d,argv[1],n-1,SIZE_MAX)==PT_PROJECT_CAPACITY && !memcmp(&d,&before,sizeof(d)));
+
+        for(i=1;i<=count;++i) {r.calls=0;r.fail=i;assert(pt_document_load_pp20_reader(&d,reader,&r,n,SIZE_MAX,finish)!=PT_PROJECT_OK);assert(live==allocated && !memcmp(&d,&before,sizeof(d)));}
+        r.fail=0;finish_fail=1;assert(pt_document_load_pp20_reader(&d,reader,&r,n,SIZE_MAX,finish)==PT_PROJECT_INVALID && live==allocated && !memcmp(&d,&before,sizeof(d)));finish_fail=0;
+        for(i=1;i<=7;++i) {calls=0;fail=(unsigned)i;assert(pt_document_load_pp20_reader(&d,reader,&r,n,SIZE_MAX,finish)==PT_PROJECT_CAPACITY);assert(live==allocated && !memcmp(&d,&before,sizeof(d)));}
+        fail=0;calls=0;assert(pt_document_load_pp20_reader(&d,reader,&r,n,size-1,finish)==PT_PROJECT_CAPACITY && !calls);
+        assert(pt_document_load_pp20_reader(&d,reader,&r,n,size+d.allocated_bytes-1,finish)==PT_PROJECT_CAPACITY && live==allocated && !memcmp(&d,&before,sizeof(d)));
     }
     calls=0;fail=0;assert(pt_document_load(&d,packed,n,size-1)==PT_PROJECT_CAPACITY && !calls);
     assert(pt_document_load(&d,packed,n,size+d.allocated_bytes-1)==PT_PROJECT_CAPACITY && live==allocated && !memcmp(&d,&before,sizeof(d)));

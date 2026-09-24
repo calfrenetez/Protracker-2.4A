@@ -1,0 +1,50 @@
+#include "pp20_import.h"
+#include <errno.h>
+#include <string.h>
+#include <fcntl.h>
+#include <unistd.h>
+struct input {int fd;size_t length,offset,used;uint8_t block[4096];};
+static long read_retry(int fd,void *data,size_t n)
+{long got;do {got=read(fd,data,n);}while(got<0 && errno==EINTR);return got;}
+static int read_at(void *context,size_t pos,uint8_t *out,size_t n)
+{
+    struct input *in=context;size_t have=0,count,start;
+    if(pos>in->length || n>in->length-pos || n>sizeof(in->block))return 0;
+    if(pos>=in->offset && pos-in->offset<=in->used && n<=in->used-(pos-in->offset)) {
+        memcpy(out,in->block+(pos-in->offset),n);return 1;
+    }
+    start=pos-(pos%sizeof(in->block));
+    if(pos-start+n>sizeof(in->block))start=pos;
+    count=in->length-start;if(count>sizeof(in->block))count=sizeof(in->block);
+    if(lseek(in->fd,(off_t)start,SEEK_SET)!=(off_t)start)return 0;
+    in->used=0;
+    while(have<count) {long got=read_retry(in->fd,in->block+have,count-have);if(got<=0)return 0;have+=(size_t)got;}
+    in->offset=start;in->used=count;memcpy(out,in->block+(pos-start),n);return 1;
+}
+static int finish(void *context)
+{
+    struct input *in=context;uint8_t extra;int rc;
+    if(lseek(in->fd,0,SEEK_END)!=(off_t)in->length || read_retry(in->fd,&extra,1)!=0)return 0;
+    rc=close(in->fd);in->fd=-1;return rc==0;
+}
+int pt_pp20_file_candidate(const char *path)
+{
+    struct input in={0};uint8_t tag[8];int ok;
+    if(!path)return 0;
+    in.fd=open(path,O_RDONLY);if(in.fd<0)return 0;in.length=4;
+    ok=read_at(&in,0,tag,4) && !memcmp(tag,"PP20",4);
+    if(close(in.fd))return 0;
+    return ok;
+}
+enum pt_project_result pt_pp20_file_load(struct pt_document *d,const char *path,size_t limit,size_t budget)
+{
+    struct input in={0};off_t end;enum pt_project_result r=PT_PROJECT_INVALID;
+    if(!path)return r;
+    in.fd=open(path,O_RDONLY);if(in.fd<0)return r;
+    end=lseek(in.fd,0,SEEK_END);if(end<0)goto done;
+    if((uintmax_t)end>(uintmax_t)limit) {r=PT_PROJECT_CAPACITY;goto done;}
+    in.length=(size_t)end;r=pt_document_load_pp20_reader(d,read_at,&in,in.length,budget,finish);
+done:
+    if(in.fd>=0)close(in.fd);
+    return r;
+}

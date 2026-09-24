@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "scope": "shared030 bounded PP20 converter load and exact MOD export",
+  "PT24GConvert_sha256": "4de6921b54883e73e588d1c3266c4ec29fc7fe2cde4579271ae5357ce94741b3",
+  "pp20-import_returncode": "0",
+  "exact_master_roundtrip": true,
+  "fixture_sha256": "813ccf02b367047a72ae5bfacf33593acd7879bc43e151de02a8deeb217325bf",
+  "run_files_cleaned": true
+}

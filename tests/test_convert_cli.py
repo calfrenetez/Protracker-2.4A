@@ -3,7 +3,7 @@ import subprocess
 import tempfile
 import unittest
 ROOT = Path(__file__).resolve().parents[1]
-SOURCES = ['tools/pt24g_convert.c','src/platform/file_load.c', 'src/platform/mod_import.c', 'src/platform/project_import.c', 'src/platform/project_file.c', 'src/platform/mod_file.c',  'src/platform/file_save.c', 'src/core/document.c', 'src/core/pp20.c', 'src/core/safe_save.c',
+SOURCES = ['tools/pt24g_convert.c','src/platform/file_load.c', 'src/platform/mod_import.c', 'src/platform/project_import.c', 'src/platform/pp20_import.c', 'src/platform/project_file.c', 'src/platform/mod_file.c',  'src/platform/file_save.c', 'src/core/document.c', 'src/core/pp20.c', 'src/core/safe_save.c',
            'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/project.c',
            'src/core/channels.c', 'src/core/pcm.c']
 class ConvertCLI(unittest.TestCase):
@@ -56,3 +56,15 @@ class ConvertCLI(unittest.TestCase):
             self.assertIn('final=0',result.stdout)
             self.assertEqual(restored.read_bytes(),data)
             print('project import: '+result.stdout.splitlines()[-1])
+
+            import importlib.util
+            spec=importlib.util.spec_from_file_location('packer',ROOT/'tools/make_pp20_fixture.py')
+            packer=importlib.util.module_from_spec(spec);spec.loader.exec_module(packer)
+            packed=d/'source.pp';packed.write_bytes(packer.literal(bytes(data)))
+            subprocess.run(['cc','-std=c99','-O1','-g','-Wall','-Wextra','-Werror',
+                '-DPT_CONVERT_LIMIT=700000','-fsanitize=address,undefined','-Isrc/core',*sources,'-o',str(binary)],cwd=ROOT,check=True)
+            unpacked=d/'unpacked.mod'
+            result=subprocess.run([str(binary),'mod',str(packed),str(unpacked)],capture_output=True,text=True,check=True)
+            self.assertEqual(unpacked.read_bytes(),data)
+            self.assertIn('final=0',result.stdout)
+            print('packed import: '+result.stdout.splitlines()[-1])

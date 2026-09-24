@@ -1,0 +1,17 @@
+{
+  "scope": "Full pinned native build; editor includes unrelated display work",
+  "binaries": {
+    "PT24GEdit": {
+      "sha256": "85f783365c66fe11cd4715d04e5c0139c272f28e70aa0ea092f0be04472d00ca",
+      "bytes": 242636
+    },
+    "PT24GConvert": {
+      "sha256": "4de6921b54883e73e588d1c3266c4ec29fc7fe2cde4579271ae5357ce94741b3",
+      "bytes": 65764
+    },
+    "PTPp20Test": {
+      "sha256": "8415dc85ab12f8d5de57e6e282920b4b50dd985af2cc57bb30d813ba1a64ec5d",
+      "bytes": 63524
+    }
+  }
+}

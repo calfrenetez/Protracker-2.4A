@@ -2,6 +2,7 @@
 #define PT_DOCUMENT_H
 #include "project.h"
 #include "mod_inspect.h"
+#include "pp20.h"
 struct pt_allocator {
     void *context;
     void *(*allocate)(void *,size_t);
@@ -31,4 +32,5 @@ enum pt_project_result pt_document_load(struct pt_document *,const uint8_t *,siz
  * cleans up input; old document is retained. No source callbacks may reenter. */
 enum pt_project_result pt_document_load_mod_reader(struct pt_document *,pt_mod_read,void *,size_t,size_t,int (*)(void *));
 enum pt_project_result pt_document_load_project_reader(struct pt_document *,pt_project_read,void *,size_t,size_t,int (*)(void *));
+enum pt_project_result pt_document_load_pp20_reader(struct pt_document *,pt_pp20_read,void *,size_t,size_t,int (*)(void *));
 #endif

@@ -1187,3 +1187,22 @@ document. Short/interrupted reads are covered. Converter tests now load the
 large enhanced project and export MOD under the same 550000-byte allocator
 ceiling, peak538110 and final zero. PP20 still retains packed/unpacked buffers.
 These statements supersede the earlier integration-pending notes above.
+
+### PP20 reverse file reader
+
+Native document load, MOD donor preview and the converter now read PP20 packed
+input through a 256-byte reverse codec cache and a fixed 4096-byte file cache.
+No full packed-input allocation remains in those paths. Back-references still
+require a complete unpublished unpacked buffer: its allocation and decoded master
+staging both count against the supplied budget. Only strict unpacked MOD content
+is accepted; encrypted PX20 and nested/enhanced payloads remain unsupported.
+Length/EOF/close must succeed before document replacement. Failed read, finish,
+allocation or budget checks release scratch/staging and preserve the old project.
+The old contiguous API remains for callers that already hold immutable bytes.
+
+Host comparisons cover all skip counts0..32, short literal lengths, back-reference
+length/offset forms and mutated malformed streams. Every injected reader failure,
+all seven allocation failures and finish failure retain the old document; short
+and interrupted file reads also pass. Large packed-MOD converter input now peaks
+at664104 allocator bytes under700000, final zero, excluding the full packed input
+beside scratch and masters. These results supersede earlier PP20-buffer notes.

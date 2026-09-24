@@ -573,3 +573,24 @@ Host tests replay the operations through voice APIs and compare 16-channel audio
 with the reference command path across repeated notes, instrument-only handoffs,
 volume cuts, offset segments, retriggers and stops. The Studio translation,
 complete song scheduling and hardware output transport remain unfinished.
+
+## Studio command dispatch
+
+`pt_studio_dispatch` translates a successful explicit command plan into Studio
+trigger/segment/repeat/stop/control calls. The owner supplies immutable descriptor
+identity to master-key/version bindings. Unknown or duplicate source bindings and
+invalid channels are rejected before provider callbacks. The provider must return
+the exact master content/format associated with the binding; no pointer arithmetic,
+PCM conversion or playback-cache substitution is used by dispatch.
+
+A later acquisition/control failure is fail-stop: every voice in the dedicated
+session is stopped, releasing current and pending pins. This does not roll back
+command state; the caller must discard it and abort playback. Dispatch itself
+allocates nothing, although provider acquisition may promote/pin a master.
+
+Host tests compare true24 output against the reference effect path across sixteen
+channels, including handoffs, cuts, segments, retriggers and stops, and verify
+cleanup after partial acquisition failure and ambiguous source bindings.
+`PTStudioPlanTest` is included in the native cross-build. Full song scheduling,
+command-state phase synchronization, editor integration and output transport are
+still pending; the adapter alone does not enable live Studio song playback.

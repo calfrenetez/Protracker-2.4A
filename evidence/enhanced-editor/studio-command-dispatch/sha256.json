@@ -1,0 +1,7 @@
+{
+  "src/core/studio_plan.c": "5cd070fc26e02f50b441bd0fe0eb7d2e4a77daf51f8a581d1d8199d73aeebe61",
+  "src/core/studio_plan.h": "4fbd66a0c7d7c08d6324242f00488e0a3a017f925ce8010ae9f8b11d19f33bdc",
+  "tests/studio_plan_test.c": "e10d1b10dd446c34867510431bd811272dff0307dae7f658ea5ba8e646e3bb7e",
+  "tests/test_studio_plan.py": "c02fec43b572aeeaad760fda83bb07d7f630ddefa0c4b01ce48130d4d62bed0c",
+  "build/dev/PTStudioPlanTest": "9575bd7d1b15e5875790d1742d8697faebceb2ec7058c932d7aa3c2ccefbf95c"
+}

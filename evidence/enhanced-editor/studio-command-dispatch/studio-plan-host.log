@@ -1,0 +1,14 @@
+STUDIO MIX PASS: pinned versions, atomic controls, pinned handoffs/segments, block continuity, true24 and cleanup
+.Studio dispatch PASS: 16-channel true24 audio equivalence, source binding, partial acquisition failure cleanup
+.STUDIO TICK PASS: tempo carry, partition hash=cbdaeaff, refusal and cleanup
+.
+----------------------------------------------------------------------
+Ran 3 tests in 4.308s
+
+OK
+render command plan PASS: explicit intents, 16-channel audio equivalence, failure discard
+.
+----------------------------------------------------------------------
+Ran 1 test in 2.651s
+
+OK

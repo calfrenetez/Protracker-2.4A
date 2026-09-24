@@ -1,0 +1,12 @@
+STUDIO PUMP PASS: stalled consumers, exact ordered true24 frames, bounded progress, failure lease retention
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.554s
+
+OK
+QUEUED SONG PASS: reference audio, tempo/delay, pre-roll, partition invariance, protocol and allocation refusal
+.
+----------------------------------------------------------------------
+Ran 1 test in 2.770s
+
+OK

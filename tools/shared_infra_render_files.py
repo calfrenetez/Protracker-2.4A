@@ -7,7 +7,7 @@ INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     group=parser.add_mutually_exclusive_group()
-    group.add_argument('--studio-memory',choices=['mixer','sampler','song','editor'],help='Run one production-allocator Studio fixture')
+    group.add_argument('--studio-memory',choices=['mixer','sampler','song','editor','queued'],help='Run one production-allocator Studio fixture')
     group.add_argument('--input-memory',choices=['import','recent','exec-import','exec-recent'],help='Run one import or recent-file memory fixture')
     group.add_argument('--exec-memory',choices=['bounce','stems','failures','save'],help='Run one native Exec-backed memory fixture')
     group.add_argument('--stems-only',action='store_true',help='Run the allocated stem export test only')
@@ -43,8 +43,10 @@ def main():
         if args.studio_memory:
             cases=[{'mixer':('studio','PTExecStudioTest','STUDIO MIX PASS:'),
                     'sampler':('sampler-studio','PTExecSamplerStudioTest','SAMPLER STUDIO PASS:'),
+                    'queued':('queued-song','PTExecQueuedSongTest','QUEUED SONG PASS:'),
                     'editor':('editor-studio','PTExecEditorStudioTest','EDITOR STUDIO PASS:'),
                     'song':('studio-song','PTExecStudioSongTest','SONG SESSION PASS:')}[args.studio_memory]]
+            if args.studio_memory=='queued':cases.append(('studio-pump','PTExecStudioPumpTest','STUDIO PUMP PASS:'))
             result['scope']='shared030 Studio ownership core; no audio device transport'
         try:
             commands=['FailAt 21','Stack 65536']

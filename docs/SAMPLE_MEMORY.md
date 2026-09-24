@@ -764,3 +764,10 @@ Tests verify exact ordered24-bit frames under repeated stalls and held leases,
 provider failure with a lease held, and full queued-song output against reference
 at block sizes1/17/256 including lead-in and pre-roll. No dropped/duplicated frames
 were observed in those deterministic cases. Hardware deadlines remain unqualified.
+
+Queued-song and pump fixtures now pass under production allocation on shared030:
+21 and4 tracked Fast/not-Chip allocations respectively, zero final owned bytes in
+both, with budget refusal retained. Queued song guest coverage uses256-frame
+blocks across normal/lead-in/pre-roll; host retains1/17/256. The native pump tests
+stalls and failure with a held lease. This is not device DMA, timing, physical
+A1200 or AmiGUS acceptance; consumer integration remains unfinished.

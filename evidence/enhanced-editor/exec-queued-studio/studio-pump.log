@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131251392 reserve=262144 flags=4
+STUDIO PUMP PASS: stalled consumers, exact ordered true24 frames, bounded progress, failure lease retention
+EXEC MEMORY PASS: 4 Fast allocations, zero owned bytes, budget refusal without Chip fallback

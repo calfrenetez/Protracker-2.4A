@@ -115,6 +115,8 @@ def main():
     inputs['PTExecEditorStudioTest'] = ['tests/native_exec_editor_studio_test.c',*inputs['PTEditorStudioTest'][1:]]
     inputs['PTStudioPumpTest'] = ['tests/studio_pump_test.c','src/core/studio_pump.c','src/core/studio_queue.c','src/core/pcm.c']
     inputs['PTQueuedSongTest'] = ['tests/studio_queued_song_test.c','src/core/studio_pump.c','src/core/studio_queue.c',*inputs['PTStudioSongTest'][1:]]
+    inputs['PTExecQueuedSongTest'] = ['tests/native_exec_queued_song_test.c',*inputs['PTQueuedSongTest'][1:]]
+    inputs['PTExecStudioPumpTest'] = ['tests/native_exec_studio_pump_test.c',*inputs['PTStudioPumpTest'][1:]]
     inputs['PTExecStudioSongTest'] = ['tests/native_exec_studio_song_test.c',*inputs['PTStudioSongTest'][1:]]
     inputs['PTSequenceTest'] = ['tests/render_sequence_test.c','src/core/studio_plan.c','src/core/studio_mix.c',*render_sources]
     inputs['PTStudioPlanTest'] = ['tests/studio_plan_test.c','src/core/studio_plan.c','src/core/studio_mix.c',*render_sources]

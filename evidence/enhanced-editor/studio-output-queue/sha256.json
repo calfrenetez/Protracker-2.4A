@@ -1,0 +1,7 @@
+{
+  "src/core/studio_queue.c": "31a58a5e514bce52606e875e642865db42676cec0dc84d3aae3c4b5e46b5b7e5",
+  "src/core/studio_queue.h": "891f680cb1cce81943e864cf73592a6b65643203762218c7676073935bc4bb04",
+  "tests/studio_queue_test.c": "09ec695c222e2950bf67e2eaf77c978522be2f08d86650570ee958f9bac8c996",
+  "tests/test_studio_queue.py": "87d00a435fc9e5b4bfe14827dbf6caaf2b81d575c6555e5c1bc20eb9cf767b5a",
+  "build/dev/PTStudioQueueTest": "f63c8eda68079fc5e1ea8ca5ba5bb29b4007b3fea2db013946f4831043106546"
+}

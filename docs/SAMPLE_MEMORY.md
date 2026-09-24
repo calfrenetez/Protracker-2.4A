@@ -725,3 +725,22 @@ project/sample/song state) were Fast/not-Chip, with zero final owned bytes and
 budget-refusal behavior preserved. Pinned playback stopped on note edit, undo and
 disposal; navigation preserved it. This is core editor/controller execution, not
 native UI interaction, live device audio, physical A1200 performance or AmiGUS.
+
+## Bounded Studio output queue
+
+`pt_studio_queue` provides1..8 copied blocks, each at most256 stereo24 frames at48k,
+inside one caller-allocator allocation. Push preserves source/master data and all
+24 bits; full queues refuse without overwriting queued or consumer-held audio.
+A serialized consumer acquires one read-only block lease and releases it with a
+monotonic ticket, preventing stale releases after slot reuse. Queue/data lifetimes
+must cover any device reference; release only after completion or confirmed cancel.
+
+Finish closes production and drains queued blocks. Abort discards unleased blocks
+but retains an outstanding lease; close refuses while it is held. Neither operation
+cancels a device transfer. Operations are owner-thread serialized, not lock-free,
+interrupt-safe or DMA-memory qualification. Ticket exhaustion refuses new leases.
+
+Host tests cover exact24-bit extrema/low bits, source-buffer independence, repeated
+ring wrap, full/backpressure, wrong/stale release, busy close, finish/drain and
+abort-held-block cleanup. Producer/song integration and device consumers are still
+unfinished; the queue alone does not make live AmiGUS output available.

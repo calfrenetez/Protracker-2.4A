@@ -1,0 +1,7 @@
+{
+  "src/core/studio_mix.c": "a4b0165edc07ba26f9695f61ccbdb9ac4a7d2a0f830183165010a07fd9f573bd",
+  "src/core/studio_mix.h": "48e81a08035fcadbb71b23c4e096039e47ea3ba482b1f539538d8c170c0dcdc3",
+  "tests/studio_mix_test.c": "8dd7d4159836f65868a6f30f5fc482095642b342c01e1b6146a1e2e3bba5e5b3",
+  "tests/native_exec_studio_test.c": "c48e519107bfc9ef7b5245a4e1bab4f1223d18f76655ddfa5a7cf083a3858f6d",
+  "tests/native_exec_memory.h": "ce0f2b696ce7767c0da8a2a44ac7730bc207f81e4f6b86bfd172353989e664b9"
+}

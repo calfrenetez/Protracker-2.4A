@@ -531,3 +531,11 @@ current and pending pins. Pending data participates in output-alias checks.
 This closes a mixer capability gap; it does not yet wire tracker events or the
 AmiGUS transport. Independent initial/repeat segment triggers and complete audited
 effect dispatch still need integration before enhanced song playback is enabled.
+
+`pt_studio_trigger_segment` now pins one master for independent initial and
+forward-repeat ranges, reusing `pt_voice_init_segment`. Disjoint ranges and
+loop-aware interpolation preserve the voice engine's behavior. Both ordinary
+and segment triggers share staged acquisition/validation and release old/current
+plus pending pins only on success. Invalid segment or loop kind leaves playback
+and pending handoff unchanged. This supplies the range primitive needed by the
+renderer’s offset/retrigger/delay mapping; tracker dispatch remains unwired.

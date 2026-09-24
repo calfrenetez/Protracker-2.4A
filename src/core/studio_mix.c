@@ -36,13 +36,14 @@ void pt_studio_close(struct pt_studio_mix *s)
     a=s->allocator;for(i=0;i<s->count;++i)pt_studio_stop(s,i);
     a.release(a.context,s);
 }
-enum pt_pcm_result pt_studio_trigger(struct pt_studio_mix *s,unsigned channel,const struct pt_studio_note *note)
+static enum pt_pcm_result trigger(struct pt_studio_mix *s,unsigned channel,const struct pt_studio_note *note,unsigned segment)
 {
     struct pt_pcm pcm;struct pt_voice voice;void *token=NULL;enum pt_pcm_result result;
-    if(!s || !note || channel>=s->count || note->gain[0]>65536 || note->gain[1]>65536)return PT_PCM_INVALID;
+    if(!s || !note || channel>=s->count || note->gain[0]>65536 || note->gain[1]>65536 || (segment && note->loop!=PT_VOICE_FORWARD))return PT_PCM_INVALID;
     memset(&pcm,0,sizeof(pcm));
     if(!s->source.acquire(s->source.context,note->key,note->version,&pcm,&token))return PT_PCM_CAPACITY;
-    result=pt_voice_init(&voice,&pcm,note->start,note->end,note->loop,note->loop_start,note->loop_end,note->step,note->linear);
+    result=segment?pt_voice_init_segment(&voice,&pcm,note->start,note->end,note->loop_start,note->loop_end,note->step,note->linear):
+        pt_voice_init(&voice,&pcm,note->start,note->end,note->loop,note->loop_start,note->loop_end,note->step,note->linear);
     if(result!=PT_PCM_OK) {s->source.release(s->source.context,token);return result;}
     pt_studio_stop(s,channel);s->pcm[channel]=pcm;s->voice[channel]=voice;
     s->voice[channel].pcm=&s->pcm[channel];
@@ -50,6 +51,10 @@ enum pt_pcm_result pt_studio_trigger(struct pt_studio_mix *s,unsigned channel,co
     s->token[channel]=token;s->pinned[channel]=1;
     s->gain[channel][0]=note->gain[0];s->gain[channel][1]=note->gain[1];return PT_PCM_OK;
 }
+enum pt_pcm_result pt_studio_trigger(struct pt_studio_mix *s,unsigned channel,const struct pt_studio_note *note)
+{return trigger(s,channel,note,0);}
+enum pt_pcm_result pt_studio_trigger_segment(struct pt_studio_mix *s,unsigned channel,const struct pt_studio_note *note)
+{return trigger(s,channel,note,1);}
 enum pt_pcm_result pt_studio_repeat(struct pt_studio_mix *s,unsigned channel,
     uint64_t key,uint64_t version,uint32_t start,uint32_t end)
 {

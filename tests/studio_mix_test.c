@@ -68,6 +68,27 @@ static void handoff_test(void)
     assert(masters[0].pins==1 && masters[1].pins==1);
     pt_studio_close(s);assert(!allocations && !masters[0].pins && !masters[1].pins);
 }
+static void segment_test(void)
+{
+    struct pt_allocator a={NULL,allocate,release};struct pt_studio_source src={NULL,acquire,unpin};
+    struct pt_studio_mix *s=pt_studio_open(&a,&src,1);
+    struct pt_studio_note note={1,1,1ULL<<31,2,4,0,2,{65536,65536},PT_VOICE_FORWARD,1};
+    int32_t values[8],reference[24];struct pt_pcm out={values,8,4,48000,2,24},expected={reference,24,12,48000,2,24};
+    struct pt_voice voice;uint32_t gains[1][2]={{65536,65536}};uint64_t clips;unsigned i;
+    assert(s && pt_studio_trigger_segment(s,0,&note)==PT_PCM_OK);
+    assert(pt_voice_init_segment(&voice,&masters[0].pcm,2,4,0,2,1ULL<<31,1)==PT_PCM_OK);
+    assert(pt_voice_mix(&voice,1,(const uint32_t (*)[2])gains,&expected,&clips)==PT_PCM_OK);
+    for(i=0;i<3;++i){assert(pt_studio_read(s,&out,&clips)==PT_PCM_OK);assert(!memcmp(values,reference+i*8,sizeof(values)));}
+    assert(values[0]==1 && values[2]==129); /* independent repeat, low bits */
+    assert(pt_studio_repeat(s,0,1,2,1,3)==PT_PCM_OK);
+    note.end=5;assert(pt_studio_trigger_segment(s,0,&note)==PT_PCM_INVALID);
+    assert(masters[0].pins==1 && masters[1].pins==1);
+    note.end=4;note.loop=PT_VOICE_ONCE;assert(pt_studio_trigger_segment(s,0,&note)==PT_PCM_INVALID);
+    note.loop=PT_VOICE_FORWARD;
+    assert(pt_studio_trigger_segment(s,0,&note)==PT_PCM_OK && masters[0].pins==1 && !masters[1].pins);
+    assert(pt_studio_read(s,&out,&clips)==PT_PCM_OK && values[0]==-513);
+    pt_studio_close(s);assert(!allocations && !masters[0].pins && !masters[1].pins);
+}
 int main(void)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_studio_source source={NULL,acquire,unpin};
@@ -105,6 +126,6 @@ int main(void)
     pt_studio_close(s);
     assert(!allocations && !masters[0].pins && !masters[1].pins);
     assert(data1[1]==257 && data2[1]==65537);
-    controls_test();handoff_test();
-    puts("STUDIO MIX PASS: pinned versions, atomic controls, pinned handoffs, block continuity, true24 and cleanup");return 0;
+    controls_test();handoff_test();segment_test();
+    puts("STUDIO MIX PASS: pinned versions, atomic controls, pinned handoffs/segments, block continuity, true24 and cleanup");return 0;
 }

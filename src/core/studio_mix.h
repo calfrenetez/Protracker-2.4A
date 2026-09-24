@@ -25,6 +25,11 @@ struct pt_studio_mix *pt_studio_open(const struct pt_allocator *,const struct pt
 /* Failed trigger retains the old voice/pin. Successful replacement releases it
  * only after the new version has been pinned and validated. */
 enum pt_pcm_result pt_studio_trigger(struct pt_studio_mix *,unsigned,const struct pt_studio_note *);
+/* Play [start,end) once, then repeat independent [loop_start,loop_end) in
+ * the same pinned master. Requires loop=FORWARD. The ranges may be disjoint;
+ * interpolation crosses the initial end into the repeat, as pt_voice_init_segment.
+ * Failure preserves the current voice AND any pending cross-source handoff. */
+enum pt_pcm_result pt_studio_trigger_segment(struct pt_studio_mix *,unsigned,const struct pt_studio_note *);
 /* Pin a new source for the next forward-loop boundary without retriggering.
  * Same format/channels/rate required. Replaces a pending handoff transactionally;
  * old source stays pinned until a successful read crosses the boundary. */

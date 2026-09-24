@@ -1,0 +1,13 @@
+STUDIO MIX PASS: pinned versions, atomic controls, pinned handoffs/segments, block continuity, true24 and cleanup
+.STUDIO TICK PASS: tempo carry, partition hash=cbdaeaff, refusal and cleanup
+.
+----------------------------------------------------------------------
+Ran 2 tests in 1.569s
+
+OK
+SAMPLER STUDIO PASS: budgeted promotion, stale refusal, edit/undo/eviction pins and final release
+.
+----------------------------------------------------------------------
+Ran 1 test in 2.943s
+
+OK

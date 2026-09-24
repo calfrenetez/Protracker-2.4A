@@ -1,0 +1,8 @@
+AMIGUS CHAIN PASS: queue consumer packed byte equivalence, odd partitions, explicit tail finish, failed reset lease retention
+.AMIGUS FIFO PASS: bounded triplets, capacity stalls, odd tail, explicit pad, uncertain writes blocked until confirmed reset
+.AMIGUS PACK PASS: true24 MSB words, stereo order, partition tails, explicit final padding, atomic refusal
+.
+----------------------------------------------------------------------
+Ran 3 tests in 1.675s
+
+OK

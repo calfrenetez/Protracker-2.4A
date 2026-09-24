@@ -70,3 +70,17 @@ producer before cancellation and preserve exclusive port ownership.
 Host sanitizer tests cover fixed words, stalls, final padding, write uncertainty,
 capacity fault, pending/failed reset and successful recovery. Pinned Amiga
 compilation passes. No native port, card access, interrupts or performance proof.
+
+## Consumer integration fixture
+
+The real queue/consumer now drives staged packing through a fake FIFO port.
+257 stereo frames partitioned1/17/256 produce identical packed bytes plus exactly
+one reported final silent frame despite intermittent capacity stalls. A partial
+write failure followed by pending/failed reset keeps the queue lease busy until
+reset succeeds. All tracked queue allocations are released.
+
+Session orchestration must explicitly reset the FIFO even when the consumer has
+no outstanding lease: consumer stop only cancels a transport-held lease. Software
+may still retain an odd tail, or hardware may still contain copied audio, after
+that lease is gone. The fixture explicitly finishes the tail before normal detach
+and explicitly resets after output. Native device drain remains unimplemented.

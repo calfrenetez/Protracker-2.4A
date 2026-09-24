@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131249872 reserve=262144 flags=4
+AMIGUS CHAIN PASS: queue consumer packed byte equivalence, odd partitions, explicit tail finish, failed reset lease retention
+EXEC MEMORY PASS: 4 Fast allocations, zero owned bytes, budget refusal without Chip fallback

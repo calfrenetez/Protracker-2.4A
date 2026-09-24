@@ -830,3 +830,8 @@ The staged `amigus_fifo` layer copies packed words into bounded caller-owned
 storage. Capacity stalls retain them, uncertain writes require confirmed reset,
 and reset clears odd-frame carry. Poll completion concerns host-buffer lifetime,
 not device silence. Host and compile checks pass; native MMIO remains unwired.
+
+The queue/consumer/staged-FIFO chain now passes host and shared030 fake-port
+checks at1/17/256-frame partitions, including failed-reset lease retention.
+Four tracked Fast allocations, zero final owned bytes; no hardware audio claim.
+Session stop must reset device FIFO separately even with no outstanding lease.

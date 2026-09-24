@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131245600 reserve=262144 flags=4
+SAMPLE WAV STREAM PASS: exact8/16/24 mono/stereo, master preserved, fixed workspace=11240, failure cleanup and no replacement
+EXEC MEMORY PASS: 18 Fast allocations, zero owned bytes, budget refusal without Chip fallback

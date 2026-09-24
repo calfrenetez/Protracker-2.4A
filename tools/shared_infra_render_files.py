@@ -7,6 +7,7 @@ INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     group=parser.add_mutually_exclusive_group()
+    group.add_argument('--sample-wav',action='store_true',help='Run streamed master WAV export with native Fast allocator')
     group.add_argument('--amigus-discovery',action='store_true',help='Discovery-only native library probe; no reservation or MMIO')
     group.add_argument('--studio-memory',choices=['mixer','sampler','song','editor','queued','consumer','fifo','session','register-session','reserved-session'],help='Run one production-allocator Studio fixture')
     group.add_argument('--input-memory',choices=['import','recent','exec-import','exec-recent'],help='Run one import or recent-file memory fixture')
@@ -55,6 +56,9 @@ def main():
             if args.studio_memory=='queued':cases.append(('studio-pump','PTExecStudioPumpTest','STUDIO PUMP PASS:'))
             if args.studio_memory=='consumer':cases.append(('queued-song','PTExecQueuedSongTest','QUEUED SONG PASS:'))
             result['scope']='shared030 Studio ownership core; no audio device transport'
+        if args.sample_wav:
+            cases=[('sample-wav','PTExecSampleFileTest','SAMPLE WAV STREAM PASS:')]
+            result['scope']='shared030 streamed master WAV export and Exec Fast allocator'
         if args.amigus_discovery:
             cases=[('amigus-discovery','PTAmiGusDiscovery','AMIGUS DISCOVERY PASS:')]
             result['scope']='shared030 discovery-only native amigus.library probe; no reservation or MMIO'
@@ -63,7 +67,7 @@ def main():
             for name,binary,marker in cases:
                 sub=run/name;sub.mkdir();shutil.copyfile(ROOT/'build/dev'/binary,sub/binary)
                 result[binary+'_sha256']=hashlib.sha256((sub/binary).read_bytes()).hexdigest()
-                commands+=['CD '+guest.device+run.name+'/'+name,binary+' '+guest.device+run.name+'/'+name+('/recent' if args.input_memory in ('recent','exec-recent') else '')+' >test.log','Echo $RC >test.rc']
+                commands+=['CD '+guest.device+run.name+'/'+name,binary+' '+guest.device+run.name+'/'+name+('/sample.wav' if args.sample_wav else '/recent' if args.input_memory in ('recent','exec-recent') else '')+' >test.log','Echo $RC >test.rc']
             commands+=['Echo done >'+guest.device+run.name+'/done']
             guest.launch.write_text('\n'.join(commands)+'\n');guest.start()
             deadline=time.monotonic()+90
@@ -75,7 +79,11 @@ def main():
                 log=(run/name/'test.log').read_text();(out/(name+'.log')).write_text(log)
                 result[name+'_returncode']=(run/name/'test.rc').read_text().strip()
                 assert result[name+'_returncode']=='0' and marker in log,log
-                if args.studio_memory or args.exec_memory or args.input_memory in ('exec-import','exec-recent'):assert 'EXEC MEMORY PASS:' in log,log
+                if args.sample_wav or args.studio_memory or args.exec_memory or args.input_memory in ('exec-import','exec-recent'):assert 'EXEC MEMORY PASS:' in log,log
+            if args.sample_wav:
+                remaining=sorted(p.name for p in (run/'sample-wav').iterdir())
+                assert remaining==['PTExecSampleFileTest','test.log','test.rc'],remaining
+                result['sample_staging_clean']=True
             result['passed']=True
         finally:
             if finished:

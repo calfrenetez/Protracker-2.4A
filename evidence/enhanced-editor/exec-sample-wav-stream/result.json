@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 streamed master WAV export and Exec Fast allocator",
+  "PTExecSampleFileTest_sha256": "79ce6cb2f5a1be7765927a14e0216a19371094d2e02b3dae206ae745ea930f71",
+  "sample-wav_returncode": "0",
+  "sample_staging_clean": true,
+  "run_files_cleaned": true
+}

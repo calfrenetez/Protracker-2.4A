@@ -1,0 +1,27 @@
+{
+  "compiler": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fbbb=-",
+    "-Isrc/core"
+  ],
+  "sources": {
+    "tests/native_exec_sample_file_test.c": "e263ef88eaf8aa50c9d281e721cbfb493876d331e12d7ac3da3e478fb71484f5",
+    "tests/native_exec_memory.h": "ce0f2b696ce7767c0da8a2a44ac7730bc207f81e4f6b86bfd172353989e664b9",
+    "tests/sample_file_test.c": "f8cf6494c251b9f3b9acf959e070d87998587e775eae5c053ae86b245e110691",
+    "src/native/master_memory.h": "ac898368849ec2d1892717d425b90c398da37a8799d536366a898e2e219e184a",
+    "src/platform/sample_file.c": "c0b3d10681604f733e07cef5c7bfbba233d86d90174910707be9bc499f36f619",
+    "src/platform/file_save.c": "0f5ccbcbd9fb6a09eee389fcee487b5a7a856bc768c1977b7a69864e914c40c8",
+    "src/core/safe_save.c": "2643e37743d34aa3e77c0e76ef0edab90b7c0f0dff030f4b9668dcb5db7b6568",
+    "src/core/wav.c": "c57b71388479d43f50945167f950bae4f16aae52fab09af4262704779ff1c794",
+    "src/core/pcm.c": "c1dcea85e047413448bf5664dc551bcbd6d27e7cfd646fb8ea5049bbb780786b"
+  },
+  "binary_sha256": "79ce6cb2f5a1be7765927a14e0216a19371094d2e02b3dae206ae745ea930f71"
+}

@@ -1,0 +1,6 @@
+SAMPLE WAV STREAM PASS: exact8/16/24 mono/stereo, master preserved, fixed workspace=11248, failure cleanup and no replacement
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.720s
+
+OK

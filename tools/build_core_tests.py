@@ -141,6 +141,7 @@ def main():
     inputs['PTExecRecentTest'] = ['tests/native_exec_recent_test.c','src/platform/recent_file.c','src/core/recent.c']
     inputs['PTRecentMemoryTest'] = ['tests/recent_memory_test.c','src/platform/recent_file.c','src/core/recent.c']
     inputs['PTFileLoadTest'] = ['tests/file_load_test.c','src/platform/file_load.c']
+    inputs['PTExecSampleFileTest'] = ['tests/native_exec_sample_file_test.c', *inputs['PTSampleFileTest'][1:]]
     inputs['PTExecSaveTest'] = ['tests/native_exec_save_test.c','src/platform/file_save.c','src/core/safe_save.c']
     flags = ['-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os',
              '-Wall', '-Wextra', '-Werror', '-Isrc/core', '-Ibuild/dev', *compiler_safety_flags(cc)]

@@ -942,3 +942,9 @@ Host sanitizer checks compare complete outputs with the existing encoder for
 all six precision/channel combinations, verify master preservation and fixed
 workspace, and cover allocation/generation/verification failures and existing
 destination refusal. Native runtime qualification remains separate.
+
+Streamed master WAV export now passes shared030 using the production Exec pool:
+11240-byte fixed workspace,18 Fast/not-Chip allocations, zero owned bytes, budget
+refusal. All six precision/channel combinations and failure cleanup pass; no
+staging remains. Evidence: `evidence/enhanced-editor/exec-sample-wav-stream/`.
+This is native file/allocator evidence, not physical storage or UI acceptance.

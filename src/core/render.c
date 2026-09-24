@@ -425,3 +425,52 @@ enum pt_render_result pt_render_stream_allocated(const struct pt_project *p,cons
     w=a->allocate(a->context,sizeof(*w));if(!w)return PT_RENDER_MEMORY;
     result=stream(p,o,sink,sink_ctx,progress,progress_ctx,out,w);a->release(a->context,w);return result;
 }
+
+struct pt_render_sequence {
+    struct pt_allocator allocator;struct pt_render_options options;
+    const struct pt_project *project;struct run run;
+    struct pt_render_command_state commands;
+    uint32_t remaining;unsigned pending,end,done,failed;
+};
+enum pt_render_result pt_render_sequence_open(const struct pt_project *p,const struct pt_render_options *o,
+    const struct pt_allocator *a,struct pt_render_sequence **out)
+{
+    struct pt_render_sequence *s;struct pt_render_report report;enum pt_render_result result;
+    if(!a || !a->allocate || !a->release || !out)return PT_RENDER_INVALID;
+    s=a->allocate(a->context,sizeof(*s));if(!s)return PT_RENDER_MEMORY;
+    memset(s,0,sizeof(*s));s->allocator=*a;
+    result=measure(p,o,NULL,NULL,&report,&s->run);
+    if(result!=PT_RENDER_OK) {a->release(a->context,s);return result;}
+    s->options=*o;s->project=p;
+    if(!start_run(&s->run,p,&s->options)) {a->release(a->context,s);return PT_RENDER_INVALID;}
+    pt_render_commands_init(&s->commands);*out=s;return PT_RENDER_OK;
+}
+enum pt_render_result pt_render_sequence_next(struct pt_render_sequence *s,struct pt_render_interval *out)
+{
+    struct pt_tick_span span;enum pt_render_result result;
+    if(!s || !out || s->pending || s->done || s->failed)return PT_RENDER_INVALID;
+    result=next_tick(&s->run,&span,&s->end);
+    if(result!=PT_RENDER_OK) {s->failed=1;return result;}
+    s->remaining=span.frames;s->pending=1;
+    out->frames=span.frames;out->emit=s->run.emit;out->end=s->end;return PT_RENDER_OK;
+}
+enum pt_render_result pt_render_sequence_consume(struct pt_render_sequence *s,uint32_t frames)
+{
+    if(!s || !s->pending || s->failed || !frames || frames>256 || frames>s->remaining)return PT_RENDER_INVALID;
+    if(pt_voice_advance(s->commands.voice,s->project->channels.count,frames)!=PT_PCM_OK) {s->failed=1;return PT_RENDER_SAMPLE;}
+    s->remaining-=frames;return PT_RENDER_OK;
+}
+enum pt_render_result pt_render_sequence_complete(struct pt_render_sequence *s,struct pt_render_plan *plan)
+{
+    enum pt_render_result result;
+    if(!plan)return PT_RENDER_INVALID;
+    plan->count=0;
+    if(!s || !s->pending || s->remaining || s->failed)return PT_RENDER_INVALID;
+    if(s->end) {s->done=1;s->pending=0;return PT_RENDER_OK;}
+    result=pt_render_commands_plan(s->project,&s->options,&s->run.timeline.flow,&s->run.pitch,
+        s->run.range,s->run.offset_tracks,&s->commands,plan);
+    if(result!=PT_RENDER_OK) {s->failed=1;return result;}
+    s->pending=0;return PT_RENDER_OK;
+}
+void pt_render_sequence_close(struct pt_render_sequence *s)
+{if(s) {struct pt_allocator a=s->allocator;a.release(a.context,s);}}

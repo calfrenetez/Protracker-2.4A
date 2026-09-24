@@ -40,4 +40,23 @@ struct pt_render_plan {unsigned count;struct pt_render_action action[PT_RENDER_A
 enum pt_render_result pt_render_commands_plan(const struct pt_project *,const struct pt_render_options *,
     const struct pt_flow *,const struct pt_pitch *,const struct pt_render_range *,uint16_t offsets,
     struct pt_render_command_state *,struct pt_render_plan *);
+/* Allocator-owned incremental audited sequence. Open measures/preflights the
+ * complete immutable project before publishing a session; exactly one allocation.
+ * Options are copied; project and all source storage must outlive close.
+ * Protocol: next -> consume successful audio blocks (1..256, exactly span.frames)
+ * -> complete (apply returned plan before next). Even zero-frame/end spans require
+ * complete. emit=0 means pre-roll: mix/discard but still consume. end!=0 marks the
+ * final preceding interval. Open/sequence failure never authorizes partial output.
+ * Invalid protocol is refused without advancement; internal tick/command failure
+ * poisons the sequence. Close releases state only, not external Studio pins.
+ * No hardware/transport, source pinning, callbacks during steps, or PCM reads in
+ * consume. Caller must stop Studio on error. */
+struct pt_render_sequence;
+struct pt_render_interval {uint32_t frames;unsigned emit,end;};
+enum pt_render_result pt_render_sequence_open(const struct pt_project *,const struct pt_render_options *,
+    const struct pt_allocator *,struct pt_render_sequence **);
+enum pt_render_result pt_render_sequence_next(struct pt_render_sequence *,struct pt_render_interval *);
+enum pt_render_result pt_render_sequence_consume(struct pt_render_sequence *,uint32_t frames);
+enum pt_render_result pt_render_sequence_complete(struct pt_render_sequence *,struct pt_render_plan *);
+void pt_render_sequence_close(struct pt_render_sequence *);
 #endif

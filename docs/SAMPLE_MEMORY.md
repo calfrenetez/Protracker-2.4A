@@ -612,3 +612,25 @@ cases. This primitive does not itself schedule songs or own borrowed descriptors
 the caller must still preserve immutable source lifetimes, advance by precisely
 the successful output frame count, and abort on dispatch/read failure. Full song
 scheduling, editor integration and live output remain unfinished.
+
+## Incremental audited sequence
+
+The allocator-owned `pt_render_sequence` reuses renderer measurement, timeline,
+pitch, range handling and explicit command plans. Open performs full bounded
+preflight/measurement before exposing the session, using one allocation. The
+project and all source storage remain borrowed and immutable until close.
+
+Each next interval describes preceding audio frames, whether to emit or discard
+pre-roll, and whether it is the ending interval. The caller reads Studio in blocks
+of at most256 frames, consumes only successful reads to advance the command mirror,
+then completes the interval and dispatches its plan before requesting another.
+Zero-frame intervals also require completion. Protocol mistakes are refused;
+internal sequencing/command failures poison the session. Closing frees sequence
+state only; the owner must stop/close Studio and discard partial output on failure.
+
+The host integration test drives a complete bounded song through Studio and
+compares every emitted true24 value to reference rendering for block sizes1/17/256,
+with tempo changes, pattern delay, retriggered notes, volume slides, initial lead-in
+and row-range pre-roll. Allocation/preflight/protocol refusal is also covered.
+This establishes a caller-driven song path; it is not yet an editor playback
+controller, output queue, AmiGUS transport or real-time performance qualification.

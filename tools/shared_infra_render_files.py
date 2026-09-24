@@ -7,7 +7,7 @@ INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     group=parser.add_mutually_exclusive_group()
-    group.add_argument('--sample-import',choices=['raw','wav'],help='Run streamed sample import with native Fast allocator')
+    group.add_argument('--sample-import',choices=['raw','wav','svx'],help='Run streamed sample import with native Fast allocator')
     group.add_argument('--mod-stream',action='store_true',help='Run bounded classic MOD export with native Fast allocator')
     group.add_argument('--project-stream',action='store_true',help='Run streamed master project save with native Fast allocator')
     group.add_argument('--sample-svx',action='store_true',help='Run streamed master IFF export with native Fast allocator')
@@ -71,7 +71,7 @@ def main():
             cases=[('sample-svx','PTExecSampleSvxFileTest','SAMPLE SVX STREAM PASS:')]
             result['scope']='shared030 streamed master IFF export and Exec Fast allocator'
         if args.sample_import:
-            cases=[('raw-import','PTExecRawImportTest','RAW IMPORT STREAM PASS:')] if args.sample_import=='raw' else [('wav-import','PTExecWavImportTest','WAV IMPORT STREAM PASS:')]
+            cases=[('raw-import','PTExecRawImportTest','RAW IMPORT STREAM PASS:')] if args.sample_import=='raw' else [('svx-import','PTExecSvxImportTest','SVX IMPORT STREAM PASS:')] if args.sample_import=='svx' else [('wav-import','PTExecWavImportTest','WAV IMPORT STREAM PASS:')]
             result['scope']='shared030 streamed sample import and Exec Fast allocator'
         if args.mod_stream:
             cases=[('mod-stream','PTExecModStreamTest','MOD STREAM PASS:')]
@@ -101,7 +101,7 @@ def main():
                 assert result[name+'_returncode']=='0' and marker in log,log
                 if args.sample_import or args.mod_stream or args.project_stream or args.sample_svx or args.sample_raw or args.sample_wav or args.studio_memory or args.exec_memory or args.input_memory in ('exec-import','exec-recent'):assert 'EXEC MEMORY PASS:' in log,log
             if args.sample_import or args.mod_stream or args.project_stream or args.sample_svx or args.sample_wav or args.sample_raw:
-                directory,binary=('raw-import','PTExecRawImportTest') if args.sample_import=='raw' else ('wav-import','PTExecWavImportTest') if args.sample_import=='wav' else ('mod-stream','PTExecModStreamTest') if args.mod_stream else ('project-stream','PTExecProjectStreamTest') if args.project_stream else ('sample-svx','PTExecSampleSvxFileTest') if args.sample_svx else ('sample-raw','PTExecSampleRawFileTest') if args.sample_raw else ('sample-wav','PTExecSampleFileTest')
+                directory,binary=('svx-import','PTExecSvxImportTest') if args.sample_import=='svx' else ('raw-import','PTExecRawImportTest') if args.sample_import=='raw' else ('wav-import','PTExecWavImportTest') if args.sample_import=='wav' else ('mod-stream','PTExecModStreamTest') if args.mod_stream else ('project-stream','PTExecProjectStreamTest') if args.project_stream else ('sample-svx','PTExecSampleSvxFileTest') if args.sample_svx else ('sample-raw','PTExecSampleRawFileTest') if args.sample_raw else ('sample-wav','PTExecSampleFileTest')
                 remaining=sorted(p.name for p in (run/directory).iterdir())
                 assert remaining==[binary,'test.log','test.rc'],remaining
                 result['sample_staging_clean']=True

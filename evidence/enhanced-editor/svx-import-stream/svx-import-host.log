@@ -1,0 +1,8 @@
+8SVX PASS: independent signed PCM fixture, odd chunks, loops, Fibonacci wrap, malformed bounds, alias and capacity
+.SVX IMPORT STREAM PASS: 8 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+SVX IMPORT STREAM PASS: 8 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+.
+----------------------------------------------------------------------
+Ran 2 tests in 6.358s
+
+OK

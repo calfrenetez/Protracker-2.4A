@@ -72,3 +72,34 @@ done:
     if(in.fd>=0)close(in.fd);
     return result;
 }
+
+int pt_svx_file_candidate(const char *path)
+{
+    struct input in;uint8_t header[12];int ok;
+    if(!path)return 0;
+    in.fd=open(path,O_RDONLY);if(in.fd<0)return 0;in.length=12;
+    ok=read_at(&in,0,header,12) && !memcmp(header,"FORM",4) && !memcmp(header+8,"8SVX",4);
+    if(close(in.fd))return 0;
+    return ok;
+}
+static int svx_fill(void *context,int32_t *data,uint32_t frames,const struct pt_raw_format *format)
+{
+    struct input *in=context;uint8_t extra;struct pt_pcm pcm={data,frames,frames,format->rate,1,8};
+    if(pt_svx_decode_reader(read_at,in,in->length,&pcm)!=PT_SVX_OK)return 0;
+    if(lseek(in->fd,0,SEEK_END)!=(off_t)in->length || read_retry(in->fd,&extra,1)!=0)return 0;
+    {int rc=close(in->fd);in->fd=-1;return rc==0;}
+}
+enum pt_edit_result pt_svx_file_import(const char *path,size_t limit,struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const char *name)
+{
+    struct input in;off_t end;struct pt_svx_info info;enum pt_edit_result result=PT_EDIT_INVALID;
+    if(!path)return result;
+    in.fd=open(path,O_RDONLY);if(in.fd<0)return result;
+    end=lseek(in.fd,0,SEEK_END);if(end<0)goto done;
+    if((uintmax_t)end>(uintmax_t)limit) {result=PT_EDIT_CAPACITY;goto done;}
+    in.length=(size_t)end;
+    if(pt_svx_inspect_reader(read_at,&in,in.length,&info)!=PT_SVX_OK || !info.frames) {result=PT_EDIT_UNSUPPORTED;goto done;}
+    result=pt_sampler_import_svx_fill(s,p,h,slot,&info,name,svx_fill,&in);
+done:
+    if(in.fd>=0)close(in.fd);
+    return result;
+}

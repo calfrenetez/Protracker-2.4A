@@ -76,6 +76,8 @@ def main():
     inputs['PTWavImportTest'] = ['tests/wav_import_test.c', 'src/platform/raw_import.c', *inputs['PTSamplerTest'][1:]]
     inputs['PTExecRawImportTest'] = ['tests/native_exec_raw_import_test.c', *inputs['PTRawImportTest'][1:]]
     inputs['PTExecWavImportTest'] = ['tests/native_exec_wav_import_test.c', *inputs['PTWavImportTest'][1:]]
+    inputs['PTSvxImportTest'] = ['tests/svx_import_test.c', 'src/platform/raw_import.c', *inputs['PTSamplerTest'][1:]]
+    inputs['PTExecSvxImportTest'] = ['tests/native_exec_svx_import_test.c', *inputs['PTSvxImportTest'][1:]]
     inputs['PTModRound8Test'] = ['tests/mod_round8_test.c', *inputs['PTDocumentTest'][1:]]
     inputs['PTViewProbe'] = ['tests/native_view_probe.c', *inputs['PTViewBench'][1:]]
     inputs['PTPaulaTest'] += ['src/core/sample_cache.c', 'src/core/playback_pcm.c', 'src/core/pcm_filtered.c']

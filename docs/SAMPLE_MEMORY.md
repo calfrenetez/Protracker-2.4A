@@ -1092,3 +1092,28 @@ RAW/WAV import fixtures pass shared030 with160/60 production Fast allocations,
 zero owned bytes, budget refusal without Chip fallback, exact cleanup and
 explicit release. Evidence: `evidence/enhanced-editor/wav-import-stream/`.
 Native handler wiring is compiled; visual UI/physical I/O remain separate.
+
+## Bounded IFF/8SVX sample import
+
+Native IFF import now sniffs FORM/8SVX then reads through the shared core
+positional inspector and decoder. Metadata workspace is32 bytes; audio is read
+in256-byte blocks, including stateful Fibonacci-delta decoding across blocks.
+Both supported compression modes use unpublished sampler master storage; no
+whole encoded input allocation is needed. Existing single-octave/mono/CHAN,
+VHDR/BODY/NAME ordering, padding, loop/trailing-PCM and format constraints remain.
+
+`pt_sampler_import_svx_fill` preserves embedded NAME (filename fallback), rounded
+tracker volume and forward-loop endpoints before one transactional commit.
+Cycles remain outside sampler metadata as before. Allocation, read/decode and
+journal failures preserve the old master/history. File-length/EOF/close checks
+precede commit; input must remain stable during the synchronous operation.
+Host sanitizer tests compare compressed stream results with the original decoder,
+cover metadata/no-metadata and loop/no-loop combinations, multiblock samples,
+three allocation failures, fill/limit/multioctave refusal, interrupted/short reads,
+undo/redo and zero leaks. Native/runtime evidence is recorded per milestone.
+Module/project/PP20 imports still use encoded input buffers.
+
+IFF import passes shared030 with80 production Fast allocations, zero owned bytes,
+budget refusal without Chip fallback, exact cleanup and explicit release.
+Evidence: `evidence/enhanced-editor/svx-import-stream/`. This qualifies file,
+metadata, undo and allocator behavior; visual UI/physical I/O remain separate.

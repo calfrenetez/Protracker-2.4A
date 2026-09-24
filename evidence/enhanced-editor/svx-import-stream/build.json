@@ -1,0 +1,13 @@
+{
+  "scope": "Full pinned native build; editor includes unrelated display work",
+  "binaries": {
+    "PT24GEdit": {
+      "sha256": "964d2d0f07aaf174ae5aabf2636c09d72d82b6ae3f570a614f1cf39c9af1a3a4",
+      "bytes": 231384
+    },
+    "PTExecSvxImportTest": {
+      "sha256": "5586956c3a99f5a4838cefe86b8ed2d96f3a9a8bfa14ac9a64e0178b58cbf2cd",
+      "bytes": 99104
+    }
+  }
+}

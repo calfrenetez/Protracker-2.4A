@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131169432 reserve=262144 flags=4
+SVX IMPORT STREAM PASS: 8 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+EXEC MEMORY PASS: 80 Fast allocations, zero owned bytes, budget refusal without Chip fallback

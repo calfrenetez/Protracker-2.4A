@@ -324,6 +324,24 @@ enum pt_edit_result pt_sampler_import_raw_fill(struct pt_sampler *s,struct pt_pr
     return commit(s,p,h,slot,v);
 }
 
+enum pt_edit_result pt_sampler_import_svx_fill(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,const struct pt_svx_info *info,const char *name,pt_sampler_raw_fill fill,void *context)
+{
+    struct pt_sample sample={0};struct pt_sample_version *v;struct pt_raw_format format;size_t i,count;
+    if(!s || !s->allocator.allocate || !s->allocator.release || pt_project_validate(p,NULL)!=PT_PROJECT_OK || slot>=p->sample_count)return PT_EDIT_INVALID;
+    if(!info || !fill || !info->frames || !info->rate || info->rate>65535 || info->volume>65536 ||
+       !memchr(info->name,0,sizeof(info->name)) || (info->loop_end?(info->loop_start>=info->loop_end || info->loop_end>info->frames):info->loop_start!=0))return PT_EDIT_UNSUPPORTED;
+    count=(size_t)p->pattern_count*64*p->channels.count;
+    for(i=0;i<count;++i)if(p->events[i].instrument==slot+1 && p->events[i].slice)return PT_EDIT_UNSUPPORTED;
+    snprintf(sample.name,sizeof(sample.name),"%s",info->name[0]?info->name:name?name:"IMPORTED SAMPLE");
+    sample.volume=(uint8_t)((info->volume*64+32768)/65536);
+    sample.loop=info->loop_end?PT_LOOP_FORWARD:PT_LOOP_NONE;sample.loop_start=info->loop_start;sample.loop_end=info->loop_end;
+    sample.pcm.frames=info->frames;sample.pcm.rate=info->rate;sample.pcm.bits=8;sample.pcm.channels=1;
+    format=(struct pt_raw_format){info->rate,8,1,0,0};
+    v=version(s,&sample);if(!v)return PT_EDIT_CAPACITY;
+    if(fill(context,v->sample.pcm.data,info->frames,&format)!=1 || pt_pcm_validate(&v->sample.pcm)!=PT_PCM_OK) {release_version(v);return PT_EDIT_INVALID;}
+    return commit(s,p,h,slot,v);
+}
+
 struct raw_memory {const uint8_t *bytes;size_t length;};
 static int raw_memory_fill(void *context,int32_t *data,uint32_t frames,const struct pt_raw_format *format)
 {

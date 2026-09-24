@@ -65,6 +65,9 @@ enum pt_edit_result pt_sampler_import_raw(struct pt_sampler *,struct pt_project 
  * project and history must remain unchanged by the callback. No reentrancy. */
 typedef int (*pt_sampler_raw_fill)(void *,int32_t *,uint32_t,const struct pt_raw_format *);
 enum pt_edit_result pt_sampler_import_raw_fill(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,size_t,const char *,const struct pt_raw_format *,pt_sampler_raw_fill,void *);
+/* IFF metadata variant of the same staged-fill contract; preserves name,
+ * rounded tracker volume and forward-loop endpoints. */
+enum pt_edit_result pt_sampler_import_svx_fill(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,const struct pt_svx_info *,const char *,pt_sampler_raw_fill,void *);
 /* Deep-copy one validated donor slot into the destination as one undo resource. */
 enum pt_edit_result pt_sampler_import_slot(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,const struct pt_project *,unsigned);
 #endif

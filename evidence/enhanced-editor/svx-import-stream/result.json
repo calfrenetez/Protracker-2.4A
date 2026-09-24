@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 streamed sample import and Exec Fast allocator",
+  "PTExecSvxImportTest_sha256": "5586956c3a99f5a4838cefe86b8ed2d96f3a9a8bfa14ac9a64e0178b58cbf2cd",
+  "svx-import_returncode": "0",
+  "sample_staging_clean": true,
+  "run_files_cleaned": true
+}

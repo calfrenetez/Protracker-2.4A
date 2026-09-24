@@ -13,11 +13,12 @@ static int overlap(const void *a,size_t an,const void *b,size_t bn)
  uintptr_t x=(uintptr_t)a,y=(uintptr_t)b;
  return an && bn && (an>UINTPTR_MAX-x || bn>UINTPTR_MAX-y || (x<y+bn && y<x+an));
 }
-enum pt_svx_result pt_svx_inspect(const uint8_t *p,size_t n,struct pt_svx_info *out)
+enum pt_svx_result pt_svx_inspect_reader(pt_svx_read read,void *context,size_t n,struct pt_svx_info *out)
 {
- struct pt_svx_info v={0};size_t pos=12,end;unsigned header=0,body=0,chunks=0;uint32_t start=0,repeat=0;
- if(!p || !out)return PT_SVX_INVALID;
+ uint8_t p[32];struct pt_svx_info v={0};size_t pos=12,end;unsigned header=0,body=0,chunks=0;uint32_t start=0,repeat=0;
+ if(!read || !out)return PT_SVX_INVALID;
  if(n<12)return PT_SVX_TRUNCATED;
+ if(read(context,0,p,12)!=1)return PT_SVX_TRUNCATED;
  if(memcmp(p,"FORM",4) || memcmp(p+8,"8SVX",4))return PT_SVX_UNSUPPORTED;
  if(u32(p+4)<4)return PT_SVX_INVALID;
  if(u32(p+4)>n-8)return PT_SVX_TRUNCATED;
@@ -26,24 +27,27 @@ enum pt_svx_result pt_svx_inspect(const uint8_t *p,size_t n,struct pt_svx_info *
   size_t data;uint32_t bytes;
   if(++chunks>4096)return PT_SVX_INVALID;
   if(end-pos<8)return PT_SVX_TRUNCATED;
-  bytes=u32(p+pos+4);data=pos+8;if(bytes>end-data)return PT_SVX_TRUNCATED;
-  if(!memcmp(p+pos,"VHDR",4)) {
+  if(read(context,pos,p,8)!=1)return PT_SVX_TRUNCATED;
+  bytes=u32(p+4);data=pos+8;if(bytes>end-data)return PT_SVX_TRUNCATED;
+  if(!memcmp(p,"VHDR",4)) {
    if(header++ || body)return PT_SVX_INVALID;
    if(bytes<20)return PT_SVX_TRUNCATED;
-   start=u32(p+data);repeat=u32(p+data+4);v.cycles=u32(p+data+8);v.rate=u16(p+data+12);
-   v.compression=p[data+15];v.volume=u32(p+data+16);
-   if(p[data+14]!=1 || v.compression>1)return PT_SVX_UNSUPPORTED;
+   if(read(context,data,p,20)!=1)return PT_SVX_TRUNCATED;
+   start=u32(p);repeat=u32(p+4);v.cycles=u32(p+8);v.rate=u16(p+12);
+   v.compression=p[15];v.volume=u32(p+16);
+   if(p[14]!=1 || v.compression>1)return PT_SVX_UNSUPPORTED;
    if(!v.rate || v.volume>65536 || repeat>UINT32_MAX-start)return PT_SVX_INVALID;
-  } else if(!memcmp(p+pos,"BODY",4)) {
+  } else if(!memcmp(p,"BODY",4)) {
    if(body++ || !header)return PT_SVX_INVALID;
    if(data>UINT32_MAX)return PT_SVX_CAPACITY;
    v.offset=(uint32_t)data;v.bytes=bytes;
-  } else if(!memcmp(p+pos,"NAME",4)) {
+  } else if(!memcmp(p,"NAME",4)) {
    size_t length=bytes<31?bytes:31;if(body)return PT_SVX_INVALID;
-   memset(v.name,0,sizeof(v.name));memcpy(v.name,p+data,length);
-  } else if(!memcmp(p+pos,"CHAN",4)) {
+   memset(v.name,0,sizeof(v.name));if(length && read(context,data,p,length)!=1)return PT_SVX_TRUNCATED;memcpy(v.name,p,length);
+  } else if(!memcmp(p,"CHAN",4)) {
    if(bytes!=4)return PT_SVX_INVALID;
-   if(u32(p+data)!=2 && u32(p+data)!=4)return PT_SVX_UNSUPPORTED;
+   if(read(context,data,p,4)!=1)return PT_SVX_TRUNCATED;
+   if(u32(p)!=2 && u32(p)!=4)return PT_SVX_UNSUPPORTED;
   }
   pos=data+bytes;if(bytes&1) {if(pos==end)return PT_SVX_TRUNCATED;++pos;}
  }
@@ -56,6 +60,33 @@ enum pt_svx_result pt_svx_inspect(const uint8_t *p,size_t n,struct pt_svx_info *
  if(start>v.frames || repeat>v.frames-start)return PT_SVX_INVALID;
  if(repeat) {v.loop_start=start;v.loop_end=start+repeat;}
  *out=v;return PT_SVX_OK;
+}
+struct memory_reader {const uint8_t *data;};
+static int memory_read(void *context,size_t offset,uint8_t *out,size_t n)
+{struct memory_reader *r=context;memcpy(out,r->data+offset,n);return 1;}
+enum pt_svx_result pt_svx_inspect(const uint8_t *data,size_t length,struct pt_svx_info *out)
+{struct memory_reader r={data};if(!data)return PT_SVX_INVALID;return pt_svx_inspect_reader(memory_read,&r,length,out);}
+enum pt_svx_result pt_svx_decode_reader(pt_svx_read read,void *context,size_t length,struct pt_pcm *dest)
+{
+ struct pt_svx_info v;enum pt_svx_result result=pt_svx_inspect_reader(read,context,length,&v);
+ static const int delta[16]={-34,-21,-13,-8,-5,-3,-2,-1,0,1,2,3,5,8,13,21};
+ uint8_t block[256],value=0;size_t pos=0,out=0;
+ if(result!=PT_SVX_OK)return result;
+ if(!dest || dest->bits!=8 || dest->channels!=1 || dest->frames!=v.frames || dest->rate!=v.rate || (v.frames && !dest->data))return PT_SVX_INVALID;
+ if((uint64_t)v.frames*sizeof(int32_t)>SIZE_MAX || dest->capacity<v.frames)return PT_SVX_CAPACITY;
+ if(v.compression) {if(read(context,v.offset,block,2)!=1)return PT_SVX_TRUNCATED;value=block[1];pos=2;}
+ while(pos<v.bytes) {
+  size_t n=v.bytes-pos,i;if(n>sizeof(block))n=sizeof(block);
+  if(read(context,(size_t)v.offset+pos,block,n)!=1)return PT_SVX_TRUNCATED;
+  for(i=0;i<n;++i) {
+   if(v.compression) {
+    value=(uint8_t)(value+delta[block[i]>>4]);dest->data[out++]=value<128?value:(int32_t)value-256;
+    value=(uint8_t)(value+delta[block[i]&15]);dest->data[out++]=value<128?value:(int32_t)value-256;
+   } else {value=block[i];dest->data[out++]=value<128?value:(int32_t)value-256;}
+  }
+  pos+=n;
+ }
+ return PT_SVX_OK;
 }
 enum pt_svx_result pt_svx_decode(const uint8_t *p,size_t n,struct pt_pcm *dest)
 {

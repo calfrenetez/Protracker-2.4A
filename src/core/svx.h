@@ -7,6 +7,11 @@ struct pt_svx_info {
  uint8_t compression;
  char name[32];
 };
+/* Exact synchronous positional reads. Reader decode may write a prefix on I/O
+ * failure; callers must use unpublished staging. Source must remain stable. */
+typedef int (*pt_svx_read)(void *,size_t,uint8_t *,size_t);
+enum pt_svx_result pt_svx_inspect_reader(pt_svx_read,void *,size_t,struct pt_svx_info *);
+enum pt_svx_result pt_svx_decode_reader(pt_svx_read,void *,size_t,struct pt_pcm *);
 enum pt_svx_result pt_svx_inspect(const uint8_t *,size_t,struct pt_svx_info *);
 enum pt_svx_result pt_svx_decode(const uint8_t *,size_t,struct pt_pcm *);
 enum pt_svx_result pt_svx_size(const struct pt_pcm *,const struct pt_svx_info *,size_t *);

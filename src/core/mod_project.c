@@ -221,3 +221,63 @@ enum pt_project_result pt_mod_export_round8(const struct pt_project *p,uint8_t *
 
 enum pt_project_result pt_mod_export_tpdf8(const struct pt_project *p,uint8_t *out,size_t capacity,size_t *written)
 {return export_mod(p,out,capacity,written,2);}
+
+
+enum pt_project_result pt_mod_export_stream(const struct pt_project *p,unsigned policy,pt_project_sink sink,void *context)
+{
+    struct pt_mod_export_report report;enum pt_project_result r;
+    uint8_t header[1084],block[1024];const uint8_t *old;
+    unsigned i,j,maxorder=0;size_t used=0;uint32_t noise=0x243f6a88UL;
+    if(policy>2 || !sink)return PT_PROJECT_INVALID;
+    r=policy?pt_mod_export_analyse_round8(p,&report):pt_mod_export_analyse(p,&report);
+    if(r!=PT_PROJECT_OK)return r;
+    if(report.issues & ~(policy?PT_EXPORT_PRECISION:0U))return PT_PROJECT_UNSUPPORTED;
+    memset(header,0,sizeof(header));old=original(p);if(old)memcpy(header,old,sizeof(header));
+    memcpy(header,p->title,20);header[950]=(uint8_t)p->order_count;if(!old)header[951]=127;
+    for(i=0;i<128;++i) {
+        unsigned value=i<p->order_count?p->orders[i]:(old && old[952+i]<p->pattern_count?old[952+i]:0);
+        header[952+i]=(uint8_t)value;if(value>maxorder)maxorder=value;
+    }
+    if(maxorder+1<p->pattern_count)header[1079]=(uint8_t)(p->pattern_count-1);
+    memcpy(header+1080,p->pattern_count>64 || (old && old[1081]=='!')?"M!K!":"M.K.",4);
+    for(i=0;i<31;++i) {
+        uint8_t *q=header+20+i*30;
+        if(i<p->sample_count) {
+            const struct pt_sample *s=&p->samples[i];memcpy(q,s->name,22);w16(q+22,s->pcm.frames/2);
+            q[24]=(uint8_t)s->finetune&15;q[25]=s->volume;
+            if(s->loop==PT_LOOP_FORWARD) {w16(q+26,s->loop_start/2);w16(q+28,(s->loop_end-s->loop_start)/2);}
+            else if(!old || u16(q+28)>1) {w16(q+26,0);w16(q+28,1);}
+        } else {memset(q,0,30);w16(q+28,1);}
+    }
+    if(sink(context,header,sizeof(header))!=1)return PT_PROJECT_INVALID;
+    for(i=0;i<(unsigned)p->pattern_count*64;++i)for(j=0;j<4;++j) {
+        uint8_t *q=block+used;memset(q,0,4);
+        if(j<p->channels.count) {
+            const struct pt_event *e=&p->events[(size_t)i*p->channels.count+j];
+            q[0]=(e->instrument&0xf0)|(uint8_t)(e->pitch>>8);q[1]=(uint8_t)e->pitch;
+            q[2]=(uint8_t)((e->instrument<<4)|e->effect);q[3]=e->parameter;
+        }
+        used+=4;if(used==sizeof(block)) {if(sink(context,block,used)!=1)return PT_PROJECT_INVALID;used=0;}
+    }
+    for(i=0;i<p->sample_count;++i) {
+        const struct pt_sample *s=&p->samples[i];
+        for(j=0;j<s->pcm.frames;++j) {
+            int32_t value=s->pcm.data[j];
+            if(s->pcm.bits>8) {
+                int32_t divisor=1L<<(s->pcm.bits-8),half=divisor/2;
+                if(policy==2) {
+                    unsigned shift=32-(s->pcm.bits-8);
+                    int32_t a=(int32_t)(dither_random(&noise)>>shift);
+                    int32_t b=(int32_t)(dither_random(&noise)>>shift);value+=a-b;
+                }
+                value=value<0?-((-value+half)/divisor):(value+half)/divisor;
+                if(value>127)value=127;
+                if(value< -128)value=-128;
+            }
+            block[used++]=(uint8_t)value;
+            if(used==sizeof(block)) {if(sink(context,block,used)!=1)return PT_PROJECT_INVALID;used=0;}
+        }
+    }
+    if(used && sink(context,block,used)!=1)return PT_PROJECT_INVALID;
+    return PT_PROJECT_OK;
+}

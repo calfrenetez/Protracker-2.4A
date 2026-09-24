@@ -1,0 +1,13 @@
+.MOD PROJECT PASS: MOD -> project -> MOD byte identity, strict validation, staged import, explicit loss reports and no silent downgrade
+.MOD ROUND8 PASS: 16/24-bit signed ties and saturation, exact reopen, source preservation, strict/rate/capacity/alias refusal, 8-bit identity
+.MOD STREAM PASS: direct/round8/TPDF exact multi-block bytes, legacy headers, loops, 65 patterns, source and destination protection; workspace=7184
+MOD STREAM PASS: direct/round8/TPDF exact multi-block bytes, legacy headers, loops, 65 patterns, source and destination protection; workspace=7184
+.HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 5 tests in 9.784s
+
+OK

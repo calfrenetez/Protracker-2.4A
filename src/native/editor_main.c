@@ -20,6 +20,7 @@
 #include "../platform/file_save.h"
 #include "../platform/sample_file.h"
 #include "../platform/project_file.h"
+#include "../platform/mod_file.h"
 #include "../platform/file_load.h"
 #include "pt_font.h"
 #include "paula.h"
@@ -164,12 +165,9 @@ static int mod_eligible(struct pt_editor *e,struct pt_mod_export_report *r,unsig
 }
 static void save_mod(struct pt_editor *e,const char *path,size_t n,unsigned round8,unsigned converted)
 {
-    uint8_t *bytes=pt_master_allocate(&master_memory,n);size_t written;enum pt_save_result result;
-    if(!bytes) {pt_editor_status(e,"MOD EXPORT: OUT OF MEMORY - PROJECT PRESERVED");return;}
-    if((round8==2?pt_mod_export_tpdf8(e->project,bytes,n,&written):round8?pt_mod_export_round8(e->project,bytes,n,&written):pt_mod_export_direct(e->project,bytes,n,&written))!=PT_PROJECT_OK || written!=n) {
-        pt_master_release(&master_memory,bytes);pt_editor_status(e,"MOD EXPORT FAILED - PROJECT PRESERVED");return;
-    }
-    result=pt_file_save_new_allocated(path,bytes,n,&render_allocator);pt_master_release(&master_memory,bytes);
+    enum pt_save_result result;
+    (void)n; /* Eligibility/UI size was computed before the explicit export action. */
+    result=pt_mod_file_save(path,e->project,round8,&render_allocator);
     if(result==PT_SAVE_OK) {pt_editor_status(e,converted?(pt_editor_dirty(e)?"MOD CONVERTED - UNSAVED":"MOD CONVERTED - SOURCE KEPT"):(pt_editor_dirty(e)?"MOD EXPORTED AND VERIFIED - PROJECT STILL UNSAVED":"MOD EXPORTED AND VERIFIED"));recent_success(e,path);}
     else pt_editor_status(e,result==PT_SAVE_MEMORY?"SAVE: OUT OF MEMORY":result==PT_SAVE_PUBLISH?"MOD EXPORT REFUSED: DESTINATION EXISTS OR CANNOT BE PUBLISHED":"MOD EXPORT FAILED: PROJECT AND DESTINATION PRESERVED");
     /* Export does not mark the richer project saved or consume undo history. */

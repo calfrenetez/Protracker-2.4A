@@ -1,0 +1,17 @@
+{
+  "scope": "Pinned native build; runtime NOT RUN; editor includes unrelated display working tree",
+  "binaries": {
+    "PT24GEdit": {
+      "sha256": "eb3b50ebde6bdc5dbe0d19a4d82f4e4f85fda69034ab4d3003550fc44b3e1967",
+      "bytes": 227304
+    },
+    "PTModStreamTest": {
+      "sha256": "676ce97449cce7e746236cbac22a25c98073b3624fbec3c7cb2be42286aa7f07",
+      "bytes": 54092
+    },
+    "PTExecModStreamTest": {
+      "sha256": "68855d22b36e6bd4df40b4b1400508880e491a1c4f57c3d49e307a2fa3d08ee7",
+      "bytes": 55260
+    }
+  }
+}

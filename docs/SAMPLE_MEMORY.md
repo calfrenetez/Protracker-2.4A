@@ -9,7 +9,7 @@ Playback representations must never become the project's source of truth.
 
 `src/native/master_memory.h` supplies the native editor's document, donor
 sample documents, sampler versions and undo, song storage, editor/history
-structure, and whole-file import/export buffers. They share one allocation
+structure, import buffers and bounded save/export workspaces. They share one allocation
 ceiling. Initialization queries Exec's installed Fast RAM and currently free
 memory; it never assumes the ACA1234's nominal capacity is available.
 
@@ -1008,3 +1008,22 @@ CRC and verification add sequential passes over the source; target performance
 remains a separate measurement. Core stack workspace is about1KiB in addition
 to fixed platform heap workspace. Host exact-format and failure checks pass;
 native runtime proof is recorded separately.
+
+## Bounded classic MOD export
+
+Native MOD export now uses `pt_mod_file_save` with the same bounded staging and
+complete readback verification as enhanced-project Save. `pt_mod_export_stream`
+keeps direct, explicit rounded8 and fixed-seed TPDF8 conversion policies distinct;
+all pre-existing classic eligibility constraints still apply before any output.
+The encoded copy is derived directly from immutable masters, never a playback
+cache. Export does not mark the richer project saved or consume undo history.
+
+The core uses a1084-byte header and1024-byte block; the platform workspace is
+fixed7184 bytes on the host. Legacy headers, pattern ordering, loop metadata and
+cross-sample dither sequence match the original encoder. Multiple native-source
+passes occur for validation and verification; physical performance is unmeasured.
+Host sanitizer tests cover65 patterns, multi-block8/16/24 masters, all three
+policies, legacy/no-legacy headers, interrupted/short readback, sink failure,
+allocation refusal, destination protection and unchanged masters. Native build
+and runtime qualification are reported separately. Emulator availability is
+currently unverified after an identity-guard refusal; no bypass or restart.

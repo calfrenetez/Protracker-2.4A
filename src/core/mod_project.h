@@ -40,4 +40,9 @@ enum pt_project_result pt_mod_export_round8(const struct pt_project *,uint8_t *,
  * Same analysis, refusal and immutable-source contract as round8. Existing
  * 8-bit samples stay byte-identical. No noise shaping or resampling. */
 enum pt_project_result pt_mod_export_tpdf8(const struct pt_project *,uint8_t *,size_t,size_t *);
+/* Bounded synchronous immutable-source export. Policy0=direct,1=round8,
+ * 2=fixed TPDF; no other conversion is implied. Validates before any sink call.
+ * Sink consumes each block completely and returns1; failure may emit a prefix.
+ * No allocation, blocks <=1084 bytes. Caller stages/verifies before publication. */
+enum pt_project_result pt_mod_export_stream(const struct pt_project *,unsigned,pt_project_sink,void *);
 #endif

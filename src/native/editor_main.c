@@ -22,6 +22,7 @@
 #include "../platform/project_file.h"
 #include "../platform/mod_file.h"
 #include "../platform/raw_import.h"
+#include "../platform/sample_import.h"
 #include "../platform/mod_import.h"
 #include "../platform/project_import.h"
 #include "../platform/pp20_import.h"
@@ -76,50 +77,6 @@ static int load(struct pt_document *d,const char *path)
     if(pt_file_load(path,64UL*1024*1024,&render_allocator,&bytes,&n)!=PT_LOAD_OK)return 0;
     ok=pt_document_load(d,bytes,n,SIZE_MAX)==PT_PROJECT_OK;
     pt_master_release(&master_memory,bytes);return ok;
-}
-static enum pt_project_result load_mod_source(void *context,struct pt_document *d,size_t budget)
-{return pt_pp20_file_candidate((const char *)context)?pt_pp20_file_load(d,(const char *)context,64UL*1024*1024,budget):pt_mod_file_load(d,(const char *)context,64UL*1024*1024,budget);}
-static enum pt_edit_result load_sample(struct pt_editor *e,const char *path,int raw,int source_only,int *preview)
-{
-    size_t n;uint8_t *bytes=NULL;enum pt_edit_result result=PT_EDIT_INVALID;
-    enum pt_load_result loaded;
-    const char *name=path,*part;
-    if(preview)*preview=0;
-    if(!e->sample)return PT_EDIT_INVALID;
-    if(raw) {
-        for(part=path;*part;++part)if(*part=='/' || *part==':')name=part+1;
-        pt_editor_prepare_change(e);
-        return pt_raw_file_import(path,64UL*1024*1024,&e->sampler,e->project,&e->history,e->sample-1,name,&e->raw_format);
-    }
-    if(!source_only && pt_wav_file_candidate(path)) {
-        for(part=path;*part;++part)if(*part=='/' || *part==':')name=part+1;
-        pt_editor_prepare_change(e);
-        return pt_wav_file_import(path,64UL*1024*1024,&e->sampler,e->project,&e->history,e->sample-1,name);
-    }
-    if(!source_only && pt_svx_file_candidate(path)) {
-        for(part=path;*part;++part)if(*part=='/' || *part==':')name=part+1;
-        pt_editor_prepare_change(e);
-        return pt_svx_file_import(path,64UL*1024*1024,&e->sampler,e->project,&e->history,e->sample-1,name);
-    }
-    if(pt_mod_file_candidate(path) || pt_pp20_file_candidate(path)) {
-        if(preview)*preview=1;
-        return pt_editor_source_load_with(e,load_mod_source,(void *)path);
-    }
-    loaded=pt_file_load(path,64UL*1024*1024,&render_allocator,&bytes,&n);
-    if(loaded!=PT_LOAD_OK)return loaded==PT_LOAD_MEMORY?PT_EDIT_CAPACITY:PT_EDIT_INVALID;
-    if(!n)goto done;
-    for(part=path;*part;++part)if(*part=='/' || *part==':')name=part+1;
-    if(!raw) {
-        struct pt_project_requirements need;
-        if(source_only || ((size_t)n>=4 && !memcmp(bytes,"PP20",4)) || pt_mod_project_probe(bytes,(size_t)n,&need)==PT_PROJECT_OK) {
-            if(preview)*preview=1;
-            result=pt_editor_source_load(e,bytes,(size_t)n);goto done;
-        }
-    }
-    pt_editor_prepare_change(e);
-    result=raw?pt_sampler_import_raw(&e->sampler,e->project,&e->history,e->sample-1,bytes,(size_t)n,name,&e->raw_format):pt_sampler_import(&e->sampler,e->project,&e->history,e->sample-1,bytes,(size_t)n,name);
-done:
-    pt_master_release(&master_memory,bytes);return result;
 }
 static void save_sample(struct pt_editor *e,const char *path)
 {
@@ -503,7 +460,7 @@ int main(int argc,char **argv)
                 selected=pt_file_request(window,importing?6:7,importing?raw_input:raw_path,chosen_path,sizeof(chosen_path));view_cache.valid=0;
                 if(selected==1) {
                     if(importing) {
-                        unsigned generation=editor->sampler.generation;enum pt_edit_result result=load_sample(editor,chosen_path,1,0,NULL);
+                        unsigned generation=editor->sampler.generation;enum pt_edit_result result=pt_editor_sample_file_import(editor,chosen_path,1,0,NULL);
                         pt_editor_sample_result(editor,result);
                         if(result==PT_EDIT_OK) {
                             strcpy(raw_input,chosen_path);pt_editor_sample_all(editor);
@@ -525,7 +482,7 @@ int main(int argc,char **argv)
                 selected=pt_file_request(window,source_only?8:importing?3:4,importing?sample_path:wav_path,chosen_path,sizeof(chosen_path));view_cache.valid=0;
                 if(selected==1) {
                     if(importing) {
-                        int preview=0;enum pt_edit_result result=load_sample(editor,chosen_path,0,source_only,&preview);
+                        int preview=0;enum pt_edit_result result=pt_editor_sample_file_import(editor,chosen_path,0,source_only,&preview);
                         if(!preview || result!=PT_EDIT_OK)pt_editor_sample_result(editor,result);
                         if(result==PT_EDIT_OK)strcpy(sample_path,chosen_path);
                         if(result==PT_EDIT_OK && !preview) {

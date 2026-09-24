@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "scope": "shared030 bounded sample dispatch and retained24-bit masters",
+  "PTExecSampleDispatchTest_sha256": "5932bd7e54b64cd74e5037f036f354c9e3eeb05a37469fb5ee7794fd33b4f8ea",
+  "sample-dispatch_returncode": "0",
+  "sample_staging_clean": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0",
+  "run_files_cleaned": true
+}

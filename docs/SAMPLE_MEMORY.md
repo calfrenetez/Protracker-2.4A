@@ -1274,3 +1274,14 @@ Evidence is in donor-shared-qualified and donor-exec-memory under
 evidence/enhanced-editor. These do not qualify unrelated display edits or
 physical memory/performance. Runtime library internal allocations remain outside
 the explicit allocator accounting.
+
+## Unsupported sample input does not allocate a whole-file buffer
+
+The native editor now calls pt_editor_sample_file_import in platform/sample_import.c.
+RAW/WAV/IFF/MOD/PP20 retain bounded reader paths. Unknown formats are refused
+before whole-file allocation or sample/history mutation; donor-only selection
+does not import WAV. Host sanitizer and shared030 production-allocator tests
+verify a1MiB invalid input causes no explicit allocation, exact stereo24-bit
+import and retained redo after refusal, with zero owned bytes at disposal.
+See evidence/enhanced-editor/sample-dispatch. Native build passes; unrelated
+display edits and physical behavior are not qualified by this non-UI fixture.

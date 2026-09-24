@@ -117,3 +117,26 @@ Source digest/cell evidence: `evidence/enhanced-editor/exec-amigus-session/mini-
 Session fixture now passes shared030 under production allocator: six tracked
 Fast allocations, zero final owned bytes and budget refusal. This closes the
 session emulator gap, not native port/physical audio acceptance.
+
+## Native adapter review, pinned source
+
+Further inspection of the same pinned SDK gives these implementation constraints:
+
+- `Base/src/amigus_pcmcia.c`, CreateCardPrivate, publishes `agus_PcmBase` from
+  its selected card mapping plus PCM offset. Use that returned pointer after
+  discovery/reservation. Do not hard-code PCMCIA mapping or switch memory mode.
+- `AHI4/src/amigus_pcm.c`, StopAmiGusPcmPlayback, disables sample rate first,
+  clears playback IRQ flags/masks, then strobes FIFO reset. Session reset success
+  must include equivalent quiescence, not only the strobe write.
+- `AHI4/header/amigus_hardware.h` declares8192-byte/4096-word playback capacity,
+  rate48k code7 and enable bit0x8000. Treat these as pinned driver assumptions;
+  validate Mini applicability before exposing live playback. A conservative
+  configurable capacity must never exceed verified device capacity.
+- `Base/src/amigus_base.c`, dispatcher around lines363-387, invokes the typed
+  `AmiGUS_Interrupt` callback. The header type places context in a0. This supports
+  a0 at source level; compiled callback ABI and native interrupt teardown remain
+  separate checks before installation.
+
+Editor output-stop binding now passes shared030 with57 tracked Fast allocations,
+zero final owned bytes and budget refusal. This verifies abstract shutdown
+requests, not native interrupt handling, PCM output or physical silence.

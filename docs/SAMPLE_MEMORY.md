@@ -857,3 +857,6 @@ The callback can request `amigus_session_stop`; the caller must continue session
 steps and confirm detach before freeing output/queue contexts. A stop request is
 not reset confirmation or immediate silence. On pump/output failure the caller
 must stop both owners; do not close a queue simply because producer pins ended.
+
+Editor output-stop binding passes shared030 with57 tracked Fast allocations,
+zero final owned bytes and budget refusal. Physical device stop remains untested.

@@ -1,0 +1,6 @@
+{
+  "scope": "Pinned m68000 soft-float cross-build of reader fixture only; no runtime proof",
+  "binary": "PTProjectReaderTest",
+  "bytes": 45932,
+  "sha256": "06318ecfa895de2179299bdd62efaf19522e80acba07e3c5794aec0821ff4a18"
+}

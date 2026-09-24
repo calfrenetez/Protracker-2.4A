@@ -469,3 +469,223 @@ enum pt_project_result pt_project_decode(const uint8_t *data,size_t length,
     v.p.extension_count=v.need.extensions;v.p.extensions=s->extensions;*out=v.p;
     return PT_PROJECT_OK;
 }
+
+/* Bounded positional preflight. Keep the contiguous scanner as an independent
+ * compatibility oracle while the document reader integration is developed. */
+struct reader_view {size_t part[6],length[6];struct pt_project p;struct pt_project_requirements need;};
+static int reader_bytes(pt_project_read read,void *context,size_t length,size_t offset,uint8_t *out,size_t count)
+{return offset<=length && count<=length-offset && (!count || read(context,offset,out,count)==1);}
+static int reader_checksum(pt_project_read read,void *context,size_t length,uint32_t *out)
+{
+    uint8_t block[1024];size_t pos=0,i;unsigned j;uint32_t crc=0xffffffffUL;
+    while(pos<length) {
+        size_t count=length-pos;if(count>sizeof(block))count=sizeof(block);
+        if(!reader_bytes(read,context,length,pos,block,count))return 0;
+        for(i=0;i<count;++i) {
+            crc^=pos+i>=20 && pos+i<24?0:block[i];
+            for(j=0;j<8;++j)crc=(crc>>1)^((crc&1)?0xedb88320UL:0);
+        }
+        pos+=count;
+    }
+    *out=crc^0xffffffffUL;return 1;
+}
+static enum pt_project_result scan_reader(pt_project_read read,void *context,size_t length,struct reader_view *v)
+{
+    size_t pos=32,i,j;unsigned count,mask=0;uint32_t caps;uint16_t slices[255];
+    uint8_t data[32],buffer[1092],chunk[12];const uint8_t *q;struct pt_event e;
+    uint32_t crc;
+    if(!read)return PT_PROJECT_INVALID;
+    if(length<32)return PT_PROJECT_TRUNCATED;
+    if(!reader_bytes(read,context,length,0,data,32))return PT_PROJECT_TRUNCATED;
+    if(memcmp(data,magic,8))return PT_PROJECT_INVALID;
+    if(u16(data+8)!=1 || u16(data+10)!=0 || (u32(data+16)&~PT_CAP_KNOWN))return PT_PROJECT_UNSUPPORTED;
+    if(u32(data+12)>length)return PT_PROJECT_TRUNCATED;
+    if(u32(data+12)!=length || u32(data+28) || u32(data+24)>4096)return PT_PROJECT_INVALID;
+    if(!reader_checksum(read,context,length,&crc))return PT_PROJECT_TRUNCATED;
+    if(crc!=u32(data+20))return PT_PROJECT_CHECKSUM;
+    memset(v,0,sizeof(*v));pt_channels_init(&v->p.channels);
+    for(count=0;count<u32(data+24);++count) {
+        size_t bytes,body;int index;
+        if(length-pos<12)return PT_PROJECT_TRUNCATED;
+        if(!reader_bytes(read,context,length,pos,chunk,12))return PT_PROJECT_TRUNCATED;
+        bytes=u32(chunk+8);body=pos+12;
+        if(bytes>length-body || pad(bytes)>length-body-bytes)return PT_PROJECT_TRUNCATED;
+        if(!reader_bytes(read,context,length,body+bytes,buffer,pad(bytes)))return PT_PROJECT_TRUNCATED;
+        for(i=0;i<pad(bytes);++i)if(buffer[i])return PT_PROJECT_INVALID;
+        if(u16(chunk+6)&~1U)return PT_PROJECT_UNSUPPORTED;
+        index=known(u32(chunk));
+        if(index<0) {
+            if(u16(chunk+6)&1)return PT_PROJECT_UNSUPPORTED;
+            ++v->need.extensions;
+            if(!add(&v->need.extension_bytes,bytes))return PT_PROJECT_CAPACITY;
+        } else {
+            if(mask&(1U<<index))return PT_PROJECT_INVALID;
+            if(u16(chunk+4)!=1)return PT_PROJECT_UNSUPPORTED;
+            if(u16(chunk+6)!=1)return PT_PROJECT_INVALID;
+            mask|=1U<<index;v->part[index]=body;v->length[index]=bytes;
+        }
+        pos=body+bytes+pad(bytes);
+    }
+    if(pos!=length || mask!=63 || v->length[0]!=44)return PT_PROJECT_INVALID;
+    if(!reader_bytes(read,context,length,v->part[0],buffer,44))return PT_PROJECT_TRUNCATED;
+    q=buffer;memcpy(v->p.title,q,32);v->p.channels.count=q[32];v->p.channels.selected=q[33];
+    v->p.speed=q[34];v->p.mode=q[35];v->p.bpm=(uint16_t)u16(q+36);
+    v->p.order_count=(uint16_t)u16(q+38);v->p.pattern_count=(uint16_t)u16(q+40);v->p.sample_count=(uint16_t)u16(q+42);
+    if(!v->p.channels.count || v->p.channels.count>16 ||
+       v->length[1]!=(size_t)v->p.channels.count*22 ||
+       v->length[5]!=64*((size_t)v->p.channels.count+1)+4)return PT_PROJECT_INVALID;
+    if(!reader_bytes(read,context,length,v->part[1],buffer,v->length[1]))return PT_PROJECT_TRUNCATED;
+    q=buffer;
+    for(i=0;i<v->p.channels.count;++i,q+=22) {
+        struct pt_channel *c=&v->p.channels.track[i];
+        c->route=q[0];c->pan=q[1];c->muted=q[2];c->solo=q[3];c->group=q[4];c->midi_channel=q[5];memcpy(c->name,q+6,16);
+    }
+    if(!reader_bytes(read,context,length,v->part[5],buffer,v->length[5]))return PT_PROJECT_TRUNCATED;
+    q=buffer;memcpy(v->p.midi_input,q,64);q+=64;
+    for(i=0;i<v->p.channels.count;++i,q+=64) {
+        memcpy(v->p.midi_output[i],q,64);
+        if(!terminated(v->p.midi_output[i],64))return PT_PROJECT_INVALID;
+    }
+    v->p.midi_flags=u32(q);
+    if(!basic(&v->p))return PT_PROJECT_INVALID;
+    caps=project_caps(&v->p);v->need.orders=v->p.order_count;v->need.samples=v->p.sample_count;
+    v->need.events=(size_t)v->p.pattern_count*64*v->p.channels.count;
+    if(v->length[2]!=(size_t)v->p.order_count*2 || v->length[3]!=v->need.events*12)return PT_PROJECT_INVALID;
+    for(i=0;i<v->p.order_count;++i) {
+        if(!reader_bytes(read,context,length,v->part[2]+i*2,buffer,2))return PT_PROJECT_TRUNCATED;
+        if(u16(buffer)>=v->p.pattern_count)return PT_PROJECT_INVALID;
+    }
+    pos=0;
+    for(i=0;i<v->p.sample_count;++i) {
+        struct pt_sample s;size_t count_values,bytes,record;uint32_t previous=0;
+        if(v->length[4]-pos<64)return PT_PROJECT_TRUNCATED;
+        if(!reader_bytes(read,context,length,v->part[4]+pos,buffer,64))return PT_PROJECT_TRUNCATED;
+        q=buffer;read_sample(q,&s);
+        if(!sample_meta(&s) || u32(q+60))return PT_PROJECT_INVALID;
+        if(s.pcm.frames>SIZE_MAX/s.pcm.channels/sizeof(int32_t))return PT_PROJECT_CAPACITY;
+        count_values=(size_t)s.pcm.frames*s.pcm.channels;bytes=count_values*(s.pcm.bits/8);
+        record=64+(size_t)s.slice_count*4;
+        if(!add(&record,bytes) || record>v->length[4]-pos || pad(record)>v->length[4]-pos-record)return PT_PROJECT_TRUNCATED;
+        for(j=0;j<s.slice_count;++j) {
+            uint32_t value;
+            if(!reader_bytes(read,context,length,v->part[4]+pos+64+j*4,buffer,4))return PT_PROJECT_TRUNCATED;
+            value=u32(buffer);
+            if(value>=s.pcm.frames || (j && value<=previous))return PT_PROJECT_INVALID;
+            previous=value;
+        }
+        if(!reader_bytes(read,context,length,v->part[4]+pos+record,buffer,pad(record)))return PT_PROJECT_TRUNCATED;
+        for(j=0;j<pad(record);++j)if(buffer[j])return PT_PROJECT_INVALID;
+        if(!add(&v->need.pcm_values,count_values) || !add(&v->need.slices,s.slice_count))return PT_PROJECT_CAPACITY;
+        if(v->need.pcm_values>SIZE_MAX/sizeof(int32_t) || v->need.slices>SIZE_MAX/sizeof(uint32_t))return PT_PROJECT_CAPACITY;
+        slices[i]=s.slice_count;caps|=sample_caps(&s);pos+=record+pad(record);
+    }
+    if(pos!=v->length[4])return PT_PROJECT_INVALID;
+    for(i=0;i<v->need.events;++i) {
+        if(!reader_bytes(read,context,length,v->part[3]+i*12,buffer,12))return PT_PROJECT_TRUNCATED;
+        q=buffer;read_event(q,&e);
+        if(u16(q+10) || !event_valid(&e,v->p.sample_count,e.instrument && e.instrument<=v->p.sample_count?slices[e.instrument-1]:0))return PT_PROJECT_INVALID;
+        caps|=event_caps(&e);
+    }
+    if(caps!=u32(data+16))return PT_PROJECT_INVALID;
+    v->need.capabilities=caps;return PT_PROJECT_OK;
+}
+enum pt_project_result pt_project_probe_reader(pt_project_read read,void *context,size_t length,struct pt_project_requirements *out)
+{
+    struct reader_view v;enum pt_project_result r;
+    if(!out)return PT_PROJECT_INVALID;
+    r=scan_reader(read,context,length,&v);if(r==PT_PROJECT_OK)*out=v.need;return r;
+}
+
+enum pt_project_result pt_project_decode_reader(pt_project_read read,void *context,size_t length,
+                                                const struct pt_project_storage *s,struct pt_project *out)
+{
+    struct reader_view v;enum pt_project_result r=scan_reader(read,context,length,&v);
+    const void *pointers[9];size_t bytes[9],i,j,pos,pc=0,sc=0,ec=0,eb=0;
+    uint8_t block[1024],chunk[12];
+    if(r!=PT_PROJECT_OK)return r;
+    if(!s || !out)return PT_PROJECT_INVALID;
+    if(s->order_capacity<v.need.orders || s->event_capacity<v.need.events || s->sample_capacity<v.need.samples ||
+       s->pcm_capacity<v.need.pcm_values || s->slice_capacity<v.need.slices ||
+       s->extension_capacity<v.need.extensions || s->extension_bytes<v.need.extension_bytes)return PT_PROJECT_CAPACITY;
+    pointers[0]=s->orders;bytes[0]=v.need.orders*sizeof(*s->orders);
+    pointers[1]=s->events;bytes[1]=v.need.events*sizeof(*s->events);
+    pointers[2]=s->samples;bytes[2]=v.need.samples*sizeof(*s->samples);
+    pointers[3]=s->pcm;bytes[3]=v.need.pcm_values*sizeof(*s->pcm);
+    pointers[4]=s->slices;bytes[4]=v.need.slices*sizeof(*s->slices);
+    pointers[5]=s->extensions;bytes[5]=v.need.extensions*sizeof(*s->extensions);
+    pointers[6]=s->extension_data;bytes[6]=v.need.extension_bytes;
+    pointers[7]=out;bytes[7]=sizeof(*out);pointers[8]=s;bytes[8]=sizeof(*s);
+    for(i=0;i<9;++i) {
+        if(bytes[i] && !pointers[i])return PT_PROJECT_INVALID;
+        for(j=0;j<i;++j)if(overlap(pointers[i],bytes[i],pointers[j],bytes[j]))return PT_PROJECT_ALIAS;
+    }
+    for(i=0;i<v.need.orders;++i) {
+        if(!reader_bytes(read,context,length,v.part[2]+i*2,block,2))return PT_PROJECT_TRUNCATED;
+        s->orders[i]=(uint16_t)u16(block);
+    }
+    for(i=0;i<v.need.events;++i) {
+        if(!reader_bytes(read,context,length,v.part[3]+i*12,block,12))return PT_PROJECT_TRUNCATED;
+        if(u16(block+10))return PT_PROJECT_INVALID;
+        read_event(block,&s->events[i]);
+    }
+    pos=0;
+    for(i=0;i<v.need.samples;++i) {
+        struct pt_sample *sample=&s->samples[i];size_t values,record,offset;unsigned width;
+        if(pos>v.length[4] || v.length[4]-pos<64 ||
+           !reader_bytes(read,context,length,v.part[4]+pos,block,64))return PT_PROJECT_TRUNCATED;
+        read_sample(block,sample);
+        if(!sample_meta(sample) || u32(block+60))return PT_PROJECT_INVALID;
+        if(sample->pcm.frames>SIZE_MAX/sample->pcm.channels)return PT_PROJECT_CAPACITY;
+        values=(size_t)sample->pcm.frames*sample->pcm.channels;width=sample->pcm.bits/8;
+        if(values>s->pcm_capacity-pc || sample->slice_count>s->slice_capacity-sc || values>SIZE_MAX/width)return PT_PROJECT_CAPACITY;
+        record=64+(size_t)sample->slice_count*4;
+        if(!add(&record,values*width) || record>v.length[4]-pos || pad(record)>v.length[4]-pos-record)return PT_PROJECT_TRUNCATED;
+        offset=v.part[4]+pos+64;
+        sample->slices=sample->slice_count?s->slices+sc:NULL;
+        for(j=0;j<sample->slice_count;++j,offset+=4) {
+            if(!reader_bytes(read,context,length,offset,block,4))return PT_PROJECT_TRUNCATED;
+            s->slices[sc++]=u32(block);
+        }
+        sample->pcm.data=values?s->pcm+pc:NULL;sample->pcm.capacity=values;
+        for(j=0;j<values;) {
+            size_t count=values-j,k;if(count>sizeof(block)/width)count=sizeof(block)/width;
+            if(!reader_bytes(read,context,length,offset,block,count*width))return PT_PROJECT_TRUNCATED;
+            for(k=0;k<count;++k) {
+                const uint8_t *q=block+k*width;uint32_t value=q[0];unsigned bit;
+                for(bit=1;bit<width;++bit)value=(value<<8)|q[bit];
+                s->pcm[pc++]=(int32_t)value-((value&(1UL<<(sample->pcm.bits-1)))?(1L<<sample->pcm.bits):0);
+            }
+            j+=count;offset+=count*width;
+        }
+        if(!reader_bytes(read,context,length,v.part[4]+pos+record,block,pad(record)))return PT_PROJECT_TRUNCATED;
+        for(j=0;j<pad(record);++j)if(block[j])return PT_PROJECT_INVALID;
+        pos+=record+pad(record);
+    }
+    if(pos!=v.length[4] || pc!=v.need.pcm_values || sc!=v.need.slices)return PT_PROJECT_INVALID;
+    pos=32;
+    while(pos<length) {
+        size_t n,body;
+        if(!reader_bytes(read,context,length,pos,chunk,12))return PT_PROJECT_TRUNCATED;
+        n=u32(chunk+8);body=pos+12;
+        if(n>length-body || pad(n)>length-body-n)return PT_PROJECT_TRUNCATED;
+        if(known(u32(chunk))<0) {
+            struct pt_extension *e;
+            if(ec>=s->extension_capacity || n>s->extension_bytes-eb)return PT_PROJECT_CAPACITY;
+            if(u16(chunk+6))return PT_PROJECT_UNSUPPORTED;
+            e=&s->extensions[ec++];e->id=u32(chunk);e->version=(uint16_t)u16(chunk+4);
+            e->length=(uint32_t)n;e->data=n?s->extension_data+eb:NULL;
+            for(j=0;j<n;) {
+                size_t count=n-j;if(count>sizeof(block))count=sizeof(block);
+                if(!reader_bytes(read,context,length,body+j,s->extension_data+eb+j,count))return PT_PROJECT_TRUNCATED;
+                j+=count;
+            }
+            eb+=n;
+        }
+        pos=body+n+pad(n);
+    }
+    if(ec!=v.need.extensions || eb!=v.need.extension_bytes)return PT_PROJECT_INVALID;
+    v.p.orders=s->orders;v.p.events=s->events;v.p.samples=s->samples;
+    v.p.extension_count=ec;v.p.extensions=s->extensions;
+    if(pt_project_validate(&v.p,NULL)!=PT_PROJECT_OK)return PT_PROJECT_INVALID;
+    *out=v.p;return PT_PROJECT_OK;
+}

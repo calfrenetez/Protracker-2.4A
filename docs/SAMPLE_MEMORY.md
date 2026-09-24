@@ -1152,3 +1152,20 @@ destination project, selection and undo intact. Samples imported from the donor
 remain independent master copies with existing undo ownership. PP20 donor input
 still uses the previous unpacking path. Donor UI/runtime acceptance is separate
 from the host source/import regression and native cross-build.
+
+### Enhanced-project positional reader core (integration pending)
+
+`pt_project_probe_reader` validates the existing version-1 format through bounded
+positional reads (maximum 1092 bytes; CRC blocks 1024). It retains strict CRC,
+chunk/version/flag/padding, capability, sample, slice and event checks.
+`pt_project_decode_reader` writes master PCM, slices and optional extensions to
+unpublished caller-owned staging, with capacity and disjoint-storage checks.
+Exact 24-bit/stereo masters are retained; an I/O failure may change staging but
+never publishes the output descriptor. Source bytes must remain stable and
+separate from destination storage throughout the synchronous operation.
+
+Host sanitizer tests compare preflight results with the original contiguous
+parser for truncations and checksum-repaired mutations; every injected read
+failure preserves output descriptors. The mixed project re-encodes byte-for-byte.
+These reader APIs are not yet connected to document/file loading: native editor
+and converter enhanced-project imports still allocate a whole encoded input.

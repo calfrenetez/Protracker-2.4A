@@ -92,6 +92,15 @@ enum pt_project_result pt_project_encode(const struct pt_project *, uint8_t *, s
  * Caller must stage/verify before publishing. No allocation. */
 typedef int (*pt_project_sink)(void *,const uint8_t *,size_t);
 enum pt_project_result pt_project_stream(const struct pt_project *,pt_project_sink,void *,size_t *);
+/* Stable, synchronous positional source; exact reads return 1. Preflight uses
+ * at most 1092 bytes per callback and leaves requirements unchanged on failure.
+ * This API validates input only; it does not load or allocate master samples. */
+typedef int (*pt_project_read)(void *,size_t,uint8_t *,size_t);
+enum pt_project_result pt_project_probe_reader(pt_project_read,void *,size_t,struct pt_project_requirements *);
+/* Decode into unpublished staging only: read failure can modify storage, but
+ * leaves the output descriptor unchanged. Source must remain stable/disjoint. */
+enum pt_project_result pt_project_decode_reader(pt_project_read,void *,size_t,
+    const struct pt_project_storage *,struct pt_project *);
 enum pt_project_result pt_project_probe(const uint8_t *, size_t, struct pt_project_requirements *);
 enum pt_project_result pt_project_decode(const uint8_t *, size_t,
                                          const struct pt_project_storage *, struct pt_project *);

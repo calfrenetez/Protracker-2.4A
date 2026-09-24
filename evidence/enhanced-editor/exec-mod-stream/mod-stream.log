@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=130871416 reserve=262144 flags=4
+MOD STREAM PASS: direct/round8/TPDF exact multi-block bytes, legacy headers, loops, 65 patterns, source and destination protection; workspace=7164
+EXEC MEMORY PASS: 12 Fast allocations, zero owned bytes, budget refusal without Chip fallback

@@ -1,0 +1,1 @@
+Shared030 guarded run render-files-1790232938061972000 passed after fresh AmiConnect clearance. Required Exec Fast allocator assertions, exact bytes, rc0, clean staging and exact owned cleanup passed. Explicit window release sent. Fixed7164-byte native file workspace; zero owned bytes. Prior identity-guard refusal remains recorded separately. No physical/card/audio/UI acceptance.

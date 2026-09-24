@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 streamed master MOD export and Exec Fast allocator",
+  "PTExecModStreamTest_sha256": "68855d22b36e6bd4df40b4b1400508880e491a1c4f57c3d49e307a2fa3d08ee7",
+  "mod-stream_returncode": "0",
+  "sample_staging_clean": true,
+  "run_files_cleaned": true
+}

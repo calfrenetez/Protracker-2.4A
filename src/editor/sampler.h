@@ -60,6 +60,11 @@ enum pt_edit_result pt_sampler_convert_quality(struct pt_sampler *,struct pt_pro
 enum pt_svx_result pt_sampler_svx_size(const struct pt_sample *,size_t *);
 enum pt_svx_result pt_sampler_svx_encode(const struct pt_sample *,uint8_t *,size_t,size_t *);
 enum pt_edit_result pt_sampler_import_raw(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,const uint8_t *,size_t,const char *,const struct pt_raw_format *);
+/* Synchronous staged RAW import. Fill must initialize every value and finish
+ * input verification/close before returning1. Failure discards staging; source,
+ * project and history must remain unchanged by the callback. No reentrancy. */
+typedef int (*pt_sampler_raw_fill)(void *,int32_t *,uint32_t,const struct pt_raw_format *);
+enum pt_edit_result pt_sampler_import_raw_fill(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,size_t,const char *,const struct pt_raw_format *,pt_sampler_raw_fill,void *);
 /* Deep-copy one validated donor slot into the destination as one undo resource. */
 enum pt_edit_result pt_sampler_import_slot(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,const struct pt_project *,unsigned);
 #endif

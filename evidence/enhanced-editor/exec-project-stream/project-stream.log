@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131010120 reserve=262144 flags=4
+PROJECT STREAM PASS: exact golden layout/CRC, mixed masters/loops/slices/extensions, sink refusal, bounded workspace=7164
+EXEC MEMORY PASS: 6 Fast allocations, zero owned bytes, budget refusal without Chip fallback

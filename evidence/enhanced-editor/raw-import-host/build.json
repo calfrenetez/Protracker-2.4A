@@ -1,0 +1,13 @@
+{
+  "scope": "Pinned full native build; raw import runtime not run; editor includes unrelated display work",
+  "binaries": {
+    "PT24GEdit": {
+      "sha256": "789e270c429f34d596ab74a505bdac516640b656d45630db6b987cc20abae048",
+      "bytes": 228216
+    },
+    "PTRawImportTest": {
+      "sha256": "7a1f22bdcd4f193046968582baca81bd7bde6da48915382955a2b4d4a3dfba3c",
+      "bytes": 93696
+    }
+  }
+}

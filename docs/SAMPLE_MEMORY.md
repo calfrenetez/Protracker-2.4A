@@ -1044,3 +1044,28 @@ with a maximum-length classic sample. All owned memory is released. Native
 cross-build passes; native runtime and physical performance are not yet proven.
 Import still requires encoded input alongside decoded staging while validating;
 this change reduces lifetime and export peak, not streaming decode.
+
+## Bounded RAW sample import
+
+Native explicit RAW import now calls `pt_raw_file_import`, measuring the file
+against the existing64 MiB limit and reading3072-byte stack blocks directly into
+an unpublished sampler master version. It does not allocate the encoded file.
+All16 existing8/16/24-bit mono/stereo/endian/signedness combinations decode through
+`pt_raw_decode`; frame alignment and explicit format rules remain unchanged.
+EOF and successful close are required before publishing the version. A failed
+read, decode, allocation or journal commit releases staging and preserves the
+previous sample/history. Normal undo/redo and generation invalidation apply.
+
+The synchronous `pt_sampler_import_raw_fill` seam permits a checked producer to
+fill the staged master; it must initialize every value, finish its input checks
+and not modify project/history/source while borrowed. Existing in-memory RAW
+import reuses this transaction. Host sanitizer tests cover multiblock exact
+values for16 formats, three allocation failures, fill/size refusal, interrupted/
+short reads, undo/redo and zero leaks. WAV/IFF/project/PP20 imports still retain
+encoded input; this milestone does not claim general streaming import.
+
+Project and MOD streaming save fixtures now pass shared030 after fresh guards:
+fixed7164-byte native file workspace;6 and12 Fast/not-Chip allocations respectively,
+zero owned bytes, no staging left, exact cleanup and explicit release. Evidence
+`exec-project-stream/` and `exec-mod-stream/`; earlier identity refusal preserved.
+This qualifies these file/allocator fixtures, not visual editor or physical I/O.

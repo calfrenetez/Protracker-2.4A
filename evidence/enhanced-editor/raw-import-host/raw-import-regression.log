@@ -1,0 +1,11 @@
+LOOP/SLICE PASS: metadata, atomic bake undo, proposal commit, non-destructive PCM, retarget refusal, undo/redo conflicts, allocation rollback and exact persistence
+CONVERSION PASS: stereo precision/rate, scaled loops and referenced slice ordinals, exact undo, collapse refusal, allocation rollback, redo and persistence
+IFF SAMPLER PASS: name/volume/loop/PCM, compressed import, exact export, allocation rollback, unsupported refusal, redo and project persistence
+RAW SAMPLER PASS: explicit stereo24 import, exact export, no autodetection, allocation rollback, refusal/redo and persistence
+STEREO24 GAIN HISTORY PASS: clipped extrema, untouched boundary frames, three exact undo/redo cycles and WAV identity
+SAMPLER PASS: exact stereo24 import/range edit, unified history, dirty state, no-op redo, allocation rollback, bounded memory, eviction, save/reopen and release
+.
+----------------------------------------------------------------------
+Ran 1 test in 2.977s
+
+OK

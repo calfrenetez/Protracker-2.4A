@@ -7,7 +7,7 @@ INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     group=parser.add_mutually_exclusive_group()
-    group.add_argument('--studio-memory',choices=['mixer','sampler','song','editor','queued','consumer','fifo','session'],help='Run one production-allocator Studio fixture')
+    group.add_argument('--studio-memory',choices=['mixer','sampler','song','editor','queued','consumer','fifo','session','register-session'],help='Run one production-allocator Studio fixture')
     group.add_argument('--input-memory',choices=['import','recent','exec-import','exec-recent'],help='Run one import or recent-file memory fixture')
     group.add_argument('--exec-memory',choices=['bounce','stems','failures','save'],help='Run one native Exec-backed memory fixture')
     group.add_argument('--stems-only',action='store_true',help='Run the allocated stem export test only')
@@ -43,6 +43,7 @@ def main():
         if args.studio_memory:
             cases=[{'mixer':('studio','PTExecStudioTest','STUDIO MIX PASS:'),
                     'sampler':('sampler-studio','PTExecSamplerStudioTest','SAMPLER STUDIO PASS:'),
+                    'register-session':('register-session','PTExecAmiGusRegisterSessionTest','AMIGUS REGISTER SESSION PASS:'),
                     'session':('amigus-session','PTExecAmiGusSessionTest','AMIGUS SESSION PASS:'),
                     'fifo':('amigus-chain','PTExecAmiGusChainTest','AMIGUS CHAIN PASS:'),
                     'consumer':('studio-consumer','PTExecStudioConsumerTest','STUDIO CONSUMER PASS:'),

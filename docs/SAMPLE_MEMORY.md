@@ -864,3 +864,7 @@ zero final owned bytes and budget refusal. Physical device stop remains untested
 The injected register-port layer requires exclusive ownership and explicit
 verified FIFO capacity. Uncertain writes invalidate alignment until bounded reset
 and readback checks succeed. Host/compile checks only; no native MMIO binding.
+
+Register/session integration passes host and shared030 fake-bus tests, including
+partial writes and ownership loss. Three tracked Fast allocations, zero final
+owned bytes. Mini readback/bus behavior and live playback remain unqualified.

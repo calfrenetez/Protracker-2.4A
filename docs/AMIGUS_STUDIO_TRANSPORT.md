@@ -162,3 +162,19 @@ Five host sanitizer groups pass, covering all seven reset I/O failure points,
 partial triplet writes, unknown ownership, odd-unit capacity, impossible usage
 and delayed readback. Pinned native compilation passes. No emulator register
 fixture execution, card access, playback enable or native interrupt installation.
+
+## Register/session integration model
+
+The integration fixture now connects queue, consumer, packer, FIFO staging,
+session and register adapter. Its injected bus models clear-bit IRQ semantics,
+16-bit pending-word accounting, explicit reset delays and a write that accepts
+part of a triplet before reporting failure. It checks exact packed bytes and
+final padding, preservation of capture IRQ bits, waiting until pending words are
+zero, no further writes after uncertainty, ownership-loss refusal and cleanup
+only after confirmed reset. No hardware enable/playback clock is simulated;
+tests explicitly advance the FIFO usage model to represent consumption.
+
+Six AmiGUS host sanitizer groups and the pinned native fixture build pass.
+This is a behavioral model, not proof that a Mini implements these readbacks or
+bus transactions. Positive card discovery, native reservation/MMIO and real
+playback timing remain separate work.

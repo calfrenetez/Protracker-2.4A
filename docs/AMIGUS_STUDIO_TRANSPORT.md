@@ -84,3 +84,22 @@ no outstanding lease: consumer stop only cancels a transport-held lease. Softwar
 may still retain an odd tail, or hardware may still contain copied audio, after
 that lease is gone. The fixture explicitly finishes the tail before normal detach
 and explicitly resets after output. Native device drain remains unimplemented.
+
+## Session-level shutdown
+
+`amigus_session` owns the consumer/FIFO orchestration and borrows the queue and
+port contexts. Normal completion flushes the odd tail, polls staged words, waits
+for a separate device-drain acknowledgement, then requires confirmed disable/reset
+before detach. Stop aborts queued audio and requests reset even without a consumer
+lease. Reset acknowledgement authorizes consumer lease release; failed/pending
+reset keeps the owner attached and blocks reuse. Step retries reset in bounded
+calls. Errors remain sticky diagnostics even after cleanup succeeds; DONE phase
+and successful detach indicate safe ownership release, not a successful playback.
+
+Failed initial reset leaves a recoverable attached owner. Caller must drive reset
+recovery and detach before freeing contexts. Stop the producer separately first.
+No callback implementation touches hardware here. Host tests cover normal end,
+delayed drain, drain error, held/no-lease Stop, failed initial reset and repeated
+reset failure/recovery. Native compilation passes; emulator session execution is
+pending. The native port must actually disable playback and reset FIFO, not merely
+report that the request was issued. Physical silence/timing remain unqualified.

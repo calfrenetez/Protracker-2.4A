@@ -1,0 +1,6 @@
+{
+  "scope": "host ASan/UBSan and pinned native compile only, no session emulator run or physical operations",
+  "binary_sha256": "fa01194c9a67456d8602e77f8bc72b3268f1fbaf7a45d1335be1026835d2864c",
+  "compile_exit": 0,
+  "flags": "-std=c99 -m68000 -msoft-float -mcrt=nix20 -Os -Wall -Wextra -Werror"
+}

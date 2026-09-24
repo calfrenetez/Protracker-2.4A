@@ -835,3 +835,8 @@ The queue/consumer/staged-FIFO chain now passes host and shared030 fake-port
 checks at1/17/256-frame partitions, including failed-reset lease retention.
 Four tracked Fast allocations, zero final owned bytes; no hardware audio claim.
 Session stop must reset device FIFO separately even with no outstanding lease.
+
+`amigus_session` now explicitly coordinates final tail, device drain acknowledgement
+and confirmed disable/reset before detach. Stop resets even without a lease;
+failed reset retains ownership. Host/compile evidence only for this session layer;
+producer stop and native device callback implementation remain caller obligations.

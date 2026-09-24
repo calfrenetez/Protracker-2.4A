@@ -844,3 +844,16 @@ producer stop and native device callback implementation remain caller obligation
 Session ownership now passes shared030 with6 tracked Fast allocations and zero
 final owned bytes. Mini map confirms24-bit stereo and16-bit FIFO data ports;
 capacity/native bus ordering still need verification before MMIO implementation.
+
+## Editor output-stop binding
+
+A queued editor Studio owner can bind one nonblocking output-stop callback after
+start. Edit, Undo, Stop, replacement start and disposal close source ownership,
+then send that request once and clear the binding. The binding survives natural
+producer completion so a later edit can still abort buffered output. Repeated
+Stop is idempotent. No callback is installed automatically in the native app.
+
+The callback can request `amigus_session_stop`; the caller must continue session
+steps and confirm detach before freeing output/queue contexts. A stop request is
+not reset confirmation or immediate silence. On pump/output failure the caller
+must stop both owners; do not close a queue simply because producer pins ended.

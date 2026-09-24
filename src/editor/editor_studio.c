@@ -1,7 +1,7 @@
 #include "editor_studio.h"
 static void close_song(struct pt_editor_studio *o) {pt_sampler_song_close(o->song);o->song=NULL;}
 void pt_editor_studio_stop(struct pt_editor_studio *owner)
-{if(owner) {if(owner->queue) {pt_studio_queue_abort(owner->queue);owner->queue=NULL;owner->pump.held=0;owner->pump.ended=1;}close_song(owner);}}
+{if(owner) {void (*stop)(void *)=owner->output_stop;void *context=owner->output_context;owner->output_stop=NULL;owner->output_context=NULL;if(owner->queue) {pt_studio_queue_abort(owner->queue);owner->queue=NULL;owner->pump.held=0;owner->pump.ended=1;}close_song(owner);if(stop)stop(context);}}
 static void stop_guard(void *context) {pt_editor_studio_stop(context);}
 static int attached(const struct pt_editor_studio *o)
 {return o && o->editor && o->editor->before_change==stop_guard && o->editor->before_change_context==o;}
@@ -57,4 +57,10 @@ enum pt_pump_result pt_editor_studio_step(struct pt_editor_studio *o,unsigned fr
     if(!attached(o)) {pt_editor_studio_stop(o);return PT_PUMP_ERROR;}
     if(!o->queue)return PT_PUMP_FINISHED;
     return pt_studio_pump_step(&o->pump,frames);
+}
+
+int pt_editor_studio_bind_output_stop(struct pt_editor_studio *o,void (*stop)(void *),void *context)
+{
+    if(!attached(o) || !o->queue || !stop || o->output_stop)return 0;
+    o->output_stop=stop;o->output_context=context;return 1;
 }

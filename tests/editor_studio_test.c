@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "../src/editor/editor_studio.h"
+#include "../src/core/amigus_session.h"
 static unsigned live;
 static void *allocate(void *c,size_t n) {void *p;(void)c;p=malloc(n);if(p)++live;return p;}
 static void release(void *c,void *p) {(void)c;if(p){assert(live);--live;free(p);}}
@@ -12,6 +13,13 @@ static void start(struct pt_editor_studio *o,struct pt_render_options *options)
     for(i=0;i<100;++i) {assert(pt_editor_studio_pull(o,1,&out,&done)==PT_RENDER_OK && !done);if(out) {assert(out->data[0]==257);return;}}
     assert(0);
 }
+static unsigned output_stops;
+static void count_stop(void *c) {++*(unsigned *)c;}
+static int port_space(void *c) {(void)c;return 3;}
+static int port_write(void *c,const uint32_t *p) {(void)c;(void)p;return 1;}
+static int port_reset(void *c) {return *(int *)c;}
+static int port_drain(void *c) {(void)c;return 0;}
+static void output_stop(void *c) {++output_stops;pt_amigus_session_stop(c);}
 int main(void)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_document d;struct pt_editor *e=calloc(1,sizeof(*e));
@@ -48,9 +56,36 @@ int main(void)
         assert(pt_studio_queue_close(q)==PT_QUEUE_OK);
         d.project.events[0].pitch=428;
     }
-    /* Natural end retains the last queued block for draining. */
-    {struct pt_studio_queue *q=pt_studio_queue_open(&a,2);uint64_t ticket;unsigned i,finished=0,received=0;
+    /* Editor stop requests reach an output with no host lease but an odd tail. */
+    for(action=0;action<3;++action) {
+        struct pt_studio_queue *q=pt_studio_queue_open(&a,2);struct pt_amigus_session session={0};
+        int reset=1;struct pt_amigus_fifo_port port={&reset,port_space,port_write,port_reset};unsigned i;
         assert(q && pt_editor_studio_start_queued(&owner,&options,q)==PT_RENDER_OK);
+        assert(pt_amigus_session_open(&session,q,&port,port_drain,NULL));
+        assert(pt_editor_studio_bind_output_stop(&owner,output_stop,&session));
+        assert(!pt_editor_studio_bind_output_stop(&owner,output_stop,&session));
+        for(i=0;i<50 && !session.fifo.pack.held;++i) {
+            assert(pt_editor_studio_step(&owner,1)!=PT_PUMP_ERROR);
+            assert(pt_amigus_session_step(&session)!=PT_CONSUMER_ERROR);
+        }
+        assert(i<50);assert(pt_amigus_session_step(&session)==PT_CONSUMER_PROGRESS);
+        assert(!session.consumer.leased && session.fifo.pack.held);
+        e->row=0;
+        if(action==0)pt_editor_key(e,0x31,0);
+        else if(action==1)pt_editor_key(e,0x31,8);
+        else pt_editor_studio_stop(&owner);
+        assert(!owner.song && !owner.queue && !owner.output_stop && session.phase==PT_AS_RESET);
+        assert(output_stops==action+1);pt_editor_studio_stop(&owner);assert(output_stops==action+1);
+        reset=0;assert(pt_amigus_session_step(&session)==PT_CONSUMER_WAIT);
+        assert(!pt_amigus_session_detach(&session));reset=1;
+        assert(pt_amigus_session_step(&session)==PT_CONSUMER_FINISHED);
+        assert(pt_amigus_session_detach(&session));assert(pt_studio_queue_close(q)==PT_QUEUE_OK);
+        d.project.events[0].pitch=428;
+    }
+    /* Natural end retains the last queued block for draining. */
+    {struct pt_studio_queue *q=pt_studio_queue_open(&a,2);uint64_t ticket;unsigned i,finished=0,received=0,stops=0;
+        assert(q && pt_editor_studio_start_queued(&owner,&options,q)==PT_RENDER_OK);
+        assert(pt_editor_studio_bind_output_stop(&owner,count_stop,&stops));
         for(i=0;i<10000;++i) {
             enum pt_queue_result qr;
             if(pt_editor_studio_step(&owner,256)==PT_PUMP_FINISHED)finished=1;
@@ -59,13 +94,14 @@ int main(void)
             else if(qr==PT_QUEUE_DONE)break;
         }
         assert(i<10000 && finished && received && !owner.song && owner.queue==q);
-        pt_editor_studio_stop(&owner);assert(pt_studio_queue_close(q)==PT_QUEUE_OK);
+        assert(!stops && owner.output_stop);pt_editor_studio_stop(&owner);assert(stops==1);assert(pt_studio_queue_close(q)==PT_QUEUE_OK);
     }
     {struct pt_studio_queue *q=pt_studio_queue_open(&a,2);uint64_t ticket;unsigned i;
         assert(q && pt_editor_studio_start_queued(&owner,&options,q)==PT_RENDER_OK);
         for(i=0;i<50;++i) {assert(pt_editor_studio_step(&owner,17)!=PT_PUMP_ERROR);
             if(pt_studio_queue_acquire(q,&out,&ticket)==PT_QUEUE_OK)break;}
-        assert(i<50);pt_editor_dispose(e);
+        assert(i<50);assert(pt_editor_studio_bind_output_stop(&owner,count_stop,&output_stops));
+        pt_editor_dispose(e);assert(output_stops==4 && !owner.output_stop);
         assert(!owner.song && !owner.queue && !e->sampler.bytes && out->data[0]==257);
         assert(pt_studio_queue_close(q)==PT_QUEUE_BUSY);
         assert(pt_studio_queue_release(q,ticket)==PT_QUEUE_OK);

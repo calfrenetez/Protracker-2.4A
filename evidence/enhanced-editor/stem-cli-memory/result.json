@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "scope": "shared030 Fast-allocator stem CLI, exact two-stem host parity and destination refusal",
+  "PT24GRender_sha256": "03dc60fb0b6ab2eca5ee243439e964e90ad96cdcfda54b718d2170931b0fe59b",
+  "stem-cli_returncode": "0",
+  "repeat_returncode": "20",
+  "exact_host_stems": true,
+  "reference_sha256": {
+    "track-01.wav": "aae0155475057e7dd51fde8a5c3231b587f3005554b1e567329ff057624ace0e",
+    "track-02.wav": "e8d5a2230285d356e41a1456ce26e77d5b7f74782c97da2a810a2ec130700a6e"
+  },
+  "run_files_cleaned": true
+}

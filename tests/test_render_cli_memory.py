@@ -46,3 +46,4 @@ class RenderMemory(unittest.TestCase):
                     result=subprocess.run([str(binary),str(source),str(failed),*options,*extra],env=env,capture_output=True,text=True)
                     self.assertEqual(result.returncode,20,result.stdout+result.stderr);self.assertIn('final=0',result.stdout);self.assertFalse(failed.exists())
                 self.assertFalse(list(d.glob('*.pttmp-*')))
+                self.assertFalse(list(d.glob('*.ptstems-*')))

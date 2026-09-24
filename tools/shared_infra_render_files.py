@@ -7,6 +7,7 @@ INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     group=parser.add_mutually_exclusive_group()
+    group.add_argument('--stem-cli',metavar='REFERENCE_DIRECTORY',help='Run two native stems and existing-directory refusal')
     group.add_argument('--render-cli',metavar='REFERENCE_WAV',help='Run one-row native renderer against an exact host reference')
     group.add_argument('--pp20-import',action='store_true',help='Run native converter bounded packed MOD import')
     group.add_argument('--project-import',action='store_true',help='Run native converter enhanced-project load/save roundtrip')
@@ -74,6 +75,9 @@ def main():
         if args.sample_svx:
             cases=[('sample-svx','PTExecSampleSvxFileTest','SAMPLE SVX STREAM PASS:')]
             result['scope']='shared030 streamed master IFF export and Exec Fast allocator'
+        if args.stem_cli:
+            cases=[('stem-cli','PT24GRender','STEMS count=2') ]
+            result['scope']='shared030 Fast-allocator stem CLI, exact two-stem host parity and destination refusal'
         if args.render_cli:
             cases=[('render-cli','PT24GRender','WAV frames=')]
             result['scope']='shared030 Fast-allocator renderer, one-row24-bit WAV host parity'
@@ -118,6 +122,11 @@ def main():
                 sub=run/'render-cli';shutil.copyfile(ROOT/'evidence/baseline/mod.baseline',sub/'source.mod')
                 commands=['FailAt 21','Stack 65536','CD '+guest.device+run.name+'/render-cli',
                           'PT24GRender source.mod output.wav --pattern 0 --from-row 0 --to-row 1 --tracks 1 >test.log','Echo $RC >test.rc']
+            if args.stem_cli:
+                sub=run/'stem-cli';shutil.copyfile(ROOT/'evidence/baseline/mod.baseline',sub/'source.mod')
+                command='PT24GRender source.mod stems --pattern 0 --from-row 0 --to-row 1 --tracks 3 --stems'
+                commands=['FailAt 21','Stack 65536','CD '+guest.device+run.name+'/stem-cli',
+                          command+' >test.log','Echo $RC >test.rc',command+' >repeat.log','Echo $RC >repeat.rc']
             commands+=['Echo done >'+guest.device+run.name+'/done']
             guest.launch.write_text('\n'.join(commands)+'\n');guest.start()
             deadline=time.monotonic()+90
@@ -155,6 +164,18 @@ def main():
                 assert sorted(p.name for p in sub.iterdir())==['PT24GRender','output.wav','source.mod','test.log','test.rc']
                 result['exact_host_wav']=True
                 result['reference_sha256']=hashlib.sha256(expected).hexdigest()
+            if args.stem_cli:
+                sub=run/'stem-cli';reference=Path(args.stem_cli)
+                expected={p.name:p.read_bytes() for p in reference.iterdir()}
+                assert sorted(expected)==['track-01.wav','track-02.wav']
+                assert {p.name:p.read_bytes() for p in (sub/'stems').iterdir()}==expected
+                assert (sub/'source.mod').read_bytes()==(ROOT/'evidence/baseline/mod.baseline').read_bytes()
+                repeat=(sub/'repeat.rc').read_text().strip();assert repeat=='20',repeat
+                assert sorted(p.name for p in sub.iterdir())==['PT24GRender','repeat.log','repeat.rc','source.mod','stems','test.log','test.rc']
+                (out/'repeat.log').write_text((sub/'repeat.log').read_text())
+                result['repeat_returncode']=repeat
+                result['exact_host_stems']=True
+                result['reference_sha256']={n:hashlib.sha256(data).hexdigest() for n,data in expected.items()}
             result['passed']=True
         finally:
             if finished:

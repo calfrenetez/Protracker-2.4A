@@ -1222,3 +1222,9 @@ peak664104, all below700000 with zero owned bytes afterward. Every allocation
 failure across mix/stem paths refuses publication, removes owned staging and
 preserves existing destinations. MOD/enhanced/PP20 WAVs match exactly; retained
 native finetune WAV references also remain byte-identical.
+
+Native stem CLI is now additionally exercised in shared030: two aligned24-bit
+stems match host bytes, and intentional re-export to the existing directory
+returns refusal with files unchanged. The owned staging directory is checked
+absent on host failure paths and after native completion. This is software
+runtime evidence, separate from editor UI and physical performance acceptance.

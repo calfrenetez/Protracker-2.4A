@@ -109,6 +109,7 @@ def main():
     inputs['PTSamplerStudioTest'] = ['tests/sampler_studio_test.c','src/editor/sampler_studio.c','src/core/studio_mix.c','src/core/voice.c',*inputs['PTSamplerTest'][1:]]
     inputs['PTVoiceAdvanceTest'] = ['tests/voice_advance_test.c','src/core/voice.c','src/core/pcm.c']
     inputs['PTStudioSongTest'] = ['tests/studio_song_test.c','src/core/studio_song.c','src/core/studio_plan.c','src/core/studio_mix.c',*render_sources]
+    inputs['PTExecStudioSongTest'] = ['tests/native_exec_studio_song_test.c',*inputs['PTStudioSongTest'][1:]]
     inputs['PTSequenceTest'] = ['tests/render_sequence_test.c','src/core/studio_plan.c','src/core/studio_mix.c',*render_sources]
     inputs['PTStudioPlanTest'] = ['tests/studio_plan_test.c','src/core/studio_plan.c','src/core/studio_mix.c',*render_sources]
     inputs['PTStudioTickTest'] = ['tests/studio_tick_test.c','src/core/studio_tick.c','src/core/studio_mix.c','src/core/frame_clock.c','src/core/voice.c','src/core/pcm.c']

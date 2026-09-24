@@ -657,3 +657,11 @@ Host tests cover reference audio at block sizes1/17/256, all three allocation
 failure points, stop during a pinned voice, natural cleanup and sticky acquisition
 failure. This provides an owner-thread playback controller, not an editor action,
 interrupt callback, device queue, transport or real-time performance qualification.
+
+The production-allocator song fixture now passes on the coordinated shared030
+emulator:18 tracked allocations were confirmed Fast/not-Chip, startup budget
+refusal did not fall back to Chip, and final owned bytes were zero. The guest
+exercises256-frame song reads across normal/lead-in/row-range cases, allocation
+failure stages, stop and acquisition failure. Host coverage retains1/17/256.
+This qualifies tracked controller/sequence/mixer allocations, not CRT/static
+buffers, hardware audio, physical A1200 performance or AmiGUS memory/transport.

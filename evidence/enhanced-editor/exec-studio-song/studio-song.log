@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=130022792 reserve=262144 flags=4
+SONG SESSION PASS: reference audio, tempo/delay, pre-roll, partition invariance, protocol and allocation refusal
+EXEC MEMORY PASS: 18 Fast allocations, zero owned bytes, budget refusal without Chip fallback

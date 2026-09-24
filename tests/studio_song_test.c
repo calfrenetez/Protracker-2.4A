@@ -12,6 +12,9 @@ static int acquire(void *c,uint64_t key,uint64_t version,struct pt_pcm *p,void *
 static void unpin(void *c,void *p) {(void)c;assert(p==&master && pins);--pins;}
 static int capture(void *c,const struct pt_pcm *p,uint64_t offset)
 {(void)c;assert(offset*2==used && used+p->frames*2<=300000);memcpy(reference+used,p->data,p->frames*2*sizeof(int32_t));used+=p->frames*2;return 1;}
+#ifndef PT_SONG_FIRST_BLOCK
+#define PT_SONG_FIRST_BLOCK 1
+#endif
 int main(void)
 {
     struct pt_project p={0};struct pt_sample sample;struct pt_event events[64*4];uint16_t orders[1]={0};
@@ -29,7 +32,7 @@ int main(void)
     events[16].kind=PT_NOTE_PERIOD;events[16].pitch=320;
     events[20].effect=15;events[20].parameter=0;
     o.rate=48000;o.bits=24;o.tracks=1;o.gain_q16=65536;o.tick_limit=1000;o.frame_limit=1000000;
-    for(mode=0;mode<3;++mode)for(partition=1;partition<=256;partition=partition==1?17:partition==17?256:257) {
+    for(mode=0;mode<3;++mode)for(partition=PT_SONG_FIRST_BLOCK;partition<=256;partition=partition==1?17:partition==17?256:257) {
         struct pt_studio_song *s=NULL;struct pt_render_report report;unsigned emitted=0,done=0;
         const struct pt_pcm *block;
         o.include_lead_in=mode==1;o.pattern_only=o.row_range=mode==2;o.row_first=2;o.row_end=5;

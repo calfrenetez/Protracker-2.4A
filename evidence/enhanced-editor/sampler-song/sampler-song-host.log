@@ -1,0 +1,18 @@
+SAMPLER STUDIO PASS: budgeted promotion, stale refusal, edit/undo/eviction pins and final release
+.
+----------------------------------------------------------------------
+Ran 1 test in 2.811s
+
+OK
+SAMPLER SONG PASS: generation binding, true24 promotion, stop/edit/restart, stale refusal and owner cleanup
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.208s
+
+OK
+SONG SESSION PASS: reference audio, tempo/delay, pre-roll, partition invariance, protocol and allocation refusal
+.
+----------------------------------------------------------------------
+Ran 1 test in 2.669s
+
+OK

@@ -665,3 +665,23 @@ exercises256-frame song reads across normal/lead-in/row-range cases, allocation
 failure stages, stop and acquisition failure. Host coverage retains1/17/256.
 This qualifies tracked controller/sequence/mixer allocations, not CRT/static
 buffers, hardware audio, physical A1200 performance or AmiGUS memory/transport.
+
+## Sampler-owned song bridge
+
+`pt_sampler_song` builds slot+1 bindings using the sampler's current generation
+and keeps its provider context alive for the entire core song session. Initial
+sample promotion uses the sampler's existing budgeted immutable master mechanism,
+preserving24-bit values. Natural end/failure closes core song state; explicit stop
+is idempotent, and close releases the bridge allocation.
+
+The owner MUST stop before edits/undo, document replacement or sampler/history
+release/reinitialization. The bridge additionally detects generation or project
+sample/event/order table replacement before each pull and refuses stale playback,
+releasing core pins. This is defensive refusal, not support for concurrent edits
+or destruction of owner objects. In-place pattern changes are not detected and
+still require explicit stop. The native editor actions are not yet wired here.
+
+Host coverage verifies initial promotion, true24 values, stop/edit/restart with
+new generation, stale-generation refusal and stop-before-owner-release cleanup.
+A bridge stopped before owner release can then be safely closed. This component
+adds no hardware output or physical-performance claim.

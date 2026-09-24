@@ -1,0 +1,7 @@
+{
+  "src/editor/sampler_song.c": "65f27575acd508b59f4516de1aaf93b461ded1dab3ce01251ba78ce45d958109",
+  "src/editor/sampler_song.h": "212813eba4234e925d4c7b76ac8c38c5c5e6a780f1aa8815f7eaf899e76f820c",
+  "tests/sampler_song_test.c": "7f67d297ac913d81325ac13ea29112dc64b56c03e536266930b1bd2090ea2abd",
+  "tests/test_sampler_song.py": "5ebc232e385524c9c2fc2c0f3614acf22c9e0f73c0909b9b5b1004d08916be2e",
+  "build/dev/PTSamplerSongTest": "9accf05563c3d21182b1a01b16e1e1fe55c88b70d04d58d81402211b4134b4cf"
+}

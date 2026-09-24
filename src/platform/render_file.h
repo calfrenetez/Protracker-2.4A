@@ -21,4 +21,14 @@ enum pt_render_file_result pt_render_file_new(const char *,const struct pt_proje
  * All allocations are released on every return, after owned-file cleanup. */
 enum pt_render_file_result pt_render_file_new_allocated(const char *,const struct pt_project *,
     const struct pt_render_options *,pt_render_progress,void *,struct pt_render_report *,enum pt_render_result *detail,const struct pt_allocator *);
+/* Internal alternate deterministic engine; the same engine/context serves
+ * measure, write and verification. Context and project outlive this call. */
+struct pt_render_file_engine {
+    void *context;
+    enum pt_render_result (*run)(void *,const struct pt_project *,const struct pt_render_options *,
+        pt_render_sink,void *,pt_render_progress,void *,struct pt_render_report *,const struct pt_allocator *);
+};
+enum pt_render_file_result pt_render_file_engine_new(const char *,const struct pt_project *,
+    const struct pt_render_options *,pt_render_progress,void *,struct pt_render_report *,
+    enum pt_render_result *,const struct pt_allocator *,const struct pt_render_file_engine *);
 #endif

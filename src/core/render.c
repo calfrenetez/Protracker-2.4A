@@ -82,7 +82,7 @@ static int silent_handoff_sample(const struct pt_sample *s)
         s->pcm.frames<=131070 && !(s->pcm.frames&1) && s->loop==PT_LOOP_NONE &&
         !s->interpolation && s->pcm.data[0]==0 && s->pcm.data[1]==0;
 }
-static enum pt_render_result preflight(const struct pt_project *p,const struct pt_render_options *o)
+static enum pt_render_result preflight(const struct pt_project *p,const struct pt_render_options *o,unsigned invert)
 {
     unsigned ch,pat,row;uint8_t used[256]={0};uint16_t offsets;
     if(!p || !o || pt_project_validate(p,NULL)!=PT_PROJECT_OK || !o->tick_limit || !o->frame_limit ||
@@ -102,7 +102,7 @@ static enum pt_render_result preflight(const struct pt_project *p,const struct p
            (e->kind==PT_NOTE_NONE && e->slice))return PT_RENDER_EFFECT;
         if(!(e->effect==0 || e->effect==1 || e->effect==2 || e->effect==3 || e->effect==4 || e->effect==5 || e->effect==6 || e->effect==7 || e->effect==8 || e->effect==9 || (e->effect>=10 && e->effect<=13) || e->effect==15 ||
              (e->effect==14 && ((e->parameter>>4)==1 || (e->parameter>>4)==2 || (e->parameter>>4)==3 || (e->parameter>>4)==4 || (e->parameter>>4)==5 || (e->parameter>>4)==6 || (e->parameter>>4)==7 || (e->parameter>>4)==8 || (e->parameter>>4)==9 || ((e->parameter>>4)>=10 && (e->parameter>>4)<=13) ||
-                               (e->parameter>>4)==14))))return PT_RENDER_EFFECT;
+                               (e->parameter>>4)==14 || (invert && (e->parameter>>4)==15)))))return PT_RENDER_EFFECT;
         if((e->effect==3 || e->effect==5) && e->slice)return PT_RENDER_EFFECT;
         if((offsets&(1U<<ch)) && e->slice)return PT_RENDER_EFFECT;
         if(e->instrument) {
@@ -184,9 +184,9 @@ static void report_run(const struct run *r,unsigned end,uint64_t clips,struct pt
     result.ticks=r->timeline.flow.ticks;result.clipped=clips;result.end=end==1?PT_RENDER_F00:end==3?PT_RENDER_ROW_EXIT:PT_RENDER_POSITION_RETURN;*out=result;
 }
 static enum pt_render_result measure(const struct pt_project *p,const struct pt_render_options *o,
-                                       pt_render_progress progress,void *ctx,struct pt_render_report *out,struct run *r)
+                                       pt_render_progress progress,void *ctx,struct pt_render_report *out,struct run *r,unsigned invert)
 {
-    struct pt_tick_span span;unsigned end;enum pt_render_result result=preflight(p,o);
+    struct pt_tick_span span;unsigned end;enum pt_render_result result=preflight(p,o,invert);
     if(!out)return PT_RENDER_INVALID;
     if(result!=PT_RENDER_OK)return result;
     if(!start_run(r,p,o))return PT_RENDER_INVALID;
@@ -199,7 +199,7 @@ static enum pt_render_result measure(const struct pt_project *p,const struct pt_
 enum pt_render_result pt_render_measure(const struct pt_project *p,const struct pt_render_options *o,
     pt_render_progress progress,void *ctx,struct pt_render_report *out)
 {
-    struct run r;return measure(p,o,progress,ctx,out,&r);
+    struct run r;return measure(p,o,progress,ctx,out,&r,0);
 }
 enum pt_render_result pt_render_measure_allocated(const struct pt_project *p,const struct pt_render_options *o,
     pt_render_progress progress,void *ctx,struct pt_render_report *out,const struct pt_allocator *a)
@@ -207,7 +207,7 @@ enum pt_render_result pt_render_measure_allocated(const struct pt_project *p,con
     struct run *r;enum pt_render_result result;
     if(!a || !a->allocate || !a->release || !out)return PT_RENDER_INVALID;
     r=a->allocate(a->context,sizeof(*r));if(!r)return PT_RENDER_MEMORY;
-    result=measure(p,o,progress,ctx,out,r);a->release(a->context,r);return result;
+    result=measure(p,o,progress,ctx,out,r,0);a->release(a->context,r);return result;
 }
 static uint64_t step(const struct pt_sample *s,unsigned period,unsigned rate)
 {return ((uint64_t)s->pcm.rate*428<<32)/((uint64_t)rate*period);}
@@ -380,13 +380,13 @@ struct workspace {
 };
 static enum pt_render_result stream(const struct pt_project *p,const struct pt_render_options *o,
                                       pt_render_sink sink,void *sink_ctx,pt_render_progress progress,void *progress_ctx,
-                                      struct pt_render_report *out,struct workspace *w)
+                                      struct pt_render_report *out,struct workspace *w,const struct pt_render_mutation *mutation)
 {
     struct pt_render_report planned;struct run *r=&w->run;struct pt_tick_span span;
     struct pt_voice *voice=w->commands.voice;uint32_t (*gain)[2]=w->commands.gain;
     struct pt_pcm block;uint64_t offset=0,clips=0;unsigned end;enum pt_render_result result;
     if(!sink || !out)return PT_RENDER_INVALID;
-    result=measure(p,o,progress,progress_ctx,&planned,r);if(result!=PT_RENDER_OK)return result;
+    result=measure(p,o,progress,progress_ctx,&planned,r,mutation!=NULL);if(result!=PT_RENDER_OK)return result;
     memset(w,0,sizeof(*w));
     if(!start_run(r,p,o))return PT_RENDER_INVALID;
     pt_render_commands_init(&w->commands);memset(&block,0,sizeof(block));
@@ -405,7 +405,9 @@ static enum pt_render_result stream(const struct pt_project *p,const struct pt_r
             }
             remaining-=block.frames;
         }
-        if(!end) {result=pt_render_commands_tick(p,o,&r->timeline.flow,&r->pitch,r->range,r->offset_tracks,&w->commands);if(result!=PT_RENDER_OK)return result;}
+        if(!end) {
+            if(mutation && !mutation->tick(mutation->context,&r->timeline.flow))return PT_RENDER_SAMPLE;
+            result=pt_render_commands_tick(mutation?mutation->playback:p,o,&r->timeline.flow,&r->pitch,r->range,r->offset_tracks,&w->commands);if(result!=PT_RENDER_OK)return result;}
     } while(!end);
     if(offset!=planned.frames || r->timeline.flow.ticks!=planned.ticks)return PT_RENDER_INVALID;
     report_run(r,end,clips,out);return PT_RENDER_OK;
@@ -414,7 +416,7 @@ static enum pt_render_result stream(const struct pt_project *p,const struct pt_r
 enum pt_render_result pt_render_stream(const struct pt_project *p,const struct pt_render_options *o,
     pt_render_sink sink,void *sink_ctx,pt_render_progress progress,void *progress_ctx,struct pt_render_report *out)
 {
-    struct workspace w;return stream(p,o,sink,sink_ctx,progress,progress_ctx,out,&w);
+    struct workspace w;return stream(p,o,sink,sink_ctx,progress,progress_ctx,out,&w,NULL);
 }
 enum pt_render_result pt_render_stream_allocated(const struct pt_project *p,const struct pt_render_options *o,
     pt_render_sink sink,void *sink_ctx,pt_render_progress progress,void *progress_ctx,
@@ -423,7 +425,20 @@ enum pt_render_result pt_render_stream_allocated(const struct pt_project *p,cons
     struct workspace *w;enum pt_render_result result;
     if(!a || !a->allocate || !a->release || !sink || !out)return PT_RENDER_INVALID;
     w=a->allocate(a->context,sizeof(*w));if(!w)return PT_RENDER_MEMORY;
-    result=stream(p,o,sink,sink_ctx,progress,progress_ctx,out,w);a->release(a->context,w);return result;
+    result=stream(p,o,sink,sink_ctx,progress,progress_ctx,out,w,NULL);a->release(a->context,w);return result;
+}
+
+
+enum pt_render_result pt_render_mutating_allocated(const struct pt_project *p,const struct pt_render_options *o,
+    pt_render_sink sink,void *sink_ctx,pt_render_progress progress,void *progress_ctx,
+    struct pt_render_report *out,const struct pt_allocator *a,const struct pt_render_mutation *mutation)
+{
+    struct workspace *w;enum pt_render_result result;
+    if(!a || !a->allocate || !a->release || !sink || !out || !mutation ||
+       !mutation->playback || !mutation->tick)return PT_RENDER_INVALID;
+    w=a->allocate(a->context,sizeof(*w));if(!w)return PT_RENDER_MEMORY;
+    result=stream(p,o,sink,sink_ctx,progress,progress_ctx,out,w,mutation);
+    a->release(a->context,w);return result;
 }
 
 struct pt_render_sequence {
@@ -439,7 +454,7 @@ enum pt_render_result pt_render_sequence_open(const struct pt_project *p,const s
     if(!a || !a->allocate || !a->release || !out)return PT_RENDER_INVALID;
     s=a->allocate(a->context,sizeof(*s));if(!s)return PT_RENDER_MEMORY;
     memset(s,0,sizeof(*s));s->allocator=*a;
-    result=measure(p,o,NULL,NULL,&report,&s->run);
+    result=measure(p,o,NULL,NULL,&report,&s->run,0);
     if(result!=PT_RENDER_OK) {a->release(a->context,s);return result;}
     s->options=*o;s->project=p;
     if(!start_run(&s->run,p,&s->options)) {a->release(a->context,s);return PT_RENDER_INVALID;}

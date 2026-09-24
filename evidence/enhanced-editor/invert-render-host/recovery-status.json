@@ -1,0 +1,15 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "[OK]\nProcess  1: Loaded as command: Status\nProcess  2: Loaded as command: Dev:AmigaBridge/amiga-bridge\nProcess  3: Loaded as command: C:TankMouse.driver\nProcess  4: Loaded as command: Workbench\nProcess  5: Loaded as command: Dev:Tests/render-files-1790248715532278000/invert-render/PTInvertRenderTest",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": {
+    "result": "[OK]\nProcess  1: Loaded as command: Status\nProcess  2: Loaded as command: Dev:AmigaBridge/amiga-bridge\nProcess  3: Loaded as command: C:TankMouse.driver\nProcess  4: Loaded as command: Workbench\nProcess  5: Loaded as command: Dev:Tests/render-files-1790248715532278000/invert-render/PTInvertRenderTest"
+  },
+  "isError": false
+}

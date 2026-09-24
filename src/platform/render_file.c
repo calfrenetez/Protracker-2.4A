@@ -98,19 +98,19 @@ static void abort_file(struct file *f)
     }
 }
 static enum pt_render_file_result file_new(const char *path,const struct pt_project *p,
-    const struct pt_render_options *o,pt_render_progress notify,void *ctx,struct pt_render_report *out,enum pt_render_result *detail,const struct pt_allocator *allocator,struct file *f)
+    const struct pt_render_options *o,pt_render_progress notify,void *ctx,struct pt_render_report *out,enum pt_render_result *detail,const struct pt_allocator *allocator,struct file *f,const struct pt_render_file_engine *engine)
 {
     struct pt_render_report plan,rendered,checked;
     enum pt_render_result result;enum pt_render_file_result failure=PT_RENDER_FILE_RENDER;int ok;
     if(detail)*detail=PT_RENDER_INVALID;
     if(!path || !*path || strlen(path)>1400 || !out || !detail)return PT_RENDER_FILE_INVALID;
     memset(f,0,sizeof(*f));f->path=path;f->fd=-1;f->reader=-1;f->progress=notify;f->progress_ctx=ctx;
-    result=(allocator?pt_render_measure_allocated(p,o,notify,ctx,&plan,allocator):pt_render_measure(p,o,notify,ctx,&plan));*detail=result;if(result!=PT_RENDER_OK)return failure;
+    result=engine?engine->run(engine->context,p,o,NULL,NULL,notify,ctx,&plan,allocator):(allocator?pt_render_measure_allocated(p,o,notify,ctx,&plan,allocator):pt_render_measure(p,o,notify,ctx,&plan));*detail=result;if(result!=PT_RENDER_OK)return failure;
     if(plan.frames>(0x7fffffffUL-44)/(o->bits/4)) {*detail=PT_RENDER_FRAME_LIMIT;return failure;}
     f->bits=o->bits;f->rate=o->rate;header(f->wav,o,(uint32_t)plan.frames);
     failure=PT_RENDER_FILE_BEGIN;if(!begin(f))goto fail;
     failure=PT_RENDER_FILE_WRITE;if(!bytes(f,f->wav,sizeof(f->wav)))goto fail;
-    result=(allocator?pt_render_stream_allocated(p,o,sink,f,progress,f,&rendered,allocator):pt_render_stream(p,o,sink,f,progress,f,&rendered));*detail=result;
+    result=engine?engine->run(engine->context,p,o,sink,f,progress,f,&rendered,allocator):(allocator?pt_render_stream_allocated(p,o,sink,f,progress,f,&rendered,allocator):pt_render_stream(p,o,sink,f,progress,f,&rendered));*detail=result;
     if(result!=PT_RENDER_OK) {if(result!=PT_RENDER_SINK)failure=PT_RENDER_FILE_RENDER;goto fail;}
     if(rendered.frames!=plan.frames || rendered.ticks!=plan.ticks || rendered.end!=plan.end) {failure=PT_RENDER_FILE_RENDER;*detail=PT_RENDER_INVALID;goto fail;}
     failure=PT_RENDER_FILE_FINISH;
@@ -121,7 +121,7 @@ static enum pt_render_file_result file_new(const char *path,const struct pt_proj
     failure=PT_RENDER_FILE_VERIFY;f->verifying=1;f->frames=0;
     if(!progress(f,PT_RENDER_VERIFY,0,0)) {*detail=PT_RENDER_CANCELLED;goto fail;}
     f->reader=open(f->temporary,O_RDONLY);if(f->reader<0 || !bytes(f,f->wav,sizeof(f->wav)))goto fail;
-    result=(allocator?pt_render_stream_allocated(p,o,sink,f,progress,f,&checked,allocator):pt_render_stream(p,o,sink,f,progress,f,&checked));*detail=result;
+    result=engine?engine->run(engine->context,p,o,sink,f,progress,f,&checked,allocator):(allocator?pt_render_stream_allocated(p,o,sink,f,progress,f,&checked,allocator):pt_render_stream(p,o,sink,f,progress,f,&checked));*detail=result;
     if(result!=PT_RENDER_OK || checked.frames!=rendered.frames || checked.ticks!=rendered.ticks || checked.clipped!=rendered.clipped ||
        checked.end!=rendered.end || read_retry(f->reader,f->wav,1)!=0)goto fail;
     if(!progress(f,PT_RENDER_VERIFY,checked.ticks,f->frames)) {*detail=PT_RENDER_CANCELLED;goto fail;}
@@ -142,7 +142,7 @@ fail:
 enum pt_render_file_result pt_render_file_new(const char *path,const struct pt_project *p,
     const struct pt_render_options *o,pt_render_progress notify,void *ctx,struct pt_render_report *out,enum pt_render_result *detail)
 {
-    struct file f;return file_new(path,p,o,notify,ctx,out,detail,NULL,&f);
+    struct file f;return file_new(path,p,o,notify,ctx,out,detail,NULL,&f,NULL);
 }
 enum pt_render_file_result pt_render_file_new_allocated(const char *path,const struct pt_project *p,
     const struct pt_render_options *o,pt_render_progress notify,void *ctx,struct pt_render_report *out,
@@ -154,6 +154,20 @@ enum pt_render_file_result pt_render_file_new_allocated(const char *path,const s
     if(!path || !*path || strlen(path)>1400 || !out || !detail || !allocator->allocate || !allocator->release)return PT_RENDER_FILE_INVALID;
     f=allocator->allocate(allocator->context,sizeof(*f));
     if(!f) {*detail=PT_RENDER_MEMORY;return PT_RENDER_FILE_RENDER;}
-    result=file_new(path,p,o,notify,ctx,out,detail,allocator,f);
+    result=file_new(path,p,o,notify,ctx,out,detail,allocator,f,NULL);
+    allocator->release(allocator->context,f);return result;
+}
+
+enum pt_render_file_result pt_render_file_engine_new(const char *path,const struct pt_project *p,
+    const struct pt_render_options *o,pt_render_progress notify,void *ctx,struct pt_render_report *out,
+    enum pt_render_result *detail,const struct pt_allocator *allocator,const struct pt_render_file_engine *engine)
+{
+    struct file *f;enum pt_render_file_result result;
+    if(detail)*detail=PT_RENDER_INVALID;
+    if(!path || !*path || strlen(path)>1400 || !out || !detail || !allocator ||
+       !allocator->allocate || !allocator->release || !engine || !engine->run)return PT_RENDER_FILE_INVALID;
+    f=allocator->allocate(allocator->context,sizeof(*f));
+    if(!f){*detail=PT_RENDER_MEMORY;return PT_RENDER_FILE_RENDER;}
+    result=file_new(path,p,o,notify,ctx,out,detail,allocator,f,engine);
     allocator->release(allocator->context,f);return result;
 }

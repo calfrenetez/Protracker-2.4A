@@ -156,3 +156,29 @@ reset and complete release pass with address/undefined-behavior sanitizers.
 The bank fixture also cross-compiles for 68030. It has not yet been run on the
 Amiga; production render/Studio entry points still refuse EFx. Wiring the bank
 into those entry points and testing output/cancellation remains unfinished.
+
+## Explicit offline EFx render and verified WAV APIs
+
+`pt_render_invert_stream` now feeds private sample descriptors to the mixer and
+runs the reference-tested mutation sequencer between audio intervals. Its
+explicit extra-sample budget covers staging descriptors and selected PCM; the
+ordinary render workspace uses the same allocator separately. The initial
+subset requires all tracks, whole mono8 forward loops with at least four loop
+frames, and no interpolation or slicing. Partial tracks/stems are refused so
+shared mutation dependencies cannot silently change. Existing editor/CLI and
+queued Studio paths remain unchanged and continue to refuse EFx.
+
+`pt_render_invert_file_new` uses the existing no-replace WAV publication code.
+Each measurement, output and byte-verification pass starts with fresh private
+copies. Exact sample/WAV checks, every allocation failure, budget refusal,
+cancellation, sink failure and cleanup pass under host sanitizers. Existing
+render and file regressions pass. These are explicit APIs, not yet UI wiring.
+
+Native run `render-files-1790248715532278000` FAILED an allocation-accounting
+assertion and reached a Software Failure requester (48000004). DMA is off but
+Process5 remains; guest files/launcher are retained under a recovery hold, with
+AmiConnect informed. No cleanup, reset, retry or physical acceptance is claimed.
+The manual build omitted canonical CRT/compiler-safety flags; a corrected
+build succeeds but has NOT run. That omission is a candidate explanation, not
+an established cause. Source build integration now uses the canonical flags.
+Evidence: `enhanced-editor/invert-render-host`.

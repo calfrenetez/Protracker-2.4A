@@ -7,6 +7,7 @@ INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     group=parser.add_mutually_exclusive_group()
+    group.add_argument('--invert-render',action='store_true',help='Run bounded offline EFx PCM and failure checks')
     group.add_argument('--stem-cli',metavar='REFERENCE_DIRECTORY',help='Run two native stems and existing-directory refusal')
     group.add_argument('--render-cli',metavar='REFERENCE_WAV',help='Run one-row native renderer against an exact host reference')
     group.add_argument('--pp20-import',action='store_true',help='Run native converter bounded packed MOD import')
@@ -110,12 +111,17 @@ def main():
         if args.amigus_discovery:
             cases=[('amigus-discovery','PTAmiGusDiscovery','AMIGUS DISCOVERY PASS:')]
             result['scope']='shared030 discovery-only native amigus.library probe; no reservation or MMIO'
+        if args.invert_render:
+            cases=[('invert-render','PTInvertRenderTest','INVERT render PASS:')]
+            result['scope']='shared030 offline EFx exact PCM and resource checks; no audio/physical acceptance'
         try:
             commands=['FailAt 21','Stack 65536']
             for name,binary,marker in cases:
                 sub=run/name;sub.mkdir();shutil.copyfile(ROOT/'build/dev'/binary,sub/binary)
                 result[binary+'_sha256']=hashlib.sha256((sub/binary).read_bytes()).hexdigest()
                 commands+=['CD '+guest.device+run.name+'/'+name,binary+' '+guest.device+run.name+'/'+name+('/sample.input' if args.sample_dispatch else '/donor.mod' if args.source_memory else '/module.mod' if args.mod_import else '/sample.input' if args.sample_import else '/master.mod' if args.mod_stream else '/master.ptg' if args.project_stream else '/sample.iff' if args.sample_svx else '/sample.raw' if args.sample_raw else '/sample.wav' if args.sample_wav else '/recent' if args.input_memory in ('recent','exec-recent') else '')+' >test.log','Echo $RC >test.rc']
+            if args.invert_render:
+                commands=['FailAt 1','Stack 65536',guest.device+run.name+'/invert-render/PTInvertRenderTest >'+guest.device+run.name+'/invert-render/test.log','Echo $RC >'+guest.device+run.name+'/invert-render/test.rc']
             if args.source_memory:
                 from make_mod_sample_fixture import make
                 donor=make((ROOT/'evidence/baseline/mod.baseline').read_bytes())
@@ -141,7 +147,7 @@ def main():
                           command+' >test.log','Echo $RC >test.rc',command+' >repeat.log','Echo $RC >repeat.rc']
             commands+=['Echo done >'+guest.device+run.name+'/done']
             guest.launch.write_text('\n'.join(commands)+'\n');guest.start()
-            deadline=time.monotonic()+90
+            deadline=time.monotonic()+(60 if args.invert_render else 90)
             while not (run/'done').exists():
                 if time.monotonic()>deadline:raise RuntimeError('Native file checks timed out; preserve owned run for recovery')
                 time.sleep(.2)
@@ -199,7 +205,7 @@ def main():
                 result['donor_unchanged']=True
             result['passed']=True
         finally:
-            if finished and (args.source_memory or args.sample_dispatch):
+            if finished and (args.source_memory or args.sample_dispatch or args.invert_render):
                 state=guest.command('GET_AUDIO_STATE')
                 finished=all('ch%d_dma=0'%i in state.split('\t') for i in range(4))
                 result['cleanup_audio']=state

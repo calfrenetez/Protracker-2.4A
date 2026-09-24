@@ -1,0 +1,8 @@
+{
+  "host_sanitized_tests": "4 passed: render, render_file, render_invert, render_invert_file",
+  "native_failed_sha256": "fc82ea294553a63f2e3d91f7b097688d6ecbe2ff43bfb3df842b85b5a821290f",
+  "corrected_build_sha256": "ec35d21fc990c002941034fac871dff239bd465d6205eb2539a9d3295ec9bf13",
+  "native_runtime": "FAILED assertion; recovery hold; corrected build NOT RUN",
+  "compiler_correction": "Canonical -m68000 -msoft-float -mcrt=nix20 -Os with compiler_safety_flags; omitted by initial manual build. Cause not established.",
+  "scope": "explicit opt-in offline APIs only; existing editor/CLI/Studio remain unchanged"
+}

@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "scope": "shared030 offline EFx exact PCM and resource checks; no audio/physical acceptance",
+  "PTInvertRenderTest_sha256": "fc82ea294553a63f2e3d91f7b097688d6ecbe2ff43bfb3df842b85b5a821290f",
+  "run_files_cleaned": false
+}

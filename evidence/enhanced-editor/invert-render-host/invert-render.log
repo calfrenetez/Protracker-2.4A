@@ -1,0 +1,2 @@
+assertion "s->live" failed: file "tests/render_invert_test.c", line 9, function: release
+Program aborted

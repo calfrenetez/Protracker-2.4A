@@ -59,4 +59,15 @@ enum pt_render_result pt_render_sequence_next(struct pt_render_sequence *,struct
 enum pt_render_result pt_render_sequence_consume(struct pt_render_sequence *,uint32_t frames);
 enum pt_render_result pt_render_sequence_complete(struct pt_render_sequence *,struct pt_render_plan *);
 void pt_render_sequence_close(struct pt_render_sequence *);
+/* Internal offline staging hook: caller prevalidates private sample descriptors.
+ * Flow observes the immutable project; voices read playback. Tick runs only
+ * after the preceding audio interval, before subsequent PCM is produced. */
+struct pt_render_mutation {
+    const struct pt_project *playback;
+    void *context;
+    int (*tick)(void *,const struct pt_flow *);
+};
+enum pt_render_result pt_render_mutating_allocated(const struct pt_project *,const struct pt_render_options *,
+    pt_render_sink,void *,pt_render_progress,void *,struct pt_render_report *,
+    const struct pt_allocator *,const struct pt_render_mutation *);
 #endif

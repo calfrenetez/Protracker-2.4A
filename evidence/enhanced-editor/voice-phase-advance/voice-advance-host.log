@@ -1,0 +1,23 @@
+.VOICE advance PASS: exact phase/handoff equivalence without PCM reads
+..
+----------------------------------------------------------------------
+Ran 3 tests in 1.706s
+
+OK
+VOICE traversal PASS: selected ranges, forward/pingpong seams, fractional steps, one-frame loops and large steps
+VOICE mix PASS: true24 stereo, single quantization, clipping, 16 voices, mute progression, capacity and alias refusal
+VOICE partition PASS hash=990c42f0 clips=40
+SEGMENT trajectory 0 hash=2a50eba5
+SEGMENT trajectory 1 hash=295ede49
+SEGMENT trajectory 2 hash=ac5189f5
+SEGMENT trajectory 3 hash=e5165089
+SEGMENT trajectory 4 hash=594e0cb9
+VOICE segment PASS: independent initial/repeat ranges, interpolation handoff, huge steps, one-frame repeats and invalid-range preservation
+STUDIO MIX PASS: pinned versions, atomic controls, pinned handoffs/segments, block continuity, true24 and cleanup
+.Studio dispatch PASS: 16-channel true24 audio equivalence, source binding, partial acquisition failure cleanup
+.STUDIO TICK PASS: tempo carry, partition hash=cbdaeaff, refusal and cleanup
+.
+----------------------------------------------------------------------
+Ran 3 tests in 4.337s
+
+OK

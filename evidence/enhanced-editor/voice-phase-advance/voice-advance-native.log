@@ -1,0 +1,378 @@
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        5888 bytes
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        6076 bytes
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        6600 bytes
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        6972 bytes
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        7028 bytes
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        6696 bytes
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+Harness(acrx2):	         874 bytes
+PTGGuard(acrx2):	         518 bytes
+PTGGuardData(aurw1):	        2108 bytes
+{
+  "PTInvertSequenceTest": {
+    "sha256": "2459ea9cf8833720adce56c061b7fd21e7899deaaa4b2bad9e4e88fe5395bfab",
+    "bytes": 30724
+  },
+  "PTInvertPCMTest": {
+    "sha256": "9da9d157ca45e83354ee7b9d1b90e397aaea232ce4e2c29242d462cd3e998f61",
+    "bytes": 26648
+  },
+  "PTInvertTest": {
+    "sha256": "3f6ae18139ca2bcdcc205bb9a3e77859b0a7e4ab975ff7b791228232029427e0",
+    "bytes": 16500
+  },
+  "PT24GEdit": {
+    "sha256": "d5f854d2c53920334f43815520313d75af7caa7280a0667d53d9786066492f4d",
+    "bytes": 220032
+  },
+  "PTPaulaTest": {
+    "sha256": "4b65321a30120f69029b5db8e2e4542a8431745863084da8b8ce07426a912ba5",
+    "bytes": 99796
+  },
+  "PTViewBench": {
+    "sha256": "d80dcc5e75d0c33957ccb8cbc66cc99b257e2eb7a9c193b7f364bbc077ccf2eb",
+    "bytes": 147468
+  },
+  "PTSlotsTest": {
+    "sha256": "fdfba07f450ddd1efaab859439a867074392d5a883e141844127902d0f350838",
+    "bytes": 125540
+  },
+  "PTSongTest": {
+    "sha256": "8b28c456b266806a6bd215246639c002875dbe0c93835c257a952de396dfb6d2",
+    "bytes": 129396
+  },
+  "PTSourceTest": {
+    "sha256": "72be8437aaffb68b293e2647fe5de1436008b274452d403eb84627a52c0be354",
+    "bytes": 128092
+  },
+  "PTNoteSliceTest": {
+    "sha256": "b7afbcb839fc84f2f16d595ed267891bc4628985b4807e78fee78358c4b7f926",
+    "bytes": 125452
+  },
+  "PTSamplerTest": {
+    "sha256": "f92905380ddc26112187fba6599d1bb3e7d06089612fa140cb196cae5d6401ff",
+    "bytes": 110224
+  },
+  "PTSampleAttributesTest": {
+    "sha256": "81bbb7b9849187a5cb9e2b68a046e51f2070af652f10ee0ed1404bd60480e8d2",
+    "bytes": 88948
+  },
+  "PTPp20Test": {
+    "sha256": "98a1fa526d119cb57c26554c73bce5a14989dca61b3372fc519c42050809a196",
+    "bytes": 48664
+  },
+  "PTRawTest": {
+    "sha256": "95ae56a333a6b79132c0eef1e8c3fbf85caa9e532c44fc318602adab92d079ef",
+    "bytes": 27788
+  },
+  "PTSvxTest": {
+    "sha256": "93c829b259e9f351948b99a7d36d891c6a94b75813f085d801d9403eafca8c77",
+    "bytes": 31436
+  },
+  "PTFilterTest": {
+    "sha256": "935dbb58f9f01b288fbaf0f81767eebdfd5c2e6b0cb98d97e6223ea21cfe9458",
+    "bytes": 47284
+  },
+  "PTMidiTest": {
+    "sha256": "bb7789471bdb8cebb4539bc5f499fb5f9d3ae64eb062470e1ddad4dd40f8de45",
+    "bytes": 19884
+  },
+  "PTRecordTest": {
+    "sha256": "43bbb41c352ee7b18691186b5f5bc44cc2d6a0f2fc49dc60c25ee3bb7ee99ab9",
+    "bytes": 46504
+  },
+  "PTPatternTest": {
+    "sha256": "07180c7d8997fe68ae4cad488ebae361f14ea932aba367b86976f6c9fccd0576",
+    "bytes": 51572
+  },
+  "PTSlicesTest": {
+    "sha256": "f4c7af9ef24fafcfe8ebdbe5fd20026f75f2d32524109010e6509fa0c38e1296",
+    "bytes": 29348
+  },
+  "PTFileSafetyTest": {
+    "sha256": "f1be65564a0782b2d214232e06a682d54dc886fe379452d36dc56ca1e024b33b",
+    "bytes": 16388
+  },
+  "PTProjectTest": {
+    "sha256": "45b75a21ec240222f78a02a06e763403bd2419bd8b1cafbbdc53d9c674bf2ae2",
+    "bytes": 40632
+  },
+  "PTModProjectTest": {
+    "sha256": "1450ab2029384ce6cfa37d841f7b26622ab6eacdd50d42ad24f3701cee29cee9",
+    "bytes": 46340
+  },
+  "PTDocumentTest": {
+    "sha256": "bed626128a1357fa9ebfea63d7c1614908e897f43152fd16207702d6234ab58c",
+    "bytes": 54296
+  },
+  "PT24GConvert": {
+    "sha256": "f69a6046aeb2f25404181bc064852d48ac88ac6d097cdd6c7621e6ee17f43293",
+    "bytes": 51704
+  },
+  "PTEditorClick": {
+    "sha256": "b265c06a53667722f1e71cfae23c6adf48604d343747bef4a4a6df40981c8540",
+    "bytes": 16356
+  },
+  "PTInputProbe": {
+    "sha256": "53cacd4c767cf8f37c257118154968c8055b5ebdefedb1ac01f7b79d348805c0",
+    "bytes": 14664
+  },
+  "PTChannelsTest": {
+    "sha256": "6ffb1ff65dc031246024b2f2fa82197ce6b6d9c93e329102c6c2e65020c4f76f",
+    "bytes": 17364
+  },
+  "PTPcmTest": {
+    "sha256": "d814a690129b307d79321905390263977517f98b8a5943a276ec54fd15756f03",
+    "bytes": 33012
+  },
+  "PTModRound8Test": {
+    "sha256": "4db1ea520f4380719c233f7e32dc77a302f275a6c17d2b200b17152fe3e593ef",
+    "bytes": 53448
+  },
+  "PTViewProbe": {
+    "sha256": "8f4fceff04b17513c85db681abe06974fd342eeac0682e4cea60dc73931b7ec5",
+    "bytes": 141960
+  },
+  "PTPreparedTest": {
+    "sha256": "1652f7a269572d1421b92a784e35e5fbb071b92d43a12d1a644325b61ca38c58",
+    "bytes": 150564
+  },
+  "PTPlaybackPCMTest": {
+    "sha256": "9c1e148da4fdda2666f60b5e14dd6433e7fe32c371e53c54ddf74eb99fc50ed3",
+    "bytes": 30796
+  },
+  "PTPlaybackUploadTest": {
+    "sha256": "9c4fc0850dbfaf2fa21a76291efbaa47533e76ac3eecbc920097198f244ab135",
+    "bytes": 33332
+  },
+  "PTPreviewPCMTest": {
+    "sha256": "c10826d702ed047331df024bc54b57416071777d347e1876bf8d24ad760a8f9c",
+    "bytes": 46440
+  },
+  "PTSampleCacheTest": {
+    "sha256": "ef8ba449181c759df891eb66727e18a668844c88b1a62cb8f1fe4ef91f21fcae",
+    "bytes": 17404
+  },
+  "PTFlowTraceTest": {
+    "sha256": "91b001a15aaf39cedb3eb91394ba7bba125420eb712567eac524958cae0585bb",
+    "bytes": 87020
+  },
+  "PTPitchTraceTest": {
+    "sha256": "d29bfed64f5287f897041db890a12b47e12091aa48630720fbdf2e5aad262ed2",
+    "bytes": 87632
+  },
+  "PTSampleTraceTest": {
+    "sha256": "46e6675d87a30260c612f9fd886e69fd2bb8fb60e9f30e07b88ab72265d79cd3",
+    "bytes": 88072
+  },
+  "PTInvertTraceTest": {
+    "sha256": "20576a428bdb7ea370daf8fd918e2a46876f94fc1e85df9c6bbe66ee450d9d3e",
+    "bytes": 88132
+  },
+  "PTVolumeTraceTest": {
+    "sha256": "01bc75fc316d10f20cef49b860f0094a4af425bbe68775043cb1a28edfb93542",
+    "bytes": 87728
+  },
+  "PTPitchTest": {
+    "sha256": "903679c89bc08296e6d4ed657894a96c54238e6ee9bd9e6ba1bd119db8b2553f",
+    "bytes": 77952
+  },
+  "PTFlowCoreTest": {
+    "sha256": "3b39252c71994a11ea4af2bcaf2b9e5e6a3b5bb59b87debf46a9f551c77830d8",
+    "bytes": 77588
+  },
+  "PTStemsTest": {
+    "sha256": "37963201adfee5b2fc501221ebd8c3ff58308b99f92397ba9e175e70706aff16",
+    "bytes": 15676
+  },
+  "PTFrameClockTest": {
+    "sha256": "f54baa7615502790abec33b2f805e038e560bd04b6656e94972a947fb0d97829",
+    "bytes": 23636
+  },
+  "PTTimelineTest": {
+    "sha256": "9dfa68b65d122d2245aa85532f2ec078ca526108bf0ad42d170bcd1385e6394c",
+    "bytes": 38316
+  },
+  "PTVoiceSegmentTest": {
+    "sha256": "e69cb8156d23a650dad96d13d73afb5cd5b980e236ffc5d043e5a9422bf3da98",
+    "bytes": 36088
+  },
+  "PTVoiceTest": {
+    "sha256": "48e9fa29d8b2697a2bfe6ec9598f15e116b846a7c1c9d13d99795e9e38c200b7",
+    "bytes": 37860
+  },
+  "PTHandoffTest": {
+    "sha256": "1c6cba46da8b6370e646f88126e01ce973dfd192087f7e902a89039cfc879f6a",
+    "bytes": 66528
+  },
+  "PTRecentTest": {
+    "sha256": "016723f53162e48269351d6086378d446eb1786e41bb9445d7d55d5549daa93d",
+    "bytes": 22540
+  },
+  "PTRecentFileTest": {
+    "sha256": "17f8a74c0c43dbea2d5ddfd8ac281a23bbb0d7ae35f09f7826fd9fc6e9720c61",
+    "bytes": 24008
+  },
+  "PTBounceTest": {
+    "sha256": "a8089e536c74c659f3c2ca5f46daa2389b92287749aa093fee5628b9e2266050",
+    "bytes": 109276
+  },
+  "PTTremoloRenderTest": {
+    "sha256": "6478a1947b7d74c47e653ce801d03db01e5b087eda5cd37418f44f35633269fb",
+    "bytes": 69188
+  },
+  "PTOffsetRenderTest": {
+    "sha256": "fc7f09af980e335f72037656e986c69707f4062750253f827ac8382228536f54",
+    "bytes": 72620
+  },
+  "PTPortaRenderTest": {
+    "sha256": "ff4c2b8049e881dd5414753ce1e3102b336485b5da28251db43ce3899032773a",
+    "bytes": 72392
+  },
+  "PTPitchRenderTest": {
+    "sha256": "6546bfccf93eb0002813ba4e75c8ba0f38d9db185ffc873df2002e36629831da",
+    "bytes": 69628
+  },
+  "PTVolumeRenderTest": {
+    "sha256": "cf063a462b664a4d7874bb164926a99e2b2820ae75cf2eedd5ba40f7cda006b0",
+    "bytes": 70464
+  },
+  "PTInstrumentRenderTest": {
+    "sha256": "2dd2a5f9868b596e70c1a1d01c87f3285aa85c8855cd4af78a931f378109a440",
+    "bytes": 52056
+  },
+  "PTRangeRenderTest": {
+    "sha256": "a6794414d96c322ee2a0ba5ece336d0c21453d36839e1949ee9131009bae8edd",
+    "bytes": 53452
+  },
+  "PTRenderTest": {
+    "sha256": "7c9d9a4e5d90991cf4550e68e83e9295f6f5abf7f5dbfd30af0f91e3a28fa264",
+    "bytes": 56664
+  },
+  "PTStemFileTest": {
+    "sha256": "b14922f4037fbb0604f0e8b569cbe10357b060131a91a1843aeebf6f1a2b7157",
+    "bytes": 64188
+  },
+  "PTRenderFileTest": {
+    "sha256": "2a23979b0ff7ca4d6aa008951a627203b22d90f43560ba30f41f36631e1cca58",
+    "bytes": 65440
+  },
+  "PT24GRender": {
+    "sha256": "ce95a232913375d83795377ddb190ad9cbddf333963acd74b5eb2a8eb42e78ff",
+    "bytes": 73412
+  },
+  "PTRenderMemoryTest": {
+    "sha256": "4911c714871266f8cbb6482ef6b6ce92825d7775cfe0a3fabf219407f65ab1ba",
+    "bytes": 61872
+  },
+  "PTRenderAllocTest": {
+    "sha256": "0578294f3790f4c5af61b5aabe2781dc7450e87da2de8fbd62fb9144a4d57272",
+    "bytes": 57612
+  },
+  "PTRenderFileAllocTest": {
+    "sha256": "cdb6da966e6cf07c77a398defa3f153bdd47ce1b8d5a07872161b370d00b2d6c",
+    "bytes": 66272
+  },
+  "PTStemFileAllocTest": {
+    "sha256": "5bfcf9b072222c7f7b8d74a1d547328e3f135d9000fd0578c5fe62bdf979829b",
+    "bytes": 64688
+  },
+  "PTExecBounceTest": {
+    "sha256": "50190eaebd91cfe0dfae5688345800e5ffbe0685608102d787695212dfb49477",
+    "bytes": 110752
+  },
+  "PTExecStemsTest": {
+    "sha256": "29356b2c2d2015236e5478c21e10f056662938192280aede805e120f6896efe4",
+    "bytes": 65944
+  },
+  "PTExecFailureTest": {
+    "sha256": "fd066e17d86aa94fc2c636a07092747859824e5b44e35452dbde00d257b0ae6e",
+    "bytes": 63160
+  },
+  "PTSamplerStudioTest": {
+    "sha256": "f9821031fc9ec804a12248a86914154c66d56fb538d8aaf0909c7feb003e5a1a",
+    "bytes": 92228
+  },
+  "PTVoiceAdvanceTest": {
+    "sha256": "d67248371a6597250caf85f29cda1be7f2272523592c3c59c4dbea4b3bcae0cf",
+    "bytes": 28692
+  },
+  "PTStudioPlanTest": {
+    "sha256": "22895e66dab3ef7c820cf201631ab2b157d4ce3885c422fcb98cdf9e003566f4",
+    "bytes": 56968
+  },
+  "PTStudioTickTest": {
+    "sha256": "4c22b8113da846a81825bc0bcfd079a5484d964261babaf8fd3fb40dcb8eba10",
+    "bytes": 35472
+  },
+  "PTStudioMixTest": {
+    "sha256": "b6506d6d7b9738195270fd796a962b53610f26400e24810b1bba74bb815844e0",
+    "bytes": 36856
+  },
+  "PTExecStudioTest": {
+    "sha256": "99787a8cf2f16945b8ab20de3045937706fdf51ae74c7d2a1a0e728e0bcd8d51",
+    "bytes": 41308
+  },
+  "PTExecSamplerStudioTest": {
+    "sha256": "43006bd97f4cef53ecafa418a8cedc9e81f201943bc14fd4421e6cdb2845b803",
+    "bytes": 93632
+  },
+  "PTExecImportTest": {
+    "sha256": "9a0625618a21972b0e14e26a0470b3c216aa4a8a9219483c5817ca39713e685b",
+    "bytes": 21688
+  },
+  "PTExecRecentTest": {
+    "sha256": "e86c258dfa6d3fec3e58b22a4192763f2fe8c8dee30b65637827e9e8dd75f6d2",
+    "bytes": 26528
+  },
+  "PTRecentMemoryTest": {
+    "sha256": "b94e8d48a278abdaf9c58ee777024474bf827392e3f18ee0ef451afbb497877f",
+    "bytes": 25132
+  },
+  "PTFileLoadTest": {
+    "sha256": "025738313e810b17b476e4fcf53c1a60b9c40888595932b20b93bb184907cf25",
+    "bytes": 20300
+  },
+  "PTExecSaveTest": {
+    "sha256": "5865686987f03b4a9d906a994cc6bb881911d33c1d481dfa632f8b6fc89c9d7a",
+    "bytes": 22820
+  },
+  "PTGuardTest": {
+    "sha256": "908722556a4bc3033b1dcc107b9b8ba28c5dfc44f75195b00336828e0e292a0b",
+    "bytes": 1660
+  }
+}

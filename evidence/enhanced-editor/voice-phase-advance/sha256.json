@@ -1,0 +1,9 @@
+{
+  "src/core/voice.c": "eba8cbfac0d132f2a85490ec1e08768d18ae741204b6c639b328aed7098b9236",
+  "src/core/voice.h": "4ff903ef341e1486d98dc4fa50255a36c2a95386e681c02d79e4ba6ef55f9296",
+  "tests/studio_plan_test.c": "5b09d299863ff1e68c4c5ba1842d51d2c2cbb033da081c10e4b4e8db4ffb45f0",
+  "tests/voice_advance_test.c": "b5a7ede56d2a38824d443b10eaa4957781574d91275735bad4b83d0508db0d3e",
+  "tests/test_voice_advance.py": "5c2bb3c27f3de88d66651857820fd7b95f257869addf8a9f1e06915787bc297e",
+  "build/dev/PTVoiceAdvanceTest": "d67248371a6597250caf85f29cda1be7f2272523592c3c59c4dbea4b3bcae0cf",
+  "build/dev/PTStudioPlanTest": "22895e66dab3ef7c820cf201631ab2b157d4ce3885c422fcb98cdf9e003566f4"
+}

@@ -77,6 +77,14 @@ static void advance(struct pt_voice *v)
         v->phase=amount>=distance?amount-distance:v->phase+amount;
     }
 }
+enum pt_pcm_result pt_voice_advance(struct pt_voice *v,unsigned count,uint32_t frames)
+{
+    unsigned ch;uint32_t i;
+    if(count>16 || frames>256 || (count && !v))return PT_PCM_INVALID;
+    for(i=0;i<frames;++i)for(ch=0;ch<count;++ch)
+        if(v[ch].active && v[ch].pcm)advance(v+ch);
+    return PT_PCM_OK;
+}
 static void frame(struct pt_voice *v,int32_t out[2])
 {
     uint64_t phase=v->phase;uint32_t index,next,fraction;unsigned side;const struct pt_pcm *next_pcm=v->pcm;

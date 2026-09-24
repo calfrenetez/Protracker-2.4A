@@ -54,12 +54,18 @@ int main(void)
         if(t==6)assert(plan.count==16 && plan.action[0].kind==PT_RENDER_STOP);
         if(t==7)assert(plan.count==0);
         assert(pt_studio_dispatch(mix,16,&plan,bindings,2)==PT_PCM_OK);
-        {int32_t a[22],b[22],c[22];uint64_t ca,cb,cc;
-            struct pt_pcm pa={a,22,11,48000,2,24},pb={b,22,11,48000,2,24},pc={c,22,11,48000,2,24};
+        {int32_t a[22],c[22];uint64_t ca,cc;
+            struct pt_pcm pa={a,22,11,48000,2,24},pc={c,22,11,48000,2,24};
             assert(pt_voice_mix(ref.voice,16,ref.gain,&pa,&ca)==PT_PCM_OK);
-            assert(pt_voice_mix(planned.voice,16,planned.gain,&pb,&cb)==PT_PCM_OK);
             assert(pt_studio_read(mix,&pc,&cc)==PT_PCM_OK);
-            assert(!memcmp(a,b,sizeof(a)) && !memcmp(a,c,sizeof(a)) && ca==cb && ca==cc);
+            assert(!memcmp(a,c,sizeof(a)) && ca==cc);
+            assert(pt_voice_advance(planned.voice,16,11)==PT_PCM_OK);
+            for(ch=0;ch<16;++ch) {
+                assert(planned.voice[ch].phase==ref.voice[ch].phase);
+                assert(planned.voice[ch].active==ref.voice[ch].active);
+                assert(planned.voice[ch].pcm==ref.voice[ch].pcm);
+                assert(planned.voice[ch].repeat_pcm==ref.voice[ch].repeat_pcm);
+            }
             if(t==0)assert(a[0]!=0);
             if(t==3 || t>=6)assert(a[0]==0);
         }

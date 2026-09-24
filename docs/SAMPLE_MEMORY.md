@@ -594,3 +594,21 @@ cleanup after partial acquisition failure and ambiguous source bindings.
 `PTStudioPlanTest` is included in the native cross-build. Full song scheduling,
 command-state phase synchronization, editor integration and output transport are
 still pending; the adapter alone does not enable live Studio song playback.
+
+## Command-state phase synchronization primitive
+
+`pt_voice_advance` advances up to16 initialized/zeroed voices by up to256 frames
+using the exact phase transition shared with the audio reader. It reads no PCM,
+allocates nothing and performs no callbacks. This lets a caller advance borrowed
+command-state mirrors only AFTER a successful Studio block, without generating a
+second discarded audio mix. It preserves loop, pending-source handoff and one-shot
+end behavior, including fractional and very large steps. Invalid count/frame
+arguments leave state unchanged.
+
+The Studio dispatch test now advances its command-state mirror this way and still
+matches reference 16-channel true24 output. Separate tests compare complete voice
+state against repeated audio reads for forward/pingpong/one-shot/segment/handoff
+cases. This primitive does not itself schedule songs or own borrowed descriptors:
+the caller must still preserve immutable source lifetimes, advance by precisely
+the successful output frame count, and abort on dispatch/read failure. Full song
+scheduling, editor integration and live output remain unfinished.

@@ -107,6 +107,7 @@ def main():
         inputs[target] = [source, *inputs[base][1:]]
     inputs['PT24GEdit'].append('src/platform/file_load.c')
     inputs['PTSamplerStudioTest'] = ['tests/sampler_studio_test.c','src/editor/sampler_studio.c','src/core/studio_mix.c','src/core/voice.c',*inputs['PTSamplerTest'][1:]]
+    inputs['PTVoiceAdvanceTest'] = ['tests/voice_advance_test.c','src/core/voice.c','src/core/pcm.c']
     inputs['PTStudioPlanTest'] = ['tests/studio_plan_test.c','src/core/studio_plan.c','src/core/studio_mix.c',*render_sources]
     inputs['PTStudioTickTest'] = ['tests/studio_tick_test.c','src/core/studio_tick.c','src/core/studio_mix.c','src/core/frame_clock.c','src/core/voice.c','src/core/pcm.c']
     inputs['PTStudioMixTest'] = ['tests/studio_mix_test.c','src/core/studio_mix.c','src/core/voice.c','src/core/pcm.c']

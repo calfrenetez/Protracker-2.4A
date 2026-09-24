@@ -36,17 +36,29 @@ void pt_editor_prepare_change(struct pt_editor *e)
 {if(e && e->before_change)e->before_change(e->before_change_context);}
 void pt_editor_dispose(struct pt_editor *e)
 {if(e) {pt_editor_prepare_change(e);pt_pattern_history_release(&e->history);source_close(e);pt_sampler_release(&e->sampler);pt_song_release(&e->song);}}
-enum pt_edit_result pt_editor_source_load(struct pt_editor *e,const uint8_t *bytes,size_t length)
+enum pt_edit_result pt_editor_source_load_with(struct pt_editor *e,pt_source_loader load,void *context)
 {
     struct pt_document next;enum pt_project_result result;size_t available;
-    if(!e || !bytes || (length>=8 && !memcmp(bytes,"PT24G\r\n\032",8)))return PT_EDIT_UNSUPPORTED;
+    if(!e || !load)return PT_EDIT_UNSUPPORTED;
     if(e->sampler.bytes>e->sampler.budget)return PT_EDIT_CAPACITY;
     available=e->sampler.budget-e->sampler.bytes;pt_document_init(&next,&e->sampler.allocator);
-    result=pt_document_load(&next,bytes,length,available);
-    if(result!=PT_PROJECT_OK)return result==PT_PROJECT_CAPACITY?PT_EDIT_CAPACITY:PT_EDIT_UNSUPPORTED;
+    result=load(context,&next,available);
+    if(result!=PT_PROJECT_OK || !next.loaded || next.allocated_bytes>available) {
+        pt_document_release(&next);
+        return result==PT_PROJECT_CAPACITY?PT_EDIT_CAPACITY:PT_EDIT_UNSUPPORTED;
+    }
     source_close(e);e->sample_source=next;e->sampler.budget-=next.allocated_bytes;
     e->source_selected=1;e->panel=11;++e->sample_ui;
     pt_editor_status(e,"MOD SOURCE READY - CHOOSE INSTRUMENT AND IMPORT");return PT_EDIT_OK;
+}
+struct source_bytes {const uint8_t *data;size_t length;};
+static enum pt_project_result load_source_bytes(void *context,struct pt_document *d,size_t budget)
+{struct source_bytes *in=context;return pt_document_load(d,in->data,in->length,budget);}
+enum pt_edit_result pt_editor_source_load(struct pt_editor *e,const uint8_t *bytes,size_t length)
+{
+    struct source_bytes in={bytes,length};
+    if(!bytes || (length>=8 && !memcmp(bytes,"PT24G\r\n\032",8)))return PT_EDIT_UNSUPPORTED;
+    return pt_editor_source_load_with(e,load_source_bytes,&in);
 }
 void pt_editor_wave_bounds(const struct pt_editor *e,uint32_t *start,uint32_t *end)
 {

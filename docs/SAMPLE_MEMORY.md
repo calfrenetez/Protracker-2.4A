@@ -1143,3 +1143,12 @@ Its maximum-length classic-sample fixture now converts to MOD and enhanced
 project under a 550000-byte allocator ceiling (host peak 538110, final zero),
 which excludes keeping a complete encoded MOD alongside decoded masters.
 Enhanced/PP20 converter input still follows the existing whole-input path.
+
+MOD source/donor preview also selects bounded file loading for uncompressed
+MODs. The editor's synchronous source-loader transaction loads into a separate
+unpublished document within the remaining sampler budget. Only a completed load
+replaces the previous donor; failure frees staging, keeping the old source,
+destination project, selection and undo intact. Samples imported from the donor
+remain independent master copies with existing undo ownership. PP20 donor input
+still uses the previous unpacking path. Donor UI/runtime acceptance is separate
+from the host source/import regression and native cross-build.

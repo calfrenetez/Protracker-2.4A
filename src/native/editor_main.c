@@ -73,6 +73,8 @@ static int load(struct pt_document *d,const char *path)
     ok=pt_document_load(d,bytes,n,SIZE_MAX)==PT_PROJECT_OK;
     pt_master_release(&master_memory,bytes);return ok;
 }
+static enum pt_project_result load_mod_source(void *context,struct pt_document *d,size_t budget)
+{return pt_mod_file_load(d,(const char *)context,64UL*1024*1024,budget);}
 static enum pt_edit_result load_sample(struct pt_editor *e,const char *path,int raw,int source_only,int *preview)
 {
     size_t n;uint8_t *bytes=NULL;enum pt_edit_result result=PT_EDIT_INVALID;
@@ -94,6 +96,10 @@ static enum pt_edit_result load_sample(struct pt_editor *e,const char *path,int 
         for(part=path;*part;++part)if(*part=='/' || *part==':')name=part+1;
         pt_editor_prepare_change(e);
         return pt_svx_file_import(path,64UL*1024*1024,&e->sampler,e->project,&e->history,e->sample-1,name);
+    }
+    if(pt_mod_file_candidate(path)) {
+        if(preview)*preview=1;
+        return pt_editor_source_load_with(e,load_mod_source,(void *)path);
     }
     loaded=pt_file_load(path,64UL*1024*1024,&render_allocator,&bytes,&n);
     if(loaded!=PT_LOAD_OK)return loaded==PT_LOAD_MEMORY?PT_EDIT_CAPACITY:PT_EDIT_INVALID;

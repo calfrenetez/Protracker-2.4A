@@ -80,6 +80,7 @@ def main():
     inputs['PTExecSvxImportTest'] = ['tests/native_exec_svx_import_test.c', *inputs['PTSvxImportTest'][1:]]
     inputs['PT24GEdit'] += ['src/platform/mod_import.c']
     inputs['PT24GConvert'] += ['src/platform/mod_import.c']
+    inputs['PTSourceTest'] += ['src/platform/mod_import.c']
     inputs['PTModImportTest'] = ['tests/mod_import_test.c', 'src/platform/mod_import.c', *inputs['PTDocumentTest'][1:]]
     inputs['PTExecModImportTest'] = ['tests/native_exec_mod_import_test.c', *inputs['PTModImportTest'][1:]]
     inputs['PTModRound8Test'] = ['tests/mod_round8_test.c', *inputs['PTDocumentTest'][1:]]

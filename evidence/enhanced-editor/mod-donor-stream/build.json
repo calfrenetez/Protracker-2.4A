@@ -1,0 +1,13 @@
+{
+  "scope": "Pinned native cross-build only; editor includes unrelated display work",
+  "binaries": {
+    "PT24GEdit": {
+      "sha256": "25f757d965e292e5ff5a38369b06739494956a9c837ec8c59e13a84ec41805e8",
+      "bytes": 234496
+    },
+    "PTSourceTest": {
+      "sha256": "a42394ea863f68e205ff441df121de623bd1da7a1d8d698f1d135b6831490a92",
+      "bytes": 137004
+    }
+  }
+}

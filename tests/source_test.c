@@ -3,6 +3,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../src/editor/editor.h"
+#include "../src/platform/mod_import.h"
+static enum pt_project_result file_source(void *context,struct pt_document *d,size_t budget)
+{return pt_mod_file_load(d,(const char *)context,64UL*1024*1024,budget);}
+static enum pt_project_result failed_source(void *context,struct pt_document *d,size_t budget)
+{enum pt_project_result r=file_source(context,d,budget);return r==PT_PROJECT_OK?PT_PROJECT_INVALID:r;}
 static unsigned calls,fail,live;
 static void *allocate(void *c,size_t n) {(void)c;void *p;if(++calls==fail)return NULL;p=malloc(n);if(p)++live;return p;}
 static void release(void *c,void *p) {(void)c;assert(live);--live;free(p);}
@@ -15,9 +20,9 @@ int main(int argc,char **argv)
     memcpy(original,d.project.events,sizeof(original));channels=d.project.channels;
     e=malloc(sizeof(*e));assert(e && pt_editor_init(e,&d.project));e->sampler.allocator=a;e->sample=3;budget=e->sampler.budget;
     allocated=live;e->sampler.budget=1;
-    assert(pt_editor_source_load(e,bytes,n)==PT_EDIT_CAPACITY && live==allocated);e->sampler.budget=budget;
+    assert(pt_editor_source_load_with(e,file_source,argv[1])==PT_EDIT_CAPACITY && live==allocated);e->sampler.budget=budget;
     for(i=1;i<=6;++i) {
-        fail=calls+i;assert(pt_editor_source_load(e,bytes,n)==PT_EDIT_CAPACITY);
+        fail=calls+i;assert(pt_editor_source_load_with(e,file_source,argv[1])==PT_EDIT_CAPACITY);
         assert(live==allocated && !e->sample_source.loaded && e->sampler.budget==budget && !e->history.revision);
     }
     fail=0;assert(pt_editor_source_load(e,bytes,n)==PT_EDIT_OK && e->panel==11 && e->source_selected==1 && !e->history.revision);
@@ -29,10 +34,14 @@ int main(int argc,char **argv)
         memcpy(bytes,title,20);
         assert(pt_editor_source_load(e,bytes,n)==PT_EDIT_OK);
     }
+    assert(pt_editor_source_load_with(e,file_source,argv[1])==PT_EDIT_OK);
     source_before=e->sample_source;available=e->sampler.budget;allocated=live;
+    assert(pt_editor_source_load_with(e,failed_source,argv[1])==PT_EDIT_UNSUPPORTED);
+    assert(!memcmp(&source_before,&e->sample_source,sizeof(source_before)) && live==allocated && e->sampler.budget==available && !e->history.revision);
+
     assert(pt_editor_source_load(e,(const uint8_t *)"PT24G",5)==PT_EDIT_UNSUPPORTED);
     assert(pt_editor_source_load(e,bytes,n-1)==PT_EDIT_UNSUPPORTED && !memcmp(&source_before,&e->sample_source,sizeof(source_before)));
-    fail=calls+2;assert(pt_editor_source_load(e,bytes,n)==PT_EDIT_CAPACITY && live==allocated && e->sampler.budget==available);fail=0;
+    fail=calls+2;assert(pt_editor_source_load_with(e,file_source,argv[1])==PT_EDIT_CAPACITY && live==allocated && e->sampler.budget==available);fail=0;
     assert(pt_editor_key(e,0x21,8)==PT_UI_SAVE && !e->history.revision);
     assert(pt_editor_key(e,0x28,0)==PT_UI_SOURCE_LOAD);
     pt_editor_click(e,520,30);assert(e->source_selected==2);

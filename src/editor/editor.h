@@ -73,6 +73,11 @@ void pt_editor_dispose(struct pt_editor *);
 void pt_editor_change_guard(struct pt_editor *,void (*)(void *),void *);
 void pt_editor_prepare_change(struct pt_editor *);
 void pt_editor_sample_all(struct pt_editor *);
+/* Synchronous MOD loader into an empty unpublished document; honor budget and
+ * allocator, finish source I/O before success, never mutate/reenter the editor.
+ * Failure releases staging and preserves the previous source and destination. */
+typedef enum pt_project_result (*pt_source_loader)(void *,struct pt_document *,size_t);
+enum pt_edit_result pt_editor_source_load_with(struct pt_editor *,pt_source_loader,void *);
 enum pt_edit_result pt_editor_source_load(struct pt_editor *,const uint8_t *,size_t);
 void pt_editor_wave_bounds(const struct pt_editor *,uint32_t *,uint32_t *);
 void pt_editor_sample_result(struct pt_editor *,enum pt_edit_result);

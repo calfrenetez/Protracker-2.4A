@@ -6,7 +6,7 @@ import tempfile
 import unittest
 ROOT=Path(__file__).resolve().parents[1]
 RENDER=['src/platform/render_file.c','src/platform/stem_file.c','src/core/stems.c','src/core/render.c','src/core/pitch.c','src/core/timeline.c','src/core/frame_clock.c','src/core/flow.c','src/core/voice.c','src/core/project.c','src/core/channels.c','src/core/pcm.c']
-IMPORT=['src/platform/mod_import.c','src/platform/project_import.c','src/platform/pp20_import.c']
+IMPORT=['src/platform/render_invert_file.c','src/core/render_invert.c','src/core/invert_bank.c','src/core/invert_sequence.c','src/core/invert_pcm.c','src/core/invert_loop.c','src/platform/mod_import.c','src/platform/project_import.c','src/platform/pp20_import.c']
 class RenderFile(unittest.TestCase):
     def test_verified_stream_publication_and_io_failure(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -33,6 +33,22 @@ class RenderFile(unittest.TestCase):
             self.assertEqual(data[:4],b'RIFF');self.assertEqual(int.from_bytes(data[24:28],'little'),44100)
             self.assertEqual(int.from_bytes(data[34:36],'little'),16)
             self.assertEqual(subprocess.run(args,capture_output=True).returncode,20);self.assertEqual(wav.read_bytes(),data)
+            # Explicit EFx export never mutates the source or silently enables stems.
+            for name in ('invert_delay','invert_shared','invert_reload'):
+                source=ROOT/'evidence/enhanced-editor/invert-ordering'/(name+'.mod')
+                original=source.read_bytes();dest=out/(name+'.wav')
+                plain=[str(cli),str(source),str(dest)]
+                self.assertEqual(subprocess.run(plain,capture_output=True).returncode,20)
+                result=subprocess.run([*plain,'--invert-budget','100000'],capture_output=True,text=True,check=True)
+                self.assertIn('verified=1 new_file=1',result.stdout)
+                data=dest.read_bytes();self.assertEqual(len(data),44+(28800 if name=='invert_delay' else 17280)*6)
+                self.assertEqual(source.read_bytes(),original)
+                self.assertEqual(subprocess.run([*plain,'--invert-budget','100000'],capture_output=True).returncode,20)
+                self.assertEqual(dest.read_bytes(),data)
+                refused=out/(name+'-refused.wav')
+                for tail in (['--invert-budget','1'],['--invert-budget','100000','--tracks','1'],['--invert-budget','100000','--stems']):
+                    self.assertEqual(subprocess.run([str(cli),str(source),str(refused),*tail],capture_output=True).returncode,20)
+                    self.assertFalse(refused.exists())
             # File-size cap is process-local. Ignore SIGXFSZ so the failed/short
             # write reaches normal cleanup instead of terminating the process.
             def limited():

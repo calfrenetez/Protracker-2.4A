@@ -182,3 +182,13 @@ The manual build omitted canonical CRT/compiler-safety flags; a corrected
 build succeeds but has NOT run. That omission is a candidate explanation, not
 an established cause. Source build integration now uses the canonical flags.
 Evidence: `enhanced-editor/invert-render-host`.
+
+The owner subsequently approved the shared emulator restart. The supported
+lifecycle recovered bridge/guest identity; the old process was absent and DMA
+off before exact retained-run cleanup. The failed run remains failed and its
+snapshot is preserved. Corrected core run `render-files-1790249723400991000`
+returned0: exact PCM, memory failure, budget, cancellation and sink checks pass.
+That window completed, cleaned up and was explicitly released. Native diagnostic
+assertions now return20 rather than creating a fatal requester. The canonical
+runtime/compiler flags were restored; no claim isolates the original root cause.
+Evidence: `enhanced-editor/invert-render-qualified`.

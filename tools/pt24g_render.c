@@ -12,6 +12,7 @@
 #include "../src/native/master_memory.h"
 #endif
 #include "../src/platform/render_file.h"
+#include "../src/platform/render_invert_file.h"
 #include "../src/platform/stem_file.h"
 #ifndef __amigaos__
 static void *allocate(void *ctx,size_t n) {(void)ctx;return malloc(n);}
@@ -35,7 +36,7 @@ int main(int argc,char **argv)
 #endif
     struct pt_document doc;struct pt_render_options o;enum pt_project_result loaded;
     struct pt_render_report report;enum pt_render_result detail=PT_RENDER_INVALID;enum pt_render_file_result saved;
-    uint32_t value;int i,rc=20,tracks_given=0,stems=0,grouped=0;
+    uint32_t value,invert_budget=0;int i,rc=20,tracks_given=0,stems=0,grouped=0;
 #ifdef __amigaos__
     pt_master_memory_init(&memory);
 #endif
@@ -51,11 +52,13 @@ int main(int argc,char **argv)
         else if(!strcmp(argv[i],"--to-row") && value>0 && value<=64) {o.row_range=1;o.row_end=(uint8_t)value;}
         else if(!strcmp(argv[i],"--rate") && (value==44100 || value==48000))o.rate=value;
         else if(!strcmp(argv[i],"--bits") && (value==16 || value==24))o.bits=(uint8_t)value;
+        else if(!strcmp(argv[i],"--invert-budget") && value)invert_budget=value;
         else if(!strcmp(argv[i],"--gain") && value<=65536)o.gain_q16=value;
         else if(!strcmp(argv[i],"--tracks") && value && value<=65535) {o.tracks=(uint16_t)value;tracks_given=1;}
         else goto usage;
         ++i;
     }
+    if(stems && invert_budget)goto usage;
     o.frame_limit=(uint64_t)o.rate*60*30; /* Includes internal startup lead-in. */
     if(pt_project_file_candidate(argv[1]))loaded=pt_project_file_load(&doc,argv[1],64UL*1024*1024,64UL*1024*1024);
     else if(pt_mod_file_candidate(argv[1]))loaded=pt_mod_file_load(&doc,argv[1],64UL*1024*1024,64UL*1024*1024);
@@ -72,15 +75,15 @@ int main(int argc,char **argv)
             batch.plan.item[n].tracks,(unsigned long)batch.audio[n].frames,(unsigned long)batch.audio[n].clipped);
         printf("STEMS count=%u verified=1 new_directory=1\n",batch.plan.count);rc=0;goto done;
     }
-    saved=pt_render_file_new_allocated(argv[2],&doc.project,&o,NULL,NULL,&report,&detail,&allocator);
+    saved=invert_budget?pt_render_invert_file_new(argv[2],&doc.project,&o,NULL,NULL,&report,&detail,invert_budget,&allocator):pt_render_file_new_allocated(argv[2],&doc.project,&o,NULL,NULL,&report,&detail,&allocator);
     if(saved!=PT_RENDER_FILE_OK) {fprintf(stderr,"Render refused save_phase=%d render_result=%d; no destination replaced\n",saved,detail);goto done;}
     printf("RENDERED profile=IDEAL_BPM_Q32 pitch=PCM_RATE_PERIOD428 rate=%lu bits=%u tracks=%04x gain_q16=%lu lead_in=%u\n",
            (unsigned long)o.rate,o.bits,o.tracks,(unsigned long)o.gain_q16,o.include_lead_in);
     printf("WAV frames=%lu ticks=%lu clipped_values=%lu end=%s verified=1 new_file=1\n",(unsigned long)report.frames,
            (unsigned long)report.ticks,(unsigned long)report.clipped,report.end==PT_RENDER_F00?"F00":report.end==PT_RENDER_ROW_EXIT?"row-range-exit":"first-position-return");rc=0;goto done;
 usage:
-    fprintf(stderr,"Usage: PT24GRender INPUT NEW.wav [--pattern N] [--rate 44100|48000] [--bits 16|24] [--tracks HEX] [--gain 0..65536] [--lead-in] [--stems|--groups] [--from-row N --to-row N]\n");
-    fprintf(stderr,"Reference renderer; bounded classic-effect subset including finetune/E5. Instrument-only events and MIDI audio unsupported. See docs/REFERENCE_RENDERER.md. Default gain32768, 30-minute bound.\n");
+    fprintf(stderr,"Usage: PT24GRender INPUT NEW.wav [--pattern N] [--rate 44100|48000] [--bits 16|24] [--tracks HEX] [--gain 0..65536] [--lead-in] [--stems|--groups] [--from-row N --to-row N] [--invert-budget BYTES]\n");
+    fprintf(stderr,"Reference renderer; bounded classic-effect subset including finetune/E5. Use --invert-budget for the bounded whole-track mono8 EFx path; stems and Studio EFx remain unsupported. See docs/REFERENCE_RENDERER.md. Default gain32768, 30-minute bound.\n");
 done:
     pt_document_release(&doc);return rc;
 }

@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "scope": "shared030 bounded EFx CLI exact host WAV; no physical/audio acceptance",
+  "PT24GRender_sha256": "0ee141bcc5a706de81729d135af13d1545ddb66adf4b203595d29493aa7f9a9d",
+  "invert-cli_returncode": "0",
+  "exact_host_wav": true,
+  "reference_sha256": "dfe70d9001936439351e124f05881192d57282ba02543480591f67fc89a4d8ba",
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=333\tsndbuf_status=0",
+  "run_files_cleaned": true
+}

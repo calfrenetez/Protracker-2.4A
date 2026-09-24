@@ -4,6 +4,14 @@
 #include <string.h>
 #include "render_invert.h"
 #include "document.h"
+#ifdef __amigaos__
+/* Diagnostic failures must return to the harness, not open a fatal requester. */
+static void test_failure(const char *condition,unsigned line)
+{fprintf(stderr,"INVERT render FAIL: line=%u condition=%s\n",line,condition);exit(20);}
+#undef assert
+#define assert(condition) ((condition)?(void)0:test_failure(#condition,__LINE__))
+#endif
+
 struct state {unsigned calls,fail,live,sinks,cancel;size_t sample_bytes;uint64_t frames;};
 static void *allocate(void *ctx,size_t n){struct state *s=ctx;void *p;++s->calls;if(s->calls<=3)s->sample_bytes+=n;if(s->calls==s->fail)return NULL;p=malloc(n);if(p)++s->live;return p;}
 static void release(void *ctx,void *p){struct state *s=ctx;assert(s->live);--s->live;free(p);}

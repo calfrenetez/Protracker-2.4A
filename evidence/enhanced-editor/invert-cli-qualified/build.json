@@ -1,0 +1,39 @@
+{
+  "build": "full native build passed",
+  "binaries": {
+    "PT24GRender": {
+      "sha256": "0ee141bcc5a706de81729d135af13d1545ddb66adf4b203595d29493aa7f9a9d",
+      "bytes": 90780
+    }
+  },
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Isrc/core",
+    "-Ibuild/dev",
+    "-fbbb=-"
+  ],
+  "scope": "CLI EFx export; unrelated dirty editor build is not UI acceptance",
+  "compiler": "m68k-amigaos-gcc (GCC) 6.5.0b 20260807212032",
+  "compiler_sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+  "runtime_inputs": {
+    "ncrt0.o": "6fe4b6088899bd53efae1ea1e4783b7deab07b13f3d40cff7b46285907f19804",
+    "libnix20.a": "0731c54ad32272f5ab0d5ecd3f1f93d7aa4fc7c6ac0a5923eb26125633556e8c",
+    "libnixmain.a": "ad54158e95516aa6f3b04a8b3d835a48ecbaaea962cd178d5fb66995dcef19df",
+    "libnix.a": "d64619bc74933ac5312ef6db0f8d4cd62b3918f9f4a5805863e7d15536fcb144",
+    "libstubs.a": "55dbd0626cb472d89ab5d1bd234e6013df178f2cd3b83266bf4b82c68f1a79de",
+    "libamiga.a": "10d78b6d303a99677c0bf29a8e1653d62669f69f395691646393020325084021",
+    "libgcc.a": "8bed858c8a5797471c3bc130df341824121c5d0f0908345dfe6ce0ceccc3569b"
+  },
+  "host_suite": [
+    "Ran 155 tests in 335.803s"
+  ],
+  "make_test_exit": 0,
+  "make_renderer_exit": 0
+}

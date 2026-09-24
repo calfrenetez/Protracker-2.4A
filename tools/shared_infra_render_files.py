@@ -7,6 +7,7 @@ INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     group=parser.add_mutually_exclusive_group()
+    group.add_argument('--invert-cli',metavar='REFERENCE_WAV',help='Verify bounded EFx CLI WAV against host bytes')
     group.add_argument('--invert-render',action='store_true',help='Run bounded offline EFx PCM and failure checks')
     group.add_argument('--stem-cli',metavar='REFERENCE_DIRECTORY',help='Run two native stems and existing-directory refusal')
     group.add_argument('--render-cli',metavar='REFERENCE_WAV',help='Run one-row native renderer against an exact host reference')
@@ -111,6 +112,9 @@ def main():
         if args.amigus_discovery:
             cases=[('amigus-discovery','PTAmiGusDiscovery','AMIGUS DISCOVERY PASS:')]
             result['scope']='shared030 discovery-only native amigus.library probe; no reservation or MMIO'
+        if args.invert_cli:
+            cases=[('invert-cli','PT24GRender','WAV frames=')]
+            result['scope']='shared030 bounded EFx CLI exact host WAV; no physical/audio acceptance'
         if args.invert_render:
             cases=[('invert-render','PTInvertRenderTest','INVERT render PASS:')]
             result['scope']='shared030 offline EFx exact PCM and resource checks; no audio/physical acceptance'
@@ -121,7 +125,7 @@ def main():
                 result[binary+'_sha256']=hashlib.sha256((sub/binary).read_bytes()).hexdigest()
                 commands+=['CD '+guest.device+run.name+'/'+name,binary+' '+guest.device+run.name+'/'+name+('/sample.input' if args.sample_dispatch else '/donor.mod' if args.source_memory else '/module.mod' if args.mod_import else '/sample.input' if args.sample_import else '/master.mod' if args.mod_stream else '/master.ptg' if args.project_stream else '/sample.iff' if args.sample_svx else '/sample.raw' if args.sample_raw else '/sample.wav' if args.sample_wav else '/recent' if args.input_memory in ('recent','exec-recent') else '')+' >test.log','Echo $RC >test.rc']
             if args.invert_render:
-                commands=['FailAt 1','Stack 65536',guest.device+run.name+'/invert-render/PTInvertRenderTest >'+guest.device+run.name+'/invert-render/test.log','Echo $RC >'+guest.device+run.name+'/invert-render/test.rc']
+                commands=['FailAt 21','Stack 65536',guest.device+run.name+'/invert-render/PTInvertRenderTest >'+guest.device+run.name+'/invert-render/test.log','Echo $RC >'+guest.device+run.name+'/invert-render/test.rc']
             if args.source_memory:
                 from make_mod_sample_fixture import make
                 donor=make((ROOT/'evidence/baseline/mod.baseline').read_bytes())
@@ -136,6 +140,10 @@ def main():
                 sub=run/'pp20-import';(sub/'source.pp').write_bytes(packer.literal((ROOT/'evidence/baseline/mod.baseline').read_bytes()))
                 commands=['FailAt 21','Stack 65536','CD '+guest.device+run.name+'/pp20-import',
                           'PT24GConvert mod source.pp copy.mod >test.log','Echo $RC >test.rc']
+            if args.invert_cli:
+                sub=run/'invert-cli';shutil.copyfile(ROOT/'evidence/enhanced-editor/invert-ordering/invert_delay.mod',sub/'source.mod')
+                commands=['FailAt 21','Stack 65536','CD '+guest.device+run.name+'/invert-cli',
+                          'PT24GRender source.mod output.wav --invert-budget 100000 --gain 65536 >test.log','Echo $RC >test.rc']
             if args.render_cli:
                 sub=run/'render-cli';shutil.copyfile(ROOT/'evidence/baseline/mod.baseline',sub/'source.mod')
                 commands=['FailAt 21','Stack 65536','CD '+guest.device+run.name+'/render-cli',
@@ -147,7 +155,7 @@ def main():
                           command+' >test.log','Echo $RC >test.rc',command+' >repeat.log','Echo $RC >repeat.rc']
             commands+=['Echo done >'+guest.device+run.name+'/done']
             guest.launch.write_text('\n'.join(commands)+'\n');guest.start()
-            deadline=time.monotonic()+(60 if args.invert_render else 90)
+            deadline=time.monotonic()+(60 if args.invert_render else 180 if args.invert_cli else 90)
             while not (run/'done').exists():
                 if time.monotonic()>deadline:raise RuntimeError('Native file checks timed out; preserve owned run for recovery')
                 time.sleep(.2)
@@ -175,6 +183,12 @@ def main():
                 assert sorted(p.name for p in sub.iterdir())==['PT24GConvert','copy.mod','source.pp','test.log','test.rc']
                 result['exact_master_roundtrip']=True
                 result['fixture_sha256']=hashlib.sha256(expected).hexdigest()
+            if args.invert_cli:
+                sub=run/'invert-cli';expected=Path(args.invert_cli).read_bytes()
+                assert (sub/'output.wav').read_bytes()==expected
+                assert (sub/'source.mod').read_bytes()==(ROOT/'evidence/enhanced-editor/invert-ordering/invert_delay.mod').read_bytes()
+                assert sorted(p.name for p in sub.iterdir())==['PT24GRender','output.wav','source.mod','test.log','test.rc']
+                result['exact_host_wav']=True;result['reference_sha256']=hashlib.sha256(expected).hexdigest()
             if args.render_cli:
                 sub=run/'render-cli';expected=Path(args.render_cli).read_bytes()
                 assert (sub/'output.wav').read_bytes()==expected
@@ -205,7 +219,7 @@ def main():
                 result['donor_unchanged']=True
             result['passed']=True
         finally:
-            if finished and (args.source_memory or args.sample_dispatch or args.invert_render):
+            if finished and (args.source_memory or args.sample_dispatch or args.invert_render or args.invert_cli):
                 state=guest.command('GET_AUDIO_STATE')
                 finished=all('ch%d_dma=0'%i in state.split('\t') for i in range(4))
                 result['cleanup_audio']=state

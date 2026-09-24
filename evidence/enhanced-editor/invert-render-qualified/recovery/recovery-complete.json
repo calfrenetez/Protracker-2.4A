@@ -1,0 +1,7 @@
+{
+  "restart": "user approved; shared lifecycle stop/start passed",
+  "old_test_process_absent": true,
+  "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0",
+  "exact_owned_cleanup": true,
+  "failed_test_remains_failed": true
+}

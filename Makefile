@@ -43,4 +43,4 @@ fixture:
 
 renderer:
 	mkdir -p build/host
-	$(CC) -std=c99 -O2 -Wall -Wextra -Werror -Isrc/core tools/pt24g_render.c src/platform/stem_file.c src/core/stems.c src/platform/render_file.c src/core/render.c src/core/pitch.c src/core/timeline.c src/core/frame_clock.c src/core/flow.c src/core/voice.c src/core/document.c src/core/pp20.c src/core/project.c src/core/mod_project.c src/core/mod_inspect.c src/core/channels.c src/core/pcm.c -o build/host/PT24GRender
+	$(CC) -std=c99 -O2 -Wall -Wextra -Werror -Isrc/core tools/pt24g_render.c src/platform/render_invert_file.c src/core/render_invert.c src/core/invert_bank.c src/core/invert_sequence.c src/core/invert_pcm.c src/core/invert_loop.c src/platform/mod_import.c src/platform/project_import.c src/platform/pp20_import.c src/platform/stem_file.c src/core/stems.c src/platform/render_file.c src/core/render.c src/core/pitch.c src/core/timeline.c src/core/frame_clock.c src/core/flow.c src/core/voice.c src/core/document.c src/core/pp20.c src/core/project.c src/core/mod_project.c src/core/mod_inspect.c src/core/channels.c src/core/pcm.c -o build/host/PT24GRender

@@ -552,3 +552,27 @@ remain refused as sources; format/rate/slice constraints remain.
 Dev88 extends pinned-reference coverage for canonical nonlooping sources to
 9xx offset memory, E92 retriggers and a return handoff back to the original
 silent repeat. Each fixture retains a noncanonical first-word refusal mutant.
+
+## Explicit bounded EFx export
+
+`PT24GRender input.mod new.wav --invert-budget 100000` enables the new offline
+invert-loop path. The decimal byte limit covers additional private sample
+metadata and PCM; ordinary renderer/file state and the master document remain
+separate allocations under the caller's allocator. Use a larger explicit limit
+for larger samples. Insufficient memory fails without publishing output.
+
+This initial path requires all tracks, whole mono8 forward loops of at least
+four frames, and no interpolation/slices. It preserves master samples, mutates
+shared private sample copies between ticks, and reconstructs fresh copies for
+output verification. Existing files are never replaced. Partial-track selection,
+`--stems` and `--groups` with this option are refused. The native editor and
+queued Studio engine still use their existing effect subset; this command-line
+option does not enable EFx there. This is ideal-clock software rendering, not
+physical Paula/AmiGUS or analogue acceptance.
+
+Native shared030 run `render-files-1790249882268620000` passed this CLI path:
+28,800 stereo24 frames (36 ticks) from the delayed EFx fixture matched the host
+WAV byte for byte, including file header. The source was unchanged. Completion,
+DMA-off and exact owned cleanup passed; the window was explicitly released.
+Full native build and targeted sanitized export/refusal checks passed. Evidence:
+`enhanced-editor/invert-cli-qualified`. Physical performance/audio remains untested.

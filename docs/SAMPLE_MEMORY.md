@@ -685,3 +685,21 @@ Host coverage verifies initial promotion, true24 values, stop/edit/restart with
 new generation, stale-generation refusal and stop-before-owner-release cleanup.
 A bridge stopped before owner release can then be safely closed. This component
 adds no hardware output or physical-performance claim.
+
+## Editor stop-before-change guard points
+
+The editor now exposes a synchronous owner callback through
+`pt_editor_change_guard` / `pt_editor_prepare_change`. Pattern edits, channel/title
+changes, undo/redo, song-order mutations and sampler edits invoke it before their
+mutation call, including refused attempts. Disposal invokes it before releasing
+history or sample owners. Ordinary navigation does not stop through this hook.
+
+Native imports and sample bounce, Stop, new-song and document-load paths now invoke
+the same guard before mutation/replacement. Owners must install an idempotent
+session-closing callback and reinstall after editor initialization; initialization
+clears the hook. It must not reenter mutation. External callers bypassing these
+entry points remain responsible for calling prepare_change before modifying data.
+
+The callback is an integration boundary, not an enabled Studio backend. No native
+Studio session or device output is started by it. Host checks verify callback
+ordering against pre-edit note data, undo and disposal, and navigation preservation.

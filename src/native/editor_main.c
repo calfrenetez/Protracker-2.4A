@@ -85,6 +85,7 @@ static enum pt_edit_result load_sample(struct pt_editor *e,const char *path,int 
             result=pt_editor_source_load(e,bytes,(size_t)n);goto done;
         }
     }
+    pt_editor_prepare_change(e);
     result=raw?pt_sampler_import_raw(&e->sampler,e->project,&e->history,e->sample-1,bytes,(size_t)n,name,&e->raw_format):pt_sampler_import(&e->sampler,e->project,&e->history,e->sample-1,bytes,(size_t)n,name);
 done:
     pt_master_release(&master_memory,bytes);return result;
@@ -310,6 +311,7 @@ static void bounce_sample(struct conversion_ui *display,struct pt_paula *audio)
         if(options.row_range)snprintf(name,sizeof(name),"BOUNCE ROWS %02X-%02X",options.row_first,options.row_end-1);
         else if(options.pattern_only)snprintf(name,sizeof(name),"BOUNCE PATTERN %03u",options.pattern);
         else strcpy(name,"BOUNCE SONG");
+        pt_editor_prepare_change(e);
         result=pt_sampler_bounce(&e->sampler,e->project,&e->history,&options,name,render_progress,&ui,&report,&detail);
     }
     if(result==PT_EDIT_OK) {
@@ -448,7 +450,7 @@ int main(int argc,char **argv)
                 error=pt_paula_audition_progress(&audio,editor->project,editor->sample,856U>>editor->octave,conversion_progress,&conversion);
                 pt_editor_status(editor,error?error:"SAMPLE AUDITION - PAULA; STOP TO RELEASE");
             }
-            if(action==PT_UI_STOP) {pt_paula_stop(&audio);pt_editor_status(editor,"STOPPED - AUDIO RELEASED");}
+            if(action==PT_UI_STOP) {pt_editor_prepare_change(editor);pt_paula_stop(&audio);pt_editor_status(editor,"STOPPED - AUDIO RELEASED");}
             if(editor->history.revision!=revision && audio.started) {
                 if(audio.mode==2 || editor->sampler.generation!=generation)pt_paula_stop(&audio);
                 else {error=pt_paula_sync(&audio,editor->project);if(error)pt_editor_status(editor,error);}
@@ -518,6 +520,7 @@ int main(int argc,char **argv)
             }
             if(action==PT_UI_NEW) {
                 unsigned channels=editor->new_channels;
+                pt_editor_prepare_change(editor);
                 if(pt_document_new(&doc,channels,SIZE_MAX)==PT_PROJECT_OK) {
                     pt_paula_stop(&audio);pt_editor_dispose(editor);editor_init_memory(editor,&doc.project);editor->recent=&recent_projects;load_path[0]=0;
                     pt_editor_status(editor,"NEW SONG READY - EMPTY SAMPLE SLOTS");view_cache.valid=0;
@@ -538,6 +541,7 @@ int main(int argc,char **argv)
                     } else selected=pt_file_request(window,0,load_path,chosen_path,sizeof(chosen_path));
                     view_cache.valid=0;
                     if(selected==1) {
+                        pt_editor_prepare_change(editor);
                         if(load(&doc,chosen_path)) {
                             pt_paula_stop(&audio);pt_editor_dispose(editor);editor_init_memory(editor,&doc.project);editor->recent=&recent_projects;strcpy(load_path,chosen_path);
                             pt_editor_status(editor,"PROJECT LOADED");recent_success(editor,chosen_path);

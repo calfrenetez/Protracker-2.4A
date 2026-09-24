@@ -1,0 +1,7 @@
+EDITOR PASS: bank/wrap/scroll, guarded note and nibble edits, OFF, undo/redo, save state, discard confirmation, atomic block copy/paste/clear/transpose/clone, all-page planar render
+.EDITOR GUARD PASS: note edit and undo stop before mutation, navigation preserved, disposal guarded
+.
+----------------------------------------------------------------------
+Ran 2 tests in 11.546s
+
+OK

@@ -20,6 +20,8 @@ enum pt_editor_action {PT_UI_NONE,PT_UI_SAVE,PT_UI_QUIT,PT_UI_PLAY,PT_UI_PATTERN
 struct pt_editor_selection {unsigned active,marking,pattern,r0,r1,c0,c1,anchor_row,anchor_channel;};
 struct pt_editor {
     struct pt_project *project;
+    void (*before_change)(void *);
+    void *before_change_context;
     struct pt_pattern_history history;
     struct pt_sampler sampler;
     struct pt_song song;
@@ -63,6 +65,13 @@ int pt_editor_init(struct pt_editor *,struct pt_project *);
 /* Dispose before reinitializing or freeing a live editor. Releases editor-owned replacement arrays;
    the project must no longer be used. Release/destroy its document separately. */
 void pt_editor_dispose(struct pt_editor *);
+/* Owner-thread synchronous playback release hook. Called before editor project
+ * mutations and disposal (also on a refused mutation). Must be idempotent, must
+ * not reenter editor mutation, and its context must outlive dispose. Init clears
+ * the hook. Native/external mutations must call prepare_change themselves BEFORE
+ * changing/releasing project storage. No backend is started by this API. */
+void pt_editor_change_guard(struct pt_editor *,void (*)(void *),void *);
+void pt_editor_prepare_change(struct pt_editor *);
 void pt_editor_sample_all(struct pt_editor *);
 enum pt_edit_result pt_editor_source_load(struct pt_editor *,const uint8_t *,size_t);
 void pt_editor_wave_bounds(const struct pt_editor *,uint32_t *,uint32_t *);

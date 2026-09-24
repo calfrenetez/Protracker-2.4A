@@ -1,0 +1,5 @@
+{
+  "src/native/paula.c": "d630380bb753f16b9e767fd06e6f6b6070e2883cfe25de082764c5d2e790fa4c",
+  "src/core/paula_playback.h": "8e34a611bd81bf6519acc31710c81daff8f0b23d6c65682aa15d5001ed6ca68f",
+  "tests/paula_playback_test.c": "d2c577629896feb5d0d28e93f0022c9836ad72980daa674239b4b6aa015fe716"
+}

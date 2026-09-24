@@ -9,6 +9,7 @@
 #include "paula.h"
 #include "paula_cache.h"
 #include "paula_preview.h"
+#include "paula_playback.h"
 extern int pt_replay_start(void *,unsigned long,void *,unsigned long,void *);
 extern void pt_replay_stop(void);
 extern volatile uint32_t pt_replay_ticks;
@@ -19,22 +20,6 @@ extern volatile uint8_t pt_replay_order,pt_replay_speed,pt_replay_voices[],pt_re
 static unsigned be16(const uint8_t *p) {return ((unsigned)p[0]<<8)|p[1];}
 static uintptr_t be32(const uint8_t *p)
 {return ((uintptr_t)p[0]<<24)|((uintptr_t)p[1]<<16)|((uintptr_t)p[2]<<8)|p[3];}
-/* Playback represents mute/solo at the owned output stage. Names/groups and
-   dormant MIDI assignments do not alter Paula audio. Clear them in the private
-   replay snapshot only; strict disk export still refuses their loss. Panning,
-   routes, sample format and all other audio requirements remain validated. */
-static int playback_project(const struct pt_project *p,struct pt_project *copy)
-{
-    unsigned i;
-    if(pt_project_validate(p,NULL)!=PT_PROJECT_OK)return 0;
-    *copy=*p;copy->title[20]=0; /* Display text never changes classic replay audio. */
-    for(i=0;i<copy->channels.count;++i) {
-        copy->channels.track[i].muted=0;copy->channels.track[i].solo=0;
-        copy->channels.track[i].group=0;copy->channels.track[i].midi_channel=(uint8_t)(i+1);
-        memset(copy->channels.track[i].name,0,sizeof(copy->channels.track[i].name));
-    }
-    return 1;
-}
 static unsigned audible_mask(const struct pt_project *p)
 {
     unsigned i,mask=0;
@@ -82,9 +67,9 @@ const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned
 {
     struct pt_project playback;struct pt_mod_export_report report;struct pt_paula_cache_plan plan;size_t written,offset;unsigned i;UBYTE channels=15;
     const char *error="PLAY: OUT OF CHIP MEMORY";
-    if(mode>1 || position>=p->order_count || pattern>=p->pattern_count)return "PLAY: INVALID POSITION";
-    if(!playback_project(p,&playback) || pt_mod_export_analyse(&playback,&report)!=PT_PROJECT_OK || report.issues)
-        return "PLAY: REQUIRES CLASSIC FOUR-CHANNEL PAULA PROJECT";
+    if(!p || mode>1 || position>=p->order_count || pattern>=p->pattern_count)return "PLAY: INVALID POSITION";
+    error=pt_paula_playback_snapshot(p,&playback,&report);
+    if(error)return error;
     halt(a,1);
     if(!a->cache.allocate)pt_cache_init(&a->cache,NULL,chip_allocate,chip_release,AvailMem(MEMF_CHIP));
     if(a->cache_version==UINT64_MAX) {pt_paula_stop(a);return "PLAY: CACHE GENERATION EXHAUSTED";}
@@ -168,7 +153,7 @@ const char *pt_paula_sync(struct pt_paula *a,const struct pt_project *p)
     if(!p || !p->orders || p->order_count!=a->order_count || memcmp(p->orders,a->orders,p->order_count*sizeof(*p->orders))) {
         pt_paula_stop(a);return "STOPPED: SONG POSITIONS CHANGED - PRESS PLAY TO RESTART";
     }
-    if(!playback_project(p,&playback) || pt_mod_export_analyse(&playback,&report)!=PT_PROJECT_OK || report.issues || report.bytes!=a->source_bytes ||
+    if(pt_paula_playback_snapshot(p,&playback,&report) || report.bytes!=a->source_bytes ||
        (size_t)p->pattern_count*1024!=a->pattern_bytes ||
        pt_mod_export_direct(&playback,a->check,a->source_bytes,&n)!=PT_PROJECT_OK || n!=a->source_bytes) {
         pt_paula_stop(a);return "STOPPED: EDIT REQUIRES ENHANCED REPLAY BACKEND";

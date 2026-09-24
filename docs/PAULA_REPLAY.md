@@ -154,3 +154,15 @@ loops that collapse to one word or less are refused. Stereo uses separate derive
 triggered together; no master downmix occurs. Native
 assertions for a half-rate preview have been added; consult the checkpoint for
 whether those assertions have executed, rather than treating a build as proof.
+
+## Playback preflight messages (2026-09-24)
+
+Native Play/Pattern now uses the portable, master-preserving Paula snapshot
+preflight. Unavailable Studio, AmiGUS and MIDI playback is named explicitly.
+High-resolution/stereo/rate, slices and unsupported loop restrictions have
+specific messages pointing to preview/render where appropriate; MIDI audio is
+explicitly excluded from rendering. This does not enable any new backend or
+silently convert a master. Classic eligibility and private mute/solo/name/group
+normalization remain unchanged; strict disk export still checks saved metadata.
+The refusal happens before replacing existing Paula playback. Live synchronization
+retains the existing stop-on-incompatible-edit behavior. No screen layout change.

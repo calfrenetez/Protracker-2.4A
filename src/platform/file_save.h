@@ -14,4 +14,9 @@ enum pt_save_result pt_file_save_new_allocated(const char *,const void *,size_t,
  * Callback failure cleans only staging. No replacement of existing destination. */
 typedef int (*pt_file_generate)(void *,size_t,void *,size_t);
 enum pt_save_result pt_file_save_generated(const char *,size_t,pt_file_generate,void *,const struct pt_allocator *);
+/* Sequential producer replayed for complete readback verification. Producer
+ * returns1 only after emitting exactly total bytes. No retained sink pointers. */
+typedef int (*pt_file_sink)(void *,const void *,size_t);
+typedef int (*pt_file_produce)(void *,pt_file_sink,void *);
+enum pt_save_result pt_file_save_streamed(const char *,size_t,pt_file_produce,void *,const struct pt_allocator *);
 #endif

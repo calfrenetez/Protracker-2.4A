@@ -1,0 +1,8 @@
+SAMPLE WAV STREAM PASS: exact8/16/24 mono/stereo, master preserved, fixed workspace=11248, failure cleanup and no replacement
+.SAMPLE RAW STREAM PASS: 16 formats, exact bytes, master preserved, fixed workspace=11248 and no replacement
+.SAMPLE SVX STREAM PASS: exact metadata, loop and odd padding, master preserved, fixed workspace=11248
+.
+----------------------------------------------------------------------
+Ran 3 tests in 2.070s
+
+OK

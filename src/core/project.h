@@ -85,6 +85,13 @@ int pt_project_event_valid(const struct pt_project *,const struct pt_event *);
 enum pt_project_result pt_project_validate(const struct pt_project *, uint32_t *);
 enum pt_project_result pt_project_size(const struct pt_project *, size_t *);
 enum pt_project_result pt_project_encode(const struct pt_project *, uint8_t *, size_t, size_t *);
+/* Bounded synchronous serialization, byte-identical to encode. Validates before
+ * emitting; computes CRC in a first pass then emits in blocks <=1024 bytes.
+ * Source must remain immutable/alive. Sink returns1 on complete consumption;
+ * failure returns INVALID, may have emitted a prefix, leaves written unchanged.
+ * Caller must stage/verify before publishing. No allocation. */
+typedef int (*pt_project_sink)(void *,const uint8_t *,size_t);
+enum pt_project_result pt_project_stream(const struct pt_project *,pt_project_sink,void *,size_t *);
 enum pt_project_result pt_project_probe(const uint8_t *, size_t, struct pt_project_requirements *);
 enum pt_project_result pt_project_decode(const uint8_t *, size_t,
                                          const struct pt_project_storage *, struct pt_project *);

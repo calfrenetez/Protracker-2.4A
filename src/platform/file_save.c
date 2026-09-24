@@ -165,3 +165,45 @@ done:
     if(reader>=0)close(reader);
     abort_output(f);a->release(a->context,g);return result;
 }
+
+struct streamed_file {struct output_file file;size_t total,pos;int reader,verifying,failed;};
+static int stream_sink(void *context,const void *data,size_t n)
+{
+    struct streamed_file *s=context;const uint8_t *p=data;size_t at=0;
+    if(s->failed || (!data && n) || n>s->total-s->pos) {s->failed=1;return 0;}
+    while(at<n) {
+        size_t count=n-at,have=0;if(count>sizeof(s->file.buffer))count=sizeof(s->file.buffer);
+        if(s->verifying) {
+            while(have<count) {
+                long got=read_retry(s->reader,s->file.buffer+have,count-have);
+                if(got<=0) {s->failed=1;return 0;}have+=(size_t)got;
+            }
+            if(memcmp(s->file.buffer,p+at,count)) {s->failed=1;return 0;}
+        } else while(have<count) {
+            size_t done=write_bytes(&s->file,p+at+have,count-have);
+            if(!done) {s->failed=1;return 0;}have+=done;
+        }
+        at+=count;
+    }
+    s->pos+=n;return 1;
+}
+enum pt_save_result pt_file_save_streamed(const char *path,size_t total,
+    pt_file_produce produce,void *context,const struct pt_allocator *a)
+{
+    struct streamed_file *s;enum pt_save_result result;
+    if(!path || !*path || strlen(path)>1400 || !produce || !a || !a->allocate || !a->release)return PT_SAVE_INVALID;
+    s=a->allocate(a->context,sizeof(*s));if(!s)return PT_SAVE_MEMORY;
+    memset(s,0,sizeof(*s));s->file.destination=path;s->file.fd=s->reader=-1;s->total=total;
+    result=PT_SAVE_BEGIN;if(!begin(&s->file))goto done;
+    result=PT_SAVE_WRITE;if(produce(context,stream_sink,s)!=1 || s->failed || s->pos!=total)goto done;
+    result=PT_SAVE_FINISH;if(!finish(&s->file))goto done;
+    result=PT_SAVE_VERIFY;s->reader=open(s->file.temporary,O_RDONLY);if(s->reader<0)goto done;
+    s->pos=0;s->verifying=1;
+    if(produce(context,stream_sink,s)!=1 || s->failed || s->pos!=total || read_retry(s->reader,s->file.buffer,1)!=0)goto done;
+    {int rc=close(s->reader);s->reader=-1;if(rc)goto done;}
+    result=PT_SAVE_PUBLISH;if(!publish(&s->file))goto done;
+    result=PT_SAVE_OK;
+done:
+    if(s->reader>=0)close(s->reader);
+    abort_output(&s->file);a->release(a->context,s);return result;
+}

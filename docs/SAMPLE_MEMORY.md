@@ -979,7 +979,7 @@ exactly. Native sampler eligibility still refuses slices, finetune and unsupport
 loop/precision/channel/rate settings; export never converts the master.
 
 WAV, RAW and IFF sample export handlers now avoid whole encoded payload copies.
-Enhanced-project saving still uses whole-file encoding and remains separate work.
+Enhanced-project saving also uses bounded streaming, as described below.
 The synchronous source-lifetime and no-replace/readback/cleanup contract is the
 same for all three formats. Host encoder-equivalence and failure tests pass;
 native runtime evidence is recorded per milestone.
@@ -988,3 +988,23 @@ IFF streaming passes shared030 with11240-byte fixed workspace,11 tracked
 Fast/not-Chip allocations, zero owned bytes and clean staging. Exact metadata
 and BODY comparisons pass. Evidence: `evidence/enhanced-editor/exec-sample-svx-stream/`.
 No physical storage or visual UI acceptance is implied.
+
+## Bounded enhanced-project saving
+
+Native enhanced-project Save now uses `pt_project_file_save`. The allocation-free
+core serializer emits the unchanged version1 format in blocks of at most1024
+bytes, computing its CRC in a first pass. Orders/events, channel state, MIDI
+settings, sample masters at their declared precision, loops/slices and optional
+extensions are retained byte-for-byte against the original encoder.
+
+The platform owns one fixed-budget file workspace, runs serialization into
+staging, closes it, then serializes again against complete readback before
+no-replace publication. Short/overflow/failed producers and mismatches fail and
+clean staging. Source lifetime remains synchronous and immutable; no edits are
+processed during save. Dirty/saved and recents state changes still occur only
+after successful publication. No whole encoded project allocation is required.
+
+CRC and verification add sequential passes over the source; target performance
+remains a separate measurement. Core stack workspace is about1KiB in addition
+to fixed platform heap workspace. Host exact-format and failure checks pass;
+native runtime proof is recorded separately.

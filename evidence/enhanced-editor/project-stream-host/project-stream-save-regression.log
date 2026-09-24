@@ -1,0 +1,7 @@
+FILE SAVE MEMORY PASS: exact multi-block bytes, allocation refusal, existing destination and zero-length preservation
+FILE SAVE MEMORY PASS: exact multi-block bytes, allocation refusal, existing destination and zero-length preservation
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.783s
+
+OK

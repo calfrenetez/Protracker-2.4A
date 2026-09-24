@@ -19,6 +19,7 @@
 #include "../editor/view.h"
 #include "../platform/file_save.h"
 #include "../platform/sample_file.h"
+#include "../platform/project_file.h"
 #include "../platform/file_load.h"
 #include "pt_font.h"
 #include "paula.h"
@@ -137,15 +138,9 @@ static void save_svx(struct pt_editor *e,const char *path)
 }
 static void save(struct pt_editor *e,const char *path)
 {
-    size_t n,w;uint8_t *bytes;enum pt_save_result result;
+    enum pt_save_result result;
     if(!path) {pt_editor_status(e,"START WITH INPUT AND NEW_OUTPUT PATH TO ENABLE SAVE");return;}
-    if(pt_project_size(e->project,&n)!=PT_PROJECT_OK || !(bytes=pt_master_allocate(&master_memory,n))) {
-        pt_editor_status(e,"SAVE: INVALID PROJECT OR OUT OF MEMORY");return;
-    }
-    if(pt_project_encode(e->project,bytes,n,&w)!=PT_PROJECT_OK || w!=n) {
-        pt_master_release(&master_memory,bytes);pt_editor_status(e,"SAVE: ENCODE FAILED; CURRENT EDITS PRESERVED");return;
-    }
-    result=pt_file_save_new_allocated(path,bytes,n,&render_allocator);pt_master_release(&master_memory,bytes);
+    result=pt_project_file_save(path,e->project,&render_allocator);
     if(result==PT_SAVE_OK) {pt_editor_saved(e);recent_success(e,path);}
     else pt_editor_status(e,result==PT_SAVE_MEMORY?"SAVE: OUT OF MEMORY":result==PT_SAVE_PUBLISH?"SAVE REFUSED: DESTINATION EXISTS OR CANNOT BE PUBLISHED":"SAVE FAILED: CURRENT EDITS AND DESTINATION PRESERVED");
     printf("EDITOR SAVE result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);

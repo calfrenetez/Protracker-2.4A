@@ -232,6 +232,95 @@ enum pt_project_result pt_project_encode(const struct pt_project *p,uint8_t *out
     w32(out+20,checksum(out,n));*written=n;return PT_PROJECT_OK;
 }
 
+struct stream_writer {
+    pt_project_sink sink;void *context;size_t pos,used;uint32_t crc;uint8_t block[1024];
+};
+static int stream_bytes(struct stream_writer *w,const void *data,size_t n)
+{
+    const uint8_t *p=data;size_t i;unsigned j;
+    if(!w->sink) {
+        for(i=0;i<n;++i,++w->pos) {
+            w->crc^=w->pos>=20 && w->pos<24?0:p[i];
+            for(j=0;j<8;++j)w->crc=(w->crc>>1)^((w->crc&1)?0xedb88320UL:0);
+        }
+        return 1;
+    }
+    while(n) {
+        size_t take=sizeof(w->block)-w->used;if(take>n)take=n;
+        memcpy(w->block+w->used,p,take);w->used+=take;w->pos+=take;p+=take;n-=take;
+        if(w->used==sizeof(w->block)) {
+            if(w->sink(w->context,w->block,w->used)!=1)return 0;
+            w->used=0;
+        }
+    }
+    return 1;
+}
+static int stream_body(const struct pt_project *p,const size_t lengths[6],size_t total,
+    uint32_t caps,uint32_t crc,struct stream_writer *w)
+{
+    uint8_t q[64],zero[3]={0};unsigned k;size_t i,j;
+#define EMIT(data,bytes) do {if(!stream_bytes(w,data,bytes))return 0;}while(0)
+    memset(q,0,32);memcpy(q,magic,8);w16(q+8,1);w32(q+12,(uint32_t)total);
+    w32(q+16,caps);w32(q+20,crc);w32(q+24,6+p->extension_count);EMIT(q,32);
+    for(k=0;k<6;++k) {
+        memset(q,0,12);w32(q,tags[k]);w16(q+4,1);w16(q+6,1);w32(q+8,(uint32_t)lengths[k]);EMIT(q,12);
+        if(k==0) {
+            memset(q,0,44);memcpy(q,p->title,32);q[32]=p->channels.count;q[33]=p->channels.selected;
+            q[34]=p->speed;q[35]=p->mode;w16(q+36,p->bpm);w16(q+38,p->order_count);
+            w16(q+40,p->pattern_count);w16(q+42,p->sample_count);EMIT(q,44);
+        } else if(k==1)for(i=0;i<p->channels.count;++i) {
+            const struct pt_channel *c=&p->channels.track[i];
+            q[0]=c->route;q[1]=c->pan;q[2]=c->muted;q[3]=c->solo;q[4]=c->group;q[5]=c->midi_channel;
+            memcpy(q+6,c->name,16);EMIT(q,22);
+        } else if(k==2)for(i=0;i<p->order_count;++i) {w16(q,p->orders[i]);EMIT(q,2);}
+        else if(k==3)for(i=0;i<(size_t)p->pattern_count*64*p->channels.count;++i) {
+            const struct pt_event *e=&p->events[i];memset(q,0,12);q[0]=e->kind;q[1]=e->instrument;w16(q+2,e->pitch);
+            q[4]=e->effect;q[5]=e->parameter;q[6]=e->velocity;q[7]=e->flags;w16(q+8,e->slice);EMIT(q,12);
+        } else if(k==4)for(i=0;i<p->sample_count;++i) {
+            const struct pt_sample *sample=&p->samples[i];size_t count=(size_t)sample->pcm.frames*sample->pcm.channels;
+            unsigned width=sample->pcm.bits/8;size_t record=64+(size_t)sample->slice_count*4+count*width;
+            memset(q,0,64);memcpy(q,sample->name,32);w32(q+32,sample->pcm.rate);w32(q+36,sample->pcm.frames);
+            q[40]=sample->pcm.bits;q[41]=sample->pcm.channels;q[42]=sample->volume;q[43]=(uint8_t)sample->finetune;
+            q[44]=sample->loop;q[45]=sample->interpolation;w16(q+46,sample->slice_count);
+            w32(q+48,sample->loop_start);w32(q+52,sample->loop_end);w32(q+56,sample->crossfade);EMIT(q,64);
+            for(j=0;j<sample->slice_count;++j) {w32(q,sample->slices[j]);EMIT(q,4);}
+            for(j=0;j<count;++j) {
+                unsigned b;uint32_t value=(uint32_t)sample->pcm.data[j];
+                for(b=0;b<width;++b)q[b]=(uint8_t)(value>>(8*(width-1-b)));
+                EMIT(q,width);
+            }
+            EMIT(zero,pad(record));
+        } else {
+            EMIT(p->midi_input,64);
+            for(i=0;i<p->channels.count;++i) {EMIT(p->midi_output[i],64);}
+            w32(q,p->midi_flags);EMIT(q,4);
+        }
+        EMIT(zero,pad(lengths[k]));
+    }
+    for(i=0;i<p->extension_count;++i) {
+        const struct pt_extension *e=&p->extensions[i];memset(q,0,12);
+        w32(q,e->id);w16(q+4,e->version);w32(q+8,e->length);EMIT(q,12);
+        EMIT(e->data,e->length);EMIT(zero,pad(e->length));
+    }
+#undef EMIT
+    return 1;
+}
+enum pt_project_result pt_project_stream(const struct pt_project *p,pt_project_sink sink,void *context,size_t *written)
+{
+    size_t lengths[6],total;uint32_t caps,crc;struct stream_writer w;
+    enum pt_project_result r;
+    if(!sink || !written)return PT_PROJECT_INVALID;
+    r=sizes(p,lengths,&total);if(r!=PT_PROJECT_OK)return r;
+    /* written must not overwrite any part of the master after successful emit. */
+    if(source_alias(p,written,sizeof(*written)))return PT_PROJECT_ALIAS;
+    pt_project_validate(p,&caps);memset(&w,0,sizeof(w));w.crc=0xffffffffUL;
+    if(!stream_body(p,lengths,total,caps,0,&w) || w.pos!=total)return PT_PROJECT_INVALID;
+    crc=w.crc^0xffffffffUL;memset(&w,0,sizeof(w));w.sink=sink;w.context=context;
+    if(!stream_body(p,lengths,total,caps,crc,&w) || w.pos!=total ||
+       (w.used && sink(context,w.block,w.used)!=1))return PT_PROJECT_INVALID;
+    *written=total;return PT_PROJECT_OK;
+}
+
 struct view { const uint8_t *part[6];size_t length[6];struct pt_project p;struct pt_project_requirements need; };
 static enum pt_project_result scan(const uint8_t *data,size_t length,struct view *v)
 {

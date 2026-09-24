@@ -1,0 +1,17 @@
+{
+  "scope": "Full native build; runtime not run; includes unrelated display working tree",
+  "binaries": {
+    "PT24GEdit": {
+      "sha256": "80cbaccb278288b000bdb48311ef1fe60f98b97a010425043a0e541c22d7dd92",
+      "bytes": 226292
+    },
+    "PTProjectStreamTest": {
+      "sha256": "49e8382b2a72a61923c03380cece8cfd9ed0d08a29d50def8543298ee6589702",
+      "bytes": 53236
+    }
+  },
+  "latest_exec_fixture": {
+    "sha256": "8ebea0bcdb338916aa51c2b5b5cb38ef221732cbc73aade5f4fec13688647ccd",
+    "bytes": 55148
+  }
+}

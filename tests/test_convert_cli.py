@@ -50,6 +50,15 @@ class ConvertCLI(unittest.TestCase):
                 if mode=='mod':self.assertEqual(output.read_bytes(),data)
                 self.assertEqual(source.read_bytes(),data)
             self.assertFalse(list(d.glob('*.pttmp-*')))
+            # Unknown input is refused from bounded signature probes. Even a
+            # large sparse file must not consume an encoded input allocation.
+            unknown=d/'unknown.bin'
+            with unknown.open('wb') as f:
+                f.seek(64*1024*1024);f.write(b'\0')
+            result=subprocess.run([str(binary),'project',str(unknown),str(d/'refused.ptg')],capture_output=True,text=True)
+            self.assertEqual(result.returncode,20)
+            self.assertIn('peak=0',result.stdout)
+            self.assertFalse((d/'refused.ptg').exists())
 
             restored=d/'from-project.mod'
             result=subprocess.run([str(binary),'mod',str(d/'project.ptg'),str(restored)],capture_output=True,text=True,check=True)

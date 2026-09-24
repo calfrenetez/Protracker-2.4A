@@ -1294,3 +1294,15 @@ export, exact saved master PCM and CRC, project reopen, identical re-export
 and project save. Low sample bits remain intact throughout. Evidence is in
 evidence/enhanced-editor/stereo24-shared-qualified. This is native editor/file
 workflow acceptance, not live Studio/AmiGUS output or physical performance.
+
+## Unknown project inputs
+
+Native editor full-document loading and the converter now refuse unknown
+formats after bounded signature probes, rather than allocating an entire input
+just to reject it. Recognized MOD, packed MOD and enhanced projects retain the
+transactional bounded readers. Converter sanitizer tests verify an unsupported
+sparse file larger than64MiB has zero explicit allocation and produces no output;
+supported roundtrips and explicit16/24-to8-bit export remain valid. Full native
+build passes. No fresh native runtime/UI qualification is claimed for this small
+refusal change. The host converter target and round8 test now link the reader
+modules they use.

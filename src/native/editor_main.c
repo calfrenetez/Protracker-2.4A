@@ -26,7 +26,6 @@
 #include "../platform/mod_import.h"
 #include "../platform/project_import.h"
 #include "../platform/pp20_import.h"
-#include "../platform/file_load.h"
 #include "pt_font.h"
 #include "paula.h"
 #include "present.h"
@@ -70,13 +69,10 @@ static int editor_init_memory(struct pt_editor *e,struct pt_project *p)
 }
 static int load(struct pt_document *d,const char *path)
 {
-    size_t n;uint8_t *bytes;int ok;
     if(pt_pp20_file_candidate(path))return pt_pp20_file_load(d,path,64UL*1024*1024,SIZE_MAX)==PT_PROJECT_OK;
     if(pt_project_file_candidate(path))return pt_project_file_load(d,path,64UL*1024*1024,SIZE_MAX)==PT_PROJECT_OK;
     if(pt_mod_file_candidate(path))return pt_mod_file_load(d,path,64UL*1024*1024,SIZE_MAX)==PT_PROJECT_OK;
-    if(pt_file_load(path,64UL*1024*1024,&render_allocator,&bytes,&n)!=PT_LOAD_OK)return 0;
-    ok=pt_document_load(d,bytes,n,SIZE_MAX)==PT_PROJECT_OK;
-    pt_master_release(&master_memory,bytes);return ok;
+    return 0; /* Unsupported input never needs a whole-file allocation. */
 }
 static void save_sample(struct pt_editor *e,const char *path)
 {

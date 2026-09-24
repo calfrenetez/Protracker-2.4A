@@ -1,0 +1,6 @@
+{
+  "scope": "host sanitizer and pinned Amiga compile; no emulator or physical port",
+  "binary_sha256": "350af5f7e2498087cf2119acd18df01bde8dda6efa7f77345690f11e4a0c7135",
+  "compile_exit": 0,
+  "flags": "-std=c99 -m68000 -msoft-float -mcrt=nix20 -Os -Wall -Wextra -Werror"
+}

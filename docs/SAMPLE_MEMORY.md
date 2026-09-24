@@ -825,3 +825,8 @@ carrying odd frames across blocks; explicit finish reports at most one silent
 padding frame. No master degradation or device access. Host sanitizer and native
 compile checks pass; positive-card/runtime transport is still unfinished.
 See [transport review](AMIGUS_STUDIO_TRANSPORT.md) for pinned evidence and gaps.
+
+The staged `amigus_fifo` layer copies packed words into bounded caller-owned
+storage. Capacity stalls retain them, uncertain writes require confirmed reset,
+and reset clears odd-frame carry. Poll completion concerns host-buffer lifetime,
+not device silence. Host and compile checks pass; native MMIO remains unwired.

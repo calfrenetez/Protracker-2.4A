@@ -43,3 +43,30 @@ on every failure; do not equate host lease release with device silence.
 No emulator positive-card, physical Mini, interrupt ABI, underrun recovery,
 bus throughput or68030 real-time deadline is qualified. A24-bit DAC alone would
 not prove24-bit source playback; the pinned PCM implementation is the basis here.
+
+## Bounded staging adapter
+
+The pinned AHI interrupt source converts FIFO usage to bytes by multiplying by2;
+its hardware header defines2048 playback LONGs. Accessors use16-bit register
+reads and32-bit FIFO writes. These are source observations, not Mini bus-cycle
+qualification. The Mini register map still needs direct reconciliation before
+native MMIO is enabled; no fixed capacity is assumed by the new core.
+
+`amigus_fifo` now stages packed words behind a caller-supplied port. Port capacity
+is explicitly normalized to32-bit free words. Poll does at most one capacity
+query and one three-word write; less than three free words stalls. Busy submission
+preserves the existing block. All writes must have confirmed completion; uncertain
+partial writes or capacity faults block further writes until confirmed reset.
+A pending/failed reset preserves software state and refuses new audio. Reset also
+clears any odd-frame carry, preventing contamination of the next stream.
+
+Its submit/poll/cancel signatures match studio_consumer, but live integration is
+not yet wired. Poll completion means copied host data is no longer referenced;
+it does NOT mean the device FIFO is empty or silent. After final producer output,
+call explicit finish and poll its possible padding, then separately drain/stop
+the device. No padding is inserted between blocks. External code must stop the
+producer before cancellation and preserve exclusive port ownership.
+
+Host sanitizer tests cover fixed words, stalls, final padding, write uncertainty,
+capacity fault, pending/failed reset and successful recovery. Pinned Amiga
+compilation passes. No native port, card access, interrupts or performance proof.

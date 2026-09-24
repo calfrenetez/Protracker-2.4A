@@ -804,3 +804,15 @@ Host sanitizer tests cover busy retry, natural drain, submit failure, successful
 cancel, delayed/failed cancel, polling failure and eventual completion. Pinned
 Amiga compilation passes; this new consumer has not yet run in the emulator or on
 hardware. Callback compliance, native transport, DMA and deadlines remain open.
+
+The queued-song integration fixture now passes audio through the actual consumer
+adapter and a deterministic delayed transport: busy submissions and three-poll
+completion delays preserve exact reference frames at host block sizes1/17/256,
+including lead-in and pre-roll. A stopped real song releases source pins while
+failed cancellation retains its independent output copy until confirmation.
+The native queued fixture uses256-frame normal/lead-in/pre-roll plus a17-frame
+cancellation case; static fixture storage is not part of tracked allocation proof.
+
+Shared030 consumer and queued-chain fixtures pass with6 and25 tracked Fast/not-Chip
+allocations, zero final owned bytes and budget refusal. This supersedes the earlier
+consumer emulator gap only; device transport and physical acceptance remain open.

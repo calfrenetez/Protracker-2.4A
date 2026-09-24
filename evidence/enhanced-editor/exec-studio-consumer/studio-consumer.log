@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131251048 reserve=262144 flags=4
+STUDIO CONSUMER PASS: refusal retry, ordered drain, pending/error cancellation retains lease until confirmed completion
+EXEC MEMORY PASS: 6 Fast allocations, zero owned bytes, budget refusal without Chip fallback

@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131144816 reserve=262144 flags=4
+EDITOR STUDIO PASS: real pinned song stopped by edit/undo/dispose, navigation preserved, guard ownership and cleanup
+EXEC MEMORY PASS: 21 Fast allocations, zero owned bytes, budget refusal without Chip fallback

@@ -111,6 +111,7 @@ def main():
     inputs['PTStudioSongTest'] = ['tests/studio_song_test.c','src/core/studio_song.c','src/core/studio_plan.c','src/core/studio_mix.c',*render_sources]
     inputs['PTSamplerSongTest'] = ['tests/sampler_song_test.c','src/editor/sampler_song.c',*dict.fromkeys([*inputs['PTSamplerStudioTest'][1:],*inputs['PTStudioSongTest'][1:]])]
     inputs['PTEditorStudioTest'] = ['tests/editor_studio_test.c','src/editor/editor_studio.c',*dict.fromkeys([*inputs['PTSamplerSongTest'][1:],*inputs['PTSongTest'][1:]])]
+    inputs['PTExecEditorStudioTest'] = ['tests/native_exec_editor_studio_test.c',*inputs['PTEditorStudioTest'][1:]]
     inputs['PTExecStudioSongTest'] = ['tests/native_exec_studio_song_test.c',*inputs['PTStudioSongTest'][1:]]
     inputs['PTSequenceTest'] = ['tests/render_sequence_test.c','src/core/studio_plan.c','src/core/studio_mix.c',*render_sources]
     inputs['PTStudioPlanTest'] = ['tests/studio_plan_test.c','src/core/studio_plan.c','src/core/studio_mix.c',*render_sources]

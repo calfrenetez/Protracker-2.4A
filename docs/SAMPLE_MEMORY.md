@@ -718,3 +718,10 @@ not change native PLAY behavior or create a device queue. The native application
 has not instantiated it yet. Tests exercise actual pinned song playback through
 note edits, undo and disposal, prove navigation leaves the session running, and
 verify guard ownership plus zero remaining tracked allocations at final cleanup.
+
+The production-allocator editor/Studio fixture now passes on shared030. Its21
+tracked allocations (including the test editor object and callback-allocated
+project/sample/song state) were Fast/not-Chip, with zero final owned bytes and
+budget-refusal behavior preserved. Pinned playback stopped on note edit, undo and
+disposal; navigation preserved it. This is core editor/controller execution, not
+native UI interaction, live device audio, physical A1200 performance or AmiGUS.

@@ -771,3 +771,20 @@ both, with budget refusal retained. Queued song guest coverage uses256-frame
 blocks across normal/lead-in/pre-roll; host retains1/17/256. The native pump tests
 stalls and failure with a held lease. This is not device DMA, timing, physical
 A1200 or AmiGUS acceptance; consumer integration remains unfinished.
+
+## Editor ownership of queued Studio audio
+
+The optional `editor_studio` owner can now drive its sampler song through the
+bounded pump into a borrowed output queue. Editing, undo, editor disposal and
+explicit Stop close source pins, discard pending output and abort unleased queue
+blocks. A consumer-held block remains valid until the consumer releases it;
+queue close continues to refuse while leased. Natural song completion instead
+finishes production and drains the queue. Stop/detach must precede queue close,
+even after natural completion. Direct pull is refused while queued.
+
+This is a tested editor ownership API, not a wired native PLAY/device consumer.
+All calls remain serialized; Stop does not cancel a physical device transfer.
+
+Queued editor ownership also passes on shared030 with42 tracked Fast allocations,
+zero final owned bytes and budget refusal. Host editor/Studio suites pass. This
+still does not qualify a native PLAY route, device cancellation or hardware audio.

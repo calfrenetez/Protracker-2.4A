@@ -111,7 +111,7 @@ def main():
     inputs['PTStudioQueueTest'] = ['tests/studio_queue_test.c','src/core/studio_queue.c','src/core/pcm.c']
     inputs['PTStudioSongTest'] = ['tests/studio_song_test.c','src/core/studio_song.c','src/core/studio_plan.c','src/core/studio_mix.c',*render_sources]
     inputs['PTSamplerSongTest'] = ['tests/sampler_song_test.c','src/editor/sampler_song.c',*dict.fromkeys([*inputs['PTSamplerStudioTest'][1:],*inputs['PTStudioSongTest'][1:]])]
-    inputs['PTEditorStudioTest'] = ['tests/editor_studio_test.c','src/editor/editor_studio.c',*dict.fromkeys([*inputs['PTSamplerSongTest'][1:],*inputs['PTSongTest'][1:]])]
+    inputs['PTEditorStudioTest'] = ['tests/editor_studio_test.c','src/editor/editor_studio.c','src/core/studio_pump.c','src/core/studio_queue.c',*dict.fromkeys([*inputs['PTSamplerSongTest'][1:],*inputs['PTSongTest'][1:]])]
     inputs['PTExecEditorStudioTest'] = ['tests/native_exec_editor_studio_test.c',*inputs['PTEditorStudioTest'][1:]]
     inputs['PTStudioPumpTest'] = ['tests/studio_pump_test.c','src/core/studio_pump.c','src/core/studio_queue.c','src/core/pcm.c']
     inputs['PTQueuedSongTest'] = ['tests/studio_queued_song_test.c','src/core/studio_pump.c','src/core/studio_queue.c',*inputs['PTStudioSongTest'][1:]]

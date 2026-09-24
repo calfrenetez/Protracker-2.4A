@@ -1,0 +1,8 @@
+EDITOR RECENT loaded=10 prefix=ENVARC:ProTracker2.4G/recent
+EDITOR RECENT saved=1 count=10
+EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=104128
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO panel=5
+EDITOR REQUEST sample
+EDITOR SAMPLE result=1 revision=0 dirty=0 preview=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLE EDIT REFUSED - NO CHANGE panel=5

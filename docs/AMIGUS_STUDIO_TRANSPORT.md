@@ -211,3 +211,15 @@ or real library/card test is claimed for this milestone. Reproduce with
 Evidence: `evidence/enhanced-editor/amigus-reservation/`. Next: qualify the
 fake-library fixture on the shared030, then integrate access ownership with
 session reset/detach tests before considering any native device operations.
+
+Reservation/session integration now passes eight host sanitizer checks and
+shared030 execution: failed initial reset, Stop with a held buffer, and natural
+odd-frame completion retain library/card ownership through pending/failed reset.
+The caller detaches before ending its access lease and releasing the card. Every
+fake port callback asserts a live reservation. Three tracked Fast allocations,
+zero owned bytes; no real library callbacks/MMIO. The production native adapter
+is linked but not invoked. Build with `tools/build_amigus_reservation.py`; run
+the coordinated shared harness with `--studio-memory reserved-session`. Evidence:
+`evidence/enhanced-editor/exec-amigus-reserved-session/`. Native playback remains
+unwired; native absent-library runtime and verified device capabilities remain
+separate unfinished work.

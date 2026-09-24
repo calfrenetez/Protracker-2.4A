@@ -1,0 +1,4 @@
+EXEC MEMORY pool_limit=131245280 reserve=262144 flags=4
+amigus reservation lifecycle: PASS (fake library, no hardware)
+AMIGUS RESERVED SESSION PASS: failed open, leased Stop and natural tail retain card through reset recovery
+EXEC MEMORY PASS: 3 Fast allocations, zero owned bytes, budget refusal without Chip fallback

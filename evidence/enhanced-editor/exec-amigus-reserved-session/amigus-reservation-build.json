@@ -1,0 +1,47 @@
+{
+  "scope": "compile/link only; fixture uses fake library",
+  "compiler_sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fbbb=-",
+    "-Isrc/core",
+    "-Ivendor/amigus-sdk"
+  ],
+  "runtime_inputs": {
+    "ncrt0.o": "6fe4b6088899bd53efae1ea1e4783b7deab07b13f3d40cff7b46285907f19804",
+    "libnix20.a": "0731c54ad32272f5ab0d5ecd3f1f93d7aa4fc7c6ac0a5923eb26125633556e8c",
+    "libnixmain.a": "ad54158e95516aa6f3b04a8b3d835a48ecbaaea962cd178d5fb66995dcef19df",
+    "libnix.a": "d64619bc74933ac5312ef6db0f8d4cd62b3918f9f4a5805863e7d15536fcb144",
+    "libstubs.a": "55dbd0626cb472d89ab5d1bd234e6013df178f2cd3b83266bf4b82c68f1a79de",
+    "libamiga.a": "10d78b6d303a99677c0bf29a8e1653d62669f69f395691646393020325084021",
+    "libgcc.a": "8bed858c8a5797471c3bc130df341824121c5d0f0908345dfe6ce0ceccc3569b"
+  },
+  "inputs": {
+    "tests/native_exec_amigus_reserved_session_test.c": "2f099f55ed4dd69d9aa87149e51754334e7039dfa7763f87a645172fd8fb14fb",
+    "src/core/amigus_reservation.c": "0fc801cc0dbd8df00bfd7762546c86990f0b8fe59420fcb406077f1265f13cff",
+    "src/native/amigus_reservation.c": "875dfda534ca80e5ab5184cd6f486cacfbc7c5ae2679ce84a502db4ae88c6f56",
+    "src/core/amigus_session.c": "bb0662d046a05eb66e24922768022ff4120932db46543e731fb28fd84531b508",
+    "src/core/amigus_fifo.c": "5c14614a81f05cdac1820be120700b9d9ed29750d1e26cc621fb1f6fadad2cef",
+    "src/core/amigus_pcm_pack.c": "3464933782918baab33ee8e1ca76a7e959897284b98e24015625707cefdfcac9",
+    "src/core/studio_consumer.c": "fe871a573e0746205a80adf051252ec8429ffc013f00c20d4980f5d9ee324573",
+    "src/core/studio_queue.c": "31a58a5e514bce52606e875e642865db42676cec0dc84d3aae3c4b5e46b5b7e5",
+    "src/core/pcm.c": "c1dcea85e047413448bf5664dc551bcbd6d27e7cfd646fb8ea5049bbb780786b",
+    "tests/amigus_reserved_session_test.c": "a07a551986f4e4c22ed9b596a1a00c11a4af4397442aa07794764e8d95b3ad46",
+    "tests/native_exec_memory.h": "ce0f2b696ce7767c0da8a2a44ac7730bc207f81e4f6b86bfd172353989e664b9",
+    "src/native/master_memory.h": "ac898368849ec2d1892717d425b90c398da37a8799d536366a898e2e219e184a",
+    "tests/amigus_reservation_test.c": "06f075629d992f4b44ff4bc6212f3cc7f137407d326287318f4673abc9a768a3",
+    "src/core/amigus_reservation.h": "d12804c07371f323e719d49270bd7787c59a18d012a14ad1a9575e33118c2216",
+    "src/native/amigus_reservation.h": "ada2555428a3a5ca92f9929b697c3344402afdac0a8efcfbd44fd1e085029429",
+    "src/diagnostic/amigus_calls.h": "3d89320a926989c3cd80c420ca5e06cb7016b21a2beea630cdcab45c28dda94d"
+  },
+  "sdk_lock_sha256": "4925be2f6ce1db4bd683629a850c3045cea55aa089d1fbeea721eb9e0ac304d1",
+  "binary_sha256": "183731bc95ce9967b0c9267c6beeca006c194a8f67f4f8d20766761ce976b663",
+  "binary_bytes": 38760
+}

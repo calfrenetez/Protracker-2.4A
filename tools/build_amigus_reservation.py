@@ -12,14 +12,17 @@ def main():
     for name, expected in lock['files'].items():
         if digest(ROOT / 'vendor/amigus-sdk' / name) != expected:
             raise SystemExit('SDK input changed: ' + name)
-    inputs = ['tests/native_amigus_reservation_test.c',
+    inputs = ['tests/native_exec_amigus_reserved_session_test.c',
               'src/core/amigus_reservation.c', 'src/native/amigus_reservation.c']
-    headers = ['tests/amigus_reservation_test.c', 'src/core/amigus_reservation.h',
+    inputs += ['src/core/' + n + '.c' for n in ['amigus_session', 'amigus_fifo',
+               'amigus_pcm_pack', 'studio_consumer', 'studio_queue', 'pcm']]
+    headers = ['tests/amigus_reserved_session_test.c', 'tests/native_exec_memory.h',
+               'src/native/master_memory.h', 'tests/amigus_reservation_test.c', 'src/core/amigus_reservation.h',
                'src/native/amigus_reservation.h', 'src/diagnostic/amigus_calls.h']
     flags = ['-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os',
              '-Wall', '-Wextra', '-Werror', *compiler_safety_flags(cc),
              '-Isrc/core', '-Ivendor/amigus-sdk']
-    out = ROOT / 'build/dev/PTAmiGusReservationTest'
+    out = ROOT / 'build/dev/PTExecAmiGusReservedSessionTest'
     out.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run([cc, *flags, *inputs, '-o', str(out)], cwd=ROOT, check=True)
     report = {'scope': 'compile/link only; fixture uses fake library',

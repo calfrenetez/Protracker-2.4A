@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Bounded donor UI regression; reserve shared030/DevBench before running."""
+import argparse
 import fcntl
+import subprocess
 import sys
 from make_mod_sample_fixture import make
 from make_pp20_fixture import literal
@@ -13,6 +15,9 @@ from build_diagnostic import ROOT,digest
 
 
 def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--build-dir',type=Path,default=ROOT/'build/dev')
+    args=parser.parse_args()
     infra=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
     sys.path.insert(0,str(infra/'scripts'))
     from shared_guest import Guest
@@ -20,8 +25,8 @@ def main():
     fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
     out=ROOT/'build/dev'/('source-shared-'+str(time.time_ns()));out.mkdir()
     guest=Guest(infra,out);share=guest.share;launch=guest.launch
-    run=share/out.name;run.mkdir();finished=False
-    for name in ['PT24GEdit','PTSourceTest']:shutil.copyfile(ROOT/'build/dev'/name,run/name)
+    run=share/out.name;run.mkdir();finished=False;launched=False;requests=0
+    for name in ['PT24GEdit','PTSourceTest']:shutil.copyfile(args.build_dir/name,run/name)
     shutil.copyfile(ROOT/'evidence/baseline/mod.baseline',run/'input.mod')
     baseline=(run/'input.mod').read_bytes();donor=make(baseline);(run/'donor.mod').write_bytes(donor);(run/'donor.pp').write_bytes(literal(donor))
     bad=bytearray(literal(donor));bad[4]=1;(run/'bad.pp').write_bytes(bad)
@@ -49,6 +54,9 @@ def main():
         offset=key(0x37 if kind=='mod' else 0x28,control=kind=='mod',shift=kind=='mod',ack=False)
         wait(lambda:('EDITOR REQUEST '+kind) in log()[offset:]);time.sleep(.8)
     def filename(text):
+        nonlocal requests
+        requests+=1
+        emu.command('SCREENSHOT',out/('request-%02d-before.png'%requests))
         keys=dict(zip('abcdefghijklmnopqrstuvwxyz',[0x20,0x35,0x33,0x22,0x12,0x23,0x24,0x25,0x17,0x26,0x27,0x28,0x37,0x36,0x18,0x19,0x10,0x13,0x21,0x14,0x16,0x34,0x11,0x32,0x15,0x31]));keys.update({'.':0x39,'/':0x3a,'-':0x0b,':':0x29});keys.update({str(i):i for i in range(1,10)});keys['0']=0x0a
         text=(guest.device+run.name+'/'+text).lower()
         emu.command('SEND_KEY',0x60,1)
@@ -59,6 +67,7 @@ def main():
             try:emu.tap(keys[ch])
             finally:
                 if ch==':':emu.command('SEND_KEY',0x60,0)
+        emu.command('SCREENSHOT',out/('request-%02d-filled.png'%requests))
     def capture(name):emu.command('SCREENSHOT',out/name)
     def audio_off():
         state=emu.command('GET_AUDIO_STATE');assert all('ch%d_dma=0'%i in state.split('\t') for i in range(4));return state
@@ -73,17 +82,28 @@ def main():
             if data[pos:pos+4]==b'SAMP':return data[pos+12:pos+12+size]
             pos+=12+size+(-size%4)
         raise AssertionError('Missing sample chunk')
+    def execute(script):
+        reply=subprocess.run([str(infra/'.venv/bin/python'),str(infra/'scripts/mcp-call.py'),
+            'amiga_run_script',json.dumps({'script':'Execute '+guest.device+run.name+'/'+script,'timeout':5})],
+            capture_output=True,text=True,timeout=20)
+        if reply.returncode or '[OK]' not in reply.stdout:raise RuntimeError('Environment setup/restore failed')
+    (run/'restore-env').write_text('\n'.join(['CD '+guest.device+run.name,
+        'If EXISTS old-recent-env','Copy old-recent-env ENV:PT24G_RECENT_PREFIX','Else',
+        'Delete ENV:PT24G_RECENT_PREFIX','EndIf',
+        'If EXISTS ENV:PT24G_RECENT_PREFIX','Copy ENV:PT24G_RECENT_PREFIX restored-recent-env','EndIf'])+'\n')
+    (run/'setup-env').write_text('\n'.join(['CD '+guest.device+run.name,
+        'If EXISTS ENV:PT24G_RECENT_PREFIX','Copy ENV:PT24G_RECENT_PREFIX old-recent-env','EndIf',
+        'SetEnv PT24G_RECENT_PREFIX '+guest.device+run.name+'/recent',
+        'Copy ENV:PT24G_RECENT_PREFIX active-recent-env'])+'\n')
     try:
+        execute('setup-env')
+        assert (run/'active-recent-env').read_bytes()==(guest.device+run.name+'/recent').encode(), 'Recent prefix did not match before launch'
         launch.write_text('\n'.join(['FailAt 21','Stack 65536','CD '+guest.device+run.name,
-            'If EXISTS ENV:PT24G_RECENT_PREFIX','Copy ENV:PT24G_RECENT_PREFIX old-recent-env','EndIf',
-            'SetEnv PT24G_RECENT_PREFIX '+guest.device+run.name+'/recent',
             'PTSourceTest donor.mod >source.log','Echo $RC >source.rc',
             'PT24GEdit input.mod saved.ptg >editor.log','Echo $RC >editor.rc',
             'PT24GEdit saved.ptg reopened.ptg >reopened.log','Echo $RC >reopened.rc',
-            'If EXISTS old-recent-env','Copy old-recent-env ENV:PT24G_RECENT_PREFIX','Else',
-            'Delete ENV:PT24G_RECENT_PREFIX','EndIf',
-            'If EXISTS ENV:PT24G_RECENT_PREFIX','Copy ENV:PT24G_RECENT_PREFIX restored-recent-env','EndIf','Echo done >done'])+'\n')
-        guest.start()
+            'Execute restore-env','Echo done >done'])+'\n')
+        launched=True;guest.start()
         frame('status=READY -');assert all((run/(n+'.rc')).read_text().strip()=='0' for n in ['source'])
         key(0x28,True);request('sample');filename('donor.pp');key(0x44);frame('revision=0 dirty=0 status=MOD SOURCE READY')
         capture('01-packed-mod-source.png')
@@ -124,6 +144,23 @@ def main():
         for n in ['donor.mod','donor.pp','saved.ptg','reopened.ptg','exact.mod']:shutil.copyfile(run/n,out/n)
         print('PASS: native MOD/PP20 source preview, selected instrument import, exact metadata/PCM, song preservation, undo and reopen')
     finally:
+        if not launched:
+            execute('restore-env')
+        # Normal app cancellation/exit only; never reset/relaunch after failure.
+        if launched and not (run/'done').exists():
+            for stem in ['editor','reopened']:
+                for _ in range(5):
+                    if (run/(stem+'.rc')).exists():break
+                    path=run/(stem+'.log')
+                    if not path.exists() or 'EDITOR FRAME' not in path.read_text():break
+                    emu.tap(0x45);time.sleep(1)
+            end=time.monotonic()+5
+            while not (run/'done').exists() and time.monotonic()<end:time.sleep(.1)
+        if (run/'done').exists():
+            previous,restored=run/'old-recent-env',run/'restored-recent-env'
+            restored_ok=previous.exists()==restored.exists() and (not previous.exists() or previous.read_bytes()==restored.read_bytes())
+            state=audio_off()
+            (out/'exit.json').write_text(json.dumps({'done':True,'recents_restored':restored_ok,'audio':state},indent=2)+'\n')
         for name in ['source.log','editor.log','reopened.log']:
             if (run/name).exists():shutil.copyfile(run/name,out/name)
         if finished:

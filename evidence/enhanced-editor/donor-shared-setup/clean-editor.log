@@ -1,0 +1,9 @@
+EDITOR RECENT loaded=0 prefix=Dev:Tests/source-shared-1790244483007640000/recent
+EDITOR RECENT saved=1 count=1
+EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=104128
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO panel=5
+EDITOR REQUEST sample
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLE FILE REQUEST CANCELLED - EDITS PRESERVED panel=5
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SETTINGS CLOSED panel=0
+EDITOR EXIT clean

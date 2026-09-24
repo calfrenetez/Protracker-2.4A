@@ -1,0 +1,16 @@
+{
+  "source_commit": "b184a93",
+  "build_exit": 0,
+  "compiler_sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+  "binaries": {
+    "PT24GEdit": {
+      "sha256": "e9c6af1231e1347e2bd7716826395f4bca5d49dd93bedf1e914f281e16fbdf56",
+      "bytes": 238568
+    },
+    "PTSourceTest": {
+      "sha256": "b2839945e7e78c68c06b7664148503bf08053c828f6a7baf010ec4b411629faa",
+      "bytes": 143240
+    }
+  },
+  "dirty_display_excluded": true
+}

@@ -1,0 +1,20 @@
+SYNC MEMORY PASS: one full immutable export plus two metadata/pattern prefixes; no duplicate sample comparison payload
+SCOPE/DMA PASS: enabled hardware channels and time-varying sample preview
+REPLAY initial ticks=40 row=5 periods=428,339,285,214
+PLAY REFUSAL PASS: Studio/AmiGUS/MIDI/24-bit requests preserve active replay, cache ownership and masters
+CHANNEL AUDIO PASS: muted start, live unmute, solo, shared solo, mute wins, immutable notes/samples, strict export refusal
+CHANNEL DETAILS AUDIO PASS: saved names/groups/MIDI assignment preserve Paula replay, strict export refuses metadata, enhanced pan still refused
+TITLE AUDIO PASS: long titles preserve playback and source metadata; strict export remains lossless
+PREVIEW PCM state active=1 ticks=7 period=428 bytes=6
+PREVIEW LOOP PASS: derived loop word alignment preserves master endpoints
+PREVIEW RATE PASS: filtered derived half-rate preview preserves true24 master
+PREVIEW PCM PASS: 24-bit master auditions via rounded/padded 8-bit Chip copy without changing master bytes or precision
+PREVIEW CANCEL PASS: cancelled staging never starts or replaces playback
+PREVIEW STEREO PASS: separate left/right Chip copies preserve interleaved true24 master
+REPLAY effects speed/tempo/volume/cut observed mask=15 ticks=16
+SONG AUDIO PASS: position changes stop stale replay; restart uses the new order list
+CACHE PASS: independent Chip samples, Fast metadata, unused payload omitted, Chip/Fast placement, new instrument and changed master stop/rebuild
+CACHE REUSE PASS: restart reuses allocation, refreshes EF-mutated/master-edited bytes and explicit stop releases cache
+CACHE PRESSURE PASS: two partial allocation failures release Chip buffers, preserve source and permit restart
+CIA fallback execution NOT RUN: Workbench already owns CIAA timer B; existing vector preserved
+PAULA PASS: playback periods, busy audio refusal, DMA stop, immutable project, repeated restart, live edit, audition, speed/tempo/volume/cut, unsupported refusal, owned empty-sample DMA, CIA exhaustion and unrelated-vector preservation

@@ -11,6 +11,7 @@
 #include "paula_preview.h"
 #include "paula_playback.h"
 #include "paula_memory.h"
+#include "paula_sync.h"
 extern int pt_replay_start(void *,unsigned long,void *,unsigned long,void *);
 extern void pt_replay_stop(void);
 extern volatile uint32_t pt_replay_ticks;
@@ -76,8 +77,7 @@ const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned
     pt_master_memory_init(&a->memory);
     error="PLAY: OUT OF REPLAY WORKSPACE MEMORY";
     a->staging=pt_master_allocate(&a->memory,a->source_bytes);
-    a->check=pt_master_allocate(&a->memory,a->source_bytes);
-    if(!a->staging || !a->check)goto failed;
+    if(!a->staging)goto failed;
     if(pt_mod_export_direct(&playback,a->staging,a->source_bytes,&written)!=PT_PROJECT_OK || written!=a->source_bytes) {
         error="PLAY: SNAPSHOT ENCODE FAILED";goto failed;
     }
@@ -86,7 +86,8 @@ const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned
     a->bytes=plan.mod.sample_offset;a->cached_instruments=plan.instruments;
     error="PLAY: OUT OF REPLAY WORKSPACE MEMORY";
     a->data=pt_master_allocate(&a->memory,a->bytes);
-    if(!a->data)goto failed;
+    a->check=pt_master_allocate(&a->memory,a->bytes);
+    if(!a->data || !a->check)goto failed;
     memcpy(a->data,a->staging,a->bytes);
     error="PLAY: OUT OF CHIP MEMORY";
     a->silence=pt_paula_chip_allocate(NULL,2);
@@ -151,18 +152,17 @@ failed:
 }
 const char *pt_paula_sync(struct pt_paula *a,const struct pt_project *p)
 {
-    struct pt_project playback;struct pt_mod_export_report report;size_t n,offset;
+    struct pt_project playback;struct pt_mod_export_report report;size_t offset;
     if(!a->started)return NULL;
     if(!p || !p->orders || p->order_count!=a->order_count || memcmp(p->orders,a->orders,p->order_count*sizeof(*p->orders))) {
         pt_paula_stop(a);return "STOPPED: SONG POSITIONS CHANGED - PRESS PLAY TO RESTART";
     }
     if(pt_paula_playback_snapshot(p,&playback,&report) || report.bytes!=a->source_bytes ||
-       (size_t)p->pattern_count*1024!=a->pattern_bytes ||
-       pt_mod_export_direct(&playback,a->check,a->source_bytes,&n)!=PT_PROJECT_OK || n!=a->source_bytes) {
+       (size_t)p->pattern_count*1024!=a->pattern_bytes) {
         pt_paula_stop(a);return "STOPPED: EDIT REQUIRES ENHANCED REPLAY BACKEND";
     }
     /* Compare with immutable export, not EFx-mutated Chip playback bytes. */
-    if(!pt_paula_cache_compatible(a->staging,a->check,a->source_bytes)) {
+    if(!pt_paula_sync_prepare(&playback,a->staging,a->source_bytes,a->check,a->bytes)) {
         pt_paula_stop(a);return "STOPPED: SAMPLE CACHE CHANGED - PRESS PLAY TO REBUILD";
     }
     /* Publish only changed rows, with short interrupt exclusion. Do not copy

@@ -1245,3 +1245,20 @@ allocations. Fragmentation can still make AllocMem fail. Host sanitizer tests
 exercise exact reserve boundaries, changing free memory, allocation failure,
 eviction, pinned data preservation and complete release. Emulator and physical
 acceptance of the changed native bridge are tracked separately in evidence.
+
+### Bounded Paula live-sync comparison
+
+Paula now retains one immutable full classic export plus two header/pattern
+prefixes (active replay and unpublished row staging). The former second full
+export is removed: `pt_paula_sync_prepare` streams direct MOD bytes in bounded
+blocks, comparing sample headers and all sample payload bytes against the
+immutable export. It stores only the prefix and checks the instrument working
+set before any row is published. A mismatch stops replay/requires rebuild, as
+before. EFx mutations remain isolated in private Chip playback copies.
+
+This saves exactly the encoded sample payload size from the replay allocator,
+including unused project samples; it does not remove the remaining immutable
+snapshot. Sync still examines the master PCM synchronously, so no reduced CPU
+cost or physical performance claim is implied. Input must remain stable during
+this synchronous operation. Failed preparation may change only unpublished row
+staging; the native caller publishes rows solely after complete success.

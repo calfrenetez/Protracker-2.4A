@@ -37,6 +37,8 @@ int main(int argc,char **argv)
     CHECK(pt_mod_export_analyse(&doc.project,&report)==PT_PROJECT_OK && !report.issues);
     CHECK(!pt_paula_play(&a,&doc.project,0,0,0));Delay(20);pt_paula_poll(&a,&state);
     CHECK(state.active && state.ticks>=6 && state.period[0]==428 && state.period[1]==339 && state.volume[0]==24);
+    CHECK(a.memory.used==a.source_bytes+2*a.bytes+3*sizeof(size_t));
+    puts("SYNC MEMORY PASS: one full immutable export plus two metadata/pattern prefixes; no duplicate sample comparison payload");
     CHECK((*(volatile UWORD *)0xdff002 & 0x20f)==0x20f);
     CHECK((*(volatile UWORD *)0xdff010 & 0xff)==0);
     {struct pt_playback previous=state;unsigned changed=0;

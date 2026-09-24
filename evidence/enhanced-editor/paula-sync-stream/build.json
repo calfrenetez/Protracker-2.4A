@@ -1,0 +1,34 @@
+{
+  "compiler_sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Isrc/core",
+    "-Ibuild/dev",
+    "-fbbb=-"
+  ],
+  "binaries": {
+    "PTPaulaTest": {
+      "sha256": "010c93e5838f955d14f3a60f2fc716c1cdc5c31115c51bf00ce8089d96952f09",
+      "bytes": 115752
+    },
+    "PT24GEdit": {
+      "sha256": "c6c2c0ce649708ce31b3753af97e1e322a206480a87e077181dfbcbf67d8dfdf",
+      "bytes": 242988
+    }
+  },
+  "sources": {
+    "src/core/mod_project.c": "f62e01a5b7a6b455ed94704d9785abb5eaf923549d440e20f4133f84c7f85ea4",
+    "src/core/paula_sync.h": "684d7ebaba54736bea2e6d259a91c080b74189fa3351e13ff33a02a470077858",
+    "src/native/paula.c": "30b1a8e688d281c4991ab65b54016119d964265038e76e95e57c5d67cadd18cd",
+    "src/native/paula_memory.h": "c547e70bfb300a25b737eeb16f3ac83a65ef20b1a0c6e42d5564cd2e700f098b",
+    "tests/native_paula_test.c": "8e4a6ecf951c07234aa6a8ce7b39906f512608832235c6aa4d3b7211a9c09394"
+  },
+  "note": "Native build exit 0. Full editor includes preserved unrelated display work; no UI acceptance."
+}

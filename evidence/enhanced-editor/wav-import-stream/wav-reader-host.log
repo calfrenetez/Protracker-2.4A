@@ -1,0 +1,6 @@
+WAV READER PASS: bounded metadata reads, data-before-fmt, odd unknown chunk, truncation, duplicate fmt, tail policy and failed-read output preservation
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.690s
+
+OK

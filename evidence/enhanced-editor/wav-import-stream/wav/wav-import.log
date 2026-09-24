@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131171944 reserve=262144 flags=4
+WAV IMPORT STREAM PASS: 6 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+EXEC MEMORY PASS: 60 Fast allocations, zero owned bytes, budget refusal without Chip fallback

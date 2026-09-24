@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131172440 reserve=262144 flags=4
+RAW IMPORT STREAM PASS: 16 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+EXEC MEMORY PASS: 160 Fast allocations, zero owned bytes, budget refusal without Chip fallback

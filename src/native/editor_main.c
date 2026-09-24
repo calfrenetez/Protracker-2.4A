@@ -83,6 +83,11 @@ static enum pt_edit_result load_sample(struct pt_editor *e,const char *path,int 
         pt_editor_prepare_change(e);
         return pt_raw_file_import(path,64UL*1024*1024,&e->sampler,e->project,&e->history,e->sample-1,name,&e->raw_format);
     }
+    if(!source_only && pt_wav_file_candidate(path)) {
+        for(part=path;*part;++part)if(*part=='/' || *part==':')name=part+1;
+        pt_editor_prepare_change(e);
+        return pt_wav_file_import(path,64UL*1024*1024,&e->sampler,e->project,&e->history,e->sample-1,name);
+    }
     loaded=pt_file_load(path,64UL*1024*1024,&render_allocator,&bytes,&n);
     if(loaded!=PT_LOAD_OK)return loaded==PT_LOAD_MEMORY?PT_EDIT_CAPACITY:PT_EDIT_INVALID;
     if(!n)goto done;

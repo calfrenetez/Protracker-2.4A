@@ -1,0 +1,9 @@
+RAW IMPORT STREAM PASS: 16 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+RAW IMPORT STREAM PASS: 16 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+.WAV IMPORT STREAM PASS: 6 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+WAV IMPORT STREAM PASS: 6 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+.
+----------------------------------------------------------------------
+Ran 2 tests in 11.274s
+
+OK

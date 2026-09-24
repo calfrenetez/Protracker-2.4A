@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 streamed sample import and Exec Fast allocator",
+  "PTExecWavImportTest_sha256": "a774155a16ae7f445387b7a80c3d7a1d7baa3c368fd7a32dbc4c94597b8ffa78",
+  "wav-import_returncode": "0",
+  "sample_staging_clean": true,
+  "run_files_cleaned": true
+}

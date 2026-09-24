@@ -1069,3 +1069,26 @@ fixed7164-byte native file workspace;6 and12 Fast/not-Chip allocations respectiv
 zero owned bytes, no staging left, exact cleanup and explicit release. Evidence
 `exec-project-stream/` and `exec-mod-stream/`; earlier identity refusal preserved.
 This qualifies these file/allocator fixtures, not visual editor or physical I/O.
+
+## Bounded WAV sample import
+
+Native WAV import now sniffs only the12-byte RIFF/WAVE identity, then uses
+`pt_wav_file_import`. The same core WAV inspector serves memory and positional
+readers; metadata reads are at most16 bytes, with the existing chunk/rate/format/
+frame-alignment/duplicate/padding acceptance rules. Unknown chunks are skipped.
+Six8/16/24-bit mono/stereo formats decode via3072-byte blocks directly into the
+unpublished sampler master. WAV8 is unsigned;16/24 remain exact signed values.
+The full encoded file is never allocated. File length/EOF and close are checked
+before commit. Undo and failed-import preservation use the existing transaction.
+WAV embedded loop metadata remains ignored as before; this adds no new formats.
+
+RAW uses the same reader, now rechecking complete file length before close.
+Both paths require a stable input file for the synchronous operation; concurrent
+same-length content edits are not promised snapshot semantics. Host sanitized
+format/undo/refusal tests and reader edge cases pass; full native build passes.
+IFF and module/PP20 inputs remain whole-file and are separate remaining work.
+
+RAW/WAV import fixtures pass shared030 with160/60 production Fast allocations,
+zero owned bytes, budget refusal without Chip fallback, exact cleanup and
+explicit release. Evidence: `evidence/enhanced-editor/wav-import-stream/`.
+Native handler wiring is compiled; visual UI/physical I/O remain separate.

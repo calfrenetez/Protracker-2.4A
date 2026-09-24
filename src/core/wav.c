@@ -12,14 +12,15 @@ static int overlaps(const void *a, size_t na, const void *b, size_t nb)
     if (na > UINTPTR_MAX - x || nb > UINTPTR_MAX - y) return 1;
     return x < y + nb && y < x + na;
 }
-enum pt_wav_result pt_wav_inspect(const uint8_t *data, size_t length, struct pt_wav_info *out)
+enum pt_wav_result pt_wav_inspect_reader(pt_wav_read read,void *context,size_t length,struct pt_wav_info *out)
 {
-    struct pt_wav_info info = {0};
+    struct pt_wav_info info = {0};uint8_t data[16];
     size_t end, pos = 12;
     unsigned int chunks = 0, fmt = 0, audio = 0;
     uint32_t align = 0;
-    if (!data || !out) return PT_WAV_INVALID;
+    if (!read || !out) return PT_WAV_INVALID;
     if (length < 12) return PT_WAV_TRUNCATED;
+    if (read(context,0,data,12)!=1)return PT_WAV_TRUNCATED;
     if (memcmp(data, "RIFF", 4) || memcmp(data + 8, "WAVE", 4)) return PT_WAV_UNSUPPORTED;
     if (le32(data + 4) < 4) return PT_WAV_INVALID;
     if (le32(data + 4) > length - 8) return PT_WAV_TRUNCATED;
@@ -29,23 +30,25 @@ enum pt_wav_result pt_wav_inspect(const uint8_t *data, size_t length, struct pt_
         size_t body;
         if (++chunks > 4096) return PT_WAV_INVALID;
         if (end - pos < 8) return PT_WAV_TRUNCATED;
-        size = le32(data + pos + 4); body = pos + 8;
+        if(read(context,pos,data,8)!=1)return PT_WAV_TRUNCATED;
+        size = le32(data + 4); body = pos + 8;
         if (size > end - body) return PT_WAV_TRUNCATED;
-        if (!memcmp(data + pos, "fmt ", 4)) {
+        if (!memcmp(data, "fmt ", 4)) {
             uint32_t channels, bits;
             if (fmt++) return PT_WAV_INVALID;
             if (size < 16) return PT_WAV_TRUNCATED;
-            if (le16(data + body) != 1) return PT_WAV_UNSUPPORTED;
-            channels = le16(data + body + 2); bits = le16(data + body + 14);
+            if(read(context,body,data,16)!=1)return PT_WAV_TRUNCATED;
+            if (le16(data) != 1) return PT_WAV_UNSUPPORTED;
+            channels = le16(data + 2); bits = le16(data + 14);
             if ((channels != 1 && channels != 2) || (bits != 8 && bits != 16 && bits != 24))
                 return PT_WAV_UNSUPPORTED;
             info.channels = (uint8_t)channels; info.bits = (uint8_t)bits;
-            info.rate = le32(data + body + 4);
+            info.rate = le32(data + 4);
             if (!info.rate || info.rate > 192000) return PT_WAV_UNSUPPORTED;
             align = channels * (bits / 8);
-            if (le16(data + body + 12) != align || le32(data + body + 8) != info.rate * align)
+            if (le16(data + 12) != align || le32(data + 8) != info.rate * align)
                 return PT_WAV_INVALID;
-        } else if (!memcmp(data + pos, "data", 4)) {
+        } else if (!memcmp(data, "data", 4)) {
             if (audio++) return PT_WAV_INVALID;
             if (body > UINT32_MAX) return PT_WAV_CAPACITY;
             info.data_offset = (uint32_t)body; info.data_bytes = size;
@@ -60,6 +63,14 @@ enum pt_wav_result pt_wav_inspect(const uint8_t *data, size_t length, struct pt_
     info.frames = info.data_bytes / align;
     *out = info;
     return PT_WAV_OK;
+}
+struct memory_reader {const uint8_t *data;};
+static int memory_read(void *context,size_t offset,uint8_t *out,size_t n)
+{struct memory_reader *r=context;memcpy(out,r->data+offset,n);return 1;}
+enum pt_wav_result pt_wav_inspect(const uint8_t *data,size_t length,struct pt_wav_info *out)
+{
+    struct memory_reader r={data};if(!data)return PT_WAV_INVALID;
+    return pt_wav_inspect_reader(memory_read,&r,length,out);
 }
 enum pt_wav_result pt_wav_decode(const uint8_t *data, size_t length, struct pt_pcm *dest)
 {

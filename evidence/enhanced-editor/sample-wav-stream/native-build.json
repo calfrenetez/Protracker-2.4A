@@ -1,0 +1,21 @@
+{
+  "scope": "native compile/link only; editor contains unrelated display edits",
+  "binaries": {
+    "PT24GEdit": {
+      "sha256": "e1a044434d991277f1a9967df0f1cbc8936114987f9f3ee58c28d027b1334db1",
+      "bytes": 222972
+    },
+    "PTSampleFileTest": {
+      "sha256": "4327849156f8d5993c90031f314c03376a22993e85c24209dc00499a9c975a85",
+      "bytes": 36884
+    }
+  },
+  "sources": {
+    "src/platform/file_save.c": "0f5ccbcbd9fb6a09eee389fcee487b5a7a856bc768c1977b7a69864e914c40c8",
+    "src/platform/file_save.h": "9d6b08c2dc634b53cc4c8e69fe2d2e7e50b2a84a483aabbdecc731893dd42e81",
+    "src/platform/sample_file.c": "c0b3d10681604f733e07cef5c7bfbba233d86d90174910707be9bc499f36f619",
+    "src/platform/sample_file.h": "1fc77d4149ef454d42a983a4b3770e5d50b4e524816087e11ccd57cfe890d2b4",
+    "tests/sample_file_test.c": "f8cf6494c251b9f3b9acf959e070d87998587e775eae5c053ae86b245e110691",
+    "src/native/editor_main.c": "ec4f795ab2d42df827208f30da8cde475b24d923b0962dac90961293a921168d"
+  }
+}

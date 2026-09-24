@@ -18,6 +18,7 @@
 #include "mod_project.h"
 #include "../editor/view.h"
 #include "../platform/file_save.h"
+#include "../platform/sample_file.h"
 #include "../platform/file_load.h"
 #include "pt_font.h"
 #include "paula.h"
@@ -92,12 +93,10 @@ done:
 }
 static void save_sample(struct pt_editor *e,const char *path)
 {
-    size_t n,w;uint8_t *bytes;enum pt_save_result result;
+    size_t n;enum pt_save_result result;
     const struct pt_pcm *pcm=e->sample && e->sample<=e->project->sample_count?&e->project->samples[e->sample-1].pcm:NULL;
     if(!pcm || !pcm->frames || pt_wav_size(pcm,&n)!=PT_WAV_OK) {pt_editor_status(e,"WAV EXPORT: SELECT A NONEMPTY SAMPLE");return;}
-    bytes=pt_master_allocate(&master_memory,n);if(!bytes) {pt_editor_status(e,"WAV EXPORT: OUT OF MEMORY");return;}
-    if(pt_wav_encode(pcm,bytes,n,&w)!=PT_WAV_OK || w!=n) {pt_master_release(&master_memory,bytes);pt_editor_status(e,"WAV EXPORT FAILED - SAMPLE PRESERVED");return;}
-    result=pt_file_save_new_allocated(path,bytes,n,&render_allocator);pt_master_release(&master_memory,bytes);
+    result=pt_sample_wav_save(path,pcm,&render_allocator);
     pt_editor_status(e,result==PT_SAVE_MEMORY?"SAVE: OUT OF MEMORY":result==PT_SAVE_OK?"WAV EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED":"WAV EXPORT REFUSED OR FAILED - DESTINATION PRESERVED");
     printf("EDITOR WAV result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
 }

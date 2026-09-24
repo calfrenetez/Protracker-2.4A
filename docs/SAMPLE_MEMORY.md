@@ -921,3 +921,24 @@ cache/master, continuing ticks; all DMA off at exit). Evidence is in
 race is retained separately from the successful completion-marker rerun. CIA
 fallback execution remains NOT RUN because Workbench owns CIAA timer B. No
 physical/audio-listening acceptance is implied.
+
+## Bounded native sample WAV export
+
+The native sample WAV export now streams directly from the authoritative PCM
+master through `pt_sample_wav_save`. It retains the declared8/16/24-bit precision
+and mono/stereo layout, including unsigned8 WAV coding and RIFF odd-byte padding.
+It no longer allocates a whole encoded sample. One fixed workspace contains
+paths and two4KiB blocks, allocated through the existing Fast-preferred master
+budget. The small header/descriptor stays on the caller stack.
+
+`pt_file_save_generated` writes bounded generated blocks to owned staging, closes
+the writer, regenerates and compares every byte, checks EOF, then uses existing
+no-replace publication. Generator/write/verification failures clean only owned
+staging; allocation refusal creates no file. Source data must remain immutable
+for the synchronous call; native export does not process edit events during it.
+This does not stream enhanced-project, RAW or IFF exports yet.
+
+Host sanitizer checks compare complete outputs with the existing encoder for
+all six precision/channel combinations, verify master preservation and fixed
+workspace, and cover allocation/generation/verification failures and existing
+destination refusal. Native runtime qualification remains separate.

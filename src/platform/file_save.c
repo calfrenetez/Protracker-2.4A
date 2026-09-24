@@ -123,3 +123,45 @@ enum pt_save_result pt_file_save_new_allocated(const char *path,const void *byte
     f=a->allocate(a->context,sizeof(*f));if(!f)return PT_SAVE_MEMORY;
     result=save_new(path,bytes,n,f);a->release(a->context,f);return result;
 }
+
+struct generated_file {struct output_file file;uint8_t expected[4096];};
+enum pt_save_result pt_file_save_generated(const char *path,size_t total,
+    pt_file_generate generate,void *context,const struct pt_allocator *a)
+{
+    struct generated_file *g;struct output_file *f;size_t pos,n,have;
+    enum pt_save_result result;int reader=-1;
+    if(!path || !*path || strlen(path)>1400 || !generate || !a || !a->allocate || !a->release)
+        return PT_SAVE_INVALID;
+    g=a->allocate(a->context,sizeof(*g));if(!g)return PT_SAVE_MEMORY;
+    memset(g,0,sizeof(*g));f=&g->file;f->destination=path;f->fd=-1;
+    result=PT_SAVE_BEGIN;if(!begin(f))goto done;
+    result=PT_SAVE_WRITE;
+    for(pos=0;pos<total;pos+=n) {
+        n=total-pos;if(n>sizeof(g->expected))n=sizeof(g->expected);
+        if(generate(context,pos,g->expected,n)!=1)goto done;
+        for(have=0;have<n;) {
+            size_t written=write_bytes(f,g->expected+have,n-have);
+            if(!written)goto done;
+            have+=written;
+        }
+    }
+    result=PT_SAVE_FINISH;if(!finish(f))goto done;
+    result=PT_SAVE_VERIFY;reader=open(f->temporary,O_RDONLY);if(reader<0)goto done;
+    for(pos=0;pos<total;pos+=n) {
+        n=total-pos;if(n>sizeof(g->expected))n=sizeof(g->expected);
+        if(generate(context,pos,g->expected,n)!=1)goto done;
+        for(have=0;have<n;) {
+            long count=read_retry(reader,f->buffer+have,n-have);
+            if(count<=0)goto done;
+            have+=(size_t)count;
+        }
+        if(memcmp(f->buffer,g->expected,n))goto done;
+    }
+    if(read_retry(reader,f->buffer,1)!=0)goto done;
+    {int rc=close(reader);reader=-1;if(rc)goto done;}
+    result=PT_SAVE_PUBLISH;if(!publish(f))goto done;
+    result=PT_SAVE_OK;
+done:
+    if(reader>=0)close(reader);
+    abort_output(f);a->release(a->context,g);return result;
+}

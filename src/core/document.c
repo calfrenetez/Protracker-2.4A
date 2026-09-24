@@ -72,6 +72,17 @@ enum pt_project_result pt_document_load_mod_reader(struct pt_document *d,pt_mod_
     next.loaded=1;pt_document_release(d);*d=next;return PT_PROJECT_OK;
 }
 
+enum pt_project_result pt_document_load_project_reader(struct pt_document *d,pt_project_read read,void *context,size_t length,size_t budget,int (*finish)(void *))
+{
+    struct pt_project_requirements need;struct pt_document next;enum pt_project_result r;
+    if(!d || !read || !finish || !d->allocator.allocate || !d->allocator.release)return PT_PROJECT_INVALID;
+    r=pt_project_probe_reader(read,context,length,&need);if(r!=PT_PROJECT_OK)return r;
+    r=allocate_staging(d,&need,budget,&next);if(r!=PT_PROJECT_OK)return r;
+    r=pt_project_decode_reader(read,context,length,&next.storage,&next.project);
+    if(r!=PT_PROJECT_OK || finish(context)!=1) {pt_document_release(&next);return r==PT_PROJECT_OK?PT_PROJECT_INVALID:r;}
+    next.loaded=1;pt_document_release(d);*d=next;return PT_PROJECT_OK;
+}
+
 enum pt_project_result pt_document_load(struct pt_document *d,const uint8_t *data,size_t length,size_t budget)
 {
     uint8_t *plain;size_t size,written;enum pt_project_result result;struct pt_project_requirements need;

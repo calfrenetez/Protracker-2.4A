@@ -1,0 +1,15 @@
+PROJECT channels=16 patterns=2 orders=2 samples=3
+MOD_ANALYSIS required_strategy=INCOMPLETE issues=0x39ff direct_bytes=0
+REQUIRES more-than-four-channels
+REQUIRES non-Paula-routes
+REQUIRES sample-precision
+REQUIRES stereo-samples
+REQUIRES sample-rate
+REQUIRES sample-slices
+REQUIRES enhanced-loops
+REQUIRES external-MIDI-audio-missing
+REQUIRES explicit-OFF-events
+REQUIRES enhanced-metadata
+REQUIRES explicit-velocity
+REQUIRES MIDI-note-values
+SAVED format=PT24G-v1 bytes=26416 verified=1 new_file=1

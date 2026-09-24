@@ -26,8 +26,9 @@ enum pt_project_result pt_document_new(struct pt_document *,unsigned channels,si
  * PP20 is detected by content, fully validated/decompressed, then strict MOD
  * validation is applied. Budget includes temporary decompressed bytes. */
 enum pt_project_result pt_document_load(struct pt_document *,const uint8_t *,size_t,size_t);
-/* Stable uncompressed MOD source; bounded read requests. Finish must verify
+/* Stable uncompressed MOD or enhanced-project source; bounded reads. Finish verifies
  * end/close and return1 before replacing the old document. On failure caller
  * cleans up input; old document is retained. No source callbacks may reenter. */
 enum pt_project_result pt_document_load_mod_reader(struct pt_document *,pt_mod_read,void *,size_t,size_t,int (*)(void *));
+enum pt_project_result pt_document_load_project_reader(struct pt_document *,pt_project_read,void *,size_t,size_t,int (*)(void *));
 #endif

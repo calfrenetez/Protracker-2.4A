@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "scope": "shared030 bounded enhanced-project converter load/save; exact mixed master roundtrip",
+  "PT24GConvert_sha256": "9fde0a112d8c520004c8c589d0af143b5ae70c39bebfb8d87364478555025bf7",
+  "project-import_returncode": "0",
+  "exact_master_roundtrip": true,
+  "fixture_sha256": "e373b2abdfd931d86727672ce31a8fea890edcdb53b254a93b8b03b7a7b6a831",
+  "run_files_cleaned": true
+}

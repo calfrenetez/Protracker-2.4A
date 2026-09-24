@@ -7,6 +7,7 @@ INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     group=parser.add_mutually_exclusive_group()
+    group.add_argument('--project-import',action='store_true',help='Run native converter enhanced-project load/save roundtrip')
     group.add_argument('--mod-import',action='store_true',help='Run bounded MOD document load with native Fast allocator')
     group.add_argument('--sample-import',choices=['raw','wav','svx'],help='Run streamed sample import with native Fast allocator')
     group.add_argument('--mod-stream',action='store_true',help='Run bounded classic MOD export with native Fast allocator')
@@ -71,6 +72,9 @@ def main():
         if args.sample_svx:
             cases=[('sample-svx','PTExecSampleSvxFileTest','SAMPLE SVX STREAM PASS:')]
             result['scope']='shared030 streamed master IFF export and Exec Fast allocator'
+        if args.project_import:
+            cases=[('project-import','PT24GConvert','SAVED format=PT24G-v1')]
+            result['scope']='shared030 bounded enhanced-project converter load/save; exact mixed master roundtrip'
         if args.mod_import:
             cases=[('mod-import','PTExecModImportTest','MOD IMPORT STREAM PASS:')]
             result['scope']='shared030 streamed MOD document import and Exec Fast allocator'
@@ -92,6 +96,10 @@ def main():
                 sub=run/name;sub.mkdir();shutil.copyfile(ROOT/'build/dev'/binary,sub/binary)
                 result[binary+'_sha256']=hashlib.sha256((sub/binary).read_bytes()).hexdigest()
                 commands+=['CD '+guest.device+run.name+'/'+name,binary+' '+guest.device+run.name+'/'+name+('/module.mod' if args.mod_import else '/sample.input' if args.sample_import else '/master.mod' if args.mod_stream else '/master.ptg' if args.project_stream else '/sample.iff' if args.sample_svx else '/sample.raw' if args.sample_raw else '/sample.wav' if args.sample_wav else '/recent' if args.input_memory in ('recent','exec-recent') else '')+' >test.log','Echo $RC >test.rc']
+            if args.project_import:
+                sub=run/'project-import';shutil.copyfile(ROOT/'tests/fixtures/project-v1/mixed.ptg',sub/'source.ptg')
+                commands=['FailAt 21','Stack 65536','CD '+guest.device+run.name+'/project-import',
+                          'PT24GConvert project source.ptg copy.ptg >test.log','Echo $RC >test.rc']
             commands+=['Echo done >'+guest.device+run.name+'/done']
             guest.launch.write_text('\n'.join(commands)+'\n');guest.start()
             deadline=time.monotonic()+90
@@ -109,6 +117,12 @@ def main():
                 remaining=sorted(p.name for p in (run/directory).iterdir())
                 assert remaining==[binary,'test.log','test.rc'],remaining
                 result['sample_staging_clean']=True
+            if args.project_import:
+                sub=run/'project-import';expected=(ROOT/'tests/fixtures/project-v1/mixed.ptg').read_bytes()
+                assert (sub/'copy.ptg').read_bytes()==expected and (sub/'source.ptg').read_bytes()==expected
+                assert sorted(p.name for p in sub.iterdir())==['PT24GConvert','copy.ptg','source.ptg','test.log','test.rc']
+                result['exact_master_roundtrip']=True
+                result['fixture_sha256']=hashlib.sha256(expected).hexdigest()
             result['passed']=True
         finally:
             if finished:

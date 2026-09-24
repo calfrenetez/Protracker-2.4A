@@ -1169,3 +1169,21 @@ parser for truncations and checksum-repaired mutations; every injected read
 failure preserves output descriptors. The mixed project re-encodes byte-for-byte.
 These reader APIs are not yet connected to document/file loading: native editor
 and converter enhanced-project imports still allocate a whole encoded input.
+
+### Enhanced-project transactional file loading
+
+Enhanced-project full-document loading in the native editor and converter now
+uses the positional reader. `pt_document_load_project_reader` probes, allocates
+separate master staging within the supplied budget, decodes, then requires a
+successful source finish callback before replacing the old document. Any failure
+releases staging only. The platform adapter checks file length, EOF and close
+before success; a fixed 4096-byte read cache avoids per-field disk seeks. No full
+encoded enhanced-project buffer is allocated by these paths. Source stability
+remains required; this is not a concurrent-write snapshot protocol.
+
+Host mixed-project import tests verify exact master re-encoding, every read and
+allocation failure, finish failure and size/budget refusal preserving the old
+document. Short/interrupted reads are covered. Converter tests now load the
+large enhanced project and export MOD under the same 550000-byte allocator
+ceiling, peak538110 and final zero. PP20 still retains packed/unpacked buffers.
+These statements supersede the earlier integration-pending notes above.

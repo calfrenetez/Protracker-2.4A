@@ -1,0 +1,8 @@
+..
+----------------------------------------------------------------------
+Ran 2 tests in 4.427s
+
+OK
+mod: CONVERTER MEMORY: peak=538110 limit=550000 final=0
+project: CONVERTER MEMORY: peak=538110 limit=550000 final=0
+project import: CONVERTER MEMORY: peak=538110 limit=550000 final=0

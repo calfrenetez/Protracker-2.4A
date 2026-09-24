@@ -1,0 +1,30 @@
+{
+  "run_id": "source-shared-1790245281022085000",
+  "elapsed_seconds": 212.976,
+  "binaries": {
+    "PT24GEdit": "e9c6af1231e1347e2bd7716826395f4bca5d49dd93bedf1e914f281e16fbdf56",
+    "PTSourceTest": "b2839945e7e78c68c06b7664148503bf08053c828f6a7baf010ec4b411629faa"
+  },
+  "isolated_recents_restored": true,
+  "native_source_ownership_fault_tests": true,
+  "plain_and_pp20_source_preview": true,
+  "browse_and_cancel_preserve_song": true,
+  "empty_source_refused": true,
+  "selected_source2_to_destination3_exact": true,
+  "invalid_source_preserves_preview_and_redo": true,
+  "whole_song_exact_mod_comparison": true,
+  "exact_project_crc_and_reopen_identity": true,
+  "normal_exits": 2,
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=416\tsndbuf_status=0",
+  "logs": {
+    "source.log": "MOD SOURCE PASS: separate preview, source/destination selection, failed allocation/budget preservation, exact metadata/PCM import, shared undo, retained song and source release\n",
+    "editor.log": "EDITOR RECENT loaded=0 prefix=Dev:Tests/source-shared-1790245281022085000/recent\nEDITOR RECENT saved=1 count=1\nEDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=104128\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO panel=5\nEDITOR REQUEST sample\nEDITOR SAMPLE result=0 revision=0 dirty=0 preview=1\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=MOD SOURCE READY - CHOOSE INSTRUMENT AND IMPORT panel=11\nEDITOR REQUEST source\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLE FILE REQUEST CANCELLED - EDITS PRESERVED panel=11\nEDITOR REQUEST source\nEDITOR SAMPLE result=0 revision=0 dirty=0 preview=1\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=MOD SOURCE READY - CHOOSE INSTRUMENT AND IMPORT panel=11\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SOURCE SELECTION ONLY - IMPORT TO CHANGE SONG panel=11\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SOURCE SELECTION ONLY - IMPORT TO CHANGE SONG panel=11\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SELECT A NONEMPTY SOURCE AND A DESTINATION SLOT panel=11\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SOURCE SELECTION ONLY - IMPORT TO CHANGE SONG panel=11\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SOURCE SELECTION ONLY - IMPORT TO CHANGE SONG panel=11\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SOURCE SELECTION ONLY - IMPORT TO CHANGE SONG panel=11\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=SOURCE INSTRUMENT IMPORTED - CONTROL-Z TO UNDO panel=11\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=UNDO panel=11\nEDITOR REQUEST source\nEDITOR SAMPLE result=5 revision=0 dirty=0 preview=1\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLE FORMAT OR SLICE REFERENCES UNSUPPORTED - NO CHANGE panel=11\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=REDO panel=11\nEDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=MOD SOURCE CLOSED - APPLIED IMPORTS KEPT panel=5\nEDITOR RECENT saved=1 count=2\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=1 dirty=0 status=PROJECT SAVED AND VERIFIED panel=5\nEDITOR REQUEST mod\nEDITOR RECENT saved=1 count=3\nEDITOR MOD result=0 dirty=0 dither=none\nEDITOR FRAME row=0 channel=0 revision=1 dirty=0 status=MOD EXPORTED AND VERIFIED panel=5\nEDITOR FRAME row=0 channel=0 revision=1 dirty=0 status=SETTINGS CLOSED panel=0\nEDITOR EXIT clean\n",
+    "reopened.log": "EDITOR RECENT loaded=3 prefix=Dev:Tests/source-shared-1790245281022085000/recent\nEDITOR RECENT saved=1 count=3\nEDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=104128\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0\nEDITOR RECENT saved=1 count=4\nEDITOR SAVE result=0 dirty=0\nEDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PROJECT SAVED AND VERIFIED panel=0\nEDITOR EXIT clean\n"
+  },
+  "environment": {
+    "GET_STATUS": "OK\tPaused=false\tConfig=autosave",
+    "GET_VERSION": "OK\tversion=Amiberry 8.3.0 (2026.08.19)\tsdl=SDL 3.4.14",
+    "GET_CPU_MODEL": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "GET_MEMORY_CONFIG": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB"
+  }
+}

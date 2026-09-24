@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Bounded donor UI regression; reserve shared030/DevBench before running."""
+"""Bounded donor UI regression; reserve shared030/DevBench before running.
+
+For each request-NN-pointer.png, inspect that the pointer is on Load/Save, then
+create request-NN-pointer-approved beside it within 120 seconds. This is a
+harness operator check, not a request for another user approval.
+"""
 import argparse
 import fcntl
 import subprocess
@@ -68,6 +73,25 @@ def main():
             finally:
                 if ch==':':emu.command('SEND_KEY',0x60,0)
         emu.command('SCREENSHOT',out/('request-%02d-filled.png'%requests))
+    def submit_request():
+        offset=len(log())
+        # Shared030 screenshot: display origin (76,40), Load center (188,440).
+        # SEND_MOUSE deltas are display pixels here; legacy tracker calibration
+        # undershoots this ASL requester. Bound deltas to avoid counter overflow.
+        for _ in range(12):
+            emu.command('SEND_MOUSE',-60,-60,0);time.sleep(.06)
+        dx,dy=109,397  # pointer clamps three pixels inside the display origin
+        while dx or dy:
+            sx,sy=min(dx,50),min(dy,50)
+            emu.command('SEND_MOUSE',sx,sy,0);dx-=sx;dy-=sy;time.sleep(.07)
+        emu.command('SCREENSHOT',out/('request-%02d-pointer.png'%requests))
+        wait(lambda:(out/('request-%02d-pointer-approved'%requests)).exists(),120)
+        emu.command('SEND_MOUSE',0,0,1)
+        try:time.sleep(.15)
+        finally:emu.command('SEND_MOUSE',0,0,0)
+        time.sleep(.3)
+        emu.command('SCREENSHOT',out/('request-%02d-submitted.png'%requests))
+        wait(lambda:'EDITOR FRAME' in log()[offset:] or 'EDITOR EXIT clean' in log()[offset:])
     def capture(name):emu.command('SCREENSHOT',out/name)
     def audio_off():
         state=emu.command('GET_AUDIO_STATE');assert all('ch%d_dma=0'%i in state.split('\t') for i in range(4));return state
@@ -105,15 +129,15 @@ def main():
             'Execute restore-env','Echo done >done'])+'\n')
         launched=True;guest.start()
         frame('status=READY -');assert all((run/(n+'.rc')).read_text().strip()=='0' for n in ['source'])
-        key(0x28,True);request('sample');filename('donor.pp');key(0x44);frame('revision=0 dirty=0 status=MOD SOURCE READY')
+        key(0x28,True);request('sample');filename('donor.pp');submit_request();frame('revision=0 dirty=0 status=MOD SOURCE READY')
         capture('01-packed-mod-source.png')
         request('source');offset=key(0x45);frame('SAMPLE FILE REQUEST CANCELLED',offset)
-        request('source');filename('donor.mod');key(0x44);frame('revision=0 dirty=0 status=MOD SOURCE READY')
+        request('source');filename('donor.mod');submit_request();frame('revision=0 dirty=0 status=MOD SOURCE READY')
         key(0x4e);key(0x4e);key(0x44);frame('revision=0 dirty=0 status=SELECT A NONEMPTY SOURCE')
         key(0x4f);key(0x0c);key(0x0c);capture('02-selected-source-and-destination.png')
         key(0x17);frame('revision=1 dirty=1 status=SOURCE INSTRUMENT IMPORTED')
         key(0x31,True);frame('revision=0 dirty=0 status=UNDO')
-        request('source');filename('bad.pp');key(0x44);frame('revision=0 dirty=0 status=SAMPLE FORMAT OR SLICE')
+        request('source');filename('bad.pp');submit_request();frame('revision=0 dirty=0 status=SAMPLE FORMAT OR SLICE')
         key(0x31,True,True);frame('revision=1 dirty=1 status=REDO');key(0x45);frame('MOD SOURCE CLOSED')
         capture('03-imported-sample.png')
         key(0x21,True);frame('dirty=0 status=PROJECT SAVED');saved=(run/'saved.ptg').read_bytes();dst=samples(saved)
@@ -123,7 +147,7 @@ def main():
             records.append(dst[pos:pos+size]);pos+=size+(-size%4)
         record=records[2];assert record[:32]==b'SOURCE TWO'+bytes(22) and record[40:46]==bytes([8,1,48,253,1,0])
         assert record[48:56]==(8).to_bytes(4,'big')+(24).to_bytes(4,'big') and record[64:]==donor[-32:]
-        request('mod');filename('exact.mod');key(0x44);frame('MOD EXPORTED AND VERIFIED');assert (run/'exact.mod').read_bytes()==expected_mod
+        request('mod');filename('exact.mod');submit_request();frame('MOD EXPORTED AND VERIFIED');assert (run/'exact.mod').read_bytes()==expected_mod
         key(0x45);key(0x45);current='reopened.log';frame('status=READY -')
         key(0x21,True);frame('dirty=0 status=PROJECT SAVED');assert (run/'reopened.ptg').read_bytes()==saved
         key(0x45);wait(lambda:(run/'done').exists())

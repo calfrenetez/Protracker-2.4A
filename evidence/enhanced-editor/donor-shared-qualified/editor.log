@@ -1,0 +1,35 @@
+EDITOR RECENT loaded=0 prefix=Dev:Tests/source-shared-1790245281022085000/recent
+EDITOR RECENT saved=1 count=1
+EDITOR READY channels=4 patterns=1 bitmap_bytes=163840 history_bytes=104128
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLER: CLICK TWICE FOR RANGE; +/- SAMPLE; CTRL-Z UNDO panel=5
+EDITOR REQUEST sample
+EDITOR SAMPLE result=0 revision=0 dirty=0 preview=1
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=MOD SOURCE READY - CHOOSE INSTRUMENT AND IMPORT panel=11
+EDITOR REQUEST source
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLE FILE REQUEST CANCELLED - EDITS PRESERVED panel=11
+EDITOR REQUEST source
+EDITOR SAMPLE result=0 revision=0 dirty=0 preview=1
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=MOD SOURCE READY - CHOOSE INSTRUMENT AND IMPORT panel=11
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SOURCE SELECTION ONLY - IMPORT TO CHANGE SONG panel=11
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SOURCE SELECTION ONLY - IMPORT TO CHANGE SONG panel=11
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SELECT A NONEMPTY SOURCE AND A DESTINATION SLOT panel=11
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SOURCE SELECTION ONLY - IMPORT TO CHANGE SONG panel=11
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SOURCE SELECTION ONLY - IMPORT TO CHANGE SONG panel=11
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SOURCE SELECTION ONLY - IMPORT TO CHANGE SONG panel=11
+EDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=SOURCE INSTRUMENT IMPORTED - CONTROL-Z TO UNDO panel=11
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=UNDO panel=11
+EDITOR REQUEST source
+EDITOR SAMPLE result=5 revision=0 dirty=0 preview=1
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=SAMPLE FORMAT OR SLICE REFERENCES UNSUPPORTED - NO CHANGE panel=11
+EDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=REDO panel=11
+EDITOR FRAME row=0 channel=0 revision=1 dirty=1 status=MOD SOURCE CLOSED - APPLIED IMPORTS KEPT panel=5
+EDITOR RECENT saved=1 count=2
+EDITOR SAVE result=0 dirty=0
+EDITOR FRAME row=0 channel=0 revision=1 dirty=0 status=PROJECT SAVED AND VERIFIED panel=5
+EDITOR REQUEST mod
+EDITOR RECENT saved=1 count=3
+EDITOR MOD result=0 dirty=0 dither=none
+EDITOR FRAME row=0 channel=0 revision=1 dirty=0 status=MOD EXPORTED AND VERIFIED panel=5
+EDITOR FRAME row=0 channel=0 revision=1 dirty=0 status=SETTINGS CLOSED panel=0
+EDITOR EXIT clean

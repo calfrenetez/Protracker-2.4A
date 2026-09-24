@@ -1,0 +1,15 @@
+{
+  "native_build_exit": 0,
+  "compiler": "m68k-amigaos-gcc pinned shared toolchain",
+  "sha256": {
+    "src/native/paula.c": "27dd1cb3269419a5c91520c49effc126e009983e0d5167c00622448f6570491c",
+    "src/native/paula_memory.h": "c547e70bfb300a25b737eeb16f3ac83a65ef20b1a0c6e42d5564cd2e700f098b",
+    "src/native/master_memory.h": "ac898368849ec2d1892717d425b90c398da37a8799d536366a898e2e219e184a",
+    "src/core/sample_cache.c": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+    "tests/native_paula_test.c": "ab2d1fedd50ff0224868ee7c3db7ff8b1245809b6fca809d3c06d7dcd10900dd",
+    "tests/test_paula_memory.py": "bbed0eb2755890640efcfa51db08336f06d0aadf6e9beaeda769a06421f0c48b",
+    "build/dev/PTPaulaTest": "52cfbceed9c9066e0d413bbca477c788ac46fd6e2057a06bb8d11333d689e9f6",
+    "build/dev/PT24GEdit": "5184cb1b2db5fff04cdae0d3e9b13d963652ecfc10816ac59f459bc85f3c88de"
+  },
+  "note": "Full build includes unrelated uncommitted display work. This is not UI acceptance."
+}

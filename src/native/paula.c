@@ -10,6 +10,7 @@
 #include "paula_cache.h"
 #include "paula_preview.h"
 #include "paula_playback.h"
+#include "paula_memory.h"
 extern int pt_replay_start(void *,unsigned long,void *,unsigned long,void *);
 extern void pt_replay_stop(void);
 extern volatile uint32_t pt_replay_ticks;
@@ -36,10 +37,6 @@ static void set_audible(struct pt_paula *a,unsigned mask)
     }
     Enable();
 }
-static void *chip_allocate(void *context,size_t bytes)
-{(void)context;return AllocMem(bytes,MEMF_CHIP|MEMF_PUBLIC);}
-static void chip_release(void *context,void *data,size_t bytes)
-{(void)context;FreeMem(data,bytes);}
 static void halt(struct pt_paula *a,int retain)
 {
     unsigned i;struct pt_sample_cache cache;uint64_t version;
@@ -71,7 +68,7 @@ const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned
     error=pt_paula_playback_snapshot(p,&playback,&report);
     if(error)return error;
     halt(a,1);
-    if(!a->cache.allocate)pt_cache_init(&a->cache,NULL,chip_allocate,chip_release,AvailMem(MEMF_CHIP));
+    if(!a->cache.allocate)pt_cache_init(&a->cache,NULL,pt_paula_chip_allocate,pt_paula_chip_release,pt_paula_chip_available());
     if(a->cache_version==UINT64_MAX) {pt_paula_stop(a);return "PLAY: CACHE GENERATION EXHAUSTED";}
     ++a->cache_version;
     a->order_count=p->order_count;memcpy(a->orders,p->orders,p->order_count*sizeof(*p->orders));a->source_bytes=report.bytes;a->pattern_bytes=(size_t)p->pattern_count*1024;
@@ -92,8 +89,14 @@ const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned
     if(!a->data)goto failed;
     memcpy(a->data,a->staging,a->bytes);
     error="PLAY: OUT OF CHIP MEMORY";
-    a->silence=AllocMem(2,MEMF_CHIP|MEMF_PUBLIC|MEMF_CLEAR);
+    a->silence=pt_paula_chip_allocate(NULL,2);
+    if(!a->silence) {
+        /* Retained restart caches may be evicted before the silent DMA word. */
+        pt_cache_trim(&a->cache,SIZE_MAX);
+        a->silence=pt_paula_chip_allocate(NULL,2);
+    }
     if(!a->silence)goto failed;
+    memset(a->silence,0,2);
     a->chip_bytes=2;offset=plan.mod.sample_offset;
     for(i=0;i<31;++i) {
         uint8_t *h=a->data+20+i*30;

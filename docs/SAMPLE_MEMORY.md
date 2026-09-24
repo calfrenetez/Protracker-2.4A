@@ -1228,3 +1228,20 @@ stems match host bytes, and intentional re-export to the existing directory
 returns refusal with files unchanged. The owned staging directory is checked
 absent on host failure paths and after native completion. This is software
 runtime evidence, separate from editor UI and physical performance acceptance.
+
+### Paula Chip-RAM reserve admission
+
+Native Paula sample-cache allocations and the silent DMA word now leave a
+512 KiB Chip-RAM display/system reserve, matching the Chip-only master policy.
+The initial cache ceiling excludes that reserve; every new allocation rechecks
+current free Chip RAM, including memory consumed by other applications since
+startup. Allocator refusal lets the cache evict unpinned entries and retry;
+active leased buffers are never evicted. If the silent word cannot be allocated
+on restart, idle retained caches are released before one retry. Exhaustion uses
+the existing clear out-of-Chip-memory error and cleanup path, preserving masters.
+
+The reserve is an admission policy, not an OS reservation against concurrent
+allocations. Fragmentation can still make AllocMem fail. Host sanitizer tests
+exercise exact reserve boundaries, changing free memory, allocation failure,
+eviction, pinned data preservation and complete release. Emulator and physical
+acceptance of the changed native bridge are tracked separately in evidence.

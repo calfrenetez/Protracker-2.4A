@@ -1,0 +1,6 @@
+{
+  "scope": "host sanitizer and pinned native compilation, no emulator or MMIO",
+  "compile_exit": 0,
+  "flags": "-std=c99 -m68000 -msoft-float -mcrt=nix20 -Os -Wall -Wextra -Werror",
+  "binary_sha256": "7f2f17fa9c370f1d03c95fe891a1a2ad4f87d2844c70af1e54949da23f96e1cb"
+}

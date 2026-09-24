@@ -860,3 +860,7 @@ must stop both owners; do not close a queue simply because producer pins ended.
 
 Editor output-stop binding passes shared030 with57 tracked Fast allocations,
 zero final owned bytes and budget refusal. Physical device stop remains untested.
+
+The injected register-port layer requires exclusive ownership and explicit
+verified FIFO capacity. Uncertain writes invalidate alignment until bounded reset
+and readback checks succeed. Host/compile checks only; no native MMIO binding.

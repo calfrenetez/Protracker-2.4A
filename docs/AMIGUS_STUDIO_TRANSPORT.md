@@ -140,3 +140,25 @@ Further inspection of the same pinned SDK gives these implementation constraints
 Editor output-stop binding now passes shared030 with57 tracked Fast allocations,
 zero final owned bytes and budget refusal. This verifies abstract shutdown
 requests, not native interrupt handling, PCM output or physical silence.
+
+## Injected register-port adapter
+
+`amigus_register_port` now implements the capacity/write/reset/drain interface
+through injected read16/write16/write32 operations. No native bus binding or
+playback start is supplied. Caller must provide verified capacity in16-bit words
+and an exclusive PCM ownership predicate with serialized access. Initialization
+performs no I/O. Reset is required before use.
+
+Free32-bit words are floor((capacity_words - pending_words)/2). Impossible usage
+faults instead of wrapping. Triplet writes recheck capacity and preserve order at
+0x0c; uncertain writes invalidate alignment until reset. Reset performs bounded
+disable-rate, clear-playback-IRQ-flags, mask-playback-IRQs, FIFO-strobe writes and
+reads rate, mask and usage. Enable clear, playback mask clear and zero usage are
+all required before success. Pending readback never grants alignment. Drain only
+reports FIFO empty, not DAC/analogue silence. Native readback and bus semantics
+must be qualified before this implementation can claim device quiescence.
+
+Five host sanitizer groups pass, covering all seven reset I/O failure points,
+partial triplet writes, unknown ownership, odd-unit capacity, impossible usage
+and delayed readback. Pinned native compilation passes. No emulator register
+fixture execution, card access, playback enable or native interrupt installation.

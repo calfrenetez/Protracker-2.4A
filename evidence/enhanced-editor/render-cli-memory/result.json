@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "scope": "shared030 Fast-allocator renderer, one-row24-bit WAV host parity",
+  "PT24GRender_sha256": "03dc60fb0b6ab2eca5ee243439e964e90ad96cdcfda54b718d2170931b0fe59b",
+  "render-cli_returncode": "0",
+  "exact_host_wav": true,
+  "reference_sha256": "aae0155475057e7dd51fde8a5c3231b587f3005554b1e567329ff057624ace0e",
+  "run_files_cleaned": true
+}

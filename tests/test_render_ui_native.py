@@ -1,7 +1,7 @@
 """Keep the native UI's retained finetune/WAV result tied to the current renderer."""
 from pathlib import Path
 import hashlib,json,subprocess,tempfile,unittest
-from test_render_file import RENDER
+from test_render_file import RENDER,IMPORT
 ROOT=Path(__file__).resolve().parents[1]
 class NativeRenderUI(unittest.TestCase):
     def test_native_finetune_wav_and_project_identity(self):
@@ -16,7 +16,7 @@ class NativeRenderUI(unittest.TestCase):
         self.assertEqual((e/'baseline.ptg').read_bytes(),(e/'saved.ptg').read_bytes())
         with tempfile.TemporaryDirectory() as tmp:
             d=Path(tmp);cli=d/'render'
-            subprocess.run(['cc','-std=c99','-O1','-g','-Wall','-Wextra','-Werror','-fsanitize=address,undefined','-Isrc/core','tools/pt24g_render.c','src/core/document.c','src/core/pp20.c','src/core/mod_project.c','src/core/mod_inspect.c',*RENDER,'-o',str(cli)],cwd=ROOT,check=True)
+            subprocess.run(['cc','-std=c99','-O1','-g','-Wall','-Wextra','-Werror','-fsanitize=address,undefined','-Isrc/core','tools/pt24g_render.c','src/core/document.c','src/core/pp20.c','src/core/mod_project.c','src/core/mod_inspect.c',*IMPORT,*RENDER,'-o',str(cli)],cwd=ROOT,check=True)
             for name,source in [('render',fixture),('finetune',e/'finetune.mod')]:
                 wav=d/(name+'.wav')
                 subprocess.run([str(cli),str(source),str(wav),'--rate','44100','--bits','16','--gain','65536'],check=True,capture_output=True)

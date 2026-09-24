@@ -5,10 +5,18 @@
 #include <stdlib.h>
 #include <string.h>
 #include "document.h"
+#include "../src/platform/mod_import.h"
+#include "../src/platform/project_import.h"
+#include "../src/platform/pp20_import.h"
+#ifdef __amigaos__
+#include "../src/native/master_memory.h"
+#endif
 #include "../src/platform/render_file.h"
 #include "../src/platform/stem_file.h"
+#ifndef __amigaos__
 static void *allocate(void *ctx,size_t n) {(void)ctx;return malloc(n);}
 static void release(void *ctx,void *p) {(void)ctx;free(p);}
+#endif
 static int number(const char *s,unsigned base,uint32_t *out)
 {
     char *end;unsigned long n;if(!s || !*s || *s=='-')return 0;errno=0;n=strtoul(s,&end,base);if(errno || *end)return 0;
@@ -19,9 +27,18 @@ static int number(const char *s,unsigned base,uint32_t *out)
 }
 int main(int argc,char **argv)
 {
-    struct pt_allocator allocator={NULL,allocate,release};struct pt_document doc;struct pt_render_options o;
+#ifdef __amigaos__
+    struct pt_master_memory memory;
+    struct pt_allocator allocator={&memory,pt_master_allocate,pt_master_release};
+#else
+    struct pt_allocator allocator={NULL,allocate,release};
+#endif
+    struct pt_document doc;struct pt_render_options o;enum pt_project_result loaded;
     struct pt_render_report report;enum pt_render_result detail=PT_RENDER_INVALID;enum pt_render_file_result saved;
-    FILE *f=NULL;uint8_t *input=NULL;long size;uint32_t value;int i,rc=20,tracks_given=0,stems=0,grouped=0;
+    uint32_t value;int i,rc=20,tracks_given=0,stems=0,grouped=0;
+#ifdef __amigaos__
+    pt_master_memory_init(&memory);
+#endif
     pt_document_init(&doc,&allocator);memset(&o,0,sizeof(o));o.rate=48000;o.bits=24;o.gain_q16=32768;o.tick_limit=1000000;
     if(argc<3)goto usage;
     for(i=3;i<argc;++i) {
@@ -40,23 +57,22 @@ int main(int argc,char **argv)
         ++i;
     }
     o.frame_limit=(uint64_t)o.rate*60*30; /* Includes internal startup lead-in. */
-    f=fopen(argv[1],"rb");if(!f) {fprintf(stderr,"Cannot open input\n");goto done;}
-    if(fseek(f,0,SEEK_END) || (size=ftell(f))<0 || size>64L*1024*1024) {fprintf(stderr,"Input exceeds 64 MiB limit or cannot be read\n");goto done;}
-    rewind(f);input=malloc(size?(size_t)size:1);if(!input || fread(input,1,(size_t)size,f)!=(size_t)size)goto done;
-    if(fclose(f)) {f=NULL;goto done;}f=NULL;
-    if(pt_document_load(&doc,input,(size_t)size,64UL*1024*1024)!=PT_PROJECT_OK) {fprintf(stderr,"Input invalid, unsupported or above document memory budget\n");goto done;}
-    free(input);input=NULL;
+    if(pt_project_file_candidate(argv[1]))loaded=pt_project_file_load(&doc,argv[1],64UL*1024*1024,64UL*1024*1024);
+    else if(pt_mod_file_candidate(argv[1]))loaded=pt_mod_file_load(&doc,argv[1],64UL*1024*1024,64UL*1024*1024);
+    else if(pt_pp20_file_candidate(argv[1]))loaded=pt_pp20_file_load(&doc,argv[1],64UL*1024*1024,64UL*1024*1024);
+    else loaded=PT_PROJECT_UNSUPPORTED;
+    if(loaded!=PT_PROJECT_OK) {fprintf(stderr,"Input invalid, unsupported or above document memory budget result=%d\n",loaded);goto done;}
     if(!tracks_given)o.tracks=(uint16_t)((1UL<<doc.project.channels.count)-1);
     if(stems) {
         struct pt_stem_report batch;unsigned n;
-        saved=pt_stem_file_new(argv[2],&doc.project,&o,(unsigned)grouped,NULL,NULL,&batch,&detail);
+        saved=pt_stem_file_new_allocated(argv[2],&doc.project,&o,(unsigned)grouped,NULL,NULL,&batch,&detail,&allocator);
         if(saved!=PT_RENDER_FILE_OK) {fprintf(stderr,"Stem export refused save_phase=%d render_result=%d; no destination replaced\n",saved,detail);goto done;}
         for(n=0;n<batch.plan.count;++n)printf("STEM %s-%02u.wav tracks=%04x frames=%lu clipped_values=%lu\n",
             batch.plan.item[n].group?"group":"track",batch.plan.item[n].group?batch.plan.item[n].group:batch.plan.item[n].channel+1,
             batch.plan.item[n].tracks,(unsigned long)batch.audio[n].frames,(unsigned long)batch.audio[n].clipped);
         printf("STEMS count=%u verified=1 new_directory=1\n",batch.plan.count);rc=0;goto done;
     }
-    saved=pt_render_file_new(argv[2],&doc.project,&o,NULL,NULL,&report,&detail);
+    saved=pt_render_file_new_allocated(argv[2],&doc.project,&o,NULL,NULL,&report,&detail,&allocator);
     if(saved!=PT_RENDER_FILE_OK) {fprintf(stderr,"Render refused save_phase=%d render_result=%d; no destination replaced\n",saved,detail);goto done;}
     printf("RENDERED profile=IDEAL_BPM_Q32 pitch=PCM_RATE_PERIOD428 rate=%lu bits=%u tracks=%04x gain_q16=%lu lead_in=%u\n",
            (unsigned long)o.rate,o.bits,o.tracks,(unsigned long)o.gain_q16,o.include_lead_in);
@@ -66,6 +82,5 @@ usage:
     fprintf(stderr,"Usage: PT24GRender INPUT NEW.wav [--pattern N] [--rate 44100|48000] [--bits 16|24] [--tracks HEX] [--gain 0..65536] [--lead-in] [--stems|--groups] [--from-row N --to-row N]\n");
     fprintf(stderr,"Reference renderer; bounded classic-effect subset including finetune/E5. Instrument-only events and MIDI audio unsupported. See docs/REFERENCE_RENDERER.md. Default gain32768, 30-minute bound.\n");
 done:
-    if(f)fclose(f);
-    free(input);pt_document_release(&doc);return rc;
+    pt_document_release(&doc);return rc;
 }

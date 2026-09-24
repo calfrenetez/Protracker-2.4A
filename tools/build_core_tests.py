@@ -126,6 +126,7 @@ def main():
     inputs['PTStemFileTest'] = ['tests/stem_file_test.c','src/platform/stem_file.c','src/core/stems.c','src/platform/render_file.c',*render_sources]
     inputs['PTRenderFileTest'] = ['tests/render_file_test.c','src/platform/render_file.c','src/core/wav.c',*render_sources]
     inputs['PT24GRender'] = ['tools/pt24g_render.c','src/platform/stem_file.c','src/core/stems.c','src/platform/render_file.c','src/core/document.c','src/core/pp20.c','src/core/mod_project.c','src/core/mod_inspect.c',*render_sources]
+    inputs['PT24GRender'] += ['src/platform/mod_import.c','src/platform/project_import.c','src/platform/pp20_import.c']
     inputs['PTRenderMemoryTest'] = ['tests/render_memory_failure_test.c',*inputs['PTStemFileTest'][1:]]
     for name, source in [('PTRenderTest','tests/render_alloc_test.c'),
                          ('PTRenderFileTest','tests/render_file_alloc_test.c'),

@@ -1,0 +1,13 @@
+{
+  "scope": "Full pinned native build; editor includes unrelated display work",
+  "binaries": {
+    "PT24GRender": {
+      "sha256": "03dc60fb0b6ab2eca5ee243439e964e90ad96cdcfda54b718d2170931b0fe59b",
+      "bytes": 85960
+    },
+    "PT24GEdit": {
+      "sha256": "85f783365c66fe11cd4715d04e5c0139c272f28e70aa0ea092f0be04472d00ca",
+      "bytes": 242636
+    }
+  }
+}

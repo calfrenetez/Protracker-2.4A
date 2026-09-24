@@ -7,6 +7,7 @@ INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     group=parser.add_mutually_exclusive_group()
+    group.add_argument('--render-cli',metavar='REFERENCE_WAV',help='Run one-row native renderer against an exact host reference')
     group.add_argument('--pp20-import',action='store_true',help='Run native converter bounded packed MOD import')
     group.add_argument('--project-import',action='store_true',help='Run native converter enhanced-project load/save roundtrip')
     group.add_argument('--mod-import',action='store_true',help='Run bounded MOD document load with native Fast allocator')
@@ -73,6 +74,9 @@ def main():
         if args.sample_svx:
             cases=[('sample-svx','PTExecSampleSvxFileTest','SAMPLE SVX STREAM PASS:')]
             result['scope']='shared030 streamed master IFF export and Exec Fast allocator'
+        if args.render_cli:
+            cases=[('render-cli','PT24GRender','WAV frames=')]
+            result['scope']='shared030 Fast-allocator renderer, one-row24-bit WAV host parity'
         if args.pp20_import:
             cases=[('pp20-import','PT24GConvert','SAVED format=MOD')]
             result['scope']='shared030 bounded PP20 converter load and exact MOD export'
@@ -110,6 +114,10 @@ def main():
                 sub=run/'pp20-import';(sub/'source.pp').write_bytes(packer.literal((ROOT/'evidence/baseline/mod.baseline').read_bytes()))
                 commands=['FailAt 21','Stack 65536','CD '+guest.device+run.name+'/pp20-import',
                           'PT24GConvert mod source.pp copy.mod >test.log','Echo $RC >test.rc']
+            if args.render_cli:
+                sub=run/'render-cli';shutil.copyfile(ROOT/'evidence/baseline/mod.baseline',sub/'source.mod')
+                commands=['FailAt 21','Stack 65536','CD '+guest.device+run.name+'/render-cli',
+                          'PT24GRender source.mod output.wav --pattern 0 --from-row 0 --to-row 1 --tracks 1 >test.log','Echo $RC >test.rc']
             commands+=['Echo done >'+guest.device+run.name+'/done']
             guest.launch.write_text('\n'.join(commands)+'\n');guest.start()
             deadline=time.monotonic()+90
@@ -140,6 +148,13 @@ def main():
                 assert sorted(p.name for p in sub.iterdir())==['PT24GConvert','copy.mod','source.pp','test.log','test.rc']
                 result['exact_master_roundtrip']=True
                 result['fixture_sha256']=hashlib.sha256(expected).hexdigest()
+            if args.render_cli:
+                sub=run/'render-cli';expected=Path(args.render_cli).read_bytes()
+                assert (sub/'output.wav').read_bytes()==expected
+                assert (sub/'source.mod').read_bytes()==(ROOT/'evidence/baseline/mod.baseline').read_bytes()
+                assert sorted(p.name for p in sub.iterdir())==['PT24GRender','output.wav','source.mod','test.log','test.rc']
+                result['exact_host_wav']=True
+                result['reference_sha256']=hashlib.sha256(expected).hexdigest()
             result['passed']=True
         finally:
             if finished:

@@ -1,0 +1,10 @@
+.
+----------------------------------------------------------------------
+Ran 1 test in 7.416s
+
+OK
+.mod: RENDER MEMORY peak=542838 calls=10 final=0
+.ptg: RENDER MEMORY peak=542838 calls=10 final=0
+.pp: RENDER MEMORY peak=664104 calls=11 final=0
+mix: RENDER MEMORY peak=542838 calls=10 final=0
+stems: RENDER MEMORY peak=546414 calls=27 final=0

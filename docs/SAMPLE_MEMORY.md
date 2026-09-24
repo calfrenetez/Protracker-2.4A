@@ -1206,3 +1206,19 @@ all seven allocation failures and finish failure retain the old document; short
 and interrupted file reads also pass. Large packed-MOD converter input now peaks
 at664104 allocator bytes under700000, final zero, excluding the full packed input
 beside scratch and masters. These results supersede earlier PP20-buffer notes.
+
+### Standalone renderer allocator integration
+
+PT24GRender now uses the production queried Fast-first allocator on Amiga for
+masters plus bounded WAV/stem workspaces. Host builds retain malloc-backed
+allocation. MOD/enhanced/PP20 input selects the positional loaders instead of
+fread/whole-input malloc. The64MiB document policy remains, alongside the native
+allocator's actual free-memory/reserve policy. Unsupported inputs are rejected
+without allocating their payload. No-replace publication and rendering semantics
+are unchanged; offline rendering is not live Studio transport acceptance.
+
+Host allocator-ceiling tests show MOD/enhanced peak542838, stems546414, PP20
+peak664104, all below700000 with zero owned bytes afterward. Every allocation
+failure across mix/stem paths refuses publication, removes owned staging and
+preserves existing destinations. MOD/enhanced/PP20 WAVs match exactly; retained
+native finetune WAV references also remain byte-identical.

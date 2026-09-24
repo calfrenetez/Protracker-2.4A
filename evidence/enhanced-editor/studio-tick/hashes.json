@@ -1,0 +1,6 @@
+{
+  "src/core/studio_tick.c": "991a92989cf63c738e0f60ded0d809966225f76a47191d3edda9f01c6ce8ce0c",
+  "src/core/studio_tick.h": "7a0d249d281d0ec6f1daeb19945f3a52c378c4c49de434a9ff8d1b3f346df79d",
+  "tests/studio_tick_test.c": "bdaae1ed07401d27eae9316582d60fc8fc836e187d8ef60d29107076efa9fecf",
+  "build/dev/PTStudioTickTest": "8096927960e3f7474c8e1aa91fd643f8f46e49aeb729fb8edec6a6af103cab01"
+}

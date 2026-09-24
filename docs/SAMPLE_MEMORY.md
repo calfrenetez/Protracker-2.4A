@@ -501,3 +501,18 @@ before writing; invalid controls, out-of-range channels or inactive selected
 voices leave all voices unchanged. It preserves phase, loops and pins, performs
 no callbacks or allocation, and lets zero-gain voices continue advancing. This
 is the control primitive for future tracker ticks, not a completed scheduler.
+
+## Bounded tick intervals
+
+`studio_tick` borrows a mixer and uses the existing48kHz ideal-BPM Q32 frame clock
+to reserve one tick interval within an explicit session frame budget. Reads consume
+1..256 frames without crossing the pending boundary. A new interval is refused
+until the current one drains; invalid BPM, exhausted budget and failed reads do
+not advance timing/remaining state. Fractional frames carry across tempo changes.
+
+This is an interval reader, not automatic tracker dispatch: the caller still
+applies commands at drained boundaries and supplies the next interval's tempo.
+It adds one bounded allocation; closing it does not close the borrowed mixer.
+Do not bypass it by reading the mixer directly while an interval is pending.
+CIA timing, effect-to-voice mapping, device output buffering and deadline/underrun
+handling remain separate work. The native editor is not yet wired to this API.

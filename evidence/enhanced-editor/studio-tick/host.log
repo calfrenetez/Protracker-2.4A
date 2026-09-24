@@ -1,0 +1,13 @@
+STUDIO MIX PASS: pinned versions, atomic controls, mute progression, block continuity, true24 and cleanup
+.STUDIO TICK PASS: tempo carry, partition hash=cbdaeaff, refusal and cleanup
+.
+----------------------------------------------------------------------
+Ran 2 tests in 1.450s
+
+OK
+FRAME CLOCK PASS: fractional tempo changes, exact rates, bounded drift, zero-frame ticks, limits/overflow and atomic failure
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.941s
+
+OK

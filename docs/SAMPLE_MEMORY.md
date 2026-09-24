@@ -539,3 +539,17 @@ and segment triggers share staged acquisition/validation and release old/current
 plus pending pins only on success. Invalid segment or loop kind leaves playback
 and pending handoff unchanged. This supplies the range primitive needed by the
 renderer’s offset/retrigger/delay mapping; tracker dispatch remains unwired.
+
+## Shared effect-command state
+
+The reference renderer now owns a `pt_render_command_state` containing voices,
+gains, instrument/volume/velocity and tremolo memory. Shared low-level init,
+completed-tick and gain functions reuse the existing effect body unchanged; the
+reference stream calls these functions directly. This exposes audited state for
+the upcoming Studio command adapter without introducing a second effect engine.
+
+The API requires renderer-preflighted, consistent immutable inputs. Its PCM
+pointers are borrowed, not pins; it must not be used as a substitute for Studio
+master ownership. A failed command tick may leave partial state and must abort
+the session. Command-intent translation into Studio triggers/controls and full
+tracker playback are still unfinished. This refactor alone adds no live output.

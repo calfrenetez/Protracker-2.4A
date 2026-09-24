@@ -1,0 +1,223 @@
+ARPEGGIO boundaries PASS: 16 tracks, nibble phases, sentinel/adjacent table, mask, inactive base and wrapped counter
+PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+........BOUNCE PASS: exact true24 PCM, atomic new slot, allocation/budget/cancellation rollback, redo preservation, mixed undo, references, table reuse, eviction and PTG identity
+...HANDOFF renderer PASS
+HANDOFF renderer PASS
+.OFFSET safety PASS: isolated track16 PCM, non-byte/stereo/odd/pingpong/slice refusal before output/report changes
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=1 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=18 frames=17280
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+.HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.ALLOC initial calls=6 live=6 bytes=6902
+ALLOC failure-case=1 live=6
+ALLOC failure-case=2 live=6
+ALLOC failure-case=3 live=6
+ALLOC failure-case=4 live=6
+ALLOC failure-case=5 live=6
+ALLOC failure-case=6 live=6
+ALLOC budget live=6
+ALLOC replacement live=6
+ALLOC reload loop
+ALLOC final release live=3
+DOCUMENT/SAVE PASS: every staging allocation failure, memory budget, corrupt input, 200 reloads, staged new songs for 1..16 channels, partial writes and all save failure phases preserve prior state
+.EDITOR PASS: bank/wrap/scroll, guarded note and nibble edits, OFF, undo/redo, save state, discard confirmation, atomic block copy/paste/clear/transpose/clone, all-page planar render
+..FILE LOAD PASS
+FILE LOAD PASS
+.FILE SAVE MEMORY PASS: exact multi-block bytes, allocation refusal, existing destination and zero-length preservation
+FILE SAVE MEMORY PASS: exact multi-block bytes, allocation refusal, existing destination and zero-length preservation
+.tone 1 kHz max deviation 0
+tone 3 kHz max deviation 4
+tone 6 kHz max deviation 1
+fractional-rate passband max deviation 1
+FILTER PASS
+.FINETUNE PASS: 16 tables, E5 ordering/memory/reload, ordinary quantization, negative tone target and final overflow words
+.PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+.FLOW boundaries PASS: atomic init, stop/limit, 1..16 tracks, 128/256 positions, order wrap and ordered globals
+.HANDOFF renderer PASS
+HANDOFF renderer PASS
+...FRAME CLOCK PASS: fractional tempo changes, exact rates, bounded drift, zero-frame ticks, limits/overflow and atomic failure
+.GLISS PASS: 16 independent controls, smooth stored periods, stepped output and disable preserves speed/target
+.PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+.HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+..INSTRUMENT PASS: track16 true24 phase/volume reload, silent preload, cross-sample and slice refusal before output
+OFFSET PCM PASS: channel=0 ticks=18 frames=17280
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=18 frames=17280
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+...INVERT sequence native parity PASS
+INVERT sequence native parity PASS
+INVERT sequence native parity PASS
+..HANDOFF renderer PASS
+HANDOFF renderer PASS
+..MIDI PASS: exclusive track ownership, shared-note releases, replacement ordering, endpoint loss/reconnect, sustain cleanup, failed sends, controller/program/bend/clock bytes and 100 lifecycle cycles
+..MOD PROJECT PASS: MOD -> project -> MOD byte identity, strict validation, staged import, explicit loss reports and no silent downgrade
+.MOD ROUND8 PASS: 16/24-bit signed ties and saturation, exact reopen, source preservation, strict/rate/capacity/alias refusal, 8-bit identity
+.HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.NOTE SLICE PASS: explicit ordinal mapping, sample attachment, bounds, modal isolation, shared note/sample undo, marker protection, PCM preservation and PTG reopen
+.HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.OFFSET safety PASS: isolated track16 PCM, non-byte/stereo/odd/pingpong/slice refusal before output/report changes
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=0 ticks=18 frames=17280
+OFFSET PCM PASS: channel=0 ticks=18 frames=17280
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=24 frames=23040
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=8 frames=7680
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=1 ticks=6 frames=5760
+OFFSET PCM PASS: channel=2 ticks=6 frames=5760
+OFFSET PCM PASS: channel=3 ticks=6 frames=5760
+..PATTERN PASS: 16-channel block edits, exact period/MIDI transpose, OFF retention, clone, bounded undo/redo, dirty tracking, eviction and conflict/no-op safety
+..PAULA PREVIEW PASS: filtered mono rate conversion, precision, padding, bounds and master preservation
+..PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+.HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.PLAYBACK PCM PASS: true24 master preservation, signed rounding/clipping, 8/16 bit endian/channel/padding, coexistence, revision invalidation and refusal
+.PLAYBACK UPLOAD PASS: bounded chunks and transactional device resources
+.PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+.PP20 PASS: exact unpack, malformed bounds, unchanged failed output, atomic MOD import, all allocation failures, peak budget and lossless MOD roundtrip
+...PROJECT PASS: exact mixed-route round trip, 24-bit stereo, OFF, loops, slices, MIDI endpoints, extensions, CRC, bounds, transactional decode
+.RAW PASS: explicit mono/stereo 8/16/24-bit signedness/endian, precision, alignment, alias, capacity and no implicit conversion
+.RECENT PASS: ten-item MRU, case-folded dedup, alias promotion, bounds, removal, CRC/truncation refusal and atomic decode
+.RECENT FILE PASS: alternating generations, interrupted/corrupt write recovery, persisted clear, invalid-save refusal
+.RECENT FILE PASS: alternating generations, interrupted/corrupt write recovery, persisted clear, invalid-save refusal
+RECENT MEMORY PASS
+RECENT FILE PASS: alternating generations, interrupted/corrupt write recovery, persisted clear, invalid-save refusal
+RECENT MEMORY PASS
+.RECORD PASS: Hold Record, staged start, velocity, grid rounding, short-note OFF, collisions, stale release, monotonic time, capacity, retryable stop and undoable project-pattern recording with effect retention
+.RENDER PASS: planned/streamed stereo16/24 PCM, startup trim, delayed voice continuity, pattern/song endings, slice bounds, selection, preflight refusal, cancellation and sink failures
+RENDER PASS: planned/streamed stereo16/24 PCM, startup trim, delayed voice continuity, pattern/song endings, slice bounds, selection, preflight refusal, cancellation and sink failures
+.RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt/truncated/trailing staging refusal and cleanup
+RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt/truncated/trailing staging refusal and cleanup
+RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt/truncated/trailing staging refusal and cleanup
+.RENDER MEMORY PASS: all4 WAV and11 stem allocation failures preserve masters/reports and remove owned staging
+.RANGE PASS: exact full-render crop with pre-roll pitch/phase, delays, loop boundaries, cancellation, empty/invalid refusal and full-range identity
+RANGE PASS: exact full-render crop with pre-roll pitch/phase, delays, loop boundaries, cancellation, empty/invalid refusal and full-range identity
+..VOLUME boundaries PASS: EC0 and Cxx restore retain silent phase across 16 voices and isolated track 16
+.HANDOFF renderer PASS
+HANDOFF renderer PASS
+.Prepared 16 flow fixtures; native traces remain NOT RUN.
+.HANDOFF renderer PASS
+HANDOFF renderer PASS
+.OFFSET safety PASS: isolated track16 PCM, non-byte/stereo/odd/pingpong/slice refusal before output/report changes
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+.SAMPLE ATTRIBUTES PASS: bounds, every allocation failure, shared 24-bit stereo PCM, bounded metadata history, marker preservation, mixed PCM/metadata undo and exact reopen
+.SAMPLE CACHE PASS: publication, pinned retirement, revisions, refill, LRU pressure, backend failure, stale handles and complete release
+....LOOP/SLICE PASS: metadata, atomic bake undo, proposal commit, non-destructive PCM, retarget refusal, undo/redo conflicts, allocation rollback and exact persistence
+CONVERSION PASS: stereo precision/rate, scaled loops and referenced slice ordinals, exact undo, collapse refusal, allocation rollback, redo and persistence
+IFF SAMPLER PASS: name/volume/loop/PCM, compressed import, exact export, allocation rollback, unsupported refusal, redo and project persistence
+RAW SAMPLER PASS: explicit stereo24 import, exact export, no autodetection, allocation rollback, refusal/redo and persistence
+STEREO24 GAIN HISTORY PASS: clipped extrema, untouched boundary frames, three exact undo/redo cycles and WAV identity
+SAMPLER PASS: exact stereo24 import/range edit, unified history, dirty state, no-op redo, allocation rollback, bounded memory, eviction, save/reopen and release
+.SAMPLER STUDIO PASS: budgeted promotion, stale refusal, edit/undo/eviction pins and final release
+..HANDOFF renderer PASS
+.SLICES PASS: deterministic non-destructive stereo transient proposals, minimum spacing, manual markers, silence, capacity/alias safety and full-precision crossfade loops
+.HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.SLOTS PASS: 0..255 slots, allocation rollback, metadata/PCM/reference preservation, mixed undo, eviction, strict MOD refusal, exact PTG, selection clamp and complete release
+.SONG PASS: bounded growth, insert/remove/move, assignments, allocation rollback, mixed note undo, conflicts, eviction, limits, round trips, controller and complete release
+.MOD SOURCE PASS: separate preview, source/destination selection, failed allocation/budget preservation, exact metadata/PCM import, shared undo, retained song and source release
+.STEMS first export phase=0 detail=0
+STEMS files PASS: grouped PCM equals individual export, global tempo alignment, cancellation, preflight refusal and no-replace race
+STEMS first export phase=0 detail=0
+STEMS files PASS: grouped PCM equals individual export, global tempo alignment, cancellation, preflight refusal and no-replace race
+.STEMS plan PASS: all65535 selections,16 tracks, groups, exact partition and MIDI/invalid preservation
+.STUDIO MIX PASS: pinned versions, atomic controls, pinned handoffs/segments, block continuity, true24 and cleanup
+.STUDIO TICK PASS: tempo carry, partition hash=cbdaeaff, refusal and cleanup
+.8SVX PASS: independent signed PCM fixture, odd chunks, loops, Fibonacci wrap, malformed bounds, alias and capacity
+.HANDOFF renderer PASS
+HANDOFF renderer PASS
+.TIMELINE PASS: prior-tempo intervals, startup, final F00 boundary, delayed passes and atomic frame/tick limits
+.HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.TREMOLO PCM PASS: channel=0 ticks=12 frames=11520
+TREMOLO PCM PASS: channel=0 ticks=24 frames=23040
+TREMOLO PCM PASS: channel=0 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=1 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=2 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=3 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=0 ticks=12 frames=11520
+TREMOLO PCM PASS: channel=0 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=0 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=0 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=0 ticks=18 frames=17280
+..HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.UNUSED PASS: all8xx/E8x parameters across16 tracks, stored/output restoration versus hold, no modulation-state mutation
+.HANDOFF renderer PASS
+HANDOFF renderer PASS
+.PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+.VIBRATO boundaries PASS: 16 tracks, waveforms, independent nibble memory, combined-slide memory, reset ordering and word wrap
+PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+....HANDOFF renderer PASS
+HANDOFF renderer PASS
+.HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 112 tests in 192.581s
+
+OK
+ARPEGGIO: nine repeated native traces match host/m68k period words and ramp PCM, including zero-period refusal
+FLOW: all 16 native trace fixtures match portable control flow
+PITCH: seven repeated native traces match host/m68k state, PCM and zero-period refusal
+PORTAMENTO phase oracle rejects forced retrigger on the same-instrument glide
+PORTAMENTO: nine repeated native traces match host/m68k pitch, volume and DMA-driven phase; 16-track state and refusal checks pass
+VOLUME: seven repeated pinned native traces match every host/m68k rendered PCM frame
+OFFSET: eight repeated native traces verify stored ranges, initial trigger ranges, loops, memory, bounds, delayed rows and four independent tracks; shipping 9xx still refused
+TRIGGERS: ten repeated native fixtures verify E9x/EDx counter timing, retained notes, pattern delay and offset/loop ranges; renderer enablement remains open
+TREMOLO: eight repeated native traces verify output/stored volume, waveforms, nibble memory, reset control, delay and vibrato-phase ramp dependency; renderer support remains open
+UNUSED: six repeated native traces match host/m68k stored/output words and PCM for8xx/E8x
+VIBRATO: eleven repeated native traces match host/m68k period words and ramp PCM
+VOICE traversal PASS: selected ranges, forward/pingpong seams, fractional steps, one-frame loops and large steps
+VOICE mix PASS: true24 stereo, single quantization, clipping, 16 voices, mute progression, capacity and alias refusal
+VOICE partition PASS hash=990c42f0 clips=40
+SEGMENT trajectory 0 hash=2a50eba5
+SEGMENT trajectory 1 hash=295ede49
+SEGMENT trajectory 2 hash=ac5189f5
+SEGMENT trajectory 3 hash=e5165089
+SEGMENT trajectory 4 hash=594e0cb9
+VOICE segment PASS: independent initial/repeat ranges, interpolation handoff, huge steps, one-frame repeats and invalid-range preservation

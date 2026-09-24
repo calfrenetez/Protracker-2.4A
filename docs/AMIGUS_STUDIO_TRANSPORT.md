@@ -178,3 +178,36 @@ Six AmiGUS host sanitizer groups and the pinned native fixture build pass.
 This is a behavioral model, not proof that a Mini implements these readbacks or
 bus transactions. Positive card discovery, native reservation/MMIO and real
 playback timing remain separate work.
+
+## Normal PCM reservation lifecycle (2026-09-24)
+
+`amigus_reservation` provides a serial, caller-owned library/card lifecycle.
+It selects an explicit enumeration index (bounded to 16), rejects cycles,
+unsupported cards and missing PCM blocks, and distinguishes missing library,
+missing card, PCM busy and other driver errors. It reserves PCM alone and uses
+the stable owner address as the reservation identity. Failed acquisition closes
+its library reference without releasing somebody else's card. Close releases
+its own reservation before closing the library, and is idempotent.
+
+A single access lease refuses close while a downstream output session may still
+use the card. The caller must acquire it before port/session setup and end it
+only after confirmed reset/detach and interrupt removal. This is an explicit
+caller obligation, not a hardware state inferred by the lifecycle. The API must
+not be copied, moved or reentered while open. FreeCard returns no status, so
+close confirms invocation order, not independently verified driver release.
+
+`src/native/amigus_reservation.c` wraps OpenLibrary/CloseLibrary and the existing
+public SFD diagnostic shims with a per-context library base. It neither calls
+the adversarial ownership diagnostic nor introduces MMIO, interrupt installation,
+FIFO capacity defaults or playback enable. Known card type plus PCM presence
+is sufficient for reservation only; it does not verify Studio capabilities.
+The native editor does not instantiate this adapter yet.
+
+Validation: seven host sanitizer groups pass. The pinned native compiler links
+`PTAmiGusReservationTest` with the production adapter and fake-library fixture.
+The fixture does not call production library callbacks. No emulator execution
+or real library/card test is claimed for this milestone. Reproduce with
+`tools/build_amigus_reservation.py` and AMIGA_CC set to the pinned compiler.
+Evidence: `evidence/enhanced-editor/amigus-reservation/`. Next: qualify the
+fake-library fixture on the shared030, then integrate access ownership with
+session reset/detach tests before considering any native device operations.

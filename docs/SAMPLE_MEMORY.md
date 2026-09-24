@@ -868,3 +868,9 @@ and readback checks succeed. Host/compile checks only; no native MMIO binding.
 Register/session integration passes host and shared030 fake-bus tests, including
 partial writes and ownership loss. Three tracked Fast allocations, zero final
 owned bytes. Mini readback/bus behavior and live playback remain unqualified.
+
+The normal PCM reservation lifecycle now retains the library/card while an
+explicit downstream access lease exists. Acquisition failures unwind only their
+own references; successful close releases PCM before the library. The native
+public-library adapter compiles/links but remains unwired to playback. Host
+fake-library checks pass; emulator and real-library behavior remain unqualified.

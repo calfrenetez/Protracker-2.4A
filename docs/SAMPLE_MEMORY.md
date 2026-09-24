@@ -788,3 +788,19 @@ All calls remain serialized; Stop does not cancel a physical device transfer.
 Queued editor ownership also passes on shared030 with42 tracked Fast allocations,
 zero final owned bytes and budget refusal. Host editor/Studio suites pass. This
 still does not qualify a native PLAY route, device cancellation or hardware audio.
+
+## Output-consumer completion ownership
+
+`studio_consumer` is an optional caller-owned, serialized transport adapter. It
+borrows a queue and bounded submit/poll/cancel callbacks. Temporary submit refusal
+retains the unsent lease for retry, without dropping audio. Accepted buffers stay
+leased until poll or cancel explicitly confirms all transport references are gone.
+Pending or failed cancellation retains memory; even a sticky error permits polling
+for eventual safe release. Stop aborts unleased audio. Detach refuses until the
+held lease is safe. Stop the producer separately and retain queue/context lifetime
+until successful detach. This does not itself install a device backend.
+
+Host sanitizer tests cover busy retry, natural drain, submit failure, successful
+cancel, delayed/failed cancel, polling failure and eventual completion. Pinned
+Amiga compilation passes; this new consumer has not yet run in the emulator or on
+hardware. Callback compliance, native transport, DMA and deadlines remain open.

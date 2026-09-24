@@ -139,3 +139,20 @@ was explicitly released. This is emulator/reference and host-sequencer evidence.
 Production EFx rendering remains refused pending private workspace integration,
 allocation-failure/cancellation coverage and rendered-output validation. No
 physical or analogue acceptance is claimed.
+
+## Bounded render-owned bank
+
+`invert_bank` prepares one instrument-indexed descriptor bank and one private
+PCM allocation for the explicitly selected samples. It checks all selected
+classic mono8 formats/loop bounds and total bytes before allocating, uses the
+caller's allocator, and unwinds either allocation failure without publishing a
+partial bank. Unselected masters, including 24-bit samples, are not copied or
+converted. Reset restores private bytes from the stable masters for another
+pass; release is safe twice. Masters must remain stable and outlive the bank.
+
+The extended native-trace host test now runs through this allocator-owned bank.
+Budget refusal, both allocation-failure points, selection, mutation isolation,
+reset and complete release pass with address/undefined-behavior sanitizers.
+The bank fixture also cross-compiles for 68030. It has not yet been run on the
+Amiga; production render/Studio entry points still refuse EFx. Wiring the bank
+into those entry points and testing output/cancellation remains unfinished.

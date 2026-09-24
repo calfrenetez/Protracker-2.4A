@@ -34,7 +34,7 @@ class InvertOrdering(unittest.TestCase):
         self.assertEqual(len(cases),3)
         with tempfile.TemporaryDirectory() as tmp:
             exe=Path(tmp)/'test'
-            sources=['invert_sequence','invert_pcm','invert_loop','flow','document','pp20','safe_save','mod_project','mod_inspect','project','channels','pcm']
+            sources=['invert_bank','invert_sequence','invert_pcm','invert_loop','flow','document','pp20','safe_save','mod_project','mod_inspect','project','channels','pcm']
             subprocess.run(['cc','-std=c99','-O1','-g','-Wall','-Wextra','-Werror','-fsanitize=address,undefined','-Isrc/core','tests/invert_ordering_test.c',*[f'src/core/{s}.c' for s in sources],'-o',str(exe)],cwd=ROOT,check=True)
             for mod in sorted(cases):
                 for repeat in range(2):

@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131138520 reserve=262144 flags=4
+MOD SOURCE PASS: separate preview, source/destination selection, failed allocation/budget preservation, exact metadata/PCM import, shared undo, retained song and source release
+EXEC MEMORY PASS: 65 Fast allocations, zero owned bytes, budget refusal without Chip fallback

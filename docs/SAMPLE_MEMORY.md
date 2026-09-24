@@ -1262,3 +1262,15 @@ snapshot. Sync still examines the master PCM synchronously, so no reduced CPU
 cost or physical performance claim is implied. Input must remain stable during
 this synchronous operation. Failed preparation may change only unpublished row
 staging; the native caller publishes rows solely after complete success.
+
+## Donor workflow and production allocator qualification
+
+The clean native editor now passes MOD/PP20 donor preview, cancel, selected
+instrument import, malformed-source refusal preserving redo, exact metadata/PCM
+save, whole-song MOD export and project reopen. Separately, PTExecSourceTest
+reuses the source ownership/failure matrix through the production master pool:65
+Fast/not-Chip allocations and zero owned bytes at disposal on shared030.
+Evidence is in donor-shared-qualified and donor-exec-memory under
+evidence/enhanced-editor. These do not qualify unrelated display edits or
+physical memory/performance. Runtime library internal allocations remain outside
+the explicit allocator accounting.

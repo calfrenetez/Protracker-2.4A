@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "scope": "shared030 donor ownership and failure checks with Exec Fast allocator",
+  "PTExecSourceTest_sha256": "a57796e49593aa1acd498a0737bd1f1fc88793061a2d8ded56ebd47814b737b6",
+  "source-memory_returncode": "0",
+  "stopped_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=333\tsndbuf_status=0",
+  "donor_unchanged": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=250\tsndbuf_status=0",
+  "run_files_cleaned": true
+}

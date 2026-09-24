@@ -11,6 +11,7 @@ def main():
     group.add_argument('--render-cli',metavar='REFERENCE_WAV',help='Run one-row native renderer against an exact host reference')
     group.add_argument('--pp20-import',action='store_true',help='Run native converter bounded packed MOD import')
     group.add_argument('--project-import',action='store_true',help='Run native converter enhanced-project load/save roundtrip')
+    group.add_argument('--source-memory',action='store_true',help='Run donor ownership/failure/undo checks with native Fast allocator')
     group.add_argument('--mod-import',action='store_true',help='Run bounded MOD document load with native Fast allocator')
     group.add_argument('--sample-import',choices=['raw','wav','svx'],help='Run streamed sample import with native Fast allocator')
     group.add_argument('--mod-stream',action='store_true',help='Run bounded classic MOD export with native Fast allocator')
@@ -87,6 +88,9 @@ def main():
         if args.project_import:
             cases=[('project-import','PT24GConvert','SAVED format=PT24G-v1')]
             result['scope']='shared030 bounded enhanced-project converter load/save; exact mixed master roundtrip'
+        if args.source_memory:
+            cases=[('source-memory','PTExecSourceTest','MOD SOURCE PASS:')]
+            result['scope']='shared030 donor ownership and failure checks with Exec Fast allocator'
         if args.mod_import:
             cases=[('mod-import','PTExecModImportTest','MOD IMPORT STREAM PASS:')]
             result['scope']='shared030 streamed MOD document import and Exec Fast allocator'
@@ -107,7 +111,11 @@ def main():
             for name,binary,marker in cases:
                 sub=run/name;sub.mkdir();shutil.copyfile(ROOT/'build/dev'/binary,sub/binary)
                 result[binary+'_sha256']=hashlib.sha256((sub/binary).read_bytes()).hexdigest()
-                commands+=['CD '+guest.device+run.name+'/'+name,binary+' '+guest.device+run.name+'/'+name+('/module.mod' if args.mod_import else '/sample.input' if args.sample_import else '/master.mod' if args.mod_stream else '/master.ptg' if args.project_stream else '/sample.iff' if args.sample_svx else '/sample.raw' if args.sample_raw else '/sample.wav' if args.sample_wav else '/recent' if args.input_memory in ('recent','exec-recent') else '')+' >test.log','Echo $RC >test.rc']
+                commands+=['CD '+guest.device+run.name+'/'+name,binary+' '+guest.device+run.name+'/'+name+('/donor.mod' if args.source_memory else '/module.mod' if args.mod_import else '/sample.input' if args.sample_import else '/master.mod' if args.mod_stream else '/master.ptg' if args.project_stream else '/sample.iff' if args.sample_svx else '/sample.raw' if args.sample_raw else '/sample.wav' if args.sample_wav else '/recent' if args.input_memory in ('recent','exec-recent') else '')+' >test.log','Echo $RC >test.rc']
+            if args.source_memory:
+                from make_mod_sample_fixture import make
+                donor=make((ROOT/'evidence/baseline/mod.baseline').read_bytes())
+                (run/'source-memory/donor.mod').write_bytes(donor)
             if args.project_import:
                 sub=run/'project-import';shutil.copyfile(ROOT/'tests/fixtures/project-v1/mixed.ptg',sub/'source.ptg')
                 commands=['FailAt 21','Stack 65536','CD '+guest.device+run.name+'/project-import',
@@ -138,7 +146,7 @@ def main():
                 log=(run/name/'test.log').read_text();(out/(name+'.log')).write_text(log)
                 result[name+'_returncode']=(run/name/'test.rc').read_text().strip()
                 assert result[name+'_returncode']=='0' and marker in log,log
-                if args.mod_import or args.sample_import or args.mod_stream or args.project_stream or args.sample_svx or args.sample_raw or args.sample_wav or args.studio_memory or args.exec_memory or args.input_memory in ('exec-import','exec-recent'):assert 'EXEC MEMORY PASS:' in log,log
+                if args.source_memory or args.mod_import or args.sample_import or args.mod_stream or args.project_stream or args.sample_svx or args.sample_raw or args.sample_wav or args.studio_memory or args.exec_memory or args.input_memory in ('exec-import','exec-recent'):assert 'EXEC MEMORY PASS:' in log,log
             if args.mod_import or args.sample_import or args.mod_stream or args.project_stream or args.sample_svx or args.sample_wav or args.sample_raw:
                 directory,binary=('mod-import','PTExecModImportTest') if args.mod_import else ('svx-import','PTExecSvxImportTest') if args.sample_import=='svx' else ('raw-import','PTExecRawImportTest') if args.sample_import=='raw' else ('wav-import','PTExecWavImportTest') if args.sample_import=='wav' else ('mod-stream','PTExecModStreamTest') if args.mod_stream else ('project-stream','PTExecProjectStreamTest') if args.project_stream else ('sample-svx','PTExecSampleSvxFileTest') if args.sample_svx else ('sample-raw','PTExecSampleRawFileTest') if args.sample_raw else ('sample-wav','PTExecSampleFileTest')
                 remaining=sorted(p.name for p in (run/directory).iterdir())
@@ -176,8 +184,18 @@ def main():
                 result['repeat_returncode']=repeat
                 result['exact_host_stems']=True
                 result['reference_sha256']={n:hashlib.sha256(data).hexdigest() for n,data in expected.items()}
+            if args.source_memory:
+                assert (run/'source-memory/donor.mod').read_bytes()==donor
+                state=guest.command('GET_AUDIO_STATE')
+                assert all('ch%d_dma=0'%i in state.split('\t') for i in range(4))
+                result['stopped_audio']=state
+                result['donor_unchanged']=True
             result['passed']=True
         finally:
+            if finished and args.source_memory:
+                state=guest.command('GET_AUDIO_STATE')
+                finished=all('ch%d_dma=0'%i in state.split('\t') for i in range(4))
+                result['cleanup_audio']=state
             if finished:
                 guest.launch.unlink();shutil.rmtree(run)
             result['run_files_cleaned']=finished

@@ -81,6 +81,7 @@ def main():
     inputs['PT24GEdit'] += ['src/platform/mod_import.c']
     inputs['PT24GConvert'] += ['src/platform/mod_import.c']
     inputs['PTSourceTest'] += ['src/platform/mod_import.c']
+    inputs['PTExecSourceTest'] = ['tests/native_exec_source_test.c', *inputs['PTSourceTest'][1:]]
     inputs['PTProjectReaderTest'] = ['tests/project_reader_test.c', *inputs['PTProjectTest'][1:]]
     inputs['PT24GEdit'] += ['src/platform/project_import.c']
     inputs['PT24GConvert'] += ['src/platform/project_import.c']

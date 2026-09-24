@@ -634,3 +634,26 @@ with tempo changes, pattern delay, retriggered notes, volume slides, initial lea
 and row-range pre-roll. Allocation/preflight/protocol refusal is also covered.
 This establishes a caller-driven song path; it is not yet an editor playback
 controller, output queue, AmiGUS transport or real-time performance qualification.
+
+## Owned Studio song controller
+
+`pt_studio_song` owns the incremental sequence, mixer, copied master bindings,
+command-plan workspace and stereo24 output scratch. It uses three bounded caller
+allocations; each failed startup stage releases earlier allocations and leaves
+the output session pointer unchanged. Input is restricted to48k stereo24 output.
+One binding per sample must match that project slot's descriptor. The project and
+master contents remain immutable/borrowed until close; stop before editing or
+replacing the document. Provider pins do not replace that project lifetime rule.
+
+Each pull performs at most one state transition or one block of up to256 frames,
+including discarded pre-roll. A null block with done=false means progress; the
+owner should yield/check cancellation before pulling again. Output is borrowed
+session scratch and must be copied before another pull. No output queue is hidden
+inside the controller. Natural end, stop and internal failure close the mixer and
+sequence and release all pins; the controller allocation remains until
+close. Failure is sticky and playback cannot be retried. Stop is idempotent.
+
+Host tests cover reference audio at block sizes1/17/256, all three allocation
+failure points, stop during a pinned voice, natural cleanup and sticky acquisition
+failure. This provides an owner-thread playback controller, not an editor action,
+interrupt callback, device queue, transport or real-time performance qualification.

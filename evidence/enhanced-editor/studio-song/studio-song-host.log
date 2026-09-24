@@ -1,0 +1,15 @@
+STUDIO MIX PASS: pinned versions, atomic controls, pinned handoffs/segments, block continuity, true24 and cleanup
+.Studio dispatch PASS: 16-channel true24 audio equivalence, source binding, partial acquisition failure cleanup
+.SONG SESSION PASS: reference audio, tempo/delay, pre-roll, partition invariance, protocol and allocation refusal
+.STUDIO TICK PASS: tempo carry, partition hash=cbdaeaff, refusal and cleanup
+.
+----------------------------------------------------------------------
+Ran 4 tests in 6.735s
+
+OK
+SEQUENCE PASS: reference audio, tempo/delay, pre-roll, partition invariance, protocol and allocation refusal
+.
+----------------------------------------------------------------------
+Ran 1 test in 2.672s
+
+OK

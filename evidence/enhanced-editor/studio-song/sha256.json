@@ -1,0 +1,7 @@
+{
+  "src/core/studio_song.c": "e45056162414701cc77cf829a925726020576658c526608948196b23bc4b82a4",
+  "src/core/studio_song.h": "c5d8b2c8a2a4e4f2aa22ef1eb28a75fa2a09e0da48107f2aaf826b18f6748434",
+  "tests/studio_song_test.c": "c964362d6e54bd176d78a96f7b8f3961622fbebfe81d46dd5354e0f01930c058",
+  "tests/test_studio_song.py": "5a4cce6e40ff236f95d1207ec9b3aa283b50cabfe1e7dbac875a9b5fa9944a51",
+  "build/dev/PTStudioSongTest": "0dc1f1608ca9677332cc741e5add3fa64859ee2165c9b92de563b70f6de95dd3"
+}

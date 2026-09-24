@@ -1,0 +1,11 @@
+{
+  "prior_generation": 28,
+  "test_generation": 29,
+  "prior_entries": 10,
+  "verified_only_test_insertion": true,
+  "restored": true,
+  "prior_list_exact": true,
+  "owned_files_cleaned": true,
+  "audio_off": true,
+  "user_approved": true
+}

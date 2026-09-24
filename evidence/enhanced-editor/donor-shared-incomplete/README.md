@@ -20,3 +20,14 @@ uses explicit full donor paths and run-owned recent-prefix backup/restore, but
 this revised harness is syntax-checked ONLY and has NOT been retried in guest.
 Screenshot also shows existing dirty display corruption; no UI acceptance is
 claimed and unrelated display work has not been changed.
+
+## User-approved repair completed
+
+The user approved local inspection and precise reversal. Both recent-list slots
+validated; generation29 contained only this test's insertion relative to valid
+generation28. State was rechecked before restoration. The previous ten-entry list
+was restored byte-for-byte and verified. No private paths or recent payloads are
+included in repository evidence. `repair.json` contains only non-private results.
+After script-completion and all-DMA-off checks, exact failed-run files and launch
+were removed, with failure logs retained. Shared window explicitly released.
+The original donor UI failure remains unqualified; repair is not a test pass.

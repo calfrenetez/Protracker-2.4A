@@ -489,3 +489,8 @@ and allocator context must remain alive and must not be reinitialized until fina
 unpin. Normal integration must close mixer sessions before editor/document reset.
 The provider is implemented and lifecycle-tested; native editor scheduling and
 AmiGUS output remain unwired. No real-time performance acceptance is implied.
+
+Production-allocator Studio ownership fixtures now pass individually on shared030:
+mixer1 and sampler11 explicit Fast/not-Chip allocations, each with zero pool-owned
+bytes at final release. This verifies pin/ref lifetime with Exec allocation, not
+real-time deadlines or AmiGUS transport. No physical acceptance is implied.

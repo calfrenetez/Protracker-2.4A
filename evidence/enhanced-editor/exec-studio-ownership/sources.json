@@ -1,0 +1,8 @@
+{
+  "tests/native_exec_memory.h": "ce0f2b696ce7767c0da8a2a44ac7730bc207f81e4f6b86bfd172353989e664b9",
+  "tests/native_exec_studio_test.c": "c48e519107bfc9ef7b5245a4e1bab4f1223d18f76655ddfa5a7cf083a3858f6d",
+  "tests/native_exec_sampler_studio_test.c": "57c122b63bccbfa22d903ed9699e115244b291bdfe5f162d985e9719eb58e9e4",
+  "tests/studio_mix_test.c": "2babcd3d9ef149faf2552e773363c82b8a9acee7c01564e65f04aa38e7ff1ba8",
+  "tests/sampler_studio_test.c": "7e3632576b86822cfe6504360c45c55b6806372ebd863daaef1739874dcbddfe",
+  "src/native/master_memory.h": "ac898368849ec2d1892717d425b90c398da37a8799d536366a898e2e219e184a"
+}

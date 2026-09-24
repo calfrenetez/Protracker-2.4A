@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131202272 reserve=262144 flags=4
+SAMPLER STUDIO PASS: budgeted promotion, stale refusal, edit/undo/eviction pins and final release
+EXEC MEMORY PASS: 11 Fast allocations, zero owned bytes, budget refusal without Chip fallback

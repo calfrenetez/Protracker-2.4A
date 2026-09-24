@@ -108,6 +108,8 @@ def main():
     inputs['PT24GEdit'].append('src/platform/file_load.c')
     inputs['PTSamplerStudioTest'] = ['tests/sampler_studio_test.c','src/editor/sampler_studio.c','src/core/studio_mix.c','src/core/voice.c',*inputs['PTSamplerTest'][1:]]
     inputs['PTStudioMixTest'] = ['tests/studio_mix_test.c','src/core/studio_mix.c','src/core/voice.c','src/core/pcm.c']
+    inputs['PTExecStudioTest'] = ['tests/native_exec_studio_test.c',*inputs['PTStudioMixTest'][1:]]
+    inputs['PTExecSamplerStudioTest'] = ['tests/native_exec_sampler_studio_test.c',*inputs['PTSamplerStudioTest'][1:]]
     inputs['PTExecImportTest'] = ['tests/native_exec_import_test.c','src/platform/file_load.c']
     inputs['PTExecRecentTest'] = ['tests/native_exec_recent_test.c','src/platform/recent_file.c','src/core/recent.c']
     inputs['PTRecentMemoryTest'] = ['tests/recent_memory_test.c','src/platform/recent_file.c','src/core/recent.c']

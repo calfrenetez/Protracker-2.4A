@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "scope": "shared030 Studio ownership core; no audio device transport",
+  "PTExecSamplerStudioTest_sha256": "e85375ed64204e4420fb4715175e9f6b60c920800ac2e4d5d2e2d95365623ae7",
+  "sampler-studio_returncode": "0",
+  "run_files_cleaned": true
+}

@@ -7,6 +7,7 @@ INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     group=parser.add_mutually_exclusive_group()
+    group.add_argument('--studio-memory',choices=['mixer','sampler'],help='Run one production-allocator Studio fixture')
     group.add_argument('--input-memory',choices=['import','recent','exec-import','exec-recent'],help='Run one import or recent-file memory fixture')
     group.add_argument('--exec-memory',choices=['bounce','stems','failures','save'],help='Run one native Exec-backed memory fixture')
     group.add_argument('--stems-only',action='store_true',help='Run the allocated stem export test only')
@@ -39,6 +40,9 @@ def main():
             if args.input_memory=='exec-import':cases=[('import','PTExecImportTest','FILE LOAD PASS')]
             if args.input_memory=='exec-recent':cases=[('recent','PTExecRecentTest','RECENT MEMORY PASS')]
             result['scope']='shared030 native import/recent file checks'
+        if args.studio_memory:
+            cases=[('studio','PTExecStudioTest','STUDIO MIX PASS:')] if args.studio_memory=='mixer' else [('sampler-studio','PTExecSamplerStudioTest','SAMPLER STUDIO PASS:')]
+            result['scope']='shared030 Studio ownership core; no audio device transport'
         try:
             commands=['FailAt 21','Stack 65536']
             for name,binary,marker in cases:
@@ -56,7 +60,7 @@ def main():
                 log=(run/name/'test.log').read_text();(out/(name+'.log')).write_text(log)
                 result[name+'_returncode']=(run/name/'test.rc').read_text().strip()
                 assert result[name+'_returncode']=='0' and marker in log,log
-                if args.exec_memory or args.input_memory in ('exec-import','exec-recent'):assert 'EXEC MEMORY PASS:' in log,log
+                if args.studio_memory or args.exec_memory or args.input_memory in ('exec-import','exec-recent'):assert 'EXEC MEMORY PASS:' in log,log
             result['passed']=True
         finally:
             if finished:

@@ -1,0 +1,17 @@
+{
+  "scope": "host sanitizer and Amiga compilation only; no device or emulator execution",
+  "upstream_commit": "d8c9a0429f41cd5f3dbadae34ef438e45c9c3718",
+  "binary_sha256": "acf6d24b784b50ff1793e9864034328f45e3461fc2d7ab5c406188077fdfda1f",
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror"
+  ],
+  "compiler": "pinned m68k-amigaos-gcc",
+  "compile_exit": 0
+}

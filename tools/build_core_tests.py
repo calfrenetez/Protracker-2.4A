@@ -111,6 +111,7 @@ def main():
     inputs['PTStudioQueueTest'] = ['tests/studio_queue_test.c','src/core/studio_queue.c','src/core/pcm.c']
     inputs['PTStudioSongTest'] = ['tests/studio_song_test.c','src/core/studio_song.c','src/core/studio_plan.c','src/core/studio_mix.c',*render_sources]
     inputs['PTSamplerSongTest'] = ['tests/sampler_song_test.c','src/editor/sampler_song.c',*dict.fromkeys([*inputs['PTSamplerStudioTest'][1:],*inputs['PTStudioSongTest'][1:]])]
+    inputs['PTAmiGusPackTest'] = ['tests/amigus_pcm_pack_test.c','src/core/amigus_pcm_pack.c','src/core/pcm.c']
     inputs['PTStudioConsumerTest'] = ['tests/studio_consumer_test.c','src/core/studio_consumer.c','src/core/studio_queue.c','src/core/pcm.c']
     inputs['PTExecStudioConsumerTest'] = ['tests/native_exec_studio_consumer_test.c',*inputs['PTStudioConsumerTest'][1:]]
     inputs['PTEditorStudioTest'] = ['tests/editor_studio_test.c','src/editor/editor_studio.c','src/core/studio_pump.c','src/core/studio_queue.c',*dict.fromkeys([*inputs['PTSamplerSongTest'][1:],*inputs['PTSongTest'][1:]])]

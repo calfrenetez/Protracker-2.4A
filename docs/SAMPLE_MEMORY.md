@@ -816,3 +816,12 @@ cancellation case; static fixture storage is not part of tracked allocation proo
 Shared030 consumer and queued-chain fixtures pass with6 and25 tracked Fast/not-Chip
 allocations, zero final owned bytes and budget refusal. This supersedes the earlier
 consumer emulator gap only; device transport and physical acceptance remain open.
+
+## AmiGUS PCM packing preparation
+
+Pinned AHI source exposes a separate stereo24 PCM FIFO path. The new pure
+`amigus_pcm_pack` preserves true24 samples as numeric MSB-first FIFO words,
+carrying odd frames across blocks; explicit finish reports at most one silent
+padding frame. No master degradation or device access. Host sanitizer and native
+compile checks pass; positive-card/runtime transport is still unfinished.
+See [transport review](AMIGUS_STUDIO_TRANSPORT.md) for pinned evidence and gaps.

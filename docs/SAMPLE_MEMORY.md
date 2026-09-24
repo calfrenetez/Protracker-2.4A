@@ -969,3 +969,22 @@ RAW streaming now passes shared030 across16 formats: fixed11240-byte workspace,
 35 tracked Fast/not-Chip allocations, zero owned bytes, budget refusal and clean
 staging. Evidence: `evidence/enhanced-editor/exec-sample-raw-stream/`. Native editor
 handler is connected; no physical storage or visual UI acceptance is implied.
+
+## Bounded native IFF/8SVX sample export
+
+IFF sample export now streams its immutable mono8 master through fixed-budget
+generated-file saving. The core8SVX encoder's88-byte header, full32-byte name,
+rate, volume, cycles, forward-loop coordinates and odd BODY padding are preserved
+exactly. Native sampler eligibility still refuses slices, finetune and unsupported
+loop/precision/channel/rate settings; export never converts the master.
+
+WAV, RAW and IFF sample export handlers now avoid whole encoded payload copies.
+Enhanced-project saving still uses whole-file encoding and remains separate work.
+The synchronous source-lifetime and no-replace/readback/cleanup contract is the
+same for all three formats. Host encoder-equivalence and failure tests pass;
+native runtime evidence is recorded per milestone.
+
+IFF streaming passes shared030 with11240-byte fixed workspace,11 tracked
+Fast/not-Chip allocations, zero owned bytes and clean staging. Exact metadata
+and BODY comparisons pass. Evidence: `evidence/enhanced-editor/exec-sample-svx-stream/`.
+No physical storage or visual UI acceptance is implied.

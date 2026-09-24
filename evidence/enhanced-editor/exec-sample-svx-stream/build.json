@@ -1,0 +1,24 @@
+{
+  "scope": "native build includes unrelated display edits; not UI release proof",
+  "binaries": {
+    "PT24GEdit": {
+      "sha256": "0562c71aa8c197aaf3e3b94433fea994dce8fb6465035ff886869308a8e2656a",
+      "bytes": 223508
+    },
+    "PTSampleSvxFileTest": {
+      "sha256": "1581ac814378323cfe82d3df5c0dfbec89584b67e02a11716b9067249dc806f1",
+      "bytes": 36852
+    },
+    "PTExecSampleSvxFileTest": {
+      "sha256": "ff618aa2642350b3186d5798d8309e827f3727b49695f3bc265e9f9cc6dba716",
+      "bytes": 38148
+    }
+  },
+  "sources": {
+    "src/platform/sample_svx_file.c": "c256fe98f5a600a86e72f35875ef835a85caee0b6c1f5065d3e8ed13c17a87c8",
+    "src/platform/sample_file.h": "c7e2083b8d695292a7e2669bf89514a0745e73e9a56d4ce0fc16ecef158971ba",
+    "tests/sample_svx_file_test.c": "f1a75a0a803a57a3ce76617f7b29a1dbd4512215b6f20fbcbc9975c31da638a2",
+    "tests/native_exec_sample_svx_file_test.c": "b9074b15a6aea4bbecc742cfc4fdceb4f53b5bdc67379d9224905e3d0b85d062",
+    "src/native/editor_main.c": "2069740abcb19d427e7d3a659d9094ddcae102746dbcb1fc449d68e52c3a4561"
+  }
+}

@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131245576 reserve=262144 flags=4
+SAMPLE SVX STREAM PASS: exact metadata, loop and odd padding, master preserved, fixed workspace=11240
+EXEC MEMORY PASS: 11 Fast allocations, zero owned bytes, budget refusal without Chip fallback

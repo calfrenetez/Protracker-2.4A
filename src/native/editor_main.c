@@ -127,11 +127,11 @@ static int svx_eligible(struct pt_editor *e)
 }
 static void save_svx(struct pt_editor *e,const char *path)
 {
-    size_t n,w;uint8_t *bytes;enum pt_save_result result;const struct pt_sample *sample=&e->project->samples[e->sample-1];
+    size_t n;struct pt_svx_info info={0};enum pt_save_result result;const struct pt_sample *sample=&e->project->samples[e->sample-1];
     if(!svx_eligible(e) || pt_sampler_svx_size(sample,&n)!=PT_SVX_OK)return;
-    bytes=pt_master_allocate(&master_memory,n);if(!bytes) {pt_editor_status(e,"IFF EXPORT: OUT OF MEMORY");return;}
-    if(pt_sampler_svx_encode(sample,bytes,n,&w)!=PT_SVX_OK || w!=n) {pt_master_release(&master_memory,bytes);pt_editor_status(e,"IFF EXPORT FAILED - SAMPLE PRESERVED");return;}
-    result=pt_file_save_new_allocated(path,bytes,n,&render_allocator);pt_master_release(&master_memory,bytes);
+    memcpy(info.name,sample->name,sizeof(info.name));info.loop_start=sample->loop_start;
+    info.loop_end=sample->loop_end;info.volume=(uint32_t)sample->volume*1024;
+    result=pt_sample_svx_save(path,&sample->pcm,&info,&render_allocator);
     pt_editor_status(e,result==PT_SAVE_MEMORY?"SAVE: OUT OF MEMORY":result==PT_SAVE_OK?"IFF EXPORTED AND VERIFIED - PROJECT STATE UNCHANGED":"IFF EXPORT REFUSED OR FAILED - DESTINATION PRESERVED");
     printf("EDITOR IFF result=%u dirty=%u\n",result,pt_editor_dirty(e));fflush(stdout);
 }

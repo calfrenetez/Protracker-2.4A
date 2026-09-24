@@ -44,10 +44,13 @@ def main():
                                               'PTPlaybackPCMTest >pcm.log', 'Echo $RC >pcm.rc',
                                               'PTPlaybackUploadTest >upload.log', 'Echo $RC >upload.rc',
                                               'PTPreviewPCMTest >preview.log', 'Echo $RC >preview.rc',
-                                              'PTPaulaTest input.mod >paula.log', 'Echo $RC >paula.rc']) + '\n')
+                                              'PTPaulaTest input.mod >paula.log', 'Echo $RC >paula.rc',
+                                              'Echo done >done']) + '\n')
             guest.start()
             end = time.monotonic() + 60
-            while not (run / 'paula.rc').exists():
+            # A file can exist before Echo has written its return code. The
+            # trailing command is reached only after all rc/log handles close.
+            while not (run / 'done').exists():
                 if time.monotonic() > end:
                     raise RuntimeError('Paula test timed out; preserve run files for guarded recovery')
                 time.sleep(.2)
@@ -70,7 +73,7 @@ def main():
             assert result['pcm_returncode'] == '0' and 'PLAYBACK PCM PASS:' in pcm_log, pcm_log
             assert all(marker in log for marker in ('PREVIEW PCM PASS:', 'PREVIEW RATE PASS:', 'PREVIEW LOOP PASS:', 'PREVIEW STEREO PASS:', 'PREVIEW CANCEL PASS:')), log
             assert result['cache_returncode'] == '0' and 'SAMPLE CACHE PASS:' in cache_log, cache_log
-            assert 'CACHE REUSE PASS:' in log, log
+            assert 'CACHE REUSE PASS:' in log and 'PLAY REFUSAL PASS:' in log, log
             assert result['returncode'] == '0' and 'CACHE PASS:' in log and 'PAULA PASS:' in log, log
             assert all('ch%d_dma=0' % i in result['audio_after'].split('\t') for i in range(4)), result['audio_after']
             result['passed'] = True

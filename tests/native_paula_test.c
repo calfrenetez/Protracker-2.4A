@@ -44,6 +44,44 @@ int main(int argc,char **argv)
         CHECK(changed);puts("SCOPE/DMA PASS: enabled hardware channels and time-varying sample preview");
     }
     printf("REPLAY initial ticks=%lu row=%u periods=%u,%u,%u,%u\n",(unsigned long)state.ticks,state.row,state.period[0],state.period[1],state.period[2],state.period[3]);
+    /* A refused new song/pattern must not replace the active replay or mutate
+       the enhanced project's authoritative samples. No actual AmiGUS access. */
+    {
+        struct pt_project candidate;
+        struct pt_sample high_samples[31],before_samples[31];
+        int32_t high_pcm[4]={-8388607,257,-513,8388607};
+        const int32_t expected_pcm[4]={-8388607,257,-513,8388607};
+        uint8_t *active_data=a.data,*active_sample=a.sample_data[0];
+        uint64_t active_version=a.cache_version;
+        unsigned attempt;
+        CHECK(doc.project.sample_count && doc.project.sample_count<=31);
+        for(attempt=0;attempt<5;++attempt) {
+            const char *error,*expected;
+            uint32_t ticks;
+            candidate=doc.project;
+            if(attempt==0) {candidate.mode=PT_MODE_STUDIO;expected="STUDIO PLAYBACK NOT AVAILABLE";}
+            else if(attempt==1) {candidate.channels.track[0].route=PT_AMIGUS;expected="AMIGUS PLAYBACK NOT AVAILABLE";}
+            else if(attempt==2) {candidate.channels.track[0].route=PT_MIDI;expected="MIDI PLAYBACK NOT AVAILABLE";}
+            else if(attempt==3) {candidate.channels.track[0].route=PT_AMIGUS;candidate.channels.track[1].route=PT_MIDI;expected="AMIGUS AND MIDI";}
+            else {
+                memcpy(high_samples,doc.project.samples,doc.project.sample_count*sizeof(*high_samples));
+                high_samples[0].pcm.data=high_pcm;high_samples[0].pcm.capacity=4;
+                high_samples[0].pcm.frames=4;high_samples[0].pcm.bits=24;
+                high_samples[0].loop=PT_LOOP_NONE;high_samples[0].loop_start=high_samples[0].loop_end=0;
+                candidate.samples=high_samples;expected="HIGH-RES MASTER";
+                memcpy(before_samples,high_samples,doc.project.sample_count*sizeof(*high_samples));
+            }
+            pt_paula_poll(&a,&state);ticks=state.ticks;
+            error=pt_paula_play(&a,&candidate,attempt&1,0,0);
+            CHECK(error && strstr(error,expected));Delay(2);pt_paula_poll(&a,&state);
+            CHECK(state.active && state.ticks>ticks && a.started && a.locked);
+            CHECK(a.data==active_data && a.sample_data[0]==active_sample && a.cache_version==active_version);
+            CHECK((*(volatile UWORD *)0xdff002 & 15)==15);
+            CHECK(!memcmp(high_pcm,expected_pcm,sizeof(high_pcm)));
+            if(attempt==4)CHECK(!memcmp(high_samples,before_samples,doc.project.sample_count*sizeof(*high_samples)));
+        }
+        puts("PLAY REFUSAL PASS: Studio/AmiGUS/MIDI/24-bit requests preserve active replay, cache ownership and masters");
+    }
     CHECK(pt_paula_play(&b,&doc.project,0,0,0)!=NULL && !b.started);
     pt_paula_poll(&a,&state);CHECK(state.active);pt_paula_stop(&a);
     CHECK((*(volatile UWORD *)0xdff002 & 15)==0);

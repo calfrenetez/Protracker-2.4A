@@ -906,3 +906,18 @@ silently convert a master. Classic eligibility and private mute/solo/name/group
 normalization remain unchanged; strict disk export still checks saved metadata.
 The refusal happens before replacing existing Paula playback. Live synchronization
 retains the existing stop-on-incompatible-edit behavior. No screen layout change.
+
+The native Paula regression now exercises refused new song/pattern requests for
+Studio, AmiGUS, MIDI, mixed routes and a separate genuine24-bit master while a
+classic song is already playing. It requires continued ticks/DMA, unchanged
+active cache addresses/version and retained audio lock; the enhanced master's
+PCM and sample descriptors must remain byte-identical. The shared runner now
+requires the new PLAY REFUSAL marker as well as normal audio shutdown. Results
+and acceptance tier are recorded in the corresponding evidence directory.
+
+Active-replay refusal now passes the shared030 regression (rc0, unchanged
+cache/master, continuing ticks; all DMA off at exit). Evidence is in
+`evidence/enhanced-editor/paula-play-refusal/`; the original harness return-code
+race is retained separately from the successful completion-marker rerun. CIA
+fallback execution remains NOT RUN because Workbench owns CIAA timer B. No
+physical/audio-listening acceptance is implied.

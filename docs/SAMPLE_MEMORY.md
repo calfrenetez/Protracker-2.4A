@@ -553,3 +553,23 @@ pointers are borrowed, not pins; it must not be used as a substitute for Studio
 master ownership. A failed command tick may leave partial state and must abort
 the session. Command-intent translation into Studio triggers/controls and full
 tracker playback are still unfinished. This refactor alone adds no live output.
+
+## Explicit playback command plans
+
+`pt_render_commands_plan` now records the same completed-tick effect execution as
+an ordered, caller-owned plan: ordinary triggers, independent segment triggers,
+repeat-source changes, stops and final step/gain controls. A fixed 64-entry bound
+covers sixteen channels without allocating. Repeated notes remain explicit even
+when the new phase equals the old phase. The reference stream retains its ordinary
+unrecorded path through the same effect implementation.
+
+The plan borrows PCM descriptors; it does not acquire master versions. Dispatch
+must resolve each source to its master key/generation and acquire through Studio's
+provider. Inputs still require renderer preflight and consistent immutable
+lifetimes. On failure the plan count is cleared, but command state may already
+have advanced: abort the session, never dispatch or retry a partial tick.
+
+Host tests replay the operations through voice APIs and compare 16-channel audio
+with the reference command path across repeated notes, instrument-only handoffs,
+volume cuts, offset segments, retriggers and stops. The Studio translation,
+complete song scheduling and hardware output transport remain unfinished.

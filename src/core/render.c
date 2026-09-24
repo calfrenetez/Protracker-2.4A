@@ -244,9 +244,35 @@ static uint8_t tremolo_volume(struct pt_render_tremolo *t,unsigned volume,unsign
     t->phase=(uint8_t)(t->phase+((t->command>>4)*4));
     return (uint8_t)(output<0?0:output>64?64:output);
 }
+static int action(struct pt_render_plan *plan,unsigned ch,enum pt_render_action_kind kind,const struct pt_voice *voice)
+{
+    struct pt_render_action *a;if(!plan)return 1;
+    if(plan->count>=PT_RENDER_ACTIONS)return 0;
+    a=&plan->action[plan->count++];memset(a,0,sizeof(*a));a->kind=kind;a->channel=ch;a->voice=*voice;return 1;
+}
+static enum pt_pcm_result command_trigger(struct pt_render_plan *plan,unsigned ch,struct pt_voice *v,const struct pt_pcm *p,
+    uint32_t start,uint32_t end,enum pt_voice_loop loop,uint32_t a,uint32_t b,uint64_t step,unsigned linear)
+{
+    enum pt_pcm_result result=pt_voice_init(v,p,start,end,loop,a,b,step,linear);
+    if(result==PT_PCM_OK && !action(plan,ch,PT_RENDER_TRIGGER,v))return PT_PCM_CAPACITY;
+    return result;
+}
+static enum pt_pcm_result command_segment(struct pt_render_plan *plan,unsigned ch,struct pt_voice *v,const struct pt_pcm *p,
+    uint32_t start,uint32_t end,uint32_t a,uint32_t b,uint64_t step,unsigned linear)
+{
+    enum pt_pcm_result result=pt_voice_init_segment(v,p,start,end,a,b,step,linear);
+    if(result==PT_PCM_OK && !action(plan,ch,PT_RENDER_SEGMENT,v))return PT_PCM_CAPACITY;
+    return result;
+}
+static enum pt_pcm_result command_repeat(struct pt_render_plan *plan,unsigned ch,struct pt_voice *v,const struct pt_pcm *p,uint32_t a,uint32_t b)
+{
+    enum pt_pcm_result result=pt_voice_set_repeat_source(v,p,a,b);
+    if(result==PT_PCM_OK && !action(plan,ch,PT_RENDER_REPEAT,v))return PT_PCM_CAPACITY;
+    return result;
+}
 static enum pt_render_result commands(const struct pt_project *p,const struct pt_render_options *o,
                                       const struct pt_flow *flow,const struct pt_pitch *pitch,const struct pt_render_range *ranges,uint16_t offsets,struct pt_voice *voice,
-                                      uint8_t *instrument,uint8_t *volume,uint8_t *velocity,uint8_t *output_volume,struct pt_render_tremolo *trem)
+                                      uint8_t *instrument,uint8_t *volume,uint8_t *velocity,uint8_t *output_volume,struct pt_render_tremolo *trem,struct pt_render_plan *plan)
 {
     unsigned ch;
     for(ch=0;ch<p->channels.count;++ch)if(o->tracks&(1U<<ch)) {
@@ -254,12 +280,12 @@ static enum pt_render_result commands(const struct pt_project *p,const struct pt
             const struct pt_event *e=flow->project->events+((size_t)flow->project->orders[flow->played_order]*64+flow->played_row)*p->channels.count+ch;
             if((e->kind==PT_NOTE_NONE || (e->kind==PT_NOTE_PERIOD && (e->effect==3 || e->effect==5 || (e->effect==14 && (e->parameter>>4)==13)))) && e->instrument && e->instrument!=instrument[ch] && voice[ch].active) {
                 const struct pt_sample *next=p->samples+e->instrument-1;
-                if(pt_voice_set_repeat_source(voice+ch,&next->pcm,next->loop?next->loop_start:0,next->loop?next->loop_end:2)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
+                if(command_repeat(plan,ch,voice+ch,&next->pcm,next->loop?next->loop_start:0,next->loop?next->loop_end:2)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
             }
             if(e->instrument) {instrument[ch]=e->instrument;volume[ch]=p->samples[e->instrument-1].volume;}
             if(e->kind==PT_NOTE_PERIOD && e->effect!=3 && e->effect!=5 &&
                !(e->effect==14 && (e->parameter>>4)==13) && !(trem[ch].control&4))trem[ch].phase=0;
-            if(e->kind==PT_NOTE_OFF)voice[ch].active=0;
+            if(e->kind==PT_NOTE_OFF) {voice[ch].active=0;if(!action(plan,ch,PT_RENDER_STOP,voice+ch))return PT_RENDER_INVALID;}
             else if(e->kind==PT_NOTE_PERIOD && instrument[ch] && e->effect!=3 && e->effect!=5 && !(e->effect==14 && (e->parameter>>4)==13)) {
                 const struct pt_sample *s=p->samples+instrument[ch]-1;uint32_t a=0,b=s->pcm.frames,la=0,lb=0;
                 enum pt_voice_loop loop=PT_VOICE_ONCE;
@@ -270,13 +296,13 @@ static enum pt_render_result commands(const struct pt_project *p,const struct pt
                 if(offsets&(1U<<ch)) {
                     a=ranges[ch].trigger_start;b=a+ranges[ch].trigger_length;
                     if(s->loop) {
-                        if(pt_voice_init_segment(voice+ch,&s->pcm,a,b,s->loop_start,s->loop_end,step(s,e->pitch,o->rate),s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
+                        if(command_segment(plan,ch,voice+ch,&s->pcm,a,b,s->loop_start,s->loop_end,step(s,e->pitch,o->rate),s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
                     } else if(silent_handoff_sample(s)) {
-                        if(pt_voice_init_segment(voice+ch,&s->pcm,a,b,0,2,step(s,e->pitch,o->rate),0)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
-                    } else if(pt_voice_init(voice+ch,&s->pcm,a,b,PT_VOICE_ONCE,0,0,step(s,e->pitch,o->rate),s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
+                        if(command_segment(plan,ch,voice+ch,&s->pcm,a,b,0,2,step(s,e->pitch,o->rate),0)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
+                    } else if(command_trigger(plan,ch,voice+ch,&s->pcm,a,b,PT_VOICE_ONCE,0,0,step(s,e->pitch,o->rate),s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
                 } else if(!e->slice && silent_handoff_sample(s)) {
-                    if(pt_voice_init_segment(voice+ch,&s->pcm,a,b,0,2,step(s,e->pitch,o->rate),0)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
-                } else if(pt_voice_init(voice+ch,&s->pcm,a,b,loop,la,lb,step(s,e->pitch,o->rate),s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
+                    if(command_segment(plan,ch,voice+ch,&s->pcm,a,b,0,2,step(s,e->pitch,o->rate),0)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
+                } else if(command_trigger(plan,ch,voice+ch,&s->pcm,a,b,loop,la,lb,step(s,e->pitch,o->rate),s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
                 velocity[ch]=(e->flags&1)?e->velocity:127;
             }
             if(e->kind==PT_NOTE_PERIOD && (e->effect==3 || e->effect==5) && (e->flags&1))velocity[ch]=e->velocity;
@@ -295,10 +321,10 @@ static enum pt_render_result commands(const struct pt_project *p,const struct pt
                 velocity[ch]=(e->flags&1)?e->velocity:127;
             }
             if(s->loop) {
-                if(pt_voice_init_segment(voice+ch,&s->pcm,a,b,s->loop_start,s->loop_end,rate,s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
+                if(command_segment(plan,ch,voice+ch,&s->pcm,a,b,s->loop_start,s->loop_end,rate,s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
             } else if(silent_handoff_sample(s)) {
-                if(pt_voice_init_segment(voice+ch,&s->pcm,a,b,0,2,rate,0)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
-            } else if(pt_voice_init(voice+ch,&s->pcm,a,b,PT_VOICE_ONCE,0,0,rate,s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
+                if(command_segment(plan,ch,voice+ch,&s->pcm,a,b,0,2,rate,0)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
+            } else if(command_trigger(plan,ch,voice+ch,&s->pcm,a,b,PT_VOICE_ONCE,0,0,rate,s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
         }
         if(voice[ch].pcm && pitch->channel[ch].output)
             voice[ch].step=step(p->samples+instrument[ch]-1,pitch->channel[ch].output,o->rate);
@@ -329,7 +355,25 @@ enum pt_render_result pt_render_commands_tick(const struct pt_project *p,const s
     struct pt_render_command_state *state)
 {
     return commands(p,o,flow,pitch,ranges,offsets,state->voice,state->instrument,
-        state->volume,state->velocity,state->output_volume,state->trem);
+        state->volume,state->velocity,state->output_volume,state->trem,NULL);
+}
+enum pt_render_result pt_render_commands_plan(const struct pt_project *p,const struct pt_render_options *o,
+    const struct pt_flow *flow,const struct pt_pitch *pitch,const struct pt_render_range *ranges,uint16_t offsets,
+    struct pt_render_command_state *state,struct pt_render_plan *plan)
+{
+    enum pt_render_result result;unsigned ch;
+    if(!plan)return PT_RENDER_INVALID;
+    plan->count=0;
+    result=commands(p,o,flow,pitch,ranges,offsets,state->voice,state->instrument,
+        state->volume,state->velocity,state->output_volume,state->trem,plan);
+    if(result!=PT_RENDER_OK) {plan->count=0;return result;}
+    pt_render_commands_gains(p,o,state);
+    for(ch=0;ch<p->channels.count;++ch)if((o->tracks&(1U<<ch)) && state->voice[ch].active) {
+        struct pt_render_action *a;
+        if(!action(plan,ch,PT_RENDER_CONTROL,&state->voice[ch])) {plan->count=0;return PT_RENDER_INVALID;}
+        a=&plan->action[plan->count-1];a->gain[0]=state->gain[ch][0];a->gain[1]=state->gain[ch][1];
+    }
+    return PT_RENDER_OK;
 }
 struct workspace {
     struct run run;struct pt_render_command_state commands;int32_t samples[512];

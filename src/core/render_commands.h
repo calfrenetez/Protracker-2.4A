@@ -24,4 +24,20 @@ void pt_render_commands_gains(const struct pt_project *,const struct pt_render_o
 enum pt_render_result pt_render_commands_tick(const struct pt_project *,const struct pt_render_options *,
     const struct pt_flow *,const struct pt_pitch *,const struct pt_render_range *,uint16_t offsets,
     struct pt_render_command_state *);
+enum pt_render_action_kind {PT_RENDER_TRIGGER,PT_RENDER_SEGMENT,PT_RENDER_REPEAT,PT_RENDER_STOP,PT_RENDER_CONTROL};
+struct pt_render_action {
+    enum pt_render_action_kind kind;unsigned channel;
+    struct pt_voice voice;uint32_t gain[2];
+};
+#define PT_RENDER_ACTIONS 64
+struct pt_render_plan {unsigned count;struct pt_render_action action[PT_RENDER_ACTIONS];};
+/* Same audited tick with explicit ordered operations; caller-owned bounded plan.
+ * Trigger/segment captures initialized voice; repeat captures pending source and
+ * bounds; control captures final step/gains. PCM pointers still borrowed.
+ * At most four operations per channel. On failure count=0; state may be partial
+ * and must be discarded. Do not dispatch partial plans. Plan/state/inputs disjoint.
+ * Success also recomputes state's gains. This is not master pinning or transport. */
+enum pt_render_result pt_render_commands_plan(const struct pt_project *,const struct pt_render_options *,
+    const struct pt_flow *,const struct pt_pitch *,const struct pt_render_range *,uint16_t offsets,
+    struct pt_render_command_state *,struct pt_render_plan *);
 #endif

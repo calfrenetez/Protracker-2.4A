@@ -1,0 +1,6 @@
+{
+  "src/core/render.c": "317003d2d5cc80c491edcdeab3db6d6e274ca636b238a500d6625d4ab1d455e6",
+  "src/core/render_commands.h": "d5195938e14ec3da2430f1777175e42282bf9bd828deddc707f8438f7f7cd73f",
+  "tests/render_plan_test.c": "38f0ddb6e410639d9c8296e2f1b6b552bc03059a707e54feb566b04e8656b1ca",
+  "tests/test_render_plan.py": "3a88712f9faf99c3c8bb1ed143cda0affecaa71e9cac370339b681e8e9836e98"
+}

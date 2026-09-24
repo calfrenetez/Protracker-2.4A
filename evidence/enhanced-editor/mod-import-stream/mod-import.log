@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131223112 reserve=262144 flags=4
+MOD IMPORT STREAM PASS: exact roundtrip, inactive orders, loops, every read/allocation/finish failure preserves old document, budgets and format routing
+EXEC MEMORY PASS: 117 Fast allocations, zero owned bytes, budget refusal without Chip fallback

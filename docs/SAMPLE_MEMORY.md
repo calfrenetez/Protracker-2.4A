@@ -1117,3 +1117,29 @@ IFF import passes shared030 with80 production Fast allocations, zero owned bytes
 budget refusal without Chip fallback, exact cleanup and explicit release.
 Evidence: `evidence/enhanced-editor/svx-import-stream/`. This qualifies file,
 metadata, undo and allocator behavior; visual UI/physical I/O remain separate.
+
+## Bounded uncompressed MOD document load
+
+Native document Open/load now recognises classic M.K./M!K! files while excluding
+enhanced-project and PP20/PX20 signatures from this route. `pt_mod_file_load`
+uses shared strict MOD preflight through positional reads (header1084 bytes,
+pattern/sample blocks1024). The whole encoded MOD is no longer allocated.
+Decoded orders/events/sample masters and preserved classic header are allocated
+into a separate candidate with the existing document allocator and budget.
+Final length/EOF/close verification must succeed before replacing the old
+project. Reader, allocator, decode and finish failures release only staging.
+
+The core reader decoder is explicitly staging-only: a failing read may write a
+prefix of candidate storage. Disjoint destination capacities and metadata bounds
+are checked; callbacks must be non-reentrant and source contents stable. Strict
+warnings/format limits, all128 order entries, signed PCM and classic metadata
+remain unchanged. Existing in-memory import keeps its no-partial-output contract.
+The shared staging allocator serves both paths, including PP20 budget accounting.
+Enhanced-project/PP20 and module donor-preview input still use encoded buffers;
+this milestone changes native full-document uncompressed MOD loading only.
+
+The command-line converter also selects this bounded uncompressed MOD loader.
+Its maximum-length classic-sample fixture now converts to MOD and enhanced
+project under a 550000-byte allocator ceiling (host peak 538110, final zero),
+which excludes keeping a complete encoded MOD alongside decoded masters.
+Enhanced/PP20 converter input still follows the existing whole-input path.

@@ -15,21 +15,16 @@ void pt_document_release(struct pt_document *d)
     }
     pt_document_init(d,&a);
 }
-static enum pt_project_result load_unpacked(struct pt_document *d,const uint8_t *data,size_t length,size_t budget)
+static enum pt_project_result allocate_staging(struct pt_document *d,const struct pt_project_requirements *need,size_t budget,struct pt_document *next)
 {
-    struct pt_project_requirements need;struct pt_document next;enum pt_project_result r;
-    size_t count[7],width[7],bytes[7],total=0;void *p[7]={0};unsigned i;int enhanced;
-    if(!d || !data || !d->allocator.allocate || !d->allocator.release)return PT_PROJECT_INVALID;
-    enhanced=length>=8 && !memcmp(data,"PT24G\r\n\032",8);
-    r=enhanced?pt_project_probe(data,length,&need):pt_mod_project_probe(data,length,&need);
-    if(r!=PT_PROJECT_OK)return r;
-    count[0]=need.orders;width[0]=sizeof(uint16_t);
-    count[1]=need.events;width[1]=sizeof(struct pt_event);
-    count[2]=need.samples;width[2]=sizeof(struct pt_sample);
-    count[3]=need.pcm_values;width[3]=sizeof(int32_t);
-    count[4]=need.slices;width[4]=sizeof(uint32_t);
-    count[5]=need.extensions;width[5]=sizeof(struct pt_extension);
-    count[6]=need.extension_bytes;width[6]=1;
+    size_t count[7],width[7],bytes[7],total=0;void *p[7]={0};unsigned i;
+    count[0]=need->orders;width[0]=sizeof(uint16_t);
+    count[1]=need->events;width[1]=sizeof(struct pt_event);
+    count[2]=need->samples;width[2]=sizeof(struct pt_sample);
+    count[3]=need->pcm_values;width[3]=sizeof(int32_t);
+    count[4]=need->slices;width[4]=sizeof(uint32_t);
+    count[5]=need->extensions;width[5]=sizeof(struct pt_extension);
+    count[6]=need->extension_bytes;width[6]=1;
     for(i=0;i<7;++i) {
         if(count[i]>SIZE_MAX/width[i])return PT_PROJECT_CAPACITY;
         bytes[i]=count[i]*width[i];
@@ -37,7 +32,7 @@ static enum pt_project_result load_unpacked(struct pt_document *d,const uint8_t 
         total+=bytes[i];
     }
     if(total>budget)return PT_PROJECT_CAPACITY;
-    pt_document_init(&next,&d->allocator);
+    pt_document_init(next,&d->allocator);
     for(i=0;i<7;++i)if(bytes[i]) {
         p[i]=d->allocator.allocate(d->allocator.context,bytes[i]);
         if(!p[i]) {
@@ -45,18 +40,36 @@ static enum pt_project_result load_unpacked(struct pt_document *d,const uint8_t 
             return PT_PROJECT_CAPACITY;
         }
     }
-    next.storage.orders=p[0];next.storage.order_capacity=count[0];
-    next.storage.events=p[1];next.storage.event_capacity=count[1];
-    next.storage.samples=p[2];next.storage.sample_capacity=count[2];
-    next.storage.pcm=p[3];next.storage.pcm_capacity=count[3];
-    next.storage.slices=p[4];next.storage.slice_capacity=count[4];
-    next.storage.extensions=p[5];next.storage.extension_capacity=count[5];
-    next.storage.extension_data=p[6];next.storage.extension_bytes=count[6];
-    r=enhanced?pt_project_decode(data,length,&next.storage,&next.project):
-               pt_mod_project_decode(data,length,&next.storage,&next.project);
+    next->storage.orders=p[0];next->storage.order_capacity=count[0];
+    next->storage.events=p[1];next->storage.event_capacity=count[1];
+    next->storage.samples=p[2];next->storage.sample_capacity=count[2];
+    next->storage.pcm=p[3];next->storage.pcm_capacity=count[3];
+    next->storage.slices=p[4];next->storage.slice_capacity=count[4];
+    next->storage.extensions=p[5];next->storage.extension_capacity=count[5];
+    next->storage.extension_data=p[6];next->storage.extension_bytes=count[6];
+    next->allocated_bytes=total;return PT_PROJECT_OK;
+}
+static enum pt_project_result load_unpacked(struct pt_document *d,const uint8_t *data,size_t length,size_t budget)
+{
+    struct pt_project_requirements need;struct pt_document next;enum pt_project_result r;int enhanced;
+    if(!d || !data || !d->allocator.allocate || !d->allocator.release)return PT_PROJECT_INVALID;
+    enhanced=length>=8 && !memcmp(data,"PT24G\r\n\032",8);
+    r=enhanced?pt_project_probe(data,length,&need):pt_mod_project_probe(data,length,&need);
+    if(r!=PT_PROJECT_OK)return r;
+    r=allocate_staging(d,&need,budget,&next);if(r!=PT_PROJECT_OK)return r;
+    r=enhanced?pt_project_decode(data,length,&next.storage,&next.project):pt_mod_project_decode(data,length,&next.storage,&next.project);
     if(r!=PT_PROJECT_OK) {pt_document_release(&next);return r;}
-    next.loaded=1;next.allocated_bytes=total;
-    pt_document_release(d);*d=next;return PT_PROJECT_OK;
+    next.loaded=1;pt_document_release(d);*d=next;return PT_PROJECT_OK;
+}
+enum pt_project_result pt_document_load_mod_reader(struct pt_document *d,pt_mod_read read,void *context,size_t length,size_t budget,int (*finish)(void *))
+{
+    struct pt_project_requirements need;struct pt_document next;enum pt_project_result r;
+    if(!d || !read || !finish || !d->allocator.allocate || !d->allocator.release)return PT_PROJECT_INVALID;
+    r=pt_mod_project_probe_reader(read,context,length,&need);if(r!=PT_PROJECT_OK)return r;
+    r=allocate_staging(d,&need,budget,&next);if(r!=PT_PROJECT_OK)return r;
+    r=pt_mod_project_decode_reader(read,context,length,&next.storage,&next.project);
+    if(r!=PT_PROJECT_OK || finish(context)!=1) {pt_document_release(&next);return r==PT_PROJECT_OK?PT_PROJECT_INVALID:r;}
+    next.loaded=1;pt_document_release(d);*d=next;return PT_PROJECT_OK;
 }
 
 enum pt_project_result pt_document_load(struct pt_document *d,const uint8_t *data,size_t length,size_t budget)

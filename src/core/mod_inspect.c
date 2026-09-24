@@ -1,15 +1,16 @@
 #include "mod_inspect.h"
+#include <string.h>
 
 static uint32_t be16(const uint8_t *p)
 { return ((uint32_t)p[0] << 8) | p[1]; }
 
-enum pt_mod_status pt_mod_inspect(const uint8_t *data, size_t length,
-                                struct pt_mod_info *out)
+enum pt_mod_status pt_mod_inspect_reader(pt_mod_read read,void *context,size_t length,struct pt_mod_info *out)
 {
-    struct pt_mod_info info = {0};
+    uint8_t data[1084];struct pt_mod_info info = {0};
     uint32_t i, maximum = 0;
-    if (!data || !out) return PT_MOD_INVALID_ARGUMENT;
+    if (!read || !out) return PT_MOD_INVALID_ARGUMENT;
     if (length < 1084) return PT_MOD_SHORT_HEADER;
+    if(read(context,0,data,sizeof(data))!=1)return PT_MOD_SHORT_HEADER;
     if (data[1080] != 'M' || data[1082] != 'K' ||
         !((data[1081] == '.' && data[1083] == '.') ||
           (data[1081] == '!' && data[1083] == '!')))
@@ -39,13 +40,22 @@ enum pt_mod_status pt_mod_inspect(const uint8_t *data, size_t length,
     info.required_bytes = info.sample_offset + info.sample_bytes;
     if (length < info.required_bytes) return PT_MOD_SHORT_SAMPLES;
     if (length > info.required_bytes) info.warnings |= PT_MOD_WARN_TRAILING;
-    for (i = 1084; i < info.sample_offset; i += 4) {
-        unsigned int instrument = (data[i] & 0xf0) | (data[i + 2] >> 4);
-        if (instrument > 31) return PT_MOD_BAD_INSTRUMENT;
+    for(i=1084;i<info.sample_offset;i+=1024) {
+        unsigned j;if(read(context,i,data,1024)!=1)return PT_MOD_SHORT_PATTERNS;
+        for(j=0;j<1024;j+=4) {
+            unsigned instrument=(data[j]&0xf0)|(data[j+2]>>4);
+            if(instrument>31)return PT_MOD_BAD_INSTRUMENT;
+        }
     }
     *out = info;
     return PT_MOD_OK;
 }
+
+struct memory_reader {const uint8_t *data;};
+static int memory_read(void *context,size_t offset,uint8_t *out,size_t n)
+{struct memory_reader *r=context;memcpy(out,r->data+offset,n);return 1;}
+enum pt_mod_status pt_mod_inspect(const uint8_t *data,size_t length,struct pt_mod_info *out)
+{struct memory_reader r={data};if(!data)return PT_MOD_INVALID_ARGUMENT;return pt_mod_inspect_reader(memory_read,&r,length,out);}
 
 const char *pt_mod_status_name(enum pt_mod_status status)
 {

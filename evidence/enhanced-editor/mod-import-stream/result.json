@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 streamed MOD document import and Exec Fast allocator",
+  "PTExecModImportTest_sha256": "354c0759e1f6cf0434e93b5beddd923118a0ae71069405eb14d0b6ea3de0055d",
+  "mod-import_returncode": "0",
+  "sample_staging_clean": true,
+  "run_files_cleaned": true
+}

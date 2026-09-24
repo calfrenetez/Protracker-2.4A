@@ -17,12 +17,12 @@ static const uint8_t *original(const struct pt_project *p)
        p->extensions[i].version==1 && p->extensions[i].length==1084)return p->extensions[i].data;
     return NULL;
 }
-enum pt_project_result pt_mod_project_probe(const uint8_t *data,size_t length,struct pt_project_requirements *out)
+enum pt_project_result pt_mod_project_probe_reader(pt_mod_read read,void *context,size_t length,struct pt_project_requirements *out)
 {
     struct pt_mod_info info;struct pt_project_requirements r;
     enum pt_mod_status status;
     if(!out)return PT_PROJECT_INVALID;
-    status=pt_mod_inspect(data,length,&info);
+    status=pt_mod_inspect_reader(read,context,length,&info);
     if(status==PT_MOD_UNSUPPORTED_FORMAT)return PT_PROJECT_UNSUPPORTED;
     if(status!=PT_MOD_OK)return PT_PROJECT_INVALID;
     if(info.warnings)return PT_PROJECT_UNSUPPORTED;
@@ -30,6 +30,11 @@ enum pt_project_result pt_mod_project_probe(const uint8_t *data,size_t length,st
     r.pcm_values=info.sample_bytes;r.extensions=1;r.extension_bytes=1084;
     *out=r;return PT_PROJECT_OK;
 }
+struct memory_reader {const uint8_t *data;};
+static int memory_read(void *context,size_t offset,uint8_t *out,size_t n)
+{struct memory_reader *r=context;memcpy(out,r->data+offset,n);return 1;}
+enum pt_project_result pt_mod_project_probe(const uint8_t *data,size_t length,struct pt_project_requirements *out)
+{struct memory_reader r={data};if(!data)return PT_PROJECT_INVALID;return pt_mod_project_probe_reader(memory_read,&r,length,out);}
 enum pt_project_result pt_mod_project_decode(const uint8_t *data,size_t length,
                                              const struct pt_project_storage *s,struct pt_project *out)
 {
@@ -71,6 +76,61 @@ enum pt_project_result pt_mod_project_decode(const uint8_t *data,size_t length,
     }
     s->extensions[0].id=PT_CLASSIC_HEADER_TAG;s->extensions[0].version=1;s->extensions[0].length=1084;
     s->extensions[0].data=s->extension_data;memcpy(s->extension_data,data,1084);*out=p;return PT_PROJECT_OK;
+}
+enum pt_project_result pt_mod_project_decode_reader(pt_mod_read read,void *context,size_t length,
+                                             const struct pt_project_storage *s,struct pt_project *out)
+{
+    uint8_t data[1084],block[1024];struct pt_project_requirements need;struct pt_mod_info info;struct pt_project p;
+    const void *pointers[8];size_t bytes[8],i,j,pos,pc=0;
+    enum pt_project_result r=pt_mod_project_probe_reader(read,context,length,&need);
+    if(r!=PT_PROJECT_OK)return r;
+    if(!s || !out)return PT_PROJECT_INVALID;
+    if(s->order_capacity<need.orders || s->event_capacity<need.events || s->sample_capacity<31 ||
+       s->pcm_capacity<need.pcm_values || s->extension_capacity<1 || s->extension_bytes<1084)return PT_PROJECT_CAPACITY;
+    pointers[0]=s->orders;bytes[0]=need.orders*sizeof(*s->orders);
+    pointers[1]=s->events;bytes[1]=need.events*sizeof(*s->events);
+    pointers[2]=s->samples;bytes[2]=31*sizeof(*s->samples);
+    pointers[3]=s->pcm;bytes[3]=need.pcm_values*sizeof(*s->pcm);
+    pointers[4]=s->extensions;bytes[4]=sizeof(*s->extensions);
+    pointers[5]=s->extension_data;bytes[5]=1084;pointers[6]=out;bytes[6]=sizeof(*out);pointers[7]=s;bytes[7]=sizeof(*s);
+    for(i=0;i<8;++i) {
+        if(bytes[i] && !pointers[i])return PT_PROJECT_INVALID;
+        for(j=0;j<i;++j)if(overlap(pointers[i],bytes[i],pointers[j],bytes[j]))return PT_PROJECT_ALIAS;
+    }
+    if(pt_mod_inspect_reader(read,context,length,&info)!=PT_MOD_OK || info.warnings)return PT_PROJECT_INVALID;
+    if((size_t)info.patterns*256!=need.events || info.song_length!=need.orders || info.sample_bytes!=need.pcm_values)return PT_PROJECT_INVALID;
+    if(read(context,0,data,sizeof(data))!=1)return PT_PROJECT_INVALID;
+    memset(&p,0,sizeof(p));memcpy(p.title,data,20);pt_channels_init(&p.channels);
+    p.bpm=125;p.speed=6;p.order_count=need.orders;p.pattern_count=info.patterns;p.sample_count=31;
+    p.orders=s->orders;p.events=s->events;p.samples=s->samples;p.extension_count=1;p.extensions=s->extensions;
+    for(i=0;i<need.orders;++i)s->orders[i]=data[952+i];
+    for(i=0;i<need.events;++i) {
+        const uint8_t *q;struct pt_event *e=&s->events[i];
+        if(i%256==0 && read(context,1084+i*4,block,1024)!=1)return PT_PROJECT_INVALID;
+        q=block+(i%256)*4;memset(e,0,sizeof(*e));
+        e->pitch=(uint16_t)(((q[0]&15)*256)+q[1]);e->kind=e->pitch?PT_NOTE_PERIOD:PT_NOTE_NONE;
+        e->instrument=(q[0]&0xf0)|(q[2]>>4);e->effect=q[2]&15;e->parameter=q[3];
+        if(e->instrument>31)return PT_PROJECT_INVALID;
+    }
+    pos=info.sample_offset;
+    for(i=0;i<31;++i) {
+        struct pt_sample *sample=&s->samples[i];const uint8_t *q=data+20+i*30;uint32_t n=u16(q+22)*2,loop=u16(q+28)*2;
+        if(n>s->pcm_capacity-pc)return PT_PROJECT_CAPACITY;
+        memset(sample,0,sizeof(*sample));memcpy(sample->name,q,22);sample->pcm.frames=n;sample->pcm.capacity=n;
+        sample->pcm.data=n?s->pcm+pc:NULL;sample->pcm.channels=1;sample->pcm.bits=8;sample->pcm.rate=PT_CLASSIC_RATE;
+        sample->volume=q[25];sample->finetune=(int8_t)(q[24]>7?(int)q[24]-16:q[24]);
+        if(loop>2) {sample->loop=PT_LOOP_FORWARD;sample->loop_start=u16(q+26)*2;sample->loop_end=sample->loop_start+loop;}
+        for(j=0;j<n;) {
+            size_t k,count=n-j;if(count>sizeof(block))count=sizeof(block);
+            if(pos>length || count>length-pos || read(context,pos,block,count)!=1)return PT_PROJECT_INVALID;
+            for(k=0;k<count;++k) {unsigned value=block[k];s->pcm[pc++]=(int32_t)value-(value>=128?256:0);}
+            j+=count;pos+=count;
+        }
+    }
+    s->extensions[0].id=PT_CLASSIC_HEADER_TAG;s->extensions[0].version=1;s->extensions[0].length=1084;
+    s->extensions[0].data=s->extension_data;memcpy(s->extension_data,data,1084);
+    if(pt_project_validate(&p,NULL)!=PT_PROJECT_OK)return PT_PROJECT_INVALID;
+    *out=p;return PT_PROJECT_OK;
 }
 enum pt_project_result pt_mod_export_analyse(const struct pt_project *p,struct pt_mod_export_report *out)
 {

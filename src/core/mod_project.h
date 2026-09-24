@@ -1,6 +1,7 @@
 #ifndef PT_MOD_PROJECT_H
 #define PT_MOD_PROJECT_H
 #include "project.h"
+#include "mod_inspect.h"
 #define PT_CLASSIC_RATE 8287UL /* Nominal PAL rate at period 428; finetune is separate. */
 #define PT_CLASSIC_HEADER_TAG 0x434d4f44UL /* CMOD: original 1084-byte header */
 enum pt_mod_export_issue {
@@ -19,6 +20,10 @@ struct pt_mod_export_report {
 };
 /* Strict import currently refuses MOD preflight warnings rather than silently
  * normalising them. Storage uses the same separate staging contract as PTG. */
+/* Reader decoding targets unpublished disjoint staging: read failure may write
+ * a prefix. Callback/source must remain stable throughout probe and decode. */
+enum pt_project_result pt_mod_project_probe_reader(pt_mod_read,void *,size_t,struct pt_project_requirements *);
+enum pt_project_result pt_mod_project_decode_reader(pt_mod_read,void *,size_t,const struct pt_project_storage *,struct pt_project *);
 enum pt_project_result pt_mod_project_probe(const uint8_t *,size_t,struct pt_project_requirements *);
 enum pt_project_result pt_mod_project_decode(const uint8_t *,size_t,
                                              const struct pt_project_storage *,struct pt_project *);

@@ -23,5 +23,8 @@ struct pt_mod_info {
  * The output is only committed on success. Unknown formats are not guessed.
  * Limits describe the pinned native 2.3F editor, not every MOD dialect. */
 enum pt_mod_status pt_mod_inspect(const uint8_t *, size_t, struct pt_mod_info *);
+/* Exact positional reader, bounded requests <=1084; failure leaves info intact. */
+typedef int (*pt_mod_read)(void *,size_t,uint8_t *,size_t);
+enum pt_mod_status pt_mod_inspect_reader(pt_mod_read,void *,size_t,struct pt_mod_info *);
 const char *pt_mod_status_name(enum pt_mod_status);
 #endif

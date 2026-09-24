@@ -18,6 +18,7 @@
 #include "../src/platform/file_load.h"
 #include "../src/platform/project_file.h"
 #include "../src/platform/mod_file.h"
+#include "../src/platform/mod_import.h"
 #ifndef __amigaos__
 static void *allocate(void *ctx,size_t n) {(void)ctx;return malloc(n);}
 static void release(void *ctx,void *p) {(void)ctx;free(p);}
@@ -61,12 +62,13 @@ int main(int argc,char **argv)
     }
     mode=!strcmp(argv[1],"inspect")?0:!strcmp(argv[1],"project")?1:!strcmp(argv[1],"mod8")?3:!strcmp(argv[1],"mod8tpdf")?4:2;
     if((mode==0 && argc!=3) || (mode && argc!=4)) {fprintf(stderr,"Wrong argument count\n");goto done;}
-    {
+    if(pt_mod_file_candidate(argv[2]))result=pt_mod_file_load(&d,argv[2],64UL*1024*1024,SIZE_MAX);
+    else {
         enum pt_load_result loaded=pt_file_load(argv[2],64UL*1024*1024,&allocator,&input,&input_size);
         if(loaded!=PT_LOAD_OK) {fprintf(stderr,"Input read failed phase=%d (64 MiB limit); no output created\n",loaded);goto done;}
+        result=pt_document_load(&d,input,(size_t)input_size,SIZE_MAX);
+        allocator.release(allocator.context,input);input=NULL;
     }
-    result=pt_document_load(&d,input,(size_t)input_size,SIZE_MAX);
-    allocator.release(allocator.context,input);input=NULL;
     if(result!=PT_PROJECT_OK) {fprintf(stderr,"Input rejected result=%d; no output created\n",result);goto done;}
     result=pt_mod_export_analyse(&d.project,&report);if(result!=PT_PROJECT_OK)goto done;print_report(&d.project,&report);
     if(!mode) {rc=0;goto done;}

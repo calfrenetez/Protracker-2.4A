@@ -46,6 +46,20 @@ enum pt_pcm_result pt_studio_trigger(struct pt_studio_mix *s,unsigned channel,co
     s->token[channel]=token;s->pinned[channel]=1;
     s->gain[channel][0]=note->gain[0];s->gain[channel][1]=note->gain[1];return PT_PCM_OK;
 }
+enum pt_pcm_result pt_studio_control(struct pt_studio_mix *s,uint16_t tracks,
+    const struct pt_studio_control *control)
+{
+    unsigned i;
+    if(!s || ((uint32_t)tracks>>s->count) || (tracks && !control))return PT_PCM_INVALID;
+    for(i=0;i<s->count;++i)if(tracks&(1U<<i)) {
+        if(!s->voice[i].active || !control[i].step || control[i].gain[0]>65536 || control[i].gain[1]>65536)return PT_PCM_INVALID;
+    }
+    for(i=0;i<s->count;++i)if(tracks&(1U<<i)) {
+        s->voice[i].step=control[i].step;
+        s->gain[i][0]=control[i].gain[0];s->gain[i][1]=control[i].gain[1];
+    }
+    return PT_PCM_OK;
+}
 enum pt_pcm_result pt_studio_read(struct pt_studio_mix *s,struct pt_pcm *output,uint64_t *clipped)
 {
     enum pt_pcm_result result;unsigned i;

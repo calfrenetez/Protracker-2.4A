@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131254128 reserve=262144 flags=4
+STUDIO MIX PASS: pinned versions, atomic controls, mute progression, block continuity, true24 and cleanup
+EXEC MEMORY PASS: 2 Fast allocations, zero owned bytes, budget refusal without Chip fallback

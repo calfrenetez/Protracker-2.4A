@@ -16,6 +16,35 @@ static int acquire(void *ctx,uint64_t key,uint64_t version,struct pt_pcm *p,void
     ++m->pins;*p=m->pcm;*token=m;return 1;
 }
 static void unpin(void *ctx,void *token) {struct master *m=token;(void)ctx;assert(m->pins);--m->pins;++releases;}
+static void controls_test(void)
+{
+    struct pt_allocator a={NULL,allocate,release};struct pt_studio_source src={NULL,acquire,unpin};
+    struct pt_studio_mix *s=pt_studio_open(&a,&src,2);
+    struct pt_studio_note note={1,1,1ULL<<32,0,4,0,4,{65536,65536},PT_VOICE_FORWARD,0};
+    struct pt_studio_control ctl[2]={{2ULL<<32,{32768,32768}},{0,{0,0}}};
+    int32_t values[2];struct pt_pcm out={values,2,1,48000,2,24};uint64_t clips;unsigned before=releases;
+    assert(s && pt_studio_trigger(s,0,&note)==PT_PCM_OK);
+    assert(pt_studio_read(s,&out,&clips)==PT_PCM_OK && values[0]==1);
+    assert(pt_studio_control(s,1,ctl)==PT_PCM_OK);
+    assert(pt_studio_read(s,&out,&clips)==PT_PCM_OK && values[0]==129);
+    assert(pt_studio_read(s,&out,&clips)==PT_PCM_OK && values[0]==4194304);
+    ctl[0].step=1ULL<<32;ctl[0].gain[0]=ctl[0].gain[1]=0;
+    assert(pt_studio_control(s,1,ctl)==PT_PCM_OK);
+    assert(pt_studio_read(s,&out,&clips)==PT_PCM_OK && !values[0]);
+    ctl[0].gain[0]=ctl[0].gain[1]=65536;
+    assert(pt_studio_control(s,1,ctl)==PT_PCM_OK);
+    assert(pt_studio_read(s,&out,&clips)==PT_PCM_OK && values[0]==-513);
+    assert(pt_studio_trigger(s,1,&note)==PT_PCM_OK);
+    ctl[0].gain[0]=ctl[0].gain[1]=0;
+    assert(pt_studio_control(s,3,ctl)==PT_PCM_INVALID); /* second step invalid */
+    assert(pt_studio_read(s,&out,&clips)==PT_PCM_OK && values[0]==8388607 && clips==2);
+    ctl[0].gain[0]=65537;assert(pt_studio_control(s,1,ctl)==PT_PCM_INVALID);
+    assert(pt_studio_control(s,4,ctl)==PT_PCM_INVALID);
+    assert(pt_studio_control(s,0,NULL)==PT_PCM_OK);
+    assert(releases==before && masters[0].pins==2); /* no pin churn */
+    pt_studio_stop(s,1);assert(pt_studio_control(s,2,ctl)==PT_PCM_INVALID);
+    pt_studio_close(s);assert(!allocations && !masters[0].pins);
+}
 int main(void)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_studio_source source={NULL,acquire,unpin};
@@ -53,5 +82,6 @@ int main(void)
     pt_studio_close(s);
     assert(!allocations && !masters[0].pins && !masters[1].pins);
     assert(data1[1]==257 && data2[1]==65537);
-    puts("STUDIO MIX PASS: pinned versions, transactional trigger, block continuity, true24, alias refusal and cleanup");return 0;
+    controls_test();
+    puts("STUDIO MIX PASS: pinned versions, atomic controls, mute progression, block continuity, true24 and cleanup");return 0;
 }

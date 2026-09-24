@@ -25,6 +25,14 @@ struct pt_studio_mix *pt_studio_open(const struct pt_allocator *,const struct pt
 /* Failed trigger retains the old voice/pin. Successful replacement releases it
  * only after the new version has been pinned and validated. */
 enum pt_pcm_result pt_studio_trigger(struct pt_studio_mix *,unsigned,const struct pt_studio_note *);
+struct pt_studio_control {uint64_t step;uint32_t gain[2];};
+/* Apply one tick's pitch/gain changes atomically to selected active voices.
+ * controls is indexed by channel. Positive Q32 step; Q16 gains0..65536.
+ * Invalid mask/control or inactive selected voice refuses the whole batch.
+ * Empty mask succeeds without controls. No phase/loop/pin changes, callbacks,
+ * allocation or retrigger; zero gain mutes output but keeps phase advancing. */
+enum pt_pcm_result pt_studio_control(struct pt_studio_mix *,uint16_t tracks,
+    const struct pt_studio_control *controls);
 void pt_studio_stop(struct pt_studio_mix *,unsigned);
 void pt_studio_close(struct pt_studio_mix *);
 /* Pull 1..256 stereo24 frames at48kHz into caller storage, preserving phase

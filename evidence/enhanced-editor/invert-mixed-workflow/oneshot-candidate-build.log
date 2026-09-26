@@ -1,0 +1,10 @@
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        5888 bytes
+PT24GEdit 8ba241a96bc8dcdd8e8157dd8a9c177b908e43daf85c19fb2f312365df6b686b
+PT24GRender 7699a6e0aa5f1b27772a0a1176d7fdd845c37d5fe7527d0552dfa4877b469ea9
+PT24GConvert be76f973f31fa3f186df8ea4cda0e66c2f4ba818219281b243fae4f4a0afe1a2
+/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/oneshot-candidate-91dc9b9

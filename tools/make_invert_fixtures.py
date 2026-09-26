@@ -31,3 +31,11 @@ def one_shot_fixtures():
         if name=='invert_oncedelay':data[1100:1104]=bytes([1,172,14,0xd3])
         data[1118:1120]=bytes([14,0xf0])
         yield name,bytes(data),{'max_ticks':100,'ordering_case':name}
+
+
+def mixed_fixture():
+    """One-shot master, separate loop and unselected shared EF8 clock."""
+    data=bytearray(next(one_shot_fixtures())[1]);data[:20]=b'invert_mixed'.ljust(20,b'\0')
+    data[1088:1092]=bytes([1,172,0x20,0])
+    data[1092:1096]=bytes([0,0,0x1e,0xf8])
+    return bytes(data)

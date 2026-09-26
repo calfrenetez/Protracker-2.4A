@@ -33,7 +33,13 @@ def main():
     group.add_argument('--memory-failures-only',action='store_true',help='Run all WAV/stem allocation-failure checks only')
     group.add_argument('--bounce-only',action='store_true',help='Run the sample-bounce allocation regression only')
     group.add_argument('--allocated-only',action='store_true',help='Run the three allocated-path tests instead of the two legacy file tests')
+    parser.add_argument('--fixture',type=Path,help='Explicit MOD for the EFx stem CLI window')
+    parser.add_argument('--candidate',type=Path,help='Manifest-verified PT24GRender for the EFx stem CLI window')
     args=parser.parse_args()
+    if (args.fixture or args.candidate) and not args.invert_stem_cli:parser.error('fixture/candidate require --invert-stem-cli')
+    if args.candidate:
+        manifest=json.loads((args.candidate.parent/'PT24GRender-build.json').read_text())
+        if hashlib.sha256(args.candidate.read_bytes()).hexdigest()!=manifest['binary_sha256']:raise RuntimeError('Candidate differs from build manifest')
     sys.path.insert(0,str(INFRA/'scripts'))
     from shared_guest import Guest
     out=ROOT/'build/dev'/('render-files-'+str(time.time_ns()));out.mkdir()
@@ -127,7 +133,7 @@ def main():
         try:
             commands=['FailAt 21','Stack 65536']
             for name,binary,marker in cases:
-                sub=run/name;sub.mkdir();shutil.copyfile(ROOT/'build/dev'/binary,sub/binary)
+                sub=run/name;sub.mkdir();shutil.copyfile(args.candidate if args.candidate else ROOT/'build/dev'/binary,sub/binary)
                 result[binary+'_sha256']=hashlib.sha256((sub/binary).read_bytes()).hexdigest()
                 commands+=['CD '+guest.device+run.name+'/'+name,binary+' '+guest.device+run.name+'/'+name+('/sample.input' if args.sample_dispatch else '/donor.mod' if args.source_memory else '/module.mod' if args.mod_import else '/sample.input' if args.sample_import else '/master.mod' if args.mod_stream else '/master.ptg' if args.project_stream else '/sample.iff' if args.sample_svx else '/sample.raw' if args.sample_raw else '/sample.wav' if args.sample_wav else '/recent' if args.input_memory in ('recent','exec-recent') else '')+' >test.log','Echo $RC >test.rc']
             if args.invert_render:
@@ -155,8 +161,8 @@ def main():
                 commands=['FailAt 21','Stack 65536','CD '+guest.device+run.name+'/render-cli',
                           'PT24GRender source.mod output.wav --pattern 0 --from-row 0 --to-row 1 --tracks 1 >test.log','Echo $RC >test.rc']
             if args.stem_cli or args.invert_stem_cli:
-                sub=run/'stem-cli';fixture=ROOT/('evidence/enhanced-editor/invert-ordering/invert_shared.mod' if args.invert_stem_cli else 'evidence/baseline/mod.baseline')
-                shutil.copyfile(fixture,sub/'source.mod')
+                sub=run/'stem-cli';fixture=args.fixture or ROOT/('evidence/enhanced-editor/invert-ordering/invert_shared.mod' if args.invert_stem_cli else 'evidence/baseline/mod.baseline')
+                shutil.copyfile(fixture,sub/'source.mod');result['fixture_sha256']=hashlib.sha256(fixture.read_bytes()).hexdigest()
                 command='PT24GRender source.mod stems --pattern 0 --from-row 0 --to-row 1 --tracks 3 --stems'
                 if args.invert_stem_cli:command='PT24GRender source.mod stems --tracks 3 --stems --invert-budget 100000 --gain 65536'
                 commands=['FailAt 21','Stack 65536','CD '+guest.device+run.name+'/stem-cli',

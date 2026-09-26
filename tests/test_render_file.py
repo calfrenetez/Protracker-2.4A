@@ -34,8 +34,8 @@ class RenderFile(unittest.TestCase):
             self.assertEqual(int.from_bytes(data[34:36],'little'),16)
             self.assertEqual(subprocess.run(args,capture_output=True).returncode,20);self.assertEqual(wav.read_bytes(),data)
             # Explicit EFx export preserves source and shared mutation across stems.
-            for name in ('invert_delay','invert_shared','invert_reload'):
-                source=ROOT/'evidence/enhanced-editor/invert-ordering'/(name+'.mod')
+            for name in ('invert_delay','invert_shared','invert_reload','invert_mixed'):
+                source=ROOT/'tests/fixtures/invert-mixed.mod' if name=='invert_mixed' else ROOT/'evidence/enhanced-editor/invert-ordering'/(name+'.mod')
                 original=source.read_bytes();dest=out/(name+'.wav')
                 plain=[str(cli),str(source),str(dest)]
                 self.assertEqual(subprocess.run(plain,capture_output=True).returncode,20)

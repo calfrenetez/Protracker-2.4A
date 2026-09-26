@@ -623,3 +623,14 @@ frame expectations. Ordinary rendering and queued Studio semantics are unchanged
 16/24-bit EFx, interpolation, slices and previously refused handoffs remain outside
 this bounded extension. This is ideal-clock software evidence, not analogue Paula
 or physical AmiGUS acceptance.
+
+
+Mixed-sample editor and CLI workflow evidence is recorded under
+`evidence/enhanced-editor/invert-mixed-workflow`. The fixture adds a separate
+forward-loop instrument and a third, unselected EF8 channel that mutates the
+one-shot shared with track 1. Native CLI stems match both host 17,280-frame
+stereo24 WAVs and refuse an existing output directory. The clean-layout editor
+matches the full WAV, both stems and the selected-track bounce, preserves every
+original serialized sample record, and passes save/undo/redo/normal exit.
+The harness verifies run-owned recents before launching and restores the exact
+prior ENV setting before releasing the shared emulator. No physical audio claim.

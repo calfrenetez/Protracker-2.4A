@@ -1,0 +1,18 @@
+{
+  "track.wav": "da4d90299c893ececb9155f4ee9ad88ec750b1e8f73bcb4b8d6ffcaf82f3a04b",
+  "input.mod": "b526fc0db6a52b547d06d4c0e3f9e37c468f6e5be4096983c5cbb6e856a6848b",
+  "PT24GConvert": "70274bec08dc9c71b799f2428ee70c7d37c7464932a7943480966bdea2158869",
+  "render.wav": "330b3fb9b42859a010447e4ff8b99832f789f20796dfc82049f090e70a403ee9",
+  "baseline.ptg": "40145ab62082041986f3d4124362a4332c47e1bb3a940b6df3ad044956bcc5b4",
+  "PT24GRender": "9942aa9c46b0ee365d7f131dd1802684d75256c20c2c97aec8e39ef3a54f825b",
+  "stems/track-01.wav": "da4d90299c893ececb9155f4ee9ad88ec750b1e8f73bcb4b8d6ffcaf82f3a04b",
+  "stems/track-02.wav": "1f0b6b7c254df3c3bff630f4d32d2b90b499abc7d8ca3638f55cb9a114cc528d",
+  "cli-stems/track-01.wav": "8e997bf3b05da712a7af3b76563354be747e626f217de66290925c96f985c7c2",
+  "cli-stems/track-02.wav": "7402ef3e4dc1a7773af0c95c80a74f56645e82acec37ef510884bded5ed3f921",
+  "PT24GConvert.dSYM/Contents/Info.plist": "a752b4c029ae9267d6471af31733b70fa70f837ef47b61ff879179930a09e891",
+  "PT24GConvert.dSYM/Contents/Resources/DWARF/PT24GConvert": "bb9d4310320a729c6dcc084e7e7cd92a7cbeeddb77d32c175c01ff1c7fd8c279",
+  "PT24GConvert.dSYM/Contents/Resources/Relocations/aarch64/PT24GConvert.yml": "75e0a91d8245ed7beba739c15fae796e7668c6136725778705a24fb652cda11b",
+  "PT24GRender.dSYM/Contents/Info.plist": "28ea178583fa335786b844789b40899732a961df9fcdc427071ffff24ea30092",
+  "PT24GRender.dSYM/Contents/Resources/DWARF/PT24GRender": "e4dda957234885b494045d50aa014c302e2fd8d9903dcfe5401f1fcde50cc642",
+  "PT24GRender.dSYM/Contents/Resources/Relocations/aarch64/PT24GRender.yml": "ea7c721a802da58eb7127a43adb0915bb7c9757898f695f9ab6c9263fb777d28"
+}

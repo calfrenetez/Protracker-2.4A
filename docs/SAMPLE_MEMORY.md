@@ -1340,3 +1340,12 @@ This is an explicit classic playback conversion; enhanced save, undo and ordinar
 sample processing still use the original master bytes, including a nonzero first
 word. The queued Studio path retains its EFx refusal. Existing restrictions on
 cross-instrument handoffs also remain; this does not widen that subset.
+
+
+The clean-layout native editor built from `91dc9b9` now has mixed one-shot/loop
+workflow evidence in `evidence/enhanced-editor/invert-mixed-workflow`. WAV and
+individual stems match host bytes; selected-track bounce creates an exact stereo24
+master. All 31 original serialized sample records remain identical after project
+save, including the one-shot's original nonzero first word. Undo/redo and clean
+exit pass. This qualifies those emulator workflows for the recorded binary only;
+physical playback/performance and queued Studio EFx remain separate.

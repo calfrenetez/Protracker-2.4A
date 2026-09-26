@@ -2,7 +2,7 @@
 """Bounded EFx editor workflow on a separately reserved shared030 guest.
 Uses an explicitly supplied clean-layout candidate and prepared host references.
 """
-import argparse,fcntl,hashlib,json,shutil,sys,time,zlib
+import argparse,fcntl,hashlib,json,shutil,subprocess,sys,time,zlib
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
@@ -23,15 +23,15 @@ def sample_records(blob):
     return records
 
 def main():
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('candidate',type=Path);parser.add_argument('reference',type=Path);args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('candidate',type=Path);parser.add_argument('reference',type=Path);parser.add_argument('--fixture',type=Path,default=ROOT/'evidence/enhanced-editor/invert-ordering/invert_shared.mod');args=parser.parse_args()
     sys.path.insert(0,str(INFRA/'scripts'));from shared_guest import Guest
     manifest=json.loads((args.candidate.parent/'editor-build.json').read_text())
     if digest(args.candidate)!=manifest['binary_sha256']:raise RuntimeError('Candidate differs from its clean-layout build manifest')
     out=ROOT/'build/dev'/('invert-ui-'+str(time.time_ns()));out.mkdir()
     result={'passed':False,'scope':'shared030 classic-layout native EFx WAV/stem/bounce UI; no physical acceptance'}
     with (INFRA/'runtime/test.lock').open('a') as lock:
-        fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);guest=Guest(INFRA,out);run=guest.share/out.name;run.mkdir();finished=False
-        fixture=ROOT/'evidence/enhanced-editor/invert-ordering/invert_shared.mod'
+        fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);guest=Guest(INFRA,out);run=guest.share/out.name;run.mkdir();finished=False;launched=False
+        fixture=args.fixture
         shutil.copyfile(args.candidate,run/'PT24GEdit');shutil.copyfile(fixture,run/'input.mod')
         result.update(candidate_sha256=digest(run/'PT24GEdit'),fixture_sha256=digest(fixture));start=time.monotonic()
         def log():return (run/'editor.log').read_text(errors='replace') if (run/'editor.log').exists() else ''
@@ -62,18 +62,33 @@ def main():
             offset=key(raw,ack=False);wait(lambda:'EDITOR REQUEST '+kind in log()[offset:]);time.sleep(.8);return offset
         def capture(name):
             path=out/name;guest.command('SCREENSHOT',path);wait(lambda:path.exists() and path.read_bytes().endswith(b'\0\0\0\0IEND\xaeB`\x82'))
+        def execute(script):
+            reply=subprocess.run([str(INFRA/'.venv/bin/python'),str(INFRA/'scripts/mcp-call.py'),
+                'amiga_run_script',json.dumps({'script':'Execute '+guest.device+run.name+'/'+script,'timeout':5})],
+                capture_output=True,text=True,timeout=20)
+            (out/(script+'.log')).write_text(reply.stdout+reply.stderr)
+            if reply.returncode or '[OK]' not in reply.stdout:raise RuntimeError('Environment setup/restore failed')
+        # Backup completion is recorded before setting the global override. A
+        # failed backup cannot authorize deleting or replacing the old setting.
+        (run/'setup-env').write_text('\n'.join(['FailAt 1','CD '+guest.device+run.name,
+            'If EXISTS ENV:PT24G_RECENT_PREFIX','Copy ENV:PT24G_RECENT_PREFIX previous-prefix','EndIf',
+            'Echo ready >backup-ready','SetEnv PT24G_RECENT_PREFIX '+guest.device+run.name+'/recent',
+            'Copy ENV:PT24G_RECENT_PREFIX active-prefix','Echo ready >setup-done'])+'\n')
+        (run/'restore-env').write_text('\n'.join(['FailAt 1','CD '+guest.device+run.name,
+            'If EXISTS previous-prefix','Copy previous-prefix ENV:PT24G_RECENT_PREFIX','Else',
+            'If EXISTS ENV:PT24G_RECENT_PREFIX','Delete ENV:PT24G_RECENT_PREFIX','EndIf','EndIf',
+            'If EXISTS ENV:PT24G_RECENT_PREFIX','Copy ENV:PT24G_RECENT_PREFIX restored-prefix','EndIf',
+            'Echo ready >restore-done'])+'\n')
         try:
-            # Preserve the global recent-prefix setting and isolate this run's
-            # recent files. Restoration executes after normal editor exit only.
+            execute('setup-env')
+            assert (run/'setup-done').exists() and (run/'active-prefix').read_bytes()==(guest.device+run.name+'/recent').encode(), 'Recent prefix did not match before launch'
+            result['recent_prefix_verified_before_launch']=True
             guest.launch.write_text('\n'.join(['FailAt 21','Stack 65536','CD '+guest.device+run.name,
-                'If EXISTS ENV:PT24G_RECENT_PREFIX','Copy ENV:PT24G_RECENT_PREFIX previous-prefix','EndIf',
-                'SetEnv PT24G_RECENT_PREFIX '+guest.device+run.name+'/recent',
                 'PT24GEdit input.mod saved.ptg >editor.log','Echo $RC >editor.rc',
-                'If EXISTS previous-prefix','Copy previous-prefix ENV:PT24G_RECENT_PREFIX','Else','Delete ENV:PT24G_RECENT_PREFIX','EndIf',
-                'If EXISTS ENV:PT24G_RECENT_PREFIX','Copy ENV:PT24G_RECENT_PREFIX restored-prefix','EndIf',
-                'Echo done >'+guest.device+run.name+'/done'])+'\n');guest.start()
+                'Execute restore-env','Echo done >'+guest.device+run.name+'/done'])+'\n')
+            launched=True;guest.start()
             frame('status=READY -');key(0x11,True,True)
-            # Two shared-sample audio tracks; EFx clocks remain global.
+            # Two audio tracks; EFx clocks on unselected tracks remain global.
             key(0x37);key(3);key(0x44);frame('RENDER TRACK MASK SET')
             offset=request(0x11,'render');key(0x45,ack=False);frame('WAV REQUEST CANCELLED',offset)
             offset=request(0x11,'render');filename('render.wav');key(0x44,ack=False);frame('WAV VERIFIED - PROJECT UNCHANGED',offset)
@@ -100,10 +115,13 @@ def main():
             # Only normal keys to this owned test app; never reset the guest.
             # Closing a requester/panel and confirming quit lets the launcher
             # restore the exact previous global setting even after an assertion.
-            for _ in range(4):
-                if (run/'done').exists():break
-                guest.tap(0x45);time.sleep(.7)
-            if (run/'done').exists() and (run/'editor.rc').read_text().strip()=='0':finished=True
+            if launched:
+                for _ in range(4):
+                    if (run/'done').exists():break
+                    guest.tap(0x45);time.sleep(.7)
+                if (run/'done').exists() and (run/'editor.rc').read_text().strip()=='0':finished=True
+            elif (run/'backup-ready').exists():
+                execute('restore-env');finished=(run/'restore-done').exists()
             raise
         finally:
             for name in ['editor.log','editor.rc','saved.ptg','render.wav','previous-prefix']:
@@ -111,12 +129,12 @@ def main():
             if (run/'stems').exists():shutil.copytree(run/'stems',out/'stems')
             if finished:
                 before=run/'previous-prefix';after=run/'restored-prefix'
-                restored=before.exists()==after.exists() and (not before.exists() or before.read_bytes()==after.read_bytes())
+                restored=(run/'restore-done').exists() and before.exists()==after.exists() and (not before.exists() or before.read_bytes()==after.read_bytes())
                 result['recent_prefix_restored']=restored
                 finished=restored
             if finished:
                 audio=guest.command('GET_AUDIO_STATE');result['cleanup_audio']=audio;finished=all('ch%d_dma=0'%i in audio.split('\t') for i in range(4))
-            if finished:guest.launch.unlink();shutil.rmtree(run)
+            if finished:guest.launch.unlink(missing_ok=True);shutil.rmtree(run)
             result['run_files_cleaned']=finished
             (out/'result.json').write_text(json.dumps(result,indent=2)+'\n');print(out,flush=True)
 if __name__=='__main__':main()

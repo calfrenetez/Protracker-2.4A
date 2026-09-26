@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=130013368 reserve=262144 flags=4
+INVERT QUEUED PASS: private mixed masters, exact offline parity, tempo/delay, pre-roll, partitions, stalled/cancelled leases, protocol and allocation refusal
+EXEC MEMORY PASS: 53 Fast allocations, zero owned bytes, budget refusal without Chip fallback

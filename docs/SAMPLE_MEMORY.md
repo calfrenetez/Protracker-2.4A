@@ -1349,3 +1349,42 @@ master. All 31 original serialized sample records remain identical after project
 save, including the one-shot's original nonzero first word. Undo/redo and clean
 exit pass. This qualifies those emulator workflows for the recorded binary only;
 physical playback/performance and queued Studio EFx remain separate.
+
+
+## Private EFx queued producer core
+
+`pt_render_invert_session` is an explicit incremental producer for the existing
+copy-owned Studio pump/queue. It stages the same bounded whole mono8 one-shot and
+forward-loop subset as the offline EFx renderer into its own mutable bank. EFx
+runs only at consumed interval boundaries; queue backpressure prevents further
+producer advancement. Selection/mute/solo continue to affect audio, not another
+channel's shared-sample mutation clock. Editable masters and ordinary immutable
+Studio source pins are unchanged.
+
+The producer mixes at most256 stereo24 frames at48k per pull into borrowed scratch
+that the pump copies. Stop/end/error discard private voices before releasing their
+bank. Already queued PCM is independent; a consumer-held block survives producer
+closure, and queue destruction still refuses until the consumer releases it.
+Open uses the supplied bounded allocator, with a separate private-sample budget;
+pull allocates nothing. Natural end/error may call allocator release. These are
+serialized owner-thread operations, not interrupt-safe or real-time qualification.
+
+Project metadata/events/orders must remain immutable and live until stop. The
+core does not yet bind sampler generations or stop automatically on editor edits.
+The sampler/editor Studio entry points and native PLAY therefore still refuse
+EFx. Wiring an explicit opt-in producer through those generation/lifetime guards
+is the next integration step.16/24-bit sources are not silently converted to
+satisfy this classic EFx subset; ordinary Studio mixing retains its direct master
+precision. Actual AmiGUS transport and physical acceptance remain separate.
+
+Host regression compares every queued PCM frame against offline rendering for
+normal playback, lead-in and row-range pre-roll using1/17/256-frame partitions,
+with submit refusals, delayed completion, held-lease cancellation failure, repeat
+sessions, every open allocation failure and sample-budget refusal. Masters remain
+byte-identical, including nonzero one-shot first words.
+
+The native core fixture also passes on shared030 with the production allocator:
+53 Fast/not-Chip allocations, zero final owned bytes and budget refusal without
+Chip fallback. It exercises256-frame playback plus17-frame held-lease stopping.
+Evidence: `evidence/enhanced-editor/invert-queued-core/`. The coordinated window
+completed RC0, all4DMAoff, exact staging cleanup and explicit release.

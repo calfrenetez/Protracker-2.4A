@@ -132,6 +132,8 @@ def main():
     invert_sources=['src/core/render_invert.c','src/core/invert_bank.c','src/core/invert_sequence.c','src/core/invert_pcm.c','src/core/invert_loop.c']
     inputs['PT24GEdit'] += ['src/editor/bounce_invert.c','src/platform/render_invert_file.c',*invert_sources]
     inputs['PTInvertRenderTest']=['tests/render_invert_test.c',*invert_sources,*render_sources]
+    inputs['PTInvertSessionTest']=['tests/render_invert_session_test.c','src/core/studio_pump.c','src/core/studio_queue.c','src/core/studio_consumer.c',*invert_sources,*render_sources]
+    inputs['PTExecInvertSessionTest']=['tests/native_exec_invert_session_test.c',*inputs['PTInvertSessionTest'][1:]]
     inputs['PTInvertBounceTest']=['tests/bounce_invert_test.c','src/editor/bounce_invert.c',*inputs['PTBounceTest'][1:],*invert_sources]
     inputs['PTExecInvertBounceTest']=['tests/native_exec_invert_bounce_test.c',*inputs['PTInvertBounceTest'][1:]]
     inputs['PT24GRender'] = ['tools/pt24g_render.c','src/platform/stem_file.c','src/core/stems.c','src/platform/render_file.c','src/core/document.c','src/core/pp20.c','src/core/mod_project.c','src/core/mod_inspect.c',*render_sources]

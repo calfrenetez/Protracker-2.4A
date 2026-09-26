@@ -451,19 +451,55 @@ struct pt_render_sequence {
     const struct pt_project *project;struct run run;
     struct pt_render_command_state commands;
     uint32_t remaining;unsigned pending,end,done,failed;
+    struct pt_render_mutation mutation;
 };
-enum pt_render_result pt_render_sequence_open(const struct pt_project *p,const struct pt_render_options *o,
-    const struct pt_allocator *a,struct pt_render_sequence **out)
+static enum pt_render_result sequence_open(const struct pt_project *p,const struct pt_render_options *o,
+    const struct pt_allocator *a,struct pt_render_sequence **out,const struct pt_render_mutation *mutation)
 {
     struct pt_render_sequence *s;struct pt_render_report report;enum pt_render_result result;
     if(!a || !a->allocate || !a->release || !out)return PT_RENDER_INVALID;
     s=a->allocate(a->context,sizeof(*s));if(!s)return PT_RENDER_MEMORY;
     memset(s,0,sizeof(*s));s->allocator=*a;
-    result=measure(p,o,NULL,NULL,&report,&s->run,0);
+    result=measure(p,o,NULL,NULL,&report,&s->run,mutation!=NULL);
     if(result!=PT_RENDER_OK) {a->release(a->context,s);return result;}
-    s->options=*o;s->project=p;
+    s->options=*o;s->project=p;if(mutation)s->mutation=*mutation;
     if(!start_run(&s->run,p,&s->options)) {a->release(a->context,s);return PT_RENDER_INVALID;}
     pt_render_commands_init(&s->commands);*out=s;return PT_RENDER_OK;
+}
+enum pt_render_result pt_render_sequence_open(const struct pt_project *p,const struct pt_render_options *o,
+    const struct pt_allocator *a,struct pt_render_sequence **out)
+{return sequence_open(p,o,a,out,NULL);}
+enum pt_render_result pt_render_mutating_sequence_open(const struct pt_project *p,const struct pt_render_options *o,
+    const struct pt_allocator *a,struct pt_render_sequence **out,const struct pt_render_mutation *mutation)
+{
+    if(!mutation || !mutation->playback || !mutation->tick)return PT_RENDER_INVALID;
+    return sequence_open(p,o,a,out,mutation);
+}
+/* Private producer path: advance the same voice state by mixing, rather than
+   consume's silent phase advance. No pointer is published beyond the owner. */
+enum pt_render_result pt_render_mutating_sequence_read(struct pt_render_sequence *s,struct pt_pcm *out)
+{
+    uint64_t clipped;
+    if(!s || !s->mutation.tick || !s->pending || s->failed || !out || !out->frames ||
+       out->frames>256 || out->frames>s->remaining || out->rate!=s->options.rate ||
+       out->bits!=s->options.bits || out->channels!=2)return PT_RENDER_INVALID;
+    pt_render_commands_gains(s->project,&s->options,&s->commands);
+    if(pt_voice_mix(s->commands.voice,s->project->channels.count,s->commands.gain,out,&clipped)!=PT_PCM_OK) {
+        s->failed=1;return PT_RENDER_SAMPLE;
+    }
+    s->remaining-=out->frames;return PT_RENDER_OK;
+}
+enum pt_render_result pt_render_mutating_sequence_complete(struct pt_render_sequence *s)
+{
+    enum pt_render_result result;
+    if(!s || !s->mutation.tick || !s->pending || s->remaining || s->failed)return PT_RENDER_INVALID;
+    if(s->end) {s->done=1;s->pending=0;return PT_RENDER_OK;}
+    if(!s->mutation.tick(s->mutation.context,&s->run.timeline.flow)) {s->failed=1;return PT_RENDER_SAMPLE;}
+    result=commands(s->mutation.playback,&s->options,&s->run.timeline.flow,&s->run.pitch,
+        s->run.range,s->run.offset_tracks,s->commands.voice,s->commands.instrument,
+        s->commands.volume,s->commands.velocity,s->commands.output_volume,s->commands.trem,NULL,1);
+    if(result!=PT_RENDER_OK) {s->failed=1;return result;}
+    s->pending=0;return PT_RENDER_OK;
 }
 enum pt_render_result pt_render_sequence_next(struct pt_render_sequence *s,struct pt_render_interval *out)
 {
@@ -476,7 +512,7 @@ enum pt_render_result pt_render_sequence_next(struct pt_render_sequence *s,struc
 }
 enum pt_render_result pt_render_sequence_consume(struct pt_render_sequence *s,uint32_t frames)
 {
-    if(!s || !s->pending || s->failed || !frames || frames>256 || frames>s->remaining)return PT_RENDER_INVALID;
+    if(!s || s->mutation.tick || !s->pending || s->failed || !frames || frames>256 || frames>s->remaining)return PT_RENDER_INVALID;
     if(pt_voice_advance(s->commands.voice,s->project->channels.count,frames)!=PT_PCM_OK) {s->failed=1;return PT_RENDER_SAMPLE;}
     s->remaining-=frames;return PT_RENDER_OK;
 }
@@ -485,7 +521,7 @@ enum pt_render_result pt_render_sequence_complete(struct pt_render_sequence *s,s
     enum pt_render_result result;
     if(!plan)return PT_RENDER_INVALID;
     plan->count=0;
-    if(!s || !s->pending || s->remaining || s->failed)return PT_RENDER_INVALID;
+    if(!s || s->mutation.tick || !s->pending || s->remaining || s->failed)return PT_RENDER_INVALID;
     if(s->end) {s->done=1;s->pending=0;return PT_RENDER_OK;}
     result=pt_render_commands_plan(s->project,&s->options,&s->run.timeline.flow,&s->run.pitch,
         s->run.range,s->run.offset_tracks,&s->commands,plan);

@@ -72,4 +72,13 @@ struct pt_render_mutation {
 enum pt_render_result pt_render_mutating_allocated(const struct pt_project *,const struct pt_render_options *,
     pt_render_sink,void *,pt_render_progress,void *,struct pt_render_report *,
     const struct pt_allocator *,const struct pt_render_mutation *);
+/* Internal private-bank producer sequence. Mutation/context/descriptors outlive
+ * close. next uses the ordinary interval protocol; use read (not consume) to mix
+ * into owner-supplied blocks, then private complete (not a public command plan).
+ * No source pin callbacks: only prevalidated session-owned playback PCM is safe.
+ * Never pass master-backed mutable storage. All calls are owner-thread serialized. */
+enum pt_render_result pt_render_mutating_sequence_open(const struct pt_project *,const struct pt_render_options *,
+    const struct pt_allocator *,struct pt_render_sequence **,const struct pt_render_mutation *);
+enum pt_render_result pt_render_mutating_sequence_read(struct pt_render_sequence *,struct pt_pcm *);
+enum pt_render_result pt_render_mutating_sequence_complete(struct pt_render_sequence *);
 #endif

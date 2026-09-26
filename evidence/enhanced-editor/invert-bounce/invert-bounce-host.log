@@ -1,0 +1,9 @@
+test_atomic_generated_sample_and_shared_history (test_bounce.Bounce.test_atomic_generated_sample_and_shared_history) ... BOUNCE PASS: exact true24 PCM, atomic new slot, allocation/budget/cancellation rollback, redo preservation, mixed undo, references, table reuse, eviction and PTG identity
+ok
+test_shared_sample_bounce_transaction (test_bounce_invert.BounceInvert.test_shared_sample_bounce_transaction) ... INVERT BOUNCE PASS: shared mutation, exact24 PCM, immutable masters, allocation/budget/cancellation rollback, redo, undo and project save
+ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 9.983s
+
+OK

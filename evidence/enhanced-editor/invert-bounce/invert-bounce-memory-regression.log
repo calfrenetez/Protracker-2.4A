@@ -1,0 +1,7 @@
+test_every_export_allocation_failure (test_render_memory_failure.RenderMemoryFailure.test_every_export_allocation_failure) ... RENDER MEMORY PASS: all4 WAV and11 stem allocation failures preserve masters/reports and remove owned staging
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 3.183s
+
+OK

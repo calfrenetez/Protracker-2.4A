@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 EFx bounce and production Fast allocator; no physical acceptance",
+  "PTExecInvertBounceTest_sha256": "2483989845122d566a0497e7bcec9db1623fc9bb9c1c1738f96675ffa827c8ad",
+  "invert-bounce_returncode": "0",
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0",
+  "run_files_cleaned": true
+}

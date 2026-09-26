@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131178568 reserve=262144 flags=4
+INVERT BOUNCE PASS: shared mutation, exact24 PCM, immutable masters, allocation/budget/cancellation rollback, redo, undo and project save
+EXEC MEMORY PASS: 137 Fast allocations, zero owned bytes, budget refusal without Chip fallback

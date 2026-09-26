@@ -210,3 +210,14 @@ mutation, fixture stem recombination, all allocation failures across later stems
 verification and final-publication cancellation, existing destination refusal,
 immutable masters and complete staging cleanup. Native evidence is recorded
 separately; these checks do not establish physical or analogue acceptance.
+
+## Transactional EFx sample bounce
+
+`pt_sampler_bounce_invert` supplies the same explicit private-sample budget to
+fresh planning and filling passes. It uses the existing generated-sample append
+transaction, preserving all source masters and redo resources on allocation,
+budget or cancellation refusal. Only a successful new sample enters undo history;
+undo/redo changes that generated slot without mutating the source. Source and
+bounced PCM both save from master representations. Ordinary bounce remains on
+its original renderer unless the caller explicitly selects the EFx API. Native
+editor controls and queued Studio wiring are not enabled by this core API.

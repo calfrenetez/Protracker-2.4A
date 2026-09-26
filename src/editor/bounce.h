@@ -15,4 +15,14 @@
 enum pt_edit_result pt_sampler_bounce(struct pt_sampler *,struct pt_project *,
     struct pt_pattern_history *,const struct pt_render_options *,const char *,
     pt_render_progress,void *,struct pt_render_report *,enum pt_render_result *);
+/* Internal synchronous render strategy. A NULL sink requests a validated plan;
+ * each call must start from the immutable masters and release all workspace. */
+struct pt_bounce_engine {
+    void *context;
+    enum pt_render_result (*run)(void *,const struct pt_project *,const struct pt_render_options *,
+        pt_render_sink,void *,pt_render_progress,void *,struct pt_render_report *,const struct pt_allocator *);
+};
+enum pt_edit_result pt_sampler_bounce_engine(struct pt_sampler *,struct pt_project *,
+    struct pt_pattern_history *,const struct pt_render_options *,const char *,
+    pt_render_progress,void *,struct pt_render_report *,enum pt_render_result *,const struct pt_bounce_engine *);
 #endif

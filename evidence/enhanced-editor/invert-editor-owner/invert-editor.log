@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131098824 reserve=262144 flags=4
+EDITOR INVERT STUDIO PASS: private bank stopped by pattern/sample edits, undo/dispose, held leases, stale output shutdown, natural drain, refusal and cleanup
+EXEC MEMORY PASS: 111 Fast allocations, zero owned bytes, budget refusal without Chip fallback

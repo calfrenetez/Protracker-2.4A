@@ -1413,3 +1413,32 @@ The sampler binding also passes on shared030 with93 Fast/not-Chip allocations,
 zero owned bytes and budget refusal. Evidence:
 `evidence/enhanced-editor/invert-sampler-song/`. Editor interception and real
 output transport remain unimplemented by this adapter.
+
+
+### Editor ownership of private EFx sessions
+
+`pt_editor_studio_start_invert` and `pt_editor_studio_start_invert_queued` are
+explicit budgeted entry points for classic EFx private-bank playback. They share
+the editor's existing before-change guard and output-stop callback. Pattern or
+sample edits, undo, dispose and explicit Stop close private voices/bank before
+masters or metadata change. Held queue blocks remain independent until their
+consumer releases them; waiting/pending audio is discarded. Natural completion
+instead drains copied output and retains its output-stop binding for later edits.
+
+Producer or queue failures now also invoke the bound output-stop request once;
+previously the pump closed only its producer. Invalid block-size requests alone
+still leave a valid session unchanged. Output cancellation remains asynchronous:
+the output owner must confirm completion/detach before releasing its context or
+a held queue block. Ordinary Studio start keeps its immutable-master behavior.
+
+These are editor-owner APIs, not native PLAY wiring, a new screen or an enabled
+AmiGUS device. The native application's unavailable-Studio indication remains
+accurate. Classic EFx still refuses16/24-bit sources instead of downgrading them;
+ordinary Studio retains direct full-precision master mixing. Tests exercise actual
+pattern/sample edit and undo keys, stale generation failure, dispose, queue leases,
+output stop including an odd FIFO tail, natural drain and budget/format refusal.
+
+Clean-source host integration checks and the native shared030 fixture pass.
+The production allocator reports111 Fast/not-Chip allocations and zero final owned
+bytes, including edit/undo/dispose and held-output cases. Exact build and RC0/
+DMAoff/cleanup evidence: `evidence/enhanced-editor/invert-editor-owner/`.

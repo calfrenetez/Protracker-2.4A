@@ -2,11 +2,12 @@
 #define PT_EDITOR_STUDIO_H
 #include "editor.h"
 #include "sampler_song.h"
+#include "sampler_invert_song.h"
 #include "../core/studio_pump.h"
 /* Caller-owned, owner-thread binding; zero/init once, detach before editor memory
  * is freed or reinitialized. Editor dispose may run first: its guard stops song
  * before sample owners are released. Does not start an audio device/backend. */
-struct pt_editor_studio {struct pt_editor *editor;struct pt_sampler_song *song;struct pt_studio_queue *queue;struct pt_studio_pump pump;void (*output_stop)(void *);void *output_context;};
+struct pt_editor_studio {struct pt_editor *editor;struct pt_sampler_song *song;struct pt_sampler_invert_song *invert_song;struct pt_studio_queue *queue;struct pt_studio_pump pump;void (*output_stop)(void *);void *output_context;};
 /* Refuses an existing editor guard rather than overwriting another owner. */
 int pt_editor_studio_attach(struct pt_editor_studio *,struct pt_editor *);
 void pt_editor_studio_stop(struct pt_editor_studio *);
@@ -15,12 +16,20 @@ void pt_editor_studio_detach(struct pt_editor_studio *);
  * must specify48k/stereo24. Project stays immutable while active; external writes
  * must prepare_change first. No PLAY action or device queue is enabled here. */
 enum pt_render_result pt_editor_studio_start(struct pt_editor_studio *,const struct pt_render_options *);
+/* Explicit classic EFx private-bank mode. Same editor guard/stop lifecycle;
+ * sample_budget bounds additional copies from the editor's sampler allocator.
+ * Unsupported16/24-bit sources are refused, never converted. Does not enable
+ * native PLAY or a device transport. Ordinary start retains immutable pins. */
+enum pt_render_result pt_editor_studio_start_invert(struct pt_editor_studio *,const struct pt_render_options *,size_t sample_budget);
 enum pt_render_result pt_editor_studio_pull(struct pt_editor_studio *,unsigned,const struct pt_pcm **,unsigned *);
 /* Borrow a fresh empty queue until stop/detach, even after natural end. Owner
  * must stop/detach BEFORE closing the queue. No direct pull while queued. Natural
  * end drains; editor edit/undo/dispose/Stop aborts unleased data and pending audio.
  * Held leases remain valid until consumer release; this does not cancel hardware. */
 enum pt_render_result pt_editor_studio_start_queued(struct pt_editor_studio *,const struct pt_render_options *,struct pt_studio_queue *);
+enum pt_render_result pt_editor_studio_start_invert_queued(struct pt_editor_studio *,const struct pt_render_options *,size_t sample_budget,struct pt_studio_queue *);
+/* Producer/queue failure closes source ownership and requests bound output stop.
+ * Invalid block sizes alone are refused without changing a valid session. */
 enum pt_pump_result pt_editor_studio_step(struct pt_editor_studio *,unsigned frames);
 /* Bind one nonblocking, nonreentrant output-stop request after queued start.
  * Context outlives stop/detach. Explicit/editor stops call it once after closing

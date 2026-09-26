@@ -634,3 +634,16 @@ matches the full WAV, both stems and the selected-track bounce, preserves every
 original serialized sample record, and passes save/undo/redo/normal exit.
 The harness verifies run-owned recents before launching and restores the exact
 prior ENV setting before releasing the shared emulator. No physical audio claim.
+
+
+### Incremental private EFx ownership
+
+The explicit `pt_render_invert_session` producer now exposes the same bounded
+classic EFx subset in <=256-frame stereo24 blocks for a copy-owned output queue.
+`pt_sampler_invert_song` adds sampler version/table guards, and explicit
+`pt_editor_studio_start_invert[_queued]` entry points stop before editor edits,
+undo and disposal. Ordinary Studio start still refuses EFx;16/24-bit masters are
+never converted implicitly to satisfy this subset. Native PLAY/device transport
+remain unimplemented by these APIs. Host parity and native allocation/lifetime
+evidence are under `invert-queued-core`, `invert-sampler-song` and
+`invert-editor-owner` in `evidence/enhanced-editor/`.

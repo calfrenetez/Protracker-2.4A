@@ -1306,3 +1306,23 @@ supported roundtrips and explicit16/24-to8-bit export remain valid. Full native
 build passes. No fresh native runtime/UI qualification is claimed for this small
 refusal change. The host converter target and round8 test now link the reader
 modules they use.
+
+## EFx offline exports and generated samples
+
+Offline selected-track and grouped/individual stem renders retain every
+channel's shared-sample mutation clock, regardless of audio selection/mute/solo.
+EFx mutates a budgeted private sample bank, not source masters or playback caches.
+Each planning, output and verification pass starts afresh. The sampler's EFx
+bounce appends its generated stereo16/24 master only after the existing atomic
+sample/history transaction succeeds; source masters and redo survive failure.
+The opt-in API passes shared030 production allocator checks:137 Fast/not-Chip
+allocations and zero owned bytes after completion, including failure paths.
+
+The native editor selects this path when the requested song/pattern contains
+EFx. Its additional private-sample budget comes from the current available
+master-memory pool; each allocation rechecks live available memory, the shared
+ceiling and reserve. There is no assumption that128MiB is free. This path retains
+the bounded whole mono8 forward-loop/no-slice/no-interpolation input subset;
+its generated output may be stereo16/24. Other high-resolution projects keep
+the ordinary renderer. Queued Studio EFx and physical/audio acceptance remain
+separate. Native UI evidence is tracked with the exact candidate.

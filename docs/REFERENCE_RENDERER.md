@@ -577,9 +577,13 @@ not once per output stem. Example:
 PT24GRender input.mod NEW-STEMS --tracks 3 --stems --invert-budget 100000
 ```
 
-The native editor and
-queued Studio engine still use their existing effect subset; this command-line
-option does not enable EFx there. This is ideal-clock software rendering, not
+The native editor now detects EFx in the requested song/pattern, including
+unselected tracks, and selects this bounded path for WAV, stems and sample
+bounce. It queries the live master-memory pool instead of assuming a RAM size;
+each subsequent allocation also rechecks the pool and its reserve. Insufficient
+memory or unsupported sample/effect combinations preserve the project and undo
+history. The classic layout and render controls are unchanged. The queued Studio
+engine still uses its existing effect subset and refuses EFx. This is ideal-clock software rendering, not
 physical Paula/AmiGUS or analogue acceptance.
 
 Native shared030 run `render-files-1790249882268620000` passed this CLI path:
@@ -595,3 +599,10 @@ stereo24 frames and exactly match host WAV bytes. Source preservation, existing
 directory refusal, completion, DMA-off, cleanup and explicit release passed.
 All156 host tests passed. Evidence: `enhanced-editor/invert-stems`. This does not
 qualify native editor integration, physical timing or analogue audio.
+
+Native editor extension: `invert-ui-1790462738704840000` passed through the
+existing controls using a candidate built without unrelated display changes.
+WAV/stems match host bytes; bounced sample032 contains the expected24-bit PCM,
+all31 original sample records remain identical, and save plus undo/redo passes.
+The dialog-cancel path preserves edits. Normal exit, recent-prefix restoration,
+DMA-off and exact cleanup passed. Evidence: `enhanced-editor/invert-editor`.

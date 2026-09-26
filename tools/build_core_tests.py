@@ -130,6 +130,7 @@ def main():
     inputs['PTStemFileTest'] = ['tests/stem_file_test.c','src/platform/stem_file.c','src/core/stems.c','src/platform/render_file.c',*render_sources]
     inputs['PTRenderFileTest'] = ['tests/render_file_test.c','src/platform/render_file.c','src/core/wav.c',*render_sources]
     invert_sources=['src/core/render_invert.c','src/core/invert_bank.c','src/core/invert_sequence.c','src/core/invert_pcm.c','src/core/invert_loop.c']
+    inputs['PT24GEdit'] += ['src/editor/bounce_invert.c','src/platform/render_invert_file.c',*invert_sources]
     inputs['PTInvertRenderTest']=['tests/render_invert_test.c',*invert_sources,*render_sources]
     inputs['PTInvertBounceTest']=['tests/bounce_invert_test.c','src/editor/bounce_invert.c',*inputs['PTBounceTest'][1:],*invert_sources]
     inputs['PTExecInvertBounceTest']=['tests/native_exec_invert_bounce_test.c',*inputs['PTInvertBounceTest'][1:]]

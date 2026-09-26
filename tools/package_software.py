@@ -82,6 +82,11 @@ normal audio while the full title remains in the project.
 Metadata shares immutable PCM storage, bounded history and project/MOD saves.
 Paula stays fixed-pan; enhanced live pan/MIDI playback remains pending.
 Offline track/group stems are available from the render panel.
+WAV, stems and new-sample bounce support bounded classic EFx using private copies
+of mono8 forward-loop samples. Source masters stay unchanged; generated samples
+share undo. Memory is queried before rendering, with graceful shortage refusal.
+The CLI enables this path with --invert-budget BYTES; see REFERENCE_RENDERER.md.
+Queued Studio EFx and physical AmiGUS remain unqualified.
 Classic Paula playback applies mute/solo live; MOD export refuses saved flags and
 non-default names/groups/pan/MIDI-channel metadata.
 SAMPLER/Control-L opens WAV/IFF/explicit RAW import/export, waveform selection and undoable edits.

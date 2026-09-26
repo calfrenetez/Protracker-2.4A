@@ -33,6 +33,9 @@
 #include "../platform/render_file.h"
 #include "../platform/stem_file.h"
 #include "../editor/bounce.h"
+#include "../editor/bounce_invert.h"
+#include "../platform/render_invert_file.h"
+#include "render_invert.h"
 #include "../platform/recent_file.h"
 struct IntuitionBase *IntuitionBase;
 struct GfxBase *GfxBase;
@@ -225,18 +228,40 @@ static const char *render_error(enum pt_render_result result)
     default:return "WAV REFUSED - CHECK SETTINGS; PROJECT PRESERVED";
     }
 }
+static int render_discard(void *context,const struct pt_pcm *pcm,uint64_t offset)
+{(void)context;(void)pcm;(void)offset;return 1;}
+static enum pt_render_result render_measure(struct pt_editor *e,const struct pt_render_options *o,
+    struct render_ui *ui,struct pt_render_report *plan,size_t *invert_budget)
+{
+    uint8_t used[PT_PROJECT_PATTERNS]={0};unsigned pat,row,ch;int invert=0;
+    *invert_budget=0;
+    if(pt_project_validate(e->project,NULL)!=PT_PROJECT_OK || o->pattern_only>1 ||
+       (o->pattern_only && o->pattern>=e->project->pattern_count))return PT_RENDER_INVALID;
+    if(o->pattern_only)used[o->pattern]=1;
+    else for(pat=0;pat<e->project->order_count;++pat)used[e->project->orders[pat]]=1;
+    /* Hidden/muted channels can mutate a sample heard by the selected tracks. */
+    for(pat=0;pat<e->project->pattern_count;++pat)if(used[pat])for(row=0;row<64;++row)for(ch=0;ch<e->project->channels.count;++ch) {
+        const struct pt_event *event=e->project->events+((size_t)pat*64+row)*e->project->channels.count+ch;
+        if(event->effect==14 && (event->parameter>>4)==15)invert=1;
+    }
+    if(!invert)return pt_render_measure_allocated(e->project,o,render_progress,ui,plan,&render_allocator);
+    /* Query current memory; the allocator enforces this shared ceiling again
+       for every private bank, renderer, output and undo allocation. */
+    *invert_budget=pt_master_memory_available(&master_memory);
+    return pt_render_invert_stream(e->project,o,render_discard,NULL,render_progress,ui,plan,*invert_budget,&render_allocator);
+}
 static void render_wav(struct conversion_ui *display,struct pt_paula *audio)
 {
     struct pt_editor *e=display->editor;struct pt_render_options options;struct pt_render_report plan,report;
     struct render_ui ui={*display,0,~0U,"WAV"};enum pt_render_result detail;enum pt_render_file_result result;
-    char path[1024],status[76];int selected;
+    char path[1024],status[76];int selected;size_t invert_budget;
     pt_paula_stop(audio);pt_paula_poll(audio,&e->playback);pt_editor_render_options(e,&options);
-    detail=pt_render_measure_allocated(e->project,&options,render_progress,&ui,&plan,&render_allocator);
+    detail=render_measure(e,&options,&ui,&plan,&invert_budget);
     if(detail!=PT_RENDER_OK) {pt_editor_status(e,render_error(detail));printf("EDITOR RENDER preflight=%u dirty=%u\n",detail,pt_editor_dirty(e));fflush(stdout);return;}
     ui.total=plan.frames;puts("EDITOR REQUEST render");fflush(stdout);
     selected=pt_file_request(display->window,9,"new-render.wav",path,sizeof(path));display->cache->valid=0;
     if(selected!=1) {pt_editor_status(e,selected==0?"WAV REQUEST CANCELLED - EDITS PRESERVED":"WAV REQUEST FAILED - EDITS PRESERVED");return;}
-    result=pt_render_file_new_allocated(path,e->project,&options,render_progress,&ui,&report,&detail,&render_allocator);
+    result=invert_budget?pt_render_invert_file_new(path,e->project,&options,render_progress,&ui,&report,&detail,invert_budget,&render_allocator):pt_render_file_new_allocated(path,e->project,&options,render_progress,&ui,&report,&detail,&render_allocator);
     if(result==PT_RENDER_FILE_OK) {
         if(report.clipped) {snprintf(status,sizeof(status),"WAV VERIFIED - %lu CLIPS; REDUCE GAIN",(unsigned long)report.clipped);pt_editor_status(e,status);}
         else pt_editor_status(e,pt_editor_dirty(e)?"WAV VERIFIED - PROJECT STILL UNSAVED":"WAV VERIFIED - PROJECT UNCHANGED");
@@ -249,16 +274,16 @@ static void render_stems(struct conversion_ui *display,struct pt_paula *audio)
     struct pt_editor *e=display->editor;struct pt_render_options options;struct pt_render_report plan;
     struct pt_stem_report report;struct pt_stem_plan stems;struct render_ui ui={*display,0,~0U,"STEMS"};
     enum pt_render_result detail;enum pt_render_file_result result;enum pt_stem_result planned;
-    char path[1024],status[76];int selected;unsigned i,clipped=0;
+    char path[1024],status[76];int selected;size_t invert_budget;unsigned i,clipped=0;
     pt_paula_stop(audio);pt_paula_poll(audio,&e->playback);pt_editor_render_options(e,&options);
     planned=pt_stems_plan(&e->project->channels,options.tracks,e->render_groups,&stems);
     if(planned!=PT_STEM_OK) {pt_editor_status(e,render_error(planned==PT_STEM_MIDI?PT_RENDER_ROUTE:PT_RENDER_INVALID));return;}
-    detail=pt_render_measure_allocated(e->project,&options,render_progress,&ui,&plan,&render_allocator);
+    detail=render_measure(e,&options,&ui,&plan,&invert_budget);
     if(detail!=PT_RENDER_OK) {pt_editor_status(e,render_error(detail));return;}
     ui.total=plan.frames;puts("EDITOR REQUEST stems");fflush(stdout);
     selected=pt_file_request(display->window,10,"new-stems",path,sizeof(path));display->cache->valid=0;
     if(selected!=1) {pt_editor_status(e,selected==0?"STEMS REQUEST CANCELLED - EDITS PRESERVED":"STEMS REQUEST FAILED - EDITS PRESERVED");return;}
-    result=pt_stem_file_new_allocated(path,e->project,&options,e->render_groups,render_progress,&ui,&report,&detail,&render_allocator);
+    result=invert_budget?pt_render_invert_stems_new(path,e->project,&options,e->render_groups,render_progress,&ui,&report,&detail,invert_budget,&render_allocator):pt_stem_file_new_allocated(path,e->project,&options,e->render_groups,render_progress,&ui,&report,&detail,&render_allocator);
     if(result==PT_RENDER_FILE_OK) {
         for(i=0;i<report.plan.count;++i)if(report.audio[i].clipped)++clipped;
         if(clipped)snprintf(status,sizeof(status),"%u STEMS VERIFIED - %u CLIPPED; REDUCE GAIN",report.plan.count,clipped);
@@ -273,9 +298,9 @@ static void bounce_sample(struct conversion_ui *display,struct pt_paula *audio)
 {
     struct pt_editor *e=display->editor;struct pt_render_options options;struct pt_render_report plan,report;
     struct render_ui ui={*display,0,~0U,"SAMPLE"};enum pt_render_result detail;enum pt_edit_result result;
-    char name[PT_PROJECT_NAME],status[76];
+    char name[PT_PROJECT_NAME],status[76];size_t invert_budget;
     pt_paula_stop(audio);pt_paula_poll(audio,&e->playback);pt_editor_render_options(e,&options);
-    detail=pt_render_measure_allocated(e->project,&options,render_progress,&ui,&plan,&render_allocator);
+    detail=render_measure(e,&options,&ui,&plan,&invert_budget);
     if(detail!=PT_RENDER_OK)result=detail==PT_RENDER_CANCELLED?PT_EDIT_CANCELLED:detail==PT_RENDER_MEMORY?PT_EDIT_CAPACITY:PT_EDIT_UNSUPPORTED;
     else {
         ui.total=plan.frames;
@@ -283,7 +308,7 @@ static void bounce_sample(struct conversion_ui *display,struct pt_paula *audio)
         else if(options.pattern_only)snprintf(name,sizeof(name),"BOUNCE PATTERN %03u",options.pattern);
         else strcpy(name,"BOUNCE SONG");
         pt_editor_prepare_change(e);
-        result=pt_sampler_bounce(&e->sampler,e->project,&e->history,&options,name,render_progress,&ui,&report,&detail);
+        result=invert_budget?pt_sampler_bounce_invert(&e->sampler,e->project,&e->history,&options,name,render_progress,&ui,&report,&detail,invert_budget):pt_sampler_bounce(&e->sampler,e->project,&e->history,&options,name,render_progress,&ui,&report,&detail);
     }
     if(result==PT_EDIT_OK) {
         e->sample=e->project->sample_count;pt_editor_sample_all(e);

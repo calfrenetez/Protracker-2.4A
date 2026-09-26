@@ -5,7 +5,9 @@ ProTracker workflow, and exclusive Paula, AmiGUS or MIDI routing per channel.
 
 The shared WAV/sample-bounce renderer now includes reference arpeggio (0xy),
 finetune and native note quantization, pitch slides, tone portamento with glissando, vibrato and tremolo with waveform controls and mono8 sample-offset/retrigger/note-delay subsets. Instrument-only preload and
-same-sample volume reload preserve phase. Full classic-effect compatibility remains in
+same-sample volume reload preserve phase. Bounded EFx invert-loop works in offline
+WAV, selected/group stems and sample bounce using private copies of mono8
+forward-loop samples; source masters remain unchanged. Full classic-effect compatibility remains in
 progress; see [reference renderer limits](docs/REFERENCE_RENDERER.md).
 
 **Development status: the native editor, sampler and song arrangement work;

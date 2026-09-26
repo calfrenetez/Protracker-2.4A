@@ -1,0 +1,11 @@
+test_private_effect_render_and_failure_boundaries (test_render_invert.RenderInvert.test_private_effect_render_and_failure_boundaries) ... INVERT render PASS: exact PCM, immutable master, repeatability, budgets, allocation failures, cancellation, sink failure
+ok
+test_verified_private_effect_file (test_render_invert_file.RenderInvertFile.test_verified_private_effect_file) ... INVERT FILE PASS: exact WAV, fresh verification workspace, all allocation failures, verification cancellation and cleanup
+ok
+test_verified_shared_sample_stems (test_render_invert_file.RenderInvertFile.test_verified_shared_sample_stems) ... INVERT STEMS PASS: shared-sample exact PCM, grouped stems, fresh banks, all allocation failures, cancellations, immutable masters and cleanup
+ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 12.553s
+
+OK

@@ -33,7 +33,7 @@ class RenderFile(unittest.TestCase):
             self.assertEqual(data[:4],b'RIFF');self.assertEqual(int.from_bytes(data[24:28],'little'),44100)
             self.assertEqual(int.from_bytes(data[34:36],'little'),16)
             self.assertEqual(subprocess.run(args,capture_output=True).returncode,20);self.assertEqual(wav.read_bytes(),data)
-            # Explicit EFx export never mutates the source or silently enables stems.
+            # Explicit EFx export preserves source and shared mutation across stems.
             for name in ('invert_delay','invert_shared','invert_reload'):
                 source=ROOT/'evidence/enhanced-editor/invert-ordering'/(name+'.mod')
                 original=source.read_bytes();dest=out/(name+'.wav')
@@ -46,9 +46,25 @@ class RenderFile(unittest.TestCase):
                 self.assertEqual(subprocess.run([*plain,'--invert-budget','100000'],capture_output=True).returncode,20)
                 self.assertEqual(dest.read_bytes(),data)
                 refused=out/(name+'-refused.wav')
-                for tail in (['--invert-budget','1'],['--invert-budget','100000','--tracks','1'],['--invert-budget','100000','--stems']):
+                for tail in (['--invert-budget','1'],['--invert-budget','1','--stems']):
                     self.assertEqual(subprocess.run([str(cli),str(source),str(refused),*tail],capture_output=True).returncode,20)
                     self.assertFalse(refused.exists())
+                stems=out/(name+'-stems')
+                stem_args=[str(cli),str(source),str(stems),'--invert-budget','100000','--stems','--tracks','3']
+                self.assertIn('STEMS count=2 verified=1 new_directory=1',subprocess.run(stem_args,capture_output=True,text=True,check=True).stdout)
+                stem_data=[]
+                for ch in range(2):
+                    selected=out/(name+f'-track{ch}.wav')
+                    subprocess.run([str(cli),str(source),str(selected),'--invert-budget','100000','--tracks',str(1<<ch)],capture_output=True,check=True)
+                    stem_data.append((stems/f'track-{ch+1:02d}.wav').read_bytes())
+                    self.assertEqual(selected.read_bytes(),stem_data[-1])
+                # Fixtures have only channels 1/2 audible and no clipping. Sum
+                # isolated audio while retaining all shared mutation clocks.
+                def pcm24(blob):
+                    return [int.from_bytes(blob[i:i+3],'little',signed=True) for i in range(44,len(blob),3)]
+                self.assertEqual(pcm24(data),[a+b for a,b in zip(*map(pcm24,stem_data))])
+                self.assertEqual(subprocess.run(stem_args,capture_output=True).returncode,20)
+                self.assertEqual(source.read_bytes(),original)
             # File-size cap is process-local. Ignore SIGXFSZ so the failed/short
             # write reaches normal cleanup instead of terminating the process.
             def limited():

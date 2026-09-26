@@ -7,6 +7,7 @@ INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     group=parser.add_mutually_exclusive_group()
+    group.add_argument('--invert-stem-cli',metavar='REFERENCE_DIRECTORY',help='Verify bounded shared-sample EFx native stems against host bytes')
     group.add_argument('--invert-cli',metavar='REFERENCE_WAV',help='Verify bounded EFx CLI WAV against host bytes')
     group.add_argument('--invert-render',action='store_true',help='Run bounded offline EFx PCM and failure checks')
     group.add_argument('--stem-cli',metavar='REFERENCE_DIRECTORY',help='Run two native stems and existing-directory refusal')
@@ -79,9 +80,10 @@ def main():
         if args.sample_svx:
             cases=[('sample-svx','PTExecSampleSvxFileTest','SAMPLE SVX STREAM PASS:')]
             result['scope']='shared030 streamed master IFF export and Exec Fast allocator'
-        if args.stem_cli:
+        if args.stem_cli or args.invert_stem_cli:
             cases=[('stem-cli','PT24GRender','STEMS count=2') ]
             result['scope']='shared030 Fast-allocator stem CLI, exact two-stem host parity and destination refusal'
+            if args.invert_stem_cli:result['scope']+='; all-channel shared EFx mutation'
         if args.render_cli:
             cases=[('render-cli','PT24GRender','WAV frames=')]
             result['scope']='shared030 Fast-allocator renderer, one-row24-bit WAV host parity'
@@ -148,14 +150,16 @@ def main():
                 sub=run/'render-cli';shutil.copyfile(ROOT/'evidence/baseline/mod.baseline',sub/'source.mod')
                 commands=['FailAt 21','Stack 65536','CD '+guest.device+run.name+'/render-cli',
                           'PT24GRender source.mod output.wav --pattern 0 --from-row 0 --to-row 1 --tracks 1 >test.log','Echo $RC >test.rc']
-            if args.stem_cli:
-                sub=run/'stem-cli';shutil.copyfile(ROOT/'evidence/baseline/mod.baseline',sub/'source.mod')
+            if args.stem_cli or args.invert_stem_cli:
+                sub=run/'stem-cli';fixture=ROOT/('evidence/enhanced-editor/invert-ordering/invert_shared.mod' if args.invert_stem_cli else 'evidence/baseline/mod.baseline')
+                shutil.copyfile(fixture,sub/'source.mod')
                 command='PT24GRender source.mod stems --pattern 0 --from-row 0 --to-row 1 --tracks 3 --stems'
+                if args.invert_stem_cli:command='PT24GRender source.mod stems --tracks 3 --stems --invert-budget 100000 --gain 65536'
                 commands=['FailAt 21','Stack 65536','CD '+guest.device+run.name+'/stem-cli',
                           command+' >test.log','Echo $RC >test.rc',command+' >repeat.log','Echo $RC >repeat.rc']
             commands+=['Echo done >'+guest.device+run.name+'/done']
             guest.launch.write_text('\n'.join(commands)+'\n');guest.start()
-            deadline=time.monotonic()+(60 if args.invert_render else 180 if args.invert_cli else 90)
+            deadline=time.monotonic()+(60 if args.invert_render else 240 if args.invert_stem_cli else 180 if args.invert_cli else 90)
             while not (run/'done').exists():
                 if time.monotonic()>deadline:raise RuntimeError('Native file checks timed out; preserve owned run for recovery')
                 time.sleep(.2)
@@ -196,12 +200,12 @@ def main():
                 assert sorted(p.name for p in sub.iterdir())==['PT24GRender','output.wav','source.mod','test.log','test.rc']
                 result['exact_host_wav']=True
                 result['reference_sha256']=hashlib.sha256(expected).hexdigest()
-            if args.stem_cli:
-                sub=run/'stem-cli';reference=Path(args.stem_cli)
+            if args.stem_cli or args.invert_stem_cli:
+                sub=run/'stem-cli';reference=Path(args.invert_stem_cli or args.stem_cli)
                 expected={p.name:p.read_bytes() for p in reference.iterdir()}
                 assert sorted(expected)==['track-01.wav','track-02.wav']
                 assert {p.name:p.read_bytes() for p in (sub/'stems').iterdir()}==expected
-                assert (sub/'source.mod').read_bytes()==(ROOT/'evidence/baseline/mod.baseline').read_bytes()
+                assert (sub/'source.mod').read_bytes()==fixture.read_bytes()
                 repeat=(sub/'repeat.rc').read_text().strip();assert repeat=='20',repeat
                 assert sorted(p.name for p in sub.iterdir())==['PT24GRender','repeat.log','repeat.rc','source.mod','stems','test.log','test.rc']
                 (out/'repeat.log').write_text((sub/'repeat.log').read_text())
@@ -219,7 +223,7 @@ def main():
                 result['donor_unchanged']=True
             result['passed']=True
         finally:
-            if finished and (args.source_memory or args.sample_dispatch or args.invert_render or args.invert_cli):
+            if finished and (args.source_memory or args.sample_dispatch or args.invert_render or args.invert_cli or args.invert_stem_cli):
                 state=guest.command('GET_AUDIO_STATE')
                 finished=all('ch%d_dma=0'%i in state.split('\t') for i in range(4))
                 result['cleanup_audio']=state

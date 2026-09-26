@@ -3,8 +3,8 @@
 #include "render.h"
 /* Explicit offline classic EFx path. sample_budget bounds all additional private
  * sample descriptors and PCM; ordinary renderer workspace uses the same caller
- * allocator separately. First implementation requires all tracks, whole mono8
- * forward-loop samples (at least four loop frames), and no interpolation/slices.
+ * allocator separately. All channels retain shared mutation clocks regardless of
+ * audio selection/mute/solo. Requires whole mono8 forward-loop samples (at least four loop frames), and no interpolation/slices.
  * Unknown/unsupported inputs fail before sink calls. Masters are never edited.
  * This does not enable EFx in the queued Studio/hardware sequence API. */
 enum pt_render_result pt_render_invert_stream(const struct pt_project *,const struct pt_render_options *,

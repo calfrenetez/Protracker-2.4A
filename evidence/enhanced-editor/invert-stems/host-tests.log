@@ -1,0 +1,442 @@
+python3 -m unittest discover -s tests -v
+test_transport_ownership (test_amigus_chain.AmiGusChain.test_transport_ownership) ... AMIGUS CHAIN PASS: queue consumer packed byte equivalence, odd partitions, explicit tail finish, failed reset lease retention
+ok
+test_transport_ownership (test_amigus_fifo.AmiGusFifo.test_transport_ownership) ... AMIGUS FIFO PASS: bounded triplets, capacity stalls, odd tail, explicit pad, uncertain writes blocked until confirmed reset
+ok
+test_transport_ownership (test_amigus_pcm_pack.AmiGusPack.test_transport_ownership) ... AMIGUS PACK PASS: true24 MSB words, stereo order, partition tails, explicit final padding, atomic refusal
+ok
+test_transport_ownership (test_amigus_register_port.AmiGusRegister.test_transport_ownership) ... AMIGUS REGISTER PASS: owned access, word capacity, ordered triplets, bounded reset/readback, partial-write poison
+ok
+test_transport_ownership (test_amigus_register_session.AmiGusRegisterSession.test_transport_ownership) ... AMIGUS REGISTER SESSION PASS: exact packed stream, IRQ bit isolation, drain wait, partial-write/reset delays, ownership loss cleanup
+ok
+test_library_lifetime (test_amigus_reservation.AmiGusReservation.test_library_lifetime) ... amigus reservation lifecycle: PASS (fake library, no hardware)
+ok
+test_session_retains_reservation (test_amigus_reservation.AmiGusReservation.test_session_retains_reservation) ... amigus reservation lifecycle: PASS (fake library, no hardware)
+AMIGUS RESERVED SESSION PASS: failed open, leased Stop and natural tail retain card through reset recovery
+ok
+test_transport_ownership (test_amigus_session.AmiGusSession.test_transport_ownership) ... AMIGUS SESSION PASS: tail flush, drain acknowledgement, no-lease Stop, failed-open/reset recovery and safe detach
+ok
+test_native_stored_output_periods_and_pcm (test_arpeggio.Arpeggio.test_native_stored_output_periods_and_pcm) ... ARPEGGIO boundaries PASS: 16 tracks, nibble phases, sentinel/adjacent table, mask, inactive base and wrapped counter
+PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+ok
+test_fixture_is_bounded_classic_mod (test_baseline_tools.BaselineTools.test_fixture_is_bounded_classic_mod) ... ok
+test_out_of_bounds_relocation_rejected (test_baseline_tools.BaselineTools.test_out_of_bounds_relocation_rejected) ... ok
+test_preparation_is_idempotent (test_baseline_tools.BaselineTools.test_preparation_is_idempotent) ... ok
+test_preparation_preserves_other_operands_and_comments (test_baseline_tools.BaselineTools.test_preparation_preserves_other_operands_and_comments) ... ok
+test_relocation_difference_rejected (test_baseline_tools.BaselineTools.test_relocation_difference_rejected) ... ok
+test_same_layout_is_not_enough (test_baseline_tools.BaselineTools.test_same_layout_is_not_enough) ... ok
+test_truncated_and_trailing_hunks_rejected (test_baseline_tools.BaselineTools.test_truncated_and_trailing_hunks_rejected) ... ok
+test_atomic_generated_sample_and_shared_history (test_bounce.Bounce.test_atomic_generated_sample_and_shared_history) ... BOUNCE PASS: exact true24 PCM, atomic new slot, allocation/budget/cancellation rollback, redo preservation, mixed undo, references, table reuse, eviction and PTG identity
+ok
+test_navigation_routing_and_history (test_channels.Channels.test_navigation_routing_and_history) ... ok
+test_conversion_with_bounded_peak_memory (test_convert_cli.ConvertCLI.test_conversion_with_bounded_peak_memory) ... ok
+test_new_file_publication_round_trip_and_existing_destination (test_convert_cli.ConvertCLI.test_new_file_publication_round_trip_and_existing_destination) ... ok
+test_pinned_volume_and_pcm (test_cut_handoff.CutHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+test_native_range_driven_pcm (test_delay_render.DelayRender.test_native_range_driven_pcm) ... OFFSET safety PASS: isolated track16 PCM, non-byte/stereo/odd/pingpong/slice refusal before output/report changes
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=1 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=18 frames=17280
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+ok
+test_pinned_volume_and_pcm (test_delayed_handoff.DelayedHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+test_allocation_and_save_faults (test_document.Document.test_allocation_and_save_faults) ... ALLOC initial calls=6 live=6 bytes=6902
+ALLOC failure-case=1 live=6
+ALLOC failure-case=2 live=6
+ALLOC failure-case=3 live=6
+ALLOC failure-case=4 live=6
+ALLOC failure-case=5 live=6
+ALLOC failure-case=6 live=6
+ALLOC budget live=6
+ALLOC replacement live=6
+ALLOC reload loop
+ALLOC final release live=3
+DOCUMENT/SAVE PASS: every staging allocation failure, memory budget, corrupt input, 200 reloads, staged new songs for 1..16 channels, partial writes and all save failure phases preserve prior state
+ok
+test_native_shared_controller_and_planar_display (test_editor.Editor.test_native_shared_controller_and_planar_display) ... EDITOR PASS: bank/wrap/scroll, guarded note and nibble edits, OFF, undo/redo, save state, discard confirmation, atomic block copy/paste/clear/transpose/clone, all-page planar render
+ok
+test_before_mutation (test_editor_guard.EditorGuard.test_before_mutation) ... EDITOR GUARD PASS: note edit and undo stop before mutation, navigation preserved, disposal guarded
+ok
+test_pinned_editor_lifecycle (test_editor_studio.EditorStudio.test_pinned_editor_lifecycle) ... EDITOR STUDIO PASS: real pinned song stopped by edit/undo/dispose, queued edit/undo/Stop/dispose held leases, natural drain, navigation and cleanup
+ok
+test_exact_profile_required (test_emulator_guard.EmulatorGuard.test_exact_profile_required) ... ok
+test_bounded_import (test_file_load.FileLoad.test_bounded_import) ... FILE LOAD PASS
+FILE LOAD PASS
+ok
+test_bounded_file_save (test_file_save_memory.FileSaveMemory.test_bounded_file_save) ... FILE SAVE MEMORY PASS: exact multi-block bytes, allocation refusal, existing destination and zero-length preservation
+FILE SAVE MEMORY PASS: exact multi-block bytes, allocation refusal, existing destination and zero-length preservation
+ok
+test_spectrum_precision_and_boundaries (test_filter.Filter.test_spectrum_precision_and_boundaries) ... tone 1 kHz max deviation 0
+tone 3 kHz max deviation 4
+tone 6 kHz max deviation 1
+fractional-rate passband max deviation 1
+FILTER PASS
+ok
+test_tables_and_state (test_finetune_core.FinetuneCore.test_tables_and_state) ... FINETUNE PASS: 16 tables, E5 ordering/memory/reload, ordinary quantization, negative tone target and final overflow words
+ok
+test_native_stored_output_periods_and_pcm (test_finetune_native.FinetuneNative.test_native_stored_output_periods_and_pcm) ... PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+ok
+test_native_trace_parity_and_extended_boundaries (test_flow.Flow.test_native_trace_parity_and_extended_boundaries) ... FLOW boundaries PASS: atomic init, stop/limit, 1..16 tracks, 128/256 positions, order wrap and ordered globals
+ok
+test_pinned_volume_and_pcm (test_flow_handoff.FlowHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+test_diagnostic_is_separate_and_anchor_checked (test_flow_trace.FlowTrace.test_diagnostic_is_separate_and_anchor_checked) ... ok
+test_trace_validation_rejects_partial_and_inconsistent_records (test_flow_trace.FlowTrace.test_trace_validation_rejects_partial_and_inconsistent_records) ... ok
+test_fractional_tempo_changes_against_exact_rationals (test_frame_clock.FrameClock.test_fractional_tempo_changes_against_exact_rationals) ... FRAME CLOCK PASS: fractional tempo changes, exact rates, bounded drift, zero-frame ticks, limits/overflow and atomic failure
+ok
+test_independent_glissando_controls (test_gliss_core.GlissCore.test_independent_glissando_controls) ... GLISS PASS: 16 independent controls, smooth stored periods, stepped output and disable preserves speed/target
+ok
+test_native_stored_output_periods_and_pcm (test_gliss_native.GlissNative.test_native_stored_output_periods_and_pcm) ... PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+ok
+test_reference_pcm_and_refusal (test_handoff_render.HandoffRender.test_reference_pcm_and_refusal) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+test_pinned_stored_ranges_without_new_trigger (test_handoff_trace.HandoffTrace.test_pinned_stored_ranges_without_new_trigger) ... ok
+test_reference_phase_volume_and_handoff_boundaries (test_instrument_render.InstrumentRender.test_reference_phase_volume_and_handoff_boundaries) ... INSTRUMENT PASS: track16 true24 phase/volume reload, silent preload, cross-sample and slice refusal before output
+OFFSET PCM PASS: channel=0 ticks=18 frames=17280
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=18 frames=17280
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+ok
+test_bounded_private_bank_failure_and_reset (test_invert_bank.InvertBank.test_bounded_private_bank_failure_and_reset) ... ok
+test_reference_clock_and_cursor (test_invert_loop.InvertLoop.test_reference_clock_and_cursor) ... ok
+test_flow_matches_pinned_native_mutations (test_invert_ordering.InvertOrdering.test_flow_matches_pinned_native_mutations) ... INVERT ordering native parity PASS: ticks=36 checked=30 immutable master
+INVERT ordering native parity PASS: ticks=36 checked=30 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+ok
+test_relocation_preserves_semantics (test_invert_ordering.InvertOrdering.test_relocation_preserves_semantics) ... ok
+test_private_shared_mutations_reset_and_refusal (test_invert_pcm.InvertPCM.test_private_shared_mutations_reset_and_refusal) ... ok
+test_c_sequence_matches_pinned_mutations (test_invert_sequence.InvertSequence.test_c_sequence_matches_pinned_mutations) ... INVERT sequence native parity PASS
+INVERT sequence native parity PASS
+INVERT sequence native parity PASS
+ok
+test_pinned_byte_mutations (test_invert_trace.InvertTrace.test_pinned_byte_mutations) ... ok
+test_pinned_volume_and_pcm (test_jump_handoff.JumpHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+test_native_allocator_pressure_and_ownership (test_master_memory.MasterMemory.test_native_allocator_pressure_and_ownership) ... ok
+test_note_ownership_and_endpoint_lifecycle (test_midi.Midi.test_note_ownership_and_endpoint_lifecycle) ... MIDI PASS: exclusive track ownership, shared-note releases, replacement ordering, endpoint loss/reconnect, sustain cleanup, failed sends, controller/program/bend/clock bytes and 100 lifecycle cycles
+ok
+test_streaming_document (test_mod_import.ModImport.test_streaming_document) ... MOD IMPORT STREAM PASS: exact roundtrip, inactive orders, loops, every read/allocation/finish failure preserves old document, budgets and format routing
+MOD IMPORT STREAM PASS: exact roundtrip, inactive orders, loops, every read/allocation/finish failure preserves old document, budgets and format routing
+ok
+test_bounds_and_truncation (test_mod_inspect.ModInspect.test_bounds_and_truncation) ... ok
+test_lossless_classic_round_trip_and_loss_reports (test_mod_project.ModProject.test_lossless_classic_round_trip_and_loss_reports) ... MOD PROJECT PASS: MOD -> project -> MOD byte identity, strict validation, staged import, explicit loss reports and no silent downgrade
+ok
+test_core_and_explicit_new_file_policy (test_mod_round8.ModRound8.test_core_and_explicit_new_file_policy) ... MOD ROUND8 PASS: 16/24-bit signed ties and saturation, exact reopen, source preservation, strict/rate/capacity/alias refusal, 8-bit identity
+ok
+test_streamed_master_mod (test_mod_stream.ModStream.test_streamed_master_mod) ... MOD STREAM PASS: direct/round8/TPDF exact multi-block bytes, legacy headers, loops, 65 patterns, source and destination protection; workspace=7184
+MOD STREAM PASS: direct/round8/TPDF exact multi-block bytes, legacy headers, loops, 65 patterns, source and destination protection; workspace=7184
+ok
+test_pinned_volume_and_pcm (test_modulation_handoff.ModulationHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+test_pinned_volume_and_pcm (test_nonloop_effect_handoff.NonloopEffectHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+test_pinned_volume_and_pcm (test_nonloop_source_handoff.NonloopSourceHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+test_controller_and_sample_history (test_note_slice.NoteSlice.test_controller_and_sample_history) ... NOTE SLICE PASS: explicit ordinal mapping, sample attachment, bounds, modal isolation, shared note/sample undo, marker protection, PCM preservation and PTG reopen
+ok
+test_pinned_volume_and_pcm (test_offset_handoff.OffsetHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+test_native_range_driven_pcm (test_offset_render.OffsetRender.test_native_range_driven_pcm) ... OFFSET safety PASS: isolated track16 PCM, non-byte/stereo/odd/pingpong/slice refusal before output/report changes
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=0 ticks=18 frames=17280
+OFFSET PCM PASS: channel=0 ticks=18 frames=17280
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=24 frames=23040
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=8 frames=7680
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=1 ticks=6 frames=5760
+OFFSET PCM PASS: channel=2 ticks=6 frames=5760
+OFFSET PCM PASS: channel=3 ticks=6 frames=5760
+ok
+test_driver_failure_and_cleanup (test_ownership.Ownership.test_driver_failure_and_cleanup) ... ok
+test_block_edits_and_history (test_pattern.Pattern.test_block_edits_and_history) ... PATTERN PASS: 16-channel block edits, exact period/MIDI transpose, OFF retention, clone, bounded undo/redo, dirty tracking, eviction and conflict/no-op safety
+ok
+test_selective_snapshot_and_invalidation (test_paula_cache.PaulaCache.test_selective_snapshot_and_invalidation) ... ok
+test_live_chip_pressure_evicts_only_unpinned_caches (test_paula_memory.PaulaMemory.test_live_chip_pressure_evicts_only_unpinned_caches) ... ok
+test_master_preserving_refusals (test_paula_playback.PaulaPlayback.test_master_preserving_refusals) ... PAULA PLAYBACK PREFLIGHT PASS: private metadata, unchanged 24-bit masters, explicit unavailable routes
+ok
+test_filtered_preview (test_paula_preview.PaulaPreview.test_filtered_preview) ... PAULA PREVIEW PASS: filtered mono rate conversion, precision, padding, bounds and master preservation
+ok
+test_bounded_sync_matches_full_export (test_paula_sync.PaulaSync.test_bounded_sync_matches_full_export) ... PAULA SYNC PASS: bounded prefix, full-export parity, sample/header refusal, split blocks, guards and unchanged masters
+ok
+test_precision_operations_and_wav (test_pcm.Pcm.test_precision_operations_and_wav) ... ok
+test_native_stored_output_periods_and_pcm (test_pitch.Pitch.test_native_stored_output_periods_and_pcm) ... PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+ok
+test_pinned_volume_and_pcm (test_pitch_handoff.PitchHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+test_representations_preserve_master (test_playback_pcm.PlaybackPCM.test_representations_preserve_master) ... PLAYBACK PCM PASS: true24 master preservation, signed rounding/clipping, 8/16 bit endian/channel/padding, coexistence, revision invalidation and refusal
+ok
+test_device_upload_ownership (test_playback_upload.PlaybackUpload.test_device_upload_ownership) ... PLAYBACK UPLOAD PASS: bounded chunks and transactional device resources
+ok
+test_native_stored_output_periods_and_pcm (test_portamento.Portamento.test_native_stored_output_periods_and_pcm) ... PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+ok
+test_bounded_decode_and_atomic_document (test_pp20.PP20.test_bounded_decode_and_atomic_document) ... PP20 PASS: exact unpack, malformed bounds, unchanged failed output, atomic MOD import, all allocation failures, peak budget and lossless MOD roundtrip
+PP20 PASS: exact unpack, malformed bounds, unchanged failed output, atomic MOD import, all allocation failures, peak budget and lossless MOD roundtrip
+ok
+test_guard_precedes_destructive_load_and_changed_anchors_fail (test_prepare_dev.NativePreparation.test_guard_precedes_destructive_load_and_changed_anchors_fail) ... ok
+test_adapter_ownership_and_unchanged_effect_routines (test_prepare_replay.ReplayAdapter.test_adapter_ownership_and_unchanged_effect_routines) ... ok
+test_round_trip_bounds_and_staging (test_project.Project.test_round_trip_bounds_and_staging) ... PROJECT PASS: exact mixed-route round trip, 24-bit stereo, OFF, loops, slices, MIDI endpoints, extensions, CRC, bounds, transactional decode
+ok
+test_streamed_transaction (test_project_import.ProjectImport.test_streamed_transaction) ... PROJECT IMPORT STREAM PASS: exact master roundtrip, every read/allocation/finish failure preserves old document, budgets and file routing
+PROJECT IMPORT STREAM PASS: exact master roundtrip, every read/allocation/finish failure preserves old document, budgets and file routing
+ok
+test_bounded_preflight_matches_original (test_project_reader.ProjectReader.test_bounded_preflight_matches_original) ... PROJECT READER PASS: exact master re-encode, decoder failure staging, bounded reads, original parser parity, truncation, CRC and repaired mutations, every read failure leaves requirements unchanged
+ok
+test_streamed_master_project (test_project_stream.ProjectStream.test_streamed_master_project) ... PROJECT STREAM PASS: exact golden layout/CRC, mixed masters/loops/slices/extensions, sink refusal, bounded workspace=7184
+PROJECT STREAM PASS: exact golden layout/CRC, mixed masters/loops/slices/extensions, sink refusal, bounded workspace=7184
+ok
+test_codec (test_raw.Raw.test_codec) ... RAW PASS: explicit mono/stereo 8/16/24-bit signedness/endian, precision, alignment, alias, capacity and no implicit conversion
+ok
+test_streamed_import (test_raw_import.RawImport.test_streamed_import) ... RAW IMPORT STREAM PASS: 16 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+RAW IMPORT STREAM PASS: 16 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+ok
+test_history_and_codec (test_recent.Recent.test_history_and_codec) ... RECENT PASS: ten-item MRU, case-folded dedup, alias promotion, bounds, removal, CRC/truncation refusal and atomic decode
+ok
+test_preferences_recovery (test_recent.Recent.test_preferences_recovery) ... RECENT FILE PASS: alternating generations, interrupted/corrupt write recovery, persisted clear, invalid-save refusal
+ok
+test_allocator_and_interrupted_io (test_recent_memory.RecentMemory.test_allocator_and_interrupted_io) ... RECENT FILE PASS: alternating generations, interrupted/corrupt write recovery, persisted clear, invalid-save refusal
+RECENT MEMORY PASS
+RECENT FILE PASS: alternating generations, interrupted/corrupt write recovery, persisted clear, invalid-save refusal
+RECENT MEMORY PASS
+ok
+test_quantization_hold_and_releases (test_record.Recording.test_quantization_hold_and_releases) ... RECORD PASS: Hold Record, staged start, velocity, grid rounding, short-note OFF, collisions, stale release, monotonic time, capacity, retryable stop and undoable project-pattern recording with effect retention
+ok
+test_bounded_reference_render_and_failure_boundaries (test_render.Render.test_bounded_reference_render_and_failure_boundaries) ... RENDER PASS: planned/streamed stereo16/24 PCM, startup trim, delayed voice continuity, pattern/song endings, slice bounds, selection, preflight refusal, cancellation and sink failures
+RENDER PASS: planned/streamed stereo16/24 PCM, startup trim, delayed voice continuity, pattern/song endings, slice bounds, selection, preflight refusal, cancellation and sink failures
+ok
+test_bounded_formats_and_every_allocation_failure (test_render_cli_memory.RenderMemory.test_bounded_formats_and_every_allocation_failure) ... ok
+test_verified_stream_publication_and_io_failure (test_render_file.RenderFile.test_verified_stream_publication_and_io_failure) ... RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt/truncated/trailing staging refusal and cleanup
+RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt/truncated/trailing staging refusal and cleanup
+RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt/truncated/trailing staging refusal and cleanup
+ok
+test_private_effect_render_and_failure_boundaries (test_render_invert.RenderInvert.test_private_effect_render_and_failure_boundaries) ... INVERT render PASS: exact PCM, immutable master, repeatability, budgets, allocation failures, cancellation, sink failure
+ok
+test_verified_private_effect_file (test_render_invert_file.RenderInvertFile.test_verified_private_effect_file) ... INVERT FILE PASS: exact WAV, fresh verification workspace, all allocation failures, verification cancellation and cleanup
+ok
+test_verified_shared_sample_stems (test_render_invert_file.RenderInvertFile.test_verified_shared_sample_stems) ... INVERT STEMS PASS: shared-sample exact PCM, grouped stems, fresh banks, all allocation failures, cancellations, immutable masters and cleanup
+ok
+test_every_export_allocation_failure (test_render_memory_failure.RenderMemoryFailure.test_every_export_allocation_failure) ... RENDER MEMORY PASS: all4 WAV and11 stem allocation failures preserve masters/reports and remove owned staging
+ok
+test_explicit_command_plan (test_render_plan.RenderPlan.test_explicit_command_plan) ... render command plan PASS: explicit intents, 16-channel audio equivalence, failure discard
+ok
+test_preroll_crop_and_boundaries (test_render_range.RenderRange.test_preroll_crop_and_boundaries) ... RANGE PASS: exact full-render crop with pre-roll pitch/phase, delays, loop boundaries, cancellation, empty/invalid refusal and full-range identity
+RANGE PASS: exact full-render crop with pre-roll pitch/phase, delays, loop boundaries, cancellation, empty/invalid refusal and full-range identity
+ok
+test_incremental_song (test_render_sequence.RenderSequence.test_incremental_song) ... SEQUENCE PASS: reference audio, tempo/delay, pre-roll, partition invariance, protocol and allocation refusal
+ok
+test_native_finetune_wav_and_project_identity (test_render_ui_native.NativeRenderUI.test_native_finetune_wav_and_project_identity) ... ok
+test_pinned_native_volume_and_silent_phase (test_render_volume.VolumeRender.test_pinned_native_volume_and_silent_phase) ... VOLUME boundaries PASS: EC0 and Cxx restore retain silent phase across 16 voices and isolated track 16
+ok
+test_pinned_volume_and_pcm (test_repeat_track_handoff.RepeatTrackHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+test_generated_inputs_are_valid_and_reproducible (test_replay_fixtures.ReplayFixtures.test_generated_inputs_are_valid_and_reproducible) ... Prepared 16 flow fixtures; native traces remain NOT RUN.
+ok
+test_pinned_volume_and_pcm (test_retrigger_handoff.RetriggerHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+test_native_range_driven_pcm (test_retrigger_render.RetriggerRender.test_native_range_driven_pcm) ... OFFSET safety PASS: isolated track16 PCM, non-byte/stereo/odd/pingpong/slice refusal before output/report changes
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+ok
+test_shared_pcm_and_history (test_sample_attributes.SampleAttributes.test_shared_pcm_and_history) ... SAMPLE ATTRIBUTES PASS: bounds, every allocation failure, shared 24-bit stereo PCM, bounded metadata history, marker preservation, mixed PCM/metadata undo and exact reopen
+ok
+test_ownership_versions_pressure_and_failure (test_sample_cache.SampleCache.test_ownership_versions_pressure_and_failure) ... SAMPLE CACHE PASS: publication, pinned retirement, revisions, refill, LRU pressure, backend failure, stale handles and complete release
+ok
+test_bounded_dispatch_and_precision (test_sample_dispatch.SampleDispatch.test_bounded_dispatch_and_precision) ... SAMPLE DISPATCH PASS: unsupported input without allocation, donor-only refusal, exact24-bit master and retained redo
+ok
+test_bounded_lossless_wav (test_sample_file.SampleFile.test_bounded_lossless_wav) ... SAMPLE WAV STREAM PASS: exact8/16/24 mono/stereo, master preserved, fixed workspace=11248, failure cleanup and no replacement
+ok
+test_native_sample_ranges_and_triggers (test_sample_offset.SampleOffset.test_native_sample_ranges_and_triggers) ... ok
+test_bounded_lossless_raw (test_sample_raw_file.SampleRawFile.test_bounded_lossless_raw) ... SAMPLE RAW STREAM PASS: 16 formats, exact bytes, master preserved, fixed workspace=11248 and no replacement
+ok
+test_bounded_lossless_svx (test_sample_svx_file.SampleSvxFile.test_bounded_lossless_svx) ... SAMPLE SVX STREAM PASS: exact metadata, loop and odd padding, master preserved, fixed workspace=11248
+ok
+test_native_runner_preflight_fails_closed (test_sample_triggers.SampleTriggers.test_native_runner_preflight_fails_closed) ... ok
+test_native_trigger_timing (test_sample_triggers.SampleTriggers.test_native_trigger_timing) ... ok
+test_owned_versions_and_journal (test_sampler.Sampler.test_owned_versions_and_journal) ... LOOP/SLICE PASS: metadata, atomic bake undo, proposal commit, non-destructive PCM, retarget refusal, undo/redo conflicts, allocation rollback and exact persistence
+CONVERSION PASS: stereo precision/rate, scaled loops and referenced slice ordinals, exact undo, collapse refusal, allocation rollback, redo and persistence
+IFF SAMPLER PASS: name/volume/loop/PCM, compressed import, exact export, allocation rollback, unsupported refusal, redo and project persistence
+RAW SAMPLER PASS: explicit stereo24 import, exact export, no autodetection, allocation rollback, refusal/redo and persistence
+STEREO24 GAIN HISTORY PASS: clipped extrema, untouched boundary frames, three exact undo/redo cycles and WAV identity
+SAMPLER PASS: exact stereo24 import/range edit, unified history, dirty state, no-op redo, allocation rollback, bounded memory, eviction, save/reopen and release
+ok
+test_song_owner_lifecycle (test_sampler_song.SamplerSong.test_song_owner_lifecycle) ... SAMPLER SONG PASS: generation binding, true24 promotion, stop/edit/restart, stale refusal and owner cleanup
+ok
+test_master_lifetime (test_sampler_studio.SamplerStudio.test_master_lifetime) ... SAMPLER STUDIO PASS: budgeted promotion, stale refusal, edit/undo/eviction pins and final release
+ok
+test_phase_loop_retrigger_pitch_and_bounds (test_scope.Scope.test_phase_loop_retrigger_pitch_and_bounds) ... ok
+test_pinned_volume_and_pcm (test_silent_handoff.SilentHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+ok
+test_transients_markers_and_crossfade (test_slices.Slices.test_transients_markers_and_crossfade) ... SLICES PASS: deterministic non-destructive stereo transient proposals, minimum spacing, manual markers, silence, capacity/alias safety and full-precision crossfade loops
+ok
+test_pinned_volume_and_pcm (test_slide_handoff.SlideHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+test_sample_table_growth_and_shared_undo (test_slots.Slots.test_sample_table_growth_and_shared_undo) ... SLOTS PASS: 0..255 slots, allocation rollback, metadata/PCM/reference preservation, mixed undo, eviction, strict MOD refusal, exact PTG, selection clamp and complete release
+ok
+test_growth_and_shared_history (test_song.Song.test_growth_and_shared_history) ... SONG PASS: bounded growth, insert/remove/move, assignments, allocation rollback, mixed note undo, conflicts, eviction, limits, round trips, controller and complete release
+ok
+test_preview_and_atomic_import (test_source.Source.test_preview_and_atomic_import) ... MOD SOURCE PASS: separate preview, source/destination selection, failed allocation/budget preservation, exact metadata/PCM import, shared undo, retained song and source release
+ok
+test_batch_publication (test_stem_file.StemFile.test_batch_publication) ... STEMS first export phase=0 detail=0
+STEMS files PASS: grouped PCM equals individual export, global tempo alignment, cancellation, preflight refusal and no-replace race
+STEMS first export phase=0 detail=0
+STEMS files PASS: grouped PCM equals individual export, global tempo alignment, cancellation, preflight refusal and no-replace race
+ok
+test_group_partition_and_refusal (test_stems.Stems.test_group_partition_and_refusal) ... STEMS plan PASS: all65535 selections,16 tracks, groups, exact partition and MIDI/invalid preservation
+ok
+test_transport_ownership (test_studio_consumer.StudioConsumer.test_transport_ownership) ... STUDIO CONSUMER PASS: refusal retry, ordered drain, pending/error cancellation retains lease until confirmed completion
+ok
+test_session (test_studio_mix.StudioMix.test_session) ... STUDIO MIX PASS: pinned versions, atomic controls, pinned handoffs/segments, block continuity, true24 and cleanup
+ok
+test_pinned_command_dispatch (test_studio_plan.StudioPlan.test_pinned_command_dispatch) ... Studio dispatch PASS: 16-channel true24 audio equivalence, source binding, partial acquisition failure cleanup
+ok
+test_bounded_producer (test_studio_pump.StudioPump.test_bounded_producer) ... STUDIO PUMP PASS: stalled consumers, exact ordered true24 frames, bounded progress, failure lease retention
+ok
+test_bounded_leases (test_studio_queue.StudioQueue.test_bounded_leases) ... STUDIO QUEUE PASS: true24 copies, bounded pressure, lease retention, stale refusal, drain and abort cleanup
+ok
+test_song_lifecycle (test_studio_queued_song.StudioQueuedSong.test_song_lifecycle) ... QUEUED SONG PASS: reference audio, tempo/delay, pre-roll, partition invariance, transport stalls/cancel ownership, protocol and allocation refusal
+ok
+test_song_lifecycle (test_studio_song.StudioSong.test_song_lifecycle) ... SONG SESSION PASS: reference audio, tempo/delay, pre-roll, partition invariance, protocol and allocation refusal
+ok
+test_interval_partition (test_studio_tick.StudioTick.test_interval_partition) ... STUDIO TICK PASS: tempo carry, partition hash=cbdaeaff, refusal and cleanup
+ok
+test_codec (test_svx.Svx.test_codec) ... 8SVX PASS: independent signed PCM fixture, odd chunks, loops, Fibonacci wrap, malformed bounds, alias and capacity
+ok
+test_streamed_import (test_svx_import.SvxImport.test_streamed_import) ... SVX IMPORT STREAM PASS: 8 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+SVX IMPORT STREAM PASS: 8 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+ok
+test_pinned_volume_and_pcm (test_tempo_handoff.TempoHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+test_flow_and_frame_clock_are_one_transaction (test_timeline.Timeline.test_flow_and_frame_clock_are_one_transaction) ... TIMELINE PASS: prior-tempo intervals, startup, final F00 boundary, delayed passes and atomic frame/tick limits
+ok
+test_pinned_volume_and_pcm (test_tone_handoff.ToneHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+test_pinned_volume_and_pcm (test_tone_note_handoff.ToneNoteHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+test_native_range_driven_pcm (test_tremolo_render.TremoloRender.test_native_range_driven_pcm) ... TREMOLO PCM PASS: channel=0 ticks=12 frames=11520
+TREMOLO PCM PASS: channel=0 ticks=24 frames=23040
+TREMOLO PCM PASS: channel=0 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=1 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=2 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=3 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=0 ticks=12 frames=11520
+TREMOLO PCM PASS: channel=0 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=0 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=0 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=0 ticks=18 frames=17280
+ok
+test_native_volume_and_memory (test_tremolo_trace.TremoloTrace.test_native_volume_and_memory) ... ok
+test_pinned_volume_and_pcm (test_tuning_handoff.TuningHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+test_pinned_unused_command_semantics (test_unused_core.UnusedCore.test_pinned_unused_command_semantics) ... UNUSED PASS: all8xx/E8x parameters across16 tracks, stored/output restoration versus hold, no modulation-state mutation
+ok
+test_pinned_volume_and_pcm (test_unused_handoff.UnusedHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+test_native_stored_output_periods_and_pcm (test_unused_native.UnusedNative.test_native_stored_output_periods_and_pcm) ... PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+ok
+test_native_stored_output_periods_and_pcm (test_vibrato.Vibrato.test_native_stored_output_periods_and_pcm) ... VIBRATO boundaries PASS: 16 tracks, waveforms, independent nibble memory, combined-slide memory, reset ordering and word wrap
+PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+ok
+test_exact_pixels_and_cooperative_break (test_view_probe.ViewProbe.test_exact_pixels_and_cooperative_break) ... ok
+test_high_resolution_voice_and_mixer (test_voice.Voice.test_high_resolution_voice_and_mixer) ... ok
+test_phase_without_pcm (test_voice_advance.VoiceAdvance.test_phase_without_pcm) ... VOICE advance PASS: exact phase/handoff equivalence without PCM reads
+ok
+test_initial_segment_and_repeat_handoff (test_voice_segment.VoiceSegment.test_initial_segment_and_repeat_handoff) ... ok
+test_pinned_volume_and_pcm (test_volume_handoff.VolumeHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+test_streamed_import (test_wav_import.WavImport.test_streamed_import) ... WAV IMPORT STREAM PASS: 6 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+WAV IMPORT STREAM PASS: 6 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+ok
+test_positional_reader (test_wav_reader.WavReader.test_positional_reader) ... WAV READER PASS: bounded metadata reads, data-before-fmt, odd unknown chunk, truncation, duplicate fmt, tail policy and failed-read output preservation
+ok
+test_pinned_volume_and_pcm (test_waveform_handoff.WaveformHandoff.test_pinned_volume_and_pcm) ... HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+ok
+
+----------------------------------------------------------------------
+Ran 156 tests in 361.115s
+
+OK
+ARPEGGIO: nine repeated native traces match host/m68k period words and ramp PCM, including zero-period refusal
+mod: CONVERTER MEMORY: peak=538110 limit=550000 final=0
+project: CONVERTER MEMORY: peak=538110 limit=550000 final=0
+project import: CONVERTER MEMORY: peak=538110 limit=550000 final=0
+packed import: CONVERTER MEMORY: peak=664104 limit=700000 final=0
+FLOW: all 16 native trace fixtures match portable control flow
+PITCH: seven repeated native traces match host/m68k state, PCM and zero-period refusal
+PORTAMENTO phase oracle rejects forced retrigger on the same-instrument glide
+PORTAMENTO: nine repeated native traces match host/m68k pitch, volume and DMA-driven phase; 16-track state and refusal checks pass
+.mod: RENDER MEMORY peak=542838 calls=10 final=0
+.ptg: RENDER MEMORY peak=542838 calls=10 final=0
+.pp: RENDER MEMORY peak=664104 calls=11 final=0
+mix: RENDER MEMORY peak=542838 calls=10 final=0
+stems: RENDER MEMORY peak=546414 calls=27 final=0
+VOLUME: seven repeated pinned native traces match every host/m68k rendered PCM frame
+OFFSET: eight repeated native traces verify stored ranges, initial trigger ranges, loops, memory, bounds, delayed rows and four independent tracks; shipping 9xx still refused
+TRIGGERS: ten repeated native fixtures verify E9x/EDx counter timing, retained notes, pattern delay and offset/loop ranges; renderer enablement remains open
+TREMOLO: eight repeated native traces verify output/stored volume, waveforms, nibble memory, reset control, delay and vibrato-phase ramp dependency; renderer support remains open
+UNUSED: six repeated native traces match host/m68k stored/output words and PCM for8xx/E8x
+VIBRATO: eleven repeated native traces match host/m68k period words and ramp PCM
+VOICE traversal PASS: selected ranges, forward/pingpong seams, fractional steps, one-frame loops and large steps
+VOICE mix PASS: true24 stereo, single quantization, clipping, 16 voices, mute progression, capacity and alias refusal
+VOICE partition PASS hash=990c42f0 clips=40
+SEGMENT trajectory 0 hash=2a50eba5
+SEGMENT trajectory 1 hash=295ede49
+SEGMENT trajectory 2 hash=ac5189f5
+SEGMENT trajectory 3 hash=e5165089
+SEGMENT trajectory 4 hash=594e0cb9
+VOICE segment PASS: independent initial/repeat ranges, interpolation handoff, huge steps, one-frame repeats and invalid-range preservation

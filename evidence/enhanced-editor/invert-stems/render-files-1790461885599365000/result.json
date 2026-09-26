@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 offline EFx exact PCM and resource checks; no audio/physical acceptance",
+  "PTInvertRenderTest_sha256": "c9f3b42d1d4d32344fef6d4f980de511d0c980edec6b5b39ced42a5a0a8dec05",
+  "invert-render_returncode": "0",
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0",
+  "run_files_cleaned": true
+}

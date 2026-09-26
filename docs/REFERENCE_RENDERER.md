@@ -561,11 +561,23 @@ metadata and PCM; ordinary renderer/file state and the master document remain
 separate allocations under the caller's allocator. Use a larger explicit limit
 for larger samples. Insufficient memory fails without publishing output.
 
-This initial path requires all tracks, whole mono8 forward loops of at least
-four frames, and no interpolation/slices. It preserves master samples, mutates
+This path requires whole mono8 forward loops of at least four frames, and no
+interpolation/slices in referenced samples. It preserves master samples, mutates
 shared private sample copies between ticks, and reconstructs fresh copies for
-output verification. Existing files are never replaced. Partial-track selection,
-`--stems` and `--groups` with this option are refused. The native editor and
+each stem and verification pass. Existing destinations are never replaced.
+`--tracks`, `--stems` and `--groups` work with `--invert-budget`. All channels
+retain their sample-mutation clocks, including unselected, muted and non-solo
+channels: they can change a shared sample heard in a selected track. The budget
+includes samples referenced by these channels. Selection affects audio only.
+Stem planning validates every stem before staging; failures/cancellation remove
+only owned staging. The private-bank budget applies to each sequential pass,
+not once per output stem. Example:
+
+```
+PT24GRender input.mod NEW-STEMS --tracks 3 --stems --invert-budget 100000
+```
+
+The native editor and
 queued Studio engine still use their existing effect subset; this command-line
 option does not enable EFx there. This is ideal-clock software rendering, not
 physical Paula/AmiGUS or analogue acceptance.
@@ -576,3 +588,10 @@ WAV byte for byte, including file header. The source was unchanged. Completion,
 DMA-off and exact owned cleanup passed; the window was explicitly released.
 Full native build and targeted sanitized export/refusal checks passed. Evidence:
 `enhanced-editor/invert-cli-qualified`. Physical performance/audio remains untested.
+
+Selected-track/stem extension: shared030 core run1790461885599365000 and CLI
+run1790461954299463000 passed. The two shared-sample stems each contain17280
+stereo24 frames and exactly match host WAV bytes. Source preservation, existing
+directory refusal, completion, DMA-off, cleanup and explicit release passed.
+All156 host tests passed. Evidence: `enhanced-editor/invert-stems`. This does not
+qualify native editor integration, physical timing or analogue audio.

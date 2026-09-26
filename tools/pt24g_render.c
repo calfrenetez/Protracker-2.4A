@@ -58,7 +58,6 @@ int main(int argc,char **argv)
         else goto usage;
         ++i;
     }
-    if(stems && invert_budget)goto usage;
     o.frame_limit=(uint64_t)o.rate*60*30; /* Includes internal startup lead-in. */
     if(pt_project_file_candidate(argv[1]))loaded=pt_project_file_load(&doc,argv[1],64UL*1024*1024,64UL*1024*1024);
     else if(pt_mod_file_candidate(argv[1]))loaded=pt_mod_file_load(&doc,argv[1],64UL*1024*1024,64UL*1024*1024);
@@ -68,7 +67,7 @@ int main(int argc,char **argv)
     if(!tracks_given)o.tracks=(uint16_t)((1UL<<doc.project.channels.count)-1);
     if(stems) {
         struct pt_stem_report batch;unsigned n;
-        saved=pt_stem_file_new_allocated(argv[2],&doc.project,&o,(unsigned)grouped,NULL,NULL,&batch,&detail,&allocator);
+        saved=invert_budget?pt_render_invert_stems_new(argv[2],&doc.project,&o,(unsigned)grouped,NULL,NULL,&batch,&detail,invert_budget,&allocator):pt_stem_file_new_allocated(argv[2],&doc.project,&o,(unsigned)grouped,NULL,NULL,&batch,&detail,&allocator);
         if(saved!=PT_RENDER_FILE_OK) {fprintf(stderr,"Stem export refused save_phase=%d render_result=%d; no destination replaced\n",saved,detail);goto done;}
         for(n=0;n<batch.plan.count;++n)printf("STEM %s-%02u.wav tracks=%04x frames=%lu clipped_values=%lu\n",
             batch.plan.item[n].group?"group":"track",batch.plan.item[n].group?batch.plan.item[n].group:batch.plan.item[n].channel+1,
@@ -83,7 +82,7 @@ int main(int argc,char **argv)
            (unsigned long)report.ticks,(unsigned long)report.clipped,report.end==PT_RENDER_F00?"F00":report.end==PT_RENDER_ROW_EXIT?"row-range-exit":"first-position-return");rc=0;goto done;
 usage:
     fprintf(stderr,"Usage: PT24GRender INPUT NEW.wav [--pattern N] [--rate 44100|48000] [--bits 16|24] [--tracks HEX] [--gain 0..65536] [--lead-in] [--stems|--groups] [--from-row N --to-row N] [--invert-budget BYTES]\n");
-    fprintf(stderr,"Reference renderer; bounded classic-effect subset including finetune/E5. Use --invert-budget for the bounded whole-track mono8 EFx path; stems and Studio EFx remain unsupported. See docs/REFERENCE_RENDERER.md. Default gain32768, 30-minute bound.\n");
+    fprintf(stderr,"Reference renderer; bounded classic-effect subset including finetune/E5. Use --invert-budget for the bounded mono8 EFx WAV/stem path; Studio EFx remains unsupported. See docs/REFERENCE_RENDERER.md. Default gain32768, 30-minute bound.\n");
 done:
     pt_document_release(&doc);return rc;
 }

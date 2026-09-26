@@ -25,9 +25,6 @@ enum pt_render_result pt_render_invert_stream(const struct pt_project *p,const s
     if(!p || !o || !sink || !out || !a || !a->allocate || !a->release ||
        pt_project_validate(p,NULL)!=PT_PROJECT_OK || o->pattern_only>1 ||
        (o->pattern_only && o->pattern>=p->pattern_count))return PT_RENDER_INVALID;
-    /* Until stem mutation dependencies are represented explicitly, refuse a
-       partial track selection rather than changing shared sample semantics. */
-    if(o->tracks!=(uint16_t)((1UL<<p->channels.count)-1))return PT_RENDER_EFFECT;
     if(o->pattern_only)used[o->pattern]=1;
     else for(i=0;i<p->order_count;++i)used[p->orders[i]]=1;
     for(pat=0;pat<p->pattern_count;++pat)if(used[pat])for(row=0;row<64;++row)for(ch=0;ch<p->channels.count;++ch) {
@@ -44,7 +41,9 @@ enum pt_render_result pt_render_invert_stream(const struct pt_project *p,const s
     }
     if(budget<sizeof(*s))return PT_RENDER_MEMORY;
     s=a->allocate(a->context,sizeof(*s));if(!s)return PT_RENDER_MEMORY;
-    memset(s,0,sizeof(*s));s->playback=*p;s->playback.samples=s->samples;s->tracks=o->tracks;
+    memset(s,0,sizeof(*s));s->playback=*p;s->playback.samples=s->samples;s->tracks=(uint16_t)((1UL<<p->channels.count)-1);
+    /* Selection/mute/solo affect audio only. Every channel keeps its EFx clock
+       and can mutate a sample heard by another selected channel. */
     memcpy(s->samples,p->samples,p->sample_count*sizeof(*s->samples));
     bank_result=pt_invert_bank_open(&s->bank,p->samples,p->sample_count,selected,budget-sizeof(*s),a);
     if(bank_result!=PT_INVERT_BANK_OK) {

@@ -50,9 +50,21 @@ int main(void)
         assert(!s.live && !memcmp(&r,&before,sizeof(r)) && !memcmp(pcm,original,sizeof(pcm)));
     }
     memset(&s,0,sizeof(s));assert(pt_render_invert_stream(&p,&o,receive,&s,NULL,NULL,&r,budget,&a)==PT_RENDER_OK && s.frames==5760 && !s.live);
-    o.tracks=1;memset(&s,0,sizeof(s));assert(pt_render_invert_stream(&p,&o,receive,&s,NULL,NULL,&r,budget,&a)==PT_RENDER_EFFECT && !s.calls);o.tracks=15;
+    o.tracks=1;memset(&s,0,sizeof(s));assert(pt_render_invert_stream(&p,&o,receive,&s,NULL,NULL,&r,budget,&a)==PT_RENDER_OK && s.frames==5760 && !s.live);
+    /* Only the unselected channel mutates the shared sample. Mute and solo
+       must not suppress its clock or change the selected channel's PCM. */
+    events[0].effect=events[0].parameter=0;events[4].effect=events[4].parameter=0;
+    events[1].instrument=1;events[1].effect=14;events[1].parameter=255;
+    events[5].effect=14;events[5].parameter=240;
+    for(i=0;i<3;++i) {
+        p.channels.track[1].muted=(i==1);p.channels.track[0].solo=(i==2);
+        memset(&s,0,sizeof(s));assert(pt_render_invert_stream(&p,&o,receive,&s,NULL,NULL,&r,budget,&a)==PT_RENDER_OK && s.frames==5760 && !s.live);
+        assert(!memcmp(pcm,original,sizeof(pcm)));
+    }
+    p.channels.track[1].muted=p.channels.track[0].solo=0;
+    memset(&s,0,sizeof(s));o.tracks=15;
     sample.pcm.bits=24;assert(pt_render_invert_stream(&p,&o,receive,&s,NULL,NULL,&r,budget,&a)==PT_RENDER_SAMPLE && !s.calls);
-    sample.pcm.bits=8;o.tracks=15;events[0].parameter=0;memset(&s,0,sizeof(s));r=before;
+    sample.pcm.bits=8;o.tracks=15;events[0].effect=14;events[0].parameter=0;memset(&s,0,sizeof(s));r=before;
     assert(pt_render_invert_stream(&p,&o,receive,&s,NULL,NULL,&r,budget,&a)==PT_RENDER_EFFECT && !s.sinks && !s.live && !memcmp(&r,&before,sizeof(r)));
     puts("INVERT render PASS: exact PCM, immutable master, repeatability, budgets, allocation failures, cancellation, sink failure");return 0;
 }

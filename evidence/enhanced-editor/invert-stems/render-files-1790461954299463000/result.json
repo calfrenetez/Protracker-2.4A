@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "scope": "shared030 Fast-allocator stem CLI, exact two-stem host parity and destination refusal; all-channel shared EFx mutation",
+  "PT24GRender_sha256": "c268a1dc7785083c8e7a17c753e2c740e5c41d0da279228f62f3bd510dffae8a",
+  "stem-cli_returncode": "0",
+  "repeat_returncode": "20",
+  "exact_host_stems": true,
+  "reference_sha256": {
+    "track-01.wav": "b50690db3b807f0a57fa074f9a15fef63c5a4e07f34c91530f73a9265f2bd245",
+    "track-02.wav": "54efb289693436e53d4654e4349f69a7d16dd2f5391324379fa9714c780ac00b"
+  },
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0",
+  "run_files_cleaned": true
+}

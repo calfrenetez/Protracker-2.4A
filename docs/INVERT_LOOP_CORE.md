@@ -192,3 +192,21 @@ That window completed, cleaned up and was explicitly released. Native diagnostic
 assertions now return20 rather than creating a fatal requester. The canonical
 runtime/compiler flags were restored; no claim isolates the original root cause.
 Evidence: `enhanced-editor/invert-render-qualified`.
+
+## Selected-track and stem mutation dependencies
+
+The opt-in offline path now clocks every project channel regardless of audio
+selection, mute or solo, in the same ascending-channel order as the full render.
+Referenced samples have one shared private copy per instrument. Exporting a
+track does not remove mutations caused by another track using that instrument.
+Each measurement/output/verification pass and each individual or grouped stem
+starts from unchanged master PCM. No private bank survives the synchronous call.
+The CLI accepts --invert-budget with --tracks, --stems and --groups. Existing
+ordinary renderer and queued Studio APIs remain unchanged. Native editor wiring
+is still pending. Earlier all-track-only limitations above describe prior steps.
+
+Sanitized host tests cover exact isolated and grouped PCM, global mute/solo
+mutation, fixture stem recombination, all allocation failures across later stems,
+verification and final-publication cancellation, existing destination refusal,
+immutable masters and complete staging cleanup. Native evidence is recorded
+separately; these checks do not establish physical or analogue acceptance.

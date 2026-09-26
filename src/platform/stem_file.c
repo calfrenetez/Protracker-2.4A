@@ -55,7 +55,7 @@ static void filename(char *out,size_t size,const char *dir,const struct pt_stem 
 }
 static enum pt_render_file_result batch_new(const char *path,const struct pt_project *project,
     const struct pt_render_options *options,unsigned grouped,pt_render_progress notify,void *ctx,
-    struct pt_stem_report *out,enum pt_render_result *detail,const struct pt_allocator *allocator,struct batch *w)
+    struct pt_stem_report *out,enum pt_render_result *detail,const struct pt_allocator *allocator,struct batch *w,const struct pt_render_file_engine *engine)
 {
     enum pt_stem_result planned;enum pt_render_file_result result=PT_RENDER_FILE_RENDER;
     unsigned i,owned=0;int made=0;
@@ -66,7 +66,7 @@ static enum pt_render_file_result batch_new(const char *path,const struct pt_pro
     w->one=*options;
     /* Validate all stems before creating any staging; global flow stays intact. */
     for(i=0;i<w->report.plan.count;++i) {
-        w->one.tracks=w->report.plan.item[i].tracks;*detail=(allocator?pt_render_measure_allocated(project,&w->one,notify,ctx,w->measured+i,allocator):pt_render_measure(project,&w->one,notify,ctx,w->measured+i));
+        w->one.tracks=w->report.plan.item[i].tracks;*detail=engine?engine->run(engine->context,project,&w->one,NULL,NULL,notify,ctx,w->measured+i,allocator):(allocator?pt_render_measure_allocated(project,&w->one,notify,ctx,w->measured+i,allocator):pt_render_measure(project,&w->one,notify,ctx,w->measured+i));
         if(*detail!=PT_RENDER_OK)return result;
         if(i && (w->measured[i].frames!=w->measured[0].frames || w->measured[i].ticks!=w->measured[0].ticks || w->measured[i].end!=w->measured[0].end)) {*detail=PT_RENDER_INVALID;return result;}
     }
@@ -78,7 +78,7 @@ static enum pt_render_file_result batch_new(const char *path,const struct pt_pro
     if(made!=1)return PT_RENDER_FILE_BEGIN;
     for(i=0;i<w->report.plan.count;++i) {
         w->one.tracks=w->report.plan.item[i].tracks;filename(w->file,sizeof(w->file),w->stage,w->report.plan.item+i);
-        result=pt_render_file_new_allocated(w->file,project,&w->one,notify,ctx,w->report.audio+i,detail,allocator);
+        result=engine?pt_render_file_engine_new(w->file,project,&w->one,notify,ctx,w->report.audio+i,detail,allocator,engine):pt_render_file_new_allocated(w->file,project,&w->one,notify,ctx,w->report.audio+i,detail,allocator);
         if(result!=PT_RENDER_FILE_OK)goto fail;
         ++owned;
         if(w->report.audio[i].frames!=w->measured[i].frames || w->report.audio[i].ticks!=w->measured[i].ticks || w->report.audio[i].end!=w->measured[i].end) {
@@ -97,18 +97,27 @@ enum pt_render_file_result pt_stem_file_new(const char *path,const struct pt_pro
     const struct pt_render_options *options,unsigned grouped,pt_render_progress notify,void *ctx,
     struct pt_stem_report *out,enum pt_render_result *detail)
 {
-    struct batch w;return batch_new(path,project,options,grouped,notify,ctx,out,detail,NULL,&w);
+    struct batch w;return batch_new(path,project,options,grouped,notify,ctx,out,detail,NULL,&w,NULL);
 }
-enum pt_render_file_result pt_stem_file_new_allocated(const char *path,const struct pt_project *project,
+enum pt_render_file_result pt_stem_file_engine_new(const char *path,const struct pt_project *project,
     const struct pt_render_options *options,unsigned grouped,pt_render_progress notify,void *ctx,
-    struct pt_stem_report *out,enum pt_render_result *detail,const struct pt_allocator *allocator)
+    struct pt_stem_report *out,enum pt_render_result *detail,const struct pt_allocator *allocator,
+    const struct pt_render_file_engine *engine)
 {
     struct batch *w;enum pt_render_file_result result;
+    if(engine && (!engine->run || !allocator))return PT_RENDER_FILE_INVALID;
     if(!allocator)return pt_stem_file_new(path,project,options,grouped,notify,ctx,out,detail);
     if(detail)*detail=PT_RENDER_INVALID;
     if(!path || !*path || strlen(path)>1200 || !project || !options || !out || !detail || !allocator->allocate || !allocator->release)return PT_RENDER_FILE_INVALID;
     w=allocator->allocate(allocator->context,sizeof(*w));
     if(!w) {*detail=PT_RENDER_MEMORY;return PT_RENDER_FILE_RENDER;}
-    result=batch_new(path,project,options,grouped,notify,ctx,out,detail,allocator,w);
+    result=batch_new(path,project,options,grouped,notify,ctx,out,detail,allocator,w,engine);
     allocator->release(allocator->context,w);return result;
+}
+
+enum pt_render_file_result pt_stem_file_new_allocated(const char *path,const struct pt_project *project,
+    const struct pt_render_options *options,unsigned grouped,pt_render_progress notify,void *ctx,
+    struct pt_stem_report *out,enum pt_render_result *detail,const struct pt_allocator *allocator)
+{
+    return pt_stem_file_engine_new(path,project,options,grouped,notify,ctx,out,detail,allocator,NULL);
 }

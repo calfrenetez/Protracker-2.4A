@@ -15,3 +15,11 @@ enum pt_render_file_result pt_render_invert_file_new(const char *path,const stru
     struct pt_render_file_engine engine={&budget,run};
     return pt_render_file_engine_new(path,p,o,progress,ctx,out,detail,a,&engine);
 }
+
+enum pt_render_file_result pt_render_invert_stems_new(const char *path,const struct pt_project *p,
+    const struct pt_render_options *o,unsigned grouped,pt_render_progress progress,void *ctx,
+    struct pt_stem_report *out,enum pt_render_result *detail,size_t budget,const struct pt_allocator *a)
+{
+    struct pt_render_file_engine engine={&budget,run};
+    return pt_stem_file_engine_new(path,p,o,grouped,progress,ctx,out,detail,a,&engine);
+}

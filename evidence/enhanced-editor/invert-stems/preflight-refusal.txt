@@ -1,0 +1,1 @@
+First native attempt refused before guest staging/execution: shared_guest.Guest raised Not the shared 030 emulator. Live ps inspection showed no Amiberry executable, only MCP helper processes. No guest launcher or directory was created; lock released. No binary runtime failure or cleanup/recovery requirement. AmiConnect notified and unused window explicitly released.

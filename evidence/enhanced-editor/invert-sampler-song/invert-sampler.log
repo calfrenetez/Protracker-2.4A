@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131162616 reserve=262144 flags=4
+SAMPLER INVERT SONG PASS: private bank, immutable masters, allocation/budget/precision refusal, stop/edit/restart, generation/table guards and owner cleanup
+EXEC MEMORY PASS: 93 Fast allocations, zero owned bytes, budget refusal without Chip fallback

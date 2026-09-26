@@ -1388,3 +1388,28 @@ The native core fixture also passes on shared030 with the production allocator:
 Chip fallback. It exercises256-frame playback plus17-frame held-lease stopping.
 Evidence: `evidence/enhanced-editor/invert-queued-core/`. The coordinated window
 completed RC0, all4DMAoff, exact staging cleanup and explicit release.
+
+
+### Sampler binding for private EFx
+
+`pt_sampler_invert_song` explicitly wraps the private producer with the sampler's
+version and project-table identity guards. Opening copies classic playback data
+without promoting, rewriting or reducing a master. Pull refuses a changed sampler
+generation or replaced samples/events/orders/sample count before touching the
+producer again, releases its private voices/bank, and keeps the error sticky.
+Stop and normal end release the producer; an already copied queue block remains
+owned by its queue. Allocation failure preserves the caller's output pointer and
+all sampler history/master state.
+
+The owner must still stop before editing, undo, document replacement or disposing
+sampler/project objects. This defensive binding does not intercept edits or make
+in-place pattern mutation safe. It is an opt-in API; existing editor Studio/native
+PLAY paths are unchanged. Connecting it to the editor's before-change and queued
+output-stop guards remains the next step. Host checks cover stop/edit/restart,
+undo/redo, unexpected version changes, all four table/count guards, every open
+allocation failure, budget refusal, unsupported24-bit preservation and completion.
+
+The sampler binding also passes on shared030 with93 Fast/not-Chip allocations,
+zero owned bytes and budget refusal. Evidence:
+`evidence/enhanced-editor/invert-sampler-song/`. Editor interception and real
+output transport remain unimplemented by this adapter.

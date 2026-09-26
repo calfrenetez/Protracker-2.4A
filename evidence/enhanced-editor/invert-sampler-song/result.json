@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 sampler EFx version/private lifetime and Fast ownership; no device/physical acceptance",
+  "PTExecSamplerInvertSongTest_sha256": "a5688c410f65706567ac23fe40e0774e0e9262b867b9128626704798ad7ec17d",
+  "invert-sampler_returncode": "0",
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0",
+  "run_files_cleaned": true
+}

@@ -134,6 +134,8 @@ def main():
     inputs['PTInvertRenderTest']=['tests/render_invert_test.c',*invert_sources,*render_sources]
     inputs['PTInvertSessionTest']=['tests/render_invert_session_test.c','src/core/studio_pump.c','src/core/studio_queue.c','src/core/studio_consumer.c',*invert_sources,*render_sources]
     inputs['PTExecInvertSessionTest']=['tests/native_exec_invert_session_test.c',*inputs['PTInvertSessionTest'][1:]]
+    inputs['PTSamplerInvertSongTest']=['tests/sampler_invert_song_test.c','src/editor/sampler_invert_song.c',*dict.fromkeys([*inputs['PTSamplerTest'][1:],*invert_sources,*render_sources])]
+    inputs['PTExecSamplerInvertSongTest']=['tests/native_exec_sampler_invert_song_test.c',*inputs['PTSamplerInvertSongTest'][1:]]
     inputs['PTInvertBounceTest']=['tests/bounce_invert_test.c','src/editor/bounce_invert.c',*inputs['PTBounceTest'][1:],*invert_sources]
     inputs['PTExecInvertBounceTest']=['tests/native_exec_invert_bounce_test.c',*inputs['PTInvertBounceTest'][1:]]
     inputs['PT24GRender'] = ['tools/pt24g_render.c','src/platform/stem_file.c','src/core/stems.c','src/platform/render_file.c','src/core/document.c','src/core/pp20.c','src/core/mod_project.c','src/core/mod_inspect.c',*render_sources]

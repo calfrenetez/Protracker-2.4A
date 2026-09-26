@@ -561,7 +561,7 @@ metadata and PCM; ordinary renderer/file state and the master document remain
 separate allocations under the caller's allocator. Use a larger explicit limit
 for larger samples. Insufficient memory fails without publishing output.
 
-This path requires whole mono8 forward loops of at least four frames, and no
+This path accepts whole mono8 one-shots or forward loops of at least four loop frames, and no
 interpolation/slices in referenced samples. It preserves master samples, mutates
 shared private sample copies between ticks, and reconstructs fresh copies for
 each stem and verification pass. Existing destinations are never replaced.
@@ -606,3 +606,20 @@ WAV/stems match host bytes; bounced sample032 contains the expected24-bit PCM,
 all31 original sample records remain identical, and save plus undo/redo passes.
 The dialog-cancel path preserves edits. Normal exit, recent-prefix restoration,
 DMA-off and exact cleanup passed. Evidence: `enhanced-editor/invert-editor`.
+
+
+## EFx one-shot repeat behavior
+
+Reference: `vendor/pt23f/replayer/PT2.3F_replay_cia.s`, `mtloop3`/`mtskip`
+initialization, `mt_NoLoop`, `mt_SetDMA` and `mt_UpdateFunk`. A non-looping
+sample begins with its first word cleared, then repeats that word after its
+initial fetch. EFx can invert these bytes, so stopping the voice after the initial
+fetch, or deciding its repeat lifetime from whether the bytes are still zero,
+would lose reference output. The explicit private-bank renderer now clears only
+its own copy and retains the repeat for normal, E9x and EDx triggers.
+Masters with nonzero first words are supported and unchanged. Mixed forward-loop
+and one-shot channels and unselected/muted EFx mutation are covered by independent
+frame expectations. Ordinary rendering and queued Studio semantics are unchanged;
+16/24-bit EFx, interpolation, slices and previously refused handoffs remain outside
+this bounded extension. This is ideal-clock software evidence, not analogue Paula
+or physical AmiGUS acceptance.

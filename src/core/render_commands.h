@@ -60,7 +60,9 @@ enum pt_render_result pt_render_sequence_consume(struct pt_render_sequence *,uin
 enum pt_render_result pt_render_sequence_complete(struct pt_render_sequence *,struct pt_render_plan *);
 void pt_render_sequence_close(struct pt_render_sequence *);
 /* Internal offline staging hook: caller prevalidates private sample descriptors.
- * Flow observes the immutable project; voices read playback. Tick runs only
+ * Requires classic whole mono8 playback descriptors; one-shots retain a two-frame
+ * repeat independently of PCM contents. Flow observes the immutable project;
+ * voices read playback. Tick runs only
  * after the preceding audio interval, before subsequent PCM is produced. */
 struct pt_render_mutation {
     const struct pt_project *playback;

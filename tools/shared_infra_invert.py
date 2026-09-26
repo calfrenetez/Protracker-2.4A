@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Capture extended EFx ordering on an explicitly reserved shared030 guest."""
-import fcntl,hashlib,json,shutil,sys,time
+import argparse,fcntl,hashlib,json,shutil,sys,time
 from pathlib import Path
-from make_invert_fixtures import extended_fixtures
+from make_invert_fixtures import extended_fixtures,one_shot_fixtures
 from test_invert_emulator import decode_trace
 ROOT=Path(__file__).resolve().parents[1]
 INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
@@ -28,6 +28,7 @@ def canonical_trace(trace):
     return bytes(result)
 
 def main():
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument("--one-shot",action="store_true");args=parser.parse_args()
     sys.path.insert(0,str(INFRA/'scripts'))
     from shared_guest import Guest
     out=ROOT/'build/dev'/('invert-shared-'+str(time.time_ns()));out.mkdir()
@@ -39,7 +40,7 @@ def main():
         try:
             binary=run/'PTInvertTraceTest';shutil.copyfile(ROOT/'build/dev/PTInvertTraceTest',binary)
             report['diagnostic_sha256']=hashlib.sha256(binary.read_bytes()).hexdigest()
-            cases=list(extended_fixtures());commands=['FailAt 1','Stack 65536','CD '+guest.device+run.name]
+            cases=list(one_shot_fixtures() if args.one_shot else extended_fixtures());commands=['FailAt 1','Stack 65536','CD '+guest.device+run.name]
             for name,data,meta in cases:
                 (run/(name+'.mod')).write_bytes(data)
                 for repeat in range(2):

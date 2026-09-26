@@ -4,7 +4,10 @@
 /* Explicit offline classic EFx path. sample_budget bounds all additional private
  * sample descriptors and PCM; ordinary renderer workspace uses the same caller
  * allocator separately. All channels retain shared mutation clocks regardless of
- * audio selection/mute/solo. Requires whole mono8 forward-loop samples (at least four loop frames), and no interpolation/slices.
+ * audio selection/mute/solo. Requires whole mono8 one-shots or forward loops
+ * (at least four loop frames), and no interpolation/slices. Private one-shots
+ * start with a cleared first word and retain the classic two-frame DMA repeat,
+ * even when EFx makes it audible; original master bytes are preserved.
  * Unknown/unsupported inputs fail before sink calls. Masters are never edited.
  * This does not enable EFx in the queued Studio/hardware sequence API. */
 enum pt_render_result pt_render_invert_stream(const struct pt_project *,const struct pt_render_options *,

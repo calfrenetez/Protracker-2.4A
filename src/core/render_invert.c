@@ -36,8 +36,8 @@ enum pt_render_result pt_render_invert_stream(const struct pt_project *p,const s
         const struct pt_sample *sample=p->samples+i;
         if(sample->pcm.bits!=8 || sample->pcm.channels!=1 || sample->pcm.frames<2 ||
            sample->pcm.frames>131070 || (sample->pcm.frames&1) || sample->interpolation ||
-           sample->loop!=PT_LOOP_FORWARD || sample->loop_end-sample->loop_start<4 ||
-           ((sample->loop_start|sample->loop_end)&1))return PT_RENDER_SAMPLE;
+           sample->loop>PT_LOOP_FORWARD || (sample->loop &&
+           (sample->loop_end-sample->loop_start<4 || ((sample->loop_start|sample->loop_end)&1))))return PT_RENDER_SAMPLE;
     }
     if(budget<sizeof(*s))return PT_RENDER_MEMORY;
     s=a->allocate(a->context,sizeof(*s));if(!s)return PT_RENDER_MEMORY;
@@ -50,7 +50,12 @@ enum pt_render_result pt_render_invert_stream(const struct pt_project *p,const s
         a->release(a->context,s);
         return bank_result==PT_INVERT_BANK_INVALID?PT_RENDER_SAMPLE:PT_RENDER_MEMORY;
     }
-    for(i=0;i<p->sample_count;++i)if(selected[i])s->samples[i].pcm=s->bank.entries[i].pcm;
+    for(i=0;i<p->sample_count;++i)if(selected[i]) {
+        s->samples[i].pcm=s->bank.entries[i].pcm;
+        /* mt_Init clears a non-looping sample's first DMA word. Apply this
+           only to private playback storage, never the editable master. */
+        if(!s->samples[i].loop)s->samples[i].pcm.data[0]=s->samples[i].pcm.data[1]=0;
+    }
     mutation.playback=&s->playback;mutation.context=s;mutation.tick=tick;
     result=pt_render_mutating_allocated(p,o,sink,sink_ctx,progress,progress_ctx,out,a,&mutation);
     pt_invert_bank_close(&s->bank);a->release(a->context,s);return result;

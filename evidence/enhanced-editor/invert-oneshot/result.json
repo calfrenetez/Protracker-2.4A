@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "scope": "pinned EFx ordering captures; no renderer/physical acceptance",
+  "diagnostic_sha256": "38e84f80a487c24c4dd2cc1c12c6212cf0069609f6971aa12de8d66150bee8fe",
+  "cases": {
+    "invert_once": {
+      "max_ticks": 100,
+      "ordering_case": "invert_once",
+      "comparison": "exact after one fixed sample-cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "cd39a08503837798b85504654d815e798f3ac95e194577ac8854553804c9de90",
+      "trace_sha256": "f3a11466eb5917b1b266202d72718578df88053822d2fe7c0436110ec1f46c2e"
+    },
+    "invert_onceretrig": {
+      "max_ticks": 100,
+      "ordering_case": "invert_onceretrig",
+      "comparison": "exact after one fixed sample-cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "5c08c6fe05b83edc3856e1c006514067bcf1e2679fd6de38325257f4cba093ab",
+      "trace_sha256": "3a90cdc0d8ef423dd21e21714c3fba76044b234c4035c41be46056e9f191388c"
+    },
+    "invert_oncedelay": {
+      "max_ticks": 100,
+      "ordering_case": "invert_oncedelay",
+      "comparison": "exact after one fixed sample-cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "1c01bfb17f2cb715a76d88a8d5f6189803518e91679b9768dfa90e35f34972d7",
+      "trace_sha256": "b782823404e40896e73fc703527614df02fdb1789df5371b2c31111c73f60039"
+    }
+  },
+  "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=666\tsndbuf_status=0",
+  "owned_files_cleaned": true
+}

@@ -221,3 +221,27 @@ undo/redo changes that generated slot without mutating the source. Source and
 bounced PCM both save from master representations. Ordinary bounce remains on
 its original renderer unless the caller explicitly selects the EFx API. Native
 editor controls and queued Studio wiring are not enabled by this core API.
+
+
+## Mixed one-shot and forward-loop offline rendering
+
+The private render bank now accepts bounded mono8 one-shots alongside the
+previous forward loops. Its first-word initialization follows the pinned replay
+without changing the canonical sample: clear private frames 0/1 once per pass,
+then let all-channel EFx clocks mutate that two-frame repeat. The renderer retains
+that repeat independently of current sample values, including retrigger and
+delayed-note paths. The generic bank-copy/reset API is unchanged; it continues to
+copy master bytes exactly unless its caller explicitly prepares classic playback.
+
+`evidence/enhanced-editor/invert-oneshot` records three pinned replay cases twice
+(one-shot, retrigger and delayed note), each stopping normally after 24 ticks.
+Portable flow/clock/private-byte comparisons match all 18 active ticks in each
+capture and preserve the nonzero source first word. The trace format remains 164
+bytes; a one-word repeat now records its two bytes followed by 14 zero pad bytes.
+Old long-loop captures retain their existing interpretation.
+
+Independent renderer frame tests cover mixed channels, fresh inherited notes,
+E91/ED1, EF0, unselected/muted EFx clocks, immutable masters, every allocation
+failure and insufficient private budget. This extends the explicit offline path;
+queued Studio, 16/24-bit EFx and broader handoff combinations still need separate
+work. It is software/emulator evidence, not physical audio acceptance.

@@ -32,6 +32,9 @@ class InvertOrdering(unittest.TestCase):
         evidence=ROOT/'evidence/enhanced-editor/invert-ordering'
         cases=list(evidence.glob('*.mod'))
         self.assertEqual(len(cases),3)
+        one_shots=list((ROOT/'evidence/enhanced-editor/invert-oneshot').glob('*.mod'))
+        self.assertEqual(len(one_shots),3)
+        cases+=one_shots
         with tempfile.TemporaryDirectory() as tmp:
             exe=Path(tmp)/'test'
             sources=['invert_bank','invert_sequence','invert_pcm','invert_loop','flow','document','pp20','safe_save','mod_project','mod_inspect','project','channels','pcm']

@@ -272,7 +272,7 @@ static enum pt_pcm_result command_repeat(struct pt_render_plan *plan,unsigned ch
 }
 static enum pt_render_result commands(const struct pt_project *p,const struct pt_render_options *o,
                                       const struct pt_flow *flow,const struct pt_pitch *pitch,const struct pt_render_range *ranges,uint16_t offsets,struct pt_voice *voice,
-                                      uint8_t *instrument,uint8_t *volume,uint8_t *velocity,uint8_t *output_volume,struct pt_render_tremolo *trem,struct pt_render_plan *plan)
+                                      uint8_t *instrument,uint8_t *volume,uint8_t *velocity,uint8_t *output_volume,struct pt_render_tremolo *trem,struct pt_render_plan *plan,unsigned private_repeat)
 {
     unsigned ch;
     for(ch=0;ch<p->channels.count;++ch)if(o->tracks&(1U<<ch)) {
@@ -297,10 +297,10 @@ static enum pt_render_result commands(const struct pt_project *p,const struct pt
                     a=ranges[ch].trigger_start;b=a+ranges[ch].trigger_length;
                     if(s->loop) {
                         if(command_segment(plan,ch,voice+ch,&s->pcm,a,b,s->loop_start,s->loop_end,step(s,e->pitch,o->rate),s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
-                    } else if(silent_handoff_sample(s)) {
+                    } else if(private_repeat || silent_handoff_sample(s)) {
                         if(command_segment(plan,ch,voice+ch,&s->pcm,a,b,0,2,step(s,e->pitch,o->rate),0)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
                     } else if(command_trigger(plan,ch,voice+ch,&s->pcm,a,b,PT_VOICE_ONCE,0,0,step(s,e->pitch,o->rate),s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
-                } else if(!e->slice && silent_handoff_sample(s)) {
+                } else if(!e->slice && !s->loop && (private_repeat || silent_handoff_sample(s))) {
                     if(command_segment(plan,ch,voice+ch,&s->pcm,a,b,0,2,step(s,e->pitch,o->rate),0)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
                 } else if(command_trigger(plan,ch,voice+ch,&s->pcm,a,b,loop,la,lb,step(s,e->pitch,o->rate),s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
                 velocity[ch]=(e->flags&1)?e->velocity:127;
@@ -322,7 +322,7 @@ static enum pt_render_result commands(const struct pt_project *p,const struct pt
             }
             if(s->loop) {
                 if(command_segment(plan,ch,voice+ch,&s->pcm,a,b,s->loop_start,s->loop_end,rate,s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
-            } else if(silent_handoff_sample(s)) {
+            } else if(private_repeat || silent_handoff_sample(s)) {
                 if(command_segment(plan,ch,voice+ch,&s->pcm,a,b,0,2,rate,0)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
             } else if(command_trigger(plan,ch,voice+ch,&s->pcm,a,b,PT_VOICE_ONCE,0,0,rate,s->interpolation)!=PT_PCM_OK)return PT_RENDER_SAMPLE;
         }
@@ -355,7 +355,7 @@ enum pt_render_result pt_render_commands_tick(const struct pt_project *p,const s
     struct pt_render_command_state *state)
 {
     return commands(p,o,flow,pitch,ranges,offsets,state->voice,state->instrument,
-        state->volume,state->velocity,state->output_volume,state->trem,NULL);
+        state->volume,state->velocity,state->output_volume,state->trem,NULL,0);
 }
 enum pt_render_result pt_render_commands_plan(const struct pt_project *p,const struct pt_render_options *o,
     const struct pt_flow *flow,const struct pt_pitch *pitch,const struct pt_render_range *ranges,uint16_t offsets,
@@ -365,7 +365,7 @@ enum pt_render_result pt_render_commands_plan(const struct pt_project *p,const s
     if(!plan)return PT_RENDER_INVALID;
     plan->count=0;
     result=commands(p,o,flow,pitch,ranges,offsets,state->voice,state->instrument,
-        state->volume,state->velocity,state->output_volume,state->trem,plan);
+        state->volume,state->velocity,state->output_volume,state->trem,plan,0);
     if(result!=PT_RENDER_OK) {plan->count=0;return result;}
     pt_render_commands_gains(p,o,state);
     for(ch=0;ch<p->channels.count;++ch)if((o->tracks&(1U<<ch)) && state->voice[ch].active) {
@@ -407,7 +407,12 @@ static enum pt_render_result stream(const struct pt_project *p,const struct pt_r
         }
         if(!end) {
             if(mutation && !mutation->tick(mutation->context,&r->timeline.flow))return PT_RENDER_SAMPLE;
-            result=pt_render_commands_tick(mutation?mutation->playback:p,o,&r->timeline.flow,&r->pitch,r->range,r->offset_tracks,&w->commands);if(result!=PT_RENDER_OK)return result;}
+            /* A private classic one-shot still repeats its first word after EFx
+               makes that word nonzero. Do not infer DMA lifetime from its PCM. */
+            result=commands(mutation?mutation->playback:p,o,&r->timeline.flow,&r->pitch,r->range,r->offset_tracks,
+                w->commands.voice,w->commands.instrument,w->commands.volume,w->commands.velocity,
+                w->commands.output_volume,w->commands.trem,NULL,mutation!=NULL);
+            if(result!=PT_RENDER_OK)return result;}
     } while(!end);
     if(offset!=planned.frames || r->timeline.flow.ticks!=planned.ticks)return PT_RENDER_INVALID;
     report_run(r,end,clips,out);return PT_RENDER_OK;

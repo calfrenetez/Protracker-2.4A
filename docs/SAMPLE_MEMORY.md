@@ -1322,7 +1322,21 @@ The native editor selects this path when the requested song/pattern contains
 EFx. Its additional private-sample budget comes from the current available
 master-memory pool; each allocation rechecks live available memory, the shared
 ceiling and reserve. There is no assumption that128MiB is free. This path retains
-the bounded whole mono8 forward-loop/no-slice/no-interpolation input subset;
+the bounded whole mono8 one-shot or forward-loop/no-slice/no-interpolation subset;
 its generated output may be stereo16/24. Other high-resolution projects keep
 the ordinary renderer. Queued Studio EFx and physical/audio acceptance remain
 separate. Native UI evidence is tracked with the exact candidate.
+
+
+### One-shot EFx playback copies
+
+The offline EFx path now accepts mixed whole mono8 forward loops and one-shots.
+Following the pinned replay's `mt_Init`, it clears the first two samples of each
+one-shot **only in its private bank**. It plays the full initial sample, then
+retains the two-frame repeat even after EFx turns its zero bytes into audible
+values. Fresh notes, E9x retriggers and EDx delayed notes use that same private
+representation. Each render pass reconstructs it from the unchanged master.
+This is an explicit classic playback conversion; enhanced save, undo and ordinary
+sample processing still use the original master bytes, including a nonzero first
+word. The queued Studio path retains its EFx refusal. Existing restrictions on
+cross-instrument handoffs also remain; this does not widen that subset.

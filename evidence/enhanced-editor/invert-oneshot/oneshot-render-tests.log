@@ -1,0 +1,25 @@
+RENDER PASS: planned/streamed stereo16/24 PCM, startup trim, delayed voice continuity, pattern/song endings, slice bounds, selection, preflight refusal, cancellation and sink failures
+RENDER PASS: planned/streamed stereo16/24 PCM, startup trim, delayed voice continuity, pattern/song endings, slice bounds, selection, preflight refusal, cancellation and sink failures
+..RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt/truncated/trailing staging refusal and cleanup
+RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt/truncated/trailing staging refusal and cleanup
+RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt/truncated/trailing staging refusal and cleanup
+.INVERT render PASS: mixed loop/one-shot, retrigger/delay, exact PCM, immutable master, repeatability, budgets, allocation failures, cancellation, sink failure
+.INVERT FILE PASS: exact WAV, fresh verification workspace, all allocation failures, verification cancellation and cleanup
+.INVERT STEMS PASS: shared-sample exact PCM, grouped stems, fresh banks, all allocation failures, cancellations, immutable masters and cleanup
+.RENDER MEMORY PASS: all4 WAV and11 stem allocation failures preserve masters/reports and remove owned staging
+.render command plan PASS: explicit intents, 16-channel audio equivalence, failure discard
+.RANGE PASS: exact full-render crop with pre-roll pitch/phase, delays, loop boundaries, cancellation, empty/invalid refusal and full-range identity
+RANGE PASS: exact full-render crop with pre-roll pitch/phase, delays, loop boundaries, cancellation, empty/invalid refusal and full-range identity
+.SEQUENCE PASS: reference audio, tempo/delay, pre-roll, partition invariance, protocol and allocation refusal
+..VOLUME boundaries PASS: EC0 and Cxx restore retain silent phase across 16 voices and isolated track 16
+.
+----------------------------------------------------------------------
+Ran 12 tests in 62.616s
+
+OK
+.mod: RENDER MEMORY peak=542838 calls=10 final=0
+.ptg: RENDER MEMORY peak=542838 calls=10 final=0
+.pp: RENDER MEMORY peak=664104 calls=11 final=0
+mix: RENDER MEMORY peak=542838 calls=10 final=0
+stems: RENDER MEMORY peak=546414 calls=27 final=0
+VOLUME: seven repeated pinned native traces match every host/m68k rendered PCM frame

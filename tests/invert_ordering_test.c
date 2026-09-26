@@ -23,6 +23,7 @@ int main(int argc,char **argv)
     for(i=0;i<31;++i)selected[i]=d.project.samples[i].pcm.frames!=0;
     assert(pt_invert_bank_open(&owned,d.project.samples,31,selected,SIZE_MAX,&a)==PT_INVERT_BANK_OK);
     bank=owned.entries;
+    if(!d.project.samples[0].loop)bank[0].pcm.data[0]=bank[0].pcm.data[1]=0;
     original=malloc(d.project.samples[0].pcm.frames*sizeof(int32_t));assert(original);
     memcpy(original,d.project.samples[0].pcm.data,d.project.samples[0].pcm.frames*sizeof(int32_t));
     assert(pt_flow_init(&flow,&d.project,PT_FLOW_CLASSIC128,0,100)==PT_FLOW_TICK);
@@ -43,7 +44,7 @@ int main(int argc,char **argv)
         if(cursor!=((sample_start+state.channel[0].cursor)&0xffffffffUL) || state.channel[0].speed!=(r[144]>>4) || state.channel[0].accumulator!=r[145]) {
             fprintf(stderr,"INVERT clock mismatch tick=%u fresh=%u counter=%u cursor=%lu/%lu speed=%u/%u accumulator=%u/%u\n",ticks,flow.fresh,flow.counter,(unsigned long)(((sample_start+state.channel[0].cursor)&0xffffffffUL)),cursor,state.channel[0].speed,r[144]>>4,state.channel[0].accumulator,r[145]);return 20;
         }
-        for(i=0;i<16;++i)if((unsigned char)bank[0].pcm.data[d.project.samples[0].loop_start+i]!=r[148+i]) {
+        for(i=0;i<(d.project.samples[0].loop?16U:2U);++i)if((unsigned char)bank[0].pcm.data[d.project.samples[0].loop_start+i]!=r[148+i]) {
             fprintf(stderr,"INVERT shared PCM mismatch tick=%u index=%u got=%u expected=%u\n",ticks,i,(unsigned char)bank[0].pcm.data[d.project.samples[0].loop_start+i],r[148+i]);return 20;
         }
         assert(!memcmp(original,d.project.samples[0].pcm.data,d.project.samples[0].pcm.frames*sizeof(int32_t)));++checked;

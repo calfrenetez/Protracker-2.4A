@@ -15,6 +15,8 @@ def prepare_invert_trace(raw,wrapper):
 \tCLR.W (A0)+
 \tMOVE.L mt_audchan1temp+n_loopstart(PC),D0
 \tBEQ.B pt_inv_empty
+\tCMP.W #1,mt_audchan1temp+n_replen
+\tBEQ.B pt_inv_word
 \tCMP.W #8,mt_audchan1temp+n_replen
 \tBLO.B pt_inv_empty
 \tMOVE.L D0,A1
@@ -22,6 +24,14 @@ def prepare_invert_trace(raw,wrapper):
 pt_inv_copy
 \tMOVE.B (A1)+,(A0)+
 \tDBRA D1,pt_inv_copy
+\tBRA.B pt_inv_done
+pt_inv_word
+\tMOVE.L D0,A1
+\tMOVE.W (A1),(A0)+
+\tCLR.W (A0)+
+\tCLR.L (A0)+
+\tCLR.L (A0)+
+\tCLR.L (A0)+
 \tBRA.B pt_inv_done
 pt_inv_empty
 \tCLR.L (A0)+

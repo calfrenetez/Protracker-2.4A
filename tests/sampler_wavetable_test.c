@@ -1,6 +1,6 @@
 #define PT_WAVETABLE_NATIVE
 #include "amigus_wavetable_cache_test.c"
-#include "../src/editor/sampler_wavetable.h"
+#include "../src/editor/sampler_wavetable_internal.h"
 static unsigned allocations,refuse;
 static void *allocate_master(void *ctx,size_t bytes)
 {void *p;(void)ctx;if(refuse)return NULL;p=malloc(bytes);if(p)++allocations;return p;}
@@ -17,6 +17,78 @@ static void exact_save(struct pt_project *p,const uint8_t *saved,size_t size)
     assert(pt_project_encode(p,output,size,&used)==PT_PROJECT_OK);
     assert(used==size && !memcmp(output,saved,size));free(output);
 }
+static void sampler_upload_fixture(void)
+{
+    struct fixture *f=malloc(sizeof(*f));struct pt_allocator a={NULL,allocate_master,release_master};
+    struct pt_document d;struct pt_sampler sampler;struct pt_sampler_wavetable bridge={0},saved_bridge;
+    struct pt_sampler_upload_job job={0};struct pt_playback_format format={16,0,0,0};
+    struct pt_cache_lease out={31,999},hit;struct pt_sample_version *pin=NULL;struct pt_pcm pcm;
+    struct pt_pattern_history history;struct pt_pattern_command commands[4];struct pt_event_change changes[4];
+    struct pt_amigus_reservation reservation;enum pt_cache_result result;
+    uint8_t staging[3],expected[8];int32_t data[4];unsigned bits,mode,prepared,writes;uint32_t address,bytes;
+    assert(f);
+    for(bits=8;bits<=24;bits+=8)for(prepared=0;prepared<2;++prepared)for(mode=0;mode<16;++mode) {
+        data[0]=bits==8?127:bits==16?32767:8388607;data[1]=-data[0]-1;data[2]=1;data[3]=-1;
+        init(f,PT_AMIGUS_WAVETABLE);assert(pt_amigus_wavetable_cache_attach(&f->cache,&f->reservation,16,112,112,f,bus_owned,bus_write));
+        pt_document_init(&d,&a);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
+        d.project.samples[0].pcm=(struct pt_pcm){data,4,4,48000,1,bits};
+        pt_sampler_init(&sampler,&a,1024*1024);
+        assert(pt_pattern_history_init(&history,&d.project,commands,4,changes,4)==PT_EDIT_OK);
+        assert(pt_sampler_wavetable_bind(&bridge,&sampler,&d.project,&f->cache));
+        assert(pt_playback_pcm_pack(&d.project.samples[0].pcm,&format,expected,sizeof(expected))==PT_PCM_OK);
+        if(prepared) {
+            assert(pt_sampler_pin(&sampler,&d.project,0,sampler.generation,&pcm,&pin)==PT_EDIT_OK);
+            if(mode==15)sampler.budget=0; /* Retaining a prepared pin allocates nothing. */
+            result=pt_sampler_upload_begin_prepared(&job,&bridge,0,sampler.generation,bridge.version,pin,&format,&out);
+            pt_sampler_unpin(pin);pin=NULL;
+        }else {
+            sampler.budget=0;assert(pt_sampler_upload_begin(&job,&bridge,0,&format,&out)==PT_CACHE_CAPACITY && !job.bridge && !sampler.bytes);
+            sampler.budget=1024*1024;refuse=1;
+            assert(pt_sampler_upload_begin(&job,&bridge,0,&format,&out)==PT_CACHE_CAPACITY && !job.bridge && !sampler.bytes);refuse=0;
+            result=pt_sampler_upload_begin(&job,&bridge,0,&format,&out);
+        }
+        assert(result==PT_CACHE_PENDING && job.pin && out.serial==999 && !f->writes);
+        assert(job.upload.upload.source==&job.pcm && job.pcm.data!=data && job.pcm.data[0]==data[0]);
+        assert(pt_sampler_upload_step(&job,staging,2,&out)==PT_CACHE_PENDING && !f->writes);
+        saved_bridge=bridge;
+        switch(mode) {
+        case 1:pt_sampler_upload_cancel(&job);break;
+        case 2:
+            assert(pt_sampler_edit(&sampler,&d.project,&history,0,PT_PCM_GAIN,0,4,500)==PT_EDIT_OK);
+            pt_pattern_history_release(&history);pt_sampler_release(&sampler);
+            assert(sampler.bytes && job.pcm.data[0]==data[0]);break;
+        case 3:pt_sampler_release(&sampler);assert(sampler.bytes && job.pcm.data[0]==data[0]);break;
+        case 4:pt_document_release(&d);pt_sampler_release(&sampler);assert(sampler.bytes);pt_sampler_upload_cancel(&job);assert(!sampler.bytes);break;
+        case 5:--d.project.samples[0].pcm.capacity;break;
+        case 6:++bridge.version;break;
+        case 7:assert(!pt_sampler_wavetable_close(&bridge));break;
+        case 8:f->healthy=0;break;
+        case 9:f->fail=f->writes+1;break;
+        case 10:reservation=f->reservation;f->cache.reservation=&reservation;break;
+        case 11:bridge.sampler=NULL;break;
+        case 12:d.project.channels.selected=1;break;
+        case 13:++sampler.generation;assert(pt_sampler_wavetable_sync(&bridge));break;
+        case 14:d.project.samples[0].pcm.data=data;break;
+        }
+        if(mode==0 || mode==12 || mode==15) {
+            do{result=pt_sampler_upload_step(&job,staging,sizeof(staging),&out);}while(result==PT_CACHE_PENDING);
+            assert(result==PT_CACHE_LOAD && !job.pin && !job.bridge);
+            assert(pt_sampler_wavetable_location(&bridge,out,&address,&bytes) && bytes==8 && !memcmp(f->ram+address,expected,8));
+            writes=f->writes;
+            assert(pt_sampler_upload_begin(&job,&bridge,0,&format,&hit)==PT_CACHE_HIT && !job.pin && f->writes==writes);
+            pt_sampler_upload_cancel(&job);assert(pt_sampler_wavetable_unpin(&bridge,hit));
+            assert(pt_sampler_wavetable_unpin(&bridge,out));out=(struct pt_cache_lease){31,999};
+        }else if(mode!=1 && mode!=4) {
+            assert(pt_sampler_upload_step(&job,staging,2,&out)==(mode==9?PT_CACHE_TRANSFER:PT_CACHE_INVALID));
+            assert(!job.pin && !job.bridge && !f->cache.cache.bytes && out.serial==999);
+            if(mode==2 || mode==3)assert(!sampler.bytes);
+        }
+        pt_sampler_upload_cancel(&job);bridge=saved_bridge;f->cache.reservation=&f->reservation;
+        assert(pt_sampler_wavetable_close(&bridge) && pt_amigus_reservation_close(&f->reservation));
+        pt_pattern_history_release(&history);pt_sampler_release(&sampler);pt_document_release(&d);assert(!allocations && !sampler.bytes);
+    }
+    free(f);puts("SAMPLER UPLOAD JOB PASS: exact8/16/24 pins, stable descriptor, bounded steps, release/edit/history/cancel guards, hits and memory refusal; injected only");
+}
 static int sampler_fixture_main(void)
 {
     struct fixture *f=malloc(sizeof(*f));
@@ -27,7 +99,7 @@ static int sampler_fixture_main(void)
     struct pt_cache_lease old,newer,hit,undo,redo,metadata,grown,out={31,999};
     int32_t data[]={257,-513,1025,-2049};uint8_t *saved,held[8];size_t size,used;
     uint32_t address,bytes;unsigned writes;uint64_t version;
-    assert(f);assert(wavetable_fixture_main()==0);init(f,PT_AMIGUS_WAVETABLE);
+    assert(f);assert(wavetable_fixture_main()==0);sampler_upload_fixture();init(f,PT_AMIGUS_WAVETABLE);
     assert(pt_amigus_wavetable_cache_attach(&f->cache,&f->reservation,16,112,112,f,bus_owned,bus_write));
     pt_document_init(&document,&allocator);assert(pt_document_new(&document,4,SIZE_MAX)==PT_PROJECT_OK);
     document.project.samples[0].pcm=(struct pt_pcm){data,4,4,48000,1,24};

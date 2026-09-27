@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 Studio ownership core; no audio device transport",
+  "PTExecEditorWavetableTest_sha256": "0d8a383e663ce28b303173a77bc3d680adc6591125300984e658ea3d53e6334e",
+  "editor-wavetable_returncode": "0",
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=250\tsndbuf_status=0",
+  "run_files_cleaned": true
+}

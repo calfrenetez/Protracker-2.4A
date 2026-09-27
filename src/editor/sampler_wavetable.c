@@ -1,5 +1,7 @@
 #include <string.h>
-#include "sampler_wavetable.h"
+#include "sampler_wavetable_internal.h"
+#include "sampler_internal.h"
+#include "../core/playback_internal.h"
 int pt_sampler_wavetable_bind(struct pt_sampler_wavetable *s,struct pt_sampler *sampler,
     struct pt_project *project,struct pt_amigus_wavetable_cache *backend)
 {
@@ -22,17 +24,65 @@ int pt_sampler_wavetable_sync(struct pt_sampler_wavetable *s)
     }
     return 1;
 }
+void pt_sampler_upload_cancel(struct pt_sampler_upload_job *j)
+{
+    if(!j)return;
+    pt_amigus_upload_cancel(&j->upload);pt_sampler_unpin(j->pin);memset(j,0,sizeof(*j));
+}
+static enum pt_cache_result begin(struct pt_sampler_upload_job *j,struct pt_sampler_wavetable *s,unsigned slot,
+    unsigned generation,uint64_t version,struct pt_sample_version *expected,
+    const struct pt_playback_format *format,struct pt_cache_lease *out,unsigned prepared)
+{
+    struct pt_cache_lease lease;enum pt_edit_result edit;enum pt_cache_result result;
+    if(!j || j->bridge || j->pin || j->upload.backend || !s || !s->sampler || !s->project || !out)return PT_CACHE_INVALID;
+    if(prepared) {
+        if(s->generation!=generation || s->sampler->generation!=generation || s->version!=version || !version ||
+           s->table!=s->project->samples || s->count!=s->project->sample_count || !pt_amigus_wavetable_cache_current(s->backend))return PT_CACHE_INVALID;
+    }else if(!pt_sampler_wavetable_sync(s))return PT_CACHE_INVALID;
+    if(slot>=s->count)return PT_CACHE_INVALID;
+    edit=prepared?pt_sampler_pin_current(s->sampler,s->project,slot,generation,expected,&j->pcm,&j->pin):
+        pt_sampler_pin(s->sampler,s->project,slot,s->generation,&j->pcm,&j->pin);
+    if(edit!=PT_EDIT_OK)return edit==PT_EDIT_CAPACITY?PT_CACHE_CAPACITY:PT_CACHE_INVALID;
+    j->bridge=s;j->sampler=s->sampler;j->project=s->project;j->backend=s->backend;
+    j->generation=s->generation;j->version=s->version;j->slot=slot;memcpy(&j->snapshot,s->project,sizeof(j->snapshot));
+    result=prepared?pt_amigus_upload_begin_prepared(&j->upload,s->backend,&j->pcm,slot+1,s->version,format,&lease):
+        pt_amigus_upload_begin(&j->upload,s->backend,&j->pcm,slot+1,s->version,format,&lease);
+    if(result!=PT_CACHE_PENDING) {
+        pt_sampler_upload_cancel(j);if(result==PT_CACHE_HIT)*out=lease;
+    }
+    return result;
+}
+enum pt_cache_result pt_sampler_upload_begin(struct pt_sampler_upload_job *j,struct pt_sampler_wavetable *s,
+    unsigned slot,const struct pt_playback_format *format,struct pt_cache_lease *out)
+{return begin(j,s,slot,0,0,NULL,format,out,0);}
+enum pt_cache_result pt_sampler_upload_begin_prepared(struct pt_sampler_upload_job *j,struct pt_sampler_wavetable *s,
+    unsigned slot,unsigned generation,uint64_t version,struct pt_sample_version *expected,
+    const struct pt_playback_format *format,struct pt_cache_lease *out)
+{return begin(j,s,slot,generation,version,expected,format,out,1);}
+static int current(struct pt_sampler_upload_job *j)
+{
+    struct pt_sampler_wavetable *s=j->bridge;struct pt_pcm pcm;struct pt_sample_version *pin;
+    j->snapshot.channels.selected=j->project->channels.selected;
+    if(s->sampler!=j->sampler || s->project!=j->project || s->backend!=j->backend ||
+       s->generation!=j->generation || s->version!=j->version || j->sampler->generation!=j->generation ||
+       memcmp(j->project,&j->snapshot,sizeof(j->snapshot)) || s->table!=j->project->samples || s->count!=j->project->sample_count ||
+       pt_sampler_pin_current(j->sampler,j->project,j->slot,j->generation,j->pin,&pcm,&pin)!=PT_EDIT_OK)return 0;
+    pt_sampler_unpin(pin);return 1;
+}
+enum pt_cache_result pt_sampler_upload_step(struct pt_sampler_upload_job *j,uint8_t *staging,size_t capacity,struct pt_cache_lease *out)
+{
+    enum pt_cache_result result;
+    if(!j || !j->bridge)return PT_CACHE_INVALID;
+    if(!out || !current(j)){pt_sampler_upload_cancel(j);return PT_CACHE_INVALID;}
+    result=pt_amigus_upload_step(&j->upload,staging,capacity,out);
+    if(result!=PT_CACHE_PENDING)pt_sampler_upload_cancel(j);
+    return result;
+}
 enum pt_cache_result pt_sampler_wavetable_acquire(struct pt_sampler_wavetable *s,unsigned slot,
     const struct pt_playback_format *format,uint8_t *staging,size_t capacity,struct pt_cache_lease *out)
 {
-    struct pt_pcm pcm;struct pt_sample_version *pin;struct pt_cache_lease lease;
-    enum pt_edit_result edit;enum pt_cache_result result;
-    if(!out || !pt_sampler_wavetable_sync(s) || slot>=s->count)return PT_CACHE_INVALID;
-    edit=pt_sampler_pin(s->sampler,s->project,slot,s->generation,&pcm,&pin);
-    if(edit!=PT_EDIT_OK)return edit==PT_EDIT_CAPACITY?PT_CACHE_CAPACITY:PT_CACHE_INVALID;
-    result=pt_amigus_wavetable_cache_acquire(s->backend,&pcm,slot+1,s->version,format,staging,capacity,&lease);
-    pt_sampler_unpin(pin);
-    if(result==PT_CACHE_LOAD || result==PT_CACHE_HIT)*out=lease;
+    struct pt_sampler_upload_job job={0};enum pt_cache_result result=pt_sampler_upload_begin(&job,s,slot,format,out);
+    while(result==PT_CACHE_PENDING)result=pt_sampler_upload_step(&job,staging,capacity,out);
     return result;
 }
 int pt_sampler_wavetable_location(struct pt_sampler_wavetable *s,struct pt_cache_lease lease,

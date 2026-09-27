@@ -2047,8 +2047,36 @@ These low-level jobs borrow source storage and its descriptor: the caller must
 keep the immutable master/version pinned through completion/cancel. They do not
 acquire a sampler master themselves. Existing synchronous APIs drive the same jobs
 to completion and the prepared sampler path retains its source pin throughout.
-Song/editor dispatch still calls these synchronous wrappers; scheduling incremental
-jobs and retaining source pins across editor turns is the next integration step.
+Song/editor dispatch still calls synchronous wrappers. The sampler-owned layer
+below now retains source pins across steps; yielding dispatch remains unfinished.
 Initial public validation, cache eviction/allocation and synchronous driver callback
 latency remain outside the per-step byte bound. This is not physical timing proof.
 Evidence: `evidence/enhanced-editor/incremental-cache-upload/`.
+
+
+### Sampler-owned incremental uploads
+
+The sampler bridge now provides begin/step/cancel jobs that retain an independent
+exact master-version pin and store their PCM descriptor in stable job storage.
+This keeps both data and descriptor alive between steps, including after the
+caller's separate pin/history references are released. Public begin validates the
+project and selectively promotes/pins the requested master. The private prepared
+song entrypoint retains an already validated exact pin without allocation or value
+scans. Neither begins bus writes; cache hits transfer immediately.
+
+Each step checks captured generation, project header, bridge/backend identity,
+cache version and exact current master descriptor before conversion. Selected
+channel navigation is permitted. Reservation/live ownership remains checked by
+the adapter. Completion transfers only a published cache lease; cancellation and
+failure release partial device resources before releasing the master pin. Output
+leases remain unchanged on pending/failure. Job storage must not move while active;
+owner/context structs must stay alive until completion/cancel. Values remain
+immutable, and normal callers cancel before editing or disposing their project.
+Cancel itself does not dereference the project and is safe after document disposal.
+
+The existing public synchronous acquire and private prepared-song acquire now
+use these jobs. Dispatch still drives all steps synchronously; editor yielding,
+pending batch acquisition and timeline scheduling remain follow-on work. Public
+begin validation/promotion/allocation and driver callbacks have no wall-time bound.
+This milestone does not establish physical AmiGUS or real-time performance.
+Evidence: `evidence/enhanced-editor/sampler-upload-jobs/`.

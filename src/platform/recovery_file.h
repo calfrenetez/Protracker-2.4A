@@ -12,8 +12,8 @@ struct pt_recovery_info {
  * master snapshot: project/metadata stay immutable through return. A small
  * allocator-owned extension table wraps the existing streamed project saver;
  * PCM is neither copied into a second whole-file buffer nor reduced in precision.
- * document_id is a nonzero caller-assigned document identity; revision must be
- * newer than saved_revision. timestamp is a nonzero caller-supplied UTC time.
+ * document_id is a nonzero caller-assigned document identity; revision must differ from
+ * saved_revision (undo may make it numerically smaller). timestamp is a nonzero caller-supplied UTC time.
  * These metadata values identify a candidate, not proof the original is unchanged.
  * Caller chooses location and scheduling; no automatic writes are enabled here.
  * Existing RCVR extensions and exhausted extension capacity are refused. */

@@ -8,7 +8,7 @@ static uint64_t get64(const uint8_t *p)
 static int valid_info(const struct pt_recovery_info *m,size_t *length)
 {
     size_t n;
-    if(!m || !m->document_id || !m->timestamp || m->revision<=m->saved_revision)return 0;
+    if(!m || !m->document_id || !m->timestamp || m->revision==m->saved_revision)return 0;
     for(n=0;n<=PT_RECOVERY_SOURCE_MAX && m->source[n];++n)
         if((unsigned char)m->source[n]<32)return 0;
     if(n>PT_RECOVERY_SOURCE_MAX)return 0;

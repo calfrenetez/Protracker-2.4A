@@ -4,6 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "../src/platform/recovery_file.h"
+#include "recovery_schedule_cases.h"
 static size_t live,calls,fail;
 static void *allocate(void *ctx,size_t n)
 {void *p;(void)ctx;if(++calls==fail)return NULL;p=malloc(n);if(p)++live;return p;}
@@ -23,6 +24,7 @@ static int recovery_fixture(int argc,char **argv)
     struct pt_recovery_info info={0},got,sentinel,bad;
     struct pt_project previous;uint8_t *original,*snapshot;size_t n,sn,owned,count,i;
     char path[512],malformed[512];
+    recovery_schedule_cases();
     assert(argc==3);assert(strlen(argv[2])+20<sizeof(path));
     snprintf(path,sizeof(path),"%s/recovery.ptg",argv[2]);
     snprintf(malformed,sizeof(malformed),"%s/malformed.ptg",argv[2]);
@@ -100,7 +102,14 @@ static int recovery_fixture(int argc,char **argv)
     assert(pt_recovery_file_load(&recovered,path,info.document_id,SIZE_MAX,SIZE_MAX,&got)==PT_PROJECT_OK && recovered.dirty);
     exact(&recovered.project,original,n);exact(&d.project,original,n);
     assert(!pt_recovery_project_info(&recovered.project,&got));
-    assert(unlink(path)==0);pt_document_release(&d);pt_document_release(&recovered);
+    assert(unlink(path)==0);
+    /* An undo to the initial state after saving is still recoverable work. */
+    info.revision=0;
+    assert(pt_recovery_file_save(path,&d.project,&info,&a)==PT_SAVE_OK);
+    assert(pt_recovery_file_load(&recovered,path,info.document_id,SIZE_MAX,SIZE_MAX,&got)==PT_PROJECT_OK);
+    assert(got.revision==0 && got.saved_revision==9 && recovered.dirty);
+    exact(&recovered.project,original,n);assert(unlink(path)==0);
+    pt_document_release(&d);pt_document_release(&recovered);
     free(original);free(snapshot);assert(!live);
     puts("RECOVERY FILE PASS: full-precision project identity, new-file-only snapshot, bounded allocation failures, corrupt/mismatched metadata preserves open song, explicit dirty restoration");
     return 0;

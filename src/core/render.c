@@ -459,21 +459,51 @@ struct pt_render_sequence {
     struct pt_allocator allocator;struct pt_render_options options;
     const struct pt_project *project;struct run run;
     struct pt_render_command_state commands;
-    uint32_t remaining;unsigned pending,end,done,failed,consumed;
+    uint32_t remaining;unsigned pending,end,done,failed,consumed,preparing;
     struct pt_render_mutation mutation;
 };
-static enum pt_render_result sequence_open(const struct pt_project *p,const struct pt_render_options *o,
+static enum pt_render_result sequence_begin(const struct pt_project *p,const struct pt_render_options *o,
     const struct pt_allocator *a,struct pt_render_sequence **out,const struct pt_render_mutation *mutation)
 {
-    struct pt_render_sequence *s;struct pt_render_report report;enum pt_render_result result;
+    struct pt_render_sequence *s;enum pt_render_result result;
     if(!a || !a->allocate || !a->release || !out)return PT_RENDER_INVALID;
     s=a->allocate(a->context,sizeof(*s));if(!s)return PT_RENDER_MEMORY;
     memset(s,0,sizeof(*s));s->allocator=*a;
-    result=measure(p,o,NULL,NULL,&report,&s->run,mutation!=NULL);
+    result=preflight(p,o,mutation!=NULL);
     if(result!=PT_RENDER_OK) {a->release(a->context,s);return result;}
     s->options=*o;s->project=p;if(mutation)s->mutation=*mutation;
     if(!start_run(&s->run,p,&s->options,mutation!=NULL)) {a->release(a->context,s);return PT_RENDER_INVALID;}
-    pt_render_commands_init(&s->commands);*out=s;return PT_RENDER_OK;
+    s->preparing=1;pt_render_commands_init(&s->commands);*out=s;return PT_RENDER_OK;
+}
+enum pt_render_result pt_render_sequence_begin(const struct pt_project *p,const struct pt_render_options *o,
+    const struct pt_allocator *a,struct pt_render_sequence **out)
+{return sequence_begin(p,o,a,out,NULL);}
+enum pt_render_result pt_render_sequence_prepare(struct pt_render_sequence *s,unsigned ticks,unsigned *ready)
+{
+    struct pt_tick_span span;unsigned i,end;enum pt_render_result result;
+    if(!s || !ready || !ticks || ticks>256 || s->failed || s->pending || s->done)return PT_RENDER_INVALID;
+    if(!s->preparing){*ready=1;return PT_RENDER_OK;}
+    for(i=0;i<ticks;++i) {
+        result=next_tick(&s->run,&span,&end);
+        if(result!=PT_RENDER_OK){s->failed=1;return result;}
+        if(end) {
+            if(!start_run(&s->run,s->project,&s->options,s->mutation.tick!=NULL)) {s->failed=1;return PT_RENDER_INVALID;}
+            s->preparing=0;*ready=1;return PT_RENDER_OK;
+        }
+    }
+    *ready=0;return PT_RENDER_OK;
+}
+static enum pt_render_result sequence_open(const struct pt_project *p,const struct pt_render_options *o,
+    const struct pt_allocator *a,struct pt_render_sequence **out,const struct pt_render_mutation *mutation)
+{
+    struct pt_render_sequence *s=NULL;unsigned ready=0;
+    enum pt_render_result result;
+    if(!out)return PT_RENDER_INVALID;
+    result=sequence_begin(p,o,a,&s,mutation);
+    if(result!=PT_RENDER_OK)return result;
+    do {result=pt_render_sequence_prepare(s,256,&ready);}while(result==PT_RENDER_OK && !ready);
+    if(result!=PT_RENDER_OK){pt_render_sequence_close(s);return result;}
+    *out=s;return PT_RENDER_OK;
 }
 enum pt_render_result pt_render_sequence_open(const struct pt_project *p,const struct pt_render_options *o,
     const struct pt_allocator *a,struct pt_render_sequence **out)
@@ -513,7 +543,7 @@ enum pt_render_result pt_render_mutating_sequence_complete(struct pt_render_sequ
 enum pt_render_result pt_render_sequence_next(struct pt_render_sequence *s,struct pt_render_interval *out)
 {
     struct pt_tick_span span;enum pt_render_result result;
-    if(!s || !out || s->pending || s->done || s->failed)return PT_RENDER_INVALID;
+    if(!s || !out || s->preparing || s->pending || s->done || s->failed)return PT_RENDER_INVALID;
     result=next_tick(&s->run,&span,&s->end);
     if(result!=PT_RENDER_OK) {s->failed=1;return result;}
     s->remaining=span.frames;s->pending=1;s->consumed=0;

@@ -32,6 +32,29 @@ static void restore_preflight_fixture(void)
     assert(pt_wavetable_restore_preflight(&p,&snapshot,48000,&format,1,&report)==PT_WAVETABLE_INVALID);
     assert(data[1]==257 && samples[1].pcm.bits==24);
 }
+static void incremental_preflight(const struct pt_project *p,const struct pt_render_options *options,
+    const struct pt_playback_format *format,unsigned controls,unsigned session,
+    const struct pt_wavetable_preflight_report *expected)
+{
+    struct pt_render_options o=*options;struct pt_playback_format f=*format;
+    struct preflight_alloc memory={0};struct pt_allocator a={&memory,preflight_allocate,release_master};
+    struct pt_wavetable_preflight *work=NULL;struct pt_wavetable_preflight_report r,old;
+    unsigned baseline=allocations,steps=0;enum pt_wavetable_capability result;
+    result=pt_wavetable_preflight_begin(p,&o,&f,controls,session,1,&a,&r,&work);
+    memset(&o,0,sizeof(o));memset(&f,0,sizeof(f)); /* Setup copied caller options. */
+    while(result==PT_WAVETABLE_PENDING) {
+        assert(work && allocations==baseline+2 && memory.calls==2);
+        old=r;
+        assert(pt_wavetable_preflight_step(NULL,&r)==PT_WAVETABLE_INVALID && !memcmp(&r,&old,sizeof(r)));
+        assert(pt_wavetable_preflight_step(work,NULL)==PT_WAVETABLE_INVALID);
+        result=pt_wavetable_preflight_step(work,&r);++steps;
+        assert(r.frames-old.frames<=256 && r.intervals-old.intervals<=1);
+    }
+    assert(!memcmp(&r,expected,sizeof(r)));
+    if(work) {old=r;assert(steps && pt_wavetable_preflight_step(work,&r)==result && !memcmp(&r,&old,sizeof(r)));}
+    pt_wavetable_preflight_close(&work);assert(!work && allocations==baseline);
+    pt_wavetable_preflight_close(&work);
+}
 static void preflight_fixture(void)
 {
     struct pt_project p={0};struct pt_sample samples[2];
@@ -59,6 +82,12 @@ static void preflight_fixture(void)
         assert(pt_render_measure(&p,&o,NULL,NULL,&measured)==PT_RENDER_OK);
         assert(pt_wavetable_preflight(&p,&o,&format,1,&a,&report)==PT_WAVETABLE_COMPATIBLE);
         assert(report.render_result==PT_RENDER_OK && report.intervals && report.action==UINT_MAX);
+        incremental_preflight(&p,&o,&format,1,0,&report);
+        if(mode==2) {
+            struct pt_wavetable_preflight_report range;
+            assert(pt_wavetable_session_preflight(&p,&o,&format,1,1,&a,&range)==PT_WAVETABLE_COMPATIBLE);
+            incremental_preflight(&p,&o,&format,1,1,&range);
+        }
         assert(mode==2?report.frames>measured.frames:report.frames==measured.frames);
         assert(allocations==baseline);
     }
@@ -69,6 +98,7 @@ static void preflight_fixture(void)
     assert(pt_render_measure(&p,&o,NULL,NULL,&measured)==PT_RENDER_OK);
     assert(pt_wavetable_preflight(&p,&o,&format,1,&a,&report)==PT_WAVETABLE_GEOMETRY);
     assert(report.intervals>4 && report.frames>0 && report.channel==0 && report.kind==PT_RENDER_TRIGGER);
+    incremental_preflight(&p,&o,&format,1,0,&report);
     /* Unsupported source in pre-roll is still found before range playback. */
     events[20].effect=0;events[24].effect=15;
     o.pattern_only=o.row_range=1;o.row_first=5;o.row_end=7;
@@ -81,13 +111,37 @@ static void preflight_fixture(void)
     {unsigned before=memory.calls;format.word_pad=1;
         assert(pt_wavetable_preflight(&p,&o,&format,1,&a,&report)==PT_WAVETABLE_FORMAT && memory.calls==before);
         format.word_pad=0;}
+    /* Cancel between every kind of work step, including partial phase advance. */
+    for(mode=0;mode<12;++mode) {
+        struct pt_wavetable_preflight *work=NULL;unsigned i,calls;
+        assert(pt_wavetable_preflight_begin(&p,&o,&format,1,0,0,&a,&report,&work)==PT_WAVETABLE_PENDING);
+        calls=memory.calls;
+        for(i=0;i<mode;++i)assert(pt_wavetable_preflight_step(work,&report)==PT_WAVETABLE_PENDING);
+        assert(memory.calls==calls && allocations==baseline+2);
+        pt_wavetable_preflight_close(&work);assert(!work && allocations==baseline);
+    }
+    { /* Measurement itself yields before a long song reaches traversal. */
+        struct pt_wavetable_preflight *work=NULL;
+        unsigned speed=p.speed;struct pt_event stop=events[20];
+        p.speed=31;events[20].effect=0;o.tick_limit=3000;o.frame_limit=3000000;
+        assert(pt_wavetable_preflight_begin(&p,&o,&format,1,0,0,&a,&report,&work)==PT_WAVETABLE_PENDING);
+        assert(pt_wavetable_preflight_step(work,&report)==PT_WAVETABLE_PENDING && !report.intervals && !report.frames);
+        assert(pt_wavetable_preflight_step(work,&report)==PT_WAVETABLE_PENDING && !report.intervals && !report.frames);
+        pt_wavetable_preflight_close(&work);assert(allocations==baseline);
+        p.speed=(uint8_t)speed;events[20]=stop;o.tick_limit=1000;o.frame_limit=1000000;
+    }
     /* Both workspace and internal sequence allocation failures clean up. */
     for(mode=1;mode<=2;++mode) {
         memory.calls=0;memory.fail_at=mode;
         assert(pt_wavetable_preflight(&p,&o,&format,1,&a,&report)==PT_WAVETABLE_MEMORY && allocations==baseline);
+        {struct pt_wavetable_preflight *sentinel=(struct pt_wavetable_preflight *)(uintptr_t)1;
+            memory.calls=0;
+            assert(pt_wavetable_preflight_begin(&p,&o,&format,1,0,0,&a,&report,&sentinel)==PT_WAVETABLE_MEMORY);
+            assert(sentinel==(struct pt_wavetable_preflight *)(uintptr_t)1 && allocations==baseline);}
     }
     memory.fail_at=0;o.tick_limit=1;
     assert(pt_wavetable_preflight(&p,&o,&format,1,&a,&report)==PT_WAVETABLE_RENDER && report.render_result==PT_RENDER_TICK_LIMIT);
+    incremental_preflight(&p,&o,&format,1,0,&report);
     o.tick_limit=1000;o.frame_limit=1;
     assert(pt_wavetable_preflight(&p,&o,&format,1,&a,&report)==PT_WAVETABLE_RENDER && report.render_result==PT_RENDER_FRAME_LIMIT);
     o.frame_limit=1000000;events[12].effect=14;events[12].parameter=0xf1;
@@ -110,6 +164,7 @@ static void preflight_fixture(void)
     assert(pt_wavetable_preflight(&p,&o,&format,1,&a,&report)==PT_WAVETABLE_OPERATION);
     assert(report.kind==PT_RENDER_SEGMENT && report.intervals>3 && report.frames>0);
     assert(allocations==baseline && pcm[0]==1 && pcm[1]==257 && pcm[2]==-513);
+    puts("WAVETABLE PREFLIGHT STEP PASS: pending gate, bounded timeline/frame progress, copied options, cancellation, late refusal, terminal stability and allocation cleanup");
 }
 struct dispatch_bus {
     struct fixture *f;struct pt_wavetable_voices *owner;

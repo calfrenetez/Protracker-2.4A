@@ -55,6 +55,17 @@ struct pt_render_sequence;
 struct pt_render_interval {uint32_t frames;unsigned emit,end;};
 enum pt_render_result pt_render_sequence_open(const struct pt_project *,const struct pt_render_options *,
     const struct pt_allocator *,struct pt_render_sequence **);
+/* Resumable alternative to open. Begin validates project/PCM/options and scans
+ * static metadata synchronously, then owns ONE allocation awaiting measurement.
+ * Prepare advances at most ticks (1..256) timeline ticks; ready=1 only after full
+ * success, then next is allowed. Completion resets the timeline (metadata scan).
+ * Close cancels at any stage. Internal errors poison state; invalid arguments do
+ * not advance or change ready. Options copied, all project/source arrays borrowed
+ * immutable until close. No output/pins/cache/device effects. Setup/static scans
+ * are NOT incremental; the tick bound is not a wall-clock latency guarantee. */
+enum pt_render_result pt_render_sequence_begin(const struct pt_project *,const struct pt_render_options *,
+    const struct pt_allocator *,struct pt_render_sequence **);
+enum pt_render_result pt_render_sequence_prepare(struct pt_render_sequence *,unsigned ticks,unsigned *ready);
 enum pt_render_result pt_render_sequence_next(struct pt_render_sequence *,struct pt_render_interval *);
 enum pt_render_result pt_render_sequence_consume(struct pt_render_sequence *,uint32_t frames);
 enum pt_render_result pt_render_sequence_complete(struct pt_render_sequence *,struct pt_render_plan *);

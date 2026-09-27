@@ -1780,3 +1780,25 @@ still refuses the range; no integer rounding or ordinary-start substitution.
 This is injected-driver session integration, not a native clock, register driver,
 audible output or physical card acceptance. Validation and candidate identity:
 `evidence/enhanced-editor/wavetable-range/`.
+
+### Resumable preparation analysis
+
+The renderer now separates synchronous project/PCM validation from incremental
+whole-song timeline measurement (`sequence_begin` / `sequence_prepare`). Playback
+intervals cannot be requested until measurement succeeds. The wavetable preflight
+uses that path and exposes begin/step/close: each step performs one measurement
+chunk (at most256 ticks), one next/snapshot, one silent phase chunk (at most256
+frames), or one command/capability batch. It retains the first-emitting snapshot
+checks and selective source mask. Existing synchronous APIs use the same engine.
+
+Pending results never authorize output. Closing cancels at any stage, releasing
+both workspace allocations; steps allocate no additional memory, pin no masters,
+and invoke no cache uploads or device callbacks. Options and conversion settings
+are copied, while project/source arrays remain borrowed and immutable until close.
+A future editor preparation owner must cancel before allowing mutations.
+
+This is bounded traversal work, not a hard UI/real-time latency guarantee: initial
+project/PCM validation, metadata scans at setup/reset and PCM checks while creating
+commands remain synchronous. Song/editor start still uses the synchronous wrapper;
+owner-controlled asynchronous start is the next integration step. See
+`evidence/enhanced-editor/wavetable-preflight-step/` for host/native evidence.

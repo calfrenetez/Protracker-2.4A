@@ -481,3 +481,19 @@ natural end, cancellation and failure. See `wavetable_song.h` for caller duties.
 Evidence in `evidence/enhanced-editor/wavetable-range/` covers fractional cursors,
 silent pre-roll, future triggers, final spans and pending/uncertain stop ownership.
 No native register, clock, audible output or physical AmiGUS acceptance is implied.
+
+## Incremental preflight traversal
+
+The synchronous preflight wrappers now use the resumable begin/step/close engine.
+PENDING is distinct from COMPATIBLE; partial masks never qualify playback. Begin
+performs static project/PCM validation and allocates the workspace plus renderer.
+Timeline measurement now yields after at most256 ticks, and command traversal
+separates next/snapshot, at most256 silent frames, and complete/capability checks.
+Cancellation frees both allocations without any source pin, cache or device side
+effects. Terminal success/refusal repeats without further advancement. The inputs
+remain immutable borrowed storage, with options/format copied at begin.
+
+The initial scans and command-time PCM checks are still synchronous, and native
+song/editor start still uses the synchronous wrappers. This milestone provides a
+cancellable analysis primitive; it does not claim responsive native PLAY or a
+hardware scheduler. Evidence: `evidence/enhanced-editor/wavetable-preflight-step/`.

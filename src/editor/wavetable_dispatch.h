@@ -6,7 +6,7 @@ enum pt_wavetable_capability {
     PT_WAVETABLE_COMPATIBLE, PT_WAVETABLE_INVALID, PT_WAVETABLE_RENDER,
     PT_WAVETABLE_MEMORY, PT_WAVETABLE_FORMAT, PT_WAVETABLE_CHANNEL,
     PT_WAVETABLE_SOURCE, PT_WAVETABLE_GEOMETRY, PT_WAVETABLE_CONTROL,
-    PT_WAVETABLE_OPERATION, PT_WAVETABLE_RESTORE
+    PT_WAVETABLE_OPERATION, PT_WAVETABLE_RESTORE, PT_WAVETABLE_PENDING
 };
 struct pt_wavetable_preflight_report {
     enum pt_wavetable_capability result;
@@ -41,6 +41,26 @@ enum pt_wavetable_capability pt_wavetable_preflight(const struct pt_project *,
 enum pt_wavetable_capability pt_wavetable_session_preflight(const struct pt_project *,
     const struct pt_render_options *,const struct pt_playback_format *,unsigned controls,unsigned restores,
     const struct pt_allocator *,struct pt_wavetable_preflight_report *);
+/* Incremental capability traversal. Begin returns PENDING with a handle only on
+ * successful setup; failures preserve *work. session=1 applies the session/range
+ * policy above; session=0 matches legacy preflight. Options/format are copied;
+ * project/PCM/arrays are borrowed immutable until close. Begin still validates
+ * static project/PCM synchronously. Step performs ONE operation: <=256 measurement
+ * ticks, one next/snapshot, <=256 silent frames, or one complete/capability batch.
+ * Measurement completion also resets static metadata; command creation may validate
+ * source PCM. No hard latency guarantee.
+ * PENDING reports (including partial sample masks) NEVER authorize output. Only
+ * COMPATIBLE after full traversal does. Terminal results repeat unchanged without
+ * advancement. No steps allocate, pin sources, upload, mix or invoke devices.
+ * Close cancels/frees both allocations at any stage and nulls *work; idempotent.
+ * Invalid step arguments leave state/report unchanged. Owner thread, no reentry.
+ * This API does not yet change synchronous song/editor start. */
+struct pt_wavetable_preflight;
+enum pt_wavetable_capability pt_wavetable_preflight_begin(const struct pt_project *,
+    const struct pt_render_options *,const struct pt_playback_format *,unsigned controls,unsigned session,unsigned restores,
+    const struct pt_allocator *,struct pt_wavetable_preflight_report *,struct pt_wavetable_preflight **);
+enum pt_wavetable_capability pt_wavetable_preflight_step(struct pt_wavetable_preflight *,struct pt_wavetable_preflight_report *);
+void pt_wavetable_preflight_close(struct pt_wavetable_preflight **);
 /* Bounded snapshot capability gate. Requires explicit exact-restore driver
  * support; ordinary start is insufficient. Checks every active source identity
  * and restore geometry before any caller may upload/start. No allocation, PCM

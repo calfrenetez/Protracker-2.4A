@@ -35,7 +35,16 @@ static int sequence_fixture_main(void)
         struct pt_studio_mix *mix;struct pt_render_report report;unsigned emitted=0,snapshots=0,fractional=0;struct pt_render_snapshot snapshot,sentinel;
         sample.loop=(uint8_t)loop;o.include_lead_in=mode==1;o.pattern_only=o.row_range=mode==2;o.row_first=2;o.row_end=5;
         used=0;assert(pt_render_stream(&p,&o,capture,NULL,NULL,NULL,&report)==PT_RENDER_OK);
-        assert(pt_render_sequence_open(&p,&o,&a,&s)==PT_RENDER_OK && s);
+        if(partition==256)assert(pt_render_sequence_open(&p,&o,&a,&s)==PT_RENDER_OK && s);
+        else {
+            unsigned ready=9,steps=0;
+            assert(pt_render_sequence_begin(&p,&o,&a,&s)==PT_RENDER_OK && s);
+            assert(pt_render_sequence_next(s,&interval)==PT_RENDER_INVALID);
+            assert(pt_render_sequence_prepare(s,0,&ready)==PT_RENDER_INVALID && ready==9);
+            assert(pt_render_sequence_prepare(s,257,&ready)==PT_RENDER_INVALID && ready==9);
+            do {assert(pt_render_sequence_prepare(s,partition,&ready)==PT_RENDER_OK);++steps;}while(!ready);
+            assert(steps>1 || partition==17);
+        }
         mix=pt_studio_open(&a,&provider,4);assert(mix);
         assert(pt_render_sequence_consume(s,1)==PT_RENDER_INVALID);
         memset(&sentinel,0x5a,sizeof(sentinel));snapshot=sentinel;
@@ -69,6 +78,20 @@ static int sequence_fixture_main(void)
         assert(emitted==used && emitted==report.frames*2 && snapshots && fractional);
         assert(pt_render_sequence_next(s,&interval)==PT_RENDER_INVALID);
         pt_studio_close(mix);pt_render_sequence_close(s);assert(!owned && !pins);
+    }
+    { /* Cancellation during measurement; a late tick-budget error cannot publish. */
+        struct pt_render_sequence *s=NULL;struct pt_render_interval span;unsigned ready=7;
+        o.row_range=o.pattern_only=0;o.tick_limit=2;
+        assert(pt_render_sequence_begin(&p,&o,&a,&s)==PT_RENDER_OK);
+        assert(pt_render_sequence_prepare(s,1,&ready)==PT_RENDER_OK && !ready);
+        pt_render_sequence_close(s);assert(!owned);
+        assert(pt_render_sequence_begin(&p,&o,&a,&s)==PT_RENDER_OK);
+        assert(pt_render_sequence_prepare(s,1,&ready)==PT_RENDER_OK && !ready);
+        assert(pt_render_sequence_prepare(s,1,&ready)==PT_RENDER_OK && !ready);
+        ready=7;assert(pt_render_sequence_prepare(s,1,&ready)==PT_RENDER_TICK_LIMIT && ready==7);
+        assert(pt_render_sequence_next(s,&span)==PT_RENDER_INVALID);
+        assert(pt_render_sequence_prepare(s,1,&ready)==PT_RENDER_INVALID && ready==7);
+        pt_render_sequence_close(s);assert(!owned);o.tick_limit=1000;
     }
     {struct pt_render_sequence *s=NULL;refuse=1;assert(pt_render_sequence_open(&p,&o,&a,&s)==PT_RENDER_MEMORY && !s && !owned);refuse=0;
         events[0].effect=14;events[0].parameter=0xf1;

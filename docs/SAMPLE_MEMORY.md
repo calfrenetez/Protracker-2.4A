@@ -15,7 +15,7 @@ software implementation from the remaining integration and hardware gates.
 | --- | --- | --- |
 | Authoritative8/16/24-bit masters | Queried, bounded native Fast-RAM pool; precision-preserving sampler versions, processing, history and source pins. Fast-equipped machines fail rather than spill enhanced allocations into Chip RAM. | Physical memory-pressure/endurance measurements. |
 | Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition preserves master precision. | Enhanced multichannel song routing beyond the classic four-channel bridge; physical sound/performance acceptance. |
-| AmiGUS wavetable copies | Versioned evictable resource pool, sampler revision/master-pin bridge, bounded 16-voice lease owner with validated rate/loop/address plans, mono sequencer trigger/control/stop dispatch, preflight-gated master-pinned sequence ownership and injected callbacks, 8/16-bit conversion and bounded address allocator/chunk uploader behind an injected register bus; failure/pinning tests. | Verified card capacity, native bus binding and voice dispatcher; explicit wavetable reservation/cache lifetime now implemented and tested with fake callbacks. Injected register tests do not establish real card access. |
+| AmiGUS wavetable copies | Versioned evictable resource pool, sampler revision/master-pin bridge, bounded 16-voice lease owner with validated rate/loop/address plans, mono sequencer trigger/control/stop dispatch, preflight-gated master-pinned sequence ownership, editor veto/retry barriers and injected callbacks, 8/16-bit conversion and bounded address allocator/chunk uploader behind an injected register bus; failure/pinning tests. | Verified card capacity, native bus binding and voice dispatcher; explicit wavetable reservation/cache lifetime now implemented and tested with fake callbacks. Injected register tests do not establish real card access. |
 | Direct24-bit Studio | Master-pinned mixer, audited sequence, sampler/editor ownership, bounded queue/pump and consumer lifecycle. Up to16 voice slots are a software bound. | Native PLAY/output wiring, verified hardware capabilities and sustainable physical voice-count/timing evidence. |
 | Master-preserving persistence | Bounded enhanced-project/sample saving and explicit classic conversion; private EFx exports/bounce never replace masters. | Broader workflow/release and physical acceptance beyond the retained fixtures. |
 | Playback invalidation | Revision/settings keys, retired active leases and stop-before-edit/undo/dispose guards. Private EFx banks are discarded on stop and rebuilt on restart. | End-to-end real AmiGUS voice/transfer ownership, once the device adapter exists. |
@@ -1704,8 +1704,8 @@ sequence workspaces use the caller's allocator and are released on refusal,
 resource failure or completion. Master PCM is preserved; no cache upload or
 voice/device callback occurs. Detailed refusal reports retain renderer errors.
 This is a callable analysis layer, not yet a mandatory native playback gate:
-an immutable session owner, timing/pre-roll policy and actual device integration
-remain unfinished. See `AMIGUS_SAMPLE_RAM.md` for the contract and evidence.
+the owned session and editor barrier described below enforce this gate;
+row-range pre-roll and actual native device integration remain unfinished. See `AMIGUS_SAMPLE_RAM.md` for the contract and evidence.
 
 ### Owned wavetable song sessions
 
@@ -1715,6 +1715,16 @@ copies options/format, checks revisions/settings at each interval operation and
 retains master/controller/device resources through pending stops. Failed open,
 normal end, stale generation and uncertain starts have bounded cleanup paths.
 Masters retain their original8/16/24-bit precision and enhanced-save bytes.
-Project arrays remain borrowed/immutable by contract; editor stop-before-edit
-hooks, row-range phase-correct pre-roll and native output integration remain
-unfinished. No real AmiGUS access or output is enabled by this owner.
+Project arrays remain borrowed/immutable by contract. The editor barrier below
+protects mutations; row-range phase-correct pre-roll and native output integration
+remain unfinished. No real AmiGUS access or output is enabled by this owner.
+
+### Confirmed-stop editor mutations
+
+The wavetable song can now own the editor change barrier. Pending or failed
+stops block pattern/sample/song changes, import, undo/redo and disposal, retaining
+all referenced storage until confirmation. Native replacement/quit/bounce paths
+honor the same result; the existing synchronous Studio hook remains supported.
+Cursor/channel navigation stays available. This is software controller integration
+with injected device callbacks; native wavetable PLAY/MMIO/output remains disabled.
+Callers must detach the owner before editor memory is freed or reinitialized.

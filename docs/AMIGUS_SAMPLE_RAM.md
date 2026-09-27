@@ -377,3 +377,37 @@ Host ASan/UBSan PASS5.940s and shared030 run
 The native fixture returned all115 Fast allocations, with no Chip fallback.
 All4DMAoff/exact cleanup and explicit release verified. Evidence and limitations
 are recorded in `evidence/enhanced-editor/wavetable-song/`.
+
+## Editor mutation barrier
+
+`editor_wavetable` attaches the song owner to a veto-capable editor change
+barrier. An unconfirmed stop returns0 and retains the song, pinned masters,
+device leases, editor/document and guard context. Stop/detach are retryable and
+never poll or force-free. Attachment refuses the existing Studio/legacy hook;
+that synchronous hook remains supported without changing its callback signature.
+
+`pt_editor_prepare_change` and `pt_editor_dispose` now return confirmation.
+Every guarded controller mutation checks it before calling pattern, sample or
+song operations; a refusal returns edit conflict without changing the project
+or journal. Platform sample imports honor it before importing. Native New/Load,
+quit, bounce and Stop paths also honor it. External owners must check these
+returns before storage replacement/free and detach before editor reinitialization.
+This adapter does not instantiate native AmiGUS output or alter the classic layout.
+
+The wavetable session ignores selected-channel cursor movement when checking
+project metadata, so ordinary navigation continues without stopping playback.
+Actual sample/project edits still close the entire song before mutation. Once
+stop is confirmed, a repeated edit/undo/redo proceeds against the original master
+and its chronological journal. A future playback restart needs a fresh bound
+voice/cache owner; the outer card reservation remains the application's concern.
+
+Validation uses a Git-index source export so unrelated local display changes
+are excluded. Host sanitizer fixtures cover editor wavetable veto/retry ownership,
+legacy editor guard and existing Studio queued/pinned lifetimes. The cross-build
+also syntax-checks the staged native main with the pinned generated bitmap font;
+that is not a full native editor runtime or physical-output acceptance test.
+
+Host ASan/UBSan: all three fixtures passed in25.946s. Shared030 run
+`render-files-1790478371042795000` returned0 within90s, with146 Fast allocations
+and zero final owned bytes/no Chip fallback. All4DMAoff, exact cleanup and
+explicit AmiConnect release verified. Evidence: `evidence/enhanced-editor/editor-wavetable/`.

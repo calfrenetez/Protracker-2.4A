@@ -307,7 +307,7 @@ static void bounce_sample(struct conversion_ui *display,struct pt_paula *audio)
         if(options.row_range)snprintf(name,sizeof(name),"BOUNCE ROWS %02X-%02X",options.row_first,options.row_end-1);
         else if(options.pattern_only)snprintf(name,sizeof(name),"BOUNCE PATTERN %03u",options.pattern);
         else strcpy(name,"BOUNCE SONG");
-        pt_editor_prepare_change(e);
+        if(!pt_editor_prepare_change(e))return;
         result=invert_budget?pt_sampler_bounce_invert(&e->sampler,e->project,&e->history,&options,name,render_progress,&ui,&report,&detail,invert_budget):pt_sampler_bounce(&e->sampler,e->project,&e->history,&options,name,render_progress,&ui,&report,&detail);
     }
     if(result==PT_EDIT_OK) {
@@ -446,7 +446,7 @@ int main(int argc,char **argv)
                 error=pt_paula_audition_progress(&audio,editor->project,editor->sample,856U>>editor->octave,conversion_progress,&conversion);
                 pt_editor_status(editor,error?error:"SAMPLE AUDITION - PAULA; STOP TO RELEASE");
             }
-            if(action==PT_UI_STOP) {pt_editor_prepare_change(editor);pt_paula_stop(&audio);pt_editor_status(editor,"STOPPED - AUDIO RELEASED");}
+            if(action==PT_UI_STOP && pt_editor_prepare_change(editor)) {pt_paula_stop(&audio);pt_editor_status(editor,"STOPPED - AUDIO RELEASED");}
             if(editor->history.revision!=revision && audio.started) {
                 if(audio.mode==2 || editor->sampler.generation!=generation)pt_paula_stop(&audio);
                 else {error=pt_paula_sync(&audio,editor->project);if(error)pt_editor_status(editor,error);}
@@ -514,9 +514,8 @@ int main(int argc,char **argv)
                     } else {strcpy(wav_path,chosen_path);save_sample(editor,chosen_path);}
                 } else pt_editor_status(editor,selected==0?"SAMPLE FILE REQUEST CANCELLED - EDITS PRESERVED":"SAMPLE FILE REQUEST FAILED - EDITS PRESERVED");
             }
-            if(action==PT_UI_NEW) {
+            if(action==PT_UI_NEW && pt_editor_prepare_change(editor)) {
                 unsigned channels=editor->new_channels;
-                pt_editor_prepare_change(editor);
                 if(pt_document_new(&doc,channels,SIZE_MAX)==PT_PROJECT_OK) {
                     pt_paula_stop(&audio);pt_editor_dispose(editor);editor_init_memory(editor,&doc.project);editor->recent=&recent_projects;load_path[0]=0;
                     pt_editor_status(editor,"NEW SONG READY - EMPTY SAMPLE SLOTS");view_cache.valid=0;
@@ -537,7 +536,7 @@ int main(int argc,char **argv)
                     } else selected=pt_file_request(window,0,load_path,chosen_path,sizeof(chosen_path));
                     view_cache.valid=0;
                     if(selected==1) {
-                        pt_editor_prepare_change(editor);
+                        if(!pt_editor_prepare_change(editor)) {redraw=1;continue;}
                         if(load(&doc,chosen_path)) {
                             pt_paula_stop(&audio);pt_editor_dispose(editor);editor_init_memory(editor,&doc.project);editor->recent=&recent_projects;strcpy(load_path,chosen_path);
                             pt_editor_status(editor,"PROJECT LOADED");recent_success(editor,chosen_path);
@@ -546,7 +545,7 @@ int main(int argc,char **argv)
                     } else pt_editor_status(editor,selected==0?"LOAD CANCELLED - EDITS PRESERVED":"LOAD REQUESTER UNAVAILABLE OR PATH TOO LONG");
                 }
             }
-            if(action==PT_UI_QUIT)running=0;
+            if(action==PT_UI_QUIT && pt_editor_prepare_change(editor))running=0;
             redraw=1;frame_log=1;
         }
     }

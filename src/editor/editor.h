@@ -21,6 +21,7 @@ struct pt_editor_selection {unsigned active,marking,pattern,r0,r1,c0,c1,anchor_r
 struct pt_editor {
     struct pt_project *project;
     void (*before_change)(void *);
+    int (*change_ready)(void *); /* Confirmed playback release; may veto mutation. */
     void *before_change_context;
     struct pt_pattern_history history;
     struct pt_sampler sampler;
@@ -63,15 +64,21 @@ struct pt_editor {
 void pt_editor_render_options(const struct pt_editor *,struct pt_render_options *);
 int pt_editor_init(struct pt_editor *,struct pt_project *);
 /* Dispose before reinitializing or freeing a live editor. Releases editor-owned replacement arrays;
-   the project must no longer be used. Release/destroy its document separately. */
-void pt_editor_dispose(struct pt_editor *);
+   the project must no longer be used. Release/destroy its document separately.
+   Returns0 without releasing owners if a playback barrier is unresolved. */
+int pt_editor_dispose(struct pt_editor *);
 /* Owner-thread synchronous playback release hook. Called before editor project
  * mutations and disposal (also on a refused mutation). Must be idempotent, must
  * not reenter editor mutation, and its context must outlive dispose. Init clears
  * the hook. Native/external mutations must call prepare_change themselves BEFORE
  * changing/releasing project storage. No backend is started by this API. */
 void pt_editor_change_guard(struct pt_editor *,void (*)(void *),void *);
-void pt_editor_prepare_change(struct pt_editor *);
+/* Veto-capable alternative. Refuses another registered hook. NULL detaches.
+ * Returns1 when installed; ready returns1 only after all playback reads end.
+ * prepare_change/dispose return0 when release is unresolved; callers MUST NOT
+ * mutate/free/reinitialize editor or document in that case. No polling loop. */
+int pt_editor_change_barrier(struct pt_editor *,int (*)(void *),void *);
+int pt_editor_prepare_change(struct pt_editor *);
 void pt_editor_sample_all(struct pt_editor *);
 /* Synchronous MOD loader into an empty unpublished document; honor budget and
  * allocator, finish source I/O before success, never mutate/reenter the editor.

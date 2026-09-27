@@ -38,6 +38,8 @@ static enum pt_wavetable_song_result current(struct pt_wavetable_song *s)
     if(!s)return PT_WAVETABLE_SONG_INVALID;
     if(s->failure)return s->failure;
     if(s->closing)return s->done?PT_WAVETABLE_SONG_DONE:PT_WAVETABLE_SONG_STOPPING;
+    /* Channel selection is a UI cursor, not a playback setting. */
+    s->snapshot.channels.selected=s->project->channels.selected;
     if(s->sampler->generation!=s->generation || memcmp(s->project,&s->snapshot,sizeof(s->snapshot)) ||
        s->voices->song_owner!=s || !s->voices->bridge || !pt_sampler_wavetable_sync(s->voices->bridge) || s->voices->bridge->version!=s->version)
         return fail(s,PT_WAVETABLE_SONG_STALE);

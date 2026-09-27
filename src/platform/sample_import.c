@@ -11,17 +11,17 @@ enum pt_edit_result pt_editor_sample_file_import(struct pt_editor *e,const char 
     if(!e || !path || !e->sample)return PT_EDIT_INVALID;
     if(raw) {
         for(part=path;*part;++part)if(*part=='/' || *part==':')name=part+1;
-        pt_editor_prepare_change(e);
+        if(!pt_editor_prepare_change(e))return PT_EDIT_CONFLICT;
         return pt_raw_file_import(path,64UL*1024*1024,&e->sampler,e->project,&e->history,e->sample-1,name,&e->raw_format);
     }
     if(!source_only && pt_wav_file_candidate(path)) {
         for(part=path;*part;++part)if(*part=='/' || *part==':')name=part+1;
-        pt_editor_prepare_change(e);
+        if(!pt_editor_prepare_change(e))return PT_EDIT_CONFLICT;
         return pt_wav_file_import(path,64UL*1024*1024,&e->sampler,e->project,&e->history,e->sample-1,name);
     }
     if(!source_only && pt_svx_file_candidate(path)) {
         for(part=path;*part;++part)if(*part=='/' || *part==':')name=part+1;
-        pt_editor_prepare_change(e);
+        if(!pt_editor_prepare_change(e))return PT_EDIT_CONFLICT;
         return pt_svx_file_import(path,64UL*1024*1024,&e->sampler,e->project,&e->history,e->sample-1,name);
     }
     if(pt_mod_file_candidate(path) || pt_pp20_file_candidate(path)) {

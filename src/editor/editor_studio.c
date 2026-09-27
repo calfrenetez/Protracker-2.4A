@@ -7,7 +7,7 @@ static int attached(const struct pt_editor_studio *o)
 {return o && o->editor && o->editor->before_change==stop_guard && o->editor->before_change_context==o;}
 int pt_editor_studio_attach(struct pt_editor_studio *o,struct pt_editor *e)
 {
-    if(!o || !e || o->editor || o->song || o->invert_song || o->queue || e->before_change)return 0;
+    if(!o || !e || o->editor || o->song || o->invert_song || o->queue || e->before_change || e->change_ready)return 0;
     o->editor=e;pt_editor_change_guard(e,stop_guard,o);return 1;
 }
 void pt_editor_studio_detach(struct pt_editor_studio *o)

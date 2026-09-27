@@ -29,17 +29,54 @@ int pt_amigus_wavetable_cache_attach(struct pt_amigus_wavetable_cache *c,
     pt_cache_init(&c->cache,&c->arena,pt_amigus_sample_ram_allocate,pt_amigus_sample_ram_release,budget);
     return 1;
 }
+void pt_amigus_upload_cancel(struct pt_amigus_upload_job *j)
+{
+    if(!j)return;
+    pt_playback_upload_cancel(&j->upload);memset(j,0,sizeof(*j));
+}
+static int job_write(void *context,void *resource,size_t offset,const uint8_t *data,size_t bytes)
+{
+    struct pt_amigus_upload_job *j=context;
+    if(j->backend->reservation!=j->reservation || !pt_amigus_wavetable_cache_current(j->backend))return 0;
+    return pt_amigus_sample_ram_write(&j->backend->arena,resource,offset,data,bytes) &&
+        j->backend->reservation==j->reservation && pt_amigus_wavetable_cache_current(j->backend);
+}
+static enum pt_cache_result begin(struct pt_amigus_upload_job *j,struct pt_amigus_wavetable_cache *c,
+    const struct pt_pcm *p,uint32_t identity,uint64_t version,const struct pt_playback_format *f,
+    struct pt_cache_lease *out,unsigned prepared)
+{
+    enum pt_cache_result result;
+    if(!j || j->backend || j->upload.cache || !pt_amigus_wavetable_cache_current(c))return PT_CACHE_INVALID;
+    result=prepared?pt_playback_upload_begin_prepared(&j->upload,&c->cache,p,identity,version,f,j,job_write,out):
+        pt_playback_upload_begin(&j->upload,&c->cache,p,identity,version,f,j,job_write,out);
+    if(result==PT_CACHE_PENDING){j->backend=c;j->reservation=c->reservation;}
+    return result;
+}
+enum pt_cache_result pt_amigus_upload_begin(struct pt_amigus_upload_job *j,struct pt_amigus_wavetable_cache *c,
+    const struct pt_pcm *p,uint32_t identity,uint64_t version,const struct pt_playback_format *f,struct pt_cache_lease *out)
+{return begin(j,c,p,identity,version,f,out,0);}
+enum pt_cache_result pt_amigus_upload_begin_prepared(struct pt_amigus_upload_job *j,struct pt_amigus_wavetable_cache *c,
+    const struct pt_pcm *p,uint32_t identity,uint64_t version,const struct pt_playback_format *f,struct pt_cache_lease *out)
+{return begin(j,c,p,identity,version,f,out,1);}
+enum pt_cache_result pt_amigus_upload_step(struct pt_amigus_upload_job *j,uint8_t *staging,size_t capacity,struct pt_cache_lease *out)
+{
+    enum pt_cache_result result;
+    if(!j || !j->backend)return PT_CACHE_INVALID;
+    if(j->backend->reservation!=j->reservation || !pt_amigus_wavetable_cache_current(j->backend)) {
+        pt_amigus_upload_cancel(j);return PT_CACHE_INVALID;
+    }
+    if(capacity>PT_AMIGUS_RAM_WRITE_MAX)capacity=PT_AMIGUS_RAM_WRITE_MAX;
+    result=pt_playback_upload_step(&j->upload,staging,capacity,out);
+    if(result!=PT_CACHE_PENDING)memset(j,0,sizeof(*j));
+    return result;
+}
 static enum pt_cache_result acquire(struct pt_amigus_wavetable_cache *c,
     const struct pt_pcm *p,uint32_t identity,uint64_t version,const struct pt_playback_format *format,
     uint8_t *staging,size_t capacity,struct pt_cache_lease *lease,unsigned prepared)
 {
-    if(!c || !c->reservation || c->closing || !owns(c))return PT_CACHE_INVALID;
-    /* Cap work per bus callback while allowing a larger supplied staging buffer. */
-    if(capacity>PT_AMIGUS_RAM_WRITE_MAX)capacity=PT_AMIGUS_RAM_WRITE_MAX;
-    if(prepared)return pt_playback_pcm_upload_prepared(&c->cache,p,identity,version,format,staging,capacity,
-        &c->arena,pt_amigus_sample_ram_write,lease);
-    return pt_playback_pcm_upload_chunks(&c->cache,p,identity,version,format,staging,capacity,
-        &c->arena,pt_amigus_sample_ram_write,lease);
+    struct pt_amigus_upload_job job={0};enum pt_cache_result result=begin(&job,c,p,identity,version,format,lease,prepared);
+    while(result==PT_CACHE_PENDING)result=pt_amigus_upload_step(&job,staging,capacity,lease);
+    return result;
 }
 enum pt_cache_result pt_amigus_wavetable_cache_acquire(struct pt_amigus_wavetable_cache *c,
     const struct pt_pcm *p,uint32_t identity,uint64_t version,const struct pt_playback_format *f,

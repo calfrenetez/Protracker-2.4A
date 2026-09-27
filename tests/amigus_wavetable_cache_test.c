@@ -8,7 +8,7 @@ struct fixture {
     struct fake library;
     struct pt_amigus_reservation reservation;
     struct pt_amigus_wavetable_cache cache;
-    unsigned healthy,writes,fail;
+    unsigned healthy,writes,fail,lose;
     uint32_t address;
     uint8_t ram[128];
 };
@@ -28,6 +28,7 @@ static int bus_write(void *ctx,unsigned reg,uint32_t value)
         assert(reg==0x10 && !(f->address&3) && f->address<=124);
         for(i=0;i<4;++i)f->ram[f->address+i]=(uint8_t)(value>>(24-8*i));
     }
+    if(f->lose && f->lose==f->writes)f->healthy=0;
     return !f->fail || f->fail!=f->writes;
 }
 static void init(struct fixture *f,enum pt_amigus_resource resource)
@@ -154,12 +155,58 @@ static void prepared_refusal(struct fixture *f)
     assert(pt_amigus_wavetable_cache_unpin(&f->cache,a) && pt_amigus_wavetable_cache_detach(&f->cache));
     assert(pt_amigus_reservation_close(&f->reservation));
 }
+static void upload_job_fixture(struct fixture *f)
+{
+    struct pt_amigus_upload_job job={0};struct pt_cache_lease out={31,999},hit;
+    struct pt_playback_format format={8,0,0,1};struct pt_amigus_reservation copy;
+    int32_t data[5]={-128,-1,0,1,127};struct pt_pcm pcm={data,5,5,48000,1,8};
+    uint8_t staging[8];unsigned mode,step,writes;uint32_t address,bytes;enum pt_cache_result result;
+    const uint8_t expected[8]={128,255,0,1,127,0,0,0};
+    for(mode=0;mode<6;++mode) {
+        init(f,PT_AMIGUS_WAVETABLE);attached(f);
+        assert(pt_amigus_upload_begin(&job,&f->cache,&pcm,1,1,&format,&out)==PT_CACHE_PENDING && !f->writes);
+        for(step=0;step<mode;++step) {
+            assert(!pt_amigus_wavetable_cache_location(&f->cache,job.upload.lease,&address,&bytes));
+            assert(pt_amigus_upload_step(&job,staging,1,&out)==PT_CACHE_PENDING && out.serial==999);
+        }
+        pt_amigus_upload_cancel(&job);pt_amigus_upload_cancel(&job);
+        assert(!job.backend && !f->cache.cache.bytes && out.serial==999);
+        assert(pt_amigus_wavetable_cache_detach(&f->cache) && pt_amigus_reservation_close(&f->reservation));
+    }
+    for(mode=0;mode<6;++mode) {
+        init(f,PT_AMIGUS_WAVETABLE);attached(f);assert(pt_pcm_validate(&pcm)==PT_PCM_OK);
+        assert(pt_amigus_upload_begin_prepared(&job,&f->cache,&pcm,1,1,&format,&out)==PT_CACHE_PENDING);
+        assert(pt_amigus_upload_step(&job,staging,1,&out)==PT_CACHE_PENDING);writes=f->writes;
+        if(mode==1)f->healthy=0;
+        if(mode==2)assert(!pt_amigus_wavetable_cache_detach(&f->cache));
+        if(mode==3){copy=f->reservation;f->cache.reservation=&copy;}
+        if(mode==4)f->fail=2;
+        if(mode==5)f->lose=4; /* Ownership disappears on the final bus write. */
+        do{result=pt_amigus_upload_step(&job,staging,1,&out);}while(result==PT_CACHE_PENDING);
+        assert(!job.backend);
+        if(mode) {
+            assert(result==(mode>=4?PT_CACHE_TRANSFER:PT_CACHE_INVALID));
+            assert(out.serial==999 && !f->cache.cache.bytes);
+            if(mode<=3)assert(f->writes==writes);
+            f->cache.reservation=&f->reservation;
+        }else {
+            assert(result==PT_CACHE_LOAD && !memcmp(f->ram+16,expected,sizeof(expected)));
+            assert(pt_amigus_wavetable_cache_location(&f->cache,out,&address,&bytes) && bytes==6);
+            writes=f->writes;
+            assert(pt_amigus_upload_begin(&job,&f->cache,&pcm,1,1,&format,&hit)==PT_CACHE_HIT && !job.backend && f->writes==writes);
+            pt_amigus_upload_cancel(&job);assert(pt_amigus_wavetable_cache_unpin(&f->cache,hit));
+            assert(pt_amigus_wavetable_cache_unpin(&f->cache,out));out=(struct pt_cache_lease){31,999};
+        }
+        assert(pt_amigus_wavetable_cache_detach(&f->cache) && pt_amigus_reservation_close(&f->reservation));
+    }
+    puts("WAVETABLE UPLOAD JOB PASS: bounded steps, cancellation, unpublished leases, partial words, live ownership loss and hit transfer; injected only");
+}
 static int wavetable_fixture_main(void)
 {
     struct fixture *f=malloc(sizeof(*f));assert(f);assert(reservation_fixture_main()==0);
     refusal(f);
     for(prepared_cache_test=0;prepared_cache_test<2;++prepared_cache_test){lifetime(f);failure(f);}
-    prepared_cache_test=0;prepared_refusal(f);free(f);
+    prepared_cache_test=0;prepared_refusal(f);upload_job_fixture(f);free(f);
     puts("AMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only");return 0;
 }
 

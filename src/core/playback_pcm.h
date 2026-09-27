@@ -35,5 +35,33 @@ enum pt_cache_result pt_playback_pcm_upload_chunks(struct pt_sample_cache *,cons
     uint32_t identity,uint64_t version,const struct pt_playback_format *,
     uint8_t *staging,size_t capacity,void *context,
     int (*write)(void *,void *resource,size_t offset,const uint8_t *,size_t),struct pt_cache_lease *);
+#define PT_PLAYBACK_UPLOAD_CHUNK 256
+/* Incremental upload. Zero-initialize job; no copying/reinitializing while active.
+ * Begin validates complete PCM synchronously, copies descriptors and reserves a
+ * cache lease. LOAD returns PENDING with no packing/write/publication; HIT writes
+ * *out immediately and leaves job idle. Allocation/eviction remains synchronous.
+ * Step packs/writes at most min(capacity,256) bytes, rounded to whole output
+ * frames. PENDING leaves *out untouched; LOAD publishes/transfers the lease only
+ * after the final write. Failure cancels/releases the unpublished lease; another
+ * step then returns INVALID. Cancel is idempotent and never releases a previously
+ * transferred result lease. Neither begin nor step changes *out on failure.
+ * Caller MUST retain immutable master data AND its descriptor, cache and callback
+ * contexts through completion/cancel; this low-level job does not pin a master.
+ * Descriptor changes/invalidation refuse. Value edits are forbidden, not scanned
+ * every step. Staging must be disjoint from master, job and all metadata/outputs.
+ * Job fields are private to these functions; never publish/use its partial lease.
+ * Serialize operations; callbacks consume synchronously and must not reenter.
+ */
+struct pt_playback_upload_job {
+    struct pt_sample_cache *cache;const struct pt_pcm *source;struct pt_pcm pcm;
+    struct pt_playback_format format;struct pt_cache_lease lease;
+    size_t bytes,offset;void *context;
+    int (*write)(void *,void *,size_t,const uint8_t *,size_t);
+};
+enum pt_cache_result pt_playback_upload_begin(struct pt_playback_upload_job *,struct pt_sample_cache *,
+    const struct pt_pcm *,uint32_t identity,uint64_t version,const struct pt_playback_format *,
+    void *,int (*)(void *,void *,size_t,const uint8_t *,size_t),struct pt_cache_lease *);
+enum pt_cache_result pt_playback_upload_step(struct pt_playback_upload_job *,uint8_t *,size_t,struct pt_cache_lease *);
+void pt_playback_upload_cancel(struct pt_playback_upload_job *);
 void pt_playback_pcm_invalidate(struct pt_sample_cache *,uint32_t identity);
 #endif

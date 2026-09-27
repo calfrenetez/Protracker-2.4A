@@ -28,6 +28,20 @@ int pt_amigus_wavetable_cache_current(struct pt_amigus_wavetable_cache *);
 enum pt_cache_result pt_amigus_wavetable_cache_acquire(struct pt_amigus_wavetable_cache *,
     const struct pt_pcm *,uint32_t identity,uint64_t version,const struct pt_playback_format *,
     uint8_t *staging,size_t capacity,struct pt_cache_lease *);
+/* Incremental device upload. Same immutable-source/lifetime contract as the
+ * generic job; keep backend/reservation alive through finish/cancel. Begin has
+ * no bus writes; each step packs/writes at most256bytes. Captured reservation
+ * identity and live ownership are checked before every step; write callbacks
+ * retain their per-word ownership checks. Detach remains busy while unpublished
+ * leases are held; cancellation permits cleanup. No device voices start here. */
+struct pt_amigus_upload_job {
+    struct pt_amigus_wavetable_cache *backend;struct pt_amigus_reservation *reservation;
+    struct pt_playback_upload_job upload;
+};
+enum pt_cache_result pt_amigus_upload_begin(struct pt_amigus_upload_job *,struct pt_amigus_wavetable_cache *,
+    const struct pt_pcm *,uint32_t,uint64_t,const struct pt_playback_format *,struct pt_cache_lease *);
+enum pt_cache_result pt_amigus_upload_step(struct pt_amigus_upload_job *,uint8_t *,size_t,struct pt_cache_lease *);
+void pt_amigus_upload_cancel(struct pt_amigus_upload_job *);
 int pt_amigus_wavetable_cache_location(struct pt_amigus_wavetable_cache *,struct pt_cache_lease,
     uint32_t *address,uint32_t *bytes);
 /* Unpin only after the corresponding voice/transfer has definitively stopped.

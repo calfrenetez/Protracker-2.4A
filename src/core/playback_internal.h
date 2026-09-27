@@ -14,4 +14,11 @@ enum pt_cache_result pt_playback_pcm_upload_prepared(struct pt_sample_cache *,co
     int (*)(void *,void *,size_t,const uint8_t *,size_t),struct pt_cache_lease *);
 enum pt_cache_result pt_amigus_wavetable_cache_acquire_prepared(struct pt_amigus_wavetable_cache *,
     const struct pt_pcm *,uint32_t,uint64_t,const struct pt_playback_format *,uint8_t *,size_t,struct pt_cache_lease *);
+/* Same job contract as public begin, but only for already-validated immutable
+ * PCM retained by its exact prepared master pin until completion/cancel. */
+enum pt_cache_result pt_playback_upload_begin_prepared(struct pt_playback_upload_job *,struct pt_sample_cache *,
+    const struct pt_pcm *,uint32_t,uint64_t,const struct pt_playback_format *,void *,
+    int (*)(void *,void *,size_t,const uint8_t *,size_t),struct pt_cache_lease *);
+enum pt_cache_result pt_amigus_upload_begin_prepared(struct pt_amigus_upload_job *,struct pt_amigus_wavetable_cache *,
+    const struct pt_pcm *,uint32_t,uint64_t,const struct pt_playback_format *,struct pt_cache_lease *);
 #endif

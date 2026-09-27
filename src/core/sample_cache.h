@@ -13,7 +13,7 @@ struct pt_sample_cache {
     void *context;void *(*allocate)(void *,size_t);void (*release)(void *,void *,size_t);
     size_t bytes,budget;uint64_t clock;
 };
-enum pt_cache_result {PT_CACHE_HIT,PT_CACHE_LOAD,PT_CACHE_CAPACITY,PT_CACHE_BUSY,PT_CACHE_INVALID,PT_CACHE_TRANSFER};
+enum pt_cache_result {PT_CACHE_HIT,PT_CACHE_LOAD,PT_CACHE_CAPACITY,PT_CACHE_BUSY,PT_CACHE_INVALID,PT_CACHE_TRANSFER,PT_CACHE_PENDING};
 /* Single-owner control API; no allocation, eviction or release in an interrupt.
  * key identifies sample plus representation settings. version identifies master
  * revision. LOAD storage is unpublished and pinned: fill/upload, then publish.

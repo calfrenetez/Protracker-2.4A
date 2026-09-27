@@ -2019,6 +2019,36 @@ and range tests show no project or PCM value-validator calls during dispatch.
 
 Initial validation/preparation and allocations remain synchronous. A first-use
 upload still processes the whole sample with bounded staging/write chunks; this
-is not a total-time bound or a physical performance result. Resumable uploads,
-native PLAY/clock/card transport and physical acceptance remain unfinished.
+is not a total-time bound or a physical performance result. Song/editor scheduling
+of the incremental jobs below, native PLAY/clock/card transport and physical
+acceptance remain unfinished.
 Evidence: `evidence/enhanced-editor/wavetable-prepared-conversion/`.
+
+### Incremental playback-cache upload jobs
+
+The PCM upload layer and AmiGUS cache adapter now expose begin/step/cancel jobs.
+Begin validates arbitrary PCM (or uses the private prepared-pin contract), copies
+its descriptor/format, and takes a cache lease without packing or bus writes.
+An existing valid cache hit transfers its lease immediately. A new allocation
+returns PENDING and remains unpublished and pinned until completion or cancellation.
+Each step converts/writes at most256bytes, limited further by supplied staging and
+rounded to complete output frames. Only the final successful write publishes and
+transfers the cache lease. Cancel/failure releases partial resources and preserves
+caller output leases. Older active representations retain their independent pins.
+
+Each step checks source descriptor identity and the unpublished cache lease.
+The AmiGUS adapter additionally checks the captured reservation and live ownership
+before each step and before/after each write, including the final write. Detach
+cannot free an in-flight lease; cancellation makes cleanup possible. Small steps
+retain partial device-word assembly safely until the word or final pad completes.
+No pending handle can authorize a playback address or a cache hit.
+
+These low-level jobs borrow source storage and its descriptor: the caller must
+keep the immutable master/version pinned through completion/cancel. They do not
+acquire a sampler master themselves. Existing synchronous APIs drive the same jobs
+to completion and the prepared sampler path retains its source pin throughout.
+Song/editor dispatch still calls these synchronous wrappers; scheduling incremental
+jobs and retaining source pins across editor turns is the next integration step.
+Initial public validation, cache eviction/allocation and synchronous driver callback
+latency remain outside the per-step byte bound. This is not physical timing proof.
+Evidence: `evidence/enhanced-editor/incremental-cache-upload/`.

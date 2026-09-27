@@ -4,12 +4,16 @@
 #include "sampler_wavetable_internal.h"
 #include "../core/render_lookahead.h"
 #include "../core/elapsed_clock.h"
+#include "../core/amigus_render_voice.h"
 #include <string.h>
 struct pt_wavetable_song {
     struct pt_allocator allocator;struct pt_wavetable_voices *voices;
     struct pt_wavetable_prepared sources;
     struct pt_sampler_upload_job upload;struct pt_render_lookahead ahead;unsigned forecast;
     struct pt_cache_lease lease[PT_RENDER_ACTIONS];
+    struct pt_amigus_voice_plan trigger_plan[PT_RENDER_ACTIONS];
+    uint32_t trigger_address[PT_RENDER_ACTIONS],trigger_bytes[PT_RENDER_ACTIONS];
+    unsigned plan_at,plan_lease;
     unsigned slot[PT_RENDER_ACTIONS],held[PT_RENDER_ACTIONS],batch_count,batch_at,uploading,next_stage;
     struct pt_wavetable_preflight *preflight;struct pt_wavetable_preflight_report report;
     struct pt_render_sequence *sequence;struct pt_render_plan plan;struct pt_render_snapshot resume;
@@ -30,7 +34,7 @@ static void cancel_batch(struct pt_wavetable_song *s)
     for(i=0;i<s->batch_count;++i)if(s->held[i]) {
         pt_cache_unpin(&s->backend->cache,s->lease[i]);s->held[i]=0;
     }
-    s->batch_count=s->batch_at=s->uploading=0;
+    s->batch_count=s->batch_at=s->uploading=s->plan_at=s->plan_lease=0;
 }
 static void release_sources(struct pt_wavetable_song *s)
 {
@@ -111,6 +115,22 @@ static int source_location(void *context,struct pt_cache_lease lease,uint32_t *a
        cache->entry[lease.slot].version!=s->version)return 0;
     return pt_amigus_wavetable_cache_location(s->backend,lease,address,bytes);
 }
+static int source_trigger_plan(void *context,const struct pt_render_action *action,unsigned rate,
+    const struct pt_playback_format *format,uint32_t address,uint32_t bytes,struct pt_amigus_voice_plan *out)
+{
+    struct pt_wavetable_song *s=context;unsigned i;
+    if(!s || !out || !format || s->uploading!=2 || s->plan_at!=s->plan.count ||
+       rate!=s->rate || format->bits!=s->format.bits || format->channel!=s->format.channel ||
+       format->little_endian!=s->format.little_endian || format->word_pad!=s->format.word_pad)return 0;
+    /* Only the private, immutable forecast may use these derived commands.
+       The caller has just revalidated its exact master and live cache lease
+       via source_location; no external callback intervenes before this copy. */
+    for(i=0;i<s->plan.count;++i)if(action==&s->plan.action[i]) {
+        if(action->kind!=PT_RENDER_TRIGGER || address!=s->trigger_address[i] || bytes!=s->trigger_bytes[i])return 0;
+        *out=s->trigger_plan[i];return 1;
+    }
+    return 0;
+}
 enum pt_wavetable_song_result pt_wavetable_song_begin(struct pt_wavetable_voices *v,
     const struct pt_render_options *o,const struct pt_playback_format *f,const struct pt_allocator *a,
     struct pt_wavetable_preflight_report *report,struct pt_wavetable_song **out)
@@ -131,7 +151,7 @@ enum pt_wavetable_song_result pt_wavetable_song_begin(struct pt_wavetable_voices
     s->sampler=v->bridge->sampler;s->project=v->bridge->project;s->generation=s->sampler->generation;
     s->bridge=v->bridge;s->backend=s->bridge->backend;s->reservation=s->backend->reservation;
     s->version=v->bridge->version;memcpy(&s->snapshot,s->project,sizeof(s->snapshot));
-    s->sources=(struct pt_wavetable_prepared){s,source_current,source_acquire,source_location};
+    s->sources=(struct pt_wavetable_prepared){s,source_current,source_acquire,source_location,source_trigger_plan};
     v->song_owner=s;*out=s;return PT_WAVETABLE_SONG_PREPARING;
 }
 enum pt_wavetable_song_result pt_wavetable_song_prepare(struct pt_wavetable_song *s,
@@ -181,7 +201,7 @@ static int batch_begin(struct pt_wavetable_song *s,unsigned restore)
 {
     unsigned i,slot,n=restore?s->resume.channels:s->plan.count;
     if(n>PT_RENDER_ACTIONS || (restore && n>16))return 0;
-    s->uploading=restore?1:2;
+    s->uploading=restore?1:2;s->plan_at=s->plan_lease=0;
     for(i=0;i<n;++i) {
         const struct pt_pcm *pcm;
         if(restore){if(!s->resume.voice[i].active)continue;pcm=s->resume.voice[i].pcm;}
@@ -192,7 +212,8 @@ static int batch_begin(struct pt_wavetable_song *s,unsigned restore)
     }
     return 1;
 }
-/* One allocation/cache hit OR <=256-byte upload per call. READY is returned on
+/* One allocation/cache hit, <=256-byte upload OR trigger conversion per call.
+   READY is returned on
    a later call after the last acquisition: no device callback shares an upload
    step. Recheck EVERY prepared descriptor/address before the first callback. */
 static int batch_step(struct pt_wavetable_song *s)
@@ -205,6 +226,21 @@ static int batch_step(struct pt_wavetable_song *s)
         if(r==PT_CACHE_LOAD || r==PT_CACHE_HIT){s->held[i]=1;++s->batch_at;}
         else if(r!=PT_CACHE_PENDING)return -1;
         return 0;
+    }
+    if(s->uploading==2 && s->plan_at<s->plan.count) {
+        uint32_t address,bytes;
+        /* At most one trigger conversion per call, after all uploads. Skip the
+           fixed-capacity non-trigger actions without dispatching anything. */
+        while(s->plan_at<s->plan.count && s->plan.action[s->plan_at].kind!=PT_RENDER_TRIGGER)++s->plan_at;
+        if(s->plan_at<s->plan.count) {
+            i=s->plan_at;
+            if(s->plan_lease>=s->batch_count || !s->held[s->plan_lease] ||
+               !source_location(s,s->lease[s->plan_lease],&address,&bytes) ||
+               !pt_amigus_render_voice(&s->plan.action[i].voice,s->rate,s->plan.action[i].gain,
+                   &s->format,address,bytes,&s->trigger_plan[i]))return -1;
+            s->trigger_address[i]=address;s->trigger_bytes[i]=bytes;
+            ++s->plan_at;++s->plan_lease;return 0;
+        }
     }
     for(i=0;i<s->batch_count;++i) {
         struct pt_pcm pcm;struct pt_sample_version *pin;uint32_t address,bytes;

@@ -562,7 +562,7 @@ static void uploading_song_fixture(void)
         }while(result==PT_WAVETABLE_SONG_UPLOADING);
         }
         if(mode==0 || mode>=8) {
-            assert(result==PT_WAVETABLE_SONG_OK && step==10 && bus->starts==3 && pins(f)==3);
+            assert(result==PT_WAVETABLE_SONG_OK && step==13 && bus->starts==3 && pins(f)==3);
             assert(f->writes==600 && !memcmp(d.project.samples[0].pcm.data,data,sizeof(data)));
             if(mode==8) {
                 assert(pt_wavetable_song_next_step(song,&span)==PT_WAVETABLE_SONG_OK && span.frames);

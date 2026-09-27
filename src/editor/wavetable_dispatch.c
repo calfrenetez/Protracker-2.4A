@@ -36,7 +36,8 @@ static int trigger(struct pt_wavetable_voices *v,const struct pt_render_action *
     result=source_acquire(v,sources,slot,f,staging,capacity,&lease);
     if(result!=PT_CACHE_LOAD && result!=PT_CACHE_HIT)return 0;
     if(!source_location(v,sources,lease,&address,&bytes) ||
-       !pt_amigus_render_voice(&a->voice,rate,a->gain,f,address,bytes,&p) ||
+       !(sources?sources->trigger_plan && sources->trigger_plan(sources->context,a,rate,f,address,bytes,&p):
+            pt_amigus_render_voice(&a->voice,rate,a->gain,f,address,bytes,&p)) ||
        pt_wavetable_voices_stop(v,a->channel)!=1) {
         pt_sampler_wavetable_unpin(v->bridge,lease);return 0;
     }

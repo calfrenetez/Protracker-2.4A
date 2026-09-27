@@ -188,7 +188,9 @@ def main():
                           command+' >test.log','Echo $RC >test.rc',command+' >repeat.log','Echo $RC >repeat.rc']
             commands+=['Echo done >'+guest.device+run.name+'/done']
             guest.launch.write_text('\n'.join(commands)+'\n');guest.start()
-            deadline=time.monotonic()+(120 if args.invert_editor or args.invert_session or args.invert_sampler else 60 if args.invert_render or args.invert_bounce else 240 if args.invert_stem_cli else 180 if args.invert_cli else 90)
+            # The cumulative editor-wavetable fixture includes native timer and
+            # cancellation diagnostics; its process budget is not an audio deadline.
+            deadline=time.monotonic()+(120 if args.studio_memory=='editor-wavetable' or args.invert_editor or args.invert_session or args.invert_sampler else 60 if args.invert_render or args.invert_bounce else 240 if args.invert_stem_cli else 180 if args.invert_cli else 90)
             while not (run/'done').exists():
                 if time.monotonic()>deadline:raise RuntimeError('Native file checks timed out; preserve owned run for recovery')
                 time.sleep(.2)

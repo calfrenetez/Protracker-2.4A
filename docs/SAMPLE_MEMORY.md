@@ -2383,3 +2383,33 @@ included. Commit allocated/uploaded nothing and all leases were released. These
 observations show that readiness and an exact service timestamp do not establish
 a bounded realtime dispatch. They do not qualify physical performance or permit
 late callbacks. Evidence: `evidence/enhanced-editor/native-cost/`.
+
+
+### Bounded trigger-command preparation
+
+Prepared song batches now calculate each absolute 8/16-bit trigger command after
+all cache acquisitions/uploads finish, with at most one trigger conversion per
+preparation call. The fixed-capacity command bank belongs to the bounded song
+allocation. Repeated readiness does not recalculate commands. Cancellation clears
+its validity together with batch ownership; no command can outlive the song.
+
+Dispatch accepts only the exact private action, rate/format and captured cache
+address/byte length, after the existing master/version/cache checks. It copies
+the prepared trigger command instead of lowering that trigger again. Whole-batch
+capability validation still runs before the first callback, and uncertain-start,
+confirmed-stop and lease rollback behavior is retained. Public manual dispatch,
+range restoration and control-command calculation keep their existing paths.
+
+Host converter instrumentation checks one conversion per preparation step and
+no repeated-ready conversions. For three simultaneous triggers, the commit keeps
+three whole-batch validation conversions instead of the previous six total.
+This is a bounded preparation change, not removal of all commit-time arithmetic
+or native realtime qualification. Native enhanced/card PLAY remains disabled.
+
+The revised candidate passed host sanitizers, staged editor lifecycle tests and
+shared030 execution within the separately coordinated120second cumulative suite
+window, with1241Fast allocations and zero final ownership. An earlier90second
+suite timeout and late RC0 completion are preserved separately with guarded
+recovery evidence. The process-budget change does not alter playback deadlines.
+Timing observations remain variable and do not prove a speedup or realtime budget.
+Evidence: `evidence/enhanced-editor/prepared-trigger/` and `prepared-trigger-timeout/`.

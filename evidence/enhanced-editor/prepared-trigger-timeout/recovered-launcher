@@ -1,0 +1,6 @@
+FailAt 21
+Stack 65536
+CD Dev:Tests/render-files-1790507331337658000/editor-wavetable
+PTExecEditorWavetableTest Dev:Tests/render-files-1790507331337658000/editor-wavetable >test.log
+Echo $RC >test.rc
+Echo done >Dev:Tests/render-files-1790507331337658000/done

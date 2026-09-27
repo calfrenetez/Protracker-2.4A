@@ -14,6 +14,10 @@ struct pt_wavetable_prepared {
     int (*current)(void *);
     enum pt_cache_result (*acquire)(void *,unsigned,const struct pt_playback_format *,uint8_t *,size_t,struct pt_cache_lease *);
     int (*location)(void *,struct pt_cache_lease,uint32_t *,uint32_t *);
+    /* Exact private action, rate/format and pinned location must still match.
+       Geometry is computed during bounded preparation, never on this callback. */
+    int (*trigger_plan)(void *,const struct pt_render_action *,unsigned,const struct pt_playback_format *,
+        uint32_t,uint32_t,struct pt_amigus_voice_plan *);
 };
 int pt_wavetable_dispatch_prepared(struct pt_wavetable_voices *,uint64_t,unsigned,
     const struct pt_render_plan *,const struct pt_playback_format *,uint8_t *,size_t,const struct pt_wavetable_prepared *);

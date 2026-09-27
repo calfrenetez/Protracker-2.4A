@@ -67,10 +67,14 @@ enum pt_wavetable_song_result pt_wavetable_song_consume(struct pt_wavetable_song
 enum pt_wavetable_song_result pt_wavetable_song_complete(struct pt_wavetable_song *);
 /* Yielding alternatives to next/complete. Repeat the SAME operation while it
  * returns UPLOADING. Each call begins one selected cache acquisition OR uploads
- * <=256bytes OR commits an entirely acquired batch. No voice callbacks before all
+ * <=256bytes OR validates/converts one ordinary trigger/control/stop command
+ * OR commits an entirely prepared batch. No voice callbacks before all
  * required leases/descriptors/addresses pass. No following interval/consume can
  * advance while uploading; next output stays unchanged. Calling the other step
  * while pending returns UPLOADING without work. Cancel via close/Stop/edit barrier.
+ * Prepared ordinary batches reuse immutable geometry/control values while
+ * checking the whole live source/channel/held-state transition before callbacks.
+ * Range restoration still converts synchronously at commit.
  * Initial allocation and final bounded action batch/callbacks remain synchronous;
  * this is not real-time scheduling. Existing next/complete drive matching steps
  * synchronously. Values/project remain immutable and owner-thread serialized. */

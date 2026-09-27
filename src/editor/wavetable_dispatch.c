@@ -22,7 +22,8 @@ static int control(struct pt_wavetable_voices *v,const struct pt_render_action *
     struct pt_wavetable_voice *voice=v->voice+a->channel;
     uint32_t frequency,address,bytes;uint16_t left,right;
     if(!voice->held || voice->uncertain || !source_location(v,sources,voice->lease,&address,&bytes) ||
-       !pt_amigus_render_control(a->voice.step,rate,a->gain,&frequency,&left,&right))return 0;
+       !(sources?sources->control_plan && sources->control_plan(sources->context,a,rate,&frequency,&left,&right):
+            pt_amigus_render_control(a->voice.step,rate,a->gain,&frequency,&left,&right)))return 0;
     if(v->api.control(v->api.context,a->channel,frequency,left,right)==1)return 1;
     voice->uncertain=1;return 0;
 }
@@ -54,7 +55,7 @@ static int valid_format(const struct pt_playback_format *f)
  * The tentative held mask changes only after the entire batch is accepted. */
 static enum pt_wavetable_capability check_plan(const struct pt_project *p,unsigned rate,
     const struct pt_render_plan *plan,const struct pt_playback_format *format,unsigned controls,
-    uint16_t *held_state,unsigned *action,uint8_t *samples)
+    uint16_t *held_state,unsigned *action,uint8_t *samples,unsigned converted)
 {
     unsigned i,slot;uint16_t held=*held_state;uint32_t frequency;uint16_t left,right;
     struct pt_amigus_voice_plan prepared;
@@ -68,13 +69,13 @@ static enum pt_wavetable_capability check_plan(const struct pt_project *p,unsign
             uint64_t size;
             if(!resolve(p,a->voice.pcm,&slot))return PT_WAVETABLE_SOURCE;
             size=(uint64_t)p->samples[slot].pcm.frames*(format->bits/8);
-            if(size>UINT32_MAX || !pt_amigus_render_voice(&a->voice,rate,a->gain,format,0,(uint32_t)size,&prepared))return PT_WAVETABLE_GEOMETRY;
+            if(size>UINT32_MAX || (!converted && !pt_amigus_render_voice(&a->voice,rate,a->gain,format,0,(uint32_t)size,&prepared)))return PT_WAVETABLE_GEOMETRY;
             if(samples)samples[slot]=1;
             held|=(uint16_t)(1U<<a->channel);break;
         }
         case PT_RENDER_CONTROL:
             if(!controls || !(held&(1U<<a->channel)) ||
-               !pt_amigus_render_control(a->voice.step,rate,a->gain,&frequency,&left,&right))return PT_WAVETABLE_CONTROL;
+               (!converted && !pt_amigus_render_control(a->voice.step,rate,a->gain,&frequency,&left,&right)))return PT_WAVETABLE_CONTROL;
             break;
         case PT_RENDER_STOP:held&=(uint16_t)~(1U<<a->channel);break;
         default:return PT_WAVETABLE_OPERATION;
@@ -160,7 +161,7 @@ enum pt_wavetable_capability pt_wavetable_preflight_step(struct pt_wavetable_pre
         r->render_result=pt_render_sequence_complete(w->sequence,&w->plan);
         if(r->render_result!=PT_RENDER_OK)break;
         r->result=check_plan(w->project,w->options.rate,&w->plan,&w->format,w->controls,&w->held,&r->action,
-            w->range && !w->restored?NULL:r->samples);
+            w->range && !w->restored?NULL:r->samples,0);
         if(r->result!=PT_WAVETABLE_COMPATIBLE) {
             if(r->action<w->plan.count){r->channel=w->plan.action[r->action].channel;r->kind=w->plan.action[r->action].kind;}
         }else if(!w->interval.end){r->result=PT_WAVETABLE_PENDING;w->phase=1;}
@@ -226,7 +227,10 @@ static int dispatch(struct pt_wavetable_voices *v,uint64_t version,unsigned rate
     if(!v || !v->bridge || v->closing || !plan || plan->count>PT_RENDER_ACTIONS || !format ||
        (rate!=44100 && rate!=48000) || !source_current(v,sources) || v->bridge->version!=version)return 0;
     for(i=0;i<PT_WAVETABLE_VOICES;++i)if(v->voice[i].held && !v->voice[i].uncertain)held|=(uint16_t)(1U<<i);
-    if(check_plan(v->bridge->project,rate,plan,format,v->api.control!=NULL,&held,&action,NULL)!=PT_WAVETABLE_COMPATIBLE)return 0;
+    /* Private preparation validated immutable command values. Still recheck the
+       entire live channel/source/held-state transition before ANY callback. */
+    if(sources && (!sources->batch_ready || !sources->batch_ready(sources->context,plan,rate,format)))return 0;
+    if(check_plan(v->bridge->project,rate,plan,format,v->api.control!=NULL,&held,&action,NULL,sources!=NULL)!=PT_WAVETABLE_COMPATIBLE)return 0;
     for(i=0;i<plan->count;++i) {
         const struct pt_render_action *a=plan->action+i;int ok;
         if(a->kind==PT_RENDER_TRIGGER)ok=trigger(v,a,rate,format,staging,capacity,sources);

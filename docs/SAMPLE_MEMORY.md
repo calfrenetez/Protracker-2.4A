@@ -2413,3 +2413,33 @@ suite timeout and late RC0 completion are preserved separately with guarded
 recovery evidence. The process-budget change does not alter playback deadlines.
 Timing observations remain variable and do not prove a speedup or realtime budget.
 Evidence: `evidence/enhanced-editor/prepared-trigger/` and `prepared-trigger-timeout/`.
+
+
+### Prepared ordinary command batches
+
+The private song command bank now covers triggers, controls and stops. Each
+preparation call validates one immutable command and computes its trigger geometry
+or control rate/gains, after all selected cache uploads finish. Readiness identifies
+the exact private batch, rate and format; cancellation invalidates the bank. No
+public caller can opt into the prepared path. Public manual dispatch and silent
+whole-song capability analysis retain full conversion validation.
+
+At commit, ordinary prepared batches no longer repeat trigger/control conversion.
+They still validate the entire live channel/source/held-state transition before
+any output callback, then recheck the master/cache/address and uncertain-voice
+ownership at each operation. A control whose voice became uncertain, or whose
+control callback disappeared after preparation, refuses the whole batch before
+any earlier valid control is sent. Failed stop retains its cache/master lease.
+Range restoration retains its separate, still-synchronous conversion path.
+
+Host instrumentation verifies at most one conversion per preparation step and
+zero conversions at ordinary startup/control commit, with8/16-bit derived plans,
+pitch-change parity, repeated readiness, duplicate leases, stale-source refusal,
+cancellation and changed active-state tests. Preparing commands does not establish
+native realtime deadlines or enable native audio/card output.
+
+The ordinary-bank follow-up passed host sanitizers, staged editor lifecycle tests,
+native build/main syntax and shared030 execution (RC0,1255Fast allocations, zero
+owned bytes, all DMA off and exact cleanup). Source/ownership checks still dominate
+substantial synchronous work; measured startup costs remain variable. This does
+not qualify realtime playback. Evidence: `evidence/enhanced-editor/prepared-batch/`.

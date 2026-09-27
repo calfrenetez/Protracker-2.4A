@@ -28,7 +28,7 @@ def main():
     group.add_argument('--sample-raw',action='store_true',help='Run streamed master RAW export with native Fast allocator')
     group.add_argument('--sample-wav',action='store_true',help='Run streamed master WAV export with native Fast allocator')
     group.add_argument('--amigus-discovery',action='store_true',help='Discovery-only native library probe; no reservation or MMIO')
-    group.add_argument('--studio-memory',choices=['mixer','sampler','song','editor','queued','consumer','fifo','session','register-session','reserved-session','sample-ram','wavetable-cache','sampler-wavetable'],help='Run one production-allocator Studio fixture')
+    group.add_argument('--studio-memory',choices=['mixer','sampler','song','editor','queued','consumer','fifo','session','register-session','reserved-session','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices'],help='Run one production-allocator Studio fixture')
     group.add_argument('--input-memory',choices=['import','recent','exec-import','exec-recent'],help='Run one import or recent-file memory fixture')
     group.add_argument('--exec-memory',choices=['bounce','stems','failures','save'],help='Run one native Exec-backed memory fixture')
     group.add_argument('--stems-only',action='store_true',help='Run the allocated stem export test only')
@@ -70,6 +70,7 @@ def main():
         if args.studio_memory:
             cases=[{'mixer':('studio','PTExecStudioTest','STUDIO MIX PASS:'),
                     'sampler':('sampler-studio','PTExecSamplerStudioTest','SAMPLER STUDIO PASS:'),
+                    'wavetable-voices':('wavetable-voices','PTExecWavetableVoicesTest','WAVETABLE VOICES PASS:'),
                     'sampler-wavetable':('sampler-wavetable','PTExecSamplerWavetableTest','SAMPLER WAVETABLE PASS:'),
                     'wavetable-cache':('wavetable-cache','PTExecAmiGusWavetableCacheTest','AMIGUS WAVETABLE OWNER PASS:'),
                     'sample-ram':('sample-ram','PTExecAmiGusSampleRamTest','AMIGUS SAMPLE RAM PASS:'),
@@ -248,7 +249,7 @@ def main():
                 result['donor_unchanged']=True
             result['passed']=True
         finally:
-            if finished and (args.studio_memory in ('sample-ram','wavetable-cache','sampler-wavetable') or args.invert_editor or args.invert_sampler or args.invert_session or args.source_memory or args.sample_dispatch or args.invert_render or args.invert_bounce or args.invert_cli or args.invert_stem_cli):
+            if finished and (args.studio_memory in ('sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices') or args.invert_editor or args.invert_sampler or args.invert_session or args.source_memory or args.sample_dispatch or args.invert_render or args.invert_bounce or args.invert_cli or args.invert_stem_cli):
                 state=guest.command('GET_AUDIO_STATE')
                 finished=all('ch%d_dma=0'%i in state.split('\t') for i in range(4))
                 result['cleanup_audio']=state

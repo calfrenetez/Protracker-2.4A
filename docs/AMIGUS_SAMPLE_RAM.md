@@ -162,3 +162,47 @@ zero final owned bytes, and budget refusal without Chip fallback. Completion,
 all four DMA off, exact cleanup and explicit release were verified. No timeout,
 retry or reset was needed. Native evidence still uses a fake library/bus and
 does not establish card upload, voice stop, audible playback or physical timing.
+
+## Bounded voice lease ownership
+
+`src/editor/wavetable_voices.c` owns up to16 software voice slots around the
+sampler bridge. The injected start/stop interface is a driver contract, not
+native voice programming. Bind to an exclusive bridge with no outstanding
+leases, and exclusively owned, initially stopped voice IDs. The owner and all
+borrowed contexts must remain alive until close succeeds. Calls run on one
+serial control thread; callbacks must not reenter or edit the sampler.
+
+Retrigger first acquires a current representation. If allocation/upload fails,
+the old voice remains playing with its lease. Once a candidate exists, the
+owner attempts the old voice's stop once. Pending or failed stop keeps the old
+lease and releases only the unstarted candidate. Nothing is queued: a later
+explicit trigger retries against the current master. After confirmed stop, the
+bridge validates the candidate's revision/address again before start.
+
+The owner records its pin before invoking start. Only return1 confirms start;
+any other start result is uncertain and retains the pin until an explicit,
+confirmed stop. A stop callback may return1 only after that voice can no longer
+read sample RAM. Sending a stop command alone is insufficient. Pending/failed
+stops never free a voice's sample. Lost cache ownership blocks new triggers but
+does not discard existing voice pins; safe stop recovery remains the injected
+driver's responsibility.
+
+Close blocks new triggers and attempts each held voice once per call. It retains
+the bridge and reservation access while any stop remains pending/failed. After
+all stops are confirmed, it detaches the bridge; the reservation's outer owner
+then closes the library. No polling loop, automatic restart, forced cleanup or
+assumed physical stop acknowledgement is hidden in this API.
+
+The host fixture tests16 simultaneous leases sharing one copy, same-sample
+retrigger, edited/retired copies under allocation pressure, pending/failed stops,
+retry after undo, uncertain starts, lost ownership and bounded repeated close.
+Enhanced saves preserve exact24-bit master bytes. This is software lifetime
+coverage; pitch/loop/volume commands, native voice register dispatch, actual
+stop acknowledgement and real card capacity remain integration requirements.
+
+This voice owner passes host ASan/UBSan and shared030 run
+`render-files-1790475253667152000` (RC0 within90s). The native fixture uses40 Fast
+allocations with zero final owned bytes and budget refusal without Chip fallback.
+Completion, all4DMAoff, exact owned cleanup and explicit release were verified.
+See `evidence/enhanced-editor/wavetable-voices/`. The native editor still does not
+instantiate this owner or an AmiGUS output adapter.

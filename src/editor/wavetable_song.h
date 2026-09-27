@@ -31,9 +31,11 @@ enum pt_wavetable_song_result pt_wavetable_song_open(struct pt_wavetable_voices 
 /* Begin claims the idle owner and returns PREPARING with a published handle.
  * Next/consume/complete return PREPARING without output until prepare returns OK.
  * Each prepare validates current generation/header/bridge, then performs one
- * analysis step, promotes at most one selected source AFTER full capability
- * success, or transfers the audited sequence without remeasurement. Static input
- * validation/sync at begin, source copies and metadata resets remain synchronous: no hard
+ * analysis step, reserves one selected master or copies at most 4096 PCM/marker
+ * bytes AFTER full capability success, or transfers the audited sequence without
+ * remeasurement. Partial masters remain unpublished and cancel releases their
+ * reservation; complete versions publish atomically. Static input validation/sync
+ * at begin, allocator calls and metadata resets remain synchronous: no hard
  * latency guarantee. The ownership predicate is called; no uploads/voice callbacks during preparation.
  * Close cancels pending/failed preparation and leaves the idle voice owner/bridge
  * bound for caller reuse/close (outer reservation retained). Failure poisons the

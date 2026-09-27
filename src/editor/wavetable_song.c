@@ -1,10 +1,11 @@
 #include "wavetable_song.h"
+#include "sampler_internal.h"
 #include <string.h>
 struct pt_wavetable_song {
     struct pt_allocator allocator;struct pt_wavetable_voices *voices;
     struct pt_wavetable_preflight *preflight;struct pt_wavetable_preflight_report report;
     struct pt_render_sequence *sequence;struct pt_render_plan plan;struct pt_render_snapshot resume;
-    struct pt_sample_version *pin[PT_PROJECT_SAMPLES];
+    struct pt_sample_version *pin[PT_PROJECT_SAMPLES];struct pt_sampler_pin_job promotion;
     struct pt_project snapshot;struct pt_sampler *sampler;struct pt_project *project;
     struct pt_sampler_wavetable *bridge;struct pt_amigus_wavetable_cache *backend;
     struct pt_amigus_reservation *reservation;
@@ -15,6 +16,7 @@ struct pt_wavetable_song {
 static void release_sources(struct pt_wavetable_song *s)
 {
     unsigned i;
+    pt_sampler_pin_job_cancel(&s->promotion);
     pt_wavetable_preflight_close(&s->preflight);
     pt_render_sequence_close(s->sequence);s->sequence=NULL;
     for(i=0;i<PT_PROJECT_SAMPLES;++i){pt_sampler_unpin(s->pin[i]);s->pin[i]=NULL;}
@@ -95,12 +97,17 @@ enum pt_wavetable_song_result pt_wavetable_song_prepare(struct pt_wavetable_song
         return PT_WAVETABLE_SONG_PREPARING;
     }
     while(s->pin_slot<s->project->sample_count) {
-        unsigned slot=s->pin_slot++;
+        unsigned slot=s->pin_slot;
         if(s->report.samples[slot]) {
-            struct pt_pcm pcm;enum pt_edit_result edit=pt_sampler_pin(s->sampler,s->project,slot,s->generation,&pcm,&s->pin[slot]);
+            struct pt_pcm pcm;unsigned ready=0;enum pt_edit_result edit;
+            if(!s->promotion.value)
+                edit=pt_sampler_pin_job_begin(&s->promotion,s->sampler,s->project,slot,s->generation);
+            else edit=pt_sampler_pin_job_step(&s->promotion,PT_SAMPLER_PIN_CHUNK,&pcm,&s->pin[slot],&ready);
             if(edit!=PT_EDIT_OK)return fail(s,edit==PT_EDIT_CAPACITY?PT_WAVETABLE_SONG_MEMORY:PT_WAVETABLE_SONG_STALE);
-            return PT_WAVETABLE_SONG_PREPARING; /* At most one source promotion per call. */
+            if(ready)++s->pin_slot;
+            return PT_WAVETABLE_SONG_PREPARING; /* At most one allocation or 4 KiB copy. */
         }
+        ++s->pin_slot;
     }
     if(!pt_wavetable_preflight_take(s->preflight,&s->sequence))return fail(s,PT_WAVETABLE_SONG_RENDER);
     pt_wavetable_preflight_close(&s->preflight);s->ready=1;return PT_WAVETABLE_SONG_OK;

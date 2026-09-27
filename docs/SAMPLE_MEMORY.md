@@ -1868,3 +1868,23 @@ check bounded failures and ensure invalid public/private-mutable inputs still fa
 Initial/reset validation, source promotion copies, Studio source acquisition and
 backend conversion remain synchronous. No native timing or device claim follows.
 See `evidence/enhanced-editor/validated-render-voices/`.
+
+
+### Bounded master promotion during song preparation
+
+After full input validation and capability analysis, each song preparation call
+now reserves one selected master or copies at most4096 PCM/marker bytes into its
+private version. The full version counts against the sampler budget from allocation
+until cancellation or final release. The project and current-version table are
+updated together only when the complete copy is ready. No partial sample or output
+is published. Existing immutable versions can be pinned without another copy.
+
+Each step checks generation, table/count/current-version and exact descriptor
+identity. Cancellation and stale-source failures discard the unpublished version;
+completed masters and active pins retain their normal independent lifetimes.
+The internal job requires previously validated immutable inputs and editor/sampler
+serialization. It does not replace untrusted input validation, and callers must
+cancel before changing/freeing the borrowed source. Public sampler_pin behavior
+is unchanged. Initial validation and allocation remain synchronous; this bounds
+copy work, not elapsed time or allocator latency. Native PLAY/device timing remains
+unfinished. See `evidence/enhanced-editor/bounded-master-promotion/`.

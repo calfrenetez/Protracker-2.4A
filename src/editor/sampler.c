@@ -2,6 +2,8 @@
 #include <limits.h>
 #include <stdio.h>
 #include "sampler.h"
+#include "sampler_internal.h"
+#include "../core/pcm_internal.h"
 #include "wav.h"
 #include "svx.h"
 struct pt_sample_version {
@@ -27,7 +29,7 @@ void pt_sampler_release(struct pt_sampler *s)
     unsigned i;for(i=0;i<PT_PROJECT_SAMPLES;++i) {release_version(s->current[i]);s->current[i]=NULL;}
     if(s->table) {s->bytes-=s->table_bytes;s->allocator.release(s->allocator.context,s->table);s->table=NULL;s->table_original=NULL;s->table_bytes=0;}
 }
-static struct pt_sample_version *version(struct pt_sampler *s,const struct pt_sample *sample)
+static struct pt_sample_version *version_allocate(struct pt_sampler *s,const struct pt_sample *sample)
 {
     size_t values,bytes,slices;struct pt_sample_version *v;
     if(sample->pcm.frames>SIZE_MAX/sizeof(int32_t)/sample->pcm.channels)return NULL;
@@ -39,9 +41,16 @@ static struct pt_sample_version *version(struct pt_sampler *s,const struct pt_sa
     memset(v,0,sizeof(*v));v->owner=s;v->bytes=bytes;v->references=1;v->sample=*sample;
     v->sample.pcm.data=(int32_t *)(v+1);v->sample.pcm.capacity=values;
     v->sample.slices=(uint32_t *)(v->sample.pcm.data+values);
-    if(values && sample->pcm.data)memcpy(v->sample.pcm.data,sample->pcm.data,values*sizeof(int32_t));
-    if(slices)memcpy(v->sample.slices,sample->slices,slices);
     s->bytes+=bytes;return v;
+}
+static struct pt_sample_version *version(struct pt_sampler *s,const struct pt_sample *sample)
+{
+    struct pt_sample_version *v=version_allocate(s,sample);size_t values;
+    if(!v)return NULL;
+    values=v->sample.pcm.capacity;
+    if(values && sample->pcm.data)memcpy(v->sample.pcm.data,sample->pcm.data,values*sizeof(int32_t));
+    if(sample->slice_count)memcpy(v->sample.slices,sample->slices,(size_t)sample->slice_count*sizeof(uint32_t));
+    return v;
 }
 static int same(const struct pt_sample *a,const struct pt_sample *b)
 {
@@ -68,6 +77,61 @@ enum pt_edit_result pt_sampler_pin(struct pt_sampler *s,struct pt_project *p,uns
     retain(v);*pcm=v->sample.pcm;*token=v;return PT_EDIT_OK;
 }
 void pt_sampler_unpin(struct pt_sample_version *v) {release_version(v);}
+static int same_storage(const struct pt_sample *a,const struct pt_sample *b)
+{
+    /* Pointer equality first keeps same() from scanning PCM or marker arrays. */
+    return a->pcm.data==b->pcm.data && a->pcm.capacity==b->pcm.capacity &&
+        a->slices==b->slices && same(a,b);
+}
+void pt_sampler_pin_job_cancel(struct pt_sampler_pin_job *j)
+{
+    if(!j)return;
+    release_version(j->value);memset(j,0,sizeof(*j));
+}
+enum pt_edit_result pt_sampler_pin_job_begin(struct pt_sampler_pin_job *j,struct pt_sampler *s,
+    struct pt_project *p,unsigned slot,unsigned generation)
+{
+    struct pt_sample_version *v;const struct pt_sample *source;
+    if(!j || j->value || !s || !s->allocator.allocate || !s->allocator.release ||
+       !p || !p->samples || p->sample_count>PT_PROJECT_SAMPLES || slot>=p->sample_count)return PT_EDIT_INVALID;
+    if(generation!=s->generation)return PT_EDIT_CONFLICT;
+    source=p->samples+slot;
+    if(pt_pcm_shape(&source->pcm)!=PT_PCM_OK || source->slice_count>PT_PROJECT_SLICES ||
+       (source->slice_count && !source->slices))return PT_EDIT_INVALID;
+    v=s->current[slot];
+    if(v && (!same_storage(&v->sample,source) || v->references==UINT_MAX))return PT_EDIT_CONFLICT;
+    if(v)retain(v);
+    else {v=version_allocate(s,source);if(!v)return PT_EDIT_CAPACITY;}
+    memset(j,0,sizeof(*j));j->owner=s;j->project=p;j->table=p->samples;j->count=p->sample_count;
+    j->slot=slot;j->generation=generation;j->source=*source;j->previous=s->current[slot];j->value=v;
+    j->values=(size_t)source->pcm.frames*source->pcm.channels*sizeof(int32_t);
+    return PT_EDIT_OK;
+}
+enum pt_edit_result pt_sampler_pin_job_step(struct pt_sampler_pin_job *j,size_t bytes,
+    struct pt_pcm *pcm,struct pt_sample_version **token,unsigned *ready)
+{
+    struct pt_sample_version *v;size_t n,slices;
+    if(!j || !j->value || !bytes || bytes>PT_SAMPLER_PIN_CHUNK || !pcm || !token || !ready)return PT_EDIT_INVALID;
+    if(j->failure)return j->failure;
+    if(j->owner->generation!=j->generation || j->project->samples!=j->table ||
+       j->project->sample_count!=j->count || j->owner->current[j->slot]!=j->previous ||
+       !same_storage(j->table+j->slot,&j->source))return j->failure=PT_EDIT_CONFLICT;
+    v=j->value;slices=(size_t)j->source.slice_count*sizeof(uint32_t);
+    if(!j->previous) {
+        n=j->values-j->copied_values;if(n>bytes)n=bytes;
+        if(n)memcpy((uint8_t *)v->sample.pcm.data+j->copied_values,(const uint8_t *)j->source.pcm.data+j->copied_values,n);
+        j->copied_values+=n;bytes-=n;
+        n=slices-j->copied_slices;if(n>bytes)n=bytes;
+        if(n)memcpy((uint8_t *)v->sample.slices+j->copied_slices,(const uint8_t *)j->source.slices+j->copied_slices,n);
+        j->copied_slices+=n;
+        if(j->copied_values<j->values || j->copied_slices<slices){*ready=0;return PT_EDIT_OK;}
+        /* Publish only a complete immutable version. The job reference becomes
+         * the caller pin; one new reference belongs to sampler.current. */
+        retain(v);j->owner->current[j->slot]=v;j->table[j->slot]=v->sample;
+    }
+    *pcm=v->sample.pcm;*token=v;*ready=1;memset(j,0,sizeof(*j));return PT_EDIT_OK;
+}
+
 struct appended_sample {
     struct pt_sampler *owner;
     struct pt_sample *before,*after;

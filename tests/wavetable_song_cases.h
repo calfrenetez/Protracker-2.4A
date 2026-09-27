@@ -380,3 +380,43 @@ static void song_guard_fixture(void)
 }
 #undef VALIDATIONS_SAVE
 #undef VALIDATIONS_UNCHANGED
+
+static void large_preparing_fixture(void)
+{
+    struct fixture *f=malloc(sizeof(*f));struct dispatch_bus *bus=malloc(sizeof(*bus));
+    struct pt_allocator a={NULL,allocate_master,release_master};struct pt_document d;
+    struct pt_sampler sampler;struct pt_sampler_wavetable bridge={0};struct pt_wavetable_voices owner={0};
+    struct pt_render_options o={0};struct pt_playback_format format={16,0,0,0};
+    struct pt_wavetable_preflight_report report;struct pt_wavetable_song *song=NULL;
+    int32_t *data=malloc(2100*sizeof(int32_t));unsigned mode,i,steps,baseline;enum pt_wavetable_song_result result;
+    assert(f && bus && data);for(i=0;i<2100;++i)data[i]=(int32_t)i*257-100000;
+    pt_document_init(&d,&a);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);baseline=allocations;
+    d.project.speed=1;d.project.events[0]=(struct pt_event){428,0,PT_NOTE_PERIOD,1,0,0,0,0};d.project.events[4].effect=15;
+    o.rate=48000;o.bits=24;o.tracks=1;o.gain_q16=65536;o.tick_limit=100;o.frame_limit=100000;
+    for(mode=0;mode<3;++mode) {
+        d.project.samples[0].pcm=(struct pt_pcm){data,2100,2100,48000,1,24};
+        pt_sampler_init(&sampler,&a,1024*1024);song_bind(f,&bridge,&owner,bus,&sampler,&d.project);
+        assert(pt_wavetable_song_begin(&owner,&o,&format,&a,&report,&song)==PT_WAVETABLE_SONG_PREPARING);
+        steps=0;
+        do{assert(pt_wavetable_song_prepare(song,&report)==PT_WAVETABLE_SONG_PREPARING);assert(++steps<1000);}while(!sampler.bytes);
+        assert(!sampler.current[0] && d.project.samples[0].pcm.data==data);
+        assert(pt_wavetable_song_prepare(song,&report)==PT_WAVETABLE_SONG_PREPARING);
+        assert(!sampler.current[0] && d.project.samples[0].pcm.data==data); /* Only4KiB copied. */
+        if(mode==1) {
+            ++sampler.generation;
+            assert(pt_wavetable_song_prepare(song,&report)==PT_WAVETABLE_SONG_STALE && !sampler.bytes);
+        } else if(mode==2) {
+            assert(pt_wavetable_song_prepare(song,&report)==PT_WAVETABLE_SONG_PREPARING && !sampler.current[0]);
+            assert(pt_wavetable_song_prepare(song,&report)==PT_WAVETABLE_SONG_PREPARING && sampler.current[0]);
+            assert(!memcmp(d.project.samples[0].pcm.data,data,8400) && d.project.samples[0].pcm.bits==24);
+            result=pt_wavetable_song_prepare(song,&report);assert(result==PT_WAVETABLE_SONG_OK);
+        }
+        assert(!f->writes && !bus->starts && !bus->controls && !bus->restores && !bus->stops);
+        assert(pt_wavetable_song_close(&song) && !owner.song_owner);
+        if(mode<2)assert(!sampler.bytes && !sampler.current[0] && d.project.samples[0].pcm.data==data);
+        assert(pt_wavetable_voices_close(&owner) && pt_amigus_reservation_close(&f->reservation));
+        pt_sampler_release(&sampler);assert(!sampler.bytes && allocations==baseline);
+    }
+    pt_document_release(&d);free(data);free(bus);free(f);assert(!allocations);
+    puts("LARGE PREPARING PASS: allocation separate from4KiB copies, no partial master publication/output, cancel/stale cleanup and intact24-bit ready master");
+}

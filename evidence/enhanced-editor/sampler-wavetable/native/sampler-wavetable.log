@@ -1,0 +1,5 @@
+EXEC MEMORY pool_limit=131155984 reserve=262144 flags=4
+amigus reservation lifecycle: PASS (fake library, no hardware)
+AMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only
+SAMPLER WAVETABLE PASS: revision rebuilds, edits/undo/table changes, pinned old playback, master save and failure cleanup; fake bus only
+EXEC MEMORY PASS: 28 Fast allocations, zero owned bytes, budget refusal without Chip fallback

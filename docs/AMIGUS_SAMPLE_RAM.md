@@ -119,3 +119,46 @@ release verified. PCM session and discovery probes still cross-build. This run
 uses fake library/bus callbacks; only descriptor inspection invokes a production
 native callback on synthetic data. It does not test ReserveCard/FreeCard against
 a real library or establish native MMIO/voice-stop behavior.
+
+## Sampler revision bridge
+
+`src/editor/sampler_wavetable.c` binds one initialized sampler/project to a
+dedicated empty attached wavetable cache. It pins the immutable master for each
+synchronous upload, then releases the source pin on success or failure. The
+derived device lease has an independent lifetime: a playing voice retains its
+old bytes until confirmed stopped and explicitly unpinned. Initial document
+samples are promoted by the existing bounded sampler allocator without changing
+their precision, saved bytes or undo history.
+
+Before each acquire or address lookup, the bridge checks sampler generation,
+sample-table identity and slot count. Any change retires all cached copies and
+advances a separate64-bit cache revision. This is deliberately conservative:
+metadata-only edits, undo/redo and table growth also rebuild representations.
+Failed edits do not advance the sampler generation and can retain cache hits.
+Retired pinned blocks remain allocated; their lease cannot authorize a new
+trigger through the bridge's address lookup. A voice already playing retains
+its previously supplied address. Revision exhaustion refuses reuse.
+
+All edits must use sampler APIs, and callbacks must not reenter the editor.
+In-place mutation outside the immutable-master contract is not detected by this
+bridge. Close before document replacement or sampler reinitialization; a new
+provider refuses an already populated cache. A busy close blocks new work but
+keeps both contexts and reservation access alive until the last playback lease
+is released. Then close detaches the backend; the reservation owner closes its
+library separately. A new document may bind only after that cleanup/re-attach.
+
+Host tests cover budget/allocation refusal before promotion, exact cache hits,
+failed edits, gain and loop edits, undo/redo, slot growth/table undo, source-slot
+replacement, failed uploads, old pinned byte preservation, revision exhaustion,
+close refusal and another document's fresh binding. Exact enhanced-project saves
+retain low24-bit source data throughout promotion and after undo; all allocator
+ownership returns to zero after cleanup. The five sampler sanitizer fixtures
+pass (20.824 seconds). This connects the software sampler API to the cache owner;
+the native editor still does not instantiate an AmiGUS bus or voice dispatcher.
+
+The sampler bridge also passes shared030 within its separately coordinated
+90-second window, run `render-files-1790474301354327000`: RC0,28 Fast allocations,
+zero final owned bytes, and budget refusal without Chip fallback. Completion,
+all four DMA off, exact cleanup and explicit release were verified. No timeout,
+retry or reset was needed. Native evidence still uses a fake library/bus and
+does not establish card upload, voice stop, audible playback or physical timing.

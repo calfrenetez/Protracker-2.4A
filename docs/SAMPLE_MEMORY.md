@@ -15,7 +15,7 @@ software implementation from the remaining integration and hardware gates.
 | --- | --- | --- |
 | Authoritative8/16/24-bit masters | Queried, bounded native Fast-RAM pool; precision-preserving sampler versions, processing, history and source pins. Fast-equipped machines fail rather than spill enhanced allocations into Chip RAM. | Physical memory-pressure/endurance measurements. |
 | Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition preserves master precision. | Enhanced multichannel song routing beyond the classic four-channel bridge; physical sound/performance acceptance. |
-| AmiGUS wavetable copies | Versioned evictable resource pool, 8/16-bit conversion and bounded address allocator/chunk uploader behind an injected register bus; failure/pinning tests. | Verified card capacity, native bus binding and voice dispatcher; explicit wavetable reservation/cache lifetime now implemented and tested with fake callbacks. Injected register tests do not establish real card access. |
+| AmiGUS wavetable copies | Versioned evictable resource pool, sampler revision/master-pin bridge, 8/16-bit conversion and bounded address allocator/chunk uploader behind an injected register bus; failure/pinning tests. | Verified card capacity, native bus binding and voice dispatcher; explicit wavetable reservation/cache lifetime now implemented and tested with fake callbacks. Injected register tests do not establish real card access. |
 | Direct24-bit Studio | Master-pinned mixer, audited sequence, sampler/editor ownership, bounded queue/pump and consumer lifecycle. Up to16 voice slots are a software bound. | Native PLAY/output wiring, verified hardware capabilities and sustainable physical voice-count/timing evidence. |
 | Master-preserving persistence | Bounded enhanced-project/sample saving and explicit classic conversion; private EFx exports/bounce never replace masters. | Broader workflow/release and physical acceptance beyond the retained fixtures. |
 | Playback invalidation | Revision/settings keys, retired active leases and stop-before-edit/undo/dispose guards. Private EFx banks are discarded on stop and rebuilt on restart. | End-to-end real AmiGUS voice/transfer ownership, once the device adapter exists. |
@@ -1680,3 +1680,17 @@ attach, stale ownership (including cache hits), partial upload failure and pinne
 old generations are checked with a fake library and injected bus. Masters retain
 24-bit data. No real library/card access, native voice dispatch or stop confirmation
 is established by this software integration. See `AMIGUS_SAMPLE_RAM.md`.
+
+### Sampler-driven wavetable invalidation
+
+The sampler now has a dedicated wavetable bridge that pins the current immutable
+master during upload and retires cached copies before a new trigger after any
+sampler generation, slot count or table identity change. Edits and undo/redo
+rebuild derived representations; old active device leases preserve their bytes
+until explicit unpin. The bridge refuses old-generation address lookup, nonempty
+cache adoption and revision wrap. Busy close keeps reservation ownership alive.
+Tests preserve exact true24 enhanced-project bytes after promotion and undo,
+including import, metadata changes, slot growth, upload failure and document
+close/rebind. This is software integration with a fake bus; native device/voice
+output remains unwired. See `AMIGUS_SAMPLE_RAM.md` and
+`evidence/enhanced-editor/sampler-wavetable/`.

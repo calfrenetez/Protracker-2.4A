@@ -422,3 +422,21 @@ command plans. The wavetable session still refuses row_range: a future restore
 plan/driver must preserve the full position or refuse before any output. The
 current initialized-trigger translator must not silently discard snapshot phase.
 See `evidence/enhanced-editor/render-snapshot/` for host/native evidence and limits.
+
+## Exact software restore plans and capability gate
+
+`pt_amigus_render_restore` preserves an active mono one-shot/forward voice's
+sample position as an absolute cache-byte Q32 cursor alongside its original
+aligned bounds. It validates phase/cycle and bounds without reading master PCM.
+The cursor may be odd/fractional; it must never be discarded or rounded to feed
+an ordinary start. `pt_wavetable_restore_preflight` requires explicit exact-restore
+capability, resolves every active borrowed descriptor and validates the entire
+snapshot before a future caller may acquire/upload/start. Source/cache leases
+remain mandatory; these pure functions do not own storage or publish output.
+
+The existing voice API does not consume restore plans and row-range song open
+still refuses. This is software preparation, not native register lowering or
+verified endpoint/phase hardware support. Host sanitizer checks pass; native
+restore fixture builds and dispatcher syntax checks pass. No new emulator run
+was attempted during the retained renderer recovery hold. Evidence is in
+`evidence/enhanced-editor/amigus-restore/`.

@@ -10,6 +10,28 @@ static void *preflight_allocate(void *ctx,size_t bytes)
     if(++a->calls==a->fail_at)return NULL;
     return allocate_master(NULL,bytes);
 }
+static void restore_preflight_fixture(void)
+{
+    int32_t data[8]={1,257,-513,799,123,991,-777,27};struct pt_project p={0};struct pt_sample samples[2]={{0}};
+    struct pt_render_snapshot snapshot={0};struct pt_wavetable_preflight_report report;
+    struct pt_playback_format format={16,0,0,0};struct pt_pcm foreign;
+    p.channels.count=16;p.samples=samples;p.sample_count=2;snapshot.channels=16;
+    samples[1].pcm=(struct pt_pcm){data,8,8,48000,1,24};foreign=samples[1].pcm;
+    assert(pt_voice_init(&snapshot.voice[15],&samples[1].pcm,0,8,PT_VOICE_FORWARD,0,8,0x90000000ULL,1)==PT_PCM_OK);
+    assert(pt_voice_advance(snapshot.voice,16,3)==PT_PCM_OK);snapshot.gain[15][0]=65536;
+    assert(pt_wavetable_restore_preflight(&p,&snapshot,48000,&format,0,&report)==PT_WAVETABLE_RESTORE);
+    assert(pt_wavetable_restore_preflight(&p,&snapshot,48000,&format,1,&report)==PT_WAVETABLE_COMPATIBLE);
+    assert(!report.samples[0] && report.samples[1] && report.channel==UINT_MAX && report.action==UINT_MAX);
+    snapshot.voice[15].pcm=&foreign;
+    assert(pt_wavetable_restore_preflight(&p,&snapshot,48000,&format,1,&report)==PT_WAVETABLE_SOURCE && report.channel==15);
+    snapshot.voice[15].pcm=&samples[1].pcm;snapshot.voice[15].phase=snapshot.voice[15].cycle;
+    assert(pt_wavetable_restore_preflight(&p,&snapshot,48000,&format,1,&report)==PT_WAVETABLE_GEOMETRY && report.channel==15);
+    snapshot.voice[15].active=0;
+    assert(pt_wavetable_restore_preflight(&p,&snapshot,48000,&format,1,&report)==PT_WAVETABLE_COMPATIBLE && !report.samples[1]);
+    snapshot.channels=4;
+    assert(pt_wavetable_restore_preflight(&p,&snapshot,48000,&format,1,&report)==PT_WAVETABLE_INVALID);
+    assert(data[1]==257 && samples[1].pcm.bits==24);
+}
 static void preflight_fixture(void)
 {
     struct pt_project p={0};struct pt_sample samples[2];
@@ -126,7 +148,7 @@ static int dispatch_fixture_main(void)
     struct pt_render_options options={0};struct pt_playback_format format={16,0,0,0};uint8_t staging[3];
     int32_t data[]={257,-513,1025,-2049,17,31,47,63};unsigned ch,i,starts,stops,controls;uint64_t version;
     uint8_t *saved;size_t size,used;
-    assert(f && bus);assert(voices_fixture_main()==0);preflight_fixture();song_fixture();memset(bus,0,sizeof(*bus));
+    assert(f && bus);assert(voices_fixture_main()==0);restore_preflight_fixture();preflight_fixture();song_fixture();memset(bus,0,sizeof(*bus));
     init(f,PT_AMIGUS_WAVETABLE);assert(pt_amigus_wavetable_cache_attach(&f->cache,&f->reservation,16,112,112,f,bus_owned,bus_write));
     pt_document_init(&d,&allocator);assert(pt_document_new(&d,16,SIZE_MAX)==PT_PROJECT_OK);
     d.project.samples[0].pcm=(struct pt_pcm){data,8,8,48000,1,24};d.project.samples[0].volume=64;

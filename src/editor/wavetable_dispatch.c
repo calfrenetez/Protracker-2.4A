@@ -114,6 +114,32 @@ release:
 done:
     *out=r;return r.result;
 }
+enum pt_wavetable_capability pt_wavetable_restore_preflight(const struct pt_project *p,
+    const struct pt_render_snapshot *snapshot,unsigned rate,const struct pt_playback_format *format,unsigned exact_restore,
+    struct pt_wavetable_preflight_report *out)
+{
+    struct pt_wavetable_preflight_report r;unsigned ch,slot;
+    memset(&r,0,sizeof(r));r.result=PT_WAVETABLE_INVALID;r.action=UINT_MAX;r.channel=UINT_MAX;
+    if(!out)return PT_WAVETABLE_INVALID;
+    if(!p || !snapshot || !p->channels.count || p->channels.count>16 || snapshot->channels!=p->channels.count ||
+       p->sample_count>PT_PROJECT_SAMPLES || (p->sample_count && !p->samples) || (rate!=44100 && rate!=48000))goto done;
+    if(!valid_format(format)){r.result=PT_WAVETABLE_FORMAT;goto done;}
+    if(exact_restore!=1){r.result=PT_WAVETABLE_RESTORE;goto done;}
+    for(ch=0;ch<snapshot->channels;++ch) {
+        const struct pt_voice *v=snapshot->voice+ch;struct pt_amigus_restore_plan plan;uint64_t size;
+        if(!v->active)continue;
+        r.channel=ch;
+        if(!resolve(p,v->pcm,&slot)){r.result=PT_WAVETABLE_SOURCE;goto done;}
+        size=(uint64_t)p->samples[slot].pcm.frames*(format->bits/8);
+        if(size>UINT32_MAX || !pt_amigus_render_restore(v,rate,snapshot->gain[ch],format,0,(uint32_t)size,&plan)) {
+            r.result=PT_WAVETABLE_GEOMETRY;goto done;
+        }
+        r.samples[slot]=1;
+    }
+    r.channel=UINT_MAX;r.result=PT_WAVETABLE_COMPATIBLE;
+done:
+    *out=r;return r.result;
+}
 int pt_wavetable_dispatch(struct pt_wavetable_voices *v,uint64_t version,unsigned rate,
     const struct pt_render_plan *plan,const struct pt_playback_format *format,uint8_t *staging,size_t capacity)
 {

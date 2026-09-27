@@ -6,7 +6,7 @@ enum pt_wavetable_capability {
     PT_WAVETABLE_COMPATIBLE, PT_WAVETABLE_INVALID, PT_WAVETABLE_RENDER,
     PT_WAVETABLE_MEMORY, PT_WAVETABLE_FORMAT, PT_WAVETABLE_CHANNEL,
     PT_WAVETABLE_SOURCE, PT_WAVETABLE_GEOMETRY, PT_WAVETABLE_CONTROL,
-    PT_WAVETABLE_OPERATION
+    PT_WAVETABLE_OPERATION, PT_WAVETABLE_RESTORE
 };
 struct pt_wavetable_preflight_report {
     enum pt_wavetable_capability result;
@@ -34,6 +34,16 @@ struct pt_wavetable_preflight_report {
 enum pt_wavetable_capability pt_wavetable_preflight(const struct pt_project *,
     const struct pt_render_options *,const struct pt_playback_format *,unsigned controls,
     const struct pt_allocator *,struct pt_wavetable_preflight_report *);
+/* Bounded snapshot capability gate. Requires explicit exact-restore driver
+ * support; ordinary start is insufficient. Checks every active source identity
+ * and restore geometry before any caller may upload/start. No allocation, PCM
+ * reads, callbacks or cache pins. report.samples marks ACTIVE slots on success;
+ * report.channel locates a refusal, action=UINT_MAX (no tick action). Inactive
+ * voices need no restore. Source storage must remain owned/current afterwards.
+ * This standalone check does NOT enable row-range sessions or native output. */
+enum pt_wavetable_capability pt_wavetable_restore_preflight(const struct pt_project *,
+    const struct pt_render_snapshot *,unsigned rate,const struct pt_playback_format *,unsigned exact_restore,
+    struct pt_wavetable_preflight_report *);
 /* Apply one successful audited renderer plan after the preceding interval.
  * Capture bridge.version AFTER sync when constructing plan. Project/master
  * descriptors must remain immutable/current; exact descriptor identity is

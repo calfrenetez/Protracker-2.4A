@@ -1744,3 +1744,11 @@ rendering, including silent pre-roll, forward/ping-pong loops and tempo/delay.
 It does not make the existing AmiGUS integer-start command capable of restoring
 fractional phase. Wavetable row-range playback remains explicitly refused until
 a matching restore/capability path exists; no rounding or audible pre-roll fallback.
+
+Exact wavetable restore preparation now retains fractional sample position in a
+separate Q32 cache-byte cursor, preserving8/16-bit cache conversion without
+changing24-bit masters. A bounded whole-snapshot check requires explicit restore
+capability and validates every active source/geometry before future upload/start.
+It has no cache/source ownership or device effects. Row-range sessions remain
+refused pending lifecycle/driver integration; native phase semantics are unverified.
+See `AMIGUS_SAMPLE_RAM.md` and `evidence/enhanced-editor/amigus-restore/`.

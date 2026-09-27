@@ -38,3 +38,28 @@ int pt_amigus_render_voice(const struct pt_voice *v,unsigned output_rate,const u
     p.control=(uint16_t)(0x8000|(f->bits==16?1:0)|(v->loop?2:0)|(v->linear?4:0)|
         (f->bits==16 && f->little_endian?8:0));*out=p;return 1;
 }
+
+int pt_amigus_render_restore(const struct pt_voice *v,unsigned output_rate,const uint32_t gains[2],
+    const struct pt_playback_format *f,uint32_t address,uint32_t bytes,struct pt_amigus_restore_plan *out)
+{
+    struct pt_amigus_restore_plan p={0};struct pt_voice initial;uint64_t position,cycle;
+    if(!v || !out || v->active!=1 || v->loop>PT_VOICE_FORWARD || v->looped>1)return 0;
+    initial=*v;initial.looped=(uint8_t)(v->loop && v->start==v->loop_start);
+    initial.phase=initial.looped?0:(uint64_t)v->start<<32;
+    if(!pt_amigus_render_voice(&initial,output_rate,gains,f,address,bytes,&p.bounds))return 0;
+    position=v->phase;
+    if(v->loop==PT_VOICE_ONCE) {
+        if(v->looped || v->cycle || position<((uint64_t)v->start<<32) || position>=((uint64_t)v->end<<32))return 0;
+    } else {
+        cycle=(uint64_t)(v->loop_end-v->loop_start)<<32;
+        if(v->cycle!=cycle)return 0;
+        if(v->looped) {
+            if(position>=cycle)return 0;
+            position+=(uint64_t)v->loop_start<<32;
+        } else if(position<((uint64_t)v->start<<32) || position>=((uint64_t)v->loop_start<<32))return 0;
+    }
+    /* Bounds validation limits the whole cache below2^25 bytes, so this exact
+       conversion fits below2^57 with no rounding, truncation or overflow. */
+    p.cursor_q32=((uint64_t)address<<32)+position*(f->bits/8);
+    *out=p;return 1;
+}

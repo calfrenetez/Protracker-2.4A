@@ -148,4 +148,5 @@ static void native_song_gate_fixture(void)
     pt_native_eclock_close(&clock.clock);pt_document_release(&d);free(bus);free(f);
     puts("NATIVE SONG GATE PASS: real clock/alarms, primed sample leases, observed late service refuses all voice callbacks and releases leases; injected voice bus, no audio output");
 }
-int main(void){int result;native_memory_start();native_eclock_fixture();native_alarm_fixture();native_alarm_signal_fixture();native_song_gate_fixture();result=editor_wavetable_fixture();native_memory_finish();return result;}
+#include "native_wavetable_cost_cases.h"
+int main(void){int result;native_memory_start();native_eclock_fixture();native_alarm_fixture();native_alarm_signal_fixture();native_song_gate_fixture();native_wavetable_cost_fixture();result=editor_wavetable_fixture();native_memory_finish();return result;}

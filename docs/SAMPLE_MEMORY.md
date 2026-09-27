@@ -2372,3 +2372,14 @@ start/control/restore callbacks and released all prepared leases. This validates
 native late-refusal/lifetime behavior, not successful real-time playback. The
 actual duration of source guards and synchronous dispatch after sampling remains
 unqualified and must be characterized before native output integration.
+
+
+A native duration diagnostic now measures unchanged source guards and prepared
+one-/16-voice startup using an injected logical clock and fake callback bus.
+Shared030 ready calls took1610..2290ticks at709379Hz (2.27..3.23ms); startup took
+10737ticks for one voice and76025ticks for16 (15.14/107.17ms). The16-voice first-to-
+last callback spread was35198ticks. Instrumentation and emulator scheduling are
+included. Commit allocated/uploaded nothing and all leases were released. These
+observations show that readiness and an exact service timestamp do not establish
+a bounded realtime dispatch. They do not qualify physical performance or permit
+late callbacks. Evidence: `evidence/enhanced-editor/native-cost/`.

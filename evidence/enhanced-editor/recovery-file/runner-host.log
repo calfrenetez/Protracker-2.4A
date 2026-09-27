@@ -1,0 +1,16 @@
+test_cleanup_requires_observed_absence_and_records_failures (test_shared_render_guard.SharedRenderGuard.test_cleanup_requires_observed_absence_and_records_failures) ... ok
+test_refusal_leaves_guest_files_untouched (test_shared_render_guard.SharedRenderGuard.test_refusal_leaves_guest_files_untouched) ... ok
+test_running_guest_can_stage_but_later_pause_refuses_launch (test_shared_render_guard.SharedRenderGuard.test_running_guest_can_stage_but_later_pause_refuses_launch) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.033s
+
+OK
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpmx2g8pxr/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpob9t86e3/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpnio41ijv/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpcci9si00/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpvmrdq36y/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpqpa7kg_o/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpu4emilfj/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpfh1tjysm/evidence

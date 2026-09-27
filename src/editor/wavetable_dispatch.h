@@ -54,13 +54,18 @@ enum pt_wavetable_capability pt_wavetable_session_preflight(const struct pt_proj
  * advancement. No steps allocate, pin sources, upload, mix or invoke devices.
  * Close cancels/frees both allocations at any stage and nulls *work; idempotent.
  * Invalid step arguments leave state/report unchanged. Owner thread, no reentry.
- * This API does not yet change synchronous song/editor start. */
+ */
 struct pt_wavetable_preflight;
 enum pt_wavetable_capability pt_wavetable_preflight_begin(const struct pt_project *,
     const struct pt_render_options *,const struct pt_playback_format *,unsigned controls,unsigned session,unsigned restores,
     const struct pt_allocator *,struct pt_wavetable_preflight_report *,struct pt_wavetable_preflight **);
 enum pt_wavetable_capability pt_wavetable_preflight_step(struct pt_wavetable_preflight *,struct pt_wavetable_preflight_report *);
 void pt_wavetable_preflight_close(struct pt_wavetable_preflight **);
+/* Transfer the successfully completed sequence, rewound for identical playback.
+ * Exactly once; no remeasurement/allocation. Refusal preserves *out. Close still
+ * frees the preflight workspace; the recipient must close the transferred sequence
+ * and own every source. No project/settings edits between analysis and playback. */
+int pt_wavetable_preflight_take(struct pt_wavetable_preflight *,struct pt_render_sequence **);
 /* Bounded snapshot capability gate. Requires explicit exact-restore driver
  * support; ordinary start is insufficient. Checks every active source identity
  * and restore geometry before any caller may upload/start. No allocation, PCM

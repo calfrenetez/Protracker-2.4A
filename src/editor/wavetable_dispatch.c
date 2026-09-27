@@ -161,6 +161,12 @@ enum pt_wavetable_capability pt_wavetable_preflight_step(struct pt_wavetable_pre
 done:
     *out=*r;return r->result;
 }
+int pt_wavetable_preflight_take(struct pt_wavetable_preflight *w,struct pt_render_sequence **out)
+{
+    if(!w || !out || w->report.result!=PT_WAVETABLE_COMPATIBLE || !w->sequence ||
+       pt_render_sequence_rewind(w->sequence)!=PT_RENDER_OK)return 0;
+    *out=w->sequence;w->sequence=NULL;return 1;
+}
 static enum pt_wavetable_capability preflight(const struct pt_project *p,
     const struct pt_render_options *o,const struct pt_playback_format *format,unsigned controls,unsigned session,unsigned restores,
     const struct pt_allocator *a,struct pt_wavetable_preflight_report *out)

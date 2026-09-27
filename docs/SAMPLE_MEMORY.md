@@ -1795,10 +1795,36 @@ Pending results never authorize output. Closing cancels at any stage, releasing
 both workspace allocations; steps allocate no additional memory, pin no masters,
 and invoke no cache uploads or device callbacks. Options and conversion settings
 are copied, while project/source arrays remain borrowed and immutable until close.
-A future editor preparation owner must cancel before allowing mutations.
+The editor preparation owner described below cancels before allowing mutations.
 
 This is bounded traversal work, not a hard UI/real-time latency guarantee: initial
 project/PCM validation, metadata scans at setup/reset and PCM checks while creating
-commands remain synchronous. Song/editor start still uses the synchronous wrapper;
-owner-controlled asynchronous start is the next integration step. See
+commands remain synchronous. The incremental owner integration is described below;
+native PLAY remains unwired. See
 `evidence/enhanced-editor/wavetable-preflight-step/` for host/native evidence.
+
+### Owned preparation and editor cancellation
+
+Song begin now claims the idle voice owner while returning PREPARING. Every
+prepare/next/consume/complete call checks the current sampler generation, project
+header/table identities and bridge revision. Playback calls refuse to advance
+until preparation is ready. Analysis completes before any master is promoted;
+subsequent calls pin at most one selected master each, then transfer the audited
+sequence reset for playback without a second whole-song measurement. Ordinary
+synchronous open drives the same state machine to completion.
+
+A cancelled or failed preparation releases its workspaces/source pins and clears
+its ownership claim. The idle voice owner/bridge stays bound for explicit caller
+reuse or close, retaining the outer reservation. Already-promoted unchanged master
+copies may remain sampler-owned. Once ready, normal confirmed-stop/cache-detach
+rules apply. Failed, incomplete or already-transferred analyses cannot supply a
+playback sequence. Only a completed non-mutating sequence may be reset for the
+same immutable inputs; unchanged source promotion is permitted.
+
+Editor begin/prepare keeps the pending song in the existing change barrier, so
+edit, Stop and disposal cancel before modifying/freeing borrowed storage. The
+caller must still close the idle backend before freeing its contexts. No native
+PLAY/UI scheduling or card output is enabled. Bridge sync still validates the
+project/PCM synchronously on each step, and source promotion copies a whole sample;
+these remain responsiveness gaps rather than hard timing guarantees. Evidence:
+`evidence/enhanced-editor/wavetable-preparing-owner/`.

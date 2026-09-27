@@ -22,6 +22,15 @@ enum pt_wavetable_song_result pt_editor_wavetable_start(struct pt_editor_wavetab
         return PT_WAVETABLE_SONG_INVALID;
     return pt_wavetable_song_open(v,options,format,&o->editor->sampler.allocator,report,&o->song);
 }
+enum pt_wavetable_song_result pt_editor_wavetable_begin(struct pt_editor_wavetable *o,struct pt_wavetable_voices *v,
+    const struct pt_render_options *options,const struct pt_playback_format *format,struct pt_wavetable_preflight_report *report)
+{
+    if(!attached(o) || o->song || !v || !v->bridge || v->bridge->sampler!=&o->editor->sampler || v->bridge->project!=o->editor->project)
+        return PT_WAVETABLE_SONG_INVALID;
+    return pt_wavetable_song_begin(v,options,format,&o->editor->sampler.allocator,report,&o->song);
+}
+enum pt_wavetable_song_result pt_editor_wavetable_prepare(struct pt_editor_wavetable *o,struct pt_wavetable_preflight_report *report)
+{return attached(o)?pt_wavetable_song_prepare(o->song,report):PT_WAVETABLE_SONG_INVALID;}
 enum pt_wavetable_song_result pt_editor_wavetable_next(struct pt_editor_wavetable *o,struct pt_render_interval *out)
 {return attached(o)?pt_wavetable_song_next(o->song,out):PT_WAVETABLE_SONG_INVALID;}
 enum pt_wavetable_song_result pt_editor_wavetable_consume(struct pt_editor_wavetable *o,uint32_t frames)

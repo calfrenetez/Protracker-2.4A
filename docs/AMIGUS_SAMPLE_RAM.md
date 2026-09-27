@@ -497,3 +497,21 @@ The initial scans and command-time PCM checks are still synchronous, and native
 song/editor start still uses the synchronous wrappers. This milestone provides a
 cancellable analysis primitive; it does not claim responsive native PLAY or a
 hardware scheduler. Evidence: `evidence/enhanced-editor/wavetable-preflight-step/`.
+
+## Preparing song/editor ownership
+
+Song begin publishes a PREPARING owner with copied options and immutable borrowed
+project storage. Steps guard generation/header/bridge revision, advance one
+analysis operation, then (only after complete compatibility) pin at most one
+selected master per call. A one-time preflight transfer resets the completed
+non-mutating sequence for playback without remeasurement. Next/consume/complete
+stay blocked until readiness. The synchronous open API wraps these steps.
+
+Cancellation/refusal before readiness frees preparation/source leases and releases
+the song claim while keeping the idle backend bound for caller reuse/close. After
+readiness the existing confirmed-stop and cache-detach lifecycle applies. The
+editor barrier cancels a pending owner before edit, Stop or disposal. Partially
+promoted unchanged masters can remain sampler-owned; no source downgrade occurs.
+Static/sync PCM scans and sample copies remain synchronous. Native PLAY, real-time
+scheduling and physical card semantics remain unverified. See
+`evidence/enhanced-editor/wavetable-preparing-owner/`.

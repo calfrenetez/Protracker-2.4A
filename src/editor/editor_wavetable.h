@@ -17,6 +17,12 @@ int pt_editor_wavetable_detach(struct pt_editor_wavetable *);
  * rebinding after close. Allocations use the editor's sampler allocator. */
 enum pt_wavetable_song_result pt_editor_wavetable_start(struct pt_editor_wavetable *,struct pt_wavetable_voices *,
     const struct pt_render_options *,const struct pt_playback_format *,struct pt_wavetable_preflight_report *);
+/* Incremental start: pending owner.song participates in the existing edit/Stop/
+ * dispose barrier. Cancellation before readiness leaves voices/bridge bound;
+ * caller must close/reuse that idle backend before freeing its contexts. */
+enum pt_wavetable_song_result pt_editor_wavetable_begin(struct pt_editor_wavetable *,struct pt_wavetable_voices *,
+    const struct pt_render_options *,const struct pt_playback_format *,struct pt_wavetable_preflight_report *);
+enum pt_wavetable_song_result pt_editor_wavetable_prepare(struct pt_editor_wavetable *,struct pt_wavetable_preflight_report *);
 enum pt_wavetable_song_result pt_editor_wavetable_next(struct pt_editor_wavetable *,struct pt_render_interval *);
 enum pt_wavetable_song_result pt_editor_wavetable_consume(struct pt_editor_wavetable *,uint32_t);
 enum pt_wavetable_song_result pt_editor_wavetable_complete(struct pt_editor_wavetable *);

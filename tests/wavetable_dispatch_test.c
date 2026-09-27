@@ -45,6 +45,8 @@ static void incremental_preflight(const struct pt_project *p,const struct pt_ren
     while(result==PT_WAVETABLE_PENDING) {
         assert(work && allocations==baseline+2 && memory.calls==2);
         old=r;
+        {struct pt_render_sequence *sentinel=(struct pt_render_sequence *)(uintptr_t)1;
+            assert(!pt_wavetable_preflight_take(work,&sentinel) && sentinel==(struct pt_render_sequence *)(uintptr_t)1);}
         assert(pt_wavetable_preflight_step(NULL,&r)==PT_WAVETABLE_INVALID && !memcmp(&r,&old,sizeof(r)));
         assert(pt_wavetable_preflight_step(work,NULL)==PT_WAVETABLE_INVALID);
         result=pt_wavetable_preflight_step(work,&r);++steps;
@@ -52,6 +54,16 @@ static void incremental_preflight(const struct pt_project *p,const struct pt_ren
     }
     assert(!memcmp(&r,expected,sizeof(r)));
     if(work) {old=r;assert(steps && pt_wavetable_preflight_step(work,&r)==result && !memcmp(&r,&old,sizeof(r)));}
+    if(result==PT_WAVETABLE_COMPATIBLE) {
+        struct pt_render_sequence *sequence=NULL,*sentinel=(struct pt_render_sequence *)(uintptr_t)1;
+        struct pt_render_interval interval;
+        assert(pt_wavetable_preflight_take(work,&sequence) && sequence);
+        assert(!pt_wavetable_preflight_take(work,&sentinel) && sentinel==(struct pt_render_sequence *)(uintptr_t)1);
+        pt_wavetable_preflight_close(&work);assert(allocations==baseline+1);
+        assert(pt_render_sequence_next(sequence,&interval)==PT_RENDER_OK);
+        pt_render_sequence_close(sequence);
+    }else {struct pt_render_sequence *sentinel=(struct pt_render_sequence *)(uintptr_t)1;
+        assert(!pt_wavetable_preflight_take(work,&sentinel) && sentinel==(struct pt_render_sequence *)(uintptr_t)1);}
     pt_wavetable_preflight_close(&work);assert(!work && allocations==baseline);
     pt_wavetable_preflight_close(&work);
 }
@@ -263,7 +275,7 @@ static int dispatch_fixture_main(void)
     struct pt_render_options options={0};struct pt_playback_format format={16,0,0,0};uint8_t staging[3];
     int32_t data[]={257,-513,1025,-2049,17,31,47,63};unsigned ch,i,starts,stops,controls;uint64_t version;
     uint8_t *saved;size_t size,used;
-    assert(f && bus);assert(voices_fixture_main()==0);restore_preflight_fixture();restore_dispatch_fixture();preflight_fixture();song_fixture();range_song_fixture();memset(bus,0,sizeof(*bus));
+    assert(f && bus);assert(voices_fixture_main()==0);restore_preflight_fixture();restore_dispatch_fixture();preflight_fixture();song_fixture();range_song_fixture();preparing_song_fixture();memset(bus,0,sizeof(*bus));
     init(f,PT_AMIGUS_WAVETABLE);assert(pt_amigus_wavetable_cache_attach(&f->cache,&f->reservation,16,112,112,f,bus_owned,bus_write));
     pt_document_init(&d,&allocator);assert(pt_document_new(&d,16,SIZE_MAX)==PT_PROJECT_OK);
     d.project.samples[0].pcm=(struct pt_pcm){data,8,8,48000,1,24};d.project.samples[0].volume=64;

@@ -18,6 +18,27 @@ static void editor_song_start(struct pt_editor_wavetable *o,struct fixture *f,st
     }while(!bus->starts);
     bus->stop_result[0]=0;
 }
+static void editor_prepare_cancel_fixture(struct pt_editor *e,struct pt_editor_wavetable *owner,
+    struct fixture *f,struct dispatch_bus *bus,struct pt_sampler_wavetable *bridge,struct pt_wavetable_voices *voices)
+{
+    struct pt_render_options o={0};struct pt_playback_format format={16,0,0,0};
+    struct pt_wavetable_preflight_report report;unsigned mode;
+    o.rate=48000;o.bits=24;o.tracks=1;o.gain_q16=65536;o.tick_limit=100;o.frame_limit=100000;
+    for(mode=0;mode<3;++mode) {
+        song_bind(f,bridge,voices,bus,&e->sampler,e->project);
+        assert(pt_editor_wavetable_begin(owner,voices,&o,&format,&report)==PT_WAVETABLE_SONG_PREPARING);
+        assert(pt_editor_wavetable_prepare(owner,&report)==PT_WAVETABLE_SONG_PREPARING);
+        if(mode==0) {
+            e->editing=1;e->row=0;e->project->channels.selected=0;
+            pt_editor_key(e,0x46,0);assert(!owner->song && e->project->events[0].kind==PT_NOTE_NONE);
+            pt_editor_key(e,0x31,8);assert(e->project->events[0].kind==PT_NOTE_PERIOD);
+        }else if(mode==1)assert(pt_editor_wavetable_stop(owner) && !owner->song);
+        else assert(pt_editor_dispose(e) && !owner->song);
+        assert(!f->writes && !bus->starts && !bus->stops && !bus->restores && !voices->song_owner);
+        assert(pt_wavetable_voices_close(voices) && pt_amigus_reservation_close(&f->reservation));
+    }
+    puts("EDITOR PREPARING PASS: edit, Stop and dispose cancel before source/output ownership");
+}
 static int editor_wavetable_fixture(void)
 {
     struct pt_editor *e=malloc(sizeof(*e));struct fixture *f=malloc(sizeof(*f));struct dispatch_bus *bus=malloc(sizeof(*bus));
@@ -75,6 +96,12 @@ static int editor_wavetable_fixture(void)
     bus->stop_result[0]=1;assert(pt_editor_prepare_change(e) && !owner.song);
     assert(pt_editor_dispose(e) && !e->sampler.bytes && pt_amigus_reservation_close(&f->reservation));
     assert(pt_editor_wavetable_detach(&owner) && !e->change_ready);
+    /* Start from the original borrowed source after disposed sampler storage. */
+    d.project.samples[0].pcm=(struct pt_pcm){data,8,8,48000,1,24};
+    assert(pt_editor_init(e,&d.project));e->sampler.allocator=a;
+    assert(pt_editor_wavetable_attach(&owner,e));
+    editor_prepare_cancel_fixture(e,&owner,f,bus,&bridge,&voices);
+    assert(pt_editor_wavetable_detach(&owner));
     free(saved);free(e);pt_document_release(&d);free(bus);free(f);assert(!allocations);
     puts("EDITOR WAVETABLE PASS: pending/failed stop vetoes edits, imports, undo/redo, replacement and disposal; navigation retained; injected only");return 0;
 }

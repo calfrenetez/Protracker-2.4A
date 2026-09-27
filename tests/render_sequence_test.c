@@ -77,6 +77,10 @@ static int sequence_fixture_main(void)
         } while(!interval.end);
         assert(emitted==used && emitted==report.frames*2 && snapshots && fractional);
         assert(pt_render_sequence_next(s,&interval)==PT_RENDER_INVALID);
+        assert(pt_render_sequence_rewind(s)==PT_RENDER_OK);
+        assert(pt_render_sequence_rewind(s)==PT_RENDER_INVALID);
+        assert(pt_render_sequence_next(s,&interval)==PT_RENDER_OK);
+        assert(pt_render_sequence_snapshot(s,&snapshot)==PT_RENDER_OK && !snapshot.voice[0].active);
         pt_studio_close(mix);pt_render_sequence_close(s);assert(!owned && !pins);
     }
     { /* Cancellation during measurement; a late tick-budget error cannot publish. */
@@ -90,6 +94,7 @@ static int sequence_fixture_main(void)
         assert(pt_render_sequence_prepare(s,1,&ready)==PT_RENDER_OK && !ready);
         ready=7;assert(pt_render_sequence_prepare(s,1,&ready)==PT_RENDER_TICK_LIMIT && ready==7);
         assert(pt_render_sequence_next(s,&span)==PT_RENDER_INVALID);
+        assert(pt_render_sequence_rewind(s)==PT_RENDER_INVALID);
         assert(pt_render_sequence_prepare(s,1,&ready)==PT_RENDER_INVALID && ready==7);
         pt_render_sequence_close(s);assert(!owned);o.tick_limit=1000;
     }
@@ -103,6 +108,7 @@ static int sequence_fixture_main(void)
         unsigned i;sample.pcm.bits=8;sample.loop=PT_LOOP_FORWARD;events[0].effect=events[0].parameter=0;
         for(i=0;i<8;++i)pcm[i]=(int32_t)i;
         assert(pt_render_mutating_sequence_open(&p,&o,&a,&s,&mutation)==PT_RENDER_OK);
+        assert(pt_render_sequence_rewind(s)==PT_RENDER_INVALID);
         memset(&sentinel,0x5a,sizeof(sentinel));snapshot=sentinel;
         assert(pt_render_sequence_next(s,&interval)==PT_RENDER_OK);
         assert(pt_render_sequence_snapshot(s,&snapshot)==PT_RENDER_INVALID && !memcmp(&snapshot,&sentinel,sizeof(snapshot)));

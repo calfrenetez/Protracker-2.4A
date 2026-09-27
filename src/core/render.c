@@ -574,5 +574,12 @@ enum pt_render_result pt_render_sequence_snapshot(const struct pt_render_sequenc
     memcpy(out->voice,s->commands.voice,sizeof(out->voice));
     memcpy(out->gain,s->commands.gain,sizeof(out->gain));return PT_RENDER_OK;
 }
+enum pt_render_result pt_render_sequence_rewind(struct pt_render_sequence *s)
+{
+    if(!s || s->mutation.tick || !s->done || s->failed || s->pending || s->preparing)return PT_RENDER_INVALID;
+    if(!start_run(&s->run,s->project,&s->options,0)){s->failed=1;return PT_RENDER_INVALID;}
+    pt_render_commands_init(&s->commands);s->remaining=0;s->end=s->done=s->consumed=0;
+    return PT_RENDER_OK;
+}
 void pt_render_sequence_close(struct pt_render_sequence *s)
 {if(s) {struct pt_allocator a=s->allocator;a.release(a.context,s);}}

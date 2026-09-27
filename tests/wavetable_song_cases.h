@@ -49,10 +49,10 @@ static void song_fixture(void)
     d.project.samples[1].pcm.channels=1;memset(d.project.events+4,0,sizeof(*d.project.events));
     d.project.events[4].effect=1;d.project.events[4].parameter=1;
     o.row_range=1;assert(pt_wavetable_song_open(&owner,&o,&format,&a,&report,&song)==PT_WAVETABLE_SONG_RANGE && !song);o.row_range=0;
-    /* Refuse plan/sequence/controller/pin/second-sequence allocations in turn.
+    /* Refuse analysis/sequence/controller/master-pin allocations in turn.
      * All contexts share this allocator, so partial master promotion may remain
      * sampler-owned; release it before restoring the original borrowed samples. */
-    for(i=1;i<=5;++i){struct preflight_alloc memory={0,i};struct pt_allocator failing={&memory,preflight_allocate,release_master};
+    for(i=1;i<=4;++i){struct preflight_alloc memory={0,i};struct pt_allocator failing={&memory,preflight_allocate,release_master};
         sampler.allocator=failing;
         assert(pt_wavetable_song_open(&owner,&o,&format,&failing,&report,&song)==PT_WAVETABLE_SONG_MEMORY && !song);
         assert(!bus->starts && !f->writes && owner.bridge==&bridge);
@@ -223,4 +223,63 @@ static void range_song_fixture(void)
     }
     free(saved);pt_sampler_release(&sampler);pt_document_release(&d);free(bus);free(f);assert(!allocations);
     puts("WAVETABLE RANGE PASS: silent pre-roll, exact fractional restore before output, selective source pins, final-span timing and uncertain-stop ownership; injected only");
+}
+
+static void preparing_song_fixture(void)
+{
+    struct fixture *f=malloc(sizeof(*f));struct dispatch_bus *bus=malloc(sizeof(*bus));
+    struct pt_allocator a={NULL,allocate_master,release_master};struct pt_document d;
+    struct pt_sampler sampler;struct pt_sampler_wavetable bridge={0};struct pt_wavetable_voices owner={0};
+    struct pt_render_options o={0};struct pt_playback_format format={16,0,0,0};
+    struct pt_wavetable_preflight_report report;struct pt_render_interval interval;
+    struct pt_wavetable_song *song=NULL,*other=NULL;enum pt_wavetable_song_result result;
+    int32_t data[16]={257,-513,1025,-2049,17,31,47,63};unsigned mode,baseline,steps;
+    assert(f && bus);pt_document_init(&d,&a);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
+    d.project.samples[0].pcm=(struct pt_pcm){data,16,8,48000,1,24};d.project.samples[0].volume=64;
+    d.project.samples[0].loop=PT_LOOP_FORWARD;d.project.samples[0].loop_end=8;
+    d.project.speed=1;d.project.events[0]=(struct pt_event){428,0,PT_NOTE_PERIOD,1,0,0,0,0};d.project.events[12].effect=15;
+    o.rate=48000;o.bits=24;o.tracks=1;o.gain_q16=65536;o.tick_limit=100;o.frame_limit=100000;
+    baseline=allocations;
+    for(mode=0;mode<9;++mode) {
+        pt_sampler_init(&sampler,&a,mode==6?0:1024*1024);
+        if(mode==5)d.project.samples[0].pcm.channels=2;
+        song_bind(f,&bridge,&owner,bus,&sampler,&d.project);owner.api.restore=range_restore;
+        o.pattern_only=o.row_range=mode==8;o.row_first=1;o.row_end=3;
+        assert(pt_wavetable_song_begin(&owner,&o,&format,&a,&report,&song)==PT_WAVETABLE_SONG_PREPARING);
+        assert(owner.song_owner==song && !sampler.bytes && allocations==baseline+3);
+        assert(pt_wavetable_song_begin(&owner,&o,&format,&a,&report,&other)==PT_WAVETABLE_SONG_INVALID && !other);
+        memset(&interval,0x5a,sizeof(interval));
+        assert(pt_wavetable_song_next(song,&interval)==PT_WAVETABLE_SONG_PREPARING && interval.frames==0x5a5a5a5a);
+        assert(pt_wavetable_song_consume(song,1)==PT_WAVETABLE_SONG_PREPARING);
+        assert(pt_wavetable_song_complete(song)==PT_WAVETABLE_SONG_PREPARING);
+        assert(pt_wavetable_song_prepare(song,NULL)==PT_WAVETABLE_SONG_INVALID);
+        result=PT_WAVETABLE_SONG_PREPARING;steps=0;
+        if(mode==3)++sampler.generation;
+        if(mode==4)++d.project.bpm;
+        while(mode && result==PT_WAVETABLE_SONG_PREPARING) {
+            if(report.result==PT_WAVETABLE_PENDING)assert(!sampler.bytes);
+            result=pt_wavetable_song_prepare(song,&report);++steps;assert(steps<1000);
+            assert(!f->writes && !bus->starts && !bus->restores && !bus->controls && !bus->stops);
+            if(mode==1 && report.result==PT_WAVETABLE_COMPATIBLE){assert(!sampler.bytes);break;}
+            if(mode==2 && sampler.bytes)break;
+        }
+        if(mode==3 || mode==4)assert(result==PT_WAVETABLE_SONG_STALE);
+        if(mode==5)assert(result==PT_WAVETABLE_SONG_CAPABILITY && !sampler.bytes);
+        if(mode==6)assert(result==PT_WAVETABLE_SONG_MEMORY && !sampler.bytes);
+        if(mode>=7) {
+            uint64_t frames=0;
+            assert(result==PT_WAVETABLE_SONG_OK && sampler.bytes);
+            assert(pt_wavetable_song_prepare(song,&report)==PT_WAVETABLE_SONG_OK);
+            do {result=song_tick(song,&frames);}while(result==PT_WAVETABLE_SONG_OK);
+            assert(result==PT_WAVETABLE_SONG_DONE && (mode==8?bus->restores:bus->starts));
+        }
+        assert(pt_wavetable_song_close(&song) && !owner.song_owner && !pins(f));
+        if(mode<7)assert(owner.bridge==&bridge && !bus->stops && !f->writes);
+        assert(pt_wavetable_voices_close(&owner) && pt_amigus_reservation_close(&f->reservation));
+        if(mode==4)--d.project.bpm;
+        pt_sampler_release(&sampler);d.project.samples[0].pcm=(struct pt_pcm){data,16,8,48000,1,24};
+        assert(allocations==baseline && data[0]==257 && data[1]==-513);
+    }
+    pt_document_release(&d);free(bus);free(f);assert(!allocations);
+    puts("WAVETABLE PREPARING PASS: exclusive pending owner, no early pins/output, cancel/stale/late-refusal/promotion-failure cleanup, transferred song/range playback");
 }

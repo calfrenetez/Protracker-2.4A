@@ -81,6 +81,12 @@ struct pt_render_snapshot {
     unsigned channels;struct pt_voice voice[16];uint32_t gain[16][2];
 };
 enum pt_render_result pt_render_sequence_snapshot(const struct pt_render_sequence *,struct pt_render_snapshot *);
+/* Reuse ONLY a successfully completed non-mutating traversal of the SAME
+ * immutable inputs. Resets timeline/voices without allocation or remeasurement.
+ * Metadata scan remains synchronous. Refuses incomplete/failed/private sequences.
+ * An owner may have promoted unchanged PCM storage, but no content/settings edit
+ * is permitted. Existing source ownership requirements still apply. */
+enum pt_render_result pt_render_sequence_rewind(struct pt_render_sequence *);
 void pt_render_sequence_close(struct pt_render_sequence *);
 /* Internal offline staging hook: caller prevalidates private sample descriptors.
  * Requires classic whole mono8 playback descriptors; one-shots retain a two-frame

@@ -6,7 +6,7 @@ enum pt_wavetable_song_result {
     PT_WAVETABLE_SONG_OK, PT_WAVETABLE_SONG_DONE, PT_WAVETABLE_SONG_STOPPING,
     PT_WAVETABLE_SONG_INVALID, PT_WAVETABLE_SONG_RANGE, PT_WAVETABLE_SONG_CAPABILITY,
     PT_WAVETABLE_SONG_MEMORY, PT_WAVETABLE_SONG_STALE, PT_WAVETABLE_SONG_RENDER,
-    PT_WAVETABLE_SONG_DEVICE
+    PT_WAVETABLE_SONG_DEVICE, PT_WAVETABLE_SONG_PREPARING
 };
 /* Serial owner-thread session. A successful open takes exclusive use of an
  * already-bound, idle voice owner/bridge until close (outer reservation remains
@@ -27,6 +27,22 @@ enum pt_wavetable_song_result {
 enum pt_wavetable_song_result pt_wavetable_song_open(struct pt_wavetable_voices *,
     const struct pt_render_options *,const struct pt_playback_format *,const struct pt_allocator *,
     struct pt_wavetable_preflight_report *,struct pt_wavetable_song **out);
+/* Begin claims the idle owner and returns PREPARING with a published handle.
+ * Next/consume/complete return PREPARING without output until prepare returns OK.
+ * Each prepare validates current generation/header/bridge, then performs one
+ * analysis step, promotes at most one selected source AFTER full capability
+ * success, or transfers the audited sequence without remeasurement. Static input
+ * validation/sync, source copies and metadata resets remain synchronous: no hard
+ * latency guarantee. No uploads/voice callbacks during preparation.
+ * Close cancels pending/failed preparation and leaves the idle voice owner/bridge
+ * bound for caller reuse/close (outer reservation retained). Failure poisons the
+ * handle; close still required. Already-promoted unchanged sampler copies may
+ * remain. Caller must cancel before any borrowed source/project edit; the editor
+ * binding supplies that barrier. Successful synchronous open is a wrapper. */
+enum pt_wavetable_song_result pt_wavetable_song_begin(struct pt_wavetable_voices *,
+    const struct pt_render_options *,const struct pt_playback_format *,const struct pt_allocator *,
+    struct pt_wavetable_preflight_report *,struct pt_wavetable_song **out);
+enum pt_wavetable_song_result pt_wavetable_song_prepare(struct pt_wavetable_song *,struct pt_wavetable_preflight_report *);
 /* next -> consume elapsed frames (1..256 each, exactly interval.frames) ->
  * complete. A zero-frame/end interval still requires complete. Caller schedules
  * time for emit=1; emit=0 pre-roll advances silently without waiting or any voice

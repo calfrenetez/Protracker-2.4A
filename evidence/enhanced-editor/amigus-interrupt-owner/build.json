@@ -1,0 +1,48 @@
+{
+  "scope": "compile/link only; private vectors, no installed library or hardware",
+  "compiler_sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fbbb=-",
+    "-Isrc/core",
+    "-Ivendor/amigus-sdk"
+  ],
+  "runtime_inputs": {
+    "ncrt0.o": "6fe4b6088899bd53efae1ea1e4783b7deab07b13f3d40cff7b46285907f19804",
+    "libnix20.a": "0731c54ad32272f5ab0d5ecd3f1f93d7aa4fc7c6ac0a5923eb26125633556e8c",
+    "libnixmain.a": "ad54158e95516aa6f3b04a8b3d835a48ecbaaea962cd178d5fb66995dcef19df",
+    "libnix.a": "d64619bc74933ac5312ef6db0f8d4cd62b3918f9f4a5805863e7d15536fcb144",
+    "libstubs.a": "55dbd0626cb472d89ab5d1bd234e6013df178f2cd3b83266bf4b82c68f1a79de",
+    "libamiga.a": "10d78b6d303a99677c0bf29a8e1653d62669f69f395691646393020325084021",
+    "libgcc.a": "8bed858c8a5797471c3bc130df341824121c5d0f0908345dfe6ce0ceccc3569b"
+  },
+  "inputs": {
+    "tests/native_amigus_abi_test.c": "db2df25a44d14778ed23775ef229693726333dba01f6566b4fd62efd152b6b25",
+    "src/core/amigus_reservation.c": "9d448f569e2f86331085343626e2b653e45c1fb96aaaf6c709f0eefe168e1e27",
+    "src/core/amigus_interrupt_owner.c": "c3b6ea998cc15876877e70a9383eb9d202bf22cbdd2f006c9809b38f64fcb3d0",
+    "src/native/amigus_reservation.c": "82a67054e6cf9f591cec51d2bcc78c10ca03571a03272e1919237421a881211c",
+    "src/native/amigus_interrupt.c": "8db1b63213114a7053e83278ea44e76f5a5fc63843ee993c2b0710c1d87a618d",
+    "src/native/amigus_interrupt_calls.c": "30fa71fa75d79f8c8eae241b6cf21084a668150cdb10a25cbe2a9b7328e8db60",
+    "src/native/amigus_interrupt_entry.s": "a8b349ea86a1513590f2bdac88ac6b4a9c0d454e9a20042cdb014746a85b7e19",
+    "src/native/amigus_interrupt.h": "f87f6ced3fbe264da978de2ed71a48c7ec4926f1233b9397492dc457dac5fc65",
+    "src/native/amigus_interrupt_calls.h": "085c3c7d17f2cd25f2c268795fb5cd2d4ea9bb17d38d18c36a1c43e277c6d897",
+    "src/core/amigus_interrupt_owner.h": "61ef5807d0358e4b486bb6dce33f152966e39d4923e04f40961bb1aaf084f30f",
+    "tests/amigus_interrupt_owner_test.c": "8bca49df100f24526775cba4cb829f13be285d0cb154a9ec9431d368674e6d15",
+    "tests/amigus_reservation_test.c": "dad17211f55fa80908f0a01f0f5482a1148946b324267fbd872caeab79205572",
+    "tests/native_exec_memory.h": "ce0f2b696ce7767c0da8a2a44ac7730bc207f81e4f6b86bfd172353989e664b9",
+    "src/native/master_memory.h": "ac898368849ec2d1892717d425b90c398da37a8799d536366a898e2e219e184a",
+    "src/core/amigus_reservation.h": "ee57be55b9865fd19d14b27b22af6e2aa6b0466b7f21da5b313016efe9a0b646",
+    "src/native/amigus_reservation.h": "ada2555428a3a5ca92f9929b697c3344402afdac0a8efcfbd44fd1e085029429",
+    "src/diagnostic/amigus_calls.h": "3074dcb5c1ddb8977b0533143bee8de5400734a915bf9f53bdf9c12a9f9f0b58"
+  },
+  "sdk_lock_sha256": "4925be2f6ce1db4bd683629a850c3045cea55aa089d1fbeea721eb9e0ac304d1",
+  "binary_sha256": "29ec3c43d328fabbdb7266bb3a0d293e37fe0184edfd5d3321530c2dff0c24ce",
+  "binary_bytes": 33056
+}

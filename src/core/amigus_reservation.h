@@ -22,7 +22,7 @@ struct pt_amigus_reservation {
     struct pt_amigus_reservation_api api;
     void *card;
     unsigned long driver_code;
-    unsigned opened, reserved, access;
+    unsigned opened, reserved, access, interrupt;
     enum pt_amigus_resource resource;
 };
 /* Select explicit zero-based library enumeration index 0..15. Never silently
@@ -38,7 +38,8 @@ enum pt_amigus_reservation_result pt_amigus_reservation_open_resource(
 /* A single access lease prevents library/card release during downstream use.
  * Acquire BEFORE creating any port/session. End ONLY after confirmed downstream
  * reset/detach and removal of any installed interrupt. These are caller proofs,
- * not assertions this lifecycle can verify. Reservation alone permits no MMIO. */
+ * not assertions this lifecycle can verify. An interrupt owner blocks end until
+ * its separate quiescence acknowledgement. Reservation alone permits no MMIO. */
 int pt_amigus_reservation_begin(struct pt_amigus_reservation *);
 int pt_amigus_reservation_end(struct pt_amigus_reservation *);
 /* 0 while leased; otherwise release own selected reservation then close library.

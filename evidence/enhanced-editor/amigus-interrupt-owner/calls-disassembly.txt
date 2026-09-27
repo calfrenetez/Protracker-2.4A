@@ -1,0 +1,52 @@
+<_pt_native_amigus_interrupt_install>:
+    4130:	4e55 0000      	linkw a5,#0
+    4134:	48e7 303a      	moveml d2-d3/a2-a4/a6,sp@-
+    4138:	286d 0008      	moveal a5@(8),a4
+    413c:	266d 000c      	moveal a5@(12),a3
+    4140:	246d 0010      	moveal a5@(16),a2
+    4144:	2f0b           	movel a3,sp@-
+    4146:	2f0c           	movel a4,sp@-
+    4148:	4eba ff8e      	jsr %pc@(40d8 <_pt_native_amigus_interrupt_dispatch+0x38>)
+    414c:	508f           	addql #8,sp
+    414e:	4a80           	tstl d0
+    4150:	672c           	beqs 417e <_pt_native_amigus_interrupt_install+0x4e>
+    4152:	b4fc 0000      	cmpaw #0,a2
+    4156:	6726           	beqs 417e <_pt_native_amigus_interrupt_install+0x4e>
+    4158:	4a92           	tstl a2@
+    415a:	6722           	beqs 417e <_pt_native_amigus_interrupt_install+0x4e>
+    415c:	7001           	moveq #1,d0
+    415e:	b0aa 0008      	cmpl a2@(8),d0
+    4162:	661a           	bnes 417e <_pt_native_amigus_interrupt_install+0x4e>
+    4164:	2c54           	moveal a4@,a6
+    4166:	206b 001c      	moveal a3@(28),a0
+    416a:	202b 0034      	movel a3@(52),d0
+    416e:	220b           	movel a3,d1
+    4170:	243c 0000 41c8 	movel #16840,d2
+    4176:	260a           	movel a2,d3
+    4178:	4eae ffd0      	jsr a6@(-48)
+    417c:	6006           	bras 4184 <_pt_native_amigus_interrupt_install+0x54>
+    417e:	203c 0000 0402 	movel #1026,d0
+    4184:	4ced 5c0c ffe8 	moveml a5@(-24),d2-d3/a2-a4/a6
+    418a:	4e5d           	unlk a5
+    418c:	4e75           	rts
+
+<_pt_native_amigus_interrupt_remove>:
+    418e:	4e55 0000      	linkw a5,#0
+    4192:	48e7 0032      	moveml a2-a3/a6,sp@-
+    4196:	266d 0008      	moveal a5@(8),a3
+    419a:	246d 000c      	moveal a5@(12),a2
+    419e:	2f0a           	movel a2,sp@-
+    41a0:	2f0b           	movel a3,sp@-
+    41a2:	4eba ff34      	jsr %pc@(40d8 <_pt_native_amigus_interrupt_dispatch+0x38>)
+    41a6:	508f           	addql #8,sp
+    41a8:	4a80           	tstl d0
+    41aa:	6710           	beqs 41bc <_pt_native_amigus_interrupt_remove+0x2e>
+    41ac:	2c53           	moveal a3@,a6
+    41ae:	206a 001c      	moveal a2@(28),a0
+    41b2:	202a 0034      	movel a2@(52),d0
+    41b6:	220a           	movel a2,d1
+    41b8:	4eae ffca      	jsr a6@(-54)
+    41bc:	4ced 4c00 fff4 	moveml a5@(-12),a2-a3/a6
+    41c2:	4e5d           	unlk a5
+    41c4:	4e75           	rts
+	...

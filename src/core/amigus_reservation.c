@@ -2,7 +2,7 @@
 #include <string.h>
 int pt_amigus_reservation_close(struct pt_amigus_reservation *r)
 {
-    if (!r || r->access) return 0;
+    if (!r || r->access || r->interrupt) return 0;
     if (r->reserved) r->api.release(r->api.context, r->card, r->resource, r);
     if (r->opened) r->api.close(r->api.context);
     memset(r, 0, sizeof(*r));
@@ -19,7 +19,7 @@ enum pt_amigus_reservation_result pt_amigus_reservation_open_resource(
     unsigned i, j;
     unsigned long code;
     enum pt_amigus_reservation_result result = PT_AMIGUS_NO_CARD;
-    if (!r || r->opened || r->reserved || r->access || !api || !api->open ||
+    if (!r || r->opened || r->reserved || r->access || r->interrupt || !api || !api->open ||
         !api->close || !api->find || !api->supported || !api->reserve ||
         !api->release || index >= 16 ||
         (resource != PT_AMIGUS_PCM && resource != PT_AMIGUS_WAVETABLE)) return PT_AMIGUS_INVALID;
@@ -60,13 +60,13 @@ failed:
 }
 int pt_amigus_reservation_begin(struct pt_amigus_reservation *r)
 {
-    if (!r || !r->reserved || r->access) return 0;
+    if (!r || !r->reserved || r->access || r->interrupt) return 0;
     r->access = 1;
     return 1;
 }
 int pt_amigus_reservation_end(struct pt_amigus_reservation *r)
 {
-    if (!r || !r->access) return 0;
+    if (!r || !r->access || r->interrupt) return 0;
     r->access = 0;
     return 1;
 }

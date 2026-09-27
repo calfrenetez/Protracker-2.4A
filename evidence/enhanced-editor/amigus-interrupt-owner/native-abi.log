@@ -1,0 +1,5 @@
+EXEC MEMORY pool_limit=131260448 reserve=262144 flags=4
+amigus reservation lifecycle: PASS (fake library, no hardware)
+AMIGUS INTERRUPT OWNER PASS: partial install retains reservation, removal request is not quiescence, pending/error/invalid status refuses release; injected callbacks only
+EXEC MEMORY PASS: 1 Fast allocations, zero owned bytes, budget refusal without Chip fallback
+AMIGUS NATIVE ABI PASS: private Find/Reserve/Free/Install/Remove vectors, a0/d0/d1/d2/d3/a6, full32 return, explicit callback bridge, partial-install retention and separate quiescence, per-context PCM/wavetable owners; no installed library or hardware access

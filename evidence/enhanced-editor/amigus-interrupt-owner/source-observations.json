@@ -1,0 +1,14 @@
+{
+  "commit": "d8c9a0429f41cd5f3dbadae34ef438e45c9c3718",
+  "source": "Software/Drivers/Base/src/amigus_base.c",
+  "sha256": "6b562ffb6b3a73832e65efd6c43582750e7ab148c521d229c5153e0b10803f04",
+  "observations": [
+    "ChangePartInterrupt stores handler/data before HandleInterruptChanges can report failure.",
+    "InstallInterrupt returns ULONG; failure cannot prove the callback was not retained.",
+    "RemoveInterrupt is VOID; it offers no status acknowledgement."
+  ],
+  "sfd_offsets": {
+    "install": 48,
+    "remove": 54
+  }
+}

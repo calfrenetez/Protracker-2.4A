@@ -11,4 +11,9 @@ extern struct Library *AmiGUS_Base;
     struct AmiGUS *, card, a0, LONG, flag, d0, APTR, owner, d1, , AmiGUS_Base)
 #define PT_Free(card, flag, owner) LP3NR(0x2a, PT_Free, \
     struct AmiGUS *, card, a0, LONG, flag, d0, APTR, owner, d1, , AmiGUS_Base)
+#define PT_InstallInterrupt(card, flag, owner, handler, data) LP5(0x30, ULONG, PT_InstallInterrupt, \
+    struct AmiGUS *, card, a0, LONG, flag, d0, APTR, owner, d1, \
+    AmiGUS_Interrupt, handler, d2, APTR, data, d3, , AmiGUS_Base)
+#define PT_RemoveInterrupt(card, flag, owner) LP3NR(0x36, PT_RemoveInterrupt, \
+    struct AmiGUS *, card, a0, LONG, flag, d0, APTR, owner, d1, , AmiGUS_Base)
 #endif

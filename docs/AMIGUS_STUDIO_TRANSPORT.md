@@ -271,3 +271,20 @@ preservation under shared030 execution, alongside the native reservation vectors
 This is ordinary task-context ABI evidence, not actual interrupt installation,
 concurrent teardown, MMIO or hardware qualification. Native PLAY remains unwired.
 Evidence: `evidence/enhanced-editor/amigus-callback-abi/`.
+
+## Partial interrupt installation ownership
+
+`amigus_interrupt_owner` now guards an existing reservation access lease before
+calling install. A nonzero installation error may follow callback retention in
+the pinned driver. Failed installation therefore still requires stop, and access
+end/card close remain refused. Removal is requested once; only a separate bounded
+quiesce callback returning exactly1 releases the guard. Native install/remove
+wrappers verify context and call the published -48/-54 vectors without a global
+library base. They supply no hardware quiescence implementation.
+
+Host sanitizer and private-vector native fixtures cover successful/partial
+installation, full32-bit status, callback entry/data/registers, both resources,
+pending/error/invalid quiescence and safe release. Evidence:
+`evidence/enhanced-editor/amigus-interrupt-owner/`. This is ordinary task-context
+execution of private vectors, not actual interrupt installation/removal or audio
+acceptance. Native output remains unwired.

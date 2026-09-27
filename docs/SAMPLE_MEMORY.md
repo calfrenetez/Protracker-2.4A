@@ -16,7 +16,7 @@ software implementation from the remaining integration and hardware gates.
 | Authoritative8/16/24-bit masters | Queried, bounded native Fast-RAM pool; precision-preserving sampler versions, processing, history and source pins. Fast-equipped machines fail rather than spill enhanced allocations into Chip RAM. | Physical memory-pressure/endurance measurements. |
 | Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition preserves master precision. | Enhanced multichannel song routing beyond the classic four-channel bridge; physical sound/performance acceptance. |
 | AmiGUS wavetable copies | Versioned evictable resource pool, sampler revision/master-pin bridge, bounded 16-voice lease owner with validated rate/loop/address plans, mono sequencer trigger/control/stop dispatch, preflight-gated master-pinned sequence ownership, editor veto/retry barriers and injected callbacks, 8/16-bit conversion and bounded address allocator/chunk uploader behind an injected register bus; failure/pinning tests. | Verified card capacity, native bus binding and voice dispatcher; explicit wavetable reservation/cache lifetime now implemented and tested with fake callbacks. Injected register tests do not establish real card access. |
-| Direct24-bit Studio | Master-pinned mixer, audited sequence, sampler/editor ownership, bounded queue/pump and consumer lifecycle. Up to16 voice slots are a software bound. | Native PLAY/output wiring, verified hardware capabilities and sustainable physical voice-count/timing evidence. |
+| Direct24-bit Studio | Master-pinned mixer, audited sequence, sampler/editor ownership, bounded queue/pump and integrated PCM-session owner; optional reservation lease retained through reset and adapter quiescence. Up to16 voice slots are a software bound. | Native PLAY/output wiring, verified hardware capabilities and sustainable physical voice-count/timing evidence. |
 | Master-preserving persistence | Bounded enhanced-project/sample saving and explicit classic conversion; private EFx exports/bounce never replace masters. | Broader workflow/release and physical acceptance beyond the retained fixtures. |
 | Playback invalidation | Revision/settings keys, retired active leases and stop-before-edit/undo/dispose guards. Private EFx banks are discarded on stop and rebuilt on restart. | End-to-end real AmiGUS voice/transfer ownership, once the device adapter exists. |
 
@@ -2569,3 +2569,17 @@ injected adapter, not capability validation or permission for MMIO. Host and nat
 shared030 fixtures cover natural completion and failed startup/Stop/reset/quiescence;
 141 Fast allocations return to zero. Evidence:
 `evidence/enhanced-editor/editor-studio-reserved/`. Native PLAY remains unwired.
+
+
+### Broad committed-source regression,27September2026
+
+A clean export of1ac4856 builds139native executables, including the editor. All
+200host tests now have passing execution:198passed in the exported-suite run,
+while two Git-dependent source-export tests required separate successful runs
+through their existing repository-root helpers. The initial setup errors are kept.
+Fourteen registered noninteractive core cases and five Paula/cache fixtures passed
+shared030 with exact candidate hashes, all DMA off and confirmed cleanup/release.
+Paula's CIAA fallback subcase remains unexecuted because Workbench owns timerB.
+The139builds are not139runtime qualifications; actual AmiGUS, native Studio PLAY,
+physical performance and listening remain separate. See evidence folders
+`core-regression-20260927/` and `paula-regression-20260927/`.

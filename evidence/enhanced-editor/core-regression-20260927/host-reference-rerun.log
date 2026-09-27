@@ -1,0 +1,8 @@
+test_committed_editor_reference_ownership (test_editor_invert_reference.EditorInvertReference.test_committed_editor_reference_ownership) ... EDITOR EFx REFERENCE PASS: exact queued PCM, backpressure, guarded edits, held leases, undo/restart, master roundtrip, no leaks
+EDITOR EFx REFERENCE PASS: exact queued PCM, backpressure, guarded edits, held leases, undo/restart, master roundtrip, no leaks
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 8.196s
+
+OK

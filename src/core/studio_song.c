@@ -1,4 +1,4 @@
-#include "studio_song.h"
+#include "studio_internal.h"
 #include <string.h>
 struct pt_studio_song {
     struct pt_allocator allocator;struct pt_render_sequence *sequence;
@@ -91,8 +91,8 @@ enum pt_render_result pt_studio_song_open(const struct pt_project *p,const struc
     if(result!=PT_RENDER_OK) {pt_studio_song_close(s);return result;}
     *out=s;return PT_RENDER_OK;
 }
-enum pt_render_result pt_studio_song_pull(struct pt_studio_song *s,unsigned max_frames,
-    const struct pt_pcm **pcm,unsigned *done)
+static enum pt_render_result pull(struct pt_studio_song *s,unsigned max_frames,
+    const struct pt_pcm **pcm,unsigned *done,unsigned prepared)
 {
     enum pt_render_result result;uint64_t clipped;
     if(!s || !pcm || !done || !max_frames || max_frames>256)return PT_RENDER_INVALID;
@@ -112,8 +112,13 @@ enum pt_render_result pt_studio_song_pull(struct pt_studio_song *s,unsigned max_
     }
     result=pt_render_sequence_complete(s->sequence,&s->plan);if(result!=PT_RENDER_OK)goto fail;
     if(s->interval.end) {pt_studio_song_stop(s);*done=1;return PT_RENDER_OK;}
-    if(pt_studio_dispatch(s->mix,s->voices,&s->plan,s->bindings,s->count)!=PT_PCM_OK) {result=PT_RENDER_SAMPLE;goto fail;}
+    if((prepared?pt_studio_dispatch_prepared(s->mix,s->voices,&s->plan,s->bindings,s->count):
+        pt_studio_dispatch(s->mix,s->voices,&s->plan,s->bindings,s->count))!=PT_PCM_OK) {result=PT_RENDER_SAMPLE;goto fail;}
     s->pending=0;return PT_RENDER_OK;
 fail:
     s->failure=result;pt_studio_song_stop(s);*done=1;return result;
 }
+enum pt_render_result pt_studio_song_pull(struct pt_studio_song *s,unsigned frames,const struct pt_pcm **pcm,unsigned *done)
+{return pull(s,frames,pcm,done,0);}
+enum pt_render_result pt_studio_song_pull_prepared(struct pt_studio_song *s,unsigned frames,const struct pt_pcm **pcm,unsigned *done)
+{return pull(s,frames,pcm,done,1);}

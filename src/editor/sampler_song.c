@@ -1,5 +1,6 @@
 #include "sampler_song.h"
 #include "sampler_internal.h"
+#include "../core/studio_internal.h"
 #include <string.h>
 struct pt_sampler_song {
     struct pt_allocator allocator;struct pt_sampler *sampler;struct pt_project *project;
@@ -101,7 +102,7 @@ enum pt_render_result pt_sampler_song_pull(struct pt_sampler_song *s,unsigned fr
         enum pt_render_result result=pt_sampler_song_prepare(s,&ready);
         *done=result!=PT_RENDER_OK;return result;
     }
-    s->failure=pt_studio_song_pull(s->song,frames,pcm,done);
+    s->failure=pt_studio_song_pull_prepared(s->song,frames,pcm,done);
     if(s->failure || *done)pt_sampler_song_stop(s);
     return s->failure;
 }

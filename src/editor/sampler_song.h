@@ -18,7 +18,8 @@ enum pt_render_result pt_sampler_song_open(struct pt_sampler *,struct pt_project
  * performs one analysis step, one budgeted allocation, or <=4096 PCM/marker bytes
  * copied. Unused samples are not promoted. Initial/reset validation and allocation
  * remain synchronous. Prepared acquisitions retain exact held pins using bounded
- * identity checks; public sampler/provider and mixer voice validation are unchanged.
+ * identity checks. This owned path reuses validated immutable voice setup; public
+ * sampler/provider/mixer APIs and mutable EFx retain full value validation.
  * Pull during preparation advances one step and returns NULL PCM/done=0 until
  * ready; errors poison/stop. Stop releases jobs/pins; unchanged completed masters
  * may remain sampler-owned. Cancel before edits or releasing any borrowed storage. */

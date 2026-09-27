@@ -1935,9 +1935,9 @@ immutable project; it cannot promote samples or validate untrusted inputs. Unexp
 version/descriptor changes refuse without publishing output or changing references.
 This does not authorize in-place edits or freeing borrowed arrays while active.
 Public sampler_pin, the general sampler_studio provider and public mixer/voice
-validation remain unchanged. The mixer still scans the selected source when
-establishing a voice, so this removes redundant whole-project validation without
-claiming hard real-time playback. Mutable EFx does not use this provider.
+validation remain unchanged. The subsequent prepared-voice boundary below also removes selected-source
+value rescans for this private path; neither change claims hard real-time
+playback. Mutable EFx does not use this provider.
 
 Instrumented host tests count calls to the actual project validator and verify
 none occur during prepared playback, including pre-roll and repeat handoffs;
@@ -1945,3 +1945,28 @@ public-provider checks still run and reject invalid unused samples. Native softw
 fixtures cover version retention/refusal, shared backing and final release. No
 native PLAY, card transport, physical timing or audible acceptance is established.
 Evidence: `evidence/enhanced-editor/studio-prepared-pins/`.
+
+### Prepared Studio voice establishment
+
+The private prepared sampler-song path now reuses its completed PCM validation
+when establishing ordinary voices, independent segments and pending repeat sources.
+An internal pull/dispatch/mixer call chain reaches the existing validated voice
+helpers only after the sampler owner is ready and its private provider retains the
+exact prepared version. Descriptor shape/capacity, playback geometry, format and
+alias checks remain; only repeated value scans are omitted. Active/pending pins,
+failed-trigger rollback, handoff and final-release behavior use the same code.
+
+No public opt-in flag or persistent trusted-mixer mode exists. Public Studio pull,
+dispatch, trigger, segment and repeat APIs retain full value validation, even on a
+mixer previously used by an internal prepared call. Arbitrary providers and mutable
+EFx never enter this private path. Its contract requires validated immutable PCM,
+retained exact versions and serialized owner-thread access; it does not validate
+untrusted data or permit writes through master pointers.
+
+Host instrumentation verifies neither project nor PCM value validators run during
+prepared direct playback, including pre-roll, slices, offset segments and repeat
+handoffs. Both mixer paths retain exact PCM, control, rollback and alias behavior;
+public invalid-value tests and private invalid-shape tests still refuse. Initial
+validation/reset and allocation remain synchronous. Queued output still performs
+its bounded block checks. No native PLAY/transport, real-time deadline, audible or
+physical acceptance follows. Evidence: `evidence/enhanced-editor/studio-prepared-voices/`.

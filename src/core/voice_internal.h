@@ -1,7 +1,7 @@
 #ifndef PT_VOICE_INTERNAL_H
 #define PT_VOICE_INTERNAL_H
 #include "voice.h"
-/* Renderer-only entry points AFTER full source-value validation and while all
+/* Immutable renderer/prepared Studio entry points AFTER full source-value validation and while all
  * source values remain immutable. Descriptor shape/capacity, bounds, format and
  * alias checks still run; only the value scan is omitted. No validation token,
  * ownership or pin is created. Never use for untrusted or mutable playback PCM.

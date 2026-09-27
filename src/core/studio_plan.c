@@ -1,4 +1,4 @@
-#include "studio_plan.h"
+#include "studio_internal.h"
 #include <string.h>
 static const struct pt_studio_binding *resolve(const struct pt_studio_binding *b,unsigned n,const struct pt_pcm *pcm)
 {
@@ -6,8 +6,8 @@ static const struct pt_studio_binding *resolve(const struct pt_studio_binding *b
     for(i=0;i<n;++i)if(b[i].pcm==pcm) {if(found || !pcm)return NULL;found=b+i;}
     return found;
 }
-enum pt_pcm_result pt_studio_dispatch(struct pt_studio_mix *mix,unsigned voices,
-    const struct pt_render_plan *plan,const struct pt_studio_binding *bindings,unsigned count)
+static enum pt_pcm_result dispatch(struct pt_studio_mix *mix,unsigned voices,
+    const struct pt_render_plan *plan,const struct pt_studio_binding *bindings,unsigned count,unsigned prepared)
 {
     unsigned i;enum pt_pcm_result result=PT_PCM_INVALID;
     if(!mix)return result;
@@ -30,10 +30,13 @@ enum pt_pcm_result pt_studio_dispatch(struct pt_studio_mix *mix,unsigned voices,
             note.start=v->start;note.end=v->end;note.loop=(enum pt_voice_loop)v->loop;
             note.loop_start=v->loop_start;note.loop_end=v->loop_end;note.linear=v->linear;
             /* Final CONTROL establishes gains before the next read. */
-            result=a->kind==PT_RENDER_SEGMENT?pt_studio_trigger_segment(mix,a->channel,&note):pt_studio_trigger(mix,a->channel,&note);break;
+            if(prepared)result=a->kind==PT_RENDER_SEGMENT?pt_studio_segment_prepared(mix,a->channel,&note):pt_studio_trigger_prepared(mix,a->channel,&note);
+            else result=a->kind==PT_RENDER_SEGMENT?pt_studio_trigger_segment(mix,a->channel,&note):pt_studio_trigger(mix,a->channel,&note);
+            break;
         case PT_RENDER_REPEAT:
             b=resolve(bindings,count,v->repeat_pcm);
-            result=pt_studio_repeat(mix,a->channel,b->key,b->version,v->loop_start,v->loop_end);break;
+            result=prepared?pt_studio_repeat_prepared(mix,a->channel,b->key,b->version,v->loop_start,v->loop_end):
+                pt_studio_repeat(mix,a->channel,b->key,b->version,v->loop_start,v->loop_end);break;
         case PT_RENDER_STOP:pt_studio_stop(mix,a->channel);break;
         case PT_RENDER_CONTROL: {
             struct pt_studio_control c[16];memset(c,0,sizeof(c));
@@ -48,3 +51,9 @@ fail:
     for(i=0;i<16;++i)pt_studio_stop(mix,i);
     return result;
 }
+enum pt_pcm_result pt_studio_dispatch(struct pt_studio_mix *mix,unsigned voices,
+    const struct pt_render_plan *plan,const struct pt_studio_binding *bindings,unsigned count)
+{return dispatch(mix,voices,plan,bindings,count,0);}
+enum pt_pcm_result pt_studio_dispatch_prepared(struct pt_studio_mix *mix,unsigned voices,
+    const struct pt_render_plan *plan,const struct pt_studio_binding *bindings,unsigned count)
+{return dispatch(mix,voices,plan,bindings,count,1);}

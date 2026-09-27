@@ -69,6 +69,11 @@ int main(void)
         assert(i<30 && done && !block && !pins && owned==1);
         assert(pt_studio_song_pull(s,256,&block,&done)==PT_RENDER_SAMPLE);
         pt_studio_song_close(s);assert(!owned);fail_pin=0;
+        master.bits=8; /* Arbitrary public provider returns invalid sample values. */
+        assert(pt_studio_song_open(&p,&o,&a,&provider,&binding,1,&s)==PT_RENDER_OK);
+        for(i=0;i<30;++i)if(pt_studio_song_pull(s,256,&block,&done)!=PT_RENDER_OK)break;
+        assert(i<30 && done && !block && !pins && owned==1);
+        pt_studio_song_close(s);assert(!owned);master=sample.pcm;
     }
     puts("SONG SESSION PASS: reference audio, tempo/delay, pre-roll, partition invariance, protocol and allocation refusal");return 0;
 }

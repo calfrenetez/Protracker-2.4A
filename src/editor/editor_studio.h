@@ -44,4 +44,26 @@ enum pt_pump_result pt_editor_studio_step(struct pt_editor_studio *,unsigned fra
  * later edits still stop buffered output. Caller must poll output shutdown and
  * confirm detach before freeing output context/queue; this hook cannot wait. */
 int pt_editor_studio_bind_output_stop(struct pt_editor_studio *,void (*)(void *),void *);
+/* Integrated serialized editor/queue/PCM-session owner. Zero-init once; attach
+ * before start. This is an injected FIFO adapter, not native MMIO or PLAY.
+ * Editor, port and drain contexts outlive successful detach. Never manipulate
+ * the embedded owners or queue independently, and never reenter callbacks.
+ * Start failure may retain a queue while reset is uncertain: keep stepping until
+ * queue==NULL, even after ERROR. Only successful detach permits freeing contexts.
+ * Each step advances at most one producer operation and one output operation.
+ * No allocation occurs after preparation, and no hardware timing is promised. */
+#include "../core/amigus_session.h"
+struct pt_editor_studio_output {
+    struct pt_editor_studio producer;
+    struct pt_amigus_session session;
+    struct pt_studio_queue *queue;
+    unsigned failed;
+};
+int pt_editor_studio_output_attach(struct pt_editor_studio_output *,struct pt_editor *);
+int pt_editor_studio_output_start(struct pt_editor_studio_output *,const struct pt_render_options *,unsigned queue_blocks,const struct pt_amigus_fifo_port *,int (*drain)(void *),void *);
+enum pt_consumer_result pt_editor_studio_output_step(struct pt_editor_studio_output *,unsigned frames);
+void pt_editor_studio_output_stop(struct pt_editor_studio_output *);
+/* Requests Stop but performs no I/O; refuses until pending reset is confirmed by
+ * step. On success removes the editor guard and releases all owned memory. */
+int pt_editor_studio_output_detach(struct pt_editor_studio_output *);
 #endif

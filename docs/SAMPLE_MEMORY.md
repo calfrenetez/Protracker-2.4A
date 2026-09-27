@@ -2539,3 +2539,22 @@ restoration and live verification in `finally`. Failure retains diagnostic evide
 and guest files; there is no retry, reset, install or network configuration change.
 Host tests cover refusal before selection and restoration on selection, execution
 and cleanup failure. These host guards do not establish physical availability.
+
+
+### Integrated editor Studio output owner
+
+`pt_editor_studio_output` composes the editor's cancellable master preparation,
+24-bit producer, bounded queue and injected PCM FIFO session. A serialized caller
+can attach, start, step, stop and detach through one lifecycle. Queue capacity is
+1..8 blocks; each step performs at most one producer operation and one output
+operation. Capacity stalls preserve queued data. Natural completion drains and
+resets before releasing the queue. Editor changes/undo/disposal and output errors
+stop source production; pending or failed reset retains the queue and forbids
+restart/detach until confirmed cleanup. Initial reset failure follows the same
+recovery contract. Errors remain visible after cleanup until a new start.
+
+The owner does not discover/reserve a device, install interrupts, access MMIO or
+wire native PLAY. Port and drain contexts, including any external reservation,
+must outlive successful detach. Host sanitizer fixtures compare every packed
+24-bit byte against a direct-mixer reference and cover startup refusal, stalls,
+edit/undo/Stop/dispose, partial-write/capacity/source faults and reset recovery.

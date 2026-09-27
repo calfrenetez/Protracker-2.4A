@@ -99,3 +99,60 @@ int pt_editor_studio_bind_output_stop(struct pt_editor_studio *o,void (*stop)(vo
     if(!attached(o) || !o->queue || !stop || o->output_stop)return 0;
     o->output_stop=stop;o->output_context=context;return 1;
 }
+
+
+static void output_session_stop(void *context) {pt_amigus_session_stop(context);}
+int pt_editor_studio_output_attach(struct pt_editor_studio_output *o,struct pt_editor *e)
+{
+    if(!o || o->queue || o->session.phase!=PT_AS_IDLE)return 0;
+    return pt_editor_studio_attach(&o->producer,e);
+}
+void pt_editor_studio_output_stop(struct pt_editor_studio_output *o)
+{
+    if(!o)return;
+    pt_editor_studio_stop(&o->producer);
+    /* Also covers initial-reset failure before the stop hook was bound. */
+    pt_amigus_session_stop(&o->session);
+}
+int pt_editor_studio_output_start(struct pt_editor_studio_output *o,const struct pt_render_options *options,unsigned blocks,const struct pt_amigus_fifo_port *port,int (*drain)(void *),void *context)
+{
+    if(!o || !attached(&o->producer) || o->queue || o->session.phase!=PT_AS_IDLE ||
+       !port || !port->capacity || !port->write3 || !port->reset || !drain || blocks<1 || blocks>8)return 0;
+    o->failed=0;
+    o->queue=pt_studio_queue_open(&o->producer.editor->sampler.allocator,blocks);
+    if(!o->queue) {o->failed=1;return 0;}
+    if(pt_editor_studio_begin_queued(&o->producer,options,o->queue)!=PT_RENDER_OK) {
+        pt_studio_queue_close(o->queue);o->queue=NULL;o->failed=1;return 0;
+    }
+    if(!pt_amigus_session_open(&o->session,o->queue,port,drain,context) ||
+       !pt_editor_studio_bind_output_stop(&o->producer,output_session_stop,&o->session)) {
+        o->failed=1;pt_editor_studio_output_stop(o);return 0;
+    }
+    return 1;
+}
+enum pt_consumer_result pt_editor_studio_output_step(struct pt_editor_studio_output *o,unsigned frames)
+{
+    enum pt_consumer_result result;
+    if(!o || !frames || frames>256)return PT_CONSUMER_ERROR;
+    if(!o->queue)return o->failed?PT_CONSUMER_ERROR:PT_CONSUMER_FINISHED;
+    if(o->session.phase==PT_AS_RUN && o->producer.queue &&
+       pt_editor_studio_step(&o->producer,frames)==PT_PUMP_ERROR) {
+        o->failed=1;pt_editor_studio_output_stop(o);
+    }
+    result=pt_amigus_session_step(&o->session);
+    if(result==PT_CONSUMER_ERROR) {o->failed=1;pt_editor_studio_output_stop(o);}
+    if(o->session.phase==PT_AS_DONE) {
+        pt_editor_studio_stop(&o->producer);
+        if(pt_studio_queue_close(o->queue)!=PT_QUEUE_OK) {o->failed=1;return PT_CONSUMER_ERROR;}
+        o->queue=NULL;pt_amigus_session_detach(&o->session);
+        return o->failed?PT_CONSUMER_ERROR:PT_CONSUMER_FINISHED;
+    }
+    return o->failed?PT_CONSUMER_ERROR:result;
+}
+int pt_editor_studio_output_detach(struct pt_editor_studio_output *o)
+{
+    if(!o)return 0;
+    pt_editor_studio_output_stop(o);
+    if(o->queue || !pt_amigus_session_detach(&o->session))return 0;
+    pt_editor_studio_detach(&o->producer);return 1;
+}

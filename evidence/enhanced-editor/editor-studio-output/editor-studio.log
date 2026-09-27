@@ -1,0 +1,4 @@
+EXEC MEMORY pool_limit=131071656 reserve=262144 flags=4
+EDITOR STUDIO OUTPUT PASS: direct24 byte parity, bounded producer/FIFO steps, natural drain, edit/undo/Stop/dispose and failure reset ownership, restart and zero allocations retained
+EDITOR STUDIO PASS: real pinned song stopped by edit/undo/dispose, queued edit/undo/Stop/dispose held leases, natural drain, navigation and cleanup
+EXEC MEMORY PASS: 121 Fast allocations, zero owned bytes, budget refusal without Chip fallback

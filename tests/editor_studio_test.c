@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include "../src/editor/editor_studio.h"
 #include "../src/core/amigus_session.h"
-static unsigned live;
-static void *allocate(void *c,size_t n) {void *p;(void)c;p=malloc(n);if(p)++live;return p;}
+static unsigned live,fail_next;
+static void *allocate(void *c,size_t n) {void *p;(void)c;if(fail_next){fail_next=0;return NULL;}p=malloc(n);if(p)++live;return p;}
 static void release(void *c,void *p) {(void)c;if(p){assert(live);--live;free(p);}}
 static void start(struct pt_editor_studio *o,struct pt_render_options *options)
 {
@@ -20,6 +20,8 @@ static int port_write(void *c,const uint32_t *p) {(void)c;(void)p;return 1;}
 static int port_reset(void *c) {return *(int *)c;}
 static int port_drain(void *c) {(void)c;return 0;}
 static void output_stop(void *c) {++output_stops;pt_amigus_session_stop(c);}
+
+#include "editor_studio_output_cases.h"
 int main(void)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_document d;struct pt_editor *e=calloc(1,sizeof(*e));
@@ -118,5 +120,6 @@ int main(void)
     assert(pt_editor_studio_pull(&owner,1,&out,&done)==PT_RENDER_OK && done && !out);
     pt_editor_studio_detach(&owner);assert(!e->before_change && !owner.editor);
     pt_document_release(&d);free(e);assert(!live && pcm[0]==257);
+    editor_studio_output_cases();
     puts("EDITOR STUDIO PASS: real pinned song stopped by edit/undo/dispose, queued edit/undo/Stop/dispose held leases, natural drain, navigation and cleanup");return 0;
 }

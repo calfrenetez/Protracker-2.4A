@@ -2296,3 +2296,29 @@ Tests check each returned tick reaches the target and its predecessor does not,
 compare against an independent original-epoch arithmetic oracle, cover extreme
 limits/borrowing, and drive a full song using queried ticks. No timer is armed by
 the query, and the existing strict no-late-dispatch policy remains unchanged.
+
+### Native read-only EClock ownership
+
+`src/native/eclock.h` supplies an owner-thread sampled-clock callback using the
+native timer.device EClock. It opens its own port/request/unit, requires Exec and
+timer.device version36 or later, and keeps the device base local to each read.
+It assembles both32-bit counter halves and returns the reported frequency rather
+than assuming PAL/NTSC timing. Failed/invalid/closed reads preserve outputs;
+outputs cannot overlap each other or the owner. Partial open failures unwind in
+reverse order. Close is idempotent and releases the private device/request/port.
+
+The owner must stay open until its reader clients are closed. This request is
+NEVER submitted: there is no pending IO, signal wait, clock-setting command,
+CIA programming or voice/device-output action. It does not change the existing
+editor's display timer and is not yet wired into native enhanced PLAY. Host tests
+inject every allocation/open/version failure and check exact release and output
+atomicity. The native fixture separately reads the real emulator timer.device
+across repeated open/close epochs and feeds those readings through the checked
+frame/deadline converter. This demonstrates clock access/lifetime, not wakeup
+accuracy, callback budgets, audio cadence or physical timing.
+
+API basis: installed classic NDK devices/timer.h and proto/inline timer headers;
+the [AmigaOS timer device documentation](https://wiki.amigaos.net/wiki/Timer_Device)
+describes the64-bit EClock count/frequency and distinguishes clock measurement
+from timer requests. Modern interface examples on that page are not copied into
+the classic68k implementation.

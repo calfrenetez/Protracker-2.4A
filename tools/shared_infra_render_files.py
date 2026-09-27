@@ -4,6 +4,16 @@ import argparse, fcntl, hashlib, importlib.util, json, shutil, sys, time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
+def require_running_guest(guest,out,phase):
+    """Read only: a connected bridge/IPC can belong to a paused emulator."""
+    status=guest.command('GET_STATUS')
+    (out/('guest-status-'+phase+'.json')).write_text(json.dumps({'status':status},indent=2)+'\n')
+    paused=[field for field in status.split('\t') if field.startswith('Paused=')]
+    if paused!=['Paused=false']:
+        raise RuntimeError('Shared guest is paused or its running state is unknown; no automatic resume/retry')
+def prepare_run(guest,out):
+    require_running_guest(guest,out,'before-staging')
+    run=guest.share/out.name;run.mkdir();return run
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     group=parser.add_mutually_exclusive_group()
@@ -49,7 +59,12 @@ def main():
     result={'passed':False,'scope':'shared030 native render/stem file checks'}
     with (INFRA/'runtime/test.lock').open('a') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
-        guest=Guest(INFRA,out);run=guest.share/out.name;run.mkdir()
+        guest=Guest(INFRA,out)
+        try:run=prepare_run(guest,out)
+        except Exception:
+            result['prelaunch_refused']=True;result['run_files_staged']=False
+            (out/'result.json').write_text(json.dumps(result,indent=2)+'\n');print(out)
+            raise
         finished=False
         cases=[('render','PTRenderFileTest','RENDER FILE PASS:'),('stems','PTStemFileTest','STEMS files PASS:'),
                ('core-allocated','PTRenderAllocTest','RENDER PASS:'),
@@ -187,6 +202,7 @@ def main():
                 commands=['FailAt 21','Stack 65536','CD '+guest.device+run.name+'/stem-cli',
                           command+' >test.log','Echo $RC >test.rc',command+' >repeat.log','Echo $RC >repeat.rc']
             commands+=['Echo done >'+guest.device+run.name+'/done']
+            require_running_guest(guest,out,'before-launch')
             guest.launch.write_text('\n'.join(commands)+'\n');guest.start()
             # The cumulative editor-wavetable fixture includes native timer and
             # cancellation diagnostics; its process budget is not an audio deadline.

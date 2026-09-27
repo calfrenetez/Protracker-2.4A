@@ -1,4 +1,10 @@
 #include "../src/editor/wavetable_song.h"
+#ifdef PT_TEST_RENDER_VOICE_COUNT
+extern unsigned pt_test_render_restores;
+#define RESTORE_COUNT pt_test_render_restores
+#else
+#define RESTORE_COUNT 0U
+#endif
 #ifdef PT_TEST_PROJECT_VALIDATION_COUNT
 extern unsigned pt_test_project_validations;
 #define VALIDATIONS_SAVE unsigned validations=pt_test_project_validations
@@ -188,7 +194,7 @@ static void range_song_fixture(void)
        restore; cancel before any output; range starts at first row; future trigger. */
     for(mode=0;mode<10;++mode) {
         if(mode){song_bind(f,&bridge,&owner,bus,&sampler,&d.project);owner.api.restore=range_restore;}
-        o.row_first=mode==5?0:1;o.row_end=mode==1?2:3;
+        o.row_first=mode==5?0:1;o.row_end=mode==1?2:3;format.bits=mode==1?8:16;
         if(mode==6)d.project.events[9]=(struct pt_event){428,0,PT_NOTE_PERIOD,2,0,0,0,0};
         assert(pt_render_measure(&d.project,&o,NULL,NULL,&measured)==PT_RENDER_OK);
         assert(pt_wavetable_song_open(&owner,&o,&format,&a,&report,&song)==PT_WAVETABLE_SONG_OK);
@@ -203,7 +209,9 @@ static void range_song_fixture(void)
             {VALIDATIONS_SAVE;PCM_SAVE;unsigned guard=0;
                 span=(struct pt_render_interval){123,4,5};
                 do {
+                    unsigned conversions=RESTORE_COUNT;
                     result=mode==6?pt_wavetable_song_next_step(song,&span):pt_wavetable_song_next_prepare(song,&span);
+                    assert(RESTORE_COUNT-conversions<=1);
                     if(result==PT_WAVETABLE_SONG_UPLOADING) {
                         assert(++guard<100 && span.frames==123 && span.emit==4 && span.end==5);
                         assert(pt_wavetable_song_next_commit(song)==PT_WAVETABLE_SONG_INVALID);
@@ -213,10 +221,10 @@ static void range_song_fixture(void)
                     }
                 }while(result==PT_WAVETABLE_SONG_UPLOADING);
                 if(result==PT_WAVETABLE_SONG_OK && mode!=6) {
-                    struct pt_render_interval repeated;unsigned writes=f->writes,restores=bus->restores,starts=bus->starts;
+                    struct pt_render_interval repeated;unsigned writes=f->writes,restores=bus->restores,starts=bus->starts,conversions=RESTORE_COUNT;
                     assert(pt_wavetable_song_next_prepare(song,&repeated)==PT_WAVETABLE_SONG_OK);
                     assert(repeated.frames==span.frames && repeated.emit==span.emit && repeated.end==span.end);
-                    assert(f->writes==writes && bus->restores==restores && bus->starts==starts);
+                    assert(f->writes==writes && bus->restores==restores && bus->starts==starts && RESTORE_COUNT==conversions);
                     assert(pt_wavetable_song_clock_arm(song,100)==PT_WAVETABLE_SONG_INVALID);
                     if(span.emit && first)assert(!bus->restores && !bus->starts);
                     if(mode>=7 && span.emit) {
@@ -228,7 +236,7 @@ static void range_song_fixture(void)
                         assert(!pins(f) && !bus->restores && !bus->starts);break;
                     }
                     result=pt_wavetable_song_next_commit(song);
-                    assert(f->writes==writes);
+                    assert(f->writes==writes && RESTORE_COUNT==conversions);
                     if(result==PT_WAVETABLE_SONG_OK)assert(pt_wavetable_song_next_commit(song)==PT_WAVETABLE_SONG_INVALID);
                 }
                 VALIDATIONS_UNCHANGED;PCM_UNCHANGED;}
@@ -243,7 +251,7 @@ static void range_song_fixture(void)
                 assert(pt_render_sequence_snapshot(oracle,&snapshot)==PT_RENDER_OK);
                 assert(pt_sampler_wavetable_location(&bridge,owner.voice[0].lease,&address,&bytes));
                 position=snapshot.voice[0].phase+((uint64_t)snapshot.voice[0].loop_start<<32);
-                assert(bus->cursor[0]==((uint64_t)address<<32)+position*2);
+                assert(bus->cursor[0]==((uint64_t)address<<32)+position*(format.bits/8));
                 if(mode!=5)assert((uint32_t)position);
                 assert(bus->restores==(mode==5?2U:1U) && !bus->starts);first=0;
                 if(mode==2)bus->stop_result[0]=0;
@@ -270,7 +278,7 @@ static void range_song_fixture(void)
         exact_save(&d.project,saved,size);
     }
     free(saved);pt_sampler_release(&sampler);pt_document_release(&d);free(bus);free(f);assert(!allocations);
-    puts("WAVETABLE STAGED RESTORE PASS: bounded callback-free preparation, repeatable readiness, write-free exact commit, early/double refusal and ready cancel/stale ownership");
+    puts("WAVETABLE STAGED RESTORE PASS: one exact-cursor conversion per preparation step,8/16-bit fractional parity, zero commit conversion/upload, repeat readiness and early/double/cancel/stale/uncertain-stop ownership");
     puts("WAVETABLE RANGE PASS: silent pre-roll, exact fractional restore before output, selective source pins, final-span timing and uncertain-stop ownership; injected only");
 }
 
@@ -633,3 +641,5 @@ static void uploading_song_fixture(void)
 
 #undef VALIDATIONS_SAVE
 #undef VALIDATIONS_UNCHANGED
+
+#undef RESTORE_COUNT

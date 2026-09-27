@@ -17,6 +17,9 @@ struct pt_wavetable_prepared {
     /* Certifies that every command of this exact private immutable batch was
        converted during preparation. Never supplied by a public caller. */
     int (*batch_ready)(void *,const struct pt_render_plan *,unsigned,const struct pt_playback_format *);
+    int (*restore_ready)(void *,const struct pt_render_snapshot *,unsigned,const struct pt_playback_format *);
+    int (*restore_plan)(void *,const struct pt_render_snapshot *,unsigned,unsigned,const struct pt_playback_format *,
+        uint32_t,uint32_t,struct pt_amigus_restore_plan *);
     int (*control_plan)(void *,const struct pt_render_action *,unsigned,uint32_t *,uint16_t *,uint16_t *);
     /* Exact private action, rate/format and pinned location must still match.
        Geometry is computed during bounded preparation, never on this callback. */

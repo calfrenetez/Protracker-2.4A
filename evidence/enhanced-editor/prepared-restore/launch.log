@@ -1,0 +1,15 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "ERROR: the Amiga bridge did not respond to 'run_script' within the timeout. It is reachable but not answering — most likely busy running a long command or wedged. This is a communication timeout, NOT an unsupported command.",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": {
+    "result": "ERROR: the Amiga bridge did not respond to 'run_script' within the timeout. It is reachable but not answering — most likely busy running a long command or wedged. This is a communication timeout, NOT an unsupported command."
+  },
+  "isError": false
+}

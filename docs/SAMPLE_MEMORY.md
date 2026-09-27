@@ -2443,3 +2443,33 @@ native build/main syntax and shared030 execution (RC0,1255Fast allocations, zero
 owned bytes, all DMA off and exact cleanup). Source/ownership checks still dominate
 substantial synchronous work; measured startup costs remain variable. This does
 not qualify realtime playback. Evidence: `evidence/enhanced-editor/prepared-batch/`.
+
+
+### Prepared exact range restoration
+
+Range-start batches now calculate at most one active voice's exact byte cursor,
+loop bounds, rate and gains per preparation call after all selected cache leases
+exist. Inactive channels are skipped within the fixed16-voice bound. The restore
+bank belongs to the same bounded song allocation and is invalidated on cancellation.
+Repeated readiness does not recompute it.
+
+The private snapshot identity, rate/format and captured address/byte length must
+match at commit. All voices must still be idle; master/version/cache checks,
+whole-batch acquisition/location validation, uncertain restore ownership and
+confirmed-stop release remain in force. Public manual restore retains its full
+validation and conversion path. No output callback runs during preparation.
+
+Host converter instrumentation checks one restore conversion per preparation
+step and zero during repeat readiness or commit. The range fixture compares
+fractional8/16-bit cache cursors with the independent render snapshot and exercises
+stale source, cancellation, early/double commit and uncertain-stop lease retention.
+Native enhanced/card PLAY remains disabled; this does not qualify realtime output.
+
+
+The range bank passed host sanitizers, staged editor lifecycle tests and native
+cross-build/main syntax. Its coordinated emulator launch timed out without an
+acknowledgement; read-only inspection found the guest paused and all DMA off,
+with no test log/RC/done. Emulator acceptance remains pending and a recovery hold
+retains exact staging/launcher. The runner now refuses a paused/unknown guest
+before staging and rechecks before launch; host guard tests pass. No automatic
+resume/reset/retry was performed. Evidence: `evidence/enhanced-editor/prepared-restore/`.

@@ -253,14 +253,17 @@ static int restore_dispatch(struct pt_wavetable_voices *v,uint64_t version,unsig
     enum pt_cache_result loaded;
     if(!v || !v->bridge || v->closing || !v->api.restore || !source_current(v,sources) || v->bridge->version!=version)return 0;
     for(ch=0;ch<16;++ch)if(v->voice[ch].held)return 0;
-    if(pt_wavetable_restore_preflight(v->bridge->project,snapshot,rate,format,1,&report)!=PT_WAVETABLE_COMPATIBLE)return 0;
+    if(sources) {
+        if(!sources->restore_ready || !sources->restore_ready(sources->context,snapshot,rate,format))return 0;
+    }else if(pt_wavetable_restore_preflight(v->bridge->project,snapshot,rate,format,1,&report)!=PT_WAVETABLE_COMPATIBLE)return 0;
     for(ch=0;ch<snapshot->channels;++ch)if(snapshot->voice[ch].active) {
         if(!resolve(v->bridge->project,snapshot->voice[ch].pcm,&slot))goto refused;
         loaded=source_acquire(v,sources,slot,format,staging,capacity,&lease[ch]);
         if(loaded!=PT_CACHE_LOAD && loaded!=PT_CACHE_HIT)goto refused;
         held[ch]=1;
         if(!source_location(v,sources,lease[ch],&address,&bytes) ||
-           !pt_amigus_render_restore(snapshot->voice+ch,rate,snapshot->gain[ch],format,address,bytes,plan+ch))goto refused;
+           !(sources?sources->restore_plan && sources->restore_plan(sources->context,snapshot,ch,rate,format,address,bytes,plan+ch):
+               pt_amigus_render_restore(snapshot->voice+ch,rate,snapshot->gain[ch],format,address,bytes,plan+ch)))goto refused;
     }
     /* All resources exist before any voice may read them. Recheck ownership
        after acquisitions; caller callbacks cannot change sampler state. */

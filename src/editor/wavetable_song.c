@@ -12,6 +12,7 @@ struct pt_wavetable_song {
     struct pt_sampler_upload_job upload;struct pt_render_lookahead ahead;unsigned forecast;
     struct pt_cache_lease lease[PT_RENDER_ACTIONS];
     struct pt_amigus_voice_plan command[PT_RENDER_ACTIONS];
+    struct pt_amigus_restore_plan restore_command[PT_WAVETABLE_VOICES];
     uint32_t trigger_address[PT_RENDER_ACTIONS],trigger_bytes[PT_RENDER_ACTIONS];
     unsigned plan_at,plan_lease;
     unsigned slot[PT_RENDER_ACTIONS],held[PT_RENDER_ACTIONS],batch_count,batch_at,uploading,next_stage;
@@ -126,6 +127,25 @@ static int source_batch_ready(void *context,const struct pt_render_plan *plan,un
         format->channel==s->format.channel && format->little_endian==s->format.little_endian &&
         format->word_pad==s->format.word_pad;
 }
+static int source_restore_ready(void *context,const struct pt_render_snapshot *snapshot,unsigned rate,
+    const struct pt_playback_format *format)
+{
+    struct pt_wavetable_song *s=context;
+    return s && format && snapshot==&s->resume && s->uploading==1 && s->batch_at==s->batch_count &&
+        snapshot->channels && snapshot->channels<=PT_WAVETABLE_VOICES && snapshot->channels==s->project->channels.count &&
+        s->plan_at==snapshot->channels && rate==s->rate && format->bits==s->format.bits &&
+        format->channel==s->format.channel && format->little_endian==s->format.little_endian &&
+        format->word_pad==s->format.word_pad;
+}
+static int source_restore_plan(void *context,const struct pt_render_snapshot *snapshot,unsigned channel,unsigned rate,
+    const struct pt_playback_format *format,uint32_t address,uint32_t bytes,struct pt_amigus_restore_plan *out)
+{
+    struct pt_wavetable_song *s=context;
+    /* Exact current master/location was checked immediately before this copy. */
+    if(!out || !source_restore_ready(s,snapshot,rate,format) || channel>=snapshot->channels ||
+       !snapshot->voice[channel].active || address!=s->trigger_address[channel] || bytes!=s->trigger_bytes[channel])return 0;
+    *out=s->restore_command[channel];return 1;
+}
 static int source_control_plan(void *context,const struct pt_render_action *action,unsigned rate,
     uint32_t *frequency,uint16_t *left,uint16_t *right)
 {
@@ -174,7 +194,7 @@ enum pt_wavetable_song_result pt_wavetable_song_begin(struct pt_wavetable_voices
     s->sampler=v->bridge->sampler;s->project=v->bridge->project;s->generation=s->sampler->generation;
     s->bridge=v->bridge;s->backend=s->bridge->backend;s->reservation=s->backend->reservation;
     s->version=v->bridge->version;memcpy(&s->snapshot,s->project,sizeof(s->snapshot));
-    s->sources=(struct pt_wavetable_prepared){s,source_current,source_acquire,source_location,source_batch_ready,source_control_plan,source_trigger_plan};
+    s->sources=(struct pt_wavetable_prepared){s,source_current,source_acquire,source_location,source_batch_ready,source_restore_ready,source_restore_plan,source_control_plan,source_trigger_plan};
     v->song_owner=s;*out=s;return PT_WAVETABLE_SONG_PREPARING;
 }
 enum pt_wavetable_song_result pt_wavetable_song_prepare(struct pt_wavetable_song *s,
@@ -249,6 +269,20 @@ static int batch_step(struct pt_wavetable_song *s)
         if(r==PT_CACHE_LOAD || r==PT_CACHE_HIT){s->held[i]=1;++s->batch_at;}
         else if(r!=PT_CACHE_PENDING)return -1;
         return 0;
+    }
+    if(s->uploading==1 && s->plan_at<s->resume.channels) {
+        uint32_t address,bytes;
+        /* Skip at most16 inactive channels; convert at most one exact cursor. */
+        while(s->plan_at<s->resume.channels && !s->resume.voice[s->plan_at].active)++s->plan_at;
+        if(s->plan_at<s->resume.channels) {
+            i=s->plan_at;
+            if(s->plan_lease>=s->batch_count || !s->held[s->plan_lease] ||
+               !source_location(s,s->lease[s->plan_lease],&address,&bytes) ||
+               !pt_amigus_render_restore(&s->resume.voice[i],s->rate,s->resume.gain[i],&s->format,
+                   address,bytes,&s->restore_command[i]))return -1;
+            s->trigger_address[i]=address;s->trigger_bytes[i]=bytes;
+            ++s->plan_at;++s->plan_lease;return 0;
+        }
     }
     if(s->uploading==2 && s->plan_at<s->plan.count) {
         const struct pt_render_action *action=s->plan.action+s->plan_at;

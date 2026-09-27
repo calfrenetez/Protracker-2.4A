@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "scope": "shared030 reference-driven EFx PCM core; no device/audio/physical acceptance",
+  "deadline_seconds": 240,
+  "binary_sha256": "b54554fb0cbfa759e1f57cc6864f0f7aae8730066d444f192560f6bfa3d5f715",
+  "cases": {
+    "inv_delay_disable": {
+      "rc": 0,
+      "log_sha256": "34a49242ebe6649264515ee983ad3748b1f2792546d4383492fcd108ddfda710"
+    }
+  },
+  "owned_files_cleaned": true,
+  "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=416\tsndbuf_status=0",
+  "elapsed_seconds": 78.75651699999798
+}

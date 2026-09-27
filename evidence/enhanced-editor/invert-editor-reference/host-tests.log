@@ -1,0 +1,84 @@
+.EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+.INVERT ordering native parity PASS: ticks=36 checked=30 immutable master
+INVERT ordering native parity PASS: ticks=30 checked=24 immutable master
+..EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+..EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+...INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=36 checked=30 immutable master
+INVERT ordering native parity PASS: ticks=36 checked=30 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+.....INVERT sequence native parity PASS
+INVERT sequence native parity PASS
+INVERT sequence native parity PASS
+.EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+.INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+.EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+..EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+.INVERT ordering native parity PASS: ticks=48 checked=42 immutable master
+INVERT ordering native parity PASS: ticks=48 checked=42 immutable master
+INVERT ordering native parity PASS: ticks=48 checked=42 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+..EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+.EDITOR EFx REFERENCE PASS: exact queued PCM, backpressure, guarded edits, held leases, undo/restart, master roundtrip, no leaks
+EDITOR EFx REFERENCE PASS: exact queued PCM, backpressure, guarded edits, held leases, undo/restart, master roundtrip, no leaks
+.EDITOR INVERT STUDIO PASS: private bank stopped by pattern/sample edits, undo/dispose, held leases, stale output shutdown, natural drain, refusal and cleanup
+.EDITOR STUDIO PASS: real pinned song stopped by edit/undo/dispose, queued edit/undo/Stop/dispose held leases, natural drain, navigation and cleanup
+.
+----------------------------------------------------------------------
+Ran 26 tests in 76.014s
+
+OK

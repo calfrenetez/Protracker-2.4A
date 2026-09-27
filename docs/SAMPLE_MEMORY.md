@@ -5,6 +5,28 @@ The enhanced project owns the authoritative sample, including its declared
 elements in the declared precision; 24-bit samples retain their low eight bits.
 Playback representations must never become the project's source of truth.
 
+## Current implementation status — 27 September 2026
+
+The sections below retain milestone history. Earlier statements such as “not yet
+wired” may be superseded by later sections; this table separates the present
+software implementation from the remaining integration and hardware gates.
+
+| Requirement | Implemented software | Still required |
+| --- | --- | --- |
+| Authoritative8/16/24-bit masters | Queried, bounded native Fast-RAM pool; precision-preserving sampler versions, processing, history and source pins. Fast-equipped machines fail rather than spill enhanced allocations into Chip RAM. | Physical memory-pressure/endurance measurements. |
+| Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition preserves master precision. | Enhanced multichannel song routing beyond the classic four-channel bridge; physical sound/performance acceptance. |
+| AmiGUS wavetable copies | Versioned evictable resource pool,8/16-bit conversion and bounded chunk-upload callback interface; failure/pinning tests. | Actual card-RAM allocator/uploader and native voice dispatcher. The generic callback interface is not an implemented AmiGUS hardware driver. |
+| Direct24-bit Studio | Master-pinned mixer, audited sequence, sampler/editor ownership, bounded queue/pump and consumer lifecycle. Up to16 voice slots are a software bound. | Native PLAY/output wiring, verified hardware capabilities and sustainable physical voice-count/timing evidence. |
+| Master-preserving persistence | Bounded enhanced-project/sample saving and explicit classic conversion; private EFx exports/bounce never replace masters. | Broader workflow/release and physical acceptance beyond the retained fixtures. |
+| Playback invalidation | Revision/settings keys, retired active leases and stop-before-edit/undo/dispose guards. Private EFx banks are discarded on stop and rebuilt on restart. | End-to-end real AmiGUS voice/transfer ownership, once the device adapter exists. |
+
+AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software
+fixtures, plus an absent-library discovery check. Those results do not establish
+positive card access, real MMIO, streaming output or physical acceptance. Native
+Studio/device output remains disabled. See `AMIGUS_STUDIO_TRANSPORT.md` for the
+precise boundary. Private EFx supports its explicit classic mono8 subset;
+ordinary Studio retains direct16/24-bit masters and never silently reduces them.
+
 ## Implemented native master allocation
 
 `src/native/master_memory.h` supplies the native editor's document, donor
@@ -1610,3 +1632,27 @@ Both cases also pass native shared030 offline/pull17/256 and mute/solo checks:
 its own180-second window with no timeout; DMA-off, exact cleanup and explicit
 release passed. The full23-test host sanitizer suite includes one-frame pulls.
 No actual device output or physical timing is qualified by these results.
+
+
+### Reference audio through editor queue ownership
+
+The four-clock EE2/EE1 fixtures now have independent PCM checks through the
+editor Studio owner, sampler binding, private producer, pump and queue. Full
+queue backpressure preserves pending data; a consumer-held block stays valid
+through pattern/sample editing. The output-stop callback checks that producer
+ownership is already closed and the original serialized project is still intact
+before the edit applies. Undo restores the exact project and a fresh complete
+playback matches the reference again. Natural end drains all copied PCM; queue
+close refuses until a held lease is released. Budget refusal and enhanced
+serialization roundtrip preserve masters and no tracked allocations remain.
+
+The fixture uses committed production source exports to exclude unrelated local
+display work. See `evidence/enhanced-editor/invert-editor-reference/` for the
+build and test boundaries. It exercises the editor/controller ownership API;
+native PLAY, real consumer cancellation and physical output remain separate.
+
+All 26 related host sanitizer tests pass. Both editor reference cases also pass
+native shared030 in separate 240-second windows (93.62 and 78.76 seconds), with
+77 Fast allocations per case, zero final owned bytes and no Chip fallback.
+Completion, all four DMA channels off, exact cleanup and explicit release were
+verified. No timeout, retry or reset was needed; no device output was enabled.

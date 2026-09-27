@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131085872 reserve=262144 flags=4
+EDITOR EFx REFERENCE PASS: exact queued PCM, backpressure, guarded edits, held leases, undo/restart, master roundtrip, no leaks
+EXEC MEMORY PASS: 77 Fast allocations, zero owned bytes, budget refusal without Chip fallback

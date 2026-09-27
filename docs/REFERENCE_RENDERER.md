@@ -709,3 +709,10 @@ tick zero and EF0 disable/re-enable. All private-bank bytes, offline/incremental
 PCM and export/bounce/master transactions agree with the pinned reference.
 See `evidence/enhanced-editor/invert-four-clock-delay/` for the conservative
 write-buffer source bound, captured ordering and native/physical distinctions.
+
+
+The same four-clock pattern-delay reference is also checked through editor-owned
+queued private playback. Backpressure, consumer-held blocks, stop-before-edit,
+undo and full restart preserve exact PCM and master serialization. See
+`evidence/enhanced-editor/invert-editor-reference/`; this does not enable native
+Studio PLAY or qualify a device output path.

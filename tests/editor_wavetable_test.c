@@ -68,6 +68,39 @@ static void editor_upload_cancel_fixture(struct pt_editor *e,struct pt_editor_wa
     }
     puts("EDITOR UPLOADING PASS: edit/undo, Stop and dispose cancel unpublished device/master leases before output");
 }
+static void editor_staged_restore_fixture(struct pt_editor *e,struct pt_editor_wavetable *o,
+    struct fixture *f,struct dispatch_bus *bus,struct pt_sampler_wavetable *bridge,struct pt_wavetable_voices *voices)
+{
+    struct pt_render_options options={0};struct pt_playback_format format={16,0,0,0};
+    struct pt_wavetable_preflight_report report;struct pt_render_interval span;unsigned mode;
+    options.rate=48000;options.bits=24;options.tracks=1;options.gain_q16=65536;
+    options.tick_limit=100;options.frame_limit=100000;options.pattern_only=options.row_range=1;
+    options.row_first=1;options.row_end=2;
+    for(mode=0;mode<3;++mode) {
+        song_bind(f,bridge,voices,bus,&e->sampler,e->project);voices->api.restore=range_restore;
+        assert(pt_editor_wavetable_start(o,voices,&options,&format,&report)==PT_WAVETABLE_SONG_OK);
+        for(;;) {
+            enum pt_wavetable_song_result r;uint32_t n;
+            do{r=pt_editor_wavetable_next_prepare(o,&span);}while(r==PT_WAVETABLE_SONG_UPLOADING);
+            assert(r==PT_WAVETABLE_SONG_OK);
+            if(span.emit)break;
+            assert(pt_editor_wavetable_next_commit(o)==PT_WAVETABLE_SONG_OK);
+            for(n=span.frames;n;) {uint32_t step=n>256?256:n;
+                assert(pt_editor_wavetable_consume(o,step)==PT_WAVETABLE_SONG_OK);n-=step;}
+            assert(pt_editor_wavetable_complete(o)==PT_WAVETABLE_SONG_OK);
+        }
+        assert(pins(f) && !bus->starts && !bus->restores);
+        if(mode==0) {
+            e->editing=1;e->row=0;e->project->channels.selected=0;
+            pt_editor_key(e,0x46,0);assert(!o->song && e->project->events[0].kind==PT_NOTE_NONE);
+            pt_editor_key(e,0x31,8);assert(e->project->events[0].kind==PT_NOTE_PERIOD);
+        }else if(mode==1)assert(pt_editor_wavetable_stop(o) && !o->song);
+        else assert(pt_editor_dispose(e) && !o->song);
+        assert(!pins(f) && !bus->starts && !bus->restores && !bus->stops);
+        assert(pt_amigus_reservation_close(&f->reservation));
+    }
+    puts("EDITOR STAGED RESTORE PASS: edit/undo, Stop and dispose release prepared leases before any voice restore");
+}
 static int editor_wavetable_fixture(void)
 {
     struct pt_editor *e=malloc(sizeof(*e));struct fixture *f=malloc(sizeof(*f));struct dispatch_bus *bus=malloc(sizeof(*bus));
@@ -138,6 +171,11 @@ static int editor_wavetable_fixture(void)
     assert(pt_editor_init(e,&d.project));e->sampler.allocator=a;
     assert(pt_editor_wavetable_attach(&owner,e));
     editor_upload_cancel_fixture(e,&owner,f,bus,&bridge,&voices);
+    assert(pt_editor_wavetable_detach(&owner));
+    d.project.samples[0].pcm=(struct pt_pcm){data,8,8,48000,1,24};
+    assert(pt_editor_init(e,&d.project));e->sampler.allocator=a;
+    assert(pt_editor_wavetable_attach(&owner,e));
+    editor_staged_restore_fixture(e,&owner,f,bus,&bridge,&voices);
     assert(pt_editor_wavetable_detach(&owner));
     free(saved);free(e);pt_document_release(&d);free(bus);free(f);assert(!allocations);
     puts("EDITOR WAVETABLE PASS: pending/failed stop vetoes edits, imports, undo/redo, replacement and disposal; navigation retained; injected only");return 0;

@@ -76,6 +76,19 @@ enum pt_wavetable_song_result pt_wavetable_song_complete(struct pt_wavetable_son
  * synchronously. Values/project remain immutable and owner-thread serialized. */
 enum pt_wavetable_song_result pt_wavetable_song_next_step(struct pt_wavetable_song *,struct pt_render_interval *);
 enum pt_wavetable_song_result pt_wavetable_song_complete_step(struct pt_wavetable_song *);
+/* Split next-step: prepare selects the interval and, for range startup, acquires
+ * its restore leases in bounded steps WITHOUT voice callbacks. UPLOADING leaves
+ * out unchanged; OK publishes the staged interval, repeatable without advancing
+ * time or doing more upload work. No consume/complete/clock-arm before commit.
+ * Commit requires readiness, revalidates source/cache identities, invokes any
+ * exact restore once WITHOUT upload/allocation, and makes the interval pending.
+ * Early/double commit refuses. Cancel via close/editor barrier. Legacy next_step
+ * wraps prepare+commit; callers choosing the split protocol must not call that
+ * wrapper until ready to start. No clock/deadline is implied by commit itself.
+ * Whole-song zero-frame commands then use prefetch+complete separately; merely
+ * preparing or committing a zero interval does not dispatch its commands. */
+enum pt_wavetable_song_result pt_wavetable_song_next_prepare(struct pt_wavetable_song *,struct pt_render_interval *);
+enum pt_wavetable_song_result pt_wavetable_song_next_commit(struct pt_wavetable_song *);
 /* Optional lookahead after next succeeds: repeatedly prefetch while the current
  * interval elapses. Computes upcoming commands on private state in <=256-frame
  * steps, then prepares only that batch's caches in <=256-byte upload steps.

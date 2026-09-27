@@ -2188,3 +2188,28 @@ caller. Timestamps and callbacks must be owner-thread/non-reentrant, and callbac
 remain synchronous. Native clock reading, callback-duration deadlines, tolerance
 policy and sustained physical throughput are unqualified. Native PLAY/output is
 still disabled; there is no new classic-layout or sample-master/persistence change.
+
+
+### Preparing range restoration separately from starting voices
+
+The song/editor next_prepare API now selects the upcoming interval and prepares
+any range-start restore leases without voice callbacks. Each pending call retains
+the existing one-acquisition or256-byte-copy work bound. Its ready interval is
+repeatable without advancing phase/time, allocating again or writing more sample
+bytes. Consume, complete and clock-arm cannot advance that staged interval.
+
+A separate next_commit requires readiness and rechecks all source descriptors,
+cache leases and device addresses before exact-position restoration. It performs
+no sample allocation/upload, invokes restoration once and then exposes the pending
+interval. Early/double commit refuses. Stop/edit/dispose cancels staged leases;
+stale generation/changed descriptors refuse before restoration. If the restoration
+callback itself fails with an unconfirmed voice, existing active-lease/master-pin
+retention still applies. Legacy next/next_step wrap preparation and commit and
+preserve their prior behavior and output atomicity on failure.
+
+Whole-song zero-frame intervals can likewise be staged without callbacks, but
+preparing/committing the interval does not apply its commands; those still use
+prefetch/complete. The full scheduler must combine these boundaries with absolute
+startup/transition deadlines before native playback is enabled. The new split
+commit itself does not check time; it is not a native-clock or physical timing
+acceptance claim. Range fractional cursor parity and master save bytes are retained.

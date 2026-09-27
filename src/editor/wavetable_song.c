@@ -9,7 +9,7 @@ struct pt_wavetable_song {
     struct pt_wavetable_prepared sources;
     struct pt_sampler_upload_job upload;struct pt_render_lookahead ahead;unsigned forecast;
     struct pt_cache_lease lease[PT_RENDER_ACTIONS];
-    unsigned slot[PT_RENDER_ACTIONS],held[PT_RENDER_ACTIONS],batch_count,batch_at,uploading;
+    unsigned slot[PT_RENDER_ACTIONS],held[PT_RENDER_ACTIONS],batch_count,batch_at,uploading,next_stage;
     struct pt_wavetable_preflight *preflight;struct pt_wavetable_preflight_report report;
     struct pt_render_sequence *sequence;struct pt_render_plan plan;struct pt_render_snapshot resume;
     struct pt_sample_version *pin[PT_PROJECT_SAMPLES];struct pt_sampler_pin_job promotion;
@@ -39,7 +39,7 @@ static void release_sources(struct pt_wavetable_song *s)
 }
 static int stop(struct pt_wavetable_song *s)
 {
-    s->closing=1;s->clock_armed=0;s->pending=0;s->remaining=0;cancel_batch(s);
+    s->closing=1;s->clock_armed=0;s->next_stage=0;s->pending=0;s->remaining=0;cancel_batch(s);
     pt_render_sequence_close(s->sequence);s->sequence=NULL;
     if(s->done)return 1;
     if(!s->ready) {
@@ -230,30 +230,51 @@ enum pt_wavetable_song_result pt_wavetable_song_prefetch(struct pt_wavetable_son
     if(!batch)return PT_WAVETABLE_SONG_UPLOADING;
     s->forecast=3;return PT_WAVETABLE_SONG_OK;
 }
-enum pt_wavetable_song_result pt_wavetable_song_next_step(struct pt_wavetable_song *s,struct pt_render_interval *out)
+enum pt_wavetable_song_result pt_wavetable_song_next_prepare(struct pt_wavetable_song *s,struct pt_render_interval *out)
 {
     enum pt_wavetable_song_result result;int batch;
     if(!s || !out || s->clock_armed)return PT_WAVETABLE_SONG_INVALID;
     result=current(s);if(result)return result;
     if(!s->ready)return PT_WAVETABLE_SONG_PREPARING;
     if(s->uploading==2)return PT_WAVETABLE_SONG_UPLOADING;
-    if(s->uploading==1) {
+    if(s->pending)return PT_WAVETABLE_SONG_INVALID;
+    if(s->next_stage==1) {
         batch=batch_step(s);
         if(batch<0)return fail(s,PT_WAVETABLE_SONG_DEVICE);
         if(!batch)return PT_WAVETABLE_SONG_UPLOADING;
-        if(pt_wavetable_restore_prepared(s->voices,s->version,s->rate,&s->resume,&s->format,s->staging,sizeof(s->staging),&s->sources)!=1)
-            return fail(s,PT_WAVETABLE_SONG_DEVICE);
-        cancel_batch(s);s->restored=1;
-    }else {
-        if(s->pending)return PT_WAVETABLE_SONG_INVALID;
+        s->next_stage=2;
+    }else if(!s->next_stage) {
         if(pt_render_sequence_next(s->sequence,&s->interval)!=PT_RENDER_OK)return fail(s,PT_WAVETABLE_SONG_RENDER);
         if(s->range && s->interval.emit && !s->restored) {
             if(pt_render_sequence_snapshot(s->sequence,&s->resume)!=PT_RENDER_OK)return fail(s,PT_WAVETABLE_SONG_RENDER);
             if(!batch_begin(s,1))return fail(s,PT_WAVETABLE_SONG_DEVICE);
-            return PT_WAVETABLE_SONG_UPLOADING;
+            s->next_stage=1;return PT_WAVETABLE_SONG_UPLOADING;
         }
+        s->next_stage=2;
     }
-    s->remaining=s->interval.frames;s->pending=1;*out=s->interval;return PT_WAVETABLE_SONG_OK;
+    *out=s->interval;return PT_WAVETABLE_SONG_OK;
+}
+enum pt_wavetable_song_result pt_wavetable_song_next_commit(struct pt_wavetable_song *s)
+{
+    enum pt_wavetable_song_result result=current(s);if(result)return result;
+    if(s->clock_armed || s->next_stage!=2 || s->pending)return PT_WAVETABLE_SONG_INVALID;
+    if(s->uploading==1) {
+        /* Ready implies all leases acquired. Recheck without permitting an upload
+           or allocation at the caller's eventual start boundary. */
+        if(s->batch_at!=s->batch_count || batch_step(s)!=1)return fail(s,PT_WAVETABLE_SONG_DEVICE);
+        if(pt_wavetable_restore_prepared(s->voices,s->version,s->rate,&s->resume,&s->format,s->staging,sizeof(s->staging),&s->sources)!=1)
+            return fail(s,PT_WAVETABLE_SONG_DEVICE);
+        cancel_batch(s);s->restored=1;
+    }
+    s->next_stage=0;s->remaining=s->interval.frames;s->pending=1;
+    return PT_WAVETABLE_SONG_OK;
+}
+enum pt_wavetable_song_result pt_wavetable_song_next_step(struct pt_wavetable_song *s,struct pt_render_interval *out)
+{
+    struct pt_render_interval interval;enum pt_wavetable_song_result result;
+    if(!out)return PT_WAVETABLE_SONG_INVALID;
+    result=pt_wavetable_song_next_prepare(s,&interval);if(result)return result;
+    result=pt_wavetable_song_next_commit(s);if(!result)*out=interval;return result;
 }
 enum pt_wavetable_song_result pt_wavetable_song_next(struct pt_wavetable_song *s,struct pt_render_interval *out)
 {

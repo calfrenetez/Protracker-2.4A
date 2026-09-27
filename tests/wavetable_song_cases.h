@@ -186,7 +186,7 @@ static void range_song_fixture(void)
     assert(pt_project_encode(&d.project,saved,size,&used)==PT_PROJECT_OK);
     /* Modes: normal range; single final interval; pending natural stop; uncertain
        restore; cancel before any output; range starts at first row; future trigger. */
-    for(mode=0;mode<7;++mode) {
+    for(mode=0;mode<10;++mode) {
         if(mode){song_bind(f,&bridge,&owner,bus,&sampler,&d.project);owner.api.restore=range_restore;}
         o.row_first=mode==5?0:1;o.row_end=mode==1?2:3;
         if(mode==6)d.project.events[9]=(struct pt_event){428,0,PT_NOTE_PERIOD,2,0,0,0,0};
@@ -203,14 +203,34 @@ static void range_song_fixture(void)
             {VALIDATIONS_SAVE;PCM_SAVE;unsigned guard=0;
                 span=(struct pt_render_interval){123,4,5};
                 do {
-                    result=pt_wavetable_song_next_step(song,&span);
+                    result=mode==6?pt_wavetable_song_next_step(song,&span):pt_wavetable_song_next_prepare(song,&span);
                     if(result==PT_WAVETABLE_SONG_UPLOADING) {
                         assert(++guard<100 && span.frames==123 && span.emit==4 && span.end==5);
+                        assert(pt_wavetable_song_next_commit(song)==PT_WAVETABLE_SONG_INVALID);
                         assert(!bus->restores && !bus->starts);
                         assert(pt_wavetable_song_consume(song,1)==PT_WAVETABLE_SONG_UPLOADING);
                         assert(pt_wavetable_song_complete_step(song)==PT_WAVETABLE_SONG_UPLOADING);
                     }
                 }while(result==PT_WAVETABLE_SONG_UPLOADING);
+                if(result==PT_WAVETABLE_SONG_OK && mode!=6) {
+                    struct pt_render_interval repeated;unsigned writes=f->writes,restores=bus->restores,starts=bus->starts;
+                    assert(pt_wavetable_song_next_prepare(song,&repeated)==PT_WAVETABLE_SONG_OK);
+                    assert(repeated.frames==span.frames && repeated.emit==span.emit && repeated.end==span.end);
+                    assert(f->writes==writes && bus->restores==restores && bus->starts==starts);
+                    assert(pt_wavetable_song_clock_arm(song,100)==PT_WAVETABLE_SONG_INVALID);
+                    if(span.emit && first)assert(!bus->restores && !bus->starts);
+                    if(mode>=7 && span.emit) {
+                        assert(pins(f) && !bus->restores && !bus->starts);
+                        if(mode==7){assert(pt_wavetable_song_close(&song));result=PT_WAVETABLE_SONG_DONE;}
+                        else if(mode==8){++sampler.generation;result=pt_wavetable_song_next_commit(song);assert(result==PT_WAVETABLE_SONG_STALE);}
+                        else {++d.project.samples[0].pcm.rate;result=pt_wavetable_song_next_commit(song);
+                            assert(result==PT_WAVETABLE_SONG_DEVICE);--d.project.samples[0].pcm.rate;}
+                        assert(!pins(f) && !bus->restores && !bus->starts);break;
+                    }
+                    result=pt_wavetable_song_next_commit(song);
+                    assert(f->writes==writes);
+                    if(result==PT_WAVETABLE_SONG_OK)assert(pt_wavetable_song_next_commit(song)==PT_WAVETABLE_SONG_INVALID);
+                }
                 VALIDATIONS_UNCHANGED;PCM_UNCHANGED;}
             if(mode==3 && expected.emit) {
                 assert(result==PT_WAVETABLE_SONG_DEVICE && pins(f)==1 && owner.voice[0].uncertain);
@@ -242,14 +262,15 @@ static void range_song_fixture(void)
             assert(result==(mode==2?PT_WAVETABLE_SONG_STOPPING:PT_WAVETABLE_SONG_DEVICE));
             assert(!pt_wavetable_song_close(&song) && !pt_amigus_reservation_close(&f->reservation));
             bus->stop_result[0]=1;
-        }else assert(result==PT_WAVETABLE_SONG_DONE);
-        if(mode!=3)assert(emitted==measured.frames && !first);
+        }else assert(result==(mode==8?PT_WAVETABLE_SONG_STALE:mode==9?PT_WAVETABLE_SONG_DEVICE:PT_WAVETABLE_SONG_DONE));
+        if(mode!=3 && mode<7)assert(emitted==measured.frames && !first);
         if(mode==6)assert(bus->starts==1);
         assert(pt_wavetable_song_close(&song) && !pins(f) && pt_amigus_reservation_close(&f->reservation));
         if(mode==6)memset(d.project.events+9,0,sizeof(*d.project.events));
         exact_save(&d.project,saved,size);
     }
     free(saved);pt_sampler_release(&sampler);pt_document_release(&d);free(bus);free(f);assert(!allocations);
+    puts("WAVETABLE STAGED RESTORE PASS: bounded callback-free preparation, repeatable readiness, write-free exact commit, early/double refusal and ready cancel/stale ownership");
     puts("WAVETABLE RANGE PASS: silent pre-roll, exact fractional restore before output, selective source pins, final-span timing and uncertain-stop ownership; injected only");
 }
 

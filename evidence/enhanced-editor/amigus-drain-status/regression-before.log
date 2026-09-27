@@ -1,0 +1,19 @@
+test_transport_ownership (test_amigus_session.AmiGusSession.test_transport_ownership) ... Assertion failed: (pt_amigus_session_step(&s)==(mode==2 || mode==6?PT_CONSUMER_ERROR:PT_CONSUMER_PROGRESS)), function main, file amigus_session_test.c, line 34.
+ERROR
+
+======================================================================
+ERROR: test_transport_ownership (test_amigus_session.AmiGusSession.test_transport_ownership)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/test_amigus_session.py", line 9, in test_transport_ownership
+    subprocess.run([str(exe)],check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpkn7_kpd_/test']' died with <Signals.SIGABRT: 6>.
+
+----------------------------------------------------------------------
+Ran 1 test in 0.666s
+
+FAILED (errors=1)

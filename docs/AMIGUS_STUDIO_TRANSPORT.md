@@ -288,3 +288,8 @@ pending/error/invalid quiescence and safe release. Evidence:
 `evidence/enhanced-editor/amigus-interrupt-owner/`. This is ordinary task-context
 execution of private vectors, not actual interrupt installation/removal or audio
 acceptance. Native output remains unwired.
+
+The PCM session also requires exactly1 from its separate drain callback. Unknown
+positive status is a fault, not successful completion; guarded reset still must
+complete before detach. Host regression and seven-case native fixture pass with
+zero retained memory. See `evidence/enhanced-editor/amigus-drain-status/`.

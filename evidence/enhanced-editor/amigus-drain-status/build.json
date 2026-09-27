@@ -1,0 +1,61 @@
+{
+  "scope": "native injected session fixture; no device output",
+  "compiler_sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Isrc/core",
+    "-fbbb=-"
+  ],
+  "sources": [
+    "tests/native_exec_amigus_session_test.c",
+    "src/core/amigus_session.c",
+    "src/core/studio_consumer.c",
+    "src/core/studio_queue.c",
+    "src/core/amigus_fifo.c",
+    "src/core/amigus_pcm_pack.c",
+    "src/core/pcm.c"
+  ],
+  "runtime_inputs": {
+    "ncrt0.o": "6fe4b6088899bd53efae1ea1e4783b7deab07b13f3d40cff7b46285907f19804",
+    "libnix20.a": "0731c54ad32272f5ab0d5ecd3f1f93d7aa4fc7c6ac0a5923eb26125633556e8c",
+    "libnixmain.a": "ad54158e95516aa6f3b04a8b3d835a48ecbaaea962cd178d5fb66995dcef19df",
+    "libnix.a": "d64619bc74933ac5312ef6db0f8d4cd62b3918f9f4a5805863e7d15536fcb144",
+    "libstubs.a": "55dbd0626cb472d89ab5d1bd234e6013df178f2cd3b83266bf4b82c68f1a79de",
+    "libamiga.a": "10d78b6d303a99677c0bf29a8e1653d62669f69f395691646393020325084021",
+    "libgcc.a": "8bed858c8a5797471c3bc130df341824121c5d0f0908345dfe6ce0ceccc3569b"
+  },
+  "inputs": {
+    "src/core/amigus_fifo.c": "5c14614a81f05cdac1820be120700b9d9ed29750d1e26cc621fb1f6fadad2cef",
+    "src/core/amigus_fifo.h": "b218313c6b243a678bf3fd12bc290ea12ff6d28aa9179677c9c5aec628020db2",
+    "src/core/amigus_pcm_pack.c": "3464933782918baab33ee8e1ca76a7e959897284b98e24015625707cefdfcac9",
+    "src/core/amigus_pcm_pack.h": "d0648c43fef1e70ffe92c7540be04e9c70e219bb2ee4cda9bf2ef1357e9b89bb",
+    "src/core/amigus_session.c": "ea57930cfa79211a519cb29b59ab7e0cc7c02ddd04ba3c8852dc7da730cb3ed2",
+    "src/core/amigus_session.h": "15bf7697d197e001664084af15b89b8614105feb1cbd0004c4dc7fcc03dabf6f",
+    "src/core/channels.h": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+    "src/core/document.h": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+    "src/core/mod_inspect.h": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+    "src/core/pcm.c": "0bd9cc86e3eab3b077484bbcb20675eab0a648a76a18adabe4203c18f3b713a2",
+    "src/core/pcm.h": "6b1a14d9010f71b693c81c066e619343bb9b4cee0f4b6723347f34de2f5e12fb",
+    "src/core/pcm_internal.h": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b",
+    "src/core/pp20.h": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+    "src/core/project.h": "fe2ce268386dc0fed856af12bcdc5190a43083329ae3b5567febc6efc7712519",
+    "src/core/studio_consumer.c": "fe871a573e0746205a80adf051252ec8429ffc013f00c20d4980f5d9ee324573",
+    "src/core/studio_consumer.h": "2b081296f92f2f49961b16d09c18bf169795ba598797d4cec088b3f4f890750e",
+    "src/core/studio_queue.c": "31a58a5e514bce52606e875e642865db42676cec0dc84d3aae3c4b5e46b5b7e5",
+    "src/core/studio_queue.h": "891f680cb1cce81943e864cf73592a6b65643203762218c7676073935bc4bb04",
+    "src/native/master_memory.h": "ac898368849ec2d1892717d425b90c398da37a8799d536366a898e2e219e184a",
+    "tests/amigus_session_test.c": "7142e1098b8128660c4bc2879b2978633721c52d0d66722f392cef9a8e3b9306",
+    "tests/native_exec_amigus_session_test.c": "08cafe339b1da023bf70f90c63582684c3d44ab76c94bed8a87aec8f4cfad073",
+    "tests/native_exec_memory.h": "ce0f2b696ce7767c0da8a2a44ac7730bc207f81e4f6b86bfd172353989e664b9"
+  },
+  "binary_bytes": 34148,
+  "binary_sha256": "80195b868172736fa3d98e5d016f6515f77e9219e505af0f7c6890af3b1fada8",
+  "verification_note": "Compilation succeeded; first manifest check rejected non-normalized dependency paths. Paths normalized and index comparison repeated, without modifying binary."
+}

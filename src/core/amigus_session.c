@@ -45,9 +45,10 @@ enum pt_consumer_result pt_amigus_session_step(struct pt_amigus_session *s)
         if(r)s->phase=PT_AS_DRAIN;
         return r?PT_CONSUMER_PROGRESS:PT_CONSUMER_WAIT;
     }
-    r=s->drain(s->drain_context);if(r<0)return fail(s);
-    if(r)s->phase=PT_AS_RESET;
-    return r?PT_CONSUMER_PROGRESS:PT_CONSUMER_WAIT;
+    r=s->drain(s->drain_context);
+    if(r!=0 && r!=1)return fail(s);
+    if(r==1)s->phase=PT_AS_RESET;
+    return r==1?PT_CONSUMER_PROGRESS:PT_CONSUMER_WAIT;
 }
 int pt_amigus_session_detach(struct pt_amigus_session *s)
 {

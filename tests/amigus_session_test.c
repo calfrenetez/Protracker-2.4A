@@ -12,7 +12,7 @@ static int drain(void *c) {return ((struct port *)c)->drain;}
 int main(void)
 {
     struct pt_allocator a={NULL,alloc,release};int32_t data[4]={257,-513,1025,-2049};struct pt_pcm pcm={data,2,1,48000,2,24};unsigned mode;
-    for(mode=0;mode<6;++mode) {
+    for(mode=0;mode<7;++mode) {
         struct pt_amigus_session s={0};struct port o={0};struct pt_amigus_fifo_port p={&o,space,write3,reset};
         struct pt_studio_queue *q=pt_studio_queue_open(&a,2);unsigned i;
         o.reset=mode==3?0:1;assert(q);
@@ -24,14 +24,15 @@ int main(void)
             if(mode!=5)assert(pt_amigus_session_step(&s)==PT_CONSUMER_PROGRESS);
             if(mode==5)assert(s.consumer.leased);
             else assert(!s.consumer.leased && s.fifo.pack.held); /* no-lease Stop */
-            if(mode==0 || mode==2 || mode==4) {
+            if(mode==0 || mode==2 || mode==4 || mode==6) {
                 pt_studio_queue_finish(q);
                 for(i=0;i<10 && s.phase!=PT_AS_DRAIN;++i)assert(pt_amigus_session_step(&s)!=PT_CONSUMER_ERROR);
                 assert(s.phase==PT_AS_DRAIN && s.padding==1 && o.writes==1);
                 assert(pt_amigus_session_step(&s)==PT_CONSUMER_WAIT);
                 assert(!pt_amigus_session_detach(&s));
-                o.drain=mode==2?-1:1;
-                assert(pt_amigus_session_step(&s)==(mode==2?PT_CONSUMER_ERROR:PT_CONSUMER_PROGRESS));
+                o.drain=mode==6?2:mode==2?-1:1;
+                assert(pt_amigus_session_step(&s)==(mode==2 || mode==6?PT_CONSUMER_ERROR:PT_CONSUMER_PROGRESS));
+                if(mode==6)assert(s.failed && s.phase==PT_AS_RESET && o.resets==1);
             } else pt_amigus_session_stop(&s);
         }
         if(mode==4) {

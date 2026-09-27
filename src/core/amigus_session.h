@@ -4,7 +4,8 @@
 #include "studio_consumer.h"
 enum pt_amigus_session_phase {PT_AS_IDLE,PT_AS_RUN,PT_AS_TAIL,PT_AS_DRAIN,PT_AS_RESET,PT_AS_DONE};
 /* Caller-owned, zero-init, serialized. No native device implementation.
- * drain(context): 1 confirms all FIFO audio consumed, 0 pending, -1 fault.
+ * drain(context): exactly1 confirms all FIFO audio consumed, 0 pending; every
+ * other result is a fault. Unknown status must not report successful playback.
  * port.reset must confirm playback disabled, FIFO empty/aligned and no retained
  * references, not just acknowledge a reset request. All callbacks bounded.
  * Queue, port and drain contexts outlive successful detach. Stop producer before

@@ -1,0 +1,35 @@
+test_transport_ownership (test_amigus_chain.AmiGusChain.test_transport_ownership) ... AMIGUS CHAIN PASS: queue consumer packed byte equivalence, odd partitions, explicit tail finish, failed reset lease retention
+ok
+test_transport_ownership (test_amigus_fifo.AmiGusFifo.test_transport_ownership) ... AMIGUS FIFO PASS: bounded triplets, capacity stalls, odd tail, explicit pad, uncertain writes blocked until confirmed reset
+ok
+test_transport_ownership (test_amigus_pcm_pack.AmiGusPack.test_transport_ownership) ... AMIGUS PACK PASS: true24 MSB words, stereo order, partition tails, explicit final padding, atomic refusal
+ok
+test_transport_ownership (test_amigus_register_port.AmiGusRegister.test_transport_ownership) ... AMIGUS REGISTER PASS: owned access, word capacity, ordered triplets, bounded reset/readback, partial-write poison
+ok
+test_transport_ownership (test_amigus_register_session.AmiGusRegisterSession.test_transport_ownership) ... AMIGUS REGISTER SESSION PASS: exact packed stream, IRQ bit isolation, drain wait, partial-write/reset delays, ownership loss cleanup
+ok
+test_library_lifetime (test_amigus_reservation.AmiGusReservation.test_library_lifetime) ... amigus reservation lifecycle: PASS (fake library, no hardware)
+ok
+test_partial_interrupt_lifetime (test_amigus_reservation.AmiGusReservation.test_partial_interrupt_lifetime) ... amigus reservation lifecycle: PASS (fake library, no hardware)
+AMIGUS INTERRUPT OWNER PASS: partial install retains reservation, removal request is not quiescence, pending/error/invalid status refuses release; injected callbacks only
+ok
+test_session_retains_reservation (test_amigus_reservation.AmiGusReservation.test_session_retains_reservation) ... amigus reservation lifecycle: PASS (fake library, no hardware)
+AMIGUS RESERVED SESSION PASS: failed open, leased Stop and natural tail retain card through reset recovery
+ok
+test_exact_restore_plan (test_amigus_restore.AmiGusRestore.test_exact_restore_plan) ... AMIGUS RESTORE PASS: exact fractional cache cursor, head/loop/one-shot bounds,8/16-bit cache and24-bit master preserved; software only
+ok
+test_bounded_device_cache (test_amigus_sample_ram.AmiGusSampleRam.test_bounded_device_cache) ... AMIGUS SAMPLE RAM PASS: bounded addresses, exact uploads, pinned eviction, failures and master preservation; fake bus only
+ok
+test_transport_ownership (test_amigus_session.AmiGusSession.test_transport_ownership) ... AMIGUS SESSION PASS: tail flush, drain acknowledgement, no-lease Stop, failed-open/reset recovery and safe detach
+ok
+test_plan_boundaries (test_amigus_voice_plan.AmiGusVoicePlan.test_plan_boundaries) ... AMIGUS VOICE PLAN PASS: byte bounds, alignment, loops, rational rate, volume, refusal atomicity; no I/O
+ok
+test_resource_and_cache_lifetime (test_amigus_wavetable_cache.WavetableOwner.test_resource_and_cache_lifetime) ... amigus reservation lifecycle: PASS (fake library, no hardware)
+WAVETABLE UPLOAD JOB PASS: bounded steps, cancellation, unpublished leases, partial words, live ownership loss and hit transfer; injected only
+AMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only
+ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 6.033s
+
+OK

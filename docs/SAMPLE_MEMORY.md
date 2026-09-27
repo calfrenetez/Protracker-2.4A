@@ -1716,8 +1716,8 @@ retains master/controller/device resources through pending stops. Failed open,
 normal end, stale generation and uncertain starts have bounded cleanup paths.
 Masters retain their original8/16/24-bit precision and enhanced-save bytes.
 Project arrays remain borrowed/immutable by contract. The editor barrier below
-protects mutations; row-range phase-correct pre-roll and native output integration
-remain unfinished. No real AmiGUS access or output is enabled by this owner.
+protects mutations; row-range pre-roll is now integrated as described below.
+Native output integration remains unfinished. No real AmiGUS access or output is enabled by this owner.
 
 ### Confirmed-stop editor mutations
 
@@ -1742,15 +1742,15 @@ This establishes state reconstruction for row-range starts. Host/native fixtures
 compare resumed 24-bit PCM exactly against continuous Studio and offline reference
 rendering, including silent pre-roll, forward/ping-pong loops and tempo/delay.
 It does not make the existing AmiGUS integer-start command capable of restoring
-fractional phase. Wavetable row-range playback remains explicitly refused until
-a matching restore/capability path exists; no rounding or audible pre-roll fallback.
+fractional phase. Wavetable row-range playback requires the explicit restore
+path described below; no rounding or audible pre-roll fallback is allowed.
 
 Exact wavetable restore preparation now retains fractional sample position in a
 separate Q32 cache-byte cursor, preserving8/16-bit cache conversion without
 changing24-bit masters. A bounded whole-snapshot check requires explicit restore
 capability and validates every active source/geometry before future upload/start.
-It has no cache/source ownership or device effects. Row-range sessions remain
-refused pending lifecycle/driver integration; native phase semantics are unverified.
+The preparation functions have no cache/source ownership or device effects.
+Session integration follows below; native phase semantics remain unverified.
 See `AMIGUS_SAMPLE_RAM.md` and `evidence/enhanced-editor/amigus-restore/`.
 
 The injected wavetable owner now supports exact restore callbacks with all active
@@ -1758,4 +1758,25 @@ playback copies acquired before any voice starts. Failed preparation releases
 its temporary leases; uncertain restore retains each started cache until confirmed
 stop. Idle-owner and current-version checks prevent overwriting active ownership.
 Masters keep their original precision and enhanced-save bytes. This is a software
-lifetime path; row-range session scheduling and native driver wiring remain open.
+lifetime path; native driver wiring remains open.
+
+### Row-range wavetable sessions
+
+Sessions with an explicit exact-restore callback now consume silent pre-roll in
+bounded blocks without voice commands or cache uploads. Before acquiring master
+pins or publishing output, session preflight validates the entire command sequence
+and the first emitting snapshot. Only active restored samples and future emitted
+triggers receive source pins; a sample finished during pre-roll stays out of the
+playback cache. Project descriptors remain borrowed and immutable throughout.
+
+At the first emitting interval, `next` restores the exact snapshot before returning
+its frame count, even when that interval is also the final interval. The caller
+advances silent spans without waiting and schedules elapsed time only for emitted
+spans. Later commands use the existing dispatch path. Cancellation, uncertain
+restore and pending stop preserve the same confirmed-stop ownership rules.
+Masters and enhanced-save bytes remain unchanged. Missing exact-restore support
+still refuses the range; no integer rounding or ordinary-start substitution.
+
+This is injected-driver session integration, not a native clock, register driver,
+audible output or physical card acceptance. Validation and candidate identity:
+`evidence/enhanced-editor/wavetable-range/`.

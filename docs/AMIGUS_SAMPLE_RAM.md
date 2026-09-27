@@ -434,8 +434,8 @@ capability, resolves every active borrowed descriptor and validates the entire
 snapshot before a future caller may acquire/upload/start. Source/cache leases
 remain mandatory; these pure functions do not own storage or publish output.
 
-The existing voice API does not consume restore plans and row-range song open
-still refuses. This is software preparation, not native register lowering or
+The injected voice API and session integration described below consume these
+restore plans. This is software preparation, not native register lowering or
 verified endpoint/phase hardware support. Host sanitizer checks pass; native
 restore fixture builds and dispatcher syntax checks pass. No new emulator run
 was attempted during the retained renderer recovery hold. Evidence is in
@@ -457,11 +457,27 @@ voices receive one stop attempt. Pending/failed stops keep their leases and card
 reservation alive until an explicit confirmed retry. The callback must copy the
 whole plan synchronously and never mutate/reenter sampler state. Source identity,
 cache location and ownership are rechecked; all pinned caches resist eviction.
-This injected driver integration does not enable row-range song open, native MMIO
-or real card playback. A session still needs silent pre-roll/restore scheduling.
+This injected driver integration does not enable native MMIO or real card playback.
+Row-range session integration is described below.
 
 Restore-owner host sanitizer and staged native build checks passed. Shared030
 run `render-files-1790480037972486000` returned0 within90s with156 Fast allocations,
 zero final owned bytes, all4DMAoff, exact cleanup and explicit AmiConnect release.
 See `evidence/enhanced-editor/wavetable-restore-owner/`. These injected callbacks
 do not qualify a real restore register implementation.
+
+## Row-range session integration
+
+`pt_wavetable_session_preflight` validates both the full sequence and its first
+emitting snapshot before source pins or output. Range sessions require an explicit
+exact-restore callback. Silent pre-roll advances software state only; it never
+uploads or invokes voice callbacks. Active snapshot sources and later emitted
+triggers are pinned, while samples that already ended are omitted. `next` acquires
+and restores all active voices at the first emitting interval before any of its
+frames elapse. The original renderer controls interval timing and the normal
+complete/dispatch protocol resumes afterwards, with confirmed-stop ownership on
+natural end, cancellation and failure. See `wavetable_song.h` for caller duties.
+
+Evidence in `evidence/enhanced-editor/wavetable-range/` covers fractional cursors,
+silent pre-roll, future triggers, final spans and pending/uncertain stop ownership.
+No native register, clock, audible output or physical AmiGUS acceptance is implied.

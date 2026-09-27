@@ -34,6 +34,13 @@ struct pt_wavetable_preflight_report {
 enum pt_wavetable_capability pt_wavetable_preflight(const struct pt_project *,
     const struct pt_render_options *,const struct pt_playback_format *,unsigned controls,
     const struct pt_allocator *,struct pt_wavetable_preflight_report *);
+/* Session variant additionally gates row-range restoration at the first emitting
+ * interval BEFORE ownership/output. Silent pre-roll is still capability checked;
+ * samples marks only active restored sources plus later emitted triggers. The
+ * two allocations cover plan/snapshot workspace and audited sequence. */
+enum pt_wavetable_capability pt_wavetable_session_preflight(const struct pt_project *,
+    const struct pt_render_options *,const struct pt_playback_format *,unsigned controls,unsigned restores,
+    const struct pt_allocator *,struct pt_wavetable_preflight_report *);
 /* Bounded snapshot capability gate. Requires explicit exact-restore driver
  * support; ordinary start is insufficient. Checks every active source identity
  * and restore geometry before any caller may upload/start. No allocation, PCM

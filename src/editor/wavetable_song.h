@@ -12,7 +12,8 @@ enum pt_wavetable_song_result {
  * already-bound, idle voice owner/bridge until close (outer reservation remains
  * caller-owned). Do not use its direct trigger/dispatch/close APIs meanwhile.
  * Complete capability preflight occurs BEFORE source pins, uploads or starts.
- * Only slots actually triggered by the sequence are master-pinned. Promotion
+ * Only slots restored at range start or triggered during output are master-pinned
+ * (whole-song sessions pin all triggered slots). Promotion
  * may retain owned Fast copies in sampler.current even if a later open step
  * fails; sample content/precision/history remain unchanged. On failure *out and
  * voice ownership are unchanged; report receives capability analysis if run.
@@ -21,14 +22,18 @@ enum pt_wavetable_song_result {
  * stop/close before edits, replacement or sampler reinitialization. Sampler
  * generation, table identities and project metadata are checked on every step;
  * these guards do not detect in-place writes to pattern/order/sample arrays.
- * Options/format are copied. Row-range playback is explicitly refused until
- * phase-correct silent pre-roll can be scheduled. No native device/scheduler. */
+ * Options/format are copied. Row-range playback requires an explicit exact-restore
+ * callback; missing support returns RANGE. No native device/scheduler. */
 enum pt_wavetable_song_result pt_wavetable_song_open(struct pt_wavetable_voices *,
     const struct pt_render_options *,const struct pt_playback_format *,const struct pt_allocator *,
     struct pt_wavetable_preflight_report *,struct pt_wavetable_song **out);
 /* next -> consume elapsed frames (1..256 each, exactly interval.frames) ->
  * complete. A zero-frame/end interval still requires complete. Caller schedules
- * time; consume only advances software phase, never waits or generates audio.
+ * time for emit=1; emit=0 pre-roll advances silently without waiting or any voice
+ * dispatch. consume only advances software phase, never waits or generates audio.
+ * For ranges, next restores the exact snapshot ONCE at the first emit=1 interval,
+ * before returning its frames. Thus next may upload/invoke restore callbacks and
+ * fail with DEVICE. Even a final emitting interval must restore before consuming.
  * complete applies one plan with internal256-byte staging. Natural end requests
  * confirmed stop and returns DONE or STOPPING. No later interval can restart it.
  * Invalid protocol is refused without advancement. Stale/internal/device errors

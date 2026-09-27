@@ -73,18 +73,22 @@ static enum pt_wavetable_capability check_plan(const struct pt_project *p,unsign
     }
     *held_state=held;*action=UINT_MAX;return PT_WAVETABLE_COMPATIBLE;
 }
-enum pt_wavetable_capability pt_wavetable_preflight(const struct pt_project *p,
-    const struct pt_render_options *o,const struct pt_playback_format *format,unsigned controls,
+static enum pt_wavetable_capability preflight(const struct pt_project *p,
+    const struct pt_render_options *o,const struct pt_playback_format *format,unsigned controls,unsigned session,unsigned restores,
     const struct pt_allocator *a,struct pt_wavetable_preflight_report *out)
 {
     struct pt_wavetable_preflight_report r;
-    struct pt_render_sequence *sequence=NULL;struct pt_render_plan *plan;uint16_t held=0;
+    struct preflight_work {struct pt_render_plan plan;struct pt_render_snapshot snapshot;} *work;
+    struct pt_render_sequence *sequence=NULL;struct pt_render_plan *plan;uint16_t held=0;unsigned restored=0,range;
     memset(&r,0,sizeof(r));r.result=PT_WAVETABLE_INVALID;r.action=UINT_MAX;
     if(!out)return PT_WAVETABLE_INVALID;
     if(!p || !o || !a || !a->allocate || !a->release)goto done;
     if(!valid_format(format)){r.result=PT_WAVETABLE_FORMAT;goto done;}
-    plan=a->allocate(a->context,sizeof(*plan));
-    if(!plan){r.result=PT_WAVETABLE_MEMORY;goto done;}
+    range=session && o->row_range;
+    if(range && restores!=1){r.result=PT_WAVETABLE_RESTORE;goto done;}
+    work=a->allocate(a->context,sizeof(*work));
+    if(!work){r.result=PT_WAVETABLE_MEMORY;goto done;}
+    plan=&work->plan;
     r.render_result=pt_render_sequence_open(p,o,a,&sequence);
     if(r.render_result!=PT_RENDER_OK)goto release;
     do {
@@ -92,6 +96,18 @@ enum pt_wavetable_capability pt_wavetable_preflight(const struct pt_project *p,
         r.render_result=pt_render_sequence_next(sequence,&interval);
         if(r.render_result!=PT_RENDER_OK)break;
         ++r.intervals;remaining=interval.frames;
+        if(range && interval.emit && !restored) {
+            struct pt_wavetable_preflight_report restore;unsigned ch,i;
+            r.render_result=pt_render_sequence_snapshot(sequence,&work->snapshot);
+            if(r.render_result!=PT_RENDER_OK)break;
+            if(pt_wavetable_restore_preflight(p,&work->snapshot,o->rate,format,restores,&restore)!=PT_WAVETABLE_COMPATIBLE) {
+                r.result=restore.result;r.channel=restore.channel;r.action=UINT_MAX;break;
+            }
+            held=0;
+            for(ch=0;ch<work->snapshot.channels;++ch)if(work->snapshot.voice[ch].active)held|=(uint16_t)(1U<<ch);
+            for(i=0;i<PT_PROJECT_SAMPLES;++i)r.samples[i]|=restore.samples[i];
+            restored=1;
+        }
         while(remaining) {
             uint32_t block=remaining>256?256:remaining;
             r.render_result=pt_render_sequence_consume(sequence,block);
@@ -101,7 +117,7 @@ enum pt_wavetable_capability pt_wavetable_preflight(const struct pt_project *p,
         if(r.render_result!=PT_RENDER_OK)break;
         r.render_result=pt_render_sequence_complete(sequence,plan);
         if(r.render_result!=PT_RENDER_OK)break;
-        r.result=check_plan(p,o->rate,plan,format,controls,&held,&r.action,r.samples);
+        r.result=check_plan(p,o->rate,plan,format,controls,&held,&r.action,range && !restored?NULL:r.samples);
         if(r.result!=PT_WAVETABLE_COMPATIBLE) {
             if(r.action<plan->count){r.channel=plan->action[r.action].channel;r.kind=plan->action[r.action].kind;}
             break;
@@ -109,11 +125,19 @@ enum pt_wavetable_capability pt_wavetable_preflight(const struct pt_project *p,
         if(interval.end)break;
     }while(1);
 release:
-    pt_render_sequence_close(sequence);a->release(a->context,plan);
+    pt_render_sequence_close(sequence);a->release(a->context,work);
     if(r.render_result!=PT_RENDER_OK)r.result=r.render_result==PT_RENDER_MEMORY?PT_WAVETABLE_MEMORY:PT_WAVETABLE_RENDER;
 done:
     *out=r;return r.result;
 }
+enum pt_wavetable_capability pt_wavetable_preflight(const struct pt_project *p,
+    const struct pt_render_options *o,const struct pt_playback_format *format,unsigned controls,
+    const struct pt_allocator *a,struct pt_wavetable_preflight_report *out)
+{return preflight(p,o,format,controls,0,0,a,out);}
+enum pt_wavetable_capability pt_wavetable_session_preflight(const struct pt_project *p,
+    const struct pt_render_options *o,const struct pt_playback_format *format,unsigned controls,unsigned restores,
+    const struct pt_allocator *a,struct pt_wavetable_preflight_report *out)
+{return preflight(p,o,format,controls,1,restores,a,out);}
 enum pt_wavetable_capability pt_wavetable_restore_preflight(const struct pt_project *p,
     const struct pt_render_snapshot *snapshot,unsigned rate,const struct pt_playback_format *format,unsigned exact_restore,
     struct pt_wavetable_preflight_report *out)

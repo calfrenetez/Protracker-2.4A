@@ -2,7 +2,7 @@
 static void song_bind(struct fixture *f,struct pt_sampler_wavetable *bridge,
     struct pt_wavetable_voices *owner,struct dispatch_bus *bus,struct pt_sampler *sampler,struct pt_project *p)
 {
-    unsigned i;struct pt_wavetable_voice_api api={bus,dispatch_start,dispatch_stop,dispatch_control};
+    unsigned i;struct pt_wavetable_voice_api api={bus,dispatch_start,dispatch_stop,dispatch_control,NULL};
     init(f,PT_AMIGUS_WAVETABLE);assert(pt_amigus_wavetable_cache_attach(&f->cache,&f->reservation,16,112,112,f,bus_owned,bus_write));
     memset(bus,0,sizeof(*bus));bus->f=f;bus->owner=owner;
     for(i=0;i<16;++i)bus->stop_result[i]=1;

@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=130008488 reserve=262144 flags=4
+SEQUENCE PASS: exact snapshot/resume audio, fractional loop phase, tempo/delay, pre-roll, partition invariance, protocol and allocation refusal
+EXEC MEMORY PASS: 38 Fast allocations, zero owned bytes, budget refusal without Chip fallback

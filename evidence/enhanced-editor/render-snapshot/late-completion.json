@@ -1,0 +1,9 @@
+{
+  "original_deadline_passed": false,
+  "late_returncode": 0,
+  "binary_sha256": "b89de1d8b65131042f854774226e32553533a3b8acd88f4e7f6cd7a2e2a8075a",
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=333\tsndbuf_status=0",
+  "done_mtime": 1790479594.048506,
+  "assessment_time": 1790479739.909397,
+  "exact_run_files_cleaned": true
+}

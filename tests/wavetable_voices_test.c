@@ -36,7 +36,7 @@ static int voices_fixture_main(void)
     struct fixture *f=malloc(sizeof(*f));struct voice_bus *bus=malloc(sizeof(*bus));
     struct pt_allocator allocator={NULL,allocate_master,release_master};
     struct pt_document document;struct pt_sampler sampler;struct pt_sampler_wavetable bridge={0};
-    struct pt_wavetable_voices voices={0};struct pt_wavetable_voice_api api={bus,voice_start,voice_stop,NULL};
+    struct pt_wavetable_voices voices={0};struct pt_wavetable_voice_api api={bus,voice_start,voice_stop,NULL,NULL};
     struct pt_pattern_history history;struct pt_pattern_command commands[8];struct pt_event_change changes[8];
     int32_t data[]={257,-513,1025,-2049};struct pt_cache_lease lease;unsigned i,n;
     uint8_t *saved;size_t size,used;

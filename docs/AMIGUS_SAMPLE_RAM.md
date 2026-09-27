@@ -440,3 +440,28 @@ verified endpoint/phase hardware support. Host sanitizer checks pass; native
 restore fixture builds and dispatcher syntax checks pass. No new emulator run
 was attempted during the retained renderer recovery hold. Evidence is in
 `evidence/enhanced-editor/amigus-restore/`.
+
+## Injected restore ownership
+
+The optional voice API `restore` callback consumes a complete exact-cursor plan;
+ordinary `start` remains separate. `pt_wavetable_restore_dispatch` accepts only
+an idle bound owner at the current bridge version. Full snapshot capability/source
+checks precede cache acquisition, and every active cache lease and actual-address
+plan is ready before the first restore callback. Cache sync may retire stale
+entries. Failed preparation invokes no voice callback and releases all temporary
+leases; unpinned loaded caches or promoted unchanged masters may remain.
+
+Each callback receives a lease already owned by its voice. Any result other than1
+is uncertain: the owner closes, unstarted candidates are unpinned and started
+voices receive one stop attempt. Pending/failed stops keep their leases and card
+reservation alive until an explicit confirmed retry. The callback must copy the
+whole plan synchronously and never mutate/reenter sampler state. Source identity,
+cache location and ownership are rechecked; all pinned caches resist eviction.
+This injected driver integration does not enable row-range song open, native MMIO
+or real card playback. A session still needs silent pre-roll/restore scheduling.
+
+Restore-owner host sanitizer and staged native build checks passed. Shared030
+run `render-files-1790480037972486000` returned0 within90s with156 Fast allocations,
+zero final owned bytes, all4DMAoff, exact cleanup and explicit AmiConnect release.
+See `evidence/enhanced-editor/wavetable-restore-owner/`. These injected callbacks
+do not qualify a real restore register implementation.

@@ -3,6 +3,7 @@
 #include "sampler_wavetable.h"
 #include "../core/amigus_voice_plan.h"
 #define PT_WAVETABLE_VOICES 16
+struct pt_amigus_restore_plan;
 /* Injected driver contract, not hardware dispatch. start returns 1 only when
  * started; every other result is uncertain and requires a confirmed stop.
  * stop returns 1 only when this voice can no longer read its sample RAM, 0 for
@@ -16,6 +17,10 @@ struct pt_wavetable_voice_api {
     /* Optional synchronous phase-preserving rate/gain update for sequence
      * dispatch. Return1 confirmed; all other results require confirmed stop. */
     int (*control)(void *,unsigned,uint32_t rate,uint16_t left,uint16_t right);
+    /* Optional EXACT cursor restore, distinct from start. Must synchronously
+     * consume/copy both bounds and Q32 cursor; never round/drop phase. Return1
+     * confirmed, anything else uncertain until stop. Same context/lifetime. */
+    int (*restore)(void *,unsigned,const struct pt_amigus_restore_plan *);
 };
 struct pt_wavetable_voice {
     struct pt_cache_lease lease;

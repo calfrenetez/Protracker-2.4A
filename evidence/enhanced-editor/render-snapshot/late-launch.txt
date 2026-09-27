@@ -1,0 +1,6 @@
+FailAt 21
+Stack 65536
+CD Dev:Tests/render-files-1790479010316536000/render-sequence
+PTExecRenderSequenceTest Dev:Tests/render-files-1790479010316536000/render-sequence >test.log
+Echo $RC >test.rc
+Echo done >Dev:Tests/render-files-1790479010316536000/done

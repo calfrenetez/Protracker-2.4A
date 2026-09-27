@@ -12,10 +12,10 @@ static void *preflight_allocate(void *ctx,size_t bytes)
 }
 static void restore_preflight_fixture(void)
 {
-    int32_t data[8]={1,257,-513,799,123,991,-777,27};struct pt_project p={0};struct pt_sample samples[2]={{0}};
+    int32_t data[8]={1,257,-513,799,123,991,-777,27};struct pt_project p={0};struct pt_sample samples[2];
     struct pt_render_snapshot snapshot={0};struct pt_wavetable_preflight_report report;
     struct pt_playback_format format={16,0,0,0};struct pt_pcm foreign;
-    p.channels.count=16;p.samples=samples;p.sample_count=2;snapshot.channels=16;
+    memset(samples,0,sizeof(samples));p.channels.count=16;p.samples=samples;p.sample_count=2;snapshot.channels=16;
     samples[1].pcm=(struct pt_pcm){data,8,8,48000,1,24};foreign=samples[1].pcm;
     assert(pt_voice_init(&snapshot.voice[15],&samples[1].pcm,0,8,PT_VOICE_FORWARD,0,8,0x90000000ULL,1)==PT_PCM_OK);
     assert(pt_voice_advance(snapshot.voice,16,3)==PT_PCM_OK);snapshot.gain[15][0]=65536;
@@ -113,7 +113,8 @@ static void preflight_fixture(void)
 }
 struct dispatch_bus {
     struct fixture *f;struct pt_wavetable_voices *owner;
-    unsigned starts,stops,controls,fail_start,fail_control;
+    unsigned starts,stops,controls,fail_start,fail_control,restores,fail_restore;
+    uint64_t cursor[16];
     unsigned active[16];int stop_result[16];struct pt_amigus_voice_plan plan[16];
 };
 static int dispatch_start(void *ctx,unsigned ch,const struct pt_amigus_voice_plan *p)
@@ -136,19 +137,78 @@ static int dispatch_control(void *ctx,unsigned ch,uint32_t rate,uint16_t left,ui
     return b->controls!=b->fail_control;
 }
 
+static int dispatch_restore(void *ctx,unsigned ch,const struct pt_amigus_restore_plan *p)
+{
+    struct dispatch_bus *b=ctx;assert(!b->active[ch] && b->owner->voice[ch].held);
+    assert(pt_cache_data(&b->f->cache.cache,b->owner->voice[ch].lease));
+    assert(pins(b->f)==16); /* EVERY candidate is pinned before first callback. */
+    b->active[ch]=1;b->plan[ch]=p->bounds;b->cursor[ch]=p->cursor_q32;
+    ++b->restores;return b->restores!=b->fail_restore;
+}
+static void restore_dispatch_fixture(void)
+{
+    struct fixture *f=malloc(sizeof(*f));struct dispatch_bus *bus=malloc(sizeof(*bus));
+    struct pt_allocator a={NULL,allocate_master,release_master};struct pt_document d;
+    struct pt_sampler sampler;struct pt_sampler_wavetable bridge={0};struct pt_wavetable_voices owner={0};
+    struct pt_wavetable_voice_api api={bus,dispatch_start,dispatch_stop,dispatch_control,NULL};
+    struct pt_render_snapshot snapshot={0},bad;struct pt_playback_format format={16,0,0,0};
+    int32_t data[64]={257,-513,1025,-2049,17,31,47,63};uint8_t staging[3],*saved;size_t size,used;
+    unsigned ch,writes;uint64_t version;assert(f && bus);memset(bus,0,sizeof(*bus));
+    init(f,PT_AMIGUS_WAVETABLE);assert(pt_amigus_wavetable_cache_attach(&f->cache,&f->reservation,16,112,112,f,bus_owned,bus_write));
+    pt_document_init(&d,&a);assert(pt_document_new(&d,16,SIZE_MAX)==PT_PROJECT_OK);
+    d.project.samples[0].pcm=(struct pt_pcm){data,64,8,48000,1,24};d.project.samples[0].volume=64;
+    d.project.samples[1].pcm=(struct pt_pcm){data,64,64,48000,1,24};d.project.samples[1].volume=64;
+    assert(pt_project_size(&d.project,&size)==PT_PROJECT_OK);saved=malloc(size);assert(saved);
+    assert(pt_project_encode(&d.project,saved,size,&used)==PT_PROJECT_OK);
+    pt_sampler_init(&sampler,&a,1024*1024);assert(pt_sampler_wavetable_bind(&bridge,&sampler,&d.project,&f->cache));
+    assert(pt_wavetable_voices_bind(&owner,&bridge,&api));bus->f=f;bus->owner=&owner;version=bridge.version;
+    snapshot.channels=16;
+    for(ch=0;ch<16;++ch) {
+        assert(pt_voice_init(snapshot.voice+ch,&d.project.samples[0].pcm,0,8,PT_VOICE_FORWARD,0,8,0x90000000ULL,1)==PT_PCM_OK);
+        snapshot.gain[ch][0]=65536;bus->stop_result[ch]=1;
+    }
+    assert(pt_voice_advance(snapshot.voice,16,3)==PT_PCM_OK);
+    assert(!pt_wavetable_restore_dispatch(&owner,version,48000,&snapshot,&format,staging,3) && !f->writes);
+    owner.api.restore=dispatch_restore;
+    assert(!pt_wavetable_restore_dispatch(&owner,version+1,48000,&snapshot,&format,staging,3) && !f->writes);
+    bad=snapshot;bad.voice[15].pcm=(const struct pt_pcm *)(uintptr_t)1;
+    assert(!pt_wavetable_restore_dispatch(&owner,version,48000,&bad,&format,staging,3) && !f->writes);
+    refuse=1;assert(!pt_wavetable_restore_dispatch(&owner,version,48000,&snapshot,&format,staging,3));refuse=0;
+    assert(!f->writes && !pins(f) && !bus->restores);
+    f->fail=1;assert(!pt_wavetable_restore_dispatch(&owner,version,48000,&snapshot,&format,staging,3));f->fail=0;
+    assert(!pins(f) && !bus->restores);
+    bad=snapshot;bad.voice[15].pcm=&d.project.samples[1].pcm;
+    assert(!pt_wavetable_restore_dispatch(&owner,version,48000,&bad,&format,staging,3));
+    assert(!pins(f) && !bus->restores);exact_save(&d.project,saved,size);
+    assert(pt_wavetable_restore_dispatch(&owner,version,48000,&snapshot,&format,staging,3)==1);
+    assert(bus->restores==16 && !bus->starts && pins(f)==16);
+    for(ch=0;ch<16;++ch)assert(bus->cursor[ch]==((uint64_t)bus->plan[ch].start<<32)+snapshot.voice[ch].phase*2);
+    writes=f->writes;assert(!pt_wavetable_restore_dispatch(&owner,version,48000,&snapshot,&format,staging,3));
+    assert(bus->restores==16 && f->writes==writes);
+    for(ch=0;ch<16;++ch)assert(pt_wavetable_voices_stop(&owner,ch)==1);
+    bus->fail_restore=19;bus->stop_result[2]=0;
+    assert(pt_wavetable_restore_dispatch(&owner,version,48000,&snapshot,&format,staging,3)==-1);
+    assert(bus->restores==19 && owner.closing && owner.voice[2].uncertain && pins(f)==1);
+    assert(!pt_amigus_reservation_close(&f->reservation) && !pt_wavetable_voices_close(&owner));
+    bus->stop_result[2]=-1;assert(!pt_wavetable_voices_close(&owner) && pins(f)==1);
+    bus->stop_result[2]=1;assert(pt_wavetable_voices_close(&owner));
+    assert(pt_amigus_reservation_close(&f->reservation));exact_save(&d.project,saved,size);
+    free(saved);pt_sampler_release(&sampler);pt_document_release(&d);free(bus);free(f);assert(!allocations);
+    puts("WAVETABLE RESTORE OWNER PASS: whole-batch acquisition, exact cursor, refusal rollback, uncertain restore retains lease until confirmed stop; injected only");
+}
 #include "wavetable_song_cases.h"
 static int dispatch_fixture_main(void)
 {
     struct fixture *f=malloc(sizeof(*f));struct dispatch_bus *bus=malloc(sizeof(*bus));
     struct pt_allocator allocator={NULL,allocate_master,release_master};
     struct pt_document d;struct pt_sampler sampler;struct pt_sampler_wavetable bridge={0};struct pt_wavetable_voices owner={0};
-    struct pt_wavetable_voice_api api={bus,dispatch_start,dispatch_stop,dispatch_control};
+    struct pt_wavetable_voice_api api={bus,dispatch_start,dispatch_stop,dispatch_control,NULL};
     struct pt_render_command_state state;struct pt_render_plan plan,bad;
     struct pt_flow flow={0};struct pt_pitch pitch={0};struct pt_render_range ranges[16]={{0}};
     struct pt_render_options options={0};struct pt_playback_format format={16,0,0,0};uint8_t staging[3];
     int32_t data[]={257,-513,1025,-2049,17,31,47,63};unsigned ch,i,starts,stops,controls;uint64_t version;
     uint8_t *saved;size_t size,used;
-    assert(f && bus);assert(voices_fixture_main()==0);restore_preflight_fixture();preflight_fixture();song_fixture();memset(bus,0,sizeof(*bus));
+    assert(f && bus);assert(voices_fixture_main()==0);restore_preflight_fixture();restore_dispatch_fixture();preflight_fixture();song_fixture();memset(bus,0,sizeof(*bus));
     init(f,PT_AMIGUS_WAVETABLE);assert(pt_amigus_wavetable_cache_attach(&f->cache,&f->reservation,16,112,112,f,bus_owned,bus_write));
     pt_document_init(&d,&allocator);assert(pt_document_new(&d,16,SIZE_MAX)==PT_PROJECT_OK);
     d.project.samples[0].pcm=(struct pt_pcm){data,8,8,48000,1,24};d.project.samples[0].volume=64;

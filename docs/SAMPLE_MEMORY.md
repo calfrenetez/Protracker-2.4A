@@ -1752,3 +1752,10 @@ capability and validates every active source/geometry before future upload/start
 It has no cache/source ownership or device effects. Row-range sessions remain
 refused pending lifecycle/driver integration; native phase semantics are unverified.
 See `AMIGUS_SAMPLE_RAM.md` and `evidence/enhanced-editor/amigus-restore/`.
+
+The injected wavetable owner now supports exact restore callbacks with all active
+playback copies acquired before any voice starts. Failed preparation releases
+its temporary leases; uncertain restore retains each started cache until confirmed
+stop. Idle-owner and current-version checks prevent overwriting active ownership.
+Masters keep their original precision and enhanced-save bytes. This is a software
+lifetime path; row-range session scheduling and native driver wiring remain open.

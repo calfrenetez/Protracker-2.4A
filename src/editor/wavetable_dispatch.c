@@ -161,3 +161,41 @@ int pt_wavetable_dispatch(struct pt_wavetable_voices *v,uint64_t version,unsigne
     }
     return 1;
 }
+
+int pt_wavetable_restore_dispatch(struct pt_wavetable_voices *v,uint64_t version,unsigned rate,
+    const struct pt_render_snapshot *snapshot,const struct pt_playback_format *format,uint8_t *staging,size_t capacity)
+{
+    struct pt_wavetable_preflight_report report;struct pt_cache_lease lease[16];
+    struct pt_amigus_restore_plan plan[16];unsigned held[16]={0},ch,slot;uint32_t address,bytes;
+    enum pt_cache_result loaded;
+    if(!v || !v->bridge || v->closing || !v->api.restore || !pt_sampler_wavetable_sync(v->bridge) || v->bridge->version!=version)return 0;
+    for(ch=0;ch<16;++ch)if(v->voice[ch].held)return 0;
+    if(pt_wavetable_restore_preflight(v->bridge->project,snapshot,rate,format,1,&report)!=PT_WAVETABLE_COMPATIBLE)return 0;
+    for(ch=0;ch<snapshot->channels;++ch)if(snapshot->voice[ch].active) {
+        if(!resolve(v->bridge->project,snapshot->voice[ch].pcm,&slot))goto refused;
+        loaded=pt_sampler_wavetable_acquire(v->bridge,slot,format,staging,capacity,&lease[ch]);
+        if(loaded!=PT_CACHE_LOAD && loaded!=PT_CACHE_HIT)goto refused;
+        held[ch]=1;
+        if(!pt_sampler_wavetable_location(v->bridge,lease[ch],&address,&bytes) ||
+           !pt_amigus_render_restore(snapshot->voice+ch,rate,snapshot->gain[ch],format,address,bytes,plan+ch))goto refused;
+    }
+    /* All resources exist before any voice may read them. Recheck ownership
+       after acquisitions; caller callbacks cannot change sampler state. */
+    if(!pt_sampler_wavetable_sync(v->bridge) || v->bridge->version!=version)goto refused;
+    for(ch=0;ch<16;++ch)if(held[ch] && !pt_sampler_wavetable_location(v->bridge,lease[ch],&address,&bytes))goto refused;
+    for(ch=0;ch<16;++ch)if(held[ch]) {
+        if(!pt_sampler_wavetable_location(v->bridge,lease[ch],&address,&bytes))goto failed;
+        v->voice[ch].lease=lease[ch];v->voice[ch].held=1;v->voice[ch].uncertain=1;held[ch]=0;
+        if(v->api.restore(v->api.context,ch,plan+ch)!=1)goto failed;
+        v->voice[ch].uncertain=0;
+    }
+    return 1;
+failed:
+    v->closing=1;
+    for(ch=0;ch<16;++ch)if(held[ch])pt_sampler_wavetable_unpin(v->bridge,lease[ch]);
+    for(ch=0;ch<16;++ch)pt_wavetable_voices_stop(v,ch);
+    return -1;
+refused:
+    for(ch=0;ch<16;++ch)if(held[ch])pt_sampler_wavetable_unpin(v->bridge,lease[ch]);
+    return 0;
+}

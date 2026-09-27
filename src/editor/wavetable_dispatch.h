@@ -44,6 +44,18 @@ enum pt_wavetable_capability pt_wavetable_preflight(const struct pt_project *,
 enum pt_wavetable_capability pt_wavetable_restore_preflight(const struct pt_project *,
     const struct pt_render_snapshot *,unsigned rate,const struct pt_playback_format *,unsigned exact_restore,
     struct pt_wavetable_preflight_report *);
+/* Restore a snapshot onto an idle bound owner. Entire snapshot, capability and
+ * version preflight precede cache acquisition/voice callbacks (sync may retire
+ * stale entries). Acquire every active cache
+ * lease and validate actual addresses before the FIRST restore callback. No old
+ * voices may be held. Refusal0 invokes no voice callback; newly loaded unpinned
+ * caches/promoted immutable masters may remain on preparation failure. Runtime
+ * failure-1 poisons owner and attempts stops once, retaining uncertain leases;
+ * success1 keeps every restored cache leased until confirmed stop. No allocation
+ * beyond normal cache/master acquisition. Borrowed snapshot sources must stay
+ * immutable/owned through call; callbacks must not mutate/reenter. */
+int pt_wavetable_restore_dispatch(struct pt_wavetable_voices *,uint64_t version,unsigned rate,
+    const struct pt_render_snapshot *,const struct pt_playback_format *,uint8_t *staging,size_t capacity);
 /* Apply one successful audited renderer plan after the preceding interval.
  * Capture bridge.version AFTER sync when constructing plan. Project/master
  * descriptors must remain immutable/current; exact descriptor identity is

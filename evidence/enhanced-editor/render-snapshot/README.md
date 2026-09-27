@@ -34,3 +34,14 @@ cannot restore arbitrary fractional sample position; this snapshot API must not
 be mistaken for hardware restore support. No native UI, real MMIO/card output,
 audible acceptance or physical operations were performed. Full row-range wiring
 requires phase-preserving restore capability and retained source/cache ownership.
+
+## Late completion and release
+
+A later bounded host-file inspection found done, returncode0 and both pass markers:
+38 Fast allocations, zero final owned bytes. The original90-second deadline failure
+is retained unchanged in result.json. Fresh shared-lock/live030/bridge checks and
+all4DMAoff passed; exact binary identity and file inventory were verified, final
+log/launch archived, and only the owned run/launch removed. Explicit release was
+sent to AmiConnect. See late-completion.json/log and late-launch.txt. This clears
+the recovery hold and establishes eventual fixture completion, not deadline or
+real-time performance acceptance. No reset/retry was used.

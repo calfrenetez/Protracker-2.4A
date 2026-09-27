@@ -37,7 +37,14 @@ int main(void)
         const struct pt_pcm *block;
         o.include_lead_in=mode==1;o.pattern_only=o.row_range=mode==2;o.row_first=2;o.row_end=5;
         used=0;assert(pt_render_stream(&p,&o,capture,NULL,NULL,NULL,&report)==PT_RENDER_OK);
-        assert(pt_studio_song_open(&p,&o,&a,&provider,&binding,1,&s)==PT_RENDER_OK && owned==3);
+        if(partition==17) {
+            unsigned ready=0,steps=0;uint8_t required[255];memset(required,0x5a,sizeof(required));
+            assert(pt_studio_song_begin(&p,&o,&a,&provider,&binding,1,&s)==PT_RENDER_OK && owned==3);
+            assert(!pt_studio_song_required(s,required) && required[0]==0x5a);
+            assert(pt_studio_song_pull(s,256,&block,&done)==PT_RENDER_INVALID && !block && !done);
+            while(!ready) {assert(pt_studio_song_prepare(s,&ready)==PT_RENDER_OK && !pins && owned==3);assert(++steps<10000);}
+            assert(pt_studio_song_required(s,required) && required[0]==1 && !required[1] && !required[254]);
+        }else assert(pt_studio_song_open(&p,&o,&a,&provider,&binding,1,&s)==PT_RENDER_OK && owned==3);
         assert(pt_studio_song_pull(s,257,&block,&done)==PT_RENDER_INVALID);
         while(!done) {
             assert(pt_studio_song_pull(s,partition,&block,&done)==PT_RENDER_OK);

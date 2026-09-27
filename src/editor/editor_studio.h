@@ -16,6 +16,13 @@ void pt_editor_studio_detach(struct pt_editor_studio *);
  * must specify48k/stereo24. Project stays immutable while active; external writes
  * must prepare_change first. No PLAY action or device queue is enabled here. */
 enum pt_render_result pt_editor_studio_start(struct pt_editor_studio *,const struct pt_render_options *);
+/* Begin keeps pending preparation in the same edit/Stop/dispose barrier.
+ * Prepare or direct pull advances one bounded step; readiness never starts a
+ * device. The queued variant advances preparation through the normal pump,
+ * publishing no queue blocks until all required master pins are ready. */
+enum pt_render_result pt_editor_studio_begin(struct pt_editor_studio *,const struct pt_render_options *);
+enum pt_render_result pt_editor_studio_prepare(struct pt_editor_studio *,unsigned *ready);
+enum pt_render_result pt_editor_studio_begin_queued(struct pt_editor_studio *,const struct pt_render_options *,struct pt_studio_queue *);
 /* Explicit classic EFx private-bank mode. Same editor guard/stop lifecycle;
  * sample_budget bounds additional copies from the editor's sampler allocator.
  * Unsupported16/24-bit sources are refused, never converted. Does not enable

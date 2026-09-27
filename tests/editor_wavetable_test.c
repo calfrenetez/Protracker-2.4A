@@ -3,6 +3,7 @@
 #include "../src/editor/editor_wavetable.h"
 #include "../src/editor/editor_studio.h"
 #include "../src/platform/sample_import.h"
+#include "studio_preparation_cases.h"
 static void editor_song_start(struct pt_editor_wavetable *o,struct fixture *f,struct dispatch_bus *bus,
     struct pt_sampler_wavetable *bridge,struct pt_wavetable_voices *voices)
 {
@@ -47,6 +48,7 @@ static int editor_wavetable_fixture(void)
     struct pt_sampler_wavetable bridge={0};struct pt_wavetable_voices voices={0};
     int32_t data[8]={257,-513,1025,-2049,17,31,47,63};size_t size,used;uint8_t *saved;
     unsigned revision,generation;struct pt_render_interval span;
+    studio_preparation_fixture(&a);
     assert(dispatch_fixture_main()==0);assert(e && f && bus);
     pt_document_init(&d,&a);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
     d.project.samples[0].pcm=(struct pt_pcm){data,8,8,48000,1,24};d.project.samples[0].volume=64;

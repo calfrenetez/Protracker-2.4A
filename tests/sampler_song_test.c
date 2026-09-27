@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "../src/editor/sampler_song.h"
-static unsigned live;
-static void *alloc(void *c,size_t n) {void *p;(void)c;p=malloc(n);if(p)++live;return p;}
+#include "studio_preparation_cases.h"
+static unsigned live,attempt,fail_at;
+static void *alloc(void *c,size_t n) {void *p;(void)c;if(++attempt==fail_at)return NULL;p=malloc(n);if(p)++live;return p;}
 static void drop(void *c,void *p) {(void)c;if(p){assert(live);--live;free(p);}}
 static int32_t first(struct pt_sampler_song *song)
 {
@@ -17,6 +18,7 @@ int main(void)
     struct pt_pattern_history h;struct pt_pattern_command commands[2];struct pt_event_change changes[2];
     struct pt_sampler_song *song=NULL;struct pt_render_options o={0};
     int32_t original[]={257,-513,1025,-2049};unsigned done;const struct pt_pcm *out;
+    studio_preparation_fixture(&a);assert(!live);
     pt_document_init(&d,&a);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
     d.project.samples[0].pcm=(struct pt_pcm){original,4,4,48000,1,24};
     d.project.samples[0].volume=64;d.project.samples[0].loop=PT_LOOP_FORWARD;d.project.samples[0].loop_end=4;
@@ -24,7 +26,13 @@ int main(void)
     d.project.events[4].effect=15;
     pt_sampler_init(&s,&a,1024*1024);assert(pt_pattern_history_init(&h,&d.project,commands,2,changes,2)==PT_EDIT_OK);
     o.rate=48000;o.bits=24;o.gain_q16=65536;o.tracks=1;o.tick_limit=1000;o.frame_limit=1000000;
-    assert(pt_sampler_song_open(&s,&d.project,&o,&a,&song)==PT_RENDER_OK);assert(first(song)==257);
+    {unsigned i,baseline=live;for(i=1;i<=5;++i) {
+        attempt=0;fail_at=i;
+        assert(pt_sampler_song_open(&s,&d.project,&o,&a,&song)==PT_RENDER_MEMORY && !song);
+        assert(live==baseline && !s.bytes && d.project.samples[0].pcm.data==original);
+    }fail_at=0;}
+    assert(pt_sampler_song_open(&s,&d.project,&o,&a,&song)==PT_RENDER_OK);
+    attempt=0;fail_at=1;assert(first(song)==257 && !attempt);fail_at=0;
     assert(d.project.samples[0].pcm.data!=original && s.bytes);
     /* Required edit lifecycle: stop before publishing the edited master. */
     pt_sampler_song_stop(song);pt_sampler_song_close(song);

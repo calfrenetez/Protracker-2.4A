@@ -1888,3 +1888,34 @@ cancel before changing/freeing the borrowed source. Public sampler_pin behavior
 is unchanged. Initial validation and allocation remain synchronous; this bounds
 copy work, not elapsed time or allocator latency. Native PLAY/device timing remains
 unfinished. See `evidence/enhanced-editor/bounded-master-promotion/`.
+
+### Studio preparation before output
+
+Ordinary Studio song sessions now analyze the complete sequence without invoking
+source providers, pinning masters or producing audio. Begin/prepare advances one
+measurement chunk, interval transition or <=256-frame silent phase chunk. The
+completed sequence is reset for playback without repeating measurement; the
+required-slot mask includes pre-roll, segment and repeat sources. Studio retains
+its stereo, true24, ping-pong and slice support rather than adopting mono wavetable
+capability limits.
+
+The sampler owner then reserves/copies only those required masters with the same
+4096-byte promotion job used by wavetable preparation. All required pins must be
+ready before the first output block. Preparation holds pins until stop/end/error,
+so later provider acquisitions reuse the immutable versions instead of promoting
+whole document-backed samples during a note trigger. Unused slots stay untouched.
+Failure or cancellation releases incomplete copies and session pins; unchanged
+completed masters may remain sampler-owned. Master precision is never reduced.
+
+Editor begin/prepare and begin_queued keep pending work under the existing
+edit/undo/dispose/Stop guard. A queued pump advances preparation with no queued
+PCM until ready, preserving independently held consumer blocks on later edits.
+The existing synchronous start/open APIs drive the same preparation to completion.
+Generation and project-header identity checks reject stale sessions; selected
+channel navigation is allowed. Borrowed arrays remain immutable by contract.
+
+Initial/reset validation, allocator calls and public provider/voice validation
+remain synchronous. No arbitrary provider gains a trusted-input flag, and this is
+not a hard real-time guarantee. Mutable EFx continues its separate private-bank
+path. Native PLAY, output scheduling, card transport and physical acceptance remain
+open. Evidence: `evidence/enhanced-editor/studio-preparing/`.

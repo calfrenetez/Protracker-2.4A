@@ -23,6 +23,22 @@ enum pt_render_result pt_editor_studio_start(struct pt_editor_studio *o,const st
     pt_editor_studio_stop(o);
     return pt_sampler_song_open(&o->editor->sampler,o->editor->project,options,&o->editor->sampler.allocator,&o->song);
 }
+enum pt_render_result pt_editor_studio_begin(struct pt_editor_studio *o,const struct pt_render_options *options)
+{
+    if(!attached(o))return PT_RENDER_INVALID;
+    pt_editor_studio_stop(o);
+    return pt_sampler_song_begin(&o->editor->sampler,o->editor->project,options,&o->editor->sampler.allocator,&o->song);
+}
+enum pt_render_result pt_editor_studio_prepare(struct pt_editor_studio *o,unsigned *ready)
+{
+    enum pt_render_result result;
+    if(!ready)return PT_RENDER_INVALID;
+    *ready=0;
+    if(!attached(o) || !o->song)return PT_RENDER_INVALID;
+    result=pt_sampler_song_prepare(o->song,ready);
+    if(result!=PT_RENDER_OK)pt_editor_studio_stop(o);
+    return result;
+}
 enum pt_render_result pt_editor_studio_start_invert(struct pt_editor_studio *o,const struct pt_render_options *options,size_t budget)
 {
     if(!attached(o))return PT_RENDER_INVALID;
@@ -53,19 +69,21 @@ static enum pt_render_result producer_pull(void *context,unsigned frames,const s
     return pull_song(o,frames,pcm,done);
 }
 static void producer_stop(void *context) {close_song(context);}
-static enum pt_render_result start_queued(struct pt_editor_studio *o,const struct pt_render_options *options,struct pt_studio_queue *queue,unsigned invert,size_t budget)
+static enum pt_render_result start_queued(struct pt_editor_studio *o,const struct pt_render_options *options,struct pt_studio_queue *queue,unsigned invert,size_t budget,unsigned preparing)
 {
     struct pt_studio_producer source;enum pt_render_result result;
     if(!queue || (o && queue==o->queue))return PT_RENDER_INVALID;
-    result=invert?pt_editor_studio_start_invert(o,options,budget):pt_editor_studio_start(o,options);if(result!=PT_RENDER_OK)return result;
+    result=invert?pt_editor_studio_start_invert(o,options,budget):preparing?pt_editor_studio_begin(o,options):pt_editor_studio_start(o,options);if(result!=PT_RENDER_OK)return result;
     source=(struct pt_studio_producer){o,producer_pull,producer_stop};
     if(!pt_studio_pump_init(&o->pump,&source,queue)) {pt_editor_studio_stop(o);return PT_RENDER_INVALID;}
     o->queue=queue;return PT_RENDER_OK;
 }
 enum pt_render_result pt_editor_studio_start_queued(struct pt_editor_studio *o,const struct pt_render_options *options,struct pt_studio_queue *queue)
-{return start_queued(o,options,queue,0,0);}
+{return start_queued(o,options,queue,0,0,0);}
 enum pt_render_result pt_editor_studio_start_invert_queued(struct pt_editor_studio *o,const struct pt_render_options *options,size_t budget,struct pt_studio_queue *queue)
-{return start_queued(o,options,queue,1,budget);}
+{return start_queued(o,options,queue,1,budget,0);}
+enum pt_render_result pt_editor_studio_begin_queued(struct pt_editor_studio *o,const struct pt_render_options *options,struct pt_studio_queue *queue)
+{return start_queued(o,options,queue,0,0,1);}
 enum pt_pump_result pt_editor_studio_step(struct pt_editor_studio *o,unsigned frames)
 {
     enum pt_pump_result result;

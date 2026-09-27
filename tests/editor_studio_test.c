@@ -32,6 +32,14 @@ int main(void)
     d.project.events[0].kind=PT_NOTE_PERIOD;d.project.events[0].pitch=428;d.project.events[0].instrument=1;d.project.events[4].effect=15;
     options.rate=48000;options.bits=24;options.tracks=1;options.gain_q16=65536;options.tick_limit=1000;options.frame_limit=1000000;
     assert(pt_editor_studio_attach(&owner,e) && !pt_editor_studio_attach(&second,e));
+    /* Preparation remains under the editor guard before there are voice pins. */
+    for(action=0;action<2;++action) {
+        unsigned ready=9;assert(pt_editor_studio_begin(&owner,&options)==PT_RENDER_OK);
+        assert(pt_editor_studio_prepare(&owner,&ready)==PT_RENDER_OK && !ready && !e->sampler.bytes);
+        if(action==0)pt_editor_studio_stop(&owner);
+        else {e->editing=1;e->row=0;pt_editor_key(e,0x46,0);assert(!owner.song);pt_editor_key(e,0x31,8);}
+        assert(!owner.song && !e->sampler.bytes);
+    }
     start(&owner,&options);assert(owner.song && e->sampler.bytes);
     pt_editor_studio_stop(&owner);baseline=live;
     start(&owner,&options);pt_editor_key(e,0x4d,0);assert(owner.song);e->row=0;e->editing=1;
@@ -40,10 +48,10 @@ int main(void)
     d.project.events[0].pitch=428;start(&owner,&options);pt_editor_key(e,0x31,8);assert(!owner.song);
     /* Queued edits discard waiting audio, but never invalidate consumer memory. */
     for(action=0;action<3;++action) {struct pt_studio_queue *q=pt_studio_queue_open(&a,2);uint64_t ticket;unsigned i;
-        assert(q && pt_editor_studio_start_queued(&owner,&options,q)==PT_RENDER_OK);
-        for(i=0;i<50;++i) {assert(pt_editor_studio_step(&owner,17)!=PT_PUMP_ERROR);
+        assert(q && pt_editor_studio_begin_queued(&owner,&options,q)==PT_RENDER_OK);
+        for(i=0;i<1000;++i) {assert(pt_editor_studio_step(&owner,17)!=PT_PUMP_ERROR);
             if(pt_studio_queue_acquire(q,&out,&ticket)==PT_QUEUE_OK)break;}
-        assert(i<50 && out->data[0]==257);
+        assert(i<1000 && out->data[0]==257);
         for(i=0;i<20;++i)assert(pt_editor_studio_step(&owner,17)!=PT_PUMP_ERROR);
         assert(owner.pump.held);e->row=0;
         if(action==0)pt_editor_key(e,0x31,0);

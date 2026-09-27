@@ -242,3 +242,15 @@ partial acquisition. The separate `amigus_wavetable_cache` owner keeps its acces
 lease until all cached sample leases retire. This does not enable native Studio
 output or bind a wavetable register bus. See `AMIGUS_SAMPLE_RAM.md` for ownership
 and the fake-library/injected-bus evidence boundary.
+
+
+## Native reservation-call ABI (27 September2026)
+
+The production native Find/Reserve/Free callback bodies now have shared030 execution
+coverage against a private process-local vector table. Assembly captures verify the
+published SFD offsets/registers, full32-bit status, per-context bases and exact PCM/
+wavetable owner identity through success and busy unwind. The fixture never installs
+or opens a mock library; core open/close are injected callbacks. It uses no MMIO or
+interrupts and releases its one Fast allocation. This validates compiler/register
+binding against the pinned ABI, not actual library/card compatibility or output.
+Evidence: `evidence/enhanced-editor/amigus-native-abi/`.

@@ -38,7 +38,7 @@ def main():
     group.add_argument('--sample-raw',action='store_true',help='Run streamed master RAW export with native Fast allocator')
     group.add_argument('--sample-wav',action='store_true',help='Run streamed master WAV export with native Fast allocator')
     group.add_argument('--amigus-discovery',action='store_true',help='Discovery-only native library probe; no reservation or MMIO')
-    group.add_argument('--studio-memory',choices=['mixer','sampler','song','editor','queued','consumer','fifo','session','register-session','reserved-session','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence'],help='Run one production-allocator Studio fixture')
+    group.add_argument('--studio-memory',choices=['native-abi','mixer','sampler','song','editor','queued','consumer','fifo','session','register-session','reserved-session','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence'],help='Run one production-allocator Studio fixture')
     group.add_argument('--input-memory',choices=['import','recent','exec-import','exec-recent'],help='Run one import or recent-file memory fixture')
     group.add_argument('--exec-memory',choices=['bounce','stems','failures','save'],help='Run one native Exec-backed memory fixture')
     group.add_argument('--stems-only',action='store_true',help='Run the allocated stem export test only')
@@ -83,7 +83,8 @@ def main():
             if args.input_memory=='exec-recent':cases=[('recent','PTExecRecentTest','RECENT MEMORY PASS')]
             result['scope']='shared030 native import/recent file checks'
         if args.studio_memory:
-            cases=[{'mixer':('studio','PTExecStudioTest','STUDIO MIX PASS:'),
+            cases=[{'native-abi':('native-abi','PTAmiGusNativeAbiTest','AMIGUS NATIVE ABI PASS:'),
+                    'mixer':('studio','PTExecStudioTest','STUDIO MIX PASS:'),
                     'sampler':('sampler-studio','PTExecSamplerStudioTest','SAMPLER STUDIO PASS:'),
                     'render-sequence':('render-sequence','PTExecRenderSequenceTest','SEQUENCE PASS:'),
                     'editor-wavetable':('editor-wavetable','PTExecEditorWavetableTest','EDITOR WAVETABLE PASS:'),
@@ -270,7 +271,7 @@ def main():
                 result['donor_unchanged']=True
             result['passed']=True
         finally:
-            if finished and (args.studio_memory in ('editor','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence') or args.invert_editor or args.invert_sampler or args.invert_session or args.source_memory or args.sample_dispatch or args.invert_render or args.invert_bounce or args.invert_cli or args.invert_stem_cli):
+            if finished and (args.studio_memory in ('native-abi','editor','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence') or args.invert_editor or args.invert_sampler or args.invert_session or args.source_memory or args.sample_dispatch or args.invert_render or args.invert_bounce or args.invert_cli or args.invert_stem_cli):
                 state=guest.command('GET_AUDIO_STATE')
                 finished=all('ch%d_dma=0'%i in state.split('\t') for i in range(4))
                 result['cleanup_audio']=state

@@ -36,4 +36,6 @@ enum pt_wavetable_song_result pt_editor_wavetable_next_commit(struct pt_editor_w
 /* Strict per-interval injected-clock gate; same editor Stop/edit ownership. */
 enum pt_wavetable_song_result pt_editor_wavetable_clock_arm(struct pt_editor_wavetable *,uint64_t);
 enum pt_wavetable_song_result pt_editor_wavetable_clock_service(struct pt_editor_wavetable *,uint64_t);
+enum pt_wavetable_song_result pt_editor_wavetable_schedule_begin(struct pt_editor_wavetable *,uint64_t);
+enum pt_wavetable_song_result pt_editor_wavetable_schedule_step(struct pt_editor_wavetable *,uint64_t,uint64_t *);
 #endif

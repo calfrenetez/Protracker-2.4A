@@ -18,7 +18,8 @@ struct pt_wavetable_song {
     struct pt_amigus_reservation *reservation;
     struct pt_playback_format format;struct pt_render_interval interval;
     uint64_t version;unsigned generation,rate,pending,closing,done,range,restored,ready,pin_slot;
-    uint64_t clock_start,clock_last,clock_deadline;unsigned clock_armed;
+    uint64_t clock_start,clock_last,clock_deadline;unsigned clock_armed,visited,schedule_phase,schedule_seen;
+    uint64_t schedule_start,schedule_last;
     uint32_t remaining;enum pt_wavetable_song_result failure;uint8_t staging[256];
 };
 static void cancel_batch(struct pt_wavetable_song *s)
@@ -39,7 +40,7 @@ static void release_sources(struct pt_wavetable_song *s)
 }
 static int stop(struct pt_wavetable_song *s)
 {
-    s->closing=1;s->clock_armed=0;s->next_stage=0;s->pending=0;s->remaining=0;cancel_batch(s);
+    s->closing=1;s->schedule_phase=0;s->clock_armed=0;s->next_stage=0;s->pending=0;s->remaining=0;cancel_batch(s);
     pt_render_sequence_close(s->sequence);s->sequence=NULL;
     if(s->done)return 1;
     if(!s->ready) {
@@ -211,7 +212,7 @@ static int batch_step(struct pt_wavetable_song *s)
     }
     return 1;
 }
-enum pt_wavetable_song_result pt_wavetable_song_prefetch(struct pt_wavetable_song *s)
+static enum pt_wavetable_song_result prefetch(struct pt_wavetable_song *s)
 {
     unsigned ready=0;int batch;enum pt_wavetable_song_result result=current(s);if(result)return result;
     if(!s->ready)return PT_WAVETABLE_SONG_PREPARING;
@@ -230,7 +231,7 @@ enum pt_wavetable_song_result pt_wavetable_song_prefetch(struct pt_wavetable_son
     if(!batch)return PT_WAVETABLE_SONG_UPLOADING;
     s->forecast=3;return PT_WAVETABLE_SONG_OK;
 }
-enum pt_wavetable_song_result pt_wavetable_song_next_prepare(struct pt_wavetable_song *s,struct pt_render_interval *out)
+static enum pt_wavetable_song_result next_prepare(struct pt_wavetable_song *s,struct pt_render_interval *out)
 {
     enum pt_wavetable_song_result result;int batch;
     if(!s || !out || s->clock_armed)return PT_WAVETABLE_SONG_INVALID;
@@ -244,6 +245,7 @@ enum pt_wavetable_song_result pt_wavetable_song_next_prepare(struct pt_wavetable
         if(!batch)return PT_WAVETABLE_SONG_UPLOADING;
         s->next_stage=2;
     }else if(!s->next_stage) {
+        s->visited=1;
         if(pt_render_sequence_next(s->sequence,&s->interval)!=PT_RENDER_OK)return fail(s,PT_WAVETABLE_SONG_RENDER);
         if(s->range && s->interval.emit && !s->restored) {
             if(pt_render_sequence_snapshot(s->sequence,&s->resume)!=PT_RENDER_OK)return fail(s,PT_WAVETABLE_SONG_RENDER);
@@ -254,7 +256,7 @@ enum pt_wavetable_song_result pt_wavetable_song_next_prepare(struct pt_wavetable
     }
     *out=s->interval;return PT_WAVETABLE_SONG_OK;
 }
-enum pt_wavetable_song_result pt_wavetable_song_next_commit(struct pt_wavetable_song *s)
+static enum pt_wavetable_song_result next_commit(struct pt_wavetable_song *s)
 {
     enum pt_wavetable_song_result result=current(s);if(result)return result;
     if(s->clock_armed || s->next_stage!=2 || s->pending)return PT_WAVETABLE_SONG_INVALID;
@@ -269,12 +271,12 @@ enum pt_wavetable_song_result pt_wavetable_song_next_commit(struct pt_wavetable_
     s->next_stage=0;s->remaining=s->interval.frames;s->pending=1;
     return PT_WAVETABLE_SONG_OK;
 }
-enum pt_wavetable_song_result pt_wavetable_song_next_step(struct pt_wavetable_song *s,struct pt_render_interval *out)
+static enum pt_wavetable_song_result next_step(struct pt_wavetable_song *s,struct pt_render_interval *out)
 {
     struct pt_render_interval interval;enum pt_wavetable_song_result result;
     if(!out)return PT_WAVETABLE_SONG_INVALID;
-    result=pt_wavetable_song_next_prepare(s,&interval);if(result)return result;
-    result=pt_wavetable_song_next_commit(s);if(!result)*out=interval;return result;
+    result=next_prepare(s,&interval);if(result)return result;
+    result=next_commit(s);if(!result)*out=interval;return result;
 }
 enum pt_wavetable_song_result pt_wavetable_song_next(struct pt_wavetable_song *s,struct pt_render_interval *out)
 {
@@ -300,7 +302,7 @@ static enum pt_wavetable_song_result complete_step(struct pt_wavetable_song *s)
     if(s->uploading==1)return PT_WAVETABLE_SONG_UPLOADING;
     if(s->forecast) {
         if(s->remaining)return PT_WAVETABLE_SONG_INVALID;
-        result=pt_wavetable_song_prefetch(s);if(result)return result;
+        result=prefetch(s);if(result)return result;
         if(pt_render_lookahead_commit(&s->ahead)!=PT_RENDER_OK)return fail(s,PT_WAVETABLE_SONG_RENDER);
         s->forecast=0;
         if(s->interval.end)return stop(s)?PT_WAVETABLE_SONG_DONE:PT_WAVETABLE_SONG_STOPPING;
@@ -327,10 +329,10 @@ static enum pt_wavetable_song_result complete_step(struct pt_wavetable_song *s)
     s->pending=0;return PT_WAVETABLE_SONG_OK;
 }
 enum pt_wavetable_song_result pt_wavetable_song_consume(struct pt_wavetable_song *s,uint32_t frames)
-{return s && !s->clock_armed?consume(s,frames):PT_WAVETABLE_SONG_INVALID;}
+{return s && !s->schedule_phase && !s->clock_armed?consume(s,frames):PT_WAVETABLE_SONG_INVALID;}
 enum pt_wavetable_song_result pt_wavetable_song_complete_step(struct pt_wavetable_song *s)
-{return s && !s->clock_armed?complete_step(s):PT_WAVETABLE_SONG_INVALID;}
-enum pt_wavetable_song_result pt_wavetable_song_clock_arm(struct pt_wavetable_song *s,uint64_t start)
+{return s && !s->schedule_phase && !s->clock_armed?complete_step(s):PT_WAVETABLE_SONG_INVALID;}
+static enum pt_wavetable_song_result clock_arm(struct pt_wavetable_song *s,uint64_t start)
 {
     enum pt_wavetable_song_result r=current(s);if(r)return r;
     if(s->clock_armed || !s->ready || !s->pending || !s->interval.emit || !s->interval.frames ||
@@ -340,7 +342,7 @@ enum pt_wavetable_song_result pt_wavetable_song_clock_arm(struct pt_wavetable_so
     s->clock_start=s->clock_last=start;s->clock_deadline=start+s->remaining;s->clock_armed=1;
     return PT_WAVETABLE_SONG_OK;
 }
-enum pt_wavetable_song_result pt_wavetable_song_clock_service(struct pt_wavetable_song *s,uint64_t now)
+static enum pt_wavetable_song_result clock_service(struct pt_wavetable_song *s,uint64_t now)
 {
     uint64_t debt;uint32_t frames;enum pt_wavetable_song_result r=current(s);if(r)return r;
     if(!s->clock_armed)return PT_WAVETABLE_SONG_INVALID;
@@ -354,7 +356,7 @@ enum pt_wavetable_song_result pt_wavetable_song_clock_service(struct pt_wavetabl
     if(now==s->clock_deadline) {
         r=complete_step(s);s->clock_armed=0;return r;
     }
-    r=pt_wavetable_song_prefetch(s);
+    r=prefetch(s);
     return r==PT_WAVETABLE_SONG_OK || r==PT_WAVETABLE_SONG_UPLOADING?PT_WAVETABLE_SONG_WAITING:r;
 }
 enum pt_wavetable_song_result pt_wavetable_song_complete(struct pt_wavetable_song *s)
@@ -362,4 +364,94 @@ enum pt_wavetable_song_result pt_wavetable_song_complete(struct pt_wavetable_son
     enum pt_wavetable_song_result r;
     do{r=pt_wavetable_song_complete_step(s);}while(r==PT_WAVETABLE_SONG_UPLOADING && (s->uploading==2 || s->forecast));
     return r;
+}
+
+/* The scheduled driver exclusively owns advancement. External callers can still
+   close, or use the editor's stop/edit barrier, but cannot bypass its deadlines. */
+enum pt_wavetable_song_result pt_wavetable_song_prefetch(struct pt_wavetable_song *s)
+{return s && !s->schedule_phase?prefetch(s):PT_WAVETABLE_SONG_INVALID;}
+enum pt_wavetable_song_result pt_wavetable_song_next_prepare(struct pt_wavetable_song *s,struct pt_render_interval *out)
+{return s && !s->schedule_phase?next_prepare(s,out):PT_WAVETABLE_SONG_INVALID;}
+enum pt_wavetable_song_result pt_wavetable_song_next_commit(struct pt_wavetable_song *s)
+{return s && !s->schedule_phase?next_commit(s):PT_WAVETABLE_SONG_INVALID;}
+enum pt_wavetable_song_result pt_wavetable_song_next_step(struct pt_wavetable_song *s,struct pt_render_interval *out)
+{return s && !s->schedule_phase?next_step(s,out):PT_WAVETABLE_SONG_INVALID;}
+enum pt_wavetable_song_result pt_wavetable_song_clock_arm(struct pt_wavetable_song *s,uint64_t start)
+{return s && !s->schedule_phase?clock_arm(s,start):PT_WAVETABLE_SONG_INVALID;}
+enum pt_wavetable_song_result pt_wavetable_song_clock_service(struct pt_wavetable_song *s,uint64_t now)
+{return s && !s->schedule_phase?clock_service(s,now):PT_WAVETABLE_SONG_INVALID;}
+
+enum {SCHEDULE_NEXT=1,SCHEDULE_SILENT,SCHEDULE_ZERO,SCHEDULE_READY_NEXT,SCHEDULE_READY_ZERO,SCHEDULE_RUNNING};
+enum pt_wavetable_song_result pt_wavetable_song_schedule_begin(struct pt_wavetable_song *s,uint64_t start)
+{
+    enum pt_wavetable_song_result r=current(s);if(r)return r;
+    if(!s->ready || s->visited || s->schedule_phase || s->clock_armed)return PT_WAVETABLE_SONG_INVALID;
+    /* Capability traversal includes silent pre-roll: a conservative upper bound
+       checked BEFORE any voice can start, rather than finding overflow mid-song. */
+    if(start>UINT64_MAX-s->report.frames)return fail(s,PT_WAVETABLE_SONG_CLOCK);
+    s->schedule_start=start;s->schedule_seen=0;s->schedule_phase=SCHEDULE_NEXT;
+    return PT_WAVETABLE_SONG_OK;
+}
+static enum pt_wavetable_song_result scheduled_interval(struct pt_wavetable_song *s,uint64_t start)
+{
+    struct pt_render_interval span;enum pt_wavetable_song_result r=next_prepare(s,&span);
+    if(r)return r==PT_WAVETABLE_SONG_UPLOADING?fail(s,PT_WAVETABLE_SONG_RENDER):r;
+    /* After the first fresh tick, supported44.1/48kHz timelines have positive
+       spans. Never silently perform an unexpected zero/silent/startup batch late. */
+    if(!span.emit || !span.frames)return fail(s,PT_WAVETABLE_SONG_RENDER);
+    r=next_commit(s);if(r)return r;
+    r=clock_arm(s,start);if(!r)s->schedule_phase=SCHEDULE_RUNNING;return r;
+}
+enum pt_wavetable_song_result pt_wavetable_song_schedule_step(struct pt_wavetable_song *s,uint64_t now,uint64_t *deadline)
+{
+    enum pt_wavetable_song_result r;struct pt_render_interval span;
+    if(!deadline)return PT_WAVETABLE_SONG_INVALID;
+    r=current(s);if(r)return r;
+    if(!s->schedule_phase)return PT_WAVETABLE_SONG_INVALID;
+    if(s->schedule_seen && now<s->schedule_last)return fail(s,PT_WAVETABLE_SONG_CLOCK);
+    s->schedule_seen=1;s->schedule_last=now;
+    if(s->schedule_phase==SCHEDULE_RUNNING) {
+        r=clock_service(s,now);
+        if(r==PT_WAVETABLE_SONG_OK) {r=scheduled_interval(s,now);if(r)return r;}
+        else if(r!=PT_WAVETABLE_SONG_WAITING)return r;
+        *deadline=s->clock_deadline;return PT_WAVETABLE_SONG_WAITING;
+    }
+    if(now>s->schedule_start)return fail(s,PT_WAVETABLE_SONG_DEADLINE);
+    if(now==s->schedule_start) {
+        if(s->schedule_phase==SCHEDULE_READY_NEXT) {
+            r=next_commit(s);if(r)return r;
+            r=clock_arm(s,now);if(r)return r;s->schedule_phase=SCHEDULE_RUNNING;
+        }else if(s->schedule_phase==SCHEDULE_READY_ZERO) {
+            r=complete_step(s);if(r)return r;
+            r=scheduled_interval(s,now);if(r)return r;
+        }else return fail(s,PT_WAVETABLE_SONG_DEADLINE);
+        *deadline=s->clock_deadline;return PT_WAVETABLE_SONG_WAITING;
+    }
+    switch(s->schedule_phase) {
+    case SCHEDULE_NEXT:
+        r=next_prepare(s,&span);
+        if(r==PT_WAVETABLE_SONG_UPLOADING)break;
+        if(r)return r;
+        if(span.emit && span.frames){s->schedule_phase=SCHEDULE_READY_NEXT;break;}
+        /* Range restore must never be committed while preparing before start. */
+        if(span.emit && s->uploading==1)return fail(s,PT_WAVETABLE_SONG_RENDER);
+        r=next_commit(s);if(r)return r;
+        s->schedule_phase=span.emit?SCHEDULE_ZERO:SCHEDULE_SILENT;break;
+    case SCHEDULE_SILENT:
+        if(s->remaining){r=consume(s,s->remaining>256?256:s->remaining);if(r)return r;}
+        else {r=complete_step(s);if(r)return r;s->schedule_phase=SCHEDULE_NEXT;}
+        break;
+    case SCHEDULE_ZERO:
+        r=prefetch(s);
+        if(r==PT_WAVETABLE_SONG_UPLOADING)break;
+        if(r)return r;
+        if(!s->plan.count && !s->interval.end) {
+            r=complete_step(s);if(r)return r;s->schedule_phase=SCHEDULE_NEXT;
+        }else s->schedule_phase=SCHEDULE_READY_ZERO;
+        break;
+    default:break; /* Already ready: no work/callback before start. */
+    }
+    *deadline=s->schedule_start;
+    return s->schedule_phase==SCHEDULE_READY_NEXT || s->schedule_phase==SCHEDULE_READY_ZERO?
+        PT_WAVETABLE_SONG_OK:PT_WAVETABLE_SONG_WAITING;
 }

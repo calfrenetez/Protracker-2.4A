@@ -79,7 +79,13 @@ static void editor_staged_restore_fixture(struct pt_editor *e,struct pt_editor_w
     for(mode=0;mode<3;++mode) {
         song_bind(f,bridge,voices,bus,&e->sampler,e->project);voices->api.restore=range_restore;
         assert(pt_editor_wavetable_start(o,voices,&options,&format,&report)==PT_WAVETABLE_SONG_OK);
-        for(;;) {
+        if(mode) {
+            enum pt_wavetable_song_result r;uint64_t deadline;unsigned guard=0;
+            assert(pt_editor_wavetable_schedule_begin(o,1000)==PT_WAVETABLE_SONG_OK);
+            do{r=pt_editor_wavetable_schedule_step(o,0,&deadline);assert(++guard<1000 && deadline==1000);}
+            while(r==PT_WAVETABLE_SONG_WAITING);
+            assert(r==PT_WAVETABLE_SONG_OK);
+        }else for(;;) {
             enum pt_wavetable_song_result r;uint32_t n;
             do{r=pt_editor_wavetable_next_prepare(o,&span);}while(r==PT_WAVETABLE_SONG_UPLOADING);
             assert(r==PT_WAVETABLE_SONG_OK);
@@ -99,7 +105,7 @@ static void editor_staged_restore_fixture(struct pt_editor *e,struct pt_editor_w
         assert(!pins(f) && !bus->starts && !bus->restores && !bus->stops);
         assert(pt_amigus_reservation_close(&f->reservation));
     }
-    puts("EDITOR STAGED RESTORE PASS: edit/undo, Stop and dispose release prepared leases before any voice restore");
+    puts("EDITOR STAGED RESTORE PASS: edit/undo, scheduled Stop and dispose release prepared leases before any voice restore");
 }
 static int editor_wavetable_fixture(void)
 {

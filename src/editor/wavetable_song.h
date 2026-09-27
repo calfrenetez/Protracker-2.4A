@@ -119,6 +119,24 @@ enum pt_wavetable_song_result pt_wavetable_song_prefetch(struct pt_wavetable_son
  * a strict interval gate, not a native event loop or real-time timing guarantee. */
 enum pt_wavetable_song_result pt_wavetable_song_clock_arm(struct pt_wavetable_song *,uint64_t start_frame);
 enum pt_wavetable_song_result pt_wavetable_song_clock_service(struct pt_wavetable_song *,uint64_t now_frame);
+/* Whole-song owner-thread scheduler with an injected absolute frame clock.
+ * Begin only immediately after prepare/open, before any next; start must leave
+ * room for the preflight's total frame bound (including silent pre-roll).
+ * Step BEFORE start performs one bounded startup/pre-roll/cache operation and
+ * returns WAITING, or OK when primed. It writes the next absolute deadline on
+ * success. At start it requires ALREADY primed; no callbacks before that time.
+ * During playback WAITING includes prefetch/elapsed-phase work. Exact boundaries
+ * dispatch only ready plans and arm the following positive interval in the SAME
+ * call, preserving absolute phase. DONE/STOPPING/error uses existing close rules.
+ * Repeated timestamps may service work; decreasing time/overflow fails CLOCK,
+ * late/unready deadlines fail DEADLINE and stop. No sleeping/clock read or catch-up
+ * trigger. Other advancement APIs refuse while scheduled; close/editor barriers
+ * remain available. Start sufficiently in the future for bounded pre-roll/jobs.
+ * Caller must keep polling before and AT the returned frame deadlines. Timestamp
+ * sampling and callbacks are non-reentrant/synchronous: no hardware latency or
+ * real-time guarantee, and no native PLAY/card binding is enabled here. */
+enum pt_wavetable_song_result pt_wavetable_song_schedule_begin(struct pt_wavetable_song *,uint64_t start_frame);
+enum pt_wavetable_song_result pt_wavetable_song_schedule_step(struct pt_wavetable_song *,uint64_t now_frame,uint64_t *deadline);
 /* One stop attempt per held voice; no polling. Retains ALL master pins/controller
  * and unconfirmed device leases until all stops and bridge detach succeed.
  * Returns0 while unresolved; caller must retain/retry *song. On success frees

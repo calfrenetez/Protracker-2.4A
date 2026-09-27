@@ -2213,3 +2213,41 @@ prefetch/complete. The full scheduler must combine these boundaries with absolut
 startup/transition deadlines before native playback is enabled. The new split
 commit itself does not check time; it is not a native-clock or physical timing
 acceptance claim. Range fractional cursor parity and master save bytes are retained.
+
+
+### Whole-song scheduling with an injected frame clock
+
+The song/editor schedule_begin/step driver now exclusively owns advancement from
+an unopened playback traversal. It accepts an absolute future start frame, checks
+that the entire preflight frame bound fits, and primes startup without callbacks.
+Each pre-start call performs one bounded stage: interval selection/cache acquisition,
+<=256 silent pre-roll frames, one silent completion, or one zero-frame-command
+prefetch step. Empty startup commands advance privately; a prepared nonempty batch
+waits for the exact start. Range playback retains its staged exact-cursor restore
+until that same boundary. Ready returns OK before start; incomplete priming returns
+WAITING. Both report the start deadline and invoke no voice callbacks.
+
+At the scheduled start, unready work is refused rather than finished late. The
+prepared command or range restore commits, then the first positive interval is
+armed. During playback, each call consumes bounded real elapsed phase and prefetches
+its upcoming command batch. At each exact deadline, only previously ready work
+commits; the following interval is selected and armed in the same call, using that
+absolute boundary rather than a new relative delay. The returned next deadline
+matches the independent renderer's fractional tick/tempo traversal. Natural end
+uses the existing confirmed-stop lifecycle. Legacy advancement APIs cannot bypass
+an active scheduled driver; close and editor edit/Stop/dispose remain available.
+
+Regressing time, overflow, late service or missed preparation deadlines poison
+playback and request stop. No late catch-up trigger is issued. Unconfirmed voices
+retain their playback leases and exact masters until close confirms stop. The
+startup overflow bound conservatively includes silent pre-roll. The caller must
+provide sufficiently early priming and poll before AND at each deadline; this is
+not a sleep/timer implementation. Positive post-start spans rely on the audited
+44.1/48kHz supported renderer timeline; unexpected zero/silent transitions refuse.
+
+Tests cover whole/range/lead-in starts, every absolute boundary against a separate
+renderer traversal, fractional tempo changes, untouched output on refusal, repeat
+readiness, deadline/clock faults and unconfirmed stops. Timestamps and callbacks
+remain injected and non-reentrant. Native clock sampling, event-loop wakeups,
+callback-duration accounting, device bus binding and physical timing/audio still
+require separate qualification. Native PLAY/card output remains disabled.

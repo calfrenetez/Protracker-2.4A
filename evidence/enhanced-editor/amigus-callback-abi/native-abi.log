@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131279360 reserve=262144 flags=4
+EXEC MEMORY PASS: 1 Fast allocations, zero owned bytes, budget refusal without Chip fallback
+AMIGUS NATIVE ABI PASS: private vectors verify Find/Reserve/Free offsets and a0/d0/d1/a6, full32 return, explicit callback a0/stack bridge and handled result, per-context bases, PCM/wavetable owner lifetime and busy unwind; no installed library or hardware access

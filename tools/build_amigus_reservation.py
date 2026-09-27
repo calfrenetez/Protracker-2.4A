@@ -30,8 +30,8 @@ def main():
         headers = ['src/core/amigus_reservation.h', 'src/native/amigus_reservation.h',
                    'src/diagnostic/amigus_calls.h']
     if args.abi:
-        inputs=['tests/native_amigus_abi_test.c','src/core/amigus_reservation.c','src/native/amigus_reservation.c']
-        headers=['tests/native_exec_memory.h','src/native/master_memory.h','src/core/amigus_reservation.h','src/native/amigus_reservation.h','src/diagnostic/amigus_calls.h']
+        inputs=['tests/native_amigus_abi_test.c','src/core/amigus_reservation.c','src/native/amigus_reservation.c','src/native/amigus_interrupt.c','src/native/amigus_interrupt_entry.s']
+        headers=['src/native/amigus_interrupt.h','tests/native_exec_memory.h','src/native/master_memory.h','src/core/amigus_reservation.h','src/native/amigus_reservation.h','src/diagnostic/amigus_calls.h']
     flags = ['-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os',
              '-Wall', '-Wextra', '-Werror', *compiler_safety_flags(cc),
              '-Isrc/core', '-Ivendor/amigus-sdk']

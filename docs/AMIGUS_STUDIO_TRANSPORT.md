@@ -254,3 +254,20 @@ or opens a mock library; core open/close are injected callbacks. It uses no MMIO
 interrupts and releases its one Fast allocation. This validates compiler/register
 binding against the pinned ABI, not actual library/card compatibility or output.
 Evidence: `evidence/enhanced-editor/amigus-native-abi/`.
+
+
+## Explicit native callback entry
+
+The SDK callback typedef names a0, while its nearby comment names d1. With the
+pinned compiler flags, a typedef-declared C callback reads a stack argument.
+`src/native/amigus_interrupt_entry.s` explicitly bridges a0 to a normal C handler,
+preserves all registers except the d0 result, and returns with RTS. The dispatcher
+refuses null/unarmed/missing handlers and normalizes only result1 to handled.
+Callers must keep its stable context alive until confirmed interrupt removal;
+arming or changing it requires a disabled, quiescent source. It installs nothing.
+
+An independent assembly caller verifies the context and volatile-register
+preservation under shared030 execution, alongside the native reservation vectors.
+This is ordinary task-context ABI evidence, not actual interrupt installation,
+concurrent teardown, MMIO or hardware qualification. Native PLAY remains unwired.
+Evidence: `evidence/enhanced-editor/amigus-callback-abi/`.

@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 Studio ownership core; no audio device transport",
+  "PTAmiGusNativeAbiTest_sha256": "36c400a7b2c94233bb1da75a9e5a8a0d219bee3b8d0b48a7d51dda913794f260",
+  "native-abi_returncode": "0",
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=333\tsndbuf_status=0",
+  "run_files_cleaned": true
+}

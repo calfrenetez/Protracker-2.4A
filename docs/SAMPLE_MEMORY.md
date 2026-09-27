@@ -2483,3 +2483,31 @@ zero owned bytes; all four DMA channels were off. Exact archived run/launcher
 cleanup and independent absence were verified, and the shared environment was
 explicitly released. The original launch timeout remains recorded as failed;
 recovered execution is separate evidence and does not qualify realtime/card output.
+
+
+### Exact snapshot comparisons on native targets
+
+Wavetable and direct-master Studio song guards retain byte-exact project snapshot
+comparison, including metadata, padding and tail bytes. Channel-selection remains
+the same permitted UI cursor exception. The equality helper copies32-bit words
+into unsigned locals with memcpy, avoiding aliasing violations; the68000 path
+states the project ABI's two-byte alignment so the compiler emits longword loads.
+Other targets use ordinary alignment-safe memcpy. Every original comparison site,
+generation, master/cache and ownership check remains; no checksum or revision-only
+shortcut replaces snapshot validation. This compares the descriptor object, not
+borrowed arrays or PCM, whose existing immutability contract remains unchanged.
+
+Host tests flip every byte in both directions, check equal/self-alias cases and
+restoration without modifying inputs, including native two-byte ABI alignment and
+the final short tail. Existing Studio, wavetable and editor stale/lease tests pass.
+Generated68000 source guards use376longword comparisons plus two trailing bytes
+instead of a1506byte loop. Native performance observations remain separate from
+realtime or physical acceptance.
+
+
+The exact snapshot change passed shared030 execution (RC0,1255Fast allocations,
+zero owned bytes, timer/lease closure, all DMA off and verified cleanup/release).
+Observed readiness748..757EClock ticks and startup4440/26989ticks for one/16voices
+at709379Hz are lower than the preceding observed costs, but remain instrumented
+emulator measurements, not realtime/physical acceptance. Evidence:
+`evidence/enhanced-editor/snapshot-equality/`.

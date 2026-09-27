@@ -1,4 +1,5 @@
 #include "wavetable_song.h"
+#include "project_snapshot.h"
 #include "sampler_internal.h"
 #include "wavetable_internal.h"
 #include "sampler_wavetable_internal.h"
@@ -74,7 +75,7 @@ static int source_current(void *context)
     if(!s || s->failure || s->closing)return 0;
     /* Channel selection is a UI cursor, not a playback setting. */
     s->snapshot.channels.selected=s->project->channels.selected;
-    if(s->sampler->generation!=s->generation || memcmp(s->project,&s->snapshot,sizeof(s->snapshot)) ||
+    if(s->sampler->generation!=s->generation || !pt_project_snapshot_equal(s->project,&s->snapshot) ||
        s->voices->song_owner!=s || s->voices->bridge!=s->bridge ||
        s->bridge->sampler!=s->sampler || s->bridge->project!=s->project ||
        s->bridge->table!=s->project->samples || s->bridge->count!=s->project->sample_count ||

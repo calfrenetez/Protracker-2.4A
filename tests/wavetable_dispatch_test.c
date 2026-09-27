@@ -272,6 +272,7 @@ static void restore_dispatch_fixture(void)
 #include "elapsed_clock_cases.h"
 #include "wavetable_clocked_cases.h"
 #include "wavetable_prepared_trigger_cases.h"
+#include "project_snapshot_cases.h"
 static int dispatch_fixture_main(void)
 {
     struct fixture *f=malloc(sizeof(*f));struct dispatch_bus *bus=malloc(sizeof(*bus));
@@ -283,7 +284,7 @@ static int dispatch_fixture_main(void)
     struct pt_render_options options={0};struct pt_playback_format format={16,0,0,0};uint8_t staging[3];
     int32_t data[]={257,-513,1025,-2049,17,31,47,63};unsigned ch,i,starts,stops,controls;uint64_t version;
     uint8_t *saved;size_t size,used;
-    assert(f && bus);pin_job_fixture(&allocator);lookahead_fixture(&allocator);validated_voice_fixture();assert(voices_fixture_main()==0);restore_preflight_fixture();restore_dispatch_fixture();preflight_fixture();song_fixture();range_song_fixture();preparing_song_fixture();song_guard_fixture();prepared_source_fixture();large_preparing_fixture();uploading_song_fixture();clock_song_fixture();schedule_song_fixture();elapsed_clock_fixture();elapsed_deadline_fixture();clocked_song_fixture();prepared_trigger_fixture();memset(bus,0,sizeof(*bus));
+    assert(f && bus);project_snapshot_fixture();pin_job_fixture(&allocator);lookahead_fixture(&allocator);validated_voice_fixture();assert(voices_fixture_main()==0);restore_preflight_fixture();restore_dispatch_fixture();preflight_fixture();song_fixture();range_song_fixture();preparing_song_fixture();song_guard_fixture();prepared_source_fixture();large_preparing_fixture();uploading_song_fixture();clock_song_fixture();schedule_song_fixture();elapsed_clock_fixture();elapsed_deadline_fixture();clocked_song_fixture();prepared_trigger_fixture();memset(bus,0,sizeof(*bus));
     init(f,PT_AMIGUS_WAVETABLE);assert(pt_amigus_wavetable_cache_attach(&f->cache,&f->reservation,16,112,112,f,bus_owned,bus_write));
     pt_document_init(&d,&allocator);assert(pt_document_new(&d,16,SIZE_MAX)==PT_PROJECT_OK);
     d.project.samples[0].pcm=(struct pt_pcm){data,8,8,48000,1,24};d.project.samples[0].volume=64;

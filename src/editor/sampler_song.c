@@ -1,4 +1,5 @@
 #include "sampler_song.h"
+#include "project_snapshot.h"
 #include "sampler_internal.h"
 #include "../core/studio_internal.h"
 #include <string.h>
@@ -49,7 +50,7 @@ static int current(struct pt_sampler_song *s)
 {
     s->snapshot.channels.selected=s->project->channels.selected;
     return s->generation==s->sampler->generation &&
-        !memcmp(s->project,&s->snapshot,sizeof(s->snapshot));
+        pt_project_snapshot_equal(s->project,&s->snapshot);
 }
 enum pt_render_result pt_sampler_song_prepare(struct pt_sampler_song *s,unsigned *ready)
 {

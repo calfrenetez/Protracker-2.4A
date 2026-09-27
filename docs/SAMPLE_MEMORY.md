@@ -1694,3 +1694,15 @@ including import, metadata changes, slot growth, upload failure and document
 close/rebind. This is software integration with a fake bus; native device/voice
 output remains unwired. See `AMIGUS_SAMPLE_RAM.md` and
 `evidence/enhanced-editor/sampler-wavetable/`.
+
+### Wavetable whole-sequence capability analysis
+
+The mono wavetable dispatcher now has a bounded silent whole-sequence pass using
+its same capability rules. It catches late stereo, segment and repeat operations
+before a caller starts output, including operations in pre-roll. Both plan and
+sequence workspaces use the caller's allocator and are released on refusal,
+resource failure or completion. Master PCM is preserved; no cache upload or
+voice/device callback occurs. Detailed refusal reports retain renderer errors.
+This is a callable analysis layer, not yet a mandatory native playback gate:
+an immutable session owner, timing/pre-roll policy and actual device integration
+remain unfinished. See `AMIGUS_SAMPLE_RAM.md` for the contract and evidence.

@@ -303,3 +303,35 @@ failure retention. Host sanitizers pass; shared030 run
 `render-files-1790476398105279000` returns RC0 within90s with50 Fast allocations
 and zero final owned bytes. All4DMAoff/exact cleanup and explicit release were
 verified. See `evidence/enhanced-editor/wavetable-dispatch/` for scope and hashes.
+
+## Whole-sequence capability check
+
+`pt_wavetable_preflight` silently traverses the complete immutable audited
+sequence before a caller begins wavetable output. The same private capability
+checker validates both this pass and live dispatch batches, including descriptor
+identity, mono trigger geometry, resolved control values and supported operations.
+Late stereo notes, segment operations and cross-source repeat changes are found
+before any device callback. The report distinguishes format, geometry, control,
+operation, renderer and allocation failures; it records the interval count,
+consumed frame count and first offending action/channel/kind when available.
+Renderer failures retain the original `pt_render_result`.
+
+Measurement and traversal use the existing mandatory tick/frame budgets. The
+plan and sequence are allocated through the caller's allocator and freed on every
+exit. Silent pre-roll and retained/delayed rows are included; phase advances in
+blocks of at most256 frames. Renderer validation can inspect source PCM, but the
+pass neither mixes audio nor writes masters, uploads samples, reserves a device
+or invokes voice callbacks. The eventual driver's control capability is explicit.
+
+A successful report applies only to those immutable project/options/format inputs.
+It is not a playback session or a cache-capacity promise. Edits require another
+pass; current revision and real-address checks remain necessary during dispatch.
+A higher-level owner still needs to enforce analysis before output, hold source
+lifetimes and sequence timing, and handle silent pre-roll/range-start policy.
+This milestone does not wire native PLAY or establish real AmiGUS semantics.
+
+Validation: final host ASan/UBSan fixture PASS5.851s; native shared030
+`render-files-1790477101421455000` RC0 within90s,73 Fast allocations and zero final
+owned bytes/no Chip fallback. All4DMAoff, exact cleanup and explicit release
+verified. See `evidence/enhanced-editor/wavetable-preflight/`. No native output or
+physical acceptance is claimed.

@@ -2,6 +2,93 @@
 #include "wavetable_voices_test.c"
 #include "../src/editor/wavetable_dispatch.h"
 #include "../src/core/amigus_render_voice.h"
+#include <limits.h>
+struct preflight_alloc {unsigned calls,fail_at;};
+static void *preflight_allocate(void *ctx,size_t bytes)
+{
+    struct preflight_alloc *a=ctx;
+    if(++a->calls==a->fail_at)return NULL;
+    return allocate_master(NULL,bytes);
+}
+static void preflight_fixture(void)
+{
+    struct pt_project p={0};struct pt_sample samples[2];
+    struct pt_event events[64*4]={{0}};uint16_t orders[1]={0};
+    int32_t pcm[16]={1,257,-513,799,123,991,-777,27},classic[8]={1,2,3,4,5,6,7,8},silent[8]={0,0,3,4,5,6,7,8};
+    struct pt_render_options o={0};struct pt_playback_format format={16,0,0,0};
+    struct preflight_alloc memory={0};struct pt_allocator a={&memory,preflight_allocate,release_master};
+    struct pt_wavetable_preflight_report report;struct pt_render_report measured;
+    unsigned baseline=allocations,mode;
+    memset(samples,0,sizeof(samples));pt_channels_init(&p.channels);p.samples=samples;p.sample_count=2;p.events=events;
+    p.orders=orders;p.order_count=p.pattern_count=1;p.speed=3;p.bpm=125;
+    samples[0].pcm=(struct pt_pcm){pcm,16,8,48000,1,24};samples[0].volume=64;
+    samples[0].loop=PT_LOOP_FORWARD;samples[0].loop_end=8;samples[1]=samples[0];
+    events[0]=(struct pt_event){428,0,PT_NOTE_PERIOD,1,0,0,0,0};
+    events[4].effect=15;events[4].parameter=131;
+    events[8].effect=14;events[8].parameter=0xe1;
+    events[12].effect=10;events[12].parameter=1;
+    events[16]=(struct pt_event){320,0,PT_NOTE_PERIOD,1,0,0,0,0};
+    events[20].effect=15;
+    o.rate=48000;o.bits=24;o.tracks=1;o.gain_q16=65536;o.tick_limit=1000;o.frame_limit=1000000;
+    /* Whole song, lead-in and selected-range pre-roll all traverse the same
+     * audited phases. Range analysis counts silent frames as well. */
+    for(mode=0;mode<3;++mode) {
+        o.include_lead_in=mode==1;o.pattern_only=o.row_range=mode==2;o.row_first=2;o.row_end=5;
+        assert(pt_render_measure(&p,&o,NULL,NULL,&measured)==PT_RENDER_OK);
+        assert(pt_wavetable_preflight(&p,&o,&format,1,&a,&report)==PT_WAVETABLE_COMPATIBLE);
+        assert(report.render_result==PT_RENDER_OK && report.intervals && report.action==UINT_MAX);
+        assert(mode==2?report.frames>measured.frames:report.frames==measured.frames);
+        assert(allocations==baseline);
+    }
+    o.include_lead_in=o.pattern_only=o.row_range=0;
+    /* A later valid stereo note passes ordinary rendering, but refuses the
+     * mono device path only after earlier valid notes/control ticks. */
+    samples[1].pcm.channels=2;events[16].instrument=2;
+    assert(pt_render_measure(&p,&o,NULL,NULL,&measured)==PT_RENDER_OK);
+    assert(pt_wavetable_preflight(&p,&o,&format,1,&a,&report)==PT_WAVETABLE_GEOMETRY);
+    assert(report.intervals>4 && report.frames>0 && report.channel==0 && report.kind==PT_RENDER_TRIGGER);
+    /* Unsupported source in pre-roll is still found before range playback. */
+    events[20].effect=0;events[24].effect=15;
+    o.pattern_only=o.row_range=1;o.row_first=5;o.row_end=7;
+    assert(pt_wavetable_preflight(&p,&o,&format,1,&a,&report)==PT_WAVETABLE_GEOMETRY);
+    events[20].effect=15;events[24].effect=0;
+    o.pattern_only=o.row_range=0;samples[1].pcm.channels=1;events[16].instrument=1;
+    assert(pt_wavetable_preflight(&p,&o,&format,0,&a,&report)==PT_WAVETABLE_CONTROL);
+    assert(report.kind==PT_RENDER_CONTROL && report.channel==0);
+    /* No allocation, even on an empty/invalid project, for invalid format. */
+    {unsigned before=memory.calls;format.word_pad=1;
+        assert(pt_wavetable_preflight(&p,&o,&format,1,&a,&report)==PT_WAVETABLE_FORMAT && memory.calls==before);
+        format.word_pad=0;}
+    /* Both workspace and internal sequence allocation failures clean up. */
+    for(mode=1;mode<=2;++mode) {
+        memory.calls=0;memory.fail_at=mode;
+        assert(pt_wavetable_preflight(&p,&o,&format,1,&a,&report)==PT_WAVETABLE_MEMORY && allocations==baseline);
+    }
+    memory.fail_at=0;o.tick_limit=1;
+    assert(pt_wavetable_preflight(&p,&o,&format,1,&a,&report)==PT_WAVETABLE_RENDER && report.render_result==PT_RENDER_TICK_LIMIT);
+    o.tick_limit=1000;o.frame_limit=1;
+    assert(pt_wavetable_preflight(&p,&o,&format,1,&a,&report)==PT_WAVETABLE_RENDER && report.render_result==PT_RENDER_FRAME_LIMIT);
+    o.frame_limit=1000000;events[12].effect=14;events[12].parameter=0xf1;
+    assert(pt_wavetable_preflight(&p,&o,&format,1,&a,&report)==PT_WAVETABLE_RENDER && report.render_result==PT_RENDER_EFFECT);
+    /* Classic later instrument-only handoff emits a REPEAT. Its first note
+     * is an ordinary forward trigger, so refusal must occur later. */
+    memset(events,0,sizeof(events));
+    samples[0].pcm.data=samples[1].pcm.data=classic;
+    samples[0].pcm.capacity=samples[1].pcm.capacity=8;
+    samples[0].pcm.bits=samples[1].pcm.bits=8;
+    events[0]=(struct pt_event){428,0,PT_NOTE_PERIOD,1,0,0,0,0};
+    events[8].instrument=2;events[16].effect=15;
+    assert(pt_render_measure(&p,&o,NULL,NULL,&measured)==PT_RENDER_OK);
+    assert(pt_wavetable_preflight(&p,&o,&format,1,&a,&report)==PT_WAVETABLE_OPERATION);
+    assert(report.kind==PT_RENDER_REPEAT && report.intervals>3 && report.frames>0);
+    /* A later classic silent-tail one-shot requires SEGMENT semantics. */
+    samples[1].loop=PT_LOOP_NONE;samples[1].loop_end=0;samples[1].pcm.data=silent;
+    events[8].kind=PT_NOTE_PERIOD;events[8].pitch=428;
+    assert(pt_render_measure(&p,&o,NULL,NULL,&measured)==PT_RENDER_OK);
+    assert(pt_wavetable_preflight(&p,&o,&format,1,&a,&report)==PT_WAVETABLE_OPERATION);
+    assert(report.kind==PT_RENDER_SEGMENT && report.intervals>3 && report.frames>0);
+    assert(allocations==baseline && pcm[0]==1 && pcm[1]==257 && pcm[2]==-513);
+}
 struct dispatch_bus {
     struct fixture *f;struct pt_wavetable_voices *owner;
     unsigned starts,stops,controls,fail_start,fail_control;
@@ -37,7 +124,7 @@ static int dispatch_fixture_main(void)
     struct pt_render_options options={0};struct pt_playback_format format={16,0,0,0};uint8_t staging[3];
     int32_t data[]={257,-513,1025,-2049,17,31,47,63};unsigned ch,i,starts,stops,controls;uint64_t version;
     uint8_t *saved;size_t size,used;
-    assert(f && bus);assert(voices_fixture_main()==0);memset(bus,0,sizeof(*bus));
+    assert(f && bus);assert(voices_fixture_main()==0);preflight_fixture();memset(bus,0,sizeof(*bus));
     init(f,PT_AMIGUS_WAVETABLE);assert(pt_amigus_wavetable_cache_attach(&f->cache,&f->reservation,16,112,112,f,bus_owned,bus_write));
     pt_document_init(&d,&allocator);assert(pt_document_new(&d,16,SIZE_MAX)==PT_PROJECT_OK);
     d.project.samples[0].pcm=(struct pt_pcm){data,8,8,48000,1,24};d.project.samples[0].volume=64;
@@ -131,7 +218,7 @@ static int dispatch_fixture_main(void)
         voice.repeat_pcm=&pcm;assert(!pt_amigus_render_voice(&voice,48000,gain,&format,256,24,&command));voice.repeat_pcm=NULL;
         voice.loop=PT_VOICE_PINGPONG;assert(!pt_amigus_render_voice(&voice,48000,gain,&format,256,24,&command));
     }
-    free(bus);free(f);puts("WAVETABLE DISPATCH PASS: resolved16-channel triggers, phase-preserving controls, atomic refusal, uncertain-stop retention; injected only");return 0;
+    free(bus);free(f);puts("WAVETABLE DISPATCH PASS: whole-sequence preflight, resolved16-channel triggers, phase-preserving controls, atomic refusal, uncertain-stop retention; injected only");return 0;
 }
 #ifndef PT_WAVETABLE_DISPATCH_NATIVE
 int main(void){return dispatch_fixture_main();}

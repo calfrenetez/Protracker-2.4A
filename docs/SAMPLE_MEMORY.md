@@ -2148,3 +2148,14 @@ build pass. Corrected bytes have NOT passed an emulator run. Shared emulator sta
 on recovery hold because allocator integrity/clean exit is unverified. See the
 lookahead evidence for the original failure and corrected build; a clean restart
 requires a new coordinated recovery decision before further guest testing.
+
+
+### Lookahead corrected native acceptance —27 September2026
+
+Following an explicitly approved shared-emulator clean restart, the corrected
+lookahead/editor fixture passed render-files-1790501978750619000 within90seconds:
+RC0,1036 Fast allocations fully released, no Chip fallback, all4PaulaDMAoff and
+exact staging cleanup. The original failed fixture allocator-mismatch evidence
+is preserved separately. Shared030/DevBench is released. See
+`evidence/enhanced-editor/lookahead-prefetch/recovered/`. Injected callbacks do
+not establish native card access, audio, scheduler deadlines or physical acceptance.

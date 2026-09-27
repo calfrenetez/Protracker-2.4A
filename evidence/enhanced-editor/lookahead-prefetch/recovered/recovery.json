@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-09-27T09:38:38.783417+00:00",
+  "user_approved_restart": true,
+  "emulator_stopped": true,
+  "failed_staging_cleaned": [
+    "render-files-1790488754500248000",
+    "launch-render-files-1790488754500248000"
+  ],
+  "original_failure_preserved": true,
+  "corrected_run": "render-files-1790501978750619000",
+  "pinned_030_startup": "bridge ping succeeded",
+  "corrected_run_passed": true,
+  "corrected_run_rc": 0,
+  "corrected_staging_absence_verified": true,
+  "reservation_released": true
+}

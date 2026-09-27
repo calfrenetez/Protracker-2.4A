@@ -61,3 +61,27 @@ and recovery hold retained with AmiConnect; shared guest must not be reused mere
 because the test later exits. A coordinated clean restart requires a new user
 recovery decision. No physical operations, no claim of product leak or emulator
 acceptance for this candidate. Host-only software changes may be reviewed/pushed.
+
+
+## Approved recovery and corrected emulator acceptance
+
+On27 September the user explicitly approved a coordinated clean emulator restart.
+AmiConnect, Scott and AmiWBMonitor confirmed no competing use or unsaved state.
+The supported shared-lock lifecycle wrapper stopped the owned emulator; a locked
+process check established quiescence before removing only the exact original run
+and launch staging. Original failed result/logs above remain unchanged. Pinned030
+fresh startup and bridge ping succeeded; the runner verified live target identity.
+
+Corrected351728-byte binary SHA256
+48c25760db003ec252cd6ee316e1c7aec8cb28f31fb4d816be714c936cac0a44
+passed run render-files-1790501978750619000 within the90-second deadline, RC0.
+The full fixture includes lookahead, upcoming600-byte cache prefetch, write-free
+ready commit, cancellation/stale/uncertain-voice ownership and editor barriers.
+EXEC MEMORY PASS:1036 Fast allocations, zero owned bytes, budget refusal without
+Chip fallback. All four Paula DMA channels off; exact run/launch staging cleaned
+and independently verified absent. Shared030/DevBench explicitly released to
+AmiConnect. See recovered/ for separate successful evidence and recovery record.
+
+This supersedes the recovery hold, not the original failed-run record. It proves
+native software ownership with injected device callbacks, not physical AmiGUS,
+real-time scheduling, transport or audio acceptance. No physical A1200 operation.

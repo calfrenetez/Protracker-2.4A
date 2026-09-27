@@ -2603,3 +2603,14 @@ guard. Regression fails against the prior ordering; host and native fixtures
 pass, including direct24-bit parity and141 Fast allocations returned to zero.
 Evidence: `evidence/enhanced-editor/editor-studio-quiescence/`. These injected
 callbacks do not qualify real IRQ removal or device silence.
+
+### Complete regression,28September2026
+
+An immutable87c3833 source export passes all201 host tests (475.074s, exit0) and
+builds139 native executables. All288 listed source hashes and139 binary hashes/
+lengths were independently verified. Separate Git-test index/worktree settings
+avoid including unfinished display work. Later PCM drain-status fix1ed99ac has
+its own13 focused host checks and seven-case native fixture; it is not included
+in the older full-build snapshot. Evidence:
+`evidence/enhanced-editor/complete-regression-20260928/`. Physical/device-output
+acceptance remains separate.

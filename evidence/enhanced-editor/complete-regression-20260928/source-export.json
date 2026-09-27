@@ -1,0 +1,9 @@
+{
+  "source_commit": "87c383339fcb8a2ac967f24204abd21f12232fb7",
+  "test_git_environment": {
+    "GIT_DIR": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/.git",
+    "GIT_WORK_TREE": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/qualification-87c3833",
+    "GIT_INDEX_FILE": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/qualification-87c3833/git-test-index"
+  },
+  "scope": "immutable committed export; separate test index, original index unchanged"
+}

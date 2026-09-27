@@ -58,6 +58,18 @@ enum pt_render_result pt_render_sequence_open(const struct pt_project *,const st
 enum pt_render_result pt_render_sequence_next(struct pt_render_sequence *,struct pt_render_interval *);
 enum pt_render_result pt_render_sequence_consume(struct pt_render_sequence *,uint32_t frames);
 enum pt_render_result pt_render_sequence_complete(struct pt_render_sequence *,struct pt_render_plan *);
+/* Exact software voice state at the beginning of a pending interval, before
+ * any consume. Use after next (including zero-frame/end spans), never after
+ * consume/complete. Refusal preserves output. No allocation, source reads or
+ * timeline advancement. PCM descriptors remain BORROWED: snapshot is not a pin
+ * or independent owner and must not outlive source storage. Private/mutating
+ * sequences refuse. This is not a hardware trigger plan: fractional Q32 phase,
+ * loop-relative position and pending repeat sources must be preserved by any
+ * future restore backend; unsupported restoration must refuse, never round. */
+struct pt_render_snapshot {
+    unsigned channels;struct pt_voice voice[16];uint32_t gain[16][2];
+};
+enum pt_render_result pt_render_sequence_snapshot(const struct pt_render_sequence *,struct pt_render_snapshot *);
 void pt_render_sequence_close(struct pt_render_sequence *);
 /* Internal offline staging hook: caller prevalidates private sample descriptors.
  * Requires classic whole mono8 playback descriptors; one-shots retain a two-frame

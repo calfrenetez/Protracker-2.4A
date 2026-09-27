@@ -1728,3 +1728,19 @@ honor the same result; the existing synchronous Studio hook remains supported.
 Cursor/channel navigation stays available. This is software controller integration
 with injected device callbacks; native wavetable PLAY/MMIO/output remains disabled.
 Callers must detach the owner before editor memory is freed or reinitialized.
+
+### Exact interval-start voice snapshots
+
+`pt_render_sequence_snapshot` now exposes a bounded copy of the software voices
+and resolved per-side gains after `next`, before any interval frames are consumed.
+It preserves fractional Q32 position, loop state and borrowed source descriptors;
+no source read, allocation, pin or master edit occurs. Mid-interval, completed,
+failed and private/mutating sequences refuse without changing the output object.
+The source/session owner must retain all borrowed descriptors and PCM storage.
+
+This establishes state reconstruction for row-range starts. Host/native fixtures
+compare resumed 24-bit PCM exactly against continuous Studio and offline reference
+rendering, including silent pre-roll, forward/ping-pong loops and tempo/delay.
+It does not make the existing AmiGUS integer-start command capable of restoring
+fractional phase. Wavetable row-range playback remains explicitly refused until
+a matching restore/capability path exists; no rounding or audible pre-roll fallback.

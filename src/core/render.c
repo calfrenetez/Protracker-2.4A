@@ -459,7 +459,7 @@ struct pt_render_sequence {
     struct pt_allocator allocator;struct pt_render_options options;
     const struct pt_project *project;struct run run;
     struct pt_render_command_state commands;
-    uint32_t remaining;unsigned pending,end,done,failed;
+    uint32_t remaining;unsigned pending,end,done,failed,consumed;
     struct pt_render_mutation mutation;
 };
 static enum pt_render_result sequence_open(const struct pt_project *p,const struct pt_render_options *o,
@@ -516,14 +516,14 @@ enum pt_render_result pt_render_sequence_next(struct pt_render_sequence *s,struc
     if(!s || !out || s->pending || s->done || s->failed)return PT_RENDER_INVALID;
     result=next_tick(&s->run,&span,&s->end);
     if(result!=PT_RENDER_OK) {s->failed=1;return result;}
-    s->remaining=span.frames;s->pending=1;
+    s->remaining=span.frames;s->pending=1;s->consumed=0;
     out->frames=span.frames;out->emit=s->run.emit;out->end=s->end;return PT_RENDER_OK;
 }
 enum pt_render_result pt_render_sequence_consume(struct pt_render_sequence *s,uint32_t frames)
 {
     if(!s || s->mutation.tick || !s->pending || s->failed || !frames || frames>256 || frames>s->remaining)return PT_RENDER_INVALID;
     if(pt_voice_advance(s->commands.voice,s->project->channels.count,frames)!=PT_PCM_OK) {s->failed=1;return PT_RENDER_SAMPLE;}
-    s->remaining-=frames;return PT_RENDER_OK;
+    s->remaining-=frames;s->consumed=1;return PT_RENDER_OK;
 }
 enum pt_render_result pt_render_sequence_complete(struct pt_render_sequence *s,struct pt_render_plan *plan)
 {
@@ -536,6 +536,13 @@ enum pt_render_result pt_render_sequence_complete(struct pt_render_sequence *s,s
         s->run.range,s->run.offset_tracks,&s->commands,plan);
     if(result!=PT_RENDER_OK) {s->failed=1;return result;}
     s->pending=0;return PT_RENDER_OK;
+}
+enum pt_render_result pt_render_sequence_snapshot(const struct pt_render_sequence *s,struct pt_render_snapshot *out)
+{
+    if(!s || !out || s->mutation.tick || !s->pending || s->consumed || s->failed)return PT_RENDER_INVALID;
+    memset(out,0,sizeof(*out));out->channels=s->project->channels.count;
+    memcpy(out->voice,s->commands.voice,sizeof(out->voice));
+    memcpy(out->gain,s->commands.gain,sizeof(out->gain));return PT_RENDER_OK;
 }
 void pt_render_sequence_close(struct pt_render_sequence *s)
 {if(s) {struct pt_allocator a=s->allocator;a.release(a.context,s);}}

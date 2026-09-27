@@ -411,3 +411,14 @@ Host ASan/UBSan: all three fixtures passed in25.946s. Shared030 run
 `render-files-1790478371042795000` returned0 within90s, with146 Fast allocations
 and zero final owned bytes/no Chip fallback. All4DMAoff, exact cleanup and
 explicit AmiConnect release verified. Evidence: `evidence/enhanced-editor/editor-wavetable/`.
+
+## Row-range reconstruction foundation
+
+The audited render sequence now publishes an interval-start software snapshot
+before consumption. Resuming its copied voices reproduces the same exact24-bit
+PCM after silent pre-roll, including fractional phase and loop-relative position.
+Snapshots are bounded borrowed state, not independent sample owners or hardware
+command plans. The wavetable session still refuses row_range: a future restore
+plan/driver must preserve the full position or refuse before any output. The
+current initialized-trigger translator must not silently discard snapshot phase.
+See `evidence/enhanced-editor/render-snapshot/` for host/native evidence and limits.

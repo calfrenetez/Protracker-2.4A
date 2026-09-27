@@ -8,23 +8,23 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def main():
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument("--commands",action="store_true");args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);group=parser.add_mutually_exclusive_group();group.add_argument("--commands",action="store_true");group.add_argument("--shared",action="store_true");args=parser.parse_args()
     sys.path.insert(0,str(INFRA/'scripts'))
     from shared_guest import Guest
-    evidence=ROOT/'evidence/enhanced-editor'/('invert-handoff-commands' if args.commands else 'invert-handoff')
-    cases=sorted(p.stem for p in evidence.glob('*.mod'));assert len(cases)==(6 if args.commands else 4)
+    evidence=ROOT/'evidence/enhanced-editor'/('invert-shared-handoff' if args.shared else 'invert-handoff-commands' if args.commands else 'invert-handoff')
+    cases=sorted(p.stem for p in evidence.glob('*.mod'));assert len(cases)==(3 if args.shared else 6 if args.commands else 4)
     out=ROOT/'build/dev'/('invert-handoff-'+str(time.time_ns()));out.mkdir()
     report={'passed':False,'scope':'shared030 reference-driven EFx PCM core; no device/audio/physical acceptance'}
     with (INFRA/'runtime/test.lock').open('a') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         guest=Guest(INFRA,out);run=guest.share/out.name;run.mkdir()
         try:
-            binary=run/'PTExecInvertHandoffTest';shutil.copyfile(ROOT/'build/dev'/binary.name,binary)
+            binary=run/('PTExecSharedInvertHandoffTest' if args.shared else 'PTExecInvertHandoffTest');shutil.copyfile(ROOT/'build/dev'/binary.name,binary)
             report['binary_sha256']=hashlib.sha256(binary.read_bytes()).hexdigest()
             commands=['FailAt 1','Stack 65536','CD '+guest.device+run.name]
             for name in cases:
                 for suffix in ('.mod','.trace'):shutil.copyfile(evidence/(name+suffix),run/(name+suffix))
-                commands+=['PTExecInvertHandoffTest '+name+'.mod '+name+'.trace >'+name+'.log','Echo $RC >'+name+'.rc']
+                commands+=[binary.name+' '+name+'.mod '+name+'.trace >'+name+'.log','Echo $RC >'+name+'.rc']
             commands+=['Echo done >done'];guest.launch.write_text('\n'.join(commands)+'\n');guest.start()
             deadline=time.monotonic()+420
             while not (run/'done').exists():

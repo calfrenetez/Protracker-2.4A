@@ -1,0 +1,80 @@
+test_exports_and_master_transactions (test_invert_shared_handoff.InvertSharedHandoff.test_exports_and_master_transactions) ... EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+ok
+test_reference_identity_and_two_clocks (test_invert_shared_handoff.InvertSharedHandoff.test_reference_identity_and_two_clocks) ... INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+ok
+test_reference_pcm_and_audibility (test_invert_shared_handoff.InvertSharedHandoff.test_reference_pcm_and_audibility) ... EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+ok
+test_command_fixture_and_capture_identity (test_invert_ordering.InvertOrdering.test_command_fixture_and_capture_identity) ... ok
+test_flow_matches_pinned_native_mutations (test_invert_ordering.InvertOrdering.test_flow_matches_pinned_native_mutations) ... INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=36 checked=30 immutable master
+INVERT ordering native parity PASS: ticks=36 checked=30 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+ok
+test_handoff_fixture_and_capture_identity (test_invert_ordering.InvertOrdering.test_handoff_fixture_and_capture_identity) ... ok
+test_handoff_relocation_preserves_semantics (test_invert_ordering.InvertOrdering.test_handoff_relocation_preserves_semantics) ... ok
+test_relocation_preserves_semantics (test_invert_ordering.InvertOrdering.test_relocation_preserves_semantics) ... ok
+test_reference_pcm_offline_and_incremental (test_render_invert_handoff.RenderInvertHandoff.test_reference_pcm_offline_and_incremental) ... EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+ok
+test_editor_default_rate_reference (test_invert_handoff_workflows.InvertHandoffWorkflows.test_editor_default_rate_reference) ... ok
+test_reference_exports_and_master_transactions (test_invert_handoff_workflows.InvertHandoffWorkflows.test_reference_exports_and_master_transactions) ... EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 27.861s
+
+OK

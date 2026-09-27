@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "scope": "pinned EFx ordering captures; no renderer/physical acceptance",
+  "diagnostic_sha256": "ea2a4799c2395db012583a47fcb2416c20b3f087ece7caa1c1cf5f051f72639c",
+  "cases": {
+    "inv_shared_join": {
+      "max_ticks": 100,
+      "ordering_case": "inv_shared_join",
+      "second_one_shot": false,
+      "mutator_row1_instrument": 2,
+      "comparison": "exact after per-sample cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 24,
+      "record_bytes": 188,
+      "fixture_sha256": "65bf0d3a6c1edb20d2ada0212af5e9a2c147dc95453dbd09d7639732379655a3",
+      "trace_sha256": "323655169df905d3327d9279cc93ee608676d88d3a9cfcd389497064dbe27400"
+    },
+    "inv_shared_split": {
+      "max_ticks": 100,
+      "ordering_case": "inv_shared_split",
+      "second_one_shot": false,
+      "mutator_row1_instrument": 1,
+      "comparison": "exact after per-sample cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 24,
+      "record_bytes": 188,
+      "fixture_sha256": "c4031c8f1c5b7ff570c6e3781e55784ecef62a67d8a8ecde8dd54524fcd87361",
+      "trace_sha256": "c1db00bf2c32d8ca84c8c7882aac10989676e5ec4273ee063fc1966bfdb7e940"
+    },
+    "inv_shared_once": {
+      "max_ticks": 100,
+      "ordering_case": "inv_shared_once",
+      "second_one_shot": true,
+      "mutator_row1_instrument": 1,
+      "comparison": "exact after per-sample cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 24,
+      "record_bytes": 188,
+      "fixture_sha256": "a3a58bd7f9838bc9df59127695a9e6b6ccc03c1b6f2277a12591e6c5b2215dc5",
+      "trace_sha256": "b76fe945fe2fba2ea22954801789508a1741cf31dd2679b796634432a7bcb989"
+    }
+  },
+  "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0",
+  "owned_files_cleaned": true
+}

@@ -76,3 +76,15 @@ def handoff_command_fixtures():
             # The looped offset case deliberately exceeds its initial repeat end;
             # the one-shot case instead starts at byte256 of its512-byte body.
             yield name,bytes(data),{'max_ticks':100,'ordering_case':name,'second_one_shot':once,'command':command}
+
+
+def shared_handoff_fixtures():
+    """Channel1 mutates shared/old/new banks while channel0 changes instruments."""
+    originals=list(handoff_fixtures())
+    for name,once,second in [('inv_shared_join',False,2),('inv_shared_split',False,1),('inv_shared_once',True,1)]:
+        data=bytearray(originals[2 if once else 0][1]);data[:20]=name.encode().ljust(20,b'\0')
+        data[1088:1092]=bytes([0,0,0x1e,0xff])
+        data[1100:1104]=bytes([0,0,0x20,0])
+        data[1104:1108]=bytes([0,0,(second<<4)|14,0xf8])
+        data[1120:1124]=bytes([0,0,0x2e,0xff])
+        yield name,bytes(data),{'max_ticks':100,'ordering_case':name,'second_one_shot':once,'mutator_row1_instrument':second}

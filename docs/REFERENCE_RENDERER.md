@@ -685,3 +685,12 @@ master-save checks pass without a production-code change. See
 `evidence/enhanced-editor/invert-handoff-commands/` and `SAMPLE_MEMORY.md` for
 scope and evidence; shared clocks across simultaneous handoffs remain a separate
 next audit. No new native Studio output or physical acceptance is implied.
+
+
+Shared-clock handoffs now have two-channel pinned-reference evidence. Three
+fixtures observe both independently mutated sample banks as clocks join/split
+and one channel changes to a one-shot. Exact offline/incremental PCM survives
+unselected, muted and solo-excluded contributing channels. Actual export/bounce/
+master-save transactions also match; production replay/renderer code is unchanged.
+See `evidence/enhanced-editor/invert-shared-handoff/` and `SAMPLE_MEMORY.md`.
+The earlier shared-clock audit note is superseded for these three bounded cases.

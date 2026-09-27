@@ -1529,3 +1529,35 @@ All six also pass the native Fast-memory PCM oracle on shared030 within its
 owned bytes at completion. `native/build.json` and raw RC/log records pin the
 exact diagnostic. All DMA was off before guarded cleanup and resource release.
 This is a core/software check, not a new native-editor UI or physical-output pass.
+
+
+### Shared EFx clocks during instrument changes
+
+A separate188-byte reference diagnostic retains the earlier164-byte schema and
+appends channel1's cursor, speed, accumulator and16 loop bytes (or the two-byte
+one-shot repeat). This observes both private banks when an unheard channel keeps
+mutating the former sample after the heard channel selects another instrument.
+The shipping replay and original diagnostic output are unchanged.
+
+Three fixtures cover clocks joining on one sample, separating onto different
+samples, and a one-shot destination followed by a return. Repeated pinned2.3F
+captures agree after fixed per-allocation relocation. Both channels' clocks and
+both loop snapshots match the portable sequence; snapshots of an aliased sample
+agree. The independent PCM oracle applies every recorded bank before each tick.
+Every17280-frame output matches offline and pull1/17/256. Muting the contributing
+channel or soloing the heard channel leaves the expected audio unchanged; the
+base test also excludes the contributing channel from the selected track mask.
+Actual WAV/stems/grouped stems, bounce/cancellation, undo/redo and save/reload
+checks preserve every master. This qualifies existing behavior, without adding
+new production effect admission or native Studio output.
+
+Evidence and exact diagnostic identities are in
+`evidence/enhanced-editor/invert-shared-handoff/`. These bounded classic mono8
+fixtures do not claim arbitrary loop-size coverage, analog output or realtime
+physical acceptance;16/24-bit masters remain outside private EFx mutation.
+
+The native shared030 PCM fixture also passes all three cases, including muted
+and solo-excluded contributors:49 Fast allocations per case and zero final owned
+bytes, no Chip fallback. Exact build/RC/log/cleanup evidence is in `native/`.
+The run finished within420 seconds and was explicitly released after all DMA
+was off and owned run/launch absence confirmed. No physical timing or audio claim.

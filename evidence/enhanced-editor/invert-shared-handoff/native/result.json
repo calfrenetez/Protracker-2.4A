@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "scope": "shared030 reference-driven EFx PCM core; no device/audio/physical acceptance",
+  "binary_sha256": "adba923a25cf1fd70cf3313cc4a8bc3d9838bc0f18fc25e77f5a44a736a986df",
+  "cases": {
+    "inv_shared_join": {
+      "rc": 0,
+      "log_sha256": "0a3b16eba717089884fd4511f0a825a59784635da4122e4763d925aa2a0faa1b"
+    },
+    "inv_shared_once": {
+      "rc": 0,
+      "log_sha256": "0a3b16eba717089884fd4511f0a825a59784635da4122e4763d925aa2a0faa1b"
+    },
+    "inv_shared_split": {
+      "rc": 0,
+      "log_sha256": "3cdfaa22696d17bbf11032d2aa0746976277946ed754472f584b8f7ae52f0093"
+    }
+  },
+  "owned_files_cleaned": true,
+  "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=416\tsndbuf_status=0"
+}

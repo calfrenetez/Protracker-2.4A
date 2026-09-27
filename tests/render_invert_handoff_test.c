@@ -4,13 +4,16 @@
 #include <string.h>
 #include "document.h"
 #include "render_invert.h"
+#ifndef INVERT_RECORD_BYTES
+#define INVERT_RECORD_BYTES 164
+#endif
 static void *allocate(void *c,size_t n){(void)c;return malloc(n);}
 static void release(void *c,void *p){(void)c;free(p);}
 static unsigned word(const unsigned char *p){return p[0]*256U+p[1];}
 static uint32_t lng(const unsigned char *p){return (uint32_t)word(p)*65536+word(p+2);}
 struct oracle {
     unsigned char *data,*initial;size_t size;
-    unsigned char record[100][164];uint64_t tick_end[100];unsigned ticks;
+    unsigned char record[100][INVERT_RECORD_BYTES];uint64_t tick_end[100];unsigned ticks;
     unsigned tick,applied,end,last_trigger,repeat_loop,changes,delayed_changes;uint64_t phase,frames;
 };
 static void reset(struct oracle *o)
@@ -29,7 +32,14 @@ static int receive(void *ctx,const struct pt_pcm *pcm,uint64_t offset)
         assert((length==2 || length==16) && loop+length<=o->size);
         if(o->applied!=o->tick+1) {
             /* Independent reference snapshots: do not call production EFx code. */
-            memcpy(o->data+loop,r+148,length);o->applied=o->tick+1;
+            unsigned ch;
+            for(ch=0;ch<(INVERT_RECORD_BYTES==188?2U:1U);++ch) {
+                unsigned begin=lng(r+58+22*ch),bytes=word(r+62+22*ch)*2;
+                assert((bytes==2 || bytes==16) && begin+bytes<=o->size);
+                if(ch && begin==loop)assert(!memcmp(r+148,r+172,bytes));
+                memcpy(o->data+begin,r+148+24*ch,bytes);
+            }
+            o->applied=o->tick+1;
         }
         if(word(r+72)!=o->last_trigger) {
             o->phase=(uint64_t)lng(r+66)<<32;o->end=lng(r+66)+word(r+70)*2;
@@ -70,7 +80,7 @@ int main(int argc,char **argv)
     struct pt_allocator a={NULL,allocate,release};struct pt_document d;struct oracle o;
     struct pt_render_options options;struct pt_render_report report;FILE *f;long size;
     unsigned i,offset=2108,partitions[]={1,17,256},calls=0,expected_changes,aligned_return;uint64_t time=0;
-    int32_t *masters[31]={0};unsigned char r[164];
+    int32_t *masters[31]={0};unsigned char r[INVERT_RECORD_BYTES];
     assert(argc==3);memset(&o,0,sizeof(o));memset(&options,0,sizeof(options));
     f=fopen(argv[1],"rb");assert(f && !fseek(f,0,SEEK_END));size=ftell(f);assert(size>0);rewind(f);
     o.size=(size_t)size;o.initial=malloc(o.size);o.data=malloc(o.size);
@@ -86,13 +96,14 @@ int main(int argc,char **argv)
         offset+=s->pcm.frames;
     }
     /* Immediate E9/9xx triggers replace the first handoff; the return still
-       waits for a repeat (the9xx one-shot return lands on the tick boundary). ED3 also exercises a handoff before its later trigger. */
+       waits for a repeat (the9xx one-shot return lands on the tick boundary).
+       ED3 also exercises a handoff before its later trigger. */
     aligned_return=o.initial[1102]==0x29 && !d.project.samples[1].loop;
     expected_changes=(o.initial[1102]==0x29 || (o.initial[1102]==0x2e && o.initial[1103]==0x92))?1:2;
     assert(offset==o.size);f=fopen(argv[2],"rb");assert(f);
-    while(fread(r,1,164,f)==164) {
+    while(fread(r,1,INVERT_RECORD_BYTES,f)==INVERT_RECORD_BYTES) {
         if(!r[14] || !word(r+28))continue;
-        assert(o.ticks<100 && word(r+12)>=32);memcpy(o.record[o.ticks],r,164);
+        assert(o.ticks<100 && word(r+12)>=32);memcpy(o.record[o.ticks],r,INVERT_RECORD_BYTES);
         time+=(120000ULL<<32)/word(r+12);o.tick_end[o.ticks++]=time>>32;
     }
     assert(feof(f) && !ferror(f) && !fclose(f) && o.ticks==18);
@@ -111,6 +122,15 @@ int main(int argc,char **argv)
         }
         assert(o.frames==o.tick_end[o.ticks-1] && o.changes==expected_changes && (aligned_return?o.delayed_changes==0:o.delayed_changes>=1));pt_render_invert_close(session);
     }
+    if(INVERT_RECORD_BYTES==188)for(i=0;i<2;++i) {
+        /* An unselected mutator was already covered. Muting it or soloing the
+           heard channel must retain both private sample mutation clocks. */
+        options.tracks=3;d.project.channels.track[1].muted=i==0;
+        d.project.channels.track[0].solo=i==1;reset(&o);
+        assert(pt_render_invert_stream(&d.project,&options,receive,&o,NULL,NULL,&report,SIZE_MAX,&a)==PT_RENDER_OK);
+        assert(o.frames==o.tick_end[o.ticks-1] && o.changes==expected_changes);
+    }
+    options.tracks=1;d.project.channels.track[1].muted=0;d.project.channels.track[0].solo=0;
     for(i=0;i<31;++i)if(masters[i])assert(!memcmp(masters[i],d.project.samples[i].pcm.data,d.project.samples[i].pcm.frames*sizeof(int32_t)));
     d.project.samples[1].interpolation=1;refused(&d.project,&options,&a);d.project.samples[1].interpolation=0;
     d.project.samples[1].pcm.bits=16;refused(&d.project,&options,&a);d.project.samples[1].pcm.bits=8;

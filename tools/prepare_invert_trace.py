@@ -42,3 +42,14 @@ pt_inv_done
 '''
     source=once(source,'\t; Publishing the count last',record+'\t; Publishing the count last')
     return source.encode('latin1')
+
+
+def prepare_shared_invert_trace(raw,wrapper):
+    """188-byte diagnostic: preserve164-byte schema and append channel1 EFx."""
+    source=prepare_invert_trace(raw,wrapper).decode('latin1')
+    start=source.index('\n\tMOVE.L mt_audchan1temp+n_wavestart(PC),D0')
+    end=source.index('\t; Publishing the count last',start)
+    second=source[start:end].replace('mt_audchan1temp','mt_audchan2temp').replace('pt_inv_','pt_inv2_')
+    source=once(source,'\tMULU #164,D0','\tMULU #188,D0')
+    source=once(source,'\t; Publishing the count last',second+'\t; Publishing the count last')
+    return source.encode('latin1')

@@ -8,13 +8,14 @@ from test_diagnostic_emulator import matching_socket
 from test_porta_emulator import decode_trace as decode_pitch
 from make_invert_fixtures import fixtures
 
-def decode_trace(log,budget):
+def decode_trace(log,budget,record_bytes=164):
+    assert record_bytes in (164,188)
     lines=log.splitlines()
-    assert re.fullmatch(r'FLOW schema=1 bytes=164 count=\d+ reason=(native-stop|tick-budget)',lines[0])
+    assert re.fullmatch(rf'FLOW schema=1 bytes={record_bytes} count=\d+ reason=(native-stop|tick-budget)',lines[0])
     records=[]
     for line in lines[1:-1]:
-        assert re.fullmatch(r'T [0-9a-f]{328}',line);records.append(bytes.fromhex(line[2:]))
-    control='\n'.join([lines[0].replace('bytes=164','bytes=52'),*['T '+r[:52].hex() for r in records],lines[-1]])
+        assert re.fullmatch(rf'T [0-9a-f]{{{record_bytes*2}}}',line);records.append(bytes.fromhex(line[2:]))
+    control='\n'.join([lines[0].replace(f'bytes={record_bytes}','bytes=52'),*['T '+r[:52].hex() for r in records],lines[-1]])
     _,reason=decode_pitch(control,budget)
     return b''.join(records),reason
 

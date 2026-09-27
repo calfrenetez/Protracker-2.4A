@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "initial_deadline_passed": false,
+  "scope": "passive completion after initial120s timeout; no restart or timing acceptance",
+  "cases": {
+    "invert_swapfast": {
+      "rc": "0",
+      "pass": true,
+      "log_sha256": "5104d49820b7dfa32ee5467e81221c73ab9b1720252fb6be7a7542a1ed713a9a"
+    },
+    "invert_swapinherit": {
+      "rc": "0",
+      "pass": true,
+      "log_sha256": "8b0b5b3f472cdcedd08af5967f70de2d2861b3a9419c8014ce5c5bd1f1085e71"
+    },
+    "invert_swapoff": {
+      "rc": "0",
+      "pass": true,
+      "log_sha256": "5104d49820b7dfa32ee5467e81221c73ab9b1720252fb6be7a7542a1ed713a9a"
+    },
+    "invert_swaponce": {
+      "rc": "0",
+      "pass": true,
+      "log_sha256": "5104d49820b7dfa32ee5467e81221c73ab9b1720252fb6be7a7542a1ed713a9a"
+    }
+  },
+  "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=416\tsndbuf_status=0",
+  "owned_files_cleaned": true
+}

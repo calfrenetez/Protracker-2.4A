@@ -11,7 +11,7 @@ struct run {
     uint16_t tracks,offset_tracks,sliced_tracks;
     struct pt_render_range range[16];
     uint64_t frames;
-    uint8_t started,pending_end,capturing,emit,row_range,row_first,row_end;
+    uint8_t started,pending_end,capturing,emit,row_range,row_first,row_end,invert;
 };
 static uint16_t offset_tracks(const struct pt_project *p,const struct pt_render_options *o)
 {
@@ -70,17 +70,26 @@ static int handoff_sample(const struct pt_sample *s)
         s->pcm.frames<=131070 && !(s->pcm.frames&1) && s->loop==PT_LOOP_FORWARD &&
         s->loop_end-s->loop_start>=4 && !((s->loop_start|s->loop_end)&1) && !s->interpolation;
 }
-static int handoff_effect(const struct pt_event *e)
+static int handoff_effect(const struct pt_event *e,unsigned invert)
 {
     unsigned sub=e->parameter>>4;
-    if(e->effect==14)return sub>=1 && sub<=14;
+    if(e->effect==14)return sub>=1 && (sub<=14 || (invert && sub==15));
     return e->effect<=15;
 }
-static int silent_handoff_sample(const struct pt_sample *s)
+static int classic_once_sample(const struct pt_sample *s)
 {
     return s->pcm.bits==8 && s->pcm.channels==1 && s->pcm.frames>=2 &&
         s->pcm.frames<=131070 && !(s->pcm.frames&1) && s->loop==PT_LOOP_NONE &&
-        !s->interpolation && s->pcm.data[0]==0 && s->pcm.data[1]==0;
+        !s->interpolation;
+}
+static int silent_handoff_sample(const struct pt_sample *s)
+{
+    return classic_once_sample(s) && s->pcm.data[0]==0 && s->pcm.data[1]==0;
+}
+static int compatible_handoff_sample(const struct pt_sample *s,unsigned invert)
+{
+    /* The private bank clears one-shot playback words without changing masters. */
+    return handoff_sample(s) || (invert?classic_once_sample(s):silent_handoff_sample(s));
 }
 static enum pt_render_result preflight(const struct pt_project *p,const struct pt_render_options *o,unsigned invert)
 {
@@ -115,9 +124,9 @@ static enum pt_render_result preflight(const struct pt_project *p,const struct p
     }
     return PT_RENDER_OK;
 }
-static int start_run(struct run *r,const struct pt_project *p,const struct pt_render_options *o)
+static int start_run(struct run *r,const struct pt_project *p,const struct pt_render_options *o,unsigned invert)
 {
-    memset(r,0,sizeof(*r));r->view=*p;r->started=o->include_lead_in;
+    memset(r,0,sizeof(*r));r->view=*p;r->started=o->include_lead_in;r->invert=(uint8_t)invert;
     r->capturing=!o->row_range;r->row_range=o->row_range;r->row_first=o->row_first;r->row_end=o->row_end;
     r->tracks=o->tracks;r->offset_tracks=offset_tracks(p,o);pt_pitch_init(&r->pitch);
     if(o->pattern_only) {r->order=o->pattern;r->view.orders=&r->order;r->view.order_count=1;}
@@ -158,7 +167,7 @@ static enum pt_render_result next_tick(struct run *r,struct pt_tick_span *span,u
                 if(r->sliced_tracks&(1U<<ch))return PT_RENDER_EFFECT;
                 if(e->instrument!=v->instrument) {
                     const struct pt_sample *a=r->view.samples+v->instrument-1,*b=r->view.samples+e->instrument-1;
-                    if(!handoff_effect(e) || (!handoff_sample(a) && !silent_handoff_sample(a)) || (!handoff_sample(b) && !silent_handoff_sample(b)) ||
+                    if(!handoff_effect(e,r->invert) || !compatible_handoff_sample(a,r->invert) || !compatible_handoff_sample(b,r->invert) ||
                        a->pcm.rate!=b->pcm.rate)return PT_RENDER_EFFECT;
                 }
             }
@@ -189,7 +198,7 @@ static enum pt_render_result measure(const struct pt_project *p,const struct pt_
     struct pt_tick_span span;unsigned end;enum pt_render_result result=preflight(p,o,invert);
     if(!out)return PT_RENDER_INVALID;
     if(result!=PT_RENDER_OK)return result;
-    if(!start_run(r,p,o))return PT_RENDER_INVALID;
+    if(!start_run(r,p,o,invert))return PT_RENDER_INVALID;
     do {
         if(progress && !progress(ctx,PT_RENDER_ANALYSE,r->timeline.flow.ticks,r->frames))return PT_RENDER_CANCELLED;
         result=next_tick(r,&span,&end);if(result!=PT_RENDER_OK)return result;
@@ -388,7 +397,7 @@ static enum pt_render_result stream(const struct pt_project *p,const struct pt_r
     if(!sink || !out)return PT_RENDER_INVALID;
     result=measure(p,o,progress,progress_ctx,&planned,r,mutation!=NULL);if(result!=PT_RENDER_OK)return result;
     memset(w,0,sizeof(*w));
-    if(!start_run(r,p,o))return PT_RENDER_INVALID;
+    if(!start_run(r,p,o,mutation!=NULL))return PT_RENDER_INVALID;
     pt_render_commands_init(&w->commands);memset(&block,0,sizeof(block));
     block.data=w->samples;block.capacity=512;block.channels=2;block.bits=o->bits;block.rate=o->rate;
     do {
@@ -463,7 +472,7 @@ static enum pt_render_result sequence_open(const struct pt_project *p,const stru
     result=measure(p,o,NULL,NULL,&report,&s->run,mutation!=NULL);
     if(result!=PT_RENDER_OK) {a->release(a->context,s);return result;}
     s->options=*o;s->project=p;if(mutation)s->mutation=*mutation;
-    if(!start_run(&s->run,p,&s->options)) {a->release(a->context,s);return PT_RENDER_INVALID;}
+    if(!start_run(&s->run,p,&s->options,mutation!=NULL)) {a->release(a->context,s);return PT_RENDER_INVALID;}
     pt_render_commands_init(&s->commands);*out=s;return PT_RENDER_OK;
 }
 enum pt_render_result pt_render_sequence_open(const struct pt_project *p,const struct pt_render_options *o,

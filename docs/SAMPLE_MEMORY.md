@@ -1442,3 +1442,43 @@ Clean-source host integration checks and the native shared030 fixture pass.
 The production allocator reports111 Fast/not-Chip allocations and zero final owned
 bytes, including edit/undo/dispose and held-output cases. Exact build and RC0/
 DMAoff/cleanup evidence: `evidence/enhanced-editor/invert-editor-owner/`.
+
+
+### EFx instrument handoffs from private playback banks
+
+Explicit EFx offline and incremental sessions now accept instrument-only changes
+between compatible classic mono8 samples at the same sample rate, including a
+one-shot whose master begins with nonzero bytes. Admission uses the private
+playback contract: one-shot initialization clears the playback word only. The
+master is neither rewritten nor used as a silence test for this private path.
+Ordinary rendering retains its existing first-word and EFx restrictions.
+
+Pinned 2.3F captures establish that changing instruments resets the EFx loop
+cursor while retaining the speed and accumulator. A same-row EFx command then
+changes the speed; an instrument-only row without EFx inherits its clock. The
+current voice iteration continues until its next repeat boundary, where it
+adopts the new instrument's loop or two-frame one-shot repeat. Returning to the
+old instrument preserves the private mutations already made to it.
+
+Evidence in `evidence/enhanced-editor/invert-handoff/` contains four MOD fixtures,
+each captured twice on shared030 with the pinned replayer. Raw logs retain actual
+allocation-relative addresses; normalized traces use one fixed mapping per sample
+cache. Tests check exact repeat parity without hiding cursor or PCM differences.
+A separate PCM oracle consumes the recorded periods, volumes, repeat registers
+and complete loop-byte snapshots. All four fixtures match every output frame in
+offline rendering and incremental pulls of1,17 and256 frames, with two repeat-source
+changes each. Both master arrays remain exact. Rate mismatch, interpolation and
+16/24-bit EFx inputs still refuse before output; ordinary true24 Studio remains
+separate. This change does not add native PLAY/device output or physical audio
+acceptance, and does not relax the existing slice/format/loop limits.
+
+The same four PCM oracle cases also complete successfully on shared030 using the
+production Fast-memory allocator:41 Fast/not-Chip allocations and zero owned bytes
+per case, including budget refusal. Native binary SHA256:
+`83a6f0a3e2cb734aa174caed214214cf1716a1a3ab3c0f64659547febc13375f`.
+The original120-second harness deadline was missed; the already running finite
+script completed during an explicitly coordinated passive extension. Both the
+original timeout and later functional completion are retained under `native/`.
+This is functional/native allocation evidence, not a realtime performance pass.
+All DMA was off before exact run/launch cleanup and explicit resource release.
+Future invocation of this expensive one-frame pull oracle reserves420 seconds.

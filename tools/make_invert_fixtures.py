@@ -39,3 +39,26 @@ def mixed_fixture():
     data[1088:1092]=bytes([1,172,0x20,0])
     data[1092:1096]=bytes([0,0,0x1e,0xf8])
     return bytes(data)
+
+
+def handoff_fixtures():
+    """Two private cache allocations; non-boundary loop change and return."""
+    original=next(base())[1]
+    for name,once,effect,parameter in [
+        ('invert_swapfast',False,14,0xff),
+        ('invert_swapinherit',False,0,0),
+        ('invert_swaponce',True,14,0xff),
+        ('invert_swapoff',True,14,0xf0),
+    ]:
+        data=bytearray(original);data[:20]=name.encode().ljust(20,b'\0')
+        data[1084:2108]=bytes(1024)
+        data[48:50]=(8).to_bytes(2,'big')
+        data[76:80]=bytes([0,0,0,1]) if once else bytes([0,32,0,8])
+        data[4156:4158]=bytes([17,163])
+        #381 gives fractional software phase, so the next repeat is not aligned
+        #with the row boundary. EF8 carries an unfinished accumulator into row1.
+        data[1084:1088]=bytes([1,125,0x1e,0xf8])
+        data[1100:1104]=bytes([0,0,0x20|effect,parameter])
+        data[1116:1120]=bytes([0,0,0x1e,0xff])
+        data[1134]=15
+        yield name,bytes(data),{'max_ticks':100,'ordering_case':name,'second_one_shot':once}

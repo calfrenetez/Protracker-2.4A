@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "scope": "pinned EFx ordering captures; no renderer/physical acceptance",
+  "diagnostic_sha256": "38e84f80a487c24c4dd2cc1c12c6212cf0069609f6971aa12de8d66150bee8fe",
+  "cases": {
+    "invert_swapfast": {
+      "max_ticks": 100,
+      "ordering_case": "invert_swapfast",
+      "second_one_shot": false,
+      "comparison": "exact after per-sample cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "585a05406db2c1e79b2c8633b7cd2b1598b757df8cd8483adad75b8edb830116",
+      "trace_sha256": "c48ba456cb7f24a64b7205d3602bcfdb1005689df8cfdaf7e05f1052c9c27d4c"
+    },
+    "invert_swapinherit": {
+      "max_ticks": 100,
+      "ordering_case": "invert_swapinherit",
+      "second_one_shot": false,
+      "comparison": "exact after per-sample cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "0d0513ad9f53835887fe82381389bc01eff097d540fe3dce87fb2892310dcadd",
+      "trace_sha256": "bb818cfa3261bc5dc7473a68fe94db3a38d9c2c0f68d40abeb697af310d24b33"
+    },
+    "invert_swaponce": {
+      "max_ticks": 100,
+      "ordering_case": "invert_swaponce",
+      "second_one_shot": true,
+      "comparison": "exact after per-sample cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "9a2c2b5204c54e9d9d760890aff2f02ce3d951d1ebf50c561a9349b54dcb8b8a",
+      "trace_sha256": "612ca2a6fd9c90cf6f51cbc5c5c541d0ba27c054775e5e70dbefd5f6c9a26a8a"
+    },
+    "invert_swapoff": {
+      "max_ticks": 100,
+      "ordering_case": "invert_swapoff",
+      "second_one_shot": true,
+      "comparison": "exact after per-sample cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "a8def1057bec5e06dc52ba2894840de822c985f0c7a1ddcaad0e75332b9b6b63",
+      "trace_sha256": "88159f02a4267dc1748055df28b6b7cb516e6ffd7a1b92414c45c259485e1249"
+    }
+  },
+  "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0",
+  "owned_files_cleaned": true
+}

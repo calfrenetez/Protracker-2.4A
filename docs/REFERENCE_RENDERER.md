@@ -694,3 +694,11 @@ unselected, muted and solo-excluded contributing channels. Actual export/bounce/
 master-save transactions also match; production replay/renderer code is unchanged.
 See `evidence/enhanced-editor/invert-shared-handoff/` and `SAMPLE_MEMORY.md`.
 The earlier shared-clock audit note is superseded for these three bounded cases.
+
+
+The EFx oracle now also consumes actual ordered reference byte-write events,
+allowing full-bank and full-PCM checks beyond the earlier16-byte loop snapshots.
+The18/64/256-byte cases include wrap, shared-address collisions and instrument
+changes, while the previous baseline confirms diagnostic neutrality. Host
+one-frame pulls remain covered; native longer-loop checks use17/256 partitions.
+See `evidence/enhanced-editor/invert-write-events/` for exact evidence and limits.

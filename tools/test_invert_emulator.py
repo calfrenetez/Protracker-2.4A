@@ -9,7 +9,7 @@ from test_porta_emulator import decode_trace as decode_pitch
 from make_invert_fixtures import fixtures
 
 def decode_trace(log,budget,record_bytes=164):
-    assert record_bytes in (164,188)
+    assert record_bytes in (164,188,208)
     lines=log.splitlines()
     assert re.fullmatch(rf'FLOW schema=1 bytes={record_bytes} count=\d+ reason=(native-stop|tick-budget)',lines[0])
     records=[]

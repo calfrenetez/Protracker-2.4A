@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "scope": "shared030 reference-driven EFx PCM core; no device/audio/physical acceptance",
+  "binary_sha256": "df8df55fe28e32e4ec362f8e14431859dca2a7de4d12f6ccc151aa984dfc924f",
+  "owned_files_cleaned": false
+}

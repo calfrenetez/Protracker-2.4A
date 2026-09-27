@@ -1,0 +1,26 @@
+{
+  "original_deadline_passed": false,
+  "completion_observed": true,
+  "elapsed_seconds": 451.77645206451416,
+  "scope": "natural completion of existing script; no retry or reset",
+  "cases": {
+    "inv_writes_18": {
+      "rc": 0,
+      "log_sha256": "e7bd26f19e1f03f5b5e2c71aaa2b327d9edfbc65911231f345ce7d460943b6a9"
+    },
+    "inv_writes_256": {
+      "rc": 0,
+      "log_sha256": "7cbe58e6281f420fa5943f57c65e24b4b28a502cd912b5598c9f9ce390cf92d3"
+    },
+    "inv_writes_64": {
+      "rc": 0,
+      "log_sha256": "7cbe58e6281f420fa5943f57c65e24b4b28a502cd912b5598c9f9ce390cf92d3"
+    },
+    "inv_writes_baseline": {
+      "rc": 0,
+      "log_sha256": "551c8009bb8d6987dbe2b682a996fd6b97dc9eaf2cf58eda38d1497537cbdc14"
+    }
+  },
+  "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=666\tsndbuf_status=0",
+  "owned_files_cleaned": true
+}

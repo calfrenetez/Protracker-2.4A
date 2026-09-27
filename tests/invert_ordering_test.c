@@ -13,7 +13,7 @@ int main(int argc,char **argv)
     struct pt_allocator a={NULL,allocate,release};struct pt_document d;struct pt_flow flow;
     struct pt_invert_sequence state;struct pt_invert_bank owned={0};uint8_t selected[31]={0};
     struct pt_invert_pcm *bank;
-    int32_t *original[31]={0};FILE *f;unsigned char *bytes;long length;
+    int32_t *original[31]={0},*expected[31]={0};uint32_t file_start[31],file_offset=2108;FILE *f;unsigned char *bytes;long length;
     char line[512];unsigned ticks=0,checked=0,i;unsigned long sample_start[31]={0};int bound[31]={0};unsigned record_bytes,ch;
     assert(argc==3);f=fopen(argv[1],"rb");assert(f && !fseek(f,0,SEEK_END));length=ftell(f);assert(length>0);rewind(f);
     bytes=malloc((size_t)length);assert(bytes && fread(bytes,1,(size_t)length,f)==(size_t)length && !fclose(f));
@@ -23,22 +23,36 @@ int main(int argc,char **argv)
     for(i=0;i<31;++i)selected[i]=d.project.samples[i].pcm.frames!=0;
     assert(pt_invert_bank_open(&owned,d.project.samples,31,selected,SIZE_MAX,&a)==PT_INVERT_BANK_OK);
     bank=owned.entries;
+    for(i=0;i<31;++i) {file_start[i]=file_offset;file_offset+=d.project.samples[i].pcm.frames;}
     for(i=0;i<31;++i)if(selected[i]) {
         if(!d.project.samples[i].loop)bank[i].pcm.data[0]=bank[i].pcm.data[1]=0;
         original[i]=malloc(d.project.samples[i].pcm.frames*sizeof(int32_t));assert(original[i]);
         memcpy(original[i],d.project.samples[i].pcm.data,d.project.samples[i].pcm.frames*sizeof(int32_t));
+        expected[i]=malloc(d.project.samples[i].pcm.frames*sizeof(int32_t));assert(expected[i]);
+        memcpy(expected[i],bank[i].pcm.data,d.project.samples[i].pcm.frames*sizeof(int32_t));
     }
     assert(pt_flow_init(&flow,&d.project,PT_FLOW_CLASSIC128,0,100)==PT_FLOW_TICK);
-    f=fopen(argv[2],"r");assert(f && fgets(line,sizeof(line),f) && sscanf(line,"FLOW schema=1 bytes=%u",&record_bytes)==1 && (record_bytes==164 || record_bytes==188));
+    f=fopen(argv[2],"r");assert(f && fgets(line,sizeof(line),f) && sscanf(line,"FLOW schema=1 bytes=%u",&record_bytes)==1 && (record_bytes==164 || record_bytes==188 || record_bytes==208));
     while(fgets(line,sizeof(line),f) && line[0]=='T') {
-        unsigned char r[188];unsigned long cursor;unsigned inst;
+        unsigned char r[208];unsigned long cursor;unsigned inst;
         assert(strlen(line)==record_bytes*2+3);
         for(i=0;i<record_bytes;++i){char hex[3]={line[2+i*2],line[3+i*2],0};r[i]=(unsigned char)strtoul(hex,NULL,16);}
         assert(pt_flow_tick(&flow)==PT_FLOW_TICK);++ticks;
         if(!flow.active)continue;
         assert(pt_invert_sequence_tick(&state,&flow,15,bank,31)==PT_PCM_OK);
         if(!state.instrument[0])continue;
-        for(ch=0;ch<(record_bytes==188?2U:1U);++ch) {
+        if(record_bytes==208) {
+            unsigned event,count=word(r+140);assert(count<=8 && !word(r+142));
+            for(event=0;event<count;++event) {
+                unsigned at=144+8*event,target;uint32_t address=(uint32_t)word(r+at)*65536+word(r+at+2);
+                for(target=0;target<31;++target)
+                    if(address>=file_start[target] && address-file_start[target]<d.project.samples[target].pcm.frames)break;
+                assert(target<31 && expected[target]);address-=file_start[target];
+                assert((unsigned char)(expected[target][address]^255)==r[at+4]);
+                expected[target][address]=(int8_t)r[at+4];
+            }
+            for(i=0;i<31;++i)if(selected[i])assert(!memcmp(expected[i],bank[i].pcm.data,d.project.samples[i].pcm.frames*sizeof(int32_t)));
+        } else for(ch=0;ch<(record_bytes==188?2U:1U);++ch) {
         if(!state.instrument[ch])continue;
         inst=state.instrument[ch]-1;
         /* Trace addresses are relative to metadata, but PCM is a separate
@@ -57,6 +71,6 @@ int main(int argc,char **argv)
         for(i=0;i<31;++i)if(selected[i])assert(!memcmp(original[i],d.project.samples[i].pcm.data,d.project.samples[i].pcm.frames*sizeof(int32_t)));++checked;
     }
     assert(!flow.active && checked && !strcmp(line,"FLOW PASS dma=0\n"));fclose(f);
-    pt_invert_bank_close(&owned);for(i=0;i<31;++i)free(original[i]);pt_document_release(&d);
+    pt_invert_bank_close(&owned);for(i=0;i<31;++i){free(expected[i]);free(original[i]);}pt_document_release(&d);
     printf("INVERT ordering native parity PASS: ticks=%u checked=%u immutable master\n",ticks,checked);return 0;
 }

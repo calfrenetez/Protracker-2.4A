@@ -19,8 +19,14 @@ def reference_pcm(mod,trace,sample_rate=48000,gain=65536,record_bytes=164):
         lng=lambda n:int.from_bytes(r[n:n+4],'big')
         if not r[14] or not word(28):continue
         loop=lng(58);length=word(62)*2
-        assert length in (2,16)
-        for ch in range(2 if record_bytes==188 else 1):
+        assert length>=2
+        if record_bytes==208:
+            assert word(140)<=8 and word(142)==0
+            for event in range(word(140)):
+                address=lng(144+8*event);value=r[148+8*event]
+                assert 2108<=address<len(data) and data[address]^255==value
+                data[address]=value
+        for ch in range(0 if record_bytes==208 else 2 if record_bytes==188 else 1):
             begin=lng(58+22*ch);size=word(62+22*ch)*2
             assert size in (2,16)
             data[begin:begin+size]=r[148+24*ch:148+24*ch+size]
@@ -32,15 +38,16 @@ def reference_pcm(mod,trace,sample_rate=48000,gain=65536,record_bytes=164):
             phase+=(sample_rate*428<<32)//(48000*word(44))
             if phase>>32>=end:phase=((phase-(end<<32))%(length<<32))+(loop<<32);end=loop+length
             frames+=1
-    assert frames==17280
+    assert frames in ((17280,40320) if record_bytes==208 else (17280,))
     return bytes(output)
 
 def verify_outputs(folder,mod,trace,record_bytes=164):
     expected=reference_pcm(mod,trace,record_bytes=record_bytes)
+    frames=len(expected)//6
     for path,audio in [('song.wav',expected),('stems/track-01.wav',expected),('stems/track-02.wav',bytes(len(expected))),('groups/group-01.wav',expected)]:
         with wave.open(str(folder/path),'rb') as wav:
-            assert (wav.getnchannels(),wav.getsampwidth(),wav.getframerate(),wav.getnframes())==(2,3,48000,17280)
-            assert wav.readframes(17281)==audio,path
+            assert (wav.getnchannels(),wav.getsampwidth(),wav.getframerate(),wav.getnframes())==(2,3,48000,frames)
+            assert wav.readframes(frames+1)==audio,path
     assert (folder/'master.ptg').read_bytes()==(folder/'undone.ptg').read_bytes()
     assert sorted(p.name for p in folder.iterdir())==['bounced.ptg','groups','master.ptg','song.wav','stems','undone.ptg']
     assert sorted(p.name for p in (folder/'stems').iterdir())==['track-01.wav','track-02.wav']

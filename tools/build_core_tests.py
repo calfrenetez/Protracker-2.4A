@@ -133,6 +133,7 @@ def main():
     inputs['PT24GEdit'] += ['src/editor/bounce_invert.c','src/platform/render_invert_file.c',*invert_sources]
     inputs['PTInvertRenderTest']=['tests/render_invert_test.c',*invert_sources,*render_sources]
     inputs['PTExecInvertHandoffTest']=['tests/native_exec_invert_handoff_test.c',*dict.fromkeys([*invert_sources,*render_sources,*inputs['PTDocumentTest'][1:]])]
+    inputs['PTExecInvertWriteTest']=['tests/native_exec_invert_write_test.c',*inputs['PTExecInvertHandoffTest'][1:]]
     inputs['PTExecSharedInvertHandoffTest']=['tests/native_exec_invert_shared_handoff_test.c',*inputs['PTExecInvertHandoffTest'][1:]]
     inputs['PTInvertSessionTest']=['tests/render_invert_session_test.c','src/core/studio_pump.c','src/core/studio_queue.c','src/core/studio_consumer.c',*invert_sources,*render_sources]
     inputs['PTExecInvertSessionTest']=['tests/native_exec_invert_session_test.c',*inputs['PTInvertSessionTest'][1:]]

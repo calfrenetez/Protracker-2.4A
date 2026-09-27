@@ -7,6 +7,9 @@
 #ifndef INVERT_RECORD_BYTES
 #define INVERT_RECORD_BYTES 164
 #endif
+#ifndef INVERT_FIRST_PULL
+#define INVERT_FIRST_PULL 1
+#endif
 static void *allocate(void *c,size_t n){(void)c;return malloc(n);}
 static void release(void *c,void *p){(void)c;free(p);}
 static unsigned word(const unsigned char *p){return p[0]*256U+p[1];}
@@ -29,11 +32,19 @@ static int receive(void *ctx,const struct pt_pcm *pcm,uint64_t offset)
         const unsigned char *r;unsigned loop,length;int value;
         while(o->tick<o->ticks && offset+i>=o->tick_end[o->tick])++o->tick;
         assert(o->tick<o->ticks);r=o->record[o->tick];loop=lng(r+58);length=word(r+62)*2;
-        assert((length==2 || length==16) && loop+length<=o->size);
+        assert(length>=2 && loop+length<=o->size);
         if(o->applied!=o->tick+1) {
             /* Independent reference snapshots: do not call production EFx code. */
             unsigned ch;
-            for(ch=0;ch<(INVERT_RECORD_BYTES==188?2U:1U);++ch) {
+            if(INVERT_RECORD_BYTES==208) {
+                assert(word(r+140)<=8 && !word(r+142));
+                for(ch=0;ch<word(r+140);++ch) {
+                    unsigned address=lng(r+144+8*ch);unsigned char value=r[148+8*ch];
+                    assert(address>=2108 && address<o->size);
+                    assert((unsigned char)(o->data[address]^255)==value);
+                    o->data[address]=value;
+                }
+            } else for(ch=0;ch<(INVERT_RECORD_BYTES==188?2U:1U);++ch) {
                 unsigned begin=lng(r+58+22*ch),bytes=word(r+62+22*ch)*2;
                 assert((bytes==2 || bytes==16) && begin+bytes<=o->size);
                 if(ch && begin==loop)assert(!memcmp(r+148,r+172,bytes));
@@ -79,7 +90,7 @@ int main(int argc,char **argv)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_document d;struct oracle o;
     struct pt_render_options options;struct pt_render_report report;FILE *f;long size;
-    unsigned i,offset=2108,partitions[]={1,17,256},calls=0,expected_changes,aligned_return;uint64_t time=0;
+    unsigned i,offset=2108,partitions[]={INVERT_FIRST_PULL,17,256},calls=0,expected_changes,aligned_return;uint64_t time=0;
     int32_t *masters[31]={0};unsigned char r[INVERT_RECORD_BYTES];
     assert(argc==3);memset(&o,0,sizeof(o));memset(&options,0,sizeof(options));
     f=fopen(argv[1],"rb");assert(f && !fseek(f,0,SEEK_END));size=ftell(f);assert(size>0);rewind(f);
@@ -106,7 +117,7 @@ int main(int argc,char **argv)
         assert(o.ticks<100 && word(r+12)>=32);memcpy(o.record[o.ticks],r,INVERT_RECORD_BYTES);
         time+=(120000ULL<<32)/word(r+12);o.tick_end[o.ticks++]=time>>32;
     }
-    assert(feof(f) && !ferror(f) && !fclose(f) && o.ticks==18);
+    assert(feof(f) && !ferror(f) && !fclose(f) && (o.ticks==18 || (INVERT_RECORD_BYTES==208 && o.ticks==42)));
     d.project.channels.track[0].pan=0;options.rate=48000;options.bits=24;options.gain_q16=65536;
     options.tracks=1;options.tick_limit=100;options.frame_limit=100000;
     assert(pt_render_stream(&d.project,&options,count,&calls,NULL,NULL,&report)==PT_RENDER_EFFECT && !calls);
@@ -115,14 +126,15 @@ int main(int argc,char **argv)
     assert(report.frames==o.frames && o.frames==o.tick_end[o.ticks-1] && o.changes==expected_changes && (aligned_return?o.delayed_changes==0:o.delayed_changes>=1));
     for(i=0;i<3;++i) {
         struct pt_render_invert_session *session=NULL;unsigned done=0,pulls=0;const struct pt_pcm *pcm;
+        if(i==1 && INVERT_FIRST_PULL==17)continue;
         reset(&o);assert(pt_render_invert_open(&d.project,&options,SIZE_MAX,&a,&session)==PT_RENDER_OK);
         while(!done) {
-            assert(++pulls<20000 && pt_render_invert_pull(session,partitions[i],&pcm,&done)==PT_RENDER_OK);
+            assert(++pulls<100100 && pt_render_invert_pull(session,partitions[i],&pcm,&done)==PT_RENDER_OK);
             if(pcm)assert(receive(&o,pcm,o.frames));
         }
         assert(o.frames==o.tick_end[o.ticks-1] && o.changes==expected_changes && (aligned_return?o.delayed_changes==0:o.delayed_changes>=1));pt_render_invert_close(session);
     }
-    if(INVERT_RECORD_BYTES==188)for(i=0;i<2;++i) {
+    if(INVERT_RECORD_BYTES>=188)for(i=0;i<2;++i) {
         /* An unselected mutator was already covered. Muting it or soloing the
            heard channel must retain both private sample mutation clocks. */
         options.tracks=3;d.project.channels.track[1].muted=i==0;
@@ -137,5 +149,5 @@ int main(int argc,char **argv)
     d.project.samples[1].pcm.bits=24;refused(&d.project,&options,&a);d.project.samples[1].pcm.bits=8;
     d.project.samples[1].pcm.rate=44100;refused(&d.project,&options,&a);d.project.samples[1].pcm.rate=48000;
     for(i=0;i<31;++i)free(masters[i]);pt_document_release(&d);free(o.data);free(o.initial);
-    puts("EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries");return 0;
+    printf("EFx handoff reference PCM PASS: offline and pull%u/17/256, preserved masters, refusal boundaries\n",partitions[0]);return 0;
 }

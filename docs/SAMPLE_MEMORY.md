@@ -1561,3 +1561,31 @@ and solo-excluded contributors:49 Fast allocations per case and zero final owned
 bytes, no Chip fallback. Exact build/RC/log/cleanup evidence is in `native/`.
 The run finished within420 seconds and was explicitly released after all DMA
 was off and owned run/launch absence confirmed. No physical timing or audio claim.
+
+
+### Actual EFx writes beyond the short-loop snapshots
+
+A separate208-byte pinned diagnostic now records ordered address/value/channel
+entries at the actual reference EFx byte store. Its fixed eight-entry ISR buffer
+fails on overflow and is cleared at each tick. The previous16-byte shared-bank
+baseline agrees with its earlier replay state and loop snapshots. Three further
+fixtures cover18/64/256-byte loops, wrap, same-tick shared-address collisions and
+instrument changes. The host compares complete private banks each active tick
+and every stereo24 output frame offline and in1/17/256-frame pulls, including
+muted/solo-excluded mutators. All original master samples remain unchanged.
+
+This removes the oracle's dependence on a16-byte snapshot for these cases;
+it does not impose or remove a product loop-size cap. Evidence and diagnostic
+identity: `evidence/enhanced-editor/invert-write-events/`. Production behavior
+and private EFx16/24-bit refusal are unchanged; no live device output is enabled.
+
+Actual WAV, individual/grouped stem and bounce workflows also match the recorded
+writes for all four fixtures. Cancellation, undo/redo and enhanced-project
+save/reload preserve the master data; generated bounce output remains stereo24.
+
+Native shared030 checks also completed all four cases with44 Fast allocations
+per case, zero owned bytes and no Chip fallback. The batch missed its420-second
+bound and completed naturally at451.8 seconds during separately coordinated
+read-only observation. Both results are retained; it is not an in-bound pass.
+All DMA was off before exact cleanup and explicit release. Native pull partitions
+were17/256; host includes1. No physical performance or audio claim follows.

@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131199688 reserve=262144 flags=4
+EFx handoff reference PCM PASS: offline and pull17/17/256, preserved masters, refusal boundaries
+EXEC MEMORY PASS: 44 Fast allocations, zero owned bytes, budget refusal without Chip fallback

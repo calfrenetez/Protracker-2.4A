@@ -40,8 +40,8 @@ int main(int argc,char **argv)
     struct pt_pattern_history history;struct pt_render_options options={0};struct pt_render_report report,before;
     struct pt_stem_report stems;enum pt_render_result detail;struct pt_project *p;struct pt_pcm pcm={0};struct pt_wav_info info;
     char wave[1024],stemdir[1024],groupdir[1024],cancelled[1024],project[1024],bounced[1024],undone[1024];
-    unsigned char *data,*saved,*wave_data;size_t n,written,wave_size;unsigned i,base;
-    assert(argc==3);pt_document_init(&d,&a);pt_document_init(&copy,&a);
+    unsigned char *data,*saved,*wave_data;size_t n,written,wave_size;unsigned i,base,expected_frames;
+    assert(argc==3 || argc==4);expected_frames=argc==4?(unsigned)strtoul(argv[3],NULL,10):17280;assert(expected_frames==17280 || expected_frames==40320);pt_document_init(&d,&a);pt_document_init(&copy,&a);
     data=read_file(argv[1],&n);assert(pt_document_load(&d,data,n,SIZE_MAX)==PT_PROJECT_OK);free(data);p=&d.project;
     for(i=0;i<p->sample_count;++i)p->samples[i].pcm.rate=48000;
     p->channels.track[0].pan=0;p->channels.track[1].pan=255;p->channels.track[0].group=p->channels.track[1].group=1;
@@ -57,8 +57,8 @@ int main(int argc,char **argv)
     assert(pt_render_invert_file_new(cancelled,p,&options,cancel_verify,NULL,&report,&detail,SIZE_MAX,&a)!=PT_RENDER_FILE_OK);
     assert(detail==PT_RENDER_CANCELLED && live==base && access(cancelled,F_OK)!=0 && !memcmp(&report,&before,sizeof(report)));unchanged(p,saved,n);
     assert(pt_render_invert_file_new(wave,p,&options,NULL,NULL,&report,&detail,SIZE_MAX,&a)==PT_RENDER_FILE_OK && live==base);
-    assert(report.frames==17280);wave_data=read_file(wave,&wave_size);
-    assert(pt_wav_inspect(wave_data,wave_size,&info)==PT_WAV_OK && info.frames==17280 && info.bits==24 && info.channels==2);
+    assert(report.frames==expected_frames);wave_data=read_file(wave,&wave_size);
+    assert(pt_wav_inspect(wave_data,wave_size,&info)==PT_WAV_OK && info.frames==expected_frames && info.bits==24 && info.channels==2);
     pcm.data=malloc(info.frames*2*sizeof(int32_t));assert(pcm.data);pcm.capacity=info.frames*2;pcm.frames=info.frames;pcm.rate=info.rate;pcm.bits=info.bits;pcm.channels=info.channels;
     assert(pt_wav_decode(wave_data,wave_size,&pcm)==PT_WAV_OK);free(wave_data);
     assert(pt_render_invert_file_new(wave,p,&options,NULL,NULL,&report,&detail,SIZE_MAX,&a)==PT_RENDER_FILE_BEGIN && live==base);

@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "scope": "pinned EFx ordering captures; no renderer/physical acceptance",
+  "diagnostic_sha256": "d2fa17c56b1ef2531a042c9d29bd10e1e784d398548a797e2add00606f4871e8",
+  "cases": {
+    "inv_writes_baseline": {
+      "max_ticks": 100,
+      "loop_bytes": 16,
+      "ordering_case": "baseline against prior188-byte capture",
+      "comparison": "exact after per-sample cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 24,
+      "record_bytes": 208,
+      "fixture_sha256": "c4031c8f1c5b7ff570c6e3781e55784ecef62a67d8a8ecde8dd54524fcd87361",
+      "trace_sha256": "ca65f9887a938a5cc57f474b27972b26aa696d5140148f1d4bf93ee4849c76aa"
+    },
+    "inv_writes_18": {
+      "max_ticks": 100,
+      "loop_bytes": 18,
+      "ordering_case": "inv_writes_18",
+      "comparison": "exact after per-sample cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 48,
+      "record_bytes": 208,
+      "fixture_sha256": "49b87a0db9e4fbf3cadff2d5ccec651b37f06fa694226a00e528312d9aa749a7",
+      "trace_sha256": "edfbf20fee75c072b3f291fd1294545f9610c7f4affa67444e97f2939f6c2368"
+    },
+    "inv_writes_64": {
+      "max_ticks": 100,
+      "loop_bytes": 64,
+      "ordering_case": "inv_writes_64",
+      "comparison": "exact after per-sample cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 48,
+      "record_bytes": 208,
+      "fixture_sha256": "d834a621be31f469c19b1b0d1ae4f6d1cf5be311ddb39c506a75642195464e48",
+      "trace_sha256": "fb92a634186149449a30ad691035073572653b203fff28ff2711e476e5e047bb"
+    },
+    "inv_writes_256": {
+      "max_ticks": 100,
+      "loop_bytes": 256,
+      "ordering_case": "inv_writes_256",
+      "comparison": "exact after per-sample cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 48,
+      "record_bytes": 208,
+      "fixture_sha256": "44db179c1e64ef05d9c78f1f78fb7404627104999754cf9f21fac72e0e15fe88",
+      "trace_sha256": "3168b1df6740cbe06f7d8cb9bd0931351f6792e3661d36212ece94765cdeab84"
+    }
+  },
+  "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0",
+  "owned_files_cleaned": true
+}

@@ -88,3 +88,22 @@ def shared_handoff_fixtures():
         data[1104:1108]=bytes([0,0,(second<<4)|14,0xf8])
         data[1120:1124]=bytes([0,0,0x2e,0xff])
         yield name,bytes(data),{'max_ticks':100,'ordering_case':name,'second_one_shot':once,'mutator_row1_instrument':second}
+
+
+def long_loop_fixtures():
+    """Full-bank oracle cases: >16 bytes, cursor wrap, collisions and handoffs."""
+    baseline=list(shared_handoff_fixtures())[1][1]
+    yield 'inv_writes_baseline',baseline,{'max_ticks':100,'loop_bytes':16,'ordering_case':'baseline against prior188-byte capture'}
+    for length in (18,64,256):
+        name='inv_writes_'+str(length);data=bytearray(next(handoff_fixtures())[1])
+        data[:20]=name.encode().ljust(20,b'\0');data[1084:2108]=bytes(1024)
+        for header in (48,78):data[header:header+2]=(length//2).to_bytes(2,'big')
+        data[1084:1088]=bytes([1,125,0x1e,0xff])
+        data[1088:1092]=bytes([0,0,0x1e,0xff])
+        data[1120:1124]=bytes([0,0,14,0xf8])
+        data[1148:1152]=bytes([0,0,0x2e,0xff])
+        data[1152:1156]=bytes([0,0,0x1e,0xff])
+        data[1180:1184]=bytes([0,0,0x1e,0xff])
+        data[1184:1188]=bytes([0,0,0x2e,0xff])
+        data[1198]=15
+        yield name,bytes(data),{'max_ticks':100,'loop_bytes':length,'ordering_case':name}

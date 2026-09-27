@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Native file regressions; requires a separately coordinated shared030 window."""
-import argparse, fcntl, hashlib, importlib.util, json, shutil, sys, time
+import argparse, fcntl, hashlib, importlib.util, json, os, shutil, sys, time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
@@ -14,6 +14,34 @@ def require_running_guest(guest,out,phase):
 def prepare_run(guest,out):
     require_running_guest(guest,out,'before-staging')
     run=guest.share/out.name;run.mkdir();return run
+def finish_run(guest,run,out,result,finished,guard_audio):
+    """Report cleanup only after absence; retain evidence and raise on uncertainty.
+
+    Called with the shared lock held. Never retry removal or clean incomplete runs.
+    """
+    result['run_files_cleaned']=False
+    try:
+        if not finished:return
+        if guard_audio:
+            state=guest.command('GET_AUDIO_STATE')
+            result['cleanup_audio']=state
+            if not all('ch%d_dma=0'%i in state.split('\t') for i in range(4)):
+                raise RuntimeError('Completed guest still has active or unknown audio DMA; cleanup refused')
+        guest.launch.unlink()
+        shutil.rmtree(run)
+        # An emulator/shared filesystem can recreate an empty directory after
+        # deletion. lexists also refuses dangling links; never delete a second time.
+        if os.path.lexists(run) or os.path.lexists(guest.launch):
+            raise RuntimeError('Completed run or launcher remains after cleanup; inspect before release')
+        result['run_files_cleaned']=True
+    except Exception as error:
+        result['passed']=False
+        result['cleanup_error']=str(error)
+        raise
+    finally:
+        (out/'result.json').write_text(json.dumps(result,indent=2)+'\n')
+        print(out)
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     group=parser.add_mutually_exclusive_group()
@@ -271,12 +299,6 @@ def main():
                 result['donor_unchanged']=True
             result['passed']=True
         finally:
-            if finished and (args.studio_memory in ('native-abi','editor','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence') or args.invert_editor or args.invert_sampler or args.invert_session or args.source_memory or args.sample_dispatch or args.invert_render or args.invert_bounce or args.invert_cli or args.invert_stem_cli):
-                state=guest.command('GET_AUDIO_STATE')
-                finished=all('ch%d_dma=0'%i in state.split('\t') for i in range(4))
-                result['cleanup_audio']=state
-            if finished:
-                guest.launch.unlink();shutil.rmtree(run)
-            result['run_files_cleaned']=finished
-            (out/'result.json').write_text(json.dumps(result,indent=2)+'\n');print(out)
+            finish_run(guest,run,out,result,finished,
+                (args.studio_memory in ('native-abi','editor','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence') or args.invert_editor or args.invert_sampler or args.invert_session or args.source_memory or args.sample_dispatch or args.invert_render or args.invert_bounce or args.invert_cli or args.invert_stem_cli))
 if __name__=='__main__':main()

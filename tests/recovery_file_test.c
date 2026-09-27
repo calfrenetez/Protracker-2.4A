@@ -19,6 +19,7 @@ static uint8_t *encoded(const struct pt_project *p,size_t *n)
 static void exact(const struct pt_project *p,const uint8_t *original,size_t n)
 {size_t size;uint8_t *b=encoded(p,&size);assert(size==n && !memcmp(b,original,n));free(b);}
 #include "recovery_store_cases.h"
+#include "recovery_find_cases.h"
 static int recovery_fixture(int argc,char **argv)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_document d,recovered,raw;
@@ -111,6 +112,7 @@ static int recovery_fixture(int argc,char **argv)
     assert(got.revision==0 && got.saved_revision==9 && recovered.dirty);
     exact(&recovered.project,original,n);assert(unlink(path)==0);
     recovery_store_cases(argv[2],&d.project,info,&a);
+    recovery_find_cases(argv[2],&d.project,info,&a);
     pt_document_release(&d);pt_document_release(&recovered);
     free(original);free(snapshot);assert(!live);
     puts("RECOVERY FILE PASS: full-precision project identity, new-file-only snapshot, bounded allocation failures, corrupt/mismatched metadata preserves open song, explicit dirty restoration");

@@ -1,7 +1,7 @@
 from pathlib import Path
 import subprocess,tempfile,unittest
 ROOT=Path(__file__).resolve().parents[1]
-SOURCES=['src/platform/recovery_store.c','src/core/recovery.c','src/platform/recovery_file.c','src/platform/project_file.c','src/platform/project_import.c','src/platform/file_save.c','src/core/document.c','src/core/pp20.c','src/core/safe_save.c','src/core/mod_project.c','src/core/mod_inspect.c','src/core/project.c','src/core/channels.c','src/core/pcm.c']
+SOURCES=['src/platform/recovery_find.c','src/platform/recovery_store.c','src/core/recovery.c','src/platform/recovery_file.c','src/platform/project_file.c','src/platform/project_import.c','src/platform/file_save.c','src/core/document.c','src/core/pp20.c','src/core/safe_save.c','src/core/mod_project.c','src/core/mod_inspect.c','src/core/project.c','src/core/channels.c','src/core/pcm.c']
 class RecoveryFile(unittest.TestCase):
     def test_master_snapshot_transaction(self):
         with tempfile.TemporaryDirectory() as tmp:

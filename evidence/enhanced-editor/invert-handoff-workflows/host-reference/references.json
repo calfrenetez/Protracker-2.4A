@@ -1,0 +1,63 @@
+{
+  "source_revision": "335f98146b7fa3c709a173690e893a522c480021",
+  "commands": [
+    [
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/handoff-workflow-candidate-335f981/build/dev/PT24GConvert-host",
+      "project",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-handoff/invert_swaponce.mod",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/handoff-ui-reference-335f981/baseline.ptg"
+    ],
+    [
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/handoff-workflow-candidate-335f981/build/dev/PT24GRender-host",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-handoff/invert_swaponce.mod",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/handoff-ui-reference-335f981/render.wav",
+      "--tracks",
+      "3",
+      "--invert-budget",
+      "100000"
+    ],
+    [
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/handoff-workflow-candidate-335f981/build/dev/PT24GRender-host",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-handoff/invert_swaponce.mod",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/handoff-ui-reference-335f981/track.wav",
+      "--tracks",
+      "1",
+      "--invert-budget",
+      "100000"
+    ],
+    [
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/handoff-workflow-candidate-335f981/build/dev/PT24GRender-host",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-handoff/invert_swaponce.mod",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/handoff-ui-reference-335f981/stems",
+      "--tracks",
+      "3",
+      "--invert-budget",
+      "100000",
+      "--stems"
+    ]
+  ],
+  "sha256": {
+    "track.wav": "b31715636851328f160befbdd61ff929a772f0bd5ea9103086a491167ea46a93",
+    "input.mod": "9a2c2b5204c54e9d9d760890aff2f02ce3d951d1ebf50c561a9349b54dcb8b8a",
+    "render.wav": "b31715636851328f160befbdd61ff929a772f0bd5ea9103086a491167ea46a93",
+    "baseline.ptg": "937dc2cb073ea53fb91e72eb5e92a02c9063bd32fcb509fe5dc3497dbe27bfd7",
+    "cli-host.log": "7de221e6a172de3560cfb59a9f422d4e48d7a3b95bf247a6ea8015e786275099",
+    "host.log": "9958a47dd30036deb25cdffb93d467b729ed246dc04ac43ad14af668feefaa88",
+    "stems/track-01.wav": "b31715636851328f160befbdd61ff929a772f0bd5ea9103086a491167ea46a93",
+    "stems/track-02.wav": "c4c7b437f39039549bbc8eead2c7f2724950fd39a974f32da7ee0fbd921d7883",
+    "cli-stems/track-01.wav": "57d6b6c222500f326c6b1650ccc6852f1fa49df3201ba99f8bd891f6e78b8e10",
+    "cli-stems/track-02.wav": "c4c7b437f39039549bbc8eead2c7f2724950fd39a974f32da7ee0fbd921d7883"
+  },
+  "additional_cli_command": [
+    "PT24GRender-host",
+    "input.mod",
+    "cli-stems",
+    "--tracks",
+    "3",
+    "--stems",
+    "--invert-budget",
+    "100000",
+    "--gain",
+    "65536"
+  ]
+}

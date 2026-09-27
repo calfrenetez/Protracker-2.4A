@@ -582,8 +582,8 @@ unselected tracks, and selects this bounded path for WAV, stems and sample
 bounce. It queries the live master-memory pool instead of assuming a RAM size;
 each subsequent allocation also rechecks the pool and its reserve. Insufficient
 memory or unsupported sample/effect combinations preserve the project and undo
-history. The classic layout and render controls are unchanged. The queued Studio
-engine still uses its existing effect subset and refuses EFx. This is ideal-clock software rendering, not
+history. The classic layout and render controls are unchanged. Ordinary Studio start still refuses EFx; the explicit private EFx session APIs
+are documented below and are not wired to native PLAY/device output. This is ideal-clock software rendering, not
 physical Paula/AmiGUS or analogue acceptance.
 
 Native shared030 run `render-files-1790249882268620000` passed this CLI path:
@@ -620,8 +620,9 @@ its own copy and retains the repeat for normal, E9x and EDx triggers.
 Masters with nonzero first words are supported and unchanged. Mixed forward-loop
 and one-shot channels and unselected/muted EFx mutation are covered by independent
 frame expectations. Ordinary rendering and queued Studio semantics are unchanged;
-16/24-bit EFx, interpolation, slices and previously refused handoffs remain outside
-this bounded extension. This is ideal-clock software evidence, not analogue Paula
+16/24-bit EFx, interpolation and slices remain outside this bounded extension.
+Compatible same-rate instrument-only handoffs now follow the private-bank rules
+described below. This is ideal-clock software evidence, not analogue Paula
 or physical AmiGUS acceptance.
 
 
@@ -647,3 +648,30 @@ never converted implicitly to satisfy this subset. Native PLAY/device transport
 remain unimplemented by these APIs. Host parity and native allocation/lifetime
 evidence are under `invert-queued-core`, `invert-sampler-song` and
 `invert-editor-owner` in `evidence/enhanced-editor/`.
+
+
+### EFx instrument handoffs and export transactions
+
+The private EFx path accepts classic whole mono8 instrument-only handoffs between
+same-rate forward loops and one-shots, including a one-shot master with a nonzero
+first word. Instrument reload resets the mutation cursor while preserving its
+clock; the voice adopts the replacement at its next repeat boundary. Master
+bytes remain untouched. Admission is consistent across offline rendering and the
+incremental private producer. Ordinary rendering keeps its existing restrictions.
+
+Four pinned2.3F handoff fixtures now qualify WAV, individual/grouped stems and
+sample-bounce transactions. Independent trace-derived PCM matches every output
+frame. Cancellation preserves the project/history and removes partial output;
+bounce undo restores the exact pre-bounce project bytes, redo restores the output,
+and a saved/reloaded project retains both original samples and the generated
+stereo24 master. Evidence: `evidence/enhanced-editor/invert-handoff-workflows`.
+
+The clean committed335f981 editor passes these controls on shared030 for the
+loop-to-one-shot handoff fixture: requester cancellation, full WAV/two stems,
+selected-track bounce, save and undo/redo. Every original sample record remains
+byte-identical. Normal exit, recent-prefix restoration, DMA-off and exact cleanup
+pass. This qualifies the software workflow, not physical sound or performance.
+The same committed native CLI also passes exact two-stem output and no-replace
+refusal (RC20) on shared030. Both application windows completed within their
+bounds, with all DMA off and guarded cleanup; their evidence remains separate
+from the earlier core oracle's recorded120-second deadline miss.

@@ -1482,3 +1482,20 @@ original timeout and later functional completion are retained under `native/`.
 This is functional/native allocation evidence, not a realtime performance pass.
 All DMA was off before exact run/launch cleanup and explicit resource release.
 Future invocation of this expensive one-frame pull oracle reserves420 seconds.
+
+
+### Handoff export/bounce/save transaction qualification
+
+The newly admitted EFx handoffs now have end-to-end host coverage through actual
+WAV/stem/grouped export, cancelled verification, existing-destination refusal,
+bounce cancellation after an instrument change, successful bounce, undo/redo and
+project-file save/reload. All four pinned fixtures match independent trace PCM.
+Source serialization is unchanged, saving after undo reproduces the entire
+pre-bounce file, and a reloaded project preserves both source masters and the
+new stereo24 bounce. A refused private-bank budget preserves pending redo.
+
+A clean335f981 native editor candidate passes the corresponding existing controls
+on shared030, with exact WAV/stems/bounce and all31 source sample records intact.
+The accepted classic layout remains unchanged. Evidence and build identities:
+`evidence/enhanced-editor/invert-handoff-workflows/`. Emulator application checks
+remain distinct from physical output, timing and AmiGUS acceptance.

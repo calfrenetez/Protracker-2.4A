@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "scope": "shared030 classic-layout native EFx WAV/stem/bounce UI; no physical acceptance",
+  "candidate_sha256": "31c59abe91fe57f289ca600b0ad3d992c82ee7bb8dd8c54b49f135ff6fc796f3",
+  "fixture_sha256": "9a2c2b5204c54e9d9d760890aff2f02ce3d951d1ebf50c561a9349b54dcb8b8a",
+  "recent_prefix_verified_before_launch": true,
+  "exact_wav": true,
+  "exact_stems": true,
+  "source_master_records_unchanged": true,
+  "bounced_pcm_exact": true,
+  "undo_redo": true,
+  "normal_exit": true,
+  "recent_prefix_restored": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=333\tsndbuf_status=0",
+  "run_files_cleaned": true
+}

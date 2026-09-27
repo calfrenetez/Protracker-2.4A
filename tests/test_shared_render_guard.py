@@ -47,7 +47,7 @@ class SharedRenderGuard(unittest.TestCase):
 
 
     def test_cleanup_requires_observed_absence_and_records_failures(self):
-        for mode in ('normal','recreated-directory','recreated-link','remove-error','active-dma','ipc-error','incomplete'):
+        for mode in ('normal','missing-launcher','recreated-directory','recreated-link','remove-error','active-dma','ipc-error','incomplete'):
             with self.subTest(mode=mode),tempfile.TemporaryDirectory() as td:
                 root=Path(td);out=root/'evidence';share=root/'guest';out.mkdir();share.mkdir()
                 run=share/'owned';run.mkdir();(run/'candidate').write_bytes(b'owned')
@@ -56,6 +56,7 @@ class SharedRenderGuard(unittest.TestCase):
                 guest.launch=share/'launcher';guest.launch.write_bytes(b'owned')
                 if mode=='active-dma':guest.status='OK\tch0_dma=1\tch1_dma=0\tch2_dma=0\tch3_dma=0'
                 if mode=='ipc-error':guest.status=RuntimeError('lost bridge')
+                if mode=='missing-launcher':guest.launch.unlink()
                 result={'passed':True}
                 real_remove=shutil.rmtree
                 def remove(path):
@@ -64,20 +65,20 @@ class SharedRenderGuard(unittest.TestCase):
                     if mode=='recreated-directory':path.mkdir()
                     if mode=='recreated-link':guest.launch.symlink_to(share/'missing')
                 with patch.object(runner.shutil,'rmtree',side_effect=remove) as deletion:
-                    if mode in ('normal','incomplete'):
+                    if mode in ('normal','missing-launcher','incomplete'):
                         runner.finish_run(guest,run,out,result,mode!='incomplete',True)
                     else:
                         with self.assertRaises((RuntimeError,OSError)):
                             runner.finish_run(guest,run,out,result,True,True)
                 recorded=json.loads((out/'result.json').read_text())
-                self.assertEqual(recorded['run_files_cleaned'],mode=='normal')
-                self.assertEqual(recorded['passed'],mode in ('normal','incomplete'))
+                self.assertEqual(recorded['run_files_cleaned'],mode in ('normal','missing-launcher'))
+                self.assertEqual(recorded['passed'],mode in ('normal','missing-launcher','incomplete'))
                 self.assertEqual(other.read_bytes(),b'preserve')
                 self.assertEqual(deletion.call_count,0 if mode in ('active-dma','ipc-error','incomplete') else 1)
                 if mode in ('active-dma','ipc-error','incomplete'):
                     self.assertTrue(guest.launch.exists());self.assertTrue((run/'candidate').exists())
                 if mode=='recreated-directory':self.assertTrue(run.is_dir())
                 if mode=='recreated-link':self.assertTrue(guest.launch.is_symlink())
-                if mode not in ('normal','incomplete'):self.assertIn('cleanup_error',recorded)
+                if mode not in ('normal','missing-launcher','incomplete'):self.assertIn('cleanup_error',recorded)
 
 if __name__=='__main__':unittest.main()

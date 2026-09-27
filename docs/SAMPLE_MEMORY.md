@@ -2583,3 +2583,11 @@ Paula's CIAA fallback subcase remains unexecuted because Workbench owns timerB.
 The139builds are not139runtime qualifications; actual AmiGUS, native Studio PLAY,
 physical performance and listening remain separate. See evidence folders
 `core-regression-20260927/` and `paula-regression-20260927/`.
+
+
+The same committed editor candidate also passed a shared030 UI workflow: cancelled
+requester, exact24-bit WAV/two stems, master-preserving bounce and verified save,
+undo/redo and clean exit. Recents settings were isolated/restored byte-for-byte;
+all DMA was off and cleanup/release verified. The classic layout was inspected.
+Evidence: `editor-regression-20260927/`. This exercises native file workflows,
+not Studio device output.

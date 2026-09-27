@@ -27,7 +27,7 @@ def finish_run(guest,run,out,result,finished,guard_audio):
             result['cleanup_audio']=state
             if not all('ch%d_dma=0'%i in state.split('\t') for i in range(4)):
                 raise RuntimeError('Completed guest still has active or unknown audio DMA; cleanup refused')
-        guest.launch.unlink()
+        guest.launch.unlink(missing_ok=True)
         shutil.rmtree(run)
         # An emulator/shared filesystem can recreate an empty directory after
         # deletion. lexists also refuses dangling links; never delete a second time.

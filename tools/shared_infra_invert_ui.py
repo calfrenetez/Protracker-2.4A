@@ -4,6 +4,7 @@ Uses an explicitly supplied clean-layout candidate and prepared host references.
 """
 import argparse,fcntl,hashlib,json,shutil,subprocess,sys,time,zlib
 from pathlib import Path
+from shared_infra_render_files import prepare_run, require_running_guest, finish_run
 ROOT=Path(__file__).resolve().parents[1]
 INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -30,7 +31,7 @@ def main():
     out=ROOT/'build/dev'/('invert-ui-'+str(time.time_ns()));out.mkdir()
     result={'passed':False,'scope':'shared030 classic-layout native EFx WAV/stem/bounce UI; no physical acceptance'}
     with (INFRA/'runtime/test.lock').open('a') as lock:
-        fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);guest=Guest(INFRA,out);run=guest.share/out.name;run.mkdir();finished=False;launched=False
+        fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);guest=Guest(INFRA,out);run=prepare_run(guest,out);finished=False;launched=False
         fixture=args.fixture
         shutil.copyfile(args.candidate,run/'PT24GEdit');shutil.copyfile(fixture,run/'input.mod')
         result.update(candidate_sha256=digest(run/'PT24GEdit'),fixture_sha256=digest(fixture));start=time.monotonic()
@@ -86,6 +87,7 @@ def main():
             guest.launch.write_text('\n'.join(['FailAt 21','Stack 65536','CD '+guest.device+run.name,
                 'PT24GEdit input.mod saved.ptg >editor.log','Echo $RC >editor.rc',
                 'Execute restore-env','Echo done >'+guest.device+run.name+'/done'])+'\n')
+            require_running_guest(guest,out,"before-launch")
             launched=True;guest.start()
             frame('status=READY -');key(0x11,True,True)
             # Two audio tracks; EFx clocks on unselected tracks remain global.
@@ -127,14 +129,15 @@ def main():
             for name in ['editor.log','editor.rc','saved.ptg','render.wav','previous-prefix']:
                 if (run/name).exists():shutil.copyfile(run/name,out/name)
             if (run/'stems').exists():shutil.copytree(run/'stems',out/'stems')
-            if finished:
-                before=run/'previous-prefix';after=run/'restored-prefix'
-                restored=(run/'restore-done').exists() and before.exists()==after.exists() and (not before.exists() or before.read_bytes()==after.read_bytes())
-                result['recent_prefix_restored']=restored
-                finished=restored
-            if finished:
-                audio=guest.command('GET_AUDIO_STATE');result['cleanup_audio']=audio;finished=all('ch%d_dma=0'%i in audio.split('\t') for i in range(4))
-            if finished:guest.launch.unlink(missing_ok=True);shutil.rmtree(run)
-            result['run_files_cleaned']=finished
-            (out/'result.json').write_text(json.dumps(result,indent=2)+'\n');print(out,flush=True)
+            try:
+                if finished:
+                    before=run/'previous-prefix';after=run/'restored-prefix'
+                    restored=(run/'restore-done').exists() and before.exists()==after.exists() and (not before.exists() or before.read_bytes()==after.read_bytes())
+                    result['recent_prefix_restored']=restored
+                    finished=restored
+                    if not restored:
+                        result['passed']=False;result['error']='Recent prefix restoration not confirmed; retain run'
+                        raise RuntimeError(result['error'])
+            finally:
+                finish_run(guest,run,out,result,finished,True)
 if __name__=='__main__':main()

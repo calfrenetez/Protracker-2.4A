@@ -55,4 +55,39 @@ static void native_alarm_fixture(void)
     pt_native_eclock_close(&clock);
     puts("NATIVE ALARM PASS: absolute EClock alarm completion, reply collection/reuse, future-alarm cancel/close and reopen; coarse diagnostic polling, no audio or timing qualification");
 }
-int main(void){int result;native_memory_start();native_eclock_fixture();native_alarm_fixture();result=editor_wavetable_fixture();native_memory_finish();return result;}
+static void native_alarm_signal_fixture(void)
+{
+    struct pt_native_eclock clock={0};struct pt_native_alarm alarm={0},watchdog={0};
+    uint64_t now,deadline,late[16],minimum=UINT64_MAX,maximum=0;
+    uint32_t frequency,initial;unsigned i,guard,over_frame=0;enum pt_alarm_result r;
+    assert(pt_native_eclock_open(&clock) && pt_native_alarm_open(&alarm) && pt_native_alarm_open(&watchdog));
+    assert(pt_native_eclock_read(&clock,&now,&initial) && initial>=500);
+    assert(pt_native_alarm_arm(&watchdog,now+(uint64_t)initial*2)==PT_ALARM_WAITING);
+    for(i=0;i<16;++i) {
+        ULONG mask;
+        assert(pt_native_eclock_read(&clock,&now,&frequency) && frequency==initial);
+        deadline=now+frequency/(i&1?100:500);
+        assert(pt_native_alarm_arm(&alarm,deadline)==PT_ALARM_WAITING);
+        mask=pt_native_alarm_signal(&alarm)|pt_native_alarm_signal(&watchdog);
+        assert(pt_native_alarm_signal(&alarm) && pt_native_alarm_signal(&watchdog) &&
+            pt_native_alarm_signal(&alarm)!=pt_native_alarm_signal(&watchdog));
+        guard=0;
+        for(;;) {
+            assert(pt_native_alarm_poll(&watchdog)==PT_ALARM_WAITING);
+            r=pt_native_alarm_poll(&alarm);if(r!=PT_ALARM_WAITING)break;
+            assert(++guard<=64);Wait(mask);
+        }
+        assert(r==PT_ALARM_READY);
+        assert(pt_native_eclock_read(&clock,&now,&frequency) && frequency==initial && now>=deadline);
+        late[i]=now-deadline;if(late[i]<minimum)minimum=late[i];if(late[i]>maximum)maximum=late[i];
+        if(late[i]*48000>=frequency)++over_frame;
+    }
+    guard=0;while(!pt_native_alarm_close(&watchdog)){assert(++guard<=8);Delay(1);}
+    assert(pt_native_alarm_close(&alarm));pt_native_eclock_close(&clock);
+    for(i=0;i<16;++i)printf("NATIVE SIGNAL observed late_ticks=%lu frequency=%lu delay_ms=%u case=%u\n",
+        (unsigned long)late[i],(unsigned long)initial,i&1?10:2,i);
+    printf("NATIVE SIGNAL SUMMARY cases=16 min_ticks=%lu max_ticks=%lu over_48k_frame=%u frequency=%lu\n",
+        (unsigned long)minimum,(unsigned long)maximum,over_frame,(unsigned long)initial);
+    puts("NATIVE SIGNAL PASS: task signal wake, independent watchdog, actual-time resampling and all requests/resources closed; diagnostic observation only, no playback dispatch");
+}
+int main(void){int result;native_memory_start();native_eclock_fixture();native_alarm_fixture();native_alarm_signal_fixture();result=editor_wavetable_fixture();native_memory_finish();return result;}

@@ -2346,3 +2346,20 @@ not intrinsic timer precision or playback deadline acceptance. No song is attach
 to the alarm and no audio callback is invoked. Actual-time resampling and the
 existing strict deadline gate remain required before future playback integration.
 The separate read-only EClock owner's request remains permanently unsubmitted.
+
+The signal diagnostic adds16alternating2/10ms alarms. It verifies a distinct,
+nonzero signal mask for the alarm and an already-armed separate2second watchdog
+before using Exec Wait. Each wake polls both requests and resamples the actual
+EClock after collecting the alarm reply. Stale/spurious signal loops are bounded;
+the outer shared runner remains the process watchdog if the timer service itself
+fails. Watchdog cancellation retains its owner until completion. Measurements
+include task switching, poll/reply collection and clock-read overhead; logging is
+deferred until the measured cases finish. No timing tolerance or late-dispatch
+policy is changed by this diagnostic, and it invokes no playback callbacks.
+
+The27September shared030 signal diagnostic observed193..10045late ticks at709379Hz
+(15cases193..198, firstcase10045); all16exceeded one48kHz frame interval. This is
+caller-inclusive emulator evidence that the measured task-wakeup path does not
+meet the current exact-frame gate. It does not justify relaxing that gate or
+claiming physical timing failure. Prepared dispatch/timing integration remains
+unfinished; native enhanced/card PLAY stays disabled.

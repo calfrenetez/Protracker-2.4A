@@ -675,3 +675,13 @@ The same committed native CLI also passes exact two-stem output and no-replace
 refusal (RC20) on shared030. Both application windows completed within their
 bounds, with all DMA off and guarded cleanup; their evidence remains separate
 from the earlier core oracle's recorded120-second deadline miss.
+
+
+Six additional EFx instrument-change fixtures qualify E92, actual ED3 notes and
+901 notes for looped and one-shot destinations, followed by a return handoff.
+Pinned captures check inherited mutation timing, delayed pitch change, retrigger
+counts, valid offset and out-of-range fallback. Exact PCM and host export/bounce/
+master-save checks pass without a production-code change. See
+`evidence/enhanced-editor/invert-handoff-commands/` and `SAMPLE_MEMORY.md` for
+scope and evidence; shared clocks across simultaneous handoffs remain a separate
+next audit. No new native Studio output or physical acceptance is implied.

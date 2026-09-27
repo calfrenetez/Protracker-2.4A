@@ -69,7 +69,7 @@ int main(int argc,char **argv)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_document d;struct oracle o;
     struct pt_render_options options;struct pt_render_report report;FILE *f;long size;
-    unsigned i,offset=2108,partitions[]={1,17,256},calls=0;uint64_t time=0;
+    unsigned i,offset=2108,partitions[]={1,17,256},calls=0,expected_changes,aligned_return;uint64_t time=0;
     int32_t *masters[31]={0};unsigned char r[164];
     assert(argc==3);memset(&o,0,sizeof(o));memset(&options,0,sizeof(options));
     f=fopen(argv[1],"rb");assert(f && !fseek(f,0,SEEK_END));size=ftell(f);assert(size>0);rewind(f);
@@ -85,6 +85,10 @@ int main(int argc,char **argv)
         }
         offset+=s->pcm.frames;
     }
+    /* Immediate E9/9xx triggers replace the first handoff; the return still
+       waits for a repeat (the9xx one-shot return lands on the tick boundary). ED3 also exercises a handoff before its later trigger. */
+    aligned_return=o.initial[1102]==0x29 && !d.project.samples[1].loop;
+    expected_changes=(o.initial[1102]==0x29 || (o.initial[1102]==0x2e && o.initial[1103]==0x92))?1:2;
     assert(offset==o.size);f=fopen(argv[2],"rb");assert(f);
     while(fread(r,1,164,f)==164) {
         if(!r[14] || !word(r+28))continue;
@@ -97,7 +101,7 @@ int main(int argc,char **argv)
     assert(pt_render_stream(&d.project,&options,count,&calls,NULL,NULL,&report)==PT_RENDER_EFFECT && !calls);
     reset(&o);
     assert(pt_render_invert_stream(&d.project,&options,receive,&o,NULL,NULL,&report,SIZE_MAX,&a)==PT_RENDER_OK);
-    assert(report.frames==o.frames && o.frames==o.tick_end[o.ticks-1] && o.changes==2 && o.delayed_changes>=1);
+    assert(report.frames==o.frames && o.frames==o.tick_end[o.ticks-1] && o.changes==expected_changes && (aligned_return?o.delayed_changes==0:o.delayed_changes>=1));
     for(i=0;i<3;++i) {
         struct pt_render_invert_session *session=NULL;unsigned done=0,pulls=0;const struct pt_pcm *pcm;
         reset(&o);assert(pt_render_invert_open(&d.project,&options,SIZE_MAX,&a,&session)==PT_RENDER_OK);
@@ -105,7 +109,7 @@ int main(int argc,char **argv)
             assert(++pulls<20000 && pt_render_invert_pull(session,partitions[i],&pcm,&done)==PT_RENDER_OK);
             if(pcm)assert(receive(&o,pcm,o.frames));
         }
-        assert(o.frames==o.tick_end[o.ticks-1] && o.changes==2 && o.delayed_changes>=1);pt_render_invert_close(session);
+        assert(o.frames==o.tick_end[o.ticks-1] && o.changes==expected_changes && (aligned_return?o.delayed_changes==0:o.delayed_changes>=1));pt_render_invert_close(session);
     }
     for(i=0;i<31;++i)if(masters[i])assert(!memcmp(masters[i],d.project.samples[i].pcm.data,d.project.samples[i].pcm.frames*sizeof(int32_t)));
     d.project.samples[1].interpolation=1;refused(&d.project,&options,&a);d.project.samples[1].interpolation=0;

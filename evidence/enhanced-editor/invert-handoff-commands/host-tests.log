@@ -1,0 +1,13 @@
+test_command_fixture_and_capture_identity (test_invert_ordering.InvertOrdering.test_command_fixture_and_capture_identity) ... ok
+test_flow_matches_pinned_native_mutations (test_invert_ordering.InvertOrdering.test_flow_matches_pinned_native_mutations) ... ok
+test_handoff_fixture_and_capture_identity (test_invert_ordering.InvertOrdering.test_handoff_fixture_and_capture_identity) ... ok
+test_handoff_relocation_preserves_semantics (test_invert_ordering.InvertOrdering.test_handoff_relocation_preserves_semantics) ... ok
+test_relocation_preserves_semantics (test_invert_ordering.InvertOrdering.test_relocation_preserves_semantics) ... ok
+test_reference_pcm_offline_and_incremental (test_render_invert_handoff.RenderInvertHandoff.test_reference_pcm_offline_and_incremental) ... ok
+test_editor_default_rate_reference (test_invert_handoff_workflows.InvertHandoffWorkflows.test_editor_default_rate_reference) ... ok
+test_reference_exports_and_master_transactions (test_invert_handoff_workflows.InvertHandoffWorkflows.test_reference_exports_and_master_transactions) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 13.960s
+
+OK

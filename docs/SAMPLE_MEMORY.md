@@ -1499,3 +1499,33 @@ on shared030, with exact WAV/stems/bounce and all31 source sample records intact
 The accepted classic layout remains unchanged. Evidence and build identities:
 `evidence/enhanced-editor/invert-handoff-workflows/`. Emulator application checks
 remain distinct from physical output, timing and AmiGUS acceptance.
+
+
+### EFx handoff command combinations
+
+Six further pinned-reference fixtures combine an inherited EF8 mutation clock
+with E92 retrigger, an ED3 note, or a 901 note while changing to a looped or
+one-shot instrument, then returning to the first instrument. Each capture is
+repeated. The existing production implementation matches these cases without
+widening admission or changing master data.
+
+The ED3 cases retain the old period until the delayed trigger, while the new
+loop and mutation clock are already selected. E92 restarts on ticks0,2,4 without
+resetting the inherited EF8 accumulator. The offset cases distinguish a256-byte
+one-shot start from an offset beyond a loop's initial end (two-byte fallback).
+They also retain the reference's second offset application after triggering.
+
+Reference normalization binds each allocation from its stable loop pointer and
+MOD loop metadata, so changing9xx start addresses remain visible. Raw captures,
+fixture identities and mutation-detection checks are retained in
+`evidence/enhanced-editor/invert-handoff-commands/`. Host sanitizer tests compare
+all17280 PCM frames, offline and pull1/17/256, and actual WAV/stem/group/bounce/
+undo/redo/save transactions. All original masters remain exact; ordinary EFx,
+16/24-bit EFx, interpolation and rate-mismatch refusal checks remain in place.
+This qualifies these six cases, not every effect combination or physical audio.
+
+All six also pass the native Fast-memory PCM oracle on shared030 within its
+420-second reservation:41 Fast allocations per case, no Chip fallback and zero
+owned bytes at completion. `native/build.json` and raw RC/log records pin the
+exact diagnostic. All DMA was off before guarded cleanup and resource release.
+This is a core/software check, not a new native-editor UI or physical-output pass.

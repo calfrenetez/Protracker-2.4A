@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "scope": "shared030 reference-driven EFx PCM core; no device/audio/physical acceptance",
+  "binary_sha256": "01fbf32671b58eab7a0c8c304d905ea7747ea5492c1ce6e89ebd5814deb76673",
+  "cases": {
+    "inv_delay_loop": {
+      "rc": 0,
+      "log_sha256": "0078044bb3001a73db8bdf8e5a55cfe4c867de211f5dc09b516021943ca556c6"
+    },
+    "inv_delay_once": {
+      "rc": 0,
+      "log_sha256": "0078044bb3001a73db8bdf8e5a55cfe4c867de211f5dc09b516021943ca556c6"
+    },
+    "inv_offset_loop": {
+      "rc": 0,
+      "log_sha256": "0078044bb3001a73db8bdf8e5a55cfe4c867de211f5dc09b516021943ca556c6"
+    },
+    "inv_offset_once": {
+      "rc": 0,
+      "log_sha256": "0078044bb3001a73db8bdf8e5a55cfe4c867de211f5dc09b516021943ca556c6"
+    },
+    "inv_retrig_loop": {
+      "rc": 0,
+      "log_sha256": "0078044bb3001a73db8bdf8e5a55cfe4c867de211f5dc09b516021943ca556c6"
+    },
+    "inv_retrig_once": {
+      "rc": 0,
+      "log_sha256": "0078044bb3001a73db8bdf8e5a55cfe4c867de211f5dc09b516021943ca556c6"
+    }
+  },
+  "owned_files_cleaned": true,
+  "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=666\tsndbuf_status=0"
+}

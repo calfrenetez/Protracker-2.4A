@@ -9,4 +9,7 @@ class RenderInvertHandoff(unittest.TestCase):
             subprocess.run(['cc','-std=c99','-O1','-g','-Wall','-Wextra','-Werror','-fsanitize=address,undefined','-Isrc/core','tests/render_invert_handoff_test.c',*[f'src/core/{s}.c' for s in sources],'-o',str(exe)],cwd=ROOT,check=True)
             cases=list((ROOT/'evidence/enhanced-editor/invert-handoff').glob('*.mod'))
             self.assertEqual(len(cases),4)
+            commands=list((ROOT/'evidence/enhanced-editor/invert-handoff-commands').glob('*.mod'))
+            self.assertEqual(len(commands),6)
+            cases+=commands
             for mod in cases:subprocess.run([str(exe),str(mod),str(mod.with_suffix('.trace'))],check=True)

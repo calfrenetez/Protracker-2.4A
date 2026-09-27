@@ -49,7 +49,9 @@ class InvertHandoffWorkflows(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             tmp=Path(tmp);exe=tmp/'test'
             subprocess.run(['cc','-std=c99','-O1','-g','-Wall','-Wextra','-Werror','-fsanitize=address,undefined','-Isrc/core','tests/invert_handoff_workflow_test.c',*WORKFLOW_SOURCES,'-o',str(exe)],cwd=ROOT,check=True)
-            for mod in sorted((ROOT/'evidence/enhanced-editor/invert-handoff').glob('*.mod')):
+            cases=list((ROOT/'evidence/enhanced-editor/invert-handoff').glob('*.mod'))+list((ROOT/'evidence/enhanced-editor/invert-handoff-commands').glob('*.mod'))
+            self.assertEqual(len(cases),10)
+            for mod in sorted(cases):
                 folder=tmp/mod.stem;folder.mkdir()
                 subprocess.run([str(exe),str(mod),str(folder)],check=True)
                 verify_outputs(folder,mod.read_bytes(),mod.with_suffix('.trace').read_bytes())

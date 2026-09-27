@@ -40,9 +40,9 @@ int main(int argc,char **argv)
         if(!state.instrument[0])continue;
         inst=state.instrument[0]-1;
         /* Trace addresses are relative to metadata, but PCM is a separate
-           Chip allocation. Bind once; retain every subsequent cursor delta. */
-        if(!bound[inst]){sample_start[inst]=(unsigned long)word(r+52)*65536+word(r+54);bound[inst]=1;}
-        assert(sample_start[inst]==(unsigned long)word(r+52)*65536+word(r+54));
+           Chip allocation. Bind its stable loop address, since9xx changes n_start; retain every subsequent cursor delta. */
+        if(!bound[inst]){sample_start[inst]=(((unsigned long)word(r+58)*65536+word(r+60))-d.project.samples[inst].loop_start)&0xffffffffUL;bound[inst]=1;}
+        assert(((sample_start[inst]+d.project.samples[inst].loop_start)&0xffffffffUL)==(unsigned long)word(r+58)*65536+word(r+60));
         cursor=(unsigned long)word(r+140)*65536+word(r+142);
         if(cursor!=((sample_start[inst]+state.channel[0].cursor)&0xffffffffUL) || state.channel[0].speed!=(r[144]>>4) || state.channel[0].accumulator!=r[145]) {
             fprintf(stderr,"INVERT clock mismatch tick=%u fresh=%u counter=%u cursor=%lu/%lu speed=%u/%u accumulator=%u/%u\n",ticks,flow.fresh,flow.counter,(unsigned long)(((sample_start[inst]+state.channel[0].cursor)&0xffffffffUL)),cursor,state.channel[0].speed,r[144]>>4,state.channel[0].accumulator,r[145]);return 20;

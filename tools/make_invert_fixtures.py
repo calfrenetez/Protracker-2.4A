@@ -62,3 +62,17 @@ def handoff_fixtures():
         data[1116:1120]=bytes([0,0,0x1e,0xff])
         data[1134]=15
         yield name,bytes(data),{'max_ticks':100,'ordering_case':name,'second_one_shot':once}
+
+
+def handoff_command_fixtures():
+    """Inherited EF8 clock with E9/ED/9xx on a new instrument, then return."""
+    originals=list(handoff_fixtures())
+    for command,period,effect,parameter in [('retrig',0,14,0x92),('delay',480,14,0xd3),('offset',480,9,1)]:
+        for once in (False,True):
+            name='inv_'+command+('_once' if once else '_loop')
+            data=bytearray(originals[2 if once else 0][1])
+            data[:20]=name.encode().ljust(20,b'\0')
+            data[1100:1104]=bytes([period>>8,period&255,0x20|effect,parameter])
+            # The looped offset case deliberately exceeds its initial repeat end;
+            # the one-shot case instead starts at byte256 of its512-byte body.
+            yield name,bytes(data),{'max_ticks':100,'ordering_case':name,'second_one_shot':once,'command':command}

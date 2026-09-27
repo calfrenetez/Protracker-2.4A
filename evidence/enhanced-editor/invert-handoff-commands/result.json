@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "scope": "pinned EFx ordering captures; no renderer/physical acceptance",
+  "diagnostic_sha256": "38e84f80a487c24c4dd2cc1c12c6212cf0069609f6971aa12de8d66150bee8fe",
+  "cases": {
+    "inv_retrig_loop": {
+      "max_ticks": 100,
+      "ordering_case": "inv_retrig_loop",
+      "second_one_shot": false,
+      "command": "retrig",
+      "comparison": "exact after per-sample cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "389109a4ff6a95b5bc1567999e481285fc5cd419410ccda9a9f7bbbabc12fe8f",
+      "trace_sha256": "3f0a11e02339896f35c5410598cc91c300483af6e3de42cc71d384e43fcef144"
+    },
+    "inv_retrig_once": {
+      "max_ticks": 100,
+      "ordering_case": "inv_retrig_once",
+      "second_one_shot": true,
+      "command": "retrig",
+      "comparison": "exact after per-sample cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "17f24204111a075e4dc8cefeba6b0bbc687277327af380ad15049b4e33595838",
+      "trace_sha256": "e7794c19b597ae6fdb5e68508eb3edf3d2bb52fc6fe9005048c1d272833a7f3b"
+    },
+    "inv_delay_loop": {
+      "max_ticks": 100,
+      "ordering_case": "inv_delay_loop",
+      "second_one_shot": false,
+      "command": "delay",
+      "comparison": "exact after per-sample cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "94d4bef90c22bd74cf2bb2134da169dd0f59319b621be971d4e9a5c7c95c13cc",
+      "trace_sha256": "0acbf7ef19afb854c3520bc0d375c4d90f2ea43e581be885bf33e8576da3efa0"
+    },
+    "inv_delay_once": {
+      "max_ticks": 100,
+      "ordering_case": "inv_delay_once",
+      "second_one_shot": true,
+      "command": "delay",
+      "comparison": "exact after per-sample cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "6af72b34a0dd79b8884c180d61f12c99eeed377d3ecb99c66f63404742607bbc",
+      "trace_sha256": "d579b8f3808d83686609b1dc09f15a7d78929fca3aa772b9b649a2d4877ff060"
+    },
+    "inv_offset_loop": {
+      "max_ticks": 100,
+      "ordering_case": "inv_offset_loop",
+      "second_one_shot": false,
+      "command": "offset",
+      "comparison": "exact after per-sample cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "f27d4cb1da1775dfa64404a699e129dd87ece2e45dc249b929281062e90b9918",
+      "trace_sha256": "f52cc8e5122e2cf496b1701a358139ab98cfc24cd1caf083c2186df922dd7bb9"
+    },
+    "inv_offset_once": {
+      "max_ticks": 100,
+      "ordering_case": "inv_offset_once",
+      "second_one_shot": true,
+      "command": "offset",
+      "comparison": "exact after per-sample cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 24,
+      "fixture_sha256": "ec87fbaddc1eb41ab978a19ae430f1d95f41bbfdbf156390b44d0bb6246042c5",
+      "trace_sha256": "5d94ab247190d5b2834fb5246598ada7d4889e3d04558a34f32d74b1eb36b1d1"
+    }
+  },
+  "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=666\tsndbuf_status=0",
+  "owned_files_cleaned": true
+}

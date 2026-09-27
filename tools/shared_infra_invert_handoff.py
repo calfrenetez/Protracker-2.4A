@@ -3,15 +3,16 @@
 
 Reserve a420-second window: the one-frame pull oracle is deliberately expensive.
 """
-import fcntl,hashlib,json,shutil,sys,time
+import argparse,fcntl,hashlib,json,shutil,sys,time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def main():
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument("--commands",action="store_true");args=parser.parse_args()
     sys.path.insert(0,str(INFRA/'scripts'))
     from shared_guest import Guest
-    evidence=ROOT/'evidence/enhanced-editor/invert-handoff'
-    cases=sorted(p.stem for p in evidence.glob('*.mod'));assert len(cases)==4
+    evidence=ROOT/'evidence/enhanced-editor'/('invert-handoff-commands' if args.commands else 'invert-handoff')
+    cases=sorted(p.stem for p in evidence.glob('*.mod'));assert len(cases)==(6 if args.commands else 4)
     out=ROOT/'build/dev'/('invert-handoff-'+str(time.time_ns()));out.mkdir()
     report={'passed':False,'scope':'shared030 reference-driven EFx PCM core; no device/audio/physical acceptance'}
     with (INFRA/'runtime/test.lock').open('a') as lock:

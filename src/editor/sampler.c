@@ -83,6 +83,15 @@ static int same_storage(const struct pt_sample *a,const struct pt_sample *b)
     return a->pcm.data==b->pcm.data && a->pcm.capacity==b->pcm.capacity &&
         a->slices==b->slices && same(a,b);
 }
+enum pt_edit_result pt_sampler_pin_current(struct pt_sampler *s,struct pt_project *p,unsigned slot,
+    unsigned generation,struct pt_sample_version *expected,struct pt_pcm *pcm,struct pt_sample_version **token)
+{
+    if(!s || !p || !p->samples || !pcm || !token || !expected ||
+       p->sample_count>PT_PROJECT_SAMPLES || slot>=p->sample_count)return PT_EDIT_INVALID;
+    if(generation!=s->generation || s->current[slot]!=expected || expected->owner!=s ||
+       expected->references==UINT_MAX || !same_storage(&expected->sample,p->samples+slot))return PT_EDIT_CONFLICT;
+    retain(expected);*pcm=expected->sample.pcm;*token=expected;return PT_EDIT_OK;
+}
 void pt_sampler_pin_job_cancel(struct pt_sampler_pin_job *j)
 {
     if(!j)return;

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "../src/editor/sampler_song.h"
+#include "../src/editor/sampler_studio.h"
 #include "studio_preparation_cases.h"
 static unsigned live,attempt,fail_at;
 static void *alloc(void *c,size_t n) {void *p;(void)c;if(++attempt==fail_at)return NULL;p=malloc(n);if(p)++live;return p;}
@@ -33,6 +34,21 @@ int main(void)
     }fail_at=0;}
     assert(pt_sampler_song_open(&s,&d.project,&o,&a,&song)==PT_RENDER_OK);
     attempt=0;fail_at=1;assert(first(song)==257 && !attempt);fail_at=0;
+    /* The public provider still validates the entire untrusted project. */
+    {struct pt_sampler_studio context={&s,&d.project};struct pt_studio_source source=pt_sampler_studio_source(&context);
+        struct pt_pcm pcm;void *token=NULL;struct pt_sample saved=d.project.samples[1];
+        pt_sampler_song_stop(song);
+        d.project.samples[1].pcm=(struct pt_pcm){original,4,4,48000,1,8};
+        assert(!source.acquire(source.context,1,s.generation,&pcm,&token) && !token);
+        d.project.samples[1]=saved;
+#ifdef PT_TEST_PROJECT_VALIDATION_COUNT
+        {unsigned scans=pt_test_project_validations;
+#endif
+        assert(source.acquire(source.context,1,s.generation,&pcm,&token));source.release(source.context,token);
+#ifdef PT_TEST_PROJECT_VALIDATION_COUNT
+        assert(pt_test_project_validations>scans);}
+#endif
+    }
     assert(d.project.samples[0].pcm.data!=original && s.bytes);
     /* Required edit lifecycle: stop before publishing the edited master. */
     pt_sampler_song_stop(song);pt_sampler_song_close(song);

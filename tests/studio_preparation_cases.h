@@ -3,6 +3,10 @@
 #include <assert.h>
 #include <string.h>
 #include "../src/editor/sampler_song.h"
+#include "sampler_pin_current_cases.h"
+#ifdef PT_TEST_PROJECT_VALIDATION_COUNT
+extern unsigned pt_test_project_validations;
+#endif
 struct studio_reference {int32_t *values;size_t count,capacity;};
 static int studio_capture(void *context,const struct pt_pcm *pcm,uint64_t offset)
 {
@@ -12,8 +16,8 @@ static int studio_capture(void *context,const struct pt_pcm *pcm,uint64_t offset
 }
 static void studio_preparation_fixture(const struct pt_allocator *a)
 {
-    unsigned mode;
-    for(mode=0;mode<10;++mode) {
+    unsigned mode;pin_current_fixture(a);
+    for(mode=0;mode<12;++mode) {
         struct pt_document d;struct pt_sampler sampler;struct pt_sampler_song *song=NULL;
         struct pt_render_options o={0};struct pt_render_report report;struct studio_reference reference;
         int32_t *data=a->allocate(a->context,4200*sizeof(*data));
@@ -60,23 +64,37 @@ static void studio_preparation_fixture(const struct pt_allocator *a)
         assert(d.project.samples[0].pcm.data!=data && d.project.samples[0].pcm.bits==(mode==8?8:24));
         assert(!memcmp(d.project.samples[0].pcm.data,data,(mode==8?2100:4200)*sizeof(*data)));
         assert((d.project.samples[1].pcm.data!=data)==(mode==8));assert(d.project.samples[2].pcm.data==data);
+        if(mode>=10) {
+            struct pt_sample saved=d.project.samples[0];enum pt_render_result result=PT_RENDER_OK;
+            if(mode==10)--d.project.samples[0].loop_end;else d.project.samples[0].pcm.data=data;
+            while(result==PT_RENDER_OK) {
+                result=pt_sampler_song_pull(song,256,&out,&done);assert(!out && ++steps<1000);
+            }
+            assert(result==PT_RENDER_SAMPLE && done);d.project.samples[0]=saved;goto cancelled;
+        }
         /* Source pins prevent first-use promotion; playback needs no allocation. */
         bytes=sampler.bytes;sampler.budget=bytes;
         reference.capacity=20000;reference.count=0;reference.values=a->allocate(a->context,reference.capacity*sizeof(int32_t));assert(reference.values);
         assert(pt_render_stream(&d.project,&o,studio_capture,&reference,NULL,NULL,&report)==PT_RENDER_OK);
         d.project.channels.selected=1; /* Navigation is not a source mutation. */
+#ifdef PT_TEST_PROJECT_VALIDATION_COUNT
+        {unsigned scans=pt_test_project_validations;
+#endif
         while(!done) {
             assert(pt_sampler_song_pull(song,256,&out,&done)==PT_RENDER_OK && sampler.bytes==bytes);
             if(out) {size_t n=out->frames*2;assert(n<=reference.count-emitted);
                 assert(!memcmp(out->data,reference.values+emitted,n*sizeof(int32_t)));emitted+=n;}
             assert(++steps<1000);
         }
+#ifdef PT_TEST_PROJECT_VALIDATION_COUNT
+        assert(pt_test_project_validations==scans);}
+#endif
         assert(emitted==reference.count && emitted==report.frames*2);a->release(a->context,reference.values);
     cancelled:
         pt_sampler_song_stop(song);pt_sampler_song_stop(song);
         if(mode<6)assert(!sampler.bytes && d.project.samples[0].pcm.data==data);
         pt_sampler_release(&sampler);pt_document_release(&d);assert(!sampler.bytes);
-        assert(pt_sampler_song_pull(song,256,&out,&done)==(mode==3 || mode==4?PT_RENDER_INVALID:mode==5?PT_RENDER_MEMORY:PT_RENDER_OK));
+        assert(pt_sampler_song_pull(song,256,&out,&done)==(mode==3 || mode==4?PT_RENDER_INVALID:mode==5?PT_RENDER_MEMORY:mode>=10?PT_RENDER_SAMPLE:PT_RENDER_OK));
         assert(!out && done);pt_sampler_song_close(song);a->release(a->context,data);
     }
     puts("STUDIO PREPARATION PASS: bounded copy/cancel/stale/budget, selective pre-roll/repeat pins, stereo24/pingpong/slice parity and stop ownership");

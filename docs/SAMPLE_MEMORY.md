@@ -1919,3 +1919,29 @@ remain synchronous. No arbitrary provider gains a trusted-input flag, and this i
 not a hard real-time guarantee. Mutable EFx continues its separate private-bank
 path. Native PLAY, output scheduling, card transport and physical acceptance remain
 open. Evidence: `evidence/enhanced-editor/studio-preparing/`.
+
+### Prepared Studio source acquisition
+
+The ordinary sampler song now supplies its own private source provider over the
+pins captured during preparation. Each trigger/segment/repeat acquisition retains
+the exact held version after bounded generation, project-header, slot/current-token,
+owner and descriptor-identity checks. It performs no project-wide PCM/marker scan,
+allocation or copy. Each mixer acquisition owns an independent reference, released
+by its existing active/pending-repeat lifecycle before the preparation pins close.
+Metadata-only versions continue to retain their shared immutable backing storage.
+
+The internal retain helper requires a genuine held pin and a previously validated,
+immutable project; it cannot promote samples or validate untrusted inputs. Unexpected
+version/descriptor changes refuse without publishing output or changing references.
+This does not authorize in-place edits or freeing borrowed arrays while active.
+Public sampler_pin, the general sampler_studio provider and public mixer/voice
+validation remain unchanged. The mixer still scans the selected source when
+establishing a voice, so this removes redundant whole-project validation without
+claiming hard real-time playback. Mutable EFx does not use this provider.
+
+Instrumented host tests count calls to the actual project validator and verify
+none occur during prepared playback, including pre-roll and repeat handoffs;
+public-provider checks still run and reject invalid unused samples. Native software
+fixtures cover version retention/refusal, shared backing and final release. No
+native PLAY, card transport, physical timing or audible acceptance is established.
+Evidence: `evidence/enhanced-editor/studio-prepared-pins/`.

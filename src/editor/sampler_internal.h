@@ -1,6 +1,14 @@
 #ifndef PT_SAMPLER_INTERNAL_H
 #define PT_SAMPLER_INTERNAL_H
 #include "sampler.h"
+/* Retain a genuine already-held immutable pin for another voice. The session
+ * has fully validated its project and keeps source arrays immutable. This checks
+ * generation, current-token/owner and exact descriptor identity without scanning
+ * PCM/markers or allocating. expected must stay pinned through this call; this is
+ * not an input validator. Success transfers one additional reference; unpin once.
+ * Refusal leaves both outputs unchanged. Owner-thread, non-reentrant only. */
+enum pt_edit_result pt_sampler_pin_current(struct pt_sampler *,struct pt_project *,unsigned slot,
+    unsigned generation,struct pt_sample_version *expected,struct pt_pcm *,struct pt_sample_version **);
 #define PT_SAMPLER_PIN_CHUNK 4096
 /* Private preparation job for an ALREADY fully validated immutable project.
  * Zero-initialize, serialize with sampler/editor, cancel before mutations or

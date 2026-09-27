@@ -20,7 +20,8 @@ enum pt_wavetable_song_result {
  * Project, sampler, voices, allocator and callback contexts must outlive close.
  * Project patterns/orders/metadata are BORROWED and MUST remain immutable;
  * stop/close before edits, replacement or sampler reinitialization. Sampler
- * generation, table identities and project metadata are checked on every step;
+ * generation, table/header/bridge/backend/reservation identities and current
+ * resource ownership are checked on every step without rescanning master PCM;
  * these guards do not detect in-place writes to pattern/order/sample arrays.
  * Options/format are copied. Row-range playback requires an explicit exact-restore
  * callback; missing support returns RANGE. No native device/scheduler. */
@@ -32,8 +33,8 @@ enum pt_wavetable_song_result pt_wavetable_song_open(struct pt_wavetable_voices 
  * Each prepare validates current generation/header/bridge, then performs one
  * analysis step, promotes at most one selected source AFTER full capability
  * success, or transfers the audited sequence without remeasurement. Static input
- * validation/sync, source copies and metadata resets remain synchronous: no hard
- * latency guarantee. No uploads/voice callbacks during preparation.
+ * validation/sync at begin, source copies and metadata resets remain synchronous: no hard
+ * latency guarantee. The ownership predicate is called; no uploads/voice callbacks during preparation.
  * Close cancels pending/failed preparation and leaves the idle voice owner/bridge
  * bound for caller reuse/close (outer reservation retained). Failure poisons the
  * handle; close still required. Already-promoted unchanged sampler copies may

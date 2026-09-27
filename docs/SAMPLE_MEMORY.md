@@ -1824,7 +1824,28 @@ same immutable inputs; unchanged source promotion is permitted.
 Editor begin/prepare keeps the pending song in the existing change barrier, so
 edit, Stop and disposal cancel before modifying/freeing borrowed storage. The
 caller must still close the idle backend before freeing its contexts. No native
-PLAY/UI scheduling or card output is enabled. Bridge sync still validates the
-project/PCM synchronously on each step, and source promotion copies a whole sample;
-these remain responsiveness gaps rather than hard timing guarantees. Evidence:
+PLAY/UI scheduling or card output is enabled. The per-step bridge validation
+recorded for this milestone is superseded by the revision-bound guard below;
+source promotion still copies a whole sample. Evidence:
 `evidence/enhanced-editor/wavetable-preparing-owner/`.
+
+
+### Revision-bound song ownership checks
+
+An immutable song session now captures the exact bridge, backend and reservation
+identities after full initial validation. Every preparation/playback guard compares
+sampler generation, project header/table/count, bridge revision and identities,
+and checks the current WAVETABLE resource lease using the ownership predicate.
+Lost ownership latches backend refusal. These checks do not scan master PCM,
+allocate, upload or dispatch voice commands; the ownership callback must remain
+synchronous and non-reentrant. Selection is still a harmless UI cursor, and intact
+master promotion is allowed without invalidating the session.
+
+Full validation remains at begin, public bridge sync/acquire/location, renderer
+setup/reset and source promotion. Borrowed sample/pattern/order arrays must still
+remain immutable until close; the guard does not detect unauthorized in-place
+writes. This removes repeated scans from the owner guard, not every preparation
+or command path, and does not establish a real-time deadline or native card output.
+Host instrumentation counts real validator calls without production hooks; the
+native fixture checks invalid input, identity replacement, ownership loss and
+cleanup with injected callbacks. Evidence: `evidence/enhanced-editor/wavetable-guard/`.

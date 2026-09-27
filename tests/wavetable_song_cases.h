@@ -283,3 +283,100 @@ static void preparing_song_fixture(void)
     pt_document_release(&d);free(bus);free(f);assert(!allocations);
     puts("WAVETABLE PREPARING PASS: exclusive pending owner, no early pins/output, cancel/stale/late-refusal/promotion-failure cleanup, transferred song/range playback");
 }
+
+#ifdef PT_TEST_PROJECT_VALIDATION_COUNT
+extern unsigned pt_test_project_validations;
+#define VALIDATIONS_SAVE unsigned validations=pt_test_project_validations
+#define VALIDATIONS_UNCHANGED assert(pt_test_project_validations==validations)
+#else
+#define VALIDATIONS_SAVE ((void)0)
+#define VALIDATIONS_UNCHANGED ((void)0)
+#endif
+static void song_guard_fixture(void)
+{
+    struct fixture *f=malloc(sizeof(*f));struct dispatch_bus *bus=malloc(sizeof(*bus));
+    struct pt_amigus_wavetable_cache *replacement=malloc(sizeof(*replacement));struct pt_amigus_reservation reservation_copy;
+    struct pt_allocator a={NULL,allocate_master,release_master};struct pt_document d;
+    struct pt_sampler sampler;struct pt_sampler_wavetable bridge={0},saved_bridge;struct pt_wavetable_voices owner={0};
+    struct pt_render_options o={0};struct pt_playback_format format={16,0,0,0};
+    struct pt_wavetable_preflight_report report;struct pt_render_interval interval;
+    struct pt_wavetable_song *song=NULL;struct pt_project saved_project;enum pt_wavetable_song_result result;
+    int32_t data[8]={257,-513,1025,-2049,17,31,47,63};unsigned mode,baseline,steps;
+    assert(f && bus && replacement);pt_document_init(&d,&a);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
+    d.project.samples[0].pcm=(struct pt_pcm){data,8,8,48000,1,24};d.project.samples[0].volume=64;
+    d.project.speed=1;d.project.events[0]=(struct pt_event){428,0,PT_NOTE_PERIOD,1,0,0,0,0};d.project.events[12].effect=15;
+    o.rate=48000;o.bits=24;o.tracks=1;o.gain_q16=65536;o.tick_limit=100;o.frame_limit=100000;
+    baseline=allocations;
+    assert(!pt_amigus_wavetable_cache_current(NULL));
+    for(mode=0;mode<18;++mode) {
+        pt_sampler_init(&sampler,&a,1024*1024);song_bind(f,&bridge,&owner,bus,&sampler,&d.project);
+        /* Initial/untrusted PCM still goes through the full validator. */
+        data[0]=8388608;
+        assert(!pt_sampler_wavetable_sync(&bridge));
+        assert(pt_wavetable_song_begin(&owner,&o,&format,&a,&report,&song)==PT_WAVETABLE_SONG_STALE && !song);
+        assert(!owner.song_owner && allocations==baseline && !f->writes);data[0]=257;
+        assert(pt_wavetable_song_begin(&owner,&o,&format,&a,&report,&song)==PT_WAVETABLE_SONG_PREPARING);
+        {VALIDATIONS_SAVE;
+            assert(pt_wavetable_song_next(song,&interval)==PT_WAVETABLE_SONG_PREPARING);
+            assert(pt_wavetable_song_consume(song,1)==PT_WAVETABLE_SONG_PREPARING);
+            assert(pt_wavetable_song_complete(song)==PT_WAVETABLE_SONG_PREPARING);
+            VALIDATIONS_UNCHANGED;
+        }
+        saved_bridge=bridge;saved_project=d.project;*replacement=f->cache;reservation_copy=f->reservation;
+        switch(mode) {
+        case 1:owner.bridge=&saved_bridge;break;
+        case 2:bridge.sampler=NULL;break;
+        case 3:bridge.project=NULL;break;
+        case 4:bridge.table=NULL;break;
+        case 5:++bridge.count;break;
+        case 6:++bridge.generation;break;
+        case 7:++bridge.version;break;
+        case 8:bridge.backend=replacement;break;
+        case 9:f->cache.reservation=&reservation_copy;break;
+        case 10:f->healthy=0;break;
+        case 11:f->cache.closing=1;break;
+        case 12:f->cache.faulted=1;break;
+        case 13:f->reservation.reserved=0;break;
+        case 14:f->reservation.access=0;break;
+        case 15:f->reservation.resource=PT_AMIGUS_PCM;break;
+        case 16:d.project.samples=NULL;break;
+        case 17:++d.project.sample_count;break;
+        }
+        {VALIDATIONS_SAVE;
+            result=pt_wavetable_song_prepare(song,&report);
+            if(mode){VALIDATIONS_UNCHANGED;}
+            assert(!f->writes && !bus->starts && !bus->stops && !bus->controls && !bus->restores);
+        }
+        if(mode) {
+            assert(result==PT_WAVETABLE_SONG_STALE && !owner.song_owner && !sampler.bytes);
+            assert(pt_wavetable_song_next(song,&interval)==PT_WAVETABLE_SONG_STALE);
+            owner.bridge=&bridge;bridge=saved_bridge;d.project=saved_project;
+            f->cache.reservation=&f->reservation;f->cache.closing=0;f->healthy=1;
+            f->reservation.reserved=f->reservation.access=1;f->reservation.resource=PT_AMIGUS_WAVETABLE;
+            if(mode==10 || (mode>=12 && mode<=15))assert(!pt_amigus_wavetable_cache_current(&f->cache));
+        } else {
+            steps=0;
+            do{result=pt_wavetable_song_prepare(song,&report);assert(++steps<1000);}while(result==PT_WAVETABLE_SONG_PREPARING);
+            assert(result==PT_WAVETABLE_SONG_OK && sampler.bytes);
+            /* Promotion changes the descriptor, not the master content/revision.
+             * Selection remains a harmless UI cursor. Ready guards and silent
+             * consumption do not call the full project validator. */
+            d.project.channels.selected=1;
+            {VALIDATIONS_SAVE;
+                assert(pt_wavetable_song_prepare(song,&report)==PT_WAVETABLE_SONG_OK);
+                assert(pt_wavetable_song_next(song,&interval)==PT_WAVETABLE_SONG_OK);
+                if(interval.frames)assert(pt_wavetable_song_consume(song,1)==PT_WAVETABLE_SONG_OK);
+                VALIDATIONS_UNCHANGED;
+            }
+        }
+        assert(pt_wavetable_song_close(&song));
+        assert(pt_wavetable_voices_close(&owner) && pt_amigus_reservation_close(&f->reservation));
+        assert(!pt_amigus_wavetable_cache_current(&f->cache));
+        pt_sampler_release(&sampler);d.project.samples[0].pcm=(struct pt_pcm){data,8,8,48000,1,24};
+        assert(allocations==baseline && data[0]==257 && data[1]==-513);
+    }
+    pt_document_release(&d);free(replacement);free(bus);free(f);assert(!allocations);
+    puts("WAVETABLE GUARD PASS: invalid initial PCM, immutable revision/identity guards, lost ownership latch, promotion and cancellation; injected only");
+}
+#undef VALIDATIONS_SAVE
+#undef VALIDATIONS_UNCHANGED

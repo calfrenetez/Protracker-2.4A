@@ -6,6 +6,8 @@ struct pt_wavetable_song {
     struct pt_render_sequence *sequence;struct pt_render_plan plan;struct pt_render_snapshot resume;
     struct pt_sample_version *pin[PT_PROJECT_SAMPLES];
     struct pt_project snapshot;struct pt_sampler *sampler;struct pt_project *project;
+    struct pt_sampler_wavetable *bridge;struct pt_amigus_wavetable_cache *backend;
+    struct pt_amigus_reservation *reservation;
     struct pt_playback_format format;struct pt_render_interval interval;
     uint64_t version;unsigned generation,rate,pending,closing,done,range,restored,ready,pin_slot;
     uint32_t remaining;enum pt_wavetable_song_result failure;uint8_t staging[256];
@@ -48,7 +50,12 @@ static enum pt_wavetable_song_result current(struct pt_wavetable_song *s)
     /* Channel selection is a UI cursor, not a playback setting. */
     s->snapshot.channels.selected=s->project->channels.selected;
     if(s->sampler->generation!=s->generation || memcmp(s->project,&s->snapshot,sizeof(s->snapshot)) ||
-       s->voices->song_owner!=s || !s->voices->bridge || !pt_sampler_wavetable_sync(s->voices->bridge) || s->voices->bridge->version!=s->version)
+       s->voices->song_owner!=s || s->voices->bridge!=s->bridge ||
+       s->bridge->sampler!=s->sampler || s->bridge->project!=s->project ||
+       s->bridge->table!=s->project->samples || s->bridge->count!=s->project->sample_count ||
+       s->bridge->generation!=s->generation || s->bridge->version!=s->version ||
+       s->bridge->backend!=s->backend || s->backend->reservation!=s->reservation ||
+       !pt_amigus_wavetable_cache_current(s->backend))
         return fail(s,PT_WAVETABLE_SONG_STALE);
     return PT_WAVETABLE_SONG_OK;
 }
@@ -70,6 +77,7 @@ enum pt_wavetable_song_result pt_wavetable_song_begin(struct pt_wavetable_voices
     memset(s,0,sizeof(*s));s->allocator=*a;s->voices=v;s->format=*f;s->rate=o->rate;s->range=o->row_range;
     s->preflight=work;s->report=*report;
     s->sampler=v->bridge->sampler;s->project=v->bridge->project;s->generation=s->sampler->generation;
+    s->bridge=v->bridge;s->backend=s->bridge->backend;s->reservation=s->backend->reservation;
     s->version=v->bridge->version;memcpy(&s->snapshot,s->project,sizeof(s->snapshot));
     v->song_owner=s;*out=s;return PT_WAVETABLE_SONG_PREPARING;
 }

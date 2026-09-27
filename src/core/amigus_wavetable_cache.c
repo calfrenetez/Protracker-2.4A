@@ -6,9 +6,11 @@ static int owns(void *context)
     struct pt_amigus_wavetable_cache *c=context;
     struct pt_amigus_reservation *r=c->reservation;
     if(!c->faulted && r && r->opened && r->reserved && r->access &&
-       r->resource==PT_AMIGUS_WAVETABLE && c->owned(c->context))return 1;
+       r->resource==PT_AMIGUS_WAVETABLE && c->owned && c->owned(c->context))return 1;
     c->faulted=1;return 0;
 }
+int pt_amigus_wavetable_cache_current(struct pt_amigus_wavetable_cache *c)
+{return c && c->reservation && !c->closing && owns(c);}
 static int write_word(void *context,unsigned reg,uint32_t word)
 {
     struct pt_amigus_wavetable_cache *c=context;

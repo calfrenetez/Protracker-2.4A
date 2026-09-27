@@ -21,6 +21,10 @@ struct pt_amigus_wavetable_cache {
 int pt_amigus_wavetable_cache_attach(struct pt_amigus_wavetable_cache *,
     struct pt_amigus_reservation *,uint32_t base,uint32_t capacity,size_t budget,
     void *,int (*owned)(void *),int (*write32)(void *,unsigned,uint32_t));
+/* Ownership-only check for an already-attached immutable session. Calls the
+ * synchronous ownership predicate and latches ownership loss; no PCM validation,
+ * sample-cache mutation, allocation or bus writes. Does not validate a sample/lease. */
+int pt_amigus_wavetable_cache_current(struct pt_amigus_wavetable_cache *);
 enum pt_cache_result pt_amigus_wavetable_cache_acquire(struct pt_amigus_wavetable_cache *,
     const struct pt_pcm *,uint32_t identity,uint64_t version,const struct pt_playback_format *,
     uint8_t *staging,size_t capacity,struct pt_cache_lease *);

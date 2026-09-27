@@ -1,5 +1,6 @@
 #include <string.h>
 #include "amigus_wavetable_cache.h"
+#include "amigus_voice_plan.h"
 static int owns(void *context)
 {
     struct pt_amigus_wavetable_cache *c=context;
@@ -19,7 +20,7 @@ int pt_amigus_wavetable_cache_attach(struct pt_amigus_wavetable_cache *c,
 {
     if(!c || c->reservation || !r || !r->opened || !r->reserved || r->access ||
        r->resource!=PT_AMIGUS_WAVETABLE || !owned || !write32 || !budget ||
-       !capacity || (base&3) || (capacity&3) || capacity>UINT32_MAX-base)return 0;
+       !capacity || (base&3) || (capacity&3) || base>=PT_AMIGUS_RAM_ADDRESS_SPACE || capacity>PT_AMIGUS_RAM_ADDRESS_SPACE-base)return 0;
     if(!owned(context) || !pt_amigus_reservation_begin(r))return 0;
     memset(c,0,sizeof(*c));c->reservation=r;c->context=context;c->owned=owned;c->write32=write32;
     pt_amigus_sample_ram_init(&c->arena,base,capacity,c,owns,write_word);

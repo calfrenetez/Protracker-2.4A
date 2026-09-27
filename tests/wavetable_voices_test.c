@@ -1,17 +1,21 @@
 #define PT_SAMPLER_WAVETABLE_NATIVE
 #include "sampler_wavetable_test.c"
 #include "../src/editor/wavetable_voices.h"
+#define PT_VOICE_PLAN_NATIVE
+#include "amigus_voice_plan_test.c"
 struct voice_bus {
     struct fixture *f;struct pt_wavetable_voices *owner;
     int start_result,stop_result[PT_WAVETABLE_VOICES];
     unsigned starts,stops,active[PT_WAVETABLE_VOICES];
     uint32_t address[PT_WAVETABLE_VOICES];uint8_t held[PT_WAVETABLE_VOICES][8];
 };
-static int voice_start(void *ctx,unsigned id,uint32_t address,uint32_t bytes,const struct pt_playback_format *format)
+static int voice_start(void *ctx,unsigned id,const struct pt_amigus_voice_plan *plan)
 {
     struct voice_bus *b=ctx;struct pt_wavetable_voice *v=&b->owner->voice[id];
+    uint32_t address=plan->start;
     assert(!b->active[id] && v->held && v->uncertain);
-    assert(pt_cache_data(&b->f->cache.cache,v->lease));assert(bytes==8 && format->bits==16);
+    assert(pt_cache_data(&b->f->cache.cache,v->lease));assert(plan->end_exclusive-address==8 && (plan->control&1));
+    assert(plan->rate==0x10000000 && plan->left==32768 && plan->right==32768);
     b->active[id]=1;b->address[id]=address;memcpy(b->held[id],b->f->ram+address,8);++b->starts;
     return b->start_result;
 }
@@ -24,7 +28,7 @@ static int voice_stop(void *ctx,unsigned id)
     return b->stop_result[id];
 }
 static enum pt_voice_result trigger(struct pt_wavetable_voices *v,unsigned id)
-{uint8_t staging[3];struct pt_playback_format format={16,0,0,0};return pt_wavetable_voices_trigger(v,id,0,&format,staging,sizeof(staging));}
+{uint8_t staging[3];struct pt_playback_format format={16,0,0,0};struct pt_amigus_voice_request request={48000,1,0,64,128};return pt_wavetable_voices_trigger(v,id,0,&format,&request,staging,sizeof(staging));}
 static unsigned pins(struct fixture *f)
 {unsigned i,n=0;for(i=0;i<PT_CACHE_SLOTS;++i)n+=f->cache.cache.entry[i].pins;return n;}
 static int voices_fixture_main(void)
@@ -36,7 +40,7 @@ static int voices_fixture_main(void)
     struct pt_pattern_history history;struct pt_pattern_command commands[8];struct pt_event_change changes[8];
     int32_t data[]={257,-513,1025,-2049};struct pt_cache_lease lease;unsigned i,n;
     uint8_t *saved;size_t size,used;
-    assert(f && bus);memset(bus,0,sizeof(*bus));assert(sampler_fixture_main()==0);init(f,PT_AMIGUS_WAVETABLE);
+    assert(f && bus);memset(bus,0,sizeof(*bus));assert(sampler_fixture_main()==0);assert(voice_plan_fixture_main()==0);init(f,PT_AMIGUS_WAVETABLE);
     assert(pt_amigus_wavetable_cache_attach(&f->cache,&f->reservation,16,112,112,f,bus_owned,bus_write));
     pt_document_init(&document,&allocator);assert(pt_document_new(&document,4,SIZE_MAX)==PT_PROJECT_OK);
     document.project.samples[0].pcm=(struct pt_pcm){data,4,4,48000,1,24};
@@ -54,6 +58,16 @@ static int voices_fixture_main(void)
     assert(trigger(&voices,16)==PT_VOICE_REFUSED && pt_wavetable_voices_stop(&voices,16)==-1);
     for(i=0;i<PT_WAVETABLE_VOICES;++i)assert(trigger(&voices,i)==PT_VOICE_ACTIVE);
     assert(pins(f)==16 && f->cache.cache.bytes==8);exact_save(&document.project,saved,size);
+    /* Invalid commands refuse before cache upload or old-voice stop. */
+    {
+        struct pt_playback_format bad={24,0,0,0};
+        struct pt_amigus_voice_request request={48000,1,0,64,128};
+        uint8_t staging[4];unsigned writes=f->writes,stops=bus->stops;
+        assert(pt_wavetable_voices_trigger(&voices,0,0,&bad,&request,staging,4)==PT_VOICE_REFUSED);
+        bad.bits=16;request.pan=257;
+        assert(pt_wavetable_voices_trigger(&voices,0,0,&bad,&request,staging,4)==PT_VOICE_REFUSED);
+        assert(f->writes==writes && bus->stops==stops && pins(f)==16);
+    }
     /* Retrigger takes a second pin before confirmed stop, even on a cache HIT. */
     assert(trigger(&voices,0)==PT_VOICE_ACTIVE && pins(f)==16 && bus->stops==1);
     bus->stop_result[0]=0;n=bus->starts;

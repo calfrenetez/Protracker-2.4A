@@ -21,7 +21,7 @@ def main():
         inputs=list(dict.fromkeys(inputs+sources[1:]))
         if args.voices:
             inputs[0]='tests/native_exec_wavetable_voices_test.c'
-            inputs+=['src/editor/wavetable_voices.c']
+            inputs+=['src/editor/wavetable_voices.c','src/core/amigus_voice_plan.c']
     flags=['-std=c99','-m68000','-msoft-float','-mcrt=nix20','-Os','-Wall','-Wextra','-Werror','-Isrc/core','-Ivendor/amigus-sdk',*compiler_safety_flags(args.cc)]
     out=ROOT/'build/dev'/('PTExecWavetableVoicesTest' if args.voices else 'PTExecSamplerWavetableTest' if args.sampler else 'PTExecAmiGusWavetableCacheTest' if args.owner else 'PTExecAmiGusSampleRamTest');out.parent.mkdir(parents=True,exist_ok=True)
     subprocess.run([args.cc,*flags,*inputs,'-o',str(out)],cwd=ROOT,check=True)

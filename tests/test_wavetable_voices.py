@@ -7,5 +7,5 @@ class WavetableVoices(unittest.TestCase):
     def test_voice_lease_lifetime(self):
         with tempfile.TemporaryDirectory() as tmp:
             exe=str(Path(tmp)/'test')
-            subprocess.run(['cc','-std=c99','-O1','-g','-Wall','-Wextra','-Werror','-fsanitize=address,undefined','-Isrc/core','tests/wavetable_voices_test.c','src/editor/wavetable_voices.c',*EXTRA,*SOURCES[1:],'-o',exe],cwd=ROOT,check=True)
+            subprocess.run(['cc','-std=c99','-O1','-g','-Wall','-Wextra','-Werror','-fsanitize=address,undefined','-Isrc/core','tests/wavetable_voices_test.c','src/editor/wavetable_voices.c','src/core/amigus_voice_plan.c',*EXTRA,*SOURCES[1:],'-o',exe],cwd=ROOT,check=True)
             subprocess.run([exe],check=True)

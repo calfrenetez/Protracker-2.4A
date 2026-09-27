@@ -40,7 +40,13 @@ static void allocation(struct fixture *f)
     init(f,40);before=f->arena;
     assert(!pt_amigus_sample_ram_init(&f->arena,1,40,f,owned,write32));
     assert(!pt_amigus_sample_ram_init(&f->arena,0xfffffffc,8,f,owned,write32));
+    assert(!pt_amigus_sample_ram_init(&f->arena,0x02000000,4,f,owned,write32));
+    assert(!pt_amigus_sample_ram_init(&f->arena,0x01fffffc,8,f,owned,write32));
     assert(!memcmp(&before,&f->arena,sizeof(before)));
+    assert(pt_amigus_sample_ram_init(&f->arena,0x01fffffc,4,f,owned,write32));
+    a=pt_amigus_sample_ram_allocate(&f->arena,4);assert(a && ((struct pt_amigus_ram_block *)a)->address==0x01fffffc);
+    assert(!pt_amigus_sample_ram_allocate(&f->arena,1));
+    pt_amigus_sample_ram_release(&f->arena,a,4);init(f,40);
     assert(!pt_amigus_sample_ram_allocate(&f->arena,0));
     assert(!pt_amigus_sample_ram_allocate(&f->arena,SIZE_MAX));
     a=pt_amigus_sample_ram_allocate(&f->arena,9);b=pt_amigus_sample_ram_allocate(&f->arena,9);

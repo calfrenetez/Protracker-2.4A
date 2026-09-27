@@ -1,5 +1,6 @@
 #include <string.h>
 #include "amigus_sample_ram.h"
+#include "amigus_voice_plan.h"
 /* Pinned public wavetable map: byte address port 0x14, data port 0x10.
  * Independent implementation; no utility upload code is incorporated. */
 #define RAM_ADDRESS 0x14
@@ -8,7 +9,7 @@ int pt_amigus_sample_ram_init(struct pt_amigus_sample_ram *a,uint32_t base,
     uint32_t capacity,void *ctx,int (*owned)(void *),int (*write32)(void *,unsigned,uint32_t))
 {
     if(!a || !capacity || (base&3) || (capacity&3) ||
-       capacity>UINT32_MAX-base || !owned || !write32)return 0;
+       base>=PT_AMIGUS_RAM_ADDRESS_SPACE || capacity>PT_AMIGUS_RAM_ADDRESS_SPACE-base || !owned || !write32)return 0;
     memset(a,0,sizeof(*a));a->base=base;a->capacity=capacity;
     a->context=ctx;a->owned=owned;a->write32=write32;return 1;
 }

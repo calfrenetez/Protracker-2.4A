@@ -1,0 +1,31 @@
+{
+  "commit": "d8c9a0429f41cd5f3dbadae34ef438e45c9c3718",
+  "sources": [
+    {
+      "path": "Documentation/AmiGUS/AmiGUS_Register_Map.xlsx",
+      "sheet": "Hagen Register",
+      "range": "B88:F117",
+      "sha256": "b3eba3e122ab1a5349a09f26c3f10e9de87016825f0f269bdd83d82478abef1c"
+    },
+    {
+      "path": "Documentation/AmiGUS_mini/AmiGUS_mini_Register_Map.xlsx",
+      "sheet": "SHIVA Register",
+      "range": "B89:F118",
+      "sha256": "a30e0cdf966b293c0d5411604a62442a3db98ca4973d2b6bf12961cdc988dd51"
+    },
+    {
+      "path": "Software/Tools/PlayWAVetable/PlayWAVetable.c",
+      "sheet": null,
+      "range": "lines126-179",
+      "sha256": "0d78fde90953da6a5a472f89c0eab034c5c0c0dd77d6d68b8da409d2588b06cc"
+    }
+  ],
+  "observations": [
+    "Both maps expose upload address bits24..2 and voice pointer bits24..1. These register widths do not detect installed or free RAM.",
+    "Both maps assign resolution, loop, interpolation and byte order to control bits0..3. Playback enable is bit15.",
+    "Rate register has31 significant bits; utility converts frames/sec to floor(rate*2^30/192000). Planner conservatively caps supported rate at192000.",
+    "Envelope-enable discrepancy: maps specify bit5, utility defines bit4. Planner never enables envelope modulation.",
+    "Maps name loop/end pointers without specifying inclusive/exclusive endpoint semantics or a memory-release fence after stop. Planner emits a software half-open bound; hardware lowering and stop proof remain unimplemented."
+  ],
+  "scope": "Read-only extraction; independently implemented validation, no copied utility routines."
+}

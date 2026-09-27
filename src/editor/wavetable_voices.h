@@ -1,6 +1,7 @@
 #ifndef PT_WAVETABLE_VOICES_H
 #define PT_WAVETABLE_VOICES_H
 #include "sampler_wavetable.h"
+#include "../core/amigus_voice_plan.h"
 #define PT_WAVETABLE_VOICES 16
 /* Injected driver contract, not hardware dispatch. start returns 1 only when
  * started; every other result is uncertain and requires a confirmed stop.
@@ -10,8 +11,7 @@
  * Voice IDs must be exclusively owned and initially stopped. */
 struct pt_wavetable_voice_api {
     void *context;
-    int (*start)(void *,unsigned,uint32_t address,uint32_t bytes,
-                 const struct pt_playback_format *);
+    int (*start)(void *,unsigned,const struct pt_amigus_voice_plan *);
     int (*stop)(void *,unsigned);
 };
 struct pt_wavetable_voice {
@@ -32,12 +32,15 @@ enum pt_voice_result {
  * Do not directly close/unpin/use the bridge while this owner is bound. */
 int pt_wavetable_voices_bind(struct pt_wavetable_voices *,struct pt_sampler_wavetable *,
     const struct pt_wavetable_voice_api *);
-/* Acquire before stopping old voice: acquisition failure preserves old playback.
+/* Validate metadata/rate/range before acquiring; resolve a bounded plan before
+ * stopping old voice. Callback must consume/copy the plan synchronously.
+ * Acquire before stopping old voice: acquisition failure preserves old playback.
  * A pending/failed stop keeps the old lease and drops the unstarted candidate.
  * No trigger is queued: retry explicitly with the current master after stop.
  * Any invoked start owns its lease until confirmed stop, even on start failure. */
 enum pt_voice_result pt_wavetable_voices_trigger(struct pt_wavetable_voices *,unsigned voice,
-    unsigned sample,const struct pt_playback_format *,uint8_t *staging,size_t capacity);
+    unsigned sample,const struct pt_playback_format *,const struct pt_amigus_voice_request *,
+    uint8_t *staging,size_t capacity);
 /* One stop attempt; returns 1 confirmed/idle, 0 pending, -1 failure/invalid. */
 int pt_wavetable_voices_stop(struct pt_wavetable_voices *,unsigned voice);
 /* Blocks new triggers, attempts each held voice once, detaches bridge only after

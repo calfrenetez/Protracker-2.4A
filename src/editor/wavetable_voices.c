@@ -20,13 +20,25 @@ int pt_wavetable_voices_stop(struct pt_wavetable_voices *v,unsigned id)
     memset(voice,0,sizeof(*voice));return 1;
 }
 enum pt_voice_result pt_wavetable_voices_trigger(struct pt_wavetable_voices *v,unsigned id,
-    unsigned sample,const struct pt_playback_format *format,uint8_t *staging,size_t capacity)
+    unsigned sample,const struct pt_playback_format *format,const struct pt_amigus_voice_request *request,
+    uint8_t *staging,size_t capacity)
 {
     struct pt_cache_lease candidate;struct pt_wavetable_voice *voice;
     enum pt_cache_result loaded;uint32_t address,bytes;int stopped;
+    struct pt_amigus_voice_plan plan;const struct pt_sample *source;uint64_t logical;
     if(!v || !v->bridge || v->closing || id>=PT_WAVETABLE_VOICES || !format)return PT_VOICE_REFUSED;
+    if(!pt_sampler_wavetable_sync(v->bridge) || sample>=v->bridge->count)return PT_VOICE_REFUSED;
+    source=v->bridge->project->samples+sample;
+    logical=(uint64_t)source->pcm.frames*(format->bits/8);
+    if(logical>UINT32_MAX || !pt_amigus_voice_plan_prepare(source,format,request,0,(uint32_t)logical,&plan))return PT_VOICE_REFUSED;
     loaded=pt_sampler_wavetable_acquire(v->bridge,sample,format,staging,capacity,&candidate);
     if(loaded!=PT_CACHE_LOAD && loaded!=PT_CACHE_HIT)return PT_VOICE_REFUSED;
+    /* Promotion can replace sample table contents; fetch current metadata. */
+    source=v->bridge->project->samples+sample;
+    if(!pt_sampler_wavetable_location(v->bridge,candidate,&address,&bytes) ||
+       !pt_amigus_voice_plan_prepare(source,format,request,address,bytes,&plan)) {
+        pt_sampler_wavetable_unpin(v->bridge,candidate);return PT_VOICE_REFUSED;
+    }
     stopped=pt_wavetable_voices_stop(v,id);
     if(stopped!=1) {
         pt_sampler_wavetable_unpin(v->bridge,candidate);
@@ -36,7 +48,7 @@ enum pt_voice_result pt_wavetable_voices_trigger(struct pt_wavetable_voices *v,u
         pt_sampler_wavetable_unpin(v->bridge,candidate);return PT_VOICE_REFUSED;
     }
     voice=&v->voice[id];voice->lease=candidate;voice->held=1;voice->uncertain=1;
-    if(v->api.start(v->api.context,id,address,bytes,format)==1) {
+    if(v->api.start(v->api.context,id,&plan)==1) {
         voice->uncertain=0;return PT_VOICE_ACTIVE;
     }
     return PT_VOICE_UNCERTAIN;

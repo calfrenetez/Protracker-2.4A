@@ -61,7 +61,9 @@ static void refusal(struct fixture *f)
     init(f,PT_AMIGUS_WAVETABLE);
     assert(!pt_amigus_wavetable_cache_attach(&f->cache,&f->reservation,17,32,32,f,bus_owned,bus_write));
     assert(!pt_amigus_wavetable_cache_attach(&f->cache,&f->reservation,0xfffffffc,8,8,f,bus_owned,bus_write));
-    assert(!f->reservation.access && !f->writes);
+    assert(!pt_amigus_wavetable_cache_attach(&f->cache,&f->reservation,0x02000000,4,4,f,bus_owned,bus_write));
+    assert(!pt_amigus_wavetable_cache_attach(&f->cache,&f->reservation,0x01fffffc,8,8,f,bus_owned,bus_write));
+    assert(!f->reservation.access && !f->writes && !f->cache.reservation);
     f->healthy=0;assert(!pt_amigus_wavetable_cache_attach(&f->cache,&f->reservation,16,32,32,f,bus_owned,bus_write));
     assert(!f->reservation.access);f->healthy=1;
     assert(pt_amigus_reservation_begin(&f->reservation));

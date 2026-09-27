@@ -17,7 +17,9 @@ observations are retained in `evidence/enhanced-editor/amigus-sample-ram/`.
 
 The caller supplies a verified, exclusively owned byte-address range. There is no
 assumed RAM capacity or hard-coded division into stereo banks. Initialization
-refuses an empty, unaligned or wrapping region without I/O. A fixed 32-descriptor
+refuses an empty, unaligned or wrapping region without I/O. It also refuses any
+region outside the25-bit address port documented by both pinned register maps;
+that width limit does not prove the supplied region is installed or available. A fixed 32-descriptor
 arena uses first-fit allocation, rounded to four bytes. Addresses do not move.
 Fragmentation or descriptor exhaustion refuses allocation; the existing cache
 may evict unpinned entries and retry. Rounding consumes physical capacity even
@@ -206,3 +208,52 @@ allocations with zero final owned bytes and budget refusal without Chip fallback
 Completion, all4DMAoff, exact owned cleanup and explicit release were verified.
 See `evidence/enhanced-editor/wavetable-voices/`. The native editor still does not
 instantiate this owner or an AmiGUS output adapter.
+
+## Voice command preparation and register-width audit
+
+`amigus_voice_plan` prepares a value-only command for the lease owner's injected
+start callback. It performs no I/O, source reads or allocation. The project and
+cache retain responsibility for validated master contents. The caller supplies
+resolved pitch as a rational frame rate, resolved volume0..64, linear pan0..256
+and an offset measured in source frames. Finetune, velocity and tracker effects
+must be resolved by the sequencer before this call; the planner does not apply
+those a second time.
+
+The planner supports one selected source channel in an8/16-bit playback cache,
+with no implicit stereo downmix, Paula padding or source precision change. It
+checks exact logical cache length, all byte/frame arithmetic and register-width
+bounds. Forward loops and one-shot playback are supported in the software plan;
+ping-pong/crossfade are refused. All start/loop/end pointers must be even, including
+8-bit playback: odd offsets/loop bounds or odd one-shot lengths are refused,
+never rounded or silently padded. Changing the explicit playback representation
+to16-bit can represent odd frame positions without altering the master.
+
+Playback rate is floor(numerator *2^30 /(192000 *denominator)), using64-bit integer
+arithmetic; zero, quantized-zero and rates above192000 are refused. Left/right
+levels use rounded linear balance with65535 as full scale. This balance is a
+software mixing policy; hardware loudness has not been measured. Control flags
+encode resolution, forward loop, interpolation,16-bit byte order and start only.
+Invalid input leaves the output unchanged. Trigger preflight rejects invalid
+metadata before upload; the acquired address-specific plan is checked before
+stopping existing playback. The callback receives the prepared plan while its
+sample lease is held.
+
+Register facts come from the pinned SDK's `AmiGUS_Register_Map.xlsx`, sheet
+`Hagen Register`, B88:F117, and mini map `SHIVA Register`, B89:F118. Both specify
+25-bit sample addresses and even voice pointers. The utility supplies the rate
+formula. Source hashes and exact cell references are retained in
+`evidence/enhanced-editor/amigus-voice-plan/source-observations.json`.
+
+The maps do not explain inclusive/exclusive end-pointer behavior or establish
+that control-bit readback fences all sample-memory reads. The plan therefore
+keeps an explicit HALF-OPEN software end bound; mapping it to an actual end
+register requires further protocol verification. The utility and maps also
+conflict on envelope-enable bit4 versus bit5; this code enables neither. Native
+start/stop dispatch stays disabled. No physical capacity or playback acceptance
+is claimed from this preparation layer.
+
+The preparation layer passes11 related AmiGUS host fixtures (5.692s), the final
+three wavetable integration fixtures (8.238s), and shared030 run
+`render-files-1790475765845129000` (RC0 within90s). The native fixture returns all
+40 Fast allocations; no Chip fallback. Completion/all4DMAoff/exact cleanup and
+explicit release verified. Evidence is in `evidence/enhanced-editor/amigus-voice-plan/`.

@@ -1849,3 +1849,22 @@ or command path, and does not establish a real-time deadline or native card outp
 Host instrumentation counts real validator calls without production hooks; the
 native fixture checks invalid input, identity replacement, ownership loss and
 cleanup with injected callbacks. Evidence: `evidence/enhanced-editor/wavetable-guard/`.
+
+### Validated immutable renderer voices
+
+Ordinary offline renders and opaque immutable sequences now reuse their initial
+full project/PCM validation when creating voices, starting independent segments or
+changing repeat sources. Private renderer entry points skip only the sample-value
+scan: shared descriptor format/rate/capacity checks, playback bounds and alias
+checks still run with the same atomic refusal behavior. No sample/cache ownership,
+pin or editable master is created by this path. All sources must remain alive and
+immutable through completion, including progress/output callbacks.
+
+Public voice and command APIs retain full sample-value validation. Mutable EFx
+playback uses the original validating path; it cannot opt into this shortcut.
+Host instrumentation proves ordinary sequence command completion does not call
+full PCM validation. Tests compare exact 8/16/24-bit loop/segment/handoff results,
+check bounded failures and ensure invalid public/private-mutable inputs still fail.
+Initial/reset validation, source promotion copies, Studio source acquisition and
+backend conversion remain synchronous. No native timing or device claim follows.
+See `evidence/enhanced-editor/validated-render-voices/`.

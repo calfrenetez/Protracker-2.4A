@@ -28,6 +28,9 @@ typedef int (*pt_render_sink)(void *,const struct pt_pcm *,uint64_t offset);
  * stops before the first subsequent fresh row outside it. Retained/delayed
  * rows and loops wholly within range remain. Unreached range is refused.
  * Tick/frame budgets include pre-roll; report frames/clips count only output.
+ * Project, source PCM and options remain immutable throughout each call,
+ * including progress/sink callbacks. Full initial validation permits private
+ * voice setup to reuse validated sample values while retaining bounded checks.
  * Preflight still validates the whole selected pattern.
  * Preflight rejects selected MIDI routes, MIDI pitches,
  * crossfade metadata, unsupported active cross-sample/slice instrument-only handoffs,

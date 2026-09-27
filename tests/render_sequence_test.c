@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "studio_plan.h"
+#ifdef PT_TEST_PCM_VALIDATION_COUNT
+extern unsigned pt_test_pcm_validations;
+#endif
 static int32_t reference[300000];static unsigned used,owned,pins,refuse;
 static struct pt_pcm master;
 static void *allocate(void *c,size_t n) {(void)c;if(refuse)return NULL;++owned;return malloc(n);}
@@ -12,7 +15,7 @@ static int acquire(void *c,uint64_t key,uint64_t version,struct pt_pcm *p,void *
 static void unpin(void *c,void *p) {(void)c;assert(p==&master && pins);--pins;}
 static int capture(void *c,const struct pt_pcm *p,uint64_t offset)
 {(void)c;assert(offset*2==used && used+p->frames*2<=300000);memcpy(reference+used,p->data,p->frames*2*sizeof(int32_t));used+=p->frames*2;return 1;}
-static int private_tick(void *context,const struct pt_flow *flow){(void)context;(void)flow;return 1;}
+static int private_tick(void *context,const struct pt_flow *flow){(void)flow;if(context)*(int32_t *)context=128;return 1;}
 static int sequence_fixture_main(void)
 {
     struct pt_project p={0};struct pt_sample sample;struct pt_event events[64*4];uint16_t orders[1]={0};
@@ -71,7 +74,15 @@ static int sequence_fixture_main(void)
                 assert(pt_render_sequence_consume(s,n)==PT_RENDER_OK);remaining-=n;
                 {struct pt_render_snapshot refused=sentinel;assert(pt_render_sequence_snapshot(s,&refused)==PT_RENDER_INVALID && !memcmp(&refused,&sentinel,sizeof(refused)));}
             }
-            assert(pt_render_sequence_complete(s,&plan)==PT_RENDER_OK);
+            {
+#ifdef PT_TEST_PCM_VALIDATION_COUNT
+                unsigned scans=pt_test_pcm_validations;
+#endif
+                assert(pt_render_sequence_complete(s,&plan)==PT_RENDER_OK);
+#ifdef PT_TEST_PCM_VALIDATION_COUNT
+                assert(pt_test_pcm_validations==scans);
+#endif
+            }
             {struct pt_render_snapshot refused=sentinel;assert(pt_render_sequence_snapshot(s,&refused)==PT_RENDER_INVALID && !memcmp(&refused,&sentinel,sizeof(refused)));}
             assert(pt_studio_dispatch(mix,4,&plan,&binding,1)==PT_PCM_OK);
         } while(!interval.end);
@@ -112,6 +123,27 @@ static int sequence_fixture_main(void)
         memset(&sentinel,0x5a,sizeof(sentinel));snapshot=sentinel;
         assert(pt_render_sequence_next(s,&interval)==PT_RENDER_OK);
         assert(pt_render_sequence_snapshot(s,&snapshot)==PT_RENDER_INVALID && !memcmp(&snapshot,&sentinel,sizeof(snapshot)));
+        pt_render_sequence_close(s);assert(!owned);
+    }
+    { /* Mutable/private sources cannot use the immutable validation shortcut. */
+        struct pt_project playback=p;struct pt_sample private_sample=sample;
+        int32_t private_data[8]={0,1,2,3,4,5,6,7},out_data[512];
+        struct pt_render_sequence *s=NULL;struct pt_render_interval interval;
+        struct pt_render_mutation mutation={&playback,private_data,private_tick};
+        enum pt_render_result result;unsigned ticks=0;
+        playback.samples=&private_sample;private_sample.pcm.data=private_data;
+        assert(pt_render_mutating_sequence_open(&p,&o,&a,&s,&mutation)==PT_RENDER_OK);
+        do {
+            uint32_t remaining;
+            assert(pt_render_sequence_next(s,&interval)==PT_RENDER_OK && !interval.end);remaining=interval.frames;
+            while(remaining) {
+                uint32_t n=remaining>256?256:remaining;
+                struct pt_pcm out={out_data,512,n,48000,2,24};
+                assert(pt_render_mutating_sequence_read(s,&out)==PT_RENDER_OK);remaining-=n;
+            }
+            result=pt_render_mutating_sequence_complete(s);assert(++ticks<10);
+        }while(result==PT_RENDER_OK);
+        assert(result==PT_RENDER_SAMPLE && private_data[0]==128 && pcm[0]==0);
         pt_render_sequence_close(s);assert(!owned);
     }
     puts("SEQUENCE PASS: exact snapshot/resume audio, fractional loop phase, tempo/delay, pre-roll, partition invariance, protocol and allocation refusal");return 0;

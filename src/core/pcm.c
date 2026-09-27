@@ -1,5 +1,5 @@
 #include <limits.h>
-#include "pcm.h"
+#include "pcm_internal.h"
 
 static int32_t maximum(unsigned int bits) { return ((int32_t)1 << (bits - 1)) - 1; }
 static int32_t clip(int64_t value, unsigned int bits)
@@ -7,20 +7,11 @@ static int32_t clip(int64_t value, unsigned int bits)
     int32_t high = maximum(bits), low = -high - 1;
     return value > high ? high : value < low ? low : (int32_t)value;
 }
-static enum pt_pcm_result shape(const struct pt_pcm *pcm)
-{
-    if (!pcm || (pcm->bits != 8 && pcm->bits != 16 && pcm->bits != 24) ||
-        (pcm->channels != 1 && pcm->channels != 2) || !pcm->rate || pcm->rate > 192000 ||
-        (pcm->frames && !pcm->data)) return PT_PCM_INVALID;
-    if (pcm->frames > pcm->capacity / pcm->channels ||
-        pcm->frames > SIZE_MAX / sizeof(int32_t) / pcm->channels) return PT_PCM_CAPACITY;
-    return PT_PCM_OK;
-}
 enum pt_pcm_result pt_pcm_validate(const struct pt_pcm *pcm)
 {
     size_t i, count;
     int32_t high, low;
-    enum pt_pcm_result result = shape(pcm);
+    enum pt_pcm_result result = pt_pcm_shape(pcm);
     if (result != PT_PCM_OK) return result;
     high = maximum(pcm->bits); low = -high - 1;
     count = (size_t)pcm->frames * pcm->channels;
@@ -89,7 +80,7 @@ enum pt_pcm_result pt_pcm_convert(const struct pt_pcm *source, struct pt_pcm *de
     size_t i, count;
     enum pt_pcm_result result = pt_pcm_validate(source);
     if (result != PT_PCM_OK) return result;
-    result = shape(dest);
+    result = pt_pcm_shape(dest);
     if (result != PT_PCM_OK) return result;
     if (dest->frames != source->frames || dest->channels != source->channels || dest->rate != source->rate)
         return PT_PCM_INVALID;
@@ -109,7 +100,7 @@ enum pt_pcm_result pt_pcm_convert(const struct pt_pcm *source, struct pt_pcm *de
 enum pt_pcm_result pt_pcm_resampled_frames(const struct pt_pcm *source, uint32_t rate, uint32_t *out)
 {
     uint64_t frames;
-    enum pt_pcm_result result = shape(source);
+    enum pt_pcm_result result = pt_pcm_shape(source);
     if (result != PT_PCM_OK) return result;
     if (!out || !rate || rate > 192000) return PT_PCM_INVALID;
     frames = ((uint64_t)source->frames * rate + source->rate - 1) / source->rate;
@@ -123,7 +114,7 @@ enum pt_pcm_result pt_pcm_resample(const struct pt_pcm *source, struct pt_pcm *d
     unsigned int channel;
     enum pt_pcm_result result = pt_pcm_validate(source);
     if (result != PT_PCM_OK) return result;
-    result = shape(dest);
+    result = pt_pcm_shape(dest);
     if (result != PT_PCM_OK) return result;
     result = pt_pcm_resampled_frames(source, dest->rate, &needed);
     if (result != PT_PCM_OK) return result;

@@ -42,7 +42,9 @@ enum pt_render_result pt_render_commands_plan(const struct pt_project *,const st
     struct pt_render_command_state *,struct pt_render_plan *);
 /* Allocator-owned incremental audited sequence. Open measures/preflights the
  * complete immutable project before publishing a session; exactly one allocation.
- * Options are copied; project and all source storage must outlive close.
+ * Options are copied; project and all source storage must outlive close and
+ * remain immutable. Voice setup reuses initial sample-value validation; bounded
+ * descriptor/range/alias checks remain. Public command APIs still scan values.
  * Protocol: next -> consume successful audio blocks (1..256, exactly span.frames)
  * -> complete (apply returned plan before next). Even zero-frame/end spans require
  * complete. emit=0 means pre-roll: mix/discard but still consume. end!=0 marks the

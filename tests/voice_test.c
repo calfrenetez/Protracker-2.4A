@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "voice.h"
+#include "voice_validated_cases.h"
 #define Q (1ULL<<32)
 static void sequence(struct pt_voice *v,const int32_t *values,unsigned n)
 {
@@ -102,4 +103,4 @@ static void partition(void)
     for(i=0;i<2048;++i) {unsigned byte;for(byte=0;byte<4;++byte)hash=(hash^((uint32_t)a[i]>>(byte*8)&255))*16777619UL;}
     printf("VOICE partition PASS hash=%08lx clips=%lu\n",(unsigned long)hash,(unsigned long)clipped);
 }
-int main(void) {traversal();mixing();partition();return 0;}
+int main(void) {validated_voice_fixture();traversal();mixing();partition();return 0;}

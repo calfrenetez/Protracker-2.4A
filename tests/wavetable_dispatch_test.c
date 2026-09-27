@@ -3,6 +3,7 @@
 #include "../src/editor/wavetable_dispatch.h"
 #include "../src/core/amigus_render_voice.h"
 #include <limits.h>
+#include "voice_validated_cases.h"
 struct preflight_alloc {unsigned calls,fail_at;};
 static void *preflight_allocate(void *ctx,size_t bytes)
 {
@@ -275,7 +276,7 @@ static int dispatch_fixture_main(void)
     struct pt_render_options options={0};struct pt_playback_format format={16,0,0,0};uint8_t staging[3];
     int32_t data[]={257,-513,1025,-2049,17,31,47,63};unsigned ch,i,starts,stops,controls;uint64_t version;
     uint8_t *saved;size_t size,used;
-    assert(f && bus);assert(voices_fixture_main()==0);restore_preflight_fixture();restore_dispatch_fixture();preflight_fixture();song_fixture();range_song_fixture();preparing_song_fixture();song_guard_fixture();memset(bus,0,sizeof(*bus));
+    assert(f && bus);validated_voice_fixture();assert(voices_fixture_main()==0);restore_preflight_fixture();restore_dispatch_fixture();preflight_fixture();song_fixture();range_song_fixture();preparing_song_fixture();song_guard_fixture();memset(bus,0,sizeof(*bus));
     init(f,PT_AMIGUS_WAVETABLE);assert(pt_amigus_wavetable_cache_attach(&f->cache,&f->reservation,16,112,112,f,bus_owned,bus_write));
     pt_document_init(&d,&allocator);assert(pt_document_new(&d,16,SIZE_MAX)==PT_PROJECT_OK);
     d.project.samples[0].pcm=(struct pt_pcm){data,8,8,48000,1,24};d.project.samples[0].volume=64;

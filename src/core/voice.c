@@ -1,4 +1,5 @@
-#include "voice.h"
+#include "voice_internal.h"
+#include "pcm_internal.h"
 #include <string.h>
 static int overlap(const void *a,size_t an,const void *b,size_t bn)
 {
@@ -9,9 +10,9 @@ static int overlap(const void *a,size_t an,const void *b,size_t bn)
 }
 static int64_t rounded(int64_t n,int64_t divisor)
 {return n<0?-((-n+divisor/2)/divisor):(n+divisor/2)/divisor;}
-enum pt_pcm_result pt_voice_init(struct pt_voice *v,const struct pt_pcm *p,
+static enum pt_pcm_result init(struct pt_voice *v,const struct pt_pcm *p,
                                 uint32_t start,uint32_t end,enum pt_voice_loop loop,
-                                uint32_t a,uint32_t b,uint64_t step,unsigned linear)
+                                uint32_t a,uint32_t b,uint64_t step,unsigned linear,unsigned validated)
 {
     struct pt_voice next;enum pt_pcm_result result;
     if(!v || !p || !step || linear>1 || start>end || end>p->frames ||
@@ -19,7 +20,7 @@ enum pt_pcm_result pt_voice_init(struct pt_voice *v,const struct pt_pcm *p,
         return PT_PCM_INVALID;
     if(loop==PT_VOICE_ONCE) {if(a || b)return PT_PCM_INVALID;}
     else if(a<start || b>end || a>=b || (loop==PT_VOICE_PINGPONG && b-a>0x80000000UL))return PT_PCM_INVALID;
-    result=pt_pcm_validate(p);if(result!=PT_PCM_OK)return result;
+    result=validated?pt_pcm_shape(p):pt_pcm_validate(p);if(result!=PT_PCM_OK)return result;
     if(overlap(v,sizeof(*v),p,sizeof(*p)) || overlap(v,sizeof(*v),p->data,(size_t)p->frames*p->channels*sizeof(*p->data)))return PT_PCM_ALIAS;
     memset(&next,0,sizeof(next));next.pcm=p;next.start=start;next.end=end;next.step=step;
     next.loop=(uint8_t)loop;next.loop_start=a;next.loop_end=b;next.linear=(uint8_t)linear;
@@ -31,24 +32,36 @@ enum pt_pcm_result pt_voice_init(struct pt_voice *v,const struct pt_pcm *p,
     }
     *v=next;return PT_PCM_OK;
 }
-enum pt_pcm_result pt_voice_init_segment(struct pt_voice *v,const struct pt_pcm *p,
+enum pt_pcm_result pt_voice_init(struct pt_voice *v,const struct pt_pcm *p,
+    uint32_t start,uint32_t end,enum pt_voice_loop loop,uint32_t a,uint32_t b,uint64_t step,unsigned linear)
+{return init(v,p,start,end,loop,a,b,step,linear,0);}
+enum pt_pcm_result pt_voice_init_validated(struct pt_voice *v,const struct pt_pcm *p,
+    uint32_t start,uint32_t end,enum pt_voice_loop loop,uint32_t a,uint32_t b,uint64_t step,unsigned linear)
+{return init(v,p,start,end,loop,a,b,step,linear,1);}
+static enum pt_pcm_result segment(struct pt_voice *v,const struct pt_pcm *p,
                                         uint32_t start,uint32_t end,uint32_t a,uint32_t b,
-                                        uint64_t step,unsigned linear)
+                                        uint64_t step,unsigned linear,unsigned validated)
 {
     enum pt_pcm_result result;
     if(!p || start>=end || end>p->frames)return PT_PCM_INVALID;
-    result=pt_voice_init(v,p,0,p->frames,PT_VOICE_FORWARD,a,b,step,linear);
+    result=init(v,p,0,p->frames,PT_VOICE_FORWARD,a,b,step,linear,validated);
     if(result!=PT_PCM_OK)return result;
     v->start=start;v->end=end;v->phase=(uint64_t)start<<32;v->looped=0;v->segment=1;
     return PT_PCM_OK;
 }
-enum pt_pcm_result pt_voice_set_repeat_source(struct pt_voice *v,const struct pt_pcm *p,uint32_t start,uint32_t end)
+enum pt_pcm_result pt_voice_init_segment(struct pt_voice *v,const struct pt_pcm *p,
+    uint32_t start,uint32_t end,uint32_t a,uint32_t b,uint64_t step,unsigned linear)
+{return segment(v,p,start,end,a,b,step,linear,0);}
+enum pt_pcm_result pt_voice_init_segment_validated(struct pt_voice *v,const struct pt_pcm *p,
+    uint32_t start,uint32_t end,uint32_t a,uint32_t b,uint64_t step,unsigned linear)
+{return segment(v,p,start,end,a,b,step,linear,1);}
+static enum pt_pcm_result repeat_source(struct pt_voice *v,const struct pt_pcm *p,uint32_t start,uint32_t end,unsigned validated)
 {
     struct pt_voice next;enum pt_pcm_result result;
     if(!v || !v->pcm || !v->active || v->loop==PT_VOICE_PINGPONG ||
        !p || start>=end || end>p->frames || p->bits!=v->pcm->bits ||
        p->channels!=v->pcm->channels || p->rate!=v->pcm->rate)return PT_PCM_INVALID;
-    result=pt_pcm_validate(p);if(result!=PT_PCM_OK)return result;
+    result=validated?pt_pcm_shape(p):pt_pcm_validate(p);if(result!=PT_PCM_OK)return result;
     if(overlap(v,sizeof(*v),p,sizeof(*p)) || overlap(v,sizeof(*v),p->data,(size_t)p->frames*p->channels*sizeof(*p->data)))return PT_PCM_ALIAS;
     next=*v;
     if(next.looped) {
@@ -59,6 +72,10 @@ enum pt_pcm_result pt_voice_set_repeat_source(struct pt_voice *v,const struct pt
     next.loop_start=start;next.loop_end=end;next.cycle=(uint64_t)(end-start)<<32;
     *v=next;return PT_PCM_OK;
 }
+enum pt_pcm_result pt_voice_set_repeat_source(struct pt_voice *v,const struct pt_pcm *p,uint32_t start,uint32_t end)
+{return repeat_source(v,p,start,end,0);}
+enum pt_pcm_result pt_voice_set_repeat_source_validated(struct pt_voice *v,const struct pt_pcm *p,uint32_t start,uint32_t end)
+{return repeat_source(v,p,start,end,1);}
 enum pt_pcm_result pt_voice_set_repeat(struct pt_voice *v,uint32_t start,uint32_t end)
 {return pt_voice_set_repeat_source(v,v?v->pcm:NULL,start,end);}
 static void advance(struct pt_voice *v)

@@ -6,7 +6,7 @@ static int owns(void *context)
     struct pt_amigus_wavetable_cache *c=context;
     struct pt_amigus_reservation *r=c->reservation;
     if(!c->faulted && r && r->opened && r->reserved && r->access &&
-       r->resource==PT_AMIGUS_WAVETABLE && c->owned && c->owned(c->context))return 1;
+       r->resource==PT_AMIGUS_WAVETABLE && c->owned && c->owned(c->context)==1)return 1;
     c->faulted=1;return 0;
 }
 int pt_amigus_wavetable_cache_current(struct pt_amigus_wavetable_cache *c)
@@ -14,7 +14,7 @@ int pt_amigus_wavetable_cache_current(struct pt_amigus_wavetable_cache *c)
 static int write_word(void *context,unsigned reg,uint32_t word)
 {
     struct pt_amigus_wavetable_cache *c=context;
-    return owns(c) && c->write32(c->context,reg,word);
+    return owns(c) && c->write32(c->context,reg,word)==1;
 }
 int pt_amigus_wavetable_cache_attach(struct pt_amigus_wavetable_cache *c,
     struct pt_amigus_reservation *r,uint32_t base,uint32_t capacity,size_t budget,
@@ -23,7 +23,7 @@ int pt_amigus_wavetable_cache_attach(struct pt_amigus_wavetable_cache *c,
     if(!c || c->reservation || !r || !r->opened || !r->reserved || r->access ||
        r->resource!=PT_AMIGUS_WAVETABLE || !owned || !write32 || !budget ||
        !capacity || (base&3) || (capacity&3) || base>=PT_AMIGUS_RAM_ADDRESS_SPACE || capacity>PT_AMIGUS_RAM_ADDRESS_SPACE-base)return 0;
-    if(!owned(context) || !pt_amigus_reservation_begin(r))return 0;
+    if(owned(context)!=1 || !pt_amigus_reservation_begin(r))return 0;
     memset(c,0,sizeof(*c));c->reservation=r;c->context=context;c->owned=owned;c->write32=write32;
     pt_amigus_sample_ram_init(&c->arena,base,capacity,c,owns,write_word);
     pt_cache_init(&c->cache,&c->arena,pt_amigus_sample_ram_allocate,pt_amigus_sample_ram_release,budget);

@@ -9,7 +9,8 @@ struct fixture {
     struct pt_sample_cache cache;
     uint8_t memory[2048];
     uint32_t address;
-    unsigned owned,calls,fail;
+    unsigned calls,fail;
+    int owned,fail_result;
 };
 static int owned(void *p) {return ((struct fixture *)p)->owned;}
 static int write32(void *p,unsigned reg,uint32_t value)
@@ -21,7 +22,7 @@ static int write32(void *p,unsigned reg,uint32_t value)
         for(i=0;i<4;++i)f->memory[f->address+i]=(uint8_t)(value>>(24-8*i));
     }
     /* Failure may follow a partial/complete bus write. Resource stays unpublished. */
-    return !f->fail || f->calls!=f->fail;
+    return f->fail && f->calls==f->fail?f->fail_result:1;
 }
 static void init(struct fixture *f,unsigned capacity)
 {
@@ -161,9 +162,32 @@ static void failures(struct fixture *f)
     f->owned=0;assert(!pt_amigus_sample_ram_write(&f->arena,p,1,bytes,1));assert(!f->calls);
     pt_amigus_sample_ram_release(&f->arena,p,257);assert(!live(f));
 }
+static void invalid_callback_results(struct fixture *f)
+{
+    const int statuses[]={-1,2};unsigned k,fail;
+    struct pt_cache_lease out;uint32_t address,size;void *p;uint8_t data[4]={1,2,3,4};
+    for(k=0;k<2;++k) {
+        init(f,32);f->owned=statuses[k];
+        assert(!pt_amigus_sample_ram_allocate(&f->arena,4) && !f->calls);
+        f->owned=1;p=pt_amigus_sample_ram_allocate(&f->arena,4);assert(p);
+        assert(pt_amigus_sample_ram_write(&f->arena,p,0,data,4));
+        f->owned=statuses[k];address=size=999;
+        assert(!pt_amigus_sample_ram_location(&f->arena,p,&address,&size));
+        assert(address==999 && size==999);
+        assert(!pt_amigus_sample_ram_write(&f->arena,p,0,data,4));
+        assert(f->calls==2);pt_amigus_sample_ram_release(&f->arena,p,4);
+        for(fail=1;fail<=2;++fail) {
+            init(f,32);f->fail=fail;f->fail_result=statuses[k];out=(struct pt_cache_lease){31,999};
+            assert(load(f,1,1,4,&out)==PT_CACHE_TRANSFER);
+            assert(out.serial==999 && f->calls==fail && !live(f) && !f->cache.bytes);
+            f->fail=0;assert(load(f,1,1,4,&out)==PT_CACHE_LOAD);
+            assert(pt_cache_unpin(&f->cache,out) && pt_cache_clear(&f->cache));
+        }
+    }
+}
 int main(void)
 {
     struct fixture *f=malloc(sizeof(*f));assert(f);
-    allocation(f);conversion(f);lifecycle(f);tails(f);failures(f);free(f);
+    allocation(f);conversion(f);lifecycle(f);tails(f);failures(f);invalid_callback_results(f);free(f);
     puts("AMIGUS SAMPLE RAM PASS: bounded addresses, exact uploads, pinned eviction, failures and master preservation; fake bus only");return 0;
 }

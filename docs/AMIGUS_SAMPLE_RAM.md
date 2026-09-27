@@ -515,3 +515,13 @@ promoted unchanged masters can remain sampler-owned; no source downgrade occurs.
 Static/sync PCM scans and sample copies remain synchronous. Native PLAY, real-time
 scheduling and physical card semantics remain unverified. See
 `evidence/enhanced-editor/wavetable-preparing-owner/`.
+
+## Exact callback success and failure publication
+
+The sample-RAM arena and reservation-backed cache require exactly1 from ownership
+and synchronous write callbacks. Negative errors and unexpected positive values
+fail closed; an upload with either address or data write failure cannot publish a
+cache lease. Ownership faults remain latched, and active leases keep the access
+reservation until unpinned. Host regressions and native fake-bus fixtures pass;
+see `evidence/enhanced-editor/amigus-callback-status/`. This does not qualify real
+card access, interrupts, output or physical memory capacity.

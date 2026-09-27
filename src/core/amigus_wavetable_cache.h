@@ -17,6 +17,7 @@ struct pt_amigus_wavetable_cache {
 };
 /* Requires an open WAVETABLE reservation with no existing access lease.
  * Region/capacity and synchronous bus semantics require independent verification.
+ * owned/write32 require exactly1 for success; other values fail closed.
  * Attach performs no bus I/O; failures leave reservation access unchanged. */
 int pt_amigus_wavetable_cache_attach(struct pt_amigus_wavetable_cache *,
     struct pt_amigus_reservation *,uint32_t base,uint32_t capacity,size_t budget,

@@ -86,7 +86,7 @@ def main():
             result['recent_prefix_verified_before_launch']=True
             guest.launch.write_text('\n'.join(['FailAt 21','Stack 65536','CD '+guest.device+run.name,
                 'PT24GEdit input.mod saved.ptg >editor.log','Echo $RC >editor.rc',
-                'Execute restore-env','Echo done >'+guest.device+run.name+'/done'])+'\n')
+                'Execute restore-env','FailAt 1','CD RAM:','Echo done >'+guest.device+run.name+'/done'])+'\n')
             require_running_guest(guest,out,"before-launch")
             launched=True;guest.start()
             frame('status=READY -');key(0x11,True,True)

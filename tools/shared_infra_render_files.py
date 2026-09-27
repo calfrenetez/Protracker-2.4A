@@ -230,7 +230,8 @@ def main():
                 if args.invert_stem_cli:command='PT24GRender source.mod stems --tracks 3 --stems --invert-budget 100000 --gain 65536'
                 commands=['FailAt 21','Stack 65536','CD '+guest.device+run.name+'/stem-cli',
                           command+' >test.log','Echo $RC >test.rc',command+' >repeat.log','Echo $RC >repeat.rc']
-            commands+=['Echo done >'+guest.device+run.name+'/done']
+            # Release the guest current-directory lock before host cleanup.
+            commands+=['FailAt 1','CD RAM:','Echo done >'+guest.device+run.name+'/done']
             require_running_guest(guest,out,'before-launch')
             guest.launch.write_text('\n'.join(commands)+'\n');guest.start()
             # The cumulative editor-wavetable fixture includes native timer and

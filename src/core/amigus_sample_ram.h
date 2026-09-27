@@ -8,6 +8,8 @@
  * no reentry/interrupt use. Retain an exclusive WAVETABLE reservation for the
  * ENTIRE cache lifetime. On ownership loss, stop all voices and clear all cached
  * handles before reopening; reacquiring ownership cannot validate old RAM.
+ * owned and write32 return exactly1 for confirmed success; every other result
+ * is failure, including negative errors and unexpected positive values.
  * write32 is synchronous: even failure must leave no deferred host-memory or
  * DMA reference. Native MMIO, bus atomicity and reservation binding are absent.
  */

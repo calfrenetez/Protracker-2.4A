@@ -45,7 +45,7 @@ def main():
                                               'PTPlaybackUploadTest >upload.log', 'Echo $RC >upload.rc',
                                               'PTPreviewPCMTest >preview.log', 'Echo $RC >preview.rc',
                                               'PTPaulaTest input.mod >paula.log', 'Echo $RC >paula.rc',
-                                              'Echo done >done']) + '\n')
+                                              'FailAt 1','CD RAM:','Echo done >'+guest.device+run.name+'/done']) + '\n')
             require_running_guest(guest, out, "before-launch")
             guest.start()
             end = time.monotonic() + 60

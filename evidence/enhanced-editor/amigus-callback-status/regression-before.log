@@ -1,0 +1,19 @@
+test_bounded_device_cache (test_amigus_sample_ram.AmiGusSampleRam.test_bounded_device_cache) ... Assertion failed: (!pt_amigus_sample_ram_allocate(&f->arena,4) && !f->calls), function invalid_callback_results, file amigus_sample_ram_test.c, line 171.
+ERROR
+
+======================================================================
+ERROR: test_bounded_device_cache (test_amigus_sample_ram.AmiGusSampleRam.test_bounded_device_cache)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/test_amigus_sample_ram.py", line 10, in test_bounded_device_cache
+    subprocess.run([exe],check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpep1_7kgs/test']' died with <Signals.SIGABRT: 6>.
+
+----------------------------------------------------------------------
+Ran 1 test in 0.539s
+
+FAILED (errors=1)

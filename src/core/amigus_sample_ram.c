@@ -23,7 +23,7 @@ void *pt_amigus_sample_ram_allocate(void *ctx,size_t bytes)
 {
     struct pt_amigus_sample_ram *a=ctx;unsigned i,pass,slot=PT_CACHE_SLOTS;
     uint32_t needed,start;
-    if(!a || !a->owned || !a->owned(a->context) || !bytes ||
+    if(!a || !a->owned || a->owned(a->context)!=1 || !bytes ||
        bytes>UINT32_MAX-3)return NULL;
     needed=((uint32_t)bytes+3)&~(uint32_t)3;
     if(needed>a->capacity)return NULL;
@@ -54,9 +54,9 @@ void pt_amigus_sample_ram_release(void *ctx,void *resource,size_t bytes)
 }
 static int store(struct pt_amigus_sample_ram *a,struct pt_amigus_ram_block *b,uint32_t offset)
 {
-    if(!a->owned(a->context) ||
-       !a->write32(a->context,RAM_ADDRESS,b->address+offset) ||
-       !a->write32(a->context,RAM_DATA,b->word)) {b->failed=1;return 0;}
+    if(a->owned(a->context)!=1 ||
+       a->write32(a->context,RAM_ADDRESS,b->address+offset)!=1 ||
+       a->write32(a->context,RAM_DATA,b->word)!=1) {b->failed=1;return 0;}
     b->word=0;b->fill=0;return 1;
 }
 int pt_amigus_sample_ram_write(void *ctx,void *resource,size_t offset,const uint8_t *data,size_t bytes)
@@ -65,7 +65,7 @@ int pt_amigus_sample_ram_write(void *ctx,void *resource,size_t offset,const uint
     if(!b)return 0;
     if(offset==0) {b->written=0;b->word=0;b->fill=0;b->failed=0;}
     if(b->failed || !data || !bytes || bytes>PT_AMIGUS_RAM_WRITE_MAX ||
-       offset!=b->written || bytes>b->bytes-b->written || !a->owned(a->context)) {
+       offset!=b->written || bytes>b->bytes-b->written || a->owned(a->context)!=1) {
         b->failed=1;return 0;
     }
     for(i=0;i<bytes;++i) {
@@ -81,7 +81,7 @@ int pt_amigus_sample_ram_write(void *ctx,void *resource,size_t offset,const uint
 }
 int pt_amigus_sample_ram_location(const struct pt_amigus_sample_ram *a,const void *resource,uint32_t *address,uint32_t *bytes)
 {
-    unsigned i;if(!a || !address || !bytes || !a->owned || !a->owned(a->context))return 0;
+    unsigned i;if(!a || !address || !bytes || !a->owned || a->owned(a->context)!=1)return 0;
     for(i=0;i<PT_CACHE_SLOTS;++i)if(resource==a->block+i) {
         const struct pt_amigus_ram_block *b=a->block+i;
         if(!b->reserved || b->written!=b->bytes || b->fill || b->failed)return 0;

@@ -1,5 +1,7 @@
 #include "native_exec_memory.h"
 #include "../src/native/eclock.h"
+#include "../src/native/eclock_alarm.h"
+#include <proto/dos.h>
 #define malloc native_allocate
 #define free native_release
 #define PT_EDITOR_WAVETABLE_NATIVE
@@ -27,4 +29,30 @@ static void native_eclock_fixture(void)
     }
     puts("NATIVE ECLOCK PASS: real timer.device reads, stable frequency, monotonic64-bit counter, checked frame/deadline conversion, repeated close/reopen; no timer requests or audio output");
 }
-int main(void){int result;native_memory_start();native_eclock_fixture();result=editor_wavetable_fixture();native_memory_finish();return result;}
+static void native_alarm_fixture(void)
+{
+    struct pt_native_eclock clock={0};struct pt_native_alarm alarm={0};
+    uint64_t now,deadline;uint32_t frequency,initial;unsigned i,guard;enum pt_alarm_result r;
+    assert(pt_native_eclock_open(&clock) && pt_native_alarm_open(&alarm));
+    assert(pt_native_eclock_read(&clock,&now,&initial) && initial>=500);
+    for(i=0;i<4;++i) {
+        assert(pt_native_eclock_read(&clock,&now,&frequency) && frequency==initial);
+        deadline=now+frequency/500;
+        assert(pt_native_alarm_arm(&alarm,deadline)==PT_ALARM_WAITING && pt_native_alarm_signal(&alarm));
+        /* Coarse diagnostic polling deliberately includes caller latency.
+           Never interpret these observations as precise wakeup performance. */
+        guard=0;
+        do {Delay(1);r=pt_native_alarm_poll(&alarm);assert(++guard<=8);}while(r==PT_ALARM_WAITING);
+        assert(r==PT_ALARM_READY && !alarm.pending && !pt_native_alarm_signal(&alarm));
+        assert(pt_native_eclock_read(&clock,&now,&frequency) && frequency==initial && now>=deadline);
+        printf("NATIVE ALARM observed late_ticks=%lu frequency=%lu poll=Delay(1) case=%u\n",(unsigned long)(now-deadline),(unsigned long)frequency,i);
+    }
+    assert(pt_native_eclock_read(&clock,&now,&frequency));
+    assert(pt_native_alarm_arm(&alarm,now+(uint64_t)frequency*10)==PT_ALARM_WAITING);
+    guard=0;while(!pt_native_alarm_close(&alarm)){assert(++guard<=8);Delay(1);}
+    assert(!alarm.port && !alarm.request && !alarm.opened && !alarm.pending);
+    assert(pt_native_alarm_close(&alarm) && pt_native_alarm_open(&alarm) && pt_native_alarm_close(&alarm));
+    pt_native_eclock_close(&clock);
+    puts("NATIVE ALARM PASS: absolute EClock alarm completion, reply collection/reuse, future-alarm cancel/close and reopen; coarse diagnostic polling, no audio or timing qualification");
+}
+int main(void){int result;native_memory_start();native_eclock_fixture();native_alarm_fixture();result=editor_wavetable_fixture();native_memory_finish();return result;}

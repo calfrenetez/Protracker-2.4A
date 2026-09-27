@@ -2322,3 +2322,27 @@ the [AmigaOS timer device documentation](https://wiki.amigaos.net/wiki/Timer_Dev
 describes the64-bit EClock count/frequency and distinguishes clock measurement
 from timer requests. Modern interface examples on that page are not copied into
 the classic68k implementation.
+
+### Native absolute alarm ownership
+
+The separate `eclock_alarm.h` owner opens UNIT_WAITECLOCK with its own port/request.
+It accepts absolute64-bit counter deadlines, refuses already-reached deadlines
+before submission and refuses rearm while pending, closing or poisoned. A normal
+arm returns WAITING; poll calls WaitIO only after CheckIO confirms completion,
+collecting each reply exactly once. The signal mask lets a future caller combine
+notification with its own event loop, without a wait inside this owner.
+
+Cancel requests AbortIO at most once and then polls for confirmed completion.
+A pending close returns0, retaining the device, request and port; the caller must
+retain the owner and retry later. No pending request is reused or freed, even if
+abort completion is delayed. Device errors poison rearm until close/reopen. A
+completed request can be cancelled/collected without abort, and clean close is
+idempotent. Partial-open failures unwind. All operations are owner-thread only.
+
+The native diagnostic uses four2ms absolute alarms with explicit Delay(1) polling,
+logs observed lateness INCLUDING that coarse caller delay, then cancels a10second
+future alarm and checks close/reopen. These are lifecycle/completion observations,
+not intrinsic timer precision or playback deadline acceptance. No song is attached
+to the alarm and no audio callback is invoked. Actual-time resampling and the
+existing strict deadline gate remain required before future playback integration.
+The separate read-only EClock owner's request remains permanently unsubmitted.

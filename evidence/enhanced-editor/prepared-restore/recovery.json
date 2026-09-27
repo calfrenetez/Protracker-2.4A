@@ -1,0 +1,12 @@
+{
+  "original_launch_passed": false,
+  "user_approved_resume": true,
+  "completed_original_pending_launch": true,
+  "returncode": 0,
+  "candidate_sha256": "ec2e3528a688184b23f3e3b0f9318bd4ba563aed64812b473e1bc77f07ed2ce9",
+  "fast_allocations": 1255,
+  "status": "OK\tPaused=false\tConfig=autosave",
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0",
+  "run_files_cleaned": true,
+  "scope": "recovered native assertions and exact cleanup; not a successful original launch or hardware/realtime acceptance"
+}

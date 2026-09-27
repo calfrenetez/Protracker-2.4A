@@ -2473,3 +2473,13 @@ with no test log/RC/done. Emulator acceptance remains pending and a recovery hol
 retains exact staging/launcher. The runner now refuses a paused/unknown guest
 before staging and rechecks before launch; host guard tests pass. No automatic
 resume/reset/retry was performed. Evidence: `evidence/enhanced-editor/prepared-restore/`.
+
+
+The user subsequently approved a single resume of the existing shared guest.
+Live CPU/memory/disk/share identity and exact staged candidate were verified;
+the original pending launch completed with RC0 and all native restore/editor,
+timer/watchdog and ownership assertions passing.1255Fast allocations ended with
+zero owned bytes; all four DMA channels were off. Exact archived run/launcher
+cleanup and independent absence were verified, and the shared environment was
+explicitly released. The original launch timeout remains recorded as failed;
+recovered execution is separate evidence and does not qualify realtime/card output.

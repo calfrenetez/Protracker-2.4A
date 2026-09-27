@@ -1,0 +1,10 @@
+{
+  "status": "OK\tPaused=true\tConfig=autosave",
+  "cpu": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+  "memory": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB",
+  "mounts": "OK\tunit0=hdf:/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/disks/Workbench-test.hdf\tunit1=dir:/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev",
+  "files": [
+    "editor-wavetable/PTExecEditorWavetableTest"
+  ],
+  "candidate_sha256": "ec2e3528a688184b23f3e3b0f9318bd4ba563aed64812b473e1bc77f07ed2ce9"
+}

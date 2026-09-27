@@ -1,0 +1,18 @@
+{
+  "scope": "explicitly user-approved resume of existing pending launch only; no reset/relaunch/cleanup",
+  "mounts": "OK\tunit0=hdf:/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/disks/Workbench-test.hdf\tunit1=dir:/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev",
+  "memory": "OK\tchip=2048KB\tfast=0KB\tbogo=0KB\tz3=131072KB\trtg=0KB",
+  "before": "OK\tPaused=true\tConfig=autosave",
+  "resume": "OK",
+  "after": "OK\tPaused=false\tConfig=autosave",
+  "done": true,
+  "files": [
+    "done",
+    "editor-wavetable/test.log",
+    "editor-wavetable/test.rc",
+    "editor-wavetable/PTExecEditorWavetableTest"
+  ],
+  "status": "OK\tPaused=false\tConfig=autosave",
+  "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=416\tsndbuf_status=0",
+  "rc": "0"
+}

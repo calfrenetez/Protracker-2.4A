@@ -42,3 +42,6 @@ enum pt_wavetable_song_result pt_editor_wavetable_next_step(struct pt_editor_wav
 {return attached(o)?pt_wavetable_song_next_step(o->song,out):PT_WAVETABLE_SONG_INVALID;}
 enum pt_wavetable_song_result pt_editor_wavetable_complete_step(struct pt_editor_wavetable *o)
 {return attached(o)?pt_wavetable_song_complete_step(o->song):PT_WAVETABLE_SONG_INVALID;}
+
+enum pt_wavetable_song_result pt_editor_wavetable_prefetch(struct pt_editor_wavetable *o)
+{return attached(o)?pt_wavetable_song_prefetch(o->song):PT_WAVETABLE_SONG_INVALID;}

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "studio_plan.h"
+#include "render_lookahead.h"
 #ifdef PT_TEST_PCM_VALIDATION_COUNT
 extern unsigned pt_test_pcm_validations;
 #endif
@@ -35,6 +36,7 @@ static int sequence_fixture_main(void)
     o.rate=48000;o.bits=24;o.tracks=1;o.gain_q16=65536;o.tick_limit=1000;o.frame_limit=1000000;
     for(loop=PT_LOOP_FORWARD;loop<=PT_LOOP_PINGPONG;++loop)for(mode=0;mode<3;++mode)for(partition=1;partition<=256;partition=partition==1?17:partition==17?256:257) {
         struct pt_render_sequence *s=NULL;struct pt_render_interval interval;struct pt_render_plan plan;
+        struct pt_render_lookahead *ahead=malloc(sizeof(*ahead));struct pt_render_plan predicted;assert(ahead);memset(ahead,0,sizeof(*ahead));
         struct pt_studio_mix *mix;struct pt_render_report report;unsigned emitted=0,snapshots=0,fractional=0;struct pt_render_snapshot snapshot,sentinel;
         sample.loop=(uint8_t)loop;o.include_lead_in=mode==1;o.pattern_only=o.row_range=mode==2;o.row_first=2;o.row_end=5;
         used=0;assert(pt_render_stream(&p,&o,capture,NULL,NULL,NULL,&report)==PT_RENDER_OK);
@@ -60,6 +62,23 @@ static int sequence_fixture_main(void)
             assert(pt_render_sequence_snapshot(NULL,&snapshot)==PT_RENDER_INVALID);
             assert(pt_render_sequence_snapshot(s,NULL)==PT_RENDER_INVALID);
             {struct pt_render_snapshot again;assert(pt_render_sequence_snapshot(s,&again)==PT_RENDER_OK && !memcmp(&snapshot,&again,sizeof(snapshot)));}
+            assert(pt_render_lookahead_begin(ahead,s)==PT_RENDER_OK);
+            {unsigned ready=0,steps=0;
+#ifdef PT_TEST_PCM_VALIDATION_COUNT
+                unsigned scans=pt_test_pcm_validations;
+#endif
+                memset(&predicted,0x5a,sizeof(predicted));
+                do {
+                    assert(pt_render_lookahead_step(ahead,partition,&predicted,&ready)==PT_RENDER_OK);++steps;
+                    if(!ready)assert(predicted.count==0x5a5a5a5aU);
+                }while(!ready);
+                assert(steps==(remaining+partition-1)/partition+1);
+#ifdef PT_TEST_PCM_VALIDATION_COUNT
+                assert(pt_test_pcm_validations==scans);
+#endif
+                assert(pt_render_sequence_snapshot(s,&snapshot)==PT_RENDER_OK); /* Preview did not consume. */
+                if(remaining)assert(pt_render_lookahead_commit(ahead)==PT_RENDER_INVALID);
+            }
             if(interval.emit && remaining) {++snapshots;if((uint32_t)snapshot.voice[0].phase)++fractional;}
             if(remaining)assert(pt_render_sequence_complete(s,&plan)==PT_RENDER_INVALID && !plan.count);
             assert(pt_render_sequence_consume(s,257)==PT_RENDER_INVALID);
@@ -78,7 +97,15 @@ static int sequence_fixture_main(void)
 #ifdef PT_TEST_PCM_VALIDATION_COUNT
                 unsigned scans=pt_test_pcm_validations;
 #endif
-                assert(pt_render_sequence_complete(s,&plan)==PT_RENDER_OK);
+                if(partition==1) {
+                    plan=predicted;assert(pt_render_lookahead_commit(ahead)==PT_RENDER_OK);
+                    assert(pt_render_lookahead_commit(ahead)==PT_RENDER_INVALID);
+                }else {
+                    assert(pt_render_sequence_complete(s,&plan)==PT_RENDER_OK);
+                    assert(plan.count==predicted.count && !memcmp(plan.action,predicted.action,plan.count*sizeof(*plan.action)));
+                    assert(pt_render_lookahead_commit(ahead)==PT_RENDER_INVALID);
+                    pt_render_lookahead_cancel(ahead);
+                }
 #ifdef PT_TEST_PCM_VALIDATION_COUNT
                 assert(pt_test_pcm_validations==scans);
 #endif
@@ -92,7 +119,7 @@ static int sequence_fixture_main(void)
         assert(pt_render_sequence_rewind(s)==PT_RENDER_INVALID);
         assert(pt_render_sequence_next(s,&interval)==PT_RENDER_OK);
         assert(pt_render_sequence_snapshot(s,&snapshot)==PT_RENDER_OK && !snapshot.voice[0].active);
-        pt_studio_close(mix);pt_render_sequence_close(s);assert(!owned && !pins);
+        pt_studio_close(mix);pt_render_sequence_close(s);free(ahead);assert(!owned && !pins);
     }
     { /* Cancellation during measurement; a late tick-budget error cannot publish. */
         struct pt_render_sequence *s=NULL;struct pt_render_interval span;unsigned ready=7;

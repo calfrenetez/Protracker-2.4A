@@ -52,8 +52,9 @@ static void editor_upload_cancel_fixture(struct pt_editor *e,struct pt_editor_wa
         do {
             enum pt_wavetable_song_result result;
             assert(pt_editor_wavetable_next_step(owner,&span)==PT_WAVETABLE_SONG_OK && !span.frames);
-            do{result=pt_editor_wavetable_complete_step(owner);}while(result==PT_WAVETABLE_SONG_UPLOADING && !pins(f));
+            do{result=mode?pt_editor_wavetable_prefetch(owner):pt_editor_wavetable_complete_step(owner);}while(result==PT_WAVETABLE_SONG_UPLOADING && !pins(f));
             assert(result==PT_WAVETABLE_SONG_OK || result==PT_WAVETABLE_SONG_UPLOADING);
+            if(mode && result==PT_WAVETABLE_SONG_OK)assert(pt_editor_wavetable_complete_step(owner)==PT_WAVETABLE_SONG_OK);
         }while(!pins(f));
         assert(pins(f)==1 && !f->writes);
         if(mode==0) {

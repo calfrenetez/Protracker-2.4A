@@ -510,9 +510,9 @@ static void uploading_song_fixture(void)
     d.project.events[1]=(struct pt_event){428,0,PT_NOTE_PERIOD,2,0,0,0,0};
     d.project.events[2]=d.project.events[0];d.project.events[4].effect=15;
     o.rate=48000;o.bits=24;o.tracks=7;o.gain_q16=65536;o.tick_limit=100;o.frame_limit=100000;
-    for(mode=0;mode<9;++mode) {
-        if(mode==8){d.project.events[4]=d.project.events[1];d.project.events[8].effect=15;}
-        for(i=0;i<2;++i){d.project.samples[i].pcm=(struct pt_pcm){data,300,300,48000,1,24};d.project.samples[i].volume=64;}
+    for(mode=0;mode<13;++mode) {
+        if(mode>=8){d.project.events[4]=d.project.events[1];d.project.events[4].instrument=mode==8?2:3;d.project.events[8].effect=15;}
+        for(i=0;i<(mode>=9?3U:2U);++i){d.project.samples[i].pcm=(struct pt_pcm){data,300,300,48000,1,24};d.project.samples[i].volume=64;}
         pt_sampler_init(&sampler,&a,1024*1024);song_bind(f,&bridge,&owner,bus,&sampler,&d.project);
         assert(pt_amigus_wavetable_cache_detach(&f->cache));
         assert(pt_amigus_wavetable_cache_attach(&f->cache,&f->reservation,16,4000,mode==5?600:4000,f,bus_owned,bus_write));
@@ -540,7 +540,7 @@ static void uploading_song_fixture(void)
             if(mode==0)d.project.channels.selected=step%4;
         }while(result==PT_WAVETABLE_SONG_UPLOADING);
         }
-        if(mode==0 || mode==8) {
+        if(mode==0 || mode>=8) {
             assert(result==PT_WAVETABLE_SONG_OK && step==10 && bus->starts==3 && pins(f)==3);
             assert(f->writes==600 && !memcmp(d.project.samples[0].pcm.data,data,sizeof(data)));
             if(mode==8) {
@@ -551,6 +551,41 @@ static void uploading_song_fixture(void)
                 bus->stop_result[1]=0;
                 assert(!pt_wavetable_song_close(&song) && song && pins(f)==1 && bus->starts==3 && f->writes==600);
                 bus->stop_result[1]=1;
+            }else if(mode>=9) {
+                unsigned guard=0,writes;struct pt_render_interval unchanged={123,4,5};
+                owner.api.start=dispatch_start;
+                assert(pt_wavetable_song_next_step(song,&span)==PT_WAVETABLE_SONG_OK && span.frames>1);
+                assert(pt_wavetable_song_consume(song,1)==PT_WAVETABLE_SONG_OK);--span.frames;
+                {VALIDATIONS_SAVE;PCM_SAVE;
+                do {
+                    writes=f->writes;result=pt_wavetable_song_prefetch(song);assert(++guard<30 && f->writes-writes<=128);
+                    assert(bus->starts==3 && !bus->restores);
+                    VALIDATIONS_UNCHANGED;PCM_UNCHANGED;
+                    if(result==PT_WAVETABLE_SONG_DEVICE)break;
+                    assert(pt_wavetable_song_complete_step(song)==PT_WAVETABLE_SONG_INVALID); /* Still ahead of live time. */
+                    if(mode==10 && f->writes>600)break;
+                    if(mode==12 && f->writes>600)f->fail=f->writes+1;
+                }while(result==PT_WAVETABLE_SONG_UPLOADING);
+                }
+                if(mode==10) {
+                    bus->stop_result[1]=0;
+                    assert(!pt_wavetable_song_close(&song) && pins(f)==1 && sampler.bytes);
+                    bus->stop_result[1]=1;
+                }else if(mode==12)assert(result==PT_WAVETABLE_SONG_DEVICE && !pins(f));
+                else {
+                    assert(result==PT_WAVETABLE_SONG_OK && pins(f)==4 && f->writes==900);
+                    if(mode==11) {
+                        --d.project.samples[2].pcm.capacity;
+                        assert(pt_wavetable_song_prefetch(song)==PT_WAVETABLE_SONG_DEVICE && !pins(f) && bus->starts==3);
+                    }else {
+                        assert(pt_wavetable_song_next_step(song,&unchanged)==PT_WAVETABLE_SONG_UPLOADING && unchanged.frames==123);
+                        writes=f->writes;assert(pt_wavetable_song_prefetch(song)==PT_WAVETABLE_SONG_OK && writes==f->writes);
+                        while(span.frames){unsigned n=span.frames>256?256:span.frames;assert(pt_wavetable_song_consume(song,n)==PT_WAVETABLE_SONG_OK);span.frames-=n;}
+                        assert(pt_wavetable_song_complete_step(song)==PT_WAVETABLE_SONG_OK && f->writes==writes && bus->starts==4);
+                        frames=0;do{result=song_tick(song,&frames);}while(result==PT_WAVETABLE_SONG_OK);
+                        assert(result==PT_WAVETABLE_SONG_DONE);
+                    }
+                }
             }else {
                 frames=0;do{result=song_tick(song,&frames);}while(result==PT_WAVETABLE_SONG_OK);
                 assert(result==PT_WAVETABLE_SONG_DONE);
@@ -568,6 +603,7 @@ static void uploading_song_fixture(void)
         assert(!sampler.bytes && allocations==baseline);
     }
     pt_document_release(&d);free(bus);free(f);assert(!allocations);
+    puts("SONG PREFETCH PASS: upcoming600-byte cache ready before elapsed interval, no early commit, write-free commit, stale/transfer/cancel with old voice ownership");
     puts("SONG UPLOADING PASS: whole-batch leases,256-byte steps, no early output/time, duplicate hits, cancellation/stale/capacity/transfer guards and uncertain stop");
 }
 

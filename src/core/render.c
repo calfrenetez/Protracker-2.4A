@@ -1,5 +1,6 @@
 #include "render.h"
 #include "render_commands.h"
+#include "render_lookahead.h"
 #include "voice_internal.h"
 #include "pitch.h"
 #include "document.h"
@@ -464,7 +465,7 @@ struct pt_render_sequence {
     struct pt_allocator allocator;struct pt_render_options options;
     const struct pt_project *project;struct run run;
     struct pt_render_command_state commands;
-    uint32_t remaining;unsigned pending,end,done,failed,consumed,preparing;
+    uint32_t remaining;unsigned pending,end,done,failed,consumed,preparing;uint64_t interval;
     struct pt_render_mutation mutation;
 };
 static enum pt_render_result sequence_begin(const struct pt_project *p,const struct pt_render_options *o,
@@ -548,10 +549,10 @@ enum pt_render_result pt_render_mutating_sequence_complete(struct pt_render_sequ
 enum pt_render_result pt_render_sequence_next(struct pt_render_sequence *s,struct pt_render_interval *out)
 {
     struct pt_tick_span span;enum pt_render_result result;
-    if(!s || !out || s->preparing || s->pending || s->done || s->failed)return PT_RENDER_INVALID;
+    if(!s || !out || s->preparing || s->pending || s->done || s->failed || s->interval==UINT64_MAX)return PT_RENDER_INVALID;
     result=next_tick(&s->run,&span,&s->end);
     if(result!=PT_RENDER_OK) {s->failed=1;return result;}
-    s->remaining=span.frames;s->pending=1;s->consumed=0;
+    s->remaining=span.frames;s->pending=1;s->consumed=0;++s->interval;
     out->frames=span.frames;out->emit=s->run.emit;out->end=s->end;return PT_RENDER_OK;
 }
 enum pt_render_result pt_render_sequence_consume(struct pt_render_sequence *s,uint32_t frames)
@@ -588,3 +589,43 @@ enum pt_render_result pt_render_sequence_rewind(struct pt_render_sequence *s)
 }
 void pt_render_sequence_close(struct pt_render_sequence *s)
 {if(s) {struct pt_allocator a=s->allocator;a.release(a.context,s);}}
+
+static int lookahead_current(const struct pt_render_lookahead *w)
+{
+    const struct pt_render_sequence *s=w->sequence;
+    return s && !w->failed && !s->mutation.tick && !s->preparing && !s->failed &&
+        !s->done && s->pending && s->interval==w->interval;
+}
+void pt_render_lookahead_cancel(struct pt_render_lookahead *w)
+{if(w)memset(w,0,sizeof(*w));}
+enum pt_render_result pt_render_lookahead_begin(struct pt_render_lookahead *w,struct pt_render_sequence *s)
+{
+    if(!w || w->sequence || !s || s->mutation.tick || s->preparing || s->failed || s->done || !s->pending)return PT_RENDER_INVALID;
+    memset(w,0,sizeof(*w));w->sequence=s;w->interval=s->interval;w->commands=s->commands;w->remaining=s->remaining;
+    return PT_RENDER_OK;
+}
+enum pt_render_result pt_render_lookahead_step(struct pt_render_lookahead *w,unsigned frames,struct pt_render_plan *out,unsigned *ready)
+{
+    enum pt_render_result result;struct pt_render_sequence *s;
+    if(!w || !frames || frames>256 || !out || !ready || !lookahead_current(w))return PT_RENDER_INVALID;
+    s=w->sequence;
+    if(w->ready){*out=w->plan;*ready=1;return PT_RENDER_OK;}
+    if(w->remaining) {
+        unsigned n=w->remaining>frames?frames:w->remaining;
+        if(pt_voice_advance(w->commands.voice,s->project->channels.count,n)!=PT_PCM_OK){w->failed=1;return PT_RENDER_SAMPLE;}
+        w->remaining-=n;*ready=0;return PT_RENDER_OK;
+    }
+    if(!s->end) {
+        result=commands_plan(s->project,&s->options,&s->run.timeline.flow,&s->run.pitch,
+            s->run.range,s->run.offset_tracks,&w->commands,&w->plan,1);
+        if(result!=PT_RENDER_OK){w->failed=1;return result;}
+    }
+    w->ready=1;*out=w->plan;*ready=1;return PT_RENDER_OK;
+}
+enum pt_render_result pt_render_lookahead_commit(struct pt_render_lookahead *w)
+{
+    struct pt_render_sequence *s;
+    if(!w || !w->ready || !lookahead_current(w) || w->sequence->remaining)return PT_RENDER_INVALID;
+    s=w->sequence;s->commands=w->commands;s->pending=0;if(s->end)s->done=1;
+    pt_render_lookahead_cancel(w);return PT_RENDER_OK;
+}

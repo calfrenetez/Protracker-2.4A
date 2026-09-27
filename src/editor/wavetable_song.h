@@ -75,6 +75,18 @@ enum pt_wavetable_song_result pt_wavetable_song_complete(struct pt_wavetable_son
  * synchronously. Values/project remain immutable and owner-thread serialized. */
 enum pt_wavetable_song_result pt_wavetable_song_next_step(struct pt_wavetable_song *,struct pt_render_interval *);
 enum pt_wavetable_song_result pt_wavetable_song_complete_step(struct pt_wavetable_song *);
+/* Optional lookahead after next succeeds: repeatedly prefetch while the current
+ * interval elapses. Computes upcoming commands on private state in <=256-frame
+ * steps, then prepares only that batch's caches in <=256-byte upload steps.
+ * UPLOADING means more work; OK means ready, with NO voice callbacks/early starts.
+ * Unlike after-boundary uploading, consume may advance the CURRENT interval
+ * while prefetch is pending. Complete refuses until all interval frames elapsed;
+ * complete_step then checks/commits ready state without conversion or allocation.
+ * If not ready at completion, complete_step continues bounded preparation and
+ * returns UPLOADING; a real scheduler must separately enforce its late policy.
+ * No prefetch during silent range pre-roll or pending range restoration. Stop/
+ * edit cancels both forecast and uploads. Real-time deadlines remain caller-owned. */
+enum pt_wavetable_song_result pt_wavetable_song_prefetch(struct pt_wavetable_song *);
 /* One stop attempt per held voice; no polling. Retains ALL master pins/controller
  * and unconfirmed device leases until all stops and bridge detach succeed.
  * Returns0 while unresolved; caller must retain/retry *song. On success frees

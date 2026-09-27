@@ -2109,3 +2109,42 @@ Initial allocations and the final bounded callback batch are synchronous. Projec
 and PCM remain immutable; callers must stop before editing or freeing contexts.
 No change to master precision, project saving or the accepted classic display.
 Evidence: `evidence/enhanced-editor/yielding-upload-batches/`.
+
+### Immutable lookahead and ahead-of-interval prefetch
+
+A caller-owned Fast workspace can now preview the current pending renderer
+interval's upcoming commands without changing live phase or time. Begin copies
+command state; each step advances the private copy by at most256frames or resolves
+one bounded command plan. Live consume may interleave independently. A monotonically
+identified interval prevents stale/rewound jobs from committing. Commit requires
+that same live interval to be fully consumed and the preview ready; it transfers
+computed command state exactly once. Cancellation changes no live state and does
+not dereference the sequence. Mutable EFx sequences cannot use this shortcut.
+The renderer workspace borrows immutable sources and does not itself pin masters.
+
+The master-pinned song owner embeds this workspace and exposes prefetch through
+the editor binding. After next succeeds, callers can prefetch while the current
+interval elapses: preview the upcoming command batch, then selectively acquire its
+playback caches. UPLOADING requests another bounded step; OK means ready without
+voice callbacks. Unlike after-boundary uploads, live consume remains allowed.
+Complete refuses before all current frames are consumed. A ready completion checks
+source/cache identity and transfers prepared state/leases without PCM conversion
+or cache allocation. If prefetch was not ready, complete_step can continue bounded
+work; a future clock driver must decide whether that is already too late.
+
+No whole-project preload, early start, master mutation or precision loss is added.
+Stop/edit/dispose cancels preview and upload jobs, then retains any unconfirmed
+active playback leases/master pins as before. Silent range pre-roll and pending
+range restoration use their existing paths; prefetch starts only once next has
+returned an output interval. Initial allocation and final callbacks remain
+synchronous. Native event-loop/clock/deadline enforcement and physical throughput
+acceptance are still unfinished; these APIs do not establish real-time playback.
+Evidence: `evidence/enhanced-editor/lookahead-prefetch/`.
+
+The first lookahead emulator attempt failed at the native test allocator cleanup:
+new fixture calloc bypassed malloc remapping while free still used the native
+pool. Tests now use matching malloc/zero/release; corrected host tests and native
+build pass. Corrected bytes have NOT passed an emulator run. Shared emulator stays
+on recovery hold because allocator integrity/clean exit is unverified. See the
+lookahead evidence for the original failure and corrected build; a clean restart
+requires a new coordinated recovery decision before further guest testing.

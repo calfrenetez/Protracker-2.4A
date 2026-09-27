@@ -1,0 +1,14 @@
+{
+  "GET_STATUS": "OK\tPaused=false\tConfig=autosave",
+  "GET_AUDIO_STATE": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=388\tsndbuf_status=0",
+  "files": [
+    "recovery",
+    "recovery/source.ptg",
+    "recovery/test.log",
+    "recovery/held.ptg",
+    "recovery/PTExecRecoveryTest",
+    "recovery/session",
+    "recovery/session/1.ptg"
+  ],
+  "recovery/test.log": "assertion \"pt_recovery_store_save(&store,project,&info,allocator)==PT_SAVE_OK && store.owned==3\" failed: file \"tests/recovery_store_cases.h\", line 47, function: recovery_store_cases\nProgram aborted\nEXEC MEMORY pool_limit=131211976 reserve=262144 flags=4\n"
+}

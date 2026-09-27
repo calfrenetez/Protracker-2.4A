@@ -1,0 +1,3 @@
+assertion "pt_recovery_store_save(&store,project,&info,allocator)==PT_SAVE_OK && store.owned==3" failed: file "tests/recovery_store_cases.h", line 47, function: recovery_store_cases
+Program aborted
+EXEC MEMORY pool_limit=131211976 reserve=262144 flags=4

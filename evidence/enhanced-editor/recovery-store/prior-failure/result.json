@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "scope": "shared030 explicit recovery file transactions; no automatic snapshots or UI wiring",
+  "PTExecRecoveryTest_sha256": "36efc467438455ab8a459c7745351e58e8b286e6a571ffb580592f84c7f2d09e",
+  "run_files_cleaned": false
+}

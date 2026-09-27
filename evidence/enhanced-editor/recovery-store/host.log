@@ -1,0 +1,7 @@
+test_master_snapshot_transaction (test_recovery_file.RecoveryFile.test_master_snapshot_transaction) ... RECOVERY FILE PASS: full-precision project identity, new-file-only snapshot, bounded allocation failures, corrupt/mismatched metadata preserves open song, explicit dirty restoration
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 2.533s
+
+OK

@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131237112 reserve=262144 flags=4
+AMIGUS SAMPLE RAM PASS: bounded addresses, exact uploads, pinned eviction, failures and master preservation; fake bus only
+EXEC MEMORY PASS: 1 Fast allocations, zero owned bytes, budget refusal without Chip fallback

@@ -1,0 +1,16 @@
+{
+  "commit": "d8c9a0429f41cd5f3dbadae34ef438e45c9c3718",
+  "scope": "local pinned primary source observations; no upstream implementation copied",
+  "files": {
+    "Software/Tools/PlayWAVetable/PlayWAVetable.c": "0d78fde90953da6a5a472f89c0eab034c5c0c0dd77d6d68b8da409d2588b06cc",
+    "Software/Drivers/Base/include-src/amigus/amigus.h": "615bbcf8b314bafe1b3eb53d605c0e82d4ff4619e1b06e25f2f0cd7ddf4654c4",
+    "Software/Drivers/Base/include-src/sfd/amigus_lib.sfd": "f2a07a7f60ce5a2f8639b27e7a396f1c8070a07aac62bb57e671aa7cfebf2e70"
+  },
+  "observations": [
+    "PlayWAVetable.c defines byte address register 0x14 and data register 0x10; numeric 32-bit writes consume MSB-first packed bytes on the Amiga.",
+    "Utility uses separate mono streams per voice and 8/16-bit representations.",
+    "Public card descriptor supplies agus_WavetableBase and reservation flag AMIGUS_FLAG_WAVETABLE=2.",
+    "Public SFD provides no sample RAM allocation/upload API; no capacity is accepted as verified from the utility.",
+    "Native Mini bus access, physical capacity and voice stop confirmation remain unqualified."
+  ]
+}

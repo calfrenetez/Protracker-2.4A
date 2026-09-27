@@ -1,0 +1,33 @@
+{
+  "checks": [
+    {
+      "command": "python3 -m unittest discover -s tests -p 'test_amigus*.py'",
+      "tests": 9,
+      "seconds": 4.958,
+      "passed": true
+    },
+    {
+      "command": "python3 -m unittest discover -s tests -p 'test_playback*.py'",
+      "tests": 2,
+      "seconds": 0.661,
+      "passed": true
+    },
+    {
+      "command": "python3 -m unittest discover -s tests -p 'test_sample_cache.py'",
+      "tests": 1,
+      "seconds": 0.353,
+      "passed": true
+    },
+    {
+      "command": "python3 -m unittest discover -s tests -p 'test_amigus_sample_ram.py'",
+      "tests": 1,
+      "seconds": 0.432,
+      "passed": true,
+      "note": "Final additional coverage of all trailing byte counts; production unchanged."
+    }
+  ],
+  "sanitizers": [
+    "address",
+    "undefined"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "scope": "compile/link; injected bus, no card access",
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Isrc/core",
+    "-fbbb=-"
+  ],
+  "inputs": {
+    "src/core/amigus_sample_ram.c": "33b60b0efc2e62c73d0624c2ecf01985c966b8111d02f09f41668547828d0091",
+    "src/core/amigus_sample_ram.h": "dfde7d139515dca0aed7c860090dea2691298a14bbd7426a82836754ea4c8ce9",
+    "src/core/pcm.c": "c1dcea85e047413448bf5664dc551bcbd6d27e7cfd646fb8ea5049bbb780786b",
+    "src/core/pcm.h": "6b1a14d9010f71b693c81c066e619343bb9b4cee0f4b6723347f34de2f5e12fb",
+    "src/core/playback_pcm.c": "a1da32394270a21f0630a16e6e19b8ec450838ea7daf37d41ba3ee59d7a3634f",
+    "src/core/playback_pcm.h": "5fadad9ca6f569ceb48698340719ea40d7ed550553dfdafa1b96bb1ac59e200e",
+    "src/core/sample_cache.c": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+    "src/core/sample_cache.h": "fbaac0ec07b6885767da51904c8e0057982f71caba55bb9542146417bfb9c615",
+    "src/native/master_memory.h": "ac898368849ec2d1892717d425b90c398da37a8799d536366a898e2e219e184a",
+    "tests/amigus_sample_ram_test.c": "a3c481ea64777fcf4bbd8a52228168ce69eeec1c3d781cab23c64c7860302c9e",
+    "tests/native_exec_amigus_sample_ram_test.c": "da533a8a8ca5c71b850661cfcdfdcf4191abbeaff92e55b24b711bb96d33b769",
+    "tests/native_exec_memory.h": "ce0f2b696ce7767c0da8a2a44ac7730bc207f81e4f6b86bfd172353989e664b9"
+  },
+  "compiler_sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+  "runtime_inputs": {
+    "ncrt0.o": "6fe4b6088899bd53efae1ea1e4783b7deab07b13f3d40cff7b46285907f19804",
+    "libnix20.a": "0731c54ad32272f5ab0d5ecd3f1f93d7aa4fc7c6ac0a5923eb26125633556e8c",
+    "libnixmain.a": "ad54158e95516aa6f3b04a8b3d835a48ecbaaea962cd178d5fb66995dcef19df",
+    "libnix.a": "d64619bc74933ac5312ef6db0f8d4cd62b3918f9f4a5805863e7d15536fcb144",
+    "libstubs.a": "55dbd0626cb472d89ab5d1bd234e6013df178f2cd3b83266bf4b82c68f1a79de",
+    "libamiga.a": "10d78b6d303a99677c0bf29a8e1653d62669f69f395691646393020325084021",
+    "libgcc.a": "8bed858c8a5797471c3bc130df341824121c5d0f0908345dfe6ce0ceccc3569b"
+  },
+  "binary_sha256": "5615df6b5772a66eb5b918df1f8055ffed95ef84caf8f17f95424f842b5301d3",
+  "binary_bytes": 40572
+}

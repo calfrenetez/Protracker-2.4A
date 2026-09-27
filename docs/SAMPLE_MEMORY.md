@@ -2251,3 +2251,32 @@ readiness, deadline/clock faults and unconfirmed stops. Timestamps and callbacks
 remain injected and non-reentrant. Native clock sampling, event-loop wakeups,
 callback-duration accounting, device bus binding and physical timing/audio still
 require separate qualification. Native PLAY/card output remains disabled.
+
+### Checked elapsed ticks and a sampled-clock adapter
+
+The portable elapsed_clock converts a monotonic64-bit counter at a stable32-bit
+frequency to sample frames (rates1..192000). It retains fractional numerator carry
+between calls, so polling partitions do not accumulate rounding loss. Splitting
+whole seconds and the remainder avoids a delta*rate overflow even when the final
+quotient fits. Frame overflow, frequency changes (including zero) and counter
+regression/wrap latch failure without changing accumulated time or caller output.
+Invalid initialization/overlapping output refuses atomically. Starting a new epoch
+is explicit initialization, never an automatic live-playback recovery.
+
+Song/editor clocked_begin samples an injected reader once, establishes frame zero
+and schedules a future start delay in frame units. Each valid clocked_service reads
+once, advances the checked converter and performs one bounded scheduler step.
+Raw timestamp progression cannot bypass a bound reader. Read/conversion failure
+poisons playback and requests stop; repeat service does not reread/rebase. Pending
+voice stops retain the existing cache/master leases. Editor disposal cancels a
+primed range restoration before any output and subsequent service cannot read the
+old context. The reader/context must outlive the session and cannot block, reenter,
+edit sources or perform voice actions.
+
+Tests use synthetic frequencies, including700001Hz, to exercise fractional carry,
+nonzero epochs, large quotients, exact uint64 limits, read/frequency/regression/
+overflow/deadline faults, natural completion and uncertain-stop retention. This is
+an injected reader adapter, not native clock acquisition or a sleep/wakeup driver.
+Deadlines are still frame counts relative to the initial read. Real clock accuracy,
+callback duration, event-loop timing and physical bus/audio remain unqualified;
+native PLAY/card output remains disabled.

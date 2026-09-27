@@ -60,3 +60,8 @@ enum pt_wavetable_song_result pt_editor_wavetable_schedule_begin(struct pt_edito
 {return attached(o)?pt_wavetable_song_schedule_begin(o->song,start):PT_WAVETABLE_SONG_INVALID;}
 enum pt_wavetable_song_result pt_editor_wavetable_schedule_step(struct pt_editor_wavetable *o,uint64_t now,uint64_t *deadline)
 {return attached(o)?pt_wavetable_song_schedule_step(o->song,now,deadline):PT_WAVETABLE_SONG_INVALID;}
+
+enum pt_wavetable_song_result pt_editor_wavetable_clocked_begin(struct pt_editor_wavetable *o,uint64_t delay,pt_wavetable_clock_read read,void *context)
+{return attached(o)?pt_wavetable_song_clocked_begin(o->song,delay,read,context):PT_WAVETABLE_SONG_INVALID;}
+enum pt_wavetable_song_result pt_editor_wavetable_clocked_service(struct pt_editor_wavetable *o,uint64_t *deadline)
+{return attached(o)?pt_wavetable_song_clocked_service(o->song,deadline):PT_WAVETABLE_SONG_INVALID;}

@@ -73,6 +73,7 @@ static void editor_staged_restore_fixture(struct pt_editor *e,struct pt_editor_w
 {
     struct pt_render_options options={0};struct pt_playback_format format={16,0,0,0};
     struct pt_wavetable_preflight_report report;struct pt_render_interval span;unsigned mode;
+    struct sampled_clock clock={100,700001,0,1};
     options.rate=48000;options.bits=24;options.tracks=1;options.gain_q16=65536;
     options.tick_limit=100;options.frame_limit=100000;options.pattern_only=options.row_range=1;
     options.row_first=1;options.row_end=2;
@@ -81,8 +82,9 @@ static void editor_staged_restore_fixture(struct pt_editor *e,struct pt_editor_w
         assert(pt_editor_wavetable_start(o,voices,&options,&format,&report)==PT_WAVETABLE_SONG_OK);
         if(mode) {
             enum pt_wavetable_song_result r;uint64_t deadline;unsigned guard=0;
-            assert(pt_editor_wavetable_schedule_begin(o,1000)==PT_WAVETABLE_SONG_OK);
-            do{r=pt_editor_wavetable_schedule_step(o,0,&deadline);assert(++guard<1000 && deadline==1000);}
+            if(mode==1)assert(pt_editor_wavetable_schedule_begin(o,1000)==PT_WAVETABLE_SONG_OK);
+            else assert(pt_editor_wavetable_clocked_begin(o,1000,sampled_read,&clock)==PT_WAVETABLE_SONG_OK);
+            do{r=mode==1?pt_editor_wavetable_schedule_step(o,0,&deadline):pt_editor_wavetable_clocked_service(o,&deadline);assert(++guard<1000 && deadline==1000);}
             while(r==PT_WAVETABLE_SONG_WAITING);
             assert(r==PT_WAVETABLE_SONG_OK);
         }else for(;;) {
@@ -102,6 +104,8 @@ static void editor_staged_restore_fixture(struct pt_editor *e,struct pt_editor_w
             pt_editor_key(e,0x31,8);assert(e->project->events[0].kind==PT_NOTE_PERIOD);
         }else if(mode==1)assert(pt_editor_wavetable_stop(o) && !o->song);
         else assert(pt_editor_dispose(e) && !o->song);
+        if(mode==2){unsigned reads=clock.reads;uint64_t deadline=77;
+            assert(pt_editor_wavetable_clocked_service(o,&deadline)==PT_WAVETABLE_SONG_INVALID && clock.reads==reads && deadline==77);}
         assert(!pins(f) && !bus->starts && !bus->restores && !bus->stops);
         assert(pt_amigus_reservation_close(&f->reservation));
     }

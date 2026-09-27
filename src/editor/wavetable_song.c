@@ -3,6 +3,7 @@
 #include "wavetable_internal.h"
 #include "sampler_wavetable_internal.h"
 #include "../core/render_lookahead.h"
+#include "../core/elapsed_clock.h"
 #include <string.h>
 struct pt_wavetable_song {
     struct pt_allocator allocator;struct pt_wavetable_voices *voices;
@@ -20,6 +21,7 @@ struct pt_wavetable_song {
     uint64_t version;unsigned generation,rate,pending,closing,done,range,restored,ready,pin_slot;
     uint64_t clock_start,clock_last,clock_deadline;unsigned clock_armed,visited,schedule_phase,schedule_seen;
     uint64_t schedule_start,schedule_last;
+    struct pt_elapsed_clock elapsed;pt_wavetable_clock_read clock_read;void *clock_context;unsigned clock_bound;
     uint32_t remaining;enum pt_wavetable_song_result failure;uint8_t staging[256];
 };
 static void cancel_batch(struct pt_wavetable_song *s)
@@ -40,7 +42,7 @@ static void release_sources(struct pt_wavetable_song *s)
 }
 static int stop(struct pt_wavetable_song *s)
 {
-    s->closing=1;s->schedule_phase=0;s->clock_armed=0;s->next_stage=0;s->pending=0;s->remaining=0;cancel_batch(s);
+    s->closing=1;s->clock_bound=0;s->schedule_phase=0;s->clock_armed=0;s->next_stage=0;s->pending=0;s->remaining=0;cancel_batch(s);
     pt_render_sequence_close(s->sequence);s->sequence=NULL;
     if(s->done)return 1;
     if(!s->ready) {
@@ -402,7 +404,7 @@ static enum pt_wavetable_song_result scheduled_interval(struct pt_wavetable_song
     r=next_commit(s);if(r)return r;
     r=clock_arm(s,start);if(!r)s->schedule_phase=SCHEDULE_RUNNING;return r;
 }
-enum pt_wavetable_song_result pt_wavetable_song_schedule_step(struct pt_wavetable_song *s,uint64_t now,uint64_t *deadline)
+static enum pt_wavetable_song_result schedule_step(struct pt_wavetable_song *s,uint64_t now,uint64_t *deadline)
 {
     enum pt_wavetable_song_result r;struct pt_render_interval span;
     if(!deadline)return PT_WAVETABLE_SONG_INVALID;
@@ -454,4 +456,27 @@ enum pt_wavetable_song_result pt_wavetable_song_schedule_step(struct pt_wavetabl
     *deadline=s->schedule_start;
     return s->schedule_phase==SCHEDULE_READY_NEXT || s->schedule_phase==SCHEDULE_READY_ZERO?
         PT_WAVETABLE_SONG_OK:PT_WAVETABLE_SONG_WAITING;
+}
+
+enum pt_wavetable_song_result pt_wavetable_song_schedule_step(struct pt_wavetable_song *s,uint64_t now,uint64_t *deadline)
+{return s && !s->clock_bound?schedule_step(s,now,deadline):PT_WAVETABLE_SONG_INVALID;}
+enum pt_wavetable_song_result pt_wavetable_song_clocked_begin(struct pt_wavetable_song *s,uint64_t delay,pt_wavetable_clock_read read,void *context)
+{
+    uint64_t ticks;uint32_t frequency;enum pt_wavetable_song_result r=current(s);if(r)return r;
+    if(!read || !s->ready || s->visited || s->schedule_phase || s->clock_armed)return PT_WAVETABLE_SONG_INVALID;
+    if(read(context,&ticks,&frequency)!=1 || pt_elapsed_clock_init(&s->elapsed,frequency,s->rate,ticks,0)!=PT_ELAPSED_OK)
+        return fail(s,PT_WAVETABLE_SONG_CLOCK);
+    r=pt_wavetable_song_schedule_begin(s,delay);if(r)return r;
+    s->clock_read=read;s->clock_context=context;s->clock_bound=1;return PT_WAVETABLE_SONG_OK;
+}
+enum pt_wavetable_song_result pt_wavetable_song_clocked_service(struct pt_wavetable_song *s,uint64_t *deadline)
+{
+    uint64_t ticks,frames;uint32_t frequency;enum pt_wavetable_song_result r;
+    if(!deadline)return PT_WAVETABLE_SONG_INVALID;
+    r=current(s);if(r)return r;
+    if(!s->clock_bound)return PT_WAVETABLE_SONG_INVALID;
+    if(s->clock_read(s->clock_context,&ticks,&frequency)!=1 ||
+       pt_elapsed_clock_advance(&s->elapsed,frequency,ticks,&frames)!=PT_ELAPSED_OK)
+        return fail(s,PT_WAVETABLE_SONG_CLOCK);
+    return schedule_step(s,frames,deadline);
 }

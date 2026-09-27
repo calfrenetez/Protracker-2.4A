@@ -137,6 +137,20 @@ enum pt_wavetable_song_result pt_wavetable_song_clock_service(struct pt_wavetabl
  * real-time guarantee, and no native PLAY/card binding is enabled here. */
 enum pt_wavetable_song_result pt_wavetable_song_schedule_begin(struct pt_wavetable_song *,uint64_t start_frame);
 enum pt_wavetable_song_result pt_wavetable_song_schedule_step(struct pt_wavetable_song *,uint64_t now_frame,uint64_t *deadline);
+/* Optional sampled-clock service adapter. read returns1 and a monotonic64-bit
+ * tick counter plus its stable ticks/second frequency. Callback/context must
+ * outlive close, never block/reenter/edit, and perform no device voice action.
+ * Begin reads once to establish frame zero and schedules start_delay frames in
+ * the future. Service reads exactly once, converts with retained fractional
+ * carry, then performs ONE schedule_step. Counter wrap/regression, frequency
+ * change, conversion overflow or failed read returns CLOCK and requests stop;
+ * uncertain leases remain retained. No rebasing/retry of failed clocks.
+ * Raw schedule_step refuses while bound. Returned deadline stays in frame units;
+ * caller wakeups/timer ownership, clock accuracy and callback duration remain
+ * separate. This adapter does not sleep or enable a native device/PLAY action. */
+typedef int (*pt_wavetable_clock_read)(void *,uint64_t *ticks,uint32_t *frequency);
+enum pt_wavetable_song_result pt_wavetable_song_clocked_begin(struct pt_wavetable_song *,uint64_t start_delay,pt_wavetable_clock_read,void *);
+enum pt_wavetable_song_result pt_wavetable_song_clocked_service(struct pt_wavetable_song *,uint64_t *deadline);
 /* One stop attempt per held voice; no polling. Retains ALL master pins/controller
  * and unconfirmed device leases until all stops and bridge detach succeed.
  * Returns0 while unresolved; caller must retain/retry *song. On success frees

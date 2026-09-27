@@ -257,3 +257,49 @@ three wavetable integration fixtures (8.238s), and shared030 run
 `render-files-1790475765845129000` (RC0 within90s). The native fixture returns all
 40 Fast allocations; no Chip fallback. Completion/all4DMAoff/exact cleanup and
 explicit release verified. Evidence is in `evidence/enhanced-editor/amigus-voice-plan/`.
+
+## Resolved sequencer dispatch
+
+`wavetable_dispatch` now consumes successful audited `pt_render_plan` batches
+through the injected voice owner. It handles ordinary mono TRIGGER, STOP and
+CONTROL operations. Every action preflights before the first device callback;
+unknown/private PCM descriptors, stale bridge revisions, invalid channels,
+unsupported ranges and segment/repeat operations refuse the whole batch. PCM
+identity is compared with the current project's descriptors before dereference.
+The caller must synchronize the bridge and capture its revision when building
+the plan, preserve the immutable project/sequence, and consume the preceding
+interval before dispatch. This layer does not provide a scheduler.
+
+The renderer's Q32 step maps directly to floor(step *output_rate /768000),
+preserving fractional pitch until the final hardware-rate quantization. Only
+44100/48000 renderer clocks and resolved source rates up to192000 are accepted.
+Already-resolved Q16 left/right gains map independently to16-bit levels. Panning,
+finetune, mute, velocity and tracker volume are not applied again. CONTROL uses
+an optional synchronous callback that changes only rate/levels: it must preserve
+phase and existing sample ownership. A trigger starts with its captured gains;
+the renderer's subsequent CONTROL establishes final gains before the next span.
+
+Successful triggering takes a current cache lease and validates the actual
+address before stopping/replacing an old voice. Any invoked start owns its lease
+until stop confirmation, including an uncertain result. During runtime failure,
+dispatch blocks new work and makes one cleanup stop attempt for each held voice.
+A stop attempted by the failing operation can therefore receive one additional
+cleanup attempt; no polling loop occurs. Unconfirmed stops keep pins and the
+reservation. The caller must discard the failed sequence and close/rebind; a
+partially applied plan must never be retried. Preflight refusal returns0 without
+device callbacks and leaves existing voices playing; the caller chooses an
+explicit Stop/close before abandoning that sequence.
+
+Stereo expansion, segment playback, boundary-delayed cross-source repeats and
+private EFx banks remain unsupported by this dispatcher. They are refused rather
+than silently mapped to simpler playback. Existing Studio paths keep their
+fuller software behavior. Output plans retain half-open byte bounds; real-device
+endpoint interpretation, stop fences and native bus wiring remain unverified.
+Native editor PLAY/output remains disabled for this adapter.
+
+Validation generates actual16-channel renderer plans and checks note starts,
+phase-preserving pitch/gain changes, Stop/retrigger and both control/start
+failure retention. Host sanitizers pass; shared030 run
+`render-files-1790476398105279000` returns RC0 within90s with50 Fast allocations
+and zero final owned bytes. All4DMAoff/exact cleanup and explicit release were
+verified. See `evidence/enhanced-editor/wavetable-dispatch/` for scope and hashes.

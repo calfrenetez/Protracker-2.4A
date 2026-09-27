@@ -13,6 +13,9 @@ struct pt_wavetable_voice_api {
     void *context;
     int (*start)(void *,unsigned,const struct pt_amigus_voice_plan *);
     int (*stop)(void *,unsigned);
+    /* Optional synchronous phase-preserving rate/gain update for sequence
+     * dispatch. Return1 confirmed; all other results require confirmed stop. */
+    int (*control)(void *,unsigned,uint32_t rate,uint16_t left,uint16_t right);
 };
 struct pt_wavetable_voice {
     struct pt_cache_lease lease;

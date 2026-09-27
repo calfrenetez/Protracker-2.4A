@@ -1,38 +1,46 @@
-#include "wavetable_dispatch.h"
+#include "wavetable_internal.h"
 #include "../core/amigus_render_voice.h"
 #include "../core/document.h"
 #include <limits.h>
 #include <string.h>
+static int source_current(struct pt_wavetable_voices *v,const struct pt_wavetable_prepared *p)
+{return p?p->current && p->acquire && p->location && p->current(p->context):pt_sampler_wavetable_sync(v->bridge);}
+static enum pt_cache_result source_acquire(struct pt_wavetable_voices *v,const struct pt_wavetable_prepared *p,
+    unsigned slot,const struct pt_playback_format *f,uint8_t *staging,size_t capacity,struct pt_cache_lease *lease)
+{return p?p->acquire(p->context,slot,f,staging,capacity,lease):pt_sampler_wavetable_acquire(v->bridge,slot,f,staging,capacity,lease);}
+static int source_location(struct pt_wavetable_voices *v,const struct pt_wavetable_prepared *p,
+    struct pt_cache_lease lease,uint32_t *address,uint32_t *bytes)
+{return p?p->location(p->context,lease,address,bytes):pt_sampler_wavetable_location(v->bridge,lease,address,bytes);}
 static int resolve(const struct pt_project *p,const struct pt_pcm *pcm,unsigned *slot)
 {
     unsigned i;
     for(i=0;i<p->sample_count;++i)if(pcm==&p->samples[i].pcm){*slot=i;return 1;}
     return 0;
 }
-static int control(struct pt_wavetable_voices *v,const struct pt_render_action *a,unsigned rate)
+static int control(struct pt_wavetable_voices *v,const struct pt_render_action *a,unsigned rate,const struct pt_wavetable_prepared *sources)
 {
     struct pt_wavetable_voice *voice=v->voice+a->channel;
     uint32_t frequency,address,bytes;uint16_t left,right;
-    if(!voice->held || voice->uncertain || !pt_sampler_wavetable_location(v->bridge,voice->lease,&address,&bytes) ||
+    if(!voice->held || voice->uncertain || !source_location(v,sources,voice->lease,&address,&bytes) ||
        !pt_amigus_render_control(a->voice.step,rate,a->gain,&frequency,&left,&right))return 0;
     if(v->api.control(v->api.context,a->channel,frequency,left,right)==1)return 1;
     voice->uncertain=1;return 0;
 }
 static int trigger(struct pt_wavetable_voices *v,const struct pt_render_action *a,unsigned rate,
-    const struct pt_playback_format *f,uint8_t *staging,size_t capacity)
+    const struct pt_playback_format *f,uint8_t *staging,size_t capacity,const struct pt_wavetable_prepared *sources)
 {
     unsigned slot;struct pt_cache_lease lease;enum pt_cache_result result;
     struct pt_amigus_voice_plan p;struct pt_wavetable_voice *voice=v->voice+a->channel;
     uint32_t address,bytes;
     if(!resolve(v->bridge->project,a->voice.pcm,&slot))return 0;
-    result=pt_sampler_wavetable_acquire(v->bridge,slot,f,staging,capacity,&lease);
+    result=source_acquire(v,sources,slot,f,staging,capacity,&lease);
     if(result!=PT_CACHE_LOAD && result!=PT_CACHE_HIT)return 0;
-    if(!pt_sampler_wavetable_location(v->bridge,lease,&address,&bytes) ||
+    if(!source_location(v,sources,lease,&address,&bytes) ||
        !pt_amigus_render_voice(&a->voice,rate,a->gain,f,address,bytes,&p) ||
        pt_wavetable_voices_stop(v,a->channel)!=1) {
         pt_sampler_wavetable_unpin(v->bridge,lease);return 0;
     }
-    if(!pt_sampler_wavetable_location(v->bridge,lease,&address,&bytes)) {
+    if(!source_location(v,sources,lease,&address,&bytes)) {
         pt_sampler_wavetable_unpin(v->bridge,lease);return 0;
     }
     voice->lease=lease;voice->held=1;voice->uncertain=1;
@@ -210,18 +218,18 @@ enum pt_wavetable_capability pt_wavetable_restore_preflight(const struct pt_proj
 done:
     *out=r;return r.result;
 }
-int pt_wavetable_dispatch(struct pt_wavetable_voices *v,uint64_t version,unsigned rate,
-    const struct pt_render_plan *plan,const struct pt_playback_format *format,uint8_t *staging,size_t capacity)
+static int dispatch(struct pt_wavetable_voices *v,uint64_t version,unsigned rate,
+    const struct pt_render_plan *plan,const struct pt_playback_format *format,uint8_t *staging,size_t capacity,const struct pt_wavetable_prepared *sources)
 {
     unsigned i,action;uint16_t held=0;
     if(!v || !v->bridge || v->closing || !plan || plan->count>PT_RENDER_ACTIONS || !format ||
-       (rate!=44100 && rate!=48000) || !pt_sampler_wavetable_sync(v->bridge) || v->bridge->version!=version)return 0;
+       (rate!=44100 && rate!=48000) || !source_current(v,sources) || v->bridge->version!=version)return 0;
     for(i=0;i<PT_WAVETABLE_VOICES;++i)if(v->voice[i].held && !v->voice[i].uncertain)held|=(uint16_t)(1U<<i);
     if(check_plan(v->bridge->project,rate,plan,format,v->api.control!=NULL,&held,&action,NULL)!=PT_WAVETABLE_COMPATIBLE)return 0;
     for(i=0;i<plan->count;++i) {
         const struct pt_render_action *a=plan->action+i;int ok;
-        if(a->kind==PT_RENDER_TRIGGER)ok=trigger(v,a,rate,format,staging,capacity);
-        else if(a->kind==PT_RENDER_CONTROL)ok=control(v,a,rate);
+        if(a->kind==PT_RENDER_TRIGGER)ok=trigger(v,a,rate,format,staging,capacity,sources);
+        else if(a->kind==PT_RENDER_CONTROL)ok=control(v,a,rate,sources);
         else ok=pt_wavetable_voices_stop(v,a->channel)==1;
         if(!ok) {
             unsigned ch;v->closing=1;
@@ -232,29 +240,29 @@ int pt_wavetable_dispatch(struct pt_wavetable_voices *v,uint64_t version,unsigne
     return 1;
 }
 
-int pt_wavetable_restore_dispatch(struct pt_wavetable_voices *v,uint64_t version,unsigned rate,
-    const struct pt_render_snapshot *snapshot,const struct pt_playback_format *format,uint8_t *staging,size_t capacity)
+static int restore_dispatch(struct pt_wavetable_voices *v,uint64_t version,unsigned rate,
+    const struct pt_render_snapshot *snapshot,const struct pt_playback_format *format,uint8_t *staging,size_t capacity,const struct pt_wavetable_prepared *sources)
 {
     struct pt_wavetable_preflight_report report;struct pt_cache_lease lease[16];
     struct pt_amigus_restore_plan plan[16];unsigned held[16]={0},ch,slot;uint32_t address,bytes;
     enum pt_cache_result loaded;
-    if(!v || !v->bridge || v->closing || !v->api.restore || !pt_sampler_wavetable_sync(v->bridge) || v->bridge->version!=version)return 0;
+    if(!v || !v->bridge || v->closing || !v->api.restore || !source_current(v,sources) || v->bridge->version!=version)return 0;
     for(ch=0;ch<16;++ch)if(v->voice[ch].held)return 0;
     if(pt_wavetable_restore_preflight(v->bridge->project,snapshot,rate,format,1,&report)!=PT_WAVETABLE_COMPATIBLE)return 0;
     for(ch=0;ch<snapshot->channels;++ch)if(snapshot->voice[ch].active) {
         if(!resolve(v->bridge->project,snapshot->voice[ch].pcm,&slot))goto refused;
-        loaded=pt_sampler_wavetable_acquire(v->bridge,slot,format,staging,capacity,&lease[ch]);
+        loaded=source_acquire(v,sources,slot,format,staging,capacity,&lease[ch]);
         if(loaded!=PT_CACHE_LOAD && loaded!=PT_CACHE_HIT)goto refused;
         held[ch]=1;
-        if(!pt_sampler_wavetable_location(v->bridge,lease[ch],&address,&bytes) ||
+        if(!source_location(v,sources,lease[ch],&address,&bytes) ||
            !pt_amigus_render_restore(snapshot->voice+ch,rate,snapshot->gain[ch],format,address,bytes,plan+ch))goto refused;
     }
     /* All resources exist before any voice may read them. Recheck ownership
        after acquisitions; caller callbacks cannot change sampler state. */
-    if(!pt_sampler_wavetable_sync(v->bridge) || v->bridge->version!=version)goto refused;
-    for(ch=0;ch<16;++ch)if(held[ch] && !pt_sampler_wavetable_location(v->bridge,lease[ch],&address,&bytes))goto refused;
+    if(!source_current(v,sources) || v->bridge->version!=version)goto refused;
+    for(ch=0;ch<16;++ch)if(held[ch] && !source_location(v,sources,lease[ch],&address,&bytes))goto refused;
     for(ch=0;ch<16;++ch)if(held[ch]) {
-        if(!pt_sampler_wavetable_location(v->bridge,lease[ch],&address,&bytes))goto failed;
+        if(!source_location(v,sources,lease[ch],&address,&bytes))goto failed;
         v->voice[ch].lease=lease[ch];v->voice[ch].held=1;v->voice[ch].uncertain=1;held[ch]=0;
         if(v->api.restore(v->api.context,ch,plan+ch)!=1)goto failed;
         v->voice[ch].uncertain=0;
@@ -269,3 +277,16 @@ refused:
     for(ch=0;ch<16;++ch)if(held[ch])pt_sampler_wavetable_unpin(v->bridge,lease[ch]);
     return 0;
 }
+
+int pt_wavetable_dispatch(struct pt_wavetable_voices *v,uint64_t version,unsigned rate,
+    const struct pt_render_plan *plan,const struct pt_playback_format *f,uint8_t *staging,size_t capacity)
+{return dispatch(v,version,rate,plan,f,staging,capacity,NULL);}
+int pt_wavetable_dispatch_prepared(struct pt_wavetable_voices *v,uint64_t version,unsigned rate,
+    const struct pt_render_plan *plan,const struct pt_playback_format *f,uint8_t *staging,size_t capacity,const struct pt_wavetable_prepared *sources)
+{return sources?dispatch(v,version,rate,plan,f,staging,capacity,sources):0;}
+int pt_wavetable_restore_dispatch(struct pt_wavetable_voices *v,uint64_t version,unsigned rate,
+    const struct pt_render_snapshot *snapshot,const struct pt_playback_format *f,uint8_t *staging,size_t capacity)
+{return restore_dispatch(v,version,rate,snapshot,f,staging,capacity,NULL);}
+int pt_wavetable_restore_prepared(struct pt_wavetable_voices *v,uint64_t version,unsigned rate,
+    const struct pt_render_snapshot *snapshot,const struct pt_playback_format *f,uint8_t *staging,size_t capacity,const struct pt_wavetable_prepared *sources)
+{return sources?restore_dispatch(v,version,rate,snapshot,f,staging,capacity,sources):0;}

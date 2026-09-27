@@ -1,8 +1,10 @@
 #include "wavetable_song.h"
 #include "sampler_internal.h"
+#include "wavetable_internal.h"
 #include <string.h>
 struct pt_wavetable_song {
     struct pt_allocator allocator;struct pt_wavetable_voices *voices;
+    struct pt_wavetable_prepared sources;
     struct pt_wavetable_preflight *preflight;struct pt_wavetable_preflight_report report;
     struct pt_render_sequence *sequence;struct pt_render_plan plan;struct pt_render_snapshot resume;
     struct pt_sample_version *pin[PT_PROJECT_SAMPLES];struct pt_sampler_pin_job promotion;
@@ -44,11 +46,10 @@ int pt_wavetable_song_close(struct pt_wavetable_song **song)
 }
 static enum pt_wavetable_song_result fail(struct pt_wavetable_song *s,enum pt_wavetable_song_result result)
 {s->failure=result;stop(s);return result;}
-static enum pt_wavetable_song_result current(struct pt_wavetable_song *s)
+static int source_current(void *context)
 {
-    if(!s)return PT_WAVETABLE_SONG_INVALID;
-    if(s->failure)return s->failure;
-    if(s->closing)return s->done?PT_WAVETABLE_SONG_DONE:PT_WAVETABLE_SONG_STOPPING;
+    struct pt_wavetable_song *s=context;
+    if(!s || s->failure || s->closing)return 0;
     /* Channel selection is a UI cursor, not a playback setting. */
     s->snapshot.channels.selected=s->project->channels.selected;
     if(s->sampler->generation!=s->generation || memcmp(s->project,&s->snapshot,sizeof(s->snapshot)) ||
@@ -58,8 +59,35 @@ static enum pt_wavetable_song_result current(struct pt_wavetable_song *s)
        s->bridge->generation!=s->generation || s->bridge->version!=s->version ||
        s->bridge->backend!=s->backend || s->backend->reservation!=s->reservation ||
        !pt_amigus_wavetable_cache_current(s->backend))
-        return fail(s,PT_WAVETABLE_SONG_STALE);
-    return PT_WAVETABLE_SONG_OK;
+        return 0;
+    return 1;
+}
+static enum pt_wavetable_song_result current(struct pt_wavetable_song *s)
+{
+    if(!s)return PT_WAVETABLE_SONG_INVALID;
+    if(s->failure)return s->failure;
+    if(s->closing)return s->done?PT_WAVETABLE_SONG_DONE:PT_WAVETABLE_SONG_STOPPING;
+    return source_current(s)?PT_WAVETABLE_SONG_OK:fail(s,PT_WAVETABLE_SONG_STALE);
+}
+static enum pt_cache_result source_acquire(void *context,unsigned slot,const struct pt_playback_format *f,
+    uint8_t *staging,size_t capacity,struct pt_cache_lease *out)
+{
+    struct pt_wavetable_song *s=context;struct pt_pcm pcm;struct pt_sample_version *pin;
+    enum pt_cache_result result;
+    if(!out || !source_current(s) || !s->ready || slot>=s->project->sample_count ||
+       pt_sampler_pin_current(s->sampler,s->project,slot,s->generation,s->pin[slot],&pcm,&pin)!=PT_EDIT_OK)
+        return PT_CACHE_INVALID;
+    result=pt_amigus_wavetable_cache_acquire(s->backend,&pcm,slot+1,s->version,f,staging,capacity,out);
+    pt_sampler_unpin(pin);return result;
+}
+static int source_location(void *context,struct pt_cache_lease lease,uint32_t *address,uint32_t *bytes)
+{
+    struct pt_wavetable_song *s=context;struct pt_sample_cache *cache;
+    if(!source_current(s) || !s->ready)return 0;
+    cache=&s->backend->cache;
+    if(!pt_cache_data(cache,lease) || cache->entry[lease.slot].valid!=1 ||
+       cache->entry[lease.slot].version!=s->version)return 0;
+    return pt_amigus_wavetable_cache_location(s->backend,lease,address,bytes);
 }
 enum pt_wavetable_song_result pt_wavetable_song_begin(struct pt_wavetable_voices *v,
     const struct pt_render_options *o,const struct pt_playback_format *f,const struct pt_allocator *a,
@@ -81,6 +109,7 @@ enum pt_wavetable_song_result pt_wavetable_song_begin(struct pt_wavetable_voices
     s->sampler=v->bridge->sampler;s->project=v->bridge->project;s->generation=s->sampler->generation;
     s->bridge=v->bridge;s->backend=s->bridge->backend;s->reservation=s->backend->reservation;
     s->version=v->bridge->version;memcpy(&s->snapshot,s->project,sizeof(s->snapshot));
+    s->sources=(struct pt_wavetable_prepared){s,source_current,source_acquire,source_location};
     v->song_owner=s;*out=s;return PT_WAVETABLE_SONG_PREPARING;
 }
 enum pt_wavetable_song_result pt_wavetable_song_prepare(struct pt_wavetable_song *s,
@@ -133,7 +162,7 @@ enum pt_wavetable_song_result pt_wavetable_song_next(struct pt_wavetable_song *s
     if(pt_render_sequence_next(s->sequence,&s->interval)!=PT_RENDER_OK)return fail(s,PT_WAVETABLE_SONG_RENDER);
     if(s->range && s->interval.emit && !s->restored) {
         if(pt_render_sequence_snapshot(s->sequence,&s->resume)!=PT_RENDER_OK)return fail(s,PT_WAVETABLE_SONG_RENDER);
-        if(pt_wavetable_restore_dispatch(s->voices,s->version,s->rate,&s->resume,&s->format,s->staging,sizeof(s->staging))!=1)
+        if(pt_wavetable_restore_prepared(s->voices,s->version,s->rate,&s->resume,&s->format,s->staging,sizeof(s->staging),&s->sources)!=1)
             return fail(s,PT_WAVETABLE_SONG_DEVICE);
         s->restored=1;
     }
@@ -156,7 +185,7 @@ enum pt_wavetable_song_result pt_wavetable_song_complete(struct pt_wavetable_son
     if(!s->pending || s->remaining)return PT_WAVETABLE_SONG_INVALID;
     if(pt_render_sequence_complete(s->sequence,&s->plan)!=PT_RENDER_OK)return fail(s,PT_WAVETABLE_SONG_RENDER);
     if(s->interval.end)return stop(s)?PT_WAVETABLE_SONG_DONE:PT_WAVETABLE_SONG_STOPPING;
-    if((!s->range || s->restored) && pt_wavetable_dispatch(s->voices,s->version,s->rate,&s->plan,&s->format,s->staging,sizeof(s->staging))!=1)
+    if((!s->range || s->restored) && pt_wavetable_dispatch_prepared(s->voices,s->version,s->rate,&s->plan,&s->format,s->staging,sizeof(s->staging),&s->sources)!=1)
         return fail(s,PT_WAVETABLE_SONG_DEVICE);
     s->pending=0;return PT_WAVETABLE_SONG_OK;
 }

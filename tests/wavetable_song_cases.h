@@ -1,4 +1,13 @@
 #include "../src/editor/wavetable_song.h"
+#ifdef PT_TEST_PROJECT_VALIDATION_COUNT
+extern unsigned pt_test_project_validations;
+#define VALIDATIONS_SAVE unsigned validations=pt_test_project_validations
+#define VALIDATIONS_UNCHANGED assert(pt_test_project_validations==validations)
+#else
+#define VALIDATIONS_SAVE ((void)0)
+#define VALIDATIONS_UNCHANGED ((void)0)
+#endif
+
 static void song_bind(struct fixture *f,struct pt_sampler_wavetable *bridge,
     struct pt_wavetable_voices *owner,struct dispatch_bus *bus,struct pt_sampler *sampler,struct pt_project *p)
 {
@@ -10,13 +19,13 @@ static void song_bind(struct fixture *f,struct pt_sampler_wavetable *bridge,
 }
 static enum pt_wavetable_song_result song_tick(struct pt_wavetable_song *s,uint64_t *frames)
 {
-    struct pt_render_interval span;uint32_t remaining;
+    struct pt_render_interval span;uint32_t remaining;VALIDATIONS_SAVE;
     enum pt_wavetable_song_result result=pt_wavetable_song_next(s,&span);
-    if(result)return result;
+    VALIDATIONS_UNCHANGED;if(result)return result;
     remaining=span.frames;
     while(remaining){uint32_t n=remaining>17?17:remaining;
         assert(pt_wavetable_song_consume(s,n)==PT_WAVETABLE_SONG_OK);remaining-=n;*frames+=n;}
-    return pt_wavetable_song_complete(s);
+    result=pt_wavetable_song_complete(s);VALIDATIONS_UNCHANGED;return result;
 }
 static void song_fixture(void)
 {
@@ -183,7 +192,7 @@ static void range_song_fixture(void)
         do {
             uint32_t remaining;
             assert(pt_render_sequence_next(oracle,&expected)==PT_RENDER_OK);
-            result=pt_wavetable_song_next(song,&span);
+            {VALIDATIONS_SAVE;result=pt_wavetable_song_next(song,&span);VALIDATIONS_UNCHANGED;}
             if(mode==3 && expected.emit) {
                 assert(result==PT_WAVETABLE_SONG_DEVICE && pins(f)==1 && owner.voice[0].uncertain);
                 break;
@@ -203,11 +212,11 @@ static void range_song_fixture(void)
             remaining=span.frames;
             while(remaining) {uint32_t n=remaining>256?256:remaining;
                 assert(pt_render_sequence_consume(oracle,n)==PT_RENDER_OK);
-                assert(pt_wavetable_song_consume(song,n)==PT_WAVETABLE_SONG_OK);
+                {VALIDATIONS_SAVE;assert(pt_wavetable_song_consume(song,n)==PT_WAVETABLE_SONG_OK);VALIDATIONS_UNCHANGED;}
                 if(span.emit)emitted+=n;
                 remaining-=n;}
             assert(pt_render_sequence_complete(oracle,&plan)==PT_RENDER_OK);
-            result=pt_wavetable_song_complete(song);
+            {VALIDATIONS_SAVE;result=pt_wavetable_song_complete(song);VALIDATIONS_UNCHANGED;}
         }while(result==PT_WAVETABLE_SONG_OK);
         pt_render_sequence_close(oracle);oracle=NULL;
         if(mode==2 || mode==3) {
@@ -284,14 +293,6 @@ static void preparing_song_fixture(void)
     puts("WAVETABLE PREPARING PASS: exclusive pending owner, no early pins/output, cancel/stale/late-refusal/promotion-failure cleanup, transferred song/range playback");
 }
 
-#ifdef PT_TEST_PROJECT_VALIDATION_COUNT
-extern unsigned pt_test_project_validations;
-#define VALIDATIONS_SAVE unsigned validations=pt_test_project_validations
-#define VALIDATIONS_UNCHANGED assert(pt_test_project_validations==validations)
-#else
-#define VALIDATIONS_SAVE ((void)0)
-#define VALIDATIONS_UNCHANGED ((void)0)
-#endif
 static void song_guard_fixture(void)
 {
     struct fixture *f=malloc(sizeof(*f));struct dispatch_bus *bus=malloc(sizeof(*bus));
@@ -377,6 +378,55 @@ static void song_guard_fixture(void)
     }
     pt_document_release(&d);free(replacement);free(bus);free(f);assert(!allocations);
     puts("WAVETABLE GUARD PASS: invalid initial PCM, immutable revision/identity guards, lost ownership latch, promotion and cancellation; injected only");
+}
+static void prepared_source_fixture(void)
+{
+    struct fixture *f=malloc(sizeof(*f));struct dispatch_bus *bus=malloc(sizeof(*bus));
+    struct pt_allocator a={NULL,allocate_master,release_master};struct pt_document d;
+    struct pt_sampler sampler;struct pt_sampler_wavetable bridge={0};struct pt_wavetable_voices owner={0};
+    struct pt_render_options o={0};struct pt_playback_format format={16,0,0,0};
+    struct pt_wavetable_preflight_report report;struct pt_wavetable_song *song=NULL;
+    struct pt_sample saved;struct pt_sample_version *token;enum pt_wavetable_song_result result;
+    int32_t data[8]={257,-513,1025,-2049,17,31,47,63};unsigned mode,writes;uint64_t frames;
+    assert(f && bus);pt_document_init(&d,&a);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
+    d.project.speed=1;d.project.samples[0].pcm=(struct pt_pcm){data,8,8,48000,1,24};
+    d.project.samples[0].volume=64;d.project.samples[0].loop=PT_LOOP_FORWARD;d.project.samples[0].loop_end=8;
+    d.project.events[0]=d.project.events[4]=(struct pt_event){428,0,PT_NOTE_PERIOD,1,0,0,0,0};
+    d.project.events[8].effect=15;
+    o.rate=48000;o.bits=24;o.tracks=1;o.gain_q16=65536;o.tick_limit=100;o.frame_limit=100000;
+    for(mode=0;mode<5;++mode) {
+        pt_sampler_init(&sampler,&a,1024*1024);song_bind(f,&bridge,&owner,bus,&sampler,&d.project);
+        assert(pt_wavetable_song_open(&owner,&o,&format,&a,&report,&song)==PT_WAVETABLE_SONG_OK);
+        saved=d.project.samples[0];token=sampler.current[0];frames=0;
+        switch(mode) {
+        case 1:--d.project.samples[0].pcm.capacity;break;
+        case 2:sampler.current[0]=NULL;break;
+        case 3:d.project.samples[0].pcm.data=data;break;
+        case 4:--d.project.samples[0].volume;break;
+        }
+        do {result=song_tick(song,&frames);}while(result==PT_WAVETABLE_SONG_OK && !bus->starts);
+        if(mode)assert(result==(mode==1?PT_WAVETABLE_SONG_RENDER:PT_WAVETABLE_SONG_DEVICE) && !bus->starts && !f->writes && !pins(f));
+        else {
+            struct pt_sample unused=d.project.samples[1];struct pt_cache_lease lease={0};
+            struct pt_render_plan empty={0};uint8_t staging[16];uint32_t address,bytes;
+            assert(result==PT_WAVETABLE_SONG_OK && bus->starts==1 && pins(f)==1);writes=f->writes;
+            /* Public APIs still validate unused samples, even after private
+             * playback. Restore adversarial input before resuming the owner. */
+            d.project.samples[1]=saved;d.project.samples[1].pcm.bits=8;
+            assert(pt_sampler_wavetable_acquire(&bridge,0,&format,staging,sizeof(staging),&lease)==PT_CACHE_INVALID);
+            assert(!pt_sampler_wavetable_location(&bridge,owner.voice[0].lease,&address,&bytes));
+            assert(!pt_wavetable_dispatch(&owner,bridge.version,o.rate,&empty,&format,staging,sizeof(staging)));
+            d.project.samples[1]=unused;
+            do{result=song_tick(song,&frames);}while(result==PT_WAVETABLE_SONG_OK);
+            assert(result==PT_WAVETABLE_SONG_DONE && bus->starts==2 && f->writes==writes && !pins(f));
+        }
+        d.project.samples[0]=saved;sampler.current[0]=token;
+        assert(pt_wavetable_song_close(&song) && pt_wavetable_voices_close(&owner) && pt_amigus_reservation_close(&f->reservation));
+        assert(d.project.samples[0].pcm.data[0]==257 && d.project.samples[0].pcm.bits==24);
+        pt_sampler_release(&sampler);d.project.samples[0].pcm=(struct pt_pcm){data,8,8,48000,1,24};
+    }
+    pt_document_release(&d);free(bus);free(f);assert(!allocations);
+    puts("WAVETABLE PREPARED SOURCES PASS: exact pin/descriptor refusal before upload, cache-hit retrigger, public validation retained; injected only");
 }
 #undef VALIDATIONS_SAVE
 #undef VALIDATIONS_UNCHANGED

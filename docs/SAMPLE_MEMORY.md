@@ -1970,3 +1970,31 @@ public invalid-value tests and private invalid-shape tests still refuse. Initial
 validation/reset and allocation remain synchronous. Queued output still performs
 its bounded block checks. No native PLAY/transport, real-time deadline, audible or
 physical acceptance follows. Evidence: `evidence/enhanced-editor/studio-prepared-voices/`.
+
+### Prepared wavetable source access
+
+Ready wavetable songs now use private source callbacks for live dispatch and
+exact range restoration. The callbacks recheck the captured generation, project
+header, bridge/backend/reservation identities and live device ownership without
+project-wide scans. Acquisition independently retains the exact prepared master
+through synchronous upload via pt_sampler_pin_current; changed current tokens or
+sample descriptors refuse before upload. Location checks the held cache lease,
+validity, captured cache version and live ownership. No source promotion occurs
+at a prepared trigger. Required master pins remain held until confirmed stop.
+
+The private dispatch call does not store a trusted mode. Public bridge sync,
+acquire/location, manual trigger and public dispatch/restore still use full
+validation. Both paths share capability checks, actual-address checks, cache
+leases, uncertain start/restore/stop handling and rollback. Editing still requires
+stopping the owner; in-place mutation of borrowed arrays is forbidden. No private
+callback is an authorization to accept unvalidated sources.
+
+Instrumented host fixtures verify no project-validator calls during ready song
+playback, including first uploads, cache-hit retriggers, controls and range
+restoration. Changed source capacity, data, metadata and current pins refuse
+without uploads; public calls still reject an invalid unused sample even after
+private playback. Existing exact range cursor and failure ownership tests pass.
+Cache sizing/conversion still validates selected PCM and first-use upload is
+synchronous with bounded staging/write chunks, not bounded total trigger time.
+Native PLAY/clock, card transport, audible and physical acceptance remain open.
+Evidence: `evidence/enhanced-editor/wavetable-prepared-sources/`.

@@ -2,7 +2,7 @@
 """Capture extended EFx ordering on an explicitly reserved shared030 guest."""
 import argparse,fcntl,hashlib,json,shutil,sys,time
 from pathlib import Path
-from make_invert_fixtures import extended_fixtures,one_shot_fixtures,handoff_fixtures,handoff_command_fixtures,shared_handoff_fixtures,long_loop_fixtures
+from make_invert_fixtures import extended_fixtures,one_shot_fixtures,handoff_fixtures,handoff_command_fixtures,shared_handoff_fixtures,long_loop_fixtures,four_clock_delay_fixtures
 from test_invert_emulator import decode_trace
 ROOT=Path(__file__).resolve().parents[1]
 INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
@@ -108,7 +108,7 @@ def canonical_commands(trace,data,record_bytes=164):
     return bytes(out)
 
 def main():
-    parser=argparse.ArgumentParser(description=__doc__);group=parser.add_mutually_exclusive_group();group.add_argument("--one-shot",action="store_true");group.add_argument("--handoff",action="store_true");group.add_argument("--handoff-commands",action="store_true");group.add_argument("--shared",action="store_true");group.add_argument("--writes",action="store_true");args=parser.parse_args();record_bytes=208 if args.writes else 188 if args.shared else 164
+    parser=argparse.ArgumentParser(description=__doc__);group=parser.add_mutually_exclusive_group();group.add_argument("--one-shot",action="store_true");group.add_argument("--handoff",action="store_true");group.add_argument("--handoff-commands",action="store_true");group.add_argument("--shared",action="store_true");group.add_argument("--writes",action="store_true");group.add_argument("--delay",action="store_true");args=parser.parse_args();record_bytes=208 if (args.writes or args.delay) else 188 if args.shared else 164
     sys.path.insert(0,str(INFRA/'scripts'))
     from shared_guest import Guest
     out=ROOT/'build/dev'/('invert-shared-'+str(time.time_ns()));out.mkdir()
@@ -118,9 +118,9 @@ def main():
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         guest=Guest(INFRA,out);run=guest.share/out.name;run.mkdir()
         try:
-            binary=run/('PTInvertWriteTraceTest' if args.writes else 'PTSharedInvertTraceTest' if args.shared else 'PTInvertTraceTest');shutil.copyfile(ROOT/'build/dev'/binary.name,binary)
+            binary=run/('PTInvertWriteTraceTest' if (args.writes or args.delay) else 'PTSharedInvertTraceTest' if args.shared else 'PTInvertTraceTest');shutil.copyfile(ROOT/'build/dev'/binary.name,binary)
             report['diagnostic_sha256']=hashlib.sha256(binary.read_bytes()).hexdigest()
-            cases=list(long_loop_fixtures() if args.writes else shared_handoff_fixtures() if args.shared else handoff_command_fixtures() if args.handoff_commands else handoff_fixtures() if args.handoff else one_shot_fixtures() if args.one_shot else extended_fixtures());commands=['FailAt 1','Stack 65536','CD '+guest.device+run.name]
+            cases=list(four_clock_delay_fixtures() if args.delay else long_loop_fixtures() if args.writes else shared_handoff_fixtures() if args.shared else handoff_command_fixtures() if args.handoff_commands else handoff_fixtures() if args.handoff else one_shot_fixtures() if args.one_shot else extended_fixtures());commands=['FailAt 1','Stack 65536','CD '+guest.device+run.name]
             for name,data,meta in cases:
                 (run/(name+'.mod')).write_bytes(data)
                 for repeat in range(2):
@@ -146,11 +146,11 @@ def main():
                     assert (run/(stem+'.rc')).read_text().strip()=='0'
                     captures.append(decode_trace(log,meta['max_ticks'],record_bytes))
                 assert captures[0][1]==captures[1][1]
-                canonical=lambda trace:canonical_commands(trace,data,record_bytes) if (args.handoff_commands or args.shared or args.writes) else canonical_handoff(trace,data) if args.handoff else canonical_trace(trace)
+                canonical=lambda trace:canonical_commands(trace,data,record_bytes) if (args.handoff_commands or args.shared or args.writes or args.delay) else canonical_handoff(trace,data) if args.handoff else canonical_trace(trace)
                 assert canonical(captures[0][0])==canonical(captures[1][0]), name
                 (out/(name+".trace")).write_bytes(canonical(captures[0][0]))
                 trace,reason=captures[0];(out/(name+'.mod')).write_bytes(data)
-                report['cases'][name]={**meta,'comparison':('exact after per-sample cache relocation' if (args.handoff or args.handoff_commands or args.shared or args.writes) else 'exact after one fixed sample-cache relocation')+'; raw logs retained','reason':reason,'ticks':len(trace)//record_bytes,'record_bytes':record_bytes,'fixture_sha256':hashlib.sha256(data).hexdigest(),'trace_sha256':hashlib.sha256(trace).hexdigest()}
+                report['cases'][name]={**meta,'comparison':('exact after per-sample cache relocation' if (args.handoff or args.handoff_commands or args.shared or args.writes or args.delay) else 'exact after one fixed sample-cache relocation')+'; raw logs retained','reason':reason,'ticks':len(trace)//record_bytes,'record_bytes':record_bytes,'fixture_sha256':hashlib.sha256(data).hexdigest(),'trace_sha256':hashlib.sha256(trace).hexdigest()}
             report['passed']=True
         finally:
             if (run/'done').exists():

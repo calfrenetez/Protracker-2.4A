@@ -90,9 +90,9 @@ int main(int argc,char **argv)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_document d;struct oracle o;
     struct pt_render_options options;struct pt_render_report report;FILE *f;long size;
-    unsigned i,offset=2108,partitions[]={INVERT_FIRST_PULL,17,256},calls=0,expected_changes,aligned_return;uint64_t time=0;
+    unsigned i,offset=2108,partitions[]={INVERT_FIRST_PULL,17,256},calls=0,expected_changes,aligned_return,expected_ticks;uint64_t time=0;
     int32_t *masters[31]={0};unsigned char r[INVERT_RECORD_BYTES];
-    assert(argc==3);memset(&o,0,sizeof(o));memset(&options,0,sizeof(options));
+    assert(argc==3 || (argc==4 && INVERT_RECORD_BYTES==208));expected_ticks=argc==4?(unsigned)strtoul(argv[3],NULL,10):0;memset(&o,0,sizeof(o));memset(&options,0,sizeof(options));
     f=fopen(argv[1],"rb");assert(f && !fseek(f,0,SEEK_END));size=ftell(f);assert(size>0);rewind(f);
     o.size=(size_t)size;o.initial=malloc(o.size);o.data=malloc(o.size);
     assert(o.initial && o.data && fread(o.initial,1,o.size,f)==o.size && !fclose(f));
@@ -117,7 +117,7 @@ int main(int argc,char **argv)
         assert(o.ticks<100 && word(r+12)>=32);memcpy(o.record[o.ticks],r,INVERT_RECORD_BYTES);
         time+=(120000ULL<<32)/word(r+12);o.tick_end[o.ticks++]=time>>32;
     }
-    assert(feof(f) && !ferror(f) && !fclose(f) && (o.ticks==18 || (INVERT_RECORD_BYTES==208 && o.ticks==42)));
+    assert(feof(f) && !ferror(f) && !fclose(f) && (expected_ticks?o.ticks==expected_ticks:(o.ticks==18 || (INVERT_RECORD_BYTES==208 && o.ticks==42))));
     d.project.channels.track[0].pan=0;options.rate=48000;options.bits=24;options.gain_q16=65536;
     options.tracks=1;options.tick_limit=100;options.frame_limit=100000;
     assert(pt_render_stream(&d.project,&options,count,&calls,NULL,NULL,&report)==PT_RENDER_EFFECT && !calls);
@@ -137,17 +137,18 @@ int main(int argc,char **argv)
     if(INVERT_RECORD_BYTES>=188)for(i=0;i<2;++i) {
         /* An unselected mutator was already covered. Muting it or soloing the
            heard channel must retain both private sample mutation clocks. */
-        options.tracks=3;d.project.channels.track[1].muted=i==0;
+        unsigned ch;options.tracks=INVERT_RECORD_BYTES==208?15:3;
+        for(ch=1;ch<4;++ch)d.project.channels.track[ch].muted=i==0;
         d.project.channels.track[0].solo=i==1;reset(&o);
         assert(pt_render_invert_stream(&d.project,&options,receive,&o,NULL,NULL,&report,SIZE_MAX,&a)==PT_RENDER_OK);
         assert(o.frames==o.tick_end[o.ticks-1] && o.changes==expected_changes);
     }
-    options.tracks=1;d.project.channels.track[1].muted=0;d.project.channels.track[0].solo=0;
+    options.tracks=1;for(i=1;i<4;++i)d.project.channels.track[i].muted=0;d.project.channels.track[0].solo=0;
     for(i=0;i<31;++i)if(masters[i])assert(!memcmp(masters[i],d.project.samples[i].pcm.data,d.project.samples[i].pcm.frames*sizeof(int32_t)));
     d.project.samples[1].interpolation=1;refused(&d.project,&options,&a);d.project.samples[1].interpolation=0;
     d.project.samples[1].pcm.bits=16;refused(&d.project,&options,&a);d.project.samples[1].pcm.bits=8;
     d.project.samples[1].pcm.bits=24;refused(&d.project,&options,&a);d.project.samples[1].pcm.bits=8;
     d.project.samples[1].pcm.rate=44100;refused(&d.project,&options,&a);d.project.samples[1].pcm.rate=48000;
     for(i=0;i<31;++i)free(masters[i]);pt_document_release(&d);free(o.data);free(o.initial);
-    printf("EFx handoff reference PCM PASS: offline and pull%u/17/256, preserved masters, refusal boundaries\n",partitions[0]);return 0;
+    printf("EFx handoff reference PCM PASS: offline and pull%s, preserved masters, refusal boundaries\n",INVERT_FIRST_PULL==17?"17/256":"1/17/256");return 0;
 }

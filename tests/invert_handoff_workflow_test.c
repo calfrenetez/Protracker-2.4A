@@ -41,7 +41,7 @@ int main(int argc,char **argv)
     struct pt_stem_report stems;enum pt_render_result detail;struct pt_project *p;struct pt_pcm pcm={0};struct pt_wav_info info;
     char wave[1024],stemdir[1024],groupdir[1024],cancelled[1024],project[1024],bounced[1024],undone[1024];
     unsigned char *data,*saved,*wave_data;size_t n,written,wave_size;unsigned i,base,expected_frames;
-    assert(argc==3 || argc==4);expected_frames=argc==4?(unsigned)strtoul(argv[3],NULL,10):17280;assert(expected_frames==17280 || expected_frames==40320);pt_document_init(&d,&a);pt_document_init(&copy,&a);
+    assert(argc==3 || argc==4);expected_frames=argc==4?(unsigned)strtoul(argv[3],NULL,10):17280;assert(expected_frames==17280 || expected_frames==23040 || expected_frames==28800 || expected_frames==40320);pt_document_init(&d,&a);pt_document_init(&copy,&a);
     data=read_file(argv[1],&n);assert(pt_document_load(&d,data,n,SIZE_MAX)==PT_PROJECT_OK);free(data);p=&d.project;
     for(i=0;i<p->sample_count;++i)p->samples[i].pcm.rate=48000;
     p->channels.track[0].pan=0;p->channels.track[1].pan=255;p->channels.track[0].group=p->channels.track[1].group=1;

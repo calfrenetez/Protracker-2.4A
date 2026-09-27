@@ -1589,3 +1589,24 @@ bound and completed naturally at451.8 seconds during separately coordinated
 read-only observation. Both results are retained; it is not an in-bound pass.
 All DMA was off before exact cleanup and explicit release. Native pull partitions
 were17/256; host includes1. No physical performance or audio claim follows.
+
+
+### Four mutation clocks with pattern delay
+
+Two further pinned-reference fixtures combine all four private EFx clocks with
+EE2/EE1 delayed rows, shared-bank collisions, instrument changes, cursor wrap
+and EF0 disable/re-enable. Repeated tick zero produces seven ordered stores
+(or five with one clock disabled), within the diagnostic's fixed eight-entry
+buffer. Full-bank and independent PCM comparisons agree, including all three
+unheard clocks when excluded, muted or solo-excluded. WAV/stems/groups, bounce,
+cancellation, undo/redo and project save/reload preserve every original master.
+
+Evidence: `evidence/enhanced-editor/invert-four-clock-delay/`. These are bounded
+classic mono8 cases; no production source changes or new effect admission were
+needed. Native Studio output and physical acceptance remain separate.
+
+Both cases also pass native shared030 offline/pull17/256 and mute/solo checks:
+44 Fast allocations each, zero final owned bytes, no Chip fallback. Each ran in
+its own180-second window with no timeout; DMA-off, exact cleanup and explicit
+release passed. The full23-test host sanitizer suite includes one-frame pulls.
+No actual device output or physical timing is qualified by these results.

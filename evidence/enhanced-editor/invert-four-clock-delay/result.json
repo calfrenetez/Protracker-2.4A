@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "scope": "pinned EFx ordering captures; no renderer/physical acceptance",
+  "diagnostic_sha256": "d2fa17c56b1ef2531a042c9d29bd10e1e784d398548a797e2add00606f4871e8",
+  "cases": {
+    "inv_delay_four": {
+      "max_ticks": 100,
+      "loop_bytes": 18,
+      "delay": 2,
+      "active_ticks": 30,
+      "ordering_case": "inv_delay_four",
+      "comparison": "exact after per-sample cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 36,
+      "record_bytes": 208,
+      "fixture_sha256": "4868fafa5260b2ffb5490e5ff06003b93c057b3fb8b5fdf5b76559048f396401",
+      "trace_sha256": "87703f10fffb434fad782bb070a31e2c5de59806e5e03a817cc30aeeb2fde4e4"
+    },
+    "inv_delay_disable": {
+      "max_ticks": 100,
+      "loop_bytes": 18,
+      "delay": 1,
+      "active_ticks": 24,
+      "ordering_case": "inv_delay_disable",
+      "comparison": "exact after per-sample cache relocation; raw logs retained",
+      "reason": "native-stop",
+      "ticks": 30,
+      "record_bytes": 208,
+      "fixture_sha256": "e5a071710278e824f88a7772f868049173438a982f81f7f124f73445007c0184",
+      "trace_sha256": "4d4b0d5f9828bf624568ba28eee62514496acfb2dcf773d11d69846de652a1f2"
+    }
+  },
+  "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=416\tsndbuf_status=0",
+  "owned_files_cleaned": true
+}

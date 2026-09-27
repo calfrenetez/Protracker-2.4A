@@ -702,3 +702,10 @@ The18/64/256-byte cases include wrap, shared-address collisions and instrument
 changes, while the previous baseline confirms diagnostic neutrality. Host
 one-frame pulls remain covered; native longer-loop checks use17/256 partitions.
 See `evidence/enhanced-editor/invert-write-events/` for exact evidence and limits.
+
+
+Four simultaneous EFx clocks now have actual-write evidence across EEx repeated
+tick zero and EF0 disable/re-enable. All private-bank bytes, offline/incremental
+PCM and export/bounce/master transactions agree with the pinned reference.
+See `evidence/enhanced-editor/invert-four-clock-delay/` for the conservative
+write-buffer source bound, captured ordering and native/physical distinctions.

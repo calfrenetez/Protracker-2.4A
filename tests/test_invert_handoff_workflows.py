@@ -38,7 +38,7 @@ def reference_pcm(mod,trace,sample_rate=48000,gain=65536,record_bytes=164):
             phase+=(sample_rate*428<<32)//(48000*word(44))
             if phase>>32>=end:phase=((phase-(end<<32))%(length<<32))+(loop<<32);end=loop+length
             frames+=1
-    assert frames in ((17280,40320) if record_bytes==208 else (17280,))
+    assert frames in ((17280,23040,28800,40320) if record_bytes==208 else (17280,))
     return bytes(output)
 
 def verify_outputs(folder,mod,trace,record_bytes=164):

@@ -2527,3 +2527,15 @@ The 259392-byte candidate passed shared030 run `20260927T120335293381Z`, RC0,
 29 Fast allocations/zero owned bytes, all DMA off, exact cleanup and explicit
 release. Physical promotion accepts those exact bytes. Physical execution and
 realtime acceptance remain separate. Evidence: `evidence/enhanced-editor/finite-timing/`.
+
+
+The separately invoked `tools/shared_infra_timing_physical.py` caller requires a
+coordinated, user-authorized physical/DevBench window. It checks shared exact-byte
+promotion before selecting hardware, delegates CPU/network/bridge identity and
+RAM-only upload/execution to the existing shared physical runner, validates all
+completion/resource markers and idle DMA, and deletes only its exact three owned
+files and directory after success. Every selection attempt is paired with emulator
+restoration and live verification in `finally`. Failure retains diagnostic evidence
+and guest files; there is no retry, reset, install or network configuration change.
+Host tests cover refusal before selection and restoration on selection, execution
+and cleanup failure. These host guards do not establish physical availability.

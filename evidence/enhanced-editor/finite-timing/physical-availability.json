@@ -1,0 +1,8 @@
+{
+  "checked_utc": "2026-09-27T12:11:18.416098+00:00",
+  "scope": "single HTTP availability check, no target selection/upload/execution",
+  "url": "http://192.168.0.156:8080/health",
+  "passed": false,
+  "error": "<urlopen error timed out>",
+  "emulator_selection_unchanged": true
+}

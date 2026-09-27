@@ -151,6 +151,11 @@ enum pt_wavetable_song_result pt_wavetable_song_schedule_step(struct pt_wavetabl
 typedef int (*pt_wavetable_clock_read)(void *,uint64_t *ticks,uint32_t *frequency);
 enum pt_wavetable_song_result pt_wavetable_song_clocked_begin(struct pt_wavetable_song *,uint64_t start_delay,pt_wavetable_clock_read,void *);
 enum pt_wavetable_song_result pt_wavetable_song_clocked_service(struct pt_wavetable_song *,uint64_t *deadline);
+/* Translate the current scheduled deadline to the first counter tick that
+ * reaches it, without reading the clock or advancing playback. Unrepresentable
+ * deadline fails CLOCK and stops. The caller must still service before/at that
+ * boundary; this is not a wakeup guarantee or late-service tolerance. */
+enum pt_wavetable_song_result pt_wavetable_song_clocked_deadline(struct pt_wavetable_song *,uint64_t *ticks);
 /* One stop attempt per held voice; no polling. Retains ALL master pins/controller
  * and unconfirmed device leases until all stops and bridge detach succeed.
  * Returns0 while unresolved; caller must retain/retry *song. On success frees

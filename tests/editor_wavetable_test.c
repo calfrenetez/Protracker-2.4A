@@ -87,6 +87,9 @@ static void editor_staged_restore_fixture(struct pt_editor *e,struct pt_editor_w
             do{r=mode==1?pt_editor_wavetable_schedule_step(o,0,&deadline):pt_editor_wavetable_clocked_service(o,&deadline);assert(++guard<1000 && deadline==1000);}
             while(r==PT_WAVETABLE_SONG_WAITING);
             assert(r==PT_WAVETABLE_SONG_OK);
+            if(mode==2){uint64_t ticks;unsigned reads=clock.reads;
+                assert(pt_editor_wavetable_clocked_deadline(o,&ticks)==PT_WAVETABLE_SONG_OK);
+                assert(ticks==100+(1000ULL*700001+47999)/48000 && reads==clock.reads);}
         }else for(;;) {
             enum pt_wavetable_song_result r;uint32_t n;
             do{r=pt_editor_wavetable_next_prepare(o,&span);}while(r==PT_WAVETABLE_SONG_UPLOADING);

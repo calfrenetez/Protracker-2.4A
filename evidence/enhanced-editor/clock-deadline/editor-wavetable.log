@@ -1,0 +1,35 @@
+EXEC MEMORY pool_limit=130938536 reserve=262144 flags=4
+CURRENT PIN PASS: exact8/16/24 master reuse, budget-free retain, stale/descriptor refusal, shared backing and final release
+STUDIO PREPARATION PASS: bounded copy/cancel/stale/budget, selective pre-roll/repeat pins, stereo24/pingpong/slice parity and stop ownership
+PIN JOB PASS: bounded PCM/marker copy, atomic 8/16/24-bit publication, cancellation, stale poison, budget/reuse and pinned lifetime
+LOOKAHEAD PASS: bounded copied phase/commands, live consume interleave, exact plans, no early commit, stale/rewind/cancel/private-source refusal
+VALIDATED VOICE PASS: 8/16/24-bit exact loop/segment/handoff parity, bounded refusal/alias atomicity, public value validation retained
+amigus reservation lifecycle: PASS (fake library, no hardware)
+WAVETABLE UPLOAD JOB PASS: bounded steps, cancellation, unpublished leases, partial words, live ownership loss and hit transfer; injected only
+AMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only
+SAMPLER UPLOAD JOB PASS: exact8/16/24 pins, stable descriptor, bounded steps, release/edit/history/cancel guards, hits and memory refusal; injected only
+SAMPLER WAVETABLE PASS: revision rebuilds, edits/undo/table changes, pinned old playback, master save and failure cleanup; fake bus only
+AMIGUS VOICE PLAN PASS: byte bounds, alignment, loops, rational rate, volume, refusal atomicity; no I/O
+WAVETABLE VOICES PASS: 16 voices, retrigger, uncertain start, confirmed stop, bounded close, master preserved
+WAVETABLE RESTORE OWNER PASS: whole-batch acquisition, exact cursor, refusal rollback, uncertain restore retains lease until confirmed stop; injected only
+WAVETABLE PREFLIGHT STEP PASS: pending gate, bounded timeline/frame progress, copied options, cancellation, late refusal, terminal stability and allocation cleanup
+WAVETABLE SONG PASS: gated preflight, selective master pins, interval protocol, pending stop, stale and failed-start ownership; injected only
+WAVETABLE STAGED RESTORE PASS: bounded callback-free preparation, repeatable readiness, write-free exact commit, early/double refusal and ready cancel/stale ownership
+WAVETABLE RANGE PASS: silent pre-roll, exact fractional restore before output, selective source pins, final-span timing and uncertain-stop ownership; injected only
+WAVETABLE PREPARING PASS: exclusive pending owner, no early pins/output, cancel/stale/late-refusal/promotion-failure cleanup, transferred song/range playback
+WAVETABLE GUARD PASS: invalid initial PCM, immutable revision/identity guards, lost ownership latch, promotion and cancellation; injected only
+WAVETABLE PREPARED SOURCES PASS: exact pin/descriptor refusal before upload, cache-hit retrigger, public validation retained; injected only
+LARGE PREPARING PASS: allocation separate from4KiB copies, no partial master publication/output, cancel/stale cleanup and intact24-bit ready master
+SONG PREFETCH PASS: upcoming600-byte cache ready before elapsed interval, no early commit, write-free commit, stale/transfer/cancel with old voice ownership
+SONG UPLOADING PASS: whole-batch leases,256-byte steps, no early output/time, duplicate hits, cancellation/stale/capacity/transfer guards and uncertain stop
+WAVETABLE CLOCK PASS: exact ready deadline, no early/late starts, monotonic/overflow refusal, bounded phase debt and retained uncertain stops; injected interval gate only
+WAVETABLE SCHEDULE PASS: future startup, silent range priming, fractional/tempo absolute boundaries, lead-in, no early/late starts, deadline/clock refusal and uncertain-stop retention; injected only
+ELAPSED CLOCK PASS: rational carry, partition invariance, large quotient, exact limit, sticky overflow/frequency/regression and atomic refusal
+ELAPSED DEADLINE PASS: earliest reaching tick, nonintegral carry, low-frequency skipped frames, extreme bounds, borrowing and atomic refusal
+WAVETABLE CLOCKED PASS: fractional tick service, single reads, exclusive progression, read/frequency/regression/deadline faults, no recovery reread and uncertain-stop retention; injected only
+WAVETABLE DISPATCH PASS: whole-sequence preflight, resolved16-channel triggers, phase-preserving controls, atomic refusal, uncertain-stop retention; injected only
+EDITOR PREPARING PASS: edit, Stop and dispose cancel before source/output ownership
+EDITOR UPLOADING PASS: edit/undo, Stop and dispose cancel unpublished device/master leases before output
+EDITOR STAGED RESTORE PASS: edit/undo, scheduled Stop and dispose release prepared leases before any voice restore
+EDITOR WAVETABLE PASS: pending/failed stop vetoes edits, imports, undo/redo, replacement and disposal; navigation retained; injected only
+EXEC MEMORY PASS: 1182 Fast allocations, zero owned bytes, budget refusal without Chip fallback

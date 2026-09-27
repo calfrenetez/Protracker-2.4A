@@ -15,4 +15,10 @@ struct pt_elapsed_clock {
 };
 enum pt_elapsed_result pt_elapsed_clock_init(struct pt_elapsed_clock *,uint32_t frequency,uint32_t rate,uint64_t ticks,uint64_t frames);
 enum pt_elapsed_result pt_elapsed_clock_advance(struct pt_elapsed_clock *,uint32_t frequency,uint64_t ticks,uint64_t *frames);
+/* First counter tick at or after the requested frame, relative to the current
+ * observation and fractional carry. Read-only: errors preserve state/output,
+ * including an unrepresentable future tick. Past frames refuse; the current
+ * frame returns the current tick. Low-frequency clocks may skip frames, so this
+ * is a threshold, not a promise that an exact frame boundary is representable. */
+enum pt_elapsed_result pt_elapsed_clock_deadline(const struct pt_elapsed_clock *,uint64_t frame,uint64_t *ticks);
 #endif

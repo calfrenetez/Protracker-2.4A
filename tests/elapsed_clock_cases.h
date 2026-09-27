@@ -43,3 +43,40 @@ static void elapsed_clock_fixture(void)
     assert(pt_elapsed_clock_advance(&c,7,1,NULL)==PT_ELAPSED_INVALID && !memcmp(&c,&before,sizeof(c)));
     puts("ELAPSED CLOCK PASS: rational carry, partition invariance, large quotient, exact limit, sticky overflow/frequency/regression and atomic refusal");
 }
+
+static void elapsed_deadline_fixture(void)
+{
+    const uint32_t frequencies[]={1,3,700001,UINT32_MAX},rates[]={1,2,48000,192000};
+    struct pt_elapsed_clock c,copy,before;uint64_t out,frame,reached,expected;unsigned f,r,i;
+    for(f=0;f<4;++f)for(r=0;r<4;++r) {
+        assert(pt_elapsed_clock_init(&c,frequencies[f],rates[r],123,17)==PT_ELAPSED_OK);
+        assert(pt_elapsed_clock_advance(&c,frequencies[f],153,&reached)==PT_ELAPSED_OK);before=c;
+        assert(pt_elapsed_clock_deadline(&c,c.frames,&out)==PT_ELAPSED_OK && out==153);
+        for(i=1;i<68;++i) {
+            frame=c.frames+i;
+            /* Independent small-product oracle from original epoch. */
+            expected=123+((frame-17)*frequencies[f]+rates[r]-1)/rates[r];
+            assert(pt_elapsed_clock_deadline(&c,frame,&out)==PT_ELAPSED_OK && out==expected);
+            assert(!memcmp(&c,&before,sizeof(c)));copy=c;
+            assert(pt_elapsed_clock_advance(&copy,frequencies[f],out,&reached)==PT_ELAPSED_OK && reached>=frame);
+            copy=c;
+            assert(out>c.ticks && pt_elapsed_clock_advance(&copy,frequencies[f],out-1,&reached)==PT_ELAPSED_OK && reached<frame);
+        }
+    }
+    assert(pt_elapsed_clock_init(&c,1,1,0,0)==PT_ELAPSED_OK);
+    assert(pt_elapsed_clock_deadline(&c,UINT64_MAX,&out)==PT_ELAPSED_OK && out==UINT64_MAX);
+    /* Carry borrowing must happen before the whole product overflow test. */
+    assert(pt_elapsed_clock_init(&c,10,1,0,0)==PT_ELAPSED_OK);
+    assert(pt_elapsed_clock_advance(&c,10,9,&out)==PT_ELAPSED_OK && c.fraction==9);
+    frame=(UINT64_MAX-9)/10+1;
+    assert(pt_elapsed_clock_deadline(&c,frame,&out)==PT_ELAPSED_OK && out==frame*10);
+    before=c;out=99;
+    assert(pt_elapsed_clock_deadline(&c,UINT64_MAX,&out)==PT_ELAPSED_OVERFLOW && out==99 && !memcmp(&c,&before,sizeof(c)));
+    assert(pt_elapsed_clock_init(&c,3,2,UINT64_MAX-1,7)==PT_ELAPSED_OK);before=c;
+    assert(pt_elapsed_clock_deadline(&c,8,&out)==PT_ELAPSED_OVERFLOW && out==99 && !memcmp(&c,&before,sizeof(c)));
+    assert(pt_elapsed_clock_deadline(&c,6,&out)==PT_ELAPSED_INVALID && out==99);
+    assert(pt_elapsed_clock_deadline(&c,7,&c.ticks)==PT_ELAPSED_INVALID && !memcmp(&c,&before,sizeof(c)));
+    assert(pt_elapsed_clock_advance(&c,3,0,&out)==PT_ELAPSED_REGRESSION);
+    assert(pt_elapsed_clock_deadline(&c,7,&out)==PT_ELAPSED_REGRESSION && out==99);
+    puts("ELAPSED DEADLINE PASS: earliest reaching tick, nonintegral carry, low-frequency skipped frames, extreme bounds, borrowing and atomic refusal");
+}

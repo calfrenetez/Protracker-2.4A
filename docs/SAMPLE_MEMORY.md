@@ -2280,3 +2280,19 @@ an injected reader adapter, not native clock acquisition or a sleep/wakeup drive
 Deadlines are still frame counts relative to the initial read. Real clock accuracy,
 callback duration, event-loop timing and physical bus/audio remain unqualified;
 native PLAY/card output remains disabled.
+
+The elapsed clock also has a read-only inverse deadline query: it returns the
+first counter tick at or after a requested future frame, accounting for the
+current fractional carry and rounding upward. Checked whole/remainder splitting
+and borrowing avoid intermediate overflow; unrepresentable ticks and past frames
+refuse without changing state/output. The current frame returns the current
+observed tick. A clock slower than the sample rate can skip frames: this query
+returns a threshold and does not promise an exact-frame observation.
+
+Song/editor clocked_deadline converts the active startup or running deadline
+without sampling the reader, preparing work or advancing playback. If that actual
+scheduled deadline cannot fit the counter, playback fails CLOCK and requests stop.
+Tests check each returned tick reaches the target and its predecessor does not,
+compare against an independent original-epoch arithmetic oracle, cover extreme
+limits/borrowing, and drive a full song using queried ticks. No timer is armed by
+the query, and the existing strict no-late-dispatch policy remains unchanged.

@@ -480,3 +480,15 @@ enum pt_wavetable_song_result pt_wavetable_song_clocked_service(struct pt_waveta
         return fail(s,PT_WAVETABLE_SONG_CLOCK);
     return schedule_step(s,frames,deadline);
 }
+
+enum pt_wavetable_song_result pt_wavetable_song_clocked_deadline(struct pt_wavetable_song *s,uint64_t *ticks)
+{
+    enum pt_wavetable_song_result r;uint64_t frame;
+    if(!ticks)return PT_WAVETABLE_SONG_INVALID;
+    r=current(s);if(r)return r;
+    if(!s->clock_bound)return PT_WAVETABLE_SONG_INVALID;
+    frame=s->schedule_phase==SCHEDULE_RUNNING?s->clock_deadline:s->schedule_start;
+    if(pt_elapsed_clock_deadline(&s->elapsed,frame,ticks)!=PT_ELAPSED_OK)
+        return fail(s,PT_WAVETABLE_SONG_CLOCK);
+    return PT_WAVETABLE_SONG_OK;
+}

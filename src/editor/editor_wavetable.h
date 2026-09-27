@@ -40,4 +40,5 @@ enum pt_wavetable_song_result pt_editor_wavetable_schedule_begin(struct pt_edito
 enum pt_wavetable_song_result pt_editor_wavetable_schedule_step(struct pt_editor_wavetable *,uint64_t,uint64_t *);
 enum pt_wavetable_song_result pt_editor_wavetable_clocked_begin(struct pt_editor_wavetable *,uint64_t,pt_wavetable_clock_read,void *);
 enum pt_wavetable_song_result pt_editor_wavetable_clocked_service(struct pt_editor_wavetable *,uint64_t *);
+enum pt_wavetable_song_result pt_editor_wavetable_clocked_deadline(struct pt_editor_wavetable *,uint64_t *ticks);
 #endif

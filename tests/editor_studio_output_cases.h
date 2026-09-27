@@ -32,7 +32,14 @@ static void output_library_release(void *c,void *card,enum pt_amigus_resource re
 static int output_quiesce(void *c)
 {
     struct output_library *f=c;
-    assert(f->reservation->access && f->reservation->reserved && !f->owner->queue && f->owner->session.phase==PT_AS_IDLE);
+    assert(f->reservation->access && f->reservation->reserved);
+    assert(f->owner->queue?f->owner->session.phase==PT_AS_DONE:f->owner->session.phase==PT_AS_IDLE);
+    if(f->owner->queue) {
+        const struct pt_pcm *pcm=NULL;uint64_t ticket=0;
+        /* A delayed adapter callback can still inspect its borrowed queue after
+         * reset. ASan would detect release before this quiescence callback. */
+        assert(pt_studio_queue_acquire(f->owner->queue,&pcm,&ticket)==PT_QUEUE_DONE);
+    }
     ++f->quiesces;return f->quiet;
 }
 static void output_reserved_cases(struct pt_editor_studio_output *o,struct pt_render_options *options,struct output_port *p,struct pt_amigus_fifo_port *port)
@@ -57,10 +64,16 @@ static void output_reserved_cases(struct pt_editor_studio_output *o,struct pt_re
         if(mode==0 || mode==3) {
             pt_editor_studio_output_step(o,17);assert(o->queue && !f.quiesces && !pt_editor_studio_output_detach(o));p->reset=1;
         }
-        for(i=0;i<30000 && o->queue;++i)pt_editor_studio_output_step(o,17);
+        for(i=0;i<30000 && o->queue && o->session.phase!=PT_AS_DONE;++i)pt_editor_studio_output_step(o,17);
         assert(i<30000 && !f.quiesces && r.access && !pt_amigus_reservation_close(&r));
         assert(!pt_editor_studio_output_detach(o));
         pt_editor_studio_output_step(o,17);assert(f.quiesces==1 && pt_editor_studio_output_busy(o));
+        assert(mode==2 || o->queue); /* Queue stays valid through pending quiescence. */
+        f.quiet=2;pt_editor_studio_output_step(o,17);
+        assert(r.access && (mode==2 || o->queue) && !pt_editor_studio_output_detach(o));
+        /* An adapter claiming success cannot override a retained IRQ guard. */
+        r.interrupt=1;f.quiet=1;pt_editor_studio_output_step(o,17);
+        assert(r.access && !o->quiesced && (mode==2 || o->queue));r.interrupt=0;
         if(mode!=4) {f.quiet=-1;assert(pt_editor_studio_output_step(o,17)==PT_CONSUMER_ERROR && r.access && !pt_amigus_reservation_close(&r));}
         f.quiet=1;assert(pt_editor_studio_output_step(o,17)==(mode==4?PT_CONSUMER_FINISHED:PT_CONSUMER_ERROR) && !r.access && !pt_editor_studio_output_busy(o));
         if(mode==4)assert(!o->failed);

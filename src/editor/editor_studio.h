@@ -58,14 +58,15 @@ struct pt_editor_studio_output {
     struct pt_editor_studio producer;
     struct pt_amigus_session session;
     struct pt_studio_queue *queue;
-    unsigned failed;
+    unsigned failed,quiesced;
     struct pt_amigus_reservation *reservation;
     int (*quiesce)(void *);void *quiesce_context;
 };
 int pt_editor_studio_output_attach(struct pt_editor_studio_output *,struct pt_editor *);
 int pt_editor_studio_output_start(struct pt_editor_studio_output *,const struct pt_render_options *,unsigned queue_blocks,const struct pt_amigus_fifo_port *,int (*drain)(void *),void *);
 /* Optional PCM reservation lease: held before any reset/output callback until
- * session reset/detach AND quiesce(context)==1. Quiesce must confirm all adapter
+ * session reset AND quiesce(context)==1, before queue/session storage is released.
+ * Quiesce must stop/detach any interrupt owner and confirm all adapter
  * references/interrupts removed; 0 pending, -1 failure, bounded/nonreentrant.
  * Caller retains library/card reservation after the lease ends and closes it.
  * This API neither verifies hardware capabilities nor permits native MMIO. */

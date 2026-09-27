@@ -1,0 +1,2 @@
+Assertion failed: (mode==2 || o->queue), function output_reserved_cases, file editor_studio_output_cases.h, line 71.
+Expected failure, exit: -6

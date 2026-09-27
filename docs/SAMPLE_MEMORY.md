@@ -2561,8 +2561,9 @@ edit/undo/Stop/dispose, partial-write/capacity/source faults and reset recovery.
 
 
 The integrated output owner also accepts an already-open PCM reservation. Its
-single access lease survives queue cleanup until a separate bounded `quiesce`
-callback confirms all adapter references/interrupts removed. Pending/failed
+single access lease and queue/session storage survive reset until a separate
+bounded `quiesce` callback confirms all adapter references/interrupts removed.
+Queue/session cleanup now follows quiescence, before access release. Pending/failed
 quiescence refuses restart, detach and card/library close. The caller retains the
 reservation after the access lease ends. This is an ownership contract for an
 injected adapter, not capability validation or permission for MMIO. Host and native
@@ -2591,3 +2592,14 @@ undo/redo and clean exit. Recents settings were isolated/restored byte-for-byte;
 all DMA was off and cleanup/release verified. The classic layout was inspected.
 Evidence: `editor-regression-20260927/`. This exercises native file workflows,
 not Studio device output.
+
+### Studio storage survives callback shutdown
+
+Queue/session storage now remains valid after device reset while adapter
+quiescence is pending or uncertain. Exactly1 plus a cleared interrupt guard is
+required before freeing the queue and detaching the session; the access lease
+ends afterwards. An adapter reporting success cannot override a live interrupt
+guard. Regression fails against the prior ordering; host and native fixtures
+pass, including direct24-bit parity and141 Fast allocations returned to zero.
+Evidence: `evidence/enhanced-editor/editor-studio-quiescence/`. These injected
+callbacks do not qualify real IRQ removal or device silence.

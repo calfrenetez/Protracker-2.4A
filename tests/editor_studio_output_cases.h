@@ -1,28 +1,79 @@
 /* End-to-end editor -> master mixer -> queue -> packed FIFO ownership. */
-struct output_port {int reset,space,write;unsigned writes,resets,drains;uint32_t hash,first;size_t bytes;};
+struct output_port {int reset,space,write;unsigned writes,resets,drains;uint32_t hash,first;size_t bytes;struct pt_amigus_reservation *reservation;};
 static uint32_t output_hash(uint32_t hash,unsigned byte) {return (hash^(byte&255u))*16777619u;}
-static int output_capacity(void *c) {return ((struct output_port *)c)->space;}
+static void output_access(struct output_port *p)
+{if(p->reservation)assert(p->reservation->opened && p->reservation->reserved && p->reservation->access && p->reservation->resource==PT_AMIGUS_PCM);}
+static int output_capacity(void *c) {output_access(c);return ((struct output_port *)c)->space;}
 static int output_write3(void *c,const uint32_t *words)
 {
     struct output_port *p=c;unsigned i,j;
-    if(!p->writes)p->first=words[0];
+    output_access(p);if(!p->writes)p->first=words[0];
     ++p->writes;
     for(i=0;i<3;++i)for(j=0;j<4;++j)p->hash=output_hash(p->hash,words[i]>>(24-j*8));
     p->bytes+=12;return p->write;
 }
-static int output_reset(void *c) {struct output_port *p=c;++p->resets;return p->reset;}
-static int output_drain(void *c) {struct output_port *p=c;return ++p->drains>1;}
+static int output_reset(void *c) {struct output_port *p=c;output_access(p);++p->resets;return p->reset;}
+static int output_drain(void *c) {struct output_port *p=c;output_access(p);return ++p->drains>1;}
 static void output_shutdown(struct pt_editor_studio_output *o,struct output_port *p)
 {
     unsigned i;p->reset=1;
     for(i=0;i<50 && o->queue;++i)pt_editor_studio_output_step(o,17);
     assert(i<50 && !o->queue && !o->producer.song && o->session.phase==PT_AS_IDLE);
 }
+struct output_library {unsigned opens,closes,reserves,releases,quiesces;int quiet;struct pt_editor_studio_output *owner;struct pt_amigus_reservation *reservation;};
+static int output_library_open(void *c) {++((struct output_library *)c)->opens;return 1;}
+static void output_library_close(void *c) {++((struct output_library *)c)->closes;}
+static void *output_library_find(void *c,void *previous) {return previous?NULL:c;}
+static int output_library_supported(void *c,void *card,enum pt_amigus_resource resource) {return c==card && resource==PT_AMIGUS_PCM;}
+static unsigned long output_library_reserve(void *c,void *card,enum pt_amigus_resource resource,void *owner)
+{struct output_library *f=c;assert(card==c && resource==PT_AMIGUS_PCM && owner==f->reservation);++f->reserves;return 0;}
+static void output_library_release(void *c,void *card,enum pt_amigus_resource resource,void *owner)
+{struct output_library *f=c;assert(card==c && resource==PT_AMIGUS_PCM && owner==f->reservation && !f->reservation->access);++f->releases;}
+static int output_quiesce(void *c)
+{
+    struct output_library *f=c;
+    assert(f->reservation->access && f->reservation->reserved && !f->owner->queue && f->owner->session.phase==PT_AS_IDLE);
+    ++f->quiesces;return f->quiet;
+}
+static void output_reserved_cases(struct pt_editor_studio_output *o,struct pt_render_options *options,struct output_port *p,struct pt_amigus_fifo_port *port)
+{
+    unsigned mode,i;
+    for(mode=0;mode<5;++mode) {
+        struct pt_amigus_reservation r={0};struct output_library f={0};
+        struct pt_amigus_reservation_api api={&f,output_library_open,output_library_close,output_library_find,output_library_supported,output_library_reserve,output_library_release};
+        f.owner=o;f.reservation=&r;p->reservation=&r;p->reset=mode!=0;p->space=3;p->write=1;
+        assert(pt_amigus_reservation_open(&r,&api,0)==PT_AMIGUS_RESERVED);
+        assert(!pt_editor_studio_output_start_reserved(o,options,2,port,output_drain,p,&r,NULL,&f));assert(!r.access);
+        r.resource=PT_AMIGUS_WAVETABLE;
+        assert(!pt_editor_studio_output_start_reserved(o,options,2,port,output_drain,p,&r,output_quiesce,&f));assert(!r.access);r.resource=PT_AMIGUS_PCM;
+        if(mode==2)fail_next=1;
+        assert(pt_editor_studio_output_start_reserved(o,options,2,port,output_drain,p,&r,output_quiesce,&f)==(mode==1 || mode==3 || mode==4));
+        assert(r.access && pt_editor_studio_output_busy(o) && !pt_amigus_reservation_close(&r));
+        assert(!pt_editor_studio_output_start(o,options,2,port,output_drain,p));
+        if(mode==3) {
+            for(i=0;i<1000 && !o->session.consumer.leased;++i)pt_editor_studio_output_step(o,17);
+            assert(i<1000);pt_editor_studio_output_stop(o);p->reset=0;
+        }
+        if(mode==0 || mode==3) {
+            pt_editor_studio_output_step(o,17);assert(o->queue && !f.quiesces && !pt_editor_studio_output_detach(o));p->reset=1;
+        }
+        for(i=0;i<30000 && o->queue;++i)pt_editor_studio_output_step(o,17);
+        assert(i<30000 && !f.quiesces && r.access && !pt_amigus_reservation_close(&r));
+        assert(!pt_editor_studio_output_detach(o));
+        pt_editor_studio_output_step(o,17);assert(f.quiesces==1 && pt_editor_studio_output_busy(o));
+        if(mode!=4) {f.quiet=-1;assert(pt_editor_studio_output_step(o,17)==PT_CONSUMER_ERROR && r.access && !pt_amigus_reservation_close(&r));}
+        f.quiet=1;assert(pt_editor_studio_output_step(o,17)==(mode==4?PT_CONSUMER_FINISHED:PT_CONSUMER_ERROR) && !r.access && !pt_editor_studio_output_busy(o));
+        if(mode==4)assert(!o->failed);
+        assert(pt_amigus_reservation_close(&r));assert(f.opens==1 && f.closes==1 && f.reserves==1 && f.releases==1);
+        p->reservation=NULL;
+    }
+    puts("EDITOR STUDIO RESERVED PASS: PCM-only lease spans failed start, natural drain, leased Stop, reset and adapter quiescence; early release/restart refused; fake library/port only");
+}
 static void editor_studio_output_cases(void)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_document d;
     struct pt_editor *e=calloc(1,sizeof(*e));struct pt_editor_studio_output owner={0},other={0};
-    struct pt_render_options options={0};struct output_port p={1,3,1,0,0,0,2166136261u,0,0};
+    struct pt_render_options options={0};struct output_port p={1,3,1,0,0,0,2166136261u,0,0,NULL};
     struct pt_amigus_fifo_port port={&p,output_capacity,output_write3,output_reset};
     int32_t pcm[4]={257,-513,1025,-2049};unsigned i,action;uint32_t expected=2166136261u;size_t expected_bytes=0;
     assert(e);pt_document_init(&d,&a);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
@@ -66,6 +117,7 @@ static void editor_studio_output_cases(void)
     assert(!pt_editor_studio_output_detach(&owner));assert(owner.producer.editor==e);
     assert(pt_editor_studio_output_step(&owner,17)==PT_CONSUMER_ERROR && owner.queue);
     output_shutdown(&owner,&p);
+    output_reserved_cases(&owner,&options,&p,&port);
     /* Edit, undo, explicit Stop, output failure and dispose all retain a leased
      * queue through pending/failed reset, and stop further source production. */
     for(action=0;action<7;++action) {

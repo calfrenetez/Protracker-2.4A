@@ -104,7 +104,7 @@ int pt_editor_studio_bind_output_stop(struct pt_editor_studio *o,void (*stop)(vo
 static void output_session_stop(void *context) {pt_amigus_session_stop(context);}
 int pt_editor_studio_output_attach(struct pt_editor_studio_output *o,struct pt_editor *e)
 {
-    if(!o || o->queue || o->session.phase!=PT_AS_IDLE)return 0;
+    if(!o || pt_editor_studio_output_busy(o) || o->session.phase!=PT_AS_IDLE)return 0;
     return pt_editor_studio_attach(&o->producer,e);
 }
 void pt_editor_studio_output_stop(struct pt_editor_studio_output *o)
@@ -114,7 +114,7 @@ void pt_editor_studio_output_stop(struct pt_editor_studio_output *o)
     /* Also covers initial-reset failure before the stop hook was bound. */
     pt_amigus_session_stop(&o->session);
 }
-int pt_editor_studio_output_start(struct pt_editor_studio_output *o,const struct pt_render_options *options,unsigned blocks,const struct pt_amigus_fifo_port *port,int (*drain)(void *),void *context)
+static int start_output(struct pt_editor_studio_output *o,const struct pt_render_options *options,unsigned blocks,const struct pt_amigus_fifo_port *port,int (*drain)(void *),void *context)
 {
     if(!o || !attached(&o->producer) || o->queue || o->session.phase!=PT_AS_IDLE ||
        !port || !port->capacity || !port->write3 || !port->reset || !drain || blocks<1 || blocks>8)return 0;
@@ -130,11 +130,39 @@ int pt_editor_studio_output_start(struct pt_editor_studio_output *o,const struct
     }
     return 1;
 }
+int pt_editor_studio_output_busy(const struct pt_editor_studio_output *o)
+{return o && (o->queue || o->reservation);}
+int pt_editor_studio_output_start(struct pt_editor_studio_output *o,const struct pt_render_options *options,unsigned blocks,const struct pt_amigus_fifo_port *port,int (*drain)(void *),void *context)
+{
+    if(!o || o->reservation)return 0;
+    return start_output(o,options,blocks,port,drain,context);
+}
+int pt_editor_studio_output_start_reserved(struct pt_editor_studio_output *o,const struct pt_render_options *options,unsigned blocks,const struct pt_amigus_fifo_port *port,int (*drain)(void *),void *context,struct pt_amigus_reservation *r,int (*quiesce)(void *),void *qc)
+{
+    if(!o || !attached(&o->producer) || pt_editor_studio_output_busy(o) ||
+       o->session.phase!=PT_AS_IDLE || !port || !port->capacity || !port->write3 || !port->reset ||
+       !drain || !quiesce || blocks<1 || blocks>8 || !r || !r->opened || !r->card ||
+       r->resource!=PT_AMIGUS_PCM || !pt_amigus_reservation_begin(r))return 0;
+    o->reservation=r;o->quiesce=quiesce;o->quiesce_context=qc;
+    /* Even failed preparation keeps access until the adapter confirms quiescence. */
+    return start_output(o,options,blocks,port,drain,context);
+}
+static enum pt_consumer_result finish_access(struct pt_editor_studio_output *o)
+{
+    int result;
+    if(!o->reservation)return o->failed?PT_CONSUMER_ERROR:PT_CONSUMER_FINISHED;
+    result=o->quiesce(o->quiesce_context);
+    if(result<0)o->failed=1;
+    if(result!=1)return o->failed?PT_CONSUMER_ERROR:PT_CONSUMER_WAIT;
+    if(!pt_amigus_reservation_end(o->reservation)) {o->failed=1;return PT_CONSUMER_ERROR;}
+    o->reservation=NULL;o->quiesce=NULL;o->quiesce_context=NULL;
+    return o->failed?PT_CONSUMER_ERROR:PT_CONSUMER_FINISHED;
+}
 enum pt_consumer_result pt_editor_studio_output_step(struct pt_editor_studio_output *o,unsigned frames)
 {
     enum pt_consumer_result result;
     if(!o || !frames || frames>256)return PT_CONSUMER_ERROR;
-    if(!o->queue)return o->failed?PT_CONSUMER_ERROR:PT_CONSUMER_FINISHED;
+    if(!o->queue)return finish_access(o);
     if(o->session.phase==PT_AS_RUN && o->producer.queue &&
        pt_editor_studio_step(&o->producer,frames)==PT_PUMP_ERROR) {
         o->failed=1;pt_editor_studio_output_stop(o);
@@ -145,7 +173,7 @@ enum pt_consumer_result pt_editor_studio_output_step(struct pt_editor_studio_out
         pt_editor_studio_stop(&o->producer);
         if(pt_studio_queue_close(o->queue)!=PT_QUEUE_OK) {o->failed=1;return PT_CONSUMER_ERROR;}
         o->queue=NULL;pt_amigus_session_detach(&o->session);
-        return o->failed?PT_CONSUMER_ERROR:PT_CONSUMER_FINISHED;
+        return o->failed?PT_CONSUMER_ERROR:o->reservation?PT_CONSUMER_PROGRESS:PT_CONSUMER_FINISHED;
     }
     return o->failed?PT_CONSUMER_ERROR:result;
 }
@@ -153,6 +181,6 @@ int pt_editor_studio_output_detach(struct pt_editor_studio_output *o)
 {
     if(!o)return 0;
     pt_editor_studio_output_stop(o);
-    if(o->queue || !pt_amigus_session_detach(&o->session))return 0;
+    if(pt_editor_studio_output_busy(o) || !pt_amigus_session_detach(&o->session))return 0;
     pt_editor_studio_detach(&o->producer);return 1;
 }

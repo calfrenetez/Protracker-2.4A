@@ -2558,3 +2558,14 @@ wire native PLAY. Port and drain contexts, including any external reservation,
 must outlive successful detach. Host sanitizer fixtures compare every packed
 24-bit byte against a direct-mixer reference and cover startup refusal, stalls,
 edit/undo/Stop/dispose, partial-write/capacity/source faults and reset recovery.
+
+
+The integrated output owner also accepts an already-open PCM reservation. Its
+single access lease survives queue cleanup until a separate bounded `quiesce`
+callback confirms all adapter references/interrupts removed. Pending/failed
+quiescence refuses restart, detach and card/library close. The caller retains the
+reservation after the access lease ends. This is an ownership contract for an
+injected adapter, not capability validation or permission for MMIO. Host and native
+shared030 fixtures cover natural completion and failed startup/Stop/reset/quiescence;
+141 Fast allocations return to zero. Evidence:
+`evidence/enhanced-editor/editor-studio-reserved/`. Native PLAY remains unwired.

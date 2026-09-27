@@ -12,6 +12,7 @@ from pathlib import Path
 import shutil
 import sys
 import time
+from shared_infra_render_files import prepare_run, require_running_guest, finish_run
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -26,8 +27,7 @@ def main():
     with (args.infra / 'runtime/test.lock').open('a') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         guest = Guest(args.infra, out)
-        run = guest.share / out.name
-        run.mkdir()
+        run = prepare_run(guest, out)
         finished = False
         result = {'passed': False, 'scope': 'shared emulator Paula regression', 'guest_directory': str(run)}
         try:
@@ -46,6 +46,7 @@ def main():
                                               'PTPreviewPCMTest >preview.log', 'Echo $RC >preview.rc',
                                               'PTPaulaTest input.mod >paula.log', 'Echo $RC >paula.rc',
                                               'Echo done >done']) + '\n')
+            require_running_guest(guest, out, "before-launch")
             guest.start()
             end = time.monotonic() + 60
             # A file can exist before Echo has written its return code. The
@@ -78,12 +79,8 @@ def main():
             assert all('ch%d_dma=0' % i in result['audio_after'].split('\t') for i in range(4)), result['audio_after']
             result['passed'] = True
         finally:
-            if finished:
-                guest.launch.unlink()
-                shutil.rmtree(run)
-            result['run_files_cleaned'] = finished
-            (out / 'result.json').write_text(json.dumps(result, indent=2) + '\n')
-            print(out)
+            finish_run(guest, run, out, result, finished, True)
+
 
 if __name__ == '__main__':
     main()

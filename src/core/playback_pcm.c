@@ -1,7 +1,8 @@
-#include "playback_pcm.h"
-enum pt_pcm_result pt_playback_pcm_size(const struct pt_pcm *p,const struct pt_playback_format *f,size_t *out)
+#include "playback_internal.h"
+#include "pcm_internal.h"
+static enum pt_pcm_result size(const struct pt_pcm *p,const struct pt_playback_format *f,size_t *out,unsigned prepared)
 {
-    size_t bytes;enum pt_pcm_result r=pt_pcm_validate(p);
+    size_t bytes;enum pt_pcm_result r=prepared?pt_pcm_shape(p):pt_pcm_validate(p);
     if(r!=PT_PCM_OK)return r;
     if(!f || !out || (f->bits!=8 && f->bits!=16) || f->channel>=p->channels ||
        f->little_endian>1 || f->word_pad>1)return PT_PCM_INVALID;
@@ -10,6 +11,8 @@ enum pt_pcm_result pt_playback_pcm_size(const struct pt_pcm *p,const struct pt_p
     if(f->word_pad && (bytes&1)) {if(bytes==SIZE_MAX)return PT_PCM_CAPACITY;++bytes;}
     *out=bytes;return PT_PCM_OK;
 }
+enum pt_pcm_result pt_playback_pcm_size(const struct pt_pcm *p,const struct pt_playback_format *f,size_t *out)
+{return size(p,f,out,0);}
 /* Caller validates the complete immutable source once before chunking. */
 static void pack_frames(const struct pt_pcm *p,const struct pt_playback_format *f,
                         uint32_t start,uint32_t count,uint8_t *out)
@@ -92,15 +95,15 @@ enum pt_cache_result pt_playback_pcm_upload(struct pt_sample_cache *c,const stru
     return result;
 }
 
-enum pt_cache_result pt_playback_pcm_upload_chunks(struct pt_sample_cache *c,const struct pt_pcm *p,
+static enum pt_cache_result upload_chunks(struct pt_sample_cache *c,const struct pt_pcm *p,
     uint32_t identity,uint64_t version,const struct pt_playback_format *f,
     uint8_t *staging,size_t capacity,void *context,
-    int (*write)(void *,void *,size_t,const uint8_t *,size_t),struct pt_cache_lease *out)
+    int (*write)(void *,void *,size_t,const uint8_t *,size_t),struct pt_cache_lease *out,unsigned prepared)
 {
     size_t bytes,width,chunk,offset,source_bytes,used;uintptr_t a,b;
     struct pt_cache_lease lease;enum pt_cache_result result;enum pt_pcm_result r;
     if(!c || !out || !write)return PT_CACHE_INVALID;
-    r=pt_playback_pcm_size(p,f,&bytes);
+    r=size(p,f,&bytes,prepared);
     if(r!=PT_PCM_OK || !bytes)return r==PT_PCM_CAPACITY?PT_CACHE_CAPACITY:PT_CACHE_INVALID;
     result=pt_cache_take(c,key(identity,f),version,bytes,&lease);
     if(result!=PT_CACHE_LOAD) {
@@ -129,3 +132,12 @@ enum pt_cache_result pt_playback_pcm_upload_chunks(struct pt_sample_cache *c,con
     if(!pt_cache_publish(c,lease)) {pt_cache_unpin(c,lease);return PT_CACHE_TRANSFER;}
     *out=lease;return PT_CACHE_LOAD;
 }
+
+enum pt_cache_result pt_playback_pcm_upload_chunks(struct pt_sample_cache *c,const struct pt_pcm *p,
+    uint32_t identity,uint64_t version,const struct pt_playback_format *f,uint8_t *staging,size_t capacity,
+    void *context,int (*write)(void *,void *,size_t,const uint8_t *,size_t),struct pt_cache_lease *out)
+{return upload_chunks(c,p,identity,version,f,staging,capacity,context,write,out,0);}
+enum pt_cache_result pt_playback_pcm_upload_prepared(struct pt_sample_cache *c,const struct pt_pcm *p,
+    uint32_t identity,uint64_t version,const struct pt_playback_format *f,uint8_t *staging,size_t capacity,
+    void *context,int (*write)(void *,void *,size_t,const uint8_t *,size_t),struct pt_cache_lease *out)
+{return upload_chunks(c,p,identity,version,f,staging,capacity,context,write,out,1);}

@@ -2,7 +2,8 @@
 #include "amigus_reservation_test.c"
 #undef main
 #include <stdlib.h>
-#include "amigus_wavetable_cache.h"
+#include "playback_internal.h"
+static unsigned prepared_cache_test;
 struct fixture {
     struct fake library;
     struct pt_amigus_reservation reservation;
@@ -44,7 +45,9 @@ static enum pt_cache_result load(struct fixture *f,unsigned id,unsigned version,
     struct pt_pcm p={data,10,5,48000,2,24};struct pt_playback_format format={16,0,0,0};
     enum pt_cache_result result;
     memcpy(original,data,sizeof(data));
-    result=pt_amigus_wavetable_cache_acquire(&f->cache,&p,id,version,&format,staging,sizeof(staging),lease);
+    assert(pt_pcm_validate(&p)==PT_PCM_OK);
+    result=prepared_cache_test?pt_amigus_wavetable_cache_acquire_prepared(&f->cache,&p,id,version,&format,staging,sizeof(staging),lease):
+        pt_amigus_wavetable_cache_acquire(&f->cache,&p,id,version,&format,staging,sizeof(staging),lease);
     assert(!memcmp(original,data,sizeof(data)));return result;
 }
 static void attached(struct fixture *f)
@@ -122,10 +125,41 @@ static void failure(struct fixture *f)
     assert(pt_amigus_wavetable_cache_unpin(&f->cache,a));assert(pt_amigus_wavetable_cache_detach(&f->cache));
     assert(pt_amigus_reservation_close(&f->reservation));
 }
+static void prepared_refusal(struct fixture *f)
+{
+    int32_t data[4]={-128,-1,0,127};struct pt_pcm p={data,4,4,48000,1,8},bad;
+    struct pt_playback_format format={16,0,0,0},bad_format;
+    struct pt_cache_lease a,out={31,999};uint8_t staging[8];unsigned mode,writes;
+    init(f,PT_AMIGUS_WAVETABLE);attached(f);assert(pt_pcm_validate(&p)==PT_PCM_OK);
+    assert(pt_amigus_wavetable_cache_acquire_prepared(&f->cache,&p,1,1,&format,staging,sizeof(staging),&a)==PT_CACHE_LOAD);
+    writes=f->writes;
+    for(mode=0;mode<7;++mode) {
+        bad=p;bad_format=format;
+        switch(mode) {
+        case 0:bad.capacity=3;break;
+        case 1:bad.rate=0;break;
+        case 2:bad.channels=3;break;
+        case 3:bad.bits=32;break;
+        case 4:bad_format.channel=2;break;
+        case 5:bad_format.bits=24;break;
+        case 6:bad_format.little_endian=2;break;
+        }
+        assert(pt_amigus_wavetable_cache_acquire_prepared(&f->cache,&bad,1,1,&bad_format,staging,sizeof(staging),&out)==(mode==0?PT_CACHE_CAPACITY:PT_CACHE_INVALID));
+        assert(out.slot==31 && out.serial==999 && f->writes==writes && pt_cache_data(&f->cache.cache,a));
+    }
+    /* Public validation is never disabled, including a populated cache hit. */
+    data[0]=-129;
+    assert(pt_amigus_wavetable_cache_acquire(&f->cache,&p,1,1,&format,staging,sizeof(staging),&out)==PT_CACHE_INVALID);
+    assert(out.serial==999 && f->writes==writes);data[0]=-128;
+    assert(pt_amigus_wavetable_cache_unpin(&f->cache,a) && pt_amigus_wavetable_cache_detach(&f->cache));
+    assert(pt_amigus_reservation_close(&f->reservation));
+}
 static int wavetable_fixture_main(void)
 {
     struct fixture *f=malloc(sizeof(*f));assert(f);assert(reservation_fixture_main()==0);
-    refusal(f);lifetime(f);failure(f);free(f);
+    refusal(f);
+    for(prepared_cache_test=0;prepared_cache_test<2;++prepared_cache_test){lifetime(f);failure(f);}
+    prepared_cache_test=0;prepared_refusal(f);free(f);
     puts("AMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only");return 0;
 }
 

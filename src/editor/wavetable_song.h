@@ -24,8 +24,8 @@ enum pt_wavetable_song_result {
  * resource ownership are checked on every step without rescanning master PCM;
  * these guards do not detect in-place writes to pattern/order/sample arrays.
  * Ready dispatch/restore uses private current-version source callbacks without
- * project-wide rescans. Exact prepared pins cover uploads; conversion still
- * validates selected PCM. Public bridge/dispatch validation stays unchanged.
+ * project-wide or selected-value rescans. Exact prepared pins cover uploads;
+ * bounded shape checks remain. Public bridge/dispatch validation stays unchanged.
  * Options/format are copied. Row-range playback requires an explicit exact-restore
  * callback; missing support returns RANGE. No native device/scheduler. */
 enum pt_wavetable_song_result pt_wavetable_song_open(struct pt_wavetable_voices *,

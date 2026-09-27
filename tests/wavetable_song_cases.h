@@ -8,6 +8,14 @@ extern unsigned pt_test_project_validations;
 #define VALIDATIONS_UNCHANGED ((void)0)
 #endif
 
+#ifdef PT_TEST_PCM_VALIDATION_COUNT
+extern unsigned pt_test_pcm_validations;
+#define PCM_SAVE unsigned pcm_validations=pt_test_pcm_validations
+#define PCM_UNCHANGED assert(pt_test_pcm_validations==pcm_validations)
+#else
+#define PCM_SAVE ((void)0)
+#define PCM_UNCHANGED ((void)0)
+#endif
 static void song_bind(struct fixture *f,struct pt_sampler_wavetable *bridge,
     struct pt_wavetable_voices *owner,struct dispatch_bus *bus,struct pt_sampler *sampler,struct pt_project *p)
 {
@@ -19,13 +27,13 @@ static void song_bind(struct fixture *f,struct pt_sampler_wavetable *bridge,
 }
 static enum pt_wavetable_song_result song_tick(struct pt_wavetable_song *s,uint64_t *frames)
 {
-    struct pt_render_interval span;uint32_t remaining;VALIDATIONS_SAVE;
+    struct pt_render_interval span;uint32_t remaining;VALIDATIONS_SAVE;PCM_SAVE;
     enum pt_wavetable_song_result result=pt_wavetable_song_next(s,&span);
-    VALIDATIONS_UNCHANGED;if(result)return result;
+    VALIDATIONS_UNCHANGED;PCM_UNCHANGED;if(result)return result;
     remaining=span.frames;
     while(remaining){uint32_t n=remaining>17?17:remaining;
         assert(pt_wavetable_song_consume(s,n)==PT_WAVETABLE_SONG_OK);remaining-=n;*frames+=n;}
-    result=pt_wavetable_song_complete(s);VALIDATIONS_UNCHANGED;return result;
+    result=pt_wavetable_song_complete(s);VALIDATIONS_UNCHANGED;PCM_UNCHANGED;return result;
 }
 static void song_fixture(void)
 {
@@ -192,7 +200,7 @@ static void range_song_fixture(void)
         do {
             uint32_t remaining;
             assert(pt_render_sequence_next(oracle,&expected)==PT_RENDER_OK);
-            {VALIDATIONS_SAVE;result=pt_wavetable_song_next(song,&span);VALIDATIONS_UNCHANGED;}
+            {VALIDATIONS_SAVE;PCM_SAVE;result=pt_wavetable_song_next(song,&span);VALIDATIONS_UNCHANGED;PCM_UNCHANGED;}
             if(mode==3 && expected.emit) {
                 assert(result==PT_WAVETABLE_SONG_DEVICE && pins(f)==1 && owner.voice[0].uncertain);
                 break;
@@ -216,7 +224,7 @@ static void range_song_fixture(void)
                 if(span.emit)emitted+=n;
                 remaining-=n;}
             assert(pt_render_sequence_complete(oracle,&plan)==PT_RENDER_OK);
-            {VALIDATIONS_SAVE;result=pt_wavetable_song_complete(song);VALIDATIONS_UNCHANGED;}
+            {VALIDATIONS_SAVE;PCM_SAVE;result=pt_wavetable_song_complete(song);VALIDATIONS_UNCHANGED;PCM_UNCHANGED;}
         }while(result==PT_WAVETABLE_SONG_OK);
         pt_render_sequence_close(oracle);oracle=NULL;
         if(mode==2 || mode==3) {
@@ -470,3 +478,6 @@ static void large_preparing_fixture(void)
     pt_document_release(&d);free(data);free(bus);free(f);assert(!allocations);
     puts("LARGE PREPARING PASS: allocation separate from4KiB copies, no partial master publication/output, cancel/stale cleanup and intact24-bit ready master");
 }
+
+#undef PCM_SAVE
+#undef PCM_UNCHANGED

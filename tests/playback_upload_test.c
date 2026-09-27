@@ -1,7 +1,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
-#include "playback_pcm.h"
+#include "playback_internal.h"
 /* Handles point to descriptors, deliberately not the simulated card bytes. */
 struct device {unsigned live[4],uploads,releases,fail,fail_chunk;size_t next_offset,max_chunk;size_t sizes[4];uint8_t ram[4][16];};
 static void *allocate(void *ctx,size_t n)
@@ -29,13 +29,19 @@ static int write_chunk(void *ctx,void *p,size_t offset,const uint8_t *data,size_
     if(d->fail_chunk && --d->fail_chunk==0)return 0;
     return 1;
 }
-static void chunk_tests(void)
+static void chunk_tests(unsigned prepared,unsigned source_bits)
 {
     struct device d={0};struct pt_sample_cache c;struct pt_cache_lease a,b;
     int32_t data[]={8388607,-8388608,-32768,32768,1,-1,32768,-32768,65536,-65536};
     int32_t original[10];struct pt_pcm p={data,10,5,48000,2,24};
     struct pt_playback_format f;uint8_t staging[17],expected[16];
-    unsigned bits,channel,endian,pad,capacity,uploads;size_t bytes;
+    unsigned bits,channel,endian,pad,capacity,uploads,i;size_t bytes;
+    enum pt_cache_result (*upload_chunks)(struct pt_sample_cache *,const struct pt_pcm *,uint32_t,uint64_t,
+        const struct pt_playback_format *,uint8_t *,size_t,void *,
+        int (*)(void *,void *,size_t,const uint8_t *,size_t),struct pt_cache_lease *)=
+        prepared?pt_playback_pcm_upload_prepared:pt_playback_pcm_upload_chunks;
+    p.bits=source_bits;for(i=0;i<10;++i)data[i]/=(int32_t)1<<(24-source_bits);
+    assert(pt_pcm_validate(&p)==PT_PCM_OK);
     memcpy(original,data,sizeof(data));pt_cache_init(&c,&d,allocate,release,16);
     for(bits=8;bits<=16;bits+=8)for(channel=0;channel<2;++channel)
     for(endian=0;endian<2;++endian)for(pad=0;pad<2;++pad)
@@ -44,23 +50,23 @@ static void chunk_tests(void)
         assert(pt_playback_pcm_size(&p,&f,&bytes)==PT_PCM_OK);
         assert(pt_playback_pcm_pack(&p,&f,expected,sizeof(expected))==PT_PCM_OK);
         d.next_offset=0;d.max_chunk=capacity;memset(staging,0xa5,sizeof(staging));
-        assert(pt_playback_pcm_upload_chunks(&c,&p,1,1,&f,staging,capacity,&d,write_chunk,&a)==PT_CACHE_LOAD);
+        assert(upload_chunks(&c,&p,1,1,&f,staging,capacity,&d,write_chunk,&a)==PT_CACHE_LOAD);
         assert(d.next_offset==bytes && staging[capacity]==0xa5);
         assert(!memcmp(d.ram[index_of(&d,pt_cache_data(&c,a))],expected,bytes));
         uploads=d.uploads;
-        assert(pt_playback_pcm_upload_chunks(&c,&p,1,1,&f,NULL,0,&d,write_chunk,&b)==PT_CACHE_HIT);
+        assert(upload_chunks(&c,&p,1,1,&f,NULL,0,&d,write_chunk,&b)==PT_CACHE_HIT);
         assert(d.uploads==uploads);assert(pt_cache_unpin(&c,b));
         assert(pt_cache_unpin(&c,a) && pt_cache_clear(&c));
     }
     f=(struct pt_playback_format){16,1,1,0};d.max_chunk=3;d.next_offset=0;d.fail_chunk=2;
     a=(struct pt_cache_lease){99,123};
-    assert(pt_playback_pcm_upload_chunks(&c,&p,1,2,&f,staging,3,&d,write_chunk,&a)==PT_CACHE_TRANSFER);
+    assert(upload_chunks(&c,&p,1,2,&f,staging,3,&d,write_chunk,&a)==PT_CACHE_TRANSFER);
     assert(c.bytes==0 && a.slot==99 && a.serial==123 && d.next_offset==4);
     d.next_offset=0;
-    assert(pt_playback_pcm_upload_chunks(&c,&p,1,2,&f,staging,3,&d,write_chunk,&a)==PT_CACHE_LOAD);
+    assert(upload_chunks(&c,&p,1,2,&f,staging,3,&d,write_chunk,&a)==PT_CACHE_LOAD);
     assert(pt_cache_unpin(&c,a) && pt_cache_clear(&c));uploads=d.uploads;
-    assert(pt_playback_pcm_upload_chunks(&c,&p,1,3,&f,staging,1,&d,write_chunk,&a)==PT_CACHE_CAPACITY);
-    assert(pt_playback_pcm_upload_chunks(&c,&p,1,3,&f,(uint8_t *)(data+8),3,&d,write_chunk,&a)==PT_CACHE_INVALID);
+    assert(upload_chunks(&c,&p,1,3,&f,staging,1,&d,write_chunk,&a)==PT_CACHE_CAPACITY);
+    assert(upload_chunks(&c,&p,1,3,&f,(uint8_t *)(data+8),3,&d,write_chunk,&a)==PT_CACHE_INVALID);
     assert(c.bytes==0 && d.uploads==uploads && !memcmp(data,original,sizeof(data)));
 }
 int main(void)
@@ -100,5 +106,6 @@ int main(void)
     assert(pt_playback_pcm_upload(&c,&p,7,4,&f,(uint8_t *)master,sizeof(master),&d,upload,&b)==PT_CACHE_INVALID);
     assert(d.uploads==uploads && c.bytes==0 && !memcmp(master,original,sizeof(master)));
     for(i=0;i<4;++i)assert(!d.live[i]);
-    chunk_tests();puts("PLAYBACK UPLOAD PASS: bounded chunks and transactional device resources");return 0;
+    for(i=8;i<=24;i+=8){chunk_tests(0,i);chunk_tests(1,i);}
+    puts("PLAYBACK UPLOAD PASS: bounded chunks and transactional device resources");return 0;
 }

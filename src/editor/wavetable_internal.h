@@ -5,9 +5,9 @@
  * The song has validated immutable project/PCM, completed capability analysis,
  * and holds every required exact master pin. Callbacks check its captured
  * revision, identities and live device ownership on each operation; acquire
- * retains the exact master through synchronous upload. No callbacks may reenter
+ * retains the exact validated master through synchronous upload. No callbacks may reenter
  * or mutate the owner. Dispatch stores no callback/trust state. Public dispatch
- * always uses the fully validating bridge. Cache conversion remains validating.
+ * always uses the fully validating bridge. Prepared upload reuses the held master validation.
  * All cache leases, uncertain-stop ownership and rollback rules are unchanged. */
 struct pt_wavetable_prepared {
     void *context;

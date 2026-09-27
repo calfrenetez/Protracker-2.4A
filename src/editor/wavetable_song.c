@@ -1,6 +1,7 @@
 #include "wavetable_song.h"
 #include "sampler_internal.h"
 #include "wavetable_internal.h"
+#include "../core/playback_internal.h"
 #include <string.h>
 struct pt_wavetable_song {
     struct pt_allocator allocator;struct pt_wavetable_voices *voices;
@@ -77,7 +78,7 @@ static enum pt_cache_result source_acquire(void *context,unsigned slot,const str
     if(!out || !source_current(s) || !s->ready || slot>=s->project->sample_count ||
        pt_sampler_pin_current(s->sampler,s->project,slot,s->generation,s->pin[slot],&pcm,&pin)!=PT_EDIT_OK)
         return PT_CACHE_INVALID;
-    result=pt_amigus_wavetable_cache_acquire(s->backend,&pcm,slot+1,s->version,f,staging,capacity,out);
+    result=pt_amigus_wavetable_cache_acquire_prepared(s->backend,&pcm,slot+1,s->version,f,staging,capacity,out);
     pt_sampler_unpin(pin);return result;
 }
 static int source_location(void *context,struct pt_cache_lease lease,uint32_t *address,uint32_t *bytes)

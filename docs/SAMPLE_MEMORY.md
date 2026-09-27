@@ -1994,7 +1994,31 @@ playback, including first uploads, cache-hit retriggers, controls and range
 restoration. Changed source capacity, data, metadata and current pins refuse
 without uploads; public calls still reject an invalid unused sample even after
 private playback. Existing exact range cursor and failure ownership tests pass.
-Cache sizing/conversion still validates selected PCM and first-use upload is
-synchronous with bounded staging/write chunks, not bounded total trigger time.
+The prepared conversion boundary below also removes redundant selected-PCM
+validation. First-use upload remains synchronous with bounded staging/write
+chunks, not bounded total trigger time.
 Native PLAY/clock, card transport, audible and physical acceptance remain open.
 Evidence: `evidence/enhanced-editor/wavetable-prepared-sources/`.
+
+### Prepared wavetable conversion
+
+The ready wavetable song now calls a private cache/upload entrypoint while holding
+an independently retained exact master pin. It reuses completed value validation,
+including on cache hits, while checking PCM shape/capacity, format, overflow and
+staging alias rules. Public PCM sizing/packing/upload and public AmiGUS cache
+acquisition always validate values, even after a prepared call on the same cache.
+There is no persistent trust flag; mutable EFx banks never enter this path.
+
+Prepared and public uploads share packing, signed rounding/clipping, endian/channel/
+padding handling, unpublished lease ownership, publication, eviction and failed
+transfer cleanup. Live reservation checks remain at acquisition and every device
+write. Conversion reads the master but never changes its precision or contents.
+Host comparisons cover all8/16/24-bit source widths and both8/16-bit playback
+formats across channel/endian/padding/chunk combinations. Instrumented ready-song
+and range tests show no project or PCM value-validator calls during dispatch.
+
+Initial validation/preparation and allocations remain synchronous. A first-use
+upload still processes the whole sample with bounded staging/write chunks; this
+is not a total-time bound or a physical performance result. Resumable uploads,
+native PLAY/clock/card transport and physical acceptance remain unfinished.
+Evidence: `evidence/enhanced-editor/wavetable-prepared-conversion/`.

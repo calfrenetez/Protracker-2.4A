@@ -1,5 +1,5 @@
 #include <string.h>
-#include "amigus_wavetable_cache.h"
+#include "playback_internal.h"
 #include "amigus_voice_plan.h"
 static int owns(void *context)
 {
@@ -29,16 +29,26 @@ int pt_amigus_wavetable_cache_attach(struct pt_amigus_wavetable_cache *c,
     pt_cache_init(&c->cache,&c->arena,pt_amigus_sample_ram_allocate,pt_amigus_sample_ram_release,budget);
     return 1;
 }
-enum pt_cache_result pt_amigus_wavetable_cache_acquire(struct pt_amigus_wavetable_cache *c,
+static enum pt_cache_result acquire(struct pt_amigus_wavetable_cache *c,
     const struct pt_pcm *p,uint32_t identity,uint64_t version,const struct pt_playback_format *format,
-    uint8_t *staging,size_t capacity,struct pt_cache_lease *lease)
+    uint8_t *staging,size_t capacity,struct pt_cache_lease *lease,unsigned prepared)
 {
     if(!c || !c->reservation || c->closing || !owns(c))return PT_CACHE_INVALID;
     /* Cap work per bus callback while allowing a larger supplied staging buffer. */
     if(capacity>PT_AMIGUS_RAM_WRITE_MAX)capacity=PT_AMIGUS_RAM_WRITE_MAX;
+    if(prepared)return pt_playback_pcm_upload_prepared(&c->cache,p,identity,version,format,staging,capacity,
+        &c->arena,pt_amigus_sample_ram_write,lease);
     return pt_playback_pcm_upload_chunks(&c->cache,p,identity,version,format,staging,capacity,
         &c->arena,pt_amigus_sample_ram_write,lease);
 }
+enum pt_cache_result pt_amigus_wavetable_cache_acquire(struct pt_amigus_wavetable_cache *c,
+    const struct pt_pcm *p,uint32_t identity,uint64_t version,const struct pt_playback_format *f,
+    uint8_t *staging,size_t capacity,struct pt_cache_lease *out)
+{return acquire(c,p,identity,version,f,staging,capacity,out,0);}
+enum pt_cache_result pt_amigus_wavetable_cache_acquire_prepared(struct pt_amigus_wavetable_cache *c,
+    const struct pt_pcm *p,uint32_t identity,uint64_t version,const struct pt_playback_format *f,
+    uint8_t *staging,size_t capacity,struct pt_cache_lease *out)
+{return acquire(c,p,identity,version,f,staging,capacity,out,1);}
 int pt_amigus_wavetable_cache_location(struct pt_amigus_wavetable_cache *c,struct pt_cache_lease lease,
     uint32_t *address,uint32_t *bytes)
 {

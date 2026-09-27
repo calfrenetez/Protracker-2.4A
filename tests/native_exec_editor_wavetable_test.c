@@ -90,4 +90,62 @@ static void native_alarm_signal_fixture(void)
         (unsigned long)minimum,(unsigned long)maximum,over_frame,(unsigned long)initial);
     puts("NATIVE SIGNAL PASS: task signal wake, independent watchdog, actual-time resampling and all requests/resources closed; diagnostic observation only, no playback dispatch");
 }
-int main(void){int result;native_memory_start();native_eclock_fixture();native_alarm_fixture();native_alarm_signal_fixture();result=editor_wavetable_fixture();native_memory_finish();return result;}
+struct native_gate_clock {struct pt_native_eclock clock;uint64_t observed;uint32_t frequency;};
+static int native_gate_read(void *p,uint64_t *ticks,uint32_t *frequency)
+{
+    struct native_gate_clock *c=p;
+    if(!pt_native_eclock_read(&c->clock,ticks,frequency))return 0;
+    c->observed=*ticks;c->frequency=*frequency;return 1;
+}
+static void native_song_gate_fixture(void)
+{
+    struct fixture *f=malloc(sizeof(*f));struct dispatch_bus *bus=malloc(sizeof(*bus));
+    struct pt_allocator a={NULL,allocate_master,release_master};struct pt_document d;
+    struct pt_sampler sampler;struct pt_sampler_wavetable bridge={0};struct pt_wavetable_voices owner={0};
+    struct pt_wavetable_song *song=NULL;struct pt_wavetable_preflight_report report;
+    struct pt_render_options o={0};struct pt_playback_format format={16,0,0,0};
+    struct native_gate_clock clock={0};struct pt_native_alarm alarm={0},watchdog={0};
+    uint64_t origin,deadline,tick,frame;unsigned mode,guard;enum pt_wavetable_song_result r;enum pt_alarm_result ar;
+    int32_t data[8]={257,-513,1025,-2049,17,31,47,63};
+    assert(f && bus && pt_native_eclock_open(&clock.clock));
+    pt_document_init(&d,&a);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
+    d.project.samples[0].pcm=(struct pt_pcm){data,8,8,48000,1,24};d.project.samples[0].volume=64;
+    d.project.samples[0].loop=PT_LOOP_FORWARD;d.project.samples[0].loop_end=8;
+    d.project.events[0]=(struct pt_event){428,0,PT_NOTE_PERIOD,1,0,0,0,0};d.project.events[4].effect=15;
+    o.rate=48000;o.bits=24;o.gain_q16=65536;o.tracks=1;o.tick_limit=100;o.frame_limit=100000;
+    for(mode=0;mode<2;++mode) {
+        pt_sampler_init(&sampler,&a,1024*1024);song_bind(f,&bridge,&owner,bus,&sampler,&d.project);
+        assert(pt_wavetable_song_open(&owner,&o,&format,&a,&report,&song)==PT_WAVETABLE_SONG_OK);
+        assert(pt_native_alarm_open(&alarm) && pt_native_alarm_open(&watchdog));
+        assert(pt_wavetable_song_clocked_begin(song,9600,native_gate_read,&clock)==PT_WAVETABLE_SONG_OK);origin=clock.observed;
+        guard=0;do{r=pt_wavetable_song_clocked_service(song,&deadline);assert(++guard<1000);}while(r==PT_WAVETABLE_SONG_WAITING);
+        assert(r==PT_WAVETABLE_SONG_OK && pins(f) && !bus->starts && !bus->controls);
+        assert(pt_wavetable_song_clocked_deadline(song,&tick)==PT_WAVETABLE_SONG_OK);
+        assert(pt_native_alarm_arm(&watchdog,tick+clock.frequency)==PT_ALARM_WAITING);
+        assert(pt_native_alarm_arm(&alarm,tick)==PT_ALARM_WAITING);guard=0;
+        for(;;) {
+            assert(pt_native_alarm_poll(&watchdog)==PT_ALARM_WAITING);
+            ar=pt_native_alarm_poll(&alarm);if(ar!=PT_ALARM_WAITING)break;
+            assert(++guard<=64);Wait(pt_native_alarm_signal(&alarm)|pt_native_alarm_signal(&watchdog));
+        }
+        assert(ar==PT_ALARM_READY);
+        if(mode)Delay(1); /* Deterministic late-service case, explicitly labelled. */
+        deadline=77;r=pt_wavetable_song_clocked_service(song,&deadline);
+        frame=(clock.observed-origin)*48000/clock.frequency;assert(frame>=9600);
+        if(mode)assert(frame>9600);
+        if(frame>9600) {
+            assert(r==PT_WAVETABLE_SONG_DEADLINE && deadline==77 && !pins(f));
+            assert(!bus->starts && !bus->controls && !bus->restores);
+        }else assert(r==PT_WAVETABLE_SONG_WAITING && bus->starts);
+        printf("NATIVE SONG GATE observed frame=%lu start=9600 result=%u starts=%u injected_delay=%u\n",
+            (unsigned long)frame,(unsigned)r,bus->starts,mode);
+        assert(pt_wavetable_song_close(&song) && !pins(f));
+        assert(pt_amigus_reservation_close(&f->reservation));pt_sampler_release(&sampler);
+        d.project.samples[0].pcm=(struct pt_pcm){data,8,8,48000,1,24};
+        guard=0;while(!pt_native_alarm_close(&watchdog)){assert(++guard<=8);Delay(1);}
+        assert(pt_native_alarm_close(&alarm));
+    }
+    pt_native_eclock_close(&clock.clock);pt_document_release(&d);free(bus);free(f);
+    puts("NATIVE SONG GATE PASS: real clock/alarms, primed sample leases, observed late service refuses all voice callbacks and releases leases; injected voice bus, no audio output");
+}
+int main(void){int result;native_memory_start();native_eclock_fixture();native_alarm_fixture();native_alarm_signal_fixture();native_song_gate_fixture();result=editor_wavetable_fixture();native_memory_finish();return result;}

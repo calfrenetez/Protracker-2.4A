@@ -2363,3 +2363,12 @@ caller-inclusive emulator evidence that the measured task-wakeup path does not
 meet the current exact-frame gate. It does not justify relaxing that gate or
 claiming physical timing failure. Prepared dispatch/timing integration remains
 unfinished; native enhanced/card PLAY stays disabled.
+
+A further native diagnostic primes24-bit sample/cache leases, schedules a200ms
+start and drives the production clocked song service from real EClock/alarms with
+fake voice callbacks. At frame9656 versus requested9600, the natural wake returned
+DEADLINE; an explicitly Delay(1)-delayed case at10778 also refused. Both issued zero
+start/control/restore callbacks and released all prepared leases. This validates
+native late-refusal/lifetime behavior, not successful real-time playback. The
+actual duration of source guards and synchronous dispatch after sampling remains
+unqualified and must be characterized before native output integration.

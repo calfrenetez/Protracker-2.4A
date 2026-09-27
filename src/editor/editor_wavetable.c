@@ -37,3 +37,8 @@ enum pt_wavetable_song_result pt_editor_wavetable_consume(struct pt_editor_wavet
 {return attached(o)?pt_wavetable_song_consume(o->song,frames):PT_WAVETABLE_SONG_INVALID;}
 enum pt_wavetable_song_result pt_editor_wavetable_complete(struct pt_editor_wavetable *o)
 {return attached(o)?pt_wavetable_song_complete(o->song):PT_WAVETABLE_SONG_INVALID;}
+
+enum pt_wavetable_song_result pt_editor_wavetable_next_step(struct pt_editor_wavetable *o,struct pt_render_interval *out)
+{return attached(o)?pt_wavetable_song_next_step(o->song,out):PT_WAVETABLE_SONG_INVALID;}
+enum pt_wavetable_song_result pt_editor_wavetable_complete_step(struct pt_editor_wavetable *o)
+{return attached(o)?pt_wavetable_song_complete_step(o->song):PT_WAVETABLE_SONG_INVALID;}

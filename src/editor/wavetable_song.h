@@ -6,7 +6,7 @@ enum pt_wavetable_song_result {
     PT_WAVETABLE_SONG_OK, PT_WAVETABLE_SONG_DONE, PT_WAVETABLE_SONG_STOPPING,
     PT_WAVETABLE_SONG_INVALID, PT_WAVETABLE_SONG_RANGE, PT_WAVETABLE_SONG_CAPABILITY,
     PT_WAVETABLE_SONG_MEMORY, PT_WAVETABLE_SONG_STALE, PT_WAVETABLE_SONG_RENDER,
-    PT_WAVETABLE_SONG_DEVICE, PT_WAVETABLE_SONG_PREPARING
+    PT_WAVETABLE_SONG_DEVICE, PT_WAVETABLE_SONG_PREPARING, PT_WAVETABLE_SONG_UPLOADING
 };
 /* Serial owner-thread session. A successful open takes exclusive use of an
  * already-bound, idle voice owner/bridge until close (outer reservation remains
@@ -56,7 +56,7 @@ enum pt_wavetable_song_result pt_wavetable_song_prepare(struct pt_wavetable_song
  * For ranges, next restores the exact snapshot ONCE at the first emit=1 interval,
  * before returning its frames. Thus next may upload/invoke restore callbacks and
  * fail with DEVICE. Even a final emitting interval must restore before consuming.
- * complete applies one plan with internal256-byte staging. Natural end requests
+ * Synchronous complete applies one plan with internal256-byte staging. Natural end requests
  * confirmed stop and returns DONE or STOPPING. No later interval can restart it.
  * Invalid protocol is refused without advancement. Stale/internal/device errors
  * poison playback and attempt bounded stop; close must still complete. A failed
@@ -64,6 +64,17 @@ enum pt_wavetable_song_result pt_wavetable_song_prepare(struct pt_wavetable_song
 enum pt_wavetable_song_result pt_wavetable_song_next(struct pt_wavetable_song *,struct pt_render_interval *);
 enum pt_wavetable_song_result pt_wavetable_song_consume(struct pt_wavetable_song *,uint32_t frames);
 enum pt_wavetable_song_result pt_wavetable_song_complete(struct pt_wavetable_song *);
+/* Yielding alternatives to next/complete. Repeat the SAME operation while it
+ * returns UPLOADING. Each call begins one selected cache acquisition OR uploads
+ * <=256bytes OR commits an entirely acquired batch. No voice callbacks before all
+ * required leases/descriptors/addresses pass. No following interval/consume can
+ * advance while uploading; next output stays unchanged. Calling the other step
+ * while pending returns UPLOADING without work. Cancel via close/Stop/edit barrier.
+ * Initial allocation and final bounded action batch/callbacks remain synchronous;
+ * this is not real-time scheduling. Existing next/complete drive matching steps
+ * synchronously. Values/project remain immutable and owner-thread serialized. */
+enum pt_wavetable_song_result pt_wavetable_song_next_step(struct pt_wavetable_song *,struct pt_render_interval *);
+enum pt_wavetable_song_result pt_wavetable_song_complete_step(struct pt_wavetable_song *);
 /* One stop attempt per held voice; no polling. Retains ALL master pins/controller
  * and unconfirmed device leases until all stops and bridge detach succeed.
  * Returns0 while unresolved; caller must retain/retry *song. On success frees

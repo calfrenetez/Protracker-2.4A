@@ -26,4 +26,8 @@ enum pt_wavetable_song_result pt_editor_wavetable_prepare(struct pt_editor_wavet
 enum pt_wavetable_song_result pt_editor_wavetable_next(struct pt_editor_wavetable *,struct pt_render_interval *);
 enum pt_wavetable_song_result pt_editor_wavetable_consume(struct pt_editor_wavetable *,uint32_t);
 enum pt_wavetable_song_result pt_editor_wavetable_complete(struct pt_editor_wavetable *);
+/* Yielding playback: repeat the same step on UPLOADING; editor edits/Stop/dispose
+ * cancel uploads before mutation, retaining any uncertain active-voice leases. */
+enum pt_wavetable_song_result pt_editor_wavetable_next_step(struct pt_editor_wavetable *,struct pt_render_interval *);
+enum pt_wavetable_song_result pt_editor_wavetable_complete_step(struct pt_editor_wavetable *);
 #endif

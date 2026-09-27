@@ -10,7 +10,7 @@ struct fixture {
     struct pt_amigus_wavetable_cache cache;
     unsigned healthy,writes,fail,lose;
     uint32_t address;
-    uint8_t ram[128];
+    uint8_t ram[4096];
 };
 static int bus_owned(void *ctx)
 {
@@ -25,7 +25,7 @@ static int bus_write(void *ctx,unsigned reg,uint32_t value)
     assert(!pt_amigus_reservation_close(&f->reservation));
     if(reg==0x14)f->address=value;
     else {
-        assert(reg==0x10 && !(f->address&3) && f->address<=124);
+        assert(reg==0x10 && !(f->address&3) && f->address<=sizeof(f->ram)-4);
         for(i=0;i<4;++i)f->ram[f->address+i]=(uint8_t)(value>>(24-8*i));
     }
     if(f->lose && f->lose==f->writes)f->healthy=0;

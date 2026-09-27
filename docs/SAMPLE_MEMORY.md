@@ -2080,3 +2080,32 @@ pending batch acquisition and timeline scheduling remain follow-on work. Public
 begin validation/promotion/allocation and driver callbacks have no wall-time bound.
 This milestone does not establish physical AmiGUS or real-time performance.
 Evidence: `evidence/enhanced-editor/sampler-upload-jobs/`.
+
+
+### Yielding song/editor upload batches
+
+The song owner and editor binding expose next_step/complete_step. UPLOADING
+means repeat that same operation on a later editor turn; consume and the other
+operation cannot advance playback or overwrite the next interval while pending.
+The owner captures only trigger slots in this command batch (or active voices in
+the exact range-start snapshot). Each call begins one cache acquisition or writes
+at most256bytes. A separate final call verifies every selected current master and
+cache address, then commits the bounded batch. No new start/restore/control/stop
+callback runs during acquisition. Duplicate triggers retain separate cache pins.
+
+Prepared dispatch now receives already-held leases, with no uploads from inside
+voice callbacks. Failure on a later acquisition cannot start an earlier voice.
+Stop, stale/failure cleanup and the editor edit/dispose barrier cancel unfinished
+uploads and release unstarted leases before stopping active voices. Unconfirmed
+voices retain their independent device leases and the session's master pins until
+stop confirmation. All cache hits and exact fractional range restoration use the
+same path. Existing synchronous next/complete calls drive the step APIs to preserve
+callers; standalone public dispatch remains unchanged.
+
+This is an owner-thread protocol, not a hardware clock. Existing device voices may
+continue playing during acquisition. Native PLAY/event-loop scheduling, lookahead
+or deadline handling, card transport and physical timing acceptance remain open.
+Initial allocations and the final bounded callback batch are synchronous. Projects
+and PCM remain immutable; callers must stop before editing or freeing contexts.
+No change to master precision, project saving or the accepted classic display.
+Evidence: `evidence/enhanced-editor/yielding-upload-batches/`.

@@ -6,6 +6,9 @@
 struct pt_wavetable_song {
     struct pt_allocator allocator;struct pt_wavetable_voices *voices;
     struct pt_wavetable_prepared sources;
+    struct pt_sampler_upload_job upload;
+    struct pt_cache_lease lease[PT_RENDER_ACTIONS];
+    unsigned slot[PT_RENDER_ACTIONS],held[PT_RENDER_ACTIONS],batch_count,batch_at,uploading;
     struct pt_wavetable_preflight *preflight;struct pt_wavetable_preflight_report report;
     struct pt_render_sequence *sequence;struct pt_render_plan plan;struct pt_render_snapshot resume;
     struct pt_sample_version *pin[PT_PROJECT_SAMPLES];struct pt_sampler_pin_job promotion;
@@ -16,17 +19,25 @@ struct pt_wavetable_song {
     uint64_t version;unsigned generation,rate,pending,closing,done,range,restored,ready,pin_slot;
     uint32_t remaining;enum pt_wavetable_song_result failure;uint8_t staging[256];
 };
+static void cancel_batch(struct pt_wavetable_song *s)
+{
+    unsigned i;pt_sampler_upload_cancel(&s->upload);
+    for(i=0;i<s->batch_count;++i)if(s->held[i]) {
+        pt_cache_unpin(&s->backend->cache,s->lease[i]);s->held[i]=0;
+    }
+    s->batch_count=s->batch_at=s->uploading=0;
+}
 static void release_sources(struct pt_wavetable_song *s)
 {
     unsigned i;
-    pt_sampler_pin_job_cancel(&s->promotion);
+    cancel_batch(s);pt_sampler_pin_job_cancel(&s->promotion);
     pt_wavetable_preflight_close(&s->preflight);
     pt_render_sequence_close(s->sequence);s->sequence=NULL;
     for(i=0;i<PT_PROJECT_SAMPLES;++i){pt_sampler_unpin(s->pin[i]);s->pin[i]=NULL;}
 }
 static int stop(struct pt_wavetable_song *s)
 {
-    s->closing=1;s->pending=0;s->remaining=0;
+    s->closing=1;s->pending=0;s->remaining=0;cancel_batch(s);
     pt_render_sequence_close(s->sequence);s->sequence=NULL;
     if(s->done)return 1;
     if(!s->ready) {
@@ -73,11 +84,18 @@ static enum pt_wavetable_song_result current(struct pt_wavetable_song *s)
 static enum pt_cache_result source_acquire(void *context,unsigned slot,const struct pt_playback_format *f,
     uint8_t *staging,size_t capacity,struct pt_cache_lease *out)
 {
-    struct pt_wavetable_song *s=context;struct pt_sampler_upload_job job={0};enum pt_cache_result result;
-    if(!out || !source_current(s) || !s->ready || slot>=s->project->sample_count)return PT_CACHE_INVALID;
-    result=pt_sampler_upload_begin_prepared(&job,s->bridge,slot,s->generation,s->version,s->pin[slot],f,out);
-    while(result==PT_CACHE_PENDING)result=pt_sampler_upload_step(&job,staging,capacity,out);
-    return result;
+    struct pt_wavetable_song *s=context;struct pt_pcm pcm;struct pt_sample_version *pin;unsigned i;
+    (void)f;(void)staging;(void)capacity;
+    /* Commit may only transfer a lease already acquired by this exact batch.
+       No new cache acquisition or writes are allowed inside device dispatch. */
+    if(!out || !source_current(s) || !s->ready || !s->uploading || s->batch_at!=s->batch_count ||
+       slot>=s->project->sample_count ||
+       pt_sampler_pin_current(s->sampler,s->project,slot,s->generation,s->pin[slot],&pcm,&pin)!=PT_EDIT_OK)return PT_CACHE_INVALID;
+    pt_sampler_unpin(pin);
+    for(i=0;i<s->batch_count;++i)if(s->held[i] && s->slot[i]==slot) {
+        *out=s->lease[i];s->held[i]=0;return PT_CACHE_HIT;
+    }
+    return PT_CACHE_INVALID;
 }
 static int source_location(void *context,struct pt_cache_lease lease,uint32_t *address,uint32_t *bytes)
 {
@@ -151,21 +169,76 @@ enum pt_wavetable_song_result pt_wavetable_song_open(struct pt_wavetable_voices 
     if(result!=PT_WAVETABLE_SONG_OK){pt_wavetable_song_close(&s);return result;}
     *out=s;return result;
 }
-enum pt_wavetable_song_result pt_wavetable_song_next(struct pt_wavetable_song *s,struct pt_render_interval *out)
+/* Only the immutable audited sequence supplies these descriptors. Capture slots
+   for this batch, never all project samples. Duplicate triggers own separate
+   cache pins, so consuming one cannot evict another pending voice's resource. */
+static int batch_begin(struct pt_wavetable_song *s,unsigned restore)
 {
-    enum pt_wavetable_song_result result;
+    unsigned i,slot,n=restore?s->resume.channels:s->plan.count;
+    if(n>PT_RENDER_ACTIONS || (restore && n>16))return 0;
+    s->uploading=restore?1:2;
+    for(i=0;i<n;++i) {
+        const struct pt_pcm *pcm;
+        if(restore){if(!s->resume.voice[i].active)continue;pcm=s->resume.voice[i].pcm;}
+        else {if(s->plan.action[i].kind!=PT_RENDER_TRIGGER)continue;pcm=s->plan.action[i].voice.pcm;}
+        for(slot=0;slot<s->project->sample_count;++slot)if(pcm==&s->project->samples[slot].pcm)break;
+        if(slot==s->project->sample_count)return 0;
+        s->slot[s->batch_count++]=slot;
+    }
+    return 1;
+}
+/* One allocation/cache hit OR <=256-byte upload per call. READY is returned on
+   a later call after the last acquisition: no device callback shares an upload
+   step. Recheck EVERY prepared descriptor/address before the first callback. */
+static int batch_step(struct pt_wavetable_song *s)
+{
+    unsigned i=s->batch_at;enum pt_cache_result r;
+    if(i<s->batch_count) {
+        if(s->upload.bridge)r=pt_sampler_upload_step(&s->upload,s->staging,sizeof(s->staging),&s->lease[i]);
+        else r=pt_sampler_upload_begin_prepared(&s->upload,s->bridge,s->slot[i],s->generation,s->version,
+            s->pin[s->slot[i]],&s->format,&s->lease[i]);
+        if(r==PT_CACHE_LOAD || r==PT_CACHE_HIT){s->held[i]=1;++s->batch_at;}
+        else if(r!=PT_CACHE_PENDING)return -1;
+        return 0;
+    }
+    for(i=0;i<s->batch_count;++i) {
+        struct pt_pcm pcm;struct pt_sample_version *pin;uint32_t address,bytes;
+        if(pt_sampler_pin_current(s->sampler,s->project,s->slot[i],s->generation,s->pin[s->slot[i]],&pcm,&pin)!=PT_EDIT_OK)return -1;
+        pt_sampler_unpin(pin);
+        if(!s->held[i] || !source_location(s,s->lease[i],&address,&bytes))return -1;
+    }
+    return 1;
+}
+enum pt_wavetable_song_result pt_wavetable_song_next_step(struct pt_wavetable_song *s,struct pt_render_interval *out)
+{
+    enum pt_wavetable_song_result result;int batch;
     if(!s || !out)return PT_WAVETABLE_SONG_INVALID;
     result=current(s);if(result)return result;
     if(!s->ready)return PT_WAVETABLE_SONG_PREPARING;
-    if(s->pending)return PT_WAVETABLE_SONG_INVALID;
-    if(pt_render_sequence_next(s->sequence,&s->interval)!=PT_RENDER_OK)return fail(s,PT_WAVETABLE_SONG_RENDER);
-    if(s->range && s->interval.emit && !s->restored) {
-        if(pt_render_sequence_snapshot(s->sequence,&s->resume)!=PT_RENDER_OK)return fail(s,PT_WAVETABLE_SONG_RENDER);
+    if(s->uploading==2)return PT_WAVETABLE_SONG_UPLOADING;
+    if(s->uploading==1) {
+        batch=batch_step(s);
+        if(batch<0)return fail(s,PT_WAVETABLE_SONG_DEVICE);
+        if(!batch)return PT_WAVETABLE_SONG_UPLOADING;
         if(pt_wavetable_restore_prepared(s->voices,s->version,s->rate,&s->resume,&s->format,s->staging,sizeof(s->staging),&s->sources)!=1)
             return fail(s,PT_WAVETABLE_SONG_DEVICE);
-        s->restored=1;
+        cancel_batch(s);s->restored=1;
+    }else {
+        if(s->pending)return PT_WAVETABLE_SONG_INVALID;
+        if(pt_render_sequence_next(s->sequence,&s->interval)!=PT_RENDER_OK)return fail(s,PT_WAVETABLE_SONG_RENDER);
+        if(s->range && s->interval.emit && !s->restored) {
+            if(pt_render_sequence_snapshot(s->sequence,&s->resume)!=PT_RENDER_OK)return fail(s,PT_WAVETABLE_SONG_RENDER);
+            if(!batch_begin(s,1))return fail(s,PT_WAVETABLE_SONG_DEVICE);
+            return PT_WAVETABLE_SONG_UPLOADING;
+        }
     }
     s->remaining=s->interval.frames;s->pending=1;*out=s->interval;return PT_WAVETABLE_SONG_OK;
+}
+enum pt_wavetable_song_result pt_wavetable_song_next(struct pt_wavetable_song *s,struct pt_render_interval *out)
+{
+    enum pt_wavetable_song_result r;
+    do{r=pt_wavetable_song_next_step(s,out);}while(r==PT_WAVETABLE_SONG_UPLOADING && s->uploading==1);
+    return r;
 }
 enum pt_wavetable_song_result pt_wavetable_song_consume(struct pt_wavetable_song *s,uint32_t frames)
 {
@@ -173,18 +246,37 @@ enum pt_wavetable_song_result pt_wavetable_song_consume(struct pt_wavetable_song
     if(!s || !frames || frames>256)return PT_WAVETABLE_SONG_INVALID;
     result=current(s);if(result)return result;
     if(!s->ready)return PT_WAVETABLE_SONG_PREPARING;
+    if(s->uploading)return PT_WAVETABLE_SONG_UPLOADING;
     if(!s->pending || frames>s->remaining)return PT_WAVETABLE_SONG_INVALID;
     if(pt_render_sequence_consume(s->sequence,frames)!=PT_RENDER_OK)return fail(s,PT_WAVETABLE_SONG_RENDER);
     s->remaining-=frames;return PT_WAVETABLE_SONG_OK;
 }
+enum pt_wavetable_song_result pt_wavetable_song_complete_step(struct pt_wavetable_song *s)
+{
+    int batch;enum pt_wavetable_song_result result=current(s);if(result)return result;
+    if(!s->ready)return PT_WAVETABLE_SONG_PREPARING;
+    if(s->uploading==1)return PT_WAVETABLE_SONG_UPLOADING;
+    if(s->uploading==2) {
+        batch=batch_step(s);
+        if(batch<0)return fail(s,PT_WAVETABLE_SONG_DEVICE);
+        if(!batch)return PT_WAVETABLE_SONG_UPLOADING;
+        if(pt_wavetable_dispatch_prepared(s->voices,s->version,s->rate,&s->plan,&s->format,s->staging,sizeof(s->staging),&s->sources)!=1)
+            return fail(s,PT_WAVETABLE_SONG_DEVICE);
+        cancel_batch(s);
+    }else {
+        if(!s->pending || s->remaining)return PT_WAVETABLE_SONG_INVALID;
+        if(pt_render_sequence_complete(s->sequence,&s->plan)!=PT_RENDER_OK)return fail(s,PT_WAVETABLE_SONG_RENDER);
+        if(s->interval.end)return stop(s)?PT_WAVETABLE_SONG_DONE:PT_WAVETABLE_SONG_STOPPING;
+        if(!s->range || s->restored) {
+            if(!batch_begin(s,0))return fail(s,PT_WAVETABLE_SONG_DEVICE);
+            return PT_WAVETABLE_SONG_UPLOADING;
+        }
+    }
+    s->pending=0;return PT_WAVETABLE_SONG_OK;
+}
 enum pt_wavetable_song_result pt_wavetable_song_complete(struct pt_wavetable_song *s)
 {
-    enum pt_wavetable_song_result result=current(s);if(result)return result;
-    if(!s->ready)return PT_WAVETABLE_SONG_PREPARING;
-    if(!s->pending || s->remaining)return PT_WAVETABLE_SONG_INVALID;
-    if(pt_render_sequence_complete(s->sequence,&s->plan)!=PT_RENDER_OK)return fail(s,PT_WAVETABLE_SONG_RENDER);
-    if(s->interval.end)return stop(s)?PT_WAVETABLE_SONG_DONE:PT_WAVETABLE_SONG_STOPPING;
-    if((!s->range || s->restored) && pt_wavetable_dispatch_prepared(s->voices,s->version,s->rate,&s->plan,&s->format,s->staging,sizeof(s->staging),&s->sources)!=1)
-        return fail(s,PT_WAVETABLE_SONG_DEVICE);
-    s->pending=0;return PT_WAVETABLE_SONG_OK;
+    enum pt_wavetable_song_result r;
+    do{r=pt_wavetable_song_complete_step(s);}while(r==PT_WAVETABLE_SONG_UPLOADING && s->uploading==2);
+    return r;
 }

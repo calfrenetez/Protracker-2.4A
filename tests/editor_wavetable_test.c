@@ -91,6 +91,8 @@ static int editor_wavetable_fixture(void)
     /* Navigation, including selected-channel changes, leaves playback valid. */
     pt_editor_key(e,0x4d,0);pt_editor_key(e,0x42,0);assert(!bus->stops);
     assert(pt_editor_wavetable_next(&owner,&span)==PT_WAVETABLE_SONG_OK);
+    assert(pt_editor_wavetable_clock_arm(&owner,100)==PT_WAVETABLE_SONG_OK);
+    assert(pt_editor_wavetable_clock_service(&owner,100)==PT_WAVETABLE_SONG_WAITING);
     e->project->channels.selected=0;e->row=0;e->editing=1;
     revision=e->history.revision;generation=e->sampler.generation;
     pt_editor_key(e,0x46,0); /* Delete note. */

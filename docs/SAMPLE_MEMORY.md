@@ -2159,3 +2159,32 @@ exact staging cleanup. The original failed fixture allocator-mismatch evidence
 is preserved separately. Shared030/DevBench is released. See
 `evidence/enhanced-editor/lookahead-prefetch/recovered/`. Injected callbacks do
 not establish native card access, audio, scheduler deadlines or physical acceptance.
+
+
+### Strict injected interval-clock gate
+
+An optional song/editor clock gate now owns one positive emitting interval already
+returned by next. Arming requires all its frames still unconsumed, computes a
+checked absolute deadline in the render sample-rate's frame units, and starts no
+voice. While armed, ordinary next/consume/complete cannot bypass it. A service call
+before the boundary consumes at most256 elapsed frames plus one bounded prefetch
+step. Repeated equal timestamps can finish preparation/phase debt without claiming
+more elapsed time. WAITING means the interval is still live, even if its cache is
+ready. Manual prefetch remains safe and permitted.
+
+At the exact boundary, the batch must already be ready and remaining phase debt
+must fit one256-frame step. Only then does completion validate and dispatch the
+prepared plan without allocation/upload. Late service, unready preparation or
+excessive phase debt returns DEADLINE and requests stop without dispatching the
+late plan. Clock regression or deadline overflow returns CLOCK and requests stop.
+Stop cancels unstarted uploads and retains all uncertain active voice leases and
+master pins until explicit close confirms their stops. The editor's existing
+edit/undo/dispose barrier applies while the gate is armed.
+
+This is deliberately a strict PER-INTERVAL contract with an injected timestamp,
+not a complete event loop: zero-frame startup commands, silent range pre-roll,
+range restoration and scheduling the following interval still belong to the
+caller. Timestamps and callbacks must be owner-thread/non-reentrant, and callbacks
+remain synchronous. Native clock reading, callback-duration deadlines, tolerance
+policy and sustained physical throughput are unqualified. Native PLAY/output is
+still disabled; there is no new classic-layout or sample-master/persistence change.

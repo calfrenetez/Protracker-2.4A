@@ -6,7 +6,8 @@ enum pt_wavetable_song_result {
     PT_WAVETABLE_SONG_OK, PT_WAVETABLE_SONG_DONE, PT_WAVETABLE_SONG_STOPPING,
     PT_WAVETABLE_SONG_INVALID, PT_WAVETABLE_SONG_RANGE, PT_WAVETABLE_SONG_CAPABILITY,
     PT_WAVETABLE_SONG_MEMORY, PT_WAVETABLE_SONG_STALE, PT_WAVETABLE_SONG_RENDER,
-    PT_WAVETABLE_SONG_DEVICE, PT_WAVETABLE_SONG_PREPARING, PT_WAVETABLE_SONG_UPLOADING
+    PT_WAVETABLE_SONG_DEVICE, PT_WAVETABLE_SONG_PREPARING, PT_WAVETABLE_SONG_UPLOADING,
+    PT_WAVETABLE_SONG_WAITING, PT_WAVETABLE_SONG_CLOCK, PT_WAVETABLE_SONG_DEADLINE
 };
 /* Serial owner-thread session. A successful open takes exclusive use of an
  * already-bound, idle voice owner/bridge until close (outer reservation remains
@@ -87,6 +88,24 @@ enum pt_wavetable_song_result pt_wavetable_song_complete_step(struct pt_wavetabl
  * No prefetch during silent range pre-roll or pending range restoration. Stop/
  * edit cancels both forecast and uploads. Real-time deadlines remain caller-owned. */
 enum pt_wavetable_song_result pt_wavetable_song_prefetch(struct pt_wavetable_song *);
+/* Optional strict clock gate for ONE positive emitting interval already returned
+ * by next, with no frames consumed. start_frame is an injected absolute frame
+ * timestamp in options.rate units. Sources/clock/callbacks are owner-thread,
+ * non-reentrant. Arm starts no voice and refuses zero/silent/restoration intervals.
+ * An unrepresentable deadline poisons playback with CLOCK and requests stop.
+ * While armed, direct next/consume/complete refuse; prefetch remains permitted.
+ * service timestamps must be monotonic. Before deadline each call consumes at
+ * most256 elapsed frames and performs one bounded prefetch step, returning WAITING.
+ * Repeated timestamps allow phase debt/preparation to catch up without inventing
+ * elapsed time. At EXACT deadline, prefetch must ALREADY be ready and phase debt
+ * <=256; then it commits once without upload/allocation and disarms. Late service
+ * or unfinished work returns DEADLINE and requests stop, never a late trigger.
+ * Regression returns CLOCK and requests stop. Failed/unconfirmed stops retain
+ * existing voice/master ownership until close succeeds. Caller owns subsequent
+ * intervals, initial zero-frame commands and range pre-roll/restoration; this is
+ * a strict interval gate, not a native event loop or real-time timing guarantee. */
+enum pt_wavetable_song_result pt_wavetable_song_clock_arm(struct pt_wavetable_song *,uint64_t start_frame);
+enum pt_wavetable_song_result pt_wavetable_song_clock_service(struct pt_wavetable_song *,uint64_t now_frame);
 /* One stop attempt per held voice; no polling. Retains ALL master pins/controller
  * and unconfirmed device leases until all stops and bridge detach succeed.
  * Returns0 while unresolved; caller must retain/retry *song. On success frees

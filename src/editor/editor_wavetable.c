@@ -45,3 +45,8 @@ enum pt_wavetable_song_result pt_editor_wavetable_complete_step(struct pt_editor
 
 enum pt_wavetable_song_result pt_editor_wavetable_prefetch(struct pt_editor_wavetable *o)
 {return attached(o)?pt_wavetable_song_prefetch(o->song):PT_WAVETABLE_SONG_INVALID;}
+
+enum pt_wavetable_song_result pt_editor_wavetable_clock_arm(struct pt_editor_wavetable *o,uint64_t start)
+{return attached(o)?pt_wavetable_song_clock_arm(o->song,start):PT_WAVETABLE_SONG_INVALID;}
+enum pt_wavetable_song_result pt_editor_wavetable_clock_service(struct pt_editor_wavetable *o,uint64_t now)
+{return attached(o)?pt_wavetable_song_clock_service(o->song,now):PT_WAVETABLE_SONG_INVALID;}

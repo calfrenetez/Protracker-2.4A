@@ -1,0 +1,71 @@
+{
+  "target": "amiberry-030",
+  "suite": "core",
+  "cpu": {
+    "model": "68030",
+    "name": "686803",
+    "fpu": "0",
+    "24bit": "false",
+    "compatible": "true",
+    "cycle_exact": "true"
+  },
+  "memory": {
+    "chip": "2048KB",
+    "fast": "0KB",
+    "bogo": "0KB",
+    "z3": "131072KB",
+    "rtg": "0KB"
+  },
+  "emulator": {
+    "version": "Amiberry 8.3.0 (2026.08.19)",
+    "sdl": "SDL 3.4.14"
+  },
+  "project": "protracker",
+  "scope": "finite clock/memory/fake-voice diagnostic; no audio/card access",
+  "passed": true,
+  "attempted_artifacts": {
+    "PTExecWavetableTimingTest": "09a401411e66710d24828769960a3a784127d365a439c87027340d74a622b372"
+  },
+  "tested_artifacts": {
+    "PTExecWavetableTimingTest": "09a401411e66710d24828769960a3a784127d365a439c87027340d74a622b372"
+  },
+  "completed_cases": [
+    "PTExecWavetableTimingTest"
+  ],
+  "calls": [
+    {
+      "tool": "amiga_ping",
+      "arguments": {},
+      "result": "Amiga alive - clients: 0, chip: 1926976 bytes, fast: 131643936 bytes"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Dev:Tests/20260927T120335293381Z/PTExecWavetableTimingTest"
+      },
+      "result": "File: Dev:Tests/20260927T120335293381Z/PTExecWavetableTimingTest\nCRC32: 0CDB0C7E\nSize: 259392 bytes"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Dev:Tests/20260927T120335293381Z/PTExecWavetableTimingTest"
+      },
+      "result": "File: Dev:Tests/20260927T120335293381Z/PTExecWavetableTimingTest\nCRC32: 0CDB0C7E\nSize: 259392 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Stack 65536\nCD Dev:Tests/20260927T120335293381Z\nPTExecWavetableTimingTest >PTExecWavetableTimingTest.log\nEcho INFRA-RC $RC",
+        "timeout": 45
+      },
+      "result": "[OK]\nINFRA-RC 0"
+    }
+  ],
+  "commit": "e9b6e78f3357c9b86a392b5b392a896fd7f8708d",
+  "working_tree": "M src/editor/editor.c\n M src/editor/editor.h\n M src/editor/view.c\n M src/editor/view.h\n M src/native/editor_main.c\n M tests/editor_test.c\nM  tests/native_exec_editor_wavetable_test.c\n M tests/test_editor.py\nA  tests/test_shared_timing_profile.py\n M tools/build_core_tests.py\nM  tools/build_editor_wavetable.py\nA  tools/shared_infra_timing.py\n M tools/test_sampler_emulator.py\n?? AGENTS.md\n?? amiga-test.json\n?? src/native/pattern_display.c\n?? src/native/pattern_display.h\n?? tests/native_prepared_test.c\n?? tools/shared_infra_sampler.py\n?? tools/shared_infra_ui.py",
+  "artifact_sha256": "09a401411e66710d24828769960a3a784127d365a439c87027340d74a622b372",
+  "guest_directory": "Dev:Tests/20260927T120335293381Z",
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=666\tsndbuf_status=0",
+  "run_files_cleaned": true,
+  "status": "passed"
+}

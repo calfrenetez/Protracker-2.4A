@@ -2511,3 +2511,19 @@ Observed readiness748..757EClock ticks and startup4440/26989ticks for one/16voic
 at709379Hz are lower than the preceding observed costs, but remain instrumented
 emulator measurements, not realtime/physical acceptance. Evidence:
 `evidence/enhanced-editor/snapshot-equality/`.
+
+
+### Finite native timing diagnostic
+
+`tools/build_editor_wavetable.py --timing-only` builds the no-argument
+`PTExecWavetableTimingTest` with its own manifest. It runs clock/alarm/watchdog,
+late-service refusal, 1/16-voice simulated cost and exact snapshot fixtures, then
+verifies all Fast allocations and leases released. It does not access audio or
+AmiGUS. `tools/shared_infra_timing.py` qualifies it using the existing shared
+core runner and exact-byte promotion gate via a process-local profile; installed
+shared configuration stays unchanged. The default full editor test is unchanged.
+
+The 259392-byte candidate passed shared030 run `20260927T120335293381Z`, RC0,
+29 Fast allocations/zero owned bytes, all DMA off, exact cleanup and explicit
+release. Physical promotion accepts those exact bytes. Physical execution and
+realtime acceptance remain separate. Evidence: `evidence/enhanced-editor/finite-timing/`.

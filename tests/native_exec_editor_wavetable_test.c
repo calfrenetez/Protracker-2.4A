@@ -149,4 +149,20 @@ static void native_song_gate_fixture(void)
     puts("NATIVE SONG GATE PASS: real clock/alarms, primed sample leases, observed late service refuses all voice callbacks and releases leases; injected voice bus, no audio output");
 }
 #include "native_wavetable_cost_cases.h"
-int main(void){int result;native_memory_start();native_eclock_fixture();native_alarm_fixture();native_alarm_signal_fixture();native_song_gate_fixture();native_wavetable_cost_fixture();result=editor_wavetable_fixture();native_memory_finish();return result;}
+int main(void)
+{
+    int result=0;
+    native_memory_start();native_eclock_fixture();native_alarm_fixture();native_alarm_signal_fixture();
+    native_song_gate_fixture();native_wavetable_cost_fixture();
+#ifdef PT_NATIVE_TIMING_ONLY
+    (void)editor_wavetable_fixture; /* Keep the common source fixture checked. */
+    project_snapshot_fixture();
+#else
+    result=editor_wavetable_fixture();
+#endif
+    native_memory_finish();
+#ifdef PT_NATIVE_TIMING_ONLY
+    puts("NATIVE TIMING PASS: finite clock/alarm/watchdog and fake-voice observations, snapshot byte parity, all leases and Fast allocations released; no audio or AmiGUS access");
+#endif
+    return result;
+}

@@ -1,0 +1,45 @@
+EXEC MEMORY pool_limit=131053320 reserve=262144 flags=4
+NATIVE ECLOCK observed frequency=709379 reads=101 epoch=0
+NATIVE ECLOCK observed frequency=709379 reads=101 epoch=1
+NATIVE ECLOCK observed frequency=709379 reads=101 epoch=2
+NATIVE ECLOCK PASS: real timer.device reads, stable frequency, monotonic64-bit counter, checked frame/deadline conversion, repeated close/reopen; no timer requests or audio output
+NATIVE ALARM observed late_ticks=16584 frequency=709379 poll=Delay(1) case=0
+NATIVE ALARM observed late_ticks=26225 frequency=709379 poll=Delay(1) case=1
+NATIVE ALARM observed late_ticks=26230 frequency=709379 poll=Delay(1) case=2
+NATIVE ALARM observed late_ticks=26240 frequency=709379 poll=Delay(1) case=3
+NATIVE ALARM PASS: absolute EClock alarm completion, reply collection/reuse, future-alarm cancel/close and reopen; coarse diagnostic polling, no audio or timing qualification
+NATIVE SIGNAL observed late_ticks=3598 frequency=709379 delay_ms=2 case=0
+NATIVE SIGNAL observed late_ticks=194 frequency=709379 delay_ms=10 case=1
+NATIVE SIGNAL observed late_ticks=196 frequency=709379 delay_ms=2 case=2
+NATIVE SIGNAL observed late_ticks=196 frequency=709379 delay_ms=10 case=3
+NATIVE SIGNAL observed late_ticks=196 frequency=709379 delay_ms=2 case=4
+NATIVE SIGNAL observed late_ticks=196 frequency=709379 delay_ms=10 case=5
+NATIVE SIGNAL observed late_ticks=193 frequency=709379 delay_ms=2 case=6
+NATIVE SIGNAL observed late_ticks=196 frequency=709379 delay_ms=10 case=7
+NATIVE SIGNAL observed late_ticks=195 frequency=709379 delay_ms=2 case=8
+NATIVE SIGNAL observed late_ticks=194 frequency=709379 delay_ms=10 case=9
+NATIVE SIGNAL observed late_ticks=194 frequency=709379 delay_ms=2 case=10
+NATIVE SIGNAL observed late_ticks=192 frequency=709379 delay_ms=10 case=11
+NATIVE SIGNAL observed late_ticks=199 frequency=709379 delay_ms=2 case=12
+NATIVE SIGNAL observed late_ticks=195 frequency=709379 delay_ms=10 case=13
+NATIVE SIGNAL observed late_ticks=193 frequency=709379 delay_ms=2 case=14
+NATIVE SIGNAL observed late_ticks=197 frequency=709379 delay_ms=10 case=15
+NATIVE SIGNAL SUMMARY cases=16 min_ticks=192 max_ticks=3598 over_48k_frame=16 frequency=709379
+NATIVE SIGNAL PASS: task signal wake, independent watchdog, actual-time resampling and all requests/resources closed; diagnostic observation only, no playback dispatch
+NATIVE SONG GATE observed frame=9626 start=9600 result=14 starts=0 injected_delay=0
+NATIVE SONG GATE observed frame=11134 start=9600 result=14 starts=0 injected_delay=1
+NATIVE SONG GATE PASS: real clock/alarms, primed sample leases, observed late service refuses all voice callbacks and releases leases; injected voice bus, no audio output
+NATIVE COST ready voices=1 before_sample=228 after_sample=522 total=750 frequency=709379 case=0
+NATIVE COST ready voices=1 before_sample=230 after_sample=521 total=751 frequency=709379 case=1
+NATIVE COST ready voices=1 before_sample=226 after_sample=523 total=749 frequency=709379 case=2
+NATIVE COST ready voices=1 before_sample=236 after_sample=514 total=750 frequency=709379 case=3
+NATIVE COST start voices=1 before_sample=235 sample_to_first=2516 first_to_last=0 last_to_return=1656 total=4407 frequency=709379
+NATIVE COST ready voices=16 before_sample=230 after_sample=525 total=755 frequency=709379 case=0
+NATIVE COST ready voices=16 before_sample=236 after_sample=515 total=751 frequency=709379 case=1
+NATIVE COST ready voices=16 before_sample=236 after_sample=519 total=755 frequency=709379 case=2
+NATIVE COST ready voices=16 before_sample=225 after_sample=520 total=745 frequency=709379 case=3
+NATIVE COST start voices=16 before_sample=227 sample_to_first=7289 first_to_last=13282 last_to_return=6566 total=27364 frequency=709379
+NATIVE COST PASS: unchanged source guards, measured ready/one/16voice prepared commit, no allocation/upload at commit, exact lease cleanup; injected logical clock/voice bus, no audio or realtime qualification
+PROJECT SNAPSHOT PASS: every object byte including padding and tail detects mutation, symmetric equality/self-alias, native ABI alignment, unchanged inputs and full ownership checks retained
+EXEC MEMORY PASS: 29 Fast allocations, zero owned bytes, budget refusal without Chip fallback
+NATIVE TIMING PASS: finite clock/alarm/watchdog and fake-voice observations, snapshot byte parity, all leases and Fast allocations released; no audio or AmiGUS access

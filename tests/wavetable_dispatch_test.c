@@ -113,6 +113,8 @@ static int dispatch_control(void *ctx,unsigned ch,uint32_t rate,uint16_t left,ui
     b->plan[ch].rate=rate;b->plan[ch].left=left;b->plan[ch].right=right;++b->controls;
     return b->controls!=b->fail_control;
 }
+
+#include "wavetable_song_cases.h"
 static int dispatch_fixture_main(void)
 {
     struct fixture *f=malloc(sizeof(*f));struct dispatch_bus *bus=malloc(sizeof(*bus));
@@ -124,7 +126,7 @@ static int dispatch_fixture_main(void)
     struct pt_render_options options={0};struct pt_playback_format format={16,0,0,0};uint8_t staging[3];
     int32_t data[]={257,-513,1025,-2049,17,31,47,63};unsigned ch,i,starts,stops,controls;uint64_t version;
     uint8_t *saved;size_t size,used;
-    assert(f && bus);assert(voices_fixture_main()==0);preflight_fixture();memset(bus,0,sizeof(*bus));
+    assert(f && bus);assert(voices_fixture_main()==0);preflight_fixture();song_fixture();memset(bus,0,sizeof(*bus));
     init(f,PT_AMIGUS_WAVETABLE);assert(pt_amigus_wavetable_cache_attach(&f->cache,&f->reservation,16,112,112,f,bus_owned,bus_write));
     pt_document_init(&d,&allocator);assert(pt_document_new(&d,16,SIZE_MAX)==PT_PROJECT_OK);
     d.project.samples[0].pcm=(struct pt_pcm){data,8,8,48000,1,24};d.project.samples[0].volume=64;

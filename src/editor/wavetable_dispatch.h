@@ -14,6 +14,7 @@ struct pt_wavetable_preflight_report {
     uint64_t intervals,frames; /* All consumed spans, including silent pre-roll. */
     unsigned action,channel; /* Zero-based action; UINT_MAX means no action. */
     enum pt_render_action_kind kind;
+    uint8_t samples[PT_PROJECT_SAMPLES]; /* Triggered slots; valid on COMPATIBLE. */
 };
 /* Silent full-sequence capability analysis with the SAME rules as dispatch.
  * Initial voices are idle. Includes pre-roll, late rows and retained loops;

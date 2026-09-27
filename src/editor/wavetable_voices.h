@@ -26,6 +26,7 @@ struct pt_wavetable_voices {
     struct pt_wavetable_voice_api api;
     struct pt_wavetable_voice voice[PT_WAVETABLE_VOICES];
     unsigned closing;
+    const void *song_owner; /* Exclusive sequence session, managed by wavetable_song. */
 };
 enum pt_voice_result {
     PT_VOICE_REFUSED=-2, PT_VOICE_STOP_FAILED=-1, PT_VOICE_STOP_PENDING=0,

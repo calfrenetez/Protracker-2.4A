@@ -335,3 +335,45 @@ Validation: final host ASan/UBSan fixture PASS5.851s; native shared030
 owned bytes/no Chip fallback. All4DMAoff, exact cleanup and explicit release
 verified. See `evidence/enhanced-editor/wavetable-preflight/`. No native output or
 physical acceptance is claimed.
+
+## Owned wavetable sequence lifecycle
+
+`wavetable_song` wraps the mono dispatcher with an enforced full-sequence
+capability check before source promotion or device callbacks. On success it
+borrows an already-bound idle voice owner exclusively and records a session
+marker so a second song cannot take that owner. The preflight report identifies
+actual triggered sample slots; only those masters are pinned for the session.
+Unused project samples are not promoted or cached. Workspace allocation and
+source promotion use caller/sampler allocators and existing memory ceilings.
+Failed open preserves the output handle and voice ownership, releases temporary
+pins/workspaces, and never starts a voice. A promoted sampler.current copy can
+remain after a later failure; it is still the intact authoritative master.
+
+The public protocol is next -> consume elapsed frames in blocks of at most256
+-> complete. The caller supplies the clock; consume does not wait or produce
+PCM. Complete applies the audited plan only at the interval boundary. Initial
+omitted lead-in can contain multiple zero-frame spans. Options and conversion
+format are copied. Row-range playback explicitly refuses until a phase-correct
+silent pre-roll/start policy exists for hardware voices.
+
+Project pattern/order/sample arrays are borrowed and must remain immutable:
+callers must close before editing or replacing them. Each step detects sampler
+revision, table identity and project-header/settings changes before using the
+sequence. This is not a deep project snapshot and cannot detect arbitrary
+in-place array writes. Native editor edit guards remain future integration.
+
+Natural end, cancellation and stale/runtime failures request bounded confirmed
+stops. Failed dispatch may attempt its own stop cleanup before the session's stop
+pass. No polling loop occurs. The sequence is discarded immediately; all master
+pins/controller state and any unconfirmed device leases remain until voice close
+and cache detach succeed. Close returns pending without freeing the controller;
+only a successful close nulls the caller's handle. The outer reservation remains
+caller-owned. A poisoned session cannot retry a partial plan or restart voices.
+These are injected-driver ownership semantics, not verified real stop fences,
+native PLAY wiring, device scheduling or hardware output.
+
+Host ASan/UBSan PASS5.940s and shared030 run
+`render-files-1790477656284461000` RC0 within90s validate these software lifetimes.
+The native fixture returned all115 Fast allocations, with no Chip fallback.
+All4DMAoff/exact cleanup and explicit release verified. Evidence and limitations
+are recorded in `evidence/enhanced-editor/wavetable-song/`.

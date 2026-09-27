@@ -1,0 +1,13 @@
+{
+  "commit": "d8c9a0429f41cd5f3dbadae34ef438e45c9c3718",
+  "inputs": {
+    "Software/Drivers/Base/src/amigus_base.c": "6b562ffb6b3a73832e65efd6c43582750e7ab148c521d229c5153e0b10803f04",
+    "Software/Drivers/Base/include-src/amigus/amigus.h": "615bbcf8b314bafe1b3eb53d605c0e82d4ff4619e1b06e25f2f0cd7ddf4654c4"
+  },
+  "facts": [
+    "ChangePartReservation returns 0x100 plus requested block when already owned by another identity.",
+    "ChangeCardReservation attempts each selected part separately; combined masks may partially acquire ownership.",
+    "PCM flag=1; WAVETABLE flag=2; descriptors have independent block base pointers."
+  ],
+  "implementation": "Independent lifecycle and cache owner; no upstream implementation incorporated."
+}

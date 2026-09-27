@@ -6,6 +6,7 @@ struct fake {
     int available, supported, count, cycle, opens, closes, finds, reserves, releases;
     int cards[16], library;
     unsigned long code;
+    enum pt_amigus_resource requested, acquired;
     void *owner, *card;
 };
 static int open_library(void *c)
@@ -29,17 +30,17 @@ static void *find(void *c,void *previous)
         return i+1<f->count ? &f->cards[i+1] : 0;
     assert(0); return 0;
 }
-static int supported(void *c,void *card)
-{ struct fake *f=c; assert(card && f->library); return f->supported; }
-static unsigned long reserve(void *c,void *card,void *owner)
+static int supported(void *c,void *card,enum pt_amigus_resource resource)
+{ struct fake *f=c; assert(card && f->library);f->requested=resource; return f->supported; }
+static unsigned long reserve(void *c,void *card,enum pt_amigus_resource resource,void *owner)
 {
-    struct fake *f=c; assert(f->library && !f->owner); ++f->reserves;
-    if (!f->code) {f->card=card;f->owner=owner;} return f->code;
+    struct fake *f=c; assert(f->library && !f->owner); assert(resource==f->requested); ++f->reserves;
+    if (!f->code) {f->card=card;f->owner=owner;f->acquired=resource;} return f->code;
 }
-static void release(void *c,void *card,void *owner)
+static void release(void *c,void *card,enum pt_amigus_resource resource,void *owner)
 {
     struct fake *f=c; assert(f->library && card==f->card && owner==f->owner);
-    ++f->releases; f->owner=0; f->card=0;
+    assert(resource==f->acquired); ++f->releases; f->owner=0; f->card=0;
 }
 int main(void)
 {
@@ -85,6 +86,24 @@ int main(void)
     assert(pt_amigus_reservation_open(&r,&api,15)==PT_AMIGUS_RESERVED);
     assert(f.card==&f.cards[15]);
     assert(pt_amigus_reservation_close(&r));
+    /* Explicit wavetable selection uses only its own busy code and release flag. */
+    {
+        int opens=f.opens;
+        assert(pt_amigus_reservation_open_resource(&r,&api,0,0)==PT_AMIGUS_INVALID);
+        assert(pt_amigus_reservation_open_resource(&r,&api,0,3)==PT_AMIGUS_INVALID);
+        assert(f.opens==opens);
+        f.code=0x102;
+        assert(pt_amigus_reservation_open_resource(&r,&api,0,PT_AMIGUS_WAVETABLE)==PT_AMIGUS_BUSY);
+        assert(r.driver_code==0x102 && f.requested==PT_AMIGUS_WAVETABLE);
+        f.code=0x101;
+        assert(pt_amigus_reservation_open_resource(&r,&api,0,PT_AMIGUS_WAVETABLE)==PT_AMIGUS_DRIVER_ERROR);
+        f.code=0;
+        assert(pt_amigus_reservation_open_resource(&r,&api,0,PT_AMIGUS_WAVETABLE)==PT_AMIGUS_RESERVED);
+        assert(r.resource==PT_AMIGUS_WAVETABLE && f.acquired==PT_AMIGUS_WAVETABLE);
+        assert(pt_amigus_reservation_open(&r,&api,0)==PT_AMIGUS_INVALID);
+        assert(pt_amigus_reservation_begin(&r));assert(!pt_amigus_reservation_close(&r));
+        assert(pt_amigus_reservation_end(&r));assert(pt_amigus_reservation_close(&r));
+    }
     api.release=0;
     assert(pt_amigus_reservation_open(&r,&api,0)==PT_AMIGUS_INVALID);
     /* Discovery must work with reservation callbacks absent. */

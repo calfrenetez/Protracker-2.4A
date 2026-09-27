@@ -13,7 +13,7 @@ The accepted layout and unrelated prepared-display work remain unchanged.
 | Standalone renderer/converter | Native queried Fast-first shared allocator; bounded supported-format loaders; allocator-owned WAV/stem workspaces and no-replace publication | Physical pressure/performance; runtime library internals |
 | Recent-files persistence | Native editor supplies master allocator for one cleared workspace; descriptor I/O retries EINTR/short transfers | Runtime descriptor internals not instrumented; legacy API retains heap allocation |
 | Display | Fast-preferred canvas with public fallback; display rasters and custom-chip requirements | Separate display budget; unrelated dirty prepared-display changes unqualified |
-| AmiGUS sample cache | Versioned, pinned, evictable resource cache plus bounded address allocation and chunk uploads through an injected register bus | Native wavetable reservation, verified physical capacity/bus binding and voice stop/release remain unimplemented |
+| AmiGUS sample cache | Versioned, pinned, evictable resource cache plus bounded address allocation and chunk uploads through an injected register bus | Explicit wavetable reservation/cache lifetime implemented with fake-library tests; verified physical capacity/bus binding and voice stop/release remain unimplemented |
 
 Exec-backed emulator fixtures verify explicit allocator pointers with TypeOfMem
 and require pool-owned bytes return to zero. They do not account for allocations

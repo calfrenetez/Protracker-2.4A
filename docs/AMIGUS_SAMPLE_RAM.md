@@ -31,8 +31,9 @@ lease or establish a hardware voice's stopped state.
 
 The entire cache lifetime requires an exclusive wavetable reservation. Losing
 ownership requires voices to be stopped and all handles discarded before reuse;
-reacquiring the reservation does not validate old card RAM. The existing native
-reservation adapter is PCM-only and is not a wavetable ownership implementation.
+reacquiring the reservation does not validate old card RAM. The reservation adapter now supports explicit PCM or wavetable selection; the
+legacy open entry point remains PCM-only. Select WAVETABLE explicitly for this
+cache. No combined resource masks are accepted.
 
 ## Upload semantics
 
@@ -62,8 +63,8 @@ ownership refusal, out-of-order chunks and every register-write failure point.
 Existing conversion, cache and AmiGUS transport checks also pass. The pinned
 Amiga build records source dependencies, compiler/runtime hashes and binary hash.
 
-Remaining: verify card/firmware capacity and Mini bus transactions, implement a
-wavetable reservation owner and native binding, and connect voices with confirmed
+Remaining: verify card/firmware capacity and Mini bus transactions, implement the
+native bus binding, and connect voices with confirmed
 stop/transfer completion before releasing leases. The injected bus establishes
 software behavior only. There is no real card access, device upload, audible
 playback, physical performance or physical acceptance from these fixtures.
@@ -74,3 +75,47 @@ final owned bytes and budget refusal without Chip fallback. All four DMA channel
 were off before exact owned cleanup and explicit resource release. No timeout,
 retry or reset was needed. This still uses the injected bus, never actual RAM
 uploads to an AmiGUS.
+
+## Reservation-bound cache owner
+
+`amigus_wavetable_cache` borrows an explicitly open WAVETABLE reservation and
+holds its access lease for the entire cache lifetime. Attach refuses a PCM-only
+reservation, an existing access lease, an invalid region or missing ownership.
+It performs no register writes. Failed attach leaves reservation access unchanged.
+The core/native reservation callbacks now receive an explicit single resource;
+the same selected flag is used for support checks, ReserveCard and FreeCard.
+Resource-specific busy codes are recognized. The old open entry point and the
+discovery PCM count retain their existing behavior. Combined masks are refused
+because the public driver can acquire individual parts before another part fails.
+
+Acquire and address lookup require current ownership, including cache hits that
+need no upload. Detected ownership loss is latched until detach; making the
+predicate true again cannot resurrect cached card contents. A failed upload
+discards only its unpublished resource and retains the card/library owner.
+Invalidate retires pinned old versions while a later version gets a separate
+allocation. A lease may be released only after its voice/transfer is confirmed
+stopped; no hardware voice-stop mechanism is implemented here.
+
+Detach retires all entries and blocks new acquisitions/address lookups. It refuses
+while any sample lease remains pinned, retaining the reservation and library.
+After the final unpin, retrying detach releases access and leaves the borrowed
+reservation open for its owner to close. Do not end that access lease externally.
+The cache and its callbacks must remain alive until detach succeeds. No hardware
+stop, drain, interrupt teardown or audible silence is inferred from these calls.
+
+Validation uses fake-library calls plus injected memory and preserves the entire
+24-bit source while deriving16-bit cache bytes. Tests cover wrong-resource and
+attach failures, cache-hit ownership loss, pinned generations under pressure,
+partial upload failure, repeated detach, and exact reserve/release resource
+identity. Production native descriptor inspection is tested against synthetic
+PCM-only, wavetable-only and unsupported card descriptions; it does not access
+real descriptors or invoke the production library callbacks.
+
+The ownership integration passes all10 AmiGUS host sanitizer tests (5.798s) and
+native shared030 run `render-files-1790473732795430000` within a separately
+coordinated90-second window. RC0, one Fast metadata allocation, zero final owned
+bytes, no Chip fallback; completion, all four DMA off, exact cleanup and explicit
+release verified. PCM session and discovery probes still cross-build. This run
+uses fake library/bus callbacks; only descriptor inspection invokes a production
+native callback on synthetic data. It does not test ReserveCard/FreeCard against
+a real library or establish native MMIO/voice-stop behavior.

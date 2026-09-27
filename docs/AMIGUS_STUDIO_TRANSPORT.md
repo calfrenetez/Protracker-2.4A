@@ -231,3 +231,14 @@ reserving or exposing card pointers. It closes every successfully opened library
 reference. Host absent/empty/unsupported/cycle checks pass; positive library/card
 and playback behavior remain untested. A discovered PCM descriptor is not a
 verified Studio capability. Evidence: `evidence/enhanced-editor/amigus-discovery/`.
+
+## Explicit resource selection (27 September 2026)
+
+The reservation lifecycle now also accepts an explicitly selected WAVETABLE block.
+Its original open entry point and discovery count remain PCM-only; Studio callers
+retain the same resource and busy-code behavior. Support/reserve/release callbacks
+carry the selected resource, and combined masks are refused to avoid ambiguous
+partial acquisition. The separate `amigus_wavetable_cache` owner keeps its access
+lease until all cached sample leases retire. This does not enable native Studio
+output or bind a wavetable register bus. See `AMIGUS_SAMPLE_RAM.md` for ownership
+and the fake-library/injected-bus evidence boundary.

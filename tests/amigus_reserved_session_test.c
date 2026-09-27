@@ -7,7 +7,7 @@ static void *allocate_queue(void *c,size_t n) {(void)c;return malloc(n);}
 static void free_queue(void *c,void *p) {(void)c;free(p);}
 struct reserved_port {struct pt_amigus_reservation *owner;int reset;unsigned writes;};
 static void check_access(struct reserved_port *p)
-{assert(p->owner->reserved && p->owner->opened && p->owner->access);}
+{assert(p->owner->reserved && p->owner->opened && p->owner->access && p->owner->resource==PT_AMIGUS_PCM);}
 static int port_capacity(void *c) {check_access(c);return 3;}
 static int port_write(void *c,const uint32_t *data)
 {struct reserved_port *p=c;check_access(p);assert(data);++p->writes;return 1;}

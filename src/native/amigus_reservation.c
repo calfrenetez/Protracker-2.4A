@@ -19,22 +19,23 @@ static void *find_card(void *ctx, void *previous)
     struct Library *AmiGUS_Base = ((struct pt_native_amigus_library *)ctx)->base;
     return PT_FindCard((struct AmiGUS *)previous);
 }
-static int supported(void *ctx, void *value)
+static int supported(void *ctx, void *value, enum pt_amigus_resource resource)
 {
     const struct AmiGUS *card = value;
     (void)ctx;
-    return card->agus_PcmBase &&
+    return ((resource == PT_AMIGUS_PCM && card->agus_PcmBase) ||
+            (resource == PT_AMIGUS_WAVETABLE && card->agus_WavetableBase)) &&
         (card->agus_TypeId == AmiGUS_Zorro2 || card->agus_TypeId == AmiGUS_mini);
 }
-static unsigned long reserve_card(void *ctx, void *card, void *owner)
+static unsigned long reserve_card(void *ctx, void *card, enum pt_amigus_resource resource, void *owner)
 {
     struct Library *AmiGUS_Base = ((struct pt_native_amigus_library *)ctx)->base;
-    return PT_Reserve((struct AmiGUS *)card, AMIGUS_FLAG_PCM, owner);
+    return PT_Reserve((struct AmiGUS *)card, resource == PT_AMIGUS_WAVETABLE ? AMIGUS_FLAG_WAVETABLE : AMIGUS_FLAG_PCM, owner);
 }
-static void release_card(void *ctx, void *card, void *owner)
+static void release_card(void *ctx, void *card, enum pt_amigus_resource resource, void *owner)
 {
     struct Library *AmiGUS_Base = ((struct pt_native_amigus_library *)ctx)->base;
-    PT_Free((struct AmiGUS *)card, AMIGUS_FLAG_PCM, owner);
+    PT_Free((struct AmiGUS *)card, resource == PT_AMIGUS_WAVETABLE ? AMIGUS_FLAG_WAVETABLE : AMIGUS_FLAG_PCM, owner);
 }
 struct pt_amigus_reservation_api pt_native_amigus_reservation_api(
     struct pt_native_amigus_library *n)

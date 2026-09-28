@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "seconds": 75.02088329099934,
+  "window_bound_seconds": 440,
+  "cases": [
+    {
+      "case": "sample-wav",
+      "binary": "PTExecSampleFileTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/render-files-1790569195970914000",
+      "sha256": "442871e4346f7e5b63546eecee4f7a445f65a8bd067befec8e6e3731c09a671d",
+      "independent_cleanup": true
+    },
+    {
+      "case": "sample-raw",
+      "binary": "PTExecSampleRawFileTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/render-files-1790569204384542000",
+      "sha256": "8dbdc5f5d138d6c86cd4c8c57854e9457b07750dc37f10c23adab769f56488de",
+      "independent_cleanup": true
+    },
+    {
+      "case": "sample-svx",
+      "binary": "PTExecSampleSvxFileTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/render-files-1790569225093877000",
+      "sha256": "552e10a8cbfd555989bd92a24538df26c2b8140fb13c0b9cb05663f2c65058c8",
+      "independent_cleanup": true
+    },
+    {
+      "case": "svx-import",
+      "binary": "PTExecSvxImportTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/render-files-1790569227536780000",
+      "sha256": "75bdb17f57635d4183e1d2be14bf961147f6f791558862645e85596313173ab1",
+      "independent_cleanup": true
+    },
+    {
+      "case": "mod-stream",
+      "binary": "PTExecModStreamTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/render-files-1790569231503761000",
+      "sha256": "7ed7e11bae6f2a1d7dc8794713c52a9321585dd7cb27d8e83fa3561bbb2e6619",
+      "independent_cleanup": true
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 streamed master IFF export and Exec Fast allocator",
+  "PTExecSampleSvxFileTest_sha256": "552e10a8cbfd555989bd92a24538df26c2b8140fb13c0b9cb05663f2c65058c8",
+  "sample-svx_returncode": "0",
+  "sample_staging_clean": true,
+  "run_files_cleaned": true
+}

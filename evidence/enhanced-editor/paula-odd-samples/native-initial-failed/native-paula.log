@@ -1,0 +1,6 @@
+SYNC MEMORY PASS: one full immutable export plus two metadata/pattern prefixes; no duplicate sample comparison payload
+SCOPE/DMA PASS: enabled hardware channels and time-varying sample preview
+REPLAY initial ticks=40 row=5 periods=428,339,285,214
+PLAY REFUSAL PASS: Studio/AmiGUS/MIDI/high-resolution rate requests preserve active replay, cache ownership and masters
+HIGHRES SONG PASS: 16/24-bit masters, rounded private8-bit Chip playback, unused cache omitted, stop/rebuild, restart refill and byte-exact enhanced save
+FAIL line 158: state.active && state.period[0]==428 && a.sample_bytes[0]==6

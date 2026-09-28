@@ -132,7 +132,7 @@ enum pt_project_result pt_mod_project_decode_reader(pt_mod_read read,void *conte
     if(pt_project_validate(&p,NULL)!=PT_PROJECT_OK)return PT_PROJECT_INVALID;
     *out=p;return PT_PROJECT_OK;
 }
-enum pt_project_result pt_mod_export_analyse(const struct pt_project *p,struct pt_mod_export_report *out)
+static enum pt_project_result analyse_mod(const struct pt_project *p,struct pt_mod_export_report *out,unsigned pad)
 {
     struct pt_mod_export_report r;unsigned i,classic_headers=0;size_t count;uint32_t maxorder=0;const uint8_t *old;
     enum pt_project_result result=pt_project_validate(p,NULL);
@@ -157,7 +157,8 @@ enum pt_project_result pt_mod_export_analyse(const struct pt_project *p,struct p
         if(s->pcm.bits!=8)r.issues|=PT_EXPORT_PRECISION;
         if(s->pcm.channels!=1)r.issues|=PT_EXPORT_STEREO;
         if(s->pcm.rate!=PT_CLASSIC_RATE)r.issues|=PT_EXPORT_RATE;
-        if(s->pcm.frames>131070 || (s->pcm.frames&1))r.issues|=PT_EXPORT_LIMITS;
+        if(s->pcm.frames>131070)r.issues|=PT_EXPORT_LIMITS;
+        if(s->pcm.frames&1)r.issues|=pad?PT_EXPORT_PADDING:PT_EXPORT_LIMITS;
         if(s->slice_count)r.issues|=PT_EXPORT_SLICES;
         /* A preserved header can contain a one-word loop start which is not
            represented by PT_LOOP_NONE. Never emit an out-of-sample DMA range
@@ -198,6 +199,23 @@ enum pt_project_result pt_mod_export_analyse(const struct pt_project *p,struct p
     }
     *out=r;return PT_PROJECT_OK;
 }
+enum pt_project_result pt_mod_export_analyse(const struct pt_project *p,struct pt_mod_export_report *out)
+{return analyse_mod(p,out,0);}
+/* Playback alone may append one silent byte to each odd-length sample. Keep
+ * this issue separate so no unrelated size/loop/export limit is relaxed. */
+enum pt_project_result pt_mod_playback_analyse(const struct pt_project *p,struct pt_mod_export_report *out)
+{
+    struct pt_mod_export_report report;unsigned i;
+    enum pt_project_result r=analyse_mod(p,&report,1);
+    if(r!=PT_PROJECT_OK)return r;
+    if(!out)return PT_PROJECT_INVALID;
+    if(!(report.issues & ~(PT_EXPORT_PRECISION|PT_EXPORT_PADDING))) {
+        report.bytes=1084+(size_t)p->pattern_count*1024;
+        for(i=0;i<p->sample_count;++i)
+            report.bytes+=p->samples[i].pcm.frames+(p->samples[i].pcm.frames&1);
+    }
+    *out=report;return PT_PROJECT_OK;
+}
 enum pt_project_result pt_mod_export_analyse_round8(const struct pt_project *p,struct pt_mod_export_report *out)
 {
     struct pt_mod_export_report report;unsigned i;
@@ -217,10 +235,10 @@ static uint32_t dither_random(uint32_t *state)
 }
 static enum pt_project_result export_mod(const struct pt_project *p,uint8_t *out,size_t capacity,size_t *written,unsigned round8)
 {
-    struct pt_mod_export_report report;enum pt_project_result r=round8?pt_mod_export_analyse_round8(p,&report):pt_mod_export_analyse(p,&report);
+    struct pt_mod_export_report report;enum pt_project_result r=round8==3?pt_mod_playback_analyse(p,&report):round8?pt_mod_export_analyse_round8(p,&report):pt_mod_export_analyse(p,&report);
     const uint8_t *old;unsigned i,j,maxorder=0;size_t pos,count;uint32_t noise=0x243f6a88UL;
     if(r!=PT_PROJECT_OK)return r;
-    if(report.issues & ~(round8?PT_EXPORT_PRECISION:0U))return PT_PROJECT_UNSUPPORTED;
+    if(report.issues & ~(round8==3?(PT_EXPORT_PRECISION|PT_EXPORT_PADDING):round8?PT_EXPORT_PRECISION:0U))return PT_PROJECT_UNSUPPORTED;
     if(!out || !written)return PT_PROJECT_INVALID;
     if(capacity<report.bytes)return PT_PROJECT_CAPACITY;
     count=(size_t)p->pattern_count*64*p->channels.count;
@@ -249,7 +267,7 @@ static enum pt_project_result export_mod(const struct pt_project *p,uint8_t *out
     for(i=0;i<31;++i) {
         uint8_t *q=out+20+i*30;
         if(i<p->sample_count) {
-            const struct pt_sample *s=&p->samples[i];memcpy(q,s->name,22);w16(q+22,s->pcm.frames/2);
+            const struct pt_sample *s=&p->samples[i];memcpy(q,s->name,22);w16(q+22,(s->pcm.frames+(round8==3?(s->pcm.frames&1):0))/2);
             q[24]=(uint8_t)s->finetune&15;q[25]=s->volume;
             if(s->loop==PT_LOOP_FORWARD) {w16(q+26,s->loop_start/2);w16(q+28,(s->loop_end-s->loop_start)/2);}
             else if(!old || u16(q+28)>1) {w16(q+26,0);w16(q+28,1);}
@@ -269,6 +287,7 @@ static enum pt_project_result export_mod(const struct pt_project *p,uint8_t *out
                 }
                 out[pos++]=(uint8_t)value;
             }
+            if(round8==3 && (s->pcm.frames&1))out[pos++]=0;
         } else {memset(q,0,30);w16(q+28,1);}
     }
     *written=report.bytes;return PT_PROJECT_OK;
@@ -283,15 +302,15 @@ enum pt_project_result pt_mod_export_tpdf8(const struct pt_project *p,uint8_t *o
 {return export_mod(p,out,capacity,written,2);}
 
 
-enum pt_project_result pt_mod_export_stream(const struct pt_project *p,unsigned policy,pt_project_sink sink,void *context)
+static enum pt_project_result stream_mod(const struct pt_project *p,unsigned policy,pt_project_sink sink,void *context)
 {
     struct pt_mod_export_report report;enum pt_project_result r;
     uint8_t header[1084],block[1024];const uint8_t *old;
     unsigned i,j,maxorder=0;size_t used=0;uint32_t noise=0x243f6a88UL;
-    if(policy>2 || !sink)return PT_PROJECT_INVALID;
-    r=policy?pt_mod_export_analyse_round8(p,&report):pt_mod_export_analyse(p,&report);
+    if(!sink)return PT_PROJECT_INVALID;
+    r=policy==3?pt_mod_playback_analyse(p,&report):policy?pt_mod_export_analyse_round8(p,&report):pt_mod_export_analyse(p,&report);
     if(r!=PT_PROJECT_OK)return r;
-    if(report.issues & ~(policy?PT_EXPORT_PRECISION:0U))return PT_PROJECT_UNSUPPORTED;
+    if(report.issues & ~(policy==3?(PT_EXPORT_PRECISION|PT_EXPORT_PADDING):policy?PT_EXPORT_PRECISION:0U))return PT_PROJECT_UNSUPPORTED;
     memset(header,0,sizeof(header));old=original(p);if(old)memcpy(header,old,sizeof(header));
     memcpy(header,p->title,20);header[950]=(uint8_t)p->order_count;if(!old)header[951]=127;
     for(i=0;i<128;++i) {
@@ -303,7 +322,7 @@ enum pt_project_result pt_mod_export_stream(const struct pt_project *p,unsigned 
     for(i=0;i<31;++i) {
         uint8_t *q=header+20+i*30;
         if(i<p->sample_count) {
-            const struct pt_sample *s=&p->samples[i];memcpy(q,s->name,22);w16(q+22,s->pcm.frames/2);
+            const struct pt_sample *s=&p->samples[i];memcpy(q,s->name,22);w16(q+22,(s->pcm.frames+(policy==3?(s->pcm.frames&1):0))/2);
             q[24]=(uint8_t)s->finetune&15;q[25]=s->volume;
             if(s->loop==PT_LOOP_FORWARD) {w16(q+26,s->loop_start/2);w16(q+28,(s->loop_end-s->loop_start)/2);}
             else if(!old || u16(q+28)>1) {w16(q+26,0);w16(q+28,1);}
@@ -337,7 +356,22 @@ enum pt_project_result pt_mod_export_stream(const struct pt_project *p,unsigned 
             block[used++]=(uint8_t)value;
             if(used==sizeof(block)) {if(sink(context,block,used)!=1)return PT_PROJECT_INVALID;used=0;}
         }
+        if(policy==3 && (s->pcm.frames&1)) {
+            block[used++]=0;
+            if(used==sizeof(block)) {if(sink(context,block,used)!=1)return PT_PROJECT_INVALID;used=0;}
+        }
     }
     if(used && sink(context,block,used)!=1)return PT_PROJECT_INVALID;
     return PT_PROJECT_OK;
 }
+
+/* The user export API deliberately does not expose playback padding. */
+enum pt_project_result pt_mod_export_stream(const struct pt_project *p,unsigned policy,pt_project_sink sink,void *context)
+{
+    if(policy>2)return PT_PROJECT_INVALID;
+    return stream_mod(p,policy,sink,context);
+}
+enum pt_project_result pt_mod_playback_encode(const struct pt_project *p,uint8_t *out,size_t capacity,size_t *written)
+{return export_mod(p,out,capacity,written,3);}
+enum pt_project_result pt_mod_playback_stream(const struct pt_project *p,pt_project_sink sink,void *context)
+{return stream_mod(p,3,sink,context);}

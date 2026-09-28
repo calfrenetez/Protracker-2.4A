@@ -90,7 +90,7 @@ const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned
     error="PLAY: OUT OF REPLAY WORKSPACE MEMORY";
     a->staging=pt_master_allocate(&a->memory,a->source_bytes);
     if(!a->staging)goto failed;
-    if(pt_mod_export_round8(&playback,a->staging,a->source_bytes,&written)!=PT_PROJECT_OK || written!=a->source_bytes) {
+    if(pt_mod_playback_encode(&playback,a->staging,a->source_bytes,&written)!=PT_PROJECT_OK || written!=a->source_bytes) {
         error="PLAY: SNAPSHOT ENCODE FAILED";goto failed;
     }
     error="PLAY: UNSAFE CLASSIC SAMPLE METADATA";

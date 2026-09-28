@@ -29,6 +29,15 @@ int main(void)
     }
     assert(sample.pcm.bits==24 && pcm[0]==-8388607 && pcm[3]==8388607);
     assert(!memcmp(&p,&before,sizeof(p)));
+    sample.pcm.frames=3;
+    assert(!pt_paula_playback_snapshot(&p,&copy,&report));
+    assert(report.issues==(PT_EXPORT_PRECISION|PT_EXPORT_PADDING) && report.bytes==2112);
+    {uint8_t mod[2112];size_t n=0;
+        assert(pt_mod_playback_encode(&copy,mod,sizeof(mod),&n)==PT_PROJECT_OK && n==sizeof(mod));
+        assert(mod[43]==2 && mod[2111]==0 && sample.pcm.frames==3 && pcm[3]==8388607);
+        assert(pt_mod_export_round8(&copy,mod,sizeof(mod),&n)==PT_PROJECT_UNSUPPORTED);
+    }
+    sample.pcm.frames=4;
     sample.pcm.bits=16;pcm[0]=-32768;pcm[3]=32767;
     assert(!pt_paula_playback_snapshot(&p,&copy,&report) && report.issues==PT_EXPORT_PRECISION);
     /* Precision permission never hides another unsupported attribute. */

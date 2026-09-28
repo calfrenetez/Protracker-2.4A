@@ -139,6 +139,40 @@ int main(int argc,char **argv)
         free(enhanced_before);free(enhanced_after);enhanced_before=enhanced_after=NULL;
     }
     puts("HIGHRES SONG PASS: 16/24-bit masters, rounded private8-bit Chip playback, unused cache omitted, stop/rebuild, restart refill and byte-exact enhanced save");
+    /* Odd source lengths remain authoritative; private DMA ends in silence. */
+    for(i=8;i<=24;i+=8) {
+        struct pt_project q=doc.project;struct pt_sample samples[31];
+        int32_t pcm[5],saved[5];int32_t scale=1L<<(i-8);size_t n,bytes;unsigned j;
+        memcpy(samples,q.samples,q.sample_count*sizeof(*samples));q.samples=samples;
+        q.extensions=NULL;q.extension_count=0;
+        for(j=0;j<5;++j)pcm[j]=((int32_t)j-2)*scale;
+        memcpy(saved,pcm,sizeof(pcm));
+        samples[0].pcm.data=pcm;samples[0].pcm.capacity=samples[0].pcm.frames=5;
+        samples[0].pcm.bits=(uint8_t)i;samples[0].loop=PT_LOOP_FORWARD;
+        samples[0].loop_start=0;samples[0].loop_end=4;samples[0].crossfade=0;
+        CHECK(pt_project_size(&q,&bytes)==PT_PROJECT_OK);
+        enhanced_before=malloc(bytes);enhanced_after=malloc(bytes);CHECK(enhanced_before && enhanced_after);
+        CHECK(pt_project_encode(&q,enhanced_before,bytes,&n)==PT_PROJECT_OK && n==bytes);
+        CHECK(pt_mod_export_round8(&q,roundtrip,(size_t)length,&written)==PT_PROJECT_UNSUPPORTED);
+        CHECK(!pt_paula_play(&a,&q,0,0,0));
+        /* The first row arrives at speed6, after six CIA ticks. Observe it
+           within20 VBlanks rather than sampling before it can be scheduled. */
+        for(j=0;j<20;++j) {Delay(1);pt_paula_poll(&a,&state);if(state.ticks>=6 && state.period[0]==428)break;}
+        printf("ODD STATE bits=%u active=%u ticks=%lu period=%u bytes=%lu\n",i,state.active,(unsigned long)state.ticks,state.period[0],(unsigned long)a.sample_bytes[0]);
+        CHECK(state.active && state.ticks>=6 && state.period[0]==428 && a.sample_bytes[0]==6);
+        CHECK(TypeOfMem(a.sample_data[0])&MEMF_CHIP);
+        CHECK(a.staging[a.bytes+4]==2 && a.staging[a.bytes+5]==0);
+        CHECK(a.sample_data[0][4]==2 && a.sample_data[0][5]==0);
+        CHECK(!pt_paula_sync(&a,&q));
+        pcm[4]+=scale;CHECK(pt_paula_sync(&a,&q) && !a.started && !a.memory.used && !a.cache.bytes);
+        CHECK(!pt_paula_play(&a,&q,0,0,0));CHECK(a.sample_data[0][4]==3 && a.sample_data[0][5]==0);
+        pt_paula_stop(&a);pcm[4]-=scale;
+        CHECK(samples[0].pcm.frames==5 && !memcmp(saved,pcm,sizeof(pcm)));
+        CHECK(pt_project_encode(&q,enhanced_after,bytes,&n)==PT_PROJECT_OK && n==bytes);
+        CHECK(!memcmp(enhanced_before,enhanced_after,bytes));
+        free(enhanced_before);free(enhanced_after);enhanced_before=enhanced_after=NULL;
+    }
+    puts("ODD SONG PASS: 8/16/24-bit five-frame masters, six-byte Chip caches with silent tail, safe loop/sync invalidation and exact save");
     /* Unused enhanced masters are absent from both Fast staging and Chip
        caches. Newly referenced unsupported masters still stop/refuse safely. */
     {struct pt_project q=doc.project;struct pt_sample slots[255];

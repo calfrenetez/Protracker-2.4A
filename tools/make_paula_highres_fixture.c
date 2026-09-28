@@ -10,7 +10,7 @@ int main(int argc,char **argv)
     const unsigned periods[4]={428,339,285,214};
     size_t n,w;unsigned i,j;uint8_t *bytes;FILE *f;int ok;
     if(argc<2 || argc>4)return 2;
-    if(argc==4 && strcmp(argv[3],"unused") && strcmp(argv[3],"mapped"))return 2;
+    if(argc==4 && strcmp(argv[3],"unused") && strcmp(argv[3],"mapped") && strcmp(argv[3],"odd"))return 2;
     if(argc>=3 && (argv[2][0]<'1' || argv[2][0]>'4' || argv[2][1]))return 2;
     pt_channels_init(&p.channels);p.speed=6;p.bpm=125;
     if(argc>=3)p.channels.count=(uint8_t)(argv[2][0]-'0');
@@ -24,7 +24,7 @@ int main(int argc,char **argv)
         strcpy(s->name,i?"16BIT TONE":"24BIT LOW BITS");
         for(j=0;j<256;++j)pcm[i][j]=i?((int32_t)(j%64)-32)*512+11:(int32_t)j+1;
     }
-    if(argc==4) {
+    if(argc==4 && strcmp(argv[3],"odd")) {
         p.sample_count=255;
         for(i=2;i<255;++i) {
             samples[i]=samples[0];samples[i].loop=PT_LOOP_NONE;
@@ -40,6 +40,9 @@ int main(int argc,char **argv)
     if(argc==4 && !strcmp(argv[3],"mapped")) {
         samples[31]=samples[1];samples[254]=samples[0];
         for(i=0;i<p.channels.count;++i)events[i].instrument=(uint8_t)(i%2?32:255);
+    }
+    if(argc==4 && !strcmp(argv[3],"odd"))for(i=0;i<2;++i) {
+        samples[i].pcm.frames=255;samples[i].loop_end=254;
     }
     if(pt_project_size(&p,&n)!=PT_PROJECT_OK)return 3;
     bytes=malloc(n);if(!bytes)return 4;

@@ -2867,3 +2867,36 @@ The separate functional-only UI run made no capture attempt and grants no visual
 acceptance. Candidate264512 bytes SHA256
 `1324c3f6a4415cd77d3f65a8d1ae0d057d4abecb2060bedf1e20c42aad2b320b`.
 See `evidence/enhanced-editor/paula-mapped-samples/`. Physical remains untested.
+
+## Odd-frame Paula playback copies
+
+Selected mono8/16/24-bit masters may have odd frame counts. The private Paula
+encoder rounds precision when needed and appends one zero byte after each odd
+master, including that byte in its replay header length. It allocates no second
+int32 PCM master or padded master buffer. The original frame count, loop points,
+precision and saved PCM remain unchanged. The bounded live comparison streams
+the same padded representation and still stops on changed derived sample bytes.
+
+The maximum remains131070 playback bytes per selected sample; odd131069 fits,
+odd131071 does not. Loop points still require safe even-word coordinates, and
+unsafe preserved CMOD one-word loops remain refused against the original source
+length. Padding does not make an unsafe loop valid. Strict MOD exports retain
+their existing odd-length refusal; playback permission is a separate API and
+cannot be selected through the public direct/round8/TPDF export policy.
+
+Host ASan/UBSan checks pass across allthree precisions, one-frame and multi-block
+boundaries, maximum lengths, silent tails, encoder/stream byte parity, bounded
+sync, alias/capacity guards, sink failures, source preservation and unchanged
+strict export behavior. Native/editor qualification is recorded separately in
+`evidence/enhanced-editor/paula-odd-samples/`.
+
+Cumulative native acceptance passes all5fixtures in69.25seconds. New native cases
+verify five-frame8/16/24-bit masters, six-byte Chip copies, silent tails, live
+sample-change invalidation and exact saved sources. An initial test observed the
+first note too early and remains a separate failed run; bounded first-row
+observation fixes the fixture. Full editor functional-only qualification passes
+three-track255-frame16/24-bit play/edit-stop/undo/restart/exactsave/reopen/second
+save. Both normal exits, fiveENV restore, DMAoff, independent cleanup and explicit
+release passed. No screenshot/visual acceptance is claimed, and previous capture
+failures remain unresolved. Native editor265184 bytes SHA256
+`badc183fbecf3111a8f08fc9801a02e923dca7f74dd4e08929b3bf1cc51c9969`.

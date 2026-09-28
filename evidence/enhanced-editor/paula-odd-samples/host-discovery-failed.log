@@ -1,0 +1,55 @@
+EEEEE
+======================================================================
+ERROR: test_paula_playback (unittest.loader._FailedTest.test_paula_playback)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_paula_playback
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+ModuleNotFoundError: No module named 'test_paula_playback'
+
+
+======================================================================
+ERROR: test_paula_sync (unittest.loader._FailedTest.test_paula_sync)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_paula_sync
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+ModuleNotFoundError: No module named 'test_paula_sync'
+
+
+======================================================================
+ERROR: test_mod_round8 (unittest.loader._FailedTest.test_mod_round8)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_mod_round8
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+ModuleNotFoundError: No module named 'test_mod_round8'
+
+
+======================================================================
+ERROR: test_mod_project (unittest.loader._FailedTest.test_mod_project)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_mod_project
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+ModuleNotFoundError: No module named 'test_mod_project'
+
+
+======================================================================
+ERROR: test_mod_stream (unittest.loader._FailedTest.test_mod_stream)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_mod_stream
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+ModuleNotFoundError: No module named 'test_mod_stream'
+
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.000s
+
+FAILED (errors=5)

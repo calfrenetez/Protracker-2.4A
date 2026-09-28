@@ -42,7 +42,7 @@ static inline int pt_paula_sync_prepare(const struct pt_project *p,
        (uintptr_t)before-(uintptr_t)workspace<capacity :
        (uintptr_t)workspace-(uintptr_t)before<bytes)return 0;
     stream=(struct pt_paula_sync_stream){before,workspace,bytes,plan.mod.sample_offset,0};
-    if(pt_mod_export_stream(p,1,pt_paula_sync_sink,&stream)!=PT_PROJECT_OK || stream.offset!=bytes)return 0;
+    if(pt_mod_playback_stream(p,pt_paula_sync_sink,&stream)!=PT_PROJECT_OK || stream.offset!=bytes)return 0;
     for(i=1084;i<plan.mod.sample_offset;i+=4) {
         unsigned sample=(workspace[i]&0xf0)|(workspace[i+2]>>4);
         if(sample>31)return 0;

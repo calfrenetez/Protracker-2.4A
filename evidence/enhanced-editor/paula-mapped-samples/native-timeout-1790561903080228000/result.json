@@ -1,0 +1,22 @@
+{
+  "passed": false,
+  "scope": "shared emulator Paula regression",
+  "guest_directory": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/paula-cache-1790561903080228000",
+  "PTPaulaTest_sha256": "00cc9d649a0d42b8db8c782399033671abee7e6932da43ba03d29e1bbd7211d8",
+  "PTSampleCacheTest_sha256": "ef8ba449181c759df891eb66727e18a668844c88b1a62cb8f1fe4ef91f21fcae",
+  "PTPlaybackPCMTest_sha256": "fd7b5c8a80f4b0abeef94726d446828da29b0d15516d45a3dd58baed99c4085e",
+  "PTPlaybackUploadTest_sha256": "5ad9b078c08b267a72465af65f07e4b33979914e9850de8ca2e085c7e322a752",
+  "PTPreviewPCMTest_sha256": "c10826d702ed047331df024bc54b57416071777d347e1876bf8d24ad760a8f9c",
+  "input.mod_sha256": "813ccf02b367047a72ae5bfacf33593acd7879bc43e151de02a8deeb217325bf",
+  "run_files_cleaned": true,
+  "late_completion": {
+    "cache_returncode": "0",
+    "pcm_returncode": "0",
+    "upload_returncode": "0",
+    "preview_returncode": "0",
+    "paula_returncode": "0"
+  },
+  "done_seconds_after_run_id": 67.5927050113678,
+  "failure": "60-second deadline exceeded; later normal completion does not clear this run",
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0"
+}

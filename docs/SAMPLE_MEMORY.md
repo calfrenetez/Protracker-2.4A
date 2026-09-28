@@ -2828,3 +2828,42 @@ layout inspected, bothnormal exits and allfive temporarysettings restored. Owned
 run/launcher cleanup independently verified before explicitrelease. Candidate
 263848 bytes SHA256`db6c7145f3b6ed1785b4f200bf7c598631ec1362c4899e0c5d0276f23231f510`.
 See `evidence/enhanced-editor/paula-selected-samples/`. Physical remains untested.
+
+## High source-slot mapping for Paula
+
+The private song view now maps referenced source slots32–255 into unused replay
+slots. Selected source slots1–31 keep their original numbers; higher source IDs
+are assigned in ascending order to the lowest free replay slots. The working set
+is bounded to31 distinct referenced masters across all stored patterns. More than
+31 is explicitly refused, preserving an already playing song. This supersedes
+the earlier low31-source-slot limitation, not the current one-to-four-track,
+mono/classic-rate and effect compatibility requirements.
+
+Mapping and short-track padding share one bounded Fast event workspace. Ordinary
+four-track songs using only low slots retain the allocation-free event-view path.
+Sample descriptors and PCM remain borrowed read-only while the private copy is
+encoded. Original CMOD headers are preserved for their original selected low
+slots; high masters receive generated playback headers. Saved project events,
+source IDs, master data and optional extensions are never rewritten.
+
+The running owner stores the31 source identities independently of derived PCM.
+Live sync stops and releases playback if any identity changes, including a switch
+to a different source with identical PCM and metadata. The next start advances the
+cache generation and reloads its private data. Insufficient mapping workspace,
+unsupported referenced formats and excess working sets never replace active
+playback on a failed start. Host ASan/UBSan tests cover allfour track counts,
+low-slot holes, high32/255 IDs, unordered/instrument-only events, exactly31 versus
+32 distinct references, exact source preservation and identical-PCM identities.
+Native cumulative shared030 acceptance passes all5fixtures in66.50seconds under
+an explicit90-second bound. The earlier60-second deadline failure is preserved
+separately despite normal late completion. Full-editor functional acceptance also
+passes: high32/255 playback, conservative unused-sample edit-stop, exact undo,
+pattern restart and byte-exact save/reopen/play/second save. Both normal exits,
+fiveENV restoration, independent cleanup and explicit release verified.
+
+Two screenshot-client attempts timed out at20/45seconds; both remain FAILED and
+unresolved. Their capture service later saved images and normal cleanup completed.
+The separate functional-only UI run made no capture attempt and grants no visual
+acceptance. Candidate264512 bytes SHA256
+`1324c3f6a4415cd77d3f65a8d1ae0d057d4abecb2060bedf1e20c42aad2b320b`.
+See `evidence/enhanced-editor/paula-mapped-samples/`. Physical remains untested.

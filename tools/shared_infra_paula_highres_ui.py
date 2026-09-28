@@ -8,12 +8,13 @@ ROOT=Path(__file__).resolve().parents[1]
 INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('candidate',type=Path);parser.add_argument('fixture',type=Path);parser.add_argument('--channels',type=int,choices=range(1,5),default=4);args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('candidate',type=Path);parser.add_argument('fixture',type=Path);parser.add_argument('--channels',type=int,choices=range(1,5),default=4);parser.add_argument('--functional-only',action='store_true',help='Separate functional UI scope; no capture attempts or visual acceptance');args=parser.parse_args()
     manifest=json.loads((args.candidate.parent/'core-build.json').read_text())
     assert digest(args.candidate)==manifest['binaries']['PT24GEdit']['sha256']
     sys.path.insert(0,str(INFRA/'scripts'));from shared_guest import Guest
     out=ROOT/'build/dev'/('paula-highres-ui-'+str(time.time_ns()));out.mkdir()
-    result={'passed':False,'scope':'shared030 high-resolution Paula play/edit/undo/save/reopen; no physical acceptance'}
+    result={'passed':False,'scope':'shared030 high-resolution Paula play/edit/undo/save/reopen; no physical acceptance','functional_only':args.functional_only,'capture_status':'NOT TESTED - functional-only scope' if args.functional_only else 'PENDING'}
+    workflow_seconds=120 if args.functional_only else 180
     with (INFRA/'runtime/test.lock').open('a') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);guest=Guest(INFRA,out);run=prepare_run(guest,out)
         finished=False;environment=False;active=None;start=time.monotonic()
@@ -24,7 +25,7 @@ def main():
         device=guest.device+run.name
         settings={'PT24G_RECENT_PREFIX':device+'/recent','PT24G_RECOVERY_DIR':device+'/copies','PT24G_RECOVERY_MEDIA':'fixed','PT24G_RECOVERY_SECONDS':'300','PT24G_RECOVERY_REMOVABLE':'0'}
         def wait(predicate,seconds=20):
-            deadline=min(start+180,time.monotonic()+seconds)
+            deadline=min(start+workflow_seconds,time.monotonic()+seconds)
             while time.monotonic()<deadline:
                 if predicate():return
                 time.sleep(.1)
@@ -67,7 +68,18 @@ def main():
             state=guest.command('GET_AUDIO_STATE')
             assert all('ch%d_dma=0'%i in state.split('\t') for i in range(4)),state
         def guest_capture(name):
-            reply=subprocess.run([str(INFRA/'.venv/bin/python'),str(INFRA/'scripts/mcp-call.py'),'amiga_screenshot','{}'],capture_output=True,text=True,timeout=20)
+            if args.functional_only:return
+            # DevBench's capture uses a20-second idle timeout, so allow its
+            # response/completeness report within our independent total bound.
+            allowance=min(45,start+workflow_seconds-time.monotonic())
+            if allowance<=0:raise RuntimeError('Paula UI deadline before capture')
+            capture_started=time.monotonic()
+            try:
+                reply=subprocess.run([str(INFRA/'.venv/bin/python'),str(INFRA/'scripts/mcp-call.py'),'amiga_screenshot','{}'],capture_output=True,text=True,timeout=allowance)
+            except subprocess.TimeoutExpired:
+                (out/(name+'-capture-timeout.json')).write_text(json.dumps({'deadline_seconds':allowance,'elapsed_seconds':time.monotonic()-capture_started},indent=2)+'\n')
+                raise
+            result[name+'_capture_seconds']=time.monotonic()-capture_started
             (out/(name+'-guest.json')).write_text(reply.stdout+reply.stderr)
             if reply.returncode:raise RuntimeError('Guest bitmap capture failed')
             report=json.loads(reply.stdout);description=report['structuredContent']['result']
@@ -76,6 +88,7 @@ def main():
             raw=Path(match.group(1)).read_bytes()
             if not raw.startswith(b'P6') or len(raw)>2*1024*1024:raise RuntimeError('Unexpected bitmap data')
             (out/(name+'-guest.ppm')).write_bytes(raw)
+            result[name+'_bitmap_complete']=True
         try:
             execute('setup-env');environment=True
             assert (run/'setup-done').exists()

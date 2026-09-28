@@ -150,7 +150,7 @@ int main(int argc,char **argv)
         slots[30].pcm.data=stereo;slots[30].pcm.capacity=8;slots[30].pcm.frames=4;
         slots[30].pcm.bits=24;slots[30].pcm.channels=2;slots[30].pcm.rate=48000;
         slots[30].loop=PT_LOOP_NONE;slots[30].loop_start=slots[30].loop_end=0;
-        slots[254]=slots[30];
+        slots[31]=slots[254]=slots[30];
         CHECK(pt_project_size(&q,&bytes)==PT_PROJECT_OK);
         enhanced_before=malloc(bytes);enhanced_after=malloc(bytes);CHECK(enhanced_before && enhanced_after);
         CHECK(pt_project_encode(&q,enhanced_before,bytes,&n)==PT_PROJECT_OK && n==bytes);
@@ -170,6 +170,38 @@ int main(int argc,char **argv)
         free(enhanced_before);free(enhanced_after);enhanced_before=enhanced_after=NULL;
     }
     puts("SELECTED MASTERS PASS: 255 stored slots, unused stereo24/48k preserved, only selected Fast/Chip payload, active unsupported refusal, sync release and exact save");
+    /* High source slots map into bounded private instrument identities. Even
+       identical PCM/header replacements must stop when that identity changes. */
+    {struct pt_project q=doc.project;struct pt_sample slots[255];
+        struct pt_event events[256]={{0}},saved[256];size_t n,bytes;unsigned j,channels;
+        for(j=0;j<255;++j)slots[j]=q.samples[0];
+        q.samples=slots;q.sample_count=255;q.extensions=NULL;q.extension_count=0;q.events=events;
+        for(channels=1;channels<=4;++channels) {
+            q.channels.count=(uint8_t)channels;memset(events,0,sizeof(events));
+            for(j=0;j<channels;++j) {events[j]=doc.project.events[j];events[j].instrument=(uint8_t)(j%2?32:255);}
+            memcpy(saved,events,sizeof(events));
+            CHECK(pt_project_size(&q,&bytes)==PT_PROJECT_OK);
+            enhanced_before=malloc(bytes);enhanced_after=malloc(bytes);CHECK(enhanced_before && enhanced_after);
+            CHECK(pt_project_encode(&q,enhanced_before,bytes,&n)==PT_PROJECT_OK && n==bytes);
+            CHECK(!pt_paula_play(&a,&q,0,0,0));Delay(10);pt_paula_poll(&a,&state);
+            CHECK(state.active && state.period[0]==428 && a.sample_sources[channels>1?1:0]==255);
+            CHECK(a.event_capacity==256 && (TypeOfMem(a.padded_events)&MEMF_FAST));
+            CHECK(!pt_paula_sync(&a,&q));
+            for(j=0;j<channels;++j)if(events[j].instrument==255)events[j].instrument=254;
+            CHECK(pt_paula_sync(&a,&q) && !a.started && !a.memory.used && !a.cache.bytes);
+            CHECK(!pt_paula_play(&a,&q,0,0,0));
+            CHECK(a.sample_sources[channels>1?1:0]==254);
+            /* 32 distinct instruments exceed the bounded private31-slot set. */
+            for(j=0;j<32;++j)events[j].instrument=(uint8_t)(j+1);
+            CHECK(pt_paula_play(&a,&q,0,0,0) && a.started);
+            CHECK(pt_paula_sync(&a,&q) && !a.started && !a.memory.used);
+            memcpy(events,saved,sizeof(events));
+            CHECK(pt_project_encode(&q,enhanced_after,bytes,&n)==PT_PROJECT_OK && n==bytes);
+            CHECK(!memcmp(enhanced_before,enhanced_after,bytes));
+            free(enhanced_before);free(enhanced_after);enhanced_before=enhanced_after=NULL;
+        }
+    }
+    puts("MAPPED MASTERS PASS: high32/255 sources across1-4 tracks, bounded Fast mapping, identical-PCM identity stop, working-set refusal and exact save");
     /* One-to-three-track projects keep their source shape while private
        replay rows pad missing voices with silence. */
     for(i=1;i<4;++i) {

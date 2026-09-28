@@ -48,7 +48,11 @@ def main():
                                               'FailAt 1','CD RAM:','Echo done >'+guest.device+run.name+'/done']) + '\n')
             require_running_guest(guest, out, "before-launch")
             guest.start()
-            end = time.monotonic() + 60
+            # Cumulative cases now include four high-slot mapping/save cycles.
+            # Keep an explicit bound within the separately reserved two minutes.
+            started = time.monotonic()
+            result['deadline_seconds'] = 90
+            end = started + result['deadline_seconds']
             # A file can exist before Echo has written its return code. The
             # trailing command is reached only after all rc/log handles close.
             while not (run / 'done').exists():
@@ -56,6 +60,7 @@ def main():
                     raise RuntimeError('Paula test timed out; preserve run files for guarded recovery')
                 time.sleep(.2)
             finished = True
+            result['execution_seconds'] = time.monotonic() - started
             log = (run / 'paula.log').read_text()
             (out / 'native-paula.log').write_text(log)
             cache_log = (run / 'cache.log').read_text()

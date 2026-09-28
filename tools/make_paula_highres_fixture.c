@@ -10,7 +10,7 @@ int main(int argc,char **argv)
     const unsigned periods[4]={428,339,285,214};
     size_t n,w;unsigned i,j;uint8_t *bytes;FILE *f;int ok;
     if(argc<2 || argc>4)return 2;
-    if(argc==4 && strcmp(argv[3],"unused"))return 2;
+    if(argc==4 && strcmp(argv[3],"unused") && strcmp(argv[3],"mapped"))return 2;
     if(argc>=3 && (argv[2][0]<'1' || argv[2][0]>'4' || argv[2][1]))return 2;
     pt_channels_init(&p.channels);p.speed=6;p.bpm=125;
     if(argc>=3)p.channels.count=(uint8_t)(argv[2][0]-'0');
@@ -36,6 +36,10 @@ int main(int argc,char **argv)
     for(i=0;i<p.channels.count;++i) {
         events[i].kind=PT_NOTE_PERIOD;events[i].pitch=(uint16_t)periods[i];
         events[i].instrument=(uint8_t)(1+i%2);
+    }
+    if(argc==4 && !strcmp(argv[3],"mapped")) {
+        samples[31]=samples[1];samples[254]=samples[0];
+        for(i=0;i<p.channels.count;++i)events[i].instrument=(uint8_t)(i%2?32:255);
     }
     if(pt_project_size(&p,&n)!=PT_PROJECT_OK)return 3;
     bytes=malloc(n);if(!bytes)return 4;

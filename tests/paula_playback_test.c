@@ -95,7 +95,7 @@ int main(void)
         slots[254]=slots[1];stored[0].instrument=1;
         stored[511].instrument=31; /* instrument-only in an unordered pattern */
         before=p;
-        assert(!pt_paula_playback_samples(&p,&selected,&work));
+        assert(!pt_paula_playback_samples(&p,&selected,&work,NULL,0));
         assert(selected.sample_count==31 && selected.samples[0].pcm.data==pcm);
         assert(selected.samples[1].pcm.frames==0 && selected.samples[30].pcm.data==pcm);
         assert(!pt_paula_playback_prepare(&selected,&copy,&report,NULL,0));
@@ -103,29 +103,63 @@ int main(void)
         assert(pt_mod_export_round8(&copy,mod,sizeof(mod),&n)==PT_PROJECT_OK && n==report.bytes);
         assert(!memcmp(&p,&before,sizeof(p)) && slots[1].pcm.channels==2 && slots[254].pcm.rate==48000);
         stored[1].instrument=2;
-        assert(!pt_paula_playback_samples(&p,&selected,&work));
+        assert(!pt_paula_playback_samples(&p,&selected,&work,NULL,0));
         assert(strstr(pt_paula_playback_snapshot(&selected,&copy,&report),"STEREO"));
         stored[1].instrument=32;
-        assert(strstr(pt_paula_playback_samples(&p,&selected,&work),"SLOTS 1-31"));
+        assert(strstr(pt_paula_playback_samples(&p,&selected,&work,NULL,0),"WORKSPACE"));
         stored[1].instrument=0;
         /* Empty selection has no payload, and malformed unused PCM is refused. */
         memset(stored,0,sizeof(stored));
-        assert(!pt_paula_playback_samples(&p,&selected,&work) && selected.sample_count==0);
+        assert(!pt_paula_playback_samples(&p,&selected,&work,NULL,0) && selected.sample_count==0);
         assert(!pt_paula_playback_snapshot(&selected,&copy,&report) && report.bytes==1084+2048);
-        slots[254].pcm.bits=7;assert(pt_paula_playback_samples(&p,&selected,&work));slots[254].pcm.bits=8;
+        slots[254].pcm.bits=7;assert(pt_paula_playback_samples(&p,&selected,&work,NULL,0));slots[254].pcm.bits=8;
         header[950]=1;memcpy(header+1080,"M.K.",4);
         header[20+30+27]=1;header[20+30+29]=1; /* valid one-word start for4frames */
         slots[1]=sample;p.extensions=&ext;p.extension_count=1;
         memcpy(saved_header,header,sizeof(header));
-        assert(!pt_paula_playback_samples(&p,&selected,&work));
+        assert(!pt_paula_playback_samples(&p,&selected,&work,NULL,0));
         assert(!pt_paula_playback_snapshot(&selected,&copy,&report));
         assert(work.header[20+30+27]==0 && work.header[20+30+29]==1);
         assert(!memcmp(header,saved_header,sizeof(header)));
         header[20+30+27]=2;
-        assert(strstr(pt_paula_playback_samples(&p,&selected,&work),"LOOP NOT PAULA"));
+        assert(strstr(pt_paula_playback_samples(&p,&selected,&work,NULL,0),"LOOP NOT PAULA"));
         header[20+30+27]=0;ext.id=0x41424344;
-        assert(!pt_paula_playback_samples(&p,&selected,&work));
+        assert(!pt_paula_playback_samples(&p,&selected,&work,NULL,0));
         assert(pt_paula_playback_snapshot(&selected,&copy,&report));
+    }
+    {struct pt_paula_samples work;struct pt_project selected;
+        struct pt_sample slots[255];struct pt_event input[256]={0},mapped[256],saved[256];
+        unsigned j,channels;uint8_t identities[31];
+        memset(&p,0,sizeof(p));pt_channels_init(&p.channels);p.speed=6;p.bpm=125;
+        p.orders=&order;p.order_count=p.pattern_count=1;p.samples=slots;p.sample_count=255;p.events=input;
+        for(j=0;j<255;++j)slots[j]=sample;
+        for(channels=1;channels<=4;++channels) {
+            p.channels.count=(uint8_t)channels;
+            memset(input,0,sizeof(input));
+            input[0].instrument=1;input[channels].instrument=31;
+            input[channels*2].instrument=32;input[channels*3].instrument=255;
+            memcpy(saved,input,sizeof(input));
+            assert(pt_paula_playback_event_count(&p)==256);
+            assert(pt_paula_playback_samples(&p,&selected,&work,mapped,255));
+            assert(!pt_paula_playback_samples(&p,&selected,&work,mapped,256));
+            assert(selected.channels.count==4 && selected.events==mapped && selected.sample_count==31);
+            assert(mapped[0].instrument==1 && mapped[4].instrument==31 && mapped[8].instrument==2 && mapped[12].instrument==3);
+            assert(work.source[0]==1 && work.source[1]==32 && work.source[2]==255 && work.source[30]==31);
+            assert(work.samples[1].pcm.data==slots[31].pcm.data);
+            for(j=0;j<64;++j) {unsigned ch;for(ch=channels;ch<4;++ch)assert(!mapped[j*4+ch].instrument);}
+            assert(!pt_paula_playback_prepare(&selected,&copy,&report,mapped,256));
+            assert(!memcmp(input,saved,sizeof(input)));
+            memcpy(identities,work.source,31);input[channels*3].instrument=254;
+            assert(!pt_paula_playback_samples(&p,&selected,&work,mapped,256));
+            assert(mapped[12].instrument==3 && memcmp(identities,work.source,31));
+            assert(!memcmp(work.samples[2].pcm.data,slots[254].pcm.data,4*sizeof(int32_t)));
+        }
+        memset(input,0,sizeof(input));p.channels.count=4;
+        for(j=0;j<31;++j)input[j].instrument=(uint8_t)(225+j);
+        assert(!pt_paula_playback_samples(&p,&selected,&work,mapped,256));
+        assert(selected.sample_count==31 && work.source[0]==225 && work.source[30]==255);
+        input[31].instrument=1;
+        assert(strstr(pt_paula_playback_samples(&p,&selected,&work,mapped,256),"MORE THAN 31"));
     }
     puts("PAULA PLAYBACK PREFLIGHT PASS: private metadata, optional8-bit playback copies, unchanged16/24-bit masters, explicit unavailable routes");
     return 0;

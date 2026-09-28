@@ -19,6 +19,8 @@ struct pt_paula {
     struct pt_master_memory memory;
     size_t source_bytes;
     struct pt_event *padded_events;
+    size_t event_capacity;
+    uint8_t sample_sources[31];
     unsigned source_channels;
     uint32_t cached_instruments;
     size_t bytes,pattern_bytes;

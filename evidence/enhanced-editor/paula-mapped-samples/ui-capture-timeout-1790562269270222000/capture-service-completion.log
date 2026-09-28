@@ -1,0 +1,9 @@
+Created new transport with session ID: 4dbd8a1c7e1e4086b11cb62065b7eadc
+Processing request of type CallToolRequest
+MCP tool: amiga_screenshot()
+Screenshot saved to /var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/amiga_screenshot_hcoip2en.ppm (640x512, 16 colors)
+Created new transport with session ID: ac176b9327614a1ab9d52e77cc9bc516
+Processing request of type CallToolRequest
+MCP tool: amiga_run_script(script=Execute Dev:Tests/paula-highres-ui-1790562269270222000/restore-env, timeout=5)
+Processing request of type ListToolsRequest
+Terminating session: ac176b9327614a1ab9d52e77cc9bc516

@@ -1,0 +1,13 @@
+{
+  "passed": false,
+  "scope": "shared030 high-resolution Paula play/edit/undo/save/reopen; no physical acceptance",
+  "editor_sha256": "1324c3f6a4415cd77d3f65a8d1ae0d057d4abecb2060bedf1e20c42aad2b320b",
+  "source_sha256": "e2a82a1837eb1bfab476bf5e8dd8fd9df252fe457e6e785e7be0776c67a34cd6",
+  "source_channels": 3,
+  "stored_samples": 255,
+  "playing_audio": "OK\tch0_dma=1\tch1_dma=1\tch2_dma=1\tch3_dma=0\tmaster=1\tsndbuf=666\tsndbuf_status=0",
+  "error": "Command '['/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/.venv/bin/python', '/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/mcp-call.py', 'amiga_screenshot', '{}']' timed out after 45 seconds",
+  "environment_restored": true,
+  "run_files_cleaned": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0"
+}

@@ -1,0 +1,16 @@
+EDITOR RECENT loaded=2 prefix=Dev:Tests/paula-highres-ui-1790562762168426000/recent
+EDITOR RECENT saved=1 count=2
+EDITOR READY channels=3 patterns=1 bitmap_bytes=163840 history_bytes=104132
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=READY - F8 PLAY / F9 PATTERN / F10 STOP panel=0
+EDITOR FRAME row=0 channel=0 revision=0 dirty=0 status=PLAYING SONG - PAULA CIA panel=0
+EDITOR REPLAY active=1 ticks=12 order=0 pattern=0 row=1 bpm=125 speed=6 period=428,339,285,0 volume=32,32,32,0
+EDITOR FRAME row=1 channel=0 revision=0 dirty=0 status=PLAYING SONG - PAULA CIA panel=0
+EDITOR REPLAY active=1 ticks=18 order=0 pattern=0 row=2 bpm=125 speed=6 period=428,339,285,0 volume=32,32,32,0
+EDITOR FRAME row=2 channel=0 revision=0 dirty=0 status=PLAYING SONG - PAULA CIA panel=0
+EDITOR RECENT saved=1 count=3
+EDITOR SAVE result=0 dirty=0
+EDITOR CADENCE frames=10 ticks50=546 peak_gap_ticks50=512
+EDITOR FRAME row=2 channel=0 revision=0 dirty=0 status=PROJECT SAVED AND VERIFIED panel=0
+EDITOR REPLAY active=1 ticks=534 order=0 pattern=0 row=24 bpm=125 speed=6 period=428,339,285,0 volume=32,32,32,0
+EDITOR FRAME row=24 channel=0 revision=0 dirty=0 status=STOPPED - AUDIO RELEASED panel=0
+EDITOR EXIT clean

@@ -1,0 +1,9 @@
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.593s
+
+OK
+VALIDATED VOICE PASS: 8/16/24-bit exact loop/segment/handoff parity, bounded refusal/alias atomicity, public value validation retained
+VOICE traversal PASS: selected ranges, forward/pingpong seams, fractional steps, one-frame loops and large steps
+VOICE mix PASS: true24 stereo, single quantization, clipping, 16 voices, mute progression, capacity and alias refusal
+VOICE partition PASS hash=990c42f0 clips=40

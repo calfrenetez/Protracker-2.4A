@@ -1,0 +1,7 @@
+CAPTURE SESSION PASS: exact formats, bounded polls, delayed start/stop, stop faults retain ownership, explicit overruns, cancellation and undoable publication; injected input only
+AMIGUS CAPTURE PASS: exclusive PCM lease, busy/format/allocation refusal, retained interrupt quiescence, exact stopped recording transfer and resource release; injected only
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.486s
+
+OK

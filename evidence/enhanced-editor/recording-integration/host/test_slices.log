@@ -1,0 +1,6 @@
+SLICES PASS: deterministic non-destructive stereo transient proposals, minimum spacing, manual markers, silence, capacity/alias safety and full-precision crossfade loops
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.472s
+
+OK

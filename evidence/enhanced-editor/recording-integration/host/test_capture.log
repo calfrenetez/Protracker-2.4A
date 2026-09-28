@@ -1,0 +1,6 @@
+CAPTURE STAGING PASS: bounded exact8/16/24 mono/stereo chunks, explicit overrun, atomic undoable sampler publication, allocation rollback and exact project roundtrip; synthetic input only
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.193s
+
+OK

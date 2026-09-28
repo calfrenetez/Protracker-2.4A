@@ -3049,3 +3049,20 @@ paths, navigation, delayed and invalid stop acknowledgments, publication failure
 exact low24-bit data and undo/redo. See `evidence/enhanced-editor/editor-capture`.
 This owner is not wired to native recording controls and has no actual input
 backend. The accepted classic layout and unrelated display work are preserved.
+
+### Recording integration regression — 28 September 2026
+
+After the collector, recording lifecycle, PCM/interrupt lease and editor barrier
+increments, all147 native executables build and all207 host cases in172 modules
+pass. The previous139 binary hashes are unchanged; all eight added fixtures are
+built, and the four Exec-backed recording variants separately pass the shared030
+emulator with zero owned bytes. The full manifest now verifies350 source inputs
+and a separately generated font header.
+
+Additional emulator checks of the exact full-build sample dispatcher, RAW/WAV
+importers and project-stream writer all pass with bounded workspace, exact master
+precision and zero owned memory. Each is independently cleaned and the window
+explicitly released. See `evidence/enhanced-editor/recording-integration` for source
+attribution, full host logs and per-fixture scope. This is software/file/lifecycle
+acceptance; actual recording devices, native recording controls and physical
+AmiGUS capabilities remain separate gates.

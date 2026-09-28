@@ -1,0 +1,6 @@
+CAPTURE SESSION PASS: exact formats, bounded polls, delayed start/stop, stop faults retain ownership, explicit overruns, cancellation and undoable publication; injected input only
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.275s
+
+OK

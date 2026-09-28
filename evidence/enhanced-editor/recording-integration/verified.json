@@ -1,0 +1,276 @@
+{
+  "source_tree": "f303cefc84460adde81b0dacd08842352e7526ff",
+  "source_hashes_verified": 350,
+  "generated_hashes_verified": 1,
+  "binary_hashes_verified": 147,
+  "changed_existing_binaries": [],
+  "added_binaries": [
+    "PTCaptureTest",
+    "PTExecCaptureTest",
+    "PTCaptureSessionTest",
+    "PTExecCaptureSessionTest",
+    "PTAmiGusCaptureTest",
+    "PTExecAmiGusCaptureTest",
+    "PTEditorCaptureTest",
+    "PTExecEditorCaptureTest"
+  ],
+  "matching_pass_result_files": {
+    "PTInvertSequenceTest": [],
+    "PTInvertPCMTest": [
+      "evidence/enhanced-editor/core-regression-20260927/result.json",
+      "evidence/enhanced-editor/studio-prefill/core/result.json"
+    ],
+    "PTInvertTest": [
+      "evidence/enhanced-editor/core-regression-20260927/result.json",
+      "evidence/enhanced-editor/studio-prefill/core/result.json"
+    ],
+    "PT24GEdit": [
+      "evidence/enhanced-editor/paula-odd-samples/ui/result.json",
+      "evidence/enhanced-editor/paula-stopped-capture/odd/result.json"
+    ],
+    "PTPaulaTest": [
+      "evidence/enhanced-editor/paula-odd-samples/native/result.json"
+    ],
+    "PTViewBench": [],
+    "PTSlotsTest": [
+      "evidence/enhanced-editor/studio-prefill/core/result.json"
+    ],
+    "PTSongTest": [],
+    "PTSourceTest": [],
+    "PTNoteSliceTest": [],
+    "PTSamplerTest": [
+      "evidence/enhanced-editor/studio-prefill/core/result.json"
+    ],
+    "PTSampleAttributesTest": [],
+    "PTPp20Test": [],
+    "PTRawTest": [
+      "evidence/enhanced-editor/core-regression-20260927/result.json",
+      "evidence/enhanced-editor/studio-prefill/core/result.json"
+    ],
+    "PTSvxTest": [
+      "evidence/enhanced-editor/core-regression-20260927/result.json",
+      "evidence/enhanced-editor/studio-prefill/core/result.json"
+    ],
+    "PTFilterTest": [
+      "evidence/enhanced-editor/core-regression-20260927/result.json",
+      "evidence/enhanced-editor/studio-prefill/core/result.json"
+    ],
+    "PTMidiTest": [
+      "evidence/enhanced-editor/core-regression-20260927/result.json",
+      "evidence/enhanced-editor/studio-prefill/core/result.json"
+    ],
+    "PTRecordTest": [
+      "evidence/enhanced-editor/core-regression-20260927/result.json",
+      "evidence/enhanced-editor/studio-prefill/core/result.json"
+    ],
+    "PTPatternTest": [
+      "evidence/enhanced-editor/core-regression-20260927/result.json",
+      "evidence/enhanced-editor/studio-prefill/core/result.json"
+    ],
+    "PTSlicesTest": [
+      "evidence/enhanced-editor/core-regression-20260927/result.json",
+      "evidence/enhanced-editor/studio-prefill/core/result.json"
+    ],
+    "PTFileSafetyTest": [
+      "evidence/enhanced-editor/core-regression-20260927/result.json",
+      "evidence/enhanced-editor/studio-prefill/core/result.json"
+    ],
+    "PTProjectTest": [],
+    "PTModProjectTest": [],
+    "PTDocumentTest": [],
+    "PT24GConvert": [],
+    "PTEditorClick": [],
+    "PTInputProbe": [],
+    "PTChannelsTest": [
+      "evidence/enhanced-editor/core-regression-20260927/result.json",
+      "evidence/enhanced-editor/studio-prefill/core/result.json"
+    ],
+    "PTPcmTest": [
+      "evidence/enhanced-editor/core-regression-20260927/result.json",
+      "evidence/enhanced-editor/studio-prefill/core/result.json"
+    ],
+    "PTSampleFileTest": [],
+    "PTSampleRawFileTest": [],
+    "PTSampleSvxFileTest": [],
+    "PTExecSampleSvxFileTest": [],
+    "PTProjectStreamTest": [],
+    "PTExecProjectStreamTest": [],
+    "PTModStreamTest": [],
+    "PTExecModStreamTest": [],
+    "PTRawImportTest": [],
+    "PTWavImportTest": [],
+    "PTExecRawImportTest": [],
+    "PTExecWavImportTest": [],
+    "PTSvxImportTest": [],
+    "PTExecSvxImportTest": [],
+    "PTExecSourceTest": [],
+    "PTSampleDispatchTest": [],
+    "PTExecSampleDispatchTest": [],
+    "PTProjectReaderTest": [],
+    "PTProjectImportTest": [],
+    "PTModImportTest": [],
+    "PTExecModImportTest": [],
+    "PTModRound8Test": [],
+    "PTViewProbe": [],
+    "PTPlaybackPCMTest": [
+      "evidence/enhanced-editor/paula-regression-20260927/result.json",
+      "evidence/enhanced-editor/paula-short-song/result.json",
+      "evidence/enhanced-editor/paula-highres-song/result.json",
+      "evidence/enhanced-editor/paula-selected-samples/paula-cache-1790561279907765000/result.json",
+      "evidence/enhanced-editor/paula-mapped-samples/native-pass-1790562116937878000/result.json",
+      "evidence/enhanced-editor/paula-odd-samples/native/result.json"
+    ],
+    "PTPlaybackUploadTest": [
+      "evidence/enhanced-editor/paula-regression-20260927/result.json",
+      "evidence/enhanced-editor/paula-short-song/result.json",
+      "evidence/enhanced-editor/paula-highres-song/result.json",
+      "evidence/enhanced-editor/paula-selected-samples/paula-cache-1790561279907765000/result.json",
+      "evidence/enhanced-editor/paula-mapped-samples/native-pass-1790562116937878000/result.json",
+      "evidence/enhanced-editor/paula-odd-samples/native/result.json"
+    ],
+    "PTPreviewPCMTest": [
+      "evidence/enhanced-editor/paula-regression-20260927/result.json",
+      "evidence/enhanced-editor/paula-chip-reserve/result.json",
+      "evidence/enhanced-editor/native-memory-suite/result.json",
+      "evidence/enhanced-editor/paula-sync-stream/result.json",
+      "evidence/enhanced-editor/paula-short-song/result.json",
+      "evidence/enhanced-editor/paula-highres-song/result.json",
+      "evidence/enhanced-editor/paula-play-refusal/rerun-pass/result.json",
+      "evidence/enhanced-editor/paula-selected-samples/paula-cache-1790561279907765000/result.json",
+      "evidence/enhanced-editor/paula-mapped-samples/native-pass-1790562116937878000/result.json",
+      "evidence/enhanced-editor/paula-odd-samples/native/result.json"
+    ],
+    "PTSampleCacheTest": [
+      "evidence/enhanced-editor/filtered-paula-preview/result.json",
+      "evidence/enhanced-editor/paula-regression-20260927/result.json",
+      "evidence/enhanced-editor/cache-ownership/result.json",
+      "evidence/enhanced-editor/paula-chip-reserve/result.json",
+      "evidence/enhanced-editor/loop-paula-preview/result.json",
+      "evidence/enhanced-editor/cancel-paula-preview/result.json",
+      "evidence/enhanced-editor/native-memory-suite/result.json",
+      "evidence/enhanced-editor/paula-sync-stream/result.json",
+      "evidence/enhanced-editor/playback-representations/result.json",
+      "evidence/enhanced-editor/paula-short-song/result.json",
+      "evidence/enhanced-editor/stereo-paula-preview/result.json",
+      "evidence/enhanced-editor/paula-highres-song/result.json",
+      "evidence/enhanced-editor/paula-play-refusal/rerun-pass/result.json",
+      "evidence/enhanced-editor/paula-selected-samples/paula-cache-1790561279907765000/result.json",
+      "evidence/enhanced-editor/paula-mapped-samples/native-pass-1790562116937878000/result.json",
+      "evidence/enhanced-editor/paula-odd-samples/native/result.json"
+    ],
+    "PTFlowTraceTest": [],
+    "PTPitchTraceTest": [],
+    "PTSampleTraceTest": [],
+    "PTInvertTraceTest": [],
+    "PTVolumeTraceTest": [],
+    "PTPitchTest": [],
+    "PTFlowCoreTest": [],
+    "PTStemsTest": [],
+    "PTFrameClockTest": [],
+    "PTTimelineTest": [],
+    "PTVoiceSegmentTest": [],
+    "PTVoiceTest": [],
+    "PTHandoffTest": [],
+    "PTRecentTest": [],
+    "PTRecentFileTest": [],
+    "PTBounceTest": [],
+    "PTTremoloRenderTest": [],
+    "PTOffsetRenderTest": [],
+    "PTPortaRenderTest": [],
+    "PTPitchRenderTest": [],
+    "PTVolumeRenderTest": [],
+    "PTInstrumentRenderTest": [],
+    "PTRangeRenderTest": [],
+    "PTRenderTest": [],
+    "PTStemFileTest": [],
+    "PTRenderFileTest": [],
+    "PTInvertRenderTest": [],
+    "PTExecInvertHandoffTest": [],
+    "PTExecInvertWriteTest": [],
+    "PTExecSharedInvertHandoffTest": [],
+    "PTInvertSessionTest": [],
+    "PTExecInvertSessionTest": [],
+    "PTSamplerInvertSongTest": [],
+    "PTExecSamplerInvertSongTest": [],
+    "PTInvertBounceTest": [],
+    "PTExecInvertBounceTest": [],
+    "PT24GRender": [],
+    "PTRenderMemoryTest": [],
+    "PTRenderAllocTest": [],
+    "PTRenderFileAllocTest": [],
+    "PTStemFileAllocTest": [],
+    "PTExecBounceTest": [],
+    "PTExecStemsTest": [],
+    "PTExecFailureTest": [],
+    "PTSamplerStudioTest": [],
+    "PTVoiceAdvanceTest": [],
+    "PTStudioQueueTest": [],
+    "PTStudioSongTest": [],
+    "PTSamplerSongTest": [],
+    "PTAmiGusRegisterSessionTest": [],
+    "PTExecAmiGusRegisterSessionTest": [
+      "evidence/enhanced-editor/studio-prefill/register/result.json"
+    ],
+    "PTAmiGusRegisterTest": [],
+    "PTAmiGusSessionTest": [],
+    "PTExecAmiGusSessionTest": [],
+    "PTAmiGusChainTest": [],
+    "PTExecAmiGusChainTest": [],
+    "PTAmiGusFifoTest": [],
+    "PTAmiGusPackTest": [],
+    "PTStudioConsumerTest": [],
+    "PTExecStudioConsumerTest": [
+      "evidence/enhanced-editor/exec-studio-consumer/result.json"
+    ],
+    "PTEditorStudioTest": [],
+    "PTCaptureTest": [],
+    "PTExecCaptureTest": [
+      "evidence/enhanced-editor/capture-staging/result.json"
+    ],
+    "PTCaptureSessionTest": [],
+    "PTExecCaptureSessionTest": [
+      "evidence/enhanced-editor/capture-session/result.json"
+    ],
+    "PTAmiGusCaptureTest": [],
+    "PTExecAmiGusCaptureTest": [
+      "evidence/enhanced-editor/amigus-capture/result.json"
+    ],
+    "PTEditorCaptureTest": [],
+    "PTExecEditorCaptureTest": [
+      "evidence/enhanced-editor/editor-capture/result.json"
+    ],
+    "PTExecEditorStudioTest": [
+      "evidence/enhanced-editor/studio-prefill/editor/result.json"
+    ],
+    "PTEditorInvertStudioTest": [],
+    "PTExecEditorInvertStudioTest": [],
+    "PTStudioPumpTest": [],
+    "PTQueuedSongTest": [],
+    "PTExecQueuedSongTest": [],
+    "PTExecStudioPumpTest": [
+      "evidence/enhanced-editor/exec-queued-studio/result.json"
+    ],
+    "PTExecStudioSongTest": [],
+    "PTSequenceTest": [],
+    "PTStudioPlanTest": [],
+    "PTStudioTickTest": [],
+    "PTStudioMixTest": [],
+    "PTExecStudioTest": [],
+    "PTExecSamplerStudioTest": [],
+    "PTExecImportTest": [
+      "evidence/enhanced-editor/exec-input-memory/import-result.json"
+    ],
+    "PTExecRecentTest": [
+      "evidence/enhanced-editor/exec-input-memory/recent-result.json"
+    ],
+    "PTRecentMemoryTest": [],
+    "PTFileLoadTest": [
+      "evidence/enhanced-editor/input-memory-guest/import-result.json"
+    ],
+    "PTExecSampleRawFileTest": [],
+    "PTExecSampleFileTest": [],
+    "PTExecSaveTest": [],
+    "PTGuardTest": []
+  },
+  "scope": "Hash matches in passing result files are evidence pointers; each run scope must be inspected, not blanket feature acceptance."
+}

@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "seconds": 24.773116832991946,
+  "window_bound_seconds": 440,
+  "cases": [
+    {
+      "case": "sample-dispatch",
+      "binary": "PTExecSampleDispatchTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/render-files-1790569020811237000",
+      "sha256": "5731a1c4078ac13b94faf12673f639ba34abfa3b41563362c65ba85afc5b398a",
+      "independent_cleanup": true
+    },
+    {
+      "case": "raw-import",
+      "binary": "PTExecRawImportTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/render-files-1790569022726309000",
+      "sha256": "72c62dbc56ff0ea19b118d321217f202bfd1ee14b30a21ed9685692ae71f12e8",
+      "independent_cleanup": true
+    },
+    {
+      "case": "wav-import",
+      "binary": "PTExecWavImportTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/render-files-1790569027639590000",
+      "sha256": "4c60b26b3a97c87009ab351d4a5fcc0889cccecd8aa62af43c59cd9dc69ea2e9",
+      "independent_cleanup": true
+    },
+    {
+      "case": "project-stream",
+      "binary": "PTExecProjectStreamTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/render-files-1790569030530533000",
+      "sha256": "0a42bf0f626462cc93a2f1f8313dcba92e45a6aadeca80ffd633ff2cd10b7301",
+      "independent_cleanup": true
+    }
+  ]
+}

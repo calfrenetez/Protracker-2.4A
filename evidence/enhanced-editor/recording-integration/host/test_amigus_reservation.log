@@ -1,0 +1,10 @@
+amigus reservation lifecycle: PASS (fake library, no hardware)
+.amigus reservation lifecycle: PASS (fake library, no hardware)
+AMIGUS INTERRUPT OWNER PASS: partial install retains reservation, removal request is not quiescence, pending/error/invalid status refuses release; injected callbacks only
+.amigus reservation lifecycle: PASS (fake library, no hardware)
+AMIGUS RESERVED SESSION PASS: failed open, leased Stop and natural tail retain card through reset recovery
+.
+----------------------------------------------------------------------
+Ran 3 tests in 1.433s
+
+OK

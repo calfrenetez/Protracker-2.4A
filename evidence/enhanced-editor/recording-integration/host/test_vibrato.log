@@ -1,0 +1,8 @@
+VIBRATO boundaries PASS: 16 tracks, waveforms, independent nibble memory, combined-slide memory, reset ordering and word wrap
+PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+.
+----------------------------------------------------------------------
+Ran 1 test in 8.930s
+
+OK
+VIBRATO: eleven repeated native traces match host/m68k period words and ramp PCM

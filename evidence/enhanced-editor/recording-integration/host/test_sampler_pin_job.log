@@ -1,0 +1,6 @@
+PIN JOB PASS: bounded PCM/marker copy, atomic 8/16/24-bit publication, cancellation, stale poison, budget/reuse and pinned lifetime
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.093s
+
+OK

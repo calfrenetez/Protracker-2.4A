@@ -1,0 +1,6 @@
+INVERT QUEUED PASS: private mixed masters, exact offline parity, tempo/delay, pre-roll, partitions, stalled/cancelled leases, protocol and allocation refusal
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.273s
+
+OK

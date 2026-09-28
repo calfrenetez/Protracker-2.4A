@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 streamed sample import and Exec Fast allocator",
+  "PTExecRawImportTest_sha256": "72c62dbc56ff0ea19b118d321217f202bfd1ee14b30a21ed9685692ae71f12e8",
+  "raw-import_returncode": "0",
+  "sample_staging_clean": true,
+  "run_files_cleaned": true
+}

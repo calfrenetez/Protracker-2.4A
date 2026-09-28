@@ -1,0 +1,17 @@
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+.INVERT ordering native parity PASS: ticks=48 checked=42 immutable master
+INVERT ordering native parity PASS: ticks=48 checked=42 immutable master
+INVERT ordering native parity PASS: ticks=48 checked=42 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+..EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+.
+----------------------------------------------------------------------
+Ran 4 tests in 13.981s
+
+OK

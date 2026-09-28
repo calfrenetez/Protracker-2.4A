@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 streamed master project save and Exec Fast allocator",
+  "PTExecProjectStreamTest_sha256": "0a42bf0f626462cc93a2f1f8313dcba92e45a6aadeca80ffd633ff2cd10b7301",
+  "project-stream_returncode": "0",
+  "sample_staging_clean": true,
+  "run_files_cleaned": true
+}

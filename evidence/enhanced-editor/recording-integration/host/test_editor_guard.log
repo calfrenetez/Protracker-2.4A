@@ -1,0 +1,6 @@
+EDITOR GUARD PASS: note edit and undo stop before mutation, navigation preserved, disposal guarded
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.620s
+
+OK

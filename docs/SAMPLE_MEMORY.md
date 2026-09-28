@@ -2672,3 +2672,27 @@ fits the existing field. The complete host run passed 200 checks; two helpers
 failed in a non-repository export and passed their corrected-environment reruns,
 giving passing results for all 202 checks without claiming the initial invocation
 was wholly successful.
+
+## Recovery setting read failures
+
+Recovery now distinguishes a missing optional setting from an empty, unreadable
+or incomplete value. Only an absent interval takes the 300-second default.
+Intervals contain decimal digits only; removable permission is absent, `0` or `1`.
+All settings reject embedded controls and potentially truncated buffers before
+opening the recovery directory. Binary environment reads prevent a line break
+from hiding a suffix. One spare buffer byte is required conservatively across
+AmigaDOS return conventions; this bounds directory input to 358 bytes.
+
+[The AmigaDOS GetVar contract](https://developer.amigaos3.net/autodocs/dos.library/GetVar.html)
+permits successful truncated reads and changed its length return convention after
+V36. The new host fixture exercises both conventions, missing defaults, read
+errors, embedded NUL/line breaks and explicit removable policy under ASan/UBSan.
+The native private-input cumulative fixture also passes with 365 Fast allocations
+returned to zero. These tests neither modify guest ENV nor establish physical
+storage behavior. See `evidence/enhanced-editor/recovery-config/`.
+
+The hardened editor (262628 bytes, SHA256
+`1ecaee823ff9829762c1ec7a6f2ffeda0c1a0ef2dfae3152b65fac5d7c81c552`) also passes
+actual AmigaDOS settings, offer/decline/restore, idle autosave and exact save in
+shared030. Evidence is in `recovery-config/editor-ui/`; all five temporary ENV
+values were restored exactly before independently verified cleanup and release.

@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "scope": "shared030 explicit recovery file transactions; no automatic snapshots or UI wiring",
+  "PTExecRecoveryTest_sha256": "3762b32623e0b070bd71038456711193883c5d163cce4979dbecd369b974d3b0",
+  "failure_cleanup_verified_before_functional_launch": true,
+  "recovery_returncode": "0",
+  "intentional_failure_returncode": "20",
+  "failure_cleanup_verified": true,
+  "source_unchanged": true,
+  "fixture_sha256": "e373b2abdfd931d86727672ce31a8fea890edcdb53b254a93b8b03b7a7b6a831",
+  "run_files_cleaned": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0"
+}

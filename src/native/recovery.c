@@ -7,10 +7,19 @@
 #include <sys/stat.h>
 #include <time.h>
 /* DOS uses BCPL-compatible data: FileInfoBlock requires longword alignment. */
+/* 1: complete nonempty text, 0: absent, -1: unreadable/invalid. Binary reads
+ * expose line breaks instead of silently accepting only their first line.
+ * Reject a full buffer conservatively: V36 returns the complete size, whereas
+ * V37+ can report a successful truncated read. Leave a spare byte in both. */
 static int variable(const char *name,char *value,size_t size)
 {
-    LONG n=GetVar((STRPTR)name,(STRPTR)value,(LONG)size,GVF_GLOBAL_ONLY);
-    return n>0 && n<(LONG)size;
+    LONG n;size_t i;
+    if(size<2)return -1;
+    n=GetVar((STRPTR)name,(STRPTR)value,(LONG)size,GVF_GLOBAL_ONLY|GVF_BINARY_VAR);
+    if(n<0)return IoErr()==ERROR_OBJECT_NOT_FOUND?0:-1;
+    if(!n || n>=(LONG)size-1)return -1;
+    for(i=0;i<(size_t)n;++i)if((unsigned char)value[i]<32 || (unsigned char)value[i]==127)return -1;
+    value[n]=0;return 1;
 }
 static uint64_t source_id(const char *source)
 {
@@ -21,17 +30,22 @@ static uint64_t source_id(const char *source)
 }
 int pt_native_recovery_configure(struct pt_native_recovery *r,const struct pt_allocator *a)
 {
-    char text[40],*end;BPTR lock;struct FileInfoBlock info __attribute__((aligned(4)));unsigned long seconds=300;
+    char text[40],*end;int state;BPTR lock;struct FileInfoBlock info __attribute__((aligned(4)));unsigned long seconds=300;
     struct pt_recovery_policy policy={300,1,0};
     if(!r || r->store.opened || r->schedule.busy || !a || !a->allocate || !a->release)return 0;
     memset(r,0,sizeof(*r));r->allocator=*a;
-    if(!variable("PT24G_RECOVERY_DIR",r->root,sizeof(r->root)) ||
-       !variable("PT24G_RECOVERY_MEDIA",text,sizeof(text)))return 0;
+    if(variable("PT24G_RECOVERY_DIR",r->root,sizeof(r->root))!=1 ||
+       variable("PT24G_RECOVERY_MEDIA",text,sizeof(text))!=1)return 0;
     if(!strcmp(text,"removable"))r->removable=1;
     else if(strcmp(text,"fixed"))return 0;
-    if(variable("PT24G_RECOVERY_REMOVABLE",text,sizeof(text)) && !strcmp(text,"1"))policy.allow_removable=1;
+    state=variable("PT24G_RECOVERY_REMOVABLE",text,sizeof(text));
+    if(state<0 || (state && strcmp(text,"0") && strcmp(text,"1")))return 0;
+    if(state && !strcmp(text,"1"))policy.allow_removable=1;
     if(r->removable && !policy.allow_removable)return 0;
-    if(variable("PT24G_RECOVERY_SECONDS",text,sizeof(text))) {
+    state=variable("PT24G_RECOVERY_SECONDS",text,sizeof(text));
+    if(state<0)return 0;
+    if(state) {
+        for(end=text;*end;++end)if(*end<'0' || *end>'9')return 0;
         seconds=strtoul(text,&end,10);
         if(!*text || *end || seconds<30 || seconds>86400)return 0;
     }

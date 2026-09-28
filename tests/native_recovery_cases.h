@@ -1,19 +1,25 @@
 /* Exercise production DOS traversal and snapshots without changing guest ENV or
  * its clock. Only configuration reads and time are private fixture inputs. */
 #include <proto/dos.h>
+#include <dos/var.h>
 #include <time.h>
 #include <sys/stat.h>
 static const char *recovery_fixture_root,*recovery_fixture_media="fixed",*recovery_fixture_seconds="30",*recovery_fixture_removable="0";
 static time_t recovery_fixture_now;
+static LONG recovery_fixture_error;
 static LONG recovery_fixture_getvar(STRPTR name,STRPTR out,LONG capacity,ULONG flags)
 {
-    const char *value=NULL;size_t n;(void)flags;
+    const char *value=NULL;size_t n,copied;
+    assert(flags==(GVF_GLOBAL_ONLY|GVF_BINARY_VAR));
+    if(recovery_fixture_error && !strcmp((const char *)name,"PT24G_RECOVERY_SECONDS")) {SetIoErr(recovery_fixture_error);return -1;}
     if(!strcmp((const char *)name,"PT24G_RECOVERY_DIR"))value=recovery_fixture_root;
     if(!strcmp((const char *)name,"PT24G_RECOVERY_MEDIA"))value=recovery_fixture_media;
     if(!strcmp((const char *)name,"PT24G_RECOVERY_SECONDS"))value=recovery_fixture_seconds;
     if(!strcmp((const char *)name,"PT24G_RECOVERY_REMOVABLE"))value=recovery_fixture_removable;
-    if(!value || capacity<=0 || (n=strlen(value))>=(size_t)capacity)return -1;
-    memcpy(out,value,n+1);return (LONG)n;
+    if(!value) {SetIoErr(ERROR_OBJECT_NOT_FOUND);return -1;}
+    if(capacity<=0) {SetIoErr(ERROR_BAD_NUMBER);return -1;}
+    n=strlen(value);copied=n<(size_t)capacity?n:(size_t)capacity-1;
+    memcpy(out,value,copied);out[copied]=0;SetIoErr((LONG)n);return (LONG)copied;
 }
 static time_t recovery_fixture_time(time_t *out)
 {if(out)*out=recovery_fixture_now;return recovery_fixture_now;}
@@ -31,7 +37,22 @@ static void native_recovery_cases(const char *directory,const char *source,
     recovery_fixture_root=directory;
     recovery_fixture_media="unknown";assert(!pt_native_recovery_configure(&r,allocator));
     recovery_fixture_media="removable";assert(!pt_native_recovery_configure(&r,allocator));
-    recovery_fixture_media="fixed";recovery_fixture_seconds="0";assert(!pt_native_recovery_configure(&r,allocator));
+    recovery_fixture_media="fixed";
+    recovery_fixture_error=ERROR_READ_PROTECTED;assert(!pt_native_recovery_configure(&r,allocator));recovery_fixture_error=0;
+    recovery_fixture_seconds=NULL;assert(pt_native_recovery_configure(&r,allocator) && r.schedule.policy.interval_seconds==300);
+    recovery_fixture_seconds="";assert(!pt_native_recovery_configure(&r,allocator));
+    recovery_fixture_seconds="30\ninvalid";assert(!pt_native_recovery_configure(&r,allocator));
+    recovery_fixture_seconds="000000000000000000000000000000000000030invalid";assert(!pt_native_recovery_configure(&r,allocator));
+    recovery_fixture_seconds="+30";assert(!pt_native_recovery_configure(&r,allocator));
+    recovery_fixture_seconds=" 30";assert(!pt_native_recovery_configure(&r,allocator));
+    recovery_fixture_seconds="86401";assert(!pt_native_recovery_configure(&r,allocator));
+    recovery_fixture_seconds="86400";assert(pt_native_recovery_configure(&r,allocator) && r.schedule.policy.interval_seconds==86400);
+    recovery_fixture_removable="yes";assert(!pt_native_recovery_configure(&r,allocator));
+    recovery_fixture_removable=NULL;assert(pt_native_recovery_configure(&r,allocator));
+    recovery_fixture_media="removable";assert(!pt_native_recovery_configure(&r,allocator));
+    recovery_fixture_removable="1";assert(pt_native_recovery_configure(&r,allocator));
+    recovery_fixture_media="fixed";recovery_fixture_removable="0";
+    recovery_fixture_seconds="0";assert(!pt_native_recovery_configure(&r,allocator));
     recovery_fixture_seconds="30x";assert(!pt_native_recovery_configure(&r,allocator));
     recovery_fixture_seconds="30";assert(pt_native_recovery_configure(&r,allocator));
     assert(pt_native_recovery_bind(&r,source) && !r.store.opened);

@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "scope": "shared030 recovery offer, decline, restore, idle autosave and exact master save; no physical acceptance",
+  "editor_sha256": "1ecaee823ff9829762c1ec7a6f2ffeda0c1a0ef2dfae3152b65fac5d7c81c552",
+  "seed_sha256": "3762b32623e0b070bd71038456711193883c5d163cce4979dbecd369b974d3b0",
+  "source_sha256": "e373b2abdfd931d86727672ce31a8fea890edcdb53b254a93b8b03b7a7b6a831",
+  "decline_preserved_project_and_copy": true,
+  "idle_autosave": true,
+  "exact_restored_project": true,
+  "master_records_unchanged": true,
+  "original_unchanged": true,
+  "clean_save_discards_owned_snapshot": true,
+  "normal_exit": true,
+  "environment_restored": true,
+  "run_files_cleaned": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0"
+}

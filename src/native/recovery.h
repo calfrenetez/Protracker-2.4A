@@ -16,8 +16,10 @@ struct pt_native_recovery {
  * Explicit opt-in: existing PT24G_RECOVERY_DIR plus PT24G_RECOVERY_MEDIA set to
  * fixed or removable. This is caller/user classification, not hardware detection.
  * Unknown media stays disabled. Removable also needs PT24G_RECOVERY_REMOVABLE=1.
- * Interval defaults to300 seconds; PT24G_RECOVERY_SECONDS=0 disables, otherwise
- * accepts30..86400. All storage uses caller's bounded allocator. */
+ * Missing interval defaults to300 seconds; PT24G_RECOVERY_SECONDS=0 disables, otherwise
+ * accepts30..86400. Incomplete, empty, control-text or unreadable values refuse
+ * configuration; invalid optional values never silently take defaults.
+ * All storage uses caller's bounded allocator. */
 int pt_native_recovery_configure(struct pt_native_recovery *,const struct pt_allocator *);
 /* Start a document identity from its canonical source; NULL/empty means unnamed.
  * Call only after committing a new/load/save-as document transition. The previous

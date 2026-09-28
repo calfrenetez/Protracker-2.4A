@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131185632 reserve=262144 flags=4
+NATIVE RECOVERY SEED PASS: snapshot retained, exact expected project written, source preserved
+EXEC MEMORY PASS: 10 Fast allocations, zero owned bytes, budget refusal without Chip fallback

@@ -1,0 +1,7 @@
+test_complete_configuration_reads (test_native_recovery_config.NativeRecoveryConfig.test_complete_configuration_reads) ... NATIVE RECOVERY CONFIG PASS: V36/V37 truncation, errors, missing defaults, raw controls and explicit removable policy
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 2.488s
+
+OK

@@ -57,6 +57,7 @@ def main():
     group.add_argument('--pp20-import',action='store_true',help='Run native converter bounded packed MOD import')
     group.add_argument('--project-import',action='store_true',help='Run native converter enhanced-project load/save roundtrip')
     group.add_argument('--recovery-file',action='store_true',help='Run explicit full-precision recovery snapshot/restore transactions')
+    group.add_argument('--capture-memory',action='store_true',help='Run synthetic recording staging/publication with native Fast allocator; no device capture')
     group.add_argument('--sample-dispatch',action='store_true',help='Check bounded sample dispatch and24-bit precision with Exec allocator')
     group.add_argument('--source-memory',action='store_true',help='Run donor ownership/failure/undo checks with native Fast allocator')
     group.add_argument('--mod-import',action='store_true',help='Run bounded MOD document load with native Fast allocator')
@@ -111,6 +112,9 @@ def main():
             if args.input_memory=='exec-import':cases=[('import','PTExecImportTest','FILE LOAD PASS')]
             if args.input_memory=='exec-recent':cases=[('recent','PTExecRecentTest','RECENT MEMORY PASS')]
             result['scope']='shared030 native import/recent file checks'
+        if args.capture_memory:
+            cases=[('capture','PTExecCaptureTest','CAPTURE STAGING PASS:')]
+            result['scope']='shared030 synthetic capture staging and undoable publication; no device input'
         if args.recovery_file:
             cases=[('recovery','PTExecRecoveryTest','RECOVERY FILE PASS:')]
             result['scope']='shared030 explicit recovery file transactions; no automatic snapshots or UI wiring'
@@ -275,7 +279,7 @@ def main():
                 log=(run/name/'test.log').read_text();(out/(name+'.log')).write_text(log)
                 result[name+'_returncode']=(run/name/'test.rc').read_text().strip()
                 assert result[name+'_returncode']=='0' and marker in log,log
-                if args.recovery_file or args.invert_editor or args.invert_sampler or args.invert_session or args.invert_bounce or args.sample_dispatch or args.source_memory or args.mod_import or args.sample_import or args.mod_stream or args.project_stream or args.sample_svx or args.sample_raw or args.sample_wav or args.studio_memory or args.exec_memory or args.input_memory in ('exec-import','exec-recent'):assert 'EXEC MEMORY PASS:' in log,log
+                if args.capture_memory or args.recovery_file or args.invert_editor or args.invert_sampler or args.invert_session or args.invert_bounce or args.sample_dispatch or args.source_memory or args.mod_import or args.sample_import or args.mod_stream or args.project_stream or args.sample_svx or args.sample_raw or args.sample_wav or args.studio_memory or args.exec_memory or args.input_memory in ('exec-import','exec-recent'):assert 'EXEC MEMORY PASS:' in log,log
             if args.mod_import or args.sample_import or args.mod_stream or args.project_stream or args.sample_svx or args.sample_wav or args.sample_raw:
                 directory,binary=('mod-import','PTExecModImportTest') if args.mod_import else ('svx-import','PTExecSvxImportTest') if args.sample_import=='svx' else ('raw-import','PTExecRawImportTest') if args.sample_import=='raw' else ('wav-import','PTExecWavImportTest') if args.sample_import=='wav' else ('mod-stream','PTExecModStreamTest') if args.mod_stream else ('project-stream','PTExecProjectStreamTest') if args.project_stream else ('sample-svx','PTExecSampleSvxFileTest') if args.sample_svx else ('sample-raw','PTExecSampleRawFileTest') if args.sample_raw else ('sample-wav','PTExecSampleFileTest')
                 remaining=sorted(p.name for p in (run/directory).iterdir())
@@ -342,5 +346,5 @@ def main():
             result['passed']=True
         finally:
             finish_run(guest,run,out,result,finished,
-                (args.recovery_file or args.studio_memory in ('native-abi','editor','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence') or args.invert_editor or args.invert_sampler or args.invert_session or args.source_memory or args.sample_dispatch or args.invert_render or args.invert_bounce or args.invert_cli or args.invert_stem_cli))
+                (args.capture_memory or args.recovery_file or args.studio_memory in ('native-abi','editor','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence') or args.invert_editor or args.invert_sampler or args.invert_session or args.source_memory or args.sample_dispatch or args.invert_render or args.invert_bounce or args.invert_cli or args.invert_stem_cli))
 if __name__=='__main__':main()

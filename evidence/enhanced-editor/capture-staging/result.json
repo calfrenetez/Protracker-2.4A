@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 synthetic capture staging and undoable publication; no device input",
+  "PTExecCaptureTest_sha256": "1cbff28667f1066928dd7ce57e76952c1c1440c7f71a3b2bf9d2cbe853f6c5d3",
+  "capture_returncode": "0",
+  "run_files_cleaned": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0"
+}

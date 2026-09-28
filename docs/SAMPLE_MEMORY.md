@@ -2952,3 +2952,28 @@ exited normally, released owned resources, verified DMAoff/exact cleanup and was
 explicitly released to AmiConnect. Native editor/Paula bytes match their prior
 qualified candidates. Evidence: `evidence/enhanced-editor/studio-prefill/`.
 Physical machine stayed off and untouched.
+
+
+## Bounded synthetic recording staging
+
+`capture` collects negotiated8/16/24-bit mono/stereo PCM into a caller-budgeted
+allocation made before input starts, using the supplied allocator (the native
+master pool can supply bounded Fast RAM). Each append validates and copies at
+most256 frames without allocation, conversion or truncation. An invalid chunk or
+explicit/device-reported overrun blocks publication; overrun remains a distinct
+sticky result. Failed chunks leave the captured prefix unchanged. Empty or active
+recordings cannot become samples.
+
+`sampler_capture` appends finished data as one undoable new sample through the
+existing sampler version transaction. Success deep-copies all precision into the
+sampler budget then releases staging. Failure preserves recording/project/history
+for retry. The temporary recording and sampler copy coexist during publication,
+so the shared native allocation ceiling must cover both. Existing masters are
+never replaced. The caller must apply the editor change guard before publication.
+
+This is software staging with synthetic input, not an AmiGUS recording backend.
+Format negotiation, actual device input, reservation/interrupt ownership, overrun
+measurement and native recording UI remain required. Buffer close does not stop
+hardware; no device may DMA into or retain the collector allocation. Accepting24
+bits here does not prove24-bit capture support on Mini or Zorro. The pinned driver's
+capture formats must be reconciled with actual variant capabilities before use.

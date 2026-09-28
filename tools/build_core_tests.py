@@ -174,6 +174,8 @@ def main():
     inputs['PTExecStudioConsumerTest'] = ['tests/native_exec_studio_consumer_test.c',*inputs['PTStudioConsumerTest'][1:]]
     inputs['PTEditorStudioTest'] = ['tests/editor_studio_test.c','src/editor/editor_studio.c','src/core/amigus_reservation.c','src/core/amigus_session.c','src/core/amigus_fifo.c','src/core/amigus_pcm_pack.c','src/core/studio_consumer.c','src/core/studio_pump.c','src/core/studio_queue.c',*dict.fromkeys([*inputs['PTSamplerSongTest'][1:],*inputs['PTSongTest'][1:]])]
     inputs['PTEditorStudioTest'] += ['src/editor/sampler_invert_song.c',*invert_sources]
+    inputs['PTCaptureTest'] = ['tests/capture_test.c','src/core/capture.c','src/editor/sampler_capture.c',*inputs['PTSamplerTest'][1:]]
+    inputs['PTExecCaptureTest'] = ['tests/native_exec_capture_test.c',*inputs['PTCaptureTest'][1:]]
     inputs['PTExecEditorStudioTest'] = ['tests/native_exec_editor_studio_test.c',*inputs['PTEditorStudioTest'][1:]]
     inputs['PTEditorInvertStudioTest'] = ['tests/editor_invert_studio_test.c',*inputs['PTEditorStudioTest'][1:]]
     inputs['PTExecEditorInvertStudioTest'] = ['tests/native_exec_editor_invert_studio_test.c',*inputs['PTEditorStudioTest'][1:]]
@@ -240,13 +242,22 @@ def main():
     subprocess.run([str(ROOT / 'local/vasm/vasmm68k_mot'), '-devpac', '-m68000', '-no-fpu',
                     '-Fhunkexe', '-kick1hunks', '-hunkpad=0', '-nosym', '-o', str(out / 'PTGuardTest'),
                     str(generated)], check=True)
+    # Include transitive project headers and included C fixtures, not only the
+    # manually listed entry points. Generated headers have separate provenance.
+    dependencies=set();generated_dependencies=set()
+    for source in sorted({p for group in inputs.values() for p in group if p.endswith('.c')}):
+        raw=subprocess.check_output([cc,*flags,'-MM',source],cwd=ROOT,text=True).replace('\\\n',' ')
+        for name in raw.split(':',1)[1].split():
+            name=str((ROOT/name).resolve().relative_to(ROOT))
+            (generated_dependencies if name.startswith('build/') else dependencies).add(name)
     report = {'compiler': subprocess.check_output([cc, '--version'], text=True).splitlines()[0],
               'compiler_sha256': digest(Path(cc)), 'runtime_inputs': runtime_inputs(cc), 'flags': flags,
               'binaries': {name: {'sha256': digest(out / name), 'bytes': (out / name).stat().st_size}
                            for name in [*inputs, 'PTGuardTest']},
               'sources': {name: digest(ROOT / name) for name in
-                          sorted(set(sum(inputs.values(), [])) | {'src/core/recent.h', 'src/platform/recent_file.h', 'src/native/file_request.h', 'src/native/recovery.h', 'src/core/recovery.h', 'src/platform/recovery_file.h', 'src/platform/recovery_store.h', 'src/platform/recovery_find.h', 'src/core/playback.h', 'src/core/scope.h', 'src/core/flow.h', 'src/core/frame_clock.h', 'src/core/timeline.h', 'src/core/voice.h', 'src/core/render.h', 'src/core/render_commands.h','src/core/render_invert.h','src/editor/bounce_invert.h','src/core/invert_bank.h', 'src/core/studio_plan.h', 'src/core/studio_song.h', 'src/core/studio_queue.h', 'src/core/studio_pump.h', 'src/editor/sampler_song.h', 'src/editor/editor_studio.h', 'src/core/stems.h', 'src/platform/stem_file.h', 'src/core/pitch.h', 'src/core/pitch_tables.h', 'tools/generate_pitch_tables.py', 'src/platform/render_file.h','src/platform/render_invert_file.h', 'tools/build_core_tests.py', 'src/native/paula.h', 'src/native/paula_memory.h', 'src/core/paula_sync.h', 'src/native/replay_abi.s', 'tools/prepare_replay.py', 'tools/prepare_flow_trace.py', 'tools/prepare_pitch_trace.py', 'tools/prepare_sample_trace.py', 'tools/prepare_invert_trace.py', 'tools/prepare_volume_trace.py', 'vendor/pt23f/replayer/PT2.3F_replay_cia.s', 'src/core/channels.h', 'src/core/pcm.h',
+                          sorted(set(sum(inputs.values(), [])) | dependencies | {'src/core/recent.h', 'src/platform/recent_file.h', 'src/native/file_request.h', 'src/native/recovery.h', 'src/core/recovery.h', 'src/platform/recovery_file.h', 'src/platform/recovery_store.h', 'src/platform/recovery_find.h', 'src/core/playback.h', 'src/core/scope.h', 'src/core/flow.h', 'src/core/frame_clock.h', 'src/core/timeline.h', 'src/core/voice.h', 'src/core/render.h', 'src/core/render_commands.h','src/core/render_invert.h','src/editor/bounce_invert.h','src/core/invert_bank.h', 'src/core/studio_plan.h', 'src/core/studio_song.h', 'src/core/studio_queue.h', 'src/core/studio_pump.h', 'src/editor/sampler_song.h', 'src/editor/editor_studio.h', 'src/core/stems.h', 'src/platform/stem_file.h', 'src/core/pitch.h', 'src/core/pitch_tables.h', 'tools/generate_pitch_tables.py', 'src/platform/render_file.h','src/platform/render_invert_file.h', 'tools/build_core_tests.py', 'src/native/paula.h', 'src/native/paula_memory.h', 'src/core/paula_sync.h', 'src/native/replay_abi.s', 'tools/prepare_replay.py', 'tools/prepare_flow_trace.py', 'tools/prepare_pitch_trace.py', 'tools/prepare_sample_trace.py', 'tools/prepare_invert_trace.py', 'tools/prepare_volume_trace.py', 'vendor/pt23f/replayer/PT2.3F_replay_cia.s', 'src/core/channels.h', 'src/core/pcm.h',
                           'src/core/sinc_kernel.h', 'tools/generate_sinc_kernel.py', 'src/core/wav.h', 'src/core/svx.h', 'src/core/raw.h', 'src/core/midi.h', 'src/core/record.h', 'src/core/record_pattern.h', 'src/editor/editor.h', 'src/editor/song.h', 'src/editor/sampler.h', 'src/editor/bounce.h', 'src/editor/view.h', 'src/platform/file_save.h', 'src/platform/sample_file.h', 'src/platform/project_file.h', 'src/platform/mod_file.h', 'src/platform/raw_import.h', 'src/platform/mod_import.h', 'src/platform/project_import.h', 'src/platform/pp20_import.h', 'src/platform/file_load.h', 'vendor/pt23f/raw/ptfont.raw', 'src/core/project.h', 'src/core/mod_project.h', 'src/core/document.h', 'src/core/pp20.h', 'src/core/safe_save.h', 'src/core/pattern.h', 'src/core/slices.h', 'src/core/mod_inspect.h', 'src/native/present.h', 'src/native/master_memory.h', 'src/core/paula_cache.h', 'src/core/sample_cache.h', 'src/core/playback_pcm.h', 'src/core/paula_preview.h', 'src/core/paula_playback.h', 'src/native/mod_guard.s', 'tests/native_guard_harness.s'})},
+              'generated_sources': {name:digest(ROOT/name) for name in sorted(generated_dependencies)},
               'guard_cases': manifest}
     (out / 'core-build.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report['binaries'], indent=2))

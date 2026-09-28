@@ -32,4 +32,28 @@ static inline const char *pt_paula_playback_snapshot(const struct pt_project *p,
     if(report->issues&~PT_EXPORT_PRECISION)return "PLAY: REQUIRES CLASSIC FOUR-CHANNEL PAULA PROJECT";
     return NULL;
 }
+/* Expand one-to-three Paula tracks into a private four-track replay view.
+ * Caller workspace is disjoint from every source object and copy/report; its
+ * capacity counts events. Failure may change workspace, never the source.
+ * Four-track input needs no workspace. No non-Paula track is discarded. */
+static inline const char *pt_paula_playback_prepare(const struct pt_project *p,
+    struct pt_project *copy,struct pt_mod_export_report *report,
+    struct pt_event *events,size_t capacity)
+{
+    struct pt_project padded;size_t rows,row;unsigned ch;
+    if(p && p->channels.count>=4)return pt_paula_playback_snapshot(p,copy,report);
+    if(!p || !copy || copy==p || !report || pt_project_validate(p,NULL)!=PT_PROJECT_OK)
+        return "PLAY: INVALID PROJECT";
+    rows=(size_t)p->pattern_count*PT_PROJECT_ROWS;
+    if(!events || capacity<rows*4)return "PLAY: OUT OF REPLAY WORKSPACE MEMORY";
+    padded=*p;pt_channels_init(&padded.channels);
+    padded.channels.selected=p->channels.selected;
+    for(ch=0;ch<p->channels.count;++ch)padded.channels.track[ch]=p->channels.track[ch];
+    for(ch=p->channels.count;ch<4;++ch)memset(padded.midi_output[ch],0,PT_MIDI_ENDPOINT);
+    memset(events,0,rows*4*sizeof(*events));
+    for(row=0;row<rows;++row)
+        memcpy(events+row*4,p->events+row*p->channels.count,p->channels.count*sizeof(*events));
+    padded.events=events;
+    return pt_paula_playback_snapshot(&padded,copy,report);
+}
 #endif

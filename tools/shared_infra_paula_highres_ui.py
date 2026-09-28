@@ -8,7 +8,7 @@ ROOT=Path(__file__).resolve().parents[1]
 INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('candidate',type=Path);parser.add_argument('fixture',type=Path);args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('candidate',type=Path);parser.add_argument('fixture',type=Path);parser.add_argument('--channels',type=int,choices=range(1,5),default=4);args=parser.parse_args()
     manifest=json.loads((args.candidate.parent/'core-build.json').read_text())
     assert digest(args.candidate)==manifest['binaries']['PT24GEdit']['sha256']
     sys.path.insert(0,str(INFRA/'scripts'));from shared_guest import Guest
@@ -19,7 +19,8 @@ def main():
         finished=False;environment=False;active=None;start=time.monotonic()
         fixture=args.fixture;original=fixture.read_bytes()
         shutil.copyfile(args.candidate,run/'PT24GEdit');(run/'source.ptg').write_bytes(original);(run/'copies').mkdir()
-        result.update(editor_sha256=digest(args.candidate),source_sha256=digest(fixture))
+        result.update(editor_sha256=digest(args.candidate),source_sha256=digest(fixture),source_channels=args.channels)
+        periods='period='+','.join(str(n if i<args.channels else 0) for i,n in enumerate((428,339,285,214)))
         device=guest.device+run.name
         settings={'PT24G_RECENT_PREFIX':device+'/recent','PT24G_RECOVERY_DIR':device+'/copies','PT24G_RECOVERY_MEDIA':'fixed','PT24G_RECOVERY_SECONDS':'300','PT24G_RECOVERY_REMOVABLE':'0'}
         def wait(predicate,seconds=20):
@@ -81,16 +82,17 @@ def main():
             for i,value in enumerate(settings.values()):assert (run/('active-'+str(i))).read_bytes()==value.encode()
             records=sample_records(original)
             assert len(records)==2 and [r[40] for r in records]==[24,16]
+            assert original[32:36]==b'HEAD' and original[76]==args.channels
             launch('editor','PT24GEdit source.ptg saved.ptg')
             wait(lambda:'status=READY -' in text('editor.log'))
             def frame(fragment,offset=0):
                 wait(lambda:any('EDITOR FRAME' in line and fragment in line for line in text('editor.log')[offset:].splitlines()))
             def audio(enabled):
                 state=guest.command('GET_AUDIO_STATE')
-                assert all('ch%d_dma=%d'%(i,enabled) in state.split('\t') for i in range(4)),state
+                assert all('ch%d_dma=%d'%(i,enabled if i<args.channels else 0) in state.split('\t') for i in range(4)),state
                 return state
             key(0x57)
-            wait(lambda:'EDITOR REPLAY active=1' in text('editor.log') and 'period=428,339,285,214' in text('editor.log'))
+            wait(lambda:'EDITOR REPLAY active=1' in text('editor.log') and periods in text('editor.log'))
             result['playing_audio']=audio(1);guest_capture('playing')
             # Reverse only sub8-bit values. Derived bytes are unchanged, but the
             # editor sample generation must still stop and invalidate playback.
@@ -107,7 +109,7 @@ def main():
             stop_editor('editor');quit_editor('editor')
             launch('reopened','PT24GEdit saved.ptg reopened.ptg')
             wait(lambda:'status=READY -' in text('reopened.log'))
-            key(0x57);wait(lambda:'EDITOR REPLAY active=1' in text('reopened.log') and 'period=428,339,285,214' in text('reopened.log'))
+            key(0x57);wait(lambda:'EDITOR REPLAY active=1' in text('reopened.log') and periods in text('reopened.log'))
             audio(1);key(0x21,True)
             wait(lambda:'EDITOR SAVE result=0 dirty=0' in text('reopened.log'))
             assert (run/'reopened.ptg').read_bytes()==original

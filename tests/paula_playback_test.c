@@ -56,6 +56,31 @@ int main(void)
     before=p;assert(pt_paula_playback_snapshot(&p,&p,&report));
     assert(!memcmp(&p,&before,sizeof(p)));
     assert(pt_paula_playback_snapshot(NULL,&copy,&report));
+    {struct pt_event packed[256]={0},padded[256],saved[256];unsigned channels,row,ch;
+        p.mode=PT_MODE_WAVETABLE;pt_channels_init(&p.channels);p.events=packed;
+        for(channels=1;channels<4;++channels) {
+            pt_channels_init(&p.channels);memset(p.midi_output,0,sizeof(p.midi_output));
+            p.channels.count=(uint8_t)channels;
+            p.channels.track[channels].route=PT_MIDI;strcpy(p.midi_output[channels],"INACTIVE ENDPOINT");
+            for(row=0;row<64;++row)for(ch=0;ch<channels;++ch) {
+                packed[row*channels+ch].kind=PT_NOTE_PERIOD;
+                packed[row*channels+ch].pitch=(uint16_t)(428+ch);
+                packed[row*channels+ch].instrument=1;
+            }
+            before=p;memcpy(saved,packed,sizeof(packed));
+            assert(pt_paula_playback_prepare(&p,&copy,&report,padded,255));
+            assert(!pt_paula_playback_prepare(&p,&copy,&report,padded,256));
+            assert(copy.channels.count==4 && copy.events==padded && report.bytes);
+            for(row=0;row<64;++row)for(ch=0;ch<4;++ch) {
+                struct pt_event silence={0};
+                assert(!memcmp(padded+row*4+ch,ch<channels?packed+row*channels+ch:&silence,sizeof(silence)));
+            }
+            assert(!memcmp(&before,&p,sizeof(p)) && !memcmp(saved,packed,sizeof(packed)));
+            p.channels.track[0].route=PT_MIDI;
+            assert(strstr(pt_paula_playback_prepare(&p,&copy,&report,padded,256),"MIDI IS NOT RENDERED"));
+            p.channels.track[0].route=PT_PAULA;
+        }
+    }
     puts("PAULA PLAYBACK PREFLIGHT PASS: private metadata, optional8-bit playback copies, unchanged16/24-bit masters, explicit unavailable routes");
     return 0;
 }

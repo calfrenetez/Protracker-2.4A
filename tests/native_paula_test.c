@@ -139,6 +139,38 @@ int main(int argc,char **argv)
         free(enhanced_before);free(enhanced_after);enhanced_before=enhanced_after=NULL;
     }
     puts("HIGHRES SONG PASS: 16/24-bit masters, rounded private8-bit Chip playback, unused cache omitted, stop/rebuild, restart refill and byte-exact enhanced save");
+    /* One-to-three-track projects keep their source shape while private
+       replay rows pad missing voices with silence. */
+    for(i=1;i<4;++i) {
+        struct pt_project q=doc.project;struct pt_event events[256]={{0}},saved[256];
+        uint16_t order=0;size_t n,bytes;unsigned ch;
+        q.channels.count=(uint8_t)i;q.orders=&order;q.order_count=q.pattern_count=1;q.events=events;
+        q.extensions=NULL;q.extension_count=0;
+        for(ch=0;ch<i;++ch)events[ch]=doc.project.events[ch];
+        memcpy(saved,events,sizeof(events));
+        CHECK(pt_project_size(&q,&bytes)==PT_PROJECT_OK);
+        enhanced_before=malloc(bytes);enhanced_after=malloc(bytes);CHECK(enhanced_before && enhanced_after);
+        CHECK(pt_project_encode(&q,enhanced_before,bytes,&n)==PT_PROJECT_OK && n==bytes);
+        CHECK(!pt_paula_play(&a,&q,0,0,0));Delay(10);pt_paula_poll(&a,&state);
+        CHECK(state.active && a.padded_events && a.source_channels==i);
+        CHECK(TypeOfMem(a.padded_events)&MEMF_FAST);
+        CHECK(a.memory.used==a.source_bytes+2*a.bytes+256*sizeof(struct pt_event)+4*sizeof(size_t));
+        for(ch=0;ch<4;++ch) {
+            CHECK(state.volume[ch]==(ch<i?24:0));
+            if(ch<i)CHECK(state.period[ch]==doc.project.events[ch].pitch);
+        }
+        events[8*i]=events[0];events[8*i].pitch=214;CHECK(!pt_paula_sync(&a,&q));Delay(50);pt_paula_poll(&a,&state);
+        CHECK(state.active && state.period[0]==214);events[8*i]=saved[8*i];
+        CHECK(!pt_paula_sync(&a,&q));pt_paula_stop(&a);
+        CHECK(!a.padded_events && !a.memory.used && !a.cache.bytes);
+        CHECK(!memcmp(events,saved,sizeof(events)));
+        CHECK(pt_project_encode(&q,enhanced_after,bytes,&n)==PT_PROJECT_OK && n==bytes);
+        CHECK(!memcmp(enhanced_before,enhanced_after,bytes));
+        CHECK(!pt_paula_play(&a,&q,1,0,0));q.channels.count=(uint8_t)(i==3?2:i+1);
+        CHECK(pt_paula_sync(&a,&q) && !a.started && !a.padded_events && !a.memory.used);
+        free(enhanced_before);free(enhanced_after);enhanced_before=enhanced_after=NULL;
+    }
+    puts("SHORT SONG PASS: 1/2/3-track private Fast padding, silent unused voices, bounded sync, count-change stop and exact source save");
     /* Saved mute/solo gates actual output without erasing effect state.
        Strict MOD export still refuses to discard these settings. */
     doc.project.channels.track[0].muted=1;

@@ -54,6 +54,7 @@ static void halt(struct pt_paula *a,int retain)
     if(a->port)DeleteMsgPort(a->port);
     for(i=0;i<31;++i)if(a->sample_bytes[i])pt_cache_unpin(&a->cache,a->lease[i]);
     if(a->silence)FreeMem(a->silence,2);
+    pt_master_release(&a->memory,a->padded_events);
     pt_master_release(&a->memory,a->data);
     pt_master_release(&a->memory,a->staging);pt_master_release(&a->memory,a->check);
     if(!retain)pt_cache_clear(&a->cache);
@@ -64,17 +65,26 @@ void pt_paula_stop(struct pt_paula *a) {halt(a,0);}
 const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned mode,unsigned position,unsigned pattern)
 {
     struct pt_project playback;struct pt_mod_export_report report;struct pt_paula_cache_plan plan;size_t written,offset;unsigned i;UBYTE channels=15;
+    struct pt_master_memory prepared_memory;struct pt_event *padded=NULL;size_t event_count=0;
     const char *error="PLAY: OUT OF CHIP MEMORY";
     if(!p || mode>1 || position>=p->order_count || pattern>=p->pattern_count)return "PLAY: INVALID POSITION";
-    error=pt_paula_playback_snapshot(p,&playback,&report);
-    if(error)return error;
+    if(p->channels.count<4) {
+        if(pt_project_validate(p,NULL)!=PT_PROJECT_OK)return "PLAY: INVALID PROJECT";
+        event_count=(size_t)p->pattern_count*PT_PROJECT_ROWS*4;
+        pt_master_memory_init(&prepared_memory);
+        padded=pt_master_allocate(&prepared_memory,event_count*sizeof(*padded));
+        if(!padded)return "PLAY: OUT OF REPLAY WORKSPACE MEMORY";
+    }
+    error=pt_paula_playback_prepare(p,&playback,&report,padded,event_count);
+    if(error) {pt_master_release(&prepared_memory,padded);return error;}
     halt(a,1);
+    if(padded)a->memory=prepared_memory;else pt_master_memory_init(&a->memory);
+    a->padded_events=padded;a->source_channels=p->channels.count;
     if(!a->cache.allocate)pt_cache_init(&a->cache,NULL,pt_paula_chip_allocate,pt_paula_chip_release,pt_paula_chip_available());
     if(a->cache_version==UINT64_MAX) {pt_paula_stop(a);return "PLAY: CACHE GENERATION EXHAUSTED";}
     ++a->cache_version;
     a->order_count=p->order_count;memcpy(a->orders,p->orders,p->order_count*sizeof(*p->orders));a->source_bytes=report.bytes;a->pattern_bytes=(size_t)p->pattern_count*1024;
     a->mode=mode;a->pattern=pattern;
-    pt_master_memory_init(&a->memory);
     error="PLAY: OUT OF REPLAY WORKSPACE MEMORY";
     a->staging=pt_master_allocate(&a->memory,a->source_bytes);
     if(!a->staging)goto failed;
@@ -157,7 +167,8 @@ const char *pt_paula_sync(struct pt_paula *a,const struct pt_project *p)
     if(!p || !p->orders || p->order_count!=a->order_count || memcmp(p->orders,a->orders,p->order_count*sizeof(*p->orders))) {
         pt_paula_stop(a);return "STOPPED: SONG POSITIONS CHANGED - PRESS PLAY TO RESTART";
     }
-    if(pt_paula_playback_snapshot(p,&playback,&report) || report.bytes!=a->source_bytes ||
+    if(p->channels.count!=a->source_channels ||
+       pt_paula_playback_prepare(p,&playback,&report,a->padded_events,a->pattern_bytes/4) || report.bytes!=a->source_bytes ||
        (size_t)p->pattern_count*1024!=a->pattern_bytes) {
         pt_paula_stop(a);return "STOPPED: EDIT REQUIRES ENHANCED REPLAY BACKEND";
     }

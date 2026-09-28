@@ -9,8 +9,10 @@ int main(int argc,char **argv)
     struct pt_event events[256]={{0}};int32_t pcm[2][256];uint16_t order=0;
     const unsigned periods[4]={428,339,285,214};
     size_t n,w;unsigned i,j;uint8_t *bytes;FILE *f;int ok;
-    if(argc!=2)return 2;
+    if(argc!=2 && argc!=3)return 2;
+    if(argc==3 && (argv[2][0]<'1' || argv[2][0]>'4' || argv[2][1]))return 2;
     pt_channels_init(&p.channels);p.speed=6;p.bpm=125;
+    if(argc==3)p.channels.count=(uint8_t)(argv[2][0]-'0');
     p.order_count=p.pattern_count=1;p.sample_count=2;
     p.orders=&order;p.events=events;p.samples=samples;strcpy(p.title,"PAULA MASTER TEST");
     for(i=0;i<2;++i) {
@@ -21,7 +23,7 @@ int main(int argc,char **argv)
         strcpy(s->name,i?"16BIT TONE":"24BIT LOW BITS");
         for(j=0;j<256;++j)pcm[i][j]=i?((int32_t)(j%64)-32)*512+11:(int32_t)j+1;
     }
-    for(i=0;i<4;++i) {
+    for(i=0;i<p.channels.count;++i) {
         events[i].kind=PT_NOTE_PERIOD;events[i].pitch=(uint16_t)periods[i];
         events[i].instrument=(uint8_t)(1+i%2);
     }

@@ -14,7 +14,7 @@ software implementation from the remaining integration and hardware gates.
 | Requirement | Implemented software | Still required |
 | --- | --- | --- |
 | Authoritative8/16/24-bit masters | Queried, bounded native Fast-RAM pool; precision-preserving sampler versions, processing, history and source pins. Fast-equipped machines fail rather than spill enhanced allocations into Chip RAM. | Physical memory-pressure/endurance measurements. |
-| Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition and precision-only song playback preserve master precision. | Enhanced multichannel song routing beyond the classic four-channel bridge; physical sound/performance acceptance. |
+| Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition and precision-only song playback preserve master precision. | Mixed-backend song routing beyond the one-to-four-track Paula bridge; physical sound/performance acceptance. |
 | AmiGUS wavetable copies | Versioned evictable resource pool, sampler revision/master-pin bridge, bounded 16-voice lease owner with validated rate/loop/address plans, mono sequencer trigger/control/stop dispatch, preflight-gated master-pinned sequence ownership, editor veto/retry barriers and injected callbacks, 8/16-bit conversion and bounded address allocator/chunk uploader behind an injected register bus; failure/pinning tests. | Verified card capacity, native bus binding and voice dispatcher; explicit wavetable reservation/cache lifetime now implemented and tested with fake callbacks. Injected register tests do not establish real card access. |
 | Direct24-bit Studio | Master-pinned mixer, audited sequence, sampler/editor ownership, bounded queue/pump and integrated PCM-session owner; optional reservation lease retained through reset and adapter quiescence. Up to16 voice slots are a software bound. | Native PLAY/output wiring, verified hardware capabilities and sustainable physical voice-count/timing evidence. |
 | Master-preserving persistence | Bounded enhanced-project/sample saving and explicit classic conversion; private EFx exports/bounce never replace masters. Explicit new-file recovery snapshots and staged identity-checked restoration preserve all master precision. | Native opt-in configuration, idle scheduling, bounded retention, read-only discovery, explicit recovery UI and exact save are implemented and emulator-tested; preferences-panel controls, real crash/endurance and physical acceptance remain. |
@@ -2769,3 +2769,29 @@ run `paula-highres-ui-1790559767477699000`. Both normal exits, exact temporary
 settings restoration, independent cleanup and explicit release passed. An earlier
 UI runner queried DMA before acknowledging Stop; that failed run is retained
 separately and the corrected runner waits for a fresh stopped application frame.
+
+## One-to-three-track Paula song views
+
+The native Paula bridge now pads1/2/3-track projects into private four-track
+replay rows. The project retains its original track count, packed event layout
+and sample masters; enhanced saving is unchanged. Padding uses the bounded
+Fast-RAM workspace owner and is released after replay stops. Padding allocation
+or preflight failure leaves existing playback intact; failures after replacement
+starts use full-stop cleanup. A track-count change stops playback
+and requires restart; pattern/control sync reuses the same private workspace.
+
+Unused tracks become silent default Paula slots in the private view, including
+clearing inactive saved MIDI endpoints there only. No active AmiGUS/MIDI route
+is discarded: unsupported active backends remain refused. Physical voice masks
+use the original active track count. Classic four-track projects need no padding
+allocation. Native cumulative shared030 tests pass allthree counts, Fast placement,
+unused-voice silence, future-row edits, count-change stopping, exact source save
+and final allocation/cache release. CIAA fallback remains not run while owned
+by Workbench. See `evidence/enhanced-editor/paula-short-song/`.
+
+The263252-byte native editor also passes a three-track16/24-bit shared030 UI
+workflow: onlythree DMA voices active, low-bit sample edit stops, undo, pattern
+restart, exact save/reopen/play/second save. Native guest bitmap confirms the
+classic layout and empty fourth column. Both normal exits, fiveENV exact restore,
+independent cleanup and explicit release passed. Evidence is under
+`paula-short-song/ui/`; this remains emulator-only acceptance.

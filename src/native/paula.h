@@ -18,6 +18,8 @@ struct pt_paula {
     uint64_t cache_version;
     struct pt_master_memory memory;
     size_t source_bytes;
+    struct pt_event *padded_events;
+    unsigned source_channels;
     uint32_t cached_instruments;
     size_t bytes,pattern_bytes;
     uint16_t order_count,orders[PT_PROJECT_ORDERS];

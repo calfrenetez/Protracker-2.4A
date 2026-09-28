@@ -1,0 +1,7 @@
+PAULA PLAYBACK PREFLIGHT PASS: private metadata, optional8-bit playback copies, unchanged16/24-bit masters, explicit unavailable routes
+.PAULA SYNC PASS: bounded prefix, full-export parity, sample/header refusal, split blocks, guards and unchanged masters
+..
+----------------------------------------------------------------------
+Ran 3 tests in 3.923s
+
+OK

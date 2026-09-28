@@ -139,6 +139,37 @@ int main(int argc,char **argv)
         free(enhanced_before);free(enhanced_after);enhanced_before=enhanced_after=NULL;
     }
     puts("HIGHRES SONG PASS: 16/24-bit masters, rounded private8-bit Chip playback, unused cache omitted, stop/rebuild, restart refill and byte-exact enhanced save");
+    /* Unused enhanced masters are absent from both Fast staging and Chip
+       caches. Newly referenced unsupported masters still stop/refuse safely. */
+    {struct pt_project q=doc.project;struct pt_sample slots[255];
+        struct pt_event events[256];int32_t stereo[8]={1,2,3,4,5,6,7,8};
+        size_t n,bytes;unsigned j;
+        memcpy(events,q.events,sizeof(events));q.events=events;
+        for(j=0;j<255;++j)slots[j]=q.samples[0];
+        q.samples=slots;q.sample_count=255;q.extensions=NULL;q.extension_count=0;
+        slots[30].pcm.data=stereo;slots[30].pcm.capacity=8;slots[30].pcm.frames=4;
+        slots[30].pcm.bits=24;slots[30].pcm.channels=2;slots[30].pcm.rate=48000;
+        slots[30].loop=PT_LOOP_NONE;slots[30].loop_start=slots[30].loop_end=0;
+        slots[254]=slots[30];
+        CHECK(pt_project_size(&q,&bytes)==PT_PROJECT_OK);
+        enhanced_before=malloc(bytes);enhanced_after=malloc(bytes);CHECK(enhanced_before && enhanced_after);
+        CHECK(pt_project_encode(&q,enhanced_before,bytes,&n)==PT_PROJECT_OK && n==bytes);
+        CHECK(!pt_paula_play(&a,&q,0,0,0));Delay(10);pt_paula_poll(&a,&state);
+        CHECK(state.active && state.period[0]==428);
+        CHECK(a.source_bytes==a.bytes+slots[0].pcm.frames && a.cached_instruments==1);
+        events[0].instrument=32;
+        CHECK(pt_paula_play(&a,&q,0,0,0) && a.started);
+        CHECK(pt_paula_sync(&a,&q) && !a.started && !a.memory.used && !a.cache.bytes);
+        events[0].instrument=1;CHECK(!pt_paula_play(&a,&q,0,0,0));
+        events[255].instrument=31; /* instrument-only event also selects a master */
+        CHECK(pt_paula_play(&a,&q,0,0,0) && a.started);
+        CHECK(pt_paula_sync(&a,&q) && !a.started);
+        events[255].instrument=0;
+        CHECK(pt_project_encode(&q,enhanced_after,bytes,&n)==PT_PROJECT_OK && n==bytes);
+        CHECK(!memcmp(enhanced_before,enhanced_after,bytes));
+        free(enhanced_before);free(enhanced_after);enhanced_before=enhanced_after=NULL;
+    }
+    puts("SELECTED MASTERS PASS: 255 stored slots, unused stereo24/48k preserved, only selected Fast/Chip payload, active unsupported refusal, sync release and exact save");
     /* One-to-three-track projects keep their source shape while private
        replay rows pad missing voices with silence. */
     for(i=1;i<4;++i) {
@@ -342,10 +373,10 @@ int main(int argc,char **argv)
     CHECK(doc.project.sample_count==31 && doc.project.samples[0].pcm.frames>0);
     doc.project.samples[30]=doc.project.samples[0];
     CHECK(!pt_paula_play(&a,&doc.project,0,0,0));
-    CHECK(a.source_bytes>=a.bytes+doc.project.samples[30].pcm.frames);
+    CHECK(a.source_bytes==a.bytes+doc.project.samples[0].pcm.frames);
     CHECK(TypeOfMem(a.silence)&MEMF_CHIP);
     for(i=0;i<31;++i)if(a.sample_bytes[i])CHECK(TypeOfMem(a.sample_data[i])&MEMF_CHIP);
-    CHECK(a.chip_bytes+ a.bytes<=a.source_bytes-doc.project.samples[30].pcm.frames+2);
+    CHECK(a.chip_bytes+a.bytes==a.source_bytes+2);
     if(AvailMem(MEMF_FAST|MEMF_TOTAL)) {CHECK(TypeOfMem(a.staging)&MEMF_FAST);CHECK(TypeOfMem(a.data)&MEMF_FAST);}
     CHECK(!(a.cached_instruments&(1UL<<30)));
     doc.project.events[0].instrument=31;

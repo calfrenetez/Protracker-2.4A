@@ -64,18 +64,18 @@ static void halt(struct pt_paula *a,int retain)
 void pt_paula_stop(struct pt_paula *a) {halt(a,0);}
 const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned mode,unsigned position,unsigned pattern)
 {
-    struct pt_project playback;struct pt_mod_export_report report;struct pt_paula_cache_plan plan;size_t written,offset;unsigned i;UBYTE channels=15;
+    struct pt_project selected,playback;struct pt_paula_samples samples;struct pt_mod_export_report report;struct pt_paula_cache_plan plan;size_t written,offset;unsigned i;UBYTE channels=15;
     struct pt_master_memory prepared_memory;struct pt_event *padded=NULL;size_t event_count=0;
     const char *error="PLAY: OUT OF CHIP MEMORY";
     if(!p || mode>1 || position>=p->order_count || pattern>=p->pattern_count)return "PLAY: INVALID POSITION";
+    error=pt_paula_playback_samples(p,&selected,&samples);if(error)return error;
     if(p->channels.count<4) {
-        if(pt_project_validate(p,NULL)!=PT_PROJECT_OK)return "PLAY: INVALID PROJECT";
         event_count=(size_t)p->pattern_count*PT_PROJECT_ROWS*4;
         pt_master_memory_init(&prepared_memory);
         padded=pt_master_allocate(&prepared_memory,event_count*sizeof(*padded));
         if(!padded)return "PLAY: OUT OF REPLAY WORKSPACE MEMORY";
     }
-    error=pt_paula_playback_prepare(p,&playback,&report,padded,event_count);
+    error=pt_paula_playback_prepare(&selected,&playback,&report,padded,event_count);
     if(error) {pt_master_release(&prepared_memory,padded);return error;}
     halt(a,1);
     if(padded)a->memory=prepared_memory;else pt_master_memory_init(&a->memory);
@@ -162,13 +162,14 @@ failed:
 }
 const char *pt_paula_sync(struct pt_paula *a,const struct pt_project *p)
 {
-    struct pt_project playback;struct pt_mod_export_report report;size_t offset;
+    struct pt_project selected,playback;struct pt_paula_samples samples;struct pt_mod_export_report report;size_t offset;
     if(!a->started)return NULL;
     if(!p || !p->orders || p->order_count!=a->order_count || memcmp(p->orders,a->orders,p->order_count*sizeof(*p->orders))) {
         pt_paula_stop(a);return "STOPPED: SONG POSITIONS CHANGED - PRESS PLAY TO RESTART";
     }
     if(p->channels.count!=a->source_channels ||
-       pt_paula_playback_prepare(p,&playback,&report,a->padded_events,a->pattern_bytes/4) || report.bytes!=a->source_bytes ||
+       pt_paula_playback_samples(p,&selected,&samples) ||
+       pt_paula_playback_prepare(&selected,&playback,&report,a->padded_events,a->pattern_bytes/4) || report.bytes!=a->source_bytes ||
        (size_t)p->pattern_count*1024!=a->pattern_bytes) {
         pt_paula_stop(a);return "STOPPED: EDIT REQUIRES ENHANCED REPLAY BACKEND";
     }

@@ -81,7 +81,8 @@ def main():
             assert (run/'setup-done').exists()
             for i,value in enumerate(settings.values()):assert (run/('active-'+str(i))).read_bytes()==value.encode()
             records=sample_records(original)
-            assert len(records)==2 and [r[40] for r in records]==[24,16]
+            assert len(records) in (2,255) and [r[40] for r in records[:2]]==[24,16]
+            result['stored_samples']=len(records)
             assert original[32:36]==b'HEAD' and original[76]==args.channels
             launch('editor','PT24GEdit source.ptg saved.ptg')
             wait(lambda:'status=READY -' in text('editor.log'))

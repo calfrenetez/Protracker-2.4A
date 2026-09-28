@@ -1,0 +1,15 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "Screenshot saved: /var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/amiga_screenshot_tuppx1hy.ppm (640x512, 4 planes, 2048 rows received)",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": {
+    "result": "Screenshot saved: /var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/amiga_screenshot_tuppx1hy.ppm (640x512, 4 planes, 2048 rows received)"
+  },
+  "isError": false
+}

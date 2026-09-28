@@ -5,14 +5,15 @@
 #include "mod_project.h"
 int main(int argc,char **argv)
 {
-    struct pt_project p={0};struct pt_sample samples[2]={{0}};
+    struct pt_project p={0};struct pt_sample samples[255]={{0}};
     struct pt_event events[256]={{0}};int32_t pcm[2][256];uint16_t order=0;
     const unsigned periods[4]={428,339,285,214};
     size_t n,w;unsigned i,j;uint8_t *bytes;FILE *f;int ok;
-    if(argc!=2 && argc!=3)return 2;
-    if(argc==3 && (argv[2][0]<'1' || argv[2][0]>'4' || argv[2][1]))return 2;
+    if(argc<2 || argc>4)return 2;
+    if(argc==4 && strcmp(argv[3],"unused"))return 2;
+    if(argc>=3 && (argv[2][0]<'1' || argv[2][0]>'4' || argv[2][1]))return 2;
     pt_channels_init(&p.channels);p.speed=6;p.bpm=125;
-    if(argc==3)p.channels.count=(uint8_t)(argv[2][0]-'0');
+    if(argc>=3)p.channels.count=(uint8_t)(argv[2][0]-'0');
     p.order_count=p.pattern_count=1;p.sample_count=2;
     p.orders=&order;p.events=events;p.samples=samples;strcpy(p.title,"PAULA MASTER TEST");
     for(i=0;i<2;++i) {
@@ -22,6 +23,15 @@ int main(int argc,char **argv)
         s->pcm.channels=1;s->pcm.bits=i?16:24;s->pcm.data=pcm[i];
         strcpy(s->name,i?"16BIT TONE":"24BIT LOW BITS");
         for(j=0;j<256;++j)pcm[i][j]=i?((int32_t)(j%64)-32)*512+11:(int32_t)j+1;
+    }
+    if(argc==4) {
+        p.sample_count=255;
+        for(i=2;i<255;++i) {
+            samples[i]=samples[0];samples[i].loop=PT_LOOP_NONE;
+            samples[i].loop_start=samples[i].loop_end=0;
+            samples[i].pcm.channels=2;samples[i].pcm.frames=128;
+            samples[i].pcm.rate=48000;strcpy(samples[i].name,"UNUSED STEREO24 48K");
+        }
     }
     for(i=0;i<p.channels.count;++i) {
         events[i].kind=PT_NOTE_PERIOD;events[i].pitch=(uint16_t)periods[i];

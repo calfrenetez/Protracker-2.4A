@@ -14,7 +14,7 @@ software implementation from the remaining integration and hardware gates.
 | Requirement | Implemented software | Still required |
 | --- | --- | --- |
 | Authoritative8/16/24-bit masters | Queried, bounded native Fast-RAM pool; precision-preserving sampler versions, processing, history and source pins. Fast-equipped machines fail rather than spill enhanced allocations into Chip RAM. | Physical memory-pressure/endurance measurements. |
-| Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition and precision-only song playback preserve master precision. | Mixed-backend song routing beyond the one-to-four-track Paula bridge; physical sound/performance acceptance. |
+| Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition and one-to-four-track song playback preserve master precision; song preparation excludes unreferenced masters from both Fast staging and Chip caches. | Mixed-backend song routing beyond the one-to-four-track Paula bridge; physical sound/performance acceptance. |
 | AmiGUS wavetable copies | Versioned evictable resource pool, sampler revision/master-pin bridge, bounded 16-voice lease owner with validated rate/loop/address plans, mono sequencer trigger/control/stop dispatch, preflight-gated master-pinned sequence ownership, editor veto/retry barriers and injected callbacks, 8/16-bit conversion and bounded address allocator/chunk uploader behind an injected register bus; failure/pinning tests. | Verified card capacity, native bus binding and voice dispatcher; explicit wavetable reservation/cache lifetime now implemented and tested with fake callbacks. Injected register tests do not establish real card access. |
 | Direct24-bit Studio | Master-pinned mixer, audited sequence, sampler/editor ownership, bounded queue/pump and integrated PCM-session owner; optional reservation lease retained through reset and adapter quiescence. Up to16 voice slots are a software bound. | Native PLAY/output wiring, verified hardware capabilities and sustainable physical voice-count/timing evidence. |
 | Master-preserving persistence | Bounded enhanced-project/sample saving and explicit classic conversion; private EFx exports/bounce never replace masters. Explicit new-file recovery snapshots and staged identity-checked restoration preserve all master precision. | Native opt-in configuration, idle scheduling, bounded retention, read-only discovery, explicit recovery UI and exact save are implemented and emulator-tested; preferences-panel controls, real crash/endurance and physical acceptance remain. |
@@ -2795,3 +2795,36 @@ restart, exact save/reopen/play/second save. Native guest bitmap confirms the
 classic layout and empty fourth column. Both normal exits, fiveENV exact restore,
 independent cleanup and explicit release passed. Evidence is under
 `paula-short-song/ui/`; this remains emulator-only acceptance.
+
+## Selective Paula song preparation — 28 September 2026
+
+Native song start and live comparison now build a fixed-size private sample view
+before export. All stored patterns are scanned, including instrument-only events
+and patterns outside the order list. Referenced sample numbers1–31 retain their
+original identities. Unreferenced descriptors and preserved sample headers become
+safe empty entries only in that view; their PCM is omitted from both immutable
+Fast staging and optional Chip playback caches. Projects can therefore store up
+to255 masters, including unused stereo24-bit/48kHz masters, without those unused
+samples blocking an otherwise compatible Paula song. All source masters, slot
+numbers and enhanced save bytes remain unchanged.
+
+This does not remap referenced slots32–255: they are explicitly refused. Referenced
+stereo, nonclassic rates, slices and unsupported loops/routes still require their
+appropriate backend. The entire source remains validated, and unsafe preserved
+one-word DMA loop metadata remains refused even when its sample is unused.
+Unknown optional extensions are not silently discarded. One-to-three-track
+padding continues to use bounded Fast workspace; four-track songs need none.
+
+A refused start preserves the existing replay. A newly referenced unsupported
+sample stops live sync and releases ownership before restart. Supported changes
+to the working set likewise require a stopped rebuild. The editor's sample
+revision barrier remains conservative and stops even for an unused master edit;
+the lower-level sync comparison checks the derived selected representation.
+
+Host sanitizer checks and cumulative native shared030 execution pass. Full editor
+UI qualification also passes with a3-track255-master fixture: playback, low-bit
+edit-stop, exactundo, restart, byte-exactsave/reopen/play/second save. Classic
+layout inspected, bothnormal exits and allfive temporarysettings restored. Owned
+run/launcher cleanup independently verified before explicitrelease. Candidate
+263848 bytes SHA256`db6c7145f3b6ed1785b4f200bf7c598631ec1362c4899e0c5d0276f23231f510`.
+See `evidence/enhanced-editor/paula-selected-samples/`. Physical remains untested.

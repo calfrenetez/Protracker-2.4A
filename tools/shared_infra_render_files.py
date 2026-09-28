@@ -241,6 +241,27 @@ def main():
                           command+' >test.log','Echo $RC >test.rc',command+' >repeat.log','Echo $RC >repeat.rc']
             # Release the guest current-directory lock before host cleanup.
             commands+=['FailAt 1','CD RAM:','Echo done >'+guest.device+run.name+'/done']
+            if args.recovery_file:
+                # The functional test may start only after the separate negative
+                # probe has exited normally and returned every owned allocation.
+                probe=['FailAt 21','Stack 65536','CD '+directory,
+                       'PTExecRecoveryTest --failure-cleanup >failure.log','Echo $RC >failure.rc',
+                       'FailAt 1','CD RAM:','Echo done >'+guest.device+run.name+'/probe-done']
+                require_running_guest(guest,out,'before-probe')
+                guest.launch.write_text('\n'.join(probe)+'\n');guest.start()
+                deadline=time.monotonic()+20
+                while not (run/'probe-done').exists():
+                    if time.monotonic()>deadline:raise RuntimeError('Cleanup probe timed out; functional test not started')
+                    time.sleep(.1)
+                failure=(run/'recovery/failure.log').read_text()
+                (out/'intentional-failure.log').write_text(failure)
+                rc=(run/'recovery/failure.rc').read_text().strip()
+                if rc!='20' or 'intentional cleanup probe' not in failure or 'EXEC MEMORY FAILURE CLEANUP: zero owned bytes' not in failure:
+                    raise RuntimeError('Cleanup probe failed; functional test not started')
+                result['failure_cleanup_verified_before_functional_launch']=True
+                state=guest.command('GET_AUDIO_STATE')
+                if not all('ch%d_dma=0'%i in state.split('\t') for i in range(4)):
+                    raise RuntimeError('Cleanup probe left active or unknown DMA; functional test not started')
             require_running_guest(guest,out,'before-launch')
             guest.launch.write_text('\n'.join(commands)+'\n');guest.start()
             # The cumulative editor-wavetable fixture includes native timer and
@@ -263,7 +284,12 @@ def main():
             if args.recovery_file:
                 sub=run/'recovery';expected=(ROOT/'tests/fixtures/project-v1/mixed.ptg').read_bytes()
                 assert (sub/'source.ptg').read_bytes()==expected
-                assert sorted(p.name for p in sub.iterdir())==['PTExecRecoveryTest','source.ptg','test.log','test.rc']
+                assert sorted(p.name for p in sub.iterdir())==['PTExecRecoveryTest','failure.log','failure.rc','source.ptg','test.log','test.rc']
+                failure=(sub/'failure.log').read_text();failure_rc=(sub/'failure.rc').read_text().strip()
+                (out/'intentional-failure.log').write_text(failure)
+                assert failure_rc=='20' and 'intentional cleanup probe' in failure and 'EXEC MEMORY FAILURE CLEANUP: zero owned bytes' in failure
+                result['intentional_failure_returncode']=failure_rc
+                result['failure_cleanup_verified']=True
                 result['source_unchanged']=True
                 result['fixture_sha256']=hashlib.sha256(expected).hexdigest()
             if args.project_import:

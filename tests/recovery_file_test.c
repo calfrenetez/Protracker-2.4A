@@ -3,6 +3,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#ifdef PT_RECOVERY_NATIVE
+#undef assert
+#define assert(c) ((c)?(void)0:recovery_failure(#c,__FILE__,__LINE__))
+#endif
 #include "../src/platform/recovery_file.h"
 #include "recovery_schedule_cases.h"
 static size_t live,calls,fail;
@@ -20,6 +24,9 @@ static void exact(const struct pt_project *p,const uint8_t *original,size_t n)
 {size_t size;uint8_t *b=encoded(p,&size);assert(size==n && !memcmp(b,original,n));free(b);}
 #include "recovery_store_cases.h"
 #include "recovery_find_cases.h"
+#ifdef PT_RECOVERY_NATIVE
+#include "native_recovery_cases.h"
+#endif
 static int recovery_fixture(int argc,char **argv)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_document d,recovered,raw;
@@ -113,6 +120,9 @@ static int recovery_fixture(int argc,char **argv)
     exact(&recovered.project,original,n);assert(unlink(path)==0);
     recovery_store_cases(argv[2],&d.project,info,&a);
     recovery_find_cases(argv[2],&d.project,info,&a);
+#ifdef PT_RECOVERY_NATIVE
+    native_recovery_cases(argv[2],argv[1],&d.project,&a);
+#endif
     pt_document_release(&d);pt_document_release(&recovered);
     free(original);free(snapshot);assert(!live);
     puts("RECOVERY FILE PASS: full-precision project identity, new-file-only snapshot, bounded allocation failures, corrupt/mismatched metadata preserves open song, explicit dirty restoration");

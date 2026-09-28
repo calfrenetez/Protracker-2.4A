@@ -1,0 +1,15 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "Process  1: stk 16384, gv 150, pri   0 Loaded as command: Status\nProcess  2: stk 65536, gv 150, pri   0 Loaded as command: Dev:AmigaBridge/amiga-bridge\nProcess  3: stk  4096, gv 150, pri  20 Loaded as command: C:TankMouse.driver\nProcess  4: stk  8000, gv 150, pri   1 Loaded as command: Workbench",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": {
+    "result": "Process  1: stk 16384, gv 150, pri   0 Loaded as command: Status\nProcess  2: stk 65536, gv 150, pri   0 Loaded as command: Dev:AmigaBridge/amiga-bridge\nProcess  3: stk  4096, gv 150, pri  20 Loaded as command: C:TankMouse.driver\nProcess  4: stk  8000, gv 150, pri   1 Loaded as command: Workbench"
+  },
+  "isError": false
+}

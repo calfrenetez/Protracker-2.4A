@@ -1,0 +1,15 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "Directory: Dev:Tests/render-files-1790553901251866000/recovery (4 entries)\n  DIR  ptg-30b4a627fd0ed76e-6ab9bd66-00        -  \n  FILE source.ptg                        26416  \n  FILE test.log                            229  \n  FILE PTExecRecoveryTest                96076  ",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": {
+    "result": "Directory: Dev:Tests/render-files-1790553901251866000/recovery (4 entries)\n  DIR  ptg-30b4a627fd0ed76e-6ab9bd66-00        -  \n  FILE source.ptg                        26416  \n  FILE test.log                            229  \n  FILE PTExecRecoveryTest                96076  "
+  },
+  "isError": false
+}

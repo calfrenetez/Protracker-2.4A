@@ -1,0 +1,13 @@
+{
+  "GET_STATUS": "OK\tPaused=false\tConfig=autosave",
+  "GET_AUDIO_STATE": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=750\tsndbuf_status=0",
+  "files": [
+    "recovery",
+    "recovery/source.ptg",
+    "recovery/test.log",
+    "recovery/ptg-30b4a627fd0ed76e-6ab9bd66-00",
+    "recovery/PTExecRecoveryTest",
+    "recovery/ptg-30b4a627fd0ed76e-6ab9bd66-00/0.ptg"
+  ],
+  "recovery/test.log": "assertion \"pt_native_recovery_find(&r,&candidate)==PT_RECOVERY_FOUND\" failed: file \"tests/native_recovery_cases.h\", line 45, function: native_recovery_cases\nProgram aborted\nEXEC MEMORY pool_limit=131210224 reserve=262144 flags=4\n"
+}

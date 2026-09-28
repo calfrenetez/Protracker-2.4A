@@ -1,0 +1,15 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "Directory \"Dev:Tests/render-files-1790553901251866000/recovery\" on Monday 28-Sep-26\nptg-30b4a627fd0ed76e-6ab9bd66-00        Dir ----rwed Today     01:06:06\nsource.ptg                    26416 ----rwed Today     01:05:01\ntest.log                        229 ----rwed Today     01:06:01\nPTExecRecoveryTest            96076 ----rwed Today     01:05:01\n3 files - 119K bytes - 1 directory - 246 blocks used",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": {
+    "result": "Directory \"Dev:Tests/render-files-1790553901251866000/recovery\" on Monday 28-Sep-26\nptg-30b4a627fd0ed76e-6ab9bd66-00        Dir ----rwed Today     01:06:06\nsource.ptg                    26416 ----rwed Today     01:05:01\ntest.log                        229 ----rwed Today     01:06:01\nPTExecRecoveryTest            96076 ----rwed Today     01:05:01\n3 files - 119K bytes - 1 directory - 246 blocks used"
+  },
+  "isError": false
+}

@@ -1,0 +1,12 @@
+{
+  "passed": false,
+  "scope": "shared030 recovery offer, decline, restore, idle autosave and exact master save; no physical acceptance",
+  "editor_sha256": "ac78da19557826caa2d5a3e695f2f311eb372a82f371805230f33f5f231265d4",
+  "seed_sha256": "51b577c8220c09a414abb564b9645759b4ce9e51c7c5f8c24eb445a32ab81067",
+  "source_sha256": "e373b2abdfd931d86727672ce31a8fea890edcdb53b254a93b8b03b7a7b6a831",
+  "decline_preserved_project_and_copy": true,
+  "error": "Recovery UI deadline; preserve evidence and owned state",
+  "environment_restored": true,
+  "run_files_cleaned": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0"
+}

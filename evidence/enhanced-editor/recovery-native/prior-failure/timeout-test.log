@@ -1,0 +1,3 @@
+assertion "pt_native_recovery_find(&r,&candidate)==PT_RECOVERY_FOUND" failed: file "tests/native_recovery_cases.h", line 45, function: native_recovery_cases
+Program aborted
+EXEC MEMORY pool_limit=131210224 reserve=262144 flags=4

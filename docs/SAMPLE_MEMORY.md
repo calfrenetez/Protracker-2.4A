@@ -5,7 +5,7 @@ The enhanced project owns the authoritative sample, including its declared
 elements in the declared precision; 24-bit samples retain their low eight bits.
 Playback representations must never become the project's source of truth.
 
-## Current implementation status — 27 September 2026
+## Current implementation status — 28 September 2026
 
 The sections below retain milestone history. Earlier statements such as “not yet
 wired” may be superseded by later sections; this table separates the present
@@ -17,7 +17,7 @@ software implementation from the remaining integration and hardware gates.
 | Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition preserves master precision. | Enhanced multichannel song routing beyond the classic four-channel bridge; physical sound/performance acceptance. |
 | AmiGUS wavetable copies | Versioned evictable resource pool, sampler revision/master-pin bridge, bounded 16-voice lease owner with validated rate/loop/address plans, mono sequencer trigger/control/stop dispatch, preflight-gated master-pinned sequence ownership, editor veto/retry barriers and injected callbacks, 8/16-bit conversion and bounded address allocator/chunk uploader behind an injected register bus; failure/pinning tests. | Verified card capacity, native bus binding and voice dispatcher; explicit wavetable reservation/cache lifetime now implemented and tested with fake callbacks. Injected register tests do not establish real card access. |
 | Direct24-bit Studio | Master-pinned mixer, audited sequence, sampler/editor ownership, bounded queue/pump and integrated PCM-session owner; optional reservation lease retained through reset and adapter quiescence. Up to16 voice slots are a software bound. | Native PLAY/output wiring, verified hardware capabilities and sustainable physical voice-count/timing evidence. |
-| Master-preserving persistence | Bounded enhanced-project/sample saving and explicit classic conversion; private EFx exports/bounce never replace masters. Explicit new-file recovery snapshots and staged identity-checked restoration preserve all master precision. | Recovery scheduling policy, bounded retention, read-only discovery and selected restoration are implemented; native scheduling/configuration/recovery UI integration remains; broader workflow/release and physical acceptance beyond the retained fixtures. |
+| Master-preserving persistence | Bounded enhanced-project/sample saving and explicit classic conversion; private EFx exports/bounce never replace masters. Explicit new-file recovery snapshots and staged identity-checked restoration preserve all master precision. | Native opt-in configuration, idle scheduling, bounded retention, read-only discovery, explicit recovery UI and exact save are implemented and emulator-tested; preferences-panel controls, real crash/endurance and physical acceptance remain. |
 | Playback invalidation | Revision/settings keys, retired active leases and stop-before-edit/undo/dispose guards. Private EFx banks are discarded on stop and rebuilt on restart. | End-to-end real AmiGUS voice/transfer ownership, once the device adapter exists. |
 
 AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software
@@ -2614,3 +2614,61 @@ its own13 focused host checks and seven-case native fixture; it is not included
 in the older full-build snapshot. Evidence:
 `evidence/enhanced-editor/complete-regression-20260928/`. Physical/device-output
 acceptance remains separate.
+
+
+## Native crash-recovery integration
+
+The native editor now uses the bounded recovery store and scheduler. Configuration
+is opt-in through these Amiga global environment variables, read at startup:
+
+| Setting | Accepted value |
+| --- | --- |
+| `PT24G_RECOVERY_DIR` | Existing recovery directory; canonicalized through AmigaDOS. |
+| `PT24G_RECOVERY_MEDIA` | `fixed` or `removable`; explicit user classification, not automatic hardware detection. |
+| `PT24G_RECOVERY_SECONDS` | 30 through 86400; default 300. Zero disables recovery. |
+| `PT24G_RECOVERY_REMOVABLE` | Must be `1` in addition to media classification to permit removable-media writes. |
+
+Missing/unknown media, invalid paths/intervals and unapproved removable storage
+leave automatic writing disabled. No preferences panel is provided yet. The app
+reads these values; it does not modify them. A safe fixed-volume configuration can
+use a dedicated existing directory, avoiding repeated floppy writes.
+
+Snapshots run only while the native audio device is closed and sequenced playback
+is inactive. An unchanged successful revision is not repeatedly written; ordinary
+interval/backoff and clean/undo behavior use the previously tested scheduler.
+The native adapter canonicalizes source paths and uses stable source identity.
+AmigaDOS FileInfoBlock buffers are explicitly longword aligned. Session directory
+names fit 29 characters, and read-only startup/load discovery inspects at most 128
+root entries; an incomplete scan reports failure rather than selecting silently.
+
+A matching newer valid snapshot prompts Recover or Keep current. Recovery loads
+into a staged document and editor before replacing the open song, preserves all
+master precision, strips recovery-only metadata and marks the result unsaved.
+Save writes a new verified project; it never overwrites the original source as a
+recovery mechanism. Save/new/load/confirmed quit discard only snapshots owned by
+the current live session. Previously abandoned crash directories remain untouched;
+they are never silently adopted or deleted. An older source reopened later may
+therefore offer its retained recovery copy again. Failed cleanup disables further
+writes instead of repeatedly attempting them every editor tick.
+
+`evidence/enhanced-editor/recovery-native/` records native configuration/traversal,
+365 Fast allocations returned to zero, clean-state discard and later undo resnapshot.
+The fixture's intentional assertion probe now exits normally and frees its tracked
+Exec blocks before the functional run is allowed to start. This covers the fixture's
+tracked allocations, not arbitrary corrupted-program recovery.
+`evidence/enhanced-editor/recovery-ui/` records visible decline/recover choices,
+real 30-second idle autosave, exact restored project save, unchanged original master
+records and normal editor exit. Five temporary test settings were restored exactly,
+and each guest window was independently checked and released. The seed helper
+created recovery state without crashing the machine. Actual crash/reset endurance,
+physical storage failure/performance and real AmiGUS hardware remain separate gates.
+
+The final native recovery editor candidate is 262480 bytes, SHA256
+`01641ef5e61d469004cafd772985c333b90772eae5ffe605dbb31a961c06a166`.
+Its final shared030 run is recorded in `recovery-ui/final-candidate/`. Amiberry IPC
+captures can be black while the guest requester is visible; fresh AmigaBridge
+bitmaps were inspected before both final requester inputs. The final status text
+fits the existing field. The complete host run passed 200 checks; two helpers
+failed in a non-repository export and passed their corrected-environment reruns,
+giving passing results for all 202 checks without claiming the initial invocation
+was wholly successful.

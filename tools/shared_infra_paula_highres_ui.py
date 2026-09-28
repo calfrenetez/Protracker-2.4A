@@ -8,12 +8,19 @@ ROOT=Path(__file__).resolve().parents[1]
 INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('candidate',type=Path);parser.add_argument('fixture',type=Path);parser.add_argument('--channels',type=int,choices=range(1,5),default=4);parser.add_argument('--functional-only',action='store_true',help='Separate functional UI scope; no capture attempts or visual acceptance');args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('candidate',type=Path);parser.add_argument('fixture',type=Path)
+    parser.add_argument('--channels',type=int,choices=range(1,5),default=4)
+    capture=parser.add_mutually_exclusive_group()
+    capture.add_argument('--functional-only',action='store_true',help='Separate functional UI scope; no capture attempts or visual acceptance')
+    capture.add_argument('--stopped-capture',action='store_true',help='Capture only after confirmed Stop; does not qualify capture during playback')
+    args=parser.parse_args()
     manifest=json.loads((args.candidate.parent/'core-build.json').read_text())
     assert digest(args.candidate)==manifest['binaries']['PT24GEdit']['sha256']
     sys.path.insert(0,str(INFRA/'scripts'));from shared_guest import Guest
     out=ROOT/'build/dev'/('paula-highres-ui-'+str(time.time_ns()));out.mkdir()
     result={'passed':False,'scope':'shared030 high-resolution Paula play/edit/undo/save/reopen; no physical acceptance','functional_only':args.functional_only,'capture_status':'NOT TESTED - functional-only scope' if args.functional_only else 'PENDING'}
+    result['capture_stage']='none' if args.functional_only else 'stopped' if args.stopped_capture else 'playing'
     workflow_seconds=120 if args.functional_only else 180
     with (INFRA/'runtime/test.lock').open('a') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);guest=Guest(INFRA,out);run=prepare_run(guest,out)
@@ -107,7 +114,8 @@ def main():
                 return state
             key(0x57)
             wait(lambda:'EDITOR REPLAY active=1' in text('editor.log') and periods in text('editor.log'))
-            result['playing_audio']=audio(1);guest_capture('playing')
+            result['playing_audio']=audio(1)
+            if not args.stopped_capture:guest_capture('playing')
             # Reverse only sub8-bit values. Derived bytes are unchanged, but the
             # editor sample generation must still stop and invalidate playback.
             key(0x28,True);frame('panel=5')
@@ -120,7 +128,9 @@ def main():
             result['restart_audio']=audio(1)
             key(0x21,True);wait(lambda:'EDITOR SAVE result=0 dirty=0' in text('editor.log'))
             assert (run/'saved.ptg').read_bytes()==original
-            stop_editor('editor');quit_editor('editor')
+            stop_editor('editor')
+            if args.stopped_capture:guest_capture('stopped')
+            quit_editor('editor')
             launch('reopened','PT24GEdit saved.ptg reopened.ptg')
             wait(lambda:'status=READY -' in text('reopened.log'))
             key(0x57);wait(lambda:'EDITOR REPLAY active=1' in text('reopened.log') and periods in text('reopened.log'))
@@ -128,7 +138,11 @@ def main():
             wait(lambda:'EDITOR SAVE result=0 dirty=0' in text('reopened.log'))
             assert (run/'reopened.ptg').read_bytes()==original
             assert (run/'source.ptg').read_bytes()==original
-            guest_capture('reopened');stop_editor('reopened');quit_editor('reopened')
+            if not args.stopped_capture:guest_capture('reopened')
+            stop_editor('reopened')
+            if args.stopped_capture:guest_capture('reopened-stopped')
+            quit_editor('reopened')
+            if not args.functional_only:result['capture_status']='COMPLETE - '+result['capture_stage']
             result.update(low_bit_sample_revision_stops=True,undo_exact=True,save_exact=True,reopen_exact=True,source_unchanged=True,normal_exit=True)
             execute('restore-env');environment=False;finished=True;result['passed']=True
         except Exception as error:

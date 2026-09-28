@@ -1,0 +1,15 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "[OK]\nENV:PT24G_RECENT_PREFIX  Deleted\nENV:PT24G_RECOVERY_DIR  Deleted\nENV:PT24G_RECOVERY_MEDIA  Deleted\nENV:PT24G_RECOVERY_SECONDS  Deleted\nENV:PT24G_RECOVERY_REMOVABLE  Deleted",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": {
+    "result": "[OK]\nENV:PT24G_RECENT_PREFIX  Deleted\nENV:PT24G_RECOVERY_DIR  Deleted\nENV:PT24G_RECOVERY_MEDIA  Deleted\nENV:PT24G_RECOVERY_SECONDS  Deleted\nENV:PT24G_RECOVERY_REMOVABLE  Deleted"
+  },
+  "isError": false
+}

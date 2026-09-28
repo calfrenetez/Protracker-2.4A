@@ -2900,3 +2900,18 @@ save. Both normal exits, fiveENV restore, DMAoff, independent cleanup and explic
 release passed. No screenshot/visual acceptance is claimed, and previous capture
 failures remain unresolved. Native editor265184 bytes SHA256
 `badc183fbecf3111a8f08fc9801a02e923dca7f74dd4e08929b3bf1cc51c9969`.
+
+## Stopped-state visual qualification
+
+A separate runner option now captures only after a fresh STOPPED - AUDIO RELEASED
+frame and allfour DMA channels off. The odd two-master editor and the exact older
+255-master mapped candidate both pass complete640x512/four-plane/2048-row captures
+before and after reopening, each in about6seconds. Allfour bitmaps retain the
+accepted classic layout. Functional play/edit-stop/undo/restart/exactsave/reopen
+also passes, with normal exits, exact ENV restoration and independent cleanup.
+
+The mapped comparison uses the same editor and fixture bytes as the earlier
+active-playback capture failures. Those failures remain recorded and unresolved;
+the new stopped-capture workaround is not active-animation, audio-quality or
+performance acceptance. No product/display/shared-bridge changes were needed.
+See `evidence/enhanced-editor/paula-stopped-capture/` for each evidence tier.

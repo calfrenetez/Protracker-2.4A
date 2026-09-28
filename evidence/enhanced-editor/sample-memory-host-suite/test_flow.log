@@ -1,0 +1,7 @@
+FLOW boundaries PASS: atomic init, stop/limit, 1..16 tracks, 128/256 positions, order wrap and ordered globals
+.
+----------------------------------------------------------------------
+Ran 1 test in 2.296s
+
+OK
+FLOW: all 16 native trace fixtures match portable control flow

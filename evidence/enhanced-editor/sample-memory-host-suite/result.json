@@ -1,0 +1,862 @@
+{
+  "source_tree": "c3eb19958c2bbe9fe331ee8874166f038ba7c750",
+  "modules": 168,
+  "completed": 168,
+  "failed": 2,
+  "seconds": 226.747,
+  "results": [
+    {
+      "module": "test_amigus_chain",
+      "returncode": 0,
+      "seconds": 0.71
+    },
+    {
+      "module": "test_amigus_fifo",
+      "returncode": 0,
+      "seconds": 0.661
+    },
+    {
+      "module": "test_amigus_pcm_pack",
+      "returncode": 0,
+      "seconds": 0.529
+    },
+    {
+      "module": "test_amigus_register_port",
+      "returncode": 0,
+      "seconds": 0.556
+    },
+    {
+      "module": "test_amigus_register_session",
+      "returncode": 0,
+      "seconds": 0.767
+    },
+    {
+      "module": "test_amigus_reservation",
+      "returncode": 0,
+      "seconds": 1.501
+    },
+    {
+      "module": "test_amigus_restore",
+      "returncode": 0,
+      "seconds": 0.423
+    },
+    {
+      "module": "test_amigus_sample_ram",
+      "returncode": 0,
+      "seconds": 0.473
+    },
+    {
+      "module": "test_amigus_session",
+      "returncode": 0,
+      "seconds": 0.668
+    },
+    {
+      "module": "test_amigus_voice_plan",
+      "returncode": 0,
+      "seconds": 0.314
+    },
+    {
+      "module": "test_amigus_wavetable_cache",
+      "returncode": 0,
+      "seconds": 0.524
+    },
+    {
+      "module": "test_arpeggio",
+      "returncode": 0,
+      "seconds": 8.375
+    },
+    {
+      "module": "test_baseline_tools",
+      "returncode": 0,
+      "seconds": 0.082
+    },
+    {
+      "module": "test_bounce",
+      "returncode": 0,
+      "seconds": 4.715
+    },
+    {
+      "module": "test_bounce_invert",
+      "returncode": 0,
+      "seconds": 5.067
+    },
+    {
+      "module": "test_channels",
+      "returncode": 0,
+      "seconds": 0.357
+    },
+    {
+      "module": "test_convert_cli",
+      "returncode": 0,
+      "seconds": 7.22
+    },
+    {
+      "module": "test_cut_handoff",
+      "returncode": 0,
+      "seconds": 1.049
+    },
+    {
+      "module": "test_delay_render",
+      "returncode": 0,
+      "seconds": 3.658
+    },
+    {
+      "module": "test_delayed_handoff",
+      "returncode": 0,
+      "seconds": 0.899
+    },
+    {
+      "module": "test_document",
+      "returncode": 0,
+      "seconds": 2.1
+    },
+    {
+      "module": "test_editor",
+      "returncode": 0,
+      "seconds": 7.834
+    },
+    {
+      "module": "test_editor_guard",
+      "returncode": 0,
+      "seconds": 4.666
+    },
+    {
+      "module": "test_editor_invert_reference",
+      "returncode": 1,
+      "seconds": 0.14
+    },
+    {
+      "module": "test_editor_invert_studio",
+      "returncode": 0,
+      "seconds": 7.352
+    },
+    {
+      "module": "test_editor_studio",
+      "returncode": 0,
+      "seconds": 7.462
+    },
+    {
+      "module": "test_editor_wavetable",
+      "returncode": 1,
+      "seconds": 0.149
+    },
+    {
+      "module": "test_emulator_guard",
+      "returncode": 0,
+      "seconds": 0.149
+    },
+    {
+      "module": "test_file_load",
+      "returncode": 0,
+      "seconds": 0.713
+    },
+    {
+      "module": "test_file_save_memory",
+      "returncode": 0,
+      "seconds": 0.863
+    },
+    {
+      "module": "test_filter",
+      "returncode": 0,
+      "seconds": 0.572
+    },
+    {
+      "module": "test_finetune_core",
+      "returncode": 0,
+      "seconds": 0.655
+    },
+    {
+      "module": "test_finetune_native",
+      "returncode": 0,
+      "seconds": 6.614
+    },
+    {
+      "module": "test_flow",
+      "returncode": 0,
+      "seconds": 2.413
+    },
+    {
+      "module": "test_flow_handoff",
+      "returncode": 0,
+      "seconds": 0.997
+    },
+    {
+      "module": "test_flow_trace",
+      "returncode": 0,
+      "seconds": 0.083
+    },
+    {
+      "module": "test_frame_clock",
+      "returncode": 0,
+      "seconds": 0.994
+    },
+    {
+      "module": "test_gliss_core",
+      "returncode": 0,
+      "seconds": 0.708
+    },
+    {
+      "module": "test_gliss_native",
+      "returncode": 0,
+      "seconds": 6.082
+    },
+    {
+      "module": "test_handoff_render",
+      "returncode": 0,
+      "seconds": 0.941
+    },
+    {
+      "module": "test_handoff_trace",
+      "returncode": 0,
+      "seconds": 0.084
+    },
+    {
+      "module": "test_instrument_render",
+      "returncode": 0,
+      "seconds": 6.371
+    },
+    {
+      "module": "test_invert_bank",
+      "returncode": 0,
+      "seconds": 0.437
+    },
+    {
+      "module": "test_invert_four_clock_delay",
+      "returncode": 0,
+      "seconds": 13.512
+    },
+    {
+      "module": "test_invert_handoff_workflows",
+      "returncode": 0,
+      "seconds": 6.389
+    },
+    {
+      "module": "test_invert_loop",
+      "returncode": 0,
+      "seconds": 0.523
+    },
+    {
+      "module": "test_invert_ordering",
+      "returncode": 0,
+      "seconds": 2.887
+    },
+    {
+      "module": "test_invert_pcm",
+      "returncode": 0,
+      "seconds": 0.361
+    },
+    {
+      "module": "test_invert_sequence",
+      "returncode": 0,
+      "seconds": 0.432
+    },
+    {
+      "module": "test_invert_shared_handoff",
+      "returncode": 0,
+      "seconds": 13.553
+    },
+    {
+      "module": "test_invert_trace",
+      "returncode": 0,
+      "seconds": 0.084
+    },
+    {
+      "module": "test_invert_write_events",
+      "returncode": 0,
+      "seconds": 13.974
+    },
+    {
+      "module": "test_jump_handoff",
+      "returncode": 0,
+      "seconds": 0.9
+    },
+    {
+      "module": "test_master_memory",
+      "returncode": 0,
+      "seconds": 0.3
+    },
+    {
+      "module": "test_midi",
+      "returncode": 0,
+      "seconds": 0.654
+    },
+    {
+      "module": "test_mod_import",
+      "returncode": 0,
+      "seconds": 4.144
+    },
+    {
+      "module": "test_mod_inspect",
+      "returncode": 0,
+      "seconds": 0.364
+    },
+    {
+      "module": "test_mod_project",
+      "returncode": 0,
+      "seconds": 1.848
+    },
+    {
+      "module": "test_mod_round8",
+      "returncode": 0,
+      "seconds": 4.385
+    },
+    {
+      "module": "test_mod_stream",
+      "returncode": 0,
+      "seconds": 4.102
+    },
+    {
+      "module": "test_modulation_handoff",
+      "returncode": 0,
+      "seconds": 0.95
+    },
+    {
+      "module": "test_native_eclock",
+      "returncode": 0,
+      "seconds": 0.54
+    },
+    {
+      "module": "test_native_recovery_config",
+      "returncode": 0,
+      "seconds": 2.475
+    },
+    {
+      "module": "test_nonloop_effect_handoff",
+      "returncode": 0,
+      "seconds": 1.005
+    },
+    {
+      "module": "test_nonloop_source_handoff",
+      "returncode": 0,
+      "seconds": 0.917
+    },
+    {
+      "module": "test_note_slice",
+      "returncode": 0,
+      "seconds": 4.156
+    },
+    {
+      "module": "test_offset_handoff",
+      "returncode": 0,
+      "seconds": 0.924
+    },
+    {
+      "module": "test_offset_render",
+      "returncode": 0,
+      "seconds": 3.778
+    },
+    {
+      "module": "test_ownership",
+      "returncode": 0,
+      "seconds": 0.368
+    },
+    {
+      "module": "test_pattern",
+      "returncode": 0,
+      "seconds": 1.672
+    },
+    {
+      "module": "test_paula_cache",
+      "returncode": 0,
+      "seconds": 0.313
+    },
+    {
+      "module": "test_paula_memory",
+      "returncode": 0,
+      "seconds": 0.368
+    },
+    {
+      "module": "test_paula_playback",
+      "returncode": 0,
+      "seconds": 1.995
+    },
+    {
+      "module": "test_paula_preview",
+      "returncode": 0,
+      "seconds": 0.42
+    },
+    {
+      "module": "test_paula_sync",
+      "returncode": 0,
+      "seconds": 2.058
+    },
+    {
+      "module": "test_pcm",
+      "returncode": 0,
+      "seconds": 0.416
+    },
+    {
+      "module": "test_pitch",
+      "returncode": 0,
+      "seconds": 6.019
+    },
+    {
+      "module": "test_pitch_handoff",
+      "returncode": 0,
+      "seconds": 0.942
+    },
+    {
+      "module": "test_playback_pcm",
+      "returncode": 0,
+      "seconds": 0.585
+    },
+    {
+      "module": "test_playback_upload",
+      "returncode": 0,
+      "seconds": 0.414
+    },
+    {
+      "module": "test_portamento",
+      "returncode": 0,
+      "seconds": 9.529
+    },
+    {
+      "module": "test_pp20",
+      "returncode": 0,
+      "seconds": 4.613
+    },
+    {
+      "module": "test_prepare_dev",
+      "returncode": 0,
+      "seconds": 0.08
+    },
+    {
+      "module": "test_prepare_replay",
+      "returncode": 0,
+      "seconds": 0.084
+    },
+    {
+      "module": "test_project",
+      "returncode": 0,
+      "seconds": 1.47
+    },
+    {
+      "module": "test_project_import",
+      "returncode": 0,
+      "seconds": 11.002
+    },
+    {
+      "module": "test_project_reader",
+      "returncode": 0,
+      "seconds": 4.702
+    },
+    {
+      "module": "test_project_stream",
+      "returncode": 0,
+      "seconds": 3.158
+    },
+    {
+      "module": "test_raw",
+      "returncode": 0,
+      "seconds": 0.552
+    },
+    {
+      "module": "test_raw_import",
+      "returncode": 0,
+      "seconds": 6.438
+    },
+    {
+      "module": "test_recent",
+      "returncode": 0,
+      "seconds": 0.925
+    },
+    {
+      "module": "test_recent_memory",
+      "returncode": 0,
+      "seconds": 1.093
+    },
+    {
+      "module": "test_record",
+      "returncode": 0,
+      "seconds": 1.736
+    },
+    {
+      "module": "test_recovery_file",
+      "returncode": 0,
+      "seconds": 2.574
+    },
+    {
+      "module": "test_render",
+      "returncode": 0,
+      "seconds": 5.603
+    },
+    {
+      "module": "test_render_cli_memory",
+      "returncode": 0,
+      "seconds": 7.78
+    },
+    {
+      "module": "test_render_file",
+      "returncode": 0,
+      "seconds": 14.421
+    },
+    {
+      "module": "test_render_invert",
+      "returncode": 0,
+      "seconds": 3.197
+    },
+    {
+      "module": "test_render_invert_file",
+      "returncode": 0,
+      "seconds": 6.829
+    },
+    {
+      "module": "test_render_invert_handoff",
+      "returncode": 0,
+      "seconds": 4.198
+    },
+    {
+      "module": "test_render_invert_session",
+      "returncode": 0,
+      "seconds": 3.379
+    },
+    {
+      "module": "test_render_memory_failure",
+      "returncode": 0,
+      "seconds": 3.072
+    },
+    {
+      "module": "test_render_plan",
+      "returncode": 0,
+      "seconds": 2.813
+    },
+    {
+      "module": "test_render_range",
+      "returncode": 0,
+      "seconds": 6.043
+    },
+    {
+      "module": "test_render_sequence",
+      "returncode": 0,
+      "seconds": 3.206
+    },
+    {
+      "module": "test_render_ui_native",
+      "returncode": 0,
+      "seconds": 4.301
+    },
+    {
+      "module": "test_render_volume",
+      "returncode": 0,
+      "seconds": 3.646
+    },
+    {
+      "module": "test_repeat_track_handoff",
+      "returncode": 0,
+      "seconds": 0.936
+    },
+    {
+      "module": "test_replay_fixtures",
+      "returncode": 0,
+      "seconds": 0.704
+    },
+    {
+      "module": "test_retrigger_handoff",
+      "returncode": 0,
+      "seconds": 0.974
+    },
+    {
+      "module": "test_retrigger_render",
+      "returncode": 0,
+      "seconds": 3.64
+    },
+    {
+      "module": "test_sample_attributes",
+      "returncode": 0,
+      "seconds": 4.284
+    },
+    {
+      "module": "test_sample_cache",
+      "returncode": 0,
+      "seconds": 0.361
+    },
+    {
+      "module": "test_sample_dispatch",
+      "returncode": 0,
+      "seconds": 4.339
+    },
+    {
+      "module": "test_sample_file",
+      "returncode": 0,
+      "seconds": 0.811
+    },
+    {
+      "module": "test_sample_offset",
+      "returncode": 0,
+      "seconds": 0.147
+    },
+    {
+      "module": "test_sample_raw_file",
+      "returncode": 0,
+      "seconds": 0.791
+    },
+    {
+      "module": "test_sample_svx_file",
+      "returncode": 0,
+      "seconds": 0.773
+    },
+    {
+      "module": "test_sample_triggers",
+      "returncode": 0,
+      "seconds": 0.3
+    },
+    {
+      "module": "test_sampler",
+      "returncode": 0,
+      "seconds": 3.405
+    },
+    {
+      "module": "test_sampler_invert_song",
+      "returncode": 0,
+      "seconds": 5.238
+    },
+    {
+      "module": "test_sampler_pin_job",
+      "returncode": 0,
+      "seconds": 3.274
+    },
+    {
+      "module": "test_sampler_song",
+      "returncode": 0,
+      "seconds": 5.15
+    },
+    {
+      "module": "test_sampler_studio",
+      "returncode": 0,
+      "seconds": 3.487
+    },
+    {
+      "module": "test_sampler_wavetable",
+      "returncode": 0,
+      "seconds": 3.938
+    },
+    {
+      "module": "test_scope",
+      "returncode": 0,
+      "seconds": 0.318
+    },
+    {
+      "module": "test_shared_render_guard",
+      "returncode": 0,
+      "seconds": 0.144
+    },
+    {
+      "module": "test_shared_timing_physical",
+      "returncode": 0,
+      "seconds": 0.135
+    },
+    {
+      "module": "test_shared_timing_profile",
+      "returncode": 0,
+      "seconds": 0.129
+    },
+    {
+      "module": "test_silent_handoff",
+      "returncode": 0,
+      "seconds": 0.926
+    },
+    {
+      "module": "test_slices",
+      "returncode": 0,
+      "seconds": 0.543
+    },
+    {
+      "module": "test_slide_handoff",
+      "returncode": 0,
+      "seconds": 0.994
+    },
+    {
+      "module": "test_slots",
+      "returncode": 0,
+      "seconds": 4.115
+    },
+    {
+      "module": "test_song",
+      "returncode": 0,
+      "seconds": 6.356
+    },
+    {
+      "module": "test_source",
+      "returncode": 0,
+      "seconds": 4.193
+    },
+    {
+      "module": "test_stem_file",
+      "returncode": 0,
+      "seconds": 6.123
+    },
+    {
+      "module": "test_stems",
+      "returncode": 0,
+      "seconds": 0.488
+    },
+    {
+      "module": "test_studio_consumer",
+      "returncode": 0,
+      "seconds": 0.6
+    },
+    {
+      "module": "test_studio_mix",
+      "returncode": 0,
+      "seconds": 0.84
+    },
+    {
+      "module": "test_studio_plan",
+      "returncode": 0,
+      "seconds": 3.068
+    },
+    {
+      "module": "test_studio_pump",
+      "returncode": 0,
+      "seconds": 0.609
+    },
+    {
+      "module": "test_studio_queue",
+      "returncode": 0,
+      "seconds": 0.538
+    },
+    {
+      "module": "test_studio_queued_song",
+      "returncode": 0,
+      "seconds": 3.393
+    },
+    {
+      "module": "test_studio_song",
+      "returncode": 0,
+      "seconds": 3.258
+    },
+    {
+      "module": "test_studio_tick",
+      "returncode": 0,
+      "seconds": 0.883
+    },
+    {
+      "module": "test_svx",
+      "returncode": 0,
+      "seconds": 0.615
+    },
+    {
+      "module": "test_svx_import",
+      "returncode": 0,
+      "seconds": 6.494
+    },
+    {
+      "module": "test_tempo_handoff",
+      "returncode": 0,
+      "seconds": 0.942
+    },
+    {
+      "module": "test_timeline",
+      "returncode": 0,
+      "seconds": 1.542
+    },
+    {
+      "module": "test_tone_handoff",
+      "returncode": 0,
+      "seconds": 0.995
+    },
+    {
+      "module": "test_tone_note_handoff",
+      "returncode": 0,
+      "seconds": 1.011
+    },
+    {
+      "module": "test_tremolo_render",
+      "returncode": 0,
+      "seconds": 3.673
+    },
+    {
+      "module": "test_tremolo_trace",
+      "returncode": 0,
+      "seconds": 0.143
+    },
+    {
+      "module": "test_tuning_handoff",
+      "returncode": 0,
+      "seconds": 1.015
+    },
+    {
+      "module": "test_unused_core",
+      "returncode": 0,
+      "seconds": 0.693
+    },
+    {
+      "module": "test_unused_handoff",
+      "returncode": 0,
+      "seconds": 0.95
+    },
+    {
+      "module": "test_unused_native",
+      "returncode": 0,
+      "seconds": 6.083
+    },
+    {
+      "module": "test_vibrato",
+      "returncode": 0,
+      "seconds": 8.486
+    },
+    {
+      "module": "test_view_probe",
+      "returncode": 0,
+      "seconds": 4.822
+    },
+    {
+      "module": "test_voice",
+      "returncode": 0,
+      "seconds": 0.718
+    },
+    {
+      "module": "test_voice_advance",
+      "returncode": 0,
+      "seconds": 0.605
+    },
+    {
+      "module": "test_voice_segment",
+      "returncode": 0,
+      "seconds": 0.659
+    },
+    {
+      "module": "test_volume_handoff",
+      "returncode": 0,
+      "seconds": 0.94
+    },
+    {
+      "module": "test_wav_import",
+      "returncode": 0,
+      "seconds": 6.498
+    },
+    {
+      "module": "test_wav_reader",
+      "returncode": 0,
+      "seconds": 0.545
+    },
+    {
+      "module": "test_waveform_handoff",
+      "returncode": 0,
+      "seconds": 0.993
+    },
+    {
+      "module": "test_wavetable_dispatch",
+      "returncode": 0,
+      "seconds": 7.579
+    },
+    {
+      "module": "test_wavetable_voices",
+      "returncode": 0,
+      "seconds": 4.177
+    }
+  ],
+  "git_checkout_rerun": {
+    "modules": [
+      "test_editor_invert_reference",
+      "test_editor_wavetable"
+    ],
+    "passed": true,
+    "source_commit": "04d1f7485fbb615b8bc106d434c261f4347ab85d",
+    "note": "Existing helpers isolate HEAD/index sources; initial exported-tree archive path errors retained."
+  },
+  "qualified_modules": 168,
+  "qualified_passed": true,
+  "scope": "Host tests only, native trace files are prior recorded oracles; no emulator or physical execution in this sweep.",
+  "initial_reported_unittest_count": 203
+}

@@ -1,0 +1,6 @@
+SONG PASS: bounded growth, insert/remove/move, assignments, allocation rollback, mixed note undo, conflicts, eviction, limits, round trips, controller and complete release
+.
+----------------------------------------------------------------------
+Ran 1 test in 6.280s
+
+OK

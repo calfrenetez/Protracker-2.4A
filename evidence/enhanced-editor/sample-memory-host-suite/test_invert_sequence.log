@@ -1,0 +1,8 @@
+INVERT sequence native parity PASS
+INVERT sequence native parity PASS
+INVERT sequence native parity PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.345s
+
+OK

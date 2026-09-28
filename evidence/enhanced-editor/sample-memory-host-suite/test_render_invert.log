@@ -1,0 +1,6 @@
+INVERT render PASS: mixed loop/one-shot, retrigger/delay, exact PCM, immutable master, repeatability, budgets, allocation failures, cancellation, sink failure
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.108s
+
+OK

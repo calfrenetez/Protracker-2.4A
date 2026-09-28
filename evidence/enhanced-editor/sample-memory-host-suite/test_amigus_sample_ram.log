@@ -1,0 +1,6 @@
+AMIGUS SAMPLE RAM PASS: bounded addresses, exact uploads, pinned eviction, failures and master preservation; fake bus only
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.371s
+
+OK

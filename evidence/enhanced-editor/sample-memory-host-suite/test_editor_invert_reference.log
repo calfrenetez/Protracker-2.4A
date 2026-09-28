@@ -1,0 +1,25 @@
+fatal: pathspec 'src' did not match any files
+E
+======================================================================
+ERROR: test_committed_editor_reference_ownership (test_editor_invert_reference.EditorInvertReference.test_committed_editor_reference_ownership)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-odd-v2-candidate/tests/test_editor_invert_reference.py", line 10, in test_committed_editor_reference_ownership
+    tmp=Path(tmp);sources=prepare(tmp);exe=tmp/'test'
+                          ~~~~~~~^^^^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-odd-v2-candidate/tools/build_editor_invert_reference.py", line 15, in prepare
+    raw=subprocess.check_output(['git','archive','HEAD','src'],cwd=ROOT)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 472, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+               **kwargs).stdout
+               ^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['git', 'archive', 'HEAD', 'src']' returned non-zero exit status 128.
+
+----------------------------------------------------------------------
+Ran 1 test in 0.029s
+
+FAILED (errors=1)

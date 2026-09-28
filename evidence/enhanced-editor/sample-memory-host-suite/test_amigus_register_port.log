@@ -1,0 +1,6 @@
+AMIGUS REGISTER PASS: owned access, word capacity, ordered triplets, bounded reset/readback, partial-write poison
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.441s
+
+OK

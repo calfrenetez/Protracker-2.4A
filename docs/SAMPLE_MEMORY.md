@@ -2915,3 +2915,15 @@ active-playback capture failures. Those failures remain recorded and unresolved;
 the new stopped-capture workaround is not active-animation, audio-quality or
 performance acceptance. No product/display/shared-bridge changes were needed.
 See `evidence/enhanced-editor/paula-stopped-capture/` for each evidence tier.
+
+## Integrated host regression sweep
+
+All168 host test modules pass on the isolated odd-frame candidate sources. Two
+Git-dependent checks initially failed to locate archived source paths from the
+exported tree; they pass when rerun using their existing committed/indexed
+checkout isolation helpers. The original launch errors are preserved separately.
+Source/test/helper comparison confirms the tested product sources match04d1f74.
+This includes cache/master ownership, sample processing/history, direct24 Studio,
+renderer/oracle comparisons, persistence, recovery and guard/refusal checks.
+It does not establish native device output or physical acceptance. See
+`evidence/enhanced-editor/sample-memory-host-suite/` for the complete records.

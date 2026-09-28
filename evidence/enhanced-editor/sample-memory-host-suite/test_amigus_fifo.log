@@ -1,0 +1,6 @@
+AMIGUS FIFO PASS: bounded triplets, capacity stalls, odd tail, explicit pad, uncertain writes blocked until confirmed reset
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.561s
+
+OK

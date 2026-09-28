@@ -1,0 +1,24 @@
+CAPTURE SESSION PASS: exact formats, bounded polls, delayed start/stop, stop faults retain ownership, explicit overruns, cancellation and undoable publication; injected input only
+AMIGUS CAPTURE PASS: exclusive PCM lease, busy/format/allocation refusal, retained interrupt quiescence, exact stopped recording transfer and resource release; injected only
+.CAPTURE SESSION PASS: exact formats, bounded polls, delayed start/stop, stop faults retain ownership, explicit overruns, cancellation and undoable publication; injected input only
+.CAPTURE STAGING PASS: bounded exact8/16/24 mono/stereo chunks, explicit overrun, atomic undoable sampler publication, allocation rollback and exact project roundtrip; synthetic input only
+.amigus reservation lifecycle: PASS (fake library, no hardware)
+.amigus reservation lifecycle: PASS (fake library, no hardware)
+AMIGUS INTERRUPT OWNER PASS: partial install retains reservation, removal request is not quiescence, pending/error/invalid status refuses release; injected callbacks only
+.amigus reservation lifecycle: PASS (fake library, no hardware)
+AMIGUS RESERVED SESSION PASS: failed open, leased Stop and natural tail retain card through reset recovery
+.E
+======================================================================
+ERROR: test_amigus_interrupt_owner (unittest.loader._FailedTest.test_amigus_interrupt_owner)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_amigus_interrupt_owner
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+ModuleNotFoundError: No module named 'test_amigus_interrupt_owner'
+
+
+----------------------------------------------------------------------
+Ran 7 tests in 11.288s
+
+FAILED (errors=1)

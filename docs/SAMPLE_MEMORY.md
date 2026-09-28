@@ -3007,3 +3007,21 @@ This is an injected software adapter, not a native AmiGUS recording backend.
 Actual format negotiation, variant capabilities, hardware reservation/interrupts,
 input register binding, native editor controls and measured capture quality remain
 unimplemented or unaccepted. No physical hardware is exercised by these fixtures.
+
+### Recording PCM reservation guard
+
+`amigus_capture` holds an existing reservation's exclusive PCM access lease for
+the recording session. The pinned SDK has a PCM-block flag covering playback,
+recording and mixer; it does not expose a separate recording reservation flag.
+A concurrent Studio/capture owner is therefore refused. Duplex sharing requires
+an explicit combined owner and is not implemented by this guard.
+
+Input cannot start/read/stop through this owner without the held PCM lease.
+Open validates callbacks and acquires staging before starting input; allocation or
+format failure unwinds the unused lease without touching the device. Capture
+faults/cancellation retain the lease through stop. A claimed stop success while
+`reservation.interrupt` remains set is treated as pending, so the collector, context
+and reservation stay alive until interrupt removal/quiescence is also confirmed.
+Only then may a stopped recording be transferred and the caller release its card
+reservation/library. This is injected software ownership, not native recording,
+actual input capability negotiation, hardware MMIO or physical acceptance.

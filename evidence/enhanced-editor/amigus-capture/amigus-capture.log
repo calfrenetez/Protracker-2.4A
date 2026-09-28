@@ -1,0 +1,4 @@
+EXEC MEMORY pool_limit=131152136 reserve=262144 flags=4
+CAPTURE SESSION PASS: exact formats, bounded polls, delayed start/stop, stop faults retain ownership, explicit overruns, cancellation and undoable publication; injected input only
+AMIGUS CAPTURE PASS: exclusive PCM lease, busy/format/allocation refusal, retained interrupt quiescence, exact stopped recording transfer and resource release; injected only
+EXEC MEMORY PASS: 35 Fast allocations, zero owned bytes, budget refusal without Chip fallback

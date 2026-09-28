@@ -1,0 +1,1 @@
+Host-only staging failed before planned manifest/runner/Guest/lock or bridge activity: missing PTExecAmiGusReservedSessionTest in 147-target full build. Dedicated tools/build_amigus_reservation.py owns this target. Window cancelled and released; no guest tests ran. Fresh dedicated build and fresh coordination used for corrected v2 sequence.

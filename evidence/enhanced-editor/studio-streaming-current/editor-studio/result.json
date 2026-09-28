@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 Studio ownership core; no audio device transport",
+  "PTExecEditorStudioTest_sha256": "62ac61c331d94316a084925eaa1461a476523fdd64c9d0e3b64ba2fc9c5e2007",
+  "editor-studio_returncode": "0",
+  "run_files_cleaned": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0"
+}

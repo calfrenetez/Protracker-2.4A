@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "seconds": 151.95878537499812,
+  "window_bound_seconds": 440,
+  "cases": [
+    {
+      "case": "queued-song",
+      "binaries": {
+        "PTExecQueuedSongTest": "74b0a4813d5eb8b5650ad58709f43f38eae8ba8839272f61acb8dba97f81d9c4",
+        "PTExecStudioPumpTest": "ef5dcd2fcfacc5ae67726990e53d8c28f378ff0c883b66ae501a642d1a76f76b"
+      },
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/render-files-1790570040305536000",
+      "independent_cleanup": true
+    },
+    {
+      "case": "studio-consumer",
+      "binaries": {
+        "PTExecStudioConsumerTest": "755864707049a968e1836f955c0cdb320a864a77bb6033ceaa8ad843a4f3faa4",
+        "PTExecQueuedSongTest": "74b0a4813d5eb8b5650ad58709f43f38eae8ba8839272f61acb8dba97f81d9c4"
+      },
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/render-files-1790570099707634000",
+      "independent_cleanup": true
+    },
+    {
+      "case": "editor-studio",
+      "binaries": {
+        "PTExecEditorStudioTest": "62ac61c331d94316a084925eaa1461a476523fdd64c9d0e3b64ba2fc9c5e2007"
+      },
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/render-files-1790570158173444000",
+      "independent_cleanup": true
+    },
+    {
+      "case": "register-session",
+      "binaries": {
+        "PTExecAmiGusRegisterSessionTest": "83cb37241bb3d33359dd36419c082673e2deadaabb3ec6086d0143eddcd2ce9d"
+      },
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/render-files-1790570188583265000",
+      "independent_cleanup": true
+    },
+    {
+      "case": "reserved-session",
+      "binaries": {
+        "PTExecAmiGusReservedSessionTest": "c1d33d5d4d8cbc156e5281dd3d12914776d49a90c113dfe66c96d7c192a8ffdb"
+      },
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/render-files-1790570190421195000",
+      "independent_cleanup": true
+    }
+  ]
+}

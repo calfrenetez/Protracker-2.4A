@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "scope": "shared030 Studio ownership core; no audio device transport",
+  "PTExecQueuedSongTest_sha256": "74b0a4813d5eb8b5650ad58709f43f38eae8ba8839272f61acb8dba97f81d9c4",
+  "PTExecStudioPumpTest_sha256": "ef5dcd2fcfacc5ae67726990e53d8c28f378ff0c883b66ae501a642d1a76f76b",
+  "queued-song_returncode": "0",
+  "studio-pump_returncode": "0",
+  "run_files_cleaned": true
+}

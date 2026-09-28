@@ -2977,3 +2977,33 @@ measurement and native recording UI remain required. Buffer close does not stop
 hardware; no device may DMA into or retain the collector allocation. Accepting24
 bits here does not prove24-bit capture support on Mini or Zorro. The pinned driver's
 capture formats must be reconciled with actual variant capabilities before use.
+
+### Injected recording lifecycle
+
+`capture_session` adds a serialized, caller-owned input boundary around the
+collector. It allocates before input starts, negotiates no hardware capability,
+and performs at most one bounded adapter callback per poll. Input copies at most
+256 frames synchronously into scratch storage; adapters cannot retain that pointer
+or DMA into it. Exact sample values go into the existing master staging path.
+
+Pending/failed starts, read faults, explicit device overruns and cancellation all
+require a confirmed stop. Exactly `1` means disabled, callbacks quiescent and no
+retained references; `0` remains pending and every other stop result is a fault.
+Faults remain sticky, but stop polling can still complete cleanup. Until that
+confirmation, close and recording transfer both refuse and allocations remain
+owned. The caller must schedule bounded polls and retain the session/context;
+a stop deadline cannot safely turn an unknown device state into freed storage.
+
+A full frame budget finishes automatically; explicit Finish keeps the recorded
+prefix. Abort or any fault discards only after confirmed stop. A successful,
+nonempty, stopped collector can be moved without allocation into a separate owner
+and published through `sampler_capture`; publication failure retains it for retry.
+The fixture covers all six sample formats, delayed start/stop, unknown acknowledgments,
+malformed counts/values, overrun, cancellation, zero owned bytes, and undoable
+publication with low 24-bit bits intact. Host sanitizer and native Exec
+checks pass; see `evidence/enhanced-editor/capture-session` for exact scope.
+
+This is an injected software adapter, not a native AmiGUS recording backend.
+Actual format negotiation, variant capabilities, hardware reservation/interrupts,
+input register binding, native editor controls and measured capture quality remain
+unimplemented or unaccepted. No physical hardware is exercised by these fixtures.

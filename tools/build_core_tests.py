@@ -176,6 +176,8 @@ def main():
     inputs['PTEditorStudioTest'] += ['src/editor/sampler_invert_song.c',*invert_sources]
     inputs['PTCaptureTest'] = ['tests/capture_test.c','src/core/capture.c','src/editor/sampler_capture.c',*inputs['PTSamplerTest'][1:]]
     inputs['PTExecCaptureTest'] = ['tests/native_exec_capture_test.c',*inputs['PTCaptureTest'][1:]]
+    inputs['PTCaptureSessionTest'] = ['tests/capture_session_test.c','src/core/capture_session.c',*inputs['PTCaptureTest'][1:]]
+    inputs['PTExecCaptureSessionTest'] = ['tests/native_exec_capture_session_test.c',*inputs['PTCaptureSessionTest'][1:]]
     inputs['PTExecEditorStudioTest'] = ['tests/native_exec_editor_studio_test.c',*inputs['PTEditorStudioTest'][1:]]
     inputs['PTEditorInvertStudioTest'] = ['tests/editor_invert_studio_test.c',*inputs['PTEditorStudioTest'][1:]]
     inputs['PTExecEditorInvertStudioTest'] = ['tests/native_exec_editor_invert_studio_test.c',*inputs['PTEditorStudioTest'][1:]]

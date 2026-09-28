@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 injected recording lifecycle and confirmed-stop ownership; no device input",
+  "PTExecCaptureSessionTest_sha256": "3b450ebc5e9e61faa1511601176769b2f7ec2a3d1b4c97fbb2ae85727067905f",
+  "capture-session_returncode": "0",
+  "run_files_cleaned": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0"
+}

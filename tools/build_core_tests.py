@@ -180,6 +180,8 @@ def main():
     inputs['PTExecCaptureSessionTest'] = ['tests/native_exec_capture_session_test.c',*inputs['PTCaptureSessionTest'][1:]]
     inputs['PTAmiGusCaptureTest'] = ['tests/amigus_capture_test.c','src/core/amigus_capture.c','src/core/amigus_reservation.c','src/core/amigus_interrupt_owner.c',*inputs['PTCaptureSessionTest'][1:]]
     inputs['PTExecAmiGusCaptureTest'] = ['tests/native_exec_amigus_capture_test.c',*inputs['PTAmiGusCaptureTest'][1:]]
+    inputs['PTEditorCaptureTest'] = ['tests/editor_capture_test.c','src/editor/editor_capture.c',*dict.fromkeys([*inputs['PTAmiGusCaptureTest'][1:],*inputs['PTSongTest'][1:]])]
+    inputs['PTExecEditorCaptureTest'] = ['tests/native_exec_editor_capture_test.c',*inputs['PTEditorCaptureTest'][1:]]
     inputs['PTExecEditorStudioTest'] = ['tests/native_exec_editor_studio_test.c',*inputs['PTEditorStudioTest'][1:]]
     inputs['PTEditorInvertStudioTest'] = ['tests/editor_invert_studio_test.c',*inputs['PTEditorStudioTest'][1:]]
     inputs['PTExecEditorInvertStudioTest'] = ['tests/native_exec_editor_invert_studio_test.c',*inputs['PTEditorStudioTest'][1:]]

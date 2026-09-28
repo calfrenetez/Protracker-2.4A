@@ -18,6 +18,7 @@ software implementation from the remaining integration and hardware gates.
 | AmiGUS wavetable copies | Versioned evictable resource pool, sampler revision/master-pin bridge, bounded 16-voice lease owner with validated rate/loop/address plans, mono sequencer trigger/control/stop dispatch, preflight-gated master-pinned sequence ownership, editor veto/retry barriers and injected callbacks, 8/16-bit conversion and bounded address allocator/chunk uploader behind an injected register bus; failure/pinning tests. | Verified card capacity, native bus binding and voice dispatcher; explicit wavetable reservation/cache lifetime now implemented and tested with fake callbacks. Injected register tests do not establish real card access. |
 | Direct24-bit Studio | Master-pinned mixer, audited sequence, sampler/editor ownership, bounded queue/pump and integrated PCM-session owner with capacity-bounded prefill and explicit start acknowledgement; optional reservation lease retained through reset and adapter quiescence. Up to16 voice slots are a software bound. | Native PLAY/output wiring, verified hardware capabilities and sustainable physical voice-count/timing evidence. |
 | Master-preserving persistence | Bounded enhanced-project/sample saving and explicit classic conversion; private EFx exports/bounce never replace masters. Explicit new-file recovery snapshots and staged identity-checked restoration preserve all master precision. | Native opt-in configuration, idle scheduling, bounded retention, read-only discovery, explicit recovery UI and exact save are implemented and emulator-tested; preferences-panel controls, real crash/endurance and physical acceptance remain. |
+| Recording masters | Bounded full-precision collector, injected input lifecycle, exclusive PCM/interrupt ownership, editor mutation/disposal veto and retryable undoable publication; host and native Exec fixtures pass. | Actual input capability negotiation, native input register/backend and controls, duplex ownership if needed, physical capture quality/overrun evidence. |
 | Playback invalidation | Revision/settings keys, retired active leases and stop-before-edit/undo/dispose guards. Private EFx banks are discarded on stop and rebuilt on restart. | End-to-end real AmiGUS voice/transfer ownership, once the device adapter exists. |
 
 AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software
@@ -3025,3 +3026,26 @@ and reservation stay alive until interrupt removal/quiescence is also confirmed.
 Only then may a stopped recording be transferred and the caller release its card
 reservation/library. This is injected software ownership, not native recording,
 actual input capability negotiation, hardware MMIO or physical acceptance.
+
+### Editor recording ownership and publication
+
+`editor_capture` attaches to the existing veto-capable editor change barrier,
+refusing any other active guard. It uses the editor sampler allocator for bounded
+recording staging and the exclusive PCM capture owner described above. Each poll
+performs bounded input/shutdown work; no input callback runs inside an edit guard.
+
+Edit, undo or disposal requests Finish and remains refused until the device and
+interrupt are quiescent. Nonempty stopped PCM remains owned and continues to veto
+mutation/disposal until explicitly published or discarded. Publication appends one
+undoable master, selects it and refreshes sample bounds. Allocation failure retains
+recording data, project/history and selection for retry. Empty/cancelled/faulty
+recordings are not published. Faults remain visible after cleanup until explicit
+discard or a new successful start. Detach explicitly discards and refuses while
+asynchronous shutdown remains unresolved; editor and allocator contexts must live
+until it succeeds.
+
+Host and native Exec integration tests cover actual editor note/undo/disposal
+paths, navigation, delayed and invalid stop acknowledgments, publication failure,
+exact low24-bit data and undo/redo. See `evidence/enhanced-editor/editor-capture`.
+This owner is not wired to native recording controls and has no actual input
+backend. The accepted classic layout and unrelated display work are preserved.

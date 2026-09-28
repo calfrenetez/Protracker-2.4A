@@ -4,20 +4,93 @@
 #include "../src/editor/editor_studio.h"
 #include "../src/platform/sample_import.h"
 #include "studio_preparation_cases.h"
-static void editor_song_start(struct pt_editor_wavetable *o,struct fixture *f,struct dispatch_bus *bus,
-    struct pt_sampler_wavetable *bridge,struct pt_wavetable_voices *voices)
+static void editor_song_start_with_quiesce(struct pt_editor_wavetable *o,struct fixture *f,struct dispatch_bus *bus,
+    struct pt_sampler_wavetable *bridge,struct pt_wavetable_voices *voices,int (*quiesce)(void *),void *context)
 {
     struct pt_render_options options={0};struct pt_playback_format format={16,0,0,0};
     struct pt_wavetable_preflight_report report;struct pt_render_interval span;
     options.rate=48000;options.bits=24;options.tracks=1;options.gain_q16=65536;
     options.tick_limit=100;options.frame_limit=100000;
     song_bind(f,bridge,voices,bus,&o->editor->sampler,o->editor->project);
-    assert(pt_editor_wavetable_start(o,voices,&options,&format,&report)==PT_WAVETABLE_SONG_OK);
+    if(quiesce)assert(pt_wavetable_voices_bind_quiesce(voices,quiesce,context));
+    if(quiesce) {
+        enum pt_wavetable_song_result result;
+        assert(pt_editor_wavetable_start(o,voices,&options,&format,&report)==PT_WAVETABLE_SONG_INVALID && !o->song && !voices->song_owner);
+        result=pt_editor_wavetable_begin(o,voices,&options,&format,&report);
+        while(result==PT_WAVETABLE_SONG_PREPARING)result=pt_editor_wavetable_prepare(o,&report);
+        assert(result==PT_WAVETABLE_SONG_OK);
+    }else assert(pt_editor_wavetable_start(o,voices,&options,&format,&report)==PT_WAVETABLE_SONG_OK);
     do {
         assert(pt_editor_wavetable_next(o,&span)==PT_WAVETABLE_SONG_OK && !span.frames);
         assert(pt_editor_wavetable_complete(o)==PT_WAVETABLE_SONG_OK);
     }while(!bus->starts);
     bus->stop_result[0]=0;
+}
+static void editor_song_start(struct pt_editor_wavetable *o,struct fixture *f,struct dispatch_bus *bus,
+    struct pt_sampler_wavetable *bridge,struct pt_wavetable_voices *voices)
+{editor_song_start_with_quiesce(o,f,bus,bridge,voices,NULL,NULL);}
+struct editor_quiescence {struct fixture *f;struct pt_wavetable_voices *voices;int result;unsigned calls;};
+static int editor_backend_quiesce(void *context)
+{
+    struct editor_quiescence *q=context;unsigned i;
+    assert(q->f->reservation.access && q->f->cache.reservation && q->voices->bridge && q->voices->song_owner);
+    for(i=0;i<PT_WAVETABLE_VOICES;++i)assert(!q->voices->voice[i].held);
+    ++q->calls;return q->result;
+}
+static void editor_quiescence_fixture(struct pt_editor *e,struct pt_editor_wavetable *owner,
+    struct fixture *f,struct dispatch_bus *bus,struct pt_sampler_wavetable *bridge,struct pt_wavetable_voices *voices)
+{
+    struct editor_quiescence q={f,voices,0,0};unsigned revision=e->history.revision,generation;
+    size_t retained;
+    editor_song_start_with_quiesce(owner,f,bus,bridge,voices,editor_backend_quiesce,&q);
+    generation=e->sampler.generation;retained=e->sampler.bytes;
+    assert(retained && !pt_editor_prepare_change(e) && !q.calls);
+    bus->stop_result[0]=1;
+    assert(!pt_editor_prepare_change(e) && q.calls==1 && !pins(f) && f->cache.cache.bytes);
+    q.result=-1;assert(!pt_editor_dispose(e) && e->sampler.bytes==retained && owner->song);
+    q.result=2;assert(!pt_editor_wavetable_detach(owner) && owner->editor==e && e->change_ready);
+    assert(pt_editor_sample_file_import(e,"no-file.raw",1,0,NULL)==PT_EDIT_CONFLICT);
+    assert(e->sampler.generation==generation && e->history.revision==revision && !pt_amigus_reservation_close(&f->reservation));
+    q.result=1;f->reservation.interrupt=1;
+    assert(!pt_editor_prepare_change(e) && owner->song && f->cache.cache.bytes);
+    f->reservation.interrupt=0;
+    assert(pt_editor_prepare_change(e) && !owner->song && !voices->bridge && !bridge->backend);
+    assert(pt_amigus_reservation_close(&f->reservation));
+    assert(e->history.revision==revision && e->sampler.generation==generation);
+    /* Native adapters can own callback contexts before the first voice. */
+    {
+        struct pt_render_options options={0};struct pt_playback_format format={16,0,0,0};
+        struct pt_wavetable_preflight_report report;
+        options.rate=48000;options.bits=24;options.tracks=1;options.gain_q16=65536;
+        options.tick_limit=100;options.frame_limit=100000;
+        song_bind(f,bridge,voices,bus,&e->sampler,e->project);q.result=0;q.calls=0;
+        assert(pt_wavetable_voices_bind_quiesce(voices,editor_backend_quiesce,&q));
+        assert(pt_editor_wavetable_begin(owner,voices,&options,&format,&report)==PT_WAVETABLE_SONG_PREPARING);
+        assert(pt_editor_wavetable_prepare(owner,&report)==PT_WAVETABLE_SONG_PREPARING);
+        assert(!pt_editor_prepare_change(e) && owner->song && q.calls==1 && !bus->starts);
+        q.result=-1;assert(!pt_editor_dispose(e) && owner->song && voices->bridge);
+        q.result=1;f->reservation.interrupt=1;
+        assert(!pt_editor_wavetable_stop(owner) && owner->song && !voices->quiesced);
+        f->reservation.interrupt=0;
+        assert(pt_editor_prepare_change(e) && !owner->song && !voices->bridge && !bridge->backend);
+        assert(pt_amigus_reservation_close(&f->reservation) && q.calls==4);
+        /* Failed preflight must retain the published handle until cleanup. */
+        {
+            enum pt_wavetable_song_result result;unsigned steps=0;
+            song_bind(f,bridge,voices,bus,&e->sampler,e->project);q.result=0;q.calls=0;
+            assert(pt_wavetable_voices_bind_quiesce(voices,editor_backend_quiesce,&q));
+            options.frame_limit=1;
+            result=pt_editor_wavetable_begin(owner,voices,&options,&format,&report);
+            assert(result==PT_WAVETABLE_SONG_PREPARING && owner->song);
+            do {result=pt_editor_wavetable_prepare(owner,&report);assert(++steps<1000);}
+            while(result==PT_WAVETABLE_SONG_PREPARING);
+            assert(result==PT_WAVETABLE_SONG_CAPABILITY && owner->song && voices->song_owner && q.calls==1);
+            assert(!pt_editor_dispose(e) && !pt_amigus_reservation_close(&f->reservation));
+            q.result=1;assert(pt_editor_prepare_change(e) && !owner->song && !voices->bridge);
+            assert(pt_amigus_reservation_close(&f->reservation));
+        }
+    }
+    puts("EDITOR WAVETABLE QUIESCENCE PASS: stopped voices retain song/master/cache contexts through callback and IRQ barriers; edits/disposal vetoed");
 }
 static void editor_prepare_cancel_fixture(struct pt_editor *e,struct pt_editor_wavetable *owner,
     struct fixture *f,struct dispatch_bus *bus,struct pt_sampler_wavetable *bridge,struct pt_wavetable_voices *voices)
@@ -133,6 +206,7 @@ static int editor_wavetable_fixture(void)
     assert(pt_project_encode(&d.project,saved,size,&used)==PT_PROJECT_OK && used==size);
     assert(pt_editor_studio_attach(&studio,e));assert(!pt_editor_wavetable_attach(&owner,e));pt_editor_studio_detach(&studio);
     assert(pt_editor_wavetable_attach(&owner,e));assert(!pt_editor_studio_attach(&studio,e) && !pt_editor_wavetable_attach(&other,e));
+    editor_quiescence_fixture(e,&owner,f,bus,&bridge,&voices);exact_save(&d.project,saved,size);
     editor_song_start(&owner,f,bus,&bridge,&voices);
     /* Navigation, including selected-channel changes, leaves playback valid. */
     pt_editor_key(e,0x4d,0);pt_editor_key(e,0x42,0);assert(!bus->stops);

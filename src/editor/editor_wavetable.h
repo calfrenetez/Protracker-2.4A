@@ -18,8 +18,10 @@ int pt_editor_wavetable_detach(struct pt_editor_wavetable *);
 enum pt_wavetable_song_result pt_editor_wavetable_start(struct pt_editor_wavetable *,struct pt_wavetable_voices *,
     const struct pt_render_options *,const struct pt_playback_format *,struct pt_wavetable_preflight_report *);
 /* Incremental start: pending owner.song participates in the existing edit/Stop/
- * dispose barrier. Cancellation before readiness leaves voices/bridge bound;
- * caller must close/reuse that idle backend before freeing its contexts. */
+ * dispose barrier. With a bound quiescence callback, cancellation also retains
+ * preparation/master contexts until that callback and IRQ guard are clear.
+ * Without it, cancellation before readiness leaves voices/bridge bound; caller
+ * must close/reuse that synchronous idle backend before freeing its contexts. */
 enum pt_wavetable_song_result pt_editor_wavetable_begin(struct pt_editor_wavetable *,struct pt_wavetable_voices *,
     const struct pt_render_options *,const struct pt_playback_format *,struct pt_wavetable_preflight_report *);
 enum pt_wavetable_song_result pt_editor_wavetable_prepare(struct pt_editor_wavetable *,struct pt_wavetable_preflight_report *);

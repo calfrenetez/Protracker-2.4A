@@ -52,6 +52,9 @@ static int stop(struct pt_wavetable_song *s)
     pt_render_sequence_close(s->sequence);s->sequence=NULL;
     if(s->done)return 1;
     if(!s->ready) {
+        /* A bound adapter may retain contexts even before the first voice.
+         * Keep the preparation owner/master pins until its barrier completes. */
+        if(s->voices->quiesce && !pt_wavetable_voices_close(s->voices))return 0;
         release_sources(s);
         if(s->voices->song_owner==s)s->voices->song_owner=NULL;
         s->done=1;return 1;
@@ -232,7 +235,9 @@ enum pt_wavetable_song_result pt_wavetable_song_open(struct pt_wavetable_voices 
     struct pt_wavetable_preflight_report *report,struct pt_wavetable_song **out)
 {
     struct pt_wavetable_song *s=NULL;enum pt_wavetable_song_result result;
-    if(!out)return PT_WAVETABLE_SONG_INVALID;
+    /* This wrapper promises no retained owner on failure. An asynchronous
+     * teardown cannot uphold that promise; begin publishes its handle first. */
+    if(!out || (v && v->quiesce))return PT_WAVETABLE_SONG_INVALID;
     result=pt_wavetable_song_begin(v,o,f,a,report,&s);
     while(result==PT_WAVETABLE_SONG_PREPARING)result=pt_wavetable_song_prepare(s,report);
     if(result!=PT_WAVETABLE_SONG_OK){pt_wavetable_song_close(&s);return result;}

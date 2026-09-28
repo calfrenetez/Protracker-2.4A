@@ -28,7 +28,10 @@ enum pt_wavetable_song_result {
  * project-wide or selected-value rescans. Exact prepared pins cover uploads;
  * bounded shape checks remain. Public bridge/dispatch validation stays unchanged.
  * Options/format are copied. Row-range playback requires an explicit exact-restore
- * callback; missing support returns RANGE. No native device/scheduler. */
+ * callback; missing support returns RANGE. A bound quiescence callback refuses
+ * this synchronous wrapper before work: use begin/prepare so failed preparation
+ * always retains a caller-visible handle for asynchronous cleanup.
+ * No native device/scheduler. */
 enum pt_wavetable_song_result pt_wavetable_song_open(struct pt_wavetable_voices *,
     const struct pt_render_options *,const struct pt_playback_format *,const struct pt_allocator *,
     struct pt_wavetable_preflight_report *,struct pt_wavetable_song **out);
@@ -41,8 +44,10 @@ enum pt_wavetable_song_result pt_wavetable_song_open(struct pt_wavetable_voices 
  * reservation; complete versions publish atomically. Static input validation/sync
  * at begin, allocator calls and metadata resets remain synchronous: no hard
  * latency guarantee. The ownership predicate is called; no uploads/voice callbacks during preparation.
- * Close cancels pending/failed preparation and leaves the idle voice owner/bridge
- * bound for caller reuse/close (outer reservation retained). Failure poisons the
+ * Close cancels pending/failed preparation. A bound quiescence callback must
+ * confirm before preparation/master contexts are released; it also closes the
+ * idle voice owner/bridge. Without that callback the synchronous owner/bridge
+ * stays bound for caller reuse/close (outer reservation retained). Failure poisons the
  * handle; close still required. Already-promoted unchanged sampler copies may
  * remain. Caller must cancel before any borrowed source/project edit; the editor
  * binding supplies that barrier. Successful synchronous open is a wrapper. */

@@ -2696,3 +2696,37 @@ The hardened editor (262628 bytes, SHA256
 actual AmigaDOS settings, offer/decline/restore, idle autosave and exact save in
 shared030. Evidence is in `recovery-config/editor-ui/`; all five temporary ENV
 values were restored exactly before independently verified cleanup and release.
+
+## Wavetable callback quiescence
+
+The voice owner can bind an explicit adapter-quiescence callback before playback.
+Closing first confirms every held voice has stopped reading sample RAM. It then
+calls the barrier once per close attempt. Pending, failed and unknown positive
+results preserve the bridge/cache/reservation and keep editor edits and disposal
+blocked. Exactly 1 is accepted only with the reservation's interrupt guard clear.
+No repeated voice-stop calls occur after those voices have acknowledged stop.
+
+The same barrier applies to cancelled preparation before the first note, because
+an adapter may already retain callback contexts. Master pins and the song owner
+remain until the barrier completes. Existing purely synchronous injected drivers
+may omit the callback and retain their prior preparation-cancellation contract.
+A future native asynchronous adapter must supply the barrier; this change neither
+installs interrupts nor claims a hardware quiescence implementation.
+
+Host sanitizer regressions cover 16 active voices, cache retention with zero voice
+pins, pending/error/unknown acknowledgements, a still-held interrupt guard, and
+editor import/edit/disposal refusal through both playback and preparation stops.
+Native emulator acceptance is recorded separately in the checkpoint/evidence.
+
+For adapters with this asynchronous barrier, synchronous song open is refused
+before work. Callers use begin/prepare, which publishes the song handle before
+preflight can fail. A forced frame-limit failure verifies that the published
+handle, callback context and editor barrier survive until cleanup confirms idle.
+This preserves the synchronous API's existing failure-without-ownership contract.
+
+The final cumulative shared030 fixture also passes: 420216-byte candidate
+`5ed539aedf12e108ed927df67e1c53478037389b0014045eec5a3d9875891bdd`,
+1265 Fast allocations returned to zero, including failed preflight followed by
+pending cleanup. Independent cleanup and explicit emulator release completed.
+See `evidence/enhanced-editor/wavetable-quiescence/`. This is injected voice-bus
+acceptance, with separate native timer diagnostics, not AmiGUS hardware output.

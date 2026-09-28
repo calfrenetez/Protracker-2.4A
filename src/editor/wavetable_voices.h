@@ -32,6 +32,9 @@ struct pt_wavetable_voices {
     struct pt_wavetable_voice voice[PT_WAVETABLE_VOICES];
     unsigned closing;
     const void *song_owner; /* Exclusive sequence session, managed by wavetable_song. */
+    int (*quiesce)(void *);
+    void *quiesce_context;
+    unsigned quiesced;
 };
 enum pt_voice_result {
     PT_VOICE_REFUSED=-2, PT_VOICE_STOP_FAILED=-1, PT_VOICE_STOP_PENDING=0,
@@ -41,6 +44,13 @@ enum pt_voice_result {
  * Do not directly close/unpin/use the bridge while this owner is bound. */
 int pt_wavetable_voices_bind(struct pt_wavetable_voices *,struct pt_sampler_wavetable *,
     const struct pt_wavetable_voice_api *);
+/* Optional for synchronous injected drivers; REQUIRED when backend callbacks or
+ * interrupts can retain voice/cache contexts. Bind before any voice/song starts.
+ * After all voice stops, close calls this once per attempt until exactly1 means
+ * no callbacks can reference these contexts and the interrupt guard is clear.
+ * Pending/error/unknown results retain bridge, cache and reservation. Callback
+ * and its context outlive successful close; no reentrancy or blocking waits. */
+int pt_wavetable_voices_bind_quiesce(struct pt_wavetable_voices *,int (*)(void *),void *);
 /* Validate metadata/rate/range before acquiring; resolve a bounded plan before
  * stopping old voice. Callback must consume/copy the plan synchronously.
  * Acquire before stopping old voice: acquisition failure preserves old playback.
@@ -53,7 +63,8 @@ enum pt_voice_result pt_wavetable_voices_trigger(struct pt_wavetable_voices *,un
 /* One stop attempt; returns 1 confirmed/idle, 0 pending, -1 failure/invalid. */
 int pt_wavetable_voices_stop(struct pt_wavetable_voices *,unsigned voice);
 /* Blocks new triggers, attempts each held voice once, detaches bridge only after
- * every stop is confirmed. Retry for pending/failed stops; never forcibly free.
+ * every stop and any bound quiescence barrier are confirmed. Retry pending or
+ * failed stops/barriers; never forcibly free.
  * No wait loop, allocation or real device I/O beyond injected callbacks. */
 int pt_wavetable_voices_close(struct pt_wavetable_voices *);
 #endif

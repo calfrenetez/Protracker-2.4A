@@ -8,7 +8,16 @@ struct voice_bus {
     int start_result,stop_result[PT_WAVETABLE_VOICES];
     unsigned starts,stops,active[PT_WAVETABLE_VOICES];
     uint32_t address[PT_WAVETABLE_VOICES];uint8_t held[PT_WAVETABLE_VOICES][8];
+    int quiesce_result;
+    unsigned quiesce_calls;
 };
+static int voice_quiesce(void *context)
+{
+    struct voice_bus *b=context;unsigned i;
+    assert(b->owner->bridge && b->f->reservation.access && b->f->cache.reservation);
+    for(i=0;i<PT_WAVETABLE_VOICES;++i)assert(!b->active[i] && !b->owner->voice[i].held);
+    ++b->quiesce_calls;return b->quiesce_result;
+}
 static int voice_start(void *ctx,unsigned id,const struct pt_amigus_voice_plan *plan)
 {
     struct voice_bus *b=ctx;struct pt_wavetable_voice *v=&b->owner->voice[id];
@@ -55,6 +64,9 @@ static int voices_fixture_main(void)
     assert(pt_wavetable_voices_bind(&voices,&bridge,&api));assert(!pt_wavetable_voices_bind(&voices,&bridge,&api));
     bus->f=f;bus->owner=&voices;bus->start_result=1;
     for(i=0;i<PT_WAVETABLE_VOICES;++i)bus->stop_result[i]=1;
+    assert(!pt_wavetable_voices_bind_quiesce(&voices,NULL,bus));
+    assert(pt_wavetable_voices_bind_quiesce(&voices,voice_quiesce,bus));
+    assert(!pt_wavetable_voices_bind_quiesce(&voices,voice_quiesce,bus));
     assert(trigger(&voices,16)==PT_VOICE_REFUSED && pt_wavetable_voices_stop(&voices,16)==-1);
     for(i=0;i<PT_WAVETABLE_VOICES;++i)assert(trigger(&voices,i)==PT_VOICE_ACTIVE);
     assert(pins(f)==16 && f->cache.cache.bytes==8);exact_save(&document.project,saved,size);
@@ -96,16 +108,28 @@ static int voices_fixture_main(void)
     f->healthy=0;n=bus->starts;assert(trigger(&voices,1)==PT_VOICE_REFUSED && bus->starts==n && pins(f)==16);
     bus->stop_result[0]=0;bus->stop_result[1]=-1;n=bus->stops;
     assert(!pt_wavetable_voices_close(&voices) && bus->stops==n+16 && pins(f)==2);
+    assert(!bus->quiesce_calls);
     assert(voices.closing && bridge.backend && f->reservation.access);
     assert(!pt_amigus_reservation_close(&f->reservation));assert(trigger(&voices,2)==PT_VOICE_REFUSED);
     n=bus->stops;assert(!pt_wavetable_voices_close(&voices) && bus->stops==n+2 && pins(f)==2);
     bus->stop_result[0]=1;assert(!pt_wavetable_voices_close(&voices) && pins(f)==1);
-    bus->stop_result[1]=1;assert(pt_wavetable_voices_close(&voices) && !pins(f) && !voices.bridge && !bridge.backend);
+    bus->stop_result[1]=1;assert(!pt_wavetable_voices_close(&voices) && !pins(f));
+    assert(bus->quiesce_calls==1 && voices.bridge && bridge.backend && f->cache.cache.bytes);
+    n=bus->stops;bus->quiesce_result=-1;
+    assert(!pt_wavetable_voices_close(&voices) && bus->stops==n && bus->quiesce_calls==2);
+    bus->quiesce_result=2;assert(!pt_wavetable_voices_close(&voices) && f->cache.cache.bytes);
+    assert(!pt_amigus_reservation_close(&f->reservation));
+    /* Even a positive adapter acknowledgement cannot override an IRQ owner. */
+    f->reservation.interrupt=1;bus->quiesce_result=1;
+    assert(!pt_wavetable_voices_close(&voices) && !voices.quiesced && f->cache.cache.bytes);
+    f->reservation.interrupt=0;
+    assert(pt_wavetable_voices_close(&voices) && !pins(f) && !voices.bridge && !bridge.backend);
+    assert(bus->stops==n && bus->quiesce_calls==5);
     assert(pt_wavetable_voices_close(&voices));assert(pt_amigus_reservation_close(&f->reservation));
     exact_save(&document.project,saved,size);free(saved);
     pt_pattern_history_release(&history);pt_sampler_release(&sampler);assert(!sampler.bytes);
     pt_document_release(&document);assert(!allocations && data[0]==257);
-    free(bus);free(f);puts("WAVETABLE VOICES PASS: 16 voices, retrigger, uncertain start, confirmed stop, bounded close, master preserved");return 0;
+    free(bus);free(f);puts("WAVETABLE VOICES PASS: 16 voices, retrigger, uncertain start, confirmed stop and quiescence, bounded close, master preserved");return 0;
 }
 #ifndef PT_WAVETABLE_VOICES_NATIVE
 int main(void){return voices_fixture_main();}

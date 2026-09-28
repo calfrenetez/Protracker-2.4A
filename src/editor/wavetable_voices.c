@@ -9,6 +9,13 @@ int pt_wavetable_voices_bind(struct pt_wavetable_voices *v,struct pt_sampler_wav
     for(i=0;i<PT_CACHE_SLOTS;++i)if(s->backend->cache.entry[i].pins)return 0;
     memset(v,0,sizeof(*v));v->bridge=s;v->api=*api;return 1;
 }
+int pt_wavetable_voices_bind_quiesce(struct pt_wavetable_voices *v,int (*quiesce)(void *),void *context)
+{
+    unsigned i;
+    if(!v || !v->bridge || v->closing || v->song_owner || v->quiesce || !quiesce)return 0;
+    for(i=0;i<PT_WAVETABLE_VOICES;++i)if(v->voice[i].held)return 0;
+    v->quiesce=quiesce;v->quiesce_context=context;return 1;
+}
 int pt_wavetable_voices_stop(struct pt_wavetable_voices *v,unsigned id)
 {
     struct pt_wavetable_voice *voice;int result;
@@ -60,6 +67,13 @@ int pt_wavetable_voices_close(struct pt_wavetable_voices *v)
     if(!v->bridge)return 1;
     v->closing=1;
     for(i=0;i<PT_WAVETABLE_VOICES;++i)if(pt_wavetable_voices_stop(v,i)!=1)complete=0;
-    if(!complete || !pt_sampler_wavetable_close(v->bridge))return 0;
+    if(!complete)return 0;
+    if(v->quiesce && !v->quiesced) {
+        if(v->quiesce(v->quiesce_context)!=1 ||
+           !v->bridge->backend || !v->bridge->backend->reservation ||
+           v->bridge->backend->reservation->interrupt)return 0;
+        v->quiesced=1;
+    }
+    if(!pt_sampler_wavetable_close(v->bridge))return 0;
     memset(v,0,sizeof(*v));return 1;
 }

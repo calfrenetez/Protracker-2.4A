@@ -1,0 +1,25 @@
+{
+  "source_tree": "f303cefc84460adde81b0dacd08842352e7526ff",
+  "cases": {
+    "PTExecStudioTest": {
+      "sha256": "f8bd9e4a20bba345b5e0f0cc88c9b69de7f5d5422b5ea46e505eeb6cc1ecf980",
+      "bytes": 44376
+    },
+    "PTExecSamplerStudioTest": {
+      "sha256": "b75867c59af20e26bbe6b7eb7fd667b15f899064db300642b8a38f3afec118d5",
+      "bytes": 109972
+    },
+    "PTExecAmiGusSessionTest": {
+      "sha256": "bd3a90613fc7e56ad5e82ba97ed086683c39e10b832be996b1831616b6b1dca3",
+      "bytes": 34576
+    },
+    "PTExecAmiGusChainTest": {
+      "sha256": "babe6a0ebfcd9ebc77c6dbc3ce9c6bdf069f6db06fc662c08dcf1ab8712898b8",
+      "bytes": 33892
+    },
+    "PTExecStudioSongTest": {
+      "sha256": "bd2867f299a6575874460fd525dad3a1970f3d6606ce23f16b855a2fd0525abc",
+      "bytes": 74248
+    }
+  }
+}

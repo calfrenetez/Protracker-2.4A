@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "scope": "shared030 Studio ownership core; no audio device transport",
+  "PTExecAmiGusSessionTest_sha256": "bd3a90613fc7e56ad5e82ba97ed086683c39e10b832be996b1831616b6b1dca3",
+  "amigus-session_returncode": "0",
+  "run_files_cleaned": true
+}

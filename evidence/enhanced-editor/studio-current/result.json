@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "seconds": 61.376131958997576,
+  "window_bound_seconds": 440,
+  "cases": [
+    {
+      "case": "studio",
+      "binary": "PTExecStudioTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/render-files-1790569409106268000",
+      "sha256": "f8bd9e4a20bba345b5e0f0cc88c9b69de7f5d5422b5ea46e505eeb6cc1ecf980",
+      "independent_cleanup": true
+    },
+    {
+      "case": "sampler-studio",
+      "binary": "PTExecSamplerStudioTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/render-files-1790569410621358000",
+      "sha256": "b75867c59af20e26bbe6b7eb7fd667b15f899064db300642b8a38f3afec118d5",
+      "independent_cleanup": true
+    },
+    {
+      "case": "amigus-session",
+      "binary": "PTExecAmiGusSessionTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/render-files-1790569412385635000",
+      "sha256": "bd3a90613fc7e56ad5e82ba97ed086683c39e10b832be996b1831616b6b1dca3",
+      "independent_cleanup": true
+    },
+    {
+      "case": "amigus-chain",
+      "binary": "PTExecAmiGusChainTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/render-files-1790569414192560000",
+      "sha256": "babe6a0ebfcd9ebc77c6dbc3ce9c6bdf069f6db06fc662c08dcf1ab8712898b8",
+      "independent_cleanup": true
+    },
+    {
+      "case": "studio-song",
+      "binary": "PTExecStudioSongTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/render-files-1790569416035829000",
+      "sha256": "bd2867f299a6575874460fd525dad3a1970f3d6606ce23f16b855a2fd0525abc",
+      "independent_cleanup": true
+    }
+  ]
+}

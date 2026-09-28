@@ -1,0 +1,5 @@
+EXEC MEMORY pool_limit=131214984 reserve=262144 flags=4
+STUDIO MIX PASS: pinned versions, atomic controls, pinned handoffs/segments, block continuity, true24 and cleanup
+STUDIO MIX PASS: pinned versions, atomic controls, pinned handoffs/segments, block continuity, true24 and cleanup
+PREPARED MIX PASS: public/private parity, retained handoffs/rollback/aliases, bounded shape refusal and public value validation
+EXEC MEMORY PASS: 9 Fast allocations, zero owned bytes, budget refusal without Chip fallback

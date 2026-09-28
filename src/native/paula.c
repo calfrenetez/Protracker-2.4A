@@ -78,7 +78,7 @@ const char *pt_paula_play(struct pt_paula *a,const struct pt_project *p,unsigned
     error="PLAY: OUT OF REPLAY WORKSPACE MEMORY";
     a->staging=pt_master_allocate(&a->memory,a->source_bytes);
     if(!a->staging)goto failed;
-    if(pt_mod_export_direct(&playback,a->staging,a->source_bytes,&written)!=PT_PROJECT_OK || written!=a->source_bytes) {
+    if(pt_mod_export_round8(&playback,a->staging,a->source_bytes,&written)!=PT_PROJECT_OK || written!=a->source_bytes) {
         error="PLAY: SNAPSHOT ENCODE FAILED";goto failed;
     }
     error="PLAY: UNSAFE CLASSIC SAMPLE METADATA";
@@ -161,7 +161,9 @@ const char *pt_paula_sync(struct pt_paula *a,const struct pt_project *p)
        (size_t)p->pattern_count*1024!=a->pattern_bytes) {
         pt_paula_stop(a);return "STOPPED: EDIT REQUIRES ENHANCED REPLAY BACKEND";
     }
-    /* Compare with immutable export, not EFx-mutated Chip playback bytes. */
+    /* Apply the same private8-bit policy as start. Editor sample revisions
+       stop playback before sync, including low-bit-only master edits. Compare
+       with immutable export, not EFx-mutated Chip playback bytes. */
     if(!pt_paula_sync_prepare(&playback,a->staging,a->source_bytes,a->check,a->bytes)) {
         pt_paula_stop(a);return "STOPPED: SAMPLE CACHE CHANGED - PRESS PLAY TO REBUILD";
     }

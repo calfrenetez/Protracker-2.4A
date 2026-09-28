@@ -5,7 +5,7 @@ int main(void)
 {
     struct pt_project p={0},copy,before;struct pt_mod_export_report report;
     struct pt_sample sample={0};struct pt_event events[256]={0};uint16_t order=0;
-    int32_t pcm[4]={-128,0,1,127};const char *error;
+    int32_t pcm[4]={-128,0,1,127};
     pt_channels_init(&p.channels);p.bpm=125;p.speed=6;p.orders=&order;p.order_count=1;
     p.pattern_count=1;p.events=events;p.samples=&sample;p.sample_count=1;
     sample.pcm.data=pcm;sample.pcm.capacity=sample.pcm.frames=4;
@@ -20,11 +20,18 @@ int main(void)
     assert(!copy.channels.track[0].muted && !copy.channels.track[1].solo);
     assert(pt_mod_export_analyse(&p,&report)==PT_PROJECT_OK && (report.issues&PT_EXPORT_METADATA));
     sample.pcm.bits=24;pcm[0]=-8388607;pcm[3]=8388607;
-    error=pt_paula_playback_snapshot(&p,&copy,&report);
-    assert(error && strstr(error,"HIGH-RES MASTER"));
+    assert(!pt_paula_playback_snapshot(&p,&copy,&report));
+    assert(report.issues==PT_EXPORT_PRECISION && report.bytes && report.classification==PT_CONVERSION_CONVERTED);
+    {uint8_t mod[2112];size_t n=0;
+        assert(pt_mod_export_round8(&copy,mod,sizeof(mod),&n)==PT_PROJECT_OK && n==sizeof(mod));
+        assert(mod[2108]==128 && mod[2109]==0 && mod[2110]==0 && mod[2111]==127);
+        assert(pt_mod_export_direct(&copy,mod,sizeof(mod),&n)==PT_PROJECT_UNSUPPORTED);
+    }
     assert(sample.pcm.bits==24 && pcm[0]==-8388607 && pcm[3]==8388607);
     assert(!memcmp(&p,&before,sizeof(p)));
-    sample.pcm.bits=8;pcm[0]=-128;pcm[3]=127;
+    sample.pcm.bits=16;pcm[0]=-32768;pcm[3]=32767;
+    assert(!pt_paula_playback_snapshot(&p,&copy,&report) && report.issues==PT_EXPORT_PRECISION);
+    /* Precision permission never hides another unsupported attribute. */
     sample.pcm.channels=2;sample.pcm.frames=2;
     assert(strstr(pt_paula_playback_snapshot(&p,&copy,&report),"STEREO MASTER"));
     sample.pcm.channels=1;sample.pcm.frames=4;sample.pcm.rate=48000;
@@ -36,6 +43,7 @@ int main(void)
     sample.loop=PT_LOOP_PINGPONG;sample.loop_end=4;
     assert(strstr(pt_paula_playback_snapshot(&p,&copy,&report),"LOOP NOT PAULA"));
     sample.loop=PT_LOOP_NONE;sample.loop_end=0;
+    sample.pcm.bits=8;pcm[0]=-128;pcm[3]=127;
     assert(!pt_paula_playback_snapshot(&p,&copy,&report));
     p.channels.track[0].route=PT_AMIGUS;
     assert(strstr(pt_paula_playback_snapshot(&p,&copy,&report),"AMIGUS PLAYBACK NOT AVAILABLE"));
@@ -48,6 +56,6 @@ int main(void)
     before=p;assert(pt_paula_playback_snapshot(&p,&p,&report));
     assert(!memcmp(&p,&before,sizeof(p)));
     assert(pt_paula_playback_snapshot(NULL,&copy,&report));
-    puts("PAULA PLAYBACK PREFLIGHT PASS: private metadata, unchanged 24-bit masters, explicit unavailable routes");
+    puts("PAULA PLAYBACK PREFLIGHT PASS: private metadata, optional8-bit playback copies, unchanged16/24-bit masters, explicit unavailable routes");
     return 0;
 }

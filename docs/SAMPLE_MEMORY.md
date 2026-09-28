@@ -14,7 +14,7 @@ software implementation from the remaining integration and hardware gates.
 | Requirement | Implemented software | Still required |
 | --- | --- | --- |
 | Authoritative8/16/24-bit masters | Queried, bounded native Fast-RAM pool; precision-preserving sampler versions, processing, history and source pins. Fast-equipped machines fail rather than spill enhanced allocations into Chip RAM. | Physical memory-pressure/endurance measurements. |
-| Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition preserves master precision. | Enhanced multichannel song routing beyond the classic four-channel bridge; physical sound/performance acceptance. |
+| Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition and precision-only song playback preserve master precision. | Enhanced multichannel song routing beyond the classic four-channel bridge; physical sound/performance acceptance. |
 | AmiGUS wavetable copies | Versioned evictable resource pool, sampler revision/master-pin bridge, bounded 16-voice lease owner with validated rate/loop/address plans, mono sequencer trigger/control/stop dispatch, preflight-gated master-pinned sequence ownership, editor veto/retry barriers and injected callbacks, 8/16-bit conversion and bounded address allocator/chunk uploader behind an injected register bus; failure/pinning tests. | Verified card capacity, native bus binding and voice dispatcher; explicit wavetable reservation/cache lifetime now implemented and tested with fake callbacks. Injected register tests do not establish real card access. |
 | Direct24-bit Studio | Master-pinned mixer, audited sequence, sampler/editor ownership, bounded queue/pump and integrated PCM-session owner; optional reservation lease retained through reset and adapter quiescence. Up to16 voice slots are a software bound. | Native PLAY/output wiring, verified hardware capabilities and sustainable physical voice-count/timing evidence. |
 | Master-preserving persistence | Bounded enhanced-project/sample saving and explicit classic conversion; private EFx exports/bounce never replace masters. Explicit new-file recovery snapshots and staged identity-checked restoration preserve all master precision. | Native opt-in configuration, idle scheduling, bounded retention, read-only discovery, explicit recovery UI and exact save are implemented and emulator-tested; preferences-panel controls, real crash/endurance and physical acceptance remain. |
@@ -2730,3 +2730,42 @@ The final cumulative shared030 fixture also passes: 420216-byte candidate
 pending cleanup. Independent cleanup and explicit emulator release completed.
 See `evidence/enhanced-editor/wavetable-quiescence/`. This is injected voice-bus
 acceptance, with separate native timer diagnostics, not AmiGUS hardware output.
+
+## High-resolution masters through the classic Paula song bridge
+
+Otherwise classic-compatible four-channel Paula songs can now play mono16/24-bit
+masters through private rounded8-bit playback copies. Rounding uses nearest with
+ties away from zero and saturation, without dither or resampling. The authoritative
+PCM, sample descriptors and enhanced save remain unchanged. Strict lossless MOD
+export still refuses precision loss; the existing explicit export policy remains
+separate from this temporary playback representation.
+
+Only referenced instruments receive Chip allocations. Restart advances the cache
+generation and refills storage from the immutable master, including after EFx
+modifies a private copy. Stop releases the cache. Pattern/control synchronization
+uses the same rounded representation as startup; the editor sample-generation
+barrier stops playback for any sample edit, including low-bit changes whose
+derived8-bit bytes would be identical. Direct adapter callers must retain this
+sample-revision barrier: streaming sync checks output compatibility, not exact
+master identity. Stereo, nonclassic rate, slices, unsupported loops, Studio mode,
+AmiGUS/MIDI routing and other classic limitations remain explicitly refused.
+
+Host sanitizer checks cover8/16/24-bit preflight, full-export versus bounded-stream
+parity, conversion boundaries, source preservation and refusal of other features.
+The native cumulative Paula fixture passes in shared030: actual audio.device/CIA
+playback, Chip/Fast placement, unused-cache omission, restart refill, changed-cache
+stop/rebuild, exact enhanced saves and partial-allocation cleanup. All five native
+fixtures returned0. CIAA fallback execution was not run because Workbench owns
+timerB; existing ownership was preserved. Independent cleanup confirmed all DMA
+off and exact run/launcher absence before explicit release. No physical testing
+or listening acceptance is implied. See `evidence/enhanced-editor/paula-highres-song/`.
+
+The full native editor also passes the shared030 UI workflow: mixed16/24-bit
+song playback, low-bit-only24-bit sample reverse stopping DMA even when derived
+8-bit bytes match, exact undo, pattern restart, save, reopen and second exact save.
+Candidate262564 bytes SHA256
+`83353fbdf697635278e53bbbcaedc5f76c45a984663b496c172df567daa5df2d`;
+run `paula-highres-ui-1790559767477699000`. Both normal exits, exact temporary
+settings restoration, independent cleanup and explicit release passed. An earlier
+UI runner queried DMA before acknowledging Stop; that failed run is retained
+separately and the corrected runner waits for a fresh stopped application frame.

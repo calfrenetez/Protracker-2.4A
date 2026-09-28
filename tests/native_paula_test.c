@@ -28,7 +28,7 @@ int main(int argc,char **argv)
     struct pt_paula a={0},b={0};struct pt_playback state;struct pt_mod_export_report report;
     struct Library *ciaa=NULL,*ciab=NULL;struct Interrupt holda,holdb;
     int32_t *pressure_pcm=NULL;
-    FILE *f=NULL;uint8_t *input=NULL,*roundtrip=NULL;long length;size_t written;unsigned own_a=0,own_b=0,i;int rc=20;
+    FILE *f=NULL;uint8_t *input=NULL,*roundtrip=NULL,*enhanced_before=NULL,*enhanced_after=NULL;long length;size_t written;unsigned own_a=0,own_b=0,i;int rc=20;
     pt_document_init(&doc,&allocator);memset(&holda,0,sizeof(holda));memset(&holdb,0,sizeof(holdb));
     holda.is_Node.ln_Type=NT_INTERRUPT;holda.is_Node.ln_Name="PT24G ownership test";holda.is_Code=(void (*)())dummy_interrupt;holdb=holda;
     CHECK(argc==2);f=fopen(argv[1],"rb");CHECK(f);CHECK(!fseek(f,0,SEEK_END));length=ftell(f);CHECK(length>0);rewind(f);
@@ -70,7 +70,8 @@ int main(int argc,char **argv)
                 high_samples[0].pcm.data=high_pcm;high_samples[0].pcm.capacity=4;
                 high_samples[0].pcm.frames=4;high_samples[0].pcm.bits=24;
                 high_samples[0].loop=PT_LOOP_NONE;high_samples[0].loop_start=high_samples[0].loop_end=0;
-                candidate.samples=high_samples;expected="HIGH-RES MASTER";
+                high_samples[0].pcm.rate=48000;
+                candidate.samples=high_samples;expected="SAMPLE RATE";
                 memcpy(before_samples,high_samples,doc.project.sample_count*sizeof(*high_samples));
             }
             pt_paula_poll(&a,&state);ticks=state.ticks;
@@ -82,7 +83,7 @@ int main(int argc,char **argv)
             CHECK(!memcmp(high_pcm,expected_pcm,sizeof(high_pcm)));
             if(attempt==4)CHECK(!memcmp(high_samples,before_samples,doc.project.sample_count*sizeof(*high_samples)));
         }
-        puts("PLAY REFUSAL PASS: Studio/AmiGUS/MIDI/24-bit requests preserve active replay, cache ownership and masters");
+        puts("PLAY REFUSAL PASS: Studio/AmiGUS/MIDI/high-resolution rate requests preserve active replay, cache ownership and masters");
     }
     CHECK(pt_paula_play(&b,&doc.project,0,0,0)!=NULL && !b.started);
     pt_paula_poll(&a,&state);CHECK(state.active);pt_paula_stop(&a);
@@ -90,6 +91,54 @@ int main(int argc,char **argv)
     roundtrip=malloc(report.bytes);CHECK(roundtrip);
     CHECK(pt_mod_export_direct(&doc.project,roundtrip,report.bytes,&written)==PT_PROJECT_OK);
     CHECK(written==(size_t)length && !memcmp(input,roundtrip,written));
+    /* Song playback derives precision-only copies; enhanced save stays exact.
+       Sample revisions are an editor stop barrier. This direct adapter test
+       exercises its representation-level pattern/control sync contract. */
+    for(i=16;i<=24;i+=8) {
+        struct pt_project q=doc.project;struct pt_sample samples[31],saved_samples[31];
+        int32_t pcm[8],saved_pcm[8];size_t enhanced_size,n;unsigned j;
+        int32_t scale=1L<<(i-8),half=scale/2;
+        const uint8_t expected[8]={128,255,0,0,0,1,127,127};
+        pcm[0]=-128*scale;pcm[1]=-half;pcm[2]=1-half;pcm[3]=0;
+        pcm[4]=half-1;pcm[5]=half;pcm[6]=127*scale;pcm[7]=128*scale-1;
+        memcpy(saved_pcm,pcm,sizeof(pcm));
+        memcpy(samples,q.samples,q.sample_count*sizeof(*samples));q.samples=samples;
+        samples[0].pcm.data=pcm;samples[0].pcm.capacity=samples[0].pcm.frames=8;
+        samples[0].pcm.bits=(uint8_t)i;samples[0].loop=PT_LOOP_NONE;
+        samples[0].loop_start=samples[0].loop_end=samples[0].crossfade=0;
+        samples[30]=samples[0]; /* Unused high-resolution master needs no Chip copy. */
+        memcpy(saved_samples,samples,sizeof(samples));
+        CHECK(pt_project_size(&q,&enhanced_size)==PT_PROJECT_OK);
+        enhanced_before=malloc(enhanced_size);enhanced_after=malloc(enhanced_size);
+        CHECK(enhanced_before && enhanced_after);
+        CHECK(pt_project_encode(&q,enhanced_before,enhanced_size,&n)==PT_PROJECT_OK && n==enhanced_size);
+        CHECK(pt_mod_export_direct(&q,roundtrip,(size_t)length,&written)==PT_PROJECT_UNSUPPORTED);
+        CHECK(!pt_paula_play(&a,&q,0,0,0));Delay(10);pt_paula_poll(&a,&state);
+        CHECK(state.active && state.period[0]==428 && a.sample_bytes[0]==8);
+        CHECK((TypeOfMem(a.sample_data[0])&MEMF_CHIP) && !a.sample_bytes[30]);
+        CHECK(!(a.cached_instruments&(1UL<<30)));
+        CHECK(!memcmp(a.staging+a.bytes,expected,sizeof(expected)));
+        /* The classic replayer may clear its own first sample word. */
+        for(j=2;j<8;++j)CHECK(a.sample_data[0][j]==expected[j]);
+        CHECK(!pt_paula_sync(&a,&q));
+        {uint8_t *buffer=a.sample_data[0];uint64_t version=a.cache_version;
+            buffer[2]^=0x7f;
+            CHECK(!pt_paula_play(&a,&q,0,0,0));
+            CHECK(a.cache_version==version+1 && a.sample_data[0]==buffer && buffer[2]==expected[2]);
+        }
+        pt_paula_stop(&a);CHECK(!a.cache.bytes && !a.memory.used);
+        CHECK(!memcmp(samples,saved_samples,sizeof(samples)) && !memcmp(pcm,saved_pcm,sizeof(pcm)));
+        CHECK(pt_project_encode(&q,enhanced_after,enhanced_size,&n)==PT_PROJECT_OK && n==enhanced_size);
+        CHECK(!memcmp(enhanced_before,enhanced_after,enhanced_size));
+        /* A changed derived byte stops sync; restart gets a fresh generation. */
+        CHECK(!pt_paula_play(&a,&q,0,0,0));pcm[4]+=scale;
+        CHECK(pt_paula_sync(&a,&q) && !a.started && !a.memory.used && !a.cache.bytes);
+        CHECK(!pt_paula_play(&a,&q,0,0,0));CHECK(a.sample_data[0][4]==1);
+        pt_paula_stop(&a);pcm[4]-=scale;
+        CHECK(!memcmp(pcm,saved_pcm,sizeof(pcm)));
+        free(enhanced_before);free(enhanced_after);enhanced_before=enhanced_after=NULL;
+    }
+    puts("HIGHRES SONG PASS: 16/24-bit masters, rounded private8-bit Chip playback, unused cache omitted, stop/rebuild, restart refill and byte-exact enhanced save");
     /* Saved mute/solo gates actual output without erasing effect state.
        Strict MOD export still refuses to discard these settings. */
     doc.project.channels.track[0].muted=1;
@@ -337,5 +386,5 @@ done:
     if(own_b)unclaim(ciab,0,&holdb);
     if(f)fclose(f);
     if(pressure_pcm)FreeMem(pressure_pcm,131070UL*sizeof(*pressure_pcm));
-    free(input);free(roundtrip);pt_document_release(&doc);return rc;
+    free(input);free(roundtrip);free(enhanced_before);free(enhanced_after);pt_document_release(&doc);return rc;
 }

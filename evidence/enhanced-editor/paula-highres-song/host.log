@@ -1,0 +1,11 @@
+PAULA PLAYBACK PREFLIGHT PASS: private metadata, optional8-bit playback copies, unchanged16/24-bit masters, explicit unavailable routes
+.PAULA SYNC PASS: bounded prefix, full-export parity, sample/header refusal, split blocks, guards and unchanged masters
+..PAULA PREVIEW PASS: filtered mono rate conversion, precision, padding, bounds and master preservation
+.MOD ROUND8 PASS: 16/24-bit signed ties and saturation, exact reopen, source preservation, strict/rate/capacity/alias refusal, 8-bit identity
+.MOD STREAM PASS: direct/round8/TPDF exact multi-block bytes, legacy headers, loops, 65 patterns, source and destination protection; workspace=7184
+MOD STREAM PASS: direct/round8/TPDF exact multi-block bytes, legacy headers, loops, 65 patterns, source and destination protection; workspace=7184
+.
+----------------------------------------------------------------------
+Ran 6 tests in 12.049s
+
+OK

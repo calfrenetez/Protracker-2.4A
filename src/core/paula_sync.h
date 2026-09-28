@@ -3,7 +3,10 @@
 #include "paula_cache.h"
 #include "mod_project.h"
 /* Prepare only metadata/pattern bytes in unpublished caller workspace. Compare
- * streamed sample bytes against the immutable export, never EF-mutated DMA.
+ * streamed rounded8-bit sample bytes against the immutable playback export,
+ * never EF-mutated DMA. This checks playback representation compatibility, not
+ * master identity. The editor must stop on sample revisions (even edits that
+ * quantize identically) before calling this for pattern/control-only changes.
  * Source project/export must remain stable and disjoint from workspace. Failure
  * may change workspace, but the caller must publish no rows until success. */
 struct pt_paula_sync_stream {
@@ -39,7 +42,7 @@ static inline int pt_paula_sync_prepare(const struct pt_project *p,
        (uintptr_t)before-(uintptr_t)workspace<capacity :
        (uintptr_t)workspace-(uintptr_t)before<bytes)return 0;
     stream=(struct pt_paula_sync_stream){before,workspace,bytes,plan.mod.sample_offset,0};
-    if(pt_mod_export_stream(p,0,pt_paula_sync_sink,&stream)!=PT_PROJECT_OK || stream.offset!=bytes)return 0;
+    if(pt_mod_export_stream(p,1,pt_paula_sync_sink,&stream)!=PT_PROJECT_OK || stream.offset!=bytes)return 0;
     for(i=1084;i<plan.mod.sample_offset;i+=4) {
         unsigned sample=(workspace[i]&0xf0)|(workspace[i+2]>>4);
         if(sample>31)return 0;

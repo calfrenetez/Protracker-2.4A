@@ -1,0 +1,306 @@
+{
+  "target": "amiberry-030",
+  "suite": "core",
+  "cpu": {
+    "model": "68030",
+    "name": "686803",
+    "fpu": "0",
+    "24bit": "false",
+    "compatible": "true",
+    "cycle_exact": "true"
+  },
+  "memory": {
+    "chip": "2048KB",
+    "fast": "0KB",
+    "bogo": "0KB",
+    "z3": "131072KB",
+    "rtg": "0KB"
+  },
+  "emulator": {
+    "version": "Amiberry 8.3.0 (2026.08.19)",
+    "sdl": "SDL 3.4.14"
+  },
+  "project": "protracker",
+  "scope": "14 noninteractive core fixtures; no audio or AmiGUS operations",
+  "passed": true,
+  "attempted_artifacts": {
+    "PTInvertPCMTest": "9da9d157ca45e83354ee7b9d1b90e397aaea232ce4e2c29242d462cd3e998f61",
+    "PTInvertTest": "3f6ae18139ca2bcdcc205bb9a3e77859b0a7e4ab975ff7b791228232029427e0",
+    "PTSlotsTest": "7edcd297d52a4ac0d28585a789dd74cfdb4d92b0721e824b45d1422b41f59327",
+    "PTSamplerTest": "744c5ec0144979e1192fcd8d9edc8289a7b0aa30122224dd4d90d515b3259079",
+    "PTRawTest": "95ae56a333a6b79132c0eef1e8c3fbf85caa9e532c44fc318602adab92d079ef",
+    "PTSvxTest": "42b33db84c5e38d1303de88f443d1b18c5590fe7214c92a58588d9b617b0329a",
+    "PTFilterTest": "935dbb58f9f01b288fbaf0f81767eebdfd5c2e6b0cb98d97e6223ea21cfe9458",
+    "PTMidiTest": "bb7789471bdb8cebb4539bc5f499fb5f9d3ae64eb062470e1ddad4dd40f8de45",
+    "PTRecordTest": "a6831ade70f9289b17f6e3cbf3c3db3a7f82db245aaf1416527ad1305d39bddb",
+    "PTPatternTest": "bad48174be311e95306bf35a815d87d0eb2d4d1a56ccb80d30fd4514ecded209",
+    "PTSlicesTest": "f4c7af9ef24fafcfe8ebdbe5fd20026f75f2d32524109010e6509fa0c38e1296",
+    "PTFileSafetyTest": "f1be65564a0782b2d214232e06a682d54dc886fe379452d36dc56ca1e024b33b",
+    "PTChannelsTest": "6ffb1ff65dc031246024b2f2fa82197ce6b6d9c93e329102c6c2e65020c4f76f",
+    "PTPcmTest": "392666739ea7384477c431e91a1ab12cfa834acf716606119d4917a5983754f8"
+  },
+  "tested_artifacts": {
+    "PTInvertPCMTest": "9da9d157ca45e83354ee7b9d1b90e397aaea232ce4e2c29242d462cd3e998f61",
+    "PTInvertTest": "3f6ae18139ca2bcdcc205bb9a3e77859b0a7e4ab975ff7b791228232029427e0",
+    "PTSlotsTest": "7edcd297d52a4ac0d28585a789dd74cfdb4d92b0721e824b45d1422b41f59327",
+    "PTSamplerTest": "744c5ec0144979e1192fcd8d9edc8289a7b0aa30122224dd4d90d515b3259079",
+    "PTRawTest": "95ae56a333a6b79132c0eef1e8c3fbf85caa9e532c44fc318602adab92d079ef",
+    "PTSvxTest": "42b33db84c5e38d1303de88f443d1b18c5590fe7214c92a58588d9b617b0329a",
+    "PTFilterTest": "935dbb58f9f01b288fbaf0f81767eebdfd5c2e6b0cb98d97e6223ea21cfe9458",
+    "PTMidiTest": "bb7789471bdb8cebb4539bc5f499fb5f9d3ae64eb062470e1ddad4dd40f8de45",
+    "PTRecordTest": "a6831ade70f9289b17f6e3cbf3c3db3a7f82db245aaf1416527ad1305d39bddb",
+    "PTPatternTest": "bad48174be311e95306bf35a815d87d0eb2d4d1a56ccb80d30fd4514ecded209",
+    "PTSlicesTest": "f4c7af9ef24fafcfe8ebdbe5fd20026f75f2d32524109010e6509fa0c38e1296",
+    "PTFileSafetyTest": "f1be65564a0782b2d214232e06a682d54dc886fe379452d36dc56ca1e024b33b",
+    "PTChannelsTest": "6ffb1ff65dc031246024b2f2fa82197ce6b6d9c93e329102c6c2e65020c4f76f",
+    "PTPcmTest": "392666739ea7384477c431e91a1ab12cfa834acf716606119d4917a5983754f8"
+  },
+  "completed_cases": [
+    "PTInvertPCMTest",
+    "PTInvertTest",
+    "PTSlotsTest",
+    "PTSamplerTest",
+    "PTRawTest",
+    "PTSvxTest",
+    "PTFilterTest",
+    "PTMidiTest",
+    "PTRecordTest",
+    "PTPatternTest",
+    "PTSlicesTest",
+    "PTFileSafetyTest",
+    "PTChannelsTest",
+    "PTPcmTest"
+  ],
+  "calls": [
+    {
+      "tool": "amiga_ping",
+      "arguments": {},
+      "result": "Amiga alive - clients: 0, chip: 1926976 bytes, fast: 131617640 bytes"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Dev:Tests/core-qualification-20260928T033243849540Z/PTSamplerTest"
+      },
+      "result": "File: Dev:Tests/core-qualification-20260928T033243849540Z/PTSamplerTest\nCRC32: CC1D6EA9\nSize: 125492 bytes"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Dev:Tests/core-qualification-20260928T033243849540Z/PTInvertPCMTest"
+      },
+      "result": "File: Dev:Tests/core-qualification-20260928T033243849540Z/PTInvertPCMTest\nCRC32: 9221A501\nSize: 26648 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Stack 65536\nCD Dev:Tests/core-qualification-20260928T033243849540Z\nPTInvertPCMTest >PTInvertPCMTest.log\nEcho INFRA-RC $RC",
+        "timeout": 45
+      },
+      "result": "[OK]\nINFRA-RC 0"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Dev:Tests/core-qualification-20260928T033243849540Z/PTInvertTest"
+      },
+      "result": "File: Dev:Tests/core-qualification-20260928T033243849540Z/PTInvertTest\nCRC32: C2F4FF43\nSize: 16500 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Stack 65536\nCD Dev:Tests/core-qualification-20260928T033243849540Z\nPTInvertTest >PTInvertTest.log\nEcho INFRA-RC $RC",
+        "timeout": 45
+      },
+      "result": "[OK]\nINFRA-RC 0"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Dev:Tests/core-qualification-20260928T033243849540Z/PTSlotsTest"
+      },
+      "result": "File: Dev:Tests/core-qualification-20260928T033243849540Z/PTSlotsTest\nCRC32: 5432A368\nSize: 141760 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Stack 65536\nCD Dev:Tests/core-qualification-20260928T033243849540Z\nPTSlotsTest >PTSlotsTest.log\nEcho INFRA-RC $RC",
+        "timeout": 45
+      },
+      "result": "[OK]\nINFRA-RC 0"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Dev:Tests/core-qualification-20260928T033243849540Z/PTSamplerTest"
+      },
+      "result": "File: Dev:Tests/core-qualification-20260928T033243849540Z/PTSamplerTest\nCRC32: CC1D6EA9\nSize: 125492 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Stack 65536\nCD Dev:Tests/core-qualification-20260928T033243849540Z\nPTSamplerTest >PTSamplerTest.log\nEcho INFRA-RC $RC",
+        "timeout": 45
+      },
+      "result": "[OK]\nINFRA-RC 0"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Dev:Tests/core-qualification-20260928T033243849540Z/PTRawTest"
+      },
+      "result": "File: Dev:Tests/core-qualification-20260928T033243849540Z/PTRawTest\nCRC32: AC013171\nSize: 27788 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Stack 65536\nCD Dev:Tests/core-qualification-20260928T033243849540Z\nPTRawTest >PTRawTest.log\nEcho INFRA-RC $RC",
+        "timeout": 45
+      },
+      "result": "[OK]\nINFRA-RC 0"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Dev:Tests/core-qualification-20260928T033243849540Z/PTSvxTest"
+      },
+      "result": "File: Dev:Tests/core-qualification-20260928T033243849540Z/PTSvxTest\nCRC32: 89A6681C\nSize: 32220 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Stack 65536\nCD Dev:Tests/core-qualification-20260928T033243849540Z\nPTSvxTest >PTSvxTest.log\nEcho INFRA-RC $RC",
+        "timeout": 45
+      },
+      "result": "[OK]\nINFRA-RC 0"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Dev:Tests/core-qualification-20260928T033243849540Z/PTFilterTest"
+      },
+      "result": "File: Dev:Tests/core-qualification-20260928T033243849540Z/PTFilterTest\nCRC32: 69A26EB2\nSize: 47284 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Stack 65536\nCD Dev:Tests/core-qualification-20260928T033243849540Z\nPTFilterTest >PTFilterTest.log\nEcho INFRA-RC $RC",
+        "timeout": 45
+      },
+      "result": "[OK]\nINFRA-RC 0"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Dev:Tests/core-qualification-20260928T033243849540Z/PTMidiTest"
+      },
+      "result": "File: Dev:Tests/core-qualification-20260928T033243849540Z/PTMidiTest\nCRC32: 5996456E\nSize: 19884 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Stack 65536\nCD Dev:Tests/core-qualification-20260928T033243849540Z\nPTMidiTest >PTMidiTest.log\nEcho INFRA-RC $RC",
+        "timeout": 45
+      },
+      "result": "[OK]\nINFRA-RC 0"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Dev:Tests/core-qualification-20260928T033243849540Z/PTRecordTest"
+      },
+      "result": "File: Dev:Tests/core-qualification-20260928T033243849540Z/PTRecordTest\nCRC32: 3933B96B\nSize: 52956 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Stack 65536\nCD Dev:Tests/core-qualification-20260928T033243849540Z\nPTRecordTest >PTRecordTest.log\nEcho INFRA-RC $RC",
+        "timeout": 45
+      },
+      "result": "[OK]\nINFRA-RC 0"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Dev:Tests/core-qualification-20260928T033243849540Z/PTPatternTest"
+      },
+      "result": "File: Dev:Tests/core-qualification-20260928T033243849540Z/PTPatternTest\nCRC32: 18D010D0\nSize: 58024 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Stack 65536\nCD Dev:Tests/core-qualification-20260928T033243849540Z\nPTPatternTest >PTPatternTest.log\nEcho INFRA-RC $RC",
+        "timeout": 45
+      },
+      "result": "[OK]\nINFRA-RC 0"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Dev:Tests/core-qualification-20260928T033243849540Z/PTSlicesTest"
+      },
+      "result": "File: Dev:Tests/core-qualification-20260928T033243849540Z/PTSlicesTest\nCRC32: 5E7CFCF0\nSize: 29348 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Stack 65536\nCD Dev:Tests/core-qualification-20260928T033243849540Z\nPTSlicesTest >PTSlicesTest.log\nEcho INFRA-RC $RC",
+        "timeout": 45
+      },
+      "result": "[OK]\nINFRA-RC 0"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Dev:Tests/core-qualification-20260928T033243849540Z/PTFileSafetyTest"
+      },
+      "result": "File: Dev:Tests/core-qualification-20260928T033243849540Z/PTFileSafetyTest\nCRC32: D68F4EAA\nSize: 16388 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Stack 65536\nCD Dev:Tests/core-qualification-20260928T033243849540Z\nPTFileSafetyTest >PTFileSafetyTest.log\nEcho INFRA-RC $RC",
+        "timeout": 45
+      },
+      "result": "[OK]\nINFRA-RC 0"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Dev:Tests/core-qualification-20260928T033243849540Z/PTChannelsTest"
+      },
+      "result": "File: Dev:Tests/core-qualification-20260928T033243849540Z/PTChannelsTest\nCRC32: 769B48AA\nSize: 17364 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Stack 65536\nCD Dev:Tests/core-qualification-20260928T033243849540Z\nPTChannelsTest >PTChannelsTest.log\nEcho INFRA-RC $RC",
+        "timeout": 45
+      },
+      "result": "[OK]\nINFRA-RC 0"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Dev:Tests/core-qualification-20260928T033243849540Z/PTPcmTest"
+      },
+      "result": "File: Dev:Tests/core-qualification-20260928T033243849540Z/PTPcmTest\nCRC32: EBEBD87F\nSize: 33976 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Stack 65536\nCD Dev:Tests/core-qualification-20260928T033243849540Z\nPTPcmTest >PTPcmTest.log\nEcho INFRA-RC $RC",
+        "timeout": 45
+      },
+      "result": "[OK]\nINFRA-RC 0"
+    }
+  ],
+  "commit": "8cefe39e2f82cfdbd9027c6ca732dd0369d542c5",
+  "working_tree": "M src/editor/editor.c\n M src/editor/editor.h\n M src/editor/view.c\n M src/editor/view.h\n M src/native/editor_main.c\n M tests/editor_test.c\n M tests/test_editor.py\n M tools/build_core_tests.py\n M tools/test_sampler_emulator.py\n?? AGENTS.md\n?? amiga-test.json\n?? src/native/pattern_display.c\n?? src/native/pattern_display.h\n?? tests/native_prepared_test.c\n?? tools/shared_infra_sampler.py\n?? tools/shared_infra_ui.py",
+  "artifact_sha256": "744c5ec0144979e1192fcd8d9edc8289a7b0aa30122224dd4d90d515b3259079",
+  "guest_directory": "Dev:Tests/core-qualification-20260928T033243849540Z",
+  "overall_seconds": 55.521,
+  "source_export_tree": "1ae2d43c19955e8414e81b6fa4c9b329e2c09484",
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0",
+  "run_files_cleaned": true
+}

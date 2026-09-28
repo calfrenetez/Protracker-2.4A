@@ -1,0 +1,7 @@
+EDITOR EFx REFERENCE PASS: exact queued PCM, backpressure, guarded edits, held leases, undo/restart, master roundtrip, no leaks
+EDITOR EFx REFERENCE PASS: exact queued PCM, backpressure, guarded edits, held leases, undo/restart, master roundtrip, no leaks
+.
+----------------------------------------------------------------------
+Ran 1 test in 7.839s
+
+OK

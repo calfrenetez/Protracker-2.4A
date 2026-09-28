@@ -2934,3 +2934,21 @@ Studio PCM output now has an optional injected prefill/start acknowledgement gat
 ownership through pending/failed enable and requires confirmed reset before reuse.
 This extends the software transport only; it does not enable native AmiGUS MMIO
 or establish card playback acceptance. See `AMIGUS_STUDIO_TRANSPORT.md`.
+
+
+## Studio start, prefill and integrated regression
+
+The injected PCM session can now enable only after capacity-bounded prefill and
+exact device acknowledgement. Its optional editor binding preserves edit/undo/
+Stop/dispose and PCM reservation ownership through uncertain startup and reset.
+Short/empty streams cannot deadlock waiting for the configured prefill. Native
+register binding, real device FIFO/readback and sustainable service timing remain
+unqualified; these controls do not wire native Studio PLAY.
+
+Latest source8cefe39 builds139 Amiga executables with298 source hashes verified.
+All203 host cases qualify (one HEAD-based reference rerun on8cefe39), plus two
+production-Exec Studio fixtures and14 registered native core cases. Every run
+exited normally, released owned resources, verified DMAoff/exact cleanup and was
+explicitly released to AmiConnect. Native editor/Paula bytes match their prior
+qualified candidates. Evidence: `evidence/enhanced-editor/studio-prefill/`.
+Physical machine stayed off and untouched.

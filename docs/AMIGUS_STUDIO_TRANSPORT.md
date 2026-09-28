@@ -360,6 +360,7 @@ and measured service timing. No capacity is inferred from a nominal card model.
 
 Prefill validation: all139 native executables build; the configured-prefill
 register and editor fixtures pass shared030 with19 and171 Fast allocations
-respectively, all released. Complete host invocation passes203 cases; one
-HEAD-based oracle requires a post-commit rerun to cover this latest source.
+respectively, all released. Complete host invocation passes203 cases; the one
+HEAD-based oracle was separately rerun successfully on8cefe39 in7.839s to cover
+this latest source.
 Evidence and the exact source caveat: `evidence/enhanced-editor/studio-prefill/`.

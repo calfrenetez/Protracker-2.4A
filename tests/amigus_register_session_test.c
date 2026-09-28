@@ -7,7 +7,7 @@ static unsigned live;
 static void *alloc(void *c,size_t n) {void *p;(void)c;p=malloc(n);if(p)++live;return p;}
 static void release(void *c,void *p) {(void)c;assert(live);--live;free(p);}
 struct bus {uint16_t rate,mask,irq,used,format;unsigned reset_delay,resets,writes,fail_write,owned;
-    unsigned starts,formats,format_delay,start_delay,start_result,format_result;uint32_t words[6];};
+    unsigned starts,formats,format_delay,start_delay,start_result,format_result;uint32_t words[12];};
 static int owned(void *v) {return ((struct bus *)v)->owned;}
 static int read16(void *v,unsigned a,uint16_t *x) {struct bus *b=v;*x=a==6?b->rate:a==2?b->mask:a==4?b->format:b->used;return 1;}
 static int write16(void *v,unsigned a,uint16_t x) {
@@ -28,7 +28,7 @@ static int write16(void *v,unsigned a,uint16_t x) {
     return 1;
 }
 static int write32(void *v,unsigned a,uint32_t x) {
-    struct bus *b=v;assert(a==12 && b->used+2<=12 && b->writes<6);
+    struct bus *b=v;assert(a==12 && b->used+2<=12 && b->writes<12);
     b->words[b->writes++]=x;b->used+=2;return b->writes!=b->fail_write;
 }
 /* Delayed device readback, failed enable, Stop before acknowledgement, and
@@ -85,6 +85,48 @@ static void start_cases(void)
         assert(pt_amigus_session_detach(&session) && pt_studio_queue_close(q)==PT_QUEUE_OK);
     }
 }
+static void prefill_cases(void)
+{
+    struct pt_allocator a={NULL,alloc,release};int32_t data[12]={1,257,-513,1025,-1,8388607,42,-79,13,1234,-998,91};
+    unsigned mode;
+    for(mode=0;mode<7;++mode) {
+        struct bus b={0};struct pt_amigus_register_port registers;struct pt_amigus_session session={0};
+        struct pt_amigus_register_io io={&b,owned,read16,write16,write32};
+        struct pt_amigus_fifo_port port={&registers,pt_amigus_register_capacity,pt_amigus_register_write3,pt_amigus_register_reset};
+        struct pt_studio_queue *q=pt_studio_queue_open(&a,8);unsigned frames=mode==0?0:mode==1?1:mode==2?3:6,i,at=0;
+        b.owned=1;assert(q && pt_amigus_register_port_init(&registers,&io,12));
+        assert(!pt_amigus_session_open_prefilled(&session,q,&port,pt_amigus_register_drain,&registers,pt_amigus_register_start,&registers,0));
+        assert(session.phase==PT_AS_IDLE && !b.resets);
+        if(mode>=5) {
+            assert(!pt_amigus_session_open_prefilled(&session,q,&port,pt_amigus_register_drain,&registers,pt_amigus_register_start,&registers,mode==5?3:~0u));
+            assert(session.phase==PT_AS_RESET && !pt_amigus_session_detach(&session) && !b.starts);
+            assert(pt_amigus_session_step(&session)==PT_CONSUMER_ERROR && session.phase==PT_AS_DONE);
+        } else {
+            assert(pt_amigus_session_open_prefilled(&session,q,&port,pt_amigus_register_drain,&registers,pt_amigus_register_start,&registers,2));
+            while(at<frames) {
+                unsigned count=mode==4?1:frames-at;
+                struct pt_pcm pcm={data+at*2,count*2,count,48000,2,24};
+                assert(pt_studio_queue_push(q,&pcm)==PT_QUEUE_OK);at+=count;
+            }
+            pt_studio_queue_finish(q);
+            for(i=0;i<100 && session.phase!=PT_AS_DONE;++i) {
+                unsigned writes=b.writes;
+                assert(pt_amigus_session_step(&session)!=PT_CONSUMER_ERROR);
+                if(b.starts)assert(b.writes>=((frames<4)?(frames+1)/2:2)*3);
+                else assert(b.writes<=6);
+                assert(b.writes-writes<=3);
+                if(b.rate==0x8007)b.used=0; /* Only the enabled simulated device consumes. */
+            }
+            assert(i<100 && b.starts==(frames!=0) && b.writes==((frames+1)/2)*3);
+            assert(session.padding==(frames&1u));
+            for(i=0;i<b.writes*4;++i) {
+                unsigned want=i<frames*6?((uint32_t)data[i/3]>>(16-(i%3)*8))&255:0;
+                assert(((b.words[i/4]>>(24-(i%4)*8))&255)==want);
+            }
+        }
+        assert(pt_amigus_session_detach(&session));assert(pt_studio_queue_close(q)==PT_QUEUE_OK);
+    }
+}
 int main(void)
 {
     struct pt_allocator a={NULL,alloc,release};int32_t data[6]={1,257,-513,1025,-1,8388607};
@@ -121,5 +163,5 @@ int main(void)
         }
         assert(pt_amigus_session_detach(&session));assert(pt_studio_queue_close(q)==PT_QUEUE_OK);
     }
-    start_cases();assert(!live);puts("AMIGUS REGISTER SESSION PASS: exact packed stream, IRQ bit isolation, drain wait, partial-write/reset delays, ownership loss cleanup, prefill/start/readback, delayed and failed enable, empty/odd tail, Stop pending");return 0;
+    start_cases();prefill_cases();assert(!live);puts("AMIGUS REGISTER SESSION PASS: exact packed stream, IRQ bit isolation, drain wait, partial-write/reset delays, ownership loss cleanup, prefill/start/readback, delayed and failed enable, empty/odd tail, Stop pending, bounded configurable prefill/short-stream flush");return 0;
 }

@@ -1,0 +1,1017 @@
+{
+  "source_tree": "1ae2d43c19955e8414e81b6fa4c9b329e2c09484",
+  "modules": 168,
+  "completed": 168,
+  "failed": 0,
+  "seconds": 246.276,
+  "results": [
+    {
+      "module": "test_amigus_chain",
+      "returncode": 0,
+      "seconds": 0.709,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_amigus_fifo",
+      "returncode": 0,
+      "seconds": 0.633,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_amigus_pcm_pack",
+      "returncode": 0,
+      "seconds": 0.503,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_amigus_register_port",
+      "returncode": 0,
+      "seconds": 0.591,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_amigus_register_session",
+      "returncode": 0,
+      "seconds": 0.814,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_amigus_reservation",
+      "returncode": 0,
+      "seconds": 1.504,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_amigus_restore",
+      "returncode": 0,
+      "seconds": 0.432,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_amigus_sample_ram",
+      "returncode": 0,
+      "seconds": 0.481,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_amigus_session",
+      "returncode": 0,
+      "seconds": 0.689,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_amigus_voice_plan",
+      "returncode": 0,
+      "seconds": 0.303,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_amigus_wavetable_cache",
+      "returncode": 0,
+      "seconds": 0.567,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_arpeggio",
+      "returncode": 0,
+      "seconds": 8.563,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_baseline_tools",
+      "returncode": 0,
+      "seconds": 0.091,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_bounce",
+      "returncode": 0,
+      "seconds": 4.842,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_bounce_invert",
+      "returncode": 0,
+      "seconds": 5.103,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_channels",
+      "returncode": 0,
+      "seconds": 0.378,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_convert_cli",
+      "returncode": 0,
+      "seconds": 7.314,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_cut_handoff",
+      "returncode": 0,
+      "seconds": 1.026,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_delay_render",
+      "returncode": 0,
+      "seconds": 3.677,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_delayed_handoff",
+      "returncode": 0,
+      "seconds": 0.937,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_document",
+      "returncode": 0,
+      "seconds": 2.083,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_editor",
+      "returncode": 0,
+      "seconds": 7.888,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_editor_guard",
+      "returncode": 0,
+      "seconds": 4.687,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_editor_invert_reference",
+      "returncode": 0,
+      "seconds": 7.85,
+      "context": "Git isolation helper"
+    },
+    {
+      "module": "test_editor_invert_studio",
+      "returncode": 0,
+      "seconds": 7.397,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_editor_studio",
+      "returncode": 0,
+      "seconds": 7.589,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_editor_wavetable",
+      "returncode": 0,
+      "seconds": 28.827,
+      "context": "Git isolation helper"
+    },
+    {
+      "module": "test_emulator_guard",
+      "returncode": 0,
+      "seconds": 0.14,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_file_load",
+      "returncode": 0,
+      "seconds": 0.697,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_file_save_memory",
+      "returncode": 0,
+      "seconds": 0.845,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_filter",
+      "returncode": 0,
+      "seconds": 0.577,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_finetune_core",
+      "returncode": 0,
+      "seconds": 0.708,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_finetune_native",
+      "returncode": 0,
+      "seconds": 6.646,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_flow",
+      "returncode": 0,
+      "seconds": 2.466,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_flow_handoff",
+      "returncode": 0,
+      "seconds": 0.93,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_flow_trace",
+      "returncode": 0,
+      "seconds": 0.09,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_frame_clock",
+      "returncode": 0,
+      "seconds": 0.999,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_gliss_core",
+      "returncode": 0,
+      "seconds": 0.784,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_gliss_native",
+      "returncode": 0,
+      "seconds": 6.172,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_handoff_render",
+      "returncode": 0,
+      "seconds": 1.026,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_handoff_trace",
+      "returncode": 0,
+      "seconds": 0.079,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_instrument_render",
+      "returncode": 0,
+      "seconds": 6.475,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_invert_bank",
+      "returncode": 0,
+      "seconds": 0.412,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_invert_four_clock_delay",
+      "returncode": 0,
+      "seconds": 13.599,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_invert_handoff_workflows",
+      "returncode": 0,
+      "seconds": 6.506,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_invert_loop",
+      "returncode": 0,
+      "seconds": 0.314,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_invert_ordering",
+      "returncode": 0,
+      "seconds": 2.962,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_invert_pcm",
+      "returncode": 0,
+      "seconds": 0.375,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_invert_sequence",
+      "returncode": 0,
+      "seconds": 0.435,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_invert_shared_handoff",
+      "returncode": 0,
+      "seconds": 13.737,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_invert_trace",
+      "returncode": 0,
+      "seconds": 0.079,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_invert_write_events",
+      "returncode": 0,
+      "seconds": 14.193,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_jump_handoff",
+      "returncode": 0,
+      "seconds": 0.936,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_master_memory",
+      "returncode": 0,
+      "seconds": 0.317,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_midi",
+      "returncode": 0,
+      "seconds": 0.436,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_mod_import",
+      "returncode": 0,
+      "seconds": 4.163,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_mod_inspect",
+      "returncode": 0,
+      "seconds": 0.381,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_mod_project",
+      "returncode": 0,
+      "seconds": 1.846,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_mod_round8",
+      "returncode": 0,
+      "seconds": 4.447,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_mod_stream",
+      "returncode": 0,
+      "seconds": 4.141,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_modulation_handoff",
+      "returncode": 0,
+      "seconds": 0.989,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_native_eclock",
+      "returncode": 0,
+      "seconds": 0.526,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_native_recovery_config",
+      "returncode": 0,
+      "seconds": 2.517,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_nonloop_effect_handoff",
+      "returncode": 0,
+      "seconds": 1.062,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_nonloop_source_handoff",
+      "returncode": 0,
+      "seconds": 0.932,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_note_slice",
+      "returncode": 0,
+      "seconds": 4.266,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_offset_handoff",
+      "returncode": 0,
+      "seconds": 1.015,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_offset_render",
+      "returncode": 0,
+      "seconds": 3.901,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_ownership",
+      "returncode": 0,
+      "seconds": 0.318,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_pattern",
+      "returncode": 0,
+      "seconds": 1.641,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_paula_cache",
+      "returncode": 0,
+      "seconds": 0.366,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_paula_memory",
+      "returncode": 0,
+      "seconds": 0.525,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_paula_playback",
+      "returncode": 0,
+      "seconds": 2.009,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_paula_preview",
+      "returncode": 0,
+      "seconds": 0.418,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_paula_sync",
+      "returncode": 0,
+      "seconds": 2.089,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_pcm",
+      "returncode": 0,
+      "seconds": 0.425,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_pitch",
+      "returncode": 0,
+      "seconds": 6.059,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_pitch_handoff",
+      "returncode": 0,
+      "seconds": 0.946,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_playback_pcm",
+      "returncode": 0,
+      "seconds": 0.414,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_playback_upload",
+      "returncode": 0,
+      "seconds": 0.442,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_portamento",
+      "returncode": 0,
+      "seconds": 9.567,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_pp20",
+      "returncode": 0,
+      "seconds": 4.598,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_prepare_dev",
+      "returncode": 0,
+      "seconds": 0.086,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_prepare_replay",
+      "returncode": 0,
+      "seconds": 0.089,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_project",
+      "returncode": 0,
+      "seconds": 1.454,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_project_import",
+      "returncode": 0,
+      "seconds": 11.011,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_project_reader",
+      "returncode": 0,
+      "seconds": 4.677,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_project_stream",
+      "returncode": 0,
+      "seconds": 3.206,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_raw",
+      "returncode": 0,
+      "seconds": 0.523,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_raw_import",
+      "returncode": 0,
+      "seconds": 6.531,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_recent",
+      "returncode": 0,
+      "seconds": 0.938,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_recent_memory",
+      "returncode": 0,
+      "seconds": 1.238,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_record",
+      "returncode": 0,
+      "seconds": 1.688,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_recovery_file",
+      "returncode": 0,
+      "seconds": 2.691,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_render",
+      "returncode": 0,
+      "seconds": 5.692,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_render_cli_memory",
+      "returncode": 0,
+      "seconds": 7.784,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_render_file",
+      "returncode": 0,
+      "seconds": 14.513,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_render_invert",
+      "returncode": 0,
+      "seconds": 3.208,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_render_invert_file",
+      "returncode": 0,
+      "seconds": 6.933,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_render_invert_handoff",
+      "returncode": 0,
+      "seconds": 4.224,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_render_invert_session",
+      "returncode": 0,
+      "seconds": 3.38,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_render_memory_failure",
+      "returncode": 0,
+      "seconds": 3.113,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_render_plan",
+      "returncode": 0,
+      "seconds": 2.803,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_render_range",
+      "returncode": 0,
+      "seconds": 6.1,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_render_sequence",
+      "returncode": 0,
+      "seconds": 3.181,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_render_ui_native",
+      "returncode": 0,
+      "seconds": 4.24,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_render_volume",
+      "returncode": 0,
+      "seconds": 3.671,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_repeat_track_handoff",
+      "returncode": 0,
+      "seconds": 0.903,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_replay_fixtures",
+      "returncode": 0,
+      "seconds": 0.657,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_retrigger_handoff",
+      "returncode": 0,
+      "seconds": 0.931,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_retrigger_render",
+      "returncode": 0,
+      "seconds": 3.619,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_sample_attributes",
+      "returncode": 0,
+      "seconds": 4.21,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_sample_cache",
+      "returncode": 0,
+      "seconds": 0.363,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_sample_dispatch",
+      "returncode": 0,
+      "seconds": 4.409,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_sample_file",
+      "returncode": 0,
+      "seconds": 0.782,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_sample_offset",
+      "returncode": 0,
+      "seconds": 0.085,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_sample_raw_file",
+      "returncode": 0,
+      "seconds": 0.797,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_sample_svx_file",
+      "returncode": 0,
+      "seconds": 0.826,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_sample_triggers",
+      "returncode": 0,
+      "seconds": 0.15,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_sampler",
+      "returncode": 0,
+      "seconds": 3.365,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_sampler_invert_song",
+      "returncode": 0,
+      "seconds": 5.117,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_sampler_pin_job",
+      "returncode": 0,
+      "seconds": 3.212,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_sampler_song",
+      "returncode": 0,
+      "seconds": 5.238,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_sampler_studio",
+      "returncode": 0,
+      "seconds": 3.574,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_sampler_wavetable",
+      "returncode": 0,
+      "seconds": 3.971,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_scope",
+      "returncode": 0,
+      "seconds": 0.317,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_shared_render_guard",
+      "returncode": 0,
+      "seconds": 0.184,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_shared_timing_physical",
+      "returncode": 0,
+      "seconds": 0.142,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_shared_timing_profile",
+      "returncode": 0,
+      "seconds": 0.125,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_silent_handoff",
+      "returncode": 0,
+      "seconds": 0.888,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_slices",
+      "returncode": 0,
+      "seconds": 0.546,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_slide_handoff",
+      "returncode": 0,
+      "seconds": 0.94,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_slots",
+      "returncode": 0,
+      "seconds": 4.161,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_song",
+      "returncode": 0,
+      "seconds": 6.436,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_source",
+      "returncode": 0,
+      "seconds": 4.193,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_stem_file",
+      "returncode": 0,
+      "seconds": 6.415,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_stems",
+      "returncode": 0,
+      "seconds": 0.442,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_studio_consumer",
+      "returncode": 0,
+      "seconds": 0.592,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_studio_mix",
+      "returncode": 0,
+      "seconds": 0.824,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_studio_plan",
+      "returncode": 0,
+      "seconds": 3.058,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_studio_pump",
+      "returncode": 0,
+      "seconds": 0.593,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_studio_queue",
+      "returncode": 0,
+      "seconds": 0.551,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_studio_queued_song",
+      "returncode": 0,
+      "seconds": 3.307,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_studio_song",
+      "returncode": 0,
+      "seconds": 3.166,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_studio_tick",
+      "returncode": 0,
+      "seconds": 0.876,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_svx",
+      "returncode": 0,
+      "seconds": 0.607,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_svx_import",
+      "returncode": 0,
+      "seconds": 6.54,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_tempo_handoff",
+      "returncode": 0,
+      "seconds": 0.932,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_timeline",
+      "returncode": 0,
+      "seconds": 1.55,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_tone_handoff",
+      "returncode": 0,
+      "seconds": 1.001,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_tone_note_handoff",
+      "returncode": 0,
+      "seconds": 0.957,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_tremolo_render",
+      "returncode": 0,
+      "seconds": 3.683,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_tremolo_trace",
+      "returncode": 0,
+      "seconds": 0.085,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_tuning_handoff",
+      "returncode": 0,
+      "seconds": 0.981,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_unused_core",
+      "returncode": 0,
+      "seconds": 0.699,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_unused_handoff",
+      "returncode": 0,
+      "seconds": 0.917,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_unused_native",
+      "returncode": 0,
+      "seconds": 6.07,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_vibrato",
+      "returncode": 0,
+      "seconds": 8.524,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_view_probe",
+      "returncode": 0,
+      "seconds": 4.792,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_voice",
+      "returncode": 0,
+      "seconds": 0.715,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_voice_advance",
+      "returncode": 0,
+      "seconds": 0.644,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_voice_segment",
+      "returncode": 0,
+      "seconds": 0.66,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_volume_handoff",
+      "returncode": 0,
+      "seconds": 0.922,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_wav_import",
+      "returncode": 0,
+      "seconds": 6.489,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_wav_reader",
+      "returncode": 0,
+      "seconds": 0.554,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_waveform_handoff",
+      "returncode": 0,
+      "seconds": 0.973,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_wavetable_dispatch",
+      "returncode": 0,
+      "seconds": 7.534,
+      "context": "indexed export"
+    },
+    {
+      "module": "test_wavetable_voices",
+      "returncode": 0,
+      "seconds": 4.133,
+      "context": "indexed export"
+    }
+  ]
+}

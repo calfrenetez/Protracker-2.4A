@@ -15,7 +15,7 @@ struct pt_amigus_session {
     struct pt_studio_consumer consumer;
     void *drain_context;int (*drain)(void *);
     void *start_context;int (*start)(void *);
-    unsigned start_pending,started;
+    unsigned start_pending,started,prefill_target,prefill_written;
     enum pt_amigus_session_phase phase;
     unsigned reset_confirmed,failed,padding;
 };
@@ -28,6 +28,11 @@ int pt_amigus_session_open(struct pt_amigus_session *,struct pt_studio_queue *,c
  * start only after padding is copied. Callback/context outlive detach. Legacy
  * open is for transports whose start is managed separately. */
 int pt_amigus_session_open_started(struct pt_amigus_session *,struct pt_studio_queue *,const struct pt_amigus_fifo_port *,int (*drain)(void *),void *,int (*start)(void *),void *);
+/* Configurable prefill in complete two-frame triplets. Must be nonzero and
+ * fit the initially empty port's reported capacity. A short finished stream
+ * starts with its available complete/padded data; empty streams never start.
+ * Failed capacity/target validation after reset retains a cleanup owner. */
+int pt_amigus_session_open_prefilled(struct pt_amigus_session *,struct pt_studio_queue *,const struct pt_amigus_fifo_port *,int (*drain)(void *),void *,int (*start)(void *),void *,unsigned triplets);
 enum pt_consumer_result pt_amigus_session_step(struct pt_amigus_session *);
 /* Requests abort; step performs bounded reset retries even after errors. */
 void pt_amigus_session_stop(struct pt_amigus_session *);

@@ -114,11 +114,13 @@ void pt_editor_studio_output_stop(struct pt_editor_studio_output *o)
     /* Also covers initial-reset failure before the stop hook was bound. */
     pt_amigus_session_stop(&o->session);
 }
-int pt_editor_studio_output_bind_start(struct pt_editor_studio_output *o,int (*start)(void *),void *context)
+int pt_editor_studio_output_bind_prefill(struct pt_editor_studio_output *o,int (*start)(void *),void *context,unsigned triplets)
 {
-    if(!o || !attached(&o->producer) || pt_editor_studio_output_busy(o) || o->session.phase!=PT_AS_IDLE)return 0;
-    o->start=start;o->start_context=start?context:NULL;return 1;
+    if(!o || !attached(&o->producer) || pt_editor_studio_output_busy(o) || o->session.phase!=PT_AS_IDLE || (start && !triplets))return 0;
+    o->start=start;o->start_context=start?context:NULL;o->prefill_triplets=start?triplets:0;return 1;
 }
+int pt_editor_studio_output_bind_start(struct pt_editor_studio_output *o,int (*start)(void *),void *context)
+{return pt_editor_studio_output_bind_prefill(o,start,context,1);}
 static int start_output(struct pt_editor_studio_output *o,const struct pt_render_options *options,unsigned blocks,const struct pt_amigus_fifo_port *port,int (*drain)(void *),void *context)
 {
     if(!o || !attached(&o->producer) || o->queue || o->session.phase!=PT_AS_IDLE ||
@@ -129,7 +131,7 @@ static int start_output(struct pt_editor_studio_output *o,const struct pt_render
     if(pt_editor_studio_begin_queued(&o->producer,options,o->queue)!=PT_RENDER_OK) {
         pt_studio_queue_close(o->queue);o->queue=NULL;o->failed=1;return 0;
     }
-    if(!(o->start?pt_amigus_session_open_started(&o->session,o->queue,port,drain,context,o->start,o->start_context):
+    if(!(o->start?pt_amigus_session_open_prefilled(&o->session,o->queue,port,drain,context,o->start,o->start_context,o->prefill_triplets):
          pt_amigus_session_open(&o->session,o->queue,port,drain,context)) ||
        !pt_editor_studio_bind_output_stop(&o->producer,output_session_stop,&o->session)) {
         o->failed=1;pt_editor_studio_output_stop(o);return 0;
@@ -201,5 +203,5 @@ int pt_editor_studio_output_detach(struct pt_editor_studio_output *o)
     if(!o)return 0;
     pt_editor_studio_output_stop(o);
     if(pt_editor_studio_output_busy(o) || !pt_amigus_session_detach(&o->session))return 0;
-    pt_editor_studio_detach(&o->producer);o->start=NULL;o->start_context=NULL;return 1;
+    pt_editor_studio_detach(&o->producer);o->start=NULL;o->start_context=NULL;o->prefill_triplets=0;return 1;
 }

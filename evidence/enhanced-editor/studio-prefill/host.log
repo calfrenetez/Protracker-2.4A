@@ -1,0 +1,1650 @@
+
+MODULE test_amigus_chain
+AMIGUS CHAIN PASS: queue consumer packed byte equivalence, odd partitions, explicit tail finish, failed reset lease retention
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.567s
+
+OK
+
+MODULE test_amigus_fifo
+AMIGUS FIFO PASS: bounded triplets, capacity stalls, odd tail, explicit pad, uncertain writes blocked until confirmed reset
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.515s
+
+OK
+
+MODULE test_amigus_pcm_pack
+AMIGUS PACK PASS: true24 MSB words, stereo order, partition tails, explicit final padding, atomic refusal
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.433s
+
+OK
+
+MODULE test_amigus_register_port
+AMIGUS REGISTER PASS: owned access, word capacity, ordered triplets, bounded reset/readback, partial-write poison
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.481s
+
+OK
+
+MODULE test_amigus_register_session
+AMIGUS REGISTER SESSION PASS: exact packed stream, IRQ bit isolation, drain wait, partial-write/reset delays, ownership loss cleanup, prefill/start/readback, delayed and failed enable, empty/odd tail, Stop pending, bounded configurable prefill/short-stream flush
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.741s
+
+OK
+
+MODULE test_amigus_reservation
+amigus reservation lifecycle: PASS (fake library, no hardware)
+.amigus reservation lifecycle: PASS (fake library, no hardware)
+AMIGUS INTERRUPT OWNER PASS: partial install retains reservation, removal request is not quiescence, pending/error/invalid status refuses release; injected callbacks only
+.amigus reservation lifecycle: PASS (fake library, no hardware)
+AMIGUS RESERVED SESSION PASS: failed open, leased Stop and natural tail retain card through reset recovery
+.
+----------------------------------------------------------------------
+Ran 3 tests in 1.440s
+
+OK
+
+MODULE test_amigus_restore
+AMIGUS RESTORE PASS: exact fractional cache cursor, head/loop/one-shot bounds,8/16-bit cache and24-bit master preserved; software only
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.332s
+
+OK
+
+MODULE test_amigus_sample_ram
+AMIGUS SAMPLE RAM PASS: bounded addresses, exact uploads, pinned eviction, failures and master preservation; fake bus only
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.378s
+
+OK
+
+MODULE test_amigus_session
+AMIGUS SESSION PASS: tail flush, drain acknowledgement, no-lease Stop, failed-open/reset recovery and safe detach
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.626s
+
+OK
+
+MODULE test_amigus_voice_plan
+AMIGUS VOICE PLAN PASS: byte bounds, alignment, loops, rational rate, volume, refusal atomicity; no I/O
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.240s
+
+OK
+
+MODULE test_amigus_wavetable_cache
+amigus reservation lifecycle: PASS (fake library, no hardware)
+WAVETABLE UPLOAD JOB PASS: bounded steps, cancellation, unpublished leases, partial words, live ownership loss and hit transfer; injected only
+AMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.478s
+
+OK
+
+MODULE test_arpeggio
+ARPEGGIO boundaries PASS: 16 tracks, nibble phases, sentinel/adjacent table, mask, inactive base and wrapped counter
+PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+.
+----------------------------------------------------------------------
+Ran 1 test in 8.415s
+
+OK
+ARPEGGIO: nine repeated native traces match host/m68k period words and ramp PCM, including zero-period refusal
+
+MODULE test_baseline_tools
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.000s
+
+OK
+
+MODULE test_bounce
+BOUNCE PASS: exact true24 PCM, atomic new slot, allocation/budget/cancellation rollback, redo preservation, mixed undo, references, table reuse, eviction and PTG identity
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.729s
+
+OK
+
+MODULE test_bounce_invert
+INVERT BOUNCE PASS: shared mutation, exact24 PCM, immutable masters, allocation/budget/cancellation rollback, redo, undo and project save
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.986s
+
+OK
+
+MODULE test_channels
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.270s
+
+OK
+
+MODULE test_convert_cli
+..
+----------------------------------------------------------------------
+Ran 2 tests in 7.212s
+
+OK
+mod: CONVERTER MEMORY: peak=538110 limit=550000 final=0
+project: CONVERTER MEMORY: peak=538110 limit=550000 final=0
+project import: CONVERTER MEMORY: peak=538110 limit=550000 final=0
+packed import: CONVERTER MEMORY: peak=664104 limit=700000 final=0
+
+MODULE test_cut_handoff
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.935s
+
+OK
+
+MODULE test_delay_render
+OFFSET safety PASS: isolated track16 PCM, non-byte/stereo/odd/pingpong/slice refusal before output/report changes
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=1 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=18 frames=17280
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.571s
+
+OK
+
+MODULE test_delayed_handoff
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.839s
+
+OK
+
+MODULE test_document
+ALLOC initial calls=6 live=6 bytes=6902
+ALLOC failure-case=1 live=6
+ALLOC failure-case=2 live=6
+ALLOC failure-case=3 live=6
+ALLOC failure-case=4 live=6
+ALLOC failure-case=5 live=6
+ALLOC failure-case=6 live=6
+ALLOC budget live=6
+ALLOC replacement live=6
+ALLOC reload loop
+ALLOC final release live=3
+DOCUMENT/SAVE PASS: every staging allocation failure, memory budget, corrupt input, 200 reloads, staged new songs for 1..16 channels, partial writes and all save failure phases preserve prior state
+.
+----------------------------------------------------------------------
+Ran 1 test in 2.001s
+
+OK
+
+MODULE test_editor
+EDITOR PASS: bank/wrap/scroll, guarded note and nibble edits, OFF, undo/redo, save state, discard confirmation, atomic block copy/paste/clear/transpose/clone, all-page planar render
+.
+----------------------------------------------------------------------
+Ran 1 test in 7.821s
+
+OK
+
+MODULE test_editor_guard
+EDITOR GUARD PASS: note edit and undo stop before mutation, navigation preserved, disposal guarded
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.620s
+
+OK
+
+MODULE test_editor_invert_reference
+EDITOR EFx REFERENCE PASS: exact queued PCM, backpressure, guarded edits, held leases, undo/restart, master roundtrip, no leaks
+EDITOR EFx REFERENCE PASS: exact queued PCM, backpressure, guarded edits, held leases, undo/restart, master roundtrip, no leaks
+.
+----------------------------------------------------------------------
+Ran 1 test in 7.731s
+
+OK
+
+MODULE test_editor_invert_studio
+EDITOR INVERT STUDIO PASS: private bank stopped by pattern/sample edits, undo/dispose, held leases, stale output shutdown, natural drain, refusal and cleanup
+.
+----------------------------------------------------------------------
+Ran 1 test in 7.329s
+
+OK
+
+MODULE test_editor_studio
+EDITOR STUDIO RESERVED PASS: PCM-only lease spans failed start, natural drain, leased Stop, reset and adapter quiescence; early release/restart refused; fake library/port only
+EDITOR STUDIO START PASS: configurable prefill, acknowledgement gate, edit/undo/Stop, unknown result and reserved quiescence retain ownership
+EDITOR STUDIO OUTPUT PASS: direct24 byte parity, bounded producer/FIFO steps, natural drain, edit/undo/Stop/dispose and failure reset ownership, restart and zero allocations retained
+EDITOR STUDIO PASS: real pinned song stopped by edit/undo/dispose, queued edit/undo/Stop/dispose held leases, natural drain, navigation and cleanup
+.
+----------------------------------------------------------------------
+Ran 1 test in 7.504s
+
+OK
+
+MODULE test_editor_wavetable
+CURRENT PIN PASS: exact8/16/24 master reuse, budget-free retain, stale/descriptor refusal, shared backing and final release
+STUDIO PREPARATION PASS: bounded copy/cancel/stale/budget, selective pre-roll/repeat pins, stereo24/pingpong/slice parity and stop ownership
+PROJECT SNAPSHOT PASS: every object byte including padding and tail detects mutation, symmetric equality/self-alias, native ABI alignment, unchanged inputs and full ownership checks retained
+PIN JOB PASS: bounded PCM/marker copy, atomic 8/16/24-bit publication, cancellation, stale poison, budget/reuse and pinned lifetime
+LOOKAHEAD PASS: bounded copied phase/commands, live consume interleave, exact plans, no early commit, stale/rewind/cancel/private-source refusal
+VALIDATED VOICE PASS: 8/16/24-bit exact loop/segment/handoff parity, bounded refusal/alias atomicity, public value validation retained
+amigus reservation lifecycle: PASS (fake library, no hardware)
+WAVETABLE UPLOAD JOB PASS: bounded steps, cancellation, unpublished leases, partial words, live ownership loss and hit transfer; injected only
+AMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only
+SAMPLER UPLOAD JOB PASS: exact8/16/24 pins, stable descriptor, bounded steps, release/edit/history/cancel guards, hits and memory refusal; injected only
+SAMPLER WAVETABLE PASS: revision rebuilds, edits/undo/table changes, pinned old playback, master save and failure cleanup; fake bus only
+AMIGUS VOICE PLAN PASS: byte bounds, alignment, loops, rational rate, volume, refusal atomicity; no I/O
+WAVETABLE VOICES PASS: 16 voices, retrigger, uncertain start, confirmed stop and quiescence, bounded close, master preserved
+WAVETABLE RESTORE OWNER PASS: whole-batch acquisition, exact cursor, refusal rollback, uncertain restore retains lease until confirmed stop; injected only
+WAVETABLE PREFLIGHT STEP PASS: pending gate, bounded timeline/frame progress, copied options, cancellation, late refusal, terminal stability and allocation cleanup
+WAVETABLE SONG PASS: gated preflight, selective master pins, interval protocol, pending stop, stale and failed-start ownership; injected only
+WAVETABLE STAGED RESTORE PASS: one exact-cursor conversion per preparation step,8/16-bit fractional parity, zero commit conversion/upload, repeat readiness and early/double/cancel/stale/uncertain-stop ownership
+WAVETABLE RANGE PASS: silent pre-roll, exact fractional restore before output, selective source pins, final-span timing and uncertain-stop ownership; injected only
+WAVETABLE PREPARING PASS: exclusive pending owner, no early pins/output, cancel/stale/late-refusal/promotion-failure cleanup, transferred song/range playback
+WAVETABLE GUARD PASS: invalid initial PCM, immutable revision/identity guards, lost ownership latch, promotion and cancellation; injected only
+WAVETABLE PREPARED SOURCES PASS: exact pin/descriptor refusal before upload, cache-hit retrigger, public validation retained; injected only
+LARGE PREPARING PASS: allocation separate from4KiB copies, no partial master publication/output, cancel/stale cleanup and intact24-bit ready master
+SONG PREFETCH PASS: upcoming600-byte cache ready before elapsed interval, no early commit, write-free commit, stale/transfer/cancel with old voice ownership
+SONG UPLOADING PASS: whole-batch leases,256-byte steps, no early output/time, duplicate hits, cancellation/stale/capacity/transfer guards and uncertain stop
+WAVETABLE CLOCK PASS: exact ready deadline, no early/late starts, monotonic/overflow refusal, bounded phase debt and retained uncertain stops; injected interval gate only
+WAVETABLE SCHEDULE PASS: future startup, silent range priming, fractional/tempo absolute boundaries, lead-in, no early/late starts, deadline/clock refusal and uncertain-stop retention; injected only
+ELAPSED CLOCK PASS: rational carry, partition invariance, large quotient, exact limit, sticky overflow/frequency/regression and atomic refusal
+ELAPSED DEADLINE PASS: earliest reaching tick, nonintegral carry, low-frequency skipped frames, extreme bounds, borrowing and atomic refusal
+WAVETABLE CLOCKED PASS: fractional tick service, single reads, exclusive progression, read/frequency/regression/deadline faults, no recovery reread and uncertain-stop retention; injected only
+PREPARED BATCH PASS: one command per preparation step, zero commit conversions,8/16-bit plans, controls, duplicate leases, stale/cancel and whole-batch active-state refusal with uncertain-stop retention
+WAVETABLE DISPATCH PASS: whole-sequence preflight, resolved16-channel triggers, phase-preserving controls, atomic refusal, uncertain-stop retention; injected only
+EDITOR WAVETABLE QUIESCENCE PASS: stopped voices retain song/master/cache contexts through callback and IRQ barriers; edits/disposal vetoed
+EDITOR PREPARING PASS: edit, Stop and dispose cancel before source/output ownership
+EDITOR UPLOADING PASS: edit/undo, Stop and dispose cancel unpublished device/master leases before output
+EDITOR STAGED RESTORE PASS: edit/undo, scheduled Stop and dispose release prepared leases before any voice restore
+EDITOR WAVETABLE PASS: pending/failed stop vetoes edits, imports, undo/redo, replacement and disposal; navigation retained; injected only
+EDITOR GUARD PASS: note edit and undo stop before mutation, navigation preserved, disposal guarded
+EDITOR STUDIO RESERVED PASS: PCM-only lease spans failed start, natural drain, leased Stop, reset and adapter quiescence; early release/restart refused; fake library/port only
+EDITOR STUDIO START PASS: configurable prefill, acknowledgement gate, edit/undo/Stop, unknown result and reserved quiescence retain ownership
+EDITOR STUDIO OUTPUT PASS: direct24 byte parity, bounded producer/FIFO steps, natural drain, edit/undo/Stop/dispose and failure reset ownership, restart and zero allocations retained
+EDITOR STUDIO PASS: real pinned song stopped by edit/undo/dispose, queued edit/undo/Stop/dispose held leases, natural drain, navigation and cleanup
+.
+----------------------------------------------------------------------
+Ran 1 test in 28.758s
+
+OK
+
+MODULE test_emulator_guard
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+
+MODULE test_file_load
+FILE LOAD PASS
+FILE LOAD PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.578s
+
+OK
+
+MODULE test_file_save_memory
+FILE SAVE MEMORY PASS: exact multi-block bytes, allocation refusal, existing destination and zero-length preservation
+FILE SAVE MEMORY PASS: exact multi-block bytes, allocation refusal, existing destination and zero-length preservation
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.772s
+
+OK
+
+MODULE test_filter
+tone 1 kHz max deviation 0
+tone 3 kHz max deviation 4
+tone 6 kHz max deviation 1
+fractional-rate passband max deviation 1
+FILTER PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.499s
+
+OK
+
+MODULE test_finetune_core
+FINETUNE PASS: 16 tables, E5 ordering/memory/reload, ordinary quantization, negative tone target and final overflow words
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.594s
+
+OK
+
+MODULE test_finetune_native
+PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+.
+----------------------------------------------------------------------
+Ran 1 test in 6.543s
+
+OK
+
+MODULE test_flow
+FLOW boundaries PASS: atomic init, stop/limit, 1..16 tracks, 128/256 positions, order wrap and ordered globals
+.
+----------------------------------------------------------------------
+Ran 1 test in 2.381s
+
+OK
+FLOW: all 16 native trace fixtures match portable control flow
+
+MODULE test_flow_handoff
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.841s
+
+OK
+
+MODULE test_flow_trace
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.004s
+
+OK
+
+MODULE test_frame_clock
+FRAME CLOCK PASS: fractional tempo changes, exact rates, bounded drift, zero-frame ticks, limits/overflow and atomic failure
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.905s
+
+OK
+
+MODULE test_gliss_core
+GLISS PASS: 16 independent controls, smooth stored periods, stepped output and disable preserves speed/target
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.683s
+
+OK
+
+MODULE test_gliss_native
+PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+.
+----------------------------------------------------------------------
+Ran 1 test in 6.082s
+
+OK
+
+MODULE test_handoff_render
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.915s
+
+OK
+
+MODULE test_handoff_trace
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.005s
+
+OK
+
+MODULE test_instrument_render
+INSTRUMENT PASS: track16 true24 phase/volume reload, silent preload, cross-sample and slice refusal before output
+OFFSET PCM PASS: channel=0 ticks=18 frames=17280
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=18 frames=17280
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+.
+----------------------------------------------------------------------
+Ran 1 test in 6.348s
+
+OK
+
+MODULE test_invert_bank
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.323s
+
+OK
+
+MODULE test_invert_four_clock_delay
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+.INVERT ordering native parity PASS: ticks=36 checked=30 immutable master
+INVERT ordering native parity PASS: ticks=30 checked=24 immutable master
+..EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+.
+----------------------------------------------------------------------
+Ran 4 tests in 13.476s
+
+OK
+
+MODULE test_invert_handoff_workflows
+.EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+.
+----------------------------------------------------------------------
+Ran 2 tests in 6.398s
+
+OK
+
+MODULE test_invert_loop
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.236s
+
+OK
+
+MODULE test_invert_ordering
+.INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=36 checked=30 immutable master
+INVERT ordering native parity PASS: ticks=36 checked=30 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+....
+----------------------------------------------------------------------
+Ran 5 tests in 2.837s
+
+OK
+
+MODULE test_invert_pcm
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.310s
+
+OK
+
+MODULE test_invert_sequence
+INVERT sequence native parity PASS
+INVERT sequence native parity PASS
+INVERT sequence native parity PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.364s
+
+OK
+
+MODULE test_invert_shared_handoff
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+.INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+.EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+.
+----------------------------------------------------------------------
+Ran 3 tests in 13.627s
+
+OK
+
+MODULE test_invert_trace
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.004s
+
+OK
+
+MODULE test_invert_write_events
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+EFx HANDOFF WORKFLOWS PASS: WAV/stems/group, cancellation, bounce undo/redo, master save/reload, no leaks
+.INVERT ordering native parity PASS: ticks=48 checked=42 immutable master
+INVERT ordering native parity PASS: ticks=48 checked=42 immutable master
+INVERT ordering native parity PASS: ticks=48 checked=42 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+..EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+.
+----------------------------------------------------------------------
+Ran 4 tests in 14.106s
+
+OK
+
+MODULE test_jump_handoff
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.825s
+
+OK
+
+MODULE test_master_memory
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.222s
+
+OK
+
+MODULE test_midi
+MIDI PASS: exclusive track ownership, shared-note releases, replacement ordering, endpoint loss/reconnect, sustain cleanup, failed sends, controller/program/bend/clock bytes and 100 lifecycle cycles
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.343s
+
+OK
+
+MODULE test_mod_import
+MOD IMPORT STREAM PASS: exact roundtrip, inactive orders, loops, every read/allocation/finish failure preserves old document, budgets and format routing
+MOD IMPORT STREAM PASS: exact roundtrip, inactive orders, loops, every read/allocation/finish failure preserves old document, budgets and format routing
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.072s
+
+OK
+
+MODULE test_mod_inspect
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.269s
+
+OK
+
+MODULE test_mod_project
+MOD PROJECT PASS: MOD -> project -> MOD byte identity, strict validation, staged import, explicit loss reports and no silent downgrade
+.
+----------------------------------------------------------------------
+Ran 1 test in 1.764s
+
+OK
+
+MODULE test_mod_round8
+MOD ROUND8 PASS: 16/24-bit signed ties and saturation, exact reopen, source preservation, strict/rate/capacity/alias refusal, 8-bit identity
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.348s
+
+OK
+
+MODULE test_mod_stream
+MOD STREAM PASS: direct/round8/TPDF exact multi-block bytes, legacy headers, loops, 65 patterns, source and destination protection; workspace=7184
+MOD STREAM PASS: direct/round8/TPDF exact multi-block bytes, legacy headers, loops, 65 patterns, source and destination protection; workspace=7184
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.051s
+
+OK
+
+MODULE test_modulation_handoff
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.867s
+
+OK
+
+MODULE test_native_eclock
+NATIVE ALARM OWNER PASS: partial-open cleanup, absolute tick packing, busy/late refusal, bounded pending polls, delayed abort retains all resources, completed cancellation and device error poison; fake Exec only
+.NATIVE ECLOCK OWNER PASS: version/allocation/open failures, exact cleanup, local device base,64-bit assembly, atomic outputs and closed-read refusal; fake Exec only
+.
+----------------------------------------------------------------------
+Ran 2 tests in 0.452s
+
+OK
+
+MODULE test_native_recovery_config
+NATIVE RECOVERY CONFIG PASS: V36/V37 truncation, errors, missing defaults, raw controls and explicit removable policy
+.
+----------------------------------------------------------------------
+Ran 1 test in 2.437s
+
+OK
+
+MODULE test_nonloop_effect_handoff
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.932s
+
+OK
+
+MODULE test_nonloop_source_handoff
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.852s
+
+OK
+
+MODULE test_note_slice
+NOTE SLICE PASS: explicit ordinal mapping, sample attachment, bounds, modal isolation, shared note/sample undo, marker protection, PCM preservation and PTG reopen
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.175s
+
+OK
+
+MODULE test_offset_handoff
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.884s
+
+OK
+
+MODULE test_offset_render
+OFFSET safety PASS: isolated track16 PCM, non-byte/stereo/odd/pingpong/slice refusal before output/report changes
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=0 ticks=18 frames=17280
+OFFSET PCM PASS: channel=0 ticks=18 frames=17280
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=24 frames=23040
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=8 frames=7680
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=1 ticks=6 frames=5760
+OFFSET PCM PASS: channel=2 ticks=6 frames=5760
+OFFSET PCM PASS: channel=3 ticks=6 frames=5760
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.792s
+
+OK
+
+MODULE test_ownership
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.246s
+
+OK
+
+MODULE test_pattern
+PATTERN PASS: 16-channel block edits, exact period/MIDI transpose, OFF retention, clone, bounded undo/redo, dirty tracking, eviction and conflict/no-op safety
+.
+----------------------------------------------------------------------
+Ran 1 test in 1.570s
+
+OK
+
+MODULE test_paula_cache
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.252s
+
+OK
+
+MODULE test_paula_memory
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.463s
+
+OK
+
+MODULE test_paula_playback
+PAULA PLAYBACK PREFLIGHT PASS: private metadata, optional8-bit playback copies, unchanged16/24-bit masters, explicit unavailable routes
+.
+----------------------------------------------------------------------
+Ran 1 test in 1.936s
+
+OK
+
+MODULE test_paula_preview
+PAULA PREVIEW PASS: filtered mono rate conversion, precision, padding, bounds and master preservation
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.316s
+
+OK
+
+MODULE test_paula_sync
+PAULA PADDING PASS: 8/16/24-bit odd masters, exact silent bytes and stream parity, strict exports, loop/length limits, bounded sync and immutable source
+PAULA SYNC PASS: bounded prefix, full-export parity, sample/header refusal, split blocks, guards and unchanged masters
+.
+----------------------------------------------------------------------
+Ran 1 test in 1.984s
+
+OK
+
+MODULE test_pcm
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.312s
+
+OK
+
+MODULE test_pitch
+PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+.
+----------------------------------------------------------------------
+Ran 1 test in 5.938s
+
+OK
+PITCH: seven repeated native traces match host/m68k state, PCM and zero-period refusal
+
+MODULE test_pitch_handoff
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.875s
+
+OK
+
+MODULE test_playback_pcm
+PLAYBACK PCM PASS: true24 master preservation, signed rounding/clipping, 8/16 bit endian/channel/padding, coexistence, revision invalidation and refusal
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.317s
+
+OK
+
+MODULE test_playback_upload
+PLAYBACK UPLOAD PASS: bounded chunks and transactional device resources
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.337s
+
+OK
+
+MODULE test_portamento
+PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+.
+----------------------------------------------------------------------
+Ran 1 test in 9.496s
+
+OK
+PORTAMENTO phase oracle rejects forced retrigger on the same-instrument glide
+PORTAMENTO: nine repeated native traces match host/m68k pitch, volume and DMA-driven phase; 16-track state and refusal checks pass
+
+MODULE test_pp20
+PP20 PASS: exact unpack, malformed bounds, unchanged failed output, atomic MOD import, all allocation failures, peak budget and lossless MOD roundtrip
+PP20 PASS: exact unpack, malformed bounds, unchanged failed output, atomic MOD import, all allocation failures, peak budget and lossless MOD roundtrip
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.499s
+
+OK
+
+MODULE test_prepare_dev
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.022s
+
+OK
+
+MODULE test_prepare_replay
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+OK
+
+MODULE test_project
+PROJECT PASS: exact mixed-route round trip, 24-bit stereo, OFF, loops, slices, MIDI endpoints, extensions, CRC, bounds, transactional decode
+.
+----------------------------------------------------------------------
+Ran 1 test in 1.353s
+
+OK
+
+MODULE test_project_import
+PROJECT IMPORT STREAM PASS: exact master roundtrip, every read/allocation/finish failure preserves old document, budgets and file routing
+PROJECT IMPORT STREAM PASS: exact master roundtrip, every read/allocation/finish failure preserves old document, budgets and file routing
+.
+----------------------------------------------------------------------
+Ran 1 test in 10.932s
+
+OK
+
+MODULE test_project_reader
+PROJECT READER PASS: exact master re-encode, decoder failure staging, bounded reads, original parser parity, truncation, CRC and repaired mutations, every read failure leaves requirements unchanged
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.566s
+
+OK
+
+MODULE test_project_stream
+PROJECT STREAM PASS: exact golden layout/CRC, mixed masters/loops/slices/extensions, sink refusal, bounded workspace=7184
+PROJECT STREAM PASS: exact golden layout/CRC, mixed masters/loops/slices/extensions, sink refusal, bounded workspace=7184
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.112s
+
+OK
+
+MODULE test_raw
+RAW PASS: explicit mono/stereo 8/16/24-bit signedness/endian, precision, alignment, alias, capacity and no implicit conversion
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.441s
+
+OK
+
+MODULE test_raw_import
+RAW IMPORT STREAM PASS: 16 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+RAW IMPORT STREAM PASS: 16 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+.
+----------------------------------------------------------------------
+Ran 1 test in 6.465s
+
+OK
+
+MODULE test_recent
+RECENT PASS: ten-item MRU, case-folded dedup, alias promotion, bounds, removal, CRC/truncation refusal and atomic decode
+.RECENT FILE PASS: alternating generations, interrupted/corrupt write recovery, persisted clear, invalid-save refusal
+.
+----------------------------------------------------------------------
+Ran 2 tests in 0.852s
+
+OK
+
+MODULE test_recent_memory
+RECENT FILE PASS: alternating generations, interrupted/corrupt write recovery, persisted clear, invalid-save refusal
+RECENT MEMORY PASS
+RECENT FILE PASS: alternating generations, interrupted/corrupt write recovery, persisted clear, invalid-save refusal
+RECENT MEMORY PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 1.129s
+
+OK
+
+MODULE test_record
+RECORD PASS: Hold Record, staged start, velocity, grid rounding, short-note OFF, collisions, stale release, monotonic time, capacity, retryable stop and undoable project-pattern recording with effect retention
+.
+----------------------------------------------------------------------
+Ran 1 test in 1.624s
+
+OK
+
+MODULE test_recovery_file
+RECOVERY FILE PASS: full-precision project identity, new-file-only snapshot, bounded allocation failures, corrupt/mismatched metadata preserves open song, explicit dirty restoration
+.
+----------------------------------------------------------------------
+Ran 1 test in 2.592s
+
+OK
+
+MODULE test_render
+RENDER PASS: planned/streamed stereo16/24 PCM, startup trim, delayed voice continuity, pattern/song endings, slice bounds, selection, preflight refusal, cancellation and sink failures
+RENDER PASS: planned/streamed stereo16/24 PCM, startup trim, delayed voice continuity, pattern/song endings, slice bounds, selection, preflight refusal, cancellation and sink failures
+.
+----------------------------------------------------------------------
+Ran 1 test in 5.620s
+
+OK
+
+MODULE test_render_cli_memory
+.
+----------------------------------------------------------------------
+Ran 1 test in 7.693s
+
+OK
+.mod: RENDER MEMORY peak=542838 calls=10 final=0
+.ptg: RENDER MEMORY peak=542838 calls=10 final=0
+.pp: RENDER MEMORY peak=664104 calls=11 final=0
+mix: RENDER MEMORY peak=542838 calls=10 final=0
+stems: RENDER MEMORY peak=546414 calls=27 final=0
+
+MODULE test_render_file
+RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt/truncated/trailing staging refusal and cleanup
+RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt/truncated/trailing staging refusal and cleanup
+RENDER FILE PASS: exact true24 WAV, byte verification, existing/late destination preservation, cancellation, corrupt/truncated/trailing staging refusal and cleanup
+.
+----------------------------------------------------------------------
+Ran 1 test in 14.454s
+
+OK
+
+MODULE test_render_invert
+INVERT render PASS: mixed loop/one-shot, retrigger/delay, exact PCM, immutable master, repeatability, budgets, allocation failures, cancellation, sink failure
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.128s
+
+OK
+
+MODULE test_render_invert_file
+INVERT FILE PASS: exact WAV, fresh verification workspace, all allocation failures, verification cancellation and cleanup
+.INVERT STEMS PASS: shared-sample exact PCM, grouped stems, fresh banks, all allocation failures, cancellations, immutable masters and cleanup
+.
+----------------------------------------------------------------------
+Ran 2 tests in 6.833s
+
+OK
+
+MODULE test_render_invert_handoff
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+EFx handoff reference PCM PASS: offline and pull1/17/256, preserved masters, refusal boundaries
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.151s
+
+OK
+
+MODULE test_render_invert_session
+INVERT QUEUED PASS: private mixed masters, exact offline parity, tempo/delay, pre-roll, partitions, stalled/cancelled leases, protocol and allocation refusal
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.314s
+
+OK
+
+MODULE test_render_memory_failure
+RENDER MEMORY PASS: all4 WAV and11 stem allocation failures preserve masters/reports and remove owned staging
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.006s
+
+OK
+
+MODULE test_render_plan
+render command plan PASS: explicit intents, 16-channel audio equivalence, failure discard
+.
+----------------------------------------------------------------------
+Ran 1 test in 2.724s
+
+OK
+
+MODULE test_render_range
+RANGE PASS: exact full-render crop with pre-roll pitch/phase, delays, loop boundaries, cancellation, empty/invalid refusal and full-range identity
+RANGE PASS: exact full-render crop with pre-roll pitch/phase, delays, loop boundaries, cancellation, empty/invalid refusal and full-range identity
+.
+----------------------------------------------------------------------
+Ran 1 test in 6.026s
+
+OK
+
+MODULE test_render_sequence
+SEQUENCE PASS: exact snapshot/resume audio, fractional loop phase, tempo/delay, pre-roll, partition invariance, protocol and allocation refusal
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.117s
+
+OK
+
+MODULE test_render_ui_native
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.165s
+
+OK
+
+MODULE test_render_volume
+VOLUME boundaries PASS: EC0 and Cxx restore retain silent phase across 16 voices and isolated track 16
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.552s
+
+OK
+VOLUME: seven repeated pinned native traces match every host/m68k rendered PCM frame
+
+MODULE test_repeat_track_handoff
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.823s
+
+OK
+
+MODULE test_replay_fixtures
+Prepared 16 flow fixtures; native traces remain NOT RUN.
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.575s
+
+OK
+
+MODULE test_retrigger_handoff
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.846s
+
+OK
+
+MODULE test_retrigger_render
+OFFSET safety PASS: isolated track16 PCM, non-byte/stereo/odd/pingpong/slice refusal before output/report changes
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.530s
+
+OK
+
+MODULE test_sample_attributes
+SAMPLE ATTRIBUTES PASS: bounds, every allocation failure, shared 24-bit stereo PCM, bounded metadata history, marker preservation, mixed PCM/metadata undo and exact reopen
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.125s
+
+OK
+
+MODULE test_sample_cache
+SAMPLE CACHE PASS: publication, pinned retirement, revisions, refill, LRU pressure, backend failure, stale handles and complete release
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.249s
+
+OK
+
+MODULE test_sample_dispatch
+SAMPLE DISPATCH PASS: unsupported input without allocation, donor-only refusal, exact24-bit master and retained redo
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.293s
+
+OK
+
+MODULE test_sample_file
+SAMPLE WAV STREAM PASS: exact8/16/24 mono/stereo, master preserved, fixed workspace=11248, failure cleanup and no replacement
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.700s
+
+OK
+
+MODULE test_sample_offset
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.010s
+
+OK
+OFFSET: eight repeated native traces verify stored ranges, initial trigger ranges, loops, memory, bounds, delayed rows and four independent tracks; shipping 9xx still refused
+
+MODULE test_sample_raw_file
+SAMPLE RAW STREAM PASS: 16 formats, exact bytes, master preserved, fixed workspace=11248 and no replacement
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.721s
+
+OK
+
+MODULE test_sample_svx_file
+SAMPLE SVX STREAM PASS: exact metadata, loop and odd padding, master preserved, fixed workspace=11248
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.717s
+
+OK
+
+MODULE test_sample_triggers
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.016s
+
+OK
+TRIGGERS: ten repeated native fixtures verify E9x/EDx counter timing, retained notes, pattern delay and offset/loop ranges; renderer enablement remains open
+
+MODULE test_sampler
+LOOP/SLICE PASS: metadata, atomic bake undo, proposal commit, non-destructive PCM, retarget refusal, undo/redo conflicts, allocation rollback and exact persistence
+CONVERSION PASS: stereo precision/rate, scaled loops and referenced slice ordinals, exact undo, collapse refusal, allocation rollback, redo and persistence
+IFF SAMPLER PASS: name/volume/loop/PCM, compressed import, exact export, allocation rollback, unsupported refusal, redo and project persistence
+RAW SAMPLER PASS: explicit stereo24 import, exact export, no autodetection, allocation rollback, refusal/redo and persistence
+STEREO24 GAIN HISTORY PASS: clipped extrema, untouched boundary frames, three exact undo/redo cycles and WAV identity
+SAMPLER PASS: exact stereo24 import/range edit, unified history, dirty state, no-op redo, allocation rollback, bounded memory, eviction, save/reopen and release
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.289s
+
+OK
+
+MODULE test_sampler_invert_song
+SAMPLER INVERT SONG PASS: private bank, immutable masters, allocation/budget/precision refusal, stop/edit/restart, generation/table guards and owner cleanup
+.
+----------------------------------------------------------------------
+Ran 1 test in 5.018s
+
+OK
+
+MODULE test_sampler_pin_job
+PIN JOB PASS: bounded PCM/marker copy, atomic 8/16/24-bit publication, cancellation, stale poison, budget/reuse and pinned lifetime
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.126s
+
+OK
+
+MODULE test_sampler_song
+CURRENT PIN PASS: exact8/16/24 master reuse, budget-free retain, stale/descriptor refusal, shared backing and final release
+STUDIO PREPARATION PASS: bounded copy/cancel/stale/budget, selective pre-roll/repeat pins, stereo24/pingpong/slice parity and stop ownership
+SAMPLER SONG PASS: generation binding, true24 promotion, stop/edit/restart, stale refusal and owner cleanup
+.
+----------------------------------------------------------------------
+Ran 1 test in 5.154s
+
+OK
+
+MODULE test_sampler_studio
+SAMPLER STUDIO PASS: budgeted promotion, stale refusal, edit/undo/eviction pins and final release
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.490s
+
+OK
+
+MODULE test_sampler_wavetable
+amigus reservation lifecycle: PASS (fake library, no hardware)
+WAVETABLE UPLOAD JOB PASS: bounded steps, cancellation, unpublished leases, partial words, live ownership loss and hit transfer; injected only
+AMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only
+SAMPLER UPLOAD JOB PASS: exact8/16/24 pins, stable descriptor, bounded steps, release/edit/history/cancel guards, hits and memory refusal; injected only
+SAMPLER WAVETABLE PASS: revision rebuilds, edits/undo/table changes, pinned old playback, master save and failure cleanup; fake bus only
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.867s
+
+OK
+
+MODULE test_scope
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.227s
+
+OK
+
+MODULE test_shared_render_guard
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.034s
+
+OK
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpf2aaxjm9/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpqojm2nwb/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpxoehha8q/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpv88n2df1/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmp_l59dzy1/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpn6fi6v3h/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmp7fbyd3_c/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmp058rp6s2/evidence
+
+MODULE test_shared_timing_physical
+......
+----------------------------------------------------------------------
+Ran 6 tests in 0.004s
+
+OK
+
+MODULE test_shared_timing_profile
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.006s
+
+OK
+
+MODULE test_silent_handoff
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.811s
+
+OK
+
+MODULE test_slices
+SLICES PASS: deterministic non-destructive stereo transient proposals, minimum spacing, manual markers, silence, capacity/alias safety and full-precision crossfade loops
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.471s
+
+OK
+
+MODULE test_slide_handoff
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.868s
+
+OK
+
+MODULE test_slots
+SLOTS PASS: 0..255 slots, allocation rollback, metadata/PCM/reference preservation, mixed undo, eviction, strict MOD refusal, exact PTG, selection clamp and complete release
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.052s
+
+OK
+
+MODULE test_song
+SONG PASS: bounded growth, insert/remove/move, assignments, allocation rollback, mixed note undo, conflicts, eviction, limits, round trips, controller and complete release
+.
+----------------------------------------------------------------------
+Ran 1 test in 6.333s
+
+OK
+
+MODULE test_source
+MOD SOURCE PASS: separate preview, source/destination selection, failed allocation/budget preservation, exact metadata/PCM import, shared undo, retained song and source release
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.098s
+
+OK
+
+MODULE test_stem_file
+STEMS first export phase=0 detail=0
+STEMS files PASS: grouped PCM equals individual export, global tempo alignment, cancellation, preflight refusal and no-replace race
+STEMS first export phase=0 detail=0
+STEMS files PASS: grouped PCM equals individual export, global tempo alignment, cancellation, preflight refusal and no-replace race
+.
+----------------------------------------------------------------------
+Ran 1 test in 6.304s
+
+OK
+
+MODULE test_stems
+STEMS plan PASS: all65535 selections,16 tracks, groups, exact partition and MIDI/invalid preservation
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.368s
+
+OK
+
+MODULE test_studio_consumer
+STUDIO CONSUMER PASS: refusal retry, ordered drain, pending/error cancellation retains lease until confirmed completion
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.475s
+
+OK
+
+MODULE test_studio_mix
+STUDIO MIX PASS: pinned versions, atomic controls, pinned handoffs/segments, block continuity, true24 and cleanup
+STUDIO MIX PASS: pinned versions, atomic controls, pinned handoffs/segments, block continuity, true24 and cleanup
+PREPARED MIX PASS: public/private parity, retained handoffs/rollback/aliases, bounded shape refusal and public value validation
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.728s
+
+OK
+
+MODULE test_studio_plan
+Studio dispatch PASS: 16-channel true24 audio equivalence, source binding, partial acquisition failure cleanup
+.
+----------------------------------------------------------------------
+Ran 1 test in 2.943s
+
+OK
+
+MODULE test_studio_pump
+STUDIO PUMP PASS: stalled consumers, exact ordered true24 frames, bounded progress, failure lease retention
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.510s
+
+OK
+
+MODULE test_studio_queue
+STUDIO QUEUE PASS: true24 copies, bounded pressure, lease retention, stale refusal, drain and abort cleanup
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.443s
+
+OK
+
+MODULE test_studio_queued_song
+QUEUED SONG PASS: reference audio, tempo/delay, pre-roll, partition invariance, transport stalls/cancel ownership, protocol and allocation refusal
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.244s
+
+OK
+
+MODULE test_studio_song
+SONG SESSION PASS: reference audio, tempo/delay, pre-roll, partition invariance, protocol and allocation refusal
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.073s
+
+OK
+
+MODULE test_studio_tick
+STUDIO TICK PASS: tempo carry, partition hash=cbdaeaff, refusal and cleanup
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.785s
+
+OK
+
+MODULE test_svx
+8SVX PASS: independent signed PCM fixture, odd chunks, loops, Fibonacci wrap, malformed bounds, alias and capacity
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.500s
+
+OK
+
+MODULE test_svx_import
+SVX IMPORT STREAM PASS: 8 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+SVX IMPORT STREAM PASS: 8 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+.
+----------------------------------------------------------------------
+Ran 1 test in 6.454s
+
+OK
+
+MODULE test_tempo_handoff
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.834s
+
+OK
+
+MODULE test_timeline
+TIMELINE PASS: prior-tempo intervals, startup, final F00 boundary, delayed passes and atomic frame/tick limits
+.
+----------------------------------------------------------------------
+Ran 1 test in 1.488s
+
+OK
+
+MODULE test_tone_handoff
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.894s
+
+OK
+
+MODULE test_tone_note_handoff
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.877s
+
+OK
+
+MODULE test_tremolo_render
+TREMOLO PCM PASS: channel=0 ticks=12 frames=11520
+TREMOLO PCM PASS: channel=0 ticks=24 frames=23040
+TREMOLO PCM PASS: channel=0 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=1 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=2 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=3 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=0 ticks=12 frames=11520
+TREMOLO PCM PASS: channel=0 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=0 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=0 ticks=18 frames=17280
+TREMOLO PCM PASS: channel=0 ticks=18 frames=17280
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.583s
+
+OK
+
+MODULE test_tremolo_trace
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.008s
+
+OK
+TREMOLO: eight repeated native traces verify output/stored volume, waveforms, nibble memory, reset control, delay and vibrato-phase ramp dependency; renderer support remains open
+
+MODULE test_tuning_handoff
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.884s
+
+OK
+
+MODULE test_unused_core
+UNUSED PASS: all8xx/E8x parameters across16 tracks, stored/output restoration versus hold, no modulation-state mutation
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.592s
+
+OK
+
+MODULE test_unused_handoff
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.843s
+
+OK
+
+MODULE test_unused_native
+PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+.
+----------------------------------------------------------------------
+Ran 1 test in 5.963s
+
+OK
+UNUSED: six repeated native traces match host/m68k stored/output words and PCM for8xx/E8x
+
+MODULE test_vibrato
+VIBRATO boundaries PASS: 16 tracks, waveforms, independent nibble memory, combined-slide memory, reset ordering and word wrap
+PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+.
+----------------------------------------------------------------------
+Ran 1 test in 8.439s
+
+OK
+VIBRATO: eleven repeated native traces match host/m68k period words and ramp PCM
+
+MODULE test_view_probe
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.717s
+
+OK
+
+MODULE test_voice
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.617s
+
+OK
+VALIDATED VOICE PASS: 8/16/24-bit exact loop/segment/handoff parity, bounded refusal/alias atomicity, public value validation retained
+VOICE traversal PASS: selected ranges, forward/pingpong seams, fractional steps, one-frame loops and large steps
+VOICE mix PASS: true24 stereo, single quantization, clipping, 16 voices, mute progression, capacity and alias refusal
+VOICE partition PASS hash=990c42f0 clips=40
+
+MODULE test_voice_advance
+VOICE advance PASS: exact phase/handoff equivalence without PCM reads
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.553s
+
+OK
+
+MODULE test_voice_segment
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.563s
+
+OK
+SEGMENT trajectory 0 hash=2a50eba5
+SEGMENT trajectory 1 hash=295ede49
+SEGMENT trajectory 2 hash=ac5189f5
+SEGMENT trajectory 3 hash=e5165089
+SEGMENT trajectory 4 hash=594e0cb9
+VOICE segment PASS: independent initial/repeat ranges, interpolation handoff, huge steps, one-frame repeats and invalid-range preservation
+
+MODULE test_volume_handoff
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.846s
+
+OK
+
+MODULE test_wav_import
+WAV IMPORT STREAM PASS: 6 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+WAV IMPORT STREAM PASS: 6 explicit formats, multi-block exact masters, allocation/fill/limit refusal, undo/redo and zero leaks
+.
+----------------------------------------------------------------------
+Ran 1 test in 6.398s
+
+OK
+
+MODULE test_wav_reader
+WAV READER PASS: bounded metadata reads, data-before-fmt, odd unknown chunk, truncation, duplicate fmt, tail policy and failed-read output preservation
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.481s
+
+OK
+
+MODULE test_waveform_handoff
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.864s
+
+OK
+
+MODULE test_wavetable_dispatch
+PROJECT SNAPSHOT PASS: every object byte including padding and tail detects mutation, symmetric equality/self-alias, native ABI alignment, unchanged inputs and full ownership checks retained
+PIN JOB PASS: bounded PCM/marker copy, atomic 8/16/24-bit publication, cancellation, stale poison, budget/reuse and pinned lifetime
+LOOKAHEAD PASS: bounded copied phase/commands, live consume interleave, exact plans, no early commit, stale/rewind/cancel/private-source refusal
+VALIDATED VOICE PASS: 8/16/24-bit exact loop/segment/handoff parity, bounded refusal/alias atomicity, public value validation retained
+amigus reservation lifecycle: PASS (fake library, no hardware)
+WAVETABLE UPLOAD JOB PASS: bounded steps, cancellation, unpublished leases, partial words, live ownership loss and hit transfer; injected only
+AMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only
+SAMPLER UPLOAD JOB PASS: exact8/16/24 pins, stable descriptor, bounded steps, release/edit/history/cancel guards, hits and memory refusal; injected only
+SAMPLER WAVETABLE PASS: revision rebuilds, edits/undo/table changes, pinned old playback, master save and failure cleanup; fake bus only
+AMIGUS VOICE PLAN PASS: byte bounds, alignment, loops, rational rate, volume, refusal atomicity; no I/O
+WAVETABLE VOICES PASS: 16 voices, retrigger, uncertain start, confirmed stop and quiescence, bounded close, master preserved
+WAVETABLE RESTORE OWNER PASS: whole-batch acquisition, exact cursor, refusal rollback, uncertain restore retains lease until confirmed stop; injected only
+WAVETABLE PREFLIGHT STEP PASS: pending gate, bounded timeline/frame progress, copied options, cancellation, late refusal, terminal stability and allocation cleanup
+WAVETABLE SONG PASS: gated preflight, selective master pins, interval protocol, pending stop, stale and failed-start ownership; injected only
+WAVETABLE STAGED RESTORE PASS: one exact-cursor conversion per preparation step,8/16-bit fractional parity, zero commit conversion/upload, repeat readiness and early/double/cancel/stale/uncertain-stop ownership
+WAVETABLE RANGE PASS: silent pre-roll, exact fractional restore before output, selective source pins, final-span timing and uncertain-stop ownership; injected only
+WAVETABLE PREPARING PASS: exclusive pending owner, no early pins/output, cancel/stale/late-refusal/promotion-failure cleanup, transferred song/range playback
+WAVETABLE GUARD PASS: invalid initial PCM, immutable revision/identity guards, lost ownership latch, promotion and cancellation; injected only
+WAVETABLE PREPARED SOURCES PASS: exact pin/descriptor refusal before upload, cache-hit retrigger, public validation retained; injected only
+LARGE PREPARING PASS: allocation separate from4KiB copies, no partial master publication/output, cancel/stale cleanup and intact24-bit ready master
+SONG PREFETCH PASS: upcoming600-byte cache ready before elapsed interval, no early commit, write-free commit, stale/transfer/cancel with old voice ownership
+SONG UPLOADING PASS: whole-batch leases,256-byte steps, no early output/time, duplicate hits, cancellation/stale/capacity/transfer guards and uncertain stop
+WAVETABLE CLOCK PASS: exact ready deadline, no early/late starts, monotonic/overflow refusal, bounded phase debt and retained uncertain stops; injected interval gate only
+WAVETABLE SCHEDULE PASS: future startup, silent range priming, fractional/tempo absolute boundaries, lead-in, no early/late starts, deadline/clock refusal and uncertain-stop retention; injected only
+ELAPSED CLOCK PASS: rational carry, partition invariance, large quotient, exact limit, sticky overflow/frequency/regression and atomic refusal
+ELAPSED DEADLINE PASS: earliest reaching tick, nonintegral carry, low-frequency skipped frames, extreme bounds, borrowing and atomic refusal
+WAVETABLE CLOCKED PASS: fractional tick service, single reads, exclusive progression, read/frequency/regression/deadline faults, no recovery reread and uncertain-stop retention; injected only
+PREPARED BATCH PASS: one command per preparation step, zero commit conversions,8/16-bit plans, controls, duplicate leases, stale/cancel and whole-batch active-state refusal with uncertain-stop retention
+WAVETABLE DISPATCH PASS: whole-sequence preflight, resolved16-channel triggers, phase-preserving controls, atomic refusal, uncertain-stop retention; injected only
+.
+----------------------------------------------------------------------
+Ran 1 test in 7.420s
+
+OK
+
+MODULE test_wavetable_voices
+amigus reservation lifecycle: PASS (fake library, no hardware)
+WAVETABLE UPLOAD JOB PASS: bounded steps, cancellation, unpublished leases, partial words, live ownership loss and hit transfer; injected only
+AMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only
+SAMPLER UPLOAD JOB PASS: exact8/16/24 pins, stable descriptor, bounded steps, release/edit/history/cancel guards, hits and memory refusal; injected only
+SAMPLER WAVETABLE PASS: revision rebuilds, edits/undo/table changes, pinned old playback, master save and failure cleanup; fake bus only
+AMIGUS VOICE PLAN PASS: byte bounds, alignment, loops, rational rate, volume, refusal atomicity; no I/O
+WAVETABLE VOICES PASS: 16 voices, retrigger, uncertain start, confirmed stop and quiescence, bounded close, master preserved
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.039s
+
+OK

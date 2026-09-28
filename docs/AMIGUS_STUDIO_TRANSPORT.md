@@ -342,3 +342,24 @@ The isolated host editor fixture and shared030 production-Exec run
 pending start. Native return0 and zero owned Fast bytes; all DMA off and exact
 cleanup independently confirmed before release. Evidence:
 `evidence/enhanced-editor/editor-studio-start/`.
+
+
+### Capacity-bounded startup prefill
+
+`pt_amigus_session_open_prefilled` and the editor's `bind_prefill` accept a
+nonzero number of complete two-frame triplets before enable. After confirmed
+reset, the target must fit the port's reported empty capacity; oversized targets
+and capacity errors retain a failed cleanup owner rather than waiting forever.
+The bounded writer accumulates prefill across producer blocks, including one-frame
+blocks. A finished stream shorter than the target enables after its available
+complete/padded data; an empty stream never enables. Pending acknowledgement still
+blocks further writes. Existing start APIs keep their one-triplet compatibility
+minimum. Neither that minimum nor any chosen target proves sustainable throughput;
+a native adapter must select its buffering policy from verified device capacity
+and measured service timing. No capacity is inferred from a nominal card model.
+
+Prefill validation: all139 native executables build; the configured-prefill
+register and editor fixtures pass shared030 with19 and171 Fast allocations
+respectively, all released. Complete host invocation passes203 cases; one
+HEAD-based oracle requires a post-commit rerun to cover this latest source.
+Evidence and the exact source caveat: `evidence/enhanced-editor/studio-prefill/`.

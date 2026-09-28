@@ -3,19 +3,23 @@
 static int submit(void *v,const struct pt_pcm *p) {struct pt_amigus_session *s=v;s->reset_confirmed=0;return pt_amigus_fifo_submit(&s->fifo,p);}
 static int poll(void *v)
 {
-    struct pt_amigus_session *s=v;int r;
+    struct pt_amigus_session *s=v;int r;size_t before;
     if(s->start_pending) {
         r=s->start(s->start_context);
         if(r!=0 && r!=1)return -1;
         if(!r)return 0;
         s->started=1;s->start_pending=0;
     }
-    r=pt_amigus_fifo_poll(&s->fifo);
+    before=s->fifo.offset;r=pt_amigus_fifo_poll(&s->fifo);
     if(r<0)return r;
-    if(s->start && !s->started && s->fifo.offset) {
-        s->start_pending=1;
-        /* Next step invokes start. No extra FIFO writes while it is pending. */
-        return 0;
+    if(s->start && !s->started) {
+        s->prefill_written+=(unsigned)((s->fifo.offset-before)/3);
+        if(s->prefill_written>=s->prefill_target ||
+           (s->phase==PT_AS_TAIL && r==1 && s->prefill_written)) {
+            s->start_pending=1;
+            /* No extra FIFO writes while start acknowledgement is pending. */
+            return 0;
+        }
     }
     return r;
 }
@@ -29,12 +33,19 @@ int pt_amigus_session_open(struct pt_amigus_session *s,struct pt_studio_queue *q
     if(!pt_studio_consumer_attach(&s->consumer,q,&t)) {s->phase=PT_AS_RESET;s->failed=1;return 0;}
     s->phase=ready?PT_AS_RUN:PT_AS_RESET;s->failed=!ready;return ready;
 }
-int pt_amigus_session_open_started(struct pt_amigus_session *s,struct pt_studio_queue *q,const struct pt_amigus_fifo_port *p,int (*drain)(void *),void *context,int (*start)(void *),void *start_context)
+int pt_amigus_session_open_prefilled(struct pt_amigus_session *s,struct pt_studio_queue *q,const struct pt_amigus_fifo_port *p,int (*drain)(void *),void *context,int (*start)(void *),void *start_context,unsigned triplets)
 {
-    if(!s || s->phase!=PT_AS_IDLE || !start)return 0;
+    int capacity;
+    if(!s || s->phase!=PT_AS_IDLE || !start || !triplets)return 0;
     if(!pt_amigus_session_open(s,q,p,drain,context))return 0;
-    s->start=start;s->start_context=start_context;return 1;
+    capacity=p->capacity(p->context);
+    if(capacity<0 || triplets>(unsigned)capacity/3) {
+        s->failed=1;pt_amigus_session_stop(s);return 0;
+    }
+    s->start=start;s->start_context=start_context;s->prefill_target=triplets;return 1;
 }
+int pt_amigus_session_open_started(struct pt_amigus_session *s,struct pt_studio_queue *q,const struct pt_amigus_fifo_port *p,int (*drain)(void *),void *context,int (*start)(void *),void *start_context)
+{return pt_amigus_session_open_prefilled(s,q,p,drain,context,start,start_context,1);}
 void pt_amigus_session_stop(struct pt_amigus_session *s)
 {
     if(!s || s->phase==PT_AS_IDLE || s->phase==PT_AS_DONE)return;

@@ -59,7 +59,7 @@ struct pt_editor_studio_output {
     struct pt_amigus_session session;
     struct pt_studio_queue *queue;
     unsigned failed,quiesced;
-    int (*start)(void *);void *start_context;
+    int (*start)(void *);void *start_context;unsigned prefill_triplets;
     struct pt_amigus_reservation *reservation;
     int (*quiesce)(void *);void *quiesce_context;
 };
@@ -69,6 +69,9 @@ int pt_editor_studio_output_attach(struct pt_editor_studio_output *,struct pt_ed
  * Context outlives successful detach or an idle rebind. NULL clears the gate.
  * Pending/failed acknowledgement retains output ownership through reset. */
 int pt_editor_studio_output_bind_start(struct pt_editor_studio_output *,int (*)(void *),void *);
+/* Same binding with explicit nonzero startup prefill in two-frame triplets.
+ * Each start checks it against the reset port capacity; no guessed device depth. */
+int pt_editor_studio_output_bind_prefill(struct pt_editor_studio_output *,int (*)(void *),void *,unsigned triplets);
 int pt_editor_studio_output_start(struct pt_editor_studio_output *,const struct pt_render_options *,unsigned queue_blocks,const struct pt_amigus_fifo_port *,int (*drain)(void *),void *);
 /* Optional PCM reservation lease: held before any reset/output callback until
  * session reset AND quiesce(context)==1, before queue/session storage is released.

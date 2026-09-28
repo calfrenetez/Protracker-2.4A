@@ -59,10 +59,16 @@ struct pt_editor_studio_output {
     struct pt_amigus_session session;
     struct pt_studio_queue *queue;
     unsigned failed,quiesced;
+    int (*start)(void *);void *start_context;
     struct pt_amigus_reservation *reservation;
     int (*quiesce)(void *);void *quiesce_context;
 };
 int pt_editor_studio_output_attach(struct pt_editor_studio_output *,struct pt_editor *);
+/* Optional bounded device-start gate, bound only while attached and idle.
+ * Applies to both ordinary and reserved starts; persists across Stop/restart.
+ * Context outlives successful detach or an idle rebind. NULL clears the gate.
+ * Pending/failed acknowledgement retains output ownership through reset. */
+int pt_editor_studio_output_bind_start(struct pt_editor_studio_output *,int (*)(void *),void *);
 int pt_editor_studio_output_start(struct pt_editor_studio_output *,const struct pt_render_options *,unsigned queue_blocks,const struct pt_amigus_fifo_port *,int (*drain)(void *),void *);
 /* Optional PCM reservation lease: held before any reset/output callback until
  * session reset AND quiesce(context)==1, before queue/session storage is released.

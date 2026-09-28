@@ -325,3 +325,20 @@ and reservation fixtures. Shared030 production-Exec register-session run
 bytes, delayed/failed enable, empty/odd tails and Stop while pending pass. All
 owned paths were removed and independently checked, DMA off, window released.
 Evidence: `evidence/enhanced-editor/studio-start/`. No physical target touched.
+
+
+The editor output owner now exposes `pt_editor_studio_output_bind_start` while
+attached and idle. The optional callback applies to both existing ordinary and
+PCM-reserved starts, persists across Stop/restart, and is cleared on successful
+detach. Rebinding is refused while a queue or reservation remains owned. Its
+context must outlive detach or an idle rebind. An adapter can bind
+`pt_amigus_register_start`; no actual native register adapter or PLAY UI action is
+introduced. Host coverage includes natural completion, pending-start edit/undo/
+Stop/dispose, unknown positive acknowledgement, and reservation retention until
+session reset and adapter quiescence both complete.
+
+The isolated host editor fixture and shared030 production-Exec run
+1790565586339483000 both pass this editor binding, including disposal during
+pending start. Native return0 and zero owned Fast bytes; all DMA off and exact
+cleanup independently confirmed before release. Evidence:
+`evidence/enhanced-editor/editor-studio-start/`.

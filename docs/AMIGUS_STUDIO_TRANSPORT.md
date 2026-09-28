@@ -293,3 +293,35 @@ The PCM session also requires exactly1 from its separate drain callback. Unknown
 positive status is a fault, not successful completion; guarded reset still must
 complete before detach. Host regression and seven-case native fixture pass with
 zero retained memory. See `evidence/enhanced-editor/amigus-drain-status/`.
+
+## Explicit polling start boundary (28 September 2026)
+
+The injected register port now offers `pt_amigus_register_start`: after confirmed
+reset and at least one complete six-word FIFO prefill, it writes signed MSB-first
+stereo24 format5, waits for exact format readback, requests48k playback with
+rate0x8007, and waits for exact enabled readback. It does not request interpolation
+or playback interrupts. Capture IRQ bits remain untouched. Each poll is bounded;
+format/enable writes occur once per reset. Partial or unknown write results,
+invalid capacity/alignment, unexpected enabled settings, playback IRQ masks or
+lost ownership poison the port until confirmed reset. A pending readback remains
+pending; callers must provide their own operation deadline or Stop policy.
+
+`pt_amigus_session_open_started` adds this boundary to the queue/session without
+changing the legacy transport initializer. The first complete packed triplet is
+copied before start; further FIFO writes wait for exact start acknowledgement.
+An empty stream never enables output. A single stereo frame starts only after its
+explicit final silent-frame padding. Stop or start failure retains the consumer
+and queue until disable/reset is confirmed, including after a possibly effective
+enable write. Start and drain contexts must remain alive until detach.
+
+This is an injectable software path, not native device output. The production
+editor still uses its existing injected output entry point; no real register bus
+is bound. Native Mini capacity, register readback, bus ordering, interrupts,
+underrun recovery, physical sound and real-time throughput remain unqualified.
+
+Validation: seven isolated host sanitizer cases pass, including existing editor
+and reservation fixtures. Shared030 production-Exec register-session run
+1790565288286312000 returned0 and released all12 Fast allocations. Exact packed
+bytes, delayed/failed enable, empty/odd tails and Stop while pending pass. All
+owned paths were removed and independently checked, DMA off, window released.
+Evidence: `evidence/enhanced-editor/studio-start/`. No physical target touched.

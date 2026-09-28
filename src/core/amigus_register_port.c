@@ -30,7 +30,7 @@ int pt_amigus_register_reset(void *v)
 {
     struct pt_amigus_register_port *p=v;uint16_t rate,mask,used;
     if(!owned(p))return -1;
-    p->aligned=0;p->fault=1;
+    p->aligned=0;p->fault=1;p->start_phase=0;
     if(p->io.write16(p->io.context,0x06,0)!=1 ||
        p->io.write16(p->io.context,0x00,7)!=1 ||
        p->io.write16(p->io.context,0x02,7)!=1 ||
@@ -48,4 +48,34 @@ int pt_amigus_register_drain(void *v)
     if(!owned(p) || p->fault || !p->aligned)return -1;
     if(p->io.read16(p->io.context,0x10,&used)!=1 || used>p->capacity_words)return fault(p);
     return used==0;
+}
+
+int pt_amigus_register_start(void *v)
+{
+    struct pt_amigus_register_port *p=v;uint16_t format,rate,mask,used;
+    if(!owned(p) || p->fault || !p->aligned)return -1;
+    if(p->start_phase==3)return 1;
+    if(p->io.read16(p->io.context,0x06,&rate)!=1 ||
+       p->io.read16(p->io.context,0x02,&mask)!=1)return fault(p);
+    if(mask&7)return fault(p);
+    if(p->start_phase<2) {
+        if(rate&0x8000)return fault(p);
+        if(p->io.read16(p->io.context,0x10,&used)!=1 ||
+           used>p->capacity_words || used%6)return fault(p);
+        if(!used)return 0;
+        if(!p->start_phase) {
+            if(p->io.write16(p->io.context,0x04,5)!=1)return fault(p);
+            p->start_phase=1;
+        }
+        if(p->io.read16(p->io.context,0x04,&format)!=1)return fault(p);
+        if(format!=5)return 0;
+        /* No interpolation, unsigned, endian swap or channel swap flags. */
+        if(p->io.write16(p->io.context,0x06,0x8007)!=1)return fault(p);
+        p->start_phase=2;
+        return 0;
+    }
+    if(p->io.read16(p->io.context,0x04,&format)!=1 || format!=5)return fault(p);
+    if(!(rate&0x8000))return 0;
+    if(rate!=0x8007)return fault(p);
+    p->start_phase=3;return 1;
 }

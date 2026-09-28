@@ -2927,3 +2927,10 @@ This includes cache/master ownership, sample processing/history, direct24 Studio
 renderer/oracle comparisons, persistence, recovery and guard/refusal checks.
 It does not establish native device output or physical acceptance. See
 `evidence/enhanced-editor/sample-memory-host-suite/` for the complete records.
+
+
+Studio PCM output now has an optional injected prefill/start acknowledgement gate:
+`pt_amigus_session_open_started` and `pt_amigus_register_start`. It preserves queue
+ownership through pending/failed enable and requires confirmed reset before reuse.
+This extends the software transport only; it does not enable native AmiGUS MMIO
+or establish card playback acceptance. See `AMIGUS_STUDIO_TRANSPORT.md`.

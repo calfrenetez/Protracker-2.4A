@@ -2,11 +2,39 @@
 #include <stdio.h>
 #include <string.h>
 #include "../src/core/amigus_register_port.h"
-struct bus {unsigned calls,fail,owned,n;unsigned addr[32];uint32_t val[32];uint16_t used,rate,mask;};
+struct bus {unsigned calls,fail,owned,n;unsigned addr[32];uint32_t val[32];uint16_t used,rate,mask,format;};
 static int owner(void *v) {return ((struct bus *)v)->owned;}
-static int read16(void *v,unsigned a,uint16_t *out) {struct bus *b=v;if(++b->calls==b->fail)return 0;*out=a==0x10?b->used:a==6?b->rate:b->mask;return 1;}
+static int read16(void *v,unsigned a,uint16_t *out) {struct bus *b=v;if(++b->calls==b->fail)return 0;*out=a==0x10?b->used:a==6?b->rate:a==4?b->format:b->mask;return 1;}
 static int write16(void *v,unsigned a,uint16_t x) {struct bus *b=v;b->addr[b->n]=a;b->val[b->n++]=x;return ++b->calls!=b->fail;}
 static int write32(void *v,unsigned a,uint32_t x) {struct bus *b=v;b->addr[b->n]=a;b->val[b->n++]=x;b->used+=2;return ++b->calls!=b->fail;}
+static void start_faults(void)
+{
+    struct bus b={0};struct pt_amigus_register_port p;
+    struct pt_amigus_register_io io={&b,owner,read16,write16,write32};unsigned i,j;
+    b.owned=1;assert(pt_amigus_register_port_init(&p,&io,12));
+    assert(pt_amigus_register_start(&p)==-1 && !b.calls);
+    for(j=0;j<2;++j)for(i=1;i<=(j?3:6);++i) {
+        b.calls=b.n=b.fail=b.used=b.rate=b.mask=0;
+        assert(pt_amigus_register_reset(&p)==1);
+        b.used=6;b.format=5;
+        if(j) {assert(pt_amigus_register_start(&p)==0);b.rate=0x8007;}
+        b.calls=b.n=0;b.fail=i;
+        assert(pt_amigus_register_start(&p)==-1 && p.fault && !p.aligned);
+        assert(pt_amigus_register_capacity(&p)==-1);
+    }
+    b.calls=b.n=b.fail=b.used=b.rate=0;assert(pt_amigus_register_reset(&p)==1);
+    b.used=4;assert(pt_amigus_register_start(&p)==-1); /* incomplete stereo pair */
+    b.used=0;b.n=0;assert(pt_amigus_register_reset(&p)==1);
+    b.used=18;assert(pt_amigus_register_start(&p)==-1); /* capacity impossible */
+    b.used=0;b.n=0;assert(pt_amigus_register_reset(&p)==1);
+    b.used=6;b.rate=0x8007;assert(pt_amigus_register_start(&p)==-1); /* already active */
+    b.used=b.rate=0;b.n=0;assert(pt_amigus_register_reset(&p)==1);
+    b.used=6;b.format=5;assert(pt_amigus_register_start(&p)==0);
+    b.rate=0x8007;assert(pt_amigus_register_start(&p)==1);
+    i=b.calls;j=b.n;assert(pt_amigus_register_start(&p)==1 && b.calls==i && b.n==j);
+    b.owned=0;assert(pt_amigus_register_start(&p)==-1 && b.calls==i);
+    b.owned=1;b.used=b.rate=0;b.n=0;assert(pt_amigus_register_reset(&p)==1 && !p.start_phase);
+}
 int main(void)
 {
     struct bus b={0};struct pt_amigus_register_port p;struct pt_amigus_register_io io={&b,owner,read16,write16,write32};unsigned i;uint32_t words[3]={0x12345678,0x90abcdef,0xfedcba98};
@@ -29,5 +57,5 @@ int main(void)
     b.used=17;assert(pt_amigus_register_capacity(&p)==-1);
     b.used=0;b.n=0;assert(pt_amigus_register_reset(&p)==1);b.owned=0;i=b.calls;
     assert(pt_amigus_register_write3(&p,words)==-1 && b.calls==i);
-    puts("AMIGUS REGISTER PASS: owned access, word capacity, ordered triplets, bounded reset/readback, partial-write poison");return 0;
+    start_faults();puts("AMIGUS REGISTER PASS: owned access, word capacity, ordered triplets, bounded reset/readback, partial-write poison");return 0;
 }

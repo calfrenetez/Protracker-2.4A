@@ -6,12 +6,22 @@
 static unsigned live;
 static void *alloc(void *c,size_t n) {void *p;(void)c;p=malloc(n);if(p)++live;return p;}
 static void release(void *c,void *p) {(void)c;assert(live);--live;free(p);}
-struct bus {uint16_t rate,mask,irq,used;unsigned reset_delay,resets,writes,fail_write,owned;uint32_t words[6];};
+struct bus {uint16_t rate,mask,irq,used,format;unsigned reset_delay,resets,writes,fail_write,owned;
+    unsigned starts,formats,format_delay,start_delay,start_result,format_result;uint32_t words[6];};
 static int owned(void *v) {return ((struct bus *)v)->owned;}
-static int read16(void *v,unsigned a,uint16_t *x) {struct bus *b=v;*x=a==6?b->rate:a==2?b->mask:b->used;return 1;}
+static int read16(void *v,unsigned a,uint16_t *x) {struct bus *b=v;*x=a==6?b->rate:a==2?b->mask:a==4?b->format:b->used;return 1;}
 static int write16(void *v,unsigned a,uint16_t x) {
     struct bus *b=v;
-    if(a==6)b->rate=x;
+    if(a==6) {
+        if(x) {assert(x==0x8007 && b->format==5 && b->used>=6 && !(b->mask&7));++b->starts;
+            if(!b->start_delay)b->rate=x;
+            if(b->start_result)return b->start_result==3?0:b->start_result;
+        } else b->rate=0;
+    }
+    else if(a==4) {assert(x==5 && !(b->rate&0x8000) && b->used>=6);++b->formats;
+        if(!b->format_delay)b->format=x;
+        if(b->format_result)return b->format_result==3?0:b->format_result;
+    }
     else if(a==0)b->irq=x&0x8000?b->irq|(x&0x7fff):b->irq&~x;
     else if(a==2)b->mask=x&0x8000?b->mask|(x&0x7fff):b->mask&~x;
     else {assert(a==8 && !x);++b->resets;if(b->reset_delay)--b->reset_delay;else b->used=0;}
@@ -20,6 +30,60 @@ static int write16(void *v,unsigned a,uint16_t x) {
 static int write32(void *v,unsigned a,uint32_t x) {
     struct bus *b=v;assert(a==12 && b->used+2<=12 && b->writes<6);
     b->words[b->writes++]=x;b->used+=2;return b->writes!=b->fail_write;
+}
+/* Delayed device readback, failed enable, Stop before acknowledgement, and
+ * zero/one-frame streams exercise the real session and register state machines. */
+static void start_cases(void)
+{
+    struct pt_allocator a={NULL,alloc,release};int32_t data[6]={1,257,-513,1025,-1,8388607};unsigned mode;
+    for(mode=0;mode<9;++mode) {
+        struct bus b={0};struct pt_amigus_register_port registers;struct pt_amigus_session session={0};
+        struct pt_amigus_register_io io={&b,owned,read16,write16,write32};
+        struct pt_amigus_fifo_port port={&registers,pt_amigus_register_capacity,pt_amigus_register_write3,pt_amigus_register_reset};
+        struct pt_studio_queue *q=pt_studio_queue_open(&a,2);unsigned i;
+        struct pt_pcm pcm={data,6,mode==1?1:3,48000,2,24};
+        b.owned=1;b.mask=b.irq=0x10;
+        assert(q && pt_amigus_register_port_init(&registers,&io,12));
+        assert(pt_amigus_session_open_started(&session,q,&port,pt_amigus_register_drain,&registers,pt_amigus_register_start,&registers));
+        assert(pt_amigus_register_start(&registers)==0 && !b.formats && !b.starts);
+        if(mode)assert(pt_studio_queue_push(q,&pcm)==PT_QUEUE_OK);
+        pt_studio_queue_finish(q);
+        if(mode>=2) {
+            b.format_delay=b.start_delay=1;
+            for(i=0;i<12 && !b.formats;++i)assert(pt_amigus_session_step(&session)!=PT_CONSUMER_ERROR);
+            assert(b.writes==3 && b.used==6 && b.formats==1 && !b.starts);
+            for(i=0;i<3;++i)assert(pt_amigus_session_step(&session)==PT_CONSUMER_WAIT);
+            assert(b.writes==3 && b.formats==1 && pt_studio_queue_close(q)==PT_QUEUE_BUSY);
+            b.format=5;
+            if(mode==3)b.start_result=3; /* uncertain write */
+            if(mode==4)b.start_result=2; /* unknown positive acknowledgement */
+            if(mode==3 || mode==4)assert(pt_amigus_session_step(&session)==PT_CONSUMER_ERROR);
+            else {
+                assert(pt_amigus_session_step(&session)==PT_CONSUMER_WAIT && b.starts==1);
+                for(i=0;i<3;++i)assert(pt_amigus_session_step(&session)==PT_CONSUMER_WAIT);
+                assert(b.writes==3 && b.starts==1 && !pt_amigus_session_detach(&session));
+                if(mode==5)pt_amigus_session_stop(&session);
+                else if(mode==6) {b.owned=0;assert(pt_amigus_session_step(&session)==PT_CONSUMER_ERROR);b.owned=1;}
+                else if(mode==7) {b.rate=0xc007;assert(pt_amigus_session_step(&session)==PT_CONSUMER_ERROR);}
+                else if(mode==8) {b.mask|=1;assert(pt_amigus_session_step(&session)==PT_CONSUMER_ERROR);}
+                else b.rate=0x8007;
+            }
+            if(mode>=3) {
+                b.reset_delay=1;
+                assert(pt_amigus_session_step(&session)==(mode==5?PT_CONSUMER_WAIT:PT_CONSUMER_ERROR));
+                assert(!pt_amigus_session_detach(&session) && pt_studio_queue_close(q)==PT_QUEUE_BUSY);
+            }
+        }
+        for(i=0;i<30 && session.phase!=PT_AS_DONE;++i) {
+            if(session.phase==PT_AS_DRAIN)b.used=0;
+            (void)pt_amigus_session_step(&session);
+        }
+        assert(session.phase==PT_AS_DONE && !b.rate && !b.used && b.mask==0x10 && b.irq==0x10);
+        assert(session.failed==(mode>=3 && mode!=5));
+        assert(b.starts==(mode?1:0) && b.formats==(mode?1:0));
+        assert(session.padding==(mode==1 || mode==2));
+        assert(pt_amigus_session_detach(&session) && pt_studio_queue_close(q)==PT_QUEUE_OK);
+    }
 }
 int main(void)
 {
@@ -32,7 +96,7 @@ int main(void)
         struct pt_studio_queue *q=pt_studio_queue_open(&a,2);unsigned i;
         b.owned=1;b.rate=0x8007;b.mask=b.irq=0x17;
         assert(q && pt_amigus_register_port_init(&registers,&io,12));
-        assert(pt_amigus_session_open(&session,q,&port,pt_amigus_register_drain,&registers));
+        assert(pt_amigus_session_open_started(&session,q,&port,pt_amigus_register_drain,&registers,pt_amigus_register_start,&registers));
         assert(!b.rate && b.mask==0x10 && b.irq==0x10); /* preserve capture bits */
         assert(pt_studio_queue_push(q,&pcm)==PT_QUEUE_OK);pt_studio_queue_finish(q);
         assert(pt_amigus_session_step(&session)==PT_CONSUMER_PROGRESS);
@@ -45,7 +109,8 @@ int main(void)
             assert(pt_amigus_session_step(&session)==PT_CONSUMER_ERROR && session.phase==PT_AS_DONE);
             assert(!b.used && b.writes==2);
         } else {
-            for(i=0;i<10 && session.phase!=PT_AS_DRAIN;++i)assert(pt_amigus_session_step(&session)!=PT_CONSUMER_ERROR);
+            for(i=0;i<20 && session.phase!=PT_AS_DRAIN;++i)assert(pt_amigus_session_step(&session)!=PT_CONSUMER_ERROR);
+            assert(b.starts==1 && b.formats==1 && b.rate==0x8007);
             assert(session.phase==PT_AS_DRAIN && b.used==12 && b.writes==6 && session.padding==1);
             assert(pt_amigus_session_step(&session)==PT_CONSUMER_WAIT);
             b.used=1;assert(pt_amigus_session_step(&session)==PT_CONSUMER_WAIT);
@@ -56,5 +121,5 @@ int main(void)
         }
         assert(pt_amigus_session_detach(&session));assert(pt_studio_queue_close(q)==PT_QUEUE_OK);
     }
-    assert(!live);puts("AMIGUS REGISTER SESSION PASS: exact packed stream, IRQ bit isolation, drain wait, partial-write/reset delays, ownership loss cleanup");return 0;
+    start_cases();assert(!live);puts("AMIGUS REGISTER SESSION PASS: exact packed stream, IRQ bit isolation, drain wait, partial-write/reset delays, ownership loss cleanup, prefill/start/readback, delayed and failed enable, empty/odd tail, Stop pending");return 0;
 }

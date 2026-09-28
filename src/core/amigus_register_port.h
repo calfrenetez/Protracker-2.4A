@@ -13,10 +13,10 @@ struct pt_amigus_register_io {
     int (*write16)(void *,unsigned,uint16_t);
     int (*write32)(void *,unsigned,uint32_t);
 };
-struct pt_amigus_register_port {struct pt_amigus_register_io io;unsigned capacity_words,aligned,fault;};
+struct pt_amigus_register_port {struct pt_amigus_register_io io;unsigned capacity_words,aligned,fault,start_phase;};
 /* Initialize once before binding; never reinitialize an active port.
  * No I/O. Explicit verified capacity in16-bit words,6..65535. Never guesses card
- * depth. Reset must succeed before capacity/write/drain. No playback start API. */
+ * depth. Reset must succeed before capacity/write/drain/start. */
 int pt_amigus_register_port_init(struct pt_amigus_register_port *,const struct pt_amigus_register_io *,unsigned capacity_words);
 int pt_amigus_register_capacity(void *);
 int pt_amigus_register_write3(void *,const uint32_t *);
@@ -24,6 +24,12 @@ int pt_amigus_register_write3(void *,const uint32_t *);
  * mask and empty readback. Pending readback returns0; errors return-1. Repeated
  * calls retry the full bounded sequence. Failure never grants alignment. */
 int pt_amigus_register_reset(void *);
+/* Polling-only signed MSB-first stereo24/48k start. Call after at least one
+ * complete triplet is copied into the disabled FIFO. 1 confirmed, 0 pending,
+ * -1 fault requiring reset. Writes format and enable only once per reset;
+ * pending calls only read acknowledgements. Never enables playback interrupts.
+ * Native binding must verify these register readbacks on the actual device. */
+int pt_amigus_register_start(void *);
 /* FIFO-empty only; no assertion about DAC pipeline/physical silence. */
 int pt_amigus_register_drain(void *);
 #endif

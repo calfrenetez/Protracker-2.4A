@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "scope": "shared030 Studio ownership core; no audio device transport",
+  "PTExecAmiGusRegisterSessionTest_sha256": "09e5176bfc9229c3a9c3a23f582da7b74f01519558d9e1732b01b99c23d6323a",
+  "register-session_returncode": "0",
+  "run_files_cleaned": true
+}

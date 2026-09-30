@@ -5,7 +5,7 @@
 struct pt_mixed_owner;
 enum pt_mixed_owner_result {PT_MIXED_OWNER_OK,PT_MIXED_OWNER_PREPARING,
     PT_MIXED_OWNER_INVALID,PT_MIXED_OWNER_MEMORY,PT_MIXED_OWNER_CAPABILITY,PT_MIXED_OWNER_STALE,PT_MIXED_OWNER_DEVICE,PT_MIXED_OWNER_RENDER,PT_MIXED_OWNER_DONE,PT_MIXED_OWNER_CLOCK,PT_MIXED_OWNER_DEADLINE,PT_MIXED_OWNER_WAITING};
-/* Combined master owner; live sequence scheduling remains unfinished. Atomically claim both
+/* Combined master owner and numerical schedule; native output remains unfinished. Claim both
  * idle bound engines of the SAME sampler/project. Copies options/capabilities;
  * no source pins, cache allocation or output at begin. Ownership predicates
  * may run during guards. Public direct operations
@@ -34,8 +34,8 @@ enum pt_mixed_owner_result pt_mixed_owner_prepare(struct pt_mixed_owner *,struct
  * live consume may interleave serialized calls. DONE retains pins/readers until
  * close. Stale/render/cache/output failures poison session and attempt each held
  * stop once when API identities are safe; no retry/catch-up. Context/PCM immutability
- * and genuine elapsed-time reporting remain caller obligations. No scheduler,
- * actual clock, native devices, repeats/segments or range restoration here. */
+ * and genuine elapsed-time reporting remain caller obligations. These manual
+ * interval APIs provide no clock, native devices, repeats/segments or range restore. */
 enum pt_mixed_owner_result pt_mixed_owner_next(struct pt_mixed_owner *,struct pt_render_interval *);
 enum pt_mixed_owner_result pt_mixed_owner_consume(struct pt_mixed_owner *,uint32_t);
 enum pt_mixed_owner_result pt_mixed_owner_prefetch(struct pt_mixed_owner *);
@@ -48,10 +48,22 @@ enum pt_mixed_owner_result pt_mixed_owner_complete(struct pt_mixed_owner *);
  * output. Regression/overflow -> CLOCK; late/unready/excess debt -> DEADLINE,
  * poison/cancel and bounded retained-reader stops. No catch-up/retry. Manual
  * next/consume/prefetch/complete/prepare refuse while armed. Completion disarms;
- * caller arms each next interval separately. Whole-song schedule, sampled clock,
- * native timer/device output and sound/performance acceptance remain unfinished. */
+ * caller arms each next interval separately. Whole-song numerical schedule below;
+ * sampled clock/native timer/device output and sound/performance remain unfinished. */
 enum pt_mixed_owner_result pt_mixed_owner_clock_arm(struct pt_mixed_owner *,uint64_t start);
 enum pt_mixed_owner_result pt_mixed_owner_clock_service(struct pt_mixed_owner *,uint64_t now);
+/* Whole-song numerical schedule: begin requires prepared, unvisited owner.
+ * Validates start+full measured frames before output. Pre-start steps prime the
+ * startup batch without starts; OK means primed. At exact start apply ONLY primed
+ * startup and arm next positive interval; each exact later boundary commits ready
+ * batch and arms the next from that absolute boundary. WAITING writes next absolute
+ * FRAME deadline; errors/DONE preserve it. Manual interval/preparation APIs refuse
+ * while scheduled. NULL deadline refuses without advancing. Regression/overflow
+ * -> CLOCK; late/unprimed start/live deadline -> DEADLINE; cancel/stop/retain as
+ * above, no catch-up/retry. Caller supplies honest numerical time. No actual clock,
+ * native event-loop/timer/DMA/device/audio or physical timing acceptance here. */
+enum pt_mixed_owner_result pt_mixed_owner_schedule_begin(struct pt_mixed_owner *,uint64_t start);
+enum pt_mixed_owner_result pt_mixed_owner_schedule_step(struct pt_mixed_owner *,uint64_t now,uint64_t *deadline);
 /* Detect generation/header/API/map/backend changes without bulk PCM scans. */
 enum pt_mixed_owner_result pt_mixed_owner_current(struct pt_mixed_owner *);
 /* Cancel partial promotion and sequence, block both engines, attempt each reader

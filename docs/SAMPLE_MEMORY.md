@@ -68,9 +68,17 @@ at the exact boundary both routes must already be ready and final debt <=256.
 Commit performs no preparation. Manual progression refuses while armed. Regression/
 overflow poisons CLOCK; late/unready/excess debt poisons DEADLINE with cancellation
 and retained-reader stops, no catch-up/retry. This is supplied numerical time,
-not actual timing evidence. Whole-song mixed scheduling, sampled clock binding
-and native device output remain requirements; two independent song engines are
-not a substitute. Cache capacity and physical timing remain separate gates.
+not actual timing evidence. Whole-song mixed numerical scheduling now primes
+startup before the requested absolute frame start; begin validates start+full
+measured duration before output. At exact start only a primed batch can commit,
+and each exact later boundary commits ready commands and arms the next positive
+interval from that absolute time, preserving phase through global tempo changes.
+WAITING reports the next absolute frame deadline; errors/DONE leave it unchanged,
+DONE is terminal/idempotent. Manual interval/preparation APIs refuse while scheduled.
+Unprimed/late startup or missed live boundary poisons DEADLINE; regression/overflow
+poisons CLOCK. No catch-up/retry; retained readers/master pins survive until close.
+Sampled clock binding and native event-loop/timer/device/DMA/audio remain requirements;
+two independent song engines are not a substitute. Cache capacity and physical timing remain separate gates.
 
 AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software
 fixtures, plus an absent-library discovery check. Those results do not establish

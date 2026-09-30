@@ -73,6 +73,66 @@ static void owner_fixture(unsigned bits,unsigned mode)
         assert(r==PT_MIXED_OWNER_OK && sampler.current[0] && sampler.current[1] && !sampler.current[2]);
         assert(report.samples[0][0] && report.samples[1][0] && report.samples[1][1]);
         doc.project.channels.selected=15;assert(pt_mixed_owner_current(owner)==PT_MIXED_OWNER_OK);
+        if(mode>=38) {
+            uint64_t start_time=1000,now=0,deadline=777,prior,total_end;unsigned polls=0,starts,wstarts,allocs,writes;size_t calls;
+            assert(pt_mixed_owner_schedule_step(owner,0,&deadline)==PT_MIXED_OWNER_INVALID && deadline==777);
+            if(mode==39){assert(pt_mixed_owner_schedule_begin(owner,UINT64_MAX)==PT_MIXED_OWNER_CLOCK && !d.starts && !wd.starts);goto close;}
+            assert(pt_mixed_owner_schedule_begin(owner,start_time)==PT_MIXED_OWNER_OK);
+            assert(pt_mixed_owner_schedule_begin(owner,start_time)==PT_MIXED_OWNER_INVALID);
+            assert(pt_mixed_owner_next(owner,NULL)==PT_MIXED_OWNER_INVALID);
+            assert(pt_mixed_owner_consume(owner,1)==PT_MIXED_OWNER_INVALID);
+            assert(pt_mixed_owner_prefetch(owner)==PT_MIXED_OWNER_INVALID);
+            assert(pt_mixed_owner_complete(owner)==PT_MIXED_OWNER_INVALID);
+            assert(pt_mixed_owner_clock_arm(owner,0)==PT_MIXED_OWNER_INVALID);
+            assert(pt_mixed_owner_clock_service(owner,0)==PT_MIXED_OWNER_INVALID);
+            assert(pt_mixed_owner_prepare(owner,NULL)==PT_MIXED_OWNER_INVALID);
+            assert(pt_mixed_owner_schedule_step(owner,0,NULL)==PT_MIXED_OWNER_INVALID && !d.starts && !wd.starts);
+            if(mode==40){assert(pt_mixed_owner_schedule_step(owner,start_time,&deadline)==PT_MIXED_OWNER_DEADLINE && deadline==777 && !d.starts && !wd.starts);goto close;}
+            do {
+                r=pt_mixed_owner_schedule_step(owner,100,&deadline);assert(++polls<1000 && !d.starts && !wd.starts && deadline==start_time);
+                if(mode==46 && d.live && !f->writes){d.quiesce_result=wd.barrier_result=0;
+                    assert(!pt_mixed_owner_close(&owner) && owner && sampler.current[0] && sampler.current[1]);
+                    d.quiesce_result=wd.barrier_result=1;goto close;}
+            }while(r==PT_MIXED_OWNER_WAITING);
+            assert(r==PT_MIXED_OWNER_OK);
+            assert(pt_mixed_owner_schedule_step(owner,101,&deadline)==PT_MIXED_OWNER_OK && !d.starts && !wd.starts);
+            if(mode==42){assert(pt_mixed_owner_schedule_step(owner,100,&deadline)==PT_MIXED_OWNER_CLOCK && deadline==start_time);goto close;}
+            if(mode==41){assert(pt_mixed_owner_schedule_step(owner,start_time+1,&deadline)==PT_MIXED_OWNER_DEADLINE && deadline==start_time);goto close;}
+            if(mode==44){d.quiesce_result=wd.barrier_result=0;assert(!pt_mixed_owner_close(&owner) && owner && !d.starts && !wd.starts);
+                d.quiesce_result=wd.barrier_result=1;goto close;}
+            if(mode==47){wd.start_result=0;d.stop_result[0]=wd.stop_result=0;}
+            calls=d.calls;allocs=fast_calls;writes=f->writes;
+            r=pt_mixed_owner_schedule_step(owner,start_time,&deadline);
+            assert(d.calls==calls && fast_calls==allocs && f->writes==writes);
+            if(mode==47){assert(r==PT_MIXED_OWNER_DEVICE && deadline==start_time && pv.voice[0].held && av.voice[7].held);
+                assert(!pt_mixed_owner_close(&owner));d.stop_result[0]=wd.stop_result=1;goto close;}
+            assert(r==PT_MIXED_OWNER_WAITING && deadline>start_time && d.starts==1 && wd.starts==1);
+            now=start_time;total_end=start_time+report.frames;
+            if(mode==43){d.stop_result[0]=wd.stop_result=0;prior=deadline;
+                assert(pt_mixed_owner_schedule_step(owner,deadline+1,&deadline)==PT_MIXED_OWNER_DEADLINE && deadline==prior);
+                assert(pv.voice[0].held && av.voice[7].held && !pt_mixed_owner_close(&owner));d.stop_result[0]=wd.stop_result=1;goto close;}
+            if(mode==45){prior=deadline;assert(pt_mixed_owner_schedule_step(owner,deadline,&deadline)==PT_MIXED_OWNER_DEADLINE && deadline==prior);goto close;}
+            do {
+                starts=d.starts;wstarts=wd.starts;
+                /* Prime the upcoming shared plan without changing live time. */
+                for(polls=0;polls<64;++polls){unsigned stepwrites=f->writes;size_t stepcalls=d.calls;
+                    assert(pt_mixed_owner_schedule_step(owner,now,&deadline)==PT_MIXED_OWNER_WAITING);
+                    assert(d.starts==starts && wd.starts==wstarts && f->writes-stepwrites<=128 && d.calls-stepcalls<=1);}
+                while(deadline-now>128){now+=128;assert(pt_mixed_owner_schedule_step(owner,now,&deadline)==PT_MIXED_OWNER_WAITING);
+                    assert(d.starts==starts && wd.starts==wstarts);}
+                if(mode==48)assert(!pt_cache_clear(&f->cache.cache));
+                prior=deadline;now=deadline;calls=d.calls;allocs=fast_calls;writes=f->writes;
+                r=pt_mixed_owner_schedule_step(owner,now,&deadline);
+                assert(d.calls==calls && fast_calls==allocs && f->writes==writes);
+                if(mode==48){assert(r==PT_MIXED_OWNER_CAPABILITY && deadline==prior);goto close;}
+                if(r==PT_MIXED_OWNER_WAITING)assert(deadline>prior);
+                else assert(r==PT_MIXED_OWNER_DONE && deadline==prior && now==total_end);
+            }while(r==PT_MIXED_OWNER_WAITING);
+            assert(mode==38 && d.starts==1 && wd.starts==2);
+            assert(pt_mixed_owner_schedule_step(owner,now,&deadline)==PT_MIXED_OWNER_DONE && deadline==prior);
+            d.quiesce_result=wd.barrier_result=0;assert(!pt_mixed_owner_close(&owner) && owner);
+            d.quiesce_result=wd.barrier_result=1;goto close;
+        }
         if(mode>=23) {
             struct pt_render_interval span,sentinel={123,456,789};uint64_t frames=0;
             unsigned intervals=0,polls,starts,wstarts,stops,wstops,allocs,writes;size_t calls;
@@ -292,8 +352,16 @@ detached:
     pt_sampler_release(&sampler);assert(!sampler.bytes);pt_document_release(&doc);free(plan);free(batch);free(f);
 }
 static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wavetable_fixture_main;
-    for(bits=8;bits<=24;bits+=8)for(mode=0;mode<38;++mode)owner_fixture(bits,mode);
-    puts("MIXED OWNER PASS: exclusive engines, union masters, bounded promotion, stale/cancel/refusal and both-reader retention, coordinated staging and global-order prepared commit, whole-batch refusal and partial-failure retention, shared interval/forecast progression and strict numerical deadline gate; no native clock");return 0;}
+#ifdef PT_TEST_MIXED_SCHEDULE_ONLY
+    /* Keep the already-qualified legacy cases in full host regressions; this
+     * separate native window qualifies the new scheduling scenarios only. */
+    for(bits=8;bits<=24;bits+=8)for(mode=38;mode<49;++mode)owner_fixture(bits,mode);
+    puts("MIXED OWNER PASS:33 native schedule-only8/16/24 scenarios, primed startup, absolute tempo boundaries, strict deadline/refusal/cancel and retained-reader cleanup; supplied numerical time only");
+#else
+    for(bits=8;bits<=24;bits+=8)for(mode=0;mode<49;++mode)owner_fixture(bits,mode);
+    puts("MIXED OWNER PASS: full147 host scenarios, master/cache/staging/commit/sequence/deadline/schedule ownership; no native clock");
+#endif
+    return 0;}
 
 #ifndef PT_TEST_MIXED_EXEC
 int main(void){return mixed_owner_fixture();}

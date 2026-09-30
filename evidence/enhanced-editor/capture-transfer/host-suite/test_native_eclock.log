@@ -1,0 +1,7 @@
+NATIVE ALARM OWNER PASS: partial-open cleanup, absolute tick packing, busy/late refusal, bounded pending polls, delayed abort retains all resources, completed cancellation and device error poison; fake Exec only
+.NATIVE ECLOCK OWNER PASS: version/allocation/open failures, exact cleanup, local device base,64-bit assembly, atomic outputs and closed-read refusal; fake Exec only
+.
+----------------------------------------------------------------------
+Ran 2 tests in 0.503s
+
+OK

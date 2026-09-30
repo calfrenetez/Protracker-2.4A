@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../src/editor/sampler_capture.h"
-static size_t live,calls,fail;
-static void *allocate(void *c,size_t n) {void *p;(void)c;if(++calls==fail)return NULL;p=malloc(n);if(p)++live;return p;}
+static size_t live,calls,fail,max_request;
+static void *allocate(void *c,size_t n) {void *p;(void)c;if(++calls==fail || (max_request && n>max_request))return NULL;p=malloc(n);if(p)++live;return p;}
 static void release(void *c,void *p) {(void)c;if(p){assert(live);--live;free(p);}}
 static struct pt_allocator allocator={NULL,allocate,release};
 static void formats(void)
@@ -89,8 +89,75 @@ static void publication(void)
     }
     assert(success);
 }
+static void transfer_ownership(void)
+{
+    struct pt_capture c={0};struct pt_document d;struct pt_sampler s;
+    struct pt_pattern_history h;struct pt_pattern_command commands[4];struct pt_event_change changes[4];
+    struct pt_sample_version *pin;struct pt_pcm pinned;int32_t values[256],*original;unsigned i;
+    struct pt_pcm chunk={values,256,256,48000,1,24};size_t before,charged;uint32_t revision;
+    for(i=0;i<256;++i)values[i]=(int32_t)i*257-32769;
+    pt_document_init(&d,&allocator);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
+    pt_sampler_init(&s,&allocator,1024*1024);
+    assert(pt_pattern_history_init(&h,&d.project,commands,4,changes,4)==PT_EDIT_OK);
+    assert(pt_capture_open(&c,&allocator,24,1,48000,65536,262144)==PT_CAPTURE_OK);
+    for(i=0;i<128;++i)assert(pt_capture_append(&c,&chunk)==PT_CAPTURE_OK);
+    assert(pt_capture_finish(&c)==PT_CAPTURE_OK);original=c.pcm.data;before=live;revision=h.revision;
+    /* Enough for a compact 128 KiB master but not the owned 256 KiB capacity. */
+    s.budget=200000;
+    assert(pt_sampler_capture_append(&s,&d.project,&h,&c,"owned")==PT_EDIT_CAPACITY);
+    assert(c.pcm.data==original && live==before && s.bytes==0 && h.revision==revision && d.project.sample_count==31);
+    s.budget=1024*1024;
+    h.next_revision=UINT32_MAX;
+    assert(pt_sampler_capture_append(&s,&d.project,&h,&c,"owned")==PT_EDIT_CAPACITY);
+    assert(c.pcm.data==original && live==before && s.bytes==0 && h.revision==revision);
+    h.next_revision=revision+1;
+    /* Reject every allocation large enough for a second full PCM copy. */
+    max_request=65536;
+    assert(pt_sampler_capture_append(&s,&d.project,&h,&c,"owned")==PT_EDIT_OK);
+    assert(!c.pcm.data && d.project.samples[31].pcm.data==original);
+    assert(s.bytes>=262144 && d.project.samples[31].pcm.capacity==65536);
+    assert(pt_sampler_attributes(&s,&d.project,&h,31,"renamed",32,0)==PT_EDIT_OK);
+    assert(d.project.samples[31].pcm.data==original);
+    assert(pt_pattern_undo(&d.project,&h,-1)==PT_EDIT_OK);
+    assert(pt_pattern_undo(&d.project,&h,-1)==PT_EDIT_OK && d.project.sample_count==31);
+    assert(pt_pattern_undo(&d.project,&h,1)==PT_EDIT_OK);
+    assert(pt_pattern_undo(&d.project,&h,1)==PT_EDIT_OK);
+    assert(pt_sampler_pin(&s,&d.project,31,s.generation,&pinned,&pin)==PT_EDIT_OK && pinned.data==original);
+    pt_pattern_history_release(&h);pt_sampler_release(&s);
+    charged=s.bytes;assert(charged>=262144 && !memcmp(pinned.data,values,sizeof(values)));
+    pt_sampler_unpin(pin);assert(s.bytes==0);max_request=0;
+    pt_capture_close(&c);pt_document_release(&d);assert(!live);
+}
+static void allocator_fallback(void)
+{
+    unsigned attempt,success=0;int other_context=0;
+    struct pt_allocator other={&other_context,allocate,release};
+    for(attempt=1;attempt<8 && !success;++attempt) {
+        struct pt_capture c={0};struct pt_document d;struct pt_sampler s;
+        struct pt_pattern_history h;struct pt_pattern_command commands[2];struct pt_event_change changes[2];
+        int32_t values[2]={257,-513},*original;struct pt_pcm chunk={values,2,2,48000,1,24};
+        size_t before;enum pt_edit_result result;
+        pt_document_init(&d,&allocator);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
+        pt_sampler_init(&s,&allocator,1024*1024);
+        assert(pt_pattern_history_init(&h,&d.project,commands,2,changes,2)==PT_EDIT_OK);
+        assert(pt_capture_open(&c,&other,24,1,48000,2,8)==PT_CAPTURE_OK);
+        assert(pt_capture_append(&c,&chunk)==PT_CAPTURE_OK && pt_capture_finish(&c)==PT_CAPTURE_OK);
+        original=c.pcm.data;before=live;
+        assert(pt_sampler_append_owned(&s,&d.project,&h,&c.pcm,&other,"refuse")==PT_EDIT_INVALID);
+        assert(c.pcm.data==original && live==before);
+        fail=calls+attempt;result=pt_sampler_capture_append(&s,&d.project,&h,&c,"copy");fail=0;
+        if(result!=PT_EDIT_OK) {
+            assert(result==PT_EDIT_CAPACITY && c.pcm.data==original && live==before && !h.cursor && s.bytes==0);
+            assert(pt_sampler_capture_append(&s,&d.project,&h,&c,"copy")==PT_EDIT_OK);
+        } else success=1;
+        assert(!c.pcm.data && d.project.samples[31].pcm.data!=original);
+        assert(!memcmp(d.project.samples[31].pcm.data,values,sizeof(values)));
+        pt_pattern_history_release(&h);pt_sampler_release(&s);pt_document_release(&d);assert(!live);
+    }
+    assert(success);
+}
 int main(void)
 {
-    formats();refusals();publication();assert(!live);
-    puts("CAPTURE STAGING PASS: bounded exact8/16/24 mono/stereo chunks, explicit overrun, atomic undoable sampler publication, allocation rollback and exact project roundtrip; synthetic input only");return 0;
+    formats();refusals();publication();transfer_ownership();allocator_fallback();assert(!live);
+    puts("CAPTURE STAGING PASS: bounded exact8/16/24 mono/stereo chunks, explicit overrun, atomic owned-buffer publication, capacity charging, pinned metadata/undo lifetime, copy fallback, allocation rollback and exact project roundtrip; synthetic input only");return 0;
 }

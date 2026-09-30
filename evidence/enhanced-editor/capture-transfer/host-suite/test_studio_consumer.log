@@ -1,0 +1,6 @@
+STUDIO CONSUMER PASS: refusal retry, ordered drain, pending/error cancellation retains lease until confirmed completion
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.484s
+
+OK

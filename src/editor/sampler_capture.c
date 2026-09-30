@@ -9,6 +9,12 @@ enum pt_edit_result pt_sampler_capture_append(struct pt_sampler *s,struct pt_pro
 {
     const struct pt_pcm *pcm=pt_capture_pcm(c);enum pt_edit_result result;
     if(!pcm)return PT_EDIT_INVALID;
+    if(s && s->allocator.context==c->allocator.context &&
+       s->allocator.allocate==c->allocator.allocate && s->allocator.release==c->allocator.release) {
+        result=pt_sampler_append_owned(s,p,h,&c->pcm,&c->allocator,name);
+        if(result==PT_EDIT_OK)memset(c,0,sizeof(*c));
+        return result;
+    }
     result=pt_sampler_append_generated(s,p,h,pcm,name,fill,(void *)pcm);
     if(result==PT_EDIT_OK)pt_capture_close(c);
     return result;

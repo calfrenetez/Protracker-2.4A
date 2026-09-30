@@ -1,0 +1,10 @@
+tone 1 kHz max deviation 0
+tone 3 kHz max deviation 4
+tone 6 kHz max deviation 1
+fractional-rate passband max deviation 1
+FILTER PASS
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.564s
+
+OK

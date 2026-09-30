@@ -1,0 +1,37 @@
+.INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=36 checked=30 immutable master
+INVERT ordering native parity PASS: ticks=36 checked=30 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+INVERT ordering native parity PASS: ticks=24 checked=18 immutable master
+....
+----------------------------------------------------------------------
+Ran 5 tests in 3.010s
+
+OK

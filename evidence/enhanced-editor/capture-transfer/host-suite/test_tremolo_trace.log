@@ -1,0 +1,6 @@
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.011s
+
+OK
+TREMOLO: eight repeated native traces verify output/stored volume, waveforms, nibble memory, reset control, delay and vibrato-phase ramp dependency; renderer support remains open

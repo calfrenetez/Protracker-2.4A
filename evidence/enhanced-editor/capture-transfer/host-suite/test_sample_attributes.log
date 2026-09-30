@@ -1,0 +1,6 @@
+SAMPLE ATTRIBUTES PASS: bounds, every allocation failure, shared 24-bit stereo PCM, bounded metadata history, marker preservation, mixed PCM/metadata undo and exact reopen
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.406s
+
+OK

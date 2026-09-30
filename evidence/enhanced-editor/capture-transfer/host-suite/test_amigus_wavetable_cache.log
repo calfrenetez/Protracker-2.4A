@@ -1,0 +1,8 @@
+amigus reservation lifecycle: PASS (fake library, no hardware)
+WAVETABLE UPLOAD JOB PASS: bounded steps, cancellation, unpublished leases, partial words, live ownership loss and hit transfer; injected only
+AMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.436s
+
+OK

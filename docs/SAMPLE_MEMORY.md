@@ -3080,3 +3080,21 @@ Editor refusal preserves the project, history and selected sample.
 This is a software contract enforced against injected adapters. Actual hardware
 capability discovery/negotiation and a native input adapter remain required.
 The collector's support for 24-bit PCM does not advertise 24-bit device capture.
+
+## Recording publication without a second PCM allocation
+
+When finished capture staging and the sampler share the same allocator functions
+and context, publication transfers the unique PCM allocation into an immutable
+sampler version. The whole allocated capacity, including unused recording space,
+is charged to the sampler budget. Publication does not compact or silently reduce
+the master. Different allocators retain the transactional deep-copy path.
+
+A failed budget check, allocation or history commit leaves the recording available
+for retry. Successful publication clears capture ownership. Metadata versions,
+undo/redo and playback pins retain the transferred buffer until the final reference
+is released; the sampler and allocator context must outlive those pins. No device
+may still own or write capture staging when this operation is called.
+
+Host validation and native build results are recorded separately in the capture
+transfer evidence. Emulator execution is pending shared-030 availability; this
+change does not enable real input or qualify physical recording.

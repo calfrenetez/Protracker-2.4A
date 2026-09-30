@@ -11,6 +11,7 @@ struct pt_sample_version {
     struct pt_sampler *owner;
     struct pt_sample_version *backing; /* Flat owner of shared PCM/markers, or NULL. */
     size_t bytes;
+    int32_t *owned_pcm; /* Separate allocation adopted only after publication. */
     unsigned references;
 };
 struct sample_change {struct pt_sampler *owner;unsigned slot,resampled;struct pt_sample_version *before,*after;};
@@ -21,7 +22,9 @@ static void release_version(struct pt_sample_version *v)
 {
     if(v && !--v->references) {
         struct pt_sampler *s=v->owner;struct pt_sample_version *backing=v->backing;
-        s->bytes-=v->bytes;s->allocator.release(s->allocator.context,v);release_version(backing);
+        s->bytes-=v->bytes;
+        if(v->owned_pcm)s->allocator.release(s->allocator.context,v->owned_pcm);
+        s->allocator.release(s->allocator.context,v);release_version(backing);
     }
 }
 void pt_sampler_release(struct pt_sampler *s)
@@ -41,6 +44,18 @@ static struct pt_sample_version *version_allocate(struct pt_sampler *s,const str
     memset(v,0,sizeof(*v));v->owner=s;v->bytes=bytes;v->references=1;v->sample=*sample;
     v->sample.pcm.data=(int32_t *)(v+1);v->sample.pcm.capacity=values;
     v->sample.slices=(uint32_t *)(v->sample.pcm.data+values);
+    s->bytes+=bytes;return v;
+}
+/* Charge the full allocation, including unused recording capacity. Until the
+ * append commits, the caller retains ownership and rollback frees only header. */
+static struct pt_sample_version *version_borrow_owned(struct pt_sampler *s,const struct pt_sample *sample)
+{
+    struct pt_sample_version *v;size_t bytes;
+    if(sample->pcm.capacity>(SIZE_MAX-sizeof(*v))/sizeof(int32_t))return NULL;
+    bytes=sizeof(*v)+sample->pcm.capacity*sizeof(int32_t);
+    if(s->bytes>s->budget || bytes>s->budget-s->bytes)return NULL;
+    v=s->allocator.allocate(s->allocator.context,sizeof(*v));if(!v)return NULL;
+    memset(v,0,sizeof(*v));v->owner=s;v->bytes=bytes;v->references=1;v->sample=*sample;
     s->bytes+=bytes;return v;
 }
 static struct pt_sample_version *version(struct pt_sampler *s,const struct pt_sample *sample)
@@ -169,13 +184,13 @@ static void append_discard(void *context)
     struct appended_sample *c=context;struct pt_sampler *s=c->owner;
     release_version(c->value);s->bytes-=sizeof(*c);s->allocator.release(s->allocator.context,c);
 }
-enum pt_edit_result pt_sampler_append_generated(struct pt_sampler *s,struct pt_project *p,
-    struct pt_pattern_history *h,const struct pt_pcm *format,const char *name,pt_sample_fill fill,void *context)
+static enum pt_edit_result append_sample(struct pt_sampler *s,struct pt_project *p,
+    struct pt_pattern_history *h,const struct pt_pcm *format,const char *name,pt_sample_fill fill,void *context,struct pt_pcm *owned)
 {
     struct appended_sample *c;struct pt_sample sample;struct pt_sample *table;
     struct pt_pcm target;struct pt_edit_resource resource;enum pt_edit_result result;
     size_t table_bytes,needed,length=0;
-    if(!s || !s->allocator.allocate || !s->allocator.release || !h || !format || !name || !fill ||
+    if(!s || !s->allocator.allocate || !s->allocator.release || !h || !format || !name || (!fill && !owned) ||
        pt_project_validate(p,NULL)!=PT_PROJECT_OK || !format->frames || !format->rate || format->rate>192000 ||
        (format->channels!=1 && format->channels!=2) || (format->bits!=8 && format->bits!=16 && format->bits!=24))return PT_EDIT_INVALID;
     while(length<PT_PROJECT_NAME && name[length])++length;
@@ -193,20 +208,37 @@ enum pt_edit_result pt_sampler_append_generated(struct pt_sampler *s,struct pt_p
         s->bytes+=table_bytes;
     }
     memset(&sample,0,sizeof(sample));sample.pcm=*format;sample.pcm.data=NULL;sample.pcm.capacity=0;
-    sample.volume=64;memcpy(sample.name,name,length);c->value=version(s,&sample);
+    sample.volume=64;memcpy(sample.name,name,length);
+    if(owned)sample.pcm=*owned;
+    c->value=owned?version_borrow_owned(s,&sample):version(s,&sample);
     result=PT_EDIT_CAPACITY;if(!c->value)goto fail;
     c->before=p->samples;c->after=table;c->count=p->sample_count;
     target=c->value->sample.pcm;
-    result=fill(context,&target);if(result!=PT_EDIT_OK)goto fail;
+    if(!owned) {result=fill(context,&target);if(result!=PT_EDIT_OK)goto fail;}
     if(target.data!=c->value->sample.pcm.data || target.capacity!=c->value->sample.pcm.capacity ||
        target.frames!=format->frames || target.rate!=format->rate || target.channels!=format->channels || target.bits!=format->bits ||
        pt_pcm_validate(&c->value->sample.pcm)!=PT_PCM_OK) {result=PT_EDIT_INVALID;goto fail;}
     resource=(struct pt_edit_resource){c,append_apply,append_discard};
-    result=pt_pattern_resource_apply(p,h,&resource);if(result==PT_EDIT_OK)return result;
+    result=pt_pattern_resource_apply(p,h,&resource);
+    if(result==PT_EDIT_OK) {
+        if(owned) {c->value->owned_pcm=owned->data;memset(owned,0,sizeof(*owned));}
+        return result;
+    }
 fail:
     append_discard(c);
     if(table_bytes) {s->bytes-=table_bytes;s->allocator.release(s->allocator.context,table);}
     return result;
+}
+enum pt_edit_result pt_sampler_append_generated(struct pt_sampler *s,struct pt_project *p,
+    struct pt_pattern_history *h,const struct pt_pcm *format,const char *name,pt_sample_fill fill,void *context)
+{return append_sample(s,p,h,format,name,fill,context,NULL);}
+enum pt_edit_result pt_sampler_append_owned(struct pt_sampler *s,struct pt_project *p,
+    struct pt_pattern_history *h,struct pt_pcm *pcm,const struct pt_allocator *allocator,const char *name)
+{
+    if(!s || !allocator || allocator->context!=s->allocator.context ||
+       allocator->allocate!=s->allocator.allocate || allocator->release!=s->allocator.release ||
+       !pcm || pt_pcm_validate(pcm)!=PT_PCM_OK)return PT_EDIT_INVALID;
+    return append_sample(s,p,h,pcm,name,NULL,NULL,pcm);
 }
 static int apply(void *context,struct pt_project *p,int direction)
 {

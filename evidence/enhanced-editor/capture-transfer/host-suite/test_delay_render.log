@@ -1,0 +1,12 @@
+OFFSET safety PASS: isolated track16 PCM, non-byte/stereo/odd/pingpong/slice refusal before output/report changes
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=6 frames=5760
+OFFSET PCM PASS: channel=1 ticks=12 frames=11520
+OFFSET PCM PASS: channel=0 ticks=18 frames=17280
+OFFSET PCM PASS: channel=0 ticks=12 frames=11520
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.574s
+
+OK

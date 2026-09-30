@@ -1,0 +1,6 @@
+FINETUNE PASS: 16 tables, E5 ordering/memory/reload, ordinary quantization, negative tone target and final overflow words
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.587s
+
+OK

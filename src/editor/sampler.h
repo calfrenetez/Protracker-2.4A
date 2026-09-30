@@ -24,6 +24,13 @@ struct pt_sampler {
 typedef enum pt_edit_result (*pt_sample_fill)(void *,struct pt_pcm *);
 enum pt_edit_result pt_sampler_append_generated(struct pt_sampler *,struct pt_project *,
     struct pt_pattern_history *,const struct pt_pcm *,const char *,pt_sample_fill,void *);
+/* Transfer a unique PCM allocation from exactly the sampler allocator. The
+ * caller must own capacity*sizeof(int32_t) bytes at data, with no retained
+ * writers or other owners. Success clears pcm; failure leaves it untouched.
+ * Full capacity is charged to the sampler budget until final history/current/
+ * pin release. Allocator context and sampler must outlive all pins as below. */
+enum pt_edit_result pt_sampler_append_owned(struct pt_sampler *,struct pt_project *,
+    struct pt_pattern_history *,struct pt_pcm *,const struct pt_allocator *,const char *);
 void pt_sampler_init(struct pt_sampler *,const struct pt_allocator *,size_t);
 /* Release journal first, then sampler, before destroying/reinitializing editor.
    Versions are immutable and must never be edited through project pointers.

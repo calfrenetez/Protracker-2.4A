@@ -1,0 +1,6 @@
+MIDI PASS: exclusive track ownership, shared-note releases, replacement ordering, endpoint loss/reconnect, sustain cleanup, failed sends, controller/program/bend/clock bytes and 100 lifecycle cycles
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.353s
+
+OK

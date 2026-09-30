@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "seconds": 22.469355042034294,
+  "window_bound_seconds": 200,
+  "cases": [
+    {
+      "case": "mixed-owner",
+      "binary": "PTExecMixedOwnerTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/mixed-stage-candidate/build/dev/render-files-1790796594520980000",
+      "sha256": "0f58e09da216f65e63a6adee93991cbf203d0e617a70b883b04796336e668505",
+      "independent_cleanup": true
+    }
+  ]
+}

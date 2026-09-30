@@ -37,9 +37,17 @@ late refusal, stale inputs and uncertain readers preserve ownership until both
 stop/quiescence barriers confirm. Public AmiGUS voice/dispatch/stop/close calls now
 respect the exclusive token, matching Paula. Close leaves engines bound and
 blocked for separate close/rebind, retaining contexts until confirmed safe. This
-preparation owner creates no derived copies and starts no voices. Coordinated
-prepared cache batches and one live scheduler are still required; two independent
-song engines are not a substitute. Cache capacity and physical timing remain separate gates.
+master-preparation phase creates no derived copies and starts no voices. Private
+coordinated staging now copies and partitions an audited resolved batch, checks
+both backend rules and genuine union pins before any cache reservation, then
+performs one bounded Paula cache step, AmiGUS reserve/hit/upload step (<=256 bytes)
+or command conversion per call. Both routes must become ready; duplicate triggers
+retain independent leases. Cancellation/failure releases all unstarted leases and
+partial jobs while preserving active readers and master pins. Warm completed
+copies may remain cached. Captured voice state changes refuse staging. This
+private foundation has no apply or live sequence progression yet. One live
+scheduler, full commit revalidation and coordinated dispatch are still required;
+two independent song engines are not a substitute. Cache capacity and physical timing remain separate gates.
 
 AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software
 fixtures, plus an absent-library discovery check. Those results do not establish

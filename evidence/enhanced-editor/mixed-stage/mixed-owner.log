@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131109016 reserve=262144 flags=4
+MIXED OWNER PASS: exclusive engines, union masters, bounded promotion, stale/cancel/refusal and both-reader retention, coordinated bounded cache staging and cancellation; no scheduler
+EXEC MEMORY PASS: 468 Fast allocations, zero owned bytes, budget refusal without Chip fallback

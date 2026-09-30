@@ -3423,7 +3423,7 @@ replace an active forecast. Close/error cancels private lookahead and unpublishe
 candidates while retaining masters and unconfirmed reader ownership as before.
 
 Source arrays remain immutable, setup/allocation synchronous, and callers own
-real elapsed time. Sampled clock binding, whole-song and shared mixed-backend scheduling,
+real elapsed time. Sampled clock binding and shared mixed-backend scheduling,
 native PLAY/DMA and sound/physical acceptance remain requirements. This addition
 provides preparation ahead of logical completion, not a timing guarantee.
 
@@ -3455,7 +3455,7 @@ no catch-up callbacks or retry, master and uncertain reader ownership retained
 until explicit confirmed close. The same shared sequence remains authoritative.
 
 This is a single-interval numerical gate, not native timing acceptance. Caller
-supplies honest elapsed time; sampled monotonic clock binding, whole-song scheduling,
+supplies honest elapsed time; sampled monotonic clock binding,
 mixed-backend coordination and native PLAY/timer/DMA/audio remain open.
 
 Four sanitized host modules pass25.492s. Four selected portable/native Ctargets
@@ -3466,3 +3466,38 @@ absence confirmed after each. Evidence `evidence/enhanced-editor/paula-deadline`
 Tests cover exact boundaries with no allocation during apply, manual-call refusal,
 regression/start overflow/late/unready/excess debt and uncertain stop retention.
 This numerical fixture does not validate actual clocks, timing or audible output.
+
+
+## Paula whole-song numerical schedule
+
+`pt_paula_song_schedule_begin/step` and editor wrappers now carry the strict
+interval gate across the same fully preflighted sequence. Begin requires prepared,
+unvisited song; checks start+total measured frames before output. Pre-start steps
+resolve startup intervals/lookahead/cache copies without callbacks. OK means
+startup already primed. At exact start only a ready startup plan may apply, then
+the next positive emitting interval arms in the same call. Each exact later
+boundary applies its ready plan and immediately arms the following interval from
+that boundary, preserving absolute phase across global tempo changes. WAITING
+returns the next absolute frame deadline; errors/DONE preserve the output pointer.
+Manual interval APIs and preparation refuse while scheduled. NULL deadline
+refuses unchanged; close and the editor mutation barrier remain available.
+
+Regression, start/total overflow, late or unprimed start and missed live deadlines
+poison/cancel/stop without catch-up, retaining uncertain ownership until close.
+Unexpected zero/silent live intervals refuse instead of doing late startup work;
+whole-song44.1/48kHz preflight remains the supported domain. Primed but unstarted
+copies are cancelled on close; failed context quiescence retains session masters.
+Sampled clock binding, native event-loop/timer/PLAY/DMA/audio and mixed outputs
+remain requirements. This scheduler uses supplied numerical frame timestamps;
+it does not qualify actual timing or audible playback.
+
+Four sanitized host modules pass25.835s;4 selected portable/native Ctargets+guard
+pass,147 indexed sources/zero generated/5binary hashes verified. Shared030 native
+song/editor fixtures pass68.711s overall with Fast/Chip checks and zero owned
+bytes. Independent locked running/all4DMAoff/exact run+launcher absence after EACH
+case confirmed. Evidence `evidence/enhanced-editor/paula-schedule`.
+Tests cover full scheduled duration across tempo change, no early startup output,
+no conversion at exact boundaries, ready idempotence, unready/late/regressing/
+overflow startup, late active reader retained through unconfirmed stop, primed
+cancellation through failed quiescence, and editor barrier while scheduled.
+No native clock/timer/sound or physical acceptance is established by these tests.

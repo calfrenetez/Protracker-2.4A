@@ -15,11 +15,12 @@ struct pt_paula_song {
     struct pt_paula_preflight_report report;struct pt_render_interval interval;
     int8_t map[PT_CHANNEL_LIMIT];uint64_t version;unsigned generation,slot,analyzed,ready,pending,done,closing;
     uint64_t clock_start,clock_last,clock_deadline;unsigned clock_armed;
+    uint64_t schedule_start,schedule_last;unsigned schedule_phase,schedule_seen,visited;
     uint32_t remaining;enum pt_paula_song_result failure;
 };
 static enum pt_paula_song_result fail(struct pt_paula_song *s,enum pt_paula_song_result result)
 {
-    unsigned i;pt_render_lookahead_cancel(&s->ahead);pt_paula_cancel(&s->batch);s->clock_armed=0;s->failure=result;s->closing=1;s->voices->closing=1;
+    unsigned i;pt_render_lookahead_cancel(&s->ahead);pt_paula_cancel(&s->batch);s->schedule_phase=0;s->clock_armed=0;s->failure=result;s->closing=1;s->voices->closing=1;
     pt_render_sequence_close(s->sequence);s->sequence=NULL;
     for(i=0;i<PT_PAULA_VOICES;++i)if(s->voices->voice[i].held)
         pt_paula_stop_owned(s->voices,(unsigned)s->voices->voice[i].track,s);
@@ -74,7 +75,7 @@ enum pt_paula_song_result pt_paula_song_prepare(struct pt_paula_song *s,struct p
     enum pt_paula_song_result state=current(s);enum pt_edit_result edit;unsigned ready;
     struct pt_pcm pcm;struct pt_sample_version *pin;
     if(state!=PT_PAULA_SONG_OK)return state;
-    if(s->clock_armed)return PT_PAULA_SONG_INVALID;
+    if(s->clock_armed || s->schedule_phase)return PT_PAULA_SONG_INVALID;
     if(!s->analyzed) {
         enum pt_paula_capability result=pt_paula_preflight_take(s->project,&s->options,s->map,&s->caps,
             s->api.control!=NULL,&s->allocator,&s->report,&s->sequence);
@@ -96,7 +97,7 @@ enum pt_paula_song_result pt_paula_song_prepare(struct pt_paula_song *s,struct p
     if(edit!=PT_EDIT_OK)return fail(s,edit==PT_EDIT_CAPACITY?PT_PAULA_SONG_MEMORY:PT_PAULA_SONG_STALE);
     return PT_PAULA_SONG_PREPARING;
 }
-enum pt_paula_song_result pt_paula_song_next(struct pt_paula_song *s,struct pt_render_interval *out)
+static enum pt_paula_song_result next(struct pt_paula_song *s,struct pt_render_interval *out)
 {
     enum pt_paula_song_result state=current(s);
     if(state!=PT_PAULA_SONG_OK)return state;
@@ -104,7 +105,7 @@ enum pt_paula_song_result pt_paula_song_next(struct pt_paula_song *s,struct pt_r
     if(s->clock_armed || !out || s->pending)return PT_PAULA_SONG_INVALID;
     if(s->done)return PT_PAULA_SONG_DONE;
     if(pt_render_sequence_next(s->sequence,&s->interval)!=PT_RENDER_OK)return fail(s,PT_PAULA_SONG_RENDER);
-    s->pending=1;s->remaining=s->interval.frames;*out=s->interval;return PT_PAULA_SONG_OK;
+    s->visited=1;s->pending=1;s->remaining=s->interval.frames;*out=s->interval;return PT_PAULA_SONG_OK;
 }
 static enum pt_paula_song_result consume(struct pt_paula_song *s,uint32_t frames)
 {
@@ -185,14 +186,14 @@ static enum pt_paula_song_result complete(struct pt_paula_song *s)
     s->pending=0;s->done=s->interval.end;return s->done?PT_PAULA_SONG_DONE:PT_PAULA_SONG_OK;
 }
 enum pt_paula_song_result pt_paula_song_consume(struct pt_paula_song *s,uint32_t frames)
-{return s && !s->clock_armed?consume(s,frames):PT_PAULA_SONG_INVALID;}
+{return s && !s->schedule_phase && !s->clock_armed?consume(s,frames):PT_PAULA_SONG_INVALID;}
 enum pt_paula_song_result pt_paula_song_prefetch(struct pt_paula_song *s)
-{return s && !s->clock_armed?prefetch(s):PT_PAULA_SONG_INVALID;}
+{return s && !s->schedule_phase && !s->clock_armed?prefetch(s):PT_PAULA_SONG_INVALID;}
 enum pt_paula_song_result pt_paula_song_stage(struct pt_paula_song *s)
-{return s && !s->clock_armed?stage(s):PT_PAULA_SONG_INVALID;}
+{return s && !s->schedule_phase && !s->clock_armed?stage(s):PT_PAULA_SONG_INVALID;}
 enum pt_paula_song_result pt_paula_song_complete(struct pt_paula_song *s)
-{return s && !s->clock_armed?complete(s):PT_PAULA_SONG_INVALID;}
-enum pt_paula_song_result pt_paula_song_clock_arm(struct pt_paula_song *s,uint64_t start)
+{return s && !s->schedule_phase && !s->clock_armed?complete(s):PT_PAULA_SONG_INVALID;}
+static enum pt_paula_song_result clock_arm(struct pt_paula_song *s,uint64_t start)
 {
     enum pt_paula_song_result r=current(s);if(r!=PT_PAULA_SONG_OK)return r;
     if(s->clock_armed || !s->ready || !s->pending || !s->interval.emit || !s->interval.frames ||
@@ -202,7 +203,7 @@ enum pt_paula_song_result pt_paula_song_clock_arm(struct pt_paula_song *s,uint64
     s->clock_start=s->clock_last=start;s->clock_deadline=start+s->remaining;s->clock_armed=1;
     return PT_PAULA_SONG_OK;
 }
-enum pt_paula_song_result pt_paula_song_clock_service(struct pt_paula_song *s,uint64_t now)
+static enum pt_paula_song_result clock_service(struct pt_paula_song *s,uint64_t now)
 {
     uint64_t debt;uint32_t frames;enum pt_paula_song_result r=current(s);if(r!=PT_PAULA_SONG_OK)return r;
     if(!s->clock_armed)return PT_PAULA_SONG_INVALID;
@@ -216,6 +217,72 @@ enum pt_paula_song_result pt_paula_song_clock_service(struct pt_paula_song *s,ui
     if(now==s->clock_deadline){r=complete(s);s->clock_armed=0;return r;}
     r=prefetch(s);
     return r==PT_PAULA_SONG_OK || r==PT_PAULA_SONG_PREPARING?PT_PAULA_SONG_WAITING:r;
+}
+enum pt_paula_song_result pt_paula_song_next(struct pt_paula_song *s,struct pt_render_interval *out)
+{return s && !s->schedule_phase?next(s,out):PT_PAULA_SONG_INVALID;}
+enum pt_paula_song_result pt_paula_song_clock_arm(struct pt_paula_song *s,uint64_t start)
+{return s && !s->schedule_phase?clock_arm(s,start):PT_PAULA_SONG_INVALID;}
+enum pt_paula_song_result pt_paula_song_clock_service(struct pt_paula_song *s,uint64_t now)
+{return s && !s->schedule_phase?clock_service(s,now):PT_PAULA_SONG_INVALID;}
+enum {SCHEDULE_NEXT=1,SCHEDULE_ZERO,SCHEDULE_READY_NEXT,SCHEDULE_READY_ZERO,SCHEDULE_RUNNING};
+enum pt_paula_song_result pt_paula_song_schedule_begin(struct pt_paula_song *s,uint64_t start)
+{
+    enum pt_paula_song_result r=current(s);if(r!=PT_PAULA_SONG_OK)return r;
+    if(!s->ready || s->visited || s->schedule_phase || s->clock_armed)return PT_PAULA_SONG_INVALID;
+    if(start>UINT64_MAX-s->report.frames)return fail(s,PT_PAULA_SONG_CLOCK);
+    s->schedule_start=start;s->schedule_seen=0;s->schedule_phase=SCHEDULE_NEXT;
+    return PT_PAULA_SONG_OK;
+}
+static enum pt_paula_song_result scheduled_interval(struct pt_paula_song *s,uint64_t start)
+{
+    struct pt_render_interval span;enum pt_paula_song_result r=next(s,&span);
+    if(r!=PT_PAULA_SONG_OK)return r;
+    /* Whole-song44.1/48kHz traversal has positive emitting runtime intervals.
+     * Refuse unexpected zero/silent work at a live boundary. */
+    if(!span.emit || !span.frames)return fail(s,PT_PAULA_SONG_RENDER);
+    r=clock_arm(s,start);if(r==PT_PAULA_SONG_OK)s->schedule_phase=SCHEDULE_RUNNING;return r;
+}
+enum pt_paula_song_result pt_paula_song_schedule_step(struct pt_paula_song *s,uint64_t now,uint64_t *deadline)
+{
+    enum pt_paula_song_result r;struct pt_render_interval span;
+    if(!deadline)return PT_PAULA_SONG_INVALID;
+    r=current(s);if(r!=PT_PAULA_SONG_OK)return r;
+    if(!s->schedule_phase)return PT_PAULA_SONG_INVALID;
+    if(s->schedule_seen && now<s->schedule_last)return fail(s,PT_PAULA_SONG_CLOCK);
+    s->schedule_seen=1;s->schedule_last=now;
+    if(s->schedule_phase==SCHEDULE_RUNNING) {
+        r=clock_service(s,now);
+        if(r==PT_PAULA_SONG_OK){r=scheduled_interval(s,now);if(r!=PT_PAULA_SONG_OK)return r;}
+        else if(r!=PT_PAULA_SONG_WAITING)return r;
+        *deadline=s->clock_deadline;return PT_PAULA_SONG_WAITING;
+    }
+    if(now>s->schedule_start)return fail(s,PT_PAULA_SONG_DEADLINE);
+    if(now==s->schedule_start) {
+        if(s->schedule_phase==SCHEDULE_READY_NEXT) {
+            r=clock_arm(s,now);if(r!=PT_PAULA_SONG_OK)return r;s->schedule_phase=SCHEDULE_RUNNING;
+        }else if(s->schedule_phase==SCHEDULE_READY_ZERO) {
+            r=complete(s);if(r!=PT_PAULA_SONG_OK)return r;
+            r=scheduled_interval(s,now);if(r!=PT_PAULA_SONG_OK)return r;
+        }else return fail(s,PT_PAULA_SONG_DEADLINE);
+        *deadline=s->clock_deadline;return PT_PAULA_SONG_WAITING;
+    }
+    switch(s->schedule_phase) {
+    case SCHEDULE_NEXT:
+        r=next(s,&span);if(r!=PT_PAULA_SONG_OK)return r;
+        if(!span.emit)return fail(s,PT_PAULA_SONG_RENDER);
+        s->schedule_phase=span.frames?SCHEDULE_READY_NEXT:SCHEDULE_ZERO;break;
+    case SCHEDULE_ZERO:
+        r=prefetch(s);if(r==PT_PAULA_SONG_PREPARING)break;
+        if(r!=PT_PAULA_SONG_OK)return r;
+        if(!s->plan.count && !s->interval.end) {
+            r=complete(s);if(r!=PT_PAULA_SONG_OK)return r;s->schedule_phase=SCHEDULE_NEXT;
+        }else s->schedule_phase=SCHEDULE_READY_ZERO;
+        break;
+    default:break; /* Ready implies no additional work/output before start. */
+    }
+    *deadline=s->schedule_start;
+    return s->schedule_phase==SCHEDULE_READY_NEXT || s->schedule_phase==SCHEDULE_READY_ZERO?
+        PT_PAULA_SONG_OK:PT_PAULA_SONG_WAITING;
 }
 int pt_paula_song_close(struct pt_paula_song **out)
 {

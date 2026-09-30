@@ -41,3 +41,8 @@ enum pt_paula_song_result pt_editor_paula_clock_arm(struct pt_editor_paula *o,ui
 {return attached(o)?pt_paula_song_clock_arm(o->song,start):PT_PAULA_SONG_INVALID;}
 enum pt_paula_song_result pt_editor_paula_clock_service(struct pt_editor_paula *o,uint64_t now)
 {return attached(o)?pt_paula_song_clock_service(o->song,now):PT_PAULA_SONG_INVALID;}
+
+enum pt_paula_song_result pt_editor_paula_schedule_begin(struct pt_editor_paula *o,uint64_t start)
+{return attached(o)?pt_paula_song_schedule_begin(o->song,start):PT_PAULA_SONG_INVALID;}
+enum pt_paula_song_result pt_editor_paula_schedule_step(struct pt_editor_paula *o,uint64_t now,uint64_t *deadline)
+{return attached(o)?pt_paula_song_schedule_step(o->song,now,deadline):PT_PAULA_SONG_INVALID;}

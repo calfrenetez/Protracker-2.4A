@@ -68,6 +68,19 @@ enum pt_paula_song_result pt_paula_song_complete(struct pt_paula_song *);
  * sleeps, native timers or whole-song scheduler; caller supplies honest time. */
 enum pt_paula_song_result pt_paula_song_clock_arm(struct pt_paula_song *,uint64_t);
 enum pt_paula_song_result pt_paula_song_clock_service(struct pt_paula_song *,uint64_t);
+/* Optional whole-song schedule after prepare, BEFORE any next. Absolute frame
+ * start and start+measured total checked before output. Each pre-start step does
+ * one next/lookahead/cache operation; OK means startup ready, WAITING more work.
+ * At exact start only an already-ready initial batch may apply. Each exact
+ * boundary applies its ready plan and arms the following positive interval in
+ * the same call, preserving absolute phase. step returns WAITING with next
+ * deadline; DONE still needs close. NULL deadline refuses unchanged; errors/DONE
+ * preserve deadline output. Regression/late/unready poison without catch-up.
+ * Manual interval APIs and prepare refuse while scheduled; close remains valid.
+ * Repeated timestamps permitted for bounded preparation. No clock read/sleep or
+ * native timing guarantee; borrowed arrays/callbacks remain immutable as above. */
+enum pt_paula_song_result pt_paula_song_schedule_begin(struct pt_paula_song *,uint64_t);
+enum pt_paula_song_result pt_paula_song_schedule_step(struct pt_paula_song *,uint64_t,uint64_t *);
 /* One attempt: block advancement, stop held readers, confirm adapter quiescence,
  * close cache, then release sequence/jobs/master pins and session. Returns0 while
  * unresolved; retain *song and all contexts. No forced free or polling. Success

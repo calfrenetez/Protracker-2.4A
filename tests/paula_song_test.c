@@ -177,6 +177,64 @@ static void song_fixture(unsigned bits)
     pinned=sampler.bytes;d.quiesce_result=0;
     assert(!pt_paula_song_close(&song) && sampler.bytes==pinned && d.starts==starts && !d.reading[0]);
     d.quiesce_result=1;assert(pt_paula_song_close(&song) && !d.live);
+    /* Whole-song startup and each next interval share absolute phase. */
+    for(mode=0;mode<7;++mode) {
+        uint64_t now=1000,deadline=77,last;
+        BIND();assert(pt_paula_song_begin(&owner,&o,&caps,&a,&song)==PT_PAULA_SONG_PREPARING);
+        assert(prepare_song(song,&report)==PT_PAULA_SONG_OK);
+        starts=d.starts;stops=d.stops;
+        if(mode==4) {
+            assert(pt_paula_song_schedule_begin(song,UINT64_MAX)==PT_PAULA_SONG_CLOCK);
+            assert(d.starts==starts && pt_paula_song_close(&song));continue;
+        }
+        assert(pt_paula_song_schedule_begin(song,1000)==PT_PAULA_SONG_OK);
+        assert(pt_paula_song_schedule_begin(song,1000)==PT_PAULA_SONG_INVALID);
+        assert(pt_paula_song_next(song,&span)==PT_PAULA_SONG_INVALID);
+        assert(pt_paula_song_prepare(song,NULL)==PT_PAULA_SONG_INVALID);
+        assert(pt_paula_song_clock_arm(song,1000)==PT_PAULA_SONG_INVALID);
+        assert(pt_paula_song_schedule_step(song,999,NULL)==PT_PAULA_SONG_INVALID && deadline==77);
+        if(mode==1) {
+            assert(pt_paula_song_schedule_step(song,1000,&deadline)==PT_PAULA_SONG_DEADLINE && deadline==77);
+            assert(d.starts==starts && pt_paula_song_close(&song));continue;
+        }
+        polls=0;
+        do {
+            result=pt_paula_song_schedule_step(song,999,&deadline);assert(++polls<2000);
+            assert(deadline==1000 && d.starts==starts && d.stops==stops);
+        }while(result==PT_PAULA_SONG_WAITING);
+        assert(result==PT_PAULA_SONG_OK);
+        calls=d.calls;assert(pt_paula_song_schedule_step(song,999,&deadline)==PT_PAULA_SONG_OK && d.calls==calls);
+        if(mode==2 || mode==3) {
+            enum pt_paula_song_result expected=mode==2?PT_PAULA_SONG_DEADLINE:PT_PAULA_SONG_CLOCK;
+            assert(pt_paula_song_schedule_step(song,mode==2?1001:998,&deadline)==expected && deadline==1000);
+            assert(d.starts==starts && pt_paula_song_close(&song));continue;
+        }
+        if(mode==6) {
+            pinned=sampler.bytes;d.quiesce_result=0;
+            assert(!pt_paula_song_close(&song) && sampler.bytes==pinned && d.starts==starts);
+            d.quiesce_result=1;assert(pt_paula_song_close(&song));continue;
+        }
+        d.fail=1;assert(pt_paula_song_schedule_step(song,now,&deadline)==PT_PAULA_SONG_WAITING);d.fail=0;
+        assert(d.calls==calls && d.reading[0] && deadline>now);
+        if(mode==5) {
+            d.stop_result[0]=0;pinned=sampler.bytes;starts=d.starts;stops=d.stops;last=deadline;
+            assert(pt_paula_song_schedule_step(song,deadline+1,&deadline)==PT_PAULA_SONG_DEADLINE && deadline==last);
+            assert(d.starts==starts && d.stops==stops+1 && d.reading[0]);
+            assert(!pt_paula_song_close(&song) && sampler.bytes==pinned);
+            d.stop_result[0]=1;assert(pt_paula_song_close(&song));continue;
+        }
+        for(i=0;i<100;++i) {
+            last=deadline;
+            for(polls=0;polls<100;++polls)assert(pt_paula_song_schedule_step(song,now,&deadline)==PT_PAULA_SONG_WAITING && deadline==last);
+            while(last-now>128){now+=128;assert(pt_paula_song_schedule_step(song,now,&deadline)==PT_PAULA_SONG_WAITING && deadline==last);}
+            now=last;calls=d.calls;d.fail=1;result=pt_paula_song_schedule_step(song,now,&deadline);d.fail=0;
+            assert(d.calls==calls);
+            if(result==PT_PAULA_SONG_DONE){assert(deadline==last);break;}
+            assert(result==PT_PAULA_SONG_WAITING && deadline>last);
+        }
+        assert(i<100 && now==1000+measured.frames);
+        assert(pt_paula_song_close(&song) && !d.live);
+    }
     /* Clock failures with an active reader never catch up or retry output;
      * uncertain stop retains session/master ownership until explicit close. */
     for(mode=0;mode<5;++mode) {

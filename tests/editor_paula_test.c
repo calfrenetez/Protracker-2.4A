@@ -8,7 +8,7 @@ static void editor_start(struct pt_editor_paula *o,struct pt_sampler_paula *cach
 {
     struct pt_render_options options={0};struct pt_paula_render_caps caps={3546895,124,65535};
     struct pt_paula_voice_api api={d,start,stop,control};struct pt_paula_preflight_report report;
-    struct pt_render_interval span;enum pt_paula_song_result result;unsigned n=0;
+    enum pt_paula_song_result result;unsigned n=0;
     d->start_result=d->control_result=d->quiesce_result=1;
     for(n=0;n<4;++n)d->stop_result[n]=1;
     assert(pt_sampler_paula_bind(cache,&o->editor->sampler,o->editor->project,d,chip_alloc,chip_free,32));
@@ -20,22 +20,13 @@ static void editor_start(struct pt_editor_paula *o,struct pt_sampler_paula *cach
     n=0;do{result=pt_editor_paula_prepare(o,&report);assert(++n<100);}while(result==PT_PAULA_SONG_PREPARING);
     assert(result==PT_PAULA_SONG_OK && !d->reading[0]);
     if(!play)return;
-    for(n=0;!d->reading[0];++n) {
-        assert(n<20 && pt_editor_paula_next(o,&span)==PT_PAULA_SONG_OK);
-        if(span.frames && span.emit) {
-            uint64_t now=1000,end=now+span.frames;unsigned polls;
-            assert(pt_editor_paula_clock_arm(o,now)==PT_PAULA_SONG_OK);
-            assert(pt_editor_paula_consume(o,1)==PT_PAULA_SONG_INVALID);
-            for(polls=0;polls<100;++polls)assert(pt_editor_paula_clock_service(o,now)==PT_PAULA_SONG_WAITING);
-            while(end-now>128){now+=128;assert(pt_editor_paula_clock_service(o,now)==PT_PAULA_SONG_WAITING);}
-            assert(pt_editor_paula_clock_service(o,end)==PT_PAULA_SONG_OK);continue;
-        }
-        do{result=pt_editor_paula_prefetch(o);assert(!d->reading[0]);}while(result==PT_PAULA_SONG_PREPARING);
-        assert(result==PT_PAULA_SONG_OK);
-        while(span.frames){uint32_t block=span.frames>256?256:span.frames;
-            assert(pt_editor_paula_consume(o,block)==PT_PAULA_SONG_OK);span.frames-=block;}
-        assert(pt_editor_paula_stage(o)==PT_PAULA_SONG_OK);
-        assert(pt_editor_paula_complete(o)==PT_PAULA_SONG_OK);
+    {
+        uint64_t deadline=0;unsigned polls=0;
+        assert(pt_editor_paula_schedule_begin(o,1000)==PT_PAULA_SONG_OK);
+        do{result=pt_editor_paula_schedule_step(o,999,&deadline);assert(++polls<2000 && !d->reading[0]);}while(result==PT_PAULA_SONG_WAITING);
+        assert(result==PT_PAULA_SONG_OK && deadline==1000);
+        assert(pt_editor_paula_consume(o,1)==PT_PAULA_SONG_INVALID);
+        assert(pt_editor_paula_schedule_step(o,1000,&deadline)==PT_PAULA_SONG_WAITING && d->reading[0]);
     }
 }
 static int occupied(void *context) {(void)context;return 1;}

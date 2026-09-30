@@ -1,0 +1,6 @@
+MIXED PREFLIGHT PASS: one global timeline, separate source masks, late backend refusal, transfer and allocation cleanup; no dispatch
+.
+----------------------------------------------------------------------
+Ran 1 test in 6.468s
+
+OK

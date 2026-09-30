@@ -100,6 +100,23 @@ and10ms at16voices, including instrumentation; strict timer startup previously
 refused late wakeups. Native PLAY event-loop/device/DMA/audio remain requirements;
 two independent song engines are not a substitute. Cache capacity and physical timing remain separate gates.
 
+Mixed owner service now validates the full borrowed project, genuine master pins and
+captured source/driver identities once at each public call boundary. File-local
+validated helpers reuse that result only within the same serialized call; no
+validation cache persists between calls. Standalone private staging entries still
+validate their own inputs. All active and prepared voice snapshots, cache leases,
+versions and wavetable addresses remain checked before any output. Reader/callback
+editing or reentry remains forbidden. Strict clock/deadline and failure cleanup
+policy is unchanged. Added regressions change metadata, master tokens or driver
+identity between calls, including after preparation and while readers are active:
+stale input refuses before clock reads/output and retains unconfirmed readers.
+Host189 ASan/UBSan cases and a separate native21-case run pass. Instrumented
+emulator startup observations fall from about7 to4.7ms at2voices and10 to8ms
+at16voices, with a21.3ms readiness outlier retained. These observations do not
+establish reliable cadence or actual output; strict late refusal remains. Evidence:
+`evidence/enhanced-editor/mixed-validation-cost/`. Host/build, emulator and physical
+acceptance remain separate tiers.
+
 AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software
 fixtures, plus an absent-library discovery check. Those results do not establish
 positive card access, real MMIO, streaming output or physical acceptance. Native

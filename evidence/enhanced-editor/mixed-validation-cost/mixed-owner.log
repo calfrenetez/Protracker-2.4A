@@ -1,0 +1,33 @@
+EXEC MEMORY pool_limit=131088384 reserve=262144 flags=4
+NATIVE MIXED COST ready voices=2 before_sample=576 after_sample=330 total=906 frequency=709379 bits=8 case=0
+NATIVE MIXED COST ready voices=2 before_sample=345 after_sample=332 total=677 frequency=709379 bits=8 case=1
+NATIVE MIXED COST ready voices=2 before_sample=349 after_sample=334 total=683 frequency=709379 bits=8 case=2
+NATIVE MIXED COST ready voices=2 before_sample=342 after_sample=330 total=672 frequency=709379 bits=8 case=3
+NATIVE MIXED COST start voices=2 before_sample=340 sample_to_first=1368 first_to_last=61 last_to_return=1575 total=3344 frequency=709379 bits=8
+NATIVE MIXED COST ready voices=16 before_sample=345 after_sample=332 total=677 frequency=709379 bits=8 case=0
+NATIVE MIXED COST ready voices=16 before_sample=344 after_sample=331 total=675 frequency=709379 bits=8 case=1
+NATIVE MIXED COST ready voices=16 before_sample=343 after_sample=331 total=674 frequency=709379 bits=8 case=2
+NATIVE MIXED COST ready voices=16 before_sample=343 after_sample=331 total=674 frequency=709379 bits=8 case=3
+NATIVE MIXED COST start voices=16 before_sample=348 sample_to_first=2370 first_to_last=841 last_to_return=2027 total=5586 frequency=709379 bits=8
+NATIVE MIXED COST ready voices=2 before_sample=340 after_sample=329 total=669 frequency=709379 bits=16 case=0
+NATIVE MIXED COST ready voices=2 before_sample=342 after_sample=330 total=672 frequency=709379 bits=16 case=1
+NATIVE MIXED COST ready voices=2 before_sample=339 after_sample=330 total=669 frequency=709379 bits=16 case=2
+NATIVE MIXED COST ready voices=2 before_sample=344 after_sample=329 total=673 frequency=709379 bits=16 case=3
+NATIVE MIXED COST start voices=2 before_sample=340 sample_to_first=1372 first_to_last=62 last_to_return=1578 total=3352 frequency=709379 bits=16
+NATIVE MIXED COST ready voices=16 before_sample=340 after_sample=329 total=669 frequency=709379 bits=16 case=0
+NATIVE MIXED COST ready voices=16 before_sample=339 after_sample=329 total=668 frequency=709379 bits=16 case=1
+NATIVE MIXED COST ready voices=16 before_sample=342 after_sample=330 total=672 frequency=709379 bits=16 case=2
+NATIVE MIXED COST ready voices=16 before_sample=339 after_sample=326 total=665 frequency=709379 bits=16 case=3
+NATIVE MIXED COST start voices=16 before_sample=343 sample_to_first=2370 first_to_last=836 last_to_return=2248 total=5797 frequency=709379 bits=16
+NATIVE MIXED COST ready voices=2 before_sample=344 after_sample=329 total=673 frequency=709379 bits=24 case=0
+NATIVE MIXED COST ready voices=2 before_sample=345 after_sample=330 total=675 frequency=709379 bits=24 case=1
+NATIVE MIXED COST ready voices=2 before_sample=14783 after_sample=329 total=15112 frequency=709379 bits=24 case=2
+NATIVE MIXED COST ready voices=2 before_sample=342 after_sample=330 total=672 frequency=709379 bits=24 case=3
+NATIVE MIXED COST start voices=2 before_sample=345 sample_to_first=1366 first_to_last=61 last_to_return=1554 total=3326 frequency=709379 bits=24
+NATIVE MIXED COST ready voices=16 before_sample=343 after_sample=331 total=674 frequency=709379 bits=24 case=0
+NATIVE MIXED COST ready voices=16 before_sample=340 after_sample=326 total=666 frequency=709379 bits=24 case=1
+NATIVE MIXED COST ready voices=16 before_sample=340 after_sample=330 total=670 frequency=709379 bits=24 case=2
+NATIVE MIXED COST ready voices=16 before_sample=342 after_sample=332 total=674 frequency=709379 bits=24 case=3
+NATIVE MIXED COST start voices=16 before_sample=348 sample_to_first=2370 first_to_last=840 last_to_return=2027 total=5585 frequency=709379 bits=24
+MIXED OWNER PASS:21 native validation/cost8/16/24 scenarios, stale metadata/master/API before reads and output, retained active readers, real EClock durations around2/16voice prepared commit, allocation/upload-free boundaries and resource cleanup; injected logical time/voices, no audio/timing acceptance
+EXEC MEMORY PASS: 231 Fast allocations, zero owned bytes, budget refusal without Chip fallback

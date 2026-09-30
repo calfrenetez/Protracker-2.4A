@@ -1,0 +1,1 @@
+Host sandbox refused ps inside Guest constructor before prepare_run/staging/guest paths or commands. Outer runner exited; lock subsequently verified free. Native21 cases NOT RUN in this attempt. Separate fresh coordinated first guest launch passed; no guest retry/reset.

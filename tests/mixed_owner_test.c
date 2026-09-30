@@ -95,6 +95,41 @@ static void owner_fixture(unsigned bits,unsigned mode)
         assert(r==PT_MIXED_OWNER_OK && sampler.current[0] && sampler.current[1] && !sampler.current[2]);
         assert(report.samples[0][0] && report.samples[1][0] && report.samples[1][1]);
         doc.project.channels.selected=15;assert(pt_mixed_owner_current(owner)==PT_MIXED_OWNER_OK);
+        if(mode>=60) {
+            struct mixed_counter counter={700,2*o.rate,0,1};uint64_t deadline=777;
+            struct pt_sample_version *saved=sampler.current[0];void *context=av.api.context;
+            unsigned reads,starts,wstarts,stops,wstops;
+            if(mode==60) {
+                ++doc.project.bpm;
+                assert(pt_mixed_owner_clocked_begin(owner,1000,mixed_read,&counter)==PT_MIXED_OWNER_STALE);
+                assert(!counter.reads && !d.starts && !wd.starts);goto close;
+            }
+            assert(pt_mixed_owner_clocked_begin(owner,1000,mixed_read,&counter)==PT_MIXED_OWNER_OK);
+            do {r=pt_mixed_owner_clocked_service(owner,&deadline);assert(!d.starts && !wd.starts);}while(r==PT_MIXED_OWNER_WAITING);
+            assert(r==PT_MIXED_OWNER_OK && deadline==1000);
+            if(mode>=63) {
+                counter.ticks=2700;
+                assert(pt_mixed_owner_clocked_service(owner,&deadline)==PT_MIXED_OWNER_WAITING);
+                assert(d.starts==1 && wd.starts==1);
+                d.stop_result[0]=wd.stop_result=0;
+            }
+            reads=counter.reads;starts=d.starts;wstarts=wd.starts;stops=d.stops;wstops=wd.stops;
+            if(mode==61 || mode==64)sampler.current[0]=sampler.current[1];
+            else if(mode==62)av.api.context=NULL;
+            else ++doc.project.bpm;
+            counter.ticks=2700;
+            {uint64_t prior=deadline;
+                assert(pt_mixed_owner_clocked_service(owner,&deadline)==PT_MIXED_OWNER_STALE && deadline==prior);
+                assert(counter.reads==reads && d.starts==starts && wd.starts==wstarts);
+                assert(pt_mixed_owner_clocked_service(owner,&deadline)==PT_MIXED_OWNER_STALE && deadline==prior && counter.reads==reads);
+            }
+            if(mode>=63) {
+                assert(d.stops==stops+1 && wd.stops==wstops+1 && pv.voice[0].held && av.voice[7].held);
+                assert(!pt_mixed_owner_close(&owner));d.stop_result[0]=wd.stop_result=1;
+            }else assert(d.stops==stops && wd.stops==wstops);
+            if(mode==62)assert(!pt_mixed_owner_close(&owner));
+            sampler.current[0]=saved;av.api.context=context;goto close;
+        }
 #ifndef PT_TEST_MIXED_EXEC
         if(mode>=58){uint64_t deadline=777;unsigned polls=0,allocs,writes;size_t calls;
             assert(pt_mixed_owner_schedule_begin(owner,1000)==PT_MIXED_OWNER_OK);
@@ -498,8 +533,8 @@ detached:
 }
 static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wavetable_fixture_main;
 #ifdef PT_TEST_MIXED_NATIVE_COST
-    for(bits=8;bits<=24;bits+=8)for(mode=58;mode<60;++mode)owner_fixture(bits,mode);
-    puts("MIXED OWNER PASS:6 native mixed-cost8/16/24 scenarios, unchanged guards, real EClock durations around2/16voice prepared commit, allocation/upload-free boundaries and resource cleanup; injected logical time/voices, no audio/timing acceptance");
+    for(bits=8;bits<=24;bits+=8)for(mode=58;mode<65;++mode)owner_fixture(bits,mode);
+    puts("MIXED OWNER PASS:21 native validation/cost8/16/24 scenarios, stale metadata/master/API before reads and output, retained active readers, real EClock durations around2/16voice prepared commit, allocation/upload-free boundaries and resource cleanup; injected logical time/voices, no audio/timing acceptance");
 #elif defined(PT_TEST_MIXED_NATIVE_GATE)
     for(bits=8;bits<=24;bits+=8)for(mode=56;mode<58;++mode)owner_fixture(bits,mode);
     puts("MIXED OWNER PASS:6 native real-clock/alarm8/16/24 scenarios, primed mixed startup, strict observed or delayed deadline refusal, uncertain barriers retain both tokens/masters, alarm/watchdog/counter cleanup; injected voices only, no audio/timing acceptance");
@@ -510,8 +545,8 @@ static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wave
     puts("MIXED OWNER PASS:21 native clock-binding-only8/16/24 scenarios, fractional counter conversion, absolute tempo boundaries, reader/frequency/regression/overflow/skipped-frame refusal and retained-reader cleanup; injected counters only");
 #else
     for(bits=8;bits<=24;bits+=8)for(mode=0;mode<56;++mode)owner_fixture(bits,mode);
-    for(bits=8;bits<=24;bits+=8)for(mode=58;mode<60;++mode)owner_fixture(bits,mode);
-    puts("MIXED OWNER PASS: full174 host scenarios, master/cache/staging/commit/sequence/deadline/schedule ownership; no native clock");
+    for(bits=8;bits<=24;bits+=8)for(mode=58;mode<65;++mode)owner_fixture(bits,mode);
+    puts("MIXED OWNER PASS: full189 host scenarios, master/cache/staging/commit/sequence/deadline/schedule ownership; no native clock");
 #endif
     return 0;}
 

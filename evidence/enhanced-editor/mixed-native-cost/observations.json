@@ -1,0 +1,357 @@
+{
+  "scope": "observations include EClock instrumentation; injected logical time/voice bus; no playback/physical timing acceptance",
+  "rows": [
+    {
+      "phase": "ready",
+      "voices": 2,
+      "before_sample": 340,
+      "after_sample": 650,
+      "total": 990,
+      "frequency": 709379,
+      "bits": 8,
+      "case": 0
+    },
+    {
+      "phase": "ready",
+      "voices": 2,
+      "before_sample": 343,
+      "after_sample": 650,
+      "total": 993,
+      "frequency": 709379,
+      "bits": 8,
+      "case": 1
+    },
+    {
+      "phase": "ready",
+      "voices": 2,
+      "before_sample": 341,
+      "after_sample": 650,
+      "total": 991,
+      "frequency": 709379,
+      "bits": 8,
+      "case": 2
+    },
+    {
+      "phase": "ready",
+      "voices": 2,
+      "before_sample": 341,
+      "after_sample": 650,
+      "total": 991,
+      "frequency": 709379,
+      "bits": 8,
+      "case": 3
+    },
+    {
+      "phase": "start",
+      "voices": 2,
+      "before_sample": 342,
+      "sample_to_first": 2306,
+      "first_to_last": 61,
+      "last_to_return": 2434,
+      "total": 5143,
+      "frequency": 709379,
+      "bits": 8
+    },
+    {
+      "phase": "ready",
+      "voices": 16,
+      "before_sample": 341,
+      "after_sample": 649,
+      "total": 990,
+      "frequency": 709379,
+      "bits": 8,
+      "case": 0
+    },
+    {
+      "phase": "ready",
+      "voices": 16,
+      "before_sample": 350,
+      "after_sample": 639,
+      "total": 989,
+      "frequency": 709379,
+      "bits": 8,
+      "case": 1
+    },
+    {
+      "phase": "ready",
+      "voices": 16,
+      "before_sample": 340,
+      "after_sample": 646,
+      "total": 986,
+      "frequency": 709379,
+      "bits": 8,
+      "case": 2
+    },
+    {
+      "phase": "ready",
+      "voices": 16,
+      "before_sample": 342,
+      "after_sample": 646,
+      "total": 988,
+      "frequency": 709379,
+      "bits": 8,
+      "case": 3
+    },
+    {
+      "phase": "start",
+      "voices": 16,
+      "before_sample": 353,
+      "sample_to_first": 3300,
+      "first_to_last": 838,
+      "last_to_return": 2635,
+      "total": 7126,
+      "frequency": 709379,
+      "bits": 8
+    },
+    {
+      "phase": "ready",
+      "voices": 2,
+      "before_sample": 355,
+      "after_sample": 635,
+      "total": 990,
+      "frequency": 709379,
+      "bits": 16,
+      "case": 0
+    },
+    {
+      "phase": "ready",
+      "voices": 2,
+      "before_sample": 341,
+      "after_sample": 651,
+      "total": 992,
+      "frequency": 709379,
+      "bits": 16,
+      "case": 1
+    },
+    {
+      "phase": "ready",
+      "voices": 2,
+      "before_sample": 353,
+      "after_sample": 635,
+      "total": 988,
+      "frequency": 709379,
+      "bits": 16,
+      "case": 2
+    },
+    {
+      "phase": "ready",
+      "voices": 2,
+      "before_sample": 341,
+      "after_sample": 651,
+      "total": 992,
+      "frequency": 709379,
+      "bits": 16,
+      "case": 3
+    },
+    {
+      "phase": "start",
+      "voices": 2,
+      "before_sample": 343,
+      "sample_to_first": 2310,
+      "first_to_last": 60,
+      "last_to_return": 2180,
+      "total": 4893,
+      "frequency": 709379,
+      "bits": 16
+    },
+    {
+      "phase": "ready",
+      "voices": 16,
+      "before_sample": 351,
+      "after_sample": 637,
+      "total": 988,
+      "frequency": 709379,
+      "bits": 16,
+      "case": 0
+    },
+    {
+      "phase": "ready",
+      "voices": 16,
+      "before_sample": 350,
+      "after_sample": 635,
+      "total": 985,
+      "frequency": 709379,
+      "bits": 16,
+      "case": 1
+    },
+    {
+      "phase": "ready",
+      "voices": 16,
+      "before_sample": 351,
+      "after_sample": 640,
+      "total": 991,
+      "frequency": 709379,
+      "bits": 16,
+      "case": 2
+    },
+    {
+      "phase": "ready",
+      "voices": 16,
+      "before_sample": 341,
+      "after_sample": 650,
+      "total": 991,
+      "frequency": 709379,
+      "bits": 16,
+      "case": 3
+    },
+    {
+      "phase": "start",
+      "voices": 16,
+      "before_sample": 341,
+      "sample_to_first": 3583,
+      "first_to_last": 835,
+      "last_to_return": 2611,
+      "total": 7370,
+      "frequency": 709379,
+      "bits": 16
+    },
+    {
+      "phase": "ready",
+      "voices": 2,
+      "before_sample": 338,
+      "after_sample": 649,
+      "total": 987,
+      "frequency": 709379,
+      "bits": 24,
+      "case": 0
+    },
+    {
+      "phase": "ready",
+      "voices": 2,
+      "before_sample": 343,
+      "after_sample": 650,
+      "total": 993,
+      "frequency": 709379,
+      "bits": 24,
+      "case": 1
+    },
+    {
+      "phase": "ready",
+      "voices": 2,
+      "before_sample": 353,
+      "after_sample": 640,
+      "total": 993,
+      "frequency": 709379,
+      "bits": 24,
+      "case": 2
+    },
+    {
+      "phase": "ready",
+      "voices": 2,
+      "before_sample": 340,
+      "after_sample": 649,
+      "total": 989,
+      "frequency": 709379,
+      "bits": 24,
+      "case": 3
+    },
+    {
+      "phase": "start",
+      "voices": 2,
+      "before_sample": 350,
+      "sample_to_first": 2288,
+      "first_to_last": 60,
+      "last_to_return": 2199,
+      "total": 4897,
+      "frequency": 709379,
+      "bits": 24
+    },
+    {
+      "phase": "ready",
+      "voices": 16,
+      "before_sample": 341,
+      "after_sample": 650,
+      "total": 991,
+      "frequency": 709379,
+      "bits": 24,
+      "case": 0
+    },
+    {
+      "phase": "ready",
+      "voices": 16,
+      "before_sample": 343,
+      "after_sample": 650,
+      "total": 993,
+      "frequency": 709379,
+      "bits": 24,
+      "case": 1
+    },
+    {
+      "phase": "ready",
+      "voices": 16,
+      "before_sample": 341,
+      "after_sample": 649,
+      "total": 990,
+      "frequency": 709379,
+      "bits": 24,
+      "case": 2
+    },
+    {
+      "phase": "ready",
+      "voices": 16,
+      "before_sample": 340,
+      "after_sample": 1511,
+      "total": 1851,
+      "frequency": 709379,
+      "bits": 24,
+      "case": 3
+    },
+    {
+      "phase": "start",
+      "voices": 16,
+      "before_sample": 343,
+      "sample_to_first": 3309,
+      "first_to_last": 829,
+      "last_to_return": 2617,
+      "total": 7098,
+      "frequency": 709379,
+      "bits": 24
+    }
+  ],
+  "startup_ranges": {
+    "2": {
+      "before_sample": {
+        "min_ms": 0.48211181892895055,
+        "max_ms": 0.49338928837758095
+      },
+      "sample_to_first": {
+        "min_ms": 3.2253562623083005,
+        "max_ms": 3.256369303292034
+      },
+      "first_to_last": {
+        "min_ms": 0.08458102086472817,
+        "max_ms": 0.08599070454580697
+      },
+      "last_to_return": {
+        "min_ms": 3.07311042475179,
+        "max_ms": 3.431170079745806
+      },
+      "total": {
+        "min_ms": 6.897582251518581,
+        "max_ms": 7.250003171788282
+      }
+    },
+    "16": {
+      "before_sample": {
+        "min_ms": 0.4807021352478717,
+        "max_ms": 0.4976183394208173
+      },
+      "sample_to_first": {
+        "min_ms": 4.651956147560049,
+        "max_ms": 5.05089662930535
+      },
+      "first_to_last": {
+        "min_ms": 1.1686277716143276,
+        "max_ms": 1.1813149247440367
+      },
+      "last_to_return": {
+        "min_ms": 3.680684091296754,
+        "max_ms": 3.714516499642645
+      },
+      "total": {
+        "min_ms": 10.005934768297342,
+        "max_ms": 10.389368729550776
+      }
+    }
+  }
+}

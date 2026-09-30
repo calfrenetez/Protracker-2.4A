@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 routed Paula dispatch with native allocators and injected callbacks; no native DMA/output",
+  "PTExecPaulaDispatchTest_sha256": "d6248c8d16f19d4b4293bdc8466e1aa8e7385d6b9a855628372e2ffc4ead8284",
+  "paula-dispatch_returncode": "0",
+  "run_files_cleaned": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0"
+}

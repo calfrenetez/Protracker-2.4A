@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "seconds": 46.606852541008266,
+  "window_bound_seconds": 200,
+  "cases": [
+    {
+      "case": "dispatch",
+      "binary": "PTExecPaulaDispatchTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-staged-candidate/build/dev/render-files-1790778865129549000",
+      "sha256": "d6248c8d16f19d4b4293bdc8466e1aa8e7385d6b9a855628372e2ffc4ead8284",
+      "independent_cleanup": true
+    },
+    {
+      "case": "song",
+      "binary": "PTExecPaulaSongTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-staged-candidate/build/dev/render-files-1790778872924383000",
+      "sha256": "4b930d9d369fd6b22bb4fcb744829a665836e54987731f5c0a595d79a809ee34",
+      "independent_cleanup": true
+    },
+    {
+      "case": "editor",
+      "binary": "PTExecEditorPaulaTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-staged-candidate/build/dev/render-files-1790778895702087000",
+      "sha256": "14bb187a44d1e470e3fd59c09e1e822bfeca529edbb7af9ea3f8dd7e74af6727",
+      "independent_cleanup": true
+    }
+  ]
+}

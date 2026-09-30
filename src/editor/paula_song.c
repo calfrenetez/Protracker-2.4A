@@ -8,7 +8,7 @@ struct pt_paula_song {
     struct pt_sampler_paula *bridge;struct pt_sampler *sampler;struct pt_project *project,snapshot;
     int (*quiesce)(void *);void *quiesce_context;
     struct pt_paula_voice_api api;struct pt_paula_render_caps caps;struct pt_render_options options;
-    struct pt_render_sequence *sequence;struct pt_render_plan plan;struct pt_paula_batch batch;
+    struct pt_render_sequence *sequence;struct pt_render_plan plan;struct pt_paula_prepared batch;
     struct pt_sample_version *pin[PT_PROJECT_SAMPLES];struct pt_sampler_pin_job job;
     struct pt_paula_preflight_report report;struct pt_render_interval interval;
     int8_t map[PT_CHANNEL_LIMIT];uint64_t version;unsigned generation,slot,analyzed,ready,pending,done,closing;
@@ -16,7 +16,7 @@ struct pt_paula_song {
 };
 static enum pt_paula_song_result fail(struct pt_paula_song *s,enum pt_paula_song_result result)
 {
-    unsigned i;s->failure=result;s->closing=1;s->voices->closing=1;
+    unsigned i;pt_paula_cancel(&s->batch);s->failure=result;s->closing=1;s->voices->closing=1;
     pt_render_sequence_close(s->sequence);s->sequence=NULL;
     for(i=0;i<PT_PAULA_VOICES;++i)if(s->voices->voice[i].held)
         pt_paula_stop_owned(s->voices,(unsigned)s->voices->voice[i].track,s);
@@ -111,14 +111,23 @@ enum pt_paula_song_result pt_paula_song_consume(struct pt_paula_song *s,uint32_t
     if(pt_render_sequence_consume(s->sequence,frames)!=PT_RENDER_OK)return fail(s,PT_PAULA_SONG_RENDER);
     s->remaining-=frames;return PT_PAULA_SONG_OK;
 }
-enum pt_paula_song_result pt_paula_song_complete(struct pt_paula_song *s)
+enum pt_paula_song_result pt_paula_song_stage(struct pt_paula_song *s)
 {
-    enum pt_paula_song_result state=current(s);int result;
+    enum pt_paula_song_result state=current(s);
     if(state!=PT_PAULA_SONG_OK)return state;
     if(!s->ready)return PT_PAULA_SONG_PREPARING;
     if(!s->pending || s->remaining)return PT_PAULA_SONG_INVALID;
+    if(s->batch.ready)return PT_PAULA_SONG_OK;
     if(pt_render_sequence_complete(s->sequence,&s->plan)!=PT_RENDER_OK)return fail(s,PT_PAULA_SONG_RENDER);
-    result=pt_paula_dispatch_owned(s->voices,s->version,s->options.rate,&s->plan,&s->caps,&s->batch,s);
+    if(!pt_paula_prepare_owned(&s->batch,s->voices,s->version,s->options.rate,&s->plan,&s->caps,s))
+        return fail(s,PT_PAULA_SONG_DEVICE);
+    return PT_PAULA_SONG_OK;
+}
+enum pt_paula_song_result pt_paula_song_complete(struct pt_paula_song *s)
+{
+    enum pt_paula_song_result state=pt_paula_song_stage(s);int result;
+    if(state!=PT_PAULA_SONG_OK)return state;
+    result=pt_paula_apply(&s->batch);
     if(result!=1) {
         /* Dispatch runtime failure already attempted each held stop once. */
         if(result<0){s->failure=PT_PAULA_SONG_DEVICE;s->closing=1;pt_render_sequence_close(s->sequence);s->sequence=NULL;return s->failure;}
@@ -131,7 +140,7 @@ int pt_paula_song_close(struct pt_paula_song **out)
     struct pt_paula_song *s;struct pt_allocator a;unsigned i;
     if(!out)return 0;
     s=*out;if(!s)return 1;
-    s->closing=1;
+    s->closing=1;pt_paula_cancel(&s->batch);
     if(!pt_paula_close_owned(s->voices,s))return 0;
     pt_render_sequence_close(s->sequence);pt_sampler_pin_job_cancel(&s->job);
     for(i=0;i<PT_PROJECT_SAMPLES;++i)pt_sampler_unpin(s->pin[i]);

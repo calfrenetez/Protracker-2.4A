@@ -29,5 +29,7 @@ enum pt_paula_song_result pt_editor_paula_next(struct pt_editor_paula *o,struct 
 {return attached(o)?pt_paula_song_next(o->song,out):PT_PAULA_SONG_INVALID;}
 enum pt_paula_song_result pt_editor_paula_consume(struct pt_editor_paula *o,uint32_t frames)
 {return attached(o)?pt_paula_song_consume(o->song,frames):PT_PAULA_SONG_INVALID;}
+enum pt_paula_song_result pt_editor_paula_stage(struct pt_editor_paula *o)
+{return attached(o)?pt_paula_song_stage(o->song):PT_PAULA_SONG_INVALID;}
 enum pt_paula_song_result pt_editor_paula_complete(struct pt_editor_paula *o)
 {return attached(o)?pt_paula_song_complete(o->song):PT_PAULA_SONG_INVALID;}

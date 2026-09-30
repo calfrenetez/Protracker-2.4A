@@ -33,6 +33,14 @@ enum pt_paula_song_result pt_paula_song_prepare(struct pt_paula_song *,struct pt
  * DONE also requires close; it is not confirmation of hardware quiescence. */
 enum pt_paula_song_result pt_paula_song_next(struct pt_paula_song *,struct pt_render_interval *);
 enum pt_paula_song_result pt_paula_song_consume(struct pt_paula_song *,uint32_t);
+/* Optional stage after logical consume finishes, before complete emits output.
+ * Advances/checks the plan and prepares pinned Chip copies without callbacks;
+ * repeated stage is idempotent. May allocate/convert synchronously. Complete
+ * applies a staged batch without cache acquisition/conversion. Calling complete
+ * without stage preserves the synchronous compatibility path. Caller owns real
+ * time/deadlines; this does not provide a prepare-ahead clock scheduler. Close
+ * or failure cancels unstarted candidates before ordinary reader cleanup. */
+enum pt_paula_song_result pt_paula_song_stage(struct pt_paula_song *);
 enum pt_paula_song_result pt_paula_song_complete(struct pt_paula_song *);
 /* One attempt: block advancement, stop held readers, confirm adapter quiescence,
  * close cache, then release sequence/jobs/master pins and session. Returns0 while

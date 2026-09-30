@@ -24,5 +24,6 @@ enum pt_paula_song_result pt_editor_paula_begin(struct pt_editor_paula *,struct 
 enum pt_paula_song_result pt_editor_paula_prepare(struct pt_editor_paula *,struct pt_paula_preflight_report *);
 enum pt_paula_song_result pt_editor_paula_next(struct pt_editor_paula *,struct pt_render_interval *);
 enum pt_paula_song_result pt_editor_paula_consume(struct pt_editor_paula *,uint32_t);
+enum pt_paula_song_result pt_editor_paula_stage(struct pt_editor_paula *);
 enum pt_paula_song_result pt_editor_paula_complete(struct pt_editor_paula *);
 #endif

@@ -13,7 +13,7 @@ static void batch_fixture(unsigned bits)
     struct pt_allocator alloc={NULL,fast_alloc,fast_free};struct pt_document doc;struct pt_sampler sampler;
     struct pt_sampler_paula cache={0};struct pt_paula_voices owner={0};struct driver d={0};
     struct pt_paula_voice_api api={&d,start,stop,control};struct pt_paula_render_caps caps={3546895,124,65535};
-    struct pt_render_plan p={0};struct pt_paula_batch work;unsigned i,before,starts;
+    struct pt_render_plan p={0};struct pt_paula_batch work;struct pt_paula_prepared prepared={0},other={0};unsigned i,before,starts;size_t calls;
     int32_t pcm[3][4]={{1,2,3,4},{5,6,7,8},{9,10,11,12}},saved[3][4];
     memcpy(saved,pcm,sizeof(pcm));d.start_result=d.control_result=d.quiesce_result=1;
     for(i=0;i<4;++i)d.stop_result[i]=1;
@@ -26,7 +26,17 @@ static void batch_fixture(unsigned bits)
     assert(pt_paula_voices_bind(&owner,&cache,&api));
     p.count=2;action(&p.action[0],&doc.project.samples[0].pcm,4,0);
     p.action[1]=p.action[0];p.action[1].kind=PT_RENDER_CONTROL;p.action[1].gain[0]=65536;
-    assert(pt_paula_dispatch(&owner,cache.version,48000,&p,&caps,&work)==1);
+    before=d.stops;assert(pt_paula_prepare(&prepared,&owner,cache.version,48000,&p,&caps));
+    assert(!d.starts && d.stops==before && owner.song_owner==&prepared);
+    assert(!pt_paula_prepare(&prepared,&owner,cache.version,48000,&p,&caps));
+    assert(!pt_paula_prepare(&other,&owner,cache.version,48000,&p,&caps));
+    assert(pt_paula_voices_stop(&owner,4)!=1 && !pt_paula_voices_close(&owner));
+    assert(!pt_paula_dispatch(&owner,cache.version,48000,&p,&caps,&work));
+    /* Input plan/caps are copied; prepared addresses remain pinned. Apply does
+     * not acquire/convert a cache, even if its allocator now refuses. */
+    p.action[1].gain[0]=0;calls=d.calls;d.fail=1;
+    assert(pt_paula_apply(&prepared)==1 && d.calls==calls && !prepared.ready && !owner.song_owner);
+    assert(!pt_paula_apply(&prepared));d.fail=0;p.action[1].gain[0]=65536;
     assert(d.starts==1 && d.controls==1 && d.reading[0] && d.plan[0].volume==64);
     /* Acquire distinct replacements for two slots while old reader pins four
      * bytes: second acquisition cannot fit. No stop/start/control may happen. */
@@ -39,6 +49,21 @@ static void batch_fixture(unsigned bits)
     cache.cache.budget=12;
     assert(pt_paula_dispatch(&owner,cache.version,48000,&p,&caps,&work)==1);
     assert(d.reading[0] && d.reading[1]);
+    /* Cancellation leaves current readers untouched and drops only candidates.
+     * A stale source between preparation/apply refuses before any callback. */
+    before=d.stops;starts=d.starts;
+    assert(pt_paula_prepare(&prepared,&owner,cache.version,48000,&p,&caps));
+    pt_paula_cancel(&prepared);pt_paula_cancel(&prepared);
+    assert(d.stops==before && d.starts==starts && !owner.song_owner && d.reading[0] && d.reading[1]);
+    assert(pt_paula_prepare(&prepared,&owner,cache.version,48000,&p,&caps));
+    owner.api.context=NULL;
+    assert(!pt_paula_apply(&prepared) && !prepared.ready && !owner.song_owner);
+    owner.api.context=&d;assert(d.stops==before && d.starts==starts);
+    assert(pt_paula_prepare(&prepared,&owner,cache.version,48000,&p,&caps));
+    doc.project.channels.track[4].muted=1;
+    assert(!pt_paula_apply(&prepared) && !prepared.ready && !owner.song_owner);
+    assert(d.stops==before && d.starts==starts && d.reading[0] && d.reading[1]);
+    doc.project.channels.track[4].muted=0;assert(pt_sampler_paula_sync(&cache));
     before=d.stops;starts=d.starts;
     p.action[1].voice.pcm=(const struct pt_pcm *)(uintptr_t)1;
     assert(!pt_paula_dispatch(&owner,cache.version,48000,&p,&caps,&work));
@@ -70,7 +95,9 @@ static void batch_fixture(unsigned bits)
     p.count=2;action(&p.action[0],&doc.project.samples[0].pcm,4,0);
     action(&p.action[1],&doc.project.samples[1].pcm,7,0);
     d.start_result=0;d.stop_result[0]=0;starts=d.starts;
-    assert(pt_paula_dispatch(&owner,cache.version,48000,&p,&caps,&work)==-1);
+    assert(pt_paula_prepare(&prepared,&owner,cache.version,48000,&p,&caps));
+    calls=d.calls;assert(pt_paula_apply(&prepared)==-1 && d.calls==calls);
+    assert(!prepared.ready && !owner.song_owner);
     assert(d.starts==starts+1 && d.reading[0] && !d.reading[1]);
     assert(owner.voice[0].held && owner.voice[0].uncertain && !work.entry[1].held);
     before=d.stops;d.start_result=1;

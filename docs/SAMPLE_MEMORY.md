@@ -14,7 +14,7 @@ software implementation from the remaining integration and hardware gates.
 | Requirement | Implemented software | Still required |
 | --- | --- | --- |
 | Authoritative8/16/24-bit masters | Queried, bounded native Fast-RAM pool; precision-preserving sampler versions, processing, history and source pins. Fast-equipped machines fail rather than spill enhanced allocations into Chip RAM. | Physical memory-pressure/endurance measurements. |
-| Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition and one-to-four-track song playback preserve master precision; song preparation excludes unreferenced masters from both Fast staging and Chip caches. Dedicated arbitrary-track cache and injected four-voice owner preserve stable slots and retain leases through uncertain start/control/stop. | Shared timeline and native dispatch for mixed-backend song routing beyond the one-to-four-track Paula bridge; physical sound/performance acceptance. |
+| Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition and one-to-four-track song playback preserve master precision; song preparation excludes unreferenced masters from both Fast staging and Chip caches. Dedicated arbitrary-track cache and injected four-voice owner preserve stable slots and retain leases through uncertain start/control/stop. Full16-track shared-sequence capability gate validates explicit clock/stereo/volume and supported sample geometry before output. | Owned prepared batches, shared mixed-backend scheduling and native dispatch beyond the one-to-four-track Paula bridge; physical sound/performance acceptance. |
 | AmiGUS wavetable copies | Versioned evictable resource pool, sampler revision/master-pin bridge, bounded 16-voice lease owner with validated rate/loop/address plans, mono sequencer trigger/control/stop dispatch, preflight-gated master-pinned sequence ownership, editor veto/retry barriers and injected callbacks, 8/16-bit conversion and bounded address allocator/chunk uploader behind an injected register bus; failure/pinning tests. | Verified card capacity, native bus binding and voice dispatcher; explicit wavetable reservation/cache lifetime now implemented and tested with fake callbacks. Injected register tests do not establish real card access. |
 | Direct24-bit Studio | Master-pinned mixer, audited sequence, sampler/editor ownership, bounded queue/pump and integrated PCM-session owner with capacity-bounded prefill and explicit start acknowledgement; optional reservation lease retained through reset and adapter quiescence. Up to16 voice slots are a software bound. | Native PLAY/output wiring, verified hardware capabilities and sustainable physical voice-count/timing evidence. |
 | Master-preserving persistence | Bounded enhanced-project/sample saving and explicit classic conversion; private EFx exports/bounce never replace masters. Explicit new-file recovery snapshots and staged identity-checked restoration preserve all master precision. | Native opt-in configuration, idle scheduling, bounded retention, read-only discovery, explicit recovery UI and exact save are implemented and emulator-tested; preferences-panel controls, real crash/endurance and physical acceptance remain. |
@@ -3175,3 +3175,37 @@ callbacks model readers; they do not perform audible DMA playback.
 Native DMA/audio.device/timer
 ownership, shared-sequencer dispatch, mixed-backend timing and end-to-end playback
 remain unfinished. The classic replay and accepted display layout are unchanged.
+
+## Routed Paula shared-sequence capability gate
+
+`paula_render_voice` translates an exact initial mono one-shot from the audited
+renderer into an aligned signed8 cache segment and explicit period/volume plan.
+The caller supplies the actual target clock and safe period limits. Frequency
+rounds to the nearest period register (ties upward); out-of-range pitches refuse
+instead of clamping. This changes no source PCM or sample rate. Gains must match
+the selected physical slot's fixed left/right position and an exact volume0–64;
+unsupported panning or fractional hardware volume refuses.
+
+`paula_preflight` silently traverses the complete shared16-track sequence,
+retaining global tempo, delay and end commands from non-Paula tracks. It checks
+Paula trigger/control/stop actions and exact sample-descriptor identity before
+any future output, including unsupported notes on late rows. Non-Paula audio
+operations remain the other backend's responsibility; this gate does not
+qualify them or relax the renderer's MIDI/effect restrictions. A successful mask
+identifies only Paula-triggered masters. Failure clears that mask; batch held
+state commits only after every action passes.
+
+Two bounded caller allocations cover the plan and sequence; every failure
+releases them. Capability traversal does not mix PCM, acquire source/cache
+leases or invoke drivers. Inputs remain borrowed and immutable during the call.
+Row-range restoration, loop/segment/repeat handoffs, stereo sources,
+interpolation and fractional cursor restoration are currently refused. These
+need exact plans and independently retained pending-source leases before
+support is enabled. The gate is a preparation seam; owned prepared batches,
+mixed-backend scheduling and native DMA dispatch remain unfinished.
+
+Five isolated host regressions and selected Amiga fixture builds passed; the
+native Exec capability fixture then passed in the coordinated shared030 emulator
+on 30 September, with 45 Fast allocations and zero owned bytes on release.
+Independent locked DMA-off/exact-path cleanup preceded explicit window release.
+This is shared-timeline capability and allocation evidence, not device playback.

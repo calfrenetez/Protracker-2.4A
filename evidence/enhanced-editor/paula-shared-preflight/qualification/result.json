@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "seconds": 5.807219084003009,
+  "window_bound_seconds": 200,
+  "cases": [
+    {
+      "case": "preflight",
+      "binary": "PTExecPaulaPreflightTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-preflight-candidate-v2/build/dev/render-files-1790773777878021000",
+      "sha256": "c56bede1d010c3a509efdba62f7e6dfcf191f7c495f495a22be513faadeef558",
+      "independent_cleanup": true
+    }
+  ]
+}

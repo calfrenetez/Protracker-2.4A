@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "seconds": 4.835409040999366,
+  "window_bound_seconds": 200,
+  "cases": [
+    {
+      "case": "dispatch",
+      "binary": "PTExecPaulaDispatchTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-dispatch-candidate-v2/build/dev/render-files-1790775179653273000",
+      "sha256": "7f493dc2646a24c7aa78f24aab64d4acadd790f377003cc8949c9860eb66b3cc",
+      "independent_cleanup": true
+    }
+  ]
+}

@@ -180,6 +180,8 @@ def main():
     inputs['PTExecPaulaVoicesTest'] = ['tests/native_exec_paula_voices_test.c',*inputs['PTPaulaVoicesTest'][1:]]
     inputs['PTPaulaPreflightTest'] = ['tests/paula_preflight_test.c','src/editor/paula_preflight.c','src/core/paula_render_voice.c',*render_sources]
     inputs['PTExecPaulaPreflightTest'] = ['tests/native_exec_paula_preflight_test.c',*inputs['PTPaulaPreflightTest'][1:]]
+    inputs['PTPaulaDispatchTest'] = ['tests/paula_dispatch_test.c','src/editor/paula_dispatch.c',*dict.fromkeys([*inputs['PTPaulaVoicesTest'][1:],*inputs['PTPaulaPreflightTest'][1:]])]
+    inputs['PTExecPaulaDispatchTest'] = ['tests/native_exec_paula_dispatch_test.c',*inputs['PTPaulaDispatchTest'][1:]]
     inputs['PTCaptureTest'] = ['tests/capture_test.c','src/core/capture.c','src/editor/sampler_capture.c',*inputs['PTSamplerTest'][1:]]
     inputs['PTExecCaptureTest'] = ['tests/native_exec_capture_test.c',*inputs['PTCaptureTest'][1:]]
     inputs['PTCaptureSessionTest'] = ['tests/capture_session_test.c','src/core/capture_session.c',*inputs['PTCaptureTest'][1:]]

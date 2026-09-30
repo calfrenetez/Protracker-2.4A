@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131159728 reserve=262144 flags=4
+Paula prepared batch ownership OK
+EXEC MEMORY PASS: 18 Fast allocations, zero owned bytes, budget refusal without Chip fallback

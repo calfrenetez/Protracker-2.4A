@@ -1,0 +1,9 @@
+Paula prepared batch ownership OK
+.PAULA PREFLIGHT PASS: full shared timeline, explicit clock/stereo/volume/geometry, late refusal and allocation cleanup; no dispatch
+.paula voices tests passed
+.SEQUENCE PASS: exact snapshot/resume audio, fractional loop phase, tempo/delay, pre-roll, partition invariance, protocol and allocation refusal
+..
+----------------------------------------------------------------------
+Ran 5 tests in 15.220s
+
+OK

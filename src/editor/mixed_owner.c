@@ -5,6 +5,7 @@
 #include "wavetable_internal.h"
 #include "sampler_internal.h"
 #include "project_snapshot.h"
+#include "../core/render_lookahead.h"
 #include <string.h>
 struct mixed_batch {
     struct pt_render_plan split,wave;struct pt_paula_prepared chip;
@@ -25,6 +26,9 @@ struct pt_mixed_owner {
     struct pt_sample_version *pin[PT_PROJECT_SAMPLES];struct pt_sampler_pin_job job;
     uint64_t pv,av;unsigned generation,slot,analyzed,ready,closing,drained[2];int8_t map[PT_CHANNEL_LIMIT];
     enum pt_mixed_owner_result failure;struct mixed_batch batch;
+    struct pt_render_lookahead ahead;struct pt_render_plan plan;
+    struct pt_render_interval interval;uint32_t remaining;
+    unsigned pending,forecast,done,stop_attempted;
 };
 static int identities(struct pt_mixed_owner *s)
 {
@@ -39,7 +43,8 @@ static int identities(struct pt_mixed_owner *s)
         s->paula->quiesce_context==s->pc && s->amigus->quiesce_context==s->ac;
 }
 static enum pt_mixed_owner_result fail(struct pt_mixed_owner *s,enum pt_mixed_owner_result r)
-{pt_mixed_stage_cancel(s);s->failure=r;s->closing=1;s->paula->closing=s->amigus->closing=1;return r;}
+{pt_render_lookahead_cancel(&s->ahead);pt_mixed_stage_cancel(s);
+ pt_render_sequence_close(s->sequence);s->sequence=NULL;s->failure=r;s->closing=1;s->paula->closing=s->amigus->closing=1;return r;}
 enum pt_mixed_owner_result pt_mixed_owner_current(struct pt_mixed_owner *s)
 {
     unsigned i;struct pt_pcm pcm;struct pt_sample_version *pin;
@@ -92,6 +97,7 @@ enum pt_mixed_owner_result pt_mixed_owner_prepare(struct pt_mixed_owner *s,struc
     enum pt_mixed_owner_result r=pt_mixed_owner_current(s);enum pt_edit_result e;unsigned ready;
     struct pt_pcm pcm;struct pt_sample_version *pin;
     if(r!=PT_MIXED_OWNER_OK)return r;
+    if(s->pending || s->done || s->batch.phase)return PT_MIXED_OWNER_INVALID;
     if(!s->analyzed) {
         enum pt_mixed_result gate=pt_mixed_preflight(s->project,&s->options,s->map,&s->caps,&s->format,
             s->pa.control!=NULL,s->aa.control!=NULL,&s->allocator,&s->report,&s->sequence);
@@ -119,7 +125,7 @@ int pt_mixed_owner_close(struct pt_mixed_owner **owner)
     s=*owner;if(!s)return 1;
     if(!identities(s))return 0;
     s->closing=1;s->paula->closing=s->amigus->closing=1;
-    pt_mixed_stage_cancel(s);pt_sampler_pin_job_cancel(&s->job);pt_render_sequence_close(s->sequence);s->sequence=NULL;
+    pt_render_lookahead_cancel(&s->ahead);pt_mixed_stage_cancel(s);pt_sampler_pin_job_cancel(&s->job);pt_render_sequence_close(s->sequence);s->sequence=NULL;
     if(!s->drained[0])s->drained[0]=pt_paula_drain_owned(s->paula,s)==1;
     if(!s->drained[1])s->drained[1]=pt_wavetable_drain_owned(s->amigus,s)==1;
     if(!s->drained[0] || !s->drained[1] || s->reservation->interrupt)return 0;
@@ -265,7 +271,7 @@ enum pt_mixed_owner_result pt_mixed_stage_commit(struct pt_mixed_owner *s)
     pt_mixed_stage_cancel(s);return PT_MIXED_OWNER_OK;
 refused:pt_mixed_stage_cancel(s);return PT_MIXED_OWNER_CAPABILITY;
 failed:
-    fail(s,PT_MIXED_OWNER_DEVICE);
+    fail(s,PT_MIXED_OWNER_DEVICE);s->stop_attempted=1;
     for(i=0;i<PT_PAULA_VOICES;++i)if(s->paula->voice[i].held) {
         s->paula->voice[i].uncertain=1;
         if(stop_route!=PT_PAULA || stop_channel!=s->paula->voice[i].track)
@@ -276,4 +282,86 @@ failed:
         if(stop_route!=PT_AMIGUS || stop_channel!=(int)i)pt_wavetable_stop_owned(s->amigus,i,s);
     }
     return PT_MIXED_OWNER_DEVICE;
+}
+
+static enum pt_mixed_owner_result sequence_fail(struct pt_mixed_owner *s,enum pt_mixed_owner_result r)
+{
+    unsigned i;fail(s,r);
+    /* Changed driver identities cannot safely be called. Restoring them and
+     * explicit close is required; retained pins/tokens are never forced free. */
+    if(!s->stop_attempted && identities(s)) {
+        s->stop_attempted=1;
+        for(i=0;i<PT_PAULA_VOICES;++i)if(s->paula->voice[i].held) {
+            s->paula->voice[i].uncertain=1;
+            pt_paula_stop_owned(s->paula,(unsigned)s->paula->voice[i].track,s);
+        }
+        for(i=0;i<PT_WAVETABLE_VOICES;++i)if(s->amigus->voice[i].held) {
+            s->amigus->voice[i].uncertain=1;pt_wavetable_stop_owned(s->amigus,i,s);
+        }
+    }
+    return r;
+}
+static enum pt_mixed_owner_result sequence_current(struct pt_mixed_owner *s)
+{
+    enum pt_mixed_owner_result r=pt_mixed_owner_current(s);
+    if(s && r!=PT_MIXED_OWNER_OK && s->failure)return sequence_fail(s,r);
+    return r;
+}
+enum pt_mixed_owner_result pt_mixed_owner_next(struct pt_mixed_owner *s,struct pt_render_interval *out)
+{
+    enum pt_mixed_owner_result r;
+    if(!out)return PT_MIXED_OWNER_INVALID;
+    r=sequence_current(s);if(r!=PT_MIXED_OWNER_OK)return r;
+    if(!s->ready)return PT_MIXED_OWNER_PREPARING;
+    if(s->pending || s->batch.phase)return PT_MIXED_OWNER_INVALID;
+    if(s->done)return PT_MIXED_OWNER_DONE;
+    if(pt_render_sequence_next(s->sequence,&s->interval)!=PT_RENDER_OK)return sequence_fail(s,PT_MIXED_OWNER_RENDER);
+    s->pending=1;s->remaining=s->interval.frames;*out=s->interval;return PT_MIXED_OWNER_OK;
+}
+enum pt_mixed_owner_result pt_mixed_owner_consume(struct pt_mixed_owner *s,uint32_t frames)
+{
+    enum pt_mixed_owner_result r=sequence_current(s);if(r!=PT_MIXED_OWNER_OK)return r;
+    if(!s->ready)return PT_MIXED_OWNER_PREPARING;
+    if(!s->pending || !frames || frames>256 || frames>s->remaining)return PT_MIXED_OWNER_INVALID;
+    if(pt_render_sequence_consume(s->sequence,frames)!=PT_RENDER_OK)return sequence_fail(s,PT_MIXED_OWNER_RENDER);
+    s->remaining-=frames;return PT_MIXED_OWNER_OK;
+}
+enum pt_mixed_owner_result pt_mixed_owner_prefetch(struct pt_mixed_owner *s)
+{
+    unsigned ready=0;enum pt_mixed_owner_result r=sequence_current(s);
+    if(r!=PT_MIXED_OWNER_OK)return r;
+    if(!s->ready)return PT_MIXED_OWNER_PREPARING;
+    if(!s->pending || (!s->forecast && s->batch.phase))return PT_MIXED_OWNER_INVALID;
+    if(!s->forecast) {
+        if(pt_render_lookahead_begin(&s->ahead,s->sequence)!=PT_RENDER_OK)return sequence_fail(s,PT_MIXED_OWNER_RENDER);
+        s->forecast=1;return PT_MIXED_OWNER_PREPARING;
+    }
+    if(s->forecast==1) {
+        if(pt_render_lookahead_step(&s->ahead,256,&s->plan,&ready)!=PT_RENDER_OK)return sequence_fail(s,PT_MIXED_OWNER_RENDER);
+        if(ready) {
+            r=pt_mixed_stage_begin(s,&s->plan);
+            if(r!=PT_MIXED_OWNER_PREPARING)return sequence_fail(s,r);
+            s->forecast=2;
+        }
+        return PT_MIXED_OWNER_PREPARING;
+    }
+    if(s->forecast==3)return PT_MIXED_OWNER_OK;
+    r=pt_mixed_stage_step(s);
+    if(r==PT_MIXED_OWNER_OK){s->forecast=3;return r;}
+    if(r==PT_MIXED_OWNER_PREPARING)return r;
+    return sequence_fail(s,r);
+}
+enum pt_mixed_owner_result pt_mixed_owner_complete(struct pt_mixed_owner *s)
+{
+    enum pt_mixed_owner_result r=sequence_current(s);if(r!=PT_MIXED_OWNER_OK)return r;
+    if(!s->ready)return PT_MIXED_OWNER_PREPARING;
+    if(!s->pending || s->remaining)return PT_MIXED_OWNER_INVALID;
+    if(s->forecast!=3)return PT_MIXED_OWNER_PREPARING;
+    /* No synchronous preparation fallback. The copied state becomes live only
+     * at this fully consumed boundary; any output refusal aborts this sequence. */
+    if(pt_render_lookahead_commit(&s->ahead)!=PT_RENDER_OK)return sequence_fail(s,PT_MIXED_OWNER_RENDER);
+    s->forecast=0;r=pt_mixed_stage_commit(s);
+    if(r!=PT_MIXED_OWNER_OK)return sequence_fail(s,r);
+    s->pending=0;s->done=s->interval.end;
+    return s->done?PT_MIXED_OWNER_DONE:PT_MIXED_OWNER_OK;
 }

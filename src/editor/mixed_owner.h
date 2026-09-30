@@ -4,7 +4,7 @@
 #include "paula_voices.h"
 struct pt_mixed_owner;
 enum pt_mixed_owner_result {PT_MIXED_OWNER_OK,PT_MIXED_OWNER_PREPARING,
-    PT_MIXED_OWNER_INVALID,PT_MIXED_OWNER_MEMORY,PT_MIXED_OWNER_CAPABILITY,PT_MIXED_OWNER_STALE,PT_MIXED_OWNER_DEVICE};
+    PT_MIXED_OWNER_INVALID,PT_MIXED_OWNER_MEMORY,PT_MIXED_OWNER_CAPABILITY,PT_MIXED_OWNER_STALE,PT_MIXED_OWNER_DEVICE,PT_MIXED_OWNER_RENDER,PT_MIXED_OWNER_DONE};
 /* Combined master owner; live sequence scheduling remains unfinished. Atomically claim both
  * idle bound engines of the SAME sampler/project. Copies options/capabilities;
  * no source pins, cache allocation or output at begin. Ownership predicates
@@ -24,6 +24,22 @@ enum pt_mixed_owner_result pt_mixed_owner_begin(struct pt_paula_voices *,struct 
  * Failure poisons handle; close still required. Completed unchanged promotions
  * may remain sampler-owned after cancel. Ready is NOT capacity/output evidence. */
 enum pt_mixed_owner_result pt_mixed_owner_prepare(struct pt_mixed_owner *,struct pt_mixed_report *);
+/* ONE retained shared sequence: next publishes a pending interval, consume
+ * advances 1..256 declared elapsed frames, prefetch snapshots that same interval
+ * and advances only its copied phase <=256 frames or one cache/conversion step.
+ * Complete requires all live frames consumed AND both routes ready; it never
+ * prepares synchronously, allocates, uploads or reconverts commands. Early
+ * completion refuses, unready completion returns PREPARING without output.
+ * Output interval is preserved on refusal/DONE. Prefetch emits no voice starts;
+ * live consume may interleave serialized calls. DONE retains pins/readers until
+ * close. Stale/render/cache/output failures poison session and attempt each held
+ * stop once when API identities are safe; no retry/catch-up. Context/PCM immutability
+ * and genuine elapsed-time reporting remain caller obligations. No scheduler,
+ * actual clock, native devices, repeats/segments or range restoration here. */
+enum pt_mixed_owner_result pt_mixed_owner_next(struct pt_mixed_owner *,struct pt_render_interval *);
+enum pt_mixed_owner_result pt_mixed_owner_consume(struct pt_mixed_owner *,uint32_t);
+enum pt_mixed_owner_result pt_mixed_owner_prefetch(struct pt_mixed_owner *);
+enum pt_mixed_owner_result pt_mixed_owner_complete(struct pt_mixed_owner *);
 /* Detect generation/header/API/map/backend changes without bulk PCM scans. */
 enum pt_mixed_owner_result pt_mixed_owner_current(struct pt_mixed_owner *);
 /* Cancel partial promotion and sequence, block both engines, attempt each reader

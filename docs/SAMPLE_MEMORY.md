@@ -52,9 +52,18 @@ with no allocation/upload/command conversion during commit. Late cache/reader
 refusal releases unstarted candidates without output. Partial callback failure
 poisons both engines, marks all retained readers uncertain and tries each stop
 once; all master pins/tokens stay owned until both drains/barriers confirm. This
-is injected software dispatch, not live sequence progression. One live sequence
-lookahead/scheduler and native device output are still required; two independent
-song engines are not a substitute. Cache capacity and physical timing remain separate gates.
+is injected software dispatch. The combined owner now advances that SAME retained
+shared sequence with next/consume/prefetch/complete. Each forecast call advances
+copied phase by <=256 frames or one existing cache/conversion step while live
+consume may interleave; it starts no voices. Complete requires fully consumed live
+frames and BOTH ready routes and never performs synchronous preparation. It
+commits copied sequence state once and dispatches in global order. DONE retains
+readers/master pins until explicit close. Faults abort the sequence and stop
+retained readers once when captured API identities remain safe; changed API/context
+requires restoration before safe close, never force-release. Genuine elapsed-time
+reporting remains the caller's duty. Strict mixed numerical scheduling, sampled
+clock binding and native device output are still required; two independent song
+engines are not a substitute. Cache capacity and physical timing remain separate gates.
 
 AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software
 fixtures, plus an absent-library discovery check. Those results do not establish

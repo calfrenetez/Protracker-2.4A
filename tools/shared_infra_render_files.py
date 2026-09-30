@@ -61,7 +61,7 @@ def main():
     group.add_argument('--capture-session-memory',action='store_true',help='Run injected recording ownership and stop/quiescence with native Fast allocator; no device input')
     group.add_argument('--amigus-capture-memory',action='store_true',help='Run injected recording PCM/interrupt ownership with native Fast allocator; no card input')
     group.add_argument('--editor-capture-memory',action='store_true',help='Run editor recording barriers and publication with native Fast allocator; no device input')
-    group.add_argument('--paula-memory',choices=['cache','voices','preflight','dispatch','song','editor'],help='Run routed Paula ownership/capability with native allocators and injected readers; no DMA')
+    group.add_argument('--paula-memory',choices=['cache','voices','preflight','mixed','dispatch','song','editor'],help='Run routed Paula ownership/capability with native allocators and injected readers; no DMA')
     group.add_argument('--sample-dispatch',action='store_true',help='Check bounded sample dispatch and24-bit precision with Exec allocator')
     group.add_argument('--source-memory',action='store_true',help='Run donor ownership/failure/undo checks with native Fast allocator')
     group.add_argument('--mod-import',action='store_true',help='Run bounded MOD document load with native Fast allocator')
@@ -132,10 +132,13 @@ def main():
             cases=[{'cache':('sampler-paula','PTExecSamplerPaulaTest','SAMPLER PAULA PASS:'),
                     'voices':('paula-voices','PTExecPaulaVoicesTest','paula voices tests passed'),
                     'preflight':('paula-preflight','PTExecPaulaPreflightTest','PAULA PREFLIGHT PASS:'),
+                    'mixed':('mixed-preflight','PTExecMixedPreflightTest','MIXED PREFLIGHT PASS:'),
                     'dispatch':('paula-dispatch','PTExecPaulaDispatchTest','Paula prepared batch ownership OK'),
                     'song':('paula-song','PTExecPaulaSongTest','PAULA SONG PASS:'),
                     'editor':('editor-paula','PTExecEditorPaulaTest','EDITOR PAULA PASS:')}[args.paula_memory]]
             result['scope']='shared030 routed Paula '+args.paula_memory+' with native allocators and injected callbacks; no native DMA/output'
+            if args.paula_memory=='mixed':
+                result['scope']='shared030 mixed capability checks on one global sequence; native Fast allocation, no caches/devices/DMA/output'
         if args.recovery_file:
             cases=[('recovery','PTExecRecoveryTest','RECOVERY FILE PASS:')]
             result['scope']='shared030 explicit recovery file transactions; no automatic snapshots or UI wiring'

@@ -83,6 +83,22 @@ static enum pt_wavetable_capability check_plan(const struct pt_project *p,unsign
     }
     *held_state=held;*action=UINT_MAX;return PT_WAVETABLE_COMPATIBLE;
 }
+enum pt_wavetable_capability pt_wavetable_check_plan(const struct pt_project *p,unsigned rate,
+    const struct pt_render_plan *plan,const struct pt_playback_format *format,unsigned controls,
+    uint16_t *held,struct pt_wavetable_preflight_report *out)
+{
+    struct pt_wavetable_preflight_report r;
+    memset(&r,0,sizeof(r));r.result=PT_WAVETABLE_INVALID;r.action=r.channel=UINT_MAX;
+    if(!out)return PT_WAVETABLE_INVALID;
+    if(!p || pt_channels_validate(&p->channels)!=PT_CHANNEL_OK || !p->samples ||
+       !p->sample_count || p->sample_count>PT_PROJECT_SAMPLES || !held || controls>1 ||
+       (*held & (uint16_t)~((1UL<<p->channels.count)-1)))goto done;
+    r.result=check_plan(p,rate,plan,format,controls,held,&r.action,r.samples,0);
+    if(plan && r.action<plan->count){r.channel=plan->action[r.action].channel;r.kind=plan->action[r.action].kind;}
+done:
+    if(r.result!=PT_WAVETABLE_COMPATIBLE)memset(r.samples,0,sizeof(r.samples));
+    *out=r;return r.result;
+}
 struct pt_wavetable_preflight {
     struct pt_allocator allocator;const struct pt_project *project;
     struct pt_render_options options;struct pt_playback_format format;

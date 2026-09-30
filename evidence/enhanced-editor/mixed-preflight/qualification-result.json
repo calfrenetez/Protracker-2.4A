@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "seconds": 5.090886915975716,
+  "window_bound_seconds": 200,
+  "cases": [
+    {
+      "case": "mixed",
+      "binary": "PTExecMixedPreflightTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/mixed-preflight-candidate/build/dev/render-files-1790794490141801000",
+      "sha256": "833cd8d4e13174748adca09398b4dea94fb1c5c6d7ca5f0b301d27f7a296671e",
+      "independent_cleanup": true
+    }
+  ]
+}

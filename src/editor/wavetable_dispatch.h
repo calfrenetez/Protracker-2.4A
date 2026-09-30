@@ -16,6 +16,13 @@ struct pt_wavetable_preflight_report {
     enum pt_render_action_kind kind;
     uint8_t samples[PT_PROJECT_SAMPLES]; /* Triggered slots; valid on COMPATIBLE. */
 };
+/* Pure whole-batch gate for an already validated immutable project. Same rules
+ * as ordinary dispatch; all actions use global channel indices. No PCM reads,
+ * source pins, cache allocation or device callbacks. Tentative held state commits
+ * only on whole success, report samples clears on refusal. Output disjoint. */
+enum pt_wavetable_capability pt_wavetable_check_plan(const struct pt_project *,unsigned,
+    const struct pt_render_plan *,const struct pt_playback_format *,unsigned,
+    uint16_t *,struct pt_wavetable_preflight_report *);
 /* Silent full-sequence capability analysis with the SAME rules as dispatch.
  * Initial voices are idle. Includes pre-roll, late rows and retained loops;
  * advances audited renderer phases in <=256-frame blocks. Existing required

@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131140704 reserve=262144 flags=4
+MIXED PREFLIGHT PASS: one global timeline, separate source masks, late backend refusal, transfer and allocation cleanup; no dispatch
+EXEC MEMORY PASS: 40 Fast allocations, zero owned bytes, budget refusal without Chip fallback

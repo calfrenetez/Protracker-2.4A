@@ -21,6 +21,19 @@ software implementation from the remaining integration and hardware gates.
 | Recording masters | Bounded full-precision collector, exact negotiated-format gate, injected input lifecycle, exclusive PCM/interrupt ownership, editor mutation/disposal veto and retryable undoable publication. Earlier recording owners passed native Exec fixtures; the new exact-format gate passes host tests and Amiga builds, with emulator execution pending after a prelaunch identity refusal. | Actual input capability negotiation, native input register/backend and controls, duplex ownership if needed, physical capture quality/overrun evidence. |
 | Playback invalidation | Revision/settings keys, retired active leases and stop-before-edit/undo/dispose guards. Private EFx banks are discarded on stop and rebuilt on restart. | End-to-end real AmiGUS voice/transfer ownership, once the device adapter exists. |
 
+The mixed Paula/AmiGUS capability gate (`mixed_preflight.h/c`) now traverses one
+full global sequence. It partitions each resolved plan by route, applies both
+backend rules, retains global diagnostic indices and collects separate used-source
+masks. A late refusal clears both masks and leaves any requested sequence transfer
+untouched. Success can transfer that same rewound sequence. Tempo, delay and end
+commands from unselected tracks still govern both backends. This silent gate uses
+two bounded allocations and does not create playback caches, pin masters, call
+hardware or mix PCM. Initial support is whole-song 44.1/48 kHz; selected MIDI tracks
+and range restoration refuse. The synchronous gate remains outside the playback
+deadline. A combined master owner, coordinated prepared cache batches and one live
+scheduler are still required before mixed playback; two independent song engines
+are not a substitute. Cache capacity and physical timing remain separate gates.
+
 AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software
 fixtures, plus an absent-library discovery check. Those results do not establish
 positive card access, real MMIO, streaming output or physical acceptance. Native

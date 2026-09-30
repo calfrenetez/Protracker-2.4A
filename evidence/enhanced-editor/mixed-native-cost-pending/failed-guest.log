@@ -1,0 +1,8 @@
+assertion "r==PT_MIXED_OWNER_OK && sampler.current[0] && sampler.current[1] && !sampler.current[2]" failed: file "tests/mixed_owner_test.c", line 95, function: owner_fixture
+Program aborted
+EXEC MEMORY pool_limit=131073152 reserve=262144 flags=4
+NATIVE MIXED COST ready voices=2 before_sample=352 after_sample=631 total=983 frequency=709379 bits=8 case=0
+NATIVE MIXED COST ready voices=2 before_sample=353 after_sample=629 total=982 frequency=709379 bits=8 case=1
+NATIVE MIXED COST ready voices=2 before_sample=353 after_sample=1317 total=1670 frequency=709379 bits=8 case=2
+NATIVE MIXED COST ready voices=2 before_sample=337 after_sample=648 total=985 frequency=709379 bits=8 case=3
+NATIVE MIXED COST start voices=2 before_sample=351 sample_to_first=2274 first_to_last=62 last_to_return=2183 total=4870 frequency=709379 bits=8

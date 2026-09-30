@@ -1,0 +1,9 @@
+/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/mixed-native-cost-candidate/build/dev/render-files-1790801822251988000
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/mixed-native-cost-candidate/tools/shared_infra_render_files.py", line 377, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/mixed-native-cost-candidate/tools/shared_infra_render_files.py", line 302, in main
+    if time.monotonic()>deadline:raise RuntimeError('Native file checks timed out; preserve owned run for recovery')
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Native file checks timed out; preserve owned run for recovery

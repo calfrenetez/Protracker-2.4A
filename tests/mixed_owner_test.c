@@ -5,15 +5,27 @@
 #include "amigus_wavetable_cache_test.c"
 #include "../src/editor/mixed_owner_internal.h"
 #include "../src/editor/paula_internal.h"
+#ifdef PT_TEST_MIXED_NATIVE_COST
+struct mixed_cost_clock {struct pt_native_eclock clock;uint64_t frame,sample_at,first,last;uint32_t frequency;unsigned callbacks;};
+static struct mixed_cost_clock *mixed_cost_active;
+static uint64_t mixed_cost_tick(struct mixed_cost_clock *c)
+{uint64_t t;uint32_t f;assert(pt_native_eclock_read(&c->clock,&t,&f));if(c->frequency)assert(f==c->frequency);else c->frequency=f;return t;}
+static int mixed_cost_read(void *p,uint64_t *t,uint32_t *f)
+{struct mixed_cost_clock *c=p;c->sample_at=mixed_cost_tick(c);*t=c->frame;*f=48000;return 1;}
+static void mixed_cost_callback(void)
+{struct mixed_cost_clock *c=mixed_cost_active;uint64_t t;if(!c)return;t=mixed_cost_tick(c);if(!c->callbacks)c->first=t;c->last=t;++c->callbacks;}
+#else
+static void mixed_cost_callback(void){}
+#endif
 static unsigned output_order[32],output_count,fast_calls;
 static void *counted_fast(void *c,size_t bytes){++fast_calls;return fast_alloc(c,bytes);}
 static int mixed_start(void *c,unsigned slot,const struct pt_paula_voice_plan *p)
-{assert(output_count<32);output_order[output_count++]=1;return start(c,slot,p);}
+{mixed_cost_callback();assert(output_count<32);output_order[output_count++]=1;return start(c,slot,p);}
 static int mixed_control(void *c,unsigned slot,uint16_t period,uint8_t volume)
 {assert(output_count<32);output_order[output_count++]=3;return control(c,slot,period,volume);}
 struct wave_driver {unsigned starts,stops,barriers;int stop_result,barrier_result,start_result;};
 static int wave_start(void *c,unsigned id,const struct pt_amigus_voice_plan *p)
-{struct wave_driver *d=c;(void)id;(void)p;assert(output_count<32);output_order[output_count++]=2;++d->starts;return d->start_result;}
+{struct wave_driver *d=c;(void)id;(void)p;mixed_cost_callback();assert(output_count<32);output_order[output_count++]=2;++d->starts;return d->start_result;}
 static int wave_stop(void *c,unsigned id){struct wave_driver *d=c;(void)id;++d->stops;return d->stop_result;}
 static int wave_control(void *c,unsigned id,uint32_t rate,uint16_t l,uint16_t r)
 {(void)c;(void)id;(void)rate;(void)l;(void)r;assert(output_count<32);output_order[output_count++]=4;return 1;}
@@ -46,6 +58,13 @@ static void owner_fixture(unsigned bits,unsigned mode)
     doc.project.events[32+15].effect=15;
     if(mode>=23)doc.project.events[16+15]=(struct pt_event){0,0,0,0,15,150,0,0};
     o.rate=mode>=23 && bits==16?44100:48000;o.bits=24;o.tracks=(1U<<4)|(1U<<7);o.gain_q16=65536;o.tick_limit=100;o.frame_limit=100000;
+#if defined(PT_TEST_MIXED_NATIVE_COST) || !defined(PT_TEST_MIXED_EXEC)
+    if(mode==59){o.tracks=65535;
+        for(i=0;i<16;++i){doc.project.channels.track[i].route=i<4?PT_PAULA:PT_AMIGUS;
+            if(i<4)doc.project.channels.track[i].pan=(i==0 || i==3)?0:255;
+            doc.project.events[i]=(struct pt_event){428,0,PT_NOTE_PERIOD,1,0,0,0,0};}}
+    if(mode>=58)o.rate=48000; /* Injected clock below uses this explicit rate. */
+#endif
     pt_sampler_init(&sampler,&a,1024*1024);
     assert(pt_sampler_paula_bind(&pb,&sampler,&doc.project,&d,chip_alloc,chip_free,4096));
     assert(pt_sampler_wavetable_bind(&ab,&sampler,&doc.project,&f->cache));
@@ -76,6 +95,39 @@ static void owner_fixture(unsigned bits,unsigned mode)
         assert(r==PT_MIXED_OWNER_OK && sampler.current[0] && sampler.current[1] && !sampler.current[2]);
         assert(report.samples[0][0] && report.samples[1][0] && report.samples[1][1]);
         doc.project.channels.selected=15;assert(pt_mixed_owner_current(owner)==PT_MIXED_OWNER_OK);
+#ifndef PT_TEST_MIXED_EXEC
+        if(mode>=58){uint64_t deadline=777;unsigned polls=0,allocs,writes;size_t calls;
+            assert(pt_mixed_owner_schedule_begin(owner,1000)==PT_MIXED_OWNER_OK);
+            do {r=pt_mixed_owner_schedule_step(owner,0,&deadline);assert(++polls<1000 && !d.starts && !wd.starts);}while(r==PT_MIXED_OWNER_WAITING);
+            assert(r==PT_MIXED_OWNER_OK);calls=d.calls;allocs=fast_calls;writes=f->writes;
+            assert(pt_mixed_owner_schedule_step(owner,1000,&deadline)==PT_MIXED_OWNER_WAITING);
+            assert(d.calls==calls && fast_calls==allocs && f->writes==writes && d.starts==(mode==59?4:1) && wd.starts==(mode==59?12:1));
+            if(mode==59)for(i=0;i<16;++i)assert(output_order[i]==(i<4?1:2));
+            goto close;
+        }
+#endif
+#ifdef PT_TEST_MIXED_NATIVE_COST
+        if(mode>=58) {
+            struct mixed_cost_clock clock={0};uint64_t before,after,deadline;unsigned polls=0,j,allocs,writes,voices=mode==59?16:2;size_t calls;
+            assert(pt_native_eclock_open(&clock.clock));mixed_cost_active=&clock;
+            assert(pt_mixed_owner_clocked_begin(owner,1000,mixed_cost_read,&clock)==PT_MIXED_OWNER_OK);
+            do {r=pt_mixed_owner_clocked_service(owner,&deadline);assert(++polls<1000 && !d.starts && !wd.starts);}while(r==PT_MIXED_OWNER_WAITING);
+            assert(r==PT_MIXED_OWNER_OK);
+            for(j=0;j<4;++j){before=mixed_cost_tick(&clock);assert(pt_mixed_owner_clocked_service(owner,&deadline)==PT_MIXED_OWNER_OK);after=mixed_cost_tick(&clock);
+                assert(before<=clock.sample_at && clock.sample_at<=after && !clock.callbacks);
+                printf("NATIVE MIXED COST ready voices=%u before_sample=%lu after_sample=%lu total=%lu frequency=%lu bits=%u case=%u\n",
+                    voices,(unsigned long)(clock.sample_at-before),(unsigned long)(after-clock.sample_at),(unsigned long)(after-before),(unsigned long)clock.frequency,bits,j);}
+            clock.frame=1000;calls=d.calls;allocs=fast_calls;writes=f->writes;before=mixed_cost_tick(&clock);
+            assert(pt_mixed_owner_clocked_service(owner,&deadline)==PT_MIXED_OWNER_WAITING);after=mixed_cost_tick(&clock);
+            assert(d.calls==calls && fast_calls==allocs && f->writes==writes && clock.callbacks==voices && d.starts==(mode==59?4:1) && wd.starts==(mode==59?12:1));
+            assert(before<=clock.sample_at && clock.sample_at<=clock.first && clock.first<=clock.last && clock.last<=after);
+            if(mode==59)for(j=0;j<16;++j)assert(output_order[j]==(j<4?1:2));
+            printf("NATIVE MIXED COST start voices=%u before_sample=%lu sample_to_first=%lu first_to_last=%lu last_to_return=%lu total=%lu frequency=%lu bits=%u\n",
+                voices,(unsigned long)(clock.sample_at-before),(unsigned long)(clock.first-clock.sample_at),(unsigned long)(clock.last-clock.first),(unsigned long)(after-clock.last),(unsigned long)(after-before),(unsigned long)clock.frequency,bits);
+            assert(pt_mixed_owner_close(&owner));mixed_cost_active=NULL;pt_native_eclock_close(&clock.clock);
+            assert(!clock.clock.port && !clock.clock.request);goto detached;
+        }
+#endif
 #ifdef PT_TEST_MIXED_NATIVE_GATE
         if(mode>=56) {
             struct pt_native_eclock clock={0};struct pt_native_alarm alarm={0},watchdog={0};
@@ -445,7 +497,10 @@ detached:
     pt_sampler_release(&sampler);assert(!sampler.bytes);pt_document_release(&doc);free(plan);free(batch);free(f);
 }
 static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wavetable_fixture_main;
-#ifdef PT_TEST_MIXED_NATIVE_GATE
+#ifdef PT_TEST_MIXED_NATIVE_COST
+    for(bits=8;bits<=24;bits+=8)for(mode=58;mode<60;++mode)owner_fixture(bits,mode);
+    puts("MIXED OWNER PASS:6 native mixed-cost8/16/24 scenarios, unchanged guards, real EClock durations around2/16voice prepared commit, allocation/upload-free boundaries and resource cleanup; injected logical time/voices, no audio/timing acceptance");
+#elif defined(PT_TEST_MIXED_NATIVE_GATE)
     for(bits=8;bits<=24;bits+=8)for(mode=56;mode<58;++mode)owner_fixture(bits,mode);
     puts("MIXED OWNER PASS:6 native real-clock/alarm8/16/24 scenarios, primed mixed startup, strict observed or delayed deadline refusal, uncertain barriers retain both tokens/masters, alarm/watchdog/counter cleanup; injected voices only, no audio/timing acceptance");
 #elif defined(PT_TEST_MIXED_SCHEDULE_ONLY)
@@ -455,7 +510,8 @@ static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wave
     puts("MIXED OWNER PASS:21 native clock-binding-only8/16/24 scenarios, fractional counter conversion, absolute tempo boundaries, reader/frequency/regression/overflow/skipped-frame refusal and retained-reader cleanup; injected counters only");
 #else
     for(bits=8;bits<=24;bits+=8)for(mode=0;mode<56;++mode)owner_fixture(bits,mode);
-    puts("MIXED OWNER PASS: full168 host scenarios, master/cache/staging/commit/sequence/deadline/schedule ownership; no native clock");
+    for(bits=8;bits<=24;bits+=8)for(mode=58;mode<60;++mode)owner_fixture(bits,mode);
+    puts("MIXED OWNER PASS: full174 host scenarios, master/cache/staging/commit/sequence/deadline/schedule ownership; no native clock");
 #endif
     return 0;}
 

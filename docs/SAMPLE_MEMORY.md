@@ -89,7 +89,13 @@ clocked service, and refuses observed or deliberately delayed late startup witho
 voice callbacks. Both tokens/masters survive uncertain cleanup barriers and clock/
 alarm owners remain alive until the combined owner closes. Native fixture evidence
 remains separate from injected-counter host tests; voice callbacks stay injected.
-Native PLAY event-loop/device/DMA/audio remain requirements;
+A further native duration fixture (corrected host/build validated; native run
+failed on an invalid all-left Paula test setup, corrected native execution pending)
+measures unchanged source/lease guards and
+prepared startup at2 and16voices (4Paula+12AmiGUS), checking no allocation/upload
+at commit and preserving global action order. EClock durations are observations
+around injected logical song timestamps/callbacks, not precise real-time or audio
+acceptance. Native PLAY event-loop/device/DMA/audio remain requirements;
 two independent song engines are not a substitute. Cache capacity and physical timing remain separate gates.
 
 AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software

@@ -174,6 +174,8 @@ def main():
     inputs['PTExecStudioConsumerTest'] = ['tests/native_exec_studio_consumer_test.c',*inputs['PTStudioConsumerTest'][1:]]
     inputs['PTEditorStudioTest'] = ['tests/editor_studio_test.c','src/editor/editor_studio.c','src/core/amigus_reservation.c','src/core/amigus_session.c','src/core/amigus_fifo.c','src/core/amigus_pcm_pack.c','src/core/studio_consumer.c','src/core/studio_pump.c','src/core/studio_queue.c',*dict.fromkeys([*inputs['PTSamplerSongTest'][1:],*inputs['PTSongTest'][1:]])]
     inputs['PTEditorStudioTest'] += ['src/editor/sampler_invert_song.c',*invert_sources]
+    inputs['PTSamplerPaulaTest'] = ['tests/sampler_paula_test.c','src/editor/sampler_paula.c','src/core/sample_cache.c','src/core/playback_pcm.c',*inputs['PTSamplerTest'][1:]]
+    inputs['PTExecSamplerPaulaTest'] = ['tests/native_exec_sampler_paula_test.c',*inputs['PTSamplerPaulaTest'][1:]]
     inputs['PTCaptureTest'] = ['tests/capture_test.c','src/core/capture.c','src/editor/sampler_capture.c',*inputs['PTSamplerTest'][1:]]
     inputs['PTExecCaptureTest'] = ['tests/native_exec_capture_test.c',*inputs['PTCaptureTest'][1:]]
     inputs['PTCaptureSessionTest'] = ['tests/capture_session_test.c','src/core/capture_session.c',*inputs['PTCaptureTest'][1:]]

@@ -3114,3 +3114,24 @@ with a new 8/16/24-bit recording, discard redo history and evict undo entries wh
 old and current playback pins retain their respective buffers. Stale sampler
 generations refuse new pins, and final release returns all sampler-owned bytes.
 These host checks do not establish native voice dispatch or physical playback.
+
+## Routed Paula cache owner (software seam)
+
+`sampler_paula` adds a dedicated optional cache for explicitly selected samples
+on any Paula-routed track among channels 1–16. Project validation rejects a fifth
+Paula assignment. Bind allocates nothing; acquisition pins the current immutable
+master during conversion and produces only signed 8-bit, even-byte-padded copies.
+Stereo requires an explicit source-channel choice. Master precision and sample
+rate remain unchanged; no implicit downmix or resampling is performed.
+
+The caller supplies the storage allocator: native callers must use Chip RAM.
+Sampler revisions, undo, sample-table changes and route changes retire cache
+copies. An active lease keeps its old bytes until confirmed stop and unpin; it
+cannot authorize a new trigger. Memory pressure evicts only unpinned copies.
+Busy close blocks new acquisitions and retains active data until readers stop.
+
+This owner is tested with injected storage and has an Exec fixture that checks
+Fast-RAM masters and Chip-RAM cache allocations when executed. It is not wired
+to native replay yet. Mixed-backend scheduling, dynamic physical voice dispatch,
+geometry/capability checks and end-to-end playback remain required. The existing
+four-channel replay path and its refusal behavior are unchanged.

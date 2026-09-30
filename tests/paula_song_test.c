@@ -9,6 +9,18 @@ static enum pt_paula_song_result prepare_song(struct pt_paula_song *s,struct pt_
     do{result=pt_paula_song_prepare(s,r);assert(++n<100);}while(result==PT_PAULA_SONG_PREPARING);
     return result;
 }
+static unsigned stage_song(struct pt_paula_song *song,struct driver *d)
+{
+    enum pt_paula_song_result result;unsigned n=0,starts=d->starts,stops=d->stops,controls=d->controls;size_t calls;
+    do {
+        result=pt_paula_song_stage(song);assert(++n<2000);
+        assert(d->starts==starts && d->stops==stops && d->controls==controls);
+        if(result==PT_PAULA_SONG_PREPARING) {
+            calls=d->calls;assert(pt_paula_song_complete(song)==PT_PAULA_SONG_PREPARING && d->calls==calls);
+        }
+    }while(result==PT_PAULA_SONG_PREPARING);
+    assert(result==PT_PAULA_SONG_OK);return n;
+}
 static void song_fixture(unsigned bits)
 {
     struct pt_allocator a={NULL,fast_alloc,fast_free};struct pt_document doc;struct pt_sampler sampler;
@@ -17,16 +29,16 @@ static void song_fixture(unsigned bits)
     struct pt_render_options o={0},saved_options;struct pt_render_report measured;
     struct pt_paula_preflight_report report;struct pt_paula_song *song=NULL,*unchanged=(void *)(uintptr_t)1;
     struct pt_render_interval span,before_span={17,18,19};struct pt_render_plan direct={0};struct pt_paula_batch batch;
-    int32_t pcm[16],stereo[32];unsigned i,stops,starts;uint64_t frames=0;size_t pinned,calls;
+    int32_t pcm[1024],stereo[2048];unsigned i,stops,starts;uint64_t frames=0;size_t pinned,calls;
     struct pt_paula_voice_request request={0,16,428,64};enum pt_paula_song_result result;
-    for(i=0;i<16;++i){pcm[i]=(int32_t)i+1;stereo[i*2]=stereo[i*2+1]=(int32_t)i+1;}
+    for(i=0;i<1024;++i){pcm[i]=(int32_t)(i%120)+1;stereo[i*2]=stereo[i*2+1]=(int32_t)(i%120)+1;}
     d.start_result=d.control_result=d.quiesce_result=1;for(i=0;i<4;++i)d.stop_result[i]=1;
     pt_document_init(&doc,&a);assert(pt_document_new(&doc,16,SIZE_MAX)==PT_PROJECT_OK);
     for(i=0;i<16;++i)doc.project.channels.track[i].route=PT_AMIGUS;
     doc.project.channels.track[4].route=doc.project.channels.track[7].route=PT_PAULA;
     doc.project.channels.track[4].pan=0;doc.project.channels.track[7].pan=255;
-    doc.project.samples[0].pcm=doc.project.samples[2].pcm=(struct pt_pcm){pcm,16,16,8000,1,(uint8_t)bits};
-    doc.project.samples[1].pcm=(struct pt_pcm){stereo,32,16,8000,2,(uint8_t)bits};
+    doc.project.samples[0].pcm=doc.project.samples[2].pcm=(struct pt_pcm){pcm,1024,1024,8000,1,(uint8_t)bits};
+    doc.project.samples[1].pcm=(struct pt_pcm){stereo,2048,1024,8000,2,(uint8_t)bits};
     doc.project.samples[0].volume=doc.project.samples[2].volume=64;
     doc.project.events[4]=(struct pt_event){428,0,PT_NOTE_PERIOD,1,0,0,0,0};
     doc.project.events[16*2+7]=(struct pt_event){428,0,PT_NOTE_PERIOD,3,0,0,0,0};
@@ -35,7 +47,7 @@ static void song_fixture(unsigned bits)
     o.rate=48000;o.bits=24;o.tracks=(1U<<4)|(1U<<7);o.gain_q16=65536;o.tick_limit=100;o.frame_limit=100000;
     assert(pt_render_measure(&doc.project,&o,NULL,NULL,&measured)==PT_RENDER_OK);saved_options=o;
     pt_sampler_init(&sampler,&a,1024*1024);
-#define BIND() do{assert(pt_sampler_paula_bind(&cache,&sampler,&doc.project,&d,chip_alloc,chip_free,32));assert(pt_paula_voices_bind(&owner,&cache,&api));assert(pt_paula_voices_bind_quiesce(&owner,quiesce,&d));}while(0)
+#define BIND() do{assert(pt_sampler_paula_bind(&cache,&sampler,&doc.project,&d,chip_alloc,chip_free,2048));assert(pt_paula_voices_bind(&owner,&cache,&api));assert(pt_paula_voices_bind_quiesce(&owner,quiesce,&d));}while(0)
     BIND();{
         struct pt_allocator refused={NULL,no_allocate,fast_free};
         assert(pt_paula_song_begin(&owner,&o,&caps,&refused,&unchanged)==PT_PAULA_SONG_MEMORY);
@@ -63,7 +75,7 @@ static void song_fixture(unsigned bits)
         if(span.frames)assert(pt_paula_song_complete(song)==PT_PAULA_SONG_INVALID);
         while(span.frames){uint32_t n=span.frames>256?256:span.frames;assert(pt_paula_song_consume(song,n)==PT_PAULA_SONG_OK);span.frames-=n;}
         starts=d.starts;stops=d.stops;
-        assert(pt_paula_song_stage(song)==PT_PAULA_SONG_OK);
+        stage_song(song,&d);
         calls=d.calls;assert(pt_paula_song_stage(song)==PT_PAULA_SONG_OK && d.calls==calls);
         assert(d.starts==starts && d.stops==stops);
         d.fail=1;result=pt_paula_song_complete(song);d.fail=0;assert(d.calls==calls);
@@ -74,10 +86,10 @@ static void song_fixture(unsigned bits)
     pinned=sampler.bytes;d.quiesce_result=0;
     assert(!pt_paula_song_close(&song) && song && sampler.bytes==pinned);
     d.quiesce_result=1;assert(pt_paula_song_close(&song) && !song && !d.live);
-    for(i=0;i<16;++i)assert(doc.project.samples[0].pcm.data[i]==pcm[i]);
+    for(i=0;i<1024;++i)assert(doc.project.samples[0].pcm.data[i]==pcm[i]);
     /* A late stereo note fails before ANY new master promotion or callback. */
     pt_sampler_release(&sampler);
-    doc.project.samples[0].pcm=doc.project.samples[2].pcm=(struct pt_pcm){pcm,16,16,8000,1,(uint8_t)bits};
+    doc.project.samples[0].pcm=doc.project.samples[2].pcm=(struct pt_pcm){pcm,1024,1024,8000,1,(uint8_t)bits};
     pt_sampler_init(&sampler,&a,1024*1024);
     BIND();o=saved_options;doc.project.events[16*2+7].instrument=2;starts=d.starts;
     assert(pt_paula_song_begin(&owner,&o,&caps,&a,&song)==PT_PAULA_SONG_PREPARING);
@@ -101,7 +113,7 @@ static void song_fixture(unsigned bits)
     d.stop_result[0]=1;doc.project.channels.track[4].pan=0;assert(pt_paula_song_close(&song));
     /* Cancel while a promotion job owns unpublished storage. */
     pt_sampler_release(&sampler);
-    doc.project.samples[0].pcm=doc.project.samples[2].pcm=(struct pt_pcm){pcm,16,16,8000,1,(uint8_t)bits};
+    doc.project.samples[0].pcm=doc.project.samples[2].pcm=(struct pt_pcm){pcm,1024,1024,8000,1,(uint8_t)bits};
     pt_sampler_init(&sampler,&a,1024*1024);BIND();
     assert(pt_paula_song_begin(&owner,&o,&caps,&a,&song)==PT_PAULA_SONG_PREPARING);
     assert(pt_paula_song_prepare(song,&report)==PT_PAULA_SONG_PREPARING);
@@ -116,11 +128,12 @@ static void song_fixture(unsigned bits)
     for(i=0;i<20;++i) {
         assert(pt_paula_song_next(song,&span)==PT_PAULA_SONG_OK);
         while(span.frames){uint32_t n=span.frames>256?256:span.frames;assert(pt_paula_song_consume(song,n)==PT_PAULA_SONG_OK);span.frames-=n;}
-        assert(pt_paula_song_stage(song)==PT_PAULA_SONG_OK && d.starts==starts);
+        do{result=pt_paula_song_stage(song);assert(d.starts==starts);}while(result==PT_PAULA_SONG_PREPARING && d.calls==calls);
         if(d.calls>calls)break;
-        assert(pt_paula_song_complete(song)==PT_PAULA_SONG_OK && d.starts==starts);
+        assert(result==PT_PAULA_SONG_OK && pt_paula_song_complete(song)==PT_PAULA_SONG_OK && d.starts==starts);
     }
-    assert(i<20 && d.calls>calls);
+    assert(i<20 && d.calls>calls && result==PT_PAULA_SONG_PREPARING);
+    assert(pt_paula_song_complete(song)==PT_PAULA_SONG_PREPARING);
     pinned=sampler.bytes;d.quiesce_result=0;
     assert(!pt_paula_song_close(&song) && sampler.bytes==pinned && d.starts==starts && !d.reading[0]);
     d.quiesce_result=1;assert(pt_paula_song_close(&song) && !d.live);

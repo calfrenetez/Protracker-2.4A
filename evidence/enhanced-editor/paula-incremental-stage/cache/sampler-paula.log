@@ -1,0 +1,4 @@
+EXEC MEMORY pool_limit=131177424 reserve=262144 flags=4
+PAULA CHIP JOB PASS: bounded256-byte conversion, unpublished leases, exact master pins, cancellation and stale/pressure/close refusal
+SAMPLER PAULA PASS: selected routed8-bit copies, explicit stereo side, odd padding, master preservation, revisions/undo/routes, pressure eviction and retained active leases; no DMA or mixed-backend playback
+EXEC MEMORY PASS: 48 Fast allocations, zero owned bytes, budget refusal without Chip fallback

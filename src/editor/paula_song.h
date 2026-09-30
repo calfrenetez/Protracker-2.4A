@@ -34,8 +34,10 @@ enum pt_paula_song_result pt_paula_song_prepare(struct pt_paula_song *,struct pt
 enum pt_paula_song_result pt_paula_song_next(struct pt_paula_song *,struct pt_render_interval *);
 enum pt_paula_song_result pt_paula_song_consume(struct pt_paula_song *,uint32_t);
 /* Optional stage after logical consume finishes, before complete emits output.
- * Advances/checks the plan and prepares pinned Chip copies without callbacks;
- * repeated stage is idempotent. May allocate/convert synchronously. Complete
+ * Advances/checks the plan, then each call reserves one candidate OR copies
+ * <=256 output bytes OR advances one action without callbacks. PREPARING requires
+ * another stage; complete refuses output while preparation is pending. Stage
+ * once ready is idempotent. Allocation/eviction remain synchronous. Complete
  * applies a staged batch without cache acquisition/conversion. Calling complete
  * without stage preserves the synchronous compatibility path. Caller owns real
  * time/deadlines; this does not provide a prepare-ahead clock scheduler. Close

@@ -118,14 +118,26 @@ enum pt_paula_song_result pt_paula_song_stage(struct pt_paula_song *s)
     if(!s->ready)return PT_PAULA_SONG_PREPARING;
     if(!s->pending || s->remaining)return PT_PAULA_SONG_INVALID;
     if(s->batch.ready)return PT_PAULA_SONG_OK;
-    if(pt_render_sequence_complete(s->sequence,&s->plan)!=PT_RENDER_OK)return fail(s,PT_PAULA_SONG_RENDER);
-    if(!pt_paula_prepare_owned(&s->batch,s->voices,s->version,s->options.rate,&s->plan,&s->caps,s))
-        return fail(s,PT_PAULA_SONG_DEVICE);
-    return PT_PAULA_SONG_OK;
+    if(!s->batch.preparing) {
+        if(pt_render_sequence_complete(s->sequence,&s->plan)!=PT_RENDER_OK)return fail(s,PT_PAULA_SONG_RENDER);
+        if(!pt_paula_prepare_begin_owned(&s->batch,s->voices,s->version,s->options.rate,&s->plan,&s->caps,s->pin,s))
+            return fail(s,PT_PAULA_SONG_DEVICE);
+        return PT_PAULA_SONG_PREPARING;
+    }
+    switch(pt_paula_prepare_step_owned(&s->batch)) {
+    case PT_CACHE_LOAD:return PT_PAULA_SONG_OK;
+    case PT_CACHE_PENDING:return PT_PAULA_SONG_PREPARING;
+    default:return fail(s,PT_PAULA_SONG_DEVICE);
+    }
 }
 enum pt_paula_song_result pt_paula_song_complete(struct pt_paula_song *s)
 {
-    enum pt_paula_song_result state=pt_paula_song_stage(s);int result;
+    enum pt_paula_song_result state=current(s);int result;
+    if(state!=PT_PAULA_SONG_OK)return state;
+    if(s->batch.preparing)return PT_PAULA_SONG_PREPARING;
+    /* Compatibility callers that never stage retain synchronous preparation.
+     * Explicit incremental callers must finish stage before complete emits. */
+    do{state=pt_paula_song_stage(s);}while(state==PT_PAULA_SONG_PREPARING && s->ready && s->pending && !s->remaining);
     if(state!=PT_PAULA_SONG_OK)return state;
     result=pt_paula_apply(&s->batch);
     if(result!=1) {

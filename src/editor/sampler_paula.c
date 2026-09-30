@@ -66,7 +66,7 @@ int pt_sampler_paula_close(struct pt_sampler_paula *s)
 #include "sampler_internal.h"
 #include "project_snapshot.h"
 #include "../core/playback_internal.h"
-static int prepared_bridge(struct pt_sampler_paula *s)
+int pt_sampler_paula_prepared_current(struct pt_sampler_paula *s)
 {
     unsigned i;
     if(!s || !s->sampler || !s->project || s->closing || !s->version ||
@@ -91,7 +91,7 @@ enum pt_cache_result pt_sampler_paula_job_begin(struct pt_sampler_paula_job *j,
 {
     struct pt_playback_format format={8,source_channel,0,1};struct pt_cache_lease lease;
     struct pt_pcm pcm;struct pt_sample_version *pin;enum pt_cache_result result;
-    if(!j || j->owner || !out || !prepared_bridge(s) || !routed(s,track) || sample>=s->count ||
+    if(!j || j->owner || !out || !pt_sampler_paula_prepared_current(s) || !routed(s,track) || sample>=s->count ||
        pt_sampler_pin_current(s->sampler,s->project,sample,s->generation,expected,&pcm,&pin)!=PT_EDIT_OK)return PT_CACHE_INVALID;
     memset(j,0,sizeof(*j));j->owner=s;j->sampler=s->sampler;j->project=s->project;
     memcpy(&j->header,s->project,sizeof(j->header));j->pin=pin;j->pcm=pcm;
@@ -113,7 +113,7 @@ enum pt_cache_result pt_sampler_paula_job_step(struct pt_sampler_paula_job *j,st
     struct pt_pcm pcm;struct pt_sample_version *pin;enum pt_cache_result result;
     if(!j || !j->owner)return PT_CACHE_INVALID;
     j->header.channels.selected=j->project->channels.selected;
-    if(!out || !prepared_bridge(j->owner) || j->owner->sampler!=j->sampler ||
+    if(!out || !pt_sampler_paula_prepared_current(j->owner) || j->owner->sampler!=j->sampler ||
        j->owner->project!=j->project || j->owner->version!=j->version ||
        !pt_project_snapshot_equal(j->project,&j->header) ||
        pt_sampler_pin_current(j->sampler,j->project,j->sample,j->generation,j->pin,&pcm,&pin)!=PT_EDIT_OK) {
@@ -123,4 +123,14 @@ enum pt_cache_result pt_sampler_paula_job_step(struct pt_sampler_paula_job *j,st
     result=pt_playback_upload_step(&j->upload,j->staging,sizeof(j->staging),out);
     if(result!=PT_CACHE_PENDING)pt_sampler_paula_job_cancel(j);
     return result;
+}
+
+int pt_sampler_paula_prepared_location(struct pt_sampler_paula *s,unsigned track,struct pt_cache_lease lease,
+    const uint8_t **data,size_t *bytes)
+{
+    void *p;
+    if(!data || !bytes || !pt_sampler_paula_prepared_current(s) || !routed(s,track))return 0;
+    p=pt_cache_data(&s->cache,lease);
+    if(!p || s->cache.entry[lease.slot].valid!=1 || s->cache.entry[lease.slot].version!=s->version)return 0;
+    *data=p;*bytes=s->cache.entry[lease.slot].bytes;return 1;
 }

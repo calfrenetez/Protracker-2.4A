@@ -27,4 +27,9 @@ enum pt_cache_result pt_sampler_paula_job_begin(struct pt_sampler_paula_job *,
     struct pt_sample_version *expected,struct pt_cache_lease *);
 enum pt_cache_result pt_sampler_paula_job_step(struct pt_sampler_paula_job *,struct pt_cache_lease *);
 void pt_sampler_paula_job_cancel(struct pt_sampler_paula_job *);
+/* Metadata-only checks for an already-validated immutable owner/project; caller
+ * retains genuine source pins. Never use for arbitrary public inputs. */
+int pt_sampler_paula_prepared_current(struct pt_sampler_paula *);
+int pt_sampler_paula_prepared_location(struct pt_sampler_paula *,unsigned,struct pt_cache_lease,
+    const uint8_t **,size_t *);
 #endif

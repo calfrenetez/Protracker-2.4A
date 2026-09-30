@@ -14,7 +14,7 @@ software implementation from the remaining integration and hardware gates.
 | Requirement | Implemented software | Still required |
 | --- | --- | --- |
 | Authoritative8/16/24-bit masters | Queried, bounded native Fast-RAM pool; precision-preserving sampler versions, processing, history and source pins. Fast-equipped machines fail rather than spill enhanced allocations into Chip RAM. | Physical memory-pressure/endurance measurements. |
-| Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition and one-to-four-track song playback preserve master precision; song preparation excludes unreferenced masters from both Fast staging and Chip caches. Dedicated arbitrary-track cache and injected four-voice owner preserve stable slots and retain leases through uncertain start/control/stop. Full16-track shared-sequence capability gate validates explicit clock/stereo/volume and supported sample geometry before output. Bounded caller-workspace dispatch prepares all trigger leases before any injected callback; refusal preserves existing readers and runtime failure blocks replay while retaining unconfirmed readers. A cancellable session retains the same fully checked sequence, selectively pins masters in bounded copy steps, claims exclusive voice ownership and retains pins through failed stop/quiescence. Its editor barrier vetoes edits, imports, undo and disposal until confirmed cleanup. Separate preparation/apply retains candidate leases and supports optional staged song/editor output without cache conversion during apply. A private prepared-master Chip job now converts at most256 output bytes per step and publishes only on completion; staged-song wiring remains pending. | Shared mixed-backend scheduling and native dispatch beyond the one-to-four-track Paula bridge; physical sound/performance acceptance. |
+| Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition and one-to-four-track song playback preserve master precision; song preparation excludes unreferenced masters from both Fast staging and Chip caches. Dedicated arbitrary-track cache and injected four-voice owner preserve stable slots and retain leases through uncertain start/control/stop. Full16-track shared-sequence capability gate validates explicit clock/stereo/volume and supported sample geometry before output. Bounded caller-workspace dispatch prepares all trigger leases before any injected callback; refusal preserves existing readers and runtime failure blocks replay while retaining unconfirmed readers. A cancellable session retains the same fully checked sequence, selectively pins masters in bounded copy steps, claims exclusive voice ownership and retains pins through failed stop/quiescence. Its editor barrier vetoes edits, imports, undo and disposal until confirmed cleanup. Separate preparation/apply retains candidate leases and supports optional staged song/editor output without cache conversion during apply. A private prepared-master Chip job now converts at most256 output bytes per step and publishes only on completion; incremental prepared song/editor staging now uses that job. | Shared mixed-backend scheduling and native dispatch beyond the one-to-four-track Paula bridge; physical sound/performance acceptance. |
 | AmiGUS wavetable copies | Versioned evictable resource pool, sampler revision/master-pin bridge, bounded 16-voice lease owner with validated rate/loop/address plans, mono sequencer trigger/control/stop dispatch, preflight-gated master-pinned sequence ownership, editor veto/retry barriers and injected callbacks, 8/16-bit conversion and bounded address allocator/chunk uploader behind an injected register bus; failure/pinning tests. | Verified card capacity, native bus binding and voice dispatcher; explicit wavetable reservation/cache lifetime now implemented and tested with fake callbacks. Injected register tests do not establish real card access. |
 | Direct24-bit Studio | Master-pinned mixer, audited sequence, sampler/editor ownership, bounded queue/pump and integrated PCM-session owner with capacity-bounded prefill and explicit start acknowledgement; optional reservation lease retained through reset and adapter quiescence. Up to16 voice slots are a software bound. | Native PLAY/output wiring, verified hardware capabilities and sustainable physical voice-count/timing evidence. |
 | Master-preserving persistence | Bounded enhanced-project/sample saving and explicit classic conversion; private EFx exports/bounce never replace masters. Explicit new-file recovery snapshots and staged identity-checked restoration preserve all master precision. | Native opt-in configuration, idle scheduling, bounded retention, read-only discovery, explicit recovery UI and exact save are implemented and emulator-tested; preferences-panel controls, real crash/endurance and physical acceptance remain. |
@@ -3354,8 +3354,8 @@ This private path avoids redundant full PCM validation between steps. Callers
 must validate before preparation and retain immutable arrays/contexts through
 completion/cancel. Allocation/eviction and metadata work are synchronous; no hard
 latency guarantee is claimed. Public arbitrary-source acquisitions retain their
-full validating behavior. The staged dispatcher/song still uses synchronous
-acquisition; wiring this job into that owner is the next integration requirement.
+full validating behavior. Incremental staged song/editor preparation now uses this job as described below;
+public direct preparation and unstaged compatibility calls remain synchronous.
 
 Tests cover8/16/24-bit masters, five steps for an odd1025-frame copy with exact
 padding, no allocation during steps, retained source lifetime after the caller
@@ -3366,3 +3366,43 @@ pass. The exact native Exec cache fixture passes shared030 with zero owned
 allocations; guarded cleanup and independent subsequent locked running/DMA-off/
 owned-path absence checks pass. Evidence is in
 `evidence/enhanced-editor/paula-chip-jobs`. No native audio or physical testing.
+
+## Incremental prepared Paula song/editor staging
+
+The owned session now uses the bounded Chip job during explicit staging. A private
+batch begin validates the whole plan/capability set, copies it and records genuine
+current source pins. Each later step reserves one selected candidate OR packs/
+copies at most256 output bytes OR advances one action. It issues no device
+callbacks. Candidate leases stay unpublished until conversion finishes and all
+addresses are checked before ready. No trigger is emitted while any candidate is
+unfinished. Only candidates/current readers pin derived copies; other cached
+copies remain evictable under the existing budget.
+
+`pt_paula_song_stage` and the editor wrapper return PREPARING until ready. During
+that phase `complete` returns PREPARING without conversion/output; ready staging
+is idempotent and complete applies without acquisition/conversion. Calls that
+omit stage retain synchronous compatibility preparation. Cancellation/stale/error
+releases unstarted candidate jobs/leases before ordinary stop/quiescence cleanup,
+while session/master ownership and unconfirmed readers remain retained.
+
+Private metadata-only current/location checks replace public full PCM validation
+between chunks and during prepared apply. Exact project header (cursor selection
+permitted), routes/map, revision, retained master identity, held voice leases,
+driver/quiescence and published addresses are rechecked. This private path requires
+an already fully validated immutable project and genuine held master pins.
+Public arbitrary-source APIs keep full validation. In-place source writes remain
+forbidden; retained pins and the editor barrier enforce ordinary mutation safety.
+
+Sanitized song/editor/dispatch/cache host fixtures and six selected Amiga C builds
+plus guard pass. Native Exec song/editor/cache fixtures pass shared030, including
+larger1024-frame samples, multi-step conversion with callback-free staging,
+complete refusal during preparation, exact master preservation, cancellation
+while a copy is unpublished and pending reader/quiescence cleanup. Every run
+has zero owned allocations, guarded owned-path cleanup and an independent
+subsequent locked running/all-four-DMA-off/absence check. Evidence is in
+`evidence/enhanced-editor/paula-incremental-stage`.
+
+Allocation/eviction, whole capability traversal and compatibility preparation
+remain synchronous. This does not implement a prepare-ahead clock/deadline
+scheduler, mixed-backend coordination, repeat/segment restoration, native PLAY
+or actual DMA/audio. Physical hardware remains deferred and was not probed.

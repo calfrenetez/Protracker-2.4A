@@ -1,0 +1,17 @@
+{
+  "source_tree": "252ac571233b01dbab963f8e70f092d0180ff834",
+  "cases": {
+    "PTExecPaulaSongTest": {
+      "sha256": "53c584c30991924308c138f1fca968562411ae93db7c25413a391ba8daa96c2c",
+      "bytes": 161568
+    },
+    "PTExecEditorPaulaTest": {
+      "sha256": "a564fafbf20fa564db2364aad75164b2949ea6677a2b948a6b67d02782be8141",
+      "bytes": 201296
+    },
+    "PTExecSamplerPaulaTest": {
+      "sha256": "160caf99ef9a54c0f56a70dad1127d6bc3ad85480fd33eb12eeb6cf5f2ba7cbd",
+      "bytes": 121024
+    }
+  }
+}

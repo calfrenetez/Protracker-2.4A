@@ -24,7 +24,8 @@ static void editor_start(struct pt_editor_paula *o,struct pt_sampler_paula *cach
         assert(n<20 && pt_editor_paula_next(o,&span)==PT_PAULA_SONG_OK);
         while(span.frames){uint32_t block=span.frames>256?256:span.frames;
             assert(pt_editor_paula_consume(o,block)==PT_PAULA_SONG_OK);span.frames-=block;}
-        assert(pt_editor_paula_stage(o)==PT_PAULA_SONG_OK);
+        do{result=pt_editor_paula_stage(o);}while(result==PT_PAULA_SONG_PREPARING);
+        assert(result==PT_PAULA_SONG_OK);
         assert(pt_editor_paula_complete(o)==PT_PAULA_SONG_OK);
     }
 }

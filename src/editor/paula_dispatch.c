@@ -1,16 +1,17 @@
 #include <string.h>
 #include "paula_internal.h"
 #include "project_snapshot.h"
+#include "sampler_internal.h"
 static void release_batch(struct pt_paula_voices *v,struct pt_paula_batch *b)
 {
     unsigned i;for(i=0;i<PT_RENDER_ACTIONS;++i)if(b->entry[i].held) {
         pt_sampler_paula_unpin(v->bridge,b->entry[i].lease);b->entry[i].held=0;
     }
 }
-static int current(struct pt_paula_voices *v,uint64_t version,uint16_t *held,void *owner)
+static int current(struct pt_paula_voices *v,uint64_t version,uint16_t *held,void *owner,unsigned prepared)
 {
     int8_t map[PT_CHANNEL_LIMIT];unsigned i;uint16_t state=0;
-    if(!v || !v->bridge || v->song_owner!=owner || v->closing || !pt_sampler_paula_sync(v->bridge) ||
+    if(!v || !v->bridge || v->song_owner!=owner || v->closing || !(prepared?pt_sampler_paula_prepared_current(v->bridge):pt_sampler_paula_sync(v->bridge)) ||
        v->bridge->version!=version ||
        pt_channels_paula_map(&v->bridge->project->channels,v->map,map)!=PT_CHANNEL_OK ||
        memcmp(map,v->map,sizeof(map)))return 0;
@@ -27,7 +28,7 @@ static int prepare_batch(struct pt_paula_voices *v,uint64_t version,unsigned rat
     struct pt_paula_preflight_report report;struct pt_paula_render_plan r;
     unsigned i,j;uint16_t held;uint16_t period;uint8_t volume;
     const uint8_t *data;size_t bytes;enum pt_cache_result loaded;
-    if(!b || !current(v,version,&held,owner) ||
+    if(!b || !current(v,version,&held,owner,0) ||
        pt_paula_check_plan(v->bridge->project,rate,v->map,p,caps,v->api.control!=NULL,&held,&report)!=PT_PAULA_COMPATIBLE)return 0;
     memset(b,0,sizeof(*b));
     for(i=0;i<p->count;++i) {
@@ -53,20 +54,21 @@ static int prepare_batch(struct pt_paula_voices *v,uint64_t version,unsigned rat
 refused:release_batch(v,b);return 0;
 }
 static int validate_batch(struct pt_paula_voices *v,uint64_t version,unsigned rate,
-    const struct pt_render_plan *p,const struct pt_paula_render_caps *caps,struct pt_paula_batch *b,void *owner)
+    const struct pt_render_plan *p,const struct pt_paula_render_caps *caps,struct pt_paula_batch *b,void *owner,unsigned prepared)
 {
     struct pt_paula_preflight_report report;struct pt_paula_render_plan r;
     unsigned i;uint16_t held;const uint8_t *data;size_t bytes;
     /* Promotion replaces storage inside the same descriptor; revalidate exact
      * source identities, map/revision and every pinned address before output. */
-    if(!current(v,version,&held,owner) ||
+    if(!current(v,version,&held,owner,prepared) ||
        pt_paula_check_plan(v->bridge->project,rate,v->map,p,caps,v->api.control!=NULL,&held,&report)!=PT_PAULA_COMPATIBLE)return 0;
     for(i=0;i<p->count;++i)if(b->entry[i].held) {
         const struct pt_render_action *a=&p->action[i];struct pt_paula_batch_entry *e=&b->entry[i];
         if(a->voice.pcm!=&v->bridge->project->samples[e->sample].pcm ||
            memcmp(a->voice.pcm,&e->source,sizeof(e->source)) ||
            !pt_paula_render_voice(&a->voice,rate,a->gain,(unsigned)v->map[a->channel],caps,&r) ||
-           !pt_sampler_paula_location(v->bridge,a->channel,e->lease,&data,&bytes) ||
+           !(prepared?pt_sampler_paula_prepared_location(v->bridge,a->channel,e->lease,&data,&bytes):
+              pt_sampler_paula_location(v->bridge,a->channel,e->lease,&data,&bytes)) ||
            ((uintptr_t)data&1) || (uint64_t)r.offset+r.length>bytes ||
            e->plan.data!=data+r.offset || e->plan.words!=r.length/2 ||
            e->plan.period!=r.period || e->plan.volume!=r.volume)return 0;
@@ -108,7 +110,7 @@ int pt_paula_dispatch_owned(struct pt_paula_voices *v,uint64_t version,unsigned 
     const struct pt_render_plan *p,const struct pt_paula_render_caps *caps,struct pt_paula_batch *b,void *owner)
 {
     if(!prepare_batch(v,version,rate,p,caps,b,owner))return 0;
-    if(!validate_batch(v,version,rate,p,caps,b,owner)){release_batch(v,b);return 0;}
+    if(!validate_batch(v,version,rate,p,caps,b,owner,0)){release_batch(v,b);return 0;}
     return apply_batch(v,p,b,owner);
 }
 
@@ -135,21 +137,22 @@ static int voices_unchanged(struct pt_paula_prepared *p)
 void pt_paula_cancel(struct pt_paula_prepared *p)
 {
     struct pt_paula_voices original;unsigned i;
-    if(!p || !p->ready)return;
+    if(!p || (!p->ready && !p->preparing))return;
+    pt_sampler_paula_job_cancel(&p->job);
     /* Release only unstarted candidates against the captured bridge. */
     memset(&original,0,sizeof(original));original.bridge=p->bridge;
     release_batch(&original,&p->batch);
     if(p->claims && p->voices->song_owner==p)p->voices->song_owner=NULL;
-    p->ready=0;p->voices=NULL;p->bridge=NULL;
+    p->ready=p->preparing=0;p->voices=NULL;p->bridge=NULL;
     for(i=0;i<PT_PAULA_VOICES;++i)p->voice[i].held=0;
 }
 int pt_paula_prepare_owned(struct pt_paula_prepared *p,struct pt_paula_voices *v,
     uint64_t version,unsigned rate,const struct pt_render_plan *plan,
     const struct pt_paula_render_caps *caps,void *owner)
 {
-    if(!p || p->ready || !plan || !caps ||
+    if(!p || p->ready || p->preparing || !plan || !caps ||
        !prepare_batch(v,version,rate,plan,caps,&p->batch,owner))return 0;
-    if(!validate_batch(v,version,rate,plan,caps,&p->batch,owner)) {
+    if(!validate_batch(v,version,rate,plan,caps,&p->batch,owner,0)) {
         release_batch(v,&p->batch);return 0;
     }
     p->voices=v;p->bridge=v->bridge;p->project=v->bridge->project;
@@ -157,19 +160,83 @@ int pt_paula_prepare_owned(struct pt_paula_prepared *p,struct pt_paula_voices *v
     p->plan=*plan;p->caps=*caps;p->api=v->api;
     p->quiesce=v->quiesce;p->quiesce_context=v->quiesce_context;
     memcpy(p->voice,v->voice,sizeof(p->voice));memcpy(p->map,v->map,sizeof(p->map));
-    p->owner=owner;p->claims=owner==NULL;p->ready=1;
+    p->owner=owner;p->claims=owner==NULL;p->incremental=0;p->ready=1;
     if(p->claims){v->song_owner=p;p->owner=p;}
     return 1;
 }
 int pt_paula_prepare(struct pt_paula_prepared *p,struct pt_paula_voices *v,
     uint64_t version,unsigned rate,const struct pt_render_plan *plan,const struct pt_paula_render_caps *caps)
 {return pt_paula_prepare_owned(p,v,version,rate,plan,caps,NULL);}
+static int prepared_sources(struct pt_paula_prepared *p);
 int pt_paula_apply(struct pt_paula_prepared *p)
 {
     int result;
     if(!p || !p->ready)return 0;
-    if(!voices_unchanged(p) || !validate_batch(p->voices,p->version,p->rate,
-       &p->plan,&p->caps,&p->batch,p->owner)){pt_paula_cancel(p);return 0;}
+    if(!voices_unchanged(p) || (p->incremental && !prepared_sources(p)) || !validate_batch(p->voices,p->version,p->rate,
+       &p->plan,&p->caps,&p->batch,p->owner,p->incremental)){pt_paula_cancel(p);return 0;}
     result=apply_batch(p->voices,&p->plan,&p->batch,p->owner);
     pt_paula_cancel(p);return result;
+}
+
+static int prepared_sources(struct pt_paula_prepared *p)
+{
+    unsigned i;struct pt_pcm pcm;struct pt_sample_version *pin;
+    for(i=0;i<p->plan.count;++i)if(p->master[i]) {
+        if(pt_sampler_pin_current(p->bridge->sampler,p->project,p->batch.entry[i].sample,
+           p->bridge->generation,p->master[i],&pcm,&pin)!=PT_EDIT_OK)return 0;
+        pt_sampler_unpin(pin);
+    }
+    return 1;
+}
+int pt_paula_prepare_begin_owned(struct pt_paula_prepared *p,struct pt_paula_voices *v,
+    uint64_t version,unsigned rate,const struct pt_render_plan *plan,
+    const struct pt_paula_render_caps *caps,struct pt_sample_version *const *pins,void *owner)
+{
+    struct pt_paula_preflight_report report;unsigned i,j;uint16_t held;
+    if(!p || p->ready || p->preparing || !owner || !pins || !plan || !caps ||
+       !current(v,version,&held,owner,1) ||
+       pt_paula_check_plan(v->bridge->project,rate,v->map,plan,caps,v->api.control!=NULL,&held,&report)!=PT_PAULA_COMPATIBLE)return 0;
+    memset(p,0,sizeof(*p));p->voices=v;p->bridge=v->bridge;p->project=v->bridge->project;
+    memcpy(&p->header,p->project,sizeof(p->header));p->version=version;p->rate=rate;
+    p->plan=*plan;p->caps=*caps;p->api=v->api;p->owner=owner;p->incremental=p->preparing=1;
+    p->quiesce=v->quiesce;p->quiesce_context=v->quiesce_context;
+    memcpy(p->voice,v->voice,sizeof(p->voice));memcpy(p->map,v->map,sizeof(p->map));
+    for(i=0;i<plan->count;++i)if(plan->action[i].kind==PT_RENDER_TRIGGER && v->map[plan->action[i].channel]>=0) {
+        for(j=0;j<p->project->sample_count;++j)if(plan->action[i].voice.pcm==&p->project->samples[j].pcm)break;
+        if(j==p->project->sample_count || !pins[j]){pt_paula_cancel(p);return 0;}
+        p->master[i]=pins[j];p->batch.entry[i].sample=j;
+        memcpy(&p->batch.entry[i].source,plan->action[i].voice.pcm,sizeof(struct pt_pcm));
+    }
+    if(!prepared_sources(p)){pt_paula_cancel(p);return 0;}
+    return 1;
+}
+enum pt_cache_result pt_paula_prepare_step_owned(struct pt_paula_prepared *p)
+{
+    uint16_t held;enum pt_cache_result result;struct pt_paula_batch_entry *e;
+    const struct pt_render_action *a;struct pt_paula_render_plan r;
+    const uint8_t *data;size_t bytes;int slot;
+    if(!p || !p->preparing)return PT_CACHE_INVALID;
+    if(!voices_unchanged(p) || !current(p->voices,p->version,&held,p->owner,1) || !prepared_sources(p))goto refused;
+    if(p->index==p->plan.count) {
+        if(!validate_batch(p->voices,p->version,p->rate,&p->plan,&p->caps,&p->batch,p->owner,1))goto refused;
+        p->preparing=0;p->ready=1;return PT_CACHE_LOAD;
+    }
+    a=&p->plan.action[p->index];e=&p->batch.entry[p->index];slot=p->map[a->channel];
+    if(slot<0){++p->index;return PT_CACHE_PENDING;}
+    if(a->kind!=PT_RENDER_TRIGGER) {
+        if(a->kind==PT_RENDER_CONTROL && !pt_paula_render_control(a->voice.step,p->rate,a->gain,
+           (unsigned)slot,&p->caps,&e->plan.period,&e->plan.volume))goto refused;
+        ++p->index;return PT_CACHE_PENDING;
+    }
+    if(p->job.owner)result=pt_sampler_paula_job_step(&p->job,&e->lease);
+    else result=pt_sampler_paula_job_begin(&p->job,p->bridge,a->channel,e->sample,0,p->master[p->index],&e->lease);
+    if(result==PT_CACHE_PENDING)return result;
+    if(result!=PT_CACHE_HIT && result!=PT_CACHE_LOAD)goto refused;
+    e->held=1;
+    if(!pt_paula_render_voice(&a->voice,p->rate,a->gain,(unsigned)slot,&p->caps,&r) ||
+       !pt_sampler_paula_prepared_location(p->bridge,a->channel,e->lease,&data,&bytes) ||
+       ((uintptr_t)data&1) || (uint64_t)r.offset+r.length>bytes)goto refused;
+    e->plan.data=data+r.offset;e->plan.words=(uint16_t)(r.length/2);e->plan.period=r.period;e->plan.volume=r.volume;
+    ++p->index;return PT_CACHE_PENDING;
+refused:pt_paula_cancel(p);return PT_CACHE_INVALID;
 }

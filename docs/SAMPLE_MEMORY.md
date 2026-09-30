@@ -14,7 +14,7 @@ software implementation from the remaining integration and hardware gates.
 | Requirement | Implemented software | Still required |
 | --- | --- | --- |
 | Authoritative8/16/24-bit masters | Queried, bounded native Fast-RAM pool; precision-preserving sampler versions, processing, history and source pins. Fast-equipped machines fail rather than spill enhanced allocations into Chip RAM. | Physical memory-pressure/endurance measurements. |
-| Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition and one-to-four-track song playback preserve master precision; song preparation excludes unreferenced masters from both Fast staging and Chip caches. Dedicated arbitrary-track cache and injected four-voice owner preserve stable slots and retain leases through uncertain start/control/stop. Full16-track shared-sequence capability gate validates explicit clock/stereo/volume and supported sample geometry before output. Bounded caller-workspace dispatch prepares all trigger leases before any injected callback; refusal preserves existing readers and runtime failure blocks replay while retaining unconfirmed readers. A cancellable session retains the same fully checked sequence, selectively pins masters in bounded copy steps, claims exclusive voice ownership and retains pins through failed stop/quiescence. | Editor mutation/disposal barrier for the new session, shared mixed-backend scheduling and native dispatch beyond the one-to-four-track Paula bridge; physical sound/performance acceptance. |
+| Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition and one-to-four-track song playback preserve master precision; song preparation excludes unreferenced masters from both Fast staging and Chip caches. Dedicated arbitrary-track cache and injected four-voice owner preserve stable slots and retain leases through uncertain start/control/stop. Full16-track shared-sequence capability gate validates explicit clock/stereo/volume and supported sample geometry before output. Bounded caller-workspace dispatch prepares all trigger leases before any injected callback; refusal preserves existing readers and runtime failure blocks replay while retaining unconfirmed readers. A cancellable session retains the same fully checked sequence, selectively pins masters in bounded copy steps, claims exclusive voice ownership and retains pins through failed stop/quiescence. Its editor barrier vetoes edits, imports, undo and disposal until confirmed cleanup. | Shared mixed-backend scheduling and native dispatch beyond the one-to-four-track Paula bridge; physical sound/performance acceptance. |
 | AmiGUS wavetable copies | Versioned evictable resource pool, sampler revision/master-pin bridge, bounded 16-voice lease owner with validated rate/loop/address plans, mono sequencer trigger/control/stop dispatch, preflight-gated master-pinned sequence ownership, editor veto/retry barriers and injected callbacks, 8/16-bit conversion and bounded address allocator/chunk uploader behind an injected register bus; failure/pinning tests. | Verified card capacity, native bus binding and voice dispatcher; explicit wavetable reservation/cache lifetime now implemented and tested with fake callbacks. Injected register tests do not establish real card access. |
 | Direct24-bit Studio | Master-pinned mixer, audited sequence, sampler/editor ownership, bounded queue/pump and integrated PCM-session owner with capacity-bounded prefill and explicit start acknowledgement; optional reservation lease retained through reset and adapter quiescence. Up to16 voice slots are a software bound. | Native PLAY/output wiring, verified hardware capabilities and sustainable physical voice-count/timing evidence. |
 | Master-preserving persistence | Bounded enhanced-project/sample saving and explicit classic conversion; private EFx exports/bounce never replace masters. Explicit new-file recovery snapshots and staged identity-checked restoration preserve all master precision. | Native opt-in configuration, idle scheduling, bounded retention, read-only discovery, explicit recovery UI and exact save are implemented and emulator-tested; preferences-panel controls, real crash/endurance and physical acceptance remain. |
@@ -3257,8 +3257,9 @@ and dispatch calls. Each advancement checks sampler generation, borrowed project
 header, voice/bridge/API/map identities and exact retained master versions.
 Channel selection is a permitted UI cursor change. Patterns/orders/sample arrays
 must remain immutable; header guards cannot detect arbitrary in-place writes.
-An editor barrier must close this session before any edit, undo, replacement or
-disposal; that binding remains unfinished.
+The editor binding described below closes this session before edits, undo,
+replacement or disposal through the existing mutation barrier. External callers
+must also use that barrier before changing borrowed arrays.
 
 Runtime failure discards the sequence, blocks repeated output and requests only
 bounded stops. Confirmed per-slot stops and adapter quiescence precede release
@@ -3273,3 +3274,28 @@ capability failure before pins, memory refusal, stale settings, uncertain start,
 partial preparation cancellation and retained ownership through failed cleanup.
 This is software ownership evidence; native PLAY/device/timer/mixed-backend and
 physical sound/performance acceptance remain separate.
+
+## Editor ownership barrier for Paula
+
+`editor_paula` attaches the owned shared-sequence session to the existing editor
+change barrier. Attachment refuses another installed barrier; begin requires the
+same editor sampler and project as the voice bridge. Each edit/import/undo or
+external replacement/disposal preparation requests session close first. Pending
+reader stops or unconfirmed adapter quiescence veto the mutation while retaining
+the session, master pins, cache leases and unpublished preparation jobs. A later
+confirmed close permits the ordinary transaction. Failed detach retains the
+binding; callers must detach before freeing or reinitializing its editor/context.
+
+The fixture covers8/16/24-bit masters, exact serialized project preservation,
+reverse/undo/redo, raw import veto, external replacement/disposal preparation,
+conflicting attachment, pending stops, rejected quiescence and cancellation of
+an unpublished promotion. Host sanitized tests and selected Amiga builds pass.
+The exact native Exec fixture passed on shared030 with81 Fast allocations,
+zero owned bytes and actual Chip allocations. Guarded owned-file cleanup and
+independent subsequent locked running/all-four-DMA-off checks pass; evidence is
+in `evidence/enhanced-editor/editor-paula-ownership`.
+
+This is an injected software ownership binding. It does not wire native PLAY,
+DMA, timers, output or UI. Initial capability traversal and cache conversion are
+still synchronous; prepare-ahead timing, exact repeat/segment leases and shared
+mixed-backend scheduling remain unfinished. Physical hardware was not probed.

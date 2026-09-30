@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "seconds": 14.726990833005402,
+  "window_bound_seconds": 200,
+  "cases": [
+    {
+      "case": "editor",
+      "binary": "PTExecEditorPaulaTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/editor-paula-candidate/build/dev/render-files-1790777848685108000",
+      "sha256": "2184bada0659e94c67a73ba73deb88167c1b6f02d470e2becf462256944551e5",
+      "independent_cleanup": true
+    }
+  ]
+}

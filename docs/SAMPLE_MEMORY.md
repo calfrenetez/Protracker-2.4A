@@ -117,6 +117,21 @@ establish reliable cadence or actual output; strict late refusal remains. Eviden
 `evidence/enhanced-editor/mixed-validation-cost/`. Host/build, emulator and physical
 acceptance remain separate tiers.
 
+A running-cost fixture extends the mixed8/16/24-bit regression to complete2/16voice
+songs with a sample change, global tempo change and end boundary. Each preparation
+call permits at most one Chip allocation OR a256-byte upload (128 fake bus writes),
+with no Fast allocation or voice output. After preparation,128-frame live services
+and exact trigger/control/end commits allocate/upload nothing. Trigger-first then
+ascending controls, full measured frame duration and terminal DONE are asserted.
+Native duration observations still use injected logical clocks/voices and do not
+qualify actual event-loop cadence or output. Host195 ASan/UBSan and separate
+native6 complete-song cases pass. Measured16voice128-frame services take about
+18..38ms in this instrumented emulator run, exceeding their2.667ms logical span;
+preparation includes up to63ms observations. This does not establish actual-time
+playback feasibility. Both consume and lookahead use frame-by-frame voice advance;
+exact bulk advance remains the next optimization to investigate. Evidence:
+`evidence/enhanced-editor/mixed-running-cost/`.
+
 AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software
 fixtures, plus an absent-library discovery check. Those results do not establish
 positive card access, real MMIO, streaming output or physical acceptance. Native

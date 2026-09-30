@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../src/editor/sampler_paula.h"
+#include "../src/editor/sampler_paula_internal.h"
 static size_t fast_live,fast_calls,fast_fail,chip_live,chip_calls;
 static unsigned chip_fail;
 static void *fast_alloc(void *c,size_t n)
@@ -104,8 +105,81 @@ static void fixture(unsigned bits)
     pt_pattern_history_release(&history);pt_sampler_release(&sampler);pt_document_release(&d);
     assert(!fast_live && !chip_live && !sampler.bytes);
 }
+static void chunk_fixture(unsigned bits)
+{
+    struct pt_allocator a={NULL,fast_alloc,fast_free};struct pt_document d;struct pt_sampler sampler;
+    struct pt_sampler_paula owner={0};struct pt_sampler_paula_job job={0};
+    struct pt_sample_version *pin0,*pin1;struct pt_pcm pcm;struct pt_playback_format format={8,0,0,1};
+    struct pt_cache_lease lease={99,99},old,hit;const uint8_t *data,*old_data;size_t bytes,offset,fast,chip;
+    struct pt_pattern_history history;struct pt_pattern_command commands[4];struct pt_event_change changes[4];
+    int32_t *source=malloc(1025*sizeof(*source));uint8_t gold[1026];unsigned i,n;enum pt_cache_result result;
+    assert(source);for(i=0;i<1025;++i)source[i]=(int32_t)(i%255)-127;
+    pt_document_init(&d,&a);assert(pt_document_new(&d,16,SIZE_MAX)==PT_PROJECT_OK);
+    for(i=0;i<16;++i)d.project.channels.track[i].route=PT_AMIGUS;
+    d.project.channels.track[4].route=PT_PAULA;
+    d.project.samples[0].pcm=d.project.samples[1].pcm=(struct pt_pcm){source,1025,1025,8000,1,(uint8_t)bits};
+    assert(pt_project_validate(&d.project,NULL)==PT_PROJECT_OK);
+    pt_sampler_init(&sampler,&a,1024*1024);
+    assert(pt_pattern_history_init(&history,&d.project,commands,4,changes,4)==PT_EDIT_OK);
+    assert(pt_sampler_paula_bind(&owner,&sampler,&d.project,NULL,chip_alloc,chip_free,2052));
+    assert(pt_sampler_pin(&sampler,&d.project,0,sampler.generation,&pcm,&pin0)==PT_EDIT_OK);
+    assert(pt_playback_pcm_pack(&pcm,&format,gold,sizeof(gold))==PT_PCM_OK);
+    fast=fast_calls;chip=chip_calls;
+    assert(pt_sampler_paula_job_begin(&job,&owner,4,0,0,NULL,&lease)==PT_CACHE_INVALID && lease.slot==99);
+    assert(pt_sampler_paula_job_begin(&job,&owner,4,0,1,pin0,&lease)==PT_CACHE_INVALID && !job.owner && lease.slot==99);
+    assert(fast_calls==fast && chip_calls==chip);
+    assert(pt_sampler_paula_job_begin(&job,&owner,4,0,0,pin0,&lease)==PT_CACHE_PENDING);
+    assert(job.owner && !job.upload.offset && owner.cache.bytes==1026 && fast_calls==fast && lease.slot==99);
+    data=NULL;bytes=17;
+    assert(!pt_sampler_paula_location(&owner,4,job.upload.lease,&data,&bytes) && !data && bytes==17);
+    assert(pt_sampler_paula_acquire(&owner,4,0,0,&lease)==PT_CACHE_BUSY && lease.slot==99);
+    assert(pt_sampler_paula_job_begin(&job,&owner,4,0,0,pin0,&lease)==PT_CACHE_INVALID);
+    /* Job retains its own master reference after caller drops its pin. */
+    pt_sampler_unpin(pin0);pin0=NULL;fast=fast_calls;chip=chip_calls;n=0;
+    do {
+        offset=job.upload.offset;d.project.channels.selected=15;
+        result=pt_sampler_paula_job_step(&job,&lease);assert(++n<=5);
+        assert(fast_calls==fast && chip_calls==chip);
+        if(result==PT_CACHE_PENDING){assert(job.upload.offset-offset==256 && lease.slot==99);}
+    }while(result==PT_CACHE_PENDING);
+    assert(result==PT_CACHE_LOAD && n==5 && !job.owner);
+    old=lease;assert(pt_sampler_paula_location(&owner,4,old,&old_data,&bytes) && bytes==sizeof(gold));
+    assert(!memcmp(old_data,gold,sizeof(gold)) && old_data[1025]==0);
+    assert(pt_sampler_pin(&sampler,&d.project,0,sampler.generation,&pcm,&pin0)==PT_EDIT_OK);
+    assert(pt_sampler_paula_job_begin(&job,&owner,4,0,0,pin0,&hit)==PT_CACHE_HIT && !job.owner);
+    assert(hit.slot==old.slot && hit.serial==old.serial && pt_sampler_paula_unpin(&owner,hit));
+    /* A second unpublished representation is cancelled without touching reader0. */
+    assert(pt_sampler_pin(&sampler,&d.project,1,sampler.generation,&pcm,&pin1)==PT_EDIT_OK);
+    lease=(struct pt_cache_lease){99,99};
+    assert(pt_sampler_paula_job_begin(&job,&owner,4,1,0,pin1,&lease)==PT_CACHE_PENDING);
+    assert(pt_sampler_paula_job_step(&job,&lease)==PT_CACHE_PENDING && chip_live==2052);
+    pt_sampler_paula_job_cancel(&job);pt_sampler_paula_job_cancel(&job);
+    assert(chip_live==1026 && lease.slot==99 && !memcmp(old_data,gold,sizeof(gold)));
+    /* Descriptor edits and sampler generation changes cancel before publication. */
+    assert(pt_sampler_paula_job_begin(&job,&owner,4,1,0,pin1,&lease)==PT_CACHE_PENDING);
+    d.project.samples[1].pcm.rate=8001;
+    assert(pt_sampler_paula_job_step(&job,&lease)==PT_CACHE_INVALID && !job.owner && lease.slot==99);
+    d.project.samples[1].pcm.rate=8000;assert(chip_live==1026);
+    assert(pt_sampler_paula_job_begin(&job,&owner,4,1,0,pin1,&lease)==PT_CACHE_PENDING);
+    assert(pt_sampler_edit(&sampler,&d.project,&history,0,PT_PCM_REVERSE,0,1025,0)==PT_EDIT_OK);
+    assert(pt_sampler_paula_job_step(&job,&lease)==PT_CACHE_INVALID && !job.owner && chip_live==1026);
+    assert(!memcmp(old_data,gold,sizeof(gold)));
+    assert(!pt_sampler_paula_location(&owner,4,old,&data,&bytes));
+    /* Allocation/budget refusal does not release the existing reader. */
+    owner.cache.budget=1026;
+    assert(pt_sampler_paula_job_begin(&job,&owner,4,1,0,pin1,&lease)==PT_CACHE_CAPACITY && !job.owner && lease.slot==99);
+    assert(chip_live==1026);owner.cache.budget=2052;
+    assert(pt_sampler_paula_job_begin(&job,&owner,4,1,0,pin1,&lease)==PT_CACHE_PENDING);
+    assert(!pt_sampler_paula_close(&owner));
+    assert(pt_sampler_paula_job_step(&job,&lease)==PT_CACHE_INVALID && !job.owner && chip_live==1026);
+    assert(pt_sampler_paula_unpin(&owner,old) && !chip_live && pt_sampler_paula_close(&owner));
+    pt_sampler_unpin(pin0);pt_sampler_unpin(pin1);
+    pt_pattern_history_release(&history);pt_sampler_release(&sampler);pt_document_release(&d);free(source);
+    assert(!fast_live && !chip_live);
+}
 int main(void)
 {
-    fixture(8);fixture(16);fixture(24);
+    fixture(8);fixture(16);fixture(24);chunk_fixture(8);chunk_fixture(16);chunk_fixture(24);
+    puts("PAULA CHIP JOB PASS: bounded256-byte conversion, unpublished leases, exact master pins, cancellation and stale/pressure/close refusal");
     puts("SAMPLER PAULA PASS: selected routed8-bit copies, explicit stereo side, odd padding, master preservation, revisions/undo/routes, pressure eviction and retained active leases; no DMA or mixed-backend playback");return 0;
 }

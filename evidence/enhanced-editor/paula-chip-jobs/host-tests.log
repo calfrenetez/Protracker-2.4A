@@ -1,0 +1,11 @@
+PAULA CHIP JOB PASS: bounded256-byte conversion, unpublished leases, exact master pins, cancellation and stale/pressure/close refusal
+SAMPLER PAULA PASS: selected routed8-bit copies, explicit stereo side, odd padding, master preservation, revisions/undo/routes, pressure eviction and retained active leases; no DMA or mixed-backend playback
+.PLAYBACK PCM PASS: true24 master preservation, signed rounding/clipping, 8/16 bit endian/channel/padding, coexistence, revision invalidation and refusal
+.Paula prepared batch ownership OK
+.PAULA SONG PASS: shared sequence, selected master pins, late refusal and retained cleanup
+.EDITOR PAULA PASS: edits, imports, undo, replacement and disposal wait for reader stops and quiescence
+.
+----------------------------------------------------------------------
+Ran 5 tests in 24.951s
+
+OK

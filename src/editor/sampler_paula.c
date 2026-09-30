@@ -61,3 +61,66 @@ int pt_sampler_paula_close(struct pt_sampler_paula *s)
     if(!pt_cache_clear(&s->cache))return 0;
     memset(s,0,sizeof(*s));return 1;
 }
+
+#include "sampler_paula_internal.h"
+#include "sampler_internal.h"
+#include "project_snapshot.h"
+#include "../core/playback_internal.h"
+static int prepared_bridge(struct pt_sampler_paula *s)
+{
+    unsigned i;
+    if(!s || !s->sampler || !s->project || s->closing || !s->version ||
+       s->generation!=s->sampler->generation || s->table!=s->project->samples ||
+       s->count!=s->project->sample_count || !s->count || s->count>PT_PROJECT_SAMPLES ||
+       s->channels!=s->project->channels.count || pt_channels_validate(&s->project->channels)!=PT_CHANNEL_OK)return 0;
+    for(i=0;i<PT_CHANNEL_LIMIT;++i)if(s->routes[i]!=s->project->channels.track[i].route)return 0;
+    return 1;
+}
+void pt_sampler_paula_job_cancel(struct pt_sampler_paula_job *j)
+{
+    if(!j)return;
+    pt_playback_upload_cancel(&j->upload);pt_sampler_unpin(j->pin);memset(j,0,sizeof(*j));
+}
+static int copy_chip(void *context,void *resource,size_t offset,const uint8_t *data,size_t bytes)
+{
+    (void)context;memcpy((uint8_t *)resource+offset,data,bytes);return 1;
+}
+enum pt_cache_result pt_sampler_paula_job_begin(struct pt_sampler_paula_job *j,
+    struct pt_sampler_paula *s,unsigned track,unsigned sample,unsigned source_channel,
+    struct pt_sample_version *expected,struct pt_cache_lease *out)
+{
+    struct pt_playback_format format={8,source_channel,0,1};struct pt_cache_lease lease;
+    struct pt_pcm pcm;struct pt_sample_version *pin;enum pt_cache_result result;
+    if(!j || j->owner || !out || !prepared_bridge(s) || !routed(s,track) || sample>=s->count ||
+       pt_sampler_pin_current(s->sampler,s->project,sample,s->generation,expected,&pcm,&pin)!=PT_EDIT_OK)return PT_CACHE_INVALID;
+    memset(j,0,sizeof(*j));j->owner=s;j->sampler=s->sampler;j->project=s->project;
+    memcpy(&j->header,s->project,sizeof(j->header));j->pin=pin;j->pcm=pcm;
+    j->version=s->version;j->generation=s->generation;j->track=track;j->sample=sample;
+    result=pt_playback_upload_begin_prepared(&j->upload,&s->cache,&j->pcm,sample+1,s->version,
+        &format,NULL,copy_chip,&lease);
+    if(result==PT_CACHE_PENDING) {
+        if((uintptr_t)pt_cache_data(&s->cache,j->upload.lease)&1){pt_sampler_paula_job_cancel(j);return PT_CACHE_INVALID;}
+        return result;
+    }
+    if(result==PT_CACHE_HIT) {
+        if((uintptr_t)pt_cache_data(&s->cache,lease)&1){pt_cache_unpin(&s->cache,lease);result=PT_CACHE_INVALID;}
+        else *out=lease;
+    }
+    pt_sampler_paula_job_cancel(j);return result;
+}
+enum pt_cache_result pt_sampler_paula_job_step(struct pt_sampler_paula_job *j,struct pt_cache_lease *out)
+{
+    struct pt_pcm pcm;struct pt_sample_version *pin;enum pt_cache_result result;
+    if(!j || !j->owner)return PT_CACHE_INVALID;
+    j->header.channels.selected=j->project->channels.selected;
+    if(!out || !prepared_bridge(j->owner) || j->owner->sampler!=j->sampler ||
+       j->owner->project!=j->project || j->owner->version!=j->version ||
+       !pt_project_snapshot_equal(j->project,&j->header) ||
+       pt_sampler_pin_current(j->sampler,j->project,j->sample,j->generation,j->pin,&pcm,&pin)!=PT_EDIT_OK) {
+        pt_sampler_paula_job_cancel(j);return PT_CACHE_INVALID;
+    }
+    pt_sampler_unpin(pin);
+    result=pt_playback_upload_step(&j->upload,j->staging,sizeof(j->staging),out);
+    if(result!=PT_CACHE_PENDING)pt_sampler_paula_job_cancel(j);
+    return result;
+}

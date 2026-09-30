@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "seconds": 5.11230350000551,
+  "window_bound_seconds": 200,
+  "cases": [
+    {
+      "case": "cache",
+      "binary": "PTExecSamplerPaulaTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-chunks-candidate/build/dev/render-files-1790779715949117000",
+      "sha256": "ddb28df00d8589787c24d8e4612d07e33ef38a2ec82caa7ec1a1317794d4984c",
+      "independent_cleanup": true
+    }
+  ]
+}

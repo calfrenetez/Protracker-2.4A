@@ -4,7 +4,7 @@
 #include <limits.h>
 #include <string.h>
 static int source_current(struct pt_wavetable_voices *v,const struct pt_wavetable_prepared *p)
-{return p?p->current && p->acquire && p->location && p->current(p->context):pt_sampler_wavetable_sync(v->bridge);}
+{return p?v->song_owner==p->context && p->current && p->acquire && p->location && p->current(p->context):!v->song_owner && pt_sampler_wavetable_sync(v->bridge);}
 static enum pt_cache_result source_acquire(struct pt_wavetable_voices *v,const struct pt_wavetable_prepared *p,
     unsigned slot,const struct pt_playback_format *f,uint8_t *staging,size_t capacity,struct pt_cache_lease *lease)
 {return p?p->acquire(p->context,slot,f,staging,capacity,lease):pt_sampler_wavetable_acquire(v->bridge,slot,f,staging,capacity,lease);}
@@ -39,7 +39,7 @@ static int trigger(struct pt_wavetable_voices *v,const struct pt_render_action *
     if(!source_location(v,sources,lease,&address,&bytes) ||
        !(sources?sources->trigger_plan && sources->trigger_plan(sources->context,a,rate,f,address,bytes,&p):
             pt_amigus_render_voice(&a->voice,rate,a->gain,f,address,bytes,&p)) ||
-       pt_wavetable_voices_stop(v,a->channel)!=1) {
+       pt_wavetable_stop_owned(v,a->channel,sources?sources->context:NULL)!=1) {
         pt_sampler_wavetable_unpin(v->bridge,lease);return 0;
     }
     if(!source_location(v,sources,lease,&address,&bytes)) {
@@ -251,10 +251,10 @@ static int dispatch(struct pt_wavetable_voices *v,uint64_t version,unsigned rate
         const struct pt_render_action *a=plan->action+i;int ok;
         if(a->kind==PT_RENDER_TRIGGER)ok=trigger(v,a,rate,format,staging,capacity,sources);
         else if(a->kind==PT_RENDER_CONTROL)ok=control(v,a,rate,sources);
-        else ok=pt_wavetable_voices_stop(v,a->channel)==1;
+        else ok=pt_wavetable_stop_owned(v,a->channel,sources?sources->context:NULL)==1;
         if(!ok) {
             unsigned ch;v->closing=1;
-            for(ch=0;ch<PT_WAVETABLE_VOICES;++ch)pt_wavetable_voices_stop(v,ch);
+            for(ch=0;ch<PT_WAVETABLE_VOICES;++ch)pt_wavetable_stop_owned(v,ch,sources?sources->context:NULL);
             return -1;
         }
     }
@@ -295,7 +295,7 @@ static int restore_dispatch(struct pt_wavetable_voices *v,uint64_t version,unsig
 failed:
     v->closing=1;
     for(ch=0;ch<16;++ch)if(held[ch])pt_sampler_wavetable_unpin(v->bridge,lease[ch]);
-    for(ch=0;ch<16;++ch)pt_wavetable_voices_stop(v,ch);
+    for(ch=0;ch<16;++ch)pt_wavetable_stop_owned(v,ch,sources?sources->context:NULL);
     return -1;
 refused:
     for(ch=0;ch<16;++ch)if(held[ch])pt_sampler_wavetable_unpin(v->bridge,lease[ch]);

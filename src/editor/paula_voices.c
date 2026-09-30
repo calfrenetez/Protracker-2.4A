@@ -98,7 +98,7 @@ int pt_paula_stop_owned(struct pt_paula_voices *v,unsigned track,void *owner)
     slot=v->map[track];if(slot<0)return 1;
     return stop_slot(v,(unsigned)slot);
 }
-int pt_paula_close_owned(struct pt_paula_voices *v,void *owner)
+int pt_paula_drain_owned(struct pt_paula_voices *v,void *owner)
 {
     unsigned i;int complete=1;
     if(!v || v->song_owner!=owner)return 0;
@@ -106,6 +106,12 @@ int pt_paula_close_owned(struct pt_paula_voices *v,void *owner)
     v->closing=1;
     for(i=0;i<PT_PAULA_VOICES;++i)if(stop_slot(v,i)!=1)complete=0;
     if(!complete || (v->quiesce && v->quiesce(v->quiesce_context)!=1))return 0;
+    return 1;
+}
+int pt_paula_close_owned(struct pt_paula_voices *v,void *owner)
+{
+    if(!pt_paula_drain_owned(v,owner))return 0;
+    if(!v->bridge)return 1;
     if(!pt_sampler_paula_close(v->bridge))return 0;
     memset(v,0,sizeof(*v));return 1;
 }

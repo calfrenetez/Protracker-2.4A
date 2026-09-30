@@ -30,9 +30,16 @@ commands from unselected tracks still govern both backends. This silent gate use
 two bounded allocations and does not create playback caches, pin masters, call
 hardware or mix PCM. Initial support is whole-song 44.1/48 kHz; selected MIDI tracks
 and range restoration refuse. The synchronous gate remains outside the playback
-deadline. A combined master owner, coordinated prepared cache batches and one live
-scheduler are still required before mixed playback; two independent song engines
-are not a substitute. Cache capacity and physical timing remain separate gates.
+deadline. The combined master owner (`mixed_owner.h/c`) now claims both idle engines and
+retains this one sequence. It promotes/pins the union of used sources, once per
+slot, in bounded 4096-byte steps; unused samples remain unpromoted. Cancellation,
+late refusal, stale inputs and uncertain readers preserve ownership until both
+stop/quiescence barriers confirm. Public AmiGUS voice/dispatch/stop/close calls now
+respect the exclusive token, matching Paula. Close leaves engines bound and
+blocked for separate close/rebind, retaining contexts until confirmed safe. This
+preparation owner creates no derived copies and starts no voices. Coordinated
+prepared cache batches and one live scheduler are still required; two independent
+song engines are not a substitute. Cache capacity and physical timing remain separate gates.
 
 AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software
 fixtures, plus an absent-library discovery check. Those results do not establish

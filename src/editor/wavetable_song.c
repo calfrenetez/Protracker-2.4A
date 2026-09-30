@@ -54,12 +54,12 @@ static int stop(struct pt_wavetable_song *s)
     if(!s->ready) {
         /* A bound adapter may retain contexts even before the first voice.
          * Keep the preparation owner/master pins until its barrier completes. */
-        if(s->voices->quiesce && !pt_wavetable_voices_close(s->voices))return 0;
+        if(s->voices->quiesce && !pt_wavetable_close_owned(s->voices,s))return 0;
         release_sources(s);
         if(s->voices->song_owner==s)s->voices->song_owner=NULL;
         s->done=1;return 1;
     }
-    if(!pt_wavetable_voices_close(s->voices))return 0;
+    if(!pt_wavetable_close_owned(s->voices,s))return 0;
     release_sources(s);s->done=1;return 1;
 }
 int pt_wavetable_song_close(struct pt_wavetable_song **song)

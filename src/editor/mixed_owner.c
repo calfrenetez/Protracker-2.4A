@@ -1,0 +1,120 @@
+#include "mixed_owner.h"
+#include "paula_internal.h"
+#include "wavetable_internal.h"
+#include "sampler_internal.h"
+#include "project_snapshot.h"
+#include <string.h>
+struct pt_mixed_owner {
+    struct pt_allocator allocator;struct pt_paula_voices *paula;struct pt_wavetable_voices *amigus;
+    struct pt_sampler_paula *pb;struct pt_sampler_wavetable *ab;
+    struct pt_sampler *sampler;struct pt_project *project,snapshot;
+    struct pt_amigus_wavetable_cache *backend;struct pt_amigus_reservation *reservation;
+    struct pt_paula_voice_api pa;struct pt_wavetable_voice_api aa;
+    int (*pq)(void *),(*aq)(void *);void *pc,*ac;
+    struct pt_render_options options;struct pt_paula_render_caps caps;struct pt_playback_format format;
+    struct pt_render_sequence *sequence;struct pt_mixed_report report;
+    struct pt_sample_version *pin[PT_PROJECT_SAMPLES];struct pt_sampler_pin_job job;
+    uint64_t pv,av;unsigned generation,slot,analyzed,ready,closing,drained[2];int8_t map[PT_CHANNEL_LIMIT];
+    enum pt_mixed_owner_result failure;
+};
+static int identities(struct pt_mixed_owner *s)
+{
+    return s->paula->song_owner==s && s->amigus->song_owner==s &&
+        s->paula->bridge==s->pb && s->amigus->bridge==s->ab && s->ab->backend==s->backend &&
+        s->backend->reservation==s->reservation &&
+        s->paula->api.context==s->pa.context && s->paula->api.start==s->pa.start &&
+        s->paula->api.stop==s->pa.stop && s->paula->api.control==s->pa.control &&
+        s->amigus->api.context==s->aa.context && s->amigus->api.start==s->aa.start &&
+        s->amigus->api.stop==s->aa.stop && s->amigus->api.control==s->aa.control && s->amigus->api.restore==s->aa.restore &&
+        s->paula->quiesce==s->pq && s->amigus->quiesce==s->aq &&
+        s->paula->quiesce_context==s->pc && s->amigus->quiesce_context==s->ac;
+}
+static enum pt_mixed_owner_result fail(struct pt_mixed_owner *s,enum pt_mixed_owner_result r)
+{s->failure=r;s->closing=1;s->paula->closing=s->amigus->closing=1;return r;}
+enum pt_mixed_owner_result pt_mixed_owner_current(struct pt_mixed_owner *s)
+{
+    unsigned i;struct pt_pcm pcm;struct pt_sample_version *pin;
+    if(!s)return PT_MIXED_OWNER_INVALID;
+    if(s->failure)return s->failure;
+    if(s->closing)return PT_MIXED_OWNER_INVALID;
+    s->snapshot.channels.selected=s->project->channels.selected;
+    if(!identities(s) || s->paula->closing || s->amigus->closing ||
+       s->pb->sampler!=s->sampler || s->ab->sampler!=s->sampler ||
+       s->pb->project!=s->project || s->ab->project!=s->project ||
+       s->pb->generation!=s->generation || s->ab->generation!=s->generation || s->sampler->generation!=s->generation ||
+       s->pb->version!=s->pv || s->ab->version!=s->av ||
+       s->pb->table!=s->project->samples || s->ab->table!=s->project->samples ||
+       s->pb->count!=s->project->sample_count || s->ab->count!=s->project->sample_count ||
+       memcmp(s->map,s->paula->map,sizeof(s->map)) || !pt_project_snapshot_equal(s->project,&s->snapshot) ||
+       !pt_amigus_wavetable_cache_current(s->backend))return fail(s,PT_MIXED_OWNER_STALE);
+    for(i=0;i<s->project->sample_count;++i)if(s->pin[i]) {
+        if(pt_sampler_pin_current(s->sampler,s->project,i,s->generation,s->pin[i],&pcm,&pin)!=PT_EDIT_OK)
+            return fail(s,PT_MIXED_OWNER_STALE);
+        pt_sampler_unpin(pin);
+    }
+    return PT_MIXED_OWNER_OK;
+}
+enum pt_mixed_owner_result pt_mixed_owner_begin(struct pt_paula_voices *p,struct pt_wavetable_voices *w,
+    const struct pt_render_options *o,const struct pt_paula_render_caps *caps,const struct pt_playback_format *f,
+    const struct pt_allocator *a,struct pt_mixed_owner **out)
+{
+    struct pt_mixed_owner *s;unsigned i;
+    if(!p || !w || !p->bridge || !w->bridge || !o || !caps || !f || !a || !a->allocate || !a->release || !out ||
+       p->song_owner || w->song_owner || p->closing || w->closing ||
+       p->bridge->sampler!=w->bridge->sampler || p->bridge->project!=w->bridge->project ||
+       !pt_paula_render_caps_valid(caps) || (f->bits!=8 && f->bits!=16) || f->channel || f->word_pad || f->little_endian>1)
+        return PT_MIXED_OWNER_INVALID;
+    for(i=0;i<PT_PAULA_VOICES;++i)if(p->voice[i].held)return PT_MIXED_OWNER_INVALID;
+    for(i=0;i<PT_WAVETABLE_VOICES;++i)if(w->voice[i].held)return PT_MIXED_OWNER_INVALID;
+    if(pt_paula_voices_sync(p)!=1 || !pt_sampler_wavetable_sync(w->bridge) ||
+       !w->bridge->backend || !pt_amigus_wavetable_cache_current(w->bridge->backend) ||
+       w->bridge->backend->reservation->interrupt)return PT_MIXED_OWNER_INVALID;
+    s=a->allocate(a->context,sizeof(*s));if(!s)return PT_MIXED_OWNER_MEMORY;
+    memset(s,0,sizeof(*s));s->allocator=*a;s->paula=p;s->amigus=w;s->pb=p->bridge;s->ab=w->bridge;
+    s->sampler=s->pb->sampler;s->project=s->pb->project;s->snapshot=*s->project;
+    s->backend=s->ab->backend;s->reservation=s->backend->reservation;
+    s->pa=p->api;s->aa=w->api;s->pq=p->quiesce;s->aq=w->quiesce;s->pc=p->quiesce_context;s->ac=w->quiesce_context;
+    s->options=*o;s->caps=*caps;s->format=*f;s->generation=s->sampler->generation;
+    s->pv=s->pb->version;s->av=s->ab->version;memcpy(s->map,p->map,sizeof(s->map));
+    p->song_owner=s;w->song_owner=s;*out=s;return PT_MIXED_OWNER_PREPARING;
+}
+enum pt_mixed_owner_result pt_mixed_owner_prepare(struct pt_mixed_owner *s,struct pt_mixed_report *out)
+{
+    enum pt_mixed_owner_result r=pt_mixed_owner_current(s);enum pt_edit_result e;unsigned ready;
+    struct pt_pcm pcm;struct pt_sample_version *pin;
+    if(r!=PT_MIXED_OWNER_OK)return r;
+    if(!s->analyzed) {
+        enum pt_mixed_result gate=pt_mixed_preflight(s->project,&s->options,s->map,&s->caps,&s->format,
+            s->pa.control!=NULL,s->aa.control!=NULL,&s->allocator,&s->report,&s->sequence);
+        if(out)*out=s->report;
+        if(gate!=PT_MIXED_OK)return fail(s,gate==PT_MIXED_MEMORY?PT_MIXED_OWNER_MEMORY:PT_MIXED_OWNER_CAPABILITY);
+        s->analyzed=1;return PT_MIXED_OWNER_PREPARING;
+    }
+    if(out)*out=s->report;
+    if(s->ready)return PT_MIXED_OWNER_OK;
+    if(s->job.owner) {
+        e=pt_sampler_pin_job_step(&s->job,PT_SAMPLER_PIN_CHUNK,&pcm,&pin,&ready);
+        if(e!=PT_EDIT_OK)return fail(s,e==PT_EDIT_CAPACITY?PT_MIXED_OWNER_MEMORY:PT_MIXED_OWNER_STALE);
+        if(ready){s->pin[s->slot]=pin;++s->slot;}return PT_MIXED_OWNER_PREPARING;
+    }
+    while(s->slot<s->project->sample_count && !s->report.samples[0][s->slot] && !s->report.samples[1][s->slot])++s->slot;
+    if(s->slot==s->project->sample_count){s->ready=1;return PT_MIXED_OWNER_OK;}
+    e=pt_sampler_pin_job_begin(&s->job,s->sampler,s->project,s->slot,s->generation);
+    if(e!=PT_EDIT_OK)return fail(s,e==PT_EDIT_CAPACITY?PT_MIXED_OWNER_MEMORY:PT_MIXED_OWNER_STALE);
+    return PT_MIXED_OWNER_PREPARING;
+}
+int pt_mixed_owner_close(struct pt_mixed_owner **owner)
+{
+    struct pt_mixed_owner *s;struct pt_allocator a;unsigned i;
+    if(!owner)return 0;
+    s=*owner;if(!s)return 1;
+    if(!identities(s))return 0;
+    s->closing=1;s->paula->closing=s->amigus->closing=1;
+    pt_sampler_pin_job_cancel(&s->job);pt_render_sequence_close(s->sequence);s->sequence=NULL;
+    if(!s->drained[0])s->drained[0]=pt_paula_drain_owned(s->paula,s)==1;
+    if(!s->drained[1])s->drained[1]=pt_wavetable_drain_owned(s->amigus,s)==1;
+    if(!s->drained[0] || !s->drained[1] || s->reservation->interrupt)return 0;
+    for(i=0;i<PT_PROJECT_SAMPLES;++i)pt_sampler_unpin(s->pin[i]);
+    s->paula->song_owner=NULL;s->amigus->song_owner=NULL;
+    a=s->allocator;a.release(a.context,s);*owner=NULL;return 1;
+}

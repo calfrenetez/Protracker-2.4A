@@ -1,6 +1,10 @@
 #ifndef PT_WAVETABLE_INTERNAL_H
 #define PT_WAVETABLE_INTERNAL_H
 #include "wavetable_dispatch.h"
+int pt_wavetable_stop_owned(struct pt_wavetable_voices *,unsigned,const void *);
+int pt_wavetable_drain_owned(struct pt_wavetable_voices *,const void *);
+int pt_wavetable_close_owned(struct pt_wavetable_voices *,const void *);
+/* Drain confirms readers/barrier without detaching caches or releasing owner. */
 /* Private prepared-song callbacks, never an opt-in for arbitrary providers.
  * The song has validated immutable project/PCM, completed capability analysis,
  * and holds every required exact master pin. Callbacks check its captured

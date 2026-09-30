@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "seconds": 37.934909292001976,
+  "window_bound_seconds": 200,
+  "cases": [
+    {
+      "case": "song",
+      "binary": "PTExecPaulaSongTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-song-candidate-v2/build/dev/render-files-1790776630797068000",
+      "sha256": "5978fa0e1998151f6d03b7c742588c27159f0c3edc58fa37052c866a397436ea",
+      "independent_cleanup": true
+    },
+    {
+      "case": "preflight",
+      "binary": "PTExecPaulaPreflightTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-song-candidate-v2/build/dev/render-files-1790776647761993000",
+      "sha256": "b8e03da8aabca26407c7a1f7b3b28702fa28a6e80af266734b89daebb804fa4c",
+      "independent_cleanup": true
+    },
+    {
+      "case": "voices",
+      "binary": "PTExecPaulaVoicesTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-song-candidate-v2/build/dev/render-files-1790776653773937000",
+      "sha256": "71faaa67b9ef8a143b16c33ec11bb8a8f08f0f1972bcbc7d7291e499a62f5997",
+      "independent_cleanup": true
+    },
+    {
+      "case": "dispatch",
+      "binary": "PTExecPaulaDispatchTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-song-candidate-v2/build/dev/render-files-1790776664063704000",
+      "sha256": "3d2e9493c6de5b2adf680bd971147738af8b4f0e6387a3a19f7b8a06e19364c8",
+      "independent_cleanup": true
+    }
+  ]
+}

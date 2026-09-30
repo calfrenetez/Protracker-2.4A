@@ -1,0 +1,21 @@
+{
+  "source_tree": "dad75d898f11918116c6cbf008a1a87283caad0b",
+  "cases": {
+    "PTExecPaulaSongTest": {
+      "sha256": "5978fa0e1998151f6d03b7c742588c27159f0c3edc58fa37052c866a397436ea",
+      "bytes": 155528
+    },
+    "PTExecPaulaPreflightTest": {
+      "sha256": "b8e03da8aabca26407c7a1f7b3b28702fa28a6e80af266734b89daebb804fa4c",
+      "bytes": 75568
+    },
+    "PTExecPaulaVoicesTest": {
+      "sha256": "71faaa67b9ef8a143b16c33ec11bb8a8f08f0f1972bcbc7d7291e499a62f5997",
+      "bytes": 119912
+    },
+    "PTExecPaulaDispatchTest": {
+      "sha256": "3d2e9493c6de5b2adf680bd971147738af8b4f0e6387a3a19f7b8a06e19364c8",
+      "bytes": 149584
+    }
+  }
+}

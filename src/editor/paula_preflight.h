@@ -38,4 +38,12 @@ enum pt_paula_capability pt_paula_check_plan(const struct pt_project *,unsigned 
 enum pt_paula_capability pt_paula_preflight(const struct pt_project *,const struct pt_render_options *,
     const int8_t *previous,const struct pt_paula_render_caps *,unsigned controls,
     const struct pt_allocator *,struct pt_paula_preflight_report *);
+/* Transfer the SAME completely validated sequence, rewound without allocation
+ * or remeasurement. Success publishes *sequence; refusal leaves it unchanged.
+ * Recipient owns sequence allocation and must separately pin all source masters
+ * before playback; patterns/metadata remain borrowed immutable. Report samples
+ * covers Paula sources only. Other backends are not qualified or owned here. */
+enum pt_paula_capability pt_paula_preflight_take(const struct pt_project *,const struct pt_render_options *,
+    const int8_t *previous,const struct pt_paula_render_caps *,unsigned controls,
+    const struct pt_allocator *,struct pt_paula_preflight_report *,struct pt_render_sequence **);
 #endif

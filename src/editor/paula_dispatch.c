@@ -1,15 +1,15 @@
 #include <string.h>
-#include "paula_dispatch.h"
+#include "paula_internal.h"
 static void release_batch(struct pt_paula_voices *v,struct pt_paula_batch *b)
 {
     unsigned i;for(i=0;i<PT_RENDER_ACTIONS;++i)if(b->entry[i].held) {
         pt_sampler_paula_unpin(v->bridge,b->entry[i].lease);b->entry[i].held=0;
     }
 }
-static int current(struct pt_paula_voices *v,uint64_t version,uint16_t *held)
+static int current(struct pt_paula_voices *v,uint64_t version,uint16_t *held,void *owner)
 {
     int8_t map[PT_CHANNEL_LIMIT];unsigned i;uint16_t state=0;
-    if(!v || !v->bridge || v->closing || !pt_sampler_paula_sync(v->bridge) ||
+    if(!v || !v->bridge || v->song_owner!=owner || v->closing || !pt_sampler_paula_sync(v->bridge) ||
        v->bridge->version!=version ||
        pt_channels_paula_map(&v->bridge->project->channels,v->map,map)!=PT_CHANNEL_OK ||
        memcmp(map,v->map,sizeof(map)))return 0;
@@ -20,13 +20,13 @@ static int current(struct pt_paula_voices *v,uint64_t version,uint16_t *held)
     }
     *held=state;return 1;
 }
-int pt_paula_dispatch(struct pt_paula_voices *v,uint64_t version,unsigned rate,
-    const struct pt_render_plan *p,const struct pt_paula_render_caps *caps,struct pt_paula_batch *b)
+int pt_paula_dispatch_owned(struct pt_paula_voices *v,uint64_t version,unsigned rate,
+    const struct pt_render_plan *p,const struct pt_paula_render_caps *caps,struct pt_paula_batch *b,void *owner)
 {
     struct pt_paula_preflight_report report;struct pt_paula_render_plan r;
     unsigned i,j;uint16_t held;uint16_t period;uint8_t volume;
     const uint8_t *data;size_t bytes;enum pt_cache_result loaded;
-    if(!b || !current(v,version,&held) ||
+    if(!b || !current(v,version,&held,owner) ||
        pt_paula_check_plan(v->bridge->project,rate,v->map,p,caps,v->api.control!=NULL,&held,&report)!=PT_PAULA_COMPATIBLE)return 0;
     memset(b,0,sizeof(*b));
     for(i=0;i<p->count;++i) {
@@ -50,7 +50,7 @@ int pt_paula_dispatch(struct pt_paula_voices *v,uint64_t version,unsigned rate,
     }
     /* Promotion replaces storage inside the same descriptor; revalidate exact
      * source identities, map/revision and every pinned address before output. */
-    if(!current(v,version,&held) ||
+    if(!current(v,version,&held,owner) ||
        pt_paula_check_plan(v->bridge->project,rate,v->map,p,caps,v->api.control!=NULL,&held,&report)!=PT_PAULA_COMPATIBLE)goto refused;
     for(i=0;i<p->count;++i)if(b->entry[i].held) {
         const struct pt_render_action *a=&p->action[i];struct pt_paula_batch_entry *e=&b->entry[i];
@@ -67,12 +67,12 @@ int pt_paula_dispatch(struct pt_paula_voices *v,uint64_t version,unsigned rate,
         if(slot<0)continue;
         switch(a->kind) {
         case PT_RENDER_TRIGGER:
-            if(pt_paula_voices_stop(v,a->channel)!=1)goto failed;
+            if(pt_paula_stop_owned(v,a->channel,owner)!=1)goto failed;
             voice=&v->voice[slot];voice->lease=e->lease;voice->held=voice->uncertain=1;
             voice->track=(int8_t)a->channel;e->held=0;v->started=1;
             if(v->api.start(v->api.context,(unsigned)slot,&e->plan)!=1)goto failed;
             voice->uncertain=0;break;
-        case PT_RENDER_STOP:if(pt_paula_voices_stop(v,a->channel)!=1)goto failed;break;
+        case PT_RENDER_STOP:if(pt_paula_stop_owned(v,a->channel,owner)!=1)goto failed;break;
         case PT_RENDER_CONTROL:
             voice=&v->voice[slot];voice->uncertain=1;
             if(v->api.control(v->api.context,(unsigned)slot,e->plan.period,e->plan.volume)!=1)goto failed;
@@ -85,6 +85,10 @@ refused:release_batch(v,b);return 0;
 failed:
     v->closing=1;release_batch(v,b);
     for(i=0;i<PT_PAULA_VOICES;++i)if(v->voice[i].held)
-        pt_paula_voices_stop(v,(unsigned)v->voice[i].track);
+        pt_paula_stop_owned(v,(unsigned)v->voice[i].track,owner);
     return -1;
 }
+
+int pt_paula_dispatch(struct pt_paula_voices *v,uint64_t version,unsigned rate,
+    const struct pt_render_plan *p,const struct pt_paula_render_caps *caps,struct pt_paula_batch *b)
+{return pt_paula_dispatch_owned(v,version,rate,p,caps,b,NULL);}

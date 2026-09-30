@@ -27,6 +27,7 @@ struct pt_paula_voice {struct pt_cache_lease lease;unsigned held,uncertain;int8_
 struct pt_paula_voices {
     struct pt_sampler_paula *bridge;struct pt_paula_voice_api api;
     struct pt_paula_voice voice[PT_PAULA_VOICES];int8_t map[PT_CHANNEL_LIMIT];
+    void *song_owner; /* Exclusive session; public direct operations refuse while set. */
     unsigned closing,started;int (*quiesce)(void *);void *quiesce_context;
 };
 enum pt_paula_voice_result {

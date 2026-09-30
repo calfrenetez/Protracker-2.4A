@@ -1,5 +1,5 @@
 #include <string.h>
-#include "paula_voices.h"
+#include "paula_internal.h"
 static int stop_slot(struct pt_paula_voices *v,unsigned slot)
 {
     struct pt_paula_voice *voice=&v->voice[slot];int result;
@@ -22,14 +22,14 @@ int pt_paula_voices_bind(struct pt_paula_voices *v,struct pt_sampler_paula *s,co
 int pt_paula_voices_bind_quiesce(struct pt_paula_voices *v,int (*quiesce)(void *),void *context)
 {
     unsigned i;
-    if(!v || !v->bridge || v->closing || v->started || v->quiesce || !quiesce)return 0;
+    if(!v || !v->bridge || v->closing || v->song_owner || v->started || v->quiesce || !quiesce)return 0;
     for(i=0;i<PT_PAULA_VOICES;++i)if(v->voice[i].held)return 0;
     v->quiesce=quiesce;v->quiesce_context=context;return 1;
 }
 int pt_paula_voices_sync(struct pt_paula_voices *v)
 {
     int8_t next[PT_CHANNEL_LIMIT];unsigned i;int result,complete=1;
-    if(!v || !v->bridge || v->closing || !pt_sampler_paula_sync(v->bridge) ||
+    if(!v || !v->bridge || v->closing || v->song_owner || !pt_sampler_paula_sync(v->bridge) ||
        pt_channels_paula_map(&v->bridge->project->channels,v->map,next)!=PT_CHANNEL_OK)return -2;
     for(i=0;i<PT_PAULA_VOICES;++i)if(v->voice[i].held &&
        next[(unsigned)v->voice[i].track]!=(int8_t)i) {
@@ -91,17 +91,17 @@ enum pt_paula_voice_result pt_paula_voices_control(struct pt_paula_voices *v,uns
     if(v->api.control(v->api.context,(unsigned)slot,period,volume)==1)return PT_PAULA_VOICE_ACTIVE;
     voice->uncertain=1;return PT_PAULA_VOICE_UNCERTAIN;
 }
-int pt_paula_voices_stop(struct pt_paula_voices *v,unsigned track)
+int pt_paula_stop_owned(struct pt_paula_voices *v,unsigned track,void *owner)
 {
     int slot;
-    if(!v || !v->bridge || track>=PT_CHANNEL_LIMIT)return -1;
+    if(!v || !v->bridge || v->song_owner!=owner || track>=PT_CHANNEL_LIMIT)return -1;
     slot=v->map[track];if(slot<0)return 1;
     return stop_slot(v,(unsigned)slot);
 }
-int pt_paula_voices_close(struct pt_paula_voices *v)
+int pt_paula_close_owned(struct pt_paula_voices *v,void *owner)
 {
     unsigned i;int complete=1;
-    if(!v)return 0;
+    if(!v || v->song_owner!=owner)return 0;
     if(!v->bridge)return 1;
     v->closing=1;
     for(i=0;i<PT_PAULA_VOICES;++i)if(stop_slot(v,i)!=1)complete=0;
@@ -109,3 +109,8 @@ int pt_paula_voices_close(struct pt_paula_voices *v)
     if(!pt_sampler_paula_close(v->bridge))return 0;
     memset(v,0,sizeof(*v));return 1;
 }
+
+int pt_paula_voices_stop(struct pt_paula_voices *v,unsigned track)
+{return pt_paula_stop_owned(v,track,NULL);}
+int pt_paula_voices_close(struct pt_paula_voices *v)
+{return pt_paula_close_owned(v,NULL);}

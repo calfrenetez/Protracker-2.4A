@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131220016 reserve=262144 flags=4
+PAULA PREFLIGHT PASS: full shared timeline, explicit clock/stereo/volume/geometry, late refusal and allocation cleanup; no dispatch
+EXEC MEMORY PASS: 45 Fast allocations, zero owned bytes, budget refusal without Chip fallback

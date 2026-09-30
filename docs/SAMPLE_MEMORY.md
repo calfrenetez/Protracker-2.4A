@@ -14,7 +14,7 @@ software implementation from the remaining integration and hardware gates.
 | Requirement | Implemented software | Still required |
 | --- | --- | --- |
 | Authoritative8/16/24-bit masters | Queried, bounded native Fast-RAM pool; precision-preserving sampler versions, processing, history and source pins. Fast-equipped machines fail rather than spill enhanced allocations into Chip RAM. | Physical memory-pressure/endurance measurements. |
-| Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition and one-to-four-track song playback preserve master precision; song preparation excludes unreferenced masters from both Fast staging and Chip caches. Dedicated arbitrary-track cache and injected four-voice owner preserve stable slots and retain leases through uncertain start/control/stop. Full16-track shared-sequence capability gate validates explicit clock/stereo/volume and supported sample geometry before output. Bounded caller-workspace dispatch prepares all trigger leases before any injected callback; refusal preserves existing readers and runtime failure blocks replay while retaining unconfirmed readers. | Master-pinned shared-sequence session ownership, shared mixed-backend scheduling and native dispatch beyond the one-to-four-track Paula bridge; physical sound/performance acceptance. |
+| Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition and one-to-four-track song playback preserve master precision; song preparation excludes unreferenced masters from both Fast staging and Chip caches. Dedicated arbitrary-track cache and injected four-voice owner preserve stable slots and retain leases through uncertain start/control/stop. Full16-track shared-sequence capability gate validates explicit clock/stereo/volume and supported sample geometry before output. Bounded caller-workspace dispatch prepares all trigger leases before any injected callback; refusal preserves existing readers and runtime failure blocks replay while retaining unconfirmed readers. A cancellable session retains the same fully checked sequence, selectively pins masters in bounded copy steps, claims exclusive voice ownership and retains pins through failed stop/quiescence. | Editor mutation/disposal barrier for the new session, shared mixed-backend scheduling and native dispatch beyond the one-to-four-track Paula bridge; physical sound/performance acceptance. |
 | AmiGUS wavetable copies | Versioned evictable resource pool, sampler revision/master-pin bridge, bounded 16-voice lease owner with validated rate/loop/address plans, mono sequencer trigger/control/stop dispatch, preflight-gated master-pinned sequence ownership, editor veto/retry barriers and injected callbacks, 8/16-bit conversion and bounded address allocator/chunk uploader behind an injected register bus; failure/pinning tests. | Verified card capacity, native bus binding and voice dispatcher; explicit wavetable reservation/cache lifetime now implemented and tested with fake callbacks. Injected register tests do not establish real card access. |
 | Direct24-bit Studio | Master-pinned mixer, audited sequence, sampler/editor ownership, bounded queue/pump and integrated PCM-session owner with capacity-bounded prefill and explicit start acknowledgement; optional reservation lease retained through reset and adapter quiescence. Up to16 voice slots are a software bound. | Native PLAY/output wiring, verified hardware capabilities and sustainable physical voice-count/timing evidence. |
 | Master-preserving persistence | Bounded enhanced-project/sample saving and explicit classic conversion; private EFx exports/bounce never replace masters. Explicit new-file recovery snapshots and staged identity-checked restoration preserve all master precision. | Native opt-in configuration, idle scheduling, bounded retention, read-only discovery, explicit recovery UI and exact save are implemented and emulator-tested; preferences-panel controls, real crash/endurance and physical acceptance remain. |
@@ -3234,3 +3234,42 @@ close confirms stops and context quiescence. A partially applied batch must neve
 be retried. This seam does not own a complete song/master lifetime, schedule mixed
 backends, restore fractional cursors, handle repeat sources or program native
 Paula DMA. Those remain separate requirements and acceptance gates.
+
+## Owned Paula shared-sequence session
+
+`paula_song` claims an idle injected voice owner and publishes a cancellable
+handle. First preparation traverses the complete shared sequence and transfers
+that same sequence rewound for playback. Subsequent preparation reserves one
+used master or copies at most4096 PCM/marker bytes. No callback output occurs
+before every used source is pinned. Unused masters remain unpromoted. Options
+and actual-clock capabilities are copied; sample precision/history stay intact.
+
+This initial session supports selected Paula tracks only. The remaining tracks
+still contribute global16-track tempo/delay/end flow. Mixed selected outputs
+refuse explicitly; a mixed scheduler still needs to coordinate all backends on
+one sequence. Row ranges, loops/repeat/segment plans and fractional restoration
+remain refused. Initial static validation, full capability traversal and cache
+conversion remain synchronous and require finite tick/frame/memory budgets;
+there is no hard latency or native timing guarantee.
+
+The exclusive session token blocks public direct sync/trigger/control/stop/close
+and dispatch calls. Each advancement checks sampler generation, borrowed project
+header, voice/bridge/API/map identities and exact retained master versions.
+Channel selection is a permitted UI cursor change. Patterns/orders/sample arrays
+must remain immutable; header guards cannot detect arbitrary in-place writes.
+An editor barrier must close this session before any edit, undo, replacement or
+disposal; that binding remains unfinished.
+
+Runtime failure discards the sequence, blocks repeated output and requests only
+bounded stops. Confirmed per-slot stops and adapter quiescence precede release
+of master pins, unpublished promotion jobs and controller storage. Failed close
+retains the handle and contexts for retry. DONE also requires close. Preparation
+cancellation may leave already-promoted unchanged sampler versions. Successful
+close clears the voice owner/cache bridge; restart must rebind them.
+
+Host and native Exec fixtures cover8/16/24-bit precision, selective promotion,
+full global flow/measurement parity, exclusive ownership, protocol refusal, late
+capability failure before pins, memory refusal, stale settings, uncertain start,
+partial preparation cancellation and retained ownership through failed cleanup.
+This is software ownership evidence; native PLAY/device/timer/mixed-backend and
+physical sound/performance acceptance remain separate.

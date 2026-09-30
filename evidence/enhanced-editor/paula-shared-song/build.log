@@ -1,0 +1,82 @@
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        5888 bytes
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        6076 bytes
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        6600 bytes
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        6972 bytes
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        7052 bytes
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+replay(acrx4):	        6696 bytes
+vasm 2.0b (c) in 2002-2025 Volker Barthelmann
+vasm M68k/CPU32/ColdFire cpu backend 2.7c (c) 2002-2024 Frank Wille
+vasm motorola syntax module 3.19b (c) 2002-2025 Frank Wille
+vasm hunk format output module 2.17f (c) 2002-2025 Frank Wille
+
+Harness(acrx2):	         874 bytes
+PTGGuard(acrx2):	         518 bytes
+PTGGuardData(aurw1):	        2108 bytes
+{
+  "PTPaulaSongTest": {
+    "sha256": "16f90e8af9e7990582f32aa0955baac53759b619d647892aa55d3b29d56b035f",
+    "bytes": 154376
+  },
+  "PTExecPaulaSongTest": {
+    "sha256": "5978fa0e1998151f6d03b7c742588c27159f0c3edc58fa37052c866a397436ea",
+    "bytes": 155528
+  },
+  "PTPaulaVoicesTest": {
+    "sha256": "1739723e0677c6e399419d958d046df24cd42acaeb1f65ea1efa037efc39a232",
+    "bytes": 118716
+  },
+  "PTExecPaulaVoicesTest": {
+    "sha256": "71faaa67b9ef8a143b16c33ec11bb8a8f08f0f1972bcbc7d7291e499a62f5997",
+    "bytes": 119912
+  },
+  "PTPaulaPreflightTest": {
+    "sha256": "51c43e1d4c739ccaa146d207f9a27c179aaba814f49000979f2e39be8f0f4167",
+    "bytes": 71124
+  },
+  "PTExecPaulaPreflightTest": {
+    "sha256": "b8e03da8aabca26407c7a1f7b3b28702fa28a6e80af266734b89daebb804fa4c",
+    "bytes": 75568
+  },
+  "PTPaulaDispatchTest": {
+    "sha256": "6d2b48cedb7a3ed6ece2a066396d831168569ca28197762fcc149b65408ef48b",
+    "bytes": 148428
+  },
+  "PTExecPaulaDispatchTest": {
+    "sha256": "3d2e9493c6de5b2adf680bd971147738af8b4f0e6387a3a19f7b8a06e19364c8",
+    "bytes": 149584
+  },
+  "PTGuardTest": {
+    "sha256": "908722556a4bc3033b1dcc107b9b8ba28c5dfc44f75195b00336828e0e292a0b",
+    "bytes": 1660
+  }
+}

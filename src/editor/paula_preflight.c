@@ -50,9 +50,9 @@ done:
     if(r.result!=PT_PAULA_COMPATIBLE)memset(r.samples,0,sizeof(r.samples));
     *out=r;return r.result;
 }
-enum pt_paula_capability pt_paula_preflight(const struct pt_project *p,const struct pt_render_options *o,
+static enum pt_paula_capability traverse(const struct pt_project *p,const struct pt_render_options *o,
     const int8_t *previous,const struct pt_paula_render_caps *caps,unsigned controls,
-    const struct pt_allocator *allocator,struct pt_paula_preflight_report *out)
+    const struct pt_allocator *allocator,struct pt_paula_preflight_report *out,struct pt_render_sequence **take)
 {
     struct pt_paula_preflight_report r,batch;struct pt_render_sequence *sequence=NULL;
     struct pt_render_plan *plan=NULL;struct pt_render_interval span;struct pt_allocator a;
@@ -79,10 +79,27 @@ enum pt_paula_capability pt_paula_preflight(const struct pt_project *p,const str
         if(r.result!=PT_PAULA_COMPATIBLE) {r.action=batch.action;r.channel=batch.channel;r.kind=batch.kind;goto done;}
         for(i=0;i<PT_PROJECT_SAMPLES;++i)r.samples[i]|=batch.samples[i];
     }while(!span.end);
+    if(take) {
+        r.render_result=pt_render_sequence_rewind(sequence);
+        if(r.render_result!=PT_RENDER_OK)goto render_error;
+        *take=sequence;sequence=NULL;
+    }
     goto done;
 render_error:r.result=r.render_result==PT_RENDER_MEMORY?PT_PAULA_MEMORY:PT_PAULA_RENDER;
 done:
     pt_render_sequence_close(sequence);if(plan)a.release(a.context,plan);
     if(r.result!=PT_PAULA_COMPATIBLE)memset(r.samples,0,sizeof(r.samples));
     *out=r;return r.result;
+}
+
+enum pt_paula_capability pt_paula_preflight(const struct pt_project *p,const struct pt_render_options *o,
+    const int8_t *previous,const struct pt_paula_render_caps *caps,unsigned controls,
+    const struct pt_allocator *a,struct pt_paula_preflight_report *out)
+{return traverse(p,o,previous,caps,controls,a,out,NULL);}
+enum pt_paula_capability pt_paula_preflight_take(const struct pt_project *p,const struct pt_render_options *o,
+    const int8_t *previous,const struct pt_paula_render_caps *caps,unsigned controls,
+    const struct pt_allocator *a,struct pt_paula_preflight_report *out,struct pt_render_sequence **sequence)
+{
+    if(!sequence)return PT_PAULA_INVALID;
+    return traverse(p,o,previous,caps,controls,a,out,sequence);
 }

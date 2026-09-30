@@ -1,0 +1,107 @@
+usage: shared_infra_render_files.py [-h]
+                                    [--invert-stem-cli REFERENCE_DIRECTORY |
+                                    --invert-cli REFERENCE_WAV |
+                                    --invert-bounce | --invert-editor |
+                                    --invert-sampler | --invert-session |
+                                    --invert-render |
+                                    --stem-cli REFERENCE_DIRECTORY |
+                                    --render-cli REFERENCE_WAV |
+                                    --pp20-import | --project-import |
+                                    --recovery-file | --capture-memory |
+                                    --capture-session-memory |
+                                    --amigus-capture-memory |
+                                    --editor-capture-memory |
+                                    --paula-memory {cache,voices} |
+                                    --sample-dispatch | --source-memory |
+                                    --mod-import |
+                                    --sample-import {raw,wav,svx} |
+                                    --mod-stream | --project-stream |
+                                    --sample-svx | --sample-raw |
+                                    --sample-wav | --amigus-discovery |
+                                    --studio-memory {native-abi,mixer,sampler,song,editor,queued,consumer,fifo,session,register-session,reserved-session,sample-ram,wavetable-cache,sampler-wavetable,wavetable-voices,wavetable-dispatch,editor-wavetable,render-sequence} |
+                                    --input-memory {import,recent,exec-import,exec-recent} |
+                                    --exec-memory {bounce,stems,failures,save} |
+                                    --stems-only | --wav-only |
+                                    --memory-failures-only | --bounce-only |
+                                    --allocated-only] [--fixture FIXTURE]
+                                    [--candidate CANDIDATE]
+
+Native file regressions; requires a separately coordinated shared030 window.
+
+options:
+  -h, --help            show this help message and exit
+  --invert-stem-cli REFERENCE_DIRECTORY
+                        Verify bounded shared-sample EFx native stems against
+                        host bytes
+  --invert-cli REFERENCE_WAV
+                        Verify bounded EFx CLI WAV against host bytes
+  --invert-bounce       Run EFx sample-bounce transaction using native Fast
+                        allocator
+  --invert-editor       Run editor EFx stop/lease guards using native Fast
+                        allocator
+  --invert-sampler      Run sampler EFx version guards using native Fast
+                        allocator
+  --invert-session      Run queued private EFx ownership using native Fast
+                        allocator
+  --invert-render       Run bounded offline EFx PCM and failure checks
+  --stem-cli REFERENCE_DIRECTORY
+                        Run two native stems and existing-directory refusal
+  --render-cli REFERENCE_WAV
+                        Run one-row native renderer against an exact host
+                        reference
+  --pp20-import         Run native converter bounded packed MOD import
+  --project-import      Run native converter enhanced-project load/save
+                        roundtrip
+  --recovery-file       Run explicit full-precision recovery snapshot/restore
+                        transactions
+  --capture-memory      Run synthetic recording staging/publication with
+                        native Fast allocator; no device capture
+  --capture-session-memory
+                        Run injected recording ownership and stop/quiescence
+                        with native Fast allocator; no device input
+  --amigus-capture-memory
+                        Run injected recording PCM/interrupt ownership with
+                        native Fast allocator; no card input
+  --editor-capture-memory
+                        Run editor recording barriers and publication with
+                        native Fast allocator; no device input
+  --paula-memory {cache,voices}
+                        Run routed Paula ownership with native Fast/Chip
+                        allocators and injected readers; no DMA
+  --sample-dispatch     Check bounded sample dispatch and24-bit precision with
+                        Exec allocator
+  --source-memory       Run donor ownership/failure/undo checks with native
+                        Fast allocator
+  --mod-import          Run bounded MOD document load with native Fast
+                        allocator
+  --sample-import {raw,wav,svx}
+                        Run streamed sample import with native Fast allocator
+  --mod-stream          Run bounded classic MOD export with native Fast
+                        allocator
+  --project-stream      Run streamed master project save with native Fast
+                        allocator
+  --sample-svx          Run streamed master IFF export with native Fast
+                        allocator
+  --sample-raw          Run streamed master RAW export with native Fast
+                        allocator
+  --sample-wav          Run streamed master WAV export with native Fast
+                        allocator
+  --amigus-discovery    Discovery-only native library probe; no reservation or
+                        MMIO
+  --studio-memory {native-abi,mixer,sampler,song,editor,queued,consumer,fifo,session,register-session,reserved-session,sample-ram,wavetable-cache,sampler-wavetable,wavetable-voices,wavetable-dispatch,editor-wavetable,render-sequence}
+                        Run one production-allocator Studio fixture
+  --input-memory {import,recent,exec-import,exec-recent}
+                        Run one import or recent-file memory fixture
+  --exec-memory {bounce,stems,failures,save}
+                        Run one native Exec-backed memory fixture
+  --stems-only          Run the allocated stem export test only
+  --wav-only            Run the allocated WAV export test only
+  --memory-failures-only
+                        Run all WAV/stem allocation-failure checks only
+  --bounce-only         Run the sample-bounce allocation regression only
+  --allocated-only      Run the three allocated-path tests instead of the two
+                        legacy file tests
+  --fixture FIXTURE     Explicit MOD for the EFx stem CLI window
+  --candidate CANDIDATE
+                        Manifest-verified PT24GRender for the EFx stem CLI
+                        window

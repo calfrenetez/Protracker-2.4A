@@ -5,7 +5,7 @@ The enhanced project owns the authoritative sample, including its declared
 elements in the declared precision; 24-bit samples retain their low eight bits.
 Playback representations must never become the project's source of truth.
 
-## Current implementation status — 28 September 2026
+## Current implementation status — 30 September 2026
 
 The sections below retain milestone history. Earlier statements such as “not yet
 wired” may be superseded by later sections; this table separates the present
@@ -14,7 +14,7 @@ software implementation from the remaining integration and hardware gates.
 | Requirement | Implemented software | Still required |
 | --- | --- | --- |
 | Authoritative8/16/24-bit masters | Queried, bounded native Fast-RAM pool; precision-preserving sampler versions, processing, history and source pins. Fast-equipped machines fail rather than spill enhanced allocations into Chip RAM. | Physical memory-pressure/endurance measurements. |
-| Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition and one-to-four-track song playback preserve master precision; song preparation excludes unreferenced masters from both Fast staging and Chip caches. | Mixed-backend song routing beyond the one-to-four-track Paula bridge; physical sound/performance acceptance. |
+| Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition and one-to-four-track song playback preserve master precision; song preparation excludes unreferenced masters from both Fast staging and Chip caches. Dedicated arbitrary-track cache and injected four-voice owner preserve stable slots and retain leases through uncertain start/control/stop. | Shared timeline and native dispatch for mixed-backend song routing beyond the one-to-four-track Paula bridge; physical sound/performance acceptance. |
 | AmiGUS wavetable copies | Versioned evictable resource pool, sampler revision/master-pin bridge, bounded 16-voice lease owner with validated rate/loop/address plans, mono sequencer trigger/control/stop dispatch, preflight-gated master-pinned sequence ownership, editor veto/retry barriers and injected callbacks, 8/16-bit conversion and bounded address allocator/chunk uploader behind an injected register bus; failure/pinning tests. | Verified card capacity, native bus binding and voice dispatcher; explicit wavetable reservation/cache lifetime now implemented and tested with fake callbacks. Injected register tests do not establish real card access. |
 | Direct24-bit Studio | Master-pinned mixer, audited sequence, sampler/editor ownership, bounded queue/pump and integrated PCM-session owner with capacity-bounded prefill and explicit start acknowledgement; optional reservation lease retained through reset and adapter quiescence. Up to16 voice slots are a software bound. | Native PLAY/output wiring, verified hardware capabilities and sustainable physical voice-count/timing evidence. |
 | Master-preserving persistence | Bounded enhanced-project/sample saving and explicit classic conversion; private EFx exports/bounce never replace masters. Explicit new-file recovery snapshots and staged identity-checked restoration preserve all master precision. | Native opt-in configuration, idle scheduling, bounded retention, read-only discovery, explicit recovery UI and exact save are implemented and emulator-tested; preferences-panel controls, real crash/endurance and physical acceptance remain. |
@@ -3135,3 +3135,43 @@ Fast-RAM masters and Chip-RAM cache allocations when executed. It is not wired
 to native replay yet. Mixed-backend scheduling, dynamic physical voice dispatch,
 geometry/capability checks and end-to-end playback remain required. The existing
 four-channel replay path and its refusal behavior are unchanged.
+
+## Routed Paula voice ownership (software seam)
+
+`paula_voices` owns four injected physical slots using the existing stable
+`pt_channels_paula_map`. Any four Paula tracks among channels 1–16 can use those
+slots. Continuing tracks retain their assignments through mute/solo and route
+edits. A removed track's reader must confirm stop before its slot can be assigned
+to another track; pending or failed stops retain the previous map and block new
+triggers. Confirmed stops within a partially completed attempt stay stopped.
+
+Each invoked start retains a pinned cache lease, including uncertain or failed
+starts. A replacement acquires and validates its candidate before stopping the
+old reader, so memory refusal preserves playback. If stopping fails or remains
+pending, the unstarted candidate is unpinned and the old data remains owned.
+Active voices may finish against retired data after master edits/undo; new
+triggers resolve only the current revision. Phase-preserving period/volume
+controls retain ownership; uncertain controls require stop or replacement.
+
+The explicit segment request accepts even byte offsets and lengths of 2–131070
+bytes (1–65535 words), including an explicitly requested final silent padding
+byte. It refuses unsupported alignment, out-of-range segments, zero periods
+and volumes above 64 before allocation. Stereo side remains explicit. It does
+not infer loops, round fractional phase or encode a zero length register.
+The eventual native adapter must validate its clock and device capabilities.
+
+Close blocks new starts, attempts every held reader once and retains all pending
+contexts. An optional quiescence callback is required when interrupts or driver
+callbacks retain contexts beyond per-slot stop; it must be bound before any
+start. Cache/context disposal happens only after all stops and quiescence are
+confirmed. The owner supplies no wait loop or forced release.
+
+Injected host regressions exercise ownership and geometry across 8/16/24-bit
+masters; the Exec fixture checks Fast master and Chip cache allocation when
+executed. On 30 September both routed cache and voice Exec fixtures passed in
+the coordinated shared030 emulator, with zero owned Fast bytes on release,
+confirmed DMA-off/exact-path cleanup and explicit window release. These fixture
+callbacks model readers; they do not perform audible DMA playback.
+Native DMA/audio.device/timer
+ownership, shared-sequencer dispatch, mixed-backend timing and end-to-end playback
+remain unfinished. The classic replay and accepted display layout are unchanged.

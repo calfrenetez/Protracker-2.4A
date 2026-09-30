@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131191848 reserve=262144 flags=4
+SAMPLER PAULA PASS: selected routed8-bit copies, explicit stereo side, odd padding, master preservation, revisions/undo/routes, pressure eviction and retained active leases; no DMA or mixed-backend playback
+EXEC MEMORY PASS: 24 Fast allocations, zero owned bytes, budget refusal without Chip fallback

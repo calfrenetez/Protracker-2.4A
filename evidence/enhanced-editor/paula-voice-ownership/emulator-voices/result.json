@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 routed Paula voices ownership with Fast masters/Chip copies and injected readers; no DMA or song dispatch",
+  "PTExecPaulaVoicesTest_sha256": "314b56c62b9a35fb25d3b5d13d42c6ba4d36272c18396c9084c7c03728a755e2",
+  "paula-voices_returncode": "0",
+  "run_files_cleaned": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=333\tsndbuf_status=0"
+}

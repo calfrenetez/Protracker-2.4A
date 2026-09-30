@@ -61,6 +61,7 @@ def main():
     group.add_argument('--capture-session-memory',action='store_true',help='Run injected recording ownership and stop/quiescence with native Fast allocator; no device input')
     group.add_argument('--amigus-capture-memory',action='store_true',help='Run injected recording PCM/interrupt ownership with native Fast allocator; no card input')
     group.add_argument('--editor-capture-memory',action='store_true',help='Run editor recording barriers and publication with native Fast allocator; no device input')
+    group.add_argument('--paula-memory',choices=['cache','voices'],help='Run routed Paula ownership with native Fast/Chip allocators and injected readers; no DMA')
     group.add_argument('--sample-dispatch',action='store_true',help='Check bounded sample dispatch and24-bit precision with Exec allocator')
     group.add_argument('--source-memory',action='store_true',help='Run donor ownership/failure/undo checks with native Fast allocator')
     group.add_argument('--mod-import',action='store_true',help='Run bounded MOD document load with native Fast allocator')
@@ -127,6 +128,9 @@ def main():
         if args.editor_capture_memory:
             cases=[('editor-capture','PTExecEditorCaptureTest','EDITOR CAPTURE PASS:')]
             result['scope']='shared030 injected editor recording barrier and master publication; no device input'
+        if args.paula_memory:
+            cases=[('sampler-paula','PTExecSamplerPaulaTest','SAMPLER PAULA PASS:')] if args.paula_memory=='cache' else [('paula-voices','PTExecPaulaVoicesTest','paula voices tests passed')]
+            result['scope']='shared030 routed Paula '+args.paula_memory+' ownership with Fast masters/Chip copies and injected readers; no DMA or song dispatch'
         if args.recovery_file:
             cases=[('recovery','PTExecRecoveryTest','RECOVERY FILE PASS:')]
             result['scope']='shared030 explicit recovery file transactions; no automatic snapshots or UI wiring'
@@ -358,5 +362,5 @@ def main():
             result['passed']=True
         finally:
             finish_run(guest,run,out,result,finished,
-                (args.capture_memory or args.capture_session_memory or args.amigus_capture_memory or args.editor_capture_memory or args.recovery_file or args.studio_memory in ('native-abi','editor','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence') or args.invert_editor or args.invert_sampler or args.invert_session or args.source_memory or args.sample_dispatch or args.invert_render or args.invert_bounce or args.invert_cli or args.invert_stem_cli))
+                (args.paula_memory or args.capture_memory or args.capture_session_memory or args.amigus_capture_memory or args.editor_capture_memory or args.recovery_file or args.studio_memory in ('native-abi','editor','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence') or args.invert_editor or args.invert_sampler or args.invert_session or args.source_memory or args.sample_dispatch or args.invert_render or args.invert_bounce or args.invert_cli or args.invert_stem_cli))
 if __name__=='__main__':main()

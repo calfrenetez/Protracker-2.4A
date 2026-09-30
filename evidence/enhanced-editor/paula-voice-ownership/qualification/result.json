@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "seconds": 47.4571945409989,
+  "window_bound_seconds": 450,
+  "cases": [
+    {
+      "case": "cache",
+      "binary": "PTExecSamplerPaulaTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-voices-candidate-v2/build/dev/render-files-1790772350965465000",
+      "sha256": "82bef2694caad16ea28df17eafb82547d67d001f5750eb340a3b2dc9a6c91288",
+      "independent_cleanup": true
+    },
+    {
+      "case": "voices",
+      "binary": "PTExecPaulaVoicesTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-voices-candidate-v2/build/dev/render-files-1790772355118669000",
+      "sha256": "314b56c62b9a35fb25d3b5d13d42c6ba4d36272c18396c9084c7c03728a755e2",
+      "independent_cleanup": true
+    }
+  ]
+}

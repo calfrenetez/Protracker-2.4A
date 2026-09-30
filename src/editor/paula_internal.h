@@ -20,4 +20,11 @@ int pt_paula_prepare_owned(struct pt_paula_prepared *,struct pt_paula_voices *,u
 int pt_paula_prepare_begin_owned(struct pt_paula_prepared *,struct pt_paula_voices *,uint64_t,unsigned,
     const struct pt_render_plan *,const struct pt_paula_render_caps *,struct pt_sample_version *const *,void *);
 enum pt_cache_result pt_paula_prepare_step_owned(struct pt_paula_prepared *);
+/* Incremental private batch only: validate ALL candidates/readers before output,
+ * then emit each index exactly once in audited global order. No conversions or
+ * allocation. Serialized immutable owner; caller cancels remaining candidates
+ * and drains BOTH engines on partial failure. Apply-one does not stop others;
+ * -2 identifies an already attempted unconfirmed stop, -1 other output failure. */
+int pt_paula_prepared_ready_owned(struct pt_paula_prepared *);
+int pt_paula_prepared_action_owned(struct pt_paula_prepared *,unsigned);
 #endif

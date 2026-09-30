@@ -5,21 +5,27 @@
 #include "amigus_wavetable_cache_test.c"
 #include "../src/editor/mixed_owner_internal.h"
 #include "../src/editor/paula_internal.h"
-struct wave_driver {unsigned starts,stops,barriers;int stop_result,barrier_result;};
+static unsigned output_order[32],output_count,fast_calls;
+static void *counted_fast(void *c,size_t bytes){++fast_calls;return fast_alloc(c,bytes);}
+static int mixed_start(void *c,unsigned slot,const struct pt_paula_voice_plan *p)
+{assert(output_count<32);output_order[output_count++]=1;return start(c,slot,p);}
+static int mixed_control(void *c,unsigned slot,uint16_t period,uint8_t volume)
+{assert(output_count<32);output_order[output_count++]=3;return control(c,slot,period,volume);}
+struct wave_driver {unsigned starts,stops,barriers;int stop_result,barrier_result,start_result;};
 static int wave_start(void *c,unsigned id,const struct pt_amigus_voice_plan *p)
-{struct wave_driver *d=c;(void)id;(void)p;++d->starts;return 1;}
+{struct wave_driver *d=c;(void)id;(void)p;assert(output_count<32);output_order[output_count++]=2;++d->starts;return d->start_result;}
 static int wave_stop(void *c,unsigned id){struct wave_driver *d=c;(void)id;++d->stops;return d->stop_result;}
 static int wave_control(void *c,unsigned id,uint32_t rate,uint16_t l,uint16_t r)
-{(void)c;(void)id;(void)rate;(void)l;(void)r;return 1;}
+{(void)c;(void)id;(void)rate;(void)l;(void)r;assert(output_count<32);output_order[output_count++]=4;return 1;}
 static int wave_quiesce(void *c){struct wave_driver *d=c;++d->barriers;return d->barrier_result;}
 static void *refuse_alloc(void *c,size_t n){(void)c;(void)n;return NULL;}
 static void owner_fixture(unsigned bits,unsigned mode)
 {
-    struct pt_allocator a={NULL,fast_alloc,fast_free};struct pt_document doc;struct pt_sampler sampler;
+    struct pt_allocator a={NULL,counted_fast,fast_free};struct pt_document doc;struct pt_sampler sampler;
     struct pt_sampler_paula pb={0};struct pt_sampler_wavetable ab={0};
     struct pt_paula_voices pv={0};struct pt_wavetable_voices av={0};
     struct driver d={0};struct wave_driver wd={0};struct fixture *f=malloc(sizeof(*f));
-    struct pt_paula_voice_api pa={&d,start,stop,control};struct pt_wavetable_voice_api aa={&wd,wave_start,wave_stop,wave_control,NULL};
+    struct pt_paula_voice_api pa={&d,mixed_start,stop,mixed_control};struct pt_wavetable_voice_api aa={&wd,wave_start,wave_stop,wave_control,NULL};
     struct pt_render_options o={0};struct pt_paula_render_caps caps={3546895,124,65535};struct pt_playback_format format={8,0,0,0};
     struct pt_mixed_owner *owner=NULL,*other=(void *)(uintptr_t)1;struct pt_mixed_report report;
     int32_t pcm[2048];unsigned i,n=0,oldbarriers;enum pt_mixed_owner_result r;
@@ -41,7 +47,7 @@ static void owner_fixture(unsigned bits,unsigned mode)
     assert(pt_sampler_wavetable_bind(&ab,&sampler,&doc.project,&f->cache));
     assert(pt_paula_voices_bind(&pv,&pb,&pa));assert(pt_wavetable_voices_bind(&av,&ab,&aa));
     assert(pt_paula_voices_bind_quiesce(&pv,quiesce,&d));assert(pt_wavetable_voices_bind_quiesce(&av,wave_quiesce,&wd));
-    d.start_result=d.quiesce_result=wd.stop_result=wd.barrier_result=1;for(i=0;i<4;++i)d.stop_result[i]=1;
+    output_count=0;d.start_result=d.control_result=d.quiesce_result=wd.start_result=wd.stop_result=wd.barrier_result=1;for(i=0;i<4;++i)d.stop_result[i]=1;
     {struct pt_allocator bad={NULL,refuse_alloc,fast_free};
     assert(pt_mixed_owner_begin(&pv,&av,&o,&caps,&format,&bad,&other)==PT_MIXED_OWNER_MEMORY);
     assert(other==(void *)(uintptr_t)1 && !pv.song_owner && !av.song_owner);}
@@ -71,6 +77,14 @@ static void owner_fixture(unsigned bits,unsigned mode)
             plan->count=3;plan->action[0]=(struct pt_render_action){PT_RENDER_TRIGGER,4,voice,{65536,0}};
             plan->action[1]=(struct pt_render_action){PT_RENDER_TRIGGER,7,voice,{32768,32768}};
             plan->action[1].voice.pcm=&doc.project.samples[1].pcm;plan->action[2]=plan->action[1];
+            if(mode>=15) {
+                /* AmiGUS first, Paula second, duplicate AmiGUS last: emitting
+                 * either whole backend at once violates original order. */
+                struct pt_render_action swap=plan->action[0];plan->action[0]=plan->action[1];plan->action[1]=swap;
+                plan->count=5;plan->action[3]=plan->action[1];plan->action[3].kind=PT_RENDER_CONTROL;
+                plan->action[4]=plan->action[0];plan->action[4].kind=PT_RENDER_CONTROL;
+                if(mode==22)plan->action[3].kind=PT_RENDER_STOP;
+            }
             if(mode==11)plan->action[2].voice.pcm=(void *)(uintptr_t)1;
             if(mode==12)plan->action[2].voice.pcm=&doc.project.samples[2].pcm;
             if(mode==11 || mode==12){assert(pt_mixed_stage_begin(owner,plan)==PT_MIXED_OWNER_CAPABILITY && !d.live && !f->writes);goto close;}
@@ -94,6 +108,43 @@ static void owner_fixture(unsigned bits,unsigned mode)
                 unsigned pins=0;assert(r==PT_MIXED_OWNER_OK && pt_mixed_stage_step(owner)==PT_MIXED_OWNER_OK);
                 for(i=0;i<PT_CACHE_SLOTS;++i)pins+=f->cache.cache.entry[i].pins;
                 assert(pins==2);pins=0;for(i=0;i<PT_CACHE_SLOTS;++i)pins+=pb.cache.entry[i].pins;assert(pins==1);
+                if(mode>=15) {
+                    unsigned writes=f->writes,allocs=fast_calls;size_t calls=d.calls;
+                    if(mode==16){wd.start_result=0;wd.stop_result=0;}
+                    if(mode==17){d.start_result=-1;d.stop_result[0]=0;wd.stop_result=-1;}
+                    if(mode==18)assert(!pt_cache_clear(&f->cache.cache));
+                    if(mode==19)assert(!pt_cache_clear(&pb.cache));
+                    if(mode==20)av.voice[7].uncertain=1;
+                    if(mode==21)wd.stop_result=0;
+                    if(mode==22)d.stop_result[0]=0;
+                    r=pt_mixed_stage_commit(owner);
+                    assert(f->writes==writes && d.calls==calls && fast_calls==allocs);
+                    if(mode>=18 && mode<=20) {
+                        assert(r==PT_MIXED_OWNER_CAPABILITY && !output_count && !d.stops && !wd.stops);
+                        av.voice[7].uncertain=0;
+                    }else if(mode==16 || mode==17 || mode==21 || mode==22) {
+                        assert(r==PT_MIXED_OWNER_DEVICE && pv.closing && av.closing);
+                        assert(pt_mixed_stage_commit(owner)==PT_MIXED_OWNER_DEVICE);
+                        assert(sampler.current[0] && sampler.current[1]);
+                        if(mode==22)assert(!av.voice[7].held);else assert(av.voice[7].held);
+                        if(mode!=22)assert(av.voice[7].uncertain);
+                        if(mode==16)assert(output_count==1 && output_order[0]==2 && !pv.voice[0].held);
+                        else if(mode==17)assert(output_count==2 && output_order[0]==2 && output_order[1]==1 && pv.voice[0].held);
+                        else if(mode==21)assert(!pv.voice[0].held && wd.stops==1 && output_count==2);
+                        else assert(pv.voice[0].held && d.stops==1 && output_count==3);
+                        wd.barrier_result=0;assert(!pt_mixed_owner_close(&owner) && owner);
+                        d.stop_result[0]=wd.stop_result=1;wd.barrier_result=0;
+                        assert(!pt_mixed_owner_close(&owner) && owner);
+                        wd.barrier_result=1;
+                    }else {
+                        assert(r==PT_MIXED_OWNER_OK && output_count==5);
+                        assert(output_order[0]==2 && output_order[1]==1 && output_order[2]==2 && output_order[3]==3 && output_order[4]==4);
+                        assert(pv.voice[0].held && av.voice[7].held && !pv.voice[0].uncertain && !av.voice[7].uncertain);
+                        pins=0;for(i=0;i<PT_CACHE_SLOTS;++i)pins+=f->cache.cache.entry[i].pins;assert(pins==1);
+                        assert(pt_mixed_stage_commit(owner)==PT_MIXED_OWNER_INVALID);
+                    }
+                    goto close;
+                }
                 pt_mixed_stage_cancel(owner);assert(pt_mixed_stage_step(owner)==PT_MIXED_OWNER_INVALID);
             }
             for(i=0;i<PT_CACHE_SLOTS;++i)assert(!pb.cache.entry[i].pins && !f->cache.cache.entry[i].pins);
@@ -126,8 +177,8 @@ detached:
     pt_sampler_release(&sampler);assert(!sampler.bytes);pt_document_release(&doc);free(plan);free(batch);free(f);
 }
 static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wavetable_fixture_main;
-    for(bits=8;bits<=24;bits+=8)for(mode=0;mode<15;++mode)owner_fixture(bits,mode);
-    puts("MIXED OWNER PASS: exclusive engines, union masters, bounded promotion, stale/cancel/refusal and both-reader retention, coordinated bounded cache staging and cancellation; no scheduler");return 0;}
+    for(bits=8;bits<=24;bits+=8)for(mode=0;mode<23;++mode)owner_fixture(bits,mode);
+    puts("MIXED OWNER PASS: exclusive engines, union masters, bounded promotion, stale/cancel/refusal and both-reader retention, coordinated staging and global-order prepared commit, whole-batch refusal and partial-failure retention; no scheduler");return 0;}
 
 #ifndef PT_TEST_MIXED_EXEC
 int main(void){return mixed_owner_fixture();}

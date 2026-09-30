@@ -4,8 +4,8 @@
 #include "paula_voices.h"
 struct pt_mixed_owner;
 enum pt_mixed_owner_result {PT_MIXED_OWNER_OK,PT_MIXED_OWNER_PREPARING,
-    PT_MIXED_OWNER_INVALID,PT_MIXED_OWNER_MEMORY,PT_MIXED_OWNER_CAPABILITY,PT_MIXED_OWNER_STALE};
-/* First ownership slice, NOT playback dispatch/scheduling. Atomically claim both
+    PT_MIXED_OWNER_INVALID,PT_MIXED_OWNER_MEMORY,PT_MIXED_OWNER_CAPABILITY,PT_MIXED_OWNER_STALE,PT_MIXED_OWNER_DEVICE};
+/* Combined master owner; live sequence scheduling remains unfinished. Atomically claim both
  * idle bound engines of the SAME sampler/project. Copies options/capabilities;
  * no source pins, cache allocation or output at begin. Ownership predicates
  * may run during guards. Public direct operations

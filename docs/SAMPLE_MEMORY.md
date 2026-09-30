@@ -45,9 +45,16 @@ or command conversion per call. Both routes must become ready; duplicate trigger
 retain independent leases. Cancellation/failure releases all unstarted leases and
 partial jobs while preserving active readers and master pins. Warm completed
 copies may remain cached. Captured voice state changes refuse staging. This
-private foundation has no apply or live sequence progression yet. One live
-scheduler, full commit revalidation and coordinated dispatch are still required;
-two independent song engines are not a substitute. Cache capacity and physical timing remain separate gates.
+private foundation now commits a ready batch after checking BOTH complete live
+states, genuine pins and every prepared lease/address before any voice callback.
+It transfers leases and emits cached commands in original global action order,
+with no allocation/upload/command conversion during commit. Late cache/reader
+refusal releases unstarted candidates without output. Partial callback failure
+poisons both engines, marks all retained readers uncertain and tries each stop
+once; all master pins/tokens stay owned until both drains/barriers confirm. This
+is injected software dispatch, not live sequence progression. One live sequence
+lookahead/scheduler and native device output are still required; two independent
+song engines are not a substitute. Cache capacity and physical timing remain separate gates.
 
 AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software
 fixtures, plus an absent-library discovery check. Those results do not establish

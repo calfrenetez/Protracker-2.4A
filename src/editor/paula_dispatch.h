@@ -17,7 +17,7 @@
  * Caller-owned bounded workspace, disjoint from inputs; zero-init not required. */
 struct pt_paula_batch_entry {
     struct pt_cache_lease lease;struct pt_paula_voice_plan plan;struct pt_pcm source;
-    unsigned held,sample;
+    unsigned held,sample;uint32_t offset,length;
 };
 struct pt_paula_batch {struct pt_paula_batch_entry entry[PT_RENDER_ACTIONS];};
 int pt_paula_dispatch(struct pt_paula_voices *,uint64_t version,unsigned rate,

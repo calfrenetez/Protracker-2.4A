@@ -11,7 +11,7 @@ struct mixed_batch {
     struct pt_sampler_upload_job upload;
     struct {struct pt_cache_lease lease;struct pt_amigus_voice_plan command;unsigned held,sample;uint32_t address,bytes;} entry[PT_RENDER_ACTIONS];
     struct pt_paula_voice pv[PT_PAULA_VOICES];struct pt_wavetable_voice av[PT_WAVETABLE_VOICES];
-    unsigned phase,index;uint8_t staging[256];
+    unsigned phase,index,count;struct {unsigned route,index;} order[PT_RENDER_ACTIONS];uint8_t staging[256];
 };
 struct pt_mixed_owner {
     struct pt_allocator allocator;struct pt_paula_voices *paula;struct pt_wavetable_voices *amigus;
@@ -143,7 +143,7 @@ enum pt_mixed_owner_result pt_mixed_stage_begin(struct pt_mixed_owner *s,const s
     if(r!=PT_MIXED_OWNER_OK)return r;
     if(!s->ready)return PT_MIXED_OWNER_PREPARING;
     if(!plan || plan->count>PT_RENDER_ACTIONS || s->batch.phase)return PT_MIXED_OWNER_INVALID;
-    b=&s->batch;
+    b=&s->batch;b->count=plan->count;
     for(i=0;i<plan->count;++i) {
         const struct pt_render_action *a=plan->action+i;
         if(a->channel>=s->project->channels.count)goto refused;
@@ -151,8 +151,12 @@ enum pt_mixed_owner_result pt_mixed_stage_begin(struct pt_mixed_owner *s,const s
             for(j=0;j<s->project->sample_count;++j)if(a->voice.pcm==&s->project->samples[j].pcm)break;
             if(j==s->project->sample_count || !s->pin[j])goto refused;
         }else j=0;
-        if(s->project->channels.track[a->channel].route==PT_PAULA)b->split.action[b->split.count++]=*a;
+        if(s->project->channels.track[a->channel].route==PT_PAULA) {
+            b->order[i].route=PT_PAULA;b->order[i].index=b->split.count;
+            b->split.action[b->split.count++]=*a;
+        }
         else if(s->project->channels.track[a->channel].route==PT_AMIGUS) {
+            b->order[i].route=PT_AMIGUS;b->order[i].index=b->wave.count;
             b->entry[b->wave.count].sample=j;b->wave.action[b->wave.count++]=*a;
         }else goto refused;
     }
@@ -210,4 +214,66 @@ enum pt_mixed_owner_result pt_mixed_stage_step(struct pt_mixed_owner *s)
         (!location(s,i,&address,&bytes) || address!=b->entry[i].address || bytes!=b->entry[i].bytes))goto refused;
     b->phase=4;return PT_MIXED_OWNER_OK;
 refused:pt_mixed_stage_cancel(s);return PT_MIXED_OWNER_CAPABILITY;
+}
+
+enum pt_mixed_owner_result pt_mixed_stage_commit(struct pt_mixed_owner *s)
+{
+    struct mixed_batch *b;unsigned i,j;uint32_t address,bytes;int stop_route=-1,stop_channel=-1,result;
+    enum pt_mixed_owner_result r=pt_mixed_owner_current(s);
+    if(r!=PT_MIXED_OWNER_OK)return r;
+    b=&s->batch;if(b->phase!=4)return PT_MIXED_OWNER_INVALID;
+    if(memcmp(b->pv,s->paula->voice,sizeof(b->pv)) || memcmp(b->av,s->amigus->voice,sizeof(b->av)) ||
+       !pt_paula_prepared_ready_owned(&b->chip))goto refused;
+    /* Immutable plans and unchanged readers preserve the already-gated state
+     * transitions. Recheck every live/candidate lease before ANY callback. */
+    for(i=0;i<PT_WAVETABLE_VOICES;++i)if(b->av[i].held) {
+        struct pt_cache_lease lease=b->av[i].lease;
+        if(b->av[i].uncertain || !pt_cache_data(&s->backend->cache,lease) ||
+           s->backend->cache.entry[lease.slot].valid!=1 || s->backend->cache.entry[lease.slot].version!=s->av ||
+           !pt_amigus_wavetable_cache_location(s->backend,lease,&address,&bytes))goto refused;
+    }
+    for(i=0;i<b->wave.count;++i)if(b->wave.action[i].kind==PT_RENDER_TRIGGER &&
+       (!location(s,i,&address,&bytes) || address!=b->entry[i].address || bytes!=b->entry[i].bytes))goto refused;
+    for(i=0;i<b->count;++i) {
+        j=b->order[i].index;
+        if(b->order[i].route==PT_PAULA) {
+            result=pt_paula_prepared_action_owned(&b->chip,j);
+            if(result!=1) {
+                if(result==-2){stop_route=PT_PAULA;stop_channel=(int)b->split.action[j].channel;}
+                goto failed;
+            }
+        }else {
+            const struct pt_render_action *a=b->wave.action+j;
+            struct pt_wavetable_voice *v=s->amigus->voice+a->channel;
+            switch(a->kind) {
+            case PT_RENDER_TRIGGER:
+                if(pt_wavetable_stop_owned(s->amigus,a->channel,s)!=1){stop_route=PT_AMIGUS;stop_channel=(int)a->channel;goto failed;}
+                v->lease=b->entry[j].lease;v->held=v->uncertain=1;b->entry[j].held=0;
+                if(s->aa.start(s->aa.context,a->channel,&b->entry[j].command)!=1)goto failed;
+                v->uncertain=0;break;
+            case PT_RENDER_CONTROL:
+                if(!v->held || v->uncertain)goto failed;
+                v->uncertain=1;
+                if(s->aa.control(s->aa.context,a->channel,b->entry[j].command.rate,
+                   b->entry[j].command.left,b->entry[j].command.right)!=1)goto failed;
+                v->uncertain=0;break;
+            case PT_RENDER_STOP:if(pt_wavetable_stop_owned(s->amigus,a->channel,s)!=1){stop_route=PT_AMIGUS;stop_channel=(int)a->channel;goto failed;}break;
+            default:goto failed;
+            }
+        }
+    }
+    pt_mixed_stage_cancel(s);return PT_MIXED_OWNER_OK;
+refused:pt_mixed_stage_cancel(s);return PT_MIXED_OWNER_CAPABILITY;
+failed:
+    fail(s,PT_MIXED_OWNER_DEVICE);
+    for(i=0;i<PT_PAULA_VOICES;++i)if(s->paula->voice[i].held) {
+        s->paula->voice[i].uncertain=1;
+        if(stop_route!=PT_PAULA || stop_channel!=s->paula->voice[i].track)
+            pt_paula_stop_owned(s->paula,(unsigned)s->paula->voice[i].track,s);
+    }
+    for(i=0;i<PT_WAVETABLE_VOICES;++i)if(s->amigus->voice[i].held) {
+        s->amigus->voice[i].uncertain=1;
+        if(stop_route!=PT_AMIGUS || stop_channel!=(int)i)pt_wavetable_stop_owned(s->amigus,i,s);
+    }
+    return PT_MIXED_OWNER_DEVICE;
 }

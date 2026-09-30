@@ -83,7 +83,13 @@ convert to counter thresholds without reading or allocating. Counter failures, f
 changes, regression and overflow poison/cancel/stop once while retaining readers until
 close. Low-frequency counters that skip exact frame boundaries refuse rather than
 catch up. DONE is terminal and does not reread the counter. Injected-counter tests
-do not establish actual native timing. Native event-loop/timer/device/DMA/audio remain requirements;
+do not establish actual native timing. A separate native mixed fixture now binds the existing timer.device EClock reader
+and absolute alarm/watchdog to primed mixed startup, resamples through the same
+clocked service, and refuses observed or deliberately delayed late startup without
+voice callbacks. Both tokens/masters survive uncertain cleanup barriers and clock/
+alarm owners remain alive until the combined owner closes. Native fixture evidence
+remains separate from injected-counter host tests; voice callbacks stay injected.
+Native PLAY event-loop/device/DMA/audio remain requirements;
 two independent song engines are not a substitute. Cache capacity and physical timing remain separate gates.
 
 AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software

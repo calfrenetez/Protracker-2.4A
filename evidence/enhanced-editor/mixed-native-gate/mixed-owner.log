@@ -1,0 +1,9 @@
+EXEC MEMORY pool_limit=131071904 reserve=262144 flags=4
+NATIVE MIXED GATE observed later_frame=48201 start=48000 result=10 paula_starts=0 amigus_starts=0 injected_delay=0 frequency=709379 bits=8
+NATIVE MIXED GATE observed later_frame=49367 start=48000 result=10 paula_starts=0 amigus_starts=0 injected_delay=1 frequency=709379 bits=8
+NATIVE MIXED GATE observed later_frame=44286 start=44100 result=10 paula_starts=0 amigus_starts=0 injected_delay=0 frequency=709379 bits=16
+NATIVE MIXED GATE observed later_frame=45998 start=44100 result=10 paula_starts=0 amigus_starts=0 injected_delay=1 frequency=709379 bits=16
+NATIVE MIXED GATE observed later_frame=48199 start=48000 result=10 paula_starts=0 amigus_starts=0 injected_delay=0 frequency=709379 bits=24
+NATIVE MIXED GATE observed later_frame=49731 start=48000 result=10 paula_starts=0 amigus_starts=0 injected_delay=1 frequency=709379 bits=24
+MIXED OWNER PASS:6 native real-clock/alarm8/16/24 scenarios, primed mixed startup, strict observed or delayed deadline refusal, uncertain barriers retain both tokens/masters, alarm/watchdog/counter cleanup; injected voices only, no audio/timing acceptance
+EXEC MEMORY PASS: 66 Fast allocations, zero owned bytes, budget refusal without Chip fallback

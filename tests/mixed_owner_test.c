@@ -76,6 +76,47 @@ static void owner_fixture(unsigned bits,unsigned mode)
         assert(r==PT_MIXED_OWNER_OK && sampler.current[0] && sampler.current[1] && !sampler.current[2]);
         assert(report.samples[0][0] && report.samples[1][0] && report.samples[1][1]);
         doc.project.channels.selected=15;assert(pt_mixed_owner_current(owner)==PT_MIXED_OWNER_OK);
+#ifdef PT_TEST_MIXED_NATIVE_GATE
+        if(mode>=56) {
+            struct pt_native_eclock clock={0};struct pt_native_alarm alarm={0},watchdog={0};
+            uint64_t deadline=777,tick,now,origin,frame;uint32_t frequency,initial;unsigned guard=0;
+            enum pt_alarm_result ar;
+            assert(pt_native_eclock_open(&clock) && pt_native_alarm_open(&alarm) && pt_native_alarm_open(&watchdog));
+            assert(pt_native_eclock_read(&clock,&origin,&initial) && initial);
+            /* The initial observation inside clocked_begin defines the epoch.
+             * Retain an enclosing observation for diagnostic bounds only. */
+            assert(pt_mixed_owner_clocked_begin(owner,o.rate,pt_native_eclock_read,&clock)==PT_MIXED_OWNER_OK);
+            do {r=pt_mixed_owner_clocked_service(owner,&deadline);assert(++guard<1000 && !d.starts && !wd.starts);}while(r==PT_MIXED_OWNER_WAITING);
+            assert(r==PT_MIXED_OWNER_OK && sampler.current[0] && sampler.current[1]);
+            assert(pt_mixed_owner_clocked_deadline(owner,&tick)==PT_MIXED_OWNER_OK);
+            assert(pt_native_alarm_arm(&watchdog,tick+initial*2)==PT_ALARM_WAITING);
+            assert(pt_native_alarm_arm(&alarm,tick)==PT_ALARM_WAITING);guard=0;
+            for(;;) {
+                assert(pt_native_alarm_poll(&watchdog)==PT_ALARM_WAITING);
+                ar=pt_native_alarm_poll(&alarm);if(ar!=PT_ALARM_WAITING)break;
+                assert(++guard<=64);Wait(pt_native_alarm_signal(&alarm)|pt_native_alarm_signal(&watchdog));
+            }
+            assert(ar==PT_ALARM_READY);
+            if(mode==57)Delay(1); /* Explicitly delayed service; never timing proof. */
+            deadline=777;r=pt_mixed_owner_clocked_service(owner,&deadline);
+            assert(pt_native_eclock_read(&clock,&now,&frequency) && frequency==initial && now>=tick);
+            frame=(now-origin)*o.rate/initial; /* Later observation, not sampled dispatch time. */
+            if(mode==57)assert(r==PT_MIXED_OWNER_DEADLINE);
+            assert(r==PT_MIXED_OWNER_DEADLINE || r==PT_MIXED_OWNER_WAITING);
+            if(r==PT_MIXED_OWNER_DEADLINE)assert(deadline==777 && !d.starts && !wd.starts);
+            else assert(d.starts==1 && wd.starts==1 && deadline>o.rate);
+            printf("NATIVE MIXED GATE observed later_frame=%lu start=%lu result=%u paula_starts=%u amigus_starts=%u injected_delay=%u frequency=%lu bits=%u\n",
+                (unsigned long)frame,(unsigned long)o.rate,(unsigned)r,d.starts,wd.starts,mode==57,(unsigned long)initial,bits);
+            /* Keep counter and alarm owners until combined sample ownership ends. */
+            d.quiesce_result=wd.barrier_result=0;
+            assert(!pt_mixed_owner_close(&owner) && owner && pv.song_owner && av.song_owner && sampler.current[0] && sampler.current[1]);
+            d.quiesce_result=wd.barrier_result=1;assert(pt_mixed_owner_close(&owner));
+            guard=0;while(!pt_native_alarm_close(&watchdog)){assert(++guard<=8);Delay(1);}
+            assert(pt_native_alarm_close(&alarm));pt_native_eclock_close(&clock);
+            assert(!alarm.port && !alarm.request && !watchdog.port && !watchdog.request && !clock.port && !clock.request);
+            goto detached;
+        }
+#endif
         if(mode>=49) {
             struct mixed_counter counter={700,2*o.rate,0,1};uint64_t deadline=777,ticks=888,now=0,prior;unsigned polls,reads,starts,wstarts,allocs,writes;size_t calls;
             assert(pt_mixed_owner_clocked_service(owner,&deadline)==PT_MIXED_OWNER_INVALID && deadline==777);
@@ -404,7 +445,10 @@ detached:
     pt_sampler_release(&sampler);assert(!sampler.bytes);pt_document_release(&doc);free(plan);free(batch);free(f);
 }
 static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wavetable_fixture_main;
-#ifdef PT_TEST_MIXED_SCHEDULE_ONLY
+#ifdef PT_TEST_MIXED_NATIVE_GATE
+    for(bits=8;bits<=24;bits+=8)for(mode=56;mode<58;++mode)owner_fixture(bits,mode);
+    puts("MIXED OWNER PASS:6 native real-clock/alarm8/16/24 scenarios, primed mixed startup, strict observed or delayed deadline refusal, uncertain barriers retain both tokens/masters, alarm/watchdog/counter cleanup; injected voices only, no audio/timing acceptance");
+#elif defined(PT_TEST_MIXED_SCHEDULE_ONLY)
     /* Keep the already-qualified legacy cases in full host regressions; this
      * separate native window qualifies the new scheduling scenarios only. */
     for(bits=8;bits<=24;bits+=8)for(mode=49;mode<56;++mode)owner_fixture(bits,mode);

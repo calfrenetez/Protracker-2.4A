@@ -1,0 +1,6 @@
+MIXED OWNER PASS: exclusive engines, union masters, bounded promotion, stale/cancel/refusal and both-reader retention, coordinated staging and global-order prepared commit, whole-batch refusal and partial-failure retention, shared interval/forecast progression and strict numerical deadline gate; no native clock
+.
+----------------------------------------------------------------------
+Ran 1 test in 7.900s
+
+OK

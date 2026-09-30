@@ -28,7 +28,8 @@ struct pt_mixed_owner {
     enum pt_mixed_owner_result failure;struct mixed_batch batch;
     struct pt_render_lookahead ahead;struct pt_render_plan plan;
     struct pt_render_interval interval;uint32_t remaining;
-    unsigned pending,forecast,done,stop_attempted;
+    unsigned pending,forecast,done,stop_attempted,clock_armed;
+    uint64_t clock_start,clock_last,clock_deadline;
 };
 static int identities(struct pt_mixed_owner *s)
 {
@@ -44,7 +45,7 @@ static int identities(struct pt_mixed_owner *s)
 }
 static enum pt_mixed_owner_result fail(struct pt_mixed_owner *s,enum pt_mixed_owner_result r)
 {pt_render_lookahead_cancel(&s->ahead);pt_mixed_stage_cancel(s);
- pt_render_sequence_close(s->sequence);s->sequence=NULL;s->failure=r;s->closing=1;s->paula->closing=s->amigus->closing=1;return r;}
+ pt_render_sequence_close(s->sequence);s->sequence=NULL;s->clock_armed=0;s->failure=r;s->closing=1;s->paula->closing=s->amigus->closing=1;return r;}
 enum pt_mixed_owner_result pt_mixed_owner_current(struct pt_mixed_owner *s)
 {
     unsigned i;struct pt_pcm pcm;struct pt_sample_version *pin;
@@ -97,7 +98,7 @@ enum pt_mixed_owner_result pt_mixed_owner_prepare(struct pt_mixed_owner *s,struc
     enum pt_mixed_owner_result r=pt_mixed_owner_current(s);enum pt_edit_result e;unsigned ready;
     struct pt_pcm pcm;struct pt_sample_version *pin;
     if(r!=PT_MIXED_OWNER_OK)return r;
-    if(s->pending || s->done || s->batch.phase)return PT_MIXED_OWNER_INVALID;
+    if(s->clock_armed || s->pending || s->done || s->batch.phase)return PT_MIXED_OWNER_INVALID;
     if(!s->analyzed) {
         enum pt_mixed_result gate=pt_mixed_preflight(s->project,&s->options,s->map,&s->caps,&s->format,
             s->pa.control!=NULL,s->aa.control!=NULL,&s->allocator,&s->report,&s->sequence);
@@ -307,7 +308,7 @@ static enum pt_mixed_owner_result sequence_current(struct pt_mixed_owner *s)
     if(s && r!=PT_MIXED_OWNER_OK && s->failure)return sequence_fail(s,r);
     return r;
 }
-enum pt_mixed_owner_result pt_mixed_owner_next(struct pt_mixed_owner *s,struct pt_render_interval *out)
+static enum pt_mixed_owner_result next(struct pt_mixed_owner *s,struct pt_render_interval *out)
 {
     enum pt_mixed_owner_result r;
     if(!out)return PT_MIXED_OWNER_INVALID;
@@ -318,7 +319,7 @@ enum pt_mixed_owner_result pt_mixed_owner_next(struct pt_mixed_owner *s,struct p
     if(pt_render_sequence_next(s->sequence,&s->interval)!=PT_RENDER_OK)return sequence_fail(s,PT_MIXED_OWNER_RENDER);
     s->pending=1;s->remaining=s->interval.frames;*out=s->interval;return PT_MIXED_OWNER_OK;
 }
-enum pt_mixed_owner_result pt_mixed_owner_consume(struct pt_mixed_owner *s,uint32_t frames)
+static enum pt_mixed_owner_result consume(struct pt_mixed_owner *s,uint32_t frames)
 {
     enum pt_mixed_owner_result r=sequence_current(s);if(r!=PT_MIXED_OWNER_OK)return r;
     if(!s->ready)return PT_MIXED_OWNER_PREPARING;
@@ -326,7 +327,7 @@ enum pt_mixed_owner_result pt_mixed_owner_consume(struct pt_mixed_owner *s,uint3
     if(pt_render_sequence_consume(s->sequence,frames)!=PT_RENDER_OK)return sequence_fail(s,PT_MIXED_OWNER_RENDER);
     s->remaining-=frames;return PT_MIXED_OWNER_OK;
 }
-enum pt_mixed_owner_result pt_mixed_owner_prefetch(struct pt_mixed_owner *s)
+static enum pt_mixed_owner_result prefetch(struct pt_mixed_owner *s)
 {
     unsigned ready=0;enum pt_mixed_owner_result r=sequence_current(s);
     if(r!=PT_MIXED_OWNER_OK)return r;
@@ -351,7 +352,7 @@ enum pt_mixed_owner_result pt_mixed_owner_prefetch(struct pt_mixed_owner *s)
     if(r==PT_MIXED_OWNER_PREPARING)return r;
     return sequence_fail(s,r);
 }
-enum pt_mixed_owner_result pt_mixed_owner_complete(struct pt_mixed_owner *s)
+static enum pt_mixed_owner_result complete(struct pt_mixed_owner *s)
 {
     enum pt_mixed_owner_result r=sequence_current(s);if(r!=PT_MIXED_OWNER_OK)return r;
     if(!s->ready)return PT_MIXED_OWNER_PREPARING;
@@ -364,4 +365,38 @@ enum pt_mixed_owner_result pt_mixed_owner_complete(struct pt_mixed_owner *s)
     if(r!=PT_MIXED_OWNER_OK)return sequence_fail(s,r);
     s->pending=0;s->done=s->interval.end;
     return s->done?PT_MIXED_OWNER_DONE:PT_MIXED_OWNER_OK;
+}
+
+enum pt_mixed_owner_result pt_mixed_owner_next(struct pt_mixed_owner *s,struct pt_render_interval *out)
+{return s && !s->clock_armed?next(s,out):PT_MIXED_OWNER_INVALID;}
+enum pt_mixed_owner_result pt_mixed_owner_consume(struct pt_mixed_owner *s,uint32_t frames)
+{return s && !s->clock_armed?consume(s,frames):PT_MIXED_OWNER_INVALID;}
+enum pt_mixed_owner_result pt_mixed_owner_prefetch(struct pt_mixed_owner *s)
+{return s && !s->clock_armed?prefetch(s):PT_MIXED_OWNER_INVALID;}
+enum pt_mixed_owner_result pt_mixed_owner_complete(struct pt_mixed_owner *s)
+{return s && !s->clock_armed?complete(s):PT_MIXED_OWNER_INVALID;}
+enum pt_mixed_owner_result pt_mixed_owner_clock_arm(struct pt_mixed_owner *s,uint64_t start)
+{
+    enum pt_mixed_owner_result r=sequence_current(s);if(r!=PT_MIXED_OWNER_OK)return r;
+    if(s->clock_armed || !s->ready || !s->pending || !s->interval.emit || !s->interval.frames ||
+       s->remaining!=s->interval.frames || (!s->forecast && s->batch.phase))return PT_MIXED_OWNER_INVALID;
+    if(start>UINT64_MAX-s->remaining)return sequence_fail(s,PT_MIXED_OWNER_CLOCK);
+    s->clock_start=s->clock_last=start;s->clock_deadline=start+s->remaining;s->clock_armed=1;
+    return PT_MIXED_OWNER_OK;
+}
+enum pt_mixed_owner_result pt_mixed_owner_clock_service(struct pt_mixed_owner *s,uint64_t now)
+{
+    uint64_t debt;uint32_t frames;enum pt_mixed_owner_result r=sequence_current(s);
+    if(r!=PT_MIXED_OWNER_OK)return r;
+    if(!s->clock_armed)return PT_MIXED_OWNER_INVALID;
+    if(now<s->clock_last)return sequence_fail(s,PT_MIXED_OWNER_CLOCK);
+    if(now>s->clock_deadline)return sequence_fail(s,PT_MIXED_OWNER_DEADLINE);
+    s->clock_last=now;
+    debt=now-s->clock_start-(s->interval.frames-s->remaining);
+    if(now==s->clock_deadline && (s->forecast!=3 || debt>256))return sequence_fail(s,PT_MIXED_OWNER_DEADLINE);
+    frames=debt>256?256:(uint32_t)debt;
+    if(frames){r=consume(s,frames);if(r!=PT_MIXED_OWNER_OK)return r;}
+    if(now==s->clock_deadline){r=complete(s);s->clock_armed=0;return r;}
+    r=prefetch(s);
+    return r==PT_MIXED_OWNER_OK || r==PT_MIXED_OWNER_PREPARING?PT_MIXED_OWNER_WAITING:r;
 }

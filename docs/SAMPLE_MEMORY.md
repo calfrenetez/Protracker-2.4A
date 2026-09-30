@@ -61,9 +61,16 @@ commits copied sequence state once and dispatches in global order. DONE retains
 readers/master pins until explicit close. Faults abort the sequence and stop
 retained readers once when captured API identities remain safe; changed API/context
 requires restoration before safe close, never force-release. Genuine elapsed-time
-reporting remains the caller's duty. Strict mixed numerical scheduling, sampled
-clock binding and native device output are still required; two independent song
-engines are not a substitute. Cache capacity and physical timing remain separate gates.
+reporting remains the caller's duty. The mixed numerical single-interval gate now
+arms a full positive emitting interval at supplied absolute frame time. Before
+the boundary, service advances live debt <=256 frames plus one preparation step;
+at the exact boundary both routes must already be ready and final debt <=256.
+Commit performs no preparation. Manual progression refuses while armed. Regression/
+overflow poisons CLOCK; late/unready/excess debt poisons DEADLINE with cancellation
+and retained-reader stops, no catch-up/retry. This is supplied numerical time,
+not actual timing evidence. Whole-song mixed scheduling, sampled clock binding
+and native device output remain requirements; two independent song engines are
+not a substitute. Cache capacity and physical timing remain separate gates.
 
 AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software
 fixtures, plus an absent-library discovery check. Those results do not establish

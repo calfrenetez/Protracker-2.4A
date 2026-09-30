@@ -4,7 +4,7 @@
 #include "paula_voices.h"
 struct pt_mixed_owner;
 enum pt_mixed_owner_result {PT_MIXED_OWNER_OK,PT_MIXED_OWNER_PREPARING,
-    PT_MIXED_OWNER_INVALID,PT_MIXED_OWNER_MEMORY,PT_MIXED_OWNER_CAPABILITY,PT_MIXED_OWNER_STALE,PT_MIXED_OWNER_DEVICE,PT_MIXED_OWNER_RENDER,PT_MIXED_OWNER_DONE};
+    PT_MIXED_OWNER_INVALID,PT_MIXED_OWNER_MEMORY,PT_MIXED_OWNER_CAPABILITY,PT_MIXED_OWNER_STALE,PT_MIXED_OWNER_DEVICE,PT_MIXED_OWNER_RENDER,PT_MIXED_OWNER_DONE,PT_MIXED_OWNER_CLOCK,PT_MIXED_OWNER_DEADLINE,PT_MIXED_OWNER_WAITING};
 /* Combined master owner; live sequence scheduling remains unfinished. Atomically claim both
  * idle bound engines of the SAME sampler/project. Copies options/capabilities;
  * no source pins, cache allocation or output at begin. Ownership predicates
@@ -40,6 +40,18 @@ enum pt_mixed_owner_result pt_mixed_owner_next(struct pt_mixed_owner *,struct pt
 enum pt_mixed_owner_result pt_mixed_owner_consume(struct pt_mixed_owner *,uint32_t);
 enum pt_mixed_owner_result pt_mixed_owner_prefetch(struct pt_mixed_owner *);
 enum pt_mixed_owner_result pt_mixed_owner_complete(struct pt_mixed_owner *);
+/* Numerical single-interval deadline gate, NOT actual clock/timing acceptance.
+ * Arm a fresh full positive emitting pending interval at absolute FRAME start.
+ * Service monotonic supplied frames, advance live debt <=256 and one forecast/
+ * cache/conversion step before the boundary. At exact deadline BOTH routes must
+ * already be ready and final debt <=256; commit does no preparation. No early
+ * output. Regression/overflow -> CLOCK; late/unready/excess debt -> DEADLINE,
+ * poison/cancel and bounded retained-reader stops. No catch-up/retry. Manual
+ * next/consume/prefetch/complete/prepare refuse while armed. Completion disarms;
+ * caller arms each next interval separately. Whole-song schedule, sampled clock,
+ * native timer/device output and sound/performance acceptance remain unfinished. */
+enum pt_mixed_owner_result pt_mixed_owner_clock_arm(struct pt_mixed_owner *,uint64_t start);
+enum pt_mixed_owner_result pt_mixed_owner_clock_service(struct pt_mixed_owner *,uint64_t now);
 /* Detect generation/header/API/map/backend changes without bulk PCM scans. */
 enum pt_mixed_owner_result pt_mixed_owner_current(struct pt_mixed_owner *);
 /* Cancel partial promotion and sequence, block both engines, attempt each reader

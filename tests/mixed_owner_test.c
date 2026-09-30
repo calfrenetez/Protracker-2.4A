@@ -77,17 +77,71 @@ static void owner_fixture(unsigned bits,unsigned mode)
             struct pt_render_interval span,sentinel={123,456,789};uint64_t frames=0;
             unsigned intervals=0,polls,starts,wstarts,stops,wstops,allocs,writes;size_t calls;
             assert(pt_mixed_owner_next(owner,NULL)==PT_MIXED_OWNER_INVALID);
+            assert(pt_mixed_owner_clock_service(owner,0)==PT_MIXED_OWNER_INVALID);
             assert(pt_mixed_owner_prefetch(owner)==PT_MIXED_OWNER_INVALID);
             assert(pt_mixed_owner_complete(owner)==PT_MIXED_OWNER_INVALID);
             do {
                 assert(pt_mixed_owner_next(owner,&span)==PT_MIXED_OWNER_OK && ++intervals<20);
                 frames+=span.frames;
+                if(!span.frames)assert(pt_mixed_owner_clock_arm(owner,1000)==PT_MIXED_OWNER_INVALID);
                 assert(pt_mixed_owner_next(owner,&sentinel)==PT_MIXED_OWNER_INVALID);
                 assert(sentinel.frames==123 && sentinel.emit==456 && sentinel.end==789);
                 assert(pt_mixed_owner_prepare(owner,NULL)==PT_MIXED_OWNER_INVALID);
                 assert(pt_mixed_owner_consume(owner,0)==PT_MIXED_OWNER_INVALID);
                 assert(pt_mixed_owner_consume(owner,257)==PT_MIXED_OWNER_INVALID);
                 assert(pt_mixed_owner_complete(owner)==(span.frames?PT_MIXED_OWNER_INVALID:PT_MIXED_OWNER_PREPARING));
+                if(mode>=29 && span.frames && span.emit) {
+                    uint64_t now=1000,end=now+span.frames;unsigned before=d.stops,wbefore=wd.stops;
+                    enum pt_mixed_owner_result expected=PT_MIXED_OWNER_DEADLINE;
+                    if(mode==31) {
+                        assert(pt_mixed_owner_clock_arm(owner,UINT64_MAX)==PT_MIXED_OWNER_CLOCK);goto close;
+                    }
+                    assert(pt_mixed_owner_clock_arm(owner,now)==PT_MIXED_OWNER_OK);
+                    assert(pt_mixed_owner_clock_arm(owner,now)==PT_MIXED_OWNER_INVALID);
+                    assert(pt_mixed_owner_next(owner,&sentinel)==PT_MIXED_OWNER_INVALID && sentinel.frames==123);
+                    assert(pt_mixed_owner_prepare(owner,NULL)==PT_MIXED_OWNER_INVALID);
+                    assert(pt_mixed_owner_consume(owner,1)==PT_MIXED_OWNER_INVALID);
+                    assert(pt_mixed_owner_prefetch(owner)==PT_MIXED_OWNER_INVALID);
+                    assert(pt_mixed_owner_complete(owner)==PT_MIXED_OWNER_INVALID);
+                    starts=d.starts;wstarts=wd.starts;
+                    if(mode==30){expected=PT_MIXED_OWNER_CLOCK;r=pt_mixed_owner_clock_service(owner,now-1);}
+                    else if(mode==32 || mode==35){
+                        if(mode==35)d.stop_result[0]=wd.stop_result=0;
+                        r=pt_mixed_owner_clock_service(owner,end+1);
+                    }else if(mode==33)r=pt_mixed_owner_clock_service(owner,end);
+                    else {
+                        /* Constant pre-boundary timestamps allow bounded preparation
+                         * without consuming any live phase or emitting voices. */
+                        for(polls=0;polls<64;++polls) {
+                            unsigned stepwrites=f->writes;size_t stepcalls=d.calls;
+                            assert(pt_mixed_owner_clock_service(owner,now)==PT_MIXED_OWNER_WAITING);
+                            assert(f->writes-stepwrites<=128 && d.calls-stepcalls<=1 && d.starts==starts && wd.starts==wstarts);
+                            if(mode==36 && polls==1) {
+                                d.stop_result[0]=wd.stop_result=0;assert(!pt_mixed_owner_close(&owner));
+                                d.stop_result[0]=wd.stop_result=1;goto close;
+                            }
+                        }
+                        if(mode==34)r=pt_mixed_owner_clock_service(owner,end); /* Ready but excess live debt. */
+                        else {
+                            while(end-now>128) {now+=128;
+                                assert(pt_mixed_owner_clock_service(owner,now)==PT_MIXED_OWNER_WAITING);
+                                assert(d.starts==starts && wd.starts==wstarts);
+                            }
+                            if(mode==37){assert(!pt_cache_clear(&f->cache.cache));expected=PT_MIXED_OWNER_CAPABILITY;}
+                            calls=d.calls;allocs=fast_calls;writes=f->writes;
+                            r=pt_mixed_owner_clock_service(owner,end);
+                            assert(d.calls==calls && fast_calls==allocs && f->writes==writes);
+                            if(mode==29){assert(r==PT_MIXED_OWNER_OK || r==PT_MIXED_OWNER_DONE);
+                                assert(pt_mixed_owner_clock_service(owner,end)==PT_MIXED_OWNER_INVALID);continue;}
+                        }
+                    }
+                    assert(r==expected && pv.closing && av.closing);
+                    assert(d.starts==starts && wd.starts==wstarts && d.stops==before+1 && wd.stops==wbefore+1);
+                    assert(pt_mixed_owner_clock_service(owner,end)==expected && d.stops==before+1 && wd.stops==wbefore+1);
+                    if(mode==35){assert(pv.voice[0].held && av.voice[7].held && !pt_mixed_owner_close(&owner));
+                        d.stop_result[0]=wd.stop_result=1;}
+                    goto close;
+                }
                 if(span.frames>256){assert(pt_mixed_owner_consume(owner,256)==PT_MIXED_OWNER_OK);span.frames-=256;}
                 starts=d.starts;wstarts=wd.starts;stops=d.stops;wstops=wd.stops;polls=0;
                 if(mode==25 && intervals==2) {
@@ -124,7 +178,7 @@ static void owner_fixture(unsigned bits,unsigned mode)
                 assert(r==PT_MIXED_OWNER_OK || r==PT_MIXED_OWNER_DONE);
                 assert(pt_mixed_owner_complete(owner)==PT_MIXED_OWNER_INVALID);
             }while(r!=PT_MIXED_OWNER_DONE);
-            assert(mode==23 && frames==report.frames && intervals==report.intervals && d.starts==1 && wd.starts==2);
+            assert((mode==23 || mode==29) && frames==report.frames && intervals==report.intervals && d.starts==1 && wd.starts==2);
             assert(pt_mixed_owner_next(owner,&sentinel)==PT_MIXED_OWNER_DONE && sentinel.frames==123);
             assert(pt_mixed_owner_prefetch(owner)==PT_MIXED_OWNER_INVALID);
             assert(pv.voice[0].held && av.voice[7].held);
@@ -238,8 +292,8 @@ detached:
     pt_sampler_release(&sampler);assert(!sampler.bytes);pt_document_release(&doc);free(plan);free(batch);free(f);
 }
 static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wavetable_fixture_main;
-    for(bits=8;bits<=24;bits+=8)for(mode=0;mode<29;++mode)owner_fixture(bits,mode);
-    puts("MIXED OWNER PASS: exclusive engines, union masters, bounded promotion, stale/cancel/refusal and both-reader retention, coordinated staging and global-order prepared commit, whole-batch refusal and partial-failure retention, shared live interval/forecast progression; no clock scheduler");return 0;}
+    for(bits=8;bits<=24;bits+=8)for(mode=0;mode<38;++mode)owner_fixture(bits,mode);
+    puts("MIXED OWNER PASS: exclusive engines, union masters, bounded promotion, stale/cancel/refusal and both-reader retention, coordinated staging and global-order prepared commit, whole-batch refusal and partial-failure retention, shared interval/forecast progression and strict numerical deadline gate; no native clock");return 0;}
 
 #ifndef PT_TEST_MIXED_EXEC
 int main(void){return mixed_owner_fixture();}

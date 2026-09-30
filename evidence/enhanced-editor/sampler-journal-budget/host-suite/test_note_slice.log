@@ -1,0 +1,6 @@
+NOTE SLICE PASS: explicit ordinal mapping, sample attachment, bounds, modal isolation, shared note/sample undo, marker protection, PCM preservation and PTG reopen
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.042s
+
+OK

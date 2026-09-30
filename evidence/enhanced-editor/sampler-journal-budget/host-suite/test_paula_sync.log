@@ -1,0 +1,7 @@
+PAULA PADDING PASS: 8/16/24-bit odd masters, exact silent bytes and stream parity, strict exports, loop/length limits, bounded sync and immutable source
+PAULA SYNC PASS: bounded prefix, full-export parity, sample/header refusal, split blocks, guards and unchanged masters
+.
+----------------------------------------------------------------------
+Ran 1 test in 1.896s
+
+OK

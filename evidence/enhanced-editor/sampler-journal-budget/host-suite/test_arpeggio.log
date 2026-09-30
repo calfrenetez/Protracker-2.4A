@@ -1,0 +1,8 @@
+ARPEGGIO boundaries PASS: 16 tracks, nibble phases, sentinel/adjacent table, mask, inactive base and wrapped counter
+PITCH boundaries PASS: 16 tracks, stored-word wrap, masked output, limits and zero results
+.
+----------------------------------------------------------------------
+Ran 1 test in 8.094s
+
+OK
+ARPEGGIO: nine repeated native traces match host/m68k period words and ramp PCM, including zero-period refusal

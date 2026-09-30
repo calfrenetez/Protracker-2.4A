@@ -1,0 +1,6 @@
+INVERT BOUNCE PASS: shared mutation, exact24 PCM, immutable masters, allocation/budget/cancellation rollback, redo, undo and project save
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.836s
+
+OK

@@ -1,0 +1,8 @@
+STUDIO MIX PASS: pinned versions, atomic controls, pinned handoffs/segments, block continuity, true24 and cleanup
+STUDIO MIX PASS: pinned versions, atomic controls, pinned handoffs/segments, block continuity, true24 and cleanup
+PREPARED MIX PASS: public/private parity, retained handoffs/rollback/aliases, bounded shape refusal and public value validation
+.
+----------------------------------------------------------------------
+Ran 1 test in 1.104s
+
+OK

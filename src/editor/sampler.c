@@ -256,19 +256,21 @@ static int apply(void *context,struct pt_project *p,int direction)
 static void discard(void *context)
 {
     struct sample_change *c=context;struct pt_sampler *s=c->owner;
-    release_version(c->before);release_version(c->after);s->allocator.release(s->allocator.context,c);
+    release_version(c->before);release_version(c->after);s->bytes-=sizeof(*c);s->allocator.release(s->allocator.context,c);
 }
 static enum pt_edit_result commit_kind(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,struct pt_sample_version *after,unsigned resampled)
 {
     struct sample_change *c;struct pt_edit_resource resource;enum pt_edit_result result;
     if(same(&p->samples[slot],&after->sample)) {release_version(after);return PT_EDIT_OK;}
+    if(s->bytes>s->budget || sizeof(*c)>s->budget-s->bytes) {release_version(after);return PT_EDIT_CAPACITY;}
     c=s->allocator.allocate(s->allocator.context,sizeof(*c));
     if(!c) {release_version(after);return PT_EDIT_CAPACITY;}
+    s->bytes+=sizeof(*c);
     c->owner=s;c->slot=slot;c->resampled=resampled;c->after=after;c->before=s->current[slot];
     if(c->before)retain(c->before);
     else if(after->backing && same(&p->samples[slot],&after->backing->sample)) {c->before=after->backing;retain(c->before);}
     else c->before=version(s,&p->samples[slot]);
-    if(!c->before) {release_version(after);s->allocator.release(s->allocator.context,c);return PT_EDIT_CAPACITY;}
+    if(!c->before) {discard(c);return PT_EDIT_CAPACITY;}
     resource.context=c;resource.apply=apply;resource.discard=discard;
     result=pt_pattern_resource_apply(p,h,&resource);if(result!=PT_EDIT_OK)discard(c);
     return result;

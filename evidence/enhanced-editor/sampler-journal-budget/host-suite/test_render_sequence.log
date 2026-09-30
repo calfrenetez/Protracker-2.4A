@@ -1,0 +1,6 @@
+SEQUENCE PASS: exact snapshot/resume audio, fractional loop phase, tempo/delay, pre-roll, partition invariance, protocol and allocation refusal
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.002s
+
+OK

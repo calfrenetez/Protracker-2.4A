@@ -1,0 +1,21 @@
+LOOP/SLICE PASS: metadata, atomic bake undo, proposal commit, non-destructive PCM, retarget refusal, undo/redo conflicts, allocation rollback and exact persistence
+CONVERSION PASS: stereo precision/rate, scaled loops and referenced slice ordinals, exact undo, collapse refusal, allocation rollback, redo and persistence
+IFF SAMPLER PASS: name/volume/loop/PCM, compressed import, exact export, allocation rollback, unsupported refusal, redo and project persistence
+RAW SAMPLER PASS: explicit stereo24 import, exact export, no autodetection, allocation rollback, refusal/redo and persistence
+STEREO24 GAIN HISTORY PASS: clipped extrema, untouched boundary frames, three exact undo/redo cycles and WAV identity
+SAMPLER BUDGET PASS: actual version and journal bytes, one-byte-short refusal, rollback, eviction and redo truncation
+SAMPLER PASS: exact stereo24 import/range edit, unified history, dirty state, no-op redo, allocation rollback, bounded memory, eviction, save/reopen and release
+.CAPTURE STAGING PASS: bounded exact8/16/24 mono/stereo chunks, explicit overrun, atomic owned-buffer publication, capacity charging, pinned metadata/undo lifetime, copy fallback, allocation rollback and exact project roundtrip; synthetic input only
+.CAPTURE SESSION PASS: negotiated tuple refusal without allocation, exact formats, bounded polls, delayed start/stop, stop faults retain ownership, explicit overruns, cancellation and undoable publication; injected input only
+.CAPTURE SESSION PASS: negotiated tuple refusal without allocation, exact formats, bounded polls, delayed start/stop, stop faults retain ownership, explicit overruns, cancellation and undoable publication; injected input only
+AMIGUS CAPTURE PASS: exclusive PCM lease, busy/format/allocation refusal, retained interrupt quiescence, exact stopped recording transfer and resource release; injected only
+.CAPTURE SESSION PASS: negotiated tuple refusal without allocation, exact formats, bounded polls, delayed start/stop, stop faults retain ownership, explicit overruns, cancellation and undoable publication; injected input only
+AMIGUS CAPTURE PASS: exclusive PCM lease, busy/format/allocation refusal, retained interrupt quiescence, exact stopped recording transfer and resource release; injected only
+EDITOR CAPTURE PASS: edit/undo/dispose veto, nonempty recording retained, explicit publish/discard, failed append retry, exact low bits and asynchronous detach; injected input only
+.SLOTS PASS: 0..255 slots, allocation rollback, metadata/PCM/reference preservation, mixed undo, eviction, strict MOD refusal, exact PTG, selection clamp and complete release
+.PIN JOB PASS: bounded PCM/marker copy, atomic 8/16/24-bit publication, cancellation, stale poison, budget/reuse and pinned lifetime
+.
+----------------------------------------------------------------------
+Ran 7 tests in 23.085s
+
+OK

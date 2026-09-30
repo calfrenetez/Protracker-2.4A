@@ -156,8 +156,45 @@ static void allocator_fallback(void)
     }
     assert(success);
 }
+static void removed_recording_pin(void)
+{
+    unsigned bits;
+    for(bits=8;bits<=24;bits+=8) {
+        struct pt_capture c={0};struct pt_document d;struct pt_sampler s;
+        struct pt_pattern_history h;struct pt_pattern_command commands[1];struct pt_event_change changes[1];
+        struct pt_sample_version *old_pin,*new_pin;struct pt_pcm old_pcm,new_pcm;
+        int32_t values[2]={(1L<<(bits-2))+1,-1};struct pt_pcm chunk={values,2,2,48000,1,(uint8_t)bits};
+        unsigned generation;size_t before;
+        pt_document_init(&d,&allocator);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
+        pt_sampler_init(&s,&allocator,1024*1024);
+        assert(pt_pattern_history_init(&h,&d.project,commands,1,changes,1)==PT_EDIT_OK);
+        assert(pt_capture_open(&c,&allocator,bits,1,48000,8,32)==PT_CAPTURE_OK);
+        assert(pt_capture_append(&c,&chunk)==PT_CAPTURE_OK && pt_capture_finish(&c)==PT_CAPTURE_OK);
+        assert(pt_sampler_capture_append(&s,&d.project,&h,&c,"first")==PT_EDIT_OK);
+        generation=s.generation;
+        assert(pt_sampler_pin(&s,&d.project,31,generation,&old_pcm,&old_pin)==PT_EDIT_OK);
+        assert(pt_pattern_undo(&d.project,&h,-1)==PT_EDIT_OK && d.project.sample_count==31);
+        values[0]=-values[0];values[1]=1;
+        assert(pt_capture_open(&c,&allocator,bits,1,48000,8,32)==PT_CAPTURE_OK);
+        assert(pt_capture_append(&c,&chunk)==PT_CAPTURE_OK && pt_capture_finish(&c)==PT_CAPTURE_OK);
+        /* Reuse the removed slot and discard the old recording's redo entry. */
+        assert(pt_sampler_capture_append(&s,&d.project,&h,&c,"second")==PT_EDIT_OK);
+        assert(d.project.sample_count==32 && d.project.samples[31].pcm.data!=old_pcm.data);
+        assert(pt_sampler_pin(&s,&d.project,31,generation,&new_pcm,&new_pin)==PT_EDIT_CONFLICT);
+        assert(pt_sampler_pin(&s,&d.project,31,s.generation,&new_pcm,&new_pin)==PT_EDIT_OK);
+        assert(old_pcm.data[0]==-values[0] && old_pcm.data[1]==-1);
+        assert(new_pcm.data[0]==values[0] && new_pcm.data[1]==1);
+        before=s.bytes;pt_sampler_unpin(old_pin);assert(before-s.bytes>=32);
+        /* Evict the new append command while current and playback still own it. */
+        assert(pt_pattern_title_apply(&d.project,&h,"evict")==PT_EDIT_OK);
+        assert(!memcmp(new_pcm.data,values,sizeof(values)));
+        pt_pattern_history_release(&h);pt_sampler_release(&s);
+        assert(s.bytes>=32 && !memcmp(new_pcm.data,values,sizeof(values)));
+        pt_sampler_unpin(new_pin);assert(!s.bytes);pt_document_release(&d);assert(!live);
+    }
+}
 int main(void)
 {
-    formats();refusals();publication();transfer_ownership();allocator_fallback();assert(!live);
-    puts("CAPTURE STAGING PASS: bounded exact8/16/24 mono/stereo chunks, explicit overrun, atomic owned-buffer publication, capacity charging, pinned metadata/undo lifetime, copy fallback, allocation rollback and exact project roundtrip; synthetic input only");return 0;
+    formats();refusals();publication();transfer_ownership();allocator_fallback();removed_recording_pin();assert(!live);
+    puts("CAPTURE STAGING PASS: bounded exact8/16/24 mono/stereo chunks, explicit overrun, atomic owned-buffer publication, capacity charging, pinned metadata/undo lifetime, removed-slot reuse and redo eviction, copy fallback, allocation rollback and exact project roundtrip; synthetic input only");return 0;
 }

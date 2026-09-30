@@ -1,0 +1,9 @@
+EDITOR STUDIO RESERVED PASS: PCM-only lease spans failed start, natural drain, leased Stop, reset and adapter quiescence; early release/restart refused; fake library/port only
+EDITOR STUDIO START PASS: configurable prefill, acknowledgement gate, edit/undo/Stop, unknown result and reserved quiescence retain ownership
+EDITOR STUDIO OUTPUT PASS: direct24 byte parity, bounded producer/FIFO steps, natural drain, edit/undo/Stop/dispose and failure reset ownership, restart and zero allocations retained
+EDITOR STUDIO PASS: real pinned song stopped by edit/undo/dispose, queued edit/undo/Stop/dispose held leases, natural drain, navigation and cleanup
+.
+----------------------------------------------------------------------
+Ran 1 test in 7.377s
+
+OK

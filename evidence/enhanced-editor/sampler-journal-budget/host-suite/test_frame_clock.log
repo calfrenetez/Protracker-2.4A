@@ -1,0 +1,6 @@
+FRAME CLOCK PASS: fractional tempo changes, exact rates, bounded drift, zero-frame ticks, limits/overflow and atomic failure
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.909s
+
+OK

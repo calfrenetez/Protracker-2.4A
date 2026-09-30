@@ -1,0 +1,6 @@
+PATTERN PASS: 16-channel block edits, exact period/MIDI transpose, OFF retention, clone, bounded undo/redo, dirty tracking, eviction and conflict/no-op safety
+.
+----------------------------------------------------------------------
+Ran 1 test in 1.547s
+
+OK

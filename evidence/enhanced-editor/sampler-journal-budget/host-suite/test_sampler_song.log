@@ -1,0 +1,8 @@
+CURRENT PIN PASS: exact8/16/24 master reuse, budget-free retain, stale/descriptor refusal, shared backing and final release
+STUDIO PREPARATION PASS: bounded copy/cancel/stale/budget, selective pre-roll/repeat pins, stereo24/pingpong/slice parity and stop ownership
+SAMPLER SONG PASS: generation binding, true24 promotion, stop/edit/restart, stale refusal and owner cleanup
+.
+----------------------------------------------------------------------
+Ran 1 test in 5.024s
+
+OK

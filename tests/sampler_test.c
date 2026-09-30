@@ -249,6 +249,50 @@ static void raw_samples(void)
     puts("RAW SAMPLER PASS: explicit stereo24 import, exact export, no autodetection, allocation rollback, refusal/redo and persistence");
 }
 
+/* Observe actual allocator payloads independently of sampler internals. */
+struct budget_probe {void *p[32];size_t n[32],used,peak;};
+static void *budget_allocate(void *context,size_t n)
+{
+    struct budget_probe *b=context;unsigned i;void *p=malloc(n);if(!p)return NULL;
+    for(i=0;i<32 && b->p[i];++i){}assert(i<32);b->p[i]=p;b->n[i]=n;
+    b->used+=n;if(b->used>b->peak)b->peak=b->used;return p;
+}
+static void budget_release(void *context,void *p)
+{
+    struct budget_probe *b=context;unsigned i;if(!p)return;
+    for(i=0;i<32 && b->p[i]!=p;++i){}assert(i<32);
+    b->used-=b->n[i];b->p[i]=NULL;free(p);
+}
+static void journal_budget(void)
+{
+    size_t required=0;unsigned pass,i;
+    for(pass=0;pass<2;++pass) {
+        struct budget_probe b={0};struct pt_allocator a={NULL,allocate,release},owned={&b,budget_allocate,budget_release};
+        struct pt_document d;struct pt_sampler s;struct pt_sample original;
+        struct pt_pattern_history h;struct pt_pattern_command commands[2];struct pt_event_change changes[2];
+        pt_document_init(&d,&a);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);original=d.project.samples[0];
+        pt_sampler_init(&s,&owned,pass?required-1:SIZE_MAX);
+        assert(pt_pattern_history_init(&h,&d.project,commands,2,changes,2)==PT_EDIT_OK);
+        if(pass) {
+            assert(pt_sampler_attributes(&s,&d.project,&h,0,"budget",32,0)==PT_EDIT_CAPACITY);
+            assert(!memcmp(&original,&d.project.samples[0],sizeof(original)) && !h.count && !h.revision && !s.generation);
+            assert(!b.used && !s.bytes && b.peak<=s.budget);
+        } else {
+            assert(pt_sampler_attributes(&s,&d.project,&h,0,"budget",32,0)==PT_EDIT_OK);
+            assert(s.bytes==b.used);required=b.peak;
+            for(i=0;i<8;++i) {
+                assert(pt_sampler_attributes(&s,&d.project,&h,0,"budget",33+i,0)==PT_EDIT_OK);
+                assert(s.bytes==b.used); /* Oldest undo entries are evicted. */
+            }
+            assert(pt_pattern_undo(&d.project,&h,-1)==PT_EDIT_OK && s.bytes==b.used);
+            assert(pt_pattern_title_apply(&d.project,&h,"branch")==PT_EDIT_OK && s.bytes==b.used);
+        }
+        pt_pattern_history_release(&h);assert(s.bytes==b.used);
+        pt_sampler_release(&s);assert(!b.used && !s.bytes);
+        pt_document_release(&d);assert(!live);
+    }
+    puts("SAMPLER BUDGET PASS: actual version and journal bytes, one-byte-short refusal, rollback, eviction and redo truncation");
+}
 int main(void)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_document d,reopened;struct pt_sampler s;
@@ -328,6 +372,6 @@ int main(void)
         pt_pattern_history_release(&h);pt_sampler_release(&s);assert(!s.bytes);
     }
     pt_document_release(&d);pt_document_release(&reopened);assert(!live);
-    loops_and_slices();conversion();iff_samples();raw_samples();stereo24_gain_history();
+    loops_and_slices();conversion();iff_samples();raw_samples();stereo24_gain_history();journal_budget();
     puts("SAMPLER PASS: exact stereo24 import/range edit, unified history, dirty state, no-op redo, allocation rollback, bounded memory, eviction, save/reopen and release");return 0;
 }

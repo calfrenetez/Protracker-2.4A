@@ -3098,3 +3098,19 @@ may still own or write capture staging when this operation is called.
 Host validation and native build results are recorded separately in the capture
 transfer evidence. Emulator execution is pending shared-030 availability; this
 change does not enable real input or qualify physical recording.
+
+## Sampler undo-record accounting and retained recording pins
+
+Sample-edit undo records now participate in the sampler byte ceiling, alongside
+immutable versions and expanded sample tables. A record that does not fit is
+refused before allocation; rollback, history eviction and redo truncation subtract
+its charge exactly once. Previously those records used the bounded native pool
+but were omitted from the sampler's narrower budget.
+
+An allocator-observing regression reproduces the previous accounting mismatch
+and checks a one-byte-short refusal without changing the master or history.
+Recording ownership tests also remove an appended slot through undo, reuse it
+with a new 8/16/24-bit recording, discard redo history and evict undo entries while
+old and current playback pins retain their respective buffers. Stale sampler
+generations refuse new pins, and final release returns all sampler-owned bytes.
+These host checks do not establish native voice dispatch or physical playback.

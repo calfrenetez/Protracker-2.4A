@@ -1,0 +1,6 @@
+AMIGUS REGISTER SESSION PASS: exact packed stream, IRQ bit isolation, drain wait, partial-write/reset delays, ownership loss cleanup, prefill/start/readback, delayed and failed enable, empty/odd tail, Stop pending, bounded configurable prefill/short-stream flush
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.722s
+
+OK

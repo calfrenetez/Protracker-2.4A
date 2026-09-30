@@ -1,0 +1,7 @@
+MOD STREAM PASS: direct/round8/TPDF exact multi-block bytes, legacy headers, loops, 65 patterns, source and destination protection; workspace=7184
+MOD STREAM PASS: direct/round8/TPDF exact multi-block bytes, legacy headers, loops, 65 patterns, source and destination protection; workspace=7184
+.
+----------------------------------------------------------------------
+Ran 1 test in 4.036s
+
+OK

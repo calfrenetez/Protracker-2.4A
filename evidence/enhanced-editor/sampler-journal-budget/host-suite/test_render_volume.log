@@ -1,0 +1,7 @@
+VOLUME boundaries PASS: EC0 and Cxx restore retain silent phase across 16 voices and isolated track 16
+.
+----------------------------------------------------------------------
+Ran 1 test in 3.354s
+
+OK
+VOLUME: seven repeated pinned native traces match every host/m68k rendered PCM frame

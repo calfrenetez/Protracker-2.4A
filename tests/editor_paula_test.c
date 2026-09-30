@@ -3,6 +3,9 @@
 #undef main
 #include "../src/editor/editor_paula.h"
 #include "../src/platform/sample_import.h"
+struct editor_clock {uint64_t ticks;unsigned reads;};
+static int editor_clock_read(void *context,uint64_t *ticks,uint32_t *frequency)
+{struct editor_clock *c=context;++c->reads;*ticks=c->ticks;*frequency=96000;return 1;}
 static void editor_start(struct pt_editor_paula *o,struct pt_sampler_paula *cache,
     struct pt_paula_voices *voices,struct driver *d,unsigned prepare,unsigned play)
 {
@@ -21,12 +24,16 @@ static void editor_start(struct pt_editor_paula *o,struct pt_sampler_paula *cach
     assert(result==PT_PAULA_SONG_OK && !d->reading[0]);
     if(!play)return;
     {
-        uint64_t deadline=0;unsigned polls=0;
-        assert(pt_editor_paula_schedule_begin(o,1000)==PT_PAULA_SONG_OK);
-        do{result=pt_editor_paula_schedule_step(o,999,&deadline);assert(++polls<2000 && !d->reading[0]);}while(result==PT_PAULA_SONG_WAITING);
+        uint64_t deadline=0,ticks;unsigned polls=0;static struct editor_clock clock;
+        clock.ticks=100;clock.reads=0;
+        assert(pt_editor_paula_clocked_begin(o,1000,editor_clock_read,&clock)==PT_PAULA_SONG_OK && clock.reads==1);
+        assert(pt_editor_paula_clocked_deadline(o,&ticks)==PT_PAULA_SONG_OK && ticks==2100 && clock.reads==1);
+        clock.ticks=2098;
+        do{result=pt_editor_paula_clocked_service(o,&deadline);assert(++polls<2000 && !d->reading[0]);}while(result==PT_PAULA_SONG_WAITING);
         assert(result==PT_PAULA_SONG_OK && deadline==1000);
         assert(pt_editor_paula_consume(o,1)==PT_PAULA_SONG_INVALID);
-        assert(pt_editor_paula_schedule_step(o,1000,&deadline)==PT_PAULA_SONG_WAITING && d->reading[0]);
+        clock.ticks=2100;
+        assert(pt_editor_paula_clocked_service(o,&deadline)==PT_PAULA_SONG_WAITING && d->reading[0]);
     }
 }
 static int occupied(void *context) {(void)context;return 1;}

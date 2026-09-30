@@ -4,6 +4,7 @@
 #include "sampler_internal.h"
 #include "project_snapshot.h"
 #include "../core/render_lookahead.h"
+#include "../core/elapsed_clock.h"
 struct pt_paula_song {
     struct pt_allocator allocator;struct pt_paula_voices *voices;
     struct pt_sampler_paula *bridge;struct pt_sampler *sampler;struct pt_project *project,snapshot;
@@ -16,11 +17,12 @@ struct pt_paula_song {
     int8_t map[PT_CHANNEL_LIMIT];uint64_t version;unsigned generation,slot,analyzed,ready,pending,done,closing;
     uint64_t clock_start,clock_last,clock_deadline;unsigned clock_armed;
     uint64_t schedule_start,schedule_last;unsigned schedule_phase,schedule_seen,visited;
+    struct pt_elapsed_clock elapsed;pt_paula_clock_read clock_read;void *clock_context;unsigned clock_bound;
     uint32_t remaining;enum pt_paula_song_result failure;
 };
 static enum pt_paula_song_result fail(struct pt_paula_song *s,enum pt_paula_song_result result)
 {
-    unsigned i;pt_render_lookahead_cancel(&s->ahead);pt_paula_cancel(&s->batch);s->schedule_phase=0;s->clock_armed=0;s->failure=result;s->closing=1;s->voices->closing=1;
+    unsigned i;pt_render_lookahead_cancel(&s->ahead);pt_paula_cancel(&s->batch);s->clock_bound=0;s->schedule_phase=0;s->clock_armed=0;s->failure=result;s->closing=1;s->voices->closing=1;
     pt_render_sequence_close(s->sequence);s->sequence=NULL;
     for(i=0;i<PT_PAULA_VOICES;++i)if(s->voices->voice[i].held)
         pt_paula_stop_owned(s->voices,(unsigned)s->voices->voice[i].track,s);
@@ -242,7 +244,7 @@ static enum pt_paula_song_result scheduled_interval(struct pt_paula_song *s,uint
     if(!span.emit || !span.frames)return fail(s,PT_PAULA_SONG_RENDER);
     r=clock_arm(s,start);if(r==PT_PAULA_SONG_OK)s->schedule_phase=SCHEDULE_RUNNING;return r;
 }
-enum pt_paula_song_result pt_paula_song_schedule_step(struct pt_paula_song *s,uint64_t now,uint64_t *deadline)
+static enum pt_paula_song_result schedule_step(struct pt_paula_song *s,uint64_t now,uint64_t *deadline)
 {
     enum pt_paula_song_result r;struct pt_render_interval span;
     if(!deadline)return PT_PAULA_SONG_INVALID;
@@ -283,6 +285,38 @@ enum pt_paula_song_result pt_paula_song_schedule_step(struct pt_paula_song *s,ui
     *deadline=s->schedule_start;
     return s->schedule_phase==SCHEDULE_READY_NEXT || s->schedule_phase==SCHEDULE_READY_ZERO?
         PT_PAULA_SONG_OK:PT_PAULA_SONG_WAITING;
+}
+enum pt_paula_song_result pt_paula_song_schedule_step(struct pt_paula_song *s,uint64_t now,uint64_t *deadline)
+{return s && !s->clock_bound?schedule_step(s,now,deadline):PT_PAULA_SONG_INVALID;}
+enum pt_paula_song_result pt_paula_song_clocked_begin(struct pt_paula_song *s,uint64_t delay,pt_paula_clock_read read,void *context)
+{
+    uint64_t ticks;uint32_t frequency;enum pt_paula_song_result r=current(s);if(r!=PT_PAULA_SONG_OK)return r;
+    if(!read || !s->ready || s->visited || s->schedule_phase || s->clock_armed || s->clock_bound)return PT_PAULA_SONG_INVALID;
+    if(read(context,&ticks,&frequency)!=1 || pt_elapsed_clock_init(&s->elapsed,frequency,s->options.rate,ticks,0)!=PT_ELAPSED_OK)
+        return fail(s,PT_PAULA_SONG_CLOCK);
+    r=pt_paula_song_schedule_begin(s,delay);if(r!=PT_PAULA_SONG_OK)return r;
+    s->clock_read=read;s->clock_context=context;s->clock_bound=1;return PT_PAULA_SONG_OK;
+}
+enum pt_paula_song_result pt_paula_song_clocked_service(struct pt_paula_song *s,uint64_t *deadline)
+{
+    uint64_t ticks,frames;uint32_t frequency;enum pt_paula_song_result r;
+    if(!deadline)return PT_PAULA_SONG_INVALID;
+    r=current(s);if(r!=PT_PAULA_SONG_OK)return r;
+    if(!s->clock_bound)return PT_PAULA_SONG_INVALID;
+    if(s->clock_read(s->clock_context,&ticks,&frequency)!=1 ||
+       pt_elapsed_clock_advance(&s->elapsed,frequency,ticks,&frames)!=PT_ELAPSED_OK)
+        return fail(s,PT_PAULA_SONG_CLOCK);
+    return schedule_step(s,frames,deadline);
+}
+enum pt_paula_song_result pt_paula_song_clocked_deadline(struct pt_paula_song *s,uint64_t *ticks)
+{
+    enum pt_paula_song_result r;uint64_t frame;
+    if(!ticks)return PT_PAULA_SONG_INVALID;
+    r=current(s);if(r!=PT_PAULA_SONG_OK)return r;
+    if(!s->clock_bound)return PT_PAULA_SONG_INVALID;
+    frame=s->schedule_phase==SCHEDULE_RUNNING?s->clock_deadline:s->schedule_start;
+    if(pt_elapsed_clock_deadline(&s->elapsed,frame,ticks)!=PT_ELAPSED_OK)return fail(s,PT_PAULA_SONG_CLOCK);
+    return PT_PAULA_SONG_OK;
 }
 int pt_paula_song_close(struct pt_paula_song **out)
 {

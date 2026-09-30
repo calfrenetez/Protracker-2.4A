@@ -182,7 +182,7 @@ def main():
     inputs['PTExecPaulaPreflightTest'] = ['tests/native_exec_paula_preflight_test.c',*inputs['PTPaulaPreflightTest'][1:]]
     inputs['PTPaulaDispatchTest'] = ['tests/paula_dispatch_test.c','src/editor/paula_dispatch.c',*dict.fromkeys([*inputs['PTPaulaVoicesTest'][1:],*inputs['PTPaulaPreflightTest'][1:]])]
     inputs['PTExecPaulaDispatchTest'] = ['tests/native_exec_paula_dispatch_test.c',*inputs['PTPaulaDispatchTest'][1:]]
-    inputs['PTPaulaSongTest'] = ['tests/paula_song_test.c','src/editor/paula_song.c',*inputs['PTPaulaDispatchTest'][1:]]
+    inputs['PTPaulaSongTest'] = ['tests/paula_song_test.c','src/editor/paula_song.c','src/core/elapsed_clock.c',*inputs['PTPaulaDispatchTest'][1:]]
     inputs['PTExecPaulaSongTest'] = ['tests/native_exec_paula_song_test.c',*inputs['PTPaulaSongTest'][1:]]
     inputs['PTEditorPaulaTest'] = ['tests/editor_paula_test.c','src/editor/editor_paula.c',*dict.fromkeys([*inputs['PTPaulaSongTest'][1:],*inputs['PTSongTest'][1:],'src/platform/sample_import.c','src/platform/raw_import.c','src/platform/mod_import.c','src/platform/pp20_import.c'])]
     inputs['PTExecEditorPaulaTest'] = ['tests/native_exec_editor_paula_test.c',*inputs['PTEditorPaulaTest'][1:]]

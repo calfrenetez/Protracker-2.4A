@@ -81,6 +81,22 @@ enum pt_paula_song_result pt_paula_song_clock_service(struct pt_paula_song *,uin
  * native timing guarantee; borrowed arrays/callbacks remain immutable as above. */
 enum pt_paula_song_result pt_paula_song_schedule_begin(struct pt_paula_song *,uint64_t);
 enum pt_paula_song_result pt_paula_song_schedule_step(struct pt_paula_song *,uint64_t,uint64_t *);
+/* Sampled monotonic transport clock; callback returns1 and supplies stable
+ * ticks/second and nondecreasing64-bit ticks. Copied callback/context must stay
+ * immutable/alive until confirmed close; serialized/non-reentrant, no edits.
+ * Begin reads once, establishes frame0 epoch and schedules delay frames later.
+ * Service reads EXACTLY once, uses existing checked elapsed-clock fractional
+ * carry then advances same schedule. Numerical schedule_step refuses while bound.
+ * Read failure, frequency change, regression/wrap or conversion/deadline overflow
+ * poison CLOCK with no rebase/catch-up/retry; retain uncertain readers until close.
+ * Returned service deadline remains absolute FRAME time. clocked_deadline converts
+ * current deadline to first tick at/after frame, read-only/no callback. Low clock
+ * frequencies can skip exact frames; translation does not guarantee timely output.
+ * NULL output refuses without reading. No native timer, sleep or hardware proof. */
+typedef int (*pt_paula_clock_read)(void *,uint64_t *,uint32_t *);
+enum pt_paula_song_result pt_paula_song_clocked_begin(struct pt_paula_song *,uint64_t,pt_paula_clock_read,void *);
+enum pt_paula_song_result pt_paula_song_clocked_service(struct pt_paula_song *,uint64_t *);
+enum pt_paula_song_result pt_paula_song_clocked_deadline(struct pt_paula_song *,uint64_t *);
 /* One attempt: block advancement, stop held readers, confirm adapter quiescence,
  * close cache, then release sequence/jobs/master pins and session. Returns0 while
  * unresolved; retain *song and all contexts. No forced free or polling. Success

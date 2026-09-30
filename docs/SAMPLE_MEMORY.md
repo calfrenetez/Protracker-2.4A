@@ -3423,7 +3423,7 @@ replace an active forecast. Close/error cancels private lookahead and unpublishe
 candidates while retaining masters and unconfirmed reader ownership as before.
 
 Source arrays remain immutable, setup/allocation synchronous, and callers own
-real elapsed time. Sampled clock binding and shared mixed-backend scheduling,
+real elapsed time. Shared mixed-backend scheduling,
 native PLAY/DMA and sound/physical acceptance remain requirements. This addition
 provides preparation ahead of logical completion, not a timing guarantee.
 
@@ -3455,8 +3455,7 @@ no catch-up callbacks or retry, master and uncertain reader ownership retained
 until explicit confirmed close. The same shared sequence remains authoritative.
 
 This is a single-interval numerical gate, not native timing acceptance. Caller
-supplies honest elapsed time; sampled monotonic clock binding,
-mixed-backend coordination and native PLAY/timer/DMA/audio remain open.
+supplies honest elapsed time; mixed-backend coordination and native PLAY/timer/DMA/audio remain open.
 
 Four sanitized host modules pass25.492s. Four selected portable/native Ctargets
 plus guard pass:147 indexed sources,zero generated and5 binaries, verified hashes.
@@ -3487,7 +3486,7 @@ poison/cancel/stop without catch-up, retaining uncertain ownership until close.
 Unexpected zero/silent live intervals refuse instead of doing late startup work;
 whole-song44.1/48kHz preflight remains the supported domain. Primed but unstarted
 copies are cancelled on close; failed context quiescence retains session masters.
-Sampled clock binding, native event-loop/timer/PLAY/DMA/audio and mixed outputs
+Native event-loop/timer/PLAY/DMA/audio and mixed outputs
 remain requirements. This scheduler uses supplied numerical frame timestamps;
 it does not qualify actual timing or audible playback.
 
@@ -3501,3 +3500,37 @@ no conversion at exact boundaries, ready idempotence, unready/late/regressing/
 overflow startup, late active reader retained through unconfirmed stop, primed
 cancellation through failed quiescence, and editor barrier while scheduled.
 No native clock/timer/sound or physical acceptance is established by these tests.
+
+
+## Paula sampled monotonic clock binding
+
+`pt_paula_song_clocked_begin/service/deadline` and editor wrappers now bind the
+same schedule to an injected monotonic reader. Begin reads once and establishes
+frame0 epoch, copied project output rate and delay in frames. Each service reads
+exactly once then uses the existing checked `pt_elapsed_clock` conversion with
+fractional carry. Public numerical schedule stepping refuses while bound.
+Deadline translation is read-only and does not call the reader or advance time;
+it returns first counter tick at/after current frame deadline. Low-frequency
+clocks can skip exact frames, so translation is not proof of timely output.
+
+Read failure, changed frequency, counter regression/wrap and conversion or
+future-counter overflow poison CLOCK; late timestamps still poison DEADLINE.
+No live epoch rebase, catch-up callbacks or retry. Reader identity/context must
+remain immutable and alive until confirmed close; serialized non-reentrant reads
+cannot edit project/playback. Failure/close retain master pins and unconfirmed
+readers as before; NULL output refuses without a clock read. Service returns
+absolute FRAME deadline while clocked_deadline returns counter TICKS.
+
+This connection uses a software clock callback. Native E-clock/timer/event-loop,
+Paula DMA/output, sound/performance and physical acceptance remain requirements.
+
+Corrected sanitized host song/editor tests pass16.709s; unchanged dispatch/cache
+checks also pass. Four selected portable/native Ctargets+guard pass:149 indexed
+sources,zero generated,5binaries; source/binary hashes verified. Native shared030
+song and editor pass separately coordinated windows75.890s/23.895s, each with
+Fast/Chip checks, zero owned bytes and independent subsequent locked running/
+all4DMAoff/exact run+launcher absence. Evidence `evidence/enhanced-editor/paula-clock`.
+Tests cover full sampled-clock song, fractional carry, exact tick deadline/no
+reader calls, once-per-service reads, duplicate/manual refusal, bad reads/changed
+frequency/regression/conversion and future tick overflow, late output and retained
+active-reader cleanup. Native clocks/timers/audio/physical remain untested.

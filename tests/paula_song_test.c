@@ -2,6 +2,15 @@
 #include "paula_voices_test.c"
 #undef main
 #include "../src/editor/paula_song.h"
+struct test_clock {uint64_t ticks;uint32_t frequency;unsigned reads;int result;};
+static int clock_read(void *context,uint64_t *ticks,uint32_t *frequency)
+{struct test_clock *c=context;++c->reads;*ticks=c->ticks;*frequency=c->frequency;return c->result;}
+static enum pt_paula_song_result schedule_poll(struct pt_paula_song *song,struct test_clock *c,unsigned sampled,uint64_t now,uint64_t *deadline)
+{
+    unsigned reads=c->reads;enum pt_paula_song_result r;
+    if(!sampled)return pt_paula_song_schedule_step(song,now,deadline);
+    c->ticks=100+now*2;r=pt_paula_song_clocked_service(song,deadline);assert(c->reads==reads+1);return r;
+}
 static void *no_allocate(void *c,size_t n) {(void)c;(void)n;return NULL;}
 static enum pt_paula_song_result prepare_song(struct pt_paula_song *s,struct pt_paula_preflight_report *r)
 {
@@ -178,8 +187,9 @@ static void song_fixture(unsigned bits)
     assert(!pt_paula_song_close(&song) && sampler.bytes==pinned && d.starts==starts && !d.reading[0]);
     d.quiesce_result=1;assert(pt_paula_song_close(&song) && !d.live);
     /* Whole-song startup and each next interval share absolute phase. */
-    for(mode=0;mode<7;++mode) {
-        uint64_t now=1000,deadline=77,last;
+    for(mode=0;mode<13;++mode) {
+        uint64_t now=1000,deadline=77,last,ticks;unsigned reads;
+        struct test_clock clock={100,96000,0,1};unsigned sampled=mode==0 || mode>=7;
         BIND();assert(pt_paula_song_begin(&owner,&o,&caps,&a,&song)==PT_PAULA_SONG_PREPARING);
         assert(prepare_song(song,&report)==PT_PAULA_SONG_OK);
         starts=d.starts;stops=d.stops;
@@ -187,23 +197,52 @@ static void song_fixture(unsigned bits)
             assert(pt_paula_song_schedule_begin(song,UINT64_MAX)==PT_PAULA_SONG_CLOCK);
             assert(d.starts==starts && pt_paula_song_close(&song));continue;
         }
-        assert(pt_paula_song_schedule_begin(song,1000)==PT_PAULA_SONG_OK);
+        if(mode==11) {
+            clock.frequency=1;clock.ticks=0;
+            assert(pt_paula_song_clocked_begin(song,1000,clock_read,&clock)==PT_PAULA_SONG_OK);
+            clock.ticks=UINT64_MAX;reads=clock.reads;
+            assert(pt_paula_song_clocked_service(song,&deadline)==PT_PAULA_SONG_CLOCK && clock.reads==reads+1 && deadline==77);
+            assert(pt_paula_song_close(&song));continue;
+        }
+        if(sampled) {
+            assert(pt_paula_song_clocked_begin(song,1000,clock_read,&clock)==PT_PAULA_SONG_OK && clock.reads==1);
+            assert(pt_paula_song_clocked_begin(song,1000,clock_read,&clock)==PT_PAULA_SONG_INVALID && clock.reads==1);
+            assert(pt_paula_song_schedule_step(song,999,&deadline)==PT_PAULA_SONG_INVALID && deadline==77);
+            assert(pt_paula_song_clocked_service(song,NULL)==PT_PAULA_SONG_INVALID && clock.reads==1);
+            assert(pt_paula_song_clocked_deadline(song,&ticks)==PT_PAULA_SONG_OK && ticks==2100 && clock.reads==1);
+            /* Single ticks carry half a frame rather than rounding per poll. */
+            clock.ticks=101;assert(pt_paula_song_clocked_service(song,&deadline)==PT_PAULA_SONG_WAITING);
+            assert(pt_paula_song_clocked_deadline(song,&ticks)==PT_PAULA_SONG_OK && ticks==2100);
+            clock.ticks=102;assert(pt_paula_song_clocked_service(song,&deadline)==PT_PAULA_SONG_WAITING);
+            assert(pt_paula_song_clocked_deadline(song,&ticks)==PT_PAULA_SONG_OK && ticks==2100);
+            if(mode==12) {
+                /* First tick at/after deadline cannot be represented. */
+                assert(pt_paula_song_close(&song));BIND();
+                assert(pt_paula_song_begin(&owner,&o,&caps,&a,&song)==PT_PAULA_SONG_PREPARING);
+                assert(prepare_song(song,&report)==PT_PAULA_SONG_OK);
+                clock.ticks=UINT64_MAX-1;
+                assert(pt_paula_song_clocked_begin(song,1000,clock_read,&clock)==PT_PAULA_SONG_OK);
+                reads=clock.reads;ticks=17;
+                assert(pt_paula_song_clocked_deadline(song,&ticks)==PT_PAULA_SONG_CLOCK && ticks==17 && clock.reads==reads);
+                assert(pt_paula_song_close(&song));continue;
+            }
+        }else assert(pt_paula_song_schedule_begin(song,1000)==PT_PAULA_SONG_OK);
         assert(pt_paula_song_schedule_begin(song,1000)==PT_PAULA_SONG_INVALID);
         assert(pt_paula_song_next(song,&span)==PT_PAULA_SONG_INVALID);
         assert(pt_paula_song_prepare(song,NULL)==PT_PAULA_SONG_INVALID);
         assert(pt_paula_song_clock_arm(song,1000)==PT_PAULA_SONG_INVALID);
-        assert(pt_paula_song_schedule_step(song,999,NULL)==PT_PAULA_SONG_INVALID && deadline==77);
+        assert(pt_paula_song_schedule_step(song,999,NULL)==PT_PAULA_SONG_INVALID && deadline==(sampled?1000:77));
         if(mode==1) {
             assert(pt_paula_song_schedule_step(song,1000,&deadline)==PT_PAULA_SONG_DEADLINE && deadline==77);
             assert(d.starts==starts && pt_paula_song_close(&song));continue;
         }
         polls=0;
         do {
-            result=pt_paula_song_schedule_step(song,999,&deadline);assert(++polls<2000);
+            result=schedule_poll(song,&clock,sampled,999,&deadline);assert(++polls<2000);
             assert(deadline==1000 && d.starts==starts && d.stops==stops);
         }while(result==PT_PAULA_SONG_WAITING);
         assert(result==PT_PAULA_SONG_OK);
-        calls=d.calls;assert(pt_paula_song_schedule_step(song,999,&deadline)==PT_PAULA_SONG_OK && d.calls==calls);
+        calls=d.calls;assert(schedule_poll(song,&clock,sampled,999,&deadline)==PT_PAULA_SONG_OK && d.calls==calls);
         if(mode==2 || mode==3) {
             enum pt_paula_song_result expected=mode==2?PT_PAULA_SONG_DEADLINE:PT_PAULA_SONG_CLOCK;
             assert(pt_paula_song_schedule_step(song,mode==2?1001:998,&deadline)==expected && deadline==1000);
@@ -214,8 +253,21 @@ static void song_fixture(unsigned bits)
             assert(!pt_paula_song_close(&song) && sampler.bytes==pinned && d.starts==starts);
             d.quiesce_result=1;assert(pt_paula_song_close(&song));continue;
         }
-        d.fail=1;assert(pt_paula_song_schedule_step(song,now,&deadline)==PT_PAULA_SONG_WAITING);d.fail=0;
+        d.fail=1;assert(schedule_poll(song,&clock,sampled,now,&deadline)==PT_PAULA_SONG_WAITING);d.fail=0;
         assert(d.calls==calls && d.reading[0] && deadline>now);
+        if(mode>=7) {
+            enum pt_paula_song_result expected=mode==10?PT_PAULA_SONG_DEADLINE:PT_PAULA_SONG_CLOCK;
+            reads=clock.reads;stops=d.stops;starts=d.starts;pinned=sampler.bytes;last=deadline;d.stop_result[0]=0;
+            if(mode==7)clock.result=0;
+            else if(mode==8)++clock.frequency;
+            else if(mode==9)--clock.ticks;
+            else clock.ticks=100+(deadline+1)*2;
+            assert(pt_paula_song_clocked_service(song,&deadline)==expected && clock.reads==reads+1 && deadline==last);
+            assert(d.starts==starts && d.stops==stops+1 && d.reading[0]);reads=clock.reads;
+            assert(pt_paula_song_clocked_service(song,&deadline)==expected && clock.reads==reads);
+            assert(!pt_paula_song_close(&song) && sampler.bytes==pinned);
+            d.stop_result[0]=1;assert(pt_paula_song_close(&song));continue;
+        }
         if(mode==5) {
             d.stop_result[0]=0;pinned=sampler.bytes;starts=d.starts;stops=d.stops;last=deadline;
             assert(pt_paula_song_schedule_step(song,deadline+1,&deadline)==PT_PAULA_SONG_DEADLINE && deadline==last);
@@ -225,9 +277,9 @@ static void song_fixture(unsigned bits)
         }
         for(i=0;i<100;++i) {
             last=deadline;
-            for(polls=0;polls<100;++polls)assert(pt_paula_song_schedule_step(song,now,&deadline)==PT_PAULA_SONG_WAITING && deadline==last);
-            while(last-now>128){now+=128;assert(pt_paula_song_schedule_step(song,now,&deadline)==PT_PAULA_SONG_WAITING && deadline==last);}
-            now=last;calls=d.calls;d.fail=1;result=pt_paula_song_schedule_step(song,now,&deadline);d.fail=0;
+            for(polls=0;polls<100;++polls)assert(schedule_poll(song,&clock,sampled,now,&deadline)==PT_PAULA_SONG_WAITING && deadline==last);
+            while(last-now>128){now+=128;assert(schedule_poll(song,&clock,sampled,now,&deadline)==PT_PAULA_SONG_WAITING && deadline==last);}
+            now=last;calls=d.calls;d.fail=1;result=schedule_poll(song,&clock,sampled,now,&deadline);d.fail=0;
             assert(d.calls==calls);
             if(result==PT_PAULA_SONG_DONE){assert(deadline==last);break;}
             assert(result==PT_PAULA_SONG_WAITING && deadline>last);

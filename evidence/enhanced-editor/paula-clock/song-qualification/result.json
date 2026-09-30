@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "seconds": 75.89041995804291,
+  "window_bound_seconds": 200,
+  "cases": [
+    {
+      "case": "song",
+      "binary": "PTExecPaulaSongTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-clock-candidate/build/dev/render-files-1790792885996962000",
+      "sha256": "03c6a41993969098c40517850d096804999cbb32affb5dd8df416f11c4aaf0bd",
+      "independent_cleanup": true
+    }
+  ]
+}

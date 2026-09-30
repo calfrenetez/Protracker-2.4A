@@ -18,7 +18,7 @@ software implementation from the remaining integration and hardware gates.
 | AmiGUS wavetable copies | Versioned evictable resource pool, sampler revision/master-pin bridge, bounded 16-voice lease owner with validated rate/loop/address plans, mono sequencer trigger/control/stop dispatch, preflight-gated master-pinned sequence ownership, editor veto/retry barriers and injected callbacks, 8/16-bit conversion and bounded address allocator/chunk uploader behind an injected register bus; failure/pinning tests. | Verified card capacity, native bus binding and voice dispatcher; explicit wavetable reservation/cache lifetime now implemented and tested with fake callbacks. Injected register tests do not establish real card access. |
 | Direct24-bit Studio | Master-pinned mixer, audited sequence, sampler/editor ownership, bounded queue/pump and integrated PCM-session owner with capacity-bounded prefill and explicit start acknowledgement; optional reservation lease retained through reset and adapter quiescence. Up to16 voice slots are a software bound. | Native PLAY/output wiring, verified hardware capabilities and sustainable physical voice-count/timing evidence. |
 | Master-preserving persistence | Bounded enhanced-project/sample saving and explicit classic conversion; private EFx exports/bounce never replace masters. Explicit new-file recovery snapshots and staged identity-checked restoration preserve all master precision. | Native opt-in configuration, idle scheduling, bounded retention, read-only discovery, explicit recovery UI and exact save are implemented and emulator-tested; preferences-panel controls, real crash/endurance and physical acceptance remain. |
-| Recording masters | Bounded full-precision collector, injected input lifecycle, exclusive PCM/interrupt ownership, editor mutation/disposal veto and retryable undoable publication; host and native Exec fixtures pass. | Actual input capability negotiation, native input register/backend and controls, duplex ownership if needed, physical capture quality/overrun evidence. |
+| Recording masters | Bounded full-precision collector, exact negotiated-format gate, injected input lifecycle, exclusive PCM/interrupt ownership, editor mutation/disposal veto and retryable undoable publication. Earlier recording owners passed native Exec fixtures; the new exact-format gate passes host tests and Amiga builds, with emulator execution pending after a prelaunch identity refusal. | Actual input capability negotiation, native input register/backend and controls, duplex ownership if needed, physical capture quality/overrun evidence. |
 | Playback invalidation | Revision/settings keys, retired active leases and stop-before-edit/undo/dispose guards. Private EFx banks are discarded on stop and rebuilt on restart. | End-to-end real AmiGUS voice/transfer ownership, once the device adapter exists. |
 
 AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software
@@ -3066,3 +3066,17 @@ explicitly released. See `evidence/enhanced-editor/recording-integration` for so
 attribution, full host logs and per-fixture scope. This is software/file/lifecycle
 acceptance; actual recording devices, native recording controls and physical
 AmiGUS capabilities remain separate gates.
+
+## Exact recording input format boundary
+
+The injected input binding now carries its exact, already-negotiated precision,
+channel count and rate. A missing, malformed or mismatched tuple is refused before
+collector allocation, input callbacks or acquisition of the PCM access lease.
+There is no implicit 24-to-16-bit fallback, resampling or channel conversion.
+The session copies the selected tuple; start must still acknowledge that exact
+format and use the existing stop/quiescence failure path if the binding is stale.
+Editor refusal preserves the project, history and selected sample.
+
+This is a software contract enforced against injected adapters. Actual hardware
+capability discovery/negotiation and a native input adapter remain required.
+The collector's support for 24-bit PCM does not advertise 24-bit device capture.

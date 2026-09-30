@@ -32,6 +32,11 @@ static void reservation_refusals(void)
     assert(pt_amigus_reservation_begin(&r));
     assert(!pt_amigus_capture_open(&o,&r,&p,&allocator,24,2,48000,2,16));
     assert(r.access && pt_amigus_reservation_end(&r));
+    {size_t before=allocations;
+     p.format.bits=16;
+     assert(!pt_amigus_capture_open(&o,&r,&p,&allocator,24,2,48000,2,16));
+     assert(!r.access && !o.reservation && !live && !in.starts && allocations==before);
+     p.format.bits=24;}
     fail_allocate=1;assert(!pt_amigus_capture_open(&o,&r,&p,&allocator,24,2,48000,2,16));fail_allocate=0;
     assert(!r.access && !o.reservation && !live && !in.starts);
     assert(!pt_amigus_capture_open(&o,&r,&p,&allocator,32,2,48000,2,16) && !r.access);

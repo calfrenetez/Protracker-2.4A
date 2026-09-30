@@ -1,5 +1,10 @@
 #include "capture_session.h"
 #include <string.h>
+int pt_capture_input_accepts(const struct pt_capture_input *in,unsigned bits,unsigned channels,uint32_t rate)
+{
+    return in && (bits==8 || bits==16 || bits==24) && (channels==1 || channels==2) &&
+        rate && rate<=192000 && in->format.bits==bits && in->format.channels==channels && in->format.rate==rate;
+}
 static enum pt_capture_poll fail(struct pt_capture_session *s,enum pt_capture_fault fault)
 {
     if(!s->fault)s->fault=fault;
@@ -10,6 +15,7 @@ enum pt_capture_result pt_capture_session_open(struct pt_capture_session *s,cons
 {
     enum pt_capture_result result;
     if(!s || s->phase!=PT_CS_IDLE || !in || !in->start || !in->read || !in->stop)return PT_CAPTURE_INVALID;
+    if(!pt_capture_input_accepts(in,bits,channels,rate))return PT_CAPTURE_UNSUPPORTED;
     result=pt_capture_open(&s->capture,a,bits,channels,rate,frames,budget);
     if(result!=PT_CAPTURE_OK)return result;
     s->input=*in;s->fault=PT_CS_NO_FAULT;s->cancelled=0;s->phase=PT_CS_START;

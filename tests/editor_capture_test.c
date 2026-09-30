@@ -21,6 +21,11 @@ static void mutation_barrier(void)
         revision=e->history.revision;event=d.project.events[0];sample=e->sample;
         assert(pt_editor_capture_attach(&o,e) && !pt_editor_capture_attach(&other,e));
         assert(pt_amigus_reservation_open(&r,&a,0)==PT_AMIGUS_RESERVED);
+        before=allocations;p.format.bits=16;
+        assert(!pt_editor_capture_start(&o,&r,&p,24,2,48000,4,32));
+        assert(!r.access && !pt_editor_capture_busy(&o) && allocations==before && !in.starts);
+        assert(e->history.revision==revision && e->sample==sample);
+        p.format.bits=24;
         assert(pt_editor_capture_start(&o,&r,&p,24,2,48000,4,32));
         in.start_rc=in.read_rc=1;in.frames=2;
         assert(pt_editor_capture_step(&o)==PT_CS_PENDING && pt_editor_capture_step(&o)==PT_CS_PENDING);
@@ -54,6 +59,7 @@ static void abort_detach(void)
     struct pt_amigus_reservation r={0};struct pt_amigus_reservation_api a=api(&f);size_t before;
     assert(e);setup_editor(e,&d);before=live;
     assert(pt_editor_capture_attach(&o,e) && pt_amigus_reservation_open(&r,&a,0)==PT_AMIGUS_RESERVED);
+    p.format=(struct pt_capture_format){16,1,22050};
     assert(pt_editor_capture_start(&o,&r,&p,16,1,22050,4,16));
     assert(pt_editor_capture_step(&o)==PT_CS_PENDING); /* pending start */
     assert(!pt_editor_capture_detach(&o) && e->change_ready && r.access && live==before+1);

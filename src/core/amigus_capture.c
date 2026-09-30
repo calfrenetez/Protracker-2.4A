@@ -24,10 +24,12 @@ static int stop_input(void *context)
 }
 int pt_amigus_capture_open(struct pt_amigus_capture *o,struct pt_amigus_reservation *r,const struct pt_capture_input *in,const struct pt_allocator *a,unsigned bits,unsigned channels,uint32_t rate,uint32_t frames,size_t budget)
 {
-    struct pt_capture_input guarded={o,start_input,read_input,stop_input};
+    struct pt_capture_input guarded;
     if(!o || o->reservation || o->session.phase!=PT_CS_IDLE || !r || !r->opened || !r->card ||
        r->resource!=PT_AMIGUS_PCM || !in || !in->start || !in->read || !in->stop ||
+       !pt_capture_input_accepts(in,bits,channels,rate) ||
        !pt_amigus_reservation_begin(r))return 0;
+    guarded=*in;guarded.context=o;guarded.start=start_input;guarded.read=read_input;guarded.stop=stop_input;
     o->reservation=r;o->input=*in;
     if(pt_capture_session_open(&o->session,a,&guarded,bits,channels,rate,frames,budget)!=PT_CAPTURE_OK) {
         /* No input callback/interrupt installation has happened yet. */

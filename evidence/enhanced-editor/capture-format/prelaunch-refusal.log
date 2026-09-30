@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/shared_infra_render_files.py", line 362, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/shared_infra_render_files.py", line 95, in main
+    guest=Guest(INFRA,out)
+  File "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/shared_guest.py", line 10, in __init__
+    if len(rows)!=1 or not owns(rows[0][1],'amiberry-030'):raise RuntimeError('Not the shared 030 emulator')
+                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Not the shared 030 emulator

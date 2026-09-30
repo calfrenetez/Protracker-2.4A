@@ -1,7 +1,7 @@
 #ifndef PT_CAPTURE_H
 #define PT_CAPTURE_H
 #include "document.h"
-enum pt_capture_result {PT_CAPTURE_OK,PT_CAPTURE_INVALID,PT_CAPTURE_CAPACITY,PT_CAPTURE_OVERRUN};
+enum pt_capture_result {PT_CAPTURE_OK,PT_CAPTURE_INVALID,PT_CAPTURE_CAPACITY,PT_CAPTURE_OVERRUN,PT_CAPTURE_UNSUPPORTED};
 /* Serialized software collector only, not device capture. The caller negotiates
  * the exact format with its backend; accepting a format here proves no hardware
  * capability. Allocate before starting the device. Append synchronously copies

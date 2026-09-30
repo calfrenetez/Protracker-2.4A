@@ -4,6 +4,10 @@
 enum pt_capture_phase {PT_CS_IDLE,PT_CS_START,PT_CS_RECORD,PT_CS_STOP,PT_CS_DONE};
 enum pt_capture_poll {PT_CS_PENDING,PT_CS_COMPLETE,PT_CS_ERROR};
 enum pt_capture_fault {PT_CS_NO_FAULT,PT_CS_INPUT_FAULT,PT_CS_OVERRUN,PT_CS_DATA_FAULT,PT_CS_STOP_FAULT};
+/* Exact format already negotiated by the adapter for this binding. An unknown
+ * or different tuple is refused, never silently resampled or reduced. This is
+ * an adapter declaration, not proof of a real device capability. */
+struct pt_capture_format {unsigned bits,channels;uint32_t rate;};
 /* Injected, serialized input adapter; no native device implementation.
  * Format is negotiated before open. start returns exactly1 for ready, 0 pending,
  * anything else a fault (possibly partially started). Repeated pending start
@@ -20,7 +24,12 @@ struct pt_capture_input {
     int (*start)(void *,unsigned bits,unsigned channels,uint32_t rate);
     int (*read)(void *,int32_t *,unsigned max_frames,unsigned *frames);
     int (*stop)(void *);
+    struct pt_capture_format format;
 };
+/* Pure validation, no callbacks or allocation. Zero/unknown format refuses.
+ * start must still confirm that this exact format is active; a stale binding
+ * must fail start and follow the normal stop/quiescence contract. */
+int pt_capture_input_accepts(const struct pt_capture_input *,unsigned bits,unsigned channels,uint32_t rate);
 struct pt_capture_session {
     struct pt_capture capture;
     struct pt_capture_input input;
@@ -29,7 +38,8 @@ struct pt_capture_session {
     enum pt_capture_fault fault;
     unsigned cancelled;
 };
-/* Zero-init once. Allocates before any input callback; failed open owns nothing.
+/* Zero-init once. Refuses an unknown/mismatched format before allocation.
+ * Allocates before any input callback; failed open owns nothing.
  * Do not access/move/close internal capture directly while attached. */
 enum pt_capture_result pt_capture_session_open(struct pt_capture_session *,const struct pt_allocator *,const struct pt_capture_input *,unsigned bits,unsigned channels,uint32_t rate,uint32_t frames,size_t budget);
 /* At most one adapter callback per poll, no allocation. ERROR is not cleanup:

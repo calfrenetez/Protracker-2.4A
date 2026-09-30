@@ -34,13 +34,48 @@ static int read_input(void *ctx,int32_t *out,unsigned max,unsigned *frames)
 static int stop(void *ctx)
 {struct fake *f=ctx;++f->stops;if(f->stop_rc==1)device_owned=0;return f->stop_rc;}
 static struct pt_capture_input input(struct fake *f)
-{struct pt_capture_input in={f,start,read_input,stop};return in;}
+{struct pt_capture_input in={f,start,read_input,stop,{24,2,48000}};return in;}
+static void negotiated_formats(void)
+{
+    const struct pt_capture_format formats[]={{8,1,8000},{8,2,48000},
+        {16,1,22050},{16,2,44100},{24,1,96000},{24,2,48000}};
+    const struct pt_capture_format invalid[]={{0,0,0},{32,2,48000},
+        {24,3,48000},{24,2,0},{24,2,192001}};
+    unsigned i,j;
+    for(i=0;i<6;++i)for(j=0;j<6;++j) {
+        struct fake f={0};struct pt_capture_session s={0};struct pt_capture_input in=input(&f);
+        size_t before=allocations;in.format=formats[i];
+        assert(pt_capture_input_accepts(&in,formats[j].bits,formats[j].channels,formats[j].rate)==(i==j));
+        assert(pt_capture_session_open(&s,&allocator,&in,formats[j].bits,formats[j].channels,formats[j].rate,1,8)==
+            (i==j?PT_CAPTURE_OK:PT_CAPTURE_UNSUPPORTED));
+        assert(!f.starts && !f.reads && !f.stops && !device_owned);
+        if(i==j) {
+            in.format=(struct pt_capture_format){0,0,0}; /* binding is copied */
+            assert(s.input.format.bits==formats[i].bits && s.input.format.channels==formats[i].channels && s.input.format.rate==formats[i].rate);
+            f.stop_rc=1;pt_capture_session_abort(&s);assert(pt_capture_session_step(&s)==PT_CS_COMPLETE);
+        } else assert(s.phase==PT_CS_IDLE && allocations==before && !live);
+        assert(pt_capture_session_close(&s) && !live);
+    }
+    for(i=0;i<sizeof(invalid)/sizeof(invalid[0]);++i) {
+        struct fake f={0};struct pt_capture_session s={0};struct pt_capture_input in=input(&f);
+        size_t before=allocations;in.format=invalid[i];
+        assert(pt_capture_session_open(&s,&allocator,&in,24,2,48000,1,8)==PT_CAPTURE_UNSUPPORTED);
+        assert(!pt_capture_input_accepts(&in,in.format.bits,in.format.channels,in.format.rate));
+        assert(!f.starts && !live && allocations==before && s.phase==PT_CS_IDLE);
+    }
+    {struct fake f={0};struct pt_capture_input in=input(&f);
+     assert(!pt_capture_input_accepts(&in,16,2,48000));
+     assert(!pt_capture_input_accepts(&in,24,1,48000));
+     assert(!pt_capture_input_accepts(&in,24,2,44100));
+     assert(!pt_capture_input_accepts(NULL,24,2,48000));}
+}
 static void completed_formats(void)
 {
     unsigned bits,channels,i;
     for(bits=8;bits<=24;bits+=8)for(channels=1;channels<=2;++channels) {
         struct fake f={0};struct pt_capture_session s={0};struct pt_capture c={0};struct pt_capture_input in=input(&f);
         const struct pt_pcm *pcm;size_t calls;
+        in.format=(struct pt_capture_format){bits,channels,48000};
         f.frames=256;f.read_rc=1;
         assert(pt_capture_session_open(&s,&allocator,&in,bits,channels,48000,257,257*channels*4)==PT_CAPTURE_OK);
         calls=allocations;assert(!f.starts && !device_owned && live==1);
@@ -103,6 +138,7 @@ static void cancellation(void)
     unsigned mode;
     for(mode=0;mode<5;++mode) {
         struct fake f={0};struct pt_capture_session s={0};struct pt_capture c={0};struct pt_capture_input in=input(&f);
+        in.format=(struct pt_capture_format){16,1,22050};
         f.read_rc=1;f.frames=1;
         assert(pt_capture_session_open(&s,&allocator,&in,16,1,22050,4,16)==PT_CAPTURE_OK);
         if(mode)assert(pt_capture_session_step(&s)==PT_CS_PENDING);
@@ -118,6 +154,7 @@ static void cancellation(void)
     }
     {
         struct fake f={0};struct pt_capture_session s={0};struct pt_capture c={0};struct pt_capture_input in=input(&f);
+        in.format=(struct pt_capture_format){8,1,8000};
         assert(pt_capture_session_open(&s,&allocator,&in,8,1,8000,1,4)==PT_CAPTURE_OK);
         pt_capture_session_finish(&s);f.stop_rc=1;assert(pt_capture_session_step(&s)==PT_CS_COMPLETE);
         assert(!f.starts && !f.reads && !pt_capture_session_take(&s,&c));
@@ -160,6 +197,6 @@ static void invalid_open(void)
 }
 int main(void)
 {
-    invalid_open();completed_formats();faults();cancellation();publication();assert(!live && !device_owned);
-    puts("CAPTURE SESSION PASS: exact formats, bounded polls, delayed start/stop, stop faults retain ownership, explicit overruns, cancellation and undoable publication; injected input only");return 0;
+    negotiated_formats();invalid_open();completed_formats();faults();cancellation();publication();assert(!live && !device_owned);
+    puts("CAPTURE SESSION PASS: negotiated tuple refusal without allocation, exact formats, bounded polls, delayed start/stop, stop faults retain ownership, explicit overruns, cancellation and undoable publication; injected input only");return 0;
 }

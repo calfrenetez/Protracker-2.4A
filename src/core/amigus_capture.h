@@ -16,7 +16,8 @@ struct pt_amigus_capture {
     struct pt_capture_input input;
 };
 /* Returns0 without acquiring input when busy, wrong block, malformed or out of
- * memory. No callbacks run in open. Caller owns library/reservation release. */
+ * memory. The exact adapter format must match before acquiring the PCM lease.
+ * No callbacks run in open. Caller owns library/reservation release. */
 int pt_amigus_capture_open(struct pt_amigus_capture *,struct pt_amigus_reservation *,const struct pt_capture_input *,const struct pt_allocator *,unsigned bits,unsigned channels,uint32_t rate,uint32_t frames,size_t budget);
 /* Same bounded callback/error/cleanup contract as capture_session. Ends access
  * only after confirmed stop and no interrupt owner, including fault/abort paths. */

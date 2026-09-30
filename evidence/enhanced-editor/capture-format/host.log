@@ -1,0 +1,12 @@
+CAPTURE SESSION PASS: negotiated tuple refusal without allocation, exact formats, bounded polls, delayed start/stop, stop faults retain ownership, explicit overruns, cancellation and undoable publication; injected input only
+AMIGUS CAPTURE PASS: exclusive PCM lease, busy/format/allocation refusal, retained interrupt quiescence, exact stopped recording transfer and resource release; injected only
+.CAPTURE STAGING PASS: bounded exact8/16/24 mono/stereo chunks, explicit overrun, atomic undoable sampler publication, allocation rollback and exact project roundtrip; synthetic input only
+.CAPTURE SESSION PASS: negotiated tuple refusal without allocation, exact formats, bounded polls, delayed start/stop, stop faults retain ownership, explicit overruns, cancellation and undoable publication; injected input only
+.CAPTURE SESSION PASS: negotiated tuple refusal without allocation, exact formats, bounded polls, delayed start/stop, stop faults retain ownership, explicit overruns, cancellation and undoable publication; injected input only
+AMIGUS CAPTURE PASS: exclusive PCM lease, busy/format/allocation refusal, retained interrupt quiescence, exact stopped recording transfer and resource release; injected only
+EDITOR CAPTURE PASS: edit/undo/dispose veto, nonempty recording retained, explicit publish/discard, failed append retry, exact low bits and asynchronous detach; injected input only
+.
+----------------------------------------------------------------------
+Ran 4 tests in 14.415s
+
+OK

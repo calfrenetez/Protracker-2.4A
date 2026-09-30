@@ -3,11 +3,13 @@
 #include "paula_internal.h"
 #include "sampler_internal.h"
 #include "project_snapshot.h"
+#include "../core/render_lookahead.h"
 struct pt_paula_song {
     struct pt_allocator allocator;struct pt_paula_voices *voices;
     struct pt_sampler_paula *bridge;struct pt_sampler *sampler;struct pt_project *project,snapshot;
     int (*quiesce)(void *);void *quiesce_context;
     struct pt_paula_voice_api api;struct pt_paula_render_caps caps;struct pt_render_options options;
+    struct pt_render_lookahead ahead;unsigned forecast;
     struct pt_render_sequence *sequence;struct pt_render_plan plan;struct pt_paula_prepared batch;
     struct pt_sample_version *pin[PT_PROJECT_SAMPLES];struct pt_sampler_pin_job job;
     struct pt_paula_preflight_report report;struct pt_render_interval interval;
@@ -16,7 +18,7 @@ struct pt_paula_song {
 };
 static enum pt_paula_song_result fail(struct pt_paula_song *s,enum pt_paula_song_result result)
 {
-    unsigned i;pt_paula_cancel(&s->batch);s->failure=result;s->closing=1;s->voices->closing=1;
+    unsigned i;pt_render_lookahead_cancel(&s->ahead);pt_paula_cancel(&s->batch);s->failure=result;s->closing=1;s->voices->closing=1;
     pt_render_sequence_close(s->sequence);s->sequence=NULL;
     for(i=0;i<PT_PAULA_VOICES;++i)if(s->voices->voice[i].held)
         pt_paula_stop_owned(s->voices,(unsigned)s->voices->voice[i].track,s);
@@ -111,12 +113,39 @@ enum pt_paula_song_result pt_paula_song_consume(struct pt_paula_song *s,uint32_t
     if(pt_render_sequence_consume(s->sequence,frames)!=PT_RENDER_OK)return fail(s,PT_PAULA_SONG_RENDER);
     s->remaining-=frames;return PT_PAULA_SONG_OK;
 }
+enum pt_paula_song_result pt_paula_song_prefetch(struct pt_paula_song *s)
+{
+    unsigned ready=0;enum pt_paula_song_result state=current(s);
+    if(state!=PT_PAULA_SONG_OK)return state;
+    if(!s->ready)return PT_PAULA_SONG_PREPARING;
+    if(!s->pending || (!s->forecast && (s->batch.preparing || s->batch.ready)))return PT_PAULA_SONG_INVALID;
+    if(!s->forecast) {
+        if(pt_render_lookahead_begin(&s->ahead,s->sequence)!=PT_RENDER_OK)return fail(s,PT_PAULA_SONG_RENDER);
+        s->forecast=1;return PT_PAULA_SONG_PREPARING;
+    }
+    if(s->forecast==1) {
+        if(pt_render_lookahead_step(&s->ahead,256,&s->plan,&ready)!=PT_RENDER_OK)return fail(s,PT_PAULA_SONG_RENDER);
+        if(ready) {
+            if(!pt_paula_prepare_begin_owned(&s->batch,s->voices,s->version,s->options.rate,&s->plan,&s->caps,s->pin,s))
+                return fail(s,PT_PAULA_SONG_DEVICE);
+            s->forecast=2;
+        }
+        return PT_PAULA_SONG_PREPARING;
+    }
+    if(s->forecast==3)return PT_PAULA_SONG_OK;
+    switch(pt_paula_prepare_step_owned(&s->batch)) {
+    case PT_CACHE_LOAD:s->forecast=3;return PT_PAULA_SONG_OK;
+    case PT_CACHE_PENDING:return PT_PAULA_SONG_PREPARING;
+    default:return fail(s,PT_PAULA_SONG_DEVICE);
+    }
+}
 enum pt_paula_song_result pt_paula_song_stage(struct pt_paula_song *s)
 {
     enum pt_paula_song_result state=current(s);
     if(state!=PT_PAULA_SONG_OK)return state;
     if(!s->ready)return PT_PAULA_SONG_PREPARING;
     if(!s->pending || s->remaining)return PT_PAULA_SONG_INVALID;
+    if(s->forecast)return pt_paula_song_prefetch(s);
     if(s->batch.ready)return PT_PAULA_SONG_OK;
     if(!s->batch.preparing) {
         if(pt_render_sequence_complete(s->sequence,&s->plan)!=PT_RENDER_OK)return fail(s,PT_PAULA_SONG_RENDER);
@@ -134,6 +163,12 @@ enum pt_paula_song_result pt_paula_song_complete(struct pt_paula_song *s)
 {
     enum pt_paula_song_result state=current(s);int result;
     if(state!=PT_PAULA_SONG_OK)return state;
+    if(s->forecast) {
+        if(s->remaining)return PT_PAULA_SONG_INVALID;
+        if(s->forecast!=3)return PT_PAULA_SONG_PREPARING;
+        if(pt_render_lookahead_commit(&s->ahead)!=PT_RENDER_OK)return fail(s,PT_PAULA_SONG_RENDER);
+        s->forecast=0;
+    }
     if(s->batch.preparing)return PT_PAULA_SONG_PREPARING;
     /* Compatibility callers that never stage retain synchronous preparation.
      * Explicit incremental callers must finish stage before complete emits. */
@@ -152,7 +187,7 @@ int pt_paula_song_close(struct pt_paula_song **out)
     struct pt_paula_song *s;struct pt_allocator a;unsigned i;
     if(!out)return 0;
     s=*out;if(!s)return 1;
-    s->closing=1;pt_paula_cancel(&s->batch);
+    s->closing=1;pt_render_lookahead_cancel(&s->ahead);pt_paula_cancel(&s->batch);
     if(!pt_paula_close_owned(s->voices,s))return 0;
     pt_render_sequence_close(s->sequence);pt_sampler_pin_job_cancel(&s->job);
     for(i=0;i<PT_PROJECT_SAMPLES;++i)pt_sampler_unpin(s->pin[i]);

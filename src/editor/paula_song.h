@@ -33,6 +33,15 @@ enum pt_paula_song_result pt_paula_song_prepare(struct pt_paula_song *,struct pt
  * DONE also requires close; it is not confirmation of hardware quiescence. */
 enum pt_paula_song_result pt_paula_song_next(struct pt_paula_song *,struct pt_render_interval *);
 enum pt_paula_song_result pt_paula_song_consume(struct pt_paula_song *,uint32_t);
+/* Optional prepare-ahead on the SAME pending shared interval, including while
+ * live frames remain. Each call snapshots, advances a private command copy by
+ * <=256 frames, resolves its plan, or advances one bounded cache preparation
+ * step. No live consume or device callbacks. Consume may proceed serially.
+ * Ready is idempotent; complete refuses early/incomplete preparation and commits
+ * lookahead only after exact live consumption, then applies without conversion.
+ * Cannot mix a started ordinary stage with prefetch. Close/error cancels both.
+ * Caller still owns monotonic timing/deadlines; no clock scheduler is provided. */
+enum pt_paula_song_result pt_paula_song_prefetch(struct pt_paula_song *);
 /* Optional stage after logical consume finishes, before complete emits output.
  * Advances/checks the plan, then each call reserves one candidate OR copies
  * <=256 output bytes OR advances one action without callbacks. PREPARING requires

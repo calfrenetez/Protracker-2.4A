@@ -3406,3 +3406,33 @@ Allocation/eviction, whole capability traversal and compatibility preparation
 remain synchronous. This does not implement a prepare-ahead clock/deadline
 scheduler, mixed-backend coordination, repeat/segment restoration, native PLAY
 or actual DMA/audio. Physical hardware remains deferred and was not probed.
+
+
+## Paula shared-sequence prepare-ahead
+
+`pt_paula_song_prefetch` and its editor wrapper now use the existing immutable
+`pt_render_lookahead` on the same pending sequence. Preparation may start after
+partial consumption; later live consumption does not disturb the private snapshot.
+Calls advance at most256 forecast frames or one bounded Chip cache preparation
+step. No output or live sequence commit occurs during prefetch. Ready candidates
+retain their leases; completion requires fully consumed live frames and fully
+prepared candidates, commits the lookahead once and applies without conversion.
+Explicit incomplete prefetch returns PREPARING without synchronous draining.
+Ordinary staging and unstaged synchronous completion remain available but cannot
+replace an active forecast. Close/error cancels private lookahead and unpublished
+candidates while retaining masters and unconfirmed reader ownership as before.
+
+Source arrays remain immutable, setup/allocation synchronous, and callers own
+real elapsed time. Monotonic clock/deadline refusal, shared mixed-backend scheduling,
+native PLAY/DMA and sound/physical acceptance remain requirements. This addition
+provides preparation ahead of logical completion, not a timing guarantee.
+
+Four sanitized host modules (song/editor/dispatch/cache) pass. Four selected C
+builds plus guard pass from an isolated indexed candidate:147 recorded sources,
+zero generated sources; source and binary hashes verified. Native shared030 song
+and editor fixtures pass in28.677seconds overall with Fast/Chip allocation checks,
+zero owned bytes and independently confirmed cleanup after each. Evidence:
+`evidence/enhanced-editor/paula-lookahead`. The software fixtures exercise partial
+consumption, further live consumption during forecast, ready idempotence,
+no conversion during apply and cancellation of an unpublished forecast candidate.
+No actual DMA/audio, native timer scheduling or physical hardware was exercised.

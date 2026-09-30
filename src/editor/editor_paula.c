@@ -33,3 +33,6 @@ enum pt_paula_song_result pt_editor_paula_stage(struct pt_editor_paula *o)
 {return attached(o)?pt_paula_song_stage(o->song):PT_PAULA_SONG_INVALID;}
 enum pt_paula_song_result pt_editor_paula_complete(struct pt_editor_paula *o)
 {return attached(o)?pt_paula_song_complete(o->song):PT_PAULA_SONG_INVALID;}
+
+enum pt_paula_song_result pt_editor_paula_prefetch(struct pt_editor_paula *o)
+{return attached(o)?pt_paula_song_prefetch(o->song):PT_PAULA_SONG_INVALID;}

@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 routed Paula editor with native allocators and injected callbacks; no native DMA/output",
+  "PTExecEditorPaulaTest_sha256": "e52c4c0faf1789a25fc4811379417b0e21c0c11e3da99fb320e1137d9561b9ae",
+  "editor-paula_returncode": "0",
+  "run_files_cleaned": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0"
+}

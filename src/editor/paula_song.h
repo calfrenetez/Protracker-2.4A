@@ -4,7 +4,8 @@
 struct pt_paula_song;
 enum pt_paula_song_result {PT_PAULA_SONG_OK,PT_PAULA_SONG_PREPARING,PT_PAULA_SONG_DONE,
     PT_PAULA_SONG_INVALID,PT_PAULA_SONG_CAPABILITY,PT_PAULA_SONG_MEMORY,
-    PT_PAULA_SONG_STALE,PT_PAULA_SONG_RENDER,PT_PAULA_SONG_DEVICE};
+    PT_PAULA_SONG_STALE,PT_PAULA_SONG_RENDER,PT_PAULA_SONG_DEVICE,
+    PT_PAULA_SONG_WAITING,PT_PAULA_SONG_CLOCK,PT_PAULA_SONG_DEADLINE};
 /* Claim an idle bound voice owner; publish a cancellable handle, no pins/output.
  * Options/caps copied. Selected audio tracks must all route to Paula; other
  * tracks remain in the full16-track shared global flow. Mixed selected outputs,
@@ -53,6 +54,20 @@ enum pt_paula_song_result pt_paula_song_prefetch(struct pt_paula_song *);
  * or failure cancels unstarted candidates before ordinary reader cleanup. */
 enum pt_paula_song_result pt_paula_song_stage(struct pt_paula_song *);
 enum pt_paula_song_result pt_paula_song_complete(struct pt_paula_song *);
+/* Strict single-interval gate using caller-supplied absolute elapsed frame time.
+ * Arm a positive emitting pending interval before live consumption; optional
+ * prefetch may already be underway. Check start+frames overflow. While armed,
+ * direct next/prepare/consume/prefetch/stage/complete refuse; close remains valid.
+ * Service advances <=256 elapsed frames and one preparation step before deadline.
+ * Same timestamp may be serviced repeatedly. At EXACT start+interval.frames,
+ * forecast must ALREADY be ready and remaining frame debt<=256: commit/apply only,
+ * no cache preparation/allocation. Returns OK/DONE at boundary, WAITING earlier.
+ * Regression/overflow -> CLOCK; late/unready/excess debt -> DEADLINE. Poison once,
+ * cancel unstarted candidates and request stops, retaining uncertain ownership
+ * until close confirms cleanup. No catch-up output or retry. No clock reads,
+ * sleeps, native timers or whole-song scheduler; caller supplies honest time. */
+enum pt_paula_song_result pt_paula_song_clock_arm(struct pt_paula_song *,uint64_t);
+enum pt_paula_song_result pt_paula_song_clock_service(struct pt_paula_song *,uint64_t);
 /* One attempt: block advancement, stop held readers, confirm adapter quiescence,
  * close cache, then release sequence/jobs/master pins and session. Returns0 while
  * unresolved; retain *song and all contexts. No forced free or polling. Success

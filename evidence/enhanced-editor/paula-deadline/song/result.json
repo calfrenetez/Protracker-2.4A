@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 routed Paula song with native allocators and injected callbacks; no native DMA/output",
+  "PTExecPaulaSongTest_sha256": "d42edf21c6200858e01ae9c849c8b9c0b0f8937ce4461277bacd506ee4844325",
+  "paula-song_returncode": "0",
+  "run_files_cleaned": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=333\tsndbuf_status=0"
+}

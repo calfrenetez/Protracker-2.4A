@@ -22,6 +22,14 @@ static void editor_start(struct pt_editor_paula *o,struct pt_sampler_paula *cach
     if(!play)return;
     for(n=0;!d->reading[0];++n) {
         assert(n<20 && pt_editor_paula_next(o,&span)==PT_PAULA_SONG_OK);
+        if(span.frames && span.emit) {
+            uint64_t now=1000,end=now+span.frames;unsigned polls;
+            assert(pt_editor_paula_clock_arm(o,now)==PT_PAULA_SONG_OK);
+            assert(pt_editor_paula_consume(o,1)==PT_PAULA_SONG_INVALID);
+            for(polls=0;polls<100;++polls)assert(pt_editor_paula_clock_service(o,now)==PT_PAULA_SONG_WAITING);
+            while(end-now>128){now+=128;assert(pt_editor_paula_clock_service(o,now)==PT_PAULA_SONG_WAITING);}
+            assert(pt_editor_paula_clock_service(o,end)==PT_PAULA_SONG_OK);continue;
+        }
         do{result=pt_editor_paula_prefetch(o);assert(!d->reading[0]);}while(result==PT_PAULA_SONG_PREPARING);
         assert(result==PT_PAULA_SONG_OK);
         while(span.frames){uint32_t block=span.frames>256?256:span.frames;

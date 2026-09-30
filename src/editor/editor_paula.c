@@ -36,3 +36,8 @@ enum pt_paula_song_result pt_editor_paula_complete(struct pt_editor_paula *o)
 
 enum pt_paula_song_result pt_editor_paula_prefetch(struct pt_editor_paula *o)
 {return attached(o)?pt_paula_song_prefetch(o->song):PT_PAULA_SONG_INVALID;}
+
+enum pt_paula_song_result pt_editor_paula_clock_arm(struct pt_editor_paula *o,uint64_t start)
+{return attached(o)?pt_paula_song_clock_arm(o->song,start):PT_PAULA_SONG_INVALID;}
+enum pt_paula_song_result pt_editor_paula_clock_service(struct pt_editor_paula *o,uint64_t now)
+{return attached(o)?pt_paula_song_clock_service(o->song,now):PT_PAULA_SONG_INVALID;}

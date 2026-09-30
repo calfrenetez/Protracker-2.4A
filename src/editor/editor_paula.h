@@ -27,4 +27,6 @@ enum pt_paula_song_result pt_editor_paula_consume(struct pt_editor_paula *,uint3
 enum pt_paula_song_result pt_editor_paula_prefetch(struct pt_editor_paula *);
 enum pt_paula_song_result pt_editor_paula_stage(struct pt_editor_paula *);
 enum pt_paula_song_result pt_editor_paula_complete(struct pt_editor_paula *);
+enum pt_paula_song_result pt_editor_paula_clock_arm(struct pt_editor_paula *,uint64_t);
+enum pt_paula_song_result pt_editor_paula_clock_service(struct pt_editor_paula *,uint64_t);
 #endif

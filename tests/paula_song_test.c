@@ -29,7 +29,7 @@ static void song_fixture(unsigned bits)
     struct pt_render_options o={0},saved_options;struct pt_render_report measured;
     struct pt_paula_preflight_report report;struct pt_paula_song *song=NULL,*unchanged=(void *)(uintptr_t)1;
     struct pt_render_interval span,before_span={17,18,19};struct pt_render_plan direct={0};struct pt_paula_batch batch;
-    int32_t pcm[1024],stereo[2048];unsigned i,stops,starts,polls;uint64_t frames=0;size_t pinned,calls;
+    int32_t pcm[1024],stereo[2048];unsigned i,stops,starts,polls,mode;uint64_t frames=0;size_t pinned,calls;
     struct pt_paula_voice_request request={0,16,428,64};enum pt_paula_song_result result;
     for(i=0;i<1024;++i){pcm[i]=(int32_t)(i%120)+1;stereo[i*2]=stereo[i*2+1]=(int32_t)(i%120)+1;}
     d.start_result=d.control_result=d.quiesce_result=1;for(i=0;i<4;++i)d.stop_result[i]=1;
@@ -72,6 +72,27 @@ static void song_fixture(unsigned bits)
         assert(pt_paula_song_next(song,&span)==PT_PAULA_SONG_OK);frames+=span.frames;
         assert(pt_paula_song_next(song,&before_span)==PT_PAULA_SONG_INVALID);
         assert(pt_paula_song_consume(song,0)==PT_PAULA_SONG_INVALID);
+        if(span.frames && span.emit) {
+            uint64_t now=1000,end=now+span.frames;
+            starts=d.starts;stops=d.stops;
+            assert(pt_paula_song_clock_arm(song,now)==PT_PAULA_SONG_OK);
+            assert(pt_paula_song_clock_arm(song,now)==PT_PAULA_SONG_INVALID);
+            assert(pt_paula_song_next(song,&before_span)==PT_PAULA_SONG_INVALID);
+            assert(pt_paula_song_prepare(song,NULL)==PT_PAULA_SONG_INVALID);
+            assert(pt_paula_song_consume(song,1)==PT_PAULA_SONG_INVALID);
+            assert(pt_paula_song_prefetch(song)==PT_PAULA_SONG_INVALID);
+            assert(pt_paula_song_stage(song)==PT_PAULA_SONG_INVALID);
+            assert(pt_paula_song_complete(song)==PT_PAULA_SONG_INVALID);
+            for(polls=0;polls<100;++polls)assert(pt_paula_song_clock_service(song,now)==PT_PAULA_SONG_WAITING);
+            while(end-now>128) {
+                now+=128;assert(pt_paula_song_clock_service(song,now)==PT_PAULA_SONG_WAITING);
+                assert(d.starts==starts && d.stops==stops);
+            }
+            calls=d.calls;d.fail=1;result=pt_paula_song_clock_service(song,end);d.fail=0;
+            assert(d.calls==calls && (result==PT_PAULA_SONG_OK || result==PT_PAULA_SONG_DONE));
+            assert(pt_paula_song_clock_service(song,end)==PT_PAULA_SONG_INVALID);
+            continue;
+        }
         if(span.frames)assert(pt_paula_song_complete(song)==PT_PAULA_SONG_INVALID);
         /* Forecast at a partially consumed interval; ready must neither consume
          * the remaining live frames nor emit. Exercise all source depths. */
@@ -156,6 +177,31 @@ static void song_fixture(unsigned bits)
     pinned=sampler.bytes;d.quiesce_result=0;
     assert(!pt_paula_song_close(&song) && sampler.bytes==pinned && d.starts==starts && !d.reading[0]);
     d.quiesce_result=1;assert(pt_paula_song_close(&song) && !d.live);
+    /* Clock failures with an active reader never catch up or retry output;
+     * uncertain stop retains session/master ownership until explicit close. */
+    for(mode=0;mode<5;++mode) {
+        enum pt_paula_song_result expected=mode<2?PT_PAULA_SONG_CLOCK:PT_PAULA_SONG_DEADLINE;
+        BIND();assert(pt_paula_song_begin(&owner,&o,&caps,&a,&song)==PT_PAULA_SONG_PREPARING);
+        assert(prepare_song(song,&report)==PT_PAULA_SONG_OK);
+        for(i=0;!d.reading[0];++i) {
+            assert(i<20 && pt_paula_song_next(song,&span)==PT_PAULA_SONG_OK);
+            while(span.frames){uint32_t n=span.frames>256?256:span.frames;assert(pt_paula_song_consume(song,n)==PT_PAULA_SONG_OK);span.frames-=n;}
+            assert(pt_paula_song_complete(song)==PT_PAULA_SONG_OK);
+        }
+        assert(pt_paula_song_next(song,&span)==PT_PAULA_SONG_OK && span.emit && span.frames>256);
+        starts=d.starts;stops=d.stops;pinned=sampler.bytes;d.stop_result[0]=0;
+        if(mode==0)assert(pt_paula_song_clock_arm(song,UINT64_MAX)==expected);
+        else {
+            assert(pt_paula_song_clock_arm(song,1000)==PT_PAULA_SONG_OK);
+            if(mode==4)for(polls=0;polls<100;++polls)assert(pt_paula_song_clock_service(song,1000)==PT_PAULA_SONG_WAITING);
+            assert(pt_paula_song_clock_service(song,mode==1?999:1000+span.frames+(mode==2?1:0))==expected);
+        }
+        assert(d.starts==starts && d.stops==stops+1 && d.reading[0]);stops=d.stops;
+        assert(pt_paula_song_clock_service(song,1000)==expected && d.stops==stops);
+        assert(pt_paula_song_next(song,&span)==expected && d.starts==starts);
+        assert(!pt_paula_song_close(&song) && sampler.bytes==pinned);
+        d.stop_result[0]=1;assert(pt_paula_song_close(&song) && !d.live);
+    }
     BIND();assert(pt_paula_song_begin(&owner,&o,&caps,&a,&song)==PT_PAULA_SONG_PREPARING);
     assert(prepare_song(song,&report)==PT_PAULA_SONG_OK);
     d.start_result=0;d.stop_result[0]=0;stops=d.stops;

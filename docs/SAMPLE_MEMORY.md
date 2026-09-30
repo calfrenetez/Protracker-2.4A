@@ -3423,7 +3423,7 @@ replace an active forecast. Close/error cancels private lookahead and unpublishe
 candidates while retaining masters and unconfirmed reader ownership as before.
 
 Source arrays remain immutable, setup/allocation synchronous, and callers own
-real elapsed time. Monotonic clock/deadline refusal, shared mixed-backend scheduling,
+real elapsed time. Sampled clock binding, whole-song and shared mixed-backend scheduling,
 native PLAY/DMA and sound/physical acceptance remain requirements. This addition
 provides preparation ahead of logical completion, not a timing guarantee.
 
@@ -3436,3 +3436,33 @@ zero owned bytes and independently confirmed cleanup after each. Evidence:
 consumption, further live consumption during forecast, ready idempotence,
 no conversion during apply and cancellation of an unpublished forecast candidate.
 No actual DMA/audio, native timer scheduling or physical hardware was exercised.
+
+
+## Paula strict interval deadline gate
+
+`pt_paula_song_clock_arm/service` and editor wrappers now implement the existing
+wavetable interval-gate convention using caller-supplied absolute elapsed frame
+timestamps. Arm requires a positive emitting interval with no live frames consumed;
+existing prefetch may be pending/ready. Start+length overflow poisons CLOCK.
+While armed, manual advancement/preparation refuses and close/edit barriers remain
+available. Before deadline a service consumes<=256 elapsed frames and advances
+one bounded forecast/cache preparation step; repeated identical timestamps may
+finish preparation. The exact boundary requires the forecast already ready and
+frame debt<=256, then commits/applies without conversion/cache allocation.
+Regressing timestamps poison CLOCK; late, unready or excess boundary debt poison
+DEADLINE. Failure cancels unstarted candidates and requests bounded stops once;
+no catch-up callbacks or retry, master and uncertain reader ownership retained
+until explicit confirmed close. The same shared sequence remains authoritative.
+
+This is a single-interval numerical gate, not native timing acceptance. Caller
+supplies honest elapsed time; sampled monotonic clock binding, whole-song scheduling,
+mixed-backend coordination and native PLAY/timer/DMA/audio remain open.
+
+Four sanitized host modules pass25.492s. Four selected portable/native Ctargets
+plus guard pass:147 indexed sources,zero generated and5 binaries, verified hashes.
+Native shared030 song/editor fixtures pass44.078s overall; Fast/Chip checks,
+zero owned bytes and independent locked running/all4DMAoff/exact run+launcher
+absence confirmed after each. Evidence `evidence/enhanced-editor/paula-deadline`.
+Tests cover exact boundaries with no allocation during apply, manual-call refusal,
+regression/start overflow/late/unready/excess debt and uncertain stop retention.
+This numerical fixture does not validate actual clocks, timing or audible output.

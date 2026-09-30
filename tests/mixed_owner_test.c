@@ -19,6 +19,9 @@ static int wave_control(void *c,unsigned id,uint32_t rate,uint16_t l,uint16_t r)
 {(void)c;(void)id;(void)rate;(void)l;(void)r;assert(output_count<32);output_order[output_count++]=4;return 1;}
 static int wave_quiesce(void *c){struct wave_driver *d=c;++d->barriers;return d->barrier_result;}
 static void *refuse_alloc(void *c,size_t n){(void)c;(void)n;return NULL;}
+struct mixed_counter {uint64_t ticks;uint32_t frequency;unsigned reads;int result;};
+static int mixed_read(void *c,uint64_t *ticks,uint32_t *frequency)
+{struct mixed_counter *m=c;++m->reads;*ticks=m->ticks;*frequency=m->frequency;return m->result;}
 static void owner_fixture(unsigned bits,unsigned mode)
 {
     struct pt_allocator a={NULL,counted_fast,fast_free};struct pt_document doc;struct pt_sampler sampler;
@@ -73,6 +76,55 @@ static void owner_fixture(unsigned bits,unsigned mode)
         assert(r==PT_MIXED_OWNER_OK && sampler.current[0] && sampler.current[1] && !sampler.current[2]);
         assert(report.samples[0][0] && report.samples[1][0] && report.samples[1][1]);
         doc.project.channels.selected=15;assert(pt_mixed_owner_current(owner)==PT_MIXED_OWNER_OK);
+        if(mode>=49) {
+            struct mixed_counter counter={700,2*o.rate,0,1};uint64_t deadline=777,ticks=888,now=0,prior;unsigned polls,reads,starts,wstarts,allocs,writes;size_t calls;
+            assert(pt_mixed_owner_clocked_service(owner,&deadline)==PT_MIXED_OWNER_INVALID && deadline==777);
+            assert(pt_mixed_owner_clocked_deadline(owner,&ticks)==PT_MIXED_OWNER_INVALID && ticks==888);
+            assert(pt_mixed_owner_clocked_begin(owner,1000,NULL,&counter)==PT_MIXED_OWNER_INVALID && !counter.reads);
+            if(mode==50)counter.result=0;
+            if(mode==54)counter.ticks=UINT64_MAX;
+            if(mode==55)counter.frequency=o.rate/2;
+            r=pt_mixed_owner_clocked_begin(owner,mode==55?1001:1000,mixed_read,&counter);
+            if(mode==50){assert(r==PT_MIXED_OWNER_CLOCK && counter.reads==1 && !d.starts && !wd.starts);goto close;}
+            assert(r==PT_MIXED_OWNER_OK && counter.reads==1);
+            assert(pt_mixed_owner_clocked_begin(owner,1000,mixed_read,&counter)==PT_MIXED_OWNER_INVALID && counter.reads==1);
+            assert(pt_mixed_owner_schedule_begin(owner,1000)==PT_MIXED_OWNER_INVALID);
+            assert(pt_mixed_owner_schedule_step(owner,0,&deadline)==PT_MIXED_OWNER_INVALID && deadline==777);
+            assert(pt_mixed_owner_clocked_service(owner,NULL)==PT_MIXED_OWNER_INVALID && counter.reads==1);
+            assert(pt_mixed_owner_clocked_deadline(owner,NULL)==PT_MIXED_OWNER_INVALID && counter.reads==1);
+            if(mode==54){assert(pt_mixed_owner_clocked_deadline(owner,&ticks)==PT_MIXED_OWNER_CLOCK && ticks==888);goto close;}
+            if(mode==51 || mode==52){if(mode==51)++counter.frequency;else --counter.ticks;
+                assert(pt_mixed_owner_clocked_service(owner,&deadline)==PT_MIXED_OWNER_CLOCK && deadline==777 && !d.starts && !wd.starts);goto close;}
+            do {r=pt_mixed_owner_clocked_service(owner,&deadline);assert(!d.starts && !wd.starts);}while(r==PT_MIXED_OWNER_WAITING);
+            assert(r==PT_MIXED_OWNER_OK);
+            reads=counter.reads;assert(pt_mixed_owner_clocked_deadline(owner,&ticks)==PT_MIXED_OWNER_OK && counter.reads==reads);
+            if(mode==55){assert(ticks==1201);counter.ticks=ticks;
+                assert(pt_mixed_owner_clocked_service(owner,&deadline)==PT_MIXED_OWNER_DEADLINE && deadline==1001 && !d.starts && !wd.starts);goto close;}
+            assert(ticks==2700);
+            /* Half-frame observation retains fractional carry without early output. */
+            counter.ticks=701;assert(pt_mixed_owner_clocked_service(owner,&deadline)==PT_MIXED_OWNER_OK);
+            assert(pt_mixed_owner_clocked_deadline(owner,&ticks)==PT_MIXED_OWNER_OK && ticks==2700);
+            counter.ticks=ticks;assert(pt_mixed_owner_clocked_service(owner,&deadline)==PT_MIXED_OWNER_WAITING && d.starts==1 && wd.starts==1);
+            if(mode==53){unsigned stops=d.stops,wstops=wd.stops;counter.result=0;d.stop_result[0]=wd.stop_result=0;prior=deadline;
+                assert(pt_mixed_owner_clocked_service(owner,&deadline)==PT_MIXED_OWNER_CLOCK && deadline==prior);
+                assert(d.stops==stops+1 && wd.stops==wstops+1 && pv.voice[0].held && av.voice[7].held);
+                reads=counter.reads;assert(pt_mixed_owner_clocked_service(owner,&deadline)==PT_MIXED_OWNER_CLOCK && counter.reads==reads && d.stops==stops+1);
+                assert(!pt_mixed_owner_close(&owner));d.stop_result[0]=wd.stop_result=1;goto close;}
+            now=1000;
+            do {
+                starts=d.starts;wstarts=wd.starts;
+                for(polls=0;polls<64;++polls)assert(pt_mixed_owner_clocked_service(owner,&deadline)==PT_MIXED_OWNER_WAITING);
+                assert(d.starts==starts && wd.starts==wstarts);
+                while(deadline-now>128){now+=128;counter.ticks=700+2*now;assert(pt_mixed_owner_clocked_service(owner,&deadline)==PT_MIXED_OWNER_WAITING);}
+                assert(pt_mixed_owner_clocked_deadline(owner,&ticks)==PT_MIXED_OWNER_OK && ticks==700+2*deadline);
+                now=deadline;counter.ticks=ticks;prior=deadline;calls=d.calls;allocs=fast_calls;writes=f->writes;
+                r=pt_mixed_owner_clocked_service(owner,&deadline);assert(d.calls==calls && fast_calls==allocs && f->writes==writes);
+                if(r==PT_MIXED_OWNER_WAITING)assert(deadline>prior);else assert(r==PT_MIXED_OWNER_DONE && now==1000+report.frames && deadline==prior);
+            }while(r==PT_MIXED_OWNER_WAITING);
+            reads=counter.reads;counter.result=0;assert(pt_mixed_owner_clocked_service(owner,&deadline)==PT_MIXED_OWNER_DONE && deadline==prior && counter.reads==reads);
+            ticks=888;assert(pt_mixed_owner_clocked_deadline(owner,&ticks)==PT_MIXED_OWNER_DONE && ticks==888);
+            d.quiesce_result=wd.barrier_result=0;assert(!pt_mixed_owner_close(&owner));d.quiesce_result=wd.barrier_result=1;goto close;
+        }
         if(mode>=38) {
             uint64_t start_time=1000,now=0,deadline=777,prior,total_end;unsigned polls=0,starts,wstarts,allocs,writes;size_t calls;
             assert(pt_mixed_owner_schedule_step(owner,0,&deadline)==PT_MIXED_OWNER_INVALID && deadline==777);
@@ -355,11 +407,11 @@ static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wave
 #ifdef PT_TEST_MIXED_SCHEDULE_ONLY
     /* Keep the already-qualified legacy cases in full host regressions; this
      * separate native window qualifies the new scheduling scenarios only. */
-    for(bits=8;bits<=24;bits+=8)for(mode=38;mode<49;++mode)owner_fixture(bits,mode);
-    puts("MIXED OWNER PASS:33 native schedule-only8/16/24 scenarios, primed startup, absolute tempo boundaries, strict deadline/refusal/cancel and retained-reader cleanup; supplied numerical time only");
+    for(bits=8;bits<=24;bits+=8)for(mode=49;mode<56;++mode)owner_fixture(bits,mode);
+    puts("MIXED OWNER PASS:21 native clock-binding-only8/16/24 scenarios, fractional counter conversion, absolute tempo boundaries, reader/frequency/regression/overflow/skipped-frame refusal and retained-reader cleanup; injected counters only");
 #else
-    for(bits=8;bits<=24;bits+=8)for(mode=0;mode<49;++mode)owner_fixture(bits,mode);
-    puts("MIXED OWNER PASS: full147 host scenarios, master/cache/staging/commit/sequence/deadline/schedule ownership; no native clock");
+    for(bits=8;bits<=24;bits+=8)for(mode=0;mode<56;++mode)owner_fixture(bits,mode);
+    puts("MIXED OWNER PASS: full168 host scenarios, master/cache/staging/commit/sequence/deadline/schedule ownership; no native clock");
 #endif
     return 0;}
 

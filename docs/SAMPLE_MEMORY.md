@@ -77,7 +77,13 @@ WAITING reports the next absolute frame deadline; errors/DONE leave it unchanged
 DONE is terminal/idempotent. Manual interval/preparation APIs refuse while scheduled.
 Unprimed/late startup or missed live boundary poisons DEADLINE; regression/overflow
 poisons CLOCK. No catch-up/retry; retained readers/master pins survive until close.
-Sampled clock binding and native event-loop/timer/device/DMA/audio remain requirements;
+The mixed schedule now binds an immutable serialized monotonic counter reader through
+the checked elapsed-clock converter. Fractional carry preserves phase; frame deadlines
+convert to counter thresholds without reading or allocating. Counter failures, frequency
+changes, regression and overflow poison/cancel/stop once while retaining readers until
+close. Low-frequency counters that skip exact frame boundaries refuse rather than
+catch up. DONE is terminal and does not reread the counter. Injected-counter tests
+do not establish actual native timing. Native event-loop/timer/device/DMA/audio remain requirements;
 two independent song engines are not a substitute. Cache capacity and physical timing remain separate gates.
 
 AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software

@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131085024 reserve=262144 flags=4
+MIXED OWNER PASS:21 native clock-binding-only8/16/24 scenarios, fractional counter conversion, absolute tempo boundaries, reader/frequency/regression/overflow/skipped-frame refusal and retained-reader cleanup; injected counters only
+EXEC MEMORY PASS: 231 Fast allocations, zero owned bytes, budget refusal without Chip fallback

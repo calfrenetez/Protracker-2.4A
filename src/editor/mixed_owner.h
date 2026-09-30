@@ -49,7 +49,7 @@ enum pt_mixed_owner_result pt_mixed_owner_complete(struct pt_mixed_owner *);
  * poison/cancel and bounded retained-reader stops. No catch-up/retry. Manual
  * next/consume/prefetch/complete/prepare refuse while armed. Completion disarms;
  * caller arms each next interval separately. Whole-song numerical schedule below;
- * sampled clock/native timer/device output and sound/performance remain unfinished. */
+ * sampled-reader binding below; native timer/device output and sound/performance remain unfinished. */
 enum pt_mixed_owner_result pt_mixed_owner_clock_arm(struct pt_mixed_owner *,uint64_t start);
 enum pt_mixed_owner_result pt_mixed_owner_clock_service(struct pt_mixed_owner *,uint64_t now);
 /* Whole-song numerical schedule: begin requires prepared, unvisited owner.
@@ -64,6 +64,21 @@ enum pt_mixed_owner_result pt_mixed_owner_clock_service(struct pt_mixed_owner *,
  * native event-loop/timer/DMA/device/audio or physical timing acceptance here. */
 enum pt_mixed_owner_result pt_mixed_owner_schedule_begin(struct pt_mixed_owner *,uint64_t start);
 enum pt_mixed_owner_result pt_mixed_owner_schedule_step(struct pt_mixed_owner *,uint64_t now,uint64_t *deadline);
+/* Bind a serialized immutable monotonic counter reader to this same schedule.
+ * Delay is sample FRAMES from the first successful observation (new epoch).
+ * Reader returns1 with ticks and stable nonzero ticks/second frequency. No edits,
+ * reentry or clock rebasing. Fractional carry avoids per-poll rounding drift.
+ * service reports next FRAME deadline; deadline converts it to the first counter
+ * tick at/after it. Low frequencies may skip exact frames: strict schedule then
+ * refuses DEADLINE, never catches up. Read/frequency/regression/overflow faults
+ * poison CLOCK and cancel/stop retained readers once. Outputs unchanged on errors
+ * or DONE; DONE never reads the counter again. NULL outputs refuse without reads.
+ * Numerical/manual APIs refuse once bound. This adapter performs no timer I/O,
+ * waits or actual device output; injected counters do not prove native timing. */
+typedef int (*pt_mixed_clock_read)(void *,uint64_t *ticks,uint32_t *frequency);
+enum pt_mixed_owner_result pt_mixed_owner_clocked_begin(struct pt_mixed_owner *,uint64_t delay,pt_mixed_clock_read,void *);
+enum pt_mixed_owner_result pt_mixed_owner_clocked_service(struct pt_mixed_owner *,uint64_t *frame_deadline);
+enum pt_mixed_owner_result pt_mixed_owner_clocked_deadline(struct pt_mixed_owner *,uint64_t *tick_deadline);
 /* Detect generation/header/API/map/backend changes without bulk PCM scans. */
 enum pt_mixed_owner_result pt_mixed_owner_current(struct pt_mixed_owner *);
 /* Cancel partial promotion and sequence, block both engines, attempt each reader

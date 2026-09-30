@@ -6,6 +6,7 @@
 #include "sampler_internal.h"
 #include "project_snapshot.h"
 #include "../core/render_lookahead.h"
+#include "../core/elapsed_clock.h"
 #include <string.h>
 struct mixed_batch {
     struct pt_render_plan split,wave;struct pt_paula_prepared chip;
@@ -31,6 +32,7 @@ struct pt_mixed_owner {
     unsigned pending,forecast,done,stop_attempted,clock_armed;
     uint64_t clock_start,clock_last,clock_deadline,schedule_start,schedule_last;
     unsigned visited,schedule_phase,schedule_seen;
+    struct pt_elapsed_clock elapsed;pt_mixed_clock_read clock_read;void *clock_context;unsigned clock_bound;
 };
 static int identities(struct pt_mixed_owner *s)
 {
@@ -407,7 +409,7 @@ enum pt_mixed_owner_result pt_mixed_owner_clock_arm(struct pt_mixed_owner *s,uin
 enum pt_mixed_owner_result pt_mixed_owner_clock_service(struct pt_mixed_owner *s,uint64_t now)
 {return s && !s->schedule_phase?clock_service(s,now):PT_MIXED_OWNER_INVALID;}
 enum {SCHEDULE_NEXT=1,SCHEDULE_ZERO,SCHEDULE_READY_NEXT,SCHEDULE_READY_ZERO,SCHEDULE_RUNNING};
-enum pt_mixed_owner_result pt_mixed_owner_schedule_begin(struct pt_mixed_owner *s,uint64_t start)
+static enum pt_mixed_owner_result schedule_begin(struct pt_mixed_owner *s,uint64_t start)
 {
     enum pt_mixed_owner_result r=sequence_current(s);if(r!=PT_MIXED_OWNER_OK)return r;
     if(!s->ready || s->visited || s->pending || s->batch.phase || s->schedule_phase || s->clock_armed)return PT_MIXED_OWNER_INVALID;
@@ -424,7 +426,7 @@ static enum pt_mixed_owner_result scheduled_interval(struct pt_mixed_owner *s,ui
     if(!span.emit || !span.frames)return sequence_fail(s,PT_MIXED_OWNER_RENDER);
     r=clock_arm(s,start);if(r==PT_MIXED_OWNER_OK)s->schedule_phase=SCHEDULE_RUNNING;return r;
 }
-enum pt_mixed_owner_result pt_mixed_owner_schedule_step(struct pt_mixed_owner *s,uint64_t now,uint64_t *deadline)
+static enum pt_mixed_owner_result schedule_step(struct pt_mixed_owner *s,uint64_t now,uint64_t *deadline)
 {
     enum pt_mixed_owner_result r;struct pt_render_interval span;
     if(!deadline)return PT_MIXED_OWNER_INVALID;
@@ -466,4 +468,42 @@ enum pt_mixed_owner_result pt_mixed_owner_schedule_step(struct pt_mixed_owner *s
     *deadline=s->schedule_start;
     return s->schedule_phase==SCHEDULE_READY_NEXT || s->schedule_phase==SCHEDULE_READY_ZERO?
         PT_MIXED_OWNER_OK:PT_MIXED_OWNER_WAITING;
+}
+
+enum pt_mixed_owner_result pt_mixed_owner_schedule_begin(struct pt_mixed_owner *s,uint64_t start)
+{return s && !s->clock_bound?schedule_begin(s,start):PT_MIXED_OWNER_INVALID;}
+enum pt_mixed_owner_result pt_mixed_owner_schedule_step(struct pt_mixed_owner *s,uint64_t now,uint64_t *deadline)
+{return s && !s->clock_bound?schedule_step(s,now,deadline):PT_MIXED_OWNER_INVALID;}
+enum pt_mixed_owner_result pt_mixed_owner_clocked_begin(struct pt_mixed_owner *s,uint64_t delay,pt_mixed_clock_read read,void *context)
+{
+    uint64_t ticks;uint32_t frequency;enum pt_mixed_owner_result r=sequence_current(s);
+    if(r!=PT_MIXED_OWNER_OK)return r;
+    if(!read || !s->ready || s->visited || s->pending || s->batch.phase || s->schedule_phase || s->clock_armed || s->clock_bound)return PT_MIXED_OWNER_INVALID;
+    if(read(context,&ticks,&frequency)!=1 || pt_elapsed_clock_init(&s->elapsed,frequency,s->options.rate,ticks,0)!=PT_ELAPSED_OK)
+        return sequence_fail(s,PT_MIXED_OWNER_CLOCK);
+    r=schedule_begin(s,delay);if(r!=PT_MIXED_OWNER_OK)return r;
+    s->clock_read=read;s->clock_context=context;s->clock_bound=1;return PT_MIXED_OWNER_OK;
+}
+enum pt_mixed_owner_result pt_mixed_owner_clocked_service(struct pt_mixed_owner *s,uint64_t *deadline)
+{
+    uint64_t ticks,frames;uint32_t frequency;enum pt_mixed_owner_result r;
+    if(!deadline)return PT_MIXED_OWNER_INVALID;
+    r=sequence_current(s);if(r!=PT_MIXED_OWNER_OK)return r;
+    if(!s->clock_bound)return PT_MIXED_OWNER_INVALID;
+    if(s->done)return PT_MIXED_OWNER_DONE;
+    if(s->clock_read(s->clock_context,&ticks,&frequency)!=1 ||
+       pt_elapsed_clock_advance(&s->elapsed,frequency,ticks,&frames)!=PT_ELAPSED_OK)
+        return sequence_fail(s,PT_MIXED_OWNER_CLOCK);
+    return schedule_step(s,frames,deadline);
+}
+enum pt_mixed_owner_result pt_mixed_owner_clocked_deadline(struct pt_mixed_owner *s,uint64_t *ticks)
+{
+    uint64_t frame;enum pt_mixed_owner_result r;
+    if(!ticks)return PT_MIXED_OWNER_INVALID;
+    r=sequence_current(s);if(r!=PT_MIXED_OWNER_OK)return r;
+    if(!s->clock_bound)return PT_MIXED_OWNER_INVALID;
+    if(s->done)return PT_MIXED_OWNER_DONE;
+    frame=s->schedule_phase==SCHEDULE_RUNNING?s->clock_deadline:s->schedule_start;
+    if(pt_elapsed_clock_deadline(&s->elapsed,frame,ticks)!=PT_ELAPSED_OK)return sequence_fail(s,PT_MIXED_OWNER_CLOCK);
+    return PT_MIXED_OWNER_OK;
 }

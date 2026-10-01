@@ -16,4 +16,3 @@
   34:	4cdf 7cfc      	moveml sp@+,d2-d7/a2-a6
   38:	7000           	moveq #0,d0
   3a:	4e75           	rts
-

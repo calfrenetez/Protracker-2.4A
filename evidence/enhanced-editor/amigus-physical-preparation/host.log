@@ -1,0 +1,13 @@
+test_library_lifetime (test_amigus_reservation.AmiGusReservation.test_library_lifetime) ... amigus reservation lifecycle: PASS (fake library, no hardware)
+ok
+test_partial_interrupt_lifetime (test_amigus_reservation.AmiGusReservation.test_partial_interrupt_lifetime) ... amigus reservation lifecycle: PASS (fake library, no hardware)
+AMIGUS INTERRUPT OWNER PASS: partial install retains reservation, removal request is not quiescence, pending/error/invalid status refuses release; injected callbacks only
+ok
+test_session_retains_reservation (test_amigus_reservation.AmiGusReservation.test_session_retains_reservation) ... amigus reservation lifecycle: PASS (fake library, no hardware)
+AMIGUS RESERVED SESSION PASS: failed open, leased Stop and natural tail retain card through reset recovery
+ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 2.016s
+
+OK

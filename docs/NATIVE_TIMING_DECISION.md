@@ -83,3 +83,22 @@ installation before Guest construction. Do not override that reservation. See
 `../evidence/enhanced-editor/cia-native-arm/`. Fresh coordination/guards are still
 required when the window is available; this is ongoing feasibility, not approval
 of a new output architecture or an argument for relaxed timing.
+
+
+## Third native critical-arm measurement and recovered cleanup
+
+1 October 2026. The assembly critical-arm candidate now ran once after fresh
+coordination. Twelve actual assembler arithmetic boundary checks PASS; unchanged
+strict gate FAILED with16late observations44..47ticks at709379Hz, programming
+span36..37ticks. Owned native resources closed, but initial independent filesystem
+cleanup FAILED because an empty test directory reappeared. The immediate runner
+cleanup claim is preserved and superseded, not used as acceptance. Exact guarded
+empty-directory recovery and separate subsequent verification PASS; window
+explicitly released after inspecting both records. No emulator lifecycle, test
+retry or output/tolerance/priority change. See
+`../evidence/enhanced-editor/cia-critical-native/` for separate evidence tiers.
+
+The user now authorizes real-Amiga/AmiGUS testing. Physical timing and positive
+AmiGUS capability remain untested; current candidate discovery is being qualified
+separately. These observations do not prove universal CIA infeasibility or permit
+relaxed timing. No production scheduling policy has changed.

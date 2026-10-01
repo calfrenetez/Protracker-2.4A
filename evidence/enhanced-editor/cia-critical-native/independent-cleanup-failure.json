@@ -1,0 +1,15 @@
+{
+  "scope": "Independent subsequent locked CIA critical-arm cleanup verification",
+  "environment": {
+    "profile": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae",
+    "share": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests"
+  },
+  "cpu": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+  "status": "OK\tPaused=false\tConfig=autosave",
+  "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=388\tsndbuf_status=0",
+  "paths": {
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790883613801685000": true,
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790883613801685000": false
+  },
+  "passed": false
+}

@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "timing_passed": false,
+  "initial_independent_cleanup_passed": false,
+  "recovered_cleanup_passed": true,
+  "window_released": true,
+  "physical_tested": false,
+  "scope": "Third timer-only diagnostic; original failed timing/cleanup retained, exact empty-directory recovery separately proven"
+}

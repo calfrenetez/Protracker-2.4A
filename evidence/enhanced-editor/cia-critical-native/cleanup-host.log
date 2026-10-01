@@ -1,0 +1,21 @@
+test_busy_lock_refusal_keeps_existing_owner_and_records_no_staging (test_shared_render_guard.SharedRenderGuard.test_busy_lock_refusal_keeps_existing_owner_and_records_no_staging) ... ok
+test_cleanup_requires_observed_absence_and_records_failures (test_shared_render_guard.SharedRenderGuard.test_cleanup_requires_observed_absence_and_records_failures) ... ok
+test_delayed_recreation_fails_without_a_second_delete (test_shared_render_guard.SharedRenderGuard.test_delayed_recreation_fails_without_a_second_delete) ... ok
+test_refusal_leaves_guest_files_untouched (test_shared_render_guard.SharedRenderGuard.test_refusal_leaves_guest_files_untouched) ... ok
+test_running_guest_can_stage_but_later_pause_refuses_launch (test_shared_render_guard.SharedRenderGuard.test_running_guest_can_stage_but_later_pause_refuses_launch) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.054s
+
+OK
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpb4s32_ct/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmp7po5jun_/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpzelcht40/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmp0wrznc1p/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpcpuowh4s/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpjzpgx5cj/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmprixl3k04/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmp311dkbrx/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpf_52my7e/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpwcw_3bxh/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmp97cahice/evidence

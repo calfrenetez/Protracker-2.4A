@@ -1,0 +1,7 @@
+test_exact_bytes_and_independent_cleanup_are_required_before_target_selection (test_physical_discovery_guard.PhysicalDiscoveryGuard.test_exact_bytes_and_independent_cleanup_are_required_before_target_selection) ... ok
+test_uncertain_script_never_deletes_or_switches_target (test_physical_discovery_guard.PhysicalDiscoveryGuard.test_uncertain_script_never_deletes_or_switches_target) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.016s
+
+OK

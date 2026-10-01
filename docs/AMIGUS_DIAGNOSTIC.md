@@ -109,3 +109,24 @@ an uncertain launch or treat a timeout as proof that the process stopped.
 Next hardware increment: actual discovery/reservation on each available card,
 then interrupt lifecycle and one voice, followed by measured 4/8/16 voices.
 Positive physical results and human listening remain separate acceptance gates.
+
+
+## Physical discovery adapter (1 October 2026)
+
+The user now authorizes real A1200/AmiGUS testing. Current production-adapter
+PTAmiGusDiscovery15524-byte candidate SHA39036e5f... has fresh shared030 missing-
+library qualification and separate independent cleanup evidence in
+`../evidence/enhanced-editor/amigus-current-discovery/`. Positive physical card,
+reservation, interrupts, cache transfer and audio remain distinct open gates.
+
+Use `tools/shared_infra_amigus_discovery.py --emulator-result <result.json>
+--independent-cleanup <result.json>` with a separately coordinated physical window.
+It validates exact binary/source/SDK hashes and both emulator evidence records
+before selecting hardware, takes the shared nonblocking lock, uses existing
+harness target/bridge guards, stages a checksummed immutable copy in a fresh RAM
+directory and performs discovery only. Known finished scripts permit exact file/
+empty-directory cleanup, a separate absence check and return to emulator. An
+uncertain async script retains the target and paths for recovery; no cancellation,
+reset, automatic test retry, recursive deletion, installation or firmware change.
+Two host refusal/uncertain-execution tests PASS. Actual physical run not yet claimed
+by this preparation record.

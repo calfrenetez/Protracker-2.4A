@@ -79,7 +79,7 @@ class SharedRenderGuard(unittest.TestCase):
                     real_remove(path)
                     if mode=='recreated-directory':path.mkdir()
                     if mode=='recreated-link':guest.launch.symlink_to(share/'missing')
-                with patch.object(runner.shutil,'rmtree',side_effect=remove) as deletion:
+                with patch.object(runner.shutil,'rmtree',side_effect=remove) as deletion, patch.object(runner.time,'sleep'):
                     if mode in ('normal','missing-launcher','incomplete'):
                         runner.finish_run(guest,run,out,result,mode!='incomplete',True)
                     else:
@@ -95,5 +95,31 @@ class SharedRenderGuard(unittest.TestCase):
                 if mode=='recreated-directory':self.assertTrue(run.is_dir())
                 if mode=='recreated-link':self.assertTrue(guest.launch.is_symlink())
                 if mode not in ('normal','missing-launcher','incomplete'):self.assertIn('cleanup_error',recorded)
+
+    def test_delayed_recreation_fails_without_a_second_delete(self):
+        for mode in ('directory','dangling-launcher'):
+            with self.subTest(mode=mode),tempfile.TemporaryDirectory() as td:
+                root=Path(td);out=root/'evidence';share=root/'guest';out.mkdir();share.mkdir()
+                run=share/'owned';run.mkdir()
+                unrelated=share/'unrelated';unrelated.write_bytes(b'preserve')
+                guest=Guest(share,'OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0')
+                guest.launch=share/'launcher';guest.launch.write_bytes(b'owned')
+                sleeps=[]
+                def delayed_recreate(interval):
+                    sleeps.append(interval)
+                    if len(sleeps)==3:
+                        if mode=='directory':(run/'cia-timing').mkdir(parents=True)
+                        else:guest.launch.symlink_to(share/'missing')
+                result={'passed':True}
+                with patch.object(runner.shutil,'rmtree',wraps=shutil.rmtree) as deletion, patch.object(runner.time,'sleep',side_effect=delayed_recreate):
+                    with self.assertRaisesRegex(RuntimeError,'reappeared'):
+                        runner.finish_run(guest,run,out,result,True,True)
+                recorded=json.loads((out/'result.json').read_text())
+                self.assertFalse(recorded['passed']);self.assertFalse(recorded['run_files_cleaned'])
+                self.assertEqual(len(recorded['cleanup_absence_observations']),4)
+                self.assertFalse(any(recorded['cleanup_absence_observations'][0]['paths'].values()))
+                self.assertTrue(any(recorded['cleanup_absence_observations'][-1]['paths'].values()))
+                self.assertEqual(deletion.call_count,1)
+                self.assertEqual(unrelated.read_bytes(),b'preserve')
 
 if __name__=='__main__':unittest.main()

@@ -23,6 +23,21 @@ def require_running_guest(guest,out,phase):
 def prepare_run(guest,out):
     require_running_guest(guest,out,'before-staging')
     run=guest.share/out.name;run.mkdir();return run
+def observe_cleanup_absence(run,launcher,result):
+    """Catch delayed shared-filesystem recreation without retrying deletion.
+
+    A bounded observation is evidence for this interval only. The coordinator's
+    independent subsequent check is still required before releasing the window.
+    """
+    observations=result['cleanup_absence_observations']=[]
+    start=time.monotonic()
+    for index in range(9):
+        paths={str(path):os.path.lexists(path) for path in (run,launcher)}
+        observations.append({'elapsed_seconds':time.monotonic()-start,'paths':paths})
+        if any(paths.values()):
+            raise RuntimeError('Completed run or launcher remains or reappeared after cleanup; inspect before release')
+        if index<8:time.sleep(0.25)
+    result['independent_release_check_required']=True
 def finish_run(guest,run,out,result,finished,guard_audio):
     """Report cleanup only after absence; retain evidence and raise on uncertainty.
 
@@ -38,10 +53,9 @@ def finish_run(guest,run,out,result,finished,guard_audio):
                 raise RuntimeError('Completed guest still has active or unknown audio DMA; cleanup refused')
         guest.launch.unlink(missing_ok=True)
         shutil.rmtree(run)
-        # An emulator/shared filesystem can recreate an empty directory after
-        # deletion. lexists also refuses dangling links; never delete a second time.
-        if os.path.lexists(run) or os.path.lexists(guest.launch):
-            raise RuntimeError('Completed run or launcher remains after cleanup; inspect before release')
+        # A single immediate check missed a delayed recreation in the CIA run.
+        # lexists also refuses dangling links. Remove once, then observe only.
+        observe_cleanup_absence(run,guest.launch,result)
         result['run_files_cleaned']=True
     except Exception as error:
         result['passed']=False

@@ -26,8 +26,14 @@ This fixture supplies its own reload; it does not qualify loading the real AHI
 driver from disk or real PCM ownership. Initial independent file cleanup FAILED
 and remains recorded; separate inspected empty-only recovery and subsequent
 independent cleanup PASS. Evidence: `../evidence/enhanced-editor/amigus-idle-window/`.
-The physical idle-driver transaction is **not yet run**. Audio/register/IRQ and
-human listening acceptance remain open.
+The separately coordinated physical idle-driver transaction now **passes**:
+run1790891886482150000 on the realMini returned0; both PCM/wavetable checks
+passed with confirmed final release, then resident4.23/020 AHI was reloaded
+with openCnt0 and delayed-expunge clear. Post-run bridge inspection and unchanged
+installedCRCBA67FEF4 verified restoration. Exact RAM cleanup, separate absence
+and return to the connected idle shared030 passed. Evidence:
+`../evidence/enhanced-editor/amigus-physical-idle-ownership/`. Audio/register/IRQ
+and human listening acceptance remain open.
 
 Exec lifecycle contract: [Commodore exec.library autodocs](https://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node059D.html).
 The pinned public RC6 source and earlier physical inspection are recorded in

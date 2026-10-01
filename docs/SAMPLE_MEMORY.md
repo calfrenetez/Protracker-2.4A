@@ -7,6 +7,15 @@ Playback representations must never become the project's source of truth.
 
 ## Current implementation status — 1 October 2026
 
+RealMini PCM and wavetable ownership now pass in a separately qualified and
+coordinated idle-AHI window: unused RC6 020 driver cooperatively unloaded, both
+blocks passed competing-owner/wrong-owner/reacquisition/final-release checks,
+resident AHI restored with zero open users and its installed file unchanged.
+Exact RAM cleanup and separate absence pass; DevBench returned to idle shared030.
+This closes the real library ownership gate only. Native registers, IRQ/stop
+quiescence, sample-RAM transfer, timing, output and listening remain open. See
+`../evidence/enhanced-editor/amigus-physical-idle-ownership/`.
+
 Host scheduling feasibility is now documented in `NATIVE_SCHEDULING_FEASIBILITY.md`.
 The current immediate audio adapter has no absolute activation timestamp. A
 sanitized integer probe checks 184,200 logical-frame admission windows, including

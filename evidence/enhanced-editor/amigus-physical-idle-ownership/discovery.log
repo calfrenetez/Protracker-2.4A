@@ -1,0 +1,11 @@
+IDLE-OWNERSHIP scope=unused-RC6-020-AHI-only audio=NOT_TESTED
+DRIVER-WINDOW result=0 stage=driver-unloaded unloaded=1 restore_needed=1
+AMIGUSTEST schema=1 version=0.3 mode=ownership
+SCOPE audio=NOT_TESTED interrupts=NOT_TESTED firmware_write=NO
+LIBRARY version=1 revision=1
+CARD index=0 type=0x7001 hardware=0x00000000 firmware=0x7ea663e7 pcm=1 wavetable=1 codec=1 date=2026-06-12T15:39
+CHECK card=0 block=1 result=PASS stage=complete driver=0x00000000 release=0x00000000 confirmed=1 retained=0
+CHECK card=0 block=2 result=PASS stage=complete driver=0x00000000 release=0x00000000 confirmed=1 retained=0
+SUMMARY result=PASS reason=complete cards=1 passed=2 skipped=0 failed=0 rc=0
+DRIVER resident=1 supported=1 delayed=0 users=0 ahi_users=0
+IDLE-OWNERSHIP result=PASS unloaded=1 restored=1 restore_needed=0 rc=0

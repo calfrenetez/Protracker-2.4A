@@ -1,0 +1,12 @@
+{
+  "physical_pcm_ownership": "PASS",
+  "physical_wavetable_ownership": "PASS",
+  "final_own_release_confirmed": true,
+  "unused_ahi_cooperative_unload": "PASS",
+  "resident_ahi_restoration": "PASS",
+  "installed_ahi_file_unchanged": true,
+  "exact_ram_cleanup": "PASS",
+  "separate_absence": "PASS",
+  "devbench_return": "PASS",
+  "MMIO_IRQ_audio_listening": "NOT_TESTED"
+}

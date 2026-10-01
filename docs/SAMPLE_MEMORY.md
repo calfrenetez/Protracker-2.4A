@@ -4422,3 +4422,11 @@ release, no automatic physical retry. Discovery previously passed. Registers,
 sample RAM transfer, IRQ, output, physical timing and listening remain open.
 Evidence `../evidence/enhanced-editor/amigus-physical-ownership/` supersedes older
 physical NOT RUN statements only for these exact named checks.
+
+
+Guest-aware cleanup pilot also FAILED independent absence despite successful
+AmigaDOS deletion and2s host observations. Separate inspected empty-only recovery
+and locked subsequent verification pass; explicit windowrelease ACK147. Root
+cause remains unproven. Method retained behind experimental --guest-cleanup-pilot,
+not adopted as default; ten host guards pass. See
+`../evidence/enhanced-editor/guest-cleanup-pilot/`. Original failures preserved.

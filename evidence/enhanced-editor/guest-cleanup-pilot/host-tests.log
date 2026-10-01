@@ -1,0 +1,28 @@
+test_busy_lock_refusal_keeps_existing_owner_and_records_no_staging (test_shared_render_guard.SharedRenderGuard.test_busy_lock_refusal_keeps_existing_owner_and_records_no_staging) ... ok
+test_cleanup_requires_observed_absence_and_records_failures (test_shared_render_guard.SharedRenderGuard.test_cleanup_requires_observed_absence_and_records_failures) ... ok
+test_default_does_not_adopt_failed_guest_cleanup_pilot (test_shared_render_guard.SharedRenderGuard.test_default_does_not_adopt_failed_guest_cleanup_pilot) ... ok
+test_delayed_recreation_fails_without_a_second_delete (test_shared_render_guard.SharedRenderGuard.test_delayed_recreation_fails_without_a_second_delete) ... ok
+test_guest_cleanup_refuses_links_unsafe_names_and_wrong_scope (test_shared_render_guard.SharedRenderGuard.test_guest_cleanup_refuses_links_unsafe_names_and_wrong_scope) ... ok
+test_guest_script_is_exact_and_deletes_deepest_directories_last (test_shared_render_guard.SharedRenderGuard.test_guest_script_is_exact_and_deletes_deepest_directories_last) ... ok
+test_partial_cleanup_marker_retains_paths_without_host_fallback (test_shared_render_guard.SharedRenderGuard.test_partial_cleanup_marker_retains_paths_without_host_fallback) ... ok
+test_refusal_leaves_guest_files_untouched (test_shared_render_guard.SharedRenderGuard.test_refusal_leaves_guest_files_untouched) ... ok
+test_running_guest_can_stage_but_later_pause_refuses_launch (test_shared_render_guard.SharedRenderGuard.test_running_guest_can_stage_but_later_pause_refuses_launch) ... ok
+test_transport_requires_finished_acknowledgement_and_running_target (test_shared_render_guard.SharedRenderGuard.test_transport_requires_finished_acknowledgement_and_running_target) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.077s
+
+OK
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpa7gl29d7/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmptsyetlpf/render-files-test
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpg39l35ag/render-files-test
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpr8wqk5wm/render-files-test
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmp6trm1ss8/render-files-test
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpjlqyzdc8/render-files-test
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmp0atc2yi7/render-files-test
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpvvlqt5ks/render-files-test
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpkn332t_i/render-files-test
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmps_hxcb70/render-files-test
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpax4fxxy3/render-files-test
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmplvja7wlh/render-files-test
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmp14w1govn/render-files-test

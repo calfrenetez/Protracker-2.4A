@@ -1,0 +1,15 @@
+{
+  "meta": null,
+  "content": [
+    {
+      "type": "text",
+      "text": "[OK]\nDev:Tests/launch-render-files-1790887014324404000  Deleted\nDev:Tests/render-files-1790887014324404000/amigus-discovery/PTAmiGusDiscovery  Deleted\nDev:Tests/render-files-1790887014324404000/amigus-discovery/test.log  Deleted\nDev:Tests/render-files-1790887014324404000/amigus-discovery/test.rc  Deleted\nDev:Tests/render-files-1790887014324404000/done  Deleted\nDev:Tests/render-files-1790887014324404000/amigus-discovery  Deleted\nDev:Tests/render-files-1790887014324404000  Deleted\nPTG-CLEANUP-ABSENT-render-files-1790887014324404000",
+      "annotations": null,
+      "meta": null
+    }
+  ],
+  "structuredContent": {
+    "result": "[OK]\nDev:Tests/launch-render-files-1790887014324404000  Deleted\nDev:Tests/render-files-1790887014324404000/amigus-discovery/PTAmiGusDiscovery  Deleted\nDev:Tests/render-files-1790887014324404000/amigus-discovery/test.log  Deleted\nDev:Tests/render-files-1790887014324404000/amigus-discovery/test.rc  Deleted\nDev:Tests/render-files-1790887014324404000/done  Deleted\nDev:Tests/render-files-1790887014324404000/amigus-discovery  Deleted\nDev:Tests/render-files-1790887014324404000  Deleted\nPTG-CLEANUP-ABSENT-render-files-1790887014324404000"
+  },
+  "isError": false
+}

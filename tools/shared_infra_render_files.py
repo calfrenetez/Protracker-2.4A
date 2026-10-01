@@ -41,8 +41,8 @@ def observe_cleanup_absence(run,launcher,result):
 def guest_cleanup_script(guest,run,out):
     """Inventory only this completed run; never use Delete ALL or patterns.
 
-    Host unlink/rmtree can leave the shared filesystem's guest metadata stale,
-    recreating empty directories later. AmigaDOS owns deletion and cache updates.
+    Empty directories reappeared after both host and guest deletion experiments;
+    the cause is unproven. This builds the experimental guest deletion script.
     Reject links and unsafe command tokens before deleting anything.
     """
     if (run.parent!=guest.share or run.name!=out.name or
@@ -85,7 +85,7 @@ def execute_guest_cleanup(guest,out,script):
     if parsed.get('isError') or not text.startswith('[OK]'):
         raise RuntimeError('Guest cleanup incomplete or still running; preserve target and paths')
     return text
-def finish_run(guest,run,out,result,finished,guard_audio):
+def finish_run(guest,run,out,result,finished,guard_audio,guest_cleanup=False):
     """Report cleanup only after absence; retain evidence and raise on uncertainty.
 
     Called with the shared lock held. Never retry removal or clean incomplete runs.
@@ -98,18 +98,23 @@ def finish_run(guest,run,out,result,finished,guard_audio):
             result['cleanup_audio']=state
             if not all('ch%d_dma=0'%i in state.split('\t') for i in range(4)):
                 raise RuntimeError('Completed guest still has active or unknown audio DMA; cleanup refused')
-        script=guest_cleanup_script(guest,run,out)
-        (out/'cleanup.script').write_text(script)
-        result['cleanup_method']='guest-amigados-exact-paths'
-        result['cleanup_script_sha256']=hashlib.sha256(script.encode()).hexdigest()
-        result['cleanup_script_pending']=True
-        reply=execute_guest_cleanup(guest,out,script)
-        # Even a marker in partial output cannot prove completion. The helper
-        # requires [OK]; uncertain execution retains this window without retry.
-        if 'PTG-CLEANUP-ABSENT-'+run.name not in reply.splitlines():
-            raise RuntimeError('Guest cleanup absence marker missing')
-        result['cleanup_script_pending']=False
-        # Never follow guest deletion with host removal, even on reappearance.
+        if guest_cleanup:
+            # Experimental: the first native pilot also recreated an empty
+            # directory. Do not promote this method into the default workflow.
+            script=guest_cleanup_script(guest,run,out)
+            (out/'cleanup.script').write_text(script)
+            result['cleanup_method']='experimental-guest-amigados-exact-paths'
+            result['cleanup_script_sha256']=hashlib.sha256(script.encode()).hexdigest()
+            result['cleanup_script_pending']=True
+            reply=execute_guest_cleanup(guest,out,script)
+            if 'PTG-CLEANUP-ABSENT-'+run.name not in reply.splitlines():
+                raise RuntimeError('Guest cleanup absence marker missing')
+            result['cleanup_script_pending']=False
+            # Never follow guest deletion with host removal on reappearance.
+        else:
+            result['cleanup_method']='host-exact-run-once'
+            guest.launch.unlink(missing_ok=True)
+            shutil.rmtree(run)
         observe_cleanup_absence(run,guest.launch,result)
         result['run_files_cleaned']=True
     except Exception as error:
@@ -122,6 +127,7 @@ def finish_run(guest,run,out,result,finished,guard_audio):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--guest-cleanup-pilot',action='store_true',help='Unqualified experimental guest deletion; separate cleanup evidence required')
     group=parser.add_mutually_exclusive_group()
     group.add_argument('--cia-timing',action='store_true',help='Finite owned CIA timer IRQ timestamp diagnostic; no Paula writes')
     group.add_argument('--invert-stem-cli',metavar='REFERENCE_DIRECTORY',help='Verify bounded shared-sample EFx native stems against host bytes')
@@ -515,5 +521,5 @@ def main():
             result['passed']=True
         finally:
             finish_run(guest,run,out,result,finished,
-                (args.cia_timing or args.amigus_diagnostic or args.paula_memory or args.capture_memory or args.capture_session_memory or args.amigus_capture_memory or args.editor_capture_memory or args.recovery_file or args.studio_memory in ('native-abi','editor','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence') or args.invert_editor or args.invert_sampler or args.invert_session or args.source_memory or args.sample_dispatch or args.invert_render or args.invert_bounce or args.invert_cli or args.invert_stem_cli))
+                (args.cia_timing or args.amigus_diagnostic or args.paula_memory or args.capture_memory or args.capture_session_memory or args.amigus_capture_memory or args.editor_capture_memory or args.recovery_file or args.studio_memory in ('native-abi','editor','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence') or args.invert_editor or args.invert_sampler or args.invert_session or args.source_memory or args.sample_dispatch or args.invert_render or args.invert_bounce or args.invert_cli or args.invert_stem_cli),guest_cleanup=args.guest_cleanup_pilot)
 if __name__=='__main__':main()

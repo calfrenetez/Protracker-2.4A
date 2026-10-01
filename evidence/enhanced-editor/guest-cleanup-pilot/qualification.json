@@ -1,0 +1,10 @@
+{
+  "native_functional_passed": true,
+  "guest_deletion_acknowledged": true,
+  "initial_cleanup_passed": false,
+  "recovery_passed": true,
+  "independent_recovered_cleanup_passed": true,
+  "window_released": true,
+  "default_adopted": false,
+  "root_cause_proven": false
+}

@@ -1,0 +1,66 @@
+FailAt 21
+CD RAM:
+If EXISTS Dev:Tests/launch-render-files-1790887014324404000
+ Delete Dev:Tests/launch-render-files-1790887014324404000
+ If WARN
+  Quit 20
+ EndIf
+EndIf
+If EXISTS Dev:Tests/launch-render-files-1790887014324404000
+ Quit 20
+EndIf
+If EXISTS Dev:Tests/render-files-1790887014324404000/amigus-discovery/PTAmiGusDiscovery
+ Delete Dev:Tests/render-files-1790887014324404000/amigus-discovery/PTAmiGusDiscovery
+ If WARN
+  Quit 20
+ EndIf
+EndIf
+If EXISTS Dev:Tests/render-files-1790887014324404000/amigus-discovery/PTAmiGusDiscovery
+ Quit 20
+EndIf
+If EXISTS Dev:Tests/render-files-1790887014324404000/amigus-discovery/test.log
+ Delete Dev:Tests/render-files-1790887014324404000/amigus-discovery/test.log
+ If WARN
+  Quit 20
+ EndIf
+EndIf
+If EXISTS Dev:Tests/render-files-1790887014324404000/amigus-discovery/test.log
+ Quit 20
+EndIf
+If EXISTS Dev:Tests/render-files-1790887014324404000/amigus-discovery/test.rc
+ Delete Dev:Tests/render-files-1790887014324404000/amigus-discovery/test.rc
+ If WARN
+  Quit 20
+ EndIf
+EndIf
+If EXISTS Dev:Tests/render-files-1790887014324404000/amigus-discovery/test.rc
+ Quit 20
+EndIf
+If EXISTS Dev:Tests/render-files-1790887014324404000/done
+ Delete Dev:Tests/render-files-1790887014324404000/done
+ If WARN
+  Quit 20
+ EndIf
+EndIf
+If EXISTS Dev:Tests/render-files-1790887014324404000/done
+ Quit 20
+EndIf
+If EXISTS Dev:Tests/render-files-1790887014324404000/amigus-discovery
+ Delete Dev:Tests/render-files-1790887014324404000/amigus-discovery
+ If WARN
+  Quit 20
+ EndIf
+EndIf
+If EXISTS Dev:Tests/render-files-1790887014324404000/amigus-discovery
+ Quit 20
+EndIf
+If EXISTS Dev:Tests/render-files-1790887014324404000
+ Delete Dev:Tests/render-files-1790887014324404000
+ If WARN
+  Quit 20
+ EndIf
+EndIf
+If EXISTS Dev:Tests/render-files-1790887014324404000
+ Quit 20
+EndIf
+Echo PTG-CLEANUP-ABSENT-render-files-1790887014324404000

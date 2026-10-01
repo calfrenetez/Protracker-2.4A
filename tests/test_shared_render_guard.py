@@ -85,10 +85,10 @@ class SharedRenderGuard(unittest.TestCase):
                     return '[OK]\nPTG-CLEANUP-ABSENT-'+run.name
                 with patch.object(runner,'execute_guest_cleanup',side_effect=cleanup) as deletion, patch.object(runner.time,'sleep'), patch.object(runner.shutil,'rmtree') as host_deletion:
                     if mode in ('normal','missing-launcher','incomplete'):
-                        runner.finish_run(guest,run,out,result,mode!='incomplete',True)
+                        runner.finish_run(guest,run,out,result,mode!='incomplete',True,guest_cleanup=True)
                     else:
                         with self.assertRaises((RuntimeError,OSError)):
-                            runner.finish_run(guest,run,out,result,True,True)
+                            runner.finish_run(guest,run,out,result,True,True,guest_cleanup=True)
                 host_deletion.assert_not_called()
                 recorded=json.loads((out/'result.json').read_text())
                 self.assertEqual(recorded['run_files_cleaned'],mode in ('normal','missing-launcher'))
@@ -121,7 +121,7 @@ class SharedRenderGuard(unittest.TestCase):
                     return '[OK]\nPTG-CLEANUP-ABSENT-'+run.name
                 with patch.object(runner,'execute_guest_cleanup',side_effect=cleanup) as deletion, patch.object(runner.time,'sleep',side_effect=delayed_recreate):
                     with self.assertRaisesRegex(RuntimeError,'reappeared'):
-                        runner.finish_run(guest,run,out,result,True,True)
+                        runner.finish_run(guest,run,out,result,True,True,guest_cleanup=True)
                 recorded=json.loads((out/'result.json').read_text())
                 self.assertFalse(recorded['passed']);self.assertFalse(recorded['run_files_cleaned'])
                 self.assertEqual(len(recorded['cleanup_absence_observations']),4)
@@ -167,7 +167,7 @@ class SharedRenderGuard(unittest.TestCase):
             guest=Guest(share,'OK');guest.launch=share/('launch-'+out.name);guest.launch.write_text('owned')
             result={'passed':True}
             with patch.object(runner,'execute_guest_cleanup',side_effect=RuntimeError('still running')),patch.object(runner.shutil,'rmtree') as remove:
-                with self.assertRaises(RuntimeError):runner.finish_run(guest,run,out,result,True,False)
+                with self.assertRaises(RuntimeError):runner.finish_run(guest,run,out,result,True,False,guest_cleanup=True)
             remove.assert_not_called();self.assertTrue((run/'candidate').exists());self.assertTrue(guest.launch.exists())
             self.assertTrue(result['cleanup_script_pending']);self.assertFalse(result['passed']);self.assertFalse(result['run_files_cleaned'])
 
@@ -187,5 +187,16 @@ class SharedRenderGuard(unittest.TestCase):
                     guest.status='OK\tPaused=true'
                     with self.assertRaises(RuntimeError):runner.execute_guest_cleanup(guest,out,'exact script')
                     self.assertEqual(call.call_count,1)
+
+    def test_default_does_not_adopt_failed_guest_cleanup_pilot(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);out=root/'render-files-test';share=root/'share';out.mkdir();share.mkdir()
+            run=share/out.name;run.mkdir();(run/'candidate').write_text('owned')
+            guest=Guest(share,'OK');guest.launch=share/('launch-'+out.name);guest.launch.write_text('owned')
+            result={'passed':True}
+            with patch.object(runner,'execute_guest_cleanup') as execute,patch.object(runner.time,'sleep'):
+                runner.finish_run(guest,run,out,result,True,False)
+            execute.assert_not_called();self.assertFalse(run.exists());self.assertFalse(guest.launch.exists())
+            self.assertEqual(result['cleanup_method'],'host-exact-run-once');self.assertTrue(result['independent_release_check_required'])
 
 if __name__=='__main__':unittest.main()

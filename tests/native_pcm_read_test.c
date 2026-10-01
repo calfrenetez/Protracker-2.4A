@@ -83,5 +83,40 @@ int main(void)
         assert(!memcmp(registers,copy,sizeof(copy)));
     }
     puts("PCM FIFO STORE PASS: native MSB-first long store and six no-write refusals; synthetic memory only");
+    {
+        struct pt_native_amigus_capacity_probe q={0};
+        registers[0]=0;registers[1]=0x50;registers[3]=registers[8]=0;
+        r.access=1;r.interrupt=0;
+        assert(pt_native_amigus_capacity_begin(&q,&r));
+        assert(!pt_native_amigus_capacity_begin(&q,&r));
+        for(i=0;i<2048;++i) {
+            registers[6]=0x1234;registers[7]=0x5678;
+            assert(pt_native_amigus_capacity_step(&q) && q.issued==i+1);
+            assert(!registers[6] && !registers[7]);
+            registers[8]=(i+1)*2; /* Simulate exact device accounting. */
+        }
+        memcpy(copy,registers,sizeof(copy));
+        assert(!pt_native_amigus_capacity_step(&q) && q.issued==2048);
+        assert(!memcmp(registers,copy,sizeof(copy)));
+        assert(pt_native_amigus_capacity_poll(&q)==0 && !q.confirmed);
+        registers[0]=2;assert(pt_native_amigus_capacity_poll(&q)==1 && q.confirmed);
+        memcpy(copy,registers,sizeof(copy));r.access=0;
+        assert(pt_native_amigus_capacity_poll(&q)==-1 && !q.confirmed && q.faulted);
+        assert(!memcmp(registers,copy,sizeof(copy)));
+        for(i=0;i<3;++i) {
+            struct pt_native_amigus_capacity_probe bad={0};
+            r.access=1;registers[0]=0;registers[8]=0;
+            assert(pt_native_amigus_capacity_begin(&bad,&r));
+            if(i==0)registers[0]=2; /* Early FULL: no overflow store. */
+            if(i==1)registers[8]=1; /* Counter cannot replace issued budget. */
+            if(i==2)r.access=0;
+            memcpy(copy,registers,sizeof(copy));
+            assert(!pt_native_amigus_capacity_step(&bad) && bad.faulted && !bad.issued);
+            assert(!memcmp(registers,copy,sizeof(copy)));
+            r.access=1;registers[0]=registers[8]=0;
+            assert(!pt_native_amigus_capacity_step(&bad) && !bad.issued);
+        }
+    }
+    puts("PCM CAPACITY GUARD PASS: 2048-store independent ceiling, FULL/count/owner refusal, fault latch and read-only full confirmation; synthetic memory only");
     return 0;
 }

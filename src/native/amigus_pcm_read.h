@@ -23,4 +23,17 @@ int pt_native_amigus_quiesce_poll(struct pt_native_amigus_quiesce *);
  * three stores/six words independent of readback. No capacity claim. Must reset
  * and confirm before releasing. */
 int pt_native_amigus_pcm_fifo_probe32(const struct pt_amigus_reservation *, uint32_t);
+/* Qualification only: monotonically count at most2048 zero long stores while
+ * disabled. The pinned driver declares4096 words; this is a probe ceiling, not
+ * a verified production capacity. Before every store require exact prior usage
+ * and no FULL flag. Caller checks post-store usage, then reset on every path.
+ * Stable zero-initialized context; a fault latches refusal, no repeat begin. */
+struct pt_native_amigus_capacity_probe {
+    const struct pt_amigus_reservation *owner;
+    unsigned issued, faulted, confirmed;
+};
+int pt_native_amigus_capacity_begin(struct pt_native_amigus_capacity_probe *,
+                                    const struct pt_amigus_reservation *);
+int pt_native_amigus_capacity_step(struct pt_native_amigus_capacity_probe *);
+int pt_native_amigus_capacity_poll(struct pt_native_amigus_capacity_probe *);
 #endif

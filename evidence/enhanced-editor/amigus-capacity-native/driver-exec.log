@@ -1,0 +1,2 @@
+DRIVER resident=1 supported=1 delayed=0 users=0 ahi_users=0
+DRIVER EXEC PASS: own-library refusal unload open-close restoration absence Fast-zero

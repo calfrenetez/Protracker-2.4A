@@ -450,3 +450,20 @@ confirmed, installedCRC unchanged, exactRAMcleanup+independentabsence+idle030ret
 PASS; physicalwindow explicitly released. See
 `../evidence/enhanced-editor/amigus-fifo-physical/`. Capacity, sample ordering,
 playback/IRQ/physical timing/output/listening remain open.
+
+
+## Bounded disabled capacity diagnostic (1 October2026)
+
+AmiGUSTest0.7 `--idle-capacity` extends the separately qualified disabled FIFO
+path with a monotonic2048-store ceiling, independent of readback. Before each
+zero long store it requires exact prior pending count, disabled rate/playback
+IRQ mask, exclusive owned access and no earlyFULL flag. It checks each subsequent
+count increase by2. At4096words it requires FULL in at most three read-only polls.
+No overflow write, format/start/IRQ install or inferred production capability.
+Every possible data-write path requires confirmed reset before release/restoration.
+
+Six host guard/model checks and native own-memory ceiling/fault-latch tests PASS;
+exact seven absent-library modes return5 and five fixtures return0. Native run
+1790895036186190000 cleanup plus separate independent1790895075327969000 PASS;
+window released, no recovery needed this run. Physical capacity/FULL observation
+is pending. See `../evidence/enhanced-editor/amigus-capacity-native/`.

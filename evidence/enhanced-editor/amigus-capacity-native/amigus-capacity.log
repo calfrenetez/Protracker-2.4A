@@ -1,0 +1,2 @@
+IDLE-CAPACITY scope=unused-RC6-020-AHI-only audio=NOT_TESTED
+IDLE-CAPACITY result=SKIP reason=library-unavailable rc=5

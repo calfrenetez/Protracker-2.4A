@@ -63,3 +63,48 @@ int pt_native_amigus_pcm_fifo_probe32(const struct pt_amigus_reservation *r,
     *(volatile uint32_t *)(address+0x0c)=value;
     return 1;
 }
+
+static int capacity_status(struct pt_native_amigus_capacity_probe *q,
+                           uintptr_t *address, uint16_t *flags)
+{
+    uint16_t rate,mask,used;
+    if (!q || !q->owner || q->faulted || q->issued>2048 ||
+        !pcm_address(q->owner,address) ||
+        !pt_native_amigus_pcm_read16(q->owner,0x06,&rate) ||
+        !pt_native_amigus_pcm_read16(q->owner,0x02,&mask) ||
+        !pt_native_amigus_pcm_read16(q->owner,0x10,&used) ||
+        !pt_native_amigus_pcm_read16(q->owner,0x00,flags) ||
+        (rate&0x8000) || (mask&7) || used!=q->issued*2) {
+        if (q) {q->faulted=1; q->confirmed=0;} return 0;
+    }
+    return 1;
+}
+int pt_native_amigus_capacity_begin(struct pt_native_amigus_capacity_probe *q,
+                                    const struct pt_amigus_reservation *r)
+{
+    struct pt_native_amigus_capacity_probe initial={0};
+    uintptr_t address; uint16_t flags;
+    if (!q || q->owner || q->issued || q->faulted || q->confirmed) return 0;
+    initial.owner=r;
+    if (!capacity_status(&initial,&address,&flags) || (flags&2)) return 0;
+    q->owner=r;
+    return 1;
+}
+int pt_native_amigus_capacity_step(struct pt_native_amigus_capacity_probe *q)
+{
+    uintptr_t address; uint16_t flags;
+    if (!q || q->issued==2048) return 0; /* Never write beyond the ceiling. */
+    if (!capacity_status(q,&address,&flags)) return 0;
+    if (flags&2) {q->faulted=1; return 0;} /* Early FULL: no overflow write. */
+    ++q->issued; /* Limit attempted writes independently of device readback. */
+    *(volatile uint32_t *)(address+0x0c)=0;
+    return 1;
+}
+int pt_native_amigus_capacity_poll(struct pt_native_amigus_capacity_probe *q)
+{
+    uintptr_t address; uint16_t flags;
+    if (!capacity_status(q,&address,&flags)) return -1;
+    if (q->issued!=2048) return 0;
+    q->confirmed=(flags&2)!=0;
+    return q->confirmed ? 1 : 0;
+}

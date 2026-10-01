@@ -35,6 +35,10 @@ class PhysicalDiscoveryGuard(unittest.TestCase):
             self.assertTrue(runner.idle_restoration_finished(fifo_line,registers=True,reset=True,fifo=True))
             self.assertFalse(runner.idle_restoration_finished(fifo_line,registers=True,reset=True))
             self.assertFalse(runner.idle_restoration_finished(fifo_line.replace('restore_needed=0','restore_needed=1'),registers=True,reset=True,fifo=True))
+            capacity_line = line.replace('IDLE-OWNERSHIP','IDLE-CAPACITY')
+            self.assertTrue(runner.idle_restoration_finished(capacity_line,registers=True,reset=True,fifo=True,capacity=True))
+            self.assertFalse(runner.idle_restoration_finished(fifo_line,registers=True,reset=True,fifo=True,capacity=True))
+            self.assertFalse(runner.idle_restoration_finished(capacity_line.replace('restored=1','restored=0'),registers=True,reset=True,fifo=True,capacity=True))
             for bad in (line.replace('restored=1','restored=0'),line.replace('restore_needed=0','restore_needed=1'),
                         line.replace('rc='+code,'rc=99'),line+'\n'+line,'DRIVER HOLD: restoration unconfirmed'):
                 self.assertFalse(runner.idle_restoration_finished(bad))
@@ -84,6 +88,9 @@ class PhysicalDiscoveryGuard(unittest.TestCase):
             emulator.write_text(json.dumps(altered))
             with self.assertRaisesRegex(RuntimeError,'disabled FIFO qualification missing'):
                 runner.qualification(binary,build,emulator,independent,True,True,True,True,True)
+            altered['amigus-fifo_returncode']='5';emulator.write_text(json.dumps(altered))
+            with self.assertRaisesRegex(RuntimeError,'bounded capacity qualification missing'):
+                runner.qualification(binary,build,emulator,independent,True,True,True,True,True,True)
             altered['amigus-fifo_returncode']='20';emulator.write_text(json.dumps(altered))
             with self.assertRaisesRegex(RuntimeError,'disabled FIFO qualification missing'):
                 runner.qualification(binary,build,emulator,independent,True,True,True,True,True)

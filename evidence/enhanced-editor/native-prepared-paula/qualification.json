@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "seconds": 2.8778868750086986,
+  "window_bound_seconds": 200,
+  "cases": [
+    {
+      "case": "prepared-output",
+      "binary": "PTExecPreparedPaulaTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/prepared-paula-corrected-final/build/dev/render-files-1790849366884329000",
+      "sha256": "016432a38384f1d77f36d71648fcc9c4f1a8d3520aad4d31a1b85eca2180d164",
+      "independent_cleanup": true
+    }
+  ]
+}

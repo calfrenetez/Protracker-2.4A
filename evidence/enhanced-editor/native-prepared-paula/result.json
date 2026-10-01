@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 prepared editor16/24 ownership with actual device WRITE reading verified zero Chip PCM, logical nonzero volume; classic8 zero-leading segment refused before promotion/cache/output; Fast masters preserved, unused masters unpromoted; numerical time only, no frontend/timer/listening/physical claim",
+  "PTExecPreparedPaulaTest_sha256": "016432a38384f1d77f36d71648fcc9c4f1a8d3520aad4d31a1b85eca2180d164",
+  "prepared-paula_returncode": "0",
+  "run_files_cleaned": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=250\tsndbuf_status=0"
+}

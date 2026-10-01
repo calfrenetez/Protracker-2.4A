@@ -15,7 +15,9 @@ direct-engine tests. An initial silent fixture failed before output: its all-zer
 classic8 source takes the renderer's segment/repeat path, which this one-shot-only
 adapter refuses. Host reproduction identifies that refusal; original native
 evidence remains failed. The corrected native fixture checks this refusal and
-separately tests silent16/24 prepared output. Native execution remains pending.
+separately tests silent16/24 prepared output. That distinct native fixture passed
+with zero owned Fast bytes, confirmed device cleanup and an independent locked
+DMA-off/path-absence check. See `evidence/enhanced-editor/native-prepared-paula/`.
 Classic segment/repeat playback, real-time timer/frontend integration and listening
 acceptance remain requirements; successful one-shot tests do not cover them.
 

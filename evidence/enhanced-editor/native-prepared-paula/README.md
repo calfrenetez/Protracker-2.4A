@@ -1,7 +1,7 @@
-# Prepared Paula native fixture: host and build evidence
+# Prepared Paula native fixture: host, build and emulator evidence
 
 Corrected candidate tree 90ca345093b0351f71a980fe3a3188a04e964fc1; PTExecPreparedPaulaTest 198404 bytes, SHA256 016432a38384f1d77f36d71648fcc9c4f1a8d3520aad4d31a1b85eca2180d164. All 149 compiled-source hashes match the indexed tree; no generated sources. Guard built but not executed.
 
 Two ASan/UBSan host suites pass. Existing four-track8/16/24 cases remain. Added16-track routing (4/7/10/15 Paula), selected track4, global end on unselected track15, unused master, silent16/24 sources and explicit classic8 zero-leading segment refusal. Cleanup retains the editor barrier through pending DMA and final device release. The corrected native fixture reports preparation diagnostics and asserts zero owned Fast bytes on normal failure cleanup too.
 
-Native execution is pending fresh coordinated release/availability. The planned native scope is classic8 segment refusal before promotion/cache/output, actual prepared16/24 WRITE of preverified zero Chip bytes at nonzero logical volume, cancellation and editor/song/device cleanup. No native8 prepared playback, timer/frontend integration, listening or physical acceptance claim.
+One fresh coordinated native run1790849366884329000 passed with normal return0. Native scope is classic8 segment refusal before promotion/cache/output, actual prepared16/24 WRITE of preverified zero Chip bytes at nonzero logical volume, cancellation and editor/song/device cleanup. 26 Fast allocations ended at zero owned bytes. Bounded reader/song/editor/device closure, exact cleanup and subsequent independent locked running/DMA-off/path-absence checks passed. RELEASE requested from AmiConnect. No native8 prepared playback, timer/frontend integration, listening or physical acceptance claim.

@@ -17,7 +17,17 @@ enum pt_elapsed_result pt_elapsed_clock_advance(struct pt_elapsed_clock *c,uint3
     if(c->failure)return c->failure;
     if(frequency!=c->frequency)return c->failure=PT_ELAPSED_FREQUENCY;
     if(ticks<c->ticks)return c->failure=PT_ELAPSED_REGRESSION;
-    delta=ticks-c->ticks;whole=delta/c->frequency;
+    delta=ticks-c->ticks;
+    /* Service deltas normally fit this32-bit numerator. Avoid software64-bit
+       division on68000 while retaining exact carry and the same failure rules. */
+    if(delta<=UINT32_MAX && (uint32_t)delta<=(UINT32_MAX-c->fraction)/c->rate) {
+        uint32_t numerator=(uint32_t)delta*c->rate+c->fraction;
+        uint32_t increment=numerator/c->frequency;
+        if(increment>UINT64_MAX-c->frames)return c->failure=PT_ELAPSED_OVERFLOW;
+        c->frames+=increment;c->fraction=numerator%c->frequency;c->ticks=ticks;
+        *frames=c->frames;return PT_ELAPSED_OK;
+    }
+    whole=delta/c->frequency;
     /* Split before multiplying; delta*rate may overflow even when the resulting
        frame count fits. The remainder product is bounded by UINT32_MAX*192000. */
     if(whole>(UINT64_MAX-c->frames)/c->rate)return c->failure=PT_ELAPSED_OVERFLOW;
@@ -36,7 +46,15 @@ enum pt_elapsed_result pt_elapsed_clock_deadline(const struct pt_elapsed_clock *
     if(c->failure)return c->failure;
     if(frames<c->frames)return PT_ELAPSED_INVALID;
     if(frames==c->frames){*ticks=c->ticks;return PT_ELAPSED_OK;}
-    delta=frames-c->frames;whole=delta/c->rate;numerator=(delta%c->rate)*c->frequency;
+    delta=frames-c->frames;
+    if(delta<=UINT32_MAX && (uint32_t)delta<=UINT32_MAX/c->frequency) {
+        /* delta>=1 implies numerator>=frequency>fraction, so no borrow. */
+        uint32_t small=(uint32_t)delta*c->frequency-c->fraction;
+        uint32_t increment=small/c->rate+(small%c->rate!=0);
+        if(increment>UINT64_MAX-c->ticks)return PT_ELAPSED_OVERFLOW;
+        *ticks=c->ticks+increment;return PT_ELAPSED_OK;
+    }
+    whole=delta/c->rate;numerator=(delta%c->rate)*c->frequency;
     /* Borrow before multiplying the whole part, so an intermediate overflow
        cannot reject a representable deadline when carry shortens the delay. */
     if(numerator<c->fraction){--whole;numerator+=(uint64_t)c->rate*c->frequency;}

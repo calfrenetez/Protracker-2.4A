@@ -41,7 +41,12 @@ observations survive cleanup without added clock reads. The distinct diagnostic
 remains FAILED; closure/Fast-zero and independent cleanup passed again.
 See `evidence/enhanced-editor/paula-polling-cadence/` and
 `evidence/enhanced-editor/paula-refusal-stage/`.
-Native periodic cadence
+Elapsed clock conversion now uses exact32-bit numerator paths for small deltas,
+with unchanged64-bit fallback. An independent host128-bit oracle passes400000
+advance/deadline comparisons. A distinct optimized native candidate still FAILED
+pre-startup cadence at the ENTRY watchdog on call5:267>256frames. Safe closure
+and independent cleanup passed; arithmetic parity does not qualify cadence.
+See `evidence/enhanced-editor/paula-clock-fast/`. Native periodic cadence
 feasibility and frontend PLAY/Wait wiring remain open, as do listening acceptance
 and classic segment/repeat playback. See `evidence/enhanced-editor/paula-native-transport/`.
 

@@ -467,3 +467,13 @@ exact seven absent-library modes return5 and five fixtures return0. Native run
 1790895036186190000 cleanup plus separate independent1790895075327969000 PASS;
 window released, no recovery needed this run. Physical capacity/FULL observation
 is pending. See `../evidence/enhanced-editor/amigus-capacity-native/`.
+
+
+Physical0.7 capacity qualification FAILED, run1790895199505034000 RC20: after
+store2048 the immediate usage read still showed4094 instead of4096. FULL polling
+was skipped; logged full=0 means not confirmed, not a measured clear flag. Cause
+unproven;4096words remains unqualified and no production limit was changed.
+One-shot reset, ownrelease/AHIrestoration, exactRAMcleanup/separateabsence and
+idle030return PASS; window released with no hold. Physical retries stopped.
+See `../evidence/enhanced-editor/amigus-capacity-physical-failed/`. Next prepare
+a distinct bounded final readback observation before requesting a user decision.

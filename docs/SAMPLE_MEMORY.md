@@ -7,6 +7,13 @@ Playback representations must never become the project's source of truth.
 
 ## Current implementation status — 1 October 2026
 
+The distinct realMini4096-word capacity qualification FAILED: store2048 issued,
+immediate finalcount4094, causeunproven; FULLpoll skipped, capacity not accepted.
+Reset/release/AHIrestoration/cleanup/idle030return PASS, no retainedhold. Physical
+retries stopped pending a separately prepared bounded observation diagnostic and
+userdecision. See `../evidence/enhanced-editor/amigus-capacity-physical-failed/`.
+
+
 RealMini read-only PCM status and initially-idle silent disable/reset readback
 also pass, with confirmed release/AHI restoration/cleanup. Disabled six-zero-word
 FIFO transfer/count and nonempty reset now pass separately (2/4/6words, reset

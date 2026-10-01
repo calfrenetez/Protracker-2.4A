@@ -1,0 +1,13 @@
+IDLE-CAPACITY scope=unused-RC6-020-AHI-only audio=NOT_TESTED
+DRIVER-WINDOW result=0 stage=driver-unloaded unloaded=1 restore_needed=1
+REGISTER-PROBE scope=Mini-7ea663e7-disabled-bounded-FIFO-capacity interrupts=NO audio=NOT_TESTED
+PCM STATUS flags=0x0000 mask=0x0000 format=0x0000 rate=0x0000 pending_words=0
+PCM CAPACITY progress_words=512 stores=256
+PCM CAPACITY progress_words=1024 stores=512
+PCM CAPACITY progress_words=2048 stores=1024
+PCM CAPACITY result=FAIL stores=2048 pending_words=4094 full=0 overflow_writes=0 ordering=NOT_TESTED
+PCM QUIESCE requested=1 confirmed=1 status=1 polls=1
+REGISTER RELEASE confirmed=1 retained=0 driver=0x00000000
+REGISTERS result=FAIL reason=capacity-count-or-guard-failed rc=20
+DRIVER resident=1 supported=1 delayed=0 users=0 ahi_users=0
+IDLE-CAPACITY result=FAIL unloaded=1 restored=1 restore_needed=0 rc=20

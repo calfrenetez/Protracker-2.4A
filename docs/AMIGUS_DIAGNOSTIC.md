@@ -155,3 +155,19 @@ NOT RUN in this preparation record. Use separately coordinated shared adapter
 build/dev/amigus-ownership-library-contract.json` with matching emulator and
 independent cleanup evidence. Retained/asynchronous uncertainty never authorizes
 file cleanup, target return, exit, process cancellation or automatic retry.
+
+
+## Actual ownership qualification — 1 October2026
+
+Current diagnostic0.2 native20case fixture/privateABI/missinglibrary modes pass.
+Initial sharedfilesystem cleanup FAILED; separate exact empty-directory recovery
+and independent locked verification pass. Original failure retained in
+`../evidence/enhanced-editor/amigus-current-ownership/`.
+RealMini physical ownership completedRC5: PCM foreignbusy0x101 skipped without
+release/probe; wavetable competing/wrongowner refusal, reacquisition and confirmed
+finalrelease PASS. Knownfinished RAMcleanup + separateabsence/targetreturn pass,
+windowreleased. Overall ownership INCOMPLETE; awaiting existing audio owner's
+release, no automatic physical retry. Discovery previously passed. Registers,
+sample RAM transfer, IRQ, output, physical timing and listening remain open.
+Evidence `../evidence/enhanced-editor/amigus-physical-ownership/` supersedes older
+physical NOT RUN statements only for these exact named checks.

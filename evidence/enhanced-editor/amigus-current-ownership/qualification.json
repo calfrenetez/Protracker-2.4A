@@ -1,0 +1,7 @@
+{
+  "native_functional_passed": true,
+  "initial_cleanup_passed": false,
+  "recovery_passed": true,
+  "independent_recovered_cleanup_passed": true,
+  "window_released": true
+}

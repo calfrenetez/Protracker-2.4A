@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Native file regressions; requires a separately coordinated shared030 window."""
-import argparse, fcntl, hashlib, importlib.util, json, os, shutil, sys, time
+import argparse, fcntl, hashlib, importlib.util, json, os, re, shutil, subprocess, sys, time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
@@ -38,6 +38,53 @@ def observe_cleanup_absence(run,launcher,result):
             raise RuntimeError('Completed run or launcher remains or reappeared after cleanup; inspect before release')
         if index<8:time.sleep(0.25)
     result['independent_release_check_required']=True
+def guest_cleanup_script(guest,run,out):
+    """Inventory only this completed run; never use Delete ALL or patterns.
+
+    Host unlink/rmtree can leave the shared filesystem's guest metadata stale,
+    recreating empty directories later. AmigaDOS owns deletion and cache updates.
+    Reject links and unsafe command tokens before deleting anything.
+    """
+    if (run.parent!=guest.share or run.name!=out.name or
+            not re.fullmatch(r'render-files-[A-Za-z0-9._-]+',run.name) or
+            guest.launch!=guest.share/('launch-'+run.name) or
+            guest.device!='Dev:Tests/' or run.is_symlink() or not run.is_dir()):
+        raise RuntimeError('Cleanup paths do not match the exact owned run')
+    files=[];directories=[]
+    def unreadable(error):raise error
+    for directory,names,leaves in os.walk(run,followlinks=False,onerror=unreadable):
+        for name in names+leaves:
+            path=Path(directory)/name
+            if (not re.fullmatch(r'[A-Za-z0-9._-]+',name) or path.is_symlink() or
+                    not (path.is_file() or path.is_dir())):
+                raise RuntimeError('Unsafe cleanup entry; preserve run for inspection')
+            (directories if path.is_dir() else files).append(path)
+    if guest.launch.is_symlink() or (os.path.lexists(guest.launch) and not guest.launch.is_file()):
+        raise RuntimeError('Unsafe cleanup launcher; preserve run for inspection')
+    paths=[guest.launch,*sorted(files),*sorted(directories,key=lambda p:(-len(p.parts),str(p))),run]
+    commands=['FailAt 21','CD RAM:']
+    for path in paths:
+        relative=path.relative_to(guest.share).as_posix()
+        token=guest.device+relative
+        commands+=['If EXISTS '+token,' Delete '+token,' If WARN','  Quit 20',' EndIf','EndIf',
+                   'If EXISTS '+token,' Quit 20','EndIf']
+    commands+=['Echo PTG-CLEANUP-ABSENT-'+run.name]
+    return '\n'.join(commands)+'\n'
+def execute_guest_cleanup(guest,out,script):
+    """Recheck the shared process/bridge before one bounded synchronous call."""
+    from shared_guest import Guest
+    current=Guest(INFRA,out)
+    require_running_guest(current,out,'before-cleanup')
+    args={'script':script,'timeout':20}
+    reply=subprocess.run([str(INFRA/'.venv/bin/python'),str(INFRA/'scripts/mcp-call.py'),
+                          'amiga_run_script',json.dumps(args)],capture_output=True,text=True,timeout=40)
+    (out/'cleanup-transport.log').write_text(reply.stdout+reply.stderr)
+    if reply.returncode:raise RuntimeError('Guest cleanup transport failed; no host removal or retry')
+    parsed=json.loads(reply.stdout)
+    text='\n'.join(block.get('text','') for block in parsed.get('content',[]) if block.get('type')=='text')
+    if parsed.get('isError') or not text.startswith('[OK]'):
+        raise RuntimeError('Guest cleanup incomplete or still running; preserve target and paths')
+    return text
 def finish_run(guest,run,out,result,finished,guard_audio):
     """Report cleanup only after absence; retain evidence and raise on uncertainty.
 
@@ -51,10 +98,18 @@ def finish_run(guest,run,out,result,finished,guard_audio):
             result['cleanup_audio']=state
             if not all('ch%d_dma=0'%i in state.split('\t') for i in range(4)):
                 raise RuntimeError('Completed guest still has active or unknown audio DMA; cleanup refused')
-        guest.launch.unlink(missing_ok=True)
-        shutil.rmtree(run)
-        # A single immediate check missed a delayed recreation in the CIA run.
-        # lexists also refuses dangling links. Remove once, then observe only.
+        script=guest_cleanup_script(guest,run,out)
+        (out/'cleanup.script').write_text(script)
+        result['cleanup_method']='guest-amigados-exact-paths'
+        result['cleanup_script_sha256']=hashlib.sha256(script.encode()).hexdigest()
+        result['cleanup_script_pending']=True
+        reply=execute_guest_cleanup(guest,out,script)
+        # Even a marker in partial output cannot prove completion. The helper
+        # requires [OK]; uncertain execution retains this window without retry.
+        if 'PTG-CLEANUP-ABSENT-'+run.name not in reply.splitlines():
+            raise RuntimeError('Guest cleanup absence marker missing')
+        result['cleanup_script_pending']=False
+        # Never follow guest deletion with host removal, even on reappearance.
         observe_cleanup_absence(run,guest.launch,result)
         result['run_files_cleaned']=True
     except Exception as error:

@@ -1,0 +1,7 @@
+AMIGUSTEST schema=1 version=0.2 mode=ownership
+SCOPE audio=NOT_TESTED interrupts=NOT_TESTED firmware_write=NO
+LIBRARY version=1 revision=1
+CARD index=0 type=0x7001 hardware=0x00000000 firmware=0x7ea663e7 pcm=1 wavetable=1 codec=1 date=2026-06-12T15:39
+CHECK card=0 block=1 result=SKIP stage=reserve-a driver=0x00000101 release=0x00000000 confirmed=0 retained=0
+CHECK card=0 block=2 result=PASS stage=complete driver=0x00000000 release=0x00000000 confirmed=1 retained=0
+SUMMARY result=SKIP reason=incomplete cards=1 passed=1 skipped=1 failed=0 rc=5

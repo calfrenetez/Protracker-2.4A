@@ -1,0 +1,14 @@
+{
+  "commit": "d8c9a0429f41cd5f3dbadae34ef438e45c9c3718",
+  "files": {
+    "Software/Drivers/AHI4/src/amigus_pcm.c": "89d4e64742e36be5856378b6388f43a68e1a32263dd95a6b897dd6f9c5166a80",
+    "Software/Drivers/AHI4/header/amigus_hardware.h": "4b7572678b7c5ae0bbb8a415db358494af842acfba4a39b708550b1fa6c76a4d",
+    "Documentation/AmiGUS_mini/AmiGUS_mini_Register_Map.xlsx": "a30e0cdf966b293c0d5411604a62442a3db98ca4973d2b6bf12961cdc988dd51"
+  },
+  "facts": [
+    "Stop playback writes disable0 at0x06, clear playback IRQflags7 at0x00, clearmask7 at0x02, resetstrobe0 at0x08",
+    "Lowerbit IRQ writes clear selected bits; capture/timer bits excluded",
+    "Confirmation requires enableclear/maskplaybackclear/zero pendingwords; no FIFOcapacity assumption or data/start/format write"
+  ],
+  "scope": "Source/map review and own-memory native fixture only; physicalreset pending"
+}

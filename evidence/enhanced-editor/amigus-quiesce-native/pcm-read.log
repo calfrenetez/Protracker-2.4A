@@ -1,0 +1,2 @@
+PCM READ PASS: five status reads, sixteen refusal guards, no memory writes
+PCM QUIESCE PASS: four exact disable/reset stores, one-shot begin, read-only pending/lost-owner polls; synthetic memory only

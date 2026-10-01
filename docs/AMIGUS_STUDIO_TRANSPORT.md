@@ -393,3 +393,23 @@ RAMcleanup/separateabsence/connectedidle030return PASS and physicalwindowrelease
 Evidence: `../evidence/enhanced-editor/amigus-pcm-read-physical/`. This qualifies
 these five status reads in the observed idle state. Reset/write/readback changes,
 FIFOcapacity/ordering, IRQ, playback, physicalsilence and listening remain open.
+
+## Bounded native silent reset qualification (1 October2026)
+
+AmiGUSTest0.5 `--idle-reset` first requires the physical register probe's idle
+conditions. A separate `pt_native_amigus_quiesce` then issues exactly four
+volatile16-bit writes: rate-disable0, clear playback flags7, clear playback mask7,
+FIFO reset-strobe0. The pinned Mini map and public Stop function agree on this
+sequence. No format/data/enable/IRQ-install operation or capacity assumption is
+introduced. A second begin is refused; at most three read-only polls observe
+enableclear/playbackmaskclear/zero usage. Ownership loss, error or exhausted
+confirmation retains the access lease, Task/library/card/owner and restoration
+obligation in HOLD; no repeated writes, card release or AHI reload.
+
+Shared030 own-memory tests verify exact store locations/values, unchanged other
+bytes, invalid-owner refusal, one-shot begin and write-free pending/lost-owner
+polls. Device clear semantics are simulated in this fixture. Exact0.5 existing
+fixtures pass0 and five unavailable-library modes return5. Cleanup and separate
+independent absence/running68030/allDMAoff PASS; window released. Evidence:
+`../evidence/enhanced-editor/amigus-quiesce-native/`. Real Mini reset/readback,
+FIFO transactions/capacity, interrupts, output and listening remain pending.

@@ -46,5 +46,26 @@ int main(void)
     assert(!pt_native_amigus_pcm_read16(&r,0x06,NULL));
     assert(!memcmp(registers,copy,sizeof(copy)));
     puts("PCM READ PASS: five status reads, sixteen refusal guards, no memory writes");
+    {
+        struct pt_native_amigus_quiesce q={0};
+        struct pt_amigus_reservation bad=r;
+        bad.access=0;
+        assert(!pt_native_amigus_quiesce_begin(&q,&bad));
+        assert(!q.owner && !q.requested && !memcmp(registers,copy,sizeof(copy)));
+        assert(pt_native_amigus_quiesce_begin(&q,&r));
+        assert(registers[0]==7 && registers[1]==7 && registers[3]==0 && registers[4]==0);
+        for (i=0;i<9;++i) if(i!=0 && i!=1 && i!=3 && i!=4) assert(registers[i]==copy[i]);
+        assert(!pt_native_amigus_quiesce_begin(&q,&r));
+        memcpy(copy,registers,sizeof(copy));
+        assert(pt_native_amigus_quiesce_poll(&q)==0 && !q.confirmed);
+        assert(!memcmp(registers,copy,sizeof(copy))); /* Pending poll writes nothing. */
+        registers[1]=0x50; registers[8]=0; /* Simulated device clear/empty readback. */
+        assert(pt_native_amigus_quiesce_poll(&q)==1 && q.confirmed);
+        memcpy(copy,registers,sizeof(copy));
+        r.access=0;
+        assert(pt_native_amigus_quiesce_poll(&q)==-1 && !q.confirmed);
+        assert(!memcmp(registers,copy,sizeof(copy)));
+    }
+    puts("PCM QUIESCE PASS: four exact disable/reset stores, one-shot begin, read-only pending/lost-owner polls; synthetic memory only");
     return 0;
 }

@@ -7,7 +7,7 @@
 #include <proto/dos.h>
 #include <stdio.h>
 
-int pt_register_probe(void)
+int pt_register_probe(int reset)
 {
     struct pt_native_amigus_library native = {0};
     struct pt_amigus_reservation r = {0};
@@ -15,10 +15,12 @@ int pt_register_probe(void)
     enum pt_amigus_reservation_result opened;
     uint16_t values[5] = {0,0,0,0,0};
     unsigned i;
+    struct pt_native_amigus_quiesce quiesce={0};
     unsigned long release_code;
     int result = PT_SKIP;
     const char *reason = "register-contract-unavailable";
-    puts("REGISTER-PROBE scope=Mini-7ea663e7-read-only writes=NO interrupts=NO audio=NOT_TESTED");
+    printf("REGISTER-PROBE scope=Mini-7ea663e7-%s interrupts=NO audio=NOT_TESTED\n",
+           reset ? "silent-disable-reset" : "read-only writes=NO");
     opened = pt_amigus_reservation_open(&r, &api, 0);
     if (opened != PT_AMIGUS_RESERVED) {
         printf("REGISTERS result=SKIP reason=reservation-unavailable status=%u rc=5\n", opened);
@@ -36,6 +38,26 @@ int pt_register_probe(void)
             }
             printf("PCM STATUS flags=0x%04x mask=0x%04x format=0x%04x rate=0x%04x pending_words=%u\n",
                    values[0],values[1],values[2],values[3],values[4]);
+        }
+        if (reset && result==PT_PASS) {
+            int status=-1;
+            if (!pt_native_amigus_quiesce_begin(&quiesce,&r)) {
+                result=PT_FAIL; reason="reset-refused-before-write";
+            } else {
+                /* Three bounded read-only observations. Never repeat writes,
+                 * release the access lease or reload AHI without confirmation. */
+                for (i=0;i<3;++i) {
+                    status=pt_native_amigus_quiesce_poll(&quiesce);
+                    if (status!=0) break;
+                    if (i<2) Delay(1);
+                }
+                printf("PCM QUIESCE requested=%u confirmed=%u status=%d polls=%u\n",
+                       quiesce.requested,quiesce.confirmed,status,i<3 ? i+1 : 3);
+                if (status!=1) {
+                    puts("QUIESCE HOLD: disable/reset unconfirmed; access/Task/library/card/owner retained; no retry");
+                    fflush(stdout); for (;;) Delay(50);
+                }
+            }
         }
         if (!pt_amigus_reservation_end(&r)) {
             puts("REGISTER HOLD: access end unconfirmed; Task/library/card retained");

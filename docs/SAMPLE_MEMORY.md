@@ -11,14 +11,20 @@ Host scheduling feasibility is now documented in `NATIVE_SCHEDULING_FEASIBILITY.
 The current immediate audio adapter has no absolute activation timestamp. A
 sanitized integer probe checks 184,200 logical-frame admission windows, including
 14/15 EClock ticks at 48 kHz; this is not native latency or physical sample timing.
-The next recommended experiment is a separately owned CIA timer-only diagnostic,
-pending the architecture choice. No new guest operation or runtime change.
+The separately owned CIA timer-only diagnostic is authorized feasibility work;
+it does not require a new policy choice. The preceding host assessment made no
+guest operation or runtime change; diagnostic results are recorded separately.
+Timer-only CIA owner/IRQ fixture now has seven host checks and pinned Amiga build
+PASS. Native NOT RUN: the coordinated guest was paused before staging, both exact
+run/launcher paths were independently absent, and the unused TAKE was released.
+Unknown pause ownership blocks that next native gate; no resume/reset performed.
+Evidence: `../evidence/enhanced-editor/cia-timer-feasibility/README.md`.
 
 Latest first-start qualification is FAILED: even with own-task diagnostic
 priority5, CORE observed the first musical target about1.015ms late and the
 unchanged exact gate refused before output. Prepared32Chipbytes were verified
 zero before the epoch; all resource/priority/signal restoration and independent
-cleanup pass. Native timing strategy now needs an explicit decision; see
+cleanup pass. Further timer-only feasibility remains authorized; see
 `NATIVE_TIMING_DECISION.md`. No timing tolerance or production priority policy
 was installed. Physical OFF/deferred/unprobed.
 

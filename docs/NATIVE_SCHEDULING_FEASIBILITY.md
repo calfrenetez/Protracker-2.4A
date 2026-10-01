@@ -2,8 +2,9 @@
 
 1 October 2026. Host/source assessment against `b43f1e2`; no new guest run,
 native timer acquisition, output, frontend or physical qualification. The user
-authorized further work until a decision; this assessment completes the work
-available without choosing a new playback architecture or lateness policy.
+authorized continued feasibility work until a timing-policy decision. A timer-only
+CIA diagnostic is within that authority; it does not select a production output
+architecture or lateness policy.
 
 ## Finding
 
@@ -125,12 +126,25 @@ native output integration: it does not implement selective direct Paula voices,
 does not establish absolute wall-clock start, and must negotiate real output
 format/rate and ownership. Do not silently substitute it for the Paula route.
 
-Recommendation: authorize investigation of a **dedicated CIA scheduled backend,
+Recommendation: investigate a **dedicated CIA scheduled backend,
 retaining the existing strict frame refusal**, starting with the timer-only
 diagnostic above. This is a feasibility experiment, not a promise of universal
 sample-exact hardware activation. If it cannot pass, report that result before
 changing timing tolerance or substituting a rendered-output route.
 
-That architecture direction is the decision now required. No new runtime code,
-timing relaxation, production priority policy or hardware control was installed
-during this assessment. The recurring follow-up remains paused for the choice.
+The timer-only investigation can proceed under existing authority. It is not a
+reason to pause. A user decision is required if the findings demand relaxing the
+timing requirement or substituting a materially different playback approach.
+The original host assessment installed no runtime change or hardware control;
+subsequent diagnostic evidence must be recorded separately.
+
+## Timer-only diagnostic prepared; emulator prelaunch refused
+
+The diagnostic and host ownership checks are now implemented. Host checks and
+pinned cross-build pass; native execution is **NOT RUN** because the coordinated
+shared guest reported paused before staging. The unused TAKE was explicitly
+released after independent exact-path absence verification. Pause ownership is
+unknown; no automatic resume/reset is authorized. No timing tolerance or output
+architecture has been changed. See
+`../evidence/enhanced-editor/cia-timer-feasibility/README.md` for exact candidate,
+checks, refusal and release evidence. A later run needs fresh coordination.

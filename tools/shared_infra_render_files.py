@@ -45,6 +45,7 @@ def finish_run(guest,run,out,result,finished,guard_audio):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     group=parser.add_mutually_exclusive_group()
+    group.add_argument('--cia-timing',action='store_true',help='Finite owned CIA timer IRQ timestamp diagnostic; no Paula writes')
     group.add_argument('--invert-stem-cli',metavar='REFERENCE_DIRECTORY',help='Verify bounded shared-sample EFx native stems against host bytes')
     group.add_argument('--invert-cli',metavar='REFERENCE_WAV',help='Verify bounded EFx CLI WAV against host bytes')
     group.add_argument('--invert-bounce',action='store_true',help='Run EFx sample-bounce transaction using native Fast allocator')
@@ -87,6 +88,11 @@ def main():
     if args.candidate:
         manifest=json.loads((args.candidate.parent/'PT24GRender-build.json').read_text())
         if hashlib.sha256(args.candidate.read_bytes()).hexdigest()!=manifest['binary_sha256']:raise RuntimeError('Candidate differs from build manifest')
+    cia_manifest=None
+    if args.cia_timing:
+        cia_manifest=json.loads((ROOT/'build/dev/cia-diagnostic-build.json').read_text())
+        if hashlib.sha256((ROOT/'build/dev/PTExecCiaTimingTest').read_bytes()).hexdigest()!=cia_manifest['binary_sha256']:
+            raise RuntimeError('CIA candidate differs from exact build manifest')
     sys.path.insert(0,str(INFRA/'scripts'))
     from shared_guest import Guest
     out=ROOT/'build/dev'/('render-files-'+str(time.time_ns()));out.mkdir()
@@ -94,7 +100,7 @@ def main():
     with (INFRA/'runtime/test.lock').open('a') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         guest=Guest(INFRA,out)
-        if args.paula_memory in ('output','output-diagnostic','engine','prepared-output','transport','wait','wait-latency','wait-priority','paula-wait-priority','paula-boundary'):
+        if args.cia_timing or args.paula_memory in ('output','output-diagnostic','engine','prepared-output','transport','wait','wait-latency','wait-priority','paula-wait-priority','paula-boundary'):
             audio=guest.command('GET_AUDIO_STATE')
             (out/'audio-before-staging.json').write_text(json.dumps({'audio':audio},indent=2)+'\n')
             if not all('ch%d_dma=0'%i in audio.split('\t') for i in range(4)):
@@ -177,6 +183,10 @@ def main():
                 result['scope']='shared030 mixed capability checks on one global sequence; native Fast allocation, no caches/devices/DMA/output'
             if args.paula_memory=='mixed-owner':
                 result['scope']='shared030 injected combined master/voice ownership, native Fast/Chip allocations; no mixed scheduler/devices/output'
+        if args.cia_timing:
+            cases=[('cia-timing','PTExecCiaTimingTest','CIA TIMING PASS:')]
+            result['source_tree']=cia_manifest['source_tree']
+            result['scope']='shared030 finite owned free CIA timer/IRQ actual-clock admission diagnostic with independent termination; no Paula/audio.device/output/frontend/physical acceptance'
         if args.recovery_file:
             cases=[('recovery','PTExecRecoveryTest','RECOVERY FILE PASS:')]
             result['scope']='shared030 explicit recovery file transactions; no automatic snapshots or UI wiring'
@@ -268,6 +278,8 @@ def main():
             for name,binary,marker in cases:
                 sub=run/name;sub.mkdir();shutil.copyfile(args.candidate if args.candidate else ROOT/'build/dev'/binary,sub/binary)
                 result[binary+'_sha256']=hashlib.sha256((sub/binary).read_bytes()).hexdigest()
+                if args.cia_timing and result[binary+'_sha256']!=cia_manifest['binary_sha256']:
+                    raise RuntimeError('Staged CIA binary differs from coordinated manifest')
                 commands+=['CD '+guest.device+run.name+'/'+name,binary+' '+guest.device+run.name+'/'+name+('/sample.input' if args.sample_dispatch else '/donor.mod' if args.source_memory else '/module.mod' if args.mod_import else '/sample.input' if args.sample_import else '/master.mod' if args.mod_stream else '/master.ptg' if args.project_stream else '/sample.iff' if args.sample_svx else '/sample.raw' if args.sample_raw else '/sample.wav' if args.sample_wav else '/recent' if args.input_memory in ('recent','exec-recent') else '')+' >test.log','Echo $RC >test.rc']
             if args.recovery_file:
                 directory=guest.device+run.name+'/recovery'
@@ -329,7 +341,7 @@ def main():
                 if not all('ch%d_dma=0'%i in state.split('\t') for i in range(4)):
                     raise RuntimeError('Cleanup probe left active or unknown DMA; functional test not started')
             require_running_guest(guest,out,'before-launch')
-            if args.paula_memory in ('output','output-diagnostic','engine','prepared-output','transport','wait','wait-latency','wait-priority','paula-wait-priority','paula-boundary'):
+            if args.cia_timing or args.paula_memory in ('output','output-diagnostic','engine','prepared-output','transport','wait','wait-latency','wait-priority','paula-wait-priority','paula-boundary'):
                 audio=guest.command('GET_AUDIO_STATE')
                 (out/'audio-before-launch.json').write_text(json.dumps({'audio':audio},indent=2)+'\n')
                 if not all('ch%d_dma=0'%i in audio.split('\t') for i in range(4)):
@@ -413,5 +425,5 @@ def main():
             result['passed']=True
         finally:
             finish_run(guest,run,out,result,finished,
-                (args.paula_memory or args.capture_memory or args.capture_session_memory or args.amigus_capture_memory or args.editor_capture_memory or args.recovery_file or args.studio_memory in ('native-abi','editor','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence') or args.invert_editor or args.invert_sampler or args.invert_session or args.source_memory or args.sample_dispatch or args.invert_render or args.invert_bounce or args.invert_cli or args.invert_stem_cli))
+                (args.cia_timing or args.paula_memory or args.capture_memory or args.capture_session_memory or args.amigus_capture_memory or args.editor_capture_memory or args.recovery_file or args.studio_memory in ('native-abi','editor','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence') or args.invert_editor or args.invert_sampler or args.invert_session or args.source_memory or args.sample_dispatch or args.invert_render or args.invert_bounce or args.invert_cli or args.invert_stem_cli))
 if __name__=='__main__':main()

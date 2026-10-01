@@ -1,0 +1,24 @@
+{
+  "scope": "host-only ownership/clock/runner guards; no native runtime",
+  "passed": true,
+  "command": "python3 -m unittest tests/test_cia_owner.py tests/test_native_eclock.py tests/test_elapsed_clock.py tests/test_shared_render_guard.py",
+  "tests": 7,
+  "cia_owner_cases": 8,
+  "elapsed_seconds": 1.638,
+  "clock_oracle_comparisons": 400000,
+  "sanitizers": "AddressSanitizer and UndefinedBehaviorSanitizer for C fixtures",
+  "python_compile": "PASS",
+  "compiled_project_hashes_verified": {
+    "src/core/elapsed_clock.c": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+    "src/core/elapsed_clock.h": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+    "src/native/eclock.h": "12b0a505ac670356ca4f2729f940159f2608584e2a425ef558e08a68dbdb46c6",
+    "src/native/eclock_alarm.h": "1171c061501a03ddb32a3d661650a7f682aaed9b76749a67778e723c7d64e79e",
+    "src/native/master_memory.h": "ac898368849ec2d1892717d425b90c398da37a8799d536366a898e2e219e184a",
+    "tests/native_cia_irq.s": "c93a8584562450c6fc22392fab1f44bc272610e729db75513686872fc476f6e8",
+    "tests/native_cia_owner.h": "38f6b22d3b0e478b45880765f0b7ee53b4fc6e2f912bd65f8fdd41472acf1919",
+    "tests/native_exec_cia_timing_test.c": "4cbf9db07447b2715143830e92ed1a7923c7342b1e665786ed1de3aca9746625",
+    "tests/native_exec_memory.h": "ce0f2b696ce7767c0da8a2a44ac7730bc207f81e4f6b86bfd172353989e664b9"
+  },
+  "sdk_hashes_verified": 70,
+  "final_candidate": "NOT RUN; later rebuild after unused TAKE release"
+}

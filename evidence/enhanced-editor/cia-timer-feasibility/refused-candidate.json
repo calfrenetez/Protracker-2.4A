@@ -1,0 +1,10 @@
+{
+  "source_tree": "fefacaf255b3e5ad0546d6283429f6e3691a4934",
+  "cases": {
+    "PTExecCiaTimingTest": {
+      "sha256": "772422df3e9e7805082325763e1a37cb3719a0df3f866f784c8fbbf17ab9fccf",
+      "bytes": 29320
+    }
+  },
+  "scope": "timer-only CIA acquisition/IRQ timestamp/teardown; no audio or frontend"
+}

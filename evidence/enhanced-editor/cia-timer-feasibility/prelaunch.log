@@ -1,0 +1,14 @@
+/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/render-files-1790878318591160000
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/shared_infra_render_files.py", line 429, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/shared_infra_render_files.py", line 108, in main
+    try:run=prepare_run(guest,out)
+            ~~~~~~~~~~~^^^^^^^^^^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/shared_infra_render_files.py", line 15, in prepare_run
+    require_running_guest(guest,out,'before-staging')
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/shared_infra_render_files.py", line 13, in require_running_guest
+    raise RuntimeError('Shared guest is paused or its running state is unknown; no automatic resume/retry')
+RuntimeError: Shared guest is paused or its running state is unknown; no automatic resume/retry

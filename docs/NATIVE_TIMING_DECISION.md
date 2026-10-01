@@ -13,8 +13,9 @@ service clock's47996frames is a different epoch and does not clear this failure.
 All resource, priority and signal restoration and independent guest cleanup pass.
 Exact evidence: `../evidence/enhanced-editor/paula-first-boundary/`.
 
-A production timing choice is needed before changing this contract or committing
-to a different native output architecture. Raising priority alone has not cleared
+A production timing choice is needed before changing this contract or selecting
+a materially different native output architecture. Timer-only feasibility work
+under the user's continuation authority does not require another approval. Raising priority alone has not cleared
 the first boundary. Repeating unchanged tests or relaxing checks silently is not
 a solution. Neither option below is implemented or qualified.
 
@@ -45,8 +46,20 @@ The strict core gate admits the correct logical frame (14/15 EClock ticks at
 still distinct from physical first-sample timing. The 720-tick late observation
 exceeds that entire window.
 
-The recommended next concrete experiment is a separately owned CIA timer-only
-diagnostic before designing its playback backend. Keep the existing gate and
-classic path unchanged. This new architecture direction remains subject to the
-user's choice; neither IRQ feasibility nor sample-exact hardware timing is
-qualified by the host probe. No new guest run was needed for this assessment.
+The next concrete experiment is a separately owned CIA timer-only diagnostic
+before designing its playback backend. Keep the existing gate and classic path
+unchanged. This experiment is authorized feasibility work, not a decision point.
+Neither IRQ feasibility nor sample-exact hardware timing is qualified by the
+host probe. No guest run was needed for the preceding host assessment; new
+diagnostic runs must have separate exact candidate and cleanup evidence.
+
+## Timer-only diagnostic prepared; emulator prelaunch refused
+
+The diagnostic and host ownership checks are now implemented. Host checks and
+pinned cross-build pass; native execution is **NOT RUN** because the coordinated
+shared guest reported paused before staging. The unused TAKE was explicitly
+released after independent exact-path absence verification. Pause ownership is
+unknown; no automatic resume/reset is authorized. No timing tolerance or output
+architecture has been changed. See
+`../evidence/enhanced-editor/cia-timer-feasibility/README.md` for exact candidate,
+checks, refusal and release evidence. A later run needs fresh coordination.

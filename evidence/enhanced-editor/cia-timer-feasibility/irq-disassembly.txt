@@ -1,0 +1,19 @@
+00000000 <_pt_diagnostic_cia_irq>:
+   0:	48e7 3f3e      	moveml d2-d7/a2-a6,sp@-
+   4:	2449           	moveal a1,a2
+   6:	4aaa 001c      	tstl a2@(28)
+   a:	6728           	beqs 34 <_pt_diagnostic_cia_irq+0x34>
+   c:	2c6a 0000      	moveal a2@(0),a6
+  10:	41ea 0004      	lea a2@(4),a0
+  14:	4eae ffc4      	jsr a6@(-60)
+  18:	2540 000c      	movel d0,a2@(12)
+  1c:	52aa 0010      	addql #1,a2@(16)
+  20:	42aa 001c      	clrl a2@(28)
+  24:	226a 0014      	moveal a2@(20),a1
+  28:	202a 0018      	movel a2@(24),d0
+  2c:	2c78 0004      	moveal 4 <_pt_diagnostic_cia_irq+0x4>,a6
+  30:	4eae febc      	jsr a6@(-324)
+  34:	4cdf 7cfc      	moveml sp@+,d2-d7/a2-a6
+  38:	7000           	moveq #0,d0
+  3a:	4e75           	rts
+

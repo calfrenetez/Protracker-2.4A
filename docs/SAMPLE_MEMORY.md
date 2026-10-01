@@ -151,6 +151,14 @@ feasibility or hardware sound; strict late refusal is unchanged. Original90s nat
 timeout remains failed, cause unproven; its approved recovery and later new-byte
 pass are recorded separately in `evidence/enhanced-editor/mixed-bulk-advance/`.
 
+A separate post-optimization startup-cost fixture selects only existing6modes58..59
+at8/16/24. Native normal resource/path cleanup passes; hostfull195 remains separate.
+Prepared16voice startup still measures7.856..8.179ms, including2.821..2.826ms after
+the last callback;2voice4.722..9.919ms with an after-last outlier retained. These
+public-call buckets do not isolate individual helpers or prove actual-time playback.
+Production and strict timing policies are unchanged. Evidence:
+`evidence/enhanced-editor/mixed-bulk-startup/`.
+
 AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software
 fixtures, plus an absent-library discovery check. Those results do not establish
 positive card access, real MMIO, streaming output or physical acceptance. Native

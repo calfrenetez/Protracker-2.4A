@@ -613,7 +613,10 @@ detached:
     pt_sampler_release(&sampler);assert(!sampler.bytes);pt_document_release(&doc);free(plan);free(batch);free(f);
 }
 static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wavetable_fixture_main;
-#ifdef PT_TEST_MIXED_NATIVE_COST
+#ifdef PT_TEST_MIXED_NATIVE_STARTUP
+    for(bits=8;bits<=24;bits+=8)for(mode=58;mode<60;++mode)owner_fixture(bits,mode);
+    puts("MIXED OWNER PASS:6 native startup-cost8/16/24 scenarios, fully prepared2/16voice startup, allocation/upload-free exact commit, global action order, resource cleanup; injected logical time/voices, no audio/timing acceptance");
+#elif defined(PT_TEST_MIXED_NATIVE_COST)
     for(bits=8;bits<=24;bits+=8)for(mode=65;mode<67;++mode)owner_fixture(bits,mode);
     puts("MIXED OWNER PASS:6 native running-cost8/16/24 scenarios, bounded preparation, allocation/upload-free running and tempo/trigger/end boundaries, global action order, full frame duration and resource cleanup; injected logical time/voices, no audio/timing acceptance");
 #elif defined(PT_TEST_MIXED_NATIVE_GATE)

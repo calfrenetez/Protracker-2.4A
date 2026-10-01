@@ -4068,3 +4068,21 @@ No musical-boundary, Wait-owner, native frontend/output, listening, endurance or
 physical acceptance follows from this bounded changed-context result. The next
 implementation is explicit notification-driven ownership with bounded abort and
 cleanup while preserving actual clock reads, strict watchdogs and sample leases.
+
+
+## Readiness for notification-driven service — host/build, 1 October 2026
+
+Combined actual-clock service now atomically returns its counter deadline and
+wait eligibility from the same guarded bounded step. Startup must be ready; a
+running interval needs a prepared forecast and zero observed frame debt. The
+native transport exposes a wait mask only after successful service/arms and its
+fresh post-work watchdog, with a live attached song. Failure, begin and confirmed
+closure clear eligibility; unresolved closure exposes no mask. Timer signals and
+WAITING alone never prove it is safe to sleep. No extra clock reads or ownership
+checks replace/relax existing service guards, clocks or deadlines.
+
+Host sanitizer tests across 8/16/24 cover preparation, 300-frame debt draining in
+256+44 at the same actual counter, atomic refusal/error outputs and retained
+DMA/timer-abort closure. Cross-build passes. Evidence:
+`evidence/enhanced-editor/paula-service-readiness`. No native execution for this
+candidate; Exec Wait owner and native frontend/output integration remain open.

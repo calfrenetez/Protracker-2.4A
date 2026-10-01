@@ -110,6 +110,14 @@ enum pt_paula_song_result pt_paula_song_clocked_service(struct pt_paula_song *,u
  * Conversion overflow poisons CLOCK. No separate current/deadline query needed;
  * caller must use result serially, without intervening mutation or callbacks. */
 enum pt_paula_song_result pt_paula_song_clocked_service_counter(struct pt_paula_song *,uint64_t *);
+/* SAME bounded actual-clock service plus atomic counter/readiness outputs.
+ * OK/WAITING publish can_wait1 only when startup is ready or the running interval
+ * has a prepared forecast and no observed frame debt. Otherwise0 requires more
+ * bounded service before sleeping. Null outputs refuse without clock reads;
+ * DONE/errors preserve BOTH outputs. No extra guards, reads or callbacks beyond
+ * service_counter. Readiness is valid only serially until next mutation/callback;
+ * it proves no timing guarantee, and wakeup still requires fresh actual service. */
+enum pt_paula_song_result pt_paula_song_clocked_service_state(struct pt_paula_song *,uint64_t *,unsigned *);
 enum pt_paula_song_result pt_paula_song_clocked_deadline(struct pt_paula_song *,uint64_t *);
 /* One attempt: block advancement, stop held readers, confirm adapter quiescence,
  * close cache, then release sequence/jobs/master pins and session. Returns0 while

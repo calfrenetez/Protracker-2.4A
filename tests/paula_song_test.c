@@ -11,12 +11,12 @@ static enum pt_paula_song_result schedule_poll(struct pt_paula_song *song,struct
     if(!sampled)return pt_paula_song_schedule_step(song,now,deadline);
     c->ticks=100+now*2;
     if(sampled==2) {
-        uint64_t counter=17,queried;
-        r=pt_paula_song_clocked_service_counter(song,&counter);
+        uint64_t counter=17,queried;unsigned can_wait=17;
+        r=pt_paula_song_clocked_service_state(song,&counter,&can_wait);
         if(r==PT_PAULA_SONG_OK || r==PT_PAULA_SONG_WAITING) {
             assert(pt_paula_song_clocked_deadline(song,&queried)==PT_PAULA_SONG_OK && queried==counter);
-            assert(counter>=100 && !(counter&1));*deadline=(counter-100)/2;
-        }else assert(counter==17);
+            assert(counter>=100 && !(counter&1) && can_wait<=1);*deadline=(counter-100)/2;
+        }else assert(counter==17 && can_wait==17);
     }else r=pt_paula_song_clocked_service(song,deadline);
     assert(c->reads==reads+1);return r;
 }
@@ -234,6 +234,11 @@ static void song_fixture(unsigned bits)
             assert(pt_paula_song_schedule_step(song,999,&deadline)==PT_PAULA_SONG_INVALID && deadline==77);
             assert(pt_paula_song_clocked_service(song,NULL)==PT_PAULA_SONG_INVALID && clock.reads==1);
             assert(pt_paula_song_clocked_service_counter(song,NULL)==PT_PAULA_SONG_INVALID && clock.reads==1);
+            {unsigned can_wait=17;uint64_t counter=17;
+                assert(pt_paula_song_clocked_service_state(song,&counter,NULL)==PT_PAULA_SONG_INVALID);
+                assert(pt_paula_song_clocked_service_state(song,NULL,&can_wait)==PT_PAULA_SONG_INVALID);
+                assert(counter==17 && can_wait==17 && clock.reads==1);
+            }
             assert(pt_paula_song_clocked_deadline(song,&ticks)==PT_PAULA_SONG_OK && ticks==2100 && clock.reads==1);
             /* Single ticks carry half a frame rather than rounding per poll. */
             clock.ticks=101;assert(pt_paula_song_clocked_service(song,&deadline)==(mode==14?PT_PAULA_SONG_OK:PT_PAULA_SONG_WAITING));
@@ -280,6 +285,24 @@ static void song_fixture(unsigned bits)
         }
         d.fail=1;assert(schedule_poll(song,&clock,sampled,now,&deadline)==PT_PAULA_SONG_WAITING);d.fail=0;
         assert(d.calls==calls && d.reading[0] && deadline>now);
+        if(mode==13 || mode==14) {
+            unsigned can_wait=0;uint64_t counter=17;reads=clock.reads;
+            /* The first live interval owes forecast work even with no debt.
+             * Service repeatedly at SAME actual counter until prepared; no read
+             * outside each bounded service and no output before its boundary. */
+            assert(pt_paula_song_clocked_service_state(song,&counter,&can_wait)==PT_PAULA_SONG_WAITING && !can_wait);
+            polls=0;do {
+                assert(pt_paula_song_clocked_service_state(song,&counter,&can_wait)==PT_PAULA_SONG_WAITING);
+                assert(++polls<2000 && d.starts==starts+1);
+            }while(!can_wait);
+            assert(clock.reads==reads+polls+1 && deadline-now>300);
+            clock.ticks=100+(now+300)*2;reads=clock.reads;
+            assert(pt_paula_song_clocked_service_state(song,&counter,&can_wait)==PT_PAULA_SONG_WAITING && !can_wait);
+            assert(clock.reads==reads+1 && d.starts==starts+1);
+            assert(pt_paula_song_clocked_service_state(song,&counter,&can_wait)==PT_PAULA_SONG_WAITING && can_wait);
+            assert(clock.reads==reads+2 && d.starts==starts+1);
+            now+=300;
+        }
         if(mode>=7 && mode<13) {
             enum pt_paula_song_result expected=mode==10?PT_PAULA_SONG_DEADLINE:PT_PAULA_SONG_CLOCK;
             reads=clock.reads;stops=d.stops;starts=d.starts;pinned=sampler.bytes;last=deadline;d.stop_result[0]=0;
@@ -314,19 +337,21 @@ static void song_fixture(unsigned bits)
     }
     /* Combined output is atomic on stale-before-read, callback mutation and
      * unrepresentable counter conversion. Neither path may emit output. */
-    for(mode=0;mode<3;++mode) {
+    for(mode=0;mode<4;++mode) {
         struct test_clock clock={mode==2?UINT64_MAX-10:100,96000,0,1,NULL};
-        uint64_t counter=17;unsigned reads;
+        uint64_t counter=17;unsigned reads,can_wait=17;
         BIND();assert(pt_paula_song_begin(&owner,&o,&caps,&a,&song)==PT_PAULA_SONG_PREPARING);
         assert(prepare_song(song,&report)==PT_PAULA_SONG_OK);
         assert(pt_paula_song_clocked_begin(song,1000,clock_read,&clock)==PT_PAULA_SONG_OK);
         reads=clock.reads;starts=d.starts;
         if(mode==0)doc.project.title[0]^=1;
         if(mode==1)clock.mutate=&doc.project;
-        result=pt_paula_song_clocked_service_counter(song,&counter);
-        assert(result==(mode==2?PT_PAULA_SONG_CLOCK:PT_PAULA_SONG_STALE) && counter==17);
+        if(mode==3)clock.result=0;
+        result=pt_paula_song_clocked_service_state(song,&counter,&can_wait);
+        assert(result==(mode>=2?PT_PAULA_SONG_CLOCK:PT_PAULA_SONG_STALE) && counter==17 && can_wait==17);
         assert(clock.reads==reads+(mode!=0) && d.starts==starts);
-        reads=clock.reads;assert(pt_paula_song_clocked_service_counter(song,&counter)==result && clock.reads==reads && counter==17);
+        reads=clock.reads;assert(pt_paula_song_clocked_service_state(song,&counter,&can_wait)==result && clock.reads==reads && counter==17 && can_wait==17);
+        assert(pt_paula_song_clocked_service_counter(song,&counter)==result && clock.reads==reads && counter==17);
         if(mode<2)doc.project.title[0]^=1;
         assert(pt_paula_song_close(&song) && !d.live);
     }

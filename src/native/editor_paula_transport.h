@@ -21,7 +21,7 @@ struct pt_native_paula_transport {
     struct pt_native_eclock clock;struct pt_native_alarm alarm;
     struct pt_native_alarm service_alarm;struct pt_elapsed_clock service_clock;
     uint64_t service_last_frames,service_deadline;unsigned service_clock_ready;
-    uint64_t alarm_deadline;unsigned started,done,failed,priming;
+    uint64_t alarm_deadline;unsigned started,done,failed,priming,can_wait;
     /* Capture once before stop can clear live state. Retained through cleanup;
      * next successful begin resets diagnostics. No additional clock I/O. */
     enum pt_native_paula_phase phase,failure_phase;
@@ -46,7 +46,7 @@ static inline int pt_native_paula_transport_release(void *context)
      * clock, enclosing owner and editor barrier if timer abort is still pending. */
     if(!pt_native_alarm_close(&t->service_alarm) || !pt_native_alarm_close(&t->alarm))return 0;
     pt_native_eclock_close(&t->clock);
-    t->started=t->done=t->service_clock_ready=t->priming=0;
+    t->started=t->done=t->service_clock_ready=t->priming=t->can_wait=0;
     /* Retain last observations even if core failure initiated this cleanup
      * before the enclosing service call can snapshot its refusal. */
     return 1;
@@ -66,7 +66,7 @@ static inline enum pt_paula_song_result pt_native_paula_transport_fail(
         t->failure_phase=t->phase;t->failure_frames=t->service_clock.frames;
         t->failure_last_frames=t->service_last_frames;
     }
-    t->failed=1;t->native.failed=1;
+    t->failed=1;t->native.failed=1;t->can_wait=0;
     /* One bounded stop attempt. Pending reader/device/timer cleanup stays under
      * the existing editor veto; caller must continue explicit stop/detach. */
     pt_editor_paula_stop(&t->native.binding);return r;
@@ -79,7 +79,7 @@ static inline enum pt_paula_song_result pt_native_paula_transport_begin(
        t->native.release_tail_context!=t)return PT_PAULA_SONG_INVALID;
     r=pt_native_editor_paula_begin(&t->native,o,budget);
     if(r==PT_PAULA_SONG_PREPARING) {
-        t->failed=t->priming=0;t->phase=t->failure_phase=PT_NATIVE_PAULA_NONE;
+        t->failed=t->priming=t->can_wait=0;t->phase=t->failure_phase=PT_NATIVE_PAULA_NONE;
         t->failure_frames=t->failure_last_frames=0;
         t->entry_ticks=t->core_ticks=t->post_ticks=t->notification_deadline=0;t->observation_mask=0;
     }
@@ -184,10 +184,10 @@ static inline enum pt_paula_song_result pt_native_paula_transport_start(
 }
 static inline enum pt_paula_song_result pt_native_paula_transport_service(struct pt_native_paula_transport *t)
 {
-    uint64_t deadline,frames;enum pt_paula_song_result r,armed;enum pt_alarm_result alarm;
+    uint64_t deadline,frames;unsigned can_wait;enum pt_paula_song_result r,armed;enum pt_alarm_result alarm;
     if(!t || !t->native.active || !t->started || t->failed)return PT_PAULA_SONG_INVALID;
     if(t->done)return PT_PAULA_SONG_DONE;
-    t->observation_mask=0;t->notification_deadline=t->service_deadline;
+    t->can_wait=0;t->observation_mask=0;t->notification_deadline=t->service_deadline;
     t->phase=PT_NATIVE_PAULA_ENTRY;
     r=pt_native_paula_transport_observe(t,&frames);if(r!=PT_PAULA_SONG_OK)return r;
     t->service_last_frames=frames;
@@ -201,18 +201,24 @@ static inline enum pt_paula_song_result pt_native_paula_transport_service(struct
     armed=pt_native_paula_transport_service_arm_at(t,frames);
     if(armed!=PT_PAULA_SONG_WAITING)return armed;
     t->phase=PT_NATIVE_PAULA_CORE;
-    r=pt_editor_paula_clocked_service_counter(&t->native.binding,&deadline);
+    r=pt_editor_paula_clocked_service_state(&t->native.binding,&deadline,&can_wait);
     if(r==PT_PAULA_SONG_DONE){t->done=1;return r;}
     if(r!=PT_PAULA_SONG_WAITING && r!=PT_PAULA_SONG_OK)return pt_native_paula_transport_fail(t,r);
     armed=pt_native_paula_transport_arm_deadline(t,deadline);
     if(armed!=PT_PAULA_SONG_WAITING)return armed;
     armed=pt_native_paula_transport_service_arm(t);
     if(armed!=PT_PAULA_SONG_WAITING)return armed;
-    return r;
+    t->can_wait=can_wait;return r;
 }
 /* Readiness/debt must still be serviced before waiting. This signal is only a
  * notification mask for BOTH alarms, not evidence of readiness/deadline success. */
 static inline ULONG pt_native_paula_transport_signal(const struct pt_native_paula_transport *t)
 {return t && t->started && !t->failed && !t->done?
     pt_native_alarm_signal(&t->alarm)|pt_native_alarm_signal(&t->service_alarm):0;}
+/* Only immediately after successful serialized service, with no intervening
+ * mutation/callback. Zero requires another bounded service, never Wait(0).
+ * A nonzero mask is notification eligibility, not an elapsed-time substitute. */
+static inline ULONG pt_native_paula_transport_wait_mask(const struct pt_native_paula_transport *t)
+{return t && t->can_wait && t->native.active && t->native.binding.song?
+    pt_native_paula_transport_signal(t):0;}
 #endif

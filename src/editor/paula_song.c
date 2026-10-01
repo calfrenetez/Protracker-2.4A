@@ -343,17 +343,28 @@ enum pt_paula_song_result pt_paula_song_clocked_service(struct pt_paula_song *s,
         return fail(s,PT_PAULA_SONG_CLOCK);
     return schedule_step(s,frames,deadline);
 }
-enum pt_paula_song_result pt_paula_song_clocked_service_counter(struct pt_paula_song *s,uint64_t *ticks)
+enum pt_paula_song_result pt_paula_song_clocked_service_state(struct pt_paula_song *s,uint64_t *ticks,unsigned *can_wait)
 {
-    uint64_t frame,counter;enum pt_paula_song_result r;
-    if(!ticks)return PT_PAULA_SONG_INVALID;
+    uint64_t frame,counter;unsigned ready;enum pt_paula_song_result r;
+    if(!ticks || !can_wait)return PT_PAULA_SONG_INVALID;
     r=pt_paula_song_clocked_service(s,&frame);
     if(r!=PT_PAULA_SONG_OK && r!=PT_PAULA_SONG_WAITING)return r;
     /* Same serialized step has already performed both current guards. This
        read-only conversion needs no second public ownership/deadline query. */
     if(pt_elapsed_clock_deadline(&s->elapsed,frame,&counter)!=PT_ELAPSED_OK)
         return fail(s,PT_PAULA_SONG_CLOCK);
-    *ticks=counter;return r;
+    /* Only this completed serialized step can publish readiness. A running
+     * interval needs its forecast AND all observed frame debt consumed. Signals
+     * and WAITING alone cannot distinguish pending bounded preparation/debt. */
+    ready=s->schedule_phase==SCHEDULE_READY_NEXT || s->schedule_phase==SCHEDULE_READY_ZERO;
+    if(s->schedule_phase==SCHEDULE_RUNNING)
+        ready=s->clock_armed && s->forecast==3 && s->clock_last>=s->clock_start &&
+            s->clock_last-s->clock_start==s->interval.frames-s->remaining;
+    *ticks=counter;*can_wait=ready;return r;
+}
+enum pt_paula_song_result pt_paula_song_clocked_service_counter(struct pt_paula_song *s,uint64_t *ticks)
+{
+    unsigned can_wait;return pt_paula_song_clocked_service_state(s,ticks,&can_wait);
 }
 enum pt_paula_song_result pt_paula_song_clocked_deadline(struct pt_paula_song *s,uint64_t *ticks)
 {

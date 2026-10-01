@@ -76,9 +76,25 @@ static void fixture(unsigned mode)
     }while(r==PT_PAULA_SONG_PREPARING);
 
     if(mode==1){assert(r==PT_PAULA_SONG_CLOCK && !t.started);finish(&t,ed,&doc);return;}
-    assert(r==PT_PAULA_SONG_WAITING && timer_sends && pt_native_paula_transport_signal(&t)==((1UL<<7)|(1UL<<8)));
+    assert(r==PT_PAULA_SONG_WAITING && timer_sends && !t.can_wait && !pt_native_paula_transport_wait_mask(&t) && pt_native_paula_transport_signal(&t)==((1UL<<7)|(1UL<<8)));
     n=timer_sends;for(i=0;i<100;++i){r=pt_native_paula_transport_service(&t);assert(r==PT_PAULA_SONG_WAITING || r==PT_PAULA_SONG_OK);}
     assert(!t.native.engine.output.held[0] && timer_sends==n);
+    assert(t.can_wait && pt_native_paula_transport_wait_mask(&t)==((1UL<<7)|(1UL<<8)));
+    if(mode==12) {
+        for(timer_now=1128;timer_now<2000;timer_now+=128) {
+            r=pt_native_paula_transport_service(&t);assert(r==PT_PAULA_SONG_OK && t.can_wait);
+        }
+        timer_now=2000;
+        assert(pt_native_paula_transport_service(&t)==PT_PAULA_SONG_WAITING && !t.can_wait && !pt_native_paula_transport_wait_mask(&t));
+        n=timer_reads;i=0;do {
+            assert(pt_native_paula_transport_service(&t)==PT_PAULA_SONG_WAITING && ++i<100);
+        }while(!t.can_wait);
+        assert(timer_reads==n+3*i && pt_native_paula_transport_wait_mask(&t));
+        timer_hold_abort=1;
+        assert(!pt_editor_prepare_change(ed) && !pt_native_paula_transport_wait_mask(&t));
+        alarm_ready[alarm_slot((struct IORequest *)t.service_alarm.request)]=1;
+        timer_hold_abort=0;finish(&t,ed,&doc);assert(!t.can_wait && !pt_native_paula_transport_wait_mask(&t));return;
+    }
     if(mode==9) {
         timer_now=1128;timer_jump_read=timer_reads+3;timer_jump_ticks=300;n=timer_reads;
         assert(pt_native_paula_transport_service(&t)==PT_PAULA_SONG_DEADLINE && timer_reads==n+4);
@@ -163,4 +179,4 @@ static void fixture(unsigned mode)
     assert(pt_native_paula_transport_service(&t)==PT_PAULA_SONG_INVALID);
     finish(&t,ed,&doc);
 }
-int main(void){fixture(0);fixture(1);fixture(2);fixture(3);fixture(4);fixture(5);fixture(6);fixture(7);fixture(8);fixture(9);fixture(10);fixture(11);puts("NATIVE PAULA TRANSPORT HOST PASS: dual private alarms, fractional periodic grid, exact prepared start, bounded preparation, starvation/clock refusal, partial open and retained DMA/timer-abort editor barrier");return 0;}
+int main(void){fixture(0);fixture(1);fixture(2);fixture(3);fixture(4);fixture(5);fixture(6);fixture(7);fixture(8);fixture(9);fixture(10);fixture(11);fixture(12);puts("NATIVE PAULA TRANSPORT HOST PASS: dual private alarms, fractional periodic grid, exact prepared start, bounded preparation, starvation/clock refusal, partial open and retained DMA/timer-abort editor barrier");return 0;}

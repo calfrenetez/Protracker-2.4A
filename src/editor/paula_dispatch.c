@@ -182,10 +182,19 @@ int pt_paula_apply(struct pt_paula_prepared *p)
 static int prepared_sources(struct pt_paula_prepared *p)
 {
     unsigned i;struct pt_pcm pcm;struct pt_sample_version *pin;
+    uint32_t checked[(PT_PROJECT_SAMPLES+31)/32]={0};
+    struct pt_sample_version *seen[PT_PROJECT_SAMPLES];
+    /* This callback-free invocation shares only an identical sample/current pin.
+     * Reset the bitmap on EVERY call; seen is read only after its bit is set.
+     * Each action's descriptor and lease/range checks remain separate. */
     for(i=0;i<p->plan.count;++i)if(p->master[i]) {
-        if(pt_sampler_pin_current(p->bridge->sampler,p->project,p->batch.entry[i].sample,
+        unsigned sample=p->batch.entry[i].sample;uint32_t bit;
+        if(sample>=PT_PROJECT_SAMPLES)return 0;
+        bit=UINT32_C(1)<<(sample&31);
+        if((checked[sample/32]&bit) && seen[sample]==p->master[i])continue;
+        if(pt_sampler_pin_current(p->bridge->sampler,p->project,sample,
            p->bridge->generation,p->master[i],&pcm,&pin)!=PT_EDIT_OK)return 0;
-        pt_sampler_unpin(pin);
+        pt_sampler_unpin(pin);seen[sample]=p->master[i];checked[sample/32]|=bit;
     }
     return 1;
 }

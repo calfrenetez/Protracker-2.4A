@@ -3740,3 +3740,21 @@ Evidence: `evidence/enhanced-editor/mixed-ready-metadata`. Native component
 16-voice complete costs 5.024–25.333 ms, with outliers retained; this does not
 qualify actual-time playback or exact speedup. Native PLAY/event-loop/device/IRQ
 binding, physical pressure/endurance and listening remain requirements.
+
+
+## Duplicate Paula master validation
+
+Incremental source validation shares checks only for the exact same sample and
+genuine current master pin during one serialized callback-free invocation. A
+local freshly reset bitmap guards bounded pointer storage; no persistent cache,
+allocation or skipped per-action descriptor/lease/range checks. Different pins
+for the same sample still validate independently. Native workspace is about
+1 KiB, bounded by 255 sample slots; sample bounds precede bitmap access.
+
+Four related host modules pass (201 mixed scenarios); native 18 cases and 120
+separate observations pass with zero owned bytes and fully verified cleanup and
+coordinated release. New safety coverage uses nonconsecutive duplicate candidates
+and 26 stale changes per precision. Evidence: `mixed-source-dedup`. Instrumented
+16-voice commit costs 4.796–5.388 ms; excess boundary costs/outliers remain, so
+actual-time or audio acceptance is not established. Native transport/event-loop/
+device/IRQ binding and hardware/listening requirements remain open.

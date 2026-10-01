@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "scope": "Host guard/model checks and pinned build inspection; native and physical pending",
+  "host_checks": 13,
+  "sanitizers": "address,undefined",
+  "candidate": "6c87f24a1d9e3d4395c39a884d4c203980383bf7641be3c9ec3e6ae9dc8bd5f5",
+  "candidate_bytes": 23760,
+  "native_fixture": "1b1622636fc1ab1b90697ba22a19cc27d027f088c835df61051e641636b918f3",
+  "store_instruction": "movel a5@(12),a0@",
+  "capacity_verified": false,
+  "ordering_verified": false,
+  "audio_tested": false
+}

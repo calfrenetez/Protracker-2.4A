@@ -20,7 +20,7 @@ int pt_register_probe(int reset)
     int result = PT_SKIP;
     const char *reason = "register-contract-unavailable";
     printf("REGISTER-PROBE scope=Mini-7ea663e7-%s interrupts=NO audio=NOT_TESTED\n",
-           reset ? "silent-disable-reset" : "read-only writes=NO");
+           reset==2 ? "disabled-six-word-FIFO" : reset ? "silent-disable-reset" : "read-only writes=NO");
     opened = pt_amigus_reservation_open(&r, &api, 0);
     if (opened != PT_AMIGUS_RESERVED) {
         printf("REGISTERS result=SKIP reason=reservation-unavailable status=%u rc=5\n", opened);
@@ -41,8 +41,22 @@ int pt_register_probe(int reset)
         }
         if (reset && result==PT_PASS) {
             int status=-1;
+            if (reset==2) {
+                uint16_t used=0;
+                for(i=0;i<3;++i) {
+                    if (!pt_native_amigus_pcm_fifo_probe32(&r,0) ||
+                        !pt_native_amigus_pcm_read16(&r,0x10,&used) || used!=(i+1)*2) {
+                        result=PT_FAIL; reason="fifo-count-mismatch"; break;
+                    }
+                    printf("PCM FIFO long=%u pending_words=%u\n",i+1,used);
+                }
+                printf("PCM FIFO result=%s pending_words=%u capacity=NOT_TESTED ordering=NOT_TESTED\n",
+                       i==3 ? "PASS" : "FAIL",used);
+            }
+            /* FIFO failure still requires confirmed reset before release. */
             if (!pt_native_amigus_quiesce_begin(&quiesce,&r)) {
-                result=PT_FAIL; reason="reset-refused-before-write";
+                puts("QUIESCE HOLD: reset refused; possible FIFO data/access/Task/library/card/owner retained; no retry");
+                fflush(stdout); for (;;) Delay(50);
             } else {
                 /* Three bounded read-only observations. Never repeat writes,
                  * release the access lease or reload AHI without confirmation. */

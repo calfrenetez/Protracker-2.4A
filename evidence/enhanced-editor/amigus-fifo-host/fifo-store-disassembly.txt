@@ -1,0 +1,54 @@
+
+     d5c:	4e55 fff4      	linkw a5,#-12
+     d60:	2f0a           	movel a2,sp@-
+     d62:	2f02           	movel d2,sp@-
+     d64:	242d 0008      	movel a5@(8),d2
+     d68:	486d fffc      	pea a5@(-4)
+     d6c:	2f02           	movel d2,sp@-
+     d6e:	4eba fe2c      	jsr %pc@(b9c <_main+0x62e>)
+     d72:	508f           	addql #8,sp
+     d74:	4a80           	tstl d0
+     d76:	6604           	bnes d7c <_pt_native_amigus_pcm_fifo_probe32+0x20>
+     d78:	7000           	moveq #0,d0
+     d7a:	606e           	bras dea <_pt_native_amigus_pcm_fifo_probe32+0x8e>
+     d7c:	486d fff6      	pea a5@(-10)
+     d80:	4878 0006      	pea 6 <__stext+0x6>
+     d84:	2f02           	movel d2,sp@-
+     d86:	45fa fe84      	lea %pc@(c0c <_pt_native_amigus_pcm_read16>),a2
+     d8a:	4e92           	jsr a2@
+     d8c:	4fef 000c      	lea sp@(12),sp
+     d90:	4a80           	tstl d0
+     d92:	67e4           	beqs d78 <_pt_native_amigus_pcm_fifo_probe32+0x1c>
+     d94:	486d fff8      	pea a5@(-8)
+     d98:	4878 0002      	pea 2 <__stext+0x2>
+     d9c:	2f02           	movel d2,sp@-
+     d9e:	4e92           	jsr a2@
+     da0:	4fef 000c      	lea sp@(12),sp
+     da4:	4a80           	tstl d0
+     da6:	67d0           	beqs d78 <_pt_native_amigus_pcm_fifo_probe32+0x1c>
+     da8:	486d fffa      	pea a5@(-6)
+     dac:	4878 0010      	pea 10 <__stext+0x10>
+     db0:	2f02           	movel d2,sp@-
+     db2:	4e92           	jsr a2@
+     db4:	4fef 000c      	lea sp@(12),sp
+     db8:	4a80           	tstl d0
+     dba:	67bc           	beqs d78 <_pt_native_amigus_pcm_fifo_probe32+0x1c>
+     dbc:	4a6d fff6      	tstw a5@(-10)
+     dc0:	6db6           	blts d78 <_pt_native_amigus_pcm_fifo_probe32+0x1c>
+     dc2:	302d fff8      	movew a5@(-8),d0
+     dc6:	0240 0007      	andiw #7,d0
+     dca:	66ac           	bnes d78 <_pt_native_amigus_pcm_fifo_probe32+0x1c>
+     dcc:	302d fffa      	movew a5@(-6),d0
+     dd0:	0c40 0004      	cmpiw #4,d0
+     dd4:	62a2           	bhis d78 <_pt_native_amigus_pcm_fifo_probe32+0x1c>
+     dd6:	0800 0000      	btst #0,d0
+     dda:	669c           	bnes d78 <_pt_native_amigus_pcm_fifo_probe32+0x1c>
+     ddc:	307c 000c      	moveaw #12,a0
+     de0:	d1ed fffc      	addal a5@(-4),a0
+     de4:	20ad 000c      	movel a5@(12),a0@
+     de8:	7001           	moveq #1,d0
+     dea:	242d ffec      	movel a5@(-20),d2
+     dee:	246d fff0      	moveal a5@(-16),a2
+     df2:	4e5d           	unlk a5
+     df4:	4e75           	rts
+	...

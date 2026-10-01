@@ -30,6 +30,11 @@ class PhysicalDiscoveryGuard(unittest.TestCase):
             self.assertTrue(runner.idle_restoration_finished(line.replace('IDLE-OWNERSHIP','IDLE-REGISTERS'),registers=True))
             self.assertFalse(runner.idle_restoration_finished(line,registers=True,reset=True))
             self.assertTrue(runner.idle_restoration_finished(line.replace('IDLE-OWNERSHIP','IDLE-RESET'),registers=True,reset=True))
+            self.assertFalse(runner.idle_restoration_finished(line,registers=True,reset=True,fifo=True))
+            fifo_line = line.replace('IDLE-OWNERSHIP','IDLE-FIFO')
+            self.assertTrue(runner.idle_restoration_finished(fifo_line,registers=True,reset=True,fifo=True))
+            self.assertFalse(runner.idle_restoration_finished(fifo_line,registers=True,reset=True))
+            self.assertFalse(runner.idle_restoration_finished(fifo_line.replace('restore_needed=0','restore_needed=1'),registers=True,reset=True,fifo=True))
             for bad in (line.replace('restored=1','restored=0'),line.replace('restore_needed=0','restore_needed=1'),
                         line.replace('rc='+code,'rc=99'),line+'\n'+line,'DRIVER HOLD: restoration unconfirmed'):
                 self.assertFalse(runner.idle_restoration_finished(bad))

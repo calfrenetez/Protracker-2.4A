@@ -1,5 +1,5 @@
-/* AmiGUSTest 0.5: discovery, ownership, Mini PCM reads and silent reset.
- * Never enables playback, writes FIFO data or installs interrupts. */
+/* AmiGUSTest 0.6: discovery/ownership, PCM reads/reset and disabled FIFO probe.
+ * Never enables playback or installs interrupts. */
 #include <exec/libraries.h>
 #include <proto/exec.h>
 #include <proto/dos.h>
@@ -33,7 +33,7 @@ static int diagnostic(int argc, char **argv)
         puts("usage: AmiGUSTest [--discover|--ownership]");
         return PT_FAIL;
     }
-    printf("AMIGUSTEST schema=1 version=0.5 mode=%s\n",
+    printf("AMIGUSTEST schema=1 version=0.6 mode=%s\n",
            ownership ? "ownership" : "discover");
     puts("SCOPE audio=NOT_TESTED interrupts=NOT_TESTED firmware_write=NO");
     AmiGUS_Base = OpenLibrary("amigus.library", 1);
@@ -116,9 +116,10 @@ int main(int argc, char **argv)
     struct pt_native_driver driver = {"AmiGUS.audio", "DEVS:AHI/AmiGUS.audio",
         "$VER: AmiGUS.audio 4.023 (30.8.26) 020 SAS/C cross\r\n", 4, 23};
     struct pt_driver_api api = pt_native_driver_api(&driver);
-    int result, reset = argc==2 && !strcmp(argv[1], "--idle-reset");
+    int result, fifo = argc==2 && !strcmp(argv[1], "--idle-fifo");
+    int reset = fifo ? 2 : argc==2 && !strcmp(argv[1], "--idle-reset");
     int registers = reset || (argc==2 && !strcmp(argv[1], "--idle-registers"));
-    const char *label = reset ? "IDLE-RESET" : registers ? "IDLE-REGISTERS" : "IDLE-OWNERSHIP";
+    const char *label = fifo ? "IDLE-FIFO" : reset ? "IDLE-RESET" : registers ? "IDLE-REGISTERS" : "IDLE-OWNERSHIP";
     char *ownership_args[] = {argv[0], "--ownership"};
     if (!registers && (argc != 2 || strcmp(argv[1], "--idle-ownership")))
         return diagnostic(argc, argv);

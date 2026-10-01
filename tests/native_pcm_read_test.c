@@ -67,5 +67,21 @@ int main(void)
         assert(!memcmp(registers,copy,sizeof(copy)));
     }
     puts("PCM QUIESCE PASS: four exact disable/reset stores, one-shot begin, read-only pending/lost-owner polls; synthetic memory only");
+    r.access=1; registers[3]=0; registers[1]=0x50; registers[8]=0;
+    assert(pt_native_amigus_pcm_fifo_probe32(&r,0x11223344));
+    assert(registers[6]==0x1122 && registers[7]==0x3344);
+    for(i=0;i<6;++i) {
+        registers[3]=0; registers[1]=0; registers[8]=0; r.access=1; r.interrupt=0;
+        if(i==0)registers[3]=0x8000;
+        if(i==1)registers[1]=1;
+        if(i==2)registers[8]=6;
+        if(i==3)registers[8]=1;
+        if(i==4)r.access=0;
+        if(i==5)r.interrupt=1;
+        memcpy(copy,registers,sizeof(copy));
+        assert(!pt_native_amigus_pcm_fifo_probe32(&r,0xffffffff));
+        assert(!memcmp(registers,copy,sizeof(copy)));
+    }
+    puts("PCM FIFO STORE PASS: native MSB-first long store and six no-write refusals; synthetic memory only");
     return 0;
 }

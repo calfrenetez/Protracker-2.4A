@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Separately coordinated RAM-only discovery or reservation; no MMIO/audio."""
+"""Coordinated RAM-only probes, including qualified disabled Mini PCM MMIO.
+
+No playback enable or interrupt installation; each write mode requires its
+exact native qualification, confirmed reset/release and idle AHI restoration.
+"""
 import argparse
 import asyncio
 import fcntl
@@ -22,12 +26,14 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def qualification(binary, build, emulator, independent, ownership=False, idle_driver=False, registers=False, reset=False):
+def qualification(binary, build, emulator, independent, ownership=False, idle_driver=False, registers=False, reset=False, fifo=False):
     """Refuse physical selection before matching the current exact candidate."""
     if registers and not idle_driver:
         raise RuntimeError('Register qualification requires an idle-driver window')
     built = json.loads(build.read_text())
     native = json.loads(emulator.read_text())
+    if fifo and (not reset or native.get('amigus-fifo_returncode') != '5'):
+        raise RuntimeError('Exact disabled FIFO qualification missing')
     if reset and (not registers or native.get('amigus-reset_returncode') != '5'):
         raise RuntimeError('Exact silent reset qualification missing')
     cleanup = json.loads(independent.read_text())
@@ -89,8 +95,8 @@ def idle_driver_info(text, require_idle=True):
         raise RuntimeError('AmiGUS.audio is active or outside the verified idle-driver contract')
 
 
-def idle_restoration_finished(output, registers=False, reset=False):
-    label = 'IDLE-RESET' if reset else 'IDLE-REGISTERS' if registers else 'IDLE-OWNERSHIP'
+def idle_restoration_finished(output, registers=False, reset=False, fifo=False):
+    label = 'IDLE-FIFO' if fifo else 'IDLE-RESET' if reset else 'IDLE-REGISTERS' if registers else 'IDLE-OWNERSHIP'
     matches = re.findall(r'^'+label+r' result=(PASS|SKIP|FAIL) unloaded=([01]) restored=([01]) restore_needed=([01]) rc=(0|5|20)$', output, re.M)
     if len(matches) != 1:
         return False
@@ -100,7 +106,9 @@ def idle_restoration_finished(output, registers=False, reset=False):
             (status != 'PASS' or unloaded == restored == '1'))
 
 
-async def run(out, binary, result, ownership=False, library_contract=None, idle_driver=None, registers=False, reset=False):
+async def run(out, binary, result, ownership=False, library_contract=None, idle_driver=None, registers=False, reset=False, fifo=False):
+    if fifo and not reset:
+        raise RuntimeError('Disabled FIFO probe requires confirmed reset path')
     if reset and not registers:
         raise RuntimeError('Silent reset requires register qualification')
     if registers and (not ownership or not idle_driver):
@@ -199,7 +207,7 @@ async def run(out, binary, result, ownership=False, library_contract=None, idle_
                 remote = destination + '/' + binary.name
                 await call('amiga_push_file', dict(local_path=str(binary), amiga_path=remote))
                 checksum(await call('amiga_checksum', dict(path=remote)), binary.read_bytes())
-                command = binary.name + (' --idle-reset' if reset else ' --idle-registers' if registers else ' --idle-ownership' if idle_driver else ' --ownership' if ownership else '')
+                command = binary.name + (' --idle-fifo' if fifo else ' --idle-reset' if reset else ' --idle-registers' if registers else ' --idle-ownership' if idle_driver else ' --ownership' if ownership else '')
                 if idle_driver:
                     result['restoration_pending'] = True
                 execution = await call('amiga_run_script', dict(script=f'FailAt 21\nStack 65536\nCD {destination}\n{command} >discovery.log\nEcho PTG-DISCOVERY-RC $RC\nCD RAM:\nEcho PTG-DISCOVERY-DONE\n', timeout=45))
@@ -212,7 +220,7 @@ async def run(out, binary, result, ownership=False, library_contract=None, idle_
                 if idle_driver:
                     # Known termination is not sufficient: positively verify the
                     # restoration obligation before any deletion/target release.
-                    if not idle_restoration_finished(output, registers, reset):
+                    if not idle_restoration_finished(output, registers, reset, fifo):
                         raise RuntimeError('Idle-driver restoration state unconfirmed; retain target/files')
                     info = await call('amiga_lib_info', dict(name='AmiGUS.audio'))
                     idle_driver_info(info, require_idle=False)
@@ -231,6 +239,10 @@ async def run(out, binary, result, ownership=False, library_contract=None, idle_
                         if not re.search(r'^PCM QUIESCE requested=1 confirmed=1 status=1 polls=[123]$', output, re.M):
                             raise RuntimeError('Silent reset readback confirmation missing')
                         result['silent_reset_passed'] = True
+                    if fifo:
+                        if not all(f'PCM FIFO long={i} pending_words={i*2}' in output.splitlines() for i in range(1,4)) or 'PCM FIFO result=PASS pending_words=6 capacity=NOT_TESTED ordering=NOT_TESTED' not in output.splitlines():
+                            raise RuntimeError('Disabled FIFO word counts unconfirmed')
+                        result['disabled_fifo_passed'] = True
                 elif ownership:
                     if not all(f'block={i} result=PASS stage=complete driver=0x00000000 release=0x00000000 confirmed=1 retained=0' in output for i in (1,2)):
                         raise RuntimeError('PCM/wavetable final-release confirmations incomplete')
@@ -272,6 +284,7 @@ def main():
                         help='Explicitly approved temporary unused RC6 AHI unload/test/restore transaction')
     parser.add_argument('--registers', action='store_true', help='Read-only Mini PCM status; requires idle driver window')
     parser.add_argument('--reset', action='store_true', help='Silent one-shot disable/reset with bounded readback; requires registers')
+    parser.add_argument('--fifo', action='store_true', help='Three zero long stores while disabled, exact count then confirmed reset; requires reset')
     args = parser.parse_args()
     if args.idle_driver_contract and not args.ownership:
         parser.error('idle-driver-contract requires ownership')
@@ -279,13 +292,15 @@ def main():
         parser.error('registers requires idle-driver-contract')
     if args.reset and not args.registers:
         parser.error('reset requires registers')
+    if args.fifo and not args.reset:
+        parser.error('fifo requires reset')
     out = ROOT / 'build/dev' / (('physical-amigus-ownership-' if args.ownership else 'physical-amigus-discovery-') + str(time.time_ns()))
     out.mkdir()
     result = dict(passed=False, target='real-a1200', scope='RAM-only PCM/wavetable exclusive reservation and confirmed release; no MMIO, interrupts, output or listening acceptance' if args.ownership else 'RAM-only discovery; no reserve/release, MMIO, interrupts, output or listening acceptance')
     try:
         source = ROOT / ('build/diagnostic/AmiGUSTest' if args.ownership else 'build/dev/physical-discovery-candidate/PTAmiGusDiscovery')
         build = ROOT / ('build/diagnostic/build.json' if args.ownership else 'build/dev/amigus-discovery-build.json')
-        result['binary_sha256'] = qualification(source, build, args.emulator_result, args.independent_cleanup, args.ownership, bool(args.idle_driver_contract), args.registers, args.reset)
+        result['binary_sha256'] = qualification(source, build, args.emulator_result, args.independent_cleanup, args.ownership, bool(args.idle_driver_contract), args.registers, args.reset, args.fifo)
         contract = json.loads(args.library_contract.read_text()) if args.library_contract else None
         if args.ownership and not contract:
             raise RuntimeError('Ownership requires the verified pinned library contract')
@@ -298,13 +313,15 @@ def main():
             result['scope'] = 'Read-only five Mini PCM status registers under exclusive PCM lease; verified release and unused AHI restoration; no register writes/IRQ/output/config change'
         if args.reset:
             result['scope'] = 'Initially idle Mini PCM: one-shot rate disable/playback IRQ clear/FIFO reset, bounded readback confirmation, verified release and AHI restoration; no data/enable/IRQ/output/config changes'
+        if args.fifo:
+            result['scope'] = 'Initially idle Mini: three disabled zero-data long stores, exact 2/4/6 word counts, confirmed nonempty FIFO reset/release/AHI restoration; no playback enable/IRQ/capacity/ordering/audio acceptance'
         binary = out / source.name
         shutil.copyfile(source, binary)
         if digest(binary) != result['binary_sha256']:
             raise RuntimeError('Snapshot changed before physical selection')
         with (INFRA / 'runtime/test.lock').open('a') as lock:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-            asyncio.run(run(out, binary, result, args.ownership, contract, idle, args.registers, args.reset))
+            asyncio.run(run(out, binary, result, args.ownership, contract, idle, args.registers, args.reset, args.fifo))
     except Exception as error:
         result['passed'] = False
         result['error'] = str(error)

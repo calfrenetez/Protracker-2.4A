@@ -18,4 +18,9 @@ struct pt_native_amigus_quiesce {
 int pt_native_amigus_quiesce_begin(struct pt_native_amigus_quiesce *,
                                   const struct pt_amigus_reservation *);
 int pt_native_amigus_quiesce_poll(struct pt_native_amigus_quiesce *);
+/* Qualification-only FIFO long store: same owner/firmware guard, playback and
+ * playback IRQs disabled, even pending count <=4. Caller must bound the test to
+ * three stores/six words independent of readback. No capacity claim. Must reset
+ * and confirm before releasing. */
+int pt_native_amigus_pcm_fifo_probe32(const struct pt_amigus_reservation *, uint32_t);
 #endif

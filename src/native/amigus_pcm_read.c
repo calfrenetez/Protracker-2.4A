@@ -48,3 +48,18 @@ int pt_native_amigus_quiesce_poll(struct pt_native_amigus_quiesce *q)
     q->confirmed=!(rate&0x8000) && !(mask&7) && !used;
     return q->confirmed ? 1 : 0;
 }
+int pt_native_amigus_pcm_fifo_probe32(const struct pt_amigus_reservation *r,
+                                    uint32_t value)
+{
+    uintptr_t address;
+    uint16_t rate,mask,used;
+    if (!pcm_address(r,&address) ||
+        !pt_native_amigus_pcm_read16(r,0x06,&rate) ||
+        !pt_native_amigus_pcm_read16(r,0x02,&mask) ||
+        !pt_native_amigus_pcm_read16(r,0x10,&used) ||
+        (rate&0x8000) || (mask&7) || used>4 || (used&1)) return 0;
+    /* Native big-endian MOVE.L at the documented adjacent16-bit data ports.
+     * Physical pending-word increments still require separate qualification. */
+    *(volatile uint32_t *)(address+0x0c)=value;
+    return 1;
+}

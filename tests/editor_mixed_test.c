@@ -45,7 +45,7 @@ static void editor_mixed_case(unsigned bits,unsigned mode)
         struct pt_native_mixed_transport native={0};int (*ready)(void *)=e->change_ready;
         assert(pt_native_editor_mixed_start(&native,&o,48000,0)==PT_MIXED_OWNER_INVALID);
         assert(!native.clock.port && !native.alarm.port && !o.transport);
-        if(mode!=6) {
+        if(mode!=6 && mode!=8) {
             do{r=pt_editor_mixed_prepare(&o,NULL);assert(++n<100);}while(r==PT_MIXED_OWNER_PREPARING);
             assert(r==PT_MIXED_OWNER_OK);
         }
@@ -57,14 +57,29 @@ static void editor_mixed_case(unsigned bits,unsigned mode)
             e->change_ready=ready;assert(pt_editor_mixed_stop(&o));
             puts("NATIVE EDITOR MIXED refused adoption closes idle requests PASS");goto closed;
         }
-        r=pt_native_editor_mixed_start(&native,&o,48000,128);
-        assert(r==(mode==6?PT_MIXED_OWNER_INVALID:PT_MIXED_OWNER_OK));
+        if(mode==8) {
+            struct pt_native_mixed_transport foreign={0};unsigned previous=0;
+            assert(pt_native_editor_mixed_advance(&native,&o,48000,0)==PT_MIXED_OWNER_INVALID);
+            assert(!o.transport && !native.clock.port && !native.alarm.port);
+            n=0;do {
+                r=pt_native_editor_mixed_advance(&native,&o,48000,128);
+                assert(++n<1000 && !d.starts && !wd.starts);
+                if(!o.transport)assert(!native.clock.port && !native.alarm.port);
+                if(o.transport && !previous) {
+                    assert(r==PT_MIXED_OWNER_PREPARING && native.clock.opened && native.alarm.opened && !native.alarm.pending);
+                    assert(pt_native_editor_mixed_advance(&foreign,&o,48000,128)==PT_MIXED_OWNER_INVALID);
+                    assert(!foreign.clock.port && !foreign.alarm.port);previous=1;
+                }
+            }while(r==PT_MIXED_OWNER_PREPARING);
+            assert(previous && r==PT_MIXED_OWNER_WAITING && native.alarm.pending && pt_editor_mixed_signal(&o));
+        } else r=pt_native_editor_mixed_start(&native,&o,48000,128);
+        assert(r==(mode==6?PT_MIXED_OWNER_INVALID:mode==8?PT_MIXED_OWNER_WAITING:PT_MIXED_OWNER_OK));
         assert(native.pump.active && o.transport==&native.pump && native.clock.opened && native.alarm.opened);
         assert(pt_native_editor_mixed_start(&native,&o,48000,128)==PT_MIXED_OWNER_INVALID);
         if(mode==5) {
             n=0;do{r=pt_editor_mixed_service(&o);assert(++n<1000);}while(r==PT_MIXED_OWNER_PREPARING);
             assert(r==PT_MIXED_OWNER_WAITING && native.alarm.pending && pt_editor_mixed_signal(&o));
-        } else assert(pt_editor_mixed_service(&o)==PT_MIXED_OWNER_INVALID);
+        } else if(mode==6)assert(pt_editor_mixed_service(&o)==PT_MIXED_OWNER_INVALID);
         assert(!d.starts && !wd.starts);revision=e->history.revision;generation=e->sampler.generation;
         d.quiesce_result=wd.barrier_result=0;e->project->channels.selected=4;e->row=0;e->editing=1;
         pt_editor_key(e,0x46,0);assert(e->history.revision==revision && doc.project.events[4].kind==PT_NOTE_PERIOD);
@@ -75,7 +90,8 @@ static void editor_mixed_case(unsigned bits,unsigned mode)
         while(!pt_editor_prepare_change(e)){assert(++n<8);Delay(1);}
         assert(!o.owner && !o.transport && !native.pump.active && !pt_editor_mixed_signal(&o));
         assert(!native.clock.port && !native.clock.request && !native.alarm.port && !native.alarm.request);
-        puts(mode==5?"NATIVE EDITOR MIXED pending alarm/editor veto/confirmed close PASS":
+        puts(mode==8?"NATIVE EDITOR MIXED bounded prepare/adopt/prime/pending/editor close PASS":
+            mode==5?"NATIVE EDITOR MIXED pending alarm/editor veto/confirmed close PASS":
             "NATIVE EDITOR MIXED adopted unprepared failure/editor veto/confirmed close PASS");goto closed;
     }
 #endif
@@ -135,8 +151,8 @@ closed:
 int editor_mixed_fixture(void)
 {unsigned bits,mode;(void)mixed_owner_fixture;for(bits=8;bits<=24;bits+=8)for(mode=0;mode<5;++mode)editor_mixed_case(bits,mode);
 #ifdef PT_TEST_NATIVE_EDITOR_MIXED
- for(bits=8;bits<=24;bits+=8)for(mode=5;mode<8;++mode)editor_mixed_case(bits,mode);
- puts("EDITOR MIXED PASS:24 native scenarios:15 injected lifetime +9 private native timer binding; no UI/output/timing acceptance");
+ for(bits=8;bits<=24;bits+=8)for(mode=5;mode<9;++mode)editor_mixed_case(bits,mode);
+ puts("EDITOR MIXED PASS:27 native scenarios:15 injected lifetime +12 private native timer/advance binding; no UI/output/timing acceptance");
 #else
  puts("EDITOR MIXED PASS:15 binding scenarios; preparation/live/timer-failure/DONE, edits/import/undo/disposal veto and alarm/reader/counter retention; injected timers/voices, no UI/output binding");
 #endif

@@ -3818,3 +3818,24 @@ locked guest cleanup and coordinated release acknowledged. Evidence:
 `evidence/enhanced-editor/editor-native-timer`. Native frontend PLAY/event-loop,
 production output/device/IRQ, actual timing/audio and physical acceptance remain
 open. Native cancellation is resource proof, not punctual wake or audio proof.
+
+
+## Native editor advancement entry point
+
+A native advancement entry point performs one owner preparation call or one
+bounded transport service per invocation. Initial setup/traversal remains
+synchronous outside playback deadlines; later master copies are<=4096bytes.
+Timers remain unopened until preparation succeeds. Readiness adopts idle private
+timers and returns PREPARING without alarm submission; a later turn primes/pumps.
+PREPARING needs immediate bounded work interleaved with bounded UI processing;
+WAITING uses the private pending signal in Wait and must not spin without a
+notification. The UI frame timer is not a playback clock. Foreign native storage
+cannot service this pump; faults/DONE retain explicit confirmed stop requirements.
+
+Host editor15/Paula/mixed240 regressions PASS; native27 PASS (15injected+12private
+native cases), including3 new complete prepare/adopt/prime/pending/editor-close
+cases across8/16/24bits. Zero owned bytes and independent locked cleanup verified;
+coordinated release acknowledged. Evidence:`evidence/enhanced-editor/editor-native-advance`.
+This is a frontend integration entry point; native PLAY/event-loop installation
+and production output/device/IRQ binding remain unfinished, with timing/audio/
+physical acceptance separate.

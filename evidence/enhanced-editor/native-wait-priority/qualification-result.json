@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "seconds": 2.6064977499772795,
+  "window_bound_seconds": 200,
+  "cases": [
+    {
+      "case": "wait-priority",
+      "binary": "PTExecWaitPriorityTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/native-wait-priority/build/dev/render-files-1790860612746785000",
+      "sha256": "97e4e7474d47af8c6ea74987587af55e54c8e2fbc70071ca24681dbdd100210e",
+      "independent_cleanup": true,
+      "passed": true,
+      "runner_rc": 0
+    }
+  ]
+}

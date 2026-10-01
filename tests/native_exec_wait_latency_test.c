@@ -1,5 +1,6 @@
 #include "native_exec_memory.h"
 #include "../src/native/eclock_alarm.h"
+#include "../src/native/task_priority.h"
 #include "../src/core/elapsed_clock.h"
 #include <exec/tasks.h>
 #include <proto/dos.h>
@@ -14,6 +15,7 @@ static int hold(const char *why)
 int main(void)
 {
     struct Task *task=FindTask(NULL);BYTE priority=task?task->tc_Node.ln_Pri:0;
+    struct pt_native_task_priority scope={0};BYTE expected=priority;
     ULONG original_signals=task?task->tc_SigAlloc:0,termination_mask=0,periodic_mask=0,wake=0;
     struct pt_native_eclock reader={0};struct pt_native_alarm periodic={0},termination={0};
     struct pt_elapsed_clock clock;struct observation *trace;
@@ -26,6 +28,10 @@ int main(void)
     CHECK(pt_native_alarm_open(&termination) && termination.port->mp_SigTask==task && termination.port->mp_SigBit<32);
     periodic_mask=1UL<<periodic.port->mp_SigBit;termination_mask=1UL<<termination.port->mp_SigBit;
     CHECK(!(periodic_mask&termination_mask) && !((periodic_mask|termination_mask)&SIGBREAKF_CTRL_C));
+#ifdef PT_NATIVE_WAIT_SCOPED_PRIORITY
+    expected=PT_NATIVE_WAIT_SCOPED_PRIORITY;
+    CHECK(pt_native_task_priority_acquire(&scope,expected) && scope.task==task && scope.saved==priority);
+#endif
     CHECK(pt_native_eclock_read(&reader,&ticks,&frequency));
     CHECK(pt_elapsed_clock_init(&clock,frequency,48000,ticks,0)==PT_ELAPSED_OK);initialized=1;
     CHECK(pt_elapsed_clock_deadline(&clock,24000,&deadline)==PT_ELAPSED_OK);
@@ -36,7 +42,7 @@ int main(void)
         CHECK(pt_elapsed_clock_deadline(&clock,target,&deadline)==PT_ELAPSED_OK);
         CHECK(pt_native_alarm_arm(&periodic,deadline)==PT_ALARM_WAITING);
         wake=Wait(periodic_mask|termination_mask|SIGBREAKF_CTRL_C);
-        CHECK(FindTask(NULL)==task && task->tc_Node.ln_Pri==priority);
+        CHECK(FindTask(NULL)==task && task->tc_Node.ln_Pri==expected);
         CHECK(pt_native_eclock_read(&reader,&ticks,&frequency));
         CHECK(pt_elapsed_clock_advance(&clock,frequency,ticks,&frames)==PT_ELAPSED_OK);
         trace[calls++]=(struct observation){deadline,periodic.observed_ticks,ticks,frames,frames-last,wake};
@@ -49,6 +55,10 @@ int main(void)
     }
     CHECK(calls<256 && calls>=100 && frames>=24000 && frames<48000 && max_gap<=256);
  done:
+    /* Restore the exact saved priority BEFORE all timer/storage cleanup, even
+     * on timing/IO failure. Failed restoration parks the live owner. */
+    if(!pt_native_task_priority_restore(&scope))return hold("own priority restoration unresolved");
+    if(scope.task)printf("LATENCY PRIORITY requested=%d saved=%d restored=%d own_identity=%u active=%u\n",(int)expected,(int)scope.saved,(int)task->tc_Node.ln_Pri,FindTask(NULL)==scope.task,scope.active);
     if(FindTask(NULL)!=task || !task || task->tc_Node.ln_Pri!=priority)return hold("task/priority identity unresolved");
     for(i=0;i<50 && !pt_native_alarm_close(&periodic);++i)Delay(1);
     if(i==50)return hold("periodic timer closure unresolved");

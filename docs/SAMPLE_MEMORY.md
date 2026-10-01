@@ -176,6 +176,18 @@ isolated by idle measurements. This is a test-only baseline; product behavior an
 the public lookahead full-zero contract are unchanged. Evidence:
 `evidence/enhanced-editor/mixed-clear-cost/`.
 
+Private mixed-batch retirement now releases every job/candidate lease, clears every
+held flag and invalidates phase/index/count and split/wave counts without clearing
+unused payload. New begin overwrites every used action/order/sample and captured
+voice snapshot; Paula preparation resets its own workspace. Public lookahead
+cancellation and all source/revision/address/active-reader/deadline guards remain.
+Host198ASan/UBSan and separate native15cases qualify changing-count/route reuse,
+ready/partial/idempotent cancellation, malformed partial begin, complete2interval
+running and normal resource/path cleanup. Observed idle retirement0.214..0.352ms
+and16voice completion5.307..5.327ms improve the baseline. Remaining service/boundary
+excess and outliers still prevent actual-time playback acceptance. Evidence:
+`evidence/enhanced-editor/mixed-retirement/`.
+
 AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software
 fixtures, plus an absent-library discovery check. Those results do not establish
 positive card access, real MMIO, streaming output or physical acceptance. Native

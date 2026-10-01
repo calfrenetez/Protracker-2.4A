@@ -142,9 +142,16 @@ void pt_mixed_stage_cancel(struct pt_mixed_owner *s)
 {
     unsigned i;if(!s)return;
     pt_paula_cancel(&s->batch.chip);pt_sampler_upload_cancel(&s->batch.upload);
-    for(i=0;i<PT_RENDER_ACTIONS;++i)if(s->batch.entry[i].held)
+    for(i=0;i<PT_RENDER_ACTIONS;++i)if(s->batch.entry[i].held) {
         pt_cache_unpin(&s->backend->cache,s->batch.entry[i].lease);
-    memset(&s->batch,0,sizeof(s->batch));
+        s->batch.entry[i].held=0;
+    }
+    /* Retire access to payload after releasing every job/candidate. Begin
+     * overwrites each used action/order/sample and both live-voice snapshots;
+     * Paula begin resets its own workspace. Unheld leases and zero plan counts
+     * make unused payload unreachable without clearing the full Fast block. */
+    s->batch.phase=s->batch.index=s->batch.count=0;
+    s->batch.split.count=s->batch.wave.count=0;
 }
 static enum pt_mixed_owner_result stage_begin_validated(struct pt_mixed_owner *s,const struct pt_render_plan *plan)
 {

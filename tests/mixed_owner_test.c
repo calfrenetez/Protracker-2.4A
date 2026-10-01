@@ -96,6 +96,50 @@ static void owner_fixture(unsigned bits,unsigned mode)
         assert(r==PT_MIXED_OWNER_OK && sampler.current[0] && sampler.current[1] && !sampler.current[2]);
         assert(report.samples[0][0] && report.samples[1][0] && report.samples[1][1]);
         doc.project.channels.selected=15;assert(pt_mixed_owner_current(owner)==PT_MIXED_OWNER_OK);
+        if(mode==67) {
+            struct pt_voice voice;struct pt_render_action action[5];unsigned iteration;
+            assert(pt_voice_init(&voice,&doc.project.samples[0].pcm,0,2048,PT_VOICE_ONCE,0,0,((uint64_t)8000<<32)/48000,0)==PT_PCM_OK);
+            action[0]=(struct pt_render_action){PT_RENDER_TRIGGER,7,voice,{32768,32768}};action[0].voice.pcm=&doc.project.samples[1].pcm;
+            action[1]=(struct pt_render_action){PT_RENDER_TRIGGER,4,voice,{65536,0}};
+            action[2]=action[0];action[3]=action[1];action[3].kind=PT_RENDER_CONTROL;
+            action[4]=action[0];action[4].kind=PT_RENDER_CONTROL;
+            for(iteration=0;iteration<12;++iteration) {
+                struct pt_paula_voice saved_pv[PT_PAULA_VOICES];struct pt_wavetable_voice saved_av[PT_WAVETABLE_VOICES];
+                unsigned width=iteration%6,steps=0,pins_before=0,pins_after=0,starts=d.starts,wstarts=wd.starts;
+                memcpy(saved_pv,pv.voice,sizeof(saved_pv));memcpy(saved_av,av.voice,sizeof(saved_av));output_count=0;
+                for(i=0;i<PT_CACHE_SLOTS;++i)pins_before+=pb.cache.entry[i].pins+f->cache.cache.entry[i].pins;
+                if(width==5) {
+                    plan->count=2;plan->action[0]=action[1];plan->action[1]=action[0];plan->action[1].channel=16;
+                    assert(pt_mixed_stage_begin(owner,plan)==PT_MIXED_OWNER_CAPABILITY && !output_count);
+                }
+                plan->count=width==0 || width==5?5:width==4?0:width==2?3:1;
+                if(width==1)plan->action[0]=action[0];
+                else if(width==3)plan->action[0]=action[1];
+                else for(i=0;i<plan->count;++i)plan->action[i]=action[i];
+                assert(pt_mixed_stage_begin(owner,plan)==PT_MIXED_OWNER_PREPARING);
+                do {
+                    r=pt_mixed_stage_step(owner);assert(++steps<1000 && !output_count && d.starts==starts && wd.starts==wstarts);
+                    if(width==2){assert(r==PT_MIXED_OWNER_PREPARING);break;}
+                }while(r==PT_MIXED_OWNER_PREPARING);
+                if(width==0 || width==2) {
+                    pt_mixed_stage_cancel(owner);pt_mixed_stage_cancel(owner);
+                    assert(pt_mixed_stage_commit(owner)==PT_MIXED_OWNER_INVALID && !output_count);
+                    assert(!memcmp(saved_pv,pv.voice,sizeof(saved_pv)) && !memcmp(saved_av,av.voice,sizeof(saved_av)));
+                    for(i=0;i<PT_CACHE_SLOTS;++i)pins_after+=pb.cache.entry[i].pins+f->cache.cache.entry[i].pins;
+                    assert(pins_after==pins_before);
+                }else {
+                    unsigned writes=f->writes,allocs=fast_calls;size_t calls=d.calls;
+                    assert(r==PT_MIXED_OWNER_OK && pt_mixed_stage_commit(owner)==PT_MIXED_OWNER_OK);
+                    assert(f->writes==writes && fast_calls==allocs && d.calls==calls && output_count==plan->count);
+                    if(width==1)assert(output_order[0]==2);
+                    else if(width==3)assert(output_order[0]==1);
+                    else if(width==5)assert(output_order[0]==2 && output_order[1]==1 && output_order[2]==2 && output_order[3]==3 && output_order[4]==4);
+                    assert(pt_mixed_stage_commit(owner)==PT_MIXED_OWNER_INVALID);
+                }
+                assert(pt_mixed_owner_current(owner)==PT_MIXED_OWNER_OK);
+            }
+            goto close;
+        }
         if(mode>=65) {
             struct mixed_counter counter={0,48000,0,1};uint64_t deadline=777,now=1000,prior;
             unsigned polls,boundaries=0,starts,wstarts,allocs,writes,outputs,voices=mode==66?16:2;size_t calls;
@@ -674,7 +718,9 @@ detached:
 static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wavetable_fixture_main;
 #ifdef PT_TEST_MIXED_NATIVE_COMPONENTS
     for(bits=8;bits<=24;bits+=8)for(mode=58;mode<60;++mode)owner_fixture(bits,mode);
-    puts("MIXED OWNER PASS:6 native component-cost8/16/24 scenarios, manual source/current/next/prefetch/complete public calls, bounded preparation, allocation/upload-free commit/next, global action order, resource cleanup; injected voices, no timed playback acceptance");
+    for(bits=8;bits<=24;bits+=8)for(mode=65;mode<67;++mode)owner_fixture(bits,mode);
+    for(bits=8;bits<=24;bits+=8)owner_fixture(bits,67);
+    puts("MIXED OWNER PASS:15 native retirement8/16/24 scenarios,6component/6running/3cancel-reuse, manual source/current/next/prefetch/complete public calls, bounded preparation, allocation/upload-free commit/next, global action order, resource cleanup; injected voices, no timed playback acceptance");
 #elif defined(PT_TEST_MIXED_NATIVE_STARTUP)
     for(bits=8;bits<=24;bits+=8)for(mode=58;mode<60;++mode)owner_fixture(bits,mode);
     puts("MIXED OWNER PASS:6 native startup-cost8/16/24 scenarios, fully prepared2/16voice startup, allocation/upload-free exact commit, global action order, resource cleanup; injected logical time/voices, no audio/timing acceptance");
@@ -691,8 +737,8 @@ static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wave
     puts("MIXED OWNER PASS:21 native clock-binding-only8/16/24 scenarios, fractional counter conversion, absolute tempo boundaries, reader/frequency/regression/overflow/skipped-frame refusal and retained-reader cleanup; injected counters only");
 #else
     for(bits=8;bits<=24;bits+=8)for(mode=0;mode<56;++mode)owner_fixture(bits,mode);
-    for(bits=8;bits<=24;bits+=8)for(mode=58;mode<67;++mode)owner_fixture(bits,mode);
-    puts("MIXED OWNER PASS: full195 host scenarios, master/cache/staging/commit/sequence/deadline/schedule ownership; no native clock");
+    for(bits=8;bits<=24;bits+=8)for(mode=58;mode<68;++mode)owner_fixture(bits,mode);
+    puts("MIXED OWNER PASS: full198 host scenarios, master/cache/staging/commit/sequence/deadline/schedule ownership; no native clock");
 #endif
     return 0;}
 

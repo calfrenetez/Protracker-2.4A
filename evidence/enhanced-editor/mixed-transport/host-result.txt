@@ -1,0 +1,2 @@
+1 October 2026
+Four related ASan/UBSan modules PASS in23.753s: test_paula_dispatch, test_sampler_paula, test_paula_song, test_mixed_owner (240 scenarios). Standalone mixed240 PASS8.288s.

@@ -10,6 +10,8 @@
 #define PT_TEST_MIXED_NATIVE_READY_COST
 #define PT_TEST_MIXED_NATIVE_CLEAR_COST
 #define PT_TEST_MIXED_EXEC
+#include "../src/native/mixed_transport.h"
+#define PT_TEST_NATIVE_MIXED_TRANSPORT
 #include "mixed_owner_test.c"
 int main(void)
 {

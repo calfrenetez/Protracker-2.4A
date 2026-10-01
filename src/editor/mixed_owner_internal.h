@@ -23,4 +23,13 @@ enum pt_mixed_owner_result pt_mixed_stage_step(struct pt_mixed_owner *);
  * Never retry partial output; caller must close. */
 enum pt_mixed_owner_result pt_mixed_stage_commit(struct pt_mixed_owner *);
 void pt_mixed_stage_cancel(struct pt_mixed_owner *);
+/* Counter-bound transport only. PREPARING means call service again without
+ * waiting: startup/future batch or elapsed debt still needs bounded work. OK
+ * returns the first counter tick at/after min(next boundary, consumed+quantum).
+ * quantum1..256; no clock read, output, rebase or cached readiness guarantee.
+ * Errors/DONE/PREPARING preserve ticks. Wakeups never promise exact dispatch. */
+enum pt_mixed_owner_result pt_mixed_owner_transport_wake(struct pt_mixed_owner *,uint32_t,uint64_t *);
+/* External timer faults poison/cancel and try each retained reader stop ONCE;
+ * no free/barrier retry. CLOCK/DEVICE/DEADLINE only; explicit close still required. */
+enum pt_mixed_owner_result pt_mixed_owner_transport_fault(struct pt_mixed_owner *,enum pt_mixed_owner_result);
 #endif

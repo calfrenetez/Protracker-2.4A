@@ -562,3 +562,29 @@ enum pt_mixed_owner_result pt_mixed_owner_clocked_deadline(struct pt_mixed_owner
     if(pt_elapsed_clock_deadline(&s->elapsed,frame,ticks)!=PT_ELAPSED_OK)return sequence_fail(s,PT_MIXED_OWNER_CLOCK);
     return PT_MIXED_OWNER_OK;
 }
+
+enum pt_mixed_owner_result pt_mixed_owner_transport_fault(struct pt_mixed_owner *s,enum pt_mixed_owner_result r)
+{
+    if(!s || (r!=PT_MIXED_OWNER_CLOCK && r!=PT_MIXED_OWNER_DEVICE && r!=PT_MIXED_OWNER_DEADLINE))return PT_MIXED_OWNER_INVALID;
+    if(s->failure)return s->failure;
+    if(!s->clock_bound)return PT_MIXED_OWNER_INVALID;
+    return sequence_fail(s,r);
+}
+enum pt_mixed_owner_result pt_mixed_owner_transport_wake(struct pt_mixed_owner *s,uint32_t quantum,uint64_t *ticks)
+{
+    uint64_t frame,consumed;enum pt_mixed_owner_result r;
+    if(!ticks || !quantum || quantum>256)return PT_MIXED_OWNER_INVALID;
+    r=sequence_current(s);if(r!=PT_MIXED_OWNER_OK)return r;
+    if(!s->clock_bound)return PT_MIXED_OWNER_INVALID;
+    if(s->done)return PT_MIXED_OWNER_DONE;
+    if(s->schedule_phase==SCHEDULE_RUNNING) {
+        if(s->forecast!=3 || s->batch.phase!=4)return PT_MIXED_OWNER_PREPARING;
+        consumed=s->clock_start+(s->interval.frames-s->remaining);
+        if(consumed<s->elapsed.frames)return PT_MIXED_OWNER_PREPARING;
+        frame=s->clock_deadline;
+        if(frame-consumed>quantum)frame=consumed+quantum;
+    }else if(s->schedule_phase==SCHEDULE_READY_NEXT || s->schedule_phase==SCHEDULE_READY_ZERO)frame=s->schedule_start;
+    else return PT_MIXED_OWNER_PREPARING;
+    if(pt_elapsed_clock_deadline(&s->elapsed,frame,ticks)!=PT_ELAPSED_OK)return sequence_fail(s,PT_MIXED_OWNER_CLOCK);
+    return PT_MIXED_OWNER_OK;
+}

@@ -3758,3 +3758,25 @@ and 26 stale changes per precision. Evidence: `mixed-source-dedup`. Instrumented
 16-voice commit costs 4.796–5.388 ms; excess boundary costs/outliers remain, so
 actual-time or audio acceptance is not established. Native transport/event-loop/
 device/IRQ binding and hardware/listening requirements remain open.
+
+
+## Private nonblocking mixed transport
+
+The owner-thread pump and OS2+ private E-clock/WAITECLOCK adapter are implemented.
+One service performs at most one poll, one bounded owner service and one alarm
+arm; preparation/elapsed debt requests another immediate bounded service, with
+future wake quantum1–256 frames capped at the next musical boundary. Completed
+alarms trigger honest counter resampling; late/skipped/unprepared boundaries fail
+without catch-up/rebasing. Failures latch and stop retained readers once. Valid
+begin adopts timer/owner control even on later begin failure; DONE and uncertain
+alarm/reader/counter closure retain ownership until explicit confirmed close.
+Counter release follows both alarm and sample-owner closure.
+
+Four related sanitized host modules PASS (240 mixed scenarios); native60 PASS:
+prior18 +39 injected pump +3 actual private pending-alarm cancellation/reader
+retention cases. Every resource closes, zero owned bytes, exact cleanup plus
+independent locked guest checks pass; coordinated release acknowledged. Evidence:
+`evidence/enhanced-editor/mixed-transport`. This component exposes a pending signal
+but does not install editor PLAY/event-loop or production output/device/IRQ
+binding. Native cancellation is resource proof; actual wake timing, audio,
+pressure/endurance and physical/listening acceptance remain open.

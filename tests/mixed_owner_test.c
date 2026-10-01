@@ -4,6 +4,7 @@
 #define PT_WAVETABLE_NATIVE
 #include "amigus_wavetable_cache_test.c"
 #include "../src/editor/mixed_owner_internal.h"
+#include "../src/editor/mixed_transport.h"
 #include "../src/editor/paula_internal.h"
 #ifdef PT_TEST_MIXED_NATIVE_COST
 #include "../src/editor/sampler_internal.h"
@@ -36,6 +37,31 @@ static void *refuse_alloc(void *c,size_t n){(void)c;(void)n;return NULL;}
 struct mixed_counter {uint64_t ticks;uint32_t frequency;unsigned reads;int result;};
 static int mixed_read(void *c,uint64_t *ticks,uint32_t *frequency)
 {struct mixed_counter *m=c;++m->reads;*ticks=m->ticks;*frequency=m->frequency;return m->result;}
+struct pump_timer {
+    struct mixed_counter clock;uint64_t deadline;unsigned pending,arms,polls,alarm_closes,counter_closes,alarm_closed,counter_closed;
+    int poll_error,arm_result,alarm_close_result,counter_close_result;
+};
+static int pump_read(void *context,uint64_t *ticks,uint32_t *frequency)
+{struct pump_timer *t=context;assert(!t->counter_closed);return mixed_read(&t->clock,ticks,frequency);}
+static enum pt_mixed_timer_result pump_poll(void *context)
+{struct pump_timer *t=context;assert(!t->alarm_closed && t->pending);++t->polls;
+ if(t->poll_error)return PT_MIXED_TIMER_ERROR;
+ if(t->clock.ticks<t->deadline)return PT_MIXED_TIMER_WAITING;
+ t->pending=0;return PT_MIXED_TIMER_READY;}
+static enum pt_mixed_timer_result pump_arm(void *context,uint64_t deadline)
+{struct pump_timer *t=context;assert(!t->alarm_closed && !t->pending);++t->arms;
+ if(t->arm_result!=PT_MIXED_TIMER_WAITING)return (enum pt_mixed_timer_result)t->arm_result;
+ assert(deadline>t->clock.ticks);t->pending=1;t->deadline=deadline;return PT_MIXED_TIMER_WAITING;}
+static int pump_alarm_close(void *context)
+{struct pump_timer *t=context;++t->alarm_closes;assert(!t->alarm_closed);
+ if(t->alarm_close_result!=1)return 0;
+ t->pending=0;t->alarm_closed=1;return 1;}
+static int pump_counter_close(void *context)
+{struct pump_timer *t=context;++t->counter_closes;assert(t->alarm_closed && !t->counter_closed);
+ if(t->counter_close_result!=1)return 0;
+ t->counter_closed=1;return 1;}
+static uint32_t pump_signal(void *context)
+{struct pump_timer *t=context;assert(!t->alarm_closed);return t->pending?32:0;}
 static void owner_fixture(unsigned bits,unsigned mode)
 {
     struct pt_allocator a={NULL,counted_fast,fast_free};struct pt_document doc;struct pt_sampler sampler;
@@ -97,6 +123,78 @@ static void owner_fixture(unsigned bits,unsigned mode)
         assert(r==PT_MIXED_OWNER_OK && sampler.current[0] && sampler.current[1] && !sampler.current[2]);
         assert(report.samples[0][0] && report.samples[1][0] && report.samples[1][1]);
         doc.project.channels.selected=15;assert(pt_mixed_owner_current(owner)==PT_MIXED_OWNER_OK);
+#ifdef PT_TEST_NATIVE_MIXED_TRANSPORT
+        if(mode==80) {
+            struct pt_native_mixed_transport native={0};unsigned polls=0;
+            assert(pt_native_mixed_open(&native,&owner,o.rate,128)==PT_MIXED_OWNER_OK);
+            do {r=pt_mixed_transport_service(&native.pump);assert(++polls<1000 && !d.starts && !wd.starts);}while(r==PT_MIXED_OWNER_PREPARING);
+            assert(r==PT_MIXED_OWNER_WAITING && native.alarm.pending && pt_mixed_transport_signal(&native.pump));
+            d.quiesce_result=wd.barrier_result=0;
+            assert(!pt_mixed_transport_close(&native.pump) && owner && native.clock.opened && native.pump.active);
+            d.quiesce_result=wd.barrier_result=1;polls=0;
+            while(!pt_mixed_transport_close(&native.pump)){assert(++polls<8);Delay(1);}
+            assert(!owner && !native.clock.port && !native.clock.request && !native.alarm.port && !native.alarm.request && !native.pump.active);
+            assert(!d.starts && !wd.starts);puts("NATIVE MIXED TRANSPORT pending private alarm cancellation/reader retention PASS; no playback output");goto detached;
+        }
+#endif
+        if((mode>=69 && mode<80) || mode==81 || mode==82) {
+            struct pt_mixed_transport pump={0};struct pump_timer timer={0};unsigned polls=0,reads,stops,wstops,arms,closes;
+            struct pt_mixed_timer_api api={&timer,pump_read,pump_poll,pump_arm,pump_alarm_close,pump_counter_close,pump_signal};
+            uint64_t tick=777;struct pt_mixed_owner *saved;
+            timer.clock=(struct mixed_counter){700,mode==70?2*o.rate:mode==81?o.rate/2:o.rate,0,1};
+            timer.alarm_close_result=timer.counter_close_result=1;
+            assert(pt_mixed_transport_close(&pump) && !pt_mixed_transport_signal(&pump));
+            assert(pt_mixed_transport_begin(&pump,&owner,1000,0,&api)==PT_MIXED_OWNER_INVALID && !pump.active && !timer.clock.reads);
+            assert(pt_mixed_owner_transport_wake(owner,0,&tick)==PT_MIXED_OWNER_INVALID && tick==777);
+            assert(pt_mixed_transport_begin(&pump,&owner,mode==81?1001:1000,mode==70?256:128,&api)==PT_MIXED_OWNER_OK);
+            assert(pt_mixed_transport_begin(&pump,&owner,1000,128,&api)==PT_MIXED_OWNER_INVALID && timer.clock.reads==1);
+            if(mode==71)timer.arm_result=PT_MIXED_TIMER_LATE;
+            if(mode==72)timer.arm_result=PT_MIXED_TIMER_ERROR;
+            if(mode==74)timer.clock.result=0;
+            if(mode==76)--timer.clock.ticks;
+            for(;;) {
+                r=pt_mixed_transport_service(&pump);assert(++polls<2000);
+                if(r!=PT_MIXED_OWNER_PREPARING && r!=PT_MIXED_OWNER_WAITING)break;
+                if(r==PT_MIXED_OWNER_PREPARING){assert(!timer.pending && !pt_mixed_transport_signal(&pump));continue;}
+                assert(timer.pending && pt_mixed_transport_signal(&pump)==32);
+                reads=timer.clock.reads;arms=timer.arms;
+                assert(pt_mixed_transport_service(&pump)==PT_MIXED_OWNER_WAITING && timer.clock.reads==reads && timer.arms==arms);
+                if(mode==78 && d.starts)break;
+                if(mode==79) {
+                    saved=owner;owner=NULL;assert(pt_mixed_transport_service(&pump)==PT_MIXED_OWNER_INVALID);owner=saved;r=PT_MIXED_OWNER_INVALID;break;
+                }
+                if(mode==73 && d.starts){timer.poll_error=1;d.stop_result[0]=wd.stop_result=0;continue;}
+                timer.clock.ticks=timer.deadline;
+                if(mode==75 && d.starts)++timer.clock.frequency;
+                if(mode==77)timer.clock.ticks+=2;
+                if(mode==82 && d.starts)timer.clock.ticks+=o.rate;
+            }
+            if(mode==69 || mode==70) {
+                assert(r==PT_MIXED_OWNER_DONE && d.starts==1 && wd.starts==2);
+                reads=timer.clock.reads;assert(pt_mixed_transport_service(&pump)==PT_MIXED_OWNER_DONE && timer.clock.reads==reads);
+            }else if(mode!=78) {
+                enum pt_mixed_owner_result expected=(mode==71 || mode==77 || mode==81 || mode==82)?PT_MIXED_OWNER_DEADLINE:
+                    (mode==72 || mode==73)?PT_MIXED_OWNER_DEVICE:mode==79?PT_MIXED_OWNER_INVALID:PT_MIXED_OWNER_CLOCK;
+                assert(r==expected);reads=timer.clock.reads;stops=d.stops;wstops=wd.stops;
+                assert(pt_mixed_transport_service(&pump)==expected && timer.clock.reads==reads && d.stops==stops && wd.stops==wstops);
+                if(mode==73)assert(pv.voice[0].held && av.voice[7].held && sampler.current[0] && sampler.current[1]);
+            }
+            if(mode==78) {
+                timer.alarm_close_result=0;
+                assert(!pt_mixed_transport_close(&pump) && !owner && pump.active && timer.pending && !timer.counter_closes);
+                timer.alarm_close_result=1;timer.counter_close_result=0;
+                assert(!pt_mixed_transport_close(&pump) && timer.alarm_closed && !timer.counter_closed && pump.active);
+                timer.counter_close_result=1;assert(pt_mixed_transport_close(&pump) && timer.counter_closed && !pump.active);goto detached;
+            }
+            timer.alarm_close_result=0;d.quiesce_result=wd.barrier_result=0;
+            assert(!pt_mixed_transport_close(&pump) && pump.active && owner && !timer.counter_closes && !timer.alarm_closed);
+            timer.alarm_close_result=1;d.stop_result[0]=wd.stop_result=1;
+            assert(!pt_mixed_transport_close(&pump) && owner && timer.alarm_closed && !timer.counter_closes);
+            closes=timer.alarm_closes;d.quiesce_result=wd.barrier_result=1;timer.counter_close_result=0;
+            assert(!pt_mixed_transport_close(&pump) && !owner && pump.active && !timer.counter_closed && timer.alarm_closes==closes);
+            timer.counter_close_result=1;assert(pt_mixed_transport_close(&pump) && !pump.active && timer.counter_closed && timer.alarm_closes==closes);
+            assert(pt_mixed_transport_close(&pump) && !pt_mixed_transport_signal(&pump));goto detached;
+        }
         if(mode==68) {
             struct pt_paula_prepared *prepared=malloc(sizeof(*prepared));struct pt_voice voice;
             unsigned steps=0,mutation,pins_before=0,pins_after=0;size_t calls;enum pt_cache_result loaded;
@@ -838,7 +936,8 @@ static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wave
     for(bits=8;bits<=24;bits+=8)for(mode=65;mode<67;++mode)owner_fixture(bits,mode);
     for(bits=8;bits<=24;bits+=8)owner_fixture(bits,67);
     for(bits=8;bits<=24;bits+=8)owner_fixture(bits,68);
-    puts("MIXED OWNER PASS:18 native retirement8/16/24 scenarios,6component/6running/3cancel-reuse/3ready-safety (26mutations each), manual source/current/next/prefetch/complete public calls, bounded preparation, allocation/upload-free commit/next, global action order, resource cleanup; injected voices, no timed playback acceptance");
+    for(bits=8;bits<=24;bits+=8)for(mode=69;mode<=82;++mode)owner_fixture(bits,mode);
+    puts("MIXED OWNER PASS:60 native retirement8/16/24 scenarios,6component/6running/3cancel-reuse/3ready-safety (26mutations each)/39injected-pump/3native-private-alarm, manual source/current/next/prefetch/complete public calls, bounded preparation, allocation/upload-free commit/next, global action order, resource cleanup; injected voices, no timed playback acceptance");
 #elif defined(PT_TEST_MIXED_NATIVE_STARTUP)
     for(bits=8;bits<=24;bits+=8)for(mode=58;mode<60;++mode)owner_fixture(bits,mode);
     puts("MIXED OWNER PASS:6 native startup-cost8/16/24 scenarios, fully prepared2/16voice startup, allocation/upload-free exact commit, global action order, resource cleanup; injected logical time/voices, no audio/timing acceptance");
@@ -855,8 +954,9 @@ static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wave
     puts("MIXED OWNER PASS:21 native clock-binding-only8/16/24 scenarios, fractional counter conversion, absolute tempo boundaries, reader/frequency/regression/overflow/skipped-frame refusal and retained-reader cleanup; injected counters only");
 #else
     for(bits=8;bits<=24;bits+=8)for(mode=0;mode<56;++mode)owner_fixture(bits,mode);
-    for(bits=8;bits<=24;bits+=8)for(mode=58;mode<69;++mode)owner_fixture(bits,mode);
-    puts("MIXED OWNER PASS: full201 host scenarios, master/cache/staging/commit/sequence/deadline/schedule ownership; no native clock");
+    for(bits=8;bits<=24;bits+=8)for(mode=58;mode<80;++mode)owner_fixture(bits,mode);
+    for(bits=8;bits<=24;bits+=8)for(mode=81;mode<=82;++mode)owner_fixture(bits,mode);
+    puts("MIXED OWNER PASS: full240 host scenarios, master/cache/staging/commit/sequence/deadline/schedule ownership; no native clock");
 #endif
     return 0;}
 

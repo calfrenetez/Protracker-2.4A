@@ -1,0 +1,81 @@
+{
+  "scope": "Read-only task/library/device/window inspection after PCM busy; no reservation retry, unload, stop, MMIO, audio or config change",
+  "passed": true,
+  "calls": [
+    {
+      "tool": "amiga_run_script",
+      "args": {
+        "script": "Version\nCPU\nShowNetStatus\nEcho PTG-INSPECT-IDENTITY-DONE\n",
+        "timeout": 20
+      },
+      "result": "[OK]\nKickstart 47.115, Workbench 47.5\nSystem: 68030  68030-MMU no FastROM (INST: Cache Burst) (DATA: Cache NoBurst)\nNetwork status summary\nLocal host address         = 192.168.0.156 (on interface 'plipbox')\nDefault gateway address    = 192.168.0.1\nDomain name system servers = 192.168.0.1, 192.168.0.1\nPTG-INSPECT-IDENTITY-DONE"
+    },
+    {
+      "tool": "amiga_checksum",
+      "args": {
+        "path": "Work:AmigaDev-20260923/amiga-bridge"
+      },
+      "result": "File: Work:AmigaDev-20260923/amiga-bridge\nCRC32: D75C2355\nSize: 150192 bytes"
+    },
+    {
+      "tool": "amiga_lib_info",
+      "args": {
+        "name": "AmiGUS.audio"
+      },
+      "result": "Library: AmiGUS.audio\n  Version:   4.23\n  Open count: 0\n  Flags:     0x04\n  Neg size:  116 bytes (jump table)\n  Pos size:  258 bytes (data)\n  Base addr: 0x40482314\n  ID string: $VER: AmiGUS.audio 4.023 (30.8.26) 020 SAS/C cross"
+    },
+    {
+      "tool": "amiga_checksum",
+      "args": {
+        "path": "DEVS:AHI/AmiGUS.audio"
+      },
+      "result": "File: DEVS:AHI/AmiGUS.audio\nCRC32: BA67FEF4\nSize: 11028 bytes"
+    }
+  ],
+  "emulator_before": "OK\tPaused=false\tConfig=autosave",
+  "audio_before": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=416\tsndbuf_status=0",
+  "switch_attempted": true,
+  "physical_target": {
+    "connected": true,
+    "mode": "tcp",
+    "logCount": 466,
+    "varCount": 0,
+    "lastHeartbeat": {
+      "type": "HB",
+      "tick": 8846,
+      "freeChip": 1853248,
+      "freeFast": 131635232,
+      "timestamp": "2026-10-01T21:35:25.055920+00:00"
+    },
+    "serialConnectedAt": 1790890527.491831,
+    "lastBridgeMessageAt": 1790890527.559119,
+    "lastHeartbeatAt": null,
+    "bridgeSilentSec": 0.0,
+    "host": "192.168.0.156",
+    "port": 2345
+  },
+  "script_pending": false,
+  "inspection_completed": true,
+  "returned_target": {
+    "connected": true,
+    "mode": "tcp",
+    "logCount": 472,
+    "varCount": 0,
+    "lastHeartbeat": {
+      "type": "HB",
+      "tick": 5,
+      "freeChip": 1889696,
+      "freeFast": 121845464,
+      "timestamp": "2026-10-01T21:35:27.781618+00:00"
+    },
+    "serialConnectedAt": 1790890529.995698,
+    "lastBridgeMessageAt": 1790890530.1461382,
+    "lastHeartbeatAt": null,
+    "bridgeSilentSec": 0.0,
+    "host": "127.0.0.1",
+    "port": 2345
+  },
+  "emulator_after": "OK\tPaused=false\tConfig=autosave",
+  "audio_after": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=333\tsndbuf_status=0",
+  "returned": true
+}

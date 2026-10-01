@@ -1,0 +1,14 @@
+{
+  "library.c": {
+    "sha256": "9d1dac0c6b57cdef068d29d6f77cc6032f5c8eda37a082db340c544ca70f0fbd",
+    "url": "https://github.com/necronomfive/AmiGUS-pub/blob/f17648d63346bab932bca5b48da922a78289f7dc/Software/Drivers/AHI4/src/library.c"
+  },
+  "lib_amigus.c": {
+    "sha256": "f60a664453071d81ec51b03d68ec4ab18215b36feb963cf372e0c07510d3b564",
+    "url": "https://github.com/necronomfive/AmiGUS-pub/blob/f17648d63346bab932bca5b48da922a78289f7dc/Software/Drivers/AHI4/src/lib_amigus.c"
+  },
+  "ahi_allocation.c": {
+    "sha256": "5d4cf76839fbaff6c5b38bbc7e43073ad5fa3cdc6591ada49124434a58645bdb",
+    "url": "https://github.com/necronomfive/AmiGUS-pub/blob/f17648d63346bab932bca5b48da922a78289f7dc/Software/Drivers/AHI4/src/ahi_allocation.c"
+  }
+}

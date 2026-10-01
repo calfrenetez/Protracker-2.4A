@@ -1,0 +1,8 @@
+Device: ahi.device
+  Version:   6.6
+  Open count: 0
+  Flags:     0x04
+  Neg size:  164 bytes (jump table)
+  Pos size:  148 bytes (data)
+  Base addr: 0x4033F61C
+  ID string: ahi.device 6.6 (27.09.05) ©1994-2005 Martin Blom. 68020-60 version.

@@ -1,0 +1,8 @@
+Library: amigus.library
+  Version:   1.1
+  Open count: 1
+  Flags:     0x04
+  Neg size:  56 bytes (jump table)
+  Pos size:  140 bytes (data)
+  Base addr: 0x4033F4E8
+  ID string: $VER: amigus.library 1.01 (30.8.26) 000 SAS/C cross

@@ -1,0 +1,8 @@
+Library: AmiGUS.audio
+  Version:   4.23
+  Open count: 0
+  Flags:     0x04
+  Neg size:  116 bytes (jump table)
+  Pos size:  258 bytes (data)
+  Base addr: 0x40482314
+  ID string: $VER: AmiGUS.audio 4.023 (30.8.26) 020 SAS/C cross

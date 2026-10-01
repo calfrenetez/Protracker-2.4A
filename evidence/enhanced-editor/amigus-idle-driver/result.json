@@ -1,0 +1,96 @@
+{
+  "scope": "Read-only task/library/device/window inspection after PCM busy; no reservation retry, unload, stop, MMIO, audio or config change",
+  "passed": true,
+  "calls": [
+    {
+      "tool": "amiga_run_script",
+      "args": {
+        "script": "Version\nCPU\nShowNetStatus\nEcho PTG-INSPECT-IDENTITY-DONE\n",
+        "timeout": 20
+      },
+      "result": "[OK]\nKickstart 47.115, Workbench 47.5\nSystem: 68030  68030-MMU no FastROM (INST: Cache Burst) (DATA: Cache NoBurst)\nNetwork status summary\nLocal host address         = 192.168.0.156 (on interface 'plipbox')\nDefault gateway address    = 192.168.0.1\nDomain name system servers = 192.168.0.1, 192.168.0.1\nPTG-INSPECT-IDENTITY-DONE"
+    },
+    {
+      "tool": "amiga_checksum",
+      "args": {
+        "path": "Work:AmigaDev-20260923/amiga-bridge"
+      },
+      "result": "File: Work:AmigaDev-20260923/amiga-bridge\nCRC32: D75C2355\nSize: 150192 bytes"
+    },
+    {
+      "tool": "amiga_list_tasks",
+      "args": {},
+      "result": "Tasks (37):\n  ?                              pri=  0 state=run        stack=?\n  card.resource                  pri= 15 state=wait       stack=?\n  carddisk.device                pri=  5 state=wait       stack=?\n  ?                              pri=  0 state=wait       stack=?\n  ?                              pri=  5 state=wait       stack=?\n  ?                              pri=  0 state=wait       stack=?\n  ?                              pri=  0 state=wait       stack=?\n  ?                              pri=  0 state=wait       stack=?\n  ?                              pri=  0 state=wait       stack=?\n  ?                              pri=  0 state=wait       stack=?\n  ?                              pri=  5 state=wait       stack=?\n  ?                              pri=  0 state=wait       stack=?\n  ?                              pri=  5 state=wait       stack=?\n  ?                              pri=  0 state=wait       stack=?\n  ?                              pri=  0 state=wait       stack=?\n  ?                              pri=  0 state=wait       stack=?\n  ?                              pri=  4 state=wait       stack=?\n  ?                              pri=  0 state=wait       stack=?\n  ?                              pri=  1 state=wait       stack=?\n  ?                              pri=  1 state=wait       stack=?\n  ?                              pri=  0 state=wait       stack=?\n  console.device                 pri=  5 state=wait       stack=?\n  ?                              pri=  0 state=wait       stack=?\n  ?                              pri=  0 state=wait       stack=?\n  ?                              pri=  0 state=wait       stack=?\n  ?                              pri= 10 state=wait       stack=?\n  ?                              pri= 10 state=wait       stack=?\n  ?                              pri= 10 state=wait       stack=?\n  ?                              pri= 10 state=wait       stack=?\n  ?                              pri= 10 state=wait       stack=?\n  ?                              pri=  1 state=wait       stack=?\n  ?                              pri= 11 state=wait       stack=?\n  ?                              pri= 10 state=wait       stack=?\n  input.device                   pri= 20 state=wait       stack=?\n  ?                              pri=  0 state=wait       stack=?\n  ?                              pri=  0 state=wait       stack=?\n  ?                              pri=  0 state=wait       stack=?"
+    },
+    {
+      "tool": "amiga_list_libs",
+      "args": {},
+      "result": "Libraries (53):\n  rexxsyslib.library             vv47.2.?\n  utility.library                vv47.3.?\n  graphics.library               vv47.10.?\n  layers.library                 vv46.2.?\n  keymap.library                 vv47.1.?\n  intuition.library              vv47.53.?\n  dos.library                    vv47.30.?\n  mathieeesingbas.library        vv47.1.?\n  mmu.library                    vv47.5.?\n  68030.library                  vv46.6.?\n  680x0.library                  vv47.3.?\n  version.library                vv47.5.?\n  icon.library                   vv47.5.?\n  diskfont.library               vv47.1.?\n  locale.library                 vv47.31.?\n  iffparse.library               vv45.3.?\n  workbench.library              vv47.42.?\n  gadtools.library               vv47.17.?\n  mathieeedoubbas.library        vv47.3.?\n  asl.library                    vv47.11.?\n  commodities.library            vv45.2.?\n  bsdsocket.library              vv4.364.?\n  usergroup.library              vv4.31.?\n  datatypes.library              vv47.3.?\n  muimaster.library              vv19.35.?\n  muigfx.library                 vv19.9.?\n  muilowlevel.library            vv19.9.?\n  NList.mcc                      vv20.147.?\n  NListtree.mcc                  vv18.54.?\n  Virtgroup.mui                  vv19.10.?\n  Newstring.mcc                  vv16.18.?\n  Popasl.mui                     vv19.8.?\n  NListview.mcc                  vv19.102.?\n  Gauge.mui                      vv19.9.?\n  ilbm.datatype                  vv47.6.?\n  picture.datatype               vv47.19.?\n  Busy.mcc                       vv16.36.?\n  muipop.library                 vv19.10.?\n  javascript.library             vv4.26.?\n  amisslmaster.library           vv5.27.?\n  mathieeedoubtrans.library      vv47.2.?\n  amissl_v362.library            vv5.27.?\n  muiconfig.library              vv19.20.?\n  muihelp.library                vv19.9.?\n  window.class                   vv47.38.?\n  amigus.library                 vv1.1.?\n  filesave.audio                 vv6.3.?\n  device.audio                   vv6.2.?\n  paula.audio                    vv4.23.?\n  AmiGUS.audio                   vv4.23.?\n  bgui.library                   vv41.8.?\n  expansion.library              vv47.4.?\n  exec.library                   vv47.13.?"
+    },
+    {
+      "tool": "amiga_lib_info",
+      "args": {
+        "name": "amigus.library"
+      },
+      "result": "Library: amigus.library\n  Version:   1.1\n  Open count: 1\n  Flags:     0x04\n  Neg size:  56 bytes (jump table)\n  Pos size:  140 bytes (data)\n  Base addr: 0x4033F4E8\n  ID string: $VER: amigus.library 1.01 (30.8.26) 000 SAS/C cross"
+    },
+    {
+      "tool": "amiga_dev_info",
+      "args": {
+        "name": "ahi.device"
+      },
+      "result": "Device: ahi.device\n  Version:   6.6\n  Open count: 0\n  Flags:     0x04\n  Neg size:  164 bytes (jump table)\n  Pos size:  148 bytes (data)\n  Base addr: 0x4033F61C\n  ID string: ahi.device 6.6 (27.09.05) \u00a91994-2005 Martin Blom. 68020-60 version."
+    },
+    {
+      "tool": "amiga_list_screen_windows",
+      "args": {},
+      "result": "No windows found on this screen"
+    }
+  ],
+  "emulator_before": "OK\tPaused=false\tConfig=autosave",
+  "audio_before": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0",
+  "switch_attempted": true,
+  "physical_target": {
+    "connected": true,
+    "mode": "tcp",
+    "logCount": 455,
+    "varCount": 0,
+    "lastHeartbeat": {
+      "type": "HB",
+      "tick": 4,
+      "freeChip": 1889696,
+      "freeFast": 121876840,
+      "timestamp": "2026-10-01T21:30:44.500470+00:00"
+    },
+    "serialConnectedAt": 1790890244.3254259,
+    "lastBridgeMessageAt": 1790890244.5021372,
+    "lastHeartbeatAt": 1790890244.500499,
+    "bridgeSilentSec": 0.0,
+    "host": "192.168.0.156",
+    "port": 2345
+  },
+  "script_pending": false,
+  "inspection_completed": true,
+  "returned_target": {
+    "connected": true,
+    "mode": "tcp",
+    "logCount": 464,
+    "varCount": 0,
+    "lastHeartbeat": {
+      "type": "HB",
+      "tick": 4,
+      "freeChip": 1889696,
+      "freeFast": 121876840,
+      "timestamp": "2026-10-01T21:30:44.500470+00:00"
+    },
+    "serialConnectedAt": 1790890247.029595,
+    "lastBridgeMessageAt": 1790890247.1940548,
+    "lastHeartbeatAt": null,
+    "bridgeSilentSec": 0.0,
+    "host": "127.0.0.1",
+    "port": 2345
+  },
+  "emulator_after": "OK\tPaused=false\tConfig=autosave",
+  "audio_after": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=416\tsndbuf_status=0",
+  "returned": true
+}

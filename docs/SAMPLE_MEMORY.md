@@ -4430,3 +4430,16 @@ and locked subsequent verification pass; explicit windowrelease ACK147. Root
 cause remains unproven. Method retained behind experimental --guest-cleanup-pilot,
 not adopted as default; ten host guards pass. See
 `../evidence/enhanced-editor/guest-cleanup-pilot/`. Original failures preserved.
+
+
+## Idle AHI coexistence observation — 1 October2026
+
+Read-only physical inspection found loaded AmiGUS.audio4.23/openCnt0 and
+ahi.device6.6/openCnt0. Installed AHI bytes match officialRC6 020-NO_LOG. Its pinned
+source reserves PCM in library initialization and releases at library expunge;
+normal close/FreeAudio does not immediately free the card reservation. This
+strongly explains PCMbusy with no known player, not a runtime private-owner match.
+No forced release/unload/retry/config change was performed. Both windows safely
+returned to emulator and released. Direct PCM testing requires a separate choice
+about temporarily unloading the unused AHI subdriver versus keeping AHI service
+resident. See `../evidence/enhanced-editor/amigus-idle-driver/`.

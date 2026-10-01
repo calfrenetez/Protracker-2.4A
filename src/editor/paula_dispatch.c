@@ -249,8 +249,10 @@ int pt_paula_prepared_ready_owned(struct pt_paula_prepared *p)
     if(!p || !p->ready || !p->incremental || !p->owner ||
        !voices_unchanged(p) || !prepared_sources(p) ||
        !current(p->voices,p->version,&held,p->owner,1))return 0;
+    /* current() checked bridge metadata once in this serialized call. These
+     * lookups have no callbacks; retain every live/candidate lease check. */
     for(i=0;i<PT_PAULA_VOICES;++i)if(p->voice[i].held &&
-       !pt_sampler_paula_prepared_location(p->bridge,(unsigned)p->voice[i].track,
+       !pt_sampler_paula_prepared_location_validated(p->bridge,(unsigned)p->voice[i].track,
            p->voice[i].lease,&data,&bytes))return 0;
     for(i=0;i<p->plan.count;++i)if(p->plan.action[i].kind==PT_RENDER_TRIGGER) {
         struct pt_paula_batch_entry *e=p->batch.entry+i;
@@ -258,7 +260,7 @@ int pt_paula_prepared_ready_owned(struct pt_paula_prepared *p)
         if(!e->held || e->sample>=p->project->sample_count ||
            a->voice.pcm!=&p->project->samples[e->sample].pcm ||
            memcmp(a->voice.pcm,&e->source,sizeof(e->source)) ||
-           !pt_sampler_paula_prepared_location(p->bridge,a->channel,e->lease,&data,&bytes) ||
+           !pt_sampler_paula_prepared_location_validated(p->bridge,a->channel,e->lease,&data,&bytes) ||
            ((uintptr_t)data&1) || (uint64_t)e->offset+e->length>bytes ||
            e->plan.data!=data+e->offset || e->plan.words!=e->length/2)return 0;
     }

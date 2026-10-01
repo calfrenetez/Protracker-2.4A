@@ -3720,3 +3720,23 @@ acceptance. Evidence: `evidence/enhanced-editor/mixed-accessor-cost`. Sharing
 bridge metadata validation only within a serialized ready check is the next
 implementation candidate; every per-lease ownership/address check must remain.
 Native PLAY/event-loop/device/IRQ binding and physical acceptance remain open.
+
+
+## Paula ready-check metadata sharing
+
+The private incremental ready checker validates bridge metadata once per
+serialized call, then checks every active/candidate lease through a private
+validated-location helper. Standalone prepared-location calls still validate
+metadata every time. No callbacks/reentry or validation carried across calls;
+all source/reader/API/map/revision, lease serial/pins/data/valid/version and
+playback pointer/alignment/range/word-count checks remain. AmiGUS and deadlines
+are unchanged. Four related sanitized host modules pass, including 201 mixed
+scenarios; native 18 cases plus 120 accessor observations pass with complete
+resource release, exact cleanup, independent guest verification and coordinated
+release. Three new precision cases each reject 22 between-call stale mutations
+then confirm restored/idempotent readiness without changing pins or output.
+
+Evidence: `evidence/enhanced-editor/mixed-ready-metadata`. Native component
+16-voice complete costs 5.024–25.333 ms, with outliers retained; this does not
+qualify actual-time playback or exact speedup. Native PLAY/event-loop/device/IRQ
+binding, physical pressure/endurance and listening remain requirements.

@@ -32,4 +32,12 @@ void pt_sampler_paula_job_cancel(struct pt_sampler_paula_job *);
 int pt_sampler_paula_prepared_current(struct pt_sampler_paula *);
 int pt_sampler_paula_prepared_location(struct pt_sampler_paula *,unsigned,struct pt_cache_lease,
     const uint8_t **,size_t *);
+/* Per-lease lookup after prepared_current succeeded in THIS serialized call.
+ * Bridge/project/sampler metadata and arrays must stay immutable, no callbacks
+ * or reentry between validation and lookup. Never persist validation across calls.
+ * Keeps route, lease serial/pins/data, valid/version checks and byte-length lookup.
+ * Only internal ready validation may share metadata checks this way; standalone
+ * callers use prepared_location above, which validates metadata every time. */
+int pt_sampler_paula_prepared_location_validated(struct pt_sampler_paula *,unsigned,struct pt_cache_lease,
+    const uint8_t **,size_t *);
 #endif

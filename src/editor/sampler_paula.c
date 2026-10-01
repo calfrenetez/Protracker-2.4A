@@ -125,12 +125,19 @@ enum pt_cache_result pt_sampler_paula_job_step(struct pt_sampler_paula_job *j,st
     return result;
 }
 
-int pt_sampler_paula_prepared_location(struct pt_sampler_paula *s,unsigned track,struct pt_cache_lease lease,
+int pt_sampler_paula_prepared_location_validated(struct pt_sampler_paula *s,unsigned track,struct pt_cache_lease lease,
     const uint8_t **data,size_t *bytes)
 {
     void *p;
-    if(!data || !bytes || !pt_sampler_paula_prepared_current(s) || !routed(s,track))return 0;
+    if(!s || !data || !bytes || !routed(s,track))return 0;
     p=pt_cache_data(&s->cache,lease);
     if(!p || s->cache.entry[lease.slot].valid!=1 || s->cache.entry[lease.slot].version!=s->version)return 0;
     *data=p;*bytes=s->cache.entry[lease.slot].bytes;return 1;
+}
+
+int pt_sampler_paula_prepared_location(struct pt_sampler_paula *s,unsigned track,struct pt_cache_lease lease,
+    const uint8_t **data,size_t *bytes)
+{
+    return data && bytes && pt_sampler_paula_prepared_current(s) &&
+        pt_sampler_paula_prepared_location_validated(s,track,lease,data,bytes);
 }

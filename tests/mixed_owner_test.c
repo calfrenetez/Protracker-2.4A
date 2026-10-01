@@ -97,6 +97,70 @@ static void owner_fixture(unsigned bits,unsigned mode)
         assert(r==PT_MIXED_OWNER_OK && sampler.current[0] && sampler.current[1] && !sampler.current[2]);
         assert(report.samples[0][0] && report.samples[1][0] && report.samples[1][1]);
         doc.project.channels.selected=15;assert(pt_mixed_owner_current(owner)==PT_MIXED_OWNER_OK);
+        if(mode==68) {
+            struct pt_paula_prepared *prepared=malloc(sizeof(*prepared));struct pt_voice voice;
+            unsigned steps=0,mutation,pins_before=0,pins_after=0;size_t calls;enum pt_cache_result loaded;
+            assert(prepared);memset(prepared,0,sizeof(*prepared));
+            assert(pt_voice_init(&voice,&doc.project.samples[0].pcm,0,2048,PT_VOICE_ONCE,0,0,((uint64_t)8000<<32)/48000,0)==PT_PCM_OK);
+            plan->count=1;plan->action[0]=(struct pt_render_action){PT_RENDER_TRIGGER,4,voice,{65536,0}};
+            assert(pt_mixed_stage_begin(owner,plan)==PT_MIXED_OWNER_PREPARING);
+            do {r=pt_mixed_stage_step(owner);assert(++steps<100);}while(r==PT_MIXED_OWNER_PREPARING);
+            assert(r==PT_MIXED_OWNER_OK && pt_mixed_stage_commit(owner)==PT_MIXED_OWNER_OK && pv.voice[0].held);
+            plan->count=2;plan->action[1]=plan->action[0];plan->action[1].voice.pcm=&doc.project.samples[1].pcm;
+            assert(pt_paula_prepare_begin_owned(prepared,&pv,pb.version,48000,plan,&caps,sampler.current,owner));
+            steps=0;do {assert(++steps<100);loaded=pt_paula_prepare_step_owned(prepared);}while(loaded==PT_CACHE_PENDING);
+            assert(loaded==PT_CACHE_LOAD && pt_paula_prepared_ready_owned(prepared));
+            for(i=0;i<PT_CACHE_SLOTS;++i)pins_before+=pb.cache.entry[i].pins;
+            calls=d.calls;
+            /* Adversarial changes occur BETWEEN serialized calls, then restore
+             * before cancellation. No copy/reinitialize of the active workspace. */
+            for(mutation=0;mutation<22;++mutation) {
+                struct pt_paula_batch_entry *e=prepared->batch.entry+1;
+                struct pt_cache_entry *entry=pb.cache.entry+e->lease.slot;
+                void *field=NULL;size_t size=0;unsigned char saved[sizeof(struct pt_pcm)],fill=0;
+                unsigned allocs=fast_calls,writes=f->writes,outputs=output_count;
+#define READY_FIELD(value) field=&(value);size=sizeof(value)
+                switch(mutation) {
+                case 0:READY_FIELD(pb.generation);fill=255;break;
+                case 1:READY_FIELD(pb.table);break;
+                case 2:READY_FIELD(pb.count);break;
+                case 3:READY_FIELD(pb.channels);break;
+                case 4:READY_FIELD(pb.routes[4]);fill=PT_AMIGUS;break;
+                case 5:READY_FIELD(pb.closing);fill=1;break;
+                case 6:READY_FIELD(pb.version);break;
+                case 7:READY_FIELD(sampler.generation);fill=255;break;
+                case 8:READY_FIELD(doc.project.samples[0].pcm.data);break;
+                case 9:READY_FIELD(e->source.data);break;
+                case 10:READY_FIELD(e->lease.serial);break;
+                case 11:READY_FIELD(entry->valid);break;
+                case 12:READY_FIELD(entry->version);break;
+                case 13:READY_FIELD(entry->data);break;
+                case 14:READY_FIELD(pv.voice[0].lease.serial);break;
+                case 15:READY_FIELD(pv.voice[0].uncertain);fill=1;break;
+                case 16:READY_FIELD(pv.voice[0].track);fill=255;break;
+                case 17:READY_FIELD(e->plan.data);break;
+                case 18:READY_FIELD(e->plan.words);break;
+                case 19:READY_FIELD(e->length);fill=255;break;
+                case 20:READY_FIELD(doc.project.bpm);break;
+                case 21:READY_FIELD(pb.project);break;
+                }
+#undef READY_FIELD
+                assert(field && size<=sizeof(saved));memcpy(saved,field,size);memset(field,fill,size);
+                if(pt_paula_prepared_ready_owned(prepared))fprintf(stderr,"ready mutation unexpectedly accepted bits=%u case=%u\n",bits,mutation);
+                assert(!pt_paula_prepared_ready_owned(prepared));
+                if(mutation<=7 || mutation==21) {
+                    const uint8_t *data=(const uint8_t *)(uintptr_t)1;size_t bytes=77;
+                    assert(!pt_sampler_paula_prepared_location(&pb,4,e->lease,&data,&bytes));
+                    assert(data==(const uint8_t *)(uintptr_t)1 && bytes==77);
+                }
+                memcpy(field,saved,size);
+                assert(pt_paula_prepared_ready_owned(prepared) && pt_paula_prepared_ready_owned(prepared));
+                pins_after=0;for(i=0;i<PT_CACHE_SLOTS;++i)pins_after+=pb.cache.entry[i].pins;
+                assert(pins_after==pins_before && d.calls==calls && output_count==outputs && fast_calls==allocs && f->writes==writes);
+            }
+            pt_paula_cancel(prepared);assert(pv.voice[0].held && d.calls==calls);
+            free(prepared);assert(pt_mixed_owner_current(owner)==PT_MIXED_OWNER_OK);goto close;
+        }
         if(mode==67) {
             struct pt_voice voice;struct pt_render_action action[5];unsigned iteration;
             assert(pt_voice_init(&voice,&doc.project.samples[0].pcm,0,2048,PT_VOICE_ONCE,0,0,((uint64_t)8000<<32)/48000,0)==PT_PCM_OK);
@@ -766,7 +830,8 @@ static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wave
     for(bits=8;bits<=24;bits+=8)for(mode=58;mode<60;++mode)owner_fixture(bits,mode);
     for(bits=8;bits<=24;bits+=8)for(mode=65;mode<67;++mode)owner_fixture(bits,mode);
     for(bits=8;bits<=24;bits+=8)owner_fixture(bits,67);
-    puts("MIXED OWNER PASS:15 native retirement8/16/24 scenarios,6component/6running/3cancel-reuse, manual source/current/next/prefetch/complete public calls, bounded preparation, allocation/upload-free commit/next, global action order, resource cleanup; injected voices, no timed playback acceptance");
+    for(bits=8;bits<=24;bits+=8)owner_fixture(bits,68);
+    puts("MIXED OWNER PASS:18 native retirement8/16/24 scenarios,6component/6running/3cancel-reuse/3ready-safety (22mutations each), manual source/current/next/prefetch/complete public calls, bounded preparation, allocation/upload-free commit/next, global action order, resource cleanup; injected voices, no timed playback acceptance");
 #elif defined(PT_TEST_MIXED_NATIVE_STARTUP)
     for(bits=8;bits<=24;bits+=8)for(mode=58;mode<60;++mode)owner_fixture(bits,mode);
     puts("MIXED OWNER PASS:6 native startup-cost8/16/24 scenarios, fully prepared2/16voice startup, allocation/upload-free exact commit, global action order, resource cleanup; injected logical time/voices, no audio/timing acceptance");
@@ -783,8 +848,8 @@ static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wave
     puts("MIXED OWNER PASS:21 native clock-binding-only8/16/24 scenarios, fractional counter conversion, absolute tempo boundaries, reader/frequency/regression/overflow/skipped-frame refusal and retained-reader cleanup; injected counters only");
 #else
     for(bits=8;bits<=24;bits+=8)for(mode=0;mode<56;++mode)owner_fixture(bits,mode);
-    for(bits=8;bits<=24;bits+=8)for(mode=58;mode<68;++mode)owner_fixture(bits,mode);
-    puts("MIXED OWNER PASS: full198 host scenarios, master/cache/staging/commit/sequence/deadline/schedule ownership; no native clock");
+    for(bits=8;bits<=24;bits+=8)for(mode=58;mode<69;++mode)owner_fixture(bits,mode);
+    puts("MIXED OWNER PASS: full201 host scenarios, master/cache/staging/commit/sequence/deadline/schedule ownership; no native clock");
 #endif
     return 0;}
 

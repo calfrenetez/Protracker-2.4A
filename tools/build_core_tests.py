@@ -190,6 +190,8 @@ def main():
     inputs['PTExecPaulaSongTest'] = ['tests/native_exec_paula_song_test.c',*inputs['PTPaulaSongTest'][1:]]
     inputs['PTEditorPaulaTest'] = ['tests/editor_paula_test.c','src/editor/editor_paula.c',*dict.fromkeys([*inputs['PTPaulaSongTest'][1:],*inputs['PTSongTest'][1:],'src/platform/sample_import.c','src/platform/raw_import.c','src/platform/mod_import.c','src/platform/pp20_import.c'])]
     inputs['PTExecEditorPaulaTest'] = ['tests/native_exec_editor_paula_test.c',*inputs['PTEditorPaulaTest'][1:]]
+    inputs['PTEditorMixedTest'] = ['tests/editor_mixed_test.c','src/editor/editor_mixed.c',*dict.fromkeys([*inputs['PTMixedOwnerTest'][1:],*inputs['PTEditorPaulaTest'][1:]])]
+    inputs['PTExecEditorMixedTest'] = ['tests/native_exec_editor_mixed_test.c',*inputs['PTEditorMixedTest'][1:]]
     inputs['PTCaptureTest'] = ['tests/capture_test.c','src/core/capture.c','src/editor/sampler_capture.c',*inputs['PTSamplerTest'][1:]]
     inputs['PTExecCaptureTest'] = ['tests/native_exec_capture_test.c',*inputs['PTCaptureTest'][1:]]
     inputs['PTCaptureSessionTest'] = ['tests/capture_session_test.c','src/core/capture_session.c',*inputs['PTCaptureTest'][1:]]

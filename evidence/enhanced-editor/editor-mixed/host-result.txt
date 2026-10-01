@@ -1,0 +1,2 @@
+1 October 2026
+Three related ASan/UBSan modules PASS29.806s: editor_mixed15, editor_paula3 precision lifetime sequences, mixed_owner240. Tests use indexed editor sources to preserve unrelated display work.

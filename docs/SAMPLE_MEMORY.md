@@ -3780,3 +3780,22 @@ independent locked guest checks pass; coordinated release acknowledged. Evidence
 but does not install editor PLAY/event-loop or production output/device/IRQ
 binding. Native cancellation is resource proof; actual wake timing, audio,
 pressure/endurance and physical/listening acceptance remain open.
+
+
+## Editor mixed-session lifetime binding
+
+The mixed session now attaches to the editor's veto-capable change barrier.
+Both idle engines must belong to its exact sampler/project. Preparation uses
+that sampler allocator; start adopts a caller-owned private pump only when its
+begin adopts resources, including clocked-begin failure. Binding service/signal
+APIs forward bounded transport work and the private pending mask. Stop/change/
+disposal/detach retain owner/pump/context whenever alarm, reader or counter close
+is unconfirmed; DONE also needs confirmed close. Detach precedes editor reinit/free.
+Existing guard ownership is preserved and navigation does not stop playback.
+
+Host15 new lifetime cases plus editor Paula and mixed240 regressions PASS;
+native15 injected timer/voice editor cases PASS, zero owned bytes and independent
+locked cleanup verified. Evidence: `evidence/enhanced-editor/editor-mixed`.
+This is an editor lifetime component, not installed native PLAY/event-loop or
+production output/IRQ/device wiring. Those, native timer integration, timing,
+audio, pressure/endurance and physical acceptance remain open.

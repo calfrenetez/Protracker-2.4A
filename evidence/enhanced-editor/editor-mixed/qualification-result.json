@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "seconds": 11.134336583025288,
+  "window_bound_seconds": 200,
+  "cases": [
+    {
+      "case": "editor-mixed",
+      "binary": "PTExecEditorMixedTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/editor-mixed-qualified-candidate/build/dev/render-files-1790839793751141000",
+      "sha256": "1c7b4e99b5e30d48a72b65ce1ecc2b2fb3435f7a1415565074b164238dec1946",
+      "independent_cleanup": true
+    }
+  ]
+}

@@ -10,11 +10,15 @@
 struct pt_native_editor_paula {
     struct pt_editor_paula binding;struct pt_native_paula_engine engine;
     struct pt_render_options options;unsigned active,begun,failed;
+    /* Optional enclosing owner's final cleanup, fixed before attach and kept
+     * alive/immutable through detach. No reader client survives song close. */
+    int (*release_tail)(void *);void *release_tail_context;
 };
 static inline int pt_native_editor_paula_release(void *context)
 {
     struct pt_native_editor_paula *n=context;
     if(!pt_native_paula_engine_close(&n->engine))return 0;
+    if(n->release_tail && n->release_tail(n->release_tail_context)!=1)return 0;
     n->active=n->begun=n->failed=0;n->options=(struct pt_render_options){0};return 1;
 }
 static inline int pt_native_editor_paula_attach(struct pt_native_editor_paula *n,struct pt_editor *e)

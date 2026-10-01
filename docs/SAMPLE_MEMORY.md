@@ -18,8 +18,16 @@ evidence remains failed. The corrected native fixture checks this refusal and
 separately tests silent16/24 prepared output. That distinct native fixture passed
 with zero owned Fast bytes, confirmed device cleanup and an independent locked
 DMA-off/path-absence check. See `evidence/enhanced-editor/native-prepared-paula/`.
-Classic segment/repeat playback, real-time timer/frontend integration and listening
-acceptance remain requirements; successful one-shot tests do not cover them.
+A native enclosing transport now owns private EClock/WAITECLOCK requests through
+an optional immutable final cleanup tail after song/device release. Pending timer
+abort retains the clock/context and editor barrier. Host exact-start, late refusal,
+partial-open, retained DMA and delayed timer cleanup checks pass; native pending
+cancellation and deliberately late-start refusal pass with18 Fast allocations
+ending at zero owned bytes and independent DMA-off/path cleanup. This qualifies
+lifetime/refusal only. The boundary alarm does not replace frequent bounded service
+of preparation and elapsed debt. Frontend PLAY/Wait wiring and a feasible periodic
+service/watchdog policy remain open, as do cadence/listening acceptance and classic
+segment/repeat playback. See `evidence/enhanced-editor/paula-native-transport/`.
 
 The sections below retain milestone history. Earlier statements such as “not yet
 wired” may be superseded by later sections; this table separates the present

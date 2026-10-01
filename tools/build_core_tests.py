@@ -191,6 +191,7 @@ def main():
     inputs['PTEditorPaulaTest'] = ['tests/editor_paula_test.c','src/editor/editor_paula.c',*dict.fromkeys([*inputs['PTPaulaSongTest'][1:],*inputs['PTSongTest'][1:],'src/platform/sample_import.c','src/platform/raw_import.c','src/platform/mod_import.c','src/platform/pp20_import.c'])]
     inputs['PTExecEditorPaulaTest'] = ['tests/native_exec_editor_paula_test.c',*inputs['PTEditorPaulaTest'][1:]]
     inputs['PTExecPreparedPaulaTest'] = ['tests/native_exec_prepared_paula_test.c',*inputs['PTEditorPaulaTest'][1:]]
+    inputs['PTExecPaulaTransportTest'] = ['tests/native_exec_paula_transport_test.c',*inputs['PTEditorPaulaTest'][1:]]
     inputs['PTEditorMixedTest'] = ['tests/editor_mixed_test.c','src/editor/editor_mixed.c',*dict.fromkeys([*inputs['PTMixedOwnerTest'][1:],*inputs['PTEditorPaulaTest'][1:]])]
     inputs['PTExecEditorMixedTest'] = ['tests/native_exec_editor_mixed_test.c',*inputs['PTEditorMixedTest'][1:]]
     inputs['PTExecPaulaReservationTest'] = ['tests/native_exec_paula_reservation_test.c']

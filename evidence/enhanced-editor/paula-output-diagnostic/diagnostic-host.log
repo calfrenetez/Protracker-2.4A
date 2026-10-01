@@ -1,0 +1,7 @@
+test_native_output_completion_and_storage_retention (test_paula_output.PaulaOutput.test_native_output_completion_and_storage_retention) ... PAULA OUTPUT HOST PASS: 21 ownership/command cases
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.704s
+
+OK

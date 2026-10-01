@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "seconds": 1.8164822090184316,
+  "window_bound_seconds": 200,
+  "cases": [
+    {
+      "case": "output-diagnostic",
+      "binary": "PTExecPaulaOutputDiagnostic",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-output-diagnostic-candidate/build/dev/render-files-1790843498564529000",
+      "sha256": "ccbe52f58f1ea283ae5abcd95b20c7910bcf3fd8fc1d856a869dfed3adcf0a6b",
+      "independent_cleanup": true
+    }
+  ]
+}

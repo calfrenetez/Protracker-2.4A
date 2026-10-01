@@ -3881,3 +3881,32 @@ physical operations. Do not claim native four-voice starts, controls, timing,
 audio/listening or production output acceptance. Next instrument refusal/state
 and resolve actual start semantics against synchronous API, preserving failure
 and using fresh exact-candidate coordination for any new diagnostic window.
+
+
+## Native Paula activation/control/closure — 1 October 2026
+
+Supersedes the immediate-start-message prototype requirement above. A single-slot
+native diagnostic observed DMA enabled/error0 with original start result0 and
+notification absent; the start message arrived one tick later. This diagnoses
+that run only; the earlier unlogged RC14 remains FAILED.
+
+Production start confirmation now requires the exclusively owned channel DMA
+stopped and DMA master enabled before BeginIO, followed by an error-free keyed
+asynchronous WRITE and read-only DMACONR channel/master enable observation.
+This proves DMA activation, not first audible sample or deadline accuracy.
+Late start messages remain owned through shutdown. Control requires a confirmed
+active WRITE; missing activation retains an uncertain reader and cannot silently
+upgrade later. Stop retains Chip data after IO completion if channel DMA remains
+enabled. Quiesce also requires all reserved channel DMA off. Idle/partial opens
+without an acquired reservation do not inspect or interfere with foreign DMA.
+No custom IRQ handler or DMA register writes.
+
+Host24 output ownership cases,12 reservation cases and routed voice regression
+PASS. Fresh exact-candidate native four silent starts, four PERVOL completions,
+confirmed stop and request/notification/FREE/LOCK/device/port closure PASS;
+Chip32 released only after DMAoff. Initial and independent subsequent locked
+DMAoff/running/pathabsence checks PASS; coordinated release acknowledged.
+Evidence: `evidence/enhanced-editor/paula-output-diagnostic` and
+`evidence/enhanced-editor/paula-device-output`. Existing failed evidence preserved.
+Native frontend private event-loop/output setup, AmiGUS native lowering, actual
+backend timing/audio/endurance and physical qualification remain requirements.

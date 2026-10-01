@@ -6,13 +6,15 @@
 #include "../editor/paula_voices.h"
 #include "../core/paula_render_voice.h"
 /* OS2+ private audio.device output, serialized owner thread. Zero-init once;
- * noncopyable. Eight fixed requests and two private ports, no IRQ/MMIO code.
+ * noncopyable. Eight fixed requests and two private ports, no custom IRQ/MMIO writes.
  * Caller supplies contiguous, immutable, valid Chip cache storage, held until
- * stop==1. Start==1 requires the device's actual write-start message, never just
- * submission. Missing immediate acknowledgement returns0 (uncertain): current
- * voice owner retains data and stops; there is no asynchronous success upgrade.
+ * stop==1. Start==1 requires an owned channel's stopped-to-enabled DMA
+ * transition with DMA master enabled and an error-free asynchronous WRITE.
+ * Start messages can arrive later and remain owned through shutdown. Missing
+ * activation returns0 (uncertain); no asynchronous success upgrade.
  * Control==1 requires command completion. Stop aborts once, polls completion and
- * consumes start notifications before releasing data. No unfinished WaitIO.
+ * consumes start notifications and proves channel DMA off before releasing data.
+ * No unfinished WaitIO.
  * Close voice/cache owner before closing this adapter; contexts outlive both.
  * quiesce proves reader closure but does not release channel reservation.
  * Capability clock uses OS2+ Exec's documented E-clock frequency, PAL/NTSC only;
@@ -22,9 +24,19 @@ struct pt_native_paula_output {
     struct MsgPort *starts;
     struct IOAudio *write[4],*control[4];
     unsigned held[4],pending[4],cancelling[4],notified[4],control_pending[4];
+    unsigned activated[4];
     unsigned ready,closing,failed;
     struct pt_paula_render_caps caps;
 };
+/* Read only. Tests substitute the register read; production never writes DMA. */
+static inline UWORD pt_native_paula_output_dma(void)
+{
+#ifdef PT_PAULA_DMA_READ
+    return PT_PAULA_DMA_READ();
+#else
+    return *(volatile UWORD *)0xdff002;
+#endif
+}
 static inline int pt_native_paula_output_notifications(struct pt_native_paula_output *o)
 {
     struct Message *m;unsigned n,i;
@@ -59,8 +71,8 @@ static inline int pt_native_paula_output_stop(void *context,unsigned slot)
     }
     if(o->control_pending[slot] && !pt_native_paula_output_completed(o->control[slot],&o->control_pending[slot]))done=0;
     if(!pt_native_paula_output_notifications(o))return -1;
-    if(!done)return 0;
-    o->held[slot]=o->cancelling[slot]=o->notified[slot]=0;
+    if(!done || (o->held[slot] && (pt_native_paula_output_dma()&(1U<<slot))))return 0;
+    o->held[slot]=o->cancelling[slot]=o->notified[slot]=o->activated[slot]=0;
     if(o->write[slot]){o->write[slot]->ioa_Data=0;o->write[slot]->ioa_Length=0;}
     return 1;
 }
@@ -69,7 +81,7 @@ static inline int pt_native_paula_output_quiesce(void *context)
     struct pt_native_paula_output *o=context;unsigned i;
     if(!o || o->failed || !pt_native_paula_output_notifications(o))return 0;
     for(i=0;i<4;++i)if(o->held[i] || o->pending[i] || o->control_pending[i])return 0;
-    return 1;
+    return !o->reservation.mask || !(pt_native_paula_output_dma()&o->reservation.mask);
 }
 static inline int pt_native_paula_output_close(struct pt_native_paula_output *o)
 {
@@ -123,11 +135,13 @@ static inline int pt_native_paula_output_valid(struct pt_native_paula_output *o,
     SysBase->LibNode.lib_Version>=36 && SysBase->ex_EClockFrequency==o->caps.clock_hz/5 && pt_native_paula_reservation_advance(&o->reservation)==1;}
 static inline int pt_native_paula_output_start(void *context,unsigned slot,const struct pt_paula_voice_plan *plan)
 {
-    struct pt_native_paula_output *o=context;struct IOAudio *a;uintptr_t p;size_t bytes;
+    struct pt_native_paula_output *o=context;struct IOAudio *a;uintptr_t p;size_t bytes;UWORD dma;
     if(slot>=4 || !plan || !pt_native_paula_output_valid(o,plan->period,plan->volume) ||
         o->held[slot] || o->pending[slot] || o->control_pending[slot] || !plan->data || !plan->words)return 0;
     p=(uintptr_t)plan->data;bytes=(size_t)plan->words*2;
     if((p&1) || p>UINTPTR_MAX-(bytes-1) || !(TypeOfMem((void *)p)&MEMF_CHIP) || !(TypeOfMem((void *)(p+bytes-1))&MEMF_CHIP))return 0;
+    dma=pt_native_paula_output_dma();
+    if(!(dma&0x200U) || (dma&(1U<<slot)))return 0;
     a=o->write[slot];a->ioa_Request.io_Unit=(struct Unit *)(uintptr_t)(1U<<slot);a->ioa_AllocKey=o->reservation.key;a->ioa_Data=(UBYTE *)plan->data;a->ioa_Length=(ULONG)bytes;
     a->ioa_Period=plan->period;a->ioa_Volume=plan->volume;a->ioa_Cycles=0;
     a->ioa_WriteMsg.mn_ReplyPort=o->starts;a->ioa_WriteMsg.mn_Length=sizeof(struct Message);
@@ -135,12 +149,16 @@ static inline int pt_native_paula_output_start(void *context,unsigned slot,const
     o->held[slot]=o->pending[slot]=1;o->cancelling[slot]=o->notified[slot]=0;
     BeginIO((struct IORequest *)a);
     if(!pt_native_paula_output_notifications(o))return 0;
-    return o->notified[slot] && !a->ioa_Request.io_Error && (uintptr_t)a->ioa_Request.io_Unit==(1U<<slot)?1:0;
+    dma=pt_native_paula_output_dma();
+    o->activated[slot]=!a->ioa_Request.io_Error && !(a->ioa_Request.io_Flags&IOF_QUICK) &&
+        (uintptr_t)a->ioa_Request.io_Unit==(1U<<slot) && (dma&(0x200U|(1U<<slot)))==(0x200U|(1U<<slot));
+    return o->activated[slot]?1:0;
 }
 static inline int pt_native_paula_output_control(void *context,unsigned slot,uint16_t period,uint8_t volume)
 {
     struct pt_native_paula_output *o=context;struct IOAudio *a;
-    if(slot>=4 || !pt_native_paula_output_valid(o,period,volume) || !o->held[slot] || o->cancelling[slot] || !o->notified[slot] || o->control_pending[slot])return 0;
+    if(slot>=4 || !pt_native_paula_output_valid(o,period,volume) || !o->held[slot] || o->cancelling[slot] || !o->activated[slot] || o->control_pending[slot])return 0;
+    if((pt_native_paula_output_dma()&(0x200U|(1U<<slot)))!=(0x200U|(1U<<slot)))return 0;
     a=o->control[slot];a->ioa_Request.io_Unit=(struct Unit *)(uintptr_t)(1U<<slot);a->ioa_AllocKey=o->reservation.key;a->ioa_Period=period;a->ioa_Volume=volume;
     a->ioa_Request.io_Command=ADCMD_PERVOL;a->ioa_Request.io_Flags=IOF_QUICK;a->ioa_Request.io_Error=0;
     o->control_pending[slot]=1;BeginIO((struct IORequest *)a);

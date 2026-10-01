@@ -1,0 +1,5 @@
+PAULA DIAG validation ready=1 failed=0 closing=0 clock=3546895 eclock=709379 minimum=124 maximum=65535 chip_start=1795 chip_end=1795 aligned=1 mask=15 key=6
+PAULA DIAG immediate result=0 notified=0 held=1 pending=1 error=0 flags=144 unit=1 key=6 request_done=0 dma=1
+PAULA DIAG one_tick_notification_drain=1
+PAULA DIAG after_tick result=0 notified=1 held=1 pending=1 error=0 flags=144 unit=1 key=6 request_done=0 dma=1
+PAULA OUTPUT DIAGNOSTIC PASS: original_start_result=0; confirmed reader/WRITE/control/FREE/LOCK close, all requests/ports/device closed, Chip32 released; no playback acceptance

@@ -22,15 +22,20 @@ after moving owned setup before the actualclock read. OriginalTask/priority0/
 signals restored, timers/vector/IO closed,2Fastallocationszero each; independent
 locked running/all4DMAoff/exactpathabsencePASS and explicit RELEASE each.
 Neither result isolates pure IRQ latency or qualifies playback/physical timing.
-A new short native clock/count/start diagnostic has offset/disassembly/build and
-host checks PASS (8tests,9owner cases), but its12 pre-acquisition assembler checks
-and16 IRQ observations remain NOT RUN: first sharedlock refused before Guest
-construction/staging. Host process inspection identifies an active AmiGUS Safari
-installation reservation; do not bypass/clear it or probe physical hardware.
-Previous prelaunch pause/refusal evidence remains preserved. No targetshift,
-calibrated compensation, tolerance or productionpriority/output change.
-Evidence: `../evidence/enhanced-editor/cia-timer-native/`, `cia-absolute-arm/`,
-`cia-native-arm/` and the earlier `cia-timer-feasibility/`.
+The short native clock/count/start diagnostic has now run once:12 actual assembler
+arithmetic checks PASS,16/16 late44..47ticks, programming36..37ticks. Strict timing
+FAILED. Initial independent filesystem cleanup FAILED; exact empty-directory
+recovery and separate subsequent verification PASS, explicit release acknowledged.
+The older installation reservation is resolved; no reset/retry/tolerance change.
+Evidence: `../evidence/enhanced-editor/cia-critical-native/` and prior timer runs.
+
+The user now authorizes physical A1200/AmiGUS testing. Current exact-byte native
+discovery passed separately on shared030, then the real A1200: two probes each
+library1/cards1/pcm_cards1/closed1. Qualified bridge identity, known finished
+execution, exact RAM cleanup and separate absence check PASS; DevBench returned
+to emulator, window released. This qualifies card/PCM discovery only; no card
+reservation/MMIO/IRQ/cache transfer/audio/listening acceptance. See
+`../evidence/enhanced-editor/amigus-physical-discovery/`.
 
 Latest first-start qualification is FAILED: even with own-task diagnostic
 priority5, CORE observed the first musical target about1.015ms late and the
@@ -38,7 +43,7 @@ unchanged exact gate refused before output. Prepared32Chipbytes were verified
 zero before the epoch; all resource/priority/signal restoration and independent
 cleanup pass. Further timer-only feasibility remains authorized; see
 `NATIVE_TIMING_DECISION.md`. No timing tolerance or production priority policy
-was installed. Physical OFF/deferred/unprobed.
+was installed. Physical timing and playback remain untested.
 
 Earlier bounded native result: private task-owned Wait cancellation passes before and
 during actual Wait. Ambient-priority sustained service remains FAILED, including
@@ -4393,3 +4398,11 @@ emulator qualification precedes RAM-only physical discovery. Opening the library
 may initialize the driver; no firmware/installation/network changes are planned.
 This is capability preparation, not cache/reservation/IRQ/playback acceptance.
 Evidence: `../evidence/enhanced-editor/amigus-physical-preparation/`.
+
+
+AmiGUS ownership diagnostic0.2 now confirms the final free state using the verified
+conditional RC6 NULL-owner probe and retains live library/card/Task/owner storage
+on busy/error. Different installed-driver checksum/runtime contract refuses.
+Host20 failure scenarios and native build PASS; native/physical reservation gate
+still pending. No production sample-cache/IRQ/output contract was changed by this
+diagnostic preparation. See `../evidence/enhanced-editor/amigus-ownership-release/`.

@@ -39,7 +39,7 @@ def runtime_inputs(cc):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--cc', default=os.environ.get('AMIGA_CC', 'm68k-amigaos-gcc'))
-    p.add_argument('--tool', choices=['AmiGUSTest', 'PTModCheck'], default='AmiGUSTest')
+    p.add_argument('--tool', choices=['AmiGUSTest', 'PTModCheck', 'PTDiagOwnershipTest'], default='AmiGUSTest')
     args = p.parse_args()
     cc = shutil.which(args.cc)
     if not cc:
@@ -52,6 +52,10 @@ def main():
         flags[-1] = '-Isrc/core'
         inputs = ['tools/modcheck.c', 'src/core/mod_inspect.c']
         headers = ['src/core/mod_inspect.h']
+    if args.tool == 'PTDiagOwnershipTest':
+        flags[-1] = '-Isrc/diagnostic'
+        inputs = ['tests/ownership_test.c', 'src/diagnostic/ownership.c']
+        headers = ['src/diagnostic/ownership.h']
     out = ROOT / 'build/diagnostic'
     out.mkdir(parents=True, exist_ok=True)
     sdk_digest = None
@@ -64,13 +68,14 @@ def main():
     result = subprocess.run([cc, *flags, *inputs, '-o', str(out / args.tool)],
                             cwd=ROOT, text=True, stdout=subprocess.PIPE,
                             stderr=subprocess.STDOUT)
-    stem = 'build' if args.tool == 'AmiGUSTest' else 'modcheck-build'
+    stem = 'build' if args.tool == 'AmiGUSTest' else 'ownership-fixture-build' if args.tool == 'PTDiagOwnershipTest' else 'modcheck-build'
     (out / (stem + '.log')).write_text(result.stdout)
     print(result.stdout, end='')
     result.check_returncode()
     report = {
         'compiler': subprocess.check_output([cc, '--version'], text=True).splitlines()[0],
         'compiler_sha256': digest(Path(cc)),
+        'builder_sha256': digest(Path(__file__)),
         'runtime_inputs': runtime_inputs(cc),
         'flags': flags,
         'inputs': {name: digest(ROOT / name) for name in inputs + headers},

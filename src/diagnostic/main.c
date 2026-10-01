@@ -1,7 +1,8 @@
-/* AmiGUSTest 0.1: discovery and exclusive-ownership checks only.
+/* AmiGUSTest 0.2: discovery and exclusive-ownership checks only.
  * Does not program PCM/wavetable/codec registers or install interrupts. */
 #include <exec/libraries.h>
 #include <proto/exec.h>
+#include <proto/dos.h>
 #include <stdio.h>
 #include <string.h>
 #include <stddef.h>
@@ -30,7 +31,7 @@ int main(int argc, char **argv)
         puts("usage: AmiGUSTest [--discover|--ownership]");
         return PT_FAIL;
     }
-    printf("AMIGUSTEST schema=1 version=0.1 mode=%s\n",
+    printf("AMIGUSTEST schema=1 version=0.2 mode=%s\n",
            ownership ? "ownership" : "discover");
     puts("SCOPE audio=NOT_TESTED interrupts=NOT_TESTED firmware_write=NO");
     AmiGUS_Base = OpenLibrary("amigus.library", 1);
@@ -40,6 +41,12 @@ int main(int argc, char **argv)
     }
     printf("LIBRARY version=%u revision=%u\n", (unsigned)AmiGUS_Base->lib_Version,
            (unsigned)AmiGUS_Base->lib_Revision);
+    if (ownership && (AmiGUS_Base->lib_Version != 1 || AmiGUS_Base->lib_Revision != 1)) {
+        reason = "unsupported-ownership-contract";
+        CloseLibrary(AmiGUS_Base);
+        AmiGUS_Base = NULL;
+        goto summary;
+    }
     for (;;) {
         if (cancelled(NULL)) { result = PT_FAIL; reason = "cancelled"; break; }
         card = PT_FindCard(card);
@@ -50,8 +57,8 @@ int main(int argc, char **argv)
         cards[count++] = card;
         printf("CARD index=%u type=0x%04x hardware=0x%08lx firmware=0x%08lx "
                "pcm=%u wavetable=%u codec=%u date=%u-%02u-%02uT%02u:%02u\n",
-               count - 1, (unsigned)card->agus_TypeId, card->agus_HardwareRev,
-               card->agus_FirmwareRev, card->agus_PcmBase != NULL,
+               count - 1, (unsigned)card->agus_TypeId, (unsigned long)card->agus_HardwareRev,
+               (unsigned long)card->agus_FirmwareRev, card->agus_PcmBase != NULL,
                card->agus_WavetableBase != NULL, card->agus_CodecBase != NULL,
                (unsigned)card->agus_Year, (unsigned)card->agus_Month,
                (unsigned)card->agus_Day, (unsigned)card->agus_Hour,
@@ -72,9 +79,15 @@ int main(int argc, char **argv)
                 continue;
             }
             check = pt_check_ownership(&api, i, &owner_a, &owner_b);
-            printf("CHECK card=%u block=%u result=%s stage=%s driver=0x%08lx\n",
+            printf("CHECK card=%u block=%u result=%s stage=%s driver=0x%08lx release=0x%08lx confirmed=%u retained=%u\n",
                    count - 1, i, check.result == PT_PASS ? "PASS" :
-                   check.result == PT_SKIP ? "SKIP" : "FAIL", check.stage, check.driver_code);
+                   check.result == PT_SKIP ? "SKIP" : "FAIL", check.stage, check.driver_code,
+                   check.release_code, (unsigned)check.release_confirmed, (unsigned)check.retained);
+            if (check.retained) {
+                puts("OWNERSHIP HOLD: release not confirmed; library/card/Task/owner addresses retained; no retry or exit");
+                fflush(stdout);
+                for (;;) Delay(50);
+            }
             if (check.result == PT_PASS) ++passed;
             else if (check.result == PT_SKIP) ++skipped;
             else ++failed;

@@ -96,6 +96,7 @@ def main():
     group.add_argument('--sample-raw',action='store_true',help='Run streamed master RAW export with native Fast allocator')
     group.add_argument('--sample-wav',action='store_true',help='Run streamed master WAV export with native Fast allocator')
     group.add_argument('--amigus-discovery',action='store_true',help='Discovery-only native library probe; no reservation or MMIO')
+    group.add_argument('--amigus-diagnostic',action='store_true',help='Native mock ownership failures and real diagnostic missing-library modes; emulator only')
     group.add_argument('--studio-memory',choices=['native-abi','mixer','sampler','song','editor','queued','consumer','fifo','session','register-session','reserved-session','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence'],help='Run one production-allocator Studio fixture')
     group.add_argument('--input-memory',choices=['import','recent','exec-import','exec-recent'],help='Run one import or recent-file memory fixture')
     group.add_argument('--exec-memory',choices=['bounce','stems','failures','save'],help='Run one native Exec-backed memory fixture')
@@ -123,7 +124,7 @@ def main():
     with (INFRA/'runtime/test.lock').open('a') as lock:
         acquire_shared_lock(lock,out,result)
         guest=Guest(INFRA,out)
-        if args.cia_timing or args.paula_memory in ('output','output-diagnostic','engine','prepared-output','transport','wait','wait-latency','wait-priority','paula-wait-priority','paula-boundary'):
+        if args.cia_timing or args.amigus_diagnostic or args.paula_memory in ('output','output-diagnostic','engine','prepared-output','transport','wait','wait-latency','wait-priority','paula-wait-priority','paula-boundary'):
             audio=guest.command('GET_AUDIO_STATE')
             (out/'audio-before-staging.json').write_text(json.dumps({'audio':audio},indent=2)+'\n')
             if not all('ch%d_dma=0'%i in audio.split('\t') for i in range(4)):
@@ -278,6 +279,12 @@ def main():
         if args.amigus_discovery:
             cases=[('amigus-discovery','PTAmiGusDiscovery','AMIGUS DISCOVERY PASS:')]
             result['scope']='shared030 discovery-only native amigus.library probe; no reservation or MMIO'
+        if args.amigus_diagnostic:
+            cases=[('ownership-fixture','PTDiagOwnershipTest','ownership: 20 scenarios passed'),
+                   ('native-abi','PTAmiGusNativeAbiTest','AMIGUS NATIVE ABI PASS:'),
+                   ('amigus-discover','AmiGUSTest','reason=library-unavailable'),
+                   ('amigus-ownership','AmiGUSTest','reason=library-unavailable')]
+            result['scope']='shared030 mock ownership/final-release failure checks and exact real diagnostic unavailable-library modes; no physical card reservation/MMIO/audio'
         if args.invert_cli:
             cases=[('invert-cli','PT24GRender','WAV frames=')]
             result['scope']='shared030 bounded EFx CLI exact host WAV; no physical/audio acceptance'
@@ -299,11 +306,16 @@ def main():
         try:
             commands=['FailAt 21','Stack 65536']
             for name,binary,marker in cases:
-                sub=run/name;sub.mkdir();shutil.copyfile(args.candidate if args.candidate else ROOT/'build/dev'/binary,sub/binary)
+                sub=run/name;sub.mkdir();shutil.copyfile(args.candidate if args.candidate else ROOT/('build/diagnostic' if args.amigus_diagnostic and binary!='PTAmiGusNativeAbiTest' else 'build/dev')/binary,sub/binary)
                 result[binary+'_sha256']=hashlib.sha256((sub/binary).read_bytes()).hexdigest()
                 if args.cia_timing and result[binary+'_sha256']!=cia_manifest['binary_sha256']:
                     raise RuntimeError('Staged CIA binary differs from coordinated manifest')
                 commands+=['CD '+guest.device+run.name+'/'+name,binary+' '+guest.device+run.name+'/'+name+('/sample.input' if args.sample_dispatch else '/donor.mod' if args.source_memory else '/module.mod' if args.mod_import else '/sample.input' if args.sample_import else '/master.mod' if args.mod_stream else '/master.ptg' if args.project_stream else '/sample.iff' if args.sample_svx else '/sample.raw' if args.sample_raw else '/sample.wav' if args.sample_wav else '/recent' if args.input_memory in ('recent','exec-recent') else '')+' >test.log','Echo $RC >test.rc']
+            if args.amigus_diagnostic:
+                commands=['FailAt 21','Stack 65536']
+                for name,binary,marker in cases:
+                    option=' --discover' if name=='amigus-discover' else ' --ownership' if name=='amigus-ownership' else ''
+                    commands+=['CD '+guest.device+run.name+'/'+name,binary+option+' >test.log','Echo $RC >test.rc']
             if args.recovery_file:
                 directory=guest.device+run.name+'/recovery'
                 shutil.copyfile(ROOT/'tests/fixtures/project-v1/mixed.ptg',run/'recovery'/'source.ptg')
@@ -364,7 +376,7 @@ def main():
                 if not all('ch%d_dma=0'%i in state.split('\t') for i in range(4)):
                     raise RuntimeError('Cleanup probe left active or unknown DMA; functional test not started')
             require_running_guest(guest,out,'before-launch')
-            if args.cia_timing or args.paula_memory in ('output','output-diagnostic','engine','prepared-output','transport','wait','wait-latency','wait-priority','paula-wait-priority','paula-boundary'):
+            if args.cia_timing or args.amigus_diagnostic or args.paula_memory in ('output','output-diagnostic','engine','prepared-output','transport','wait','wait-latency','wait-priority','paula-wait-priority','paula-boundary'):
                 audio=guest.command('GET_AUDIO_STATE')
                 (out/'audio-before-launch.json').write_text(json.dumps({'audio':audio},indent=2)+'\n')
                 if not all('ch%d_dma=0'%i in audio.split('\t') for i in range(4)):
@@ -380,7 +392,7 @@ def main():
             for name,binary,marker in cases:
                 log=(run/name/'test.log').read_text();(out/(name+'.log')).write_text(log)
                 result[name+'_returncode']=(run/name/'test.rc').read_text().strip()
-                assert result[name+'_returncode']=='0' and marker in log,log
+                assert result[name+'_returncode']==('5' if args.amigus_diagnostic and binary=='AmiGUSTest' else '0') and marker in log,log
                 if args.capture_memory or args.capture_session_memory or args.amigus_capture_memory or args.editor_capture_memory or args.recovery_file or args.invert_editor or args.invert_sampler or args.invert_session or args.invert_bounce or args.sample_dispatch or args.source_memory or args.mod_import or args.sample_import or args.mod_stream or args.project_stream or args.sample_svx or args.sample_raw or args.sample_wav or args.studio_memory or args.exec_memory or args.input_memory in ('exec-import','exec-recent'):assert 'EXEC MEMORY PASS:' in log,log
             if args.mod_import or args.sample_import or args.mod_stream or args.project_stream or args.sample_svx or args.sample_wav or args.sample_raw:
                 directory,binary=('mod-import','PTExecModImportTest') if args.mod_import else ('svx-import','PTExecSvxImportTest') if args.sample_import=='svx' else ('raw-import','PTExecRawImportTest') if args.sample_import=='raw' else ('wav-import','PTExecWavImportTest') if args.sample_import=='wav' else ('mod-stream','PTExecModStreamTest') if args.mod_stream else ('project-stream','PTExecProjectStreamTest') if args.project_stream else ('sample-svx','PTExecSampleSvxFileTest') if args.sample_svx else ('sample-raw','PTExecSampleRawFileTest') if args.sample_raw else ('sample-wav','PTExecSampleFileTest')
@@ -448,5 +460,5 @@ def main():
             result['passed']=True
         finally:
             finish_run(guest,run,out,result,finished,
-                (args.cia_timing or args.paula_memory or args.capture_memory or args.capture_session_memory or args.amigus_capture_memory or args.editor_capture_memory or args.recovery_file or args.studio_memory in ('native-abi','editor','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence') or args.invert_editor or args.invert_sampler or args.invert_session or args.source_memory or args.sample_dispatch or args.invert_render or args.invert_bounce or args.invert_cli or args.invert_stem_cli))
+                (args.cia_timing or args.amigus_diagnostic or args.paula_memory or args.capture_memory or args.capture_session_memory or args.amigus_capture_memory or args.editor_capture_memory or args.recovery_file or args.studio_memory in ('native-abi','editor','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence') or args.invert_editor or args.invert_sampler or args.invert_session or args.source_memory or args.sample_dispatch or args.invert_render or args.invert_bounce or args.invert_cli or args.invert_stem_cli))
 if __name__=='__main__':main()

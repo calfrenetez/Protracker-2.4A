@@ -46,6 +46,15 @@ class PhysicalDiscoveryGuard(unittest.TestCase):
                     independent.write_text(json.dumps(altered));emulator.write_text(json.dumps(altered_native))
                     with self.assertRaises(RuntimeError):runner.qualification(binary,build,emulator,independent)
                     binary.write_bytes(b'checked bytes')
+            independent.write_text(json.dumps(cleanup))
+            own_native=dict(AmiGUSTest_sha256=runner.digest(binary),passed=True,run_files_cleaned=True,
+                **{'amigus-discover_returncode':'5','amigus-ownership_returncode':'5','ownership-fixture_returncode':'0','native-abi_returncode':'0'})
+            emulator.write_text(json.dumps(own_native))
+            self.assertEqual(runner.qualification(binary,build,emulator,independent,True),runner.digest(binary))
+            for field,value in (('passed',False),('AmiGUSTest_sha256','different'),('amigus-ownership_returncode','20'),('ownership-fixture_returncode','20')):
+                with self.subTest(ownership_field=field):
+                    altered=dict(own_native);altered[field]=value;emulator.write_text(json.dumps(altered))
+                    with self.assertRaises(RuntimeError):runner.qualification(binary,build,emulator,independent,True)
 
     def test_uncertain_script_never_deletes_or_switches_target(self):
         switches=[]; calls=[]
@@ -74,7 +83,7 @@ class PhysicalDiscoveryGuard(unittest.TestCase):
             'shared_guest':SimpleNamespace(Guest=Guest),'mcp':SimpleNamespace(ClientSession=Session),
             'mcp.client.streamable_http':SimpleNamespace(streamable_http_client=transport)}
         with tempfile.TemporaryDirectory() as td,patch.dict(sys.modules,modules):
-            out=Path(td);binary=out/'probe';binary.write_bytes(b'fixture');result={'passed':False}
+            out=Path(td);binary=out/'PTAmiGusDiscovery';binary.write_bytes(b'fixture');result={'passed':False}
             original_path=list(sys.path)
             try:
                 with self.assertRaisesRegex(RuntimeError,'still running'):asyncio.run(runner.run(out,binary,result))

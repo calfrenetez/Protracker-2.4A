@@ -7,6 +7,7 @@ struct mock {
     void *owner;
     unsigned int reserves, frees, checks;
     unsigned int cancel_at, fail_at;
+    unsigned int sticky_at;
     int overwrite, wrong_free, sticky_free;
 };
 static unsigned long reserve(void *ctx, unsigned long flag, void *owner)
@@ -23,7 +24,7 @@ static void release(void *ctx, unsigned long flag, void *owner)
     struct mock *m = ctx;
     (void)flag;
     ++m->frees;
-    if (!m->sticky_free && (m->owner == owner || m->wrong_free)) m->owner = NULL;
+    if (!m->sticky_free && m->frees != m->sticky_at && (m->owner == owner || m->wrong_free)) m->owner = NULL;
 }
 static int cancelled(void *ctx)
 {
@@ -40,15 +41,17 @@ int main(void)
     for (i = 1; i <= 2; ++i) {
         memset(&m, 0, sizeof(m));
         r = pt_check_ownership(&api, i, &a, &b);
-        assert(r.result == PT_PASS && !m.owner && m.reserves == 5);
+        assert(r.result == PT_PASS && !m.owner && m.reserves == 6 &&
+               r.release_confirmed && !r.retained);
     }
     memset(&m, 0, sizeof(m)); m.owner = &foreign;
     r = pt_check_ownership(&api, 1, &a, &b);
     assert(r.result == PT_SKIP && m.owner == &foreign && !m.frees);
-    for (i = 1; i <= 5; ++i) {
+    for (i = 1; i <= 6; ++i) {
         memset(&m, 0, sizeof(m)); m.fail_at = i;
         r = pt_check_ownership(&api, 2, &a, &b);
         assert(r.result == PT_FAIL && !m.owner);
+        assert(r.retained == (i == 6));
     }
     for (i = 1; i <= 3; ++i) {
         memset(&m, 0, sizeof(m)); m.cancel_at = i;
@@ -64,12 +67,18 @@ int main(void)
     memset(&m, 0, sizeof(m)); m.sticky_free = 1;
     r = pt_check_ownership(&api, 1, &a, &b);
     assert(r.result == PT_FAIL && !strcmp(r.stage, "reacquire-b"));
+    assert(r.retained && !r.release_confirmed && m.owner == &a);
+    /* Only the final release fails: earlier cross-owner checks all pass. */
+    memset(&m, 0, sizeof(m)); m.sticky_at = 5;
+    r = pt_check_ownership(&api, 1, &a, &b);
+    assert(r.result == PT_FAIL && !strcmp(r.stage, "final-release"));
+    assert(r.retained && !r.release_confirmed && r.release_code == 0x101 && m.owner == &a);
     memset(&m, 0, sizeof(m));
     assert(pt_check_ownership(&api, 3, &a, &b).result == PT_FAIL);
     assert(pt_check_ownership(&api, 1, &a, &a).result == PT_FAIL);
     assert(pt_check_ownership(&api, 1, NULL, &b).result == PT_FAIL);
     assert(pt_check_ownership(NULL, 1, &a, &b).result == PT_FAIL);
     assert(m.reserves == 0 && m.frees == 0);
-    puts("ownership: 18 scenarios passed (mock driver, not hardware)");
+    puts("ownership: 20 scenarios passed (mock driver, not hardware)");
     return 0;
 }

@@ -1,0 +1,84 @@
+{
+  "scope": "RC6 NULL-owner reservation probe for free state; public source reviewed, installed file must match distribution, runtime library1.1 required",
+  "release": "rc-6",
+  "release_commit": "f17648d63346bab932bca5b48da922a78289f7dc",
+  "public_source": "https://github.com/necronomfive/AmiGUS-pub/blob/f17648d63346bab932bca5b48da922a78289f7dc/Software/Drivers/Base/src/amigus_base.c",
+  "source_sha256": "6b562ffb6b3a73832e65efd6c43582750e7ab148c521d229c5153e0b10803f04",
+  "sdk_snapshot_commit": "d8c9a0429f41cd5f3dbadae34ef438e45c9c3718",
+  "same_public_source": true,
+  "distribution_sha256": "8a18f5777c1e986adfc397c41ce59d2fbc1de233b81a5562045dfb8126238c0b",
+  "libraries": [
+    {
+      "path": "/Users/james1/Documents/Codex/2026-10-01/pleas/work/amigus-package/AmiGUS/Base/amigus.library-000-FILE_LOG",
+      "sha256": "e59aef616dae200b2485c2c69a277b722af3dfd3127ff4e26e8e152aee8d8f02",
+      "crc32": "5920C3E2",
+      "bytes": 9280
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-10-01/pleas/work/amigus-package/AmiGUS/Base/amigus.library-000-MEM_LOG",
+      "sha256": "f9e45364b51f36fd4591e583c8f320facc546c1f57f9dd64aaa02edca019e062",
+      "crc32": "89E9B45A",
+      "bytes": 10412
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-10-01/pleas/work/amigus-package/AmiGUS/Base/amigus.library-000-NO_LOG",
+      "sha256": "13e8a543145df0bbb79466f8a5d9490bd910dab5b9e9a07af2acf60797053e6c",
+      "crc32": "893A5718",
+      "bytes": 4776
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-10-01/pleas/work/amigus-package/AmiGUS/Base/amigus.library-000-SER_LOG",
+      "sha256": "dcdf9f91284dbd324d4f55487c03919abd216a4622dd872b1b58609bacb946e5",
+      "crc32": "81D1DE3D",
+      "bytes": 8508
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-10-01/pleas/work/amigus-package/AmiGUS/Base/amigus.library-020-FILE_LOG",
+      "sha256": "3b89195402c0406cd5183b83620efc5839222a4c159f80950f1117df2c6efac7",
+      "crc32": "DAA693DF",
+      "bytes": 9280
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-10-01/pleas/work/amigus-package/AmiGUS/Base/amigus.library-020-MEM_LOG",
+      "sha256": "dce21758d876087dd946076b34e1036722cfa707c60ae915023327651c2de423",
+      "crc32": "319DF1B0",
+      "bytes": 10408
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-10-01/pleas/work/amigus-package/AmiGUS/Base/amigus.library-020-NO_LOG",
+      "sha256": "56551f67ca20f0cc9b61177bb59ff8f0a1a9c558ad1498324367c1aaa4ed8596",
+      "crc32": "8B0D4B22",
+      "bytes": 4772
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-10-01/pleas/work/amigus-package/AmiGUS/Base/amigus.library-020-SER_LOG",
+      "sha256": "0b24eb01cf5810eb38555181f44ed90ca061f2f1cdec01ed34a5fb9a5436a92d",
+      "crc32": "07DE5722",
+      "bytes": 8508
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-10-01/pleas/work/amigus-package/AmiGUS/Base/amigus.library-040-FILE_LOG",
+      "sha256": "05f234f83a3abccd99adb8ed2a46b051f4d5108e7aa657dfe8b46a0bc352c428",
+      "crc32": "647C5E20",
+      "bytes": 9272
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-10-01/pleas/work/amigus-package/AmiGUS/Base/amigus.library-040-MEM_LOG",
+      "sha256": "69d25a2fd3eba2d4c427c5bfe8f7985e2a9cbdcd06e01d42c9490f945262a2f5",
+      "crc32": "D731F0CB",
+      "bytes": 10404
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-10-01/pleas/work/amigus-package/AmiGUS/Base/amigus.library-040-NO_LOG",
+      "sha256": "5ace7891ba8f5b24a09248dfa755b30eff2fdcc0cb1903844c4e347942274f08",
+      "crc32": "B14CA3EF",
+      "bytes": 4768
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-10-01/pleas/work/amigus-package/AmiGUS/Base/amigus.library-040-SER_LOG",
+      "sha256": "8b00fb593bfc79cf1bcf693cde48ca08798407a1ec3b7d5c76390d4b5895c3e4",
+      "crc32": "682C70AE",
+      "bytes": 8504
+    }
+  ]
+}

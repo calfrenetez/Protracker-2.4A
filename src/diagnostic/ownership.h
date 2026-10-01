@@ -13,10 +13,16 @@ struct pt_ownership_result {
     enum pt_result result;
     const char *stage;
     unsigned long driver_code;
+    unsigned long release_code;
+    int release_confirmed;
+    int retained;
 };
 
 /* One functional block per call: upstream multi-block reservations can
- * partially succeed. Owners must be distinct, non-null, stable addresses. */
+ * partially succeed. Owners must be distinct, non-null, stable addresses.
+ * The pinned driver permits a NULL-owner reserve as an unowned-state probe:
+ * it returns busy for any non-NULL owner and only stores NULL when already free.
+ * A failed probe requires retaining the library/card/owner addresses. */
 struct pt_ownership_result pt_check_ownership(
     const struct pt_ownership_api *, unsigned long, void *, void *);
 #endif

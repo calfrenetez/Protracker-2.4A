@@ -134,6 +134,9 @@ int main(void)
             pt_abi_result=0xf1234567UL;
             assert(api[i].reserve(api[i].context,&card,which,&owner_token)==pt_abi_result);check(2,&native[i],&card,resource,&owner_token);
             api[i].release(api[i].context,&card,which,&owner_token);check(3,&native[i],&card,resource,&owner_token);
+            /* The diagnostic's final unowned-state probe must pass literal NULL
+             * in the published d1 owner register, without changing base/card. */
+            assert(api[i].reserve(api[i].context,&card,which,NULL)==pt_abi_result);check(2,&native[i],&card,resource,NULL);
             owner_api.open=private_open;owner_api.close=private_close;pt_abi_next=(ULONG)&card;pt_abi_result=0;
             assert(pt_amigus_reservation_open_resource(&r,&owner_api,0,which)==PT_AMIGUS_RESERVED);check(2,&native[i],&card,resource,&r);
             assert(pt_amigus_reservation_begin(&r) && !pt_amigus_reservation_close(&r));

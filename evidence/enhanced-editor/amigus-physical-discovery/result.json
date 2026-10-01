@@ -1,0 +1,137 @@
+{
+  "passed": true,
+  "target": "real-a1200",
+  "scope": "RAM-only discovery; no reserve/release, MMIO, interrupts, output or listening acceptance",
+  "binary_sha256": "39036e5f836766ea51bc5461cae0c506b5153d0dfb8c0e177e6835bee1af272e",
+  "emulator_evidence": "build/dev/render-files-1790884485011949000/result.json",
+  "independent_emulator_cleanup": "build/dev/discovery-independent-1790884510716795000/result.json",
+  "emulator_environment": {
+    "profile": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae",
+    "share": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests"
+  },
+  "emulator_before": "OK\tPaused=false\tConfig=autosave",
+  "audio_before": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=750\tsndbuf_status=0",
+  "target_switch_attempted": true,
+  "physical_target": {
+    "connected": true,
+    "mode": "tcp",
+    "logCount": 425,
+    "varCount": 0,
+    "lastHeartbeat": {
+      "type": "HB",
+      "tick": 0,
+      "freeChip": 1889696,
+      "freeFast": 121885176,
+      "timestamp": "2026-10-01T20:01:43.891229+00:00"
+    },
+    "serialConnectedAt": 1790884903.754645,
+    "lastBridgeMessageAt": 1790884903.891236,
+    "lastHeartbeatAt": 1790884903.891244,
+    "bridgeSilentSec": 0.0,
+    "host": "192.168.0.156",
+    "port": 2345
+  },
+  "guest_directory": "RAM:ptg-discovery-physical-amigus-discovery-1790884903065122000",
+  "calls": [
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Version\nCPU\nAvail\nVersion bsdsocket.library\nShowNetStatus\nEcho PTG-IDENTITY-DONE\n",
+        "timeout": 20
+      },
+      "result": "[OK]\nKickstart 47.115, Workbench 47.5\nSystem: 68030  68030-MMU no FastROM (INST: Cache Burst) (DATA: Cache NoBurst)\nType  Available    In-Use   Maximum   Largest\nchip    1889696    203360   2093056   1869056\nfast  121856424  11312728 133169152 120351888\ntotal 123746120  11516088 135262208 120351888\nbsdsocket.library 4.364\nNetwork status summary\nLocal host address         = 192.168.0.156 (on interface 'plipbox')\nDefault gateway address    = 192.168.0.1\nDomain name system servers = 192.168.0.1, 192.168.0.1\nPTG-IDENTITY-DONE"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Work:AmigaDev-20260923/amiga-bridge"
+      },
+      "result": "File: Work:AmigaDev-20260923/amiga-bridge\nCRC32: D75C2355\nSize: 150192 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "MakeDir RAM:ptg-discovery-physical-amigus-discovery-1790884903065122000\nIf WARN\n Quit 20\nEndIf\nEcho PTG-DIRECTORY-CREATED\n",
+        "timeout": 20
+      },
+      "result": "[OK]\nPTG-DIRECTORY-CREATED"
+    },
+    {
+      "tool": "amiga_push_file",
+      "arguments": {
+        "local_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/physical-amigus-discovery-1790884903065122000/PTAmiGusDiscovery",
+        "amiga_path": "RAM:ptg-discovery-physical-amigus-discovery-1790884903065122000/PTAmiGusDiscovery"
+      },
+      "result": "Transferred 15524 bytes in 4.7s (3325 B/s), 16 chunks, CRC32 verified"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "RAM:ptg-discovery-physical-amigus-discovery-1790884903065122000/PTAmiGusDiscovery"
+      },
+      "result": "File: RAM:ptg-discovery-physical-amigus-discovery-1790884903065122000/PTAmiGusDiscovery\nCRC32: 748BFF77\nSize: 15524 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "FailAt 21\nStack 65536\nCD RAM:ptg-discovery-physical-amigus-discovery-1790884903065122000\nPTAmiGusDiscovery >discovery.log\nEcho PTG-DISCOVERY-RC $RC\nCD RAM:\nEcho PTG-DISCOVERY-DONE\n",
+        "timeout": 45
+      },
+      "result": "[OK]\nPTG-DISCOVERY-RC 0\nPTG-DISCOVERY-DONE"
+    },
+    {
+      "tool": "amiga_pull_file",
+      "arguments": {
+        "amiga_path": "RAM:ptg-discovery-physical-amigus-discovery-1790884903065122000/discovery.log",
+        "local_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/physical-amigus-discovery-1790884903065122000/discovery.log"
+      },
+      "result": "Downloaded 227 bytes in 0.1s (1601 B/s), 1 chunks, CRC32 verified"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "CD RAM:\nIf EXISTS RAM:ptg-discovery-physical-amigus-discovery-1790884903065122000/PTAmiGusDiscovery\n Delete RAM:ptg-discovery-physical-amigus-discovery-1790884903065122000/PTAmiGusDiscovery\n If WARN\n  Quit 20\n EndIf\nEndIf\nIf EXISTS RAM:ptg-discovery-physical-amigus-discovery-1790884903065122000/discovery.log\n Delete RAM:ptg-discovery-physical-amigus-discovery-1790884903065122000/discovery.log\n If WARN\n  Quit 20\n EndIf\nEndIf\nDelete RAM:ptg-discovery-physical-amigus-discovery-1790884903065122000\nIf WARN\n Quit 20\nEndIf\nIf EXISTS RAM:ptg-discovery-physical-amigus-discovery-1790884903065122000\n Quit 20\nEndIf\nEcho PTG-CLEANUP-ABSENT\n",
+        "timeout": 20
+      },
+      "result": "[OK]\nRAM:ptg-discovery-physical-amigus-discovery-1790884903065122000/PTAmiGusDiscovery  Deleted\nRAM:ptg-discovery-physical-amigus-discovery-1790884903065122000/discovery.log  Deleted\nRAM:ptg-discovery-physical-amigus-discovery-1790884903065122000  Deleted\nPTG-CLEANUP-ABSENT"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:ptg-discovery-physical-amigus-discovery-1790884903065122000\n Quit 20\nEndIf\nEcho PTG-INDEPENDENT-ABSENCE\n",
+        "timeout": 20
+      },
+      "result": "[OK]\nPTG-INDEPENDENT-ABSENCE"
+    }
+  ],
+  "script_pending": false,
+  "identity": "[OK]\nKickstart 47.115, Workbench 47.5\nSystem: 68030  68030-MMU no FastROM (INST: Cache Burst) (DATA: Cache NoBurst)\nType  Available    In-Use   Maximum   Largest\nchip    1889696    203360   2093056   1869056\nfast  121856424  11312728 133169152 120351888\ntotal 123746120  11516088 135262208 120351888\nbsdsocket.library 4.364\nNetwork status summary\nLocal host address         = 192.168.0.156 (on interface 'plipbox')\nDefault gateway address    = 192.168.0.1\nDomain name system servers = 192.168.0.1, 192.168.0.1\nPTG-IDENTITY-DONE",
+  "bridge_sha256": "e5c8b4ad13776e59d7792c00b0ea664ca2e4f47fe0a2478ef133839b40f2df8c",
+  "directory_created": true,
+  "execution_finished": true,
+  "discovery_passed": true,
+  "card_detected": true,
+  "run_files_cleaned": true,
+  "independent_cleanup_passed": true,
+  "returned_target": {
+    "connected": true,
+    "mode": "tcp",
+    "logCount": 436,
+    "varCount": 0,
+    "lastHeartbeat": {
+      "type": "HB",
+      "tick": 7926,
+      "freeChip": 1853248,
+      "freeFast": 131636200,
+      "timestamp": "2026-10-01T20:01:53.947731+00:00"
+    },
+    "serialConnectedAt": 1790884913.75559,
+    "lastBridgeMessageAt": 1790884913.9477398,
+    "lastHeartbeatAt": 1790884913.947756,
+    "bridgeSilentSec": 0.0,
+    "host": "127.0.0.1",
+    "port": 2345
+  },
+  "audio_after": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=666\tsndbuf_status=0",
+  "devbench_returned": true
+}

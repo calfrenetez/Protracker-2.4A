@@ -1,0 +1,6 @@
+test_driver_failure_and_cleanup (test_ownership.Ownership.test_driver_failure_and_cleanup) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.452s
+
+OK

@@ -130,3 +130,28 @@ uncertain async script retains the target and paths for recovery; no cancellatio
 reset, automatic test retry, recursive deletion, installation or firmware change.
 Two host refusal/uncertain-execution tests PASS. Actual physical run not yet claimed
 by this preparation record.
+
+
+Physical production-adapter discovery completed: two probes each library1/cards1/
+pcm_cards1/closed1; RAM cleanup, separate absence and target return PASS. Evidence
+`../evidence/enhanced-editor/amigus-physical-discovery/`. This supersedes the older
+physical-unavailable state, but does not qualify AmiGUSTest ownership or audio.
+
+
+## AmiGUSTest0.2 final-release gate
+
+Before physical reservations, final release is now checked with the verified RC6
+NULL-owner reserve semantics, separately from void FreeCard issuance. Busy/error
+retains native library/card/Task/owner addresses in a cooperative HOLD. Runtime
+library1.1 and installed file checksum matching the official verified RC6
+variants are required by the physical adapter. Unknown contract refuses before
+reservation. The NULL probe does not acquire a new owner or free a foreign owner
+under that verified implementation. Evidence and conditional contract/source link:
+`../evidence/enhanced-editor/amigus-ownership-release/`.
+
+Host20 injected failures PASS, pinned build PASS; native/physical ownership
+NOT RUN in this preparation record. Use separately coordinated shared adapter
+`--amigus-diagnostic`, then physical adapter `--ownership --library-contract
+build/dev/amigus-ownership-library-contract.json` with matching emulator and
+independent cleanup evidence. Retained/asynchronous uncertainty never authorizes
+file cleanup, target return, exit, process cancellation or automatic retry.

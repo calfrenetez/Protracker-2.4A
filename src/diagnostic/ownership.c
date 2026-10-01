@@ -1,9 +1,10 @@
 #include "ownership.h"
+#include <stddef.h>
 
 struct pt_ownership_result pt_check_ownership(
     const struct pt_ownership_api *api, unsigned long flag, void *a, void *b)
 {
-    struct pt_ownership_result r = { PT_FAIL, "invalid-input", 0 };
+    struct pt_ownership_result r = { PT_FAIL, "invalid-input", 0, 0, 0, 0 };
     if (!api || !api->reserve || !api->release || !api->cancelled ||
         !a || !b || a == b || (flag != 1 && flag != 2))
         return r;
@@ -43,9 +44,17 @@ struct pt_ownership_result pt_check_ownership(
     r.result = PT_PASS;
     r.stage = "complete";
 cleanup:
-    /* FreeCard has no return value. Use both identities even on a broken
-     * exclusivity result; a conforming driver ignores non-owner release. */
+    /* FreeCard has no return value. Free each diagnostic identity, then probe
+     * with NULL: the pinned driver refuses a live owner and never acquires a
+     * resource with this identity. Do not return PASS merely because Free ran. */
     api->release(api->context, flag, b);
     api->release(api->context, flag, a);
+    r.release_code = api->reserve(api->context, flag, NULL);
+    r.release_confirmed = r.release_code == 0;
+    r.retained = !r.release_confirmed;
+    if (r.retained && r.result == PT_PASS) {
+        r.result = PT_FAIL;
+        r.stage = "final-release";
+    }
     return r;
 }

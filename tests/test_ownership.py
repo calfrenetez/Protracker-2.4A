@@ -16,4 +16,4 @@ class Ownership(unittest.TestCase):
                             'src/diagnostic/ownership.c', '-o', binary],
                            cwd=ROOT, check=True)
             result = subprocess.run([binary], check=True, text=True, capture_output=True)
-            self.assertIn('18 scenarios passed', result.stdout)
+            self.assertIn('20 scenarios passed', result.stdout)

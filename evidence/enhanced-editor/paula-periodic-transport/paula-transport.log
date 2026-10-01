@@ -1,0 +1,7 @@
+EXEC MEMORY pool_limit=131106928 reserve=262144 flags=4
+TRANSPORT start=9 clock=1 alarm=1 pending=1
+PAULA TRANSPORT PASS: case=0 private clock/alarm and editor/device cleanup; no WRITE/cadence/listening claim
+TRANSPORT start=9 clock=1 alarm=1 pending=1
+TRANSPORT late=11
+PAULA TRANSPORT PASS: case=1 private clock/alarm and editor/device cleanup; no WRITE/cadence/listening claim
+EXEC MEMORY PASS: 18 Fast allocations, zero owned bytes, budget refusal without Chip fallback

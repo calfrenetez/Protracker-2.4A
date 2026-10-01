@@ -25,9 +25,14 @@ partial-open, retained DMA and delayed timer cleanup checks pass; native pending
 cancellation and deliberately late-start refusal pass with18 Fast allocations
 ending at zero owned bytes and independent DMA-off/path cleanup. This qualifies
 lifetime/refusal only. The boundary alarm does not replace frequent bounded service
-of preparation and elapsed debt. Frontend PLAY/Wait wiring and a feasible periodic
-service/watchdog policy remain open, as do cadence/listening acceptance and classic
-segment/repeat playback. See `evidence/enhanced-editor/paula-native-transport/`.
+of preparation and elapsed debt. A separate private periodic alarm now uses an
+immutable 128-frame grid with fractional carry; an observed service gap above
+256 frames refuses before dispatch. It preserves the exact boundary alarm and
+never rebases song time or loops to catch up. Host dual-owner, fractional-grid,
+starvation, frequency-change and regression checks pass. The dual-alarm native cancellation/late-refusal fixture also passes with zero
+owned Fast bytes and independent DMA-off cleanup. Native periodic cadence
+feasibility and frontend PLAY/Wait wiring remain open, as do listening acceptance
+and classic segment/repeat playback. See `evidence/enhanced-editor/paula-native-transport/`.
 
 The sections below retain milestone history. Earlier statements such as “not yet
 wired” may be superseded by later sections; this table separates the present

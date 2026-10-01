@@ -26,7 +26,7 @@ static int fixture(unsigned late)
     CHECK(r==PT_PAULA_SONG_OK);
     r=pt_native_paula_transport_start(&t,48000);
     printf("TRANSPORT start=%u clock=%u alarm=%u pending=%u\n",(unsigned)r,t.clock.opened,t.alarm.opened,t.alarm.pending);
-    CHECK(r==PT_PAULA_SONG_WAITING && t.clock.opened && t.alarm.opened && t.alarm.pending);
+    CHECK(r==PT_PAULA_SONG_WAITING && t.clock.opened && t.alarm.opened && t.alarm.pending && t.service_alarm.opened && t.service_alarm.pending);
     CHECK(pt_native_paula_transport_signal(&t));
     if(late) {
         Delay(60);
@@ -40,7 +40,7 @@ static int fixture(unsigned late)
     if(attached){for(i=0;i<50 && !pt_editor_paula_stop(&t.native.binding);++i)Delay(1);if(i==50){puts("TRANSPORT HOLD: pending cleanup, all storage retained");return 21;}}
     if(attached && !pt_editor_paula_detach(&t.native.binding))return 22;
     if(initialized && !pt_editor_dispose(ed))return 23;
-    if(t.clock.port || t.alarm.port || t.native.active || t.native.engine.output.reservation.port || (pt_native_paula_output_dma()&15))return 24;
+    if(t.clock.port || t.alarm.port || t.service_alarm.port || t.native.active || t.native.engine.output.reservation.port || (pt_native_paula_output_dma()&15))return 24;
     pt_document_release(&doc);native_release(pcm);native_release(ed);
     if(result){native_memory_finish();return result;}
     printf("PAULA TRANSPORT PASS: case=%u private clock/alarm and editor/device cleanup; no WRITE/cadence/listening claim\n",late);

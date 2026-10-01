@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 private timer/editor/device lifetime, cancellation and deliberately late startup refusal; zero24 master; no WRITE/cadence/frontend/listening/physical acceptance",
+  "PTExecPaulaTransportTest_sha256": "6063ae8a5d7222f7ca0a4a61c575823681fda39a7482d295a87ea99085e92a3f",
+  "paula-transport_returncode": "0",
+  "run_files_cleaned": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0"
+}

@@ -46,7 +46,14 @@ with unchanged64-bit fallback. An independent host128-bit oracle passes400000
 advance/deadline comparisons. A distinct optimized native candidate still FAILED
 pre-startup cadence at the ENTRY watchdog on call5:267>256frames. Safe closure
 and independent cleanup passed; arithmetic parity does not qualify cadence.
-See `evidence/enhanced-editor/paula-clock-fast/`. Native periodic cadence
+See `evidence/enhanced-editor/paula-clock-fast/`. A combined core/editor service
+now returns its exact counter deadline from the same validated actual-clock step,
+avoiding a separate full ownership/deadline query. Both before/after-read guards
+and native pending-alarm identity/late-arm checks remain. Host8/16/24 progress
+parity, stale callback and atomic counter-overflow checks pass. A distinct native
+candidate still FAILED at the ENTRY watchdog after17calls/eightcompletions:
+265>256frames. Cleanup passed; startup readiness at refusal remains unmeasured.
+See `evidence/enhanced-editor/paula-service-counter/`. Native periodic cadence
 feasibility and frontend PLAY/Wait wiring remain open, as do listening acceptance
 and classic segment/repeat playback. See `evidence/enhanced-editor/paula-native-transport/`.
 

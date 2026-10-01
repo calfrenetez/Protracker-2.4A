@@ -72,21 +72,27 @@ static inline enum pt_paula_song_result pt_native_paula_transport_begin(
     }
     return r;
 }
-static inline enum pt_paula_song_result pt_native_paula_transport_arm(struct pt_native_paula_transport *t)
+/* Only an immediately returned validated core deadline or startup query may be
+ * passed here. Pending absolute identity and actual late-arm check remain exact. */
+static inline enum pt_paula_song_result pt_native_paula_transport_arm_deadline(
+    struct pt_native_paula_transport *t,uint64_t deadline)
 {
-    uint64_t deadline;enum pt_paula_song_result r;enum pt_alarm_result alarm;
-    t->phase=PT_NATIVE_PAULA_BOUNDARY_DEADLINE;
-    r=pt_editor_paula_clocked_deadline(&t->native.binding,&deadline);
-    if(r!=PT_PAULA_SONG_OK)return pt_native_paula_transport_fail(t,r);
+    enum pt_alarm_result alarm;t->phase=PT_NATIVE_PAULA_BOUNDARY_ARM;
     if(t->alarm.pending) {
         if(t->alarm_deadline==deadline)return PT_PAULA_SONG_WAITING;
         return pt_native_paula_transport_fail(t,PT_PAULA_SONG_CLOCK);
     }
-    t->phase=PT_NATIVE_PAULA_BOUNDARY_ARM;
     alarm=pt_native_alarm_arm(&t->alarm,deadline);
     if(alarm!=PT_ALARM_WAITING)return pt_native_paula_transport_fail(t,
         alarm==PT_ALARM_LATE?PT_PAULA_SONG_DEADLINE:PT_PAULA_SONG_CLOCK);
     t->alarm_deadline=deadline;return PT_PAULA_SONG_WAITING;
+}
+static inline enum pt_paula_song_result pt_native_paula_transport_arm(struct pt_native_paula_transport *t)
+{
+    uint64_t deadline;enum pt_paula_song_result r;t->phase=PT_NATIVE_PAULA_BOUNDARY_DEADLINE;
+    r=pt_editor_paula_clocked_deadline(&t->native.binding,&deadline);
+    if(r!=PT_PAULA_SONG_OK)return pt_native_paula_transport_fail(t,r);
+    return pt_native_paula_transport_arm_deadline(t,deadline);
 }
 /* Service wakeups use their own immutable epoch and fractional carry. Their
  * 128-frame grid never rebases song time or replaces its exact boundary alarm.
@@ -146,7 +152,7 @@ static inline enum pt_paula_song_result pt_native_paula_transport_start(
 }
 static inline enum pt_paula_song_result pt_native_paula_transport_service(struct pt_native_paula_transport *t)
 {
-    uint64_t ignored,frames;enum pt_paula_song_result r,armed;enum pt_alarm_result alarm;
+    uint64_t deadline,frames;enum pt_paula_song_result r,armed;enum pt_alarm_result alarm;
     if(!t || !t->native.active || !t->started || t->failed)return PT_PAULA_SONG_INVALID;
     if(t->done)return PT_PAULA_SONG_DONE;
     t->phase=PT_NATIVE_PAULA_ENTRY;
@@ -160,10 +166,10 @@ static inline enum pt_paula_song_result pt_native_paula_transport_service(struct
     if(alarm!=PT_ALARM_WAITING && alarm!=PT_ALARM_READY && alarm!=PT_ALARM_IDLE)
         return pt_native_paula_transport_fail(t,PT_PAULA_SONG_CLOCK);
     t->phase=PT_NATIVE_PAULA_CORE;
-    r=pt_editor_paula_clocked_service(&t->native.binding,&ignored);
+    r=pt_editor_paula_clocked_service_counter(&t->native.binding,&deadline);
     if(r==PT_PAULA_SONG_DONE){t->done=1;return r;}
     if(r!=PT_PAULA_SONG_WAITING && r!=PT_PAULA_SONG_OK)return pt_native_paula_transport_fail(t,r);
-    armed=pt_native_paula_transport_arm(t);
+    armed=pt_native_paula_transport_arm_deadline(t,deadline);
     if(armed!=PT_PAULA_SONG_WAITING)return armed;
     armed=pt_native_paula_transport_service_arm(t);
     if(armed!=PT_PAULA_SONG_WAITING)return armed;

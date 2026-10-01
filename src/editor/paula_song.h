@@ -96,6 +96,12 @@ enum pt_paula_song_result pt_paula_song_schedule_step(struct pt_paula_song *,uin
 typedef int (*pt_paula_clock_read)(void *,uint64_t *,uint32_t *);
 enum pt_paula_song_result pt_paula_song_clocked_begin(struct pt_paula_song *,uint64_t,pt_paula_clock_read,void *);
 enum pt_paula_song_result pt_paula_song_clocked_service(struct pt_paula_song *,uint64_t *);
+/* Combined bounded service and counter-deadline result from the SAME validated
+ * step. Exactly one clock read; before/after-read guards and schedule unchanged.
+ * OK/WAITING publish first reaching counter tick. DONE/errors preserve output.
+ * Conversion overflow poisons CLOCK. No separate current/deadline query needed;
+ * caller must use result serially, without intervening mutation or callbacks. */
+enum pt_paula_song_result pt_paula_song_clocked_service_counter(struct pt_paula_song *,uint64_t *);
 enum pt_paula_song_result pt_paula_song_clocked_deadline(struct pt_paula_song *,uint64_t *);
 /* One attempt: block advancement, stop held readers, confirm adapter quiescence,
  * close cache, then release sequence/jobs/master pins and session. Returns0 while

@@ -308,6 +308,18 @@ enum pt_paula_song_result pt_paula_song_clocked_service(struct pt_paula_song *s,
         return fail(s,PT_PAULA_SONG_CLOCK);
     return schedule_step(s,frames,deadline);
 }
+enum pt_paula_song_result pt_paula_song_clocked_service_counter(struct pt_paula_song *s,uint64_t *ticks)
+{
+    uint64_t frame,counter;enum pt_paula_song_result r;
+    if(!ticks)return PT_PAULA_SONG_INVALID;
+    r=pt_paula_song_clocked_service(s,&frame);
+    if(r!=PT_PAULA_SONG_OK && r!=PT_PAULA_SONG_WAITING)return r;
+    /* Same serialized step has already performed both current guards. This
+       read-only conversion needs no second public ownership/deadline query. */
+    if(pt_elapsed_clock_deadline(&s->elapsed,frame,&counter)!=PT_ELAPSED_OK)
+        return fail(s,PT_PAULA_SONG_CLOCK);
+    *ticks=counter;return r;
+}
 enum pt_paula_song_result pt_paula_song_clocked_deadline(struct pt_paula_song *s,uint64_t *ticks)
 {
     enum pt_paula_song_result r;uint64_t frame;

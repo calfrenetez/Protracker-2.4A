@@ -1,0 +1,13 @@
+# Combined validated service/counter deadline; cadence still FAILED
+
+New core/editor clocked_service_counter performs the SAME bounded clocked service with before/after-clock-read current guards, then converts its returned frame deadline from the SAME checked elapsed state. OK/WAITING publish first reaching countertick; DONE/errors preserve output; conversion overflow poisonsCLOCK. Exactly one actualclockread. Native uses immediate returnedcounter to check pendingalarmabsoluteidentity or arm with actuallatecheck; startup stillusespublicdeadlinequery. No intervening mutation/callback or separate fullcurrent query.
+
+Sanitizer nativePaula and editorPaula suites pass. PaulaSong corrected rerunPASS6.353s: full8/16/24 songprogress parity against separatecounterquery, singleactualread, unchangedexactboundaries, nulloutput/no-read, stalebefore-read, callbackmetadata mutation caught afterread, stickyatomicconversionoverflow, DONE/error output preservation. Initial testmode13 fell into oldfault injection branch; corrected test branch, no productionweakening. Initial3-suite run28.080s had this one test failure and two passing suites; not an aggregatePASS.
+
+Verifiedtree15770bed582a29cd5c1bc0cde9d478a3bfd709d2,152compiledsourcehashes/no generated. PTExecPaulaTransportTest201932bytes SHA256f0d25eed5dc00df04ff0641efa6c5f1e5cedbbd4421b1aaaba5c848c9f725e32. Guard built NOTexecuted.
+
+Fresh coordinated run1790853181151874000 aggregateRC20FAILED; cancel/latecases0/1PASS. Cadencecalls17/completions8/observed2943frames; phase4ENTRYwatchdog:2948-last2683=265>256. Maxentrygap3911ticks at709379Hz (~5.513ms); maxpriorcost3878ticks (~5.467ms). Last observation cost69ticks. More calls than earlier candidates is not stableperformance or24000-frame cadence acceptance. Primed/readiness state is not recorded at refusal, so startup-versussteady-state attribution remains unproven. NoWRITE/cache/output.
+
+Candidate-specific safe failure path checks boundedstop/detach/dispose, bothalarms/EClock/audio/editor/master/resources clear before27Fastalloczeroownedbytes. Exactcleanup and independent subsequent sharedlocked running/profile/bridge68030/all4DMAoff/run+launcherabsencePASS. ExplicitRELEASEsent; nohold/ownership/nextwindow. Priorfailures remainFAILED, no automatic retry/reset/resume/weaken/rebase. No Wait/frontend/musicalboundary/output/listening/physical acceptance.
+
+Next review: measure readiness at refusal; distinguish startup preparation from steady service, inspect redundant private current guards inside already-validated serialized steps while preserving guards around callbacks and all public APIs.

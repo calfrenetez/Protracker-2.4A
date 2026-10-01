@@ -60,5 +60,7 @@ enum pt_paula_song_result pt_editor_paula_clocked_begin(struct pt_editor_paula *
 {return attached(o)?pt_paula_song_clocked_begin(o->song,delay,read,context):PT_PAULA_SONG_INVALID;}
 enum pt_paula_song_result pt_editor_paula_clocked_service(struct pt_editor_paula *o,uint64_t *deadline)
 {return attached(o)?pt_paula_song_clocked_service(o->song,deadline):PT_PAULA_SONG_INVALID;}
+enum pt_paula_song_result pt_editor_paula_clocked_service_counter(struct pt_editor_paula *o,uint64_t *ticks)
+{return attached(o)?pt_paula_song_clocked_service_counter(o->song,ticks):PT_PAULA_SONG_INVALID;}
 enum pt_paula_song_result pt_editor_paula_clocked_deadline(struct pt_editor_paula *o,uint64_t *ticks)
 {return attached(o)?pt_paula_song_clocked_deadline(o->song,ticks):PT_PAULA_SONG_INVALID;}

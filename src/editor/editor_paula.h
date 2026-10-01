@@ -39,5 +39,6 @@ enum pt_paula_song_result pt_editor_paula_schedule_begin(struct pt_editor_paula 
 enum pt_paula_song_result pt_editor_paula_schedule_step(struct pt_editor_paula *,uint64_t,uint64_t *);
 enum pt_paula_song_result pt_editor_paula_clocked_begin(struct pt_editor_paula *,uint64_t,pt_paula_clock_read,void *);
 enum pt_paula_song_result pt_editor_paula_clocked_service(struct pt_editor_paula *,uint64_t *);
+enum pt_paula_song_result pt_editor_paula_clocked_service_counter(struct pt_editor_paula *,uint64_t *);
 enum pt_paula_song_result pt_editor_paula_clocked_deadline(struct pt_editor_paula *,uint64_t *);
 #endif

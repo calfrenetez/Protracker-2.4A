@@ -1,0 +1,7 @@
+VOICE bulk PASS: 4096 randomized16voice partitions plus256 wide scalar trajectories; exact frame-reader/handoff tests, no PCM reads
+VOICE advance PASS: exact phase/handoff equivalence without PCM reads
+.
+----------------------------------------------------------------------
+Ran 1 test in 1.162s
+
+OK

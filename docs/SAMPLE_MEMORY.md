@@ -128,9 +128,28 @@ qualify actual event-loop cadence or output. Host195 ASan/UBSan and separate
 native6 complete-song cases pass. Measured16voice128-frame services take about
 18..38ms in this instrumented emulator run, exceeding their2.667ms logical span;
 preparation includes up to63ms observations. This does not establish actual-time
-playback feasibility. Both consume and lookahead use frame-by-frame voice advance;
-exact bulk advance remains the next optimization to investigate. Evidence:
+playback feasibility. This measurement preceded the bulk-advance optimization below. Evidence:
 `evidence/enhanced-editor/mixed-running-cost/`.
+
+Voice advance now uses overflow-safe block arithmetic instead of a frame/channel
+loop: compute steps strictly before an end/first-loop boundary, cross once through
+the unchanged frame transition (including repeat PCM handoff), then perform at
+most eight modular doublings. No source reads, allocation or callback. Zero/invalid
+count/frame and borrowed voice lifetime contracts are unchanged. Equivalence
+checks compare every state byte against the unchanged frame reader and preserved
+scalar transition, including fractional/huge steps, inactive slots, one-shot,
+forward/pingpong, segments, repeat-source handoff and near64-bit arithmetic.
+Both live consume and lookahead share this advancement.
+Host4096random16voice partitions,256wide scalar trajectories and40frame-reader
+trajectories pass ASan/UBSan. A separate native diagnostic passes32random partitions,
+256wide and40frame-reader cases plus6complete mixed running-cost cases; normal
+Fast/Chip/reader/pin/lease/private EClock cleanup and independent run-path cleanup
+are confirmed. Observed16voice128-frame services fall to2.339..2.950ms;2voice
+services1.166..1.720ms. Boundary observations still reach7.240ms and preparation
+36.604ms. These injected-clock/output observations do not establish actual-time
+feasibility or hardware sound; strict late refusal is unchanged. Original90s native
+timeout remains failed, cause unproven; its approved recovery and later new-byte
+pass are recorded separately in `evidence/enhanced-editor/mixed-bulk-advance/`.
 
 AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software
 fixtures, plus an absent-library discovery check. Those results do not establish

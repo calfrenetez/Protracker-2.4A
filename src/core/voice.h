@@ -38,7 +38,9 @@ enum pt_pcm_result pt_voice_set_repeat(struct pt_voice *,uint32_t start,uint32_t
 enum pt_pcm_result pt_voice_set_repeat_source(struct pt_voice *,const struct pt_pcm *,uint32_t start,uint32_t end);
 /* Advance valid initialized/zeroed voices without reading PCM or mixing audio.
  * count<=16, frames<=256; zero frames/count permitted. Uses exactly the frame
- * reader's phase/handoff transition. No allocation/callback/PCM dereference.
+ * reader's phase/handoff transition, using bounded overflow-safe block math
+ * (one boundary transition and <=8 modular doublings per voice).
+ * No allocation/callback/PCM dereference.
  * Intended for borrowed command-state mirrors AFTER a successful Studio read;
  * source descriptor lifetime and immutable format remain caller obligations.
  * Invalid count/frame arguments preserve state. State must not alias sources. */

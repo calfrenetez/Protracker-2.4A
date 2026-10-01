@@ -1,0 +1,19 @@
+..SEQUENCE PASS: exact snapshot/resume audio, fractional loop phase, tempo/delay, pre-roll, partition invariance, protocol and allocation refusal
+.MIXED OWNER PASS: full195 host scenarios, master/cache/staging/commit/sequence/deadline/schedule ownership; no native clock
+.HANDOFF renderer PASS
+HANDOFF renderer PASS
+.
+----------------------------------------------------------------------
+Ran 5 tests in 14.844s
+
+OK
+VALIDATED VOICE PASS: 8/16/24-bit exact loop/segment/handoff parity, bounded refusal/alias atomicity, public value validation retained
+VOICE traversal PASS: selected ranges, forward/pingpong seams, fractional steps, one-frame loops and large steps
+VOICE mix PASS: true24 stereo, single quantization, clipping, 16 voices, mute progression, capacity and alias refusal
+VOICE partition PASS hash=990c42f0 clips=40
+SEGMENT trajectory 0 hash=2a50eba5
+SEGMENT trajectory 1 hash=295ede49
+SEGMENT trajectory 2 hash=ac5189f5
+SEGMENT trajectory 3 hash=e5165089
+SEGMENT trajectory 4 hash=594e0cb9
+VOICE segment PASS: independent initial/repeat ranges, interpolation handoff, huge steps, one-frame repeats and invalid-range preservation

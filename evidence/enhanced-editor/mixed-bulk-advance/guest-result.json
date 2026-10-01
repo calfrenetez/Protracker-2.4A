@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "scope": "shared030 injected combined master/voice ownership, native Fast/Chip allocations; no mixed scheduler/devices/output",
+  "PTExecMixedOwnerTest_sha256": "ff73f741277b6ee2b4b834a608271c69c3ea5c3dd43cea950acc343977d7128d",
+  "run_files_cleaned": false
+}

@@ -1,0 +1,10 @@
+{
+  "passed": false,
+  "native_status": "FAILED:90s fixture deadline exceeded",
+  "host_equivalence_pass": true,
+  "host_regressions_pass": true,
+  "run": "1790811697827119000",
+  "native_resource_cleanup_proven": false,
+  "owned_run_removed": false,
+  "emulator_recovery_hold": true
+}

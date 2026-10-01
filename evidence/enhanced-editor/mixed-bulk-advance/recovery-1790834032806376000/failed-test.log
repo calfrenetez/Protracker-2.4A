@@ -1,0 +1,863 @@
+EXEC MEMORY pool_limit=131080920 reserve=262144 flags=4
+VOICE bulk PASS: 32 randomized16voice partitions plus256 wide scalar trajectories; exact frame-reader/handoff tests, no PCM reads
+VOICE advance PASS: exact phase/handoff equivalence without PCM reads
+NATIVE MIXED RUN prepare voices=2 total=960 frequency=709379 bits=8 interval=0 case=0 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=841 frequency=709379 bits=8 interval=0 case=1 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=839 frequency=709379 bits=8 interval=0 case=2 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=851 frequency=709379 bits=8 interval=0 case=3 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1088 frequency=709379 bits=8 interval=0 case=4 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=3965 frequency=709379 bits=8 interval=0 case=5 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1443 frequency=709379 bits=8 interval=0 case=6 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1702 frequency=709379 bits=8 interval=0 case=7 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1414 frequency=709379 bits=8 interval=0 case=8 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=7032 frequency=709379 bits=8 interval=0 case=9 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=7437 frequency=709379 bits=8 interval=0 case=10 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=7035 frequency=709379 bits=8 interval=0 case=11 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=8285 frequency=709379 bits=8 interval=0 case=12 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=7426 frequency=709379 bits=8 interval=0 case=13 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=7067 frequency=709379 bits=8 interval=0 case=14 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=21481 frequency=709379 bits=8 interval=0 case=15 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=7148 frequency=709379 bits=8 interval=0 case=16 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=3983 frequency=709379 bits=8 interval=0 case=17 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1126 frequency=709379 bits=8 interval=0 case=18 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1009 frequency=709379 bits=8 interval=0 case=19 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=901 frequency=709379 bits=8 interval=0 case=20 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=8 interval=0 case=21 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=925 frequency=709379 bits=8 interval=0 case=22 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=8 interval=0 case=23 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=8 interval=0 case=24 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=8 interval=0 case=25 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=690 frequency=709379 bits=8 interval=0 case=26 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=692 frequency=709379 bits=8 interval=0 case=27 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=8 interval=0 case=28 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1405 frequency=709379 bits=8 interval=0 case=29 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=8 interval=0 case=30 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=692 frequency=709379 bits=8 interval=0 case=31 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=8 interval=0 case=32 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=691 frequency=709379 bits=8 interval=0 case=33 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=8 interval=0 case=34 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=691 frequency=709379 bits=8 interval=0 case=35 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=934 frequency=709379 bits=8 interval=0 case=36 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=692 frequency=709379 bits=8 interval=0 case=37 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=8 interval=0 case=38 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=692 frequency=709379 bits=8 interval=0 case=39 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=8 interval=0 case=40 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=691 frequency=709379 bits=8 interval=0 case=41 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=690 frequency=709379 bits=8 interval=0 case=42 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=934 frequency=709379 bits=8 interval=0 case=43 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=8 interval=0 case=44 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=8 interval=0 case=45 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=8 interval=0 case=46 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=8 interval=0 case=47 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=8 interval=0 case=48 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=8 interval=0 case=49 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=927 frequency=709379 bits=8 interval=0 case=50 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=8 interval=0 case=51 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=691 frequency=709379 bits=8 interval=0 case=52 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=8 interval=0 case=53 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=8 interval=0 case=54 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=691 frequency=709379 bits=8 interval=0 case=55 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=8 interval=0 case=56 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=931 frequency=709379 bits=8 interval=0 case=57 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=8 interval=0 case=58 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=8 interval=0 case=59 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=8 interval=0 case=60 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=8 interval=0 case=61 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=8 interval=0 case=62 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=686 frequency=709379 bits=8 interval=0 case=63 writes=0 chip_alloc=0
+NATIVE MIXED RUN service voices=2 total=1090 frequency=709379 bits=8 interval=0 case=0
+NATIVE MIXED RUN service voices=2 total=845 frequency=709379 bits=8 interval=0 case=1
+NATIVE MIXED RUN service voices=2 total=847 frequency=709379 bits=8 interval=0 case=2
+NATIVE MIXED RUN service voices=2 total=842 frequency=709379 bits=8 interval=0 case=3
+NATIVE MIXED RUN service voices=2 total=848 frequency=709379 bits=8 interval=0 case=4
+NATIVE MIXED RUN service voices=2 total=844 frequency=709379 bits=8 interval=0 case=5
+NATIVE MIXED RUN service voices=2 total=843 frequency=709379 bits=8 interval=0 case=6
+NATIVE MIXED RUN boundary voices=2 total=3982 frequency=709379 bits=8 interval=1 result=11 outputs=3
+NATIVE MIXED RUN prepare voices=2 total=960 frequency=709379 bits=8 interval=1 case=0 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=838 frequency=709379 bits=8 interval=1 case=1 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=842 frequency=709379 bits=8 interval=1 case=2 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=839 frequency=709379 bits=8 interval=1 case=3 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=838 frequency=709379 bits=8 interval=1 case=4 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=2698 frequency=709379 bits=8 interval=1 case=5 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1535 frequency=709379 bits=8 interval=1 case=6 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=844 frequency=709379 bits=8 interval=1 case=7 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=842 frequency=709379 bits=8 interval=1 case=8 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=8 interval=1 case=9 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=8 interval=1 case=10 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=8 interval=1 case=11 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=8 interval=1 case=12 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=714 frequency=709379 bits=8 interval=1 case=13 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=8 interval=1 case=14 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=8 interval=1 case=15 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=686 frequency=709379 bits=8 interval=1 case=16 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=8 interval=1 case=17 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=8 interval=1 case=18 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=8 interval=1 case=19 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=691 frequency=709379 bits=8 interval=1 case=20 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=8 interval=1 case=21 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=691 frequency=709379 bits=8 interval=1 case=22 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=688 frequency=709379 bits=8 interval=1 case=23 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=697 frequency=709379 bits=8 interval=1 case=24 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=692 frequency=709379 bits=8 interval=1 case=25 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=8 interval=1 case=26 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=692 frequency=709379 bits=8 interval=1 case=27 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=8 interval=1 case=28 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=691 frequency=709379 bits=8 interval=1 case=29 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=687 frequency=709379 bits=8 interval=1 case=30 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=8 interval=1 case=31 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=8 interval=1 case=32 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=8 interval=1 case=33 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=8 interval=1 case=34 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=8 interval=1 case=35 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=8 interval=1 case=36 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=8 interval=1 case=37 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=8 interval=1 case=38 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=8 interval=1 case=39 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=8 interval=1 case=40 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=8 interval=1 case=41 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=8 interval=1 case=42 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=8 interval=1 case=43 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=8 interval=1 case=44 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=692 frequency=709379 bits=8 interval=1 case=45 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=690 frequency=709379 bits=8 interval=1 case=46 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=8 interval=1 case=47 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=8 interval=1 case=48 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=692 frequency=709379 bits=8 interval=1 case=49 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=8 interval=1 case=50 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=8 interval=1 case=51 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=8 interval=1 case=52 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=8 interval=1 case=53 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=690 frequency=709379 bits=8 interval=1 case=54 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=695 frequency=709379 bits=8 interval=1 case=55 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=688 frequency=709379 bits=8 interval=1 case=56 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=8 interval=1 case=57 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=936 frequency=709379 bits=8 interval=1 case=58 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=8 interval=1 case=59 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=689 frequency=709379 bits=8 interval=1 case=60 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=8 interval=1 case=61 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=692 frequency=709379 bits=8 interval=1 case=62 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=8 interval=1 case=63 writes=0 chip_alloc=0
+NATIVE MIXED RUN service voices=2 total=846 frequency=709379 bits=8 interval=1 case=7
+NATIVE MIXED RUN service voices=2 total=1084 frequency=709379 bits=8 interval=1 case=8
+NATIVE MIXED RUN service voices=2 total=847 frequency=709379 bits=8 interval=1 case=9
+NATIVE MIXED RUN service voices=2 total=846 frequency=709379 bits=8 interval=1 case=10
+NATIVE MIXED RUN service voices=2 total=838 frequency=709379 bits=8 interval=1 case=11
+NATIVE MIXED RUN service voices=2 total=835 frequency=709379 bits=8 interval=1 case=12
+NATIVE MIXED RUN boundary voices=2 total=2941 frequency=709379 bits=8 interval=2 result=8 outputs=0
+NATIVE MIXED RUN prepare voices=16 total=973 frequency=709379 bits=8 interval=0 case=0 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1715 frequency=709379 bits=8 interval=0 case=1 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1714 frequency=709379 bits=8 interval=0 case=2 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1714 frequency=709379 bits=8 interval=0 case=3 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1715 frequency=709379 bits=8 interval=0 case=4 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=12021 frequency=709379 bits=8 interval=0 case=5 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1448 frequency=709379 bits=8 interval=0 case=6 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1449 frequency=709379 bits=8 interval=0 case=7 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1452 frequency=709379 bits=8 interval=0 case=8 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1452 frequency=709379 bits=8 interval=0 case=9 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=2367 frequency=709379 bits=8 interval=0 case=10 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=15605 frequency=709379 bits=8 interval=0 case=11 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=7038 frequency=709379 bits=8 interval=0 case=12 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=10163 frequency=709379 bits=8 interval=0 case=13 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=7737 frequency=709379 bits=8 interval=0 case=14 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=7030 frequency=709379 bits=8 interval=0 case=15 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=7261 frequency=709379 bits=8 interval=0 case=16 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=7025 frequency=709379 bits=8 interval=0 case=17 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=7269 frequency=709379 bits=8 interval=0 case=18 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=7387 frequency=709379 bits=8 interval=0 case=19 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=880 frequency=709379 bits=8 interval=0 case=20 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1116 frequency=709379 bits=8 interval=0 case=21 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1015 frequency=709379 bits=8 interval=0 case=22 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1030 frequency=709379 bits=8 interval=0 case=23 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1015 frequency=709379 bits=8 interval=0 case=24 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1275 frequency=709379 bits=8 interval=0 case=25 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1015 frequency=709379 bits=8 interval=0 case=26 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1032 frequency=709379 bits=8 interval=0 case=27 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1045 frequency=709379 bits=8 interval=0 case=28 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1029 frequency=709379 bits=8 interval=0 case=29 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1014 frequency=709379 bits=8 interval=0 case=30 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1272 frequency=709379 bits=8 interval=0 case=31 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1015 frequency=709379 bits=8 interval=0 case=32 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1031 frequency=709379 bits=8 interval=0 case=33 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=904 frequency=709379 bits=8 interval=0 case=34 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=8 interval=0 case=35 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=8 interval=0 case=36 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1361 frequency=709379 bits=8 interval=0 case=37 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=8 interval=0 case=38 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=690 frequency=709379 bits=8 interval=0 case=39 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=8 interval=0 case=40 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=8 interval=0 case=41 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=8 interval=0 case=42 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=8 interval=0 case=43 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1011 frequency=709379 bits=8 interval=0 case=44 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=690 frequency=709379 bits=8 interval=0 case=45 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=8 interval=0 case=46 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=8 interval=0 case=47 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=8 interval=0 case=48 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=691 frequency=709379 bits=8 interval=0 case=49 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=8 interval=0 case=50 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=15170 frequency=709379 bits=8 interval=0 case=51 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=719 frequency=709379 bits=8 interval=0 case=52 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=696 frequency=709379 bits=8 interval=0 case=53 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=8 interval=0 case=54 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=691 frequency=709379 bits=8 interval=0 case=55 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=686 frequency=709379 bits=8 interval=0 case=56 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=8 interval=0 case=57 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=3637 frequency=709379 bits=8 interval=0 case=58 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=8 interval=0 case=59 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=8 interval=0 case=60 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=691 frequency=709379 bits=8 interval=0 case=61 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=8 interval=0 case=62 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=8 interval=0 case=63 writes=0 chip_alloc=0
+NATIVE MIXED RUN service voices=16 total=1712 frequency=709379 bits=8 interval=0 case=0
+NATIVE MIXED RUN service voices=16 total=1711 frequency=709379 bits=8 interval=0 case=1
+NATIVE MIXED RUN service voices=16 total=1709 frequency=709379 bits=8 interval=0 case=2
+NATIVE MIXED RUN service voices=16 total=1710 frequency=709379 bits=8 interval=0 case=3
+NATIVE MIXED RUN service voices=16 total=1710 frequency=709379 bits=8 interval=0 case=4
+NATIVE MIXED RUN service voices=16 total=2386 frequency=709379 bits=8 interval=0 case=5
+NATIVE MIXED RUN service voices=16 total=1709 frequency=709379 bits=8 interval=0 case=6
+NATIVE MIXED RUN boundary voices=16 total=5174 frequency=709379 bits=8 interval=1 result=11 outputs=17
+NATIVE MIXED RUN prepare voices=16 total=971 frequency=709379 bits=8 interval=1 case=0 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1717 frequency=709379 bits=8 interval=1 case=1 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1715 frequency=709379 bits=8 interval=1 case=2 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1714 frequency=709379 bits=8 interval=1 case=3 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1746 frequency=709379 bits=8 interval=1 case=4 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=2578 frequency=709379 bits=8 interval=1 case=5 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1552 frequency=709379 bits=8 interval=1 case=6 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=862 frequency=709379 bits=8 interval=1 case=7 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=846 frequency=709379 bits=8 interval=1 case=8 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=8 interval=1 case=9 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=696 frequency=709379 bits=8 interval=1 case=10 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=8 interval=1 case=11 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=687 frequency=709379 bits=8 interval=1 case=12 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=693 frequency=709379 bits=8 interval=1 case=13 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=8 interval=1 case=14 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=8 interval=1 case=15 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=8 interval=1 case=16 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=8 interval=1 case=17 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=8 interval=1 case=18 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=8 interval=1 case=19 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=8 interval=1 case=20 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=8 interval=1 case=21 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=691 frequency=709379 bits=8 interval=1 case=22 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=8 interval=1 case=23 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=8 interval=1 case=24 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=8 interval=1 case=25 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=8 interval=1 case=26 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=8 interval=1 case=27 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=690 frequency=709379 bits=8 interval=1 case=28 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=8 interval=1 case=29 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=8 interval=1 case=30 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=8 interval=1 case=31 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=696 frequency=709379 bits=8 interval=1 case=32 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=8 interval=1 case=33 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=8 interval=1 case=34 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=8 interval=1 case=35 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=689 frequency=709379 bits=8 interval=1 case=36 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=8 interval=1 case=37 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=8 interval=1 case=38 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=686 frequency=709379 bits=8 interval=1 case=39 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=8 interval=1 case=40 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=690 frequency=709379 bits=8 interval=1 case=41 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=8 interval=1 case=42 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=8 interval=1 case=43 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=8 interval=1 case=44 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=695 frequency=709379 bits=8 interval=1 case=45 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=8 interval=1 case=46 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=8 interval=1 case=47 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=8 interval=1 case=48 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=691 frequency=709379 bits=8 interval=1 case=49 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=8 interval=1 case=50 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=8 interval=1 case=51 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=8 interval=1 case=52 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=690 frequency=709379 bits=8 interval=1 case=53 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=8 interval=1 case=54 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=8 interval=1 case=55 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=8 interval=1 case=56 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=8 interval=1 case=57 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=8 interval=1 case=58 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=8 interval=1 case=59 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=690 frequency=709379 bits=8 interval=1 case=60 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=8 interval=1 case=61 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=8 interval=1 case=62 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=8 interval=1 case=63 writes=0 chip_alloc=0
+NATIVE MIXED RUN service voices=16 total=1721 frequency=709379 bits=8 interval=1 case=7
+NATIVE MIXED RUN service voices=16 total=2392 frequency=709379 bits=8 interval=1 case=8
+NATIVE MIXED RUN service voices=16 total=1721 frequency=709379 bits=8 interval=1 case=9
+NATIVE MIXED RUN service voices=16 total=1719 frequency=709379 bits=8 interval=1 case=10
+NATIVE MIXED RUN service voices=16 total=1716 frequency=709379 bits=8 interval=1 case=11
+NATIVE MIXED RUN service voices=16 total=1708 frequency=709379 bits=8 interval=1 case=12
+NATIVE MIXED RUN boundary voices=16 total=4797 frequency=709379 bits=8 interval=2 result=8 outputs=0
+NATIVE MIXED RUN prepare voices=2 total=971 frequency=709379 bits=16 interval=0 case=0 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1523 frequency=709379 bits=16 interval=0 case=1 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=851 frequency=709379 bits=16 interval=0 case=2 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=842 frequency=709379 bits=16 interval=0 case=3 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=848 frequency=709379 bits=16 interval=0 case=4 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=3962 frequency=709379 bits=16 interval=0 case=5 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1810 frequency=709379 bits=16 interval=0 case=6 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1743 frequency=709379 bits=16 interval=0 case=7 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1169 frequency=709379 bits=16 interval=0 case=8 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=22264 frequency=709379 bits=16 interval=0 case=9 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=7807 frequency=709379 bits=16 interval=0 case=10 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=11156 frequency=709379 bits=16 interval=0 case=11 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=8068 frequency=709379 bits=16 interval=0 case=12 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=7865 frequency=709379 bits=16 interval=0 case=13 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=7804 frequency=709379 bits=16 interval=0 case=14 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=8044 frequency=709379 bits=16 interval=0 case=15 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=7933 frequency=709379 bits=16 interval=0 case=16 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=866 frequency=709379 bits=16 interval=0 case=17 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1118 frequency=709379 bits=16 interval=0 case=18 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1009 frequency=709379 bits=16 interval=0 case=19 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=914 frequency=709379 bits=16 interval=0 case=20 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=0 case=21 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=691 frequency=709379 bits=16 interval=0 case=22 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=926 frequency=709379 bits=16 interval=0 case=23 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=691 frequency=709379 bits=16 interval=0 case=24 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=16 interval=0 case=25 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=691 frequency=709379 bits=16 interval=0 case=26 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=686 frequency=709379 bits=16 interval=0 case=27 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=692 frequency=709379 bits=16 interval=0 case=28 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=0 case=29 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=688 frequency=709379 bits=16 interval=0 case=30 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=16 interval=0 case=31 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=691 frequency=709379 bits=16 interval=0 case=32 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=686 frequency=709379 bits=16 interval=0 case=33 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=16 interval=0 case=34 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=0 case=35 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=16 interval=0 case=36 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=0 case=37 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=692 frequency=709379 bits=16 interval=0 case=38 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=16 interval=0 case=39 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=690 frequency=709379 bits=16 interval=0 case=40 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=0 case=41 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=692 frequency=709379 bits=16 interval=0 case=42 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=16 interval=0 case=43 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1373 frequency=709379 bits=16 interval=0 case=44 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=692 frequency=709379 bits=16 interval=0 case=45 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=16 interval=0 case=46 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=691 frequency=709379 bits=16 interval=0 case=47 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=0 case=48 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=16 interval=0 case=49 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=16 interval=0 case=50 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1084 frequency=709379 bits=16 interval=0 case=51 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=16 interval=0 case=52 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=16 interval=0 case=53 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=0 case=54 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=16 interval=0 case=55 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=0 case=56 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=689 frequency=709379 bits=16 interval=0 case=57 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=16 interval=0 case=58 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=16 interval=0 case=59 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=16 interval=0 case=60 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=0 case=61 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=16 interval=0 case=62 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=16 interval=0 case=63 writes=0 chip_alloc=0
+NATIVE MIXED RUN service voices=2 total=838 frequency=709379 bits=16 interval=0 case=0
+NATIVE MIXED RUN service voices=2 total=3978 frequency=709379 bits=16 interval=0 case=1
+NATIVE MIXED RUN service voices=2 total=844 frequency=709379 bits=16 interval=0 case=2
+NATIVE MIXED RUN service voices=2 total=836 frequency=709379 bits=16 interval=0 case=3
+NATIVE MIXED RUN service voices=2 total=844 frequency=709379 bits=16 interval=0 case=4
+NATIVE MIXED RUN service voices=2 total=837 frequency=709379 bits=16 interval=0 case=5
+NATIVE MIXED RUN service voices=2 total=844 frequency=709379 bits=16 interval=0 case=6
+NATIVE MIXED RUN boundary voices=2 total=3556 frequency=709379 bits=16 interval=1 result=11 outputs=3
+NATIVE MIXED RUN prepare voices=2 total=975 frequency=709379 bits=16 interval=1 case=0 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=844 frequency=709379 bits=16 interval=1 case=1 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=841 frequency=709379 bits=16 interval=1 case=2 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=848 frequency=709379 bits=16 interval=1 case=3 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1521 frequency=709379 bits=16 interval=1 case=4 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=2299 frequency=709379 bits=16 interval=1 case=5 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1492 frequency=709379 bits=16 interval=1 case=6 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=845 frequency=709379 bits=16 interval=1 case=7 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=859 frequency=709379 bits=16 interval=1 case=8 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=1 case=9 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=686 frequency=709379 bits=16 interval=1 case=10 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=717 frequency=709379 bits=16 interval=1 case=11 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=692 frequency=709379 bits=16 interval=1 case=12 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=928 frequency=709379 bits=16 interval=1 case=13 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=16 interval=1 case=14 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=687 frequency=709379 bits=16 interval=1 case=15 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=16 interval=1 case=16 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=1 case=17 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=16 interval=1 case=18 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=1 case=19 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=933 frequency=709379 bits=16 interval=1 case=20 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=16 interval=1 case=21 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=695 frequency=709379 bits=16 interval=1 case=22 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=16 interval=1 case=23 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=16 interval=1 case=24 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=1 case=25 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=690 frequency=709379 bits=16 interval=1 case=26 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=925 frequency=709379 bits=16 interval=1 case=27 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=1 case=28 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=16 interval=1 case=29 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=16 interval=1 case=30 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=691 frequency=709379 bits=16 interval=1 case=31 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=1 case=32 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=16 interval=1 case=33 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=1 case=34 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=1 case=35 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=16 interval=1 case=36 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=1 case=37 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=688 frequency=709379 bits=16 interval=1 case=38 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=16 interval=1 case=39 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=697 frequency=709379 bits=16 interval=1 case=40 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=687 frequency=709379 bits=16 interval=1 case=41 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=16 interval=1 case=42 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=16 interval=1 case=43 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=692 frequency=709379 bits=16 interval=1 case=44 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=16 interval=1 case=45 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=690 frequency=709379 bits=16 interval=1 case=46 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=16 interval=1 case=47 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1113 frequency=709379 bits=16 interval=1 case=48 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=16 interval=1 case=49 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=1 case=50 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=16 interval=1 case=51 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=1 case=52 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=688 frequency=709379 bits=16 interval=1 case=53 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=16 interval=1 case=54 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=15144 frequency=709379 bits=16 interval=1 case=55 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=16 interval=1 case=56 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=16 interval=1 case=57 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=16 interval=1 case=58 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=16 interval=1 case=59 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=16 interval=1 case=60 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=16 interval=1 case=61 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=4040 frequency=709379 bits=16 interval=1 case=62 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=16 interval=1 case=63 writes=0 chip_alloc=0
+NATIVE MIXED RUN service voices=2 total=837 frequency=709379 bits=16 interval=1 case=7
+NATIVE MIXED RUN service voices=2 total=844 frequency=709379 bits=16 interval=1 case=8
+NATIVE MIXED RUN service voices=2 total=836 frequency=709379 bits=16 interval=1 case=9
+NATIVE MIXED RUN service voices=2 total=883 frequency=709379 bits=16 interval=1 case=10
+NATIVE MIXED RUN service voices=2 total=838 frequency=709379 bits=16 interval=1 case=11
+NATIVE MIXED RUN service voices=2 total=838 frequency=709379 bits=16 interval=1 case=12
+NATIVE MIXED RUN boundary voices=2 total=2976 frequency=709379 bits=16 interval=2 result=8 outputs=0
+NATIVE MIXED RUN prepare voices=16 total=962 frequency=709379 bits=16 interval=0 case=0 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1715 frequency=709379 bits=16 interval=0 case=1 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1717 frequency=709379 bits=16 interval=0 case=2 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1963 frequency=709379 bits=16 interval=0 case=3 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1713 frequency=709379 bits=16 interval=0 case=4 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=11996 frequency=709379 bits=16 interval=0 case=5 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1410 frequency=709379 bits=16 interval=0 case=6 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1452 frequency=709379 bits=16 interval=0 case=7 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1412 frequency=709379 bits=16 interval=0 case=8 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1695 frequency=709379 bits=16 interval=0 case=9 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=2339 frequency=709379 bits=16 interval=0 case=10 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1151 frequency=709379 bits=16 interval=0 case=11 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=8073 frequency=709379 bits=16 interval=0 case=12 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=7866 frequency=709379 bits=16 interval=0 case=13 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=8061 frequency=709379 bits=16 interval=0 case=14 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=8506 frequency=709379 bits=16 interval=0 case=15 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=7830 frequency=709379 bits=16 interval=0 case=16 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=8239 frequency=709379 bits=16 interval=0 case=17 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=22303 frequency=709379 bits=16 interval=0 case=18 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=7940 frequency=709379 bits=16 interval=0 case=19 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=879 frequency=709379 bits=16 interval=0 case=20 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1118 frequency=709379 bits=16 interval=0 case=21 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1030 frequency=709379 bits=16 interval=0 case=22 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1030 frequency=709379 bits=16 interval=0 case=23 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1014 frequency=709379 bits=16 interval=0 case=24 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=4149 frequency=709379 bits=16 interval=0 case=25 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1008 frequency=709379 bits=16 interval=0 case=26 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1010 frequency=709379 bits=16 interval=0 case=27 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1012 frequency=709379 bits=16 interval=0 case=28 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1012 frequency=709379 bits=16 interval=0 case=29 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1689 frequency=709379 bits=16 interval=0 case=30 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1012 frequency=709379 bits=16 interval=0 case=31 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1014 frequency=709379 bits=16 interval=0 case=32 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1013 frequency=709379 bits=16 interval=0 case=33 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=906 frequency=709379 bits=16 interval=0 case=34 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=690 frequency=709379 bits=16 interval=0 case=35 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=693 frequency=709379 bits=16 interval=0 case=36 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=16 interval=0 case=37 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=16 interval=0 case=38 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=690 frequency=709379 bits=16 interval=0 case=39 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=696 frequency=709379 bits=16 interval=0 case=40 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=690 frequency=709379 bits=16 interval=0 case=41 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=690 frequency=709379 bits=16 interval=0 case=42 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=16 interval=0 case=43 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=16 interval=0 case=44 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=16 interval=0 case=45 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=16 interval=0 case=46 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=16 interval=0 case=47 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=16 interval=0 case=48 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=16 interval=0 case=49 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=926 frequency=709379 bits=16 interval=0 case=50 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=16 interval=0 case=51 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=696 frequency=709379 bits=16 interval=0 case=52 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=691 frequency=709379 bits=16 interval=0 case=53 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=16 interval=0 case=54 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=693 frequency=709379 bits=16 interval=0 case=55 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=16 interval=0 case=56 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=935 frequency=709379 bits=16 interval=0 case=57 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=688 frequency=709379 bits=16 interval=0 case=58 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=696 frequency=709379 bits=16 interval=0 case=59 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=691 frequency=709379 bits=16 interval=0 case=60 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=693 frequency=709379 bits=16 interval=0 case=61 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=16 interval=0 case=62 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=688 frequency=709379 bits=16 interval=0 case=63 writes=0 chip_alloc=0
+NATIVE MIXED RUN service voices=16 total=1962 frequency=709379 bits=16 interval=0 case=0
+NATIVE MIXED RUN service voices=16 total=1709 frequency=709379 bits=16 interval=0 case=1
+NATIVE MIXED RUN service voices=16 total=1721 frequency=709379 bits=16 interval=0 case=2
+NATIVE MIXED RUN service voices=16 total=1710 frequency=709379 bits=16 interval=0 case=3
+NATIVE MIXED RUN service voices=16 total=1722 frequency=709379 bits=16 interval=0 case=4
+NATIVE MIXED RUN service voices=16 total=2388 frequency=709379 bits=16 interval=0 case=5
+NATIVE MIXED RUN service voices=16 total=1755 frequency=709379 bits=16 interval=0 case=6
+NATIVE MIXED RUN boundary voices=16 total=5152 frequency=709379 bits=16 interval=1 result=11 outputs=17
+NATIVE MIXED RUN prepare voices=16 total=968 frequency=709379 bits=16 interval=1 case=0 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1712 frequency=709379 bits=16 interval=1 case=1 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1720 frequency=709379 bits=16 interval=1 case=2 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1715 frequency=709379 bits=16 interval=1 case=3 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1716 frequency=709379 bits=16 interval=1 case=4 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=16776 frequency=709379 bits=16 interval=1 case=5 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1513 frequency=709379 bits=16 interval=1 case=6 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=862 frequency=709379 bits=16 interval=1 case=7 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=864 frequency=709379 bits=16 interval=1 case=8 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=696 frequency=709379 bits=16 interval=1 case=9 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=16 interval=1 case=10 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=3820 frequency=709379 bits=16 interval=1 case=11 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=16 interval=1 case=12 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=16 interval=1 case=13 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=16 interval=1 case=14 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=16 interval=1 case=15 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=718 frequency=709379 bits=16 interval=1 case=16 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=16 interval=1 case=17 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=690 frequency=709379 bits=16 interval=1 case=18 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=696 frequency=709379 bits=16 interval=1 case=19 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=691 frequency=709379 bits=16 interval=1 case=20 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=691 frequency=709379 bits=16 interval=1 case=21 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=696 frequency=709379 bits=16 interval=1 case=22 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=691 frequency=709379 bits=16 interval=1 case=23 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=16 interval=1 case=24 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=16 interval=1 case=25 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=16 interval=1 case=26 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=16 interval=1 case=27 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=691 frequency=709379 bits=16 interval=1 case=28 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=16 interval=1 case=29 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=16 interval=1 case=30 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=16 interval=1 case=31 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=693 frequency=709379 bits=16 interval=1 case=32 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=695 frequency=709379 bits=16 interval=1 case=33 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=16 interval=1 case=34 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=693 frequency=709379 bits=16 interval=1 case=35 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=16 interval=1 case=36 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=16 interval=1 case=37 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=16 interval=1 case=38 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=16 interval=1 case=39 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=16 interval=1 case=40 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=16 interval=1 case=41 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=16 interval=1 case=42 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=16 interval=1 case=43 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=16 interval=1 case=44 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=691 frequency=709379 bits=16 interval=1 case=45 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=16 interval=1 case=46 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=16 interval=1 case=47 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=731 frequency=709379 bits=16 interval=1 case=48 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=16 interval=1 case=49 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=16 interval=1 case=50 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=16 interval=1 case=51 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=16 interval=1 case=52 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=687 frequency=709379 bits=16 interval=1 case=53 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=686 frequency=709379 bits=16 interval=1 case=54 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=16 interval=1 case=55 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=16 interval=1 case=56 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=16 interval=1 case=57 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=16 interval=1 case=58 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=691 frequency=709379 bits=16 interval=1 case=59 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=16 interval=1 case=60 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=16 interval=1 case=61 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=693 frequency=709379 bits=16 interval=1 case=62 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=693 frequency=709379 bits=16 interval=1 case=63 writes=0 chip_alloc=0
+NATIVE MIXED RUN service voices=16 total=1714 frequency=709379 bits=16 interval=1 case=7
+NATIVE MIXED RUN service voices=16 total=2388 frequency=709379 bits=16 interval=1 case=8
+NATIVE MIXED RUN service voices=16 total=1722 frequency=709379 bits=16 interval=1 case=9
+NATIVE MIXED RUN service voices=16 total=1709 frequency=709379 bits=16 interval=1 case=10
+NATIVE MIXED RUN service voices=16 total=1711 frequency=709379 bits=16 interval=1 case=11
+NATIVE MIXED RUN service voices=16 total=1709 frequency=709379 bits=16 interval=1 case=12
+NATIVE MIXED RUN boundary voices=16 total=4987 frequency=709379 bits=16 interval=2 result=8 outputs=0
+NATIVE MIXED RUN prepare voices=2 total=962 frequency=709379 bits=24 interval=0 case=0 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=849 frequency=709379 bits=24 interval=0 case=1 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=838 frequency=709379 bits=24 interval=0 case=2 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=852 frequency=709379 bits=24 interval=0 case=3 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=847 frequency=709379 bits=24 interval=0 case=4 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=4192 frequency=709379 bits=24 interval=0 case=5 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1412 frequency=709379 bits=24 interval=0 case=6 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1701 frequency=709379 bits=24 interval=0 case=7 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1172 frequency=709379 bits=24 interval=0 case=8 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=8050 frequency=709379 bits=24 interval=0 case=9 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=8069 frequency=709379 bits=24 interval=0 case=10 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=7840 frequency=709379 bits=24 interval=0 case=11 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=8066 frequency=709379 bits=24 interval=0 case=12 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=8484 frequency=709379 bits=24 interval=0 case=13 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=7825 frequency=709379 bits=24 interval=0 case=14 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=8229 frequency=709379 bits=24 interval=0 case=15 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=22443 frequency=709379 bits=24 interval=0 case=16 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=864 frequency=709379 bits=24 interval=0 case=17 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1108 frequency=709379 bits=24 interval=0 case=18 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1014 frequency=709379 bits=24 interval=0 case=19 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=913 frequency=709379 bits=24 interval=0 case=20 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=24 interval=0 case=21 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=24 interval=0 case=22 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=24 interval=0 case=23 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=0 case=24 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=24 interval=0 case=25 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=24 interval=0 case=26 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=24 interval=0 case=27 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=927 frequency=709379 bits=24 interval=0 case=28 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=24 interval=0 case=29 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=0 case=30 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=688 frequency=709379 bits=24 interval=0 case=31 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=24 interval=0 case=32 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=0 case=33 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=690 frequency=709379 bits=24 interval=0 case=34 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1362 frequency=709379 bits=24 interval=0 case=35 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=0 case=36 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=24 interval=0 case=37 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=24 interval=0 case=38 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=24 interval=0 case=39 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=24 interval=0 case=40 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=0 case=41 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=935 frequency=709379 bits=24 interval=0 case=42 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=0 case=43 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=692 frequency=709379 bits=24 interval=0 case=44 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=24 interval=0 case=45 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=690 frequency=709379 bits=24 interval=0 case=46 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=691 frequency=709379 bits=24 interval=0 case=47 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=0 case=48 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=934 frequency=709379 bits=24 interval=0 case=49 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=0 case=50 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=688 frequency=709379 bits=24 interval=0 case=51 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=24 interval=0 case=52 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=691 frequency=709379 bits=24 interval=0 case=53 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=686 frequency=709379 bits=24 interval=0 case=54 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=692 frequency=709379 bits=24 interval=0 case=55 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=929 frequency=709379 bits=24 interval=0 case=56 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=690 frequency=709379 bits=24 interval=0 case=57 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=0 case=58 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=24 interval=0 case=59 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=0 case=60 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=688 frequency=709379 bits=24 interval=0 case=61 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=24 interval=0 case=62 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=936 frequency=709379 bits=24 interval=0 case=63 writes=0 chip_alloc=0
+NATIVE MIXED RUN service voices=2 total=842 frequency=709379 bits=24 interval=0 case=0
+NATIVE MIXED RUN service voices=2 total=838 frequency=709379 bits=24 interval=0 case=1
+NATIVE MIXED RUN service voices=2 total=846 frequency=709379 bits=24 interval=0 case=2
+NATIVE MIXED RUN service voices=2 total=838 frequency=709379 bits=24 interval=0 case=3
+NATIVE MIXED RUN service voices=2 total=842 frequency=709379 bits=24 interval=0 case=4
+NATIVE MIXED RUN service voices=2 total=839 frequency=709379 bits=24 interval=0 case=5
+NATIVE MIXED RUN service voices=2 total=841 frequency=709379 bits=24 interval=0 case=6
+NATIVE MIXED RUN boundary voices=2 total=3312 frequency=709379 bits=24 interval=1 result=11 outputs=3
+NATIVE MIXED RUN prepare voices=2 total=977 frequency=709379 bits=24 interval=1 case=0 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=842 frequency=709379 bits=24 interval=1 case=1 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=849 frequency=709379 bits=24 interval=1 case=2 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=838 frequency=709379 bits=24 interval=1 case=3 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1528 frequency=709379 bits=24 interval=1 case=4 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=2327 frequency=709379 bits=24 interval=1 case=5 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1500 frequency=709379 bits=24 interval=1 case=6 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=844 frequency=709379 bits=24 interval=1 case=7 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=844 frequency=709379 bits=24 interval=1 case=8 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=24 interval=1 case=9 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=24 interval=1 case=10 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=1 case=11 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=689 frequency=709379 bits=24 interval=1 case=12 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=1 case=13 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=24 interval=1 case=14 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=694 frequency=709379 bits=24 interval=1 case=15 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=24 interval=1 case=16 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=24 interval=1 case=17 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=687 frequency=709379 bits=24 interval=1 case=18 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=24 interval=1 case=19 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=24 interval=1 case=20 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=24 interval=1 case=21 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=690 frequency=709379 bits=24 interval=1 case=22 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=24 interval=1 case=23 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=692 frequency=709379 bits=24 interval=1 case=24 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=24 interval=1 case=25 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=695 frequency=709379 bits=24 interval=1 case=26 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=1 case=27 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=24 interval=1 case=28 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=24 interval=1 case=29 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=690 frequency=709379 bits=24 interval=1 case=30 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=1 case=31 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=692 frequency=709379 bits=24 interval=1 case=32 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=24 interval=1 case=33 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=1363 frequency=709379 bits=24 interval=1 case=34 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=24 interval=1 case=35 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=682 frequency=709379 bits=24 interval=1 case=36 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=24 interval=1 case=37 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=1 case=38 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=690 frequency=709379 bits=24 interval=1 case=39 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=1 case=40 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=1 case=41 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=689 frequency=709379 bits=24 interval=1 case=42 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=24 interval=1 case=43 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=692 frequency=709379 bits=24 interval=1 case=44 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=1 case=45 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=691 frequency=709379 bits=24 interval=1 case=46 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=1 case=47 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=1 case=48 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=688 frequency=709379 bits=24 interval=1 case=49 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=24 interval=1 case=50 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=691 frequency=709379 bits=24 interval=1 case=51 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=686 frequency=709379 bits=24 interval=1 case=52 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=693 frequency=709379 bits=24 interval=1 case=53 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=687 frequency=709379 bits=24 interval=1 case=54 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=688 frequency=709379 bits=24 interval=1 case=55 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=685 frequency=709379 bits=24 interval=1 case=56 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=691 frequency=709379 bits=24 interval=1 case=57 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=720 frequency=709379 bits=24 interval=1 case=58 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=695 frequency=709379 bits=24 interval=1 case=59 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=683 frequency=709379 bits=24 interval=1 case=60 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=696 frequency=709379 bits=24 interval=1 case=61 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=931 frequency=709379 bits=24 interval=1 case=62 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=2 total=684 frequency=709379 bits=24 interval=1 case=63 writes=0 chip_alloc=0
+NATIVE MIXED RUN service voices=2 total=842 frequency=709379 bits=24 interval=1 case=7
+NATIVE MIXED RUN service voices=2 total=837 frequency=709379 bits=24 interval=1 case=8
+NATIVE MIXED RUN service voices=2 total=848 frequency=709379 bits=24 interval=1 case=9
+NATIVE MIXED RUN service voices=2 total=840 frequency=709379 bits=24 interval=1 case=10
+NATIVE MIXED RUN service voices=2 total=837 frequency=709379 bits=24 interval=1 case=11
+NATIVE MIXED RUN service voices=2 total=1081 frequency=709379 bits=24 interval=1 case=12
+NATIVE MIXED RUN boundary voices=2 total=2967 frequency=709379 bits=24 interval=2 result=8 outputs=0
+NATIVE MIXED RUN prepare voices=16 total=964 frequency=709379 bits=24 interval=0 case=0 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1714 frequency=709379 bits=24 interval=0 case=1 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1722 frequency=709379 bits=24 interval=0 case=2 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1717 frequency=709379 bits=24 interval=0 case=3 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1723 frequency=709379 bits=24 interval=0 case=4 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=15146 frequency=709379 bits=24 interval=0 case=5 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1449 frequency=709379 bits=24 interval=0 case=6 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1413 frequency=709379 bits=24 interval=0 case=7 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1450 frequency=709379 bits=24 interval=0 case=8 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1418 frequency=709379 bits=24 interval=0 case=9 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=2369 frequency=709379 bits=24 interval=0 case=10 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1170 frequency=709379 bits=24 interval=0 case=11 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=8043 frequency=709379 bits=24 interval=0 case=12 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=7807 frequency=709379 bits=24 interval=0 case=13 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=8505 frequency=709379 bits=24 interval=0 case=14 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=8047 frequency=709379 bits=24 interval=0 case=15 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=7863 frequency=709379 bits=24 interval=0 case=16 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=8041 frequency=709379 bits=24 interval=0 case=17 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=8065 frequency=709379 bits=24 interval=0 case=18 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=7923 frequency=709379 bits=24 interval=0 case=19 writes=128 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1139 frequency=709379 bits=24 interval=0 case=20 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1129 frequency=709379 bits=24 interval=0 case=21 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1032 frequency=709379 bits=24 interval=0 case=22 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1029 frequency=709379 bits=24 interval=0 case=23 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1030 frequency=709379 bits=24 interval=0 case=24 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1029 frequency=709379 bits=24 interval=0 case=25 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1271 frequency=709379 bits=24 interval=0 case=26 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1030 frequency=709379 bits=24 interval=0 case=27 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1031 frequency=709379 bits=24 interval=0 case=28 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1032 frequency=709379 bits=24 interval=0 case=29 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1031 frequency=709379 bits=24 interval=0 case=30 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1030 frequency=709379 bits=24 interval=0 case=31 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1888 frequency=709379 bits=24 interval=0 case=32 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1014 frequency=709379 bits=24 interval=0 case=33 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=906 frequency=709379 bits=24 interval=0 case=34 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=691 frequency=709379 bits=24 interval=0 case=35 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=690 frequency=709379 bits=24 interval=0 case=36 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=24 interval=0 case=37 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=24 interval=0 case=38 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=693 frequency=709379 bits=24 interval=0 case=39 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=0 case=40 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=24 interval=0 case=41 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=0 case=42 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=24 interval=0 case=43 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=24 interval=0 case=44 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=3806 frequency=709379 bits=24 interval=0 case=45 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=690 frequency=709379 bits=24 interval=0 case=46 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=24 interval=0 case=47 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=24 interval=0 case=48 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=24 interval=0 case=49 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=0 case=50 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=24 interval=0 case=51 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=690 frequency=709379 bits=24 interval=0 case=52 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=693 frequency=709379 bits=24 interval=0 case=53 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=24 interval=0 case=54 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=24 interval=0 case=55 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=693 frequency=709379 bits=24 interval=0 case=56 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=0 case=57 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=24 interval=0 case=58 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=688 frequency=709379 bits=24 interval=0 case=59 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=696 frequency=709379 bits=24 interval=0 case=60 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=691 frequency=709379 bits=24 interval=0 case=61 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=24 interval=0 case=62 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=693 frequency=709379 bits=24 interval=0 case=63 writes=0 chip_alloc=0
+NATIVE MIXED RUN service voices=16 total=2396 frequency=709379 bits=24 interval=0 case=0
+NATIVE MIXED RUN service voices=16 total=1711 frequency=709379 bits=24 interval=0 case=1
+NATIVE MIXED RUN service voices=16 total=1718 frequency=709379 bits=24 interval=0 case=2
+NATIVE MIXED RUN service voices=16 total=1710 frequency=709379 bits=24 interval=0 case=3
+NATIVE MIXED RUN service voices=16 total=1708 frequency=709379 bits=24 interval=0 case=4
+NATIVE MIXED RUN service voices=16 total=1962 frequency=709379 bits=24 interval=0 case=5
+NATIVE MIXED RUN service voices=16 total=1712 frequency=709379 bits=24 interval=0 case=6
+NATIVE MIXED RUN boundary voices=16 total=5144 frequency=709379 bits=24 interval=1 result=11 outputs=17
+NATIVE MIXED RUN prepare voices=16 total=977 frequency=709379 bits=24 interval=1 case=0 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1961 frequency=709379 bits=24 interval=1 case=1 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1715 frequency=709379 bits=24 interval=1 case=2 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1720 frequency=709379 bits=24 interval=1 case=3 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1715 frequency=709379 bits=24 interval=1 case=4 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=2336 frequency=709379 bits=24 interval=1 case=5 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1553 frequency=709379 bits=24 interval=1 case=6 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=849 frequency=709379 bits=24 interval=1 case=7 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=860 frequency=709379 bits=24 interval=1 case=8 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=693 frequency=709379 bits=24 interval=1 case=9 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=10 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=11 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=12 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=13 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=14 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=15 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=16 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=24 interval=1 case=17 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=18 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=19 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=20 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=21 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=22 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=24 interval=1 case=23 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=24 interval=1 case=24 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=25 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=691 frequency=709379 bits=24 interval=1 case=26 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=24 interval=1 case=27 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=693 frequency=709379 bits=24 interval=1 case=28 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=695 frequency=709379 bits=24 interval=1 case=29 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=24 interval=1 case=30 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=693 frequency=709379 bits=24 interval=1 case=31 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=693 frequency=709379 bits=24 interval=1 case=32 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=688 frequency=709379 bits=24 interval=1 case=33 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=34 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=24 interval=1 case=35 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=24 interval=1 case=36 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=24 interval=1 case=37 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=38 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=39 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=24 interval=1 case=40 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=693 frequency=709379 bits=24 interval=1 case=41 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=24 interval=1 case=42 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=43 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=24 interval=1 case=44 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=926 frequency=709379 bits=24 interval=1 case=45 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=24 interval=1 case=46 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=24 interval=1 case=47 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=24 interval=1 case=48 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=49 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=50 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=24 interval=1 case=51 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=24 interval=1 case=52 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=685 frequency=709379 bits=24 interval=1 case=53 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=54 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=55 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=56 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=57 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=683 frequency=709379 bits=24 interval=1 case=58 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=1367 frequency=709379 bits=24 interval=1 case=59 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=692 frequency=709379 bits=24 interval=1 case=60 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=694 frequency=709379 bits=24 interval=1 case=61 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=684 frequency=709379 bits=24 interval=1 case=62 writes=0 chip_alloc=0
+NATIVE MIXED RUN prepare voices=16 total=715 frequency=709379 bits=24 interval=1 case=63 writes=0 chip_alloc=0
+NATIVE MIXED RUN service voices=16 total=1721 frequency=709379 bits=24 interval=1 case=7
+NATIVE MIXED RUN service voices=16 total=1955 frequency=709379 bits=24 interval=1 case=8
+NATIVE MIXED RUN service voices=16 total=1710 frequency=709379 bits=24 interval=1 case=9
+NATIVE MIXED RUN service voices=16 total=1716 frequency=709379 bits=24 interval=1 case=10
+NATIVE MIXED RUN service voices=16 total=1721 frequency=709379 bits=24 interval=1 case=11
+NATIVE MIXED RUN service voices=16 total=1717 frequency=709379 bits=24 interval=1 case=12
+NATIVE MIXED RUN boundary voices=16 total=4800 frequency=709379 bits=24 interval=2 result=8 outputs=0
+MIXED OWNER PASS:6 native running-cost8/16/24 scenarios, bounded preparation, allocation/upload-free running and tempo/trigger/end boundaries, global action order, full frame duration and resource cleanup; injected logical time/voices, no audio/timing acceptance
+EXEC MEMORY PASS: 66 Fast allocations, zero owned bytes, budget refusal without Chip fallback

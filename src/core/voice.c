@@ -94,14 +94,43 @@ static void advance(struct pt_voice *v)
         v->phase=amount>=distance?amount-distance:v->phase+amount;
     }
 }
+/* x,y<modulus. Subtract the distance to wrap before adding, so even
+ * cycles near UINT64_MAX do not overflow. */
+static uint64_t add_cycle(uint64_t x,uint64_t y,uint64_t modulus)
+{uint64_t distance=modulus-x;return y>=distance?y-distance:x+y;}
+static void advance_block(struct pt_voice *v,uint32_t frames)
+{
+    uint64_t distance,before,amount;
+    if(!frames)return;
+    if(!v->loop || !v->looped) {
+        distance=((uint64_t)(!v->loop || v->segment?v->end:v->loop_start)<<32)-v->phase;
+        /* Number of steps strictly before the boundary. Their product is
+         * smaller than distance and cannot overflow. Cross once through the
+         * frame reader's existing transition, including repeat-PCM handoff. */
+        before=distance?(distance-1)/v->step:0;
+        if(before>=frames){v->phase+=v->step*frames;return;}
+        v->phase+=v->step*before;frames-=(uint32_t)before;
+        advance(v);--frames;
+        if(!v->active || !frames)return;
+    }
+    if(!v->cycle)return;
+    amount=v->step%v->cycle;
+    /* At most eight doubling steps for the public <=256-frame bound.
+     * No step*frames or phase+amount expression can overflow. */
+    while(frames) {
+        if(frames&1)v->phase=add_cycle(v->phase,amount,v->cycle);
+        frames>>=1;
+        if(frames)amount=add_cycle(amount,amount,v->cycle);
+    }
+}
 enum pt_pcm_result pt_voice_advance(struct pt_voice *v,unsigned count,uint32_t frames)
 {
-    unsigned ch;uint32_t i;
+    unsigned ch;
     if(count>16 || frames>256 || (count && !v))return PT_PCM_INVALID;
-    for(i=0;i<frames;++i)for(ch=0;ch<count;++ch)
-        if(v[ch].active && v[ch].pcm)advance(v+ch);
+    for(ch=0;ch<count;++ch)if(v[ch].active && v[ch].pcm)advance_block(v+ch,frames);
     return PT_PCM_OK;
 }
+
 static void frame(struct pt_voice *v,int32_t out[2])
 {
     uint64_t phase=v->phase;uint32_t index,next,fraction;unsigned side;const struct pt_pcm *next_pcm=v->pcm;

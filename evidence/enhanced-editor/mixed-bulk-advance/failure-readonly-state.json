@@ -1,0 +1,8 @@
+{
+  "status": "OK\tPaused=false\tConfig=autosave",
+  "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=166\tsndbuf_status=0",
+  "done": false,
+  "rc": null,
+  "owned_run_present": true,
+  "launcher_present": true
+}

@@ -1,6 +1,10 @@
 #include "editor_paula.h"
 int pt_editor_paula_stop(struct pt_editor_paula *o)
-{return o && pt_paula_song_close(&o->song);}
+{
+    if(!o || !pt_paula_song_close(&o->song))return 0;
+    if(o->release){o->release_pending=1;if(o->release(o->release_context)!=1)return 0;}
+    o->release_pending=0;return 1;
+}
 static int barrier(void *context){return pt_editor_paula_stop(context);}
 static int attached(const struct pt_editor_paula *o)
 {return o && o->editor && o->editor->change_ready==barrier && o->editor->before_change_context==o;}
@@ -9,16 +13,21 @@ int pt_editor_paula_attach(struct pt_editor_paula *o,struct pt_editor *e)
     if(!o || o->editor || o->song || !pt_editor_change_barrier(e,barrier,o))return 0;
     o->editor=e;return 1;
 }
+int pt_editor_paula_bind_release(struct pt_editor_paula *o,int (*release)(void *),void *context)
+{
+    if(!attached(o) || o->song || o->release || o->release_pending || !release)return 0;
+    o->release=release;o->release_context=context;return 1;
+}
 int pt_editor_paula_detach(struct pt_editor_paula *o)
 {
     if(!o || !pt_editor_paula_stop(o))return 0;
     if(attached(o) && !pt_editor_change_barrier(o->editor,NULL,NULL))return 0;
-    o->editor=NULL;return 1;
+    o->editor=NULL;o->release=NULL;o->release_context=NULL;return 1;
 }
 enum pt_paula_song_result pt_editor_paula_begin(struct pt_editor_paula *o,struct pt_paula_voices *v,
     const struct pt_render_options *options,const struct pt_paula_render_caps *caps)
 {
-    if(!attached(o) || o->song || !v || !v->bridge ||
+    if(!attached(o) || o->song || o->release_pending || !v || !v->bridge ||
        v->bridge->sampler!=&o->editor->sampler || v->bridge->project!=o->editor->project)
         return PT_PAULA_SONG_INVALID;
     return pt_paula_song_begin(v,options,caps,&o->editor->sampler.allocator,&o->song);

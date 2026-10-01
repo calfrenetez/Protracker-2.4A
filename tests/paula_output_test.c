@@ -10,7 +10,7 @@ static struct Device device;
 static struct {struct IORequest *q;unsigned pending;} requests[16];
 static struct Message *messages[4];static unsigned message_count;
 static unsigned live,opens,closes,commands,aborts,waits,resources,fail_resource;
-static unsigned delay_start,delay_abort,delay_control,start_error,control_error;
+static unsigned delay_start,delay_abort,delay_control,start_error,control_error,delay_free;
 static union {uint16_t align;uint8_t bytes[32];} chip;
 static unsigned find(struct IORequest *q){unsigned i;for(i=0;i<16;++i)if(requests[i].q==q)return i;assert(0);return 0;}
 struct MsgPort *CreateMsgPort(void){struct MsgPort *p;if(++resources==fail_resource)return 0;p=calloc(1,sizeof(*p));assert(p);p->mp_SigBit=4;++live;return p;}
@@ -21,7 +21,7 @@ void BeginIO(struct IORequest *q){struct IOAudio *a=(struct IOAudio *)q;unsigned
  case ADCMD_ALLOCATE:assert(q->io_Flags==(IOF_QUICK|ADIOF_NOWAIT) && q->io_Message.mn_Node.ln_Pri==-128 && a->ioa_Length==1 && *a->ioa_Data==15);q->io_Unit=(struct Unit *)(uintptr_t)15;a->ioa_AllocKey=7;break;
  case ADCMD_SETPREC:assert(q->io_Flags==IOF_QUICK && q->io_Message.mn_Node.ln_Pri==127 && (uintptr_t)q->io_Unit==15 && a->ioa_AllocKey==7);break;
  case ADCMD_LOCK:assert(!q->io_Flags && a->ioa_AllocKey==7);requests[i].pending=1;break;
- case ADCMD_FREE:assert(a->ioa_AllocKey==7 && (uintptr_t)q->io_Unit==15);for(i=0;i<16;++i)if(requests[i].q && requests[i].q->io_Command==ADCMD_LOCK)requests[i].pending=0;break;
+ case ADCMD_FREE:assert(a->ioa_AllocKey==7 && (uintptr_t)q->io_Unit==15);if(delay_free){q->io_Flags&=~IOF_QUICK;requests[i].pending=1;break;}for(i=0;i<16;++i)if(requests[i].q && requests[i].q->io_Command==ADCMD_LOCK)requests[i].pending=0;break;
  case CMD_WRITE:assert(a->ioa_AllocKey==7 && q->io_Flags==(IOF_QUICK|ADIOF_PERVOL|ADIOF_WRITEMESSAGE));assert(a->ioa_Data==chip.bytes && a->ioa_Length==32 && !a->ioa_Cycles && a->ioa_Period>=124 && a->ioa_Volume<=64);assert(a->ioa_WriteMsg.mn_ReplyPort && a->ioa_WriteMsg.mn_Length==sizeof(struct Message));
   if(start_error){q->io_Error=-10;break;}q->io_Flags&=~IOF_QUICK;requests[i].pending=1;if(!suppress_dma)dma|=(unsigned)(uintptr_t)q->io_Unit;if(!delay_start){assert(message_count<4);messages[message_count++]=&a->ioa_WriteMsg;}break;
  case ADCMD_PERVOL:assert(a->ioa_AllocKey==7 && q->io_Flags==IOF_QUICK);if(control_error)q->io_Error=-10;if(delay_control){q->io_Flags&=~IOF_QUICK;requests[i].pending=1;}break;
@@ -36,7 +36,7 @@ ULONG TypeOfMem(const void *p){return (uintptr_t)p>=(uintptr_t)chip.bytes && (ui
 void CloseDevice(struct IORequest *q){assert(!q->io_Unit && !((struct IOAudio *)q)->ioa_AllocKey);++closes;}
 void DeleteIORequest(struct IORequest *q){unsigned i=find(q);assert(!requests[i].pending);requests[i].q=0;--live;free(q);}
 void DeleteMsgPort(struct MsgPort *p){assert(!message_count);--live;free(p);}
-static void reset(void){assert(!live && opens==closes && !message_count);memset(requests,0,sizeof(requests));opens=closes=commands=aborts=waits=resources=fail_resource=delay_start=delay_abort=delay_control=start_error=control_error=0;dma=0x200;suppress_dma=hold_dma=0;executive.LibNode.lib_Version=36;executive.ex_EClockFrequency=709379;}
+static void reset(void){assert(!live && opens==closes && !message_count);memset(requests,0,sizeof(requests));opens=closes=commands=aborts=waits=resources=fail_resource=delay_start=delay_abort=delay_control=start_error=control_error=delay_free=0;dma=0x200;suppress_dma=hold_dma=0;executive.LibNode.lib_Version=36;executive.ex_EClockFrequency=709379;}
 static void ready(struct pt_native_paula_output *o){assert(pt_native_paula_output_open(o));assert(pt_native_paula_output_advance(o)==0);assert(pt_native_paula_output_advance(o)==0);assert(pt_native_paula_output_advance(o)==1);assert(live==12);}
 static void closed(struct pt_native_paula_output *o){unsigned i;for(i=0;i<8 && !pt_native_paula_output_close(o);++i){}assert(i<8 && !live && opens==closes);assert(pt_native_paula_output_close(o));}
 int main(void){struct pt_native_paula_output o;struct pt_paula_voice_api api;struct pt_paula_voice_plan p={chip.bytes,16,400,0},bad;unsigned i,cases=0;

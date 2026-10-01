@@ -3933,3 +3933,23 @@ reader/cache/device cleanup PASS; independent locked DMAoff/pathabsence PASS.
 Evidence: `evidence/enhanced-editor/paula-native-engine`. Coordinated release in
 checkpoint. This is production master/cache/device ownership integration, not
 native PLAY/timer/event-loop integration, audible/timing or physical acceptance.
+
+
+## Native prepared editor binding — host/cross-build, 1 October 2026
+
+The editor Paula barrier now supports an optional final device/context release
+callback after the song has closed. A pending callback vetoes mutation, disposal,
+detach and restart even with songNULL; only exactly1 confirms release. Context
+survives until successful detach. Existing bindings without this hook behave as
+before. `src/native/editor_paula.h` attaches this hook to the native cache/device
+engine before preparation; cancellation before song publication also closes the
+engine. Options copied per run; failed preparation is terminal until explicit
+barrier cleanup. Advance reserves/binds/begins or prepares masters, without output.
+Caller subsequently uses the same attached prepared-song APIs and honest timing.
+
+Host8/16/24 integration, modeled DMA retention and pending finalFREE barrier
+cases plus existing editor/output/engine regressions PASS (four suites25.892s).
+Native helper cross-compiler syntax and existing editor fixture cross-build PASS;
+no new native execution. Evidence:`evidence/enhanced-editor/native-editor-paula-binding`.
+Actual frontend PLAY/private timer/Wait/advance integration, native prepared song
+runtime evidence, output timing/listening/endurance and physical acceptance remain.

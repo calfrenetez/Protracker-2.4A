@@ -7,8 +7,14 @@
  * Editor, binding and all callback/allocator contexts survive failed stop.
  * Detach BEFORE editor reinit/free, including after successful dispose.
  * No native device, PLAY action, DMA, timer or clock is enabled. */
-struct pt_editor_paula {struct pt_editor *editor;struct pt_paula_song *song;};
+struct pt_editor_paula {struct pt_editor *editor;struct pt_paula_song *song;
+    int (*release)(void *);void *release_context;unsigned release_pending;};
 int pt_editor_paula_attach(struct pt_editor_paula *,struct pt_editor *);
+/* Optional final device/context barrier, installed once before begin. Exactly1
+ * confirms release after song readers/cache/master pins close. Other results
+ * veto edits/disposal/restart even when song is already NULL. Context remains
+ * alive/immutable until detach succeeds. Serialized, no callback reentry. */
+int pt_editor_paula_bind_release(struct pt_editor_paula *,int (*)(void *),void *);
 /* One close attempt, no polling/forced release. Pending/failed reader stop or
  * adapter quiescence retains song, master pins and editor barrier. Explicit retry
  * required before mutation/disposal/replacement. NULL song already stopped. */

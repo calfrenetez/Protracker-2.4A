@@ -1,0 +1,11 @@
+NATIVE EDITOR PAULA HOST PASS: prepared device output; early cancellation, retained DMA and final FREE barrier, capability refusal
+.EDITOR PAULA PASS: edits, imports, undo, replacement and disposal wait for reader stops and quiescence
+.PAULA OUTPUT HOST PASS: 24 ownership/command cases
+.PAULA ENGINE PASS: 8-bit master, selected Chip32 shared by four silent device readers, confirmed stop before cache/device release
+PAULA ENGINE PASS: 16-bit master, selected Chip32 shared by four silent device readers, confirmed stop before cache/device release
+PAULA ENGINE PASS: 24-bit master, selected Chip32 shared by four silent device readers, confirmed stop before cache/device release
+.
+----------------------------------------------------------------------
+Ran 4 tests in 25.892s
+
+OK

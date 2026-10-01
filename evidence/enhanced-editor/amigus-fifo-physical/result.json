@@ -1,0 +1,188 @@
+{
+  "passed": true,
+  "target": "real-a1200",
+  "scope": "Initially idle Mini: three disabled zero-data long stores, exact 2/4/6 word counts, confirmed nonempty FIFO reset/release/AHI restoration; no playback enable/IRQ/capacity/ordering/audio acceptance",
+  "binary_sha256": "6c87f24a1d9e3d4395c39a884d4c203980383bf7641be3c9ec3e6ae9dc8bd5f5",
+  "emulator_evidence": "build/dev/render-files-1790894461252831000/result.json",
+  "independent_emulator_cleanup": "build/dev/fifo-independent-1790894573717543000/result.json",
+  "emulator_environment": {
+    "profile": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae",
+    "share": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests"
+  },
+  "emulator_before": "OK\tPaused=false\tConfig=autosave",
+  "audio_before": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0",
+  "target_switch_attempted": true,
+  "physical_target": {
+    "connected": true,
+    "mode": "tcp",
+    "logCount": 545,
+    "varCount": 0,
+    "lastHeartbeat": {
+      "type": "HB",
+      "tick": 12,
+      "freeChip": 1929744,
+      "freeFast": 121892328,
+      "timestamp": "2026-10-01T22:44:33.652180+00:00"
+    },
+    "serialConnectedAt": 1790894673.502631,
+    "lastBridgeMessageAt": 1790894673.707938,
+    "lastHeartbeatAt": 1790894673.652205,
+    "bridgeSilentSec": 0.0,
+    "host": "192.168.0.156",
+    "port": 2345
+  },
+  "guest_directory": "RAM:ptg-discovery-physical-amigus-ownership-1790894672726472000",
+  "calls": [
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Version\nCPU\nAvail\nVersion bsdsocket.library\nShowNetStatus\nEcho PTG-IDENTITY-DONE\n",
+        "timeout": 20
+      },
+      "result": "[OK]\nKickstart 47.115, Workbench 47.5\nSystem: 68030  68030-MMU no FastROM (INST: Cache Burst) (DATA: Cache NoBurst)\nType  Available    In-Use   Maximum   Largest\nchip    1929744    163312   2093056   1790936\nfast  121863576  11305576 133169152 120351888\ntotal 123793320  11468888 135262208 120351888\nbsdsocket.library 4.364\nNetwork status summary\nLocal host address         = 192.168.0.156 (on interface 'plipbox')\nDefault gateway address    = 192.168.0.1\nDomain name system servers = 192.168.0.1, 192.168.0.1\nPTG-IDENTITY-DONE"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Work:AmigaDev-20260923/amiga-bridge"
+      },
+      "result": "File: Work:AmigaDev-20260923/amiga-bridge\nCRC32: D75C2355\nSize: 150192 bytes"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "LIBS:amigus.library"
+      },
+      "result": "File: LIBS:amigus.library\nCRC32: 8B0D4B22\nSize: 4772 bytes"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "DEVS:AHI/AmiGUS.audio"
+      },
+      "result": "File: DEVS:AHI/AmiGUS.audio\nCRC32: BA67FEF4\nSize: 11028 bytes"
+    },
+    {
+      "tool": "amiga_lib_info",
+      "arguments": {
+        "name": "AmiGUS.audio"
+      },
+      "result": "Library: AmiGUS.audio\n  Version:   4.23\n  Open count: 0\n  Flags:     0x04\n  Neg size:  116 bytes (jump table)\n  Pos size:  258 bytes (data)\n  Base addr: 0x402B4FB4\n  ID string: $VER: AmiGUS.audio 4.023 (30.8.26) 020 SAS/C cross"
+    },
+    {
+      "tool": "amiga_dev_info",
+      "arguments": {
+        "name": "ahi.device"
+      },
+      "result": "Device: ahi.device\n  Version:   6.6\n  Open count: 0\n  Flags:     0x04\n  Neg size:  164 bytes (jump table)\n  Pos size:  148 bytes (data)\n  Base addr: 0x4033F61C\n  ID string: ahi.device 6.6 (27.09.05) \u00a91994-2005 Martin Blom. 68020-60 version."
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "MakeDir RAM:ptg-discovery-physical-amigus-ownership-1790894672726472000\nIf WARN\n Quit 20\nEndIf\nEcho PTG-DIRECTORY-CREATED\n",
+        "timeout": 20
+      },
+      "result": "[OK]\nPTG-DIRECTORY-CREATED"
+    },
+    {
+      "tool": "amiga_push_file",
+      "arguments": {
+        "local_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/physical-amigus-ownership-1790894672726472000/AmiGUSTest",
+        "amiga_path": "RAM:ptg-discovery-physical-amigus-ownership-1790894672726472000/AmiGUSTest"
+      },
+      "result": "Transferred 23760 bytes in 7.4s (3232 B/s), 24 chunks, CRC32 verified"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "RAM:ptg-discovery-physical-amigus-ownership-1790894672726472000/AmiGUSTest"
+      },
+      "result": "File: RAM:ptg-discovery-physical-amigus-ownership-1790894672726472000/AmiGUSTest\nCRC32: 38FC6F37\nSize: 23760 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "FailAt 21\nStack 65536\nCD RAM:ptg-discovery-physical-amigus-ownership-1790894672726472000\nAmiGUSTest --idle-fifo >discovery.log\nEcho PTG-DISCOVERY-RC $RC\nCD RAM:\nEcho PTG-DISCOVERY-DONE\n",
+        "timeout": 45
+      },
+      "result": "[OK]\nPTG-DISCOVERY-RC 0\nPTG-DISCOVERY-DONE"
+    },
+    {
+      "tool": "amiga_pull_file",
+      "arguments": {
+        "amiga_path": "RAM:ptg-discovery-physical-amigus-ownership-1790894672726472000/discovery.log",
+        "local_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/physical-amigus-ownership-1790894672726472000/discovery.log"
+      },
+      "result": "Downloaded 746 bytes in 0.4s (1827 B/s), 1 chunks, CRC32 verified"
+    },
+    {
+      "tool": "amiga_lib_info",
+      "arguments": {
+        "name": "AmiGUS.audio"
+      },
+      "result": "Library: AmiGUS.audio\n  Version:   4.23\n  Open count: 0\n  Flags:     0x04\n  Neg size:  116 bytes (jump table)\n  Pos size:  258 bytes (data)\n  Base addr: 0x402B4FB4\n  ID string: $VER: AmiGUS.audio 4.023 (30.8.26) 020 SAS/C cross"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "DEVS:AHI/AmiGUS.audio"
+      },
+      "result": "File: DEVS:AHI/AmiGUS.audio\nCRC32: BA67FEF4\nSize: 11028 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "CD RAM:\nIf EXISTS RAM:ptg-discovery-physical-amigus-ownership-1790894672726472000/AmiGUSTest\n Delete RAM:ptg-discovery-physical-amigus-ownership-1790894672726472000/AmiGUSTest\n If WARN\n  Quit 20\n EndIf\nEndIf\nIf EXISTS RAM:ptg-discovery-physical-amigus-ownership-1790894672726472000/discovery.log\n Delete RAM:ptg-discovery-physical-amigus-ownership-1790894672726472000/discovery.log\n If WARN\n  Quit 20\n EndIf\nEndIf\nDelete RAM:ptg-discovery-physical-amigus-ownership-1790894672726472000\nIf WARN\n Quit 20\nEndIf\nIf EXISTS RAM:ptg-discovery-physical-amigus-ownership-1790894672726472000\n Quit 20\nEndIf\nEcho PTG-CLEANUP-ABSENT\n",
+        "timeout": 20
+      },
+      "result": "[OK]\nRAM:ptg-discovery-physical-amigus-ownership-1790894672726472000/AmiGUSTest  Deleted\nRAM:ptg-discovery-physical-amigus-ownership-1790894672726472000/discovery.log  Deleted\nRAM:ptg-discovery-physical-amigus-ownership-1790894672726472000  Deleted\nPTG-CLEANUP-ABSENT"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:ptg-discovery-physical-amigus-ownership-1790894672726472000\n Quit 20\nEndIf\nEcho PTG-INDEPENDENT-ABSENCE\n",
+        "timeout": 20
+      },
+      "result": "[OK]\nPTG-INDEPENDENT-ABSENCE"
+    }
+  ],
+  "script_pending": false,
+  "identity": "[OK]\nKickstart 47.115, Workbench 47.5\nSystem: 68030  68030-MMU no FastROM (INST: Cache Burst) (DATA: Cache NoBurst)\nType  Available    In-Use   Maximum   Largest\nchip    1929744    163312   2093056   1790936\nfast  121863576  11305576 133169152 120351888\ntotal 123793320  11468888 135262208 120351888\nbsdsocket.library 4.364\nNetwork status summary\nLocal host address         = 192.168.0.156 (on interface 'plipbox')\nDefault gateway address    = 192.168.0.1\nDomain name system servers = 192.168.0.1, 192.168.0.1\nPTG-IDENTITY-DONE",
+  "bridge_sha256": "e5c8b4ad13776e59d7792c00b0ea664ca2e4f47fe0a2478ef133839b40f2df8c",
+  "installed_library_sha256": "56551f67ca20f0cc9b61177bb59ff8f0a1a9c558ad1498324367c1aaa4ed8596",
+  "idle_driver_before": "Library: AmiGUS.audio\n  Version:   4.23\n  Open count: 0\n  Flags:     0x04\n  Neg size:  116 bytes (jump table)\n  Pos size:  258 bytes (data)\n  Base addr: 0x402B4FB4\n  ID string: $VER: AmiGUS.audio 4.023 (30.8.26) 020 SAS/C cross",
+  "ahi_before": "Device: ahi.device\n  Version:   6.6\n  Open count: 0\n  Flags:     0x04\n  Neg size:  164 bytes (jump table)\n  Pos size:  148 bytes (data)\n  Base addr: 0x4033F61C\n  ID string: ahi.device 6.6 (27.09.05) \u00a91994-2005 Martin Blom. 68020-60 version.",
+  "idle_driver_sha256": "3ad6ec0b598ebbb215121a72a3945f3360f64963df133d53d45a65b144c84c27",
+  "directory_created": true,
+  "restoration_pending": false,
+  "execution_finished": true,
+  "idle_driver_after": "Library: AmiGUS.audio\n  Version:   4.23\n  Open count: 0\n  Flags:     0x04\n  Neg size:  116 bytes (jump table)\n  Pos size:  258 bytes (data)\n  Base addr: 0x402B4FB4\n  ID string: $VER: AmiGUS.audio 4.023 (30.8.26) 020 SAS/C cross",
+  "driver_restoration_verified": true,
+  "discovery_passed": true,
+  "register_probe_passed": true,
+  "silent_reset_passed": true,
+  "disabled_fifo_passed": true,
+  "run_files_cleaned": true,
+  "independent_cleanup_passed": true,
+  "returned_target": {
+    "connected": true,
+    "mode": "tcp",
+    "logCount": 562,
+    "varCount": 0,
+    "lastHeartbeat": {
+      "type": "HB",
+      "tick": 9585,
+      "freeChip": 1853248,
+      "freeFast": 131627600,
+      "timestamp": "2026-10-01T22:44:47.745065+00:00"
+    },
+    "serialConnectedAt": 1790894687.625659,
+    "lastBridgeMessageAt": 1790894687.74508,
+    "lastHeartbeatAt": 1790894687.7450821,
+    "bridgeSilentSec": 0.0,
+    "host": "127.0.0.1",
+    "port": 2345
+  },
+  "audio_after": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=333\tsndbuf_status=0",
+  "devbench_returned": true
+}

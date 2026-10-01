@@ -441,3 +441,12 @@ recovery and a separate subsequent independent check PASS; window explicitly
 released. Initial failure preserved, cause unproven. Physical qualification is
 pending. Evidence: `../evidence/enhanced-editor/amigus-fifo-host/` and
 `../evidence/enhanced-editor/amigus-fifo-native/`.
+
+
+The separately coordinated physical0.6 FIFO test now PASS: run1790894672726472000,
+three disabled zero-data long stores yielded exactly2/4/6pending16-bit words;
+reset confirmed empty on the first read-only poll. Ownrelease and AHIrestoration
+confirmed, installedCRC unchanged, exactRAMcleanup+independentabsence+idle030return
+PASS; physicalwindow explicitly released. See
+`../evidence/enhanced-editor/amigus-fifo-physical/`. Capacity, sample ordering,
+playback/IRQ/physical timing/output/listening remain open.

@@ -159,6 +159,15 @@ public-call buckets do not isolate individual helpers or prove actual-time playb
 Production and strict timing policies are unchanged. Evidence:
 `evidence/enhanced-editor/mixed-bulk-startup/`.
 
+A separate native6case manual component fixture now measures public-call costs,
+without product profiling hooks:16voice source/current0.467..0.813ms,
+next_live1.225..1.242ms,complete6.558..6.960ms. Complete includes validation,
+lookahead state retirement, callbacks and staged-batch cleanup; these broad buckets
+do not isolate a private helper or prove actual-time feasibility. Each prep retains
+its allocation/upload bound; complete/next allocate/upload nothing, and resource/
+path cleanup passes. Hostfull195 remains a separate tier. Evidence:
+`evidence/enhanced-editor/mixed-component-cost/`.
+
 AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software
 fixtures, plus an absent-library discovery check. Those results do not establish
 positive card access, real MMIO, streaming output or physical acceptance. Native

@@ -222,7 +222,43 @@ static void owner_fixture(unsigned bits,unsigned mode)
             goto close;
         }
 #endif
-#ifdef PT_TEST_MIXED_NATIVE_COST
+#ifdef PT_TEST_MIXED_NATIVE_COMPONENTS
+        if(mode>=58) {
+            struct mixed_cost_clock clock={0};struct pt_render_interval interval;
+            uint64_t before,after;unsigned j,polls=0,voices=mode==59?16:2,allocs,writes;size_t calls;
+            assert(pt_native_eclock_open(&clock.clock));mixed_cost_active=&clock;
+            for(j=0;j<4;++j) {
+                calls=d.calls;allocs=fast_calls;writes=f->writes;
+                before=mixed_cost_tick(&clock);assert(pt_mixed_owner_current(owner)==PT_MIXED_OWNER_OK);after=mixed_cost_tick(&clock);
+                assert(d.calls==calls && fast_calls==allocs && f->writes==writes && !clock.callbacks);
+                printf("NATIVE MIXED COMPONENT current voices=%u total=%lu frequency=%lu bits=%u case=%u\n",voices,(unsigned long)(after-before),(unsigned long)clock.frequency,bits,j);
+            }
+            before=mixed_cost_tick(&clock);assert(pt_mixed_owner_next(owner,&interval)==PT_MIXED_OWNER_OK);after=mixed_cost_tick(&clock);
+            assert(interval.emit && !interval.frames && !interval.end && !clock.callbacks);
+            printf("NATIVE MIXED COMPONENT next_start voices=%u total=%lu frequency=%lu bits=%u\n",voices,(unsigned long)(after-before),(unsigned long)clock.frequency,bits);
+            do {
+                calls=d.calls;allocs=fast_calls;writes=f->writes;
+                before=mixed_cost_tick(&clock);r=pt_mixed_owner_prefetch(owner);after=mixed_cost_tick(&clock);
+                assert(++polls<1000 && !clock.callbacks && !d.starts && !wd.starts && fast_calls==allocs);
+                assert((d.calls==calls && f->writes-writes<=128) || (d.calls==calls+1 && f->writes==writes));
+                assert(r==PT_MIXED_OWNER_PREPARING || r==PT_MIXED_OWNER_OK);
+                printf("NATIVE MIXED COMPONENT prefetch voices=%u total=%lu frequency=%lu bits=%u case=%u\n",voices,(unsigned long)(after-before),(unsigned long)clock.frequency,bits,polls);
+            }while(r==PT_MIXED_OWNER_PREPARING);
+            calls=d.calls;allocs=fast_calls;writes=f->writes;
+            before=mixed_cost_tick(&clock);assert(pt_mixed_owner_complete(owner)==PT_MIXED_OWNER_OK);after=mixed_cost_tick(&clock);
+            assert(d.calls==calls && fast_calls==allocs && f->writes==writes && clock.callbacks==voices);
+            assert(d.starts==(mode==59?4:1) && wd.starts==(mode==59?12:1));
+            assert(before<=clock.first && clock.first<=clock.last && clock.last<=after);
+            if(mode==59)for(j=0;j<16;++j)assert(output_order[j]==(j<4?1:2));
+            printf("NATIVE MIXED COMPONENT complete voices=%u before_first=%lu first_to_last=%lu last_to_return=%lu total=%lu frequency=%lu bits=%u\n",voices,(unsigned long)(clock.first-before),(unsigned long)(clock.last-clock.first),(unsigned long)(after-clock.last),(unsigned long)(after-before),(unsigned long)clock.frequency,bits);
+            calls=d.calls;allocs=fast_calls;writes=f->writes;j=clock.callbacks;
+            before=mixed_cost_tick(&clock);assert(pt_mixed_owner_next(owner,&interval)==PT_MIXED_OWNER_OK);after=mixed_cost_tick(&clock);
+            assert(interval.emit && interval.frames && !interval.end && clock.callbacks==j && d.calls==calls && fast_calls==allocs && f->writes==writes);
+            printf("NATIVE MIXED COMPONENT next_live voices=%u total=%lu frequency=%lu bits=%u\n",voices,(unsigned long)(after-before),(unsigned long)clock.frequency,bits);
+            assert(pt_mixed_owner_close(&owner));mixed_cost_active=NULL;pt_native_eclock_close(&clock.clock);
+            assert(!clock.clock.port && !clock.clock.request);goto detached;
+        }
+#elif defined(PT_TEST_MIXED_NATIVE_COST)
         if(mode>=58) {
             struct mixed_cost_clock clock={0};uint64_t before,after,deadline;unsigned polls=0,j,allocs,writes,voices=mode==59?16:2;size_t calls;
             assert(pt_native_eclock_open(&clock.clock));mixed_cost_active=&clock;
@@ -613,7 +649,10 @@ detached:
     pt_sampler_release(&sampler);assert(!sampler.bytes);pt_document_release(&doc);free(plan);free(batch);free(f);
 }
 static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wavetable_fixture_main;
-#ifdef PT_TEST_MIXED_NATIVE_STARTUP
+#ifdef PT_TEST_MIXED_NATIVE_COMPONENTS
+    for(bits=8;bits<=24;bits+=8)for(mode=58;mode<60;++mode)owner_fixture(bits,mode);
+    puts("MIXED OWNER PASS:6 native component-cost8/16/24 scenarios, manual source/current/next/prefetch/complete public calls, bounded preparation, allocation/upload-free commit/next, global action order, resource cleanup; injected voices, no timed playback acceptance");
+#elif defined(PT_TEST_MIXED_NATIVE_STARTUP)
     for(bits=8;bits<=24;bits+=8)for(mode=58;mode<60;++mode)owner_fixture(bits,mode);
     puts("MIXED OWNER PASS:6 native startup-cost8/16/24 scenarios, fully prepared2/16voice startup, allocation/upload-free exact commit, global action order, resource cleanup; injected logical time/voices, no audio/timing acceptance");
 #elif defined(PT_TEST_MIXED_NATIVE_COST)

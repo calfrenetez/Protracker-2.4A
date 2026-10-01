@@ -1,3 +1,15 @@
+# Bulk advance qualification and retained failure history
+
+The new diagnostic binary passes native equivalence and mixed running-cost checks
+with normal resource cleanup and independent exact-path cleanup. See
+[native diagnostic qualification](native-diagnostic-pass/README.md) for its hashes,
+scope, timing observations and limitations. The approved recovery is retained in
+`recovery-1790834032806376000/`. Host checks and native acceptance remain separate.
+The original timeout below remains FAILED/incomplete with unknown cause; its
+historical uncommitted/paused statements describe that original attempt only.
+
+---
+
 # Bulk advance — host PASS, native FAILED/incomplete
 
 1 October 2026. Changes remain uncommitted/staged; HEAD/origin40edfff is the last

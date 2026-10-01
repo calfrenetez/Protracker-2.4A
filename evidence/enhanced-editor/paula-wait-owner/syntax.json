@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "scope": "pinned NDK FindTask/SetSignal/Wait/MsgPort ownership and helper calls; not executed",
+  "probe_sha256": "154a3d942090e37c1cf722fd9f5ea006afd436bc540f6773c9c769e795240efa",
+  "compiler_sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Isrc/core",
+    "-Ibuild/dev",
+    "-fbbb=-"
+  ]
+}

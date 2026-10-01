@@ -4086,3 +4086,27 @@ Host sanitizer tests across 8/16/24 cover preparation, 300-frame debt draining i
 DMA/timer-abort closure. Cross-build passes. Evidence:
 `evidence/enhanced-editor/paula-service-readiness`. No native execution for this
 candidate; Exec Wait owner and native frontend/output integration remain open.
+
+
+## Native notification-driven owner — host/build, 1 October 2026
+
+`src/native/paula_pump.h` claims one already-started transport and verifies the
+calling task owns its private timer ports. Each step checks a mandatory separate
+termination mask, performs one actual bounded service, and waits on notifications
+only when forecast and observed frame debt are complete. Wakeup requires fresh
+actual service. No priority change, clock relaxation, signal-derived time,
+Wait(0), catchup/rebase or frontend installation. Duplicate/copy/wrong-task use
+and restart with an active owner refuse.
+
+Abort/DONE/error stop once; pending cleanup returns HOLD retaining the complete
+owner/context/storage. Subsequent step remains HOLD until explicit bounded close
+confirms cleanup and releases the claim. Task change after Wait retains HOLD;
+only the original task may close. Caller owns work-loop bounds and abort delivery;
+cooperative notifications do not guarantee recovery from a stuck foreign call.
+
+Host sanitizer tests cover actual-read-after-wake, unfinished forecast/debt, abort,
+late wake, exact modeled full-song traversal, DMA/timer abort retention, task/port
+identity and explicit cleanup. Pinned cross-build and Exec API syntax pass.
+Evidence: `evidence/enhanced-editor/paula-wait-owner`. No native execution of Wait
+owner yet; a finite coordinated diagnostic is next. Frontend, sustained output,
+listening, physical timing and native AmiGUS lowering remain requirements.

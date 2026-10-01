@@ -1,6 +1,6 @@
 #include "native_exec_memory.h"
 #include "../src/native/task_priority.h"
-#include "../src/native/editor_paula_transport.h"
+#include "../src/native/paula_pump.h"
 #include <proto/dos.h>
 #include <string.h>
 /* Private timer lifetime/refusal and bounded pre-startup periodic polling.

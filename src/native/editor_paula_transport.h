@@ -16,7 +16,9 @@ enum pt_native_paula_phase {
     PT_NATIVE_PAULA_CORE,PT_NATIVE_PAULA_BOUNDARY_DEADLINE,PT_NATIVE_PAULA_BOUNDARY_ARM,
     PT_NATIVE_PAULA_POST,PT_NATIVE_PAULA_PERIODIC_DEADLINE,PT_NATIVE_PAULA_PERIODIC_ARM
 };
+struct pt_native_paula_pump;
 struct pt_native_paula_transport {
+    struct pt_native_paula_pump *pump;
     struct pt_native_editor_paula native;
     struct pt_native_eclock clock;struct pt_native_alarm alarm;
     struct pt_native_alarm service_alarm;struct pt_elapsed_clock service_clock;
@@ -53,7 +55,7 @@ static inline int pt_native_paula_transport_release(void *context)
 }
 static inline int pt_native_paula_transport_attach(struct pt_native_paula_transport *t,struct pt_editor *e)
 {
-    if(!t || t->native.binding.editor || t->native.active || t->clock.port || t->alarm.port || t->service_alarm.port ||
+    if(!t || t->pump || t->native.binding.editor || t->native.active || t->clock.port || t->alarm.port || t->service_alarm.port ||
        t->native.release_tail)return 0;
     t->native.release_tail=pt_native_paula_transport_release;t->native.release_tail_context=t;
     if(pt_native_editor_paula_attach(&t->native,e))return 1;
@@ -75,7 +77,7 @@ static inline enum pt_paula_song_result pt_native_paula_transport_begin(
     struct pt_native_paula_transport *t,const struct pt_render_options *o,size_t budget)
 {
     enum pt_paula_song_result r;
-    if(!t || t->native.release_tail!=pt_native_paula_transport_release ||
+    if(!t || t->pump || t->native.release_tail!=pt_native_paula_transport_release ||
        t->native.release_tail_context!=t)return PT_PAULA_SONG_INVALID;
     r=pt_native_editor_paula_begin(&t->native,o,budget);
     if(r==PT_PAULA_SONG_PREPARING) {

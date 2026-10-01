@@ -79,6 +79,15 @@ class PhysicalDiscoveryGuard(unittest.TestCase):
                     altered=dict(own_native);altered[field]=value;emulator.write_text(json.dumps(altered))
                     with self.assertRaises(RuntimeError):runner.qualification(binary,build,emulator,independent,True)
 
+            # A prior reset qualification cannot qualify the new FIFO mode.
+            altered=dict(own_native);altered['amigus-reset_returncode']='5'
+            emulator.write_text(json.dumps(altered))
+            with self.assertRaisesRegex(RuntimeError,'disabled FIFO qualification missing'):
+                runner.qualification(binary,build,emulator,independent,True,True,True,True,True)
+            altered['amigus-fifo_returncode']='20';emulator.write_text(json.dumps(altered))
+            with self.assertRaisesRegex(RuntimeError,'disabled FIFO qualification missing'):
+                runner.qualification(binary,build,emulator,independent,True,True,True,True,True)
+
     def test_uncertain_script_never_deletes_or_switches_target(self):
         switches=[]; calls=[]
         async def connect(target):switches.append(target)

@@ -1,0 +1,8 @@
+{
+  "passed": false,
+  "scope": "shared030 isolated ambient-task private Wait/timer actual-clock latency; no song/cache/device/output/frontend/listening/physical acceptance",
+  "PTExecWaitLatencyTest_sha256": "6247242597ec212151922f23490bdad54bf7dda0dc427a4b488e9e8bdc0ac0bc",
+  "wait-latency_returncode": "20",
+  "run_files_cleaned": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=333\tsndbuf_status=0"
+}

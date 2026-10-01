@@ -193,6 +193,7 @@ def main():
     inputs['PTExecPreparedPaulaTest'] = ['tests/native_exec_prepared_paula_test.c',*inputs['PTEditorPaulaTest'][1:]]
     inputs['PTExecPaulaTransportTest'] = ['tests/native_exec_paula_transport_test.c',*inputs['PTEditorPaulaTest'][1:]]
     inputs['PTExecPaulaWaitTest'] = ['tests/native_exec_paula_wait_test.c',*inputs['PTEditorPaulaTest'][1:]]
+    inputs['PTExecWaitLatencyTest'] = ['tests/native_exec_wait_latency_test.c','src/core/elapsed_clock.c']
     inputs['PTEditorMixedTest'] = ['tests/editor_mixed_test.c','src/editor/editor_mixed.c',*dict.fromkeys([*inputs['PTMixedOwnerTest'][1:],*inputs['PTEditorPaulaTest'][1:]])]
     inputs['PTExecEditorMixedTest'] = ['tests/native_exec_editor_mixed_test.c',*inputs['PTEditorMixedTest'][1:]]
     inputs['PTExecPaulaReservationTest'] = ['tests/native_exec_paula_reservation_test.c']

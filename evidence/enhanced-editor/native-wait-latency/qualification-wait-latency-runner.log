@@ -1,0 +1,55 @@
+/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/native-wait-latency/build/dev/render-files-1790860305670332000
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/native-wait-latency/tools/shared_infra_render_files.py", line 412, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/native-wait-latency/tools/shared_infra_render_files.py", line 343, in main
+    assert result[name+'_returncode']=='0' and marker in log,log
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: EXEC MEMORY pool_limit=131265384 reserve=262144 flags=4
+WAIT LATENCY FAIL line=48 frames=5524 calls=42
+LATENCY TASK priority=0 unchanged=1 own_identity=1 timers_closed=1 reader_closed=1 signal_alloc_restored=1 calls=42 frames=5524 max_gap_frames=265 max_lag_ticks=2187 frequency=709379 initialized=1 termination_target=3746551654 termination_arm=3746197288
+LATENCY OBS index=0 target=3746198856 arm=3746197401 actual=3746199030 frames=139 gap=139 wake=1073741824
+LATENCY OBS index=1 target=3746200748 arm=3746199144 actual=3746200926 frames=268 gap=129 wake=1073741824
+LATENCY OBS index=2 target=3746202640 arm=3746201042 actual=3746202817 frames=396 gap=128 wake=1073741824
+LATENCY OBS index=3 target=3746204531 arm=3746202932 actual=3746204704 frames=523 gap=127 wake=1073741824
+LATENCY OBS index=4 target=3746206423 arm=3746204818 actual=3746206599 frames=651 gap=128 wake=1073741824
+LATENCY OBS index=5 target=3746208315 arm=3746206712 actual=3746208488 frames=779 gap=128 wake=1073741824
+LATENCY OBS index=6 target=3746210206 arm=3746208603 actual=3746210381 frames=907 gap=128 wake=1073741824
+LATENCY OBS index=7 target=3746212098 arm=3746210496 actual=3746212274 frames=1035 gap=128 wake=1073741824
+LATENCY OBS index=8 target=3746213990 arm=3746212387 actual=3746214163 frames=1163 gap=128 wake=1073741824
+LATENCY OBS index=9 target=3746215881 arm=3746214276 actual=3746216055 frames=1291 gap=128 wake=1073741824
+LATENCY OBS index=10 target=3746217773 arm=3746216169 actual=3746217947 frames=1419 gap=128 wake=1073741824
+LATENCY OBS index=11 target=3746219665 arm=3746218060 actual=3746219838 frames=1547 gap=128 wake=1073741824
+LATENCY OBS index=12 target=3746221556 arm=3746219952 actual=3746221730 frames=1675 gap=128 wake=1073741824
+LATENCY OBS index=13 target=3746223448 arm=3746221844 actual=3746223624 frames=1803 gap=128 wake=1073741824
+LATENCY OBS index=14 target=3746225340 arm=3746223737 actual=3746225513 frames=1931 gap=128 wake=1073741824
+LATENCY OBS index=15 target=3746227231 arm=3746225626 actual=3746227405 frames=2059 gap=128 wake=1073741824
+LATENCY OBS index=16 target=3746229123 arm=3746227519 actual=3746229298 frames=2187 gap=128 wake=1073741824
+LATENCY OBS index=17 target=3746231015 arm=3746229412 actual=3746231191 frames=2315 gap=128 wake=1073741824
+LATENCY OBS index=18 target=3746232906 arm=3746231306 actual=3746233078 frames=2443 gap=128 wake=1073741824
+LATENCY OBS index=19 target=3746234798 arm=3746233192 actual=3746234973 frames=2571 gap=128 wake=1073741824
+LATENCY OBS index=20 target=3746236690 arm=3746235085 actual=3746236864 frames=2699 gap=128 wake=1073741824
+LATENCY OBS index=21 target=3746238581 arm=3746236979 actual=3746238754 frames=2827 gap=128 wake=1073741824
+LATENCY OBS index=22 target=3746240473 arm=3746238867 actual=3746240649 frames=2955 gap=128 wake=1073741824
+LATENCY OBS index=23 target=3746242365 arm=3746240762 actual=3746242538 frames=3083 gap=128 wake=1073741824
+LATENCY OBS index=24 target=3746244256 arm=3746242653 actual=3746244431 frames=3211 gap=128 wake=1073741824
+LATENCY OBS index=25 target=3746246148 arm=3746244546 actual=3746246324 frames=3339 gap=128 wake=1073741824
+LATENCY OBS index=26 target=3746248040 arm=3746246437 actual=3746248212 frames=3467 gap=128 wake=1073741824
+LATENCY OBS index=27 target=3746249931 arm=3746248325 actual=3746250105 frames=3595 gap=128 wake=1073741824
+LATENCY OBS index=28 target=3746251823 arm=3746250219 actual=3746251999 frames=3723 gap=128 wake=1073741824
+LATENCY OBS index=29 target=3746253715 arm=3746252112 actual=3746253888 frames=3851 gap=128 wake=1073741824
+LATENCY OBS index=30 target=3746255606 arm=3746254001 actual=3746255780 frames=3979 gap=128 wake=1073741824
+LATENCY OBS index=31 target=3746257498 arm=3746255894 actual=3746257673 frames=4107 gap=128 wake=1073741824
+LATENCY OBS index=32 target=3746259390 arm=3746257787 actual=3746259566 frames=4235 gap=128 wake=1073741824
+LATENCY OBS index=33 target=3746261282 arm=3746259681 actual=3746261507 frames=4367 gap=132 wake=1073741824
+LATENCY OBS index=34 target=3746263173 arm=3746261621 actual=3746263348 frames=4491 gap=124 wake=1073741824
+LATENCY OBS index=35 target=3746265065 arm=3746263462 actual=3746265242 frames=4620 gap=129 wake=1073741824
+LATENCY OBS index=36 target=3746266957 arm=3746265357 actual=3746267133 frames=4747 gap=127 wake=1073741824
+LATENCY OBS index=37 target=3746268848 arm=3746267248 actual=3746269025 frames=4875 gap=128 wake=1073741824
+LATENCY OBS index=38 target=3746270740 arm=3746269139 actual=3746270917 frames=5004 gap=129 wake=1073741824
+LATENCY OBS index=39 target=3746272632 arm=3746271032 actual=3746272808 frames=5131 gap=127 wake=1073741824
+LATENCY OBS index=40 target=3746274523 arm=3746272922 actual=3746274700 frames=5259 gap=128 wake=1073741824
+LATENCY OBS index=41 target=3746276415 arm=3746274816 actual=3746278602 frames=5524 gap=265 wake=1073741824
+EXEC MEMORY PASS: 1 Fast allocations, zero owned bytes, budget refusal without Chip fallback
+

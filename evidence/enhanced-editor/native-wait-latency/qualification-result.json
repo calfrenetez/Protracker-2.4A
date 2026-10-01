@@ -1,0 +1,16 @@
+{
+  "passed": false,
+  "seconds": 1.980849625018891,
+  "window_bound_seconds": 200,
+  "cases": [
+    {
+      "case": "wait-latency",
+      "binary": "PTExecWaitLatencyTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/native-wait-latency/build/dev/render-files-1790860305670332000",
+      "sha256": "6247242597ec212151922f23490bdad54bf7dda0dc427a4b488e9e8bdc0ac0bc",
+      "independent_cleanup": true,
+      "passed": false,
+      "runner_rc": 1
+    }
+  ]
+}

@@ -34,3 +34,19 @@ components already implemented remain distinct from these integration gates.
 Once chosen, write the explicit backend/policy contract and meaningful failure
 tests before another candidate run. Every guest window still needs fresh exact
 coordination, live guards, bounded lifetime, independent cleanup and release.
+
+## Feasibility assessment completed after the user's continuation
+
+See `NATIVE_SCHEDULING_FEASIBILITY.md` and the host numerical evidence in
+`evidence/enhanced-editor/native-timing-feasibility`. The current audio adapter
+has no timestamped activation command; a future queue alone cannot fix this.
+The strict core gate admits the correct logical frame (14/15 EClock ticks at
+48 kHz), rather than requiring one exact counter tick. Passing that gate is
+still distinct from physical first-sample timing. The 720-tick late observation
+exceeds that entire window.
+
+The recommended next concrete experiment is a separately owned CIA timer-only
+diagnostic before designing its playback backend. Keep the existing gate and
+classic path unchanged. This new architecture direction remains subject to the
+user's choice; neither IRQ feasibility nor sample-exact hardware timing is
+qualified by the host probe. No new guest run was needed for this assessment.

@@ -7,6 +7,13 @@ Playback representations must never become the project's source of truth.
 
 ## Current implementation status — 1 October 2026
 
+Host scheduling feasibility is now documented in `NATIVE_SCHEDULING_FEASIBILITY.md`.
+The current immediate audio adapter has no absolute activation timestamp. A
+sanitized integer probe checks 184,200 logical-frame admission windows, including
+14/15 EClock ticks at 48 kHz; this is not native latency or physical sample timing.
+The next recommended experiment is a separately owned CIA timer-only diagnostic,
+pending the architecture choice. No new guest operation or runtime change.
+
 Latest first-start qualification is FAILED: even with own-task diagnostic
 priority5, CORE observed the first musical target about1.015ms late and the
 unchanged exact gate refused before output. Prepared32Chipbytes were verified

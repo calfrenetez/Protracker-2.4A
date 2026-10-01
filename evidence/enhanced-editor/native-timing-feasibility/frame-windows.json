@@ -1,0 +1,63 @@
+{
+  "scope": "host integer frame admission only; no native timing or output proof",
+  "cases": [
+    {
+      "frequency": 709379,
+      "rate": 44100,
+      "windows_checked": 44100,
+      "minimum_ticks": 16,
+      "maximum_ticks": 17,
+      "minimum_count": 40321,
+      "maximum_count": 3779
+    },
+    {
+      "frequency": 709379,
+      "rate": 48000,
+      "windows_checked": 48000,
+      "minimum_ticks": 14,
+      "maximum_ticks": 15,
+      "minimum_count": 10621,
+      "maximum_count": 37379
+    },
+    {
+      "frequency": 715909,
+      "rate": 44100,
+      "windows_checked": 44100,
+      "minimum_ticks": 16,
+      "maximum_ticks": 17,
+      "minimum_count": 33791,
+      "maximum_count": 10309
+    },
+    {
+      "frequency": 715909,
+      "rate": 48000,
+      "windows_checked": 48000,
+      "minimum_ticks": 14,
+      "maximum_ticks": 15,
+      "minimum_count": 4091,
+      "maximum_count": 43909
+    }
+  ],
+  "returncode": 0,
+  "base_commit": "b43f1e272a82339a445e9df8e6e8295cb8291f47",
+  "flags": [
+    "-std=c99",
+    "-O1",
+    "-g",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fsanitize=address,undefined"
+  ],
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "inputs": {
+    "evidence/enhanced-editor/native-timing-feasibility/frame_window.c": "965e34c6338a86cea4fda8ce9afdd44ed1ca185c1a97d866eff7f6e5c78ff071",
+    "src/core/elapsed_clock.c": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+    "src/core/elapsed_clock.h": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+    "src/editor/paula_song.c": "d57d604a4d8f7f1a2f7400eba8aacf6f1b79703f020721089021b9f971042d67",
+    "src/native/paula_output.h": "eb297d0280c0d0928be8480bb89f8b73b05e0dc4d9effda77c300da8c93d8c81",
+    "src/core/studio_queue.h": "891f680cb1cce81943e864cf73592a6b65643203762218c7676073935bc4bb04",
+    "tools/prepare_replay.py": "e14f79de1c37e4957b64733128d41c9395809e7b46337d29724adae4922a760a",
+    "src/native/replay_abi.s": "73ea464308d258ebe94069e1bbf9522dff11a9b39f959b4dfb04bd3ca8b967bd"
+  }
+}

@@ -386,5 +386,10 @@ Shared030 synthetic-memory fixture passes five reads/sixteen refusal guards and
 unchanged backing bytes. Exact0.4 four missing-library modes return5; existing
 guard/Exec/ownership/ABI fixtures pass. Exact cleanup and subsequent independent
 absence/running68030/allDMAoff pass, window released. Evidence:
-`../evidence/enhanced-editor/amigus-pcm-read-native/`. Physical register reads
-remain pending; emulator memory reads do not qualify Mini readback semantics.
+`../evidence/enhanced-editor/amigus-pcm-read-native/`. The separately coordinated realMini read-only probe now PASS: run1790892657172678000,
+flags/mask/format/rate/pendingwords all0, ownrelease confirmed1/retained0, normal
+AHIreload resident1/support1/delayed0/users0, unchanged installeddriverCRC. Exact
+RAMcleanup/separateabsence/connectedidle030return PASS and physicalwindowreleased.
+Evidence: `../evidence/enhanced-editor/amigus-pcm-read-physical/`. This qualifies
+these five status reads in the observed idle state. Reset/write/readback changes,
+FIFOcapacity/ordering, IRQ, playback, physicalsilence and listening remain open.

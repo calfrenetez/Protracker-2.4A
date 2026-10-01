@@ -364,3 +364,27 @@ respectively, all released. Complete host invocation passes203 cases; the one
 HEAD-based oracle was separately rerun successfully on8cefe39 in7.839s to cover
 this latest source.
 Evidence and the exact source caveat: `evidence/enhanced-editor/studio-prefill/`.
+
+## Read-only native Mini register qualification (1 October2026)
+
+`src/native/amigus_pcm_read.c` supplies five volatile16-bit status reads only
+(flags0x00, mask0x02, format0x04, rate0x06, pendingwords0x10). It requires an
+exclusive PCM reservation/access lease, no installed interrupt, and the observed
+Mini hardware0/firmware0x7ea663e7. Unknown cards/firmware, unaligned/wrapping/null
+addresses, lost ownership and other offsets refuse without changing the output.
+No write/reset/start/IRQ or capacity guess is exposed.
+
+AmiGUSTest0.4 `--idle-registers` uses the approved unused-AHI window around this
+probe. It reserves through the production native adapter/core lifecycle, reads
+status, reports PASS only for enableclear/playbackmaskclear/zero pendingwords,
+ends access, explicitly confirms its own release with the pinned NULL-owner
+probe, then closes the library and restores AHI. Unconfirmed release/restoration
+retains Task/base/card/owner and the harness target/files. Non-idle observations
+are SKIP, with no attempt to change another owner's previous hardware state.
+
+Shared030 synthetic-memory fixture passes five reads/sixteen refusal guards and
+unchanged backing bytes. Exact0.4 four missing-library modes return5; existing
+guard/Exec/ownership/ABI fixtures pass. Exact cleanup and subsequent independent
+absence/running68030/allDMAoff pass, window released. Evidence:
+`../evidence/enhanced-editor/amigus-pcm-read-native/`. Physical register reads
+remain pending; emulator memory reads do not qualify Mini readback semantics.

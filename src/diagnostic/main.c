@@ -1,4 +1,4 @@
-/* AmiGUSTest 0.3: discovery and exclusive-ownership checks only.
+/* AmiGUSTest 0.4: discovery, ownership and read-only Mini PCM status.
  * Does not program PCM/wavetable/codec registers or install interrupts. */
 #include <exec/libraries.h>
 #include <proto/exec.h>
@@ -9,6 +9,7 @@
 #include "amigus_calls.h"
 #include "ownership.h"
 #include "native_driver_window.h"
+#include "register_probe.h"
 
 struct Library *AmiGUS_Base;
 typedef char abi_card_size[(sizeof(struct AmiGUS) == 40) ? 1 : -1];
@@ -32,7 +33,7 @@ static int diagnostic(int argc, char **argv)
         puts("usage: AmiGUSTest [--discover|--ownership]");
         return PT_FAIL;
     }
-    printf("AMIGUSTEST schema=1 version=0.3 mode=%s\n",
+    printf("AMIGUSTEST schema=1 version=0.4 mode=%s\n",
            ownership ? "ownership" : "discover");
     puts("SCOPE audio=NOT_TESTED interrupts=NOT_TESTED firmware_write=NO");
     AmiGUS_Base = OpenLibrary("amigus.library", 1);
@@ -115,18 +116,19 @@ int main(int argc, char **argv)
     struct pt_native_driver driver = {"AmiGUS.audio", "DEVS:AHI/AmiGUS.audio",
         "$VER: AmiGUS.audio 4.023 (30.8.26) 020 SAS/C cross\r\n", 4, 23};
     struct pt_driver_api api = pt_native_driver_api(&driver);
-    int result;
+    int result, registers = argc==2 && !strcmp(argv[1], "--idle-registers");
+    const char *label = registers ? "IDLE-REGISTERS" : "IDLE-OWNERSHIP";
     char *ownership_args[] = {argv[0], "--ownership"};
-    if (argc != 2 || strcmp(argv[1], "--idle-ownership"))
+    if (!registers && (argc != 2 || strcmp(argv[1], "--idle-ownership")))
         return diagnostic(argc, argv);
-    puts("IDLE-OWNERSHIP scope=unused-RC6-020-AHI-only audio=NOT_TESTED");
+    printf("%s scope=unused-RC6-020-AHI-only audio=NOT_TESTED\n",label);
     if (cancelled(NULL)) return PT_FAIL;
     /* Keep the existing base library resident through driver restoration. */
     pin = OpenLibrary("amigus.library", 1);
-    if (!pin) { puts("IDLE-OWNERSHIP result=SKIP reason=library-unavailable rc=5"); return PT_SKIP; }
+    if (!pin) { printf("%s result=SKIP reason=library-unavailable rc=5\n",label); return PT_SKIP; }
     if (pin->lib_Version != 1 || pin->lib_Revision != 1) {
         CloseLibrary(pin);
-        puts("IDLE-OWNERSHIP result=SKIP reason=unsupported-ownership-contract rc=5");
+        printf("%s result=SKIP reason=unsupported-ownership-contract rc=5\n",label);
         return PT_SKIP;
     }
     window = pt_driver_begin(&api);
@@ -134,7 +136,7 @@ int main(int argc, char **argv)
            window.result, window.stage, window.unloaded, window.restore_needed);
     fflush(stdout);
     result = window.result;
-    if (window.unloaded) result = diagnostic(2, ownership_args);
+    if (window.unloaded) result = registers ? pt_register_probe() : diagnostic(2, ownership_args);
     /* diagnostic deliberately never returns with uncertain card ownership.
      * Such a HOLD also keeps this driver restoration obligation and base pin. */
     if (!pt_driver_end(&api, &window)) {
@@ -143,7 +145,7 @@ int main(int argc, char **argv)
         for (;;) Delay(50);
     }
     CloseLibrary(pin);
-    printf("IDLE-OWNERSHIP result=%s unloaded=%u restored=%u restore_needed=%u rc=%d\n",
+    printf("%s result=%s unloaded=%u restored=%u restore_needed=%u rc=%d\n",label,
            result == PT_PASS ? "PASS" : result == PT_SKIP ? "SKIP" : "FAIL",
            window.unloaded, window.restored, window.restore_needed, result);
     return result;

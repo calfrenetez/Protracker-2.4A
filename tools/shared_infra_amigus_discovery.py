@@ -22,8 +22,10 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def qualification(binary, build, emulator, independent, ownership=False, idle_driver=False):
+def qualification(binary, build, emulator, independent, ownership=False, idle_driver=False, registers=False):
     """Refuse physical selection before matching the current exact candidate."""
+    if registers and not idle_driver:
+        raise RuntimeError('Register qualification requires an idle-driver window')
     built = json.loads(build.read_text())
     native = json.loads(emulator.read_text())
     cleanup = json.loads(independent.read_text())
@@ -57,8 +59,13 @@ def qualification(binary, build, emulator, independent, ownership=False, idle_dr
     if idle_driver:
         if not ownership or native.get('amigus-idle_returncode') != '5':
             raise RuntimeError('Exact idle-driver mode unavailable-library check missing')
-        for tool, stem, case in [('PTDriverWindowTest', 'driver-window-build', 'driver-window'),
-                                 ('PTDriverExecTest', 'driver-exec-build', 'driver-exec')]:
+        fixtures = [('PTDriverWindowTest', 'driver-window-build', 'driver-window'),
+                    ('PTDriverExecTest', 'driver-exec-build', 'driver-exec')]
+        if registers:
+            if native.get('amigus-registers_returncode') != '5':
+                raise RuntimeError('Exact register mode unavailable-library check missing')
+            fixtures.append(('PTPcmReadTest', 'pcm-read-build', 'pcm-read'))
+        for tool, stem, case in fixtures:
             manifest = json.loads((ROOT / 'build/diagnostic' / (stem + '.json')).read_text())
             fixture = ROOT / 'build/diagnostic' / tool
             if (native.get(case + '_returncode') != '0' or
@@ -80,8 +87,9 @@ def idle_driver_info(text, require_idle=True):
         raise RuntimeError('AmiGUS.audio is active or outside the verified idle-driver contract')
 
 
-def idle_restoration_finished(output):
-    matches = re.findall(r'^IDLE-OWNERSHIP result=(PASS|SKIP|FAIL) unloaded=([01]) restored=([01]) restore_needed=([01]) rc=(0|5|20)$', output, re.M)
+def idle_restoration_finished(output, registers=False):
+    label = 'IDLE-REGISTERS' if registers else 'IDLE-OWNERSHIP'
+    matches = re.findall(r'^'+label+r' result=(PASS|SKIP|FAIL) unloaded=([01]) restored=([01]) restore_needed=([01]) rc=(0|5|20)$', output, re.M)
     if len(matches) != 1:
         return False
     status, unloaded, restored, pending, rc = matches[0]
@@ -90,7 +98,9 @@ def idle_restoration_finished(output):
             (status != 'PASS' or unloaded == restored == '1'))
 
 
-async def run(out, binary, result, ownership=False, library_contract=None, idle_driver=None):
+async def run(out, binary, result, ownership=False, library_contract=None, idle_driver=None, registers=False):
+    if registers and (not ownership or not idle_driver):
+        raise RuntimeError('Register probe requires the qualified idle-driver transaction')
     sys.path.insert(0, str(INFRA / 'scripts'))
     from amiga import connect
     from bridge_checks import target, require_reply, checksum
@@ -185,7 +195,7 @@ async def run(out, binary, result, ownership=False, library_contract=None, idle_
                 remote = destination + '/' + binary.name
                 await call('amiga_push_file', dict(local_path=str(binary), amiga_path=remote))
                 checksum(await call('amiga_checksum', dict(path=remote)), binary.read_bytes())
-                command = binary.name + (' --idle-ownership' if idle_driver else ' --ownership' if ownership else '')
+                command = binary.name + (' --idle-registers' if registers else ' --idle-ownership' if idle_driver else ' --ownership' if ownership else '')
                 if idle_driver:
                     result['restoration_pending'] = True
                 execution = await call('amiga_run_script', dict(script=f'FailAt 21\nStack 65536\nCD {destination}\n{command} >discovery.log\nEcho PTG-DISCOVERY-RC $RC\nCD RAM:\nEcho PTG-DISCOVERY-DONE\n', timeout=45))
@@ -198,18 +208,22 @@ async def run(out, binary, result, ownership=False, library_contract=None, idle_
                 if idle_driver:
                     # Known termination is not sufficient: positively verify the
                     # restoration obligation before any deletion/target release.
-                    if not idle_restoration_finished(output):
+                    if not idle_restoration_finished(output, registers):
                         raise RuntimeError('Idle-driver restoration state unconfirmed; retain target/files')
                     info = await call('amiga_lib_info', dict(name='AmiGUS.audio'))
                     idle_driver_info(info, require_idle=False)
                     checksum(await call('amiga_checksum', dict(path='DEVS:AHI/AmiGUS.audio')), snapshot.read_bytes())
                     result.update(idle_driver_after=info, driver_restoration_verified=True)
                     result['restoration_pending'] = False
-                marker = 'SUMMARY result=PASS reason=complete' if ownership else 'AMIGUS DISCOVERY PASS:'
+                marker = 'REGISTERS result=PASS reason=idle rc=0' if registers else 'SUMMARY result=PASS reason=complete' if ownership else 'AMIGUS DISCOVERY PASS:'
                 if 'PTG-DISCOVERY-RC 0' not in execution.splitlines() or marker not in output:
                     raise RuntimeError('Physical discovery test failed')
                 result['discovery_passed'] = True
-                if ownership:
+                if registers:
+                    if 'REGISTER RELEASE confirmed=1 retained=0 driver=0x00000000' not in output:
+                        raise RuntimeError('Register probe final release confirmation missing')
+                    result['register_probe_passed'] = True
+                elif ownership:
                     if not all(f'block={i} result=PASS stage=complete driver=0x00000000 release=0x00000000 confirmed=1 retained=0' in output for i in (1,2)):
                         raise RuntimeError('PCM/wavetable final-release confirmations incomplete')
                     result['ownership_passed'] = True
@@ -248,16 +262,19 @@ def main():
     parser.add_argument('--library-contract', type=Path)
     parser.add_argument('--idle-driver-contract', type=Path,
                         help='Explicitly approved temporary unused RC6 AHI unload/test/restore transaction')
+    parser.add_argument('--registers', action='store_true', help='Read-only Mini PCM status; requires idle driver window')
     args = parser.parse_args()
     if args.idle_driver_contract and not args.ownership:
         parser.error('idle-driver-contract requires ownership')
+    if args.registers and not args.idle_driver_contract:
+        parser.error('registers requires idle-driver-contract')
     out = ROOT / 'build/dev' / (('physical-amigus-ownership-' if args.ownership else 'physical-amigus-discovery-') + str(time.time_ns()))
     out.mkdir()
     result = dict(passed=False, target='real-a1200', scope='RAM-only PCM/wavetable exclusive reservation and confirmed release; no MMIO, interrupts, output or listening acceptance' if args.ownership else 'RAM-only discovery; no reserve/release, MMIO, interrupts, output or listening acceptance')
     try:
         source = ROOT / ('build/diagnostic/AmiGUSTest' if args.ownership else 'build/dev/physical-discovery-candidate/PTAmiGusDiscovery')
         build = ROOT / ('build/diagnostic/build.json' if args.ownership else 'build/dev/amigus-discovery-build.json')
-        result['binary_sha256'] = qualification(source, build, args.emulator_result, args.independent_cleanup, args.ownership, bool(args.idle_driver_contract))
+        result['binary_sha256'] = qualification(source, build, args.emulator_result, args.independent_cleanup, args.ownership, bool(args.idle_driver_contract), args.registers)
         contract = json.loads(args.library_contract.read_text()) if args.library_contract else None
         if args.ownership and not contract:
             raise RuntimeError('Ownership requires the verified pinned library contract')
@@ -266,13 +283,15 @@ def main():
         idle = json.loads(args.idle_driver_contract.read_text()) if args.idle_driver_contract else None
         if idle:
             result['scope'] = 'Approved cooperative unused RC6 AHI unload, PCM/wavetable ownership/final release, verified driver restoration; no MMIO/interrupt/audio/config change'
+        if args.registers:
+            result['scope'] = 'Read-only five Mini PCM status registers under exclusive PCM lease; verified release and unused AHI restoration; no register writes/IRQ/output/config change'
         binary = out / source.name
         shutil.copyfile(source, binary)
         if digest(binary) != result['binary_sha256']:
             raise RuntimeError('Snapshot changed before physical selection')
         with (INFRA / 'runtime/test.lock').open('a') as lock:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-            asyncio.run(run(out, binary, result, args.ownership, contract, idle))
+            asyncio.run(run(out, binary, result, args.ownership, contract, idle, args.registers))
     except Exception as error:
         result['passed'] = False
         result['error'] = str(error)

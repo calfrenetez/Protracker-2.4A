@@ -1,0 +1,88 @@
+{
+  "passed": true,
+  "scope": "shared030 mock ownership/final-release failure checks and exact real diagnostic unavailable-library modes; no physical card reservation/MMIO/audio",
+  "PTDiagOwnershipTest_sha256": "75a7924a10d6d0cee68572fedf1509110a799005d3349ab3bee164766629591d",
+  "PTDriverWindowTest_sha256": "5f6d80baab20a0e8a22e1ae367d41438888f5240a7b9f5b07239e153aee5c266",
+  "PTDriverExecTest_sha256": "4ec820f310914ae7309845228b79d07c333495964521c5808392d2dcd76a7381",
+  "PTPcmReadTest_sha256": "feaf889f781c7e5c2ce40afdff8677a95af6053d04f87c8c56c4cd6ad3bac131",
+  "PTAmiGusNativeAbiTest_sha256": "eb21c186fd744d434f3c23b1d89937e038e9f83670a5af293644a7c790dfa96a",
+  "AmiGUSTest_sha256": "708ce31ac15ba418eb8a5822af8096911444c9d68987a1af55af83ef5bb7e0ac",
+  "ownership-fixture_returncode": "0",
+  "driver-window_returncode": "0",
+  "driver-exec_returncode": "0",
+  "pcm-read_returncode": "0",
+  "native-abi_returncode": "0",
+  "amigus-discover_returncode": "5",
+  "amigus-ownership_returncode": "5",
+  "amigus-idle_returncode": "5",
+  "amigus-registers_returncode": "5",
+  "run_files_cleaned": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=333\tsndbuf_status=0",
+  "cleanup_method": "host-exact-run-once",
+  "cleanup_absence_observations": [
+    {
+      "elapsed_seconds": 3.400002606213093e-05,
+      "paths": {
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790892453199704000": false,
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790892453199704000": false
+      }
+    },
+    {
+      "elapsed_seconds": 0.25517358403885737,
+      "paths": {
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790892453199704000": false,
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790892453199704000": false
+      }
+    },
+    {
+      "elapsed_seconds": 0.5069018750218675,
+      "paths": {
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790892453199704000": false,
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790892453199704000": false
+      }
+    },
+    {
+      "elapsed_seconds": 0.7619632090209052,
+      "paths": {
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790892453199704000": false,
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790892453199704000": false
+      }
+    },
+    {
+      "elapsed_seconds": 1.0170534170465544,
+      "paths": {
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790892453199704000": false,
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790892453199704000": false
+      }
+    },
+    {
+      "elapsed_seconds": 1.2718057500314899,
+      "paths": {
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790892453199704000": false,
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790892453199704000": false
+      }
+    },
+    {
+      "elapsed_seconds": 1.5241451250039972,
+      "paths": {
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790892453199704000": false,
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790892453199704000": false
+      }
+    },
+    {
+      "elapsed_seconds": 1.7784742090152577,
+      "paths": {
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790892453199704000": false,
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790892453199704000": false
+      }
+    },
+    {
+      "elapsed_seconds": 2.0335572920157574,
+      "paths": {
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790892453199704000": false,
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790892453199704000": false
+      }
+    }
+  ],
+  "independent_release_check_required": true
+}

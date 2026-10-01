@@ -39,7 +39,7 @@ def runtime_inputs(cc):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--cc', default=os.environ.get('AMIGA_CC', 'm68k-amigaos-gcc'))
-    p.add_argument('--tool', choices=['AmiGUSTest', 'PTModCheck', 'PTDiagOwnershipTest', 'PTDriverWindowTest', 'PTDriverExecTest'], default='AmiGUSTest')
+    p.add_argument('--tool', choices=['AmiGUSTest', 'PTModCheck', 'PTDiagOwnershipTest', 'PTDriverWindowTest', 'PTDriverExecTest', 'PTPcmReadTest'], default='AmiGUSTest')
     args = p.parse_args()
     cc = shutil.which(args.cc)
     if not cc:
@@ -48,6 +48,10 @@ def main():
              '-Wall', '-Wextra', '-Werror', *compiler_safety_flags(cc), '-Ivendor/amigus-sdk']
     inputs = ['src/diagnostic/main.c', 'src/diagnostic/ownership.c', 'src/diagnostic/driver_window.c', 'src/diagnostic/native_driver_window.c']
     headers = ['src/diagnostic/amigus_calls.h', 'src/diagnostic/ownership.h', 'src/diagnostic/driver_window.h', 'src/diagnostic/native_driver_window.h']
+    inputs += ['src/diagnostic/register_probe.c', 'src/native/amigus_pcm_read.c',
+               'src/native/amigus_reservation.c', 'src/core/amigus_reservation.c']
+    headers += ['src/diagnostic/register_probe.h', 'src/native/amigus_pcm_read.h',
+                'src/native/amigus_reservation.h', 'src/core/amigus_reservation.h']
     if args.tool == 'PTModCheck':
         flags[-1] = '-Isrc/core'
         inputs = ['tools/modcheck.c', 'src/core/mod_inspect.c']
@@ -66,10 +70,14 @@ def main():
                   'src/diagnostic/native_driver_window.c']
         headers = ['src/diagnostic/driver_window.h', 'src/diagnostic/ownership.h',
                    'src/diagnostic/native_driver_window.h']
+    if args.tool == 'PTPcmReadTest':
+        flags += ['-Isrc/native']
+        inputs = ['tests/native_pcm_read_test.c', 'src/native/amigus_pcm_read.c']
+        headers = ['src/native/amigus_pcm_read.h', 'src/core/amigus_reservation.h']
     out = ROOT / 'build/diagnostic'
     out.mkdir(parents=True, exist_ok=True)
     sdk_digest = None
-    if args.tool == 'AmiGUSTest':
+    if args.tool in ('AmiGUSTest', 'PTPcmReadTest'):
         lock = json.loads((ROOT / 'amigus-sdk.lock.json').read_text())
         for name, expected in lock['files'].items():
             if digest(ROOT / 'vendor/amigus-sdk' / name) != expected:
@@ -80,7 +88,7 @@ def main():
                             stderr=subprocess.STDOUT)
     stem = {'AmiGUSTest': 'build', 'PTDiagOwnershipTest': 'ownership-fixture-build',
             'PTDriverWindowTest': 'driver-window-build', 'PTDriverExecTest': 'driver-exec-build',
-            'PTModCheck': 'modcheck-build'}[args.tool]
+            'PTPcmReadTest': 'pcm-read-build', 'PTModCheck': 'modcheck-build'}[args.tool]
     (out / (stem + '.log')).write_text(result.stdout)
     print(result.stdout, end='')
     result.check_returncode()

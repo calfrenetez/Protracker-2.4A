@@ -1,0 +1,36 @@
+{
+  "compiler": "m68k-amigaos-gcc (GCC) 6.5.0b 20260807212032",
+  "compiler_sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+  "builder_sha256": "b39b3f1f90357ae7b567bb1259b2df220c9bba94f42ffd97703022f4858374c6",
+  "runtime_inputs": {
+    "ncrt0.o": "6fe4b6088899bd53efae1ea1e4783b7deab07b13f3d40cff7b46285907f19804",
+    "libnix20.a": "0731c54ad32272f5ab0d5ecd3f1f93d7aa4fc7c6ac0a5923eb26125633556e8c",
+    "libnixmain.a": "ad54158e95516aa6f3b04a8b3d835a48ecbaaea962cd178d5fb66995dcef19df",
+    "libnix.a": "d64619bc74933ac5312ef6db0f8d4cd62b3918f9f4a5805863e7d15536fcb144",
+    "libstubs.a": "55dbd0626cb472d89ab5d1bd234e6013df178f2cd3b83266bf4b82c68f1a79de",
+    "libamiga.a": "10d78b6d303a99677c0bf29a8e1653d62669f69f395691646393020325084021",
+    "libgcc.a": "8bed858c8a5797471c3bc130df341824121c5d0f0908345dfe6ce0ceccc3569b"
+  },
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fbbb=-",
+    "-Ivendor/amigus-sdk",
+    "-Isrc/native"
+  ],
+  "inputs": {
+    "tests/native_pcm_read_test.c": "2c9626938536ae104cbdf1f999c47182e85fd29ce6638b828641a8219ce44e04",
+    "src/native/amigus_pcm_read.c": "3dd16a6785e904fc2aaa1ffa3094b59c9c7274c3d94fbaa0540bb4e96fc84c46",
+    "src/native/amigus_pcm_read.h": "4e28e79a60a16821ed9a91caf17762a6debbfa31a901f9111b5d9c689072d111",
+    "src/core/amigus_reservation.h": "ee57be55b9865fd19d14b27b22af6e2aa6b0466b7f21da5b313016efe9a0b646"
+  },
+  "sdk_lock_sha256": "4925be2f6ce1db4bd683629a850c3045cea55aa089d1fbeea721eb9e0ac304d1",
+  "binary_bytes": 12584,
+  "binary_sha256": "feaf889f781c7e5c2ce40afdff8677a95af6053d04f87c8c56c4cd6ad3bac131"
+}

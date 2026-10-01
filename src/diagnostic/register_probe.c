@@ -1,0 +1,66 @@
+#include "register_probe.h"
+#include "ownership.h"
+#include "amigus_calls.h"
+#include "../native/amigus_pcm_read.h"
+#include "../native/amigus_reservation.h"
+#include <proto/exec.h>
+#include <proto/dos.h>
+#include <stdio.h>
+
+int pt_register_probe(void)
+{
+    struct pt_native_amigus_library native = {0};
+    struct pt_amigus_reservation r = {0};
+    struct pt_amigus_reservation_api api = pt_native_amigus_reservation_api(&native);
+    enum pt_amigus_reservation_result opened;
+    uint16_t values[5] = {0,0,0,0,0};
+    unsigned i;
+    unsigned long release_code;
+    int result = PT_SKIP;
+    const char *reason = "register-contract-unavailable";
+    puts("REGISTER-PROBE scope=Mini-7ea663e7-read-only writes=NO interrupts=NO audio=NOT_TESTED");
+    opened = pt_amigus_reservation_open(&r, &api, 0);
+    if (opened != PT_AMIGUS_RESERVED) {
+        printf("REGISTERS result=SKIP reason=reservation-unavailable status=%u rc=5\n", opened);
+        return PT_SKIP;
+    }
+    if (pt_amigus_reservation_begin(&r)) {
+        for (i=0; i<5; ++i) {
+            if (SetSignal(0,0)&SIGBREAKF_CTRL_C) { result=PT_FAIL; reason="cancelled"; break; }
+            if (!pt_native_amigus_pcm_read16(&r, i==4 ? 0x10 : i*2, &values[i])) break;
+        }
+        if (i==5) {
+            reason="not-idle";
+            if (!(values[3]&0x8000) && !(values[1]&7) && !values[4]) {
+                result=PT_PASS; reason="idle";
+            }
+            printf("PCM STATUS flags=0x%04x mask=0x%04x format=0x%04x rate=0x%04x pending_words=%u\n",
+                   values[0],values[1],values[2],values[3],values[4]);
+        }
+        if (!pt_amigus_reservation_end(&r)) {
+            puts("REGISTER HOLD: access end unconfirmed; Task/library/card retained");
+            fflush(stdout); for (;;) Delay(50);
+        }
+    }
+    {
+        struct Library *AmiGUS_Base = native.base;
+        PT_Free(r.card, AMIGUS_FLAG_PCM, &r);
+        release_code = PT_Reserve(r.card, AMIGUS_FLAG_PCM, NULL);
+    }
+    printf("REGISTER RELEASE confirmed=%u retained=%u driver=0x%08lx\n",
+           release_code==0,release_code!=0,release_code);
+    if (release_code) {
+        puts("REGISTER HOLD: release unconfirmed; Task/library/card/owner retained");
+        fflush(stdout); for (;;) Delay(50);
+    }
+    /* Own release was verified before ending the library lifetime. Suppress
+     * the core's unacknowledged release callback on this diagnostic path. */
+    r.reserved=0;
+    if (!pt_amigus_reservation_close(&r)) {
+        puts("REGISTER HOLD: library close unconfirmed; Task retained");
+        fflush(stdout); for (;;) Delay(50);
+    }
+    printf("REGISTERS result=%s reason=%s rc=%d\n",
+           result==PT_PASS ? "PASS" : result==PT_SKIP ? "SKIP" : "FAIL",reason,result);
+    return result;
+}

@@ -1,0 +1,14 @@
+{
+  "path": "../amigus-sdk/Documentation/AmiGUS_mini/AmiGUS_mini_Register_Map.xlsx",
+  "sha256": "a30e0cdf966b293c0d5411604a62442a3db98ca4973d2b6bf12961cdc988dd51",
+  "commit": "d8c9a0429f41cd5f3dbadae34ef438e45c9c3718",
+  "sheet": "Main Register",
+  "status_offsets": {
+    "0x00": "IRQ flags R/W, clear/set only on write bit15",
+    "0x02": "IRQ mask R/W",
+    "0x04": "sample format R/W",
+    "0x06": "sample rate R/W, bit15 playback enable",
+    "0x10": "FIFO pending words R"
+  },
+  "scope": "Read only; rejects write-only FIFO/reset addresses; capacity and actual readback semantics remain unqualified"
+}

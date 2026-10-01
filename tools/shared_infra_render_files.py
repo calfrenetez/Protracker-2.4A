@@ -344,10 +344,12 @@ def main():
             cases=[('ownership-fixture','PTDiagOwnershipTest','ownership: 20 scenarios passed'),
                    ('driver-window','PTDriverWindowTest','driver window: 8 scenarios passed'),
                    ('driver-exec','PTDriverExecTest','DRIVER EXEC PASS:'),
+                   ('pcm-read','PTPcmReadTest','PCM READ PASS:'),
                    ('native-abi','PTAmiGusNativeAbiTest','AMIGUS NATIVE ABI PASS:'),
                    ('amigus-discover','AmiGUSTest','reason=library-unavailable'),
                    ('amigus-ownership','AmiGUSTest','reason=library-unavailable'),
-                   ('amigus-idle','AmiGUSTest','reason=library-unavailable')]
+                   ('amigus-idle','AmiGUSTest','reason=library-unavailable'),
+                   ('amigus-registers','AmiGUSTest','reason=library-unavailable')]
             result['scope']='shared030 mock ownership/final-release failure checks and exact real diagnostic unavailable-library modes; no physical card reservation/MMIO/audio'
         if args.invert_cli:
             cases=[('invert-cli','PT24GRender','WAV frames=')]
@@ -378,7 +380,7 @@ def main():
             if args.amigus_diagnostic:
                 commands=['FailAt 21','Stack 65536']
                 for name,binary,marker in cases:
-                    option={'amigus-discover':' --discover','amigus-ownership':' --ownership','amigus-idle':' --idle-ownership'}.get(name,'')
+                    option={'amigus-discover':' --discover','amigus-ownership':' --ownership','amigus-idle':' --idle-ownership','amigus-registers':' --idle-registers'}.get(name,'')
                     commands+=['CD '+guest.device+run.name+'/'+name,binary+option+' >test.log','Echo $RC >test.rc']
             if args.recovery_file:
                 directory=guest.device+run.name+'/recovery'

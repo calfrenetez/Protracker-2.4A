@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "seconds": 2.4810606249957345,
+  "window_bound_seconds": 200,
+  "cases": [
+    {
+      "case": "engine",
+      "binary": "PTExecPaulaEngineTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-engine-guarded-candidate/build/dev/render-files-1790844737009866000",
+      "sha256": "67a5eba97a97fa33050eb0e595abe1c62a1cbc9c06b00cc4319a878a18bac062",
+      "independent_cleanup": true
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+PAULA ENGINE PASS: 8-bit master, selected Chip32 shared by four silent device readers, confirmed stop before cache/device release
+PAULA ENGINE PASS: 16-bit master, selected Chip32 shared by four silent device readers, confirmed stop before cache/device release
+PAULA ENGINE PASS: 24-bit master, selected Chip32 shared by four silent device readers, confirmed stop before cache/device release
+.PAULA OUTPUT HOST PASS: 24 ownership/command cases
+.PAULA RESERVATION HOST PASS: 12 ownership cases
+.
+----------------------------------------------------------------------
+Ran 3 tests in 5.251s
+
+OK

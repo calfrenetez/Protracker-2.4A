@@ -61,7 +61,7 @@ def main():
     group.add_argument('--capture-session-memory',action='store_true',help='Run injected recording ownership and stop/quiescence with native Fast allocator; no device input')
     group.add_argument('--amigus-capture-memory',action='store_true',help='Run injected recording PCM/interrupt ownership with native Fast allocator; no card input')
     group.add_argument('--editor-capture-memory',action='store_true',help='Run editor recording barriers and publication with native Fast allocator; no device input')
-    group.add_argument('--paula-memory',choices=['cache','voices','preflight','mixed','mixed-owner','dispatch','song','editor','editor-mixed','reservation','output','output-diagnostic'],help='Run routed Paula ownership/capability with native allocators and injected readers; no DMA')
+    group.add_argument('--paula-memory',choices=['cache','voices','preflight','mixed','mixed-owner','dispatch','song','editor','editor-mixed','reservation','output','output-diagnostic','engine'],help='Run routed Paula ownership/capability with native allocators and injected readers; no DMA')
     group.add_argument('--sample-dispatch',action='store_true',help='Check bounded sample dispatch and24-bit precision with Exec allocator')
     group.add_argument('--source-memory',action='store_true',help='Run donor ownership/failure/undo checks with native Fast allocator')
     group.add_argument('--mod-import',action='store_true',help='Run bounded MOD document load with native Fast allocator')
@@ -94,7 +94,7 @@ def main():
     with (INFRA/'runtime/test.lock').open('a') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         guest=Guest(INFRA,out)
-        if args.paula_memory in ('output','output-diagnostic'):
+        if args.paula_memory in ('output','output-diagnostic','engine'):
             audio=guest.command('GET_AUDIO_STATE')
             (out/'audio-before-staging.json').write_text(json.dumps({'audio':audio},indent=2)+'\n')
             if not all('ch%d_dma=0'%i in audio.split('\t') for i in range(4)):
@@ -145,10 +145,13 @@ def main():
                     'editor-mixed':('editor-mixed','PTExecEditorMixedTest','EDITOR MIXED PASS:'),
                     'reservation':('paula-reservation','PTExecPaulaReservationTest','PAULA RESERVATION PASS:'),
                     'output':('paula-output','PTExecPaulaOutputTest','PAULA OUTPUT PASS:'),
+                    'engine':('paula-engine','PTExecPaulaEngineTest','PAULA ENGINE PASS:'),
                     'output-diagnostic':('paula-output-diagnostic','PTExecPaulaOutputDiagnostic','PAULA OUTPUT DIAGNOSTIC PASS:')}[args.paula_memory]]
             result['scope']='shared030 routed Paula '+args.paula_memory+' with native allocators and injected callbacks; no native DMA/output'
-            if args.paula_memory in ('output','output-diagnostic'):
+            if args.paula_memory in ('output','output-diagnostic','engine'):
                 result['scope']='shared030 actual audio.device acknowledged silent WRITE/DMA, control, confirmed stop and Chip/channel/IO release; no listening/timing/physical claim'
+            if args.paula_memory=='engine':
+                result['scope']='shared030 native Fast8/16/24 masters and selective shared Chip cache with four silent audio.device readers; confirmed voice/cache/device closure; no timing/listening/frontend/physical claim'
             if args.paula_memory=='output-diagnostic':
                 result['scope']='shared030 one silent device WRITE start-state observation and confirmed cleanup; diagnostic only, not playback acceptance'
             if args.paula_memory=='reservation':
@@ -309,7 +312,7 @@ def main():
                 if not all('ch%d_dma=0'%i in state.split('\t') for i in range(4)):
                     raise RuntimeError('Cleanup probe left active or unknown DMA; functional test not started')
             require_running_guest(guest,out,'before-launch')
-            if args.paula_memory in ('output','output-diagnostic'):
+            if args.paula_memory in ('output','output-diagnostic','engine'):
                 audio=guest.command('GET_AUDIO_STATE')
                 (out/'audio-before-launch.json').write_text(json.dumps({'audio':audio},indent=2)+'\n')
                 if not all('ch%d_dma=0'%i in audio.split('\t') for i in range(4)):

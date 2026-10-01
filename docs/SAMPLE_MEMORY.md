@@ -3910,3 +3910,26 @@ Evidence: `evidence/enhanced-editor/paula-output-diagnostic` and
 `evidence/enhanced-editor/paula-device-output`. Existing failed evidence preserved.
 Native frontend private event-loop/output setup, AmiGUS native lowering, actual
 backend timing/audio/endurance and physical qualification remain requirements.
+
+
+## Native selected-cache device owner — 1 October 2026
+
+`src/native/paula_engine.h` now owns the actual audio.device output, dedicated
+selective Chip cache and stable four-voice lease owner together. Begin/advance
+reserves without playback and binds the real Chip allocator, device callbacks
+and quiescence check; allocation/conversion remains selective at acquisition.
+Close first respects attached song ownership, confirms reader stop/quiescence
+and releases the cache, then closes device reservations and requests. Pending
+or failed closure retains contexts and storage. No wait/force-release/retry.
+Caller must adopt these voices through the existing editor song/mixed barrier
+before allowing edits during playback; that frontend installation remains open.
+
+Host tests across8/16/24 plus pending DMA/storage and external song-owner refusal
+pass. A separate native fixture across all three precisions uses actual bounded
+Fast masters and a shared selected32byte Chip copy with four silent device
+readers/control/stop per case. Snapshots/declared precision preserved;15 Fast
+allocations end at zero owned bytes. Cancellation before acquisition and complete
+reader/cache/device cleanup PASS; independent locked DMAoff/pathabsence PASS.
+Evidence: `evidence/enhanced-editor/paula-native-engine`. Coordinated release in
+checkpoint. This is production master/cache/device ownership integration, not
+native PLAY/timer/event-loop integration, audible/timing or physical acceptance.

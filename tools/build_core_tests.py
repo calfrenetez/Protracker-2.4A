@@ -195,6 +195,7 @@ def main():
     inputs['PTExecPaulaReservationTest'] = ['tests/native_exec_paula_reservation_test.c']
     inputs['PTExecPaulaOutputTest'] = ['tests/native_exec_paula_output_test.c']
     inputs['PTExecPaulaOutputDiagnostic'] = ['tests/native_exec_paula_output_diagnostic.c']
+    inputs['PTExecPaulaEngineTest'] = ['tests/native_exec_paula_engine_test.c',*inputs['PTPaulaVoicesTest'][1:]]
     inputs['PTCaptureTest'] = ['tests/capture_test.c','src/core/capture.c','src/editor/sampler_capture.c',*inputs['PTSamplerTest'][1:]]
     inputs['PTExecCaptureTest'] = ['tests/native_exec_capture_test.c',*inputs['PTCaptureTest'][1:]]
     inputs['PTCaptureSessionTest'] = ['tests/capture_session_test.c','src/core/capture_session.c',*inputs['PTCaptureTest'][1:]]

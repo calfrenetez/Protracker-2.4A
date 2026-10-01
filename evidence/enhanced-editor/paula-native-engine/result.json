@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "shared030 native Fast8/16/24 masters and selective shared Chip cache with four silent audio.device readers; confirmed voice/cache/device closure; no timing/listening/frontend/physical claim",
+  "PTExecPaulaEngineTest_sha256": "67a5eba97a97fa33050eb0e595abe1c62a1cbc9c06b00cc4319a878a18bac062",
+  "paula-engine_returncode": "0",
+  "run_files_cleaned": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0"
+}

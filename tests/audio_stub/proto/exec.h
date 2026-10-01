@@ -11,3 +11,6 @@ void DeleteMsgPort(struct MsgPort *);
 struct Message *GetMsg(struct MsgPort *);
 LONG AbortIO(struct IORequest *);
 ULONG TypeOfMem(const void *);
+ULONG AvailMem(ULONG);
+void *AllocMem(ULONG,ULONG);
+void FreeMem(void *,ULONG);

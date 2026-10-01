@@ -1,0 +1,5 @@
+EXEC MEMORY pool_limit=131182920 reserve=262144 flags=4
+PAULA ENGINE PASS: 8-bit master, selected Chip32 shared by four silent device readers, confirmed stop before cache/device release
+PAULA ENGINE PASS: 16-bit master, selected Chip32 shared by four silent device readers, confirmed stop before cache/device release
+PAULA ENGINE PASS: 24-bit master, selected Chip32 shared by four silent device readers, confirmed stop before cache/device release
+EXEC MEMORY PASS: 15 Fast allocations, zero owned bytes, budget refusal without Chip fallback

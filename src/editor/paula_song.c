@@ -99,15 +99,20 @@ enum pt_paula_song_result pt_paula_song_prepare(struct pt_paula_song *s,struct p
     if(edit!=PT_EDIT_OK)return fail(s,edit==PT_EDIT_CAPACITY?PT_PAULA_SONG_MEMORY:PT_PAULA_SONG_STALE);
     return PT_PAULA_SONG_PREPARING;
 }
-static enum pt_paula_song_result next(struct pt_paula_song *s,struct pt_render_interval *out)
+/* Only within a serialized call which has checked current(), with no
+ * intervening external callback. Public entry points retain their guards. */
+static enum pt_paula_song_result next_validated(struct pt_paula_song *s,struct pt_render_interval *out)
 {
-    enum pt_paula_song_result state=current(s);
-    if(state!=PT_PAULA_SONG_OK)return state;
     if(!s->ready)return PT_PAULA_SONG_PREPARING;
     if(s->clock_armed || !out || s->pending)return PT_PAULA_SONG_INVALID;
     if(s->done)return PT_PAULA_SONG_DONE;
     if(pt_render_sequence_next(s->sequence,&s->interval)!=PT_RENDER_OK)return fail(s,PT_PAULA_SONG_RENDER);
     s->visited=1;s->pending=1;s->remaining=s->interval.frames;*out=s->interval;return PT_PAULA_SONG_OK;
+}
+static enum pt_paula_song_result next(struct pt_paula_song *s,struct pt_render_interval *out)
+{
+    enum pt_paula_song_result state=current(s);
+    return state==PT_PAULA_SONG_OK?next_validated(s,out):state;
 }
 static enum pt_paula_song_result consume(struct pt_paula_song *s,uint32_t frames)
 {
@@ -118,10 +123,9 @@ static enum pt_paula_song_result consume(struct pt_paula_song *s,uint32_t frames
     if(pt_render_sequence_consume(s->sequence,frames)!=PT_RENDER_OK)return fail(s,PT_PAULA_SONG_RENDER);
     s->remaining-=frames;return PT_PAULA_SONG_OK;
 }
-static enum pt_paula_song_result prefetch(struct pt_paula_song *s)
+static enum pt_paula_song_result prefetch_validated(struct pt_paula_song *s)
 {
-    unsigned ready=0;enum pt_paula_song_result state=current(s);
-    if(state!=PT_PAULA_SONG_OK)return state;
+    unsigned ready=0;
     if(!s->ready)return PT_PAULA_SONG_PREPARING;
     if(!s->pending || (!s->forecast && (s->batch.preparing || s->batch.ready)))return PT_PAULA_SONG_INVALID;
     if(!s->forecast) {
@@ -144,13 +148,18 @@ static enum pt_paula_song_result prefetch(struct pt_paula_song *s)
     default:return fail(s,PT_PAULA_SONG_DEVICE);
     }
 }
+static enum pt_paula_song_result prefetch(struct pt_paula_song *s)
+{
+    enum pt_paula_song_result state=current(s);
+    return state==PT_PAULA_SONG_OK?prefetch_validated(s):state;
+}
 static enum pt_paula_song_result stage(struct pt_paula_song *s)
 {
     enum pt_paula_song_result state=current(s);
     if(state!=PT_PAULA_SONG_OK)return state;
     if(!s->ready)return PT_PAULA_SONG_PREPARING;
     if(!s->pending || s->remaining)return PT_PAULA_SONG_INVALID;
-    if(s->forecast)return prefetch(s);
+    if(s->forecast)return prefetch_validated(s);
     if(s->batch.ready)return PT_PAULA_SONG_OK;
     if(!s->batch.preparing) {
         if(pt_render_sequence_complete(s->sequence,&s->plan)!=PT_RENDER_OK)return fail(s,PT_PAULA_SONG_RENDER);
@@ -270,11 +279,11 @@ static enum pt_paula_song_result schedule_step(struct pt_paula_song *s,uint64_t 
     }
     switch(s->schedule_phase) {
     case SCHEDULE_NEXT:
-        r=next(s,&span);if(r!=PT_PAULA_SONG_OK)return r;
+        r=next_validated(s,&span);if(r!=PT_PAULA_SONG_OK)return r;
         if(!span.emit)return fail(s,PT_PAULA_SONG_RENDER);
         s->schedule_phase=span.frames?SCHEDULE_READY_NEXT:SCHEDULE_ZERO;break;
     case SCHEDULE_ZERO:
-        r=prefetch(s);if(r==PT_PAULA_SONG_PREPARING)break;
+        r=prefetch_validated(s);if(r==PT_PAULA_SONG_PREPARING)break;
         if(r!=PT_PAULA_SONG_OK)return r;
         if(!s->plan.count && !s->interval.end) {
             r=complete(s);if(r!=PT_PAULA_SONG_OK)return r;s->schedule_phase=SCHEDULE_NEXT;

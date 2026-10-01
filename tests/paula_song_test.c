@@ -168,6 +168,14 @@ static void song_fixture(unsigned bits)
     assert(pt_paula_song_next(song,&span)==PT_PAULA_SONG_STALE && d.stops==stops+1 && d.reading[0]);
     assert(!pt_paula_song_close(&song) && sampler.bytes==pinned);
     d.stop_result[0]=1;doc.project.channels.track[4].pan=0;assert(pt_paula_song_close(&song));
+    /* Public prefetch must validate even when its private body is shared with
+     * an already validated schedule step. No device work may follow staleness. */
+    BIND();assert(pt_paula_song_begin(&owner,&o,&caps,&a,&song)==PT_PAULA_SONG_PREPARING);
+    assert(prepare_song(song,&report)==PT_PAULA_SONG_OK);
+    assert(pt_paula_song_next(song,&span)==PT_PAULA_SONG_OK);
+    calls=d.calls;starts=d.starts;doc.project.title[0]^=1;
+    assert(pt_paula_song_prefetch(song)==PT_PAULA_SONG_STALE && d.calls==calls && d.starts==starts);
+    doc.project.title[0]^=1;assert(pt_paula_song_close(&song));
     /* Cancel while a promotion job owns unpublished storage. */
     pt_sampler_release(&sampler);
     doc.project.samples[0].pcm=doc.project.samples[2].pcm=(struct pt_pcm){pcm,1024,1024,8000,1,(uint8_t)bits};

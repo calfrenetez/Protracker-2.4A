@@ -52,7 +52,14 @@ avoiding a separate full ownership/deadline query. Both before/after-read guards
 and native pending-alarm identity/late-arm checks remain. Host8/16/24 progress
 parity, stale callback and atomic counter-overflow checks pass. A distinct native
 candidate still FAILED at the ENTRY watchdog after17calls/eightcompletions:
-265>256frames. Cleanup passed; startup readiness at refusal remains unmeasured.
+265>256frames. Cleanup passed; startup readiness at refusal remains unmeasured. A subsequent
+startup-validation diagnostic removes only duplicate private guards within the same
+validated callback-free step; public and clock-reader guards remain. Host checks
+pass, including public stale prefetch without device work. That native candidate
+still FAILED atPOST on call23:264>256frames, with23 preparation calls andzero ready
+calls. It confirms this refusal occurred before readiness; steady cadence is still
+untested. Safe closure/Fast-zero and independent cleanup pass separately.
+See `evidence/enhanced-editor/paula-startup-validated/`.
 See `evidence/enhanced-editor/paula-service-counter/`. Native periodic cadence
 feasibility and frontend PLAY/Wait wiring remain open, as do listening acceptance
 and classic segment/repeat playback. See `evidence/enhanced-editor/paula-native-transport/`.

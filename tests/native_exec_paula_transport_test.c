@@ -30,8 +30,8 @@ static int fixture(unsigned late)
     CHECK(pt_native_paula_transport_signal(&t));
     if(late==2) {
         struct pt_elapsed_clock observed=t.service_clock;
-        uint64_t frames=0,previous=0,before,after,max_gap=0,max_cost=0;
-        unsigned calls=0,completions=0,primed=0;
+        uint64_t frames=0,previous=0,before,after,max_gap=0,max_cost=0,max_prime_cost=0,max_ready_cost=0;
+        unsigned calls=0,completions=0,primed=0,was_primed,prime_calls=0,ready_calls=0;
         for(i=0;i<1000000 && frames<24000;++i) {
             CHECK(pt_native_eclock_read(&t.clock,&ticks,&frequency));
             CHECK(pt_elapsed_clock_advance(&observed,frequency,ticks,&frames)==PT_ELAPSED_OK);
@@ -41,6 +41,7 @@ static int fixture(unsigned late)
             before=ticks;
             if(calls && before-previous>max_gap)max_gap=before-previous;
             previous=before;++calls;
+            was_primed=primed;if(was_primed)++ready_calls;else ++prime_calls;
             r=pt_native_paula_transport_service(&t);
             if(r!=PT_PAULA_SONG_WAITING && r!=PT_PAULA_SONG_OK) {
                 printf("CADENCE REFUSED calls=%u completions=%u frames=%lu result=%u max_gap_ticks=%lu frequency=%lu\n",
@@ -50,11 +51,15 @@ static int fixture(unsigned late)
                     (unsigned long)(t.service_clock.ticks>=before?t.service_clock.ticks-before:0),
                     (unsigned long)max_cost,(unsigned long)t.service_alarm.observed_ticks,
                     (unsigned long)t.service_alarm.attempted_deadline);
+                printf("CADENCE readiness=%u prime_calls=%u ready_calls=%u max_prime_cost_ticks=%lu max_ready_cost_ticks=%lu\n",
+                    was_primed,prime_calls,ready_calls,(unsigned long)max_prime_cost,(unsigned long)max_ready_cost);
                 CHECK(0);
             }
             if(r==PT_PAULA_SONG_OK)primed=1;
             CHECK(pt_native_eclock_read(&t.clock,&after,&frequency) && after>=before);
             if(after-before>max_cost)max_cost=after-before;
+            if(was_primed){if(after-before>max_ready_cost)max_ready_cost=after-before;}
+            else if(after-before>max_prime_cost)max_prime_cost=after-before;
         }
         printf("CADENCE observed_frames=%lu calls=%u completions=%u loops=%u max_gap_ticks=%lu max_cost_ticks=%lu frequency=%lu\n",
             (unsigned long)frames,calls,completions,i,(unsigned long)max_gap,(unsigned long)max_cost,(unsigned long)frequency);

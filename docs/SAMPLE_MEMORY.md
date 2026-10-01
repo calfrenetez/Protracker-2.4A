@@ -35,7 +35,12 @@ zero owned Fast bytes and independent DMA-off cleanup. A separate pre-startup
 periodic polling diagnostic FAILED on its third service call at527 observed
 frames, before output. Its failure path confirmed owner closure/Fast-zero and
 independent DMA-off cleanup. That cleanup does not qualify cadence; exact refusal
-stage still needs measurement. See `evidence/enhanced-editor/paula-polling-cadence/`.
+stage is now measured by a distinct diagnostic: POST watchdog observes262frames
+of work against256, and refuses. Phase/frame and last alarm counter/target
+observations survive cleanup without added clock reads. The distinct diagnostic
+remains FAILED; closure/Fast-zero and independent cleanup passed again.
+See `evidence/enhanced-editor/paula-polling-cadence/` and
+`evidence/enhanced-editor/paula-refusal-stage/`.
 Native periodic cadence
 feasibility and frontend PLAY/Wait wiring remain open, as do listening acceptance
 and classic segment/repeat playback. See `evidence/enhanced-editor/paula-native-transport/`.

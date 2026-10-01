@@ -27,6 +27,7 @@ int main(void)
     fail_at=0;device.dd_Library.lib_Version=36;assert(pt_native_alarm_open(&a));
     assert(!pt_native_alarm_open(&a) && !pt_native_alarm_signal(&a));
     assert(pt_native_alarm_arm(&a,((uint64_t)1<<32)+100)==PT_ALARM_LATE && !sends);
+    assert(a.observed_ticks==((uint64_t)1<<32)+100 && a.attempted_deadline==a.observed_ticks);
     assert(pt_native_alarm_arm(&a,deadline)==PT_ALARM_WAITING);
     assert(request.tr_time.tv_secs==2 && request.tr_time.tv_micro==123 && pt_native_alarm_signal(&a)==32);
     assert(pt_native_alarm_arm(&a,deadline)==PT_ALARM_INVALID && sends==1);
@@ -38,9 +39,9 @@ int main(void)
     assert(!pt_native_alarm_close(&a) && aborts==1 && waits==n);
     assert(pt_native_alarm_arm(&a,deadline)==PT_ALARM_INVALID);
     ready=1;error=IOERR_ABORTED;assert(pt_native_alarm_close(&a) && waits==n+1 && !ports && !requests && !opens);
-    assert(pt_native_alarm_close(&a));
+    assert(pt_native_alarm_close(&a));assert(a.observed_ticks==((uint64_t)1<<32)+100 && a.attempted_deadline==deadline);
     /* Cancel a completed request: collect it once without abort. Then rearm. */
-    assert(pt_native_alarm_open(&a));assert(pt_native_alarm_arm(&a,deadline)==PT_ALARM_WAITING);
+    assert(pt_native_alarm_open(&a));assert(!a.observed_ticks && !a.attempted_deadline);assert(pt_native_alarm_arm(&a,deadline)==PT_ALARM_WAITING);
     ready=1;error=0;n=aborts;assert(pt_native_alarm_cancel(&a)==PT_ALARM_CANCELLED && aborts==n);
     /* Completion can race the abort request and return success, not ABORTED. */
     assert(pt_native_alarm_arm(&a,deadline)==PT_ALARM_WAITING);complete_on_abort=1;n=waits;

@@ -76,9 +76,11 @@ static void fixture(unsigned mode)
          *128-frame arm threshold. Refuse; never submit an already-late alarm. */
         timer_now=1128;timer_read_cost=90;n=timer_sends;
         assert(pt_native_paula_transport_service(&t)==PT_PAULA_SONG_DEADLINE);
+        assert(t.failure_phase==PT_NATIVE_PAULA_PERIODIC_ARM && t.failure_frames==308 && t.failure_last_frames==128);
         assert(t.service_clock.frames==308 && timer_sends==n && !t.native.engine.output.held[0]);
         assert(pt_native_paula_transport_service(&t)==PT_PAULA_SONG_INVALID);
-        timer_read_cost=0;finish(&t,ed,&doc);return;
+        timer_read_cost=0;finish(&t,ed,&doc);
+        assert(t.failure_phase==PT_NATIVE_PAULA_PERIODIC_ARM && t.failure_frames==308);return;
     }
     if(mode==5) {
         assert(t.service_deadline==1000+(128ULL*timer_rate+47999)/48000);

@@ -45,6 +45,11 @@ static int fixture(unsigned late)
             if(r!=PT_PAULA_SONG_WAITING && r!=PT_PAULA_SONG_OK) {
                 printf("CADENCE REFUSED calls=%u completions=%u frames=%lu result=%u max_gap_ticks=%lu frequency=%lu\n",
                     calls,completions,(unsigned long)frames,(unsigned)r,(unsigned long)max_gap,(unsigned long)frequency);
+                printf("CADENCE STAGE=%u service_frames=%lu last_frames=%lu observed_cost_ticks=%lu max_prior_cost_ticks=%lu periodic_observed_ticks=%lu periodic_target_ticks=%lu\n",
+                    (unsigned)t.failure_phase,(unsigned long)t.failure_frames,(unsigned long)t.failure_last_frames,
+                    (unsigned long)(t.service_clock.ticks>=before?t.service_clock.ticks-before:0),
+                    (unsigned long)max_cost,(unsigned long)t.service_alarm.observed_ticks,
+                    (unsigned long)t.service_alarm.attempted_deadline);
                 CHECK(0);
             }
             if(r==PT_PAULA_SONG_OK)primed=1;

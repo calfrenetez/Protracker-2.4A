@@ -1,0 +1,8 @@
+{
+  "passed": false,
+  "scope": "shared030 ambient-task private Wait/termination/retained-cleanup before musical start; zero24 master; no WRITE/output/frontend/listening/physical acceptance",
+  "PTExecPaulaWaitTest_sha256": "f8ae028076597e483e8282a613f011014e678a144e43b05266363f49313963d0",
+  "paula-wait_returncode": "20",
+  "run_files_cleaned": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=666\tsndbuf_status=0"
+}

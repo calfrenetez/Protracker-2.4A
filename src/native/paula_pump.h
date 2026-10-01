@@ -15,7 +15,9 @@ enum pt_native_pump_result {PT_NATIVE_PUMP_FAILED=-2,PT_NATIVE_PUMP_INVALID=-1,
  * transport/editor/master/storage and callback contexts. No automatic retry,
  * detach, disposal, forced release, catchup or epoch/deadline changes. */
 struct pt_native_paula_pump {struct pt_native_paula_transport *transport;
-    struct Task *task;unsigned active,stopping;enum pt_paula_song_result last;};
+    struct Task *task;unsigned active,stopping;enum pt_paula_song_result last;
+    /* Diagnostic only: no time/readiness decisions; retained after close. */
+    unsigned wait_calls;ULONG last_wake;};
 static inline int pt_native_paula_pump_bind(struct pt_native_paula_pump *p,
     struct pt_native_paula_transport *t)
 {
@@ -26,7 +28,7 @@ static inline int pt_native_paula_pump_bind(struct pt_native_paula_pump *p,
     if(!task || !t->clock.port || !t->alarm.port || !t->service_alarm.port ||
        t->clock.port->mp_SigTask!=task || t->alarm.port->mp_SigTask!=task ||
        t->service_alarm.port->mp_SigTask!=task)return 0;
-    p->transport=t;p->task=task;p->active=1;p->stopping=0;p->last=PT_PAULA_SONG_OK;t->pump=p;return 1;
+    p->transport=t;p->task=task;p->active=1;p->stopping=0;p->last=PT_PAULA_SONG_OK;p->wait_calls=0;p->last_wake=0;t->pump=p;return 1;
 }
 static inline int pt_native_paula_pump_close(struct pt_native_paula_pump *p)
 {
@@ -56,7 +58,7 @@ static inline enum pt_native_pump_result pt_native_paula_pump_step(
         return pt_native_paula_pump_stop(p,PT_NATIVE_PUMP_FAILED);
     mask=pt_native_paula_transport_wait_mask(t);
     if(!mask)return PT_NATIVE_PUMP_WORK;
-    wake=Wait(mask|abort_mask);
+    ++p->wait_calls;wake=Wait(mask|abort_mask);p->last_wake=wake;
     if(FindTask(NULL)!=p->task){p->stopping=1;t->can_wait=0;return PT_NATIVE_PUMP_HOLD;}
     if(wake&abort_mask)return pt_native_paula_pump_stop(p,PT_NATIVE_PUMP_STOPPED);
     return PT_NATIVE_PUMP_WAKE;

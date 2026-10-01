@@ -1,0 +1,18 @@
+/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-native-wait-safe/build/dev/render-files-1790859812845142000
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-native-wait-safe/tools/shared_infra_render_files.py", line 409, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-native-wait-safe/tools/shared_infra_render_files.py", line 340, in main
+    assert result[name+'_returncode']=='0' and marker in log,log
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: EXEC MEMORY pool_limit=131102216 reserve=262144 flags=4
+WAIT TASK case=0 priority=0 unchanged=1 own_identity=1 owner_closed=1 termination_closed=1 diagnostic_closed=1 signal_alloc_restored=1 calls=0 work=0 wakes=0 waits=0 last_wake=0 startup=27 frames=0
+PAULA WAIT PASS: case=0 private task/timer/termination/editor/device cleanup; no WRITE/output/timing claim
+WAIT TASK case=1 priority=0 unchanged=1 own_identity=1 owner_closed=1 termination_closed=1 diagnostic_closed=1 signal_alloc_restored=1 calls=2 work=0 wakes=1 waits=2 last_wake=2147483648 startup=27 frames=0
+PAULA WAIT PASS: case=1 private task/timer/termination/editor/device cleanup; no WRITE/output/timing claim
+PAULA WAIT FAIL case=2 line=88
+WAIT REFUSED case=2 result=-2 song=11 phase=4 frames=7516 last_frames=6573 mask=1 waits=52 wake=33554432 termination_observed=3404140424 termination_target=3404493984
+WAIT TASK case=2 priority=0 unchanged=1 own_identity=1 owner_closed=1 termination_closed=1 diagnostic_closed=1 signal_alloc_restored=1 calls=53 work=0 wakes=52 waits=52 last_wake=33554432 startup=27 frames=7511
+EXEC MEMORY PASS: 27 Fast allocations, zero owned bytes, budget refusal without Chip fallback
+

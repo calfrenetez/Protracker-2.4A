@@ -106,7 +106,7 @@ static void fixture(unsigned mode)
         if(mode==13) {
             wait_return=1UL<<8;wait_advance=128;
             assert(pt_native_paula_pump_step(&pump,abort)==PT_NATIVE_PUMP_WAKE && timer_reads==reads+3 && timer_now==1128);
-            assert(wait_mask==((1UL<<7)|(1UL<<8)|abort));
+            assert(wait_mask==((1UL<<7)|(1UL<<8)|abort) && pump.wait_calls==1 && pump.last_wake==wait_return);
             wait_advance=0;reads=timer_reads;
             assert(pt_native_paula_pump_step(&pump,abort)==PT_NATIVE_PUMP_WAKE && timer_reads==reads+4);
         }else if(mode==14) {
@@ -117,10 +117,10 @@ static void fixture(unsigned mode)
         }else if(mode==15) {
             pending_signals=abort;reads=timer_reads;
             pr=pt_native_paula_pump_step(&pump,abort);
-            assert((pr==PT_NATIVE_PUMP_STOPPED || pr==PT_NATIVE_PUMP_HOLD) && timer_reads==reads && !wait_calls);
+            assert((pr==PT_NATIVE_PUMP_STOPPED || pr==PT_NATIVE_PUMP_HOLD) && timer_reads==reads && !wait_calls && !pump.wait_calls && !pump.last_wake);
         }else if(mode==16) {
             wait_return=abort;pr=pt_native_paula_pump_step(&pump,abort);
-            assert((pr==PT_NATIVE_PUMP_STOPPED || pr==PT_NATIVE_PUMP_HOLD) && wait_calls==1);
+            assert((pr==PT_NATIVE_PUMP_STOPPED || pr==PT_NATIVE_PUMP_HOLD) && wait_calls==1 && pump.wait_calls==1 && pump.last_wake==abort);
         }else if(mode==17) {
             current_task=&foreign_task;
             assert(pt_native_paula_pump_step(&pump,abort)==PT_NATIVE_PUMP_INVALID && !pt_native_paula_pump_close(&pump));

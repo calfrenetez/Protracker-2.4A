@@ -1,0 +1,16 @@
+{
+  "passed": false,
+  "seconds": 5.709607166994829,
+  "window_bound_seconds": 200,
+  "cases": [
+    {
+      "case": "wait",
+      "binary": "PTExecPaulaWaitTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-native-wait-safe/build/dev/render-files-1790859812845142000",
+      "sha256": "f8ae028076597e483e8282a613f011014e678a144e43b05266363f49313963d0",
+      "independent_cleanup": true,
+      "passed": false,
+      "runner_rc": 1
+    }
+  ]
+}

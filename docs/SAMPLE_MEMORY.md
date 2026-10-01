@@ -7,6 +7,11 @@ Playback representations must never become the project's source of truth.
 
 ## Current implementation status — 1 October 2026
 
+RealMini read-only PCM status and initially-idle silent disable/reset readback
+also pass, with confirmed release/AHI restoration/cleanup. FIFO data/count/reset
+from nonempty state, capacity, sampleRAM/IRQ/output/listening remain unqualified.
+See `../evidence/enhanced-editor/amigus-quiesce-physical/`.
+
 RealMini PCM and wavetable ownership now pass in a separately qualified and
 coordinated idle-AHI window: unused RC6 020 driver cooperatively unloaded, both
 blocks passed competing-owner/wrong-owner/reacquisition/final-release checks,

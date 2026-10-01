@@ -411,5 +411,11 @@ bytes, invalid-owner refusal, one-shot begin and write-free pending/lost-owner
 polls. Device clear semantics are simulated in this fixture. Exact0.5 existing
 fixtures pass0 and five unavailable-library modes return5. Cleanup and separate
 independent absence/running68030/allDMAoff PASS; window released. Evidence:
-`../evidence/enhanced-editor/amigus-quiesce-native/`. Real Mini reset/readback,
-FIFO transactions/capacity, interrupts, output and listening remain pending.
+`../evidence/enhanced-editor/amigus-quiesce-native/`. The separately coordinated realMini idle reset/readback now PASS:
+run1790893318682550000 returned0, one-shot reset confirmed on first read-only
+poll, ownrelease confirmed1/retained0 and normal AHIreload resident1/support1/
+delayed0/users0. Postbridge knownID and installedCRCunchanged; exact RAMcleanup,
+separateabsence and connectedidle030return PASS, physicalwindowreleased. See
+`../evidence/enhanced-editor/amigus-quiesce-physical/`. This verifies reset from
+an initially empty, disabled FIFO. It does not establish removal of nonempty
+queued data, FIFOcapacity/ordering, IRQ teardown, acoustic silence or playback.

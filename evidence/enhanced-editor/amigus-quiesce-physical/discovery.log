@@ -1,0 +1,9 @@
+IDLE-RESET scope=unused-RC6-020-AHI-only audio=NOT_TESTED
+DRIVER-WINDOW result=0 stage=driver-unloaded unloaded=1 restore_needed=1
+REGISTER-PROBE scope=Mini-7ea663e7-silent-disable-reset interrupts=NO audio=NOT_TESTED
+PCM STATUS flags=0x0000 mask=0x0000 format=0x0000 rate=0x0000 pending_words=0
+PCM QUIESCE requested=1 confirmed=1 status=1 polls=1
+REGISTER RELEASE confirmed=1 retained=0 driver=0x00000000
+REGISTERS result=PASS reason=idle rc=0
+DRIVER resident=1 supported=1 delayed=0 users=0 ahi_users=0
+IDLE-RESET result=PASS unloaded=1 restored=1 restore_needed=0 rc=0

@@ -4046,3 +4046,25 @@ Native helper cross-compiler syntax and existing editor fixture cross-build PASS
 no new native execution. Evidence:`evidence/enhanced-editor/native-editor-paula-binding`.
 Actual frontend PLAY/private timer/Wait/advance integration, native prepared song
 runtime evidence, output timing/listening/endurance and physical acceptance remain.
+
+
+## Scoped native Paula scheduling diagnostic — 1 October 2026
+
+A calling-task-only priority scope records exact identity and signed saved priority,
+verifies acquisition/restoration and retains a failed restoration obligation. The
+native cadence fixture temporarily uses priority 5 after preparation and restores
+its exact saved priority before every normal/error resource-cleanup path. Finite
+priming/live loops check Ctrl-C without clearing signals; uncertain restoration or
+timeout retains a recovery hold. This is a diagnostic context, not frontend policy.
+
+Host guard/transport/EClock sanitizer checks and pinned cross-build pass. In one
+fresh coordinated emulator window the priority-5 fixture reached 24,027 actual
+frames with 187 service calls/completions; saved priority 0 was verified restored
+before all timer/device/editor/master cleanup and 27 Fast allocations reached zero
+owned bytes. Exact cleanup and independent locked running/DMA-off/path-absence
+checks pass, followed by explicit release. Evidence: `evidence/enhanced-editor/paula-priority-scope`.
+Earlier default-priority failures remain FAILED; their cause is not established.
+No musical-boundary, Wait-owner, native frontend/output, listening, endurance or
+physical acceptance follows from this bounded changed-context result. The next
+implementation is explicit notification-driven ownership with bounded abort and
+cleanup while preserving actual clock reads, strict watchdogs and sample leases.

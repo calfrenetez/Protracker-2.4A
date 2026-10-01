@@ -1,4 +1,5 @@
 #include "native_exec_memory.h"
+#include "../src/native/task_priority.h"
 #include "../src/native/editor_paula_transport.h"
 #include <proto/dos.h>
 #include <string.h>
@@ -12,7 +13,7 @@ static int fixture(unsigned late)
     struct pt_editor *ed=native_allocate(sizeof(*ed));struct pt_native_paula_transport t={0};
     int32_t *pcm=native_allocate(32*sizeof(*pcm));struct pt_render_options o={0};
     enum pt_paula_song_result r;unsigned i,startup_calls=0,initialized=0,attached=0;int result=0;
-    uint64_t ticks;uint32_t frequency;
+    uint64_t ticks;uint32_t frequency;struct pt_native_task_priority priority={0};
 #define CHECK(c) do{if(!(c)){printf("PAULA TRANSPORT FAIL case=%u line=%u\n",late,(unsigned)__LINE__);result=20;goto done;}}while(0)
     memset(pcm,0,32*sizeof(*pcm));pt_document_init(&doc,&a);
     CHECK(pt_document_new(&doc,4,SIZE_MAX)==PT_PROJECT_OK);
@@ -24,7 +25,9 @@ static int fixture(unsigned late)
     CHECK(pt_native_paula_transport_begin(&t,&o,32)==PT_PAULA_SONG_PREPARING);
     i=0;do{r=pt_native_editor_paula_advance(&t.native,NULL);CHECK(++i<100);if(r==PT_PAULA_SONG_PREPARING && !t.native.engine.ready)Delay(1);}while(r==PT_PAULA_SONG_PREPARING);
     CHECK(r==PT_PAULA_SONG_OK);
+    if(late==2)CHECK(pt_native_task_priority_acquire(&priority,5));
     i=0;do {
+        CHECK(!(SetSignal(0,0)&SIGBREAKF_CTRL_C));
         r=pt_native_paula_transport_start(&t,48000);CHECK(++i<2000);
         if(r==PT_PAULA_SONG_PREPARING) {
             CHECK(!t.clock.port && !t.alarm.port && !t.service_alarm.port && !t.started && !(pt_native_paula_output_dma()&15));
@@ -41,6 +44,7 @@ static int fixture(unsigned late)
         unsigned calls=0,completions=0,primed=1,was_primed,prime_calls=0,ready_calls=0;
         uint64_t to_core=0,to_post=0,notify_lag=0,max_to_core=0,max_to_post=0,max_notify_lag=0;
         for(i=0;i<1000000 && frames<24000;++i) {
+            CHECK(!(SetSignal(0,0)&SIGBREAKF_CTRL_C));
             CHECK(pt_native_eclock_read(&t.clock,&ticks,&frequency));
             CHECK(pt_elapsed_clock_advance(&observed,frequency,ticks,&frames)==PT_ELAPSED_OK);
             if(frames>=24000)break;
@@ -95,6 +99,14 @@ static int fixture(unsigned late)
     }
     CHECK(!t.native.engine.output.held[0] && !(pt_native_paula_output_dma()&15));
  done:
+    /* Every exit, including an unresolved device/timer cleanup, first returns
+     * the calling task to its exact saved priority. No other task is touched. */
+    if(!pt_native_task_priority_restore(&priority)){puts("TRANSPORT HOLD: priority restoration unresolved, all storage retained");return 25;}
+    if(late==2 && priority.task) {
+        if(FindTask(NULL)!=priority.task || priority.task->tc_Node.ln_Pri!=priority.saved)return 25;
+        printf("TASK PRIORITY requested=5 saved=%d restored=%d own_identity=1 active=%u\n",
+            (int)priority.saved,(int)priority.task->tc_Node.ln_Pri,priority.active);
+    }
     if(attached){for(i=0;i<50 && !pt_editor_paula_stop(&t.native.binding);++i)Delay(1);if(i==50){puts("TRANSPORT HOLD: pending cleanup, all storage retained");return 21;}}
     if(attached && !pt_editor_paula_detach(&t.native.binding))return 22;
     if(initialized && !pt_editor_dispose(ed))return 23;

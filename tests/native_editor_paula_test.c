@@ -8,26 +8,45 @@ void FreeMem(void *p,ULONG bytes){assert(p==chip.bytes && bytes==32 && chip_owne
 static void *fast_alloc(void *c,size_t n){(void)c;return malloc(n);}
 static void fast_free(void *c,void *p){(void)c;free(p);}
 #include "../src/native/editor_paula.h"
-static void prepared_fixture(unsigned bits)
+static void prepared_fixture(unsigned bits,unsigned mapped)
 {
     struct pt_allocator a={NULL,fast_alloc,fast_free};struct pt_document doc;
     struct pt_editor *ed=malloc(sizeof(*ed));struct pt_native_editor_paula n={0};
     struct pt_render_options options={0};struct pt_render_interval span;
+    struct pt_paula_preflight_report report={0};
     enum pt_paula_song_result r;unsigned i,polls;int32_t pcm[32],saved[32];
     reset();assert(ed);for(i=0;i<32;++i)pcm[i]=(int32_t)i+1;memcpy(saved,pcm,sizeof(saved));
-    pt_document_init(&doc,&a);assert(pt_document_new(&doc,4,SIZE_MAX)==PT_PROJECT_OK);
+    pt_document_init(&doc,&a);assert(pt_document_new(&doc,mapped?16:4,SIZE_MAX)==PT_PROJECT_OK);
+    if(mapped) {
+        if(bits!=8 || mapped==2)memset(pcm,0,sizeof(pcm));
+        memcpy(saved,pcm,sizeof(saved));
+        for(i=0;i<16;++i)doc.project.channels.track[i].route=PT_AMIGUS;
+        doc.project.channels.track[4].route=doc.project.channels.track[7].route=
+            doc.project.channels.track[10].route=doc.project.channels.track[15].route=PT_PAULA;
+        doc.project.channels.track[4].pan=0;
+        doc.project.samples[1].pcm=(struct pt_pcm){pcm,32,32,8000,1,(uint8_t)bits};
+    }
     doc.project.samples[0].pcm=(struct pt_pcm){pcm,32,32,8000,1,(uint8_t)bits};
-    doc.project.samples[0].volume=64;doc.project.events[0]=(struct pt_event){428,0,PT_NOTE_PERIOD,1,0,0,0,0};
-    doc.project.events[4*3].effect=15;doc.project.events[4*3].parameter=0;
+    doc.project.samples[0].volume=64;doc.project.events[mapped?4:0]=(struct pt_event){428,0,PT_NOTE_PERIOD,1,0,0,0,0};
+    doc.project.events[mapped?16*3+15:4*3].effect=15;doc.project.events[mapped?16*3+15:4*3].parameter=0;
     assert(pt_editor_init(ed,&doc.project));ed->sampler.allocator=a;
-    options.rate=48000;options.bits=24;options.tracks=1;options.gain_q16=65536;
+    options.rate=48000;options.bits=24;options.tracks=mapped?1U<<4:1;options.gain_q16=65536;
     options.tick_limit=100;options.frame_limit=100000;
     assert(pt_native_editor_paula_attach(&n,ed));
     assert(pt_native_editor_paula_begin(&n,&options,32)==PT_PAULA_SONG_PREPARING);
     assert(!n.binding.song && n.active && pt_editor_prepare_change(ed));
     assert(!n.active && !n.engine.output.reservation.port); /* Cancel before song exists. */
     assert(pt_native_editor_paula_begin(&n,&options,32)==PT_PAULA_SONG_PREPARING);
-    polls=0;do{r=pt_native_editor_paula_advance(&n,NULL);assert(++polls<100);}while(r==PT_PAULA_SONG_PREPARING);
+    polls=0;do{r=pt_native_editor_paula_advance(&n,&report);assert(++polls<100);}while(r==PT_PAULA_SONG_PREPARING);
+    if(mapped==2) {
+        /* Zero-leading classic8 is a segment/repeat, not the supported one-shot. */
+        assert(bits==8 && r==PT_PAULA_SONG_CAPABILITY && report.result==PT_PAULA_OPERATION);
+        assert(report.channel==4 && report.kind==PT_RENDER_SEGMENT && n.failed);
+        assert(!n.engine.output.held[0] && !chip_owned && !ed->sampler.current[0]);
+        for(polls=0;polls<8 && !pt_editor_prepare_change(ed);++polls){}
+        assert(polls<8 && !n.active);
+        goto done;
+    }
     assert(r==PT_PAULA_SONG_OK && n.binding.song && !n.engine.output.held[0]);
     for(i=0;i<20 && !n.engine.output.held[0];++i) {
     assert(pt_editor_paula_next(&n.binding,&span)==PT_PAULA_SONG_OK);
@@ -53,7 +72,8 @@ static void prepared_fixture(unsigned bits)
     assert(pt_native_editor_paula_advance(&n,NULL)==PT_PAULA_SONG_INVALID);
     for(polls=0;polls<8 && !pt_editor_prepare_change(ed);++polls){}
     assert(polls<8 && !n.active);
+ done:
     assert(pt_editor_dispose(ed) && pt_editor_paula_detach(&n.binding));
     pt_document_release(&doc);free(ed);
 }
-int main(void){prepared_fixture(8);prepared_fixture(16);prepared_fixture(24);puts("NATIVE EDITOR PAULA HOST PASS: prepared device output; early cancellation, retained DMA and final FREE barrier, capability refusal");return 0;}
+int main(void){unsigned mapped;for(mapped=0;mapped<2;++mapped){prepared_fixture(8,mapped);prepared_fixture(16,mapped);prepared_fixture(24,mapped);}prepared_fixture(8,2);puts("NATIVE EDITOR PAULA HOST PASS: prepared device output; early cancellation, retained DMA and final FREE barrier, classic8 segment refusal");return 0;}

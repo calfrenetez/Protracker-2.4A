@@ -5,7 +5,19 @@ The enhanced project owns the authoritative sample, including its declared
 elements in the declared precision; 24-bit samples retain their low eight bits.
 Playback representations must never become the project's source of truth.
 
-## Current implementation status — 30 September 2026
+## Current implementation status — 1 October 2026
+
+The native prepared Paula editor binding now owns the device from preparation
+through confirmed final release, including cancellation before song publication.
+Host tests cover mapped16-track selection,8/16/24 masters, retained DMA and pending
+device release. Native prepared-output qualification is separate from the earlier
+direct-engine tests. An initial silent fixture failed before output: its all-zero
+classic8 source takes the renderer's segment/repeat path, which this one-shot-only
+adapter refuses. Host reproduction identifies that refusal; original native
+evidence remains failed. The corrected native fixture checks this refusal and
+separately tests silent16/24 prepared output. Native execution remains pending.
+Classic segment/repeat playback, real-time timer/frontend integration and listening
+acceptance remain requirements; successful one-shot tests do not cover them.
 
 The sections below retain milestone history. Earlier statements such as “not yet
 wired” may be superseded by later sections; this table separates the present

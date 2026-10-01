@@ -1,0 +1,10 @@
+{
+  "passed": false,
+  "native_returncode": 14,
+  "native_failure": "at least one start did not return confirmed success; precise cause unlogged",
+  "normal_termination": true,
+  "cleanup_proven_by_exact_rc14_path": true,
+  "independent_cleanup": true,
+  "no_retry_reset_physical": true,
+  "output_adapter_native_qualified": false
+}

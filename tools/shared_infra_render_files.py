@@ -61,7 +61,7 @@ def main():
     group.add_argument('--capture-session-memory',action='store_true',help='Run injected recording ownership and stop/quiescence with native Fast allocator; no device input')
     group.add_argument('--amigus-capture-memory',action='store_true',help='Run injected recording PCM/interrupt ownership with native Fast allocator; no card input')
     group.add_argument('--editor-capture-memory',action='store_true',help='Run editor recording barriers and publication with native Fast allocator; no device input')
-    group.add_argument('--paula-memory',choices=['cache','voices','preflight','mixed','mixed-owner','dispatch','song','editor','editor-mixed','reservation'],help='Run routed Paula ownership/capability with native allocators and injected readers; no DMA')
+    group.add_argument('--paula-memory',choices=['cache','voices','preflight','mixed','mixed-owner','dispatch','song','editor','editor-mixed','reservation','output'],help='Run routed Paula ownership/capability with native allocators and injected readers; no DMA')
     group.add_argument('--sample-dispatch',action='store_true',help='Check bounded sample dispatch and24-bit precision with Exec allocator')
     group.add_argument('--source-memory',action='store_true',help='Run donor ownership/failure/undo checks with native Fast allocator')
     group.add_argument('--mod-import',action='store_true',help='Run bounded MOD document load with native Fast allocator')
@@ -94,6 +94,11 @@ def main():
     with (INFRA/'runtime/test.lock').open('a') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         guest=Guest(INFRA,out)
+        if args.paula_memory=='output':
+            audio=guest.command('GET_AUDIO_STATE')
+            (out/'audio-before-staging.json').write_text(json.dumps({'audio':audio},indent=2)+'\n')
+            if not all('ch%d_dma=0'%i in audio.split('\t') for i in range(4)):
+                raise RuntimeError('Silent output fixture refuses an initially active DMA reader')
         try:run=prepare_run(guest,out)
         except Exception:
             result['prelaunch_refused']=True;result['run_files_staged']=False
@@ -138,8 +143,11 @@ def main():
                     'song':('paula-song','PTExecPaulaSongTest','PAULA SONG PASS:'),
                     'editor':('editor-paula','PTExecEditorPaulaTest','EDITOR PAULA PASS:'),
                     'editor-mixed':('editor-mixed','PTExecEditorMixedTest','EDITOR MIXED PASS:'),
-                    'reservation':('paula-reservation','PTExecPaulaReservationTest','PAULA RESERVATION PASS:')}[args.paula_memory]]
+                    'reservation':('paula-reservation','PTExecPaulaReservationTest','PAULA RESERVATION PASS:'),
+                    'output':('paula-output','PTExecPaulaOutputTest','PAULA OUTPUT PASS:')}[args.paula_memory]]
             result['scope']='shared030 routed Paula '+args.paula_memory+' with native allocators and injected callbacks; no native DMA/output'
+            if args.paula_memory=='output':
+                result['scope']='shared030 actual audio.device acknowledged silent WRITE/DMA, control, confirmed stop and Chip/channel/IO release; no listening/timing/physical claim'
             if args.paula_memory=='reservation':
                 result['scope']='shared030 actual audio.device channel reservation/lock/free and busy refusal; no WRITE/MMIO/DMA/output'
             if args.paula_memory=='mixed':
@@ -298,6 +306,11 @@ def main():
                 if not all('ch%d_dma=0'%i in state.split('\t') for i in range(4)):
                     raise RuntimeError('Cleanup probe left active or unknown DMA; functional test not started')
             require_running_guest(guest,out,'before-launch')
+            if args.paula_memory=='output':
+                audio=guest.command('GET_AUDIO_STATE')
+                (out/'audio-before-launch.json').write_text(json.dumps({'audio':audio},indent=2)+'\n')
+                if not all('ch%d_dma=0'%i in audio.split('\t') for i in range(4)):
+                    raise RuntimeError('Silent output fixture refuses DMA active before launch')
             guest.launch.write_text('\n'.join(commands)+'\n');guest.start()
             # The cumulative editor-wavetable fixture includes native timer and
             # cancellation diagnostics; its process budget is not an audio deadline.

@@ -1,0 +1,9 @@
+/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-output-guarded-candidate/build/dev/render-files-1790842848954463000
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-output-guarded-candidate/tools/shared_infra_render_files.py", line 394, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-output-guarded-candidate/tools/shared_infra_render_files.py", line 325, in main
+    assert result[name+'_returncode']=='0' and marker in log,log
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

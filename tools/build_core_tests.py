@@ -193,6 +193,7 @@ def main():
     inputs['PTEditorMixedTest'] = ['tests/editor_mixed_test.c','src/editor/editor_mixed.c',*dict.fromkeys([*inputs['PTMixedOwnerTest'][1:],*inputs['PTEditorPaulaTest'][1:]])]
     inputs['PTExecEditorMixedTest'] = ['tests/native_exec_editor_mixed_test.c',*inputs['PTEditorMixedTest'][1:]]
     inputs['PTExecPaulaReservationTest'] = ['tests/native_exec_paula_reservation_test.c']
+    inputs['PTExecPaulaOutputTest'] = ['tests/native_exec_paula_output_test.c']
     inputs['PTCaptureTest'] = ['tests/capture_test.c','src/core/capture.c','src/editor/sampler_capture.c',*inputs['PTSamplerTest'][1:]]
     inputs['PTExecCaptureTest'] = ['tests/native_exec_capture_test.c',*inputs['PTCaptureTest'][1:]]
     inputs['PTCaptureSessionTest'] = ['tests/capture_session_test.c','src/core/capture_session.c',*inputs['PTCaptureTest'][1:]]

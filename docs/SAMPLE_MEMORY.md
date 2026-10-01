@@ -3859,3 +3859,25 @@ This is production channel reservation, not yet a pt_paula_voice_api output
 adapter or installed mixed frontend. Voice start/control/confirmed stop, actual
 clock/capability validation, DMA cache retention, audio/timing/endurance and
 physical qualification remain required. Existing classic playback is unchanged.
+
+
+## Audio.device voice prototype — native start qualification FAILED
+
+A host-tested native prototype adds fixed WRITE/control requests and a private
+start-message port behind pt_paula_voice_api. Actual write-start acknowledgement
+is required for start1; submission/pending/error retains data until confirmed
+stop. Controls require command completion. Stop aborts once, polls before WaitIO
+and drains notifications, retaining Chip data and control contexts while pending.
+Capability uses OS2+ documented Exec E-clock PAL/NTSC frequency; geometry/Chip
+storage validated. No MMIO writes or custom IRQ handlers. Not installed frontend.
+
+Host21 output +12 reservation sanitizer cases pass; existing routed voice owner
+regression passes. Native attempt1790842848954463000 FAILED RC14 at unconfirmed
+start; cause not logged, so delayed acknowledgement is only a hypothesis. The
+exact RC14 path proves all requests/channel/lock/device/port closure, DMAoff and
+Chip release before exit; exact and independent locked cleanup pass, hold released.
+Evidence:`evidence/enhanced-editor/paula-device-output-failed`. No retry/reset or
+physical operations. Do not claim native four-voice starts, controls, timing,
+audio/listening or production output acceptance. Next instrument refusal/state
+and resolve actual start semantics against synchronous API, preserving failure
+and using fresh exact-candidate coordination for any new diagnostic window.

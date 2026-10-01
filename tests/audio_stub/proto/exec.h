@@ -8,3 +8,6 @@ LONG WaitIO(struct IORequest *);
 void CloseDevice(struct IORequest *);
 void DeleteIORequest(struct IORequest *);
 void DeleteMsgPort(struct MsgPort *);
+struct Message *GetMsg(struct MsgPort *);
+LONG AbortIO(struct IORequest *);
+ULONG TypeOfMem(const void *);

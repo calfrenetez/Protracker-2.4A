@@ -1,0 +1,8 @@
+{
+  "passed": false,
+  "scope": "shared030 actual audio.device acknowledged silent WRITE/DMA, control, confirmed stop and Chip/channel/IO release; no listening/timing/physical claim",
+  "PTExecPaulaOutputTest_sha256": "38fe2dfa97a001cc34d4df3fa67b2fbe4d605ad66818ab33160be7225755ab51",
+  "paula-output_returncode": "14",
+  "run_files_cleaned": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0"
+}

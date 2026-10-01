@@ -1,0 +1,16 @@
+{
+  "passed": false,
+  "seconds": 3.015381332952529,
+  "window_bound_seconds": 200,
+  "cases": [
+    {
+      "case": "paula-boundary",
+      "binary": "PTExecPaulaBoundaryTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/native-paula-boundary-zero/build/dev/render-files-1790861764770375000",
+      "sha256": "8f44a05b67b154f69a8eed818930ee3b1942edb2fc9d4ed7afb2cbe28cd561eb",
+      "independent_cleanup": true,
+      "passed": false,
+      "runner_rc": 1
+    }
+  ]
+}

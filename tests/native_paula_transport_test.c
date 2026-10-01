@@ -75,8 +75,18 @@ static void fixture(unsigned mode)
     assert(pt_editor_init(ed,&doc.project));ed->sampler.allocator=a;
     o.rate=48000;o.bits=24;o.tracks=1;o.gain_q16=65536;o.tick_limit=100;o.frame_limit=100000;
     assert(pt_native_paula_transport_attach(&t,ed));assert(!pt_native_paula_transport_attach(&t,ed));
+    assert(pt_native_paula_transport_prime(NULL)==PT_PAULA_SONG_INVALID && pt_native_paula_transport_prime(&t)==PT_PAULA_SONG_INVALID);
     assert(pt_native_paula_transport_begin(&t,&o,32)==PT_PAULA_SONG_PREPARING);
     i=0;do{r=pt_native_editor_paula_advance(&t.native,NULL);assert(++i<100);}while(r==PT_PAULA_SONG_PREPARING);assert(r==PT_PAULA_SONG_OK);
+    if(mode==2) {
+        i=0;do{r=pt_native_paula_transport_prime(&t);assert(++i<2000);
+            assert(!timer_opens && !timer_ports && timer_reads==initial_reads && timer_sends==initial_sends && !(dma&15));
+            assert(!t.started && !t.service_clock_ready);
+        }while(r==PT_PAULA_SONG_PREPARING);
+        assert(r==PT_PAULA_SONG_OK && t.priming && t.native.engine.cache.cache.bytes==32);
+        assert(pt_native_paula_transport_prime(&t)==PT_PAULA_SONG_OK && timer_reads==initial_reads && !timer_ports && !(dma&15));
+        for(i=0;i<32;++i)assert(!chip.bytes[i]);
+    }
     if(mode==1)timer_fail_open=UNIT_WAITECLOCK;
     i=0;do {
         r=pt_native_paula_transport_start(&t,1000);assert(++i<2000);
@@ -88,6 +98,7 @@ static void fixture(unsigned mode)
 
     if(mode==1){assert(r==PT_PAULA_SONG_CLOCK && !t.started);finish(&t,ed,&doc);return;}
     assert(r==PT_PAULA_SONG_WAITING && timer_sends && !t.can_wait && !pt_native_paula_transport_wait_mask(&t) && pt_native_paula_transport_signal(&t)==((1UL<<7)|(1UL<<8)));
+    assert(pt_native_paula_transport_prime(&t)==PT_PAULA_SONG_INVALID);
     n=timer_sends;for(i=0;i<100;++i){r=pt_native_paula_transport_service(&t);assert(r==PT_PAULA_SONG_WAITING || r==PT_PAULA_SONG_OK);}
     assert(!t.native.engine.output.held[0] && timer_sends==n);
     assert(t.can_wait && pt_native_paula_transport_wait_mask(&t)==((1UL<<7)|(1UL<<8)));

@@ -1,0 +1,8 @@
+EXEC MEMORY pool_limit=131092888 reserve=262144 flags=4
+BOUNDARY PREPARED calls=27 verified_zero_chip_bytes=32 pinned=1 before_timer_epoch=1 before_WRITE=1
+PAULA WAIT FAIL case=3 line=111
+PAULA BOUNDARY observed_output=0 musical_target=482118739 entry_ticks=482119000 core_ticks=482119459 post_ticks=482118232 mask=3 result=-2 song=11 phase=6
+WAIT REFUSED case=3 result=-2 song=11 phase=6 frames=47996 last_frames=47996 mask=3 waits=375 wake=67108864 termination_observed=481410816 termination_target=482137964
+WAIT PRIORITY requested=5 saved=0 restored=0 own_identity=1 active=0
+WAIT TASK case=3 priority=0 unchanged=1 own_identity=1 owner_closed=1 termination_closed=1 diagnostic_closed=1 signal_alloc_restored=1 calls=376 work=0 wakes=375 waits=375 last_wake=67108864 startup=1 frames=47991
+EXEC MEMORY PASS: 9 Fast allocations, zero owned bytes, budget refusal without Chip fallback

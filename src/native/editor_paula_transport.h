@@ -154,10 +154,14 @@ static inline enum pt_paula_song_result pt_native_paula_transport_service_arm(st
     r=pt_native_paula_transport_observe(t,&frames);if(r!=PT_PAULA_SONG_OK)return r;
     return pt_native_paula_transport_service_arm_at(t,frames);
 }
-static inline enum pt_paula_song_result pt_native_paula_transport_start(
-    struct pt_native_paula_transport *t,uint64_t delay_frames)
+/* One bounded unclocked preparation step. OK is stable prepared readiness,
+ * with no timer opened or WRITE; callers may inspect pinned derived caches
+ * before start. Repeated OK does no startup work/output. Start revalidates the
+ * same owner; mutation/disposal still uses its existing editor barrier. */
+static inline enum pt_paula_song_result pt_native_paula_transport_prime(
+    struct pt_native_paula_transport *t)
 {
-    enum pt_paula_song_result r;uint64_t ticks;uint32_t frequency;
+    enum pt_paula_song_result r;
     if(!t || t->failed || !t->native.active || t->native.failed || !t->native.binding.song ||
        t->started || t->clock.port || t->alarm.port || t->service_alarm.port)return PT_PAULA_SONG_INVALID;
     /* Both master and bounded sequence/cache preparation precede clock binding.
@@ -170,6 +174,13 @@ static inline enum pt_paula_song_result pt_native_paula_transport_start(
     r=pt_editor_paula_prime(&t->native.binding);
     if(r==PT_PAULA_SONG_WAITING)return PT_PAULA_SONG_PREPARING;
     if(r!=PT_PAULA_SONG_OK)return pt_native_paula_transport_fail(t,r);
+    return PT_PAULA_SONG_OK;
+}
+static inline enum pt_paula_song_result pt_native_paula_transport_start(
+    struct pt_native_paula_transport *t,uint64_t delay_frames)
+{
+    enum pt_paula_song_result r;uint64_t ticks;uint32_t frequency;
+    r=pt_native_paula_transport_prime(t);if(r!=PT_PAULA_SONG_OK)return r;
     t->phase=PT_NATIVE_PAULA_OPEN;
     if(!pt_native_eclock_open(&t->clock) || !pt_native_alarm_open(&t->alarm) || !pt_native_alarm_open(&t->service_alarm))
         return pt_native_paula_transport_fail(t,PT_PAULA_SONG_CLOCK);

@@ -26,8 +26,8 @@ static int fixture(unsigned mode)
     struct pt_native_task_priority scope={0};
     ULONG original_signals=task?task->tc_SigAlloc:0;
     enum pt_paula_song_result r;enum pt_native_pump_result pr=PT_NATIVE_PUMP_INVALID;
-    unsigned initialized=0,attached=0,i,starts=0,calls=0,work=0,wakes=0;int result=0;
-    uint64_t ticks,frames=0,deadline;uint32_t frequency;ULONG abort_mask=0;
+    unsigned initialized=0,attached=0,i,starts=0,calls=0,work=0,wakes=0,output_seen=0;int result=0;
+    uint64_t ticks,frames=0,deadline,musical_deadline=0;uint32_t frequency;ULONG abort_mask=0;
 #define CHECK(c) do{if(!(c)){printf("PAULA WAIT FAIL case=%u line=%u\n",mode,(unsigned)__LINE__);result=20;goto done;}}while(0)
     memset(pcm,0,32*sizeof(*pcm));pt_document_init(&doc,&a);CHECK(task);
     CHECK(pt_document_new(&doc,4,SIZE_MAX)==PT_PROJECT_OK);
@@ -42,8 +42,23 @@ static int fixture(unsigned mode)
     CHECK(pt_native_paula_transport_begin(&t,&o,32)==PT_PAULA_SONG_PREPARING);
     i=0;do{CHECK(!(SetSignal(0,0)&SIGBREAKF_CTRL_C));r=pt_native_editor_paula_advance(&t.native,NULL);CHECK(++i<100);if(r==PT_PAULA_SONG_PREPARING && !t.native.engine.ready)Delay(1);}while(r==PT_PAULA_SONG_PREPARING);
     CHECK(r==PT_PAULA_SONG_OK);
+    if(mode==3) {
+        unsigned prepared=0,j;size_t zero_bytes=0;
+        do{CHECK(!(SetSignal(0,0)&SIGBREAKF_CTRL_C));r=pt_native_paula_transport_prime(&t);CHECK(++prepared<2000);
+            CHECK(!t.clock.port && !t.alarm.port && !t.service_alarm.port && !t.started && !(pt_native_paula_output_dma()&15));
+        }while(r==PT_PAULA_SONG_PREPARING);
+        CHECK(r==PT_PAULA_SONG_OK && t.native.engine.cache.cache.bytes==32);
+        for(j=0;j<PT_CACHE_SLOTS;++j)if(t.native.engine.cache.cache.entry[j].data) {
+            size_t k;struct pt_cache_entry *e=&t.native.engine.cache.cache.entry[j];
+            CHECK(e->bytes==32 && e->pins && e->valid && (TypeOfMem(e->data)&(MEMF_FAST|MEMF_CHIP))==MEMF_CHIP);
+            for(k=0;k<e->bytes;++k)CHECK(!((const uint8_t *)e->data)[k]);
+            zero_bytes+=e->bytes;
+        }
+        CHECK(zero_bytes==32);
+        printf("BOUNDARY PREPARED calls=%u verified_zero_chip_bytes=%lu pinned=1 before_timer_epoch=1 before_WRITE=1\n",prepared,(unsigned long)zero_bytes);
+    }
 #ifdef PT_NATIVE_PAULA_WAIT_SCOPED_PRIORITY
-    if(mode==2)CHECK(pt_native_task_priority_acquire(&scope,PT_NATIVE_PAULA_WAIT_SCOPED_PRIORITY) && scope.task==task && scope.saved==priority);
+    if(mode>=2)CHECK(pt_native_task_priority_acquire(&scope,PT_NATIVE_PAULA_WAIT_SCOPED_PRIORITY) && scope.task==task && scope.saved==priority);
 #endif
     i=0;do {
         CHECK(!(SetSignal(0,0)&SIGBREAKF_CTRL_C));r=pt_native_paula_transport_start(&t,48000);CHECK(++i<2000);
@@ -52,6 +67,7 @@ static int fixture(unsigned mode)
         }
     }while(r==PT_PAULA_SONG_PREPARING);
     starts=i;CHECK(r==PT_PAULA_SONG_WAITING && pt_native_paula_pump_bind(&pump,&t));
+    musical_deadline=t.alarm_deadline;
     if(mode==0) {
         SetSignal(abort_mask,abort_mask);
         pr=pt_native_paula_pump_step(&pump,abort_mask|SIGBREAKF_CTRL_C);
@@ -71,31 +87,35 @@ static int fixture(unsigned mode)
             pump.wait_calls && (pump.last_wake&abort_mask));
     }else {
         struct pt_elapsed_clock observed=t.service_clock;
+        uint64_t end=mode==3?49280:24000;
         /* This third private request independently terminates any ordinary
          * Wait at the finite target, even with no playback notification. Keep
          * independent reader alive through pump close to verify actual end. */
-        CHECK(pt_elapsed_clock_deadline(&observed,24000,&deadline)==PT_ELAPSED_OK);
+        CHECK(pt_elapsed_clock_deadline(&observed,end,&deadline)==PT_ELAPSED_OK);
         CHECK(pt_native_alarm_arm(&termination,deadline)==PT_ALARM_WAITING);
-        for(i=0;i<10000 && frames<24000;++i) {
+        for(i=0;i<10000 && frames<end;++i) {
             CHECK(pt_native_eclock_read(&diagnostic,&ticks,&frequency));
             CHECK(pt_elapsed_clock_advance(&observed,frequency,ticks,&frames)==PT_ELAPSED_OK);
-            if(frames>=24000)break;
+            if(frames>=end)break;
             pr=pt_native_paula_pump_step(&pump,abort_mask|SIGBREAKF_CTRL_C);++calls;
+            if(mode==3 && t.native.engine.output.activated[0])output_seen=1;
             if(pr==PT_NATIVE_PUMP_WORK){++work;continue;}
             if(pr==PT_NATIVE_PUMP_WAKE){++wakes;continue;}
             if((pr==PT_NATIVE_PUMP_STOPPED || pr==PT_NATIVE_PUMP_HOLD) && !t.failed &&
                (pump.last==PT_PAULA_SONG_OK || pump.last==PT_PAULA_SONG_WAITING) &&
                CheckIO((struct IORequest *)termination.request)) {
                 CHECK(pt_native_eclock_read(&diagnostic,&ticks,&frequency));
-                CHECK(pt_elapsed_clock_advance(&observed,frequency,ticks,&frames)==PT_ELAPSED_OK && frames>=24000);
+                CHECK(pt_elapsed_clock_advance(&observed,frequency,ticks,&frames)==PT_ELAPSED_OK && frames>=end);
                 break;
             }
             CHECK(0);
         }
-        CHECK(i<10000 && frames>=24000 && frames<48000 && wakes>=100 && pump.wait_calls>=100);
+        CHECK(i<10000 && frames>=end && frames<(mode==3?60000:48000) && wakes>=100 && pump.wait_calls>=100);
     }
-    CHECK(!t.native.engine.output.held[0] && !(pt_native_paula_output_dma()&15));
+    if(mode==3)CHECK(output_seen);
+    else CHECK(!t.native.engine.output.held[0] && !(pt_native_paula_output_dma()&15));
  done:
+    if(mode==3)printf("PAULA BOUNDARY observed_output=%u musical_target=%lu entry_ticks=%lu core_ticks=%lu post_ticks=%lu mask=%u result=%d song=%u phase=%u\n",output_seen,(unsigned long)musical_deadline,(unsigned long)t.entry_ticks,(unsigned long)t.core_ticks,(unsigned long)t.post_ticks,t.observation_mask,(int)pr,(unsigned)pump.last,(unsigned)t.failure_phase);
     if(result)printf("WAIT REFUSED case=%u result=%d song=%u phase=%u frames=%lu last_frames=%lu mask=%u waits=%u wake=%lu termination_observed=%lu termination_target=%lu\n",
         mode,(int)pr,(unsigned)pump.last,(unsigned)t.failure_phase,(unsigned long)t.failure_frames,
         (unsigned long)t.failure_last_frames,t.observation_mask,pump.wait_calls,(unsigned long)pump.last_wake,
@@ -126,4 +146,8 @@ static int fixture(unsigned mode)
 #undef CHECK
     return 0;
 }
+#ifdef PT_NATIVE_PAULA_BOUNDARY_ONLY
+int main(void){int r;native_memory_start();r=fixture(3);if(r)return r;native_memory_finish();return 0;}
+#else
 int main(void){int r;native_memory_start();r=fixture(0);if(r)return r;r=fixture(1);if(r)return r;r=fixture(2);if(r)return r;native_memory_finish();return 0;}
+#endif

@@ -3839,3 +3839,23 @@ coordinated release acknowledged. Evidence:`evidence/enhanced-editor/editor-nati
 This is a frontend integration entry point; native PLAY/event-loop installation
 and production output/device/IRQ binding remain unfinished, with timing/audio/
 physical acceptance separate.
+
+
+## Native Paula channel reservation
+
+A private audio.device reservation component now opens without channels, requests
+all four using BeginIO NOWAIT at minimum precedence, then raises precedence only
+for exact successful mask/key ownership. Pending LOCK observes theft. Each
+advance polls/submits bounded work; pending or failed FREE retains every resource.
+Close requires playback clients already stopped, uses only the acquired mask/key,
+and releases requests/port/device only after command and LOCK completion.
+No unfinished WaitIO, automatic retry, WRITE, MMIO or DMA operations.
+
+Host12 sanitizer ownership cases and native3 actual reservation/close/busy-refusal
+cases PASS. Busy contender leaves original ownership ready. Normal completion,
+explicit owner cleanup and independent shared-locked guest cleanup pass;
+coordinated release acknowledged. Evidence: `evidence/enhanced-editor/paula-reservation`.
+This is production channel reservation, not yet a pt_paula_voice_api output
+adapter or installed mixed frontend. Voice start/control/confirmed stop, actual
+clock/capability validation, DMA cache retention, audio/timing/endurance and
+physical qualification remain required. Existing classic playback is unchanged.

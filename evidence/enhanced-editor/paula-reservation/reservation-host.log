@@ -1,0 +1,7 @@
+test_native_command_and_retained_ownership (test_paula_reservation.PaulaReservation.test_native_command_and_retained_ownership) ... PAULA RESERVATION HOST PASS: 12 ownership cases
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.500s
+
+OK

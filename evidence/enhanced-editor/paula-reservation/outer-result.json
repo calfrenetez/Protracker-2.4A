@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "seconds": 1.7235243750037625,
+  "window_bound_seconds": 200,
+  "cases": [
+    {
+      "case": "reservation",
+      "binary": "PTExecPaulaReservationTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-reservation-qualified-candidate/build/dev/render-files-1790841823999865000",
+      "sha256": "6bcc2d0d563125784fc1f99a8201df1481da127e0e0ffd9676cecd277d3575a7",
+      "independent_cleanup": true
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+EXEC MEMORY pool_limit=131052200 reserve=262144 flags=4
+NATIVE EDITOR MIXED pending alarm/editor veto/confirmed close PASS
+NATIVE EDITOR MIXED adopted unprepared failure/editor veto/confirmed close PASS
+NATIVE EDITOR MIXED refused adoption closes idle requests PASS
+NATIVE EDITOR MIXED pending alarm/editor veto/confirmed close PASS
+NATIVE EDITOR MIXED adopted unprepared failure/editor veto/confirmed close PASS
+NATIVE EDITOR MIXED refused adoption closes idle requests PASS
+NATIVE EDITOR MIXED pending alarm/editor veto/confirmed close PASS
+NATIVE EDITOR MIXED adopted unprepared failure/editor veto/confirmed close PASS
+NATIVE EDITOR MIXED refused adoption closes idle requests PASS
+EDITOR MIXED PASS:24 native scenarios:15 injected lifetime +9 private native timer binding; no UI/output/timing acceptance
+EXEC MEMORY PASS: 210 Fast allocations, zero owned bytes, budget refusal without Chip fallback

@@ -4,5 +4,8 @@
 #define PT_TEST_EDITOR_MIXED_EXEC
 #define malloc native_allocate
 #define free native_release
+#include "../src/native/editor_mixed.h"
+#include <proto/dos.h>
+#define PT_TEST_NATIVE_EDITOR_MIXED
 #include "editor_mixed_test.c"
 int main(void){int result;native_memory_start();result=editor_mixed_fixture();native_memory_finish();return result;}

@@ -3799,3 +3799,22 @@ locked cleanup verified. Evidence: `evidence/enhanced-editor/editor-mixed`.
 This is an editor lifetime component, not installed native PLAY/event-loop or
 production output/IRQ/device wiring. Those, native timer integration, timing,
 audio, pressure/endurance and physical acceptance remain open.
+
+
+## Private native timer adoption by editor session
+
+The OS2+ native editor start helper now connects the mixed editor binding to its
+private E-clock/WAITECLOCK transport. Start opens idle requests but submits no
+alarm until service. Refused binding adoption closes only those idle requests,
+preserving the sample owner. Failure after pump adoption retains timer/editor
+ownership for explicit bounded barrier close. Native storage and callback contexts
+remain alive until confirmed stop; no direct owner/pump calls while adopted.
+
+Related host15 editor lifetime +Paula +mixed240 regressions PASS. Native24 PASS:
+15 injected +9 actual private binding cases covering pending alarm/editor veto,
+unprepared adopted failure and refused adoption/idle cleanup at8/16/24bits.
+Zero owned bytes, full native request and sample ownership cleanup, independent
+locked guest cleanup and coordinated release acknowledged. Evidence:
+`evidence/enhanced-editor/editor-native-timer`. Native frontend PLAY/event-loop,
+production output/device/IRQ, actual timing/audio and physical acceptance remain
+open. Native cancellation is resource proof, not punctual wake or audio proof.

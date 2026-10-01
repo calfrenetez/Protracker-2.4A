@@ -29,6 +29,14 @@ static void control_write(volatile UBYTE *p,UBYTE value)
 #define PT_CIA_CONTROL_WRITE(pointer,value) control_write(pointer,value)
 #include "native_cia_owner.h"
 static void handler(void){}
+struct clock_input {uint64_t ticks;uint32_t frequency;unsigned fail,calls;};
+static int read_clock(void *context,uint64_t *ticks,uint32_t *frequency)
+{
+    struct clock_input *c=context;assert(depth);++c->calls;
+    assert(!(host_hardware[0].ciacra&1U));
+    if(c->fail)return 0;
+    *ticks=c->ticks;*frequency=c->frequency;return 1;
+}
 static void reset(void)
 {assert(!depth);memset(host_hardware,0,sizeof(host_hardware));memset(vectors,0,sizeof(vectors));enabled[0]=enabled[1]=0x1c;pending[0]=pending[1]=0x1c;missing=adds=removes=changes=writes=hold_start=0;current=&task;}
 int main(void)
@@ -81,5 +89,24 @@ int main(void)
     assert(pending[0]==0x1c && pending[1]==0x1c && enabled[0]==0x1c && enabled[1]==0x1c);
     assert(!vectors[0][0] && !vectors[0][1] && !vectors[1][0] && !vectors[1][1]);
     assert(pt_diagnostic_cia_close(&t) && !depth);++cases;
+    /* Actual sample after setup; bad clocks/expired targets never write latches
+     * or start hardware, and retain the vector with its interrupt masked. */
+    {
+        struct clock_input c={100,709379,0,0};uint64_t observed=99;unsigned count=99;
+        reset();t=(struct pt_diagnostic_cia){0};assert(pt_diagnostic_cia_acquire(&t,handler,&data));
+        host_hardware[0].ciatalo=0x56;host_hardware[0].ciatahi=0x78;
+        assert(!pt_diagnostic_cia_arm_at(&t,read_clock,&c,100,709379,&observed,&count));
+        assert(observed==99 && count==99 && host_hardware[0].ciatalo==0x56 && host_hardware[0].ciatahi==0x78);
+        assert(enabled[0]==0x1c && t.held && !removes);
+        c.fail=1;assert(!pt_diagnostic_cia_arm_at(&t,read_clock,&c,200,709379,&observed,&count));c.fail=0;
+        c.frequency=715909;assert(!pt_diagnostic_cia_arm_at(&t,read_clock,&c,200,709379,&observed,&count));c.frequency=709379;
+        assert(!pt_diagnostic_cia_arm_at(&t,read_clock,&c,65636,709379,&observed,&count));
+        assert(observed==99 && count==99 && enabled[0]==0x1c && !depth);
+        c.ticks=UINT64_MAX-65535;
+        assert(pt_diagnostic_cia_arm_at(&t,read_clock,&c,UINT64_MAX,709379,&observed,&count));
+        assert(observed==c.ticks && count==65535 && host_hardware[0].ciatalo==255 && host_hardware[0].ciatahi==255);
+        assert(host_hardware[0].ciacra==0x19 && pending[0]==0x1c && enabled[0]==0x1d);
+        assert(pt_diagnostic_cia_close(&t) && !depth);++cases;
+    }
     assert(!depth);printf("CIA OWNER HOST PASS: %u busy/vector/register/task/copy/retained-stop cases\n",cases);return 0;
 }

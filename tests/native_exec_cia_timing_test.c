@@ -20,6 +20,55 @@ struct irq_state {
 OFFSET(timer,0);OFFSET(ticks,4);OFFSET(frequency,12);OFFSET(calls,16);
 OFFSET(task,20);OFFSET(signal,24);OFFSET(armed,28);
 extern void pt_diagnostic_cia_irq(void);
+struct arm_state {
+    struct Device *timer;struct EClockVal ticks,target;ULONG frequency,expected;
+    volatile UBYTE *low,*high,*control;ULONG start,count;
+};
+#define ARM_OFFSET(field,n) typedef char arm_offset_##field[(offsetof(struct arm_state,field)==n)?1:-1]
+ARM_OFFSET(timer,0);ARM_OFFSET(ticks,4);ARM_OFFSET(target,12);ARM_OFFSET(frequency,20);
+ARM_OFFSET(expected,24);ARM_OFFSET(low,28);ARM_OFFSET(high,32);ARM_OFFSET(control,36);
+ARM_OFFSET(start,40);ARM_OFFSET(count,44);
+extern ULONG pt_diagnostic_cia_arm_native(struct arm_state *state);
+extern ULONG pt_diagnostic_cia_count_native(struct arm_state *state);
+static int arm_native(struct pt_diagnostic_cia *owner,struct pt_native_eclock *reader,
+    uint64_t target,uint32_t frequency,uint64_t *observed,unsigned *count)
+{
+    struct Library *cia_resource;struct arm_state state;ULONG result;
+    if(!pt_diagnostic_cia_current(owner) || !reader->opened || !reader->request ||
+       !reader->request->tr_node.io_Device || !frequency)return 0;
+    memset(&state,0,sizeof(state));state.timer=reader->request->tr_node.io_Device;
+    state.target.ev_hi=(ULONG)(target>>32);state.target.ev_lo=(ULONG)target;
+    state.expected=frequency;state.low=owner->low;state.high=owner->high;
+    state.control=owner->control;state.start=(owner->saved_control&(owner->bit?0x80U:0xc0U))|0x19U;
+    cia_resource=owner->resource;Disable();AbleICR(cia_resource,(WORD)(1U<<owner->bit));
+    PT_CIA_CONTROL_WRITE(owner->control,owner->saved_control&~1U);
+    if(*owner->control&1U){Enable();return 0;}
+    SetICR(cia_resource,(WORD)(1U<<owner->bit));
+    AbleICR(cia_resource,(WORD)(0x80U|(1U<<owner->bit)));
+    result=pt_diagnostic_cia_arm_native(&state);
+    if(!result)AbleICR(cia_resource,(WORD)(1U<<owner->bit));
+    Enable();if(!result)return 0;
+    *observed=((uint64_t)state.ticks.ev_hi<<32)|state.ticks.ev_lo;
+    *count=(unsigned)state.count;return 1;
+}
+static int count_native_test(void)
+{
+    static const uint64_t cases[][2]={
+        {100,100},{101,100},{99,100},{65635,100},{65636,100},
+        {0x100000000ULL,0xffffffffULL},{0x100000010ULL,0xfffffff0ULL},
+        {UINT64_MAX,UINT64_MAX-65535},{UINT64_MAX,UINT64_MAX-65536},
+        {0,UINT64_MAX},{UINT64_MAX,0},{0x200000010ULL,0xfffffff0ULL}
+    };
+    unsigned i;struct arm_state s;
+    for(i=0;i<sizeof(cases)/sizeof(cases[0]);++i){
+        uint64_t target=cases[i][0],actual=cases[i][1];ULONG expected=0;
+        memset(&s,0,sizeof(s));s.target.ev_hi=(ULONG)(target>>32);s.target.ev_lo=(ULONG)target;
+        s.ticks.ev_hi=(ULONG)(actual>>32);s.ticks.ev_lo=(ULONG)actual;
+        if(target>actual && target-actual<=65535)expected=(ULONG)(target-actual);
+        if(pt_diagnostic_cia_count_native(&s)!=expected)return 0;
+    }
+    puts("CIA COUNT NATIVE PASS: 12 actual arm arithmetic boundary cases before resource acquisition");return 1;
+}
 struct trace {uint64_t target,arm_before,arm_after,actual,frame;ULONG wake,calls;unsigned count;};
 static int hold(const char *reason) __attribute__((noreturn));
 static int hold(const char *reason)
@@ -34,7 +83,7 @@ int main(void)
     uint64_t ticks=0,deadline=0,now=0,frames=0;uint32_t frequency=0;
     unsigned i,completed=0,late=0,early=0,chip=0,bit=0,acquired=0;int result=0;
 #define CHECK(c) do{if(!(c)){printf("CIA TIMING FAIL line=%u completed=%u\n",(unsigned)__LINE__,completed);result=20;goto done;}}while(0)
-    CHECK(task);native_memory_start();irq=native_allocate(sizeof(*irq));trace=native_allocate(16*sizeof(*trace));
+    CHECK(task && count_native_test());native_memory_start();irq=native_allocate(sizeof(*irq));trace=native_allocate(16*sizeof(*trace));
     memset(irq,0,sizeof(*irq));memset(trace,0,16*sizeof(*trace));
     CHECK(pt_native_eclock_open(&reader) && reader.port->mp_SigTask==task);
     CHECK(pt_native_alarm_open(&termination) && termination.port->mp_SigTask==task && termination.port->mp_SigBit<32);
@@ -56,12 +105,10 @@ int main(void)
          * diagnostic reports pre/post arm so programming bias is not mislabeled
          * pure interrupt latency. No calibrated subtraction or fake timestamp. */
         Disable();SetSignal(0,irq->signal);irq->armed=1;
-        if(!pt_native_eclock_read(&reader,&now,&actual_frequency) || actual_frequency!=frequency ||
-           now>=entry->target || entry->target-now>65535) {
+        if(!arm_native(&owner,&reader,entry->target,frequency,&now,&count)){
             irq->armed=0;Enable();CHECK(0);
         }
-        entry->arm_before=now;count=(unsigned)(entry->target-now);entry->count=count;
-        if(!pt_diagnostic_cia_arm(&owner,count)){irq->armed=0;Enable();CHECK(0);}
+        entry->arm_before=now;entry->count=count;
         read_ok=pt_native_eclock_read(&reader,&ticks,&actual_frequency);entry->arm_after=ticks;
         Enable(); /* nested arm exclusion is balanced before Wait */
         CHECK(read_ok && actual_frequency==frequency);

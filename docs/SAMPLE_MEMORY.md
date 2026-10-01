@@ -14,11 +14,23 @@ sanitized integer probe checks 184,200 logical-frame admission windows, includin
 The separately owned CIA timer-only diagnostic is authorized feasibility work;
 it does not require a new policy choice. The preceding host assessment made no
 guest operation or runtime change; diagnostic results are recorded separately.
-Timer-only CIA owner/IRQ fixture now has seven host checks and pinned Amiga build
-PASS. Native NOT RUN: the coordinated guest was paused before staging, both exact
-run/launcher paths were independently absent, and the unused TAKE was released.
-Unknown pause ownership blocks that next native gate; no resume/reset performed.
-Evidence: `../evidence/enhanced-editor/cia-timer-feasibility/README.md`.
+Timer-only CIA host ownership checks and pinned Amiga builds pass. Following
+explicit user approval, one guarded resume restored the same shared guest to
+running. Two separately coordinated timer-only runs completed with safe closure
+but FAILED unchanged strict timing:16/16 late84..98ticks, then16/16 late47..53ticks
+after moving owned setup before the actualclock read. OriginalTask/priority0/
+signals restored, timers/vector/IO closed,2Fastallocationszero each; independent
+locked running/all4DMAoff/exactpathabsencePASS and explicit RELEASE each.
+Neither result isolates pure IRQ latency or qualifies playback/physical timing.
+A new short native clock/count/start diagnostic has offset/disassembly/build and
+host checks PASS (8tests,9owner cases), but its12 pre-acquisition assembler checks
+and16 IRQ observations remain NOT RUN: first sharedlock refused before Guest
+construction/staging. Host process inspection identifies an active AmiGUS Safari
+installation reservation; do not bypass/clear it or probe physical hardware.
+Previous prelaunch pause/refusal evidence remains preserved. No targetshift,
+calibrated compensation, tolerance or productionpriority/output change.
+Evidence: `../evidence/enhanced-editor/cia-timer-native/`, `cia-absolute-arm/`,
+`cia-native-arm/` and the earlier `cia-timer-feasibility/`.
 
 Latest first-start qualification is FAILED: even with own-task diagnostic
 priority5, CORE observed the first musical target about1.015ms late and the

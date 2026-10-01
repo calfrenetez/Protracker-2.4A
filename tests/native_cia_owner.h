@@ -1,5 +1,6 @@
 #ifndef PT_DIAGNOSTIC_CIA_OWNER_H
 #define PT_DIAGNOSTIC_CIA_OWNER_H
+#include <stdint.h>
 /* Diagnostic only: no frontend binding, audio commands or Paula MMIO.
  * Single CPU, original task, zero-init/noncopyable. Borrowed handler/data must
  * remain alive until successful close. Never replace an occupied vector.
@@ -73,7 +74,7 @@ static int pt_diagnostic_cia_acquire(struct pt_diagnostic_cia *t,void (*code)(vo
 /* Caller publishes handler state and clears ONLY its own signal under the same
  * brief exclusion before arm. Relative count is a hardware countdown, not an
  * absolute-start guarantee. No finished/pending IO, allocation or task wait. */
-static int pt_diagnostic_cia_arm(struct pt_diagnostic_cia *t,unsigned count)
+static inline int pt_diagnostic_cia_arm(struct pt_diagnostic_cia *t,unsigned count)
 {
     struct Library *cia_resource;
     if(!pt_diagnostic_cia_current(t) || !count || count>65535)return 0;
@@ -88,6 +89,35 @@ static int pt_diagnostic_cia_arm(struct pt_diagnostic_cia *t,unsigned count)
      * Retain unrelated serial/TOD bits from original stopped control. */
     PT_CIA_CONTROL_WRITE(t->control,(t->saved_control&(t->bit?0x80U:0xc0U))|0x19U);
     Enable();return 1;
+}
+/* Separate absolute-arm experiment. Stop/mask/pending setup precedes the
+ * fresh actual clock sample; never subtract a calibrated programming offset.
+ * read must be a bounded IRQ-safe clock reader, with no owner mutation. Caller
+ * publishes handler state under exclusion just as for relative arm. A failed
+ * read/deadline leaves the owned timer stopped and masked, retaining its vector.
+ * This reduces setup bias; it does not promise exact hardware activation. */
+static inline int pt_diagnostic_cia_arm_at(struct pt_diagnostic_cia *t,
+    int (*read)(void *,uint64_t *,uint32_t *),void *context,
+    uint64_t deadline,uint32_t expected_frequency,uint64_t *observed,unsigned *count_out)
+{
+    struct Library *cia_resource;uint64_t now;uint32_t frequency;unsigned count;
+    if(!pt_diagnostic_cia_current(t) || !read || !context || !expected_frequency ||
+       !observed || !count_out)return 0;
+    cia_resource=t->resource;Disable();
+    AbleICR(cia_resource,(WORD)(1U<<t->bit));
+    PT_CIA_CONTROL_WRITE(t->control,t->saved_control&~1U);
+    if(*t->control&1U){Enable();return 0;}
+    SetICR(cia_resource,(WORD)(1U<<t->bit));
+    /* Stopped timer/pending clear: enable setup cannot fire this timer. */
+    AbleICR(cia_resource,(WORD)(0x80U|(1U<<t->bit)));
+    if(!read(context,&now,&frequency) || frequency!=expected_frequency ||
+       now>=deadline || deadline-now>65535) {
+        AbleICR(cia_resource,(WORD)(1U<<t->bit));Enable();return 0;
+    }
+    count=(unsigned)(deadline-now);
+    *t->low=(UBYTE)count;*t->high=(UBYTE)(count>>8);
+    PT_CIA_CONTROL_WRITE(t->control,(t->saved_control&(t->bit?0x80U:0xc0U))|0x19U);
+    *observed=now;*count_out=count;Enable();return 1;
 }
 static int pt_diagnostic_cia_close(struct pt_diagnostic_cia *t)
 {

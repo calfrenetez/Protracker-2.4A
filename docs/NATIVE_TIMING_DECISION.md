@@ -63,3 +63,23 @@ unknown; no automatic resume/reset is authorized. No timing tolerance or output
 architecture has been changed. See
 `../evidence/enhanced-editor/cia-timer-feasibility/README.md` for exact candidate,
 checks, refusal and release evidence. A later run needs fresh coordination.
+
+## Native timer measurements after explicit resume approval
+
+Two separately coordinated timer-only runs completed and safely closed their
+owned resources, but FAILED unchanged strict timing:84..98ticks late, then
+47..53ticks after moving setup ahead of the actualclock read. Each collected
+16actual IRQ observations, with independent cutoff and2Fastallocationszero.
+Pre/post programming spans72..75 then40..43ticks mean these are not pure IRQ
+latency bounds. No playback or physical timing qualification follows. Exact
+evidence is in `../evidence/enhanced-editor/cia-timer-native/` and
+`cia-absolute-arm/`. These supersede the paused guest blocker for those runs.
+
+A distinct native critical-arm diagnostic is built; it checks the same64-bit
+count arithmetic on12boundary cases BEFORE timer acquisition, then shortens the
+actual ReadEClock/count/START interval. No empirically chosen lead or tolerance.
+It remains NOT RUN because the sharedlock was reserved for AmiGUS Safari
+installation before Guest construction. Do not override that reservation. See
+`../evidence/enhanced-editor/cia-native-arm/`. Fresh coordination/guards are still
+required when the window is available; this is ongoing feasibility, not approval
+of a new output architecture or an argument for relaxed timing.

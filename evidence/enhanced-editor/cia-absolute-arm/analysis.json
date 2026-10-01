@@ -1,0 +1,43 @@
+{
+  "scope": "No output or physical acceptance",
+  "late": 16,
+  "early": 0,
+  "target_lateness_ticks": [
+    51,
+    50,
+    51,
+    47,
+    50,
+    53,
+    51,
+    50,
+    50,
+    50,
+    48,
+    51,
+    50,
+    51,
+    50,
+    48
+  ],
+  "programming_span_ticks": [
+    43,
+    42,
+    42,
+    41,
+    42,
+    42,
+    42,
+    40,
+    41,
+    42,
+    42,
+    42,
+    42,
+    42,
+    42,
+    40
+  ],
+  "timing": "FAILED",
+  "cleanup": "PASS"
+}

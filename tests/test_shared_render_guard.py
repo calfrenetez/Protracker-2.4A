@@ -5,6 +5,7 @@ import json
 from unittest.mock import patch
 import shutil
 import unittest
+import fcntl
 
 ROOT=Path(__file__).resolve().parents[1]
 spec=importlib.util.spec_from_file_location('shared_render',ROOT/'tools/shared_infra_render_files.py')
@@ -20,6 +21,20 @@ class Guest:
         return self.status
 
 class SharedRenderGuard(unittest.TestCase):
+    def test_busy_lock_refusal_keeps_existing_owner_and_records_no_staging(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);out=root/'evidence';out.mkdir();path=root/'test.lock'
+            with path.open('a') as first,path.open('a') as second,path.open('a') as third:
+                fcntl.flock(first,fcntl.LOCK_EX|fcntl.LOCK_NB)
+                result={'passed':False}
+                with self.assertRaises(BlockingIOError):runner.acquire_shared_lock(second,out,result)
+                with self.assertRaises(BlockingIOError):fcntl.flock(third,fcntl.LOCK_EX|fcntl.LOCK_NB)
+                recorded=json.loads((out/'result.json').read_text())
+                self.assertTrue(recorded['prelaunch_refused'])
+                self.assertFalse(recorded['run_files_staged']);self.assertFalse(recorded['passed'])
+                self.assertIn('lock busy',recorded['refusal_reason'])
+                fcntl.flock(first,fcntl.LOCK_UN)
+                runner.acquire_shared_lock(second,out,{'passed':False})
     def test_refusal_leaves_guest_files_untouched(self):
         for status in ('OK\tPaused=true','OK\tConfig=autosave',
                        'OK\tPaused=false\tPaused=true','OK\tPaused=unknown',

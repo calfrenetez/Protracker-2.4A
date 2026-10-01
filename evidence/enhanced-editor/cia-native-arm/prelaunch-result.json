@@ -1,0 +1,11 @@
+{
+  "passed": false,
+  "prelaunch_refused": true,
+  "reason": "Nonblocking shared lock busy before Guest construction",
+  "run_files_staged": false,
+  "source_tree": "8e125629f4b28119277af306de43eff429005ae3",
+  "binary_sha256": "0047c1b8bc06001e96032e4716eb2d139c6a81dc9beed790fd1629545d8583f2",
+  "attempt": "1790881047026208000",
+  "native_execution": "NOT RUN",
+  "record_scope": "Host reconstruction from exact runner traceback; original runner created no result.json"
+}

@@ -1,0 +1,19 @@
+CIA OWNER HOST PASS: 9 busy/vector/register/task/copy/retained-stop cases
+.NATIVE ALARM OWNER PASS: partial-open cleanup, absolute tick packing, busy/late refusal, bounded pending polls, delayed abort retains all resources, completed cancellation and device error poison; fake Exec only
+.NATIVE ECLOCK OWNER PASS: version/allocation/open failures, exact cleanup, local device base,64-bit assembly, atomic outputs and closed-read refusal; fake Exec only
+.ELAPSED CLOCK PASS: rational carry, partition invariance, large quotient, exact limit, sticky overflow/frequency/regression and atomic refusal
+ELAPSED DEADLINE PASS: earliest reaching tick, nonintegral carry, low-frequency skipped frames, extreme bounds, borrowing and atomic refusal
+ELAPSED FAST ORACLE PASS:400000 advance/deadline comparisons,32-bit path boundaries, carry and atomic overflow; host only
+....
+----------------------------------------------------------------------
+Ran 7 tests in 1.688s
+
+OK
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpewuout8k/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpn3hzjfvj/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmp02sysg0t/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpri400c1l/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmp33cinpgv/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmp5dp10cpa/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpcjlzvyug/evidence
+/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/tmpi0_lsklb/evidence

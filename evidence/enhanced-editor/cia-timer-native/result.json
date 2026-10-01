@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "scope": "shared030 finite owned free CIA timer/IRQ actual-clock admission diagnostic with independent termination; no Paula/audio.device/output/frontend/physical acceptance",
+  "source_tree": "ad116d4281bd4af3ae32e977214bf6fb43099187",
+  "PTExecCiaTimingTest_sha256": "78d8dfc8f3f6e89b3bec71b0138c276ab9a1b3817e8f19032f33241b98156305",
+  "cia-timing_returncode": "20",
+  "run_files_cleaned": true,
+  "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0"
+}

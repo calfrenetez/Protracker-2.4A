@@ -1,0 +1,74 @@
+
+/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/cia-diagnostic-ueqddyda/cia_irq.o:     file format amiga
+
+
+Disassembly of section diagnostic:
+
+00000000 <_pt_diagnostic_cia_irq>:
+   0:	48e7 3f3e      	moveml d2-d7/a2-a6,sp@-
+   4:	2449           	moveal a1,a2
+   6:	4aaa 001c      	tstl a2@(28)
+   a:	6728           	beqs 34 <_pt_diagnostic_cia_irq+0x34>
+   c:	2c6a 0000      	moveal a2@(0),a6
+  10:	41ea 0004      	lea a2@(4),a0
+  14:	4eae ffc4      	jsr a6@(-60)
+  18:	2540 000c      	movel d0,a2@(12)
+  1c:	52aa 0010      	addql #1,a2@(16)
+  20:	42aa 001c      	clrl a2@(28)
+  24:	226a 0014      	moveal a2@(20),a1
+  28:	202a 0018      	movel a2@(24),d0
+  2c:	2c78 0004      	moveal 4 <_pt_diagnostic_cia_irq+0x4>,a6
+  30:	4eae febc      	jsr a6@(-324)
+  34:	4cdf 7cfc      	moveml sp@+,d2-d7/a2-a6
+  38:	7000           	moveq #0,d0
+  3a:	4e75           	rts
+
+0000003c <_pt_diagnostic_cia_arm_native>:
+  3c:	48e7 3f3e      	moveml d2-d7/a2-a6,sp@-
+  40:	246f 0030      	moveal sp@(48),a2
+  44:	2c6a 0000      	moveal a2@(0),a6
+  48:	41ea 0004      	lea a2@(4),a0
+  4c:	4eae ffc4      	jsr a6@(-60)
+  50:	2540 0014      	movel d0,a2@(20)
+  54:	b0aa 0018      	cmpl a2@(24),d0
+  58:	6628           	bnes 82 <_pt_diagnostic_cia_arm_native+0x46>
+  5a:	613e           	bsrs 9a <_pt_diagnostic_cia_count_native+0x10>
+  5c:	4a80           	tstl d0
+  5e:	6722           	beqs 82 <_pt_diagnostic_cia_arm_native+0x46>
+  60:	2200           	movel d0,d1
+  62:	206a 001c      	moveal a2@(28),a0
+  66:	1080           	moveb d0,a0@
+  68:	e088           	lsrl #8,d0
+  6a:	206a 0020      	moveal a2@(32),a0
+  6e:	1080           	moveb d0,a0@
+  70:	206a 0024      	moveal a2@(36),a0
+  74:	202a 0028      	movel a2@(40),d0
+  78:	1080           	moveb d0,a0@
+  7a:	2541 002c      	movel d1,a2@(44)
+  7e:	7001           	moveq #1,d0
+  80:	6002           	bras 84 <_pt_diagnostic_cia_arm_native+0x48>
+  82:	7000           	moveq #0,d0
+  84:	4cdf 7cfc      	moveml sp@+,d2-d7/a2-a6
+  88:	4e75           	rts
+
+0000008a <_pt_diagnostic_cia_count_native>:
+  8a:	48e7 2020      	moveml d2/a2,sp@-
+  8e:	246f 000c      	moveal sp@(12),a2
+  92:	6106           	bsrs 9a <_pt_diagnostic_cia_count_native+0x10>
+  94:	4cdf 0404      	moveml sp@+,d2/a2
+  98:	4e75           	rts
+  9a:	222a 000c      	movel a2@(12),d1
+  9e:	202a 0010      	movel a2@(16),d0
+  a2:	90aa 0008      	subl a2@(8),d0
+  a6:	242a 0004      	movel a2@(4),d2
+  aa:	9382           	subxl d2,d1
+  ac:	6512           	bcss c0 <_pt_diagnostic_cia_count_native+0x36>
+  ae:	4a81           	tstl d1
+  b0:	660e           	bnes c0 <_pt_diagnostic_cia_count_native+0x36>
+  b2:	4a80           	tstl d0
+  b4:	670a           	beqs c0 <_pt_diagnostic_cia_count_native+0x36>
+  b6:	b0bc 0000 ffff 	cmpl #65535,d0
+  bc:	6202           	bhis c0 <_pt_diagnostic_cia_count_native+0x36>
+  be:	4e75           	rts
+  c0:	7000           	moveq #0,d0
+  c2:	4e75           	rts

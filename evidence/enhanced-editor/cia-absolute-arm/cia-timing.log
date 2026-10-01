@@ -1,0 +1,19 @@
+EXEC MEMORY pool_limit=131255896 reserve=262144 flags=4
+CIA CLOSED timer_acquired=1 chip=0 bit=0 vector_removed=1 owned_timer_stopped=1 task_identity=1 priority=0 unchanged=1 signal_alloc_restored=1 timers_closed=1 reader_closed=1 completed=16 early=0 late=16 frequency=709379
+CIA OBS index=0 target=2303924011 arm_before=2303901786 arm_after=2303901829 actual=2303924062 frame=1539 count=22225 wake=536870912 calls=1
+CIA OBS index=1 target=2303946711 arm_before=2303924274 arm_after=2303924316 actual=2303946761 frame=3075 count=22437 wake=536870912 calls=2
+CIA OBS index=2 target=2303969411 arm_before=2303946946 arm_after=2303946988 actual=2303969462 frame=4611 count=22465 wake=536870912 calls=3
+CIA OBS index=3 target=2303992111 arm_before=2303969909 arm_after=2303969950 actual=2303992158 frame=6147 count=22202 wake=536870912 calls=4
+CIA OBS index=4 target=2304014811 arm_before=2303995786 arm_after=2303995828 actual=2304014861 frame=7683 count=19025 wake=536870912 calls=5
+CIA OBS index=5 target=2304037511 arm_before=2304015562 arm_after=2304015604 actual=2304037564 frame=9219 count=21949 wake=536870912 calls=6
+CIA OBS index=6 target=2304060211 arm_before=2304038472 arm_after=2304038514 actual=2304060262 frame=10755 count=21739 wake=536870912 calls=7
+CIA OBS index=7 target=2304082912 arm_before=2304060964 arm_after=2304061004 actual=2304082962 frame=12291 count=21948 wake=536870912 calls=8
+CIA OBS index=8 target=2304105612 arm_before=2304083667 arm_after=2304083708 actual=2304105662 frame=13827 count=21945 wake=536870912 calls=9
+CIA OBS index=9 target=2304128312 arm_before=2304106364 arm_after=2304106406 actual=2304128362 frame=15363 count=21948 wake=536870912 calls=10
+CIA OBS index=10 target=2304151012 arm_before=2304129066 arm_after=2304129108 actual=2304151060 frame=16899 count=21946 wake=536870912 calls=11
+CIA OBS index=11 target=2304173712 arm_before=2304152095 arm_after=2304152137 actual=2304173763 frame=18435 count=21617 wake=536870912 calls=12
+CIA OBS index=12 target=2304196412 arm_before=2304174463 arm_after=2304174505 actual=2304196462 frame=19971 count=21949 wake=536870912 calls=13
+CIA OBS index=13 target=2304219112 arm_before=2304197165 arm_after=2304197207 actual=2304219163 frame=21507 count=21947 wake=536870912 calls=14
+CIA OBS index=14 target=2304241812 arm_before=2304219865 arm_after=2304219907 actual=2304241862 frame=23043 count=21947 wake=536870912 calls=15
+CIA OBS index=15 target=2304264513 arm_before=2304242566 arm_after=2304242606 actual=2304264561 frame=24579 count=21947 wake=536870912 calls=16
+EXEC MEMORY PASS: 2 Fast allocations, zero owned bytes, budget refusal without Chip fallback

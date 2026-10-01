@@ -4,6 +4,15 @@ import argparse, fcntl, hashlib, importlib.util, json, os, shutil, sys, time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 INFRA=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
+def acquire_shared_lock(lock,out,result):
+    """Refuse before any Guest creation, recording a busy window accurately."""
+    try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+    except BlockingIOError:
+        result.update(prelaunch_refused=True,run_files_staged=False,
+                      refusal_reason='Shared test lock busy; no guest command or retry')
+        (out/'result.json').write_text(json.dumps(result,indent=2)+'\n')
+        print(out)
+        raise
 def require_running_guest(guest,out,phase):
     """Read only: a connected bridge/IPC can belong to a paused emulator."""
     status=guest.command('GET_STATUS')
@@ -98,7 +107,7 @@ def main():
     out=ROOT/'build/dev'/('render-files-'+str(time.time_ns()));out.mkdir()
     result={'passed':False,'scope':'shared030 native render/stem file checks'}
     with (INFRA/'runtime/test.lock').open('a') as lock:
-        fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        acquire_shared_lock(lock,out,result)
         guest=Guest(INFRA,out)
         if args.cia_timing or args.paula_memory in ('output','output-diagnostic','engine','prepared-output','transport','wait','wait-latency','wait-priority','paula-wait-priority','paula-boundary'):
             audio=guest.command('GET_AUDIO_STATE')

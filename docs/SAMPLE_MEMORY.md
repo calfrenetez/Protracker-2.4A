@@ -82,6 +82,18 @@ correction. A distinct service-split diagnostic remains FAILED atPERIODIC_ARM:
 27ticks late while post-work elapsed debt was65frames, within256. This narrows that
 refusal, without proving identical timing or root cause; all-resource/Fast-zero and
 independent cleanup pass separately. See `evidence/enhanced-editor/paula-service-split/`.
+Periodic notification rearming now occurs immediately after the validated entry
+observation and private-alarm polls, before core work. It retains the original
+128-frame absolute grid and strict actual late-arm check. A fresh post-work read
+still applies the256-frame watchdog even with a pending notification. Host staged
+checks cover near-grid work, genuinely late early arms, overlong core work,
+fractional clocks and retained cleanup; no extra reads or clock rebasing.
+A distinct early-rearm native diagnostic reached51 ready calls, then failed the
+ENTRY watchdog with1076>256frames and about20ms notification lag, before any core
+work in that failing call. Its cause remains unproven; cadence is still FAILED.
+All-resource/Fast-zero and independent cleanup passed separately.
+See `evidence/enhanced-editor/paula-early-rearm/`.
+
 
 
 See `evidence/enhanced-editor/paula-service-counter/`. Native periodic cadence

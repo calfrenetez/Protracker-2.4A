@@ -80,26 +80,46 @@ static void fixture(unsigned mode)
     n=timer_sends;for(i=0;i<100;++i){r=pt_native_paula_transport_service(&t);assert(r==PT_PAULA_SONG_WAITING || r==PT_PAULA_SONG_OK);}
     assert(!t.native.engine.output.held[0] && timer_sends==n);
     if(mode==9) {
-        timer_now=1128;timer_jump_read=timer_reads+2;timer_jump_ticks=300;n=timer_reads;
-        assert(pt_native_paula_transport_service(&t)==PT_PAULA_SONG_DEADLINE && timer_reads==n+3);
+        timer_now=1128;timer_jump_read=timer_reads+3;timer_jump_ticks=300;n=timer_reads;
+        assert(pt_native_paula_transport_service(&t)==PT_PAULA_SONG_DEADLINE && timer_reads==n+4);
         assert(t.failure_phase==PT_NATIVE_PAULA_POST && t.observation_mask==7);
         assert(t.entry_ticks==1128 && t.core_ticks==1128 && t.post_ticks==1428 && t.notification_deadline==1128);
         finish(&t,ed,&doc);
         assert(t.observation_mask==7 && t.entry_ticks==1128 && t.core_ticks==1128 && t.post_ticks==1428);return;
     }
     if(mode==8) {
-        /* The observed gap stays within256frames, but work crosses the next
-         *128-frame arm threshold. Refuse; never submit an already-late alarm. */
+        /* Early rearm succeeds, but core work still exceeds the256 watchdog.
+         * The pending notification cannot waive the fresh post-work refusal. */
         unsigned reads=timer_reads;
         timer_now=1128;timer_read_cost=90;n=timer_sends;
         assert(pt_native_paula_transport_service(&t)==PT_PAULA_SONG_DEADLINE);
         assert(timer_reads==reads+4 && t.observation_mask==7);
-        assert(t.entry_ticks==1128 && t.core_ticks==1218 && t.post_ticks==1308 && t.notification_deadline==1128);
-        assert(t.failure_phase==PT_NATIVE_PAULA_PERIODIC_ARM && t.failure_frames==308 && t.failure_last_frames==128);
-        assert(t.service_clock.frames==308 && timer_sends==n && !t.native.engine.output.held[0]);
+        assert(t.entry_ticks==1128 && t.core_ticks==1308 && t.post_ticks==1398 && t.notification_deadline==1128);
+        assert(t.failure_phase==PT_NATIVE_PAULA_POST && t.failure_frames==398 && t.failure_last_frames==128);
+        assert(timer_sends==n+1 && !t.native.engine.output.held[0]);
         assert(pt_native_paula_transport_service(&t)==PT_PAULA_SONG_INVALID);
         timer_read_cost=0;finish(&t,ed,&doc);
-        assert(t.failure_phase==PT_NATIVE_PAULA_PERIODIC_ARM && t.failure_frames==308);return;
+        assert(t.failure_phase==PT_NATIVE_PAULA_POST && t.failure_frames==398);return;
+    }
+    if(mode==10) {
+        /* Core work ends close enough to the grid that post-work rearm would
+         * already be late. Early arm keeps the exact1256 target; no skipped grid. */
+        timer_now=1128;timer_read_cost=2;timer_jump_read=timer_reads+3;timer_jump_ticks=120;n=timer_reads;
+        assert(pt_native_paula_transport_service(&t)==PT_PAULA_SONG_OK && timer_reads==n+4);
+        assert(t.entry_ticks==1128 && t.core_ticks==1132 && t.post_ticks==1254 && t.observation_mask==7);
+        assert(t.service_deadline==1256 && t.service_alarm.observed_ticks==1130 && t.service_alarm.pending);
+        timer_read_cost=0;timer_jump_read=0;timer_now=1256;
+        assert(pt_native_paula_transport_service(&t)==PT_PAULA_SONG_OK && t.service_deadline==1384);
+        finish(&t,ed,&doc);return;
+    }
+    if(mode==11) {
+        /* Even early arm refuses if the actual counter crosses its exact target;
+         * no core clock read or output follows the refusal. */
+        timer_now=1255;timer_read_cost=2;n=timer_reads;
+        assert(pt_native_paula_transport_service(&t)==PT_PAULA_SONG_DEADLINE && timer_reads==n+2);
+        assert(t.failure_phase==PT_NATIVE_PAULA_PERIODIC_ARM && t.observation_mask==1);
+        assert(t.service_alarm.observed_ticks==1257 && t.service_alarm.attempted_deadline==1256);
+        assert(!t.native.engine.output.held[0]);timer_read_cost=0;finish(&t,ed,&doc);return;
     }
     if(mode==5) {
         assert(t.service_deadline==1000+(128ULL*timer_rate+47999)/48000);
@@ -143,4 +163,4 @@ static void fixture(unsigned mode)
     assert(pt_native_paula_transport_service(&t)==PT_PAULA_SONG_INVALID);
     finish(&t,ed,&doc);
 }
-int main(void){fixture(0);fixture(1);fixture(2);fixture(3);fixture(4);fixture(5);fixture(6);fixture(7);fixture(8);fixture(9);puts("NATIVE PAULA TRANSPORT HOST PASS: dual private alarms, fractional periodic grid, exact prepared start, bounded preparation, starvation/clock refusal, partial open and retained DMA/timer-abort editor barrier");return 0;}
+int main(void){fixture(0);fixture(1);fixture(2);fixture(3);fixture(4);fixture(5);fixture(6);fixture(7);fixture(8);fixture(9);fixture(10);fixture(11);puts("NATIVE PAULA TRANSPORT HOST PASS: dual private alarms, fractional periodic grid, exact prepared start, bounded preparation, starvation/clock refusal, partial open and retained DMA/timer-abort editor barrier");return 0;}

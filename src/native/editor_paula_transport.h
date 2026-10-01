@@ -125,11 +125,12 @@ static inline enum pt_paula_song_result pt_native_paula_transport_observe(
         return pt_native_paula_transport_fail(t,PT_PAULA_SONG_DEADLINE);
     return PT_PAULA_SONG_OK;
 }
-static inline enum pt_paula_song_result pt_native_paula_transport_service_arm(struct pt_native_paula_transport *t)
+/* frames must be the immediately validated actual observation of this private
+ * service clock. Rearm before core work; never move the immutable 128-frame grid. */
+static inline enum pt_paula_song_result pt_native_paula_transport_service_arm_at(
+    struct pt_native_paula_transport *t,uint64_t frames)
 {
-    uint64_t frames,next,deadline;enum pt_alarm_result alarm;enum pt_paula_song_result r;
-    t->phase=PT_NATIVE_PAULA_POST;
-    r=pt_native_paula_transport_observe(t,&frames);if(r!=PT_PAULA_SONG_OK)return r;
+    uint64_t next,deadline;enum pt_alarm_result alarm;
     if(t->service_alarm.pending)return PT_PAULA_SONG_WAITING;
     t->phase=PT_NATIVE_PAULA_PERIODIC_DEADLINE;
     if(frames>UINT64_MAX-128)return pt_native_paula_transport_fail(t,PT_PAULA_SONG_CLOCK);
@@ -142,6 +143,14 @@ static inline enum pt_paula_song_result pt_native_paula_transport_service_arm(st
     if(alarm!=PT_ALARM_WAITING)return pt_native_paula_transport_fail(t,
         alarm==PT_ALARM_LATE?PT_PAULA_SONG_DEADLINE:PT_PAULA_SONG_CLOCK);
     t->service_deadline=deadline;return PT_PAULA_SONG_WAITING;
+}
+static inline enum pt_paula_song_result pt_native_paula_transport_service_arm(struct pt_native_paula_transport *t)
+{
+    uint64_t frames;enum pt_paula_song_result r;
+    /* Fresh post-work watchdog is mandatory even when early rearm is pending. */
+    t->phase=PT_NATIVE_PAULA_POST;
+    r=pt_native_paula_transport_observe(t,&frames);if(r!=PT_PAULA_SONG_OK)return r;
+    return pt_native_paula_transport_service_arm_at(t,frames);
 }
 static inline enum pt_paula_song_result pt_native_paula_transport_start(
     struct pt_native_paula_transport *t,uint64_t delay_frames)
@@ -189,6 +198,8 @@ static inline enum pt_paula_song_result pt_native_paula_transport_service(struct
     alarm=pt_native_alarm_poll(&t->alarm);
     if(alarm!=PT_ALARM_WAITING && alarm!=PT_ALARM_READY && alarm!=PT_ALARM_IDLE)
         return pt_native_paula_transport_fail(t,PT_PAULA_SONG_CLOCK);
+    armed=pt_native_paula_transport_service_arm_at(t,frames);
+    if(armed!=PT_PAULA_SONG_WAITING)return armed;
     t->phase=PT_NATIVE_PAULA_CORE;
     r=pt_editor_paula_clocked_service_counter(&t->native.binding,&deadline);
     if(r==PT_PAULA_SONG_DONE){t->done=1;return r;}

@@ -1,0 +1,13 @@
+EXEC MEMORY pool_limit=131103472 reserve=262144 flags=4
+TRANSPORT start=9 clock=1 alarm=1 pending=1
+PAULA TRANSPORT PASS: case=0 private clock/alarm and editor/device cleanup; no WRITE/cadence/listening claim
+TRANSPORT start=9 clock=1 alarm=1 pending=1
+TRANSPORT late=11
+PAULA TRANSPORT PASS: case=1 private clock/alarm and editor/device cleanup; no WRITE/cadence/listening claim
+UNBOUND STARTUP calls=27 no timer epoch or WRITE before readiness
+CADENCE REFUSED calls=51 completions=51 frames=6506 result=11 max_gap_ticks=2362 frequency=709379
+CADENCE STAGE=4 service_frames=7489 last_frames=6413 observed_cost_ticks=14520 max_prior_cost_ticks=2327 periodic_observed_ticks=709284310 periodic_target_ticks=709285893
+CADENCE readiness=1 prime_calls=0 ready_calls=51 max_prime_cost_ticks=0 max_ready_cost_ticks=2327
+CADENCE SPLIT mask=1 entry_to_core_ticks=0 core_to_post_ticks=0 notification_lag_ticks=14203 max_entry_to_core_ticks=1321 max_core_to_post_ticks=741 max_notification_lag_ticks=14203
+PAULA TRANSPORT FAIL case=2 line=74
+EXEC MEMORY PASS: 27 Fast allocations, zero owned bytes, budget refusal without Chip fallback

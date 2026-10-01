@@ -477,3 +477,18 @@ One-shot reset, ownrelease/AHIrestoration, exactRAMcleanup/separateabsence and
 idle030return PASS; window released with no hold. Physical retries stopped.
 See `../evidence/enhanced-editor/amigus-capacity-physical-failed/`. Next prepare
 a distinct bounded final readback observation before requesting a user decision.
+
+
+## Prepared follow-up observation — user decision pending
+
+Separate0.8 `--idle-capacity-observe` retains the2048 disabled zero-store ceiling,
+then performs eight read-only usage/flags/rate/mask snapshots without more data
+writes. Only the observed final immediate4094 reading may bypass the prior exact
+count refusal for these measurements. This does not weaken the original capacity
+acceptance test or promote observed4094/4096 into a production limit. Reset,
+confirmed release and AHI restoration remain mandatory; uncertainty retains owners.
+Seven host checks and thirteen native fixture/absent-library cases PASS. Initial
+independent cleanup failed, exact empty-only recovery and subsequent independent
+check pass; window released. See
+`../evidence/enhanced-editor/amigus-capacity-observation-native/`. The physical
+follow-up awaits user approval because the preceding physical capacity test failed.

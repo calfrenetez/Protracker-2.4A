@@ -16,6 +16,19 @@ spec.loader.exec_module(runner)
 
 
 class PhysicalDiscoveryGuard(unittest.TestCase):
+    def test_bounded_observation_never_promotes_capacity(self):
+        footer='PCM CAPACITY OBSERVATION complete=1 polls=8 stores=2048 writes_after_poll_start=0 capacity=NOT_QUALIFIED'
+        for counts in ([4094]*8,[4094]+[4096]*7):
+            lines=[f'PCM CAPACITY OBSERVE index={i+1} pending_words={n} flags=0x0002 rate=0x0000 mask=0x0050' for i,n in enumerate(counts)]
+            output='\n'.join(lines+[footer])
+            parsed=runner.capacity_observation_finished(output)
+            self.assertFalse(parsed['capacity_qualified'])
+            self.assertEqual([row['pending_words'] for row in parsed['polls']],counts)
+            for bad in (output.replace('index=8','index=7'),output.replace('pending_words=4094','pending_words=4095'),
+                        output.replace('rate=0x0000','rate=0x8000'),output.replace('mask=0x0050','mask=0x0051'),
+                        output+'\n'+footer,'\n'.join(lines[:-1]+[footer])):
+                with self.assertRaises(RuntimeError):runner.capacity_observation_finished(bad)
+
     def test_idle_driver_guards_and_positive_restoration(self):
         info = 'Library: AmiGUS.audio\n  Version: 4.23\n  Open count: 0\n  ID string: ' + runner.IDLE_DRIVER_ID + '\n'
         runner.idle_driver_info(info)
@@ -39,6 +52,9 @@ class PhysicalDiscoveryGuard(unittest.TestCase):
             self.assertTrue(runner.idle_restoration_finished(capacity_line,registers=True,reset=True,fifo=True,capacity=True))
             self.assertFalse(runner.idle_restoration_finished(fifo_line,registers=True,reset=True,fifo=True,capacity=True))
             self.assertFalse(runner.idle_restoration_finished(capacity_line.replace('restored=1','restored=0'),registers=True,reset=True,fifo=True,capacity=True))
+            observe_line=line.replace('IDLE-OWNERSHIP','IDLE-CAPACITY-OBSERVE')
+            self.assertTrue(runner.idle_restoration_finished(observe_line,registers=True,reset=True,fifo=True,capacity=True,observe=True))
+            self.assertFalse(runner.idle_restoration_finished(capacity_line,registers=True,reset=True,fifo=True,capacity=True,observe=True))
             for bad in (line.replace('restored=1','restored=0'),line.replace('restore_needed=0','restore_needed=1'),
                         line.replace('rc='+code,'rc=99'),line+'\n'+line,'DRIVER HOLD: restoration unconfirmed'):
                 self.assertFalse(runner.idle_restoration_finished(bad))
@@ -91,6 +107,9 @@ class PhysicalDiscoveryGuard(unittest.TestCase):
             altered['amigus-fifo_returncode']='5';emulator.write_text(json.dumps(altered))
             with self.assertRaisesRegex(RuntimeError,'bounded capacity qualification missing'):
                 runner.qualification(binary,build,emulator,independent,True,True,True,True,True,True)
+            altered['amigus-capacity_returncode']='5';emulator.write_text(json.dumps(altered))
+            with self.assertRaisesRegex(RuntimeError,'bounded observation qualification missing'):
+                runner.qualification(binary,build,emulator,independent,True,True,True,True,True,True,True)
             altered['amigus-fifo_returncode']='20';emulator.write_text(json.dumps(altered))
             with self.assertRaisesRegex(RuntimeError,'disabled FIFO qualification missing'):
                 runner.qualification(binary,build,emulator,independent,True,True,True,True,True)

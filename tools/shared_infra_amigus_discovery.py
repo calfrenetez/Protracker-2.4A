@@ -26,14 +26,18 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def qualification(binary, build, emulator, independent, ownership=False, idle_driver=False, registers=False, reset=False, fifo=False, capacity=False):
+def qualification(binary, build, emulator, independent, ownership=False, idle_driver=False, registers=False, reset=False, fifo=False, capacity=False, observe=False):
     """Refuse physical selection before matching the current exact candidate."""
+    if observe and not capacity:
+        raise RuntimeError('Observation requires bounded capacity mode')
     if registers and not idle_driver:
         raise RuntimeError('Register qualification requires an idle-driver window')
     if capacity and not fifo:
         raise RuntimeError('Capacity qualification requires disabled FIFO mode')
     built = json.loads(build.read_text())
     native = json.loads(emulator.read_text())
+    if observe and native.get('amigus-capacity-observe_returncode') != '5':
+        raise RuntimeError('Exact bounded observation qualification missing')
     if capacity and native.get('amigus-capacity_returncode') != '5':
         raise RuntimeError('Exact bounded capacity qualification missing')
     if fifo and (not reset or native.get('amigus-fifo_returncode') != '5'):
@@ -99,8 +103,8 @@ def idle_driver_info(text, require_idle=True):
         raise RuntimeError('AmiGUS.audio is active or outside the verified idle-driver contract')
 
 
-def idle_restoration_finished(output, registers=False, reset=False, fifo=False, capacity=False):
-    label = 'IDLE-CAPACITY' if capacity else 'IDLE-FIFO' if fifo else 'IDLE-RESET' if reset else 'IDLE-REGISTERS' if registers else 'IDLE-OWNERSHIP'
+def idle_restoration_finished(output, registers=False, reset=False, fifo=False, capacity=False, observe=False):
+    label = 'IDLE-CAPACITY-OBSERVE' if observe else 'IDLE-CAPACITY' if capacity else 'IDLE-FIFO' if fifo else 'IDLE-RESET' if reset else 'IDLE-REGISTERS' if registers else 'IDLE-OWNERSHIP'
     matches = re.findall(r'^'+label+r' result=(PASS|SKIP|FAIL) unloaded=([01]) restored=([01]) restore_needed=([01]) rc=(0|5|20)$', output, re.M)
     if len(matches) != 1:
         return False
@@ -110,7 +114,19 @@ def idle_restoration_finished(output, registers=False, reset=False, fifo=False, 
             (status != 'PASS' or unloaded == restored == '1'))
 
 
-async def run(out, binary, result, ownership=False, library_contract=None, idle_driver=None, registers=False, reset=False, fifo=False, capacity=False):
+def capacity_observation_finished(output):
+    rows = re.findall(r'^PCM CAPACITY OBSERVE index=(\d+) pending_words=(\d+) flags=0x([0-9a-f]{4}) rate=0x([0-9a-f]{4}) mask=0x([0-9a-f]{4})$', output, re.M)
+    if len(rows)!=8 or [int(row[0]) for row in rows]!=list(range(1,9)) or output.splitlines().count('PCM CAPACITY OBSERVATION complete=1 polls=8 stores=2048 writes_after_poll_start=0 capacity=NOT_QUALIFIED')!=1:
+        raise RuntimeError('Bounded observation evidence incomplete')
+    values=[dict(index=int(i),pending_words=int(n),flags=int(f,16),rate=int(r,16),mask=int(m,16)) for i,n,f,r,m in rows]
+    if any(v['pending_words']>4096 or v['pending_words']&1 or v['rate']&0x8000 or v['mask']&7 for v in values):
+        raise RuntimeError('Disabled observation guards unconfirmed')
+    return dict(polls=values,capacity_qualified=False)
+
+
+async def run(out, binary, result, ownership=False, library_contract=None, idle_driver=None, registers=False, reset=False, fifo=False, capacity=False, observe=False):
+    if observe and not capacity:
+        raise RuntimeError('Observation requires bounded capacity and confirmed reset path')
     if capacity and not fifo:
         raise RuntimeError('Capacity probe requires disabled FIFO and confirmed reset path')
     if fifo and not reset:
@@ -213,7 +229,7 @@ async def run(out, binary, result, ownership=False, library_contract=None, idle_
                 remote = destination + '/' + binary.name
                 await call('amiga_push_file', dict(local_path=str(binary), amiga_path=remote))
                 checksum(await call('amiga_checksum', dict(path=remote)), binary.read_bytes())
-                command = binary.name + (' --idle-capacity' if capacity else ' --idle-fifo' if fifo else ' --idle-reset' if reset else ' --idle-registers' if registers else ' --idle-ownership' if idle_driver else ' --ownership' if ownership else '')
+                command = binary.name + (' --idle-capacity-observe' if observe else ' --idle-capacity' if capacity else ' --idle-fifo' if fifo else ' --idle-reset' if reset else ' --idle-registers' if registers else ' --idle-ownership' if idle_driver else ' --ownership' if ownership else '')
                 if idle_driver:
                     result['restoration_pending'] = True
                 execution = await call('amiga_run_script', dict(script=f'FailAt 21\nStack 65536\nCD {destination}\n{command} >discovery.log\nEcho PTG-DISCOVERY-RC $RC\nCD RAM:\nEcho PTG-DISCOVERY-DONE\n', timeout=45))
@@ -226,7 +242,7 @@ async def run(out, binary, result, ownership=False, library_contract=None, idle_
                 if idle_driver:
                     # Known termination is not sufficient: positively verify the
                     # restoration obligation before any deletion/target release.
-                    if not idle_restoration_finished(output, registers, reset, fifo, capacity):
+                    if not idle_restoration_finished(output, registers, reset, fifo, capacity, observe):
                         raise RuntimeError('Idle-driver restoration state unconfirmed; retain target/files')
                     info = await call('amiga_lib_info', dict(name='AmiGUS.audio'))
                     idle_driver_info(info, require_idle=False)
@@ -249,10 +265,12 @@ async def run(out, binary, result, ownership=False, library_contract=None, idle_
                         if not all(f'PCM FIFO long={i} pending_words={i*2}' in output.splitlines() for i in range(1,4)) or 'PCM FIFO result=PASS pending_words=6 capacity=NOT_TESTED ordering=NOT_TESTED' not in output.splitlines():
                             raise RuntimeError('Disabled FIFO word counts unconfirmed')
                         result['disabled_fifo_passed'] = True
-                    if capacity:
+                    if capacity and not observe:
                         if 'PCM CAPACITY result=PASS stores=2048 pending_words=4096 full=1 overflow_writes=0 ordering=NOT_TESTED' not in output.splitlines():
                             raise RuntimeError('Bounded FIFO capacity/full observation unconfirmed')
                         result['verified_disabled_fifo_words'] = 4096
+                    if observe:
+                        result['capacity_observation'] = capacity_observation_finished(output)
                 elif ownership:
                     if not all(f'block={i} result=PASS stage=complete driver=0x00000000 release=0x00000000 confirmed=1 retained=0' in output for i in (1,2)):
                         raise RuntimeError('PCM/wavetable final-release confirmations incomplete')
@@ -296,6 +314,7 @@ def main():
     parser.add_argument('--reset', action='store_true', help='Silent one-shot disable/reset with bounded readback; requires registers')
     parser.add_argument('--fifo', action='store_true', help='Three zero long stores while disabled, exact count then confirmed reset; requires reset')
     parser.add_argument('--capacity', action='store_true', help='Bounded disabled fill to pinned4096-word ceiling and FULL flag; requires fifo')
+    parser.add_argument('--observe', action='store_true', help='Eight final read-only observations with no capacity acceptance; requires capacity')
     args = parser.parse_args()
     if args.idle_driver_contract and not args.ownership:
         parser.error('idle-driver-contract requires ownership')
@@ -307,13 +326,15 @@ def main():
         parser.error('fifo requires reset')
     if args.capacity and not args.fifo:
         parser.error('capacity requires fifo')
+    if args.observe and not args.capacity:
+        parser.error('observe requires capacity')
     out = ROOT / 'build/dev' / (('physical-amigus-ownership-' if args.ownership else 'physical-amigus-discovery-') + str(time.time_ns()))
     out.mkdir()
     result = dict(passed=False, target='real-a1200', scope='RAM-only PCM/wavetable exclusive reservation and confirmed release; no MMIO, interrupts, output or listening acceptance' if args.ownership else 'RAM-only discovery; no reserve/release, MMIO, interrupts, output or listening acceptance')
     try:
         source = ROOT / ('build/diagnostic/AmiGUSTest' if args.ownership else 'build/dev/physical-discovery-candidate/PTAmiGusDiscovery')
         build = ROOT / ('build/diagnostic/build.json' if args.ownership else 'build/dev/amigus-discovery-build.json')
-        result['binary_sha256'] = qualification(source, build, args.emulator_result, args.independent_cleanup, args.ownership, bool(args.idle_driver_contract), args.registers, args.reset, args.fifo, args.capacity)
+        result['binary_sha256'] = qualification(source, build, args.emulator_result, args.independent_cleanup, args.ownership, bool(args.idle_driver_contract), args.registers, args.reset, args.fifo, args.capacity, args.observe)
         contract = json.loads(args.library_contract.read_text()) if args.library_contract else None
         if args.ownership and not contract:
             raise RuntimeError('Ownership requires the verified pinned library contract')
@@ -330,13 +351,15 @@ def main():
             result['scope'] = 'Initially idle Mini: three disabled zero-data long stores, exact 2/4/6 word counts, confirmed nonempty FIFO reset/release/AHI restoration; no playback enable/IRQ/capacity/ordering/audio acceptance'
         if args.capacity:
             result['scope'] = 'Disabled Mini FIFO bounded2048 zero long stores, exact4096-word accounting and FULL flag, no overflow store; confirmed reset/release/AHI restoration; no output/IRQ/format/sample-order acceptance'
+        if args.observe:
+            result['scope'] = 'Bounded2048 disabled zero long stores then eight read-only usage/flags/rate/mask snapshots without further writes, reset/release/AHI restoration; no capacity acceptance or playback'
         binary = out / source.name
         shutil.copyfile(source, binary)
         if digest(binary) != result['binary_sha256']:
             raise RuntimeError('Snapshot changed before physical selection')
         with (INFRA / 'runtime/test.lock').open('a') as lock:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-            asyncio.run(run(out, binary, result, args.ownership, contract, idle, args.registers, args.reset, args.fifo, args.capacity))
+            asyncio.run(run(out, binary, result, args.ownership, contract, idle, args.registers, args.reset, args.fifo, args.capacity, args.observe))
     except Exception as error:
         result['passed'] = False
         result['error'] = str(error)

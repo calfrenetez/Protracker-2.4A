@@ -20,7 +20,7 @@ int pt_register_probe(int reset)
     int result = PT_SKIP;
     const char *reason = "register-contract-unavailable";
     printf("REGISTER-PROBE scope=Mini-7ea663e7-%s interrupts=NO audio=NOT_TESTED\n",
-           reset==3 ? "disabled-bounded-FIFO-capacity" : reset==2 ? "disabled-six-word-FIFO" : reset ? "silent-disable-reset" : "read-only writes=NO");
+           reset==4 ? "disabled-capacity-final-observation" : reset==3 ? "disabled-bounded-FIFO-capacity" : reset==2 ? "disabled-six-word-FIFO" : reset ? "silent-disable-reset" : "read-only writes=NO");
     opened = pt_amigus_reservation_open(&r, &api, 0);
     if (opened != PT_AMIGUS_RESERVED) {
         printf("REGISTERS result=SKIP reason=reservation-unavailable status=%u rc=5\n", opened);
@@ -41,7 +41,7 @@ int pt_register_probe(int reset)
         }
         if (reset && result==PT_PASS) {
             int status=-1;
-            if (reset==3) {
+            if (reset==3 || reset==4) {
                 struct pt_native_amigus_capacity_probe capacity={0};
                 uint16_t used=0;
                 int full=-1;
@@ -51,13 +51,31 @@ int pt_register_probe(int reset)
                     for(i=0;i<2048;++i) {
                         if ((SetSignal(0,0)&SIGBREAKF_CTRL_C) ||
                             !pt_native_amigus_capacity_step(&capacity) ||
-                            !pt_native_amigus_pcm_read16(&r,0x10,&used) || used!=(i+1)*2) {
+                            !pt_native_amigus_pcm_read16(&r,0x10,&used) ||
+                            (used!=(i+1)*2 && !(reset==4 && i==2047 && used==4094))) {
                             result=PT_FAIL; reason="capacity-count-or-guard-failed"; break;
                         }
                         if (used==512 || used==1024 || used==2048 || used==4096)
                             printf("PCM CAPACITY progress_words=%u stores=%u\n",used,capacity.issued);
                     }
-                    if (result==PT_PASS) {
+                    if (reset==4 && result==PT_PASS) {
+                        uint16_t flags=0,rate=0,mask=0;
+                        for(i=0;i<8;++i) {
+                            if (!pt_native_amigus_pcm_read16(&r,0x10,&used) ||
+                                !pt_native_amigus_pcm_read16(&r,0x00,&flags) ||
+                                !pt_native_amigus_pcm_read16(&r,0x06,&rate) ||
+                                !pt_native_amigus_pcm_read16(&r,0x02,&mask) ||
+                                used>4096 || (used&1) || (rate&0x8000) || (mask&7)) {
+                                result=PT_FAIL;reason="capacity-observation-refused";break;
+                            }
+                            printf("PCM CAPACITY OBSERVE index=%u pending_words=%u flags=0x%04x rate=0x%04x mask=0x%04x\n",
+                                   i+1,used,flags,rate,mask);
+                            if(i<7)Delay(1);
+                        }
+                        printf("PCM CAPACITY OBSERVATION complete=%u polls=%u stores=%u writes_after_poll_start=0 capacity=NOT_QUALIFIED\n",
+                               i==8,i,capacity.issued);
+                    }
+                    if (reset==3 && result==PT_PASS) {
                         for(i=0;i<3;++i) {
                             full=pt_native_amigus_capacity_poll(&capacity);
                             if (full!=0) break;
@@ -66,7 +84,7 @@ int pt_register_probe(int reset)
                         if(full!=1) {result=PT_FAIL;reason="capacity-full-unconfirmed";}
                     }
                 }
-                printf("PCM CAPACITY result=%s stores=%u pending_words=%u full=%u overflow_writes=0 ordering=NOT_TESTED\n",
+                if(reset==3)printf("PCM CAPACITY result=%s stores=%u pending_words=%u full=%u overflow_writes=0 ordering=NOT_TESTED\n",
                        result==PT_PASS ? "PASS" : "FAIL",capacity.issued,used,capacity.confirmed);
             }
             if (reset==2) {

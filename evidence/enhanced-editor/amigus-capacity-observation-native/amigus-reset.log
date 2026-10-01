@@ -1,0 +1,2 @@
+IDLE-RESET scope=unused-RC6-020-AHI-only audio=NOT_TESTED
+IDLE-RESET result=SKIP reason=library-unavailable rc=5

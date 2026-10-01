@@ -5,6 +5,7 @@ import asyncio
 import fcntl
 import hashlib
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -13,13 +14,15 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 INFRA = Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra')
+IDLE_DRIVER_SHA256 = '3ad6ec0b598ebbb215121a72a3945f3360f64963df133d53d45a65b144c84c27'
+IDLE_DRIVER_ID = '$VER: AmiGUS.audio 4.023 (30.8.26) 020 SAS/C cross'
 
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def qualification(binary, build, emulator, independent, ownership=False):
+def qualification(binary, build, emulator, independent, ownership=False, idle_driver=False):
     """Refuse physical selection before matching the current exact candidate."""
     built = json.loads(build.read_text())
     native = json.loads(emulator.read_text())
@@ -51,10 +54,43 @@ def qualification(binary, build, emulator, independent, ownership=False):
     for name, expected_digest in json.loads(lock.read_text())['files'].items():
         if digest(ROOT / 'vendor/amigus-sdk' / name) != expected_digest:
             raise RuntimeError('SDK header changed')
+    if idle_driver:
+        if not ownership or native.get('amigus-idle_returncode') != '5':
+            raise RuntimeError('Exact idle-driver mode unavailable-library check missing')
+        for tool, stem, case in [('PTDriverWindowTest', 'driver-window-build', 'driver-window'),
+                                 ('PTDriverExecTest', 'driver-exec-build', 'driver-exec')]:
+            manifest = json.loads((ROOT / 'build/diagnostic' / (stem + '.json')).read_text())
+            fixture = ROOT / 'build/diagnostic' / tool
+            if (native.get(case + '_returncode') != '0' or
+                    native.get(tool + '_sha256') != digest(fixture) or
+                    manifest['binary_sha256'] != digest(fixture)):
+                raise RuntimeError('Idle-driver native guard/Exec fixture not qualified')
+            for name, expected_digest in manifest['inputs'].items():
+                committed = subprocess.check_output(['git', 'show', 'HEAD:' + name], cwd=ROOT)
+                if digest(ROOT / name) != expected_digest or hashlib.sha256(committed).hexdigest() != expected_digest:
+                    raise RuntimeError('Idle-driver fixture source changed: ' + name)
     return actual
 
 
-async def run(out, binary, result, ownership=False, library_contract=None):
+def idle_driver_info(text, require_idle=True):
+    """Native code repeats these public guards under Exec serialization."""
+    if (not re.search(r'^\s*Version:\s+4\.23\s*$', text, re.M) or
+            not re.search(r'^\s*ID string:\s+' + re.escape(IDLE_DRIVER_ID) + r'\s*$', text, re.M) or
+            (require_idle and not re.search(r'^\s*Open count:\s+0\s*$', text, re.M))):
+        raise RuntimeError('AmiGUS.audio is active or outside the verified idle-driver contract')
+
+
+def idle_restoration_finished(output):
+    matches = re.findall(r'^IDLE-OWNERSHIP result=(PASS|SKIP|FAIL) unloaded=([01]) restored=([01]) restore_needed=([01]) rc=(0|5|20)$', output, re.M)
+    if len(matches) != 1:
+        return False
+    status, unloaded, restored, pending, rc = matches[0]
+    return (pending == '0' and rc == {'PASS':'0','SKIP':'5','FAIL':'20'}[status] and
+            (unloaded == '0' or restored == '1') and
+            (status != 'PASS' or unloaded == restored == '1'))
+
+
+async def run(out, binary, result, ownership=False, library_contract=None, idle_driver=None):
     sys.path.insert(0, str(INFRA / 'scripts'))
     from amiga import connect
     from bridge_checks import target, require_reply, checksum
@@ -131,6 +167,17 @@ async def run(out, binary, result, ownership=False, library_contract=None):
                         break
                     if not matched:
                         raise RuntimeError('Installed driver is outside the verified NULL-owner probe contract')
+                if idle_driver:
+                    snapshot = Path(idle_driver['path'])
+                    if idle_driver.get('sha256') != IDLE_DRIVER_SHA256 or digest(snapshot) != IDLE_DRIVER_SHA256:
+                        raise RuntimeError('Pinned RC6 AHI driver snapshot changed')
+                    checksum(await call('amiga_checksum', dict(path='DEVS:AHI/AmiGUS.audio')), snapshot.read_bytes())
+                    info = await call('amiga_lib_info', dict(name='AmiGUS.audio'))
+                    idle_driver_info(info)
+                    ahi = await call('amiga_dev_info', dict(name='ahi.device'))
+                    if not re.search(r'^\s*Open count:\s+0\s*$', ahi, re.M):
+                        raise RuntimeError('AHI has open users; idle-driver test refused')
+                    result.update(idle_driver_before=info, ahi_before=ahi, idle_driver_sha256=IDLE_DRIVER_SHA256)
                 made = await call('amiga_run_script', dict(script=f'MakeDir {destination}\nIf WARN\n Quit 20\nEndIf\nEcho PTG-DIRECTORY-CREATED\n', timeout=20))
                 if 'PTG-DIRECTORY-CREATED' not in made.splitlines():
                     raise RuntimeError('Fresh RAM directory was not reserved')
@@ -138,7 +185,9 @@ async def run(out, binary, result, ownership=False, library_contract=None):
                 remote = destination + '/' + binary.name
                 await call('amiga_push_file', dict(local_path=str(binary), amiga_path=remote))
                 checksum(await call('amiga_checksum', dict(path=remote)), binary.read_bytes())
-                command = binary.name + (' --ownership' if ownership else '')
+                command = binary.name + (' --idle-ownership' if idle_driver else ' --ownership' if ownership else '')
+                if idle_driver:
+                    result['restoration_pending'] = True
                 execution = await call('amiga_run_script', dict(script=f'FailAt 21\nStack 65536\nCD {destination}\n{command} >discovery.log\nEcho PTG-DISCOVERY-RC $RC\nCD RAM:\nEcho PTG-DISCOVERY-DONE\n', timeout=45))
                 if 'PTG-DISCOVERY-DONE' not in execution.splitlines():
                     result['script_pending'] = True
@@ -146,6 +195,16 @@ async def run(out, binary, result, ownership=False, library_contract=None):
                 result['execution_finished'] = True
                 await call('amiga_pull_file', dict(amiga_path=destination + '/discovery.log', local_path=str(out / 'discovery.log')))
                 output = (out / 'discovery.log').read_text(errors='replace')
+                if idle_driver:
+                    # Known termination is not sufficient: positively verify the
+                    # restoration obligation before any deletion/target release.
+                    if not idle_restoration_finished(output):
+                        raise RuntimeError('Idle-driver restoration state unconfirmed; retain target/files')
+                    info = await call('amiga_lib_info', dict(name='AmiGUS.audio'))
+                    idle_driver_info(info, require_idle=False)
+                    checksum(await call('amiga_checksum', dict(path='DEVS:AHI/AmiGUS.audio')), snapshot.read_bytes())
+                    result.update(idle_driver_after=info, driver_restoration_verified=True)
+                    result['restoration_pending'] = False
                 marker = 'SUMMARY result=PASS reason=complete' if ownership else 'AMIGUS DISCOVERY PASS:'
                 if 'PTG-DISCOVERY-RC 0' not in execution.splitlines() or marker not in output:
                     raise RuntimeError('Physical discovery test failed')
@@ -157,7 +216,8 @@ async def run(out, binary, result, ownership=False, library_contract=None):
                 else:
                     result['card_detected'] = all(f'pass={i} status=1 library=1 cards=1 pcm_cards=1 closed=1' in output for i in range(2))
             finally:
-                if result.get('directory_created') and not result.get('script_pending'):
+                held = result.get('script_pending') or result.get('restoration_pending')
+                if result.get('directory_created') and not held:
                     clean = await call('amiga_run_script', dict(script=f'CD RAM:\nIf EXISTS {destination}/{binary.name}\n Delete {destination}/{binary.name}\n If WARN\n  Quit 20\n EndIf\nEndIf\nIf EXISTS {destination}/discovery.log\n Delete {destination}/discovery.log\n If WARN\n  Quit 20\n EndIf\nEndIf\nDelete {destination}\nIf WARN\n Quit 20\nEndIf\nIf EXISTS {destination}\n Quit 20\nEndIf\nEcho PTG-CLEANUP-ABSENT\n', timeout=20))
                     if 'PTG-CLEANUP-ABSENT' not in clean.splitlines():
                         raise RuntimeError('Exact physical cleanup not confirmed')
@@ -166,7 +226,7 @@ async def run(out, binary, result, ownership=False, library_contract=None):
                     if 'PTG-INDEPENDENT-ABSENCE' not in separate.splitlines():
                         raise RuntimeError('Independent physical absence check failed')
                     result['independent_cleanup_passed'] = True
-                if not result.get('script_pending'):
+                if not held:
                     await connect('amiberry-030')
                     result['returned_target'] = target(INFRA, 'amiberry-030')
                     final = Guest(INFRA, out)
@@ -186,26 +246,33 @@ def main():
     parser.add_argument('--independent-cleanup', type=Path, required=True)
     parser.add_argument('--ownership', action='store_true')
     parser.add_argument('--library-contract', type=Path)
+    parser.add_argument('--idle-driver-contract', type=Path,
+                        help='Explicitly approved temporary unused RC6 AHI unload/test/restore transaction')
     args = parser.parse_args()
+    if args.idle_driver_contract and not args.ownership:
+        parser.error('idle-driver-contract requires ownership')
     out = ROOT / 'build/dev' / (('physical-amigus-ownership-' if args.ownership else 'physical-amigus-discovery-') + str(time.time_ns()))
     out.mkdir()
     result = dict(passed=False, target='real-a1200', scope='RAM-only PCM/wavetable exclusive reservation and confirmed release; no MMIO, interrupts, output or listening acceptance' if args.ownership else 'RAM-only discovery; no reserve/release, MMIO, interrupts, output or listening acceptance')
     try:
         source = ROOT / ('build/diagnostic/AmiGUSTest' if args.ownership else 'build/dev/physical-discovery-candidate/PTAmiGusDiscovery')
         build = ROOT / ('build/diagnostic/build.json' if args.ownership else 'build/dev/amigus-discovery-build.json')
-        result['binary_sha256'] = qualification(source, build, args.emulator_result, args.independent_cleanup, args.ownership)
+        result['binary_sha256'] = qualification(source, build, args.emulator_result, args.independent_cleanup, args.ownership, bool(args.idle_driver_contract))
         contract = json.loads(args.library_contract.read_text()) if args.library_contract else None
         if args.ownership and not contract:
             raise RuntimeError('Ownership requires the verified pinned library contract')
         result['emulator_evidence'] = str(args.emulator_result)
         result['independent_emulator_cleanup'] = str(args.independent_cleanup)
+        idle = json.loads(args.idle_driver_contract.read_text()) if args.idle_driver_contract else None
+        if idle:
+            result['scope'] = 'Approved cooperative unused RC6 AHI unload, PCM/wavetable ownership/final release, verified driver restoration; no MMIO/interrupt/audio/config change'
         binary = out / source.name
         shutil.copyfile(source, binary)
         if digest(binary) != result['binary_sha256']:
             raise RuntimeError('Snapshot changed before physical selection')
         with (INFRA / 'runtime/test.lock').open('a') as lock:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-            asyncio.run(run(out, binary, result, args.ownership, contract))
+            asyncio.run(run(out, binary, result, args.ownership, contract, idle))
     except Exception as error:
         result['passed'] = False
         result['error'] = str(error)

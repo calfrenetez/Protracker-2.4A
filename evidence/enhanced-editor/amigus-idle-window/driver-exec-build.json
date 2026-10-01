@@ -1,0 +1,37 @@
+{
+  "compiler": "m68k-amigaos-gcc (GCC) 6.5.0b 20260807212032",
+  "compiler_sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+  "builder_sha256": "bbe470118045e3e49548ae6acb301720e0fddb81715de276e1d07436c771c545",
+  "runtime_inputs": {
+    "ncrt0.o": "6fe4b6088899bd53efae1ea1e4783b7deab07b13f3d40cff7b46285907f19804",
+    "libnix20.a": "0731c54ad32272f5ab0d5ecd3f1f93d7aa4fc7c6ac0a5923eb26125633556e8c",
+    "libnixmain.a": "ad54158e95516aa6f3b04a8b3d835a48ecbaaea962cd178d5fb66995dcef19df",
+    "libnix.a": "d64619bc74933ac5312ef6db0f8d4cd62b3918f9f4a5805863e7d15536fcb144",
+    "libstubs.a": "55dbd0626cb472d89ab5d1bd234e6013df178f2cd3b83266bf4b82c68f1a79de",
+    "libamiga.a": "10d78b6d303a99677c0bf29a8e1653d62669f69f395691646393020325084021",
+    "libgcc.a": "8bed858c8a5797471c3bc130df341824121c5d0f0908345dfe6ce0ceccc3569b"
+  },
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fbbb=-",
+    "-Isrc/diagnostic"
+  ],
+  "inputs": {
+    "tests/native_driver_exec_test.c": "1d14e5e2e23292f6888912dceaed9502b0b3abf197ab37d559fae535fee33e62",
+    "src/diagnostic/driver_window.c": "d20370179a7abda0f00840f06a192549429ed825fe235f914ed5f6a8e2b80655",
+    "src/diagnostic/native_driver_window.c": "93d1c4d4ee03051285d01fc182a03f971c7f887d1fa49f8ebb14123a149b9993",
+    "src/diagnostic/driver_window.h": "d95a26f3561e352ef88e024d6b5f4b3f8faee070c2b71064cc5aec17a5eb5d95",
+    "src/diagnostic/ownership.h": "70ece053ae0adabdda74e6d069ff439d13d547cd829be4e958bf0d6a3aec6164",
+    "src/diagnostic/native_driver_window.h": "009bf7b107c131dd9cc1dc064767cee771fe61128f94e0ff2c8c9b0251e98422"
+  },
+  "sdk_lock_sha256": null,
+  "binary_bytes": 17304,
+  "binary_sha256": "4ec820f310914ae7309845228b79d07c333495964521c5808392d2dcd76a7381"
+}

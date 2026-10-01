@@ -1,0 +1,18 @@
+{
+  "host_sanitized_driver_scenarios": 8,
+  "native_functional_passed": true,
+  "native_returns": [
+    0,
+    0,
+    0,
+    0,
+    5,
+    5,
+    5
+  ],
+  "initial_independent_cleanup_passed": false,
+  "separate_empty_only_recovery_passed": true,
+  "subsequent_independent_cleanup_passed": true,
+  "physical_idle_window": "NOT_RUN",
+  "audio_interrupt_listening": "NOT_TESTED"
+}

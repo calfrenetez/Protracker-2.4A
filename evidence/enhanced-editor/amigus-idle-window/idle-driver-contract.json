@@ -1,0 +1,11 @@
+{
+  "scope": "Only official RC6 020 NO_LOG idle AHI driver; explicit user approval temporary unload/test/restore",
+  "path": "/Users/james1/Documents/Codex/2026-10-01/pleas/work/amigus-package/AmiGUS/AHI4/AHI/AmiGUS.audio-020-NO_LOG",
+  "sha256": "3ad6ec0b598ebbb215121a72a3945f3360f64963df133d53d45a65b144c84c27",
+  "bytes": 11028,
+  "crc32": "BA67FEF4",
+  "runtime_version": "4.23",
+  "runtime_id": "$VER: AmiGUS.audio 4.023 (30.8.26) 020 SAS/C cross\r\n",
+  "installed_path": "DEVS:AHI/AmiGUS.audio",
+  "source_review": "../amigus-idle-driver/source-review.json"
+}

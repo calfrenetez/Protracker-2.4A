@@ -39,15 +39,15 @@ def runtime_inputs(cc):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--cc', default=os.environ.get('AMIGA_CC', 'm68k-amigaos-gcc'))
-    p.add_argument('--tool', choices=['AmiGUSTest', 'PTModCheck', 'PTDiagOwnershipTest'], default='AmiGUSTest')
+    p.add_argument('--tool', choices=['AmiGUSTest', 'PTModCheck', 'PTDiagOwnershipTest', 'PTDriverWindowTest', 'PTDriverExecTest'], default='AmiGUSTest')
     args = p.parse_args()
     cc = shutil.which(args.cc)
     if not cc:
         p.error('Set AMIGA_CC to the m68k-amigaos-gcc compiler path')
     flags = ['-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os',
              '-Wall', '-Wextra', '-Werror', *compiler_safety_flags(cc), '-Ivendor/amigus-sdk']
-    inputs = ['src/diagnostic/main.c', 'src/diagnostic/ownership.c']
-    headers = ['src/diagnostic/amigus_calls.h', 'src/diagnostic/ownership.h']
+    inputs = ['src/diagnostic/main.c', 'src/diagnostic/ownership.c', 'src/diagnostic/driver_window.c', 'src/diagnostic/native_driver_window.c']
+    headers = ['src/diagnostic/amigus_calls.h', 'src/diagnostic/ownership.h', 'src/diagnostic/driver_window.h', 'src/diagnostic/native_driver_window.h']
     if args.tool == 'PTModCheck':
         flags[-1] = '-Isrc/core'
         inputs = ['tools/modcheck.c', 'src/core/mod_inspect.c']
@@ -56,6 +56,16 @@ def main():
         flags[-1] = '-Isrc/diagnostic'
         inputs = ['tests/ownership_test.c', 'src/diagnostic/ownership.c']
         headers = ['src/diagnostic/ownership.h']
+    if args.tool == 'PTDriverWindowTest':
+        flags[-1] = '-Isrc/diagnostic'
+        inputs = ['tests/driver_window_test.c', 'src/diagnostic/driver_window.c']
+        headers = ['src/diagnostic/driver_window.h', 'src/diagnostic/ownership.h']
+    if args.tool == 'PTDriverExecTest':
+        flags[-1] = '-Isrc/diagnostic'
+        inputs = ['tests/native_driver_exec_test.c', 'src/diagnostic/driver_window.c',
+                  'src/diagnostic/native_driver_window.c']
+        headers = ['src/diagnostic/driver_window.h', 'src/diagnostic/ownership.h',
+                   'src/diagnostic/native_driver_window.h']
     out = ROOT / 'build/diagnostic'
     out.mkdir(parents=True, exist_ok=True)
     sdk_digest = None
@@ -68,7 +78,9 @@ def main():
     result = subprocess.run([cc, *flags, *inputs, '-o', str(out / args.tool)],
                             cwd=ROOT, text=True, stdout=subprocess.PIPE,
                             stderr=subprocess.STDOUT)
-    stem = 'build' if args.tool == 'AmiGUSTest' else 'ownership-fixture-build' if args.tool == 'PTDiagOwnershipTest' else 'modcheck-build'
+    stem = {'AmiGUSTest': 'build', 'PTDiagOwnershipTest': 'ownership-fixture-build',
+            'PTDriverWindowTest': 'driver-window-build', 'PTDriverExecTest': 'driver-exec-build',
+            'PTModCheck': 'modcheck-build'}[args.tool]
     (out / (stem + '.log')).write_text(result.stdout)
     print(result.stdout, end='')
     result.check_returncode()

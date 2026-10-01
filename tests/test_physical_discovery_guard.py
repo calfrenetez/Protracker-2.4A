@@ -16,6 +16,20 @@ spec.loader.exec_module(runner)
 
 
 class PhysicalDiscoveryGuard(unittest.TestCase):
+    def test_idle_driver_guards_and_positive_restoration(self):
+        info = 'Library: AmiGUS.audio\n  Version: 4.23\n  Open count: 0\n  ID string: ' + runner.IDLE_DRIVER_ID + '\n'
+        runner.idle_driver_info(info)
+        for bad in (info.replace('count: 0','count: 1'),info.replace('4.23','4.24'),
+                    info.replace('020 SAS/C','000 SAS/C'), 'unavailable'):
+            with self.assertRaises(RuntimeError):runner.idle_driver_info(bad)
+        runner.idle_driver_info(info.replace('count: 0','count: 1'),require_idle=False)
+        for status,code in (('PASS','0'),('FAIL','20'),('SKIP','5')):
+            line = f'IDLE-OWNERSHIP result={status} unloaded=1 restored=1 restore_needed=0 rc={code}'
+            self.assertTrue(runner.idle_restoration_finished(line))
+            for bad in (line.replace('restored=1','restored=0'),line.replace('restore_needed=0','restore_needed=1'),
+                        line.replace('rc='+code,'rc=99'),line+'\n'+line,'DRIVER HOLD: restoration unconfirmed'):
+                self.assertFalse(runner.idle_restoration_finished(bad))
+
     def test_exact_bytes_and_independent_cleanup_are_required_before_target_selection(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td); binary = root / 'probe'; binary.write_bytes(b'checked bytes')

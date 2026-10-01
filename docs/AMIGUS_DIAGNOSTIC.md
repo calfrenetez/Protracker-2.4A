@@ -1,4 +1,39 @@
-# AmiGUSTest 0.1 — discovery and ownership preparation
+# AmiGUSTest 0.3 — guarded idle AHI ownership window
+
+1 October 2026. The user explicitly approved temporarily unloading the unused
+resident AmiGUS.audio driver, checking direct PCM ownership, then restoring it.
+`--idle-ownership` implements this single transaction. It pins the existing
+amigus.library1.1, refuses an unknown driver ID/version, either open-user count
+or a delayed expunge, and requests only normal Exec `RemLibrary` with the guard
+snapshot and removal serialized by `Forbid`/`Permit`. It never calls a foreign
+owner's `FreeCard`, edits library flags, flushes unrelated libraries, kills a
+player or changes saved settings. After confirmed absence it runs the existing
+PCM/wavetable checks. Known failures/cancellation also run restoration through
+normal `OpenLibrary`/`CloseLibrary`, then verify the fresh resident node.
+Uncertain card release or driver restoration retains the diagnostic Task,
+base library and owner addresses indefinitely; the harness retains target/files
+and does not retry or clean an uncertain transaction.
+
+The physical runner additionally binds the installed AHI file to the official
+RC6 020 NO_LOG snapshot and checks both public open counts before staging.
+The native guard repeats those counts at removal. Exactly matching native
+candidate checks are required before physical selection. Eight sanitized host
+failure/refusal/restoration scenarios pass. On shared030, the same Exec callback
+code passes busy/unknown refusal, normal removal and Open/Close restoration with
+a separately named owned temporary library, followed by absent-node/Fast-zero
+checks. The real diagnostic's three missing-library modes return5 as expected.
+This fixture supplies its own reload; it does not qualify loading the real AHI
+driver from disk or real PCM ownership. Initial independent file cleanup FAILED
+and remains recorded; separate inspected empty-only recovery and subsequent
+independent cleanup PASS. Evidence: `../evidence/enhanced-editor/amigus-idle-window/`.
+The physical idle-driver transaction is **not yet run**. Audio/register/IRQ and
+human listening acceptance remain open.
+
+Exec lifecycle contract: [Commodore exec.library autodocs](https://amigadev.elowar.com/read/ADCD_2.1/Includes_and_Autodocs_2._guide/node059D.html).
+The pinned public RC6 source and earlier physical inspection are recorded in
+`../evidence/enhanced-editor/amigus-idle-driver/`.
+
+## Original 0.1 qualification (historical)
 
 19 September 2026. Native CLI executable built; emulator absent-library path
 verified. Physical AmiGUS discovery/ownership, audio, capture, interrupts and

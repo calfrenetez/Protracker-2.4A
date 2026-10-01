@@ -157,7 +157,7 @@ def main():
     group.add_argument('--sample-raw',action='store_true',help='Run streamed master RAW export with native Fast allocator')
     group.add_argument('--sample-wav',action='store_true',help='Run streamed master WAV export with native Fast allocator')
     group.add_argument('--amigus-discovery',action='store_true',help='Discovery-only native library probe; no reservation or MMIO')
-    group.add_argument('--amigus-diagnostic',action='store_true',help='Native mock ownership failures and real diagnostic missing-library modes; emulator only')
+    group.add_argument('--amigus-diagnostic',action='store_true',help='Native ownership/idle-driver guards and real diagnostic missing-library modes; emulator only')
     group.add_argument('--studio-memory',choices=['native-abi','mixer','sampler','song','editor','queued','consumer','fifo','session','register-session','reserved-session','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence'],help='Run one production-allocator Studio fixture')
     group.add_argument('--input-memory',choices=['import','recent','exec-import','exec-recent'],help='Run one import or recent-file memory fixture')
     group.add_argument('--exec-memory',choices=['bounce','stems','failures','save'],help='Run one native Exec-backed memory fixture')
@@ -342,9 +342,12 @@ def main():
             result['scope']='shared030 discovery-only native amigus.library probe; no reservation or MMIO'
         if args.amigus_diagnostic:
             cases=[('ownership-fixture','PTDiagOwnershipTest','ownership: 20 scenarios passed'),
+                   ('driver-window','PTDriverWindowTest','driver window: 8 scenarios passed'),
+                   ('driver-exec','PTDriverExecTest','DRIVER EXEC PASS:'),
                    ('native-abi','PTAmiGusNativeAbiTest','AMIGUS NATIVE ABI PASS:'),
                    ('amigus-discover','AmiGUSTest','reason=library-unavailable'),
-                   ('amigus-ownership','AmiGUSTest','reason=library-unavailable')]
+                   ('amigus-ownership','AmiGUSTest','reason=library-unavailable'),
+                   ('amigus-idle','AmiGUSTest','reason=library-unavailable')]
             result['scope']='shared030 mock ownership/final-release failure checks and exact real diagnostic unavailable-library modes; no physical card reservation/MMIO/audio'
         if args.invert_cli:
             cases=[('invert-cli','PT24GRender','WAV frames=')]
@@ -375,7 +378,7 @@ def main():
             if args.amigus_diagnostic:
                 commands=['FailAt 21','Stack 65536']
                 for name,binary,marker in cases:
-                    option=' --discover' if name=='amigus-discover' else ' --ownership' if name=='amigus-ownership' else ''
+                    option={'amigus-discover':' --discover','amigus-ownership':' --ownership','amigus-idle':' --idle-ownership'}.get(name,'')
                     commands+=['CD '+guest.device+run.name+'/'+name,binary+option+' >test.log','Echo $RC >test.rc']
             if args.recovery_file:
                 directory=guest.device+run.name+'/recovery'

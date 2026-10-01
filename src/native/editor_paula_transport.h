@@ -4,7 +4,8 @@
 #include "eclock_alarm.h"
 #include "../core/elapsed_clock.h"
 /* Zero-init, noncopyable, serialized enclosing owner. Prepare with native.begin/
- * advance, then start once ready. Service does one bounded scheduler call and
+ * advance, then call start until it stops returning PREPARING: each call primes
+ * one startup step before opening any timer. Service does one bounded call and
  * polls private alarm IO without waiting. Wakeups never supply logical time.
  * Caller drives preparation/service and Wait using signal(); no UI installed.
  * Refusal/error is terminal until explicit cleanup/restart; never catch up or
@@ -20,7 +21,7 @@ struct pt_native_paula_transport {
     struct pt_native_eclock clock;struct pt_native_alarm alarm;
     struct pt_native_alarm service_alarm;struct pt_elapsed_clock service_clock;
     uint64_t service_last_frames,service_deadline;unsigned service_clock_ready;
-    uint64_t alarm_deadline;unsigned started,done,failed;
+    uint64_t alarm_deadline;unsigned started,done,failed,priming;
     /* Capture once before stop can clear live state. Retained through cleanup;
      * next successful begin resets diagnostics. No additional clock I/O. */
     enum pt_native_paula_phase phase,failure_phase;
@@ -34,7 +35,7 @@ static inline int pt_native_paula_transport_release(void *context)
      * clock, enclosing owner and editor barrier if timer abort is still pending. */
     if(!pt_native_alarm_close(&t->service_alarm) || !pt_native_alarm_close(&t->alarm))return 0;
     pt_native_eclock_close(&t->clock);
-    t->started=t->done=t->service_clock_ready=0;
+    t->started=t->done=t->service_clock_ready=t->priming=0;
     /* Retain last observations even if core failure initiated this cleanup
      * before the enclosing service call can snapshot its refusal. */
     return 1;
@@ -67,7 +68,7 @@ static inline enum pt_paula_song_result pt_native_paula_transport_begin(
        t->native.release_tail_context!=t)return PT_PAULA_SONG_INVALID;
     r=pt_native_editor_paula_begin(&t->native,o,budget);
     if(r==PT_PAULA_SONG_PREPARING) {
-        t->failed=0;t->phase=t->failure_phase=PT_NATIVE_PAULA_NONE;
+        t->failed=t->priming=0;t->phase=t->failure_phase=PT_NATIVE_PAULA_NONE;
         t->failure_frames=t->failure_last_frames=0;
     }
     return r;
@@ -133,9 +134,16 @@ static inline enum pt_paula_song_result pt_native_paula_transport_start(
     enum pt_paula_song_result r;uint64_t ticks;uint32_t frequency;
     if(!t || t->failed || !t->native.active || t->native.failed || !t->native.binding.song ||
        t->started || t->clock.port || t->alarm.port || t->service_alarm.port)return PT_PAULA_SONG_INVALID;
-    /* Confirm master preparation before opening/binding any clock. */
-    r=pt_native_editor_paula_advance(&t->native,NULL);
-    if(r!=PT_PAULA_SONG_OK)return r;
+    /* Both master and bounded sequence/cache preparation precede clock binding.
+     * A PREPARING result owns no timer; caller schedules the next bounded call. */
+    if(!t->priming) {
+        r=pt_native_editor_paula_advance(&t->native,NULL);
+        if(r!=PT_PAULA_SONG_OK)return r;
+        t->priming=1;
+    }
+    r=pt_editor_paula_prime(&t->native.binding);
+    if(r==PT_PAULA_SONG_WAITING)return PT_PAULA_SONG_PREPARING;
+    if(r!=PT_PAULA_SONG_OK)return pt_native_paula_transport_fail(t,r);
     t->phase=PT_NATIVE_PAULA_OPEN;
     if(!pt_native_eclock_open(&t->clock) || !pt_native_alarm_open(&t->alarm) || !pt_native_alarm_open(&t->service_alarm))
         return pt_native_paula_transport_fail(t,PT_PAULA_SONG_CLOCK);

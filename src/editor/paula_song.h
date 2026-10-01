@@ -81,10 +81,18 @@ enum pt_paula_song_result pt_paula_song_clock_service(struct pt_paula_song *,uin
  * native timing guarantee; borrowed arrays/callbacks remain immutable as above. */
 enum pt_paula_song_result pt_paula_song_schedule_begin(struct pt_paula_song *,uint64_t);
 enum pt_paula_song_result pt_paula_song_schedule_step(struct pt_paula_song *,uint64_t,uint64_t *);
+/* Optional bounded unbound startup preparation after master prepare, before any
+ * manual next or schedule. Each call performs one startup transition; WAITING
+ * needs another call, OK means ready and repeated calls are inert. No clock read
+ * or elapsed epoch; no voice output. Manual/numerical schedule APIs refuse while
+ * priming. Only clocked_begin may bind an already-ready primed state. All borrowed
+ * ownership/context guards and cancellation remain active until confirmed close. */
+enum pt_paula_song_result pt_paula_song_prime(struct pt_paula_song *);
 /* Sampled monotonic transport clock; callback returns1 and supplies stable
  * ticks/second and nondecreasing64-bit ticks. Copied callback/context must stay
  * immutable/alive until confirmed close; serialized/non-reentrant, no edits.
- * Begin reads once, establishes frame0 epoch and schedules delay frames later.
+ * Begin reads once, revalidates ownership, establishes frame0 epoch and schedules
+ * delay frames later; an optional primed state keeps its prepared startup batch.
  * Service reads EXACTLY once, uses existing checked elapsed-clock fractional
  * carry then advances same schedule. Numerical schedule_step refuses while bound.
  * Read failure, frequency change, regression/wrap or conversion/deadline overflow

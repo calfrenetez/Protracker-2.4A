@@ -11,7 +11,7 @@ static int fixture(unsigned late)
     struct pt_allocator a={NULL,fast_alloc,fast_free};struct pt_document doc;
     struct pt_editor *ed=native_allocate(sizeof(*ed));struct pt_native_paula_transport t={0};
     int32_t *pcm=native_allocate(32*sizeof(*pcm));struct pt_render_options o={0};
-    enum pt_paula_song_result r;unsigned i,initialized=0,attached=0;int result=0;
+    enum pt_paula_song_result r;unsigned i,startup_calls=0,initialized=0,attached=0;int result=0;
     uint64_t ticks;uint32_t frequency;
 #define CHECK(c) do{if(!(c)){printf("PAULA TRANSPORT FAIL case=%u line=%u\n",late,(unsigned)__LINE__);result=20;goto done;}}while(0)
     memset(pcm,0,32*sizeof(*pcm));pt_document_init(&doc,&a);
@@ -24,14 +24,21 @@ static int fixture(unsigned late)
     CHECK(pt_native_paula_transport_begin(&t,&o,32)==PT_PAULA_SONG_PREPARING);
     i=0;do{r=pt_native_editor_paula_advance(&t.native,NULL);CHECK(++i<100);if(r==PT_PAULA_SONG_PREPARING && !t.native.engine.ready)Delay(1);}while(r==PT_PAULA_SONG_PREPARING);
     CHECK(r==PT_PAULA_SONG_OK);
-    r=pt_native_paula_transport_start(&t,48000);
+    i=0;do {
+        r=pt_native_paula_transport_start(&t,48000);CHECK(++i<2000);
+        if(r==PT_PAULA_SONG_PREPARING) {
+            CHECK(!t.clock.port && !t.alarm.port && !t.service_alarm.port && !t.started && !(pt_native_paula_output_dma()&15));
+            Delay(1);
+        }
+    }while(r==PT_PAULA_SONG_PREPARING);
+    startup_calls=i;
     if(late!=2)printf("TRANSPORT start=%u clock=%u alarm=%u pending=%u\n",(unsigned)r,t.clock.opened,t.alarm.opened,t.alarm.pending);
     CHECK(r==PT_PAULA_SONG_WAITING && t.clock.opened && t.alarm.opened && t.alarm.pending && t.service_alarm.opened && t.service_alarm.pending);
     CHECK(pt_native_paula_transport_signal(&t));
     if(late==2) {
         struct pt_elapsed_clock observed=t.service_clock;
         uint64_t frames=0,previous=0,before,after,max_gap=0,max_cost=0,max_prime_cost=0,max_ready_cost=0;
-        unsigned calls=0,completions=0,primed=0,was_primed,prime_calls=0,ready_calls=0;
+        unsigned calls=0,completions=0,primed=1,was_primed,prime_calls=0,ready_calls=0;
         for(i=0;i<1000000 && frames<24000;++i) {
             CHECK(pt_native_eclock_read(&t.clock,&ticks,&frequency));
             CHECK(pt_elapsed_clock_advance(&observed,frequency,ticks,&frames)==PT_ELAPSED_OK);
@@ -44,6 +51,7 @@ static int fixture(unsigned late)
             was_primed=primed;if(was_primed)++ready_calls;else ++prime_calls;
             r=pt_native_paula_transport_service(&t);
             if(r!=PT_PAULA_SONG_WAITING && r!=PT_PAULA_SONG_OK) {
+                printf("UNBOUND STARTUP calls=%u no timer epoch or WRITE before readiness\n",startup_calls);
                 printf("CADENCE REFUSED calls=%u completions=%u frames=%lu result=%u max_gap_ticks=%lu frequency=%lu\n",
                     calls,completions,(unsigned long)frames,(unsigned)r,(unsigned long)max_gap,(unsigned long)frequency);
                 printf("CADENCE STAGE=%u service_frames=%lu last_frames=%lu observed_cost_ticks=%lu max_prior_cost_ticks=%lu periodic_observed_ticks=%lu periodic_target_ticks=%lu\n",
@@ -61,6 +69,7 @@ static int fixture(unsigned late)
             if(was_primed){if(after-before>max_ready_cost)max_ready_cost=after-before;}
             else if(after-before>max_prime_cost)max_prime_cost=after-before;
         }
+        printf("UNBOUND STARTUP calls=%u no timer epoch or WRITE before readiness\n",startup_calls);
         printf("CADENCE observed_frames=%lu calls=%u completions=%u loops=%u max_gap_ticks=%lu max_cost_ticks=%lu frequency=%lu\n",
             (unsigned long)frames,calls,completions,i,(unsigned long)max_gap,(unsigned long)max_cost,(unsigned long)frequency);
         CHECK(i<1000000 && frames>=24000 && frames<48000 && calls>=100 && completions>=100 && primed);
@@ -72,7 +81,7 @@ static int fixture(unsigned late)
         printf("TRANSPORT late=%u\n",(unsigned)r);
         CHECK(r==PT_PAULA_SONG_DEADLINE && pt_native_paula_transport_service(&t)==PT_PAULA_SONG_INVALID);
     }
-    CHECK(!t.native.engine.output.held[0] && !t.native.engine.cache.cache.bytes && !(pt_native_paula_output_dma()&15));
+    CHECK(!t.native.engine.output.held[0] && !(pt_native_paula_output_dma()&15));
  done:
     if(attached){for(i=0;i<50 && !pt_editor_paula_stop(&t.native.binding);++i)Delay(1);if(i==50){puts("TRANSPORT HOLD: pending cleanup, all storage retained");return 21;}}
     if(attached && !pt_editor_paula_detach(&t.native.binding))return 22;

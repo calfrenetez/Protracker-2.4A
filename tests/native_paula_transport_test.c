@@ -66,7 +66,14 @@ static void fixture(unsigned mode)
     assert(pt_native_paula_transport_begin(&t,&o,32)==PT_PAULA_SONG_PREPARING);
     i=0;do{r=pt_native_editor_paula_advance(&t.native,NULL);assert(++i<100);}while(r==PT_PAULA_SONG_PREPARING);assert(r==PT_PAULA_SONG_OK);
     if(mode==1)timer_fail_open=UNIT_WAITECLOCK;
-    r=pt_native_paula_transport_start(&t,1000);
+    i=0;do {
+        r=pt_native_paula_transport_start(&t,1000);assert(++i<2000);
+        if(r==PT_PAULA_SONG_PREPARING) {
+            assert(!timer_opens && !timer_ports && !timer_reads && !timer_sends && !(dma&15));
+            assert(!t.started && !t.service_clock_ready);
+        }
+    }while(r==PT_PAULA_SONG_PREPARING);
+
     if(mode==1){assert(r==PT_PAULA_SONG_CLOCK && !t.started);finish(&t,ed,&doc);return;}
     assert(r==PT_PAULA_SONG_WAITING && timer_sends && pt_native_paula_transport_signal(&t)==((1UL<<7)|(1UL<<8)));
     n=timer_sends;for(i=0;i<100;++i){r=pt_native_paula_transport_service(&t);assert(r==PT_PAULA_SONG_WAITING || r==PT_PAULA_SONG_OK);}

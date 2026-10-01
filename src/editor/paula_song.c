@@ -16,7 +16,7 @@ struct pt_paula_song {
     struct pt_paula_preflight_report report;struct pt_render_interval interval;
     int8_t map[PT_CHANNEL_LIMIT];uint64_t version;unsigned generation,slot,analyzed,ready,pending,done,closing;
     uint64_t clock_start,clock_last,clock_deadline;unsigned clock_armed;
-    uint64_t schedule_start,schedule_last;unsigned schedule_phase,schedule_seen,visited;
+    uint64_t schedule_start,schedule_last;unsigned schedule_phase,schedule_seen,visited,priming;
     struct pt_elapsed_clock elapsed;pt_paula_clock_read clock_read;void *clock_context;unsigned clock_bound;
     uint32_t remaining;enum pt_paula_song_result failure;
 };
@@ -253,9 +253,41 @@ static enum pt_paula_song_result scheduled_interval(struct pt_paula_song *s,uint
     if(!span.emit || !span.frames)return fail(s,PT_PAULA_SONG_RENDER);
     r=clock_arm(s,start);if(r==PT_PAULA_SONG_OK)s->schedule_phase=SCHEDULE_RUNNING;return r;
 }
-static enum pt_paula_song_result schedule_step(struct pt_paula_song *s,uint64_t now,uint64_t *deadline)
+/* One bounded startup transition, independent of any clock or frame epoch.
+ * Caller validated ownership; empty plans may advance without voice output. */
+static enum pt_paula_song_result startup_step(struct pt_paula_song *s)
 {
     enum pt_paula_song_result r;struct pt_render_interval span;
+    switch(s->schedule_phase) {
+    case SCHEDULE_NEXT:
+        r=next_validated(s,&span);if(r!=PT_PAULA_SONG_OK)return r;
+        if(!span.emit)return fail(s,PT_PAULA_SONG_RENDER);
+        s->schedule_phase=span.frames?SCHEDULE_READY_NEXT:SCHEDULE_ZERO;break;
+    case SCHEDULE_ZERO:
+        r=prefetch_validated(s);if(r==PT_PAULA_SONG_PREPARING)break;
+        if(r!=PT_PAULA_SONG_OK)return r;
+        if(!s->plan.count && !s->interval.end) {
+            r=complete(s);if(r!=PT_PAULA_SONG_OK)return r;s->schedule_phase=SCHEDULE_NEXT;
+        }else s->schedule_phase=SCHEDULE_READY_ZERO;
+        break;
+    default:break; /* Ready implies no additional work/output before start. */
+    }
+    return s->schedule_phase==SCHEDULE_READY_NEXT || s->schedule_phase==SCHEDULE_READY_ZERO?
+        PT_PAULA_SONG_OK:PT_PAULA_SONG_WAITING;
+}
+enum pt_paula_song_result pt_paula_song_prime(struct pt_paula_song *s)
+{
+    enum pt_paula_song_result r=current(s);if(r!=PT_PAULA_SONG_OK)return r;
+    if(!s->ready || s->clock_armed || s->clock_bound)return PT_PAULA_SONG_INVALID;
+    if(!s->priming) {
+        if(s->visited || s->schedule_phase)return PT_PAULA_SONG_INVALID;
+        s->priming=1;s->schedule_phase=SCHEDULE_NEXT;
+    }
+    return startup_step(s);
+}
+static enum pt_paula_song_result schedule_step(struct pt_paula_song *s,uint64_t now,uint64_t *deadline)
+{
+    enum pt_paula_song_result r;
     if(!deadline)return PT_PAULA_SONG_INVALID;
     r=current(s);if(r!=PT_PAULA_SONG_OK)return r;
     if(!s->schedule_phase)return PT_PAULA_SONG_INVALID;
@@ -277,33 +309,27 @@ static enum pt_paula_song_result schedule_step(struct pt_paula_song *s,uint64_t 
         }else return fail(s,PT_PAULA_SONG_DEADLINE);
         *deadline=s->clock_deadline;return PT_PAULA_SONG_WAITING;
     }
-    switch(s->schedule_phase) {
-    case SCHEDULE_NEXT:
-        r=next_validated(s,&span);if(r!=PT_PAULA_SONG_OK)return r;
-        if(!span.emit)return fail(s,PT_PAULA_SONG_RENDER);
-        s->schedule_phase=span.frames?SCHEDULE_READY_NEXT:SCHEDULE_ZERO;break;
-    case SCHEDULE_ZERO:
-        r=prefetch_validated(s);if(r==PT_PAULA_SONG_PREPARING)break;
-        if(r!=PT_PAULA_SONG_OK)return r;
-        if(!s->plan.count && !s->interval.end) {
-            r=complete(s);if(r!=PT_PAULA_SONG_OK)return r;s->schedule_phase=SCHEDULE_NEXT;
-        }else s->schedule_phase=SCHEDULE_READY_ZERO;
-        break;
-    default:break; /* Ready implies no additional work/output before start. */
-    }
-    *deadline=s->schedule_start;
-    return s->schedule_phase==SCHEDULE_READY_NEXT || s->schedule_phase==SCHEDULE_READY_ZERO?
-        PT_PAULA_SONG_OK:PT_PAULA_SONG_WAITING;
+    r=startup_step(s);
+    if(r!=PT_PAULA_SONG_OK && r!=PT_PAULA_SONG_WAITING)return r;
+    *deadline=s->schedule_start;return r;
 }
 enum pt_paula_song_result pt_paula_song_schedule_step(struct pt_paula_song *s,uint64_t now,uint64_t *deadline)
-{return s && !s->clock_bound?schedule_step(s,now,deadline):PT_PAULA_SONG_INVALID;}
+{return s && !s->clock_bound && !s->priming?schedule_step(s,now,deadline):PT_PAULA_SONG_INVALID;}
 enum pt_paula_song_result pt_paula_song_clocked_begin(struct pt_paula_song *s,uint64_t delay,pt_paula_clock_read read,void *context)
 {
     uint64_t ticks;uint32_t frequency;enum pt_paula_song_result r=current(s);if(r!=PT_PAULA_SONG_OK)return r;
-    if(!read || !s->ready || s->visited || s->schedule_phase || s->clock_armed || s->clock_bound)return PT_PAULA_SONG_INVALID;
+    if(!read || !s->ready || s->clock_armed || s->clock_bound)return PT_PAULA_SONG_INVALID;
+    if(s->priming) {
+        if(s->schedule_phase!=SCHEDULE_READY_NEXT && s->schedule_phase!=SCHEDULE_READY_ZERO)return PT_PAULA_SONG_INVALID;
+    }else if(s->visited || s->schedule_phase)return PT_PAULA_SONG_INVALID;
+    if(delay>UINT64_MAX-s->report.frames)return fail(s,PT_PAULA_SONG_CLOCK);
     if(read(context,&ticks,&frequency)!=1 || pt_elapsed_clock_init(&s->elapsed,frequency,s->options.rate,ticks,0)!=PT_ELAPSED_OK)
         return fail(s,PT_PAULA_SONG_CLOCK);
-    r=pt_paula_song_schedule_begin(s,delay);if(r!=PT_PAULA_SONG_OK)return r;
+    /* The foreign reader can invalidate borrowed ownership before binding. */
+    r=current(s);if(r!=PT_PAULA_SONG_OK)return r;
+    if(s->priming) {
+        s->schedule_start=delay;s->schedule_seen=0;s->priming=0;
+    }else {r=pt_paula_song_schedule_begin(s,delay);if(r!=PT_PAULA_SONG_OK)return r;}
     s->clock_read=read;s->clock_context=context;s->clock_bound=1;return PT_PAULA_SONG_OK;
 }
 enum pt_paula_song_result pt_paula_song_clocked_service(struct pt_paula_song *s,uint64_t *deadline)

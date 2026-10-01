@@ -60,6 +60,21 @@ still FAILED atPOST on call23:264>256frames, with23 preparation calls andzero re
 calls. It confirms this refusal occurred before readiness; steady cadence is still
 untested. Safe closure/Fast-zero and independent cleanup pass separately.
 See `evidence/enhanced-editor/paula-startup-validated/`.
+The native transport now explicitly primes the startup sequence/cache in bounded
+unbound steps before opening EClock or either alarm. OK readiness preserves the
+prepared batch, then clocked begin samples the actual counter once and revalidates
+ownership before establishing the immutable epoch/start delay. Manual schedule
+and interval APIs refuse while priming. Cancel/stale/overflow retain the existing
+reader/context barrier and confirmed cleanup path. This changes the startup
+contract: earlier timed-preparation failures remain FAILED. Host full8/16/24
+progress, timer-free preparation, invalid phase/no-read, stale prime/reader,
+primed overflow, retained cancellation and exact-start/refusal checks pass.
+A distinct native run completed27 unbound preparation calls, then43 ready-service
+calls before a POST overrun of1076>256frames. That diagnostic remains FAILED;
+it does not establish the cause or stable cadence. Both alarm/audio/master cleanup,
+zero owned Fast bytes and independent DMA-off/path cleanup pass separately.
+See `evidence/enhanced-editor/paula-unbound-prime/`.
+
 See `evidence/enhanced-editor/paula-service-counter/`. Native periodic cadence
 feasibility and frontend PLAY/Wait wiring remain open, as do listening acceptance
 and classic segment/repeat playback. See `evidence/enhanced-editor/paula-native-transport/`.

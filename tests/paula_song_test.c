@@ -204,12 +204,19 @@ static void song_fixture(unsigned bits)
     assert(!pt_paula_song_close(&song) && sampler.bytes==pinned && d.starts==starts && !d.reading[0]);
     d.quiesce_result=1;assert(pt_paula_song_close(&song) && !d.live);
     /* Whole-song startup and each next interval share absolute phase. */
-    for(mode=0;mode<14;++mode) {
+    for(mode=0;mode<15;++mode) {
         uint64_t now=1000,deadline=77,last,ticks;unsigned reads;
-        struct test_clock clock={100,96000,0,1,NULL};unsigned sampled=mode==13?2:mode==0 || mode>=7;
+        struct test_clock clock={100,96000,0,1,NULL};unsigned sampled=mode>=13?2:mode==0 || mode>=7;
         BIND();assert(pt_paula_song_begin(&owner,&o,&caps,&a,&song)==PT_PAULA_SONG_PREPARING);
         assert(prepare_song(song,&report)==PT_PAULA_SONG_OK);
         starts=d.starts;stops=d.stops;
+        if(mode==14) {
+            polls=0;do {result=pt_paula_song_prime(song);assert(++polls<2000 && !clock.reads && d.starts==starts);}while(result==PT_PAULA_SONG_WAITING);
+            assert(result==PT_PAULA_SONG_OK);calls=d.calls;
+            assert(pt_paula_song_prime(song)==PT_PAULA_SONG_OK && d.calls==calls);
+            assert(pt_paula_song_schedule_step(song,0,&deadline)==PT_PAULA_SONG_INVALID && deadline==77);
+            assert(pt_paula_song_schedule_begin(song,1000)==PT_PAULA_SONG_INVALID);
+        }
         if(mode==4) {
             assert(pt_paula_song_schedule_begin(song,UINT64_MAX)==PT_PAULA_SONG_CLOCK);
             assert(d.starts==starts && pt_paula_song_close(&song));continue;
@@ -229,9 +236,9 @@ static void song_fixture(unsigned bits)
             assert(pt_paula_song_clocked_service_counter(song,NULL)==PT_PAULA_SONG_INVALID && clock.reads==1);
             assert(pt_paula_song_clocked_deadline(song,&ticks)==PT_PAULA_SONG_OK && ticks==2100 && clock.reads==1);
             /* Single ticks carry half a frame rather than rounding per poll. */
-            clock.ticks=101;assert(pt_paula_song_clocked_service(song,&deadline)==PT_PAULA_SONG_WAITING);
+            clock.ticks=101;assert(pt_paula_song_clocked_service(song,&deadline)==(mode==14?PT_PAULA_SONG_OK:PT_PAULA_SONG_WAITING));
             assert(pt_paula_song_clocked_deadline(song,&ticks)==PT_PAULA_SONG_OK && ticks==2100);
-            clock.ticks=102;assert(pt_paula_song_clocked_service(song,&deadline)==PT_PAULA_SONG_WAITING);
+            clock.ticks=102;assert(pt_paula_song_clocked_service(song,&deadline)==(mode==14?PT_PAULA_SONG_OK:PT_PAULA_SONG_WAITING));
             assert(pt_paula_song_clocked_deadline(song,&ticks)==PT_PAULA_SONG_OK && ticks==2100);
             if(mode==12) {
                 /* First tick at/after deadline cannot be represented. */
@@ -322,6 +329,38 @@ static void song_fixture(unsigned bits)
         reads=clock.reads;assert(pt_paula_song_clocked_service_counter(song,&counter)==result && clock.reads==reads && counter==17);
         if(mode<2)doc.project.title[0]^=1;
         assert(pt_paula_song_close(&song) && !d.live);
+    }
+    /* Unbound prime retains ownership without a clock or voice start. Refusal
+     * while unfinished must not read; cancel can retain a pending device context. */
+    for(mode=0;mode<5;++mode) {
+        struct test_clock clock={100,96000,0,1,NULL};uint64_t counter=17;
+        BIND();assert(pt_paula_song_begin(&owner,&o,&caps,&a,&song)==PT_PAULA_SONG_PREPARING);
+        assert(prepare_song(song,&report)==PT_PAULA_SONG_OK);starts=d.starts;
+        assert(pt_paula_song_prime(song)==PT_PAULA_SONG_WAITING);
+        assert(pt_paula_song_clocked_begin(song,1000,clock_read,&clock)==PT_PAULA_SONG_INVALID && !clock.reads);
+        assert(pt_paula_song_clocked_deadline(song,&counter)==PT_PAULA_SONG_INVALID && counter==17);
+        if(mode==0) {
+            pinned=sampler.bytes;d.quiesce_result=0;
+            assert(!pt_paula_song_close(&song) && sampler.bytes==pinned && d.starts==starts);
+            d.quiesce_result=1;assert(pt_paula_song_close(&song));continue;
+        }
+        if(mode==1) {
+            doc.project.title[0]^=1;assert(pt_paula_song_prime(song)==PT_PAULA_SONG_STALE && d.starts==starts);
+            doc.project.title[0]^=1;assert(pt_paula_song_close(&song));continue;
+        }
+        polls=0;do{result=pt_paula_song_prime(song);assert(++polls<2000 && d.starts==starts);}while(result==PT_PAULA_SONG_WAITING);
+        assert(result==PT_PAULA_SONG_OK);
+        if(mode==4) {
+            pinned=sampler.bytes;calls=d.calls;d.quiesce_result=0;
+            assert(!pt_paula_song_close(&song) && sampler.bytes==pinned && d.starts==starts && d.calls==calls);
+            d.quiesce_result=1;assert(pt_paula_song_close(&song) && !d.live);continue;
+        }
+        if(mode==2)clock.mutate=&doc.project;
+        assert(pt_paula_song_clocked_begin(song,mode==3?UINT64_MAX:1000,clock_read,&clock)==
+            (mode==3?PT_PAULA_SONG_CLOCK:PT_PAULA_SONG_STALE));
+        assert(clock.reads==(mode==2) && d.starts==starts);
+        if(mode==2)doc.project.title[0]^=1;
+        assert(pt_paula_song_close(&song));
     }
     /* Clock failures with an active reader never catch up or retry output;
      * uncertain stop retains session/master ownership until explicit close. */

@@ -1,0 +1,4037 @@
+[
+  {
+    "voices": 2,
+    "total": 333,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 0,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.4694246657992413
+    }
+  },
+  {
+    "voices": 2,
+    "total": 340,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 1,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.47929245156679295
+    }
+  },
+  {
+    "voices": 2,
+    "total": 332,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 2,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.4680149821181625
+    }
+  },
+  {
+    "voices": 2,
+    "total": 342,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 3,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.48211181892895055
+    }
+  },
+  {
+    "voices": 2,
+    "total": 665,
+    "frequency": 709379,
+    "bits": 8,
+    "kind": "next_start",
+    "milliseconds": {
+      "total": 0.9374396479174039
+    }
+  },
+  {
+    "voices": 2,
+    "total": 619,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 1,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.8725941985877789
+    }
+  },
+  {
+    "voices": 2,
+    "total": 4123,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 2,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.812125817087904
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1600,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 3,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 2.2554938897260843
+    }
+  },
+  {
+    "voices": 2,
+    "total": 2593,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 4,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 3.6553097850373355
+    }
+  },
+  {
+    "voices": 2,
+    "total": 2602,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 5,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 3.6679969381670445
+    }
+  },
+  {
+    "voices": 2,
+    "total": 2588,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 6,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 3.6482613666319414
+    }
+  },
+  {
+    "voices": 2,
+    "total": 3268,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 7,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 4.606846269765527
+    }
+  },
+  {
+    "voices": 2,
+    "total": 2606,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 8,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 3.67363567289136
+    }
+  },
+  {
+    "voices": 2,
+    "total": 2589,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 9,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 3.64967105031302
+    }
+  },
+  {
+    "voices": 2,
+    "total": 2606,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 10,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 3.67363567289136
+    }
+  },
+  {
+    "voices": 2,
+    "total": 3302,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 11,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 4.654775514922207
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1115,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 12,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.571797304402865
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1989,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 13,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 2.8038608416657387
+    }
+  },
+  {
+    "voices": 2,
+    "total": 838,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 14,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1813149247440367
+    }
+  },
+  {
+    "voices": 2,
+    "total": 6952,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 15,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 9.800120950859837
+    }
+  },
+  {
+    "voices": 2,
+    "total": 6695,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 16,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 9.437832244822584
+    }
+  },
+  {
+    "voices": 2,
+    "total": 7132,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 17,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 10.053864013454021
+    }
+  },
+  {
+    "voices": 2,
+    "total": 6695,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 18,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 9.437832244822584
+    }
+  },
+  {
+    "voices": 2,
+    "total": 21161,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 19,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 29.830316375308545
+    }
+  },
+  {
+    "voices": 2,
+    "total": 6703,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 20,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 9.449109714271215
+    }
+  },
+  {
+    "voices": 2,
+    "total": 6730,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 21,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 9.487171173660343
+    }
+  },
+  {
+    "voices": 2,
+    "total": 7064,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 22,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 9.958005523140663
+    }
+  },
+  {
+    "voices": 2,
+    "total": 509,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 23,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.7175289936691106
+    }
+  },
+  {
+    "voices": 2,
+    "total": 775,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 24,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.0925048528360721
+    }
+  },
+  {
+    "voices": 2,
+    "total": 694,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 25,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9783204746686891
+    }
+  },
+  {
+    "voices": 2,
+    "total": 556,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 26,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.7837841266798143
+    }
+  },
+  {
+    "voices": 2,
+    "before_first": 1379,
+    "first_to_last": 62,
+    "last_to_return": 1477,
+    "total": 2918,
+    "frequency": 709379,
+    "bits": 8,
+    "kind": "complete",
+    "milliseconds": {
+      "before_first": 1.943953796207669,
+      "first_to_last": 0.08740038822688577,
+      "last_to_return": 2.0821027969533916,
+      "total": 4.113456981387946
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1080,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 0,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.5224583755651069
+    }
+  },
+  {
+    "voices": 2,
+    "total": 234,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 0,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32986598137243983
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1080,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 1,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.5224583755651069
+    }
+  },
+  {
+    "voices": 2,
+    "total": 234,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 1,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32986598137243983
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1059,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 2,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.492855018262452
+    }
+  },
+  {
+    "voices": 2,
+    "total": 229,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 2,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32281756296704583
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1056,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 3,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.4886259672192157
+    }
+  },
+  {
+    "voices": 2,
+    "total": 229,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 3,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32281756296704583
+    }
+  },
+  {
+    "voices": 2,
+    "total": 641,
+    "frequency": 709379,
+    "bits": 8,
+    "kind": "next_live",
+    "milliseconds": {
+      "total": 0.9036072395715126
+    }
+  },
+  {
+    "voices": 16,
+    "total": 574,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 0,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.8091584329392327
+    }
+  },
+  {
+    "voices": 16,
+    "total": 332,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 1,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.4680149821181625
+    }
+  },
+  {
+    "voices": 16,
+    "total": 332,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 2,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.4680149821181625
+    }
+  },
+  {
+    "voices": 16,
+    "total": 332,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 3,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.4680149821181625
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1072,
+    "frequency": 709379,
+    "bits": 8,
+    "kind": "next_start",
+    "milliseconds": {
+      "total": 1.5111809061164765
+    }
+  },
+  {
+    "voices": 16,
+    "total": 619,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 1,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.8725941985877789
+    }
+  },
+  {
+    "voices": 16,
+    "total": 18517,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 2,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 26.10311272253619
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1528,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 3,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 2.153996664688411
+    }
+  },
+  {
+    "voices": 16,
+    "total": 2778,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 4,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 3.916101266036914
+    }
+  },
+  {
+    "voices": 16,
+    "total": 2759,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 5,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 3.8893172760964165
+    }
+  },
+  {
+    "voices": 16,
+    "total": 2760,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 6,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 3.8907269597774956
+    }
+  },
+  {
+    "voices": 16,
+    "total": 3013,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 7,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 4.247376931090432
+    }
+  },
+  {
+    "voices": 16,
+    "total": 2770,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 8,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 3.9048237965882837
+    }
+  },
+  {
+    "voices": 16,
+    "total": 2759,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 9,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 3.8893172760964165
+    }
+  },
+  {
+    "voices": 16,
+    "total": 2758,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 10,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 3.887907592415338
+    }
+  },
+  {
+    "voices": 16,
+    "total": 3172,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 11,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 4.4715166363819625
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1810,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 12,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 2.5515274627526328
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1844,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 13,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 2.599456707909312
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1842,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 14,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 2.596637340547155
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1540,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 15,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 2.170912868861356
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1258,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 16,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.7733820707971337
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1289,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 17,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.8170822649105767
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1259,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 18,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.7747917544782126
+    }
+  },
+  {
+    "voices": 16,
+    "total": 4376,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 19,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 6.168775788400841
+    }
+  },
+  {
+    "voices": 16,
+    "total": 838,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 20,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1813149247440367
+    }
+  },
+  {
+    "voices": 16,
+    "total": 6692,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 21,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 9.433603193779348
+    }
+  },
+  {
+    "voices": 16,
+    "total": 7160,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 22,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 10.093335156524228
+    }
+  },
+  {
+    "voices": 16,
+    "total": 6708,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 23,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 9.45615813267661
+    }
+  },
+  {
+    "voices": 16,
+    "total": 21160,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 24,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 29.828906691627466
+    }
+  },
+  {
+    "voices": 16,
+    "total": 6708,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 25,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 9.45615813267661
+    }
+  },
+  {
+    "voices": 16,
+    "total": 11080,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 26,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 15.619295186353135
+    }
+  },
+  {
+    "voices": 16,
+    "total": 6939,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 27,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 9.781795063005813
+    }
+  },
+  {
+    "voices": 16,
+    "total": 6876,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 28,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 9.692984991097848
+    }
+  },
+  {
+    "voices": 16,
+    "total": 849,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 29,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1968214452359036
+    }
+  },
+  {
+    "voices": 16,
+    "total": 849,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 30,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1968214452359036
+    }
+  },
+  {
+    "voices": 16,
+    "total": 828,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 31,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1672180879332485
+    }
+  },
+  {
+    "voices": 16,
+    "total": 851,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 32,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.199640812598061
+    }
+  },
+  {
+    "voices": 16,
+    "total": 828,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 33,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1672180879332485
+    }
+  },
+  {
+    "voices": 16,
+    "total": 850,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 34,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1982311289169822
+    }
+  },
+  {
+    "voices": 16,
+    "total": 828,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 35,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1672180879332485
+    }
+  },
+  {
+    "voices": 16,
+    "total": 851,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 36,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.199640812598061
+    }
+  },
+  {
+    "voices": 16,
+    "total": 828,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 37,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1672180879332485
+    }
+  },
+  {
+    "voices": 16,
+    "total": 831,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 38,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1714471389764851
+    }
+  },
+  {
+    "voices": 16,
+    "total": 850,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 39,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1982311289169822
+    }
+  },
+  {
+    "voices": 16,
+    "total": 538,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 40,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.7584098204203958
+    }
+  },
+  {
+    "voices": 16,
+    "total": 776,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 41,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.093914536517151
+    }
+  },
+  {
+    "voices": 16,
+    "total": 777,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 42,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.0953242201982296
+    }
+  },
+  {
+    "voices": 16,
+    "total": 791,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 43,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.115059791733333
+    }
+  },
+  {
+    "voices": 16,
+    "total": 793,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 44,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1178791590954906
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1017,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 45,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.4336483036571424
+    }
+  },
+  {
+    "voices": 16,
+    "total": 778,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 46,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.0967339038793085
+    }
+  },
+  {
+    "voices": 16,
+    "total": 794,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 47,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1192888427765693
+    }
+  },
+  {
+    "voices": 16,
+    "total": 791,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 48,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.115059791733333
+    }
+  },
+  {
+    "voices": 16,
+    "total": 780,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 49,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.0995532712414662
+    }
+  },
+  {
+    "voices": 16,
+    "total": 778,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 50,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.0967339038793085
+    }
+  },
+  {
+    "voices": 16,
+    "total": 793,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 51,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1178791590954906
+    }
+  },
+  {
+    "voices": 16,
+    "total": 791,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 52,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.115059791733333
+    }
+  },
+  {
+    "voices": 16,
+    "total": 921,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 53,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.2983186702735774
+    }
+  },
+  {
+    "voices": 16,
+    "total": 677,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 54,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9543558520903495
+    }
+  },
+  {
+    "voices": 16,
+    "total": 678,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 55,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9557655357714282
+    }
+  },
+  {
+    "voices": 16,
+    "total": 679,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 56,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.957175219452507
+    }
+  },
+  {
+    "voices": 16,
+    "total": 684,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 57,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9642236378579011
+    }
+  },
+  {
+    "voices": 16,
+    "total": 674,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 58,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.950126801047113
+    }
+  },
+  {
+    "voices": 16,
+    "total": 677,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 59,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9543558520903495
+    }
+  },
+  {
+    "voices": 16,
+    "total": 677,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 60,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9543558520903495
+    }
+  },
+  {
+    "voices": 16,
+    "total": 678,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 61,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9557655357714282
+    }
+  },
+  {
+    "voices": 16,
+    "total": 694,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 62,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9783204746686891
+    }
+  },
+  {
+    "voices": 16,
+    "total": 694,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 63,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9783204746686891
+    }
+  },
+  {
+    "voices": 16,
+    "total": 694,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 64,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9783204746686891
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1141,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 65,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.608449080110914
+    }
+  },
+  {
+    "voices": 16,
+    "before_first": 2393,
+    "first_to_last": 857,
+    "last_to_return": 1480,
+    "total": 4730,
+    "frequency": 709379,
+    "bits": 8,
+    "kind": "complete",
+    "milliseconds": {
+      "before_first": 3.3733730488215747,
+      "first_to_last": 1.208098914684534,
+      "last_to_return": 2.086331847996628,
+      "total": 6.667803811502737
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1081,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 0,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.5238680592461857
+    }
+  },
+  {
+    "voices": 16,
+    "total": 229,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 0,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32281756296704583
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1081,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 1,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.5238680592461857
+    }
+  },
+  {
+    "voices": 16,
+    "total": 229,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 1,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32281756296704583
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1080,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 2,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.5224583755651069
+    }
+  },
+  {
+    "voices": 16,
+    "total": 229,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 2,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32281756296704583
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1080,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 3,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.5224583755651069
+    }
+  },
+  {
+    "voices": 16,
+    "total": 229,
+    "frequency": 709379,
+    "bits": 8,
+    "case": 3,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32281756296704583
+    }
+  },
+  {
+    "voices": 16,
+    "total": 877,
+    "frequency": 709379,
+    "bits": 8,
+    "kind": "next_live",
+    "milliseconds": {
+      "total": 1.23629258830611
+    }
+  },
+  {
+    "voices": 2,
+    "total": 332,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 0,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.4680149821181625
+    }
+  },
+  {
+    "voices": 2,
+    "total": 333,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 1,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.4694246657992413
+    }
+  },
+  {
+    "voices": 2,
+    "total": 333,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 2,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.4694246657992413
+    }
+  },
+  {
+    "voices": 2,
+    "total": 331,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 3,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.4666052984370837
+    }
+  },
+  {
+    "voices": 2,
+    "total": 669,
+    "frequency": 709379,
+    "bits": 16,
+    "kind": "next_start",
+    "milliseconds": {
+      "total": 0.9430783826417191
+    }
+  },
+  {
+    "voices": 2,
+    "total": 638,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 1,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.8993781885282761
+    }
+  },
+  {
+    "voices": 2,
+    "total": 4156,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 2,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.858645378563504
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1357,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 3,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.9129407552239353
+    }
+  },
+  {
+    "voices": 2,
+    "total": 4232,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 4,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.965781338325493
+    }
+  },
+  {
+    "voices": 2,
+    "total": 3531,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 5,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 4.977593077889252
+    }
+  },
+  {
+    "voices": 2,
+    "total": 3542,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 6,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 4.993099598381119
+    }
+  },
+  {
+    "voices": 2,
+    "total": 3775,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 7,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.32155589607248
+    }
+  },
+  {
+    "voices": 2,
+    "total": 3551,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 8,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.005786751510828
+    }
+  },
+  {
+    "voices": 2,
+    "total": 3537,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 9,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 4.986051179975726
+    }
+  },
+  {
+    "voices": 2,
+    "total": 3787,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 10,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.338472100245426
+    }
+  },
+  {
+    "voices": 2,
+    "total": 3969,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 11,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.595034530201768
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1120,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 12,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.578845722808259
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1952,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 13,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 2.751702545465823
+    }
+  },
+  {
+    "voices": 2,
+    "total": 838,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 14,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1813149247440367
+    }
+  },
+  {
+    "voices": 2,
+    "total": 7608,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 15,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 10.724873445647532
+    }
+  },
+  {
+    "voices": 2,
+    "total": 22097,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 16,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 31.149780300798305
+    }
+  },
+  {
+    "voices": 2,
+    "total": 7594,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 17,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 10.705137874112427
+    }
+  },
+  {
+    "voices": 2,
+    "total": 11997,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 18,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 16.911975121902397
+    }
+  },
+  {
+    "voices": 2,
+    "total": 7827,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 19,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 11.03359417180379
+    }
+  },
+  {
+    "voices": 2,
+    "total": 7595,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 20,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 10.706547557793506
+    }
+  },
+  {
+    "voices": 2,
+    "total": 7612,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 21,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 10.730512180371846
+    }
+  },
+  {
+    "voices": 2,
+    "total": 7940,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 22,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 11.192888427765693
+    }
+  },
+  {
+    "voices": 2,
+    "total": 510,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 23,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.7189386773501893
+    }
+  },
+  {
+    "voices": 2,
+    "total": 794,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 24,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1192888427765693
+    }
+  },
+  {
+    "voices": 2,
+    "total": 693,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 25,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9769107909876102
+    }
+  },
+  {
+    "voices": 2,
+    "total": 572,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 26,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.8063390655770751
+    }
+  },
+  {
+    "voices": 2,
+    "before_first": 1379,
+    "first_to_last": 61,
+    "last_to_return": 1237,
+    "total": 2677,
+    "frequency": 709379,
+    "bits": 16,
+    "kind": "complete",
+    "milliseconds": {
+      "before_first": 1.943953796207669,
+      "first_to_last": 0.08599070454580697,
+      "last_to_return": 1.7437787134944789,
+      "total": 3.773723214247955
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1080,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 0,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.5224583755651069
+    }
+  },
+  {
+    "voices": 2,
+    "total": 229,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 0,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32281756296704583
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1079,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 1,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.5210486918840282
+    }
+  },
+  {
+    "voices": 2,
+    "total": 230,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 1,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32422724664812463
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1082,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 2,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.5252777429272646
+    }
+  },
+  {
+    "voices": 2,
+    "total": 229,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 2,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32281756296704583
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1081,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 3,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.5238680592461857
+    }
+  },
+  {
+    "voices": 2,
+    "total": 229,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 3,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32281756296704583
+    }
+  },
+  {
+    "voices": 2,
+    "total": 650,
+    "frequency": 709379,
+    "bits": 16,
+    "kind": "next_live",
+    "milliseconds": {
+      "total": 0.9162943927012218
+    }
+  },
+  {
+    "voices": 16,
+    "total": 332,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 0,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.4680149821181625
+    }
+  },
+  {
+    "voices": 16,
+    "total": 341,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 1,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.48070213524787175
+    }
+  },
+  {
+    "voices": 16,
+    "total": 332,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 2,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.4680149821181625
+    }
+  },
+  {
+    "voices": 16,
+    "total": 343,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 3,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.48352150261002935
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1070,
+    "frequency": 709379,
+    "bits": 16,
+    "kind": "next_start",
+    "milliseconds": {
+      "total": 1.508361538754319
+    }
+  },
+  {
+    "voices": 16,
+    "total": 619,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 1,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.8725941985877789
+    }
+  },
+  {
+    "voices": 16,
+    "total": 18523,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 2,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 26.111570824622664
+    }
+  },
+  {
+    "voices": 16,
+    "total": 2166,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 3,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 3.053374853216687
+    }
+  },
+  {
+    "voices": 16,
+    "total": 3691,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 4,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.203142466861861
+    }
+  },
+  {
+    "voices": 16,
+    "total": 3706,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 5,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.224287722078043
+    }
+  },
+  {
+    "voices": 16,
+    "total": 3901,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 6,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.499176039888409
+    }
+  },
+  {
+    "voices": 16,
+    "total": 3709,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 7,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.228516773121279
+    }
+  },
+  {
+    "voices": 16,
+    "total": 3661,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 8,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.160851956429497
+    }
+  },
+  {
+    "voices": 16,
+    "total": 3951,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 9,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.56966022394235
+    }
+  },
+  {
+    "voices": 16,
+    "total": 3664,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 10,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.165081007472733
+    }
+  },
+  {
+    "voices": 16,
+    "total": 4068,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 11,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.734593214628569
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1841,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 12,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 2.5952276568660757
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1842,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 13,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 2.596637340547155
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1806,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 14,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 2.545888728028318
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1258,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 15,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.7733820707971337
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1257,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 16,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.771972387116055
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1259,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 17,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.7747917544782126
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1681,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 18,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 2.3696782678934674
+    }
+  },
+  {
+    "voices": 16,
+    "total": 4367,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 19,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 6.156088635271131
+    }
+  },
+  {
+    "voices": 16,
+    "total": 821,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 20,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.157350302165697
+    }
+  },
+  {
+    "voices": 16,
+    "total": 22519,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 21,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 31.74466681421356
+    }
+  },
+  {
+    "voices": 16,
+    "total": 7595,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 22,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 10.706547557793506
+    }
+  },
+  {
+    "voices": 16,
+    "total": 11453,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 23,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 16.14510719939553
+    }
+  },
+  {
+    "voices": 16,
+    "total": 7836,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 24,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 11.046281324933497
+    }
+  },
+  {
+    "voices": 16,
+    "total": 7580,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 25,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 10.685402302577325
+    }
+  },
+  {
+    "voices": 16,
+    "total": 7626,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 26,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 10.750247751906949
+    }
+  },
+  {
+    "voices": 16,
+    "total": 7827,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 27,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 11.03359417180379
+    }
+  },
+  {
+    "voices": 16,
+    "total": 7701,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 28,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 10.855974027987859
+    }
+  },
+  {
+    "voices": 16,
+    "total": 830,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 29,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1700374552954063
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1105,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 30,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.557700467592077
+    }
+  },
+  {
+    "voices": 16,
+    "total": 831,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 31,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1714471389764851
+    }
+  },
+  {
+    "voices": 16,
+    "total": 830,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 32,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1700374552954063
+    }
+  },
+  {
+    "voices": 16,
+    "total": 830,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 33,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1700374552954063
+    }
+  },
+  {
+    "voices": 16,
+    "total": 827,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 34,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.16580840425217
+    }
+  },
+  {
+    "voices": 16,
+    "total": 832,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 35,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.172856822657564
+    }
+  },
+  {
+    "voices": 16,
+    "total": 828,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 36,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1672180879332485
+    }
+  },
+  {
+    "voices": 16,
+    "total": 850,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 37,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1982311289169822
+    }
+  },
+  {
+    "voices": 16,
+    "total": 848,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 38,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1954117615548248
+    }
+  },
+  {
+    "voices": 16,
+    "total": 850,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 39,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1982311289169822
+    }
+  },
+  {
+    "voices": 16,
+    "total": 550,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 40,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.7753260245933415
+    }
+  },
+  {
+    "voices": 16,
+    "total": 775,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 41,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.0925048528360721
+    }
+  },
+  {
+    "voices": 16,
+    "total": 794,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 42,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1192888427765693
+    }
+  },
+  {
+    "voices": 16,
+    "total": 794,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 43,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1192888427765693
+    }
+  },
+  {
+    "voices": 16,
+    "total": 780,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 44,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.0995532712414662
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1019,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 45,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.4364676710193
+    }
+  },
+  {
+    "voices": 16,
+    "total": 794,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 46,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1192888427765693
+    }
+  },
+  {
+    "voices": 16,
+    "total": 794,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 47,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1192888427765693
+    }
+  },
+  {
+    "voices": 16,
+    "total": 780,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 48,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.0995532712414662
+    }
+  },
+  {
+    "voices": 16,
+    "total": 775,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 49,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.0925048528360721
+    }
+  },
+  {
+    "voices": 16,
+    "total": 794,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 50,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1192888427765693
+    }
+  },
+  {
+    "voices": 16,
+    "total": 794,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 51,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1192888427765693
+    }
+  },
+  {
+    "voices": 16,
+    "total": 780,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 52,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.0995532712414662
+    }
+  },
+  {
+    "voices": 16,
+    "total": 921,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 53,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.2983186702735774
+    }
+  },
+  {
+    "voices": 16,
+    "total": 680,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 54,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9585849031335859
+    }
+  },
+  {
+    "voices": 16,
+    "total": 694,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 55,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9783204746686891
+    }
+  },
+  {
+    "voices": 16,
+    "total": 679,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 56,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.957175219452507
+    }
+  },
+  {
+    "voices": 16,
+    "total": 694,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 57,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9783204746686891
+    }
+  },
+  {
+    "voices": 16,
+    "total": 683,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 58,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9628139541768223
+    }
+  },
+  {
+    "voices": 16,
+    "total": 693,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 59,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9769107909876102
+    }
+  },
+  {
+    "voices": 16,
+    "total": 680,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 60,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9585849031335859
+    }
+  },
+  {
+    "voices": 16,
+    "total": 921,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 61,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.2983186702735774
+    }
+  },
+  {
+    "voices": 16,
+    "total": 693,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 62,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9769107909876102
+    }
+  },
+  {
+    "voices": 16,
+    "total": 681,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 63,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9599945868146647
+    }
+  },
+  {
+    "voices": 16,
+    "total": 694,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 64,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9783204746686891
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1130,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 65,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.5929425596190472
+    }
+  },
+  {
+    "voices": 16,
+    "before_first": 2394,
+    "first_to_last": 855,
+    "last_to_return": 1481,
+    "total": 4730,
+    "frequency": 709379,
+    "bits": 16,
+    "kind": "complete",
+    "milliseconds": {
+      "before_first": 3.374782732502654,
+      "first_to_last": 1.2052795473223763,
+      "last_to_return": 2.087741531677707,
+      "total": 6.667803811502737
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1058,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 0,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.4914453345813732
+    }
+  },
+  {
+    "voices": 16,
+    "total": 229,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 0,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32281756296704583
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1058,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 1,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.4914453345813732
+    }
+  },
+  {
+    "voices": 16,
+    "total": 229,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 1,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32281756296704583
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1057,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 2,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.4900356509002946
+    }
+  },
+  {
+    "voices": 16,
+    "total": 233,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 2,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32845629769136103
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1080,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 3,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.5224583755651069
+    }
+  },
+  {
+    "voices": 16,
+    "total": 234,
+    "frequency": 709379,
+    "bits": 16,
+    "case": 3,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32986598137243983
+    }
+  },
+  {
+    "voices": 16,
+    "total": 883,
+    "frequency": 709379,
+    "bits": 16,
+    "kind": "next_live",
+    "milliseconds": {
+      "total": 1.244750690392583
+    }
+  },
+  {
+    "voices": 2,
+    "total": 333,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 0,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.4694246657992413
+    }
+  },
+  {
+    "voices": 2,
+    "total": 331,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 1,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.4666052984370837
+    }
+  },
+  {
+    "voices": 2,
+    "total": 332,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 2,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.4680149821181625
+    }
+  },
+  {
+    "voices": 2,
+    "total": 332,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 3,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.4680149821181625
+    }
+  },
+  {
+    "voices": 2,
+    "total": 661,
+    "frequency": 709379,
+    "bits": 24,
+    "kind": "next_start",
+    "milliseconds": {
+      "total": 0.9318009131930886
+    }
+  },
+  {
+    "voices": 2,
+    "total": 636,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 1,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.8965588211661185
+    }
+  },
+  {
+    "voices": 2,
+    "total": 4124,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 2,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.813535500768983
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1384,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 3,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.951002214613063
+    }
+  },
+  {
+    "voices": 2,
+    "total": 3548,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 4,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.001557700467592
+    }
+  },
+  {
+    "voices": 2,
+    "total": 3530,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 5,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 4.9761833942081735
+    }
+  },
+  {
+    "voices": 2,
+    "total": 3547,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 6,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.000148016786513
+    }
+  },
+  {
+    "voices": 2,
+    "total": 3531,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 7,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 4.977593077889252
+    }
+  },
+  {
+    "voices": 2,
+    "total": 3548,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 8,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.001557700467592
+    }
+  },
+  {
+    "voices": 2,
+    "total": 3534,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 9,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 4.981822128932489
+    }
+  },
+  {
+    "voices": 2,
+    "total": 3550,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 10,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.00437706782975
+    }
+  },
+  {
+    "voices": 2,
+    "total": 18857,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 11,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 26.582405174102984
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1146,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 12,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.615497498516308
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1983,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 13,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 2.795402739579266
+    }
+  },
+  {
+    "voices": 2,
+    "total": 818,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 14,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1531212511224607
+    }
+  },
+  {
+    "voices": 2,
+    "total": 11483,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 15,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 16.18739770982789
+    }
+  },
+  {
+    "voices": 2,
+    "total": 7829,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 16,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 11.036413539165947
+    }
+  },
+  {
+    "voices": 2,
+    "total": 7594,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 17,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 10.705137874112427
+    }
+  },
+  {
+    "voices": 2,
+    "total": 7579,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 18,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 10.683992618896246
+    }
+  },
+  {
+    "voices": 2,
+    "total": 7814,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 19,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 11.015268283949764
+    }
+  },
+  {
+    "voices": 2,
+    "total": 7610,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 20,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 10.72769281300969
+    }
+  },
+  {
+    "voices": 2,
+    "total": 7825,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 21,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 11.03077480444163
+    }
+  },
+  {
+    "voices": 2,
+    "total": 8393,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 22,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 11.831475135294392
+    }
+  },
+  {
+    "voices": 2,
+    "total": 523,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 23,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.7372645652042138
+    }
+  },
+  {
+    "voices": 2,
+    "total": 781,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 24,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.100962954922545
+    }
+  },
+  {
+    "voices": 2,
+    "total": 680,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 25,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9585849031335859
+    }
+  },
+  {
+    "voices": 2,
+    "total": 561,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 26,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.7908325450852083
+    }
+  },
+  {
+    "voices": 2,
+    "before_first": 1393,
+    "first_to_last": 62,
+    "last_to_return": 1263,
+    "total": 2718,
+    "frequency": 709379,
+    "bits": 24,
+    "kind": "complete",
+    "milliseconds": {
+      "before_first": 1.9636893677427723,
+      "first_to_last": 0.08740038822688577,
+      "last_to_return": 1.7804304892025278,
+      "total": 3.831520245172186
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1058,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 0,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.4914453345813732
+    }
+  },
+  {
+    "voices": 2,
+    "total": 229,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 0,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32281756296704583
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1079,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 1,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.5210486918840282
+    }
+  },
+  {
+    "voices": 2,
+    "total": 229,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 1,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32281756296704583
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1080,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 2,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.5224583755651069
+    }
+  },
+  {
+    "voices": 2,
+    "total": 230,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 2,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32422724664812463
+    }
+  },
+  {
+    "voices": 2,
+    "total": 1303,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 3,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.83681783644568
+    }
+  },
+  {
+    "voices": 2,
+    "total": 235,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 3,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.33127566505351863
+    }
+  },
+  {
+    "voices": 2,
+    "total": 645,
+    "frequency": 709379,
+    "bits": 24,
+    "kind": "next_live",
+    "milliseconds": {
+      "total": 0.9092459742958278
+    }
+  },
+  {
+    "voices": 16,
+    "total": 343,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 0,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.48352150261002935
+    }
+  },
+  {
+    "voices": 16,
+    "total": 332,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 1,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.4680149821181625
+    }
+  },
+  {
+    "voices": 16,
+    "total": 332,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 2,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.4680149821181625
+    }
+  },
+  {
+    "voices": 16,
+    "total": 585,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 3,
+    "kind": "current",
+    "milliseconds": {
+      "total": 0.8246649534310996
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1042,
+    "frequency": 709379,
+    "bits": 24,
+    "kind": "next_start",
+    "milliseconds": {
+      "total": 1.4688903956841124
+    }
+  },
+  {
+    "voices": 16,
+    "total": 620,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 1,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.8740038822688577
+    }
+  },
+  {
+    "voices": 16,
+    "total": 18550,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 2,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 26.14963228401179
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1497,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 3,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 2.110296470574968
+    }
+  },
+  {
+    "voices": 16,
+    "total": 3952,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 4,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.5710699076234285
+    }
+  },
+  {
+    "voices": 16,
+    "total": 3658,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 5,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.156622905386261
+    }
+  },
+  {
+    "voices": 16,
+    "total": 3702,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 6,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.218648987353728
+    }
+  },
+  {
+    "voices": 16,
+    "total": 4103,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 7,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.783932143466328
+    }
+  },
+  {
+    "voices": 16,
+    "total": 3661,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 8,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.160851956429497
+    }
+  },
+  {
+    "voices": 16,
+    "total": 3707,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 9,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.225697405759122
+    }
+  },
+  {
+    "voices": 16,
+    "total": 18567,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 10,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 26.17359690659013
+    }
+  },
+  {
+    "voices": 16,
+    "total": 4070,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 11,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 5.737412581990727
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1841,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 12,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 2.5952276568660757
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1840,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 13,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 2.593817973184997
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1805,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 14,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 2.5444790443472387
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1257,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 15,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.771972387116055
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1258,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 16,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.7733820707971337
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1260,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 17,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.7762014381592914
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1532,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 18,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 2.1596353994127258
+    }
+  },
+  {
+    "voices": 16,
+    "total": 4383,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 19,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 6.178643574168392
+    }
+  },
+  {
+    "voices": 16,
+    "total": 836,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 20,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1784955573818792
+    }
+  },
+  {
+    "voices": 16,
+    "total": 7826,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 21,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 11.03218448812271
+    }
+  },
+  {
+    "voices": 16,
+    "total": 7581,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 22,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 10.686811986258403
+    }
+  },
+  {
+    "voices": 16,
+    "total": 7836,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 23,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 11.046281324933497
+    }
+  },
+  {
+    "voices": 16,
+    "total": 7835,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 24,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 11.044871641252419
+    }
+  },
+  {
+    "voices": 16,
+    "total": 7630,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 25,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 10.755886486631265
+    }
+  },
+  {
+    "voices": 16,
+    "total": 8274,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 26,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 11.663722777246013
+    }
+  },
+  {
+    "voices": 16,
+    "total": 7581,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 27,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 10.686811986258403
+    }
+  },
+  {
+    "voices": 16,
+    "total": 7706,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 28,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 10.863022446393254
+    }
+  },
+  {
+    "voices": 16,
+    "total": 829,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 29,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1686277716143274
+    }
+  },
+  {
+    "voices": 16,
+    "total": 831,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 30,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1714471389764851
+    }
+  },
+  {
+    "voices": 16,
+    "total": 828,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 31,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1672180879332485
+    }
+  },
+  {
+    "voices": 16,
+    "total": 849,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 32,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1968214452359036
+    }
+  },
+  {
+    "voices": 16,
+    "total": 850,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 33,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1982311289169822
+    }
+  },
+  {
+    "voices": 16,
+    "total": 851,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 34,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.199640812598061
+    }
+  },
+  {
+    "voices": 16,
+    "total": 851,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 35,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.199640812598061
+    }
+  },
+  {
+    "voices": 16,
+    "total": 848,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 36,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1954117615548248
+    }
+  },
+  {
+    "voices": 16,
+    "total": 849,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 37,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1968214452359036
+    }
+  },
+  {
+    "voices": 16,
+    "total": 849,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 38,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1968214452359036
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1062,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 39,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.4970840693056886
+    }
+  },
+  {
+    "voices": 16,
+    "total": 550,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 40,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.7753260245933415
+    }
+  },
+  {
+    "voices": 16,
+    "total": 781,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 41,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.100962954922545
+    }
+  },
+  {
+    "voices": 16,
+    "total": 794,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 42,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1192888427765693
+    }
+  },
+  {
+    "voices": 16,
+    "total": 795,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 43,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1206985264576481
+    }
+  },
+  {
+    "voices": 16,
+    "total": 777,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 44,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.0953242201982296
+    }
+  },
+  {
+    "voices": 16,
+    "total": 778,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 45,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.0967339038793085
+    }
+  },
+  {
+    "voices": 16,
+    "total": 780,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 46,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.0995532712414662
+    }
+  },
+  {
+    "voices": 16,
+    "total": 892,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 47,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.257437843522292
+    }
+  },
+  {
+    "voices": 16,
+    "total": 780,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 48,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.0995532712414662
+    }
+  },
+  {
+    "voices": 16,
+    "total": 775,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 49,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.0925048528360721
+    }
+  },
+  {
+    "voices": 16,
+    "total": 792,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 50,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1164694754144118
+    }
+  },
+  {
+    "voices": 16,
+    "total": 793,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 51,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1178791590954906
+    }
+  },
+  {
+    "voices": 16,
+    "total": 782,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 52,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.1023726386036237
+    }
+  },
+  {
+    "voices": 16,
+    "total": 676,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 53,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9529461684092706
+    }
+  },
+  {
+    "voices": 16,
+    "total": 693,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 54,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9769107909876102
+    }
+  },
+  {
+    "voices": 16,
+    "total": 15578,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 55,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 21.96005238384559
+    }
+  },
+  {
+    "voices": 16,
+    "total": 692,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 56,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9755011073065315
+    }
+  },
+  {
+    "voices": 16,
+    "total": 681,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 57,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9599945868146647
+    }
+  },
+  {
+    "voices": 16,
+    "total": 679,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 58,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.957175219452507
+    }
+  },
+  {
+    "voices": 16,
+    "total": 694,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 59,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9783204746686891
+    }
+  },
+  {
+    "voices": 16,
+    "total": 683,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 60,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9628139541768223
+    }
+  },
+  {
+    "voices": 16,
+    "total": 693,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 61,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9769107909876102
+    }
+  },
+  {
+    "voices": 16,
+    "total": 680,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 62,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9585849031335859
+    }
+  },
+  {
+    "voices": 16,
+    "total": 677,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 63,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9543558520903495
+    }
+  },
+  {
+    "voices": 16,
+    "total": 693,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 64,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 0.9769107909876102
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1129,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 65,
+    "kind": "prefetch",
+    "milliseconds": {
+      "total": 1.5915328759379683
+    }
+  },
+  {
+    "voices": 16,
+    "before_first": 2396,
+    "first_to_last": 850,
+    "last_to_return": 1484,
+    "total": 4730,
+    "frequency": 709379,
+    "bits": 24,
+    "kind": "complete",
+    "milliseconds": {
+      "before_first": 3.3776020998648115,
+      "first_to_last": 1.1982311289169822,
+      "last_to_return": 2.0919705827209434,
+      "total": 6.667803811502737
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1059,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 0,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.492855018262452
+    }
+  },
+  {
+    "voices": 16,
+    "total": 229,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 0,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32281756296704583
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1056,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 1,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.4886259672192157
+    }
+  },
+  {
+    "voices": 16,
+    "total": 229,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 1,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32281756296704583
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1058,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 2,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.4914453345813732
+    }
+  },
+  {
+    "voices": 16,
+    "total": 233,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 2,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32845629769136103
+    }
+  },
+  {
+    "voices": 16,
+    "total": 1080,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 3,
+    "kind": "cancel_idle",
+    "milliseconds": {
+      "total": 1.5224583755651069
+    }
+  },
+  {
+    "voices": 16,
+    "total": 233,
+    "frequency": 709379,
+    "bits": 24,
+    "case": 3,
+    "bytes": 5612,
+    "kind": "lookahead_cancel",
+    "milliseconds": {
+      "total": 0.32845629769136103
+    }
+  },
+  {
+    "voices": 16,
+    "total": 883,
+    "frequency": 709379,
+    "bits": 24,
+    "kind": "next_live",
+    "milliseconds": {
+      "total": 1.244750690392583
+    }
+  }
+]

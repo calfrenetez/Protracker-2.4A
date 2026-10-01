@@ -168,6 +168,14 @@ its allocation/upload bound; complete/next allocate/upload nothing, and resource
 path cleanup passes. Hostfull195 remains a separate tier. Evidence:
 `evidence/enhanced-editor/mixed-component-cost/`.
 
+Native idle cancellation measurements confirm24private mixed-batch cancels at
+1.489..1.837ms and24standalone5612-byte lookahead cancels at0.323..0.331ms.
+The owner and every live voice remain unchanged, all temporary workspace/resources
+close normally, and no cancel allocates/uploads/emits. Active release cost is not
+isolated by idle measurements. This is a test-only baseline; product behavior and
+the public lookahead full-zero contract are unchanged. Evidence:
+`evidence/enhanced-editor/mixed-clear-cost/`.
+
 AmiGUS PCM reservation/FIFO/session code has fake-port/library and native software
 fixtures, plus an absent-library discovery check. Those results do not establish
 positive card access, real MMIO, streaming output or physical acceptance. Native

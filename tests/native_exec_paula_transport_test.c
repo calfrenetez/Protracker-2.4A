@@ -2,8 +2,8 @@
 #include "../src/native/editor_paula_transport.h"
 #include <proto/dos.h>
 #include <string.h>
-/* Private timer lifetime and deliberate late refusal only. No prepared output
- * or native cadence acceptance;24-bit zero source guards against audible data. */
+/* Private timer lifetime/refusal and bounded pre-startup periodic polling.
+ * No musical boundary/output or Wait-loop qualification; zero24 source. */
 static void *fast_alloc(void *c,size_t n){(void)c;return native_allocate(n);}
 static void fast_free(void *c,void *p){(void)c;native_release(p);}
 static int fixture(unsigned late)
@@ -25,10 +25,37 @@ static int fixture(unsigned late)
     i=0;do{r=pt_native_editor_paula_advance(&t.native,NULL);CHECK(++i<100);if(r==PT_PAULA_SONG_PREPARING && !t.native.engine.ready)Delay(1);}while(r==PT_PAULA_SONG_PREPARING);
     CHECK(r==PT_PAULA_SONG_OK);
     r=pt_native_paula_transport_start(&t,48000);
-    printf("TRANSPORT start=%u clock=%u alarm=%u pending=%u\n",(unsigned)r,t.clock.opened,t.alarm.opened,t.alarm.pending);
+    if(late!=2)printf("TRANSPORT start=%u clock=%u alarm=%u pending=%u\n",(unsigned)r,t.clock.opened,t.alarm.opened,t.alarm.pending);
     CHECK(r==PT_PAULA_SONG_WAITING && t.clock.opened && t.alarm.opened && t.alarm.pending && t.service_alarm.opened && t.service_alarm.pending);
     CHECK(pt_native_paula_transport_signal(&t));
-    if(late) {
+    if(late==2) {
+        struct pt_elapsed_clock observed=t.service_clock;
+        uint64_t frames=0,previous=0,before,after,max_gap=0,max_cost=0;
+        unsigned calls=0,completions=0,primed=0;
+        for(i=0;i<1000000 && frames<24000;++i) {
+            CHECK(pt_native_eclock_read(&t.clock,&ticks,&frequency));
+            CHECK(pt_elapsed_clock_advance(&observed,frequency,ticks,&frames)==PT_ELAPSED_OK);
+            if(frames>=24000)break;
+            if(primed && !CheckIO((struct IORequest *)t.service_alarm.request))continue;
+            if(CheckIO((struct IORequest *)t.service_alarm.request))++completions;
+            before=ticks;
+            if(calls && before-previous>max_gap)max_gap=before-previous;
+            previous=before;++calls;
+            r=pt_native_paula_transport_service(&t);
+            if(r!=PT_PAULA_SONG_WAITING && r!=PT_PAULA_SONG_OK) {
+                printf("CADENCE REFUSED calls=%u completions=%u frames=%lu result=%u max_gap_ticks=%lu frequency=%lu\n",
+                    calls,completions,(unsigned long)frames,(unsigned)r,(unsigned long)max_gap,(unsigned long)frequency);
+                CHECK(0);
+            }
+            if(r==PT_PAULA_SONG_OK)primed=1;
+            CHECK(pt_native_eclock_read(&t.clock,&after,&frequency) && after>=before);
+            if(after-before>max_cost)max_cost=after-before;
+        }
+        printf("CADENCE observed_frames=%lu calls=%u completions=%u loops=%u max_gap_ticks=%lu max_cost_ticks=%lu frequency=%lu\n",
+            (unsigned long)frames,calls,completions,i,(unsigned long)max_gap,(unsigned long)max_cost,(unsigned long)frequency);
+        CHECK(i<1000000 && frames>=24000 && frames<48000 && calls>=100 && completions>=100 && primed);
+    }
+    if(late==1) {
         Delay(60);
         CHECK(pt_native_eclock_read(&t.clock,&ticks,&frequency) && ticks>t.alarm_deadline);
         r=pt_native_paula_transport_service(&t);
@@ -47,4 +74,4 @@ static int fixture(unsigned late)
 #undef CHECK
     return 0;
 }
-int main(void){int r;native_memory_start();r=fixture(0);if(r)return r;r=fixture(1);if(r)return r;native_memory_finish();return 0;}
+int main(void){int r;native_memory_start();r=fixture(0);if(r)return r;r=fixture(1);if(r)return r;r=fixture(2);if(r)return r;native_memory_finish();return 0;}

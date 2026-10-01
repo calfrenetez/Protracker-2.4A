@@ -1,0 +1,3 @@
+AMIGUSTEST schema=1 version=0.6 mode=discover
+SCOPE audio=NOT_TESTED interrupts=NOT_TESTED firmware_write=NO
+SUMMARY result=SKIP reason=library-unavailable cards=0 passed=0 skipped=0 failed=0 rc=5

@@ -419,3 +419,25 @@ separateabsence and connectedidle030return PASS, physicalwindowreleased. See
 `../evidence/enhanced-editor/amigus-quiesce-physical/`. This verifies reset from
 an initially empty, disabled FIFO. It does not establish removal of nonempty
 queued data, FIFOcapacity/ordering, IRQ teardown, acoustic silence or playback.
+
+
+## Disabled six-word FIFO diagnostic (1 October2026)
+
+AmiGUSTest0.6 adds `--idle-fifo`: the same verified Mini identity and exclusive
+PCM access first require disabled playback, cleared playback IRQ mask and zero
+pending words. Exactly three zero-data native long stores at0x0c must report
+2/4/6 pending16-bit words. Every possible write path requires a one-shot reset
+and bounded readback confirmation before release and AHI restoration. Refused
+or unconfirmed reset retains all owners and restoration obligations without retry.
+This diagnostic uses no playback enable, interrupt installation or FIFO capacity
+assumption. Zero data and pending counts do not establish physical sample ordering.
+
+Thirteen host checks and pinned native builds/long-store inspection PASS. Native
+own-memory checks now PASS for ordered long store and six refusal guards, alongside
+existing read/reset checks. Exact0.6 six unavailable-library modes return5, with
+five fixtures returning0. The first independent shared-filesystem cleanup check
+FAILED because four exact empty run directories reappeared. Exact empty-only
+recovery and a separate subsequent independent check PASS; window explicitly
+released. Initial failure preserved, cause unproven. Physical qualification is
+pending. Evidence: `../evidence/enhanced-editor/amigus-fifo-host/` and
+`../evidence/enhanced-editor/amigus-fifo-native/`.

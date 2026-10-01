@@ -7,6 +7,7 @@
 #include <proto/dos.h>
 #define PT_TEST_MIXED_NATIVE_COST
 #define PT_TEST_MIXED_NATIVE_COMPONENTS
+#define PT_TEST_MIXED_NATIVE_READY_COST
 #define PT_TEST_MIXED_NATIVE_CLEAR_COST
 #define PT_TEST_MIXED_EXEC
 #include "mixed_owner_test.c"

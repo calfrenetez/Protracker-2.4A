@@ -6,6 +6,7 @@
 #include "../src/editor/mixed_owner_internal.h"
 #include "../src/editor/paula_internal.h"
 #ifdef PT_TEST_MIXED_NATIVE_COST
+#include "../src/editor/sampler_internal.h"
 #include "../src/core/render_lookahead.h"
 struct mixed_cost_clock {struct pt_native_eclock clock;uint64_t frame,sample_at,first,last;uint32_t frequency;unsigned callbacks;};
 static struct mixed_cost_clock *mixed_cost_active;
@@ -296,6 +297,51 @@ static void owner_fixture(unsigned bits,unsigned mode)
             assert(before<=clock.first && clock.first<=clock.last && clock.last<=after);
             if(mode==59)for(j=0;j<16;++j)assert(output_order[j]==(j<4?1:2));
             printf("NATIVE MIXED COMPONENT complete voices=%u before_first=%lu first_to_last=%lu last_to_return=%lu total=%lu frequency=%lu bits=%u\n",voices,(unsigned long)(clock.first-before),(unsigned long)(clock.last-clock.first),(unsigned long)(after-clock.last),(unsigned long)(after-before),(unsigned long)clock.frequency,bits);
+#ifdef PT_TEST_MIXED_NATIVE_READY_COST
+            {
+                struct pt_paula_voice saved_pv[PT_PAULA_VOICES];struct pt_wavetable_voice saved_av[PT_WAVETABLE_VOICES];
+                unsigned iteration,k,callbacks=clock.callbacks,pins_before=0,pins_after=0;
+                memcpy(saved_pv,pv.voice,sizeof(saved_pv));memcpy(saved_av,av.voice,sizeof(saved_av));
+                for(k=0;k<PT_CACHE_SLOTS;++k)pins_before+=pb.cache.entry[k].pins+f->cache.cache.entry[k].pins;
+                for(iteration=0;iteration<4;++iteration) {
+                    struct pt_pcm source;struct pt_sample_version *pin;const uint8_t *data;size_t bytes;
+                    uint32_t address,wbytes;unsigned sources=0,pvoices=0,wvoices=0;
+                    calls=d.calls;allocs=fast_calls;writes=f->writes;
+                    before=mixed_cost_tick(&clock);
+                    for(k=0;k<doc.project.sample_count;++k)if(sampler.current[k]) {
+                        assert(pt_sampler_pin_current(&sampler,&doc.project,k,sampler.generation,sampler.current[k],&source,&pin)==PT_EDIT_OK);
+                        assert(pin==sampler.current[k]);pt_sampler_unpin(pin);++sources;
+                    }
+                    after=mixed_cost_tick(&clock);
+                    printf("NATIVE MIXED ACCESSOR masters voices=%u total=%lu frequency=%lu bits=%u case=%u count=%u\n",voices,(unsigned long)(after-before),(unsigned long)clock.frequency,bits,iteration,sources);
+                    before=mixed_cost_tick(&clock);assert(pt_sampler_paula_prepared_current(&pb));after=mixed_cost_tick(&clock);
+                    printf("NATIVE MIXED ACCESSOR paula_current voices=%u total=%lu frequency=%lu bits=%u case=%u\n",voices,(unsigned long)(after-before),(unsigned long)clock.frequency,bits,iteration);
+                    before=mixed_cost_tick(&clock);assert(pt_amigus_wavetable_cache_current(&f->cache));after=mixed_cost_tick(&clock);
+                    printf("NATIVE MIXED ACCESSOR amigus_current voices=%u total=%lu frequency=%lu bits=%u case=%u\n",voices,(unsigned long)(after-before),(unsigned long)clock.frequency,bits,iteration);
+                    before=mixed_cost_tick(&clock);
+                    for(k=0;k<PT_PAULA_VOICES;++k)if(pv.voice[k].held) {
+                        assert(!pv.voice[k].uncertain && pt_sampler_paula_prepared_location(&pb,(unsigned)pv.voice[k].track,pv.voice[k].lease,&data,&bytes));
+                        assert(data && bytes);++pvoices;
+                    }
+                    after=mixed_cost_tick(&clock);
+                    printf("NATIVE MIXED ACCESSOR paula_live_locations voices=%u total=%lu frequency=%lu bits=%u case=%u count=%u\n",voices,(unsigned long)(after-before),(unsigned long)clock.frequency,bits,iteration,pvoices);
+                    before=mixed_cost_tick(&clock);
+                    for(k=0;k<PT_WAVETABLE_VOICES;++k)if(av.voice[k].held) {
+                        struct pt_cache_lease lease=av.voice[k].lease;
+                        assert(!av.voice[k].uncertain && pt_cache_data(&f->cache.cache,lease));
+                        assert(f->cache.cache.entry[lease.slot].valid==1 && f->cache.cache.entry[lease.slot].version==ab.version);
+                        assert(pt_amigus_wavetable_cache_location(&f->cache,lease,&address,&wbytes) && wbytes);++wvoices;
+                    }
+                    after=mixed_cost_tick(&clock);
+                    printf("NATIVE MIXED ACCESSOR amigus_live_locations voices=%u total=%lu frequency=%lu bits=%u case=%u count=%u\n",voices,(unsigned long)(after-before),(unsigned long)clock.frequency,bits,iteration,wvoices);
+                    assert(sources==2 && pvoices==(voices==16?4:1) && wvoices==(voices==16?12:1));
+                    assert(d.calls==calls && fast_calls==allocs && f->writes==writes && clock.callbacks==callbacks);
+                    assert(!memcmp(saved_pv,pv.voice,sizeof(saved_pv)) && !memcmp(saved_av,av.voice,sizeof(saved_av)));
+                    pins_after=0;for(k=0;k<PT_CACHE_SLOTS;++k)pins_after+=pb.cache.entry[k].pins+f->cache.cache.entry[k].pins;
+                    assert(pins_after==pins_before && pt_mixed_owner_current(owner)==PT_MIXED_OWNER_OK);
+                }
+            }
+#endif
 #ifdef PT_TEST_MIXED_NATIVE_CLEAR_COST
             {
                 struct pt_render_lookahead *workspace=malloc(sizeof(*workspace));

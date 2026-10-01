@@ -3701,3 +3701,22 @@ Tests cover full sampled-clock song, fractional carry, exact tick deadline/no
 reader calls, once-per-service reads, duplicate/manual refusal, bad reads/changed
 frequency/regression/conversion and future tick overflow, late output and retained
 active-reader cleanup. Native clocks/timers/audio/physical remain untested.
+
+
+## Mixed playback live-accessor cost baseline
+
+Production remains unchanged from `3bbc8ae`. Native read-only diagnostics now
+isolate genuine master retain/unpin, Paula prepared-current, AmiGUS backend-current
+and every active Paula/AmiGUS lease location after a complete mixed commit. Four
+repetitions retain live-voice bytes, cache pin totals, output/allocation/write
+counts, and full owner validity. Host 198 sanitized scenarios pass; native 15
+cases plus 120 accessor observations pass, with all resource release, exact
+cleanup, independent locked guest cleanup, and coordinated release verified.
+
+Four Paula active locations measure 0.482–0.488 ms; twelve AmiGUS locations
+0.867–5.729 ms (outliers retained). These are instrumented emulator accessor
+groups, not whole ready checks, candidate validation, actual timing or audio
+acceptance. Evidence: `evidence/enhanced-editor/mixed-accessor-cost`. Sharing
+bridge metadata validation only within a serialized ready check is the next
+implementation candidate; every per-lease ownership/address check must remain.
+Native PLAY/event-loop/device/IRQ binding and physical acceptance remain open.

@@ -1,0 +1,16 @@
+{
+  "passed": false,
+  "seconds": 6.813374165969435,
+  "window_bound_seconds": 200,
+  "cases": [
+    {
+      "case": "transport",
+      "binary": "PTExecPaulaTransportTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-service-split/build/dev/render-files-1790855287109306000",
+      "sha256": "f4f84b84e6373f330d6ea33367608952feface3eeb9877273af2f62d329b7b4a",
+      "independent_cleanup": true,
+      "passed": false,
+      "runner_rc": 1
+    }
+  ]
+}

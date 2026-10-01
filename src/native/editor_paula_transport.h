@@ -26,8 +26,19 @@ struct pt_native_paula_transport {
      * next successful begin resets diagnostics. No additional clock I/O. */
     enum pt_native_paula_phase phase,failure_phase;
     uint64_t failure_frames,failure_last_frames;
+    /* Diagnostic samples from existing reads only. Mask1=entry,2=core,4=post;
+     * reset per service, retained through cleanup, never used as logical time. */
+    uint64_t entry_ticks,core_ticks,post_ticks,notification_deadline;
+    unsigned observation_mask;
 
 };
+static inline int pt_native_paula_transport_clock_read(void *context,uint64_t *ticks,uint32_t *frequency)
+{
+    struct pt_native_paula_transport *t=context;
+    if(!t || !pt_native_eclock_read(&t->clock,ticks,frequency))return 0;
+    if(t->phase==PT_NATIVE_PAULA_CORE){t->core_ticks=*ticks;t->observation_mask|=2;}
+    return 1;
+}
 static inline int pt_native_paula_transport_release(void *context)
 {
     struct pt_native_paula_transport *t=context;
@@ -70,6 +81,7 @@ static inline enum pt_paula_song_result pt_native_paula_transport_begin(
     if(r==PT_PAULA_SONG_PREPARING) {
         t->failed=t->priming=0;t->phase=t->failure_phase=PT_NATIVE_PAULA_NONE;
         t->failure_frames=t->failure_last_frames=0;
+        t->entry_ticks=t->core_ticks=t->post_ticks=t->notification_deadline=0;t->observation_mask=0;
     }
     return r;
 }
@@ -103,8 +115,11 @@ static inline enum pt_paula_song_result pt_native_paula_transport_observe(
     struct pt_native_paula_transport *t,uint64_t *frames)
 {
     uint64_t ticks;uint32_t frequency;
-    if(!t->service_clock_ready || !pt_native_eclock_read(&t->clock,&ticks,&frequency) ||
-       pt_elapsed_clock_advance(&t->service_clock,frequency,ticks,frames)!=PT_ELAPSED_OK)
+    if(!t->service_clock_ready || !pt_native_eclock_read(&t->clock,&ticks,&frequency))
+        return pt_native_paula_transport_fail(t,PT_PAULA_SONG_CLOCK);
+    if(t->phase==PT_NATIVE_PAULA_ENTRY){t->entry_ticks=ticks;t->observation_mask|=1;}
+    if(t->phase==PT_NATIVE_PAULA_POST){t->post_ticks=ticks;t->observation_mask|=4;}
+    if(pt_elapsed_clock_advance(&t->service_clock,frequency,ticks,frames)!=PT_ELAPSED_OK)
         return pt_native_paula_transport_fail(t,PT_PAULA_SONG_CLOCK);
     if(*frames-t->service_last_frames>256)
         return pt_native_paula_transport_fail(t,PT_PAULA_SONG_DEADLINE);
@@ -148,7 +163,7 @@ static inline enum pt_paula_song_result pt_native_paula_transport_start(
     if(!pt_native_eclock_open(&t->clock) || !pt_native_alarm_open(&t->alarm) || !pt_native_alarm_open(&t->service_alarm))
         return pt_native_paula_transport_fail(t,PT_PAULA_SONG_CLOCK);
     t->phase=PT_NATIVE_PAULA_BEGIN;
-    r=pt_editor_paula_clocked_begin(&t->native.binding,delay_frames,pt_native_eclock_read,&t->clock);
+    r=pt_editor_paula_clocked_begin(&t->native.binding,delay_frames,pt_native_paula_transport_clock_read,t);
     if(r!=PT_PAULA_SONG_OK)return pt_native_paula_transport_fail(t,r);
     t->phase=PT_NATIVE_PAULA_SERVICE_CLOCK;
     if(!pt_native_eclock_read(&t->clock,&ticks,&frequency) ||
@@ -163,6 +178,7 @@ static inline enum pt_paula_song_result pt_native_paula_transport_service(struct
     uint64_t deadline,frames;enum pt_paula_song_result r,armed;enum pt_alarm_result alarm;
     if(!t || !t->native.active || !t->started || t->failed)return PT_PAULA_SONG_INVALID;
     if(t->done)return PT_PAULA_SONG_DONE;
+    t->observation_mask=0;t->notification_deadline=t->service_deadline;
     t->phase=PT_NATIVE_PAULA_ENTRY;
     r=pt_native_paula_transport_observe(t,&frames);if(r!=PT_PAULA_SONG_OK)return r;
     t->service_last_frames=frames;

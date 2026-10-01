@@ -1,0 +1,22 @@
+/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-service-split/build/dev/render-files-1790855287109306000
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-service-split/tools/shared_infra_render_files.py", line 406, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-service-split/tools/shared_infra_render_files.py", line 337, in main
+    assert result[name+'_returncode']=='0' and marker in log,log
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: EXEC MEMORY pool_limit=131103528 reserve=262144 flags=4
+TRANSPORT start=9 clock=1 alarm=1 pending=1
+PAULA TRANSPORT PASS: case=0 private clock/alarm and editor/device cleanup; no WRITE/cadence/listening claim
+TRANSPORT start=9 clock=1 alarm=1 pending=1
+TRANSPORT late=11
+PAULA TRANSPORT PASS: case=1 private clock/alarm and editor/device cleanup; no WRITE/cadence/listening claim
+UNBOUND STARTUP calls=27 no timer epoch or WRITE before readiness
+CADENCE REFUSED calls=21 completions=21 frames=2688 result=11 max_gap_ticks=2036 frequency=709379
+CADENCE STAGE=11 service_frames=2812 last_frames=2747 observed_cost_ticks=1826 max_prior_cost_ticks=1578 periodic_observed_ticks=289873423 periodic_target_ticks=289873396
+CADENCE readiness=1 prime_calls=0 ready_calls=21 max_prime_cost_ticks=0 max_ready_cost_ticks=1578
+CADENCE SPLIT mask=7 entry_to_core_ticks=352 core_to_post_ticks=610 notification_lag_ticks=873 max_entry_to_core_ticks=352 max_core_to_post_ticks=858 max_notification_lag_ticks=873
+PAULA TRANSPORT FAIL case=2 line=74
+EXEC MEMORY PASS: 27 Fast allocations, zero owned bytes, budget refusal without Chip fallback
+

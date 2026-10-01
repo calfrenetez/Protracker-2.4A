@@ -74,6 +74,15 @@ calls before a POST overrun of1076>256frames. That diagnostic remains FAILED;
 it does not establish the cause or stable cadence. Both alarm/audio/master cleanup,
 zero owned Fast bytes and independent DMA-off/path cleanup pass separately.
 See `evidence/enhanced-editor/paula-unbound-prime/`.
+Subsequent native timing snapshots use only existing entry/core/post reads and
+retain validity through cleanup. Current staged-source host checks pass, including
+exact read counts and injected work refusal. Earlier native host priming claims
+used the preceding index; the unbound-prime README records that provenance
+correction. A distinct service-split diagnostic remains FAILED atPERIODIC_ARM:
+27ticks late while post-work elapsed debt was65frames, within256. This narrows that
+refusal, without proving identical timing or root cause; all-resource/Fast-zero and
+independent cleanup pass separately. See `evidence/enhanced-editor/paula-service-split/`.
+
 
 See `evidence/enhanced-editor/paula-service-counter/`. Native periodic cadence
 feasibility and frontend PLAY/Wait wiring remain open, as do listening acceptance

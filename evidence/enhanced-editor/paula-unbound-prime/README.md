@@ -39,3 +39,16 @@ before27Fast allocations end withzero owned bytes. Exactrun/launcher cleanup and
 independent subsequent shared-locked running/bridge68030/all4DMAoff/pathabsence
 pass. Explicit RELEASE sent after proof. Resource closure is separate from FAILED
 cadence. Previous results, strict thresholds and immutable epochs preserved.
+
+## Host-source provenance correction — following service-split development
+
+The native transport/editor Python tests export the Git index. The historical
+17.613s native test ran before staging the unbound-prime changes and therefore
+validated the preceding indexed native source, not this candidate's new native
+start contract. PaulaSong uses direct working-tree sources and did validate the
+new core prime. Native candidate build and guest failure/cleanup evidence remain
+exact-byte evidence. A subsequent staged-source run discovered a cumulative
+fixture timer-counter assertion against zero; corrected to compare per-fixture
+baselines. Current native transport/priming, native editor, EClock and song checks
+pass in the distinct service-split evidence; do not use the earlier native host
+pass as fresh source qualification of this unbound-prime candidate.

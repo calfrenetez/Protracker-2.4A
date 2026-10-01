@@ -29,6 +29,7 @@ static unsigned alarm_slot(struct IORequest *q)
 static int alarm_live(struct IORequest *q){return alarm_io[0]==q || alarm_io[1]==q;}
 static unsigned timer_ports,timer_requests,timer_opens,timer_reads,timer_sends,timer_waits,timer_aborts;
 static unsigned timer_hold_abort,timer_fail_open;
+static unsigned timer_jump_read;static uint64_t timer_jump_ticks;
 static uint64_t timer_now,timer_read_cost;static ULONG timer_rate=48000;
 struct MsgPort *CreateMsgPort(void){struct MsgPort *p=calloc(1,sizeof(*p));assert(p);p->mp_SigBit=6+timer_ports;++timer_ports;return p;}
 void DeleteMsgPort(struct MsgPort *p){assert(timer_ports);--timer_ports;free(p);}
@@ -41,7 +42,7 @@ void SendIO(struct IORequest *q){unsigned i;assert(q->io_Device==&timer);for(i=0
 struct IORequest *CheckIO(struct IORequest *q){unsigned i=alarm_slot(q);struct timerequest *r=(struct timerequest *)q;uint64_t deadline=((uint64_t)r->tr_time.tv_secs<<32)|r->tr_time.tv_micro;return alarm_ready[i] || (!q->io_Error && timer_now>=deadline)?q:NULL;}
 LONG WaitIO(struct IORequest *q){unsigned i=alarm_slot(q);assert(CheckIO(q));alarm_io[i]=NULL;++timer_waits;return q->io_Error;}
 LONG AbortIO(struct IORequest *q){unsigned i=alarm_slot(q);assert(!CheckIO(q));++timer_aborts;q->io_Error=IOERR_ABORTED;if(!timer_hold_abort)alarm_ready[i]=1;return 0;}
-ULONG fake_read(struct Device *d,struct EClockVal *v){assert(d==&timer && timer_opens);++timer_reads;v->ev_hi=(ULONG)(timer_now>>32);v->ev_lo=(ULONG)timer_now;timer_now+=timer_read_cost;return timer_rate;}
+ULONG fake_read(struct Device *d,struct EClockVal *v){assert(d==&timer && timer_opens);++timer_reads;v->ev_hi=(ULONG)(timer_now>>32);v->ev_lo=(ULONG)timer_now;timer_now+=timer_read_cost;if(timer_reads==timer_jump_read)timer_now+=timer_jump_ticks;return timer_rate;}
 static unsigned chip_owned;
 ULONG AvailMem(ULONG f){assert(f==MEMF_CHIP);return 512UL*1024+32;}
 void *AllocMem(ULONG size,ULONG f){assert(size==32 && f==(MEMF_CHIP|MEMF_PUBLIC) && !chip_owned);chip_owned=1;return chip.bytes;}
@@ -54,8 +55,8 @@ static void fixture(unsigned mode)
 {
     struct pt_allocator a={NULL,fast_alloc,fast_free};struct pt_document doc;
     struct pt_editor *ed=malloc(sizeof(*ed));struct pt_native_paula_transport t={0};
-    struct pt_render_options o={0};int32_t pcm[32]={0};unsigned i,n;enum pt_paula_song_result r;
-    reset();timer_read_cost=0;timer_now=1000;timer_rate=mode==5?700001:48000;timer_fail_open=0;timer_hold_abort=0;assert(ed);
+    struct pt_render_options o={0};int32_t pcm[32]={0};unsigned i,n,initial_reads=timer_reads,initial_sends=timer_sends;enum pt_paula_song_result r;
+    reset();timer_jump_read=0;timer_jump_ticks=0;timer_read_cost=0;timer_now=1000;timer_rate=mode==5?700001:48000;timer_fail_open=0;timer_hold_abort=0;assert(ed);
     pt_document_init(&doc,&a);assert(pt_document_new(&doc,4,SIZE_MAX)==PT_PROJECT_OK);
     doc.project.samples[0].pcm=(struct pt_pcm){pcm,32,32,8000,1,24};doc.project.samples[0].volume=64;
     doc.project.events[0]=(struct pt_event){428,0,PT_NOTE_PERIOD,1,0,0,0,0};
@@ -69,7 +70,7 @@ static void fixture(unsigned mode)
     i=0;do {
         r=pt_native_paula_transport_start(&t,1000);assert(++i<2000);
         if(r==PT_PAULA_SONG_PREPARING) {
-            assert(!timer_opens && !timer_ports && !timer_reads && !timer_sends && !(dma&15));
+            assert(!timer_opens && !timer_ports && timer_reads==initial_reads && timer_sends==initial_sends && !(dma&15));
             assert(!t.started && !t.service_clock_ready);
         }
     }while(r==PT_PAULA_SONG_PREPARING);
@@ -78,11 +79,22 @@ static void fixture(unsigned mode)
     assert(r==PT_PAULA_SONG_WAITING && timer_sends && pt_native_paula_transport_signal(&t)==((1UL<<7)|(1UL<<8)));
     n=timer_sends;for(i=0;i<100;++i){r=pt_native_paula_transport_service(&t);assert(r==PT_PAULA_SONG_WAITING || r==PT_PAULA_SONG_OK);}
     assert(!t.native.engine.output.held[0] && timer_sends==n);
+    if(mode==9) {
+        timer_now=1128;timer_jump_read=timer_reads+2;timer_jump_ticks=300;n=timer_reads;
+        assert(pt_native_paula_transport_service(&t)==PT_PAULA_SONG_DEADLINE && timer_reads==n+3);
+        assert(t.failure_phase==PT_NATIVE_PAULA_POST && t.observation_mask==7);
+        assert(t.entry_ticks==1128 && t.core_ticks==1128 && t.post_ticks==1428 && t.notification_deadline==1128);
+        finish(&t,ed,&doc);
+        assert(t.observation_mask==7 && t.entry_ticks==1128 && t.core_ticks==1128 && t.post_ticks==1428);return;
+    }
     if(mode==8) {
         /* The observed gap stays within256frames, but work crosses the next
          *128-frame arm threshold. Refuse; never submit an already-late alarm. */
+        unsigned reads=timer_reads;
         timer_now=1128;timer_read_cost=90;n=timer_sends;
         assert(pt_native_paula_transport_service(&t)==PT_PAULA_SONG_DEADLINE);
+        assert(timer_reads==reads+4 && t.observation_mask==7);
+        assert(t.entry_ticks==1128 && t.core_ticks==1218 && t.post_ticks==1308 && t.notification_deadline==1128);
         assert(t.failure_phase==PT_NATIVE_PAULA_PERIODIC_ARM && t.failure_frames==308 && t.failure_last_frames==128);
         assert(t.service_clock.frames==308 && timer_sends==n && !t.native.engine.output.held[0]);
         assert(pt_native_paula_transport_service(&t)==PT_PAULA_SONG_INVALID);
@@ -99,7 +111,9 @@ static void fixture(unsigned mode)
     }
     if(mode==6 || mode==7) {
         if(mode==6)++timer_rate;else --timer_now;
+        n=timer_reads;
         assert(pt_native_paula_transport_service(&t)==PT_PAULA_SONG_CLOCK);
+        assert(timer_reads==n+1 && t.observation_mask==1);
         assert(!t.native.engine.output.held[0]);finish(&t,ed,&doc);return;
     }
     if(mode==3) {
@@ -129,4 +143,4 @@ static void fixture(unsigned mode)
     assert(pt_native_paula_transport_service(&t)==PT_PAULA_SONG_INVALID);
     finish(&t,ed,&doc);
 }
-int main(void){fixture(0);fixture(1);fixture(2);fixture(3);fixture(4);fixture(5);fixture(6);fixture(7);fixture(8);puts("NATIVE PAULA TRANSPORT HOST PASS: dual private alarms, fractional periodic grid, exact prepared start, bounded preparation, starvation/clock refusal, partial open and retained DMA/timer-abort editor barrier");return 0;}
+int main(void){fixture(0);fixture(1);fixture(2);fixture(3);fixture(4);fixture(5);fixture(6);fixture(7);fixture(8);fixture(9);puts("NATIVE PAULA TRANSPORT HOST PASS: dual private alarms, fractional periodic grid, exact prepared start, bounded preparation, starvation/clock refusal, partial open and retained DMA/timer-abort editor barrier");return 0;}

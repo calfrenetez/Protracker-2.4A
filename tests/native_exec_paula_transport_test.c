@@ -39,6 +39,7 @@ static int fixture(unsigned late)
         struct pt_elapsed_clock observed=t.service_clock;
         uint64_t frames=0,previous=0,before,after,max_gap=0,max_cost=0,max_prime_cost=0,max_ready_cost=0;
         unsigned calls=0,completions=0,primed=1,was_primed,prime_calls=0,ready_calls=0;
+        uint64_t to_core=0,to_post=0,notify_lag=0,max_to_core=0,max_to_post=0,max_notify_lag=0;
         for(i=0;i<1000000 && frames<24000;++i) {
             CHECK(pt_native_eclock_read(&t.clock,&ticks,&frequency));
             CHECK(pt_elapsed_clock_advance(&observed,frequency,ticks,&frames)==PT_ELAPSED_OK);
@@ -50,6 +51,12 @@ static int fixture(unsigned late)
             previous=before;++calls;
             was_primed=primed;if(was_primed)++ready_calls;else ++prime_calls;
             r=pt_native_paula_transport_service(&t);
+            to_core=(t.observation_mask&3)==3 && t.core_ticks>=t.entry_ticks?t.core_ticks-t.entry_ticks:0;
+            to_post=(t.observation_mask&6)==6 && t.post_ticks>=t.core_ticks?t.post_ticks-t.core_ticks:0;
+            notify_lag=(t.observation_mask&1) && t.entry_ticks>=t.notification_deadline?t.entry_ticks-t.notification_deadline:0;
+            if(to_core>max_to_core)max_to_core=to_core;
+            if(to_post>max_to_post)max_to_post=to_post;
+            if(notify_lag>max_notify_lag)max_notify_lag=notify_lag;
             if(r!=PT_PAULA_SONG_WAITING && r!=PT_PAULA_SONG_OK) {
                 printf("UNBOUND STARTUP calls=%u no timer epoch or WRITE before readiness\n",startup_calls);
                 printf("CADENCE REFUSED calls=%u completions=%u frames=%lu result=%u max_gap_ticks=%lu frequency=%lu\n",
@@ -61,6 +68,9 @@ static int fixture(unsigned late)
                     (unsigned long)t.service_alarm.attempted_deadline);
                 printf("CADENCE readiness=%u prime_calls=%u ready_calls=%u max_prime_cost_ticks=%lu max_ready_cost_ticks=%lu\n",
                     was_primed,prime_calls,ready_calls,(unsigned long)max_prime_cost,(unsigned long)max_ready_cost);
+                printf("CADENCE SPLIT mask=%u entry_to_core_ticks=%lu core_to_post_ticks=%lu notification_lag_ticks=%lu max_entry_to_core_ticks=%lu max_core_to_post_ticks=%lu max_notification_lag_ticks=%lu\n",
+                    t.observation_mask,(unsigned long)to_core,(unsigned long)to_post,(unsigned long)notify_lag,
+                    (unsigned long)max_to_core,(unsigned long)max_to_post,(unsigned long)max_notify_lag);
                 CHECK(0);
             }
             if(r==PT_PAULA_SONG_OK)primed=1;
@@ -72,6 +82,8 @@ static int fixture(unsigned late)
         printf("UNBOUND STARTUP calls=%u no timer epoch or WRITE before readiness\n",startup_calls);
         printf("CADENCE observed_frames=%lu calls=%u completions=%u loops=%u max_gap_ticks=%lu max_cost_ticks=%lu frequency=%lu\n",
             (unsigned long)frames,calls,completions,i,(unsigned long)max_gap,(unsigned long)max_cost,(unsigned long)frequency);
+        printf("CADENCE SPLIT max_entry_to_core_ticks=%lu max_core_to_post_ticks=%lu max_notification_lag_ticks=%lu\n",
+            (unsigned long)max_to_core,(unsigned long)max_to_post,(unsigned long)max_notify_lag);
         CHECK(i<1000000 && frames>=24000 && frames<48000 && calls>=100 && completions>=100 && primed);
     }
     if(late==1) {

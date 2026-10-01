@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "seconds": 5.78090837498894,
+  "window_bound_seconds": 200,
+  "cases": [
+    {
+      "case": "paula-wait-priority",
+      "binary": "PTExecPaulaWaitPriorityTest",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/native-paula-wait-priority/build/dev/render-files-1790860887200528000",
+      "sha256": "5c0d49b7ff377066101838f7b5dee6dfdb60c0854e6bca2f37a8d022fe53d909",
+      "independent_cleanup": true,
+      "passed": true,
+      "runner_rc": 0
+    }
+  ]
+}

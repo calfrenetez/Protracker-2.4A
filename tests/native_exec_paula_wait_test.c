@@ -1,5 +1,6 @@
 #include "native_exec_memory.h"
 #include "../src/native/paula_pump.h"
+#include "../src/native/task_priority.h"
 #include <proto/dos.h>
 #include <exec/tasks.h>
 #include <string.h>
@@ -22,6 +23,7 @@ static int fixture(unsigned mode)
     struct pt_native_paula_transport t={0};struct pt_native_paula_pump pump={0};
     struct pt_native_alarm termination={0};struct pt_native_eclock diagnostic={0};struct pt_render_options o={0};
     struct Task *task=FindTask(NULL);BYTE priority=task?task->tc_Node.ln_Pri:0;
+    struct pt_native_task_priority scope={0};
     ULONG original_signals=task?task->tc_SigAlloc:0;
     enum pt_paula_song_result r;enum pt_native_pump_result pr=PT_NATIVE_PUMP_INVALID;
     unsigned initialized=0,attached=0,i,starts=0,calls=0,work=0,wakes=0;int result=0;
@@ -40,6 +42,9 @@ static int fixture(unsigned mode)
     CHECK(pt_native_paula_transport_begin(&t,&o,32)==PT_PAULA_SONG_PREPARING);
     i=0;do{CHECK(!(SetSignal(0,0)&SIGBREAKF_CTRL_C));r=pt_native_editor_paula_advance(&t.native,NULL);CHECK(++i<100);if(r==PT_PAULA_SONG_PREPARING && !t.native.engine.ready)Delay(1);}while(r==PT_PAULA_SONG_PREPARING);
     CHECK(r==PT_PAULA_SONG_OK);
+#ifdef PT_NATIVE_PAULA_WAIT_SCOPED_PRIORITY
+    if(mode==2)CHECK(pt_native_task_priority_acquire(&scope,PT_NATIVE_PAULA_WAIT_SCOPED_PRIORITY) && scope.task==task && scope.saved==priority);
+#endif
     i=0;do {
         CHECK(!(SetSignal(0,0)&SIGBREAKF_CTRL_C));r=pt_native_paula_transport_start(&t,48000);CHECK(++i<2000);
         if(r==PT_PAULA_SONG_PREPARING) {
@@ -97,6 +102,8 @@ static int fixture(unsigned mode)
         (unsigned long)termination.observed_ticks,(unsigned long)termination.attempted_deadline);
     /* Every exit retains task/context/storage until BOTH owner and separate
      * termination IO close. Never force-free or retry a stuck foreign call. */
+    if(!pt_native_task_priority_restore(&scope))return hold(25,"own priority restoration unresolved");
+    if(scope.task)printf("WAIT PRIORITY requested=%d saved=%d restored=%d own_identity=%u active=%u\n",5,(int)scope.saved,(int)task->tc_Node.ln_Pri,FindTask(NULL)==scope.task,scope.active);
     if(FindTask(NULL)!=task || !task || task->tc_Node.ln_Pri!=priority)return hold(25,"task/priority identity unresolved");
     for(i=0;i<50 && !pt_native_paula_pump_close(&pump);++i)Delay(1);
     if(i==50)return hold(21,"pump cleanup unresolved");

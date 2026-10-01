@@ -61,7 +61,7 @@ def main():
     group.add_argument('--capture-session-memory',action='store_true',help='Run injected recording ownership and stop/quiescence with native Fast allocator; no device input')
     group.add_argument('--amigus-capture-memory',action='store_true',help='Run injected recording PCM/interrupt ownership with native Fast allocator; no card input')
     group.add_argument('--editor-capture-memory',action='store_true',help='Run editor recording barriers and publication with native Fast allocator; no device input')
-    group.add_argument('--paula-memory',choices=['cache','voices','preflight','mixed','mixed-owner','dispatch','song','editor','editor-mixed','reservation','output','output-diagnostic','engine','prepared-output','transport','wait','wait-latency','wait-priority'],help='Run routed Paula ownership/capability with native allocators and injected readers; no DMA')
+    group.add_argument('--paula-memory',choices=['cache','voices','preflight','mixed','mixed-owner','dispatch','song','editor','editor-mixed','reservation','output','output-diagnostic','engine','prepared-output','transport','wait','wait-latency','wait-priority','paula-wait-priority'],help='Run routed Paula ownership/capability with native allocators and injected readers; no DMA')
     group.add_argument('--sample-dispatch',action='store_true',help='Check bounded sample dispatch and24-bit precision with Exec allocator')
     group.add_argument('--source-memory',action='store_true',help='Run donor ownership/failure/undo checks with native Fast allocator')
     group.add_argument('--mod-import',action='store_true',help='Run bounded MOD document load with native Fast allocator')
@@ -94,7 +94,7 @@ def main():
     with (INFRA/'runtime/test.lock').open('a') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         guest=Guest(INFRA,out)
-        if args.paula_memory in ('output','output-diagnostic','engine','prepared-output','transport','wait','wait-latency','wait-priority'):
+        if args.paula_memory in ('output','output-diagnostic','engine','prepared-output','transport','wait','wait-latency','wait-priority','paula-wait-priority'):
             audio=guest.command('GET_AUDIO_STATE')
             (out/'audio-before-staging.json').write_text(json.dumps({'audio':audio},indent=2)+'\n')
             if not all('ch%d_dma=0'%i in audio.split('\t') for i in range(4)):
@@ -150,15 +150,16 @@ def main():
                     'wait':('paula-wait','PTExecPaulaWaitTest','PAULA WAIT PASS:'),
                     'wait-latency':('wait-latency','PTExecWaitLatencyTest','WAIT LATENCY PASS:'),
                     'wait-priority':('wait-priority','PTExecWaitPriorityTest','WAIT LATENCY PASS:'),
+                    'paula-wait-priority':('paula-wait-priority','PTExecPaulaWaitPriorityTest','PAULA WAIT PASS:'),
                     'engine':('paula-engine','PTExecPaulaEngineTest','PAULA ENGINE PASS:'),
                     'output-diagnostic':('paula-output-diagnostic','PTExecPaulaOutputDiagnostic','PAULA OUTPUT DIAGNOSTIC PASS:')}[args.paula_memory]]
             result['scope']='shared030 routed Paula '+args.paula_memory+' with native allocators and injected callbacks; no native DMA/output'
-            if args.paula_memory in ('output','output-diagnostic','engine','prepared-output','transport','wait','wait-latency','wait-priority'):
+            if args.paula_memory in ('output','output-diagnostic','engine','prepared-output','transport','wait','wait-latency','wait-priority','paula-wait-priority'):
                 result['scope']='shared030 actual audio.device acknowledged silent WRITE/DMA, control, confirmed stop and Chip/channel/IO release; no listening/timing/physical claim'
             if args.paula_memory=='transport':
                 result['scope']='shared030 private timer/editor/device lifetime, cancellation and deliberately late startup refusal; zero24 master; no WRITE/cadence/frontend/listening/physical acceptance'
-            if args.paula_memory=='wait':
-                result['scope']='shared030 ambient-task private Wait/termination/retained-cleanup before musical start; zero24 master; no WRITE/output/frontend/listening/physical acceptance'
+            if args.paula_memory in ('wait','paula-wait-priority'):
+                result['scope']='shared030 private Wait/termination/retained-cleanup with exact own-priority scope reported before musical start; zero24 master; no WRITE/output/frontend/listening/physical acceptance'
             if args.paula_memory in ('wait-latency','wait-priority'):
                 result['scope']='shared030 isolated private Wait/timer actual-clock latency with exact own-priority scope reported; no song/cache/device/output/frontend/listening/physical acceptance'
             if args.paula_memory=='prepared-output':
@@ -325,7 +326,7 @@ def main():
                 if not all('ch%d_dma=0'%i in state.split('\t') for i in range(4)):
                     raise RuntimeError('Cleanup probe left active or unknown DMA; functional test not started')
             require_running_guest(guest,out,'before-launch')
-            if args.paula_memory in ('output','output-diagnostic','engine','prepared-output','transport','wait','wait-latency','wait-priority'):
+            if args.paula_memory in ('output','output-diagnostic','engine','prepared-output','transport','wait','wait-latency','wait-priority','paula-wait-priority'):
                 audio=guest.command('GET_AUDIO_STATE')
                 (out/'audio-before-launch.json').write_text(json.dumps({'audio':audio},indent=2)+'\n')
                 if not all('ch%d_dma=0'%i in audio.split('\t') for i in range(4)):

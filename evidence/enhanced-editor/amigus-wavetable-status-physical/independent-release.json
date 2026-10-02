@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "scope": "Subsequent independent original idle emulator and completed physical release evidence check",
+  "processes": [
+    [
+      19081,
+      "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+    ]
+  ],
+  "physical_directory": "RAM:ptg-discovery-physical-amigus-ownership-1790982188208138000",
+  "physical_separate_absence_acknowledged": true,
+  "environment": {
+    "profile": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae",
+    "share": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests"
+  },
+  "status": "OK\tPaused=false\tConfig=autosave",
+  "cpu": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+  "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=833\tsndbuf_status=0"
+}

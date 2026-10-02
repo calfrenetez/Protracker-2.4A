@@ -1,0 +1,11 @@
+WAVETABLE-PROBE version=0.9 scope=Mini-7ea663e7-global-status writes=NO bank_select=NO audio=NOT_TESTED capacity=NOT_QUALIFIED voices_stopped=NOT_QUALIFIED
+WAVETABLE STATUS offset=0x00 value=0x0000
+WAVETABLE STATUS offset=0x02 value=0x0000
+WAVETABLE STATUS offset=0x04 value=0x0000
+WAVETABLE STATUS offset=0x06 value=0x0000
+WAVETABLE STATUS offset=0x08 value=0x0000
+WAVETABLE STATUS offset=0x0a value=0x0000
+WAVETABLE STATUS offset=0x0c value=0x0000
+WAVETABLE STATUS offset=0x0e value=0x0000
+WAVETABLE RELEASE confirmed=1 retained=0 driver=0x00000000
+WAVETABLE result=PASS reason=observed reads=8 rc=0

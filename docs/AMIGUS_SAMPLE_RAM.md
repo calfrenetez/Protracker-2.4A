@@ -588,6 +588,10 @@ exact shared030 run `render-files-1790931158760994000` passes the reader fixture
 RC0 and real missing-library mode RC5. Its initial independent cleanup failure is
 preserved alongside separately guarded empty-directory recovery and final
 independent release checks. See `../evidence/enhanced-editor/amigus-wavetable-status/`.
-Physical status qualification remains pending fresh ownership/recovery guards;
-another task's failed playback and temporary mute have not been cleared by these
-emulator results.
+Separate realMini run1790982188208138000 now passes eight global reads (all0000)
+and positively confirmed own release, exact RAM cleanup, separate physical
+absence, unchanged idle emulator return and independent release check. Safari
+remained View Only with no control taken. See
+`../evidence/enhanced-editor/amigus-wavetable-status-physical/`. This does not clear
+another task's playback/listening gate or qualify sample-RAM capacity, transfer
+completion/order, all-voice stop or audio. No sample upload occurred.

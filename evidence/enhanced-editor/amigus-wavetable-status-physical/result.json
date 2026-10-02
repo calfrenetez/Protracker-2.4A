@@ -1,0 +1,197 @@
+{
+  "passed": true,
+  "target": "real-a1200",
+  "scope": "Eight read-only global Mini wavetable IRQ/mask words and confirmed own release; no writes/bank selection/AHI unload/capacity/voice-stop/audio acceptance",
+  "binary_sha256": "076b2e53289bd4cf728657a53d17fa3007a3a768a68d9f10f6e943ebb9320119",
+  "emulator_evidence": "build/dev/render-files-1790931158760994000/result.json",
+  "independent_emulator_cleanup": "build/dev/wavetable-independent-1790931541417759000/result.json",
+  "emulator_process_before": [
+    [
+      19081,
+      "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+    ]
+  ],
+  "current_physical_scope": "Human resumed development/testing; distinct readonly status0.9 only; no playback retry",
+  "emulator_environment": {
+    "profile": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae",
+    "share": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests"
+  },
+  "emulator_before": "OK\tPaused=false\tConfig=autosave",
+  "audio_before": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0",
+  "target_switch_attempted": true,
+  "physical_target": {
+    "connected": true,
+    "mode": "tcp",
+    "logCount": 518,
+    "varCount": 0,
+    "lastHeartbeat": {
+      "type": "HB",
+      "tick": 2787,
+      "freeChip": 1926976,
+      "freeFast": 131620880,
+      "timestamp": "2026-10-02T23:03:06.173082+00:00"
+    },
+    "serialConnectedAt": 1790982189.9992478,
+    "lastBridgeMessageAt": 1790982190.206847,
+    "lastHeartbeatAt": null,
+    "bridgeSilentSec": 0.0,
+    "host": "192.168.0.156",
+    "port": 2345
+  },
+  "guest_directory": "RAM:ptg-discovery-physical-amigus-ownership-1790982188208138000",
+  "calls": [
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Version\nCPU\nAvail\nVersion bsdsocket.library\nShowNetStatus\nEcho PTG-IDENTITY-DONE\n",
+        "timeout": 20
+      },
+      "result": "[OK]\nKickstart 47.115, Workbench 47.5\nSystem: 68030  68030-MMU no FastROM (INST: Cache Burst) (DATA: Cache NoBurst)\nType  Available    In-Use   Maximum   Largest\nchip    1939960    153096   2093056   1931832\nfast  129744880   3424272 133169152 128559592\ntotal 131684840   3577368 135262208 128559592\nbsdsocket.library 4.364\nNetwork status summary\nLocal host address         = 192.168.0.156 (on interface 'plipbox')\nDefault gateway address    = 192.168.0.1\nDomain name system servers = 192.168.0.1, 192.168.0.1\nPTG-IDENTITY-DONE"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Work:AmigaDev-20260923/amiga-bridge"
+      },
+      "result": "File: Work:AmigaDev-20260923/amiga-bridge\nCRC32: D75C2355\nSize: 150192 bytes"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "LIBS:amigus.library"
+      },
+      "result": "File: LIBS:amigus.library\nCRC32: 8B0D4B22\nSize: 4772 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "MakeDir RAM:ptg-discovery-physical-amigus-ownership-1790982188208138000\nIf WARN\n Quit 20\nEndIf\nEcho PTG-DIRECTORY-CREATED\n",
+        "timeout": 20
+      },
+      "result": "[OK]\nPTG-DIRECTORY-CREATED"
+    },
+    {
+      "tool": "amiga_push_file",
+      "arguments": {
+        "local_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/physical-amigus-ownership-1790982188208138000/AmiGUSTest",
+        "amiga_path": "RAM:ptg-discovery-physical-amigus-ownership-1790982188208138000/AmiGUSTest"
+      },
+      "result": "Transferred 27916 bytes in 8.6s (3256 B/s), 28 chunks, CRC32 verified"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "RAM:ptg-discovery-physical-amigus-ownership-1790982188208138000/AmiGUSTest"
+      },
+      "result": "File: RAM:ptg-discovery-physical-amigus-ownership-1790982188208138000/AmiGUSTest\nCRC32: 218BC976\nSize: 27916 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "FailAt 21\nStack 65536\nCD RAM:ptg-discovery-physical-amigus-ownership-1790982188208138000\nAmiGUSTest --wavetable-status >discovery.log\nEcho PTG-DISCOVERY-RC $RC\nCD RAM:\nEcho PTG-DISCOVERY-DONE\n",
+        "timeout": 45
+      },
+      "result": "[OK]\nPTG-DISCOVERY-RC 0\nPTG-DISCOVERY-DONE"
+    },
+    {
+      "tool": "amiga_pull_file",
+      "arguments": {
+        "amiga_path": "RAM:ptg-discovery-physical-amigus-ownership-1790982188208138000/discovery.log",
+        "local_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/physical-amigus-ownership-1790982188208138000/discovery.log"
+      },
+      "result": "Downloaded 602 bytes in 0.4s (1665 B/s), 1 chunks, CRC32 verified"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "CD RAM:\nIf EXISTS RAM:ptg-discovery-physical-amigus-ownership-1790982188208138000/AmiGUSTest\n Delete RAM:ptg-discovery-physical-amigus-ownership-1790982188208138000/AmiGUSTest\n If WARN\n  Quit 20\n EndIf\nEndIf\nIf EXISTS RAM:ptg-discovery-physical-amigus-ownership-1790982188208138000/discovery.log\n Delete RAM:ptg-discovery-physical-amigus-ownership-1790982188208138000/discovery.log\n If WARN\n  Quit 20\n EndIf\nEndIf\nDelete RAM:ptg-discovery-physical-amigus-ownership-1790982188208138000\nIf WARN\n Quit 20\nEndIf\nIf EXISTS RAM:ptg-discovery-physical-amigus-ownership-1790982188208138000\n Quit 20\nEndIf\nEcho PTG-CLEANUP-ABSENT\n",
+        "timeout": 20
+      },
+      "result": "[OK]\nRAM:ptg-discovery-physical-amigus-ownership-1790982188208138000/AmiGUSTest  Deleted\nRAM:ptg-discovery-physical-amigus-ownership-1790982188208138000/discovery.log  Deleted\nRAM:ptg-discovery-physical-amigus-ownership-1790982188208138000  Deleted\nPTG-CLEANUP-ABSENT"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:ptg-discovery-physical-amigus-ownership-1790982188208138000\n Quit 20\nEndIf\nEcho PTG-INDEPENDENT-ABSENCE\n",
+        "timeout": 20
+      },
+      "result": "[OK]\nPTG-INDEPENDENT-ABSENCE"
+    }
+  ],
+  "script_pending": false,
+  "identity": "[OK]\nKickstart 47.115, Workbench 47.5\nSystem: 68030  68030-MMU no FastROM (INST: Cache Burst) (DATA: Cache NoBurst)\nType  Available    In-Use   Maximum   Largest\nchip    1939960    153096   2093056   1931832\nfast  129744880   3424272 133169152 128559592\ntotal 131684840   3577368 135262208 128559592\nbsdsocket.library 4.364\nNetwork status summary\nLocal host address         = 192.168.0.156 (on interface 'plipbox')\nDefault gateway address    = 192.168.0.1\nDomain name system servers = 192.168.0.1, 192.168.0.1\nPTG-IDENTITY-DONE",
+  "bridge_sha256": "e5c8b4ad13776e59d7792c00b0ea664ca2e4f47fe0a2478ef133839b40f2df8c",
+  "installed_library_sha256": "56551f67ca20f0cc9b61177bb59ff8f0a1a9c558ad1498324367c1aaa4ed8596",
+  "directory_created": true,
+  "ownership_release_pending": false,
+  "execution_finished": true,
+  "discovery_passed": true,
+  "wavetable_status": {
+    "registers": [
+      {
+        "offset": 0,
+        "value": 0
+      },
+      {
+        "offset": 2,
+        "value": 0
+      },
+      {
+        "offset": 4,
+        "value": 0
+      },
+      {
+        "offset": 6,
+        "value": 0
+      },
+      {
+        "offset": 8,
+        "value": 0
+      },
+      {
+        "offset": 10,
+        "value": 0
+      },
+      {
+        "offset": 12,
+        "value": 0
+      },
+      {
+        "offset": 14,
+        "value": 0
+      }
+    ],
+    "capacity_qualified": false,
+    "voices_stopped_qualified": false
+  },
+  "run_files_cleaned": true,
+  "independent_cleanup_passed": true,
+  "returned_target": {
+    "connected": true,
+    "mode": "tcp",
+    "logCount": 530,
+    "varCount": 0,
+    "lastHeartbeat": {
+      "type": "HB",
+      "tick": 2788,
+      "freeChip": 1926976,
+      "freeFast": 131620880,
+      "timestamp": "2026-10-02T23:03:29.186859+00:00"
+    },
+    "serialConnectedAt": 1790982209.059253,
+    "lastBridgeMessageAt": 1790982209.1868732,
+    "lastHeartbeatAt": 1790982209.1868749,
+    "bridgeSilentSec": 0.0,
+    "host": "127.0.0.1",
+    "port": 2345
+  },
+  "audio_after": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0",
+  "devbench_returned": true,
+  "emulator_process_after": [
+    [
+      19081,
+      "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+    ]
+  ],
+  "emulator_after": "OK\tPaused=false\tConfig=autosave"
+}

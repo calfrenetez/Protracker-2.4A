@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131112864 reserve=262144 flags=4
+MIXED PREFLIGHT PASS: incremental/synchronous parity, bounded steps, hidden partial masks, one sequence transfer, cancellation and late refusal cleanup; no dispatch
+EXEC MEMORY PASS: 96 Fast allocations, zero owned bytes, budget refusal without Chip fallback

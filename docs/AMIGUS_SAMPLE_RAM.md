@@ -547,6 +547,17 @@ explicitly volatile and synchronous at the CPU level. Their return value is not
 independent proof that device RAM accepted/completed the transfer; qualify those
 semantics before connecting a live editor cache. No voices or interrupts start.
 
+The pinned SDK at `d8c9a0429f41cd5f3dbadae34ef438e45c9c3718` documents a
+32 MB Mini design capacity (`README.md` lines65/130 and
+`Documentation/AmiGUS_mini/AmiGUS mini.guide` lines102/183–184). This documented
+capacity is distinct from an independently qualified usable region on the
+installed card. The library descriptor has no capacity field. The inspected SFD
+has discovery/reservation/interrupt operations, but no upload completion or
+ordering fence. `PlayWAVetable.c` demonstrates sample writes and32 voice-control
+writes without a completion/readback acknowledgment; releasing reservation
+metadata does not confirm that every hardware voice stopped. The successful
+read-only global-status probe below cannot establish these remaining contracts.
+
 Three host ASan/UBSan groups pass: native descriptor/ordinary-register storage,
 existing bounded sample-RAM allocation/upload, and wavetable cache ownership.
 The new fixture covers17 bind refusals, invalid/data-before-address stores,

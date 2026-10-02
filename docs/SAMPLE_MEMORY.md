@@ -5,6 +5,22 @@ The enhanced project owns the authoritative sample, including its declared
 elements in the declared precision; 24-bit samples retain their low eight bits.
 Playback representations must never become the project's source of truth.
 
+## Incremental mixed preparation — 3 October 2026
+
+Mixed Paula/AmiGUS capability analysis now advances one bounded phase per owner
+preparation call: at most256 measurement ticks, one interval fetch, at most256
+consumed frames, or one completed backend check. Pending and refused reports
+expose no source masks. Masters and playback copies remain unallocated/unpinned
+until the complete gate passes; the same audited sequence transfers once.
+Cancellation or stale-source refusal releases unfinished analysis while retaining
+any unresolved reader barriers. Initial validation/static scans remain
+synchronous. Host sanitizers, indexed editor tests and pinned native cross-builds
+pass. Exact shared030 preflight/owner/editor fixtures now pass separately with
+zero owned Fast bytes, followed by independent idle/DMA-off/path cleanup and
+explicit window release. See `MIXED_PREFLIGHT.md` and
+`../evidence/enhanced-editor/mixed-incremental/`. Bounds do not establish timing
+or physical playback.
+
 ## Current implementation status — 2 October 2026
 
 The approved physical0.8 final readback observation completed safely: eight

@@ -534,3 +534,11 @@ I/O failure position, delayed reset and retained queue ownership. Both selected
 native fixtures cross-build with the pinned compiler via
 `tools/build_amigus_register.py`, avoiding the unrelated dirty editor builder.
 Native execution is pending a fresh coordinated window.
+
+
+The FULL-aware register session now passes exact native shared030 run
+1790927022395699000 (RC0),22 Fast allocations/zero final owned bytes/no Chip
+fallback. Separate independent1790927077785504000 passed original solePID79263/
+running68030/all4DMAoff/exact run+launcher absence without recovery, followed by
+explicit release. See `../evidence/enhanced-editor/amigus-full-guard-native/`.
+This is still an injected register bus, not real-card output or timing acceptance.

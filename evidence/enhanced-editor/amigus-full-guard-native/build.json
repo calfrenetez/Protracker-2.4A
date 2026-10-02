@@ -1,0 +1,64 @@
+{
+  "scope": "Compile/link injected bus fixtures only; no card or MMIO",
+  "compiler_sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+  "runtime_inputs": {
+    "ncrt0.o": "6fe4b6088899bd53efae1ea1e4783b7deab07b13f3d40cff7b46285907f19804",
+    "libnix20.a": "0731c54ad32272f5ab0d5ecd3f1f93d7aa4fc7c6ac0a5923eb26125633556e8c",
+    "libnixmain.a": "ad54158e95516aa6f3b04a8b3d835a48ecbaaea962cd178d5fb66995dcef19df",
+    "libnix.a": "d64619bc74933ac5312ef6db0f8d4cd62b3918f9f4a5805863e7d15536fcb144",
+    "libstubs.a": "55dbd0626cb472d89ab5d1bd234e6013df178f2cd3b83266bf4b82c68f1a79de",
+    "libamiga.a": "10d78b6d303a99677c0bf29a8e1653d62669f69f395691646393020325084021",
+    "libgcc.a": "8bed858c8a5797471c3bc130df341824121c5d0f0908345dfe6ce0ceccc3569b"
+  },
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Isrc/core",
+    "-fbbb=-"
+  ],
+  "inputs": {
+    "src/core/amigus_fifo.c": "5c14614a81f05cdac1820be120700b9d9ed29750d1e26cc621fb1f6fadad2cef",
+    "src/core/amigus_fifo.h": "b218313c6b243a678bf3fd12bc290ea12ff6d28aa9179677c9c5aec628020db2",
+    "src/core/amigus_pcm_pack.c": "3464933782918baab33ee8e1ca76a7e959897284b98e24015625707cefdfcac9",
+    "src/core/amigus_pcm_pack.h": "d0648c43fef1e70ffe92c7540be04e9c70e219bb2ee4cda9bf2ef1357e9b89bb",
+    "src/core/amigus_register_port.c": "c5aa7b7ef9c55b4be73bcee534270457383f3fc1f2133a86e81d14a0db243dfc",
+    "src/core/amigus_register_port.h": "94d7623b6d5c8cdee3c43884e34962e91375ecac80537e92b1a386e120e08940",
+    "src/core/amigus_session.c": "672fc5b6e2b720fb74db90040be6951eb92fc894e78351b8ab6c5a9917113460",
+    "src/core/amigus_session.h": "43b5a5ab74dcff269c692013fca4feb7145d1c6f20c0971a80321749c6ec047c",
+    "src/core/channels.h": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+    "src/core/document.h": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+    "src/core/mod_inspect.h": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+    "src/core/pcm.c": "0bd9cc86e3eab3b077484bbcb20675eab0a648a76a18adabe4203c18f3b713a2",
+    "src/core/pcm.h": "6b1a14d9010f71b693c81c066e619343bb9b4cee0f4b6723347f34de2f5e12fb",
+    "src/core/pcm_internal.h": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b",
+    "src/core/pp20.h": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+    "src/core/project.h": "fe2ce268386dc0fed856af12bcdc5190a43083329ae3b5567febc6efc7712519",
+    "src/core/studio_consumer.c": "fe871a573e0746205a80adf051252ec8429ffc013f00c20d4980f5d9ee324573",
+    "src/core/studio_consumer.h": "2b081296f92f2f49961b16d09c18bf169795ba598797d4cec088b3f4f890750e",
+    "src/core/studio_queue.c": "31a58a5e514bce52606e875e642865db42676cec0dc84d3aae3c4b5e46b5b7e5",
+    "src/core/studio_queue.h": "891f680cb1cce81943e864cf73592a6b65643203762218c7676073935bc4bb04",
+    "src/native/master_memory.h": "ac898368849ec2d1892717d425b90c398da37a8799d536366a898e2e219e184a",
+    "tests/amigus_register_port_test.c": "64411d07c6c3c8c4c4725576f1d7342964d0c651e1c2bb31608568c850099a6b",
+    "tests/amigus_register_session_test.c": "d31411ca1510dd5b7877bb5fcfad00cec2e9d293f7c8d0b0b7737371a0a2a960",
+    "tests/native_exec_amigus_register_session_test.c": "b7b67734d958c21803c668894937cc66fae4a06a6a20383c24d5e116c35319e5",
+    "tests/native_exec_memory.h": "ce0f2b696ce7767c0da8a2a44ac7730bc207f81e4f6b86bfd172353989e664b9",
+    "tools/build_amigus_register.py": "6c9cd776c8007228c08c8857a8fc4d88becb3c60122a3e655c90f4704209be99",
+    "tools/build_diagnostic.py": "b39b3f1f90357ae7b567bb1259b2df220c9bba94f42ffd97703022f4858374c6"
+  },
+  "binaries": {
+    "PTAmiGusRegisterTest": {
+      "sha256": "15875bc9052dd1d058864faa79253b823ac52e513b85ade17ab2b919b7fc5387",
+      "bytes": 17504
+    },
+    "PTExecAmiGusRegisterSessionTest": {
+      "sha256": "c766e7313e60608e4c4aba0f16e7fcbd1fb95099e833fe801f713d61a6aeca99",
+      "bytes": 42920
+    }
+  }
+}

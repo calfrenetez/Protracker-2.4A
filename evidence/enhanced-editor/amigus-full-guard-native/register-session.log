@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131226592 reserve=262144 flags=4
+AMIGUS REGISTER SESSION PASS: exact packed stream, IRQ bit isolation, drain wait, partial-write/reset delays, ownership loss cleanup, prefill/start/readback, delayed and failed enable, empty/odd tail, Stop pending, bounded configurable prefill/short-stream flush, independent FULL stall and partial-triplet reset
+EXEC MEMORY PASS: 22 Fast allocations, zero owned bytes, budget refusal without Chip fallback

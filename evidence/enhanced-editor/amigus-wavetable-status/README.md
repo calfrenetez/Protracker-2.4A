@@ -28,3 +28,15 @@ capacity, ordering/completion, all voices stopped, playback or human listening.
 The DevBench runner still needs an exclusive shared window and must not retarget
 another chat's connection. The user's independent Safari route remains available
 subject to separate live physical ownership/control guards and View Only release.
+
+## Host preflight follow-up
+
+`diagnostic_candidate_guard` now verifies all seven distinct suite binaries,
+manifest lengths/hashes, transitive source inputs in both working tree and HEAD,
+and pinned SDK lock/header hashes before any Guest construction or guest access.
+The real current artifact preflight passes; a temporary Git fixture confirms
+changed bytes, dirty source, rewritten manifests with uncommitted sources, missing
+inputs/provenance and changed SDK inputs cannot qualify. Nine combined host checks
+PASS. No new target/lock/control access occurred. AmiConnect's fresh check still
+reports the soundcard-driver Safari/playback reservation unreleased; Scott's new
+emulator window request is also pending. Exact suite execution remains pending.

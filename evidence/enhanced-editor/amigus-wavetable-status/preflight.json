@@ -1,0 +1,18 @@
+{
+  "scope": "Host-only candidate verification; no guest/physical access",
+  "passed": true,
+  "candidates": {
+    "AmiGUSTest": "076b2e53289bd4cf728657a53d17fa3007a3a768a68d9f10f6e943ebb9320119",
+    "PTDiagOwnershipTest": "75a7924a10d6d0cee68572fedf1509110a799005d3349ab3bee164766629591d",
+    "PTDriverWindowTest": "5f6d80baab20a0e8a22e1ae367d41438888f5240a7b9f5b07239e153aee5c266",
+    "PTDriverExecTest": "4ec820f310914ae7309845228b79d07c333495964521c5808392d2dcd76a7381",
+    "PTPcmReadTest": "f2bb763e768c65297fecd87d2d220a0e77bd070b388295b0697c50dcae5ef740",
+    "PTWavetableReadTest": "a79ded73db5a2534a4bccfbd1ac0e5217e00bf18681f7c8a0eb954ba985aa6c5",
+    "PTAmiGusNativeAbiTest": "eb21c186fd744d434f3c23b1d89937e038e9f83670a5af293644a7c790dfa96a"
+  },
+  "working_and_committed_inputs_match": true,
+  "sdk_headers_match": true,
+  "host_checks": 9,
+  "emulator_execution": false,
+  "physical_execution": false
+}

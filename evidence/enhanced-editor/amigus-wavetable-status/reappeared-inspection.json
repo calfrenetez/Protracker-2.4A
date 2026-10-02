@@ -1,0 +1,112 @@
+{
+  "path": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790931158760994000",
+  "exists": true,
+  "symlink": false,
+  "entries": [
+    {
+      "path": "amigus-ownership",
+      "size": 2097120,
+      "mode": "0o40700",
+      "mtime_ns": 1790931162000000000,
+      "symlink": false
+    },
+    {
+      "path": "amigus-fifo",
+      "size": 64,
+      "mode": "0o40700",
+      "mtime_ns": 1790931162000000000,
+      "symlink": false
+    },
+    {
+      "path": "ownership-fixture",
+      "size": 64,
+      "mode": "0o40700",
+      "mtime_ns": 1790931162000000000,
+      "symlink": false
+    },
+    {
+      "path": "amigus-reset",
+      "size": 64,
+      "mode": "0o40700",
+      "mtime_ns": 1790931162000000000,
+      "symlink": false
+    },
+    {
+      "path": "amigus-discover",
+      "size": 64,
+      "mode": "0o40700",
+      "mtime_ns": 1790931162000000000,
+      "symlink": false
+    },
+    {
+      "path": "native-abi",
+      "size": 64,
+      "mode": "0o40700",
+      "mtime_ns": 1790931162000000000,
+      "symlink": false
+    },
+    {
+      "path": "amigus-wavetable",
+      "size": 64,
+      "mode": "0o40700",
+      "mtime_ns": 1790931162000000000,
+      "symlink": false
+    },
+    {
+      "path": "pcm-read",
+      "size": 64,
+      "mode": "0o40700",
+      "mtime_ns": 1790931162000000000,
+      "symlink": false
+    },
+    {
+      "path": "amigus-capacity-observe",
+      "size": 64,
+      "mode": "0o40700",
+      "mtime_ns": 1790931162000000000,
+      "symlink": false
+    },
+    {
+      "path": "driver-exec",
+      "size": 2097120,
+      "mode": "0o40700",
+      "mtime_ns": 1790931162000000000,
+      "symlink": false
+    },
+    {
+      "path": "amigus-capacity",
+      "size": 64,
+      "mode": "0o40700",
+      "mtime_ns": 1790931162000000000,
+      "symlink": false
+    },
+    {
+      "path": "amigus-idle",
+      "size": 2097120,
+      "mode": "0o40700",
+      "mtime_ns": 1790931162000000000,
+      "symlink": false
+    },
+    {
+      "path": "wavetable-read",
+      "size": 64,
+      "mode": "0o40700",
+      "mtime_ns": 1790931162000000000,
+      "symlink": false
+    },
+    {
+      "path": "driver-window",
+      "size": 2097120,
+      "mode": "0o40700",
+      "mtime_ns": 1790931162000000000,
+      "symlink": false
+    },
+    {
+      "path": "amigus-registers",
+      "size": 2097120,
+      "mode": "0o40700",
+      "mtime_ns": 1790931162000000000,
+      "symlink": false
+    }
+  ]
+}

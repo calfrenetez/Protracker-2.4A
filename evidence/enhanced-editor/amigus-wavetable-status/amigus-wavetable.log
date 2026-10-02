@@ -1,0 +1,2 @@
+WAVETABLE-PROBE version=0.9 scope=Mini-7ea663e7-global-status writes=NO bank_select=NO audio=NOT_TESTED capacity=NOT_QUALIFIED voices_stopped=NOT_QUALIFIED
+WAVETABLE result=SKIP reason=library-unavailable rc=5

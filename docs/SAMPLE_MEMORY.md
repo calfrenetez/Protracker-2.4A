@@ -27,9 +27,11 @@ the frontend does not instantiate this bus. See `AMIGUS_SAMPLE_RAM.md`.
 AmiGUSTest0.9 now contains a separate read-only WAVETABLE diagnostic: exactly
 eight global IRQ/mask reads, stable lease/descriptor guards, no bank selection,
 writes or AHI unload, and positive own-release confirmation. Host ASan/UBSan
-and the pinned native build pass. Exact emulator and physical status execution
-are pending shared-target availability; no RAM capacity or all-voice stop claim
-is derived from these registers. See `AMIGUS_SAMPLE_RAM.md`.
+and the pinned native build pass. Exact shared030 execution passes the synthetic
+reader fixture RC0 and real missing-library mode RC5. Initial independent cleanup
+failed on reappeared empty directories; separate guarded recovery and independent
+cleanup passed before explicit release. Physical status remains pending fresh
+coordination; no RAM capacity or all-voice stop claim derives from these registers. See `AMIGUS_SAMPLE_RAM.md`.
 
 ## Prior implementation status — 1 October 2026
 

@@ -584,5 +584,10 @@ address, reset and bank-selector registers are write-only in this map. There is
 no documented sample-RAM readback or usage counter here. Snapshot values alone
 cannot establish installed capacity, upload completion, ordering or stopped
 voices. Host sanitizer/native build checks use ordinary synthetic storage;
-physical status qualification is pending until its exact emulator candidate,
-separate cleanup and fresh ownership guards pass.
+exact shared030 run `render-files-1790931158760994000` passes the reader fixture
+RC0 and real missing-library mode RC5. Its initial independent cleanup failure is
+preserved alongside separately guarded empty-directory recovery and final
+independent release checks. See `../evidence/enhanced-editor/amigus-wavetable-status/`.
+Physical status qualification remains pending fresh ownership/recovery guards;
+another task's failed playback and temporary mute have not been cleared by these
+emulator results.

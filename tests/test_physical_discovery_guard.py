@@ -16,6 +16,61 @@ spec.loader.exec_module(runner)
 
 
 class PhysicalDiscoveryGuard(unittest.TestCase):
+    def test_wavetable_snapshot_requires_exact_reads_release_and_scope(self):
+        scope='WAVETABLE-PROBE version=0.9 scope=Mini-7ea663e7-global-status writes=NO bank_select=NO audio=NOT_TESTED capacity=NOT_QUALIFIED voices_stopped=NOT_QUALIFIED'
+        rows=[f'WAVETABLE STATUS offset=0x{i:02x} value=0x8001' for i in range(0,16,2)]
+        release='WAVETABLE RELEASE confirmed=1 retained=0 driver=0x00000000'
+        footer='WAVETABLE result=PASS reason=observed reads=8 rc=0'
+        output='\n'.join([scope,*rows,release,footer])
+        parsed=runner.wavetable_status_finished(output)
+        self.assertFalse(parsed['capacity_qualified'])
+        self.assertFalse(parsed['voices_stopped_qualified'])
+        self.assertEqual([r['value'] for r in parsed['registers']],[0x8001]*8)
+        for bad in (output.replace('offset=0x0e','offset=0x10'),
+                    output.replace('offset=0x0e','offset=0x0c'),
+                    output.replace('confirmed=1','confirmed=0'),
+                    output.replace('retained=0','retained=1'),
+                    output.replace('writes=NO','writes=YES'),
+                    output.replace('bank_select=NO','bank_select=YES'),
+                    output.replace('reads=8','reads=7'),output+'\n'+release,
+                    output+'\n'+footer,output+'\nWAVETABLE HOLD',
+                    '\n'.join([scope,*rows[:-1],release,footer])):
+            with self.assertRaises(RuntimeError):runner.wavetable_status_finished(bad)
+
+    def test_wavetable_exact_fixture_and_separate_mode_gate(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td); (root/'build/diagnostic').mkdir(parents=True)
+            lock=root/'amigus-sdk.lock.json';lock.write_text('{"files":{}}')
+            binary=root/'AmiGUSTest';binary.write_bytes(b'exact diagnostic')
+            fixture=root/'build/diagnostic/PTWavetableReadTest';fixture.write_bytes(b'exact reader')
+            manifest=dict(binary_sha256=runner.digest(fixture),binary_bytes=fixture.stat().st_size,
+                inputs={},sdk_lock_sha256=runner.digest(lock))
+            fixture_build=fixture.parent/'wavetable-read-build.json';fixture_build.write_text(json.dumps(manifest))
+            build=root/'build.json';build.write_text(json.dumps(dict(binary_sha256=runner.digest(binary),
+                binary_bytes=binary.stat().st_size,inputs={},sdk_lock_sha256=runner.digest(lock))))
+            directory=root/'render-owned';directory.mkdir();emulator=directory/'result.json'
+            native=dict(AmiGUSTest_sha256=runner.digest(binary),PTWavetableReadTest_sha256=runner.digest(fixture),
+                passed=True,run_files_cleaned=True,**{'amigus-discover_returncode':'5',
+                'amigus-ownership_returncode':'5','ownership-fixture_returncode':'0','native-abi_returncode':'0',
+                'amigus-wavetable_returncode':'5','wavetable-read_returncode':'0'})
+            emulator.write_text(json.dumps(native))
+            independent=root/'independent.json';independent.write_text(json.dumps(dict(passed=True,
+                paths={str(runner.INFRA/'runtime/Dev/Tests'/directory.name):False,
+                       str(runner.INFRA/'runtime/Dev/Tests'/('launch-'+directory.name)):False},
+                status='OK\tPaused=false',cpu='OK\tmodel=68030',
+                audio='OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0')))
+            with patch.object(runner,'ROOT',root):
+                self.assertEqual(runner.qualification(binary,build,emulator,independent,ownership=True,wavetable=True),runner.digest(binary))
+                for field,value in (('amigus-wavetable_returncode','20'),('wavetable-read_returncode','20'),
+                                    ('PTWavetableReadTest_sha256','old')):
+                    altered=dict(native);altered[field]=value;emulator.write_text(json.dumps(altered))
+                    with self.assertRaises(RuntimeError):runner.qualification(binary,build,emulator,independent,ownership=True,wavetable=True)
+                emulator.write_text(json.dumps(native));fixture.write_bytes(b'unqualified reader')
+                with self.assertRaises(RuntimeError):runner.qualification(binary,build,emulator,independent,ownership=True,wavetable=True)
+                for kwargs in ({'ownership':False},{'ownership':True,'idle_driver':True}):
+                    with self.assertRaisesRegex(RuntimeError,'separate ownership-only'):
+                        runner.qualification(binary,build,emulator,independent,wavetable=True,**kwargs)
+
     def test_bounded_observation_never_promotes_capacity(self):
         footer='PCM CAPACITY OBSERVATION complete=1 polls=8 stores=2048 writes_after_poll_start=0 capacity=NOT_QUALIFIED'
         for counts in ([4094]*8,[4094]+[4096]*7):

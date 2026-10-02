@@ -62,6 +62,20 @@ int main(void)
         assert(!pt_native_amigus_wavetable_read16(&active,0,&value));
         assert(!memcmp(registers,copy,sizeof(copy)));
     }
+    for (i=0;i<4;++i) {
+        struct AmiGUS saved=card;
+        struct pt_native_amigus_wavetable_read active={0};
+        assert(pt_native_amigus_wavetable_read_bind(&active,&r));
+        if (i==0) card.agus_TypeId=AmiGUS_Zorro2;
+        if (i==1) card.agus_HardwareRev=1;
+        if (i==2) card.agus_FirmwareRev++;
+        if (i==3) card.agus_WavetableBase=(APTR)copy;
+        value=0x1234;
+        assert(!pt_native_amigus_wavetable_read16(&active,0,&value) && value==0x1234 && active.faulted);
+        card=saved;
+        assert(!pt_native_amigus_wavetable_read16(&active,0,&value));
+        assert(!memcmp(registers,copy,sizeof(copy)));
+    }
     puts("WAVETABLE READ PASS: eight global reads, all unsafe offsets refused, descriptor/lease loss latched, no writes; synthetic storage only");
     return 0;
 }

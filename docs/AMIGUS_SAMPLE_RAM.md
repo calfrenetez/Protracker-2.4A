@@ -65,8 +65,8 @@ ownership refusal, out-of-order chunks and every register-write failure point.
 Existing conversion, cache and AmiGUS transport checks also pass. The pinned
 Amiga build records source dependencies, compiler/runtime hashes and binary hash.
 
-Remaining: verify card/firmware capacity and Mini bus transactions, implement the
-native bus binding, and connect voices with confirmed
+Remaining: verify card/firmware capacity and physical Mini bus transactions,
+qualify the separately implemented native binding on the actual card, and connect voices with confirmed
 stop/transfer completion before releasing leases. The injected bus establishes
 software behavior only. There is no real card access, device upload, audible
 playback, physical performance or physical acceptance from these fixtures.

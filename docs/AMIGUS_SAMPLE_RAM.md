@@ -525,3 +525,37 @@ cache lease. Ownership faults remain latched, and active leases keep the access
 reservation until unpinned. Host regressions and native fake-bus fixtures pass;
 see `evidence/enhanced-editor/amigus-callback-status/`. This does not qualify real
 card access, interrupts, output or physical memory capacity.
+
+
+## Native sample-RAM bus candidate (2 October 2026)
+
+`src/native/amigus_ram_bus.c` now provides the production volatile32-bit bus
+callbacks for the separately identified Mini hardware0/firmware7ea663e7. Bind
+performs no I/O and requires an exclusive WAVETABLE reservation without an existing
+access/interrupt owner. The stable bus context, library/card descriptor and
+reservation outlive the cache. Bind before cache attach; the ownership predicate
+permits the reservation-only attach check, while every store requires exactly one
+access lease. Clear refuses until cache detach releases that lease.
+
+The caller supplies an independently verified four-byte-aligned region inside
+the25-bit address space. This bus selects no installed RAM capacity and does not
+probe addresses. Address0x14 and data0x10 stores must alternate; each whole word
+must fit the supplied region. Invalid ports/pairing/ranges, lost reservation,
+changed descriptor/base or an interrupt owner latch refusal before further writes.
+Restoring a lost predicate cannot resurrect the old bus. Numeric stores are
+explicitly volatile and synchronous at the CPU level. Their return value is not
+independent proof that device RAM accepted/completed the transfer; qualify those
+semantics before connecting a live editor cache. No voices or interrupts start.
+
+Three host ASan/UBSan groups pass: native descriptor/ordinary-register storage,
+existing bounded sample-RAM allocation/upload, and wavetable cache ownership.
+The new fixture covers17 bind refusals, invalid/data-before-address stores,
+reservation loss between address/data, sticky refusal,25-bit upper boundary,
+retained access while a cache lease is pinned, and intact24-bit master conversion
+to a padded16-bit representation through the actual cache callback chain. The
+host uses a scalar SDK ABI shim; it does not establish68k layout. The pinned
+compiler builds `PTExecAmiGusRamBusTest` using the real SDK via
+`tools/build_amigus_sample_ram.py --ram-bus --cc <pinned compiler>`. Native
+execution is pending fresh coordination after Scott's independently released
+window. Hardware capacity/upload/readback/ordering/voice-stop/output/listening
+remain open.

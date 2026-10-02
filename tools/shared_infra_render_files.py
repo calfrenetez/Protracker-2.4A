@@ -158,7 +158,7 @@ def main():
     group.add_argument('--sample-wav',action='store_true',help='Run streamed master WAV export with native Fast allocator')
     group.add_argument('--amigus-discovery',action='store_true',help='Discovery-only native library probe; no reservation or MMIO')
     group.add_argument('--amigus-diagnostic',action='store_true',help='Native ownership/idle-driver guards and real diagnostic missing-library modes; emulator only')
-    group.add_argument('--studio-memory',choices=['native-abi','mixer','sampler','song','editor','queued','consumer','fifo','session','register-session','reserved-session','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence'],help='Run one production-allocator Studio fixture')
+    group.add_argument('--studio-memory',choices=['native-abi','mixer','sampler','song','editor','queued','consumer','fifo','session','register-session','reserved-session','sample-ram','ram-bus','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence'],help='Run one production-allocator Studio fixture')
     group.add_argument('--input-memory',choices=['import','recent','exec-import','exec-recent'],help='Run one import or recent-file memory fixture')
     group.add_argument('--exec-memory',choices=['bounce','stems','failures','save'],help='Run one native Exec-backed memory fixture')
     group.add_argument('--stems-only',action='store_true',help='Run the allocated stem export test only')
@@ -185,7 +185,7 @@ def main():
     with (INFRA/'runtime/test.lock').open('a') as lock:
         acquire_shared_lock(lock,out,result)
         guest=Guest(INFRA,out)
-        if args.cia_timing or args.amigus_diagnostic or args.studio_memory=='register-session' or args.paula_memory in ('output','output-diagnostic','engine','prepared-output','transport','wait','wait-latency','wait-priority','paula-wait-priority','paula-boundary'):
+        if args.cia_timing or args.amigus_diagnostic or args.studio_memory in ('register-session','ram-bus') or args.paula_memory in ('output','output-diagnostic','engine','prepared-output','transport','wait','wait-latency','wait-priority','paula-wait-priority','paula-boundary'):
             audio=guest.command('GET_AUDIO_STATE')
             (out/'audio-before-staging.json').write_text(json.dumps({'audio':audio},indent=2)+'\n')
             if not all('ch%d_dma=0'%i in audio.split('\t') for i in range(4)):
@@ -286,6 +286,7 @@ def main():
                     'sampler-wavetable':('sampler-wavetable','PTExecSamplerWavetableTest','SAMPLER WAVETABLE PASS:'),
                     'wavetable-cache':('wavetable-cache','PTExecAmiGusWavetableCacheTest','AMIGUS WAVETABLE OWNER PASS:'),
                     'sample-ram':('sample-ram','PTExecAmiGusSampleRamTest','AMIGUS SAMPLE RAM PASS:'),
+                    'ram-bus':('ram-bus','PTExecAmiGusRamBusTest','NATIVE RAM BUS PASS:'),
                     'reserved-session':('reserved-session','PTExecAmiGusReservedSessionTest','AMIGUS RESERVED SESSION PASS:'),
                     'register-session':('register-session','PTExecAmiGusRegisterSessionTest','AMIGUS REGISTER SESSION PASS:'),
                     'session':('amigus-session','PTExecAmiGusSessionTest','AMIGUS SESSION PASS:'),
@@ -297,6 +298,7 @@ def main():
             if args.studio_memory=='queued':cases.append(('studio-pump','PTExecStudioPumpTest','STUDIO PUMP PASS:'))
             if args.studio_memory=='consumer':cases.append(('queued-song','PTExecQueuedSongTest','QUEUED SONG PASS:'))
             result['scope']='shared030 Studio ownership core; no audio device transport'
+            if args.studio_memory=='ram-bus':result['scope']='shared030 production native sample-RAM bus on synthetic descriptor/register storage; no card access'
         if args.sample_wav:
             cases=[('sample-wav','PTExecSampleFileTest','SAMPLE WAV STREAM PASS:')]
             result['scope']='shared030 streamed master WAV export and Exec Fast allocator'
@@ -530,5 +532,5 @@ def main():
             result['passed']=True
         finally:
             finish_run(guest,run,out,result,finished,
-                (args.cia_timing or args.amigus_diagnostic or args.paula_memory or args.capture_memory or args.capture_session_memory or args.amigus_capture_memory or args.editor_capture_memory or args.recovery_file or args.studio_memory in ('native-abi','editor','register-session','sample-ram','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence') or args.invert_editor or args.invert_sampler or args.invert_session or args.source_memory or args.sample_dispatch or args.invert_render or args.invert_bounce or args.invert_cli or args.invert_stem_cli),guest_cleanup=args.guest_cleanup_pilot)
+                (args.cia_timing or args.amigus_diagnostic or args.paula_memory or args.capture_memory or args.capture_session_memory or args.amigus_capture_memory or args.editor_capture_memory or args.recovery_file or args.studio_memory in ('native-abi','editor','register-session','sample-ram','ram-bus','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence') or args.invert_editor or args.invert_sampler or args.invert_session or args.source_memory or args.sample_dispatch or args.invert_render or args.invert_bounce or args.invert_cli or args.invert_stem_cli),guest_cleanup=args.guest_cleanup_pilot)
 if __name__=='__main__':main()

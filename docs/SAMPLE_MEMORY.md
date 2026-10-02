@@ -5,13 +5,32 @@ The enhanced project owns the authoritative sample, including its declared
 elements in the declared precision; 24-bit samples retain their low eight bits.
 Playback representations must never become the project's source of truth.
 
-## Current implementation status — 1 October 2026
+## Current implementation status — 2 October 2026
+
+The approved physical0.8 final readback observation completed safely: eight
+snapshots remained4094words/FULL0x0002 with rate/mask0. Reset, own release,
+AHI restoration, exact cleanup and independent absence passed. It did not
+qualify4096 or exact usable capacity. The injected production register port
+now honors FULL independently of arithmetic space and refuses further stores
+within a partial triplet; four host sanitizer groups and native shared030 session
+ownership/cleanup checks pass. See `AMIGUS_STUDIO_TRANSPORT.md` and the separate
+physical observation/native FULL evidence.
+
+A native wavetable sample-RAM bus candidate now supplies bounded address/data
+callbacks to the existing cache. Bind performs no I/O, writes require the cache
+access lease, and detected ownership/descriptor loss latches refusal. Host
+sanitizer checks and exact native cross-build pass against synthetic descriptors
+and ordinary register storage. Native execution is pending the next coordinated
+emulator window. No physical RAM region or upload/readback semantics is inferred;
+the frontend does not instantiate this bus. See `AMIGUS_SAMPLE_RAM.md`.
+
+## Prior implementation status — 1 October 2026
 
 The distinct realMini4096-word capacity qualification FAILED: store2048 issued,
 immediate finalcount4094, causeunproven; FULLpoll skipped, capacity not accepted.
 Reset/release/AHIrestoration/cleanup/idle030return PASS, no retainedhold. Physical
-retries stopped pending a separately prepared bounded observation diagnostic and
-userdecision. See `../evidence/enhanced-editor/amigus-capacity-physical-failed/`.
+retries were stopped pending a separately prepared bounded observation diagnostic
+and user decision; that distinct approved follow-up is recorded above. See `../evidence/enhanced-editor/amigus-capacity-physical-failed/`.
 
 
 RealMini read-only PCM status and initially-idle silent disable/reset readback

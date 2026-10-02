@@ -7,9 +7,9 @@ static unsigned live;
 static void *alloc(void *c,size_t n) {void *p;(void)c;p=malloc(n);if(p)++live;return p;}
 static void release(void *c,void *p) {(void)c;assert(live);--live;free(p);}
 struct bus {uint16_t rate,mask,irq,used,format;unsigned reset_delay,resets,writes,fail_write,owned;
-    unsigned starts,formats,format_delay,start_delay,start_result,format_result;uint32_t words[12];};
+    unsigned starts,formats,format_delay,start_delay,start_result,format_result,full_after;uint32_t words[12];};
 static int owned(void *v) {return ((struct bus *)v)->owned;}
-static int read16(void *v,unsigned a,uint16_t *x) {struct bus *b=v;*x=a==6?b->rate:a==2?b->mask:a==4?b->format:b->used;return 1;}
+static int read16(void *v,unsigned a,uint16_t *x) {struct bus *b=v;*x=a==0?b->irq:a==6?b->rate:a==2?b->mask:a==4?b->format:b->used;return 1;}
 static int write16(void *v,unsigned a,uint16_t x) {
     struct bus *b=v;
     if(a==6) {
@@ -29,7 +29,40 @@ static int write16(void *v,unsigned a,uint16_t x) {
 }
 static int write32(void *v,unsigned a,uint32_t x) {
     struct bus *b=v;assert(a==12 && b->used+2<=12 && b->writes<12);
-    b->words[b->writes++]=x;b->used+=2;return b->writes!=b->fail_write;
+    b->words[b->writes++]=x;b->used+=2;if(b->full_after && b->writes==b->full_after)b->irq|=2;return b->writes!=b->fail_write;
+}
+static void full_cases(void)
+{
+    struct pt_allocator a={NULL,alloc,release};int32_t data[6]={1,2,3,4,5,6};unsigned mode;
+    for(mode=0;mode<3;++mode) {
+        struct bus b={0};struct pt_amigus_register_port registers;struct pt_amigus_session session={0};
+        struct pt_amigus_register_io io={&b,owned,read16,write16,write32};
+        struct pt_amigus_fifo_port port={&registers,pt_amigus_register_capacity,pt_amigus_register_write3,pt_amigus_register_reset};
+        struct pt_studio_queue *q=pt_studio_queue_open(&a,2);struct pt_pcm pcm={data,6,3,48000,2,24};unsigned i;
+        b.owned=1;assert(q && pt_amigus_register_port_init(&registers,&io,12));
+        assert(pt_amigus_session_open(&session,q,&port,pt_amigus_register_drain,&registers));
+        assert(pt_studio_queue_push(q,&pcm)==PT_QUEUE_OK);pt_studio_queue_finish(q);
+        if(!mode) {
+            b.irq=2; /* FULL despite arithmetic space: stall without releasing source. */
+            assert(pt_amigus_session_step(&session)==PT_CONSUMER_PROGRESS);
+            for(i=0;i<5;++i)assert(pt_amigus_session_step(&session)==PT_CONSUMER_WAIT);
+            assert(!b.writes && !session.failed && !registers.fault);
+            assert(pt_studio_queue_close(q)==PT_QUEUE_BUSY);b.irq=0;
+            for(i=0;i<10 && !b.writes;++i)assert(pt_amigus_session_step(&session)!=PT_CONSUMER_ERROR);
+            assert(b.writes==3);
+        } else {
+            b.full_after=mode;
+            for(i=0;i<10 && !session.failed;++i)pt_amigus_session_step(&session);
+            assert(session.failed && registers.fault && b.writes==mode);
+            b.irq=0;b.reset_delay=1;
+            assert(pt_amigus_session_step(&session)==PT_CONSUMER_ERROR && b.writes==mode);
+            assert(!pt_amigus_session_detach(&session) && pt_studio_queue_close(q)==PT_QUEUE_BUSY);
+        }
+        pt_amigus_session_stop(&session);
+        for(i=0;i<10 && session.phase!=PT_AS_DONE;++i)pt_amigus_session_step(&session);
+        assert(session.phase==PT_AS_DONE && !b.used && pt_amigus_session_detach(&session));
+        assert(pt_studio_queue_close(q)==PT_QUEUE_OK);
+    }
 }
 /* Delayed device readback, failed enable, Stop before acknowledgement, and
  * zero/one-frame streams exercise the real session and register state machines. */
@@ -163,5 +196,5 @@ int main(void)
         }
         assert(pt_amigus_session_detach(&session));assert(pt_studio_queue_close(q)==PT_QUEUE_OK);
     }
-    start_cases();prefill_cases();assert(!live);puts("AMIGUS REGISTER SESSION PASS: exact packed stream, IRQ bit isolation, drain wait, partial-write/reset delays, ownership loss cleanup, prefill/start/readback, delayed and failed enable, empty/odd tail, Stop pending, bounded configurable prefill/short-stream flush");return 0;
+    start_cases();prefill_cases();full_cases();assert(!live);puts("AMIGUS REGISTER SESSION PASS: exact packed stream, IRQ bit isolation, drain wait, partial-write/reset delays, ownership loss cleanup, prefill/start/readback, delayed and failed enable, empty/odd tail, Stop pending, bounded configurable prefill/short-stream flush, independent FULL stall and partial-triplet reset");return 0;
 }

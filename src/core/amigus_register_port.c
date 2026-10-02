@@ -13,9 +13,13 @@ int pt_amigus_register_port_init(struct pt_amigus_register_port *p,const struct 
 }
 int pt_amigus_register_capacity(void *v)
 {
-    struct pt_amigus_register_port *p=v;uint16_t used;
+    struct pt_amigus_register_port *p=v;uint16_t used,flags;
     if(!owned(p) || p->fault || !p->aligned)return -1;
-    if(p->io.read16(p->io.context,0x10,&used)!=1 || used>p->capacity_words)return fault(p);
+    if(p->io.read16(p->io.context,0x10,&used)!=1 || used>p->capacity_words ||
+       p->io.read16(p->io.context,0x00,&flags)!=1)return fault(p);
+    /* FULL is an independent refusal, even when usage arithmetic leaves space.
+     * Native Mini observations reported FULL with4094 words, not4096. */
+    if(flags&2)return 0;
     return (int)((p->capacity_words-used)/2);
 }
 int pt_amigus_register_write3(void *v,const uint32_t *words)
@@ -23,7 +27,12 @@ int pt_amigus_register_write3(void *v,const uint32_t *words)
     struct pt_amigus_register_port *p=v;unsigned i;int free;
     if(!words || !owned(p) || p->fault || !p->aligned)return -1;
     free=pt_amigus_register_capacity(p);if(free<3)return fault(p);
-    for(i=0;i<3;++i)if(p->io.write32(p->io.context,0x0c,words[i])!=1)return fault(p);
+    for(i=0;i<3;++i) {
+        /* Recheck between longword stores: an incomplete stereo triplet must
+         * retain a failed owner until reset rather than issue another store. */
+        if(i && pt_amigus_register_capacity(p)<1)return fault(p);
+        if(p->io.write32(p->io.context,0x0c,words[i])!=1)return fault(p);
+    }
     return 1;
 }
 int pt_amigus_register_reset(void *v)

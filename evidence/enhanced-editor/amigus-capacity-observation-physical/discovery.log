@@ -1,0 +1,21 @@
+IDLE-CAPACITY-OBSERVE scope=unused-RC6-020-AHI-only audio=NOT_TESTED
+DRIVER-WINDOW result=0 stage=driver-unloaded unloaded=1 restore_needed=1
+REGISTER-PROBE scope=Mini-7ea663e7-disabled-capacity-final-observation interrupts=NO audio=NOT_TESTED
+PCM STATUS flags=0x0000 mask=0x0000 format=0x0000 rate=0x0000 pending_words=0
+PCM CAPACITY progress_words=512 stores=256
+PCM CAPACITY progress_words=1024 stores=512
+PCM CAPACITY progress_words=2048 stores=1024
+PCM CAPACITY OBSERVE index=1 pending_words=4094 flags=0x0002 rate=0x0000 mask=0x0000
+PCM CAPACITY OBSERVE index=2 pending_words=4094 flags=0x0002 rate=0x0000 mask=0x0000
+PCM CAPACITY OBSERVE index=3 pending_words=4094 flags=0x0002 rate=0x0000 mask=0x0000
+PCM CAPACITY OBSERVE index=4 pending_words=4094 flags=0x0002 rate=0x0000 mask=0x0000
+PCM CAPACITY OBSERVE index=5 pending_words=4094 flags=0x0002 rate=0x0000 mask=0x0000
+PCM CAPACITY OBSERVE index=6 pending_words=4094 flags=0x0002 rate=0x0000 mask=0x0000
+PCM CAPACITY OBSERVE index=7 pending_words=4094 flags=0x0002 rate=0x0000 mask=0x0000
+PCM CAPACITY OBSERVE index=8 pending_words=4094 flags=0x0002 rate=0x0000 mask=0x0000
+PCM CAPACITY OBSERVATION complete=1 polls=8 stores=2048 writes_after_poll_start=0 capacity=NOT_QUALIFIED
+PCM QUIESCE requested=1 confirmed=1 status=1 polls=1
+REGISTER RELEASE confirmed=1 retained=0 driver=0x00000000
+REGISTERS result=PASS reason=idle rc=0
+DRIVER resident=1 supported=1 delayed=0 users=0 ahi_users=0
+IDLE-CAPACITY-OBSERVE result=PASS unloaded=1 restored=1 restore_needed=0 rc=0

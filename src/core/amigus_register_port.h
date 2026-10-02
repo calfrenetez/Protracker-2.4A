@@ -18,6 +18,9 @@ struct pt_amigus_register_port {struct pt_amigus_register_io io;unsigned capacit
  * No I/O. Explicit verified capacity in16-bit words,6..65535. Never guesses card
  * depth. Reset must succeed before capacity/write/drain/start. */
 int pt_amigus_register_port_init(struct pt_amigus_register_port *,const struct pt_amigus_register_io *,unsigned capacity_words);
+/* FULL independently reports zero free words. Read failure/impossible usage
+ * faults the port; a FULL stall alone keeps alignment. Triplet stores recheck
+ * before each remaining word and fault on any partial-triplet refusal. */
 int pt_amigus_register_capacity(void *);
 int pt_amigus_register_write3(void *,const uint32_t *);
 /* Disable playback, clear playback IRQ flags/masks, reset, then check disable,

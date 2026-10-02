@@ -492,3 +492,45 @@ independent cleanup failed, exact empty-only recovery and subsequent independent
 check pass; window released. See
 `../evidence/enhanced-editor/amigus-capacity-observation-native/`. The physical
 follow-up awaits user approval because the preceding physical capacity test failed.
+
+
+## Physical bounded final readback observation (2 October2026)
+
+The human explicitly approved the separate0.8 follow-up after the0.7 physical
+capacity failure. Run1790926340154651000 completed RC0: all eight read-only
+snapshots reported4094 pending16-bit words, flags0x0002 (FULL), rate0 and mask0
+after2048 disabled zero longword stores. No further data writes occurred during
+the observation. The count did not catch up within the bounded interval. This
+does not establish4096 capacity or prove exact usable depth/overflow semantics;
+the original qualification failure remains preserved. No production capacity
+is selected from this observation.
+
+Reset confirmed poll1, own release confirmed1/retained0, supported resident AHI
+restored with no users/delayed-expunge and installed CRC unchanged. Known execution
+completion, exact RAM cleanup, separate independent absence and original idle
+shared030 return passed; explicit release left no recovery hold. Evidence:
+`../evidence/enhanced-editor/amigus-capacity-observation-physical/`. Playback,
+word ordering, IRQ teardown, timing, recording and human listening remain open.
+
+
+## Independent FULL handling in the injected port
+
+The physical observation exposed an arithmetic-only gap. The port now reads
+FULL separately after validating usage: FULL reports zero free words even when
+the supplied capacity minus usage would leave space. A FULL stall does not poison
+alignment, so clearing it through consumption can resume an untouched triplet.
+Impossible usage or a failed status read still faults and requires reset.
+
+Triplet submission rechecks usage and FULL between individual longword stores.
+A refusal after one or two stores stops all later stores, faults alignment and
+retains the session/source owner until reset is confirmed. This is deliberately
+conservative when status changes inside a triplet. No card capacity is inferred.
+The extra bounded status reads need actual performance qualification before
+production use; neither this change nor synthetic fixtures qualify native output.
+
+Four ASan/UBSan groups pass, including FULL with4094/4090 usage against a synthetic
+4096 capacity, independent stall/recovery, partial-triplet FULL, every triplet
+I/O failure position, delayed reset and retained queue ownership. Both selected
+native fixtures cross-build with the pinned compiler via
+`tools/build_amigus_register.py`, avoiding the unrelated dirty editor builder.
+Native execution is pending a fresh coordinated window.

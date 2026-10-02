@@ -173,6 +173,10 @@ def main():
     if args.candidate:
         manifest=json.loads((args.candidate.parent/'PT24GRender-build.json').read_text())
         if hashlib.sha256(args.candidate.read_bytes()).hexdigest()!=manifest['binary_sha256']:raise RuntimeError('Candidate differs from build manifest')
+    diagnostic_candidates=None
+    if args.amigus_diagnostic:
+        from diagnostic_candidate_guard import verify_diagnostic_candidates
+        diagnostic_candidates=verify_diagnostic_candidates(ROOT)
     cia_manifest=None
     if args.cia_timing:
         cia_manifest=json.loads((ROOT/'build/dev/cia-diagnostic-build.json').read_text())
@@ -182,6 +186,7 @@ def main():
     from shared_guest import Guest
     out=ROOT/'build/dev'/('render-files-'+str(time.time_ns()));out.mkdir()
     result={'passed':False,'scope':'shared030 native render/stem file checks'}
+    if diagnostic_candidates is not None:result['verified_diagnostic_candidates']=diagnostic_candidates
     with (INFRA/'runtime/test.lock').open('a') as lock:
         acquire_shared_lock(lock,out,result)
         guest=Guest(INFRA,out)

@@ -467,8 +467,27 @@ static void song_fixture(unsigned bits)
     pt_sampler_release(&sampler);pt_document_release(&doc);
 #undef BIND
 }
+/* Native qualification runs one complete bit-depth matrix per bounded window.
+ * This selector never changes a case, loop bound, assertion or production path.
+ * The ordinary host entry still runs all three matrices. */
+#if defined(PT_TEST_SONG_EXEC_BITS)
+#if !defined(PT_TEST_SONG_EXEC)
+#error PT_TEST_SONG_EXEC_BITS requires the native fixture entry
+#endif
+#if PT_TEST_SONG_EXEC_BITS!=8 && PT_TEST_SONG_EXEC_BITS!=16 && PT_TEST_SONG_EXEC_BITS!=24
+#error PT_TEST_SONG_EXEC_BITS must be 8, 16 or 24
+#endif
+#endif
 int paula_song_fixture(void)
-{song_fixture(8);song_fixture(16);song_fixture(24);puts("PAULA SONG PASS: shared sequence, selected master pins, late refusal and retained cleanup");return 0;}
+{
+#ifdef PT_TEST_SONG_EXEC_BITS
+    song_fixture(PT_TEST_SONG_EXEC_BITS);
+    printf("PAULA SONG CASE PASS: bits=%u full per-bit assertions and runtime bounds\n",(unsigned)PT_TEST_SONG_EXEC_BITS);
+#else
+    song_fixture(8);song_fixture(16);song_fixture(24);
+#endif
+    puts("PAULA SONG PASS: shared sequence, selected master pins, late refusal and retained cleanup");return 0;
+}
 #ifndef PT_TEST_SONG_EXEC
 int main(void) {return paula_song_fixture();}
 #endif

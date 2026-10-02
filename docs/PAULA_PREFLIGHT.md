@@ -49,3 +49,18 @@ not emulator, physical-device, native deadline or audible playback acceptance.
 The transport and Wait wrappers were cross-built only; their prior runtime
 qualification limits remain separate. Runtime/stage regression bounds were kept
 unchanged; only pre-playback preparation call budgets accommodate the new slices.
+
+The monolithic native song fixture exceeded the existing 90-second qualification
+window, then completed later with RC0 and zero owned Fast bytes. The failed
+qualification deadline remains failed; late completion is separate cleanup and
+functional evidence. It does not justify increasing the deadline or repeating
+that unchanged candidate.
+
+Native song qualification now selects one complete bit-depth matrix using
+`PT_TEST_SONG_EXEC_BITS=8`, `16` or `24` with the native fixture entry. Each
+candidate retains every case, assertion and runtime bound for its chosen depth,
+and prints that depth only after the whole matrix completes. The ordinary host
+entry still executes all three matrices. Invalid depths and selection outside
+the native entry refuse compilation. Each candidate needs its own exact build
+manifest, fresh coordinated window, unchanged deadline and independent cleanup
+check. Splitting workloads supplies no native timing or device-output acceptance.

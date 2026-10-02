@@ -206,6 +206,54 @@ class PhysicalDiscoveryGuard(unittest.TestCase):
             self.assertTrue(result['script_pending']);self.assertTrue(result['recovery_hold'])
             self.assertNotIn('run_files_cleaned',result);self.assertNotIn('devbench_returned',result)
 
+    def test_finished_wavetable_script_without_release_retains_target_and_files(self):
+        switches=[]; calls=[]
+        async def connect(name):switches.append(name)
+        class Guest:
+            env={'profile':'synthetic'}
+            def __init__(self,*args):pass
+            def command(self,name):
+                return 'OK\tPaused=false' if name=='GET_STATUS' else 'OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0'
+        class Session:
+            def __init__(self,*args):pass
+            async def __aenter__(self):return self
+            async def __aexit__(self,*args):pass
+            async def initialize(self):pass
+            async def call_tool(self,name,args):
+                calls.append((name,args))
+                text='[OK]'
+                if name=='amiga_run_script':
+                    if 'ShowNetStatus' in args['script']:
+                        text+="\n68030\n192.168.0.156 (on interface 'plipbox')\nPTG-IDENTITY-DONE"
+                    elif 'MakeDir' in args['script']:text+='\nPTG-DIRECTORY-CREATED'
+                    elif '--wavetable-status' in args['script']:text+='\nPTG-DISCOVERY-RC 0\nPTG-DISCOVERY-DONE'
+                    else:raise AssertionError('Cleanup must not execute with release pending')
+                if name=='amiga_pull_file':
+                    Path(args['local_path']).write_text('WAVETABLE result=PASS reason=observed reads=8 rc=0\n')
+                return SimpleNamespace(content=[SimpleNamespace(text=text)])
+        @asynccontextmanager
+        async def transport(*args):yield (None,None,None)
+        modules={'amiga':SimpleNamespace(connect=connect),
+            'bridge_checks':SimpleNamespace(target=lambda *args:{'connected':True},require_reply=lambda *args:None,checksum=lambda *args:None),
+            'shared_guest':SimpleNamespace(Guest=Guest),'mcp':SimpleNamespace(ClientSession=Session),
+            'mcp.client.streamable_http':SimpleNamespace(streamable_http_client=transport)}
+        with tempfile.TemporaryDirectory() as td,patch.dict(sys.modules,modules):
+            root=Path(td);(root/'scripts').mkdir();(root/'config').mkdir();(root/'runtime/physical-staging').mkdir(parents=True)
+            bridge=root/'runtime/physical-staging/bridge-20260923';bridge.write_bytes(b'synthetic bridge')
+            (root/'config/hardware.json').write_text(json.dumps(dict(bridge_sha256=runner.digest(bridge),bridge_path='synthetic/bridge')))
+            out=root/'run';out.mkdir();binary=out/'AmiGUSTest';binary.write_bytes(b'synthetic diagnostic')
+            snapshot=root/'library';snapshot.write_bytes(b'synthetic library')
+            contract={'libraries':[dict(path=str(snapshot),sha256=runner.digest(snapshot))]}
+            result={'passed':False}; original_path=list(sys.path)
+            try:
+                with patch.object(runner,'INFRA',root),self.assertRaisesRegex(RuntimeError,'own release unconfirmed'):
+                    asyncio.run(runner.run(out,binary,result,ownership=True,library_contract=contract,wavetable=True))
+            finally:sys.path[:]=original_path
+            self.assertEqual(switches,['real-a1200'])
+            self.assertTrue(result['execution_finished']);self.assertFalse(result['script_pending'])
+            self.assertTrue(result['ownership_release_pending']);self.assertTrue(result['recovery_hold'])
+            self.assertNotIn('run_files_cleaned',result);self.assertNotIn('devbench_returned',result)
+
 
 if __name__ == '__main__':
     unittest.main()

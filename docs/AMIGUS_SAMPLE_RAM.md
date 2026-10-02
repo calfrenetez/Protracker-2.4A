@@ -567,3 +567,22 @@ independent1790927959178348000 passed originalsolePID79263/profile/localhost/
 running68030/all4DMAoff/exact run+launcher absence without recovery, then explicit
 RELEASE. See `../evidence/enhanced-editor/amigus-ram-bus-native/`. The production
 volatile callbacks operated on ordinary allocated memory, never device RAM.
+
+## Read-only wavetable qualification candidate
+
+AmiGUSTest0.9 adds `--wavetable-status`. It reserves only WAVETABLE under the
+verified amigus.library1.1 contract and reads exactly eight global IRQ/mask words
+at offsets0x00 through0x0e. It never selects a voice bank, writes a register,
+uploads samples, resets hardware, installs interrupts or unloads AHI. Each read
+checks the stable lease/card/base and observed Mini hardware0/firmware7ea663e7;
+loss latches refusal. Own release is independently confirmed using the library's
+NULL-owner query before closing; uncertainty retains Task/library/owner.
+
+The pinned Mini workbook access facts and hash are recorded in
+`evidence/enhanced-editor/amigus-wavetable-status/source-review.json`. Data,
+address, reset and bank-selector registers are write-only in this map. There is
+no documented sample-RAM readback or usage counter here. Snapshot values alone
+cannot establish installed capacity, upload completion, ordering or stopped
+voices. Host sanitizer/native build checks use ordinary synthetic storage;
+physical status qualification is pending until its exact emulator candidate,
+separate cleanup and fresh ownership guards pass.

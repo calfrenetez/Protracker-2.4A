@@ -220,3 +220,13 @@ and locked subsequent verification pass; explicit windowrelease ACK147. Root
 cause remains unproven. Method retained behind experimental --guest-cleanup-pilot,
 not adopted as default; ten host guards pass. See
 `../evidence/enhanced-editor/guest-cleanup-pilot/`. Original failures preserved.
+
+### Version0.9 wavetable status
+
+`--wavetable-status` is a separate bounded read-only Mini diagnostic: eight global
+IRQ/mask reads under a WAVETABLE lease, confirmed own release, no MMIO writes,
+voice-bank selection or idle-AHI unload. It refuses an unverified library
+revision or hardware/firmware descriptor. Status observations do not establish
+all-voice stop, sample-RAM capacity/readback or playback. The synthetic reader
+fixture is `PTWavetableReadTest`; both its exact bytes and the real missing-library
+mode must pass native qualification before a separately coordinated physical run.

@@ -347,7 +347,9 @@ def main():
                    ('driver-window','PTDriverWindowTest','driver window: 8 scenarios passed'),
                    ('driver-exec','PTDriverExecTest','DRIVER EXEC PASS:'),
                    ('pcm-read','PTPcmReadTest','PCM CAPACITY GUARD PASS:'),
+                   ('wavetable-read','PTWavetableReadTest','WAVETABLE READ PASS:'),
                    ('native-abi','PTAmiGusNativeAbiTest','AMIGUS NATIVE ABI PASS:'),
+                   ('amigus-wavetable','AmiGUSTest','reason=library-unavailable'),
                    ('amigus-discover','AmiGUSTest','reason=library-unavailable'),
                    ('amigus-ownership','AmiGUSTest','reason=library-unavailable'),
                    ('amigus-idle','AmiGUSTest','reason=library-unavailable'),
@@ -386,7 +388,7 @@ def main():
             if args.amigus_diagnostic:
                 commands=['FailAt 21','Stack 65536']
                 for name,binary,marker in cases:
-                    option={'amigus-discover':' --discover','amigus-ownership':' --ownership','amigus-idle':' --idle-ownership','amigus-registers':' --idle-registers','amigus-reset':' --idle-reset','amigus-fifo':' --idle-fifo','amigus-capacity':' --idle-capacity','amigus-capacity-observe':' --idle-capacity-observe'}.get(name,'')
+                    option={'amigus-wavetable':' --wavetable-status','amigus-discover':' --discover','amigus-ownership':' --ownership','amigus-idle':' --idle-ownership','amigus-registers':' --idle-registers','amigus-reset':' --idle-reset','amigus-fifo':' --idle-fifo','amigus-capacity':' --idle-capacity','amigus-capacity-observe':' --idle-capacity-observe'}.get(name,'')
                     commands+=['CD '+guest.device+run.name+'/'+name,binary+option+' >test.log','Echo $RC >test.rc']
             if args.recovery_file:
                 directory=guest.device+run.name+'/recovery'

@@ -1,0 +1,15 @@
+{
+  "upstream": "https://github.com/necronomfive/AmiGUS-pub",
+  "commit": "d8c9a0429f41cd5f3dbadae34ef438e45c9c3718",
+  "file": "Documentation/AmiGUS_mini/AmiGUS_mini_Register_Map.xlsx",
+  "sha256": "a30e0cdf966b293c0d5411604a62442a3db98ca4973d2b6bf12961cdc988dd51",
+  "sheet": "SHIVA Register",
+  "observations": [
+    "Rows5-46 describe global IRQ registers0x00/02/04/06 as readable and writable. Reads observe flags; bit15 semantics concern writes.",
+    "Rows47-88 describe global masks0x08/0a/0c/0e as readable and writable. No bank selection is needed for these eight reads.",
+    "Rows89-94 mark sample data0x10/12, address0x14/16, reset0x18 and bank selector0x1e write-only. No sample-RAM read port or usage counter is documented here.",
+    "Rows95-125 concern the selected voice bank. A read-only probe cannot select every bank because0x1e is write-only. Global flags/masks do not prove all voices stopped.",
+    "Documentation is a pinned access contract, not physical device qualification, RAM capacity or transfer completion evidence."
+  ],
+  "implementation": "independent qualification helper; no upstream implementation copied"
+}

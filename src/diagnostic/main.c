@@ -1,4 +1,4 @@
-/* AmiGUSTest 0.8: discovery/ownership and disabled bounded FIFO qualification.
+/* AmiGUSTest 0.9: discovery/ownership, read-only wavetable status and bounded FIFO qualification.
  * Never enables playback or installs interrupts. */
 #include <exec/libraries.h>
 #include <proto/exec.h>
@@ -10,6 +10,7 @@
 #include "ownership.h"
 #include "native_driver_window.h"
 #include "register_probe.h"
+#include "wavetable_probe.h"
 
 struct Library *AmiGUS_Base;
 typedef char abi_card_size[(sizeof(struct AmiGUS) == 40) ? 1 : -1];
@@ -33,7 +34,7 @@ static int diagnostic(int argc, char **argv)
         puts("usage: AmiGUSTest [--discover|--ownership]");
         return PT_FAIL;
     }
-    printf("AMIGUSTEST schema=1 version=0.8 mode=%s\n",
+    printf("AMIGUSTEST schema=1 version=0.9 mode=%s\n",
            ownership ? "ownership" : "discover");
     puts("SCOPE audio=NOT_TESTED interrupts=NOT_TESTED firmware_write=NO");
     AmiGUS_Base = OpenLibrary("amigus.library", 1);
@@ -123,6 +124,7 @@ int main(int argc, char **argv)
     int registers = reset || (argc==2 && !strcmp(argv[1], "--idle-registers"));
     const char *label = observe ? "IDLE-CAPACITY-OBSERVE" : capacity ? "IDLE-CAPACITY" : fifo ? "IDLE-FIFO" : reset ? "IDLE-RESET" : registers ? "IDLE-REGISTERS" : "IDLE-OWNERSHIP";
     char *ownership_args[] = {argv[0], "--ownership"};
+    if (argc==2 && !strcmp(argv[1],"--wavetable-status")) return pt_wavetable_probe();
     if (!registers && (argc != 2 || strcmp(argv[1], "--idle-ownership")))
         return diagnostic(argc, argv);
     printf("%s scope=unused-RC6-020-AHI-only audio=NOT_TESTED\n",label);

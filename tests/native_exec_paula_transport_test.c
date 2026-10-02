@@ -23,7 +23,7 @@ static int fixture(unsigned late)
     CHECK(pt_native_paula_transport_attach(&t,ed));attached=1;
     o.rate=48000;o.bits=24;o.tracks=1;o.gain_q16=65536;o.tick_limit=100;o.frame_limit=100000;
     CHECK(pt_native_paula_transport_begin(&t,&o,32)==PT_PAULA_SONG_PREPARING);
-    i=0;do{r=pt_native_editor_paula_advance(&t.native,NULL);CHECK(++i<100);if(r==PT_PAULA_SONG_PREPARING && !t.native.engine.ready)Delay(1);}while(r==PT_PAULA_SONG_PREPARING);
+    i=0;do{r=pt_native_editor_paula_advance(&t.native,NULL);CHECK(++i<4096);if(r==PT_PAULA_SONG_PREPARING && !t.native.engine.ready)Delay(1);}while(r==PT_PAULA_SONG_PREPARING);
     CHECK(r==PT_PAULA_SONG_OK);
     if(late==2)CHECK(pt_native_task_priority_acquire(&priority,5));
     i=0;do {

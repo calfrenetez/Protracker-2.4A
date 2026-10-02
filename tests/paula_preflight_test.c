@@ -4,9 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../src/editor/paula_preflight.h"
-static unsigned live,calls,fail;
+static unsigned live,calls,fail;static void *last_allocation;
 static void *allocate(void *context,size_t bytes)
-{void *p;(void)context;if(++calls==fail)return NULL;p=malloc(bytes);if(p)++live;return p;}
+{void *p;(void)context;if(++calls==fail)return NULL;p=malloc(bytes);if(p){++live;last_allocation=p;}return p;}
 static void release(void *context,void *p) {(void)context;assert(p && live);--live;free(p);}
 static void controls(void)
 {
@@ -48,13 +48,75 @@ static void controls(void)
     assert(pt_paula_render_voice(&v,48000,gains,0,&caps,&plan) && plan.length==131070);
     pcm.frames=pcm.capacity=v.end=131072;assert(!pt_paula_render_voice(&v,48000,gains,0,&caps,&plan));
 }
+static enum pt_paula_capability incremental(const struct pt_project *p,const struct pt_render_options *o,
+    const struct pt_paula_render_caps *caps,const struct pt_allocator *a,
+    struct pt_paula_preflight_report *out,unsigned transfer)
+{
+    struct pt_paula_preflight *work=NULL,*same;struct pt_render_sequence *sequence=(void *)(uintptr_t)1;
+    struct pt_paula_preflight_report before;struct pt_render_interval span;struct pt_render_plan plan;
+    enum pt_paula_capability result;unsigned n=0,i,allocations=calls;void *audited;
+    result=pt_paula_preflight_begin(p,o,NULL,caps,1,a,out,&work);
+    assert(result==PT_PAULA_PENDING && work && live==2 && calls==allocations+2);
+    same=work;audited=last_allocation;
+    assert(!pt_paula_preflight_transfer(work,&sequence) && sequence==(void *)(uintptr_t)1);
+    assert(pt_paula_preflight_begin(p,o,NULL,caps,1,a,&before,&same)==PT_PAULA_INVALID && same==work && calls==allocations+2);
+    assert(pt_paula_preflight_step(work,NULL)==PT_PAULA_INVALID);
+    while(result==PT_PAULA_PENDING) {
+        before=*out;result=pt_paula_preflight_step(work,out);assert(++n<20000 && calls==allocations+2);
+        assert(out->frames>=before.frames && out->frames-before.frames<=256);
+        assert(out->intervals>=before.intervals && out->intervals-before.intervals<=1);
+        assert(!(out->frames!=before.frames && out->intervals!=before.intervals));
+        if(result!=PT_PAULA_COMPATIBLE)for(i=0;i<PT_PROJECT_SAMPLES;++i)assert(!out->samples[i]);
+    }
+    before=*out;assert(pt_paula_preflight_step(work,out)==result && !memcmp(out,&before,sizeof(before)));
+    if(transfer && result==PT_PAULA_COMPATIBLE) {
+        uint64_t frames=0;unsigned intervals=0;
+        assert(pt_paula_preflight_transfer(work,&sequence) && (void *)sequence==audited && calls==allocations+2);
+        {struct pt_render_sequence *second=(void *)(uintptr_t)1;assert(!pt_paula_preflight_transfer(work,&second) && second==(void *)(uintptr_t)1);}
+        pt_paula_preflight_close(&work);assert(!work && live==1);
+        assert(pt_render_sequence_next(sequence,&span)==PT_RENDER_OK);
+        do {
+            ++intervals;frames+=span.frames;
+            while(span.frames){unsigned chunk=span.frames>256?256:span.frames;assert(pt_render_sequence_consume(sequence,chunk)==PT_RENDER_OK);span.frames-=chunk;}
+            assert(pt_render_sequence_complete(sequence,&plan)==PT_RENDER_OK);
+            if(span.end)break;
+            assert(pt_render_sequence_next(sequence,&span)==PT_RENDER_OK);
+        }while(1);
+        assert(frames==out->frames && intervals==out->intervals && calls==allocations+2);
+        pt_render_sequence_close(sequence);
+    }else {
+        assert(result!=PT_PAULA_COMPATIBLE && !pt_paula_preflight_transfer(work,&sequence) && sequence==(void *)(uintptr_t)1);
+        pt_paula_preflight_close(&work);
+    }
+    pt_paula_preflight_close(&work);assert(!work && !live);return result;
+}
+static void cancel_phases(const struct pt_project *p,const struct pt_render_options *o,
+    const struct pt_paula_render_caps *caps,const struct pt_allocator *a)
+{
+    struct pt_paula_preflight *work=NULL;struct pt_paula_preflight_report r;
+    struct pt_render_sequence *untouched=(void *)(uintptr_t)1;unsigned mode,n,i;
+    for(mode=0;mode<5;++mode) {
+        assert(pt_paula_preflight_begin(p,o,NULL,caps,1,a,&r,&work)==PT_PAULA_PENDING && live==2);
+        if(mode) {
+            for(n=0;n<20000;++n) {
+                assert(pt_paula_preflight_step(work,&r)==PT_PAULA_PENDING);
+                for(i=0;i<PT_PROJECT_SAMPLES;++i)assert(!r.samples[i]);
+                if((mode==1 && !r.intervals) || (mode==2 && r.intervals) ||
+                   (mode==3 && r.frames) || (mode==4 && r.intervals>1 && r.frames))break;
+            }
+            assert(n<20000);
+        }
+        assert(!pt_paula_preflight_transfer(work,&untouched) && untouched==(void *)(uintptr_t)1);
+        pt_paula_preflight_close(&work);assert(!work && !live);pt_paula_preflight_close(&work);
+    }
+}
 static void fixture(unsigned bits)
 {
     struct pt_project p={0};struct pt_sample samples[2];struct pt_event events[64*16]={{0}};
     uint16_t order=0;int32_t pcm[16]={1,257,-513,799},stereo[32]={1,2,3,4};
     struct pt_render_options o={0};struct pt_render_report measured;
     struct pt_paula_render_caps caps={3546895,124,65535};struct pt_allocator a={NULL,allocate,release};
-    struct pt_paula_preflight_report report,batch;struct pt_render_plan plan={0};int8_t map[16];
+    struct pt_paula_preflight_report report,batch,stepped;struct pt_render_plan plan={0};int8_t map[16];
     uint16_t held=0;unsigned i,first_calls;struct pt_voice voice;
     memset(samples,0,sizeof(samples));for(i=0;i<16;++i){if(bits==8)pcm[i]=(int32_t)i+1;}
     pt_channels_init(&p.channels);p.channels.count=16;
@@ -75,6 +137,8 @@ static void fixture(unsigned bits)
     assert(pt_paula_preflight(&p,&o,NULL,&caps,1,&a,&report)==PT_PAULA_COMPATIBLE);
     assert(calls==first_calls+2 && !live && report.frames==measured.frames && report.samples[0] && !report.samples[1]);
     assert(report.map[4]==0 && report.map[7]==1 && report.map[10]==2 && report.map[14]==3);
+    assert(incremental(&p,&o,&caps,&a,&stepped,1)==PT_PAULA_COMPATIBLE && !memcmp(&stepped,&report,sizeof(report)));
+    cancel_phases(&p,&o,&caps,&a);
     /* A different global tempo changes the full shared timeline. */
     events[16+15].parameter=125;
     assert(pt_paula_preflight(&p,&o,NULL,&caps,1,&a,&batch)==PT_PAULA_COMPATIBLE && batch.frames>report.frames);
@@ -86,6 +150,7 @@ static void fixture(unsigned bits)
     events[16*2+4]=(struct pt_event){428,0,PT_NOTE_PERIOD,2,0,0,0,0};
     assert(pt_paula_preflight(&p,&o,NULL,&caps,1,&a,&report)==PT_PAULA_GEOMETRY && report.channel==4 && report.intervals>1);
     assert(!report.samples[0] && !report.samples[1] && !live);
+    assert(incremental(&p,&o,&caps,&a,&stepped,0)==PT_PAULA_GEOMETRY && !memcmp(&stepped,&report,sizeof(report)));
     events[16*2+4]=(struct pt_event){0};
     p.channels.track[4].pan=255;
     assert(pt_paula_preflight(&p,&o,NULL,&caps,1,&a,&report)==PT_PAULA_CONTROL && !live);
@@ -101,7 +166,30 @@ static void fixture(unsigned bits)
         fail=calls+i;
         assert(pt_paula_preflight(&p,&o,NULL,&caps,1,&a,&report)==PT_PAULA_MEMORY && !live);
         fail=0;
+        {
+            struct pt_paula_preflight *work=NULL;
+            fail=calls+i;
+            assert(pt_paula_preflight_begin(&p,&o,NULL,&caps,1,&a,&report,&work)==PT_PAULA_MEMORY && !work && !live);
+            assert(!report.samples[0] && !report.samples[1]);fail=0;
+        }
     }
+    /* Measurement must yield after256 ticks without permitting traversal. */
+    events[16*3+15].effect=0;p.speed=8;o.tick_limit=1000;o.frame_limit=1000000;
+    {
+        struct pt_paula_preflight *work=NULL;struct pt_render_sequence *sequence=(void *)(uintptr_t)1;
+        assert(pt_paula_preflight_begin(&p,&o,NULL,&caps,1,&a,&report,&work)==PT_PAULA_PENDING);
+        assert(pt_paula_preflight_step(work,&report)==PT_PAULA_PENDING && !report.intervals && !report.frames);
+        assert(pt_paula_preflight_step(work,&report)==PT_PAULA_PENDING && !report.intervals && !report.frames);
+        assert(!pt_paula_preflight_transfer(work,&sequence) && sequence==(void *)(uintptr_t)1);
+        pt_paula_preflight_close(&work);assert(!live);
+        o.tick_limit=1;
+        assert(pt_paula_preflight_begin(&p,&o,NULL,&caps,1,&a,&report,&work)==PT_PAULA_PENDING);
+        assert(pt_paula_preflight_step(work,&report)==PT_PAULA_RENDER && report.render_result==PT_RENDER_TICK_LIMIT);
+        assert(!report.intervals && !report.frames && !report.samples[0]);
+        assert(!pt_paula_preflight_transfer(work,&sequence) && sequence==(void *)(uintptr_t)1);
+        pt_paula_preflight_close(&work);assert(!live);
+    }
+    events[16*3+15].effect=15;p.speed=3;o.tick_limit=100;o.frame_limit=100000;
     /* Pure batch gate resolves identity before dereferencing a foreign pointer. */
     assert(pt_channels_paula_map(&p.channels,NULL,map)==PT_CHANNEL_OK);
     assert(pt_voice_init(&voice,&samples[0].pcm,0,16,PT_VOICE_ONCE,0,0,((uint64_t)8000<<32)/48000,0)==PT_PCM_OK);
@@ -124,4 +212,4 @@ static void fixture(unsigned bits)
     assert(pt_paula_check_plan(&p,o.rate,map,&plan,&caps,1,&held,&batch)==PT_PAULA_INVALID && !held);
     assert(!live && samples[0].pcm.bits==bits && pcm[0]==1);
 }
-int main(void){controls();fixture(8);fixture(16);fixture(24);puts("PAULA PREFLIGHT PASS: full shared timeline, explicit clock/stereo/volume/geometry, late refusal and allocation cleanup; no dispatch");return 0;}
+int main(void){controls();fixture(8);fixture(16);fixture(24);puts("PAULA PREFLIGHT PASS: full shared timeline, explicit clock/stereo/volume/geometry, incremental/synchronous parity, same-sequence transfer, bounded phases, cancellation, late refusal and allocation cleanup; no dispatch");return 0;}

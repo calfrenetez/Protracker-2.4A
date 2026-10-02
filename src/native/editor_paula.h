@@ -40,7 +40,7 @@ static inline enum pt_paula_song_result pt_native_editor_paula_begin(
         n->binding.editor->project,chip_budget)){n->failed=1;return PT_PAULA_SONG_DEVICE;}
     return PT_PAULA_SONG_PREPARING;
 }
-/* One reservation/bind/begin OR one master preparation call, no waiting/output.
+/* One reservation/bind/begin OR one bounded analysis/master preparation call, no waiting/output.
  * Failure is terminal until editor stop confirms all cleanup, including cases
  * with no song published. Options/caps immutable for each run. */
 static inline enum pt_paula_song_result pt_native_editor_paula_advance(

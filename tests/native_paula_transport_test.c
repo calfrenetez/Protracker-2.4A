@@ -77,7 +77,7 @@ static void fixture(unsigned mode)
     assert(pt_native_paula_transport_attach(&t,ed));assert(!pt_native_paula_transport_attach(&t,ed));
     assert(pt_native_paula_transport_prime(NULL)==PT_PAULA_SONG_INVALID && pt_native_paula_transport_prime(&t)==PT_PAULA_SONG_INVALID);
     assert(pt_native_paula_transport_begin(&t,&o,32)==PT_PAULA_SONG_PREPARING);
-    i=0;do{r=pt_native_editor_paula_advance(&t.native,NULL);assert(++i<100);}while(r==PT_PAULA_SONG_PREPARING);assert(r==PT_PAULA_SONG_OK);
+    i=0;do{r=pt_native_editor_paula_advance(&t.native,NULL);assert(++i<4096);}while(r==PT_PAULA_SONG_PREPARING);assert(r==PT_PAULA_SONG_OK);
     if(mode==2) {
         i=0;do{r=pt_native_paula_transport_prime(&t);assert(++i<2000);
             assert(!timer_opens && !timer_ports && timer_reads==initial_reads && timer_sends==initial_sends && !(dma&15));

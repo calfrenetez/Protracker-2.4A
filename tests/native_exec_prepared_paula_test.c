@@ -35,7 +35,7 @@ static int fixture(unsigned bits)
     CHECK(!n.binding.song && n.active && pt_editor_prepare_change(ed));
     CHECK(!n.active && !n.engine.output.reservation.port);
     CHECK(pt_native_editor_paula_begin(&n,&options,32)==PT_PAULA_SONG_PREPARING);
-    polls=0;do{r=pt_native_editor_paula_advance(&n,&report);CHECK(++polls<100);if(r==PT_PAULA_SONG_PREPARING && !n.engine.ready)Delay(1);}while(r==PT_PAULA_SONG_PREPARING);
+    polls=0;do{r=pt_native_editor_paula_advance(&n,&report);CHECK(++polls<4096);if(r==PT_PAULA_SONG_PREPARING && !n.engine.ready)Delay(1);}while(r==PT_PAULA_SONG_PREPARING);
     printf("PREPARE bits=%u result=%u capability=%u render=%u action=%u channel=%u kind=%u begun=%u ready=%u\n",bits,(unsigned)r,(unsigned)report.result,(unsigned)report.render_result,report.action,report.channel,(unsigned)report.kind,n.begun,n.engine.ready);
     if(bits==8) {
         CHECK(r==PT_PAULA_SONG_CAPABILITY && report.result==PT_PAULA_OPERATION);

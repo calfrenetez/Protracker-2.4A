@@ -40,7 +40,7 @@ static int fixture(unsigned mode)
     CHECK(pt_native_eclock_open(&diagnostic) && diagnostic.port->mp_SigTask==task);
     o.rate=48000;o.bits=24;o.tracks=1;o.gain_q16=65536;o.tick_limit=100;o.frame_limit=100000;
     CHECK(pt_native_paula_transport_begin(&t,&o,32)==PT_PAULA_SONG_PREPARING);
-    i=0;do{CHECK(!(SetSignal(0,0)&SIGBREAKF_CTRL_C));r=pt_native_editor_paula_advance(&t.native,NULL);CHECK(++i<100);if(r==PT_PAULA_SONG_PREPARING && !t.native.engine.ready)Delay(1);}while(r==PT_PAULA_SONG_PREPARING);
+    i=0;do{CHECK(!(SetSignal(0,0)&SIGBREAKF_CTRL_C));r=pt_native_editor_paula_advance(&t.native,NULL);CHECK(++i<4096);if(r==PT_PAULA_SONG_PREPARING && !t.native.engine.ready)Delay(1);}while(r==PT_PAULA_SONG_PREPARING);
     CHECK(r==PT_PAULA_SONG_OK);
     if(mode==3) {
         unsigned prepared=0,j;size_t zero_bytes=0;

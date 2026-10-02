@@ -21,10 +21,19 @@ static enum pt_paula_song_result schedule_poll(struct pt_paula_song *song,struct
     assert(c->reads==reads+1);return r;
 }
 static void *no_allocate(void *c,size_t n) {(void)c;(void)n;return NULL;}
+struct analysis_allocations {unsigned live,calls,fail;};
+static void *analysis_allocate(void *context,size_t bytes)
+{
+    struct analysis_allocations *a=context;void *p;
+    if(++a->calls==a->fail)return NULL;
+    p=malloc(bytes);if(p)++a->live;return p;
+}
+static void analysis_release(void *context,void *p)
+{struct analysis_allocations *a=context;assert(p && a->live);--a->live;free(p);}
 static enum pt_paula_song_result prepare_song(struct pt_paula_song *s,struct pt_paula_preflight_report *r)
 {
     enum pt_paula_song_result result;unsigned n=0;
-    do{result=pt_paula_song_prepare(s,r);assert(++n<100);}while(result==PT_PAULA_SONG_PREPARING);
+    do{result=pt_paula_song_prepare(s,r);assert(++n<4096);}while(result==PT_PAULA_SONG_PREPARING);
     return result;
 }
 static unsigned stage_song(struct pt_paula_song *song,struct driver *d)
@@ -176,13 +185,43 @@ static void song_fixture(unsigned bits)
     calls=d.calls;starts=d.starts;doc.project.title[0]^=1;
     assert(pt_paula_song_prefetch(song)==PT_PAULA_SONG_STALE && d.calls==calls && d.starts==starts);
     doc.project.title[0]^=1;assert(pt_paula_song_close(&song));
+    /* Cancel and stale guards during analysis precede any promotion/cache/output. */
+    pt_sampler_release(&sampler);
+    doc.project.samples[0].pcm=doc.project.samples[2].pcm=(struct pt_pcm){pcm,1024,1024,8000,1,(uint8_t)bits};
+    pt_sampler_init(&sampler,&a,1024*1024);
+    for(mode=0;mode<12;++mode) {
+        struct analysis_allocations memory={0};struct pt_allocator analyzed={&memory,analysis_allocate,analysis_release};
+        BIND();assert(pt_paula_song_begin(&owner,&o,&caps,&analyzed,&song)==PT_PAULA_SONG_PREPARING);
+        calls=d.calls;starts=d.starts;
+        for(i=0;i<=mode;++i) {
+            assert(pt_paula_song_prepare(song,&report)==PT_PAULA_SONG_PREPARING && report.result==PT_PAULA_PENDING);
+            assert(!sampler.bytes && !sampler.current[0] && !d.live && d.calls==calls && d.starts==starts);
+            assert(!report.samples[0] && !report.samples[2] && memory.live==3 && memory.calls==3);
+        }
+        if(mode&1) {
+            doc.project.title[0]^=1;
+            assert(pt_paula_song_prepare(song,&report)==PT_PAULA_SONG_STALE && !sampler.bytes && d.calls==calls && d.starts==starts);
+            doc.project.title[0]^=1;
+            assert(pt_paula_song_prepare(song,&report)==PT_PAULA_SONG_STALE && memory.live==1);
+        }
+        d.quiesce_result=0;assert(!pt_paula_song_close(&song) && song && !sampler.bytes && memory.live==1);
+        d.quiesce_result=1;assert(pt_paula_song_close(&song) && !song && !sampler.bytes && !d.live && !memory.live);
+    }
+    for(mode=2;mode<=3;++mode) {
+        struct analysis_allocations memory={0,0,mode};struct pt_allocator analyzed={&memory,analysis_allocate,analysis_release};
+        BIND();assert(pt_paula_song_begin(&owner,&o,&caps,&analyzed,&song)==PT_PAULA_SONG_PREPARING);
+        calls=d.calls;starts=d.starts;
+        assert(pt_paula_song_prepare(song,&report)==PT_PAULA_SONG_MEMORY && report.result==PT_PAULA_MEMORY);
+        assert(memory.live==1 && !sampler.bytes && !d.live && d.calls==calls && d.starts==starts);
+        assert(pt_paula_song_close(&song) && !memory.live);
+    }
     /* Cancel while a promotion job owns unpublished storage. */
     pt_sampler_release(&sampler);
     doc.project.samples[0].pcm=doc.project.samples[2].pcm=(struct pt_pcm){pcm,1024,1024,8000,1,(uint8_t)bits};
     pt_sampler_init(&sampler,&a,1024*1024);BIND();
     assert(pt_paula_song_begin(&owner,&o,&caps,&a,&song)==PT_PAULA_SONG_PREPARING);
-    assert(pt_paula_song_prepare(song,&report)==PT_PAULA_SONG_PREPARING);
-    assert(pt_paula_song_prepare(song,&report)==PT_PAULA_SONG_PREPARING && sampler.bytes);
+    starts=d.starts;polls=0;do{assert(pt_paula_song_prepare(song,&report)==PT_PAULA_SONG_PREPARING);assert(++polls<4096 && d.starts==starts);}while(!sampler.bytes);
+    assert(report.result==PT_PAULA_COMPATIBLE);
     pinned=sampler.bytes;d.quiesce_result=0;assert(!pt_paula_song_close(&song) && sampler.bytes==pinned);
     d.quiesce_result=1;assert(pt_paula_song_close(&song) && !sampler.bytes);
     BIND();assert(pt_paula_song_begin(&owner,&o,&caps,&a,&song)==PT_PAULA_SONG_PREPARING);

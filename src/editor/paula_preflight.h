@@ -5,7 +5,7 @@
 #include "../core/document.h"
 enum pt_paula_capability {PT_PAULA_COMPATIBLE,PT_PAULA_INVALID,PT_PAULA_RENDER,
     PT_PAULA_MEMORY,PT_PAULA_RANGE,PT_PAULA_CHANNEL,PT_PAULA_SOURCE,
-    PT_PAULA_GEOMETRY,PT_PAULA_CONTROL,PT_PAULA_OPERATION};
+    PT_PAULA_GEOMETRY,PT_PAULA_CONTROL,PT_PAULA_OPERATION,PT_PAULA_PENDING};
 struct pt_paula_preflight_report {
     enum pt_paula_capability result;enum pt_render_result render_result;
     uint64_t intervals,frames;unsigned action,channel;enum pt_render_action_kind kind;
@@ -29,7 +29,7 @@ enum pt_paula_capability pt_paula_check_plan(const struct pt_project *,unsigned 
  * Requires ordinary renderer-valid options/route selection and finite budgets.
  * Row-range restoration is unsupported and refuses before allocation.
  * Previous map may be NULL; report.map is the resulting stable assignment.
- * Exactly two bounded caller allocations (plan+sequence), released on all paths.
+ * Exactly two bounded caller allocations (workspace+sequence), released on all paths.
  * No PCM mixing, source pins, cache allocation, hardware or driver callbacks.
  * Inputs/arrays/PCM are borrowed immutable through return, including allocator
  * callbacks; output disjoint. Success is capability evidence only, not a session,
@@ -46,4 +46,23 @@ enum pt_paula_capability pt_paula_preflight(const struct pt_project *,const stru
 enum pt_paula_capability pt_paula_preflight_take(const struct pt_project *,const struct pt_render_options *,
     const int8_t *previous,const struct pt_paula_render_caps *,unsigned controls,
     const struct pt_allocator *,struct pt_paula_preflight_report *,struct pt_render_sequence **);
+/* Cancellable alternative to the synchronous wrappers. Begin requires a NULL
+ * work handle and copies options/caps/map. Project/PCM validation and static
+ * metadata scans remain synchronous, before any playback deadline. Two bounded
+ * allocations own workspace and sequence. Each later step performs at most256
+ * measurement ticks, one next, <=256 consumed frames, or one complete/plan check.
+ * PENDING and refusal expose no source masks; full late-row success precedes
+ * pins/cache/output permission. Borrowed project/source storage stays immutable
+ * until close or transferred sequence close; allocator callbacks must not edit.
+ * Transfer returns the SAME successful sequence rewound once, no allocation or
+ * remeasurement. Refusal preserves output; repeated transfer refuses. Close is
+ * idempotent and cancels any phase. Handle is an owner, not copyable state.
+ * Operation bounds are not wall-clock, native timing or hardware guarantees. */
+struct pt_paula_preflight;
+enum pt_paula_capability pt_paula_preflight_begin(const struct pt_project *,const struct pt_render_options *,
+    const int8_t *,const struct pt_paula_render_caps *,unsigned,const struct pt_allocator *,
+    struct pt_paula_preflight_report *,struct pt_paula_preflight **);
+enum pt_paula_capability pt_paula_preflight_step(struct pt_paula_preflight *,struct pt_paula_preflight_report *);
+int pt_paula_preflight_transfer(struct pt_paula_preflight *,struct pt_render_sequence **);
+void pt_paula_preflight_close(struct pt_paula_preflight **);
 #endif

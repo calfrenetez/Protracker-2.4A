@@ -37,7 +37,7 @@ static void prepared_fixture(unsigned bits,unsigned mapped)
     assert(!n.binding.song && n.active && pt_editor_prepare_change(ed));
     assert(!n.active && !n.engine.output.reservation.port); /* Cancel before song exists. */
     assert(pt_native_editor_paula_begin(&n,&options,32)==PT_PAULA_SONG_PREPARING);
-    polls=0;do{r=pt_native_editor_paula_advance(&n,&report);assert(++polls<100);}while(r==PT_PAULA_SONG_PREPARING);
+    polls=0;do{r=pt_native_editor_paula_advance(&n,&report);assert(++polls<4096);}while(r==PT_PAULA_SONG_PREPARING);
     if(mapped==2) {
         /* Zero-leading classic8 is a segment/repeat, not the supported one-shot. */
         assert(bits==8 && r==PT_PAULA_SONG_CAPABILITY && report.result==PT_PAULA_OPERATION);
@@ -67,7 +67,7 @@ static void prepared_fixture(unsigned bits,unsigned mapped)
     assert(doc.project.samples[0].pcm.bits==bits && !memcmp(doc.project.samples[0].pcm.data,saved,sizeof(saved)));
     /* Refused capability never starts a reader and must still use the barrier. */
     options.rate=123;assert(pt_native_editor_paula_begin(&n,&options,32)==PT_PAULA_SONG_PREPARING);
-    polls=0;do{r=pt_native_editor_paula_advance(&n,NULL);assert(++polls<100);}while(r==PT_PAULA_SONG_PREPARING);
+    polls=0;do{r=pt_native_editor_paula_advance(&n,NULL);assert(++polls<4096);}while(r==PT_PAULA_SONG_PREPARING);
     assert(r!=PT_PAULA_SONG_OK && n.failed && !n.engine.output.held[0]);
     assert(pt_native_editor_paula_advance(&n,NULL)==PT_PAULA_SONG_INVALID);
     for(polls=0;polls<8 && !pt_editor_prepare_change(ed);++polls){}

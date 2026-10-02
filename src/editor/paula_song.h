@@ -18,11 +18,13 @@ enum pt_paula_song_result {PT_PAULA_SONG_OK,PT_PAULA_SONG_PREPARING,PT_PAULA_SON
 enum pt_paula_song_result pt_paula_song_begin(struct pt_paula_voices *,
     const struct pt_render_options *,const struct pt_paula_render_caps *,
     const struct pt_allocator *,struct pt_paula_song **);
-/* First prepare performs full silent capability traversal bounded by options'
- * tick/frame limits, then retains the SAME rewound sequence. Subsequent calls
- * reserve one selected master or copy <=4096 PCM/marker bytes. All used masters
- * stay pinned before ready/output; unused slots are not promoted. Setup,
- * traversal and allocations are synchronous, not a hard latency guarantee.
+/* First prepare begins silent capability analysis; later calls perform at most
+ *256 measurement ticks, one next, <=256 consumed frames, or one complete/plan
+ * check. Full late-row success retains the SAME rewound sequence before any
+ * source promotion. Later calls reserve one selected master or copy <=4096
+ * PCM/marker bytes. All used masters stay pinned before ready/output; unused
+ * slots are not promoted. Initial validation/static scans and allocations remain
+ * synchronous, outside playback deadlines; no hard latency guarantee.
  * Failures poison handle, request bounded stops, and still require close.
  * Already-promoted unchanged masters may remain sampler-owned after cancellation. */
 enum pt_paula_song_result pt_paula_song_prepare(struct pt_paula_song *,struct pt_paula_preflight_report *);

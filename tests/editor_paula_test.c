@@ -20,7 +20,7 @@ static void editor_start(struct pt_editor_paula *o,struct pt_sampler_paula *cach
     options.tick_limit=100;options.frame_limit=100000;
     assert(pt_editor_paula_begin(o,voices,&options,&caps)==PT_PAULA_SONG_PREPARING);
     if(!prepare)return;
-    n=0;do{result=pt_editor_paula_prepare(o,&report);assert(++n<100);}while(result==PT_PAULA_SONG_PREPARING);
+    n=0;do{result=pt_editor_paula_prepare(o,&report);assert(++n<4096);}while(result==PT_PAULA_SONG_PREPARING);
     assert(result==PT_PAULA_SONG_OK && !d->reading[0]);
     if(!play)return;
     {
@@ -100,8 +100,7 @@ static void editor_fixture(unsigned bits)
     /* Partial unpublished copy remains charged while adapter context is held. */
     doc.project.events[4].instrument=2;retained=e->sampler.bytes;
     editor_start(&owner,&cache,&voices,&d,0,0);
-    assert(pt_editor_paula_prepare(&owner,NULL)==PT_PAULA_SONG_PREPARING);
-    assert(pt_editor_paula_prepare(&owner,NULL)==PT_PAULA_SONG_PREPARING);
+    {unsigned polls=0;do{assert(pt_editor_paula_prepare(&owner,NULL)==PT_PAULA_SONG_PREPARING);assert(++polls<4096);}while(e->sampler.bytes==retained);}
     assert(e->sampler.bytes>retained && !e->sampler.current[1]);retained=e->sampler.bytes;d.quiesce_result=0;
     assert(!pt_editor_paula_detach(&owner) && e->sampler.bytes==retained);
     d.quiesce_result=1;assert(pt_editor_paula_stop(&owner) && !owner.song && e->sampler.bytes<retained && !e->sampler.current[1]);

@@ -11,7 +11,7 @@ struct pt_paula_song {
     int (*quiesce)(void *);void *quiesce_context;
     struct pt_paula_voice_api api;struct pt_paula_render_caps caps;struct pt_render_options options;
     struct pt_render_lookahead ahead;unsigned forecast;
-    struct pt_render_sequence *sequence;struct pt_render_plan plan;struct pt_paula_prepared batch;
+    struct pt_paula_preflight *analysis;struct pt_render_sequence *sequence;struct pt_render_plan plan;struct pt_paula_prepared batch;
     struct pt_sample_version *pin[PT_PROJECT_SAMPLES];struct pt_sampler_pin_job job;
     struct pt_paula_preflight_report report;struct pt_render_interval interval;
     int8_t map[PT_CHANNEL_LIMIT];uint64_t version;unsigned generation,slot,analyzed,ready,pending,done,closing;
@@ -23,7 +23,7 @@ struct pt_paula_song {
 static enum pt_paula_song_result fail(struct pt_paula_song *s,enum pt_paula_song_result result)
 {
     unsigned i;pt_render_lookahead_cancel(&s->ahead);pt_paula_cancel(&s->batch);s->clock_bound=0;s->schedule_phase=0;s->clock_armed=0;s->failure=result;s->closing=1;s->voices->closing=1;
-    pt_render_sequence_close(s->sequence);s->sequence=NULL;
+    pt_paula_preflight_close(&s->analysis);pt_render_sequence_close(s->sequence);s->sequence=NULL;
     for(i=0;i<PT_PAULA_VOICES;++i)if(s->voices->voice[i].held)
         pt_paula_stop_owned(s->voices,(unsigned)s->voices->voice[i].track,s);
     return result;
@@ -79,11 +79,14 @@ enum pt_paula_song_result pt_paula_song_prepare(struct pt_paula_song *s,struct p
     if(state!=PT_PAULA_SONG_OK)return state;
     if(s->clock_armed || s->schedule_phase)return PT_PAULA_SONG_INVALID;
     if(!s->analyzed) {
-        enum pt_paula_capability result=pt_paula_preflight_take(s->project,&s->options,s->map,&s->caps,
-            s->api.control!=NULL,&s->allocator,&s->report,&s->sequence);
+        enum pt_paula_capability result=s->analysis?pt_paula_preflight_step(s->analysis,&s->report):
+            pt_paula_preflight_begin(s->project,&s->options,s->map,&s->caps,s->api.control!=NULL,
+                &s->allocator,&s->report,&s->analysis);
         if(out)*out=s->report;
+        if(result==PT_PAULA_PENDING)return PT_PAULA_SONG_PREPARING;
         if(result!=PT_PAULA_COMPATIBLE)return fail(s,result==PT_PAULA_MEMORY?PT_PAULA_SONG_MEMORY:PT_PAULA_SONG_CAPABILITY);
-        s->analyzed=1;return PT_PAULA_SONG_PREPARING;
+        if(!pt_paula_preflight_transfer(s->analysis,&s->sequence))return fail(s,PT_PAULA_SONG_RENDER);
+        pt_paula_preflight_close(&s->analysis);s->analyzed=1;return PT_PAULA_SONG_PREPARING;
     }
     if(out)*out=s->report;
     if(s->ready)return PT_PAULA_SONG_OK;
@@ -381,7 +384,7 @@ int pt_paula_song_close(struct pt_paula_song **out)
     struct pt_paula_song *s;struct pt_allocator a;unsigned i;
     if(!out)return 0;
     s=*out;if(!s)return 1;
-    s->closing=1;pt_render_lookahead_cancel(&s->ahead);pt_paula_cancel(&s->batch);
+    s->closing=1;pt_render_lookahead_cancel(&s->ahead);pt_paula_cancel(&s->batch);pt_paula_preflight_close(&s->analysis);
     if(!pt_paula_close_owned(s->voices,s))return 0;
     pt_render_sequence_close(s->sequence);pt_sampler_pin_job_cancel(&s->job);
     for(i=0;i<PT_PROJECT_SAMPLES;++i)pt_sampler_unpin(s->pin[i]);

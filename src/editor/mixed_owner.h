@@ -17,10 +17,16 @@ enum pt_mixed_owner_result {PT_MIXED_OWNER_OK,PT_MIXED_OWNER_PREPARING,
 enum pt_mixed_owner_result pt_mixed_owner_begin(struct pt_paula_voices *,struct pt_wavetable_voices *,
     const struct pt_render_options *,const struct pt_paula_render_caps *,const struct pt_playback_format *,
     const struct pt_allocator *,struct pt_mixed_owner **);
-/* First call fully gates and retains ONE rewound sequence. Subsequent calls
+/* Initial calls incrementally gate and retain ONE rewound sequence. One call
+ * sets up analysis, then each advances <=256 measurement ticks, one next,
+ * <=256 consumed frames, or one complete/backend-plan check. Cancel/close ends
+ * unfinished analysis safely. No master pin/cache/output before full success.
+ * Subsequent calls
  * reserve one master or copy <=4096 bytes. Pins union of both used-source masks
  * exactly once per slot; unused slots remain unpromoted. No derived copies or
- * output callbacks; live backend ownership predicates remain checked. Setup/traversal/allocation synchronous, outside playback deadline.
+ * output callbacks; live backend ownership predicates remain checked. Initial
+ * validation/static scans/allocation remain synchronous, outside playback deadline;
+ * bounded progress does not promise wall-clock latency.
  * Failure poisons handle; close still required. Completed unchanged promotions
  * may remain sampler-owned after cancel. Ready is NOT capacity/output evidence. */
 enum pt_mixed_owner_result pt_mixed_owner_prepare(struct pt_mixed_owner *,struct pt_mixed_report *);

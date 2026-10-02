@@ -20,8 +20,8 @@ static void mixed_cost_callback(void)
 #else
 static void mixed_cost_callback(void){}
 #endif
-static unsigned output_order[32],output_count,fast_calls;
-static void *counted_fast(void *c,size_t bytes){++fast_calls;return fast_alloc(c,bytes);}
+static unsigned output_order[32],output_count,fast_calls,mixed_fail_at;
+static void *counted_fast(void *c,size_t bytes){if(++fast_calls==mixed_fail_at)return NULL;return fast_alloc(c,bytes);}
 static int mixed_start(void *c,unsigned slot,const struct pt_paula_voice_plan *p)
 {mixed_cost_callback();assert(output_count<32);output_order[output_count++]=1;return start(c,slot,p);}
 static int mixed_control(void *c,unsigned slot,uint16_t period,uint8_t volume)
@@ -112,6 +112,37 @@ static void owner_fixture(unsigned bits,unsigned mode)
     assert(pt_wavetable_voices_trigger(&av,7,0,&format,&wr,staging,sizeof(staging))==PT_VOICE_REFUSED);
     plan->count=0;assert(!pt_wavetable_dispatch(&av,ab.version,48000,plan,&format,staging,sizeof(staging)));
     if(mode==1)goto close;
+    if(mode>=83 && mode<=87) {
+        unsigned allocs=fast_calls;size_t live_before;
+        if(mode>=86)mixed_fail_at=fast_calls+(mode==86?1:2);
+        r=pt_mixed_owner_prepare(owner,&report);mixed_fail_at=0;
+        if(mode>=86) {
+            assert(r==PT_MIXED_OWNER_MEMORY && !sampler.bytes && !sampler.current[0] && !sampler.current[1]);
+            assert(pt_mixed_owner_prepare(owner,&report)==PT_MIXED_OWNER_MEMORY);goto close;
+        }
+        assert(r==PT_MIXED_OWNER_PREPARING && report.result==PT_MIXED_PENDING && fast_calls==allocs+2);
+        allocs=fast_calls;
+        if(mode>=84)do {
+            uint64_t frames=report.frames,intervals=report.intervals;
+            r=pt_mixed_owner_prepare(owner,&report);assert(++n<100);
+            assert(r==PT_MIXED_OWNER_PREPARING && report.result==PT_MIXED_PENDING);
+            assert(report.frames-frames<=256 && report.intervals-intervals<=1);
+            assert(!(report.frames!=frames && report.intervals!=intervals));
+        }while(!report.frames);
+        assert(fast_calls==allocs && !sampler.bytes && !sampler.current[0] && !sampler.current[1] && !sampler.current[2]);
+        assert(!d.starts && !wd.starts && !d.live && !f->writes && !output_count);
+        for(i=0;i<PT_PROJECT_SAMPLES;++i)assert(!report.samples[0][i] && !report.samples[1][i]);
+        if(mode==85) {
+            doc.project.bpm=150;assert(pt_mixed_owner_current(owner)==PT_MIXED_OWNER_STALE);
+            assert(pt_mixed_owner_prepare(owner,&report)==PT_MIXED_OWNER_STALE);goto close;
+        }
+        /* Close cancels analysis before a pending device barrier, retaining only
+         * the owner until a later confirmed close. No source was promoted. */
+        live_before=sampler.bytes;d.quiesce_result=wd.barrier_result=0;
+        assert(!pt_mixed_owner_close(&owner) && owner && pv.song_owner==owner && av.song_owner==owner);
+        assert(sampler.bytes==live_before && !sampler.current[0] && !d.starts && !wd.starts && !f->writes);
+        d.quiesce_result=wd.barrier_result=1;goto close;
+    }
     if(mode==3)sampler.budget=0;
     do {r=pt_mixed_owner_prepare(owner,&report);assert(++n<100 && !d.starts && !wd.starts && !d.live && !f->writes);
         if(mode==2 && sampler.current[0]){doc.project.bpm=150;break;}
@@ -937,7 +968,8 @@ static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wave
     for(bits=8;bits<=24;bits+=8)owner_fixture(bits,67);
     for(bits=8;bits<=24;bits+=8)owner_fixture(bits,68);
     for(bits=8;bits<=24;bits+=8)for(mode=69;mode<=82;++mode)owner_fixture(bits,mode);
-    puts("MIXED OWNER PASS:60 native retirement8/16/24 scenarios,6component/6running/3cancel-reuse/3ready-safety (26mutations each)/39injected-pump/3native-private-alarm, manual source/current/next/prefetch/complete public calls, bounded preparation, allocation/upload-free commit/next, global action order, resource cleanup; injected voices, no timed playback acceptance");
+    for(bits=8;bits<=24;bits+=8)for(mode=83;mode<=87;++mode)owner_fixture(bits,mode);
+    puts("MIXED OWNER PASS:75 native retirement8/16/24 scenarios,15incremental-analysis/6component/6running/3cancel-reuse/3ready-safety (26mutations each)/39injected-pump/3native-private-alarm, manual source/current/next/prefetch/complete public calls, bounded preparation, allocation/upload-free commit/next, global action order, resource cleanup; injected voices, no timed playback acceptance");
 #elif defined(PT_TEST_MIXED_NATIVE_STARTUP)
     for(bits=8;bits<=24;bits+=8)for(mode=58;mode<60;++mode)owner_fixture(bits,mode);
     puts("MIXED OWNER PASS:6 native startup-cost8/16/24 scenarios, fully prepared2/16voice startup, allocation/upload-free exact commit, global action order, resource cleanup; injected logical time/voices, no audio/timing acceptance");
@@ -956,7 +988,8 @@ static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wave
     for(bits=8;bits<=24;bits+=8)for(mode=0;mode<56;++mode)owner_fixture(bits,mode);
     for(bits=8;bits<=24;bits+=8)for(mode=58;mode<80;++mode)owner_fixture(bits,mode);
     for(bits=8;bits<=24;bits+=8)for(mode=81;mode<=82;++mode)owner_fixture(bits,mode);
-    puts("MIXED OWNER PASS: full240 host scenarios, master/cache/staging/commit/sequence/deadline/schedule ownership; no native clock");
+    for(bits=8;bits<=24;bits+=8)for(mode=83;mode<=87;++mode)owner_fixture(bits,mode);
+    puts("MIXED OWNER PASS: full255 host scenarios, incremental analysis cancellation/failure, master/cache/staging/commit/sequence/deadline/schedule ownership; no native clock");
 #endif
     return 0;}
 

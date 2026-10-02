@@ -96,6 +96,11 @@ static void editor_mixed_case(unsigned bits,unsigned mode)
     }
 #endif
     if(mode==0) {
+        /* The editor barrier also owns analysis after preparation has begun:
+         * cancel its unfinished sequence without ever pinning a master/cache. */
+        struct pt_mixed_report report;
+        for(n=0;n<3;++n)assert(pt_editor_mixed_prepare(&o,&report)==PT_MIXED_OWNER_PREPARING);
+        assert(report.result==PT_MIXED_PENDING && !e->sampler.bytes && !d.starts && !wd.starts && !f->writes);
         d.quiesce_result=wd.barrier_result=0;assert(!pt_editor_prepare_change(e) && o.owner);
         assert(!pt_editor_dispose(e) && !pt_editor_mixed_detach(&o));
         d.quiesce_result=wd.barrier_result=1;assert(pt_editor_prepare_change(e) && !o.owner);goto closed;

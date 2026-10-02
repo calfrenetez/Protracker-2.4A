@@ -44,6 +44,55 @@ static void fixture(unsigned bits,unsigned cache_bits)
         for(i=0;i<plan->count;++i)assert(plan->action[i].channel==4 || plan->action[i].channel==7);
     }while(!span.end);assert(frames==measured.frames);assert(pt_render_sequence_rewind(s)==PT_RENDER_OK);}
     pt_render_sequence_close(s);assert(!live);
+    /* The resumable gate transfers that same sequence once, without another
+     * allocation, preserves the synchronous report, and exposes no partial masks. */
+    {
+        struct pt_mixed_preflight *work=NULL;struct pt_mixed_report expected=r,step,old;
+        enum pt_mixed_result result;unsigned steps=0,allocs;struct pt_render_sequence *second=sentinel;
+        assert(pt_mixed_preflight_begin(&p,&o,NULL,&caps,&format,1,1,&a,&step,&work)==PT_MIXED_PENDING);
+        assert(work && live==2 && !step.frames && !step.intervals);allocs=calls;
+        s=sentinel;assert(!pt_mixed_preflight_take(work,&s) && s==sentinel);
+        assert(pt_mixed_preflight_begin(&p,&o,NULL,&caps,&format,1,1,&a,&r,&work)==PT_MIXED_INVALID && calls==allocs);
+        do {
+            old=step;result=pt_mixed_preflight_step(work,&step);assert(++steps<1000 && calls==allocs);
+            assert(step.frames-old.frames<=256 && step.intervals-old.intervals<=1);
+            assert(!(step.frames!=old.frames && step.intervals!=old.intervals));
+            if(result!=PT_MIXED_OK)for(i=0;i<PT_PROJECT_SAMPLES;++i)assert(!step.samples[0][i] && !step.samples[1][i]);
+        }while(result==PT_MIXED_PENDING);
+        assert(result==PT_MIXED_OK && steps>8 && !memcmp(&step,&expected,sizeof(step)));
+        old=step;assert(pt_mixed_preflight_step(work,&step)==PT_MIXED_OK && !memcmp(&step,&old,sizeof(step)));
+        assert(pt_mixed_preflight_take(work,&s) && s!=sentinel && live==2 && calls==allocs);
+        assert(!pt_mixed_preflight_take(work,&second) && second==sentinel);
+        pt_mixed_preflight_close(&work);assert(!work && live==1);
+        pt_mixed_preflight_close(&work);frames=0;
+        do {
+            assert(pt_render_sequence_next(s,&span)==PT_RENDER_OK);
+            {uint32_t left=span.frames;while(left){uint32_t n=left>256?256:left;assert(pt_render_sequence_consume(s,n)==PT_RENDER_OK);left-=n;}frames+=span.frames;}
+            assert(pt_render_sequence_complete(s,plan)==PT_RENDER_OK);
+        }while(!span.end);
+        assert(frames==expected.frames);pt_render_sequence_close(s);assert(!live);
+    }
+    /* Cancel during measurement, interval traversal and completed untaken work.
+     * Five64-row orders require more than one256-tick measurement step. */
+    {
+        struct pt_mixed_preflight *work=NULL;struct pt_mixed_report step;
+        struct pt_render_options long_options=o;uint16_t orders[5]={0};unsigned stage,steps;
+        enum pt_mixed_result result;
+        events[48+15].effect=0;p.orders=orders;p.order_count=5;
+        long_options.tick_limit=400;long_options.frame_limit=1000000;
+        for(stage=0;stage<4;++stage) {
+            assert(pt_mixed_preflight_begin(&p,&long_options,NULL,&caps,&format,1,1,&a,&step,&work)==PT_MIXED_PENDING && live==2);
+            if(stage) {
+                assert(pt_mixed_preflight_step(work,&step)==PT_MIXED_PENDING && !step.intervals && !step.frames);
+                if(stage>=2) {
+                    steps=0;do {result=pt_mixed_preflight_step(work,&step);assert(++steps<10000);}while(result==PT_MIXED_PENDING && (stage==3 || !step.frames));
+                    assert(stage==3?result==PT_MIXED_OK:result==PT_MIXED_PENDING && step.frames);
+                }
+            }
+            pt_mixed_preflight_close(&work);assert(!work && !live);pt_mixed_preflight_close(&work);
+        }
+        p.orders=&order;p.order_count=1;events[48+15].effect=15;
+    }
     events[16+15].parameter=125;
     assert(pt_mixed_preflight(&p,&o,NULL,&caps,&format,1,1,&a,&r,NULL)==PT_MIXED_OK && r.frames>measured.frames);
     events[16+15].parameter=150;
@@ -52,6 +101,15 @@ static void fixture(unsigned bits,unsigned cache_bits)
         assert(pt_mixed_preflight(&p,&o,NULL,&caps,&format,1,1,&a,&r,&s)==(pass?PT_MIXED_AMIGUS:PT_MIXED_PAULA));
         assert(r.channel==ch && r.kind==PT_RENDER_TRIGGER && r.intervals>1 && s==sentinel && !live);
         for(i=0;i<PT_PROJECT_SAMPLES;++i)assert(!r.samples[0][i] && !r.samples[1][i]);
+        {
+            struct pt_mixed_preflight *work=NULL;struct pt_mixed_report step,failed;enum pt_mixed_result result;unsigned steps=0;
+            assert(pt_mixed_preflight_begin(&p,&o,NULL,&caps,&format,1,1,&a,&step,&work)==PT_MIXED_PENDING);
+            do {result=pt_mixed_preflight_step(work,&step);assert(++steps<1000);}while(result==PT_MIXED_PENDING);
+            assert(result==r.result && !memcmp(&step,&r,sizeof(step)));
+            failed=step;assert(pt_mixed_preflight_step(work,&step)==result && !memcmp(&step,&failed,sizeof(step)));
+            assert(!pt_mixed_preflight_take(work,&s) && s==sentinel);
+            pt_mixed_preflight_close(&work);assert(!live);
+        }
         events[32+ch]=(struct pt_event){0};
     }
     before=calls;o.row_range=1;
@@ -70,4 +128,4 @@ static void fixture(unsigned bits,unsigned cache_bits)
     plan->count=1;assert(pt_wavetable_check_plan(&p,48000,plan,&format,1,&held,&wr)==PT_WAVETABLE_COMPATIBLE && held==(1U<<7));
     free(plan);assert(!live && samples[0].pcm.bits==bits && samples[1].pcm.bits==bits && pcm[0]==1);
 }
-int main(void){fixture(8,8);fixture(16,16);fixture(24,8);fixture(24,16);puts("MIXED PREFLIGHT PASS: one global timeline, separate source masks, late backend refusal, transfer and allocation cleanup; no dispatch");return 0;}
+int main(void){fixture(8,8);fixture(16,16);fixture(24,8);fixture(24,16);puts("MIXED PREFLIGHT PASS: incremental/synchronous parity, bounded steps, hidden partial masks, one sequence transfer, cancellation and late refusal cleanup; no dispatch");return 0;}

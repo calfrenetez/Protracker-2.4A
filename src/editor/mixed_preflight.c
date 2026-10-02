@@ -2,8 +2,25 @@
 #include <limits.h>
 #include <string.h>
 struct workspace {struct pt_render_plan all,paula,amigus;unsigned index[2][PT_RENDER_ACTIONS];};
+struct pt_mixed_preflight {
+    struct workspace batch;struct pt_allocator allocator;
+    const struct pt_project *project;struct pt_render_options options;
+    struct pt_paula_render_caps caps;struct pt_playback_format format;
+    struct pt_render_sequence *sequence;struct pt_render_interval span;
+    struct pt_mixed_report report;uint16_t held[2];uint32_t remaining;
+    unsigned pc,ac,phase;
+};
 static void init(struct pt_mixed_report *r)
 {unsigned i;memset(r,0,sizeof(*r));r->result=PT_MIXED_INVALID;r->action=r->channel=UINT_MAX;r->paula=PT_PAULA_INVALID;r->amigus=PT_WAVETABLE_INVALID;for(i=0;i<PT_CHANNEL_LIMIT;++i)r->map[i]=-1;}
+static void report(const struct pt_mixed_report *r,struct pt_mixed_report *out)
+{*out=*r;if(r->result!=PT_MIXED_OK)memset(out->samples,0,sizeof(out->samples));}
+void pt_mixed_preflight_close(struct pt_mixed_preflight **work)
+{
+    struct pt_mixed_preflight *w;struct pt_allocator a;
+    if(!work || !*work)return;
+    w=*work;a=w->allocator;pt_render_sequence_close(w->sequence);
+    a.release(a.context,w);*work=NULL;
+}
 static enum pt_mixed_result batch(const struct pt_project *p,unsigned rate,struct workspace *w,
     const struct pt_paula_render_caps *caps,const struct pt_playback_format *f,unsigned pc,unsigned ac,
     uint16_t held[2],struct pt_mixed_report *r)
@@ -33,14 +50,13 @@ static enum pt_mixed_result batch(const struct pt_project *p,unsigned rate,struc
     for(i=0;i<PT_PROJECT_SAMPLES;++i){r->samples[0][i]|=pr.samples[i];r->samples[1][i]|=ar.samples[i];}
     held[0]=next[0];held[1]=next[1];return PT_MIXED_OK;
 }
-enum pt_mixed_result pt_mixed_preflight(const struct pt_project *p,const struct pt_render_options *o,
+enum pt_mixed_result pt_mixed_preflight_begin(const struct pt_project *p,const struct pt_render_options *o,
     const int8_t *previous,const struct pt_paula_render_caps *caps,const struct pt_playback_format *f,
-    unsigned pc,unsigned ac,const struct pt_allocator *a,struct pt_mixed_report *out,struct pt_render_sequence **take)
+    unsigned pc,unsigned ac,const struct pt_allocator *a,struct pt_mixed_report *out,struct pt_mixed_preflight **work)
 {
-    struct pt_mixed_report r;struct workspace *w=NULL;struct pt_render_sequence *s=NULL;
-    struct pt_render_interval span;uint16_t held[2]={0,0};uint32_t remaining;unsigned i;
+    struct pt_mixed_report r;struct pt_mixed_preflight *w=NULL;unsigned i;
     init(&r);if(!out)return PT_MIXED_INVALID;
-    if(!p || !o || !a || !a->allocate || !a->release || pc>1 || ac>1 || (o->rate!=44100 && o->rate!=48000) ||
+    if(!work || *work || !p || !o || !a || !a->allocate || !a->release || pc>1 || ac>1 || (o->rate!=44100 && o->rate!=48000) ||
        !pt_paula_render_caps_valid(caps) || !f || (f->bits!=8 && f->bits!=16) ||
        f->channel || f->word_pad || f->little_endian>1 || pt_project_validate(p,NULL)!=PT_PROJECT_OK ||
        pt_channels_paula_map(&p->channels,previous,r.map)!=PT_CHANNEL_OK)goto done;
@@ -48,19 +64,64 @@ enum pt_mixed_result pt_mixed_preflight(const struct pt_project *p,const struct 
     for(i=0;i<p->channels.count;++i)if((o->tracks&(1U<<i)) &&
        p->channels.track[i].route!=PT_PAULA && p->channels.track[i].route!=PT_AMIGUS){r.result=PT_MIXED_ROUTE;r.channel=i;goto done;}
     w=a->allocate(a->context,sizeof(*w));if(!w){r.result=PT_MIXED_MEMORY;goto done;}
-    r.render_result=pt_render_sequence_open(p,o,a,&s);if(r.render_result!=PT_RENDER_OK)goto render_error;
-    do {
-        r.render_result=pt_render_sequence_next(s,&span);if(r.render_result!=PT_RENDER_OK)goto render_error;
-        ++r.intervals;remaining=span.frames;
-        while(remaining){uint32_t n=remaining>256?256:remaining;r.render_result=pt_render_sequence_consume(s,n);if(r.render_result!=PT_RENDER_OK)goto render_error;remaining-=n;r.frames+=n;}
-        r.render_result=pt_render_sequence_complete(s,&w->all);if(r.render_result!=PT_RENDER_OK)goto render_error;
-        r.result=batch(p,o->rate,w,caps,f,pc,ac,held,&r);if(r.result!=PT_MIXED_OK)goto done;
-    }while(!span.end);
-    if(take){r.render_result=pt_render_sequence_rewind(s);if(r.render_result!=PT_RENDER_OK)goto render_error;*take=s;s=NULL;}
-    goto done;
-render_error:r.result=r.render_result==PT_RENDER_MEMORY?PT_MIXED_MEMORY:PT_MIXED_RENDER;
+    memset(w,0,sizeof(*w));w->allocator=*a;
+    r.render_result=pt_render_sequence_begin(p,o,a,&w->sequence);
+    if(r.render_result!=PT_RENDER_OK) {
+        r.result=r.render_result==PT_RENDER_MEMORY?PT_MIXED_MEMORY:PT_MIXED_RENDER;
+        pt_mixed_preflight_close(&w);goto done;
+    }
+    w->project=p;w->options=*o;w->caps=*caps;w->format=*f;w->pc=pc;w->ac=ac;
+    r.result=PT_MIXED_PENDING;w->report=r;*work=w;
 done:
-    pt_render_sequence_close(s);if(w)a->release(a->context,w);
-    if(r.result!=PT_MIXED_OK)memset(r.samples,0,sizeof(r.samples));
-    *out=r;return r.result;
+    report(&r,out);return r.result;
+}
+enum pt_mixed_result pt_mixed_preflight_step(struct pt_mixed_preflight *w,struct pt_mixed_report *out)
+{
+    struct pt_mixed_report *r;unsigned ready;
+    if(!w || !out)return PT_MIXED_INVALID;
+    r=&w->report;if(r->result!=PT_MIXED_PENDING)goto done;
+    switch(w->phase) {
+    case 0:
+        r->render_result=pt_render_sequence_prepare(w->sequence,256,&ready);
+        if(r->render_result==PT_RENDER_OK && ready)w->phase=1;
+        break;
+    case 1:
+        r->render_result=pt_render_sequence_next(w->sequence,&w->span);
+        if(r->render_result!=PT_RENDER_OK)break;
+        ++r->intervals;w->remaining=w->span.frames;w->phase=w->remaining?2:3;
+        break;
+    case 2: {
+        uint32_t n=w->remaining>256?256:w->remaining;
+        r->render_result=pt_render_sequence_consume(w->sequence,n);
+        if(r->render_result!=PT_RENDER_OK)break;
+        w->remaining-=n;r->frames+=n;if(!w->remaining)w->phase=3;
+        break;
+    }
+    case 3:
+        r->render_result=pt_render_sequence_complete(w->sequence,&w->batch.all);
+        if(r->render_result!=PT_RENDER_OK)break;
+        r->result=batch(w->project,w->options.rate,&w->batch,&w->caps,&w->format,w->pc,w->ac,w->held,r);
+        if(r->result==PT_MIXED_OK && !w->span.end){r->result=PT_MIXED_PENDING;w->phase=1;}
+        break;
+    }
+    if(r->render_result!=PT_RENDER_OK)r->result=r->render_result==PT_RENDER_MEMORY?PT_MIXED_MEMORY:PT_MIXED_RENDER;
+done:
+    report(r,out);return r->result;
+}
+int pt_mixed_preflight_take(struct pt_mixed_preflight *w,struct pt_render_sequence **out)
+{
+    if(!w || !out || w->report.result!=PT_MIXED_OK || !w->sequence)return 0;
+    w->report.render_result=pt_render_sequence_rewind(w->sequence);
+    if(w->report.render_result!=PT_RENDER_OK){w->report.result=PT_MIXED_RENDER;return 0;}
+    *out=w->sequence;w->sequence=NULL;return 1;
+}
+enum pt_mixed_result pt_mixed_preflight(const struct pt_project *p,const struct pt_render_options *o,
+    const int8_t *previous,const struct pt_paula_render_caps *caps,const struct pt_playback_format *f,
+    unsigned pc,unsigned ac,const struct pt_allocator *a,struct pt_mixed_report *out,struct pt_render_sequence **take)
+{
+    struct pt_mixed_preflight *w=NULL;
+    enum pt_mixed_result result=pt_mixed_preflight_begin(p,o,previous,caps,f,pc,ac,a,out,&w);
+    while(result==PT_MIXED_PENDING)result=pt_mixed_preflight_step(w,out);
+    if(result==PT_MIXED_OK && take && !pt_mixed_preflight_take(w,take))result=pt_mixed_preflight_step(w,out);
+    pt_mixed_preflight_close(&w);return result;
 }

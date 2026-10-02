@@ -30,8 +30,9 @@ static inline enum pt_mixed_owner_result pt_native_editor_mixed_start(
     return r;
 }
 /* Native frontend advancement seam: one owner preparation call OR one bounded
- * transport service per call. Initial setup/traversal remains synchronous outside
- * playback deadlines; later master promotion copies at most4096bytes per call. Ready preparation opens/adopts idle timers
+ * transport service per call. Initial validation/static setup remain synchronous
+ * outside playback deadlines; timeline analysis advances in bounded phases and
+ * later master promotion copies at most4096bytes per call. Ready preparation opens/adopts idle timers
  * and returns PREPARING: caller schedules another turn to prime/start, no output
  * here. Delay/quantum remain immutable for this run. PREPARING means immediate
  * bounded work, interleave bounded UI processing without sleeping on an unarmed

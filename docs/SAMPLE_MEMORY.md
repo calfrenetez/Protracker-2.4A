@@ -20,8 +20,8 @@ A native wavetable sample-RAM bus candidate now supplies bounded address/data
 callbacks to the existing cache. Bind performs no I/O, writes require the cache
 access lease, and detected ownership/descriptor loss latches refusal. Host
 sanitizer checks and exact native cross-build pass against synthetic descriptors
-and ordinary register storage. Native execution is pending the next coordinated
-emulator window. No physical RAM region or upload/readback semantics is inferred;
+and ordinary register storage. Native shared030 execution now passes with the real SDK, one Fast allocation
+and zero owned bytes; separate exact cleanup/idle guest verification passed. No physical RAM region or upload/readback semantics is inferred;
 the frontend does not instantiate this bus. See `AMIGUS_SAMPLE_RAM.md`.
 
 ## Prior implementation status — 1 October 2026

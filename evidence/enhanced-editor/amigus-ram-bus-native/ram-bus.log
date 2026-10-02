@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131227216 reserve=262144 flags=4
+NATIVE RAM BUS PASS: synthetic descriptor/paired stores, bounded region, exclusive access, latched refusal, pinned cache and intact24-bit master; no card access
+EXEC MEMORY PASS: 1 Fast allocations, zero owned bytes, budget refusal without Chip fallback

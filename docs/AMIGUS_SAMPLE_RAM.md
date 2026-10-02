@@ -559,3 +559,11 @@ compiler builds `PTExecAmiGusRamBusTest` using the real SDK via
 execution is pending fresh coordination after Scott's independently released
 window. Hardware capacity/upload/readback/ordering/voice-stop/output/listening
 remain open.
+
+
+The exact RAM-bus fixture now passes shared030 run1790927892937497000 RC0 with
+the real SDK and one Fast allocation/zero owned bytes/no Chip fallback. Separate
+independent1790927959178348000 passed originalsolePID79263/profile/localhost/
+running68030/all4DMAoff/exact run+launcher absence without recovery, then explicit
+RELEASE. See `../evidence/enhanced-editor/amigus-ram-bus-native/`. The production
+volatile callbacks operated on ordinary allocated memory, never device RAM.

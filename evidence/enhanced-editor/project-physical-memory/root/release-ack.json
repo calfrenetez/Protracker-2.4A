@@ -1,0 +1,7 @@
+{
+  "scope": "Explicit verified RELEASE acknowledgment of physical TAKE100",
+  "revision": 101,
+  "turn_id": "01a1024b-392c-7b83-b27a-cc2b0f174146",
+  "cursor": "e7a645e7-31a2-432b-918d-41790ea9e0a3:101",
+  "text": "ProTracker reports the physical RAM-only serializer test passed and both reservations are released after independent verification. Safari is View Only; DevBench is back on the unchanged emulator. No recovery hold remains. This qualifies software master-save and Exec memory only\u2014not audio, AmiGUS or timing. Scott may seek a fresh window."
+}

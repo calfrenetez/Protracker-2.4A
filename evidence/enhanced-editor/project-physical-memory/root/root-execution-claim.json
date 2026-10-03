@@ -1,0 +1,16 @@
+{
+  "arguments": [
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/.venv/bin/python",
+    "-I",
+    "/private/tmp/protracker-project-physical-prepared-VEd4D7/physical_project_stream.py",
+    "--execute-approved-single-case",
+    "--prepared-manifest-sha256",
+    "eba2a65de4bc29e0c3fd4b5d568de48c33f6ce9ef043e38face9efda15e269bf",
+    "--coordination-gate",
+    "/private/tmp/protracker-physical-project-root-5j11jtqn/gate.json",
+    "--coordination-gate-sha256",
+    "73929ebccddffe7958dc6daab0920affe5d01b0df0ab0fe88a2f61f6b220bb2a"
+  ],
+  "gate_sha256": "73929ebccddffe7958dc6daab0920affe5d01b0df0ab0fe88a2f61f6b220bb2a",
+  "time_ns": 1791039556882387000
+}

@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "scope": "Host synthetic/static orchestration checks only; no product build/test, no lock/Guest/bridge/browser/native or target action",
+  "test_methods": 6,
+  "fault_scenarios": 16,
+  "typed_inventory_guard": true,
+  "all99_pinned_host_files_rehashed": true,
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "/private/tmp/protracker-project-physical-prepared-VEd4D7/test_prepared_guards.py"
+      ],
+      "env": {
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "rc": 0,
+      "log": "/private/tmp/protracker-project-physical-prepared-VEd4D7/host-mock-checks-final.log",
+      "log_sha256": "75d12c6d5b957b2d282e96dede70971c357819d8fc1241b32226ac3ebbafbeb3"
+    }
+  ],
+  "ast_parse": [
+    "physical_project_stream.py",
+    "test_prepared_guards.py"
+  ],
+  "execution_claim_present": false,
+  "prepared_host_python": {
+    "executable": "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "version": "3.14.0 (main, Oct  7 2025, 09:34:52) [Clang 17.0.0 (clang-1700.3.19.1)]"
+  }
+}

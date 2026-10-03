@@ -1,0 +1,24 @@
+{
+  "scope": "One externally bounded physical fixture invocation, no retries or recovery",
+  "arguments": [
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/.venv/bin/python",
+    "-I",
+    "/private/tmp/protracker-project-physical-prepared-VEd4D7/physical_project_stream.py",
+    "--execute-approved-single-case",
+    "--prepared-manifest-sha256",
+    "eba2a65de4bc29e0c3fd4b5d568de48c33f6ce9ef043e38face9efda15e269bf",
+    "--coordination-gate",
+    "/private/tmp/protracker-physical-project-root-5j11jtqn/gate.json",
+    "--coordination-gate-sha256",
+    "73929ebccddffe7958dc6daab0920affe5d01b0df0ab0fe88a2f61f6b220bb2a"
+  ],
+  "timeout_seconds": 310,
+  "gate_sha256": "73929ebccddffe7958dc6daab0920affe5d01b0df0ab0fe88a2f61f6b220bb2a",
+  "passed": true,
+  "returncode": 0,
+  "native_result": {
+    "path": "/private/tmp/protracker-project-physical-prepared-VEd4D7/physical-project-1791039556965048000/result.json",
+    "sha256": "7d6c91ab22f35d8508e527791ff7ce1542ecccd8dda7dfcaa0eeaf8a0926c4f3"
+  },
+  "elapsed_seconds": 92.37658087500313
+}

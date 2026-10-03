@@ -1,0 +1,17 @@
+{
+  "passed": false,
+  "observations": [
+    {
+      "elapsed_seconds": 0.0,
+      "processes": [
+        [
+          19081,
+          "owned original"
+        ]
+      ],
+      "cpu": "OK\tmodel=68030",
+      "status": "OK\tPaused=false",
+      "audio": "OK\tch0_dma=1\tch1_dma=0\tch2_dma=0\tch3_dma=0"
+    }
+  ]
+}

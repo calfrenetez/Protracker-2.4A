@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "scope": "Separate externally bounded locked read-only original030 idle check",
+  "arguments": [
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/.venv/bin/python",
+    "-I",
+    "/private/tmp/protracker-physical-project-root-5j11jtqn/verify_idle_return.py",
+    "--original",
+    "/private/tmp/protracker-physical-project-root-5j11jtqn/original-processes.json",
+    "--out",
+    "/private/tmp/protracker-physical-project-root-5j11jtqn/idle-verification-1791039710236863000"
+  ],
+  "timeout_seconds": 60,
+  "returncode": 0,
+  "result": {
+    "path": "/private/tmp/protracker-physical-project-root-5j11jtqn/idle-verification-1791039710236863000/result.json",
+    "sha256": "cd7b62c714da5719a6e262f07b044603cdb9fe6a859a4099d8d28b4bfb2aa5bb"
+  },
+  "elapsed_seconds": 14.019939207995776
+}

@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "scope": "Host-only mock; no locks/process health/Guest/target operation",
+  "cases": [
+    "11 stable observations >10s",
+    "captured conflicting process refusal persisted",
+    "active DMA refusal persisted"
+  ],
+  "mock_root": "/private/tmp/protracker-physical-project-root-5j11jtqn/idle-mock-lmabkr69"
+}

@@ -1,0 +1,34 @@
+{
+  "scope": "Passive local lock/process/health availability; no target selection, guest commands or physical probe",
+  "time_ns": 1791038608981233000,
+  "locks": [
+    {
+      "path": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/test.lock",
+      "identity": [
+        16777233,
+        197405378
+      ],
+      "free": true
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/real-a1200-safari.lock",
+      "identity": [
+        16777233,
+        198641859
+      ],
+      "free": true
+    }
+  ],
+  "processes": [
+    [
+      19081,
+      "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+    ]
+  ],
+  "serial": {
+    "host": "127.0.0.1",
+    "port": 2345,
+    "connected": true
+  },
+  "passed": true
+}

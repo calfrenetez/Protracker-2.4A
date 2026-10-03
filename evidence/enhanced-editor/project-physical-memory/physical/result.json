@@ -1,0 +1,438 @@
+{
+  "passed": true,
+  "scope": "One exact physical RAM-only streamed project save/Fast allocator fixture; no card/device/MMIO/IRQ/driver/audio/timing/listening acceptance",
+  "native_launches": 1,
+  "target_switch_attempted": true,
+  "recovery_hold": false,
+  "root_release_not_performed": true,
+  "host_qualification": {
+    "source_tree": "c9e522973e2b4b4943eec9b0bfd5639f4eaeadc4",
+    "canonical_dependencies": 21,
+    "sdk_headers": 74,
+    "binary_sha256": "d4a3da30620fef5e644ca8dae5a8a48d3483cc1522a50acbbd7b57835c380451",
+    "binary_bytes": 65656
+  },
+  "root_reported_coordination_gate": {
+    "scope": "single-physical-project-stream",
+    "target": "real-a1200",
+    "candidate_sha256": "d4a3da30620fef5e644ca8dae5a8a48d3483cc1522a50acbbd7b57835c380451",
+    "original_pid": 19081,
+    "no_conflicting_claims": true,
+    "recovery_holds_clear": true,
+    "safari_view_only": true,
+    "browser_control_not_acquired": true,
+    "coordination_take_ack": "The revised maximum-420-second TAKE is acknowledged for the single RAM-only physical fixture and verified return. Fresh records show Scott still yielding and no newer soundcard claim; AmiConnect holds nothing. Actual ownership requires both nonblocking locks and fresh exact guards. AmiConnect will leave both targets untouched until refusal, hold or explicit verified release. No audio, settings or lifecycle scope is added.",
+    "coordination_revision": 100,
+    "coordination_turn_id": "01a10244-b9db-7001-85ba-60379e4a70a4",
+    "coordination_cursor": "e7a645e7-31a2-432b-918d-41790ea9e0a3:100",
+    "observed_utc": "2026-10-03T14:59:13.801598+00:00",
+    "safari_observation": "Fresh CUA Safari AX unchanged: AmiConnect192.168.0.156:8080 authenticated Connected View Only, remote input released; no control acquired. Observed immediately before the TAKE request; unchanged tree compared with initial full observation.",
+    "live_revalidation_required": true,
+    "max_reserved_seconds": 420,
+    "native_timeout_seconds": 90,
+    "outer_helper_timeout_seconds": 310,
+    "separate_idle_timeout_seconds": 60
+  },
+  "root_gate_path": "/private/tmp/protracker-physical-project-root-5j11jtqn/gate.json",
+  "root_gate_sha256": "73929ebccddffe7958dc6daab0920affe5d01b0df0ab0fe88a2f61f6b220bb2a",
+  "initial_original_idle": {
+    "processes": [
+      [
+        19081,
+        "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+      ]
+    ],
+    "cpu": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "status": "OK\tPaused=false\tConfig=autosave",
+    "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0",
+    "command_profile": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae",
+    "profile_sha256": "894aa5a61a2bf6267b461c6774a0bdc913a96e7f581ea7e4e3762c4d71709a30"
+  },
+  "exclusive_one_attempt_claim": "/private/tmp/protracker-project-physical-prepared-VEd4D7/physical-execution-claim.json",
+  "guest_directory": "RAM:ptg-project-physical-project-1791039556965048000",
+  "calls": [
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Version\nCPU\nAvail\nVersion bsdsocket.library\nShowNetStatus\nEcho PTG-PHYSICAL-IDENTITY-DONE\n",
+        "timeout": 20
+      },
+      "complete": true,
+      "result": "[OK]\nKickstart 47.115, Workbench 47.5\nSystem: 68030  68030-MMU no FastROM (INST: Cache Burst) (DATA: Cache NoBurst)\nType  Available    In-Use   Maximum   Largest\nchip    1948448    144608   2093056   1915904\nfast  128958728   4210424 133169152 127819008\ntotal 130907176   4355032 135262208 127819008\nbsdsocket.library 4.364\nNetwork status summary\nLocal host address         = 192.168.0.156 (on interface 'plipbox')\nDefault gateway address    = 192.168.0.1\nDomain name system servers = 192.168.0.1, 192.168.0.1\nPTG-PHYSICAL-IDENTITY-DONE"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Work:AmigaDev-20260923/amiga-bridge"
+      },
+      "complete": true,
+      "result": "File: Work:AmigaDev-20260923/amiga-bridge\nCRC32: D75C2355\nSize: 150192 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:ptg-project-physical-project-1791039556965048000\n Quit 20\nEndIf\nEcho PTG-FRESH-ABSENT\n",
+        "timeout": 20
+      },
+      "complete": true,
+      "result": "[OK]\nPTG-FRESH-ABSENT"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "MakeDir RAM:ptg-project-physical-project-1791039556965048000\nIf WARN\n Quit 20\nEndIf\nEcho PTG-DIRECTORY-CREATED\n",
+        "timeout": 20
+      },
+      "complete": true,
+      "result": "[OK]\nPTG-DIRECTORY-CREATED"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Echo PTG-FILES-BEGIN\nList RAM:ptg-project-physical-project-1791039556965048000 FILES NOHEAD LFORMAT \"%N\"\nIf WARN\n Quit 20\nEndIf\nEcho PTG-FILES-END\nEcho PTG-DIRS-BEGIN\nList RAM:ptg-project-physical-project-1791039556965048000 DIRS NOHEAD LFORMAT \"%N\"\nIf WARN\n Quit 20\nEndIf\nEcho PTG-DIRS-END\n",
+        "timeout": 20
+      },
+      "complete": true,
+      "result": "[OK]\nPTG-FILES-BEGIN\nPTG-FILES-END\nPTG-DIRS-BEGIN\nPTG-DIRS-END"
+    },
+    {
+      "tool": "amiga_push_file",
+      "arguments": {
+        "local_path": "/private/tmp/protracker-project-physical-prepared-VEd4D7/physical-project-1791039556965048000/PTExecProjectStreamTest",
+        "amiga_path": "RAM:ptg-project-physical-project-1791039556965048000/PTExecProjectStreamTest"
+      },
+      "complete": true,
+      "result": "Transferred 65656 bytes in 21.3s (3086 B/s), 65 chunks, CRC32 verified"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "RAM:ptg-project-physical-project-1791039556965048000/PTExecProjectStreamTest"
+      },
+      "complete": true,
+      "result": "File: RAM:ptg-project-physical-project-1791039556965048000/PTExecProjectStreamTest\nCRC32: D07FEE36\nSize: 65656 bytes"
+    },
+    {
+      "tool": "amiga_pull_file",
+      "arguments": {
+        "amiga_path": "RAM:ptg-project-physical-project-1791039556965048000/PTExecProjectStreamTest",
+        "local_path": "/private/tmp/protracker-project-physical-prepared-VEd4D7/physical-project-1791039556965048000/staged-readback.bin"
+      },
+      "complete": true,
+      "result": "Downloaded 65656 bytes in 20.0s (3280 B/s), 65 chunks, CRC32 verified"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Echo PTG-FILES-BEGIN\nList RAM:ptg-project-physical-project-1791039556965048000 FILES NOHEAD LFORMAT \"%N\"\nIf WARN\n Quit 20\nEndIf\nEcho PTG-FILES-END\nEcho PTG-DIRS-BEGIN\nList RAM:ptg-project-physical-project-1791039556965048000 DIRS NOHEAD LFORMAT \"%N\"\nIf WARN\n Quit 20\nEndIf\nEcho PTG-DIRS-END\n",
+        "timeout": 20
+      },
+      "complete": true,
+      "result": "[OK]\nPTG-FILES-BEGIN\nPTExecProjectStreamTest\nPTG-FILES-END\nPTG-DIRS-BEGIN\nPTG-DIRS-END"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "FailAt 21\nStack 65536\nCD RAM:ptg-project-physical-project-1791039556965048000\nPTExecProjectStreamTest project.ptg >project.log\nEcho PTG-PROJECT-RC $RC\nCD RAM:\nEcho PTG-PROJECT-DONE\n",
+        "timeout": 90
+      },
+      "complete": true,
+      "result": "[OK]\nPTG-PROJECT-RC 0\nPTG-PROJECT-DONE"
+    },
+    {
+      "tool": "amiga_pull_file",
+      "arguments": {
+        "amiga_path": "RAM:ptg-project-physical-project-1791039556965048000/project.log",
+        "local_path": "/private/tmp/protracker-project-physical-prepared-VEd4D7/physical-project-1791039556965048000/project.log"
+      },
+      "complete": true,
+      "result": "Downloaded 271 bytes in 0.2s (1203 B/s), 1 chunks, CRC32 verified"
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "RAM:ptg-project-physical-project-1791039556965048000/project.log"
+      },
+      "complete": true,
+      "result": "File: RAM:ptg-project-physical-project-1791039556965048000/project.log\nCRC32: E4722DE0\nSize: 271 bytes"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Echo PTG-FILES-BEGIN\nList RAM:ptg-project-physical-project-1791039556965048000 FILES NOHEAD LFORMAT \"%N\"\nIf WARN\n Quit 20\nEndIf\nEcho PTG-FILES-END\nEcho PTG-DIRS-BEGIN\nList RAM:ptg-project-physical-project-1791039556965048000 DIRS NOHEAD LFORMAT \"%N\"\nIf WARN\n Quit 20\nEndIf\nEcho PTG-DIRS-END\n",
+        "timeout": 20
+      },
+      "complete": true,
+      "result": "[OK]\nPTG-FILES-BEGIN\nproject.log\nPTExecProjectStreamTest\nPTG-FILES-END\nPTG-DIRS-BEGIN\nPTG-DIRS-END"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:ptg-project-physical-project-1791039556965048000/project.ptg\n Quit 20\nEndIf\nEcho PTG-FIXTURE-ABSENT\n",
+        "timeout": 20
+      },
+      "complete": true,
+      "result": "[OK]\nPTG-FIXTURE-ABSENT"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "CD RAM:\nDelete RAM:ptg-project-physical-project-1791039556965048000/PTExecProjectStreamTest\nIf WARN\n Quit 20\nEndIf\nDelete RAM:ptg-project-physical-project-1791039556965048000/project.log\nIf WARN\n Quit 20\nEndIf\nDelete RAM:ptg-project-physical-project-1791039556965048000\nIf WARN\n Quit 20\nEndIf\nIf EXISTS RAM:ptg-project-physical-project-1791039556965048000\n Quit 20\nEndIf\nEcho PTG-CLEANUP-ABSENT\n",
+        "timeout": 20
+      },
+      "complete": true,
+      "result": "[OK]\nRAM:ptg-project-physical-project-1791039556965048000/PTExecProjectStreamTest  Deleted\nRAM:ptg-project-physical-project-1791039556965048000/project.log  Deleted\nRAM:ptg-project-physical-project-1791039556965048000  Deleted\nPTG-CLEANUP-ABSENT"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:ptg-project-physical-project-1791039556965048000\n Quit 20\nEndIf\nEcho PTG-INDEPENDENT-ABSENT-0\n",
+        "timeout": 15
+      },
+      "complete": true,
+      "result": "[OK]\nPTG-INDEPENDENT-ABSENT-0"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:ptg-project-physical-project-1791039556965048000\n Quit 20\nEndIf\nEcho PTG-INDEPENDENT-ABSENT-1\n",
+        "timeout": 15
+      },
+      "complete": true,
+      "result": "[OK]\nPTG-INDEPENDENT-ABSENT-1"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:ptg-project-physical-project-1791039556965048000\n Quit 20\nEndIf\nEcho PTG-INDEPENDENT-ABSENT-2\n",
+        "timeout": 15
+      },
+      "complete": true,
+      "result": "[OK]\nPTG-INDEPENDENT-ABSENT-2"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:ptg-project-physical-project-1791039556965048000\n Quit 20\nEndIf\nEcho PTG-INDEPENDENT-ABSENT-3\n",
+        "timeout": 15
+      },
+      "complete": true,
+      "result": "[OK]\nPTG-INDEPENDENT-ABSENT-3"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:ptg-project-physical-project-1791039556965048000\n Quit 20\nEndIf\nEcho PTG-INDEPENDENT-ABSENT-4\n",
+        "timeout": 15
+      },
+      "complete": true,
+      "result": "[OK]\nPTG-INDEPENDENT-ABSENT-4"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:ptg-project-physical-project-1791039556965048000\n Quit 20\nEndIf\nEcho PTG-INDEPENDENT-ABSENT-5\n",
+        "timeout": 15
+      },
+      "complete": true,
+      "result": "[OK]\nPTG-INDEPENDENT-ABSENT-5"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:ptg-project-physical-project-1791039556965048000\n Quit 20\nEndIf\nEcho PTG-INDEPENDENT-ABSENT-6\n",
+        "timeout": 15
+      },
+      "complete": true,
+      "result": "[OK]\nPTG-INDEPENDENT-ABSENT-6"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:ptg-project-physical-project-1791039556965048000\n Quit 20\nEndIf\nEcho PTG-INDEPENDENT-ABSENT-7\n",
+        "timeout": 15
+      },
+      "complete": true,
+      "result": "[OK]\nPTG-INDEPENDENT-ABSENT-7"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:ptg-project-physical-project-1791039556965048000\n Quit 20\nEndIf\nEcho PTG-INDEPENDENT-ABSENT-8\n",
+        "timeout": 15
+      },
+      "complete": true,
+      "result": "[OK]\nPTG-INDEPENDENT-ABSENT-8"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:ptg-project-physical-project-1791039556965048000\n Quit 20\nEndIf\nEcho PTG-INDEPENDENT-ABSENT-9\n",
+        "timeout": 15
+      },
+      "complete": true,
+      "result": "[OK]\nPTG-INDEPENDENT-ABSENT-9"
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:ptg-project-physical-project-1791039556965048000\n Quit 20\nEndIf\nEcho PTG-INDEPENDENT-ABSENT-10\n",
+        "timeout": 15
+      },
+      "complete": true,
+      "result": "[OK]\nPTG-INDEPENDENT-ABSENT-10"
+    }
+  ],
+  "physical_absence_observations": [
+    {
+      "index": 0,
+      "elapsed_seconds": 2.4170003598555923e-06,
+      "completed": true,
+      "path": "RAM:ptg-project-physical-project-1791039556965048000",
+      "exists": false
+    },
+    {
+      "index": 1,
+      "elapsed_seconds": 1.5529917499952717,
+      "completed": true,
+      "path": "RAM:ptg-project-physical-project-1791039556965048000",
+      "exists": false
+    },
+    {
+      "index": 2,
+      "elapsed_seconds": 3.0057359589991393,
+      "completed": true,
+      "path": "RAM:ptg-project-physical-project-1791039556965048000",
+      "exists": false
+    },
+    {
+      "index": 3,
+      "elapsed_seconds": 4.590236709002056,
+      "completed": true,
+      "path": "RAM:ptg-project-physical-project-1791039556965048000",
+      "exists": false
+    },
+    {
+      "index": 4,
+      "elapsed_seconds": 6.119338375006919,
+      "completed": true,
+      "path": "RAM:ptg-project-physical-project-1791039556965048000",
+      "exists": false
+    },
+    {
+      "index": 5,
+      "elapsed_seconds": 7.847190792002948,
+      "completed": true,
+      "path": "RAM:ptg-project-physical-project-1791039556965048000",
+      "exists": false
+    },
+    {
+      "index": 6,
+      "elapsed_seconds": 9.277214792004088,
+      "completed": true,
+      "path": "RAM:ptg-project-physical-project-1791039556965048000",
+      "exists": false
+    },
+    {
+      "index": 7,
+      "elapsed_seconds": 10.783998124999925,
+      "completed": true,
+      "path": "RAM:ptg-project-physical-project-1791039556965048000",
+      "exists": false
+    },
+    {
+      "index": 8,
+      "elapsed_seconds": 12.372114625002723,
+      "completed": true,
+      "path": "RAM:ptg-project-physical-project-1791039556965048000",
+      "exists": false
+    },
+    {
+      "index": 9,
+      "elapsed_seconds": 13.983458834001794,
+      "completed": true,
+      "path": "RAM:ptg-project-physical-project-1791039556965048000",
+      "exists": false
+    },
+    {
+      "index": 10,
+      "elapsed_seconds": 15.569146249996265,
+      "completed": true,
+      "path": "RAM:ptg-project-physical-project-1791039556965048000",
+      "exists": false
+    }
+  ],
+  "physical_target": {
+    "connected": true,
+    "mode": "tcp",
+    "logCount": 646,
+    "varCount": 0,
+    "lastHeartbeat": {
+      "type": "HB",
+      "tick": 13044,
+      "freeChip": 1896256,
+      "freeFast": 131586608,
+      "timestamp": "2026-10-03T14:59:15.823734+00:00"
+    },
+    "serialConnectedAt": 1791039558.1569521,
+    "lastBridgeMessageAt": 1791039558.2533262,
+    "lastHeartbeatAt": null,
+    "bridgeSilentSec": 0.1,
+    "host": "192.168.0.156",
+    "port": 2345
+  },
+  "operation_pending": false,
+  "physical_identity": "[OK]\nKickstart 47.115, Workbench 47.5\nSystem: 68030  68030-MMU no FastROM (INST: Cache Burst) (DATA: Cache NoBurst)\nType  Available    In-Use   Maximum   Largest\nchip    1948448    144608   2093056   1915904\nfast  128958728   4210424 133169152 127819008\ntotal 130907176   4355032 135262208 127819008\nbsdsocket.library 4.364\nNetwork status summary\nLocal host address         = 192.168.0.156 (on interface 'plipbox')\nDefault gateway address    = 192.168.0.1\nDomain name system servers = 192.168.0.1, 192.168.0.1\nPTG-PHYSICAL-IDENTITY-DONE",
+  "installed_bridge_sha256": "e5c8b4ad13776e59d7792c00b0ea664ca2e4f47fe0a2478ef133839b40f2df8c",
+  "directory_created": true,
+  "binary_readback_sha256": "d4a3da30620fef5e644ca8dae5a8a48d3483cc1522a50acbbd7b57835c380451",
+  "native_running_or_unknown": false,
+  "native_completed": true,
+  "native_markers": {
+    "pool_limit": 128218328,
+    "workspace": 7164,
+    "fast_allocations": 6,
+    "owned_bytes": 0
+  },
+  "native_log_sha256": "0c2b661239eafc802e1714a846a3d4894abcefee5eac79cb1e807d9a53508840",
+  "fixture_and_temporary_children_absent": true,
+  "exact_nonrecursive_cleanup_acknowledged": true,
+  "physical_independent_absence_passed": true,
+  "physical_absence_seconds": 16.1442714589939,
+  "return_target_switch_attempted": true,
+  "returned_target": {
+    "connected": true,
+    "mode": "tcp",
+    "logCount": 674,
+    "varCount": 0,
+    "lastHeartbeat": {
+      "type": "HB",
+      "tick": 13045,
+      "freeChip": 1896256,
+      "freeFast": 131586608,
+      "timestamp": "2026-10-03T15:00:48.974974+00:00"
+    },
+    "serialConnectedAt": 1791039648.767175,
+    "lastBridgeMessageAt": 1791039648.974988,
+    "lastHeartbeatAt": 1791039648.9749901,
+    "bridgeSilentSec": 0.0,
+    "host": "127.0.0.1",
+    "port": 2345
+  },
+  "final_original_idle": {
+    "processes": [
+      [
+        19081,
+        "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+      ]
+    ],
+    "cpu": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+    "status": "OK\tPaused=false\tConfig=autosave",
+    "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=416\tsndbuf_status=0",
+    "command_profile": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae",
+    "profile_sha256": "894aa5a61a2bf6267b461c6774a0bdc913a96e7f581ea7e4e3762c4d71709a30"
+  },
+  "devbench_returned": true,
+  "root_separate_release_check_required": true,
+  "elapsed_seconds": 92.2200230830058
+}

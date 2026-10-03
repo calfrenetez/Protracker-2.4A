@@ -1,0 +1,39 @@
+{
+  "scope": "Passive local shared availability check, no target selection/guest commands/physical probes",
+  "time_ns": 1791038572687617000,
+  "locks": [
+    {
+      "path": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/test.lock",
+      "identity": [
+        16777233,
+        197405378
+      ],
+      "free": true
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/real-a1200-safari.lock",
+      "identity": [
+        16777233,
+        198641859
+      ],
+      "free": true
+    }
+  ],
+  "processes": [
+    [
+      19081,
+      "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+    ],
+    [
+      62469,
+      "/bin/bash -c python3 - <<'PY'\\012import fcntl,json,os,subprocess,time,urllib.request\\012from pathlib import Path\\012root=Path('/private/tmp/protracker-physical-project-root-5j11jtqn');infra=Path('/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra');r={'scope':'Passive local shared availability check, no target selection/guest commands/physical probes','time_ns':time.time_ns(),'locks':[]};fs=[]\\012try:\\012 for name in ['test.lock','real-a1200-safari.lock']:\\012  p=infra/'runtime'/name;assert p.is_file() and not p.is_symlink();fd=os.open(p,os.O_RDWR);fs.append(fd);fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB);s=os.fstat(fd);q=p.stat();assert (s.st_dev,s.st_ino)==(q.st_dev,q.st_ino);r['locks'].append({'path':str(p),'identity':[s.st_dev,s.st_ino],'free':True})\\012 rows=[]\\012 for line in subprocess.check_output(['ps','-axo','pid=,command='],text=True).splitlines():\\012  x=line.strip().split(None,1)\\012  if len(x)==2 and x[1].startswith('/') and '/Contents/MacOS/Amiberry ' in x[1]:rows.append([int(x[0]),x[1]])\\012 r['processes']=rows\\012 with urllib.request.urlopen('http://127.0.0.1:3000/health',timeout=3) as response:s=json.load(response)['serial']\\012 r['serial']={k:s.get(k) for k in ['host','port','connected']};assert len(rows)==1 and rows[0][0]==19081;assert r['serial']=={'host':'127.0.0.1','port':2345,'connected':True};r['passed']=True\\012except BaseException as e:r['passed']=False;r['error']=str(e);raise\\012finally:\\012 for fd in reversed(fs):os.close(fd)\\012 p=root/'availability-live.json';p.write_text(json.dumps(r,indent=2)+'\\n');print(json.dumps(r))\\012PY"
+    ]
+  ],
+  "serial": {
+    "host": "127.0.0.1",
+    "port": 2345,
+    "connected": true
+  },
+  "passed": false,
+  "error": ""
+}

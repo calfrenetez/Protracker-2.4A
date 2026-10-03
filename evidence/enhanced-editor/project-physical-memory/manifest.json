@@ -1,0 +1,266 @@
+{
+  "scope": "Physical RAM-only project master-save/Exec memory qualification with distinct prepared/host errors/mocks/physical/independent-return tiers; original failures preserved",
+  "files": [
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/prerequisites.json",
+      "path": "root/prerequisites.json",
+      "bytes": 26361,
+      "sha256": "ea2f3a751ac4f5ae7537c17069a42fd45905b6e37b0c26129a8882829abf2b1e"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/availability.json",
+      "path": "root/availability.json",
+      "bytes": 628,
+      "sha256": "3998122f14d70ae71fca9ab928be1cc8aa5eec56846147083aac20c1d8e858f2"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/availability-live.json",
+      "path": "root/availability-live.json",
+      "bytes": 2666,
+      "sha256": "b43923b13cb86ccd54733833d48c4d3ca76fda2b749afa7b39807ef09c5c4985"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/availability-corrected.json",
+      "path": "root/availability-corrected.json",
+      "bytes": 1015,
+      "sha256": "117290003907483e630ee8e17c3662e3ab2c9452312ed3361b22ddd43b9a5ee3"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/availability.py",
+      "path": "root/availability.py",
+      "bytes": 1353,
+      "sha256": "167c36e4ef542d8d9056eda67a5203b39ca41eaefbc678ba2e6879e13dabd971"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/gate.json",
+      "path": "root/gate.json",
+      "bytes": 1445,
+      "sha256": "73929ebccddffe7958dc6daab0920affe5d01b0df0ab0fe88a2f61f6b220bb2a"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/run_physical_once.py",
+      "path": "root/run_physical_once.py",
+      "bytes": 2375,
+      "sha256": "1e0353c64e9311c9ca7ee3b01d06684ff1ad50ca39c102527b38c5c15d8ec2f9"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/root-execution-claim.json",
+      "path": "root/root-execution-claim.json",
+      "bytes": 676,
+      "sha256": "94fdbc95ed5c2e8a2ba4ee4eede30579c25201d13a1767e697415272b1637765"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/physical-execution.stdout",
+      "path": "root/physical-execution.stdout",
+      "bytes": 258,
+      "sha256": "b27a4b069139e2fb7af795d62f2fd57b74124441790fec1ee9b9e6256442cbc3"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/physical-execution.stderr",
+      "path": "root/physical-execution.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/physical-invocation-result.json",
+      "path": "root/physical-invocation-result.json",
+      "bytes": 1062,
+      "sha256": "02927529d429fd8a423a62eeeab2dcedc14d54758d3baf98d1aca3cd5f04a9bd"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/original-processes.json",
+      "path": "root/original-processes.json",
+      "bytes": 322,
+      "sha256": "75dbd5ca2ac39303d8d0c90f46e170ce8e73bdaee3cda09280f241f8e83fb739"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/verify_idle_return_v1.py",
+      "path": "root/verify_idle_return_v1.py",
+      "bytes": 3618,
+      "sha256": "d11bc0e8e30b44838bf7b4987b65c500bfd841408c429b623b08feee7bbb3b0b"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/verify_idle_return_v2.py",
+      "path": "root/verify_idle_return_v2.py",
+      "bytes": 3754,
+      "sha256": "28fd269d1030b0fd2383689e8364d1b0408aabd720cc83bf7e9e842304813c3d"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/verify_idle_return.py",
+      "path": "root/verify_idle_return.py",
+      "bytes": 3820,
+      "sha256": "4987ef359748ed6598822cfeb0a9e922f5caa45618c4962780b71ee62eb87058"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/test_idle_checker.py",
+      "path": "root/test_idle_checker.py",
+      "bytes": 2110,
+      "sha256": "c3d514cc715a73336cd4092370d102619e1a290f51b9bb034f8eae71285ee68b"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/idle-checker-mocks.json",
+      "path": "root/idle-checker-mocks.json",
+      "bytes": 332,
+      "sha256": "aeba032e0a20546d7a7e34c310add771c5ee5d5cbc07a71963792f569ece29c2"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/run_idle_once.py",
+      "path": "root/run_idle_once.py",
+      "bytes": 1383,
+      "sha256": "96286b813da59db27faca9bed30f5e2381e56f3fc0f1075e51e0338134806f80"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/idle-execution-claim.json",
+      "path": "root/idle-execution-claim.json",
+      "bytes": 544,
+      "sha256": "98d040200d39cf255dd62c80dc950356f67f2c2f323bce8becbf5aadf873a285"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/idle-execution.stdout",
+      "path": "root/idle-execution.stdout",
+      "bytes": 179,
+      "sha256": "94bc458671653a09d6d98523113225ce0a7ee110695c112df7d0dadcbb283d20"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/idle-execution.stderr",
+      "path": "root/idle-execution.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/idle-invocation-result.json",
+      "path": "root/idle-invocation-result.json",
+      "bytes": 823,
+      "sha256": "74717f568dc6de8a527bb326c05525d5dacbaf28d14fc00d875fb4c62b58e0d0"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/safari-final.json",
+      "path": "root/safari-final.json",
+      "bytes": 417,
+      "sha256": "257c430c6891a96a144180e09f7f44336309190abbc14d14789f66f6a822592e"
+    },
+    {
+      "source": "/private/tmp/protracker-project-physical-prepared-VEd4D7/README.md",
+      "path": "prepared/README.md",
+      "bytes": 5224,
+      "sha256": "4899e58473c735786ab172a4270308e50999989caddb707d7c98f155ceb16356"
+    },
+    {
+      "source": "/private/tmp/protracker-project-physical-prepared-VEd4D7/host-checks.json",
+      "path": "prepared/host-checks.json",
+      "bytes": 1026,
+      "sha256": "500f072316d2085a8101aedd4bed5f4ba68317d52d8c2a724ce0e57151fd67f6"
+    },
+    {
+      "source": "/private/tmp/protracker-project-physical-prepared-VEd4D7/host-mock-checks-final.log",
+      "path": "prepared/host-mock-checks-final.log",
+      "bytes": 770,
+      "sha256": "75d12c6d5b957b2d282e96dede70971c357819d8fc1241b32226ac3ebbafbeb3"
+    },
+    {
+      "source": "/private/tmp/protracker-project-physical-prepared-VEd4D7/host-mock-checks-typed.log",
+      "path": "prepared/host-mock-checks-typed.log",
+      "bytes": 770,
+      "sha256": "50d62ea2430b0715e0deb6d8c6dc83d5b250560f48b73612079d52748680a347"
+    },
+    {
+      "source": "/private/tmp/protracker-project-physical-prepared-VEd4D7/host-mock-checks.log",
+      "path": "prepared/host-mock-checks.log",
+      "bytes": 770,
+      "sha256": "7194de29edfebdf805e765a9bfb1002f7653a1eb8e32676b5bac43e444cc7b79"
+    },
+    {
+      "source": "/private/tmp/protracker-project-physical-prepared-VEd4D7/physical_project_stream.py",
+      "path": "prepared/physical_project_stream.py",
+      "bytes": 22702,
+      "sha256": "9380988d40d514286f6f224c7660deef6fbb2a30edd46bc73b2e5ac4e236c6e6"
+    },
+    {
+      "source": "/private/tmp/protracker-project-physical-prepared-VEd4D7/plan.json",
+      "path": "prepared/plan.json",
+      "bytes": 28930,
+      "sha256": "f156eacd9cedec1393fcde2c37ce39c6f026338f7d0f0ca07a67a4c35da61ab9"
+    },
+    {
+      "source": "/private/tmp/protracker-project-physical-prepared-VEd4D7/test_prepared_guards.py",
+      "path": "prepared/test_prepared_guards.py",
+      "bytes": 11065,
+      "sha256": "52b242e4ba1b2e0ce0c68a0118486c72a5981411dd9c1b73cc79cb45225663b5"
+    },
+    {
+      "source": "/private/tmp/protracker-project-physical-prepared-VEd4D7/prepared-files.json",
+      "path": "prepared/prepared-files.json",
+      "bytes": 25353,
+      "sha256": "eba2a65de4bc29e0c3fd4b5d568de48c33f6ce9ef043e38face9efda15e269bf"
+    },
+    {
+      "source": "/private/tmp/protracker-project-physical-prepared-VEd4D7/physical-execution-claim.json",
+      "path": "prepared/physical-execution-claim.json",
+      "bytes": 382,
+      "sha256": "e4e2c28d0e92445c695c5a860760a3221cee0dc3cc280f4ba0dfe66146f7bb81"
+    },
+    {
+      "source": "/private/tmp/protracker-project-physical-prepared-VEd4D7/physical-project-1791039556965048000/result.json",
+      "path": "physical/result.json",
+      "bytes": 18947,
+      "sha256": "7d6c91ab22f35d8508e527791ff7ce1542ecccd8dda7dfcaa0eeaf8a0926c4f3"
+    },
+    {
+      "source": "/private/tmp/protracker-project-physical-prepared-VEd4D7/physical-project-1791039556965048000/project.log",
+      "path": "physical/project.log",
+      "bytes": 271,
+      "sha256": "0c2b661239eafc802e1714a846a3d4894abcefee5eac79cb1e807d9a53508840"
+    },
+    {
+      "source": "/private/tmp/protracker-project-physical-prepared-VEd4D7/physical-project-1791039556965048000/PTExecProjectStreamTest",
+      "path": "physical/PTExecProjectStreamTest",
+      "bytes": 65656,
+      "sha256": "d4a3da30620fef5e644ca8dae5a8a48d3483cc1522a50acbbd7b57835c380451"
+    },
+    {
+      "source": "/private/tmp/protracker-project-physical-prepared-VEd4D7/physical-project-1791039556965048000/staged-readback.bin",
+      "path": "physical/staged-readback.bin",
+      "bytes": 65656,
+      "sha256": "d4a3da30620fef5e644ca8dae5a8a48d3483cc1522a50acbbd7b57835c380451"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/idle-verification-1791039710236863000/result.json",
+      "path": "independent-return/result.json",
+      "bytes": 8307,
+      "sha256": "cd7b62c714da5719a6e262f07b044603cdb9fe6a859a4099d8d28b4bfb2aa5bb"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/idle-mock-lmabkr69/conflict/result.json",
+      "path": "mocks/idle-mock-lmabkr69/conflict/result.json",
+      "bytes": 318,
+      "sha256": "2f6ce3e9dfdc752058fcc0085fc2cb44895e14150ddec3e4c9eca2e92fdfa749"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/idle-mock-lmabkr69/active-dma/result.json",
+      "path": "mocks/idle-mock-lmabkr69/active-dma/result.json",
+      "bytes": 315,
+      "sha256": "546f3c86c5e4206b010f20a34cc49903dbd844ced924c746d47ddf8a74b417f8"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/idle-mock-lmabkr69/normal/result.json",
+      "path": "mocks/idle-mock-lmabkr69/normal/result.json",
+      "bytes": 3112,
+      "sha256": "bbff7e9b3a7e133443276c1580d072e9cfd5a80a8dd5a8a9ae2cb8e068b38805"
+    },
+    {
+      "source": "/private/tmp/protracker-physical-project-root-5j11jtqn/release-ack.json",
+      "path": "root/release-ack.json",
+      "bytes": 563,
+      "sha256": "592a67390c58be5ddcf8592f711d3660c026acfc6f15275cf00af49f5366a6b7"
+    }
+  ],
+  "file_count": 42,
+  "total_bytes": 315278,
+  "head_before": "8969da594039fa23e43ab1d1ed0907d250b596f3",
+  "physical_passed": true,
+  "physical_result_sha256": "7d6c91ab22f35d8508e527791ff7ce1542ecccd8dda7dfcaa0eeaf8a0926c4f3",
+  "independent_return_passed": true,
+  "independent_return_sha256": "cd7b62c714da5719a6e262f07b044603cdb9fe6a859a4099d8d28b4bfb2aa5bb",
+  "coordinator_release_ack_pending": false,
+  "coordinator_release_revision": 101
+}

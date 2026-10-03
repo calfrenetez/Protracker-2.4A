@@ -5,6 +5,25 @@ The enhanced project owns the authoritative sample, including its declared
 elements in the declared precision; 24-bit samples retain their low eight bits.
 Playback representations must never become the project's source of truth.
 
+## Physical master-save and Fast RAM qualification — 3 October 2026
+
+The exact native streamed-project fixture passed on the real A1200 using the
+shared harness after its existing shared 030 qualification. It preserved exact
+mixed 8/16/24-bit masters, project layout/CRC, loops, slices and extensions; sink,
+file, budget and replacement refusals passed. Workspace remained 7,164 bytes. Six
+owned allocations were verified Fast memory and ended at zero owned bytes, with
+budget refusal and no Chip fallback. This extends software allocator/file
+acceptance to the physical machine.
+
+Exact RAM cleanup, eleven separate physical absence calls, unchanged original 030
+return, separate locked idle verification and Safari View Only were verified.
+The coordinator acknowledged explicit release; no recovery hold remains. The
+previous WAV cleanup hold was separately recovered and released, while the
+original WAV and FIFO failures remain failed. MOD native execution is still
+pending. Hardware sample RAM capacity/completion/order/all-voice-stop, audio,
+timing and listening remain unqualified by this software-only fixture. See
+[evidence/enhanced-editor/project-physical-memory](../evidence/enhanced-editor/project-physical-memory/README.md).
+
 ## MOD caller-output master protection — 3 October 2026
 
 Public direct, round-to8 and playback analysis reports now refuse overlap with

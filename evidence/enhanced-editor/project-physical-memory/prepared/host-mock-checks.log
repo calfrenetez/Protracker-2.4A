@@ -1,0 +1,11 @@
+test_all_failures_stop_and_retain_no_retry (__main__.PreparedGuards.test_all_failures_stop_and_retain_no_retry) ... ok
+test_ast_no_top_level_live_import_or_finally_cleanup (__main__.PreparedGuards.test_ast_no_top_level_live_import_or_finally_cleanup) ... ok
+test_complete_one_case (__main__.PreparedGuards.test_complete_one_case) ... ok
+test_inventory_and_marker_negative_controls (__main__.PreparedGuards.test_inventory_and_marker_negative_controls) ... ok
+test_preselection_budget_refusal (__main__.PreparedGuards.test_preselection_budget_refusal) ... ok
+test_root_gate_exact_scope_and_freshness (__main__.PreparedGuards.test_root_gate_exact_scope_and_freshness) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.196s
+
+OK

@@ -1,0 +1,7 @@
+{
+  "scope": "single-physical-project-stream",
+  "out": "/private/tmp/protracker-project-physical-prepared-VEd4D7/physical-project-1791039556965048000",
+  "gate_sha256": "73929ebccddffe7958dc6daab0920affe5d01b0df0ab0fe88a2f61f6b220bb2a",
+  "candidate_sha256": "d4a3da30620fef5e644ca8dae5a8a48d3483cc1522a50acbbd7b57835c380451",
+  "created_utc": "2026-10-03T14:59:17.873832+00:00"
+}

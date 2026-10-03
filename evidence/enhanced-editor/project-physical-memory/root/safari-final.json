@@ -1,0 +1,12 @@
+{
+  "observed_utc": "2026-10-03T15:02:58.228Z",
+  "app": "Safari",
+  "window": "AmiConnect",
+  "url": "http://192.168.0.156:8080/",
+  "authenticated": true,
+  "view_only": true,
+  "control_released": true,
+  "remote_input_released": true,
+  "browser_control_acquired_by_this_scope": false,
+  "method": "Native CUA full AX observation; matching URL and exact Authenticated/Connected View Only/control released text"
+}

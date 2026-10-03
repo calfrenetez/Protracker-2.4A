@@ -1,0 +1,21 @@
+{
+  "scope": "single-physical-project-stream",
+  "target": "real-a1200",
+  "candidate_sha256": "d4a3da30620fef5e644ca8dae5a8a48d3483cc1522a50acbbd7b57835c380451",
+  "original_pid": 19081,
+  "no_conflicting_claims": true,
+  "recovery_holds_clear": true,
+  "safari_view_only": true,
+  "browser_control_not_acquired": true,
+  "coordination_take_ack": "The revised maximum-420-second TAKE is acknowledged for the single RAM-only physical fixture and verified return. Fresh records show Scott still yielding and no newer soundcard claim; AmiConnect holds nothing. Actual ownership requires both nonblocking locks and fresh exact guards. AmiConnect will leave both targets untouched until refusal, hold or explicit verified release. No audio, settings or lifecycle scope is added.",
+  "coordination_revision": 100,
+  "coordination_turn_id": "01a10244-b9db-7001-85ba-60379e4a70a4",
+  "coordination_cursor": "e7a645e7-31a2-432b-918d-41790ea9e0a3:100",
+  "observed_utc": "2026-10-03T14:59:13.801598+00:00",
+  "safari_observation": "Fresh CUA Safari AX unchanged: AmiConnect192.168.0.156:8080 authenticated Connected View Only, remote input released; no control acquired. Observed immediately before the TAKE request; unchanged tree compared with initial full observation.",
+  "live_revalidation_required": true,
+  "max_reserved_seconds": 420,
+  "native_timeout_seconds": 90,
+  "outer_helper_timeout_seconds": 310,
+  "separate_idle_timeout_seconds": 60
+}

@@ -1,0 +1,24 @@
+{
+  "scope": "Passive local shared availability check, no target selection/guest commands/physical probes",
+  "time_ns": 1791038535638669000,
+  "locks": [
+    {
+      "path": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/test.lock",
+      "identity": [
+        16777233,
+        197405378
+      ],
+      "free": true
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/real-a1200-safari.lock",
+      "identity": [
+        16777233,
+        198641859
+      ],
+      "free": true
+    }
+  ],
+  "passed": false,
+  "error": "[Errno 1] Operation not permitted: 'ps'"
+}

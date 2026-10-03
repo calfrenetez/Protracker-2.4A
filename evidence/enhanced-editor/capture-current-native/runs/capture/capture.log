@@ -1,0 +1,3 @@
+EXEC MEMORY pool_limit=131151480 reserve=262144 flags=4
+CAPTURE STAGING PASS: bounded exact8/16/24 mono/stereo chunks, explicit overrun, atomic owned-buffer publication, capacity charging, pinned metadata/undo lifetime, removed-slot reuse and redo eviction, copy fallback, allocation rollback and exact project roundtrip; synthetic input only
+EXEC MEMORY PASS: 143 Fast allocations, zero owned bytes, budget refusal without Chip fallback

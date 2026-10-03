@@ -285,7 +285,7 @@ software implementation from the remaining integration and hardware gates.
 | AmiGUS wavetable copies | Versioned evictable resource pool, sampler revision/master-pin bridge, bounded 16-voice lease owner with validated rate/loop/address plans, mono sequencer trigger/control/stop dispatch, preflight-gated master-pinned sequence ownership, editor veto/retry barriers and injected callbacks, 8/16-bit conversion and bounded address allocator/chunk uploader behind an injected register bus; failure/pinning tests. | Verified card capacity and native voice dispatcher remain open. Native sample-RAM bus binding and explicit wavetable reservation/cache lifetime are implemented; synthetic native/host checks pass. Real sample-RAM transfer, completion and voice-stop are unqualified; the read-only status candidate passes exact emulator and separately coordinated realMini global-read/release checks; those values establish neither capacity nor all-voice stop. |
 | Direct24-bit Studio | Master-pinned mixer, audited sequence, sampler/editor ownership, bounded queue/pump and integrated PCM-session owner with capacity-bounded prefill and explicit start acknowledgement; optional reservation lease retained through reset and adapter quiescence. Up to16 voice slots are a software bound. | Native PLAY/output wiring, verified hardware capabilities and sustainable physical voice-count/timing evidence. |
 | Master-preserving persistence | Bounded enhanced-project/sample saving and explicit classic conversion; private EFx exports/bounce never replace masters. Explicit new-file recovery snapshots and staged identity-checked restoration preserve all master precision. | Native opt-in configuration, idle scheduling, bounded retention, read-only discovery, explicit recovery UI and exact save are implemented and emulator-tested; preferences-panel controls, real crash/endurance and physical acceptance remain. |
-| Recording masters | Bounded full-precision collector, exact negotiated-format gate, injected input lifecycle, exclusive PCM/interrupt ownership, editor mutation/disposal veto and retryable undoable publication. Earlier recording owners passed native Exec fixtures; the new exact-format gate passes host tests and Amiga builds, with emulator execution pending after a prelaunch identity refusal. | Actual input capability negotiation, native input register/backend and controls, duplex ownership if needed, physical capture quality/overrun evidence. |
+| Recording masters | Bounded full-precision collector, exact negotiated-format gate, injected input lifecycle, exclusive PCM/interrupt ownership, editor mutation/disposal veto and retryable undoable publication. Same-allocator publication transfers the unique PCM allocation and charges its full capacity; different allocators copy transactionally. Current exact-format/transfer/pin/editor fixtures pass host sanitizers, pinned builds and shared030 Exec checks with zero owned bytes; the earlier prelaunch NOT RUN evidence remains preserved. | Actual input capability negotiation, native input register/backend and controls, duplex ownership if needed, physical capture quality/overrun evidence. |
 | Playback invalidation | Revision/settings keys, retired active leases and stop-before-edit/undo/dispose guards. Private EFx banks are discarded on stop and rebuilt on restart. | End-to-end real AmiGUS voice/transfer ownership, once the device adapter exists. |
 
 The mixed Paula/AmiGUS capability gate (`mixed_preflight.h/c`) now traverses one
@@ -3517,6 +3517,19 @@ This is a software contract enforced against injected adapters. Actual hardware
 capability discovery/negotiation and a native input adapter remain required.
 The collector's support for 24-bit PCM does not advertise 24-bit device capture.
 
+On 3 October 2026, a clean source export of `0adacb2` passed the two scoped host
+sanitizer groups and pinned native builds. Exact shared030 capture and editor-capture
+fixtures then passed with RC0: 143 and 70 Fast allocations respectively ended at
+zero owned bytes. The editor fixture includes the capture-session and AmiGUS
+ownership assertions, including negotiated-tuple refusal before allocation.
+Each retained its unchanged 90-second deadline and passed exact owned cleanup,
+then a separate locked 10-second, 11-observation absence/original-idle/DMA-off check.
+The window was explicitly released and acknowledged. See
+`../evidence/enhanced-editor/capture-current-native/`. This injected-input software
+qualification does not establish real input capability, native recording controls,
+physical capture quality or listening acceptance. The 30 September prelaunch identity
+refusal remains separately recorded as NOT RUN.
+
 ## Recording publication without a second PCM allocation
 
 When finished capture staging and the sampler share the same allocator functions
@@ -3531,9 +3544,11 @@ undo/redo and playback pins retain the transferred buffer until the final refere
 is released; the sampler and allocator context must outlive those pins. No device
 may still own or write capture staging when this operation is called.
 
-Host validation and native build results are recorded separately in the capture
-transfer evidence. Emulator execution is pending shared-030 availability; this
-change does not enable real input or qualify physical recording.
+Host validation and native build results remain separately recorded in the capture
+transfer evidence. Current shared030 execution passes transfer, full-capacity
+charging, different-allocator copy fallback, rollback and retained-pin assertions
+in the 143-allocation capture fixture described above. This does not enable real
+input or qualify physical recording.
 
 ## Sampler undo-record accounting and retained recording pins
 
@@ -3549,7 +3564,9 @@ Recording ownership tests also remove an appended slot through undo, reuse it
 with a new 8/16/24-bit recording, discard redo history and evict undo entries while
 old and current playback pins retain their respective buffers. Stale sampler
 generations refuse new pins, and final release returns all sampler-owned bytes.
-These host checks do not establish native voice dispatch or physical playback.
+The current 143-allocation native capture fixture also passes these retained-buffer
+and accounting assertions. They do not establish native voice dispatch or physical
+playback.
 
 ## Routed Paula cache owner (software seam)
 

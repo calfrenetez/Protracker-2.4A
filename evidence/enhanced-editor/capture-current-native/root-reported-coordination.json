@@ -1,0 +1,24 @@
+{
+  "source": "Root task reports supplied directly to packaging subagent; no independent live coordination verification by packager.",
+  "release": {
+    "sent_after_all_pass": true,
+    "acknowledged": true,
+    "no_hold": true,
+    "no_reservation": true,
+    "amiconnect_revision": 29
+  },
+  "executed_root_script": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/qualify_capture_current.py",
+    "root_reports_current_bytes_are_exact_historical_execution": true,
+    "no_embedded_execution_hash_claimed": true,
+    "archived_copy": "runner/qualify_capture_current.py",
+    "copy_sha256": "1039573dec374a7bb6fd74fc9f752876af82d1b3dae7ae988bd2fecc8afd419c"
+  },
+  "target": {
+    "root_reported_cpu": "68030",
+    "recorded_original_process_pid": 19081,
+    "recorded_profile": "A1200-030-DEV.uae",
+    "root_reported_localhost": true
+  },
+  "scope": "No real input, card/input MMIO, physical operation, audio or human listening acceptance; packaging performs no target operation."
+}

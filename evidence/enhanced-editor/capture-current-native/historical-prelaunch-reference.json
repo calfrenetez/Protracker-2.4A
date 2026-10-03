@@ -1,0 +1,75 @@
+{
+  "status": "Preserved original30September prelaunch NOT RUN; no files modified or substituted. This later qualification has its own exact candidates and runs.",
+  "records": [
+    {
+      "path": "evidence/enhanced-editor/capture-format/README.md",
+      "bytes": 895,
+      "sha256": "f3af395fc07754736d33cb235be4f59edb12071d612f8ced774ecd8ea1ef2eab"
+    },
+    {
+      "path": "evidence/enhanced-editor/capture-format/build.log",
+      "bytes": 2926,
+      "sha256": "66d4c841fb27f846dd3c7b11a6ee99eb9d7f335220041dcd95d8ae2bfbe8eadd"
+    },
+    {
+      "path": "evidence/enhanced-editor/capture-format/core-build.json",
+      "bytes": 16565,
+      "sha256": "1a85edc8c1036a785458c7b2f95beec68107048b573d806db8f1811e20f1fd3b"
+    },
+    {
+      "path": "evidence/enhanced-editor/capture-format/host.log",
+      "bytes": 1495,
+      "sha256": "afdde340bc1b9be68d101a25c0a6a801ce9ab51e5df9a2ce3b18c271ac45edca"
+    },
+    {
+      "path": "evidence/enhanced-editor/capture-format/planned.json",
+      "bytes": 520,
+      "sha256": "808309c570cdd20e103488347060989b054c4bc8b71edee042270968bada6f26"
+    },
+    {
+      "path": "evidence/enhanced-editor/capture-format/prelaunch-refusal.log",
+      "bytes": 767,
+      "sha256": "9aa0cae598a94d902dc96420da76454ba51feb798e33d81a1256128e143181ff"
+    },
+    {
+      "path": "evidence/enhanced-editor/capture-format/source-tree.txt",
+      "bytes": 41,
+      "sha256": "ca9408bc911509f62ff11f8a2014467b55bb347565e22334563398de3d15352a"
+    },
+    {
+      "path": "evidence/enhanced-editor/capture-transfer/README.md",
+      "bytes": 1548,
+      "sha256": "9b34846207ac09ab8d0c6ba3cc11ca20d748208accb900fc9154570d15d53851"
+    },
+    {
+      "path": "evidence/enhanced-editor/capture-transfer/before-export-build-refusal.log",
+      "bytes": 310,
+      "sha256": "8ce8917974565c10b4267f49f3091eeb8b20149cfd177247096b4826c1422b23"
+    },
+    {
+      "path": "evidence/enhanced-editor/capture-transfer/build.log",
+      "bytes": 21288,
+      "sha256": "37d67e35e3b18f827e029e902a58a27b08085ddca3c4e736d2c52c9a77f5c5d8"
+    },
+    {
+      "path": "evidence/enhanced-editor/capture-transfer/committed-reference-host.log",
+      "bytes": 354,
+      "sha256": "42d8e32f70f8ceb170e2c10f4d92685d629a5d7b64554519a822c969f7248233"
+    },
+    {
+      "path": "evidence/enhanced-editor/capture-transfer/core-build.json",
+      "bytes": 59074,
+      "sha256": "558287fa73771918659e7912d56387a5971f49e44fbf02e5219b7042ad73cff2"
+    },
+    {
+      "path": "evidence/enhanced-editor/capture-transfer/source-tree.txt",
+      "bytes": 41,
+      "sha256": "e2575386fdd1f651df6855859a749f44caea9837f1cf69c6abd5a35f560bdf0a"
+    },
+    {
+      "path": "evidence/enhanced-editor/capture-transfer/targeted-host.log",
+      "bytes": 2734,
+      "sha256": "69308e964fd8b1293f2bbc2e366bdaf97fe07a6bcbdc437174479bcef5c0efb5"
+    }
+  ]
+}

@@ -1,0 +1,490 @@
+{
+  "id": "capture-current-native-1790989013101614000",
+  "created_utc": "2026-10-03T00:56:53.101619+00:00",
+  "package_scope": "Host evidence and completed shared030 injected-fixture records; packaging only, no product edits/reruns/targets/staging.",
+  "product_commit": "0adacb2cef6e657931d78e4c8dc82d0ad8279601",
+  "product_tree": "b94f1d9b75d0801cc8b120165636fab0dda30ca4",
+  "packaging_head": "e5962ced3b29175c5a2419cba982173df779aa0c",
+  "original_private_package": "/private/tmp/protracker-capture-current-_eke0mzq",
+  "original_root_qualification": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/capture-current-qualification-1790988615201455000",
+  "frozen_source_inputs": 7443,
+  "native_dependency_counts": {
+    "PTExecCaptureTest": 39,
+    "PTExecEditorCaptureTest": 62
+  },
+  "host_dependencies": 64,
+  "zero_overlays": true,
+  "excluded_dirty_paths": 9,
+  "historical_files_untouched_verified": true,
+  "byte_copies_verified_against_origins": true,
+  "files": [
+    {
+      "path": "host/host-checks.json",
+      "bytes": 24516,
+      "sha256": "d7bdfb1f73944d68050f627a144897e3ac40346dfcc14948ffb29fb99d88abe0",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/private/tmp/protracker-capture-current-_eke0mzq/host-checks.json",
+          "bytes": 24516,
+          "sha256": "d7bdfb1f73944d68050f627a144897e3ac40346dfcc14948ffb29fb99d88abe0"
+        }
+      ]
+    },
+    {
+      "path": "host/host-checks.log",
+      "bytes": 1174,
+      "sha256": "5be0816eeb5a2028b1a7ac90e27fbf0bfe8ab25e0db9d2203912746486a074e5",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/private/tmp/protracker-capture-current-_eke0mzq/host-checks.log",
+          "bytes": 1174,
+          "sha256": "5be0816eeb5a2028b1a7ac90e27fbf0bfe8ab25e0db9d2203912746486a074e5"
+        }
+      ]
+    },
+    {
+      "path": "host/validate_host.py",
+      "bytes": 4933,
+      "sha256": "ae2990f7187e7b52d52806c11af6e9fad1fa283a7fce342e5a828b8f710f1a29",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/private/tmp/protracker-capture-current-_eke0mzq/validate_host.py",
+          "bytes": 4933,
+          "sha256": "ae2990f7187e7b52d52806c11af6e9fad1fa283a7fce342e5a828b8f710f1a29"
+        }
+      ]
+    },
+    {
+      "path": "host/suite-1.d",
+      "bytes": 3938,
+      "sha256": "3e64a3870ed88bc7b1b489d325f57b2383800ca07af1c3030ee481b8396da7ab",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/private/tmp/protracker-capture-current-_eke0mzq/suite-1.d",
+          "bytes": 3938,
+          "sha256": "3e64a3870ed88bc7b1b489d325f57b2383800ca07af1c3030ee481b8396da7ab"
+        }
+      ]
+    },
+    {
+      "path": "host/suite-2.d",
+      "bytes": 7105,
+      "sha256": "255305709e2c7da6d2158918bf175a45fcbed80b2d6c582e2def64102436efc9",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/private/tmp/protracker-capture-current-_eke0mzq/suite-2.d",
+          "bytes": 7105,
+          "sha256": "255305709e2c7da6d2158918bf175a45fcbed80b2d6c582e2def64102436efc9"
+        }
+      ]
+    },
+    {
+      "path": "native/build.log",
+      "bytes": 330,
+      "sha256": "3c240e9c9361786121d274f3dec3eac41ba42ac7cdd57bf9b970f3e68e7773d9",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/private/tmp/protracker-capture-current-_eke0mzq/native-build.log",
+          "bytes": 330,
+          "sha256": "3c240e9c9361786121d274f3dec3eac41ba42ac7cdd57bf9b970f3e68e7773d9"
+        }
+      ]
+    },
+    {
+      "path": "native/compile-commands.json",
+      "bytes": 6440,
+      "sha256": "30059003e37153e38522ff044b6e76fc74983740572ae4407b98cbad254de893",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/private/tmp/protracker-capture-current-_eke0mzq/native/compile-commands.json",
+          "bytes": 6440,
+          "sha256": "30059003e37153e38522ff044b6e76fc74983740572ae4407b98cbad254de893"
+        }
+      ]
+    },
+    {
+      "path": "native/build-helper.py",
+      "bytes": 5957,
+      "sha256": "99f50115b2f5dc1e97ec162c4f6a22e49d417e7c7a31566b28d7dec089efc8aa",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/private/tmp/protracker_capture_native_build.py",
+          "bytes": 5957,
+          "sha256": "99f50115b2f5dc1e97ec162c4f6a22e49d417e7c7a31566b28d7dec089efc8aa"
+        }
+      ]
+    },
+    {
+      "path": "native/PTExecCaptureTest.build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/private/tmp/protracker-capture-current-_eke0mzq/native/PTExecCaptureTest.build.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "path": "native/PTExecCaptureTest.d",
+      "bytes": 2647,
+      "sha256": "eccf8e5170f9d8fac9e1db94f2253f25e5949eeb56e3cdf516550c4d0f1dabbb",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/private/tmp/protracker-capture-current-_eke0mzq/native/PTExecCaptureTest.d",
+          "bytes": 2647,
+          "sha256": "eccf8e5170f9d8fac9e1db94f2253f25e5949eeb56e3cdf516550c4d0f1dabbb"
+        }
+      ]
+    },
+    {
+      "path": "native/PTExecEditorCaptureTest.build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/private/tmp/protracker-capture-current-_eke0mzq/native/PTExecEditorCaptureTest.build.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "path": "native/PTExecEditorCaptureTest.d",
+      "bytes": 5317,
+      "sha256": "f6732bd37570fd58fe23d8cb78ca38607e38a773846fb0f978ca0abf5e93898f",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/private/tmp/protracker-capture-current-_eke0mzq/native/PTExecEditorCaptureTest.d",
+          "bytes": 5317,
+          "sha256": "f6732bd37570fd58fe23d8cb78ca38607e38a773846fb0f978ca0abf5e93898f"
+        }
+      ]
+    },
+    {
+      "path": "frozen-source-manifest.json.gz",
+      "bytes": 466671,
+      "sha256": "f396a024b7869586cbad04fdf170b69458cdefc0a515e0f4df550404eff6433c",
+      "kind": "derived",
+      "origins": [
+        {
+          "path": "/private/tmp/protracker-capture-current-_eke0mzq/source-manifest.json",
+          "bytes": 2297415,
+          "sha256": "e14ff644f9a4dab3ec323048174132fafd4063de3269f46b3fb98fadcdfc5d66"
+        }
+      ],
+      "derivation": "Deterministic gzip of compact JSON retaining all original source fields,7443 source records, base/tree, zero overlays and9 dirty exclusions, plus original manifest byte fingerprint."
+    },
+    {
+      "path": "native/scoped-manifest.json",
+      "bytes": 17019,
+      "sha256": "6ed9122d941b51a2b09d5ecc2370774949195e3d1122889a9d8d418d50ffad33",
+      "kind": "derived",
+      "origins": [
+        {
+          "path": "/private/tmp/protracker-capture-current-_eke0mzq/native/manifest.json",
+          "bytes": 1020769,
+          "sha256": "181ca29252d463b71c129541dfed3124ff7c04059ef40a6281af2039713e848d"
+        },
+        {
+          "path": "/private/tmp/protracker-capture-current-_eke0mzq/source-manifest.json",
+          "bytes": 2297415,
+          "sha256": "e14ff644f9a4dab3ec323048174132fafd4063de3269f46b3fb98fadcdfc5d66"
+        }
+      ],
+      "derivation": "Remove only duplicated export_file_hashes; preserve original fingerprint and full frozen snapshot reference."
+    },
+    {
+      "path": "qualification-result.json",
+      "bytes": 1055695,
+      "sha256": "d8855945c1e92ba7592f9e55156965b3c7e3fff74aefd9562feb0b0dd72922e9",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/capture-current-qualification-1790988615201455000/qualification-result.json",
+          "bytes": 1055695,
+          "sha256": "d8855945c1e92ba7592f9e55156965b3c7e3fff74aefd9562feb0b0dd72922e9"
+        }
+      ]
+    },
+    {
+      "path": "runs/capture/runner.log",
+      "bytes": 184,
+      "sha256": "94c6664081452851c5d08f42355d14d091fb4432a9bd519da721e6b04a80ce8f",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/capture-current-qualification-1790988615201455000/capture-runner.log",
+          "bytes": 184,
+          "sha256": "94c6664081452851c5d08f42355d14d091fb4432a9bd519da721e6b04a80ce8f"
+        }
+      ]
+    },
+    {
+      "path": "runs/capture/capture.log",
+      "bytes": 438,
+      "sha256": "c8acfea30dbceae640dbbf0fc9250456e567888530c236e41d31abe440c77658",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/capture-current-qualification-1790988615201455000/runner-capture/build/dev/render-files-1790988616063281000/capture.log",
+          "bytes": 438,
+          "sha256": "c8acfea30dbceae640dbbf0fc9250456e567888530c236e41d31abe440c77658"
+        }
+      ]
+    },
+    {
+      "path": "runs/capture/guest-status-before-launch.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/capture-current-qualification-1790988615201455000/runner-capture/build/dev/render-files-1790988616063281000/guest-status-before-launch.json",
+          "bytes": 52,
+          "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+        }
+      ]
+    },
+    {
+      "path": "runs/capture/guest-status-before-staging.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/capture-current-qualification-1790988615201455000/runner-capture/build/dev/render-files-1790988616063281000/guest-status-before-staging.json",
+          "bytes": 52,
+          "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+        }
+      ]
+    },
+    {
+      "path": "runs/capture/independent-cleanup.json",
+      "bytes": 3698,
+      "sha256": "f6238b4285e33224b2e78587862c383306476dc66fdafea33fffdb8dfe358f43",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/capture-current-qualification-1790988615201455000/runner-capture/build/dev/render-files-1790988616063281000/independent-cleanup.json",
+          "bytes": 3698,
+          "sha256": "f6238b4285e33224b2e78587862c383306476dc66fdafea33fffdb8dfe358f43"
+        }
+      ]
+    },
+    {
+      "path": "runs/capture/launch.log",
+      "bytes": 236,
+      "sha256": "2da539d575b3326341d040f2a976fb36e2f7d9aff5595c8334a5e44e1ee6f8e2",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/capture-current-qualification-1790988615201455000/runner-capture/build/dev/render-files-1790988616063281000/launch.log",
+          "bytes": 236,
+          "sha256": "2da539d575b3326341d040f2a976fb36e2f7d9aff5595c8334a5e44e1ee6f8e2"
+        }
+      ]
+    },
+    {
+      "path": "runs/capture/result.json",
+      "bytes": 3614,
+      "sha256": "51b912c5e9f56c005693c8e39d75be957ed853122dbe1a6ad312b9f0ca633507",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/capture-current-qualification-1790988615201455000/runner-capture/build/dev/render-files-1790988616063281000/result.json",
+          "bytes": 3614,
+          "sha256": "51b912c5e9f56c005693c8e39d75be957ed853122dbe1a6ad312b9f0ca633507"
+        }
+      ]
+    },
+    {
+      "path": "runs/editor-capture/runner.log",
+      "bytes": 191,
+      "sha256": "60b92e28e5ce45feed460a04dcf0ed27782000d1bd9adaca77c3db166b0202a6",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/capture-current-qualification-1790988615201455000/editor-capture-runner.log",
+          "bytes": 191,
+          "sha256": "60b92e28e5ce45feed460a04dcf0ed27782000d1bd9adaca77c3db166b0202a6"
+        }
+      ]
+    },
+    {
+      "path": "runs/editor-capture/editor-capture.log",
+      "bytes": 730,
+      "sha256": "fe9464589fae44950ea62897b8e3096ea0006c317836721cd0089a457265c660",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/capture-current-qualification-1790988615201455000/runner-editor-capture/build/dev/render-files-1790988631933347000/editor-capture.log",
+          "bytes": 730,
+          "sha256": "fe9464589fae44950ea62897b8e3096ea0006c317836721cd0089a457265c660"
+        }
+      ]
+    },
+    {
+      "path": "runs/editor-capture/guest-status-before-launch.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/capture-current-qualification-1790988615201455000/runner-editor-capture/build/dev/render-files-1790988631933347000/guest-status-before-launch.json",
+          "bytes": 52,
+          "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+        }
+      ]
+    },
+    {
+      "path": "runs/editor-capture/guest-status-before-staging.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/capture-current-qualification-1790988615201455000/runner-editor-capture/build/dev/render-files-1790988631933347000/guest-status-before-staging.json",
+          "bytes": 52,
+          "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+        }
+      ]
+    },
+    {
+      "path": "runs/editor-capture/independent-cleanup.json",
+      "bytes": 3698,
+      "sha256": "0d59b1a2cdf87e328b9d99076252834f955e106409a62f93e1cc2151536a5987",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/capture-current-qualification-1790988615201455000/runner-editor-capture/build/dev/render-files-1790988631933347000/independent-cleanup.json",
+          "bytes": 3698,
+          "sha256": "0d59b1a2cdf87e328b9d99076252834f955e106409a62f93e1cc2151536a5987"
+        }
+      ]
+    },
+    {
+      "path": "runs/editor-capture/launch.log",
+      "bytes": 236,
+      "sha256": "2da539d575b3326341d040f2a976fb36e2f7d9aff5595c8334a5e44e1ee6f8e2",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/capture-current-qualification-1790988615201455000/runner-editor-capture/build/dev/render-files-1790988631933347000/launch.log",
+          "bytes": 236,
+          "sha256": "2da539d575b3326341d040f2a976fb36e2f7d9aff5595c8334a5e44e1ee6f8e2"
+        }
+      ]
+    },
+    {
+      "path": "runs/editor-capture/result.json",
+      "bytes": 3633,
+      "sha256": "0b58e1c584570e211ee3349a08ecc0d924ae0bd147fa6d4034bdfd975a0df4ce",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/capture-current-qualification-1790988615201455000/runner-editor-capture/build/dev/render-files-1790988631933347000/result.json",
+          "bytes": 3633,
+          "sha256": "0b58e1c584570e211ee3349a08ecc0d924ae0bd147fa6d4034bdfd975a0df4ce"
+        }
+      ]
+    },
+    {
+      "path": "runner/shared_infra_render_files.py",
+      "bytes": 47582,
+      "sha256": "3c10c18cfb56e4e07fb530df7cd0409797c3e116419a126e234f50a455cb4e8b",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/capture-current-qualification-1790988615201455000/runner-capture/tools/shared_infra_render_files.py",
+          "bytes": 47582,
+          "sha256": "3c10c18cfb56e4e07fb530df7cd0409797c3e116419a126e234f50a455cb4e8b"
+        },
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/capture-current-qualification-1790988615201455000/runner-editor-capture/tools/shared_infra_render_files.py",
+          "bytes": 47582,
+          "sha256": "3c10c18cfb56e4e07fb530df7cd0409797c3e116419a126e234f50a455cb4e8b"
+        }
+      ]
+    },
+    {
+      "path": "runner/qualify_capture_current.py",
+      "bytes": 7016,
+      "sha256": "1039573dec374a7bb6fd74fc9f752876af82d1b3dae7ae988bd2fecc8afd419c",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/qualify_capture_current.py",
+          "bytes": 7016,
+          "sha256": "1039573dec374a7bb6fd74fc9f752876af82d1b3dae7ae988bd2fecc8afd419c"
+        }
+      ]
+    },
+    {
+      "path": "packaging-helper.py",
+      "bytes": 14107,
+      "sha256": "e8ce798d28c3965625c43d1094fc7ff462ca86a027a0f205d0e947e9d06acb1c",
+      "kind": "byte-copy",
+      "origins": [
+        {
+          "path": "/private/tmp/package_capture_current_evidence.py",
+          "bytes": 14107,
+          "sha256": "e8ce798d28c3965625c43d1094fc7ff462ca86a027a0f205d0e947e9d06acb1c"
+        }
+      ]
+    },
+    {
+      "path": "historical-prelaunch-reference.json",
+      "bytes": 2855,
+      "sha256": "065c114a0e8de85ba39ff2a1f834c3d32dfabf1588e3e3b8e71107fb1e579b3d",
+      "kind": "derived",
+      "origins": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/capture-format/README.md",
+          "bytes": 895,
+          "sha256": "f3af395fc07754736d33cb235be4f59edb12071d612f8ced774ecd8ea1ef2eab"
+        },
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/capture-transfer/README.md",
+          "bytes": 1548,
+          "sha256": "9b34846207ac09ab8d0c6ba3cc11ca20d748208accb900fc9154570d15d53851"
+        }
+      ],
+      "derivation": "Read-only fingerprints of original format/transfer history; current native qualification does not rewrite historical NOT RUN."
+    },
+    {
+      "path": "root-reported-coordination.json",
+      "bytes": 1029,
+      "sha256": "a39d635559eab7fad8e4ed0f00281bf1d528a4609007cee022ed215468e66dde",
+      "kind": "derived",
+      "origins": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/qualify_capture_current.py",
+          "bytes": 7016,
+          "sha256": "1039573dec374a7bb6fd74fc9f752876af82d1b3dae7ae988bd2fecc8afd419c"
+        }
+      ],
+      "derivation": "Manual attribution to direct root reports including release ACK revision29 and exact historical script confirmation; source script copy bytes independently verified, coordination not independently rechecked."
+    },
+    {
+      "path": "README.md",
+      "bytes": 3220,
+      "sha256": "9656a22de8c5214bde777a62628da2e587d400de36e5025d829600fec4cabdb9",
+      "kind": "authored",
+      "derivation": "Evidence summary from preserved artifact records and explicitly attributed root reports; no added acceptance tier."
+    }
+  ]
+}

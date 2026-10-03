@@ -7,6 +7,15 @@
  * Signed 8/16-bit output, explicit 16-bit byte order; optional silent even-byte
  * padding for Paula DMA. Conversion rounds nearest, ties away from zero. */
 struct pt_playback_format {unsigned bits,channel,little_endian,word_pad;};
+/* Scalar and packed outputs must be disjoint from PCM/format descriptors and
+ * the full declared master capacity, including unused storage. Checked span
+ * overflow or missing nonzero-capacity storage returns PT_PCM_ALIAS without
+ * publication. Guards read metadata only, never capacity padding. Existing
+ * shape/value/format/count and pack capacity/NULL refusals precede alias checks.
+ * Empty zero-capacity sources still publish size zero. Any valid empty shape
+ * packs zero bytes without inspecting an unused byte pointer/storage extent,
+ * including an empty NULL source with retained nonzero capacity. Scalar size
+ * publication refuses that missing declared storage as PT_PCM_ALIAS. */
 enum pt_pcm_result pt_playback_pcm_size(const struct pt_pcm *,const struct pt_playback_format *,size_t *);
 enum pt_pcm_result pt_playback_pcm_pack(const struct pt_pcm *,const struct pt_playback_format *,uint8_t *,size_t);
 /* Use a dedicated representation pool per backend/memory domain. Identity is
@@ -45,6 +54,12 @@ enum pt_cache_result pt_playback_pcm_upload_chunks(struct pt_sample_cache *,cons
  * after the final write. Failure cancels/releases the unpublished lease; another
  * step then returns INVALID. Cancel is idempotent and never releases a previously
  * transferred result lease. Neither begin nor step changes *out on failure.
+ * Source/format/lease-output overlap refuses before cache reservation in begin.
+ * Step protects staging and lease output from the retained source descriptor and
+ * full capacity, and staging from job/output metadata. Other failures cancel as
+ * above. If *out overlaps the job, INVALID leaves the unpublished job unchanged:
+ * retry with a disjoint output or explicitly cancel; cancellation would otherwise
+ * overwrite the refused caller output.
  * Caller MUST retain immutable master data AND its descriptor, cache and callback
  * contexts through completion/cancel; this low-level job does not pin a master.
  * Descriptor changes/invalidation refuse. Value edits are forbidden, not scanned

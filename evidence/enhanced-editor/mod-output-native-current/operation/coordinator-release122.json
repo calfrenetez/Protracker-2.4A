@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"timedOut\":false,\"wake\":{\"reason\":\"turnCompleted\",\"turnId\":\"01a102b8-9a3e-7d90-ba98-831e88eaf37c\",\"threadId\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\"},\"polls\":[{\"schemaVersion\":1,\"cursor\":\"e7a645e7-31a2-432b-918d-41790ea9e0a3:122\",\"revision\":122,\"changed\":true,\"thread\":{\"id\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\",\"status\":{\"type\":\"idle\"}},\"latestTurn\":{\"id\":\"01a102b8-9a3e-7d90-ba98-831e88eaf37c\",\"status\":\"completed\",\"error\":null,\"startedAt\":1791047014,\"completedAt\":1791047025,\"durationMs\":10128},\"latestAssistantMessageId\":\"msg_052d99eb5846a575016ac1356dfa3c87d0ba27710b1b30202f\",\"latestAssistantMessage\":{\"id\":\"msg_052d99eb5846a575016ac1356dfa3c87d0ba27710b1b30202f\",\"turnId\":\"01a102b8-9a3e-7d90-ba98-831e88eaf37c\",\"phase\":\"final_answer\",\"text\":\"ProTracker reports the MOD fixture passed and its window is released after independent cleanup and idle verification. No recovery hold remains. Acceptance is emulator software export/file/Fast-memory behaviour only—not physical, audio or timing. AmiConnect holds no reservation; the old cache request remains withdrawn.\"},\"latestToolMarkerId\":null,\"latestToolMarker\":null}]}"
+    }
+  ],
+  "isError": false
+}

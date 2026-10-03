@@ -153,6 +153,98 @@ static void large_job(void)
     assert(!memcmp(d.ram[index_of(&d,pt_cache_data(&c,out))],expected,600));
     assert(pt_cache_unpin(&c,out) && pt_cache_clear(&c));
 }
+static void storage_guard_jobs(void)
+{
+    union master {int32_t values[64];struct {int32_t prefix[16];struct pt_cache_lease output;} padding;struct pt_playback_upload_job job;};
+    unsigned bits,channels,i,mode;
+    for(bits=8;bits<=24;bits+=8)for(channels=1;channels<=2;++channels) {
+        union master master,before;struct device d={0};struct pt_sample_cache c;
+        struct pt_pcm p,oldp;struct pt_playback_format f={8,0,0,1},oldf=f;
+        struct pt_cache_lease out={99,123},oldout=out;struct pt_playback_upload_job job={0};uint8_t staging[16];
+        for(i=0;i<64;++i)master.values[i]=i&1?INT32_MIN:INT32_MAX;
+        for(i=0;i<3*channels;++i)master.values[i]=i&1?-1:1;
+        p=(struct pt_pcm){master.values,64,3,48000,(uint8_t)channels,(uint8_t)bits};memcpy(&oldp,&p,sizeof(p));memcpy(&before,&master,sizeof(master));
+        memset(&out,0,sizeof(out));out.slot=99;out.serial=123;memcpy(&oldout,&out,sizeof(out));
+        pt_cache_init(&c,&d,allocate,release,16);d.max_chunk=16;
+        assert(pt_playback_upload_begin(&job,&c,&p,1,1,&f,&d,write_chunk,&master.padding.output)==PT_CACHE_INVALID);
+        assert(!job.cache && !c.bytes && !d.uploads && !memcmp(&master,&before,sizeof(master)));
+        for(mode=0;mode<6;++mode) {
+            uint8_t *bad;
+            d.next_offset=0;out=oldout;
+            assert(pt_playback_upload_begin(&job,&c,&p,1,1,&f,&d,write_chunk,&out)==PT_CACHE_PENDING);
+            if(mode==0)bad=(uint8_t *)(master.values+3*channels);
+            else if(mode==1)bad=(uint8_t *)master.values+sizeof(master.values)-1;
+            else if(mode==2)bad=(uint8_t *)&p;
+            else if(mode==3)bad=(uint8_t *)&job;
+            else if(mode==4)bad=(uint8_t *)&out;
+            else bad=(uint8_t *)(uintptr_t)(UINTPTR_MAX-2);
+            assert(pt_playback_upload_step(&job,bad,16,&out)==PT_CACHE_INVALID);
+            assert(!job.cache && !c.bytes && !d.uploads && !memcmp(&out,&oldout,sizeof(out)));
+            assert(!memcmp(&master,&before,sizeof(master)) && !memcmp(&p,&oldp,sizeof(p)) && !memcmp(&f,&oldf,sizeof(f)));
+            for(i=0;i<4;++i)assert(!d.live[i]);
+        }
+        d.next_offset=0;
+        assert(pt_playback_upload_begin(&job,&c,&p,1,1,&f,&d,write_chunk,&out)==PT_CACHE_PENDING);
+        assert(pt_playback_upload_step(&job,staging,sizeof(staging),&master.padding.output)==PT_CACHE_INVALID);
+        assert(!job.cache && !c.bytes && !d.uploads && !memcmp(&master,&before,sizeof(master)));
+        d.next_offset=0;
+        assert(pt_playback_upload_begin(&job,&c,&p,1,1,&f,&d,write_chunk,&out)==PT_CACHE_PENDING);
+        {
+            struct pt_playback_upload_job oldjob;struct pt_sample_cache oldc;
+            memcpy(&oldjob,&job,sizeof(job));memcpy(&oldc,&c,sizeof(c));
+            assert(pt_playback_upload_step(&job,staging,sizeof(staging),&job.lease)==PT_CACHE_INVALID);
+            assert(!memcmp(&job,&oldjob,sizeof(job)) && !memcmp(&c,&oldc,sizeof(c)) && !d.uploads);
+            assert(!memcmp(&master,&before,sizeof(master)) && !memcmp(&out,&oldout,sizeof(out)));
+            pt_playback_upload_cancel(&job);assert(!job.cache && !c.bytes);
+        }
+        d.next_offset=0;
+        assert(pt_playback_pcm_upload(&c,&p,1,1,&f,(uint8_t *)(master.values+3*channels),16,&d,upload,&out)==PT_CACHE_INVALID);
+        assert(!c.bytes && !d.uploads && !memcmp(&master,&before,sizeof(master)) && !memcmp(&out,&oldout,sizeof(out)));
+        assert(pt_playback_pcm_upload(&c,&p,1,1,&f,(uint8_t *)&out,16,&d,upload,&out)==PT_CACHE_INVALID);
+        assert(!c.bytes && !d.uploads && !memcmp(&out,&oldout,sizeof(out)));
+        d.next_offset=0;
+        assert(pt_playback_pcm_upload_chunks(&c,&p,1,1,&f,staging,sizeof(staging),&d,write_chunk,&out)==PT_CACHE_LOAD);
+        assert(d.uploads==1 && !memcmp(&master,&before,sizeof(master)));
+        assert(pt_cache_unpin(&c,out) && pt_cache_clear(&c));
+        for(i=0;i<4;++i)assert(!d.live[i]);
+    }
+    {
+        union master m,old;struct device d={0};struct pt_sample_cache c;struct pt_cache_lease out={99,123};
+        struct pt_pcm p={m.values,64,1,48000,1,8};struct pt_playback_format f={8,0,0,0};
+        memset(&m,0,sizeof(m));old=m;pt_cache_init(&c,&d,allocate,release,16);
+        assert(pt_playback_upload_begin(&m.job,&c,&p,1,1,&f,&d,write_chunk,&out)==PT_CACHE_INVALID);
+        assert(!memcmp(&m,&old,sizeof(m)) && !c.bytes && !d.uploads && out.serial==123);
+    }
+}
+
+static void prepared_storage_guards(void)
+{
+    union {int32_t values[64];struct {int32_t prefix[16];struct pt_cache_lease out;} padding;} m,before;
+    struct pt_pcm p={m.values,64,3,48000,2,24},oldp;struct pt_playback_format f={16,1,1,0};
+    struct pt_sample_cache c,oldc;struct device d={0};struct pt_playback_upload_job job={0},oldjob;
+    struct pt_cache_lease out={99,123};uint8_t staging[16];unsigned i;
+    for(i=0;i<64;++i)m.values[i]=INT32_MIN;for(i=0;i<6;++i)m.values[i]=65537;
+    memcpy(&before,&m,sizeof(m));memcpy(&oldp,&p,sizeof(p));pt_cache_init(&c,&d,allocate,release,16);d.max_chunk=16;
+    memcpy(&oldc,&c,sizeof(c));
+    assert(pt_playback_upload_begin_prepared(&job,&c,&p,1,1,&f,&d,write_chunk,&m.padding.out)==PT_CACHE_INVALID);
+    assert(!memcmp(&c,&oldc,sizeof(c)) && !job.cache && !d.uploads);
+    assert(pt_playback_upload_begin_prepared(&job,&c,&p,1,1,&f,&d,write_chunk,&out)==PT_CACHE_PENDING);
+    assert(pt_playback_upload_step(&job,(uint8_t *)(m.values+6),16,&out)==PT_CACHE_INVALID);
+    assert(!job.cache && !c.bytes && !d.uploads && out.serial==123);
+    assert(!memcmp(&m,&before,sizeof(m)) && !memcmp(&p,&oldp,sizeof(p)));
+    assert(pt_playback_upload_begin_prepared(&job,&c,&p,1,1,&f,&d,write_chunk,&out)==PT_CACHE_PENDING);
+    memcpy(&oldjob,&job,sizeof(job));memcpy(&oldc,&c,sizeof(c));
+    assert(pt_playback_upload_step(&job,staging,sizeof(staging),&job.lease)==PT_CACHE_INVALID);
+    assert(!memcmp(&job,&oldjob,sizeof(job)) && !memcmp(&c,&oldc,sizeof(c)) && !d.uploads);
+    pt_playback_upload_cancel(&job);assert(!job.cache && !c.bytes);
+    assert(pt_playback_pcm_upload_chunks(&c,&p,1,1,&f,staging,sizeof(staging),&d,write_chunk,&out)==PT_CACHE_LOAD);
+    memcpy(&oldc,&c,sizeof(c));
+    assert(pt_playback_upload_begin_prepared(&job,&c,&p,1,1,&f,&d,write_chunk,&m.padding.out)==PT_CACHE_INVALID);
+    assert(!memcmp(&c,&oldc,sizeof(c)) && !job.cache && d.uploads==1);
+    assert(!memcmp(&m,&before,sizeof(m)) && !memcmp(&p,&oldp,sizeof(p)));
+    assert(pt_cache_unpin(&c,out) && pt_cache_clear(&c));for(i=0;i<4;++i)assert(!d.live[i]);
+}
+
 int main(void)
 {
     struct device d={0};struct pt_sample_cache c;struct pt_cache_lease a,b,old,sentinel={99,123};
@@ -191,5 +283,5 @@ int main(void)
     assert(d.uploads==uploads && c.bytes==0 && !memcmp(master,original,sizeof(master)));
     for(i=0;i<4;++i)assert(!d.live[i]);
     for(incremental=0;incremental<3;++incremental)for(i=8;i<=24;i+=8){chunk_tests(0,i);chunk_tests(1,i);}
-    job_refusal();large_job();puts("PLAYBACK UPLOAD PASS: bounded chunks and transactional device resources");return 0;
+    job_refusal();large_job();storage_guard_jobs();prepared_storage_guards();puts("PLAYBACK UPLOAD PASS: bounded chunks and transactional device resources");return 0;
 }

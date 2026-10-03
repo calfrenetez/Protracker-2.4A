@@ -1,0 +1,4 @@
+EXEC MEMORY pool_limit=130734232 reserve=262144 flags=4
+MOD OUTPUT PRESERVATION PASS: analysis and direct/round8/TPDF/playback outputs, all source tables and full 8/16/24-bit capacities, mutual outputs, fail-closed capacity/address spans, refusal precedence and unchanged streamed/padded bytes
+MOD STREAM PASS: direct/round8/TPDF exact multi-block bytes, legacy headers, loops, 65 patterns, source and destination protection; workspace=7164
+EXEC MEMORY PASS: 13 Fast allocations, zero owned bytes, budget refusal without Chip fallback

@@ -1,0 +1,11 @@
+{
+  "scope": "One Exec MOD file/memory fixture only",
+  "root_take_recorded": true,
+  "shared_holds_cleared": true,
+  "helper_sha256": "9ea1a8a6d08957a1bfcdcfaea70301e3bc61cf4abc35e9006ef93b120322d4e1",
+  "take_epoch_seconds": 1791046724.885,
+  "revision": 121,
+  "coordination_ack": "The single MOD-fixture TAKE is acknowledged, conditional on successful nonblocking lock and exact live guards. No newer conflicting claim is recorded here. AmiConnect will leave shared resources untouched through independent verification and explicit release, or a hold report.",
+  "candidate_sha256": "52e273bdf829092f1bad2182d1fa9e544e314a6d5dff81bb45880c947cdf8102",
+  "maximum_reservation_s": 420
+}

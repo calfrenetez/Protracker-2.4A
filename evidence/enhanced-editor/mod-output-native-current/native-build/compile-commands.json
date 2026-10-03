@@ -1,0 +1,45 @@
+{
+  "commands": [
+    {
+      "name": "PTExecModStreamTest",
+      "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc/core",
+        "-Ibuild/dev",
+        "-fbbb=-",
+        "tests/native_exec_mod_stream_test.c",
+        "src/platform/mod_file.c",
+        "src/platform/file_save.c",
+        "src/core/safe_save.c",
+        "src/core/mod_project.c",
+        "src/core/mod_inspect.c",
+        "src/core/project.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "-o",
+        "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/PTExecModStreamTest"
+      ],
+      "output": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/PTExecModStreamTest",
+      "ordered_translation_units": [
+        "tests/native_exec_mod_stream_test.c",
+        "src/platform/mod_file.c",
+        "src/platform/file_save.c",
+        "src/core/safe_save.c",
+        "src/core/mod_project.c",
+        "src/core/mod_inspect.c",
+        "src/core/project.c",
+        "src/core/channels.c",
+        "src/core/pcm.c"
+      ]
+    }
+  ]
+}

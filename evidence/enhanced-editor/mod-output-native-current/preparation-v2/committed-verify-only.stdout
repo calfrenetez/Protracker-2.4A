@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "scope": "Host-only exact committed-source/compiler/runtime verification; no Guest/lock/staging/target",
+  "source_tree": "4507b62ed3fe0bd50211d666191531b7aeacc55d",
+  "cases": [
+    {
+      "label": "mod-stream",
+      "binary": "PTExecModStreamTest",
+      "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/PTExecModStreamTest",
+      "bytes": 70824,
+      "sha256": "52e273bdf829092f1bad2182d1fa9e544e314a6d5dff81bb45880c947cdf8102",
+      "markers": [
+        "MOD STREAM PASS:",
+        "EXEC MEMORY PASS:",
+        "zero owned bytes"
+      ],
+      "mode": [
+        "--mod-stream"
+      ],
+      "process_bound": 140
+    }
+  ]
+}

@@ -1,6 +1,24 @@
 #include "playback_internal.h"
 #include "pcm_internal.h"
 #include <string.h>
+/* Metadata only: capacity is the complete owned int32_t extent, not just the
+ * active frames. Padding is protected without reading its values. */
+static int overlap(const void *a,size_t n,const void *b,size_t m)
+{
+    uintptr_t x=(uintptr_t)a,y=(uintptr_t)b;
+    if(!n || !m)return 0;
+    if(!a || !b || n>UINTPTR_MAX-x || m>UINTPTR_MAX-y)return 1;
+    return x<y+m && y<x+n;
+}
+static int source_alias(const struct pt_pcm *p,const struct pt_playback_format *f,const void *out,size_t bytes)
+{
+    size_t source_bytes;
+    if(!bytes)return 0;
+    if(!out || bytes>UINTPTR_MAX-(uintptr_t)out || p->capacity>SIZE_MAX/sizeof(*p->data))return 1;
+    source_bytes=p->capacity*sizeof(*p->data);
+    return overlap(out,bytes,p,sizeof(*p)) || overlap(out,bytes,f,sizeof(*f)) ||
+        overlap(out,bytes,p->data,source_bytes);
+}
 static enum pt_pcm_result size(const struct pt_pcm *p,const struct pt_playback_format *f,size_t *out,unsigned prepared)
 {
     size_t bytes;enum pt_pcm_result r=prepared?pt_pcm_shape(p):pt_pcm_validate(p);
@@ -13,7 +31,12 @@ static enum pt_pcm_result size(const struct pt_pcm *p,const struct pt_playback_f
     *out=bytes;return PT_PCM_OK;
 }
 enum pt_pcm_result pt_playback_pcm_size(const struct pt_pcm *p,const struct pt_playback_format *f,size_t *out)
-{return size(p,f,out,0);}
+{
+    size_t bytes;enum pt_pcm_result r=size(p,f,out?&bytes:NULL,0);
+    if(r!=PT_PCM_OK)return r;
+    if(source_alias(p,f,out,sizeof(*out)))return PT_PCM_ALIAS;
+    *out=bytes;return PT_PCM_OK;
+}
 /* Caller validates the complete immutable source once before chunking. */
 static void pack_frames(const struct pt_pcm *p,const struct pt_playback_format *f,
                         uint32_t start,uint32_t count,uint8_t *out)
@@ -39,12 +62,11 @@ static void pack_frames(const struct pt_pcm *p,const struct pt_playback_format *
 }
 enum pt_pcm_result pt_playback_pcm_pack(const struct pt_pcm *p,const struct pt_playback_format *f,uint8_t *out,size_t capacity)
 {
-    size_t bytes,source_bytes;uintptr_t a,b;enum pt_pcm_result r=pt_playback_pcm_size(p,f,&bytes);
+    size_t bytes;enum pt_pcm_result r=size(p,f,&bytes,0);
     if(r!=PT_PCM_OK)return r;
     if(capacity<bytes)return PT_PCM_CAPACITY;
     if(bytes && !out)return PT_PCM_INVALID;
-    source_bytes=(size_t)p->frames*p->channels*sizeof(int32_t);a=(uintptr_t)p->data;b=(uintptr_t)out;
-    if(bytes && (a<=b?b-a<source_bytes:a-b<bytes))return PT_PCM_ALIAS;
+    if(source_alias(p,f,out,bytes))return PT_PCM_ALIAS;
     pack_frames(p,f,0,p->frames,out);
     if(f->word_pad && f->bits==8 && (p->frames&1))out[p->frames]=0;
     return PT_PCM_OK;
@@ -58,6 +80,7 @@ enum pt_cache_result pt_playback_pcm_acquire(struct pt_sample_cache *c,const str
     if(!out)return PT_CACHE_INVALID;
     r=pt_playback_pcm_size(p,f,&bytes);
     if(r!=PT_PCM_OK || !bytes)return r==PT_PCM_CAPACITY?PT_CACHE_CAPACITY:PT_CACHE_INVALID;
+    if(source_alias(p,f,out,sizeof(*out)))return PT_CACHE_INVALID;
     result=pt_cache_take(c,key(identity,f),version,bytes,&lease);
     if(result==PT_CACHE_LOAD) {
         if(pt_playback_pcm_pack(p,f,pt_cache_data(c,lease),bytes)!=PT_PCM_OK || !pt_cache_publish(c,lease)) {
@@ -82,8 +105,12 @@ enum pt_cache_result pt_playback_pcm_upload(struct pt_sample_cache *c,const stru
     if(!c || !out || !upload)return PT_CACHE_INVALID;
     r=pt_playback_pcm_size(p,f,&bytes);
     if(r!=PT_PCM_OK || !bytes)return r==PT_PCM_CAPACITY?PT_CACHE_CAPACITY:PT_CACHE_INVALID;
+    if(source_alias(p,f,out,sizeof(*out)))return PT_CACHE_INVALID;
     result=pt_cache_take(c,key(identity,f),version,bytes,&lease);
     if(result==PT_CACHE_LOAD) {
+        if(capacity>=bytes && overlap(staging,bytes,out,sizeof(*out))) {
+            pt_cache_unpin(c,lease);return PT_CACHE_INVALID;
+        }
         r=pt_playback_pcm_pack(p,f,staging,capacity);
         if(r!=PT_PCM_OK) {
             pt_cache_unpin(c,lease);return r==PT_PCM_CAPACITY?PT_CACHE_CAPACITY:PT_CACHE_INVALID;
@@ -110,6 +137,8 @@ static enum pt_cache_result upload_begin(struct pt_playback_upload_job *j,struct
     if(!j || j->cache || !c || !out || !write)return PT_CACHE_INVALID;
     r=size(p,f,&bytes,prepared);
     if(r!=PT_PCM_OK || !bytes)return r==PT_PCM_CAPACITY?PT_CACHE_CAPACITY:PT_CACHE_INVALID;
+    if(source_alias(p,f,j,sizeof(*j)) || source_alias(p,f,out,sizeof(*out)) ||
+       overlap(j,sizeof(*j),out,sizeof(*out)))return PT_CACHE_INVALID;
     result=pt_cache_take(c,key(identity,f),version,bytes,&lease);
     if(result==PT_CACHE_HIT){*out=lease;return result;}
     if(result!=PT_CACHE_LOAD)return result;
@@ -134,16 +163,19 @@ static int upload_current(const struct pt_playback_upload_job *j)
 enum pt_cache_result pt_playback_upload_step(struct pt_playback_upload_job *j,uint8_t *staging,
     size_t capacity,struct pt_cache_lease *out)
 {
-    size_t width,chunk,n,start,frames,source_bytes;uintptr_t a,b;enum pt_cache_result result=PT_CACHE_INVALID;
+    size_t width,chunk,n,start,frames;enum pt_cache_result result=PT_CACHE_INVALID;
     if(!j || !j->cache)return result;
+    /* Cancelling would itself overwrite an output located inside the job.
+     * Leave this valid unpublished job intact for explicit retry/cancel. */
+    if(out && overlap(out,sizeof(*out),j,sizeof(*j)))return result;
     if(!out || !upload_current(j))goto fail;
+    if(source_alias(j->source,&j->format,out,sizeof(*out)))goto fail;
     if(capacity>PT_PLAYBACK_UPLOAD_CHUNK)capacity=PT_PLAYBACK_UPLOAD_CHUNK;
     width=j->format.bits/8;chunk=capacity-capacity%width;
     if(!chunk){result=PT_CACHE_CAPACITY;goto fail;}
     n=j->bytes-j->offset;if(n>chunk)n=chunk;
-    source_bytes=(size_t)j->pcm.frames*j->pcm.channels*sizeof(int32_t);
-    a=(uintptr_t)j->pcm.data;b=(uintptr_t)staging;
-    if(!staging || (a<=b?b-a<source_bytes:a-b<n))goto fail;
+    if(source_alias(j->source,&j->format,staging,n) ||
+       overlap(staging,n,j,sizeof(*j)) || overlap(staging,n,out,sizeof(*out)))goto fail;
     start=j->offset/width;frames=n/width;
     if(frames>j->pcm.frames-start)frames=j->pcm.frames-start;
     pack_frames(&j->pcm,&j->format,(uint32_t)start,(uint32_t)frames,staging);

@@ -1,0 +1,1671 @@
+{
+  "members": {
+    "records/README.md": {
+      "bytes": 3272,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/README.md",
+      "role": "exact private source/proof/import history",
+      "sha256": "5d80df2491abbe596f4ad43229cb84fc607fc10ec2ef08e02f6f718c6ef1bd57"
+    },
+    "records/baseline-manifest.json": {
+      "bytes": 1052782,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline-manifest.json",
+      "role": "exact original control or preserved pre-runtime refusal",
+      "sha256": "35932d027eaa7c47a48eba8550776d8357b360caa7f084f95c8ef14c9013ada9"
+    },
+    "records/baseline-probe-prelaunch-failure.json": {
+      "bytes": 394,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline-probe-prelaunch-failure.json",
+      "role": "exact original control or preserved pre-runtime refusal",
+      "sha256": "cdbb951cc5ad3f1b9cf56e7a05415a95236c4541de576e69cc2b5f49b9343079"
+    },
+    "records/baseline-probe-v2/compile.log": {
+      "bytes": 0,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline-probe-v2/compile.log",
+      "role": "exact original baseline-probe-v2 member",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "records/baseline-probe-v2/compiler-resource.log": {
+      "bytes": 53,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline-probe-v2/compiler-resource.log",
+      "role": "exact original baseline-probe-v2 member",
+      "sha256": "ae4dc8a8a83fdae4897a378fbf33fe0a98ae67d92cb9d6da17ac13eafbe7405b"
+    },
+    "records/baseline-probe-v2/compiler-version.log": {
+      "bytes": 158,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline-probe-v2/compiler-version.log",
+      "role": "exact original baseline-probe-v2 member",
+      "sha256": "a856ec74c559401131ad608625ef252fb2db6c78bc0c480c1c4c782ee4896db1"
+    },
+    "records/baseline-probe-v2/dependencies-00.log": {
+      "bytes": 8363,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline-probe-v2/dependencies-00.log",
+      "role": "exact original baseline-probe-v2 member",
+      "sha256": "70193ad2be2f3fa2155b085578633c03a2be7ae2e74e6bb2a3a5bc3636fdfa13"
+    },
+    "records/baseline-probe-v2/dependencies-01.log": {
+      "bytes": 4529,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline-probe-v2/dependencies-01.log",
+      "role": "exact original baseline-probe-v2 member",
+      "sha256": "88b1bb1c44d211001353a424da05c63dfba54f0e3f5600ed3900c4272f92cc4b"
+    },
+    "records/baseline-probe-v2/dependencies-02.log": {
+      "bytes": 4819,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline-probe-v2/dependencies-02.log",
+      "role": "exact original baseline-probe-v2 member",
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73"
+    },
+    "records/baseline-probe-v2/dependencies-03.log": {
+      "bytes": 3268,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline-probe-v2/dependencies-03.log",
+      "role": "exact original baseline-probe-v2 member",
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2"
+    },
+    "records/baseline-probe-v2/probe": {
+      "bytes": 142008,
+      "mode": 493,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline-probe-v2/probe",
+      "role": "exact original baseline-probe-v2 member",
+      "sha256": "30f2825c71548a052eb4758d6ed0bd1e0a5136c930a6fb0832b4e992d3a14e88"
+    },
+    "records/baseline-probe-v2/probe.c": {
+      "bytes": 2238,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline-probe-v2/probe.c",
+      "role": "exact original baseline-probe-v2 member",
+      "sha256": "d69844f0204b8c03a12154965d703ff4b631d32ee0dbf1e8c4673d4ea7bb7622"
+    },
+    "records/baseline-probe-v2/probe.dSYM/Contents/Info.plist": {
+      "bytes": 634,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline-probe-v2/probe.dSYM/Contents/Info.plist",
+      "role": "exact original baseline-probe-v2 member",
+      "sha256": "9de088233f62a847d8cdb3921daf5341f6bc948e34f38e4e651706dd1bec3401"
+    },
+    "records/baseline-probe-v2/probe.dSYM/Contents/Resources/DWARF/probe": {
+      "bytes": 53124,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline-probe-v2/probe.dSYM/Contents/Resources/DWARF/probe",
+      "role": "exact original baseline-probe-v2 member",
+      "sha256": "2b1e2e499544968df3a2de19bfd8bdcd8090b3d1f70b1697b56420a6116dd57b"
+    },
+    "records/baseline-probe-v2/probe.dSYM/Contents/Resources/Relocations/aarch64/probe.yml": {
+      "bytes": 159,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline-probe-v2/probe.dSYM/Contents/Resources/Relocations/aarch64/probe.yml",
+      "role": "exact original baseline-probe-v2 member",
+      "sha256": "8b6e86f8322ca89dc6a801dfbb010ca50761bece0712d91fcb26f4171d8dd5d3"
+    },
+    "records/baseline-probe-v2/result.json": {
+      "bytes": 24915,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline-probe-v2/result.json",
+      "role": "exact original control or preserved pre-runtime refusal",
+      "sha256": "cbb59b2b33c84d780256e99ef31d64ce1e844c36cae0308f977d3bc6cb342bf3"
+    },
+    "records/baseline-probe-v2/run.log": {
+      "bytes": 138,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline-probe-v2/run.log",
+      "role": "exact original baseline-probe-v2 member",
+      "sha256": "c77caf6a622c9c023c0ce311e1d893a5773d23379c76106c203b594623adc620"
+    },
+    "records/candidate-probe-v2/compile.log": {
+      "bytes": 0,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v2/compile.log",
+      "role": "exact original candidate-probe-v2 member",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "records/candidate-probe-v2/compiler-resource.log": {
+      "bytes": 53,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v2/compiler-resource.log",
+      "role": "exact original candidate-probe-v2 member",
+      "sha256": "ae4dc8a8a83fdae4897a378fbf33fe0a98ae67d92cb9d6da17ac13eafbe7405b"
+    },
+    "records/candidate-probe-v2/compiler-version.log": {
+      "bytes": 158,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v2/compiler-version.log",
+      "role": "exact original candidate-probe-v2 member",
+      "sha256": "a856ec74c559401131ad608625ef252fb2db6c78bc0c480c1c4c782ee4896db1"
+    },
+    "records/candidate-probe-v2/dependencies-00.log": {
+      "bytes": 8364,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v2/dependencies-00.log",
+      "role": "exact original candidate-probe-v2 member",
+      "sha256": "d2438da74d903827e64f181cb265d999335d8eeb495ea23db6802638caf16124"
+    },
+    "records/candidate-probe-v2/dependencies-01.log": {
+      "bytes": 4529,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v2/dependencies-01.log",
+      "role": "exact original candidate-probe-v2 member",
+      "sha256": "88b1bb1c44d211001353a424da05c63dfba54f0e3f5600ed3900c4272f92cc4b"
+    },
+    "records/candidate-probe-v2/dependencies-02.log": {
+      "bytes": 4819,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v2/dependencies-02.log",
+      "role": "exact original candidate-probe-v2 member",
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73"
+    },
+    "records/candidate-probe-v2/dependencies-03.log": {
+      "bytes": 3268,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v2/dependencies-03.log",
+      "role": "exact original candidate-probe-v2 member",
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2"
+    },
+    "records/candidate-probe-v2/probe": {
+      "bytes": 142136,
+      "mode": 493,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v2/probe",
+      "role": "exact original candidate-probe-v2 member",
+      "sha256": "a3c41eb9303dac6225fe37590b04425cbe114571b7251ce47ee48124597b7acd"
+    },
+    "records/candidate-probe-v2/probe.c": {
+      "bytes": 2238,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v2/probe.c",
+      "role": "exact original candidate-probe-v2 member",
+      "sha256": "d69844f0204b8c03a12154965d703ff4b631d32ee0dbf1e8c4673d4ea7bb7622"
+    },
+    "records/candidate-probe-v2/probe.dSYM/Contents/Info.plist": {
+      "bytes": 634,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v2/probe.dSYM/Contents/Info.plist",
+      "role": "exact original candidate-probe-v2 member",
+      "sha256": "9de088233f62a847d8cdb3921daf5341f6bc948e34f38e4e651706dd1bec3401"
+    },
+    "records/candidate-probe-v2/probe.dSYM/Contents/Resources/DWARF/probe": {
+      "bytes": 55068,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v2/probe.dSYM/Contents/Resources/DWARF/probe",
+      "role": "exact original candidate-probe-v2 member",
+      "sha256": "033a0654aac3da43b9a9ea1b136d38d9430ca78014adbd3ff6e0ecad771c6caf"
+    },
+    "records/candidate-probe-v2/probe.dSYM/Contents/Resources/Relocations/aarch64/probe.yml": {
+      "bytes": 160,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v2/probe.dSYM/Contents/Resources/Relocations/aarch64/probe.yml",
+      "role": "exact original candidate-probe-v2 member",
+      "sha256": "d182ac95c23b04befa88634fc43156bf4c2ea3046354c45f881b3c06596a5b98"
+    },
+    "records/candidate-probe-v2/result.json": {
+      "bytes": 24984,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v2/result.json",
+      "role": "exact original control or preserved pre-runtime refusal",
+      "sha256": "7b02ba0d9c66eb366f9887fa7d5c5bde6b46e81b70b5595e4d8f83fcb99d7897"
+    },
+    "records/candidate-probe-v2/run.log": {
+      "bytes": 138,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v2/run.log",
+      "role": "exact original candidate-probe-v2 member",
+      "sha256": "c2a7405d6a46c62da80872d370570a1ec177633c053da2f70774136cb5a0aa8e"
+    },
+    "records/candidate-probe-v3/compile.log": {
+      "bytes": 0,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v3/compile.log",
+      "role": "exact original candidate-probe-v3 member",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "records/candidate-probe-v3/compiler-resource.log": {
+      "bytes": 53,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v3/compiler-resource.log",
+      "role": "exact original candidate-probe-v3 member",
+      "sha256": "ae4dc8a8a83fdae4897a378fbf33fe0a98ae67d92cb9d6da17ac13eafbe7405b"
+    },
+    "records/candidate-probe-v3/compiler-version.log": {
+      "bytes": 158,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v3/compiler-version.log",
+      "role": "exact original candidate-probe-v3 member",
+      "sha256": "a856ec74c559401131ad608625ef252fb2db6c78bc0c480c1c4c782ee4896db1"
+    },
+    "records/candidate-probe-v3/dependencies-00.log": {
+      "bytes": 8364,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v3/dependencies-00.log",
+      "role": "exact original candidate-probe-v3 member",
+      "sha256": "a77f0ec28aae91c4fdccac8621295389fca428356e290c60ef17c4e286a52e71"
+    },
+    "records/candidate-probe-v3/dependencies-01.log": {
+      "bytes": 4529,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v3/dependencies-01.log",
+      "role": "exact original candidate-probe-v3 member",
+      "sha256": "88b1bb1c44d211001353a424da05c63dfba54f0e3f5600ed3900c4272f92cc4b"
+    },
+    "records/candidate-probe-v3/dependencies-02.log": {
+      "bytes": 4819,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v3/dependencies-02.log",
+      "role": "exact original candidate-probe-v3 member",
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73"
+    },
+    "records/candidate-probe-v3/dependencies-03.log": {
+      "bytes": 3268,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v3/dependencies-03.log",
+      "role": "exact original candidate-probe-v3 member",
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2"
+    },
+    "records/candidate-probe-v3/probe": {
+      "bytes": 142136,
+      "mode": 493,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v3/probe",
+      "role": "exact original candidate-probe-v3 member",
+      "sha256": "e92c2697fcc7aa96f4076bdad4b1019c52d014c01abff6b1021e8778b5a1678f"
+    },
+    "records/candidate-probe-v3/probe.c": {
+      "bytes": 2238,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v3/probe.c",
+      "role": "exact original candidate-probe-v3 member",
+      "sha256": "d69844f0204b8c03a12154965d703ff4b631d32ee0dbf1e8c4673d4ea7bb7622"
+    },
+    "records/candidate-probe-v3/probe.dSYM/Contents/Info.plist": {
+      "bytes": 634,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v3/probe.dSYM/Contents/Info.plist",
+      "role": "exact original candidate-probe-v3 member",
+      "sha256": "9de088233f62a847d8cdb3921daf5341f6bc948e34f38e4e651706dd1bec3401"
+    },
+    "records/candidate-probe-v3/probe.dSYM/Contents/Resources/DWARF/probe": {
+      "bytes": 55068,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v3/probe.dSYM/Contents/Resources/DWARF/probe",
+      "role": "exact original candidate-probe-v3 member",
+      "sha256": "8b40a0faf6522d0eb4a6a0603030d85be7ac04d7a99df8443719fabda8b9f62d"
+    },
+    "records/candidate-probe-v3/probe.dSYM/Contents/Resources/Relocations/aarch64/probe.yml": {
+      "bytes": 160,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v3/probe.dSYM/Contents/Resources/Relocations/aarch64/probe.yml",
+      "role": "exact original candidate-probe-v3 member",
+      "sha256": "b9091280f3f211f4e7f8df6e6c33315776aea04d54d7e3b791a9455d1dfe3edc"
+    },
+    "records/candidate-probe-v3/result.json": {
+      "bytes": 24984,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v3/result.json",
+      "role": "exact original control or preserved pre-runtime refusal",
+      "sha256": "16bef551211392ba90aa156ad53f5a47c4756ff19634bf74915b7f63d839a31e"
+    },
+    "records/candidate-probe-v3/run.log": {
+      "bytes": 138,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/candidate-probe-v3/run.log",
+      "role": "exact original candidate-probe-v3 member",
+      "sha256": "c2a7405d6a46c62da80872d370570a1ec177633c053da2f70774136cb5a0aa8e"
+    },
+    "records/delivery.json": {
+      "bytes": 1355,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/delivery.json",
+      "role": "exact original control or preserved pre-runtime refusal",
+      "sha256": "26edd083b12482367d4a8c6be57962713c10d9260ca99b599d7fdb8dc4e1d484"
+    },
+    "records/final-v3.patch": {
+      "bytes": 23045,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/final-v3.patch",
+      "role": "exact original control or preserved pre-runtime refusal",
+      "sha256": "a25ef50e00efad8c8fc4d00d9bce5bb8a640fd8238bb98873830d07dfd32e9f3"
+    },
+    "records/freeze.py": {
+      "bytes": 1658,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/freeze.py",
+      "role": "exact private source/proof/import history",
+      "sha256": "3887a2519e4c734ad32ac00ecb98b9d15c8365e307c8ea0d58ca4dc49748fae3"
+    },
+    "records/handoff.json": {
+      "bytes": 8827,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/handoff.json",
+      "role": "exact original control or preserved pre-runtime refusal",
+      "sha256": "a25ae05900d4e40c2321402a28e66b0190739aadbc02b41430afb55e95e63bb8"
+    },
+    "records/host-final-v2/c001-dependencies-00.txt": {
+      "bytes": 8565,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v2/c001-dependencies-00.txt",
+      "role": "exact original host-final-v2 member",
+      "sha256": "6b9855fc219517201942bf39b17f4137ed2d4449a0287b8854e547a0c90d14b6"
+    },
+    "records/host-final-v2/c001-dependencies-01.txt": {
+      "bytes": 4529,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v2/c001-dependencies-01.txt",
+      "role": "exact original host-final-v2 member",
+      "sha256": "88b1bb1c44d211001353a424da05c63dfba54f0e3f5600ed3900c4272f92cc4b"
+    },
+    "records/host-final-v2/c001-dependencies-02.txt": {
+      "bytes": 4819,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v2/c001-dependencies-02.txt",
+      "role": "exact original host-final-v2 member",
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73"
+    },
+    "records/host-final-v2/c001-dependencies-03.txt": {
+      "bytes": 3268,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v2/c001-dependencies-03.txt",
+      "role": "exact original host-final-v2 member",
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2"
+    },
+    "records/host-final-v2/c001-product.log": {
+      "bytes": 951,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v2/c001-product.log",
+      "role": "exact original host-final-v2 member",
+      "sha256": "0931903ab5e53f473d28a0cdaa4c3e8dd9996a0d87c0ca1412dcaf849cd90d58"
+    },
+    "records/host-final-v2/host-checks.json": {
+      "bytes": 46584,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v2/host-checks.json",
+      "role": "exact original control or preserved pre-runtime refusal",
+      "sha256": "593f9995c935e8efd58b910dec282a43166436a993a5ef1c86db83e7acd3a302"
+    },
+    "records/host-final-v2/host-checks.log": {
+      "bytes": 2827,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v2/host-checks.log",
+      "role": "exact original host-final-v2 member",
+      "sha256": "cbeaf858f427847c275f6916521cdf25d555ab8280edcef64989abda0e752696"
+    },
+    "records/host-final-v3/c001-dependencies-00.txt": {
+      "bytes": 8565,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c001-dependencies-00.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "6b9855fc219517201942bf39b17f4137ed2d4449a0287b8854e547a0c90d14b6"
+    },
+    "records/host-final-v3/c001-dependencies-01.txt": {
+      "bytes": 4529,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c001-dependencies-01.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "88b1bb1c44d211001353a424da05c63dfba54f0e3f5600ed3900c4272f92cc4b"
+    },
+    "records/host-final-v3/c001-dependencies-02.txt": {
+      "bytes": 4819,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c001-dependencies-02.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73"
+    },
+    "records/host-final-v3/c001-dependencies-03.txt": {
+      "bytes": 3268,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c001-dependencies-03.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2"
+    },
+    "records/host-final-v3/c001-product.log": {
+      "bytes": 0,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c001-product.log",
+      "role": "exact original host-final-v3 member",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "records/host-final-v3/c002-product.log": {
+      "bytes": 153,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c002-product.log",
+      "role": "exact original host-final-v3 member",
+      "sha256": "8f16706c52319a939158f553797d313552877e0805478e9e9634431b689b68e5"
+    },
+    "records/host-final-v3/c003-dependencies-00.txt": {
+      "bytes": 5421,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c003-dependencies-00.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "3c0e331db1ca7c201f435af0a81eba940c5c70f3a58dff8a534473424df80224"
+    },
+    "records/host-final-v3/c003-dependencies-01.txt": {
+      "bytes": 4529,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c003-dependencies-01.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "88b1bb1c44d211001353a424da05c63dfba54f0e3f5600ed3900c4272f92cc4b"
+    },
+    "records/host-final-v3/c003-dependencies-02.txt": {
+      "bytes": 4819,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c003-dependencies-02.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73"
+    },
+    "records/host-final-v3/c003-dependencies-03.txt": {
+      "bytes": 3268,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c003-dependencies-03.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2"
+    },
+    "records/host-final-v3/c003-product.log": {
+      "bytes": 0,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c003-product.log",
+      "role": "exact original host-final-v3 member",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "records/host-final-v3/c004-product.log": {
+      "bytes": 72,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c004-product.log",
+      "role": "exact original host-final-v3 member",
+      "sha256": "d2f6f6c3b1da7124d70f0c429bb743b17fcc7b8a15681263b0a94d2399cd56d8"
+    },
+    "records/host-final-v3/c005-dependencies-00.txt": {
+      "bytes": 8943,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c005-dependencies-00.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "d6527ba39de33a2141986958a95e0c82b15da8e04cd38baa1551e2827c4cb71f"
+    },
+    "records/host-final-v3/c005-dependencies-01.txt": {
+      "bytes": 4968,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c005-dependencies-01.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "56d0a0912aa8809ea143f19e0356de9403be2f5a6f7a7a4d4dd537712025ec76"
+    },
+    "records/host-final-v3/c005-dependencies-02.txt": {
+      "bytes": 4819,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c005-dependencies-02.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73"
+    },
+    "records/host-final-v3/c005-dependencies-03.txt": {
+      "bytes": 4529,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c005-dependencies-03.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "88b1bb1c44d211001353a424da05c63dfba54f0e3f5600ed3900c4272f92cc4b"
+    },
+    "records/host-final-v3/c005-dependencies-04.txt": {
+      "bytes": 5775,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c005-dependencies-04.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "7a04b43f6816495c089991b17a992614b1bd469154babe991de237275036375b"
+    },
+    "records/host-final-v3/c005-dependencies-05.txt": {
+      "bytes": 4540,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c005-dependencies-05.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "31a0d850205f57f2b83679a08ed5070ba55a6cfd9e2e915122e5c1dd42a208ad"
+    },
+    "records/host-final-v3/c005-dependencies-06.txt": {
+      "bytes": 4354,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c005-dependencies-06.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "d33c386d36eec7f20a1eda63b048189b771560fc5a8a980c94652a4efe2b729f"
+    },
+    "records/host-final-v3/c005-dependencies-07.txt": {
+      "bytes": 4333,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c005-dependencies-07.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "d1d791f84ac8c81a831534cfc8c6d72c61b775c3c0c3a190d57b9c9fcb948435"
+    },
+    "records/host-final-v3/c005-dependencies-08.txt": {
+      "bytes": 4379,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c005-dependencies-08.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "33b9be1b32562414c717d241d46b436efd376a24fc584b14cc128c9d01729e10"
+    },
+    "records/host-final-v3/c005-dependencies-09.txt": {
+      "bytes": 4448,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c005-dependencies-09.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "713687508744f2c15e4089e7bd17b56e758928af2034a189a66c3c20a2834fd9"
+    },
+    "records/host-final-v3/c005-dependencies-10.txt": {
+      "bytes": 4312,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c005-dependencies-10.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "c958df8c7ad062ad68feeca55fac66c08da7b811c9ecace81ce41009f4a9f397"
+    },
+    "records/host-final-v3/c005-dependencies-11.txt": {
+      "bytes": 4360,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c005-dependencies-11.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "eb68c3559b29b101934ab7f4ba740746b6092619ffb1195f8a0156a3c8df01a4"
+    },
+    "records/host-final-v3/c005-dependencies-12.txt": {
+      "bytes": 4418,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c005-dependencies-12.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "88a7a868d906166af8c42b771e4f3abbee1c72ff86f049979e30ba55645b7004"
+    },
+    "records/host-final-v3/c005-dependencies-13.txt": {
+      "bytes": 4329,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c005-dependencies-13.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "021af1b93d018969b3bda1b8897e7cc21f794c69d90006a430b9fce413356dfe"
+    },
+    "records/host-final-v3/c005-dependencies-14.txt": {
+      "bytes": 3665,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c005-dependencies-14.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "b4b8d9d6597c3710564b2567ea428238ed80aae5b571f2b95fb659af6dd18097"
+    },
+    "records/host-final-v3/c005-dependencies-15.txt": {
+      "bytes": 3268,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c005-dependencies-15.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2"
+    },
+    "records/host-final-v3/c005-dependencies-16.txt": {
+      "bytes": 4324,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c005-dependencies-16.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "d03d1303964f1fe8dddabcb3eb7913a443af83492768ad61241ce22fdead2404"
+    },
+    "records/host-final-v3/c005-dependencies-17.txt": {
+      "bytes": 4324,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c005-dependencies-17.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "4b81a96da592d7feab5caf463e99aac11b345cab3930035783a3998cd2d3468f"
+    },
+    "records/host-final-v3/c005-dependencies-18.txt": {
+      "bytes": 2772,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c005-dependencies-18.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "0a7021bf58bae5096f7938e17aee23e62a6b3498f4ef1c4e8bcaf43898da5453"
+    },
+    "records/host-final-v3/c005-product.log": {
+      "bytes": 0,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c005-product.log",
+      "role": "exact original host-final-v3 member",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "records/host-final-v3/c006-product.log": {
+      "bytes": 341,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c006-product.log",
+      "role": "exact original host-final-v3 member",
+      "sha256": "54b1ae94ac42582d801d59011ea5742d7df6c05ae8c04ac67b161cb0a1dad878"
+    },
+    "records/host-final-v3/c007-dependencies-00.txt": {
+      "bytes": 9134,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-00.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "41dbc2348655c88c952427f9ebd312a3e7e48694fdf270db41aaac15d5a7dd8e"
+    },
+    "records/host-final-v3/c007-dependencies-01.txt": {
+      "bytes": 4925,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-01.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "1bb6e5bbebfe2249efe50dd0d3b376125af9649c656ca053aec94fb0d4f28e50"
+    },
+    "records/host-final-v3/c007-dependencies-02.txt": {
+      "bytes": 3018,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-02.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "306c7b5e7c5ef93419a60a4bab1417b00ec0283e4fe5f51839958cfa3ea95df7"
+    },
+    "records/host-final-v3/c007-dependencies-03.txt": {
+      "bytes": 4601,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-03.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "c04f802181dd86de3aea52fd5d2fea7c0ca3d30a5a3001ec38ebaef131675094"
+    },
+    "records/host-final-v3/c007-dependencies-04.txt": {
+      "bytes": 4490,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-04.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "d13d8ea6c03a26ce0c38244c17ee4587651dda6682b68d960e986fc3bf9a5010"
+    },
+    "records/host-final-v3/c007-dependencies-05.txt": {
+      "bytes": 4819,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-05.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73"
+    },
+    "records/host-final-v3/c007-dependencies-06.txt": {
+      "bytes": 4529,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-06.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "88b1bb1c44d211001353a424da05c63dfba54f0e3f5600ed3900c4272f92cc4b"
+    },
+    "records/host-final-v3/c007-dependencies-07.txt": {
+      "bytes": 5775,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-07.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "7a04b43f6816495c089991b17a992614b1bd469154babe991de237275036375b"
+    },
+    "records/host-final-v3/c007-dependencies-08.txt": {
+      "bytes": 4540,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-08.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "31a0d850205f57f2b83679a08ed5070ba55a6cfd9e2e915122e5c1dd42a208ad"
+    },
+    "records/host-final-v3/c007-dependencies-09.txt": {
+      "bytes": 4354,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-09.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "d33c386d36eec7f20a1eda63b048189b771560fc5a8a980c94652a4efe2b729f"
+    },
+    "records/host-final-v3/c007-dependencies-10.txt": {
+      "bytes": 4333,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-10.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "d1d791f84ac8c81a831534cfc8c6d72c61b775c3c0c3a190d57b9c9fcb948435"
+    },
+    "records/host-final-v3/c007-dependencies-11.txt": {
+      "bytes": 4379,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-11.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "33b9be1b32562414c717d241d46b436efd376a24fc584b14cc128c9d01729e10"
+    },
+    "records/host-final-v3/c007-dependencies-12.txt": {
+      "bytes": 4448,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-12.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "713687508744f2c15e4089e7bd17b56e758928af2034a189a66c3c20a2834fd9"
+    },
+    "records/host-final-v3/c007-dependencies-13.txt": {
+      "bytes": 4312,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-13.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "c958df8c7ad062ad68feeca55fac66c08da7b811c9ecace81ce41009f4a9f397"
+    },
+    "records/host-final-v3/c007-dependencies-14.txt": {
+      "bytes": 4360,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-14.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "eb68c3559b29b101934ab7f4ba740746b6092619ffb1195f8a0156a3c8df01a4"
+    },
+    "records/host-final-v3/c007-dependencies-15.txt": {
+      "bytes": 4418,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-15.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "88a7a868d906166af8c42b771e4f3abbee1c72ff86f049979e30ba55645b7004"
+    },
+    "records/host-final-v3/c007-dependencies-16.txt": {
+      "bytes": 4329,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-16.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "021af1b93d018969b3bda1b8897e7cc21f794c69d90006a430b9fce413356dfe"
+    },
+    "records/host-final-v3/c007-dependencies-17.txt": {
+      "bytes": 3665,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-17.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "b4b8d9d6597c3710564b2567ea428238ed80aae5b571f2b95fb659af6dd18097"
+    },
+    "records/host-final-v3/c007-dependencies-18.txt": {
+      "bytes": 3268,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-18.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2"
+    },
+    "records/host-final-v3/c007-dependencies-19.txt": {
+      "bytes": 4324,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-19.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "d03d1303964f1fe8dddabcb3eb7913a443af83492768ad61241ce22fdead2404"
+    },
+    "records/host-final-v3/c007-dependencies-20.txt": {
+      "bytes": 4324,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-20.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "4b81a96da592d7feab5caf463e99aac11b345cab3930035783a3998cd2d3468f"
+    },
+    "records/host-final-v3/c007-dependencies-21.txt": {
+      "bytes": 2772,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-dependencies-21.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "0a7021bf58bae5096f7938e17aee23e62a6b3498f4ef1c4e8bcaf43898da5453"
+    },
+    "records/host-final-v3/c007-product.log": {
+      "bytes": 0,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c007-product.log",
+      "role": "exact original host-final-v3 member",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "records/host-final-v3/c008-product.log": {
+      "bytes": 630,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c008-product.log",
+      "role": "exact original host-final-v3 member",
+      "sha256": "372a01b99fe4d093dd754c0c2c86738c163e72bc5cafd0fb3837f8f60ca81603"
+    },
+    "records/host-final-v3/c009-dependencies-00.txt": {
+      "bytes": 8747,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c009-dependencies-00.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "ac6c8f83c8ffd3a5fecad4fba1b16269408026646e5f74bd395052060933372b"
+    },
+    "records/host-final-v3/c009-dependencies-01.txt": {
+      "bytes": 3018,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c009-dependencies-01.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "306c7b5e7c5ef93419a60a4bab1417b00ec0283e4fe5f51839958cfa3ea95df7"
+    },
+    "records/host-final-v3/c009-dependencies-02.txt": {
+      "bytes": 4601,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c009-dependencies-02.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "c04f802181dd86de3aea52fd5d2fea7c0ca3d30a5a3001ec38ebaef131675094"
+    },
+    "records/host-final-v3/c009-dependencies-03.txt": {
+      "bytes": 4490,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c009-dependencies-03.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "d13d8ea6c03a26ce0c38244c17ee4587651dda6682b68d960e986fc3bf9a5010"
+    },
+    "records/host-final-v3/c009-dependencies-04.txt": {
+      "bytes": 4819,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c009-dependencies-04.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73"
+    },
+    "records/host-final-v3/c009-dependencies-05.txt": {
+      "bytes": 4529,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c009-dependencies-05.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "88b1bb1c44d211001353a424da05c63dfba54f0e3f5600ed3900c4272f92cc4b"
+    },
+    "records/host-final-v3/c009-dependencies-06.txt": {
+      "bytes": 3268,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c009-dependencies-06.txt",
+      "role": "exact original host-final-v3 member",
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2"
+    },
+    "records/host-final-v3/c009-product.log": {
+      "bytes": 0,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c009-product.log",
+      "role": "exact original host-final-v3 member",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "records/host-final-v3/c010-product.log": {
+      "bytes": 340,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/c010-product.log",
+      "role": "exact original host-final-v3 member",
+      "sha256": "a1fa4c7633a425775de801e3ddc9acf33b8e668bea5a5df471519ed07380d9da"
+    },
+    "records/host-final-v3/host-checks.json": {
+      "bytes": 194745,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/host-checks.json",
+      "role": "exact original control or preserved pre-runtime refusal",
+      "sha256": "98b2d387da245de223c33fcd1e82b41a73920559b2c2e29054d6f718fc2f2430"
+    },
+    "records/host-final-v3/host-checks.log": {
+      "bytes": 2599,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/host-checks.log",
+      "role": "exact original host-final-v3 member",
+      "sha256": "863f7d52a671f32ab340c7e1c86e935eebd78a92d33c33dca70602a0e5fe496c"
+    },
+    "records/host-final-v3/products/c001-executable-5677c6571c2bbb4a-playback-pcm-test": {
+      "bytes": 195888,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/products/c001-executable-5677c6571c2bbb4a-playback-pcm-test",
+      "role": "exact original host-final-v3 member",
+      "sha256": "5677c6571c2bbb4a8df55e67d5d4998ebf18313504850e8e054f1f4d06da650c"
+    },
+    "records/host-final-v3/products/c003-executable-9422dfd4c99e30dd-playback-upload-test": {
+      "bytes": 251720,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/products/c003-executable-9422dfd4c99e30dd-playback-upload-test",
+      "role": "exact original host-final-v3 member",
+      "sha256": "9422dfd4c99e30dddc2c269c49d456ad6c1965a71cf4119450a474b4ad77ea6f"
+    },
+    "records/host-final-v3/products/c005-executable-0a70dc342771fb30-test": {
+      "bytes": 985624,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/products/c005-executable-0a70dc342771fb30-test",
+      "role": "exact original host-final-v3 member",
+      "sha256": "0a70dc342771fb30ba4dc5ac2258ae329c6fd49d82b732175c6a37502b9dbb15"
+    },
+    "records/host-final-v3/products/c007-executable-95971cc090da4fd7-test": {
+      "bytes": 1165736,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/products/c007-executable-95971cc090da4fd7-test",
+      "role": "exact original host-final-v3 member",
+      "sha256": "95971cc090da4fd72a55df9ec7e33917175bc0012e9643633ca3e637de8502c8"
+    },
+    "records/host-final-v3/products/c009-executable-d9abddefd935945d-test": {
+      "bytes": 373240,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/host-final-v3/products/c009-executable-d9abddefd935945d-test",
+      "role": "exact original host-final-v3 member",
+      "sha256": "d9abddefd935945d5e089508813024fc5a3f2f0eb7de1fd253cfd5f3fcc7f40b"
+    },
+    "records/output-probe.c": {
+      "bytes": 2238,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/output-probe.c",
+      "role": "exact private source/proof/import history",
+      "sha256": "d69844f0204b8c03a12154965d703ff4b631d32ee0dbf1e8c4673d4ea7bb7622"
+    },
+    "records/prepared-files.json": {
+      "bytes": 689,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/prepared-files.json",
+      "role": "exact private source/proof/import history",
+      "sha256": "6eb1db8a3d776a7204db229f70ba59c18ae3e8e59819f0d687f6ebd1d1c07f52"
+    },
+    "records/root-import-receipt.json": {
+      "bytes": 1442,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/root-import-receipt.json",
+      "role": "exact original control or preserved pre-runtime refusal",
+      "sha256": "127f25d2bcf8193e0fc4cbe6b99943bb34b3d6d5d07326ee20a91bea24dff913"
+    },
+    "records/source-manifest-v2.json": {
+      "bytes": 1053379,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-manifest-v2.json",
+      "role": "exact original control or preserved pre-runtime refusal",
+      "sha256": "b13fc4ddcd163b7965eb6595a5feeb2d10f643ab7a0c1c35f2091dd25564d828"
+    },
+    "records/source-manifest-v3.json": {
+      "bytes": 1053376,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-manifest-v3.json",
+      "role": "exact original control or preserved pre-runtime refusal",
+      "sha256": "7c2288be138ad0a1bfa4d49619e6a12d1b43ac94586f9ad553cefa676452e49c"
+    },
+    "records/tools-v2/__pycache__/provenance_common.cpython-314.pyc": {
+      "bytes": 23473,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/tools-v2/__pycache__/provenance_common.cpython-314.pyc",
+      "role": "exact original tools-v2 member",
+      "sha256": "feb8cd8b09f141f24a0312d15b6382d5927708f01e4f6dc9f5b318a0e54c684d"
+    },
+    "records/tools-v2/host_provenance.py": {
+      "bytes": 14225,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/tools-v2/host_provenance.py",
+      "role": "exact original tools-v2 member",
+      "sha256": "50d7ce7044492edb6891211d244049143d3004de0980db163ccdc3a6b3f5a113"
+    },
+    "records/tools-v2/provenance_common.py": {
+      "bytes": 11124,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/tools-v2/provenance_common.py",
+      "role": "exact original tools-v2 member",
+      "sha256": "78e28229f0f132c73153606be3a40d750a4013f5ea1bbb5af7c15e117e62cdb5"
+    },
+    "records/tools-v2/run_probe.py": {
+      "bytes": 5050,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/tools-v2/run_probe.py",
+      "role": "exact original tools-v2 member",
+      "sha256": "86a3bfe0dd00a8a507de0d8c1ffe61733932bc06963510f23fc17ac5a8bab967"
+    },
+    "records/tools-v2/toolchain-pins.json": {
+      "bytes": 2709,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/tools-v2/toolchain-pins.json",
+      "role": "exact original tools-v2 member",
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065"
+    },
+    "records/tools/host_provenance.py": {
+      "bytes": 14168,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/tools/host_provenance.py",
+      "role": "exact original tools member",
+      "sha256": "4b378b452187e4e0c7af519e9f595a3fedccfbee9d7be8e86b92d9feda6b8b8b"
+    },
+    "records/tools/provenance_common.py": {
+      "bytes": 11124,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/tools/provenance_common.py",
+      "role": "exact original tools member",
+      "sha256": "78e28229f0f132c73153606be3a40d750a4013f5ea1bbb5af7c15e117e62cdb5"
+    },
+    "records/tools/run_probe.py": {
+      "bytes": 4993,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/tools/run_probe.py",
+      "role": "exact original tools member",
+      "sha256": "9c51514f4174430a9138d30fa11c6d55ba4cf3691324daa6d68b27232e5c447f"
+    },
+    "records/tools/toolchain-pins.json": {
+      "bytes": 2709,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/tools/toolchain-pins.json",
+      "role": "exact original tools member",
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065"
+    },
+    "records/verify_final.py": {
+      "bytes": 5574,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/verify_final.py",
+      "role": "exact private source/proof/import history",
+      "sha256": "dad6b5908bdddd3aa527aaf7aac05efc3a18053a4f504e854bd3316b3b8d1947"
+    },
+    "review/independent-final-v3-review.json": {
+      "bytes": 4053,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-playback-independent-final-v3-review.json",
+      "role": "independent read-only recorded proof review",
+      "sha256": "f8b8a77586ebc6ad9957f13c6f000860a1d5e4d80fbb4b431c8db80b1587d374"
+    },
+    "source/baseline/src/core/amigus_reservation.h": {
+      "bytes": 3404,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline/src/core/amigus_reservation.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "ee57be55b9865fd19d14b27b22af6e2aa6b0466b7f21da5b313016efe9a0b646"
+    },
+    "source/baseline/src/core/amigus_sample_ram.h": {
+      "bytes": 2813,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline/src/core/amigus_sample_ram.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "005111323eb1884112230ea415fbfb75e01d560618326148e08790d4f23fadf6"
+    },
+    "source/baseline/src/core/amigus_wavetable_cache.h": {
+      "bytes": 3792,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline/src/core/amigus_wavetable_cache.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "8c449f009eac14807a9521d16a756345dd531e47b50312a3cabf96ee7ea2ee9c"
+    },
+    "source/baseline/src/core/pcm.c": {
+      "bytes": 7061,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline/src/core/pcm.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266"
+    },
+    "source/baseline/src/core/pcm.h": {
+      "bytes": 2494,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline/src/core/pcm.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e"
+    },
+    "source/baseline/src/core/pcm_internal.h": {
+      "bytes": 615,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline/src/core/pcm_internal.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b"
+    },
+    "source/baseline/src/core/playback_internal.h": {
+      "bytes": 1893,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline/src/core/playback_internal.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "5d76f20f2c9a7eda89c3543a897f053c97f9460a847d2d70b32b8b71c14775e2"
+    },
+    "source/baseline/src/core/playback_pcm.c": {
+      "bytes": 9858,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline/src/core/playback_pcm.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "111283b81defd83e2f4449edae76fea373612df705b2e3d2fe9481749e6db661"
+    },
+    "source/baseline/src/core/playback_pcm.h": {
+      "bytes": 4888,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline/src/core/playback_pcm.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "9b16641c6a7755f013150a0950ef41193af08e9e3b5094e0044007d914b5e906"
+    },
+    "source/baseline/src/core/sample_cache.c": {
+      "bytes": 4018,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline/src/core/sample_cache.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a"
+    },
+    "source/baseline/src/core/sample_cache.h": {
+      "bytes": 1999,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/baseline/src/core/sample_cache.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6"
+    },
+    "source/source-final-v2/src/core/amigus_reservation.h": {
+      "bytes": 3404,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v2/src/core/amigus_reservation.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "ee57be55b9865fd19d14b27b22af6e2aa6b0466b7f21da5b313016efe9a0b646"
+    },
+    "source/source-final-v2/src/core/amigus_sample_ram.h": {
+      "bytes": 2813,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v2/src/core/amigus_sample_ram.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "005111323eb1884112230ea415fbfb75e01d560618326148e08790d4f23fadf6"
+    },
+    "source/source-final-v2/src/core/amigus_wavetable_cache.h": {
+      "bytes": 3792,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v2/src/core/amigus_wavetable_cache.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "8c449f009eac14807a9521d16a756345dd531e47b50312a3cabf96ee7ea2ee9c"
+    },
+    "source/source-final-v2/src/core/pcm.c": {
+      "bytes": 7061,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v2/src/core/pcm.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266"
+    },
+    "source/source-final-v2/src/core/pcm.h": {
+      "bytes": 2494,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v2/src/core/pcm.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e"
+    },
+    "source/source-final-v2/src/core/pcm_internal.h": {
+      "bytes": 615,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v2/src/core/pcm_internal.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b"
+    },
+    "source/source-final-v2/src/core/playback_internal.h": {
+      "bytes": 1893,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v2/src/core/playback_internal.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "5d76f20f2c9a7eda89c3543a897f053c97f9460a847d2d70b32b8b71c14775e2"
+    },
+    "source/source-final-v2/src/core/playback_pcm.c": {
+      "bytes": 11344,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v2/src/core/playback_pcm.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "f00995c1ca81176fc244968b4276b41624767f42c2963eb90482f23953d09a1f"
+    },
+    "source/source-final-v2/src/core/playback_pcm.h": {
+      "bytes": 6034,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v2/src/core/playback_pcm.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65"
+    },
+    "source/source-final-v2/src/core/sample_cache.c": {
+      "bytes": 4018,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v2/src/core/sample_cache.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a"
+    },
+    "source/source-final-v2/src/core/sample_cache.h": {
+      "bytes": 1999,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v2/src/core/sample_cache.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6"
+    },
+    "source/source-final-v2/tests/playback_pcm_test.c": {
+      "bytes": 9808,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v2/tests/playback_pcm_test.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "5cb94c55f235acc2cfe88515a7194e3c5cfeb8b593ef7c1a311dd0c686eb2a54"
+    },
+    "source/source-final-v2/tests/playback_upload_test.c": {
+      "bytes": 18408,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v2/tests/playback_upload_test.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "a1f395bcbde9fcc7d546a0c44a9f879bd25502fae3789983f8624a8be3a2d632"
+    },
+    "source/source-final-v2/tests/test_amigus_wavetable_cache.py": {
+      "bytes": 663,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v2/tests/test_amigus_wavetable_cache.py",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "56ebc7e3e65a3023211355ab858b1bad4cbef8b8987f545707b94cb69cd2abd7"
+    },
+    "source/source-final-v2/tests/test_playback_pcm.py": {
+      "bytes": 711,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v2/tests/test_playback_pcm.py",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "c70010704d487d7485e98a63d3700849d66e85eddc0af6febfc9825cb467746e"
+    },
+    "source/source-final-v2/tests/test_playback_upload.py": {
+      "bytes": 712,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v2/tests/test_playback_upload.py",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "29a338d285896e61575b5f7fd80fea1146fd5cf99e38a03d0741e56dddd77cae"
+    },
+    "source/source-final-v2/tests/test_sampler_paula.py": {
+      "bytes": 739,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v2/tests/test_sampler_paula.py",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "931ceb7d5d2748846bc4611f6d71d5bc4c6d123ea6019d313903d7fb5e26d1bd"
+    },
+    "source/source-final-v2/tests/test_sampler_wavetable.py": {
+      "bytes": 741,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v2/tests/test_sampler_wavetable.py",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "ea470760d443a2d9915ea1c128139b23b5d8421cb88afd5933f14b97e98c374a"
+    },
+    "source/source-final-v3/src/core/amigus_reservation.c": {
+      "bytes": 3456,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/amigus_reservation.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "9d448f569e2f86331085343626e2b653e45c1fb96aaaf6c709f0eefe168e1e27"
+    },
+    "source/source-final-v3/src/core/amigus_reservation.h": {
+      "bytes": 3404,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/amigus_reservation.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "ee57be55b9865fd19d14b27b22af6e2aa6b0466b7f21da5b313016efe9a0b646"
+    },
+    "source/source-final-v3/src/core/amigus_sample_ram.c": {
+      "bytes": 3973,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/amigus_sample_ram.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "5c25d93bf9166b568fccf599b392a4ca11c24923efc915f0dd4e4dfad7e1fa9a"
+    },
+    "source/source-final-v3/src/core/amigus_sample_ram.h": {
+      "bytes": 2813,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/amigus_sample_ram.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "005111323eb1884112230ea415fbfb75e01d560618326148e08790d4f23fadf6"
+    },
+    "source/source-final-v3/src/core/amigus_voice_plan.h": {
+      "bytes": 1701,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/amigus_voice_plan.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "0910081dcb6cd26709c8fc1b5028aa2b0e693a8b48789173dac491b3a511c850"
+    },
+    "source/source-final-v3/src/core/amigus_wavetable_cache.c": {
+      "bytes": 6165,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/amigus_wavetable_cache.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "c634faa6c6c6af0086ec62a92e49ee2d6b2f90adbb0ebd0acabb901c497cae8d"
+    },
+    "source/source-final-v3/src/core/amigus_wavetable_cache.h": {
+      "bytes": 3792,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/amigus_wavetable_cache.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "8c449f009eac14807a9521d16a756345dd531e47b50312a3cabf96ee7ea2ee9c"
+    },
+    "source/source-final-v3/src/core/channels.c": {
+      "bytes": 6996,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/channels.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d"
+    },
+    "source/source-final-v3/src/core/channels.h": {
+      "bytes": 1818,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/channels.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517"
+    },
+    "source/source-final-v3/src/core/document.c": {
+      "bytes": 9127,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/document.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a"
+    },
+    "source/source-final-v3/src/core/document.h": {
+      "bytes": 1965,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/document.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f"
+    },
+    "source/source-final-v3/src/core/mod_inspect.c": {
+      "bytes": 3513,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/mod_inspect.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511"
+    },
+    "source/source-final-v3/src/core/mod_inspect.h": {
+      "bytes": 1240,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/mod_inspect.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f"
+    },
+    "source/source-final-v3/src/core/mod_project.c": {
+      "bytes": 23640,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/mod_project.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09"
+    },
+    "source/source-final-v3/src/core/mod_project.h": {
+      "bytes": 5051,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/mod_project.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "c28407161729fc0fea2398f79341a866f03913b092769674bd871bb23adb59ee"
+    },
+    "source/source-final-v3/src/core/pattern.c": {
+      "bytes": 15753,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pattern.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e"
+    },
+    "source/source-final-v3/src/core/pattern.h": {
+      "bytes": 3642,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pattern.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "f8c9abde09c4fe495ae77f25c070da647eab038845729edc83adec08c5678d53"
+    },
+    "source/source-final-v3/src/core/pcm.c": {
+      "bytes": 7061,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pcm.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266"
+    },
+    "source/source-final-v3/src/core/pcm.h": {
+      "bytes": 2494,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pcm.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e"
+    },
+    "source/source-final-v3/src/core/pcm_filtered.c": {
+      "bytes": 4604,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pcm_filtered.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9"
+    },
+    "source/source-final-v3/src/core/pcm_internal.h": {
+      "bytes": 615,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pcm_internal.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b"
+    },
+    "source/source-final-v3/src/core/playback_internal.h": {
+      "bytes": 1893,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/playback_internal.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "5d76f20f2c9a7eda89c3543a897f053c97f9460a847d2d70b32b8b71c14775e2"
+    },
+    "source/source-final-v3/src/core/playback_pcm.c": {
+      "bytes": 11344,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/playback_pcm.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "f00995c1ca81176fc244968b4276b41624767f42c2963eb90482f23953d09a1f"
+    },
+    "source/source-final-v3/src/core/playback_pcm.h": {
+      "bytes": 6034,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/playback_pcm.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65"
+    },
+    "source/source-final-v3/src/core/pp20.c": {
+      "bytes": 7187,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pp20.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465"
+    },
+    "source/source-final-v3/src/core/pp20.h": {
+      "bytes": 966,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pp20.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6"
+    },
+    "source/source-final-v3/src/core/project.c": {
+      "bytes": 39034,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/project.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "e4fde542cdfc9b9bce585ef0cda0b5b09d07482f3ec89fddb8d79137b8b0e1c1"
+    },
+    "source/source-final-v3/src/core/project.h": {
+      "bytes": 5698,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/project.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8"
+    },
+    "source/source-final-v3/src/core/raw.c": {
+      "bytes": 3920,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/raw.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377"
+    },
+    "source/source-final-v3/src/core/raw.h": {
+      "bytes": 1171,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/raw.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "f9f47added4df41bb7b15aa3b1b7a4d8131a2c4aa19266436318483a41bc0f3b"
+    },
+    "source/source-final-v3/src/core/sample_cache.c": {
+      "bytes": 4018,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/sample_cache.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a"
+    },
+    "source/source-final-v3/src/core/sample_cache.h": {
+      "bytes": 1999,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/sample_cache.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6"
+    },
+    "source/source-final-v3/src/core/sinc_kernel.h": {
+      "bytes": 28756,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/sinc_kernel.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "058629396a0b22daa67f75c909adf9181fc4e52bfc668890fe2abc3231c3a185"
+    },
+    "source/source-final-v3/src/core/slices.c": {
+      "bytes": 6060,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/slices.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "2951045844f6fdebdd80afe12fe7a5afc1f37bf837c2f49d840f14867835342f"
+    },
+    "source/source-final-v3/src/core/slices.h": {
+      "bytes": 2003,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/slices.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "31cd82785c2b86c41d9cde1f7a29056c9d70ec41fb7a9bfb1a5679ba762c24f7"
+    },
+    "source/source-final-v3/src/core/svx.c": {
+      "bytes": 7817,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/svx.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813"
+    },
+    "source/source-final-v3/src/core/svx.h": {
+      "bytes": 1442,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/svx.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "824541cd25b72b5820e091cfc9f4e6a5f41351fd0630dddc09aefc0405036814"
+    },
+    "source/source-final-v3/src/core/wav.c": {
+      "bytes": 7200,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/wav.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f"
+    },
+    "source/source-final-v3/src/core/wav.h": {
+      "bytes": 1384,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/wav.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "8dd0f4454304babb53eef5ecb97cde7bfe6569d292cc0e9a0f204c4a587f2028"
+    },
+    "source/source-final-v3/src/editor/project_snapshot.h": {
+      "bytes": 1203,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/project_snapshot.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "dbb1206c1e8bfd317b515086f9d064c6eacd2450228893bb394f278ed6c0b2df"
+    },
+    "source/source-final-v3/src/editor/sampler.c": {
+      "bytes": 34124,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "95dbc2574822a940a609f86ed32b615b2f6aaef094e714990bb236a8a82a154e"
+    },
+    "source/source-final-v3/src/editor/sampler.h": {
+      "bytes": 6264,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "d19465c8b3866cfb67cfaca98457c2201165675cc3a4f45804d3c00b17284433"
+    },
+    "source/source-final-v3/src/editor/sampler_internal.h": {
+      "bytes": 3138,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler_internal.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "9f04d1d01a18f737bdbe29fc36cb7b91c6270abf33d900b07f13c17d62044f33"
+    },
+    "source/source-final-v3/src/editor/sampler_paula.c": {
+      "bytes": 7401,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler_paula.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e"
+    },
+    "source/source-final-v3/src/editor/sampler_paula.h": {
+      "bytes": 2718,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler_paula.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890"
+    },
+    "source/source-final-v3/src/editor/sampler_paula_internal.h": {
+      "bytes": 3013,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler_paula_internal.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb"
+    },
+    "source/source-final-v3/src/editor/sampler_wavetable.c": {
+      "bytes": 6285,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler_wavetable.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "53e7ed0491234ffeed5cb9be8f20d33da2059e8a9ecf335a59040a0245ab579e"
+    },
+    "source/source-final-v3/src/editor/sampler_wavetable.h": {
+      "bytes": 4278,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler_wavetable.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "5b64c95994f3837834b39e3918847f811c1f037cc5a5ba4467031f753783561d"
+    },
+    "source/source-final-v3/src/editor/sampler_wavetable_internal.h": {
+      "bytes": 853,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler_wavetable_internal.h",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "518929f618b6eb182df9bef4b9d307bad064c53895708a92bf870068e37494b2"
+    },
+    "source/source-final-v3/src/editor/slots.c": {
+      "bytes": 3233,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/slots.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "60ab6a784d4bc47285bb436b975cdd6ee0bad4743bdf9f0817837d818645f7fa"
+    },
+    "source/source-final-v3/tests/amigus_reservation_test.c": {
+      "bytes": 5856,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/amigus_reservation_test.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "dad17211f55fa80908f0a01f0f5482a1148946b324267fbd872caeab79205572"
+    },
+    "source/source-final-v3/tests/amigus_wavetable_cache_test.c": {
+      "bytes": 13852,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/amigus_wavetable_cache_test.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "0dfb01bd967669b0661ea01cdcec22800dc98f6c0476a83d3995975b83c18eef"
+    },
+    "source/source-final-v3/tests/playback_pcm_test.c": {
+      "bytes": 9819,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/playback_pcm_test.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "f2b7cf80cef66dbc6a9aa1ff37b773adff8600a6b0f3cf76e21cead209f698bf"
+    },
+    "source/source-final-v3/tests/playback_upload_test.c": {
+      "bytes": 18408,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/playback_upload_test.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "a1f395bcbde9fcc7d546a0c44a9f879bd25502fae3789983f8624a8be3a2d632"
+    },
+    "source/source-final-v3/tests/sampler_paula_test.c": {
+      "bytes": 12633,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/sampler_paula_test.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "edafbce36a0eaf4465571af0599313489806a6f314a6264f7631a49caa4d928d"
+    },
+    "source/source-final-v3/tests/sampler_wavetable_test.c": {
+      "bytes": 13960,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/sampler_wavetable_test.c",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "2ba19ed1fe23f0932823c91aec05ddd706481f6f8489ddec9a51387e64f15a37"
+    },
+    "source/source-final-v3/tests/test_amigus_wavetable_cache.py": {
+      "bytes": 663,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/test_amigus_wavetable_cache.py",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "56ebc7e3e65a3023211355ab858b1bad4cbef8b8987f545707b94cb69cd2abd7"
+    },
+    "source/source-final-v3/tests/test_playback_pcm.py": {
+      "bytes": 711,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/test_playback_pcm.py",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "c70010704d487d7485e98a63d3700849d66e85eddc0af6febfc9825cb467746e"
+    },
+    "source/source-final-v3/tests/test_playback_upload.py": {
+      "bytes": 712,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/test_playback_upload.py",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "29a338d285896e61575b5f7fd80fea1146fd5cf99e38a03d0741e56dddd77cae"
+    },
+    "source/source-final-v3/tests/test_sampler.py": {
+      "bytes": 860,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/test_sampler.py",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "847a13bc1694ed2c8dff8638e54ff6f49660a61734f4d21f4328d719999c35da"
+    },
+    "source/source-final-v3/tests/test_sampler_paula.py": {
+      "bytes": 739,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/test_sampler_paula.py",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "931ceb7d5d2748846bc4611f6d71d5bc4c6d123ea6019d313903d7fb5e26d1bd"
+    },
+    "source/source-final-v3/tests/test_sampler_wavetable.py": {
+      "bytes": 741,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/test_sampler_wavetable.py",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "ea470760d443a2d9915ea1c128139b23b5d8421cb88afd5933f14b97e98c374a"
+    },
+    "source/source-final-v3/tools/build_core_tests.py": {
+      "bytes": 38970,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tools/build_core_tests.py",
+      "role": "actual scoped compile/dependency/overlay/module input",
+      "sha256": "1948232ab42449eb518e49ee55276542b102d7461f0f58d8aa273588a20a0d55"
+    },
+    "tools/package_playback_master_storage.py": {
+      "bytes": 20008,
+      "mode": 420,
+      "origin": "/private/tmp/package_playback_master_storage.py",
+      "role": "exact executed archival helper",
+      "sha256": "8d31102a6f3e43e8e0f67940a644a30538a68416477c9b5570152b0f627ca44d"
+    }
+  },
+  "scope": "Exact archived original bytes/modes and origin hashes; host-only proof, with no hardware acceptance"
+}

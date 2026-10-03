@@ -1,0 +1,27 @@
+test_allocator_zero_marker_required (__main__.MockOnly.test_allocator_zero_marker_required) ... ok
+test_changed_candidate_before_guest (__main__.MockOnly.test_changed_candidate_before_guest) ... ok
+test_changed_identity_after_absence_is_not_pass (__main__.MockOnly.test_changed_identity_after_absence_is_not_pass) ... ok
+test_changed_profile_before_any_guest_or_staging (__main__.MockOnly.test_changed_profile_before_any_guest_or_staging) ... ok
+test_changed_runtime_path_refuses (__main__.MockOnly.test_changed_runtime_path_refuses) ... ok
+test_changed_source_refuses (__main__.MockOnly.test_changed_source_refuses) ... ok
+test_cleanup_failure_preserves_top_no_retry (__main__.MockOnly.test_cleanup_failure_preserves_top_no_retry) ... ok
+test_different_existing_runtime_same_bytes_refuses (__main__.MockOnly.test_different_existing_runtime_same_bytes_refuses) ... ok
+test_extra_marker_required (__main__.MockOnly.test_extra_marker_required) ... ok
+test_final_cpu_guard_required (__main__.MockOnly.test_final_cpu_guard_required) ... ok
+test_fresh_cpu_guard_before_launch (__main__.MockOnly.test_fresh_cpu_guard_before_launch) ... ok
+test_insufficient_budget_prevents_launch (__main__.MockOnly.test_insufficient_budget_prevents_launch) ... ok
+test_lexical_runtime_path_same_canonical_file_passes (__main__.MockOnly.test_lexical_runtime_path_same_canonical_file_passes) ... ok
+test_minimum_observed_duration (__main__.MockOnly.test_minimum_observed_duration) ... ok
+test_missing_identity_before_any_guest_or_staging (__main__.MockOnly.test_missing_identity_before_any_guest_or_staging) ... ok
+test_overall_limit_includes_final_cleanup (__main__.MockOnly.test_overall_limit_includes_final_cleanup) ... ok
+test_reappearance_preserves_failed_independent_record (__main__.MockOnly.test_reappearance_preserves_failed_independent_record) ... ok
+test_runner_failure_preserves_top_no_retry (__main__.MockOnly.test_runner_failure_preserves_top_no_retry) ... ok
+test_success_is_simulated_only (__main__.MockOnly.test_success_is_simulated_only) ... ok
+test_transactional_staging_guard_required (__main__.MockOnly.test_transactional_staging_guard_required) ... ok
+test_verify_only_is_target_free (__main__.MockOnly.test_verify_only_is_target_free) ... ok
+test_wrong_original_pid_before_any_guest (__main__.MockOnly.test_wrong_original_pid_before_any_guest) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.994s
+
+OK

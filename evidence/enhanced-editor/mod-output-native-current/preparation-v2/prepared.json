@@ -1,0 +1,61 @@
+{
+  "scope": "MOD Exec preparation only, native/target qualification NOT RUN. Actual committed --verify-only and simulated guard proof are host-only; no identity, cleanup or ACK invented.",
+  "helper_and_proof_files": [
+    {
+      "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/qualifier-current-v2/committed-verify-only.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/qualifier-current-v2/committed-verify-only.stdout",
+      "bytes": 683,
+      "sha256": "cce10581587e90772d9f686943688138fec77583e19226aedfa7414a17532e8e"
+    },
+    {
+      "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/qualifier-current-v2/development-correction.json",
+      "bytes": 693,
+      "sha256": "fc1b0e77c05ac42d5aba980d7363b3427aac4657cb35662b3f9a1e1b1a8addb9"
+    },
+    {
+      "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/qualifier-current-v2/host-preparation-proof.json",
+      "bytes": 2402,
+      "sha256": "e8bf51cc365b0cafcb278e14f4efc8901c72fac0a98ce276dff37c8d1356eda5"
+    },
+    {
+      "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/qualifier-current-v2/mock-check.stderr",
+      "bytes": 2449,
+      "sha256": "ecf75972b11ca69d8265eb56b86125e2abc4176c8fb3a694e1f93042dd7a0c85"
+    },
+    {
+      "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/qualifier-current-v2/mock-check.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/qualifier-current-v2/mock-proof.json",
+      "bytes": 902,
+      "sha256": "eaad111ce56c4db3ae60f9876a0c63decb566916b354cbcce70cdcaac0a65402"
+    },
+    {
+      "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/qualifier-current-v2/preparation-scope.json",
+      "bytes": 1531,
+      "sha256": "fee3c306af473801a20c267966adf54219a1e25d57814de43ca1b05a2628b31a"
+    },
+    {
+      "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/qualifier-current-v2/qualify_mod_output_safety_current.py",
+      "bytes": 13029,
+      "sha256": "9ea1a8a6d08957a1bfcdcfaea70301e3bc61cf4abc35e9006ef93b120322d4e1"
+    },
+    {
+      "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/qualifier-current-v2/test_qualifier_mocked.py",
+      "bytes": 14288,
+      "sha256": "6399d377ebf3e99250dd12ee755952de555c2c609f35228eccb90689180933d9"
+    }
+  ],
+  "required_later_live_conditions": [
+    "Fresh separately approved ownership/control scope with no recovery hold.",
+    "Explicit --repo plus separately pinned fresh sole process full command/profile SHA identity file.",
+    "Caller-enforced outer250s bound; stop/HOLD on any uncertain timeout/ownership/restoration failure.",
+    "Unchanged native90s/process140s/overall250s gates and persistent11absences>10s."
+  ]
+}

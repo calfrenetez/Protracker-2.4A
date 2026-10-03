@@ -1,0 +1,911 @@
+{
+  "passed": true,
+  "scope": "One shared030 Exec MOD analysis/encode output-master boundary, transactional file stream and Fast-pool ownership fixture; original SDK __assert_func retained; no device/card/MMIO/physical/audio/timing/listening acceptance",
+  "cases": [
+    {
+      "candidate": {
+        "label": "mod-stream",
+        "binary": "PTExecModStreamTest",
+        "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/PTExecModStreamTest",
+        "bytes": 70824,
+        "sha256": "52e273bdf829092f1bad2182d1fa9e544e314a6d5dff81bb45880c947cdf8102",
+        "markers": [
+          "MOD STREAM PASS:",
+          "EXEC MEMORY PASS:",
+          "zero owned bytes"
+        ],
+        "mode": [
+          "--mod-stream"
+        ],
+        "process_bound": 140
+      },
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/mod-output-safety-current-qualification-1791046730931142000/runner-mod-stream/build/dev/render-files-1791046732612670000",
+      "result": {
+        "passed": true,
+        "scope": "shared030 streamed master MOD export and Exec Fast allocator",
+        "PTExecModStreamTest_sha256": "52e273bdf829092f1bad2182d1fa9e544e314a6d5dff81bb45880c947cdf8102",
+        "mod-stream_returncode": "0",
+        "sample_staging_clean": true,
+        "run_files_cleaned": true,
+        "cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=666\tsndbuf_status=0",
+        "cleanup_method": "host-exact-run-once",
+        "cleanup_absence_observations": [
+          {
+            "elapsed_seconds": 2.3125001462176442e-05,
+            "paths": {
+              "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791046732612670000": false,
+              "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791046732612670000": false
+            }
+          },
+          {
+            "elapsed_seconds": 0.2536161659954814,
+            "paths": {
+              "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791046732612670000": false,
+              "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791046732612670000": false
+            }
+          },
+          {
+            "elapsed_seconds": 0.5041309999942314,
+            "paths": {
+              "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791046732612670000": false,
+              "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791046732612670000": false
+            }
+          },
+          {
+            "elapsed_seconds": 0.7559392080001999,
+            "paths": {
+              "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791046732612670000": false,
+              "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791046732612670000": false
+            }
+          },
+          {
+            "elapsed_seconds": 1.0063403749954887,
+            "paths": {
+              "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791046732612670000": false,
+              "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791046732612670000": false
+            }
+          },
+          {
+            "elapsed_seconds": 1.2614124160027131,
+            "paths": {
+              "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791046732612670000": false,
+              "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791046732612670000": false
+            }
+          },
+          {
+            "elapsed_seconds": 1.5150897080020513,
+            "paths": {
+              "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791046732612670000": false,
+              "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791046732612670000": false
+            }
+          },
+          {
+            "elapsed_seconds": 1.7701794579916168,
+            "paths": {
+              "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791046732612670000": false,
+              "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791046732612670000": false
+            }
+          },
+          {
+            "elapsed_seconds": 2.025245625001844,
+            "paths": {
+              "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791046732612670000": false,
+              "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791046732612670000": false
+            }
+          }
+        ],
+        "independent_release_check_required": true
+      },
+      "independent_cleanup": {
+        "passed": true,
+        "processes": [
+          [
+            19081,
+            "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+          ]
+        ],
+        "observations": [
+          {
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791046732612670000": false,
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791046732612670000": false
+          },
+          {
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791046732612670000": false,
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791046732612670000": false
+          },
+          {
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791046732612670000": false,
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791046732612670000": false
+          },
+          {
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791046732612670000": false,
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791046732612670000": false
+          },
+          {
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791046732612670000": false,
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791046732612670000": false
+          },
+          {
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791046732612670000": false,
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791046732612670000": false
+          },
+          {
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791046732612670000": false,
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791046732612670000": false
+          },
+          {
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791046732612670000": false,
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791046732612670000": false
+          },
+          {
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791046732612670000": false,
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791046732612670000": false
+          },
+          {
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791046732612670000": false,
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791046732612670000": false
+          },
+          {
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791046732612670000": false,
+            "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791046732612670000": false
+          }
+        ],
+        "observation_elapsed_s": [
+          0.21217645799333695,
+          1.2164872499997728,
+          2.223161040994455,
+          3.224859915993875,
+          4.229201790993102,
+          5.233051290997537,
+          6.237089749993174,
+          7.243668208000599,
+          8.248842874992988,
+          9.255624165991321,
+          10.262357999992673
+        ],
+        "status": "OK\tPaused=false\tConfig=autosave",
+        "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=333\tsndbuf_status=0",
+        "cpu": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+        "observed_elapsed_s": 10.262358332998701,
+        "final_idle": {
+          "status": "OK\tPaused=false\tConfig=autosave",
+          "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=416\tsndbuf_status=0",
+          "cpu": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true"
+        },
+        "elapsed_s": 10.385436500000651
+      },
+      "native_log": "EXEC MEMORY pool_limit=130734232 reserve=262144 flags=4\nMOD OUTPUT PRESERVATION PASS: analysis and direct/round8/TPDF/playback outputs, all source tables and full 8/16/24-bit capacities, mutual outputs, fail-closed capacity/address spans, refusal precedence and unchanged streamed/padded bytes\nMOD STREAM PASS: direct/round8/TPDF exact multi-block bytes, legacy headers, loops, 65 patterns, source and destination protection; workspace=7164\nEXEC MEMORY PASS: 13 Fast allocations, zero owned bytes, budget refusal without Chip fallback\n"
+    }
+  ],
+  "boundaries": {
+    "native_runner_s": 90,
+    "process_s": 140,
+    "overall_s": 250
+  },
+  "source_tree": "8869e6e261efe2905c820e5fecf228df323df461",
+  "verified_manifest": {
+    "scope": "Pinned host cross-build only; no native execution/target/physical/audio/timing/listening acceptance",
+    "source_export": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+    "source_manifest": {
+      "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source-manifest.json",
+      "bytes": 3143590,
+      "sha256": "b88837bae2b7767cced5ad5a6c030306ea4ac2bc4d73e8c6f433dd41ca4d7ddc"
+    },
+    "pins": {
+      "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/tools-native/toolchain-pins.json",
+      "bytes": 2709,
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065"
+    },
+    "base_commit": "8969da594039fa23e43ab1d1ed0907d250b596f3",
+    "base_tree": "c9e522973e2b4b4943eec9b0bfd5639f4eaeadc4",
+    "source_files_before": 7633,
+    "export_tree_sha256": "6a83c825e581b8ca2212cd8ebd47f1ae0e895978329c4189dc4ed16887351756",
+    "commands": [
+      {
+        "label": "compiler-version",
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+          "--version"
+        ],
+        "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+        "returncode": 0,
+        "log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/compiler-version.log",
+          "bytes": 247,
+          "sha256": "5946ce0c1a43a84e1c7af8cfaa306b2f4bd276dd02164560d5674bcc91250d0b"
+        }
+      },
+      {
+        "label": "compiler-target-help",
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+          "--help=target"
+        ],
+        "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+        "returncode": 0,
+        "log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/compiler-target-help.log",
+          "bytes": 7189,
+          "sha256": "f49f0114a73ba557163318b0fdad968b33b41a939e5766a83460468bda9c7a79"
+        }
+      },
+      {
+        "label": "runtime-ncrt0-o",
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+          "-m68000",
+          "-msoft-float",
+          "-mcrt=nix20",
+          "-print-file-name=ncrt0.o"
+        ],
+        "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+        "returncode": 0,
+        "log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/runtime-ncrt0-o.log",
+          "bytes": 120,
+          "sha256": "1562950e2e8cb15a51238fddb72e6e26f0ff2d5a774543473aba0d274a19c45f"
+        }
+      },
+      {
+        "label": "runtime-libnix20-a",
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+          "-m68000",
+          "-msoft-float",
+          "-mcrt=nix20",
+          "-print-file-name=libnix20.a"
+        ],
+        "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+        "returncode": 0,
+        "log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/runtime-libnix20-a.log",
+          "bytes": 123,
+          "sha256": "9060e4a22ea9e716b8f9cf85b5fe5e11a9e6c88ef938b9111d189acc2df8465b"
+        }
+      },
+      {
+        "label": "runtime-libnixmain-a",
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+          "-m68000",
+          "-msoft-float",
+          "-mcrt=nix20",
+          "-print-file-name=libnixmain.a"
+        ],
+        "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+        "returncode": 0,
+        "log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/runtime-libnixmain-a.log",
+          "bytes": 125,
+          "sha256": "dd28b9a8319d35bd81f76cd9479f889e7e5628be07a45ef138f35a729c640add"
+        }
+      },
+      {
+        "label": "runtime-libnix-a",
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+          "-m68000",
+          "-msoft-float",
+          "-mcrt=nix20",
+          "-print-file-name=libnix.a"
+        ],
+        "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+        "returncode": 0,
+        "log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/runtime-libnix-a.log",
+          "bytes": 121,
+          "sha256": "1ca0a83ef891770cbbe671647c7aad9f925ed0b9756c8f85aca35c84961e202a"
+        }
+      },
+      {
+        "label": "runtime-libstubs-a",
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+          "-m68000",
+          "-msoft-float",
+          "-mcrt=nix20",
+          "-print-file-name=libstubs.a"
+        ],
+        "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+        "returncode": 0,
+        "log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/runtime-libstubs-a.log",
+          "bytes": 156,
+          "sha256": "8ce0c56c26f8f09a8af8b76d62c4d380cbfbe8efde13fa64884d8e9e6c93027f"
+        }
+      },
+      {
+        "label": "runtime-libamiga-a",
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+          "-m68000",
+          "-msoft-float",
+          "-mcrt=nix20",
+          "-print-file-name=libamiga.a"
+        ],
+        "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+        "returncode": 0,
+        "log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/runtime-libamiga-a.log",
+          "bytes": 156,
+          "sha256": "c2c8e44936c32e01094e9de761e57c62c7bb834fbf6cabd464465bf3b17090c4"
+        }
+      },
+      {
+        "label": "runtime-libgcc-a",
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+          "-m68000",
+          "-msoft-float",
+          "-mcrt=nix20",
+          "-print-file-name=libgcc.a"
+        ],
+        "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+        "returncode": 0,
+        "log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/runtime-libgcc-a.log",
+          "bytes": 125,
+          "sha256": "b1912e77c4c1160ce749ca74fbe6edabd5896c2291188e718a9cdfd72c84d57a"
+        }
+      },
+      {
+        "label": "PTExecModStreamTest-dependencies-00",
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+          "-std=c99",
+          "-m68000",
+          "-msoft-float",
+          "-mcrt=nix20",
+          "-Os",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Isrc/core",
+          "-Ibuild/dev",
+          "-fbbb=-",
+          "-M",
+          "tests/native_exec_mod_stream_test.c"
+        ],
+        "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+        "returncode": 0,
+        "log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/PTExecModStreamTest-dependencies-00.log",
+          "bytes": 6910,
+          "sha256": "d87a47d1dc24785442d87b35a0f6086a0cc4d42cb193808245f70fe0b0544c75"
+        }
+      },
+      {
+        "label": "PTExecModStreamTest-dependencies-01",
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+          "-std=c99",
+          "-m68000",
+          "-msoft-float",
+          "-mcrt=nix20",
+          "-Os",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Isrc/core",
+          "-Ibuild/dev",
+          "-fbbb=-",
+          "-M",
+          "src/platform/mod_file.c"
+        ],
+        "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+        "returncode": 0,
+        "log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/PTExecModStreamTest-dependencies-01.log",
+          "bytes": 1145,
+          "sha256": "e456d19033d74ccce3a97dc828bbc9333cf02811530cd750203c8631fd60df20"
+        }
+      },
+      {
+        "label": "PTExecModStreamTest-dependencies-02",
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+          "-std=c99",
+          "-m68000",
+          "-msoft-float",
+          "-mcrt=nix20",
+          "-Os",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Isrc/core",
+          "-Ibuild/dev",
+          "-fbbb=-",
+          "-M",
+          "src/platform/file_save.c"
+        ],
+        "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+        "returncode": 0,
+        "log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/PTExecModStreamTest-dependencies-02.log",
+          "bytes": 8520,
+          "sha256": "fad9752fb45f55bd201fe08fa28a3726c59dcd0d0a97cdb85213bf0f0eb176f4"
+        }
+      },
+      {
+        "label": "PTExecModStreamTest-dependencies-03",
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+          "-std=c99",
+          "-m68000",
+          "-msoft-float",
+          "-mcrt=nix20",
+          "-Os",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Isrc/core",
+          "-Ibuild/dev",
+          "-fbbb=-",
+          "-M",
+          "src/core/safe_save.c"
+        ],
+        "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+        "returncode": 0,
+        "log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/PTExecModStreamTest-dependencies-03.log",
+          "bytes": 191,
+          "sha256": "d54c6732445047ae7f1627bfbf1ecce6039788d39965043a3180033a97aaac1c"
+        }
+      },
+      {
+        "label": "PTExecModStreamTest-dependencies-04",
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+          "-std=c99",
+          "-m68000",
+          "-msoft-float",
+          "-mcrt=nix20",
+          "-Os",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Isrc/core",
+          "-Ibuild/dev",
+          "-fbbb=-",
+          "-M",
+          "src/core/mod_project.c"
+        ],
+        "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+        "returncode": 0,
+        "log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/PTExecModStreamTest-dependencies-04.log",
+          "bytes": 2754,
+          "sha256": "e4faeae096c9ec48ef2fc5ad7099505e81e7e2ce0fe48974860884543a80b668"
+        }
+      },
+      {
+        "label": "PTExecModStreamTest-dependencies-05",
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+          "-std=c99",
+          "-m68000",
+          "-msoft-float",
+          "-mcrt=nix20",
+          "-Os",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Isrc/core",
+          "-Ibuild/dev",
+          "-fbbb=-",
+          "-M",
+          "src/core/mod_inspect.c"
+        ],
+        "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+        "returncode": 0,
+        "log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/PTExecModStreamTest-dependencies-05.log",
+          "bytes": 2671,
+          "sha256": "c7ba9b4659696523b158251b58782db04ab261cbaa3ba9c8a33a76f1e25d7f57"
+        }
+      },
+      {
+        "label": "PTExecModStreamTest-dependencies-06",
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+          "-std=c99",
+          "-m68000",
+          "-msoft-float",
+          "-mcrt=nix20",
+          "-Os",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Isrc/core",
+          "-Ibuild/dev",
+          "-fbbb=-",
+          "-M",
+          "src/core/project.c"
+        ],
+        "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+        "returncode": 0,
+        "log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/PTExecModStreamTest-dependencies-06.log",
+          "bytes": 2700,
+          "sha256": "b07d0f6181a81bd4892e3d3ba2d642f861ddb380cf1eac93b0fced33761264ad"
+        }
+      },
+      {
+        "label": "PTExecModStreamTest-dependencies-07",
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+          "-std=c99",
+          "-m68000",
+          "-msoft-float",
+          "-mcrt=nix20",
+          "-Os",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Isrc/core",
+          "-Ibuild/dev",
+          "-fbbb=-",
+          "-M",
+          "src/core/channels.c"
+        ],
+        "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+        "returncode": 0,
+        "log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/PTExecModStreamTest-dependencies-07.log",
+          "bytes": 2665,
+          "sha256": "e6d857bcb44c2f2752e7795df3426c8312bd2bd7d6ad93177da0fc47597b1cc5"
+        }
+      },
+      {
+        "label": "PTExecModStreamTest-dependencies-08",
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+          "-std=c99",
+          "-m68000",
+          "-msoft-float",
+          "-mcrt=nix20",
+          "-Os",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Isrc/core",
+          "-Ibuild/dev",
+          "-fbbb=-",
+          "-M",
+          "src/core/pcm.c"
+        ],
+        "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+        "returncode": 0,
+        "log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/PTExecModStreamTest-dependencies-08.log",
+          "bytes": 1767,
+          "sha256": "01c3547804956b0748114b63f1de3c6d9d5093feac2a7ff56dfeb2e0290c867a"
+        }
+      },
+      {
+        "label": "PTExecModStreamTest-preprocessed-wrapper",
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+          "-std=c99",
+          "-m68000",
+          "-msoft-float",
+          "-mcrt=nix20",
+          "-Os",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Isrc/core",
+          "-Ibuild/dev",
+          "-fbbb=-",
+          "-E",
+          "-dD",
+          "tests/native_exec_mod_stream_test.c"
+        ],
+        "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+        "returncode": 0,
+        "log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/PTExecModStreamTest-preprocessed-wrapper.log",
+          "bytes": 289980,
+          "sha256": "6814b239be8dcdba2b21c621eeefc1b8411e35f871d39ea849afdb8753cee08a"
+        }
+      },
+      {
+        "label": "PTExecModStreamTest.build",
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+          "-std=c99",
+          "-m68000",
+          "-msoft-float",
+          "-mcrt=nix20",
+          "-Os",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Isrc/core",
+          "-Ibuild/dev",
+          "-fbbb=-",
+          "tests/native_exec_mod_stream_test.c",
+          "src/platform/mod_file.c",
+          "src/platform/file_save.c",
+          "src/core/safe_save.c",
+          "src/core/mod_project.c",
+          "src/core/mod_inspect.c",
+          "src/core/project.c",
+          "src/core/channels.c",
+          "src/core/pcm.c",
+          "-o",
+          "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/PTExecModStreamTest"
+        ],
+        "directory": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source",
+        "returncode": 0,
+        "log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/PTExecModStreamTest.build.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    ],
+    "passed": true,
+    "compiler": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+    "compiler_sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+    "compiler_version": "m68k-amigaos-gcc (GCC) 6.5.0b 20260807212032",
+    "runtime_inputs": {
+      "ncrt0.o": "6fe4b6088899bd53efae1ea1e4783b7deab07b13f3d40cff7b46285907f19804",
+      "libnix20.a": "0731c54ad32272f5ab0d5ecd3f1f93d7aa4fc7c6ac0a5923eb26125633556e8c",
+      "libnixmain.a": "ad54158e95516aa6f3b04a8b3d835a48ecbaaea962cd178d5fb66995dcef19df",
+      "libnix.a": "d64619bc74933ac5312ef6db0f8d4cd62b3918f9f4a5805863e7d15536fcb144",
+      "libstubs.a": "55dbd0626cb472d89ab5d1bd234e6013df178f2cd3b83266bf4b82c68f1a79de",
+      "libamiga.a": "10d78b6d303a99677c0bf29a8e1653d62669f69f395691646393020325084021",
+      "libgcc.a": "8bed858c8a5797471c3bc130df341824121c5d0f0908345dfe6ce0ceccc3569b"
+    },
+    "runtime_paths": {
+      "ncrt0.o": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o",
+      "libnix20.a": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix20.a",
+      "libnixmain.a": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnixmain.a",
+      "libnix.a": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix.a",
+      "libstubs.a": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/lib/libstubs.a",
+      "libamiga.a": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/lib/libamiga.a",
+      "libgcc.a": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/lib/gcc/m68k-amigaos/6.5.0b/libgcc.a"
+    },
+    "targets": {
+      "PTExecModStreamTest": {
+        "scope": "Exec Fast-pool/TypeOfMem and bounded MOD file workspace fixture; shared output-preservation assertions",
+        "flags": [
+          "-std=c99",
+          "-m68000",
+          "-msoft-float",
+          "-mcrt=nix20",
+          "-Os",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Isrc/core",
+          "-Ibuild/dev",
+          "-fbbb=-"
+        ],
+        "source_inputs": [
+          "tests/native_exec_mod_stream_test.c",
+          "src/platform/mod_file.c",
+          "src/platform/file_save.c",
+          "src/core/safe_save.c",
+          "src/core/mod_project.c",
+          "src/core/mod_inspect.c",
+          "src/core/project.c",
+          "src/core/channels.c",
+          "src/core/pcm.c"
+        ],
+        "dependencies": {
+          "src/core/channels.c": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+          "src/core/channels.h": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+          "src/core/document.h": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+          "src/core/mod_inspect.c": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511",
+          "src/core/mod_inspect.h": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+          "src/core/mod_project.c": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09",
+          "src/core/mod_project.h": "c28407161729fc0fea2398f79341a866f03913b092769674bd871bb23adb59ee",
+          "src/core/pcm.c": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266",
+          "src/core/pcm.h": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+          "src/core/pcm_internal.h": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b",
+          "src/core/pp20.h": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+          "src/core/project.c": "e4fde542cdfc9b9bce585ef0cda0b5b09d07482f3ec89fddb8d79137b8b0e1c1",
+          "src/core/project.h": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8",
+          "src/core/safe_save.c": "2643e37743d34aa3e77c0e76ef0edab90b7c0f0dff030f4b9668dcb5db7b6568",
+          "src/core/safe_save.h": "8f184c5af658e2fb81b5f5dec9773cf6767d9e8dcd7de8405cf7d2892a0cac6d",
+          "src/native/master_memory.h": "ac898368849ec2d1892717d425b90c398da37a8799d536366a898e2e219e184a",
+          "src/platform/file_save.c": "a26119e3819bd3f18cbb05b2bfe474ae97cd375bf7aaf0264e4ddf64a0373989",
+          "src/platform/file_save.h": "0b17cd45c8307aea727fe737196fcf8cd4ce83e4715fe5ba0e900deb6b28d814",
+          "src/platform/mod_file.c": "8f8d7766a4fa128cfa52b0d029ec3310d5504b84fc1b88f03d47f63d83a87247",
+          "src/platform/mod_file.h": "aae21c944c8af791c9afd1c3f464ffbe6fa3fa7b7b615d15ce595b335c893b21",
+          "tests/mod_stream_test.c": "df2e3fd16724582bc2dd9f2825592bbb80a2806b3d4d36c63efc1433b8d42852",
+          "tests/native_exec_memory.h": "ce0f2b696ce7767c0da8a2a44ac7730bc207f81e4f6b86bfd172353989e664b9",
+          "tests/native_exec_mod_stream_test.c": "6a63962c5b6b1c4268ea0d8609c0dd42dee0a0f014362481d59ceb8df2ef7d76"
+        },
+        "external_sdk_dependencies": {
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/lib/gcc/m68k-amigaos/6.5.0b/include/stdarg.h": "422dc8918c30cc1752b2c185f751f9f836cce2b65ca60fb0777f0dd527c33a47",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/lib/gcc/m68k-amigaos/6.5.0b/include/stddef.h": "08af5ba7d8fd43d802efcb43a20c03155e89ec82722671876a5eb5209c9f6aa9",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/_newlib_version.h": "c1b40b9eb9ce7f7b1581f01fa3c2cb95b7e9f6d86212dab7af887c260b8c234f",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/errno.h": "c1bc488a81c2856da4597e6b09ce447db404a0f20acba0b661e8a04302a07b2b",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/stdio.h": "303faa533d6fa8a4a1cffe94c9e9e2503106979a62bfdb136f9efba546675247",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/stdlib.h": "f51e103cc93590a591ea65efd1bf5545657f1eab34ba106dcc6f9de739ab2747",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/string.h": "e3892b819de58d43abad679017e5902d9ba91fd65c176e28df258cc7919b2db3",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/strsup.h": "1d15d972c1c9d168ffac1fa16cc2cb2f159d3e12d56af4bcaab070a3ba5a0725",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/sys/errno.h": "afd599e47b4775649d57c614e39f12a0e50cd041862cdd282ab0674193b3e17f",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/sys/reent.h": "04f3c1df7cf2814753eba6afade64bd09f3d2cb23df5baac56a526d455d95a27",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/clib/compiler-specific.h": "1709ef9a94d2371e576a277021564480a5e66db802c5f3f57e00ea9d4773eedc",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/clib/dos_protos.h": "f641c6836c31140d6569b83f1459d908df4455c0536abc067a990d0b3b2c2513",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/clib/exec_protos.h": "1c44d5f1f42d36587d0db6547eafc99ef8414352038e32b77db61ce3040be9ca",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/devices/timer.h": "474d2a76982e6de1c1d88ef72827aa0900dc5975de23dca7a30d5ecf3d700235",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/dos/datetime.h": "15bfa3b0424c99d32d32252abf9b00bbea3287bef18edb8ee4a148567071c6bb",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/dos/dos.h": "40ff825550769cf997f6f2234eeeb38c1ea531dd52cb5c0e4fe58dfde68e0fa7",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/dos/dosasl.h": "dd38cf08c7bc9a9c9d2bc373b8601fcb6c3c508c54986f99a45ad57a03e453c0",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/dos/dosextens.h": "9c80bb44bce8ba2dd1ff5cc9ab69e5066fc6d2d052382496ea9b738cb87b6b6d",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/dos/exall.h": "51580e300999efd70a9b91f30b5b3c37534b9eec52a175a0a8d689cf9e5582c3",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/dos/notify.h": "79f4f915c66c005a319166d725a0ac69c9546537ba59544b4324adc0b1b66ebd",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/dos/rdargs.h": "881e98da8e28951d83558d3524091a271423097ea1d9e720e42e4cfdc51e7010",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/dos/record.h": "2b60cf2d83439e870d8a1187e070dabe4760808ca432f8f98e91cb08f07911fb",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/dos/var.h": "e11b19ac528df8414c6549cea9d5f39e1f45da4f232f7311aba138bcbf83ce62",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/exec/devices.h": "e6ae704f2869122fcd8ae7d834a17c52599a33a8c7d854d6c59628c7ca337242",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/exec/execbase.h": "5f8900b9b2c6d9f8cad62e19dc7fe13d4f611729660dcff14e16811492e49dee",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/exec/interrupts.h": "7699e65b8edc47caa6291d9aecfbae97fb3b3034c108235bb6d342550ddc824c",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/exec/io.h": "26eed1281389392dee7d0f9eb6b78612828d6d52f969feae29f5ce7db9f56cd3",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/exec/libraries.h": "e6ff042af876fb3b8d74850229bcf22cce3f95116a22b65fe3ab26fa237ae586",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/exec/lists.h": "04484dadfad91e54c52c107341df62fb45e79be38154d0eb80342f13ce949334",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/exec/memory.h": "1334ecff45e5945c3ab90aff36eddc934305130b8923c53a32d51872062ddfb4",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/exec/nodes.h": "96f4679f97f5b62a8e8a0be22f6577f66f69069dea01f39026d9bca37028c406",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/exec/ports.h": "1eb8b6f5b2def25e3bfb98d88f63b4b5a94dd0c0e71e61c87b010cf077e58900",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/exec/resident.h": "6349b6f2b5b24689b60c71d705e730849ac3a65139ecdea037fce548536baa38",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/exec/semaphores.h": "9176e138532e206886354d04a87fd8005a66c801fcb7f633f4691334958b13fe",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/exec/tasks.h": "bf2ad632d96e84b302af9ab1f28cbbe2cf7c34d88089abbc0f2d8b8783c29a33",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/exec/types.h": "49b05c26d7e755ec5428f4c69de00d31bffa4f9bec649e019ade6fc734bf5230",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/inline/dos.h": "59c476578f3a25d108798d0715ddfc0576b717287c53cf68a4b8494593a242b8",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/inline/exec.h": "85c5cc7f039f5e74754828e967d925ff6c4a9c4c9488b5f4f1c623ce140045de",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/proto/dos.h": "8884c3ca57423f4b779dfd48b30a7f9908e6ed74996b6686d51590da35b9f26a",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/proto/exec.h": "bff891745519a922b20a9b1692055987e559ef45ff882ae08756c7d15614ea97",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/utility/hooks.h": "2fe76f9636ecc424c6fce9ea3a190922328489348a243f6b654ece85eb69bc0f",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/utility/tagitem.h": "91dcb8ced8c7deafc9fd3c7e870b4defdfb9f8f8f610949b187d0b73a1ad26b8",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/_ansi.h": "5c6403b471ee897c9a6c12e00a58617247804eb3ee72d7baeb7c08616090dd1d",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/assert.h": "1bd08ced27ea4e39a158a209f89e72a3aa0979aae45b84e753e519a80e018a7b",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/fcntl.h": "637889253928e98bc028dbdcd58560492aed8e981eff349c43a8e7e6a45f75f5",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/limits.h": "a3b9dc330bf7ac4f0cec2911064a529be1cfb0b9692a9d25365f34580d85b75d",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/machine/_default_types.h": "5d8f9f7ead7927e4b8b7ed00172e84f2ae82ea7f5f6ba3240ff813a9236771b3",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/machine/_types.h": "44544ecbbc10c8aa58ca2da6d0617ffeee5af847af24515ab108c8218d6d92c8",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/machine/ieeefp.h": "1fac67951c04e67e4ea09753a1c7ea9c444f63e851e85fafa165212b581c0caa",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/machine/limits.h": "50a2c0d11af5c27ca1c1877992e0ea11eaec55f38f47bdbd070a46462b01653d",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/machine/stdlib.h": "43552e520d412993325ba62cb496839cd03fd46b0df67149a5ccbe1b95c45fdd",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/machine/time.h": "34b0ffc6c87538b71187448a08fd7815c06a6804dc028d0cc7524146f54ee702",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/machine/types.h": "2979fad7fe3ef1fc01bd06640841114f0a0f3b5d33ada20e35a2bd38c27a4931",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/newlib.h": "2aba2f7be6a870f4f71d4a87bc2d42c058e7ffdfa651ca9aebae30b081cf3e1c",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/stdint.h": "92ab9407509d5e6ba084ba7b71900496d6f860b9e85552fe6583ab256aed6e7e",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/stdlib.h": "c5a89c784fa1a750f1d2362093ddd29fcffc99490403a2b74c85fcda01cede12",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/_default_fcntl.h": "0e4559f3d299541d6b60fe4ed8c29df9385d059ffc282f7916fd25294371abdc",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/_intsup.h": "bafd67248df6ebffd5455a8c8f9aa9fcb572e84ffb88d89824115705764b3198",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/_pthreadtypes.h": "515128c9c933673f5273d0b0ff6e0f5e170ba949957e25bc4ee89c3e73169b5e",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/_stdint.h": "49f8328943afa2a83ed4a35fcb808ed08b8c9fcb55373c786fb1b1d3a21952d7",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/_timespec.h": "5441000af785218d81879835ed0531582fb9723e01f478533e13a174389763bf",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/_types.h": "6bd87e7bde70bf3506e9470ae6499daa2a3acea075915e1ddf573eddca2528c0",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/cdefs.h": "48d785331f1018c30119cfffb51060cba4133c5bbf0d88d0be27ab1f3a443d3b",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/config.h": "8c41585c4d6f2e504ea8f7deb6df8ae91a0e81d4b6df4260d0ab540e24ba6291",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/errno.h": "43bcd99e6b52f224ad141adbdeff70a53d9ebcb7eb01028a79df323cf07bab97",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/fcntl.h": "471e655eee7e30a4a8c5c34a465c0891c85a0bed33a26bd555d7538a91bd6e9b",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/features.h": "bea5c315d5ca2c0187cd61eab0cac07dbe6e25a79a6124f4f1d290430b76a1d0",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/lock.h": "76842985d0c09740ece1920efa93c1f68c2160a7a81656c5fff26da9094f0d11",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/stat.h": "069e626d430e45a49bb1a75ad0e729c74ccfd52bd0fead46582a421b6d3d51b5",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/timespec.h": "c2c2dfdcf9deacccb8919ff633f212afa455e4779a2d12c47b9afa0eff7d73c1",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/types.h": "92a05e633c6b9ab96e778ecfc95a68d26b95f686ecf74c3aac023a4f015ceeca",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/unistd.h": "83efd3c087c89409d3641d251c6a8908ea208d32559847ec8b551b7bbb4a83e6",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/time.h": "53e6e8c49c69e61ccd8813993c21d5b5ef3ffda7fb0cb048dc68514f01c8ab60",
+          "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/unistd.h": "19f31553182c4d649dd0d6301ffdbb5b4d7903b28373dd070a553798b41f524f"
+        },
+        "binary_bytes": 70824,
+        "binary_sha256": "52e273bdf829092f1bad2182d1fa9e544e314a6d5dff81bb45880c947cdf8102",
+        "format": "HUNK_HEADER0x000003f3",
+        "preprocessed_wrapper": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/PTExecModStreamTest-preprocessed-wrapper.log",
+          "bytes": 289980,
+          "sha256": "6814b239be8dcdba2b21c621eeefc1b8411e35f871d39ea849afdb8753cee08a"
+        },
+        "last_assert_macro": "#define assert(__e) ((__e) ? (void)0 : __assert_func (__FILE__, __LINE__, __ASSERT_FUNC, #__e))",
+        "build_log": {
+          "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/PTExecModStreamTest.build.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    "flags": [
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Isrc/core",
+      "-Ibuild/dev",
+      "-fbbb=-"
+    ],
+    "python": {
+      "path": "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "sha256": "60ab7f8bb944386c0022689716e405a77117111d65110532a1889d713dddf757",
+      "version": "3.14.0 (main, Oct  7 2025, 09:34:52) [Clang 17.0.0 (clang-1700.3.19.1)]"
+    },
+    "helper_inputs": [
+      {
+        "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/tools-native/native_build.py",
+        "bytes": 10636,
+        "sha256": "03ed22fde1bc04badfbbac42e26e6c89a8b58cec076df566188cb778b028e93e"
+      },
+      {
+        "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/tools-native/provenance_common.py",
+        "bytes": 11168,
+        "sha256": "25130a0b539b7ade8c2fd1c04642ee0f4fc4d8883b43a2c528ce3473412f6b2b"
+      }
+    ],
+    "compile_commands": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/compile-commands.json",
+    "compile_commands_sha256": "f0587a8dae791960f7b273901c04c1ca6e714383ae53bd07b6b54ed2c0ab8d26",
+    "compile_commands_bytes": 1389,
+    "elapsed_s": 2.5988021249941085,
+    "canonical_recipe": {
+      "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/tools/build_core_tests.py",
+      "bytes": 38970,
+      "sha256": "1948232ab42449eb518e49ee55276542b102d7461f0f58d8aa273588a20a0d55"
+    },
+    "python_declaration_inputs": {
+      "tests/test_mod_stream.py": "1f66c5c9c819cc8c4168476bae1650069432f3843c336043b23ce6ac99f61117"
+    },
+    "recipe_comparison": {
+      "PTExecModStreamTest": {
+        "canonical_ordered_translation_units": [
+          "tests/native_exec_mod_stream_test.c",
+          "src/platform/mod_file.c",
+          "src/platform/file_save.c",
+          "src/core/safe_save.c",
+          "src/core/mod_project.c",
+          "src/core/mod_inspect.c",
+          "src/core/project.c",
+          "src/core/channels.c",
+          "src/core/pcm.c"
+        ],
+        "python_declared_ordered_translation_units": [
+          "tests/native_exec_mod_stream_test.c",
+          "src/core/mod_project.c",
+          "src/core/mod_inspect.c",
+          "src/core/project.c",
+          "src/core/channels.c",
+          "src/core/pcm.c",
+          "src/platform/mod_file.c",
+          "src/platform/file_save.c",
+          "src/core/safe_save.c"
+        ],
+        "same_order": false,
+        "additional_host_declared_units": [],
+        "intentional_canonical_extra_units": [],
+        "policy": "Build uses committed canonical recipe order unchanged; no canonical extras versus the pinned host declarations are accepted."
+      }
+    },
+    "source_files_after": 7633
+  },
+  "identity_record": {
+    "scope": "Fresh read-only original sole emulator process/profile identity; no Guest/IPC/lock/target call",
+    "observed_time_ns": 1791046730768799000,
+    "process": [
+      19081,
+      "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+    ],
+    "profile": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae",
+    "profile_sha256": "894aa5a61a2bf6267b461c6774a0bdc913a96e7f581ea7e4e3762c4d71709a30"
+  },
+  "identity_sha256": "55e41b4a27fe70b3403d458db714b11e99cf4d450453991f6ee52f43e84d597c",
+  "original_processes": [
+    [
+      19081,
+      "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+    ]
+  ],
+  "initial_idle": {
+    "status": "OK\tPaused=false\tConfig=autosave",
+    "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0",
+    "cpu": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true"
+  },
+  "elapsed_s": 67.13834058299835
+}

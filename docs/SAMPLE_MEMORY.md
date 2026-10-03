@@ -5,6 +5,29 @@ The enhanced project owns the authoritative sample, including its declared
 elements in the declared precision; 24-bit samples retain their low eight bits.
 Playback representations must never become the project's source of truth.
 
+## Playback conversion master protection — 3 October 2026
+
+Playback size, packed bytes and cache lease outputs now protect the borrowed
+PCM/format descriptors and full declared master capacity, including unused
+storage. Upload staging also protects its retained source, job and lease output
+before packing or callbacks. Checked metadata guards read no padding as audio.
+Conversion bytes, channel selection, byte order, even-byte padding and existing
+validation/capacity/NULL precedence remain unchanged.
+
+Public size publication refuses missing nonzero-capacity storage or an
+unrepresentable span. Zero-byte packing keeps its existing no-write behavior.
+Ordinary upload failure cancels the unpublished resource; an output inside the
+job instead refuses with the entire job unchanged, since cancellation would
+overwrite that output. The caller can retry with a disjoint output or cancel.
+
+The identical sanitizer probe changes from three baseline master corruptions to
+ALIAS/INVALID refusals with unchanged masters, no upload callback and zero owned
+resources. Five sanitizer groups pass: playback packing/upload, sampler Paula,
+sampler wavetable and AmiGUS wavetable cache. These are host software checks;
+the earlier Paula cache native candidate is withdrawn and requires a rebuild.
+No physical, device-transfer, voice-stop, audio or timing acceptance is inferred.
+See [host records](../evidence/enhanced-editor/playback-master-storage-host/README.md).
+
 ## Slice output master protection — 3 October 2026
 
 Automatic slice markers/counts and the crossfade next-start output now protect
@@ -56,8 +79,9 @@ Exact RAM cleanup, eleven separate physical absence calls, unchanged original 03
 return, separate locked idle verification and Safari View Only were verified.
 The coordinator acknowledged explicit release; no recovery hold remains. The
 previous WAV cleanup hold was separately recovered and released, while the
-original WAV and FIFO failures remain failed. MOD native execution is still
-pending. Hardware sample RAM capacity/completion/order/all-voice-stop, audio,
+original WAV and FIFO failures remain failed. The current MOD fixture separately
+passed shared 030; physical MOD qualification remains pending. Hardware sample
+RAM capacity/completion/order/all-voice-stop, audio,
 timing and listening remain unqualified by this software-only fixture. See
 [evidence/enhanced-editor/project-physical-memory](../evidence/enhanced-editor/project-physical-memory/README.md).
 
@@ -78,9 +102,17 @@ groups pass from the combined frozen source containing the reviewed WAV fix;
 the complete MOD/probe compile dependencies are byte-identical to the prior MOD
 source and exclude those WAV files. The original host dependency logger is
 unchanged; a separate full-header preprocessor audit records every49 translation
-unit closure and132 system-header hashes. One pinned Amiga cross-build passes.
-Native MOD execution remains pending. Later recovery released the distinct WAV
-cleanup hold; a fresh MOD candidate must include subsequent PCM source changes.
+unit closure and132 system-header hashes. A subsequent current-source pinned
+70,824-byte Exec fixture passes shared 030 once, preserving direct/round8/TPDF
+outputs, playback analysis, all source tables and full 8/16/24-bit capacities,
+legacy headers/loops, 65 patterns and multi-block streamed bytes. Workspace is
+7,164 bytes; thirteen verified Fast allocations end at zero owned bytes without
+Chip fallback. Exact cleanup, eleven persistent absences and a separate locked
+eleven-observation original idle return pass; explicit release is acknowledged.
+Its compiled closure excludes playback conversion and slicing, so their later
+changes do not alter this exact MOD candidate. See
+[current native records](../evidence/enhanced-editor/mod-output-native-current/README.md).
+The original prepared host packet and failed WAV cleanup records remain separate.
 Host/build, native allocator/file checks, physical audio, timing and listening
 acceptance remain separate. Ordinary streamed Save already uses private outputs;
 this closes public caller-output boundaries without changing classic MOD bytes.

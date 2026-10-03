@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"timedOut\":false,\"wake\":{\"reason\":\"turnCompleted\",\"turnId\":\"01a102b2-e87c-7ba0-8a70-f2fcef3abe82\",\"threadId\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\"},\"polls\":[{\"schemaVersion\":1,\"cursor\":\"e7a645e7-31a2-432b-918d-41790ea9e0a3:121\",\"revision\":121,\"changed\":true,\"thread\":{\"id\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\",\"status\":{\"type\":\"idle\"}},\"latestTurn\":{\"id\":\"01a102b2-e87c-7ba0-8a70-f2fcef3abe82\",\"status\":\"completed\",\"error\":null,\"startedAt\":1791046641,\"completedAt\":1791046651,\"durationMs\":9582},\"latestAssistantMessageId\":\"msg_052d99eb5846a575016ac133f566dc87d09baaf0f452fe9021\",\"latestAssistantMessage\":{\"id\":\"msg_052d99eb5846a575016ac133f566dc87d09baaf0f452fe9021\",\"turnId\":\"01a102b2-e87c-7ba0-8a70-f2fcef3abe82\",\"phase\":\"final_answer\",\"text\":\"The single MOD-fixture TAKE is acknowledged, conditional on successful nonblocking lock and exact live guards. No newer conflicting claim is recorded here. AmiConnect will leave shared resources untouched through independent verification and explicit release, or a hold report.\"},\"latestToolMarkerId\":null,\"latestToolMarker\":null}]}"
+    }
+  ],
+  "isError": false
+}

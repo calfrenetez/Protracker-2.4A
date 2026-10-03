@@ -1,0 +1,21 @@
+{
+  "scope": "Private current MOD qualification preparation only; native execution NOT RUN. Existing old helper/build/history and PCM template remain unchanged.",
+  "basis": [
+    {
+      "path": "/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/protracker-mod-output-root-8bsabfje/qualify_mod_output_safety.py",
+      "sha256": "7d3fe3e7169ed26403dfcd4d5a84d7b4851182c9741042a2f35f67a28e06f1a2"
+    },
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/qualify_pcm_frame_output_safety.py",
+      "sha256": "9565cc5a762fffd4f576c2af2ea1dbceaea13a2b846b34bbded7db50ff206f2b"
+    }
+  ],
+  "deltas": [
+    "New exact 70824-byte MOD candidate/manifest pins; all 23 current committed compile dependencies/74 SDK inputs and ordered nine-TU recipe checked before live import.",
+    "Canonical resolved runtime path plus exact SHA; unchanged compiler/seven runtimes.",
+    "Original literal SDK __assert_func checked against preprocessed evidence; no safe test_failure claim.",
+    "No default old PID: fresh separately pinned full process/profile identity required; CPU68030 fresh at each idle guard including final.",
+    "Original one --mod-stream native90/process140/overall250 boundaries, isolated committed runner, staging cleanup, three markers, persistent 11 absences over>10s; caller must supply external250s deadline and HOLD on uncertain timeout."
+  ],
+  "unavailable_evidence": "No acquired target identity, native result, shared lock, cleanup or release ACK is supplied or inferred."
+}

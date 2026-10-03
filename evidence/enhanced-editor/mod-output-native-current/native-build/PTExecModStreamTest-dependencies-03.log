@@ -1,0 +1,2 @@
+safe_save.o: src/core/safe_save.c src/core/safe_save.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/lib/gcc/m68k-amigaos/6.5.0b/include/stddef.h

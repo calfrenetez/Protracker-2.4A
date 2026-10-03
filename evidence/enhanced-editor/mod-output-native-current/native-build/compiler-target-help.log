@@ -1,0 +1,114 @@
+The following options are target specific:
+  -fbaserel                   data is addressed relative to a4
+  -fbaserel32                 data is addressed relative to a4 with 32 bit
+                              offsets
+  -fbbb=                      Enable Bebbo's optimizations.
+                              +    enable all optimizations (default)
+                              a    commute add move instructions
+                              b    use register for base addresses
+                              c    convert load const and compare into a sub
+                              e    eliminate dead assignments + redundant loads
+                              f    shrink stack frame
+                              h    optimize shift instructions
+                              i    use post increment on addresses
+                              l    remove single used lea if possible
+                              n    pipeline instructions
+                              m    merge add and move statements
+                              p    propagate move assignment pairs out of loops
+                              r    register renaming to maybe save registers
+                              s    a strcpy optimization
+                              z    final pass with simple substitutions
+                              0    insert clear registers before storing a byte
+                              or word, if possible
+                              v    be verbose
+                              V    be very verbose
+                              x    dump insns
+                              Default: -fbbb=+ which yields
+                              -fbbb=abcefhilmnprsz0
+  -fdouble-indirect           Use double indirect addressing mode.
+  -fno-truncz-same-mode       emit round to zero insns (e.g. fintrz.x fp0,fp0)
+  -m5200                      Generate code for a 520X.  Same as -mcpu=.
+  -m5206e                     Generate code for a 5206e.  Same as -mcpu=.
+  -m528x                      Generate code for a 528x.  Same as -mcpu=.
+  -m5307                      Generate code for a 5307.  Same as -mcpu=.
+  -m5407                      Generate code for a 5407.  Same as -mcpu=.
+  -m68000                     Generate code for a 68000.  Same as -mcpu=.
+  -m68010                     Generate code for a 68010.  Same as -mcpu=.
+  -m68020                     Generate code for a 68020.  Same as -mcpu=.
+  -m68020-40                  Generate code for a 68040, without any new
+                              instructions.
+  -m68020-60                  Generate code for a 68060, without any new
+                              instructions.
+  -m68030                     Generate code for a 68030.  Same as -mcpu=.
+  -m68040                     Generate code for a 68040.  Same as -mcpu=.
+  -m68060                     Generate code for a 68060.  Same as -mcpu=.
+  -m68080                     Generate code for a 68080.  Same as -mcpu=.
+  -m68302                     Generate code for a 68302.  Same as -mcpu=.
+  -m68332                     Generate code for a 68332.  Same as -mcpu=.
+  -m68851                     Generate code for a 68851.
+  -m68881                     Generate code that uses 68881 floating-point
+                              instructions.
+  -malign-int                 Align variables on a 32-bit boundary.
+  -march=                     Specify the name of the target architecture.
+  -mbitfield                  Use the bit-field instructions.
+  -mc68000                    Generate code for a 68000.  Same as -mcpu=.
+  -mc68020                    Generate code for a 68020.  Same as -mcpu=.
+  -mcfv4e                     Generate code for a ColdFire v4e.  Same as -mcpu=.
+  -mcpu32                     Generate code for a cpu32.  Same as -mcpu=.
+  -mcpu=                      Specify the target CPU.
+  -mcrt=                      Specify startup binary
+  -mdiv                       Use hardware division instructions on ColdFire.
+  -mexperimental              experimental code, e.g. using new 68080
+                              instructions, registers, etc.p.p.
+  -mfidoa                     Generate code for a Fido A.
+  -mhard-float                Generate code which uses hardware floating point
+                              instructions.
+  -mid-shared-library         Enable ID based shared library.
+  -mnobitfield                Do not use the bit-field instructions.
+  -mnortd                     Use normal calling convention.
+  -mnoshort                   Consider type 'int' to be 32 bits wide.
+  -mpcrel                     Generate pc-relative code.
+  -mregparm                   Same as -mregparm=2  Same as -mregparm=.
+  -mregparm=                  Pass arguments through registers.
+  -mrtd                       Use different calling convention using 'rtd'.
+  -msasregparm                Same as -mregparm=2 but do not use alternate
+                              registers
+  -mschulz                    Don't use fmove.x, used fmove.d instead
+  -msep-data                  Enable separate data segment.
+  -mshared-library-id=        ID of shared library to build.
+  -mshort                     Consider type 'int' to be 16 bits wide.
+  -msmall-code                small code model
+  -msoft-float                Generate code with library calls for floating
+                              point.
+  -mstrict-align              Do not use unaligned memory references.
+  -mtune=                     Tune for the specified target CPU or architecture.
+  -mxgot                      Support more than 8192 GOT entries on ColdFire.
+  -mxtls                      Support TLS segment larger than 64K.
+  -noixemul                   Do not use ixemul.library - use libnix instead to
+                              link
+  -ramiga-dev                 Use devinit.o as start file
+  -ramiga-lib                 Use libinit.o as start file
+  -ramiga-libr                Use libinitr.o as start file
+  -resident                   data is addressed relative to a4, linked as
+                              resident
+  -resident32                 data is addressed relative to a4 with 32 bit
+                              offsets, linked as resident
+
+  Known M68K ISAs (for use with the -march= option):
+    68000 68010 68020 68030 68040 68060 68080 cpu32 isaa isaaplus isab isac
+
+  Known M68K CPUs (for use with the -mcpu= option):
+    51 51ac 51ag 51cn 51em 51je 51jf 51jg 51jm 51mm 51qe 51qm 5202 5204 5206
+    5206e 5207 5208 5210a 5211 5211a 5212 5213 5214 5216 5221x 52221 52223 52230
+    52231 52232 52233 52234 52235 5224 5225 52252 52254 52255 52256 52258 52259
+    52274 52277 5232 5233 5234 5235 523x 5249 5250 5253 5270 5271 5272 5274 5275
+    5280 5281 5282 528x 53011 53012 53013 53014 53015 53016 53017 5307 5327 5328
+    5329 532x 5372 5373 537x 5407 54410 54415 54416 54417 54418 54450 54451
+    54452 54453 54454 54455 5470 5471 5472 5473 5474 5475 547x 5480 5481 5482
+    5483 5484 5485 548x 68000 68010 68020 68030 68040 68060 68080 68302 68332
+    cpu32 fidoa
+
+  Known M68K microarchitectures (for use with the -mtune= option):
+    68000 68010 68020 68020-40 68020-60 68020-80 68030 68040 68060 68080 cfv1
+    cfv2 cfv3 cfv4 cfv4e cpu32
+

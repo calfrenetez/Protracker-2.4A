@@ -1,0 +1,6 @@
+{
+  "scope": "Host-only simulated fixture path typo corrected; no qualifier production/source/native/build/target failure. Original draft helper, mock report and failure log remain preserved unchanged.",
+  "original_draft": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/qualifier-current",
+  "original_mock_sha256": "d7bc3eb0b6b31f7d39566ef8b5cbdca9ba762251e0817bbb222267281e874a46",
+  "correction": "Mock-only archived tools source was BASE/source-final/tools, but the existing MOD immutable export is BASE/source/tools. All 14 mock errors originated in this absent simulated source path before any simulated native invocation; no actual Guest/IPC/shared lock/target was involved."
+}

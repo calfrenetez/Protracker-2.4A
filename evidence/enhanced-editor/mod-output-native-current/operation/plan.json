@@ -1,0 +1,18 @@
+{
+  "scope": "Host-only prepared root one-case MOD wrappers copied from separately qualified PCM wrappers; no TAKE/identity/target/native execution",
+  "native_status": "NOT RUN",
+  "candidate_sha256": "52e273bdf829092f1bad2182d1fa9e544e314a6d5dff81bb45880c947cdf8102",
+  "candidate_bytes": 70824,
+  "files": {
+    "capture_identity_next.py": "c1d3fe039d1052ce31e94977df4e15fcb10fe6a840b00019eb5c612c7823ba41",
+    "run_native_next_once.py": "28e529872412036270532eabb4329af168c2e1bcff9606624d0967e70a8cb4f1",
+    "verify_native_return.py": "5fc81574c9b318b0fe01fa3ededc40d03e1e98e6058906467abc1001d2c15072",
+    "run_verify_return_once.py": "747f7c1502f75459050abbb7294ab4c3b9cddb9931c889aaca8e70dfeca01d3a"
+  },
+  "whole_reservation_s": 420,
+  "native_s": 90,
+  "runner_s": 140,
+  "qualifier_external_s": 250,
+  "separate_idle_external_s": 60,
+  "no_retry_cleanup_release": true
+}

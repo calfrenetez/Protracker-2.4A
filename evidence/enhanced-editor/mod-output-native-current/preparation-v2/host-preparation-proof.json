@@ -1,0 +1,52 @@
+{
+  "scope": "Host-only mocked guard tests and exact committed-source/toolchain --verify-only. No Guest/IPC/lock/staging/target or native execution.",
+  "passed": true,
+  "commands": [
+    {
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/qualifier-current-v2/test_qualifier_mocked.py"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev",
+      "returncode": 0,
+      "elapsed_s": 1.1061368329974357,
+      "stdout": {
+        "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/qualifier-current-v2/mock-check.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/qualifier-current-v2/mock-check.stderr",
+        "sha256": "ecf75972b11ca69d8265eb56b86125e2abc4176c8fb3a694e1f93042dd7a0c85"
+      }
+    },
+    {
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/qualifier-current-v2/qualify_mod_output_safety_current.py",
+        "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final",
+        "--repo",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "--verify-only"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev",
+      "returncode": 0,
+      "elapsed_s": 0.41653091700572986,
+      "stdout": {
+        "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/qualifier-current-v2/committed-verify-only.stdout",
+        "sha256": "cce10581587e90772d9f686943688138fec77583e19226aedfa7414a17532e8e"
+      },
+      "stderr": {
+        "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/qualifier-current-v2/committed-verify-only.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "helper": {
+    "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/qualifier-current-v2/qualify_mod_output_safety_current.py",
+    "sha256": "9ea1a8a6d08957a1bfcdcfaea70301e3bc61cf4abc35e9006ef93b120322d4e1"
+  },
+  "mock": {
+    "path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/qualifier-current-v2/test_qualifier_mocked.py",
+    "sha256": "6399d377ebf3e99250dd12ee755952de555c2c609f35228eccb90689180933d9"
+  }
+}

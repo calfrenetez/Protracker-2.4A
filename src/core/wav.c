@@ -12,6 +12,18 @@ static int overlaps(const void *a, size_t na, const void *b, size_t nb)
     if (na > UINTPTR_MAX - x || nb > UINTPTR_MAX - y) return 1;
     return x < y + nb && y < x + na;
 }
+/* Guard declared master storage without reading reserved capacity values.
+ * Active values keep the existing synchronous PCM validation below. */
+static int source_alias(const struct pt_pcm *pcm, const void *out, size_t bytes)
+{
+    size_t pcm_bytes;
+    if (!out || bytes > UINTPTR_MAX - (uintptr_t)out ||
+        pcm->capacity > SIZE_MAX / sizeof(*pcm->data)) return 1;
+    pcm_bytes = pcm->capacity * sizeof(*pcm->data);
+    if (pcm_bytes && (!pcm->data || pcm_bytes > UINTPTR_MAX - (uintptr_t)pcm->data)) return 1;
+    return overlaps(out, bytes, pcm, sizeof(*pcm)) ||
+           overlaps(out, bytes, pcm->data, pcm_bytes);
+}
 enum pt_wav_result pt_wav_inspect_reader(pt_wav_read read,void *context,size_t length,struct pt_wav_info *out)
 {
     struct pt_wav_info info = {0};uint8_t data[16];
@@ -104,6 +116,7 @@ enum pt_wav_result pt_wav_size(const struct pt_pcm *pcm, size_t *out)
     bytes = (uint64_t)pcm->frames * pcm->channels * (pcm->bits / 8);
     bytes += 44 + (bytes & 1);
     if (bytes > UINT32_MAX || bytes > SIZE_MAX) return PT_WAV_CAPACITY;
+    if (source_alias(pcm, out, sizeof(*out))) return PT_WAV_ALIAS;
     *out = (size_t)bytes;
     return PT_WAV_OK;
 }
@@ -117,7 +130,8 @@ enum pt_wav_result pt_wav_encode(const struct pt_pcm *pcm, uint8_t *out, size_t 
     if (!out || !written) return PT_WAV_INVALID;
     if (capacity < size) return PT_WAV_CAPACITY;
     count = (size_t)pcm->frames * pcm->channels;
-    if (overlaps(out, size, pcm->data, count * sizeof(int32_t))) return PT_WAV_ALIAS;
+    if (source_alias(pcm, out, size) || source_alias(pcm, written, sizeof(*written)) ||
+        overlaps(out, size, written, sizeof(*written))) return PT_WAV_ALIAS;
     width = pcm->bits / 8;
     memcpy(out, "RIFF", 4); put32(out + 4, (uint32_t)size - 8);
     memcpy(out + 8, "WAVEfmt ", 8); put32(out + 16, 16); put16(out + 20, 1);

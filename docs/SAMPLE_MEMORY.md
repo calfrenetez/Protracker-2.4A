@@ -5,6 +5,25 @@ The enhanced project owns the authoritative sample, including its declared
 elements in the declared precision; 24-bit samples retain their low eight bits.
 Playback representations must never become the project's source of truth.
 
+## WAV caller-output master protection — 3 October 2026
+
+Public WAV size and encode outputs now protect the borrowed PCM descriptor and
+full declared master capacity. Encoded RIFF bytes and completion counts must
+also be disjoint over the actual emitted extent. Checked metadata guards allocate
+nothing or read unused padding as audio. Six fixed 8/16/24-bit mono/stereo wire
+variants, odd padding, empty44-byte headers and existing invalid/null/capacity
+precedence remain unchanged; no conversion was added.
+
+The original valid sanitizer probe changed a 24-bit master from257 to56 through
+both size and completion outputs. The identical final probe returns ALIAS and
+preserves257. Two focused host sanitizer groups and both pinned Amiga cross-builds
+pass. The first build helper stopped on an incorrect target-name validation map
+before compiling a test; its empty-target failure is preserved separately from
+the corrected helper and successful builds. Emulator execution is pending, with
+portable codec assertions separate from the Exec streamed file fixture.
+Ordinary transactional WAV Save already uses private outputs; this closes public
+API boundaries. Physical audio, timing and listening acceptance remain separate.
+
 ## RAW caller-output master protection — 3 October 2026
 
 Public RAW frame counts now protect the borrowed format descriptor. Size and

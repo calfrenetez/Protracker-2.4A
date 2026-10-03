@@ -13,6 +13,12 @@ typedef int (*pt_wav_read)(void *,size_t,uint8_t *,size_t);
 enum pt_wav_result pt_wav_inspect_reader(pt_wav_read,void *,size_t,struct pt_wav_info *);
 enum pt_wav_result pt_wav_inspect(const uint8_t *, size_t, struct pt_wav_info *);
 enum pt_wav_result pt_wav_decode(const uint8_t *, size_t, struct pt_pcm *);
+/* Size/encode outputs must be disjoint from the borrowed PCM descriptor and
+ * its full declared capacity, including unused master storage. Encoded bytes
+ * and written must also be disjoint over the actual emitted RIFF extent.
+ * Overflowing/wrapped declared spans refuse with ALIAS before any output write.
+ * Existing invalid/short-capacity precedence and active PCM validation remain;
+ * the extra output guard reads metadata only and allocates nothing. */
 enum pt_wav_result pt_wav_size(const struct pt_pcm *, size_t *);
 enum pt_wav_result pt_wav_encode(const struct pt_pcm *, uint8_t *, size_t, size_t *);
 #endif

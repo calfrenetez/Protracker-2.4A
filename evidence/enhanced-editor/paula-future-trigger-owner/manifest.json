@@ -1,0 +1,2490 @@
+{
+  "scope": "Exact original regular member bytes/modes and original paths; normalized archive ownership/timestamps; full source exports and SDK/toolchain trees omitted",
+  "members": {
+    "original/baseline-manifest.json": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/baseline-manifest.json",
+      "bytes": 1088089,
+      "sha256": "81840112ee35328c2bf91cfb230dfe7bf52410f184bcddf33acdd0a4ab5dd103",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/development-preparation-path-refusal.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/development-preparation-path-refusal.txt",
+      "bytes": 270,
+      "sha256": "767dd8ac9c76d47b20be3e40744043c3f89c83bcf1ff0c6e3a531a37d8647a75",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/development-tests-10.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/development-tests-10.log",
+      "bytes": 225,
+      "sha256": "229612fbadfcea9cbdb7fd90bffd858cb2e9b3c77f307e67585983778f55bea2",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/development-tests-11.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/development-tests-11.log",
+      "bytes": 225,
+      "sha256": "8ead94010ee0c9e20c8e849844e2f59c46ec308c204bd239a5a46b6c41114043",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/development-tests-2.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/development-tests-2.log",
+      "bytes": 1245,
+      "sha256": "10396b2fe05540dea02fd770ed8598f5813357bf4e5151f9dcf265861df1731f",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/development-tests-3.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/development-tests-3.log",
+      "bytes": 178,
+      "sha256": "8b5a0f6d6747fde2b4a241b9bcc3df44c256520776fab27176f673eda33fc56e",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/development-tests-4.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/development-tests-4.log",
+      "bytes": 178,
+      "sha256": "799c4c78aa666807e434baa8fa3d190818f610517297cafe6e34d81e8b9718be",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/development-tests-5.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/development-tests-5.log",
+      "bytes": 178,
+      "sha256": "4ec51792cacdb29600546115a093c13b0f66582ba797a0be335b93378e672079",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/development-tests-6.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/development-tests-6.log",
+      "bytes": 178,
+      "sha256": "7b48bce4c400b37e90a3f6e8f5cba294d65ec5b558316f70bf227a30f73f6072",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/development-tests-7.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/development-tests-7.log",
+      "bytes": 178,
+      "sha256": "30da5162215b487cd48bdc9f3685cc46767c0f750bc76c0472165bf7da5c3862",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/development-tests-8.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/development-tests-8.log",
+      "bytes": 225,
+      "sha256": "d036e2bcb4d911f82421f3c97fefc73de4616dc9100395df1b5b2b9b1d0d2def",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/development-tests-9.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/development-tests-9.log",
+      "bytes": 225,
+      "sha256": "1b7a233f02aa1f4391dff1707212833ce8954448e99f5fd79d3bca6dead1d6f0",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/development-tests.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/development-tests.log",
+      "bytes": 1173,
+      "sha256": "a6cacd904c922a727d4d3f2e60fc7906ac1db856568ba1c248516152d093eefc",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/final-v2.patch": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/final-v2.patch",
+      "bytes": 71088,
+      "sha256": "95c38dc00d73aa2072dbf74f21edeae20b3ca9ccde84f950aec623c0b45d551e",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/final-v3.patch": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/final-v3.patch",
+      "bytes": 71094,
+      "sha256": "7b9778373df86d07e745020f8928861fbe4f2ba6fd6d07a5321f824263d424b3",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/final.patch": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/final.patch",
+      "bytes": 67308,
+      "sha256": "7ade8b9beadbf357bf0f784113ebda8951a785ce3aeb163d81de0750ab7bf250",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/formatting-equivalence-v3.json": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/formatting-equivalence-v3.json",
+      "bytes": 1775,
+      "sha256": "a79aede60797c41bd9edbe7516bbab586d7622246381685f0c31edcc32be8b5a",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/handoff-v2.json": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/handoff-v2.json",
+      "bytes": 7888,
+      "sha256": "f03f419280aba02b8816330da51dc69dd0b270328435882591919ef4e36c8038",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/handoff-v3.json": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/handoff-v3.json",
+      "bytes": 2872,
+      "sha256": "54c4a7d2429b14212bb2dfbab03a9017dfad0be32f8b44386da04563eda56ccd",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/own-final-v2-audit.json": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/own-final-v2-audit.json",
+      "bytes": 10107,
+      "sha256": "a33a80a1d3fa84d4954d00767491fcab804ba085c8bfbc6bd36e706f77b814d2",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/source-manifest-v2.json": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-manifest-v2.json",
+      "bytes": 1090750,
+      "sha256": "16e31fdafcba336cab9fd151fe122d23cfd158c3664e1489fcbbae8c88af86ac",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/source-manifest-v3.json": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-manifest-v3.json",
+      "bytes": 1090710,
+      "sha256": "e81a0589e3ed5e3babec191be3ff9e83e514abcfe826316eaedd3829903915cf",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/source-manifest.json": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-manifest.json",
+      "bytes": 1090314,
+      "sha256": "37fb6b75417e660adf8028e60475c6e128a18c3ad1fb5f744551590a24291e8e",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/source-native-manifest-v2.json": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-manifest-v2.json",
+      "bytes": 1091114,
+      "sha256": "485c5a1d6731814805d8b1dec8a2ef0f743491cff666a9cd1079cf4c83eecbc5",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/source-native-manifest-v3.json": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-manifest-v3.json",
+      "bytes": 1091226,
+      "sha256": "843290e76e0ad486d721816f0734ddba478646333b7a9db28e8cd9912c0e3726",
+      "mode": 420,
+      "role": "Exact original handoff, complete source inventory, patch/equivalence or historical development outcome; mutable-draft logs are not reproducible source qualification"
+    },
+    "original/tools/__pycache__/provenance_common.cpython-314.pyc": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/tools/__pycache__/provenance_common.cpython-314.pyc",
+      "bytes": 23472,
+      "sha256": "7ee63f879d7367b3934f4024b9a74fd1b547f4300c9390b802a6e0ab16059415",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/tools/host_provenance.py": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/tools/host_provenance.py",
+      "bytes": 14203,
+      "sha256": "5aa0789da4f6ea56d1775bbe877136b65b76598968154d7b5e253ea1a8c17120",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/tools/prepared-files.json": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/tools/prepared-files.json",
+      "bytes": 913,
+      "sha256": "97d9afe2c57b03d00ef2b9a93f16767f35fb779911836a11f69eae11ecc1db67",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/tools/provenance_common.py": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/tools/provenance_common.py",
+      "bytes": 11124,
+      "sha256": "78e28229f0f132c73153606be3a40d750a4013f5ea1bbb5af7c15e117e62cdb5",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/tools/toolchain-pins.json": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/tools/toolchain-pins.json",
+      "bytes": 2709,
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-00.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-00.txt",
+      "bytes": 9023,
+      "sha256": "90bb98521d29188730ea8e63501fb5e329d6f50e62552024edb6df5cc228f616",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-01.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-01.txt",
+      "bytes": 5406,
+      "sha256": "dc3e3135736abc4d334600a50601440a6711150bebce35def2c8156215ec31b1",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-02.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-02.txt",
+      "bytes": 4968,
+      "sha256": "56d0a0912aa8809ea143f19e0356de9403be2f5a6f7a7a4d4dd537712025ec76",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-03.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-03.txt",
+      "bytes": 4819,
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-04.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-04.txt",
+      "bytes": 4529,
+      "sha256": "88b1bb1c44d211001353a424da05c63dfba54f0e3f5600ed3900c4272f92cc4b",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-05.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-05.txt",
+      "bytes": 4494,
+      "sha256": "ff680f9a353b1a16f12bd1fd8a5c0eeaa9482dd748b83e8d2a0b8d375af35724",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-06.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-06.txt",
+      "bytes": 4335,
+      "sha256": "42c7499b25b2aea510723679cd8c3b05f6579288e42e053ab8a31328255e114d",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-07.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-07.txt",
+      "bytes": 5775,
+      "sha256": "7a04b43f6816495c089991b17a992614b1bd469154babe991de237275036375b",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-08.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-08.txt",
+      "bytes": 4540,
+      "sha256": "31a0d850205f57f2b83679a08ed5070ba55a6cfd9e2e915122e5c1dd42a208ad",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-09.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-09.txt",
+      "bytes": 4354,
+      "sha256": "d33c386d36eec7f20a1eda63b048189b771560fc5a8a980c94652a4efe2b729f",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-10.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-10.txt",
+      "bytes": 4333,
+      "sha256": "d1d791f84ac8c81a831534cfc8c6d72c61b775c3c0c3a190d57b9c9fcb948435",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-11.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-11.txt",
+      "bytes": 4379,
+      "sha256": "33b9be1b32562414c717d241d46b436efd376a24fc584b14cc128c9d01729e10",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-12.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-12.txt",
+      "bytes": 4448,
+      "sha256": "713687508744f2c15e4089e7bd17b56e758928af2034a189a66c3c20a2834fd9",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-13.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-13.txt",
+      "bytes": 4312,
+      "sha256": "c958df8c7ad062ad68feeca55fac66c08da7b811c9ecace81ce41009f4a9f397",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-14.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-14.txt",
+      "bytes": 4360,
+      "sha256": "eb68c3559b29b101934ab7f4ba740746b6092619ffb1195f8a0156a3c8df01a4",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-15.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-15.txt",
+      "bytes": 4418,
+      "sha256": "88a7a868d906166af8c42b771e4f3abbee1c72ff86f049979e30ba55645b7004",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-16.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-16.txt",
+      "bytes": 4329,
+      "sha256": "021af1b93d018969b3bda1b8897e7cc21f794c69d90006a430b9fce413356dfe",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-17.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-17.txt",
+      "bytes": 3665,
+      "sha256": "b4b8d9d6597c3710564b2567ea428238ed80aae5b571f2b95fb659af6dd18097",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-18.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-18.txt",
+      "bytes": 3268,
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-19.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-19.txt",
+      "bytes": 4324,
+      "sha256": "d03d1303964f1fe8dddabcb3eb7913a443af83492768ad61241ce22fdead2404",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-20.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-20.txt",
+      "bytes": 4324,
+      "sha256": "4b81a96da592d7feab5caf463e99aac11b345cab3930035783a3998cd2d3468f",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-dependencies-21.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-dependencies-21.txt",
+      "bytes": 2772,
+      "sha256": "0a7021bf58bae5096f7938e17aee23e62a6b3498f4ef1c4e8bcaf43898da5453",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c001-product.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c001-product.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c002-product.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c002-product.log",
+      "bytes": 127,
+      "sha256": "38bd1a39ce4942569bc541839afd86acf30a432f3441d1fb37daf6a55eb5600e",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c003-dependencies-00.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c003-dependencies-00.txt",
+      "bytes": 8943,
+      "sha256": "d6527ba39de33a2141986958a95e0c82b15da8e04cd38baa1551e2827c4cb71f",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c003-dependencies-01.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c003-dependencies-01.txt",
+      "bytes": 4968,
+      "sha256": "56d0a0912aa8809ea143f19e0356de9403be2f5a6f7a7a4d4dd537712025ec76",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c003-dependencies-02.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c003-dependencies-02.txt",
+      "bytes": 4819,
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c003-dependencies-03.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c003-dependencies-03.txt",
+      "bytes": 4529,
+      "sha256": "88b1bb1c44d211001353a424da05c63dfba54f0e3f5600ed3900c4272f92cc4b",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c003-dependencies-04.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c003-dependencies-04.txt",
+      "bytes": 5775,
+      "sha256": "7a04b43f6816495c089991b17a992614b1bd469154babe991de237275036375b",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c003-dependencies-05.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c003-dependencies-05.txt",
+      "bytes": 4540,
+      "sha256": "31a0d850205f57f2b83679a08ed5070ba55a6cfd9e2e915122e5c1dd42a208ad",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c003-dependencies-06.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c003-dependencies-06.txt",
+      "bytes": 4354,
+      "sha256": "d33c386d36eec7f20a1eda63b048189b771560fc5a8a980c94652a4efe2b729f",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c003-dependencies-07.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c003-dependencies-07.txt",
+      "bytes": 4333,
+      "sha256": "d1d791f84ac8c81a831534cfc8c6d72c61b775c3c0c3a190d57b9c9fcb948435",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c003-dependencies-08.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c003-dependencies-08.txt",
+      "bytes": 4379,
+      "sha256": "33b9be1b32562414c717d241d46b436efd376a24fc584b14cc128c9d01729e10",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c003-dependencies-09.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c003-dependencies-09.txt",
+      "bytes": 4448,
+      "sha256": "713687508744f2c15e4089e7bd17b56e758928af2034a189a66c3c20a2834fd9",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c003-dependencies-10.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c003-dependencies-10.txt",
+      "bytes": 4312,
+      "sha256": "c958df8c7ad062ad68feeca55fac66c08da7b811c9ecace81ce41009f4a9f397",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c003-dependencies-11.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c003-dependencies-11.txt",
+      "bytes": 4360,
+      "sha256": "eb68c3559b29b101934ab7f4ba740746b6092619ffb1195f8a0156a3c8df01a4",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c003-dependencies-12.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c003-dependencies-12.txt",
+      "bytes": 4418,
+      "sha256": "88a7a868d906166af8c42b771e4f3abbee1c72ff86f049979e30ba55645b7004",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c003-dependencies-13.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c003-dependencies-13.txt",
+      "bytes": 4329,
+      "sha256": "021af1b93d018969b3bda1b8897e7cc21f794c69d90006a430b9fce413356dfe",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c003-dependencies-14.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c003-dependencies-14.txt",
+      "bytes": 3665,
+      "sha256": "b4b8d9d6597c3710564b2567ea428238ed80aae5b571f2b95fb659af6dd18097",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c003-dependencies-15.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c003-dependencies-15.txt",
+      "bytes": 3268,
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c003-dependencies-16.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c003-dependencies-16.txt",
+      "bytes": 4324,
+      "sha256": "d03d1303964f1fe8dddabcb3eb7913a443af83492768ad61241ce22fdead2404",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c003-dependencies-17.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c003-dependencies-17.txt",
+      "bytes": 4324,
+      "sha256": "4b81a96da592d7feab5caf463e99aac11b345cab3930035783a3998cd2d3468f",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c003-dependencies-18.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c003-dependencies-18.txt",
+      "bytes": 2772,
+      "sha256": "0a7021bf58bae5096f7938e17aee23e62a6b3498f4ef1c4e8bcaf43898da5453",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c003-product.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c003-product.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c004-product.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c004-product.log",
+      "bytes": 341,
+      "sha256": "54b1ae94ac42582d801d59011ea5742d7df6c05ae8c04ac67b161cb0a1dad878",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c005-dependencies-00.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c005-dependencies-00.txt",
+      "bytes": 8793,
+      "sha256": "a96033ca8b2c36c67b70c0bf1d649f0462b40175d70d127011b2fafebdd7c5f3",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c005-dependencies-01.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c005-dependencies-01.txt",
+      "bytes": 4494,
+      "sha256": "ff680f9a353b1a16f12bd1fd8a5c0eeaa9482dd748b83e8d2a0b8d375af35724",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c005-dependencies-02.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c005-dependencies-02.txt",
+      "bytes": 4335,
+      "sha256": "42c7499b25b2aea510723679cd8c3b05f6579288e42e053ab8a31328255e114d",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c005-dependencies-03.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c005-dependencies-03.txt",
+      "bytes": 4819,
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c005-product.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c005-product.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/c006-product.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/c006-product.log",
+      "bytes": 176,
+      "sha256": "8d41e1624fc2ed2e5f8b7c7f66c1be1db48483ce8fd65930d55e1c8cfcca7f3f",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/host-checks.json": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/host-checks.json",
+      "bytes": 144232,
+      "sha256": "617f0a69a2708688480f65cbb4c5cf0169f0f78df5fcf91bd9358ec05900f643",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/host-checks.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/host-checks.log",
+      "bytes": 1332,
+      "sha256": "220d45be30388f74fedc35bd2e02872d58e12f055d4a769d489e5e287877ba48",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/products/c001-executable-90bd463cae4d1d9a-test": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/products/c001-executable-90bd463cae4d1d9a-test",
+      "bytes": 1287928,
+      "sha256": "90bd463cae4d1d9a0bfdcc7bcfb651fb63e9e42ecdb6ace56741a8ca997ababe",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/products/c003-executable-3576875d3a337912-test": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/products/c003-executable-3576875d3a337912-test",
+      "bytes": 985848,
+      "sha256": "3576875d3a3379122cf5949aa9135dcc5a2077cfedb248680d44fc89fd9a9d07",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final/products/c005-executable-a8d5b72491515755-test": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final/products/c005-executable-a8d5b72491515755-test",
+      "bytes": 223992,
+      "sha256": "a8d5b724915157556be0a0de3ffadeadceb1bec9fe4890ffe2d2832027be6bcc",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-00.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-00.txt",
+      "bytes": 9023,
+      "sha256": "90bb98521d29188730ea8e63501fb5e329d6f50e62552024edb6df5cc228f616",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-01.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-01.txt",
+      "bytes": 5406,
+      "sha256": "dc3e3135736abc4d334600a50601440a6711150bebce35def2c8156215ec31b1",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-02.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-02.txt",
+      "bytes": 4968,
+      "sha256": "56d0a0912aa8809ea143f19e0356de9403be2f5a6f7a7a4d4dd537712025ec76",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-03.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-03.txt",
+      "bytes": 4819,
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-04.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-04.txt",
+      "bytes": 4529,
+      "sha256": "88b1bb1c44d211001353a424da05c63dfba54f0e3f5600ed3900c4272f92cc4b",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-05.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-05.txt",
+      "bytes": 4494,
+      "sha256": "ff680f9a353b1a16f12bd1fd8a5c0eeaa9482dd748b83e8d2a0b8d375af35724",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-06.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-06.txt",
+      "bytes": 4335,
+      "sha256": "42c7499b25b2aea510723679cd8c3b05f6579288e42e053ab8a31328255e114d",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-07.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-07.txt",
+      "bytes": 5775,
+      "sha256": "7a04b43f6816495c089991b17a992614b1bd469154babe991de237275036375b",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-08.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-08.txt",
+      "bytes": 4540,
+      "sha256": "31a0d850205f57f2b83679a08ed5070ba55a6cfd9e2e915122e5c1dd42a208ad",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-09.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-09.txt",
+      "bytes": 4354,
+      "sha256": "d33c386d36eec7f20a1eda63b048189b771560fc5a8a980c94652a4efe2b729f",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-10.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-10.txt",
+      "bytes": 4333,
+      "sha256": "d1d791f84ac8c81a831534cfc8c6d72c61b775c3c0c3a190d57b9c9fcb948435",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-11.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-11.txt",
+      "bytes": 4379,
+      "sha256": "33b9be1b32562414c717d241d46b436efd376a24fc584b14cc128c9d01729e10",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-12.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-12.txt",
+      "bytes": 4448,
+      "sha256": "713687508744f2c15e4089e7bd17b56e758928af2034a189a66c3c20a2834fd9",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-13.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-13.txt",
+      "bytes": 4312,
+      "sha256": "c958df8c7ad062ad68feeca55fac66c08da7b811c9ecace81ce41009f4a9f397",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-14.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-14.txt",
+      "bytes": 4360,
+      "sha256": "eb68c3559b29b101934ab7f4ba740746b6092619ffb1195f8a0156a3c8df01a4",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-15.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-15.txt",
+      "bytes": 4418,
+      "sha256": "88a7a868d906166af8c42b771e4f3abbee1c72ff86f049979e30ba55645b7004",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-16.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-16.txt",
+      "bytes": 4329,
+      "sha256": "021af1b93d018969b3bda1b8897e7cc21f794c69d90006a430b9fce413356dfe",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-17.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-17.txt",
+      "bytes": 3665,
+      "sha256": "b4b8d9d6597c3710564b2567ea428238ed80aae5b571f2b95fb659af6dd18097",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-18.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-18.txt",
+      "bytes": 3268,
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-19.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-19.txt",
+      "bytes": 4324,
+      "sha256": "d03d1303964f1fe8dddabcb3eb7913a443af83492768ad61241ce22fdead2404",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-20.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-20.txt",
+      "bytes": 4324,
+      "sha256": "4b81a96da592d7feab5caf463e99aac11b345cab3930035783a3998cd2d3468f",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-dependencies-21.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-dependencies-21.txt",
+      "bytes": 2772,
+      "sha256": "0a7021bf58bae5096f7938e17aee23e62a6b3498f4ef1c4e8bcaf43898da5453",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c001-product.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c001-product.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c002-product.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c002-product.log",
+      "bytes": 127,
+      "sha256": "38bd1a39ce4942569bc541839afd86acf30a432f3441d1fb37daf6a55eb5600e",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c003-dependencies-00.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c003-dependencies-00.txt",
+      "bytes": 8943,
+      "sha256": "d6527ba39de33a2141986958a95e0c82b15da8e04cd38baa1551e2827c4cb71f",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c003-dependencies-01.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c003-dependencies-01.txt",
+      "bytes": 4968,
+      "sha256": "56d0a0912aa8809ea143f19e0356de9403be2f5a6f7a7a4d4dd537712025ec76",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c003-dependencies-02.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c003-dependencies-02.txt",
+      "bytes": 4819,
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c003-dependencies-03.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c003-dependencies-03.txt",
+      "bytes": 4529,
+      "sha256": "88b1bb1c44d211001353a424da05c63dfba54f0e3f5600ed3900c4272f92cc4b",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c003-dependencies-04.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c003-dependencies-04.txt",
+      "bytes": 5775,
+      "sha256": "7a04b43f6816495c089991b17a992614b1bd469154babe991de237275036375b",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c003-dependencies-05.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c003-dependencies-05.txt",
+      "bytes": 4540,
+      "sha256": "31a0d850205f57f2b83679a08ed5070ba55a6cfd9e2e915122e5c1dd42a208ad",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c003-dependencies-06.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c003-dependencies-06.txt",
+      "bytes": 4354,
+      "sha256": "d33c386d36eec7f20a1eda63b048189b771560fc5a8a980c94652a4efe2b729f",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c003-dependencies-07.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c003-dependencies-07.txt",
+      "bytes": 4333,
+      "sha256": "d1d791f84ac8c81a831534cfc8c6d72c61b775c3c0c3a190d57b9c9fcb948435",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c003-dependencies-08.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c003-dependencies-08.txt",
+      "bytes": 4379,
+      "sha256": "33b9be1b32562414c717d241d46b436efd376a24fc584b14cc128c9d01729e10",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c003-dependencies-09.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c003-dependencies-09.txt",
+      "bytes": 4448,
+      "sha256": "713687508744f2c15e4089e7bd17b56e758928af2034a189a66c3c20a2834fd9",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c003-dependencies-10.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c003-dependencies-10.txt",
+      "bytes": 4312,
+      "sha256": "c958df8c7ad062ad68feeca55fac66c08da7b811c9ecace81ce41009f4a9f397",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c003-dependencies-11.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c003-dependencies-11.txt",
+      "bytes": 4360,
+      "sha256": "eb68c3559b29b101934ab7f4ba740746b6092619ffb1195f8a0156a3c8df01a4",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c003-dependencies-12.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c003-dependencies-12.txt",
+      "bytes": 4418,
+      "sha256": "88a7a868d906166af8c42b771e4f3abbee1c72ff86f049979e30ba55645b7004",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c003-dependencies-13.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c003-dependencies-13.txt",
+      "bytes": 4329,
+      "sha256": "021af1b93d018969b3bda1b8897e7cc21f794c69d90006a430b9fce413356dfe",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c003-dependencies-14.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c003-dependencies-14.txt",
+      "bytes": 3665,
+      "sha256": "b4b8d9d6597c3710564b2567ea428238ed80aae5b571f2b95fb659af6dd18097",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c003-dependencies-15.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c003-dependencies-15.txt",
+      "bytes": 3268,
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c003-dependencies-16.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c003-dependencies-16.txt",
+      "bytes": 4324,
+      "sha256": "d03d1303964f1fe8dddabcb3eb7913a443af83492768ad61241ce22fdead2404",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c003-dependencies-17.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c003-dependencies-17.txt",
+      "bytes": 4324,
+      "sha256": "4b81a96da592d7feab5caf463e99aac11b345cab3930035783a3998cd2d3468f",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c003-dependencies-18.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c003-dependencies-18.txt",
+      "bytes": 2772,
+      "sha256": "0a7021bf58bae5096f7938e17aee23e62a6b3498f4ef1c4e8bcaf43898da5453",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c003-product.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c003-product.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c004-product.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c004-product.log",
+      "bytes": 341,
+      "sha256": "54b1ae94ac42582d801d59011ea5742d7df6c05ae8c04ac67b161cb0a1dad878",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c005-dependencies-00.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c005-dependencies-00.txt",
+      "bytes": 8793,
+      "sha256": "a96033ca8b2c36c67b70c0bf1d649f0462b40175d70d127011b2fafebdd7c5f3",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c005-dependencies-01.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c005-dependencies-01.txt",
+      "bytes": 4494,
+      "sha256": "ff680f9a353b1a16f12bd1fd8a5c0eeaa9482dd748b83e8d2a0b8d375af35724",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c005-dependencies-02.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c005-dependencies-02.txt",
+      "bytes": 4335,
+      "sha256": "42c7499b25b2aea510723679cd8c3b05f6579288e42e053ab8a31328255e114d",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c005-dependencies-03.txt": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c005-dependencies-03.txt",
+      "bytes": 4819,
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c005-product.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c005-product.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/c006-product.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/c006-product.log",
+      "bytes": 176,
+      "sha256": "8d41e1624fc2ed2e5f8b7c7f66c1be1db48483ce8fd65930d55e1c8cfcca7f3f",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/host-checks.json": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/host-checks.json",
+      "bytes": 144584,
+      "sha256": "1f56286bc0dfc78e759c9b8b36fb3cd1d5e5e2f484416e4d37000b22ee267175",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/host-checks.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/host-checks.log",
+      "bytes": 1332,
+      "sha256": "e76683e96177ff0e28a16f850711e38f9041982339aa4453b90038d9206066a6",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/products/c001-executable-00569887e43e3204-test": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/products/c001-executable-00569887e43e3204-test",
+      "bytes": 1306328,
+      "sha256": "00569887e43e320476b75dbd0e87e6559f75a087014fb7f4c2d07e7fa2eebb01",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/products/c003-executable-0c26dcada935cc35-test": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/products/c003-executable-0c26dcada935cc35-test",
+      "bytes": 985912,
+      "sha256": "0c26dcada935cc35659d1e35c046a27a4391b31b91c23a57bebc89d5d71dad8d",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/host-final-v2/products/c005-executable-814df3a0777dc192-test": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/products/c005-executable-814df3a0777dc192-test",
+      "bytes": 223992,
+      "sha256": "814df3a0777dc192521fae182f37c2d19cc90cf1eeb1ca4780579666c4073176",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/PTPaulaFutureTriggerTest.build.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/PTPaulaFutureTriggerTest.build.log",
+      "bytes": 474,
+      "sha256": "ca187d1afffd57f40a35b4a2d4ecf48d5b9127a7cc99e22a11bee07b2013d688",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/compile-commands.json": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/compile-commands.json",
+      "bytes": 2253,
+      "sha256": "a7844405387293c82408e827d64ed94a6d7c0806d6958f6131c8960eaf28e797",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/compiler-target-help.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/compiler-target-help.log",
+      "bytes": 7189,
+      "sha256": "f49f0114a73ba557163318b0fdad968b33b41a939e5766a83460468bda9c7a79",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/compiler-version.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/compiler-version.log",
+      "bytes": 247,
+      "sha256": "5946ce0c1a43a84e1c7af8cfaa306b2f4bd276dd02164560d5674bcc91250d0b",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-00.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-00.log",
+      "bytes": 4585,
+      "sha256": "f1462aabe92d0be38aeafbf81e433fc56b5726a5308f704a513c9439fe90aa61",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-01.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-01.log",
+      "bytes": 3509,
+      "sha256": "bc5bd1f5298e86448a0ad498e66dab0f2d36a25abad2f11e454db0a7db16e923",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-02.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-02.log",
+      "bytes": 3329,
+      "sha256": "a48dba34e0041f01a5a244832c13ae6728bbba974dd87219df385d21d9f7d192",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-03.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-03.log",
+      "bytes": 2935,
+      "sha256": "92ec819ff7d6e393804022b7c06ea0558e530db37a234dd44bc0a333b0bbb928",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-04.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-04.log",
+      "bytes": 2868,
+      "sha256": "29b3f6cd229dfc310a8352b1ace422b53297267c479f637c556fc0110cfa1cb6",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-05.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-05.log",
+      "bytes": 2836,
+      "sha256": "b8a62f1d581911370796e214ff61a25814ec23022c1d578ca0197c507fd69028",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-06.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-06.log",
+      "bytes": 2677,
+      "sha256": "7649b08c78af4bc4cb103d1549be8cee06ac757e10a5b6578a43a16049038361",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-07.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-07.log",
+      "bytes": 3486,
+      "sha256": "91d61721891d4308221ccf687813163848b8b65b78c8225015e59653a1d79c53",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-08.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-08.log",
+      "bytes": 2877,
+      "sha256": "6d965099f3d42fe6e1d3f339e33832baa6cfbfba2504c2d0d0ef07c1f94db8b4",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-09.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-09.log",
+      "bytes": 2691,
+      "sha256": "ecfca1c53587ed34fc179bac0275d99ba44e46c144f39ca6e722c4b08bbbeb46",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-10.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-10.log",
+      "bytes": 2674,
+      "sha256": "6eca9be45c2f9e1b81b0d88fa1ccd7ab10c728f6d1a8b8290d29176b9f5d3271",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-11.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-11.log",
+      "bytes": 2719,
+      "sha256": "0a6f724c52f97951e0cc34b50a4aae9db35c2a99d21128cc6f38f72dc4ba32e5",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-12.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-12.log",
+      "bytes": 2787,
+      "sha256": "1f192fe62ece619be6d88a2eb02b0a026130d9d8ee2387791ab4e545a29b5a20",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-13.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-13.log",
+      "bytes": 2653,
+      "sha256": "6b987584a6c74fb8817a7124512d83b18df1c43a53f40741061c14a0343ad866",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-14.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-14.log",
+      "bytes": 2700,
+      "sha256": "b07d0f6181a81bd4892e3d3ba2d642f861ddb380cf1eac93b0fced33761264ad",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-15.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-15.log",
+      "bytes": 2754,
+      "sha256": "e4faeae096c9ec48ef2fc5ad7099505e81e7e2ce0fe48974860884543a80b668",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-16.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-16.log",
+      "bytes": 2671,
+      "sha256": "c7ba9b4659696523b158251b58782db04ab261cbaa3ba9c8a33a76f1e25d7f57",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-17.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-17.log",
+      "bytes": 2665,
+      "sha256": "e6d857bcb44c2f2752e7795df3426c8312bd2bd7d6ad93177da0fc47597b1cc5",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-18.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-18.log",
+      "bytes": 1767,
+      "sha256": "01c3547804956b0748114b63f1de3c6d9d5093feac2a7ff56dfeb2e0290c867a",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-19.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-19.log",
+      "bytes": 2665,
+      "sha256": "30fc4d262f9607a81b3b62ef30564262161af272e84a2320ac95cf8fd56cc5fb",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-20.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-20.log",
+      "bytes": 2665,
+      "sha256": "3ec39f4b71cc8765d576a56a9b4c058099052b7c3f21a3643f8dbb0f08bea835",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/dependencies-21.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/dependencies-21.log",
+      "bytes": 982,
+      "sha256": "153faaede332c2e41619a5bd53c34e720a48f4d8135fb16442b2c5d1f1462628",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/manifest.json": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/manifest.json",
+      "bytes": 34884,
+      "sha256": "6bf0ca91641baa4f3a264df20833181994e17022c9e6f583093d1e985421c232",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/preprocessed-fixture.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/preprocessed-fixture.log",
+      "bytes": 274934,
+      "sha256": "03fe24fb05e99da9720137429ed228d520f645e389a6f5dfcdd713ad03094188",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/runtime-libamiga-a.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/runtime-libamiga-a.log",
+      "bytes": 156,
+      "sha256": "c2c8e44936c32e01094e9de761e57c62c7bb834fbf6cabd464465bf3b17090c4",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/runtime-libgcc-a.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/runtime-libgcc-a.log",
+      "bytes": 125,
+      "sha256": "b1912e77c4c1160ce749ca74fbe6edabd5896c2291188e718a9cdfd72c84d57a",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/runtime-libnix-a.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/runtime-libnix-a.log",
+      "bytes": 121,
+      "sha256": "1ca0a83ef891770cbbe671647c7aad9f925ed0b9756c8f85aca35c84961e202a",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/runtime-libnix20-a.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/runtime-libnix20-a.log",
+      "bytes": 123,
+      "sha256": "9060e4a22ea9e716b8f9cf85b5fe5e11a9e6c88ef938b9111d189acc2df8465b",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/runtime-libnixmain-a.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/runtime-libnixmain-a.log",
+      "bytes": 125,
+      "sha256": "dd28b9a8319d35bd81f76cd9479f889e7e5628be07a45ef138f35a729c640add",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/runtime-libstubs-a.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/runtime-libstubs-a.log",
+      "bytes": 156,
+      "sha256": "8ce0c56c26f8f09a8af8b76d62c4d380cbfbe8efde13fa64884d8e9e6c93027f",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v2/runtime-ncrt0-o.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/runtime-ncrt0-o.log",
+      "bytes": 120,
+      "sha256": "1562950e2e8cb15a51238fddb72e6e26f0ff2d5a774543473aba0d274a19c45f",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/PTPaulaFutureTriggerTest": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/PTPaulaFutureTriggerTest",
+      "bytes": 150852,
+      "sha256": "f6247401a54eae94cb36adf07aee9aac2ee70acd4085a0e2fedde51db5624c3f",
+      "mode": 493,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/PTPaulaFutureTriggerTest.build.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/PTPaulaFutureTriggerTest.build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/compile-commands.json": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/compile-commands.json",
+      "bytes": 2253,
+      "sha256": "ed04fe88795528ae5167419046add46a9771bcb2d0ecb1129945219bdc6e40c6",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/compiler-target-help.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/compiler-target-help.log",
+      "bytes": 7189,
+      "sha256": "f49f0114a73ba557163318b0fdad968b33b41a939e5766a83460468bda9c7a79",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/compiler-version.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/compiler-version.log",
+      "bytes": 247,
+      "sha256": "5946ce0c1a43a84e1c7af8cfaa306b2f4bd276dd02164560d5674bcc91250d0b",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-00.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-00.log",
+      "bytes": 4585,
+      "sha256": "f1462aabe92d0be38aeafbf81e433fc56b5726a5308f704a513c9439fe90aa61",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-01.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-01.log",
+      "bytes": 3509,
+      "sha256": "bc5bd1f5298e86448a0ad498e66dab0f2d36a25abad2f11e454db0a7db16e923",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-02.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-02.log",
+      "bytes": 3329,
+      "sha256": "a48dba34e0041f01a5a244832c13ae6728bbba974dd87219df385d21d9f7d192",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-03.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-03.log",
+      "bytes": 2935,
+      "sha256": "92ec819ff7d6e393804022b7c06ea0558e530db37a234dd44bc0a333b0bbb928",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-04.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-04.log",
+      "bytes": 2868,
+      "sha256": "29b3f6cd229dfc310a8352b1ace422b53297267c479f637c556fc0110cfa1cb6",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-05.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-05.log",
+      "bytes": 2836,
+      "sha256": "b8a62f1d581911370796e214ff61a25814ec23022c1d578ca0197c507fd69028",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-06.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-06.log",
+      "bytes": 2677,
+      "sha256": "7649b08c78af4bc4cb103d1549be8cee06ac757e10a5b6578a43a16049038361",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-07.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-07.log",
+      "bytes": 3486,
+      "sha256": "91d61721891d4308221ccf687813163848b8b65b78c8225015e59653a1d79c53",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-08.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-08.log",
+      "bytes": 2877,
+      "sha256": "6d965099f3d42fe6e1d3f339e33832baa6cfbfba2504c2d0d0ef07c1f94db8b4",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-09.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-09.log",
+      "bytes": 2691,
+      "sha256": "ecfca1c53587ed34fc179bac0275d99ba44e46c144f39ca6e722c4b08bbbeb46",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-10.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-10.log",
+      "bytes": 2674,
+      "sha256": "6eca9be45c2f9e1b81b0d88fa1ccd7ab10c728f6d1a8b8290d29176b9f5d3271",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-11.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-11.log",
+      "bytes": 2719,
+      "sha256": "0a6f724c52f97951e0cc34b50a4aae9db35c2a99d21128cc6f38f72dc4ba32e5",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-12.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-12.log",
+      "bytes": 2787,
+      "sha256": "1f192fe62ece619be6d88a2eb02b0a026130d9d8ee2387791ab4e545a29b5a20",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-13.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-13.log",
+      "bytes": 2653,
+      "sha256": "6b987584a6c74fb8817a7124512d83b18df1c43a53f40741061c14a0343ad866",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-14.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-14.log",
+      "bytes": 2700,
+      "sha256": "b07d0f6181a81bd4892e3d3ba2d642f861ddb380cf1eac93b0fced33761264ad",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-15.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-15.log",
+      "bytes": 2754,
+      "sha256": "e4faeae096c9ec48ef2fc5ad7099505e81e7e2ce0fe48974860884543a80b668",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-16.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-16.log",
+      "bytes": 2671,
+      "sha256": "c7ba9b4659696523b158251b58782db04ab261cbaa3ba9c8a33a76f1e25d7f57",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-17.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-17.log",
+      "bytes": 2665,
+      "sha256": "e6d857bcb44c2f2752e7795df3426c8312bd2bd7d6ad93177da0fc47597b1cc5",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-18.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-18.log",
+      "bytes": 1767,
+      "sha256": "01c3547804956b0748114b63f1de3c6d9d5093feac2a7ff56dfeb2e0290c867a",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-19.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-19.log",
+      "bytes": 2665,
+      "sha256": "30fc4d262f9607a81b3b62ef30564262161af272e84a2320ac95cf8fd56cc5fb",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-20.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-20.log",
+      "bytes": 2665,
+      "sha256": "3ec39f4b71cc8765d576a56a9b4c058099052b7c3f21a3643f8dbb0f08bea835",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/dependencies-21.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/dependencies-21.log",
+      "bytes": 982,
+      "sha256": "153faaede332c2e41619a5bd53c34e720a48f4d8135fb16442b2c5d1f1462628",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/manifest.json": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/manifest.json",
+      "bytes": 46300,
+      "sha256": "3bbab345029d7faf1342b7514124360635a22eab02cdf5f3a60d1a53f568bf37",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/preprocessed-fixture.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/preprocessed-fixture.log",
+      "bytes": 274939,
+      "sha256": "94f10b90668bf984435da1eada7feb3fb21ccbd292cb32f122da004f36067658",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/runtime-libamiga-a.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/runtime-libamiga-a.log",
+      "bytes": 156,
+      "sha256": "c2c8e44936c32e01094e9de761e57c62c7bb834fbf6cabd464465bf3b17090c4",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/runtime-libgcc-a.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/runtime-libgcc-a.log",
+      "bytes": 125,
+      "sha256": "b1912e77c4c1160ce749ca74fbe6edabd5896c2291188e718a9cdfd72c84d57a",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/runtime-libnix-a.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/runtime-libnix-a.log",
+      "bytes": 121,
+      "sha256": "1ca0a83ef891770cbbe671647c7aad9f925ed0b9756c8f85aca35c84961e202a",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/runtime-libnix20-a.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/runtime-libnix20-a.log",
+      "bytes": 123,
+      "sha256": "9060e4a22ea9e716b8f9cf85b5fe5e11a9e6c88ef938b9111d189acc2df8465b",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/runtime-libnixmain-a.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/runtime-libnixmain-a.log",
+      "bytes": 125,
+      "sha256": "dd28b9a8319d35bd81f76cd9479f889e7e5628be07a45ef138f35a729c640add",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/runtime-libstubs-a.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/runtime-libstubs-a.log",
+      "bytes": 156,
+      "sha256": "8ce0c56c26f8f09a8af8b76d62c4d380cbfbe8efde13fa64884d8e9e6c93027f",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "original/native-final-v3/runtime-ncrt0-o.log": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/runtime-ncrt0-o.log",
+      "bytes": 120,
+      "sha256": "1562950e2e8cb15a51238fddb72e6e26f0ff2d5a774543473aba0d274a19c45f",
+      "mode": 420,
+      "role": "Exact original helper/commands/dependency logs/products; host v1 is superseded history, native v2 is compiler failure, native v3 is compiler-only PASS"
+    },
+    "host-compiled-inputs/src/core/amigus_reservation.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/amigus_reservation.h",
+      "bytes": 3404,
+      "sha256": "ee57be55b9865fd19d14b27b22af6e2aa6b0466b7f21da5b313016efe9a0b646",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/amigus_sample_ram.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/amigus_sample_ram.h",
+      "bytes": 2813,
+      "sha256": "005111323eb1884112230ea415fbfb75e01d560618326148e08790d4f23fadf6",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/amigus_wavetable_cache.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/amigus_wavetable_cache.h",
+      "bytes": 3792,
+      "sha256": "8c449f009eac14807a9521d16a756345dd531e47b50312a3cabf96ee7ea2ee9c",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/channels.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/channels.c",
+      "bytes": 6996,
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/channels.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/channels.h",
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/document.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/document.c",
+      "bytes": 9127,
+      "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/document.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/document.h",
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/elapsed_clock.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/elapsed_clock.c",
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/elapsed_clock.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/elapsed_clock.h",
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/mod_inspect.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/mod_inspect.c",
+      "bytes": 3513,
+      "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/mod_inspect.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/mod_inspect.h",
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/mod_project.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/mod_project.c",
+      "bytes": 23640,
+      "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/mod_project.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/mod_project.h",
+      "bytes": 5051,
+      "sha256": "c28407161729fc0fea2398f79341a866f03913b092769674bd871bb23adb59ee",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/pattern.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/pattern.c",
+      "bytes": 15753,
+      "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/pattern.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/pattern.h",
+      "bytes": 3642,
+      "sha256": "f8c9abde09c4fe495ae77f25c070da647eab038845729edc83adec08c5678d53",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/pcm.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/pcm.c",
+      "bytes": 7061,
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/pcm.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/pcm.h",
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/pcm_filtered.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/pcm_filtered.c",
+      "bytes": 4604,
+      "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/pcm_internal.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/pcm_internal.h",
+      "bytes": 615,
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/playback_internal.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/playback_internal.h",
+      "bytes": 1893,
+      "sha256": "5d76f20f2c9a7eda89c3543a897f053c97f9460a847d2d70b32b8b71c14775e2",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/playback_pcm.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/playback_pcm.c",
+      "bytes": 11344,
+      "sha256": "f00995c1ca81176fc244968b4276b41624767f42c2963eb90482f23953d09a1f",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/playback_pcm.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/playback_pcm.h",
+      "bytes": 6034,
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/pp20.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/pp20.c",
+      "bytes": 7187,
+      "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/pp20.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/pp20.h",
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/project.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/project.c",
+      "bytes": 39034,
+      "sha256": "e4fde542cdfc9b9bce585ef0cda0b5b09d07482f3ec89fddb8d79137b8b0e1c1",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/project.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/project.h",
+      "bytes": 5698,
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/raw.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/raw.c",
+      "bytes": 3920,
+      "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/raw.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/raw.h",
+      "bytes": 1171,
+      "sha256": "f9f47added4df41bb7b15aa3b1b7a4d8131a2c4aa19266436318483a41bc0f3b",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/sample_cache.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/sample_cache.c",
+      "bytes": 4018,
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/sample_cache.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/sample_cache.h",
+      "bytes": 1999,
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/scheduled_output.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/scheduled_output.c",
+      "bytes": 9473,
+      "sha256": "940979a07c48679e141722cc672b967d9e4dffd575ba126038a3fd111ec55405",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/scheduled_output.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/scheduled_output.h",
+      "bytes": 6515,
+      "sha256": "3289945d9446b373d8aa1897cb2c432f08ef253b443a81cd4dde39230df9b9da",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/sinc_kernel.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/sinc_kernel.h",
+      "bytes": 28756,
+      "sha256": "058629396a0b22daa67f75c909adf9181fc4e52bfc668890fe2abc3231c3a185",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/slices.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/slices.c",
+      "bytes": 6060,
+      "sha256": "2951045844f6fdebdd80afe12fe7a5afc1f37bf837c2f49d840f14867835342f",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/slices.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/slices.h",
+      "bytes": 2003,
+      "sha256": "31cd82785c2b86c41d9cde1f7a29056c9d70ec41fb7a9bfb1a5679ba762c24f7",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/svx.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/svx.c",
+      "bytes": 7817,
+      "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/svx.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/svx.h",
+      "bytes": 1442,
+      "sha256": "824541cd25b72b5820e091cfc9f4e6a5f41351fd0630dddc09aefc0405036814",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/wav.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/wav.c",
+      "bytes": 7200,
+      "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/core/wav.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/core/wav.h",
+      "bytes": 1384,
+      "sha256": "8dd0f4454304babb53eef5ecb97cde7bfe6569d292cc0e9a0f204c4a587f2028",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/editor/project_snapshot.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/editor/project_snapshot.h",
+      "bytes": 1203,
+      "sha256": "dbb1206c1e8bfd317b515086f9d064c6eacd2450228893bb394f278ed6c0b2df",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/editor/sampler.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/editor/sampler.c",
+      "bytes": 35514,
+      "sha256": "5b18d67b6a51aa505131040e3a15425da674334ec66e3fd24faab988d062c984",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/editor/sampler.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/editor/sampler.h",
+      "bytes": 6264,
+      "sha256": "d19465c8b3866cfb67cfaca98457c2201165675cc3a4f45804d3c00b17284433",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/editor/sampler_internal.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/editor/sampler_internal.h",
+      "bytes": 3679,
+      "sha256": "8ce04909cd657d0caa6598416cfce2ee91109bf8fde782fc7795d35b116ac3e2",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/editor/sampler_paula.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/editor/sampler_paula.c",
+      "bytes": 7401,
+      "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/editor/sampler_paula.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/editor/sampler_paula.h",
+      "bytes": 2718,
+      "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/editor/sampler_paula_future.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/editor/sampler_paula_future.c",
+      "bytes": 22678,
+      "sha256": "4ba81d5e506a669df3cfaf6afbb6b0819070c06119c8c54a1ff09bc9d8944f1f",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/editor/sampler_paula_future.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/editor/sampler_paula_future.h",
+      "bytes": 4016,
+      "sha256": "760a6f6ae9cf33656401d6ea827eea1a90caed34559eaee0743e4ebac2415326",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/editor/sampler_paula_internal.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/editor/sampler_paula_internal.h",
+      "bytes": 3013,
+      "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/src/editor/slots.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/editor/slots.c",
+      "bytes": 3233,
+      "sha256": "60ab6a784d4bc47285bb436b975cdd6ee0bad4743bdf9f0817837d818645f7fa",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/tests/sampler_paula_future_test.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/tests/sampler_paula_future_test.c",
+      "bytes": 34089,
+      "sha256": "e6dc403092270335134bbf850373f4e06593c0fa383dee0ab76cd2b66bbec8d7",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/tests/sampler_paula_test.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/tests/sampler_paula_test.c",
+      "bytes": 12633,
+      "sha256": "edafbce36a0eaf4465571af0599313489806a6f314a6264f7631a49caa4d928d",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-compiled-inputs/tests/scheduled_output_test.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/tests/scheduled_output_test.c",
+      "bytes": 17562,
+      "sha256": "cde1db9470f14575f418bc7b749e7a2950b40112c252afb1b20b3258a9ebd864",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/amigus_reservation.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/amigus_reservation.h",
+      "bytes": 3404,
+      "sha256": "ee57be55b9865fd19d14b27b22af6e2aa6b0466b7f21da5b313016efe9a0b646",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/amigus_sample_ram.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/amigus_sample_ram.h",
+      "bytes": 2813,
+      "sha256": "005111323eb1884112230ea415fbfb75e01d560618326148e08790d4f23fadf6",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/amigus_wavetable_cache.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/amigus_wavetable_cache.h",
+      "bytes": 3792,
+      "sha256": "8c449f009eac14807a9521d16a756345dd531e47b50312a3cabf96ee7ea2ee9c",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/channels.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/channels.c",
+      "bytes": 6996,
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/channels.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/channels.h",
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/document.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/document.c",
+      "bytes": 9127,
+      "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/document.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/document.h",
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/elapsed_clock.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/elapsed_clock.c",
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/elapsed_clock.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/elapsed_clock.h",
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/mod_inspect.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/mod_inspect.c",
+      "bytes": 3513,
+      "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/mod_inspect.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/mod_inspect.h",
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/mod_project.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/mod_project.c",
+      "bytes": 23640,
+      "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/mod_project.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/mod_project.h",
+      "bytes": 5051,
+      "sha256": "c28407161729fc0fea2398f79341a866f03913b092769674bd871bb23adb59ee",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/pattern.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/pattern.c",
+      "bytes": 15753,
+      "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/pattern.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/pattern.h",
+      "bytes": 3642,
+      "sha256": "f8c9abde09c4fe495ae77f25c070da647eab038845729edc83adec08c5678d53",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/pcm.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/pcm.c",
+      "bytes": 7061,
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/pcm.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/pcm.h",
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/pcm_filtered.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/pcm_filtered.c",
+      "bytes": 4604,
+      "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/pcm_internal.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/pcm_internal.h",
+      "bytes": 615,
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/playback_internal.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/playback_internal.h",
+      "bytes": 1893,
+      "sha256": "5d76f20f2c9a7eda89c3543a897f053c97f9460a847d2d70b32b8b71c14775e2",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/playback_pcm.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/playback_pcm.c",
+      "bytes": 11344,
+      "sha256": "f00995c1ca81176fc244968b4276b41624767f42c2963eb90482f23953d09a1f",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/playback_pcm.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/playback_pcm.h",
+      "bytes": 6034,
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/pp20.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/pp20.c",
+      "bytes": 7187,
+      "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/pp20.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/pp20.h",
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/project.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/project.c",
+      "bytes": 39034,
+      "sha256": "e4fde542cdfc9b9bce585ef0cda0b5b09d07482f3ec89fddb8d79137b8b0e1c1",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/project.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/project.h",
+      "bytes": 5698,
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/raw.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/raw.c",
+      "bytes": 3920,
+      "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/raw.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/raw.h",
+      "bytes": 1171,
+      "sha256": "f9f47added4df41bb7b15aa3b1b7a4d8131a2c4aa19266436318483a41bc0f3b",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/sample_cache.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/sample_cache.c",
+      "bytes": 4018,
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/sample_cache.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/sample_cache.h",
+      "bytes": 1999,
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/scheduled_output.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/scheduled_output.c",
+      "bytes": 9473,
+      "sha256": "940979a07c48679e141722cc672b967d9e4dffd575ba126038a3fd111ec55405",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/scheduled_output.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/scheduled_output.h",
+      "bytes": 6515,
+      "sha256": "3289945d9446b373d8aa1897cb2c432f08ef253b443a81cd4dde39230df9b9da",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/sinc_kernel.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/sinc_kernel.h",
+      "bytes": 28756,
+      "sha256": "058629396a0b22daa67f75c909adf9181fc4e52bfc668890fe2abc3231c3a185",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/slices.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/slices.c",
+      "bytes": 6060,
+      "sha256": "2951045844f6fdebdd80afe12fe7a5afc1f37bf837c2f49d840f14867835342f",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/slices.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/slices.h",
+      "bytes": 2003,
+      "sha256": "31cd82785c2b86c41d9cde1f7a29056c9d70ec41fb7a9bfb1a5679ba762c24f7",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/svx.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/svx.c",
+      "bytes": 7817,
+      "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/svx.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/svx.h",
+      "bytes": 1442,
+      "sha256": "824541cd25b72b5820e091cfc9f4e6a5f41351fd0630dddc09aefc0405036814",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/wav.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/wav.c",
+      "bytes": 7200,
+      "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/core/wav.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/core/wav.h",
+      "bytes": 1384,
+      "sha256": "8dd0f4454304babb53eef5ecb97cde7bfe6569d292cc0e9a0f204c4a587f2028",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/editor/project_snapshot.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/editor/project_snapshot.h",
+      "bytes": 1203,
+      "sha256": "dbb1206c1e8bfd317b515086f9d064c6eacd2450228893bb394f278ed6c0b2df",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/editor/sampler.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/editor/sampler.c",
+      "bytes": 35514,
+      "sha256": "5b18d67b6a51aa505131040e3a15425da674334ec66e3fd24faab988d062c984",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/editor/sampler.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/editor/sampler.h",
+      "bytes": 6264,
+      "sha256": "d19465c8b3866cfb67cfaca98457c2201165675cc3a4f45804d3c00b17284433",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/editor/sampler_internal.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/editor/sampler_internal.h",
+      "bytes": 3679,
+      "sha256": "8ce04909cd657d0caa6598416cfce2ee91109bf8fde782fc7795d35b116ac3e2",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/editor/sampler_paula.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/editor/sampler_paula.c",
+      "bytes": 7401,
+      "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/editor/sampler_paula.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/editor/sampler_paula.h",
+      "bytes": 2718,
+      "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/editor/sampler_paula_future.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/editor/sampler_paula_future.c",
+      "bytes": 22678,
+      "sha256": "4ba81d5e506a669df3cfaf6afbb6b0819070c06119c8c54a1ff09bc9d8944f1f",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/editor/sampler_paula_future.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/editor/sampler_paula_future.h",
+      "bytes": 4016,
+      "sha256": "760a6f6ae9cf33656401d6ea827eea1a90caed34559eaee0743e4ebac2415326",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/editor/sampler_paula_internal.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/editor/sampler_paula_internal.h",
+      "bytes": 3013,
+      "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/src/editor/slots.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/src/editor/slots.c",
+      "bytes": 3233,
+      "sha256": "60ab6a784d4bc47285bb436b975cdd6ee0bad4743bdf9f0817837d818645f7fa",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "native-compiled-inputs/tests/sampler_paula_future_test.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/tests/sampler_paula_future_test.c",
+      "bytes": 34094,
+      "sha256": "0891aa9a90c4c329beb798ee97ad1b83b6b95c6110f98ae14c356a1b9a0a8f56",
+      "mode": 420,
+      "role": "Exact canonical compiled source/header; closure and full frozen inventory bound"
+    },
+    "host-declarations/tests/test_sampler_paula_future.py": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/tests/test_sampler_paula_future.py",
+      "bytes": 854,
+      "sha256": "022079dc7769b5a7ca62d31664429a1bec172323c72568ce938dadb0f609d599",
+      "mode": 420,
+      "role": "Actual executed/imported Python module bytes"
+    },
+    "host-declarations/tests/test_sampler_paula.py": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/tests/test_sampler_paula.py",
+      "bytes": 739,
+      "sha256": "931ceb7d5d2748846bc4611f6d71d5bc4c6d123ea6019d313903d7fb5e26d1bd",
+      "mode": 420,
+      "role": "Actual executed/imported Python module bytes"
+    },
+    "host-declarations/tests/test_scheduled_output.py": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/tests/test_scheduled_output.py",
+      "bytes": 655,
+      "sha256": "75f8482facc0951592c8fbeb388f02ae37b75abcc332dd2e16e279792fa777a3",
+      "mode": 420,
+      "role": "Actual executed/imported Python module bytes"
+    },
+    "host-declarations/tests/test_sampler.py": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/tests/test_sampler.py",
+      "bytes": 860,
+      "sha256": "847a13bc1694ed2c8dff8638e54ff6f49660a61734f4d21f4328d719999c35da",
+      "mode": 420,
+      "role": "Actual executed/imported Python module bytes"
+    },
+    "native-declarations/tools/build_core_tests.py": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/tools/build_core_tests.py",
+      "bytes": 38970,
+      "sha256": "1948232ab42449eb518e49ee55276542b102d7461f0f58d8aa273588a20a0d55",
+      "mode": 420,
+      "role": "Actual canonical standalone build declaration or committed flags/runtime recipe"
+    },
+    "native-declarations/tools/build_diagnostic.py": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/tools/build_diagnostic.py",
+      "bytes": 5879,
+      "sha256": "a5a42c8a811eb4e5ce744157afd2715de8f4c9c7d392b3b7b40f1dc6f459a805",
+      "mode": 420,
+      "role": "Actual canonical standalone build declaration or committed flags/runtime recipe"
+    },
+    "native-declarations/tests/test_sampler_paula_future.py": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/tests/test_sampler_paula_future.py",
+      "bytes": 854,
+      "sha256": "022079dc7769b5a7ca62d31664429a1bec172323c72568ce938dadb0f609d599",
+      "mode": 420,
+      "role": "Actual canonical standalone build declaration or committed flags/runtime recipe"
+    },
+    "native-declarations/tests/test_sampler.py": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/tests/test_sampler.py",
+      "bytes": 860,
+      "sha256": "847a13bc1694ed2c8dff8638e54ff6f49660a61734f4d21f4328d719999c35da",
+      "mode": 420,
+      "role": "Actual canonical standalone build declaration or committed flags/runtime recipe"
+    },
+    "native-declarations/tools/build_paula_future_test.py": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3/tools/build_paula_future_test.py",
+      "bytes": 14972,
+      "sha256": "123c7580fa1d3ac79fd2c84abda2dc16e1c27091b38b7e2e642ff99846f07068",
+      "mode": 420,
+      "role": "Exact executed root standalone builder"
+    },
+    "own-overlays/v1/src/editor/sampler.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final/src/editor/sampler.c",
+      "bytes": 35514,
+      "sha256": "5b18d67b6a51aa505131040e3a15425da674334ec66e3fd24faab988d062c984",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "own-overlays/v1/src/editor/sampler_internal.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final/src/editor/sampler_internal.h",
+      "bytes": 3679,
+      "sha256": "8ce04909cd657d0caa6598416cfce2ee91109bf8fde782fc7795d35b116ac3e2",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "own-overlays/v1/src/editor/sampler_paula_future.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final/src/editor/sampler_paula_future.c",
+      "bytes": 22198,
+      "sha256": "fdcfd7b6e6c7c9215bff36448a4a93f2453ebee8a155dcb750cebfb0a794348a",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "own-overlays/v1/src/editor/sampler_paula_future.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final/src/editor/sampler_paula_future.h",
+      "bytes": 4016,
+      "sha256": "760a6f6ae9cf33656401d6ea827eea1a90caed34559eaee0743e4ebac2415326",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "own-overlays/v1/tests/sampler_paula_future_test.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final/tests/sampler_paula_future_test.c",
+      "bytes": 31164,
+      "sha256": "3959b01acc6f336e24e7c38e2874d5a3ce64c31e06175ad281617260f5b734de",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "own-overlays/v1/tests/test_sampler_paula_future.py": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final/tests/test_sampler_paula_future.py",
+      "bytes": 854,
+      "sha256": "022079dc7769b5a7ca62d31664429a1bec172323c72568ce938dadb0f609d599",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "own-overlays/v1/docs/PAULA_FUTURE_OWNER.md": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final/docs/PAULA_FUTURE_OWNER.md",
+      "bytes": 4949,
+      "sha256": "b33050b8b523492d79e0ad2d35e9822e72e39c12a5ecc0e674274673c758dc2b",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "own-overlays/v2/src/editor/sampler.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/editor/sampler.c",
+      "bytes": 35514,
+      "sha256": "5b18d67b6a51aa505131040e3a15425da674334ec66e3fd24faab988d062c984",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "own-overlays/v2/src/editor/sampler_internal.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/editor/sampler_internal.h",
+      "bytes": 3679,
+      "sha256": "8ce04909cd657d0caa6598416cfce2ee91109bf8fde782fc7795d35b116ac3e2",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "own-overlays/v2/src/editor/sampler_paula_future.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/editor/sampler_paula_future.c",
+      "bytes": 22678,
+      "sha256": "4ba81d5e506a669df3cfaf6afbb6b0819070c06119c8c54a1ff09bc9d8944f1f",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "own-overlays/v2/src/editor/sampler_paula_future.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/src/editor/sampler_paula_future.h",
+      "bytes": 4016,
+      "sha256": "760a6f6ae9cf33656401d6ea827eea1a90caed34559eaee0743e4ebac2415326",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "own-overlays/v2/tests/sampler_paula_future_test.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/tests/sampler_paula_future_test.c",
+      "bytes": 34089,
+      "sha256": "e6dc403092270335134bbf850373f4e06593c0fa383dee0ab76cd2b66bbec8d7",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "own-overlays/v2/tests/test_sampler_paula_future.py": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/tests/test_sampler_paula_future.py",
+      "bytes": 854,
+      "sha256": "022079dc7769b5a7ca62d31664429a1bec172323c72568ce938dadb0f609d599",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "own-overlays/v2/docs/PAULA_FUTURE_OWNER.md": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2/docs/PAULA_FUTURE_OWNER.md",
+      "bytes": 5271,
+      "sha256": "b8ef8532da756e5c97fb2cc6d5517539c884ca414fa22a28d89f4dd64dfd8d2c",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "own-overlays/v3/src/editor/sampler.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v3/src/editor/sampler.c",
+      "bytes": 35514,
+      "sha256": "5b18d67b6a51aa505131040e3a15425da674334ec66e3fd24faab988d062c984",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "own-overlays/v3/src/editor/sampler_internal.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v3/src/editor/sampler_internal.h",
+      "bytes": 3679,
+      "sha256": "8ce04909cd657d0caa6598416cfce2ee91109bf8fde782fc7795d35b116ac3e2",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "own-overlays/v3/src/editor/sampler_paula_future.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v3/src/editor/sampler_paula_future.c",
+      "bytes": 22678,
+      "sha256": "4ba81d5e506a669df3cfaf6afbb6b0819070c06119c8c54a1ff09bc9d8944f1f",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "own-overlays/v3/src/editor/sampler_paula_future.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v3/src/editor/sampler_paula_future.h",
+      "bytes": 4016,
+      "sha256": "760a6f6ae9cf33656401d6ea827eea1a90caed34559eaee0743e4ebac2415326",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "own-overlays/v3/tests/sampler_paula_future_test.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v3/tests/sampler_paula_future_test.c",
+      "bytes": 34094,
+      "sha256": "0891aa9a90c4c329beb798ee97ad1b83b6b95c6110f98ae14c356a1b9a0a8f56",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "own-overlays/v3/tests/test_sampler_paula_future.py": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v3/tests/test_sampler_paula_future.py",
+      "bytes": 854,
+      "sha256": "022079dc7769b5a7ca62d31664429a1bec172323c72568ce938dadb0f609d599",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "own-overlays/v3/docs/PAULA_FUTURE_OWNER.md": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v3/docs/PAULA_FUTURE_OWNER.md",
+      "bytes": 5271,
+      "sha256": "b8ef8532da756e5c97fb2cc6d5517539c884ca414fa22a28d89f4dd64dfd8d2c",
+      "mode": 420,
+      "role": "Exact seven-path source overlay history"
+    },
+    "baseline-inputs/src/editor/sampler.c": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/baseline/src/editor/sampler.c",
+      "bytes": 34124,
+      "sha256": "95dbc2574822a940a609f86ed32b615b2f6aaef094e714990bb236a8a82a154e",
+      "mode": 420,
+      "role": "Exact baseline bytes of the two existing modified paths"
+    },
+    "baseline-inputs/src/editor/sampler_internal.h": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/baseline/src/editor/sampler_internal.h",
+      "bytes": 3138,
+      "sha256": "9f04d1d01a18f737bdbe29fc36cb7b91c6270abf33d900b07f13c17d62044f33",
+      "mode": 420,
+      "role": "Exact baseline bytes of the two existing modified paths"
+    },
+    "independent/protracker-future-native-builder-independent-review.json": {
+      "original_path": "/private/tmp/protracker-future-native-builder-independent-review.json",
+      "bytes": 1863,
+      "sha256": "aa5e27530768a509a3d7098ad3c1cb4186058c186eb93f91f5ac7a62d06f5004",
+      "mode": 420,
+      "role": "Actual independent source/host/equivalence/standalone builder review"
+    },
+    "independent/protracker-paula-future-owner-v2-independent-review.json": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-v2-independent-review.json",
+      "bytes": 33285,
+      "sha256": "f9913844339ccdee84ee7ff816939b1573cd6139bac0e3bbb1fa7538f16e5915",
+      "mode": 420,
+      "role": "Actual independent source/host/equivalence/standalone builder review"
+    },
+    "independent/protracker-paula-future-owner-v3-format-independent-review.json": {
+      "original_path": "/private/tmp/protracker-paula-future-owner-v3-format-independent-review.json",
+      "bytes": 2284,
+      "sha256": "5c68f00f41400313686d8e483e592b49d36b3ce627617f7f3dd6f36509c3d749",
+      "mode": 420,
+      "role": "Actual independent source/host/equivalence/standalone builder review"
+    },
+    "independent/native-build-review.json": {
+      "original_path": "/private/tmp/protracker-paula-future-native-portability-independent-review-v2.json",
+      "bytes": 6044,
+      "sha256": "8b2de2d2e78f05eebd58506126c252d84ba21314f5296a779bb8efc4c0b08dbe",
+      "mode": 420,
+      "role": "Actual separately supplied native crossbuild independent review"
+    },
+    "independent/native-review-initial-schema-history.json": {
+      "original_path": "/private/tmp/protracker-paula-future-native-portability-independent-review-v1-schema-failure.json",
+      "bytes": 966,
+      "sha256": "c90116fb364d58e8b5ea4bc4585f0b1ada6adeea1fa90326d0eaebeb45649e95",
+      "mode": 420,
+      "role": "Original independent audit schema error; no producer/compiler/target rerun"
+    },
+    "root/root-import.json": {
+      "original_path": "/private/tmp/protracker-native-foundation-current-root-YYUDKM4i/future-root-import.json",
+      "bytes": 2294,
+      "sha256": "f30d3e369cd51e3bf39828f0177d9837076d4da472bfd79ee8f4b97436bd90ad",
+      "mode": 420,
+      "role": "Exact root-reported eight-path import and protected16 preservation; no compiler/target operation"
+    },
+    "root/root-import-initial-schema-history.json": {
+      "original_path": "/private/tmp/protracker-native-foundation-current-root-YYUDKM4i/future-root-import-initial-schema-history.json",
+      "bytes": 283,
+      "sha256": "97af2ebded07d7c3e5e193ecec07871681ba70abc7b3b7a3b48b35b5daa4eca3",
+      "mode": 420,
+      "role": "Original root import schema error before mutations; later successful import is separate"
+    },
+    "packaging/packager.py": {
+      "original_path": "/private/tmp/protracker-package-paula-future-owner-v2.py",
+      "bytes": 23178,
+      "sha256": "09e9a55241abafd4f30d759c541ee59145a4505da56d88e2c74d66e3665ae20c",
+      "mode": 420,
+      "role": "Exact host-only evidence packaging helper; no product/runtime execution"
+    }
+  }
+}

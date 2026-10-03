@@ -1,0 +1,113 @@
+{
+  "scope": "Host evidence packaging only; no test/compiler/native target/Guest/lock/browser/network/Git operation",
+  "base_commit": "c055a101529ad5fbeaecb492dd831fb0772ec1a4",
+  "base_tree": "505c4faec2d461cd4ff52b7bbf2ebf2acdb9c16c",
+  "member_count": 355,
+  "original_bytes": 14764092,
+  "payload_bytes": 4211445,
+  "payload_sha256": "4c78c119b3df27cbdd11129bc33fe92f846304f6cecc99d8df1ac3368c3c136b",
+  "complete_source_tree_verification": [
+    {
+      "source": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/baseline",
+      "count": 7973,
+      "ordered_path_hash_fingerprint": "121fbd78a31e24206ba6a39cec9d9f33c83e6b6c7d9282f9f037ec426205ee24"
+    },
+    {
+      "source": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final",
+      "count": 7978,
+      "ordered_path_hash_fingerprint": "0f9d05361c68b270ab9861cc7407d5e986e7b3f7d2656f1e6891833590783cd9"
+    },
+    {
+      "source": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v2",
+      "count": 7978,
+      "ordered_path_hash_fingerprint": "2d1db152f64c11e59ca31b82bf4b82e540805133ef43947e7df7211fe734d259"
+    },
+    {
+      "source": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-final-v3",
+      "count": 7978,
+      "ordered_path_hash_fingerprint": "fed59179c2e2eacbed252bffedfe5d043c8cc0d94e905e0576a03f31bdcd0114"
+    },
+    {
+      "source": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v2",
+      "count": 7979,
+      "ordered_path_hash_fingerprint": "1b7b79ca07f5bc667780a9813c9df16fb27eba48c792be17e57ada66a3c38e32"
+    },
+    {
+      "source": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/source-native-final-v3",
+      "count": 7979,
+      "ordered_path_hash_fingerprint": "6560b44a0e520e575e3c2ff5cea295487f5d32a6b65bf80e2750323304b75e60"
+    }
+  ],
+  "baseline_tar_fingerprint": {
+    "path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/committed.tar",
+    "bytes": 103956480,
+    "sha256": "cfbbd34ee5de927f79c6753833d96a96bb18c15bf699ba001066906deae9cbf6",
+    "mode": 420
+  },
+  "host": {
+    "groups": 3,
+    "commands_RC0": 6,
+    "canonical_inputs": 52,
+    "system_inputs": 105,
+    "products": 3,
+    "generated_inputs": 0,
+    "report": {
+      "path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/host-final-v2/host-checks.json",
+      "bytes": 144584,
+      "sha256": "1f56286bc0dfc78e759c9b8b36fb3cd1d5e5e2f484416e4d37000b22ee267175",
+      "mode": 420
+    },
+    "scope": "ASan/UBSan software-only synthetic future backend; final-v2 runtime proof"
+  },
+  "native": {
+    "ordered_TUs": 22,
+    "canonical_inputs": 50,
+    "SDK_inputs": 32,
+    "runtime_inputs": 7,
+    "commands_RC0": 33,
+    "manifest": {
+      "path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/manifest.json",
+      "bytes": 46300,
+      "sha256": "3bbab345029d7faf1342b7514124360635a22eab02cdf5f3a60d1a53f568bf37",
+      "mode": 420
+    },
+    "binary": {
+      "path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v3/PTPaulaFutureTriggerTest",
+      "bytes": 150852,
+      "sha256": "f6247401a54eae94cb36adf07aee9aac2ee70acd4085a0e2fedde51db5624c3f"
+    },
+    "scope": "Crossbuild only; default SDK assertions/HUNK; NOT RUN"
+  },
+  "original_native_compiler_failure": {
+    "path": "/private/tmp/protracker-paula-future-owner-vpbs9_ci/native-final-v2/manifest.json",
+    "bytes": 34884,
+    "sha256": "6bf0ca91641baa4f3a264df20833181994e17022c9e6f583093d1e985421c232",
+    "mode": 420
+  },
+  "native_independent_review": {
+    "path": "/private/tmp/protracker-paula-future-native-portability-independent-review-v2.json",
+    "bytes": 6044,
+    "sha256": "8b2de2d2e78f05eebd58506126c252d84ba21314f5296a779bb8efc4c0b08dbe",
+    "mode": 420
+  },
+  "root_import": {
+    "path": "/private/tmp/protracker-native-foundation-current-root-YYUDKM4i/future-root-import.json",
+    "bytes": 2294,
+    "sha256": "f30d3e369cd51e3bf39828f0177d9837076d4da472bfd79ee8f4b97436bd90ad",
+    "mode": 420
+  },
+  "packager": {
+    "path": "/private/tmp/protracker-package-paula-future-owner-v2.py",
+    "bytes": 23178,
+    "sha256": "09e9a55241abafd4f30d759c541ee59145a4505da56d88e2c74d66e3665ae20c",
+    "mode": 420
+  },
+  "duplicate_archive_equal": true,
+  "complete_tar_reader_verified": true,
+  "all_original_bytes_modes_verified": true,
+  "native_execution": false,
+  "physical_acceptance": false,
+  "IRQ_acceptance": false,
+  "audio_acceptance": false,
+  "hardware_timing_acceptance": false
+}

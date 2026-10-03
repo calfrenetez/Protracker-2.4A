@@ -100,6 +100,35 @@ local before-images. The dirty shared core-build recipe remains untouched. See
 [host evidence](../evidence/enhanced-editor/scheduled-output-host/README.md) and
 [compiler evidence](../evidence/enhanced-editor/scheduled-output-native-build/README.md).
 
+## Independent future Paula trigger owners — 3 October 2026
+
+The task-side `sampler_paula_future` pool prepares selected signed8 playback copies
+from authoritative 8/16/24-bit mono or stereo masters. It bounds control storage,
+Chip copy storage and one through eight retained owners separately. Each step
+performs one transition, at most 4096 master bytes or at most 256 Chip bytes;
+partial copies remain private. Every submitted trigger independently retains its
+genuine master version and cache lease until confirmed all-reader retirement.
+A retrigger can acquire independent refs to an earlier owner's exact cache HIT,
+so retiring either event cannot release the other's storage. Whole-batch refusal
+preserves the owner, queue and outputs; uncertain submission retains ownership.
+
+Only TRIGGER is supported by this bridge. CONTROL/STOP require positively
+observed active-reader identities and conditional targets, which remain unfinished.
+Queue acceptance, held sample identity and cache reuse do not establish activation.
+The bridge is separate from existing exclusive Paula voices and prepared objects;
+song, native output and IRQ integration remain open.
+
+Three ASan/UBSan host groups pass with precision/channel/padding checks, real
+sampler/cache jobs, independent retirement, stale edits/undo/routes, bounded
+pressure, cancellation and full-capacity alias before-images. One fixture-only
+newline corrects a strict 68k compiler warning with unchanged C tokens and all
+production bytes. The standalone portability build passes with enabled SDK
+assertions: 22 translation units, 50 canonical inputs, 32 SDK inputs and seven
+runtime inputs produce a 150,852-byte HUNK. This candidate has not run natively.
+Injected allocators/backends establish neither Exec memory placement nor DMA,
+device, interrupt, timing or audio acceptance. See [owner contract](PAULA_FUTURE_OWNER.md)
+and [host/compiler evidence](../evidence/enhanced-editor/paula-future-trigger-owner/README.md).
+
 ## Physical MOD export memory qualification — 3 October 2026
 
 The exact 70,824-byte MOD fixture passed once on the real A1200 after its separate
@@ -622,7 +651,7 @@ software implementation from the remaining integration and hardware gates.
 | Requirement | Implemented software | Still required |
 | --- | --- | --- |
 | Authoritative8/16/24-bit masters | Queried, bounded native Fast-RAM pool; precision-preserving sampler versions, processing, history and source pins. Fast-equipped machines fail rather than spill enhanced allocations into Chip RAM. | Physical memory-pressure/endurance measurements. |
-| Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition and one-to-four-track song playback preserve master precision; song preparation excludes unreferenced masters from both Fast staging and Chip caches. Dedicated arbitrary-track cache and injected four-voice owner preserve stable slots and retain leases through uncertain start/control/stop. Full16-track shared-sequence capability gate validates explicit clock/stereo/volume and supported sample geometry before output. Bounded caller-workspace dispatch prepares all trigger leases before any injected callback; refusal preserves existing readers and runtime failure blocks replay while retaining unconfirmed readers. A cancellable session retains the same fully checked sequence, selectively pins masters in bounded copy steps, claims exclusive voice ownership and retains pins through failed stop/quiescence. Its editor barrier vetoes edits, imports, undo and disposal until confirmed cleanup. Separate preparation/apply retains candidate leases and supports optional staged song/editor output without cache conversion during apply. A private prepared-master Chip job now converts at most256 output bytes per step and publishes only on completion; incremental prepared song/editor staging now uses that job. | Shared mixed-backend scheduling and native dispatch beyond the one-to-four-track Paula bridge; physical sound/performance acceptance. |
+| Optional Paula copies | Selected8-bit Chip allocations, pinned during use; restart reload/reuse, eviction and guarded stop/release. Enhanced sample audition and one-to-four-track song playback preserve master precision; song preparation excludes unreferenced masters from both Fast staging and Chip caches. Dedicated arbitrary-track cache and injected four-voice owner preserve stable slots and retain leases through uncertain start/control/stop. Full16-track shared-sequence capability gate validates explicit clock/stereo/volume and supported sample geometry before output. Bounded caller-workspace dispatch prepares all trigger leases before any injected callback; refusal preserves existing readers and runtime failure blocks replay while retaining unconfirmed readers. A cancellable session retains the same fully checked sequence, selectively pins masters in bounded copy steps, claims exclusive voice ownership and retains pins through failed stop/quiescence. Its editor barrier vetoes edits, imports, undo and disposal until confirmed cleanup. Separate preparation/apply retains candidate leases and supports optional staged song/editor output without cache conversion during apply. A private prepared-master Chip job now converts at most256 output bytes per step and publishes only on completion; incremental prepared song/editor staging now uses that job. Independently held future TRIGGER owners now retain genuine master/cache refs through confirmed retirement; active-reader CONTROL/STOP lineage remains open. | Shared mixed-backend scheduling and native dispatch beyond the one-to-four-track Paula bridge; physical sound/performance acceptance. |
 | AmiGUS wavetable copies | Versioned evictable resource pool, sampler revision/master-pin bridge, bounded 16-voice lease owner with validated rate/loop/address plans, mono sequencer trigger/control/stop dispatch, preflight-gated master-pinned sequence ownership, editor veto/retry barriers and injected callbacks, 8/16-bit conversion and bounded address allocator/chunk uploader behind an injected register bus; failure/pinning tests. | Verified card capacity and native voice dispatcher remain open. Native sample-RAM bus binding and explicit wavetable reservation/cache lifetime are implemented; synthetic native/host checks pass. Real sample-RAM transfer, completion and voice-stop are unqualified; the read-only status candidate passes exact emulator and separately coordinated realMini global-read/release checks; those values establish neither capacity nor all-voice stop. |
 | Direct24-bit Studio | Master-pinned mixer, audited sequence, sampler/editor ownership, bounded queue/pump and integrated PCM-session owner with capacity-bounded prefill and explicit start acknowledgement; optional reservation lease retained through reset and adapter quiescence. Up to16 voice slots are a software bound. | Native PLAY/output wiring, verified hardware capabilities and sustainable physical voice-count/timing evidence. |
 | Master-preserving persistence | Bounded enhanced-project/sample saving and explicit classic conversion; private EFx exports/bounce never replace masters. Explicit new-file recovery snapshots and staged identity-checked restoration preserve all master precision. | Native opt-in configuration, idle scheduling, bounded retention, read-only discovery, explicit recovery UI and exact save are implemented and emulator-tested; preferences-panel controls, real crash/endurance and physical acceptance remain. |

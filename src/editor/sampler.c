@@ -43,6 +43,33 @@ int pt_sampler_version_output_disjoint(const struct pt_sample_version *v,const v
     return !backing || (!backing->backing &&
         !output_overlap(out,bytes,backing,sizeof(*backing)) && sample_output_disjoint(&backing->sample,out,bytes));
 }
+static int version_span_add(struct pt_sampler_storage_span *a,unsigned *n,const void *p,size_t bytes)
+{
+    if(!bytes)return 1;
+    if(!p || bytes>UINTPTR_MAX-(uintptr_t)p || *n==PT_SAMPLER_VERSION_SPANS)return 0;
+    a[*n].data=p;a[(*n)++].bytes=bytes;return 1;
+}
+int pt_sampler_version_spans(const struct pt_sample_version *v,
+    struct pt_sampler_storage_span *out,unsigned capacity,unsigned *count)
+{
+    struct pt_sampler_storage_span a[PT_SAMPLER_VERSION_SPANS];unsigned n=0,i;
+    const struct pt_sample_version *p=v;
+    if(!v || !out || !count)return 0;
+    for(i=0;i<2 && p;++i) {
+        if(p->sample.pcm.capacity>SIZE_MAX/sizeof(int32_t) ||
+           !version_span_add(a,&n,p,sizeof(*p)) ||
+           !version_span_add(a,&n,p->sample.pcm.data,p->sample.pcm.capacity*sizeof(int32_t)) ||
+           !version_span_add(a,&n,p->sample.slices,(size_t)p->sample.slice_count*sizeof(uint32_t)))return 0;
+        if(i && p->backing)return 0;
+        p=p->backing;
+    }
+    if(n>capacity || !pt_sampler_output_disjoint(v->owner,out,n*sizeof(*out)) ||
+       !pt_sampler_output_disjoint(v->owner,count,sizeof(*count)) ||
+       !pt_sampler_version_output_disjoint(v,out,n*sizeof(*out)) ||
+       !pt_sampler_version_output_disjoint(v,count,sizeof(*count)) ||
+       output_overlap(out,n*sizeof(*out),count,sizeof(*count)))return 0;
+    memcpy(out,a,n*sizeof(*out));*count=n;return 1;
+}
 int pt_sampler_output_disjoint(const struct pt_sampler *s,const void *out,size_t bytes)
 {
     unsigned i;

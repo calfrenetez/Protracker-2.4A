@@ -40,4 +40,12 @@ void pt_sampler_pin_job_cancel(struct pt_sampler_pin_job *);
 int pt_sampler_version_output_disjoint(const struct pt_sample_version *,const void *,size_t);
 int pt_sampler_output_disjoint(const struct pt_sampler *,const void *,size_t);
 int pt_sampler_pin_job_output_disjoint(const struct pt_sampler_pin_job *,const void *,size_t);
+/* Enumerate genuine held version storage without exposing its private layout.
+ * Metadata only; <=6 header/PCM/marker spans including a flat backing. Outputs
+ * are unchanged on refusal and must be disjoint from every named source span
+ * and each other. Zero-length spans are omitted. Sampler/context stays alive. */
+#define PT_SAMPLER_VERSION_SPANS 6
+struct pt_sampler_storage_span {const void *data;size_t bytes;};
+int pt_sampler_version_spans(const struct pt_sample_version *,
+    struct pt_sampler_storage_span *,unsigned,unsigned *);
 #endif

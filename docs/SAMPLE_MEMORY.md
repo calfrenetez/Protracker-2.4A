@@ -5,6 +5,24 @@ The enhanced project owns the authoritative sample, including its declared
 elements in the declared precision; 24-bit samples retain their low eight bits.
 Playback representations must never become the project's source of truth.
 
+## PCM frame-count output master protection — 3 October 2026
+
+The public resampled-frame count now refuses an output overlapping the borrowed
+PCM descriptor or its full declared master capacity, including unused storage.
+Checked metadata guards read no audio or padding and allocate nothing. Existing
+shape, NULL/rate and count-capacity refusal precedence remains unchanged; alias
+refusals preserve the source and output. Empty zero-capacity PCM still returns
+zero. Nonzero capacity with NULL backing or an unrepresentable span fails closed.
+
+The identical four-case sanitizer probe changes from baseline source/header
+corruption to ALIAS refusal with unchanged bytes. PCM and filter sanitizer groups
+pass, as do the existing sampler and Paula preview callers and focused empty
+8/16/24-bit mono/stereo caller checks. One pinned portable PTPcmTest cross-build
+passes with active assertions. Native execution is prepared, not run, while the
+shared target is reserved by another task; no allocator, physical, audio, timing
+or listening acceptance is inferred. See
+[evidence/enhanced-editor/pcm-frame-output-safety](../evidence/enhanced-editor/pcm-frame-output-safety/README.md).
+
 ## Physical master-save and Fast RAM qualification — 3 October 2026
 
 The exact native streamed-project fixture passed on the real A1200 using the
@@ -42,7 +60,8 @@ the complete MOD/probe compile dependencies are byte-identical to the prior MOD
 source and exclude those WAV files. The original host dependency logger is
 unchanged; a separate full-header preprocessor audit records every49 translation
 unit closure and132 system-header hashes. One pinned Amiga cross-build passes.
-Native MOD execution is pending while the distinct WAV cleanup hold is unresolved.
+Native MOD execution remains pending. Later recovery released the distinct WAV
+cleanup hold; a fresh MOD candidate must include subsequent PCM source changes.
 Host/build, native allocator/file checks, physical audio, timing and listening
 acceptance remain separate. Ordinary streamed Save already uses private outputs;
 this closes public caller-output boundaries without changing classic MOD bytes.

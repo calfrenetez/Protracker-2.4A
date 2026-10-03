@@ -1,0 +1,148 @@
+{
+  "scope": "Persisted original host/build/preparation packet and root read-only audit; native execution NOT RUN",
+  "files": [
+    {
+      "name": "README.md",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared/README.md",
+      "bytes": 3407,
+      "sha256": "37c42fffdc587c77bf46b9dc277403a82252c6f3c8b79a5f9f1a188f050231c9",
+      "kind": "byte-exact-copy"
+    },
+    {
+      "name": "SHA256SUMS",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared/SHA256SUMS",
+      "bytes": 1273,
+      "sha256": "c07e4d04b7672fc76be7ebe5ace4152b5b5ae5309ad62206a9c95810d9b795a6",
+      "kind": "byte-exact-copy"
+    },
+    {
+      "name": "baseline-manifest.json.gz",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared/baseline-manifest.json.gz",
+      "bytes": 773211,
+      "sha256": "8efe0fa23e210b9c35195f48404d16b58b1e1303efdcf32a36480e0c06258793",
+      "kind": "byte-exact-copy"
+    },
+    {
+      "name": "baseline-probe.json",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared/baseline-probe.json",
+      "bytes": 16760,
+      "sha256": "33044e0256673ee483c8030fd971e1240a417f70c1a2ba5c836c21d6befa0a5f",
+      "kind": "byte-exact-copy"
+    },
+    {
+      "name": "candidate-probe.json",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared/candidate-probe.json",
+      "bytes": 16791,
+      "sha256": "1bb9cb6e96aef4d0aea0fae83c30d9b80a6b26e474aad979770ec9d8492ff99e",
+      "kind": "byte-exact-copy"
+    },
+    {
+      "name": "handoff.json",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared/handoff.json",
+      "bytes": 10277,
+      "sha256": "4028b6891a009edbaa73b06d814b06637b89c6ea89ecabba53b187537ab77e90",
+      "kind": "byte-exact-copy"
+    },
+    {
+      "name": "host-callers.json.gz",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared/host-callers.json.gz",
+      "bytes": 25837,
+      "sha256": "e9f2a8bd47fc117087f1ac980b6a1cca0b69908755d831d84c903ef7e5bb23ad",
+      "kind": "byte-exact-copy"
+    },
+    {
+      "name": "host-checks.json.gz",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared/host-checks.json.gz",
+      "bytes": 9293,
+      "sha256": "891a2c2412c5d0df69876345b86688419eae2cb264c2b16fc33a8c3474ba7387",
+      "kind": "byte-exact-copy"
+    },
+    {
+      "name": "member-index.json.gz",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared/member-index.json.gz",
+      "bytes": 12521,
+      "sha256": "d2dd30de4ed04c79d256c3f0627647f287026404c93631db6b1ffdc2f894af97",
+      "kind": "byte-exact-copy"
+    },
+    {
+      "name": "mock-proof.json",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared/mock-proof.json",
+      "bytes": 886,
+      "sha256": "40a8aa73eff04c97f2f8315b64f77231ec92651d06bcbcd24ee1519f8a6ce86a",
+      "kind": "byte-exact-copy"
+    },
+    {
+      "name": "native-manifest.json.gz",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared/native-manifest.json.gz",
+      "bytes": 5166,
+      "sha256": "b121542f5795ecf3fc31bd2ee262efc9a465084cea44209f793ae712833153b8",
+      "kind": "byte-exact-copy"
+    },
+    {
+      "name": "packager.py",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared/packager.py",
+      "bytes": 21522,
+      "sha256": "967a99c1e1ac6324b4ac1629ee1e01384a39ae7a69a03ad7109899b9087b7d2a",
+      "kind": "byte-exact-copy"
+    },
+    {
+      "name": "payload.tar.gz",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared/payload.tar.gz",
+      "bytes": 2743884,
+      "sha256": "0d31994c23130e0e1f16f19d8e9b71b91a15c7b5779cb4e8787c947dca68c0a3",
+      "kind": "byte-exact-copy"
+    },
+    {
+      "name": "provenance.json",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared/provenance.json",
+      "bytes": 6373,
+      "sha256": "34fcb783335c65a56647fd1a50f91cbd7619872d6a166dd4d5f123dc8dcccd46",
+      "kind": "byte-exact-copy"
+    },
+    {
+      "name": "qualifier-prepared.json",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared/qualifier-prepared.json",
+      "bytes": 3041,
+      "sha256": "7a3b5303ca51c3843c7a90bdf116ea6b2e468e23a8da8c0ab68a98d1fde80663",
+      "kind": "byte-exact-copy"
+    },
+    {
+      "name": "source-manifest.json.gz",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared/source-manifest.json.gz",
+      "bytes": 773624,
+      "sha256": "89e9e6da16c151703bcc846289a32a3b7de3f6e9d69be4a11205c9eeb0d9d574",
+      "kind": "byte-exact-copy"
+    },
+    {
+      "name": "packaging-qa.json",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared-QA.json",
+      "bytes": 1514,
+      "sha256": "da104096ae4d402e31e03989cc5a107745c13f8314f35d404e8f18a44bf93e7a",
+      "kind": "byte-exact-copy"
+    },
+    {
+      "name": "root-current-source-check.json",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/current-source-check.json",
+      "bytes": 1823,
+      "sha256": "f1605402060c32fb6b26a6d16c52ad438740b2dfbaf3b123190229d9e2e905b1",
+      "kind": "byte-exact-copy"
+    },
+    {
+      "name": "root-packet-audit.json",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/prepared-packet-audit.json",
+      "bytes": 668,
+      "sha256": "2c9e090154582332575cda4b127370852c51f043327eb15d0e3910d43da63d6c",
+      "kind": "byte-exact-copy"
+    },
+    {
+      "name": "ROOT_REVIEW.md",
+      "bytes": 1687,
+      "sha256": "fa06ce33fc9231feebbf1f838e68e01c76e1e283e5692d6a83b2640af19fa7ee",
+      "kind": "authored-root-scope"
+    }
+  ],
+  "original_packet_files": 16,
+  "original_archive_members": 240,
+  "source_overlays": 3,
+  "native_status": "NOT_RUN"
+}

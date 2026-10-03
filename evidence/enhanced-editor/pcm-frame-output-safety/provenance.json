@@ -1,0 +1,167 @@
+{
+  "scope": "Private compact evidence packaging only; no tests/builds/native execution/source/repository/target operation.",
+  "helper": {
+    "path": "/private/tmp/package_pcm_frame_output_safety_v2.py",
+    "bytes": 21522,
+    "sha256": "967a99c1e1ac6324b4ac1629ee1e01384a39ae7a69a03ad7109899b9087b7d2a",
+    "mode": 420
+  },
+  "records": [
+    {
+      "destination": "member-index.json.gz",
+      "kind": "authored-lossless-gzip-index",
+      "bytes": 12521,
+      "sha256": "d2dd30de4ed04c79d256c3f0627647f287026404c93631db6b1ffdc2f894af97",
+      "uncompressed_bytes": 77005,
+      "uncompressed_sha256": "2a55d869a4c17f9bb2f18220db8e33e6878e4fae411b3619fd1c449d8bcdb96b"
+    },
+    {
+      "destination": "payload.tar.gz",
+      "kind": "deterministic-tar-gzip-derivation",
+      "member_count": 240,
+      "original_bytes": 10629397,
+      "bytes": 2743884,
+      "sha256": "0d31994c23130e0e1f16f19d8e9b71b91a15c7b5779cb4e8787c947dca68c0a3"
+    },
+    {
+      "destination": "baseline-manifest.json.gz",
+      "kind": "lossless-gzip-derivation",
+      "origin": {
+        "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline-manifest.json",
+        "bytes": 3142744,
+        "sha256": "2b9a35b1fd7e0929ae5f31246deedef99b09e75c8436fb427834746a10eca67c",
+        "mode": 420
+      },
+      "bytes": 773211,
+      "sha256": "8efe0fa23e210b9c35195f48404d16b58b1e1303efdcf32a36480e0c06258793"
+    },
+    {
+      "destination": "source-manifest.json.gz",
+      "kind": "lossless-gzip-derivation",
+      "origin": {
+        "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/source-manifest.json",
+        "bytes": 3143590,
+        "sha256": "b88837bae2b7767cced5ad5a6c030306ea4ac2bc4d73e8c6f433dd41ca4d7ddc",
+        "mode": 420
+      },
+      "bytes": 773624,
+      "sha256": "89e9e6da16c151703bcc846289a32a3b7de3f6e9d69be4a11205c9eeb0d9d574"
+    },
+    {
+      "destination": "host-checks.json.gz",
+      "kind": "lossless-gzip-derivation",
+      "origin": {
+        "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/host-final/host-checks.json",
+        "bytes": 64291,
+        "sha256": "f5b83f9cf51fd7aba851a444761c187df2347e28c59bf829b873858e1e222187",
+        "mode": 420
+      },
+      "bytes": 9293,
+      "sha256": "891a2c2412c5d0df69876345b86688419eae2cb264c2b16fc33a8c3474ba7387"
+    },
+    {
+      "destination": "host-callers.json.gz",
+      "kind": "lossless-gzip-derivation",
+      "origin": {
+        "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/host-callers-final/host-checks.json",
+        "bytes": 126278,
+        "sha256": "aab2332ff0897ae87ac2d51e3b7d86f5381ffa3f4793e51be5ef3ad44ea957d1",
+        "mode": 420
+      },
+      "bytes": 25837,
+      "sha256": "e9f2a8bd47fc117087f1ac980b6a1cca0b69908755d831d84c903ef7e5bb23ad"
+    },
+    {
+      "destination": "native-manifest.json.gz",
+      "kind": "lossless-gzip-derivation",
+      "origin": {
+        "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/native-final/manifest.json",
+        "bytes": 24434,
+        "sha256": "846a791f9cc4e2d7556bc1c48d58dc2c81a3274e2f8e07de5090c112f98014b5",
+        "mode": 420
+      },
+      "bytes": 5166,
+      "sha256": "b121542f5795ecf3fc31bd2ee262efc9a465084cea44209f793ae712833153b8"
+    },
+    {
+      "destination": "baseline-probe.json",
+      "kind": "exact-copy",
+      "origin": {
+        "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline-probe/result.json",
+        "bytes": 16760,
+        "sha256": "33044e0256673ee483c8030fd971e1240a417f70c1a2ba5c836c21d6befa0a5f",
+        "mode": 420
+      },
+      "bytes": 16760,
+      "sha256": "33044e0256673ee483c8030fd971e1240a417f70c1a2ba5c836c21d6befa0a5f"
+    },
+    {
+      "destination": "candidate-probe.json",
+      "kind": "exact-copy",
+      "origin": {
+        "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/candidate-probe/result.json",
+        "bytes": 16791,
+        "sha256": "1bb9cb6e96aef4d0aea0fae83c30d9b80a6b26e474aad979770ec9d8492ff99e",
+        "mode": 420
+      },
+      "bytes": 16791,
+      "sha256": "1bb9cb6e96aef4d0aea0fae83c30d9b80a6b26e474aad979770ec9d8492ff99e"
+    },
+    {
+      "destination": "handoff.json",
+      "kind": "exact-copy",
+      "origin": {
+        "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/handoff-final.json",
+        "bytes": 10277,
+        "sha256": "4028b6891a009edbaa73b06d814b06637b89c6ea89ecabba53b187537ab77e90",
+        "mode": 420
+      },
+      "bytes": 10277,
+      "sha256": "4028b6891a009edbaa73b06d814b06637b89c6ea89ecabba53b187537ab77e90"
+    },
+    {
+      "destination": "qualifier-prepared.json",
+      "kind": "exact-copy",
+      "origin": {
+        "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier/prepared.json",
+        "bytes": 3041,
+        "sha256": "7a3b5303ca51c3843c7a90bdf116ea6b2e468e23a8da8c0ab68a98d1fde80663",
+        "mode": 420
+      },
+      "bytes": 3041,
+      "sha256": "7a3b5303ca51c3843c7a90bdf116ea6b2e468e23a8da8c0ab68a98d1fde80663"
+    },
+    {
+      "destination": "mock-proof.json",
+      "kind": "exact-copy",
+      "origin": {
+        "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier/mock-proof.json",
+        "bytes": 886,
+        "sha256": "40a8aa73eff04c97f2f8315b64f77231ec92651d06bcbcd24ee1519f8a6ce86a",
+        "mode": 420
+      },
+      "bytes": 886,
+      "sha256": "40a8aa73eff04c97f2f8315b64f77231ec92651d06bcbcd24ee1519f8a6ce86a"
+    },
+    {
+      "destination": "packager.py",
+      "kind": "exact-copy",
+      "origin": {
+        "path": "/private/tmp/package_pcm_frame_output_safety_v2.py",
+        "bytes": 21522,
+        "sha256": "967a99c1e1ac6324b4ac1629ee1e01384a39ae7a69a03ad7109899b9087b7d2a",
+        "mode": 420
+      },
+      "bytes": 21522,
+      "sha256": "967a99c1e1ac6324b4ac1629ee1e01384a39ae7a69a03ad7109899b9087b7d2a"
+    },
+    {
+      "destination": "README.md",
+      "kind": "authored-scope-note",
+      "bytes": 3407,
+      "sha256": "37c42fffdc587c77bf46b9dc277403a82252c6f3c8b79a5f9f1a188f050231c9"
+    }
+  ],
+  "source_inventory_verification": "Both immutable inventories matched before and after packaging, every source hash retained without field substitution",
+  "member_index_sha256": "d2dd30de4ed04c79d256c3f0627647f287026404c93631db6b1ffdc2f894af97"
+}

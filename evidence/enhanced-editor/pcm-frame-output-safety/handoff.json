@@ -1,0 +1,251 @@
+{
+  "scope": "Private host sanitizer validation and pinned Amiga cross-build of PCM resampled-frame output protection; no native execution, repository change, target, physical, audio, timing or listening acceptance",
+  "base_commit": "8969da594039fa23e43ab1d1ed0907d250b596f3",
+  "base_tree": "c9e522973e2b4b4943eec9b0bfd5639f4eaeadc4",
+  "source_files": 7633,
+  "baseline_manifest": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline-manifest.json",
+    "bytes": 3142744,
+    "sha256": "2b9a35b1fd7e0929ae5f31246deedef99b09e75c8436fb427834746a10eca67c"
+  },
+  "source_manifest": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/source-manifest.json",
+    "bytes": 3143590,
+    "sha256": "b88837bae2b7767cced5ad5a6c030306ea4ac2bc4d73e8c6f433dd41ca4d7ddc"
+  },
+  "source": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/source-final",
+  "own_overlays": {
+    "src/core/pcm.c": {
+      "before_sha256": "0bd9cc86e3eab3b077484bbcb20675eab0a648a76a18adabe4203c18f3b713a2",
+      "after_sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266"
+    },
+    "src/core/pcm.h": {
+      "before_sha256": "6b1a14d9010f71b693c81c066e619343bb9b4cee0f4b6723347f34de2f5e12fb",
+      "after_sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e"
+    },
+    "tests/pcm_test.c": {
+      "before_sha256": "824f40074b69f15cd4cc650a0ba09cdde63906f454832c7344c350db3929cd23",
+      "after_sha256": "51165214f735477fce9730208fd3332633985b50ffe689078744a7f4dcdef9c3"
+    }
+  },
+  "patch": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/final.patch",
+    "bytes": 7642,
+    "sha256": "994ba0c414cd7ad6829573789456ead319c4b63bf886daa0f8acc8cb22bf3041"
+  },
+  "host_report": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/host-final/host-checks.json",
+    "bytes": 64291,
+    "sha256": "f5b83f9cf51fd7aba851a444761c187df2347e28c59bf829b873858e1e222187"
+  },
+  "host_groups": [
+    {
+      "module": "test_pcm",
+      "tests": 1,
+      "passed": true,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 0.915976916992804
+    },
+    {
+      "module": "test_filter",
+      "tests": 1,
+      "passed": true,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 0.6663703329977579
+    }
+  ],
+  "host_elapsed_s": 2.360279916989384,
+  "host_compile_runtime_commands": 4,
+  "host_full_M_closures": 6,
+  "host_canonical_dependencies": 9,
+  "host_external_sdk_dependencies": 105,
+  "host_products": 2,
+  "host_module_inputs": [
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/source-final/tests/test_pcm.py",
+      "bytes": 675,
+      "sha256": "b7efdb9c8d52a18efa9627bf6709a20b41e5ca396302aed94e15be7e10253e77"
+    },
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/source-final/tests/test_filter.py",
+      "bytes": 869,
+      "sha256": "a0bac98fa98bd0b8a682e6a292c7edf05d6c63d66395f8c633c52783b0e8dec6"
+    },
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/source-final/tools/generate_sinc_kernel.py",
+      "bytes": 799,
+      "sha256": "9a03003763ebda51fe138199d87cc974dcfbb418dcf57754b78f674a0356a48e"
+    }
+  ],
+  "probe": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/output-probe.c",
+    "bytes": 860,
+    "sha256": "87638fbc915b1880ee33bf414794496151432de6a71e6c04b314ebc8e5998288"
+  },
+  "baseline_probe": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline-probe/result.json",
+    "bytes": 16760,
+    "sha256": "33044e0256673ee483c8030fd971e1240a417f70c1a2ba5c836c21d6befa0a5f"
+  },
+  "candidate_probe": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/candidate-probe/result.json",
+    "bytes": 16791,
+    "sha256": "1bb9cb6e96aef4d0aea0fae83c30d9b80a6b26e474aad979770ec9d8492ff99e"
+  },
+  "baseline_expected_rc": 20,
+  "candidate_rc": 0,
+  "same_exact_four_case_probe": true,
+  "probe_canonical_dependencies": 3,
+  "probe_external_sdk_dependencies": 64,
+  "explicit_semantics": "Shape, NULL output, rate and count-capacity precedence unchanged; empty NULL backing+zero capacity returns zero. Nonzero declared capacity with NULL backing is refused ALIAS as an unprovable storage span, consistent with existing WAV guards.",
+  "dirty_exclusions_verified_unchanged": 16,
+  "helpers": [
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/tools/host_provenance.py",
+      "bytes": 14100,
+      "sha256": "238c3f61dcec00fcd008e07f2118b4ddaec14613866738b827fde33f1443a2b9"
+    },
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/tools/provenance_common.py",
+      "bytes": 11124,
+      "sha256": "78e28229f0f132c73153606be3a40d750a4013f5ea1bbb5af7c15e117e62cdb5"
+    },
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/tools/run_probe.py",
+      "bytes": 4754,
+      "sha256": "2e37a5c0f216cb9580be01cec7dee318ac16beadbe5be120ad0e21df566a7947"
+    },
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/tools/toolchain-pins.json",
+      "bytes": 2709,
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065"
+    }
+  ],
+  "previous_host_handoff": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/handoff.json",
+    "bytes": 5342,
+    "sha256": "c1193103f98afb2f9258cdb008b0461ff6861e2fdf35abc76a94205f17b87c47"
+  },
+  "native_manifest": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/native-final/manifest.json",
+    "bytes": 24434,
+    "sha256": "846a791f9cc4e2d7556bc1c48d58dc2c81a3274e2f8e07de5090c112f98014b5"
+  },
+  "native_compile_commands": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/native-final/compile-commands.json",
+    "bytes": 1031,
+    "sha256": "a36bed536cfe2c7994a18607c9fa95018559b17fef71bf480057f462e43fe4a9"
+  },
+  "native_helper_preparation": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/tools-native/prepared-files.json",
+    "bytes": 2374,
+    "sha256": "c46cfafdb53d444cec38a11191dc28c1f5f184a2eadf243a5097ea20cc9bc541"
+  },
+  "native_target": "PTPcmTest",
+  "native_elapsed_s": 1.9313779169897316,
+  "native_commands": 16,
+  "native_all_commands_rc0": true,
+  "native_canonical_dependencies": 10,
+  "native_sdk_dependencies": 25,
+  "native_binary": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/native-final/PTPcmTest",
+    "bytes": 45988,
+    "sha256": "48acf5e0b61042dd7774c87253a016d09d005f9663880552d5766ce2a35f494f"
+  },
+  "native_recipe": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/source-final/tools/build_core_tests.py",
+    "bytes": 38970,
+    "sha256": "1948232ab42449eb518e49ee55276542b102d7461f0f58d8aa273588a20a0d55"
+  },
+  "native_flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Isrc/core",
+    "-Ibuild/dev",
+    "-fbbb=-"
+  ],
+  "native_assert_macro": "#define assert(__e) ((__e) ? (void)0 : __assert_func (__FILE__, __LINE__, __ASSERT_FUNC, #__e))",
+  "native_new_marker": "PCM FRAME OUTPUT PASS:",
+  "native_existing_marker": "PCM/WAV PASS:",
+  "native_scope": "Pinned portable PCM/WAV assertions cross-build only; fixture not executed on emulator or physical target. No Exec Fast-pool/TypeOfMem/device/file/timing/listening acceptance.",
+  "native_helpers": [
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/tools-native/native_build.py",
+      "bytes": 10981,
+      "sha256": "27f4cd709f1b8aa18d59129b04a237b242c90e6c0a8ed9a1eb169252a5bcbdc6"
+    },
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/tools-native/prepared-files.json",
+      "bytes": 2374,
+      "sha256": "c46cfafdb53d444cec38a11191dc28c1f5f184a2eadf243a5097ea20cc9bc541"
+    },
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/tools-native/provenance_common.py",
+      "bytes": 11226,
+      "sha256": "6f8495769e5e39eacb44944d233064a06203f21672fc8f30456ddbe1a4458113"
+    },
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/tools-native/toolchain-pins.json",
+      "bytes": 2709,
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065"
+    }
+  ],
+  "previous_complete_handoff": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/handoff-complete.json",
+    "bytes": 8476,
+    "sha256": "00192ca1a4f5517e407382763e373660ecdf8e4d5618bbe8e1def7b54f7cc805",
+    "note": "Original host wording was not updated when native cross-build fields were appended; preserved unchanged, this derived record corrects the scope only."
+  },
+  "previous_complete_handoff_v2": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/handoff-complete-v2.json",
+    "bytes": 8791,
+    "sha256": "65d9687fed2416bd9eb21531722e65b16a80f9b1619ed676c62cbb7be4477730"
+  },
+  "focused_caller_report": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/host-callers-final/host-checks.json",
+    "bytes": 126278,
+    "sha256": "aab2332ff0897ae87ac2d51e3b7d86f5381ffa3f4793e51be5ef3ad44ea957d1"
+  },
+  "focused_caller_groups": [
+    {
+      "module": "test_sampler",
+      "tests": 1,
+      "passed": true,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 4.653462457994465
+    },
+    {
+      "module": "test_paula_preview",
+      "tests": 1,
+      "passed": true,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 0.5379519580019405
+    },
+    {
+      "module": "test_pcm_callers",
+      "tests": 1,
+      "passed": true,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 4.000602375002927
+    }
+  ],
+  "focused_caller_elapsed_s": 9.990064957994036,
+  "focused_caller_commands": 6,
+  "focused_caller_full_M_closures": 36,
+  "focused_caller_canonical_inputs": 36,
+  "focused_caller_sdk_inputs": 105,
+  "focused_caller_products": 3,
+  "focused_caller_generated_inputs": 2,
+  "focused_caller_semantics": "Existing sampler and Paula preview caller groups plus generated8/16/24 mono/stereo empty-source checks; no production overlay, PCM/filter repetition or native/target execution."
+}

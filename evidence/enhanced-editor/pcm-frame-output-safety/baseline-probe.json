@@ -1,0 +1,238 @@
+{
+  "scope": "Host ASan/UBSan exact four-case scalar publication probe only; expected baselineRC20 versus candidateRC0; no native/target operation",
+  "source_manifest": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline-manifest.json",
+    "bytes": 3142744,
+    "sha256": "2b9a35b1fd7e0929ae5f31246deedef99b09e75c8436fb427834746a10eca67c"
+  },
+  "source_files_before": 7633,
+  "expected_rc": 20,
+  "probe": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline-probe/probe.c",
+    "bytes": 860,
+    "sha256": "87638fbc915b1880ee33bf414794496151432de6a71e6c04b314ebc8e5998288"
+  },
+  "probe_origin": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/output-probe.c",
+    "bytes": 860,
+    "sha256": "87638fbc915b1880ee33bf414794496151432de6a71e6c04b314ebc8e5998288"
+  },
+  "compiler": {
+    "path": "/usr/bin/cc",
+    "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+    "version": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "resource_dir": "/Library/Developer/CommandLineTools/usr/lib/clang/21"
+  },
+  "python": {
+    "path": "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "sha256": "60ab7f8bb944386c0022689716e405a77117111d65110532a1889d713dddf757",
+    "version": "3.14.0 (main, Oct  7 2025, 09:34:52) [Clang 17.0.0 (clang-1700.3.19.1)]"
+  },
+  "runtime_inputs": {
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.asan_osx_dynamic.dylib": "a319f00c1792b8ab704f8814655f2073cf16cdcc4b7463c9c07d8034da1de49f",
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.ubsan_osx_dynamic.dylib": "b4d8b49379b26b4faa55fa84f9aedf1f5188205767ddf529040ef904cbda4996"
+  },
+  "sdk_inputs": {
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb"
+  },
+  "helpers": [
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/tools/run_probe.py",
+      "bytes": 4754,
+      "sha256": "2e37a5c0f216cb9580be01cec7dee318ac16beadbe5be120ad0e21df566a7947"
+    },
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/tools/provenance_common.py",
+      "bytes": 11124,
+      "sha256": "78e28229f0f132c73153606be3a40d750a4013f5ea1bbb5af7c15e117e62cdb5"
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "--version"
+      ],
+      "directory": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline-probe/compiler-version.log",
+        "bytes": 158,
+        "sha256": "a856ec74c559401131ad608625ef252fb2db6c78bc0c480c1c4c782ee4896db1"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-print-resource-dir"
+      ],
+      "directory": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline-probe/compiler-resource.log",
+        "bytes": 53,
+        "sha256": "ae4dc8a8a83fdae4897a378fbf33fe0a98ae67d92cb9d6da17ac13eafbe7405b"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-M",
+        "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline-probe/probe.c"
+      ],
+      "directory": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline-probe/dependencies-00.log",
+        "bytes": 5035,
+        "sha256": "d491a6196b2b9e1a9b25c91ac30b139841cbf50816208be822fba4a15024d2f6"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-M",
+        "src/core/pcm.c"
+      ],
+      "directory": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline-probe/dependencies-01.log",
+        "bytes": 3268,
+        "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline-probe/probe.c",
+        "src/core/pcm.c",
+        "-o",
+        "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline-probe/probe"
+      ],
+      "directory": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline-probe/compile.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline-probe/probe"
+      ],
+      "directory": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline",
+      "returncode": 20,
+      "log": {
+        "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline-probe/run.log",
+        "bytes": 223,
+        "sha256": "25a6a9e6e4580647847e901d4140f678cfa4170ce9320af8846901b07ffe196d"
+      }
+    }
+  ],
+  "canonical_dependencies": {
+    "src/core/pcm.h": "6b1a14d9010f71b693c81c066e619343bb9b4cee0f4b6723347f34de2f5e12fb",
+    "src/core/pcm.c": "0bd9cc86e3eab3b077484bbcb20675eab0a648a76a18adabe4203c18f3b713a2",
+    "src/core/pcm_internal.h": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b"
+  },
+  "external_sdk_dependencies": {
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/share/asan_ignorelist.txt": "f0180e94133315446c6e45287e1801e70ea94de1905a237c974627a732ebeadc",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb",
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/include/stdint.h": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/stdint.h": "9d070aad02d9f2ba1f2248d093b4194b62cf8d363778c737d1110f4736e5ed3c",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/_types/_int8_t.h": "607f6beede0251eb801e763493df26fd45d46eb951e4ff9cac17f1ac951b8cc0",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/_types/_int16_t.h": "e40d40ad59c6dc98577b2c7cfdba1121ebfee17b29e093cbd10b7936df496d8e",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/_types/_int32_t.h": "77127195e57f1690402377ddd72e3dcda684ddf591346f08ef4772dddcbbc281",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/_types/_int64_t.h": "a2427b34e5e83996bd28d83cec920cf3b82a366af90e767234557bd11fa33a18",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/_types/_uint8_t.h": "0a5c0353c8410f5e502db7971d987ac83a9ec3148905f10984c78152f541de68",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/_types/_uint16_t.h": "adf29323b0ecb87cbc43ac3ff25c096de7a214ceb90007c2828616151c66ad37",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/_types/_uint32_t.h": "951131475ec815813c8ff40d5e875029cd968334fd3a42d5a65fbe7851d1718c",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/_types/_uint64_t.h": "a5692cddb9c42d1b55ebcd6fa445b212c4b0c46db4583aaf3293ed6386d3d0d6",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/_types.h": "863c4f07045775002b63b7e616742d9f746e4a02da4441442d8fe1138bbd0ff9",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/cdefs.h": "ac1a889ee7e6f3025e01be9981d26751489b9e63e926035201cae07ab9e6576f",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/_symbol_aliasing.h": "be0bd8cbed76094f86924f0e24c8bbf7b4f2020e95b480966cad14a5c1138ecd",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/_posix_availability.h": "452bff9ae32655a49b65802e29b21c67a546be1446553f908ef9850a694746bd",
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/include/ptrcheck.h": "ac60d1e96ac17d789d1879b968d391dfbfa222f12213ba95f14592453eebe338",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/machine/_types.h": "f27264f8fdec9f164b4fc2b556f666ed7c5c0e5b88fd9f23db0b731ffa6cf864",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/arm/_types.h": "4f0bde85f9a41cc7d30fff22ebd7e8f4eb206a55a926eda012a2e7481e3524fa",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/_pthread/_pthread_types.h": "741433612525badf767d48b1924d4c7ba564ccc5c1bab5cb7045c238850fa86b",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/_types/_intptr_t.h": "b2a7ba9b9b2d357d75e59114874658f893b23ea6d1357815b027d8189075daba",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/_types/_uintptr_t.h": "f435cf25e4f06dace9c1884c066392bafd204c6d71f16696e71acde5912bc81f",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/_types/_intmax_t.h": "215f90a4efdca4991735be55a1ff701964dde07d8b4a8382ec8ed41ecbf5f115",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/_types/_uintmax_t.h": "0b154b16a3945edff78f00321d90a662d522e197c08e7de3b68f0ea44ae0d042",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/stdio.h": "d2220614f42d3cb678ae0de176ba0ab3256e15fb45b3efdb5d17b8ac1f6a4b54",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/_stdio.h": "8417242466f6df6890587974393e97bb0aeac8caeb80cdf82a4e03a97e6d4660",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/_bounds.h": "3d9f049f5fac54421170fa34a845b244dce7b83a3c68ddd589909df759854700",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/Availability.h": "d39d74d343b5f3dc147525c5f4ba99c1ae9133bccc57eb6205a74d0ba99d92cb",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/AvailabilityVersions.h": "e9f8f7e0eb62c904cf7dca1fd6ba2fe28ba7a382cd9b5339fd03f6de13e66d02",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/AvailabilityInternal.h": "4b7f7e27b33d7ccdcc21654b0016eaa4187ce63387eb135babf269cddedcb9b0",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/AvailabilityInternalLegacy.h": "4c15ffce0467946a20beaa2eb25eba2cbe1788c620aaeb2516c39436a88fe276",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/_types.h": "532c4b0f11274f6b10875db65e154e6cedaa20fdd189f5f40a8780c9a4c39449",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/_types/_va_list.h": "688c84ca73e82898609ae7282c820e896e4b82b7dc14f4fc92b4263df5827de2",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/machine/types.h": "76e7c59451d996fe674a6fc7e518366609a95875c9b9aec9fd590a3ac138dddd",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/arm/types.h": "b9eccd5a3feb3a62e22e42936656c8822e7e3e8708d759b1512deee05f682f0d",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/_types/_u_int8_t.h": "7505dbbdf3ecca2b8e585871ad81c0e67a3cb63c97c47abe73fe262e071a3ebb",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/_types/_u_int16_t.h": "9dabbd8280c28416a5ba115355678d2540588df1a7251bd9b4a13e30c309a71b",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/_types/_u_int32_t.h": "196cba7a865c086bba457758d3b2605a4c1299c54a758366b7d420a585895f1d",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/_types/_u_int64_t.h": "d096eee54a5acc2c3cd5cf71256d69198ada8f8d82cdb0a717bc8ed65650ad93",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/_types/_size_t.h": "3e1bcf6c23ad00e0fe2b5a4683e687299baf51cf26b0a4ebc73db6140378acc2",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/_types/_null.h": "3e021525d2a711070e9c78ea2791e020ef6105c51121d8496d617f89a83d2f92",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/stdio.h": "a8078ae1cba1a46a66d0de6fe7f13bbc969cdb7e78fc2d4b9a5c5cdaaf16126b",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/_printf.h": "d90a7023063c22dfb77d3034163d2c35908f3103b458a83659b7f7b38d2d0cb2",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/_types/_seek_set.h": "353b2276ef8132f625b1b780e7593a43183fbf054c1bc906c0515f89dad335c8",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/_ctermid.h": "73ac20b763ff6e1c328563bbd125e3eaa78a367eb92c867626a047ae4ab391b3",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/_types/_off_t.h": "7b07626d71084f1b3220e045089f54fd30f4d736be9cd0449042c5fe411fc569",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/_types/_ssize_t.h": "58eb3bdea24b27e6b5fb45e203e476faf2510b5c0aa81a0b45c17b528aa9c192",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/string.h": "4b1b9c05bfe370d423d7a6bf9e74b189bcc7f59c1cd97f23d6d94f2f3df6a4bc",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/_string.h": "18ce21b76c6876087aae9053dcdb81182adbdb0405afc82f36d8edc000c06b3a",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/_strings.h": "76b984c39538b145bcb8a930538e07ce446e9d4ace00916d6110c775151d800e",
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/include/stddef.h": "e8d92dad1b380f2f2130fd7aa446bcb4fc923f7062a41c7c35beb4913093a8f5",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/stddef.h": "1e871643e931a1fe9ba76c2cc55dd32aa1a4b4cdf4584901b65b6203db321d2b",
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/include/__stddef_header_macro.h": "4cf46e8fbb809df048eecbbd63686fa741da27afa8db4245bd1f61c1fb1611dc",
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/include/__stddef_ptrdiff_t.h": "b4178a57f3711b7013cba747a72a2f178c29fa9364e77d75b2159754072ced43",
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/include/__stddef_size_t.h": "d86ddc0238da09b385846ebef814ffc50a44e40cf85d4e3793f485952b7e73ad",
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/include/__stddef_wchar_t.h": "1900d4998aef3698b06399ed686db0c21e26509b08638a25734fb97ae89b1001",
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/include/__stddef_null.h": "b1d71b08563ab3d2c22a1e4f8ddf4d9a1111c89e9404b859a45c307e8ebc6c69",
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/include/__stddef_offsetof.h": "e5f0f4ff8ff5fc6a1cc8b535f5065f1728eadd2bf1e1401f021f803ec7b4222f",
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/include/limits.h": "6b59cc1b6f86c901bf41ce942b8434530e852eb16e79e6e9287f89441f71efca",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/limits.h": "4e09d7a2307887fe787c65e31d63747720c4d462b7ba3bf8f45e401d74f0b246",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/machine/limits.h": "50345f1ab843fca787a38c552a84177e678d79dab86e714434f94f2546839357",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/arm/limits.h": "dcfa3b29f6a6c6fda1ce6f362a6eb2b27cc756ef5051c3a48641365660265139",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/arm/_limits.h": "b64325f6b5aba08a361b7b8e537df3d8d193538c1d6329a4c4a7e72f5aa63478",
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include/sys/syslimits.h": "170629c923b4ef2b7132dc8a9d71e9f010332bada56363f619b7c758e17d2c83"
+  },
+  "passed": true,
+  "binary": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/baseline-probe/probe",
+    "bytes": 70696,
+    "sha256": "9beb661b17cdc2824ef8b2f4eb03d2971e9a7ac73681a8a904b724380abcbf29"
+  },
+  "run_rc": 20,
+  "source_files_after": 7633,
+  "elapsed_s": 1.9473970420076512
+}

@@ -1,0 +1,72 @@
+{
+  "scope": "Private preparation only; portable native fixture NOT RUN. Mocked guard proof is not emulator/physical acceptance. No target/Guest/IPC/shared lock/coordination/browser operation.",
+  "status": "PREPARED_NOT_RUN",
+  "candidate": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/native-final/PTPcmTest",
+    "bytes": 45988,
+    "sha256": "48acf5e0b61042dd7774c87253a016d09d005f9663880552d5766ce2a35f494f"
+  },
+  "manifest": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/native-final/manifest.json",
+    "sha256": "846a791f9cc4e2d7556bc1c48d58dc2c81a3274e2f8e07de5090c112f98014b5"
+  },
+  "qualifier": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier/qualify_pcm_frame_output_safety.py",
+    "bytes": 11709,
+    "sha256": "30d279d5cabe5118ce34cd2955e5a8c5b639ba5bbd8fba118896c4171224cc71"
+  },
+  "runner": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/source-final/tools/shared_infra_render_files.py",
+    "sha256": "df9c7f37252bb27e9315aa244854db12a3186ba987924c0d094f5142ae968978",
+    "mode": [
+      "--wav-output"
+    ],
+    "native_case": "wav-core"
+  },
+  "markers": [
+    "PCM FRAME OUTPUT PASS:",
+    "PCM/WAV PASS:"
+  ],
+  "boundaries": {
+    "native_runner_s": 90,
+    "outer_runner_process_s": 140,
+    "overall_pass_elapsed_gate_s": 250,
+    "independent_observations": 11,
+    "independent_observed_duration": "strictly greater than10s"
+  },
+  "caller_watchdog": "Live caller must also impose an external250s watchdog. Internal overall gate is passive; on timeout/uncertain cleanup preserve originals, stop and retain a recovery HOLD. No automatic target cleanup or retry.",
+  "live_command_template": [
+    "PINNED_HARNESS_PYTHON",
+    "qualify_pcm_frame_output_safety.py",
+    "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/native-final",
+    "--repo",
+    "ACTUAL_PROTRACKER_REPO",
+    "--identity",
+    "FRESH_COORDINATOR_WINDOW_IDENTITY_JSON",
+    "--identity-sha256",
+    "EXACT_IDENTITY_SHA256"
+  ],
+  "identity_schema": {
+    "process": [
+      "positive original sole PID",
+      "exact full original Amiberry command"
+    ],
+    "profile": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae",
+    "profile_sha256": "fresh explicitly pinned profile file SHA256"
+  },
+  "identity_note": "No identity has been acquired or recorded by preparation; root will supply a separate fresh scope after release/apply checks. No PID19081 default or replacement adoption. Private helper needs explicit --repo.",
+  "mock_proof": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier/mock-proof.json",
+    "sha256": "40a8aa73eff04c97f2f8315b64f77231ec92651d06bcbcd24ee1519f8a6ce86a",
+    "tests": 17,
+    "passed": true
+  },
+  "excluded_acceptance": [
+    "native fixture execution",
+    "Exec Fast allocator/TypeOfMem",
+    "device/MMIO",
+    "physical hardware",
+    "audio/listening",
+    "scheduling/timing"
+  ]
+}

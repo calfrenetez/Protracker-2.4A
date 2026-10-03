@@ -1,0 +1,15 @@
+{
+  "scope": "Root read-only audit of original package and source bytes; no tests/builds/target operations or native acceptance",
+  "passed": true,
+  "package": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared",
+  "original_packet_files": 16,
+  "sum_rows": 15,
+  "archive_members": 240,
+  "archive_uncompressed_bytes": 10629397,
+  "all_original_members_byte_exact": true,
+  "both_7633_input_manifests_byte_exact": true,
+  "controls_exact": true,
+  "native_status": "NOT_RUN",
+  "payload_sha256": "0d31994c23130e0e1f16f19d8e9b71b91a15c7b5779cb4e8787c947dca68c0a3",
+  "sums_sha256": "c07e4d04b7672fc76be7ebe5ace4152b5b5ae5309ad62206a9c95810d9b795a6"
+}

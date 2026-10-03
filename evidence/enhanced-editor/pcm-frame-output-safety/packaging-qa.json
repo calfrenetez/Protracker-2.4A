@@ -1,0 +1,42 @@
+{
+  "scope": "External packaging QA, not test/build/target acceptance",
+  "passed": true,
+  "package": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared",
+  "files": 16,
+  "bytes": 4423866,
+  "checksum_rows": 15,
+  "payload": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared/payload.tar.gz",
+    "bytes": 2743884,
+    "sha256": "0d31994c23130e0e1f16f19d8e9b71b91a15c7b5779cb4e8787c947dca68c0a3",
+    "mode": 420
+  },
+  "member_index": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared/member-index.json.gz",
+    "bytes": 12521,
+    "sha256": "d2dd30de4ed04c79d256c3f0627647f287026404c93631db6b1ffdc2f894af97",
+    "mode": 420
+  },
+  "provenance": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared/provenance.json",
+    "bytes": 6373,
+    "sha256": "34fcb783335c65a56647fd1a50f91cbd7619872d6a166dd4d5f123dc8dcccd46",
+    "mode": 420
+  },
+  "sums": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-evidence-prepared/SHA256SUMS",
+    "bytes": 1273,
+    "sha256": "c07e4d04b7672fc76be7ebe5ace4152b5b5ae5309ad62206a9c95810d9b795a6",
+    "mode": 420
+  },
+  "archive_members": 240,
+  "archive_original_bytes": 10629397,
+  "source_inventory_files_each": 7633,
+  "copied_source_files_each": 45,
+  "overlays": 3,
+  "dirty_exclusions_preserved": 16,
+  "native_status": "NOT_RUN",
+  "qualifier_status": "PREPARED_NOT_RUN",
+  "origin_and_full_source_reverified": true,
+  "deterministic_repeat": true
+}

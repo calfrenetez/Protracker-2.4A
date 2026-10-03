@@ -1,0 +1,19 @@
+{
+  "scope": "Host-only mocked qualifier guards, all identities/Guest/IPC/processes/native runner/time/shared locks are simulated in private temporary directories; no real target/Guest/IPC/shared lock/native execution",
+  "passed": true,
+  "tests": 17,
+  "failures": 0,
+  "errors": 0,
+  "elapsed_s": 0.6437588749977294,
+  "qualifier": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier/qualify_pcm_frame_output_safety.py",
+    "bytes": 11709,
+    "sha256": "30d279d5cabe5118ce34cd2955e5a8c5b639ba5bbd8fba118896c4171224cc71"
+  },
+  "mock_test": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier/test_qualifier_mocked.py",
+    "bytes": 12108,
+    "sha256": "c2672e308aebe1afe318782471732dc09a9ada0fbd21b6933ddc2e97509b0a34"
+  },
+  "build_manifest_sha256": "846a791f9cc4e2d7556bc1c48d58dc2c81a3274e2f8e07de5090c112f98014b5"
+}

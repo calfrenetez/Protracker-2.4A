@@ -1,0 +1,45 @@
+{
+  "scope": "Read-only root check of saved host and cross-build inputs/products; no new test, target or native execution",
+  "head": "411aca9ae7a5323a031973ac2b64f1b0862b3a6f",
+  "own_overlays": {
+    "src/core/pcm.c": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266",
+    "src/core/pcm.h": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+    "tests/pcm_test.c": "51165214f735477fce9730208fd3332633985b50ffe689078744a7f4dcdef9c3"
+  },
+  "checks": [
+    {
+      "report": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/host-final/host-checks.json",
+      "report_sha256": "f5b83f9cf51fd7aba851a444761c187df2347e28c59bf829b873858e1e222187",
+      "canonical_inputs": 9,
+      "external_sdk_inputs": 105,
+      "products": 2,
+      "all_exact": true
+    },
+    {
+      "report": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/host-callers-final/host-checks.json",
+      "report_sha256": "aab2332ff0897ae87ac2d51e3b7d86f5381ffa3f4793e51be5ef3ad44ea957d1",
+      "canonical_inputs": 36,
+      "external_sdk_inputs": 105,
+      "products": 3,
+      "all_exact": true
+    },
+    {
+      "report": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/candidate-probe/result.json",
+      "report_sha256": "1bb9cb6e96aef4d0aea0fae83c30d9b80a6b26e474aad979770ec9d8492ff99e",
+      "canonical_inputs": 3,
+      "external_sdk_inputs": 64,
+      "products": 0,
+      "all_exact": true
+    },
+    {
+      "report": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/native-final/manifest.json",
+      "report_sha256": "846a791f9cc4e2d7556bc1c48d58dc2c81a3274e2f8e07de5090c112f98014b5",
+      "canonical_inputs": 10,
+      "external_sdk_inputs": 25,
+      "products": 0,
+      "all_exact": true
+    }
+  ],
+  "unrelated_dirty_paths_unchanged": 16,
+  "passed": true
+}

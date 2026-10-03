@@ -114,6 +114,74 @@ static void wav_output_alias_cases(void)
     assert(out.data[4] == 36 && out.data[40] == 0 && out.data[44] == 0x55 && !memcmp(&v, &old, sizeof(v)));
 }
 
+static void resampled_frame_output_cases(void)
+{
+    struct source {struct pt_pcm pcm;int32_t data[16];uint32_t adjacent;} v, old;
+    uint32_t out, *aliases[6];unsigned bits, channels, i;
+    for(bits=8;bits<=24;bits+=8)for(channels=1;channels<=2;++channels) {
+        memset(&v,0,sizeof(v));
+        v.pcm=(struct pt_pcm){v.data,16,4,48000,(uint8_t)channels,(uint8_t)bits};
+        for(i=0;i<16;++i)v.data[i]=i<4*channels?1:INT32_MAX;
+        if(bits==24)v.data[0]=0x123457; /* Preserve the low eight source bits. */
+        v.adjacent=123;memcpy(&old,&v,sizeof(v));out=123;
+        assert(pt_pcm_resampled_frames(&v.pcm,96000,&out)==PT_PCM_OK && out==8);
+        assert(pt_pcm_resampled_frames(&v.pcm,44100,&out)==PT_PCM_OK && out==4);
+        assert(pt_pcm_resampled_frames(&v.pcm,12000,&out)==PT_PCM_OK && out==1);
+        assert(!memcmp(&v,&old,sizeof(v)));
+        aliases[0]=(uint32_t *)v.data;aliases[1]=(uint32_t *)(v.data+4*channels-1);
+        aliases[2]=(uint32_t *)(v.data+4*channels);aliases[3]=(uint32_t *)(v.data+15);
+        aliases[4]=&v.pcm.frames;aliases[5]=&v.pcm.rate;
+        for(i=0;i<6;++i) {
+            assert(pt_pcm_resampled_frames(&v.pcm,96000,aliases[i])==PT_PCM_ALIAS);
+            assert(!memcmp(&v,&old,sizeof(v)));
+        }
+        /* An actual scalar immediately outside declared master storage is legal. */
+        assert(pt_pcm_resampled_frames(&v.pcm,96000,&v.adjacent)==PT_PCM_OK && v.adjacent==8);
+        assert(!memcmp(&v,&old,offsetof(struct source,adjacent)));v.adjacent=123;
+        v.pcm.frames=0;memcpy(&old,&v,sizeof(v));out=123;
+        assert(pt_pcm_resampled_frames(&v.pcm,96000,&out)==PT_PCM_OK && out==0);
+        assert(pt_pcm_resampled_frames(&v.pcm,96000,(uint32_t *)(v.data+15))==PT_PCM_ALIAS);
+        assert(!memcmp(&v,&old,sizeof(v)));
+        /* Count remains metadata-only, even with values invalid at declared precision. */
+        v.pcm.frames=1;v.data[0]=INT32_MAX;memcpy(&old,&v,sizeof(v));
+        assert(pt_pcm_resampled_frames(&v.pcm,48000,&out)==PT_PCM_OK && out==1);
+        assert(!memcmp(&v,&old,sizeof(v)));
+    }
+    out=123;v.pcm=(struct pt_pcm){v.data,16,4,48000,1,16};memcpy(&old,&v,sizeof(v));
+    assert(pt_pcm_resampled_frames(&v.pcm,0,(uint32_t *)v.data)==PT_PCM_INVALID);
+    assert(pt_pcm_resampled_frames(&v.pcm,192001,(uint32_t *)v.data)==PT_PCM_INVALID);
+    assert(pt_pcm_resampled_frames(&v.pcm,48000,NULL)==PT_PCM_INVALID);
+    assert(pt_pcm_resampled_frames(NULL,48000,&out)==PT_PCM_INVALID && out==123);
+    assert(!memcmp(&v,&old,sizeof(v)));
+    v.pcm.rate=0;memcpy(&old,&v,sizeof(v));
+    assert(pt_pcm_resampled_frames(&v.pcm,48000,(uint32_t *)v.data)==PT_PCM_INVALID);
+    assert(!memcmp(&v,&old,sizeof(v)));
+    v.pcm.rate=48000;v.pcm.capacity=1;memcpy(&old,&v,sizeof(v));
+    assert(pt_pcm_resampled_frames(&v.pcm,48000,(uint32_t *)v.data)==PT_PCM_CAPACITY);
+    assert(pt_pcm_resampled_frames(&v.pcm,0,NULL)==PT_PCM_CAPACITY);
+    assert(!memcmp(&v,&old,sizeof(v)));
+    v.pcm=(struct pt_pcm){v.data,UINT32_MAX,UINT32_MAX,1,1,16};memcpy(&old,&v,sizeof(v));
+    assert(pt_pcm_resampled_frames(&v.pcm,192000,(uint32_t *)v.data)==PT_PCM_CAPACITY);
+    assert(!memcmp(&v,&old,sizeof(v)));
+    v.pcm=(struct pt_pcm){v.data,16,0,48000,1,16};memcpy(&old,&v,sizeof(v));
+    assert(pt_pcm_resampled_frames(&v.pcm,48000,(uint32_t *)(UINTPTR_MAX-(sizeof(uint32_t)-1)))==PT_PCM_ALIAS);
+    assert(!memcmp(&v,&old,sizeof(v)));
+    v.pcm.capacity=SIZE_MAX/sizeof(*v.data)+1;memcpy(&old,&v,sizeof(v));
+    assert(pt_pcm_resampled_frames(&v.pcm,48000,&out)==PT_PCM_ALIAS && out==123);
+    assert(pt_pcm_resampled_frames(&v.pcm,0,NULL)==PT_PCM_INVALID);
+    assert(!memcmp(&v,&old,sizeof(v)));
+    v.pcm.capacity=1;v.pcm.data=(int32_t *)(UINTPTR_MAX-(sizeof(int32_t)-1));memcpy(&old,&v,sizeof(v));
+    assert(pt_pcm_resampled_frames(&v.pcm,48000,&out)==PT_PCM_ALIAS && out==123);
+    assert(!memcmp(&v,&old,sizeof(v)));
+    v.pcm.data=NULL;memcpy(&old,&v,sizeof(v));
+    assert(pt_pcm_resampled_frames(&v.pcm,48000,&out)==PT_PCM_ALIAS && out==123);
+    assert(!memcmp(&v,&old,sizeof(v)));
+    v.pcm.capacity=0;memcpy(&old,&v,sizeof(v));
+    assert(pt_pcm_resampled_frames(&v.pcm,48000,&out)==PT_PCM_OK && out==0);
+    assert(!memcmp(&v,&old,sizeof(v)));
+    puts("PCM FRAME OUTPUT PASS: metadata-only 8/16/24 mono/stereo counts, descriptor and full capacity protection, empty/NULL/precedence and fail-closed spans");
+}
+
 int main(void)
 {
     int32_t data[16] = {1, 101, 2, 102, 3, 103, 4, 104}, dest[32] = {0}, copy[16];
@@ -186,6 +254,7 @@ int main(void)
     memcpy(copy, data, sizeof(data));
     assert(pt_pcm_edit(&pcm, PT_PCM_REVERSE, 0, 4, 0) == PT_PCM_INVALID);
     assert(!memcmp(copy, data, sizeof(data)));
+    resampled_frame_output_cases();
     wav_output_alias_cases();
     puts("PCM/WAV PASS: 8/16/24-bit precision, stereo edits, conversion, resampling, bounds and round trips");
     return 0;

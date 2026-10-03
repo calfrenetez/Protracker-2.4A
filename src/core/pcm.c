@@ -97,6 +97,19 @@ enum pt_pcm_result pt_pcm_convert(const struct pt_pcm *source, struct pt_pcm *de
     }
     return PT_PCM_OK;
 }
+/* Protect borrowed descriptors and all declared master storage, including
+ * reserved capacity. This guard reads metadata only, never PCM values. */
+static int frame_output_alias(const struct pt_pcm *source, const uint32_t *out)
+{
+    uintptr_t x = (uintptr_t)out, descriptor = (uintptr_t)source, data = (uintptr_t)source->data;
+    size_t bytes;
+    if (sizeof(*out) > UINTPTR_MAX - x || sizeof(*source) > UINTPTR_MAX - descriptor ||
+        source->capacity > SIZE_MAX / sizeof(*source->data)) return 1;
+    bytes = source->capacity * sizeof(*source->data);
+    if (bytes && (!source->data || bytes > UINTPTR_MAX - data)) return 1;
+    return (x < descriptor + sizeof(*source) && descriptor < x + sizeof(*out)) ||
+           (bytes && x < data + bytes && data < x + sizeof(*out));
+}
 enum pt_pcm_result pt_pcm_resampled_frames(const struct pt_pcm *source, uint32_t rate, uint32_t *out)
 {
     uint64_t frames;
@@ -105,6 +118,7 @@ enum pt_pcm_result pt_pcm_resampled_frames(const struct pt_pcm *source, uint32_t
     if (!out || !rate || rate > 192000) return PT_PCM_INVALID;
     frames = ((uint64_t)source->frames * rate + source->rate - 1) / source->rate;
     if (frames > UINT32_MAX) return PT_PCM_CAPACITY;
+    if (frame_output_alias(source, out)) return PT_PCM_ALIAS;
     *out = (uint32_t)frames;
     return PT_PCM_OK;
 }

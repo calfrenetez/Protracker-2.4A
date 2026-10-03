@@ -1,5 +1,19 @@
 # Native musical-boundary timing decision
 
+## User decision: preserve exact scheduling
+
+On 3 October 2026 the user selected **Keep exact scheduling** in response to
+the explicit timing question. Enhanced live playback must preserve the existing
+musical schedule and logical-frame gate. Develop a backend with explicit
+scheduled activation, bounded future-event preparation and completion/stop
+ownership; refuse a backend that cannot provide that capability. No live jitter
+tolerance, production priority change or hardware timing acceptance follows.
+
+This decision selects the direction below. The existing failed measurements
+remain evidence, and the scheduled native output implementation and its
+physical timing/listening qualification remain unfinished. Independent memory,
+save/export and recovery work can continue under the user's standing authority.
+
 The current prepared owner preserves Fast masters, selective pinned Chip copies,
 actual clocks and confirmed stop. Cancellation and half-second pre-startup
 Wait/service pass in a scoped calling-task priority5 diagnostic. Production
@@ -13,11 +27,12 @@ service clock's47996frames is a different epoch and does not clear this failure.
 All resource, priority and signal restoration and independent guest cleanup pass.
 Exact evidence: `../evidence/enhanced-editor/paula-first-boundary/`.
 
-A production timing choice is needed before changing this contract or selecting
-a materially different native output architecture. Timer-only feasibility work
+A production timing choice was needed before selecting a materially different
+native output architecture; the decision above now selects exact scheduling.
+Timer-only feasibility work
 under the user's continuation authority does not require another approval. Raising priority alone has not cleared
 the first boundary. Repeating unchanged tests or relaxing checks silently is not
-a solution. Neither option below is implemented or qualified.
+a solution. Neither option below is implemented or qualified as native output.
 
 | Direction | Concrete implementation consequence | Tradeoff and acceptance |
 | --- | --- | --- |

@@ -1,0 +1,22 @@
+{
+  "scope": "Host-only deterministic evidence packaging; no test/build/native/target/network/browser operation",
+  "member_count": 176,
+  "original_bytes": 3826130,
+  "payload_bytes": 846184,
+  "payload_sha256": "52f6ce7b258e7a1d201f787da023291523a37bee469cea6ea655550f05ed909e",
+  "duplicate_generation_equal": true,
+  "full_reader_bytes_and_modes_verified": true,
+  "head": "1ab5ed42d85c8b33e656f8673484fb85309f3205",
+  "physical_run": "1791052358263352000",
+  "physical_result_sha256": "b27c0478562babebba2915a5ddf953dbeb1d48d070c37e41963818837c5d4c2b",
+  "separate_idle_result": {
+    "path": "/private/tmp/protracker-paula-physical-current-root-fonppuu7/idle-verification-1791052493934757000/result.json",
+    "sha256": "abe039269dfb4eb35cae08442e80f0ac9d3f95bcc950fbfcc208f15ad9c7a77e"
+  },
+  "explicit_release": {
+    "turnId": "01a1030e-4ca4-7b71-b60f-6d4f229259c6",
+    "completedAt": 1791052637,
+    "text": "ProTracker reports the physical RAM-only cache test passed and its window is released after independent cleanup, return-to-emulator and Safari View Only checks. No recovery hold remains.\n\nThis qualifies memory/cache behaviour only\u2014not DMA, audio, card RAM or timing. AmiConnect holds no reservation."
+  },
+  "current_lock_reservation_control_or_hold": false
+}

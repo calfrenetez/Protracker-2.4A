@@ -34,11 +34,46 @@ lifetime assertions pass. No numerical Chip allocation count is emitted.
 Exact owned cleanup, eleven persistent absence observations and a separate locked
 eleven-observation original idle return pass. Explicit release is acknowledged;
 native/process/overall limits remain 90/140/250 seconds. This adds emulator memory
-and software cache-ownership acceptance. Physical qualification remains pending.
+and software cache-ownership acceptance. The separate physical memory fixture
+below subsequently passed.
 No device-transfer, voice-stop, audio or timing acceptance is inferred.
 See [host records](../evidence/enhanced-editor/playback-master-storage-host/README.md).
 The separate [native records](../evidence/enhanced-editor/paula-cache-playback-current-native/README.md)
 preserve the exact candidate, source/toolchain closure and cleanup/release evidence.
+
+## Physical selective Paula cache memory qualification — 3 October 2026
+
+The same 123,732-byte Exec sampler/cache candidate passed once on the real A1200
+after its exact shared 030 qualification. Bounded conversion, unpublished leases,
+exact master pins, selected routed copies, revision/undo/route invalidation,
+pressure eviction and retained active leases passed. Forty-eight allocations were
+verified Fast memory and ended at zero owned bytes, with no Chip fallback. Active
+Chip-only TypeOfMem and positive-live/zero-lifetime assertions completed; no
+numerical Chip allocation count is emitted.
+
+Actual CPU/network and installed bridge checks preceded RAM writes. Full candidate
+SHA readback, exact typed two-file cleanup, eleven physical absence calls spanning
+14.094 seconds and unchanged original 030 return passed. A separate locked idle
+check passed with eleven observations spanning 13.520 seconds. Safari was verified
+View Only; root acquired no control or remote input. Explicit release is
+acknowledged and no recovery hold remains. Native/internal/root bounds remained
+90/300/310 seconds; the root invocation completed in 89.994 seconds.
+
+This qualifies physical Fast-master/selective Chip-cache memory and software
+ownership behavior. Paula DMA/voice-stop, AmiGUS sample RAM capacity or transfer
+ordering/completion, actual music timing, audio, endurance and listening remain
+separate gates. See
+[physical records](../evidence/enhanced-editor/paula-cache-physical-memory/README.md).
+
+## Live scheduling direction selected — 3 October 2026
+
+The user selected **Keep exact scheduling**. Preserve the existing musical grid
+and logical-frame gate, and develop explicit scheduled activation with bounded
+future-event preparation and confirmed completion/stop ownership. A backend that
+cannot provide that capability must refuse; no immediate-start fallback or live
+jitter tolerance is approved. This selects an architecture direction, without
+qualifying a native backend, interrupt implementation or physical output timing.
+See [the decision and retained measurements](NATIVE_TIMING_DECISION.md).
 
 ## Slice output master protection — 3 October 2026
 

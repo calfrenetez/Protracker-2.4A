@@ -1,0 +1,11 @@
+{
+  "passed": false,
+  "scope": "Three exact committed incremental Paula preparation fixtures; injected voices, no physical card/output/timing acceptance",
+  "cases": [],
+  "source_tree": "b328ae16b928f191df26daac3de96109e493f75e",
+  "error": "Command '['git', 'show', 'b328ae16b928f191df26daac3de96109e493f75e:src/editor/../core/channels.h']' returned non-zero exit status 128.",
+  "prelaunch_refused": true,
+  "run_files_staged": false,
+  "guest_constructed": false,
+  "refusal_scope": "Host Git dependency path lookup before any Guest/lock; original failure preserved"
+}

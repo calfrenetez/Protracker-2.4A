@@ -1,0 +1,9 @@
+/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-qualification-1790984170549003000/runner/build/dev/render-files-1790984197938062000
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-qualification-1790984170549003000/runner/tools/shared_infra_render_files.py", line 543, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-qualification-1790984170549003000/runner/tools/shared_infra_render_files.py", line 468, in main
+    if time.monotonic()>deadline:raise RuntimeError('Native file checks timed out; preserve owned run for recovery')
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Native file checks timed out; preserve owned run for recovery

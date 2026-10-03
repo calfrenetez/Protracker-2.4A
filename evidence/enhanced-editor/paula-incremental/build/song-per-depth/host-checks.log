@@ -1,0 +1,17 @@
+..
+----------------------------------------------------------------------
+Ran 2 tests in 23.248s
+
+OK
+PAULA SONG CASE PASS: bits=8 full per-bit assertions and runtime bounds
+PAULA SONG PASS: shared sequence, selected master pins, late refusal and retained cleanup
+PAULA SONG CASE PASS: bits=16 full per-bit assertions and runtime bounds
+PAULA SONG PASS: shared sequence, selected master pins, late refusal and retained cleanup
+PAULA SONG CASE PASS: bits=24 full per-bit assertions and runtime bounds
+PAULA SONG PASS: shared sequence, selected master pins, late refusal and retained cleanup
+PAULA SONG PASS: shared sequence, selected master pins, late refusal and retained cleanup
+.
+----------------------------------------------------------------------
+Ran 1 test in 6.706s
+
+OK

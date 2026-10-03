@@ -1,0 +1,34 @@
+# Standalone incremental Paula preparation evidence
+
+This folder preserves the host/build evidence for standalone incremental Paula preparation committed in `186fe0e`, the per-depth native test split committed in `3de2f10`, the qualified native preflight fixture, the unchanged failed monolithic deadline, and its separately scoped observation and recovery. Only recorded evidence was copied; this preservation task made no target connection or shared-lock operation.
+
+| Gate | Recorded state and scope |
+| --- | --- |
+| Original host checks | Eight ASan/UBSan groups PASS, 71.074 seconds. See [host.log](build/original-six/host.log). |
+| Original pinned native builds | Six cross-builds PASS. Original ordered compile/link arguments, dependency hashes, compiler/runtime identities and candidate hashes are preserved. Preflight, editor and prepared-output candidate qualification is recorded separately below; transport and Wait remain cross-build only. |
+| Split host checks | Selected complete per-bit matrices for 8/16/24-bit masters and invalid selector refusals PASS, 23.248 seconds; unchanged full host matrix PASS, 6.706 seconds. |
+| Split pinned native builds | Three cross-builds PASS, 189412 bytes each. Runtime assertions and per-case limits are unchanged; each native binary selects one complete per-bit matrix. |
+| Native standalone preflight | Run `1790984177339757000` PASS: RC0, 102 Fast allocations, zero owned bytes, exact cleanup and separate independent cleanup verification. Injected callbacks; no native DMA/output. |
+| Original monolithic native song | Run `1790984197938062000` **FAILED the unchanged 90-second runner deadline**. Original `passed=false`, `run_files_cleaned=false` result and runner traceback remain intact. Remaining original fixtures were stopped. |
+| Read-only late completion | Separate observation `1790984426213813000` found done, RC0, `PAULA SONG PASS`, and 489 Fast allocations with zero owned bytes. This does **not** qualify the failed deadline. |
+| Separate recovery | Guarded exact cleanup `1790984608045482000` PASS; independent read-only release verification `1790984871648059000` PASS. These are cleanup/release gates, not a song qualification PASS. |
+| Split native qualification | Run `1790985173500464000` PASS: all8/16/24 complete matrices RC0, each163 Fast allocationszero; editor ownership RC0/81zero. Each unchanged90s deadline, exact cleanup and separate10s independent idle/path checks PASS. Window explicitly released. See [result](native-split/result.json). |
+| Prepared silent output | Separate run `1790985496983654000` PASS in16.978s: classic8 zero-leading segment refuses before promotion/output; silent16/24 use real emulator audio.device WRITE, selected zero Chip32, unused master unpromoted and confirmed device closure. RC0/26Fastallocationszero, exact cleanup/independent10s idle check and explicit release. See [coordinator result](native-prepared/qualification-result.json) and [native runner](native-prepared/result.json). |
+
+The initial host-only dependency lookup refusal is preserved in [its own folder](failures/host-prelaunch-1790983985822622000/result.json). Literal `src/editor/../core/channels.h` spelling was refused by Git before Guest construction, locks or staging. The later qualification used a normalized dependency map verified against the committed source tree. The original build manifests retain their recorded spelling; [qualification-result.json](failures/monolithic-song-1790984197938062000/qualification-result.json) preserves the later verified manifest and failed combined qualification result.
+
+## File provenance and reproduction
+
+[copy-provenance.json](copy-provenance.json) records each copied file's original absolute location, byte count and SHA-256. All copied logs, manifests, scripts and result files are unchanged. Native binaries, compiler/runtime binaries and source exports are deliberately absent. The runtime archive identities are retained inside the build manifests; empty native build logs represent successful silent compiler output, with build/candidate details in their manifests.
+
+The original six-build records came from `/private/tmp/protracker-paula-incremental-4glly2eg`, exported from committed base `fd084f12e252b44d2dd193d52f8d0fef46d5b08b` plus the recorded scoped overlays. The split records came from `/private/tmp/protracker-paula-song-split-1di4u5r1`, exported from `186fe0ecf54299436131aaaa1872631d6093b230` plus its recorded test overlays. These base identities describe the historical build inputs; they are not replaced by later commit names.
+
+`historical-scripts/` contains the exact original build scripts from `/private/tmp`. They are provenance records with their original absolute locations and assumptions, not portable reproduction commands for this tracked folder. The historical split README's statement that no candidate was executed by the build task describes that build task only.
+
+Each unchanged `reproduce-native.py` reads the adjacent manifest and ordered command records. It can reproduce a host cross-build only while the recorded original source export and pinned compiler still exist and match their hashes, using a new output file. This tracked evidence copy supplies neither source export nor compiler. The original six-build command arrays were reconstructed from the recorded build scripts after building, checked for ordered flags/inputs, and preserved without rebuilding. Included C fixtures remain dependencies of their native wrapper rather than extra translation units. No reproduction script was run during preservation.
+
+Split qualification required the matching `PAULA SONG CASE PASS: bits=N` marker together with final RC0, final native allocator-zero result, exact cleanup and independent release evidence. The depth marker precedes the allocator's final check.
+
+Initial project validation and static metadata scans remain synchronous. Host/build and injected native fixture evidence establish their stated software checks only; they do not establish frame latency, strict native musical timing, physical Paula/AmiGUS behavior, or human listening acceptance. In particular, no physical sample-RAM upload/completion/order/all-voice-stop capability is inferred from these fixtures.
+
+`native-split/qualification.py` and `native-prepared/qualification.py` preserve the executed coordinator scripts. Their root/export/candidate paths describe the original `build/dev` execution location; they are historical records, not commands to execute from this folder. Source/compiler/runtime/binary hashes were verified before Guest construction. Split candidates use private byte-verified aliases named `PTExecPaulaSongTest` for the existing runner; result records name each actual selected-depth candidate and hash. All four injected fixtures and the separate silent device fixture finished before their unchanged deadlines. The failed monolithic deadline is preserved independently.

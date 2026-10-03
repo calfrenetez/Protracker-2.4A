@@ -1,0 +1,21 @@
+test_shared_timeline_and_explicit_capabilities (test_paula_preflight.PaulaPreflight.test_shared_timeline_and_explicit_capabilities) ... PAULA PREFLIGHT PASS: full shared timeline, explicit clock/stereo/volume/geometry, incremental/synchronous parity, same-sequence transfer, bounded phases, cancellation, late refusal and allocation cleanup; no dispatch
+ok
+test_owned_shared_sequence (test_paula_song.PaulaSong.test_owned_shared_sequence) ... PAULA SONG PASS: shared sequence, selected master pins, late refusal and retained cleanup
+ok
+test_whole_batch_and_failure_ownership (test_paula_dispatch.PaulaDispatch.test_whole_batch_and_failure_ownership) ... Paula prepared batch ownership OK
+ok
+test_indexed_editor_lifetimes (test_editor_paula.EditorPaula.test_indexed_editor_lifetimes) ... EDITOR PAULA PASS: edits, imports, undo, replacement and disposal wait for reader stops and quiescence
+ok
+test_prepared_device_barrier (test_native_editor_paula.NativeEditorPaula.test_prepared_device_barrier) ... NATIVE EDITOR PAULA HOST PASS: prepared device output; early cancellation, retained DMA and final FREE barrier, classic8 segment refusal
+ok
+test_timer_device_barrier (test_native_paula_transport.NativePaulaTransport.test_timer_device_barrier) ... NATIVE PAULA TRANSPORT HOST PASS: dual private alarms, fractional periodic grid, exact prepared start, bounded preparation, starvation/clock refusal, partial open and retained DMA/timer-abort editor barrier; task-owned Wait pump, abort, work debt, late wake, terminal/full song and retained close
+ok
+test_one_global_sequence_and_atomic_refusal (test_mixed_preflight.MixedPreflight.test_one_global_sequence_and_atomic_refusal) ... MIXED PREFLIGHT PASS: incremental/synchronous parity, bounded steps, hidden partial masks, one sequence transfer, cancellation and late refusal cleanup; no dispatch
+ok
+test_union_pins_and_both_reader_barrier (test_mixed_owner.MixedOwner.test_union_pins_and_both_reader_barrier) ... MIXED OWNER PASS: full255 host scenarios, incremental analysis cancellation/failure, master/cache/staging/commit/sequence/deadline/schedule ownership; no native clock
+ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 71.074s
+
+OK

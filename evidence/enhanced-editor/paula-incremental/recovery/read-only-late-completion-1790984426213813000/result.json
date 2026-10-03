@@ -1,0 +1,47 @@
+{
+  "scope": "Read-only observation of exact timed-out owned injected fixture; no cleanup/lifecycle/retry",
+  "processes": [
+    [
+      19081,
+      "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+    ]
+  ],
+  "status": "OK\tPaused=false\tConfig=autosave",
+  "cpu": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+  "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=666\tsndbuf_status=0",
+  "registers_error": "ERROR\tUnknown command: GET_CPU_STATE",
+  "launcher": "FailAt 21\nStack 65536\nCD Dev:Tests/render-files-1790984197938062000/paula-song\nPTExecPaulaSongTest Dev:Tests/render-files-1790984197938062000/paula-song >test.log\nEcho $RC >test.rc\nFailAt 1\nCD RAM:\nEcho done >Dev:Tests/render-files-1790984197938062000/done\n",
+  "files": [
+    {
+      "path": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790984197938062000/done",
+      "symlink": false,
+      "directory": false,
+      "bytes": 5
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790984197938062000/paula-song",
+      "symlink": false,
+      "directory": true
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790984197938062000/paula-song/PTExecPaulaSongTest",
+      "symlink": false,
+      "directory": false,
+      "bytes": 189388
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790984197938062000/paula-song/test.log",
+      "symlink": false,
+      "directory": false,
+      "bytes": 241,
+      "text": "EXEC MEMORY pool_limit=131091912 reserve=262144 flags=4\nPAULA SONG PASS: shared sequence, selected master pins, late refusal and retained cleanup\nEXEC MEMORY PASS: 489 Fast allocations, zero owned bytes, budget refusal without Chip fallback\n"
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790984197938062000/paula-song/test.rc",
+      "symlink": false,
+      "directory": false,
+      "bytes": 2,
+      "text": "0\n"
+    }
+  ]
+}

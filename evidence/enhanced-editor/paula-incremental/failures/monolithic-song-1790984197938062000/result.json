@@ -1,0 +1,6 @@
+{
+  "passed": false,
+  "scope": "shared030 routed Paula song with native allocators and injected callbacks; no native DMA/output",
+  "PTExecPaulaSongTest_sha256": "58889dfa74a51dd4f6fa8cf7c821dba34903fd774a42683cfb91d137a88073cd",
+  "run_files_cleaned": false
+}

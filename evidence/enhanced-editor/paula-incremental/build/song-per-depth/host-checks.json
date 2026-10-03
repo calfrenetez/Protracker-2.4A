@@ -1,0 +1,32 @@
+{
+  "scope": "host ASan/UBSan selection and complete original matrix; no native runtime or timing acceptance",
+  "selected_group": {
+    "module": "test_paula_song_selected",
+    "unittest_tests": 2,
+    "selected_depths": [
+      8,
+      16,
+      24
+    ],
+    "accepted_each_complete_per_bit_body": true,
+    "invalid_32_refused": true,
+    "non_native_8_refused": true,
+    "elapsed_seconds": 23.248,
+    "exit_code": 0
+  },
+  "full_group": {
+    "module": "test_paula_song",
+    "selected_depths": [
+      8,
+      16,
+      24
+    ],
+    "elapsed_seconds": 6.706,
+    "exit_code": 0
+  },
+  "source_overlay_hashes": {
+    "tests/paula_song_test.c": "cec3e898ca0ded0ab229f36e36857aad2f4ac830cd14b91e39196e406891c813",
+    "tests/test_paula_song_selected.py": "59948c333fdd79eb9c4b8eeb4b61f1d2a4e716342a63f59079d3edc746501470"
+  },
+  "capture": "captured output from completed host session3025; hashes checked against final exported source"
+}

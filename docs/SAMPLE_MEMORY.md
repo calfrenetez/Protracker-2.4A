@@ -5,6 +5,32 @@ The enhanced project owns the authoritative sample, including its declared
 elements in the declared precision; 24-bit samples retain their low eight bits.
 Playback representations must never become the project's source of truth.
 
+## Incremental standalone Paula preparation — 3 October 2026
+
+Standalone Paula capability analysis now has begin/step/transfer/close phases.
+Each song preparation call performs at most256 measurement ticks, one interval
+fetch, at most256 consumed frames, or one completed capability check. Pending or
+refused reports expose no source masks; no master pins or Chip playback copies
+are acquired before the full gate. Cancellation and stale-source refusal close
+unfinished analysis; transfer takes the same audited sequence once. Initial
+project/PCM/static validation remains synchronous. Eight host sanitizer groups,
+indexed editor tests and six pinned native cross-builds pass.
+
+Native preflight passes separately (102 Fast allocationszero) with independent
+cleanup. A monolithic native song fixture exceeded its unchanged90second deadline,
+then completed later with RC0 and zero owned bytes; its qualification remains
+FAILED. Guarded cleanup and a subsequent independent check passed, and the hold
+was explicitly released. Native qualification is now partitioned into complete
+8/16/24-bit matrices with unchanged per-bit assertions and90second deadlines;
+the host entry retains all three. Exact native selected8/16/24 matrices now pass
+(163 Fast allocationszero each), as does editor ownership (81zero). Each retains
+its unchanged deadline and separate independent cleanup. Separately scoped silent
+prepared16/24 device WRITE/closure passes (26zero); classic8 zero-leading geometry
+refuses before promotion/output. Both windows explicitly released after original
+idle guest verification. See `PAULA_PREFLIGHT.md` and
+`../evidence/enhanced-editor/paula-incremental/`; no musical timing, frontend PLAY,
+physical or listening acceptance follows.
+
 ## Incremental mixed preparation — 3 October 2026
 
 Mixed Paula/AmiGUS capability analysis now advances one bounded phase per owner

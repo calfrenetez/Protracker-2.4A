@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "scope": "Separate guarded exact cleanup after independently observed lateRC0/resource-zero; original90s failure unchanged",
+  "processes": [
+    [
+      19081,
+      "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+    ]
+  ],
+  "status": "OK\tPaused=false\tConfig=autosave",
+  "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=166\tsndbuf_status=0",
+  "native_log": "EXEC MEMORY pool_limit=131091912 reserve=262144 flags=4\nPAULA SONG PASS: shared sequence, selected master pins, late refusal and retained cleanup\nEXEC MEMORY PASS: 489 Fast allocations, zero owned bytes, budget refusal without Chip fallback\n",
+  "candidate_sha256": "58889dfa74a51dd4f6fa8cf7c821dba34903fd774a42683cfb91d137a88073cd",
+  "execution_seconds_from_host_mtime": 106.88940048217773,
+  "absence_observations": [
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790984197938062000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790984197938062000": false
+    },
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790984197938062000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790984197938062000": false
+    },
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790984197938062000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790984197938062000": false
+    },
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790984197938062000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790984197938062000": false
+    },
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790984197938062000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790984197938062000": false
+    },
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790984197938062000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790984197938062000": false
+    },
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790984197938062000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790984197938062000": false
+    },
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790984197938062000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790984197938062000": false
+    },
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790984197938062000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790984197938062000": false
+    },
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790984197938062000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790984197938062000": false
+    },
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790984197938062000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790984197938062000": false
+    }
+  ],
+  "independent_release_check_required": true
+}

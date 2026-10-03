@@ -1,0 +1,8 @@
+EXEC MEMORY pool_limit=131013200 reserve=262144 flags=4
+PREPARE bits=8 result=4 capability=9 render=0 action=0 channel=4 kind=1 begun=1 ready=1
+PREPARED PAULA PASS: classic8 zero-leading segment refusal before master promotion/cache/output; early cancellation and editor/device closure
+PREPARE bits=16 result=0 capability=0 render=0 action=4294967295 channel=4294967295 kind=0 begun=1 ready=1
+PREPARED PAULA PASS: 16-bit Fast master; selected zero Chip32; real prepared WRITE; early cancellation and editor stop/device closure; unused master unpromoted
+PREPARE bits=24 result=0 capability=0 render=0 action=4294967295 channel=4294967295 kind=0 begun=1 ready=1
+PREPARED PAULA PASS: 24-bit Fast master; selected zero Chip32; real prepared WRITE; early cancellation and editor stop/device closure; unused master unpromoted
+EXEC MEMORY PASS: 26 Fast allocations, zero owned bytes, budget refusal without Chip fallback

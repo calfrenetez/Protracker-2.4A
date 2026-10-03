@@ -1,0 +1,491 @@
+{
+  "scope": "Preservation of historical host/build/native/recovery files; copies unchanged and byte-verified. Preservation itself made no target action or executable copy.",
+  "files": [
+    {
+      "path": "build/original-six/manifest.json",
+      "original_path": "/private/tmp/protracker-paula-incremental-4glly2eg/manifest.json",
+      "bytes": 129196,
+      "sha256": "b554e2e048fd639c0ece08f7bc522b2df85275a765f3d1ac63913638699eb7c5"
+    },
+    {
+      "path": "build/original-six/build.json",
+      "original_path": "/private/tmp/protracker-paula-incremental-4glly2eg/build.json",
+      "bytes": 80101,
+      "sha256": "c17367290dc749424bc51b3ca2fa851c294cee61a385ef791ab66666a64d0181"
+    },
+    {
+      "path": "build/original-six/compile-commands.json",
+      "original_path": "/private/tmp/protracker-paula-incremental-4glly2eg/compile-commands.json",
+      "bytes": 15122,
+      "sha256": "90e477ad90ca1493e18362429e7725f0dfb49fe375bdf3bd1c0a9ef4e00da8e0"
+    },
+    {
+      "path": "build/original-six/compile-provenance.json",
+      "original_path": "/private/tmp/protracker-paula-incremental-4glly2eg/compile-provenance.json",
+      "bytes": 716,
+      "sha256": "f4ec03c872e0ff98ceef30945c4a57fea52f6a241ac1b6b10605dc20a5db261f"
+    },
+    {
+      "path": "build/original-six/REPRODUCTION.md",
+      "original_path": "/private/tmp/protracker-paula-incremental-4glly2eg/REPRODUCTION.md",
+      "bytes": 865,
+      "sha256": "8be5d8b03f2043b865b3a0db0294dec4c8c2fea892998abbb9b9f64bc93d6e1e"
+    },
+    {
+      "path": "build/original-six/reproduce-native.py",
+      "original_path": "/private/tmp/protracker-paula-incremental-4glly2eg/reproduce-native.py",
+      "bytes": 1420,
+      "sha256": "8fc2022c337de9eecfbfad00980ba9d853509acecd51ccc5aa6f2e26ab86d4a0"
+    },
+    {
+      "path": "build/original-six/host.log",
+      "original_path": "/private/tmp/protracker-paula-incremental-4glly2eg/host.log",
+      "bytes": 2228,
+      "sha256": "c971794212c9f40be283a2d7587d18df4a09f6fc1c855dff17e9f295aa077b59"
+    },
+    {
+      "path": "build/original-six/native-build.log",
+      "original_path": "/private/tmp/protracker-paula-incremental-4glly2eg/native-build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/original-six/native-followons-build.log",
+      "original_path": "/private/tmp/protracker-paula-incremental-4glly2eg/native-followons-build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/original-six/historical-scripts/qualify_paula_incremental.py",
+      "original_path": "/private/tmp/qualify_paula_incremental.py",
+      "bytes": 5002,
+      "sha256": "0f8144ad18a996900a49e0a29e07439a7aea4b0872d27a740d9b6906edc03fae"
+    },
+    {
+      "path": "build/original-six/historical-scripts/crossbuild_paula_followons.py",
+      "original_path": "/private/tmp/crossbuild_paula_followons.py",
+      "bytes": 1535,
+      "sha256": "c680f3269125c549322456b9cdee0ff72bdcf14ff0cf146581f75c06ae1e0af8"
+    },
+    {
+      "path": "build/song-per-depth/manifest.json",
+      "original_path": "/private/tmp/protracker-paula-song-split-1di4u5r1/manifest.json",
+      "bytes": 29866,
+      "sha256": "a8f12714b0b31ad46c958fb2ed584e39a24337186c4af0f0535b9e13a9c62df5"
+    },
+    {
+      "path": "build/song-per-depth/compile-commands.json",
+      "original_path": "/private/tmp/protracker-paula-song-split-1di4u5r1/compile-commands.json",
+      "bytes": 5282,
+      "sha256": "de07800ec14bb459fb5f1fbb19e81aa8c6d0898a8cd70878a20d05fe3e5ff524"
+    },
+    {
+      "path": "build/song-per-depth/host-checks.json",
+      "original_path": "/private/tmp/protracker-paula-song-split-1di4u5r1/host-checks.json",
+      "bytes": 947,
+      "sha256": "3107510c393e02a5320491405d5ab63b4b8d367a60b299da75df83518929b027"
+    },
+    {
+      "path": "build/song-per-depth/host-checks.log",
+      "original_path": "/private/tmp/protracker-paula-song-split-1di4u5r1/host-checks.log",
+      "bytes": 777,
+      "sha256": "d2016b249998104331c65a00304cb74f9b47f59f6f85c92f9b2ea0371888b878"
+    },
+    {
+      "path": "build/song-per-depth/native-build.log",
+      "original_path": "/private/tmp/protracker-paula-song-split-1di4u5r1/native-build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/song-per-depth/README.md",
+      "original_path": "/private/tmp/protracker-paula-song-split-1di4u5r1/README.md",
+      "bytes": 1148,
+      "sha256": "6e2a9cad1b23bd4c80ef3a6c5f9aa0ab16334497f5d1f817c3cbc815f1ba3073"
+    },
+    {
+      "path": "build/song-per-depth/reproduce-native.py",
+      "original_path": "/private/tmp/protracker-paula-song-split-1di4u5r1/reproduce-native.py",
+      "bytes": 1420,
+      "sha256": "8fc2022c337de9eecfbfad00980ba9d853509acecd51ccc5aa6f2e26ab86d4a0"
+    },
+    {
+      "path": "build/song-per-depth/historical-scripts/build_paula_song_split.py",
+      "original_path": "/private/tmp/build_paula_song_split.py",
+      "bytes": 2857,
+      "sha256": "432a1e0dfcc931386720ebc975bc4f10f0df8acd6ccb838deb230a2f462c96fb"
+    },
+    {
+      "path": "native/preflight-1790984177339757000/result.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-qualification-1790984170549003000/runner/build/dev/render-files-1790984177339757000/result.json",
+      "bytes": 3650,
+      "sha256": "d141ba5380ea99d9e3b3f9b8d306ecac618b3770c8490b1580520e5056ad4e40"
+    },
+    {
+      "path": "native/preflight-1790984177339757000/independent-cleanup.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-qualification-1790984170549003000/runner/build/dev/render-files-1790984177339757000/independent-cleanup.json",
+      "bytes": 3529,
+      "sha256": "f4191bb6ed57a9318dfc25057f805c726b8f49744abae6bcb751571d53638620"
+    },
+    {
+      "path": "native/preflight-1790984177339757000/paula-preflight.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-qualification-1790984170549003000/runner/build/dev/render-files-1790984177339757000/paula-preflight.log",
+      "bytes": 369,
+      "sha256": "3a58c2c9e682694c61c2182a045413fc5c4753c515c6f582b8b0870de150b384"
+    },
+    {
+      "path": "native/preflight-1790984177339757000/launch.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-qualification-1790984170549003000/runner/build/dev/render-files-1790984177339757000/launch.log",
+      "bytes": 236,
+      "sha256": "2da539d575b3326341d040f2a976fb36e2f7d9aff5595c8334a5e44e1ee6f8e2"
+    },
+    {
+      "path": "native/preflight-1790984177339757000/guest-status-before-launch.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-qualification-1790984170549003000/runner/build/dev/render-files-1790984177339757000/guest-status-before-launch.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+    },
+    {
+      "path": "native/preflight-1790984177339757000/guest-status-before-staging.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-qualification-1790984170549003000/runner/build/dev/render-files-1790984177339757000/guest-status-before-staging.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+    },
+    {
+      "path": "native/preflight-1790984177339757000/runner.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-qualification-1790984170549003000/preflight-runner.log",
+      "bytes": 178,
+      "sha256": "36cd9b07c151c42a7f2059491549f30ac312c8db2b05a6abc9c6a4b2af2151df"
+    },
+    {
+      "path": "failures/host-prelaunch-1790983985822622000/result.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-qualification-1790983985822622000/result.json",
+      "bytes": 574,
+      "sha256": "1c1e6386b51bbbc9d6bd3901c0173adf221a53f22c839137a20ab0d0a9f5ae40"
+    },
+    {
+      "path": "failures/monolithic-song-1790984197938062000/result.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-qualification-1790984170549003000/runner/build/dev/render-files-1790984197938062000/result.json",
+      "bytes": 262,
+      "sha256": "a8c712b0262dca28c5006691c2117efbc49109de13ade54307ef9c8eae7ca4a3"
+    },
+    {
+      "path": "failures/monolithic-song-1790984197938062000/launch.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-qualification-1790984170549003000/runner/build/dev/render-files-1790984197938062000/launch.log",
+      "bytes": 236,
+      "sha256": "2da539d575b3326341d040f2a976fb36e2f7d9aff5595c8334a5e44e1ee6f8e2"
+    },
+    {
+      "path": "failures/monolithic-song-1790984197938062000/guest-status-before-launch.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-qualification-1790984170549003000/runner/build/dev/render-files-1790984197938062000/guest-status-before-launch.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+    },
+    {
+      "path": "failures/monolithic-song-1790984197938062000/guest-status-before-staging.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-qualification-1790984170549003000/runner/build/dev/render-files-1790984197938062000/guest-status-before-staging.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+    },
+    {
+      "path": "failures/monolithic-song-1790984197938062000/runner.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-qualification-1790984170549003000/song-runner.log",
+      "bytes": 993,
+      "sha256": "84c7944192274c2e8eec567a3a46597fda551ecc26203e18231a726ce878b6ae"
+    },
+    {
+      "path": "failures/monolithic-song-1790984197938062000/qualification-result.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-qualification-1790984170549003000/result.json",
+      "bytes": 90967,
+      "sha256": "57fbd28e93a67dd0c92791a0647023d06717109cb6ee798e92222dee55ca3faa"
+    },
+    {
+      "path": "recovery/read-only-late-completion-1790984426213813000/result.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-timeout-inspect-1790984426213813000/result.json",
+      "bytes": 2456,
+      "sha256": "14fe42328780a0ea6b229ca60de699a266f291cb064c87de80b25b2d135689a4"
+    },
+    {
+      "path": "recovery/exact-cleanup-1790984608045482000/result.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-timeout-cleanup-1790984608045482000/result.json",
+      "bytes": 4117,
+      "sha256": "034b44584823ad8805c58a6275511c68e978e427f925827bb8b9ddf59e71f314"
+    },
+    {
+      "path": "recovery/exact-cleanup-1790984608045482000/done",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-timeout-cleanup-1790984608045482000/done",
+      "bytes": 5,
+      "sha256": "d117fa006ba9208500b2930ce69cbde436c647afa917cb7396a9bc9111a46dd2"
+    },
+    {
+      "path": "recovery/exact-cleanup-1790984608045482000/launcher.script",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-timeout-cleanup-1790984608045482000/launcher.script",
+      "bytes": 257,
+      "sha256": "3b50508e9108f98fe5e24b8780bd68e792f4e4c7ac3b606fb792d1a1ffbb3ddf"
+    },
+    {
+      "path": "recovery/exact-cleanup-1790984608045482000/test.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-timeout-cleanup-1790984608045482000/test.log",
+      "bytes": 241,
+      "sha256": "15bb14ac2ea4500e401a8d6514c0f25cecfd490c52f1016b9c2ca0482c626ddc"
+    },
+    {
+      "path": "recovery/exact-cleanup-1790984608045482000/test.rc",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-timeout-cleanup-1790984608045482000/test.rc",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "recovery/independent-release-1790984871648059000/result.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-recovery-independent-1790984871648059000/result.json",
+      "bytes": 7021,
+      "sha256": "7469ef90139170143daa8b7c43dc872c5f8952805ab16578b43e9183220f646a"
+    },
+    {
+      "path": "native-split/result.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/result.json",
+      "bytes": 83622,
+      "sha256": "1277a1d2c8a6b36915d4345c7b1d89e37b547b2cc1329226f84daaf775e4b013"
+    },
+    {
+      "path": "native-split/qualification.py",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/qualify_incremental_paula_split.py",
+      "bytes": 7334,
+      "sha256": "18821f67db5449d2d23f2a5adb6d5dbe15c8af44f4b8d5357cd53c3206eedde6"
+    },
+    {
+      "path": "native-split/song-8/runner.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/song-8-runner.log",
+      "bytes": 179,
+      "sha256": "4dcc8dc526cf583b5f969b6ca00cb0c64e6ca6ab6af478a9c560e29fffcad6fe"
+    },
+    {
+      "path": "native-split/song-8/result.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-song-8/build/dev/render-files-1790985174393147000/result.json",
+      "bytes": 3635,
+      "sha256": "95eb88ecfb1eae5b99845b4f7efd1b3b1c649200a27375232111f08bccabb4e3"
+    },
+    {
+      "path": "native-split/song-8/launch.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-song-8/build/dev/render-files-1790985174393147000/launch.log",
+      "bytes": 236,
+      "sha256": "2da539d575b3326341d040f2a976fb36e2f7d9aff5595c8334a5e44e1ee6f8e2"
+    },
+    {
+      "path": "native-split/song-8/paula-song.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-song-8/build/dev/render-files-1790985174393147000/paula-song.log",
+      "bytes": 313,
+      "sha256": "593ceed8e477f8f53773790b4d78c3464a7743b452261627526398107c5d3d15"
+    },
+    {
+      "path": "native-split/song-8/guest-status-before-launch.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-song-8/build/dev/render-files-1790985174393147000/guest-status-before-launch.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+    },
+    {
+      "path": "native-split/song-8/independent-cleanup.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-song-8/build/dev/render-files-1790985174393147000/independent-cleanup.json",
+      "bytes": 3698,
+      "sha256": "bd447865695179db09b2eeaf1c731c46867d107cb5780dac21004c9225f3ab55"
+    },
+    {
+      "path": "native-split/song-8/guest-status-before-staging.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-song-8/build/dev/render-files-1790985174393147000/guest-status-before-staging.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+    },
+    {
+      "path": "native-split/song-16/runner.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/song-16-runner.log",
+      "bytes": 180,
+      "sha256": "67e4e0d943e0021d2aa4498f32ff8bd2235fcd15f7ff05af924d2e2bfd650006"
+    },
+    {
+      "path": "native-split/song-16/result.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-song-16/build/dev/render-files-1790985223604574000/result.json",
+      "bytes": 3637,
+      "sha256": "9436bf47597ea76c04ada042b487cd80becb2735f394620fcb61ffa2bc067ab7"
+    },
+    {
+      "path": "native-split/song-16/launch.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-song-16/build/dev/render-files-1790985223604574000/launch.log",
+      "bytes": 236,
+      "sha256": "2da539d575b3326341d040f2a976fb36e2f7d9aff5595c8334a5e44e1ee6f8e2"
+    },
+    {
+      "path": "native-split/song-16/paula-song.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-song-16/build/dev/render-files-1790985223604574000/paula-song.log",
+      "bytes": 314,
+      "sha256": "04dd662d3180f5a522c379f9a7f70bc1361d64ab3292169e0cd6d50ee657da8d"
+    },
+    {
+      "path": "native-split/song-16/guest-status-before-launch.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-song-16/build/dev/render-files-1790985223604574000/guest-status-before-launch.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+    },
+    {
+      "path": "native-split/song-16/independent-cleanup.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-song-16/build/dev/render-files-1790985223604574000/independent-cleanup.json",
+      "bytes": 3698,
+      "sha256": "8ac6543dde079b8431faf250875c230a38c3ccb1985d42d73ce7ece976c2cfb2"
+    },
+    {
+      "path": "native-split/song-16/guest-status-before-staging.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-song-16/build/dev/render-files-1790985223604574000/guest-status-before-staging.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+    },
+    {
+      "path": "native-split/song-24/runner.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/song-24-runner.log",
+      "bytes": 180,
+      "sha256": "279810e32bd2a982904e2483604b1e8828fa0d402ddafdf59b0a7d7326603dc3"
+    },
+    {
+      "path": "native-split/song-24/result.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-song-24/build/dev/render-files-1790985272929657000/result.json",
+      "bytes": 3637,
+      "sha256": "2d92b7f090a81f2c047d3f70ca3a6b95df070e888592f7f355ef1b57a7e95ff0"
+    },
+    {
+      "path": "native-split/song-24/launch.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-song-24/build/dev/render-files-1790985272929657000/launch.log",
+      "bytes": 236,
+      "sha256": "2da539d575b3326341d040f2a976fb36e2f7d9aff5595c8334a5e44e1ee6f8e2"
+    },
+    {
+      "path": "native-split/song-24/paula-song.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-song-24/build/dev/render-files-1790985272929657000/paula-song.log",
+      "bytes": 314,
+      "sha256": "2b61d917255ac1d84be41a34c4b42b453eadabc0dbd99eaa05745fa187b762c4"
+    },
+    {
+      "path": "native-split/song-24/guest-status-before-launch.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-song-24/build/dev/render-files-1790985272929657000/guest-status-before-launch.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+    },
+    {
+      "path": "native-split/song-24/independent-cleanup.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-song-24/build/dev/render-files-1790985272929657000/independent-cleanup.json",
+      "bytes": 3698,
+      "sha256": "d19b635f1c9468a8bcf92a404407b8193e4533259c8479444a43c0afe5ce3ee9"
+    },
+    {
+      "path": "native-split/song-24/guest-status-before-staging.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-song-24/build/dev/render-files-1790985272929657000/guest-status-before-staging.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+    },
+    {
+      "path": "native-split/editor/runner.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/editor-runner.log",
+      "bytes": 179,
+      "sha256": "1cb7a127fef083473685b39d1c5bc5e14002067cc6d4454b50e5e1e05d2950fb"
+    },
+    {
+      "path": "native-split/editor/result.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-editor/build/dev/render-files-1790985323625529000/result.json",
+      "bytes": 3642,
+      "sha256": "259f4b58b5be7fb835ddafd190e6a771e64aaeab804955959bb18f583977d921"
+    },
+    {
+      "path": "native-split/editor/launch.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-editor/build/dev/render-files-1790985323625529000/launch.log",
+      "bytes": 236,
+      "sha256": "2da539d575b3326341d040f2a976fb36e2f7d9aff5595c8334a5e44e1ee6f8e2"
+    },
+    {
+      "path": "native-split/editor/editor-paula.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-editor/build/dev/render-files-1790985323625529000/editor-paula.log",
+      "bytes": 253,
+      "sha256": "2469f83131400e51a725075eebc502765808b3b38a3d867cb81b9d6a4fff5c71"
+    },
+    {
+      "path": "native-split/editor/guest-status-before-launch.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-editor/build/dev/render-files-1790985323625529000/guest-status-before-launch.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+    },
+    {
+      "path": "native-split/editor/independent-cleanup.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-editor/build/dev/render-files-1790985323625529000/independent-cleanup.json",
+      "bytes": 3698,
+      "sha256": "bb044c6ee43646a9e71d3242368ec6d3d4b344003f4d54a0225eea10750c520b"
+    },
+    {
+      "path": "native-split/editor/guest-status-before-staging.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-split-qualification-1790985173500464000/runner-editor/build/dev/render-files-1790985323625529000/guest-status-before-staging.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+    },
+    {
+      "path": "native-prepared/qualification-result.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-prepared-1790985496983654000/result.json",
+      "bytes": 28730,
+      "sha256": "2afcec36e76f9a8ca8717a9d67cbf6be94caf1c87d0711b0b09bf430b974e412"
+    },
+    {
+      "path": "native-prepared/qualification.py",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/qualify_incremental_paula_prepared.py",
+      "bytes": 7957,
+      "sha256": "7122c69c9222553ab044f30edb6363fa3149c3234f6b78c2e32f304a85c66646"
+    },
+    {
+      "path": "native-prepared/runner.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-prepared-1790985496983654000/prepared-output-runner.log",
+      "bytes": 173,
+      "sha256": "33b0d45ba45b56873a1d5401f5834c13820613d4d52314733d963f005a82020d"
+    },
+    {
+      "path": "native-prepared/result.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-prepared-1790985496983654000/runner/build/dev/render-files-1790985499005187000/result.json",
+      "bytes": 3854,
+      "sha256": "56471178a3e7212b4789bf9d39acbe5025f29d4faf485454838c1d57c50efa0e"
+    },
+    {
+      "path": "native-prepared/launch.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-prepared-1790985496983654000/runner/build/dev/render-files-1790985499005187000/launch.log",
+      "bytes": 236,
+      "sha256": "2da539d575b3326341d040f2a976fb36e2f7d9aff5595c8334a5e44e1ee6f8e2"
+    },
+    {
+      "path": "native-prepared/prepared-paula.log",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-prepared-1790985496983654000/runner/build/dev/render-files-1790985499005187000/prepared-paula.log",
+      "bytes": 914,
+      "sha256": "b474fcd51d5ebe4c7e25fa52a758bfa9b30b02467f9162ca49d81288bb1acf40"
+    },
+    {
+      "path": "native-prepared/guest-status-before-launch.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-prepared-1790985496983654000/runner/build/dev/render-files-1790985499005187000/guest-status-before-launch.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+    },
+    {
+      "path": "native-prepared/independent-cleanup.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-prepared-1790985496983654000/runner/build/dev/render-files-1790985499005187000/independent-cleanup.json",
+      "bytes": 3690,
+      "sha256": "076ce0b54aa1b564f10bfd99e77526bfb69622a32fde88625d8180e68b46094e"
+    },
+    {
+      "path": "native-prepared/audio-before-launch.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-prepared-1790985496983654000/runner/build/dev/render-files-1790985499005187000/audio-before-launch.json",
+      "bytes": 103,
+      "sha256": "b328387d5b0321522ca8ca775c7be9ebc0f8b14dc550f323909addbfbf3be016"
+    },
+    {
+      "path": "native-prepared/audio-before-staging.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-prepared-1790985496983654000/runner/build/dev/render-files-1790985499005187000/audio-before-staging.json",
+      "bytes": 103,
+      "sha256": "b97948b787e1baadc84e8b47be3f1b4a502779302671ac713b99130b520a8301"
+    },
+    {
+      "path": "native-prepared/guest-status-before-staging.json",
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-incremental-prepared-1790985496983654000/runner/build/dev/render-files-1790985499005187000/guest-status-before-staging.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+    }
+  ]
+}

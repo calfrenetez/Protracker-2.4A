@@ -1,0 +1,4 @@
+EXEC MEMORY pool_limit=131083504 reserve=262144 flags=4
+PAULA SONG CASE PASS: bits=16 full per-bit assertions and runtime bounds
+PAULA SONG PASS: shared sequence, selected master pins, late refusal and retained cleanup
+EXEC MEMORY PASS: 163 Fast allocations, zero owned bytes, budget refusal without Chip fallback

@@ -64,3 +64,16 @@ entry still executes all three matrices. Invalid depths and selection outside
 the native entry refuse compilation. Each candidate needs its own exact build
 manifest, fresh coordinated window, unchanged deadline and independent cleanup
 check. Splitting workloads supplies no native timing or device-output acceptance.
+
+Exact shared030 qualification now passes native preflight (102 Fast allocations,
+zero owned bytes), all three full selected-depth song matrices (163 each, zero)
+and standalone editor ownership (81, zero). Each candidate completed within its
+unchanged90second deadline, with matching depth marker where applicable, RC0,
+exact cleanup and subsequent separately locked10second absence/original idle
+identity checks. A separately coordinated silent prepared-output fixture also
+passes: classic8 zero-leading segment refuses before promotion/output; silent
+16/24 use selected zero Chip32 and actual emulator audio.device WRITE, then
+confirm device closure and26 Fast allocationszero. Both windows were explicitly
+released. See `../evidence/enhanced-editor/paula-incremental/`. These are software
+preparation/ownership and silent emulator device checks, not musical timing,
+frontend PLAY, physical-device or listening acceptance.

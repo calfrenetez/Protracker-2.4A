@@ -1,0 +1,11 @@
+{
+  "base_commit": "fd084f12e252b44d2dd193d52f8d0fef46d5b08b",
+  "source_export": "/private/tmp/protracker-paula-incremental-4glly2eg/source",
+  "compiler_sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+  "manifest_sha256": "b554e2e048fd639c0ece08f7bc522b2df85275a765f3d1ac63913638699eb7c5",
+  "recorded_from": [
+    "/private/tmp/qualify_paula_incremental.py",
+    "/private/tmp/crossbuild_paula_followons.py"
+  ],
+  "verification": "Compared ordered inputs and flags with the build-script source-list construction; verified all existing binary bytes and hashes; no compiler invocation or rebuild. Included C fixtures stay in dependency maps, not independent compile/link arguments."
+}

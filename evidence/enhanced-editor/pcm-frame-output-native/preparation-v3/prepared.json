@@ -1,0 +1,61 @@
+{
+  "scope": "PCM portable preparation only, native/target qualification NOT RUN. Actual committed --verify-only and simulated guard proof are host-only; no identity, cleanup or ACK invented.",
+  "helper_and_proof_files": [
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/committed-verify-only.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/committed-verify-only.stdout",
+      "bytes": 639,
+      "sha256": "2fb57c8375384cabaed6543372144e311702d9a83beb9f6aba9ccb71df8d9f50"
+    },
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/host-preparation-proof.json",
+      "bytes": 3413,
+      "sha256": "98f509dbbbf3e3df08d7cb09fa0e4f1b123e78c1c8efaa6701a0e15a2876bed0"
+    },
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/mock-check.stderr",
+      "bytes": 2152,
+      "sha256": "37a65888b808d4c950a6260b224d1b7ec624c78c9872ed8cbea569ec69d1f9af"
+    },
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/mock-check.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/mock-proof.json",
+      "bytes": 892,
+      "sha256": "f5b7c73826b78b5a8fc2d10a329f14df1f97709759e7b887595819c4cf885e60"
+    },
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/original-root-host-only-failure.json",
+      "bytes": 649,
+      "sha256": "08bc16d735e962415e6dffb27d97aad04e8cda9552a497a72a6d0466bdb4358d"
+    },
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/preparation-scope.json",
+      "bytes": 869,
+      "sha256": "6d2f882ed878cc4b041e073e5154bbf0b7c169ddfc9a3921db0b58af5b1fd5e3"
+    },
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/qualify_pcm_frame_output_safety.py",
+      "bytes": 11865,
+      "sha256": "9565cc5a762fffd4f576c2af2ea1dbceaea13a2b846b34bbded7db50ff206f2b"
+    },
+    {
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/test_qualifier_mocked.py",
+      "bytes": 13222,
+      "sha256": "10cd257655ce6ff065ea49f39198cdb412edcfb01754034ad01de9c44838a4a0"
+    }
+  ],
+  "required_later_live_conditions": [
+    "Fresh separately approved ownership/control scope with no recovery hold.",
+    "Explicit --repo plus separately pinned fresh sole process full command/profile SHA identity file.",
+    "Caller-enforced outer250s bound; stop/HOLD on any uncertain timeout/ownership/restoration failure.",
+    "Unchanged native90s/process140s/overall250s gates and persistent11absences>10s."
+  ]
+}

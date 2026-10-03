@@ -1,0 +1,298 @@
+{
+  "scope": "Exact copied original portable native qualification/preparation/guard/coordination evidence; single native pass and separate read-only verification, no physical/device/audio/timing acceptance",
+  "files": [
+    {
+      "path": "root/capture_identity.py",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/capture_identity.py",
+      "bytes": 1284,
+      "sha256": "2770e0dfa5ae65346cd8c3a114c29a4aa3497c7b0fecd95f8d5a196b2e082c9d"
+    },
+    {
+      "path": "root/capture_identity_next.py",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/capture_identity_next.py",
+      "bytes": 1289,
+      "sha256": "88ea8e0bbc2987f2157e28e884e0cb43454e7de45bcc7ab7cad56c593353d3cc"
+    },
+    {
+      "path": "root/committed-verify-only.json",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/committed-verify-only.json",
+      "bytes": 649,
+      "sha256": "08bc16d735e962415e6dffb27d97aad04e8cda9552a497a72a6d0466bdb4358d"
+    },
+    {
+      "path": "root/committed-verify-only.log",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/committed-verify-only.log",
+      "bytes": 852,
+      "sha256": "cc557a165892a56f68344ec86bfd84ac09a96a466443234047aad8ebbbdc220a"
+    },
+    {
+      "path": "root/coordinator-release115.json",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/coordinator-release115.json",
+      "bytes": 1166,
+      "sha256": "0ab0304e5fad3d3e0bd30d5246848ae5204f41a3d02c346f62262cc8ec0f216e"
+    },
+    {
+      "path": "root/coordinator-request111.json",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/coordinator-request111.json",
+      "bytes": 1414,
+      "sha256": "216fe3f793d2fa9eca4133678900e15cfe03e59603a698a3fcf615f64202fcbe"
+    },
+    {
+      "path": "root/coordinator-take113.json",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/coordinator-take113.json",
+      "bytes": 1115,
+      "sha256": "c35679655b19b3ffb621d939afd0f6cf628b0480cd1219efb0a86835a18c87d5"
+    },
+    {
+      "path": "root/coordinator-unused-release109.json",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/coordinator-unused-release109.json",
+      "bytes": 1099,
+      "sha256": "d64c8b220b50ea61bdc8cf80c569d46d2b67a47e6462c3a087765a96cba636d0"
+    },
+    {
+      "path": "root/current-source-check.json",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/current-source-check.json",
+      "bytes": 1823,
+      "sha256": "f1605402060c32fb6b26a6d16c52ad438740b2dfbaf3b123190229d9e2e905b1"
+    },
+    {
+      "path": "root/fresh-identity-next.json",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/fresh-identity-next.json",
+      "bytes": 698,
+      "sha256": "c84d06d653099d7b6dd5e80143dc25a726c623fefaa13363a867e564f70d2447"
+    },
+    {
+      "path": "root/fresh-identity.json",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/fresh-identity.json",
+      "bytes": 698,
+      "sha256": "680694239975183ee096e8f53f80beea96fd5dd81d79850e70957cce3d9bfa94"
+    },
+    {
+      "path": "root/native-execution-next-claim.json",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/native-execution-next-claim.json",
+      "bytes": 101,
+      "sha256": "5171ed0671a505cb2096e31e0ad00c5d6bd2d99910e40b7c08095c6e28619722"
+    },
+    {
+      "path": "root/native-execution-next.json",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/native-execution-next.json",
+      "bytes": 1435,
+      "sha256": "134bc138aa1983d1d450082bcbb72c3e8652a56e490b001ae9f1bbfcca87aa1d"
+    },
+    {
+      "path": "root/native-execution-next.log",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/native-execution-next.log",
+      "bytes": 484,
+      "sha256": "954002aeec4978422d851cbdbdc0bd85bed30f8987ad61329d8bb9bdd8d1c3a8"
+    },
+    {
+      "path": "root/prepared-packet-audit.json",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/prepared-packet-audit.json",
+      "bytes": 668,
+      "sha256": "2c9e090154582332575cda4b127370852c51f043327eb15d0e3910d43da63d6c"
+    },
+    {
+      "path": "root/run_native_next_once.py",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/run_native_next_once.py",
+      "bytes": 2102,
+      "sha256": "dcf88c8da647e45c5b73820d1e50ad8da8c6e4d60344630190d64eb9ed2a723d"
+    },
+    {
+      "path": "root/run_native_once.py",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/run_native_once.py",
+      "bytes": 1957,
+      "sha256": "881b52069951fe3bfba6e27ed10ef221a4e7cc9733d11f7c2e342527856673bc"
+    },
+    {
+      "path": "root/run_verify_return_once.py",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/run_verify_return_once.py",
+      "bytes": 759,
+      "sha256": "362f2c54b959ec9d9b7613c621688ff4a6d7514910ceac23a08e6ca439704a8e"
+    },
+    {
+      "path": "root/separate-idle-claim.json",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/separate-idle-claim.json",
+      "bytes": 99,
+      "sha256": "80eb832748bdcd2cb1283ec88396b724f073f61fa55f8491e3c0e9b0fc3596fb"
+    },
+    {
+      "path": "root/separate-idle-execution.json",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/separate-idle-execution.json",
+      "bytes": 174,
+      "sha256": "a8bf60829491b4a82d790d0534c0c977e1a823f85f508ac8ac2c97a190ea3c5d"
+    },
+    {
+      "path": "root/separate-idle-execution.log",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/separate-idle-execution.log",
+      "bytes": 70,
+      "sha256": "a62e09e4972935caf28f995cbe942f3fbd0ea771ec35940c210599bcc611dd8d"
+    },
+    {
+      "path": "root/separate-idle-result.json",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/separate-idle-result.json",
+      "bytes": 5226,
+      "sha256": "5f20f6b9f6b59cb1b3f9d8fe6ea2a54388c4fd558c33e61fd049fce320b671a6"
+    },
+    {
+      "path": "root/take-gate.json",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/take-gate.json",
+      "bytes": 628,
+      "sha256": "eddb416311a65b3899ac2563d8d0e3eea5b4a7e02469ce9105993bde0089d2fb"
+    },
+    {
+      "path": "root/verify_native_return.py",
+      "origin": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/verify_native_return.py",
+      "bytes": 3162,
+      "sha256": "63157fd2db31916bcdb9587abb5d2aa5aebc278dda599ae742288c8f11f282f9"
+    },
+    {
+      "path": "preparation-v3/README.md",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/README.md",
+      "bytes": 1286,
+      "sha256": "d6b29ab63a59baae1fc69dec315de4d4ffe1a86f225365d916dbcf1336dc026d"
+    },
+    {
+      "path": "preparation-v3/committed-verify-only.stderr",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/committed-verify-only.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "preparation-v3/committed-verify-only.stdout",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/committed-verify-only.stdout",
+      "bytes": 639,
+      "sha256": "2fb57c8375384cabaed6543372144e311702d9a83beb9f6aba9ccb71df8d9f50"
+    },
+    {
+      "path": "preparation-v3/file-inventory.json",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/file-inventory.json",
+      "bytes": 2290,
+      "sha256": "903ed52e2e11e965366ce246992936caff0fc331218c03893d7918ccdae4a472"
+    },
+    {
+      "path": "preparation-v3/host-preparation-proof.json",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/host-preparation-proof.json",
+      "bytes": 3413,
+      "sha256": "98f509dbbbf3e3df08d7cb09fa0e4f1b123e78c1c8efaa6701a0e15a2876bed0"
+    },
+    {
+      "path": "preparation-v3/mock-check.stderr",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/mock-check.stderr",
+      "bytes": 2152,
+      "sha256": "37a65888b808d4c950a6260b224d1b7ec624c78c9872ed8cbea569ec69d1f9af"
+    },
+    {
+      "path": "preparation-v3/mock-check.stdout",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/mock-check.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "preparation-v3/mock-proof.json",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/mock-proof.json",
+      "bytes": 892,
+      "sha256": "f5b7c73826b78b5a8fc2d10a329f14df1f97709759e7b887595819c4cf885e60"
+    },
+    {
+      "path": "preparation-v3/original-root-host-only-failure.json",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/original-root-host-only-failure.json",
+      "bytes": 649,
+      "sha256": "08bc16d735e962415e6dffb27d97aad04e8cda9552a497a72a6d0466bdb4358d"
+    },
+    {
+      "path": "preparation-v3/preparation-scope.json",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/preparation-scope.json",
+      "bytes": 869,
+      "sha256": "6d2f882ed878cc4b041e073e5154bbf0b7c169ddfc9a3921db0b58af5b1fd5e3"
+    },
+    {
+      "path": "preparation-v3/prepared.json",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/prepared.json",
+      "bytes": 2939,
+      "sha256": "659306448e853d90f732cdebc081f5ed7d6fcad85748cb5b9cdf5f76df1b7e3b"
+    },
+    {
+      "path": "preparation-v3/qualify_pcm_frame_output_safety.py",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/qualify_pcm_frame_output_safety.py",
+      "bytes": 11865,
+      "sha256": "9565cc5a762fffd4f576c2af2ea1dbceaea13a2b846b34bbded7db50ff206f2b"
+    },
+    {
+      "path": "preparation-v3/test_qualifier_mocked.py",
+      "origin": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/test_qualifier_mocked.py",
+      "bytes": 13222,
+      "sha256": "10cd257655ce6ff065ea49f39198cdb412edcfb01754034ad01de9c44838a4a0"
+    },
+    {
+      "path": "qualification/qualification-result.json",
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/pcm-frame-output-safety-qualification-1791044018440356000/qualification-result.json",
+      "bytes": 37194,
+      "sha256": "732e1c384ef97c67683705c5691db9cdee3be717a4be3380463361ff217e56f0"
+    },
+    {
+      "path": "qualification/runner-wav-core/build/dev/PTPcmTest",
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/pcm-frame-output-safety-qualification-1791044018440356000/runner-wav-core/build/dev/PTPcmTest",
+      "bytes": 45988,
+      "sha256": "48acf5e0b61042dd7774c87253a016d09d005f9663880552d5766ce2a35f494f"
+    },
+    {
+      "path": "qualification/runner-wav-core/build/dev/render-files-1791044020059350000/guest-status-before-launch.json",
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/pcm-frame-output-safety-qualification-1791044018440356000/runner-wav-core/build/dev/render-files-1791044020059350000/guest-status-before-launch.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+    },
+    {
+      "path": "qualification/runner-wav-core/build/dev/render-files-1791044020059350000/guest-status-before-staging.json",
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/pcm-frame-output-safety-qualification-1791044018440356000/runner-wav-core/build/dev/render-files-1791044020059350000/guest-status-before-staging.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+    },
+    {
+      "path": "qualification/runner-wav-core/build/dev/render-files-1791044020059350000/independent-cleanup.json",
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/pcm-frame-output-safety-qualification-1791044018440356000/runner-wav-core/build/dev/render-files-1791044020059350000/independent-cleanup.json",
+      "bytes": 4263,
+      "sha256": "7f4cdbe8c53e0026af582cda11e854db75d3f5c01e30bd98e372d54bee8fd912"
+    },
+    {
+      "path": "qualification/runner-wav-core/build/dev/render-files-1791044020059350000/launch.log",
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/pcm-frame-output-safety-qualification-1791044018440356000/runner-wav-core/build/dev/render-files-1791044020059350000/launch.log",
+      "bytes": 236,
+      "sha256": "2da539d575b3326341d040f2a976fb36e2f7d9aff5595c8334a5e44e1ee6f8e2"
+    },
+    {
+      "path": "qualification/runner-wav-core/build/dev/render-files-1791044020059350000/result.json",
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/pcm-frame-output-safety-qualification-1791044018440356000/runner-wav-core/build/dev/render-files-1791044020059350000/result.json",
+      "bytes": 3632,
+      "sha256": "a2fe1636cf50b5b5c38d2cf134b5d5b90e48b9bce1ab33bb4fb3af08afa55321"
+    },
+    {
+      "path": "qualification/runner-wav-core/build/dev/render-files-1791044020059350000/wav-core.log",
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/pcm-frame-output-safety-qualification-1791044018440356000/runner-wav-core/build/dev/render-files-1791044020059350000/wav-core.log",
+      "bytes": 248,
+      "sha256": "b550b8f6c913920924b5ffa5b0981c388da6f3363f87cdb6106d7eb4527846c5"
+    },
+    {
+      "path": "qualification/wav-core-runner.log",
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/pcm-frame-output-safety-qualification-1791044018440356000/wav-core-runner.log",
+      "bytes": 193,
+      "sha256": "21e7e8a14d20b849238d0d48a4531cd69c0c609c9e08ac4880d48bde20ade779"
+    },
+    {
+      "path": "executed-runner/shared_infra_render_files.py",
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/pcm-frame-output-safety-qualification-1791044018440356000/runner-wav-core/tools/shared_infra_render_files.py",
+      "bytes": 48976,
+      "sha256": "df9c7f37252bb27e9315aa244854db12a3186ba987924c0d094f5142ae968978"
+    },
+    {
+      "path": "root/pcm-native-independent-review.json",
+      "origin": "/private/tmp/protracker-pcm-native-independent-review.json",
+      "bytes": 4568,
+      "sha256": "a679c00cfe6959a79e1889f172d565af303483973fe5a4610499cbc300d3ba4b"
+    }
+  ],
+  "readme_sha256": "5cadc4b6e10550680fdac8e21989ee28d14bbd3676b88abfed7c4975eb4202e7",
+  "native_candidate_sha256": "48acf5e0b61042dd7774c87253a016d09d005f9663880552d5766ce2a35f494f",
+  "qualification_sha256": "732e1c384ef97c67683705c5691db9cdee3be717a4be3380463361ff217e56f0",
+  "separate_idle_sha256": "5f20f6b9f6b59cb1b3f9d8fe6ea2a54388c4fd558c33e61fd049fce320b671a6",
+  "coordinator_release_revision": 115
+}

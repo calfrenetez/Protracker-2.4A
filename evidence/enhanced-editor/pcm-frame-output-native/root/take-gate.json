@@ -1,0 +1,10 @@
+{
+  "scope": "One portable PCM fixture only",
+  "root_take_recorded": true,
+  "shared_holds_cleared": true,
+  "coordinator_revision": 113,
+  "coordinator_ack": "ProTracker\u2019s single-fixture, maximum-420-second TAKE is noted, conditional on successful nonblocking lock and exact live guards. AmiConnect will leave shared resources untouched until refusal, hold or independently verified release. No second case or collector is included.",
+  "coordinator_turn": "01a1028a-7aaf-7421-b4a0-346cbf79427c",
+  "take_epoch_seconds": 1791043992,
+  "helper_sha256": "9565cc5a762fffd4f576c2af2ea1dbceaea13a2b846b34bbded7db50ff206f2b"
+}

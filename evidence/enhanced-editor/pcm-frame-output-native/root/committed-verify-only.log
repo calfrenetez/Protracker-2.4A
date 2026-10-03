@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier/qualify_pcm_frame_output_safety.py", line 169, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier/qualify_pcm_frame_output_safety.py", line 112, in main
+    tree,cases,_=verified(build,repo)
+                 ~~~~~~~~^^^^^^^^^^^^
+  File "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier/qualify_pcm_frame_output_safety.py", line 50, in verified
+    if str(path)!=manifest['runtime_paths'][name]:raise RuntimeError('Resolved runtime path changed: '+name)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Resolved runtime path changed: libstubs.a

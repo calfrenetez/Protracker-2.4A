@@ -1,0 +1,12 @@
+{
+  "scope": "Preparation-only correction of lexical runtime path comparison; no product/source/binary/build/Guest/lock/staging/target changes. Original helper/mock/proofs and committed evidence package remain unchanged.",
+  "original_qualifier": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier/qualify_pcm_frame_output_safety.py",
+    "sha256": "30d279d5cabe5118ce34cd2955e5a8c5b639ba5bbd8fba118896c4171224cc71"
+  },
+  "original_root_host_only_failure": {
+    "path": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/committed-verify-only.json",
+    "sha256": "08bc16d735e962415e6dffb27d97aad04e8cda9552a497a72a6d0466bdb4358d"
+  },
+  "change": "Resolve compiler-reported runtime paths strictly to canonical existing paths, then require exact pinned canonical path and SHA; lexical ../ segments do not weaken any actual-file guard."
+}

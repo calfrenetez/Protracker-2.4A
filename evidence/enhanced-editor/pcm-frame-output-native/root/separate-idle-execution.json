@@ -1,0 +1,7 @@
+{
+  "scope": "External60s watchdog for separate read-only idle verification",
+  "passed": true,
+  "outer_bound_s": 60,
+  "returncode": 0,
+  "elapsed_s": 11.013470292004058
+}

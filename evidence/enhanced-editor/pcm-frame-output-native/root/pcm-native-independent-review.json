@@ -1,0 +1,97 @@
+{
+  "candidate": {
+    "bytes": 45988,
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/native-final/PTPcmTest",
+    "sha256": "48acf5e0b61042dd7774c87253a016d09d005f9663880552d5766ce2a35f494f"
+  },
+  "committed_verified_paths": 13,
+  "compiled_canonical_paths": 10,
+  "coordinator_take_receipt": {
+    "bytes": 1115,
+    "path": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/coordinator-take113.json",
+    "sha256": "c35679655b19b3ffb621d939afd0f6cf628b0480cd1219efb0a86835a18c87d5"
+  },
+  "history_scope": "Original verify-only lexical runtime-path refusal and unusedTAKE108 time-budget refusal remain NOT RUN, separate from fresh113 actual single native fixture. No native failure was retried by this reviewer.",
+  "internal_absence_observations": 11,
+  "internal_first_to_last_span_s": 10.060107249999419,
+  "markers": [
+    "PCM FRAME OUTPUT PASS:",
+    "PCM/WAV PASS:"
+  ],
+  "native_external_s": 15.431034666995401,
+  "native_rc": "0",
+  "original_host_failure": [
+    {
+      "bytes": 649,
+      "path": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/committed-verify-only.json",
+      "sha256": "08bc16d735e962415e6dffb27d97aad04e8cda9552a497a72a6d0466bdb4358d"
+    },
+    {
+      "bytes": 852,
+      "path": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/committed-verify-only.log",
+      "sha256": "cc557a165892a56f68344ec86bfd84ac09a96a466443234047aad8ebbbdc220a"
+    }
+  ],
+  "original_process": [
+    19081,
+    "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+  ],
+  "passed": true,
+  "previous_review": {
+    "bytes": 2986,
+    "path": "/private/tmp/protracker-pcm-native-independent-review.pre-release.json",
+    "sha256": "7b08a547475bd5c8c866c455aa36554bac1024aa33a717dbe50a84406a90297b"
+  },
+  "profile_guard_attribution": "Actual saved identity plus executed helper require_identity/profile checks at begin/end; not a new live observation",
+  "profile_hash_from_fresh_identity": "894aa5a61a2bf6267b461c6774a0bdc913a96e7f581ea7e4e3762c4d71709a30",
+  "qualification": {
+    "bytes": 37194,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/pcm-frame-output-safety-qualification-1791044018440356000/qualification-result.json",
+    "sha256": "732e1c384ef97c67683705c5691db9cdee3be717a4be3380463361ff217e56f0"
+  },
+  "receipts": [
+    {
+      "bytes": 1435,
+      "path": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/native-execution-next.json",
+      "sha256": "134bc138aa1983d1d450082bcbb72c3e8652a56e490b001ae9f1bbfcca87aa1d"
+    },
+    {
+      "bytes": 698,
+      "path": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/fresh-identity-next.json",
+      "sha256": "c84d06d653099d7b6dd5e80143dc25a726c623fefaa13363a867e564f70d2447"
+    },
+    {
+      "bytes": 628,
+      "path": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/take-gate.json",
+      "sha256": "eddb416311a65b3899ac2563d8d0e3eea5b4a7e02469ce9105993bde0089d2fb"
+    },
+    {
+      "bytes": 5226,
+      "path": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/separate-idle-result.json",
+      "sha256": "5f20f6b9f6b59cb1b3f9d8fe6ea2a54388c4fd558c33e61fd049fce320b671a6"
+    },
+    {
+      "bytes": 174,
+      "path": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/separate-idle-execution.json",
+      "sha256": "a8bf60829491b4a82d790d0534c0c977e1a823f85f508ac8ac2c97a190ea3c5d"
+    }
+  ],
+  "release_receipt": {
+    "bytes": 1166,
+    "path": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/coordinator-release115.json",
+    "sha256": "0ab0304e5fad3d3e0bd30d5246848ae5204f41a3d02c346f62262cc8ec0f216e"
+  },
+  "release_status": "Saved actual coordinator acknowledgment115 records portable-only pass/release/no hold; no live coordinator query by reviewer",
+  "runtime_fingerprints": 7,
+  "scope": "Independent read-only audit of saved portable emulator assertion/cleanup evidence; no target queries, reruns or physical/Exec acceptance",
+  "sdk_fingerprints": 25,
+  "separate_absence_observations": 11,
+  "separate_external_s": 11.013470292004058,
+  "separate_first_to_last_span_s": 10.058767041002284,
+  "take_revision": 113,
+  "unused_prior_window_release": {
+    "bytes": 1099,
+    "path": "/private/tmp/protracker-pcm-frame-root-z8bmyumb/coordinator-unused-release109.json",
+    "sha256": "d64c8b220b50ea61bdc8cf80c569d46d2b67a47e6462c3a087765a96cba636d0"
+  }
+}

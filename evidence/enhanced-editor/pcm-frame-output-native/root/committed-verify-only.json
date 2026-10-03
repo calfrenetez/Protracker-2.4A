@@ -1,0 +1,16 @@
+{
+  "scope": "Host-only verify-only invocation; no Guest/lock/staging/target",
+  "argv": [
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/.venv/bin/python",
+    "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier/qualify_pcm_frame_output_safety.py",
+    "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/native-final",
+    "--repo",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+    "--verify-only"
+  ],
+  "helper_sha256": "30d279d5cabe5118ce34cd2955e5a8c5b639ba5bbd8fba118896c4171224cc71",
+  "returncode": 1,
+  "elapsed_s": 0.3006560000067111,
+  "result": {},
+  "passed": false
+}

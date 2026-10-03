@@ -1,0 +1,60 @@
+{
+  "scope": "Host-only mocked guard tests and exact committed-source/toolchain --verify-only. No Guest/IPC/lock/staging/target or native execution; original qualifier directory unchanged.",
+  "passed": true,
+  "commands": [
+    {
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/test_qualifier_mocked.py"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev",
+      "returncode": 0,
+      "elapsed_s": 0.8964450829953421,
+      "stdout": {
+        "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/mock-check.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/mock-check.stderr",
+        "sha256": "37a65888b808d4c950a6260b224d1b7ec624c78c9872ed8cbea569ec69d1f9af"
+      }
+    },
+    {
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/qualify_pcm_frame_output_safety.py",
+        "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/native-final",
+        "--repo",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "--verify-only"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev",
+      "returncode": 0,
+      "elapsed_s": 0.30363754100108054,
+      "stdout": {
+        "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/committed-verify-only.stdout",
+        "sha256": "2fb57c8375384cabaed6543372144e311702d9a83beb9f6aba9ccb71df8d9f50"
+      },
+      "stderr": {
+        "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/committed-verify-only.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "original_files_unchanged": {
+    "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier/mock-proof.log": "a6e9d20757f308bb8c2f960d9793ba325f87e6ce2917958d100477954288f547",
+    "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier/test_qualifier_mocked.py": "c2672e308aebe1afe318782471732dc09a9ada0fbd21b6933ddc2e97509b0a34",
+    "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier/qualify_pcm_frame_output_safety.py": "30d279d5cabe5118ce34cd2955e5a8c5b639ba5bbd8fba118896c4171224cc71",
+    "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier/prepared.json": "7a3b5303ca51c3843c7a90bdf116ea6b2e468e23a8da8c0ab68a98d1fde80663",
+    "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier/README.md": "82c8f7ef73ed12cff1ebac58742ec89d727819a266315431adb2584dc8850b7b",
+    "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier/mock-proof.json": "40a8aa73eff04c97f2f8315b64f77231ec92651d06bcbcd24ee1519f8a6ce86a"
+  },
+  "helper": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/qualify_pcm_frame_output_safety.py",
+    "sha256": "9565cc5a762fffd4f576c2af2ea1dbceaea13a2b846b34bbded7db50ff206f2b"
+  },
+  "mock": {
+    "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/test_qualifier_mocked.py",
+    "sha256": "10cd257655ce6ff065ea49f39198cdb412edcfb01754034ad01de9c44838a4a0"
+  }
+}

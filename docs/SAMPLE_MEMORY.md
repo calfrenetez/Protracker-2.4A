@@ -33,9 +33,13 @@ The identical four-case sanitizer probe changes from baseline source/header
 corruption to ALIAS refusal with unchanged bytes. PCM and filter sanitizer groups
 pass, as do the existing sampler and Paula preview callers and focused empty
 8/16/24-bit mono/stereo caller checks. One pinned portable PTPcmTest cross-build
-passes with active assertions. Native execution is prepared, not run, while the
-shared target is reserved by another task; no allocator, physical, audio, timing
-or listening acceptance is inferred. See
+passes with active assertions. The exact portable fixture subsequently passes
+shared 030 once with both frame-output and PCM/WAV markers. Exact owned cleanup,
+eleven internal absence observations and a separate locked eleven-observation
+idle check pass; the window is explicitly released. This qualifies portable
+assertions, without allocator, physical, audio, timing or listening acceptance.
+See the separate [native records](../evidence/enhanced-editor/pcm-frame-output-native/README.md)
+and the preserved original host/build preparation under
 [evidence/enhanced-editor/pcm-frame-output-safety](../evidence/enhanced-editor/pcm-frame-output-safety/README.md).
 
 ## Physical master-save and Fast RAM qualification — 3 October 2026

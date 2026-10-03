@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "processes": [
+    [
+      19081,
+      "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+    ]
+  ],
+  "observations": [
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791044020059350000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791044020059350000": false
+    },
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791044020059350000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791044020059350000": false
+    },
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791044020059350000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791044020059350000": false
+    },
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791044020059350000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791044020059350000": false
+    },
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791044020059350000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791044020059350000": false
+    },
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791044020059350000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791044020059350000": false
+    },
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791044020059350000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791044020059350000": false
+    },
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791044020059350000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791044020059350000": false
+    },
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791044020059350000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791044020059350000": false
+    },
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791044020059350000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791044020059350000": false
+    },
+    {
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1791044020059350000": false,
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1791044020059350000": false
+    }
+  ],
+  "observation_elapsed_s": [
+    0.22523091699986253,
+    1.2325657500041416,
+    2.2390630839945516,
+    3.2457160000049043,
+    4.252352750001592,
+    5.258370833995286,
+    6.264036291991943,
+    7.265831958997296,
+    8.272673208994092,
+    9.278419875001418,
+    10.285338166999281
+  ],
+  "status": "OK\tPaused=false\tConfig=autosave",
+  "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=500\tsndbuf_status=0",
+  "cpu": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true",
+  "observed_elapsed_s": 10.285338834000868,
+  "final_idle": {
+    "status": "OK\tPaused=false\tConfig=autosave",
+    "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=333\tsndbuf_status=0",
+    "cpu": "OK\tmodel=68030\tname=686803\tfpu=0\t24bit=false\tcompatible=true\tcycle_exact=true"
+  },
+  "elapsed_s": 10.401760209002532
+}

@@ -1,0 +1,28 @@
+{
+  "scope": "Root external250s watchdog for one portable native fixture; no automatic retry/cleanup/release",
+  "argv": [
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/.venv/bin/python",
+    "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/qualifier-v3/qualify_pcm_frame_output_safety.py",
+    "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/native-final",
+    "--repo",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+    "--identity",
+    "/private/tmp/protracker-pcm-frame-root-z8bmyumb/fresh-identity-next.json",
+    "--identity-sha256",
+    "c84d06d653099d7b6dd5e80143dc25a726c623fefaa13363a867e564f70d2447"
+  ],
+  "passed": true,
+  "outer_bound_s": 250,
+  "gate": {
+    "scope": "One portable PCM fixture only",
+    "root_take_recorded": true,
+    "shared_holds_cleared": true,
+    "coordinator_revision": 113,
+    "coordinator_ack": "ProTracker\u2019s single-fixture, maximum-420-second TAKE is noted, conditional on successful nonblocking lock and exact live guards. AmiConnect will leave shared resources untouched until refusal, hold or independently verified release. No second case or collector is included.",
+    "coordinator_turn": "01a1028a-7aaf-7421-b4a0-346cbf79427c",
+    "take_epoch_seconds": 1791043992,
+    "helper_sha256": "9565cc5a762fffd4f576c2af2ea1dbceaea13a2b846b34bbded7db50ff206f2b"
+  },
+  "returncode": 0,
+  "elapsed_s": 15.431034666995401
+}

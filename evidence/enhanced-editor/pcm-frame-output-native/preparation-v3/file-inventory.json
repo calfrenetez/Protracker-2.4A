@@ -1,0 +1,68 @@
+{
+  "scope": "Final frozen preparation inventory; all results are host-only verification/mocked guard proofs. Native/Guest/target qualification NOT RUN. Not a replacement for original committed PCM packet or old MOD artifacts. This inventory lists the 12 proof/preparation files and excludes its own index bytes.",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 1286,
+      "sha256": "d6b29ab63a59baae1fc69dec315de4d4ffe1a86f225365d916dbcf1336dc026d"
+    },
+    {
+      "path": "committed-verify-only.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "committed-verify-only.stdout",
+      "bytes": 639,
+      "sha256": "2fb57c8375384cabaed6543372144e311702d9a83beb9f6aba9ccb71df8d9f50"
+    },
+    {
+      "path": "host-preparation-proof.json",
+      "bytes": 3413,
+      "sha256": "98f509dbbbf3e3df08d7cb09fa0e4f1b123e78c1c8efaa6701a0e15a2876bed0"
+    },
+    {
+      "path": "mock-check.stderr",
+      "bytes": 2152,
+      "sha256": "37a65888b808d4c950a6260b224d1b7ec624c78c9872ed8cbea569ec69d1f9af"
+    },
+    {
+      "path": "mock-check.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "mock-proof.json",
+      "bytes": 892,
+      "sha256": "f5b7c73826b78b5a8fc2d10a329f14df1f97709759e7b887595819c4cf885e60"
+    },
+    {
+      "path": "original-root-host-only-failure.json",
+      "bytes": 649,
+      "sha256": "08bc16d735e962415e6dffb27d97aad04e8cda9552a497a72a6d0466bdb4358d"
+    },
+    {
+      "path": "preparation-scope.json",
+      "bytes": 869,
+      "sha256": "6d2f882ed878cc4b041e073e5154bbf0b7c169ddfc9a3921db0b58af5b1fd5e3"
+    },
+    {
+      "path": "prepared.json",
+      "bytes": 2939,
+      "sha256": "659306448e853d90f732cdebc081f5ed7d6fcad85748cb5b9cdf5f76df1b7e3b"
+    },
+    {
+      "path": "qualify_pcm_frame_output_safety.py",
+      "bytes": 11865,
+      "sha256": "9565cc5a762fffd4f576c2af2ea1dbceaea13a2b846b34bbded7db50ff206f2b"
+    },
+    {
+      "path": "test_qualifier_mocked.py",
+      "bytes": 13222,
+      "sha256": "10cd257655ce6ff065ea49f39198cdb412edcfb01754034ad01de9c44838a4a0"
+    }
+  ],
+  "file_count": 12,
+  "total_bytes": 37926,
+  "self_index_excluded": true
+}

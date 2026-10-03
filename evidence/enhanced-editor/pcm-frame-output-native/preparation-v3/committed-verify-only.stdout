@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "scope": "Host-only exact committed-source/compiler/runtime verification; no Guest/lock/staging/target",
+  "source_tree": "4507b62ed3fe0bd50211d666191531b7aeacc55d",
+  "cases": [
+    {
+      "label": "wav-core",
+      "binary": "PTPcmTest",
+      "path": "/private/tmp/protracker-pcm-frame-output-safety-klk3djw8/native-final/PTPcmTest",
+      "bytes": 45988,
+      "sha256": "48acf5e0b61042dd7774c87253a016d09d005f9663880552d5766ce2a35f494f",
+      "markers": [
+        "PCM FRAME OUTPUT PASS:",
+        "PCM/WAV PASS:"
+      ],
+      "mode": [
+        "--wav-output"
+      ],
+      "process_bound": 140
+    }
+  ]
+}

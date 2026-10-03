@@ -1,0 +1,10 @@
+{
+  "scope": "Fresh read-only original sole emulator process/profile identity; no Guest/IPC/lock/target call",
+  "observed_time_ns": 1791043287881756000,
+  "process": [
+    19081,
+    "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+  ],
+  "profile": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae",
+  "profile_sha256": "894aa5a61a2bf6267b461c6774a0bdc913a96e7f581ea7e4e3762c4d71709a30"
+}

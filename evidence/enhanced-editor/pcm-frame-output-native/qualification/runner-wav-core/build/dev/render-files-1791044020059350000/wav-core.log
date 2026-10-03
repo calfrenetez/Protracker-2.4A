@@ -1,0 +1,2 @@
+PCM FRAME OUTPUT PASS: metadata-only 8/16/24 mono/stereo counts, descriptor and full capacity protection, empty/NULL/precedence and fail-closed spans
+PCM/WAV PASS: 8/16/24-bit precision, stereo edits, conversion, resampling, bounds and round trips

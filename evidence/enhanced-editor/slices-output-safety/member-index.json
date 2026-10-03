@@ -1,0 +1,999 @@
+{
+  "members": {
+    "instructions/AGENTS.md": {
+      "bytes": 789,
+      "mode": 420,
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/AGENTS.md",
+      "role": "exact author instruction input, outside frozen source",
+      "sha256": "57dcd76709e95cd29c3d17c545a992bb924c629566de1e84a69db97701f5633b"
+    },
+    "instructions/PROJECT_ONBOARDING.md": {
+      "bytes": 5665,
+      "mode": 420,
+      "origin": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/docs/PROJECT_ONBOARDING.md",
+      "role": "exact author instruction input, outside frozen source",
+      "sha256": "101e8a063f7b40f4931cd9fab0bc5165728cc3ed02fcd4b9faef66bf13fc5d1a"
+    },
+    "records/baseline-manifest.json": {
+      "bytes": 1041667,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline-manifest.json",
+      "role": "exact original host/source control",
+      "sha256": "445c3d5402a8378f07560e52248099dbe22f3a1bbc9c3958d8ad0594dcb5f1af"
+    },
+    "records/baseline-probe/compile.log": {
+      "bytes": 0,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline-probe/compile.log",
+      "role": "exact original baseline-probe member",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "records/baseline-probe/compiler-resource.log": {
+      "bytes": 53,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline-probe/compiler-resource.log",
+      "role": "exact original baseline-probe member",
+      "sha256": "ae4dc8a8a83fdae4897a378fbf33fe0a98ae67d92cb9d6da17ac13eafbe7405b"
+    },
+    "records/baseline-probe/compiler-version.log": {
+      "bytes": 158,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline-probe/compiler-version.log",
+      "role": "exact original baseline-probe member",
+      "sha256": "a856ec74c559401131ad608625ef252fb2db6c78bc0c480c1c4c782ee4896db1"
+    },
+    "records/baseline-probe/dependencies-00.log": {
+      "bytes": 5048,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline-probe/dependencies-00.log",
+      "role": "exact original baseline-probe member",
+      "sha256": "f73d782b3e8ca66701491bdbae3c495a3909c1262b8beba816dd4f8ea2e4bdd2"
+    },
+    "records/baseline-probe/dependencies-01.log": {
+      "bytes": 4333,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline-probe/dependencies-01.log",
+      "role": "exact original baseline-probe member",
+      "sha256": "d1d791f84ac8c81a831534cfc8c6d72c61b775c3c0c3a190d57b9c9fcb948435"
+    },
+    "records/baseline-probe/dependencies-02.log": {
+      "bytes": 3268,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline-probe/dependencies-02.log",
+      "role": "exact original baseline-probe member",
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2"
+    },
+    "records/baseline-probe/probe": {
+      "bytes": 89256,
+      "mode": 493,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline-probe/probe",
+      "role": "exact original baseline-probe member",
+      "sha256": "d5203d5a36cf68e82790030ce649a998b36a2196e4039bbeadd39c37d55f58e3"
+    },
+    "records/baseline-probe/probe.c": {
+      "bytes": 1410,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline-probe/probe.c",
+      "role": "exact original baseline-probe member",
+      "sha256": "4fad0cfaa37f40126258381131fc1991eeed3a541e8d3f6d7932261459c8846f"
+    },
+    "records/baseline-probe/probe.dSYM/Contents/Info.plist": {
+      "bytes": 634,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline-probe/probe.dSYM/Contents/Info.plist",
+      "role": "exact original baseline-probe member",
+      "sha256": "9de088233f62a847d8cdb3921daf5341f6bc948e34f38e4e651706dd1bec3401"
+    },
+    "records/baseline-probe/probe.dSYM/Contents/Resources/DWARF/probe": {
+      "bytes": 38300,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline-probe/probe.dSYM/Contents/Resources/DWARF/probe",
+      "role": "exact original baseline-probe member",
+      "sha256": "a53214603e687c1bc2626a35845ff60cc5406627d378d7a1e62abcbb11d140d8"
+    },
+    "records/baseline-probe/probe.dSYM/Contents/Resources/Relocations/aarch64/probe.yml": {
+      "bytes": 158,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline-probe/probe.dSYM/Contents/Resources/Relocations/aarch64/probe.yml",
+      "role": "exact original baseline-probe member",
+      "sha256": "a5b9ee1e16fe70deb634c1bf2d5629d1665cf08bdfe052a6a6f665b355a75c3e"
+    },
+    "records/baseline-probe/result.json": {
+      "bytes": 17488,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline-probe/result.json",
+      "role": "exact original host/source control",
+      "sha256": "208fd411d5e7103a3da69e963297c4e973bf9323028ae137733c9b1aa063675f"
+    },
+    "records/baseline-probe/run.log": {
+      "bytes": 132,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline-probe/run.log",
+      "role": "exact original baseline-probe member",
+      "sha256": "4176077620099ba4f2c7cfe7b4cc10561319bd1c25626f8926af77808db58e05"
+    },
+    "records/candidate-probe/compile.log": {
+      "bytes": 0,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/candidate-probe/compile.log",
+      "role": "exact original candidate-probe member",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "records/candidate-probe/compiler-resource.log": {
+      "bytes": 53,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/candidate-probe/compiler-resource.log",
+      "role": "exact original candidate-probe member",
+      "sha256": "ae4dc8a8a83fdae4897a378fbf33fe0a98ae67d92cb9d6da17ac13eafbe7405b"
+    },
+    "records/candidate-probe/compiler-version.log": {
+      "bytes": 158,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/candidate-probe/compiler-version.log",
+      "role": "exact original candidate-probe member",
+      "sha256": "a856ec74c559401131ad608625ef252fb2db6c78bc0c480c1c4c782ee4896db1"
+    },
+    "records/candidate-probe/dependencies-00.log": {
+      "bytes": 5049,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/candidate-probe/dependencies-00.log",
+      "role": "exact original candidate-probe member",
+      "sha256": "73ea849956cc0e52b3b346868f527153b9d3c81e8608c3c769646b99aad9d806"
+    },
+    "records/candidate-probe/dependencies-01.log": {
+      "bytes": 4333,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/candidate-probe/dependencies-01.log",
+      "role": "exact original candidate-probe member",
+      "sha256": "d1d791f84ac8c81a831534cfc8c6d72c61b775c3c0c3a190d57b9c9fcb948435"
+    },
+    "records/candidate-probe/dependencies-02.log": {
+      "bytes": 3268,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/candidate-probe/dependencies-02.log",
+      "role": "exact original candidate-probe member",
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2"
+    },
+    "records/candidate-probe/probe": {
+      "bytes": 105880,
+      "mode": 493,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/candidate-probe/probe",
+      "role": "exact original candidate-probe member",
+      "sha256": "bd0bd473a22d9ffbd36f9a9ed5f0dc1d785e97472702856561c88832d23eb736"
+    },
+    "records/candidate-probe/probe.c": {
+      "bytes": 1410,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/candidate-probe/probe.c",
+      "role": "exact original candidate-probe member",
+      "sha256": "4fad0cfaa37f40126258381131fc1991eeed3a541e8d3f6d7932261459c8846f"
+    },
+    "records/candidate-probe/probe.dSYM/Contents/Info.plist": {
+      "bytes": 634,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/candidate-probe/probe.dSYM/Contents/Info.plist",
+      "role": "exact original candidate-probe member",
+      "sha256": "9de088233f62a847d8cdb3921daf5341f6bc948e34f38e4e651706dd1bec3401"
+    },
+    "records/candidate-probe/probe.dSYM/Contents/Resources/DWARF/probe": {
+      "bytes": 38808,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/candidate-probe/probe.dSYM/Contents/Resources/DWARF/probe",
+      "role": "exact original candidate-probe member",
+      "sha256": "f05fc6eea8101df4f51e8e537e6cc7a7756a47abfaf1e9fc333659dae6ce9b4d"
+    },
+    "records/candidate-probe/probe.dSYM/Contents/Resources/Relocations/aarch64/probe.yml": {
+      "bytes": 159,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/candidate-probe/probe.dSYM/Contents/Resources/Relocations/aarch64/probe.yml",
+      "role": "exact original candidate-probe member",
+      "sha256": "db8a35a630d83057e68d61b97fb51d73c424fd34744ceb0e625a9adb01e868fe"
+    },
+    "records/candidate-probe/result.json": {
+      "bytes": 17526,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/candidate-probe/result.json",
+      "role": "exact original host/source control",
+      "sha256": "2fd7b78167ac82b544094fefc5b4de64d00f2b004d1bddd341fb2023ac3716d8"
+    },
+    "records/candidate-probe/run.log": {
+      "bytes": 132,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/candidate-probe/run.log",
+      "role": "exact original candidate-probe member",
+      "sha256": "e02289d68c57c2a0b2801972f1416d641657074e40cfbaf227b1f4760475770f"
+    },
+    "records/final-review.json": {
+      "bytes": 1744,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/final-review.json",
+      "role": "exact original host/source control",
+      "sha256": "5505981fb02fb845e4f57bc421eb0ef3fc5236f6681262fc5f6923a07d59a92d"
+    },
+    "records/final.patch": {
+      "bytes": 12150,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/final.patch",
+      "role": "exact original host/source control",
+      "sha256": "93c79524fa50487a7036bf97c97a6df956ff32b9f372d585231f3540ba011f7a"
+    },
+    "records/handoff.json": {
+      "bytes": 5566,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/handoff.json",
+      "role": "exact original host/source control",
+      "sha256": "633be8088f6c050ed3f20deac1e5c5c2c8934da60491e02acc23dc5d0a85ba3b"
+    },
+    "records/host-final/c001-dependencies-00.txt": {
+      "bytes": 5239,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c001-dependencies-00.txt",
+      "role": "exact original host-final member",
+      "sha256": "435bc49e60bfce27668414a79ad9a91da38d345d2ce7d860c3edc9e19835f5f7"
+    },
+    "records/host-final/c001-dependencies-01.txt": {
+      "bytes": 4333,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c001-dependencies-01.txt",
+      "role": "exact original host-final member",
+      "sha256": "d1d791f84ac8c81a831534cfc8c6d72c61b775c3c0c3a190d57b9c9fcb948435"
+    },
+    "records/host-final/c001-dependencies-02.txt": {
+      "bytes": 3268,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c001-dependencies-02.txt",
+      "role": "exact original host-final member",
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2"
+    },
+    "records/host-final/c001-product.log": {
+      "bytes": 0,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c001-product.log",
+      "role": "exact original host-final member",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "records/host-final/c002-product.log": {
+      "bytes": 307,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c002-product.log",
+      "role": "exact original host-final member",
+      "sha256": "531eca01a7deef0340f7644ac0b56f79fe20348a89c3137a7f8d58d6d9b248d3"
+    },
+    "records/host-final/c003-dependencies-00.txt": {
+      "bytes": 8725,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c003-dependencies-00.txt",
+      "role": "exact original host-final member",
+      "sha256": "8d0d62e78137c8c2a646458215003c6823bbfe1cd6f557fa616d067227ede9ba"
+    },
+    "records/host-final/c003-dependencies-01.txt": {
+      "bytes": 5775,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c003-dependencies-01.txt",
+      "role": "exact original host-final member",
+      "sha256": "7a04b43f6816495c089991b17a992614b1bd469154babe991de237275036375b"
+    },
+    "records/host-final/c003-dependencies-02.txt": {
+      "bytes": 4540,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c003-dependencies-02.txt",
+      "role": "exact original host-final member",
+      "sha256": "31a0d850205f57f2b83679a08ed5070ba55a6cfd9e2e915122e5c1dd42a208ad"
+    },
+    "records/host-final/c003-dependencies-03.txt": {
+      "bytes": 4354,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c003-dependencies-03.txt",
+      "role": "exact original host-final member",
+      "sha256": "d33c386d36eec7f20a1eda63b048189b771560fc5a8a980c94652a4efe2b729f"
+    },
+    "records/host-final/c003-dependencies-04.txt": {
+      "bytes": 4333,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c003-dependencies-04.txt",
+      "role": "exact original host-final member",
+      "sha256": "d1d791f84ac8c81a831534cfc8c6d72c61b775c3c0c3a190d57b9c9fcb948435"
+    },
+    "records/host-final/c003-dependencies-05.txt": {
+      "bytes": 4379,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c003-dependencies-05.txt",
+      "role": "exact original host-final member",
+      "sha256": "33b9be1b32562414c717d241d46b436efd376a24fc584b14cc128c9d01729e10"
+    },
+    "records/host-final/c003-dependencies-06.txt": {
+      "bytes": 4448,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c003-dependencies-06.txt",
+      "role": "exact original host-final member",
+      "sha256": "713687508744f2c15e4089e7bd17b56e758928af2034a189a66c3c20a2834fd9"
+    },
+    "records/host-final/c003-dependencies-07.txt": {
+      "bytes": 4312,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c003-dependencies-07.txt",
+      "role": "exact original host-final member",
+      "sha256": "c958df8c7ad062ad68feeca55fac66c08da7b811c9ecace81ce41009f4a9f397"
+    },
+    "records/host-final/c003-dependencies-08.txt": {
+      "bytes": 4360,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c003-dependencies-08.txt",
+      "role": "exact original host-final member",
+      "sha256": "eb68c3559b29b101934ab7f4ba740746b6092619ffb1195f8a0156a3c8df01a4"
+    },
+    "records/host-final/c003-dependencies-09.txt": {
+      "bytes": 4418,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c003-dependencies-09.txt",
+      "role": "exact original host-final member",
+      "sha256": "88a7a868d906166af8c42b771e4f3abbee1c72ff86f049979e30ba55645b7004"
+    },
+    "records/host-final/c003-dependencies-10.txt": {
+      "bytes": 4329,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c003-dependencies-10.txt",
+      "role": "exact original host-final member",
+      "sha256": "021af1b93d018969b3bda1b8897e7cc21f794c69d90006a430b9fce413356dfe"
+    },
+    "records/host-final/c003-dependencies-11.txt": {
+      "bytes": 3665,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c003-dependencies-11.txt",
+      "role": "exact original host-final member",
+      "sha256": "b4b8d9d6597c3710564b2567ea428238ed80aae5b571f2b95fb659af6dd18097"
+    },
+    "records/host-final/c003-dependencies-12.txt": {
+      "bytes": 3268,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c003-dependencies-12.txt",
+      "role": "exact original host-final member",
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2"
+    },
+    "records/host-final/c003-dependencies-13.txt": {
+      "bytes": 4324,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c003-dependencies-13.txt",
+      "role": "exact original host-final member",
+      "sha256": "d03d1303964f1fe8dddabcb3eb7913a443af83492768ad61241ce22fdead2404"
+    },
+    "records/host-final/c003-dependencies-14.txt": {
+      "bytes": 4324,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c003-dependencies-14.txt",
+      "role": "exact original host-final member",
+      "sha256": "4b81a96da592d7feab5caf463e99aac11b345cab3930035783a3998cd2d3468f"
+    },
+    "records/host-final/c003-dependencies-15.txt": {
+      "bytes": 2772,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c003-dependencies-15.txt",
+      "role": "exact original host-final member",
+      "sha256": "0a7021bf58bae5096f7938e17aee23e62a6b3498f4ef1c4e8bcaf43898da5453"
+    },
+    "records/host-final/c003-product.log": {
+      "bytes": 0,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c003-product.log",
+      "role": "exact original host-final member",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "records/host-final/c004-product.log": {
+      "bytes": 987,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/c004-product.log",
+      "role": "exact original host-final member",
+      "sha256": "c26ad399507a103c7e2edbec697c8db1a4b160f360d6e26f42e97844a53a9ce5"
+    },
+    "records/host-final/host-checks.json": {
+      "bytes": 81388,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/host-checks.json",
+      "role": "exact original host/source control",
+      "sha256": "99742cd13c061993cdaf29bc5d5533f2afbb16c54c0bdc1626c25692b8d0d2e6"
+    },
+    "records/host-final/host-checks.log": {
+      "bytes": 1686,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/host-checks.log",
+      "role": "exact original host-final member",
+      "sha256": "a9bcd39023e06a42db8479780c6cea059f3bac53ec3821a3bafed1db5f497564"
+    },
+    "records/host-final/products/c001-executable-76d3b9847062b48c-slices-test": {
+      "bytes": 132104,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/products/c001-executable-76d3b9847062b48c-slices-test",
+      "role": "exact original host-final member",
+      "sha256": "76d3b9847062b48cf5151118328c9023b7e08022bc1ba7c4ca6617be0de83b05"
+    },
+    "records/host-final/products/c003-executable-f4f2ba7c1a2937b9-sampler": {
+      "bytes": 985032,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/host-final/products/c003-executable-f4f2ba7c1a2937b9-sampler",
+      "role": "exact original host-final member",
+      "sha256": "f4f2ba7c1a2937b9375b58bd97f5048fbb258780a31d5f194e24d0112a2b3b94"
+    },
+    "records/original-README.md": {
+      "bytes": 1630,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/README.md",
+      "role": "original private handoff note",
+      "sha256": "000d8e02af0129647654e0a603367e26b090f260895380b4bd0d6e777d543751"
+    },
+    "records/output-probe.c": {
+      "bytes": 1410,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/output-probe.c",
+      "role": "identical valid before/after probe",
+      "sha256": "4fad0cfaa37f40126258381131fc1991eeed3a541e8d3f6d7932261459c8846f"
+    },
+    "records/source-manifest.json": {
+      "bytes": 1042533,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-manifest.json",
+      "role": "exact original host/source control",
+      "sha256": "e8499f3aa398fba7a99b63653e452cc62811e1805462e4ec20c883ddd829d882"
+    },
+    "records/tools/final_review.py": {
+      "bytes": 3462,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/tools/final_review.py",
+      "role": "exact original tools member",
+      "sha256": "4278250736fed6f42444ba6b865ac6ad36425ea0fa19a950c8d6717f20bc557c"
+    },
+    "records/tools/host_provenance.py": {
+      "bytes": 14066,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/tools/host_provenance.py",
+      "role": "exact original tools member",
+      "sha256": "98f2c2aa2383741cebbb815ab4ed4d5ee51c97e096a4236fdab217e9cc584d1e"
+    },
+    "records/tools/provenance_common.py": {
+      "bytes": 11124,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/tools/provenance_common.py",
+      "role": "exact original tools member",
+      "sha256": "78e28229f0f132c73153606be3a40d750a4013f5ea1bbb5af7c15e117e62cdb5"
+    },
+    "records/tools/run_probe.py": {
+      "bytes": 4792,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/tools/run_probe.py",
+      "role": "exact original tools member",
+      "sha256": "c8305ea43a6155dff6f10199c82f91a1bf51955701a83befbfd4022d67b7e0a1"
+    },
+    "records/tools/toolchain-pins.json": {
+      "bytes": 2709,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/tools/toolchain-pins.json",
+      "role": "exact original tools member",
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065"
+    },
+    "root/excluded-dirty-before.json": {
+      "bytes": 3062,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-studio-output-safety-root-g5p3wv2y/excluded-dirty-before.json",
+      "role": "original excluded-path metadata; root-reported current preservation is separate",
+      "sha256": "d6dfa411a66cdf2d45802ebe945425dcbf1ba364537ac44ffc9d6a007499b5b7"
+    },
+    "root/import-and-source-check.json": {
+      "bytes": 1102,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-root-u1w5j02x/import-and-source-check.json",
+      "role": "exact root-reported import/current-source review",
+      "sha256": "a2649743cbcc74fda4f39bd836fa5d62724b4b200c9505bef97d6a0cfe7943b4"
+    },
+    "source/baseline/src/core/channels.c": {
+      "bytes": 6996,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/channels.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d"
+    },
+    "source/baseline/src/core/channels.h": {
+      "bytes": 1818,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/channels.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517"
+    },
+    "source/baseline/src/core/document.c": {
+      "bytes": 9127,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/document.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a"
+    },
+    "source/baseline/src/core/document.h": {
+      "bytes": 1965,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/document.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f"
+    },
+    "source/baseline/src/core/mod_inspect.c": {
+      "bytes": 3513,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/mod_inspect.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511"
+    },
+    "source/baseline/src/core/mod_inspect.h": {
+      "bytes": 1240,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/mod_inspect.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f"
+    },
+    "source/baseline/src/core/mod_project.c": {
+      "bytes": 23640,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/mod_project.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09"
+    },
+    "source/baseline/src/core/mod_project.h": {
+      "bytes": 5051,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/mod_project.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "c28407161729fc0fea2398f79341a866f03913b092769674bd871bb23adb59ee"
+    },
+    "source/baseline/src/core/pattern.c": {
+      "bytes": 15753,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/pattern.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e"
+    },
+    "source/baseline/src/core/pattern.h": {
+      "bytes": 3642,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/pattern.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "f8c9abde09c4fe495ae77f25c070da647eab038845729edc83adec08c5678d53"
+    },
+    "source/baseline/src/core/pcm.c": {
+      "bytes": 7061,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/pcm.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266"
+    },
+    "source/baseline/src/core/pcm.h": {
+      "bytes": 2494,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/pcm.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e"
+    },
+    "source/baseline/src/core/pcm_filtered.c": {
+      "bytes": 4604,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/pcm_filtered.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9"
+    },
+    "source/baseline/src/core/pcm_internal.h": {
+      "bytes": 615,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/pcm_internal.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b"
+    },
+    "source/baseline/src/core/pp20.c": {
+      "bytes": 7187,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/pp20.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465"
+    },
+    "source/baseline/src/core/pp20.h": {
+      "bytes": 966,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/pp20.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6"
+    },
+    "source/baseline/src/core/project.c": {
+      "bytes": 39034,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/project.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "e4fde542cdfc9b9bce585ef0cda0b5b09d07482f3ec89fddb8d79137b8b0e1c1"
+    },
+    "source/baseline/src/core/project.h": {
+      "bytes": 5698,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/project.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8"
+    },
+    "source/baseline/src/core/raw.c": {
+      "bytes": 3920,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/raw.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377"
+    },
+    "source/baseline/src/core/raw.h": {
+      "bytes": 1171,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/raw.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "f9f47added4df41bb7b15aa3b1b7a4d8131a2c4aa19266436318483a41bc0f3b"
+    },
+    "source/baseline/src/core/sinc_kernel.h": {
+      "bytes": 28756,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/sinc_kernel.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "058629396a0b22daa67f75c909adf9181fc4e52bfc668890fe2abc3231c3a185"
+    },
+    "source/baseline/src/core/slices.c": {
+      "bytes": 5654,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/slices.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "cc13030936d4a427f0aff7cf56834c67938f0bd70f4d4099de75cceded802db9"
+    },
+    "source/baseline/src/core/slices.h": {
+      "bytes": 1367,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/slices.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "d6e650e67a1c23d3afa413e40150ca747ea0c9412b0a2366bb4ec6facbc4a3c7"
+    },
+    "source/baseline/src/core/svx.c": {
+      "bytes": 7817,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/svx.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813"
+    },
+    "source/baseline/src/core/svx.h": {
+      "bytes": 1442,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/svx.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "824541cd25b72b5820e091cfc9f4e6a5f41351fd0630dddc09aefc0405036814"
+    },
+    "source/baseline/src/core/wav.c": {
+      "bytes": 7200,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/wav.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f"
+    },
+    "source/baseline/src/core/wav.h": {
+      "bytes": 1384,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/core/wav.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "8dd0f4454304babb53eef5ecb97cde7bfe6569d292cc0e9a0f204c4a587f2028"
+    },
+    "source/baseline/src/editor/sampler.c": {
+      "bytes": 34124,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/editor/sampler.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "95dbc2574822a940a609f86ed32b615b2f6aaef094e714990bb236a8a82a154e"
+    },
+    "source/baseline/src/editor/sampler.h": {
+      "bytes": 6264,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/editor/sampler.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "d19465c8b3866cfb67cfaca98457c2201165675cc3a4f45804d3c00b17284433"
+    },
+    "source/baseline/src/editor/sampler_internal.h": {
+      "bytes": 3138,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/editor/sampler_internal.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "9f04d1d01a18f737bdbe29fc36cb7b91c6270abf33d900b07f13c17d62044f33"
+    },
+    "source/baseline/src/editor/slots.c": {
+      "bytes": 3233,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/src/editor/slots.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "60ab6a784d4bc47285bb436b975cdd6ee0bad4743bdf9f0817837d818645f7fa"
+    },
+    "source/baseline/tests/pcm_test.c": {
+      "bytes": 16786,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/tests/pcm_test.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "51165214f735477fce9730208fd3332633985b50ffe689078744a7f4dcdef9c3"
+    },
+    "source/baseline/tests/sampler_test.c": {
+      "bytes": 32009,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/tests/sampler_test.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "3560137a8be403caa7ee91f65ab5df1e5033e7d561ccda190b150cb62a9c1a43"
+    },
+    "source/baseline/tests/slices_test.c": {
+      "bytes": 2858,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/tests/slices_test.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "e9d4728d8b8f64efa371154fa1ac8972f32c2b1cbedcc196d48a803c2d988c9d"
+    },
+    "source/baseline/tests/test_sampler.py": {
+      "bytes": 860,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/tests/test_sampler.py",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "847a13bc1694ed2c8dff8638e54ff6f49660a61734f4d21f4328d719999c35da"
+    },
+    "source/baseline/tests/test_slices.py": {
+      "bytes": 647,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/baseline/tests/test_slices.py",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "95204656ed3ebc21d156936ad6a90d00ccb0467860f77ed31a225d3b6f5c37d4"
+    },
+    "source/source-final/src/core/channels.c": {
+      "bytes": 6996,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/channels.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d"
+    },
+    "source/source-final/src/core/channels.h": {
+      "bytes": 1818,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/channels.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517"
+    },
+    "source/source-final/src/core/document.c": {
+      "bytes": 9127,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/document.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a"
+    },
+    "source/source-final/src/core/document.h": {
+      "bytes": 1965,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/document.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f"
+    },
+    "source/source-final/src/core/mod_inspect.c": {
+      "bytes": 3513,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/mod_inspect.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511"
+    },
+    "source/source-final/src/core/mod_inspect.h": {
+      "bytes": 1240,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/mod_inspect.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f"
+    },
+    "source/source-final/src/core/mod_project.c": {
+      "bytes": 23640,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/mod_project.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09"
+    },
+    "source/source-final/src/core/mod_project.h": {
+      "bytes": 5051,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/mod_project.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "c28407161729fc0fea2398f79341a866f03913b092769674bd871bb23adb59ee"
+    },
+    "source/source-final/src/core/pattern.c": {
+      "bytes": 15753,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/pattern.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e"
+    },
+    "source/source-final/src/core/pattern.h": {
+      "bytes": 3642,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/pattern.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "f8c9abde09c4fe495ae77f25c070da647eab038845729edc83adec08c5678d53"
+    },
+    "source/source-final/src/core/pcm.c": {
+      "bytes": 7061,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/pcm.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266"
+    },
+    "source/source-final/src/core/pcm.h": {
+      "bytes": 2494,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/pcm.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e"
+    },
+    "source/source-final/src/core/pcm_filtered.c": {
+      "bytes": 4604,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/pcm_filtered.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9"
+    },
+    "source/source-final/src/core/pcm_internal.h": {
+      "bytes": 615,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/pcm_internal.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b"
+    },
+    "source/source-final/src/core/pp20.c": {
+      "bytes": 7187,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/pp20.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465"
+    },
+    "source/source-final/src/core/pp20.h": {
+      "bytes": 966,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/pp20.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6"
+    },
+    "source/source-final/src/core/project.c": {
+      "bytes": 39034,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/project.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "e4fde542cdfc9b9bce585ef0cda0b5b09d07482f3ec89fddb8d79137b8b0e1c1"
+    },
+    "source/source-final/src/core/project.h": {
+      "bytes": 5698,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/project.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8"
+    },
+    "source/source-final/src/core/raw.c": {
+      "bytes": 3920,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/raw.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377"
+    },
+    "source/source-final/src/core/raw.h": {
+      "bytes": 1171,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/raw.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "f9f47added4df41bb7b15aa3b1b7a4d8131a2c4aa19266436318483a41bc0f3b"
+    },
+    "source/source-final/src/core/sinc_kernel.h": {
+      "bytes": 28756,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/sinc_kernel.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "058629396a0b22daa67f75c909adf9181fc4e52bfc668890fe2abc3231c3a185"
+    },
+    "source/source-final/src/core/slices.c": {
+      "bytes": 6060,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/slices.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "2951045844f6fdebdd80afe12fe7a5afc1f37bf837c2f49d840f14867835342f"
+    },
+    "source/source-final/src/core/slices.h": {
+      "bytes": 2003,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/slices.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "31cd82785c2b86c41d9cde1f7a29056c9d70ec41fb7a9bfb1a5679ba762c24f7"
+    },
+    "source/source-final/src/core/svx.c": {
+      "bytes": 7817,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/svx.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813"
+    },
+    "source/source-final/src/core/svx.h": {
+      "bytes": 1442,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/svx.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "824541cd25b72b5820e091cfc9f4e6a5f41351fd0630dddc09aefc0405036814"
+    },
+    "source/source-final/src/core/wav.c": {
+      "bytes": 7200,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/wav.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f"
+    },
+    "source/source-final/src/core/wav.h": {
+      "bytes": 1384,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/core/wav.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "8dd0f4454304babb53eef5ecb97cde7bfe6569d292cc0e9a0f204c4a587f2028"
+    },
+    "source/source-final/src/editor/sampler.c": {
+      "bytes": 34124,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/editor/sampler.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "95dbc2574822a940a609f86ed32b615b2f6aaef094e714990bb236a8a82a154e"
+    },
+    "source/source-final/src/editor/sampler.h": {
+      "bytes": 6264,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/editor/sampler.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "d19465c8b3866cfb67cfaca98457c2201165675cc3a4f45804d3c00b17284433"
+    },
+    "source/source-final/src/editor/sampler_internal.h": {
+      "bytes": 3138,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/editor/sampler_internal.h",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "9f04d1d01a18f737bdbe29fc36cb7b91c6270abf33d900b07f13c17d62044f33"
+    },
+    "source/source-final/src/editor/slots.c": {
+      "bytes": 3233,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/src/editor/slots.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "60ab6a784d4bc47285bb436b975cdd6ee0bad4743bdf9f0817837d818645f7fa"
+    },
+    "source/source-final/tests/pcm_test.c": {
+      "bytes": 16786,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/tests/pcm_test.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "51165214f735477fce9730208fd3332633985b50ffe689078744a7f4dcdef9c3"
+    },
+    "source/source-final/tests/sampler_test.c": {
+      "bytes": 32009,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/tests/sampler_test.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "3560137a8be403caa7ee91f65ab5df1e5033e7d561ccda190b150cb62a9c1a43"
+    },
+    "source/source-final/tests/slices_test.c": {
+      "bytes": 10154,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/tests/slices_test.c",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "6124b3bd1fcf204b3ef5502e8c2b080a9f97b97c36d22357f2a1065142dc0d3b"
+    },
+    "source/source-final/tests/test_sampler.py": {
+      "bytes": 860,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/tests/test_sampler.py",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "847a13bc1694ed2c8dff8638e54ff6f49660a61734f4d21f4328d719999c35da"
+    },
+    "source/source-final/tests/test_slices.py": {
+      "bytes": 647,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-slices-output-safety-LmjGLE/source-final/tests/test_slices.py",
+      "role": "scoped canonical execution/overlay/module closure",
+      "sha256": "95204656ed3ebc21d156936ad6a90d00ccb0467860f77ed31a225d3b6f5c37d4"
+    },
+    "tools/package_slices_output_safety.py": {
+      "bytes": 15586,
+      "mode": 420,
+      "origin": "/private/tmp/package_slices_output_safety.py",
+      "role": "exact executed packet helper",
+      "sha256": "510be3446261f5e9d678b95cbf438027fc93fa67012e6c41860eddb998121a46"
+    }
+  },
+  "scope": "Exact original regular-file bytes/modes with deterministic archive metadata; no SDK/compiler trees archived"
+}

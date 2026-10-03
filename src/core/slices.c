@@ -7,6 +7,15 @@ static int overlap(const void *a,size_t an,const void *b,size_t bn)
     if(an>UINTPTR_MAX-x || bn>UINTPTR_MAX-y)return 1;
     return x<y+bn && y<x+an;
 }
+/* Declared storage is protected without reading unused PCM elements. */
+static int pcm_storage_bytes(const struct pt_pcm *pcm,size_t *bytes)
+{
+    uintptr_t data=(uintptr_t)pcm->data;
+    if(pcm->capacity>SIZE_MAX/sizeof(*pcm->data))return 0;
+    *bytes=pcm->capacity*sizeof(*pcm->data);
+    if(*bytes && (!pcm->data || *bytes>UINTPTR_MAX-data))return 0;
+    return 1;
+}
 int pt_slices_valid(uint32_t frames,const uint32_t *markers,size_t count)
 {
     size_t i;if(count>4096 || (count && !markers))return 0;
@@ -87,7 +96,7 @@ enum pt_slice_result pt_auto_slice(const struct pt_pcm *pcm,const struct pt_slic
     needed=propose(pcm,o,threshold,NULL);
     if(needed>4096 || needed>capacity)return PT_SLICE_CAPACITY;
     if(needed && !out)return PT_SLICE_INVALID;
-    pcm_bytes=(size_t)pcm->frames*pcm->channels*sizeof(*pcm->data);
+    if(!pcm_storage_bytes(pcm,&pcm_bytes))return PT_SLICE_ALIAS;
     if(overlap(out,needed*sizeof(*out),pcm->data,pcm_bytes) || overlap(out,needed*sizeof(*out),pcm,sizeof(*pcm)) ||
        overlap(out,needed*sizeof(*out),o,sizeof(*o)) || overlap(out,needed*sizeof(*out),written,sizeof(*written)) ||
        overlap(written,sizeof(*written),pcm->data,pcm_bytes) || overlap(written,sizeof(*written),pcm,sizeof(*pcm)) ||
@@ -96,11 +105,12 @@ enum pt_slice_result pt_auto_slice(const struct pt_pcm *pcm,const struct pt_slic
 }
 enum pt_pcm_result pt_pcm_crossfade_loop(struct pt_pcm *pcm,uint32_t start,uint32_t end,uint32_t fade,uint32_t *next_start)
 {
-    enum pt_pcm_result result=pt_pcm_validate(pcm);uint32_t i;unsigned c;
+    enum pt_pcm_result result=pt_pcm_validate(pcm);uint32_t i;unsigned c;size_t pcm_bytes;
     if(result!=PT_PCM_OK)return result;
     if(!next_start || start>=end || end>pcm->frames || !fade || fade>(end-start)/2)return PT_PCM_INVALID;
+    if(!pcm_storage_bytes(pcm,&pcm_bytes))return PT_PCM_ALIAS;
     if(overlap(next_start,sizeof(*next_start),pcm,sizeof(*pcm)) ||
-       overlap(next_start,sizeof(*next_start),pcm->data,(size_t)pcm->frames*pcm->channels*sizeof(*pcm->data)))return PT_PCM_ALIAS;
+       overlap(next_start,sizeof(*next_start),pcm->data,pcm_bytes))return PT_PCM_ALIAS;
     for(i=0;i<fade;++i)for(c=0;c<pcm->channels;++c) {
         size_t head=((size_t)start+i)*pcm->channels+c,tail=((size_t)end-fade+i)*pcm->channels+c;
         int64_t blended=(int64_t)pcm->data[tail]*(fade-1-i)+(int64_t)pcm->data[head]*(i+1);

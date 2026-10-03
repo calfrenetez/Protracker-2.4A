@@ -5,6 +5,21 @@ The enhanced project owns the authoritative sample, including its declared
 elements in the declared precision; 24-bit samples retain their low eight bits.
 Playback representations must never become the project's source of truth.
 
+## Slice output master protection — 3 October 2026
+
+Automatic slice markers/counts and the crossfade next-start output now protect
+the full declared PCM capacity, including unused storage. Checked metadata spans
+fail closed before publication or crossfade edits. Existing validation, geometry,
+capacity and NULL-output precedence remain unchanged. Automatic slicing protects
+only the actual emitted marker extent; padding is never read as audio.
+
+The identical three-case sanitizer probe changes from baseline master-padding
+corruption to ALIAS refusal with complete before-images preserved. Slice and
+direct sampler groups pass; six 8/16/24-bit mono/stereo cases retain successful
+crossfade integer/low-bit behavior and all spare bytes. This is host proof; no
+native, physical, audio or timing acceptance is inferred. See
+[evidence/enhanced-editor/slices-output-safety](../evidence/enhanced-editor/slices-output-safety/README.md).
+
 ## PCM frame-count output master protection — 3 October 2026
 
 The public resampled-frame count now refuses an output overlapping the borrowed

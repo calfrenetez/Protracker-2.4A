@@ -12,12 +12,20 @@ enum pt_slice_result pt_slice_insert(uint32_t,uint32_t *,size_t *,size_t,uint32_
 enum pt_slice_result pt_slice_remove(uint32_t,uint32_t *,size_t *,size_t);
 /* Offline proposals, source untouched. Zero first marker for nonempty input.
  * Two passes preserve output on capacity failure. Output is at most 4096 markers.
+ * Emitted markers and the count must be mutually disjoint and disjoint from
+ * source/options descriptors and the full declared PCM capacity, including spare
+ * storage. Unrepresentable storage spans are refused as PT_SLICE_ALIAS. Earlier
+ * validation/capacity/NULL-output refusals retain precedence; all refusals leave
+ * source and outputs unchanged. Spare PCM storage is never read as audio.
  * Refinement chooses the nearest crossing shared by all channels, else keeps
  * the detected attack. Marker spacing is respected after refinement.
  */
 enum pt_slice_result pt_auto_slice(const struct pt_pcm *,const struct pt_slice_options *,uint32_t *,size_t,size_t *);
 /* Destructive offline crossfade; head and tail spans cannot overlap. Resulting
  * forward-loop start skips the head frames incorporated into the blended tail.
+ * The next-start output must be disjoint from the PCM descriptor and full
+ * declared capacity. Unrepresentable storage spans are refused as PT_PCM_ALIAS
+ * before any tail edit; earlier validation/loop-geometry errors retain precedence.
  * Caller supplies undo/ownership and commits loop metadata only after success.
  */
 enum pt_pcm_result pt_pcm_crossfade_loop(struct pt_pcm *,uint32_t,uint32_t,uint32_t,uint32_t *);

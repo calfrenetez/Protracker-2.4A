@@ -1,0 +1,12 @@
+{
+  "scope": "Root read-only exact original packet/inventory/current-source audit, no new tests/builds/native target operation",
+  "passed": true,
+  "archive_members": 142,
+  "original_archive_bytes": 4399781,
+  "all_members_byte_exact": true,
+  "both_7677_inventories_exact": true,
+  "current_canonical_inputs_exact": 33,
+  "unrelated_dirty_unchanged": 16,
+  "native_status": "NOT_RUN",
+  "payload_sha256": "6cf604a0781d3e48d97c358de0b95668b2f377e36564b0b37da81d2a8e44e42d"
+}

@@ -1,0 +1,47 @@
+{
+  "scope": "Exact original slice host proof packet and external read-only QA; no native execution",
+  "files": [
+    {
+      "path": "README.md",
+      "origin": "/private/tmp/protracker-slices-output-safety-evidence-final/README.md",
+      "bytes": 2148,
+      "sha256": "a51e9ce7830e41b16a345dafb4ed1dcd35d72ae37337d35d7d6cc80a063c21dc"
+    },
+    {
+      "path": "SHA256SUMS",
+      "origin": "/private/tmp/protracker-slices-output-safety-evidence-final/SHA256SUMS",
+      "bytes": 330,
+      "sha256": "dc28c0422f4dec3ea241eed71103ea1904afe7b2d9237480183c9f8ad3af7f0f"
+    },
+    {
+      "path": "member-index.json",
+      "origin": "/private/tmp/protracker-slices-output-safety-evidence-final/member-index.json",
+      "bytes": 48521,
+      "sha256": "3bee34f7b8edd872d952e6835fff22b866304b17b4dc879784dd6287eb52a9b6"
+    },
+    {
+      "path": "packet-provenance.json",
+      "origin": "/private/tmp/protracker-slices-output-safety-evidence-final/packet-provenance.json",
+      "bytes": 18721,
+      "sha256": "6205b8642840833781da81c4d177e33d32f9c271fe2afb354f910272af86fbd7"
+    },
+    {
+      "path": "payload.tar.gz",
+      "origin": "/private/tmp/protracker-slices-output-safety-evidence-final/payload.tar.gz",
+      "bytes": 1256969,
+      "sha256": "6cf604a0781d3e48d97c358de0b95668b2f377e36564b0b37da81d2a8e44e42d"
+    },
+    {
+      "path": "packaging-qa.json",
+      "origin": "/private/tmp/protracker-slices-output-safety-evidence-final-qa.json",
+      "bytes": 1225,
+      "sha256": "bd7ae3f8e427790f84a0c873dd33ee846e260efe28ae0316c423650ee1b902df"
+    },
+    {
+      "path": "root-packet-audit.json",
+      "origin": "/private/tmp/protracker-slices-root-u1w5j02x/packet-audit.json",
+      "bytes": 477,
+      "sha256": "bc420b387dfddd0ba915bd795fec0c4f75501432d195430919445b9a543ba45b"
+    }
+  ]
+}

@@ -6,6 +6,19 @@ static int overlap(const void *a,size_t an,const void *b,size_t bn)
     uintptr_t x=(uintptr_t)a,y=(uintptr_t)b;
     return an && bn && (an>UINTPTR_MAX-x || bn>UINTPTR_MAX-y || (x<y+bn && y<x+an));
 }
+/* Full declared source storage remains authoritative even beyond live frames.
+ * Existing validation reads active values; these output checks read metadata. */
+static int source_alias(const struct pt_pcm *pcm,const struct pt_raw_format *format,
+    const void *out,size_t bytes)
+{
+    size_t pcm_bytes;
+    if(!bytes)return 0; /* Zero-frame encode emits nothing, including through NULL. */
+    if(!out || bytes>UINTPTR_MAX-(uintptr_t)out || pcm->capacity>SIZE_MAX/sizeof(*pcm->data))return 1;
+    pcm_bytes=pcm->capacity*sizeof(*pcm->data);
+    if(pcm_bytes && (!pcm->data || pcm_bytes>UINTPTR_MAX-(uintptr_t)pcm->data))return 1;
+    return overlap(out,bytes,pcm,sizeof(*pcm)) || overlap(out,bytes,format,sizeof(*format)) ||
+        overlap(out,bytes,pcm->data,pcm_bytes);
+}
 enum pt_raw_result pt_raw_frames(size_t n,const struct pt_raw_format *f,uint32_t *out)
 {
     unsigned align;
@@ -13,6 +26,7 @@ enum pt_raw_result pt_raw_frames(size_t n,const struct pt_raw_format *f,uint32_t
     align=f->channels*(f->bits/8);
     if(n%align)return PT_RAW_INVALID;
     if(n/align>UINT32_MAX)return PT_RAW_CAPACITY;
+    if(overlap(out,sizeof(*out),f,sizeof(*f)))return PT_RAW_ALIAS;
     *out=(uint32_t)(n/align);return PT_RAW_OK;
 }
 enum pt_raw_result pt_raw_decode(const uint8_t *bytes,size_t n,const struct pt_raw_format *f,struct pt_pcm *pcm)
@@ -36,6 +50,7 @@ enum pt_raw_result pt_raw_size(const struct pt_pcm *pcm,const struct pt_raw_form
     if(!valid(f) || !out || pt_pcm_validate(pcm)!=PT_PCM_OK || pcm->bits!=f->bits || pcm->channels!=f->channels || pcm->rate!=f->rate)return PT_RAW_INVALID;
     n=(uint64_t)pcm->frames*f->channels*(f->bits/8);
     if(n>SIZE_MAX)return PT_RAW_CAPACITY;
+    if(source_alias(pcm,f,out,sizeof(*out)))return PT_RAW_ALIAS;
     *out=(size_t)n;return PT_RAW_OK;
 }
 enum pt_raw_result pt_raw_encode(const struct pt_pcm *pcm,const struct pt_raw_format *f,uint8_t *bytes,size_t capacity,size_t *written)
@@ -45,7 +60,8 @@ enum pt_raw_result pt_raw_encode(const struct pt_pcm *pcm,const struct pt_raw_fo
     if((n && !bytes) || !written)return PT_RAW_INVALID;
     if(capacity<n)return PT_RAW_CAPACITY;
     count=(size_t)pcm->frames*pcm->channels;width=f->bits/8;
-    if(overlap(bytes,n,pcm->data,count*sizeof(int32_t)) || overlap(bytes,n,f,sizeof(*f)))return PT_RAW_ALIAS;
+    if(source_alias(pcm,f,bytes,n) || source_alias(pcm,f,written,sizeof(*written)) ||
+       overlap(bytes,n,written,sizeof(*written)))return PT_RAW_ALIAS;
     for(i=0;i<count;++i) {
         uint32_t value=(uint32_t)(pcm->data[i]+(f->unsigned8?128:0));
         for(j=0;j<width;++j)bytes[i*width+j]=(uint8_t)(value>>(8*(f->little_endian?j:width-1-j)));

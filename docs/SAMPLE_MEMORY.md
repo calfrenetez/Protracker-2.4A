@@ -5,6 +5,24 @@ The enhanced project owns the authoritative sample, including its declared
 elements in the declared precision; 24-bit samples retain their low eight bits.
 Playback representations must never become the project's source of truth.
 
+## RAW caller-output master protection — 3 October 2026
+
+Public RAW frame counts now protect the borrowed format descriptor. Size and
+encode outputs protect the PCM and format descriptors and full declared master
+capacity; encoded bytes and completion counts must also be disjoint. Checked
+metadata guards allocate nothing and leave inputs and outputs unchanged on
+alias refusal. Zero-frame behavior and explicit signedness, endian and precision
+settings retain their existing contracts; no conversion was added.
+
+The original sanitizer probe changed a valid master from 257 to 12 and the
+borrowed sample rate from 48000 to 4. The identical candidate probe returns ALIAS
+and preserves both. Two focused host sanitizer groups pass, including sixteen
+fixed 8/16/24-bit mono/stereo wire variants and reserved-capacity guards. Both
+pinned Amiga cross-builds pass. Emulator execution is pending: portable codec
+assertions and the Exec streamed file fixture will be qualified separately.
+Ordinary transactional RAW Save already uses private outputs; this closes public
+API boundaries. Physical audio, timing and listening acceptance remain separate.
+
 ## 8SVX caller-output master protection — 3 October 2026
 
 Public codec and sampler 8SVX exports now refuse scalar or encoded outputs that

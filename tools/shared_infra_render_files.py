@@ -154,6 +154,7 @@ def main():
     group.add_argument('--mod-stream',action='store_true',help='Run bounded classic MOD export with native Fast allocator')
     group.add_argument('--project-stream',action='store_true',help='Run streamed master project save with native Fast allocator')
     group.add_argument('--svx-output',choices=['core','sampler'],help='Run existing native SVX output/master aliases; portable assertions, no device playback')
+    group.add_argument('--raw-output',action='store_true',help='Run existing native RAW output/master aliases; portable assertions, no device playback')
     group.add_argument('--sample-svx',action='store_true',help='Run streamed master IFF export with native Fast allocator')
     group.add_argument('--sample-raw',action='store_true',help='Run streamed master RAW export with native Fast allocator')
     group.add_argument('--sample-wav',action='store_true',help='Run streamed master WAV export with native Fast allocator')
@@ -348,6 +349,9 @@ def main():
         if args.svx_output:
             cases=[('svx-core','PTSvxTest','8SVX PASS:')] if args.svx_output=='core' else [('svx-sampler','PTSamplerTest','SAMPLER PASS:')]
             result['scope']='shared030 portable SVX codec/sampler master-output assertions; no Exec Fast allocator or device playback claim'
+        if args.raw_output:
+            cases=[('raw-core','PTRawTest','RAW PASS:')]
+            result['scope']='shared030 portable RAW codec master/settings-output assertions; no Exec Fast allocator or device playback claim'
         if args.amigus_discovery:
             cases=[('amigus-discovery','PTAmiGusDiscovery','AMIGUS DISCOVERY PASS:')]
             result['scope']='shared030 discovery-only native amigus.library probe; no reservation or MMIO'
@@ -543,5 +547,5 @@ def main():
             result['passed']=True
         finally:
             finish_run(guest,run,out,result,finished,
-                (args.cia_timing or args.amigus_diagnostic or args.paula_memory or args.capture_memory or args.capture_session_memory or args.amigus_capture_memory or args.editor_capture_memory or args.recovery_file or args.project_stream or args.sample_svx or args.svx_output or args.studio_memory in ('native-abi','song','editor','register-session','sample-ram','ram-bus','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence') or args.invert_editor or args.invert_sampler or args.invert_session or args.source_memory or args.sample_dispatch or args.invert_render or args.invert_bounce or args.invert_cli or args.invert_stem_cli),guest_cleanup=args.guest_cleanup_pilot)
+                (args.cia_timing or args.amigus_diagnostic or args.paula_memory or args.capture_memory or args.capture_session_memory or args.amigus_capture_memory or args.editor_capture_memory or args.recovery_file or args.project_stream or args.sample_svx or args.svx_output or args.sample_raw or args.raw_output or args.studio_memory in ('native-abi','song','editor','register-session','sample-ram','ram-bus','wavetable-cache','sampler-wavetable','wavetable-voices','wavetable-dispatch','editor-wavetable','render-sequence') or args.invert_editor or args.invert_sampler or args.invert_session or args.source_memory or args.sample_dispatch or args.invert_render or args.invert_bounce or args.invert_cli or args.invert_stem_cli),guest_cleanup=args.guest_cleanup_pilot)
 if __name__=='__main__':main()

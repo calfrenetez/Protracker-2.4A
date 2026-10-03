@@ -1,0 +1,64 @@
+{
+  "scope": "Private archive/control/source integrity only; no targets or new acceptance",
+  "package": "/private/tmp/protracker-wav-output-safety-evidence-failed-hold60",
+  "files": 22,
+  "bytes": 2600917,
+  "archive_verification": {
+    "members": 465,
+    "original_member_bytes": 7219944,
+    "all_member_bytes_hashes_sizes_modes_verified": true,
+    "safe_unique_regular_paths": true,
+    "uid_gid_mtime_zero": true,
+    "no_symlinks_hardlinks_or_truncated_members": true,
+    "second_archive_write_byte_identical": true
+  },
+  "payload": {
+    "path": "/private/tmp/protracker-wav-output-safety-evidence-failed-hold60/payload.tar.gz",
+    "bytes": 1831230,
+    "sha256": "d43e49a1f13d4cea749d38605da628db0085644bb7839bf243240c925a8c66c2"
+  },
+  "compact_index": {
+    "path": "/private/tmp/protracker-wav-output-safety-evidence-failed-hold60/compact-index.json",
+    "bytes": 12495,
+    "sha256": "2c15111bff04f1d5f6f64986e74ae49dbd0744242281fb4f8e90dde642d8118f"
+  },
+  "sha256sums": {
+    "path": "/private/tmp/protracker-wav-output-safety-evidence-failed-hold60/SHA256SUMS",
+    "bytes": 1900,
+    "sha256": "9cc5de386f0f4a564bc4de69703de9b02f84014200dbc77d9fee5b350d2052b6"
+  },
+  "checksum_rows": 21,
+  "all_original_member_control_bytes_and_gzip_hashes_verified": true,
+  "all_source_inventories_before_after_identical": true,
+  "native_cases": [
+    {
+      "label": "wav-core",
+      "binary": "PTPcmTest",
+      "sha256": "1662735ba451998090a44acab34acdcea0bb7149d29c96f6924d80a4a2adb321",
+      "scope": "Portable PCM/WAV codec assertions and original independent cleanup completed; no Exec Fast/TypeOfMem acceptance",
+      "original_top_nested_independent_equal": true,
+      "independent_observations": 11
+    },
+    {
+      "label": "sample-wav",
+      "binary": "PTExecSampleFileTest",
+      "sha256": "cca7ca73b117813ab982c51fc5f97b9914812f7209349e46f3a7ab66ec62b1a7",
+      "scope": "Native file fixture RC0 and Exec Fast workspace/own cleanup reported; subsequent independent absence qualification FAILED",
+      "original_nested_runner_passed": true,
+      "original_nested_runner_absence_observations": 9,
+      "independent_cleanup_record": "MISSING_IN_ORIGINAL_CAPTURE",
+      "independent_cleanup_status": "NOT_QUALIFIED",
+      "partial_failed_independent_observations": "NOT_PERSISTED; no failed index/time/path/contents invented",
+      "present_in_original_top_cases": false,
+      "recovery_status": "PENDING_SEPARATELY_AUTHORIZED_RECOVERY",
+      "release_status": "NOT_RELEASED; captured HOLD60, no release record"
+    }
+  ],
+  "original_top_passed": false,
+  "captured_coordination_status": "HOLD60_NOT_RELEASED",
+  "sample_independent_record_missing_not_synthesized": true,
+  "recovery_status": "PENDING_SEPARATELY_AUTHORIZED_RECOVERY",
+  "portable_assertions_distinct_from_exec_allocation_proof": true,
+  "no_missing_generated_fixture_invented": true,
+  "historical_coordination_copied_root_report_only": true
+}

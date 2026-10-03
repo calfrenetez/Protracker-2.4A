@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "scope": "Root exact build provenance only; no native execution or target",
+  "source_files": 7531,
+  "manifest_sha256": "1a37f834d8fd3f19869e78241a14d0a20145b0bbf52597d060017df77b5fe657",
+  "compile_commands_sha256": "a65da122bf75a22c0b2bdb740a7ce753a63e74094c228dc8b479290163dff68d",
+  "commands": 24,
+  "elapsed_s": 2.3127057080055238,
+  "canonical_union": 25,
+  "sdk_union": 74,
+  "targets": [
+    {
+      "name": "PTPcmTest",
+      "scope": "Portable PCM/WAV codec fixture; no Exec Fast-pool/TypeOfMem acceptance",
+      "binary_bytes": 40796,
+      "binary_sha256": "1662735ba451998090a44acab34acdcea0bb7149d29c96f6924d80a4a2adb321",
+      "ordered_tus": 5
+    },
+    {
+      "name": "PTExecSampleFileTest",
+      "scope": "Exec Fast-pool/TypeOfMem and bounded file workspace fixture",
+      "binary_bytes": 39284,
+      "binary_sha256": "cca7ca73b117813ab982c51fc5f97b9914812f7209349e46f3a7ab66ec62b1a7",
+      "ordered_tus": 6
+    }
+  ],
+  "prior_host_helper_failure_preserved": "530e7af2bab3c16f3516ae96c18afe8c64be7650220826eacb103a6f1b5ad921",
+  "root_review_schema_history": "First readonly QA script asked absent retained_assert_define; original manifest field is last_assert_macro. No proof/source changed."
+}

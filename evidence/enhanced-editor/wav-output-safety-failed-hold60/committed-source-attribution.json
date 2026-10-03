@@ -1,0 +1,11 @@
+{
+  "schema": "derived-root-provided-source-attribution-v1",
+  "source_commit": "04bd3fb5e89c3562b4521938cdd98fa7abd5da53",
+  "source_tree": "457d908c20480aa1d74c3ae52a1324ca0892ad2b",
+  "documentation": {
+    "path": "/private/tmp/protracker-wav-output-root-blltiblv/committed-source-sample-memory.md",
+    "bytes": 304172,
+    "sha256": "0431c08e0d86f5ed07f7d52b375d84e9aeb3fbd66aed906a0ed4afc4b2bf49ea"
+  },
+  "scope": "Derived from exact root-provided commit/tree and pinned committed documentation bytes; documentation is outside compiled source closure; no Git or target operations by package"
+}

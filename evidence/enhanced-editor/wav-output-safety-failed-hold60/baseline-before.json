@@ -1,0 +1,164 @@
+{
+  "scope": "Host ASan/UBSan baseline preservation probe: expected RC20 and two24bit master corruptions through size/written; no native/target operation",
+  "source_manifest": {
+    "path": "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline-manifest.json",
+    "bytes": 1020260,
+    "sha256": "b0bfdc75aae343a8cff064ab9d1c251e6d5349cd29985dd8259888859393f1f4"
+  },
+  "source_files_before": 7531,
+  "compiler": {
+    "path": "/usr/bin/cc",
+    "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+    "version": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "resource_dir": "/Library/Developer/CommandLineTools/usr/lib/clang/21"
+  },
+  "runtime_inputs": {
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.asan_osx_dynamic.dylib": "a319f00c1792b8ab704f8814655f2073cf16cdcc4b7463c9c07d8034da1de49f",
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.ubsan_osx_dynamic.dylib": "b4d8b49379b26b4faa55fa84f9aedf1f5188205767ddf529040ef904cbda4996"
+  },
+  "helper": {
+    "path": "/private/tmp/protracker-wav-output-safety-n00_vv8l/tools/run_baseline_probe.py",
+    "bytes": 4030,
+    "sha256": "0bfb326c213c21c2d7ace909a49d8ebe915b2422be3ffa2a8f0b6f6b24fafecf"
+  },
+  "probe": {
+    "path": "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline-probe/probe.c",
+    "bytes": 1152,
+    "sha256": "520dd929f26f04b305cf70861df789f861883d42d587ead3c2915fa9986a2006"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "--version"
+      ],
+      "directory": "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline-probe/compiler-version.log",
+        "bytes": 158,
+        "sha256": "a856ec74c559401131ad608625ef252fb2db6c78bc0c480c1c4c782ee4896db1"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-MM",
+        "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline-probe/probe.c"
+      ],
+      "directory": "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline-probe/dependencies-00.log",
+        "bytes": 194,
+        "sha256": "7bff49bb1c678a77bfa8f4d8e11504f3ded0902436dd8a55424b71103b656d59"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-MM",
+        "src/core/wav.c"
+      ],
+      "directory": "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline-probe/dependencies-01.log",
+        "bytes": 129,
+        "sha256": "15339b9aed6fc8d81a2cc51892d681b0820e5603f56d447827fa04902cbad27b"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-MM",
+        "src/core/pcm.c"
+      ],
+      "directory": "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline-probe/dependencies-02.log",
+        "bytes": 138,
+        "sha256": "d12934cacf5920d48e9d890945e3296ee17179bfdac60b6c556a431cfcb3409c"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline-probe/probe.c",
+        "src/core/wav.c",
+        "src/core/pcm.c",
+        "-o",
+        "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline-probe/probe"
+      ],
+      "directory": "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline-probe/compile.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline-probe/probe"
+      ],
+      "directory": "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline",
+      "returncode": 20,
+      "log": {
+        "path": "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline-probe/run.log",
+        "bytes": 91,
+        "sha256": "7c5a0a0ab1e957644c9832c0fe7e42b1515959914c686a5e6a72a9f2631d9fbe"
+      }
+    }
+  ],
+  "canonical_dependencies": {
+    "src/core/wav.h": "3af92b181ebbe927c46466d0f47287d60035cbbd163e2ecf892e4eedffdae9e3",
+    "src/core/pcm.h": "6b1a14d9010f71b693c81c066e619343bb9b4cee0f4b6723347f34de2f5e12fb",
+    "src/core/wav.c": "fecc9e48f21688c735e49f366f0a2e0dcb666f21dc394bf4e2ec1a9deffc5fca",
+    "src/core/pcm.c": "0bd9cc86e3eab3b077484bbcb20675eab0a648a76a18adabe4203c18f3b713a2",
+    "src/core/pcm_internal.h": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b"
+  },
+  "external_sdk_dependencies": {
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb"
+  },
+  "passed": true,
+  "binary": {
+    "path": "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline-probe/probe",
+    "bytes": 89816,
+    "sha256": "e4212d68d875fffee62bb40b6dbe00b02617391e056c7aa9996b11cda0472f7b"
+  },
+  "source_files_after": 7531
+}

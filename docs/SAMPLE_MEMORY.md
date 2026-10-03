@@ -53,6 +53,12 @@ Portable codec assertions remain separate from the Exec streamed file fixture.
 Ordinary transactional WAV Save already uses private outputs; this closes public
 API boundaries. Physical audio, timing and listening acceptance remain separate.
 
+The lossless host/build and exact failed-qualification archive is under
+[evidence/enhanced-editor/wav-output-safety-failed-hold60](../evidence/enhanced-editor/wav-output-safety-failed-hold60/README.md).
+All465 original members and both full source inventories are byte verified.
+Archive integrity does not clear the failed cleanup; any separately approved
+recovery and release will have their own records.
+
 ## RAW caller-output master protection — 3 October 2026
 
 Public RAW frame counts now protect the borrowed format descriptor. Size and

@@ -1,0 +1,7 @@
+{
+  "runner_before_sha256": "20f310d3313bbb4015f3382b350cfafbd26d06e8e47140483b2b0d9ee4feb5b4",
+  "runner_after_sha256": "79a4ca287666ad8d28314bebde92122b70d9ba1ff5ae9c9b0852ad989861e646",
+  "qualifier_sha256": "a9d45690ed3c3ca1eb25363cc6441f1f76e55eafea97d2e43b89d5bf4916a262",
+  "scope": "Private prepared only; PCM/WAV portable versus Exec file distinct; unchanged90s/140s/430s/185s",
+  "preparation_history": "First in-memory draft preparation assertion used mismatched RAW scope text and stopped before any output write; corrected exact source match. No product/build/target execution."
+}

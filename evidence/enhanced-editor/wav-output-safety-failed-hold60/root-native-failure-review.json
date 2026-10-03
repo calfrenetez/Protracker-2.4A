@@ -1,0 +1,43 @@
+{
+  "passed": false,
+  "top_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/wav-output-safety-qualification-1790998001475740000/qualification-result.json",
+  "top_sha256": "f37734aa70730973fe40783bee9eef6eaa9f0b8466d6cf634f3ed5548221f1e3",
+  "error": "Independent exact paths reappeared; no retry",
+  "source_tree": "457d908c20480aa1d74c3ae52a1324ca0892ad2b",
+  "completed_independent_cases": [
+    "wav-core"
+  ],
+  "sample_native_rc": "0",
+  "sample_native_fast_allocations": 18,
+  "sample_native_zero_owned_bytes": true,
+  "sample_workspace_bytes": 11240,
+  "sample_runner_record_passed": true,
+  "sample_independent_release_not_qualified": true,
+  "read_only_host_inventory": [
+    {
+      "path": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790998016536947000",
+      "exists_or_symlink": true,
+      "mode": "0o40700",
+      "bytes": 96,
+      "mtime_ns": 1790998035000000000,
+      "symlink": false,
+      "regular": false,
+      "directory": true
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790998016536947000/sample-wav",
+      "exists_or_symlink": true,
+      "mode": "0o40700",
+      "bytes": 96,
+      "mtime_ns": 1790998035000000000,
+      "symlink": false,
+      "regular": false,
+      "directory": true
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/launch-render-files-1790998016536947000",
+      "exists_or_symlink": false
+    }
+  ],
+  "scope": "Original FAILED top preserved; no retried target/cleanup/launch, no inferred cause or release, coordination HOLD revision60. File fixture own generated residue contents hash only; no independent failed observation log was persisted before qualifier exception."
+}

@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "scope": "Root immutable source and original host/probe provenance inspection only; no rerun/native/target",
+  "source_files": 7531,
+  "report_sha256": "9934924d352364674495772780d58b0fa05fa77515f31f3c59a5f70104df60a2",
+  "commands": 4,
+  "canonical_dependencies": 20,
+  "source_manifest_sha256": "cf9088034834cc14e69b7b000d08a44f015fc43bd2f42692f66197e0664fb04f",
+  "probes": [
+    {
+      "report_sha256": "404eaa5791faf9875925969c0ef5f64394aa3c59cbaa2e70b0be109783eb2910",
+      "probe_sha256": "520dd929f26f04b305cf70861df789f861883d42d587ead3c2915fa9986a2006",
+      "original_rc": 20
+    },
+    {
+      "report_sha256": "9bb25e314654ecddd985cc683640c28cb95b1910c4e588eac81ab435d7dbdeeb",
+      "probe_sha256": "520dd929f26f04b305cf70861df789f861883d42d587ead3c2915fa9986a2006",
+      "original_rc": 0
+    }
+  ]
+}

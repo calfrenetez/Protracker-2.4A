@@ -1,0 +1,288 @@
+{
+  "schema": "protracker-wav-output-safety-failed-compact-controls-v1",
+  "scope": "Copy/archive/derivation integrity only; no new execution or live coordination acceptance",
+  "items": [
+    {
+      "path": "payload.tar.gz",
+      "bytes": 1831230,
+      "sha256": "d43e49a1f13d4cea749d38605da628db0085644bb7839bf243240c925a8c66c2",
+      "kind": "lossless_archive_derivation",
+      "scope": "Every selected wav original byte/source closure/helper/history",
+      "derivation": {
+        "members": 465,
+        "original_member_bytes": 7219944,
+        "all_member_bytes_hashes_sizes_modes_verified": true,
+        "safe_unique_regular_paths": true,
+        "uid_gid_mtime_zero": true,
+        "no_symlinks_hardlinks_or_truncated_members": true,
+        "second_archive_write_byte_identical": true
+      }
+    },
+    {
+      "path": "source-manifest.json.gz",
+      "bytes": 285592,
+      "sha256": "3c64ec3b9da2d89ba20368236e53c8bf6b7050105fecfd3efaf88ee34251b70f",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Original complete7531 source manifest/three WAV plus thirteen inherited project/SVX/RAW overlays",
+      "origin": {
+        "path": "/private/tmp/protracker-wav-output-safety-n00_vv8l/source-manifest.json",
+        "bytes": 1022060,
+        "sha256": "cf9088034834cc14e69b7b000d08a44f015fc43bd2f42692f66197e0664fb04f"
+      },
+      "derivation": {
+        "method": "gzip level9/mtime0/emptyfilename; no source JSON fields/order/whitespace altered"
+      }
+    },
+    {
+      "path": "baseline-manifest.json.gz",
+      "bytes": 285329,
+      "sha256": "aee2d32c5c48d1e8d3d9180892007416329b0c1ba0733e8b33678069d3a0b390",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Original complete7531 before-WAV manifest",
+      "origin": {
+        "path": "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline-manifest.json",
+        "bytes": 1020260,
+        "sha256": "b0bfdc75aae343a8cff064ab9d1c251e6d5349cd29985dd8259888859393f1f4"
+      },
+      "derivation": {
+        "method": "gzip level9/mtime0/emptyfilename; no source JSON fields/order/whitespace altered"
+      }
+    },
+    {
+      "path": "host-checks.json.gz",
+      "bytes": 4136,
+      "sha256": "52ee26274c6d0d394d6e9ccca7ef2bcd7fa806d2af684e16946fa4e51dab0263",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Original two-group host sanitizer report/allcommands/products; generated_inputs[] retained",
+      "origin": {
+        "path": "/private/tmp/protracker-wav-output-safety-n00_vv8l/host-final/host-checks.json",
+        "bytes": 24505,
+        "sha256": "9934924d352364674495772780d58b0fa05fa77515f31f3c59a5f70104df60a2"
+      },
+      "derivation": {
+        "method": "gzip level9/mtime0/emptyfilename; no source JSON fields/order/whitespace altered"
+      }
+    },
+    {
+      "path": "native-build-failed-v1.json.gz",
+      "bytes": 2558,
+      "sha256": "1d9f5e20498b85ea3e7d281e0a6821316f7890a46077890bc3a896782d9c0501",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Original host-only V1 KeyError after nine RC0 compiler/runtime queries, empty target/build commands; not a product assertion failure",
+      "origin": {
+        "path": "/private/tmp/protracker-wav-output-safety-n00_vv8l/native-final/manifest.json",
+        "bytes": 10546,
+        "sha256": "530e7af2bab3c16f3516ae96c18afe8c64be7650220826eacb103a6f1b5ad921"
+      },
+      "derivation": {
+        "method": "gzip level9/mtime0/emptyfilename; no source JSON fields/order/whitespace altered"
+      }
+    },
+    {
+      "path": "native-build.json.gz",
+      "bytes": 8978,
+      "sha256": "69406688024df3e58fd57c508d84e1cc90bf811845e091e5558122654ce9f7e1",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Original successful corrected V2 two-target cross-build report/orderedTUs/SDKclosures/pinpaths/scopes",
+      "origin": {
+        "path": "/private/tmp/protracker-wav-output-safety-n00_vv8l/native-final-v2/manifest.json",
+        "bytes": 51233,
+        "sha256": "1a37f834d8fd3f19869e78241a14d0a20145b0bbf52597d060017df77b5fe657"
+      },
+      "derivation": {
+        "method": "gzip level9/mtime0/emptyfilename; no source JSON fields/order/whitespace altered"
+      }
+    },
+    {
+      "path": "qualification-result.json.gz",
+      "bytes": 10164,
+      "sha256": "c0e80998a1d625234da25fcb6688cb7f68983fee741fca3a64f0ffb39919a2b5",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Original actual top native report fields/status/scopes, distinct nested copies in payload",
+      "origin": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/wav-output-safety-qualification-1790998001475740000/qualification-result.json",
+        "bytes": 62873,
+        "sha256": "f37734aa70730973fe40783bee9eef6eaa9f0b8466d6cf634f3ed5548221f1e3"
+      },
+      "derivation": {
+        "method": "gzip level9/mtime0/emptyfilename; no source JSON fields/order/whitespace altered"
+      }
+    },
+    {
+      "path": "committed-sample-memory.md.gz",
+      "bytes": 100017,
+      "sha256": "e3b40ee6afdf89fe3dcf241dd243657e20d3a717ed5251db65ec1e3f78bbeb0e",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Exact committed documentation only, separate from immutable7531 compiled source/dependencies",
+      "origin": {
+        "path": "/private/tmp/protracker-wav-output-root-blltiblv/committed-source-sample-memory.md",
+        "bytes": 304172,
+        "sha256": "0431c08e0d86f5ed07f7d52b375d84e9aeb3fbd66aed906a0ed4afc4b2bf49ea"
+      },
+      "derivation": {
+        "method": "gzip level9/mtime0/emptyfilename; no source JSON fields/order/whitespace altered"
+      }
+    },
+    {
+      "path": "baseline-before.json",
+      "bytes": 6082,
+      "sha256": "404eaa5791faf9875925969c0ef5f64394aa3c59cbaa2e70b0be109783eb2910",
+      "kind": "exact_byte_copy",
+      "scope": "Original expected before-WAV RC20 preservation failure",
+      "origin": {
+        "path": "/private/tmp/protracker-wav-output-safety-n00_vv8l/baseline-probe/result.json",
+        "bytes": 6082,
+        "sha256": "404eaa5791faf9875925969c0ef5f64394aa3c59cbaa2e70b0be109783eb2910"
+      }
+    },
+    {
+      "path": "probe-after.json",
+      "bytes": 6110,
+      "sha256": "9bb25e314654ecddd985cc683640c28cb95b1910c4e588eac81ab435d7dbdeeb",
+      "kind": "exact_byte_copy",
+      "scope": "Original identical-source RC0 preservation probe after three fixes",
+      "origin": {
+        "path": "/private/tmp/protracker-wav-output-safety-n00_vv8l/candidate-probe/result.json",
+        "bytes": 6110,
+        "sha256": "9bb25e314654ecddd985cc683640c28cb95b1910c4e588eac81ab435d7dbdeeb"
+      }
+    },
+    {
+      "path": "root-host-review.json",
+      "bytes": 841,
+      "sha256": "e35ecee30e06ff59b2d32aa0875357b51797c7110ce61485c92e81057fefa40a",
+      "kind": "exact_byte_copy",
+      "scope": "Original root host review",
+      "origin": {
+        "path": "/private/tmp/protracker-wav-output-root-blltiblv/root-host-review.json",
+        "bytes": 841,
+        "sha256": "e35ecee30e06ff59b2d32aa0875357b51797c7110ce61485c92e81057fefa40a"
+      }
+    },
+    {
+      "path": "root-native-build-review.json",
+      "bytes": 1246,
+      "sha256": "7fee35c975e148f9d76a92b86345fbb2784a74a9258ff20c6298263f3e5508b6",
+      "kind": "exact_byte_copy",
+      "scope": "Original root cross-build review, unmodified portable/Exec scopes",
+      "origin": {
+        "path": "/private/tmp/protracker-wav-output-root-blltiblv/root-native-build-review.json",
+        "bytes": 1246,
+        "sha256": "7fee35c975e148f9d76a92b86345fbb2784a74a9258ff20c6298263f3e5508b6"
+      }
+    },
+    {
+      "path": "root-native-failure-review.json",
+      "bytes": 1844,
+      "sha256": "73e91236e2832097e5b6350fc3e658d5e43e177c3fe02669f934c21e439c7411",
+      "kind": "exact_byte_copy",
+      "scope": "Original root FAILED qualification review; portable core completed, sample execution distinct from failed independent cleanup",
+      "origin": {
+        "path": "/private/tmp/protracker-wav-output-root-blltiblv/root-native-failure-review.json",
+        "bytes": 1844,
+        "sha256": "73e91236e2832097e5b6350fc3e658d5e43e177c3fe02669f934c21e439c7411"
+      }
+    },
+    {
+      "path": "reappeared-inventory.json",
+      "bytes": 988,
+      "sha256": "96946d7f3238426756c54d20795f39d240e42a43228e55fe2b03b9ea067a30b9",
+      "kind": "exact_byte_copy",
+      "scope": "Exact root historical read-only owned-path inventory; no new/live packaging inspection and no recreation cause inferred",
+      "origin": {
+        "path": "/private/tmp/protracker-wav-output-root-blltiblv/reappeared-inventory.json",
+        "bytes": 988,
+        "sha256": "96946d7f3238426756c54d20795f39d240e42a43228e55fe2b03b9ea067a30b9"
+      }
+    },
+    {
+      "path": "coordination-before-native.json",
+      "bytes": 3301,
+      "sha256": "a2c97160f2e9a0ef94ab061b2a4b253a2c858c9ab0630137d4319b9536321272",
+      "kind": "exact_byte_copy",
+      "scope": "Original captured request57/take59; earlier no hold is not current release",
+      "origin": {
+        "path": "/private/tmp/protracker-wav-output-root-blltiblv/coordination-before-native.json",
+        "bytes": 3301,
+        "sha256": "a2c97160f2e9a0ef94ab061b2a4b253a2c858c9ab0630137d4319b9536321272"
+      }
+    },
+    {
+      "path": "root-inputs.json",
+      "bytes": 594,
+      "sha256": "2f4d56c8a706b00875226881528bd82b9787e11af34b8cad0c0c5c4a27927203",
+      "kind": "exact_byte_copy",
+      "scope": "Original root separate runner/qualifier fingerprints",
+      "origin": {
+        "path": "/private/tmp/protracker-wav-output-root-blltiblv/root-inputs.json",
+        "bytes": 594,
+        "sha256": "2f4d56c8a706b00875226881528bd82b9787e11af34b8cad0c0c5c4a27927203"
+      }
+    },
+    {
+      "path": "root-reported-coordination.json",
+      "bytes": 1712,
+      "sha256": "1c20f3949b9ecd256dc9693008a09338bf35bb537ece0538b559dc395e6d0c16",
+      "kind": "exact_byte_copy",
+      "scope": "Original captured HOLD60; no live verification/release/recovery claims",
+      "origin": {
+        "path": "/private/tmp/protracker-wav-output-root-blltiblv/coordination-hold.json",
+        "bytes": 1712,
+        "sha256": "1c20f3949b9ecd256dc9693008a09338bf35bb537ece0538b559dc395e6d0c16"
+      }
+    },
+    {
+      "path": "committed-source-attribution.json",
+      "bytes": 602,
+      "sha256": "220939d364ee8d2d17b28ef822c3e9b4c1580de48a224a64b8fc5c0b3b8afc62",
+      "kind": "authored_root_provided_attribution",
+      "scope": "Derived root-provided full04bd commit/tree and exact committed documentation identity; not an original Git/target proof",
+      "derivation": {
+        "prepared_inputs": {
+          "path": "/private/tmp/package-wav-failed-prepared-inputs.json",
+          "bytes": 107443,
+          "sha256": "479d87d7553aaa0bc1006fc13884e8c7edf8541dd6951463975dca42c4cefc87"
+        },
+        "document": {
+          "path": "/private/tmp/protracker-wav-output-root-blltiblv/committed-source-sample-memory.md",
+          "bytes": 304172,
+          "sha256": "0431c08e0d86f5ed07f7d52b375d84e9aeb3fbd66aed906a0ed4afc4b2bf49ea"
+        }
+      }
+    },
+    {
+      "path": "member-provenance.json.gz",
+      "bytes": 32066,
+      "sha256": "42d94bfdeaf7d11e105439a153ceda86a28557a557762cadd3aa0fe5767626e6",
+      "kind": "authored_member_provenance_gzip",
+      "scope": "All selected original member/origin/byte/hash/mode identities and source inventories",
+      "derivation": {
+        "uncompressed_bytes": 330612,
+        "uncompressed_sha256": "53a8339acd92511e3f7c965c17206314b71d5da84e3c82f37e62130cc51574de",
+        "method": "Authored full original-member index, gzip level9 mtime0 emptyfilename"
+      }
+    },
+    {
+      "path": "README.md",
+      "bytes": 3132,
+      "sha256": "fbeef35eaa21372bf82a4325a3d494b2a33d8ac01da60c47de2a8c8be62cabe1",
+      "kind": "authored_scope_note",
+      "scope": "Precise portable/Exec/host/native/history/coordination tiers and selected-payload navigation"
+    }
+  ],
+  "control_exclusions": [
+    "compact-index.json",
+    "SHA256SUMS"
+  ],
+  "archive_verification": {
+    "members": 465,
+    "original_member_bytes": 7219944,
+    "all_member_bytes_hashes_sizes_modes_verified": true,
+    "safe_unique_regular_paths": true,
+    "uid_gid_mtime_zero": true,
+    "no_symlinks_hardlinks_or_truncated_members": true,
+    "second_archive_write_byte_identical": true
+  },
+  "original_native_status": false,
+  "source_inventories_before_after_identical": true
+}

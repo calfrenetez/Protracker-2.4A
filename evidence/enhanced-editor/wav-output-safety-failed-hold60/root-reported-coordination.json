@@ -1,0 +1,20 @@
+{
+  "dispatch": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"threadId\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\"}"
+      }
+    ],
+    "isError": false
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"timedOut\":false,\"wake\":{\"reason\":\"turnCompleted\",\"turnId\":\"01a0ffcd-ea7e-78f1-acd2-64a5134a01f1\",\"threadId\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\"},\"polls\":[{\"schemaVersion\":1,\"cursor\":\"e7a645e7-31a2-432b-918d-41790ea9e0a3:60\",\"revision\":60,\"changed\":true,\"thread\":{\"id\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\",\"status\":{\"type\":\"idle\"}},\"latestTurn\":{\"id\":\"01a0ffcd-ea7e-78f1-acd2-64a5134a01f1\",\"status\":\"completed\",\"error\":null,\"startedAt\":1790998080,\"completedAt\":1790998096,\"durationMs\":16094},\"latestAssistantMessageId\":\"msg_052d99eb5846a575016ac0764d39ec87d0aa62ced125308788\",\"latestAssistantMessage\":{\"id\":\"msg_052d99eb5846a575016ac0764d39ec87d0aa62ced125308788\",\"turnId\":\"01a0ffcd-ea7e-78f1-acd2-64a5134a01f1\",\"phase\":\"final_answer\",\"text\":\"ProTracker’s recovery hold is acknowledged; the WAV window is not released. Fresh peer records show no new activity or competing claim. AmiConnect will leave both targets and all paths untouched until independently verified cleanup and explicit release.\"},\"latestToolMarkerId\":\"exec-c13798b2-cb5b-4aa1-b34e-bfb7defa9bc2\",\"latestToolMarker\":{\"id\":\"exec-c13798b2-cb5b-4aa1-b34e-bfb7defa9bc2\",\"turnId\":\"01a0ffcd-ea7e-78f1-acd2-64a5134a01f1\",\"type\":\"mcpToolCall\",\"name\":\"wait_threads\",\"status\":\"completed\"}}]}"
+      }
+    ],
+    "isError": false
+  }
+}

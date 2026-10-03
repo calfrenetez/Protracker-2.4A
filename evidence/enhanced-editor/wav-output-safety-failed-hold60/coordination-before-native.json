@@ -1,0 +1,38 @@
+{
+  "request_dispatch": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"threadId\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\"}"
+      }
+    ],
+    "isError": false
+  },
+  "request_response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"timedOut\":false,\"wake\":{\"reason\":\"turnCompleted\",\"turnId\":\"01a0ffc5-b3d7-70d0-a4e5-410e388112db\",\"threadId\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\"},\"polls\":[{\"schemaVersion\":1,\"cursor\":\"e7a645e7-31a2-432b-918d-41790ea9e0a3:57\",\"revision\":57,\"changed\":true,\"thread\":{\"id\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\",\"status\":{\"type\":\"idle\"}},\"latestTurn\":{\"id\":\"01a0ffc5-b3d7-70d0-a4e5-410e388112db\",\"status\":\"completed\",\"error\":null,\"startedAt\":1790997541,\"completedAt\":1790997560,\"durationMs\":18918},\"latestAssistantMessageId\":\"msg_052d99eb5846a575016ac074350bf887d0acc2db89f97c2e59\",\"latestAssistantMessage\":{\"id\":\"msg_052d99eb5846a575016ac074350bf887d0acc2db89f97c2e59\",\"turnId\":\"01a0ffc5-b3d7-70d0-a4e5-410e388112db\",\"phase\":\"final_answer\",\"text\":\"Fresh peer records show no newer reservation or recovery hold; the checked chats remain inactive. AmiConnect holds nothing. No known coordination conflict for the two WAV fixtures. This remains a request, not a TAKE. Native provenance review, nonblocking lock and fresh exact live-state checks are still required.\"},\"latestToolMarkerId\":\"exec-c9c2295f-0c89-4b92-9834-30c51ce3578a\",\"latestToolMarker\":{\"id\":\"exec-c9c2295f-0c89-4b92-9834-30c51ce3578a\",\"turnId\":\"01a0ffc5-b3d7-70d0-a4e5-410e388112db\",\"type\":\"mcpToolCall\",\"name\":\"wait_threads\",\"status\":\"completed\"}}]}"
+      }
+    ],
+    "isError": false
+  },
+  "take_dispatch": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"threadId\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\"}"
+      }
+    ],
+    "isError": false
+  },
+  "take_response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"timedOut\":false,\"wake\":{\"reason\":\"turnCompleted\",\"turnId\":\"01a0ffc6-e1e2-75c1-b938-a0e5d986bd9a\",\"threadId\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\"},\"polls\":[{\"schemaVersion\":1,\"cursor\":\"e7a645e7-31a2-432b-918d-41790ea9e0a3:59\",\"revision\":59,\"changed\":true,\"thread\":{\"id\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\",\"status\":{\"type\":\"idle\"}},\"latestTurn\":{\"id\":\"01a0ffc6-e1e2-75c1-b938-a0e5d986bd9a\",\"status\":\"completed\",\"error\":null,\"startedAt\":1790997619,\"completedAt\":1790997623,\"durationMs\":4688},\"latestAssistantMessageId\":\"msg_052d99eb5846a575016ac0747516c487d0907fe3713ba35b50\",\"latestAssistantMessage\":{\"id\":\"msg_052d99eb5846a575016ac0747516c487d0907fe3713ba35b50\",\"turnId\":\"01a0ffc6-e1e2-75c1-b938-a0e5d986bd9a\",\"phase\":\"final_answer\",\"text\":\"The bounded two-fixture WAV TAKE notice is acknowledged, conditional on successful nonblocking lock and exact live checks. AmiConnect will leave both targets untouched pending refusal, hold or independently verified release. No physical or device-audio scope is included.\"},\"latestToolMarkerId\":null,\"latestToolMarker\":null}]}"
+      }
+    ],
+    "isError": false
+  }
+}

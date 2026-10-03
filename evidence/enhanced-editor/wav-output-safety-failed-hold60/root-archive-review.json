@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "scope": "Root independent readonly archive/control/origin/source verification only; original WAV qualification remains FAILED and HOLD60 NOT RELEASED",
+  "files": 22,
+  "members": 465,
+  "original_bytes": 7219944,
+  "all_original_member_bytes_modes_hashes_verified": true,
+  "controls_and_all21_checksums_verified": true,
+  "full_baseline_final7531_source_verified": true,
+  "payload_sha256": "d43e49a1f13d4cea749d38605da628db0085644bb7839bf243240c925a8c66c2",
+  "original_top_sha256": "f37734aa70730973fe40783bee9eef6eaa9f0b8466d6cf634f3ed5548221f1e3",
+  "missing_sample_independent_record_not_synthesized": true,
+  "no_live_guest_share_or_target_operations": true
+}

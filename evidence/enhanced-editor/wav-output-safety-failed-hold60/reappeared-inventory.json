@@ -1,0 +1,26 @@
+{
+  "root": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790998016536947000",
+  "read_only_host_inventory": [
+    {
+      "path": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790998016536947000/sample-wav",
+      "mode": "0o40700",
+      "bytes": 96,
+      "mtime_ns": 1790998035000000000,
+      "symlink": false,
+      "regular": false,
+      "directory": true
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/render-files-1790998016536947000/sample-wav/sample.wav.pttmp-1076336616-0",
+      "mode": "0o40700",
+      "bytes": 64,
+      "mtime_ns": 1790998028000000000,
+      "symlink": false,
+      "regular": false,
+      "directory": true
+    }
+  ],
+  "scope": "Current exact owned paths only, no guest or target mutations, no inference of delayed-recreation cause",
+  "empty_leaf_confirmed": true,
+  "root_is_exact_owned_run": true
+}

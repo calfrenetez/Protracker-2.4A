@@ -1,0 +1,515 @@
+{
+  "scope": "Host/build and completed shared030 native evidence packaging. Original byte copies preserve source paths/bytes; generated summaries are explicitly labelled. This packaging task performs no target operations.",
+  "copied_files": [
+    {
+      "kind": "byte_copy",
+      "scope": "successful_host_only",
+      "source": "/private/tmp/protracker-efx-integration-final-u7z20nyz/host-checks-v2.json",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/host/host-checks-v2.json",
+      "destination_relative": "host/host-checks-v2.json",
+      "bytes": 42688,
+      "sha256": "4df28b92eb1259beea9c3b8b5b3ceee19917676291ebddeefbf75b335b8b0ab6",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_host_only",
+      "source": "/private/tmp/protracker-efx-integration-final-u7z20nyz/host-checks-v2.log",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/host/host-checks-v2.log",
+      "destination_relative": "host/host-checks-v2.log",
+      "bytes": 1492,
+      "sha256": "3f4c4d436984ad9505144754ad96d65ea0dbcdda3ceae00d979ba10daa0ddf7d",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_host_only",
+      "source": "/private/tmp/protracker-efx-integration-final-u7z20nyz/core-host.log",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/host/core-host.log",
+      "destination_relative": "host/core-host.log",
+      "bytes": 723,
+      "sha256": "d1ed1bcc2b411e7c691e28ce116b119a260af2e8e1e8be5d48ea5c346c766373",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_host_only",
+      "source": "/private/tmp/protracker-efx-integration-final-u7z20nyz/validate_host_v2.py",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/host/validate_host_v2.py",
+      "destination_relative": "host/validate_host_v2.py",
+      "bytes": 4984,
+      "sha256": "fba8bbfda9ec1cc81da8354c5ae7caa4171f1ad089dbe56f00794588f326eb77",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_cross_build_only_not_run",
+      "source": "/private/tmp/protracker-efx-integration-final-u7z20nyz/native/manifest.json",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/cross-build/manifest.json",
+      "destination_relative": "cross-build/manifest.json",
+      "bytes": 1035535,
+      "sha256": "5f04dc4a192c41c276944df14875f45626ce9947d236602d32addd325425c820",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_cross_build_only_not_run",
+      "source": "/private/tmp/protracker-efx-integration-final-u7z20nyz/native/compile-commands.json",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/cross-build/compile-commands.json",
+      "destination_relative": "cross-build/compile-commands.json",
+      "bytes": 8395,
+      "sha256": "74e3879c897eb391dc1c88bba57aac810bcd61c77b4aca399d32d0e3835a2f3d",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_cross_build_only_not_run",
+      "source": "/private/tmp/protracker-efx-integration-final-u7z20nyz/native/PTExecInvertSessionTest.build.log",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/cross-build/PTExecInvertSessionTest.build.log",
+      "destination_relative": "cross-build/PTExecInvertSessionTest.build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_cross_build_only_not_run",
+      "source": "/private/tmp/protracker-efx-integration-final-u7z20nyz/native/PTExecSamplerInvertSongTest.build.log",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/cross-build/PTExecSamplerInvertSongTest.build.log",
+      "destination_relative": "cross-build/PTExecSamplerInvertSongTest.build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_cross_build_only_not_run",
+      "source": "/private/tmp/protracker-efx-integration-final-u7z20nyz/native/PTExecEditorInvertStudioTest.build.log",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/cross-build/PTExecEditorInvertStudioTest.build.log",
+      "destination_relative": "cross-build/PTExecEditorInvertStudioTest.build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_cross_build_recipe",
+      "source": "/private/tmp/protracker_efx_native_build.py",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/cross-build/build_efx_native.py",
+      "destination_relative": "cross-build/build_efx_native.py",
+      "bytes": 4938,
+      "sha256": "fef38d83cbf1bf1124662a1c3bc9b4833b0c285493585148d571bed87a443a1c",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "derived_metadata",
+      "scope": "derived_final_source_summary",
+      "sources": [
+        "/private/tmp/protracker-efx-integration-final-u7z20nyz/source-manifest.json"
+      ],
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/source-snapshot.json",
+      "destination_relative": "source-snapshot.json",
+      "bytes": 9723,
+      "sha256": "c2407889e249fd7eb59b59de190890a7cc2d0c2e645a415430a921a45e67cd78",
+      "verified_write": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "preserved_logging_failure_before_product_runtime",
+      "source": "/private/tmp/protracker-efx-integration-gvbbj8_f/host-checks.json",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/failures/superseded-gvbbj8_f/host-checks.json",
+      "destination_relative": "failures/superseded-gvbbj8_f/host-checks.json",
+      "bytes": 14295,
+      "sha256": "3f14d3ad69f1c6c645065db47ff6c0e653ebe8af68328892eef9346f59065c40",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "preserved_logging_failure_before_product_runtime",
+      "source": "/private/tmp/protracker-efx-integration-gvbbj8_f/host-checks.log",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/failures/superseded-gvbbj8_f/host-checks.log",
+      "destination_relative": "failures/superseded-gvbbj8_f/host-checks.log",
+      "bytes": 5726,
+      "sha256": "3b01cece7d42b8109cc025557966c60b17287d80ffd437363c1a8d487104bb99",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "preserved_logging_failure_before_product_runtime",
+      "source": "/private/tmp/protracker-efx-integration-gvbbj8_f/validate_host.py",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/failures/superseded-gvbbj8_f/validate_host.py",
+      "destination_relative": "failures/superseded-gvbbj8_f/validate_host.py",
+      "bytes": 4342,
+      "sha256": "faf46cad6350dd82b7bcfbccffeaefcf60f313d537415f719892b936b9028563",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "preserved_logging_failure_before_product_runtime",
+      "source": "/private/tmp/protracker-efx-integration-gvbbj8_f/suite-1.d",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/failures/superseded-gvbbj8_f/suite-1.d",
+      "destination_relative": "failures/superseded-gvbbj8_f/suite-1.d",
+      "bytes": 7983,
+      "sha256": "ee5545d9b72ccd7fff0e1ba8cee7ef6caf2b04a1a48089f84d6a2517c2ca3794",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "preserved_logging_failure_before_product_runtime",
+      "source": "/private/tmp/protracker-efx-integration-gvbbj8_f/suite-2.d",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/failures/superseded-gvbbj8_f/suite-2.d",
+      "destination_relative": "failures/superseded-gvbbj8_f/suite-2.d",
+      "bytes": 15026,
+      "sha256": "a2c16bec59f9180db1e4f8ed056766cd46f97b1fce7f3b799244f3e401c87c98",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "preserved_logging_failure_before_product_runtime",
+      "source": "/private/tmp/protracker-efx-integration-gvbbj8_f/suite-3.d",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/failures/superseded-gvbbj8_f/suite-3.d",
+      "destination_relative": "failures/superseded-gvbbj8_f/suite-3.d",
+      "bytes": 15047,
+      "sha256": "2b95c2cef71fd15d3ef3749d818c5e98507e5c471323000b50fc629e213e4e6b",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "preserved_logging_failure_before_product_runtime",
+      "source": "/private/tmp/protracker-efx-integration-final-u7z20nyz/host-checks.json",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/failures/final-parser-v1-u7z20nyz/host-checks.json",
+      "destination_relative": "failures/final-parser-v1-u7z20nyz/host-checks.json",
+      "bytes": 14337,
+      "sha256": "070b79e13fe304a15590c82b6a2528ea1915cb5262c0b6ac3da4266db56cffc1",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "preserved_logging_failure_before_product_runtime",
+      "source": "/private/tmp/protracker-efx-integration-final-u7z20nyz/host-checks.log",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/failures/final-parser-v1-u7z20nyz/host-checks.log",
+      "destination_relative": "failures/final-parser-v1-u7z20nyz/host-checks.log",
+      "bytes": 4967,
+      "sha256": "24f2ebbec26cbd8f4c21eac1e54fbe56b5f20ac6c519a4e0c52c1feefccb5bcc",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "preserved_logging_failure_before_product_runtime",
+      "source": "/private/tmp/protracker-efx-integration-final-u7z20nyz/validate_host.py",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/failures/final-parser-v1-u7z20nyz/validate_host.py",
+      "destination_relative": "failures/final-parser-v1-u7z20nyz/validate_host.py",
+      "bytes": 4353,
+      "sha256": "04ef1dd8af9ed5c86bf4cc888410a25aa3c2a66697b064110b95af2893632780",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "preserved_logging_failure_before_product_runtime",
+      "source": "/private/tmp/protracker-efx-integration-final-u7z20nyz/suite-1.d",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/failures/final-parser-v1-u7z20nyz/suite-1.d",
+      "destination_relative": "failures/final-parser-v1-u7z20nyz/suite-1.d",
+      "bytes": 7983,
+      "sha256": "ee5545d9b72ccd7fff0e1ba8cee7ef6caf2b04a1a48089f84d6a2517c2ca3794",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "preserved_logging_failure_before_product_runtime",
+      "source": "/private/tmp/protracker-efx-integration-final-u7z20nyz/suite-2.d",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/failures/final-parser-v1-u7z20nyz/suite-2.d",
+      "destination_relative": "failures/final-parser-v1-u7z20nyz/suite-2.d",
+      "bytes": 15026,
+      "sha256": "a2c16bec59f9180db1e4f8ed056766cd46f97b1fce7f3b799244f3e401c87c98",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "preserved_logging_failure_before_product_runtime",
+      "source": "/private/tmp/protracker-efx-integration-final-u7z20nyz/suite-3.d",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/failures/final-parser-v1-u7z20nyz/suite-3.d",
+      "destination_relative": "failures/final-parser-v1-u7z20nyz/suite-3.d",
+      "bytes": 15047,
+      "sha256": "2b95c2cef71fd15d3ef3749d818c5e98507e5c471323000b50fc629e213e4e6b",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "derived_metadata",
+      "scope": "derived_failure_classification",
+      "sources": [
+        "/private/tmp/protracker-efx-integration-gvbbj8_f/host-checks.json",
+        "/private/tmp/protracker-efx-integration-gvbbj8_f/host-checks.log",
+        "/private/tmp/protracker-efx-integration-final-u7z20nyz/host-checks.json",
+        "/private/tmp/protracker-efx-integration-final-u7z20nyz/host-checks.log"
+      ],
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/failures/summary.json",
+      "destination_relative": "failures/summary.json",
+      "bytes": 1768,
+      "sha256": "5f5c27f2992db1ba80f7580e058dda0e25da19d9524568af0c63ae525536fb33",
+      "verified_write": true
+    },
+    {
+      "kind": "authored_documentation",
+      "scope": "host_build_native_status_and_limits",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/README.md",
+      "destination_relative": "README.md",
+      "bytes": 6368,
+      "sha256": "bec58ddfbc980c14f90427b1b7c0a65f6a05b64b09ef94998491aa166ba6538c",
+      "verified_write": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_shared030_native_qualification",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/qualification-result.json",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/qualification-result.json",
+      "destination_relative": "native/qualification-1790987821163521000/qualification-result.json",
+      "bytes": 1079558,
+      "sha256": "4605858d57e225bf95da5c07475cc51eef58c8d97edc15031f5cc2f98119abee",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "historical_executed_orchestration_source_not_portable_command",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/qualify_incremental_invert.py",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/historical-qualify_incremental_invert.py",
+      "destination_relative": "native/qualification-1790987821163521000/historical-qualify_incremental_invert.py",
+      "bytes": 6695,
+      "sha256": "1c4c1342fbb82010a37d82d1f9b89934da81b6f223e72fe8edd119c61577be70",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_session_native_run_and_independent_cleanup",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/runner-session/build/dev/render-files-1790987822164089000/guest-status-before-launch.json",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/session/guest-status-before-launch.json",
+      "destination_relative": "native/qualification-1790987821163521000/session/guest-status-before-launch.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_session_native_run_and_independent_cleanup",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/runner-session/build/dev/render-files-1790987822164089000/guest-status-before-staging.json",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/session/guest-status-before-staging.json",
+      "destination_relative": "native/qualification-1790987821163521000/session/guest-status-before-staging.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_session_native_run_and_independent_cleanup",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/runner-session/build/dev/render-files-1790987822164089000/independent-cleanup.json",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/session/independent-cleanup.json",
+      "destination_relative": "native/qualification-1790987821163521000/session/independent-cleanup.json",
+      "bytes": 3698,
+      "sha256": "fbb0efb1e8138de1fed14d75dd6896ead6b4554aa35eeed59b3fcd48195df33d",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_session_native_run_and_independent_cleanup",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/runner-session/build/dev/render-files-1790987822164089000/invert-session.log",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/session/invert-session.log",
+      "destination_relative": "native/qualification-1790987821163521000/session/invert-session.log",
+      "bytes": 347,
+      "sha256": "624c1a4b8a8c648778c588fa9752ad17926d4f48847e22d9b60dfcf874af629c",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_session_native_run_and_independent_cleanup",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/runner-session/build/dev/render-files-1790987822164089000/launch.log",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/session/launch.log",
+      "destination_relative": "native/qualification-1790987821163521000/session/launch.log",
+      "bytes": 236,
+      "sha256": "2da539d575b3326341d040f2a976fb36e2f7d9aff5595c8334a5e44e1ee6f8e2",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_session_native_run_and_independent_cleanup",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/runner-session/build/dev/render-files-1790987822164089000/result.json",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/session/result.json",
+      "destination_relative": "native/qualification-1790987821163521000/session/result.json",
+      "bytes": 3623,
+      "sha256": "d768103e7d25a59acf0e9ac47455a664ff21b7ba4c80e64d5279c835a8a655a5",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_session_host_runner_output",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/session-runner.log",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/session/runner.log",
+      "destination_relative": "native/qualification-1790987821163521000/session/runner.log",
+      "bytes": 187,
+      "sha256": "9814d53a71a087742a6c84c5f21cedc26b0d9fc017fbe91f2af21b0f26fc3068",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_sampler_native_run_and_independent_cleanup",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/runner-sampler/build/dev/render-files-1790987895710976000/guest-status-before-launch.json",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/sampler/guest-status-before-launch.json",
+      "destination_relative": "native/qualification-1790987821163521000/sampler/guest-status-before-launch.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_sampler_native_run_and_independent_cleanup",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/runner-sampler/build/dev/render-files-1790987895710976000/guest-status-before-staging.json",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/sampler/guest-status-before-staging.json",
+      "destination_relative": "native/qualification-1790987821163521000/sampler/guest-status-before-staging.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_sampler_native_run_and_independent_cleanup",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/runner-sampler/build/dev/render-files-1790987895710976000/independent-cleanup.json",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/sampler/independent-cleanup.json",
+      "destination_relative": "native/qualification-1790987821163521000/sampler/independent-cleanup.json",
+      "bytes": 3698,
+      "sha256": "5c37558511438412c4604d7c89c44f86f53a456b230968d83a7bb638089b1717",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_sampler_native_run_and_independent_cleanup",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/runner-sampler/build/dev/render-files-1790987895710976000/invert-sampler.log",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/sampler/invert-sampler.log",
+      "destination_relative": "native/qualification-1790987821163521000/sampler/invert-sampler.log",
+      "bytes": 348,
+      "sha256": "66590a705c0ad47c3c59ab776303d2fc719e9692a4d976eca6fc3fe791cbf6b2",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_sampler_native_run_and_independent_cleanup",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/runner-sampler/build/dev/render-files-1790987895710976000/launch.log",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/sampler/launch.log",
+      "destination_relative": "native/qualification-1790987821163521000/sampler/launch.log",
+      "bytes": 236,
+      "sha256": "2da539d575b3326341d040f2a976fb36e2f7d9aff5595c8334a5e44e1ee6f8e2",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_sampler_native_run_and_independent_cleanup",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/runner-sampler/build/dev/render-files-1790987895710976000/result.json",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/sampler/result.json",
+      "destination_relative": "native/qualification-1790987821163521000/sampler/result.json",
+      "bytes": 3649,
+      "sha256": "e8ddf46c0b4c2ed5c27a196346b9dad5346bd2f00d512ddc6a911afd960a2bb7",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_sampler_host_runner_output",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/sampler-runner.log",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/sampler/runner.log",
+      "destination_relative": "native/qualification-1790987821163521000/sampler/runner.log",
+      "bytes": 187,
+      "sha256": "39693f2aac12b5a4a2bd61e584d3eeaf892de9e7fd53fda637f7d4f6d59835d6",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_editor_native_run_and_independent_cleanup",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/runner-editor/build/dev/render-files-1790987926178894000/guest-status-before-launch.json",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/editor/guest-status-before-launch.json",
+      "destination_relative": "native/qualification-1790987821163521000/editor/guest-status-before-launch.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_editor_native_run_and_independent_cleanup",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/runner-editor/build/dev/render-files-1790987926178894000/guest-status-before-staging.json",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/editor/guest-status-before-staging.json",
+      "destination_relative": "native/qualification-1790987821163521000/editor/guest-status-before-staging.json",
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_editor_native_run_and_independent_cleanup",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/runner-editor/build/dev/render-files-1790987926178894000/independent-cleanup.json",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/editor/independent-cleanup.json",
+      "destination_relative": "native/qualification-1790987821163521000/editor/independent-cleanup.json",
+      "bytes": 3698,
+      "sha256": "24e229eb83967a0761733dc42c3aff4bb00d201b22e0215884a183a9b73249d9",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_editor_native_run_and_independent_cleanup",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/runner-editor/build/dev/render-files-1790987926178894000/invert-editor.log",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/editor/invert-editor.log",
+      "destination_relative": "native/qualification-1790987821163521000/editor/invert-editor.log",
+      "bytes": 359,
+      "sha256": "eed1fd75946ab87650827de97972999375a4eb52e09a7bcdd61b283d76d80070",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_editor_native_run_and_independent_cleanup",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/runner-editor/build/dev/render-files-1790987926178894000/launch.log",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/editor/launch.log",
+      "destination_relative": "native/qualification-1790987821163521000/editor/launch.log",
+      "bytes": 236,
+      "sha256": "2da539d575b3326341d040f2a976fb36e2f7d9aff5595c8334a5e44e1ee6f8e2",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_editor_native_run_and_independent_cleanup",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/runner-editor/build/dev/render-files-1790987926178894000/result.json",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/editor/result.json",
+      "destination_relative": "native/qualification-1790987821163521000/editor/result.json",
+      "bytes": 3641,
+      "sha256": "039b51c749f323c33f47fafa2f2aa2e640f171e0c921903e4c4fa39afb9bbd2d",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "byte_copy",
+      "scope": "successful_editor_host_runner_output",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/editor-runner.log",
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/qualification-1790987821163521000/editor/runner.log",
+      "destination_relative": "native/qualification-1790987821163521000/editor/runner.log",
+      "bytes": 186,
+      "sha256": "54ed227d035a4827e3d6393083c7f80c510f4ff2cf9af04d6ebca4253675cf49",
+      "verified_byte_equal": true
+    },
+    {
+      "kind": "derived_metadata",
+      "scope": "derived_successful_native_status_and_coordination_report",
+      "sources": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/qualification-result.json",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/qualify_incremental_invert.py"
+      ],
+      "destination": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/invert-incremental/native/summary.json",
+      "destination_relative": "native/summary.json",
+      "bytes": 4083,
+      "sha256": "a90c839885b65a5fb52d38fa2fe17371b32613a74c25fcab962c5333e7b58c65",
+      "verified_write": true
+    }
+  ],
+  "byte_copy_count": 45,
+  "derived_or_authored_count": 4,
+  "all_copies_verified": true,
+  "source_edits": false,
+  "staged": false,
+  "committed": false,
+  "guest_access": false,
+  "native_targets_run_by_packaging_task": 0,
+  "native_passes_recorded": 3,
+  "release_ack_reported": true,
+  "release_ack_revision": 26
+}

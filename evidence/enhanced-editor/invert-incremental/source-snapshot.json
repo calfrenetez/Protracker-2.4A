@@ -1,0 +1,287 @@
+{
+  "classification": "DERIVED_SUMMARY_NOT_THE_FULL_SOURCE_MANIFEST",
+  "scope": "Clean baseline source export plus only21 declared EFx overlays; all7443 original input records remain in the referenced manifest.",
+  "base_commit": "2470f6824286b6dc2b0c483a95dbc31366b117c6",
+  "base_tree": "6886e568ebc3182e59f0b89c35e872fb102d50f1",
+  "source_export": "/private/tmp/protracker-efx-integration-final-u7z20nyz/source",
+  "source_input_count": 7443,
+  "overlay_paths": [
+    "src/core/invert_pcm.c",
+    "src/core/invert_pcm.h",
+    "src/core/invert_bank.c",
+    "src/core/invert_bank.h",
+    "src/core/render.c",
+    "src/core/render_commands.h",
+    "src/core/render_invert.c",
+    "src/core/render_invert.h",
+    "tests/invert_pcm_test.c",
+    "tests/invert_bank_test.c",
+    "tests/render_sequence_test.c",
+    "tests/render_invert_session_test.c",
+    "tests/render_invert_prepare_test.c",
+    "tests/test_render_invert_prepare.py",
+    "src/editor/sampler_invert_song.c",
+    "src/editor/sampler_invert_song.h",
+    "src/editor/editor_studio.c",
+    "src/editor/editor_studio.h",
+    "tests/sampler_invert_song_test.c",
+    "tests/editor_invert_studio_test.c",
+    "docs/INVERT_LOOP_CORE.md"
+  ],
+  "overlays": [
+    {
+      "path": "src/core/invert_pcm.c",
+      "sha256": "f9b6b4259468f27cab2064831d1d62efd28c751c51de59073baf4b39e59c7404",
+      "size": 4485,
+      "overlay": true,
+      "scope": "core",
+      "base_blob": "45639f5f73a11e068c106d9a43549e89a80a72b8",
+      "base_mode": "100644"
+    },
+    {
+      "path": "src/core/invert_pcm.h",
+      "sha256": "d521c050aafee6e808d3312d81ecaa958ac957ef61f5f98f41678d1f4070174d",
+      "size": 2426,
+      "overlay": true,
+      "scope": "core",
+      "base_blob": "bea40222bd512ad3a43c3232cff0210bb95fdb78",
+      "base_mode": "100644"
+    },
+    {
+      "path": "src/core/invert_bank.c",
+      "sha256": "b374b4e88ead336b6c7566038c5a2f090552fc3e562751f9ef7ec2a931005d5f",
+      "size": 6792,
+      "overlay": true,
+      "scope": "core",
+      "base_blob": "c25871aab933144d1826ba9f525352bfc36ec8dc",
+      "base_mode": "100644"
+    },
+    {
+      "path": "src/core/invert_bank.h",
+      "sha256": "5d55e42986389b2b8f6d9d3b80fa8d51603a6e9e00e014d185aaae21ef53d377",
+      "size": 2207,
+      "overlay": true,
+      "scope": "core",
+      "base_blob": "18b29032f261673f7fc5cc7502cb7e064838c824",
+      "base_mode": "100644"
+    },
+    {
+      "path": "src/core/render.c",
+      "sha256": "cc71012b99b9f92b31458d66e8f968a14a75e3bb4791585b7b9d092b9f88243b",
+      "size": 40828,
+      "overlay": true,
+      "scope": "core",
+      "base_blob": "bf735cc73e723d118f8f832148e33210632af747",
+      "base_mode": "100644"
+    },
+    {
+      "path": "src/core/render_commands.h",
+      "sha256": "ea176e8382ea808929d11571396d6214bb40d2fce8defc9b19569c1bb5c30d14",
+      "size": 9193,
+      "overlay": true,
+      "scope": "core",
+      "base_blob": "db81a5b9b34a0c0d94df960423db93ebfe5f5053",
+      "base_mode": "100644"
+    },
+    {
+      "path": "src/core/render_invert.c",
+      "sha256": "e08d9f5df22969bb069347675a4c38ffd84956da0e813cfd446d8219f630c827",
+      "size": 10320,
+      "overlay": true,
+      "scope": "core",
+      "base_blob": "fd16062625f89f6e9a249e06e71354faa2f103c1",
+      "base_mode": "100644"
+    },
+    {
+      "path": "src/core/render_invert.h",
+      "sha256": "9d66ec381257454dc816d39ba0ee5b07db4d1f09f326cdcdbd8abbf66285e6d5",
+      "size": 4182,
+      "overlay": true,
+      "scope": "core",
+      "base_blob": "6d0d205c65fc56d3920716b385e7030f9b2891d3",
+      "base_mode": "100644"
+    },
+    {
+      "path": "tests/invert_pcm_test.c",
+      "sha256": "31aa5c850dd4203f16053066f45c4044851831b9fb59946649632cac775e9c9b",
+      "size": 4948,
+      "overlay": true,
+      "scope": "core",
+      "base_blob": "12b61ecd7d53fb2f9d9effc0321547ce76deba3c",
+      "base_mode": "100644"
+    },
+    {
+      "path": "tests/invert_bank_test.c",
+      "sha256": "8cd20713bd413eea50d039a18f9bbcc071e1b2a3ae4aef97d06159beebd48f76",
+      "size": 5851,
+      "overlay": true,
+      "scope": "core",
+      "base_blob": "f61b7b99c79ac7a7c80a5fc60c4f3730c4d44a0c",
+      "base_mode": "100644"
+    },
+    {
+      "path": "tests/render_sequence_test.c",
+      "sha256": "554d98bfbe5222c5c438a065d47a59026e8c7d670749eea6f926bee220d16408",
+      "size": 12972,
+      "overlay": true,
+      "scope": "core",
+      "base_blob": "45e6dcf873d53fc0d5570f27d088f23816b98fe1",
+      "base_mode": "100644"
+    },
+    {
+      "path": "tests/render_invert_session_test.c",
+      "sha256": "70c47440360bc370c1c24e5123d36cc93c61a2a413855b6fe8caa6f4374640f1",
+      "size": 8472,
+      "overlay": true,
+      "scope": "core",
+      "base_blob": "856b9a87e79c04bad52e538dbff88602a22059a5",
+      "base_mode": "100644"
+    },
+    {
+      "path": "tests/render_invert_prepare_test.c",
+      "sha256": "49793279ec6835533cc6d15813678efbbc458cfe3edb2ff0bd27c01e36c605ca",
+      "size": 8131,
+      "overlay": true,
+      "scope": "core"
+    },
+    {
+      "path": "tests/test_render_invert_prepare.py",
+      "sha256": "e67b6ea16f0692e4851dd59145cac37a8faf1c4a65e88869cf3da85c3eec9d30",
+      "size": 742,
+      "overlay": true,
+      "scope": "core"
+    },
+    {
+      "path": "src/editor/sampler_invert_song.c",
+      "sha256": "5271b02ec9c2dea5e4dc5218fba262a7af290bebfb0d63624c5a03e005174be2",
+      "size": 4770,
+      "overlay": true,
+      "scope": "integration",
+      "base_blob": "83d992571799bc65297263d91d957c69e518d595",
+      "base_mode": "100644"
+    },
+    {
+      "path": "src/editor/sampler_invert_song.h",
+      "sha256": "caf056384c8d0a206a2bafcdd3fb002897c8622afd1a0a53595a22d1b14ab4e1",
+      "size": 2674,
+      "overlay": true,
+      "scope": "integration",
+      "base_blob": "025bbad4ec5feb9dbe583257630f4afe8cf2a291",
+      "base_mode": "100644"
+    },
+    {
+      "path": "src/editor/editor_studio.c",
+      "sha256": "c067670fc0f016a2d3f73cf79efa8905469702700e951012736ef32b167edd27",
+      "size": 12688,
+      "overlay": true,
+      "scope": "integration",
+      "base_blob": "c548659845def6dde365584140e5b5fcade476c8",
+      "base_mode": "100644"
+    },
+    {
+      "path": "src/editor/editor_studio.h",
+      "sha256": "5b7c3aec1f2c87d828d928325b8be14027fbc2690004b75706005375dceddab2",
+      "size": 7763,
+      "overlay": true,
+      "scope": "integration",
+      "base_blob": "38cec0020ad2af35c817f0cae1caff4dd44e8c2d",
+      "base_mode": "100644"
+    },
+    {
+      "path": "tests/sampler_invert_song_test.c",
+      "sha256": "bd3b9d3e362ea59dbdd1a67a73a1140d8a872537c0579a39e8c64bbafd122d60",
+      "size": 16319,
+      "overlay": true,
+      "scope": "integration",
+      "base_blob": "12c8a0b01caa5f90be8bf1741457e2c2d1884ddd",
+      "base_mode": "100644"
+    },
+    {
+      "path": "tests/editor_invert_studio_test.c",
+      "sha256": "4f5bbf7dcae407976ad398044f12bd44330ccb0479dc32121c951a18a255e621",
+      "size": 20675,
+      "overlay": true,
+      "scope": "integration",
+      "base_blob": "ebccd34ff3d640121ed7abc884f84973e67c6282",
+      "base_mode": "100644"
+    },
+    {
+      "path": "docs/INVERT_LOOP_CORE.md",
+      "sha256": "ada6384a2afa299694ce7704c97c6ce8f7d5a2b5927dd7eff0d1f114b7043b6e",
+      "size": 18916,
+      "overlay": true,
+      "scope": "integration",
+      "base_blob": "4ed1c75d9d7a95cd79e7de72335e826660fb25a9",
+      "base_mode": "100644"
+    }
+  ],
+  "new_inputs": [
+    "tests/render_invert_prepare_test.c",
+    "tests/test_render_invert_prepare.py"
+  ],
+  "excluded_dirty_source_checks": [
+    {
+      "path": "src/editor/editor.c",
+      "sha256": "41e8d6877ed103864f365bf80b99a204ba60dc9cc26f725a552e9f5ddefca936",
+      "matches_base": true,
+      "matches_dirty_checkout": false
+    },
+    {
+      "path": "src/editor/editor.h",
+      "sha256": "ce3c9dcf1838b5e2c5e094b363b862ffe2320730b67c1e14d28ea69bfb2cb4ea",
+      "matches_base": true,
+      "matches_dirty_checkout": false
+    },
+    {
+      "path": "src/editor/view.c",
+      "sha256": "e648c01c0f7f260e131ce70e0117e01e2699740eeaa3f156404112fa07322b75",
+      "matches_base": true,
+      "matches_dirty_checkout": false
+    },
+    {
+      "path": "src/editor/view.h",
+      "sha256": "1ce9950cfa9efa124e5a887dc6db36bebc43c91b410dfbc9ce8dd60c1b324d6c",
+      "matches_base": true,
+      "matches_dirty_checkout": false
+    },
+    {
+      "path": "src/native/editor_main.c",
+      "sha256": "7b413926bd822b8718f6f1b0359f66d08fa942a457555fe24bea6161b51c8bb1",
+      "matches_base": true,
+      "matches_dirty_checkout": false
+    },
+    {
+      "path": "tests/editor_test.c",
+      "sha256": "db5fa18007b058000c1b1800888e1ffd323793e85c92952857c21366fc5cc084",
+      "matches_base": true,
+      "matches_dirty_checkout": false
+    },
+    {
+      "path": "tests/test_editor.py",
+      "sha256": "aa7488572b18721591813942f53e711e32307c9c9383ec91f6071c616a6b0710",
+      "matches_base": true,
+      "matches_dirty_checkout": false
+    },
+    {
+      "path": "tools/build_core_tests.py",
+      "sha256": "1948232ab42449eb518e49ee55276542b102d7461f0f58d8aa273588a20a0d55",
+      "matches_base": true,
+      "matches_dirty_checkout": false
+    },
+    {
+      "path": "tools/test_sampler_emulator.py",
+      "sha256": "66b0db3c493a16ab9028db0ed1be866f51da6e37410723332735b14d951ebd4b",
+      "matches_base": true,
+      "matches_dirty_checkout": false
+    }
+  ],
+  "original_source_manifest": {
+    "original_path": "/private/tmp/protracker-efx-integration-final-u7z20nyz/source-manifest.json",
+    "bytes": 2304789,
+    "sha256": "08adff81ee933d4e0f6fb9fc019f32c87206b4d93482cd5997bdfa4273fd30fe"
+  },
+  "product_commit": "0adacb2",
+  "guest_access": false,
+  "staged": false,
+  "supersedes_snapshot": "/private/tmp/protracker-efx-integration-gvbbj8_f"
+}

@@ -1,0 +1,50 @@
+test_generation_and_private_lifetime (test_sampler_invert_song.SamplerInvertSong.test_generation_and_private_lifetime) ... ERROR
+test_private_editor_lifecycle (test_editor_invert_studio.EditorInvertStudio.test_private_editor_lifecycle) ... ERROR
+test_pinned_editor_lifecycle (test_editor_studio.EditorStudio.test_pinned_editor_lifecycle) ... ERROR
+
+======================================================================
+ERROR: test_generation_and_private_lifetime (test_sampler_invert_song.SamplerInvertSong.test_generation_and_private_lifetime)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/protracker-efx-integration-final-u7z20nyz/source/tests/test_sampler_invert_song.py", line 11, in test_generation_and_private_lifetime
+    subprocess.run(['cc','-std=c99','-O1','-g','-Wall','-Wextra','-Werror','-fsanitize=address,undefined','-Isrc/core','tests/sampler_invert_song_test.c',*SOURCES,'-o',str(exe)],cwd=ROOT,check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/protracker-efx-integration-final-u7z20nyz/validate_host.py", line 45, in recorded_run
+    path=(root/value).resolve();relative=path.relative_to(root).as_posix()
+                                         ~~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 495, in relative_to
+    raise ValueError(f"{str(self)!r} is not in the subpath of {str(other)!r}")
+ValueError: '/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/SDKSettings.json' is not in the subpath of '/private/tmp/protracker-efx-integration-final-u7z20nyz/source'
+
+======================================================================
+ERROR: test_private_editor_lifecycle (test_editor_invert_studio.EditorInvertStudio.test_private_editor_lifecycle)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/protracker-efx-integration-final-u7z20nyz/source/tests/test_editor_invert_studio.py", line 10, in test_private_editor_lifecycle
+    subprocess.run(['cc','-std=c99','-O1','-g','-Wall','-Wextra','-Werror','-fsanitize=address,undefined','-Isrc/core','tests/editor_invert_studio_test.c',*EXTRA,*SOURCES[1:],'-o',str(exe)],cwd=ROOT,check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/protracker-efx-integration-final-u7z20nyz/validate_host.py", line 45, in recorded_run
+    path=(root/value).resolve();relative=path.relative_to(root).as_posix()
+                                         ~~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 495, in relative_to
+    raise ValueError(f"{str(self)!r} is not in the subpath of {str(other)!r}")
+ValueError: '/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/SDKSettings.json' is not in the subpath of '/private/tmp/protracker-efx-integration-final-u7z20nyz/source'
+
+======================================================================
+ERROR: test_pinned_editor_lifecycle (test_editor_studio.EditorStudio.test_pinned_editor_lifecycle)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/protracker-efx-integration-final-u7z20nyz/source/tests/test_editor_studio.py", line 10, in test_pinned_editor_lifecycle
+    subprocess.run(['cc','-std=c99','-O1','-g','-Wall','-Wextra','-Werror','-fsanitize=address,undefined','-Isrc/core','tests/editor_studio_test.c',*EXTRA,*SOURCES[1:],'-o',str(exe)],cwd=ROOT,check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/protracker-efx-integration-final-u7z20nyz/validate_host.py", line 45, in recorded_run
+    path=(root/value).resolve();relative=path.relative_to(root).as_posix()
+                                         ~~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 495, in relative_to
+    raise ValueError(f"{str(self)!r} is not in the subpath of {str(other)!r}")
+ValueError: '/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/SDKSettings.json' is not in the subpath of '/private/tmp/protracker-efx-integration-final-u7z20nyz/source'
+
+----------------------------------------------------------------------
+Ran 3 tests in 22.377s
+
+FAILED (errors=3)

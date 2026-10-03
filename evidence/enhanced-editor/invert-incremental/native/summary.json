@@ -1,0 +1,95 @@
+{
+  "classification": "SHARED030_NATIVE_SOFTWARE_QUALIFICATION_PASS",
+  "scope": "Three native EFx private preparation, PCM parity, cancellation and owner fixtures; no device, physical, timing or listening acceptance",
+  "source_tree": "b94f1d9b75d0801cc8b120165636fab0dda30ca4",
+  "original_processes": [
+    [
+      19081,
+      "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+    ]
+  ],
+  "qualification_result": {
+    "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/invert-incremental-qualification-1790987821163521000/qualification-result.json",
+    "destination_relative": "native/qualification-1790987821163521000/qualification-result.json",
+    "bytes": 1079558,
+    "sha256": "4605858d57e225bf95da5c07475cc51eef58c8d97edc15031f5cc2f98119abee"
+  },
+  "historical_executed_script": {
+    "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/qualify_incremental_invert.py",
+    "destination_relative": "native/qualification-1790987821163521000/historical-qualify_incremental_invert.py",
+    "bytes": 6695,
+    "sha256": "1c4c1342fbb82010a37d82d1f9b89934da81b6f223e72fe8edd119c61577be70"
+  },
+  "script_is_portable_command": false,
+  "cases": [
+    {
+      "label": "session",
+      "binary": "PTExecInvertSessionTest",
+      "binary_bytes": 88784,
+      "binary_sha256": "d9ce0a76a1f0fc1f409432ee873d6382b8dcc444d4f60c35b20fdcf2e3b9b06a",
+      "returncode": 0,
+      "fast_allocations": 169,
+      "final_owned_bytes": 0,
+      "fixture_deadline_seconds": 120,
+      "exact_cleanup_passed": true,
+      "independent_cleanup_passed": true,
+      "independent_absence_observations": 11,
+      "independent_observation_window_seconds": 10,
+      "original_pid": 19081,
+      "original_process_preserved": true,
+      "running": true,
+      "four_paula_dma_channels_off": true,
+      "records_directory": "native/qualification-1790987821163521000/session"
+    },
+    {
+      "label": "sampler",
+      "binary": "PTExecSamplerInvertSongTest",
+      "binary_bytes": 147308,
+      "binary_sha256": "70fa05b0cc7cfe5582805698e0e0b840ffee171f2fbeea732723dc947d58bcdb",
+      "returncode": 0,
+      "fast_allocations": 454,
+      "final_owned_bytes": 0,
+      "fixture_deadline_seconds": 120,
+      "exact_cleanup_passed": true,
+      "independent_cleanup_passed": true,
+      "independent_absence_observations": 11,
+      "independent_observation_window_seconds": 10,
+      "original_pid": 19081,
+      "original_process_preserved": true,
+      "running": true,
+      "four_paula_dma_channels_off": true,
+      "records_directory": "native/qualification-1790987821163521000/sampler"
+    },
+    {
+      "label": "editor",
+      "binary": "PTExecEditorInvertStudioTest",
+      "binary_bytes": 223200,
+      "binary_sha256": "5ec79c00ed9cb8192022e26866e8dc8061c860d514e6b8aecd5193f78f8c88db",
+      "returncode": 0,
+      "fast_allocations": 278,
+      "final_owned_bytes": 0,
+      "fixture_deadline_seconds": 120,
+      "exact_cleanup_passed": true,
+      "independent_cleanup_passed": true,
+      "independent_absence_observations": 11,
+      "independent_observation_window_seconds": 10,
+      "original_pid": 19081,
+      "original_process_preserved": true,
+      "running": true,
+      "four_paula_dma_channels_off": true,
+      "records_directory": "native/qualification-1790987821163521000/editor"
+    }
+  ],
+  "coordination": {
+    "release_sent": true,
+    "release_ack_received": true,
+    "ack_revision": 26,
+    "reservation": false,
+    "recovery_hold": false,
+    "basis": "Root reports fresh AmiConnect RELEASE acknowledgement revision26; packaging performs no coordinator/target operations."
+  },
+  "device_acceptance": false,
+  "physical_acceptance": false,
+  "realtime_timing_acceptance": false,
+  "human_listening_acceptance": false
+}

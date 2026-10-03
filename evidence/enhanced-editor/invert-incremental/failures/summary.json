@@ -1,0 +1,47 @@
+{
+  "classification": "Preserved failed logging passes; neither pass executed the product fixtures.",
+  "failures": [
+    {
+      "classification": "LOGGING_HARNESS_FAILURE_BEFORE_PRODUCT_RUNTIME",
+      "preserved_directory": "failures/superseded-gvbbj8_f",
+      "error": "Make dependency continuation parsing raised ValueError: No escaped character.",
+      "test_groups": 3,
+      "logging_errors": 3,
+      "product_compile_returncodes": [
+        0,
+        0,
+        0
+      ],
+      "product_runtime_commands_recorded": 0,
+      "product_assertion_failure": false,
+      "original_source_manifest": {
+        "original_path": "/private/tmp/protracker-efx-integration-gvbbj8_f/source-manifest.json",
+        "bytes": 2304706,
+        "sha256": "e8e5818cdb415ed89aa7b04e3cdc75b247241da4882c71ec70921d08b7881acd"
+      },
+      "guest_access": false,
+      "superseded_by": "host/host-checks-v2.json"
+    },
+    {
+      "classification": "LOGGING_HARNESS_FAILURE_BEFORE_PRODUCT_RUNTIME",
+      "preserved_directory": "failures/final-parser-v1-u7z20nyz",
+      "error": "Dependency logger classified the external macOS SDKSettings.json as a source-relative dependency and raised ValueError.",
+      "test_groups": 3,
+      "logging_errors": 3,
+      "product_compile_returncodes": [
+        0,
+        0,
+        0
+      ],
+      "product_runtime_commands_recorded": 0,
+      "product_assertion_failure": false,
+      "original_source_manifest": {
+        "original_path": "/private/tmp/protracker-efx-integration-final-u7z20nyz/source-manifest.json",
+        "bytes": 2304789,
+        "sha256": "08adff81ee933d4e0f6fb9fc019f32c87206b4d93482cd5997bdfa4273fd30fe"
+      },
+      "guest_access": false,
+      "superseded_by": "host/host-checks-v2.json"
+    }
+  ]
+}

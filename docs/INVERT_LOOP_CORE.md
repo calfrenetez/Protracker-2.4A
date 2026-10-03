@@ -294,7 +294,11 @@ failure, pending/ready generation and fixed-header staleness, permitted cursor
 navigation, readiness/publication alias refusal, stopped/failed former-owner
 safety, queued readiness, real editor edit/undo/dispose cancellation, held queue
 leases, and comparison of every original8192-frame fixture value. Both shared fixtures are included
-unconditionally by their existing native Exec wrappers. Current validation is
-host only: inclusion does not qualify a new native binary, physical AmiGUS
-playback, human listening, or native PLAY/frontend/scheduler integration. Those
-remain separate acceptance work.
+unconditionally by their existing native Exec wrappers. Nine clean-export host
+sanitizer groups and three pinned cross-builds pass. Exact shared030 execution
+now passes session169, sampler454 and editor278 Fast allocations with zero owned
+bytes, each within its unchanged120second deadline. Exact cleanup and separate
+locked10second path absence/original-idle/DMA-off checks pass; the window was
+explicitly released. See `../evidence/enhanced-editor/invert-incremental/`.
+Physical AmiGUS playback, human listening and native PLAY/frontend/scheduler
+integration remain separate acceptance work.

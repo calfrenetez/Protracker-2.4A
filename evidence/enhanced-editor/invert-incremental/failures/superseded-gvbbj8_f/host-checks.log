@@ -1,0 +1,68 @@
+test_generation_and_private_lifetime (test_sampler_invert_song.SamplerInvertSong.test_generation_and_private_lifetime) ... ERROR
+test_private_editor_lifecycle (test_editor_invert_studio.EditorInvertStudio.test_private_editor_lifecycle) ... ERROR
+test_pinned_editor_lifecycle (test_editor_studio.EditorStudio.test_pinned_editor_lifecycle) ... ERROR
+
+======================================================================
+ERROR: test_generation_and_private_lifetime (test_sampler_invert_song.SamplerInvertSong.test_generation_and_private_lifetime)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/protracker-efx-integration-gvbbj8_f/source/tests/test_sampler_invert_song.py", line 11, in test_generation_and_private_lifetime
+    subprocess.run(['cc','-std=c99','-O1','-g','-Wall','-Wextra','-Werror','-fsanitize=address,undefined','-Isrc/core','tests/sampler_invert_song_test.c',*SOURCES,'-o',str(exe)],cwd=ROOT,check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/protracker-efx-integration-gvbbj8_f/validate_host.py", line 45, in recorded_run
+    for value in shlex.split(line.split(':',1)[1]):
+                 ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/shlex.py", line 312, in split
+    return list(lex)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/shlex.py", line 299, in __next__
+    token = self.get_token()
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/shlex.py", line 107, in get_token
+    raw = self.read_token()
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/shlex.py", line 208, in read_token
+    raise ValueError("No escaped character")
+ValueError: No escaped character
+
+======================================================================
+ERROR: test_private_editor_lifecycle (test_editor_invert_studio.EditorInvertStudio.test_private_editor_lifecycle)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/protracker-efx-integration-gvbbj8_f/source/tests/test_editor_invert_studio.py", line 10, in test_private_editor_lifecycle
+    subprocess.run(['cc','-std=c99','-O1','-g','-Wall','-Wextra','-Werror','-fsanitize=address,undefined','-Isrc/core','tests/editor_invert_studio_test.c',*EXTRA,*SOURCES[1:],'-o',str(exe)],cwd=ROOT,check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/protracker-efx-integration-gvbbj8_f/validate_host.py", line 45, in recorded_run
+    for value in shlex.split(line.split(':',1)[1]):
+                 ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/shlex.py", line 312, in split
+    return list(lex)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/shlex.py", line 299, in __next__
+    token = self.get_token()
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/shlex.py", line 107, in get_token
+    raw = self.read_token()
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/shlex.py", line 208, in read_token
+    raise ValueError("No escaped character")
+ValueError: No escaped character
+
+======================================================================
+ERROR: test_pinned_editor_lifecycle (test_editor_studio.EditorStudio.test_pinned_editor_lifecycle)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/protracker-efx-integration-gvbbj8_f/source/tests/test_editor_studio.py", line 10, in test_pinned_editor_lifecycle
+    subprocess.run(['cc','-std=c99','-O1','-g','-Wall','-Wextra','-Werror','-fsanitize=address,undefined','-Isrc/core','tests/editor_studio_test.c',*EXTRA,*SOURCES[1:],'-o',str(exe)],cwd=ROOT,check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/protracker-efx-integration-gvbbj8_f/validate_host.py", line 45, in recorded_run
+    for value in shlex.split(line.split(':',1)[1]):
+                 ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/shlex.py", line 312, in split
+    return list(lex)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/shlex.py", line 299, in __next__
+    token = self.get_token()
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/shlex.py", line 107, in get_token
+    raw = self.read_token()
+  File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/shlex.py", line 208, in read_token
+    raise ValueError("No escaped character")
+ValueError: No escaped character
+
+----------------------------------------------------------------------
+Ran 3 tests in 22.201s
+
+FAILED (errors=3)

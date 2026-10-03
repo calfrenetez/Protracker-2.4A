@@ -1,0 +1,14 @@
+test_generation_and_private_lifetime (test_sampler_invert_song.SamplerInvertSong.test_generation_and_private_lifetime) ... SAMPLER INVERT SONG PASS: private bank, immutable masters, allocation/budget/precision refusal, stop/edit/restart, incremental parity/phase cancellation, generation/header guards and owner cleanup
+ok
+test_private_editor_lifecycle (test_editor_invert_studio.EditorInvertStudio.test_private_editor_lifecycle) ... EDITOR INVERT STUDIO PASS: incremental readiness/cancellation/header guards, private bank stopped by pattern/sample edits, undo/dispose, held leases, stale output shutdown, natural drain, refusal and cleanup
+ok
+test_pinned_editor_lifecycle (test_editor_studio.EditorStudio.test_pinned_editor_lifecycle) ... EDITOR STUDIO RESERVED PASS: PCM-only lease spans failed start, natural drain, leased Stop, reset and adapter quiescence; early release/restart refused; fake library/port only
+EDITOR STUDIO START PASS: configurable prefill, acknowledgement gate, edit/undo/Stop, unknown result and reserved quiescence retain ownership
+EDITOR STUDIO OUTPUT PASS: direct24 byte parity, bounded producer/FIFO steps, natural drain, edit/undo/Stop/dispose and failure reset ownership, restart and zero allocations retained
+EDITOR STUDIO PASS: real pinned song stopped by edit/undo/dispose, queued edit/undo/Stop/dispose held leases, natural drain, navigation and cleanup
+ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 23.324s
+
+OK

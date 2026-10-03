@@ -25,9 +25,13 @@ the caller's readiness output unchanged and avoids scanning former tables.
 
 Nine scoped ASan/UBSan groups pass from an immutable baseline plus only the
 authorized EFx changes, including unchanged ordinary direct24 Studio behavior.
-Three pinned native Exec fixtures cross-build; execution remains pending fresh
-coordination. These progress bounds do not establish live timing, native PLAY,
-physical AmiGUS output or listening acceptance. See `INVERT_LOOP_CORE.md`.
+Three exact native Exec fixtures now pass separately: private session169,
+sampler454 and editor278 Fast allocations end at zero owned bytes. Each retains
+its unchanged120second deadline and passes exact cleanup followed by a separate
+locked10second absence/original-idle/DMA-off check. The window was explicitly
+released and acknowledged. These progress bounds do not establish live timing,
+native PLAY, physical AmiGUS output or listening acceptance. See
+`INVERT_LOOP_CORE.md` and `../evidence/enhanced-editor/invert-incremental/`.
 
 ## Incremental standalone Paula preparation — 3 October 2026
 
@@ -3396,11 +3400,13 @@ sticky result. Failed chunks leave the captured prefix unchanged. Empty or activ
 recordings cannot become samples.
 
 `sampler_capture` appends finished data as one undoable new sample through the
-existing sampler version transaction. Success deep-copies all precision into the
-sampler budget then releases staging. Failure preserves recording/project/history
-for retry. The temporary recording and sampler copy coexist during publication,
-so the shared native allocation ceiling must cover both. Existing masters are
-never replaced. The caller must apply the editor change guard before publication.
+existing sampler version transaction. With identical allocator functions and
+context, success transfers the unique PCM buffer and charges its full capacity
+to the sampler budget. Different allocators retain the precision-preserving copy
+path, where recording and sampler buffers coexist during publication. Failure
+preserves recording/project/history for retry. Existing masters are never
+replaced. The caller must apply the editor change guard before publication.
+See the later recording-publication section for transfer and retained-pin rules.
 
 This is software staging with synthetic input, not an AmiGUS recording backend.
 Format negotiation, actual device input, reservation/interrupt ownership, overrun

@@ -1,0 +1,9 @@
+..INVERT render PASS: mixed loop/one-shot, retrigger/delay, exact PCM, immutable master, repeatability, budgets, allocation failures, cancellation, sink failure
+.INVERT PREPARATION PASS: bounded copy/measurement, all-phase cancellation, aliases, late refusal and immutable masters
+.INVERT QUEUED PASS: private mixed masters, exact offline parity, tempo/delay, pre-roll, partitions, stalled/cancelled leases, protocol, incremental preparation/cancellation and allocation refusal
+.SEQUENCE PASS: exact snapshot/resume audio, fractional loop phase, tempo/delay, pre-roll, partition invariance, protocol and allocation refusal
+.
+----------------------------------------------------------------------
+Ran 6 tests in 14.201s
+
+OK

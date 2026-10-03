@@ -1,0 +1,1414 @@
+{
+  "scope": "Exact original regular member bytes/modes; deterministic tar ownership and timestamps normalized, no truncation or software execution",
+  "member_count": 177,
+  "original_bytes": 19187215,
+  "payload": {
+    "bytes": 4744645,
+    "sha256": "8fef92f5f62c7652eb4c17c5b64d5354a72811b6c02ac4734958cb9db1cb1cc7"
+  },
+  "members": {
+    "author-controls/audit-v2.py": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/audit-v2.py",
+      "bytes": 6933,
+      "sha256": "3e3ff9daeb8b734ec519a5d86dd30a9c766906af3b1bd9dcdd1c8e2cfbbb0128",
+      "mode": 420,
+      "role": "Original author lineage history/control; development logs do not imply a reproducible frozen source unless explicitly bound"
+    },
+    "author-controls/baseline-manifest.json": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/baseline-manifest.json",
+      "bytes": 1088089,
+      "sha256": "81840112ee35328c2bf91cfb230dfe7bf52410f184bcddf33acdd0a4ab5dd103",
+      "mode": 420,
+      "role": "Original author lineage history/control; development logs do not imply a reproducible frozen source unless explicitly bound"
+    },
+    "author-controls/development-1-platform-refusal.json": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/development-1-platform-refusal.json",
+      "bytes": 601,
+      "sha256": "eda8d2d183522c0cb7a9faf8b2aba14595b36313da28375ba7ab5cd599628081",
+      "mode": 420,
+      "role": "Original author lineage history/control; development logs do not imply a reproducible frozen source unless explicitly bound"
+    },
+    "author-controls/development-2.log": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/development-2.log",
+      "bytes": 263,
+      "sha256": "94b2f396c8dd2d6d5f1178e65fa7a55ff12c724181dff202295bb1daa0be4d81",
+      "mode": 420,
+      "role": "Original author lineage history/control; development logs do not imply a reproducible frozen source unless explicitly bound"
+    },
+    "author-controls/development-3.log": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/development-3.log",
+      "bytes": 263,
+      "sha256": "a4d4ba962728466fef50661a661bf0f3644fd5ed4819184b651bf64e1a113546",
+      "mode": 420,
+      "role": "Original author lineage history/control; development logs do not imply a reproducible frozen source unless explicitly bound"
+    },
+    "author-controls/development-4.log": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/development-4.log",
+      "bytes": 441,
+      "sha256": "565c59d222efeaa0d9a93b81786629d2649e29bb330a5289b551875262254819",
+      "mode": 420,
+      "role": "Original author lineage history/control; development logs do not imply a reproducible frozen source unless explicitly bound"
+    },
+    "author-controls/development-5.log": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/development-5.log",
+      "bytes": 441,
+      "sha256": "0425ac969ee118ed1d02b0a2de4b5a21846febac6b2ef71a7b2c6af5bfdbcb5f",
+      "mode": 420,
+      "role": "Original author lineage history/control; development logs do not imply a reproducible frozen source unless explicitly bound"
+    },
+    "author-controls/development-6.log": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/development-6.log",
+      "bytes": 441,
+      "sha256": "d0ee1859f64151d8c95f36eb02052ae38558617fc49d2986b853a6715b9e2bdc",
+      "mode": 420,
+      "role": "Original author lineage history/control; development logs do not imply a reproducible frozen source unless explicitly bound"
+    },
+    "author-controls/final-v2.patch": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/final-v2.patch",
+      "bytes": 74597,
+      "sha256": "1b82c7f15fb287458cb4b0b3e8ef85cd3e01811d06763958d6d3b037e80e3739",
+      "mode": 420,
+      "role": "Original author lineage history/control; development logs do not imply a reproducible frozen source unless explicitly bound"
+    },
+    "author-controls/final.patch": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/final.patch",
+      "bytes": 71617,
+      "sha256": "7ba7e1b4678f042167ed9cdc4335c339e76949c3a5286783b68faee125e97c5b",
+      "mode": 420,
+      "role": "Original author lineage history/control; development logs do not imply a reproducible frozen source unless explicitly bound"
+    },
+    "author-controls/freeze-v2.json": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/freeze-v2.json",
+      "bytes": 2208,
+      "sha256": "44484a660874a36f343fb54420860ea3cfd0b2c02936947248c88011f5d4e586",
+      "mode": 420,
+      "role": "Original author lineage history/control; development logs do not imply a reproducible frozen source unless explicitly bound"
+    },
+    "author-controls/freeze-v2.py": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/freeze-v2.py",
+      "bytes": 3741,
+      "sha256": "8fe353da7ffaa4ea8e6d51ceb94b99a3217e3417cb51eab8699f6d9609d542c6",
+      "mode": 420,
+      "role": "Original author lineage history/control; development logs do not imply a reproducible frozen source unless explicitly bound"
+    },
+    "author-controls/handoff-v2.json": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/handoff-v2.json",
+      "bytes": 4697,
+      "sha256": "284ed875c338b194407c72f2b938e7633ca58ccb85c8060c3fd92f57aa57e4d1",
+      "mode": 420,
+      "role": "Original author lineage history/control; development logs do not imply a reproducible frozen source unless explicitly bound"
+    },
+    "author-controls/own-final-audit.json": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/own-final-audit.json",
+      "bytes": 22549,
+      "sha256": "5cf113671eb625763c02881572a0e4eaeaee56761e882b5202e6285f69b0495b",
+      "mode": 420,
+      "role": "Original author lineage history/control; development logs do not imply a reproducible frozen source unless explicitly bound"
+    },
+    "author-controls/own-final-v2-audit.json": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/own-final-v2-audit.json",
+      "bytes": 28591,
+      "sha256": "2d87714f9bff86f22193769e7630eed9b7d3296c3c6715dd09f463de37d03625",
+      "mode": 420,
+      "role": "Original author lineage history/control; development logs do not imply a reproducible frozen source unless explicitly bound"
+    },
+    "author-controls/scope.json": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/scope.json",
+      "bytes": 413,
+      "sha256": "681bcd0c188b379be948e1eb9f57410dc5ab63033d9f7fc7fdd91cd134c30cff",
+      "mode": 420,
+      "role": "Original author lineage history/control; development logs do not imply a reproducible frozen source unless explicitly bound"
+    },
+    "author-controls/source-manifest-v2.json": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-manifest-v2.json",
+      "bytes": 1090143,
+      "sha256": "b2fb0521eb1fbdce11100550e69c5c5fefe67f3a8d53673a847f1197f5b2bb6a",
+      "mode": 420,
+      "role": "Original author lineage history/control; development logs do not imply a reproducible frozen source unless explicitly bound"
+    },
+    "author-controls/source-manifest.json": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-manifest.json",
+      "bytes": 1089622,
+      "sha256": "304ed8335d5dc80f941617b960812e0cd17bcd2a3a8c69ef210271a10e1b0ff5",
+      "mode": 420,
+      "role": "Original author lineage history/control; development logs do not imply a reproducible frozen source unless explicitly bound"
+    },
+    "author/tools/__pycache__/provenance_common.cpython-314.pyc": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/tools/__pycache__/provenance_common.cpython-314.pyc",
+      "bytes": 23471,
+      "sha256": "a8b4e20150928fdebd54c619171d4ed92d232e9896efc50c921b4930b417f86d",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/tools/helper-lineage.json": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/tools/helper-lineage.json",
+      "bytes": 762,
+      "sha256": "59b1b345553bd2b3f1be529352b4f0621b3ef2a8d9592984867247209ff72c2e",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/tools/host_provenance.py": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/tools/host_provenance.py",
+      "bytes": 14153,
+      "sha256": "7d72538d68d70705ea9d3f00d8101d2ffd967ecca170c345e549c1f039f8992d",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/tools/provenance_common.py": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/tools/provenance_common.py",
+      "bytes": 11124,
+      "sha256": "78e28229f0f132c73153606be3a40d750a4013f5ea1bbb5af7c15e117e62cdb5",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/tools/toolchain-pins.json": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/tools/toolchain-pins.json",
+      "bytes": 2709,
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final/c001-dependencies-00.txt": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final/c001-dependencies-00.txt",
+      "bytes": 8804,
+      "sha256": "ab6be88e88ab05039adfdd5c570ce8f350461adeaaf7c20e407512668deef564",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final/c001-dependencies-01.txt": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final/c001-dependencies-01.txt",
+      "bytes": 4529,
+      "sha256": "b94e7b3c2bb0a2a32ca8e457fd41f6d939e2fc988a570c2c65c810b1dbed1812",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final/c001-dependencies-02.txt": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final/c001-dependencies-02.txt",
+      "bytes": 4335,
+      "sha256": "42c7499b25b2aea510723679cd8c3b05f6579288e42e053ab8a31328255e114d",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final/c001-product.log": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final/c001-product.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final/c002-product.log": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final/c002-product.log",
+      "bytes": 165,
+      "sha256": "bb0c01c7da2c2cada6966955892868dedb836bbbd87cb2e629e69ab724fc847b",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final/c003-dependencies-00.txt": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final/c003-dependencies-00.txt",
+      "bytes": 8793,
+      "sha256": "a96033ca8b2c36c67b70c0bf1d649f0462b40175d70d127011b2fafebdd7c5f3",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final/c003-dependencies-01.txt": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final/c003-dependencies-01.txt",
+      "bytes": 4494,
+      "sha256": "ff680f9a353b1a16f12bd1fd8a5c0eeaa9482dd748b83e8d2a0b8d375af35724",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final/c003-dependencies-02.txt": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final/c003-dependencies-02.txt",
+      "bytes": 4335,
+      "sha256": "42c7499b25b2aea510723679cd8c3b05f6579288e42e053ab8a31328255e114d",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final/c003-dependencies-03.txt": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final/c003-dependencies-03.txt",
+      "bytes": 4819,
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final/c003-product.log": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final/c003-product.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final/c004-product.log": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final/c004-product.log",
+      "bytes": 176,
+      "sha256": "8d41e1624fc2ed2e5f8b7c7f66c1be1db48483ce8fd65930d55e1c8cfcca7f3f",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final/host-checks.json": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final/host-checks.json",
+      "bytes": 73067,
+      "sha256": "812631cdd7ee95ae9f9e13aa60e41220a8884ebe22ef0d2501a6cc71f25c0788",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final/host-checks.log": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final/host-checks.log",
+      "bytes": 739,
+      "sha256": "9e8ab493ea34f3f0db17c200f2c00f747472f0035825ffdff2abd8eefc278aea",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final/products/c001-executable-5c974b40b0f51bd2-scheduled-lineage-test": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final/products/c001-executable-5c974b40b0f51bd2-scheduled-lineage-test",
+      "bytes": 515864,
+      "sha256": "5c974b40b0f51bd2b0ef80a73b160d9c68c0c43f8700f8e88f47ea0a919ddc9d",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final/products/c003-executable-caddc8602e80cdb0-test": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final/products/c003-executable-caddc8602e80cdb0-test",
+      "bytes": 223976,
+      "sha256": "caddc8602e80cdb03397b6ce31a3722a0bb2fac1f110d4d8f9e18e97aa3ad610",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final-v2/c001-dependencies-00.txt": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final-v2/c001-dependencies-00.txt",
+      "bytes": 8804,
+      "sha256": "ab6be88e88ab05039adfdd5c570ce8f350461adeaaf7c20e407512668deef564",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final-v2/c001-dependencies-01.txt": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final-v2/c001-dependencies-01.txt",
+      "bytes": 4529,
+      "sha256": "b94e7b3c2bb0a2a32ca8e457fd41f6d939e2fc988a570c2c65c810b1dbed1812",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final-v2/c001-dependencies-02.txt": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final-v2/c001-dependencies-02.txt",
+      "bytes": 4335,
+      "sha256": "42c7499b25b2aea510723679cd8c3b05f6579288e42e053ab8a31328255e114d",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final-v2/c001-product.log": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final-v2/c001-product.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final-v2/c002-product.log": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final-v2/c002-product.log",
+      "bytes": 165,
+      "sha256": "bb0c01c7da2c2cada6966955892868dedb836bbbd87cb2e629e69ab724fc847b",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final-v2/c003-dependencies-00.txt": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final-v2/c003-dependencies-00.txt",
+      "bytes": 8793,
+      "sha256": "a96033ca8b2c36c67b70c0bf1d649f0462b40175d70d127011b2fafebdd7c5f3",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final-v2/c003-dependencies-01.txt": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final-v2/c003-dependencies-01.txt",
+      "bytes": 4494,
+      "sha256": "ff680f9a353b1a16f12bd1fd8a5c0eeaa9482dd748b83e8d2a0b8d375af35724",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final-v2/c003-dependencies-02.txt": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final-v2/c003-dependencies-02.txt",
+      "bytes": 4335,
+      "sha256": "42c7499b25b2aea510723679cd8c3b05f6579288e42e053ab8a31328255e114d",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final-v2/c003-dependencies-03.txt": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final-v2/c003-dependencies-03.txt",
+      "bytes": 4819,
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final-v2/c003-product.log": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final-v2/c003-product.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final-v2/c004-product.log": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final-v2/c004-product.log",
+      "bytes": 176,
+      "sha256": "8d41e1624fc2ed2e5f8b7c7f66c1be1db48483ce8fd65930d55e1c8cfcca7f3f",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final-v2/host-checks.json": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final-v2/host-checks.json",
+      "bytes": 73163,
+      "sha256": "548fcec0a63e87864bf26df20d4cb076bd44f6469bb925bbbf41fd471d0165c7",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final-v2/host-checks.log": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final-v2/host-checks.log",
+      "bytes": 739,
+      "sha256": "3bec4959106c70ee91cea7a27e0e49fd657ebf64beceff209c5f39b47d88a88a",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final-v2/products/c001-executable-76c446ad5f1d3664-scheduled-lineage-test": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final-v2/products/c001-executable-76c446ad5f1d3664-scheduled-lineage-test",
+      "bytes": 534680,
+      "sha256": "76c446ad5f1d3664a26ae777f7483b4e411199cdde537efe466812984f79801e",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/host-final-v2/products/c003-executable-cff67c7ac5150a55-test": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/host-final-v2/products/c003-executable-cff67c7ac5150a55-test",
+      "bytes": 223992,
+      "sha256": "cff67c7ac5150a55d12f362c0a9230c9936de01bc659615353873fc908a5ef45",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/history/development-6-tested/development-6.log": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/history/development-6-tested/development-6.log",
+      "bytes": 441,
+      "sha256": "d0ee1859f64151d8c95f36eb02052ae38558617fc49d2986b853a6715b9e2bdc",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/history/development-6-tested/docs/SCHEDULED_LINEAGE.md": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/history/development-6-tested/docs/SCHEDULED_LINEAGE.md",
+      "bytes": 7803,
+      "sha256": "f44b1fb265e808ff3a32b2a2e1c6039a5131b07529d03f4503d59fad228edb4d",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/history/development-6-tested/src/core/scheduled_lineage.c": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/history/development-6-tested/src/core/scheduled_lineage.c",
+      "bytes": 21757,
+      "sha256": "6550c1483ca9620c856ccbaa2b8015cb13fb59f5a2e1f6b28a6f47b8d90dd786",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/history/development-6-tested/src/core/scheduled_lineage.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/history/development-6-tested/src/core/scheduled_lineage.h",
+      "bytes": 6189,
+      "sha256": "922162700b31408011c05b12f0f81db26d978fba5ec9635b00626aee42c453eb",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/history/development-6-tested/tests/scheduled_lineage_test.c": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/history/development-6-tested/tests/scheduled_lineage_test.c",
+      "bytes": 36603,
+      "sha256": "064c4bf1007a35cc3244149dc40e0779228590934efbe7ec6c84cf4bfa550ff0",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "author/history/development-6-tested/tests/test_scheduled_lineage.py": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/history/development-6-tested/tests/test_scheduled_lineage.py",
+      "bytes": 855,
+      "sha256": "aea9461b85f9085a1ce1ba50127d761bd69fe4550ea64d640b94dbdcde2c816d",
+      "mode": 420,
+      "role": "Exact author helper, old obsolete or final-v2 host commands/dependency logs/product and retained development-tested source history"
+    },
+    "current-controls/baseline-after.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/baseline-after.json",
+      "bytes": 2685666,
+      "sha256": "fc5ccb7e4a873927eddff911a4fb712d9deb38687a6759d909eda94342385902",
+      "mode": 420,
+      "role": "Exact current committed baseline/current source inventories, formatting proof, invocation, original strict compiler failure and retained reviews"
+    },
+    "current-controls/baseline-before.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/baseline-before.json",
+      "bytes": 3404405,
+      "sha256": "06347b28cfcd1b2d357d5507026962195fc5f1c1a0258e2c5c7776508de15448",
+      "mode": 420,
+      "role": "Exact current committed baseline/current source inventories, formatting proof, invocation, original strict compiler failure and retained reviews"
+    },
+    "current-controls/builder-independent-author-review.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/builder-independent-author-review.json",
+      "bytes": 1727,
+      "sha256": "7e4f946cafb6d36e09c928e55c549787432c2f9a7d385a2b5cd737b4f40be1f0",
+      "mode": 420,
+      "role": "Exact current committed baseline/current source inventories, formatting proof, invocation, original strict compiler failure and retained reviews"
+    },
+    "current-controls/formatting-native-v2.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/formatting-native-v2.json",
+      "bytes": 3449,
+      "sha256": "82c745d384b69e0100931f02325f9f3805ec33b51c7a87f67a2127885e5238d3",
+      "mode": 420,
+      "role": "Exact current committed baseline/current source inventories, formatting proof, invocation, original strict compiler failure and retained reviews"
+    },
+    "current-controls/handoff-native-v2.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/handoff-native-v2.json",
+      "bytes": 3320,
+      "sha256": "11851f2d73790257179851d9225f2a89db4277036ff6f3a2058e27e0f4cd8574",
+      "mode": 420,
+      "role": "Exact current committed baseline/current source inventories, formatting proof, invocation, original strict compiler failure and retained reviews"
+    },
+    "current-controls/native-failure-preservation.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-failure-preservation.json",
+      "bytes": 3205,
+      "sha256": "2ce0f16a777976b40491fa2b5811590eb0af8f640e996ca191acd3e1ebd31b7b",
+      "mode": 420,
+      "role": "Exact current committed baseline/current source inventories, formatting proof, invocation, original strict compiler failure and retained reviews"
+    },
+    "current-controls/native-invocation-v2.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-invocation-v2.json",
+      "bytes": 1463,
+      "sha256": "7081de10347c60d60fbe3ade160d9f6c88aa7e659fcd8d0ec0e352f530c0cfd6",
+      "mode": 420,
+      "role": "Exact current committed baseline/current source inventories, formatting proof, invocation, original strict compiler failure and retained reviews"
+    },
+    "current-controls/native-invocation-v2.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-invocation-v2.log",
+      "bytes": 271,
+      "sha256": "50c56bbaf62ac4b5b3344ece76702de5dd35a34848369bcfa1abb4d31d40b5f0",
+      "mode": 420,
+      "role": "Exact current committed baseline/current source inventories, formatting proof, invocation, original strict compiler failure and retained reviews"
+    },
+    "current-controls/native-invocation.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-invocation.json",
+      "bytes": 1403,
+      "sha256": "fd8a79e49c4bc74fe87bf8493c06c3883d83ef82324f219b2f5a357647b203f7",
+      "mode": 420,
+      "role": "Exact current committed baseline/current source inventories, formatting proof, invocation, original strict compiler failure and retained reviews"
+    },
+    "current-controls/native-invocation.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-invocation.log",
+      "bytes": 269,
+      "sha256": "a8f21a0ae1f32b13c3fe817f837736edf40b10ef2c5c5ab42faec97adf65a0b8",
+      "mode": 420,
+      "role": "Exact current committed baseline/current source inventories, formatting proof, invocation, original strict compiler failure and retained reviews"
+    },
+    "current-controls/origin-handoff-v2.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/origin-handoff-v2.json",
+      "bytes": 4697,
+      "sha256": "284ed875c338b194407c72f2b938e7633ca58ccb85c8060c3fd92f57aa57e4d1",
+      "mode": 420,
+      "role": "Exact current committed baseline/current source inventories, formatting proof, invocation, original strict compiler failure and retained reviews"
+    },
+    "current-controls/origin-host-checks.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/origin-host-checks.json",
+      "bytes": 73163,
+      "sha256": "548fcec0a63e87864bf26df20d4cb076bd44f6469bb925bbbf41fd471d0165c7",
+      "mode": 420,
+      "role": "Exact current committed baseline/current source inventories, formatting proof, invocation, original strict compiler failure and retained reviews"
+    },
+    "current-controls/origin-protracker-lineage-current-closure-before-import.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/origin-protracker-lineage-current-closure-before-import.json",
+      "bytes": 2577,
+      "sha256": "adf30ff196c8c9c6a75229c18cd065bb6b919bb598b262ede5be0ccc2b117354",
+      "mode": 420,
+      "role": "Exact current committed baseline/current source inventories, formatting proof, invocation, original strict compiler failure and retained reviews"
+    },
+    "current-controls/origin-protracker-lineage-native-builder-independent-review.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/origin-protracker-lineage-native-builder-independent-review.json",
+      "bytes": 1574,
+      "sha256": "1d5b914f584c41ae4a67b33c0a5da7739d91fb7e9cdf7f9b53a5493838b82acb",
+      "mode": 420,
+      "role": "Exact current committed baseline/current source inventories, formatting proof, invocation, original strict compiler failure and retained reviews"
+    },
+    "current-controls/origin-source-manifest-v2.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/origin-source-manifest-v2.json",
+      "bytes": 1090143,
+      "sha256": "b2fb0521eb1fbdce11100550e69c5c5fefe67f3a8d53673a847f1197f5b2bb6a",
+      "mode": 420,
+      "role": "Exact current committed baseline/current source inventories, formatting proof, invocation, original strict compiler failure and retained reviews"
+    },
+    "current-controls/own-native-v2-audit.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/own-native-v2-audit.json",
+      "bytes": 17592,
+      "sha256": "81ed92609fea9eeb0d534ce5a96b0deb7e5d118f910931994780857348d3dc50",
+      "mode": 420,
+      "role": "Exact current committed baseline/current source inventories, formatting proof, invocation, original strict compiler failure and retained reviews"
+    },
+    "current-controls/source-manifest-native-v2.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-manifest-native-v2.json",
+      "bytes": 2696631,
+      "sha256": "f21e6bb8a253c8e2e005f00674a5192e55122a020ba4d141469000260d43c46e",
+      "mode": 420,
+      "role": "Exact current committed baseline/current source inventories, formatting proof, invocation, original strict compiler failure and retained reviews"
+    },
+    "current-controls/source-manifest.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-manifest.json",
+      "bytes": 2695570,
+      "sha256": "f5e174fb809800c0e0ecf7ed63c25069d15d3700a62795c5f4f9ac046f1e61cd",
+      "mode": 420,
+      "role": "Exact current committed baseline/current source inventories, formatting proof, invocation, original strict compiler failure and retained reviews"
+    },
+    "current-controls/source-preparation.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-preparation.json",
+      "bytes": 2765,
+      "sha256": "4a63047bda355b529ceff4bedb85a63c749ff6dd4d0fbe2e1ed283162862a491",
+      "mode": 420,
+      "role": "Exact current committed baseline/current source inventories, formatting proof, invocation, original strict compiler failure and retained reviews"
+    },
+    "current-controls/toolchain-pins.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/toolchain-pins.json",
+      "bytes": 2709,
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065",
+      "mode": 420,
+      "role": "Exact current committed baseline/current source inventories, formatting proof, invocation, original strict compiler failure and retained reviews"
+    },
+    "current/native-final/PTScheduledLineageTest.build.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final/PTScheduledLineageTest.build.log",
+      "bytes": 665,
+      "sha256": "d0187205cf2570fd265872820c616d4289254ce42b959039347415ffa1faa116",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final/compile-commands.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final/compile-commands.json",
+      "bytes": 1039,
+      "sha256": "fc1f36b43318a2573d320c45e8c8ff3bc6d50af3bbc7aa493dcd4e0a3ac239fd",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final/compiler-target-help.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final/compiler-target-help.log",
+      "bytes": 7189,
+      "sha256": "f49f0114a73ba557163318b0fdad968b33b41a939e5766a83460468bda9c7a79",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final/compiler-version.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final/compiler-version.log",
+      "bytes": 247,
+      "sha256": "5946ce0c1a43a84e1c7af8cfaa306b2f4bd276dd02164560d5674bcc91250d0b",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final/dependencies-00.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final/dependencies-00.log",
+      "bytes": 4373,
+      "sha256": "4c3f95fcae1d79c751fb9dd41894e83c59957c246c84c1fa488c318ddefffddb",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final/dependencies-01.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final/dependencies-01.log",
+      "bytes": 2867,
+      "sha256": "93a5d26d712ec9f251647e81487175ac5c515e5bf4e05439dd6f170c914a3b63",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final/dependencies-02.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final/dependencies-02.log",
+      "bytes": 2677,
+      "sha256": "7649b08c78af4bc4cb103d1549be8cee06ac757e10a5b6578a43a16049038361",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final/manifest.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final/manifest.json",
+      "bytes": 16967,
+      "sha256": "c6663fae409b2566b202f0637c51f5535b301b19d39bf1a6a1917ab665435ade",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final/preprocessed-fixture.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final/preprocessed-fixture.log",
+      "bytes": 233519,
+      "sha256": "2ff49f8b8d7f47aa6ba7c3c47668eb5ba53a4afa49e40de2a297c73adaf9b16b",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final/runtime-libamiga-a.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final/runtime-libamiga-a.log",
+      "bytes": 156,
+      "sha256": "c2c8e44936c32e01094e9de761e57c62c7bb834fbf6cabd464465bf3b17090c4",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final/runtime-libgcc-a.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final/runtime-libgcc-a.log",
+      "bytes": 125,
+      "sha256": "b1912e77c4c1160ce749ca74fbe6edabd5896c2291188e718a9cdfd72c84d57a",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final/runtime-libnix-a.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final/runtime-libnix-a.log",
+      "bytes": 121,
+      "sha256": "1ca0a83ef891770cbbe671647c7aad9f925ed0b9756c8f85aca35c84961e202a",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final/runtime-libnix20-a.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final/runtime-libnix20-a.log",
+      "bytes": 123,
+      "sha256": "9060e4a22ea9e716b8f9cf85b5fe5e11a9e6c88ef938b9111d189acc2df8465b",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final/runtime-libnixmain-a.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final/runtime-libnixmain-a.log",
+      "bytes": 125,
+      "sha256": "dd28b9a8319d35bd81f76cd9479f889e7e5628be07a45ef138f35a729c640add",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final/runtime-libstubs-a.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final/runtime-libstubs-a.log",
+      "bytes": 156,
+      "sha256": "8ce0c56c26f8f09a8af8b76d62c4d380cbfbe8efde13fa64884d8e9e6c93027f",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final/runtime-ncrt0-o.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final/runtime-ncrt0-o.log",
+      "bytes": 120,
+      "sha256": "1562950e2e8cb15a51238fddb72e6e26f0ff2d5a774543473aba0d274a19c45f",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final-v2/PTScheduledLineageTest": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final-v2/PTScheduledLineageTest",
+      "bytes": 60292,
+      "sha256": "59c0cfe3d2dc2ceecf645c3fce0651f0022503c0d6ceb9b66c3cc6b5b68e5a8e",
+      "mode": 493,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final-v2/PTScheduledLineageTest.build.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final-v2/PTScheduledLineageTest.build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final-v2/compile-commands.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final-v2/compile-commands.json",
+      "bytes": 1055,
+      "sha256": "4207e51261d894863e2b3e7e65fdca748a3d54d295af518099ff448f104c9fe1",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final-v2/compiler-target-help.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final-v2/compiler-target-help.log",
+      "bytes": 7189,
+      "sha256": "f49f0114a73ba557163318b0fdad968b33b41a939e5766a83460468bda9c7a79",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final-v2/compiler-version.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final-v2/compiler-version.log",
+      "bytes": 247,
+      "sha256": "5946ce0c1a43a84e1c7af8cfaa306b2f4bd276dd02164560d5674bcc91250d0b",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final-v2/dependencies-00.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final-v2/dependencies-00.log",
+      "bytes": 4373,
+      "sha256": "4c3f95fcae1d79c751fb9dd41894e83c59957c246c84c1fa488c318ddefffddb",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final-v2/dependencies-01.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final-v2/dependencies-01.log",
+      "bytes": 2867,
+      "sha256": "93a5d26d712ec9f251647e81487175ac5c515e5bf4e05439dd6f170c914a3b63",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final-v2/dependencies-02.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final-v2/dependencies-02.log",
+      "bytes": 2677,
+      "sha256": "7649b08c78af4bc4cb103d1549be8cee06ac757e10a5b6578a43a16049038361",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final-v2/manifest.json": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final-v2/manifest.json",
+      "bytes": 24661,
+      "sha256": "1c92f93e4a952fa25af82e15e518c8bb43ffd5138de9e0a3376d35a92bc05739",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final-v2/preprocessed-fixture.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final-v2/preprocessed-fixture.log",
+      "bytes": 233344,
+      "sha256": "284e5b4ead1fbd320ea9d24eed61d5450d0e2412efb96318d61631683921164b",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final-v2/runtime-libamiga-a.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final-v2/runtime-libamiga-a.log",
+      "bytes": 156,
+      "sha256": "c2c8e44936c32e01094e9de761e57c62c7bb834fbf6cabd464465bf3b17090c4",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final-v2/runtime-libgcc-a.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final-v2/runtime-libgcc-a.log",
+      "bytes": 125,
+      "sha256": "b1912e77c4c1160ce749ca74fbe6edabd5896c2291188e718a9cdfd72c84d57a",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final-v2/runtime-libnix-a.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final-v2/runtime-libnix-a.log",
+      "bytes": 121,
+      "sha256": "1ca0a83ef891770cbbe671647c7aad9f925ed0b9756c8f85aca35c84961e202a",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final-v2/runtime-libnix20-a.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final-v2/runtime-libnix20-a.log",
+      "bytes": 123,
+      "sha256": "9060e4a22ea9e716b8f9cf85b5fe5e11a9e6c88ef938b9111d189acc2df8465b",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final-v2/runtime-libnixmain-a.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final-v2/runtime-libnixmain-a.log",
+      "bytes": 125,
+      "sha256": "dd28b9a8319d35bd81f76cd9479f889e7e5628be07a45ef138f35a729c640add",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final-v2/runtime-libstubs-a.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final-v2/runtime-libstubs-a.log",
+      "bytes": 156,
+      "sha256": "8ce0c56c26f8f09a8af8b76d62c4d380cbfbe8efde13fa64884d8e9e6c93027f",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "current/native-final-v2/runtime-ncrt0-o.log": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/native-final-v2/runtime-ncrt0-o.log",
+      "bytes": 120,
+      "sha256": "1562950e2e8cb15a51238fddb72e6e26f0ff2d5a774543473aba0d274a19c45f",
+      "mode": 420,
+      "role": "Original distinct first failed or corrected PASS compile/dependency/preprocessor/runtime commands/logs/products"
+    },
+    "builder-draft/build_scheduled_lineage_test.py": {
+      "original_path": "/private/tmp/protracker-lineage-native-builder-hed1g75m/build_scheduled_lineage_test.py",
+      "bytes": 13690,
+      "sha256": "40a9a14b4b3d08b0c7ab278c03ddde5b8dc0d84bdfa0684c8e0b9355ef72c681",
+      "mode": 420,
+      "role": "Exact unchanged standalone builder, canonical origin copy, adaptation diff and initial draft handoff"
+    },
+    "builder-draft/builder-origin.diff": {
+      "original_path": "/private/tmp/protracker-lineage-native-builder-hed1g75m/builder-origin.diff",
+      "bytes": 4309,
+      "sha256": "85de6fff75c615253d1b96bf30969b4ac9e28d4deaa69b1c6993b380a78e9ed8",
+      "mode": 420,
+      "role": "Exact unchanged standalone builder, canonical origin copy, adaptation diff and initial draft handoff"
+    },
+    "builder-draft/draft-handoff.json": {
+      "original_path": "/private/tmp/protracker-lineage-native-builder-hed1g75m/draft-handoff.json",
+      "bytes": 1995,
+      "sha256": "19c10dc22a2e7a8782e2c43509cd43c94ac8fb603cd1a01153ae323c68d7fcc3",
+      "mode": 420,
+      "role": "Exact unchanged standalone builder, canonical origin copy, adaptation diff and initial draft handoff"
+    },
+    "builder-draft/origin_build_scheduled_output_test.py": {
+      "original_path": "/private/tmp/protracker-lineage-native-builder-hed1g75m/origin_build_scheduled_output_test.py",
+      "bytes": 13472,
+      "sha256": "1e53387fc1f3c0ab204102eae39595f13d3544c4de290928a221b6df6b65825b",
+      "mode": 420,
+      "role": "Exact unchanged standalone builder, canonical origin copy, adaptation diff and initial draft handoff"
+    },
+    "host-inputs/obsolete-v1/docs/SCHEDULED_LINEAGE.md": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final/docs/SCHEDULED_LINEAGE.md",
+      "bytes": 7405,
+      "sha256": "16425929130273afa6e1d645cdde080fbd426a6a9c640396eaf03ef472fa9a03",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/obsolete-v1/src/core/channels.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final/src/core/channels.h",
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/obsolete-v1/src/core/document.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final/src/core/document.h",
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/obsolete-v1/src/core/elapsed_clock.c": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final/src/core/elapsed_clock.c",
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/obsolete-v1/src/core/elapsed_clock.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final/src/core/elapsed_clock.h",
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/obsolete-v1/src/core/mod_inspect.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final/src/core/mod_inspect.h",
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/obsolete-v1/src/core/pcm.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final/src/core/pcm.h",
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/obsolete-v1/src/core/pp20.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final/src/core/pp20.h",
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/obsolete-v1/src/core/project.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final/src/core/project.h",
+      "bytes": 5698,
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/obsolete-v1/src/core/sample_cache.c": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final/src/core/sample_cache.c",
+      "bytes": 4018,
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/obsolete-v1/src/core/sample_cache.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final/src/core/sample_cache.h",
+      "bytes": 1999,
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/obsolete-v1/src/core/scheduled_lineage.c": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final/src/core/scheduled_lineage.c",
+      "bytes": 20955,
+      "sha256": "a0f7b98711e4fe66f0a4b311513e19824882335b263f9df53c12e553bd4e71ff",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/obsolete-v1/src/core/scheduled_lineage.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final/src/core/scheduled_lineage.h",
+      "bytes": 6189,
+      "sha256": "922162700b31408011c05b12f0f81db26d978fba5ec9635b00626aee42c453eb",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/obsolete-v1/src/core/scheduled_output.c": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final/src/core/scheduled_output.c",
+      "bytes": 9473,
+      "sha256": "940979a07c48679e141722cc672b967d9e4dffd575ba126038a3fd111ec55405",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/obsolete-v1/src/core/scheduled_output.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final/src/core/scheduled_output.h",
+      "bytes": 6515,
+      "sha256": "3289945d9446b373d8aa1897cb2c432f08ef253b443a81cd4dde39230df9b9da",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/obsolete-v1/tests/scheduled_lineage_test.c": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final/tests/scheduled_lineage_test.c",
+      "bytes": 34412,
+      "sha256": "1125579976a8f03f2272603b51bc921dab321efdc766d99205a5b3e4db0baad0",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/obsolete-v1/tests/scheduled_output_test.c": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final/tests/scheduled_output_test.c",
+      "bytes": 17562,
+      "sha256": "cde1db9470f14575f418bc7b749e7a2950b40112c252afb1b20b3258a9ebd864",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/obsolete-v1/tests/test_scheduled_lineage.py": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final/tests/test_scheduled_lineage.py",
+      "bytes": 855,
+      "sha256": "aea9461b85f9085a1ce1ba50127d761bd69fe4550ea64d640b94dbdcde2c816d",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/obsolete-v1/tests/test_scheduled_output.py": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final/tests/test_scheduled_output.py",
+      "bytes": 655,
+      "sha256": "75f8482facc0951592c8fbeb388f02ae37b75abcc332dd2e16e279792fa777a3",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/final-v2/docs/SCHEDULED_LINEAGE.md": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/docs/SCHEDULED_LINEAGE.md",
+      "bytes": 7803,
+      "sha256": "f44b1fb265e808ff3a32b2a2e1c6039a5131b07529d03f4503d59fad228edb4d",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/final-v2/src/core/channels.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/src/core/channels.h",
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/final-v2/src/core/document.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/src/core/document.h",
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/final-v2/src/core/elapsed_clock.c": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/src/core/elapsed_clock.c",
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/final-v2/src/core/elapsed_clock.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/src/core/elapsed_clock.h",
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/final-v2/src/core/mod_inspect.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/src/core/mod_inspect.h",
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/final-v2/src/core/pcm.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/src/core/pcm.h",
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/final-v2/src/core/pp20.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/src/core/pp20.h",
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/final-v2/src/core/project.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/src/core/project.h",
+      "bytes": 5698,
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/final-v2/src/core/sample_cache.c": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/src/core/sample_cache.c",
+      "bytes": 4018,
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/final-v2/src/core/sample_cache.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/src/core/sample_cache.h",
+      "bytes": 1999,
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/final-v2/src/core/scheduled_lineage.c": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/src/core/scheduled_lineage.c",
+      "bytes": 21757,
+      "sha256": "6550c1483ca9620c856ccbaa2b8015cb13fb59f5a2e1f6b28a6f47b8d90dd786",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/final-v2/src/core/scheduled_lineage.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/src/core/scheduled_lineage.h",
+      "bytes": 6189,
+      "sha256": "922162700b31408011c05b12f0f81db26d978fba5ec9635b00626aee42c453eb",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/final-v2/src/core/scheduled_output.c": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/src/core/scheduled_output.c",
+      "bytes": 9473,
+      "sha256": "940979a07c48679e141722cc672b967d9e4dffd575ba126038a3fd111ec55405",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/final-v2/src/core/scheduled_output.h": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/src/core/scheduled_output.h",
+      "bytes": 6515,
+      "sha256": "3289945d9446b373d8aa1897cb2c432f08ef253b443a81cd4dde39230df9b9da",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/final-v2/tests/scheduled_lineage_test.c": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/tests/scheduled_lineage_test.c",
+      "bytes": 36620,
+      "sha256": "8cd9b724824484804ffb5946df3feb92cc907d87e4a914c530f16f24592e38bc",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/final-v2/tests/scheduled_output_test.c": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/tests/scheduled_output_test.c",
+      "bytes": 17562,
+      "sha256": "cde1db9470f14575f418bc7b749e7a2950b40112c252afb1b20b3258a9ebd864",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/final-v2/tests/test_scheduled_lineage.py": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/tests/test_scheduled_lineage.py",
+      "bytes": 855,
+      "sha256": "aea9461b85f9085a1ce1ba50127d761bd69fe4550ea64d640b94dbdcde2c816d",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "host-inputs/final-v2/tests/test_scheduled_output.py": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/tests/test_scheduled_output.py",
+      "bytes": 655,
+      "sha256": "75f8482facc0951592c8fbeb388f02ae37b75abcc332dd2e16e279792fa777a3",
+      "mode": 420,
+      "role": "Exact host compiled canonical closure, executed Python declaration or original five-path overlay for this frozen stage"
+    },
+    "native-inputs/docs/SCHEDULED_LINEAGE.md": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final-native-v2/docs/SCHEDULED_LINEAGE.md",
+      "bytes": 7803,
+      "sha256": "f44b1fb265e808ff3a32b2a2e1c6039a5131b07529d03f4503d59fad228edb4d",
+      "mode": 420,
+      "role": "Exact current formatted compiler closure, standalone builder, committed AST-only recipes and actual Python declaration bytes"
+    },
+    "native-inputs/src/core/channels.h": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final-native-v2/src/core/channels.h",
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": 436,
+      "role": "Exact current formatted compiler closure, standalone builder, committed AST-only recipes and actual Python declaration bytes"
+    },
+    "native-inputs/src/core/document.h": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final-native-v2/src/core/document.h",
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": 436,
+      "role": "Exact current formatted compiler closure, standalone builder, committed AST-only recipes and actual Python declaration bytes"
+    },
+    "native-inputs/src/core/elapsed_clock.c": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final-native-v2/src/core/elapsed_clock.c",
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "mode": 436,
+      "role": "Exact current formatted compiler closure, standalone builder, committed AST-only recipes and actual Python declaration bytes"
+    },
+    "native-inputs/src/core/elapsed_clock.h": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final-native-v2/src/core/elapsed_clock.h",
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "mode": 436,
+      "role": "Exact current formatted compiler closure, standalone builder, committed AST-only recipes and actual Python declaration bytes"
+    },
+    "native-inputs/src/core/mod_inspect.h": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final-native-v2/src/core/mod_inspect.h",
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": 436,
+      "role": "Exact current formatted compiler closure, standalone builder, committed AST-only recipes and actual Python declaration bytes"
+    },
+    "native-inputs/src/core/pcm.h": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final-native-v2/src/core/pcm.h",
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": 436,
+      "role": "Exact current formatted compiler closure, standalone builder, committed AST-only recipes and actual Python declaration bytes"
+    },
+    "native-inputs/src/core/pp20.h": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final-native-v2/src/core/pp20.h",
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": 436,
+      "role": "Exact current formatted compiler closure, standalone builder, committed AST-only recipes and actual Python declaration bytes"
+    },
+    "native-inputs/src/core/project.h": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final-native-v2/src/core/project.h",
+      "bytes": 5698,
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8",
+      "mode": 436,
+      "role": "Exact current formatted compiler closure, standalone builder, committed AST-only recipes and actual Python declaration bytes"
+    },
+    "native-inputs/src/core/scheduled_lineage.c": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final-native-v2/src/core/scheduled_lineage.c",
+      "bytes": 21757,
+      "sha256": "6550c1483ca9620c856ccbaa2b8015cb13fb59f5a2e1f6b28a6f47b8d90dd786",
+      "mode": 420,
+      "role": "Exact current formatted compiler closure, standalone builder, committed AST-only recipes and actual Python declaration bytes"
+    },
+    "native-inputs/src/core/scheduled_lineage.h": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final-native-v2/src/core/scheduled_lineage.h",
+      "bytes": 6189,
+      "sha256": "922162700b31408011c05b12f0f81db26d978fba5ec9635b00626aee42c453eb",
+      "mode": 420,
+      "role": "Exact current formatted compiler closure, standalone builder, committed AST-only recipes and actual Python declaration bytes"
+    },
+    "native-inputs/src/core/scheduled_output.h": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final-native-v2/src/core/scheduled_output.h",
+      "bytes": 6515,
+      "sha256": "3289945d9446b373d8aa1897cb2c432f08ef253b443a81cd4dde39230df9b9da",
+      "mode": 436,
+      "role": "Exact current formatted compiler closure, standalone builder, committed AST-only recipes and actual Python declaration bytes"
+    },
+    "native-inputs/tests/scheduled_lineage_test.c": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final-native-v2/tests/scheduled_lineage_test.c",
+      "bytes": 36625,
+      "sha256": "38e8adb032b148db814d819df7b584a44b3edc5d982f840fb93c583060e1db19",
+      "mode": 420,
+      "role": "Exact current formatted compiler closure, standalone builder, committed AST-only recipes and actual Python declaration bytes"
+    },
+    "native-inputs/tests/test_scheduled_lineage.py": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final-native-v2/tests/test_scheduled_lineage.py",
+      "bytes": 855,
+      "sha256": "aea9461b85f9085a1ce1ba50127d761bd69fe4550ea64d640b94dbdcde2c816d",
+      "mode": 420,
+      "role": "Exact current formatted compiler closure, standalone builder, committed AST-only recipes and actual Python declaration bytes"
+    },
+    "native-inputs/tests/test_scheduled_output.py": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final-native-v2/tests/test_scheduled_output.py",
+      "bytes": 655,
+      "sha256": "75f8482facc0951592c8fbeb388f02ae37b75abcc332dd2e16e279792fa777a3",
+      "mode": 436,
+      "role": "Exact current formatted compiler closure, standalone builder, committed AST-only recipes and actual Python declaration bytes"
+    },
+    "native-inputs/tools/build_core_tests.py": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final-native-v2/tools/build_core_tests.py",
+      "bytes": 38970,
+      "sha256": "1948232ab42449eb518e49ee55276542b102d7461f0f58d8aa273588a20a0d55",
+      "mode": 436,
+      "role": "Exact current formatted compiler closure, standalone builder, committed AST-only recipes and actual Python declaration bytes"
+    },
+    "native-inputs/tools/build_diagnostic.py": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final-native-v2/tools/build_diagnostic.py",
+      "bytes": 5879,
+      "sha256": "a5a42c8a811eb4e5ce744157afd2715de8f4c9c7d392b3b7b40f1dc6f459a805",
+      "mode": 436,
+      "role": "Exact current formatted compiler closure, standalone builder, committed AST-only recipes and actual Python declaration bytes"
+    },
+    "native-inputs/tools/build_scheduled_lineage_test.py": {
+      "original_path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final-native-v2/tools/build_scheduled_lineage_test.py",
+      "bytes": 13690,
+      "sha256": "40a9a14b4b3d08b0c7ab278c03ddde5b8dc0d84bdfa0684c8e0b9355ef72c681",
+      "mode": 420,
+      "role": "Exact current formatted compiler closure, standalone builder, committed AST-only recipes and actual Python declaration bytes"
+    },
+    "independent/source-final-v2-review.json": {
+      "original_path": "/private/tmp/protracker-scheduled-lineage-v2-independent-review.json",
+      "bytes": 34467,
+      "sha256": "50f197caa623a7a8922a19e051efd5c1ca4ace81dc939c5059a70a3f5307beb7",
+      "mode": 420,
+      "role": "Independent final author source and host-proof audit; superseded v1 positive-replacement gap remains history"
+    },
+    "independent/native-corrected-v2-review.json": {
+      "original_path": "/private/tmp/protracker-lineage-native-v2-independent-review-1791064237903007000.json",
+      "bytes": 27391,
+      "sha256": "77edf8bc09a7d9e760136bd6ad4ad118438c907b24d1e730802de5e32dfc95ac",
+      "mode": 420,
+      "role": "Independent exact corrected build and current-source audit; HUNK has not run"
+    },
+    "preparation-helpers/prepare_lineage_current_source.py": {
+      "original_path": "/private/tmp/prepare_lineage_current_source.py",
+      "bytes": 8152,
+      "sha256": "86aa85f8a7bbeb7dfd735faab65b978b5d1c9dce3d10cfe7944fc493a9f9d38d",
+      "mode": 420,
+      "role": "Exact host source/export/formatting/packaging helper; no target action"
+    },
+    "preparation-helpers/prepare_lineage_formatting_v2.py": {
+      "original_path": "/private/tmp/prepare_lineage_formatting_v2.py",
+      "bytes": 5386,
+      "sha256": "64799f878747b769a2e4d7f4795f2b0e6dab238a2262f7ce39651932c7d25135",
+      "mode": 420,
+      "role": "Exact host source/export/formatting/packaging helper; no target action"
+    },
+    "preparation-helpers/package_scheduled_lineage_evidence.py": {
+      "original_path": "/private/tmp/package_scheduled_lineage_evidence.py",
+      "bytes": 17324,
+      "sha256": "9cc5f412afe70af8248511dafb2e97529f9503c6841596337bae62b3f1573874",
+      "mode": 420,
+      "role": "Exact host source/export/formatting/packaging helper; no target action"
+    }
+  },
+  "source_inventories": {
+    "author-baseline": {
+      "source_root": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/baseline",
+      "manifest": {
+        "path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/baseline-manifest.json",
+        "bytes": 1088089,
+        "sha256": "81840112ee35328c2bf91cfb230dfe7bf52410f184bcddf33acdd0a4ab5dd103"
+      },
+      "file_count": 7973,
+      "all_file_hashes_match": true
+    },
+    "author-obsolete-v1": {
+      "source_root": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final",
+      "manifest": {
+        "path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-manifest.json",
+        "bytes": 1089622,
+        "sha256": "304ed8335d5dc80f941617b960812e0cd17bcd2a3a8c69ef210271a10e1b0ff5"
+      },
+      "file_count": 7978,
+      "all_file_hashes_match": true
+    },
+    "author-final-v2": {
+      "source_root": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2",
+      "manifest": {
+        "path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-manifest-v2.json",
+        "bytes": 1090143,
+        "sha256": "b2fb0521eb1fbdce11100550e69c5c5fefe67f3a8d53673a847f1197f5b2bb6a"
+      },
+      "file_count": 7978,
+      "all_file_hashes_match": true
+    },
+    "current-baseline": {
+      "source_root": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/baseline",
+      "manifest": {
+        "path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/baseline-before.json",
+        "bytes": 3404405,
+        "sha256": "06347b28cfcd1b2d357d5507026962195fc5f1c1a0258e2c5c7776508de15448"
+      },
+      "file_count": 7984,
+      "all_file_hashes_match": true
+    },
+    "current-first-compile": {
+      "source_root": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final",
+      "manifest": {
+        "path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-manifest.json",
+        "bytes": 2695570,
+        "sha256": "f5e174fb809800c0e0ecf7ed63c25069d15d3700a62795c5f4f9ac046f1e61cd"
+      },
+      "file_count": 7990,
+      "all_file_hashes_match": true
+    },
+    "current-formatting-v2": {
+      "source_root": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final-native-v2",
+      "manifest": {
+        "path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-manifest-native-v2.json",
+        "bytes": 2696631,
+        "sha256": "f21e6bb8a253c8e2e005f00674a5192e55122a020ba4d141469000260d43c46e"
+      },
+      "file_count": 7990,
+      "all_file_hashes_match": true
+    }
+  },
+  "complete_source_exports_and_sdk_trees_archived": false,
+  "source_only_current_base": "dbededed13cd596683867c3f39a5127651f86d74",
+  "overlay_paths": [
+    {
+      "path": "src/core/scheduled_lineage.c",
+      "origin": {
+        "path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/src/core/scheduled_lineage.c",
+        "bytes": 21757,
+        "sha256": "6550c1483ca9620c856ccbaa2b8015cb13fb59f5a2e1f6b28a6f47b8d90dd786"
+      },
+      "copy": {
+        "path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final/src/core/scheduled_lineage.c",
+        "bytes": 21757,
+        "sha256": "6550c1483ca9620c856ccbaa2b8015cb13fb59f5a2e1f6b28a6f47b8d90dd786"
+      },
+      "base_sha256": null
+    },
+    {
+      "path": "src/core/scheduled_lineage.h",
+      "origin": {
+        "path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/src/core/scheduled_lineage.h",
+        "bytes": 6189,
+        "sha256": "922162700b31408011c05b12f0f81db26d978fba5ec9635b00626aee42c453eb"
+      },
+      "copy": {
+        "path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final/src/core/scheduled_lineage.h",
+        "bytes": 6189,
+        "sha256": "922162700b31408011c05b12f0f81db26d978fba5ec9635b00626aee42c453eb"
+      },
+      "base_sha256": null
+    },
+    {
+      "path": "tests/scheduled_lineage_test.c",
+      "origin": {
+        "path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/tests/scheduled_lineage_test.c",
+        "bytes": 36620,
+        "sha256": "8cd9b724824484804ffb5946df3feb92cc907d87e4a914c530f16f24592e38bc"
+      },
+      "copy": {
+        "path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final-native-v2/tests/scheduled_lineage_test.c",
+        "bytes": 36625,
+        "sha256": "38e8adb032b148db814d819df7b584a44b3edc5d982f840fb93c583060e1db19"
+      },
+      "base_sha256": null,
+      "transformation": "Only split the for(...)hold(...); from t=trigger(...) onto a following line; exact tokens/directives unchanged",
+      "original_frozen_sha256": "8cd9b724824484804ffb5946df3feb92cc907d87e4a914c530f16f24592e38bc"
+    },
+    {
+      "path": "tests/test_scheduled_lineage.py",
+      "origin": {
+        "path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/tests/test_scheduled_lineage.py",
+        "bytes": 855,
+        "sha256": "aea9461b85f9085a1ce1ba50127d761bd69fe4550ea64d640b94dbdcde2c816d"
+      },
+      "copy": {
+        "path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final/tests/test_scheduled_lineage.py",
+        "bytes": 855,
+        "sha256": "aea9461b85f9085a1ce1ba50127d761bd69fe4550ea64d640b94dbdcde2c816d"
+      },
+      "base_sha256": null
+    },
+    {
+      "path": "docs/SCHEDULED_LINEAGE.md",
+      "origin": {
+        "path": "/private/tmp/protracker-scheduled-lineage-fyrcg2b7/source-final-v2/docs/SCHEDULED_LINEAGE.md",
+        "bytes": 7803,
+        "sha256": "f44b1fb265e808ff3a32b2a2e1c6039a5131b07529d03f4503d59fad228edb4d"
+      },
+      "copy": {
+        "path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final/docs/SCHEDULED_LINEAGE.md",
+        "bytes": 7803,
+        "sha256": "f44b1fb265e808ff3a32b2a2e1c6039a5131b07529d03f4503d59fad228edb4d"
+      },
+      "base_sha256": null
+    },
+    {
+      "path": "tools/build_scheduled_lineage_test.py",
+      "origin": {
+        "path": "/private/tmp/protracker-lineage-native-builder-hed1g75m/build_scheduled_lineage_test.py",
+        "bytes": 13690,
+        "sha256": "40a9a14b4b3d08b0c7ab278c03ddde5b8dc0d84bdfa0684c8e0b9355ef72c681"
+      },
+      "copy": {
+        "path": "/private/tmp/protracker-lineage-current-source-l2sqyvbp/source-final/tools/build_scheduled_lineage_test.py",
+        "bytes": 13690,
+        "sha256": "40a9a14b4b3d08b0c7ab278c03ddde5b8dc0d84bdfa0684c8e0b9355ef72c681"
+      },
+      "base_sha256": null
+    }
+  ],
+  "independent_source_review": {
+    "path": "/private/tmp/protracker-scheduled-lineage-v2-independent-review.json",
+    "bytes": 34467,
+    "sha256": "50f197caa623a7a8922a19e051efd5c1ca4ace81dc939c5059a70a3f5307beb7"
+  },
+  "independent_actual_native_build_review": {
+    "path": "/private/tmp/protracker-lineage-native-v2-independent-review-1791064237903007000.json",
+    "bytes": 27391,
+    "sha256": "77edf8bc09a7d9e760136bd6ad4ad118438c907b24d1e730802de5e32dfc95ac"
+  },
+  "native_NOT_RUN": true,
+  "reproduction": "verify_payload.py verifies all member bytes/modes and reconstructs the deterministic archive without extraction; --origins additionally verifies retained private paths"
+}

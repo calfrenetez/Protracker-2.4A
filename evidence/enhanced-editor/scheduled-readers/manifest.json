@@ -1,0 +1,876 @@
+{
+  "scope": "host_and_native_compile_only",
+  "member_count": 116,
+  "original_bytes": 5449130,
+  "payload": {
+    "bytes": 1372880,
+    "sha256": "c47fb6fda0d44a90709607f0470f4e7dac1eb1eb726aa0c1269bfff463e39bd6"
+  },
+  "members": {
+    "author/audit_final.py": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/audit_final.py",
+      "bytes": 8412,
+      "sha256": "37c5e9e22f7a4c646cd0e180a6fd35f8878c3618703b6c6634284317f5544df4",
+      "mode": 420,
+      "scope": "Final author source/full inventory/proof control; no target"
+    },
+    "author/baseline-binding.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/baseline-binding.json",
+      "bytes": 1091772,
+      "sha256": "18f5190e7a818befa9eb0356cefa792357aca67c0e2eb844f116210681b95896",
+      "mode": 420,
+      "scope": "Final author source/full inventory/proof control; no target"
+    },
+    "author/final-extra/docs/SCHEDULED_READERS.md": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/source-final/docs/SCHEDULED_READERS.md",
+      "bytes": 7680,
+      "sha256": "d484345a06d8f04a28c0428152854293408a2e807575143c9648dc69c9ec69e4",
+      "mode": 292,
+      "scope": "Final new Python declaration/documentation; original frozen bytes"
+    },
+    "author/final-extra/tests/test_scheduled_readers.py": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/source-final/tests/test_scheduled_readers.py",
+      "bytes": 968,
+      "sha256": "4e1d252b571e19063355bc5c3b4bd559df53cc33cf95b702d781cfe4795c2852",
+      "mode": 292,
+      "scope": "Final new Python declaration/documentation; original frozen bytes"
+    },
+    "author/final.patch": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/final.patch",
+      "bytes": 83265,
+      "sha256": "2cceca49c71a4d3574cb6de31102c159d455720583942239d097217b72382ed3",
+      "mode": 420,
+      "scope": "Final author source/full inventory/proof control; no target"
+    },
+    "author/handoff.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/handoff.json",
+      "bytes": 4832,
+      "sha256": "8c9f9a0bbf333b46767ea1aacbd7c1835637a06b7fcfd2693e4c759f89877787",
+      "mode": 420,
+      "scope": "Final author source/full inventory/proof control; no target"
+    },
+    "author/helpers/host_provenance.py": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/tools/host_provenance.py",
+      "bytes": 14120,
+      "sha256": "042f7d1748eb67d52b2f27ba2ac8d4ed3a9d76336e6bb04b8096bd06909d0f18",
+      "mode": 420,
+      "scope": "Executed pinned one-group host helper bytes/declaration delta"
+    },
+    "author/helpers/prepared-files.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/tools/prepared-files.json",
+      "bytes": 1362,
+      "sha256": "c651d7646de42ce0751b0265a3227b655f955fe211500ec1988a1100fbe9016d",
+      "mode": 420,
+      "scope": "Executed pinned one-group host helper bytes/declaration delta"
+    },
+    "author/helpers/provenance_common.py": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/tools/provenance_common.py",
+      "bytes": 11124,
+      "sha256": "78e28229f0f132c73153606be3a40d750a4013f5ea1bbb5af7c15e117e62cdb5",
+      "mode": 420,
+      "scope": "Executed pinned one-group host helper bytes/declaration delta"
+    },
+    "author/helpers/toolchain-pins.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/tools/toolchain-pins.json",
+      "bytes": 2709,
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065",
+      "mode": 420,
+      "scope": "Executed pinned one-group host helper bytes/declaration delta"
+    },
+    "author/history/development-01/fixture.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-01/fixture.c",
+      "bytes": 27795,
+      "sha256": "bea7df93482f8b636ce83995c7ef1006a4b1e9f1a1bdc088c13dd00564cecdec",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-01/production.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-01/production.c",
+      "bytes": 25985,
+      "sha256": "b140f3c09f7faf7c6a82aa6e478f43d112797af30715765e998ba45b6d5c2240",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-01/test.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-01/test.log",
+      "bytes": 1092,
+      "sha256": "d8f4c9f63941a397c8d4e263185c4ed3890bc4c9bc62aaee218e1bcb27fc272f",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-02/fixture.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-02/fixture.c",
+      "bytes": 28033,
+      "sha256": "b20a27999f3a54826ab006e49d54b7bff8f2a5d8857b3b50781d110df74e57b7",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-02/test.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-02/test.log",
+      "bytes": 1054,
+      "sha256": "ee62cb2f2f5ad8135d5bff4e68266666613f67697eec0221c87bf5f02a62e728",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-03/fixture.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-03/fixture.c",
+      "bytes": 28180,
+      "sha256": "5c9bd68289e236fd9b69076bf992e6e6cbc15977d79534f7f8a32abf4690619c",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-03/test.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-03/test.log",
+      "bytes": 1075,
+      "sha256": "8a351484b02f4da338dccf5a0561f359a8b4006ffd348553a3f454872b3e4065",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-04/fixture.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-04/fixture.c",
+      "bytes": 28234,
+      "sha256": "04404d9b651dc790494d0cccc9c81ce63b170e81c870cf3be9204f07b06c541f",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-04/test.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-04/test.log",
+      "bytes": 218,
+      "sha256": "92826e44f81b59e40ffa43af050f00c6c62d306a5041bb94d865b239d247b9ab",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-05/fixture.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-05/fixture.c",
+      "bytes": 29374,
+      "sha256": "67feb928b0e40defafc2a138d0e97bd2fec78ba74a30fe3f10c58b55490b3602",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-05/production.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-05/production.c",
+      "bytes": 26978,
+      "sha256": "16d975895a9c8801a1301a881ab1e51b5ffb6f63ab9071fe203cc9fb311bba69",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-05/test.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-05/test.log",
+      "bytes": 218,
+      "sha256": "2676b4b3379e6baee7ec6c6fc1bcce4483a316a3aace1e3bd03d2f8c59578001",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-06/fixture.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-06/fixture.c",
+      "bytes": 32474,
+      "sha256": "ec2f0303426e3700c7c95a45a0d2fa96933e1ef2ef06ebbd2e001894f6afc7db",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-06/production.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-06/production.c",
+      "bytes": 26978,
+      "sha256": "16d975895a9c8801a1301a881ab1e51b5ffb6f63ab9071fe203cc9fb311bba69",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-06/test.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-06/test.log",
+      "bytes": 218,
+      "sha256": "3b4a008bdc52f0a947a924e577a246cfb64b482e6b18c5f15f5bdf06e81bc70e",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-07/fixture.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-07/fixture.c",
+      "bytes": 33312,
+      "sha256": "12b66cca98e9c1bf403c38ee8d7c20f36313d22045acdbe1a9bf569dfa56244c",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-07/production.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-07/production.c",
+      "bytes": 26978,
+      "sha256": "16d975895a9c8801a1301a881ab1e51b5ffb6f63ab9071fe203cc9fb311bba69",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-07/test.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-07/test.log",
+      "bytes": 218,
+      "sha256": "a143de1ea16eb12f0212fe964e04718164736550c105c14332549ac8a57e0f5e",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-08/fixture.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-08/fixture.c",
+      "bytes": 35126,
+      "sha256": "0a03f08874028f8bfbd69066731128ffd0d7fe8691a596aafde770cad74f16ae",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-08/production.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-08/production.c",
+      "bytes": 27008,
+      "sha256": "b59421288795ebf52607e4f26b00149c40cef53aab2c7ce973b923a8022ae8f3",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-08/test.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-08/test.log",
+      "bytes": 218,
+      "sha256": "4808c2d877ea14060fbb42127bf056d202cc5499fdfb09138f8949f81415fa6c",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-09/fixture.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-09/fixture.c",
+      "bytes": 37132,
+      "sha256": "ac2ba5083c250ca276092770ca64a420119409e97e6cf49750de717a187a0a45",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-09/production.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-09/production.c",
+      "bytes": 27301,
+      "sha256": "d357f179171d996f714b49d046f2749a3251d8ee1534138cfe84ca690f328778",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/development-09/test.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/development-09/test.log",
+      "bytes": 218,
+      "sha256": "c03465899d21e6b14bb13f4eb8c098bd6a5ade0aed7a53292e9103e0a52b9809",
+      "mode": 420,
+      "scope": "Exploratory development originals; first three logs fail test-model assertions, later logs PASS; early transient headers were not separately archived"
+    },
+    "author/history/scheduled_readers.before-admission-staging.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/scheduled_readers.before-admission-staging.c",
+      "bytes": 25985,
+      "sha256": "b140f3c09f7faf7c6a82aa6e478f43d112797af30715765e998ba45b6d5c2240",
+      "mode": 420,
+      "scope": "Historical production draft, superseded; not current acceptance"
+    },
+    "author/history/scheduled_readers.before-live-control-span-fix.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/scheduled_readers.before-live-control-span-fix.c",
+      "bytes": 25793,
+      "sha256": "7845448c1e706c2ccd8cf365b8ebd6d6be526a533506266477969aa3d7da0fd9",
+      "mode": 420,
+      "scope": "Historical production draft, superseded; not current acceptance"
+    },
+    "author/history/scheduled_readers.before-local-origin.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/scheduled_readers.before-local-origin.c",
+      "bytes": 27008,
+      "sha256": "b59421288795ebf52607e4f26b00149c40cef53aab2c7ce973b923a8022ae8f3",
+      "mode": 420,
+      "scope": "Historical production draft, superseded; not current acceptance"
+    },
+    "author/history/scheduled_readers.before-monotone-valid-close-guard.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/scheduled_readers.before-monotone-valid-close-guard.c",
+      "bytes": 26978,
+      "sha256": "16d975895a9c8801a1301a881ab1e51b5ffb6f63ab9071fe203cc9fb311bba69",
+      "mode": 420,
+      "scope": "Historical production draft, superseded; not current acceptance"
+    },
+    "author/history/scheduled_readers.initial-draft.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/scheduled_readers.initial-draft.c",
+      "bytes": 25437,
+      "sha256": "d62ecd1efce4fb5e008cb82cd355ccfbe8c159ddca01824c0af5d71f239c5e4f",
+      "mode": 420,
+      "scope": "Historical production draft, superseded; not current acceptance"
+    },
+    "author/host-final-invocation.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/host-final-invocation.log",
+      "bytes": 284,
+      "sha256": "31ccd684cc8fd50b2fbdd8ec3d3970e0570fd782cb851cb188a783b9972d5161",
+      "mode": 420,
+      "scope": "Final author source/full inventory/proof control; no target"
+    },
+    "author/host-final/c001-dependencies-00.txt": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/host-final/c001-dependencies-00.txt",
+      "bytes": 8846,
+      "sha256": "073f0d0a6ee20a6bffb95deadea27244e4a6e5718064e14931c0608696f407cb",
+      "mode": 420,
+      "scope": "Final immutable ASan/UBSan proof and archived product; not native"
+    },
+    "author/host-final/c001-dependencies-01.txt": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/host-final/c001-dependencies-01.txt",
+      "bytes": 4335,
+      "sha256": "42c7499b25b2aea510723679cd8c3b05f6579288e42e053ab8a31328255e114d",
+      "mode": 420,
+      "scope": "Final immutable ASan/UBSan proof and archived product; not native"
+    },
+    "author/host-final/c001-product.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/host-final/c001-product.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "scope": "Final immutable ASan/UBSan proof and archived product; not native"
+    },
+    "author/host-final/c002-product.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/host-final/c002-product.log",
+      "bytes": 120,
+      "sha256": "38012f6e8d7e0ca9be8b79f52c5cb9156e801916bab4c082190a598332aa26d6",
+      "mode": 420,
+      "scope": "Final immutable ASan/UBSan proof and archived product; not native"
+    },
+    "author/host-final/host-checks.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/host-final/host-checks.json",
+      "bytes": 43935,
+      "sha256": "c683159952f2c0efc4244654a5c75b2a15dcf6b722c957146517b8957df2267b",
+      "mode": 420,
+      "scope": "Final immutable ASan/UBSan proof and archived product; not native"
+    },
+    "author/host-final/host-checks.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/host-final/host-checks.log",
+      "bytes": 298,
+      "sha256": "cf08867c1ef9d3f2abff67fa20ff33a3b4c763a73d8c57b3e1bb55e290c2a9af",
+      "mode": 420,
+      "scope": "Final immutable ASan/UBSan proof and archived product; not native"
+    },
+    "author/host-final/products/c001-executable-1ab298bcd671a5e5-scheduled-readers-test": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/host-final/products/c001-executable-1ab298bcd671a5e5-scheduled-readers-test",
+      "bytes": 565384,
+      "sha256": "1ab298bcd671a5e535b3fc2c03f343b102ca5313852b999f45e2487913987173",
+      "mode": 420,
+      "scope": "Final immutable ASan/UBSan proof and archived product; not native"
+    },
+    "author/own-final-review.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/own-final-review.json",
+      "bytes": 11229,
+      "sha256": "7f9048fdf989a6b2f43b61341dee93cf8553bc9009cede7b01a3189dcd6821b0",
+      "mode": 420,
+      "scope": "Final author source/full inventory/proof control; no target"
+    },
+    "author/source-manifest.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/source-manifest.json",
+      "bytes": 1093158,
+      "sha256": "ff655544f798e76485c28c795a4053049a0707ab58a6afc9ae2f3498e218ceb9",
+      "mode": 420,
+      "scope": "Final author source/full inventory/proof control; no target"
+    },
+    "builder-preparation/build_scheduled_readers_test.py": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-builder-21ye76l5/build_scheduled_readers_test.py",
+      "bytes": 13602,
+      "sha256": "7516bb4214fc2292650c1b3abaf5dcd212a7652ab1fe26dd78f45b8f4a974f60",
+      "mode": 420,
+      "scope": "Root standalone builder exact delta and unchanged ancestor"
+    },
+    "builder-preparation/builder.diff": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-builder-21ye76l5/builder.diff",
+      "bytes": 2007,
+      "sha256": "cbcdd708228f29c9c3ec1bb4b2b4af1749991fcc3cbce4b779407e1029d9b9fa",
+      "mode": 420,
+      "scope": "Root standalone builder exact delta and unchanged ancestor"
+    },
+    "builder-preparation/original_build_scheduled_lineage_test.py": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-builder-21ye76l5/original_build_scheduled_lineage_test.py",
+      "bytes": 13690,
+      "sha256": "40a9a14b4b3d08b0c7ab278c03ddde5b8dc0d84bdfa0684c8e0b9355ef72c681",
+      "mode": 420,
+      "scope": "Root standalone builder exact delta and unchanged ancestor"
+    },
+    "builder-preparation/prepared-builder.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-builder-21ye76l5/prepared-builder.json",
+      "bytes": 1182,
+      "sha256": "a1555517f739535e0c90ba067293d956df651bda46da0b7eab9e09c6f2c4f635",
+      "mode": 420,
+      "scope": "Root standalone builder exact delta and unchanged ancestor"
+    },
+    "compiled-host/src/core/channels.h": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/source-final/src/core/channels.h",
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": 292,
+      "scope": "Exact canonical host full-M source/header closure"
+    },
+    "compiled-host/src/core/document.h": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/source-final/src/core/document.h",
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": 292,
+      "scope": "Exact canonical host full-M source/header closure"
+    },
+    "compiled-host/src/core/elapsed_clock.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/source-final/src/core/elapsed_clock.c",
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "mode": 292,
+      "scope": "Exact canonical host full-M source/header closure"
+    },
+    "compiled-host/src/core/elapsed_clock.h": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/source-final/src/core/elapsed_clock.h",
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "mode": 292,
+      "scope": "Exact canonical host full-M source/header closure"
+    },
+    "compiled-host/src/core/mod_inspect.h": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/source-final/src/core/mod_inspect.h",
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": 292,
+      "scope": "Exact canonical host full-M source/header closure"
+    },
+    "compiled-host/src/core/pcm.h": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/source-final/src/core/pcm.h",
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": 292,
+      "scope": "Exact canonical host full-M source/header closure"
+    },
+    "compiled-host/src/core/pp20.h": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/source-final/src/core/pp20.h",
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": 292,
+      "scope": "Exact canonical host full-M source/header closure"
+    },
+    "compiled-host/src/core/project.h": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/source-final/src/core/project.h",
+      "bytes": 5698,
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8",
+      "mode": 292,
+      "scope": "Exact canonical host full-M source/header closure"
+    },
+    "compiled-host/src/core/scheduled_output.h": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/source-final/src/core/scheduled_output.h",
+      "bytes": 6515,
+      "sha256": "3289945d9446b373d8aa1897cb2c432f08ef253b443a81cd4dde39230df9b9da",
+      "mode": 292,
+      "scope": "Exact canonical host full-M source/header closure"
+    },
+    "compiled-host/src/core/scheduled_readers.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/source-final/src/core/scheduled_readers.c",
+      "bytes": 27301,
+      "sha256": "d357f179171d996f714b49d046f2749a3251d8ee1534138cfe84ca690f328778",
+      "mode": 292,
+      "scope": "Exact canonical host full-M source/header closure"
+    },
+    "compiled-host/src/core/scheduled_readers.h": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/source-final/src/core/scheduled_readers.h",
+      "bytes": 8810,
+      "sha256": "f6dd9354a65ee501d30ba2934f837d39c6b3e5ba1c92bee370a3468fe5ea3f3e",
+      "mode": 292,
+      "scope": "Exact canonical host full-M source/header closure"
+    },
+    "compiled-host/tests/scheduled_readers_test.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/source-final/tests/scheduled_readers_test.c",
+      "bytes": 37132,
+      "sha256": "ac2ba5083c250ca276092770ca64a420119409e97e6cf49750de717a187a0a45",
+      "mode": 292,
+      "scope": "Exact canonical host full-M source/header closure"
+    },
+    "compiled-native/src/core/channels.h": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/source-final-native/src/core/channels.h",
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": 420,
+      "scope": "Exact actual native canonical full-M source/header closure"
+    },
+    "compiled-native/src/core/document.h": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/source-final-native/src/core/document.h",
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": 420,
+      "scope": "Exact actual native canonical full-M source/header closure"
+    },
+    "compiled-native/src/core/elapsed_clock.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/source-final-native/src/core/elapsed_clock.c",
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "mode": 420,
+      "scope": "Exact actual native canonical full-M source/header closure"
+    },
+    "compiled-native/src/core/elapsed_clock.h": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/source-final-native/src/core/elapsed_clock.h",
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "mode": 420,
+      "scope": "Exact actual native canonical full-M source/header closure"
+    },
+    "compiled-native/src/core/mod_inspect.h": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/source-final-native/src/core/mod_inspect.h",
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": 420,
+      "scope": "Exact actual native canonical full-M source/header closure"
+    },
+    "compiled-native/src/core/pcm.h": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/source-final-native/src/core/pcm.h",
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": 420,
+      "scope": "Exact actual native canonical full-M source/header closure"
+    },
+    "compiled-native/src/core/pp20.h": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/source-final-native/src/core/pp20.h",
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": 420,
+      "scope": "Exact actual native canonical full-M source/header closure"
+    },
+    "compiled-native/src/core/project.h": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/source-final-native/src/core/project.h",
+      "bytes": 5698,
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8",
+      "mode": 420,
+      "scope": "Exact actual native canonical full-M source/header closure"
+    },
+    "compiled-native/src/core/scheduled_output.h": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/source-final-native/src/core/scheduled_output.h",
+      "bytes": 6515,
+      "sha256": "3289945d9446b373d8aa1897cb2c432f08ef253b443a81cd4dde39230df9b9da",
+      "mode": 420,
+      "scope": "Exact actual native canonical full-M source/header closure"
+    },
+    "compiled-native/src/core/scheduled_readers.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/source-final-native/src/core/scheduled_readers.c",
+      "bytes": 27301,
+      "sha256": "d357f179171d996f714b49d046f2749a3251d8ee1534138cfe84ca690f328778",
+      "mode": 420,
+      "scope": "Exact actual native canonical full-M source/header closure"
+    },
+    "compiled-native/src/core/scheduled_readers.h": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/source-final-native/src/core/scheduled_readers.h",
+      "bytes": 8810,
+      "sha256": "f6dd9354a65ee501d30ba2934f837d39c6b3e5ba1c92bee370a3468fe5ea3f3e",
+      "mode": 420,
+      "scope": "Exact actual native canonical full-M source/header closure"
+    },
+    "compiled-native/tests/scheduled_readers_test.c": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/source-final-native/tests/scheduled_readers_test.c",
+      "bytes": 37132,
+      "sha256": "ac2ba5083c250ca276092770ca64a420119409e97e6cf49750de717a187a0a45",
+      "mode": 420,
+      "scope": "Exact actual native canonical full-M source/header closure"
+    },
+    "native-build/PTScheduledReadersTest": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/native-final-v1/PTScheduledReadersTest",
+      "bytes": 61416,
+      "sha256": "9e62dea2cc6ed4c4d544bd7bd59fec79bee90b0db88c6273642ec73f0bbe0a6c",
+      "mode": 493,
+      "scope": "Actual successful pinned compiler-only native product/commands/logs; HUNK NOT RUN"
+    },
+    "native-build/PTScheduledReadersTest.build.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/native-final-v1/PTScheduledReadersTest.build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "scope": "Actual successful pinned compiler-only native product/commands/logs; HUNK NOT RUN"
+    },
+    "native-build/compile-commands.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/native-final-v1/compile-commands.json",
+      "bytes": 1002,
+      "sha256": "1223caea3b22556328468ec14e3f32f5c81259ad140c1fe7e60917d6268f08d2",
+      "mode": 420,
+      "scope": "Actual successful pinned compiler-only native product/commands/logs; HUNK NOT RUN"
+    },
+    "native-build/compiler-target-help.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/native-final-v1/compiler-target-help.log",
+      "bytes": 7189,
+      "sha256": "f49f0114a73ba557163318b0fdad968b33b41a939e5766a83460468bda9c7a79",
+      "mode": 420,
+      "scope": "Actual successful pinned compiler-only native product/commands/logs; HUNK NOT RUN"
+    },
+    "native-build/compiler-version.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/native-final-v1/compiler-version.log",
+      "bytes": 247,
+      "sha256": "5946ce0c1a43a84e1c7af8cfaa306b2f4bd276dd02164560d5674bcc91250d0b",
+      "mode": 420,
+      "scope": "Actual successful pinned compiler-only native product/commands/logs; HUNK NOT RUN"
+    },
+    "native-build/dependencies-00.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/native-final-v1/dependencies-00.log",
+      "bytes": 4414,
+      "sha256": "fe9e0bc2334e22127b96d7fdb7d4e60aeb1f5aca6b9be5965a54ad4cc74aed95",
+      "mode": 420,
+      "scope": "Actual successful pinned compiler-only native product/commands/logs; HUNK NOT RUN"
+    },
+    "native-build/dependencies-01.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/native-final-v1/dependencies-01.log",
+      "bytes": 2677,
+      "sha256": "7649b08c78af4bc4cb103d1549be8cee06ac757e10a5b6578a43a16049038361",
+      "mode": 420,
+      "scope": "Actual successful pinned compiler-only native product/commands/logs; HUNK NOT RUN"
+    },
+    "native-build/manifest.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/native-final-v1/manifest.json",
+      "bytes": 24036,
+      "sha256": "4b2996ceca348d459d1821a5894d016de01405cf990e4c7ea4bdd3babc746d31",
+      "mode": 420,
+      "scope": "Actual successful pinned compiler-only native product/commands/logs; HUNK NOT RUN"
+    },
+    "native-build/preprocessed-fixture.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/native-final-v1/preprocessed-fixture.log",
+      "bytes": 252157,
+      "sha256": "270a74c5c4bad17d063a49b171a5fbe8e6c0ca6e8d66cb802fba469f79b0fbd9",
+      "mode": 420,
+      "scope": "Actual successful pinned compiler-only native product/commands/logs; HUNK NOT RUN"
+    },
+    "native-build/runtime-libamiga-a.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/native-final-v1/runtime-libamiga-a.log",
+      "bytes": 156,
+      "sha256": "c2c8e44936c32e01094e9de761e57c62c7bb834fbf6cabd464465bf3b17090c4",
+      "mode": 420,
+      "scope": "Actual successful pinned compiler-only native product/commands/logs; HUNK NOT RUN"
+    },
+    "native-build/runtime-libgcc-a.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/native-final-v1/runtime-libgcc-a.log",
+      "bytes": 125,
+      "sha256": "b1912e77c4c1160ce749ca74fbe6edabd5896c2291188e718a9cdfd72c84d57a",
+      "mode": 420,
+      "scope": "Actual successful pinned compiler-only native product/commands/logs; HUNK NOT RUN"
+    },
+    "native-build/runtime-libnix-a.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/native-final-v1/runtime-libnix-a.log",
+      "bytes": 121,
+      "sha256": "1ca0a83ef891770cbbe671647c7aad9f925ed0b9756c8f85aca35c84961e202a",
+      "mode": 420,
+      "scope": "Actual successful pinned compiler-only native product/commands/logs; HUNK NOT RUN"
+    },
+    "native-build/runtime-libnix20-a.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/native-final-v1/runtime-libnix20-a.log",
+      "bytes": 123,
+      "sha256": "9060e4a22ea9e716b8f9cf85b5fe5e11a9e6c88ef938b9111d189acc2df8465b",
+      "mode": 420,
+      "scope": "Actual successful pinned compiler-only native product/commands/logs; HUNK NOT RUN"
+    },
+    "native-build/runtime-libnixmain-a.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/native-final-v1/runtime-libnixmain-a.log",
+      "bytes": 125,
+      "sha256": "dd28b9a8319d35bd81f76cd9479f889e7e5628be07a45ef138f35a729c640add",
+      "mode": 420,
+      "scope": "Actual successful pinned compiler-only native product/commands/logs; HUNK NOT RUN"
+    },
+    "native-build/runtime-libstubs-a.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/native-final-v1/runtime-libstubs-a.log",
+      "bytes": 156,
+      "sha256": "8ce0c56c26f8f09a8af8b76d62c4d380cbfbe8efde13fa64884d8e9e6c93027f",
+      "mode": 420,
+      "scope": "Actual successful pinned compiler-only native product/commands/logs; HUNK NOT RUN"
+    },
+    "native-build/runtime-ncrt0-o.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/native-final-v1/runtime-ncrt0-o.log",
+      "bytes": 120,
+      "sha256": "1562950e2e8cb15a51238fddb72e6e26f0ff2d5a774543473aba0d274a19c45f",
+      "mode": 420,
+      "scope": "Actual successful pinned compiler-only native product/commands/logs; HUNK NOT RUN"
+    },
+    "native-recipes/tests/test_scheduled_lineage.py": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/source-final-native/tests/test_scheduled_lineage.py",
+      "bytes": 855,
+      "sha256": "aea9461b85f9085a1ce1ba50127d761bd69fe4550ea64d640b94dbdcde2c816d",
+      "mode": 420,
+      "scope": "Recorded native builder/recipe/declaration inputs; source closure remains original"
+    },
+    "native-recipes/tests/test_scheduled_readers.py": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/source-final-native/tests/test_scheduled_readers.py",
+      "bytes": 968,
+      "sha256": "4e1d252b571e19063355bc5c3b4bd559df53cc33cf95b702d781cfe4795c2852",
+      "mode": 420,
+      "scope": "Recorded native builder/recipe/declaration inputs; source closure remains original"
+    },
+    "native-recipes/tools/build_core_tests.py": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/source-final-native/tools/build_core_tests.py",
+      "bytes": 38970,
+      "sha256": "1948232ab42449eb518e49ee55276542b102d7461f0f58d8aa273588a20a0d55",
+      "mode": 420,
+      "scope": "Recorded native builder/recipe/declaration inputs; source closure remains original"
+    },
+    "native-recipes/tools/build_diagnostic.py": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/source-final-native/tools/build_diagnostic.py",
+      "bytes": 5879,
+      "sha256": "a5a42c8a811eb4e5ce744157afd2715de8f4c9c7d392b3b7b40f1dc6f459a805",
+      "mode": 420,
+      "scope": "Recorded native builder/recipe/declaration inputs; source closure remains original"
+    },
+    "native-recipes/tools/build_scheduled_readers_test.py": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/source-final-native/tools/build_scheduled_readers_test.py",
+      "bytes": 13602,
+      "sha256": "7516bb4214fc2292650c1b3abaf5dcd212a7652ab1fe26dd78f45b8f4a974f60",
+      "mode": 420,
+      "scope": "Recorded native builder/recipe/declaration inputs; source closure remains original"
+    },
+    "native-root/root-export-review.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/root-export-review.json",
+      "bytes": 1603,
+      "sha256": "9462b7cd2e812bd19904ed4c997e7e9bd1efd209bc1b91dbaa0384ae242421f4",
+      "mode": 420,
+      "scope": "Clean current source export/full inventory and actual compiler-only invocation"
+    },
+    "native-root/root-native-build-invocation.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/root-native-build-invocation.json",
+      "bytes": 1270,
+      "sha256": "907c3976707246bfc6bb6b98db973d51f70b2915fba6cd12672d9e9e89fcf013",
+      "mode": 420,
+      "scope": "Clean current source export/full inventory and actual compiler-only invocation"
+    },
+    "native-root/root-native-build.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/root-native-build.log",
+      "bytes": 281,
+      "sha256": "64e35dd2b3c66dfbef2ab7ae330546884d357161099530cd7b0ae299b99c120d",
+      "mode": 420,
+      "scope": "Clean current source export/full inventory and actual compiler-only invocation"
+    },
+    "native-root/source-manifest-native.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/source-manifest-native.json",
+      "bytes": 1094036,
+      "sha256": "9a8437c23abd6ab038313884f4bc34b1abb0e135eb8eca84ceb2a347d6931b44",
+      "mode": 420,
+      "scope": "Clean current source export/full inventory and actual compiler-only invocation"
+    },
+    "native-root/toolchain-pins.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/toolchain-pins.json",
+      "bytes": 2709,
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065",
+      "mode": 420,
+      "scope": "Clean current source export/full inventory and actual compiler-only invocation"
+    },
+    "packaging-history/initial-prepared-origins.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-packet-prepared-wnkunu2u/prepared-origins.json",
+      "bytes": 43955,
+      "sha256": "3d01b5776d5c405f337551981b9e71fe19e1c6ef3a0727d4ca0eec752710cf9d",
+      "mode": 420,
+      "scope": "Original packet preparation retained unchanged; readiness waiting status historical"
+    },
+    "packaging-history/package-invocation.failed-v2.log": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-packet-prepared-wnkunu2u/history/package-invocation.failed-v2.log",
+      "bytes": 989,
+      "sha256": "81b1e90bf62e68daf393dd1103f95c7bb08763eb0260ef9b22a2ac578ece1e0f",
+      "mode": 420,
+      "scope": "Historical packet-only helper/preparation/failure; no source/product/target operation and no output on failed v2"
+    },
+    "packaging-history/package_packet.executed-v2.py": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-packet-prepared-wnkunu2u/history/package_packet.executed-v2.py",
+      "bytes": 9291,
+      "sha256": "cd2161862e967a3c28731683c64ec5ad3d4cc3ba7af28dce676ac8b39ecaca45",
+      "mode": 420,
+      "scope": "Historical packet-only helper/preparation/failure; no source/product/target operation and no output on failed v2"
+    },
+    "packaging-history/package_packet.unexecuted-v1.py": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-packet-prepared-wnkunu2u/history/package_packet.unexecuted-v1.py",
+      "bytes": 9210,
+      "sha256": "ef26cc5dd05441015ebe157b3d80bff6856a4bbbb75e001290d4e80118531cf2",
+      "mode": 420,
+      "scope": "Historical packet-only helper/preparation/failure; no source/product/target operation and no output on failed v2"
+    },
+    "packaging-history/prepared-files.v1.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-packet-prepared-wnkunu2u/history/prepared-files.v1.json",
+      "bytes": 516,
+      "sha256": "1689e9f8fa7a3960030cea635f20d3e3ee6af20fbaa52c34aa62f53c2bb7812c",
+      "mode": 420,
+      "scope": "Historical packet-only helper/preparation/failure; no source/product/target operation and no output on failed v2"
+    },
+    "packaging-history/prepared-files.v2.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-packet-prepared-wnkunu2u/history/prepared-files.v2.json",
+      "bytes": 557,
+      "sha256": "73161155b7f5676a12b4eaf329845c9a9681a47c8c248b6fc9d8d5c5937733fd",
+      "mode": 420,
+      "scope": "Historical packet-only helper/preparation/failure; no source/product/target operation and no output on failed v2"
+    },
+    "packaging/package_packet.py": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-packet-prepared-wnkunu2u/package_packet.py",
+      "bytes": 9449,
+      "sha256": "88743303dab21e97121baea629f45c80e1a0e27358c21100405ca69565222b2e",
+      "mode": 420,
+      "scope": "Executed packet-only assembly helper; no producer operations"
+    },
+    "packaging/prepared-origins.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-packet-prepared-wnkunu2u/prepared-origins-v3.json",
+      "bytes": 46530,
+      "sha256": "855618d9d8571a43b3c62cd6ba920b6b9d8445f693dadf96f64809ac52e7de56",
+      "mode": 420,
+      "scope": "Historical packet preparation with WAITING review label; actual review is separate"
+    },
+    "packaging/verify_payload.py": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-packet-prepared-wnkunu2u/verify_payload.py",
+      "bytes": 3155,
+      "sha256": "44eb2d8ae1e3bd90fcf4305d07a5a74f155ca7f8b9cb08af7201807c17665026",
+      "mode": 420,
+      "scope": "Standalone read-only packet verifier source"
+    },
+    "reviews/actual-native-build.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-native-actual-independent-review-1791069638701860000.json",
+      "bytes": 14218,
+      "sha256": "91bd8a3fdf1ada9da4a5e41808f556352f495430fbb254ff3ff9abcdf9f06354",
+      "mode": 420,
+      "scope": "Actual independent saved native build review; no runtime claim"
+    },
+    "reviews/final-source-host-export.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-final-independent-review-1791069435689780000.json",
+      "bytes": 30759,
+      "sha256": "e4b4adf3c3a642b97854aae767534a6077e23d3c4ca380b9b8904933c6d455d1",
+      "mode": 420,
+      "scope": "Read-only independent original review; scope/status remain literal"
+    },
+    "reviews/initial-source.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-initial-review-1791068899799323000.json",
+      "bytes": 3791,
+      "sha256": "8f2605c4bee70e65ded81533fa6824ecb6f7f9a712385a5fa2afa2ddf55fe627",
+      "mode": 420,
+      "scope": "Read-only independent original review; scope/status remain literal"
+    },
+    "reviews/standalone-builder.json": {
+      "original_path": "/private/tmp/protracker-scheduled-readers-builder-independent-review-1791069040919240000.json",
+      "bytes": 2511,
+      "sha256": "3886dea109bc573088764a0cb53b9af2c50d28d5297e0ba71f508710e23a7e88",
+      "mode": 420,
+      "scope": "Read-only independent original review; scope/status remain literal"
+    }
+  },
+  "host": {
+    "groups": 1,
+    "RC0": 2,
+    "full_M": 2,
+    "canonical": 12,
+    "system": 99,
+    "products": 1
+  },
+  "native": {
+    "RC0": 13,
+    "TUs": 2,
+    "canonical": 12,
+    "SDK": 30,
+    "runtimes": 7
+  },
+  "native_binary": {
+    "path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/native-final-v1/PTScheduledReadersTest",
+    "bytes": 61416,
+    "sha256": "9e62dea2cc6ed4c4d544bd7bd59fec79bee90b0db88c6273642ec73f0bbe0a6c"
+  },
+  "source_manifests": {
+    "author": {
+      "path": "/private/tmp/protracker-scheduled-readers-dmuzps6v/source-manifest.json",
+      "bytes": 1093158,
+      "sha256": "ff655544f798e76485c28c795a4053049a0707ab58a6afc9ae2f3498e218ceb9"
+    },
+    "current_native": {
+      "path": "/private/tmp/protracker-scheduled-readers-current-native-kd9zrg6c/source-manifest-native.json",
+      "bytes": 1094036,
+      "sha256": "9a8437c23abd6ab038313884f4bc34b1abb0e135eb8eca84ceb2a347d6931b44"
+    }
+  },
+  "independent_actual_native_review": {
+    "path": "/private/tmp/protracker-scheduled-readers-native-actual-independent-review-1791069638701860000.json",
+    "bytes": 14218,
+    "sha256": "91bd8a3fdf1ada9da4a5e41808f556352f495430fbb254ff3ff9abcdf9f06354",
+    "mode": 420
+  },
+  "native_NOT_RUN": true,
+  "limits": [
+    "Synthetic holders/backend ownership proof, not actual sampler/master/cache pin integration",
+    "Native HUNK is compiler-only and NOT RUN",
+    "No target/device/IRQ/MMIO/DMA/audio/timing/physical/listening acceptance",
+    "Historical exploratory failing runs did not independently archive early transient headers; do not claim their complete reproducibility"
+  ],
+  "complete_source_exports_or_SDK_trees_archived": false,
+  "archive_excludes": [
+    "All complete source exports",
+    "116264960-byte Git export tar (original size/hash retained in root export record)",
+    "SDK/compiler/runtime trees",
+    "Unrelated existing evidence"
+  ],
+  "packet_reproduction": "verify_payload.py reconstructs deterministic payload in memory; --origins verifies exact retained originals"
+}

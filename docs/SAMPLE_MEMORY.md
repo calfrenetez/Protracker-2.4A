@@ -75,6 +75,29 @@ jitter tolerance is approved. This selects an architecture direction, without
 qualifying a native backend, interrupt implementation or physical output timing.
 See [the decision and retained measurements](NATIVE_TIMING_DECISION.md).
 
+## Persistent readers and recyclable commands — 4 October 2026
+
+The separate opt-in `scheduled_readers` core now bounds command holders and
+persistent reader holders independently (one through eight each). A TRIGGER
+transfers separate holders; CONTROL/STOP retains a counted reference to the exact
+positively adopted ACTIVE original reader. Exact command detachment recycles only
+its small holder. The reader's full declared resources remain held until an
+independent exact retirement proof and zero referencing commands agree. Original
+keys and timing survive command-slot reuse; replacement and invalid terminal
+classification history stay permanent. Local cancellation has explicit provenance.
+
+The synthetic ownership fixture passes 20 controls with command capacity two,
+retirement in both orders, stale/forged domain receipts, full-capacity aliases,
+reentry and original-grid refusal checks under ASan/UBSan. A pinned portability
+build passes and produces a 61,416-byte HUNK, which remains native NOT RUN.
+Existing flags7, lineage-v1 retirement, exclusive sampler owners and classic
+replay retain their prior contracts. Binding actual sampler master/cache pins to
+these separate domains, backend reference transfer, IRQ/DMA activation, native
+song playback and physical timing/audio/listening remain unfinished. This core
+adds no AmiGUS RAM capacity, transfer or all-voice-stop qualification. See
+[contract](SCHEDULED_READERS.md) and
+[evidence](../evidence/enhanced-editor/scheduled-readers/README.md).
+
 ## Scheduled output ownership foundation — 3 October 2026
 
 The new portable queue retains independently held sample owners for bounded future

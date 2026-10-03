@@ -94,10 +94,12 @@ The strict retirement rule has a finite-capacity consequence. A published
 CONTROL sharing an active reader's cache cannot be released just because its
 register command finished. Repeated controls can consume all eight retained
 event slots until that reader retires. Capacity refusal is tested and preserved;
-this is not a completed scalable song scheduler. Separating fixed command slots
-from a separately bounded persistent-reader owner domain needs a later reviewed
-reference-transfer/acknowledgement contract. It must not reinterpret flags7,
-copy exclusive prepared owners or release a cache on acceptance/issue.
+this is not a completed scalable song scheduler. The separate opt-in
+[scheduled_readers contract](SCHEDULED_READERS.md) now supplies independently
+bounded command and persistent-reader domains, with host tests and a portability
+build. Actual sampler binding and backend reference-transfer qualification remain
+unfinished. That new API preserves this lineage-v1 contract and flags7, without
+copying exclusive prepared owners or releasing a cache on acceptance/issue.
 
 The sanitizer fixture checks actual-observation versus acceptance, cancellation
 before/after activation, duplicate keys/times, same-cache replacement with complete

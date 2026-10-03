@@ -1,0 +1,89 @@
+{
+  "scope": "Read-only package integrity and copied-record consistency only; no targets/release live verification or new acceptance",
+  "package": "/private/tmp/protracker-studio-output-safety-evidence-final",
+  "files": 1883,
+  "bytes": 29547045,
+  "provenance_items": 1881,
+  "exact_copies": 1871,
+  "gzip_derivations": 7,
+  "authored_metadata": 3,
+  "sha256sum_rows": 1882,
+  "provenance_sha256": "742799510b670a0c6ef94c169bdb1a9d2c379d76f7ad543896833127aaad0c07",
+  "sha256sums_sha256": "fd98cead32924f4f87943cdf0d21d9cccecb3de9ebfe9d057a02a4014142959c",
+  "all_copies_match_origins": true,
+  "all_gzip_original_bytes_preserved": true,
+  "all_checksums_pass": true,
+  "baseline_before_rc20_and_after_rc0": true,
+  "prelaunch_original_false_empty_cases_preserved": true,
+  "qualification_top_and_nested_separate_and_equal": true,
+  "cases": [
+    {
+      "label": "studio-song",
+      "result_equals_nested": true,
+      "allocation_marker": "EXEC MEMORY PASS: 301 Fast allocations, zero owned bytes, budget refusal without Chip fallback",
+      "independent_observations": 11,
+      "original_returncodes": {
+        "studio-song_returncode": "0"
+      },
+      "copied_original_sole_pid_profile_running_dmaoff_consistent": true
+    },
+    {
+      "label": "editor-studio",
+      "result_equals_nested": true,
+      "allocation_marker": "EXEC MEMORY PASS: 300 Fast allocations, zero owned bytes, budget refusal without Chip fallback",
+      "independent_observations": 11,
+      "original_returncodes": {
+        "editor-studio_returncode": "0"
+      },
+      "copied_original_sole_pid_profile_running_dmaoff_consistent": true
+    },
+    {
+      "label": "invert-session",
+      "result_equals_nested": true,
+      "allocation_marker": "EXEC MEMORY PASS: 183 Fast allocations, zero owned bytes, budget refusal without Chip fallback",
+      "independent_observations": 11,
+      "original_returncodes": {
+        "invert-session_returncode": "0"
+      },
+      "copied_original_sole_pid_profile_running_dmaoff_consistent": true
+    },
+    {
+      "label": "invert-sampler",
+      "result_equals_nested": true,
+      "allocation_marker": "EXEC MEMORY PASS: 530 Fast allocations, zero owned bytes, budget refusal without Chip fallback",
+      "independent_observations": 11,
+      "original_returncodes": {
+        "invert-sampler_returncode": "0"
+      },
+      "copied_original_sole_pid_profile_running_dmaoff_consistent": true
+    },
+    {
+      "label": "invert-editor",
+      "result_equals_nested": true,
+      "allocation_marker": "EXEC MEMORY PASS: 278 Fast allocations, zero owned bytes, budget refusal without Chip fallback",
+      "independent_observations": 11,
+      "original_returncodes": {
+        "invert-editor_returncode": "0"
+      },
+      "copied_original_sole_pid_profile_running_dmaoff_consistent": true
+    }
+  ],
+  "file_sections": {
+    "host-prelaunch-not-run": 681,
+    "native-build": 171,
+    "native-qualification": 721,
+    "host": 251,
+    "development": 28,
+    "source": 3,
+    "regression": 16,
+    "helpers": 7,
+    "DERIVATIONS.json": 1,
+    "provenance-1790992504159407000.json": 1,
+    "package-summary.json": 1,
+    "README.md": 1,
+    "SHA256SUMS": 1
+  },
+  "supplemental_qa_schema_adjustment": "Initial extra return-code check compared original string \"0\" to integer0; fixed schema check preserves original strings. Evidence package unchanged; this was a QA-code assumption, not product/native qualification failure.",
+  "sha256sums_bytes": 292902,
+  "provenance_bytes": 1273967
+}

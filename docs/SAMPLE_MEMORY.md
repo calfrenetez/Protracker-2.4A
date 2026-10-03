@@ -31,8 +31,13 @@ from 257 to 0 when readiness pointed into that master. The same probe against th
 candidate refuses the alias and retains 257. Ten exact host ASan/UBSan groups and
 five pinned native cross-builds pass from
 the clean committed export plus only the reviewed changes. The full 7531-source
-inventory remains unchanged, including generated host C/object provenance. Native
-runtime qualification of this exact candidate is still pending. This boundary fix
+inventory remains unchanged, including generated host C/object provenance.
+Exact a3585d0 native qualification also passes for the song, editor and three
+private EFx fixtures: 301/300/183/530/278 Fast allocations end at zero owned bytes.
+Every case passes fresh DMA-off cleanup and a separate locked 10-second/11-
+observation absence/original-idle check; the window is explicitly released and
+acknowledged. The earlier host process-permission refusal remains separately
+NOT RUN. See `../evidence/enhanced-editor/studio-output-safety/`. This boundary fix
 changes no precision, effect subset, queue transport or timing policy and does
 not establish hardware audio or listening acceptance.
 

@@ -1,0 +1,29 @@
+{
+  "request": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"timedOut\":false,\"wake\":{\"reason\":\"turnCompleted\",\"turnId\":\"01a0ff70-ce8d-7473-a202-99885cbe7c56\",\"threadId\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\"},\"polls\":[{\"schemaVersion\":1,\"cursor\":\"e7a645e7-31a2-432b-918d-41790ea9e0a3:39\",\"revision\":39,\"changed\":true,\"thread\":{\"id\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\",\"status\":{\"type\":\"idle\"}},\"latestTurn\":{\"id\":\"01a0ff70-ce8d-7473-a202-99885cbe7c56\",\"status\":\"completed\",\"error\":null,\"startedAt\":1790991978,\"completedAt\":1790991995,\"durationMs\":17396},\"latestAssistantMessageId\":\"msg_052d99eb5846a575016ac05e784e7487d0ae3d350144f93e6a\",\"latestAssistantMessage\":{\"id\":\"msg_052d99eb5846a575016ac05e784e7487d0ae3d350144f93e6a\",\"turnId\":\"01a0ff70-ce8d-7473-a202-99885cbe7c56\",\"phase\":\"final_answer\",\"text\":\"Fresh peer records are unchanged, with no newer reservation or recovery hold reported. AmiConnect holds nothing. No known coordination conflict for the fresh five-fixture request. Actual target availability remains subject to the nonblocking lock and exact live guards. The earlier permission-blocked attempt remains NOT RUN; no new TAKE is recorded yet.\"},\"latestToolMarkerId\":\"exec-4488b232-f873-413d-ac51-fda56935f7bf\",\"latestToolMarker\":{\"id\":\"exec-4488b232-f873-413d-ac51-fda56935f7bf\",\"turnId\":\"01a0ff70-ce8d-7473-a202-99885cbe7c56\",\"type\":\"mcpToolCall\",\"name\":\"wait_threads\",\"status\":\"completed\"}}]}"
+      }
+    ],
+    "isError": false
+  },
+  "take": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"timedOut\":false,\"wake\":{\"reason\":\"turnCompleted\",\"turnId\":\"01a0ff71-771c-7442-821d-c9108fee37d5\",\"threadId\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\"},\"polls\":[{\"schemaVersion\":1,\"cursor\":\"e7a645e7-31a2-432b-918d-41790ea9e0a3:41\",\"revision\":41,\"changed\":true,\"thread\":{\"id\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\",\"status\":{\"type\":\"idle\"}},\"latestTurn\":{\"id\":\"01a0ff71-771c-7442-821d-c9108fee37d5\",\"status\":\"completed\",\"error\":null,\"startedAt\":1790992021,\"completedAt\":1790992027,\"durationMs\":6188},\"latestAssistantMessageId\":\"msg_052d99eb5846a575016ac05e98d7a487d09f21616c5034746e\",\"latestAssistantMessage\":{\"id\":\"msg_052d99eb5846a575016ac05e98d7a487d09f21616c5034746e\",\"turnId\":\"01a0ff71-771c-7442-821d-c9108fee37d5\",\"phase\":\"final_answer\",\"text\":\"The fresh five-fixture TAKE notice is acknowledged, conditional on successful nonblocking lock and exact live checks. AmiConnect will leave both targets untouched pending refusal, hold or verified release. The earlier permission-blocked attempt remains separately recorded as NOT RUN.\"},\"latestToolMarkerId\":null,\"latestToolMarker\":null}]}"
+      }
+    ],
+    "isError": false
+  },
+  "release": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"timedOut\":false,\"wake\":{\"reason\":\"turnCompleted\",\"turnId\":\"01a0ff77-16bc-77e3-a8d8-7018d4342ad5\",\"threadId\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\"},\"polls\":[{\"schemaVersion\":1,\"cursor\":\"e7a645e7-31a2-432b-918d-41790ea9e0a3:43\",\"revision\":43,\"changed\":true,\"thread\":{\"id\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\",\"status\":{\"type\":\"idle\"}},\"latestTurn\":{\"id\":\"01a0ff77-16bc-77e3-a8d8-7018d4342ad5\",\"status\":\"completed\",\"error\":null,\"startedAt\":1790992389,\"completedAt\":1790992399,\"durationMs\":9566},\"latestAssistantMessageId\":\"msg_052d99eb5846a575016ac0600be21c87d0b5cec9bef6d9fe77\",\"latestAssistantMessage\":{\"id\":\"msg_052d99eb5846a575016ac0600be21c87d0b5cec9bef6d9fe77\",\"turnId\":\"01a0ff77-16bc-77e3-a8d8-7018d4342ad5\",\"phase\":\"final_answer\",\"text\":\"ProTracker reports all five fixtures passed and the window is released after independent cleanup and idle checks. No recovery hold remains. The earlier permission-blocked attempt remains NOT RUN. No physical, audio or timing qualification occurred; AmiConnect holds no reservation.\"},\"latestToolMarkerId\":null,\"latestToolMarker\":null}]}"
+      }
+    ],
+    "isError": false
+  }
+}

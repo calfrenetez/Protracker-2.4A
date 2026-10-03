@@ -1,0 +1,11 @@
+{
+  "scope": "Root-reported host prelaunch permission refusal; no Guest construction/staging/launch or native run, not a product/physical failure",
+  "status": "NOT RUN",
+  "original_result": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/studio-output-safety-qualification-1790991832570530000/qualification-result.json",
+  "original_result_sha256": "74fc0bd5fd029856a3c624707259e2993cbc81c8fe6c88d95039c677d2c0f733",
+  "original_error": "[Errno 1] Operation not permitted: 'ps'",
+  "root_release_ack_revision": 35,
+  "fresh_later_execution_does_not_rewrite_original": true,
+  "host_process_permission_resolution": "Separately approved host-only psread originalsolePID19081/profilePASS, then fresh REQUEST39 TAKE41",
+  "source": "Root execution report and preserved original result; release messages retained in coordination-history.json"
+}

@@ -1,0 +1,54 @@
+{
+  "scope": "Root inspection of exact five fixture results and independent cleanup records; injectedFast/privatePCM only",
+  "qualification_result": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/studio-output-safety-qualification-1790992044834416000/qualification-result.json",
+  "qualification_result_sha256": "14f1e2eaaca153246782e8e270f45bb18fb924bac26519a6f90ab776440cf1d6",
+  "source_tree": "96bf8d21eb7ca9e879ff50fdc8f5c09dbcd57e02",
+  "passed": true,
+  "cases": [
+    {
+      "label": "studio-song",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/studio-output-safety-qualification-1790992044834416000/runner-studio-song/build/dev/render-files-1790992045826950000",
+      "Fast_allocations": 301,
+      "returncode": "0",
+      "fresh_cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0",
+      "independent_observations": 11,
+      "passed": true
+    },
+    {
+      "label": "editor-studio",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/studio-output-safety-qualification-1790992044834416000/runner-editor-studio/build/dev/render-files-1790992113680524000",
+      "Fast_allocations": 300,
+      "returncode": "0",
+      "fresh_cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0",
+      "independent_observations": 11,
+      "passed": true
+    },
+    {
+      "label": "invert-session",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/studio-output-safety-qualification-1790992044834416000/runner-invert-session/build/dev/render-files-1790992192398167000",
+      "Fast_allocations": 183,
+      "returncode": "0",
+      "fresh_cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=666\tsndbuf_status=0",
+      "independent_observations": 11,
+      "passed": true
+    },
+    {
+      "label": "invert-sampler",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/studio-output-safety-qualification-1790992044834416000/runner-invert-sampler/build/dev/render-files-1790992264943965000",
+      "Fast_allocations": 530,
+      "returncode": "0",
+      "fresh_cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=833\tsndbuf_status=0",
+      "independent_observations": 11,
+      "passed": true
+    },
+    {
+      "label": "invert-editor",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/studio-output-safety-qualification-1790992044834416000/runner-invert-editor/build/dev/render-files-1790992309846153000",
+      "Fast_allocations": 278,
+      "returncode": "0",
+      "fresh_cleanup_audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=333\tsndbuf_status=0",
+      "independent_observations": 11,
+      "passed": true
+    }
+  ]
+}

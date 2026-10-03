@@ -1,0 +1,38 @@
+{
+  "schema": "protracker-studio-output-safety-evidence-summary-v1",
+  "source_manifest": {
+    "path": "/private/tmp/protracker-studio-output-safety-root-g5p3wv2y/source-manifest.json",
+    "bytes": 1363689,
+    "sha256": "97bdeab17b21aace16c2e9eca127067207bd21a40dc218bc0bf6c1a51d57c249"
+  },
+  "base_commit": "e3cf67d30d13813b959b0e28acbc503927a578a5",
+  "base_tree": "e29b3aed4c3332d65a75227f18df45d7be0fe04a",
+  "source_files": 7531,
+  "overlays": 22,
+  "excluded_dirty_versions": 16,
+  "host_original_result": {
+    "passed": true,
+    "groups": 10,
+    "elapsed_s": 49.29325158300344
+  },
+  "native_build_original_result": {
+    "passed": true,
+    "targets": [
+      "PTExecStudioSongTest",
+      "PTExecEditorStudioTest",
+      "PTExecInvertSessionTest",
+      "PTExecSamplerInvertSongTest",
+      "PTExecEditorInvertStudioTest"
+    ],
+    "elapsed_s": 19.78877441700024
+  },
+  "regression_before_runtime_returncode": 20,
+  "regression_after_runtime_returncode": 0,
+  "host_prelaunch_history_records": [
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/studio-output-safety-qualification-1790991832570530000"
+  ],
+  "qualification_supplied": true,
+  "qualification_original_top_passed_value": true,
+  "coordination_record_supplied": true,
+  "scope": "Host sanitizer and cross-build evidence; later supplied native records retain original exact scope/status. No physical hardware, audio, timing or human listening acceptance inferred."
+}

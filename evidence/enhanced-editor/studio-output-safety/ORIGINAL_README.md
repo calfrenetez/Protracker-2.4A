@@ -1,0 +1,11 @@
+# Studio output preservation evidence
+
+This package preserves exact final host sanitizer and five Exec cross-build records for the Studio source/output alias fix. Source inventory,22 authorized overlays, compiler/runtime identities, ordered command/definition records, generated C/object inputs and before/after snapshots remain in the original manifests. Every `.json.gz` decompresses to its original bytes; `DERIVATIONS.json` records the uncompressed byte hash and size. No manifest field was removed, renamed, deduplicated or reformatted.
+
+`regression/before/` preserves the independent expected before-fix failure; `regression/after/` uses the identical probe source against the combined candidate. `development/core/` and `development/integration/` retain draft history and failures separately. These older records are not the final candidate's acceptance evidence. `source/` retains dirty-version exclusion/preservation records without copying dirty source into the candidate.
+
+`host-prelaunch-not-run/` preserves separately supplied host prelaunch failures where no guest was staged or run. A later successful qualification never rewrites those original NOT RUN records. Any root-reported release after a prelaunch failure is coordination evidence, not guest cleanup or native acceptance.
+
+When supplied, `native-qualification/qualification-result.json` is the exact original top result. Its nested runner/cleanup/identity/independent records are separate under `native-qualification/records/`. Packaging does not run targets, confirm cleanup live or invent a release ACK. Any historical-helper execution attribution or coordination statement comes only from its original records or an explicit root-reported record. If that directory is absent, no native qualification was supplied.
+
+Host/build, native fixture execution, physical hardware, device/audio, timing and human listening remain separate acceptance scopes. No physical, audio, timing or listening approval is implied. Original absolute paths are retained intentionally; provenance rows map each copied origin to its package path. `SHA256SUMS` covers every package file except itself, including the unique provenance control manifest. No product sources or tracked evidence were edited by this private packager.

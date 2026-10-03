@@ -1,0 +1,96 @@
+{
+  "scope": "Exact-byte gzip derivations, never summaries or reformatted source/build manifests",
+  "items": [
+    {
+      "path": "source/source-manifest.json.gz",
+      "derivation": "gzip level9 with mtime0; uncompressed original bytes are unchanged, including all JSON fields/order/whitespace",
+      "original": {
+        "path": "/private/tmp/protracker-studio-output-safety-root-g5p3wv2y/source-manifest.json",
+        "bytes": 1363689,
+        "sha256": "97bdeab17b21aace16c2e9eca127067207bd21a40dc218bc0bf6c1a51d57c249"
+      },
+      "compressed": {
+        "bytes": 309408,
+        "sha256": "913c384df25a49ec879e8349f7becadea798912a4d2abd83580dd9edd93273d0"
+      }
+    },
+    {
+      "path": "host/host-checks.json.gz",
+      "derivation": "gzip level9 with mtime0; uncompressed original bytes are unchanged, including all JSON fields/order/whitespace",
+      "original": {
+        "path": "/private/tmp/protracker-studio-output-safety-root-g5p3wv2y/host-final/host-checks.json",
+        "bytes": 326694,
+        "sha256": "64ecd4d353aac65a3482f9e973946f9cbd76635a13b93b59255fa2eec91b2eb5"
+      },
+      "compressed": {
+        "bytes": 43376,
+        "sha256": "58d9a3321bfc70fe875a34f0ce3a22df31cf2aea0a3ba7636ab1832423968896"
+      }
+    },
+    {
+      "path": "native-build/manifest.json.gz",
+      "derivation": "gzip level9 with mtime0; uncompressed original bytes are unchanged, including all JSON fields/order/whitespace",
+      "original": {
+        "path": "/private/tmp/protracker-studio-output-safety-root-g5p3wv2y/native-final/manifest.json",
+        "bytes": 258109,
+        "sha256": "1ef340143efd469e9a234559c2ac4d7e2a722568b311a2df63bb41a5200e61de"
+      },
+      "compressed": {
+        "bytes": 23847,
+        "sha256": "7cec461297b0aa0350821fef47c7de88dde88d4e566f89f97a5201613fe0498c"
+      }
+    },
+    {
+      "path": "development/core/source-manifest.json.gz",
+      "derivation": "gzip level9 with mtime0; uncompressed original bytes are unchanged, including all JSON fields/order/whitespace",
+      "original": {
+        "path": "/private/tmp/protracker-studio-alias-core-r44p8dj6/source-manifest.json",
+        "bytes": 1014224,
+        "sha256": "33d4d6437dc9c133d548a4e73a3eaf71cd017c5ebd8e9dfd3f4648bdf8774cde"
+      },
+      "compressed": {
+        "bytes": 283636,
+        "sha256": "4a06c230dfdd93c1e1535ea43d085d3c80b48204cf40f0c8dd3819969a5d0360"
+      }
+    },
+    {
+      "path": "development/core/source-final-manifest.json.gz",
+      "derivation": "gzip level9 with mtime0; uncompressed original bytes are unchanged, including all JSON fields/order/whitespace",
+      "original": {
+        "path": "/private/tmp/protracker-studio-alias-core-r44p8dj6/source-final-manifest.json",
+        "bytes": 1014224,
+        "sha256": "763242c89475885bd1ffde9b20107166d112a3f94b6fcfead8f861adbb32fc4d"
+      },
+      "compressed": {
+        "bytes": 283636,
+        "sha256": "6fe5c579065099b403e2cff5d2827e1821d2b5ca6bde80f2fafa88aa49398e47"
+      }
+    },
+    {
+      "path": "development/core/source-final-v2-manifest.json.gz",
+      "derivation": "gzip level9 with mtime0; uncompressed original bytes are unchanged, including all JSON fields/order/whitespace",
+      "original": {
+        "path": "/private/tmp/protracker-studio-alias-core-r44p8dj6/source-final-v2-manifest.json",
+        "bytes": 1014224,
+        "sha256": "763242c89475885bd1ffde9b20107166d112a3f94b6fcfead8f861adbb32fc4d"
+      },
+      "compressed": {
+        "bytes": 283636,
+        "sha256": "6fe5c579065099b403e2cff5d2827e1821d2b5ca6bde80f2fafa88aa49398e47"
+      }
+    },
+    {
+      "path": "development/integration/integration-manifest.json.gz",
+      "derivation": "gzip level9 with mtime0; uncompressed original bytes are unchanged, including all JSON fields/order/whitespace",
+      "original": {
+        "path": "/private/tmp/protracker-studio-alias-wrapper-13qfc79k/integration-manifest.json",
+        "bytes": 1675547,
+        "sha256": "ea61ae1668e6c3739e7bd3a0fb6d044107216a27a27214fdf0b148198986b174"
+      },
+      "compressed": {
+        "bytes": 309501,
+        "sha256": "3f132bd86bfc6186c6751a092e0a4d9a84f40f4df05a732193b74c6e79f85e50"
+      }
+    }
+  ]
+}

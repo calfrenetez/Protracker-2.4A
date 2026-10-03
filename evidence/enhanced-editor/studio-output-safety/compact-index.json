@@ -1,0 +1,299 @@
+{
+  "schema": "protracker-studio-output-safety-compact-provenance-v1",
+  "scope": "Private lossless archive/copy/derivation integrity only; no new execution/cleanup/release/audio/timing/physical/listening acceptance",
+  "full_package_directory": "/private/tmp/protracker-studio-output-safety-evidence-final",
+  "full_package_regular_members": 1883,
+  "full_package_member_bytes": 29547045,
+  "full_provenance_identity": {
+    "path": "/private/tmp/protracker-studio-output-safety-evidence-final/provenance-1790992504159407000.json",
+    "bytes": 1273967,
+    "sha256": "742799510b670a0c6ef94c169bdb1a9d2c379d76f7ad543896833127aaad0c07"
+  },
+  "full_sha256sums_identity": {
+    "path": "/private/tmp/protracker-studio-output-safety-evidence-final/SHA256SUMS",
+    "bytes": 292902,
+    "sha256": "fd98cead32924f4f87943cdf0d21d9cccecb3de9ebfe9d057a02a4014142959c"
+  },
+  "full_input_verification": {
+    "checksum_rows": 1882,
+    "provenance_items": 1881,
+    "kind_counts": {
+      "gzip_exact_byte_derivation": 7,
+      "exact_byte_copy": 1871,
+      "authored_package_metadata": 3
+    },
+    "originals_and_exact_gzip_bytes_verified": true
+  },
+  "full_inputs_before_after_identical": true,
+  "archive_verification": {
+    "regular_members": 1883,
+    "member_bytes": 29547045,
+    "all_member_bytes_hashes_modes_verified": true,
+    "safe_unique_paths_only": true,
+    "uid_gid_mtime_zero": true,
+    "no_symlinks_hardlinks_or_truncated_members": true,
+    "second_independent_archive_write_byte_identical": true
+  },
+  "items": [
+    {
+      "path": "payload.tar.gz",
+      "bytes": 9451314,
+      "sha256": "5e74fd65679145923ae321adde5d17e418eae5aa964a989e50491988240e2ebb",
+      "kind": "lossless_archive_derivation",
+      "scope": "Every full-package regular member, including all controls and historical failures",
+      "derivation": {
+        "input_directory": "/private/tmp/protracker-studio-output-safety-evidence-final",
+        "member_count": 1883,
+        "member_bytes": 29547045,
+        "format": "POSIX PAX tar + gzip level9",
+        "metadata": "sorted paths; uid/gid/mtime0; empty uname/gname/gzip filename; original file modes",
+        "verification": {
+          "regular_members": 1883,
+          "member_bytes": 29547045,
+          "all_member_bytes_hashes_modes_verified": true,
+          "safe_unique_paths_only": true,
+          "uid_gid_mtime_zero": true,
+          "no_symlinks_hardlinks_or_truncated_members": true,
+          "second_independent_archive_write_byte_identical": true
+        }
+      }
+    },
+    {
+      "path": "member-index.json.gz",
+      "bytes": 86400,
+      "sha256": "3b2c8bcc072a6d696ba301cdbf57497aa8f5cc44e0b79e27ec62af5882436df6",
+      "kind": "authored_index_gzip_derivation",
+      "scope": "Every original member path/size/hash/mode and original full control identities",
+      "derivation": {
+        "uncompressed_bytes": 457922,
+        "uncompressed_sha256": "b4d993d463d0d16af05c949439de5bfc8eac61a55ef0ea7d7e0528d82d2b2803",
+        "gzip_method": "level9, mtime0, empty filename",
+        "inventory_source": "/private/tmp/protracker-studio-output-safety-evidence-final"
+      }
+    },
+    {
+      "path": "full-provenance.json.gz",
+      "bytes": 109204,
+      "sha256": "76c5db8606c0fa13989a7e341318a8dc2f6f7fd41d0764a4a690e96ff592a146",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Every original full-package provenance field/byte retained",
+      "origin": {
+        "path": "/private/tmp/protracker-studio-output-safety-evidence-final/provenance-1790992504159407000.json",
+        "bytes": 1273967,
+        "sha256": "742799510b670a0c6ef94c169bdb1a9d2c379d76f7ad543896833127aaad0c07"
+      },
+      "derivation": {
+        "method": "gzip level9, mtime0, empty filename; original bytes/fields retained without reformatting"
+      }
+    },
+    {
+      "path": "source-manifest.json.gz",
+      "bytes": 309408,
+      "sha256": "913c384df25a49ec879e8349f7becadea798912a4d2abd83580dd9edd93273d0",
+      "kind": "exact_byte_copy",
+      "scope": "Exact existing compressed7531-input/22-overlay/16-dirty-exclusion original manifest",
+      "origin": {
+        "path": "/private/tmp/protracker-studio-output-safety-evidence-final/source/source-manifest.json.gz",
+        "bytes": 309408,
+        "sha256": "913c384df25a49ec879e8349f7becadea798912a4d2abd83580dd9edd93273d0"
+      }
+    },
+    {
+      "path": "host-checks.json.gz",
+      "bytes": 43376,
+      "sha256": "58d9a3321bfc70fe875a34f0ce3a22df31cf2aea0a3ba7636ab1832423968896",
+      "kind": "exact_byte_copy",
+      "scope": "Exact existing compressed ten-group host ASan/UBSan original report",
+      "origin": {
+        "path": "/private/tmp/protracker-studio-output-safety-evidence-final/host/host-checks.json.gz",
+        "bytes": 43376,
+        "sha256": "58d9a3321bfc70fe875a34f0ce3a22df31cf2aea0a3ba7636ab1832423968896"
+      }
+    },
+    {
+      "path": "native-build.json.gz",
+      "bytes": 23847,
+      "sha256": "7cec461297b0aa0350821fef47c7de88dde88d4e566f89f97a5201613fe0498c",
+      "kind": "exact_byte_copy",
+      "scope": "Exact existing compressed five-target pinned cross-build original report",
+      "origin": {
+        "path": "/private/tmp/protracker-studio-output-safety-evidence-final/native-build/manifest.json.gz",
+        "bytes": 23847,
+        "sha256": "7cec461297b0aa0350821fef47c7de88dde88d4e566f89f97a5201613fe0498c"
+      }
+    },
+    {
+      "path": "baseline-before.json",
+      "bytes": 2409,
+      "sha256": "f6d1eed18574abbb48a7e69e599812e97b9287ca5ac8377036e1eea9840f8281",
+      "kind": "exact_byte_copy",
+      "scope": "Exact expected before-fix regressionRC20 report",
+      "origin": {
+        "path": "/private/tmp/protracker-studio-output-safety-evidence-final/regression/before/result.json",
+        "bytes": 2409,
+        "sha256": "f6d1eed18574abbb48a7e69e599812e97b9287ca5ac8377036e1eea9840f8281"
+      }
+    },
+    {
+      "path": "baseline-after.json",
+      "bytes": 1220,
+      "sha256": "a459dc8756bedd53c86455f974934a202fc41d9fa9e1ee01b414a42d38fe7a20",
+      "kind": "exact_byte_copy",
+      "scope": "Exact identical-source after-fix regressionRC0 report",
+      "origin": {
+        "path": "/private/tmp/protracker-studio-output-safety-evidence-final/regression/after/result.json",
+        "bytes": 1220,
+        "sha256": "a459dc8756bedd53c86455f974934a202fc41d9fa9e1ee01b414a42d38fe7a20"
+      }
+    },
+    {
+      "path": "prelaunch-not-run.json",
+      "bytes": 269822,
+      "sha256": "74fc0bd5fd029856a3c624707259e2993cbc81c8fe6c88d95039c677d2c0f733",
+      "kind": "exact_byte_copy",
+      "scope": "Exact first original prelaunchfalse/emptycases record; no guest launch",
+      "origin": {
+        "path": "/private/tmp/protracker-studio-output-safety-evidence-final/host-prelaunch-not-run/01-studio-output-safety-qualification-1790991832570530000/qualification-result.json",
+        "bytes": 269822,
+        "sha256": "74fc0bd5fd029856a3c624707259e2993cbc81c8fe6c88d95039c677d2c0f733"
+      }
+    },
+    {
+      "path": "root-reported-coordination.json",
+      "bytes": 4298,
+      "sha256": "90348f43132f0edcfbdd5ac9e6d845813d370058d1c2b9088e74ce87e9b3f0c7",
+      "kind": "exact_byte_copy",
+      "scope": "Exact historical/root-reported coordination including releaseACK43; no packaging live verification",
+      "origin": {
+        "path": "/private/tmp/protracker-studio-output-safety-evidence-final/native-qualification/root-reported-coordination.json",
+        "bytes": 4298,
+        "sha256": "90348f43132f0edcfbdd5ac9e6d845813d370058d1c2b9088e74ce87e9b3f0c7"
+      }
+    },
+    {
+      "path": "native-root-review.json",
+      "bytes": 2953,
+      "sha256": "91fc4a0b617c1d79ba1c6c90c4397061d1f988cc6c947c5ddd6358f6ce24d86f",
+      "kind": "exact_byte_copy",
+      "scope": "Exact root-reported original copied qualification review",
+      "origin": {
+        "path": "/private/tmp/protracker-studio-output-safety-evidence-final/native-qualification/extra/native-root-review.json",
+        "bytes": 2953,
+        "sha256": "91fc4a0b617c1d79ba1c6c90c4397061d1f988cc6c947c5ddd6358f6ce24d86f"
+      }
+    },
+    {
+      "path": "prelaunch-root-report.json",
+      "bytes": 871,
+      "sha256": "ab67110145b70545b8e1a1cfc8cd69e5798fb76f05a1deebe42d0d98e5f081e4",
+      "kind": "exact_byte_copy",
+      "scope": "Exact root-reported first attempt HOST PRELAUNCH NOT RUN/releaseACK35",
+      "origin": {
+        "path": "/private/tmp/protracker-studio-output-safety-evidence-final/native-qualification/extra/prelaunch-root-report.json",
+        "bytes": 871,
+        "sha256": "ab67110145b70545b8e1a1cfc8cd69e5798fb76f05a1deebe42d0d98e5f081e4"
+      }
+    },
+    {
+      "path": "full-package-summary.json",
+      "bytes": 1478,
+      "sha256": "10d8942dd9053ade9aa1504a4ac156fc1c5f569d2549db474881b7837e78a7f6",
+      "kind": "exact_byte_copy",
+      "scope": "Exact original full-package authored scope summary",
+      "origin": {
+        "path": "/private/tmp/protracker-studio-output-safety-evidence-final/package-summary.json",
+        "bytes": 1478,
+        "sha256": "10d8942dd9053ade9aa1504a4ac156fc1c5f569d2549db474881b7837e78a7f6"
+      }
+    },
+    {
+      "path": "ORIGINAL_README.md",
+      "bytes": 2279,
+      "sha256": "3b29caee781cf76d3edd04be8273278695d29bbb28ca88863c3ad54e7e94cfa3",
+      "kind": "exact_byte_copy",
+      "scope": "Exact original full-package README; paths refer to payload archive members",
+      "origin": {
+        "path": "/private/tmp/protracker-studio-output-safety-evidence-final/README.md",
+        "bytes": 2279,
+        "sha256": "3b29caee781cf76d3edd04be8273278695d29bbb28ca88863c3ad54e7e94cfa3"
+      }
+    },
+    {
+      "path": "original-gzip-derivations.json",
+      "bytes": 4195,
+      "sha256": "2fb44432227e4e6d71b9652996ea50017d7fa9e1fd74128f960767744162b441",
+      "kind": "exact_byte_copy",
+      "scope": "Exact original uncompressed identities for existing source/host/build gzip controls",
+      "origin": {
+        "path": "/private/tmp/protracker-studio-output-safety-evidence-final/DERIVATIONS.json",
+        "bytes": 4195,
+        "sha256": "2fb44432227e4e6d71b9652996ea50017d7fa9e1fd74128f960767744162b441"
+      }
+    },
+    {
+      "path": "full-package-qa.json",
+      "bytes": 3529,
+      "sha256": "8b0f36a531fa5e5b5e41834c4279d69e4746ad4fa794789327171d0be4e6bea4",
+      "kind": "exact_byte_copy",
+      "scope": "Exact external read-only full-package integrity/copy consistency QA, not target acceptance",
+      "origin": {
+        "path": "/private/tmp/protracker-studio-output-safety-evidence-final-qa.json",
+        "bytes": 3529,
+        "sha256": "8b0f36a531fa5e5b5e41834c4279d69e4746ad4fa794789327171d0be4e6bea4"
+      }
+    },
+    {
+      "path": "compact-builder.py",
+      "bytes": 23390,
+      "sha256": "1860e5b8a7450f507120005e3d4d4d86313a0b3e18cb8d01ec6f0c75b0345063",
+      "kind": "exact_byte_copy",
+      "scope": "Exact executed private compact packager helper; no repository or target operations",
+      "origin": {
+        "path": "/private/tmp/compact_studio_output_safety_evidence.py",
+        "bytes": 23390,
+        "sha256": "1860e5b8a7450f507120005e3d4d4d86313a0b3e18cb8d01ec6f0c75b0345063"
+      }
+    },
+    {
+      "path": "qualification-result.json.gz",
+      "bytes": 27523,
+      "sha256": "34ceaa77aa32110e76a7755bd0cdb54cf69749ef7afd3ecc6fb0a5a142abde90",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Exact original top qualification bytes; distinct nested records remain separate in payload",
+      "origin": {
+        "path": "/private/tmp/protracker-studio-output-safety-evidence-final/native-qualification/qualification-result.json",
+        "bytes": 317475,
+        "sha256": "14f1e2eaaca153246782e8e270f45bb18fb924bac26519a6f90ab776440cf1d6"
+      },
+      "derivation": {
+        "method": "gzip level9, mtime0, empty filename; original bytes/fields retained without reformatting"
+      }
+    },
+    {
+      "path": "coordination-history.json.gz",
+      "bytes": 1972,
+      "sha256": "50ce15f14fa6774c6c3b7883de6eaaf2ab39993e2c58b3cf24a45475c139952a",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Exact original historical/root-reported coordination fields including prior releaseACK35",
+      "origin": {
+        "path": "/private/tmp/protracker-studio-output-safety-evidence-final/native-qualification/extra/coordination-history.json",
+        "bytes": 5103,
+        "sha256": "c9e9558723bccd3e97ffe4c23ca2f7d455e854e8cf81b130589aefaa4bb420e0"
+      },
+      "derivation": {
+        "method": "gzip level9, mtime0, empty filename; original bytes/fields retained without reformatting"
+      }
+    },
+    {
+      "path": "README.md",
+      "bytes": 3036,
+      "sha256": "f74a2161ba06ab67213509866b9d21598da4b8b33535720cfb50cf9d30fe9838",
+      "kind": "authored_scope_note",
+      "scope": "Readable scope and lossless archive/control navigation; historical coordination explicitly root-reported"
+    }
+  ],
+  "control_file_exclusions_from_items": [
+    "compact-index.json",
+    "SHA256SUMS"
+  ]
+}

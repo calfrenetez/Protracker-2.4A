@@ -1,0 +1,1109 @@
+{
+  "members": {
+    "build/build-plan.json": {
+      "bytes": 1168,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/build-plan.json",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/build-plan.json",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "acd83cf64538f6aa9dd47c5354331673aa89f50e3a37ee10ca5f75ac9ca94687"
+    },
+    "build/coordinator-request-clearance.json": {
+      "bytes": 3382,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/coordinator-request-clearance.json",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/coordinator-request-clearance.json",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "93b06bef10d3f72764ede0d839f6a72ed01a7a62d049e6752b298067e8e5060a"
+    },
+    "build/current-committed-and-working-inputs.json": {
+      "bytes": 5010,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/current-committed-and-working-inputs.json",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/current-committed-and-working-inputs.json",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "efc867ce7160e078743a9f8e08acdd4de274b909b145f1d692fd2bdb36476f5f"
+    },
+    "build/native-execution.json": {
+      "bytes": 920,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-execution.json",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-execution.json",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "f0448231fa20d6fcbba7018f946b76ceb50e150edcb107515e4e1fb81732697a"
+    },
+    "build/native-execution.log": {
+      "bytes": 255,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-execution.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-execution.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "b2db3d57c6a623b274dc455c59d3293ad4b7aab86c671a8ad95d3bb80d294a5d"
+    },
+    "build/native-final/PTExecSamplerPaulaTest": {
+      "bytes": 123732,
+      "mode": 493,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "b6c79b4c7c5455702f4ea6817bebd8cdf648c19d5bd77dee20df6282e1cba32d"
+    },
+    "build/native-final/PTExecSamplerPaulaTest-dependencies-00.log": {
+      "bytes": 6938,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-00.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-00.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "e6eebca7d560781454a35d33e6f790d42c515a08d03d3e751d67a9cf388e614f"
+    },
+    "build/native-final/PTExecSamplerPaulaTest-dependencies-01.log": {
+      "bytes": 3329,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-01.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-01.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "a48dba34e0041f01a5a244832c13ae6728bbba974dd87219df385d21d9f7d192"
+    },
+    "build/native-final/PTExecSamplerPaulaTest-dependencies-02.log": {
+      "bytes": 2935,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-02.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-02.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "92ec819ff7d6e393804022b7c06ea0558e530db37a234dd44bc0a333b0bbb928"
+    },
+    "build/native-final/PTExecSamplerPaulaTest-dependencies-03.log": {
+      "bytes": 2868,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-03.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-03.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "29b3f6cd229dfc310a8352b1ace422b53297267c479f637c556fc0110cfa1cb6"
+    },
+    "build/native-final/PTExecSamplerPaulaTest-dependencies-04.log": {
+      "bytes": 3486,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-04.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-04.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "91d61721891d4308221ccf687813163848b8b65b78c8225015e59653a1d79c53"
+    },
+    "build/native-final/PTExecSamplerPaulaTest-dependencies-05.log": {
+      "bytes": 2877,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-05.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-05.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "6d965099f3d42fe6e1d3f339e33832baa6cfbfba2504c2d0d0ef07c1f94db8b4"
+    },
+    "build/native-final/PTExecSamplerPaulaTest-dependencies-06.log": {
+      "bytes": 2691,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-06.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-06.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "ecfca1c53587ed34fc179bac0275d99ba44e46c144f39ca6e722c4b08bbbeb46"
+    },
+    "build/native-final/PTExecSamplerPaulaTest-dependencies-07.log": {
+      "bytes": 2674,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-07.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-07.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "6eca9be45c2f9e1b81b0d88fa1ccd7ab10c728f6d1a8b8290d29176b9f5d3271"
+    },
+    "build/native-final/PTExecSamplerPaulaTest-dependencies-08.log": {
+      "bytes": 2719,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-08.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-08.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "0a6f724c52f97951e0cc34b50a4aae9db35c2a99d21128cc6f38f72dc4ba32e5"
+    },
+    "build/native-final/PTExecSamplerPaulaTest-dependencies-09.log": {
+      "bytes": 2787,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-09.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-09.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "1f192fe62ece619be6d88a2eb02b0a026130d9d8ee2387791ab4e545a29b5a20"
+    },
+    "build/native-final/PTExecSamplerPaulaTest-dependencies-10.log": {
+      "bytes": 2653,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-10.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-10.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "6b987584a6c74fb8817a7124512d83b18df1c43a53f40741061c14a0343ad866"
+    },
+    "build/native-final/PTExecSamplerPaulaTest-dependencies-11.log": {
+      "bytes": 2700,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-11.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-11.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "b07d0f6181a81bd4892e3d3ba2d642f861ddb380cf1eac93b0fced33761264ad"
+    },
+    "build/native-final/PTExecSamplerPaulaTest-dependencies-12.log": {
+      "bytes": 2754,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-12.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-12.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "e4faeae096c9ec48ef2fc5ad7099505e81e7e2ce0fe48974860884543a80b668"
+    },
+    "build/native-final/PTExecSamplerPaulaTest-dependencies-13.log": {
+      "bytes": 2671,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-13.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-13.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "c7ba9b4659696523b158251b58782db04ab261cbaa3ba9c8a33a76f1e25d7f57"
+    },
+    "build/native-final/PTExecSamplerPaulaTest-dependencies-14.log": {
+      "bytes": 2665,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-14.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-14.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "e6d857bcb44c2f2752e7795df3426c8312bd2bd7d6ad93177da0fc47597b1cc5"
+    },
+    "build/native-final/PTExecSamplerPaulaTest-dependencies-15.log": {
+      "bytes": 1767,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-15.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-15.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "01c3547804956b0748114b63f1de3c6d9d5093feac2a7ff56dfeb2e0290c867a"
+    },
+    "build/native-final/PTExecSamplerPaulaTest-dependencies-16.log": {
+      "bytes": 2665,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-16.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-16.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "30fc4d262f9607a81b3b62ef30564262161af272e84a2320ac95cf8fd56cc5fb"
+    },
+    "build/native-final/PTExecSamplerPaulaTest-dependencies-17.log": {
+      "bytes": 2665,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-17.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-17.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "3ec39f4b71cc8765d576a56a9b4c058099052b7c3f21a3643f8dbb0f08bea835"
+    },
+    "build/native-final/PTExecSamplerPaulaTest-dependencies-18.log": {
+      "bytes": 982,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-18.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-dependencies-18.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "153faaede332c2e41619a5bd53c34e720a48f4d8135fb16442b2c5d1f1462628"
+    },
+    "build/native-final/PTExecSamplerPaulaTest-preprocessed-wrapper.log": {
+      "bytes": 295948,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-preprocessed-wrapper.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest-preprocessed-wrapper.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "d4cf221b9e66ce9c666a82b50d5349727f3953e41842114c7d8cc4f9b26e76d9"
+    },
+    "build/native-final/PTExecSamplerPaulaTest.build.log": {
+      "bytes": 0,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest.build.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/PTExecSamplerPaulaTest.build.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "build/native-final/compile-commands.json": {
+      "bytes": 2022,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/compile-commands.json",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/compile-commands.json",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "3171fe962e361aabad22b69c0fefa0125157de3690602c670a85dc160204760e"
+    },
+    "build/native-final/compiler-target-help.log": {
+      "bytes": 7189,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/compiler-target-help.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/compiler-target-help.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "f49f0114a73ba557163318b0fdad968b33b41a939e5766a83460468bda9c7a79"
+    },
+    "build/native-final/compiler-version.log": {
+      "bytes": 247,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/compiler-version.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/compiler-version.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "5946ce0c1a43a84e1c7af8cfaa306b2f4bd276dd02164560d5674bcc91250d0b"
+    },
+    "build/native-final/manifest.json": {
+      "bytes": 47757,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/manifest.json",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/manifest.json",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "eba7fb37bb4b25dac8596cea4891274194f25963b2a88f2af549a2a5f841a67a"
+    },
+    "build/native-final/runtime-libamiga-a.log": {
+      "bytes": 156,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/runtime-libamiga-a.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/runtime-libamiga-a.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "c2c8e44936c32e01094e9de761e57c62c7bb834fbf6cabd464465bf3b17090c4"
+    },
+    "build/native-final/runtime-libgcc-a.log": {
+      "bytes": 125,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/runtime-libgcc-a.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/runtime-libgcc-a.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "b1912e77c4c1160ce749ca74fbe6edabd5896c2291188e718a9cdfd72c84d57a"
+    },
+    "build/native-final/runtime-libnix-a.log": {
+      "bytes": 121,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/runtime-libnix-a.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/runtime-libnix-a.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "1ca0a83ef891770cbbe671647c7aad9f925ed0b9756c8f85aca35c84961e202a"
+    },
+    "build/native-final/runtime-libnix20-a.log": {
+      "bytes": 123,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/runtime-libnix20-a.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/runtime-libnix20-a.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "9060e4a22ea9e716b8f9cf85b5fe5e11a9e6c88ef938b9111d189acc2df8465b"
+    },
+    "build/native-final/runtime-libnixmain-a.log": {
+      "bytes": 125,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/runtime-libnixmain-a.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/runtime-libnixmain-a.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "dd28b9a8319d35bd81f76cd9479f889e7e5628be07a45ef138f35a729c640add"
+    },
+    "build/native-final/runtime-libstubs-a.log": {
+      "bytes": 156,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/runtime-libstubs-a.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/runtime-libstubs-a.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "8ce0c56c26f8f09a8af8b76d62c4d380cbfbe8efde13fa64884d8e9e6c93027f"
+    },
+    "build/native-final/runtime-ncrt0-o.log": {
+      "bytes": 120,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/runtime-ncrt0-o.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/native-final/runtime-ncrt0-o.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "1562950e2e8cb15a51238fddb72e6e26f0ff2d5a774543473aba0d274a19c45f"
+    },
+    "build/qualifier-current/committed-ddee2db-receipt.json": {
+      "bytes": 1382,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/committed-ddee2db-receipt.json",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/committed-ddee2db-receipt.json",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "146015c824c5ca16af2d0524154e00af473368096bab93aaf17572a8ec949743"
+    },
+    "build/qualifier-current/committed-ddee2db-verify-only.log": {
+      "bytes": 728,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/committed-ddee2db-verify-only.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/committed-ddee2db-verify-only.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "9d60eac2d610a03eee064c06a2bfaadc6d54341b937e020103b08f4487f6beff"
+    },
+    "build/qualifier-current/mock-execution.json": {
+      "bytes": 669,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/mock-execution.json",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/mock-execution.json",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "62ec25a61c80460465a6746a9f22a2b67b901502147ba81161f18e2f826669b0"
+    },
+    "build/qualifier-current/mock-proof.json": {
+      "bytes": 902,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/mock-proof.json",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/mock-proof.json",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "d382069840482f3db2a3c0eefb83fe8f06d4b170a9a1043bdd5ba78b5dd7848a"
+    },
+    "build/qualifier-current/prepared-files.json": {
+      "bytes": 2068,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/prepared-files.json",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/prepared-files.json",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "6dc461333f5d4e77bb572af5d0d39eff59ec038120afec0ecf91976b4c5596f1"
+    },
+    "build/qualifier-current/qualify_sampler_paula.py": {
+      "bytes": 13182,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/qualify_sampler_paula.py",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/qualify_sampler_paula.py",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "4bd514a9386d96b00d9428da668f3f2a39428e07288efddc2988f2b3f2f8a99d"
+    },
+    "build/qualifier-current/run_guarded.py": {
+      "bytes": 3673,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/run_guarded.py",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/run_guarded.py",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "d28ffaba2f2f564aaf24d9ba7e76a91575348d7b390bfe84e233c1eff6b3a71a"
+    },
+    "build/qualifier-current/test_qualifier_mocked.py": {
+      "bytes": 13857,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/test_qualifier_mocked.py",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/test_qualifier_mocked.py",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "77194a7b3df5607304a327840973de632569b91a817a05a1e4f48a9a8b70ecc0"
+    },
+    "build/qualifier-current/test_qualifier_mocked.py.log": {
+      "bytes": 2152,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/test_qualifier_mocked.py.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/test_qualifier_mocked.py.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "ffcc83889fee915c4ba301bd033663c6b31e7462e93f811de1d5611e4e2685b2"
+    },
+    "build/qualifier-current/test_watchdog_mocked.py": {
+      "bytes": 3428,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/test_watchdog_mocked.py",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/test_watchdog_mocked.py",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "83503c1ca103840937b457d83be3e505d19f95313617e3bc8833f3c8d8bdaefb"
+    },
+    "build/qualifier-current/test_watchdog_mocked.py.log": {
+      "bytes": 348,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/test_watchdog_mocked.py.log",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/test_watchdog_mocked.py.log",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "110b13d0b9df0482edd76567a23df91ac239d06eb2904f30f675c5cb0c3fea04"
+    },
+    "build/qualifier-current/watchdog-mock-proof.json": {
+      "bytes": 740,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/watchdog-mock-proof.json",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/qualifier-current/watchdog-mock-proof.json",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "86faf623041fd0d495d31064a521cd289a2b69bf487cacf36b47b1a0eac25729"
+    },
+    "build/tools-native/native_build.py": {
+      "bytes": 12192,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/tools-native/native_build.py",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/tools-native/native_build.py",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "7efb37d4f4c7384ae2afe7e24a492b927803507a3ed9c20689c0fac91b6876b7"
+    },
+    "build/tools-native/provenance_common.py": {
+      "bytes": 11210,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/tools-native/provenance_common.py",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/tools-native/provenance_common.py",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "85f0edcee5d36433b1d5c5c343f1002702890b13e1ee2c4c3723c61f1fa5ac8d"
+    },
+    "build/tools-native/toolchain-pins.json": {
+      "bytes": 2709,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/tools-native/toolchain-pins.json",
+      "path": "/private/tmp/protracker-paula-cache-playback-current-stuk75hj/tools-native/toolchain-pins.json",
+      "role": "exact original new build or qualifier preparation record",
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065"
+    },
+    "compiled-source/src/core/amigus_reservation.h": {
+      "bytes": 3404,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/amigus_reservation.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/amigus_reservation.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "ee57be55b9865fd19d14b27b22af6e2aa6b0466b7f21da5b313016efe9a0b646"
+    },
+    "compiled-source/src/core/amigus_sample_ram.h": {
+      "bytes": 2813,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/amigus_sample_ram.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/amigus_sample_ram.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "005111323eb1884112230ea415fbfb75e01d560618326148e08790d4f23fadf6"
+    },
+    "compiled-source/src/core/amigus_wavetable_cache.h": {
+      "bytes": 3792,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/amigus_wavetable_cache.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/amigus_wavetable_cache.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "8c449f009eac14807a9521d16a756345dd531e47b50312a3cabf96ee7ea2ee9c"
+    },
+    "compiled-source/src/core/channels.c": {
+      "bytes": 6996,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/channels.c",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/channels.c",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d"
+    },
+    "compiled-source/src/core/channels.h": {
+      "bytes": 1818,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/channels.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/channels.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517"
+    },
+    "compiled-source/src/core/document.c": {
+      "bytes": 9127,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/document.c",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/document.c",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a"
+    },
+    "compiled-source/src/core/document.h": {
+      "bytes": 1965,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/document.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/document.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f"
+    },
+    "compiled-source/src/core/mod_inspect.c": {
+      "bytes": 3513,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/mod_inspect.c",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/mod_inspect.c",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511"
+    },
+    "compiled-source/src/core/mod_inspect.h": {
+      "bytes": 1240,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/mod_inspect.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/mod_inspect.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f"
+    },
+    "compiled-source/src/core/mod_project.c": {
+      "bytes": 23640,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/mod_project.c",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/mod_project.c",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09"
+    },
+    "compiled-source/src/core/mod_project.h": {
+      "bytes": 5051,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/mod_project.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/mod_project.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "c28407161729fc0fea2398f79341a866f03913b092769674bd871bb23adb59ee"
+    },
+    "compiled-source/src/core/pattern.c": {
+      "bytes": 15753,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pattern.c",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pattern.c",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e"
+    },
+    "compiled-source/src/core/pattern.h": {
+      "bytes": 3642,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pattern.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pattern.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "f8c9abde09c4fe495ae77f25c070da647eab038845729edc83adec08c5678d53"
+    },
+    "compiled-source/src/core/pcm.c": {
+      "bytes": 7061,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pcm.c",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pcm.c",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266"
+    },
+    "compiled-source/src/core/pcm.h": {
+      "bytes": 2494,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pcm.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pcm.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e"
+    },
+    "compiled-source/src/core/pcm_filtered.c": {
+      "bytes": 4604,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pcm_filtered.c",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pcm_filtered.c",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9"
+    },
+    "compiled-source/src/core/pcm_internal.h": {
+      "bytes": 615,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pcm_internal.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pcm_internal.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b"
+    },
+    "compiled-source/src/core/playback_internal.h": {
+      "bytes": 1893,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/playback_internal.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/playback_internal.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "5d76f20f2c9a7eda89c3543a897f053c97f9460a847d2d70b32b8b71c14775e2"
+    },
+    "compiled-source/src/core/playback_pcm.c": {
+      "bytes": 11344,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/playback_pcm.c",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/playback_pcm.c",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "f00995c1ca81176fc244968b4276b41624767f42c2963eb90482f23953d09a1f"
+    },
+    "compiled-source/src/core/playback_pcm.h": {
+      "bytes": 6034,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/playback_pcm.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/playback_pcm.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65"
+    },
+    "compiled-source/src/core/pp20.c": {
+      "bytes": 7187,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pp20.c",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pp20.c",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465"
+    },
+    "compiled-source/src/core/pp20.h": {
+      "bytes": 966,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pp20.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/pp20.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6"
+    },
+    "compiled-source/src/core/project.c": {
+      "bytes": 39034,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/project.c",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/project.c",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "e4fde542cdfc9b9bce585ef0cda0b5b09d07482f3ec89fddb8d79137b8b0e1c1"
+    },
+    "compiled-source/src/core/project.h": {
+      "bytes": 5698,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/project.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/project.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8"
+    },
+    "compiled-source/src/core/raw.c": {
+      "bytes": 3920,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/raw.c",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/raw.c",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377"
+    },
+    "compiled-source/src/core/raw.h": {
+      "bytes": 1171,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/raw.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/raw.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "f9f47added4df41bb7b15aa3b1b7a4d8131a2c4aa19266436318483a41bc0f3b"
+    },
+    "compiled-source/src/core/sample_cache.c": {
+      "bytes": 4018,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/sample_cache.c",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/sample_cache.c",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a"
+    },
+    "compiled-source/src/core/sample_cache.h": {
+      "bytes": 1999,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/sample_cache.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/sample_cache.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6"
+    },
+    "compiled-source/src/core/sinc_kernel.h": {
+      "bytes": 28756,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/sinc_kernel.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/sinc_kernel.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "058629396a0b22daa67f75c909adf9181fc4e52bfc668890fe2abc3231c3a185"
+    },
+    "compiled-source/src/core/slices.c": {
+      "bytes": 6060,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/slices.c",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/slices.c",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "2951045844f6fdebdd80afe12fe7a5afc1f37bf837c2f49d840f14867835342f"
+    },
+    "compiled-source/src/core/slices.h": {
+      "bytes": 2003,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/slices.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/slices.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "31cd82785c2b86c41d9cde1f7a29056c9d70ec41fb7a9bfb1a5679ba762c24f7"
+    },
+    "compiled-source/src/core/svx.c": {
+      "bytes": 7817,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/svx.c",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/svx.c",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813"
+    },
+    "compiled-source/src/core/svx.h": {
+      "bytes": 1442,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/svx.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/svx.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "824541cd25b72b5820e091cfc9f4e6a5f41351fd0630dddc09aefc0405036814"
+    },
+    "compiled-source/src/core/wav.c": {
+      "bytes": 7200,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/wav.c",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/wav.c",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f"
+    },
+    "compiled-source/src/core/wav.h": {
+      "bytes": 1384,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/wav.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/core/wav.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "8dd0f4454304babb53eef5ecb97cde7bfe6569d292cc0e9a0f204c4a587f2028"
+    },
+    "compiled-source/src/editor/project_snapshot.h": {
+      "bytes": 1203,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/project_snapshot.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/project_snapshot.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "dbb1206c1e8bfd317b515086f9d064c6eacd2450228893bb394f278ed6c0b2df"
+    },
+    "compiled-source/src/editor/sampler.c": {
+      "bytes": 34124,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler.c",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler.c",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "95dbc2574822a940a609f86ed32b615b2f6aaef094e714990bb236a8a82a154e"
+    },
+    "compiled-source/src/editor/sampler.h": {
+      "bytes": 6264,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "d19465c8b3866cfb67cfaca98457c2201165675cc3a4f45804d3c00b17284433"
+    },
+    "compiled-source/src/editor/sampler_internal.h": {
+      "bytes": 3138,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler_internal.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler_internal.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "9f04d1d01a18f737bdbe29fc36cb7b91c6270abf33d900b07f13c17d62044f33"
+    },
+    "compiled-source/src/editor/sampler_paula.c": {
+      "bytes": 7401,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler_paula.c",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler_paula.c",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e"
+    },
+    "compiled-source/src/editor/sampler_paula.h": {
+      "bytes": 2718,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler_paula.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler_paula.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890"
+    },
+    "compiled-source/src/editor/sampler_paula_internal.h": {
+      "bytes": 3013,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler_paula_internal.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/sampler_paula_internal.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb"
+    },
+    "compiled-source/src/editor/slots.c": {
+      "bytes": 3233,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/slots.c",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/editor/slots.c",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "60ab6a784d4bc47285bb436b975cdd6ee0bad4743bdf9f0817837d818645f7fa"
+    },
+    "compiled-source/src/native/master_memory.h": {
+      "bytes": 1694,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/native/master_memory.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/native/master_memory.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "ac898368849ec2d1892717d425b90c398da37a8799d536366a898e2e219e184a"
+    },
+    "compiled-source/src/native/paula_memory.h": {
+      "bytes": 1036,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/native/paula_memory.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/src/native/paula_memory.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "c547e70bfb300a25b737eeb16f3ac83a65ef20b1a0c6e42d5564cd2e700f098b"
+    },
+    "compiled-source/tests/native_exec_memory.h": {
+      "bytes": 1506,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/native_exec_memory.h",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/native_exec_memory.h",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "ce0f2b696ce7767c0da8a2a44ac7730bc207f81e4f6b86bfd172353989e664b9"
+    },
+    "compiled-source/tests/native_exec_sampler_paula_test.c": {
+      "bytes": 357,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/native_exec_sampler_paula_test.c",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/native_exec_sampler_paula_test.c",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "d5628488a9a123a5ea46f2f031d45ee5c5a9986b39bc44284d7815bc6143555c"
+    },
+    "compiled-source/tests/sampler_paula_test.c": {
+      "bytes": 12633,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/sampler_paula_test.c",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/sampler_paula_test.c",
+      "role": "exact compiled canonical source/header closure",
+      "sha256": "edafbce36a0eaf4465571af0599313489806a6f314a6264f7631a49caa4d928d"
+    },
+    "controls/prepared-inputs.json": {
+      "bytes": 50905,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-paula-cache-current-native-prepared-inputs.json",
+      "path": "/private/tmp/protracker-paula-cache-current-native-prepared-inputs.json",
+      "role": "exact pinned original selection before archive execution",
+      "sha256": "00ec0edc1d88d021edb31ec71fe1d1e334d1de1fc00d108e238f095ea0dc44c4"
+    },
+    "declarations/tests/test_sampler.py": {
+      "bytes": 860,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/test_sampler.py",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/test_sampler.py",
+      "role": "canonical recipe and original host source-list declarations",
+      "sha256": "847a13bc1694ed2c8dff8638e54ff6f49660a61734f4d21f4328d719999c35da"
+    },
+    "declarations/tests/test_sampler_paula.py": {
+      "bytes": 739,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/test_sampler_paula.py",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tests/test_sampler_paula.py",
+      "role": "canonical recipe and original host source-list declarations",
+      "sha256": "931ceb7d5d2748846bc4611f6d71d5bc4c6d123ea6019d313903d7fb5e26d1bd"
+    },
+    "declarations/tools/build_core_tests.py": {
+      "bytes": 38970,
+      "mode": 292,
+      "origin": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tools/build_core_tests.py",
+      "path": "/private/tmp/protracker-playback-storage-tka8fnd9/source-final-v3/tools/build_core_tests.py",
+      "role": "canonical recipe and original host source-list declarations",
+      "sha256": "1948232ab42449eb518e49ee55276542b102d7461f0f58d8aa273588a20a0d55"
+    },
+    "host-reference/SHA256SUMS": {
+      "bytes": 326,
+      "mode": 420,
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/playback-master-storage-host/SHA256SUMS",
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/playback-master-storage-host/SHA256SUMS",
+      "role": "reference controls for separate immutable host packet; its payload is not duplicated",
+      "sha256": "0d66a7810860021cbde977706447be393e082f013ed005890c0d9f9739c92bfe"
+    },
+    "host-reference/manifest.json": {
+      "bytes": 84259,
+      "mode": 420,
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/playback-master-storage-host/manifest.json",
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/playback-master-storage-host/manifest.json",
+      "role": "reference controls for separate immutable host packet; its payload is not duplicated",
+      "sha256": "167d45c0fa22955b974531566edf306bc8ecbca35cd1b4dcc8419b17d0384674"
+    },
+    "host-reference/packet-provenance.json": {
+      "bytes": 20488,
+      "mode": 420,
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/playback-master-storage-host/packet-provenance.json",
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/playback-master-storage-host/packet-provenance.json",
+      "role": "reference controls for separate immutable host packet; its payload is not duplicated",
+      "sha256": "214f4c188c1f0b4980cdf5e48a1e2cb0572f6951dee155793b04fa74eccf0a6d"
+    },
+    "prior/coordinator-old-cache-withdrawn122.json": {
+      "bytes": 1347,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-mod-current-root-1cn1g3y0/coordinator-release122.json",
+      "path": "/private/tmp/protracker-mod-current-root-1cn1g3y0/coordinator-release122.json",
+      "role": "literal preceding withdrawal statement, no old cache native result",
+      "sha256": "874a6c6640dd7ffcb8b5d5402b88a388706506e5342823b5105259ac58c05f8f"
+    },
+    "qualification/executed-shared_infra_render_files.py": {
+      "bytes": 48976,
+      "mode": 420,
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-cache-memory-qualification-1791048742445491000/runner-sampler-paula/tools/shared_infra_render_files.py",
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-cache-memory-qualification-1791048742445491000/runner-sampler-paula/tools/shared_infra_render_files.py",
+      "role": "actual executed runner source, not unused copied tools",
+      "sha256": "df9c7f37252bb27e9315aa244854db12a3186ba987924c0d094f5142ae968978"
+    },
+    "qualification/nested/guest-status-before-launch.json": {
+      "bytes": 52,
+      "mode": 420,
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-cache-memory-qualification-1791048742445491000/runner-sampler-paula/build/dev/render-files-1791048744242842000/guest-status-before-launch.json",
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-cache-memory-qualification-1791048742445491000/runner-sampler-paula/build/dev/render-files-1791048744242842000/guest-status-before-launch.json",
+      "role": "original nested native/cleanup receipt",
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+    },
+    "qualification/nested/guest-status-before-staging.json": {
+      "bytes": 52,
+      "mode": 420,
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-cache-memory-qualification-1791048742445491000/runner-sampler-paula/build/dev/render-files-1791048744242842000/guest-status-before-staging.json",
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-cache-memory-qualification-1791048742445491000/runner-sampler-paula/build/dev/render-files-1791048744242842000/guest-status-before-staging.json",
+      "role": "original nested native/cleanup receipt",
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859"
+    },
+    "qualification/nested/independent-cleanup.json": {
+      "bytes": 4306,
+      "mode": 420,
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-cache-memory-qualification-1791048742445491000/runner-sampler-paula/build/dev/render-files-1791048744242842000/independent-cleanup.json",
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-cache-memory-qualification-1791048742445491000/runner-sampler-paula/build/dev/render-files-1791048744242842000/independent-cleanup.json",
+      "role": "original nested native/cleanup receipt",
+      "sha256": "0bdd2ed2e839008e98476b63a508659fe0fe0cb26963963a87c0f8f8a935d1ca"
+    },
+    "qualification/nested/launch.log": {
+      "bytes": 236,
+      "mode": 420,
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-cache-memory-qualification-1791048742445491000/runner-sampler-paula/build/dev/render-files-1791048744242842000/launch.log",
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-cache-memory-qualification-1791048742445491000/runner-sampler-paula/build/dev/render-files-1791048744242842000/launch.log",
+      "role": "original nested native/cleanup receipt",
+      "sha256": "2da539d575b3326341d040f2a976fb36e2f7d9aff5595c8334a5e44e1ee6f8e2"
+    },
+    "qualification/nested/result.json": {
+      "bytes": 3645,
+      "mode": 420,
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-cache-memory-qualification-1791048742445491000/runner-sampler-paula/build/dev/render-files-1791048744242842000/result.json",
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-cache-memory-qualification-1791048742445491000/runner-sampler-paula/build/dev/render-files-1791048744242842000/result.json",
+      "role": "original nested native/cleanup receipt",
+      "sha256": "3ecff06f44e0aa4d73d54c1074c9d1056bb8b16ae81589097f13777b459d1194"
+    },
+    "qualification/nested/sampler-paula.log": {
+      "bytes": 491,
+      "mode": 420,
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-cache-memory-qualification-1791048742445491000/runner-sampler-paula/build/dev/render-files-1791048744242842000/sampler-paula.log",
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-cache-memory-qualification-1791048742445491000/runner-sampler-paula/build/dev/render-files-1791048744242842000/sampler-paula.log",
+      "role": "original nested native/cleanup receipt",
+      "sha256": "ece4ac0b753483ad22b7072e3a8c9a389c47c768e9b1d6e4089fbcaf77c67eaa"
+    },
+    "qualification/sampler-paula-runner.log": {
+      "bytes": 193,
+      "mode": 420,
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-cache-memory-qualification-1791048742445491000/sampler-paula-runner.log",
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-cache-memory-qualification-1791048742445491000/sampler-paula-runner.log",
+      "role": "original executed runner output",
+      "sha256": "1701f3f9667611d12be8f4b14d80d6a3407c98b08ab43dc9096085ffccf1934b"
+    },
+    "qualification/staged-PTExecSamplerPaulaTest": {
+      "bytes": 123732,
+      "mode": 420,
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-cache-memory-qualification-1791048742445491000/runner-sampler-paula/build/dev/PTExecSamplerPaulaTest",
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-cache-memory-qualification-1791048742445491000/runner-sampler-paula/build/dev/PTExecSamplerPaulaTest",
+      "role": "exact staged candidate copy",
+      "sha256": "b6c79b4c7c5455702f4ea6817bebd8cdf648c19d5bd77dee20df6282e1cba32d"
+    },
+    "qualification/top-result.json": {
+      "bytes": 62026,
+      "mode": 420,
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-cache-memory-qualification-1791048742445491000/qualification-result.json",
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/paula-cache-memory-qualification-1791048742445491000/qualification-result.json",
+      "role": "original successful pre-release qualification ledger, unchanged",
+      "sha256": "22805c50507c8dfe5ee46a9a1716376688b806fa234389d5ecc5a8079e9f20ae"
+    },
+    "review/build-independent-review.json": {
+      "bytes": 4194,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-cache-playback-current-independent-review.json",
+      "path": "/private/tmp/protracker-cache-playback-current-independent-review.json",
+      "role": "independent historical build/preparation review, NOT RUN fields retained",
+      "sha256": "6f5bb5384f6930f7bc225aab2b3d4b31fa67a856f031d1c45752a2ef7c7c7ce6"
+    },
+    "review/native-independent-review.json": {
+      "bytes": 8716,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-cache-current-native-independent-review.json",
+      "path": "/private/tmp/protracker-cache-current-native-independent-review.json",
+      "role": "independent recorded native/cleanup/release review",
+      "sha256": "8b0ed862a24ba5607fcd6638731444a887daa1f7dbd67a1af400c5cf877f1e99"
+    },
+    "root/capture_identity_next.py": {
+      "bytes": 1293,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-cache-current-root-r7anu_dk/capture_identity_next.py",
+      "path": "/private/tmp/protracker-cache-current-root-r7anu_dk/capture_identity_next.py",
+      "role": "exact original orchestration/identity/idle/coordination record",
+      "sha256": "1be6a912b4182f5efcd97dede7e96ce3091ab993e9caccbfc7b3a2561ccd5a0e"
+    },
+    "root/coordinator-release128.json": {
+      "bytes": 1321,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-cache-current-root-r7anu_dk/coordinator-release128.json",
+      "path": "/private/tmp/protracker-cache-current-root-r7anu_dk/coordinator-release128.json",
+      "role": "exact original orchestration/identity/idle/coordination record",
+      "sha256": "af25bf85579a5efeee542eab6f57d503a70efea36814f52788e19136b2e3ddc5"
+    },
+    "root/coordinator-take127.json": {
+      "bytes": 1589,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-cache-current-root-r7anu_dk/coordinator-take127.json",
+      "path": "/private/tmp/protracker-cache-current-root-r7anu_dk/coordinator-take127.json",
+      "role": "exact original orchestration/identity/idle/coordination record",
+      "sha256": "559df5c319b4d33967b5cf400e729a21ff9a99cd374c533d77eb93907b4ca11f"
+    },
+    "root/fresh-identity-next.json": {
+      "bytes": 698,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-cache-current-root-r7anu_dk/fresh-identity-next.json",
+      "path": "/private/tmp/protracker-cache-current-root-r7anu_dk/fresh-identity-next.json",
+      "role": "exact original orchestration/identity/idle/coordination record",
+      "sha256": "d4bcbe8ba155a649399b17aa81373eeb648413837ea8a5bc41c4b15581f02031"
+    },
+    "root/native-execution-next-claim.json": {
+      "bytes": 122,
+      "mode": 384,
+      "origin": "/private/tmp/protracker-cache-current-root-r7anu_dk/native-execution-next-claim.json",
+      "path": "/private/tmp/protracker-cache-current-root-r7anu_dk/native-execution-next-claim.json",
+      "role": "exact original orchestration/identity/idle/coordination record",
+      "sha256": "48b5b700983bf1cf2fdeb07255b1f88efe0c3e4f2e70a302f7411380fb57d7c5"
+    },
+    "root/native-execution-next.json": {
+      "bytes": 1359,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-cache-current-root-r7anu_dk/native-execution-next.json",
+      "path": "/private/tmp/protracker-cache-current-root-r7anu_dk/native-execution-next.json",
+      "role": "exact original orchestration/identity/idle/coordination record",
+      "sha256": "3e689f4e2a45a14b407ba9bacfa9f0c56a3cdf19a1f0969dc98e50c38487b1a0"
+    },
+    "root/native-execution-next.log": {
+      "bytes": 479,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-cache-current-root-r7anu_dk/native-execution-next.log",
+      "path": "/private/tmp/protracker-cache-current-root-r7anu_dk/native-execution-next.log",
+      "role": "exact original orchestration/identity/idle/coordination record",
+      "sha256": "4fd7ccc350646f09f31fb7c0af2521f1574cdadf8abb5c37cbe42f40507d05dd"
+    },
+    "root/plan.json": {
+      "bytes": 3123,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-cache-current-root-r7anu_dk/plan.json",
+      "path": "/private/tmp/protracker-cache-current-root-r7anu_dk/plan.json",
+      "role": "exact original orchestration/identity/idle/coordination record",
+      "sha256": "7d5a7d7d5f39a7301f381b48349260ddbc865ad8b74374e6e2a983c7ebac7d03"
+    },
+    "root/run_native_next_once.py": {
+      "bytes": 2226,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-cache-current-root-r7anu_dk/run_native_next_once.py",
+      "path": "/private/tmp/protracker-cache-current-root-r7anu_dk/run_native_next_once.py",
+      "role": "exact original orchestration/identity/idle/coordination record",
+      "sha256": "0183a09ea7bd308f45c66e8fa492ebd309b437d2bb0fc275978ad2cebdae9468"
+    },
+    "root/run_verify_return_once.py": {
+      "bytes": 763,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-cache-current-root-r7anu_dk/run_verify_return_once.py",
+      "path": "/private/tmp/protracker-cache-current-root-r7anu_dk/run_verify_return_once.py",
+      "role": "exact original orchestration/identity/idle/coordination record",
+      "sha256": "8f9e451d5a5f6574753d05bf74ad1c23d03042b0c47605daa62e85fd63563494"
+    },
+    "root/separate-idle-claim.json": {
+      "bytes": 99,
+      "mode": 384,
+      "origin": "/private/tmp/protracker-cache-current-root-r7anu_dk/separate-idle-claim.json",
+      "path": "/private/tmp/protracker-cache-current-root-r7anu_dk/separate-idle-claim.json",
+      "role": "exact original orchestration/identity/idle/coordination record",
+      "sha256": "f1be972d7a01e3d78c3234cd98ecf128f937dce477a9d51589bd75e2826187ef"
+    },
+    "root/separate-idle-execution.json": {
+      "bytes": 174,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-cache-current-root-r7anu_dk/separate-idle-execution.json",
+      "path": "/private/tmp/protracker-cache-current-root-r7anu_dk/separate-idle-execution.json",
+      "role": "exact original orchestration/identity/idle/coordination record",
+      "sha256": "1ab6c2feb376f617588f6a976d064b67a8addd5933dfcf09af70c77e5a20733e"
+    },
+    "root/separate-idle-execution.log": {
+      "bytes": 69,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-cache-current-root-r7anu_dk/separate-idle-execution.log",
+      "path": "/private/tmp/protracker-cache-current-root-r7anu_dk/separate-idle-execution.log",
+      "role": "exact original orchestration/identity/idle/coordination record",
+      "sha256": "3ad3000059a28e855a3b008eb2831b394ca9aad93abec4c40720e39d222e2233"
+    },
+    "root/separate-idle-result.json": {
+      "bytes": 5221,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-cache-current-root-r7anu_dk/separate-idle-result.json",
+      "path": "/private/tmp/protracker-cache-current-root-r7anu_dk/separate-idle-result.json",
+      "role": "exact original orchestration/identity/idle/coordination record",
+      "sha256": "0c00ea7ae01a1e9bea2042b633d6a420d0566c788999958035694539edfd2de6"
+    },
+    "root/take-gate.json": {
+      "bytes": 430,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-cache-current-root-r7anu_dk/take-gate.json",
+      "path": "/private/tmp/protracker-cache-current-root-r7anu_dk/take-gate.json",
+      "role": "exact original orchestration/identity/idle/coordination record",
+      "sha256": "1e5e4b2abfc7b425bc15ac401d5f5ef96fa7cbef1b4a4834c817fdf828d71f2d"
+    },
+    "root/verify_native_return.py": {
+      "bytes": 3166,
+      "mode": 420,
+      "origin": "/private/tmp/protracker-cache-current-root-r7anu_dk/verify_native_return.py",
+      "path": "/private/tmp/protracker-cache-current-root-r7anu_dk/verify_native_return.py",
+      "role": "exact original orchestration/identity/idle/coordination record",
+      "sha256": "ea32b6776d9ff69e498525cac2f0cc83faf8381045dee97b03e3e873dd29158e"
+    },
+    "tools/package_paula_cache_playback_native.py": {
+      "bytes": 21032,
+      "mode": 420,
+      "origin": "/private/tmp/package_paula_cache_playback_native.py",
+      "path": "/private/tmp/package_paula_cache_playback_native.py",
+      "role": "exact executed archival helper",
+      "sha256": "1a1bf993ed8ca3f598a5abbca07ec2207aa7aa813116c76c41eedca6535eebc3"
+    }
+  },
+  "scope": "Exact original regular member bytes/modes; normalized archive timestamps/ownership"
+}

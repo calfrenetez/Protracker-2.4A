@@ -24,9 +24,21 @@ The identical sanitizer probe changes from three baseline master corruptions to
 ALIAS/INVALID refusals with unchanged masters, no upload callback and zero owned
 resources. Five sanitizer groups pass: playback packing/upload, sampler Paula,
 sampler wavetable and AmiGUS wavetable cache. These are host software checks;
-the earlier Paula cache native candidate is withdrawn and requires a rebuild.
-No physical, device-transfer, voice-stop, audio or timing acceptance is inferred.
+the earlier Paula cache native candidate is withdrawn. The revised 123,732-byte
+Exec sampler/cache fixture separately passes shared 030 once: bounded conversion,
+unpublished leases, exact master pins, selected routed copies, revision/undo/route
+invalidation, eviction and retained active leases. Forty-eight verified Fast
+allocations end at zero owned bytes; active Chip-only memory-placement and cache
+lifetime assertions pass. No numerical Chip allocation count is emitted.
+
+Exact owned cleanup, eleven persistent absence observations and a separate locked
+eleven-observation original idle return pass. Explicit release is acknowledged;
+native/process/overall limits remain 90/140/250 seconds. This adds emulator memory
+and software cache-ownership acceptance. Physical qualification remains pending.
+No device-transfer, voice-stop, audio or timing acceptance is inferred.
 See [host records](../evidence/enhanced-editor/playback-master-storage-host/README.md).
+The separate [native records](../evidence/enhanced-editor/paula-cache-playback-current-native/README.md)
+preserve the exact candidate, source/toolchain closure and cleanup/release evidence.
 
 ## Slice output master protection — 3 October 2026
 

@@ -1,0 +1,970 @@
+{
+  "scope": "Lossless host-only scheduled-output evidence; no native/device/interrupt/song integration or hardware timing qualification",
+  "base_commit": "1ab5ed42d85c8b33e656f8673484fb85309f3205",
+  "base_tree": "1f26c7e4aa5aeba8007d7b2c7302c45cf948388e",
+  "baseline_files": 7936,
+  "final_files": 7941,
+  "owned_new_paths": [
+    "src/core/scheduled_output.c",
+    "src/core/scheduled_output.h",
+    "tests/scheduled_output_test.c",
+    "tests/test_scheduled_output.py",
+    "docs/SCHEDULED_OUTPUT.md"
+  ],
+  "member_count": 119,
+  "original_bytes": 6415465,
+  "members": [
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-development-v1/c001-dependencies-00.txt",
+      "bytes": 8793,
+      "sha256": "a96033ca8b2c36c67b70c0bf1d649f0462b40175d70d127011b2fafebdd7c5f3",
+      "mode": 420,
+      "member": "host/development-v1/c001-dependencies-00.txt",
+      "role": "Exact development-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-development-v1/c001-dependencies-01.txt",
+      "bytes": 4494,
+      "sha256": "ff680f9a353b1a16f12bd1fd8a5c0eeaa9482dd748b83e8d2a0b8d375af35724",
+      "mode": 420,
+      "member": "host/development-v1/c001-dependencies-01.txt",
+      "role": "Exact development-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-development-v1/c001-dependencies-02.txt",
+      "bytes": 4335,
+      "sha256": "42c7499b25b2aea510723679cd8c3b05f6579288e42e053ab8a31328255e114d",
+      "mode": 420,
+      "member": "host/development-v1/c001-dependencies-02.txt",
+      "role": "Exact development-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-development-v1/c001-dependencies-03.txt",
+      "bytes": 4819,
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73",
+      "mode": 420,
+      "member": "host/development-v1/c001-dependencies-03.txt",
+      "role": "Exact development-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-development-v1/c001-product.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "member": "host/development-v1/c001-product.log",
+      "role": "Exact development-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-development-v1/c002-product.log",
+      "bytes": 176,
+      "sha256": "8d41e1624fc2ed2e5f8b7c7f66c1be1db48483ce8fd65930d55e1c8cfcca7f3f",
+      "mode": 420,
+      "member": "host/development-v1/c002-product.log",
+      "role": "Exact development-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-development-v1/c003-dependencies-00.txt",
+      "bytes": 8522,
+      "sha256": "994de30674cfe84c516614323f20f267658162999d7eed14aded68750b2e9783",
+      "mode": 420,
+      "member": "host/development-v1/c003-dependencies-00.txt",
+      "role": "Exact development-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-development-v1/c003-dependencies-01.txt",
+      "bytes": 4819,
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73",
+      "mode": 420,
+      "member": "host/development-v1/c003-dependencies-01.txt",
+      "role": "Exact development-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-development-v1/c003-product.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "member": "host/development-v1/c003-product.log",
+      "role": "Exact development-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-development-v1/c004-product.log",
+      "bytes": 136,
+      "sha256": "f8f1fbbaa6d689651382e950668b2fed9e5489b91239bc8316fab8860d46faa3",
+      "mode": 420,
+      "member": "host/development-v1/c004-product.log",
+      "role": "Exact development-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-development-v1/host-checks.json",
+      "bytes": 71896,
+      "sha256": "357d04dd35b497293aac62f3783b70cdb49bceef80ad5e3377282acdb3e354e6",
+      "mode": 420,
+      "member": "host/development-v1/host-checks.json",
+      "role": "Exact development-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-development-v1/host-checks.log",
+      "bytes": 758,
+      "sha256": "153e83fdcc05f31801a996ac09864e74561b20360054679c982e74b986a0c187",
+      "mode": 420,
+      "member": "host/development-v1/host-checks.log",
+      "role": "Exact development-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-development-v1/products/c001-executable-dce793a36008aec7-test",
+      "bytes": 202920,
+      "sha256": "dce793a36008aec774da29c5a3060c0a7063d7bc675663143cb4bb254e5d349c",
+      "mode": 420,
+      "member": "host/development-v1/products/c001-executable-dce793a36008aec7-test",
+      "role": "Exact development-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-development-v1/products/c003-executable-3c0f9cbed60d8bf5-sample-cache-test",
+      "bytes": 90384,
+      "sha256": "3c0f9cbed60d8bf57d281e2cb2945091bef5758edcbc060f509427a48fac68e3",
+      "mode": 420,
+      "member": "host/development-v1/products/c003-executable-3c0f9cbed60d8bf5-sample-cache-test",
+      "role": "Exact development-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final/c001-dependencies-00.txt",
+      "bytes": 8793,
+      "sha256": "a96033ca8b2c36c67b70c0bf1d649f0462b40175d70d127011b2fafebdd7c5f3",
+      "mode": 420,
+      "member": "host/final-v1/c001-dependencies-00.txt",
+      "role": "Exact final-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final/c001-dependencies-01.txt",
+      "bytes": 4494,
+      "sha256": "ff680f9a353b1a16f12bd1fd8a5c0eeaa9482dd748b83e8d2a0b8d375af35724",
+      "mode": 420,
+      "member": "host/final-v1/c001-dependencies-01.txt",
+      "role": "Exact final-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final/c001-dependencies-02.txt",
+      "bytes": 4335,
+      "sha256": "42c7499b25b2aea510723679cd8c3b05f6579288e42e053ab8a31328255e114d",
+      "mode": 420,
+      "member": "host/final-v1/c001-dependencies-02.txt",
+      "role": "Exact final-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final/c001-dependencies-03.txt",
+      "bytes": 4819,
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73",
+      "mode": 420,
+      "member": "host/final-v1/c001-dependencies-03.txt",
+      "role": "Exact final-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final/c001-product.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "member": "host/final-v1/c001-product.log",
+      "role": "Exact final-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final/c002-product.log",
+      "bytes": 176,
+      "sha256": "8d41e1624fc2ed2e5f8b7c7f66c1be1db48483ce8fd65930d55e1c8cfcca7f3f",
+      "mode": 420,
+      "member": "host/final-v1/c002-product.log",
+      "role": "Exact final-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final/c003-dependencies-00.txt",
+      "bytes": 8522,
+      "sha256": "994de30674cfe84c516614323f20f267658162999d7eed14aded68750b2e9783",
+      "mode": 420,
+      "member": "host/final-v1/c003-dependencies-00.txt",
+      "role": "Exact final-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final/c003-dependencies-01.txt",
+      "bytes": 4819,
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73",
+      "mode": 420,
+      "member": "host/final-v1/c003-dependencies-01.txt",
+      "role": "Exact final-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final/c003-product.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "member": "host/final-v1/c003-product.log",
+      "role": "Exact final-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final/c004-product.log",
+      "bytes": 136,
+      "sha256": "f8f1fbbaa6d689651382e950668b2fed9e5489b91239bc8316fab8860d46faa3",
+      "mode": 420,
+      "member": "host/final-v1/c004-product.log",
+      "role": "Exact final-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final/host-checks.json",
+      "bytes": 71608,
+      "sha256": "d98b2d4770c8f7536846f34a2f312d5eebce32d28330b97a950bf06fa6bfe6bf",
+      "mode": 420,
+      "member": "host/final-v1/host-checks.json",
+      "role": "Exact final-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final/host-checks.log",
+      "bytes": 758,
+      "sha256": "0029b48a53da08a57e3c03a8ee1f3cc91a96961fcd6930d8cac278caefe53396",
+      "mode": 420,
+      "member": "host/final-v1/host-checks.log",
+      "role": "Exact final-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final/products/c001-executable-ad4bda80d61be432-test",
+      "bytes": 223672,
+      "sha256": "ad4bda80d61be4324de994149d06cd9a1cb3282482db23f9afb803c02fbcf5af",
+      "mode": 420,
+      "member": "host/final-v1/products/c001-executable-ad4bda80d61be432-test",
+      "role": "Exact final-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final/products/c003-executable-3c0f9cbed60d8bf5-sample-cache-test",
+      "bytes": 90384,
+      "sha256": "3c0f9cbed60d8bf57d281e2cb2945091bef5758edcbc060f509427a48fac68e3",
+      "mode": 420,
+      "member": "host/final-v1/products/c003-executable-3c0f9cbed60d8bf5-sample-cache-test",
+      "role": "Exact final-v1 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final-v2/c001-dependencies-00.txt",
+      "bytes": 8793,
+      "sha256": "a96033ca8b2c36c67b70c0bf1d649f0462b40175d70d127011b2fafebdd7c5f3",
+      "mode": 420,
+      "member": "host/final-v2/c001-dependencies-00.txt",
+      "role": "Exact final-v2 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final-v2/c001-dependencies-01.txt",
+      "bytes": 4494,
+      "sha256": "ff680f9a353b1a16f12bd1fd8a5c0eeaa9482dd748b83e8d2a0b8d375af35724",
+      "mode": 420,
+      "member": "host/final-v2/c001-dependencies-01.txt",
+      "role": "Exact final-v2 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final-v2/c001-dependencies-02.txt",
+      "bytes": 4335,
+      "sha256": "42c7499b25b2aea510723679cd8c3b05f6579288e42e053ab8a31328255e114d",
+      "mode": 420,
+      "member": "host/final-v2/c001-dependencies-02.txt",
+      "role": "Exact final-v2 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final-v2/c001-dependencies-03.txt",
+      "bytes": 4819,
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73",
+      "mode": 420,
+      "member": "host/final-v2/c001-dependencies-03.txt",
+      "role": "Exact final-v2 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final-v2/c001-product.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "member": "host/final-v2/c001-product.log",
+      "role": "Exact final-v2 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final-v2/c002-product.log",
+      "bytes": 176,
+      "sha256": "8d41e1624fc2ed2e5f8b7c7f66c1be1db48483ce8fd65930d55e1c8cfcca7f3f",
+      "mode": 420,
+      "member": "host/final-v2/c002-product.log",
+      "role": "Exact final-v2 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final-v2/c003-dependencies-00.txt",
+      "bytes": 8522,
+      "sha256": "994de30674cfe84c516614323f20f267658162999d7eed14aded68750b2e9783",
+      "mode": 420,
+      "member": "host/final-v2/c003-dependencies-00.txt",
+      "role": "Exact final-v2 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final-v2/c003-dependencies-01.txt",
+      "bytes": 4819,
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73",
+      "mode": 420,
+      "member": "host/final-v2/c003-dependencies-01.txt",
+      "role": "Exact final-v2 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final-v2/c003-product.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "member": "host/final-v2/c003-product.log",
+      "role": "Exact final-v2 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final-v2/c004-product.log",
+      "bytes": 136,
+      "sha256": "f8f1fbbaa6d689651382e950668b2fed9e5489b91239bc8316fab8860d46faa3",
+      "mode": 420,
+      "member": "host/final-v2/c004-product.log",
+      "role": "Exact final-v2 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final-v2/host-checks.json",
+      "bytes": 71702,
+      "sha256": "2de63fd48beffbe90f9b653e6b1d02834b36abaaf0a9a3dc7e4c173d2931b146",
+      "mode": 420,
+      "member": "host/final-v2/host-checks.json",
+      "role": "Exact final-v2 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final-v2/host-checks.log",
+      "bytes": 758,
+      "sha256": "6d91e799ac03c0e8038c3ace6d5605890e5646f6f460a7fdfca20da62828cfc0",
+      "mode": 420,
+      "member": "host/final-v2/host-checks.log",
+      "role": "Exact final-v2 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final-v2/products/c001-executable-c3b541092f340931-test",
+      "bytes": 223992,
+      "sha256": "c3b541092f340931dd259e60d303da9fd27b0f07e2cfd8c9b4642a7c56f3bdaa",
+      "mode": 420,
+      "member": "host/final-v2/products/c001-executable-c3b541092f340931-test",
+      "role": "Exact final-v2 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/host-final-v2/products/c003-executable-3c0f9cbed60d8bf5-sample-cache-test",
+      "bytes": 90384,
+      "sha256": "3c0f9cbed60d8bf57d281e2cb2945091bef5758edcbc060f509427a48fac68e3",
+      "mode": 420,
+      "member": "host/final-v2/products/c003-executable-3c0f9cbed60d8bf5-sample-cache-test",
+      "role": "Exact final-v2 recorded host commands/full-M/logs and archived products; historical group is not final-v2 proof"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/audit_final.py",
+      "bytes": 4949,
+      "sha256": "53b162acd4e037239713ad894fa7a384bee92b9aa7f34094d6e8865f1438e0fd",
+      "mode": 420,
+      "member": "records/audit_final.py",
+      "role": "Exact original source inventory, patch, handoff or host archival/audit helper; earlier finals remain separate"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/baseline-manifest.json",
+      "bytes": 1547144,
+      "sha256": "c01100ea16331ec8f5066e07dc7b14227ec7e29b880c776066139adfd2c7bfed",
+      "mode": 420,
+      "member": "records/baseline-manifest.json",
+      "role": "Exact original source inventory, patch, handoff or host archival/audit helper; earlier finals remain separate"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/final-v2.patch",
+      "bytes": 39782,
+      "sha256": "126a7f82600cb16fa939e518ab13b144fb9f6053c925463907cbca9b0e900573",
+      "mode": 420,
+      "member": "records/final-v2.patch",
+      "role": "Exact original source inventory, patch, handoff or host archival/audit helper; earlier finals remain separate"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/final.patch",
+      "bytes": 39201,
+      "sha256": "1e6222a84282b45178feab531a8cee734bc8e9b81dd4e859d942f876f4a05636",
+      "mode": 420,
+      "member": "records/final.patch",
+      "role": "Exact original source inventory, patch, handoff or host archival/audit helper; earlier finals remain separate"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/handoff-v2.json",
+      "bytes": 4875,
+      "sha256": "5467469890d005b350951bca710aeb73ab0dd2f3cbf310de490f0a562f1e7128",
+      "mode": 420,
+      "member": "records/handoff-v2.json",
+      "role": "Exact original source inventory, patch, handoff or host archival/audit helper; earlier finals remain separate"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/own-final-audit-v2.json",
+      "bytes": 3992,
+      "sha256": "ea8b421987bf6f792dc9c5c36f7f7620b2516fdd947584f79d892df9bb9bf6bf",
+      "mode": 420,
+      "member": "records/own-final-audit-v2.json",
+      "role": "Exact original source inventory, patch, handoff or host archival/audit helper; earlier finals remain separate"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/package_host_evidence.py",
+      "bytes": 10411,
+      "sha256": "4c05ba712e94c50a4139c55fb9d71f61075b57aa46d435d0774acfcf3a6e5d5d",
+      "mode": 420,
+      "member": "records/package_host_evidence.py",
+      "role": "Exact original source inventory, patch, handoff or host archival/audit helper; earlier finals remain separate"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-development-v1-manifest.json",
+      "bytes": 1083514,
+      "sha256": "b9c42be005bcbf4baeb000be472f4e19576e12d6351076b44606f10a98e28a6e",
+      "mode": 420,
+      "member": "records/source-development-v1-manifest.json",
+      "role": "Exact original source inventory, patch, handoff or host archival/audit helper; earlier finals remain separate"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-manifest-v2.json",
+      "bytes": 1084893,
+      "sha256": "1f8884f010132f799422c6eb988491895fbd1181c3c8359fbb360f83d60100ab",
+      "mode": 420,
+      "member": "records/source-manifest-v2.json",
+      "role": "Exact original source inventory, patch, handoff or host archival/audit helper; earlier finals remain separate"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-manifest.json",
+      "bytes": 1084751,
+      "sha256": "af3e552cb47c46ae590a10746a33f1407da4a97751995a6a1cd1797ac8b0bdf2",
+      "mode": 420,
+      "member": "records/source-manifest.json",
+      "role": "Exact original source inventory, patch, handoff or host archival/audit helper; earlier finals remain separate"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-independent-review.json",
+      "bytes": 6154,
+      "sha256": "2271e5e10ab0b26f968e90a597121e3e79e5f65d3d0ad36c9208be1ce49e12ac",
+      "mode": 420,
+      "member": "reviews/independent-final-review.json",
+      "role": "Independent read-only final source and proof review; exact copied original"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/baseline/src/core/channels.h",
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": 420,
+      "member": "sources/baseline/src/core/channels.h",
+      "role": "Exact committed baseline inherited compile/declaration input"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/baseline/src/core/document.h",
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": 420,
+      "member": "sources/baseline/src/core/document.h",
+      "role": "Exact committed baseline inherited compile/declaration input"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/baseline/src/core/elapsed_clock.c",
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "mode": 420,
+      "member": "sources/baseline/src/core/elapsed_clock.c",
+      "role": "Exact committed baseline inherited compile/declaration input"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/baseline/src/core/elapsed_clock.h",
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "mode": 420,
+      "member": "sources/baseline/src/core/elapsed_clock.h",
+      "role": "Exact committed baseline inherited compile/declaration input"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/baseline/src/core/mod_inspect.h",
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": 420,
+      "member": "sources/baseline/src/core/mod_inspect.h",
+      "role": "Exact committed baseline inherited compile/declaration input"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/baseline/src/core/pcm.h",
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": 420,
+      "member": "sources/baseline/src/core/pcm.h",
+      "role": "Exact committed baseline inherited compile/declaration input"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/baseline/src/core/pp20.h",
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": 420,
+      "member": "sources/baseline/src/core/pp20.h",
+      "role": "Exact committed baseline inherited compile/declaration input"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/baseline/src/core/project.h",
+      "bytes": 5698,
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8",
+      "mode": 420,
+      "member": "sources/baseline/src/core/project.h",
+      "role": "Exact committed baseline inherited compile/declaration input"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/baseline/src/core/sample_cache.c",
+      "bytes": 4018,
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+      "mode": 420,
+      "member": "sources/baseline/src/core/sample_cache.c",
+      "role": "Exact committed baseline inherited compile/declaration input"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/baseline/src/core/sample_cache.h",
+      "bytes": 1999,
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6",
+      "mode": 420,
+      "member": "sources/baseline/src/core/sample_cache.h",
+      "role": "Exact committed baseline inherited compile/declaration input"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/baseline/tests/sample_cache_test.c",
+      "bytes": 3750,
+      "sha256": "779ce166c450b62fd2d447edf24a127b234701ffb910fd24ad0abdf2bd3786b9",
+      "mode": 420,
+      "member": "sources/baseline/tests/sample_cache_test.c",
+      "role": "Exact committed baseline inherited compile/declaration input"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/baseline/tests/test_sample_cache.py",
+      "bytes": 674,
+      "sha256": "53ba0e7c88fc9bfb9db88e34ef6d84fb6c866e1b6ecf13f893d112518a65ab1a",
+      "mode": 420,
+      "member": "sources/baseline/tests/test_sample_cache.py",
+      "role": "Exact committed baseline inherited compile/declaration input"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-development-v1/docs/SCHEDULED_OUTPUT.md",
+      "bytes": 4410,
+      "sha256": "d95bfe7223b84ef8a2998468aa25383e921112a6de97e057ed538f291241e1f5",
+      "mode": 420,
+      "member": "sources/development-v1/docs/SCHEDULED_OUTPUT.md",
+      "role": "Exact development-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-development-v1/src/core/channels.h",
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": 420,
+      "member": "sources/development-v1/src/core/channels.h",
+      "role": "Exact development-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-development-v1/src/core/document.h",
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": 420,
+      "member": "sources/development-v1/src/core/document.h",
+      "role": "Exact development-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-development-v1/src/core/elapsed_clock.c",
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "mode": 420,
+      "member": "sources/development-v1/src/core/elapsed_clock.c",
+      "role": "Exact development-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-development-v1/src/core/elapsed_clock.h",
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "mode": 420,
+      "member": "sources/development-v1/src/core/elapsed_clock.h",
+      "role": "Exact development-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-development-v1/src/core/mod_inspect.h",
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": 420,
+      "member": "sources/development-v1/src/core/mod_inspect.h",
+      "role": "Exact development-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-development-v1/src/core/pcm.h",
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": 420,
+      "member": "sources/development-v1/src/core/pcm.h",
+      "role": "Exact development-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-development-v1/src/core/pp20.h",
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": 420,
+      "member": "sources/development-v1/src/core/pp20.h",
+      "role": "Exact development-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-development-v1/src/core/project.h",
+      "bytes": 5698,
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8",
+      "mode": 420,
+      "member": "sources/development-v1/src/core/project.h",
+      "role": "Exact development-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-development-v1/src/core/sample_cache.c",
+      "bytes": 4018,
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+      "mode": 420,
+      "member": "sources/development-v1/src/core/sample_cache.c",
+      "role": "Exact development-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-development-v1/src/core/sample_cache.h",
+      "bytes": 1999,
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6",
+      "mode": 420,
+      "member": "sources/development-v1/src/core/sample_cache.h",
+      "role": "Exact development-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-development-v1/src/core/scheduled_output.c",
+      "bytes": 8919,
+      "sha256": "1e1ac9746ff957bfb2dc2313c8eb02b6af158400893157aeee221e6b772d0f9a",
+      "mode": 420,
+      "member": "sources/development-v1/src/core/scheduled_output.c",
+      "role": "Exact development-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-development-v1/src/core/scheduled_output.h",
+      "bytes": 6261,
+      "sha256": "70f4c7632d3b0975abc0d10fe80e5ebb173d087695bd05f4d0429d0ad9a753e2",
+      "mode": 420,
+      "member": "sources/development-v1/src/core/scheduled_output.h",
+      "role": "Exact development-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-development-v1/tests/sample_cache_test.c",
+      "bytes": 3750,
+      "sha256": "779ce166c450b62fd2d447edf24a127b234701ffb910fd24ad0abdf2bd3786b9",
+      "mode": 420,
+      "member": "sources/development-v1/tests/sample_cache_test.c",
+      "role": "Exact development-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-development-v1/tests/scheduled_output_test.c",
+      "bytes": 12145,
+      "sha256": "81579717a296ce9df04deb36a8af9de5d375d1a5312f5153b360eab95d42ca19",
+      "mode": 420,
+      "member": "sources/development-v1/tests/scheduled_output_test.c",
+      "role": "Exact development-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-development-v1/tests/test_sample_cache.py",
+      "bytes": 674,
+      "sha256": "53ba0e7c88fc9bfb9db88e34ef6d84fb6c866e1b6ecf13f893d112518a65ab1a",
+      "mode": 420,
+      "member": "sources/development-v1/tests/test_sample_cache.py",
+      "role": "Exact development-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-development-v1/tests/test_scheduled_output.py",
+      "bytes": 655,
+      "sha256": "75f8482facc0951592c8fbeb388f02ae37b75abcc332dd2e16e279792fa777a3",
+      "mode": 420,
+      "member": "sources/development-v1/tests/test_scheduled_output.py",
+      "role": "Exact development-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final/docs/SCHEDULED_OUTPUT.md",
+      "bytes": 4651,
+      "sha256": "0ffe98e6ec2d841a5b5f6369e2f2e6f918deeacff85123f60d0161717814f049",
+      "mode": 420,
+      "member": "sources/final-v1/docs/SCHEDULED_OUTPUT.md",
+      "role": "Exact final-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final/src/core/channels.h",
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": 420,
+      "member": "sources/final-v1/src/core/channels.h",
+      "role": "Exact final-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final/src/core/document.h",
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": 420,
+      "member": "sources/final-v1/src/core/document.h",
+      "role": "Exact final-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final/src/core/elapsed_clock.c",
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "mode": 420,
+      "member": "sources/final-v1/src/core/elapsed_clock.c",
+      "role": "Exact final-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final/src/core/elapsed_clock.h",
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "mode": 420,
+      "member": "sources/final-v1/src/core/elapsed_clock.h",
+      "role": "Exact final-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final/src/core/mod_inspect.h",
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": 420,
+      "member": "sources/final-v1/src/core/mod_inspect.h",
+      "role": "Exact final-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final/src/core/pcm.h",
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": 420,
+      "member": "sources/final-v1/src/core/pcm.h",
+      "role": "Exact final-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final/src/core/pp20.h",
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": 420,
+      "member": "sources/final-v1/src/core/pp20.h",
+      "role": "Exact final-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final/src/core/project.h",
+      "bytes": 5698,
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8",
+      "mode": 420,
+      "member": "sources/final-v1/src/core/project.h",
+      "role": "Exact final-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final/src/core/sample_cache.c",
+      "bytes": 4018,
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+      "mode": 420,
+      "member": "sources/final-v1/src/core/sample_cache.c",
+      "role": "Exact final-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final/src/core/sample_cache.h",
+      "bytes": 1999,
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6",
+      "mode": 420,
+      "member": "sources/final-v1/src/core/sample_cache.h",
+      "role": "Exact final-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final/src/core/scheduled_output.c",
+      "bytes": 9473,
+      "sha256": "940979a07c48679e141722cc672b967d9e4dffd575ba126038a3fd111ec55405",
+      "mode": 420,
+      "member": "sources/final-v1/src/core/scheduled_output.c",
+      "role": "Exact final-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final/src/core/scheduled_output.h",
+      "bytes": 6515,
+      "sha256": "3289945d9446b373d8aa1897cb2c432f08ef253b443a81cd4dde39230df9b9da",
+      "mode": 420,
+      "member": "sources/final-v1/src/core/scheduled_output.h",
+      "role": "Exact final-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final/tests/sample_cache_test.c",
+      "bytes": 3750,
+      "sha256": "779ce166c450b62fd2d447edf24a127b234701ffb910fd24ad0abdf2bd3786b9",
+      "mode": 420,
+      "member": "sources/final-v1/tests/sample_cache_test.c",
+      "role": "Exact final-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final/tests/scheduled_output_test.c",
+      "bytes": 16987,
+      "sha256": "42df63d8739bb413a969dc26c75e59ac485b03d4e17694deba73d28617308f6c",
+      "mode": 420,
+      "member": "sources/final-v1/tests/scheduled_output_test.c",
+      "role": "Exact final-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final/tests/test_sample_cache.py",
+      "bytes": 674,
+      "sha256": "53ba0e7c88fc9bfb9db88e34ef6d84fb6c866e1b6ecf13f893d112518a65ab1a",
+      "mode": 420,
+      "member": "sources/final-v1/tests/test_sample_cache.py",
+      "role": "Exact final-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final/tests/test_scheduled_output.py",
+      "bytes": 655,
+      "sha256": "75f8482facc0951592c8fbeb388f02ae37b75abcc332dd2e16e279792fa777a3",
+      "mode": 420,
+      "member": "sources/final-v1/tests/test_scheduled_output.py",
+      "role": "Exact final-v1 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v2/docs/SCHEDULED_OUTPUT.md",
+      "bytes": 4651,
+      "sha256": "0ffe98e6ec2d841a5b5f6369e2f2e6f918deeacff85123f60d0161717814f049",
+      "mode": 292,
+      "member": "sources/final-v2/docs/SCHEDULED_OUTPUT.md",
+      "role": "Exact final-v2 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v2/src/core/channels.h",
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": 292,
+      "member": "sources/final-v2/src/core/channels.h",
+      "role": "Exact final-v2 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v2/src/core/document.h",
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": 292,
+      "member": "sources/final-v2/src/core/document.h",
+      "role": "Exact final-v2 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v2/src/core/elapsed_clock.c",
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "mode": 292,
+      "member": "sources/final-v2/src/core/elapsed_clock.c",
+      "role": "Exact final-v2 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v2/src/core/elapsed_clock.h",
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "mode": 292,
+      "member": "sources/final-v2/src/core/elapsed_clock.h",
+      "role": "Exact final-v2 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v2/src/core/mod_inspect.h",
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": 292,
+      "member": "sources/final-v2/src/core/mod_inspect.h",
+      "role": "Exact final-v2 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v2/src/core/pcm.h",
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": 292,
+      "member": "sources/final-v2/src/core/pcm.h",
+      "role": "Exact final-v2 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v2/src/core/pp20.h",
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": 292,
+      "member": "sources/final-v2/src/core/pp20.h",
+      "role": "Exact final-v2 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v2/src/core/project.h",
+      "bytes": 5698,
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8",
+      "mode": 292,
+      "member": "sources/final-v2/src/core/project.h",
+      "role": "Exact final-v2 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v2/src/core/sample_cache.c",
+      "bytes": 4018,
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+      "mode": 292,
+      "member": "sources/final-v2/src/core/sample_cache.c",
+      "role": "Exact final-v2 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v2/src/core/sample_cache.h",
+      "bytes": 1999,
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6",
+      "mode": 292,
+      "member": "sources/final-v2/src/core/sample_cache.h",
+      "role": "Exact final-v2 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v2/src/core/scheduled_output.c",
+      "bytes": 9473,
+      "sha256": "940979a07c48679e141722cc672b967d9e4dffd575ba126038a3fd111ec55405",
+      "mode": 292,
+      "member": "sources/final-v2/src/core/scheduled_output.c",
+      "role": "Exact final-v2 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v2/src/core/scheduled_output.h",
+      "bytes": 6515,
+      "sha256": "3289945d9446b373d8aa1897cb2c432f08ef253b443a81cd4dde39230df9b9da",
+      "mode": 292,
+      "member": "sources/final-v2/src/core/scheduled_output.h",
+      "role": "Exact final-v2 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v2/tests/sample_cache_test.c",
+      "bytes": 3750,
+      "sha256": "779ce166c450b62fd2d447edf24a127b234701ffb910fd24ad0abdf2bd3786b9",
+      "mode": 292,
+      "member": "sources/final-v2/tests/sample_cache_test.c",
+      "role": "Exact final-v2 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v2/tests/scheduled_output_test.c",
+      "bytes": 17562,
+      "sha256": "cde1db9470f14575f418bc7b749e7a2950b40112c252afb1b20b3258a9ebd864",
+      "mode": 292,
+      "member": "sources/final-v2/tests/scheduled_output_test.c",
+      "role": "Exact final-v2 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v2/tests/test_sample_cache.py",
+      "bytes": 674,
+      "sha256": "53ba0e7c88fc9bfb9db88e34ef6d84fb6c866e1b6ecf13f893d112518a65ab1a",
+      "mode": 292,
+      "member": "sources/final-v2/tests/test_sample_cache.py",
+      "role": "Exact final-v2 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v2/tests/test_scheduled_output.py",
+      "bytes": 655,
+      "sha256": "75f8482facc0951592c8fbeb388f02ae37b75abcc332dd2e16e279792fa777a3",
+      "mode": 292,
+      "member": "sources/final-v2/tests/test_scheduled_output.py",
+      "role": "Exact final-v2 compiled/declaration/document closure; does not copy complete export"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/tools/host_provenance.py",
+      "bytes": 14149,
+      "sha256": "48565b2a71d13ee43f5814c4a2859d442ab2387d05c32b42b173688a9bd8ba36",
+      "mode": 420,
+      "member": "tools/host_provenance.py",
+      "role": "Executed pinned host logger/helper or toolchain fingerprint controls"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/tools/provenance_common.py",
+      "bytes": 11124,
+      "sha256": "78e28229f0f132c73153606be3a40d750a4013f5ea1bbb5af7c15e117e62cdb5",
+      "mode": 420,
+      "member": "tools/provenance_common.py",
+      "role": "Executed pinned host logger/helper or toolchain fingerprint controls"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/tools/toolchain-pins.json",
+      "bytes": 2709,
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065",
+      "mode": 420,
+      "member": "tools/toolchain-pins.json",
+      "role": "Executed pinned host logger/helper or toolchain fingerprint controls"
+    }
+  ]
+}

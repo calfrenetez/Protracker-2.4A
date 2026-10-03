@@ -1,0 +1,7 @@
+# Scheduled output host evidence
+
+This packet preserves the exact private host implementation and proof for a new portable future-event ownership contract. It is not integration with `pt_paula_prepared`, song playback, native output or interrupts, and is not hardware timing or listening acceptance. Future integration needs independently held owners and a separately qualified timestamp backend.
+
+Final-v2 passed two ASan/UBSan groups, four compile/runtime commands and six full-M queries, with 14 canonical inputs, 105 external system inputs and two archived executable products. Refusal/cancellation/uncertain submission and all-reader retirement were tested. The backend capability is a declaration, never hardware proof. Original development-v1 and final-v1 passing checks remain separate historical records.
+
+The deterministic payload contains exact original source closures, all five new files, complete baseline/final inventories, patches, reports, actual products, logs, executed helpers and independent review. It omits full source exports and system SDK/toolchain trees. Their exact recorded fingerprints are preserved. `manifest.json` maps every archive member to its original path, role, SHA256, bytes and mode. All member bytes and modes were read back and the archive reproduced byte-for-byte. Historical scripts retain original private paths; use preserved source closures and ordered commands for reproduction in a fresh private export rather than running stale paths blindly. No test, native run or target action was performed by packaging.

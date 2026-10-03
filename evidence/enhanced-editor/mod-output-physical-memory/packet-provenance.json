@@ -1,0 +1,22 @@
+{
+  "scope": "Host-only deterministic evidence packaging; no test/build/native/target/network/browser operation",
+  "member_count": 94,
+  "original_bytes": 968687,
+  "payload_bytes": 261889,
+  "payload_sha256": "b9621c35c316bd007f0dcbb50ab91161098fd73136c5f1071dd66239e1cbe5f4",
+  "duplicate_generation_equal": true,
+  "full_reader_bytes_and_modes_verified": true,
+  "head": "6a5334ac0b5e4556ee0991cb7a0acb079e827c2f",
+  "physical_run": "1791053782973616000",
+  "physical_result_sha256": "a34fe21cd4b9d9806d098dcf9d710de81f0ab0a6275e8269200c3070c2440c1d",
+  "separate_idle_result": {
+    "path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/idle-verification-1791053941703637000/result.json",
+    "sha256": "bfadbe15997cb5a16d2785700e66b56b19144446b9fef29e1bd5ae4ac729d37e"
+  },
+  "explicit_release": {
+    "turnId": "01a10323-8c5d-7140-beec-725fe08b1dc9",
+    "completedAt": 1791054028,
+    "text": "ProTracker reports the physical MOD test passed and its window is released after independent cleanup, emulator-return and Safari View Only checks. No recovery hold remains.\n\nAcceptance is software export and memory behaviour only\u2014not audio, DMA or timing. Scott\u2019s queued visual test may now seek fresh clearance; AmiConnect holds nothing."
+  },
+  "current_lock_reservation_control_or_hold": false
+}

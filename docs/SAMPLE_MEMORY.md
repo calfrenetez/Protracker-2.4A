@@ -75,6 +75,47 @@ jitter tolerance is approved. This selects an architecture direction, without
 qualifying a native backend, interrupt implementation or physical output timing.
 See [the decision and retained measurements](NATIVE_TIMING_DECISION.md).
 
+## Scheduled output ownership foundation — 3 October 2026
+
+The new portable queue retains independently held sample owners for bounded future
+TRIGGER/CONTROL/STOP batches on the original musical grid. It requires explicit
+timestamped publication, atomic publication and reader-retirement capabilities
+before allocation. Unsupported adapters refuse. Publication must precede the
+original frame window; uncertain submission latches failure and retains storage.
+Only positive retirement of every future activation, reader and callback permits
+release. Cancellation and close preserve uncertain owners. Full master/cache and
+backend-control extents protect output aliases without reading sample padding.
+
+Two ASan/UBSan host groups pass with real cache leases and before-images, including
+uncertain submission, partial cancellation, out-of-order retirement and alias
+refusals. The clock/backend used by these checks is synthetic. This implements a
+portable ownership contract; it does not integrate song playback, move the existing
+exclusive Paula prepared object, implement IRQ activation or qualify native or
+physical timing. A separate portable native build/test is later work. See
+[contract](SCHEDULED_OUTPUT.md) and
+[host evidence](../evidence/enhanced-editor/scheduled-output-host/README.md).
+
+## Physical MOD export memory qualification — 3 October 2026
+
+The exact 70,824-byte MOD fixture passed once on the real A1200 after its separate
+shared 030 qualification. Direct/round-to8/TPDF output, full master capacities and
+project tables, legacy loops and multiblock streaming passed. The workspace stayed
+7,164 bytes with 65 patterns; thirteen verified Fast allocations ended at zero
+owned bytes without Chip fallback. Four complete MOD/resource markers passed.
+
+Actual CPU/network and installed bridge CRC/size checks preceded RAM writes.
+The candidate matched full physical SHA readback. Exact typed two-file cleanup,
+eleven physical absence observations spanning 15.972 seconds and unchanged
+original emulator return passed. A separate locked idle check passed with eleven
+observations spanning 13.218 seconds. Safari remained View Only and explicit
+release was acknowledged with no hold. Native/internal/root limits remained
+90/300/310 seconds; the root invocation completed in 128.560 seconds.
+
+This extends software export and Fast-memory acceptance to the real machine.
+Chip allocation, DMA, voice-stop, AmiGUS RAM capacity/order/completion, output
+timing, audio and listening remain separate. See
+[physical records](../evidence/enhanced-editor/mod-output-physical-memory/README.md).
+
 ## Slice output master protection — 3 October 2026
 
 Automatic slice markers/counts and the crossfade next-start output now protect
@@ -127,7 +168,8 @@ return, separate locked idle verification and Safari View Only were verified.
 The coordinator acknowledged explicit release; no recovery hold remains. The
 previous WAV cleanup hold was separately recovered and released, while the
 original WAV and FIFO failures remain failed. The current MOD fixture separately
-passed shared 030; physical MOD qualification remains pending. Hardware sample
+passed shared 030 and the physical software export/memory fixture described above.
+Hardware sample
 RAM capacity/completion/order/all-voice-stop, audio,
 timing and listening remain unqualified by this software-only fixture. See
 [evidence/enhanced-editor/project-physical-memory](../evidence/enhanced-editor/project-physical-memory/README.md).
@@ -3401,6 +3443,29 @@ fits the existing field. The complete host run passed 200 checks; two helpers
 failed in a non-repository export and passed their corrected-environment reruns,
 giving passing results for all 202 checks without claiming the initial invocation
 was wholly successful.
+
+## Typed recovery configuration controller — 3 October 2026
+
+The native adapter now exposes transactional configuration get/apply operations
+for later preferences controls. Busy, opened or owned stores refuse even a no-op.
+Directory validation/canonicalization finishes before publication; refusal preserves
+the entire controller. Semantic no-op keeps armed scheduling, backoff and snapshot
+revision. Successful change resets configuration and schedule while retaining
+allocator, document/project identity, source timestamp, binding and store. Disabled
+policy keeps a nonzero interval and an empty unknown root is never scanned.
+Controller/output aliases fail closed. Startup ENV behavior remains compatible;
+its allocator self-alias bug is fixed by staging callbacks before reset.
+
+The existing DOS-stub host configuration group passes ASan/UBSan, including typed
+changes, cancellation/no-op, busy/owned refusal, path/media errors and before-image
+protection. The identical allocator-alias probe changes from expected baseline
+RC20 to candidate RC0. The existing native fixture compiles the changed controller
+indirectly with real SDK headers and its GetVar/time substitutions. That is compile/
+link proof, without native execution of the new typed assertions. A distinct
+native assertion fixture is being prepared. Preferences requester wiring, actual
+crash/endurance and physical settings/storage acceptance remain unfinished. No
+ENV writes or editor UI change were introduced. See
+[host and compiler evidence](../evidence/enhanced-editor/recovery-controller-host/README.md).
 
 ## Recovery setting read failures
 

@@ -1,0 +1,663 @@
+{
+  "scope": "Exact original regular member bytes/modes; normalized archive timestamps/ownership",
+  "members": {
+    "disabled-preparation/README.md": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/README.md",
+      "bytes": 4810,
+      "sha256": "fa37a3a6fe26db28f6f79a3b65f28f6b6c3bbbadca1a5beba64434640e90125a",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/authoring-history.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/authoring-history.json",
+      "bytes": 4540,
+      "sha256": "14bc4012ac4628f17bb857c0112368183f8825d719ad0754bc15e707f84c37ee",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/build-recipe.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/build-recipe.json",
+      "bytes": 5441,
+      "sha256": "9ca14cc8cce12e8fbdafc92b4122d699efa5fe323fa4b856c440057009c36aba",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/copied-files.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/copied-files.json",
+      "bytes": 3523,
+      "sha256": "72ce0e63ea03a5edb9029b253d6ec29ac7fe152ddc9cb8a598dc281c89dfc18f",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/emulator-coordinator-release122.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/emulator-coordinator-release122.json",
+      "bytes": 1347,
+      "sha256": "874a6c6640dd7ffcb8b5d5402b88a388706506e5342823b5105259ac58c05f8f",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/emulator-independent-review.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/emulator-independent-review.json",
+      "bytes": 42828,
+      "sha256": "c7d556c4e5a921b1a3bcfb80e1685a42b88aa51138e90aeec24f6b74c348722a",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/emulator-separate-idle-result.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/emulator-separate-idle-result.json",
+      "bytes": 5222,
+      "sha256": "114859dd0471e6b1b9a89fcc64ddd05ecf6e703229c8069237292ec38be7a351",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/exact-emulator-qualification.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/exact-emulator-qualification.json",
+      "bytes": 53443,
+      "sha256": "9c82b75e031085aec5d8b238b98c128442a79c40cae165c6fc6e8f719d7966c9",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/host-checks.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/host-checks.json",
+      "bytes": 78600,
+      "sha256": "834a31b28a276d048b891cbcff3696e030fc70f32d91eae4843585ca0dd43b53",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/host-inputs-before.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/host-inputs-before.json",
+      "bytes": 34488,
+      "sha256": "84656f0618239c81bb0603daa2399670320e5b7cff6dee118be0528546c1c7f7",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/host-mock-proof.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/host-mock-proof.json",
+      "bytes": 497,
+      "sha256": "375f1063fc5bba754640b6eaf397416f284605a66867d511b8b4c5a7e9d111f2",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/host-saved-receipt.stderr": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/host-saved-receipt.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/host-saved-receipt.stdout": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/host-saved-receipt.stdout",
+      "bytes": 1688,
+      "sha256": "cf03191e0b0f33886f895681063b4cadd08c03f242d32254b593998d836a1635",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/host-source-only.stderr": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/host-source-only.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/host-source-only.stdout": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/host-source-only.stdout",
+      "bytes": 718,
+      "sha256": "452c5639e68842b837e2c492513cd500b7931e11ad075225cf2513121d05a2cf",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/host-synthetic.stderr": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/host-synthetic.stderr",
+      "bytes": 2340,
+      "sha256": "a7e837c91ac1f630afba1767f5ca601081085ad6c2c93ebc70858767ea47ef47",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/host-synthetic.stdout": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/host-synthetic.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/host_check_runner.py": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/host_check_runner.py",
+      "bytes": 4018,
+      "sha256": "5e2ffe0b9b99f00bc27057a676348b74fc808c09487448d07e88c1d288413b56",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/origin.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/origin.json",
+      "bytes": 1821,
+      "sha256": "775b51b6dc6199e8a24a05d40a262241cab844c1656ee679c4ad2e6cf386dbb9",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/physical_mod_stream.py": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/physical_mod_stream.py",
+      "bytes": 36831,
+      "sha256": "f4735c36bc615637b545e8c1b1bd086ed54f47c00af010cfd2e51f0b8b68e048",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/plan.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/plan.json",
+      "bytes": 41514,
+      "sha256": "7982d1cbdf5ae82de563eae633635b2abea5c331c3e30251fcced24fe97bd668",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/reference-helper.diff": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/reference-helper.diff",
+      "bytes": 17971,
+      "sha256": "78702faf4fa386b7882fee2248e22b5a00207a52686b81f05ff783f538e19d02",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/test_prepared_guards.py": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/test_prepared_guards.py",
+      "bytes": 29770,
+      "sha256": "8b2fc2508ebf8ac9984a554818abcf4a7a9df84e094df1004e2869bc9950c1a0",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/host-checks-v1/result.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/host-checks-v1/result.json",
+      "bytes": 78600,
+      "sha256": "834a31b28a276d048b891cbcff3696e030fc70f32d91eae4843585ca0dd43b53",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/host-checks-v1/saved-receipt.stderr": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/host-checks-v1/saved-receipt.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/host-checks-v1/saved-receipt.stdout": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/host-checks-v1/saved-receipt.stdout",
+      "bytes": 1688,
+      "sha256": "cf03191e0b0f33886f895681063b4cadd08c03f242d32254b593998d836a1635",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/host-checks-v1/source-only.stderr": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/host-checks-v1/source-only.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/host-checks-v1/source-only.stdout": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/host-checks-v1/source-only.stdout",
+      "bytes": 718,
+      "sha256": "452c5639e68842b837e2c492513cd500b7931e11ad075225cf2513121d05a2cf",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/host-checks-v1/synthetic.stderr": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/host-checks-v1/synthetic.stderr",
+      "bytes": 2340,
+      "sha256": "a7e837c91ac1f630afba1767f5ca601081085ad6c2c93ebc70858767ea47ef47",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/host-checks-v1/synthetic.stdout": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/host-checks-v1/synthetic.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "role": "Original host-only preparation or preserved earlier preparation history; NOT RUN at creation"
+    },
+    "disabled-preparation/prepared-files.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-prepared-yn29dvhf/prepared-files.json",
+      "bytes": 4864,
+      "sha256": "b0ae001f5bd570fe0adea18911d0a9df8d0c3bfc07348530b1ea811b86cd42db",
+      "mode": 420,
+      "role": "Original disabled preparation index"
+    },
+    "execution/plan.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-execution-s15yqjxz/plan.json",
+      "bytes": 41513,
+      "sha256": "4b9b7671aacee892e67b2c0b0b5a98c918269aa123c0e1b5ab20da6e8ade5d52",
+      "mode": 420,
+      "role": "Fresh readiness-only clone/index or exclusive actual one-attempt claim"
+    },
+    "execution/prepared-files.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-execution-s15yqjxz/prepared-files.json",
+      "bytes": 4863,
+      "sha256": "d609d5621f620a366556ef3f0eb09d61040b6d858a43afb58b3ef5afa9ec420b",
+      "mode": 420,
+      "role": "Fresh readiness-only clone/index or exclusive actual one-attempt claim"
+    },
+    "execution/physical-execution-claim.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-execution-s15yqjxz/physical-execution-claim.json",
+      "bytes": 380,
+      "sha256": "6ccefc208d5da4a39aa7cc861ca220e545f7826d1aef357f9af68183cddb2b8a",
+      "mode": 420,
+      "role": "Fresh readiness-only clone/index or exclusive actual one-attempt claim"
+    },
+    "execution/physical-mod-stream-1791053782973616000/PTExecModStreamTest": {
+      "original_path": "/private/tmp/protracker-mod-physical-execution-s15yqjxz/physical-mod-stream-1791053782973616000/PTExecModStreamTest",
+      "bytes": 70824,
+      "sha256": "52e273bdf829092f1bad2182d1fa9e544e314a6d5dff81bb45880c947cdf8102",
+      "mode": 420,
+      "role": "Actual one physical MOD fixture; exact candidate/readback/log/transaction result"
+    },
+    "execution/physical-mod-stream-1791053782973616000/mod.log": {
+      "original_path": "/private/tmp/protracker-mod-physical-execution-s15yqjxz/physical-mod-stream-1791053782973616000/mod.log",
+      "bytes": 535,
+      "sha256": "98f7b2817d5d40d002de53b8ecff9323f4167666eca2f4c66fa34c18f3cf93fe",
+      "mode": 420,
+      "role": "Actual one physical MOD fixture; exact candidate/readback/log/transaction result"
+    },
+    "execution/physical-mod-stream-1791053782973616000/result.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-execution-s15yqjxz/physical-mod-stream-1791053782973616000/result.json",
+      "bytes": 22714,
+      "sha256": "a34fe21cd4b9d9806d098dcf9d710de81f0ab0a6275e8269200c3070c2440c1d",
+      "mode": 420,
+      "role": "Actual one physical MOD fixture; exact candidate/readback/log/transaction result"
+    },
+    "execution/physical-mod-stream-1791053782973616000/staged-readback.bin": {
+      "original_path": "/private/tmp/protracker-mod-physical-execution-s15yqjxz/physical-mod-stream-1791053782973616000/staged-readback.bin",
+      "bytes": 70824,
+      "sha256": "52e273bdf829092f1bad2182d1fa9e544e314a6d5dff81bb45880c947cdf8102",
+      "mode": 420,
+      "role": "Actual one physical MOD fixture; exact candidate/readback/log/transaction result"
+    },
+    "root/availability.py": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/availability.py",
+      "bytes": 1756,
+      "sha256": "a8af0c4b8936166a8c2ae43cc1b6747279daaa27a15fff1680f6efa35aa45a72",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/coordinator-actual-take-ack.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/coordinator-actual-take-ack.json",
+      "bytes": 410,
+      "sha256": "39e63a15bce93817bb6bc6d7f757c889c4dc8bf77ba0f7f90f74e69b1691fb5e",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/coordinator-actual-take-dispatch.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/coordinator-actual-take-dispatch.json",
+      "bytes": 149,
+      "sha256": "16d5191a2004b4e71d97d33fa0ec7e33c8b6a699a946919d539fb50a7120a119",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/coordinator-release-ack.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/coordinator-release-ack.json",
+      "bytes": 442,
+      "sha256": "fd70ef547ea45fcb5a9ead9dbf0d4a75626ac6dc8d9f23f34b1179f856cb29bc",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/coordinator-release-dispatch.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/coordinator-release-dispatch.json",
+      "bytes": 149,
+      "sha256": "16d5191a2004b4e71d97d33fa0ec7e33c8b6a699a946919d539fb50a7120a119",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/coordinator-request-clearance.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/coordinator-request-clearance.json",
+      "bytes": 2582,
+      "sha256": "d4d52ac88bcafeaef9d836a30207d21d4b60a26b625f62c300a735a3d31cb816",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/coordinator-request-dispatch.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/coordinator-request-dispatch.json",
+      "bytes": 149,
+      "sha256": "16d5191a2004b4e71d97d33fa0ec7e33c8b6a699a946919d539fb50a7120a119",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/execution-clone-origin.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/execution-clone-origin.json",
+      "bytes": 1352,
+      "sha256": "024875565570764b06645fab0d50ea496e3bfaba133377d295bbb287bace5295",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/fresh-identity.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/fresh-identity.json",
+      "bytes": 1252,
+      "sha256": "3a60bf54cb784adb0f76fd7a8fa0b353c268d1f4e08966c77317f86b3bc71e08",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/gate.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/gate.json",
+      "bytes": 1905,
+      "sha256": "7303d072f400606d6ba02f239569246f1fae63eea57bb85f057bdceb4b07eab8",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/idle-execution-claim.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/idle-execution-claim.json",
+      "bytes": 732,
+      "sha256": "220bcbb03fd72b820700b31ee239c77aa7b6e1d46dd70cc433c29c022130baf6",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/idle-execution.log": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/idle-execution.log",
+      "bytes": 183,
+      "sha256": "02ae85f661c1bc2a98a77db4dfc0ec45bf8c919df9f078a4d1d92dd6202930bf",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/idle-invocation-result.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/idle-invocation-result.json",
+      "bytes": 1015,
+      "sha256": "26f0072ca13e6e7115c982007304f60517f102c9f36e1a85f21427f191de9d2d",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/idle-verification-1791053941703637000/result.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/idle-verification-1791053941703637000/result.json",
+      "bytes": 8446,
+      "sha256": "bfadbe15997cb5a16d2785700e66b56b19144446b9fef29e1bd5ae4ac729d37e",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/independent-clone-delta-review.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/independent-clone-delta-review.json",
+      "bytes": 2485,
+      "sha256": "6fd0b102ebe8015ad6f390c7ba89103ac15e06e869ed7d5708b7a0e3078b2f7a",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/independent-root-wrapper-review.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/independent-root-wrapper-review.json",
+      "bytes": 5415,
+      "sha256": "ec6c08d238a39398878b28473333d4a09aaf895b0bbfc06de016f8296d3ee044",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/operation.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/operation.json",
+      "bytes": 576,
+      "sha256": "28b548324b689c830b7cbf989dc0df0d1145f74acbba60f0d718b5b16c4e1344",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/physical-execution.log": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/physical-execution.log",
+      "bytes": 260,
+      "sha256": "6a7c24f76ff55c8c9e0e1bb0c85ab28bb4aaf8b16f966c52f3c5edc073a5baf6",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/physical-invocation-prelaunch.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/physical-invocation-prelaunch.json",
+      "bytes": 1341,
+      "sha256": "7000f0412f3e909a5c25a62ee4fe25e3d199b42242b0c291f6e37bc0a498c40b",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/physical-invocation-result.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/physical-invocation-result.json",
+      "bytes": 1631,
+      "sha256": "a2c808ce669dddc2e7adf304f483d7ff0d2d6c4ffd84d008dc8b7870e644768a",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/request-passive-identity.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/request-passive-identity.json",
+      "bytes": 1252,
+      "sha256": "3cd208b863bf338bf6b284333b330835d9c1b1a86813caf72774ccf717ecc244",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/root-execution-claim.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/root-execution-claim.json",
+      "bytes": 1151,
+      "sha256": "4b8d0377df765c8dd7dfb4a1db2c605c2ef16fe1dd592fe9a819cdaee4b9e0fc",
+      "mode": 384,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/root-verified-completion.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/root-verified-completion.json",
+      "bytes": 1257,
+      "sha256": "639fc9cd236d0cb5c1a1cd5e3dc76c21511921613e6fa0decf78702e7e60eae2",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/run_idle_once.py": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/run_idle_once.py",
+      "bytes": 2205,
+      "sha256": "89ff11506d35c783a02239d2adb02786fbf58eb45e2682303aadcbc8b03090e9",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/run_physical_once.py": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/run_physical_once.py",
+      "bytes": 3810,
+      "sha256": "9c923f6018a43aceb7b12033d736bb6084e14a9fc54b2506535822133e39671f",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/verify_idle_return.py": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/verify_idle_return.py",
+      "bytes": 4326,
+      "sha256": "7a196e501b7e034284a9cc7cd4350600ef5718b151baf809b988516e23af93fd",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "root/wrapper-preparation.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-current-root-ge9ggjgn/wrapper-preparation.json",
+      "bytes": 3063,
+      "sha256": "f057aca5dc6dc49e0a3beb5397f9316a6b96cf23e5ff610b7c7047e055001da1",
+      "mode": 420,
+      "role": "Actual root guard/invocation/separate return/Safari/release or original conservative pre-release record"
+    },
+    "independent/actual-review.json": {
+      "original_path": "/private/tmp/protracker-mod-physical-actual-independent-review.json",
+      "bytes": 13172,
+      "sha256": "c9793c2985b1e5d0ac256f277d2fe78b7ecdc85f724b6a6f1c69767ab93b222c",
+      "mode": 420,
+      "role": "Independent read-only audit of completed actual physical run and release"
+    },
+    "compiled-inputs/src/core/channels.c": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/src/core/channels.c",
+      "bytes": 6996,
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/src/core/channels.h": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/src/core/channels.h",
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/src/core/document.h": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/src/core/document.h",
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/src/core/mod_inspect.c": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/src/core/mod_inspect.c",
+      "bytes": 3513,
+      "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/src/core/mod_inspect.h": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/src/core/mod_inspect.h",
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/src/core/mod_project.c": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/src/core/mod_project.c",
+      "bytes": 23640,
+      "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/src/core/mod_project.h": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/src/core/mod_project.h",
+      "bytes": 5051,
+      "sha256": "c28407161729fc0fea2398f79341a866f03913b092769674bd871bb23adb59ee",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/src/core/pcm.c": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/src/core/pcm.c",
+      "bytes": 7061,
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/src/core/pcm.h": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/src/core/pcm.h",
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/src/core/pcm_internal.h": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/src/core/pcm_internal.h",
+      "bytes": 615,
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/src/core/pp20.h": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/src/core/pp20.h",
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/src/core/project.c": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/src/core/project.c",
+      "bytes": 39034,
+      "sha256": "e4fde542cdfc9b9bce585ef0cda0b5b09d07482f3ec89fddb8d79137b8b0e1c1",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/src/core/project.h": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/src/core/project.h",
+      "bytes": 5698,
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/src/core/safe_save.c": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/src/core/safe_save.c",
+      "bytes": 885,
+      "sha256": "2643e37743d34aa3e77c0e76ef0edab90b7c0f0dff030f4b9668dcb5db7b6568",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/src/core/safe_save.h": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/src/core/safe_save.h",
+      "bytes": 966,
+      "sha256": "8f184c5af658e2fb81b5f5dec9773cf6767d9e8dcd7de8405cf7d2892a0cac6d",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/src/native/master_memory.h": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/src/native/master_memory.h",
+      "bytes": 1694,
+      "sha256": "ac898368849ec2d1892717d425b90c398da37a8799d536366a898e2e219e184a",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/src/platform/file_save.c": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/src/platform/file_save.c",
+      "bytes": 8604,
+      "sha256": "a26119e3819bd3f18cbb05b2bfe474ae97cd375bf7aaf0264e4ddf64a0373989",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/src/platform/file_save.h": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/src/platform/file_save.h",
+      "bytes": 1475,
+      "sha256": "0b17cd45c8307aea727fe737196fcf8cd4ce83e4715fe5ba0e900deb6b28d814",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/src/platform/mod_file.c": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/src/platform/mod_file.c",
+      "bytes": 1008,
+      "sha256": "8f8d7766a4fa128cfa52b0d029ec3310d5504b84fc1b88f03d47f63d83a87247",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/src/platform/mod_file.h": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/src/platform/mod_file.h",
+      "bytes": 289,
+      "sha256": "aae21c944c8af791c9afd1c3f464ffbe6fa3fa7b7b615d15ce595b335c893b21",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/tests/mod_stream_test.c": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/tests/mod_stream_test.c",
+      "bytes": 16234,
+      "sha256": "df2e3fd16724582bc2dd9f2825592bbb80a2806b3d4d36c63efc1433b8d42852",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/tests/native_exec_memory.h": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/tests/native_exec_memory.h",
+      "bytes": 1506,
+      "sha256": "ce0f2b696ce7767c0da8a2a44ac7730bc207f81e4f6b86bfd172353989e664b9",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/tests/native_exec_mod_stream_test.c": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/tests/native_exec_mod_stream_test.c",
+      "bytes": 290,
+      "sha256": "6a63962c5b6b1c4268ea0d8609c0dd42dee0a0f014362481d59ceb8df2ef7d76",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/tests/test_mod_stream.py": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/tests/test_mod_stream.py",
+      "bytes": 1001,
+      "sha256": "1f66c5c9c819cc8c4168476bae1650069432f3843c336043b23ce6ac99f61117",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "compiled-inputs/tools/build_core_tests.py": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/source/tools/build_core_tests.py",
+      "bytes": 38970,
+      "sha256": "1948232ab42449eb518e49ee55276542b102d7461f0f58d8aa273588a20a0d55",
+      "mode": 420,
+      "role": "Byte-exact frozen canonical compiled source/header or build declaration; current committed equivalence verified"
+    },
+    "build/native-manifest.json": {
+      "original_path": "/private/tmp/protracker-mod-after-pcm-build-eqyyzl74/native-final/manifest.json",
+      "bytes": 39932,
+      "sha256": "4027777578e796af0eaa3e061559c98a022df2803ee90b170291ad3e58af36dc",
+      "mode": 420,
+      "role": "Original pinned build manifest; SDK/runtime identities, recipes and candidate closure"
+    },
+    "references/mod-output-native-current/README.md": {
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/mod-output-native-current/README.md",
+      "bytes": 3319,
+      "sha256": "b40b070e1868a7d9bc91ca7704b6ad7a0ebaba1ed533a32766c25198227896f6",
+      "mode": 420,
+      "role": "Existing persistent build/native or full frozen source controls; referenced payload omitted"
+    },
+    "references/mod-output-native-current/SHA256SUMS": {
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/mod-output-native-current/SHA256SUMS",
+      "bytes": 18684,
+      "sha256": "5e63d74cbca9be5e3b380a6ba5b389261a8247fdf448be2d316c7d9c767de970",
+      "mode": 420,
+      "role": "Existing persistent build/native or full frozen source controls; referenced payload omitted"
+    }
+  }
+}

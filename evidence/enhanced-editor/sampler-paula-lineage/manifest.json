@@ -1,0 +1,2463 @@
+{
+  "scope": "Lossless host/compiler origins and ordinary deterministic regular USTAR members; no software/target execution",
+  "member_count": 332,
+  "original_bytes": 9439222,
+  "payload": {
+    "bytes": 2651086,
+    "sha256": "8647e2b95cd3958d9a1c4c43f1eca397d345c8070a9f18010fb7c11ef8bbe0dd"
+  },
+  "members": {
+    "author-controls/ROOT.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/ROOT.txt",
+      "sha256": "69740d8e2d4915b924eeccf7d0b5ecb0d40ec5280d9000e2ce87828519fdfacc",
+      "bytes": 47,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/add-boundaries.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/add-boundaries.py",
+      "sha256": "bfd85aafe0773b66eadecd75e9524d98fef1e2a740902b9afe763823acad0834",
+      "bytes": 4435,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/add-final-tests.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/add-final-tests.py",
+      "sha256": "b56cd6b1165747fc2665435c118e262860a32d5510f7b4bb215f018c646c6152",
+      "bytes": 3693,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/audit-final.prepared-v1.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/audit-final.prepared-v1.py",
+      "sha256": "b882a9d5f4ff1cde819421a8dc72dfc8d0434e740cf33ac1319335412ad5dde0",
+      "bytes": 8117,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/audit-final.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/audit-final.py",
+      "sha256": "78d54a65f6d0e1bcc624e9d352542f9bedf67cf6786dc1179975c10c0789f163",
+      "bytes": 8167,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/baseline-manifest.json": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline-manifest.json",
+      "sha256": "59c66a349e2cec325c4d20ae1c3ee65972de90009606724de893e1de27a57bd2",
+      "bytes": 1090820,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/create-draft.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/create-draft.py",
+      "sha256": "f44051e67c924979dec7ece439558714a9719dac77d99691f5a065136336594f",
+      "bytes": 15162,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/create-tests.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/create-tests.py",
+      "sha256": "534b288daf5aa0a9709397e8f1804e2623efd760feed87d8c20814d49342c80d",
+      "bytes": 19883,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/development-1.log": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/development-1.log",
+      "sha256": "53097a6e612a6e478b603564d79aa639d8de033b57de3076ff2ea6c8f68a669b",
+      "bytes": 859,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/development-2.log": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/development-2.log",
+      "sha256": "0603a7ab1f48c10b740189e97dd54a130cb0dd71a67bcbe89d3e14906d0f708f",
+      "bytes": 21036,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/development-3.log": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/development-3.log",
+      "sha256": "9893f2e5bee1608e79cd377ee4b49d192c941395747a9c7925d760cece75ba97",
+      "bytes": 1224,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/development-4.log": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/development-4.log",
+      "sha256": "12d355af4709b9fd23ab7a9563aff3894573fdd9fc825207e09ead518bf67d40",
+      "bytes": 274,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/development-5.log": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/development-5.log",
+      "sha256": "551340504591be2258418bca05f0fde7ca14c9aeaff3b455b52010e9bbdaaffe",
+      "bytes": 2670,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/development-6.log": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/development-6.log",
+      "sha256": "ab0a35f0c7b1c3681f6fd579c28357585e52252f2bbb67a504932cc72896afa6",
+      "bytes": 274,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/development-7.log": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/development-7.log",
+      "sha256": "8aa1e5e16d0173f20340feb5b8b59f6a166ec8c7e210c3af662f20a1de888e10",
+      "bytes": 570,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/development-8.log": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/development-8.log",
+      "sha256": "4d584c0bd253aabd6bb7bcdd1522126e45b727c4a1fa070709c6fb0dde554c76",
+      "bytes": 1299,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/development-9.log": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/development-9.log",
+      "sha256": "12d355af4709b9fd23ab7a9563aff3894573fdd9fc825207e09ead518bf67d40",
+      "bytes": 274,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/final.patch": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/final.patch",
+      "sha256": "ae6e57e6b158e742cf1e12463aadd2db459e63fe9fe58507367c384fc2a38028",
+      "bytes": 69232,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/freeze-and-prepare.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/freeze-and-prepare.py",
+      "sha256": "ca8b1eeb9dc88031dc99df32c7b8171adc9025631cb3b04473260f605407d32d",
+      "bytes": 5851,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/handoff-v2.json": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/handoff-v2.json",
+      "sha256": "f0c697b5dfb81a86a5248c1081723ddac6250a0fd100117c0a3feb04ae3bc2d6",
+      "bytes": 17877,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/handoff.json": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/handoff.json",
+      "sha256": "81d6b6e4b88f3f4bdc5dc2228b44edab1c48468d53bd69fd0e526a104410816c",
+      "bytes": 17162,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/host-launch.log": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-launch.log",
+      "sha256": "d0f6362f7d76fa2900c1d56b1c59e1713e29c09f68a8bf48712ca4ca0fd31a82",
+      "bytes": 536,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/own-audit-launch.log": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/own-audit-launch.log",
+      "sha256": "edc1dc6f2b4d93cdc1bc883b002cbd4fb16bac2574eda3069034a500053931fb",
+      "bytes": 201,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/own-final-review.json": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/own-final-review.json",
+      "sha256": "8660b9afd79cba18be089a2ad287bfc21ccaf9904a521fef641adef095ef36be",
+      "bytes": 6440,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/prepare-native-builder.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/prepare-native-builder.py",
+      "sha256": "e187d56304d71c84f801762c6b3136b069bbcf02ee0159b40b801cb697d927fc",
+      "bytes": 4974,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/prepared-files.json": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/prepared-files.json",
+      "sha256": "4e258519eeb6134393af505a6d80b54a8df1726b0446178039968c73874dd7e3",
+      "bytes": 1629,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author-controls/source-manifest.json": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-manifest.json",
+      "sha256": "50acaf95c24acd818529d218b21c24468ae57ccb653cd24c74acdcbe9389a8ee",
+      "bytes": 1092443,
+      "mode": 420,
+      "role": "Exact author control/history/helper; development logs qualify only their literal outcomes and retained source snapshots"
+    },
+    "author/tools/host_provenance.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/tools/host_provenance.py",
+      "sha256": "ab7f1bd30314094119bf720a275b21720c2f028e144edaca8645bb9927226efe",
+      "bytes": 16320,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/tools/provenance_common.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/tools/provenance_common.py",
+      "sha256": "78e28229f0f132c73153606be3a40d750a4013f5ea1bbb5af7c15e117e62cdb5",
+      "bytes": 11124,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/tools/toolchain-pins.json": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/tools/toolchain-pins.json",
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065",
+      "bytes": 2709,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-00.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-00.txt",
+      "sha256": "88b8910d8b63f3a8bdb529194936fa2cf87427f5acc1961e92364817285207b9",
+      "bytes": 9078,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-01.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-01.txt",
+      "sha256": "f575ab62274b16f6224fcfefe386bbd81fb59daf5c7d4dfa5da0b1feda9ec882",
+      "bytes": 5452,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-02.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-02.txt",
+      "sha256": "56d0a0912aa8809ea143f19e0356de9403be2f5a6f7a7a4d4dd537712025ec76",
+      "bytes": 4968,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-03.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-03.txt",
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73",
+      "bytes": 4819,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-04.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-04.txt",
+      "sha256": "88b1bb1c44d211001353a424da05c63dfba54f0e3f5600ed3900c4272f92cc4b",
+      "bytes": 4529,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-05.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-05.txt",
+      "sha256": "b94e7b3c2bb0a2a32ca8e457fd41f6d939e2fc988a570c2c65c810b1dbed1812",
+      "bytes": 4529,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-06.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-06.txt",
+      "sha256": "42c7499b25b2aea510723679cd8c3b05f6579288e42e053ab8a31328255e114d",
+      "bytes": 4335,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-07.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-07.txt",
+      "sha256": "7a04b43f6816495c089991b17a992614b1bd469154babe991de237275036375b",
+      "bytes": 5775,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-08.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-08.txt",
+      "sha256": "31a0d850205f57f2b83679a08ed5070ba55a6cfd9e2e915122e5c1dd42a208ad",
+      "bytes": 4540,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-09.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-09.txt",
+      "sha256": "d33c386d36eec7f20a1eda63b048189b771560fc5a8a980c94652a4efe2b729f",
+      "bytes": 4354,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-10.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-10.txt",
+      "sha256": "d1d791f84ac8c81a831534cfc8c6d72c61b775c3c0c3a190d57b9c9fcb948435",
+      "bytes": 4333,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-11.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-11.txt",
+      "sha256": "33b9be1b32562414c717d241d46b436efd376a24fc584b14cc128c9d01729e10",
+      "bytes": 4379,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-12.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-12.txt",
+      "sha256": "713687508744f2c15e4089e7bd17b56e758928af2034a189a66c3c20a2834fd9",
+      "bytes": 4448,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-13.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-13.txt",
+      "sha256": "c958df8c7ad062ad68feeca55fac66c08da7b811c9ecace81ce41009f4a9f397",
+      "bytes": 4312,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-14.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-14.txt",
+      "sha256": "eb68c3559b29b101934ab7f4ba740746b6092619ffb1195f8a0156a3c8df01a4",
+      "bytes": 4360,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-15.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-15.txt",
+      "sha256": "88a7a868d906166af8c42b771e4f3abbee1c72ff86f049979e30ba55645b7004",
+      "bytes": 4418,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-16.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-16.txt",
+      "sha256": "021af1b93d018969b3bda1b8897e7cc21f794c69d90006a430b9fce413356dfe",
+      "bytes": 4329,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-17.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-17.txt",
+      "sha256": "b4b8d9d6597c3710564b2567ea428238ed80aae5b571f2b95fb659af6dd18097",
+      "bytes": 3665,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-18.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-18.txt",
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2",
+      "bytes": 3268,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-19.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-19.txt",
+      "sha256": "d03d1303964f1fe8dddabcb3eb7913a443af83492768ad61241ce22fdead2404",
+      "bytes": 4324,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-20.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-20.txt",
+      "sha256": "4b81a96da592d7feab5caf463e99aac11b345cab3930035783a3998cd2d3468f",
+      "bytes": 4324,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-dependencies-21.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-dependencies-21.txt",
+      "sha256": "0a7021bf58bae5096f7938e17aee23e62a6b3498f4ef1c4e8bcaf43898da5453",
+      "bytes": 2772,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c001-product.log": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c001-product.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c002-product.log": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c002-product.log",
+      "sha256": "9f9ba802118c7d4f805c2f557d055f6fd143ae64b79b3d80c8e5ae5354c29339",
+      "bytes": 176,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-00.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-00.txt",
+      "sha256": "90bb98521d29188730ea8e63501fb5e329d6f50e62552024edb6df5cc228f616",
+      "bytes": 9023,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-01.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-01.txt",
+      "sha256": "dc3e3135736abc4d334600a50601440a6711150bebce35def2c8156215ec31b1",
+      "bytes": 5406,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-02.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-02.txt",
+      "sha256": "56d0a0912aa8809ea143f19e0356de9403be2f5a6f7a7a4d4dd537712025ec76",
+      "bytes": 4968,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-03.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-03.txt",
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73",
+      "bytes": 4819,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-04.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-04.txt",
+      "sha256": "88b1bb1c44d211001353a424da05c63dfba54f0e3f5600ed3900c4272f92cc4b",
+      "bytes": 4529,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-05.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-05.txt",
+      "sha256": "ff680f9a353b1a16f12bd1fd8a5c0eeaa9482dd748b83e8d2a0b8d375af35724",
+      "bytes": 4494,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-06.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-06.txt",
+      "sha256": "42c7499b25b2aea510723679cd8c3b05f6579288e42e053ab8a31328255e114d",
+      "bytes": 4335,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-07.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-07.txt",
+      "sha256": "7a04b43f6816495c089991b17a992614b1bd469154babe991de237275036375b",
+      "bytes": 5775,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-08.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-08.txt",
+      "sha256": "31a0d850205f57f2b83679a08ed5070ba55a6cfd9e2e915122e5c1dd42a208ad",
+      "bytes": 4540,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-09.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-09.txt",
+      "sha256": "d33c386d36eec7f20a1eda63b048189b771560fc5a8a980c94652a4efe2b729f",
+      "bytes": 4354,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-10.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-10.txt",
+      "sha256": "d1d791f84ac8c81a831534cfc8c6d72c61b775c3c0c3a190d57b9c9fcb948435",
+      "bytes": 4333,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-11.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-11.txt",
+      "sha256": "33b9be1b32562414c717d241d46b436efd376a24fc584b14cc128c9d01729e10",
+      "bytes": 4379,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-12.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-12.txt",
+      "sha256": "713687508744f2c15e4089e7bd17b56e758928af2034a189a66c3c20a2834fd9",
+      "bytes": 4448,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-13.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-13.txt",
+      "sha256": "c958df8c7ad062ad68feeca55fac66c08da7b811c9ecace81ce41009f4a9f397",
+      "bytes": 4312,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-14.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-14.txt",
+      "sha256": "eb68c3559b29b101934ab7f4ba740746b6092619ffb1195f8a0156a3c8df01a4",
+      "bytes": 4360,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-15.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-15.txt",
+      "sha256": "88a7a868d906166af8c42b771e4f3abbee1c72ff86f049979e30ba55645b7004",
+      "bytes": 4418,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-16.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-16.txt",
+      "sha256": "021af1b93d018969b3bda1b8897e7cc21f794c69d90006a430b9fce413356dfe",
+      "bytes": 4329,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-17.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-17.txt",
+      "sha256": "b4b8d9d6597c3710564b2567ea428238ed80aae5b571f2b95fb659af6dd18097",
+      "bytes": 3665,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-18.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-18.txt",
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2",
+      "bytes": 3268,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-19.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-19.txt",
+      "sha256": "d03d1303964f1fe8dddabcb3eb7913a443af83492768ad61241ce22fdead2404",
+      "bytes": 4324,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-20.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-20.txt",
+      "sha256": "4b81a96da592d7feab5caf463e99aac11b345cab3930035783a3998cd2d3468f",
+      "bytes": 4324,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-dependencies-21.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-dependencies-21.txt",
+      "sha256": "0a7021bf58bae5096f7938e17aee23e62a6b3498f4ef1c4e8bcaf43898da5453",
+      "bytes": 2772,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c003-product.log": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c003-product.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c004-product.log": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c004-product.log",
+      "sha256": "38bd1a39ce4942569bc541839afd86acf30a432f3441d1fb37daf6a55eb5600e",
+      "bytes": 127,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c005-dependencies-00.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c005-dependencies-00.txt",
+      "sha256": "ab6be88e88ab05039adfdd5c570ce8f350461adeaaf7c20e407512668deef564",
+      "bytes": 8804,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c005-dependencies-01.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c005-dependencies-01.txt",
+      "sha256": "b94e7b3c2bb0a2a32ca8e457fd41f6d939e2fc988a570c2c65c810b1dbed1812",
+      "bytes": 4529,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c005-dependencies-02.txt": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c005-dependencies-02.txt",
+      "sha256": "42c7499b25b2aea510723679cd8c3b05f6579288e42e053ab8a31328255e114d",
+      "bytes": 4335,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c005-product.log": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c005-product.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/c006-product.log": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/c006-product.log",
+      "sha256": "bb0c01c7da2c2cada6966955892868dedb836bbbd87cb2e629e69ab724fc847b",
+      "bytes": 165,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/host-checks.json": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/host-checks.json",
+      "sha256": "3426a49871d70ee78d3c3306cf1c816e7fdbda518422412dc6778e479b57329b",
+      "bytes": 147726,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/host-checks.log": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/host-checks.log",
+      "sha256": "2d18fa2759155dd48cdbf2f90852f6826c1ad1ad6ea709237963e8e57b467a72",
+      "bytes": 1146,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/products/c001-executable-b1e249d5722b6b37-test": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/products/c001-executable-b1e249d5722b6b37-test",
+      "sha256": "b1e249d5722b6b37a57fcbba8a89374a5d59e0476bad5396b27b30b6ab723a18",
+      "bytes": 1415560,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/products/c003-executable-6e4d4c530867a354-test": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/products/c003-executable-6e4d4c530867a354-test",
+      "sha256": "6e4d4c530867a3541a966fbec565860dbb45e8b50d0e6b7fe03cc85235843a47",
+      "bytes": 1306152,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/host-final/products/c005-executable-eadf0b661fe48356-scheduled-lineage-test": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/host-final/products/c005-executable-eadf0b661fe48356-scheduled-lineage-test",
+      "sha256": "eadf0b661fe48356b02bf2967d926d5fcceec2a3552dee5397fb8b1ad419d95a",
+      "bytes": 534664,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/history/development-5-compile/development-5.log": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/history/development-5-compile/development-5.log",
+      "sha256": "551340504591be2258418bca05f0fde7ca14c9aeaff3b455b52010e9bbdaaffe",
+      "bytes": 2670,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/history/development-5-compile/docs/SAMPLER_PAULA_LINEAGE.md": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/history/development-5-compile/docs/SAMPLER_PAULA_LINEAGE.md",
+      "sha256": "61dd4cd676f8d5869021882999201a47c3024be247b02bdea8a019e15a8b299c",
+      "bytes": 1570,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/history/development-5-compile/src/editor/sampler_paula_lineage.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/history/development-5-compile/src/editor/sampler_paula_lineage.c",
+      "sha256": "a9097a4aeb9699559895b4112836fcb6a0428dcc1b8ac7eed1596331e21bd715",
+      "bytes": 26636,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/history/development-5-compile/src/editor/sampler_paula_lineage.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/history/development-5-compile/src/editor/sampler_paula_lineage.h",
+      "sha256": "42b17b3d928b7bf0f7c7cca658fa06f6e053f0d0352c02c96aa6e6716fbe7c9a",
+      "bytes": 4104,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/history/development-5-compile/tests/sampler_paula_lineage_test.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/history/development-5-compile/tests/sampler_paula_lineage_test.c",
+      "sha256": "59b3a9a03bcdab7a4ae489b0515e57b74980947e5ffe85ab98660ba5ac78e70f",
+      "bytes": 25979,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/history/development-5-compile/tests/test_sampler_paula_lineage.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/history/development-5-compile/tests/test_sampler_paula_lineage.py",
+      "sha256": "e51d2f9e13925a40af3b71ed925514af4b8d84c9bcc22820765c60ccc95d8644",
+      "bytes": 867,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/history/development-8-retirement-cache-expectation/development-8.log": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/history/development-8-retirement-cache-expectation/development-8.log",
+      "sha256": "4d584c0bd253aabd6bb7bcdd1522126e45b727c4a1fa070709c6fb0dde554c76",
+      "bytes": 1299,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/history/development-8-retirement-cache-expectation/docs/SAMPLER_PAULA_LINEAGE.md": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/history/development-8-retirement-cache-expectation/docs/SAMPLER_PAULA_LINEAGE.md",
+      "sha256": "61dd4cd676f8d5869021882999201a47c3024be247b02bdea8a019e15a8b299c",
+      "bytes": 1570,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/history/development-8-retirement-cache-expectation/src/editor/sampler_paula_lineage.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/history/development-8-retirement-cache-expectation/src/editor/sampler_paula_lineage.c",
+      "sha256": "ce7b47e05d5efae1e3f426886d7e90a56a5f69eb0d7007b15bfdbb17088a4a67",
+      "bytes": 26720,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/history/development-8-retirement-cache-expectation/src/editor/sampler_paula_lineage.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/history/development-8-retirement-cache-expectation/src/editor/sampler_paula_lineage.h",
+      "sha256": "24fae91fc5f16a0ab235a3b82ac9b731fda84f909fa4e6be8a3b706d294d373a",
+      "bytes": 4120,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/history/development-8-retirement-cache-expectation/tests/sampler_paula_lineage_test.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/history/development-8-retirement-cache-expectation/tests/sampler_paula_lineage_test.c",
+      "sha256": "deee92b8c9e91ef3d2ab7ff6e7c421c7e6247c370f605d7c2c77d4f126da4449",
+      "bytes": 28638,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "author/history/development-8-retirement-cache-expectation/tests/test_sampler_paula_lineage.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/history/development-8-retirement-cache-expectation/tests/test_sampler_paula_lineage.py",
+      "sha256": "e51d2f9e13925a40af3b71ed925514af4b8d84c9bcc22820765c60ccc95d8644",
+      "bytes": 867,
+      "mode": 420,
+      "role": "Exact host helper/pins/47-M logs/six command logs/three products and original retained tested draft snapshots; no execution by packager"
+    },
+    "native-controls/audit-native-build.py": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/audit-native-build.py",
+      "sha256": "8b0ab225e59869740fd5edaf67bf9d03037d124374d142e1de8acefa3086527b",
+      "bytes": 4856,
+      "mode": 420,
+      "role": "Exact current source/root export review/compiler invocation/own audit metadata histories and handoff"
+    },
+    "native-controls/native-build-handoff.json": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-build-handoff.json",
+      "sha256": "3aad5f842ed166d75983161ad9f170189a1cca7a8037d2f8c5bc9f110a93ab45",
+      "bytes": 2425,
+      "mode": 420,
+      "role": "Exact current source/root export review/compiler invocation/own audit metadata histories and handoff"
+    },
+    "native-controls/native-launch-v1.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-launch-v1.log",
+      "sha256": "495a0ea191c2a60dbc91114d4fb8c064e2f211702fe5a659d90a8830ad953792",
+      "bytes": 279,
+      "mode": 420,
+      "role": "Exact current source/root export review/compiler invocation/own audit metadata histories and handoff"
+    },
+    "native-controls/paula-preflight-agent-native-build-review-v2.json": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/paula-preflight-agent-native-build-review-v2.json",
+      "sha256": "eaa6bb0ef4540a45cdc4dd0ed26401a3770c1136bd48f17b777033b91442f7ed",
+      "bytes": 3753,
+      "mode": 420,
+      "role": "Exact current source/root export review/compiler invocation/own audit metadata histories and handoff"
+    },
+    "native-controls/paula-preflight-agent-native-build-review.json": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/paula-preflight-agent-native-build-review.json",
+      "sha256": "d42865bc236a8eb8a53d67ff4d7fc10ee1c4a181af5ef307be9082f4183792de",
+      "bytes": 3071,
+      "mode": 420,
+      "role": "Exact current source/root export review/compiler invocation/own audit metadata histories and handoff"
+    },
+    "native-controls/root-preflight-review.json": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/root-preflight-review.json",
+      "sha256": "43b09aa01cbdeac14b4ca02379a859fb582e658b83098a6458396bbbb60788a6",
+      "bytes": 8756,
+      "mode": 420,
+      "role": "Exact current source/root export review/compiler invocation/own audit metadata histories and handoff"
+    },
+    "native-controls/source-manifest-native.json": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-manifest-native.json",
+      "sha256": "757498b9dd2d73145df6ebf909e6ec50b360d8c0a9d6429c1ccf51c4a362131d",
+      "bytes": 1092662,
+      "mode": 420,
+      "role": "Exact current source/root export review/compiler invocation/own audit metadata histories and handoff"
+    },
+    "native-controls/toolchain-pins.json": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/toolchain-pins.json",
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065",
+      "bytes": 2709,
+      "mode": 420,
+      "role": "Exact current source/root export review/compiler invocation/own audit metadata histories and handoff"
+    },
+    "native-build/PTPaulaLineageTest": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/PTPaulaLineageTest",
+      "sha256": "5607e94a8417e8476d4bade6b92bcbf832e835b61c340ac174bb2278f5e32d78",
+      "bytes": 151592,
+      "mode": 493,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/PTPaulaLineageTest.build.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/PTPaulaLineageTest.build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/compile-commands.json": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/compile-commands.json",
+      "sha256": "fac09b97f6673d3400f0e9ee9e880a7f0b68819d4805c60bdf7695205eb0daae",
+      "bytes": 2274,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/compiler-target-help.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/compiler-target-help.log",
+      "sha256": "f49f0114a73ba557163318b0fdad968b33b41a939e5766a83460468bda9c7a79",
+      "bytes": 7189,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/compiler-version.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/compiler-version.log",
+      "sha256": "5946ce0c1a43a84e1c7af8cfaa306b2f4bd276dd02164560d5674bcc91250d0b",
+      "bytes": 247,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-00.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-00.log",
+      "sha256": "148e83a0b3b20445679c4ccbe5247277be1a9e815593ed062a007609b2ee0b2f",
+      "bytes": 4642,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-01.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-01.log",
+      "sha256": "fc30de26ecda691bd9e1fa78f31bf0cc1437bc83aed4d801b387537f942c6ab6",
+      "bytes": 3554,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-02.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-02.log",
+      "sha256": "a48dba34e0041f01a5a244832c13ae6728bbba974dd87219df385d21d9f7d192",
+      "bytes": 3329,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-03.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-03.log",
+      "sha256": "92ec819ff7d6e393804022b7c06ea0558e530db37a234dd44bc0a333b0bbb928",
+      "bytes": 2935,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-04.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-04.log",
+      "sha256": "29b3f6cd229dfc310a8352b1ace422b53297267c479f637c556fc0110cfa1cb6",
+      "bytes": 2868,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-05.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-05.log",
+      "sha256": "93a5d26d712ec9f251647e81487175ac5c515e5bf4e05439dd6f170c914a3b63",
+      "bytes": 2867,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-06.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-06.log",
+      "sha256": "7649b08c78af4bc4cb103d1549be8cee06ac757e10a5b6578a43a16049038361",
+      "bytes": 2677,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-07.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-07.log",
+      "sha256": "91d61721891d4308221ccf687813163848b8b65b78c8225015e59653a1d79c53",
+      "bytes": 3486,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-08.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-08.log",
+      "sha256": "6d965099f3d42fe6e1d3f339e33832baa6cfbfba2504c2d0d0ef07c1f94db8b4",
+      "bytes": 2877,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-09.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-09.log",
+      "sha256": "ecfca1c53587ed34fc179bac0275d99ba44e46c144f39ca6e722c4b08bbbeb46",
+      "bytes": 2691,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-10.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-10.log",
+      "sha256": "6eca9be45c2f9e1b81b0d88fa1ccd7ab10c728f6d1a8b8290d29176b9f5d3271",
+      "bytes": 2674,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-11.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-11.log",
+      "sha256": "0a6f724c52f97951e0cc34b50a4aae9db35c2a99d21128cc6f38f72dc4ba32e5",
+      "bytes": 2719,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-12.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-12.log",
+      "sha256": "1f192fe62ece619be6d88a2eb02b0a026130d9d8ee2387791ab4e545a29b5a20",
+      "bytes": 2787,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-13.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-13.log",
+      "sha256": "6b987584a6c74fb8817a7124512d83b18df1c43a53f40741061c14a0343ad866",
+      "bytes": 2653,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-14.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-14.log",
+      "sha256": "b07d0f6181a81bd4892e3d3ba2d642f861ddb380cf1eac93b0fced33761264ad",
+      "bytes": 2700,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-15.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-15.log",
+      "sha256": "e4faeae096c9ec48ef2fc5ad7099505e81e7e2ce0fe48974860884543a80b668",
+      "bytes": 2754,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-16.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-16.log",
+      "sha256": "c7ba9b4659696523b158251b58782db04ab261cbaa3ba9c8a33a76f1e25d7f57",
+      "bytes": 2671,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-17.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-17.log",
+      "sha256": "e6d857bcb44c2f2752e7795df3426c8312bd2bd7d6ad93177da0fc47597b1cc5",
+      "bytes": 2665,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-18.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-18.log",
+      "sha256": "01c3547804956b0748114b63f1de3c6d9d5093feac2a7ff56dfeb2e0290c867a",
+      "bytes": 1767,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-19.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-19.log",
+      "sha256": "30fc4d262f9607a81b3b62ef30564262161af272e84a2320ac95cf8fd56cc5fb",
+      "bytes": 2665,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-20.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-20.log",
+      "sha256": "3ec39f4b71cc8765d576a56a9b4c058099052b7c3f21a3643f8dbb0f08bea835",
+      "bytes": 2665,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/dependencies-21.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/dependencies-21.log",
+      "sha256": "153faaede332c2e41619a5bd53c34e720a48f4d8135fb16442b2c5d1f1462628",
+      "bytes": 982,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/manifest.json": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/manifest.json",
+      "sha256": "9731f31f7e5f6d16e3dca54980f7f99a7f4328978e68f85b9e1b9b86fb9d4d90",
+      "bytes": 47214,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/preprocessed-fixture.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/preprocessed-fixture.log",
+      "sha256": "f9b00685e89d9af98e86276b8bed48cbb66f1ee728b25cc0be1ba256bd667579",
+      "bytes": 226015,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/runtime-libamiga-a.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/runtime-libamiga-a.log",
+      "sha256": "c2c8e44936c32e01094e9de761e57c62c7bb834fbf6cabd464465bf3b17090c4",
+      "bytes": 156,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/runtime-libgcc-a.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/runtime-libgcc-a.log",
+      "sha256": "b1912e77c4c1160ce749ca74fbe6edabd5896c2291188e718a9cdfd72c84d57a",
+      "bytes": 125,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/runtime-libnix-a.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/runtime-libnix-a.log",
+      "sha256": "1ca0a83ef891770cbbe671647c7aad9f925ed0b9756c8f85aca35c84961e202a",
+      "bytes": 121,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/runtime-libnix20-a.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/runtime-libnix20-a.log",
+      "sha256": "9060e4a22ea9e716b8f9cf85b5fe5e11a9e6c88ef938b9111d189acc2df8465b",
+      "bytes": 123,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/runtime-libnixmain-a.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/runtime-libnixmain-a.log",
+      "sha256": "dd28b9a8319d35bd81f76cd9479f889e7e5628be07a45ef138f35a729c640add",
+      "bytes": 125,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/runtime-libstubs-a.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/runtime-libstubs-a.log",
+      "sha256": "8ce0c56c26f8f09a8af8b76d62c4d380cbfbe8efde13fa64884d8e9e6c93027f",
+      "bytes": 156,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "native-build/runtime-ncrt0-o.log": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/runtime-ncrt0-o.log",
+      "sha256": "1562950e2e8cb15a51238fddb72e6e26f0ff2d5a774543473aba0d274a19c45f",
+      "bytes": 120,
+      "mode": 420,
+      "role": "Exact one-attempt compiler/runtime/full-M/preprocessing/link records and NOT RUN HUNK"
+    },
+    "builder-preparation/README.md": {
+      "original_path": "/private/tmp/protracker-paula-lineage-native-builder-www6ahsh/README.md",
+      "sha256": "cd897631ddf2c4b235181b8a97ed74707996b80025d9623e13988d0ecec13411",
+      "bytes": 946,
+      "mode": 420,
+      "role": "Exact committed origin, prepared-v1 builder/control, count==1 revision and diffs; no producer execution by packager"
+    },
+    "builder-preparation/build_paula_future_test.original.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-native-builder-www6ahsh/build_paula_future_test.original.py",
+      "sha256": "123c7580fa1d3ac79fd2c84abda2dc16e1c27091b38b7e2e642ff99846f07068",
+      "bytes": 14972,
+      "mode": 420,
+      "role": "Exact committed origin, prepared-v1 builder/control, count==1 revision and diffs; no producer execution by packager"
+    },
+    "builder-preparation/build_paula_lineage_test.prepared-v1.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-native-builder-www6ahsh/build_paula_lineage_test.prepared-v1.py",
+      "sha256": "6164dbd78890c9de62948b5a9198588fbbbfb5168eefa47f9f70fe29888b166e",
+      "bytes": 15280,
+      "mode": 420,
+      "role": "Exact committed origin, prepared-v1 builder/control, count==1 revision and diffs; no producer execution by packager"
+    },
+    "builder-preparation/build_paula_lineage_test.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-native-builder-www6ahsh/build_paula_lineage_test.py",
+      "sha256": "3382f2b342858ee81dac33b8016cba94e55a8d0086a40e5496a0fa4ac7654b12",
+      "bytes": 15290,
+      "mode": 420,
+      "role": "Exact committed origin, prepared-v1 builder/control, count==1 revision and diffs; no producer execution by packager"
+    },
+    "builder-preparation/builder-v2-delta.patch": {
+      "original_path": "/private/tmp/protracker-paula-lineage-native-builder-www6ahsh/builder-v2-delta.patch",
+      "sha256": "7b209dcd233849dc155889ba1537e02faf962ac49c4d0b1fd0eec5a671ee4865",
+      "bytes": 1796,
+      "mode": 420,
+      "role": "Exact committed origin, prepared-v1 builder/control, count==1 revision and diffs; no producer execution by packager"
+    },
+    "builder-preparation/builder.patch": {
+      "original_path": "/private/tmp/protracker-paula-lineage-native-builder-www6ahsh/builder.patch",
+      "sha256": "bbe6d7334e70bd10e7c06e5c6f455450ecb3660cc3d4828e0804b6e8d55284eb",
+      "bytes": 6177,
+      "mode": 420,
+      "role": "Exact committed origin, prepared-v1 builder/control, count==1 revision and diffs; no producer execution by packager"
+    },
+    "builder-preparation/builder.prepared-v1.patch": {
+      "original_path": "/private/tmp/protracker-paula-lineage-native-builder-www6ahsh/builder.prepared-v1.patch",
+      "sha256": "2d9ec700120dfa0d35f8058c6f517188f79c7a8044d984c5dc714fc17318a443",
+      "bytes": 6167,
+      "mode": 420,
+      "role": "Exact committed origin, prepared-v1 builder/control, count==1 revision and diffs; no producer execution by packager"
+    },
+    "builder-preparation/prepared-files.json": {
+      "original_path": "/private/tmp/protracker-paula-lineage-native-builder-www6ahsh/prepared-files.json",
+      "sha256": "1fd1fa99f6f1888eab564a94738d5cb2a86df476cb1a9bde31fe1c5c26c17ecf",
+      "bytes": 3782,
+      "mode": 420,
+      "role": "Exact committed origin, prepared-v1 builder/control, count==1 revision and diffs; no producer execution by packager"
+    },
+    "builder-preparation/prepared-files.prepared-v1.json": {
+      "original_path": "/private/tmp/protracker-paula-lineage-native-builder-www6ahsh/prepared-files.prepared-v1.json",
+      "sha256": "2dd0930721c75e1e61791d9a3295aca39ead86639f35e46cc1f56e1f29ade598",
+      "bytes": 2952,
+      "mode": 420,
+      "role": "Exact committed origin, prepared-v1 builder/control, count==1 revision and diffs; no producer execution by packager"
+    },
+    "host-inputs/baseline/src/core/amigus_reservation.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/amigus_reservation.h",
+      "sha256": "ee57be55b9865fd19d14b27b22af6e2aa6b0466b7f21da5b313016efe9a0b646",
+      "bytes": 3404,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/amigus_sample_ram.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/amigus_sample_ram.h",
+      "sha256": "005111323eb1884112230ea415fbfb75e01d560618326148e08790d4f23fadf6",
+      "bytes": 2813,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/amigus_wavetable_cache.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/amigus_wavetable_cache.h",
+      "sha256": "8c449f009eac14807a9521d16a756345dd531e47b50312a3cabf96ee7ea2ee9c",
+      "bytes": 3792,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/channels.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/channels.c",
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+      "bytes": 6996,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/channels.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/channels.h",
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "bytes": 1818,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/document.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/document.c",
+      "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a",
+      "bytes": 9127,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/document.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/document.h",
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "bytes": 1965,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/elapsed_clock.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/elapsed_clock.c",
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "bytes": 3917,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/elapsed_clock.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/elapsed_clock.h",
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "bytes": 1659,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/mod_inspect.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/mod_inspect.c",
+      "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511",
+      "bytes": 3513,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/mod_inspect.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/mod_inspect.h",
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "bytes": 1240,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/mod_project.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/mod_project.c",
+      "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09",
+      "bytes": 23640,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/mod_project.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/mod_project.h",
+      "sha256": "c28407161729fc0fea2398f79341a866f03913b092769674bd871bb23adb59ee",
+      "bytes": 5051,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/pattern.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/pattern.c",
+      "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e",
+      "bytes": 15753,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/pattern.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/pattern.h",
+      "sha256": "f8c9abde09c4fe495ae77f25c070da647eab038845729edc83adec08c5678d53",
+      "bytes": 3642,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/pcm.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/pcm.c",
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266",
+      "bytes": 7061,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/pcm.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/pcm.h",
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "bytes": 2494,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/pcm_filtered.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/pcm_filtered.c",
+      "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9",
+      "bytes": 4604,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/pcm_internal.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/pcm_internal.h",
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b",
+      "bytes": 615,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/playback_internal.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/playback_internal.h",
+      "sha256": "5d76f20f2c9a7eda89c3543a897f053c97f9460a847d2d70b32b8b71c14775e2",
+      "bytes": 1893,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/playback_pcm.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/playback_pcm.c",
+      "sha256": "f00995c1ca81176fc244968b4276b41624767f42c2963eb90482f23953d09a1f",
+      "bytes": 11344,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/playback_pcm.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/playback_pcm.h",
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65",
+      "bytes": 6034,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/pp20.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/pp20.c",
+      "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465",
+      "bytes": 7187,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/pp20.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/pp20.h",
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "bytes": 966,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/project.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/project.c",
+      "sha256": "e4fde542cdfc9b9bce585ef0cda0b5b09d07482f3ec89fddb8d79137b8b0e1c1",
+      "bytes": 39034,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/project.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/project.h",
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8",
+      "bytes": 5698,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/raw.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/raw.c",
+      "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377",
+      "bytes": 3920,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/raw.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/raw.h",
+      "sha256": "f9f47added4df41bb7b15aa3b1b7a4d8131a2c4aa19266436318483a41bc0f3b",
+      "bytes": 1171,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/sample_cache.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/sample_cache.c",
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+      "bytes": 4018,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/sample_cache.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/sample_cache.h",
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6",
+      "bytes": 1999,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/scheduled_lineage.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/scheduled_lineage.c",
+      "sha256": "6550c1483ca9620c856ccbaa2b8015cb13fb59f5a2e1f6b28a6f47b8d90dd786",
+      "bytes": 21757,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/scheduled_lineage.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/scheduled_lineage.h",
+      "sha256": "922162700b31408011c05b12f0f81db26d978fba5ec9635b00626aee42c453eb",
+      "bytes": 6189,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/scheduled_output.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/scheduled_output.c",
+      "sha256": "940979a07c48679e141722cc672b967d9e4dffd575ba126038a3fd111ec55405",
+      "bytes": 9473,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/scheduled_output.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/scheduled_output.h",
+      "sha256": "3289945d9446b373d8aa1897cb2c432f08ef253b443a81cd4dde39230df9b9da",
+      "bytes": 6515,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/sinc_kernel.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/sinc_kernel.h",
+      "sha256": "058629396a0b22daa67f75c909adf9181fc4e52bfc668890fe2abc3231c3a185",
+      "bytes": 28756,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/slices.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/slices.c",
+      "sha256": "2951045844f6fdebdd80afe12fe7a5afc1f37bf837c2f49d840f14867835342f",
+      "bytes": 6060,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/slices.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/slices.h",
+      "sha256": "31cd82785c2b86c41d9cde1f7a29056c9d70ec41fb7a9bfb1a5679ba762c24f7",
+      "bytes": 2003,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/svx.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/svx.c",
+      "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813",
+      "bytes": 7817,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/svx.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/svx.h",
+      "sha256": "824541cd25b72b5820e091cfc9f4e6a5f41351fd0630dddc09aefc0405036814",
+      "bytes": 1442,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/wav.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/wav.c",
+      "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f",
+      "bytes": 7200,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/core/wav.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/core/wav.h",
+      "sha256": "8dd0f4454304babb53eef5ecb97cde7bfe6569d292cc0e9a0f204c4a587f2028",
+      "bytes": 1384,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/editor/project_snapshot.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/editor/project_snapshot.h",
+      "sha256": "dbb1206c1e8bfd317b515086f9d064c6eacd2450228893bb394f278ed6c0b2df",
+      "bytes": 1203,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/editor/sampler.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/editor/sampler.c",
+      "sha256": "5b18d67b6a51aa505131040e3a15425da674334ec66e3fd24faab988d062c984",
+      "bytes": 35514,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/editor/sampler.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/editor/sampler.h",
+      "sha256": "d19465c8b3866cfb67cfaca98457c2201165675cc3a4f45804d3c00b17284433",
+      "bytes": 6264,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/editor/sampler_internal.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/editor/sampler_internal.h",
+      "sha256": "8ce04909cd657d0caa6598416cfce2ee91109bf8fde782fc7795d35b116ac3e2",
+      "bytes": 3679,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/editor/sampler_paula.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/editor/sampler_paula.c",
+      "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e",
+      "bytes": 7401,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/editor/sampler_paula.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/editor/sampler_paula.h",
+      "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890",
+      "bytes": 2718,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/editor/sampler_paula_future.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/editor/sampler_paula_future.c",
+      "sha256": "4ba81d5e506a669df3cfaf6afbb6b0819070c06119c8c54a1ff09bc9d8944f1f",
+      "bytes": 22678,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/editor/sampler_paula_future.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/editor/sampler_paula_future.h",
+      "sha256": "760a6f6ae9cf33656401d6ea827eea1a90caed34559eaee0743e4ebac2415326",
+      "bytes": 4016,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/editor/sampler_paula_internal.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/editor/sampler_paula_internal.h",
+      "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb",
+      "bytes": 3013,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/src/editor/slots.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/src/editor/slots.c",
+      "sha256": "60ab6a784d4bc47285bb436b975cdd6ee0bad4743bdf9f0817837d818645f7fa",
+      "bytes": 3233,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/tests/sampler_paula_future_test.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/tests/sampler_paula_future_test.c",
+      "sha256": "0891aa9a90c4c329beb798ee97ad1b83b6b95c6110f98ae14c356a1b9a0a8f56",
+      "bytes": 34094,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/tests/scheduled_lineage_test.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/tests/scheduled_lineage_test.c",
+      "sha256": "8cd9b724824484804ffb5946df3feb92cc907d87e4a914c530f16f24592e38bc",
+      "bytes": 36620,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/tests/test_sampler.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/tests/test_sampler.py",
+      "sha256": "847a13bc1694ed2c8dff8638e54ff6f49660a61734f4d21f4328d719999c35da",
+      "bytes": 860,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/tests/test_sampler_paula_future.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/tests/test_sampler_paula_future.py",
+      "sha256": "022079dc7769b5a7ca62d31664429a1bec172323c72568ce938dadb0f609d599",
+      "bytes": 854,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/baseline/tests/test_scheduled_lineage.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline/tests/test_scheduled_lineage.py",
+      "sha256": "aea9461b85f9085a1ce1ba50127d761bd69fe4550ea64d640b94dbdcde2c816d",
+      "bytes": 855,
+      "mode": 420,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/docs/SAMPLER_PAULA_LINEAGE.md": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/docs/SAMPLER_PAULA_LINEAGE.md",
+      "sha256": "14498be8c4c70cadf03efb3962011c44b08539db0cdb4a30a64778621ad51da4",
+      "bytes": 6731,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/amigus_reservation.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/amigus_reservation.h",
+      "sha256": "ee57be55b9865fd19d14b27b22af6e2aa6b0466b7f21da5b313016efe9a0b646",
+      "bytes": 3404,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/amigus_sample_ram.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/amigus_sample_ram.h",
+      "sha256": "005111323eb1884112230ea415fbfb75e01d560618326148e08790d4f23fadf6",
+      "bytes": 2813,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/amigus_wavetable_cache.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/amigus_wavetable_cache.h",
+      "sha256": "8c449f009eac14807a9521d16a756345dd531e47b50312a3cabf96ee7ea2ee9c",
+      "bytes": 3792,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/channels.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/channels.c",
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+      "bytes": 6996,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/channels.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/channels.h",
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "bytes": 1818,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/document.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/document.c",
+      "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a",
+      "bytes": 9127,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/document.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/document.h",
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "bytes": 1965,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/elapsed_clock.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/elapsed_clock.c",
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "bytes": 3917,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/elapsed_clock.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/elapsed_clock.h",
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "bytes": 1659,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/mod_inspect.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/mod_inspect.c",
+      "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511",
+      "bytes": 3513,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/mod_inspect.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/mod_inspect.h",
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "bytes": 1240,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/mod_project.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/mod_project.c",
+      "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09",
+      "bytes": 23640,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/mod_project.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/mod_project.h",
+      "sha256": "c28407161729fc0fea2398f79341a866f03913b092769674bd871bb23adb59ee",
+      "bytes": 5051,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/pattern.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/pattern.c",
+      "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e",
+      "bytes": 15753,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/pattern.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/pattern.h",
+      "sha256": "f8c9abde09c4fe495ae77f25c070da647eab038845729edc83adec08c5678d53",
+      "bytes": 3642,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/pcm.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/pcm.c",
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266",
+      "bytes": 7061,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/pcm.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/pcm.h",
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "bytes": 2494,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/pcm_filtered.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/pcm_filtered.c",
+      "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9",
+      "bytes": 4604,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/pcm_internal.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/pcm_internal.h",
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b",
+      "bytes": 615,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/playback_internal.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/playback_internal.h",
+      "sha256": "5d76f20f2c9a7eda89c3543a897f053c97f9460a847d2d70b32b8b71c14775e2",
+      "bytes": 1893,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/playback_pcm.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/playback_pcm.c",
+      "sha256": "f00995c1ca81176fc244968b4276b41624767f42c2963eb90482f23953d09a1f",
+      "bytes": 11344,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/playback_pcm.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/playback_pcm.h",
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65",
+      "bytes": 6034,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/pp20.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/pp20.c",
+      "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465",
+      "bytes": 7187,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/pp20.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/pp20.h",
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "bytes": 966,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/project.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/project.c",
+      "sha256": "e4fde542cdfc9b9bce585ef0cda0b5b09d07482f3ec89fddb8d79137b8b0e1c1",
+      "bytes": 39034,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/project.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/project.h",
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8",
+      "bytes": 5698,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/raw.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/raw.c",
+      "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377",
+      "bytes": 3920,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/raw.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/raw.h",
+      "sha256": "f9f47added4df41bb7b15aa3b1b7a4d8131a2c4aa19266436318483a41bc0f3b",
+      "bytes": 1171,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/sample_cache.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/sample_cache.c",
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+      "bytes": 4018,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/sample_cache.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/sample_cache.h",
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6",
+      "bytes": 1999,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/scheduled_lineage.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/scheduled_lineage.c",
+      "sha256": "6550c1483ca9620c856ccbaa2b8015cb13fb59f5a2e1f6b28a6f47b8d90dd786",
+      "bytes": 21757,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/scheduled_lineage.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/scheduled_lineage.h",
+      "sha256": "922162700b31408011c05b12f0f81db26d978fba5ec9635b00626aee42c453eb",
+      "bytes": 6189,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/scheduled_output.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/scheduled_output.c",
+      "sha256": "940979a07c48679e141722cc672b967d9e4dffd575ba126038a3fd111ec55405",
+      "bytes": 9473,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/scheduled_output.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/scheduled_output.h",
+      "sha256": "3289945d9446b373d8aa1897cb2c432f08ef253b443a81cd4dde39230df9b9da",
+      "bytes": 6515,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/sinc_kernel.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/sinc_kernel.h",
+      "sha256": "058629396a0b22daa67f75c909adf9181fc4e52bfc668890fe2abc3231c3a185",
+      "bytes": 28756,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/slices.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/slices.c",
+      "sha256": "2951045844f6fdebdd80afe12fe7a5afc1f37bf837c2f49d840f14867835342f",
+      "bytes": 6060,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/slices.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/slices.h",
+      "sha256": "31cd82785c2b86c41d9cde1f7a29056c9d70ec41fb7a9bfb1a5679ba762c24f7",
+      "bytes": 2003,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/svx.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/svx.c",
+      "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813",
+      "bytes": 7817,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/svx.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/svx.h",
+      "sha256": "824541cd25b72b5820e091cfc9f4e6a5f41351fd0630dddc09aefc0405036814",
+      "bytes": 1442,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/wav.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/wav.c",
+      "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f",
+      "bytes": 7200,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/core/wav.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/core/wav.h",
+      "sha256": "8dd0f4454304babb53eef5ecb97cde7bfe6569d292cc0e9a0f204c4a587f2028",
+      "bytes": 1384,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/editor/project_snapshot.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/editor/project_snapshot.h",
+      "sha256": "dbb1206c1e8bfd317b515086f9d064c6eacd2450228893bb394f278ed6c0b2df",
+      "bytes": 1203,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/editor/sampler.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/editor/sampler.c",
+      "sha256": "5b18d67b6a51aa505131040e3a15425da674334ec66e3fd24faab988d062c984",
+      "bytes": 35514,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/editor/sampler.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/editor/sampler.h",
+      "sha256": "d19465c8b3866cfb67cfaca98457c2201165675cc3a4f45804d3c00b17284433",
+      "bytes": 6264,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/editor/sampler_internal.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/editor/sampler_internal.h",
+      "sha256": "8ce04909cd657d0caa6598416cfce2ee91109bf8fde782fc7795d35b116ac3e2",
+      "bytes": 3679,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/editor/sampler_paula.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/editor/sampler_paula.c",
+      "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e",
+      "bytes": 7401,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/editor/sampler_paula.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/editor/sampler_paula.h",
+      "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890",
+      "bytes": 2718,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/editor/sampler_paula_future.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/editor/sampler_paula_future.c",
+      "sha256": "4ba81d5e506a669df3cfaf6afbb6b0819070c06119c8c54a1ff09bc9d8944f1f",
+      "bytes": 22678,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/editor/sampler_paula_future.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/editor/sampler_paula_future.h",
+      "sha256": "760a6f6ae9cf33656401d6ea827eea1a90caed34559eaee0743e4ebac2415326",
+      "bytes": 4016,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/editor/sampler_paula_internal.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/editor/sampler_paula_internal.h",
+      "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb",
+      "bytes": 3013,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/editor/sampler_paula_lineage.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/editor/sampler_paula_lineage.c",
+      "sha256": "ce7b47e05d5efae1e3f426886d7e90a56a5f69eb0d7007b15bfdbb17088a4a67",
+      "bytes": 26720,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/editor/sampler_paula_lineage.h": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/editor/sampler_paula_lineage.h",
+      "sha256": "24fae91fc5f16a0ab235a3b82ac9b731fda84f909fa4e6be8a3b706d294d373a",
+      "bytes": 4120,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/src/editor/slots.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/src/editor/slots.c",
+      "sha256": "60ab6a784d4bc47285bb436b975cdd6ee0bad4743bdf9f0817837d818645f7fa",
+      "bytes": 3233,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/tests/sampler_paula_future_test.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/tests/sampler_paula_future_test.c",
+      "sha256": "0891aa9a90c4c329beb798ee97ad1b83b6b95c6110f98ae14c356a1b9a0a8f56",
+      "bytes": 34094,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/tests/sampler_paula_lineage_test.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/tests/sampler_paula_lineage_test.c",
+      "sha256": "2c40bffc7209378f12117a97e0c1f27f3d15fbbf1cdcc1abe5f42f69f4c31076",
+      "bytes": 28878,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/tests/scheduled_lineage_test.c": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/tests/scheduled_lineage_test.c",
+      "sha256": "8cd9b724824484804ffb5946df3feb92cc907d87e4a914c530f16f24592e38bc",
+      "bytes": 36620,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/tests/test_sampler.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/tests/test_sampler.py",
+      "sha256": "847a13bc1694ed2c8dff8638e54ff6f49660a61734f4d21f4328d719999c35da",
+      "bytes": 860,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/tests/test_sampler_paula_future.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/tests/test_sampler_paula_future.py",
+      "sha256": "022079dc7769b5a7ca62d31664429a1bec172323c72568ce938dadb0f609d599",
+      "bytes": 854,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/tests/test_sampler_paula_lineage.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/tests/test_sampler_paula_lineage.py",
+      "sha256": "e51d2f9e13925a40af3b71ed925514af4b8d84c9bcc22820765c60ccc95d8644",
+      "bytes": 867,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "host-inputs/final/tests/test_scheduled_lineage.py": {
+      "original_path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final/tests/test_scheduled_lineage.py",
+      "sha256": "aea9461b85f9085a1ce1ba50127d761bd69fe4550ea64d640b94dbdcde2c816d",
+      "bytes": 855,
+      "mode": 292,
+      "role": "Exact compiled canonical/Python declaration bytes for this stage; five new files exist only in final"
+    },
+    "native-inputs/docs/SAMPLER_PAULA_LINEAGE.md": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/docs/SAMPLER_PAULA_LINEAGE.md",
+      "sha256": "14498be8c4c70cadf03efb3962011c44b08539db0cdb4a30a64778621ad51da4",
+      "bytes": 6731,
+      "mode": 292,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/amigus_reservation.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/amigus_reservation.h",
+      "sha256": "ee57be55b9865fd19d14b27b22af6e2aa6b0466b7f21da5b313016efe9a0b646",
+      "bytes": 3404,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/amigus_sample_ram.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/amigus_sample_ram.h",
+      "sha256": "005111323eb1884112230ea415fbfb75e01d560618326148e08790d4f23fadf6",
+      "bytes": 2813,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/amigus_wavetable_cache.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/amigus_wavetable_cache.h",
+      "sha256": "8c449f009eac14807a9521d16a756345dd531e47b50312a3cabf96ee7ea2ee9c",
+      "bytes": 3792,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/channels.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/channels.c",
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+      "bytes": 6996,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/channels.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/channels.h",
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "bytes": 1818,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/document.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/document.c",
+      "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a",
+      "bytes": 9127,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/document.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/document.h",
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "bytes": 1965,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/elapsed_clock.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/elapsed_clock.c",
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "bytes": 3917,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/elapsed_clock.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/elapsed_clock.h",
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "bytes": 1659,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/mod_inspect.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/mod_inspect.c",
+      "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511",
+      "bytes": 3513,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/mod_inspect.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/mod_inspect.h",
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "bytes": 1240,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/mod_project.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/mod_project.c",
+      "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09",
+      "bytes": 23640,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/mod_project.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/mod_project.h",
+      "sha256": "c28407161729fc0fea2398f79341a866f03913b092769674bd871bb23adb59ee",
+      "bytes": 5051,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/pattern.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/pattern.c",
+      "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e",
+      "bytes": 15753,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/pattern.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/pattern.h",
+      "sha256": "f8c9abde09c4fe495ae77f25c070da647eab038845729edc83adec08c5678d53",
+      "bytes": 3642,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/pcm.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/pcm.c",
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266",
+      "bytes": 7061,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/pcm.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/pcm.h",
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "bytes": 2494,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/pcm_filtered.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/pcm_filtered.c",
+      "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9",
+      "bytes": 4604,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/pcm_internal.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/pcm_internal.h",
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b",
+      "bytes": 615,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/playback_internal.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/playback_internal.h",
+      "sha256": "5d76f20f2c9a7eda89c3543a897f053c97f9460a847d2d70b32b8b71c14775e2",
+      "bytes": 1893,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/playback_pcm.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/playback_pcm.c",
+      "sha256": "f00995c1ca81176fc244968b4276b41624767f42c2963eb90482f23953d09a1f",
+      "bytes": 11344,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/playback_pcm.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/playback_pcm.h",
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65",
+      "bytes": 6034,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/pp20.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/pp20.c",
+      "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465",
+      "bytes": 7187,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/pp20.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/pp20.h",
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "bytes": 966,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/project.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/project.c",
+      "sha256": "e4fde542cdfc9b9bce585ef0cda0b5b09d07482f3ec89fddb8d79137b8b0e1c1",
+      "bytes": 39034,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/project.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/project.h",
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8",
+      "bytes": 5698,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/raw.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/raw.c",
+      "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377",
+      "bytes": 3920,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/raw.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/raw.h",
+      "sha256": "f9f47added4df41bb7b15aa3b1b7a4d8131a2c4aa19266436318483a41bc0f3b",
+      "bytes": 1171,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/sample_cache.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/sample_cache.c",
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+      "bytes": 4018,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/sample_cache.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/sample_cache.h",
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6",
+      "bytes": 1999,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/scheduled_lineage.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/scheduled_lineage.c",
+      "sha256": "6550c1483ca9620c856ccbaa2b8015cb13fb59f5a2e1f6b28a6f47b8d90dd786",
+      "bytes": 21757,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/scheduled_lineage.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/scheduled_lineage.h",
+      "sha256": "922162700b31408011c05b12f0f81db26d978fba5ec9635b00626aee42c453eb",
+      "bytes": 6189,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/scheduled_output.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/scheduled_output.h",
+      "sha256": "3289945d9446b373d8aa1897cb2c432f08ef253b443a81cd4dde39230df9b9da",
+      "bytes": 6515,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/sinc_kernel.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/sinc_kernel.h",
+      "sha256": "058629396a0b22daa67f75c909adf9181fc4e52bfc668890fe2abc3231c3a185",
+      "bytes": 28756,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/slices.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/slices.c",
+      "sha256": "2951045844f6fdebdd80afe12fe7a5afc1f37bf837c2f49d840f14867835342f",
+      "bytes": 6060,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/slices.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/slices.h",
+      "sha256": "31cd82785c2b86c41d9cde1f7a29056c9d70ec41fb7a9bfb1a5679ba762c24f7",
+      "bytes": 2003,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/svx.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/svx.c",
+      "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813",
+      "bytes": 7817,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/svx.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/svx.h",
+      "sha256": "824541cd25b72b5820e091cfc9f4e6a5f41351fd0630dddc09aefc0405036814",
+      "bytes": 1442,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/wav.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/wav.c",
+      "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f",
+      "bytes": 7200,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/core/wav.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/core/wav.h",
+      "sha256": "8dd0f4454304babb53eef5ecb97cde7bfe6569d292cc0e9a0f204c4a587f2028",
+      "bytes": 1384,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/editor/project_snapshot.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/editor/project_snapshot.h",
+      "sha256": "dbb1206c1e8bfd317b515086f9d064c6eacd2450228893bb394f278ed6c0b2df",
+      "bytes": 1203,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/editor/sampler.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/editor/sampler.c",
+      "sha256": "5b18d67b6a51aa505131040e3a15425da674334ec66e3fd24faab988d062c984",
+      "bytes": 35514,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/editor/sampler.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/editor/sampler.h",
+      "sha256": "d19465c8b3866cfb67cfaca98457c2201165675cc3a4f45804d3c00b17284433",
+      "bytes": 6264,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/editor/sampler_internal.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/editor/sampler_internal.h",
+      "sha256": "8ce04909cd657d0caa6598416cfce2ee91109bf8fde782fc7795d35b116ac3e2",
+      "bytes": 3679,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/editor/sampler_paula.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/editor/sampler_paula.c",
+      "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e",
+      "bytes": 7401,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/editor/sampler_paula.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/editor/sampler_paula.h",
+      "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890",
+      "bytes": 2718,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/editor/sampler_paula_internal.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/editor/sampler_paula_internal.h",
+      "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb",
+      "bytes": 3013,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/editor/sampler_paula_lineage.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/editor/sampler_paula_lineage.c",
+      "sha256": "ce7b47e05d5efae1e3f426886d7e90a56a5f69eb0d7007b15bfdbb17088a4a67",
+      "bytes": 26720,
+      "mode": 292,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/editor/sampler_paula_lineage.h": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/editor/sampler_paula_lineage.h",
+      "sha256": "24fae91fc5f16a0ab235a3b82ac9b731fda84f909fa4e6be8a3b706d294d373a",
+      "bytes": 4120,
+      "mode": 292,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/src/editor/slots.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/src/editor/slots.c",
+      "sha256": "60ab6a784d4bc47285bb436b975cdd6ee0bad4743bdf9f0817837d818645f7fa",
+      "bytes": 3233,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/tests/sampler_paula_lineage_test.c": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/tests/sampler_paula_lineage_test.c",
+      "sha256": "2c40bffc7209378f12117a97e0c1f27f3d15fbbf1cdcc1abe5f42f69f4c31076",
+      "bytes": 28878,
+      "mode": 292,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/tests/test_sampler.py": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/tests/test_sampler.py",
+      "sha256": "847a13bc1694ed2c8dff8638e54ff6f49660a61734f4d21f4328d719999c35da",
+      "bytes": 860,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/tests/test_sampler_paula_lineage.py": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/tests/test_sampler_paula_lineage.py",
+      "sha256": "e51d2f9e13925a40af3b71ed925514af4b8d84c9bcc22820765c60ccc95d8644",
+      "bytes": 867,
+      "mode": 292,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/tools/build_core_tests.py": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/tools/build_core_tests.py",
+      "sha256": "1948232ab42449eb518e49ee55276542b102d7461f0f58d8aa273588a20a0d55",
+      "bytes": 38970,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/tools/build_diagnostic.py": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/tools/build_diagnostic.py",
+      "sha256": "a5a42c8a811eb4e5ce744157afd2715de8f4c9c7d392b3b7b40f1dc6f459a805",
+      "bytes": 5879,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "native-inputs/tools/build_paula_lineage_test.py": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/tools/build_paula_lineage_test.py",
+      "sha256": "3382f2b342858ee81dac33b8016cba94e55a8d0086a40e5496a0fa4ac7654b12",
+      "bytes": 15290,
+      "mode": 420,
+      "role": "Exact current51 compiled inputs or five-file/builder overlay and AST-only committed build/runtime/Python declaration controls"
+    },
+    "independent/source-host-final.json": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-final-independent-review-1791066278673219000.json",
+      "sha256": "3d590fca5e29e051e8b0bfed0e8a28180cbb16ac37c5e394f951a215e6a7caf3",
+      "bytes": 50534,
+      "mode": 420,
+      "role": "Exact independent source-host-final receipt; scope and historical timing preserved"
+    },
+    "independent/builder-export.json": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-builder-export-independent-review-1791066692137432000.json",
+      "sha256": "f126bc9c7a13b49c05a56b18286ab0c887061fe81163fe7b29b41f355f8d4903",
+      "bytes": 5268,
+      "mode": 420,
+      "role": "Exact independent builder-export receipt; scope and historical timing preserved"
+    },
+    "independent/actual-native-build.json": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-native-actual-independent-review-1791066832121789000.json",
+      "sha256": "9798c8efcc37f08499317e21fa6971f4fbd7dff8a9ea55b42fff7dec85d789ca",
+      "bytes": 33433,
+      "mode": 420,
+      "role": "Exact independent actual-native-build receipt; scope and historical timing preserved"
+    },
+    "independent/source-host-prior.json": {
+      "original_path": "/private/tmp/protracker-sampler-lineage-independent-review-1791066212099923000.json",
+      "sha256": "bf4fa402d2437210d06df25a03f366197a006f95d0a1b39b62fbf912b921e5a6",
+      "bytes": 40448,
+      "mode": 420,
+      "role": "Exact earlier independent read-only source/host audit prior to final append-only builder binding"
+    },
+    "preparation/packager.py": {
+      "original_path": "/private/tmp/package_sampler_paula_lineage_evidence.py",
+      "sha256": "cf33bd8e554aac4d289602fc2e8a9460e4f07c215a65b8eef780fd5b398722f5",
+      "bytes": 20290,
+      "mode": 420,
+      "role": "Exact host-only lossless copier, standard-library reader and deterministic archive creation; no producer imports"
+    }
+  },
+  "source_inventories": {
+    "author-baseline": {
+      "source_root": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline",
+      "manifest": {
+        "path": "/private/tmp/protracker-paula-lineage-ixzzdr35/baseline-manifest.json",
+        "bytes": 1090820,
+        "sha256": "59c66a349e2cec325c4d20ae1c3ee65972de90009606724de893e1de27a57bd2"
+      },
+      "file_count": 7989,
+      "all_hashes_match": true
+    },
+    "author-final": {
+      "source_root": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-final",
+      "manifest": {
+        "path": "/private/tmp/protracker-paula-lineage-ixzzdr35/source-manifest.json",
+        "bytes": 1092443,
+        "sha256": "50acaf95c24acd818529d218b21c24468ae57ccb653cd24c74acdcbe9389a8ee"
+      },
+      "file_count": 7994,
+      "all_hashes_match": true
+    },
+    "native-current": {
+      "source_root": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native",
+      "manifest": {
+        "path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-manifest-native.json",
+        "bytes": 1092662,
+        "sha256": "757498b9dd2d73145df6ebf909e6ec50b360d8c0a9d6429c1ccf51c4a362131d"
+      },
+      "file_count": 8001,
+      "all_hashes_match": true
+    }
+  },
+  "five_adapter_paths": [
+    {
+      "path": "src/editor/sampler_paula_lineage.c",
+      "sha256": "ce7b47e05d5efae1e3f426886d7e90a56a5f69eb0d7007b15bfdbb17088a4a67",
+      "bytes": 26720
+    },
+    {
+      "path": "src/editor/sampler_paula_lineage.h",
+      "sha256": "24fae91fc5f16a0ab235a3b82ac9b731fda84f909fa4e6be8a3b706d294d373a",
+      "bytes": 4120
+    },
+    {
+      "path": "tests/sampler_paula_lineage_test.c",
+      "sha256": "2c40bffc7209378f12117a97e0c1f27f3d15fbbf1cdcc1abe5f42f69f4c31076",
+      "bytes": 28878
+    },
+    {
+      "path": "tests/test_sampler_paula_lineage.py",
+      "sha256": "e51d2f9e13925a40af3b71ed925514af4b8d84c9bcc22820765c60ccc95d8644",
+      "bytes": 867
+    },
+    {
+      "path": "docs/SAMPLER_PAULA_LINEAGE.md",
+      "sha256": "14498be8c4c70cadf03efb3962011c44b08539db0cdb4a30a64778621ad51da4",
+      "bytes": 6731
+    }
+  ],
+  "six_native_overlays": [
+    {
+      "path": "src/editor/sampler_paula_lineage.c",
+      "sha256": "ce7b47e05d5efae1e3f426886d7e90a56a5f69eb0d7007b15bfdbb17088a4a67",
+      "bytes": 26720
+    },
+    {
+      "path": "src/editor/sampler_paula_lineage.h",
+      "sha256": "24fae91fc5f16a0ab235a3b82ac9b731fda84f909fa4e6be8a3b706d294d373a",
+      "bytes": 4120
+    },
+    {
+      "path": "tests/sampler_paula_lineage_test.c",
+      "sha256": "2c40bffc7209378f12117a97e0c1f27f3d15fbbf1cdcc1abe5f42f69f4c31076",
+      "bytes": 28878
+    },
+    {
+      "path": "tests/test_sampler_paula_lineage.py",
+      "sha256": "e51d2f9e13925a40af3b71ed925514af4b8d84c9bcc22820765c60ccc95d8644",
+      "bytes": 867
+    },
+    {
+      "path": "docs/SAMPLER_PAULA_LINEAGE.md",
+      "sha256": "14498be8c4c70cadf03efb3962011c44b08539db0cdb4a30a64778621ad51da4",
+      "bytes": 6731
+    },
+    {
+      "path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/source-final-native/tools/build_paula_lineage_test.py",
+      "bytes": 15290,
+      "sha256": "3382f2b342858ee81dac33b8016cba94e55a8d0086a40e5496a0fa4ac7654b12"
+    }
+  ],
+  "independent_reviews": {
+    "source-host-final": {
+      "path": "/private/tmp/protracker-sampler-lineage-final-independent-review-1791066278673219000.json",
+      "bytes": 50534,
+      "sha256": "3d590fca5e29e051e8b0bfed0e8a28180cbb16ac37c5e394f951a215e6a7caf3"
+    },
+    "builder-export": {
+      "path": "/private/tmp/protracker-sampler-lineage-builder-export-independent-review-1791066692137432000.json",
+      "bytes": 5268,
+      "sha256": "f126bc9c7a13b49c05a56b18286ab0c887061fe81163fe7b29b41f355f8d4903"
+    },
+    "actual-native-build": {
+      "path": "/private/tmp/protracker-sampler-lineage-native-actual-independent-review-1791066832121789000.json",
+      "bytes": 33433,
+      "sha256": "9798c8efcc37f08499317e21fa6971f4fbd7dff8a9ea55b42fff7dec85d789ca"
+    }
+  },
+  "root_preflight": {
+    "path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/root-preflight-review.json",
+    "bytes": 8756,
+    "sha256": "43b09aa01cbdeac14b4ca02379a859fb582e658b83098a6458396bbbb60788a6"
+  },
+  "compiled_source_equivalence": "All51 compiler canonical inputs match actual frozen host dependencies; different full trees are explicitly preserved",
+  "complete_source_exports_and_SDK_toolchain_trees_archived": false,
+  "external_fingerprints": "All host105system/native32SDK/compiler/Python/runtime inputs retained in original controls and rehashed at packaging",
+  "host_PASS": "three groups/sixRC0/47-M/56canonical105system/three archived executables",
+  "native_build_PASS": "one attempt33RC0/22TUs/22-M/51canonical32SDK/seven runtime pins",
+  "native_binary": {
+    "path": "/private/tmp/protracker-sampler-lineage-current-native-lu1i49zc/native-final-v1/PTPaulaLineageTest",
+    "bytes": 151592,
+    "sha256": "5607e94a8417e8476d4bade6b92bcbf832e835b61c340ac174bb2278f5e32d78"
+  },
+  "HUNK_NOT_RUN": true,
+  "Stack2097152": "PROVISIONAL/NOT QUALIFIED",
+  "native_Exec_Chip_DMA_backend_IRQ_song_hardware_timing": "NOT QUALIFIED OR IMPLEMENTED",
+  "protected16": "Only original captured root-reported check, not packager live verification",
+  "reader": "verify_payload.py checks controls/all bytes and modes and recreates deterministic payload without extracting/evaluating producer code; optional --origins checks retained exact private originals"
+}

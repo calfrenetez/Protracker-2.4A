@@ -149,8 +149,9 @@ has explicit local provenance and cannot invent an ACTIVE fact. Uncertainty
 retains resources and latches failure. The unchanged legacy flags7 contract is
 still separate. Capacity is at most eight events and four actions; repeated
 CONTROL commands can exhaust it until their shared reader retires. A scalable
-persistent reader domain, actual sampler CONTROL/STOP integration, song output
-and a native activation backend remain unfinished.
+persistent reader domain, song output and a native activation backend remain
+unfinished. The independent sampler CONTROL/STOP ownership adapter is implemented
+and qualified as a separate host/compiler software contract below.
 
 Two ASan/UBSan host groups passed four commands; independent review checked the
 16 canonical inputs and all 105 system fingerprints. The standalone 68k build
@@ -161,6 +162,39 @@ warning and token-equivalent newline correction are retained separately. These
 checks qualify neither memory classes, stack adequacy, IRQ/DMA, physical timing,
 audio nor listening. See [contract](SCHEDULED_LINEAGE.md) and
 [host/compiler evidence](../evidence/enhanced-editor/scheduled-lineage/README.md).
+
+## Independent sampler CONTROL/STOP lineage ownership — 3 October 2026
+
+The separate `sampler_paula_lineage` pool now prepares real master-version pins
+and selective signed8 cache leases for bounded TRIGGER, CONTROL and STOP batches.
+CONTROL/STOP requires the complete genuine positively ACTIVE original TRIGGER key;
+cache identity, publication acceptance and absence of retirement cannot create it.
+Each command acquires its own current master and identical cache slot/serial lease.
+Temporary predecessor borrowing defers disposal through acquisition, then both raw
+predecessor pointers are cleared before READY. Exact copied keys are rechecked at
+each step and enqueue, by the core at publication, and contractually by the backend
+at actual activation before any action.
+
+Preparation performs one transition, at most 4,096 bytes of master data or 256 bytes
+of Chip data per step. Pending copies remain private. Whole-batch aliases, changed
+keys and same-cache replacement refuse with complete protected before-images.
+Matching uses stable slots and captured sources, so reversed action order remains
+valid. Submitted owners retain independent resources until their exact
+all-reader retirement; cancelled-before CONTROL, pending STOP and draining readers
+are separate states. Correct retirement with invalid classification releases only
+that ticket once and latches pool failure. Unknown envelopes retain storage.
+
+Three ASan/UBSan host groups passed with actual sampler/cache jobs and a synthetic
+backend: 8/16/24-bit mono/stereo precision, independent pins, predecessor retirement,
+all-phase cancellation, budgets/pressure, aliases, reentry and terminal propagation.
+One pinned standalone 68k compile/link passed 33 commands from 22 translation units:
+51 canonical inputs, 32 SDK inputs, seven runtimes and active SDK assertions. Its
+151,592-byte HUNK has NOT RUN. Host allocations do not qualify memory classes.
+A 2 MiB test stack is provisional. A scalable persistent-reader domain, song integration,
+native activation/IRQ/DMA, physical timing, audio and listening remain unqualified.
+The fixed eight-owner/event domain intentionally refuses pressure. See
+[contract](SAMPLER_PAULA_LINEAGE.md) and
+[host/compiler evidence](../evidence/enhanced-editor/sampler-paula-lineage/README.md).
 
 ## Physical MOD export memory qualification — 3 October 2026
 

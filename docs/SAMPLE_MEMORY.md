@@ -5,6 +5,29 @@ The enhanced project owns the authoritative sample, including its declared
 elements in the declared precision; 24-bit samples retain their low eight bits.
 Playback representations must never become the project's source of truth.
 
+## MOD caller-output master protection — 3 October 2026
+
+Public direct, round-to8 and playback analysis reports now refuse overlap with
+project descriptors, orders, events, sample tables, slices, extension payloads and
+full declared PCM capacities. Direct, round-to8, TPDF and playback encoders apply
+the same protection to emitted bytes and completion counts, including mutual
+output overlap. Metadata-only guards allocate nothing and do not read unused
+capacity as audio. Validation, unsupported policy, NULL and capacity precedence
+remain unchanged. Streaming uses private analysis; no callback ownership rule,
+new conversion, dither policy or playback padding policy was introduced.
+
+The identical valid eleven-path sanitizer probe changes from baseline corruption
+to ALIAS refusal with source and outputs unchanged. Three focused host sanitizer
+groups pass from the combined frozen source containing the reviewed WAV fix;
+the complete MOD/probe compile dependencies are byte-identical to the prior MOD
+source and exclude those WAV files. The original host dependency logger is
+unchanged; a separate full-header preprocessor audit records every49 translation
+unit closure and132 system-header hashes. One pinned Amiga cross-build passes.
+Native MOD execution is pending while the distinct WAV cleanup hold is unresolved.
+Host/build, native allocator/file checks, physical audio, timing and listening
+acceptance remain separate. Ordinary streamed Save already uses private outputs;
+this closes public caller-output boundaries without changing classic MOD bytes.
+
 ## WAV caller-output master protection — 3 October 2026
 
 Public WAV size and encode outputs now protect the borrowed PCM descriptor and
@@ -19,8 +42,14 @@ both size and completion outputs. The identical final probe returns ALIAS and
 preserves257. Two focused host sanitizer groups and both pinned Amiga cross-builds
 pass. The first build helper stopped on an incorrect target-name validation map
 before compiling a test; its empty-target failure is preserved separately from
-the corrected helper and successful builds. Emulator execution is pending, with
-portable codec assertions separate from the Exec streamed file fixture.
+the corrected helper and successful builds. Exact04bd3fb emulator codec assertions
+pass with the original independent cleanup check. The streamed file fixture also
+returns RC0, preserves all six formats and ends18 Fast allocations at zero owned
+bytes with workspace11240. Its later independent cleanup check fails when exact
+run-owned paths reappear; the original qualification remains FAILED. Captured
+AmiConnect HOLD60 is not a release. The recreation cause and missing partial
+observer details are unknown; no automatic cleanup or fixture retry was performed.
+Portable codec assertions remain separate from the Exec streamed file fixture.
 Ordinary transactional WAV Save already uses private outputs; this closes public
 API boundaries. Physical audio, timing and listening acceptance remain separate.
 

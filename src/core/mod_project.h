@@ -28,6 +28,12 @@ enum pt_project_result pt_mod_project_decode_reader(pt_mod_read,void *,size_t,co
 enum pt_project_result pt_mod_project_probe(const uint8_t *,size_t,struct pt_project_requirements *);
 enum pt_project_result pt_mod_project_decode(const uint8_t *,size_t,
                                              const struct pt_project_storage *,struct pt_project *);
+/* Analysis reports and successful encoding outputs must be disjoint from the
+ * project, tables, slices, extension payloads and full declared PCM capacities,
+ * including unused capacity. Encode's written scalar must also be disjoint from
+ * its actual emitted bytes. ALIAS preserves source and outputs; unrepresentable
+ * spans fail closed. Guards read metadata only and allocate nothing. Encoding
+ * retains validation, unsupported-policy, NULL and capacity error precedence. */
 enum pt_project_result pt_mod_export_analyse(const struct pt_project *,struct pt_mod_export_report *);
 /* Direct, lossless path only. Any reported issue leaves output untouched and
  * returns UNSUPPORTED. Future transformations require explicit caller policy. */

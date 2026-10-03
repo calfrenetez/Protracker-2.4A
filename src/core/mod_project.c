@@ -10,6 +10,34 @@ static int overlap(const void *a,size_t an,const void *b,size_t bn)
     if(an>UINTPTR_MAX-x || bn>UINTPTR_MAX-y)return 1;
     return x<y+bn && y<x+an;
 }
+/* Called only after project validation. Count all declared master capacity,
+ * including padding, without reading inactive sample values or allocating. */
+static int span_alias(const void *out,size_t n,const void *source,size_t count,size_t width)
+{
+    size_t bytes;
+    if(count>SIZE_MAX/width)return 1;
+    bytes=count*width;
+    if(bytes && (!source || bytes>UINTPTR_MAX-(uintptr_t)source))return 1;
+    return overlap(out,n,source,bytes);
+}
+static int source_alias(const struct pt_project *p,const void *out,size_t n)
+{
+    unsigned i;size_t count=(size_t)p->pattern_count*64*p->channels.count;
+    if(n && (!out || n>UINTPTR_MAX-(uintptr_t)out))return 1;
+    if(span_alias(out,n,p,1,sizeof(*p)) ||
+       span_alias(out,n,p->orders,p->order_count,sizeof(*p->orders)) ||
+       span_alias(out,n,p->events,count,sizeof(*p->events)) ||
+       span_alias(out,n,p->samples,p->sample_count,sizeof(*p->samples)) ||
+       span_alias(out,n,p->extensions,p->extension_count,sizeof(*p->extensions)))return 1;
+    for(i=0;i<p->sample_count;++i) {
+        const struct pt_sample *sample=&p->samples[i];
+        if(span_alias(out,n,sample->pcm.data,sample->pcm.capacity,sizeof(*sample->pcm.data)) ||
+           span_alias(out,n,sample->slices,sample->slice_count,sizeof(*sample->slices)))return 1;
+    }
+    for(i=0;i<p->extension_count;++i)
+        if(span_alias(out,n,p->extensions[i].data,p->extensions[i].length,1))return 1;
+    return 0;
+}
 static const uint8_t *original(const struct pt_project *p)
 {
     unsigned i;
@@ -199,35 +227,36 @@ static enum pt_project_result analyse_mod(const struct pt_project *p,struct pt_m
     }
     *out=r;return PT_PROJECT_OK;
 }
-enum pt_project_result pt_mod_export_analyse(const struct pt_project *p,struct pt_mod_export_report *out)
-{return analyse_mod(p,out,0);}
-/* Playback alone may append one silent byte to each odd-length sample. Keep
- * this issue separate so no unrelated size/loop/export limit is relaxed. */
-enum pt_project_result pt_mod_playback_analyse(const struct pt_project *p,struct pt_mod_export_report *out)
+/* Private calculation keeps encoding's established unsupported/null/capacity
+ * precedence independent of external report publication or span refusal. */
+static enum pt_project_result analyse_policy(const struct pt_project *p,struct pt_mod_export_report *report,unsigned policy)
 {
-    struct pt_mod_export_report report;unsigned i;
-    enum pt_project_result r=analyse_mod(p,&report,1);
+    unsigned i;enum pt_project_result r=analyse_mod(p,report,policy==3);
     if(r!=PT_PROJECT_OK)return r;
-    if(!out)return PT_PROJECT_INVALID;
-    if(!(report.issues & ~(PT_EXPORT_PRECISION|PT_EXPORT_PADDING))) {
-        report.bytes=1084+(size_t)p->pattern_count*1024;
+    /* Playback alone may append one silent byte to each odd-length sample.
+     * Do not relax any unrelated size, loop or format constraint. */
+    if((policy==3 && !(report->issues & ~(PT_EXPORT_PRECISION|PT_EXPORT_PADDING))) ||
+       (policy && policy!=3 && report->issues==PT_EXPORT_PRECISION)) {
+        report->bytes=1084+(size_t)p->pattern_count*1024;
         for(i=0;i<p->sample_count;++i)
-            report.bytes+=p->samples[i].pcm.frames+(p->samples[i].pcm.frames&1);
+            report->bytes+=p->samples[i].pcm.frames+(policy==3?(p->samples[i].pcm.frames&1):0);
     }
-    *out=report;return PT_PROJECT_OK;
+    return PT_PROJECT_OK;
 }
-enum pt_project_result pt_mod_export_analyse_round8(const struct pt_project *p,struct pt_mod_export_report *out)
+static enum pt_project_result publish_analysis(const struct pt_project *p,struct pt_mod_export_report *out,unsigned policy)
 {
-    struct pt_mod_export_report report;unsigned i;
-    enum pt_project_result r=pt_mod_export_analyse(p,&report);
+    struct pt_mod_export_report report;enum pt_project_result r=analyse_policy(p,&report,policy);
     if(r!=PT_PROJECT_OK)return r;
     if(!out)return PT_PROJECT_INVALID;
-    if(report.issues==PT_EXPORT_PRECISION) {
-        report.bytes=1084+(size_t)p->pattern_count*1024;
-        for(i=0;i<p->sample_count;++i)report.bytes+=p->samples[i].pcm.frames;
-    }
+    if(source_alias(p,out,sizeof(*out)))return PT_PROJECT_ALIAS;
     *out=report;return PT_PROJECT_OK;
 }
+enum pt_project_result pt_mod_export_analyse(const struct pt_project *p,struct pt_mod_export_report *out)
+{return publish_analysis(p,out,0);}
+enum pt_project_result pt_mod_playback_analyse(const struct pt_project *p,struct pt_mod_export_report *out)
+{return publish_analysis(p,out,3);}
+enum pt_project_result pt_mod_export_analyse_round8(const struct pt_project *p,struct pt_mod_export_report *out)
+{return publish_analysis(p,out,1);}
 /* Fixed-width xorshift32: repeatable on both host and 680x0. */
 static uint32_t dither_random(uint32_t *state)
 {
@@ -235,21 +264,14 @@ static uint32_t dither_random(uint32_t *state)
 }
 static enum pt_project_result export_mod(const struct pt_project *p,uint8_t *out,size_t capacity,size_t *written,unsigned round8)
 {
-    struct pt_mod_export_report report;enum pt_project_result r=round8==3?pt_mod_playback_analyse(p,&report):round8?pt_mod_export_analyse_round8(p,&report):pt_mod_export_analyse(p,&report);
-    const uint8_t *old;unsigned i,j,maxorder=0;size_t pos,count;uint32_t noise=0x243f6a88UL;
+    struct pt_mod_export_report report;enum pt_project_result r=analyse_policy(p,&report,round8);
+    const uint8_t *old;unsigned i,j,maxorder=0;size_t pos;uint32_t noise=0x243f6a88UL;
     if(r!=PT_PROJECT_OK)return r;
     if(report.issues & ~(round8==3?(PT_EXPORT_PRECISION|PT_EXPORT_PADDING):round8?PT_EXPORT_PRECISION:0U))return PT_PROJECT_UNSUPPORTED;
     if(!out || !written)return PT_PROJECT_INVALID;
     if(capacity<report.bytes)return PT_PROJECT_CAPACITY;
-    count=(size_t)p->pattern_count*64*p->channels.count;
-    if(overlap(out,report.bytes,p,sizeof(*p)) || overlap(out,report.bytes,written,sizeof(*written)) ||
-       overlap(out,report.bytes,p->orders,p->order_count*sizeof(*p->orders)) ||
-       overlap(out,report.bytes,p->events,count*sizeof(*p->events)) ||
-       overlap(out,report.bytes,p->samples,p->sample_count*sizeof(*p->samples)) ||
-       overlap(out,report.bytes,p->extensions,p->extension_count*sizeof(*p->extensions)))return PT_PROJECT_ALIAS;
-    for(i=0;i<p->sample_count;++i)if(overlap(out,report.bytes,p->samples[i].pcm.data,
-        (size_t)p->samples[i].pcm.frames*sizeof(int32_t)))return PT_PROJECT_ALIAS;
-    for(i=0;i<p->extension_count;++i)if(overlap(out,report.bytes,p->extensions[i].data,p->extensions[i].length))return PT_PROJECT_ALIAS;
+    if(source_alias(p,out,report.bytes) || source_alias(p,written,sizeof(*written)) ||
+       overlap(out,report.bytes,written,sizeof(*written)))return PT_PROJECT_ALIAS;
     memset(out,0,report.bytes);old=original(p);if(old)memcpy(out,old,1084);
     memcpy(out,p->title,20);out[950]=(uint8_t)p->order_count;if(!old)out[951]=127;
     for(i=0;i<128;++i) {
@@ -308,7 +330,7 @@ static enum pt_project_result stream_mod(const struct pt_project *p,unsigned pol
     uint8_t header[1084],block[1024];const uint8_t *old;
     unsigned i,j,maxorder=0;size_t used=0;uint32_t noise=0x243f6a88UL;
     if(!sink)return PT_PROJECT_INVALID;
-    r=policy==3?pt_mod_playback_analyse(p,&report):policy?pt_mod_export_analyse_round8(p,&report):pt_mod_export_analyse(p,&report);
+    r=analyse_policy(p,&report,policy);
     if(r!=PT_PROJECT_OK)return r;
     if(report.issues & ~(policy==3?(PT_EXPORT_PRECISION|PT_EXPORT_PADDING):policy?PT_EXPORT_PRECISION:0U))return PT_PROJECT_UNSUPPORTED;
     memset(header,0,sizeof(header));old=original(p);if(old)memcpy(header,old,sizeof(header));

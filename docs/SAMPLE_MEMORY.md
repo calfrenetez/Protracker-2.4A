@@ -18,10 +18,15 @@ The original sanitizer probe changed a valid master from 257 to 12 and the
 borrowed sample rate from 48000 to 4. The identical candidate probe returns ALIAS
 and preserves both. Two focused host sanitizer groups pass, including sixteen
 fixed 8/16/24-bit mono/stereo wire variants and reserved-capacity guards. Both
-pinned Amiga cross-builds pass. Emulator execution is pending: portable codec
-assertions and the Exec streamed file fixture will be qualified separately.
-Ordinary transactional RAW Save already uses private outputs; this closes public
-API boundaries. Physical audio, timing and listening acceptance remain separate.
+pinned Amiga cross-builds pass. Exact 0219362 emulator codec assertions pass
+separately from the Exec streamed file fixture: sixteen formats preserve exact
+bytes and masters, fixed workspace11240, and 35 Fast allocations ending at zero
+owned bytes. Both retain90second deadlines, fresh DMA-off exact cleanup, separate
+locked10-second/11-observation absence and original-idle checks. The shared
+window is explicitly released and acknowledged. See
+`../evidence/enhanced-editor/raw-output-safety/`. Ordinary transactional RAW Save
+already uses private outputs; this closes public API boundaries. Physical audio,
+timing and listening acceptance remain separate.
 
 ## 8SVX caller-output master protection — 3 October 2026
 

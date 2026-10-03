@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "scope": "Two native RAW master/settings-output and Exec file fixtures; portable codec assertions separate from Exec allocator; no device/card/MMIO/physical/audio/timing/listening acceptance",
+  "source_tree": "37a852bea9854348c68614989f1d35ec65bbe0fe",
+  "top_sha256": "f0b9302c1f159858c5be91e88d585beaf380a795c40e2e2352c30bb775ce94a5",
+  "cases": [
+    {
+      "label": "raw-core",
+      "binary": "PTRawTest",
+      "binary_sha256": "43474df97bb4ea7e505d21f4d110dac42c4bf13ea0fa4cc62ae368188df6946f",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/raw-output-safety-qualification-1790996128083598000/runner-raw-core/build/dev/render-files-1790996128940445000",
+      "scope": "Portable RAW assertions only",
+      "rc": "0",
+      "independent_observations": 11,
+      "original_idle": true
+    },
+    {
+      "label": "sample-raw",
+      "binary": "PTExecSampleRawFileTest",
+      "binary_sha256": "e3d47b83afc8bfaea8c2d4739eca3c0478b7de304bf4a00e030bcfe755eff9ec",
+      "run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/raw-output-safety-qualification-1790996128083598000/runner-sample-raw/build/dev/render-files-1790996143108537000",
+      "scope": "Exec Fast pool and file workspace",
+      "rc": "0",
+      "independent_observations": 11,
+      "original_idle": true
+    }
+  ],
+  "no_current_shell_or_guest_operations": true
+}

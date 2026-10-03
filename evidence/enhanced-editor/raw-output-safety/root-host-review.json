@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "scope": "Root immutable/provenance inspection only; original host evidence tier unchanged",
+  "source_files": 7531,
+  "report_sha256": "875b762b6816f3e28c624d626f23420f0aa244414b26a1ede457daba316eb3f0",
+  "commands": 4,
+  "canonical_dependencies": 19
+}

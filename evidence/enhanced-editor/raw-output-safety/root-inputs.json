@@ -1,0 +1,6 @@
+{
+  "runner_before_sha256": "a34df812f9906b719ab4ca8ca7829838a2973807816f046a50e3ef86bdaf2f0c",
+  "runner_after_sha256": "20f310d3313bbb4015f3382b350cfafbd26d06e8e47140483b2b0d9ee4feb5b4",
+  "qualifier_sha256": "c9830703c76969d75111342412e95d3b141b6157c36a7433b840cc46eb974d52",
+  "scope": "Private preparation only; portable RAW assertions distinct from Exec fileallocation proof; unchanged90s native/140s runner,430s total/185s launchreserve"
+}

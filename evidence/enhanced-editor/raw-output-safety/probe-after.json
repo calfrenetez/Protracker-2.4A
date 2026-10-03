@@ -1,0 +1,164 @@
+{
+  "scope": "Host ASan/UBSan same baseline preservation probe: expected RC0, masters/settings retained through ALIAS; no native/target operation",
+  "source_manifest": {
+    "path": "/private/tmp/protracker-raw-output-safety-769na_5f/source-manifest.json",
+    "bytes": 1021532,
+    "sha256": "b958e2910b011c9329d4786e305edf90a9e32e95f76bf64285ab0c97a800e616"
+  },
+  "source_files_before": 7531,
+  "compiler": {
+    "path": "/usr/bin/cc",
+    "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+    "version": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "resource_dir": "/Library/Developer/CommandLineTools/usr/lib/clang/21"
+  },
+  "runtime_inputs": {
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.asan_osx_dynamic.dylib": "a319f00c1792b8ab704f8814655f2073cf16cdcc4b7463c9c07d8034da1de49f",
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.ubsan_osx_dynamic.dylib": "b4d8b49379b26b4faa55fa84f9aedf1f5188205767ddf529040ef904cbda4996"
+  },
+  "helper": {
+    "path": "/private/tmp/protracker-raw-output-safety-769na_5f/tools/run_candidate_probe.py",
+    "bytes": 4106,
+    "sha256": "6836e5332cfbbc8469a0702d7920f89d064b3bba48641e30411c2e108c359e91"
+  },
+  "probe": {
+    "path": "/private/tmp/protracker-raw-output-safety-769na_5f/candidate-probe/probe.c",
+    "bytes": 1520,
+    "sha256": "ef587afcbe28474dfc520736fbae1d9f53fa9069953b6bcc5819626ef0cd2afa"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "--version"
+      ],
+      "directory": "/private/tmp/protracker-raw-output-safety-769na_5f/source-final",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-raw-output-safety-769na_5f/candidate-probe/compiler-version.log",
+        "bytes": 158,
+        "sha256": "a856ec74c559401131ad608625ef252fb2db6c78bc0c480c1c4c782ee4896db1"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-MM",
+        "/private/tmp/protracker-raw-output-safety-769na_5f/candidate-probe/probe.c"
+      ],
+      "directory": "/private/tmp/protracker-raw-output-safety-769na_5f/source-final",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-raw-output-safety-769na_5f/candidate-probe/dependencies-00.log",
+        "bytes": 195,
+        "sha256": "7d29efe85c9118e7ef189e076148e1b97073b7d67a70b812569c437ae0bdba7b"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-MM",
+        "src/core/raw.c"
+      ],
+      "directory": "/private/tmp/protracker-raw-output-safety-769na_5f/source-final",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-raw-output-safety-769na_5f/candidate-probe/dependencies-01.log",
+        "bytes": 129,
+        "sha256": "d89bd0be07c507e9e5cf3a7c0962d0757742cd9ddc080753dd874d0d316849d3"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-MM",
+        "src/core/pcm.c"
+      ],
+      "directory": "/private/tmp/protracker-raw-output-safety-769na_5f/source-final",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-raw-output-safety-769na_5f/candidate-probe/dependencies-02.log",
+        "bytes": 138,
+        "sha256": "d12934cacf5920d48e9d890945e3296ee17179bfdac60b6c556a431cfcb3409c"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "/private/tmp/protracker-raw-output-safety-769na_5f/candidate-probe/probe.c",
+        "src/core/raw.c",
+        "src/core/pcm.c",
+        "-o",
+        "/private/tmp/protracker-raw-output-safety-769na_5f/candidate-probe/probe"
+      ],
+      "directory": "/private/tmp/protracker-raw-output-safety-769na_5f/source-final",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-raw-output-safety-769na_5f/candidate-probe/compile.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/private/tmp/protracker-raw-output-safety-769na_5f/candidate-probe/probe"
+      ],
+      "directory": "/private/tmp/protracker-raw-output-safety-769na_5f/source-final",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-raw-output-safety-769na_5f/candidate-probe/run.log",
+        "bytes": 144,
+        "sha256": "ec0df327b76b96a8799eee489b554fbd6a05714a2889eef230da35713351e94c"
+      }
+    }
+  ],
+  "canonical_dependencies": {
+    "src/core/raw.h": "f9f47added4df41bb7b15aa3b1b7a4d8131a2c4aa19266436318483a41bc0f3b",
+    "src/core/pcm.h": "6b1a14d9010f71b693c81c066e619343bb9b4cee0f4b6723347f34de2f5e12fb",
+    "src/core/raw.c": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377",
+    "src/core/pcm.c": "0bd9cc86e3eab3b077484bbcb20675eab0a648a76a18adabe4203c18f3b713a2",
+    "src/core/pcm_internal.h": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b"
+  },
+  "external_sdk_dependencies": {
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb"
+  },
+  "passed": true,
+  "binary": {
+    "path": "/private/tmp/protracker-raw-output-safety-769na_5f/candidate-probe/probe",
+    "bytes": 88952,
+    "sha256": "f0470163b0f950127aaa6fd9697db6f207791b28ad376f1d441bbac13080c3c9"
+  },
+  "source_files_after": 7531
+}

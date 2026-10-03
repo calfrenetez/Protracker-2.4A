@@ -1,0 +1,39 @@
+{
+  "scope": "Actual root captured REQUEST/TAKE/RELEASE responses; live native verification separately recorded",
+  "before_native": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"timedOut\":false,\"wake\":{\"reason\":\"turnCompleted\",\"turnId\":\"01a0ffae-fad7-73a3-8719-b24d86576df1\",\"threadId\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\"},\"polls\":[{\"schemaVersion\":1,\"cursor\":\"e7a645e7-31a2-432b-918d-41790ea9e0a3:51\",\"revision\":51,\"changed\":true,\"thread\":{\"id\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\",\"status\":{\"type\":\"idle\"}},\"latestTurn\":{\"id\":\"01a0ffae-fad7-73a3-8719-b24d86576df1\",\"status\":\"completed\",\"error\":null,\"startedAt\":1790996052,\"completedAt\":1790996069,\"durationMs\":16915},\"latestAssistantMessageId\":\"msg_052d99eb5846a575016ac06e624b4887d0bff89bc719bee968\",\"latestAssistantMessage\":{\"id\":\"msg_052d99eb5846a575016ac06e624b4887d0bff89bc719bee968\",\"turnId\":\"01a0ffae-fad7-73a3-8719-b24d86576df1\",\"phase\":\"final_answer\",\"text\":\"Fresh peer records show no newer TAKE or recovery hold; all three checked chats are inactive. AmiConnect holds nothing. No known coordination conflict for the two RAW fixtures. I have not verified PID19081 or live target identity. This remains a request, not a TAKE; fresh lock and exact live checks are required.\"},\"latestToolMarkerId\":\"exec-77d4bc75-0582-4bd4-8f35-dc91f2abb0ad\",\"latestToolMarker\":{\"id\":\"exec-77d4bc75-0582-4bd4-8f35-dc91f2abb0ad\",\"turnId\":\"01a0ffae-fad7-73a3-8719-b24d86576df1\",\"type\":\"mcpToolCall\",\"name\":\"wait_threads\",\"status\":\"completed\"}}]}"
+      }
+    ],
+    "isError": false
+  },
+  "take_response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"timedOut\":false,\"wake\":{\"reason\":\"turnCompleted\",\"turnId\":\"01a0ffaf-b3c5-7400-90bd-165ce6dfdd2f\",\"threadId\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\"},\"polls\":[{\"schemaVersion\":1,\"cursor\":\"e7a645e7-31a2-432b-918d-41790ea9e0a3:53\",\"revision\":53,\"changed\":true,\"thread\":{\"id\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\",\"status\":{\"type\":\"idle\"}},\"latestTurn\":{\"id\":\"01a0ffaf-b3c5-7400-90bd-165ce6dfdd2f\",\"status\":\"completed\",\"error\":null,\"startedAt\":1790996100,\"completedAt\":1790996106,\"durationMs\":6115},\"latestAssistantMessageId\":\"msg_052d99eb5846a575016ac06e86929887d0a08ef8a866650a60\",\"latestAssistantMessage\":{\"id\":\"msg_052d99eb5846a575016ac06e86929887d0a08ef8a866650a60\",\"turnId\":\"01a0ffaf-b3c5-7400-90bd-165ce6dfdd2f\",\"phase\":\"final_answer\",\"text\":\"The bounded two-fixture RAW TAKE notice is acknowledged, conditional on successful nonblocking lock and exact live checks. AmiConnect will leave both targets untouched pending refusal, hold or independently verified release. No physical or device-audio scope is included.\"},\"latestToolMarkerId\":null,\"latestToolMarker\":null}]}"
+      }
+    ],
+    "isError": false
+  },
+  "release_dispatch": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"threadId\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\"}"
+      }
+    ],
+    "isError": false
+  },
+  "release_response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"timedOut\":false,\"wake\":{\"reason\":\"turnCompleted\",\"turnId\":\"01a0ffb2-2d7a-7af0-8ea2-cf52c587cb04\",\"threadId\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\"},\"polls\":[{\"schemaVersion\":1,\"cursor\":\"e7a645e7-31a2-432b-918d-41790ea9e0a3:55\",\"revision\":55,\"changed\":true,\"thread\":{\"id\":\"01a02122-c34e-72f0-95cc-e36ce3d73629\",\"hostId\":\"local\",\"status\":{\"type\":\"idle\"}},\"latestTurn\":{\"id\":\"01a0ffb2-2d7a-7af0-8ea2-cf52c587cb04\",\"status\":\"completed\",\"error\":null,\"startedAt\":1790996262,\"completedAt\":1790996268,\"durationMs\":6292},\"latestAssistantMessageId\":\"msg_052d99eb5846a575016ac06f29fa4087d0a1e184bf4b612b62\",\"latestAssistantMessage\":{\"id\":\"msg_052d99eb5846a575016ac06f29fa4087d0a1e184bf4b612b62\",\"turnId\":\"01a0ffb2-2d7a-7af0-8ea2-cf52c587cb04\",\"phase\":\"final_answer\",\"text\":\"ProTracker reports both RAW fixtures passed and the window is released after independent cleanup and idle checks. No recovery hold remains. No physical, audio, timing or listening qualification occurred. AmiConnect holds no reservation.\"},\"latestToolMarkerId\":null,\"latestToolMarker\":null}]}"
+      }
+    ],
+    "isError": false
+  }
+}

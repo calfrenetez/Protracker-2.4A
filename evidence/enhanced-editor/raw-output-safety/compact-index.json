@@ -1,0 +1,254 @@
+{
+  "schema": "protracker-raw-output-safety-compact-controls-v1",
+  "scope": "Copy/archive/derivation integrity only; no new execution or live coordination acceptance",
+  "items": [
+    {
+      "path": "payload.tar.gz",
+      "bytes": 1736137,
+      "sha256": "47fa37030216aeb42b71d02dd3476654b036be903adaf1620e540e958d68d180",
+      "kind": "lossless_archive_derivation",
+      "scope": "Every selected raw original byte/source closure/helper/history",
+      "derivation": {
+        "members": 439,
+        "original_member_bytes": 6878782,
+        "all_member_bytes_hashes_sizes_modes_verified": true,
+        "safe_unique_regular_paths": true,
+        "uid_gid_mtime_zero": true,
+        "no_symlinks_hardlinks_or_truncated_members": true,
+        "second_archive_write_byte_identical": true
+      }
+    },
+    {
+      "path": "source-manifest.json.gz",
+      "bytes": 285368,
+      "sha256": "839a01578522f42138ad0d99c3dec9370b7990ee9259dcac3af6daec758c0b80",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Original complete7531 source manifest/three RAW plus ten inherited project/SVX overlays",
+      "origin": {
+        "path": "/private/tmp/protracker-raw-output-safety-769na_5f/source-manifest.json",
+        "bytes": 1021532,
+        "sha256": "b958e2910b011c9329d4786e305edf90a9e32e95f76bf64285ab0c97a800e616"
+      },
+      "derivation": {
+        "method": "gzip level9/mtime0/emptyfilename; no source JSON fields/order/whitespace altered"
+      }
+    },
+    {
+      "path": "baseline-manifest.json.gz",
+      "bytes": 285197,
+      "sha256": "ba4d674f505d683db198fb3ff1a65a3e4fb8893aaf9c9195a8e59ae04dcdd2a8",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Original complete7531 before-RAW manifest",
+      "origin": {
+        "path": "/private/tmp/protracker-raw-output-safety-769na_5f/baseline-manifest.json",
+        "bytes": 1019992,
+        "sha256": "f41e64bed7718992024c5ccb64a7b9343a7233d6ae9c09cf163d3d80fa0367d4"
+      },
+      "derivation": {
+        "method": "gzip level9/mtime0/emptyfilename; no source JSON fields/order/whitespace altered"
+      }
+    },
+    {
+      "path": "host-checks.json.gz",
+      "bytes": 4058,
+      "sha256": "5ae4bcdb2809df94a466dc616ca371ba9b4e14857a5f365ecbd735725c8d43cc",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Original two-group host sanitizer report/allcommands/products; generated_inputs[] retained",
+      "origin": {
+        "path": "/private/tmp/protracker-raw-output-safety-769na_5f/host-final/host-checks.json",
+        "bytes": 24440,
+        "sha256": "875b762b6816f3e28c624d626f23420f0aa244414b26a1ede457daba316eb3f0"
+      },
+      "derivation": {
+        "method": "gzip level9/mtime0/emptyfilename; no source JSON fields/order/whitespace altered"
+      }
+    },
+    {
+      "path": "native-build.json.gz",
+      "bytes": 8654,
+      "sha256": "f96954753e93043ac48e3767028003f8917f163030c3e36bf1ac9a749752159d",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Original two-target cross-build report/orderedTUs/SDKclosures/pinpaths/scopes",
+      "origin": {
+        "path": "/private/tmp/protracker-raw-output-safety-769na_5f/native-final/manifest.json",
+        "bytes": 48873,
+        "sha256": "93415b404c555f40e838d3d9736fa07b0879850578bfd8eef5b6c561027c6bcb"
+      },
+      "derivation": {
+        "method": "gzip level9/mtime0/emptyfilename; no source JSON fields/order/whitespace altered"
+      }
+    },
+    {
+      "path": "qualification-result.json.gz",
+      "bytes": 10322,
+      "sha256": "066db8c906d6c7475f21bd2ed094ff78aeb4797c9375b31c04cff38fc3b41bf1",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Original actual top native report fields/status/scopes, distinct nested copies in payload",
+      "origin": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/raw-output-safety-qualification-1790996128083598000/qualification-result.json",
+        "bytes": 69489,
+        "sha256": "f0b9302c1f159858c5be91e88d585beaf380a795c40e2e2352c30bb775ce94a5"
+      },
+      "derivation": {
+        "method": "gzip level9/mtime0/emptyfilename; no source JSON fields/order/whitespace altered"
+      }
+    },
+    {
+      "path": "committed-sample-memory.md.gz",
+      "bytes": 99702,
+      "sha256": "4bcacf7122493af0c9c30a2ad1a9d951f597b75a37abe4fefc77834b86dd6bf9",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Exact committed documentation only, separate from immutable7531 compiled source/dependencies",
+      "origin": {
+        "path": "/private/tmp/protracker-raw-output-root-q6vxdl_5/committed-source-sample-memory.md",
+        "bytes": 302604,
+        "sha256": "099e2b0e880de2e3972d06d7d9a5513d388824e211198e8ad186050bb2623ea9"
+      },
+      "derivation": {
+        "method": "gzip level9/mtime0/emptyfilename; no source JSON fields/order/whitespace altered"
+      }
+    },
+    {
+      "path": "baseline-before.json",
+      "bytes": 6084,
+      "sha256": "dc8bce8915c9d0abe29a32597249f5fee66dcfb78d1ea5fb6402e18d38656bfa",
+      "kind": "exact_byte_copy",
+      "scope": "Original expected before-RAW RC20 preservation failure",
+      "origin": {
+        "path": "/private/tmp/protracker-raw-output-safety-769na_5f/baseline-probe/result.json",
+        "bytes": 6084,
+        "sha256": "dc8bce8915c9d0abe29a32597249f5fee66dcfb78d1ea5fb6402e18d38656bfa"
+      }
+    },
+    {
+      "path": "probe-after.json",
+      "bytes": 6109,
+      "sha256": "a196bf7963bb1a4e3eceb067d8242ec29d7d3359f69c385919c2383c014180bd",
+      "kind": "exact_byte_copy",
+      "scope": "Original identical-source RC0 preservation probe after three fixes",
+      "origin": {
+        "path": "/private/tmp/protracker-raw-output-safety-769na_5f/candidate-probe/result.json",
+        "bytes": 6109,
+        "sha256": "a196bf7963bb1a4e3eceb067d8242ec29d7d3359f69c385919c2383c014180bd"
+      }
+    },
+    {
+      "path": "root-host-review.json",
+      "bytes": 276,
+      "sha256": "345edc6611a4c15717a77aca9f0caa44f5e82c53b239add4ad2ca81929bb7bd1",
+      "kind": "exact_byte_copy",
+      "scope": "Original root host review",
+      "origin": {
+        "path": "/private/tmp/protracker-raw-output-root-q6vxdl_5/root-host-review.json",
+        "bytes": 276,
+        "sha256": "345edc6611a4c15717a77aca9f0caa44f5e82c53b239add4ad2ca81929bb7bd1"
+      }
+    },
+    {
+      "path": "root-native-build-review.json",
+      "bytes": 284,
+      "sha256": "83a937f3cb838479072b61ff31a425447fcc6098a5af93fda2eaf227966e6bb9",
+      "kind": "exact_byte_copy",
+      "scope": "Original root cross-build review, unmodified portable/Exec scopes",
+      "origin": {
+        "path": "/private/tmp/protracker-raw-output-root-q6vxdl_5/root-native-build-review.json",
+        "bytes": 284,
+        "sha256": "83a937f3cb838479072b61ff31a425447fcc6098a5af93fda2eaf227966e6bb9"
+      }
+    },
+    {
+      "path": "root-native-review.json",
+      "bytes": 1435,
+      "sha256": "28b6f23be12d218981126915a6cbe9a36ff7a0d5938b3a5e56e1f5feecbb8afe",
+      "kind": "exact_byte_copy",
+      "scope": "Original root actual native review: portable RAW codec separate from Exec file",
+      "origin": {
+        "path": "/private/tmp/protracker-raw-output-root-q6vxdl_5/native-root-review.json",
+        "bytes": 1435,
+        "sha256": "28b6f23be12d218981126915a6cbe9a36ff7a0d5938b3a5e56e1f5feecbb8afe"
+      }
+    },
+    {
+      "path": "committed-source.json",
+      "bytes": 457,
+      "sha256": "7a2ade3b397313b40e45a83c840305d87e036235593f44072e4ad5e782418579",
+      "kind": "exact_byte_copy",
+      "scope": "Original source commit/tree and separate documentation-only identity; outside compiled7531 snapshot",
+      "origin": {
+        "path": "/private/tmp/protracker-raw-output-root-q6vxdl_5/committed-source.json",
+        "bytes": 457,
+        "sha256": "7a2ade3b397313b40e45a83c840305d87e036235593f44072e4ad5e782418579"
+      }
+    },
+    {
+      "path": "root-inputs.json",
+      "bytes": 447,
+      "sha256": "a8895b9c3379b757d0de6587c9418204527a0c137a7b325cff4d7e8647b25018",
+      "kind": "exact_byte_copy",
+      "scope": "Original root separate runner/qualifier fingerprints",
+      "origin": {
+        "path": "/private/tmp/protracker-raw-output-root-q6vxdl_5/root-inputs.json",
+        "bytes": 447,
+        "sha256": "a8895b9c3379b757d0de6587c9418204527a0c137a7b325cff4d7e8647b25018"
+      }
+    },
+    {
+      "path": "root-reported-coordination.json",
+      "bytes": 4523,
+      "sha256": "46b0bd301ee25de941f121a5cb9a56bc7cfbd84f16acbf39f891f1b8f8ecd527",
+      "kind": "exact_byte_copy",
+      "scope": "Original root-captured release acknowledgment; packaging does not verify release live",
+      "origin": {
+        "path": "/private/tmp/protracker-raw-output-root-q6vxdl_5/coordination-complete.json",
+        "bytes": 4523,
+        "sha256": "46b0bd301ee25de941f121a5cb9a56bc7cfbd84f16acbf39f891f1b8f8ecd527"
+      }
+    },
+    {
+      "path": "extra-01-package_raw_output_safety.reviewed-draft.py",
+      "bytes": 33345,
+      "sha256": "db4e8ab2caafa8f1fdaf676436cbbcc54dd433d13c572a1d894609c0a2d0e03a",
+      "kind": "exact_byte_copy",
+      "scope": "Original supplied extra control/review, no changed field",
+      "origin": {
+        "path": "/private/tmp/package_raw_output_safety.reviewed-draft.py",
+        "bytes": 33345,
+        "sha256": "db4e8ab2caafa8f1fdaf676436cbbcc54dd433d13c572a1d894609c0a2d0e03a"
+      }
+    },
+    {
+      "path": "member-provenance.json.gz",
+      "bytes": 29863,
+      "sha256": "f872554379304032c10ca57cf8257e226995d94fb7367fcf85b1684907bde588",
+      "kind": "authored_member_provenance_gzip",
+      "scope": "All selected original member/origin/byte/hash/mode identities and source inventories",
+      "derivation": {
+        "uncompressed_bytes": 302011,
+        "uncompressed_sha256": "e2519e5802001bc4828e56742a4cf97e1c136c5982f406a3b38a31c060e07aa0",
+        "method": "Authored full original-member index, gzip level9 mtime0 emptyfilename"
+      }
+    },
+    {
+      "path": "README.md",
+      "bytes": 2840,
+      "sha256": "5924f438e3d314a7052f7116a6c1c7332f4fc04dc3e09e98122fe28c523d9913",
+      "kind": "authored_scope_note",
+      "scope": "Precise portable/Exec/host/native/history/coordination tiers and selected-payload navigation"
+    }
+  ],
+  "control_exclusions": [
+    "compact-index.json",
+    "SHA256SUMS"
+  ],
+  "archive_verification": {
+    "members": 439,
+    "original_member_bytes": 6878782,
+    "all_member_bytes_hashes_sizes_modes_verified": true,
+    "safe_unique_regular_paths": true,
+    "uid_gid_mtime_zero": true,
+    "no_symlinks_hardlinks_or_truncated_members": true,
+    "second_archive_write_byte_identical": true
+  },
+  "original_native_status": true,
+  "source_inventories_before_after_identical": true
+}

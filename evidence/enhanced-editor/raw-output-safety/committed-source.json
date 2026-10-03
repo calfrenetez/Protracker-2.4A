@@ -1,0 +1,10 @@
+{
+  "source_commit": "0219362725960d2c5c76b53a0ae4c2bd10289ac7",
+  "source_tree": "37a852bea9854348c68614989f1d35ec65bbe0fe",
+  "documentation": {
+    "path": "/private/tmp/protracker-raw-output-root-q6vxdl_5/committed-source-sample-memory.md",
+    "bytes": 302604,
+    "sha256": "099e2b0e880de2e3972d06d7d9a5513d388824e211198e8ad186050bb2623ea9"
+  },
+  "scope": "Exact committed documentation only, outside immutable native source snapshot/dependencies"
+}

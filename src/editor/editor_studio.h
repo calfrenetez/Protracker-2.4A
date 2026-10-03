@@ -19,7 +19,9 @@ enum pt_render_result pt_editor_studio_start(struct pt_editor_studio *,const str
 /* Begin keeps pending preparation in the same edit/Stop/dispose barrier.
  * Prepare or direct pull advances one bounded step; readiness never starts a
  * device. The queued variant advances preparation through the normal pump,
- * publishing no queue blocks until all required master pins are ready. */
+ * publishing no queue blocks until the chosen producer is fully ready. Prepare
+ * dispatches to exactly one ordinary or private-bank producer. Prepare refuses
+ * output inside the editor/owner; invalid owner states preserve readiness. */
 enum pt_render_result pt_editor_studio_begin(struct pt_editor_studio *,const struct pt_render_options *);
 enum pt_render_result pt_editor_studio_prepare(struct pt_editor_studio *,unsigned *ready);
 enum pt_render_result pt_editor_studio_begin_queued(struct pt_editor_studio *,const struct pt_render_options *,struct pt_studio_queue *);
@@ -28,6 +30,10 @@ enum pt_render_result pt_editor_studio_begin_queued(struct pt_editor_studio *,co
  * Unsupported16/24-bit sources are refused, never converted. Does not enable
  * native PLAY or a device transport. Ordinary start retains immutable pins. */
 enum pt_render_result pt_editor_studio_start_invert(struct pt_editor_studio *,const struct pt_render_options *,size_t sample_budget);
+/* Same incremental lifecycle as ordinary begin: every required private copy and
+ * full timeline measurement must finish before PCM or queue publication. Stop,
+ * edits and dispose cancel pending work before changing any sample owner. */
+enum pt_render_result pt_editor_studio_begin_invert(struct pt_editor_studio *,const struct pt_render_options *,size_t sample_budget);
 enum pt_render_result pt_editor_studio_pull(struct pt_editor_studio *,unsigned,const struct pt_pcm **,unsigned *);
 /* Borrow a fresh empty queue until stop/detach, even after natural end. Owner
  * must stop/detach BEFORE closing the queue. No direct pull while queued. Natural
@@ -35,6 +41,7 @@ enum pt_render_result pt_editor_studio_pull(struct pt_editor_studio *,unsigned,c
  * Held leases remain valid until consumer release; this does not cancel hardware. */
 enum pt_render_result pt_editor_studio_start_queued(struct pt_editor_studio *,const struct pt_render_options *,struct pt_studio_queue *);
 enum pt_render_result pt_editor_studio_start_invert_queued(struct pt_editor_studio *,const struct pt_render_options *,size_t sample_budget,struct pt_studio_queue *);
+enum pt_render_result pt_editor_studio_begin_invert_queued(struct pt_editor_studio *,const struct pt_render_options *,size_t sample_budget,struct pt_studio_queue *);
 /* Producer/queue failure closes source ownership and requests bound output stop.
  * Invalid block sizes alone are refused without changing a valid session. */
 enum pt_pump_result pt_editor_studio_step(struct pt_editor_studio *,unsigned frames);

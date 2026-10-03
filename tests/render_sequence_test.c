@@ -159,6 +159,12 @@ static int sequence_fixture_main(void)
         struct pt_render_mutation mutation={&playback,private_data,private_tick};
         enum pt_render_result result;unsigned ticks=0;
         playback.samples=&private_sample;private_sample.pcm.data=private_data;
+        assert(pt_render_mutating_sequence_begin(&p,&o,&a,(struct pt_render_sequence **)pcm,&mutation)==PT_RENDER_INVALID && !owned && !pcm[0]);
+        assert(pt_render_mutating_sequence_begin(&p,&o,&a,(struct pt_render_sequence **)private_data,&mutation)==PT_RENDER_INVALID && !owned && !private_data[0]);
+        assert(pt_render_mutating_sequence_begin(&p,&o,&a,&s,&mutation)==PT_RENDER_OK);
+        assert(pt_render_sequence_prepare(s,1,(unsigned *)pcm)==PT_RENDER_INVALID && !pcm[0]);
+        assert(pt_render_sequence_prepare(s,1,(unsigned *)private_data)==PT_RENDER_INVALID && !private_data[0]);
+        pt_render_sequence_close(s);s=NULL;assert(!owned);
         assert(pt_render_mutating_sequence_open(&p,&o,&a,&s,&mutation)==PT_RENDER_OK);
         do {
             uint32_t remaining;

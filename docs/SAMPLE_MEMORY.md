@@ -5,6 +5,30 @@ The enhanced project owns the authoritative sample, including its declared
 elements in the declared precision; 24-bit samples retain their low eight bits.
 Playback representations must never become the project's source of truth.
 
+## Cancellable private EFx preparation — 3 October 2026
+
+The explicit classic EFx Studio producer now separates begin, preparation and
+playback. Each preparation step copies at most4096 bytes of private int32 PCM
+storage or measures at most256 timeline ticks; the complete bank and timeline
+must be ready before audio can be produced. Initial validation, static selection
+and allocation remain synchronous. Existing open APIs drain these same phases
+synchronously and preserve their output. Masters remain immutable; this retains
+the existing mono8 EFx subset and does not convert16/24-bit EFx sources.
+
+Sampler generation and the complete fixed project header, except the selected
+channel cursor, are checked before preparation and playback. Editor Stop, edits,
+undo and disposal cancel unfinished copying or measurement. Queues remain empty
+until readiness; consumer-held audio copies survive producer cancellation.
+Handle/readiness outputs overlapping masters, metadata or owned preparation
+storage are refused before writes. Stale or stopped sampler preparation leaves
+the caller's readiness output unchanged and avoids scanning former tables.
+
+Nine scoped ASan/UBSan groups pass from an immutable baseline plus only the
+authorized EFx changes, including unchanged ordinary direct24 Studio behavior.
+Three pinned native Exec fixtures cross-build; execution remains pending fresh
+coordination. These progress bounds do not establish live timing, native PLAY,
+physical AmiGUS output or listening acceptance. See `INVERT_LOOP_CORE.md`.
+
 ## Incremental standalone Paula preparation — 3 October 2026
 
 Standalone Paula capability analysis now has begin/step/transfer/close phases.

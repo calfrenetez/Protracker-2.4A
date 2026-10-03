@@ -468,6 +468,35 @@ struct pt_render_sequence {
     uint32_t remaining;unsigned pending,end,done,failed,consumed,preparing;uint64_t interval;
     struct pt_render_mutation mutation;
 };
+static int preparation_overlap(const void *a,size_t an,const void *b,size_t bn)
+{
+    uintptr_t x=(uintptr_t)a,y=(uintptr_t)b;
+    if(!an || !bn)return 0;
+    if(an>UINTPTR_MAX-x || bn>UINTPTR_MAX-y)return 1;
+    return x<y+bn && y<x+an;
+}
+static int project_output_disjoint(const struct pt_project *p,const void *out,size_t bytes)
+{
+    size_t i;
+    if(preparation_overlap(out,bytes,p,sizeof(*p)) ||
+       preparation_overlap(out,bytes,p->samples,p->sample_count*sizeof(*p->samples)) ||
+       preparation_overlap(out,bytes,p->orders,p->order_count*sizeof(*p->orders)) ||
+       preparation_overlap(out,bytes,p->events,(size_t)p->pattern_count*64*p->channels.count*sizeof(*p->events)) ||
+       preparation_overlap(out,bytes,p->extensions,p->extension_count*sizeof(*p->extensions)))return 0;
+    for(i=0;i<p->sample_count;++i) {
+        const struct pt_sample *sample=p->samples+i;
+        if(preparation_overlap(out,bytes,sample->pcm.data,(size_t)sample->pcm.frames*sample->pcm.channels*sizeof(int32_t)) ||
+           preparation_overlap(out,bytes,sample->slices,sample->slice_count*sizeof(*sample->slices)))return 0;
+    }
+    for(i=0;i<p->extension_count;++i)if(preparation_overlap(out,bytes,p->extensions[i].data,p->extensions[i].length))return 0;
+    return 1;
+}
+int pt_render_sequence_output_disjoint(const struct pt_render_sequence *s,const void *out,size_t bytes)
+{
+    return s && out && !preparation_overlap(out,bytes,s,sizeof(*s)) &&
+        project_output_disjoint(s->project,out,bytes) &&
+        (!s->mutation.playback || project_output_disjoint(s->mutation.playback,out,bytes));
+}
 static enum pt_render_result sequence_begin(const struct pt_project *p,const struct pt_render_options *o,
     const struct pt_allocator *a,struct pt_render_sequence **out,const struct pt_render_mutation *mutation)
 {
@@ -479,7 +508,9 @@ static enum pt_render_result sequence_begin(const struct pt_project *p,const str
     if(result!=PT_RENDER_OK) {a->release(a->context,s);return result;}
     s->options=*o;s->project=p;if(mutation)s->mutation=*mutation;
     if(!start_run(&s->run,p,&s->options,mutation!=NULL)) {a->release(a->context,s);return PT_RENDER_INVALID;}
-    s->preparing=1;pt_render_commands_init(&s->commands);*out=s;return PT_RENDER_OK;
+    s->preparing=1;pt_render_commands_init(&s->commands);
+    if(!pt_render_sequence_output_disjoint(s,out,sizeof(*out))) {a->release(a->context,s);return PT_RENDER_INVALID;}
+    *out=s;return PT_RENDER_OK;
 }
 enum pt_render_result pt_render_sequence_begin(const struct pt_project *p,const struct pt_render_options *o,
     const struct pt_allocator *a,struct pt_render_sequence **out)
@@ -487,7 +518,8 @@ enum pt_render_result pt_render_sequence_begin(const struct pt_project *p,const 
 enum pt_render_result pt_render_sequence_prepare(struct pt_render_sequence *s,unsigned ticks,unsigned *ready)
 {
     struct pt_tick_span span;unsigned i,end;enum pt_render_result result;
-    if(!s || !ready || !ticks || ticks>256 || s->failed || s->pending || s->done)return PT_RENDER_INVALID;
+    if(!s || !ready || !ticks || ticks>256 || s->failed || s->pending || s->done ||
+       !pt_render_sequence_output_disjoint(s,ready,sizeof(*ready)))return PT_RENDER_INVALID;
     if(!s->preparing){*ready=1;return PT_RENDER_OK;}
     for(i=0;i<ticks;++i) {
         result=next_tick(&s->run,&span,&end);
@@ -519,6 +551,12 @@ enum pt_render_result pt_render_mutating_sequence_open(const struct pt_project *
 {
     if(!mutation || !mutation->playback || !mutation->tick)return PT_RENDER_INVALID;
     return sequence_open(p,o,a,out,mutation);
+}
+enum pt_render_result pt_render_mutating_sequence_begin(const struct pt_project *p,const struct pt_render_options *o,
+    const struct pt_allocator *a,struct pt_render_sequence **out,const struct pt_render_mutation *mutation)
+{
+    if(!mutation || !mutation->playback || !mutation->tick)return PT_RENDER_INVALID;
+    return sequence_begin(p,o,a,out,mutation);
 }
 /* Private producer path: advance the same voice state by mixing, rather than
    consume's silent phase advance. No pointer is published beyond the owner. */

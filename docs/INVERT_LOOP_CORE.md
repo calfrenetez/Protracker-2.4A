@@ -245,3 +245,56 @@ E91/ED1, EF0, unselected/muted EFx clocks, immutable masters, every allocation
 failure and insufficient private budget. This extends the explicit offline path;
 queued Studio, 16/24-bit EFx and broader handoff combinations still need separate
 work. It is software/emulator evidence, not physical audio acceptance.
+
+
+## Cancellable private-bank preparation for explicit Studio owners
+
+The opt-in core session now exposes `pt_render_invert_begin` and
+`pt_render_invert_prepare`. Begin retains synchronous project/PCM validation,
+static sample selection and all initial core allocations (five when selected
+PCM storage is nonempty). It copies no master PCM and does not measure the full timeline. Preparation advances one
+private-bank copy/setup step, copying at most 4096 bytes of stored `int32_t` PCM,
+or at most 256 measured ticks. Readiness becomes visible only after every
+required private copy, classic first-word setup and full timeline measurement
+succeeds. Static scans and allocation are still synchronous; these bounds do
+not establish timing, scheduler or device guarantees. The existing core open
+API drives the same preparation synchronously. Core pull refuses an incomplete
+session without producing PCM or advancing preparation.
+
+`pt_sampler_invert_song_begin` adds the sampler owner and a fixed-size complete
+project-header snapshot. Every preparation and pull checks sampler generation
+and all header bytes except the permitted `channels.selected` cursor. This
+catches same-header-object edits to counts, timing, routes, MIDI and extension
+metadata as well as replaced tables. It does not copy pointed-to descriptors,
+events, orders or PCM: those objects must remain immutable and live until Stop.
+The sampler wrapper adds one allocation, separate from the private-sample
+budget. Its existing open remains synchronous. A pending sampler pull advances
+one preparation step and returns NULL PCM with `done=0`, including the step
+which first becomes ready; only a subsequent pull can emit audio. Preparation
+failure is sticky, releases private producer state, and still requires closing
+the small sampler wrapper.
+
+`pt_editor_studio_begin_invert` and `pt_editor_studio_begin_invert_queued` keep
+that pending work under the existing editor edit/undo/dispose/Stop barrier.
+`pt_editor_studio_prepare` dispatches to exactly one ordinary or private-bank
+producer. Readiness outputs inside live owner/project/PCM storage are refused
+before mutation; stopped or failed preparation does not traverse former tables.
+Sampler begin/open also guard external handle publication and unwind a refused
+alias without changing source storage. A queued pump may advance preparation, but publishes no block before
+full readiness. Failure or an edit aborts waiting queue data, releases private
+state and requests a bound output Stop once. A consumer-held queue copy remains
+valid until release. Natural end retains the existing queue-drain behavior.
+Unsupported mono16/24 EFx sources remain refused; this path never converts or
+publishes a new master. Ordinary direct24 Studio behavior is unchanged.
+
+Shared host sanitizer fixtures cover complete synchronous/incremental PCM
+parity, multi-slice copying and yielded timeline measurement, cancellation at
+every observed pending phase, all observed allocation failures, late tick-limit
+failure, pending/ready generation and fixed-header staleness, permitted cursor
+navigation, readiness/publication alias refusal, stopped/failed former-owner
+safety, queued readiness, real editor edit/undo/dispose cancellation, held queue
+leases, and comparison of every original8192-frame fixture value. Both shared fixtures are included
+unconditionally by their existing native Exec wrappers. Current validation is
+host only: inclusion does not qualify a new native binary, physical AmiGUS
+playback, human listening, or native PLAY/frontend/scheduler integration. Those
+remain separate acceptance work.

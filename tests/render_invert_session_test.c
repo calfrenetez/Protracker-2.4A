@@ -11,6 +11,8 @@ static void test_failure(const char *condition,unsigned line)
 #undef assert
 #define assert(condition) ((condition)?(void)0:test_failure(#condition,__LINE__))
 #endif
+#define PT_INVERT_PREPARE_EMBEDDED
+#include "render_invert_prepare_test.c"
 static int32_t reference[300000];static unsigned used,owned,refuse,attempt,fail_at;
 static void *allocate(void *c,size_t n) {(void)c;if(refuse || ++attempt==fail_at)return NULL;++owned;return malloc(n);}
 static void release(void *c,void *p) {(void)c;assert(owned);--owned;free(p);}
@@ -57,7 +59,16 @@ int main(void)
         const struct pt_pcm *block;
         o.include_lead_in=mode==1;o.pattern_only=o.row_range=mode==2;o.row_first=2;o.row_end=5;
         used=0;assert(pt_render_invert_stream(&p,&o,capture,NULL,NULL,NULL,&report,SIZE_MAX,&a)==PT_RENDER_OK);
-        assert(pt_render_invert_open(&p,&o,SIZE_MAX,&a,&s)==PT_RENDER_OK && owned==5);
+        if(partition==17 || PT_SONG_FIRST_BLOCK==256) {
+            unsigned ready=0,steps=0;
+            assert(pt_render_invert_begin(&p,&o,SIZE_MAX,&a,&s)==PT_RENDER_OK && owned==5);
+            while(!ready) {
+                block=(const struct pt_pcm *)1;done=77;
+                assert(pt_render_invert_pull(s,17,&block,&done)==PT_RENDER_INVALID && !block && !done);
+                assert(pt_render_invert_prepare(s,&ready)==PT_RENDER_OK && ++steps<20);
+            }
+            assert(steps>1);
+        } else assert(pt_render_invert_open(&p,&o,SIZE_MAX,&a,&s)==PT_RENDER_OK && owned==5);
         assert(pt_render_invert_pull(s,257,&block,&done)==PT_RENDER_INVALID);
         {struct pt_studio_queue *queue=pt_studio_queue_open(&a,2);struct pt_studio_pump pump;
             struct pt_studio_producer producer={s,song_pull,song_stop};assert(queue && pt_studio_pump_init(&pump,&producer,queue));
@@ -117,5 +128,6 @@ int main(void)
         pt_render_invert_stop(s);pt_render_invert_close(s);assert(!owned);
         assert(!memcmp(pcm,original,sizeof(pcm)));
     }
-    puts("INVERT QUEUED PASS: private mixed masters, exact offline parity, tempo/delay, pre-roll, partitions, stalled/cancelled leases, protocol and allocation refusal");return 0;
+    invert_preparation_fixture();
+    puts("INVERT QUEUED PASS: private mixed masters, exact offline parity, tempo/delay, pre-roll, partitions, stalled/cancelled leases, protocol, incremental preparation/cancellation and allocation refusal");return 0;
 }

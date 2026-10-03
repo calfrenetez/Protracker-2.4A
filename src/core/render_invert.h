@@ -24,6 +24,24 @@ enum pt_render_result pt_render_invert_stream(const struct pt_project *,const st
 struct pt_render_invert_session;
 enum pt_render_result pt_render_invert_open(const struct pt_project *,const struct pt_render_options *,
     size_t sample_budget,const struct pt_allocator *,struct pt_render_invert_session **);
+/* Cancellable equivalent: begin owns bounded storage after synchronous input
+ * validation/static selection/allocation, but copies no PCM and does not measure
+ * the complete timeline. Each prepare initializes one copy job, copies <=4096
+ * bytes, completes the private bank, or measures <=256 timeline ticks. Only
+ * ready=1 permits pull; pending pull refuses without advancing and emits no PCM.
+ * Close/stop cancels any phase. Preparation errors are sticky and release private
+ * state; the session still needs close. No output callbacks/pins/queue blocks.
+ * Options copied; project/source metadata and PCM must stay immutable and live
+ * through close. Bounds are progress limits, not native timing/device evidence.
+ * The synchronous open wrapper drives these phases to full readiness. */
+enum pt_render_result pt_render_invert_begin(const struct pt_project *,const struct pt_render_options *,
+    size_t sample_budget,const struct pt_allocator *,struct pt_render_invert_session **);
+enum pt_render_result pt_render_invert_prepare(struct pt_render_invert_session *,unsigned *ready);
+/* Owner-wrapper output guard, before any caller-output write. Checks bounded
+ * metadata spans, not PCM values or generations. Live inputs retain validated
+ * geometry; stopped sessions inspect their controller alone, without former
+ * project/storage dereferences. NULL session/output refuses. */
+int pt_render_invert_output_disjoint(const struct pt_render_invert_session *,const void *,size_t);
 /* One bounded interval transition OR <=256 audio frames per pull. NULL audio and
  * done=0 means progress; yield then pull again. PCM is borrowed until next pull,
  * stop or close: pumps/queues must copy it. Stop/end/error release all private

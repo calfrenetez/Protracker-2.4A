@@ -1,4 +1,11 @@
 #include "editor_studio.h"
+static int output_overlaps(const void *out,size_t bytes,const void *owner,size_t size)
+{
+    uintptr_t x=(uintptr_t)out,y=(uintptr_t)owner;
+    if(!bytes || !size)return 0;
+    if(bytes>UINTPTR_MAX-x || size>UINTPTR_MAX-y)return 1;
+    return x<y+size && y<x+bytes;
+}
 static void close_song(struct pt_editor_studio *o) {pt_sampler_song_close(o->song);o->song=NULL;pt_sampler_invert_song_close(o->invert_song);o->invert_song=NULL;}
 void pt_editor_studio_stop(struct pt_editor_studio *owner)
 {if(owner) {void (*stop)(void *)=owner->output_stop;void *context=owner->output_context;owner->output_stop=NULL;owner->output_context=NULL;if(owner->queue) {pt_studio_queue_abort(owner->queue);owner->queue=NULL;owner->pump.held=0;owner->pump.ended=1;}close_song(owner);if(stop)stop(context);}}
@@ -32,10 +39,11 @@ enum pt_render_result pt_editor_studio_begin(struct pt_editor_studio *o,const st
 enum pt_render_result pt_editor_studio_prepare(struct pt_editor_studio *o,unsigned *ready)
 {
     enum pt_render_result result;
-    if(!ready)return PT_RENDER_INVALID;
-    *ready=0;
-    if(!attached(o) || !o->song)return PT_RENDER_INVALID;
-    result=pt_sampler_song_prepare(o->song,ready);
+    if(!ready || (o && (output_overlaps(ready,sizeof(*ready),o,sizeof(*o)) ||
+       (o->editor && output_overlaps(ready,sizeof(*ready),o->editor,sizeof(*o->editor))))))return PT_RENDER_INVALID;
+    if(!attached(o) || (!o->song && !o->invert_song))return PT_RENDER_INVALID;
+    if(o->song && o->invert_song) {pt_editor_studio_stop(o);return PT_RENDER_INVALID;}
+    result=o->invert_song?pt_sampler_invert_song_prepare(o->invert_song,ready):pt_sampler_song_prepare(o->song,ready);
     if(result!=PT_RENDER_OK)pt_editor_studio_stop(o);
     return result;
 }
@@ -44,6 +52,12 @@ enum pt_render_result pt_editor_studio_start_invert(struct pt_editor_studio *o,c
     if(!attached(o))return PT_RENDER_INVALID;
     pt_editor_studio_stop(o);
     return pt_sampler_invert_song_open(&o->editor->sampler,o->editor->project,options,budget,&o->editor->sampler.allocator,&o->invert_song);
+}
+enum pt_render_result pt_editor_studio_begin_invert(struct pt_editor_studio *o,const struct pt_render_options *options,size_t budget)
+{
+    if(!attached(o))return PT_RENDER_INVALID;
+    pt_editor_studio_stop(o);
+    return pt_sampler_invert_song_begin(&o->editor->sampler,o->editor->project,options,budget,&o->editor->sampler.allocator,&o->invert_song);
 }
 static enum pt_render_result pull_song(struct pt_editor_studio *o,unsigned frames,const struct pt_pcm **pcm,unsigned *done)
 {
@@ -73,7 +87,9 @@ static enum pt_render_result start_queued(struct pt_editor_studio *o,const struc
 {
     struct pt_studio_producer source;enum pt_render_result result;
     if(!queue || (o && queue==o->queue))return PT_RENDER_INVALID;
-    result=invert?pt_editor_studio_start_invert(o,options,budget):preparing?pt_editor_studio_begin(o,options):pt_editor_studio_start(o,options);if(result!=PT_RENDER_OK)return result;
+    if(invert)result=preparing?pt_editor_studio_begin_invert(o,options,budget):pt_editor_studio_start_invert(o,options,budget);
+    else result=preparing?pt_editor_studio_begin(o,options):pt_editor_studio_start(o,options);
+    if(result!=PT_RENDER_OK)return result;
     source=(struct pt_studio_producer){o,producer_pull,producer_stop};
     if(!pt_studio_pump_init(&o->pump,&source,queue)) {pt_editor_studio_stop(o);return PT_RENDER_INVALID;}
     o->queue=queue;return PT_RENDER_OK;
@@ -84,6 +100,8 @@ enum pt_render_result pt_editor_studio_start_invert_queued(struct pt_editor_stud
 {return start_queued(o,options,queue,1,budget,0);}
 enum pt_render_result pt_editor_studio_begin_queued(struct pt_editor_studio *o,const struct pt_render_options *options,struct pt_studio_queue *queue)
 {return start_queued(o,options,queue,0,0,1);}
+enum pt_render_result pt_editor_studio_begin_invert_queued(struct pt_editor_studio *o,const struct pt_render_options *options,size_t budget,struct pt_studio_queue *queue)
+{return start_queued(o,options,queue,1,budget,1);}
 enum pt_pump_result pt_editor_studio_step(struct pt_editor_studio *o,unsigned frames)
 {
     enum pt_pump_result result;

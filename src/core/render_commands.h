@@ -110,6 +110,17 @@ enum pt_render_result pt_render_mutating_allocated(const struct pt_project *,con
  * Never pass master-backed mutable storage. All calls are owner-thread serialized. */
 enum pt_render_result pt_render_mutating_sequence_open(const struct pt_project *,const struct pt_render_options *,
     const struct pt_allocator *,struct pt_render_sequence **,const struct pt_render_mutation *);
+/* Resumable private equivalent. Initial project/PCM/options validation and
+ * metadata scans remain synchronous. The caller owns disjoint private playback
+ * storage and finishes initializing its values before measurement/playback.
+ * Ordinary sequence_prepare advances <=256 ticks and invokes no mutation or
+ * private PCM reads; ready=1 is required before next. Close cancels any phase. */
+enum pt_render_result pt_render_mutating_sequence_begin(const struct pt_project *,const struct pt_render_options *,
+    const struct pt_allocator *,struct pt_render_sequence **,const struct pt_render_mutation *);
+/* Internal preparation-output guard: bounded metadata spans only, no PCM reads.
+ * Reject owner outputs overlapping this sequence or its immutable/private inputs.
+ * Borrowed descriptors must retain their validated geometry. */
+int pt_render_sequence_output_disjoint(const struct pt_render_sequence *,const void *,size_t);
 enum pt_render_result pt_render_mutating_sequence_read(struct pt_render_sequence *,struct pt_pcm *);
 enum pt_render_result pt_render_mutating_sequence_complete(struct pt_render_sequence *);
 #endif

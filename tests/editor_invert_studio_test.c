@@ -10,8 +10,8 @@ static void test_failure(const char *condition,unsigned line)
 #undef assert
 #define assert(condition) ((condition)?(void)0:test_failure(#condition,__LINE__))
 #endif
-static unsigned live;
-static void *allocate(void *c,size_t n) {void *p;(void)c;p=malloc(n);if(p)++live;return p;}
+static unsigned live,calls,fail_at;
+static void *allocate(void *c,size_t n) {void *p;(void)c;if(++calls==fail_at)return NULL;p=malloc(n);if(p)++live;return p;}
 static void release(void *c,void *p) {(void)c;if(p){assert(live);--live;free(p);}}
 static void start(struct pt_editor_studio *o,struct pt_render_options *options)
 {
@@ -27,9 +27,133 @@ static int port_write(void *c,const uint32_t *p) {(void)c;(void)p;return 1;}
 static int port_reset(void *c) {return *(int *)c;}
 static int port_drain(void *c) {(void)c;return 0;}
 static void output_stop(void *c) {++output_stops;pt_amigus_session_stop(c);}
+static void incremental_cases(void)
+{
+    static int32_t master[8192];struct pt_allocator a={NULL,allocate,release};struct pt_document d;
+    struct pt_editor *e=calloc(1,sizeof(*e));struct pt_editor_studio owner={0};struct pt_render_options o={0},limited;
+    const struct pt_pcm *out;unsigned ready,done,i,baseline,action,phase,mode,count;
+    assert(e);pt_document_init(&d,&a);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
+    assert(pt_editor_init(e,&d.project));pt_sampler_init(&e->sampler,&a,1024*1024);
+    for(i=0;i<8192;++i)master[i]=(int32_t)(i%127)-63;
+    master[0]=17;d.project.samples[0].pcm=(struct pt_pcm){master,8192,8192,48000,1,8};
+    d.project.samples[0].volume=64;d.project.samples[0].loop=PT_LOOP_FORWARD;d.project.samples[0].loop_end=8192;
+    d.project.channels.track[0].pan=0;d.project.events[0]=(struct pt_event){428,0,PT_NOTE_PERIOD,1,14,255,0,0};d.project.events[4].effect=15;
+    o.rate=48000;o.bits=24;o.tracks=1;o.gain_q16=65536;o.tick_limit=1000;o.frame_limit=1000000;
+    assert(pt_editor_studio_attach(&owner,e));baseline=live;
+    ready=9;assert(pt_editor_studio_prepare(&owner,&ready)==PT_RENDER_INVALID && ready==9);
+    assert(pt_editor_studio_begin_invert(&owner,&o,SIZE_MAX)==PT_RENDER_OK && owner.invert_song && !owner.song);
+    assert(pt_editor_studio_pull(&owner,1,&out,&done)==PT_RENDER_OK && !out && !done && !e->sampler.bytes);
+    pt_editor_key(e,0x4d,0);assert(owner.invert_song);
+    for(i=0,ready=0;i<64 && !ready;++i)assert(pt_editor_studio_prepare(&owner,&ready)==PT_RENDER_OK);
+    assert(i<64 && ready);
+    for(i=0;i<100;++i) {assert(pt_editor_studio_pull(&owner,1,&out,&done)==PT_RENDER_OK && !done);if(out)break;}
+    assert(i<100 && out->data[0]==17*65536 && master[0]==17 && !e->sampler.bytes);
+    pt_editor_studio_stop(&owner);assert(live==baseline);d.project.channels.selected=0;
+    for(i=16;i<=24;i+=8) {
+        d.project.samples[0].pcm.bits=(uint8_t)i;
+        assert(pt_editor_studio_begin_invert(&owner,&o,SIZE_MAX)==PT_RENDER_SAMPLE && !owner.invert_song && live==baseline);
+        assert(d.project.samples[0].pcm.bits==i && master[0]==17);
+    }
+    d.project.samples[0].pcm.bits=8;
+    /* Pump-driven pending copies publish no audio; readiness itself still leaves
+     * the queue empty. Stop preserves a consumer lease from the ready producer. */
+    {struct pt_studio_queue *q=pt_studio_queue_open(&a,2);uint64_t ticket;unsigned stops=0;
+        assert(q && pt_editor_studio_begin_invert_queued(&owner,&o,SIZE_MAX,q)==PT_RENDER_OK);
+        assert(pt_editor_studio_bind_output_stop(&owner,count_stop,&stops));
+        assert(pt_editor_studio_step(&owner,0)==PT_PUMP_ERROR && owner.invert_song && !stops);
+        for(i=0;i<3;++i) {
+            assert(pt_editor_studio_step(&owner,17)==PT_PUMP_PROGRESS && !owner.pump.held);
+            assert(pt_studio_queue_acquire(q,&out,&ticket)==PT_QUEUE_EMPTY);
+        }
+        for(i=0,ready=0;i<64 && !ready;++i) {
+            assert(pt_editor_studio_prepare(&owner,&ready)==PT_RENDER_OK);
+            assert(pt_studio_queue_acquire(q,&out,&ticket)==PT_QUEUE_EMPTY);
+        }
+        assert(i<64 && ready && !stops);
+        for(i=0;i<50;++i) {assert(pt_editor_studio_step(&owner,17)!=PT_PUMP_ERROR);if(pt_studio_queue_acquire(q,&out,&ticket)==PT_QUEUE_OK)break;}
+        assert(i<50 && out->data[0]==17*65536);
+        for(i=0;i<20;++i)assert(pt_editor_studio_step(&owner,17)!=PT_PUMP_ERROR);
+        assert(owner.pump.held);pt_editor_studio_stop(&owner);
+        assert(!owner.invert_song && !owner.queue && !owner.pump.held && stops==1 && out->data[0]==17*65536);
+        pt_editor_studio_stop(&owner);assert(stops==1 && pt_studio_queue_close(q)==PT_QUEUE_BUSY);
+        assert(pt_studio_queue_release(q,ticket)==PT_QUEUE_OK && pt_studio_queue_close(q)==PT_QUEUE_OK && live==baseline);
+    }
+    /* Explicit Stop and real editor edit/undo barriers cancel a partially copied
+     * bank without creating master storage or any queue block. */
+    for(action=0;action<3;++action) {
+        struct pt_studio_queue *q=pt_studio_queue_open(&a,2);uint64_t ticket;unsigned stops=0;
+        e->editing=1;e->row=0;e->panel=0;
+        if(action==2) {pt_editor_key(e,0x31,0);e->row=0;}
+        assert(q && pt_editor_studio_begin_invert_queued(&owner,&o,SIZE_MAX,q)==PT_RENDER_OK);
+        assert(pt_editor_studio_bind_output_stop(&owner,count_stop,&stops));
+        for(i=0;i<3;++i)assert(pt_editor_studio_step(&owner,17)==PT_PUMP_PROGRESS);
+        assert(pt_studio_queue_acquire(q,&out,&ticket)==PT_QUEUE_EMPTY);
+        if(!action)pt_editor_studio_stop(&owner);
+        else pt_editor_key(e,0x31,action==2?8:0);
+        assert(!owner.invert_song && !owner.queue && stops==1 && !e->sampler.bytes);
+        assert(pt_studio_queue_acquire(q,&out,&ticket)==PT_QUEUE_DONE && pt_studio_queue_close(q)==PT_QUEUE_OK && live==baseline);
+        if(action==1)pt_editor_key(e,0x31,8);
+        assert(d.project.events[0].pitch==428 && d.project.samples[0].pcm.data==master && master[0]==17);
+    }
+    /* Editor/owner output aliases leave the live producer usable; delegated
+     * private-source aliases follow the existing producer-error Stop lifecycle. */
+    for(phase=0;phase<2;++phase)for(mode=0;mode<2;++mode) {
+        struct pt_studio_queue *q=pt_studio_queue_open(&a,2);uint64_t ticket;unsigned stops=0,generation=e->sampler.generation;
+        assert(q && pt_editor_studio_begin_invert_queued(&owner,&o,SIZE_MAX,q)==PT_RENDER_OK);
+        assert(pt_editor_studio_bind_output_stop(&owner,count_stop,&stops));
+        if(phase) {for(i=0,ready=0;i<64 && !ready;++i)assert(pt_editor_studio_prepare(&owner,&ready)==PT_RENDER_OK);assert(i<64 && ready);}
+        assert(pt_editor_studio_prepare(&owner,(unsigned *)(void *)&owner.pump.error)==PT_RENDER_INVALID && owner.invert_song && owner.queue==q && !stops);
+        assert(pt_editor_studio_prepare(&owner,&e->sampler.generation)==PT_RENDER_INVALID && e->sampler.generation==generation && owner.invert_song && !stops);
+        assert(pt_editor_studio_prepare(&owner,mode?&d.project.midi_flags:(unsigned *)(void *)master)==PT_RENDER_INVALID);
+        assert(master[0]==17 && master[1]==-62 && !owner.invert_song && !owner.queue && stops==1);
+        assert(pt_studio_queue_acquire(q,&out,&ticket)==PT_QUEUE_DONE && pt_studio_queue_close(q)==PT_QUEUE_OK && live==baseline);
+    }
+    /* Stale fixed-header and generation changes fail the queued owner while
+     * pending and fully prepared; cleanup requests bound output Stop once. */
+    for(phase=0;phase<2;++phase)for(mode=0;mode<4;++mode) {
+        struct pt_studio_queue *q=pt_studio_queue_open(&a,2);struct pt_project saved;
+        uint64_t ticket;unsigned stops=0,generation=e->sampler.generation;
+        memcpy(&saved,&d.project,sizeof(saved));
+        assert(q && pt_editor_studio_begin_invert_queued(&owner,&o,SIZE_MAX,q)==PT_RENDER_OK);
+        assert(pt_editor_studio_bind_output_stop(&owner,count_stop,&stops));
+        if(phase) {for(i=0,ready=0;i<64 && !ready;++i)assert(pt_editor_studio_prepare(&owner,&ready)==PT_RENDER_OK);assert(i<64 && ready);}
+        else for(i=0;i<3;++i)assert(pt_editor_studio_step(&owner,17)==PT_PUMP_PROGRESS);
+        if(mode==0)++d.project.bpm;else if(mode==1)d.project.samples=NULL;
+        else if(mode==2)d.project.midi_output[0][0]^=1;else ++e->sampler.generation;
+        assert(pt_editor_studio_step(&owner,17)==PT_PUMP_ERROR && !owner.invert_song && !owner.queue && stops==1);
+        pt_editor_studio_stop(&owner);assert(stops==1);
+        assert(pt_studio_queue_acquire(q,&out,&ticket)==PT_QUEUE_DONE && pt_studio_queue_close(q)==PT_QUEUE_OK && live==baseline);
+        memcpy(&d.project,&saved,sizeof(saved));e->sampler.generation=generation;
+    }
+    {struct pt_studio_queue *q=pt_studio_queue_open(&a,2);uint64_t ticket;unsigned stops=0;
+        limited=o;limited.tick_limit=1;
+        assert(q && pt_editor_studio_begin_invert_queued(&owner,&limited,SIZE_MAX,q)==PT_RENDER_OK);
+        assert(pt_editor_studio_bind_output_stop(&owner,count_stop,&stops));
+        for(i=0;i<64;++i) {if(pt_editor_studio_step(&owner,17)==PT_PUMP_ERROR)break;assert(pt_studio_queue_acquire(q,&out,&ticket)==PT_QUEUE_EMPTY);}
+        assert(i<64 && !owner.invert_song && !owner.queue && stops==1 && !e->sampler.bytes);
+        assert(pt_studio_queue_acquire(q,&out,&ticket)==PT_QUEUE_DONE && pt_studio_queue_close(q)==PT_QUEUE_OK && live==baseline);
+    }
+    calls=0;assert(pt_editor_studio_begin_invert(&owner,&o,SIZE_MAX)==PT_RENDER_OK);count=calls;pt_editor_studio_stop(&owner);
+    for(i=1;i<=count;++i) {
+        struct pt_studio_queue *q=pt_studio_queue_open(&a,2);assert(q);calls=0;fail_at=i;
+        assert(pt_editor_studio_begin_invert_queued(&owner,&o,SIZE_MAX,q)==PT_RENDER_MEMORY && !owner.invert_song && !owner.queue);
+        fail_at=0;assert(pt_studio_queue_close(q)==PT_QUEUE_OK && live==baseline);
+    }
+    {struct pt_studio_queue *q=pt_studio_queue_open(&a,2);uint64_t ticket;unsigned stops=0;
+        assert(q && pt_editor_studio_begin_invert_queued(&owner,&o,SIZE_MAX,q)==PT_RENDER_OK);
+        assert(pt_editor_studio_bind_output_stop(&owner,count_stop,&stops));
+        for(i=0;i<3;++i)assert(pt_editor_studio_step(&owner,17)==PT_PUMP_PROGRESS);
+        pt_editor_dispose(e);assert(!owner.invert_song && !owner.queue && stops==1 && !e->sampler.bytes);
+        assert(pt_studio_queue_acquire(q,&out,&ticket)==PT_QUEUE_DONE && pt_studio_queue_close(q)==PT_QUEUE_OK);
+    }
+    pt_editor_studio_detach(&owner);pt_document_release(&d);free(e);
+    assert(!live);
+    for(i=0;i<8192;++i)assert(master[i]==(i?(int32_t)(i%127)-63:17));
+}
 int main(void)
 {
-    struct pt_allocator a={NULL,allocate,release};struct pt_document d;struct pt_editor *e=calloc(1,sizeof(*e));
+    struct pt_allocator a={NULL,allocate,release};struct pt_document d;struct pt_editor *e;
+    incremental_cases();e=calloc(1,sizeof(*e));
     struct pt_editor_studio owner={0},second={0};struct pt_render_options options={0};
     int32_t pcm[4]={17,-93,30,40};unsigned baseline,done,action;const struct pt_pcm *out;
     assert(e);pt_document_init(&d,&a);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
@@ -157,5 +281,5 @@ int main(void)
     assert(pt_editor_studio_pull(&owner,1,&out,&done)==PT_RENDER_OK && done && !out);
     pt_editor_studio_detach(&owner);assert(!e->before_change && !owner.editor);
     pt_document_release(&d);free(e);assert(!live && pcm[0]==17 && pcm[1]==-93);
-    puts("EDITOR INVERT STUDIO PASS: private bank stopped by pattern/sample edits, undo/dispose, held leases, stale output shutdown, natural drain, refusal and cleanup");return 0;
+    puts("EDITOR INVERT STUDIO PASS: incremental readiness/cancellation/header guards, private bank stopped by pattern/sample edits, undo/dispose, held leases, stale output shutdown, natural drain, refusal and cleanup");return 0;
 }

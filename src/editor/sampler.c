@@ -448,18 +448,29 @@ enum pt_edit_result pt_sampler_convert_quality(struct pt_sampler *s,struct pt_pr
 enum pt_edit_result pt_sampler_convert(struct pt_sampler *s,struct pt_project *p,struct pt_pattern_history *h,unsigned slot,unsigned bits,uint32_t rate)
 {return pt_sampler_convert_quality(s,p,h,slot,bits,rate,0);}
 
+static int svx_output_disjoint(const struct pt_sample *sample,const void *out,size_t bytes)
+{
+    return out && bytes && bytes<=UINTPTR_MAX-(uintptr_t)out &&
+        !output_overlap(out,bytes,sample,sizeof(*sample)) && sample_output_disjoint(sample,out,bytes);
+}
 enum pt_svx_result pt_sampler_svx_size(const struct pt_sample *sample,size_t *size)
 {
-    struct pt_svx_info info={0};
+    struct pt_svx_info info={0};size_t n;enum pt_svx_result result;
     if(!sample || !sample->pcm.frames)return PT_SVX_INVALID;
     if(sample->loop>PT_LOOP_FORWARD || sample->slice_count || sample->finetune)return PT_SVX_UNSUPPORTED;
+    if(!size)return PT_SVX_INVALID;
     info.loop_start=sample->loop_start;info.loop_end=sample->loop_end;info.volume=(uint32_t)sample->volume*1024;
-    return pt_svx_size(&sample->pcm,&info,size);
+    result=pt_svx_size(&sample->pcm,&info,&n);if(result!=PT_SVX_OK)return result;
+    if(!svx_output_disjoint(sample,size,sizeof(*size)))return PT_SVX_ALIAS;
+    *size=n;return PT_SVX_OK;
 }
 enum pt_svx_result pt_sampler_svx_encode(const struct pt_sample *sample,uint8_t *bytes,size_t capacity,size_t *written)
 {
     size_t size;struct pt_svx_info info={0};enum pt_svx_result result=pt_sampler_svx_size(sample,&size);
     if(result!=PT_SVX_OK)return result;
+    if(!bytes || !written)return PT_SVX_INVALID;
+    if(capacity<size)return PT_SVX_CAPACITY;
+    if(!svx_output_disjoint(sample,bytes,size) || !svx_output_disjoint(sample,written,sizeof(*written)))return PT_SVX_ALIAS;
     memcpy(info.name,sample->name,sizeof(info.name));info.loop_start=sample->loop_start;
     info.loop_end=sample->loop_end;info.volume=(uint32_t)sample->volume*1024;
     return pt_svx_encode(&sample->pcm,&info,bytes,capacity,written);

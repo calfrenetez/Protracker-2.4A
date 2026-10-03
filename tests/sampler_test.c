@@ -166,8 +166,54 @@ static void conversion(void)
     pt_pattern_history_release(&h);pt_sampler_release(&s);assert(!s.bytes);pt_document_release(&d);pt_document_release(&reopened);assert(!live);
     puts("CONVERSION PASS: stereo precision/rate, scaled loops and referenced slice ordinals, exact undo, collapse refusal, allocation rollback, redo and persistence");
 }
+static void iff_output_aliases(void)
+{
+ struct source {struct pt_sample sample;int32_t data[128];} v,old;
+ uint8_t bytes[512],saved[512];void *alias[8];size_t i,n,w,allocated=live,count=calls;
+ memset(&v,0,sizeof(v));v.sample.pcm=(struct pt_pcm){v.data,128,5,8287,1,8};
+ v.sample.volume=32;strcpy(v.sample.name,"GUARDED");
+ for(i=0;i<5;++i)v.data[i]=(int32_t)i-128;
+ for(i=5;i<128;++i)v.data[i]=INT32_MAX;
+ old=v;memset(bytes,0x55,sizeof(bytes));memcpy(saved,bytes,sizeof(bytes));
+ alias[0]=&v.sample;alias[1]=v.sample.name+31;alias[2]=&v.sample.pcm;
+ alias[3]=(uint8_t *)&v.sample+sizeof(v.sample)-1;
+ alias[4]=v.data;alias[5]=v.data+4;alias[6]=v.data+5;alias[7]=(uint8_t *)v.data+sizeof(v.data)-1;
+ for(i=0;i<8;++i) {
+  assert(pt_sampler_svx_size(&v.sample,(size_t *)alias[i])==PT_SVX_ALIAS);
+  assert(!memcmp(&v,&old,sizeof(v)));
+  assert(pt_sampler_svx_encode(&v.sample,bytes,sizeof(bytes),(size_t *)alias[i])==PT_SVX_ALIAS);
+  assert(!memcmp(&v,&old,sizeof(v)) && !memcmp(bytes,saved,sizeof(bytes)));
+  w=123;assert(pt_sampler_svx_encode(&v.sample,alias[i],sizeof(bytes),&w)==PT_SVX_ALIAS && w==123);
+  assert(!memcmp(&v,&old,sizeof(v)) && !memcmp(bytes,saved,sizeof(bytes)));
+ }
+ assert(pt_sampler_svx_size(&v.sample,NULL)==PT_SVX_INVALID);
+ w=123;assert(pt_sampler_svx_encode(&v.sample,NULL,sizeof(bytes),&w)==PT_SVX_INVALID && w==123);
+ assert(pt_sampler_svx_encode(&v.sample,bytes,sizeof(bytes),NULL)==PT_SVX_INVALID);
+ n=123;assert(pt_sampler_svx_size(&v.sample,&n)==PT_SVX_OK && n==94);
+ assert(pt_sampler_svx_encode(&v.sample,bytes,sizeof(bytes),(size_t *)bytes)==PT_SVX_ALIAS && !memcmp(bytes,saved,sizeof(bytes)));
+ assert(pt_sampler_svx_encode(&v.sample,bytes,sizeof(bytes),(size_t *)(bytes+n-1))==PT_SVX_ALIAS && !memcmp(bytes,saved,sizeof(bytes)));
+ assert(pt_sampler_svx_size(&v.sample,(size_t *)(UINTPTR_MAX-1))==PT_SVX_ALIAS);
+ w=123;assert(pt_sampler_svx_encode(&v.sample,bytes,n-1,&w)==PT_SVX_CAPACITY && w==123);
+ for(i=16;i<=24;i+=8) {
+  v.sample.pcm.bits=(uint8_t)i;old=v;n=w=123;
+  assert(pt_sampler_svx_size(&v.sample,&n)==PT_SVX_UNSUPPORTED && n==123);
+  assert(pt_sampler_svx_encode(&v.sample,bytes,sizeof(bytes),&w)==PT_SVX_UNSUPPORTED && w==123);
+  assert(!memcmp(&v,&old,sizeof(v)) && !memcmp(bytes,saved,sizeof(bytes)));
+ }
+ v.sample.pcm.bits=8;v.sample.pcm.channels=2;for(i=5;i<10;++i)v.data[i]=0;old=v;
+ assert(pt_sampler_svx_encode(&v.sample,bytes,sizeof(bytes),&w)==PT_SVX_UNSUPPORTED && w==123 && !memcmp(&v,&old,sizeof(v)));
+ v.sample.pcm.channels=1;v.sample.pcm.bits=8;v.data[0]=128;old=v;
+ assert(pt_sampler_svx_size(&v.sample,&n)==PT_SVX_INVALID && n==123);
+ assert(pt_sampler_svx_encode(&v.sample,bytes,sizeof(bytes),&w)==PT_SVX_INVALID && w==123);
+ assert(!memcmp(&v,&old,sizeof(v)) && !memcmp(bytes,saved,sizeof(bytes)));
+ v.data[0]=-128;v.sample.pcm.capacity=SIZE_MAX/sizeof(int32_t)+1;old=v;
+ assert(pt_sampler_svx_size(&v.sample,&n)==PT_SVX_ALIAS && n==123);
+ assert(pt_sampler_svx_encode(&v.sample,bytes,sizeof(bytes),&w)==PT_SVX_ALIAS && w==123 && !memcmp(&v,&old,sizeof(v)));
+ assert(!memcmp(bytes,saved,sizeof(bytes)) && allocated==live && count==calls);
+}
 static void iff_samples(void)
 {
+    iff_output_aliases();
     struct pt_allocator a={NULL,allocate,release};struct pt_document d,reopened;struct pt_sampler s;
     struct pt_pattern_history h;struct pt_pattern_command commands[8];struct pt_event_change changes[8];
     int32_t values[5]={-128,-7,0,12,127};struct pt_pcm pcm={values,5,5,8287,1,8};

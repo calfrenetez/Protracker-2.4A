@@ -13,6 +13,18 @@ static int overlap(const void *a,size_t an,const void *b,size_t bn)
  uintptr_t x=(uintptr_t)a,y=(uintptr_t)b;
  return an && bn && (an>UINTPTR_MAX-x || bn>UINTPTR_MAX-y || (x<y+bn && y<x+an));
 }
+/* Output guards use full declared storage, including unused PCM capacity.
+ * Validation reads active PCM first; these checks read metadata only. */
+static int source_alias(const struct pt_pcm *pcm,const struct pt_svx_info *info,
+    const void *out,size_t bytes)
+{
+ size_t pcm_bytes;
+ if(!out || bytes>UINTPTR_MAX-(uintptr_t)out || pcm->capacity>SIZE_MAX/sizeof(*pcm->data))return 1;
+ pcm_bytes=pcm->capacity*sizeof(*pcm->data);
+ if(pcm_bytes && (!pcm->data || pcm_bytes>UINTPTR_MAX-(uintptr_t)pcm->data))return 1;
+ return overlap(out,bytes,pcm,sizeof(*pcm)) || overlap(out,bytes,info,sizeof(*info)) ||
+    overlap(out,bytes,pcm->data,pcm_bytes);
+}
 enum pt_svx_result pt_svx_inspect_reader(pt_svx_read read,void *context,size_t n,struct pt_svx_info *out)
 {
  uint8_t p[32];struct pt_svx_info v={0};size_t pos=12,end;unsigned header=0,body=0,chunks=0;uint32_t start=0,repeat=0;
@@ -112,6 +124,7 @@ enum pt_svx_result pt_svx_size(const struct pt_pcm *pcm,const struct pt_svx_info
  if(v->volume>65536 || (v->loop_end?(v->loop_start>=v->loop_end || v->loop_end>pcm->frames):v->loop_start!=0))return PT_SVX_INVALID;
  bytes=88+(uint64_t)pcm->frames+(pcm->frames&1);
  if(bytes>SIZE_MAX || bytes>UINT32_MAX)return PT_SVX_CAPACITY;
+ if(source_alias(pcm,v,out,sizeof(*out)))return PT_SVX_ALIAS;
  *out=(size_t)bytes;return PT_SVX_OK;
 }
 enum pt_svx_result pt_svx_encode(const struct pt_pcm *pcm,const struct pt_svx_info *v,uint8_t *out,size_t capacity,size_t *written)
@@ -120,7 +133,8 @@ enum pt_svx_result pt_svx_encode(const struct pt_pcm *pcm,const struct pt_svx_in
  if(result!=PT_SVX_OK)return result;
  if(!out || !written)return PT_SVX_INVALID;
  if(capacity<size)return PT_SVX_CAPACITY;
- if(overlap(out,size,pcm->data,(size_t)pcm->frames*sizeof(int32_t)) || overlap(out,size,v,sizeof(*v)))return PT_SVX_ALIAS;
+ if(source_alias(pcm,v,out,size) || source_alias(pcm,v,written,sizeof(*written)) ||
+    overlap(out,size,written,sizeof(*written)))return PT_SVX_ALIAS;
  memset(out,0,size);memcpy(out,"FORM",4);w32(out+4,(uint32_t)size-8);memcpy(out+8,"8SVXVHDR",8);w32(out+16,20);
  w32(out+20,v->loop_end?v->loop_start:pcm->frames);w32(out+24,v->loop_end?v->loop_end-v->loop_start:0);w32(out+28,v->cycles);
  w16(out+32,pcm->rate);out[34]=1;w32(out+36,v->volume);

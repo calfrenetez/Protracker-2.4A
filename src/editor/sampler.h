@@ -64,6 +64,8 @@ enum pt_edit_result pt_sampler_convert(struct pt_sampler *,struct pt_project *,s
 enum pt_edit_result pt_sampler_convert_quality(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,unsigned,uint32_t,unsigned);
 /* Explicit IFF export preserves PCM/name/rate/volume/forward loop. Unsupported
    precision, stereo, loop kinds, slices and finetune refuse without conversion. */
+/* Scalar/encoded outputs also protect the complete sample header and declared
+ * master capacity. ALIAS preserves sample and outputs; no allocation occurs. */
 enum pt_svx_result pt_sampler_svx_size(const struct pt_sample *,size_t *);
 enum pt_svx_result pt_sampler_svx_encode(const struct pt_sample *,uint8_t *,size_t,size_t *);
 enum pt_edit_result pt_sampler_import_raw(struct pt_sampler *,struct pt_project *,struct pt_pattern_history *,unsigned,const uint8_t *,size_t,const char *,const struct pt_raw_format *);

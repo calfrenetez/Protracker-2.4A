@@ -14,6 +14,11 @@ enum pt_svx_result pt_svx_inspect_reader(pt_svx_read,void *,size_t,struct pt_svx
 enum pt_svx_result pt_svx_decode_reader(pt_svx_read,void *,size_t,struct pt_pcm *);
 enum pt_svx_result pt_svx_inspect(const uint8_t *,size_t,struct pt_svx_info *);
 enum pt_svx_result pt_svx_decode(const uint8_t *,size_t,struct pt_pcm *);
+/* No allocation or implicit precision conversion. Size/encode outputs must be
+ * disjoint from PCM/info descriptors and full declared PCM capacity. Encode's
+ * written scalar must also be disjoint from its actual encoded bytes. ALIAS
+ * leaves source and outputs unchanged; unrepresentable spans fail closed.
+ * Existing active-value validation is synchronous; guards read metadata only. */
 enum pt_svx_result pt_svx_size(const struct pt_pcm *,const struct pt_svx_info *,size_t *);
 enum pt_svx_result pt_svx_encode(const struct pt_pcm *,const struct pt_svx_info *,uint8_t *,size_t,size_t *);
 #endif

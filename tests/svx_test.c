@@ -10,6 +10,75 @@ static const uint8_t fixture[]={
  'V','H','D','R',0,0,0,20, 0,0,0,1,0,0,0,3,0,0,0,2, 0x20,0x5f,1,0,0,0,0x80,0,
  'N','A','M','E',0,0,0,3,'O','D','D',0,
  'B','O','D','Y',0,0,0,5,128,255,0,127,42,0};
+/* Complete before-images catch scalar, encoded and reserved-capacity writes. */
+static void output_alias_cases(void)
+{
+ struct source {struct pt_pcm pcm;struct pt_svx_info info;int32_t data[128];} v,old;
+ uint8_t bytes[512],saved[512];size_t n,w,i;void *alias[8];
+ memset(&v,0,sizeof(v));v.pcm=(struct pt_pcm){v.data,128,5,8287,1,8};
+ for(i=0;i<5;++i)v.data[i]=(int32_t)i-128;
+ for(i=5;i<128;++i)v.data[i]=INT32_MAX; /* Padding is guarded, never validated as PCM. */
+ v.info.volume=32768;v.info.loop_start=1;v.info.loop_end=4;strcpy(v.info.name,"GUARDED");
+ old=v;memset(bytes,0x55,sizeof(bytes));memcpy(saved,bytes,sizeof(bytes));
+ alias[0]=&v.pcm;alias[1]=(uint8_t *)&v.pcm+sizeof(v.pcm)-1;
+ alias[2]=&v.info;alias[3]=(uint8_t *)&v.info+sizeof(v.info)-1;
+ alias[4]=v.data;alias[5]=v.data+4;alias[6]=v.data+5;alias[7]=(uint8_t *)v.data+sizeof(v.data)-1;
+ for(i=0;i<8;++i) {
+  assert(pt_svx_size(&v.pcm,&v.info,(size_t *)alias[i])==PT_SVX_ALIAS);
+  assert(!memcmp(&v,&old,sizeof(v)) && !memcmp(bytes,saved,sizeof(bytes)));
+  assert(pt_svx_encode(&v.pcm,&v.info,bytes,sizeof(bytes),(size_t *)alias[i])==PT_SVX_ALIAS);
+  assert(!memcmp(&v,&old,sizeof(v)) && !memcmp(bytes,saved,sizeof(bytes)));
+  w=123;assert(pt_svx_encode(&v.pcm,&v.info,alias[i],sizeof(bytes),&w)==PT_SVX_ALIAS && w==123);
+  assert(!memcmp(&v,&old,sizeof(v)) && !memcmp(bytes,saved,sizeof(bytes)));
+ }
+ n=123;assert(pt_svx_size(&v.pcm,&v.info,&n)==PT_SVX_OK && n==94);
+ assert(pt_svx_encode(&v.pcm,&v.info,bytes,sizeof(bytes),(size_t *)bytes)==PT_SVX_ALIAS);
+ assert(!memcmp(bytes,saved,sizeof(bytes)) && !memcmp(&v,&old,sizeof(v)));
+ assert(pt_svx_encode(&v.pcm,&v.info,bytes,sizeof(bytes),(size_t *)(bytes+n-1))==PT_SVX_ALIAS);
+ assert(!memcmp(bytes,saved,sizeof(bytes)) && !memcmp(&v,&old,sizeof(v)));
+ assert(pt_svx_size(&v.pcm,&v.info,(size_t *)(UINTPTR_MAX-1))==PT_SVX_ALIAS);
+ w=123;assert(pt_svx_encode(&v.pcm,&v.info,(uint8_t *)(UINTPTR_MAX-1),sizeof(bytes),&w)==PT_SVX_ALIAS && w==123);
+ assert(!memcmp(&v,&old,sizeof(v)) && !memcmp(bytes,saved,sizeof(bytes)));
+ /* Encoded capacity beyond actual wire bytes is not an emitted source span. */
+ {struct output {uint8_t bytes[128];size_t written;} output;
+  memset(&output,0x55,sizeof(output));
+  assert(pt_svx_encode(&v.pcm,&v.info,output.bytes,sizeof(output),&output.written)==PT_SVX_OK && output.written==n);
+  assert(output.bytes[88]==128 && output.bytes[92]==132 && output.bytes[93]==0);
+  assert(!memcmp(&v,&old,sizeof(v)));
+ }
+ /* Invalid/unsupported/capacity refusals retain their original precedence. */
+ assert(pt_svx_size(&v.pcm,&v.info,NULL)==PT_SVX_INVALID);
+ w=123;assert(pt_svx_encode(&v.pcm,&v.info,NULL,sizeof(bytes),&w)==PT_SVX_INVALID && w==123);
+ assert(pt_svx_encode(&v.pcm,&v.info,bytes,sizeof(bytes),NULL)==PT_SVX_INVALID);
+ assert(!memcmp(bytes,saved,sizeof(bytes)) && !memcmp(&v,&old,sizeof(v)));
+ w=123;assert(pt_svx_encode(&v.pcm,&v.info,bytes,n-1,&w)==PT_SVX_CAPACITY && w==123);
+ assert(!memcmp(bytes,saved,sizeof(bytes)) && !memcmp(&v,&old,sizeof(v)));
+ v.data[0]=128;old=v;n=123;
+ assert(pt_svx_size(&v.pcm,&v.info,&n)==PT_SVX_INVALID && n==123);
+ assert(pt_svx_encode(&v.pcm,&v.info,bytes,sizeof(bytes),&w)==PT_SVX_INVALID && w==123);
+ assert(pt_svx_size(&v.pcm,&v.info,(size_t *)v.data)==PT_SVX_INVALID && !memcmp(&v,&old,sizeof(v)));
+ v.data[0]=-128;
+ for(i=16;i<=24;i+=8) {
+  v.pcm.bits=(uint8_t)i;old=v;n=123;w=123;
+  assert(pt_svx_size(&v.pcm,&v.info,&n)==PT_SVX_UNSUPPORTED && n==123);
+  assert(pt_svx_encode(&v.pcm,&v.info,bytes,sizeof(bytes),&w)==PT_SVX_UNSUPPORTED && w==123);
+  assert(pt_svx_encode(&v.pcm,&v.info,bytes,sizeof(bytes),(size_t *)v.data)==PT_SVX_UNSUPPORTED);
+  assert(!memcmp(&v,&old,sizeof(v)) && !memcmp(bytes,saved,sizeof(bytes)));
+ }
+ v.pcm.bits=8;v.pcm.channels=2;for(i=5;i<10;++i)v.data[i]=0;old=v;
+ n=123;assert(pt_svx_size(&v.pcm,&v.info,&n)==PT_SVX_UNSUPPORTED && n==123 && !memcmp(&v,&old,sizeof(v)));
+ v.pcm.channels=1;v.pcm.capacity=SIZE_MAX/sizeof(int32_t)+1;old=v;
+ assert(pt_svx_size(&v.pcm,&v.info,&n)==PT_SVX_ALIAS && n==123 && !memcmp(&v,&old,sizeof(v)));
+ w=123;assert(pt_svx_encode(&v.pcm,&v.info,bytes,sizeof(bytes),&w)==PT_SVX_ALIAS && w==123);
+ assert(!memcmp(bytes,saved,sizeof(bytes)));
+ v.pcm.frames=0;v.pcm.capacity=1;v.pcm.data=(int32_t *)(UINTPTR_MAX-1);v.info.loop_start=v.info.loop_end=0;old=v;
+ assert(pt_svx_size(&v.pcm,&v.info,&n)==PT_SVX_ALIAS && n==123 && !memcmp(&v,&old,sizeof(v)));
+ v.pcm.data=NULL;old=v;
+ assert(pt_svx_size(&v.pcm,&v.info,&n)==PT_SVX_ALIAS && n==123 && !memcmp(&v,&old,sizeof(v)));
+ v.pcm.capacity=0;old=v;
+ assert(pt_svx_size(&v.pcm,&v.info,&n)==PT_SVX_OK && n==88);
+ assert(pt_svx_encode(&v.pcm,&v.info,bytes,sizeof(bytes),&w)==PT_SVX_OK && w==88 && !memcmp(&v,&old,sizeof(v)));
+}
 int main(void)
 {
  uint8_t bytes[512],saved[512];struct pt_svx_info v,untouched;int32_t data[8]={0},original[5]={-128,-1,0,127,42};
@@ -67,6 +136,7 @@ int main(void)
    assert(pt_svx_decode(bytes,66,&pcm)==PT_SVX_OK);
   }
  }
+ output_alias_cases();
  puts("8SVX PASS: independent signed PCM fixture, odd chunks, loops, Fibonacci wrap, malformed bounds, alias and capacity");
  return 0;
 }

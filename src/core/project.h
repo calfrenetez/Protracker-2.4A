@@ -82,6 +82,12 @@ struct pt_project_storage {
  * Commit the returned project only after the caller's file/UI transaction ends.
  */
 int pt_project_event_valid(const struct pt_project *,const struct pt_event *);
+/* Successful validation/size/encode output publication must be disjoint from
+ * the project, tables, slices, extensions and full declared PCM capacities.
+ * Encode's written scalar must also be disjoint from its actual encoded bytes.
+ * ALIAS leaves outputs and source unchanged. Unrepresentable spans fail closed.
+ * Existing validation remains synchronous; these guards scan metadata only and
+ * allocate nothing. NULL validation caps retains the ordinary validation path. */
 enum pt_project_result pt_project_validate(const struct pt_project *, uint32_t *);
 enum pt_project_result pt_project_size(const struct pt_project *, size_t *);
 enum pt_project_result pt_project_encode(const struct pt_project *, uint8_t *, size_t, size_t *);
@@ -89,7 +95,9 @@ enum pt_project_result pt_project_encode(const struct pt_project *, uint8_t *, s
  * emitting; computes CRC in a first pass then emits in blocks <=1024 bytes.
  * Source must remain immutable/alive. Sink returns1 on complete consumption;
  * failure returns INVALID, may have emitted a prefix, leaves written unchanged.
- * Caller must stage/verify before publishing. No allocation. */
+ * Caller must stage/verify before publishing. No allocation. written uses the
+ * same master/metadata/capacity guard and refuses ALIAS before sink callbacks.
+ * The opaque sink/context must separately honor source immutability. */
 typedef int (*pt_project_sink)(void *,const uint8_t *,size_t);
 enum pt_project_result pt_project_stream(const struct pt_project *,pt_project_sink,void *,size_t *);
 /* Stable, synchronous positional source; exact reads return 1. Preflight uses

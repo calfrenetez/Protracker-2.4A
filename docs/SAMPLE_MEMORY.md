@@ -5,6 +5,24 @@ The enhanced project owns the authoritative sample, including its declared
 elements in the declared precision; 24-bit samples retain their low eight bits.
 Playback representations must never become the project's source of truth.
 
+## Project serializer output protection — 3 October 2026
+
+Public validation capabilities, serialized-size and encoded/streamed completion
+outputs now refuse overlap with project metadata, tables, slices, extensions or
+any declared master PCM capacity. Encoded bytes and their completion scalar must
+also be disjoint. Guards check representable spans using validated metadata,
+allocate nothing and read no padding PCM values. Internal validation refusals
+propagate before encoding, CRC or sink callbacks; failed publication leaves
+outputs and masters unchanged. Opaque sinks still owe source immutability.
+
+A clean-source sanitizer probe reproduced a valid master changing from 257 to
+3712 through the encoded-byte count. The identical final probe returns ALIAS and
+retains 257. Two focused host sanitizer groups and the pinned native Exec stream
+cross-build pass from 7531 immutable source inputs plus four reviewed overlays.
+Full 8/16/24-bit mono/stereo wire-byte parity and unused-capacity protection pass.
+Exact native execution is pending. Existing transactional native Save already
+uses private completion outputs; its format, CRC and precision are unchanged.
+
 ## Studio caller-output master protection — 3 October 2026
 
 Ordinary direct24 Studio and the private classic EFx producer now refuse caller

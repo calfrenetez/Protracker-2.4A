@@ -26,6 +26,7 @@ static int project_stream_fixture(int argc,char **argv)
 {
     struct pt_project p;struct sink_state sink={0,SIZE_MAX};struct budget b={0};
     struct pt_allocator a={&b,allocate_stream,release_stream};size_t n,w,i;FILE *f;
+    project_output_alias_cases();
     assert(argc==2);fixture(&p);
     assert(pt_project_encode(&p,encoded,sizeof(encoded),&n)==PT_PROJECT_OK);
     assert(pt_project_stream(&p,collect,&sink,&w)==PT_PROJECT_OK && w==n && sink.offset==n);

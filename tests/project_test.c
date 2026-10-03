@@ -60,6 +60,126 @@ static size_t chunk(const uint8_t *p,uint32_t tag)
     for(i=0;i<get32(p+24);++i) {size_t n=get32(p+pos+8);if(get32(p+pos)==tag)return pos;pos+=12+n+((4-(n&3))&3);}
     assert(0);return 0;
 }
+/* Narrow shared coverage: native project-stream calls this without replaying
+ * the historical full truncation matrix in project_baseline_main. */
+struct project_alias_fixture {
+    struct pt_project project;
+    struct pt_event events[256];
+    struct pt_sample sample;
+    struct pt_extension extension;
+    uint16_t orders[2];uint32_t markers[2];uint8_t opaque[16];
+    union {size_t size;uint32_t caps;int32_t values[1024];} master;
+};
+static struct project_alias_fixture alias_source,alias_before;
+static uint8_t alias_encoded[8192],alias_encoded_before[8192],alias_gold[8192],alias_streamed[8192];
+struct alias_sink {size_t bytes;unsigned calls;};
+static int alias_collect(void *context,const uint8_t *data,size_t n)
+{
+    struct alias_sink *s=context;
+    assert(n<=1024 && n<=sizeof(alias_streamed)-s->bytes);
+    memcpy(alias_streamed+s->bytes,data,n);s->bytes+=n;++s->calls;return 1;
+}
+static void alias_fixture(unsigned bits,unsigned channels)
+{
+    struct pt_project *p=&alias_source.project;struct pt_sample *s=&alias_source.sample;unsigned i;
+    memset(&alias_source,0,sizeof(alias_source));pt_channels_init(&p->channels);
+    p->orders=alias_source.orders;p->events=alias_source.events;p->samples=s;
+    p->order_count=2;p->pattern_count=1;p->sample_count=1;p->bpm=125;p->speed=6;
+    p->extensions=&alias_source.extension;p->extension_count=1;
+    s->pcm=(struct pt_pcm){alias_source.master.values,1024,4/channels,48000,(uint8_t)channels,(uint8_t)bits};s->volume=64;
+    s->slices=alias_source.markers;s->slice_count=2;alias_source.markers[1]=1;
+    s->loop=PT_LOOP_FORWARD;s->loop_end=s->pcm.frames;
+    alias_source.master.values[0]=bits==8?17:257;
+    alias_source.master.values[1]=bits==8?-93:-513;
+    alias_source.master.values[2]=bits==24?0x123457:30;
+    alias_source.master.values[3]=bits==24?-0x234569:-77;
+    /* Capacity padding deliberately exceeds every declared precision: guards
+     * must protect its bytes without extending validation into those values. */
+    for(i=4;i<1024;++i)alias_source.master.values[i]=(int32_t)(0x5ac30000UL+i);
+    alias_source.extension=(struct pt_extension){0x54455354,16,17,alias_source.opaque};
+    for(i=0;i<sizeof(alias_source.opaque);++i)alias_source.opaque[i]=(uint8_t)(17+i);
+}
+static void alias_outputs_refuse(void *location,size_t n)
+{
+    struct pt_project *p=&alias_source.project;struct alias_sink sink={0,0};size_t written=123;
+    alias_before=alias_source;memset(alias_encoded,0xa5,sizeof(alias_encoded));
+    memcpy(alias_encoded_before,alias_encoded,sizeof(alias_encoded));
+    assert(pt_project_validate(p,(uint32_t *)location)==PT_PROJECT_ALIAS);
+    assert(!memcmp(&alias_source,&alias_before,sizeof(alias_source)));
+    assert(pt_project_size(p,(size_t *)location)==PT_PROJECT_ALIAS);
+    assert(!memcmp(&alias_source,&alias_before,sizeof(alias_source)));
+    assert(pt_project_encode(p,alias_encoded,sizeof(alias_encoded),(size_t *)location)==PT_PROJECT_ALIAS);
+    assert(!memcmp(&alias_source,&alias_before,sizeof(alias_source)) && !memcmp(alias_encoded,alias_encoded_before,sizeof(alias_encoded)));
+    assert(pt_project_encode(p,location,n,&written)==PT_PROJECT_ALIAS && written==123);
+    assert(!memcmp(&alias_source,&alias_before,sizeof(alias_source)));
+    assert(pt_project_stream(p,alias_collect,&sink,(size_t *)location)==PT_PROJECT_ALIAS && !sink.calls && !sink.bytes);
+    assert(!memcmp(&alias_source,&alias_before,sizeof(alias_source)));
+}
+static void alias_bad_spans_refuse(void)
+{
+    struct pt_project *p=&alias_source.project;struct alias_sink sink={0,0};size_t n=123,w=456;uint32_t caps=789;
+    alias_before=alias_source;memset(alias_encoded,0xa5,sizeof(alias_encoded));
+    memcpy(alias_encoded_before,alias_encoded,sizeof(alias_encoded));
+    /* NULL-caps validation still validates only the existing readable values. */
+    assert(pt_project_validate(p,NULL)==PT_PROJECT_OK);
+    assert(pt_project_validate(p,&caps)==PT_PROJECT_ALIAS && caps==789);
+    assert(pt_project_size(p,&n)==PT_PROJECT_ALIAS && n==123);
+    assert(pt_project_encode(p,alias_encoded,sizeof(alias_encoded),&w)==PT_PROJECT_ALIAS && w==456);
+    assert(!memcmp(alias_encoded,alias_encoded_before,sizeof(alias_encoded)));
+    assert(pt_project_stream(p,alias_collect,&sink,&w)==PT_PROJECT_ALIAS && w==456 && !sink.calls);
+    assert(!memcmp(&alias_source,&alias_before,sizeof(alias_source)));
+}
+static void project_output_alias_cases(void)
+{
+    unsigned bits,channels,i;size_t n,w;uint32_t caps;struct alias_sink sink;
+    for(bits=8;bits<=24;bits+=8)for(channels=1;channels<=2;++channels) {
+        struct pt_project *p;void *locations[19];unsigned k=0;uint32_t expected;
+        alias_fixture(bits,channels);p=&alias_source.project;
+        expected=PT_CAP_SLICES|(bits==16?PT_CAP_16BIT:bits==24?PT_CAP_24BIT:0)|(channels==2?PT_CAP_STEREO:0);
+        assert(pt_project_validate(p,&caps)==PT_PROJECT_OK && caps==expected);
+        assert(pt_project_size(p,&n)==PT_PROJECT_OK && n<sizeof(alias_gold));
+        assert(pt_project_encode(p,alias_gold,sizeof(alias_gold),&w)==PT_PROJECT_OK && w==n);
+        locations[k++]=p;locations[k++]=(uint8_t *)p+sizeof(*p)-1;
+        locations[k++]=alias_source.events;locations[k++]=(uint8_t *)alias_source.events+sizeof(alias_source.events)-1;
+        locations[k++]=&alias_source.sample;locations[k++]=(uint8_t *)&alias_source.sample+sizeof(alias_source.sample)-1;
+        locations[k++]=alias_source.orders;locations[k++]=(uint8_t *)alias_source.orders+sizeof(alias_source.orders)-1;
+        locations[k++]=alias_source.markers;locations[k++]=(uint8_t *)alias_source.markers+sizeof(alias_source.markers)-1;
+        locations[k++]=&alias_source.extension;locations[k++]=(uint8_t *)&alias_source.extension+sizeof(alias_source.extension)-1;
+        locations[k++]=alias_source.opaque;locations[k++]=alias_source.opaque+sizeof(alias_source.opaque)-1;
+        locations[k++]=alias_source.master.values;locations[k++]=(uint8_t *)alias_source.master.values+4*sizeof(int32_t)-1;
+        locations[k++]=alias_source.master.values+8;locations[k++]=(uint8_t *)alias_source.master.values+sizeof(alias_source.master.values)-1;
+        assert(k<=sizeof(locations)/sizeof(*locations));
+        for(i=0;i<k;++i)alias_outputs_refuse(locations[i],n);
+        /* Both directions of output/length overlap refuse before any bytes. */
+        alias_outputs_refuse((void *)(uintptr_t)(UINTPTR_MAX-1),n);
+        memset(alias_encoded,0xa5,sizeof(alias_encoded));memcpy(alias_encoded_before,alias_encoded,sizeof(alias_encoded));
+        assert(pt_project_encode(p,alias_encoded,sizeof(alias_encoded),(size_t *)alias_encoded)==PT_PROJECT_ALIAS);
+        assert(pt_project_encode(p,alias_encoded,sizeof(alias_encoded),(size_t *)(alias_encoded+n-1))==PT_PROJECT_ALIAS);
+        assert(!memcmp(alias_encoded,alias_encoded_before,sizeof(alias_encoded)));
+        w=123;assert(pt_project_encode(p,alias_encoded,n-1,&w)==PT_PROJECT_CAPACITY && w==123);
+        assert(!memcmp(alias_encoded,alias_encoded_before,sizeof(alias_encoded)));
+        alias_before=alias_source;
+        assert(pt_project_encode(p,alias_encoded,sizeof(alias_encoded),&w)==PT_PROJECT_OK && w==n && !memcmp(alias_encoded,alias_gold,n));
+        sink=(struct alias_sink){0,0};assert(pt_project_stream(p,alias_collect,&sink,&w)==PT_PROJECT_OK && w==n && sink.bytes==n);
+        assert(!memcmp(alias_streamed,alias_gold,n) && !memcmp(&alias_source,&alias_before,sizeof(alias_source)));
+        p->speed=0;alias_before=alias_source;n=123;w=456;caps=789;sink=(struct alias_sink){0,0};
+        memcpy(alias_encoded_before,alias_encoded,sizeof(alias_encoded));
+        assert(pt_project_validate(p,&caps)==PT_PROJECT_INVALID && caps==789);
+        assert(pt_project_size(p,&n)==PT_PROJECT_INVALID && n==123);
+        assert(pt_project_encode(p,alias_encoded,sizeof(alias_encoded),&w)==PT_PROJECT_INVALID && w==456);
+        assert(pt_project_stream(p,alias_collect,&sink,&w)==PT_PROJECT_INVALID && w==456 && !sink.calls);
+        assert(!memcmp(alias_encoded,alias_encoded_before,sizeof(alias_encoded)) && !memcmp(&alias_source,&alias_before,sizeof(alias_source)));
+    }
+    alias_fixture(24,1);alias_source.sample.pcm.capacity=SIZE_MAX/sizeof(int32_t)+1;alias_bad_spans_refuse();
+    alias_fixture(24,1);alias_source.extension.data=(const uint8_t *)(uintptr_t)(UINTPTR_MAX-3);alias_bad_spans_refuse();
+    alias_fixture(24,1);alias_source.sample.pcm.frames=0;alias_source.sample.slice_count=0;alias_source.sample.loop=PT_LOOP_NONE;alias_source.sample.loop_end=0;
+    alias_source.sample.pcm.capacity=8;alias_source.sample.pcm.data=(int32_t *)(uintptr_t)(UINTPTR_MAX-7);alias_bad_spans_refuse();
+    alias_source.sample.pcm.data=NULL;alias_bad_spans_refuse();
+    /* Truly empty capacity has no backing span and remains serializable. */
+    alias_source.sample.pcm.capacity=0;
+    assert(pt_project_size(&alias_source.project,&n)==PT_PROJECT_OK);
+    assert(pt_project_encode(&alias_source.project,alias_encoded,sizeof(alias_encoded),&w)==PT_PROJECT_OK && w==n);
+}
 int main(int argc,char **argv)
 {
     struct pt_project p,decoded,before;struct pt_project_storage s=storage();
@@ -113,6 +233,7 @@ int main(int argc,char **argv)
     samples[0].crossfade=3;assert(pt_project_validate(&p,NULL)==PT_PROJECT_INVALID);samples[0].crossfade=2;
     slices[1]=0;assert(pt_project_validate(&p,NULL)==PT_PROJECT_INVALID);slices[1]=2;
     if(argc==2) {FILE *f=fopen(argv[1],"wb");assert(f);assert(fwrite(encoded,1,n,f)==n);assert(!fclose(f));}
+    project_output_alias_cases();
     puts("PROJECT PASS: exact mixed-route round trip, 24-bit stereo, OFF, loops, slices, MIDI endpoints, extensions, CRC, bounds, transactional decode");
     return 0;
 }

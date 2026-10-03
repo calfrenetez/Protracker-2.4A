@@ -114,6 +114,7 @@ static uint32_t project_caps(const struct pt_project *p)
     }
     return c;
 }
+static int source_alias(const struct pt_project *,const void *,size_t);
 enum pt_project_result pt_project_validate(const struct pt_project *p,uint32_t *caps)
 {
     unsigned i,j;size_t n;uint32_t c;
@@ -137,7 +138,10 @@ enum pt_project_result pt_project_validate(const struct pt_project *p,uint32_t *
     }
     for(i=0;i<p->extension_count;++i)if(known(p->extensions[i].id)>=0 ||
         (p->extensions[i].length && !p->extensions[i].data))return PT_PROJECT_INVALID;
-    if(caps)*caps=c;
+    if(caps) {
+        if(source_alias(p,caps,sizeof(*caps)))return PT_PROJECT_ALIAS;
+        *caps=c;
+    }
     return PT_PROJECT_OK;
 }
 static enum pt_project_result sizes(const struct pt_project *p,size_t lengths[6],size_t *total)
@@ -163,19 +167,32 @@ enum pt_project_result pt_project_size(const struct pt_project *p,size_t *out)
 {
     size_t lengths[6],n;enum pt_project_result r;
     if(!out)return PT_PROJECT_INVALID;
-    r=sizes(p,lengths,&n);if(r==PT_PROJECT_OK)*out=n;return r;
+    r=sizes(p,lengths,&n);if(r!=PT_PROJECT_OK)return r;
+    if(source_alias(p,out,sizeof(*out)))return PT_PROJECT_ALIAS;
+    *out=n;return PT_PROJECT_OK;
+}
+/* Validated metadata only. Guard the complete declared storage without reading
+ * padding values. Unrepresentable storage/output spans refuse conservatively. */
+static int span_alias(const void *out,size_t n,const void *source,size_t count,size_t width)
+{
+    size_t bytes;
+    if(count>SIZE_MAX/width)return 1;
+    bytes=count*width;
+    if(bytes && (!source || bytes>UINTPTR_MAX-(uintptr_t)source))return 1;
+    return overlap(out,n,source,bytes);
 }
 static int source_alias(const struct pt_project *p,const void *out,size_t n)
 {
     unsigned i;size_t events=(size_t)p->pattern_count*64*p->channels.count;
-    if(overlap(out,n,p,sizeof(*p)) || overlap(out,n,p->orders,p->order_count*sizeof(*p->orders)) ||
-       overlap(out,n,p->events,events*sizeof(*p->events)) ||
-       overlap(out,n,p->samples,p->sample_count*sizeof(*p->samples)) ||
-       overlap(out,n,p->extensions,p->extension_count*sizeof(*p->extensions)))return 1;
-    for(i=0;i<p->sample_count;++i)if(overlap(out,n,p->samples[i].pcm.data,
-        (size_t)p->samples[i].pcm.frames*p->samples[i].pcm.channels*4) ||
-        overlap(out,n,p->samples[i].slices,(size_t)p->samples[i].slice_count*4))return 1;
-    for(i=0;i<p->extension_count;++i)if(overlap(out,n,p->extensions[i].data,p->extensions[i].length))return 1;
+    if(n && (!out || n>UINTPTR_MAX-(uintptr_t)out))return 1;
+    if(span_alias(out,n,p,1,sizeof(*p)) || span_alias(out,n,p->orders,p->order_count,sizeof(*p->orders)) ||
+       span_alias(out,n,p->events,events,sizeof(*p->events)) ||
+       span_alias(out,n,p->samples,p->sample_count,sizeof(*p->samples)) ||
+       span_alias(out,n,p->extensions,p->extension_count,sizeof(*p->extensions)))return 1;
+    for(i=0;i<p->sample_count;++i)if(span_alias(out,n,p->samples[i].pcm.data,
+        p->samples[i].pcm.capacity,sizeof(*p->samples[i].pcm.data)) ||
+        span_alias(out,n,p->samples[i].slices,p->samples[i].slice_count,sizeof(*p->samples[i].slices)))return 1;
+    for(i=0;i<p->extension_count;++i)if(span_alias(out,n,p->extensions[i].data,p->extensions[i].length,1))return 1;
     return 0;
 }
 enum pt_project_result pt_project_encode(const struct pt_project *p,uint8_t *out,size_t capacity,size_t *written)
@@ -185,8 +202,10 @@ enum pt_project_result pt_project_encode(const struct pt_project *p,uint8_t *out
     if(r!=PT_PROJECT_OK)return r;
     if(!out || !written)return PT_PROJECT_INVALID;
     if(capacity<n)return PT_PROJECT_CAPACITY;
-    if(source_alias(p,out,n) || overlap(out,n,written,sizeof(*written)))return PT_PROJECT_ALIAS;
-    pt_project_validate(p,&caps);memset(out,0,n);memcpy(out,magic,8);w16(out+8,1);
+    if(source_alias(p,out,n) || source_alias(p,written,sizeof(*written)) ||
+       overlap(out,n,written,sizeof(*written)))return PT_PROJECT_ALIAS;
+    r=pt_project_validate(p,&caps);if(r!=PT_PROJECT_OK)return r;
+    memset(out,0,n);memcpy(out,magic,8);w16(out+8,1);
     w32(out+12,(uint32_t)n);w32(out+16,caps);w32(out+24,6+p->extension_count);
     for(k=0;k<6;++k) {
         w32(out+pos,tags[k]);w16(out+pos+4,1);w16(out+pos+6,1);w32(out+pos+8,(uint32_t)lengths[k]);
@@ -313,7 +332,8 @@ enum pt_project_result pt_project_stream(const struct pt_project *p,pt_project_s
     r=sizes(p,lengths,&total);if(r!=PT_PROJECT_OK)return r;
     /* written must not overwrite any part of the master after successful emit. */
     if(source_alias(p,written,sizeof(*written)))return PT_PROJECT_ALIAS;
-    pt_project_validate(p,&caps);memset(&w,0,sizeof(w));w.crc=0xffffffffUL;
+    r=pt_project_validate(p,&caps);if(r!=PT_PROJECT_OK)return r;
+    memset(&w,0,sizeof(w));w.crc=0xffffffffUL;
     if(!stream_body(p,lengths,total,caps,0,&w) || w.pos!=total)return PT_PROJECT_INVALID;
     crc=w.crc^0xffffffffUL;memset(&w,0,sizeof(w));w.sink=sink;w.context=context;
     if(!stream_body(p,lengths,total,caps,crc,&w) || w.pos!=total ||

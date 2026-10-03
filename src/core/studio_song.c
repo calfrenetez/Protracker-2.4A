@@ -3,17 +3,48 @@
 struct pt_studio_song {
     struct pt_allocator allocator;struct pt_render_sequence *sequence;
     struct pt_studio_mix *mix;struct pt_studio_binding bindings[255];
+    const struct pt_project *project;
     struct pt_render_plan plan;struct pt_render_interval interval;
     struct pt_pcm block;int32_t samples[512];
     unsigned voices,count,pending,done,measured,ready;uint32_t remaining;
     uint8_t required[255];
     enum pt_render_result failure;
 };
+static int overlaps(const void *a,size_t an,const void *b,size_t bn)
+{
+    uintptr_t x=(uintptr_t)a,y=(uintptr_t)b;
+    if(!an || !bn)return 0;
+    if(an>UINTPTR_MAX-x || bn>UINTPTR_MAX-y)return 1;
+    return x<y+bn && y<x+an;
+}
+int pt_studio_song_output_disjoint(const struct pt_studio_song *s,const void *out,size_t bytes)
+{
+    unsigned i;
+    if(!s || !out || bytes>UINTPTR_MAX-(uintptr_t)out || overlaps(out,bytes,s,sizeof(*s)))return 0;
+    /* Stop clears all borrowed owners before callers may destroy them. */
+    if(!s->sequence)return 1;
+    if(!pt_render_sequence_output_disjoint(s->sequence,out,bytes) ||
+       (s->mix && !pt_studio_mix_output_disjoint(s->mix,out,bytes)))return 0;
+    /* Capacity includes reserved/unfilled elements, not only audible frames. */
+    for(i=0;i<s->project->sample_count;++i) {
+        const struct pt_pcm *pcm=&s->project->samples[i].pcm;
+        if(pcm->capacity>SIZE_MAX/sizeof(*pcm->data) ||
+           overlaps(out,bytes,pcm->data,pcm->capacity*sizeof(*pcm->data)))return 0;
+    }
+    return 1;
+}
+static int input_output_disjoint(const struct pt_render_options *o,const struct pt_allocator *a,
+    const struct pt_studio_source *source,const struct pt_studio_binding *bindings,unsigned count,const void *out,size_t bytes)
+{
+    return !overlaps(out,bytes,o,sizeof(*o)) && !overlaps(out,bytes,a,sizeof(*a)) &&
+        !overlaps(out,bytes,source,sizeof(*source)) && !overlaps(out,bytes,bindings,count*sizeof(*bindings));
+}
 void pt_studio_song_stop(struct pt_studio_song *s)
 {
     if(!s)return;
     pt_studio_close(s->mix);s->mix=NULL;
     pt_render_sequence_close(s->sequence);s->sequence=NULL;
+    s->project=NULL;
     s->done=1;s->pending=0;s->remaining=0;s->ready=0;
 }
 void pt_studio_song_close(struct pt_studio_song *s)
@@ -25,24 +56,26 @@ enum pt_render_result pt_studio_song_begin(const struct pt_project *p,const stru
     struct pt_studio_song *s;unsigned i;enum pt_render_result result;
     if(!out || !p || !o || o->rate!=48000 || o->bits!=24 || !a || !a->allocate || !a->release ||
        !source || !source->acquire || !source->release || count>255 || count!=p->sample_count ||
-       (count && (!bindings || !p->samples)))return PT_RENDER_INVALID;
+       (count && (!bindings || !p->samples)) ||
+       !input_output_disjoint(o,a,source,bindings,count,out,sizeof(*out)))return PT_RENDER_INVALID;
     for(i=0;i<count;++i)if(bindings[i].pcm!=&p->samples[i].pcm)return PT_RENDER_INVALID;
     s=a->allocate(a->context,sizeof(*s));if(!s)return PT_RENDER_MEMORY;
-    memset(s,0,sizeof(*s));s->allocator=*a;s->count=count;s->voices=p->channels.count;
+    memset(s,0,sizeof(*s));s->allocator=*a;s->count=count;s->voices=p->channels.count;s->project=p;
     if(count)memcpy(s->bindings,bindings,count*sizeof(*bindings));
     result=pt_render_sequence_begin(p,o,a,&s->sequence);
     if(result!=PT_RENDER_OK) {pt_studio_song_close(s);return result;}
     s->mix=pt_studio_open(a,source,s->voices);
     if(!s->mix) {pt_studio_song_close(s);return PT_RENDER_MEMORY;}
+    if(!pt_studio_song_output_disjoint(s,out,sizeof(*out))) {pt_studio_song_close(s);return PT_RENDER_INVALID;}
     s->block=(struct pt_pcm){s->samples,512,0,48000,2,24};*out=s;return PT_RENDER_OK;
 }
 enum pt_render_result pt_studio_song_prepare(struct pt_studio_song *s,unsigned *ready)
 {
     enum pt_render_result result;unsigned i,j;
-    if(!s || !ready)return PT_RENDER_INVALID;
-    *ready=0;
+    if(!s || !ready || !pt_studio_song_output_disjoint(s,ready,sizeof(*ready)))return PT_RENDER_INVALID;
     if(s->failure)return s->failure;
     if(s->done)return PT_RENDER_INVALID;
+    *ready=0;
     if(s->ready) {*ready=1;return PT_RENDER_OK;}
     if(!s->measured) {
         result=pt_render_sequence_prepare(s->sequence,256,&s->measured);
@@ -77,7 +110,8 @@ fail:
 }
 int pt_studio_song_required(const struct pt_studio_song *s,uint8_t samples[255])
 {
-    if(!s || !samples || !s->ready || s->done || s->failure)return 0;
+    if(!s || !samples || !s->ready || s->done || s->failure ||
+       !pt_studio_song_output_disjoint(s,samples,sizeof(s->required)))return 0;
     memcpy(samples,s->required,sizeof(s->required));return 1;
 }
 enum pt_render_result pt_studio_song_open(const struct pt_project *p,const struct pt_render_options *o,
@@ -88,6 +122,8 @@ enum pt_render_result pt_studio_song_open(const struct pt_project *p,const struc
     if(!out)return PT_RENDER_INVALID;
     result=pt_studio_song_begin(p,o,a,source,bindings,count,&s);
     while(result==PT_RENDER_OK && !ready)result=pt_studio_song_prepare(s,&ready);
+    if(result==PT_RENDER_OK && (!input_output_disjoint(o,a,source,bindings,count,out,sizeof(*out)) ||
+       !pt_studio_song_output_disjoint(s,out,sizeof(*out))))result=PT_RENDER_INVALID;
     if(result!=PT_RENDER_OK) {pt_studio_song_close(s);return result;}
     *out=s;return PT_RENDER_OK;
 }
@@ -95,7 +131,10 @@ static enum pt_render_result pull(struct pt_studio_song *s,unsigned max_frames,
     const struct pt_pcm **pcm,unsigned *done,unsigned prepared)
 {
     enum pt_render_result result;uint64_t clipped;
-    if(!s || !pcm || !done || !max_frames || max_frames>256)return PT_RENDER_INVALID;
+    if(!s || !pcm || !done || !max_frames || max_frames>256 ||
+       !pt_studio_song_output_disjoint(s,pcm,sizeof(*pcm)) ||
+       !pt_studio_song_output_disjoint(s,done,sizeof(*done)) ||
+       overlaps(pcm,sizeof(*pcm),done,sizeof(*done)))return PT_RENDER_INVALID;
     *pcm=NULL;*done=s->done;
     if(s->failure)return s->failure;
     if(s->done)return PT_RENDER_OK;

@@ -31,4 +31,13 @@ struct pt_sampler_pin_job {
 enum pt_edit_result pt_sampler_pin_job_begin(struct pt_sampler_pin_job *,struct pt_sampler *,struct pt_project *,unsigned,unsigned);
 enum pt_edit_result pt_sampler_pin_job_step(struct pt_sampler_pin_job *,size_t,struct pt_pcm *,struct pt_sample_version **,unsigned *ready);
 void pt_sampler_pin_job_cancel(struct pt_sampler_pin_job *);
+/* Metadata-only output guards for live immutable sampler ownership. No PCM
+ * value scans, allocation or callbacks. Caller checks project/generation first,
+ * retains every version/job, and never calls after those owners are released.
+ * Version accounting bytes may cover separate adopted PCM; inspect actual
+ * header, capacity, markers and flat backing spans separately. NULL version is
+ * an empty span; other invalid/overflowing arguments refuse. */
+int pt_sampler_version_output_disjoint(const struct pt_sample_version *,const void *,size_t);
+int pt_sampler_output_disjoint(const struct pt_sampler *,const void *,size_t);
+int pt_sampler_pin_job_output_disjoint(const struct pt_sampler_pin_job *,const void *,size_t);
 #endif

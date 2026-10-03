@@ -61,7 +61,8 @@ static void studio_preparation_fixture(const struct pt_allocator *a)
         if(mode==3 || mode==4) {
             if(mode==3)++sampler.generation;else ++d.project.bpm;
             assert(pt_sampler_song_prepare(song,&ready)==PT_RENDER_INVALID && !ready && !sampler.bytes);
-            assert(pt_sampler_song_pull(song,256,&out,&done)==PT_RENDER_INVALID && !out && done);
+            out=(const struct pt_pcm *)1;done=77;
+            assert(pt_sampler_song_pull(song,256,&out,&done)==PT_RENDER_INVALID && out==(const struct pt_pcm *)1 && done==77);
             goto cancelled;
         }
         while(!ready) {assert(pt_sampler_song_prepare(song,&ready)==PT_RENDER_OK);assert(++steps<1000);}
@@ -104,8 +105,10 @@ static void studio_preparation_fixture(const struct pt_allocator *a)
         pt_sampler_song_stop(song);pt_sampler_song_stop(song);
         if(mode<6)assert(!sampler.bytes && d.project.samples[0].pcm.data==data);
         pt_sampler_release(&sampler);pt_document_release(&d);assert(!sampler.bytes);
+        out=(const struct pt_pcm *)1;done=77;
         assert(pt_sampler_song_pull(song,256,&out,&done)==(mode==3 || mode==4?PT_RENDER_INVALID:mode==5?PT_RENDER_MEMORY:(mode==10 || mode==11)?PT_RENDER_SAMPLE:PT_RENDER_OK));
-        assert(!out && done);pt_sampler_song_close(song);a->release(a->context,data);
+        if(mode==3 || mode==4 || mode==5 || mode==10 || mode==11)assert(out==(const struct pt_pcm *)1 && done==77);
+        else assert(!out && done);pt_sampler_song_close(song);a->release(a->context,data);
     }
     puts("STUDIO PREPARATION PASS: bounded copy/cancel/stale/budget, selective pre-roll/repeat pins, stereo24/pingpong/slice parity and stop ownership");
 }

@@ -6,34 +6,53 @@
 #include <string.h>
 #include "render_invert.h"
 #include "document.h"
-struct preparation_memory {unsigned calls,fail,live,refuse;void *allocation[5];};
+struct preparation_memory {unsigned calls,fail,live,refuse;void *allocation[5];size_t bytes[5];};
 static void *preparation_allocate(void *ctx,size_t bytes)
 {
     struct preparation_memory *m=ctx;void *p;
     if(m->refuse || ++m->calls==m->fail)return NULL;
-    p=malloc(bytes);if(p){assert(m->live<5);m->allocation[m->live++]=p;}return p;
+    p=malloc(bytes);if(p){assert(m->live<5);m->allocation[m->live]=p;m->bytes[m->live++]=bytes;}return p;
 }
 static void preparation_release(void *ctx,void *p)
 {
     struct preparation_memory *m=ctx;unsigned i;
     for(i=0;i<m->live;++i)if(m->allocation[i]==p)break;
-    assert(i<m->live);m->allocation[i]=m->allocation[--m->live];free(p);
+    assert(i<m->live);m->allocation[i]=m->allocation[--m->live];m->bytes[i]=m->bytes[m->live];free(p);
+}
+static void preparation_refuse_pull(struct pt_render_invert_session *session,void *span,size_t bytes)
+{
+    unsigned done=77;const struct pt_pcm *pcm=(const struct pt_pcm *)1;
+    unsigned char *image=malloc(bytes);unsigned *tail;
+    assert(image && bytes>=sizeof(done));memcpy(image,span,bytes);
+    tail=(unsigned *)((unsigned char *)span+((bytes-sizeof(done))/sizeof(done))*sizeof(done));
+    assert(pt_render_invert_pull(session,1,&pcm,tail)==PT_RENDER_INVALID && pcm==(const struct pt_pcm *)1 && !memcmp(image,span,bytes));
+    if(bytes>=sizeof(pcm))assert(pt_render_invert_pull(session,1,(const struct pt_pcm **)span,&done)==PT_RENDER_INVALID && done==77 && !memcmp(image,span,bytes));
+    free(image);
+}
+static void preparation_pull_aliases(struct pt_render_invert_session *session,const struct preparation_memory *memory,
+    int32_t *master,size_t master_bytes,int32_t *second,size_t second_bytes)
+{
+    unsigned i;union {const struct pt_pcm *pcm;unsigned done;} both;unsigned char image[sizeof(both)];
+    preparation_refuse_pull(session,master,master_bytes);preparation_refuse_pull(session,second,second_bytes);
+    for(i=0;i<memory->live;++i)preparation_refuse_pull(session,memory->allocation[i],memory->bytes[i]);
+    both.pcm=(const struct pt_pcm *)1;memcpy(image,&both,sizeof(both));
+    assert(pt_render_invert_pull(session,1,&both.pcm,&both.done)==PT_RENDER_INVALID && !memcmp(image,&both,sizeof(both)));
 }
 static void invert_preparation_fixture(void)
 {
     struct preparation_memory memory={0};struct pt_allocator allocator={&memory,preparation_allocate,preparation_release};
     struct pt_project project={0};struct pt_sample samples[2]={0};struct pt_event events[64*4]={0};
     uint16_t orders[5]={0,0,0,0,0};struct pt_render_options options={0};
-    static int32_t master[8192];int32_t second[8]={17,-93,30,40,1,99,-77,27},original[8];
+    static int32_t master[8208];int32_t second[16]={17,-93,30,40,1,99,-77,27},original[16];
     struct pt_render_invert_session *session=NULL;const struct pt_pcm *block;
     unsigned i,phase,ready,done,steps,total=0;
-    for(i=0;i<8192;++i)master[i]=(int)(i%256)-128;
+    for(i=0;i<8208;++i)master[i]=(int)(i%256)-128;
     memcpy(original,second,sizeof(second));pt_channels_init(&project.channels);
     project.samples=samples;project.sample_count=2;project.events=events;project.orders=orders;
     project.order_count=5;project.pattern_count=1;project.speed=1;project.bpm=125;
-    samples[0].pcm=(struct pt_pcm){master,8192,8192,48000,1,8};samples[0].volume=64;
+    samples[0].pcm=(struct pt_pcm){master,8208,8192,48000,1,8};samples[0].volume=64;
     samples[0].loop=PT_LOOP_FORWARD;samples[0].loop_end=8192;
-    samples[1]=samples[0];samples[1].pcm=(struct pt_pcm){second,8,8,48000,1,8};samples[1].loop=PT_LOOP_NONE;samples[1].loop_end=0;
+    samples[1]=samples[0];samples[1].pcm=(struct pt_pcm){second,16,8,48000,1,8};samples[1].loop=PT_LOOP_NONE;samples[1].loop_end=0;
     events[0]=(struct pt_event){428,0,PT_NOTE_PERIOD,1,14,0xff,0,0};
     events[1]=(struct pt_event){428,0,PT_NOTE_PERIOD,2,14,0xff,0,0};
     options.rate=48000;options.bits=24;options.tracks=3;options.gain_q16=65536;
@@ -52,7 +71,7 @@ static void invert_preparation_fixture(void)
         }
         if(phase==14)assert(ready);
         assert(!memcmp(second,original,sizeof(second)));
-        for(i=0;i<8192;++i)assert(master[i]==(int)(i%256)-128);
+        for(i=0;i<8208;++i)assert(master[i]==(int)(i%256)-128);
         pt_render_invert_close(session);session=NULL;memory.refuse=0;assert(!memory.live);
     }
     assert(pt_render_invert_begin(&project,&options,SIZE_MAX,&allocator,&session)==PT_RENDER_OK);
@@ -68,10 +87,12 @@ static void invert_preparation_fixture(void)
         assert(pt_render_invert_prepare(session,memory.allocation[i])==PT_RENDER_INVALID);
         assert(!memcmp(saved,memory.allocation[i],sizeof(saved)));
     }
+    preparation_pull_aliases(session,&memory,master,sizeof(master),second,sizeof(second));
     assert(!pt_render_invert_output_disjoint(NULL,&ready,sizeof(ready)));
     ready=77;assert(pt_render_invert_prepare(NULL,&ready)==PT_RENDER_INVALID && ready==77);
     for(steps=0,ready=0;!ready;++steps){assert(steps<14);assert(pt_render_invert_prepare(session,&ready)==PT_RENDER_OK);}
     assert(steps==14);assert(pt_render_invert_prepare(session,&ready)==PT_RENDER_OK && ready);
+    preparation_pull_aliases(session,&memory,master,sizeof(master),second,sizeof(second));
     pt_render_invert_stop(session);assert(memory.live==1);
     ready=77;assert(pt_render_invert_prepare(session,&ready)==PT_RENDER_INVALID && !ready);
     block=(const struct pt_pcm *)1;done=77;
@@ -116,9 +137,9 @@ static void invert_preparation_fixture(void)
     }
     memory.refuse=0;assert(total && memory.live==1);pt_render_invert_close(session);assert(!memory.live);
     assert(!memcmp(second,original,sizeof(second)));
-    for(i=0;i<8192;++i)assert(master[i]==(int)(i%256)-128);
+    for(i=0;i<8208;++i)assert(master[i]==(int)(i%256)-128);
 }
 #ifndef PT_INVERT_PREPARE_EMBEDDED
 int main(void)
-{invert_preparation_fixture();puts("INVERT PREPARATION PASS: bounded copy/measurement, all-phase cancellation, aliases, late refusal and immutable masters");return 0;}
+{invert_preparation_fixture();puts("INVERT PREPARATION PASS: bounded copy/measurement, all-phase cancellation, ready/pull capacity and pairwise aliases, late refusal and immutable masters");return 0;}
 #endif

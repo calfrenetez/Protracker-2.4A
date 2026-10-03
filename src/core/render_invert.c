@@ -105,7 +105,7 @@ static int overlaps(const void *a,size_t an,const void *b,size_t bn)
 }
 int pt_render_invert_output_disjoint(const struct pt_render_invert_session *s,const void *out,size_t bytes)
 {
-    const struct staging *stage;const struct pt_invert_bank *bank;
+    const struct staging *stage;const struct pt_invert_bank *bank;size_t i;
     if(!s || !out)return 0;
     stage=s->stage;
     if(overlaps(out,bytes,s,sizeof(*s)))return 0;
@@ -113,7 +113,21 @@ int pt_render_invert_output_disjoint(const struct pt_render_invert_session *s,co
     if(overlaps(out,bytes,stage,sizeof(*stage)) ||
        !pt_render_sequence_output_disjoint(s->sequence,out,bytes))return 0;
     bank=stage->bank.entries?&stage->bank:&stage->preparation.bank;
-    return !overlaps(out,bytes,bank->entries,bank->count*sizeof(*bank->entries));
+    if(bank->count>PT_PROJECT_SAMPLES || bank->count>SIZE_MAX/sizeof(*bank->entries) ||
+       bank->allocated_bytes<bank->count*sizeof(*bank->entries) ||
+       overlaps(out,bytes,bank->entries,bank->count*sizeof(*bank->entries)) ||
+       overlaps(out,bytes,bank->storage,bank->allocated_bytes-bank->count*sizeof(*bank->entries)))return 0;
+    for(i=0;i<stage->playback.sample_count;++i) {
+        const struct pt_pcm *pcm=&stage->samples[i].pcm;
+        if(pcm->capacity>SIZE_MAX/sizeof(int32_t) ||
+           overlaps(out,bytes,pcm->data,pcm->capacity*sizeof(int32_t)))return 0;
+    }
+    for(i=0;i<bank->count;++i)if(bank->entries[i].source) {
+        const struct pt_pcm *pcm=bank->entries[i].source;
+        if(pcm->capacity>SIZE_MAX/sizeof(int32_t) ||
+           overlaps(out,bytes,pcm->data,pcm->capacity*sizeof(int32_t)))return 0;
+    }
+    return 1;
 }
 void pt_render_invert_stop(struct pt_render_invert_session *s)
 {
@@ -168,7 +182,10 @@ enum pt_render_result pt_render_invert_pull(struct pt_render_invert_session *s,u
     const struct pt_pcm **pcm,unsigned *done)
 {
     enum pt_render_result result;
-    if(!s || !pcm || !done || !max_frames || max_frames>256)return PT_RENDER_INVALID;
+    if(!s || !pcm || !done || !max_frames || max_frames>256 ||
+       !pt_render_invert_output_disjoint(s,pcm,sizeof(*pcm)) ||
+       !pt_render_invert_output_disjoint(s,done,sizeof(*done)) ||
+       overlaps(pcm,sizeof(*pcm),done,sizeof(*done)))return PT_RENDER_INVALID;
     *pcm=NULL;*done=s->done;
     if(s->failure)return s->failure;
     if(s->done)return PT_RENDER_OK;

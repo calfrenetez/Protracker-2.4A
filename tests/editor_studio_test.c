@@ -22,11 +22,15 @@ static int port_drain(void *c) {(void)c;return 0;}
 static void output_stop(void *c) {++output_stops;pt_amigus_session_stop(c);}
 
 #include "editor_studio_output_cases.h"
+#define PT_STUDIO_ALIAS_WITH_INVERT
+#define PT_STUDIO_ALIAS_WITH_EDITOR
+#include "studio_wrapper_alias_cases.h"
 int main(void)
 {
     struct pt_allocator a={NULL,allocate,release};struct pt_document d;struct pt_editor *e=calloc(1,sizeof(*e));
     struct pt_editor_studio owner={0},second={0};struct pt_render_options options={0};
     int32_t pcm[4]={257,-513,1025,-2049};unsigned baseline,done,action;const struct pt_pcm *out;
+    studio_alias_owner_cases(&a,0,1);studio_alias_owner_cases(&a,1,1);studio_alias_adopted_cases(&a);assert(!live);
     assert(e);pt_document_init(&d,&a);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
     assert(pt_editor_init(e,&d.project));pt_sampler_init(&e->sampler,&a,1024*1024);
     d.project.samples[0].pcm=(struct pt_pcm){pcm,4,4,48000,1,24};d.project.samples[0].volume=64;

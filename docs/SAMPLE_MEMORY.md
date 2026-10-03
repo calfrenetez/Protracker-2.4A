@@ -5,6 +5,37 @@ The enhanced project owns the authoritative sample, including its declared
 elements in the declared precision; 24-bit samples retain their low eight bits.
 Playback representations must never become the project's source of truth.
 
+## Studio caller-output master protection — 3 October 2026
+
+Ordinary direct24 Studio and the private classic EFx producer now refuse caller
+output pointers that overlap live project tables, any master PCM capacity,
+active or pending voice PCM, or owned session/preparation storage. Handle
+publication, preparation readiness, required-sample masks and pull outputs are
+checked before writes, progress or source callbacks. PCM and done outputs must
+also be mutually disjoint. The sampler guards retained version headers, markers,
+separate adopted PCM and unpublished promotion storage; synchronous open checks
+its actual caller output before any source promotion can replace a descriptor.
+
+Ordinary core preparation preserves readiness on stopped or already-failed calls;
+sampler/editor preparation also preserves it on stale calls.
+Stale sampler/editor pull refuses without touching unvalidated outputs and
+releases its producer;
+normal stopped pull still reports no PCM and done=true. Editor source-owner
+replacement is checked before forwarding preparation, pull or queued producer
+work, avoiding former project-table traversal. These metadata guards allocate
+nothing and read no PCM values. They rely on the existing immutable-source and
+stop-before-edit lifetime contracts.
+
+The original clean-source sanitizer probe reproduced a master value changing
+from 257 to 0 when readiness pointed into that master. The same probe against the
+candidate refuses the alias and retains 257. Ten exact host ASan/UBSan groups and
+five pinned native cross-builds pass from
+the clean committed export plus only the reviewed changes. The full 7531-source
+inventory remains unchanged, including generated host C/object provenance. Native
+runtime qualification of this exact candidate is still pending. This boundary fix
+changes no precision, effect subset, queue transport or timing policy and does
+not establish hardware audio or listening acceptance.
+
 ## Cancellable private EFx preparation — 3 October 2026
 
 The explicit classic EFx Studio producer now separates begin, preparation and

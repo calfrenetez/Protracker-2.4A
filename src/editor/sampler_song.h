@@ -28,6 +28,15 @@ enum pt_render_result pt_sampler_song_begin(struct pt_sampler *,struct pt_projec
 enum pt_render_result pt_sampler_song_prepare(struct pt_sampler_song *,unsigned *ready);
 enum pt_render_result pt_sampler_song_pull(struct pt_sampler_song *,unsigned,
     const struct pt_pcm **,unsigned *done);
+/* Internal owner/editor forwarding checks: fixed controller/owner spans always;
+ * nested spans only while generation/project identity remain current. Stale
+ * forwarding is left to prepare/pull, which cancels without output writes.
+ * The identity check compares pointers without reading project tables. */
+int pt_sampler_song_matches_owner(const struct pt_sampler_song *,const struct pt_sampler *,const struct pt_project *);
+int pt_sampler_song_output_disjoint(struct pt_sampler_song *,const void *,size_t);
+/* Output aliases refuse before publication/advancement. Invalid/aliased/stopped/stale/already-failed readiness calls preserve ready;
+ * already-failed/stale pulls preserve both outputs.
+ * Legal pending pulls return NULL/done0; stopped legal pulls return NULL/done1. */
 void pt_sampler_song_stop(struct pt_sampler_song *);
 void pt_sampler_song_close(struct pt_sampler_song *);
 #endif

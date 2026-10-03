@@ -20,8 +20,10 @@ enum pt_render_result pt_editor_studio_start(struct pt_editor_studio *,const str
  * Prepare or direct pull advances one bounded step; readiness never starts a
  * device. The queued variant advances preparation through the normal pump,
  * publishing no queue blocks until the chosen producer is fully ready. Prepare
- * dispatches to exactly one ordinary or private-bank producer. Prepare refuses
- * output inside the editor/owner; invalid owner states preserve readiness. */
+ * dispatches to exactly one ordinary or private-bank producer. Output aliases
+ * into owner/editor/project or live nested producer/master storage refuse before
+ * state changes. Stale/replaced owners are stopped without writing readiness or
+ * pull outputs; valid pending/stopped pulls retain NULL/done0-or1 semantics. */
 enum pt_render_result pt_editor_studio_begin(struct pt_editor_studio *,const struct pt_render_options *);
 enum pt_render_result pt_editor_studio_prepare(struct pt_editor_studio *,unsigned *ready);
 enum pt_render_result pt_editor_studio_begin_queued(struct pt_editor_studio *,const struct pt_render_options *,struct pt_studio_queue *);

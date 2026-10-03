@@ -16,4 +16,6 @@ enum pt_pcm_result pt_studio_segment_prepared(struct pt_studio_mix *,unsigned,co
 enum pt_pcm_result pt_studio_repeat_prepared(struct pt_studio_mix *,unsigned,uint64_t,uint64_t,uint32_t,uint32_t);
 enum pt_pcm_result pt_studio_dispatch_prepared(struct pt_studio_mix *,unsigned,const struct pt_render_plan *,const struct pt_studio_binding *,unsigned);
 enum pt_render_result pt_studio_song_pull_prepared(struct pt_studio_song *,unsigned,const struct pt_pcm **,unsigned *);
+/* Metadata-only owner-output guard; no callbacks or PCM-value reads. */
+int pt_studio_mix_output_disjoint(const struct pt_studio_mix *,const void *,size_t);
 #endif

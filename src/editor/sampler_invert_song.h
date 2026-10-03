@@ -33,6 +33,11 @@ enum pt_render_result pt_sampler_invert_song_open(struct pt_sampler *,struct pt_
     struct pt_sampler_invert_song **out);
 enum pt_render_result pt_sampler_invert_song_pull(struct pt_sampler_invert_song *,unsigned,
     const struct pt_pcm **,unsigned *done);
+/* Metadata-only owner/editor forwarding, with no former-table traversal after
+ * Stop/failure or lost generation/project identity. Stale/already-failed pull preserves
+ * both caller outputs; alias refusal never advances the private producer. */
+int pt_sampler_invert_song_matches_owner(const struct pt_sampler_invert_song *,const struct pt_sampler *,const struct pt_project *);
+int pt_sampler_invert_song_output_disjoint(struct pt_sampler_invert_song *,const void *,size_t);
 void pt_sampler_invert_song_stop(struct pt_sampler_invert_song *);
 void pt_sampler_invert_song_close(struct pt_sampler_invert_song *);
 #endif

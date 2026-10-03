@@ -15,6 +15,54 @@ struct pt_sample_version {
     unsigned references;
 };
 struct sample_change {struct pt_sampler *owner;unsigned slot,resampled;struct pt_sample_version *before,*after;};
+
+static int output_overlap(const void *out,size_t bytes,const void *owner,size_t size)
+{
+    uintptr_t x=(uintptr_t)out,y=(uintptr_t)owner;
+    if(!bytes || !size)return 0;
+    if(bytes>UINTPTR_MAX-x || size>UINTPTR_MAX-y)return 1;
+    return x<y+size && y<x+bytes;
+}
+static int sample_output_disjoint(const struct pt_sample *sample,const void *out,size_t bytes)
+{
+    if(sample->pcm.capacity>SIZE_MAX/sizeof(int32_t) ||
+       (sample->pcm.capacity && !sample->pcm.data) ||
+       (sample->slice_count && !sample->slices))return 0;
+    return !output_overlap(out,bytes,sample->pcm.data,sample->pcm.capacity*sizeof(int32_t)) &&
+        !output_overlap(out,bytes,sample->slices,(size_t)sample->slice_count*sizeof(*sample->slices));
+}
+int pt_sampler_version_output_disjoint(const struct pt_sample_version *v,const void *out,size_t bytes)
+{
+    const struct pt_sample_version *backing;
+    if(!out || !bytes || bytes>UINTPTR_MAX-(uintptr_t)out)return 0;
+    if(!v)return 1;
+    if(output_overlap(out,bytes,v,sizeof(*v)) || !sample_output_disjoint(&v->sample,out,bytes))return 0;
+    /* bytes is budget accounting, not the extent of every version header:
+     * adopted PCM is separate, and metadata revisions retain a flat backing. */
+    backing=v->backing;
+    return !backing || (!backing->backing &&
+        !output_overlap(out,bytes,backing,sizeof(*backing)) && sample_output_disjoint(&backing->sample,out,bytes));
+}
+int pt_sampler_output_disjoint(const struct pt_sampler *s,const void *out,size_t bytes)
+{
+    unsigned i;
+    if(!s || !out || !bytes || bytes>UINTPTR_MAX-(uintptr_t)out ||
+       output_overlap(out,bytes,s,sizeof(*s)) || (s->table_bytes && !s->table) ||
+       output_overlap(out,bytes,s->table,s->table_bytes))return 0;
+    for(i=0;i<PT_PROJECT_SAMPLES;++i)
+        if(!pt_sampler_version_output_disjoint(s->current[i],out,bytes))return 0;
+    return 1;
+}
+int pt_sampler_pin_job_output_disjoint(const struct pt_sampler_pin_job *j,const void *out,size_t bytes)
+{
+    if(!j || !out || !bytes || bytes>UINTPTR_MAX-(uintptr_t)out ||
+       output_overlap(out,bytes,j,sizeof(*j)))return 0;
+    if(!j->value)return 1;
+    return sample_output_disjoint(&j->source,out,bytes) &&
+        pt_sampler_version_output_disjoint(j->value,out,bytes) &&
+        pt_sampler_version_output_disjoint(j->previous,out,bytes);
+}
+
 void pt_sampler_init(struct pt_sampler *s,const struct pt_allocator *a,size_t budget)
 {memset(s,0,sizeof(*s));s->allocator=*a;s->budget=budget;}
 static void retain(struct pt_sample_version *v) {++v->references;}

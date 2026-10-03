@@ -100,7 +100,8 @@ static void incremental(struct pt_sampler *sampler,struct pt_project *p,const st
             for(j=0,ready=0;j<64 && result==PT_RENDER_OK && !ready;++j)result=pt_sampler_invert_song_prepare(song,&ready);
             assert(result==PT_RENDER_MEMORY && !ready && live==before+1);
             assert(pt_sampler_invert_song_prepare(song,&ready)==PT_RENDER_MEMORY && !ready);
-            assert(pt_sampler_invert_song_pull(song,1,&left,&done)==PT_RENDER_MEMORY && !left && done);
+            left=(const struct pt_pcm *)1;done=77;
+            assert(pt_sampler_invert_song_pull(song,1,&left,&done)==PT_RENDER_MEMORY && left==(const struct pt_pcm *)1 && done==77);
             pt_sampler_invert_song_close(song);
         } else assert(result==PT_RENDER_MEMORY && song==sentinel);
         assert(live==before);
@@ -142,14 +143,16 @@ static void incremental(struct pt_sampler *sampler,struct pt_project *p,const st
         if(phase)prepared(song);
         change_header(p,mode);ready=9;
         assert(pt_sampler_invert_song_prepare(song,&ready)==PT_RENDER_INVALID && ready==9 && live==before+1);
-        assert(pt_sampler_invert_song_pull(song,1,&left,&done)==PT_RENDER_INVALID && !left && done);
+        left=(const struct pt_pcm *)1;done=77;
+        assert(pt_sampler_invert_song_pull(song,1,&left,&done)==PT_RENDER_INVALID && left==(const struct pt_pcm *)1 && done==77);
         pt_sampler_invert_song_close(song);memcpy(p,&snapshot,sizeof(*p));assert(live==before);
     }
     for(phase=0;phase<2;++phase) {
         assert(pt_sampler_invert_song_begin(sampler,p,o,SIZE_MAX,a,&song)==PT_RENDER_OK);
         if(phase)prepared(song);
         ++sampler->generation;
-        assert(pt_sampler_invert_song_pull(song,1,&left,&done)==PT_RENDER_INVALID && !left && done && live==before+1);
+        left=(const struct pt_pcm *)1;done=77;
+        assert(pt_sampler_invert_song_pull(song,1,&left,&done)==PT_RENDER_INVALID && left==(const struct pt_pcm *)1 && done==77 && live==before+1);
         ready=9;assert(pt_sampler_invert_song_prepare(song,&ready)==PT_RENDER_INVALID && ready==9);
         pt_sampler_invert_song_close(song);sampler->generation=generation;assert(live==before);
     }
@@ -164,7 +167,8 @@ static void incremental(struct pt_sampler *sampler,struct pt_project *p,const st
         assert(!ready);
     }
     assert(i<64 && live==before+1);
-    assert(pt_sampler_invert_song_pull(song,1,&left,&done)==PT_RENDER_TICK_LIMIT && !left && done);
+    left=(const struct pt_pcm *)1;done=77;
+    assert(pt_sampler_invert_song_pull(song,1,&left,&done)==PT_RENDER_TICK_LIMIT && left==(const struct pt_pcm *)1 && done==77);
     {struct pt_sampler saved_sampler;memcpy(&saved_sampler,sampler,sizeof(saved_sampler));memset(sampler,0,sizeof(*sampler));
         p->samples=NULL;p->events=NULL;p->orders=NULL;ready=9;
         assert(pt_sampler_invert_song_prepare(song,&ready)==PT_RENDER_TICK_LIMIT && ready==9 && live==before+1);
@@ -174,12 +178,16 @@ static void incremental(struct pt_sampler *sampler,struct pt_project *p,const st
     assert(!sampler->bytes);
     for(i=0;i<8192;++i)assert(master[i]==(i?(int32_t)(i%127)-63:17));
 }
+#define PT_STUDIO_ALIAS_WITH_INVERT
+#define PT_STUDIO_ALIAS_INVERT_ONLY
+#include "studio_wrapper_alias_cases.h"
 int main(void)
 {
     struct pt_allocator a={NULL,alloc,drop};struct pt_document d;struct pt_sampler s;
     struct pt_pattern_history h;struct pt_pattern_command commands[2];struct pt_event_change changes[2];
     struct pt_sampler_invert_song *song=NULL;struct pt_render_options o={0};
     int32_t original[]={17,-93,30,40};unsigned done,before,i,count;const struct pt_pcm *out;
+    studio_alias_owner_cases(&a,1,0);assert(!live);
     pt_document_init(&d,&a);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
     d.project.samples[0].pcm=(struct pt_pcm){original,4,4,48000,1,8};
     d.project.samples[0].volume=64;d.project.samples[0].loop=PT_LOOP_FORWARD;d.project.samples[0].loop_end=4;
@@ -206,12 +214,14 @@ int main(void)
     assert(pt_sampler_invert_song_open(&s,&d.project,&o,SIZE_MAX,&a,&song)==PT_RENDER_OK);assert(first(song)==34*65536);
     /* Defensive generation check, even for a caller missing the required stop. */
     assert(pt_sampler_edit(&s,&d.project,&h,0,PT_PCM_GAIN,0,4,2000)==PT_EDIT_OK);
-    assert(pt_sampler_invert_song_pull(song,256,&out,&done)==PT_RENDER_INVALID && !out && done);
+    out=(const struct pt_pcm *)1;done=77;
+    assert(pt_sampler_invert_song_pull(song,256,&out,&done)==PT_RENDER_INVALID && out==(const struct pt_pcm *)1 && done==77);
     assert(pt_sampler_invert_song_pull(song,256,&out,&done)==PT_RENDER_INVALID);pt_sampler_invert_song_close(song);
     assert(pt_sampler_invert_song_open(&s,&d.project,&o,SIZE_MAX,&a,&song)==PT_RENDER_OK);
     assert(first(song)==68*65536);
     assert(pt_pattern_undo(&d.project,&h,-1)==PT_EDIT_OK);
-    assert(pt_sampler_invert_song_pull(song,17,&out,&done)==PT_RENDER_INVALID && !out && done);
+    out=(const struct pt_pcm *)1;done=77;
+    assert(pt_sampler_invert_song_pull(song,17,&out,&done)==PT_RENDER_INVALID && out==(const struct pt_pcm *)1 && done==77);
     pt_sampler_invert_song_close(song);
     assert(pt_sampler_invert_song_open(&s,&d.project,&o,SIZE_MAX,&a,&song)==PT_RENDER_OK);
     assert(first(song)==34*65536);pt_sampler_invert_song_close(song);
@@ -222,7 +232,8 @@ int main(void)
         unsigned n=d.project.sample_count;
         assert(pt_sampler_invert_song_open(&s,&d.project,&o,SIZE_MAX,&a,&song)==PT_RENDER_OK);
         if(i==0)d.project.samples=NULL;else if(i==1)d.project.events=NULL;else if(i==2)d.project.orders=NULL;else d.project.sample_count=0;
-        assert(pt_sampler_invert_song_pull(song,17,&out,&done)==PT_RENDER_INVALID && !out && done);
+        out=(const struct pt_pcm *)1;done=77;
+    assert(pt_sampler_invert_song_pull(song,17,&out,&done)==PT_RENDER_INVALID && out==(const struct pt_pcm *)1 && done==77);
         pt_sampler_invert_song_close(song);d.project.samples=samples;d.project.events=events;d.project.orders=orders;d.project.sample_count=n;
     }
     assert(pt_sampler_invert_song_open(&s,&d.project,&o,SIZE_MAX,&a,&song)==PT_RENDER_OK);assert(first(song)==68*65536);

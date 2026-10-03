@@ -11,6 +11,26 @@ struct pt_studio_mix {
     unsigned count;
     uint8_t pinned[16],pending[16];
 };
+static int output_overlaps(const void *out,size_t bytes,const void *owner,size_t size)
+{
+    uintptr_t x=(uintptr_t)out,y=(uintptr_t)owner;
+    if(!bytes || !size)return 0;
+    if(bytes>UINTPTR_MAX-x || size>UINTPTR_MAX-y)return 1;
+    return x<y+size && y<x+bytes;
+}
+int pt_studio_mix_output_disjoint(const struct pt_studio_mix *s,const void *out,size_t bytes)
+{
+    unsigned i;
+    if(!s || !out || bytes>UINTPTR_MAX-(uintptr_t)out || output_overlaps(out,bytes,s,sizeof(*s)))return 0;
+    for(i=0;i<s->count;++i) {
+        const struct pt_pcm *pcm[2]={&s->pcm[i],&s->pending_pcm[i]};unsigned j;
+        for(j=0;j<2;++j)if(j?s->pending[i]:s->pinned[i]) {
+            if(pcm[j]->capacity>SIZE_MAX/sizeof(*pcm[j]->data) ||
+               output_overlaps(out,bytes,pcm[j]->data,pcm[j]->capacity*sizeof(*pcm[j]->data)))return 0;
+        }
+    }
+    return 1;
+}
 struct pt_studio_mix *pt_studio_open(const struct pt_allocator *a,const struct pt_studio_source *source,unsigned count)
 {
     struct pt_studio_mix *s;

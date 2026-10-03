@@ -13,12 +13,14 @@ static int32_t first(struct pt_sampler_song *song)
     for(i=0;i<100;++i) {assert(pt_sampler_song_pull(song,1,&out,&done)==PT_RENDER_OK && !done);if(out)return out->data[0];}
     assert(0);return 0;
 }
+#include "studio_wrapper_alias_cases.h"
 int main(void)
 {
     struct pt_allocator a={NULL,alloc,drop};struct pt_document d;struct pt_sampler s;
     struct pt_pattern_history h;struct pt_pattern_command commands[2];struct pt_event_change changes[2];
     struct pt_sampler_song *song=NULL;struct pt_render_options o={0};
     int32_t original[]={257,-513,1025,-2049};unsigned done;const struct pt_pcm *out;
+    studio_alias_owner_cases(&a,0,0);studio_alias_adopted_cases(&a);assert(!live);
     studio_preparation_fixture(&a);assert(!live);
     pt_document_init(&d,&a);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
     d.project.samples[0].pcm=(struct pt_pcm){original,4,4,48000,1,24};
@@ -56,7 +58,8 @@ int main(void)
     assert(pt_sampler_song_open(&s,&d.project,&o,&a,&song)==PT_RENDER_OK);assert(first(song)==514);
     /* Defensive stale-generation gate releases pins without emitting more audio. */
     assert(pt_sampler_edit(&s,&d.project,&h,0,PT_PCM_GAIN,0,4,2000)==PT_EDIT_OK);
-    assert(pt_sampler_song_pull(song,256,&out,&done)==PT_RENDER_INVALID && !out && done);
+    out=(const struct pt_pcm *)1;done=77;
+    assert(pt_sampler_song_pull(song,256,&out,&done)==PT_RENDER_INVALID && out==(const struct pt_pcm *)1 && done==77);
     assert(pt_sampler_song_pull(song,256,&out,&done)==PT_RENDER_INVALID);pt_sampler_song_close(song);
     assert(pt_sampler_song_open(&s,&d.project,&o,&a,&song)==PT_RENDER_OK);assert(first(song)==1028);
     pt_sampler_song_stop(song);

@@ -6,6 +6,23 @@ static int output_overlaps(const void *out,size_t bytes,const void *owner,size_t
     if(bytes>UINTPTR_MAX-x || size>UINTPTR_MAX-y)return 1;
     return x<y+size && y<x+bytes;
 }
+static int fixed_output_disjoint(const struct pt_editor_studio *o,const void *out,size_t bytes)
+{
+    return out && bytes && bytes<=UINTPTR_MAX-(uintptr_t)out && (!o ||
+        (!output_overlaps(out,bytes,o,sizeof(*o)) && (!o->editor ||
+        (!output_overlaps(out,bytes,o->editor,sizeof(*o->editor)) &&
+         !output_overlaps(out,bytes,o->editor->project,sizeof(*o->editor->project))))));
+}
+static int source_owner_matches(const struct pt_editor_studio *o)
+{
+    return (!o->song || pt_sampler_song_matches_owner(o->song,&o->editor->sampler,o->editor->project)) &&
+        (!o->invert_song || pt_sampler_invert_song_matches_owner(o->invert_song,&o->editor->sampler,o->editor->project));
+}
+static int source_output_disjoint(struct pt_editor_studio *o,const void *out,size_t bytes)
+{
+    return (!o->song || pt_sampler_song_output_disjoint(o->song,out,bytes)) &&
+        (!o->invert_song || pt_sampler_invert_song_output_disjoint(o->invert_song,out,bytes));
+}
 static void close_song(struct pt_editor_studio *o) {pt_sampler_song_close(o->song);o->song=NULL;pt_sampler_invert_song_close(o->invert_song);o->invert_song=NULL;}
 void pt_editor_studio_stop(struct pt_editor_studio *owner)
 {if(owner) {void (*stop)(void *)=owner->output_stop;void *context=owner->output_context;owner->output_stop=NULL;owner->output_context=NULL;if(owner->queue) {pt_studio_queue_abort(owner->queue);owner->queue=NULL;owner->pump.held=0;owner->pump.ended=1;}close_song(owner);if(stop)stop(context);}}
@@ -39,10 +56,10 @@ enum pt_render_result pt_editor_studio_begin(struct pt_editor_studio *o,const st
 enum pt_render_result pt_editor_studio_prepare(struct pt_editor_studio *o,unsigned *ready)
 {
     enum pt_render_result result;
-    if(!ready || (o && (output_overlaps(ready,sizeof(*ready),o,sizeof(*o)) ||
-       (o->editor && output_overlaps(ready,sizeof(*ready),o->editor,sizeof(*o->editor))))))return PT_RENDER_INVALID;
+    if(!fixed_output_disjoint(o,ready,sizeof(*ready)))return PT_RENDER_INVALID;
     if(!attached(o) || (!o->song && !o->invert_song))return PT_RENDER_INVALID;
-    if(o->song && o->invert_song) {pt_editor_studio_stop(o);return PT_RENDER_INVALID;}
+    if((o->song && o->invert_song) || !source_owner_matches(o)) {pt_editor_studio_stop(o);return PT_RENDER_INVALID;}
+    if(!source_output_disjoint(o,ready,sizeof(*ready)))return PT_RENDER_INVALID;
     result=o->invert_song?pt_sampler_invert_song_prepare(o->invert_song,ready):pt_sampler_song_prepare(o->song,ready);
     if(result!=PT_RENDER_OK)pt_editor_studio_stop(o);
     return result;
@@ -68,9 +85,12 @@ static enum pt_render_result pull_song(struct pt_editor_studio *o,unsigned frame
 enum pt_render_result pt_editor_studio_pull(struct pt_editor_studio *o,unsigned frames,const struct pt_pcm **pcm,unsigned *done)
 {
     enum pt_render_result result;
-    if(!pcm || !done || !frames || frames>256)return PT_RENDER_INVALID;
-    *pcm=NULL;*done=1;
+    if(!pcm || !done || !frames || frames>256 ||
+       !fixed_output_disjoint(o,pcm,sizeof(*pcm)) || !fixed_output_disjoint(o,done,sizeof(*done)) ||
+       output_overlaps(pcm,sizeof(*pcm),done,sizeof(*done)))return PT_RENDER_INVALID;
     if(!attached(o)) {pt_editor_studio_stop(o);return PT_RENDER_INVALID;}
+    if((o->song && o->invert_song) || !source_owner_matches(o)) {pt_editor_studio_stop(o);return PT_RENDER_INVALID;}
+    if(!source_output_disjoint(o,pcm,sizeof(*pcm)) || !source_output_disjoint(o,done,sizeof(*done)))return PT_RENDER_INVALID;
     if(o->queue)return PT_RENDER_INVALID;
     result=pull_song(o,frames,pcm,done);
     if(result!=PT_RENDER_OK || *done)pt_editor_studio_stop(o);
@@ -107,6 +127,7 @@ enum pt_pump_result pt_editor_studio_step(struct pt_editor_studio *o,unsigned fr
     enum pt_pump_result result;
     if(!attached(o)) {pt_editor_studio_stop(o);return PT_PUMP_ERROR;}
     if(!o->queue)return PT_PUMP_FINISHED;
+    if((o->song && o->invert_song) || !source_owner_matches(o)) {pt_editor_studio_stop(o);return PT_PUMP_ERROR;}
     result=pt_studio_pump_step(&o->pump,frames);
     if(result==PT_PUMP_ERROR && o->pump.error)pt_editor_studio_stop(o);
     return result;

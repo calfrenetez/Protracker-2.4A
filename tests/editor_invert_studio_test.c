@@ -95,8 +95,8 @@ static void incremental_cases(void)
         if(action==1)pt_editor_key(e,0x31,8);
         assert(d.project.events[0].pitch==428 && d.project.samples[0].pcm.data==master && master[0]==17);
     }
-    /* Editor/owner output aliases leave the live producer usable; delegated
-     * private-source aliases follow the existing producer-error Stop lifecycle. */
+    /* Editor, owner and private-source output aliases refuse before advancement
+     * and leave the live queued producer usable until explicit Stop. */
     for(phase=0;phase<2;++phase)for(mode=0;mode<2;++mode) {
         struct pt_studio_queue *q=pt_studio_queue_open(&a,2);uint64_t ticket;unsigned stops=0,generation=e->sampler.generation;
         assert(q && pt_editor_studio_begin_invert_queued(&owner,&o,SIZE_MAX,q)==PT_RENDER_OK);
@@ -105,7 +105,8 @@ static void incremental_cases(void)
         assert(pt_editor_studio_prepare(&owner,(unsigned *)(void *)&owner.pump.error)==PT_RENDER_INVALID && owner.invert_song && owner.queue==q && !stops);
         assert(pt_editor_studio_prepare(&owner,&e->sampler.generation)==PT_RENDER_INVALID && e->sampler.generation==generation && owner.invert_song && !stops);
         assert(pt_editor_studio_prepare(&owner,mode?&d.project.midi_flags:(unsigned *)(void *)master)==PT_RENDER_INVALID);
-        assert(master[0]==17 && master[1]==-62 && !owner.invert_song && !owner.queue && stops==1);
+        assert(master[0]==17 && master[1]==-62 && owner.invert_song && owner.queue==q && !stops);
+        pt_editor_studio_stop(&owner);assert(stops==1);
         assert(pt_studio_queue_acquire(q,&out,&ticket)==PT_QUEUE_DONE && pt_studio_queue_close(q)==PT_QUEUE_OK && live==baseline);
     }
     /* Stale fixed-header and generation changes fail the queued owner while

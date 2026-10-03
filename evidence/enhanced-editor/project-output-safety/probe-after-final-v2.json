@@ -1,0 +1,189 @@
+{
+  "scope": "Host ASan/UBSan same baseline preservation probe, expected RC0+257 retained; no native/target operation",
+  "source_manifest": {
+    "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/source-final-v2-manifest.json",
+    "bytes": 1019205,
+    "sha256": "95577c22f903e3e3799b21130d66f4af14f5cc8bcd094649507b873a4849378e"
+  },
+  "source_files_before": 7531,
+  "compiler": {
+    "path": "/usr/bin/cc",
+    "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+    "version": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "resource_dir": "/Library/Developer/CommandLineTools/usr/lib/clang/21"
+  },
+  "runtime_inputs": {
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.asan_osx_dynamic.dylib": "a319f00c1792b8ab704f8814655f2073cf16cdcc4b7463c9c07d8034da1de49f",
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.ubsan_osx_dynamic.dylib": "b4d8b49379b26b4faa55fa84f9aedf1f5188205767ddf529040ef904cbda4996"
+  },
+  "helper": {
+    "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/tools/run_candidate_probe_v3.py",
+    "bytes": 3967,
+    "sha256": "04b876d61c17685ed3906eadeea4a2d3f75efb6fac04766b04aca92905ea701d"
+  },
+  "probe": {
+    "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/candidate-probe-v3/probe.c",
+    "bytes": 902,
+    "sha256": "379e2cb1f2c832e65e1c8c37dece3c8ab3332a7fb0f505260e22a04bd3f62fb7"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "--version"
+      ],
+      "directory": "/private/tmp/protracker-project-output-safety-c_zm9c99/source-final-v2",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/candidate-probe-v3/compiler-version.log",
+        "bytes": 158,
+        "sha256": "a856ec74c559401131ad608625ef252fb2db6c78bc0c480c1c4c782ee4896db1"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-MM",
+        "/private/tmp/protracker-project-output-safety-c_zm9c99/candidate-probe-v3/probe.c"
+      ],
+      "directory": "/private/tmp/protracker-project-output-safety-c_zm9c99/source-final-v2",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/candidate-probe-v3/dependencies-00.log",
+        "bytes": 226,
+        "sha256": "4aa7b6b5644a2ad19f0b8156610dc301e71844bc641b69e5caa4fc5d131fa8d1"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-MM",
+        "src/core/project.c"
+      ],
+      "directory": "/private/tmp/protracker-project-output-safety-c_zm9c99/source-final-v2",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/candidate-probe-v3/dependencies-01.log",
+        "bytes": 165,
+        "sha256": "d579c11b5ffdefbb848b36976b572213104684e35a7dee39bd22b3bc448d5bc6"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-MM",
+        "src/core/channels.c"
+      ],
+      "directory": "/private/tmp/protracker-project-output-safety-c_zm9c99/source-final-v2",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/candidate-probe-v3/dependencies-02.log",
+        "bytes": 129,
+        "sha256": "becf082ffcef992628294b05cc30c24f6d24c9b54f359c3a4a8a5d7eae15abcc"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-MM",
+        "src/core/pcm.c"
+      ],
+      "directory": "/private/tmp/protracker-project-output-safety-c_zm9c99/source-final-v2",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/candidate-probe-v3/dependencies-03.log",
+        "bytes": 138,
+        "sha256": "d12934cacf5920d48e9d890945e3296ee17179bfdac60b6c556a431cfcb3409c"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "/private/tmp/protracker-project-output-safety-c_zm9c99/candidate-probe-v3/probe.c",
+        "src/core/project.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "-o",
+        "/private/tmp/protracker-project-output-safety-c_zm9c99/candidate-probe-v3/probe"
+      ],
+      "directory": "/private/tmp/protracker-project-output-safety-c_zm9c99/source-final-v2",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/candidate-probe-v3/compile.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/private/tmp/protracker-project-output-safety-c_zm9c99/candidate-probe-v3/probe"
+      ],
+      "directory": "/private/tmp/protracker-project-output-safety-c_zm9c99/source-final-v2",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/candidate-probe-v3/run.log",
+        "bytes": 51,
+        "sha256": "75bb3154992f87a69c3f6365020d27179c37262119a86e6a8db26f89f95c7341"
+      }
+    }
+  ],
+  "canonical_dependencies": {
+    "src/core/project.h": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8",
+    "src/core/channels.h": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+    "src/core/pcm.h": "6b1a14d9010f71b693c81c066e619343bb9b4cee0f4b6723347f34de2f5e12fb",
+    "src/core/project.c": "e4fde542cdfc9b9bce585ef0cda0b5b09d07482f3ec89fddb8d79137b8b0e1c1",
+    "src/core/channels.c": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+    "src/core/pcm.c": "0bd9cc86e3eab3b077484bbcb20675eab0a648a76a18adabe4203c18f3b713a2",
+    "src/core/pcm_internal.h": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b"
+  },
+  "external_sdk_dependencies": {
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb"
+  },
+  "passed": true,
+  "binary": {
+    "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/candidate-probe-v3/probe",
+    "bytes": 292168,
+    "sha256": "f1f495933d3c78678695100bf243d48bf29903414e12ad5c31455a143aece3cb"
+  },
+  "source_files_after": 7531
+}

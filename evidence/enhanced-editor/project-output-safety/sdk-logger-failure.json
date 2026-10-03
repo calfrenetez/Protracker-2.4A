@@ -1,0 +1,20 @@
+{
+  "scope": "Original additional candidate probe harness failure preserved; no product compile or runtime executed",
+  "phase": "dependency provenance",
+  "cause": "Clang -MM includes pinned external SDKSettings.json; old logger assumed every dependency canonical",
+  "failure_kind": "ValueError",
+  "failure_message": "'/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/SDKSettings.json' is not in the subpath of '/private/tmp/protracker-project-output-safety-c_zm9c99/source-final'",
+  "record": {
+    "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/candidate-probe/result.json",
+    "sha256": "9c2d6b1a9814db0bdc57f54fc02a661e546865a46b3e226d6a8a1d62e34f69ec"
+  },
+  "commands_completed": 2,
+  "old_helper": {
+    "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/tools/run_candidate_probe.py",
+    "sha256": "8490469a0e2c3960b777d0afb67093a07fac620ac090beda5dd4bedd79477dc6"
+  },
+  "superseding_helper": {
+    "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/tools/run_candidate_probe_v2.py",
+    "sha256": "4da91ad7b3fb6f7f37bceb7f61ef6e2c4612f835f482a9cefcc38719b909af37"
+  }
+}

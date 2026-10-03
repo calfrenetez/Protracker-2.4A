@@ -1,0 +1,10 @@
+{
+  "runner": {
+    "path": "tools/shared_infra_render_files.py",
+    "before_sha256": "8ef21631f1427aa0ae82ef7002093ea317b0e38bbac327ef2e8966e25b0f7c5b",
+    "after_sha256": "24f4ae222ed6482e602ac1093af7c08033e30a71ebc2ea0d42e20c93aecd7c44"
+  },
+  "qualifier_sha256": "cd4f4a7960e3ba191cf5134d6698998167b2c0956a99941ca6cf4663ffc39efa",
+  "scope": "Private preparation only; no target operation",
+  "prior_preparation": "An empty private temp was created but a string-match assertion stopped before any source or qualifier write; actual runner guard expression is now matched exactly."
+}

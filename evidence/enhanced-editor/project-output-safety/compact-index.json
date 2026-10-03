@@ -1,0 +1,242 @@
+{
+  "schema": "protracker-project-output-safety-compact-controls-v1",
+  "scope": "Copy/derivation integrity only; no new execution/cleanup/coordination acceptance",
+  "items": [
+    {
+      "path": "payload.tar.gz",
+      "bytes": 2539878,
+      "sha256": "7f1e0919c73eb930b91e5a327554e2fdfe55ce408a1ff0c102bdaf9d2645613b",
+      "kind": "lossless_archive_derivation",
+      "scope": "Every selected original byte/control/scoped source/helper/history preserved",
+      "derivation": {
+        "members": 353,
+        "original_member_bytes": 8794940,
+        "all_member_bytes_hashes_sizes_modes_verified": true,
+        "safe_unique_regular_paths": true,
+        "uid_gid_mtime_zero": true,
+        "no_symlinks_hardlinks_or_truncated_members": true,
+        "second_archive_write_byte_identical": true
+      }
+    },
+    {
+      "path": "source-manifest.json.gz",
+      "bytes": 284847,
+      "sha256": "8e77de5cbe217320da49cc8e58c9a70f8f2bdb1b1c1f99cc92681ba7c86779ee",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Original full7531 source/four-overlay manifest, unmodified",
+      "origin": {
+        "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/source-final-v2-manifest.json",
+        "bytes": 1019205,
+        "sha256": "95577c22f903e3e3799b21130d66f4af14f5cc8bcd094649507b873a4849378e"
+      },
+      "derivation": {
+        "method": "gzip level9, mtime0, empty filename; original bytes/allfields/order/whitespace unchanged"
+      }
+    },
+    {
+      "path": "baseline-manifest.json.gz",
+      "bytes": 284558,
+      "sha256": "86f34f2de10dd1dfa861551f6187ce5170fd773a68a450fc99535b6f952c83dc",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Original full7531 baseline manifest, unmodified",
+      "origin": {
+        "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/baseline-manifest.json",
+        "bytes": 1018688,
+        "sha256": "67fb0e3ef0f7feedcdd082f0f95926a24c22649cd637fecebb7ce1b12eb7166a"
+      },
+      "derivation": {
+        "method": "gzip level9, mtime0, empty filename; original bytes/allfields/order/whitespace unchanged"
+      }
+    },
+    {
+      "path": "source-v1-manifest.json.gz",
+      "bytes": 284836,
+      "sha256": "e01f24aaf655310aa968eccdc589e436d810a489f2dfd9949eb22542170ae68d",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Original full7531 source-v1 manifest, unmodified",
+      "origin": {
+        "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/source-final-manifest.json",
+        "bytes": 1019186,
+        "sha256": "386bd3ffd444745a78998e799d0e84377ff16de393d07deb70f959d3a13767e2"
+      },
+      "derivation": {
+        "method": "gzip level9, mtime0, empty filename; original bytes/allfields/order/whitespace unchanged"
+      }
+    },
+    {
+      "path": "host-checks.json.gz",
+      "bytes": 4694,
+      "sha256": "282b276546d061f281b69a744f6919f80e8d856158db085142c5743eaf4b28d8",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Exact final two-group host sanitizer report/allcommands/products/generatedfixture/compilerpins",
+      "origin": {
+        "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/host-final-v2/host-checks.json",
+        "bytes": 42404,
+        "sha256": "59ad0ce2bb3a19722d8e31f84a516e3cd9e166af4e0a18d71ca64136583bf22f"
+      },
+      "derivation": {
+        "method": "gzip level9, mtime0, empty filename; original bytes/allfields/order/whitespace unchanged"
+      }
+    },
+    {
+      "path": "native-build.json.gz",
+      "bytes": 8174,
+      "sha256": "5aac8dfb1d723df103d430abc79f37c5a43ebf63ba4324ef8aa1ef5f7d097865",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Exact one-target cross-build report/orderedTUs/SDKclosures/runtimepins",
+      "origin": {
+        "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/native-final-v2/manifest.json",
+        "bytes": 38082,
+        "sha256": "abe9d60207ccf9405e081524dd117884bf770777b53ee28ac133a34cb233a39a"
+      },
+      "derivation": {
+        "method": "gzip level9, mtime0, empty filename; original bytes/allfields/order/whitespace unchanged"
+      }
+    },
+    {
+      "path": "qualification-result.json.gz",
+      "bytes": 9423,
+      "sha256": "15789ddee66ece35d622a780880ed0e7dd5aa842a7c03849caaa5ad6176592fb",
+      "kind": "gzip_exact_byte_derivation",
+      "scope": "Exact actual original top status/fields; distinct nested originals remain in payload",
+      "origin": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/project-output-safety-qualification-1790994019019842000/qualification-result.json",
+        "bytes": 49359,
+        "sha256": "0355e4627d2f9a7caca240f7380fe47e714379303f622a1a8ab3d973ae8c0b5d"
+      },
+      "derivation": {
+        "method": "gzip level9, mtime0, empty filename; original bytes/allfields/order/whitespace unchanged"
+      }
+    },
+    {
+      "path": "baseline-before.json",
+      "bytes": 3224,
+      "sha256": "ad390b23eef06498c4f4673665fe93150f0744fe92eecd54e0d4f7a4adc0c098",
+      "kind": "exact_byte_copy",
+      "scope": "Original expected baseline RC20, not a sanitizer failure",
+      "origin": {
+        "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/baseline-probe/result.json",
+        "bytes": 3224,
+        "sha256": "ad390b23eef06498c4f4673665fe93150f0744fe92eecd54e0d4f7a4adc0c098"
+      }
+    },
+    {
+      "path": "probe-after-final-v2.json",
+      "bytes": 7094,
+      "sha256": "94263a80897b2396fc3e5f5c98edf82f39763ba108af562f12c4d8769a34c6f7",
+      "kind": "exact_byte_copy",
+      "scope": "Original final-v2 identical-probeRC0/masterpreservation",
+      "origin": {
+        "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/candidate-probe-v3/result.json",
+        "bytes": 7094,
+        "sha256": "94263a80897b2396fc3e5f5c98edf82f39763ba108af562f12c4d8769a34c6f7"
+      }
+    },
+    {
+      "path": "sdk-logger-failure.json",
+      "bytes": 1136,
+      "sha256": "4973e0a10d4e6d1d0f366a26d5ba31aa2f2b762b7e568bd1704b2f68bce3ff85",
+      "kind": "exact_byte_copy",
+      "scope": "Original pre-runtime SDK logger failure, not rewritten as a product result",
+      "origin": {
+        "path": "/private/tmp/protracker-project-output-safety-c_zm9c99/candidate-probe-harness-failure.json",
+        "bytes": 1136,
+        "sha256": "4973e0a10d4e6d1d0f366a26d5ba31aa2f2b762b7e568bd1704b2f68bce3ff85"
+      }
+    },
+    {
+      "path": "root-review.json",
+      "bytes": 1163,
+      "sha256": "34ff4b40b087dbd7edadda8799e39e56811c5098bea33cf3e29fe3fd94376584",
+      "kind": "exact_byte_copy",
+      "scope": "Original root provenance review; its original pending/native scope retained",
+      "origin": {
+        "path": "/private/tmp/protracker-project-output-root-76srz_37/root-host-build-review.json",
+        "bytes": 1163,
+        "sha256": "34ff4b40b087dbd7edadda8799e39e56811c5098bea33cf3e29fe3fd94376584"
+      }
+    },
+    {
+      "path": "root-inputs.json",
+      "bytes": 588,
+      "sha256": "8cd11ba6492dbfefd30441e590d40f1b30431ace685cf0c236e46c3db38ebf24",
+      "kind": "exact_byte_copy",
+      "scope": "Original separate fifth runner overlay/qualifier fingerprint",
+      "origin": {
+        "path": "/private/tmp/protracker-project-output-root-76srz_37/root-inputs.json",
+        "bytes": 588,
+        "sha256": "8cd11ba6492dbfefd30441e590d40f1b30431ace685cf0c236e46c3db38ebf24"
+      }
+    },
+    {
+      "path": "root-reported-coordination.json",
+      "bytes": 9044,
+      "sha256": "766911bfa35c5968b2ad873b033c9ab4f68e7c273e187f46555f84a407d1b154",
+      "kind": "exact_byte_copy",
+      "scope": "Original/root-reported coordination only; no live packaging verification",
+      "origin": {
+        "path": "/private/tmp/protracker-project-output-root-76srz_37/coordination-complete.json",
+        "bytes": 9044,
+        "sha256": "766911bfa35c5968b2ad873b033c9ab4f68e7c273e187f46555f84a407d1b154"
+      }
+    },
+    {
+      "path": "packaging-only-failure-v1.json",
+      "bytes": 957,
+      "sha256": "3383e5d88e45793ad774f3059baf8bbf66fc13e6f8510bec455b221c9fe74643",
+      "kind": "exact_byte_copy",
+      "scope": "Original private packaging metadata assumption failure before output creation, distinct from product/native proofs",
+      "origin": {
+        "path": "/private/tmp/protracker-project-output-safety-packaging-failure-v1.json",
+        "bytes": 957,
+        "sha256": "3383e5d88e45793ad774f3059baf8bbf66fc13e6f8510bec455b221c9fe74643"
+      }
+    },
+    {
+      "path": "extra-01-native-root-review.json",
+      "bytes": 1097,
+      "sha256": "11c7452ea4d2afecbcad7838f29321c527cfbf150ada401a4fbc33f0f0ef94fe",
+      "kind": "exact_byte_copy",
+      "scope": "Original supplied extra control/review, explicitly preserved",
+      "origin": {
+        "path": "/private/tmp/protracker-project-output-root-76srz_37/native-root-review.json",
+        "bytes": 1097,
+        "sha256": "11c7452ea4d2afecbcad7838f29321c527cfbf150ada401a4fbc33f0f0ef94fe"
+      }
+    },
+    {
+      "path": "member-provenance.json.gz",
+      "bytes": 23170,
+      "sha256": "0ba37702a5b81e3337ff630e20ad965328a6e55995851e04898529e92fbff415",
+      "kind": "authored_member_provenance_gzip",
+      "scope": "All selected original path/byte/hash/mode identities and source before/after verification",
+      "derivation": {
+        "uncompressed_bytes": 230726,
+        "uncompressed_sha256": "15a13feeda0f2be1f509ae251405355027da4c03d758d7801d9ca7c9aa52f731",
+        "method": "authored full original-member index, gzip level9 mtime0 emptyfilename"
+      }
+    },
+    {
+      "path": "README.md",
+      "bytes": 2747,
+      "sha256": "5efe1af888a86d771cadd2cc3e873c646c576781ac1a5cc1e7588a8631717665",
+      "kind": "authored_scope_note",
+      "scope": "Original history/result tier separation and lossless selected-payload navigation"
+    }
+  ],
+  "control_exclusions": [
+    "compact-index.json",
+    "SHA256SUMS"
+  ],
+  "original_native_status_unchanged": true,
+  "archive_verification": {
+    "members": 353,
+    "original_member_bytes": 8794940,
+    "all_member_bytes_hashes_sizes_modes_verified": true,
+    "safe_unique_regular_paths": true,
+    "uid_gid_mtime_zero": true,
+    "no_symlinks_hardlinks_or_truncated_members": true,
+    "second_archive_write_byte_identical": true
+  },
+  "source_inventories_before_after_identical": true
+}

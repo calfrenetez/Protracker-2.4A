@@ -20,8 +20,15 @@ A clean-source sanitizer probe reproduced a valid master changing from 257 to
 retains 257. Two focused host sanitizer groups and the pinned native Exec stream
 cross-build pass from 7531 immutable source inputs plus four reviewed overlays.
 Full 8/16/24-bit mono/stereo wire-byte parity and unused-capacity protection pass.
-Exact native execution is pending. Existing transactional native Save already
-uses private completion outputs; its format, CRC and precision are unchanged.
+Exact 13444f7 native Exec stream execution also passes: golden layout/CRC and
+sink refusal, six Fast allocations ending at zero owned bytes, unchanged90second
+deadline, staging cleanup and fresh DMA-off exact cleanup. A separate locked
+10-second/11-observation check confirms original idle guest and owned-path
+absence; the window is explicitly released. See
+`../evidence/enhanced-editor/project-output-safety/`. Existing transactional
+native Save already uses private completion outputs; its format, CRC and
+precision are unchanged. This proves emulator file/ownership behavior, with
+physical audio, timing and listening acceptance still separate.
 
 ## Studio caller-output master protection — 3 October 2026
 

@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "qualification_sha256": "0355e4627d2f9a7caca240f7380fe47e714379303f622a1a8ab3d973ae8c0b5d",
+  "source_tree": "71191282071920c783fd80121690aff79ca68206",
+  "native_run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/project-output-safety-qualification-1790994019019842000/runner-project-stream/build/dev/render-files-1790994019845308000",
+  "native_log": "EXEC MEMORY pool_limit=130910912 reserve=262144 flags=4\nPROJECT STREAM PASS: exact golden layout/CRC, mixed masters/loops/slices/extensions, sink refusal, bounded workspace=7164\nEXEC MEMORY PASS: 6 Fast allocations, zero owned bytes, budget refusal without Chip fallback\n",
+  "sample_staging_clean": true,
+  "fresh_cleanup_dma_off": true,
+  "independent_observations": 11,
+  "original_pid": 19081,
+  "final_idle": {
+    "status": "OK\tPaused=false\tConfig=autosave",
+    "audio": "OK\tch0_dma=0\tch1_dma=0\tch2_dma=0\tch3_dma=0\tmaster=1\tsndbuf=583\tsndbuf_status=0"
+  },
+  "scope": "One emulator Exec serializer/master-output fixture; no physical/audio/timing/listening acceptance"
+}

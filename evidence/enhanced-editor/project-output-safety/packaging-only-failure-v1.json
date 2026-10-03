@@ -1,0 +1,17 @@
+{
+  "scope": "Original private evidence-packager metadata-only failure; no product compile/runtime/native/target operation and before any output package creation",
+  "cause": "tests/__init__.py absent from original source manifests; executed tests are namespace/direct modules and no source initialization file should be invented",
+  "failure": "KeyError('tests/__init__.py')",
+  "output_package_created": false,
+  "reviewed_helper": {
+    "path": "/private/tmp/package_project_output_safety.py",
+    "bytes": 32724,
+    "sha256": "dad75f2fad0c51cb7b8350d8f497abbdcd5ff599a4ed03766ea669d13a8096b8"
+  },
+  "original_failure_log": {
+    "path": "/private/tmp/protracker-project-output-safety-packaging.log",
+    "bytes": 434,
+    "sha256": "ca547e02d8629c2092d52e1bb4c9344dcedab23cf5ea4dee24bdea30aa2eb783"
+  },
+  "all_original_input_files_unchanged": "Packager performed read-only validation/collection; never reached out.mkdir, archive or control writes"
+}

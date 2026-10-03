@@ -1,0 +1,57 @@
+{
+  "scope": "Baseline ASan/UBSan preservation probe; RC20 is expected missing-refusal failure, not sanitizer error",
+  "source_base_commit": "a3585d00d83c354c484a7fc8cbcafa9631dbfdff",
+  "compiler": {
+    "path": "/usr/bin/cc",
+    "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+    "version": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "resource_dir": "/Library/Developer/CommandLineTools/usr/lib/clang/21"
+  },
+  "runtime_inputs": {
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.asan_osx_dynamic.dylib": "a319f00c1792b8ab704f8814655f2073cf16cdcc4b7463c9c07d8034da1de49f",
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.ubsan_osx_dynamic.dylib": "b4d8b49379b26b4faa55fa84f9aedf1f5188205767ddf529040ef904cbda4996"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "/private/tmp/protracker-project-output-safety-c_zm9c99/baseline-probe/probe.c",
+        "src/core/project.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "-o",
+        "/private/tmp/protracker-project-output-safety-c_zm9c99/baseline-probe/probe"
+      ],
+      "directory": "/private/tmp/protracker-project-output-safety-c_zm9c99/baseline",
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "/private/tmp/protracker-project-output-safety-c_zm9c99/baseline-probe/probe"
+      ],
+      "returncode": 20
+    }
+  ],
+  "result": "PROJECT OUTPUT PROBE result=0 before=257 after=3712\n",
+  "expected_returncode": 20,
+  "expected_failure_observed": true,
+  "inputs": {
+    "/private/tmp/protracker-project-output-safety-c_zm9c99/baseline-probe/probe.c": "379e2cb1f2c832e65e1c8c37dece3c8ab3332a7fb0f505260e22a04bd3f62fb7",
+    "/private/tmp/protracker-project-output-safety-c_zm9c99/baseline/src/core/project.c": "57cae40baef58988806d4fb722a3208c78556e3a75fe607a4ed30e1278e86db3",
+    "/private/tmp/protracker-project-output-safety-c_zm9c99/baseline/src/core/project.h": "fe2ce268386dc0fed856af12bcdc5190a43083329ae3b5567febc6efc7712519",
+    "/private/tmp/protracker-project-output-safety-c_zm9c99/baseline/src/core/channels.c": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+    "/private/tmp/protracker-project-output-safety-c_zm9c99/baseline/src/core/channels.h": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+    "/private/tmp/protracker-project-output-safety-c_zm9c99/baseline/src/core/pcm.c": "0bd9cc86e3eab3b077484bbcb20675eab0a648a76a18adabe4203c18f3b713a2",
+    "/private/tmp/protracker-project-output-safety-c_zm9c99/baseline/src/core/pcm.h": "6b1a14d9010f71b693c81c066e619343bb9b4cee0f4b6723347f34de2f5e12fb",
+    "/private/tmp/protracker-project-output-safety-c_zm9c99/baseline/src/core/pcm_internal.h": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b"
+  },
+  "binary_sha256": "9e3a6dfe0a2f352576632ee3f107f362eb229412b137f0649d923503774a9b28"
+}

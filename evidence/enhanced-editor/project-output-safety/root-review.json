@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "source_files": 7531,
+  "host_groups": 2,
+  "host_commands": 6,
+  "native_commands": 18,
+  "canonical_native_dependencies": 21,
+  "sdk_native_inputs": 74,
+  "ordered_translation_units": [
+    "tests/native_exec_project_stream_test.c",
+    "src/platform/project_file.c",
+    "src/platform/file_save.c",
+    "src/core/safe_save.c",
+    "src/core/project.c",
+    "src/core/channels.c",
+    "src/core/pcm.c"
+  ],
+  "binary": "d4a3da30620fef5e644ca8dae5a8a48d3483cc1522a50acbbd7b57835c380451",
+  "source_manifest_sha256": "95577c22f903e3e3799b21130d66f4af14f5cc8bcd094649507b873a4849378e",
+  "host_sha256": "59ad0ce2bb3a19722d8e31f84a516e3cd9e166af4e0a18d71ca64136583bf22f",
+  "native_sha256": "abe9d60207ccf9405e081524dd117884bf770777b53ee28ac133a34cb233a39a",
+  "probe_sha256": "94263a80897b2396fc3e5f5c98edf82f39763ba108af562f12c4d8769a34c6f7",
+  "scope": "Root byte/provenance review only; native execution pending",
+  "qa_schema_adjustment": "Original root supplementary review reached probe log then expected master=257 field; actual unchanged original says before=257 after=257. Corrected exact assertion, no source/proof modification."
+}

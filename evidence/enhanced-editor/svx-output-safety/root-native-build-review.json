@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "manifest_sha256": "7caef56100cba2a08e93393d0c8051c719ac97273a928de6036df3b58cf2f319",
+  "elapsed_s": 4.488200749998214,
+  "commands": 41,
+  "source_before_after": 7531,
+  "targets": {
+    "PTSvxTest": {
+      "bytes": 37120,
+      "sha256": "ccd4b35d252839fc669dbe72b1095640cd872ab5fdb0913197b7b7cd779e4a39",
+      "scope": "Portable codec/sampler fixture; no Exec Fast-pool/TypeOfMem acceptance",
+      "units": 4,
+      "canonical_dependencies": 8,
+      "sdk_inputs": 25
+    },
+    "PTSamplerTest": {
+      "bytes": 132820,
+      "sha256": "41c514cca71515f53e9cb9f0d767ddc188a29293157707f0445aff41b2aea221",
+      "scope": "Portable codec/sampler fixture; no Exec Fast-pool/TypeOfMem acceptance",
+      "units": 16,
+      "canonical_dependencies": 32,
+      "sdk_inputs": 32
+    },
+    "PTExecSampleSvxFileTest": {
+      "bytes": 39860,
+      "sha256": "d93c8d49118a482d64abf2425c0ed33519f3dba4fce8cf65bd1dba50d41a80b3",
+      "scope": "Exec Fast-pool/TypeOfMem and bounded file workspace fixture",
+      "units": 6,
+      "canonical_dependencies": 21,
+      "sdk_inputs": 74
+    }
+  },
+  "scope": "Root crossbuild byte/source review only, no native target execution"
+}

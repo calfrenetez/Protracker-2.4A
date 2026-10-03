@@ -5,6 +5,26 @@ The enhanced project owns the authoritative sample, including its declared
 elements in the declared precision; 24-bit samples retain their low eight bits.
 Playback representations must never become the project's source of truth.
 
+## 8SVX caller-output master protection — 3 October 2026
+
+Public codec and sampler 8SVX exports now refuse scalar or encoded outputs that
+overlap PCM/info descriptors, the complete sample header or any declared master
+capacity. Encoded bytes and completion counts must also be disjoint. Metadata
+checks allocate nothing and do not validate unused padding as audio. Existing
+mono8 format, volume/loops/name/odd padding and unsupported16/24/stereo refusals
+remain unchanged; no precision conversion was added.
+
+A union-backed sanitizer probe reproduced size and completion outputs changing
+a valid master from -128 to94. The identical final probe returns ALIAS and
+retains -128. Three host sanitizer groups and pinned cross-builds pass. Exact
+01c482b emulator codec and sampler assertions pass separately from the Exec file
+fixture, which preserves master/wire bytes, uses fixed workspace11240 and ends
+11 Fast allocations at zero owned bytes. All three retain90second deadlines,
+fresh DMA-off exact cleanup and separate locked10-second/11-observation absence
+and original-idle checks. The shared window is explicitly released and acknowledged.
+See `../evidence/enhanced-editor/svx-output-safety/`; physical audio, timing and
+listening acceptance remain separate.
+
 ## Project serializer output protection — 3 October 2026
 
 Public validation capabilities, serialized-size and encoded/streamed completion

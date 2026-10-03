@@ -1,0 +1,7 @@
+{
+  "runner_before_sha256": "24f4ae222ed6482e602ac1093af7c08033e30a71ebc2ea0d42e20c93aecd7c44",
+  "runner_after_sha256": "a34df812f9906b719ab4ca8ca7829838a2973807816f046a50e3ef86bdaf2f0c",
+  "qualifier_sha256": "b8b93ab6a755f10f5fd91468bea329548b3de12f6841a5dec1fffc4975e77b33",
+  "scope": "Preparation only, no builds or target; portable core/sampler assertion scopes separate from Exec file allocation proof",
+  "scope_correction": "Original unexecuted draft misplaced project-stream scope; retained first draft and corrected both branch scope labels before any application/build/execution."
+}

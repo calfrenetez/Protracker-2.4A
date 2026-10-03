@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "source_files": 7531,
+  "source_manifest_sha256": "4e410e63eb25a853efcf091f37873e2b3f1e4f21c8af0f4d63e84bb0af42c22c",
+  "patch_sha256": "46275cd337448280a32f4c82e6c2c95d22802856f716400d54765156043a22a9",
+  "host_sha256": "b5d67b7dcc4cb736a798e858da871db7d64d75f58472e8e077b1a4032cd62af2",
+  "groups": [
+    {
+      "module": "test_svx",
+      "tests": 1,
+      "passed": true,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 0.6994844169967109
+    },
+    {
+      "module": "test_sampler",
+      "tests": 1,
+      "passed": true,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 3.9100511250071577
+    },
+    {
+      "module": "test_sample_svx_file",
+      "tests": 1,
+      "passed": true,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 0.9278438749970519
+    }
+  ],
+  "canonical_dependencies": 40,
+  "scope": "Root byte/source/host review, crossbuild and native execution pending",
+  "qa_schema_adjustment": "Initial supplementary root check failed reading assumed source-final-manifest.json before verification. Corrected to original host-report source_manifest.path; no product or proof changed."
+}

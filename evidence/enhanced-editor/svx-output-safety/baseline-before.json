@@ -1,0 +1,164 @@
+{
+  "scope": "Host ASan/UBSan baseline preservation probe: expected RC20 and two valid mono8 masters changed through size/written; no native/target operation",
+  "source_manifest": {
+    "path": "/private/tmp/protracker-svx-output-safety-t90omilq/baseline-manifest.json",
+    "bytes": 1019457,
+    "sha256": "c669b1bf883d3ed1339467b879fc099884a8a2aefa4e1a6f553272d98aba3efe"
+  },
+  "source_files_before": 7531,
+  "compiler": {
+    "path": "/usr/bin/cc",
+    "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+    "version": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "resource_dir": "/Library/Developer/CommandLineTools/usr/lib/clang/21"
+  },
+  "runtime_inputs": {
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.asan_osx_dynamic.dylib": "a319f00c1792b8ab704f8814655f2073cf16cdcc4b7463c9c07d8034da1de49f",
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.ubsan_osx_dynamic.dylib": "b4d8b49379b26b4faa55fa84f9aedf1f5188205767ddf529040ef904cbda4996"
+  },
+  "helper": {
+    "path": "/private/tmp/protracker-svx-output-safety-t90omilq/tools/run_baseline_probe.py",
+    "bytes": 4042,
+    "sha256": "90aab4fbd6ecf1c3684c90ddd7f60a2f1a4ff6720b164a055cafe96145a15766"
+  },
+  "probe": {
+    "path": "/private/tmp/protracker-svx-output-safety-t90omilq/baseline-probe/probe.c",
+    "bytes": 1259,
+    "sha256": "1623c8d576cb9888e9f83fd8de5f030ec5404d422e4e60a59d66af27ba7988a8"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "--version"
+      ],
+      "directory": "/private/tmp/protracker-svx-output-safety-t90omilq/baseline",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-svx-output-safety-t90omilq/baseline-probe/compiler-version.log",
+        "bytes": 158,
+        "sha256": "a856ec74c559401131ad608625ef252fb2db6c78bc0c480c1c4c782ee4896db1"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-MM",
+        "/private/tmp/protracker-svx-output-safety-t90omilq/baseline-probe/probe.c"
+      ],
+      "directory": "/private/tmp/protracker-svx-output-safety-t90omilq/baseline",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-svx-output-safety-t90omilq/baseline-probe/dependencies-00.log",
+        "bytes": 194,
+        "sha256": "29d2ad88cbf195e4d9b0543ec558e6e7a57166ac176ab7fc090566c41d0494b7"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-MM",
+        "src/core/svx.c"
+      ],
+      "directory": "/private/tmp/protracker-svx-output-safety-t90omilq/baseline",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-svx-output-safety-t90omilq/baseline-probe/dependencies-01.log",
+        "bytes": 129,
+        "sha256": "826ba8e88d7715e0a97d5c822bdca0761c8003ee808adf718b1fd80a8e673991"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-MM",
+        "src/core/pcm.c"
+      ],
+      "directory": "/private/tmp/protracker-svx-output-safety-t90omilq/baseline",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-svx-output-safety-t90omilq/baseline-probe/dependencies-02.log",
+        "bytes": 138,
+        "sha256": "d12934cacf5920d48e9d890945e3296ee17179bfdac60b6c556a431cfcb3409c"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "/private/tmp/protracker-svx-output-safety-t90omilq/baseline-probe/probe.c",
+        "src/core/svx.c",
+        "src/core/pcm.c",
+        "-o",
+        "/private/tmp/protracker-svx-output-safety-t90omilq/baseline-probe/probe"
+      ],
+      "directory": "/private/tmp/protracker-svx-output-safety-t90omilq/baseline",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-svx-output-safety-t90omilq/baseline-probe/compile.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/private/tmp/protracker-svx-output-safety-t90omilq/baseline-probe/probe"
+      ],
+      "directory": "/private/tmp/protracker-svx-output-safety-t90omilq/baseline",
+      "returncode": 20,
+      "log": {
+        "path": "/private/tmp/protracker-svx-output-safety-t90omilq/baseline-probe/run.log",
+        "bytes": 93,
+        "sha256": "c98e8196a9ff0b3559b07e0960a6588ed1aadc4ccba4d503db07aaf4bf5929a7"
+      }
+    }
+  ],
+  "canonical_dependencies": {
+    "src/core/svx.h": "3e067d32699c2b28674e5785e3ddeb87be66255676a0683759273cf9a9a005d6",
+    "src/core/pcm.h": "6b1a14d9010f71b693c81c066e619343bb9b4cee0f4b6723347f34de2f5e12fb",
+    "src/core/svx.c": "9c45524f7e0960425d639b17c12336af9c509e13d4f0b071ccf2f633b248ac77",
+    "src/core/pcm.c": "0bd9cc86e3eab3b077484bbcb20675eab0a648a76a18adabe4203c18f3b713a2",
+    "src/core/pcm_internal.h": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b"
+  },
+  "external_sdk_dependencies": {
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb"
+  },
+  "passed": true,
+  "binary": {
+    "path": "/private/tmp/protracker-svx-output-safety-t90omilq/baseline-probe/probe",
+    "bytes": 107384,
+    "sha256": "77d0a09db924fef193b22bf607f9b45689ba2d112321469dfe0b24b2c0dc1e1a"
+  },
+  "source_files_after": 7531
+}

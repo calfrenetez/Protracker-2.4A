@@ -1,0 +1,164 @@
+{
+  "scope": "Host ASan/UBSan same baseline preservation probe: expected RC0 and original mono8 masters retained through ALIAS; no native/target operation",
+  "source_manifest": {
+    "path": "/private/tmp/protracker-svx-output-safety-t90omilq/source-manifest.json",
+    "bytes": 1021016,
+    "sha256": "4e410e63eb25a853efcf091f37873e2b3f1e4f21c8af0f4d63e84bb0af42c22c"
+  },
+  "source_files_before": 7531,
+  "compiler": {
+    "path": "/usr/bin/cc",
+    "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+    "version": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+    "resource_dir": "/Library/Developer/CommandLineTools/usr/lib/clang/21"
+  },
+  "runtime_inputs": {
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.asan_osx_dynamic.dylib": "a319f00c1792b8ab704f8814655f2073cf16cdcc4b7463c9c07d8034da1de49f",
+    "/Library/Developer/CommandLineTools/usr/lib/clang/21/lib/darwin/libclang_rt.ubsan_osx_dynamic.dylib": "b4d8b49379b26b4faa55fa84f9aedf1f5188205767ddf529040ef904cbda4996"
+  },
+  "helper": {
+    "path": "/private/tmp/protracker-svx-output-safety-t90omilq/tools/run_candidate_probe.py",
+    "bytes": 4042,
+    "sha256": "b6ead23ebbdaf8694b7acdd4680a2bd20ce4d2d3342388f8bda1a9d3a5afd998"
+  },
+  "probe": {
+    "path": "/private/tmp/protracker-svx-output-safety-t90omilq/candidate-probe/probe.c",
+    "bytes": 1259,
+    "sha256": "1623c8d576cb9888e9f83fd8de5f030ec5404d422e4e60a59d66af27ba7988a8"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "--version"
+      ],
+      "directory": "/private/tmp/protracker-svx-output-safety-t90omilq/source-final",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-svx-output-safety-t90omilq/candidate-probe/compiler-version.log",
+        "bytes": 158,
+        "sha256": "a856ec74c559401131ad608625ef252fb2db6c78bc0c480c1c4c782ee4896db1"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-MM",
+        "/private/tmp/protracker-svx-output-safety-t90omilq/candidate-probe/probe.c"
+      ],
+      "directory": "/private/tmp/protracker-svx-output-safety-t90omilq/source-final",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-svx-output-safety-t90omilq/candidate-probe/dependencies-00.log",
+        "bytes": 195,
+        "sha256": "0248fc1d957b74b3543f55248c42c77b9ff64872c339431f72d4ea7dcbd70d8c"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-MM",
+        "src/core/svx.c"
+      ],
+      "directory": "/private/tmp/protracker-svx-output-safety-t90omilq/source-final",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-svx-output-safety-t90omilq/candidate-probe/dependencies-01.log",
+        "bytes": 129,
+        "sha256": "826ba8e88d7715e0a97d5c822bdca0761c8003ee808adf718b1fd80a8e673991"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-MM",
+        "src/core/pcm.c"
+      ],
+      "directory": "/private/tmp/protracker-svx-output-safety-t90omilq/source-final",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-svx-output-safety-t90omilq/candidate-probe/dependencies-02.log",
+        "bytes": 138,
+        "sha256": "d12934cacf5920d48e9d890945e3296ee17179bfdac60b6c556a431cfcb3409c"
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "/private/tmp/protracker-svx-output-safety-t90omilq/candidate-probe/probe.c",
+        "src/core/svx.c",
+        "src/core/pcm.c",
+        "-o",
+        "/private/tmp/protracker-svx-output-safety-t90omilq/candidate-probe/probe"
+      ],
+      "directory": "/private/tmp/protracker-svx-output-safety-t90omilq/source-final",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-svx-output-safety-t90omilq/candidate-probe/compile.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "argv": [
+        "/private/tmp/protracker-svx-output-safety-t90omilq/candidate-probe/probe"
+      ],
+      "directory": "/private/tmp/protracker-svx-output-safety-t90omilq/source-final",
+      "returncode": 0,
+      "log": {
+        "path": "/private/tmp/protracker-svx-output-safety-t90omilq/candidate-probe/run.log",
+        "bytes": 97,
+        "sha256": "981d33812d847d95b0590b8ed1b3cf489d37e39811ae7c9e1125521f3a71b57c"
+      }
+    }
+  ],
+  "canonical_dependencies": {
+    "src/core/svx.h": "824541cd25b72b5820e091cfc9f4e6a5f41351fd0630dddc09aefc0405036814",
+    "src/core/pcm.h": "6b1a14d9010f71b693c81c066e619343bb9b4cee0f4b6723347f34de2f5e12fb",
+    "src/core/svx.c": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813",
+    "src/core/pcm.c": "0bd9cc86e3eab3b077484bbcb20675eab0a648a76a18adabe4203c18f3b713a2",
+    "src/core/pcm_internal.h": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b"
+  },
+  "external_sdk_dependencies": {
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb"
+  },
+  "passed": true,
+  "binary": {
+    "path": "/private/tmp/protracker-svx-output-safety-t90omilq/candidate-probe/probe",
+    "bytes": 107512,
+    "sha256": "e789516be158a0bf9dde42c72486088a9d2d0ed5b32b246f639d0281171cafd9"
+  },
+  "source_files_after": 7531
+}

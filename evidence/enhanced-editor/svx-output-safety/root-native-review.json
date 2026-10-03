@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "qualification_sha256": "2375547867cc0507419b889ecb456e0c8f3a156539612d5db6935c40e0946e25",
+  "source_tree": "0a80e54bef85071e39d6eb9c9be1dd758d12fd4f",
+  "cases": [
+    {
+      "label": "svx-core",
+      "native_run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/svx-output-safety-qualification-1790995064714565000/runner-svx-core/build/dev/render-files-1790995065603191000",
+      "log": "8SVX PASS: independent signed PCM fixture, odd chunks, loops, Fibonacci wrap, malformed bounds, alias and capacity\n",
+      "scope": "shared030 portable SVX codec/sampler master-output assertions; no Exec Fast allocator or device playback claim",
+      "independent_observations": 11
+    },
+    {
+      "label": "svx-sampler",
+      "native_run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/svx-output-safety-qualification-1790995064714565000/runner-svx-sampler/build/dev/render-files-1790995080879616000",
+      "log": "LOOP/SLICE PASS: metadata, atomic bake undo, proposal commit, non-destructive PCM, retarget refusal, undo/redo conflicts, allocation rollback and exact persistence\nCONVERSION PASS: stereo precision/rate, scaled loops and referenced slice ordinals, exact undo, collapse refusal, allocation rollback, redo and persistence\nIFF SAMPLER PASS: name/volume/loop/PCM, compressed import, exact export, allocation rollback, unsupported refusal, redo and project persistence\nRAW SAMPLER PASS: explicit stereo24 import, exact export, no autodetection, allocation rollback, refusal/redo and persistence\nSTEREO24 GAIN HISTORY PASS: clipped extrema, untouched boundary frames, three exact undo/redo cycles and WAV identity\nSAMPLER BUDGET PASS: actual version and journal bytes, one-byte-short refusal, rollback, eviction and redo truncation\nSAMPLER PASS: exact stereo24 import/range edit, unified history, dirty state, no-op redo, allocation rollback, bounded memory, eviction, save/reopen and release\n",
+      "scope": "shared030 portable SVX codec/sampler master-output assertions; no Exec Fast allocator or device playback claim",
+      "independent_observations": 11
+    },
+    {
+      "label": "sample-svx",
+      "native_run": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/build/dev/svx-output-safety-qualification-1790995064714565000/runner-sample-svx/build/dev/render-files-1790995100061677000",
+      "log": "EXEC MEMORY pool_limit=131222464 reserve=262144 flags=4\nSAMPLE SVX STREAM PASS: exact metadata, loop and odd padding, master preserved, fixed workspace=11240\nEXEC MEMORY PASS: 11 Fast allocations, zero owned bytes, budget refusal without Chip fallback\n",
+      "scope": "shared030 streamed master IFF export and Exec Fast allocator",
+      "independent_observations": 11
+    }
+  ],
+  "original_pid": 19081,
+  "scope": "Emulator native portable assertions distinct from Exec file Fast allocation proof; no physical/audio/timing/listening acceptance"
+}

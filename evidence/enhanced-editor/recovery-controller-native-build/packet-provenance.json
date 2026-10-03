@@ -1,0 +1,17 @@
+{
+  "scope": "Host evidence packaging only; no test/build/target/browser/network operation",
+  "member_count": 134,
+  "original_bytes": 4592486,
+  "payload_bytes": 1832545,
+  "payload_sha256": "d5aedd586a4cd3b1335e02ddb4547f182ea4dac746ef600ed869e674375e1dd3",
+  "duplicate_generation_equal": true,
+  "full_reader_bytes_and_modes_verified": true,
+  "head_at_import": "1444b10e53f7c71824c2be81b87afa3d67e7c2c9",
+  "independent_review_sha256": "8a3ad33d62bbec9d1ea66d285752925b62d76f17724d2950b8e4d0fee8ea3540",
+  "production_paths": [
+    "tests/native_recovery_cases.h",
+    "tests/native_recovery_configuration_cases.h"
+  ],
+  "native_execution": false,
+  "physical_acceptance": false
+}

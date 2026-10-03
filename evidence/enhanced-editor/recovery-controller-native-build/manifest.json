@@ -1,0 +1,943 @@
+{
+  "scope": "Exact original regular member bytes and modes; normalized archive ownership/timestamps",
+  "members": {
+    "original/README.md": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/README.md",
+      "bytes": 2198,
+      "sha256": "ce5d9ac83ab0e8866b0da583ac76f67aee0b11fff19d76d8263bc21574bbd3f7",
+      "mode": 420,
+      "role": "Original implementation handoff, complete frozen inventory, probe, patch or root import receipt"
+    },
+    "original/final-handoff.json": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/final-handoff.json",
+      "bytes": 12458,
+      "sha256": "7bced85d38eb9eda8acc0bb154836e5c7afc4d2445c220fa01d612855653a7f1",
+      "mode": 420,
+      "role": "Original implementation handoff, complete frozen inventory, probe, patch or root import receipt"
+    },
+    "original/host-path-model.c": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-path-model.c",
+      "bytes": 3125,
+      "sha256": "e3309633c08bfa9df2176ceb971f9405b90b1f75d6605001855d2acd98ca7333",
+      "mode": 420,
+      "role": "Original implementation handoff, complete frozen inventory, probe, patch or root import receipt"
+    },
+    "original/native-controller-assertions.patch": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-controller-assertions.patch",
+      "bytes": 9397,
+      "sha256": "a56916f51fdc2fc99177e3f4dc2f491ff240a65a4318714bc484d1e2f18404c0",
+      "mode": 420,
+      "role": "Original implementation handoff, complete frozen inventory, probe, patch or root import receipt"
+    },
+    "original/parent-proof.json": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/parent-proof.json",
+      "bytes": 958,
+      "sha256": "772312a981c4e819eb32336e64fdc17be306de372f33344e2bed6a1276d29cf9",
+      "mode": 420,
+      "role": "Original implementation handoff, complete frozen inventory, probe, patch or root import receipt"
+    },
+    "original/root-import-receipt.json": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/root-import-receipt.json",
+      "bytes": 703,
+      "sha256": "86c9c433ff7f2ffc1f997647503e24c60286aeaa70c0ab226bf3e2d6a029e110",
+      "mode": 420,
+      "role": "Original implementation handoff, complete frozen inventory, probe, patch or root import receipt"
+    },
+    "original/root-path.txt": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/root-path.txt",
+      "bytes": 58,
+      "sha256": "0aaf40797147eccc5aa1e1d6bf3dc684d8b2312c6be950f0d5cd74876c2b2218",
+      "mode": 420,
+      "role": "Original implementation handoff, complete frozen inventory, probe, patch or root import receipt"
+    },
+    "original/source-manifest.json": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-manifest.json",
+      "bytes": 1437311,
+      "sha256": "6f6c7ea144266d5a97c6df30e752aeea5cf8c40ae59c80133a02c2a0c253ae28",
+      "mode": 420,
+      "role": "Original implementation handoff, complete frozen inventory, probe, patch or root import receipt"
+    },
+    "original/tools/prepared-files.json": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/tools/prepared-files.json",
+      "bytes": 751,
+      "sha256": "25f08c3c6d7dbd52bced99514834e2fc18219f09f181af3abda97ab37973b99e",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/tools/provenance_common.py": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/tools/provenance_common.py",
+      "bytes": 11124,
+      "sha256": "78e28229f0f132c73153606be3a40d750a4013f5ea1bbb5af7c15e117e62cdb5",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/tools/run_model.py": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/tools/run_model.py",
+      "bytes": 6828,
+      "sha256": "8f596a34971902075bca8134f2bb68140c0e9139be4d1eeece9d1b4c4c864df0",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/tools/toolchain-pins.json": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/tools/toolchain-pins.json",
+      "bytes": 2709,
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/tools-native/inherited-source-prepared-files.json": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/tools-native/inherited-source-prepared-files.json",
+      "bytes": 665,
+      "sha256": "311c1b85f83cb548c342c57bcb8ab98979524097ad09af29e3504aad8b8edfba",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/tools-native/native_build.py": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/tools-native/native_build.py",
+      "bytes": 10375,
+      "sha256": "eeddabf551a233d1563cfdf09010340d2422a769998be141c7ec281ca650e3c5",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/tools-native/native_build.py.review.diff": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/tools-native/native_build.py.review.diff",
+      "bytes": 5042,
+      "sha256": "46273d8b9fc90483c98cab973c456864f85c618a1dc63923d5f2345cdde2fe6a",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/tools-native/prepared-files.json": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/tools-native/prepared-files.json",
+      "bytes": 798,
+      "sha256": "9d0f93e164af526786bdb9997a42cf5f2d595fc4d0279b949cfae397437a033e",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/tools-native/provenance_common.py": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/tools-native/provenance_common.py",
+      "bytes": 8835,
+      "sha256": "f74735e6a4e991fcf69d47f800698cde807f3b8f10d91a77df0d94729b6b1225",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/tools-native/provenance_common.py.review.diff": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/tools-native/provenance_common.py.review.diff",
+      "bytes": 6522,
+      "sha256": "fd81ecea50ad99a78e7c701ff6d2f6d2634f8f6ac46cc3ff1601c7fca550e43b",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/tools-native/toolchain-pins.json": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/tools-native/toolchain-pins.json",
+      "bytes": 2709,
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/compile.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/compiler-resource.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/compiler-resource.log",
+      "bytes": 53,
+      "sha256": "ae4dc8a8a83fdae4897a378fbf33fe0a98ae67d92cb9d6da17ac13eafbe7405b",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/compiler-version.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/compiler-version.log",
+      "bytes": 158,
+      "sha256": "a856ec74c559401131ad608625ef252fb2db6c78bc0c480c1c4c782ee4896db1",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/dependencies-00.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/dependencies-00.log",
+      "bytes": 11360,
+      "sha256": "3f67701f47f4be737acc2781cb8e8a263f8f42770c2ec7064c3680fcd6f18927",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/dependencies-01.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/dependencies-01.log",
+      "bytes": 5302,
+      "sha256": "46887c053d5498cb94965156a237ab8fa2f4a1b29ee3f97e2efba8527620c3ed",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/dependencies-02.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/dependencies-02.log",
+      "bytes": 8434,
+      "sha256": "b86b4c4880e0ee6566ed82f82f4be889b9567a7cef47cc92777871242ec7fbeb",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/dependencies-03.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/dependencies-03.log",
+      "bytes": 3661,
+      "sha256": "5c9f034a67b9ce507b5550b6d30f6892a36e931c8a1990fba1030ba3a761826f",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/dependencies-04.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/dependencies-04.log",
+      "bytes": 4580,
+      "sha256": "63340e9d9f46b133854ab0b08fd07bf17ce8b520068001a22477e32c7719b216",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/dependencies-05.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/dependencies-05.log",
+      "bytes": 2904,
+      "sha256": "5079fdb9fc479dbd1e548ec6322d4bdd7116cd81d998815e3327a450e2c19f6e",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/dependencies-06.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/dependencies-06.log",
+      "bytes": 7697,
+      "sha256": "f8afd1951d714eb09d89bf05ff004bb09ece184cfe9e07a7c7bb27f33926cdb0",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/dependencies-07.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/dependencies-07.log",
+      "bytes": 10763,
+      "sha256": "1cb28f4cb78c396cdc4585bef8fb4f2013103907729800f691ae7504fb67c57a",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/dependencies-08.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/dependencies-08.log",
+      "bytes": 4448,
+      "sha256": "713687508744f2c15e4089e7bd17b56e758928af2034a189a66c3c20a2834fd9",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/dependencies-09.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/dependencies-09.log",
+      "bytes": 4312,
+      "sha256": "c958df8c7ad062ad68feeca55fac66c08da7b811c9ecace81ce41009f4a9f397",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/dependencies-10.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/dependencies-10.log",
+      "bytes": 874,
+      "sha256": "09646af039c8aedcc114980a32eb556402f69eb1edfa46d5daf2b218bbe7b471",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/dependencies-11.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/dependencies-11.log",
+      "bytes": 4418,
+      "sha256": "88a7a868d906166af8c42b771e4f3abbee1c72ff86f049979e30ba55645b7004",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/dependencies-12.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/dependencies-12.log",
+      "bytes": 4329,
+      "sha256": "021af1b93d018969b3bda1b8897e7cc21f794c69d90006a430b9fce413356dfe",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/dependencies-13.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/dependencies-13.log",
+      "bytes": 4360,
+      "sha256": "eb68c3559b29b101934ab7f4ba740746b6092619ffb1195f8a0156a3c8df01a4",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/dependencies-14.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/dependencies-14.log",
+      "bytes": 3665,
+      "sha256": "b4b8d9d6597c3710564b2567ea428238ed80aae5b571f2b95fb659af6dd18097",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/dependencies-15.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/dependencies-15.log",
+      "bytes": 3268,
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/generated/dos/var.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/generated/dos/var.h",
+      "bytes": 57,
+      "sha256": "9321d052c388897ea5e5fca3cf1b55fee4117dab4eb13e936aa4bad2917dfd0b",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/generated/proto/dos.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/generated/proto/dos.h",
+      "bytes": 533,
+      "sha256": "b6f734753dffe871b2533ea3e9c64d0ead9a5c3ea118fe6ce7e0c4f292e28643",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/probe": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/probe",
+      "bytes": 606232,
+      "sha256": "2be3b4147249f4366c8b1637e3e862789d1727deb0cdd8ab1750867cc32f64fe",
+      "mode": 493,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/probe.c": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/probe.c",
+      "bytes": 3125,
+      "sha256": "e3309633c08bfa9df2176ceb971f9405b90b1f75d6605001855d2acd98ca7333",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/probe.dSYM/Contents/Info.plist": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/probe.dSYM/Contents/Info.plist",
+      "bytes": 634,
+      "sha256": "9de088233f62a847d8cdb3921daf5341f6bc948e34f38e4e651706dd1bec3401",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/probe.dSYM/Contents/Resources/DWARF/probe": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/probe.dSYM/Contents/Resources/DWARF/probe",
+      "bytes": 294052,
+      "sha256": "7b01d7258afade60b548956e77a53a2ee4fa4625963fcc2b830ca4c359c66922",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/probe.dSYM/Contents/Resources/Relocations/aarch64/probe.yml": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/probe.dSYM/Contents/Resources/Relocations/aarch64/probe.yml",
+      "bytes": 166,
+      "sha256": "d295775b8556bf5b11d2327666c8f51006fdbcddcbb28749e5e8c9210f817696",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/result.json": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/result.json",
+      "bytes": 47248,
+      "sha256": "9ed1d134ded8acc042b3420022b15b53c6848bb6ffdeace949ea644f945a8d4f",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/run.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/run.log",
+      "bytes": 331,
+      "sha256": "2f775275529fcfe58bc52b87a96b2eefe308fff165de38b6fd69ba090cec1639",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/host-model-final/workspace/source.bin": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/host-model-final/workspace/source.bin",
+      "bytes": 42,
+      "sha256": "53a9a61a9c2476e07b24ead70579c6f836ae44f78d925edb52a5b416077a5f2a",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/PTExecRecoveryTest": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/PTExecRecoveryTest",
+      "bytes": 105068,
+      "sha256": "9d0e8f6c384d8bce5052437d28db6a349777a29c99ad2d3b4c128452ad6ba9b7",
+      "mode": 493,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/PTExecRecoveryTest-dependencies-00.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/PTExecRecoveryTest-dependencies-00.log",
+      "bytes": 10106,
+      "sha256": "1e8f4136fba689c4c5138732dcaeb34513150f963b2a4920e11c51246cbf9d03",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/PTExecRecoveryTest-dependencies-01.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/PTExecRecoveryTest-dependencies-01.log",
+      "bytes": 3261,
+      "sha256": "5b5b1a51d3ee741047c26b41add6bd34cd9ac313cf7d6f01e661abcdc52d188d",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/PTExecRecoveryTest-dependencies-02.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/PTExecRecoveryTest-dependencies-02.log",
+      "bytes": 7132,
+      "sha256": "4e9945851a0fd15e560178693c1312fcf23863753ffc51ee0bf00335420197bb",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/PTExecRecoveryTest-dependencies-03.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/PTExecRecoveryTest-dependencies-03.log",
+      "bytes": 2662,
+      "sha256": "c23ef529c785468dacb700fcbfeb8425236c9e8fcaa4b977c3771a966e557cac",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/PTExecRecoveryTest-dependencies-04.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/PTExecRecoveryTest-dependencies-04.log",
+      "bytes": 2936,
+      "sha256": "e1f7596814f177fdeef2850dea86b119e3851b5bfc8ffa3753b16809adfb8827",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/PTExecRecoveryTest-dependencies-05.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/PTExecRecoveryTest-dependencies-05.log",
+      "bytes": 1111,
+      "sha256": "ddd8905bfc82146654c7a145e262056065e1f6dc704076a4f96b60e971affb6a",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/PTExecRecoveryTest-dependencies-06.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/PTExecRecoveryTest-dependencies-06.log",
+      "bytes": 4741,
+      "sha256": "0482f99f93b3603e90742ff33b36e6299b87c0ef5dee3ade8c49a105eb77de99",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/PTExecRecoveryTest-dependencies-07.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/PTExecRecoveryTest-dependencies-07.log",
+      "bytes": 8520,
+      "sha256": "fad9752fb45f55bd201fe08fa28a3726c59dcd0d0a97cdb85213bf0f0eb176f4",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/PTExecRecoveryTest-dependencies-08.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/PTExecRecoveryTest-dependencies-08.log",
+      "bytes": 2787,
+      "sha256": "1f192fe62ece619be6d88a2eb02b0a026130d9d8ee2387791ab4e545a29b5a20",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/PTExecRecoveryTest-dependencies-09.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/PTExecRecoveryTest-dependencies-09.log",
+      "bytes": 2653,
+      "sha256": "6b987584a6c74fb8817a7124512d83b18df1c43a53f40741061c14a0343ad866",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/PTExecRecoveryTest-dependencies-10.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/PTExecRecoveryTest-dependencies-10.log",
+      "bytes": 191,
+      "sha256": "d54c6732445047ae7f1627bfbf1ecce6039788d39965043a3180033a97aaac1c",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/PTExecRecoveryTest-dependencies-11.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/PTExecRecoveryTest-dependencies-11.log",
+      "bytes": 2754,
+      "sha256": "e4faeae096c9ec48ef2fc5ad7099505e81e7e2ce0fe48974860884543a80b668",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/PTExecRecoveryTest-dependencies-12.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/PTExecRecoveryTest-dependencies-12.log",
+      "bytes": 2671,
+      "sha256": "c7ba9b4659696523b158251b58782db04ab261cbaa3ba9c8a33a76f1e25d7f57",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/PTExecRecoveryTest-dependencies-13.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/PTExecRecoveryTest-dependencies-13.log",
+      "bytes": 2700,
+      "sha256": "b07d0f6181a81bd4892e3d3ba2d642f861ddb380cf1eac93b0fced33761264ad",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/PTExecRecoveryTest-dependencies-14.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/PTExecRecoveryTest-dependencies-14.log",
+      "bytes": 2665,
+      "sha256": "e6d857bcb44c2f2752e7795df3426c8312bd2bd7d6ad93177da0fc47597b1cc5",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/PTExecRecoveryTest-dependencies-15.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/PTExecRecoveryTest-dependencies-15.log",
+      "bytes": 1767,
+      "sha256": "01c3547804956b0748114b63f1de3c6d9d5093feac2a7ff56dfeb2e0290c867a",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/PTExecRecoveryTest-preprocessed-wrapper.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/PTExecRecoveryTest-preprocessed-wrapper.log",
+      "bytes": 524675,
+      "sha256": "267ae9e042d62048f0efa490abb3aefd5244804d5c022024f389b33933dfc187",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/PTExecRecoveryTest.build.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/PTExecRecoveryTest.build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/compile-commands.json": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/compile-commands.json",
+      "bytes": 1890,
+      "sha256": "40a9739368dbfe57f4296d09931727992b81ecaa9c8223565892865d3a21542c",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/compiler-target-help.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/compiler-target-help.log",
+      "bytes": 7189,
+      "sha256": "f49f0114a73ba557163318b0fdad968b33b41a939e5766a83460468bda9c7a79",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/compiler-version.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/compiler-version.log",
+      "bytes": 247,
+      "sha256": "5946ce0c1a43a84e1c7af8cfaa306b2f4bd276dd02164560d5674bcc91250d0b",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/manifest.json": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/manifest.json",
+      "bytes": 49002,
+      "sha256": "9960d3e5afa597d7b2d733f1443c4e16981eb0b7f14c07e79d3c2d1c96945055",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/runtime-libamiga-a.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/runtime-libamiga-a.log",
+      "bytes": 156,
+      "sha256": "c2c8e44936c32e01094e9de761e57c62c7bb834fbf6cabd464465bf3b17090c4",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/runtime-libgcc-a.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/runtime-libgcc-a.log",
+      "bytes": 125,
+      "sha256": "b1912e77c4c1160ce749ca74fbe6edabd5896c2291188e718a9cdfd72c84d57a",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/runtime-libnix-a.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/runtime-libnix-a.log",
+      "bytes": 121,
+      "sha256": "1ca0a83ef891770cbbe671647c7aad9f925ed0b9756c8f85aca35c84961e202a",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/runtime-libnix20-a.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/runtime-libnix20-a.log",
+      "bytes": 123,
+      "sha256": "9060e4a22ea9e716b8f9cf85b5fe5e11a9e6c88ef938b9111d189acc2df8465b",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/runtime-libnixmain-a.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/runtime-libnixmain-a.log",
+      "bytes": 125,
+      "sha256": "dd28b9a8319d35bd81f76cd9479f889e7e5628be07a45ef138f35a729c640add",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/runtime-libstubs-a.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/runtime-libstubs-a.log",
+      "bytes": 156,
+      "sha256": "8ce0c56c26f8f09a8af8b76d62c4d380cbfbe8efde13fa64884d8e9e6c93027f",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "original/native-final/runtime-ncrt0-o.log": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/native-final/runtime-ncrt0-o.log",
+      "bytes": 120,
+      "sha256": "1562950e2e8cb15a51238fddb72e6e26f0ff2d5a774543473aba0d274a19c45f",
+      "mode": 420,
+      "role": "Actual executed helper, compiler/dependency/runtime log, generated header, product or original precompile invocation history"
+    },
+    "compiled-inputs/src/core/channels.c": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/core/channels.c",
+      "bytes": 6996,
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/core/channels.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/core/channels.h",
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/core/document.c": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/core/document.c",
+      "bytes": 9127,
+      "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/core/document.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/core/document.h",
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/core/mod_inspect.c": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/core/mod_inspect.c",
+      "bytes": 3513,
+      "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/core/mod_inspect.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/core/mod_inspect.h",
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/core/mod_project.c": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/core/mod_project.c",
+      "bytes": 23640,
+      "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/core/mod_project.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/core/mod_project.h",
+      "bytes": 5051,
+      "sha256": "c28407161729fc0fea2398f79341a866f03913b092769674bd871bb23adb59ee",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/core/pcm.c": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/core/pcm.c",
+      "bytes": 7061,
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/core/pcm.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/core/pcm.h",
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/core/pcm_internal.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/core/pcm_internal.h",
+      "bytes": 615,
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/core/pp20.c": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/core/pp20.c",
+      "bytes": 7187,
+      "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/core/pp20.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/core/pp20.h",
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/core/project.c": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/core/project.c",
+      "bytes": 39034,
+      "sha256": "e4fde542cdfc9b9bce585ef0cda0b5b09d07482f3ec89fddb8d79137b8b0e1c1",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/core/project.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/core/project.h",
+      "bytes": 5698,
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/core/recovery.c": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/core/recovery.c",
+      "bytes": 1395,
+      "sha256": "afcd236331f6cb8646e88512be9632395bcf2bc8340852f93fa8846ddf4a7878",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/core/recovery.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/core/recovery.h",
+      "bytes": 1945,
+      "sha256": "2766d77af8155e4798354640253ffcd79213db678f1bf792cae097514ed0197f",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/core/safe_save.c": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/core/safe_save.c",
+      "bytes": 885,
+      "sha256": "2643e37743d34aa3e77c0e76ef0edab90b7c0f0dff030f4b9668dcb5db7b6568",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/core/safe_save.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/core/safe_save.h",
+      "bytes": 966,
+      "sha256": "8f184c5af658e2fb81b5f5dec9773cf6767d9e8dcd7de8405cf7d2892a0cac6d",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/native/master_memory.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/native/master_memory.h",
+      "bytes": 1694,
+      "sha256": "ac898368849ec2d1892717d425b90c398da37a8799d536366a898e2e219e184a",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/native/recovery.c": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/native/recovery.c",
+      "bytes": 11454,
+      "sha256": "2479f6c64f7d80ef62768d739158c5664f2f10e57cb1f47ab787c43b08839bfb",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/native/recovery.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/native/recovery.h",
+      "bytes": 4707,
+      "sha256": "0502973dec3b4f60ba1fc6c3b4593192f51e8e7b1e924617338e20d2a169594a",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/platform/file_save.c": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/platform/file_save.c",
+      "bytes": 8604,
+      "sha256": "a26119e3819bd3f18cbb05b2bfe474ae97cd375bf7aaf0264e4ddf64a0373989",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/platform/file_save.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/platform/file_save.h",
+      "bytes": 1475,
+      "sha256": "0b17cd45c8307aea727fe737196fcf8cd4ce83e4715fe5ba0e900deb6b28d814",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/platform/project_file.c": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/platform/project_file.c",
+      "bytes": 842,
+      "sha256": "fcd275495cd60b4cb92482081e21cf41d79957c48b247a811c56eb1bc3e84731",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/platform/project_file.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/platform/project_file.h",
+      "bytes": 372,
+      "sha256": "9bc2e3babc4956a2d665d150287c5a405bf0e08f0642620f0f971262b78f7b8f",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/platform/project_import.c": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/platform/project_import.c",
+      "bytes": 2057,
+      "sha256": "05378be74d33324cf854217f23304f594e7bc04b4d1fe50d3ae8bfb688b76394",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/platform/project_import.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/platform/project_import.h",
+      "bytes": 224,
+      "sha256": "66745961eee8c4f7b1fbd9fc96f28b67f6746ca1159120fc1111f286ed81b9cf",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/platform/recovery_file.c": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/platform/recovery_file.c",
+      "bytes": 4132,
+      "sha256": "4dc3ed93938f4ab9f1affb4a7072db378da7b272615b83bc7e5c3369bbfc4f4a",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/platform/recovery_file.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/platform/recovery_file.h",
+      "bytes": 2121,
+      "sha256": "fed054f4047729acc924eb16a30e7e2194dda6acf36b58ad3ea956e6f26634f5",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/platform/recovery_find.c": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/platform/recovery_find.c",
+      "bytes": 2416,
+      "sha256": "b6a59dc6ac650d7174d02d80a655622d17f6e776a289c3305d45a29f194dc5c2",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/platform/recovery_find.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/platform/recovery_find.h",
+      "bytes": 1645,
+      "sha256": "11497e0445681b4778f7fc4899961a37eed9c4339ce164a506ea83815949fc8d",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/platform/recovery_store.c": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/platform/recovery_store.c",
+      "bytes": 2418,
+      "sha256": "af61831d1e356ad78b8d5a1d7675050bcb1b7a88fb9c93ca3115642a61bbbeff",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/src/platform/recovery_store.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/src/platform/recovery_store.h",
+      "bytes": 1905,
+      "sha256": "6e3d1b65c25cd944a84fc184a4b8638b926595f5f74aa44a56d1f58594d91f8b",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/tests/native_exec_memory.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/tests/native_exec_memory.h",
+      "bytes": 1506,
+      "sha256": "ce0f2b696ce7767c0da8a2a44ac7730bc207f81e4f6b86bfd172353989e664b9",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/tests/native_exec_recovery_test.c": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/tests/native_exec_recovery_test.c",
+      "bytes": 1822,
+      "sha256": "144b8b28eb989a17a9f0471a261193a7e2fac58001b37260d96b1cab562e7c22",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/tests/native_recovery_cases.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/tests/native_recovery_cases.h",
+      "bytes": 7115,
+      "sha256": "56f461776566ad60cb655f519a737164f078e900fd00883293eb46b185509d5b",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/tests/native_recovery_configuration_cases.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/tests/native_recovery_configuration_cases.h",
+      "bytes": 7737,
+      "sha256": "efb476d53aed58a5f922de1624a06982f9c0e594e9b98bcb498f3c25519546db",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/tests/recovery_file_test.c": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/tests/recovery_file_test.c",
+      "bytes": 8174,
+      "sha256": "1ff1f67d994b66681de349cfe15d31fcdaec0ae8659e2233ffba584e8930adbf",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/tests/recovery_find_cases.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/tests/recovery_find_cases.h",
+      "bytes": 3509,
+      "sha256": "6fd2f77b4ca742d0479a80621b6a8d05cd1c5621480c40def6fd99377214a565",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/tests/recovery_schedule_cases.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/tests/recovery_schedule_cases.h",
+      "bytes": 2883,
+      "sha256": "2b4dcb67647569c9e786dcd3365959434730a442c71fe107353e2f76a60b13a8",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "compiled-inputs/tests/recovery_store_cases.h": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/tests/recovery_store_cases.h",
+      "bytes": 4212,
+      "sha256": "6a70b2734fbb1d4f7e97830ad70c27180ca2c64ff4f8e525abb0eba37b015b67",
+      "mode": 420,
+      "role": "Exact final compiled canonical source/header; current working equivalence verified"
+    },
+    "declarations/tools/build_recovery.py": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/tools/build_recovery.py",
+      "bytes": 1648,
+      "sha256": "5f0a6470d08a3d822ba2b850824309d30a0f76088a7c6d5d5f02f6554bf97361",
+      "mode": 420,
+      "role": "Canonical build or host test declaration; committed equivalence verified"
+    },
+    "declarations/tests/test_native_recovery_config.py": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/tests/test_native_recovery_config.py",
+      "bytes": 1615,
+      "sha256": "1b1ace20ed65f3c463c0acb524641652058552cd4fd326d8d05763a08206fd56",
+      "mode": 420,
+      "role": "Canonical build or host test declaration; committed equivalence verified"
+    },
+    "declarations/tests/test_recovery_file.py": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/tests/test_recovery_file.py",
+      "bytes": 1183,
+      "sha256": "7129b5e1eb385b48ce758fa6f51b0599eeee652de561c7db0be1e010dbd919ea",
+      "mode": 420,
+      "role": "Canonical build or host test declaration; committed equivalence verified"
+    },
+    "declarations/tools/build_diagnostic.py": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-03slmkoq/source-final/tools/build_diagnostic.py",
+      "bytes": 5879,
+      "sha256": "a5a42c8a811eb4e5ce744157afd2715de8f4c9c7d392b3b7b40f1dc6f459a805",
+      "mode": 420,
+      "role": "Canonical build or host test declaration; committed equivalence verified"
+    },
+    "references/recovery-controller-host/README.md": {
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/recovery-controller-host/README.md",
+      "bytes": 3083,
+      "sha256": "5211098a7f1ecef74e245fe7c43b1028e720e588d18cf638aa6f8e27754f0fef",
+      "mode": 420,
+      "role": "Earlier reviewed production/controller host proof; full prior payload remains separately persistent"
+    },
+    "references/recovery-controller-host/manifest.json": {
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/recovery-controller-host/manifest.json",
+      "bytes": 77334,
+      "sha256": "7f82c473cbe98c1cf159790b045e1c8b3c885e27b2b18238c304a44a103cfa16",
+      "mode": 420,
+      "role": "Earlier reviewed production/controller host proof; full prior payload remains separately persistent"
+    },
+    "references/recovery-controller-host/packet-provenance.json": {
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/recovery-controller-host/packet-provenance.json",
+      "bytes": 701,
+      "sha256": "aa1b643e1f460dcf35b0ccb22f4408bcb5c88a6d535eff039cccb995b2926a39",
+      "mode": 420,
+      "role": "Earlier reviewed production/controller host proof; full prior payload remains separately persistent"
+    },
+    "references/recovery-controller-host/SHA256SUMS": {
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/evidence/enhanced-editor/recovery-controller-host/SHA256SUMS",
+      "bytes": 326,
+      "sha256": "0487ac810b9e05eb9ef562209a89bce5385df0a7c1a07bcb96273148c92da0da",
+      "mode": 420,
+      "role": "Earlier reviewed production/controller host proof; full prior payload remains separately persistent"
+    },
+    "initial-packet-history/README.md": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-initial-packet-history/README.md",
+      "bytes": 2866,
+      "sha256": "0da77eb28c34048dad41652e5c0de09e2ae892789e4697e3dad4b99444075a38",
+      "mode": 420,
+      "role": "Exact initial compact packet before two-declaration completeness correction; original proofs unchanged"
+    },
+    "initial-packet-history/SHA256SUMS": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-initial-packet-history/SHA256SUMS",
+      "bytes": 326,
+      "sha256": "df3e29cb81f4744538f3057397fa0d75bb3c7c33ea2ee57e1425e259c50d13c9",
+      "mode": 420,
+      "role": "Exact initial compact packet before two-declaration completeness correction; original proofs unchanged"
+    },
+    "initial-packet-history/manifest.json": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-initial-packet-history/manifest.json",
+      "bytes": 54841,
+      "sha256": "959b53b4a15bbecd3c787be04031ab8952f5af5488f92151fe1b3498a09c57d5",
+      "mode": 420,
+      "role": "Exact initial compact packet before two-declaration completeness correction; original proofs unchanged"
+    },
+    "initial-packet-history/packet-provenance.json": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-initial-packet-history/packet-provenance.json",
+      "bytes": 687,
+      "sha256": "6db8ffc75bd5339e3aaa972978e45056b3f7b43045d5833a08ddb184e079afe1",
+      "mode": 420,
+      "role": "Exact initial compact packet before two-declaration completeness correction; original proofs unchanged"
+    },
+    "initial-packet-history/payload.tar.gz": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-initial-packet-history/payload.tar.gz",
+      "bytes": 910352,
+      "sha256": "19960d8e0d634a8cbac9eeb03533862054de97030c727a5b8b2f807a122fde42",
+      "mode": 420,
+      "role": "Exact initial compact packet before two-declaration completeness correction; original proofs unchanged"
+    },
+    "independent/review.json": {
+      "original_path": "/private/tmp/protracker-recovery-native-settings-independent-review.json",
+      "bytes": 19799,
+      "sha256": "8a3ad33d62bbec9d1ea66d285752925b62d76f17724d2950b8e4d0fee8ea3540",
+      "mode": 420,
+      "role": "Independent read-only implementation and actual saved proof audit"
+    }
+  }
+}

@@ -1,0 +1,434 @@
+{
+  "scope": "Separate portable 68k compile/link supplement; HUNK never executed",
+  "base_commit": "1ab5ed42d85c8b33e656f8673484fb85309f3205",
+  "base_tree": "1f26c7e4aa5aeba8007d7b2c7302c45cf948388e",
+  "source_files": 7942,
+  "six_new_paths": [
+    "src/core/scheduled_output.c",
+    "src/core/scheduled_output.h",
+    "tests/scheduled_output_test.c",
+    "tests/test_scheduled_output.py",
+    "docs/SCHEDULED_OUTPUT.md",
+    "tools/build_scheduled_output_test.py"
+  ],
+  "member_count": 52,
+  "original_bytes": 2749630,
+  "members": [
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/native-final-v3/PTScheduledOutputTest",
+      "sha256": "3ea907eb5607d3a10ba3ed605f54d31aad39876d4435525cecc1fb1bbdb638ca",
+      "bytes": 39824,
+      "mode": 493,
+      "member": "native-build/PTScheduledOutputTest",
+      "role": "Exact compiler/runtime query/full-M/preprocess/build logs and linked HUNK; not target execution"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/native-final-v3/PTScheduledOutputTest.build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "mode": 420,
+      "member": "native-build/PTScheduledOutputTest.build.log",
+      "role": "Exact compiler/runtime query/full-M/preprocess/build logs and linked HUNK; not target execution"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/native-final-v3/compile-commands.json",
+      "sha256": "b36a7d2901bfb196486a11a5a4f94a21a10dd11305a6adeb4e1970d729db0742",
+      "bytes": 1093,
+      "mode": 420,
+      "member": "native-build/compile-commands.json",
+      "role": "Exact compiler/runtime query/full-M/preprocess/build logs and linked HUNK; not target execution"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/native-final-v3/compiler-target-help.log",
+      "sha256": "f49f0114a73ba557163318b0fdad968b33b41a939e5766a83460468bda9c7a79",
+      "bytes": 7189,
+      "mode": 420,
+      "member": "native-build/compiler-target-help.log",
+      "role": "Exact compiler/runtime query/full-M/preprocess/build logs and linked HUNK; not target execution"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/native-final-v3/compiler-version.log",
+      "sha256": "5946ce0c1a43a84e1c7af8cfaa306b2f4bd276dd02164560d5674bcc91250d0b",
+      "bytes": 247,
+      "mode": 420,
+      "member": "native-build/compiler-version.log",
+      "role": "Exact compiler/runtime query/full-M/preprocess/build logs and linked HUNK; not target execution"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/native-final-v3/dependencies-00.log",
+      "sha256": "8c1491ac21f3ddd335b14108c0d4b8de6e4c12a52118ee426495da13714aa616",
+      "bytes": 4366,
+      "mode": 420,
+      "member": "native-build/dependencies-00.log",
+      "role": "Exact compiler/runtime query/full-M/preprocess/build logs and linked HUNK; not target execution"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/native-final-v3/dependencies-01.log",
+      "sha256": "b8a62f1d581911370796e214ff61a25814ec23022c1d578ca0197c507fd69028",
+      "bytes": 2836,
+      "mode": 420,
+      "member": "native-build/dependencies-01.log",
+      "role": "Exact compiler/runtime query/full-M/preprocess/build logs and linked HUNK; not target execution"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/native-final-v3/dependencies-02.log",
+      "sha256": "7649b08c78af4bc4cb103d1549be8cee06ac757e10a5b6578a43a16049038361",
+      "bytes": 2677,
+      "mode": 420,
+      "member": "native-build/dependencies-02.log",
+      "role": "Exact compiler/runtime query/full-M/preprocess/build logs and linked HUNK; not target execution"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/native-final-v3/dependencies-03.log",
+      "sha256": "92ec819ff7d6e393804022b7c06ea0558e530db37a234dd44bc0a333b0bbb928",
+      "bytes": 2935,
+      "mode": 420,
+      "member": "native-build/dependencies-03.log",
+      "role": "Exact compiler/runtime query/full-M/preprocess/build logs and linked HUNK; not target execution"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/native-final-v3/manifest.json",
+      "sha256": "c66dd72fd072dabf421f7f64f075b30980968a31728619d9c92a8d08e2c98707",
+      "bytes": 25687,
+      "mode": 420,
+      "member": "native-build/manifest.json",
+      "role": "Exact compiler/runtime query/full-M/preprocess/build logs and linked HUNK; not target execution"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/native-final-v3/preprocessed-fixture.log",
+      "sha256": "32ae2f9ef4c4dd06fe934958d7fd2a5b16dd098acf80d7c3f09c573a817a0e0a",
+      "bytes": 170259,
+      "mode": 420,
+      "member": "native-build/preprocessed-fixture.log",
+      "role": "Exact compiler/runtime query/full-M/preprocess/build logs and linked HUNK; not target execution"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/native-final-v3/runtime-libamiga-a.log",
+      "sha256": "c2c8e44936c32e01094e9de761e57c62c7bb834fbf6cabd464465bf3b17090c4",
+      "bytes": 156,
+      "mode": 420,
+      "member": "native-build/runtime-libamiga-a.log",
+      "role": "Exact compiler/runtime query/full-M/preprocess/build logs and linked HUNK; not target execution"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/native-final-v3/runtime-libgcc-a.log",
+      "sha256": "b1912e77c4c1160ce749ca74fbe6edabd5896c2291188e718a9cdfd72c84d57a",
+      "bytes": 125,
+      "mode": 420,
+      "member": "native-build/runtime-libgcc-a.log",
+      "role": "Exact compiler/runtime query/full-M/preprocess/build logs and linked HUNK; not target execution"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/native-final-v3/runtime-libnix-a.log",
+      "sha256": "1ca0a83ef891770cbbe671647c7aad9f925ed0b9756c8f85aca35c84961e202a",
+      "bytes": 121,
+      "mode": 420,
+      "member": "native-build/runtime-libnix-a.log",
+      "role": "Exact compiler/runtime query/full-M/preprocess/build logs and linked HUNK; not target execution"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/native-final-v3/runtime-libnix20-a.log",
+      "sha256": "9060e4a22ea9e716b8f9cf85b5fe5e11a9e6c88ef938b9111d189acc2df8465b",
+      "bytes": 123,
+      "mode": 420,
+      "member": "native-build/runtime-libnix20-a.log",
+      "role": "Exact compiler/runtime query/full-M/preprocess/build logs and linked HUNK; not target execution"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/native-final-v3/runtime-libnixmain-a.log",
+      "sha256": "dd28b9a8319d35bd81f76cd9479f889e7e5628be07a45ef138f35a729c640add",
+      "bytes": 125,
+      "mode": 420,
+      "member": "native-build/runtime-libnixmain-a.log",
+      "role": "Exact compiler/runtime query/full-M/preprocess/build logs and linked HUNK; not target execution"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/native-final-v3/runtime-libstubs-a.log",
+      "sha256": "8ce0c56c26f8f09a8af8b76d62c4d380cbfbe8efde13fa64884d8e9e6c93027f",
+      "bytes": 156,
+      "mode": 420,
+      "member": "native-build/runtime-libstubs-a.log",
+      "role": "Exact compiler/runtime query/full-M/preprocess/build logs and linked HUNK; not target execution"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/native-final-v3/runtime-ncrt0-o.log",
+      "sha256": "1562950e2e8cb15a51238fddb72e6e26f0ff2d5a774543473aba0d274a19c45f",
+      "bytes": 120,
+      "mode": 420,
+      "member": "native-build/runtime-ncrt0-o.log",
+      "role": "Exact compiler/runtime query/full-M/preprocess/build logs and linked HUNK; not target execution"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/tools/toolchain-pins.json",
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065",
+      "bytes": 2709,
+      "mode": 420,
+      "member": "pins/toolchain-pins.json",
+      "role": "Exact supplied compiler/Python/runtime pin control; SDK trees omitted"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-host-evidence-final/README.md",
+      "sha256": "49d83e913781740f0202fd2592c2cb94f8eccdf61955ed55d8554a80056e7537",
+      "bytes": 1559,
+      "mode": 420,
+      "member": "prior-host-packet-controls/README.md",
+      "role": "Exact prior host packet control; payload referenced by fingerprint without duplication"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-host-evidence-final/SHA256SUMS",
+      "sha256": "d9c9926d45cd620d4b60e427346d4d67fed1301146bcc76ec2daa78f654397fd",
+      "bytes": 326,
+      "mode": 420,
+      "member": "prior-host-packet-controls/SHA256SUMS",
+      "role": "Exact prior host packet control; payload referenced by fingerprint without duplication"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-host-evidence-final/manifest.json",
+      "sha256": "975b66dc957e14cd09b02fea0260ae524545c071cd69eff6a90eb6303e90c74b",
+      "bytes": 50651,
+      "mode": 420,
+      "member": "prior-host-packet-controls/manifest.json",
+      "role": "Exact prior host packet control; payload referenced by fingerprint without duplication"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-host-evidence-final/packet-provenance.json",
+      "sha256": "655cc5f9e0f4f8807db14438d0b692b9abbf911c1c23a90f0f83f44e9768651c",
+      "bytes": 17971,
+      "mode": 420,
+      "member": "prior-host-packet-controls/packet-provenance.json",
+      "role": "Exact prior host packet control; payload referenced by fingerprint without duplication"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/audit_native_v3.py",
+      "sha256": "7a5894095d40c77e713c19c1ac470ec74863767e96772f2c7cc96b27af554049",
+      "bytes": 4044,
+      "mode": 420,
+      "member": "records/audit_native_v3.py",
+      "role": "Exact inventory/equivalence/delta/handoff or archival helper; original host proof unchanged"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/final-v3.patch",
+      "sha256": "e7776a97dc2055dced0259878f3ac4fff1d57c358411581b604f5df62cb2a39b",
+      "bytes": 53599,
+      "mode": 420,
+      "member": "records/final-v3.patch",
+      "role": "Exact inventory/equivalence/delta/handoff or archival helper; original host proof unchanged"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/handoff-v3.json",
+      "sha256": "4ff8f23468a51e44295b4c6cee89997e72634b22bb42da6d7134cf3533d17567",
+      "bytes": 5600,
+      "mode": 420,
+      "member": "records/handoff-v3.json",
+      "role": "Exact inventory/equivalence/delta/handoff or archival helper; original host proof unchanged"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/own-native-v3-audit.json",
+      "sha256": "5032feed3daa0d2c9a685da2b02c286d4aad400df960757527a1bb68ced3e2ee",
+      "bytes": 3027,
+      "mode": 420,
+      "member": "records/own-native-v3-audit.json",
+      "role": "Exact inventory/equivalence/delta/handoff or archival helper; original host proof unchanged"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/package_native_build_supplement.py",
+      "sha256": "be25ecee9e4b921c95b77a001114c4f6981ea7ca33d2efbb70881913f497a65b",
+      "bytes": 9732,
+      "mode": 420,
+      "member": "records/package_native_build_supplement.py",
+      "role": "Exact inventory/equivalence/delta/handoff or archival helper; original host proof unchanged"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-manifest-v2.json",
+      "sha256": "1f8884f010132f799422c6eb988491895fbd1181c3c8359fbb360f83d60100ab",
+      "bytes": 1084893,
+      "mode": 420,
+      "member": "records/source-manifest-v2.json",
+      "role": "Exact inventory/equivalence/delta/handoff or archival helper; original host proof unchanged"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-manifest-v3.json",
+      "sha256": "f5aeebbdfa5700da6844d7c99f9e22a48fc58f7a60b2ba168b94a6cb521a9450",
+      "bytes": 1085227,
+      "mode": 420,
+      "member": "records/source-manifest-v3.json",
+      "role": "Exact inventory/equivalence/delta/handoff or archival helper; original host proof unchanged"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/v2-v3-source-equivalence.json",
+      "sha256": "6dccab31e9cc121cd89be82596945bf6370091a7fecabd93e8f70f0b6e68341b",
+      "bytes": 961,
+      "mode": 420,
+      "member": "records/v2-v3-source-equivalence.json",
+      "role": "Exact inventory/equivalence/delta/handoff or archival helper; original host proof unchanged"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-native-v3-independent-review.json",
+      "sha256": "2216cf5f2cb75f59ea2416c9e41543be52b81ab435206c4cf5c3ab5ec718d571",
+      "bytes": 10838,
+      "mode": 420,
+      "member": "reviews/independent-native-build-review.json",
+      "role": "Exact independent read-only builder and successful cross-build provenance review"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-host-packet-independent-review.json",
+      "sha256": "2fe21f3d0eba7376fc9c09cf367b9b31f5444dbe0fa336497870a52c194d398d",
+      "bytes": 31349,
+      "mode": 420,
+      "member": "reviews/protracker-scheduled-output-host-packet-independent-review.json",
+      "role": "Original preceding host/packet review; no new sanitizer run"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-independent-review.json",
+      "sha256": "2271e5e10ab0b26f968e90a597121e3e79e5f65d3d0ad36c9208be1ce49e12ac",
+      "bytes": 6154,
+      "mode": 420,
+      "member": "reviews/protracker-scheduled-output-independent-review.json",
+      "role": "Original preceding host/packet review; no new sanitizer run"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v3/docs/SCHEDULED_OUTPUT.md",
+      "sha256": "0ffe98e6ec2d841a5b5f6369e2f2e6f918deeacff85123f60d0161717814f049",
+      "bytes": 4651,
+      "mode": 292,
+      "member": "source/docs/SCHEDULED_OUTPUT.md",
+      "role": "Exact six-file new delta and complete native compile/declaration/flag/runtime-recipe closure"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v3/src/core/channels.h",
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "bytes": 1818,
+      "mode": 292,
+      "member": "source/src/core/channels.h",
+      "role": "Exact six-file new delta and complete native compile/declaration/flag/runtime-recipe closure"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v3/src/core/document.h",
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "bytes": 1965,
+      "mode": 292,
+      "member": "source/src/core/document.h",
+      "role": "Exact six-file new delta and complete native compile/declaration/flag/runtime-recipe closure"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v3/src/core/elapsed_clock.c",
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "bytes": 3917,
+      "mode": 292,
+      "member": "source/src/core/elapsed_clock.c",
+      "role": "Exact six-file new delta and complete native compile/declaration/flag/runtime-recipe closure"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v3/src/core/elapsed_clock.h",
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "bytes": 1659,
+      "mode": 292,
+      "member": "source/src/core/elapsed_clock.h",
+      "role": "Exact six-file new delta and complete native compile/declaration/flag/runtime-recipe closure"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v3/src/core/mod_inspect.h",
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "bytes": 1240,
+      "mode": 292,
+      "member": "source/src/core/mod_inspect.h",
+      "role": "Exact six-file new delta and complete native compile/declaration/flag/runtime-recipe closure"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v3/src/core/pcm.h",
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "bytes": 2494,
+      "mode": 292,
+      "member": "source/src/core/pcm.h",
+      "role": "Exact six-file new delta and complete native compile/declaration/flag/runtime-recipe closure"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v3/src/core/pp20.h",
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "bytes": 966,
+      "mode": 292,
+      "member": "source/src/core/pp20.h",
+      "role": "Exact six-file new delta and complete native compile/declaration/flag/runtime-recipe closure"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v3/src/core/project.h",
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8",
+      "bytes": 5698,
+      "mode": 292,
+      "member": "source/src/core/project.h",
+      "role": "Exact six-file new delta and complete native compile/declaration/flag/runtime-recipe closure"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v3/src/core/sample_cache.c",
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+      "bytes": 4018,
+      "mode": 292,
+      "member": "source/src/core/sample_cache.c",
+      "role": "Exact six-file new delta and complete native compile/declaration/flag/runtime-recipe closure"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v3/src/core/sample_cache.h",
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6",
+      "bytes": 1999,
+      "mode": 292,
+      "member": "source/src/core/sample_cache.h",
+      "role": "Exact six-file new delta and complete native compile/declaration/flag/runtime-recipe closure"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v3/src/core/scheduled_output.c",
+      "sha256": "940979a07c48679e141722cc672b967d9e4dffd575ba126038a3fd111ec55405",
+      "bytes": 9473,
+      "mode": 292,
+      "member": "source/src/core/scheduled_output.c",
+      "role": "Exact six-file new delta and complete native compile/declaration/flag/runtime-recipe closure"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v3/src/core/scheduled_output.h",
+      "sha256": "3289945d9446b373d8aa1897cb2c432f08ef253b443a81cd4dde39230df9b9da",
+      "bytes": 6515,
+      "mode": 292,
+      "member": "source/src/core/scheduled_output.h",
+      "role": "Exact six-file new delta and complete native compile/declaration/flag/runtime-recipe closure"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v3/tests/scheduled_output_test.c",
+      "sha256": "cde1db9470f14575f418bc7b749e7a2950b40112c252afb1b20b3258a9ebd864",
+      "bytes": 17562,
+      "mode": 292,
+      "member": "source/tests/scheduled_output_test.c",
+      "role": "Exact six-file new delta and complete native compile/declaration/flag/runtime-recipe closure"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v3/tests/test_scheduled_output.py",
+      "sha256": "75f8482facc0951592c8fbeb388f02ae37b75abcc332dd2e16e279792fa777a3",
+      "bytes": 655,
+      "mode": 292,
+      "member": "source/tests/test_scheduled_output.py",
+      "role": "Exact six-file new delta and complete native compile/declaration/flag/runtime-recipe closure"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v3/tools/build_core_tests.py",
+      "sha256": "1948232ab42449eb518e49ee55276542b102d7461f0f58d8aa273588a20a0d55",
+      "bytes": 38970,
+      "mode": 292,
+      "member": "source/tools/build_core_tests.py",
+      "role": "Exact six-file new delta and complete native compile/declaration/flag/runtime-recipe closure"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v3/tools/build_diagnostic.py",
+      "sha256": "a5a42c8a811eb4e5ce744157afd2715de8f4c9c7d392b3b7b40f1dc6f459a805",
+      "bytes": 5879,
+      "mode": 292,
+      "member": "source/tools/build_diagnostic.py",
+      "role": "Exact six-file new delta and complete native compile/declaration/flag/runtime-recipe closure"
+    },
+    {
+      "original_path": "/private/tmp/protracker-scheduled-output-lvf80_5i/source-final-v3/tools/build_scheduled_output_test.py",
+      "sha256": "1e53387fc1f3c0ab204102eae39595f13d3544c4de290928a221b6df6b65825b",
+      "bytes": 13472,
+      "mode": 292,
+      "member": "source/tools/build_scheduled_output_test.py",
+      "role": "Exact six-file new delta and complete native compile/declaration/flag/runtime-recipe closure"
+    }
+  ]
+}

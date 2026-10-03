@@ -29,6 +29,7 @@ static time_t recovery_fixture_time(time_t *out)
 #include "../src/native/recovery.c"
 #undef time
 #undef GetVar
+#include "native_recovery_configuration_cases.h"
 static void native_recovery_cases(const char *directory,const char *source,
     const struct pt_project *project,const struct pt_allocator *allocator)
 {
@@ -62,6 +63,7 @@ static void native_recovery_cases(const char *directory,const char *source,
     recovery_fixture_now+=31;
     assert(pt_native_recovery_poll(&r,project,1,0,0)==PT_RECOVERY_SKIPPED && !r.store.opened);
     assert(pt_native_recovery_poll(&r,project,1,0,1)==PT_RECOVERY_SAVED && r.store.opened);
+    native_recovery_configuration_owner_refusal(&r);
     assert(!pt_native_recovery_configure(&r,allocator)); /* Never lose a live owner. */
     assert(pt_native_recovery_find(&r,&candidate)==PT_RECOVERY_FOUND);
     assert(candidate.info.timestamp==(uint64_t)recovery_fixture_now);
@@ -76,6 +78,8 @@ static void native_recovery_cases(const char *directory,const char *source,
     assert(pt_native_recovery_poll(&r,project,1,0,1)==PT_RECOVERY_SAVED);
     assert(pt_native_recovery_finish(&r,0) && r.store.opened); /* Keep on abnormal exit. */
     assert(pt_recovery_store_discard(&r.store)); /* Explicit fixture-owned cleanup. */
+    assert(live==owned);
+    native_recovery_configuration_cases(directory,source,project,allocator);
     assert(live==owned);
     puts("NATIVE RECOVERY PASS: explicit configuration, canonical identity, deferred writes, exact snapshot discovery, clean-state discard and subsequent undo snapshot");
 }

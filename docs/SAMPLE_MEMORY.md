@@ -91,9 +91,14 @@ uncertain submission, partial cancellation, out-of-order retirement and alias
 refusals. The clock/backend used by these checks is synthetic. This implements a
 portable ownership contract; it does not integrate song playback, move the existing
 exclusive Paula prepared object, implement IRQ activation or qualify native or
-physical timing. A separate portable native build/test is later work. See
-[contract](SCHEDULED_OUTPUT.md) and
-[host evidence](../evidence/enhanced-editor/scheduled-output-host/README.md).
+physical timing. A standalone pinned portability crossbuild now produces a
+39,824-byte HUNK from the unchanged host-tested implementation and four translation
+units, with active original SDK assertions. It has not run on a native target;
+a later fixture run must explicitly provide a 262,144-byte stack for two 64 KiB
+local before-images. The dirty shared core-build recipe remains untouched. See
+[contract](SCHEDULED_OUTPUT.md),
+[host evidence](../evidence/enhanced-editor/scheduled-output-host/README.md) and
+[compiler evidence](../evidence/enhanced-editor/scheduled-output-native-build/README.md).
 
 ## Physical MOD export memory qualification — 3 October 2026
 
@@ -3462,10 +3467,17 @@ protection. The identical allocator-alias probe changes from expected baseline
 RC20 to candidate RC0. The existing native fixture compiles the changed controller
 indirectly with real SDK headers and its GetVar/time substitutions. That is compile/
 link proof, without native execution of the new typed assertions. A distinct
-native assertion fixture is being prepared. Preferences requester wiring, actual
-crash/endurance and physical settings/storage acceptance remain unfinished. No
-ENV writes or editor UI change were introduced. See
-[host and compiler evidence](../evidence/enhanced-editor/recovery-controller-host/README.md).
+105,068-byte native fixture now compiles those assertions: real canonical directory,
+missing-path and non-directory refusal, exact state preservation and an actual
+snapshot-owner refusal hook. Ordinary argc3 mode is required; seed mode skips the
+new tests. A separate host DOS path model passes sanitizers with synthetic ownership;
+the native HUNK remains NOT RUN. Preferences requester wiring, actual crash/
+endurance and physical settings/storage acceptance remain unfinished. No ENV
+writes or editor UI change were introduced. See
+[controller host evidence](../evidence/enhanced-editor/recovery-controller-host/README.md)
+and [new assertion compiler evidence](../evidence/enhanced-editor/recovery-controller-native-build/README.md).
+The latter supplement also supplies two canonical declaration files previously
+retained as hashes only; the earlier packet is preserved unchanged.
 
 ## Recovery setting read failures
 

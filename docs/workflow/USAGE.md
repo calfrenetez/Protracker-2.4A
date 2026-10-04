@@ -70,9 +70,10 @@ slots remain empty targets. Return uses the captured pattern/row/track/order.
 The frontend flow mode is explicit: the native supported four-track classic CIA
 context uses classic128; enhanced offline context uses extended256.
 
-The first changed-version inherited resolver preparation still performs the
-existing synchronous project validation. It is deferred during active playback;
-same-version cached resolution advances at most16 ticks per active idle service
+Changed-version inherited resolver preparation validates the project in bounded,
+cancellable steps while stopped and yields before replay. First uncached
+preparation remains refused during active playback; same-version cached
+resolution advances at most16 ticks per active idle service
 (256 while stopped). Waveform summaries read at most4096 PCM values per step and
 publish only complete views. Selection/status redraw reuses the completed bins.
 A changed viewport displays a preparation placeholder until its own summary is

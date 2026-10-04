@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCES = ['tests/editor_test.c', 'src/editor/editor.c','src/editor/song.c', 'src/editor/view.c', 'src/editor/sampler.c','src/editor/slots.c', 'src/core/pcm_filtered.c', 'src/core/slices.c', 'src/core/wav.c', 'src/core/svx.c', 'src/core/raw.c',
            'src/core/document.c', 'src/core/pp20.c', 'src/core/pattern.c', 'src/core/project.c',
            'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/channels.c', 'src/core/pcm.c']
+SOURCES += ['src/editor/workflow.c', 'src/editor/sample_range.c', 'src/editor/wave_summary.c', 'src/core/sample_usage.c', 'src/core/event_resource.c', 'src/core/flow.c', 'src/core/pitch.c']
 class Editor(unittest.TestCase):
     def test_native_shared_controller_and_planar_display(self):
         with tempfile.TemporaryDirectory() as tmp:

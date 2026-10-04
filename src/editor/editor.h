@@ -6,6 +6,7 @@
 #include "song.h"
 #include "render.h"
 #include "recent.h"
+#include "workflow.h"
 #define PT_EDITOR_ROWS 20
 /* One grid for parameter rows, command rows and their mouse targets. */
 #define PT_EDITOR_CONTROL_Y 2
@@ -16,7 +17,7 @@
 #define PT_EDITOR_HEADER_Y 234
 #define PT_EDITOR_PATTERN_Y 250
 #define PT_EDITOR_BOTTOM_Y 491
-enum pt_editor_action {PT_UI_NONE,PT_UI_SAVE,PT_UI_QUIT,PT_UI_PLAY,PT_UI_PATTERN,PT_UI_STOP,PT_UI_AUDITION,PT_UI_LOAD,PT_UI_SAVE_AS,PT_UI_EXPORT_MOD,PT_UI_NEW,PT_UI_SAMPLE_LOAD,PT_UI_SAMPLE_SAVE,PT_UI_SAMPLE_SVX,PT_UI_RAW_LOAD,PT_UI_RAW_SAVE,PT_UI_SOURCE_LOAD,PT_UI_RENDER,PT_UI_BOUNCE,PT_UI_STEMS,PT_UI_RECENT_LOAD,PT_UI_RECENT_REMOVE,PT_UI_RECENT_CLEAR,PT_UI_EXPORT_MOD8};
+enum pt_editor_action {PT_UI_NONE,PT_UI_SAVE,PT_UI_QUIT,PT_UI_PLAY,PT_UI_PATTERN,PT_UI_STOP,PT_UI_AUDITION,PT_UI_LOAD,PT_UI_SAVE_AS,PT_UI_EXPORT_MOD,PT_UI_NEW,PT_UI_SAMPLE_LOAD,PT_UI_SAMPLE_SAVE,PT_UI_SAMPLE_SVX,PT_UI_RAW_LOAD,PT_UI_RAW_SAVE,PT_UI_SOURCE_LOAD,PT_UI_RENDER,PT_UI_BOUNCE,PT_UI_STEMS,PT_UI_RECENT_LOAD,PT_UI_RECENT_REMOVE,PT_UI_RECENT_CLEAR,PT_UI_EXPORT_MOD8,PT_UI_WORKFLOW_STOP_APPLY};
 struct pt_editor_selection {unsigned active,marking,pattern,r0,r1,c0,c1,anchor_row,anchor_channel;};
 struct pt_editor {
     struct pt_project *project;
@@ -48,6 +49,7 @@ struct pt_editor {
     uint32_t loop_fade,slice_markers[4096];
     size_t slice_count;
     unsigned slice_pending,slice_slot,slice_generation,slice_threshold,slice_gap_ms,slice_zero,sample_ui;
+    struct pt_editor_workflow workflow;
     struct pt_pattern_command commands[128];
     struct pt_event_change changes[2048];
     unsigned pattern,row,first_row,field,sample,octave,editing,quit_pending,position,panel,load_pending,new_pending,new_channels;
@@ -94,7 +96,16 @@ void pt_editor_status(struct pt_editor *,const char *);
 void pt_editor_saved(struct pt_editor *);
 int pt_editor_dirty(const struct pt_editor *);
 /* Follow normal playback without moving an active edit cursor or audition. */
+void pt_editor_reveal_cursor(struct pt_editor *);
 void pt_editor_follow_playback(struct pt_editor *);
+/* Owner-task workflow service. Input helpers return1 only when consumed. */
+int pt_editor_workflow_key(struct pt_editor *,unsigned,unsigned,enum pt_editor_action *);
+int pt_editor_workflow_click(struct pt_editor *,int,int,enum pt_editor_action *);
+int pt_editor_workflow_idle(struct pt_editor *);
+void pt_editor_workflow_cancel(struct pt_editor *);
+void pt_editor_workflow_apply(struct pt_editor *);
+void pt_editor_event_resource(struct pt_editor *,unsigned open);
+void pt_editor_workflow_loop(struct pt_editor *,unsigned operation);
 /* Current half-open selection, normalized across reverse/cross-page marking. */
 int pt_editor_selection(const struct pt_editor *,struct pt_editor_selection *);
 void pt_editor_note(const struct pt_event *,char out[4]);

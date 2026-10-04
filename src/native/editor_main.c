@@ -66,6 +66,10 @@ static int editor_init_memory(struct pt_editor *e,struct pt_project *p)
     size_t available;
     memset(e,0,sizeof(*e));
     if(!pt_editor_init(e,p))return 0;
+    /* This frontend uses the pinned classic CIA replay for its supported
+       four-track context. Enhanced offline projects retain extended flow. */
+    if(p->channels.count==4 && p->order_count<=128 && p->speed==6 && p->bpm==125)
+        e->workflow.flow_mode=PT_FLOW_CLASSIC128;
     available=pt_master_memory_available(&master_memory);
     pt_sampler_init(&e->sampler,&a,available/2);
     pt_document_init(&e->sample_source,&a);
@@ -457,6 +461,7 @@ int main(int argc,char **argv)
             unsigned was_active=editor->playback.active,old_row=editor->playback.row;
             WaitIO((struct IORequest *)clock_request);clock_pending=0;
             pt_paula_poll(&audio,&editor->playback);pt_editor_follow_playback(editor);
+            if(pt_editor_workflow_idle(editor))redraw=1;
             {
                 enum pt_recovery_tick_result recovery_result=pt_native_recovery_poll(&recovery,
                     editor->project,editor->history.revision,editor->history.saved_revision,
@@ -496,11 +501,18 @@ int main(int argc,char **argv)
                 error=pt_paula_play(&audio,editor->project,action==PT_UI_PATTERN,editor->position,editor->pattern);
                 pt_editor_status(editor,error?error:action==PT_UI_PATTERN?"PLAYING PATTERN - PAULA CIA":"PLAYING SONG - PAULA CIA");
             }
+            if(action==PT_UI_AUDITION && editor->playback.active) {
+                action=PT_UI_NONE;pt_editor_status(editor,"AUDITION UNAVAILABLE DURING ACTIVE PLAYBACK - STOP FIRST");
+            }
             if(action==PT_UI_AUDITION) {
                 error=pt_paula_audition_progress(&audio,editor->project,editor->sample,856U>>editor->octave,conversion_progress,&conversion);
                 pt_editor_status(editor,error?error:"SAMPLE AUDITION - PAULA; STOP TO RELEASE");
             }
-            if(action==PT_UI_STOP && pt_editor_prepare_change(editor)) {pt_paula_stop(&audio);pt_editor_status(editor,"STOPPED - AUDIO RELEASED");}
+            if((action==PT_UI_STOP || action==PT_UI_WORKFLOW_STOP_APPLY) && pt_editor_prepare_change(editor)) {
+                pt_paula_stop(&audio);pt_paula_poll(&audio,&editor->playback);
+                pt_editor_status(editor,"STOPPED - AUDIO RELEASED");
+                if(action==PT_UI_WORKFLOW_STOP_APPLY)pt_editor_workflow_apply(editor);
+            }
             if(editor->history.revision!=revision && audio.started) {
                 if(audio.mode==2 || editor->sampler.generation!=generation)pt_paula_stop(&audio);
                 else {error=pt_paula_sync(&audio,editor->project);if(error)pt_editor_status(editor,error);}

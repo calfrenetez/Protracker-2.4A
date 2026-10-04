@@ -1,0 +1,856 @@
+{
+  "schema": 1,
+  "reference": "PT24G-030-WORKFLOW-v1",
+  "addendum_sha256": "41900a674a0024b4f83b6ff0bcf78d73d2f9153f2a4852c1ec98b3e79c4d9fb6",
+  "pre_edit_commit": "61f3b01e1bd45539bbaf85c8769cd8d5a46aca48",
+  "branch": "feat/hardware-independent-core",
+  "implementation": {
+    "ZT1": "IMPLEMENTED",
+    "ZT2": "IMPLEMENTED",
+    "ZT3": "IMPLEMENTED"
+  },
+  "native_validation": {
+    "ZT1": "NOT_VALIDATED",
+    "ZT2": "NOT_VALIDATED",
+    "ZT3": "NOT_VALIDATED"
+  },
+  "host_regression": {
+    "receipt": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-addendum-7ya6a7zc/owned-host-final/report.json",
+      "bytes": 172320,
+      "sha256": "2003422e7697b948f2424ee67e108fd53051205888649a192b469d00c811c5ee"
+    },
+    "passed": true,
+    "checks": [
+      {
+        "group": "sample_usage",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_sample_usage.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 1.7189888330030954,
+        "log": "sample_usage.log"
+      },
+      {
+        "group": "sampler_workflow",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_sampler_workflow.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 4.5293676250003045,
+        "log": "sampler_workflow.log"
+      },
+      {
+        "group": "sampler_copy_range_boundaries",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_sampler_copy_range_boundaries.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 4.594884374993853,
+        "log": "sampler_copy_range_boundaries.log"
+      },
+      {
+        "group": "sample_range",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_sample_range.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 0.44934800000919495,
+        "log": "sample_range.log"
+      },
+      {
+        "group": "wave_summary",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_wave_summary.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 0.5618679160106694,
+        "log": "wave_summary.log"
+      },
+      {
+        "group": "event_resource",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_event_resource.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 2.1804142920009326,
+        "log": "event_resource.log"
+      },
+      {
+        "group": "editor_workflow",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_editor_workflow.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 6.900584999995772,
+        "log": "editor_workflow.log"
+      },
+      {
+        "group": "workflow_view",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_workflow_view.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 6.897226415996556,
+        "log": "workflow_view.log"
+      },
+      {
+        "group": "sampler",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_sampler.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 3.918300082994392,
+        "log": "sampler.log"
+      },
+      {
+        "group": "slots",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_slots.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 6.119279000005918,
+        "log": "slots.log"
+      },
+      {
+        "group": "editor",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_editor.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 9.882601582998177,
+        "log": "editor.log"
+      },
+      {
+        "group": "pattern",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_pattern.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 1.6711499579978408,
+        "log": "pattern.log"
+      },
+      {
+        "group": "song",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_song.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 8.37683237499732,
+        "log": "song.log"
+      },
+      {
+        "group": "slices",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_slices.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 0.6151625839993358,
+        "log": "slices.log"
+      },
+      {
+        "group": "flow",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_flow.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 2.50423174999014,
+        "log": "flow.log"
+      },
+      {
+        "group": "editor_guard",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_editor_guard.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 6.778393459011568,
+        "log": "editor_guard.log"
+      },
+      {
+        "group": "editor_capture",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_editor_capture.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 6.579044875004911,
+        "log": "editor_capture.log"
+      },
+      {
+        "group": "sampler_pin_job",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_sampler_pin_job.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 3.9216634160111425,
+        "log": "sampler_pin_job.log"
+      },
+      {
+        "group": "sampler_paula",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_sampler_paula.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 4.1741154579940485,
+        "log": "sampler_paula.log"
+      },
+      {
+        "group": "sampler_wavetable",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_sampler_wavetable.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 4.614102833002107,
+        "log": "sampler_wavetable.log"
+      },
+      {
+        "group": "project",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_project.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 1.571464583001216,
+        "log": "project.log"
+      },
+      {
+        "group": "document",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_document.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 2.212264582994976,
+        "log": "document.log"
+      }
+    ],
+    "source_unchanged": true,
+    "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n"
+  },
+  "final_affected_clean": {
+    "receipt": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-addendum-7ya6a7zc/owned-host-sort-final/report.json",
+      "bytes": 166789,
+      "sha256": "0bb37be06f40fa7dd9ae42baa7de273134ec3134e1677b26e6479bc6a36779b2"
+    },
+    "passed": true,
+    "checks": [
+      {
+        "group": "editor",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_editor.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 9.91040779100149,
+        "log": "editor.log"
+      },
+      {
+        "group": "editor_workflow",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_editor_workflow.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 6.780212957994081,
+        "log": "editor_workflow.log"
+      },
+      {
+        "group": "editor_guard",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_editor_guard.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 6.805823249989771,
+        "log": "editor_guard.log"
+      },
+      {
+        "group": "editor_capture",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_editor_capture.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 6.520110708006541,
+        "log": "editor_capture.log"
+      },
+      {
+        "group": "workflow_view",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_workflow_view.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 6.823841916004312,
+        "log": "workflow_view.log"
+      },
+      {
+        "group": "workflow_performance",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_workflow_performance.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 6.842741582993767,
+        "log": "workflow_performance.log"
+      }
+    ],
+    "source_unchanged": true,
+    "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n"
+  },
+  "final_affected_display_overlay": {
+    "receipt": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-addendum-7ya6a7zc/working-host-sort-final/report.json",
+      "bytes": 167415,
+      "sha256": "14aba4bf6311dbd9e13baa8f815aa94da41ff230d107fa3b41c468e84ec2a3c5"
+    },
+    "passed": true,
+    "checks": [
+      {
+        "group": "editor",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_editor.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 10.107036583998706,
+        "log": "editor.log"
+      },
+      {
+        "group": "editor_workflow",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_editor_workflow.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 6.770545291001326,
+        "log": "editor_workflow.log"
+      },
+      {
+        "group": "editor_guard",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_editor_guard.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 326.2447882080014,
+        "log": "editor_guard.log"
+      },
+      {
+        "group": "editor_capture",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_editor_capture.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 6.683140832989011,
+        "log": "editor_capture.log"
+      },
+      {
+        "group": "workflow_view",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_workflow_view.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 6.882081082992954,
+        "log": "workflow_view.log"
+      },
+      {
+        "group": "workflow_performance",
+        "command": [
+          "/opt/homebrew/opt/python@3.14/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_workflow_performance.py",
+          "-v"
+        ],
+        "returncode": 0,
+        "seconds": 7.183397208005772,
+        "log": "workflow_performance.log"
+      }
+    ],
+    "source_unchanged": true,
+    "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n"
+  },
+  "performance": {
+    "owned": {
+      "master_active_bytes": 8388608,
+      "master_capacity_bytes": 8388864,
+      "frames": 1048576,
+      "bits": 24,
+      "channels": 2,
+      "summary_steps": 512,
+      "summary_reads": 2097152,
+      "summary_max_values": 4096,
+      "summary_begin_cpu_s": 2.3e-05,
+      "summary_total_cpu_s": 0.015427,
+      "summary_max_step_cpu_s": 3.7e-05,
+      "warm_calls": 128,
+      "warm_cpu_s": 3.5e-05,
+      "copy_active_bytes": 4194304,
+      "copy_idle_calls": 1029,
+      "copy_request_cpu_s": 5.6e-05,
+      "copy_idle_total_cpu_s": 0.010311,
+      "copy_max_idle_cpu_s": 0.007191,
+      "undo_cpu_s": 4e-05,
+      "redo_cpu_s": 5e-06,
+      "dispose_cpu_s": 2.1e-05,
+      "allocator_base_bytes": 8599802,
+      "allocator_copy_live_bytes": 12797530,
+      "allocator_undo_live_bytes": 12797530,
+      "sampler_retained_bytes": 4197728,
+      "copy_allocations": 3,
+      "allocator_peak_requested_bytes": 12797530,
+      "allocator_largest_request": 8388864,
+      "allocator_requests": 8,
+      "allocator_cumulative_requested_bytes": 12797530,
+      "final_live_allocations": 0,
+      "final_requested_bytes": 0
+    },
+    "working": {
+      "master_active_bytes": 8388608,
+      "master_capacity_bytes": 8388864,
+      "frames": 1048576,
+      "bits": 24,
+      "channels": 2,
+      "summary_steps": 512,
+      "summary_reads": 2097152,
+      "summary_max_values": 4096,
+      "summary_begin_cpu_s": 1.6e-05,
+      "summary_total_cpu_s": 0.015085,
+      "summary_max_step_cpu_s": 3.8e-05,
+      "warm_calls": 128,
+      "warm_cpu_s": 5.5e-05,
+      "copy_active_bytes": 4194304,
+      "copy_idle_calls": 1029,
+      "copy_request_cpu_s": 4.9e-05,
+      "copy_idle_total_cpu_s": 0.011261,
+      "copy_max_idle_cpu_s": 0.007413,
+      "undo_cpu_s": 3.3e-05,
+      "redo_cpu_s": 5e-06,
+      "dispose_cpu_s": 3.1e-05,
+      "allocator_base_bytes": 8599802,
+      "allocator_copy_live_bytes": 12797530,
+      "allocator_undo_live_bytes": 12797530,
+      "sampler_retained_bytes": 4197728,
+      "copy_allocations": 3,
+      "allocator_peak_requested_bytes": 12797530,
+      "allocator_largest_request": 8388864,
+      "allocator_requests": 8,
+      "allocator_cumulative_requested_bytes": 12797530,
+      "final_live_allocations": 0,
+      "final_requested_bytes": 0
+    }
+  },
+  "native_candidates": {
+    "owned": {
+      "build": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-addendum-7ya6a7zc/owned-native-final/core-build.json",
+        "bytes": 20590,
+        "sha256": "1e0e594d13ea1bb1871072d7d37ebe2f630e9b0204872ae3737ec3e64a9021ad"
+      },
+      "binaries": {
+        "PT24GEdit": {
+          "sha256": "24f84a4092b3224a3607ea228e5e5eb2d5496a44e8b70afc2e60b9ceb585496c",
+          "bytes": 306276
+        },
+        "PTWorkflowTest": {
+          "sha256": "0e0c658aa1f8375ffe58fd079d81971ea57839b4979d00b3c0c698ff9ed1966d",
+          "bytes": 204808
+        },
+        "PTGuardTest": {
+          "sha256": "908722556a4bc3033b1dcc107b9b8ba28c5dfc44f75195b00336828e0e292a0b",
+          "bytes": 1660
+        }
+      },
+      "compiler": "m68k-amigaos-gcc (GCC) 6.5.0b 20260807212032",
+      "compiler_sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+      "flags": [
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc/core",
+        "-Ibuild/dev",
+        "-fbbb=-"
+      ],
+      "build_command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "tools/build_core_tests.py",
+        "--cc",
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "--target",
+        "PT24GEdit",
+        "--target",
+        "PTWorkflowTest"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-addendum-7ya6a7zc/owned-candidate",
+      "log": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-addendum-7ya6a7zc/native-owned-sort-final.log",
+        "bytes": 2361,
+        "sha256": "609c62a32de3f46ecea4cc6ae7a025e3892a9f1fd2c5d0bc1091911b87150311"
+      }
+    },
+    "working": {
+      "build": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-addendum-7ya6a7zc/working-native-final/core-build.json",
+        "bytes": 20798,
+        "sha256": "6d5a7467e2f609eaa86b7390b2beec3800fd623c1827f80725afb1e520b0d358"
+      },
+      "binaries": {
+        "PT24GEdit": {
+          "sha256": "a2c286fa47512e4276f8828a56445a7aa7db6dc7449c6d398b50ac12c36292b5",
+          "bytes": 310608
+        },
+        "PTWorkflowTest": {
+          "sha256": "5c562c6e69d3c0aff6b8afa669561fac873ad01c72a29d8560bdca15f315e5b4",
+          "bytes": 205320
+        },
+        "PTGuardTest": {
+          "sha256": "908722556a4bc3033b1dcc107b9b8ba28c5dfc44f75195b00336828e0e292a0b",
+          "bytes": 1660
+        }
+      },
+      "compiler": "m68k-amigaos-gcc (GCC) 6.5.0b 20260807212032",
+      "compiler_sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+      "flags": [
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc/core",
+        "-Ibuild/dev",
+        "-fbbb=-"
+      ],
+      "build_command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "tools/build_core_tests.py",
+        "--cc",
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "--target",
+        "PT24GEdit",
+        "--target",
+        "PTWorkflowTest"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "log": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-addendum-7ya6a7zc/native-working-sort-final.log",
+        "bytes": 2361,
+        "sha256": "9f75a992fc800fc61f232127fcc1c26e7d0f314d2cc5a2287bd891fd93c67d86"
+      }
+    }
+  },
+  "emulator": "NOT RUN",
+  "physical_a1200": "NOT RUN",
+  "target_ownership_acquired": false,
+  "target_control_acquired": false,
+  "blockers": [
+    "Explicit cross-task coordination messaging authorization pending after automatic-review rejection",
+    "CODEX_START_HERE.txt and companion ACCEPTANCE_TESTS.md/SOURCES.md/JSON not supplied or found"
+  ],
+  "limits": [
+    "Performance clock() measures one host process CPU run under ASan/UBSan; not native030 latency or a worst-case bound",
+    "Allocator counters are requested payload bytes excluding headers/runtime/RSS; undo retains copies",
+    "Existing enhanced output timing and physical device/listening gates unchanged"
+  ]
+}

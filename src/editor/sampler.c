@@ -560,3 +560,408 @@ enum pt_edit_result pt_sampler_import_slot(struct pt_sampler *s,struct pt_projec
     v=version(s,sample);if(!v)return PT_EDIT_CAPACITY;
     return commit(s,p,h,slot,v);
 }
+#include "sampler_workflow.h"
+#include "mod_project.h"
+struct workflow_entry {
+    unsigned slot;struct pt_sample source;
+    struct pt_sample_version *previous,*before,*after;
+    size_t copied_values,copied_slices;
+    unsigned retained;
+};
+struct workflow_span {const void *data;size_t bytes;};
+struct pt_sampler_workflow {
+    struct pt_sampler *owner;struct pt_project *project;struct pt_pattern_history *history;
+    struct pt_project snapshot;struct pt_pattern_history history_snapshot;
+    struct pt_sample copy_source;unsigned source_slot;
+    unsigned generation,count,kind,ready,initialized,first_apply;
+    unsigned append,copy_started,copy_done,table_owned;
+    uint32_t start,end;size_t marker_first,copy_values,copy_slices;
+    struct pt_sample *table_after;
+    size_t bytes,reserved_bytes,span_count;struct workflow_span *spans;struct pt_sampler_workflow_stats stats;
+    struct workflow_entry entries[];
+};
+static int workflow_project_apart(const struct pt_project *p,const void *out,size_t bytes)
+{
+    unsigned i;size_t n;
+    if(!p || !out || !bytes || bytes>UINTPTR_MAX-(uintptr_t)out ||
+       !p->channels.count || p->channels.count>PT_CHANNEL_LIMIT ||
+       p->sample_count>PT_PROJECT_SAMPLES || p->pattern_count>PT_PROJECT_PATTERNS ||
+       p->order_count>PT_PROJECT_ORDERS || p->extension_count>4090)return 0;
+    n=(size_t)p->pattern_count*PT_PROJECT_ROWS*p->channels.count;
+    if(output_overlap(out,bytes,p,sizeof(*p)) ||
+       output_overlap(out,bytes,p->events,n*sizeof(*p->events)) ||
+       output_overlap(out,bytes,p->orders,p->order_count*sizeof(*p->orders)) ||
+       output_overlap(out,bytes,p->samples,p->sample_count*sizeof(*p->samples)) ||
+       output_overlap(out,bytes,p->extensions,p->extension_count*sizeof(*p->extensions)))return 0;
+    if((n && !p->events) || (p->order_count && !p->orders) ||
+       (p->sample_count && !p->samples) || (p->extension_count && !p->extensions))return 0;
+    for(i=0;i<p->sample_count;++i)if(!sample_output_disjoint(p->samples+i,out,bytes))return 0;
+    for(i=0;i<p->extension_count;++i) {
+        if((p->extensions[i].length && !p->extensions[i].data) ||
+           output_overlap(out,bytes,p->extensions[i].data,p->extensions[i].length))return 0;
+    }
+    return 1;
+}
+static int workflow_history_apart(const struct pt_pattern_history *h,const void *out,size_t bytes)
+{
+    return h && h->command_capacity<=SIZE_MAX/sizeof(*h->commands) &&
+        h->change_capacity<=SIZE_MAX/sizeof(*h->changes) &&
+        !output_overlap(out,bytes,h,sizeof(*h)) &&
+        !output_overlap(out,bytes,h->commands,h->command_capacity*sizeof(*h->commands)) &&
+        !output_overlap(out,bytes,h->changes,h->change_capacity*sizeof(*h->changes));
+}
+static int workflow_external_apart(struct pt_sampler *s,struct pt_project *p,
+    struct pt_pattern_history *h,const void *out,size_t bytes)
+{return pt_sampler_output_disjoint(s,out,bytes) && workflow_project_apart(p,out,bytes) && workflow_history_apart(h,out,bytes);}
+static int workflow_apart(const struct pt_sampler_workflow *c,const void *out,size_t bytes)
+{
+    unsigned i;
+    if(!c || !out || !bytes || output_overlap(out,bytes,c,c->bytes) ||
+       !pt_sampler_output_disjoint(c->owner,out,bytes) ||
+       output_overlap(out,bytes,c->project,sizeof(*c->project)) ||
+       output_overlap(out,bytes,c->history,sizeof(*c->history)) ||
+       (c->table_owned && output_overlap(out,bytes,c->table_after,PT_PROJECT_SAMPLES*sizeof(*c->table_after))))return 0;
+    /* Captured extents protect source outputs without walking a changed or
+     * released table. Cancellation needs only living controls/private owners. */
+    for(i=0;i<c->span_count;++i)
+        if(output_overlap(out,bytes,c->spans[i].data,c->spans[i].bytes))return 0;
+    for(i=0;i<c->count;++i)
+        if(!pt_sampler_version_output_disjoint(c->entries[i].before,out,bytes) ||
+           !pt_sampler_version_output_disjoint(c->entries[i].after,out,bytes))return 0;
+    return 1;
+}
+static int workflow_same_project(const struct pt_project *a,const struct pt_project *b)
+{
+    size_t offset=offsetof(struct pt_project,channels)+offsetof(struct pt_channels,selected);
+    return !memcmp(a,b,offset) && !memcmp((const uint8_t *)a+offset+1,(const uint8_t *)b+offset+1,sizeof(*a)-offset-1);
+}
+static int workflow_preview_current(const struct pt_sample_usage_preview *v,const struct pt_project *p,
+    const struct pt_pattern_history *h,const struct pt_sampler *s)
+{
+    unsigned i;
+    if(!v || v->project!=p || v->count!=p->sample_count || v->revision!=h->revision ||
+       v->generation!=s->generation || !workflow_same_project(&v->snapshot,p))return 0;
+    for(i=0;i<v->count;++i)if(memcmp(&v->rows[i].identity,p->samples+i,sizeof(*p->samples)))return 0;
+    return 1;
+}
+static int workflow_history_room(const struct pt_project *p,const struct pt_pattern_history *h)
+{
+    return h && h->bound_events==p->events && h->bound_patterns==p->pattern_count &&
+        h->bound_channels==p->channels.count && h->commands && h->changes &&
+        h->command_capacity && h->change_capacity && h->count<h->command_capacity &&
+        h->cursor<=h->count && h->used<=h->change_capacity && h->next_revision &&
+        h->next_revision<UINT32_MAX;
+}
+static int workflow_current(const struct pt_sampler_workflow *c)
+{
+    unsigned i;
+    if(c->owner->generation!=c->generation || !workflow_same_project(c->project,&c->snapshot) ||
+       memcmp(c->history,&c->history_snapshot,sizeof(c->history_snapshot)))return 0;
+    for(i=0;i<c->count;++i) {
+        const struct workflow_entry *e=c->entries+i;
+        if(e->slot<c->snapshot.sample_count &&
+           (memcmp(c->project->samples+e->slot,&e->source,sizeof(e->source)) || c->owner->current[e->slot]!=e->previous))return 0;
+    }
+    if(c->kind==2 && memcmp(c->project->samples+c->source_slot,&c->copy_source,sizeof(c->copy_source)))return 0;
+    return 1;
+}
+static struct pt_sample_version *workflow_version_allocate(struct pt_sampler *s,const struct pt_sample *sample,
+    struct pt_sampler_workflow *c,struct pt_sampler_workflow **out,enum pt_edit_result *result)
+{
+    struct pt_sample_version *v;size_t capacity=sample->pcm.capacity,slices,bytes;
+    slices=(size_t)sample->slice_count*sizeof(uint32_t);
+    if(capacity>(SIZE_MAX-sizeof(*v)-slices)/sizeof(int32_t))return NULL;
+    bytes=sizeof(*v)+capacity*sizeof(int32_t)+slices;
+    if(s->bytes>s->budget || bytes>s->budget-s->bytes)return NULL;
+    v=s->allocator.allocate(s->allocator.context,bytes);if(!v)return NULL;
+    if(!workflow_current(c)) {s->allocator.release(s->allocator.context,v);*result=PT_EDIT_CONFLICT;return NULL;}
+    if(!workflow_apart(c,v,bytes) || output_overlap(v,bytes,out,sizeof(*out))) {
+        s->allocator.release(s->allocator.context,v);*result=PT_EDIT_ALIAS;return NULL;
+    }
+    memset(v,0,sizeof(*v));v->owner=s;v->bytes=bytes;v->references=1;v->sample=*sample;
+    v->sample.pcm.data=capacity?(int32_t *)(v+1):NULL;
+    v->sample.slices=sample->slice_count?(uint32_t *)((uint8_t *)(v+1)+capacity*sizeof(int32_t)):NULL;
+    s->bytes+=bytes;return v;
+}
+static void workflow_discard(void *context)
+{
+    struct pt_sampler_workflow *c=context;struct pt_sampler *s=c->owner;unsigned i;
+    for(i=0;i<c->count;++i) {release_version(c->entries[i].before);release_version(c->entries[i].after);}
+    if(c->table_owned) {
+        size_t n=PT_PROJECT_SAMPLES*sizeof(*c->table_after);
+        s->bytes-=n;s->allocator.release(s->allocator.context,c->table_after);
+    }
+    s->bytes-=c->bytes;s->allocator.release(s->allocator.context,c);
+}
+void pt_sampler_workflow_cancel(struct pt_sampler_workflow **job)
+{
+    struct pt_sampler_workflow *c;
+    if(!job || !(c=*job) || c->initialized || !workflow_apart(c,job,sizeof(*job)))return;
+    *job=NULL;workflow_discard(c);
+}
+static void workflow_span_add(struct pt_sampler_workflow *c,const void *data,size_t bytes)
+{if(bytes)c->spans[c->span_count++]=(struct workflow_span){data,bytes};}
+static struct pt_sampler_workflow *workflow_allocate(struct pt_sampler *s,struct pt_project *p,
+    struct pt_pattern_history *h,const struct pt_sample_usage_preview *v,unsigned count,unsigned kind,
+    struct pt_sampler_workflow **out,enum pt_edit_result *result)
+{
+    struct pt_sampler_workflow *c;unsigned i,generation=s->generation;
+    struct pt_project snapshot=*p;struct pt_pattern_history history_snapshot=*h;struct pt_allocator allocator=s->allocator;
+    size_t maximum=6+(size_t)p->sample_count*2+p->extension_count;
+    size_t bytes=sizeof(*c)+count*sizeof(struct workflow_entry);
+    if(maximum>(SIZE_MAX-bytes)/sizeof(struct workflow_span))return NULL;
+    bytes+=maximum*sizeof(struct workflow_span);
+    if(s->bytes>s->budget || bytes>s->budget-s->bytes)return NULL;
+    c=allocator.allocate(allocator.context,bytes);if(!c)return NULL;
+    if(s->generation!=generation || !workflow_same_project(p,&snapshot) || memcmp(h,&history_snapshot,sizeof(*h)) ||
+       !workflow_preview_current(v,p,h,s)) {allocator.release(allocator.context,c);*result=PT_EDIT_CONFLICT;return NULL;}
+    if(s->bytes>s->budget || bytes>s->budget-s->bytes) {allocator.release(allocator.context,c);return NULL;}
+    if(!workflow_external_apart(s,p,h,c,bytes) || output_overlap(c,bytes,v,sizeof(*v)) ||
+       output_overlap(c,bytes,out,sizeof(*out))) {allocator.release(allocator.context,c);*result=PT_EDIT_ALIAS;return NULL;}
+    memset(c,0,bytes);c->owner=s;c->project=p;c->history=h;c->snapshot=snapshot;
+    c->history_snapshot=history_snapshot;c->generation=generation;c->count=count;c->kind=kind;c->bytes=bytes;
+    c->spans=(struct workflow_span *)(c->entries+count);
+    workflow_span_add(c,p->events,(size_t)p->pattern_count*PT_PROJECT_ROWS*p->channels.count*sizeof(*p->events));
+    workflow_span_add(c,p->orders,p->order_count*sizeof(*p->orders));
+    workflow_span_add(c,p->samples,p->sample_count*sizeof(*p->samples));
+    workflow_span_add(c,p->extensions,p->extension_count*sizeof(*p->extensions));
+    workflow_span_add(c,h->commands,h->command_capacity*sizeof(*h->commands));
+    workflow_span_add(c,h->changes,h->change_capacity*sizeof(*h->changes));
+    for(i=0;i<p->sample_count;++i) {
+        workflow_span_add(c,p->samples[i].pcm.data,p->samples[i].pcm.capacity*sizeof(int32_t));
+        workflow_span_add(c,p->samples[i].slices,p->samples[i].slice_count*sizeof(uint32_t));
+    }
+    for(i=0;i<p->extension_count;++i)workflow_span_add(c,p->extensions[i].data,p->extensions[i].length);
+    c->reserved_bytes=s->bytes;s->bytes+=bytes;return c;
+}
+static int workflow_before(struct pt_sampler_workflow *c,unsigned i,unsigned slot,
+    struct pt_sampler_workflow **out,enum pt_edit_result *result)
+{
+    struct workflow_entry *e=c->entries+i;struct pt_sampler *s=c->owner;
+    if(e->slot!=slot)return 0;
+    if(slot<c->snapshot.sample_count) {
+        if(e->previous) {
+            if(e->previous->owner!=s || e->previous->references==UINT_MAX ||
+               !same_storage(&e->previous->sample,&e->source))return 0;
+            retain(e->previous);e->before=e->previous;e->retained=1;
+        } else e->before=workflow_version_allocate(s,&e->source,c,out,result);
+        if(!e->before)return 0;
+        c->stats.retained_master_bytes+=(uint64_t)e->source.pcm.capacity*sizeof(int32_t);
+    }
+    return 1;
+}
+static enum pt_edit_result workflow_begin_valid(struct pt_sampler *s,struct pt_project *p,
+    struct pt_pattern_history *h,const struct pt_sample_usage_preview *v,unsigned stopped,
+    struct pt_sampler_workflow **out)
+{
+    if(!s || !p || !h || !v || !out || !s->allocator.allocate || !s->allocator.release)return PT_EDIT_INVALID;
+    if(!pt_sampler_output_disjoint(s,out,sizeof(*out)) || output_overlap(out,sizeof(*out),p,sizeof(*p)) ||
+       output_overlap(out,sizeof(*out),h,sizeof(*h)) || output_overlap(out,sizeof(*out),v,sizeof(*v)))return PT_EDIT_ALIAS;
+    if(!stopped)return PT_EDIT_CONFLICT;
+    if(!workflow_preview_current(v,p,h,s))return PT_EDIT_CONFLICT;
+    if(!workflow_external_apart(s,p,h,out,sizeof(*out)))return PT_EDIT_ALIAS;
+    if(*out)return PT_EDIT_INVALID;
+    if(!workflow_history_room(p,h))return PT_EDIT_CAPACITY;
+    /* Initial full validation is synchronous, as in existing sampler mutations. */
+    if(pt_project_validate(p,NULL)!=PT_PROJECT_OK)return PT_EDIT_INVALID;
+    if(s->table && p->samples!=s->table && p->samples!=s->table_original)return PT_EDIT_CONFLICT;
+    return PT_EDIT_OK;
+}
+enum pt_edit_result pt_sampler_cleanup_begin(struct pt_sampler *s,struct pt_project *p,
+    struct pt_pattern_history *h,const struct pt_sample_usage_preview *v,
+    const uint8_t selected[PT_PROJECT_SAMPLES],unsigned stopped,struct pt_sampler_workflow **out)
+{
+    struct pt_sampler_workflow *c;unsigned i,n=0;uint8_t choice[PT_PROJECT_SAMPLES];enum pt_edit_result result;
+    result=workflow_begin_valid(s,p,h,v,stopped,out);if(result!=PT_EDIT_OK)return result;
+    if(!selected)return PT_EDIT_INVALID;
+    if(output_overlap(out,sizeof(*out),selected,PT_PROJECT_SAMPLES))return PT_EDIT_ALIAS;
+    memcpy(choice,selected,sizeof(choice));
+    for(i=0;i<PT_PROJECT_SAMPLES;++i)if(choice[i]) {
+        if(i>=v->count || !(v->rows[i].flags&PT_USAGE_ELIGIBLE) ||
+           (v->rows[i].flags&(PT_USAGE_REFERENCED|PT_USAGE_RESERVED|PT_USAGE_PROTECTED|PT_USAGE_UNKNOWN|PT_USAGE_FREE)))return PT_EDIT_UNSUPPORTED;
+        ++n;
+    }
+    if(!n)return PT_EDIT_INVALID;
+    result=PT_EDIT_CAPACITY;c=workflow_allocate(s,p,h,v,n,1,out,&result);if(!c)return result;
+    n=0;
+    for(i=0;i<v->count;++i)if(choice[i]) {
+        struct workflow_entry *e=c->entries+n++;
+        e->slot=i;e->source=p->samples[i];e->previous=s->current[i];
+    }
+    n=0;
+    for(i=0;i<v->count;++i)if(choice[i]) {
+        if(!workflow_before(c,n++,i,out,&result)) {workflow_discard(c);return result;}
+        if(!workflow_current(c)) {workflow_discard(c);return PT_EDIT_CONFLICT;}
+    }
+    c->stats.affected_slots=n;c->stats.slots_freed=n;c->stats.staged_bytes=s->bytes-c->reserved_bytes;
+    if(!workflow_apart(c,out,sizeof(*out))) {workflow_discard(c);return PT_EDIT_ALIAS;}
+    *out=c;return PT_EDIT_OK;
+}
+enum pt_edit_result pt_sampler_copy_begin(struct pt_sampler *s,struct pt_project *p,
+    struct pt_pattern_history *h,const struct pt_sample_usage_preview *v,unsigned source_slot,
+    uint32_t start,uint32_t end,unsigned stopped,struct pt_sampler_workflow **out)
+{
+    struct pt_sampler_workflow *c;struct pt_sample sample;unsigned slot,i,n=0;enum pt_edit_result result;
+    result=workflow_begin_valid(s,p,h,v,stopped,out);if(result!=PT_EDIT_OK)return result;
+    if(source_slot>=p->sample_count || start>=end || end>p->samples[source_slot].pcm.frames)return PT_EDIT_INVALID;
+    for(slot=0;slot<p->sample_count;++slot) {
+        const struct pt_sample_usage_row *r=v->rows+slot;struct pt_sample empty;
+        memset(&empty,0,sizeof(empty));empty.pcm.bits=8;empty.pcm.channels=1;empty.pcm.rate=PT_CLASSIC_RATE;
+        if((r->flags&PT_USAGE_FREE) && !(r->flags&(PT_USAGE_REFERENCED|PT_USAGE_RESERVED|PT_USAGE_PROTECTED|PT_USAGE_UNKNOWN|PT_USAGE_CONFIGURED|PT_USAGE_ELIGIBLE)) &&
+           !memcmp(p->samples+slot,&empty,sizeof(empty)))break;
+    }
+    if(slot==p->sample_count && slot==PT_PROJECT_SAMPLES)return PT_EDIT_CAPACITY;
+    if(slot==p->sample_count) {
+        if(v->rows[slot].flags&(PT_USAGE_RESERVED|PT_USAGE_PROTECTED|PT_USAGE_UNKNOWN))return PT_EDIT_UNSUPPORTED;
+        for(i=0;i<p->extension_count;++i) {
+            const struct pt_extension *e=p->extensions+i;
+            if(e->id!=PT_CLASSIC_HEADER_TAG || e->version!=1 || e->length!=1084)return PT_EDIT_UNSUPPORTED;
+        }
+    }
+    result=PT_EDIT_CAPACITY;c=workflow_allocate(s,p,h,v,1,2,out,&result);if(!c)return result;
+    c->source_slot=source_slot;c->copy_source=p->samples[source_slot];c->start=start;c->end=end;
+    c->append=slot==p->sample_count;c->entries[0].slot=slot;
+    if(!c->append) {c->entries[0].source=p->samples[slot];c->entries[0].previous=s->current[slot];}
+    if(!workflow_before(c,0,slot,out,&result)) {workflow_discard(c);return result;}
+    if(!workflow_current(c)) {workflow_discard(c);return PT_EDIT_CONFLICT;}
+    if(c->append) {
+        c->table_after=s->table;
+        if(!c->table_after) {
+            size_t bytes=PT_PROJECT_SAMPLES*sizeof(*c->table_after);
+            if(s->bytes>s->budget || bytes>s->budget-s->bytes) {workflow_discard(c);return PT_EDIT_CAPACITY;}
+            c->table_after=s->allocator.allocate(s->allocator.context,bytes);
+            if(!c->table_after) {workflow_discard(c);return PT_EDIT_CAPACITY;}
+            if(!workflow_current(c)) {s->allocator.release(s->allocator.context,c->table_after);c->table_after=NULL;workflow_discard(c);return PT_EDIT_CONFLICT;}
+            if(!workflow_apart(c,c->table_after,bytes) || output_overlap(c->table_after,bytes,out,sizeof(*out))) {
+                s->allocator.release(s->allocator.context,c->table_after);c->table_after=NULL;workflow_discard(c);return PT_EDIT_ALIAS;
+            }
+            s->bytes+=bytes;c->table_owned=1;
+        }
+    }
+    sample=c->copy_source;sample.pcm.frames=end-start;sample.pcm.capacity=(size_t)(end-start)*sample.pcm.channels;
+    if(sample.loop && sample.loop_start>=start && sample.loop_end<=end) {
+        sample.loop_start-=start;sample.loop_end-=start;
+    } else {sample.loop=PT_LOOP_NONE;sample.loop_start=sample.loop_end=sample.crossfade=0;}
+    for(i=0;i<sample.slice_count && sample.slices[i]<start;++i) {}
+    c->marker_first=i;
+    while(i+n<sample.slice_count && sample.slices[i+n]<end)++n;
+    sample.slice_count=(uint16_t)n;sample.slices=n?sample.slices+i:NULL;
+    c->entries[0].after=workflow_version_allocate(s,&sample,c,out,&result);
+    if(!c->entries[0].after) {workflow_discard(c);return result;}
+    if(!workflow_current(c)) {workflow_discard(c);return PT_EDIT_CONFLICT;}
+    c->stats.affected_slots=1;c->stats.destination_slot=slot;c->stats.appended=c->append;c->stats.staged_bytes=s->bytes-c->reserved_bytes;
+    if(!workflow_apart(c,out,sizeof(*out))) {workflow_discard(c);return PT_EDIT_ALIAS;}
+    *out=c;return PT_EDIT_OK;
+}
+/* Copy a private retention version, zeroing unused capacity without reading it. */
+static int workflow_copy_before(struct workflow_entry *e)
+{
+    struct pt_pcm *to=&e->before->sample.pcm;size_t active=(size_t)e->source.pcm.frames*e->source.pcm.channels,n,offset=e->copied_values;
+    if(e->retained)return 1;
+    if(offset<to->capacity) {
+        n=to->capacity-offset;if(n>PT_SAMPLER_PIN_CHUNK/sizeof(int32_t))n=PT_SAMPLER_PIN_CHUNK/sizeof(int32_t);
+        if(offset<active) {
+            size_t copied=active-offset;if(copied>n)copied=n;
+            memcpy(to->data+offset,e->source.pcm.data+offset,copied*sizeof(int32_t));
+            if(copied<n)memset(to->data+offset+copied,0,(n-copied)*sizeof(int32_t));
+        } else memset(to->data+offset,0,n*sizeof(int32_t));
+        e->copied_values+=n;return 0;
+    }
+    offset=e->copied_slices;
+    if(offset<e->source.slice_count) {
+        n=e->source.slice_count-offset;if(n>PT_SAMPLER_PIN_CHUNK/sizeof(uint32_t))n=PT_SAMPLER_PIN_CHUNK/sizeof(uint32_t);
+        memcpy(e->before->sample.slices+offset,e->source.slices+offset,n*sizeof(uint32_t));e->copied_slices+=n;return 0;
+    }
+    return 1;
+}
+enum pt_edit_result pt_sampler_workflow_step(struct pt_sampler_workflow *c,unsigned *ready)
+{
+    unsigned i;size_t n;
+    if(!c || !ready || c->initialized)return PT_EDIT_INVALID;
+    if(!workflow_apart(c,ready,sizeof(*ready)))return PT_EDIT_ALIAS;
+    if(!workflow_current(c))return PT_EDIT_CONFLICT;
+    if(c->ready) {*ready=1;return PT_EDIT_OK;}
+    for(i=0;i<c->count;++i)if(c->entries[i].before && !workflow_copy_before(c->entries+i)) {*ready=0;return PT_EDIT_OK;}
+    if(c->kind==2) {
+        struct pt_sample *sample=&c->entries[0].after->sample;
+        size_t values=(size_t)sample->pcm.frames*sample->pcm.channels;
+        if(c->copy_values<values) {
+            n=values-c->copy_values;if(n>PT_SAMPLER_PIN_CHUNK/sizeof(int32_t))n=PT_SAMPLER_PIN_CHUNK/sizeof(int32_t);
+            memcpy(sample->pcm.data+c->copy_values,c->copy_source.pcm.data+(size_t)c->start*sample->pcm.channels+c->copy_values,n*sizeof(int32_t));
+            c->copy_values+=n;*ready=0;return PT_EDIT_OK;
+        }
+        if(c->copy_slices<sample->slice_count) {
+            n=sample->slice_count-c->copy_slices;if(n>PT_SAMPLER_PIN_CHUNK/sizeof(uint32_t))n=PT_SAMPLER_PIN_CHUNK/sizeof(uint32_t);
+            for(i=0;i<n;++i)sample->slices[c->copy_slices+i]=c->copy_source.slices[c->marker_first+c->copy_slices+i]-c->start;
+            c->copy_slices+=n;*ready=0;return PT_EDIT_OK;
+        }
+    }
+    c->ready=1;*ready=1;return PT_EDIT_OK;
+}
+static void workflow_empty(struct pt_sample *sample)
+{memset(sample,0,sizeof(*sample));sample->pcm.bits=8;sample->pcm.channels=1;sample->pcm.rate=PT_CLASSIC_RATE;}
+static int workflow_referenced(const struct pt_sampler_workflow *c,unsigned slot)
+{
+    size_t i,n=(size_t)c->project->pattern_count*PT_PROJECT_ROWS*c->project->channels.count;
+    for(i=0;i<n;++i)if(c->project->events[i].instrument==slot+1)return 1;
+    return 0;
+}
+static int workflow_apply(void *context,struct pt_project *p,int direction)
+{
+    struct pt_sampler_workflow *c=context;struct pt_sampler *s=c->owner;struct pt_sample empty;
+    unsigned i;struct pt_sample *table;unsigned expected_count=c->snapshot.sample_count;
+    if(p!=c->project || (direction!=-1 && direction!=1) || !c->ready)return 0;
+    if(c->append && direction<0)++expected_count;
+    if(p->sample_count!=expected_count || p->events!=c->snapshot.events || p->pattern_count!=c->snapshot.pattern_count ||
+       p->channels.count!=c->snapshot.channels.count || s->generation==UINT_MAX)return 0;
+    if(!c->initialized) {if(direction<0 || !workflow_current(c))return 0;}
+    workflow_empty(&empty);
+    table=c->append?(direction>0?c->snapshot.samples:c->table_after):c->snapshot.samples;
+    if(p->samples!=table)return 0;
+    for(i=0;i<c->count;++i) {
+        struct workflow_entry *e=c->entries+i;const struct pt_sample *expected;
+        struct pt_sample_version *expected_version;
+        if(c->append && direction>0) {
+            if(s->current[e->slot])return 0;
+        } else {
+            if(direction>0) {
+                expected=c->initialized?&e->before->sample:&e->source;
+                expected_version=c->initialized?e->before:e->previous;
+            } else {expected=e->after?&e->after->sample:&empty;expected_version=e->after;}
+            if(memcmp(p->samples+e->slot,expected,sizeof(*expected)) || s->current[e->slot]!=expected_version)return 0;
+        }
+        if((direction>0 && (!c->append || c->kind==1)) || (c->append && direction<0))
+            if(workflow_referenced(c,e->slot))return 0;
+        if((direction>0?e->after:e->before) && (direction>0?e->after:e->before)->references==UINT_MAX)return 0;
+    }
+    if(c->append) {
+        struct pt_sample *to=direction>0?c->table_after:c->snapshot.samples;
+        if(to!=table && c->snapshot.sample_count)memcpy(to,table,c->snapshot.sample_count*sizeof(*to));
+        if(!s->table) {s->table=c->table_after;s->table_original=c->snapshot.samples;s->table_bytes=PT_PROJECT_SAMPLES*sizeof(*to);c->table_owned=0;}
+        p->samples=to;
+    }
+    for(i=0;i<c->count;++i) {
+        struct workflow_entry *e=c->entries+i;
+        struct pt_sample_version *next=direction>0?e->after:e->before;
+        if(next)retain(next);
+        release_version(s->current[e->slot]);s->current[e->slot]=next;
+        if(next)p->samples[e->slot]=next->sample;
+        else if(e->slot<c->snapshot.sample_count)workflow_empty(p->samples+e->slot);
+    }
+    p->sample_count=(uint16_t)(c->snapshot.sample_count+(c->append && direction>0));
+    ++s->generation;c->initialized=1;return 1;
+}
+enum pt_edit_result pt_sampler_workflow_commit(struct pt_sampler_workflow **job,unsigned stopped,
+    struct pt_sampler_workflow_stats *stats)
+{
+    struct pt_sampler_workflow *c;struct pt_edit_resource resource;enum pt_edit_result result;
+    if(!job || !(c=*job) || !stats || c->initialized || !c->ready)return PT_EDIT_INVALID;
+    if(!workflow_apart(c,job,sizeof(*job)) || !workflow_apart(c,stats,sizeof(*stats)) ||
+       output_overlap(job,sizeof(*job),stats,sizeof(*stats)))return PT_EDIT_ALIAS;
+    if(!stopped || !workflow_current(c))return PT_EDIT_CONFLICT;
+    if(!workflow_history_room(c->project,c->history) || c->owner->generation==UINT_MAX)return PT_EDIT_CAPACITY;
+    resource=(struct pt_edit_resource){c,workflow_apply,workflow_discard};
+    result=pt_pattern_resource_apply(c->project,c->history,&resource);
+    if(result!=PT_EDIT_OK)return result;
+    *stats=c->stats;*job=NULL;return PT_EDIT_OK;
+}

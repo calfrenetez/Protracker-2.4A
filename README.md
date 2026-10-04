@@ -64,6 +64,11 @@ host/native sink tests, but CAMD and live recording transport are unconnected.
 Physical AmiGUS and ACA1234 performance/audio acceptance remain untested while
 the owner's Mini is in transit. No emulator result substitutes for that gate.
 
+The approved native workflow additions add a conservative sample manager, loop/range
+tools and silent event-to-resource navigation. See [usage](docs/workflow/USAGE.md)
+and the [implementation and validation report](docs/workflow/REPORT.md); their
+Amiberry and real A1200 acceptance gates remain open.
+
 See the [editor guide](docs/ENHANCED_EDITOR.md),
 [software milestones](docs/HARDWARE_INDEPENDENT.md),
 [Paula replay boundaries](docs/PAULA_REPLAY.md),

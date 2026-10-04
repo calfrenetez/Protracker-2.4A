@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "editor.h"
+#include "workflow.h"
 static const unsigned periods[36]={856,808,762,720,678,640,604,570,538,508,480,453,
     428,404,381,360,339,320,302,285,269,254,240,226,214,202,190,180,170,160,151,143,135,127,120,113};
 static const char *notes[12]={"C-","C#","D-","D#","E-","F-","F#","G-","G#","A-","A#","B-"};
@@ -26,6 +27,7 @@ static void *sample_allocate(void *context,size_t bytes) {(void)context;return m
 static void sample_release(void *context,void *data) {(void)context;free(data);}
 static void source_close(struct pt_editor *e)
 {
+    ++e->workflow.source_generation;
     e->sampler.budget+=e->sample_source.allocated_bytes;pt_document_release(&e->sample_source);e->source_selected=0;
     if(e->panel==11)e->panel=5;
     ++e->sample_ui;
@@ -50,7 +52,7 @@ int pt_editor_dispose(struct pt_editor *e)
 {
     if(!e)return 1;
     if(!pt_editor_prepare_change(e))return 0;
-    pt_pattern_history_release(&e->history);source_close(e);pt_sampler_release(&e->sampler);pt_song_release(&e->song);return 1;
+    pt_editor_workflow_cancel(e);pt_pattern_history_release(&e->history);source_close(e);pt_sampler_release(&e->sampler);pt_song_release(&e->song);return 1;
 }
 enum pt_edit_result pt_editor_source_load_with(struct pt_editor *e,pt_source_loader load,void *context)
 {
@@ -86,6 +88,7 @@ void pt_editor_sample_all(struct pt_editor *e)
 {
     if(e->sample>e->project->sample_count)e->sample=e->project->sample_count;
     if(e->slice_pending && (e->slice_slot!=e->sample || e->slice_generation!=e->sampler.generation)) {e->slice_pending=0;++e->sample_ui;}
+    e->workflow.wave_cancelled=0;
     e->sample_range_slot=e->sample;e->sample_start=0;e->sample_marking=0;
     e->sample_end=e->sample && e->sample<=e->project->sample_count?e->project->samples[e->sample-1].pcm.frames:0;
     if(e->format_slot!=e->sample && e->sample) {
@@ -378,14 +381,9 @@ static void format_apply(struct pt_editor *e)
 }
 static void loop_edit(struct pt_editor *e,unsigned op)
 {
-    struct pt_sample *sample;enum pt_edit_result result;
+    enum pt_edit_result result;
+    if(op==4) {pt_editor_workflow_loop(e,0);return;}
     if(!sample_range(e))return;
-    sample=&e->project->samples[e->sample-1];
-    if(op==4) {
-        if(!sample->loop) {pt_editor_status(e,"NO LOOP TO SELECT");return;}
-        e->sample_start=sample->loop_start;e->sample_end=sample->loop_end;
-        pt_editor_status(e,"CURRENT LOOP RANGE SELECTED");return;
-    }
     result=(pt_editor_prepare_change(e)?pt_sampler_loop(&e->sampler,e->project,&e->history,e->sample-1,(enum pt_loop_kind)op,
         op?e->sample_start:0,op?e->sample_end:0,op==PT_LOOP_CROSSFADE?e->loop_fade:0):PT_EDIT_CONFLICT);
     if(result==PT_EDIT_OK) {
@@ -456,6 +454,7 @@ int pt_editor_init(struct pt_editor *e,struct pt_project *p)
     e->render_rate=48000;e->render_bits=24;e->render_gain=32768;e->render_tracks=(uint16_t)((1UL<<p->channels.count)-1);
     e->raw_format=(struct pt_raw_format){8287,8,1,0,0};
     e->format_filtered=1;e->loop_fade=32;e->slice_threshold=500;e->slice_gap_ms=50;e->slice_zero=1;
+    e->workflow.flow_mode=PT_FLOW_EXTENDED256;
     pt_editor_sample_all(e);
     e->clipboard.events=e->clipboard_events;e->clipboard.capacity=1024;
     pt_editor_status(e,"READY - F8 PLAY / F9 PATTERN / F10 STOP");return 1;
@@ -468,6 +467,8 @@ static void visible(struct pt_editor *e)
     if(e->row<e->first_row)e->first_row=e->row;
     if(e->row>=e->first_row+PT_EDITOR_ROWS)e->first_row=e->row-PT_EDITOR_ROWS+1;
 }
+void pt_editor_reveal_cursor(struct pt_editor *e)
+{if(e)visible(e);}
 void pt_editor_follow_playback(struct pt_editor *e)
 {
     const struct pt_playback *s=&e->playback;
@@ -676,6 +677,7 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
     static const unsigned keys[24]={0x31,0x21,0x32,0x22,0x33,0x34,0x24,0x35,0x25,0x36,0x26,0x37,
         0x10,0x02,0x11,0x03,0x12,0x13,0x05,0x14,0x06,0x15,0x07,0x16};
     if(raw&0x80)return PT_UI_NONE;
+    {enum pt_editor_action action;if(pt_editor_workflow_key(e,raw,qualifier,&action))return action;}
     if(e->number_field) {if(!(qualifier&8))number_key(e,raw);return PT_UI_NONE;}
     if(e->name_entry) {if(!(qualifier&8))name_key(e,raw);return PT_UI_NONE;}
     if(e->panel==2 && e->export_details) {
@@ -791,7 +793,8 @@ enum pt_editor_action pt_editor_key(struct pt_editor *e,unsigned raw,unsigned qu
         else if(raw==0x0b || raw==0x0c)note_step(e,raw==0x0b?-1:1);
         else if(raw==0x33)(void)note_slice(e,0);
         else if(raw==0x16)note_sample(e);
-        else if(raw==0x28) {if(current_event(e)->instrument)e->sample=current_event(e)->instrument;sampler_panel(e);}
+        else if(raw==0x28)pt_editor_event_resource(e,1);
+        else if(raw==0x13)pt_editor_event_resource(e,0);
         else if(raw==0x1a || raw==0x1b) {if(raw==0x1a && e->sample>1)--e->sample;else if(raw==0x1b && e->sample<e->project->sample_count)++e->sample;pt_editor_sample_all(e);}
         else if(raw==0x4c || raw==0x4d) {e->row=(e->row+(raw==0x4c?63:1))%64;visible(e);}
         else if(raw==0x42 || raw==0x4e || raw==0x4f)pt_channels_step(&p->channels,raw==0x4f || (raw==0x42 && (qualifier&3))?-1:1);
@@ -935,6 +938,7 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
 {
     unsigned c,r,f;
     if(x<0 || x>=640 || y<0 || y>=512)return PT_UI_NONE;
+    {enum pt_editor_action action;if(pt_editor_workflow_click(e,x,y,&action))return action;}
     if(e->number_field || e->name_entry) {pt_editor_status(e,"FINISH ENTRY WITH RETURN OR ESC FIRST");return PT_UI_NONE;}
     if(e->panel==2 && e->export_details) {
         if(x>=230 && x<599 && y>=21 && y<40)export_toggle(e);
@@ -1079,7 +1083,7 @@ enum pt_editor_action pt_editor_click(struct pt_editor *e,int x,int y)
         r=(unsigned)(y-PT_EDITOR_CONTROL_Y)/PT_EDITOR_CONTROL_HEIGHT;c=(unsigned)(x-230)/123;
         if(e->note_details) {
             if(r==1) {if(c==1)number_begin(e,8);else note_step(e,c==0?-1:1);}
-            else if(r==2) {if(c==0)note_sample(e);else if(c==1)(void)note_slice(e,0);else {if(current_event(e)->instrument)e->sample=current_event(e)->instrument;sampler_panel(e);}}
+            else if(r==2) {if(c==0)note_sample(e);else if(c==1)(void)note_slice(e,0);else pt_editor_event_resource(e,1);}
             else if(r==4) {if(c<2)undo(e,c==0?-1:1);else {e->note_details=0;++e->sample_ui;pt_editor_status(e,"EDIT OPERATIONS");}}
             return PT_UI_NONE;
         }

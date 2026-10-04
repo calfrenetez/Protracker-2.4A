@@ -11,12 +11,14 @@ static int barrier(void *context)
     if(o->device.session.phase!=PT_CS_IDLE || o->device.reservation)return 0;
     return !o->ready.pcm.data || o->publishing;
 }
+static int workflow_busy(void *context)
+{return pt_editor_capture_busy(context);}
 static int attached(const struct pt_editor_capture *o)
 {return o && o->editor && o->editor->change_ready==barrier && o->editor->before_change_context==o;}
 int pt_editor_capture_attach(struct pt_editor_capture *o,struct pt_editor *e)
 {
     if(!o || o->editor || pt_editor_capture_busy(o) || !pt_editor_change_barrier(e,barrier,o))return 0;
-    o->editor=e;return 1;
+    o->editor=e;e->workflow.recording_busy=workflow_busy;e->workflow.recording_context=o;return 1;
 }
 int pt_editor_capture_start(struct pt_editor_capture *o,struct pt_amigus_reservation *r,const struct pt_capture_input *in,unsigned bits,unsigned channels,uint32_t rate,uint32_t frames,size_t budget)
 {
@@ -64,6 +66,9 @@ int pt_editor_capture_discard(struct pt_editor_capture *o)
 int pt_editor_capture_detach(struct pt_editor_capture *o)
 {
     if(!pt_editor_capture_discard(o))return 0;
-    if(attached(o))pt_editor_change_barrier(o->editor,NULL,NULL);
+    if(attached(o)) {
+        if(o->editor->workflow.recording_context==o) {o->editor->workflow.recording_busy=NULL;o->editor->workflow.recording_context=NULL;}
+        pt_editor_change_barrier(o->editor,NULL,NULL);
+    }
     o->editor=NULL;return 1;
 }

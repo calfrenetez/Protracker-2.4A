@@ -177,7 +177,10 @@ static void draw_sample(const struct pt_editor *e,struct pt_canvas *c,const uint
     const struct pt_sample *sample=e->sample && e->sample<=e->project->sample_count?&e->project->samples[e->sample-1]:NULL;
     if(e->panel==11)sample=e->sample_source.loaded && e->source_selected?&e->sample_source.project.samples[e->source_selected-1]:NULL;
     const struct pt_pcm *pcm=sample?&sample->pcm:NULL;char text[80];unsigned channel,x;
-    uint32_t view_start,view_end,span;
+    uint32_t view_start,view_end,span;unsigned summary_ready;
+    const struct pt_wave_summary *summary=&e->workflow.wave;
+    const struct pt_project *source=e->panel==11?&e->sample_source.project:e->project;
+    uint64_t generation=e->panel==11?e->workflow.source_generation:e->sampler.generation;
     pt_editor_wave_bounds(e,&view_start,&view_end);span=view_end-view_start;
     uint32_t start=e->sample_range_slot==e->sample?e->sample_start:0;
     uint32_t end=e->sample_range_slot==e->sample?e->sample_end:pcm?pcm->frames:0;
@@ -191,14 +194,20 @@ static void draw_sample(const struct pt_editor *e,struct pt_canvas *c,const uint
     if(e->panel==10)snprintf(text,sizeof(text),"RAW %u BIT %s %s %s %lu HZ / PCM ONLY",e->raw_format.bits,e->raw_format.channels==2?"STEREO":"MONO",e->raw_format.unsigned8?"UNSIGNED":"SIGNED",e->raw_format.little_endian?"LE":"BE",(unsigned long)e->raw_format.rate);
     if(e->panel==11)snprintf(text,sizeof(text),"SOURCE %02X %.31s > SAMPLE %02X",e->source_selected,sample->name,e->sample);
     label(c,font,2,PT_EDITOR_HEADER_Y,636,19,text,0);
+    summary_ready=pt_wave_summary_current(summary,source,generation) &&
+        summary->slot==(e->panel==11?e->source_selected:e->sample)-1 &&
+        summary->view.start==view_start && summary->view.end==view_end;
     for(channel=0;channel<pcm->channels;++channel) {
         int top=254+(int)channel*(216/pcm->channels),height=216/pcm->channels-4,mid=top+height/2;
         rect(c,10,top,620,height,BLACK);
         if(pcm->frames)for(x=0;x<620;++x) {
-            uint32_t first=view_start+(uint32_t)((uint64_t)x*span/620),last=view_start+(uint32_t)((uint64_t)(x+1)*span/620),f;
+            uint32_t first=view_start+(uint32_t)((uint64_t)x*span/620);
             int32_t low=0,high=0;int y0,y1;
-            if(last==first)last=first+1;
-            for(f=first;f<last && f<pcm->frames;++f) {int32_t value=pcm->data[(size_t)f*pcm->channels+channel];if(value<low)low=value;if(value>high)high=value;}
+            if(summary_ready) {
+                const struct pt_wave_summary_bin *bin=summary->bins+(size_t)x*pcm->channels+channel;
+                if(bin->minimum<0)low=bin->minimum;
+                if(bin->maximum>0)high=bin->maximum;
+            }
             if(first>=start && first<end)rect(c,10+(int)x,top,1,height,8);
             y0=mid-(int)((int64_t)high*(height/2-2)/((int32_t)1<<(pcm->bits-1)));
             y1=mid-(int)((int64_t)low*(height/2-2)/((int32_t)1<<(pcm->bits-1)));
@@ -227,6 +236,36 @@ static void draw_sample(const struct pt_editor *e,struct pt_canvas *c,const uint
     snprintf(text,sizeof(text),"RANGE %lu-%lu  VIEW %lu-%lu / %lu",(unsigned long)start,(unsigned long)end,(unsigned long)view_start,(unsigned long)view_end,(unsigned long)pcm->frames);
     if(e->panel==11)snprintf(text,sizeof(text),"SOURCE %lu FRAMES / READ ONLY - IMPORT TO COPY",(unsigned long)pcm->frames);
     small(c,font,12,478,text,NAVY);
+    if(pcm->frames && !summary_ready)small(c,font,12,258,e->workflow.wave_cancelled?"OVERVIEW CANCELLED - REOPEN TO BUILD":"OVERVIEW PREPARING IN BOUNDED CHUNKS",WHITE);
+    label(c,font,248,PT_EDITOR_BOTTOM_Y,84,21,"MANAGER",0);label(c,font,332,PT_EDITOR_BOTTOM_Y,84,21,"TOOLS",0);
+}
+static void draw_manager(const struct pt_editor *e,struct pt_canvas *c,const uint8_t *font)
+{
+    const struct pt_editor_workflow *w=&e->workflow;char text[80];unsigned r,col,i;
+    unsigned valid=w->usage_valid && pt_sample_usage_current(&w->usage,e->project,e->history.revision,e->sampler.generation);
+    static const char *ops[4][3]={{"REFRESH","ELIGIBLE","SORT"},{"CHECK ALL","CHECK NONE","APPLY"},{"EDITOR","AUDITION","TOOLS"},{"EVENT BACK","STOP+APPLY","CANCEL"}};
+    label(c,font,230,2,369,19,w->scanning?"SAMPLE MANAGER - SCANNING":"SAMPLE MANAGER - STABLE SLOT IDS",0);
+    for(r=0;r<4;++r)for(col=0;col<3;++col)label(c,font,230+(int)col*123,21+(int)r*19,123,19,ops[r][col],r==0 && col==1 && w->filter);
+    panel(c,2,PT_EDITOR_HEADER_Y,636,PT_EDITOR_BOTTOM_Y-PT_EDITOR_HEADER_Y,GREY);
+    small(c,font,6,240,"  ID NAME             B/C     FRAMES REFS PAT LOOP  USAGE",NAVY);
+    for(i=0;i<PT_WORKFLOW_ROWS;++i) {
+        unsigned row=w->first+i,slot;const struct pt_sample *s;const struct pt_sample_usage_row *u;
+        panel(c,2,258+(int)i*20,636,20,row==w->highlight?YELLOW:GREY);
+        if(row>=w->view_count)continue;
+        slot=w->view[row];if(slot>=e->project->sample_count)continue;
+        s=&e->project->samples[slot];u=&w->usage.rows[slot];
+        snprintf(text,sizeof(text),"%c %02X %-16.16s %2u/%u %10lu %4lu %3u %-5s %s",valid && w->usage.selected[slot]?'X':' ',slot+1,s->name,s->pcm.bits,s->pcm.channels,(unsigned long)s->pcm.frames,
+            (unsigned long)(valid?u->references:0),valid?u->patterns:0,s->loop==PT_LOOP_NONE?"OFF":s->loop==PT_LOOP_FORWARD?"FWD":s->loop==PT_LOOP_PINGPONG?"PING":"FADE",
+            !valid?"WAIT":u->flags&PT_USAGE_REFERENCED?"USED":u->flags&(PT_USAGE_UNKNOWN|PT_USAGE_PROTECTED|PT_USAGE_RESERVED)?"HOLD":u->flags&PT_USAGE_FREE?"FREE":"UNUSED");
+        if(valid && (u->flags&PT_USAGE_ELIGIBLE)) {
+            int by=261+(int)i*20;rect(c,4,by,12,1,BLACK);rect(c,4,by+14,12,1,BLACK);rect(c,4,by,1,15,BLACK);rect(c,15,by,1,15,BLACK);
+        }
+        small(c,font,6,264+(int)i*20,text,BLACK);
+    }
+    label(c,font,2,458,126,20,"PREV PAGE",0);label(c,font,128,458,128,20,"NEXT PAGE",0);
+    snprintf(text,sizeof(text),"FIND: %.16s%s",w->find,w->searching?"_":"");label(c,font,256,458,382,20,text,0);
+    snprintf(text,sizeof(text),"%s / %u ELIGIBLE / CHECKBOXES REMOVE SELECTED ONLY",valid?"STORED REFS":"REFRESH REQUIRED",valid?w->usage.eligible_count:0);
+    small(c,font,6,480,text,NAVY);
 }
 void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t font[580])
 {
@@ -305,6 +344,13 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
             snprintf(s,sizeof(s),"%02u %s%s",i+1,len>72?"...":"",tail);
             small(c,font,8,258+(int)i*24,s,BLACK);
         }
+    } else if(e->panel==PT_WORKFLOW_MANAGER) {
+        draw_manager(e,c,font);
+    } else if(e->panel==PT_WORKFLOW_TOOLBOX) {
+        static const char *ops[4][3]={{"SELECT LOOP","GO START","GO END"},{"COPY RANGE","ALL","MANAGER"},{"EVENT BACK","STOP+APPLY","EDITOR"},{"STOP","","CANCEL"}};
+        label(c,font,230,2,369,19,"LOOP / CURRENT SELECTION TOOLBOX",0);
+        for(r=0;r<4;++r)for(i=0;i<3;++i)label(c,font,230+(int)i*123,21+(int)r*19,123,19,ops[r][i],0);
+        draw_sample(e,c,font);
     } else if(e->panel>=5) {
         static const char *tabs[4]={"SAMPLER","LOOPS","SLICES","RANGE"};
         static const char *ops[7][4][3]={
@@ -399,7 +445,7 @@ void pt_editor_draw(const struct pt_editor *e,struct pt_canvas *c,const uint8_t 
         label(c,font,353,40,123,19,"NO SLICE",0);label(c,font,476,40,123,19,"SAMPLER",0);
         if(event->slice && source)snprintf(s,sizeof(s),"FRAMES %lu-%lu",(unsigned long)source->slices[event->slice-1],(unsigned long)(event->slice<source->slice_count?source->slices[event->slice]:source->pcm.frames));
         else snprintf(s,sizeof(s),"%s",source?"WHOLE SAMPLE":"SET A SAMPLE INSTRUMENT");
-        label(c,font,230,59,369,19,s,0);
+        label(c,font,230,59,123,19,"SELECT RES",0);label(c,font,353,59,123,19,"OPEN RES",0);label(c,font,476,59,123,19,"EVENT BACK",0);
         label(c,font,230,78,123,19,"UNDO",0);label(c,font,353,78,123,19,"REDO",0);label(c,font,476,78,123,19,"BACK",0);
     } else if(e->panel==1) {
         static const char *ops[3][3]={{"UNDO","REDO","MARK"},{"COPY","PASTE","CLEAR"},{"SEMI -","SEMI +","ALL"}};

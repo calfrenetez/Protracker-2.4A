@@ -120,6 +120,22 @@ budget is not a native wall-clock or interrupt latency guarantee. Existing
 synchronous APIs, command/readers ownership and the original musical grid remain
 unchanged.
 
+## Optional renderer-boundary lowering
+
+The optional boundary adapter lowers one borrowed, immutable renderer plan at its caller-supplied absolute musical frame. It copies normalized numeric ranges, pitch and gain into the existing bounded command holder. Supported Paula triggers are mono 8/16/24-bit one-shots with exact initial phase and even bounds; selective signed8 playback caches remain derived from authoritative masters.
+
+The renderer may emit a TRIGGER followed by the same voice's final CONTROL. Lowering combines that pair into one trigger using the final pitch and volume, retaining the original source/range/phase. Other repeated or unsupported Paula operations refuse the whole boundary. Known other-route actions are ignored, while unknown kinds and invalid channels refuse even outside Paula tracks; ignoring another route grants no output permission for it.
+
+A continuing CONTROL or STOP requires the complete original key positively acquired from the genuine reader after actual adoption. Its source sample and PCM channel come from the registered original reader, independently of the renderer's current instrument. Copied keys are rechecked during preparation and transfer. Submit acceptance, a matching cache address, a reader view and command detachment do not supply ACTIVE permission.
+
+Use the existing cancellable preparation steps and explicit command/reader close operations. The specialized enqueue resolves held cache bytes at transfer and binds the copied normalized geometry. The general enqueue enforces the same binding for lowered commands. Inputs and returned storage protect full known source/control capacities, including caller plan/capabilities/key storage and private staging during allocator callbacks. Opaque allocator/backend contexts still obey the caller-disjoint lifetime contract.
+
+Lowering leaves sequence/lookahead consumption and commitment to the caller. An empty terminal renderer plan creates no command; explicit STOP and independently confirmed reader retirement remain separate. This API does not provide whole-song transport, activation, interrupts, DMA, device completion, timing or listening qualification.
+
+The copied lowering fields enlarge each opaque command allocation. The existing
+control budget charges the actual allocation size; it remains bounded and can
+refuse capacity. No new master or Chip allocation is added to CONTROL/STOP.
+
 ## Current validation status
 
 The frozen shared fixture passes one ASan/UBSan host group with 21 full dependency
@@ -145,7 +161,7 @@ callback identity changes/reentry, empty projects and 20 zero-owner lifecycles.
 The host workspace is 2384 bytes. Earlier preparation/parser refusals and the
 passing version before the empty-project guard are retained separately.
 
-Current pinned compiler-only builds produce `PTPaulaReadersTest` (168816 bytes)
+The earlier startup qualification builds produce `PTPaulaReadersTest` (168816 bytes)
 and `PTPaulaReadersStartupTest` (155792 bytes). Both preserve enabled assertions,
 68000/software-float flags and unchanged source closures; each remains native
 NOT RUN. These are ordinary injected-allocation fixtures, not Exec or hardware
@@ -158,3 +174,38 @@ observed setup CPU was 20.276 versus 15.210 ms; requested heap payload stayed
 28472 bytes, with one pool allocation, no Chip calls and zero final owned bytes.
 This is not 030 elapsed latency, a worst-case bound, RSS or physical acceptance.
 See [the scoped startup evidence](../evidence/enhanced-editor/sampler-paula-readers-startup/README.md).
+
+## Renderer-boundary qualification — 4 October 2026
+
+Seven unique ASan/UBSan host groups pass once each for the frozen source: the
+new boundary fixture, genuine readers, initial preparation, Paula preflight,
+render sequence, render plan and scheduled readers. The boundary fixture drives
+actual transferred preflight/sequence/lookahead at 48 kHz through mono8/16/24
+songs with four simultaneous Paula slots, tick-zero pitch/volume folding, at least
+80 continuing controls, an unselected global-tempo track, sample replacement
+and delayed command detachment/reader retirement. It checks full initial master
+and retained version spans, cache parity, copied input lifetime, cancellation,
+geometry substitution, malformed plans and allocator/output aliases. Empty DONE
+and separately explicit STOP retain their distinct meanings. The 44.1-kHz direct
+boundary path, every forged field/cancellation point and arbitrary callback
+padding mutation are not independently exhausted by this fixture.
+
+The three-group proof records six successful compile/run commands and 73 full
+dependency queries; four affected regression groups record nine successful
+commands and 37 queries, including intentional retained counting sources. Each
+proof preserves actual products, complete dependencies and unchanged source
+inventories. Independent product/proof review is clear; that reviewer authored
+the boundary fixture and did not independently execute it.
+
+Current pinned compiler-only products are `PTPaulaReadersTest` (172684 bytes),
+`PTPaulaReadersStartupTest` (159792 bytes), and `PTPaulaReadersBoundaryTest`
+(215772 bytes). The first two record 33 successful commands/22 ordered dependency
+queries each; boundary records 40/29. All retain active SDK assertions,
+68000/software-float flags, seven unchanged runtime inputs and HUNK output.
+These products bind this current source, superseding the previous startup
+products for subsequent qualification while preserving their original records.
+All three remain native NOT RUN. They use ordinary injected allocation; no
+Exec memory-placement, native stack adequacy, backend transfer, DMA/IRQ, exact
+hardware scheduling, physical device, audio or human listening acceptance follows.
+No target window, lock, control or queued target action was acquired for this slice.
+See [saved boundary proof](../evidence/enhanced-editor/sampler-paula-readers-boundary/README.md).

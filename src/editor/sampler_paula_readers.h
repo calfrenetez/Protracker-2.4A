@@ -2,6 +2,8 @@
 #define PT_SAMPLER_PAULA_READERS_H
 #include "sampler.h"
 #include "../core/scheduled_readers.h"
+#include "../core/render_commands.h"
+#include "../core/paula_render_voice.h"
 #define PT_PAULA_READERS_COMMANDS 8
 #define PT_PAULA_READERS_PERSISTENT 8
 #define PT_PAULA_READERS_ACTIONS 4
@@ -82,6 +84,34 @@ enum pt_paula_readers_result pt_paula_readers_open(const struct pt_allocator *,s
     struct pt_project *,const struct pt_paula_readers_config *,struct pt_paula_readers_pool **);
 enum pt_paula_readers_result pt_paula_readers_begin(struct pt_paula_readers_pool *,struct pt_readers_output *,
     uint64_t,const struct pt_paula_readers_request *,unsigned,struct pt_paula_readers_command **);
+/* Optional task-side lowering of ONE actual renderer boundary. frame is the
+ * original absolute boundary, never rebased to now. Known operations on valid
+ * non-Paula tracks are ignored (not dispatched/qualified). Unknown kinds and
+ * out-of-project tracks always refuse. Paula slots admit one TRIGGER optionally
+ * followed by one final CONTROL with identical source/geometry/phase; only its
+ * step/gains are fused. Paula SEGMENT/REPEAT, loops and ambiguous duplicates
+ * refuse atomically. Mono8/16/24 ONCE/even geometry uses render_voice's existing
+ * exact conversion; output_rate must be 44100/48000. No PCM scan occurs here.
+ * Continuing CONTROL/STOP requires keys[track] from the positive reader_key
+ * getter and resolves its original registered reader sample/channel. A renderer
+ * instrument/voice, cache HIT or accepted command is never ACTIVE proof.
+ * plan, caps and optional keys[PT_CHANNEL_LIMIT] stay alive/immutable throughout
+ * begin and allocator callbacks only; complete fixed storage is guarded/copied.
+ * No caller plan pointer is retained. Source lifetime remains the pool contract.
+ * Empty/other-route-only plan returns OK and NULL after output guards, without
+ * allocation or ownership changes. DONE empty is NOT STOP/reader retirement.
+ * Use existing step/cancel/close. lower_enqueue binds exactly the saved numeric
+ * geometry to genuine held cache bytes; generic enqueue enforces the same saved
+ * values for lowered commands, so it cannot substitute different valid bytes.
+ * This does not consume/commit a sequence/lookahead or implement song transport,
+ * activation, DMA, IRQ, a backend or hardware timing. Opaque context/queue spans
+ * remain caller-disjoint as above. No automatic cleanup/retry of LIVE domains.
+ */
+enum pt_paula_readers_result pt_paula_readers_lower_begin(struct pt_paula_readers_pool *,
+    struct pt_readers_output *,uint64_t frame,uint32_t output_rate,
+    const struct pt_render_plan *,const struct pt_paula_render_caps *,
+    const struct pt_readers_key keys[PT_CHANNEL_LIMIT],struct pt_paula_readers_command **);
+enum pt_scheduled_result pt_paula_readers_lower_enqueue(struct pt_paula_readers_command *,uint64_t *);
 /* One transition/action OR <=4096 master bytes OR <=256 Chip bytes. Trigger
  * resources remain private until ready/transfer. Controls allocate no master or
  * Chip copy/ref. Invalid aliases preserve state/output; valid stale/error calls

@@ -25,6 +25,7 @@ struct pt_paula_readers_command {
     struct pt_paula_readers_pool *pool;struct pt_readers_output *queue;
     uint64_t token,frame,ticket;unsigned count,index,phase,state,terminal_seen,terminal_valid;
     struct command_source source[PT_PAULA_READERS_ACTIONS];struct pt_scheduled_batch batch;
+    unsigned lowered;struct pt_paula_render_plan lower[PT_PAULA_READERS_ACTIONS];
 };
 struct pt_paula_readers_pool {
     struct pt_allocator allocator;struct pt_sampler *sampler;struct pt_project *project,header;
@@ -179,6 +180,15 @@ static int batch_valid(struct pt_paula_readers_command *c,const struct pt_schedu
    for(j=0;j<c->count;++j)if(p->map[c->source[j].request.track]==(int)a->slot)break;
    if(j==c->count)return 0;
    s=c->source+j;if(a->kind!=s->request.kind)return 0;
+   if(c->lowered) {
+     const struct pt_paula_render_plan *v=c->lower+j;
+     if(a->period!=v->period||a->volume!=v->volume)return 0;
+     if(a->kind==PT_SCHEDULED_TRIGGER) {
+       struct pt_paula_readers_reader *r=trigger_reader(c,j);
+       if(!r||v->offset>r->bytes||v->length>r->bytes-v->offset||
+          a->data!=r->data+v->offset||a->words!=v->length/2)return 0;
+     }
+   }
    if(a->kind==PT_SCHEDULED_TRIGGER) {
      struct pt_paula_readers_reader *r=trigger_reader(c,j);uintptr_t x=(uintptr_t)a->data,y;size_t n=(size_t)a->words*2;
      if(!r)return 0;
@@ -262,8 +272,29 @@ enum pt_paula_readers_result pt_paula_readers_open(const struct pt_allocator *a,
  }
  *out=p;return PT_PAULA_READERS_OK;
 }
-enum pt_paula_readers_result pt_paula_readers_begin(struct pt_paula_readers_pool *p,struct pt_readers_output *q,
- uint64_t frame,const struct pt_paula_readers_request *r,unsigned n,struct pt_paula_readers_command **out)
+/* Extra borrowed inputs are checked again after every allocator callback,
+ * before any returned arena is initialized. Staged copies are protected too. */
+struct lower_input {const void *source,*copy;size_t bytes;};
+static int inputs_current(const struct lower_input *in,unsigned n)
+{
+ unsigned i;
+ for(i=0;i<n;++i) {
+   if(memcmp(in[i].source,in[i].copy,in[i].bytes))return 0;
+ }
+ return 1;
+}
+static int inputs_apart(const struct lower_input *in,unsigned n,const void *out,size_t bytes)
+{
+ unsigned i;
+ if(!disjoint(out,bytes,in,n*sizeof(*in)))return 0;
+ for(i=0;i<n;++i) {
+   if(!disjoint(out,bytes,in[i].source,in[i].bytes)||!disjoint(out,bytes,in[i].copy,in[i].bytes))return 0;
+ }
+ return 1;
+}
+static enum pt_paula_readers_result readers_begin(struct pt_paula_readers_pool *p,struct pt_readers_output *q,
+ uint64_t frame,const struct pt_paula_readers_request *r,unsigned n,struct pt_paula_readers_command **out,
+ const struct lower_input *inputs,unsigned input_count,const struct pt_paula_render_plan *lower)
 {
  struct pt_paula_readers_command *c;struct pt_paula_readers_request request[PT_PAULA_READERS_ACTIONS];unsigned i,k,free_readers=0,triggers=0;
  size_t need;
@@ -280,18 +311,24 @@ enum pt_paula_readers_result pt_paula_readers_begin(struct pt_paula_readers_pool
     p->bytes>p->config.control_budget||need>p->config.control_budget-p->bytes){p->busy=0;return PT_PAULA_READERS_CAPACITY;}
  c=p->allocator.allocate(p->allocator.context,sizeof(*c));
  if(!c){p->busy=0;return PT_PAULA_READERS_CAPACITY;}
- if(!current_pool(p)||!request_valid(p,q,frame,request,n)||!output_disjoint(p,c,sizeof(*c))||
+ if(!current_pool(p)||!inputs_current(inputs,input_count)||!request_valid(p,q,frame,request,n)||
+    !inputs_apart(inputs,input_count,c,sizeof(*c))||!disjoint(c,sizeof(*c),request,sizeof(request))||
+    !output_disjoint(p,c,sizeof(*c))||
     !disjoint(c,sizeof(*c),out,sizeof(*out))||!disjoint(c,sizeof(*c),r,n*sizeof(*r))) {
    p->allocator.release(p->allocator.context,c);p->busy=0;return PT_PAULA_READERS_INVALID;
  }
  memset(c,0,sizeof(*c));c->pool=p;c->queue=q;c->frame=frame;c->token=++p->serial;c->count=n;c->state=PREPARING;
+ if(lower){c->lowered=1;memcpy(c->lower,lower,n*sizeof(*lower));}
  p->commands[k]=c;p->bytes+=sizeof(*c);
  for(i=0;i<n;++i) {
    c->source[i].request=request[i];
    if(request[i].kind==PT_SCHEDULED_TRIGGER) {
      struct pt_paula_readers_reader *v=p->allocator.allocate(p->allocator.context,sizeof(*v));unsigned j;
      if(!v){partial_resources(c);p->commands[k]=NULL;p->bytes-=sizeof(*c);p->allocator.release(p->allocator.context,c);p->busy=0;return PT_PAULA_READERS_CAPACITY;}
-     if(!current_pool(p)||!output_disjoint(p,v,sizeof(*v))||!disjoint(v,sizeof(*v),out,sizeof(*out))||!disjoint(v,sizeof(*v),r,n*sizeof(*r))) {
+     if(!current_pool(p)||!inputs_current(inputs,input_count)||!request_valid(p,q,frame,request,n)||
+        !inputs_apart(inputs,input_count,v,sizeof(*v))||!disjoint(v,sizeof(*v),request,sizeof(request))||
+        !output_disjoint(p,v,sizeof(*v))||
+        !disjoint(v,sizeof(*v),out,sizeof(*out))||!disjoint(v,sizeof(*v),r,n*sizeof(*r))) {
        p->allocator.release(p->allocator.context,v);partial_resources(c);p->commands[k]=NULL;p->bytes-=sizeof(*c);
        p->allocator.release(p->allocator.context,c);p->busy=0;return PT_PAULA_READERS_INVALID;
      }
@@ -303,6 +340,92 @@ enum pt_paula_readers_result pt_paula_readers_begin(struct pt_paula_readers_pool
    }
  }
  p->busy=0;*out=c;return PT_PAULA_READERS_OK;
+}
+enum pt_paula_readers_result pt_paula_readers_begin(struct pt_paula_readers_pool *p,struct pt_readers_output *q,
+ uint64_t frame,const struct pt_paula_readers_request *r,unsigned n,struct pt_paula_readers_command **out)
+{return readers_begin(p,q,frame,r,n,out,NULL,0,NULL);}
+static int lower_voice_same(const struct pt_voice *a,const struct pt_voice *b)
+{
+ return a->pcm==b->pcm&&a->repeat_pcm==b->repeat_pcm&&a->phase==b->phase&&a->cycle==b->cycle&&
+ a->start==b->start&&a->end==b->end&&a->loop_start==b->loop_start&&a->loop_end==b->loop_end&&
+ a->loop==b->loop&&a->looped==b->looped&&a->linear==b->linear&&a->active==b->active&&a->segment==b->segment;
+}
+static struct pt_paula_readers_reader *lower_original(struct pt_paula_readers_pool *p,
+ struct pt_readers_output *q,unsigned track,const struct pt_readers_key *key,uint64_t frame,
+ struct pt_paula_readers_request *request)
+{
+ unsigned i;
+ for(i=0;i<p->config.maximum_readers;++i)if(p->readers[i]) {
+   struct pt_paula_readers_reader *r=p->readers[i];
+   if(r->state==LIVE&&r->key_seen&&r->queue==q&&r->track==track&&same_key(&r->key,key)) {
+     request->sample=r->sample;request->channel=r->channel;request->key=*key;
+     return resolve(p,q,request,frame);
+   }
+ }
+ return NULL;
+}
+enum pt_paula_readers_result pt_paula_readers_lower_begin(struct pt_paula_readers_pool *p,
+ struct pt_readers_output *q,uint64_t frame,uint32_t rate,const struct pt_render_plan *plan,
+ const struct pt_paula_render_caps *caps,const struct pt_readers_key keys[PT_CHANNEL_LIMIT],
+ struct pt_paula_readers_command **out)
+{
+ struct pt_render_plan copy;struct pt_paula_render_caps limits;struct pt_readers_key keycopy[PT_CHANNEL_LIMIT];
+ struct pt_paula_readers_request request[4];struct pt_paula_render_plan lower[4];
+ struct lower_input inputs[4];unsigned input_count=0,i,j,n=0;int first[4],control[4];
+ if(!p||reentry(p)||p->closing||!q||frame==UINT64_MAX||!out||!valid_span(plan,sizeof(*plan))||
+    !valid_span(caps,sizeof(*caps))||(keys&&!valid_span(keys,sizeof(keycopy)))||
+    (rate!=44100&&rate!=48000))return PT_PAULA_READERS_INVALID;
+ if(!current_pool(p))return PT_PAULA_READERS_STALE;
+ if(!output_disjoint(p,out,sizeof(*out))||!output_disjoint(p,plan,sizeof(*plan))||
+    !output_disjoint(p,caps,sizeof(*caps))||(keys&&!output_disjoint(p,keys,sizeof(keycopy)))||
+    !disjoint(out,sizeof(*out),plan,sizeof(*plan))||!disjoint(out,sizeof(*out),caps,sizeof(*caps))||
+    !disjoint(plan,sizeof(*plan),caps,sizeof(*caps))||
+    (keys&&(!disjoint(out,sizeof(*out),keys,sizeof(keycopy))||!disjoint(plan,sizeof(*plan),keys,sizeof(keycopy))||
+     !disjoint(caps,sizeof(*caps),keys,sizeof(keycopy)))))return PT_PAULA_READERS_INVALID;
+ memcpy(&copy,plan,sizeof(copy));memcpy(&limits,caps,sizeof(limits));if(keys)memcpy(keycopy,keys,sizeof(keycopy));
+ if(copy.count>PT_RENDER_ACTIONS||!pt_paula_render_caps_valid(&limits))
+   return PT_PAULA_READERS_INVALID;
+ for(i=0;i<4;++i)first[i]=control[i]=-1;
+ for(i=0;i<copy.count;++i) {
+   const struct pt_render_action *a=copy.action+i;unsigned slot;
+   if(a->channel>=p->header.channels.count||
+      (a->kind!=PT_RENDER_TRIGGER&&a->kind!=PT_RENDER_SEGMENT&&a->kind!=PT_RENDER_REPEAT&&
+       a->kind!=PT_RENDER_STOP&&a->kind!=PT_RENDER_CONTROL))
+     return PT_PAULA_READERS_INVALID;
+   if(p->map[a->channel]<0)continue;
+   slot=(unsigned)p->map[a->channel];
+   if(a->kind==PT_RENDER_SEGMENT||a->kind==PT_RENDER_REPEAT)return PT_PAULA_READERS_INVALID;
+   if(first[slot]<0){first[slot]=(int)i;continue;}
+   if(copy.action[first[slot]].kind!=PT_RENDER_TRIGGER||a->kind!=PT_RENDER_CONTROL||control[slot]>=0||
+      !lower_voice_same(&copy.action[first[slot]].voice,&a->voice))return PT_PAULA_READERS_INVALID;
+   control[slot]=(int)i;
+ }
+ memset(request,0,sizeof(request));memset(lower,0,sizeof(lower));p->busy=1;
+ for(i=0;i<4;++i)if(first[i]>=0) {
+   const struct pt_render_action *a=copy.action+first[i];struct pt_voice voice=a->voice;
+   const uint32_t *gain=a->gain;struct pt_paula_readers_request *r=request+n;
+   r->track=a->channel;
+   if(a->kind==PT_RENDER_TRIGGER) {
+     for(j=0;j<p->header.sample_count;++j)if(voice.pcm==&p->project->samples[j].pcm)break;
+     if(j==p->header.sample_count){p->busy=0;return PT_PAULA_READERS_INVALID;}
+     r->kind=PT_SCHEDULED_TRIGGER;r->sample=j;r->channel=0;
+     if(control[i]>=0){voice.step=copy.action[control[i]].voice.step;gain=copy.action[control[i]].gain;}
+     if(!pt_paula_render_voice(&voice,rate,gain,i,&limits,lower+n)){p->busy=0;return PT_PAULA_READERS_INVALID;}
+   }else {
+     r->kind=a->kind==PT_RENDER_CONTROL?PT_SCHEDULED_CONTROL:PT_SCHEDULED_STOP;
+     if(!keys||!lower_original(p,q,r->track,keycopy+r->track,frame,r)){p->busy=0;return PT_PAULA_READERS_INVALID;}
+     if(r->kind==PT_SCHEDULED_CONTROL&&!pt_paula_render_control(voice.step,rate,gain,i,&limits,
+        &lower[n].period,&lower[n].volume)){p->busy=0;return PT_PAULA_READERS_INVALID;}
+   }
+   ++n;
+ }
+ p->busy=0;if(!n){*out=NULL;return PT_PAULA_READERS_OK;}
+ inputs[input_count++]=(struct lower_input){plan,&copy,sizeof(copy)};
+ inputs[input_count++]=(struct lower_input){caps,&limits,sizeof(limits)};
+ if(keys)inputs[input_count++]=(struct lower_input){keys,keycopy,sizeof(keycopy)};
+ /* Protect the staged normalized values against an overlapping allocator arena. */
+ inputs[input_count++]=(struct lower_input){lower,lower,sizeof(lower)};
+ return readers_begin(p,q,frame,request,n,out,inputs,input_count,lower);
 }
 static enum pt_paula_readers_result fail(struct pt_paula_readers_command *c,enum pt_paula_readers_result result)
 {partial_resources(c);c->state=FAILED;return result;}
@@ -408,6 +531,25 @@ enum pt_scheduled_result pt_paula_readers_enqueue(struct pt_paula_readers_comman
    }
  }
  p->busy=0;return result;
+}
+enum pt_scheduled_result pt_paula_readers_lower_enqueue(struct pt_paula_readers_command *c,uint64_t *out)
+{
+ struct pt_scheduled_batch b;struct pt_paula_readers_pool *p;unsigned i;
+ if(!c||!(p=c->pool)||reentry(p)||!command_registered(p,c)||c->state!=READY||!c->lowered||
+    !out||!output_disjoint(p,out,sizeof(*out)))return PT_SCHEDULED_INVALID;
+ if(!current_pool(p))return PT_SCHEDULED_STALE;
+ memset(&b,0,sizeof(b));b.frame=c->frame;b.generation=p->config.generation;b.count=c->count;
+ for(i=0;i<c->count;++i) {
+   struct command_source *s=c->source+i;struct pt_scheduled_action *a=b.action+i;
+   const struct pt_paula_render_plan *v=c->lower+i;
+   a->kind=s->request.kind;a->slot=(unsigned)p->map[s->request.track];a->period=v->period;a->volume=v->volume;
+   if(a->kind==PT_SCHEDULED_TRIGGER) {
+     struct pt_paula_readers_reader *r=trigger_reader(c,i);
+     if(!r||!source_current(r)||v->offset>r->bytes||v->length>r->bytes-v->offset)return PT_SCHEDULED_STALE;
+     a->data=r->data+v->offset;a->words=v->length/2;
+   }
+ }
+ return pt_paula_readers_enqueue(c,&b,out);
 }
 enum pt_paula_readers_result pt_paula_readers_reader(struct pt_paula_readers_command *c,unsigned index,struct pt_paula_readers_reader **out)
 {

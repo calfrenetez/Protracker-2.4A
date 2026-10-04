@@ -4,7 +4,7 @@ from test_sampler import SOURCES
 ROOT=Path(__file__).resolve().parents[1]
 PREPARE_SOURCES=['tests/sampler_paula_readers_prepare_test.c','src/editor/sampler_paula.c',
                  'src/core/sample_cache.c','src/core/playback_pcm.c','src/core/scheduled_readers.c',
-                 'src/core/elapsed_clock.c',*SOURCES[1:]]
+                 'src/core/elapsed_clock.c','src/core/paula_render_voice.c',*SOURCES[1:]]
 class PaulaReadersPreparation(unittest.TestCase):
     def test_bounded_validation_and_checked_pool_transfer(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -112,6 +112,17 @@ adds no AmiGUS RAM capacity, transfer or all-voice-stop qualification. See
 [contract](SCHEDULED_READERS.md) and
 [evidence](../evidence/enhanced-editor/scheduled-readers/README.md).
 
+
+The optional task-side renderer-boundary adapter now copies normalized exact
+Paula geometry into these recyclable commands. It folds a trigger with its
+same-source final control, and continues CONTROL/STOP only through positively
+ACTIVE original reader keys. Mono8/16/24 one-shots use derived signed8 caches;
+unsupported Paula boundaries refuse atomically. Empty renderer DONE leaves
+readers held until explicit STOP and confirmed independent retirement. Host
+software-ownership tests pass; the adapter does not provide song transport,
+native activation, DMA/IRQ or a timing guarantee. See the
+[boundary contract](SAMPLER_PAULA_READERS.md#optional-renderer-boundary-lowering).
+
 ## Scheduled output ownership foundation — 3 October 2026
 
 The new portable queue retains independently held sample owners for bounded future

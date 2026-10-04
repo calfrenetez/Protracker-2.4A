@@ -1,0 +1,22 @@
+# Exact renderer-boundary lowering into genuine Paula readers
+
+The opt-in task-side adapter lowers one renderer boundary into the existing bounded command and persistent-reader pool. It retains the original absolute frame, folds a trigger with its identical-source final pitch/gain control, and copies normalized geometry. Continuing CONTROL/STOP resolves the original positively ACTIVE reader key. Genuine immutable 8/16/24-bit masters and derived selective signed 8-bit cache ownership remain separate from command detachment.
+
+All known full-capacity declarations, staging and returned allocation arenas are guarded. Invalid or unsupported Paula plans refuse before resource publication; generic enqueue cannot substitute other valid geometry in a lowered command. Empty renderer DONE does not retire readers: STOP and independent retirement remain explicit. Copied lowering metadata increases the bounded command allocation charge. Other valid routes are ignored without qualifying their output. This change does not install song transport or a native activation backend.
+
+| Evidence | Result | Limit |
+| --- | --- | --- |
+| Boundary, genuine-reader and initial-setup host groups | PASS once each; 6 compile/run commands, 73 full dependency queries | Serialized ASan/UBSan software models |
+| Preflight, render sequence, render plan and scheduled-reader regressions | PASS once each; 9 commands, 37 dependency queries | Includes three intentional saved counting-source/object records |
+| Genuine 68k compiler product | 172684 bytes; 33 commands/22 ordered dependency queries PASS | Native NOT RUN |
+| Startup 68k compiler product | 159792 bytes; 33/22 PASS | Native NOT RUN |
+| Boundary 68k compiler product | 215772 bytes; 40/29 PASS | Native NOT RUN |
+| Amiberry / real A1200 | NOT RUN | Fresh shared ownership, recovery/cleanup clearance, exact candidates and harness guards still required |
+
+The actual renderer/preflight/lookahead fixture covers 48-kHz mono 8/16/24-bit songs, four folded initial voices, at least 80 continuing controls with two command slots, a global tempo effect on an unselected track, source replacement, late command detachment and independent retirement, exact cache parity, cancellation, malformed plans and allocator/output aliases. Initial masters, low bits and full retained initial version spans have before-image checks. Replacement has full PCM/cache parity checks. The direct 44.1-kHz boundary path, every forged key/cancel point and callback padding mutation are not exhausted here; the separate genuine/startup fixtures retain their own broader scope.
+
+Independent product and saved three-group proof review found no actionable defects. That reviewer authored the new boundary fixture, and did not independently execute it. Root independently reviewed source, the complete fixture, four affected regression proofs and all three compiler proofs. All products retain assertions, 68000/software-float flags, seven pinned runtimes and HUNK headers. Native stack adequacy, Exec Fast/Chip placement, actual backend transfer, activation, IRQ/DMA, hardware timing, physical audio and human listening remain unqualified.
+
+`payload.tar.gz` contains exact source closures, baseline/owned source bindings, complete original host/compiler reports and products, full dependency outputs, helper/contracts/pins and scoped review records. `manifest.json` fingerprints every safe member. Run `python3 verify_payload.py` to read and verify saved bytes without extraction, compilation or product execution. Original paths remain in reports; durable-copy mappings are separate. The complete source inventory is bound to clean base d93b32c4c3500ca09a6a79159bf531e76e73b37e/tree d0a1eb0652e8c330b72f82a05aae8ec1ebb48d90, with exactly six source deltas. All 16 unrelated working paths remain protected. Documentation is a post-build prose overlay outside the frozen compiler source.
+
+Mutable draft source reviews and the initial host/native manifest-schema mismatch are retained as preparation history; the mismatch was caught before any compiler invocation. There was no failed compiler product or rerun in this slice. Earlier physical, scheduling and listening failures remain in their original evidence. Shared-target snapshots report an Amiberry recovery HOLD and incomplete peer RAM/Shell cleanup; absence/nonownership/View Only reports do not clear those gates. No target window, lock, control, queued device action, upload, reset, AHI change or audio operation occurred here.

@@ -91,9 +91,14 @@ retirement in both orders, stale/forged domain receipts, full-capacity aliases,
 reentry and original-grid refusal checks under ASan/UBSan. A pinned portability
 build passes and produces a 61,416-byte HUNK, which remains native NOT RUN.
 Existing flags7, lineage-v1 retirement, exclusive sampler owners and classic
-replay retain their prior contracts. Binding actual sampler master/cache pins to
-these separate domains, backend reference transfer, IRQ/DMA activation, native
-song playback and physical timing/audio/listening remain unfinished. This core
+replay retain their prior contracts. The separate opt-in `sampler_paula_readers` binding now attaches genuine immutable
+master pins and selective Chip cache leases to these domains. Its host fixture
+retains them through 20 controls with command capacity two, cancellation and
+independent retirement races; one pinned portability build passes, native NOT RUN.
+Backend reference transfer, IRQ/DMA activation, native song playback and physical
+timing/audio/listening remain unfinished. See
+[binding](SAMPLER_PAULA_READERS.md) and
+[evidence](../evidence/enhanced-editor/sampler-paula-readers/README.md). This core
 adds no AmiGUS RAM capacity, transfer or all-voice-stop qualification. See
 [contract](SCHEDULED_READERS.md) and
 [evidence](../evidence/enhanced-editor/scheduled-readers/README.md).

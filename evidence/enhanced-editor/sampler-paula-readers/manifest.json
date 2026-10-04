@@ -1,0 +1,1278 @@
+{
+  "scope": "host_and_native_compile_only",
+  "member_count": 173,
+  "original_bytes": 6721958,
+  "payload": {
+    "bytes": 1862353,
+    "sha256": "9de1f2b35ab52cad5c348f4a38cdc8c811f78e146887f012e0cf1d958c024f4b"
+  },
+  "members": {
+    "author/audit_final.py": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/audit_final.py",
+      "bytes": 6427,
+      "sha256": "58d4d14ba902a323cf2bdc8f500c5b7f5b5331accbb644ae5e0d149c13257015",
+      "mode": 420,
+      "scope": "Original frozen author proof/history; v2 attribution supplement is append-only"
+    },
+    "author/audit_final_v2.py": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/audit_final_v2.py",
+      "bytes": 6578,
+      "sha256": "c3ba25d92410ed83dc2a741764bb53919eff66bd3c866ef5301c1fe52e2aabb9",
+      "mode": 420,
+      "scope": "Original frozen author proof/history; v2 attribution supplement is append-only"
+    },
+    "author/baseline-binding.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/baseline-binding.json",
+      "bytes": 1093052,
+      "sha256": "56ce219cd94c7a94fc618d2dde97797b1c6443fce7f7144162d095eff8f406b5",
+      "mode": 420,
+      "scope": "Original frozen author proof/history; v2 attribution supplement is append-only"
+    },
+    "author/final.patch": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/final.patch",
+      "bytes": 78096,
+      "sha256": "a2ae7bea0d5722773ba6056bf4e0fabe8c676981a360108dafc6cd5e56d5f689",
+      "mode": 420,
+      "scope": "Original frozen author proof/history; v2 attribution supplement is append-only"
+    },
+    "author/handoff-v2.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/handoff-v2.json",
+      "bytes": 10001,
+      "sha256": "e645047967d58b03c83c0fd2298191d503535d006d7eb7f6c4f5e2e334444d1c",
+      "mode": 420,
+      "scope": "Original frozen author proof/history; v2 attribution supplement is append-only"
+    },
+    "author/handoff.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/handoff.json",
+      "bytes": 8737,
+      "sha256": "960fa2ce610d91176f294f79c45930b838c1c6a6a7b95be3a37bd5a884752d2a",
+      "mode": 420,
+      "scope": "Original frozen author proof/history; v2 attribution supplement is append-only"
+    },
+    "author/helpers/host_provenance.py": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/tools/host_provenance.py",
+      "bytes": 14132,
+      "sha256": "1d89e3e89f9400aaaa5376ab77d0e4cd51dc4ec6a86534dcc075d150c7c9d40c",
+      "mode": 420,
+      "scope": "Actual pinned one-group host helper bytes; no new tests"
+    },
+    "author/helpers/prepared-files.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/tools/prepared-files.json",
+      "bytes": 1626,
+      "sha256": "5ea98b7b765cd0df21f2196b5ff74a586bb674f083c20e9c99f12e3fc38e33a8",
+      "mode": 420,
+      "scope": "Actual pinned one-group host helper bytes; no new tests"
+    },
+    "author/helpers/provenance_common.py": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/tools/provenance_common.py",
+      "bytes": 11124,
+      "sha256": "78e28229f0f132c73153606be3a40d750a4013f5ea1bbb5af7c15e117e62cdb5",
+      "mode": 420,
+      "scope": "Actual pinned one-group host helper bytes; no new tests"
+    },
+    "author/helpers/toolchain-pins.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/tools/toolchain-pins.json",
+      "bytes": 2709,
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065",
+      "mode": 420,
+      "scope": "Actual pinned one-group host helper bytes; no new tests"
+    },
+    "author/history/audit-final-v1-failure.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/history/audit-final-v1-failure.log",
+      "bytes": 383,
+      "sha256": "4e03377ddb9ebea7fb36f91c9b0c762a6a978fc2a0dac11c871e6f280212211b",
+      "mode": 420,
+      "scope": "Recorded exploratory fixture/compiler/reader failures and PASS logs; incomplete early transient history labeled separately"
+    },
+    "author/history/audit-final-v1.py": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/history/audit-final-v1.py",
+      "bytes": 6427,
+      "sha256": "58d4d14ba902a323cf2bdc8f500c5b7f5b5331accbb644ae5e0d149c13257015",
+      "mode": 420,
+      "scope": "Recorded exploratory fixture/compiler/reader failures and PASS logs; incomplete early transient history labeled separately"
+    },
+    "author/history/development1-failure.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/history/development1-failure.json",
+      "bytes": 254,
+      "sha256": "3cb89adc9d74bfafc20a6f42a86a51fe470805ffd3cc59ee28634da0fa1ee4c8",
+      "mode": 420,
+      "scope": "Recorded exploratory fixture/compiler/reader failures and PASS logs; incomplete early transient history labeled separately"
+    },
+    "author/history/development1-test.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/history/development1-test.c",
+      "bytes": 17733,
+      "sha256": "5fd0175325e3327831d4760f9ef0ba5f7a9d949ddfd1b59884e23cd17b4a7695",
+      "mode": 420,
+      "scope": "Recorded exploratory fixture/compiler/reader failures and PASS logs; incomplete early transient history labeled separately"
+    },
+    "author/history/development2-test.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/history/development2-test.c",
+      "bytes": 17926,
+      "sha256": "4a577ae0620d4e6fbc0c903fe44c1aedfeb8d70c46d32bdf8945e517a4161666",
+      "mode": 420,
+      "scope": "Recorded exploratory fixture/compiler/reader failures and PASS logs; incomplete early transient history labeled separately"
+    },
+    "author/history/development2.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/history/development2.log",
+      "bytes": 1232,
+      "sha256": "fc218a69b04c9a234548350294acd25d9f02ca2e52fcca48669a402916310f40",
+      "mode": 420,
+      "scope": "Recorded exploratory fixture/compiler/reader failures and PASS logs; incomplete early transient history labeled separately"
+    },
+    "author/history/development3.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/history/development3.log",
+      "bytes": 218,
+      "sha256": "54635985fe9ae077b708f02b24718fae67c2fcffa0cee70dd3ed82191eac5ab7",
+      "mode": 420,
+      "scope": "Recorded exploratory fixture/compiler/reader failures and PASS logs; incomplete early transient history labeled separately"
+    },
+    "author/history/development4-test.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/history/development4-test.c",
+      "bytes": 31634,
+      "sha256": "bd60bf485415625b6d2e0ca1ff483d73360781e1f346eeab308856b06abd50dd",
+      "mode": 420,
+      "scope": "Recorded exploratory fixture/compiler/reader failures and PASS logs; incomplete early transient history labeled separately"
+    },
+    "author/history/development4.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/history/development4.log",
+      "bytes": 2779,
+      "sha256": "b836b3480a96755ce37ecb7a6a936f730083b3159387de82c6bc48a2d9584223",
+      "mode": 420,
+      "scope": "Recorded exploratory fixture/compiler/reader failures and PASS logs; incomplete early transient history labeled separately"
+    },
+    "author/history/development5-test.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/history/development5-test.c",
+      "bytes": 30913,
+      "sha256": "89a623f55bb4a15537bf09a0d42098a59f45dc0869a98168f3df3bfe60696a9b",
+      "mode": 420,
+      "scope": "Recorded exploratory fixture/compiler/reader failures and PASS logs; incomplete early transient history labeled separately"
+    },
+    "author/history/development5.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/history/development5.log",
+      "bytes": 2779,
+      "sha256": "a28329ec7c0b9e3eb95a2bf886de330c091462c848464c3fbe631be4f3eb8551",
+      "mode": 420,
+      "scope": "Recorded exploratory fixture/compiler/reader failures and PASS logs; incomplete early transient history labeled separately"
+    },
+    "author/history/development6-test.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/history/development6-test.c",
+      "bytes": 30985,
+      "sha256": "04606eac7ee23e6d647bcde823c276e2ce32cebe4c0aa1fab7dc615b92282a22",
+      "mode": 420,
+      "scope": "Recorded exploratory fixture/compiler/reader failures and PASS logs; incomplete early transient history labeled separately"
+    },
+    "author/history/development6.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/history/development6.log",
+      "bytes": 1189,
+      "sha256": "acc7a1984547b0277ba3758aea633b1d9350541c31e7315848a840baac66351f",
+      "mode": 420,
+      "scope": "Recorded exploratory fixture/compiler/reader failures and PASS logs; incomplete early transient history labeled separately"
+    },
+    "author/history/development7-test.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/history/development7-test.c",
+      "bytes": 30961,
+      "sha256": "02897ac0469561910cda37d46c06c13b34e8d59a4250115a4ac45915c6d12eee",
+      "mode": 420,
+      "scope": "Recorded exploratory fixture/compiler/reader failures and PASS logs; incomplete early transient history labeled separately"
+    },
+    "author/history/development7.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/history/development7.log",
+      "bytes": 218,
+      "sha256": "b94281b660d69740eca040aebec1a8ef70fa7a44ef3076c9521f1630c6cfd3cf",
+      "mode": 420,
+      "scope": "Recorded exploratory fixture/compiler/reader failures and PASS logs; incomplete early transient history labeled separately"
+    },
+    "author/history/development8.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/history/development8.log",
+      "bytes": 218,
+      "sha256": "8720f8f61080e71bac2842718000d56600ec68f346d6911fa854150d7cc7ac06",
+      "mode": 420,
+      "scope": "Recorded exploratory fixture/compiler/reader failures and PASS logs; incomplete early transient history labeled separately"
+    },
+    "author/history/development9.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/history/development9.log",
+      "bytes": 218,
+      "sha256": "aa847f9c782358806e247c6b8039238449e33a85497aa29103428d149ba15df5",
+      "mode": 420,
+      "scope": "Recorded exploratory fixture/compiler/reader failures and PASS logs; incomplete early transient history labeled separately"
+    },
+    "author/host-final-invocation.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final-invocation.log",
+      "bytes": 285,
+      "sha256": "ec1bbac2018f8453bd84b57070b716a0635883af577a95aeb6aa22b637fc1c47",
+      "mode": 420,
+      "scope": "Original frozen author proof/history; v2 attribution supplement is append-only"
+    },
+    "author/own-final-review-invocation.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/own-final-review-invocation.log",
+      "bytes": 383,
+      "sha256": "4e03377ddb9ebea7fb36f91c9b0c762a6a978fc2a0dac11c871e6f280212211b",
+      "mode": 420,
+      "scope": "Original frozen author proof/history; v2 attribution supplement is append-only"
+    },
+    "author/own-final-review-v2-invocation.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/own-final-review-v2-invocation.log",
+      "bytes": 227,
+      "sha256": "553ff0d80d1bb400a28cb052a4b88f1666e970cdd7a35c4c2137f6f58c77123c",
+      "mode": 420,
+      "scope": "Original frozen author proof/history; v2 attribution supplement is append-only"
+    },
+    "author/own-final-review.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/own-final-review.json",
+      "bytes": 11768,
+      "sha256": "a49723cb8d2ccfd95d5f0763ef518e3e0e234c3c1b35ad675d49c5bad5f361aa",
+      "mode": 420,
+      "scope": "Original frozen author proof/history; v2 attribution supplement is append-only"
+    },
+    "author/own-review-supplement.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/own-review-supplement.json",
+      "bytes": 1657,
+      "sha256": "3370d65d251e0039991399d7cd7ab726436e86423034299b2673d83578f8ae09",
+      "mode": 420,
+      "scope": "Original frozen author proof/history; v2 attribution supplement is append-only"
+    },
+    "author/source-manifest.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-manifest.json",
+      "bytes": 1094346,
+      "sha256": "50b2f55da40c93e2edadac028cc5592e32c18acf43fffabb6bd7b2b915cd72ab",
+      "mode": 420,
+      "scope": "Original frozen author proof/history; v2 attribution supplement is append-only"
+    },
+    "builder-preparation/build_paula_readers_test.py": {
+      "original_path": "/private/tmp/protracker-paula-readers-builder-3ux5ykmt/build_paula_readers_test.py",
+      "bytes": 15539,
+      "sha256": "f5299ab38cccdb5112437380fc64fbc66237e62f997b0a2b70d9090676a32ff8",
+      "mode": 420,
+      "scope": "New standalone builder exact delta from preserved ancestor/pins; no native invocation"
+    },
+    "builder-preparation/origin-build_paula_lineage_test.py": {
+      "original_path": "/private/tmp/protracker-paula-readers-builder-3ux5ykmt/origin-build_paula_lineage_test.py",
+      "bytes": 15290,
+      "sha256": "3382f2b342858ee81dac33b8016cba94e55a8d0086a40e5496a0fa4ac7654b12",
+      "mode": 420,
+      "scope": "New standalone builder exact delta from preserved ancestor/pins; no native invocation"
+    },
+    "builder-preparation/prepared-files.json": {
+      "original_path": "/private/tmp/protracker-paula-readers-builder-3ux5ykmt/prepared-files.json",
+      "bytes": 2735,
+      "sha256": "0893ffb0af44f4ef66ebb2aa3488ab29d4c9de914ea2b53063ac840638dbb0bc",
+      "mode": 420,
+      "scope": "New standalone builder exact delta from preserved ancestor/pins; no native invocation"
+    },
+    "builder-preparation/review.diff": {
+      "original_path": "/private/tmp/protracker-paula-readers-builder-3ux5ykmt/review.diff",
+      "bytes": 7379,
+      "sha256": "974fc9f53fcb9d6a0eb9e9dcdb4934f45dc0e9ba0fcf8c9c1290d1d0c2887cd7",
+      "mode": 420,
+      "scope": "New standalone builder exact delta from preserved ancestor/pins; no native invocation"
+    },
+    "builder-preparation/toolchain-pins.json": {
+      "original_path": "/private/tmp/protracker-paula-readers-builder-3ux5ykmt/toolchain-pins.json",
+      "bytes": 2709,
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065",
+      "mode": 420,
+      "scope": "New standalone builder exact delta from preserved ancestor/pins; no native invocation"
+    },
+    "compiled/src/core/amigus_reservation.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/amigus_reservation.h",
+      "bytes": 3404,
+      "sha256": "ee57be55b9865fd19d14b27b22af6e2aa6b0466b7f21da5b313016efe9a0b646",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/amigus_sample_ram.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/amigus_sample_ram.h",
+      "bytes": 2813,
+      "sha256": "005111323eb1884112230ea415fbfb75e01d560618326148e08790d4f23fadf6",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/amigus_wavetable_cache.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/amigus_wavetable_cache.h",
+      "bytes": 3792,
+      "sha256": "8c449f009eac14807a9521d16a756345dd531e47b50312a3cabf96ee7ea2ee9c",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/channels.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/channels.c",
+      "bytes": 6996,
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/channels.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/channels.h",
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/document.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/document.c",
+      "bytes": 9127,
+      "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/document.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/document.h",
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/elapsed_clock.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/elapsed_clock.c",
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/elapsed_clock.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/elapsed_clock.h",
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/mod_inspect.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/mod_inspect.c",
+      "bytes": 3513,
+      "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/mod_inspect.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/mod_inspect.h",
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/mod_project.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/mod_project.c",
+      "bytes": 23640,
+      "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/mod_project.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/mod_project.h",
+      "bytes": 5051,
+      "sha256": "c28407161729fc0fea2398f79341a866f03913b092769674bd871bb23adb59ee",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/pattern.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/pattern.c",
+      "bytes": 15753,
+      "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/pattern.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/pattern.h",
+      "bytes": 3642,
+      "sha256": "f8c9abde09c4fe495ae77f25c070da647eab038845729edc83adec08c5678d53",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/pcm.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/pcm.c",
+      "bytes": 7061,
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/pcm.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/pcm.h",
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/pcm_filtered.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/pcm_filtered.c",
+      "bytes": 4604,
+      "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/pcm_internal.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/pcm_internal.h",
+      "bytes": 615,
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/playback_internal.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/playback_internal.h",
+      "bytes": 1893,
+      "sha256": "5d76f20f2c9a7eda89c3543a897f053c97f9460a847d2d70b32b8b71c14775e2",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/playback_pcm.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/playback_pcm.c",
+      "bytes": 11344,
+      "sha256": "f00995c1ca81176fc244968b4276b41624767f42c2963eb90482f23953d09a1f",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/playback_pcm.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/playback_pcm.h",
+      "bytes": 6034,
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/pp20.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/pp20.c",
+      "bytes": 7187,
+      "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/pp20.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/pp20.h",
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/project.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/project.c",
+      "bytes": 39034,
+      "sha256": "e4fde542cdfc9b9bce585ef0cda0b5b09d07482f3ec89fddb8d79137b8b0e1c1",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/project.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/project.h",
+      "bytes": 5698,
+      "sha256": "ffbb7e265c2d10bbcc2bb1dfa86d5a6f39f572670640a9dcc52ec0de08930bf8",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/raw.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/raw.c",
+      "bytes": 3920,
+      "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/raw.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/raw.h",
+      "bytes": 1171,
+      "sha256": "f9f47added4df41bb7b15aa3b1b7a4d8131a2c4aa19266436318483a41bc0f3b",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/sample_cache.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/sample_cache.c",
+      "bytes": 4018,
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/sample_cache.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/sample_cache.h",
+      "bytes": 1999,
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/scheduled_output.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/scheduled_output.h",
+      "bytes": 6515,
+      "sha256": "3289945d9446b373d8aa1897cb2c432f08ef253b443a81cd4dde39230df9b9da",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/scheduled_readers.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/scheduled_readers.c",
+      "bytes": 27301,
+      "sha256": "d357f179171d996f714b49d046f2749a3251d8ee1534138cfe84ca690f328778",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/scheduled_readers.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/scheduled_readers.h",
+      "bytes": 8810,
+      "sha256": "f6dd9354a65ee501d30ba2934f837d39c6b3e5ba1c92bee370a3468fe5ea3f3e",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/sinc_kernel.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/sinc_kernel.h",
+      "bytes": 28756,
+      "sha256": "058629396a0b22daa67f75c909adf9181fc4e52bfc668890fe2abc3231c3a185",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/slices.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/slices.c",
+      "bytes": 6060,
+      "sha256": "2951045844f6fdebdd80afe12fe7a5afc1f37bf837c2f49d840f14867835342f",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/slices.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/slices.h",
+      "bytes": 2003,
+      "sha256": "31cd82785c2b86c41d9cde1f7a29056c9d70ec41fb7a9bfb1a5679ba762c24f7",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/svx.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/svx.c",
+      "bytes": 7817,
+      "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/svx.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/svx.h",
+      "bytes": 1442,
+      "sha256": "824541cd25b72b5820e091cfc9f4e6a5f41351fd0630dddc09aefc0405036814",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/wav.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/wav.c",
+      "bytes": 7200,
+      "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/core/wav.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/core/wav.h",
+      "bytes": 1384,
+      "sha256": "8dd0f4454304babb53eef5ecb97cde7bfe6569d292cc0e9a0f204c4a587f2028",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/editor/project_snapshot.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/editor/project_snapshot.h",
+      "bytes": 1203,
+      "sha256": "dbb1206c1e8bfd317b515086f9d064c6eacd2450228893bb394f278ed6c0b2df",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/editor/sampler.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/editor/sampler.c",
+      "bytes": 35514,
+      "sha256": "5b18d67b6a51aa505131040e3a15425da674334ec66e3fd24faab988d062c984",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/editor/sampler.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/editor/sampler.h",
+      "bytes": 6264,
+      "sha256": "d19465c8b3866cfb67cfaca98457c2201165675cc3a4f45804d3c00b17284433",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/editor/sampler_internal.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/editor/sampler_internal.h",
+      "bytes": 3679,
+      "sha256": "8ce04909cd657d0caa6598416cfce2ee91109bf8fde782fc7795d35b116ac3e2",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/editor/sampler_paula.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/editor/sampler_paula.c",
+      "bytes": 7401,
+      "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/editor/sampler_paula.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/editor/sampler_paula.h",
+      "bytes": 2718,
+      "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/editor/sampler_paula_internal.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/editor/sampler_paula_internal.h",
+      "bytes": 3013,
+      "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/editor/sampler_paula_readers.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/editor/sampler_paula_readers.c",
+      "bytes": 29512,
+      "sha256": "6cb0728c7ef6351ac28f93f43b466f920407be66f2d23d1c2ed5bb644d9d693e",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/editor/sampler_paula_readers.h": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/editor/sampler_paula_readers.h",
+      "bytes": 4298,
+      "sha256": "bc101fb4574e681aa2953a1effcaac28d08cfa6a0d73f7b84b92cc05913b06a3",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/src/editor/slots.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/src/editor/slots.c",
+      "bytes": 3233,
+      "sha256": "60ab6a784d4bc47285bb436b975cdd6ee0bad4743bdf9f0817837d818645f7fa",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "compiled/tests/sampler_paula_readers_test.c": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/tests/sampler_paula_readers_test.c",
+      "bytes": 35570,
+      "sha256": "a0e34856402b4338264f50bfc159d6d9960c8ff0a3b18052f92c228ebb34670d",
+      "mode": 292,
+      "scope": "Exact51 canonical host closure; byte-identical to actual native closure"
+    },
+    "declarations-doc/docs/SAMPLER_PAULA_READERS.md": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/docs/SAMPLER_PAULA_READERS.md",
+      "bytes": 6354,
+      "sha256": "091dd9bc86755de965b3e1660a274f9cca9ef96bb5eb7c258c5b2b3e6f73b326",
+      "mode": 292,
+      "scope": "Frozen new declaration/doc and inherited test_sampler.py SOURCES declaration only; not another executed group"
+    },
+    "declarations-doc/tests/test_sampler.py": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/tests/test_sampler.py",
+      "bytes": 860,
+      "sha256": "847a13bc1694ed2c8dff8638e54ff6f49660a61734f4d21f4328d719999c35da",
+      "mode": 292,
+      "scope": "Frozen new declaration/doc and inherited test_sampler.py SOURCES declaration only; not another executed group"
+    },
+    "declarations-doc/tests/test_sampler_paula_readers.py": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-final/tests/test_sampler_paula_readers.py",
+      "bytes": 908,
+      "sha256": "ae8514ca100ce8f85117a0c2eb143be38fe6f8716098823e67554898982a1204",
+      "mode": 292,
+      "scope": "Frozen new declaration/doc and inherited test_sampler.py SOURCES declaration only; not another executed group"
+    },
+    "host-final/c001-dependencies-00.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-00.txt",
+      "bytes": 9854,
+      "sha256": "55646065b0287b65688e862ab108dc145e0275eca6877be481a9f0006a788a0a",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-dependencies-01.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-01.txt",
+      "bytes": 4968,
+      "sha256": "56d0a0912aa8809ea143f19e0356de9403be2f5a6f7a7a4d4dd537712025ec76",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-dependencies-02.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-02.txt",
+      "bytes": 4819,
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-dependencies-03.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-03.txt",
+      "bytes": 4529,
+      "sha256": "88b1bb1c44d211001353a424da05c63dfba54f0e3f5600ed3900c4272f92cc4b",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-dependencies-04.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-04.txt",
+      "bytes": 4529,
+      "sha256": "860db339232ba6a46f808bc329dc82d499933e51309d2f7a6531798a667ac184",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-dependencies-05.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-05.txt",
+      "bytes": 4335,
+      "sha256": "42c7499b25b2aea510723679cd8c3b05f6579288e42e053ab8a31328255e114d",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-dependencies-06.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-06.txt",
+      "bytes": 5775,
+      "sha256": "7a04b43f6816495c089991b17a992614b1bd469154babe991de237275036375b",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-dependencies-07.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-07.txt",
+      "bytes": 4540,
+      "sha256": "31a0d850205f57f2b83679a08ed5070ba55a6cfd9e2e915122e5c1dd42a208ad",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-dependencies-08.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-08.txt",
+      "bytes": 4354,
+      "sha256": "d33c386d36eec7f20a1eda63b048189b771560fc5a8a980c94652a4efe2b729f",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-dependencies-09.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-09.txt",
+      "bytes": 4333,
+      "sha256": "d1d791f84ac8c81a831534cfc8c6d72c61b775c3c0c3a190d57b9c9fcb948435",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-dependencies-10.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-10.txt",
+      "bytes": 4379,
+      "sha256": "33b9be1b32562414c717d241d46b436efd376a24fc584b14cc128c9d01729e10",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-dependencies-11.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-11.txt",
+      "bytes": 4448,
+      "sha256": "713687508744f2c15e4089e7bd17b56e758928af2034a189a66c3c20a2834fd9",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-dependencies-12.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-12.txt",
+      "bytes": 4312,
+      "sha256": "c958df8c7ad062ad68feeca55fac66c08da7b811c9ecace81ce41009f4a9f397",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-dependencies-13.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-13.txt",
+      "bytes": 4360,
+      "sha256": "eb68c3559b29b101934ab7f4ba740746b6092619ffb1195f8a0156a3c8df01a4",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-dependencies-14.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-14.txt",
+      "bytes": 4418,
+      "sha256": "88a7a868d906166af8c42b771e4f3abbee1c72ff86f049979e30ba55645b7004",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-dependencies-15.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-15.txt",
+      "bytes": 4329,
+      "sha256": "021af1b93d018969b3bda1b8897e7cc21f794c69d90006a430b9fce413356dfe",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-dependencies-16.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-16.txt",
+      "bytes": 3665,
+      "sha256": "b4b8d9d6597c3710564b2567ea428238ed80aae5b571f2b95fb659af6dd18097",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-dependencies-17.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-17.txt",
+      "bytes": 3268,
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-dependencies-18.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-18.txt",
+      "bytes": 4324,
+      "sha256": "d03d1303964f1fe8dddabcb3eb7913a443af83492768ad61241ce22fdead2404",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-dependencies-19.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-19.txt",
+      "bytes": 4324,
+      "sha256": "4b81a96da592d7feab5caf463e99aac11b345cab3930035783a3998cd2d3468f",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-dependencies-20.txt": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-dependencies-20.txt",
+      "bytes": 2772,
+      "sha256": "0a7021bf58bae5096f7938e17aee23e62a6b3498f4ef1c4e8bcaf43898da5453",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c001-product.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c001-product.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/c002-product.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/c002-product.log",
+      "bytes": 120,
+      "sha256": "46c43bc7d8fc96e3b941140d5a4980515efc3f80e937a8c86f735302e175f212",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/host-checks.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/host-checks.json",
+      "bytes": 71754,
+      "sha256": "1a3232271e15204717415bd0f800db0a19562802e55d1903e42ec4119bdcdacf",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/host-checks.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/host-checks.log",
+      "bytes": 366,
+      "sha256": "617755e05457e17b8ec0db053087dc00e016b249b8680bdb43396ee657c9a1f0",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "host-final/products/c001-executable-64bc88f9f7038309-test": {
+      "original_path": "/private/tmp/protracker-sampler-readers-gtljl35f/host-final/products/c001-executable-64bc88f9f7038309-test",
+      "bytes": 1505160,
+      "sha256": "64bc88f9f703830921738b71e9aa7ad4513c2111de5d321ee282559fc37029d0",
+      "mode": 420,
+      "scope": "Actual final one-group ASan/UBSan proof/logs/product, portable host only"
+    },
+    "native-build/PTPaulaReadersTest": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/PTPaulaReadersTest",
+      "bytes": 157632,
+      "sha256": "83759f8caa4843a24eb6ece9009cf287f43af3b00424173c0fa7eb9202e02af4",
+      "mode": 493,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/PTPaulaReadersTest.build.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/PTPaulaReadersTest.build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/compile-commands.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/compile-commands.json",
+      "bytes": 2182,
+      "sha256": "46a2b8f8baf71c58397a88fe3dd66fa1c16ddd7840bde474e44af88b466b33c3",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/compiler-target-help.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/compiler-target-help.log",
+      "bytes": 7189,
+      "sha256": "f49f0114a73ba557163318b0fdad968b33b41a939e5766a83460468bda9c7a79",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/compiler-version.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/compiler-version.log",
+      "bytes": 247,
+      "sha256": "5946ce0c1a43a84e1c7af8cfaa306b2f4bd276dd02164560d5674bcc91250d0b",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-00.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-00.log",
+      "bytes": 5228,
+      "sha256": "65dd570d2e89a78387b2e23d61dd5b66e45fd39672f2958d3e40d9f577f156ba",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-01.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-01.log",
+      "bytes": 3329,
+      "sha256": "a48dba34e0041f01a5a244832c13ae6728bbba974dd87219df385d21d9f7d192",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-02.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-02.log",
+      "bytes": 2935,
+      "sha256": "92ec819ff7d6e393804022b7c06ea0558e530db37a234dd44bc0a333b0bbb928",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-03.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-03.log",
+      "bytes": 2868,
+      "sha256": "29b3f6cd229dfc310a8352b1ace422b53297267c479f637c556fc0110cfa1cb6",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-04.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-04.log",
+      "bytes": 2867,
+      "sha256": "4cd5d434f990b47e5bcac544a05a2a1f1910ad12e51e1ca67e93c01abaadf83f",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-05.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-05.log",
+      "bytes": 2677,
+      "sha256": "7649b08c78af4bc4cb103d1549be8cee06ac757e10a5b6578a43a16049038361",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-06.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-06.log",
+      "bytes": 3486,
+      "sha256": "91d61721891d4308221ccf687813163848b8b65b78c8225015e59653a1d79c53",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-07.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-07.log",
+      "bytes": 2877,
+      "sha256": "6d965099f3d42fe6e1d3f339e33832baa6cfbfba2504c2d0d0ef07c1f94db8b4",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-08.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-08.log",
+      "bytes": 2691,
+      "sha256": "ecfca1c53587ed34fc179bac0275d99ba44e46c144f39ca6e722c4b08bbbeb46",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-09.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-09.log",
+      "bytes": 2674,
+      "sha256": "6eca9be45c2f9e1b81b0d88fa1ccd7ab10c728f6d1a8b8290d29176b9f5d3271",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-10.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-10.log",
+      "bytes": 2719,
+      "sha256": "0a6f724c52f97951e0cc34b50a4aae9db35c2a99d21128cc6f38f72dc4ba32e5",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-11.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-11.log",
+      "bytes": 2787,
+      "sha256": "1f192fe62ece619be6d88a2eb02b0a026130d9d8ee2387791ab4e545a29b5a20",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-12.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-12.log",
+      "bytes": 2653,
+      "sha256": "6b987584a6c74fb8817a7124512d83b18df1c43a53f40741061c14a0343ad866",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-13.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-13.log",
+      "bytes": 2700,
+      "sha256": "b07d0f6181a81bd4892e3d3ba2d642f861ddb380cf1eac93b0fced33761264ad",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-14.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-14.log",
+      "bytes": 2754,
+      "sha256": "e4faeae096c9ec48ef2fc5ad7099505e81e7e2ce0fe48974860884543a80b668",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-15.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-15.log",
+      "bytes": 2671,
+      "sha256": "c7ba9b4659696523b158251b58782db04ab261cbaa3ba9c8a33a76f1e25d7f57",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-16.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-16.log",
+      "bytes": 2665,
+      "sha256": "e6d857bcb44c2f2752e7795df3426c8312bd2bd7d6ad93177da0fc47597b1cc5",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-17.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-17.log",
+      "bytes": 1767,
+      "sha256": "01c3547804956b0748114b63f1de3c6d9d5093feac2a7ff56dfeb2e0290c867a",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-18.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-18.log",
+      "bytes": 2665,
+      "sha256": "30fc4d262f9607a81b3b62ef30564262161af272e84a2320ac95cf8fd56cc5fb",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-19.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-19.log",
+      "bytes": 2665,
+      "sha256": "3ec39f4b71cc8765d576a56a9b4c058099052b7c3f21a3643f8dbb0f08bea835",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/dependencies-20.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/dependencies-20.log",
+      "bytes": 982,
+      "sha256": "153faaede332c2e41619a5bd53c34e720a48f4d8135fb16442b2c5d1f1462628",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/manifest.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/manifest.json",
+      "bytes": 46343,
+      "sha256": "ec59783bd4f8478dd3b0ea7b5c4451d9e5c2c093e23436379aa4d40d06f5820f",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/preprocessed-fixture.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/preprocessed-fixture.log",
+      "bytes": 301857,
+      "sha256": "ee4c4e2e382f37a4b7423a55bba6356064e8509bb3c2eeef2cabefd596027a7e",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/runtime-libamiga-a.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/runtime-libamiga-a.log",
+      "bytes": 156,
+      "sha256": "c2c8e44936c32e01094e9de761e57c62c7bb834fbf6cabd464465bf3b17090c4",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/runtime-libgcc-a.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/runtime-libgcc-a.log",
+      "bytes": 125,
+      "sha256": "b1912e77c4c1160ce749ca74fbe6edabd5896c2291188e718a9cdfd72c84d57a",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/runtime-libnix-a.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/runtime-libnix-a.log",
+      "bytes": 121,
+      "sha256": "1ca0a83ef891770cbbe671647c7aad9f925ed0b9756c8f85aca35c84961e202a",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/runtime-libnix20-a.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/runtime-libnix20-a.log",
+      "bytes": 123,
+      "sha256": "9060e4a22ea9e716b8f9cf85b5fe5e11a9e6c88ef938b9111d189acc2df8465b",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/runtime-libnixmain-a.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/runtime-libnixmain-a.log",
+      "bytes": 125,
+      "sha256": "dd28b9a8319d35bd81f76cd9479f889e7e5628be07a45ef138f35a729c640add",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/runtime-libstubs-a.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/runtime-libstubs-a.log",
+      "bytes": 156,
+      "sha256": "8ce0c56c26f8f09a8af8b76d62c4d380cbfbe8efde13fa64884d8e9e6c93027f",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-build/runtime-ncrt0-o.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/runtime-ncrt0-o.log",
+      "bytes": 120,
+      "sha256": "1562950e2e8cb15a51238fddb72e6e26f0ff2d5a774543473aba0d274a19c45f",
+      "mode": 420,
+      "scope": "Actual one successful pinned native compiler/link proof; HUNK NOT RUN"
+    },
+    "native-recipes/tools/build_core_tests.py": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/source-final-native/tools/build_core_tests.py",
+      "bytes": 38970,
+      "sha256": "1948232ab42449eb518e49ee55276542b102d7461f0f58d8aa273588a20a0d55",
+      "mode": 420,
+      "scope": "Recorded native standalone/committed recipe inputs; canonical declarations separately archived"
+    },
+    "native-recipes/tools/build_diagnostic.py": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/source-final-native/tools/build_diagnostic.py",
+      "bytes": 5879,
+      "sha256": "a5a42c8a811eb4e5ce744157afd2715de8f4c9c7d392b3b7b40f1dc6f459a805",
+      "mode": 420,
+      "scope": "Recorded native standalone/committed recipe inputs; canonical declarations separately archived"
+    },
+    "native-recipes/tools/build_paula_lineage_test.py": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/source-final-native/tools/build_paula_lineage_test.py",
+      "bytes": 15290,
+      "sha256": "3382f2b342858ee81dac33b8016cba94e55a8d0086a40e5496a0fa4ac7654b12",
+      "mode": 420,
+      "scope": "Recorded native standalone/committed recipe inputs; canonical declarations separately archived"
+    },
+    "native-recipes/tools/build_paula_readers_test.py": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/source-final-native/tools/build_paula_readers_test.py",
+      "bytes": 15539,
+      "sha256": "f5299ab38cccdb5112437380fc64fbc66237e62f997b0a2b70d9090676a32ff8",
+      "mode": 420,
+      "scope": "Recorded native standalone/committed recipe inputs; canonical declarations separately archived"
+    },
+    "native-root/native-build-root-invocation.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-build-root-invocation.json",
+      "bytes": 1130,
+      "sha256": "5dfd3d32763d7b591f1fa42a9a2a7de30579789e1e0df8a8e3e04e17f7a831f9",
+      "mode": 420,
+      "scope": "Current clean85a export/full inventory and one actual compiler-only root invocation"
+    },
+    "native-root/native-build-root.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-build-root.log",
+      "bytes": 279,
+      "sha256": "fbb7c1c3fce211d9ccf0477bb531e96fdfc4bd3b0a64a53465bd8f66700689c0",
+      "mode": 420,
+      "scope": "Current clean85a export/full inventory and one actual compiler-only root invocation"
+    },
+    "native-root/root-export-review.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/root-export-review.json",
+      "bytes": 1587,
+      "sha256": "0b8e7f656e449f3f7b46cf10bf125d6cd6b32ff8763bb8908402e0acaff4d1dd",
+      "mode": 420,
+      "scope": "Current clean85a export/full inventory and one actual compiler-only root invocation"
+    },
+    "native-root/source-manifest-native.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/source-manifest-native.json",
+      "bytes": 1095363,
+      "sha256": "3491c925b339b3d98f6ef418ce57e675caa07c566645a9b16842f5df42e3785a",
+      "mode": 420,
+      "scope": "Current clean85a export/full inventory and one actual compiler-only root invocation"
+    },
+    "native-root/toolchain-pins.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/toolchain-pins.json",
+      "bytes": 2709,
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065",
+      "mode": 420,
+      "scope": "Current clean85a export/full inventory and one actual compiler-only root invocation"
+    },
+    "packaging/history/first-package-helper.py": {
+      "original_path": "/private/tmp/protracker-sampler-readers-packet-prepared-w5bdegjy/package_packet.py",
+      "bytes": 9783,
+      "sha256": "0a1cf84706014c95f292655069d19aa0c71fb7186daae9f48bcb50a0d749f38d",
+      "mode": 420,
+      "scope": "Executed first packet helper, source/product unchanged"
+    },
+    "packaging/history/first-package-invocation.log": {
+      "original_path": "/private/tmp/protracker-sampler-readers-packet-prepared-w5bdegjy/package-invocation.log",
+      "bytes": 1274,
+      "sha256": "1e3e61db2b583b62943c083aebe1d22e12a2e0d5129c4572fa6fd409ed40a091",
+      "mode": 420,
+      "scope": "First packet RC0 operation log, superseded by supplement-only packet"
+    },
+    "packaging/history/first-packet-own-qa.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-evidence-final-own-qa.json",
+      "bytes": 1464,
+      "sha256": "395fec1c88f0b7dc3ff5f687e50c5e25a9f47982f44647a28ff63b77b4bc3fcb",
+      "mode": 420,
+      "scope": "Original five-control packet checksum history, immutable full packet retained separately"
+    },
+    "packaging/history/first-prepared-origins.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-packet-prepared-w5bdegjy/prepared-origins.json",
+      "bytes": 64471,
+      "sha256": "d4d54ee0a7f2967c71a7b4e46a295c91c37a01e44b0a3a14317639c2c8a08e8e",
+      "mode": 420,
+      "scope": "Original packet inventory retained before supplemental review addition"
+    },
+    "packaging/package_packet.py": {
+      "original_path": "/private/tmp/protracker-sampler-readers-packet-prepared-w5bdegjy/package_packet_v2.py",
+      "bytes": 10153,
+      "sha256": "3308dd6212e2fb328920ab8f78321461947c73597643b47197e337ff1e1bbb88",
+      "mode": 420,
+      "scope": "Executed packet-only assembly helper; no producer operations"
+    },
+    "packaging/prepared-origins.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-packet-prepared-w5bdegjy/prepared-origins-v2.json",
+      "bytes": 66446,
+      "sha256": "48ab7263d515a22e090a5dccd427e7ff8a3a1482b148c350b1363fc33a35e392",
+      "mode": 420,
+      "scope": "Original packet preparation binding actual native review; no readiness or runtime inference"
+    },
+    "packaging/verify_payload.py": {
+      "original_path": "/private/tmp/protracker-sampler-readers-packet-prepared-w5bdegjy/verify_payload.py",
+      "bytes": 3155,
+      "sha256": "44eb2d8ae1e3bd90fcf4305d07a5a74f155ca7f8b9cb08af7201807c17665026",
+      "mode": 420,
+      "scope": "Standalone read-only packet verifier source"
+    },
+    "reviews/actual-native-build.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-native-actual-independent-review-1791073381946927000.json",
+      "bytes": 107594,
+      "sha256": "36e411f01c085db201ea2b485268c6fe00fcf40c64f10627c0cc826b3cd838e8",
+      "mode": 420,
+      "scope": "Actual independent saved native build review; no runtime claim"
+    },
+    "reviews/attribution-builder-supplement.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-builder-attribution-independent-review-1791073590207007000.json",
+      "bytes": 3933,
+      "sha256": "92bef37c5cc770f07ed1981ce059d405fcf95b9ba4319c7917eefa85721085ce",
+      "mode": 420,
+      "scope": "Independent append-only source attribution/builder review arriving after initial packet"
+    },
+    "reviews/final-source-host.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-final-independent-review-1791072880671688000.json",
+      "bytes": 38477,
+      "sha256": "183b4a4e6ac9180bb4c747abcb3a937e31636a0871c6d71a493d12e44258136d",
+      "mode": 420,
+      "scope": "Independent read-only review exact original; acceptance tier literal"
+    },
+    "reviews/fresh-builder-export.json": {
+      "original_path": "/private/tmp/protracker-sampler-readers-builder-export-independent-review-1791073219419890000.json",
+      "bytes": 4341,
+      "sha256": "8551d3040cf82ed1ae69d343d6c8e6588e0b9779bd80e7250f319afc469f86e3",
+      "mode": 420,
+      "scope": "Independent read-only review exact original; acceptance tier literal"
+    }
+  },
+  "host": {
+    "groups": 1,
+    "RC0": 2,
+    "full_M": 21,
+    "canonical": 51,
+    "system": 105,
+    "products": 1,
+    "generated": 0
+  },
+  "native": {
+    "RC0": 32,
+    "TUs": 21,
+    "full_M": 21,
+    "canonical": 51,
+    "SDK": 32,
+    "runtimes": 7
+  },
+  "native_binary": {
+    "path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/native-final-v1/PTPaulaReadersTest",
+    "bytes": 157632,
+    "sha256": "83759f8caa4843a24eb6ece9009cf287f43af3b00424173c0fa7eb9202e02af4"
+  },
+  "source_manifests": {
+    "author": {
+      "path": "/private/tmp/protracker-sampler-readers-gtljl35f/source-manifest.json",
+      "bytes": 1094346,
+      "sha256": "50b2f55da40c93e2edadac028cc5592e32c18acf43fffabb6bd7b2b915cd72ab"
+    },
+    "current_native": {
+      "path": "/private/tmp/protracker-sampler-readers-current-native-whzlm266/source-manifest-native.json",
+      "bytes": 1095363,
+      "sha256": "3491c925b339b3d98f6ef418ce57e675caa07c566645a9b16842f5df42e3785a"
+    }
+  },
+  "independent_actual_native_review": {
+    "path": "/private/tmp/protracker-sampler-readers-native-actual-independent-review-1791073381946927000.json",
+    "bytes": 107594,
+    "sha256": "36e411f01c085db201ea2b485268c6fe00fcf40c64f10627c0cc826b3cd838e8",
+    "mode": 420
+  },
+  "native_NOT_RUN": true,
+  "limits": [
+    "Genuine sampler immutable master pins and selective cache ownership are host-tested with injected allocators/simulated backend, not native hardware classification or actual activation",
+    "Native HUNK compiler-only NOT RUN; no stack/runtime/Exec Fast/Chip/device/IRQ/MMIO/DMA/audio/timing/physical/listening acceptance",
+    "Original external PCM and held-version HEADER before-images; no whole promoted PCM allocation snapshot claimed",
+    "Public playback packer parity, not independent signed8 codec oracle; no explicit adopted-table/pin-job output-alias fixture claimed",
+    "Early exploratory transient headers/production variants were not all separately archived; do not claim complete historical reproducibility"
+  ],
+  "complete_source_exports_or_SDK_trees_archived": false,
+  "archive_excludes": [
+    "Complete source exports",
+    "117800960-byte Git archive (original exact bytes/hash retained by root export record)",
+    "SDK/compiler/runtime trees",
+    "Unrelated prior evidence"
+  ],
+  "packet_reproduction": "verify_payload.py reconstructs deterministic payload in memory; --origins verifies exact retained originals"
+}

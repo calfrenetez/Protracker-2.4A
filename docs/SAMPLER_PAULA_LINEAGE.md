@@ -100,8 +100,11 @@ lineage sanitizer regressions run separately against the same frozen export.
 Those checks qualify a software contract. Host allocations do not prove Chip
 memory class, Paula DMA, hardware voice stop, an interrupt deadline or listening
 acceptance. A native adapter and exact output capability remain unimplemented.
-The fixed eight-event full-reader domain intentionally refuses pressure; scalable
-persistent reader ownership and production song integration remain unfinished.
+The fixed eight-event full-reader domain intentionally refuses pressure. The
+separate opt-in [persistent-reader binding](SAMPLER_PAULA_READERS.md) now keeps genuine
+sampler pins independently of recyclable command holders and passes host checks
+plus a pinned portability build; it remains native NOT RUN. Production song and
+actual backend integration remain unfinished.
 
 ## Saved host and compiler qualification
 

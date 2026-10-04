@@ -51,17 +51,17 @@ static int pt_diagnostic_cia_acquire(struct pt_diagnostic_cia *t,void (*code)(vo
     for(chip=0;chip<2;++chip) {
         cia_resource=(struct Library *)OpenResource(chip?"ciaa.resource":"ciab.resource");
         if(!cia_resource)continue;
+        hardware=PT_CIA_HARDWARE(chip);
         for(bit=0;bit<2;++bit) {
+            volatile UBYTE *control=bit?&hardware->ciacrb:&hardware->ciacra;
+            UBYTE stopped_control=*control;
+            /* Add/RemICRVector may change the selected interrupt mask. Refuse
+             * an already running timer BEFORE either vector/mask operation;
+             * exclusion prevents a task from starting this stopped candidate. */
+            if(stopped_control&1U)continue;
             if(AddICRVector(cia_resource,bit,&t->server))continue;
             AbleICR(cia_resource,(WORD)(1U<<bit));
-            hardware=PT_CIA_HARDWARE(chip);
-            t->control=bit?&hardware->ciacrb:&hardware->ciacra;
-            t->saved_control=*t->control;
-            /* A running free-vector timer is not assumed disposable. Release
-             * our vector without writing ANY hardware register, then try next. */
-            if(t->saved_control&1U) {
-                RemICRVector(cia_resource,bit,&t->server);t->control=NULL;continue;
-            }
+            t->control=control;t->saved_control=stopped_control;
             SetICR(cia_resource,(WORD)(1U<<bit));
             t->resource=cia_resource;t->chip=chip;t->bit=bit;
             t->low=bit?&hardware->ciatblo:&hardware->ciatalo;

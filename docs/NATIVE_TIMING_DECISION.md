@@ -117,3 +117,22 @@ The user now authorizes real-Amiga/AmiGUS testing. Physical timing and positive
 AmiGUS capability remain untested; current candidate discovery is being qualified
 separately. These observations do not prove universal CIA infeasibility or permit
 relaxed timing. No production scheduling policy has changed.
+
+## Original-window deadline-aperture experiment prepared — 4 October 2026
+
+The user selected exact scheduling. The separate CIA deadline-aperture experiment
+publishes immutable RAM-only work in advance and uses an earlier wake plus bounded
+actual-clock reads to attempt a shadow commit inside the original frame window.
+Its fixed diagnostic aperture/read cap defines a residency policy; it neither
+subtracts measured lateness nor moves the musical epoch or widens the gate.
+Precommit refusal has zero effects; a postcommit bracket crossing remains a failure
+with one irreversible commit. Dispatch clock brackets do not prove full IRQ WCET.
+
+The diagnostic exposed a prerequisite helper bug: acquiring a free vector on a
+running timer could alter its enabled interrupt mask. The helper now checks running
+control under Disable before AddICRVector. Two host sanitizer groups and an identical
+baseline/corrected hardware-stub probe verify preservation, and one pinned portability
+build passes. The diagnostic remains native NOT RUN. Timer/register ownership, actual
+window feasibility, stack adequacy, DMA and physical/audio/listening remain unqualified.
+See [diagnostic contract](CIA_APERTURE_DIAGNOSTIC.md) and
+[saved host/compiler records](../evidence/enhanced-editor/cia-aperture-diagnostic/README.md).

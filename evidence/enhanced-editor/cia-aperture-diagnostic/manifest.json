@@ -1,0 +1,1257 @@
+{
+  "acceptance": {
+    "host_RC0_commands": 4,
+    "host_canonical_inputs": 7,
+    "host_full_M_queries": 4,
+    "host_groups": 2,
+    "host_products": 2,
+    "host_system_inputs": 61,
+    "native_RC0_commands": 16,
+    "native_SDK_inputs": 70,
+    "native_binary": {
+      "bytes": 47576,
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-final-v1/PTExecCiaApertureTest",
+      "sha256": "f9441121833d46ddd1d3b96c1677576414fa14e78d3a638d93d91246ee69f007"
+    },
+    "native_canonical_inputs": 12,
+    "native_full_M_queries": 4,
+    "native_ordered_TUs": 4,
+    "native_run": false,
+    "native_runtimes": 7,
+    "probe_baseline_expected_RC20": true,
+    "probe_corrected_RC0": true,
+    "timing_WCET_stack_device_qualified": false
+  },
+  "deterministic_archive": {
+    "format": "USTAR + gzip",
+    "gid": 0,
+    "modes": "exact origin file mode",
+    "mtime": 0,
+    "owners": "empty",
+    "second_write_byte_identical": true,
+    "uid": 0
+  },
+  "large_origin_omitted": {
+    "bytes": 117800960,
+    "mode": 420,
+    "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/committed-export.tar",
+    "sha256": "c28a69c53fa1dfb18c72f2765ba91ca72c27c51fdbfd7e46cf337a5cb66bbfef"
+  },
+  "members": [
+    {
+      "bytes": 5009,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/audit_host_proof.py",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/audit_host_proof.py",
+      "role": "Author frozen proof, attribution or unexecuted preparation history; original bytes",
+      "sha256": "dc1d99c49681a2c86310931de45fa05a997da9f9f320b6d02b01f408d33b4904"
+    },
+    {
+      "bytes": 1929,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/author-host-proof-review.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/author-host-proof-review.json",
+      "role": "Author frozen proof, attribution or unexecuted preparation history; original bytes",
+      "sha256": "c330b1ad380352b082110412a077a0f7e669d4de5993f612c01eb2c449248518"
+    },
+    {
+      "bytes": 1076,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/baseline-attribution.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/baseline-attribution.json",
+      "role": "Author frozen proof, attribution or unexecuted preparation history; original bytes",
+      "sha256": "615dc5c40dea8fdd2a807bcdc8e526c459a6449098812632e0896833a158e30c"
+    },
+    {
+      "bytes": 2399,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/current-compiled-inputs.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/current-compiled-inputs.json",
+      "role": "Author frozen proof, attribution or unexecuted preparation history; original bytes",
+      "sha256": "296f70b906a2d36c5da8fc7f1cced3d4544bffb4295ac611d4e75cfefdfe237e"
+    },
+    {
+      "bytes": 3739,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/draft-review-v2.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/draft-review-v2.json",
+      "role": "Author frozen proof, attribution or unexecuted preparation history; original bytes",
+      "sha256": "60b6c6306a8537acc8e8eccb89b46f5ae5fd2214ebd2f10ead3e370e2da21db7"
+    },
+    {
+      "bytes": 1959,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/draft-review.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/draft-review.json",
+      "role": "Author frozen proof, attribution or unexecuted preparation history; original bytes",
+      "sha256": "cc7498a95207fe54d1cf32a846bb6991a547e8f444215e1993dfebd3e982ba13"
+    },
+    {
+      "bytes": 64434,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/draft-v2.patch",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/draft-v2.patch",
+      "role": "Author frozen proof, attribution or unexecuted preparation history; original bytes",
+      "sha256": "c76e22607dab75370dbc9570d7351e184eafaa21f01ee109ee9bb4d8be5e1789"
+    },
+    {
+      "bytes": 56646,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/draft.patch",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/draft.patch",
+      "role": "Author frozen proof, attribution or unexecuted preparation history; original bytes",
+      "sha256": "f2632814dde4805adb7769380420b0f44cb51968d6cd4b50851c56323422bc01"
+    },
+    {
+      "bytes": 8020,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/handoff.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/handoff.json",
+      "role": "Author frozen proof, attribution or unexecuted preparation history; original bytes",
+      "sha256": "4780306984776db6f23410389ff9bfdbba27d8ff34126e43c12a64eec042429f"
+    },
+    {
+      "bytes": 4944,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/history-audit/audit_host_proof-v1.py",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/history-audit/audit_host_proof-v1.py",
+      "role": "Author helper/probe or original before-image/history; exact original bytes",
+      "sha256": "4d8f500e513e7baa52c6185df46548d6a52b8e10695607ade271fc54bf8cf2f1"
+    },
+    {
+      "bytes": 5001,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/history-audit/audit_host_proof-v2.py",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/history-audit/audit_host_proof-v2.py",
+      "role": "Author helper/probe or original before-image/history; exact original bytes",
+      "sha256": "93cb8769d6a1f5a4a03d4609a133e92a93c706e98a2d16425ad3d4a871a74077"
+    },
+    {
+      "bytes": 452,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/history-audit/failure-v1.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/history-audit/failure-v1.json",
+      "role": "Author helper/probe or original before-image/history; exact original bytes",
+      "sha256": "ce5ca90e349bc20a760b0b0afd0227c518988daae5c598f98f9d8e3ca79ccd74"
+    },
+    {
+      "bytes": 401,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/history-audit/failure-v2.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/history-audit/failure-v2.json",
+      "role": "Author helper/probe or original before-image/history; exact original bytes",
+      "sha256": "aec91a9f96dba5fca5b26518c3a7d71c7857d9e9f33aeb8c151a29c6cacc8997"
+    },
+    {
+      "bytes": 8305,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/history-before-owner-fix/tests/cia_owner_test.c",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/history-before-owner-fix/tests/cia_owner_test.c",
+      "role": "Author helper/probe or original before-image/history; exact original bytes",
+      "sha256": "2427327839b3c5293c28638b457c5dfb7ac40762ccd19a0bd51fb2c130b1169f"
+    },
+    {
+      "bytes": 6659,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/history-before-owner-fix/tests/native_cia_owner.h",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/history-before-owner-fix/tests/native_cia_owner.h",
+      "role": "Author helper/probe or original before-image/history; exact original bytes",
+      "sha256": "b8434ac3bdbfa5720814912f7af635fa4150b4d91d5e89a07384f8409bc6ac1e"
+    },
+    {
+      "bytes": 872,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/host-tools-prepared.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/host-tools-prepared.json",
+      "role": "Author frozen proof, attribution or unexecuted preparation history; original bytes",
+      "sha256": "55f67474e8f8060413cae9b96ff46b8568d09b5101d48116810a26f79bd54f88"
+    },
+    {
+      "bytes": 990,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/native-build-invocation-template.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/native-build-invocation-template.json",
+      "role": "Author frozen proof, attribution or unexecuted preparation history; original bytes",
+      "sha256": "7aec2381638fcfb18fe3994e0b57d9f19727af1aa4fc68d0c7adb59dd3daeebf"
+    },
+    {
+      "bytes": 1234,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/owner-probe/probe.c",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/owner-probe/probe.c",
+      "role": "Author helper/probe or original before-image/history; exact original bytes",
+      "sha256": "b892a582184a09aa2cd099688a76e068d9d576dc84833a3e48488e7cc17b6839"
+    },
+    {
+      "bytes": 5741,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/owner-probe/run_probe.py",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/owner-probe/run_probe.py",
+      "role": "Author helper/probe or original before-image/history; exact original bytes",
+      "sha256": "632c96137afc5bbbf74485f9598be06de3c91ffcd67f7ab7acd2cdc6dee5f93c"
+    },
+    {
+      "bytes": 6015,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/prepare_builder.py",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/prepare_builder.py",
+      "role": "Author frozen proof, attribution or unexecuted preparation history; original bytes",
+      "sha256": "fb4d4b03ac84bd0b9f3ecf1fd0ed65485b16bcffce5184f6fd29bf9ec6deda42"
+    },
+    {
+      "bytes": 3617,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/refine_budget.py",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/refine_budget.py",
+      "role": "Author frozen proof, attribution or unexecuted preparation history; original bytes",
+      "sha256": "33a28dcf7741ede48231e5dde07816a0ceff9c64877980144ace7a22e5fd7846"
+    },
+    {
+      "bytes": 6858,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/refine_draft.py",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/refine_draft.py",
+      "role": "Author frozen proof, attribution or unexecuted preparation history; original bytes",
+      "sha256": "c897d9f970de0e675486e988787398060e2f38f45a4f4f4438fc2c03aeb5c025"
+    },
+    {
+      "bytes": 3307,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/refine_native_reads.py",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/refine_native_reads.py",
+      "role": "Author frozen proof, attribution or unexecuted preparation history; original bytes",
+      "sha256": "ac9aa1aea03de8af98440a5266e1fb4ed288d3f688ad6225d7dc90b3d14f4ccb"
+    },
+    {
+      "bytes": 1603,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/root-export-review.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/root-export-review.json",
+      "role": "Author frozen proof, attribution or unexecuted preparation history; original bytes",
+      "sha256": "9462b7cd2e812bd19904ed4c997e7e9bd1efd209bc1b91dbaa0384ae242421f4"
+    },
+    {
+      "bytes": 1094036,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/source-manifest-native.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/source-manifest-native.json",
+      "role": "Author frozen proof, attribution or unexecuted preparation history; original bytes",
+      "sha256": "9a8437c23abd6ab038313884f4bc34b1abb0e135eb8eca84ceb2a347d6931b44"
+    },
+    {
+      "bytes": 2189444,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/source-manifest.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/source-manifest.json",
+      "role": "Author frozen proof, attribution or unexecuted preparation history; original bytes",
+      "sha256": "533d8d54c36b648364235691b6867a06541966a08091ec09b220d7a12411b377"
+    },
+    {
+      "bytes": 3688,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/toolchain-pins-aperture.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/toolchain-pins-aperture.json",
+      "role": "Author frozen proof, attribution or unexecuted preparation history; original bytes",
+      "sha256": "616f4c3acde58210144ec3fb81128ac440075630c8cb5d6eff38bae512e29ec3"
+    },
+    {
+      "bytes": 14135,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/tools-host/host_provenance.py",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/tools-host/host_provenance.py",
+      "role": "Author helper/probe or original before-image/history; exact original bytes",
+      "sha256": "d4e94c379325489e19be23eaee012dd7c54433e9f67ce1488c360f3a57743241"
+    },
+    {
+      "bytes": 11124,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/tools-host/provenance_common.py",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/tools-host/provenance_common.py",
+      "role": "Author helper/probe or original before-image/history; exact original bytes",
+      "sha256": "78e28229f0f132c73153606be3a40d750a4013f5ea1bbb5af7c15e117e62cdb5"
+    },
+    {
+      "bytes": 2709,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "author/tools-host/toolchain-pins.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/tools-host/toolchain-pins.json",
+      "role": "Author helper/probe or original before-image/history; exact original bytes",
+      "sha256": "ad2ecef26f9d50b2899d057b92efc7ffeb9e6ea9fa48042c1d623d009e059065"
+    },
+    {
+      "bytes": 1602646,
+      "derivation": "Complete read-only tar member hash/bytes/mode inventory; not an exact copy of the omitted tar",
+      "mode": 420,
+      "name": "derived/committed-85a-archive-inventory.json",
+      "path": "/private/tmp/protracker-cia-aperture-packet-derived-8cku0nh5/committed-85a-archive-inventory.json",
+      "role": "Derived complete committed archive member inventory; original archive omitted",
+      "sha256": "d229f3ee008b53fefd133113a520290438b99e0db068927b5a07467064d8e9d2"
+    },
+    {
+      "bytes": 10271,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "design/DESIGN.md",
+      "path": "/private/tmp/protracker-native-conditional-design-zdwa84b3/DESIGN.md",
+      "role": "Earlier read-only native conditional feasibility proposal; not timing proof",
+      "sha256": "39ef075d968fab0f5960160a7cadc6fdd0dab1666f037d1233e712c76638d5b1"
+    },
+    {
+      "bytes": 845,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "design/handoff.json",
+      "path": "/private/tmp/protracker-native-conditional-design-zdwa84b3/handoff.json",
+      "role": "Earlier read-only native conditional feasibility proposal; not timing proof",
+      "sha256": "d5c4cd4e1e1a7ddf0cc723665fd0a60518af5f65c64f167c51e3d18ff8b43213"
+    },
+    {
+      "bytes": 3779,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "design/source-facts.json",
+      "path": "/private/tmp/protracker-native-conditional-design-zdwa84b3/source-facts.json",
+      "role": "Earlier read-only native conditional feasibility proposal; not timing proof",
+      "sha256": "025f1f4b32415cfae9014e2114ec9bbbaad834f9236db48f5b628f3e4961834d"
+    },
+    {
+      "bytes": 2511,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "history/prior-cia-critical-failure/README.md",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/baseline/evidence/enhanced-editor/cia-critical-native/README.md",
+      "role": "Prior distinct critical-arm failed native qualification/recovery originals; failure remains",
+      "sha256": "765acb41cd7e114cbd695e20af8e7120d3c85231c86168d69ce8ced3e65dcec5"
+    },
+    {
+      "bytes": 16715,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "history/prior-cia-critical-failure/build.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/baseline/evidence/enhanced-editor/cia-critical-native/build.json",
+      "role": "Prior distinct critical-arm failed native qualification/recovery originals; failure remains",
+      "sha256": "f1aaf994bf7a9e5e2a7f49ad33cb90762ba496f55d5fc4b970492a8a42ff0fbf"
+    },
+    {
+      "bytes": 2612,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "history/prior-cia-critical-failure/cia-timing.log",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/baseline/evidence/enhanced-editor/cia-critical-native/cia-timing.log",
+      "role": "Prior distinct critical-arm failed native qualification/recovery originals; failure remains",
+      "sha256": "220889dc5ccfa1bdb0437183a60572f5340dc24952dfe60a2916ba73c2e9410d"
+    },
+    {
+      "bytes": 1694,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "history/prior-cia-critical-failure/cleanup-host.log",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/baseline/evidence/enhanced-editor/cia-critical-native/cleanup-host.log",
+      "role": "Prior distinct critical-arm failed native qualification/recovery originals; failure remains",
+      "sha256": "f43fc55b3bb0b6cb150788dc82bdf015321adbdb848ff11f7658c8d8da830281"
+    },
+    {
+      "bytes": 1260,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "history/prior-cia-critical-failure/deferred-absence.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/baseline/evidence/enhanced-editor/cia-critical-native/deferred-absence.json",
+      "role": "Prior distinct critical-arm failed native qualification/recovery originals; failure remains",
+      "sha256": "6e9240368d16ee0d77063f1cfd17fc348db25fa2d7135fb2e262b48b45c3f3a7"
+    },
+    {
+      "bytes": 4555,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "history/prior-cia-critical-failure/empty-directory-recovery.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/baseline/evidence/enhanced-editor/cia-critical-native/empty-directory-recovery.json",
+      "role": "Prior distinct critical-arm failed native qualification/recovery originals; failure remains",
+      "sha256": "c5556ec6ec7b1f79ac2ea574c554c7a2d24a858f7e3cf1d9ca8f9c1ddaa56aed"
+    },
+    {
+      "bytes": 863,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "history/prior-cia-critical-failure/independent-cleanup-failure.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/baseline/evidence/enhanced-editor/cia-critical-native/independent-cleanup-failure.json",
+      "role": "Prior distinct critical-arm failed native qualification/recovery originals; failure remains",
+      "sha256": "1cc106cd02337a783752c6740722f77cbe3de9d3b6b4ca6f4240db70e1659d77"
+    },
+    {
+      "bytes": 1234,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "history/prior-cia-critical-failure/independent-recovered-cleanup.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/baseline/evidence/enhanced-editor/cia-critical-native/independent-recovered-cleanup.json",
+      "role": "Prior distinct critical-arm failed native qualification/recovery originals; failure remains",
+      "sha256": "8246de4614555dc95f2c299cfba82881ee610998d19d7363a027332b5b0b1626"
+    },
+    {
+      "bytes": 531,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "history/prior-cia-critical-failure/native-result.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/baseline/evidence/enhanced-editor/cia-critical-native/native-result.json",
+      "role": "Prior distinct critical-arm failed native qualification/recovery originals; failure remains",
+      "sha256": "e38a8ec0db31cce979d9c9ede5163e3a99ef0604b826d79527e4a5dd4189ad6b"
+    },
+    {
+      "bytes": 319,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "history/prior-cia-critical-failure/qualification.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/baseline/evidence/enhanced-editor/cia-critical-native/qualification.json",
+      "role": "Prior distinct critical-arm failed native qualification/recovery originals; failure remains",
+      "sha256": "f7ca349d2b0eff4ccaed99bddcdddefea1daee5e104235932c78881d470dbe22"
+    },
+    {
+      "bytes": 18592,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "packaging/package_cia_aperture_8cku0nh5.py",
+      "path": "/private/tmp/package_cia_aperture_8cku0nh5.py",
+      "role": "Exact host-only packet writer source; not a product/runtime helper",
+      "sha256": "abf131722758b0787c5524db505114c2483a8944a5a7761f9c20983fb9154c3b"
+    },
+    {
+      "bytes": 5283,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/host/c001-dependencies-00.txt",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/host-final/c001-dependencies-00.txt",
+      "role": "Final host ASan/UBSan command/dependency/log/product original",
+      "sha256": "8b3405d6f5b0a9479243290c95443fbcbf8fdbf70ef302218da1804e3cb632b5"
+    },
+    {
+      "bytes": 4382,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/host/c001-dependencies-01.txt",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/host-final/c001-dependencies-01.txt",
+      "role": "Final host ASan/UBSan command/dependency/log/product original",
+      "sha256": "d728b22ce74498eae8a3995a293bfcafdba8f76a00549e9c10738b74b5fef37f"
+    },
+    {
+      "bytes": 4335,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/host/c001-dependencies-02.txt",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/host-final/c001-dependencies-02.txt",
+      "role": "Final host ASan/UBSan command/dependency/log/product original",
+      "sha256": "42c7499b25b2aea510723679cd8c3b05f6579288e42e053ab8a31328255e114d"
+    },
+    {
+      "bytes": 0,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/host/c001-product.log",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/host-final/c001-product.log",
+      "role": "Final host ASan/UBSan command/dependency/log/product original",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 138,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/host/c002-product.log",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/host-final/c002-product.log",
+      "role": "Final host ASan/UBSan command/dependency/log/product original",
+      "sha256": "5f92a95b4b715dfa6dbf44e441f5f4f1bd9f8a644a096944f9a72bfb8658024f"
+    },
+    {
+      "bytes": 4578,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/host/c003-dependencies-00.txt",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/host-final/c003-dependencies-00.txt",
+      "role": "Final host ASan/UBSan command/dependency/log/product original",
+      "sha256": "275785b929bdecd7447aa08d400dc22a7c3571b2aafbd0ef92e3c636b5c8d326"
+    },
+    {
+      "bytes": 0,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/host/c003-product.log",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/host-final/c003-product.log",
+      "role": "Final host ASan/UBSan command/dependency/log/product original",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 75,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/host/c004-product.log",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/host-final/c004-product.log",
+      "role": "Final host ASan/UBSan command/dependency/log/product original",
+      "sha256": "1b01259b2cb15d665b36e55eaba1fc8ae8897322db99bd2c47e5d4d782853098"
+    },
+    {
+      "bytes": 44768,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/host/host-checks.json",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/host-final/host-checks.json",
+      "role": "Final host ASan/UBSan command/dependency/log/product original",
+      "sha256": "6f731baa2bc936f90a0000e4377d883617a2c9f4c246970c9e45bc4e3b28bd2d"
+    },
+    {
+      "bytes": 629,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/host/host-checks.log",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/host-final/host-checks.log",
+      "role": "Final host ASan/UBSan command/dependency/log/product original",
+      "sha256": "02070bc6e72e6972cfbefe057e5ccb8b94bb23c533327d3812a7be29d19a5fa6"
+    },
+    {
+      "bytes": 149056,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/host/products/c001-executable-cd51e0ea121c17b1-cia-aperture",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/host-final/products/c001-executable-cd51e0ea121c17b1-cia-aperture",
+      "role": "Final host ASan/UBSan command/dependency/log/product original",
+      "sha256": "cd51e0ea121c17b158e0046e193c9b2844a8815bf5f7842aa07bde7582be39f9"
+    },
+    {
+      "bytes": 99352,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/host/products/c003-executable-49fc2493fe6d730c-test",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/host-final/products/c003-executable-49fc2493fe6d730c-test",
+      "role": "Final host ASan/UBSan command/dependency/log/product original",
+      "sha256": "49fc2493fe6d730caab72ce2b03dd2b324e10de5d3c962fd9b6d4996210efc78"
+    },
+    {
+      "bytes": 47576,
+      "derivation": "exact original bytes",
+      "mode": 493,
+      "name": "records/native/PTExecCiaApertureTest",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-final-v1/PTExecCiaApertureTest",
+      "role": "One actual native compiler/assembler build original; HUNK NOT RUN",
+      "sha256": "f9441121833d46ddd1d3b96c1677576414fa14e78d3a638d93d91246ee69f007"
+    },
+    {
+      "bytes": 0,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/native/PTExecCiaApertureTest.build.log",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-final-v1/PTExecCiaApertureTest.build.log",
+      "role": "One actual native compiler/assembler build original; HUNK NOT RUN",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 148,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/native/assembler-path.log",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-final-v1/assembler-path.log",
+      "role": "One actual native compiler/assembler build original; HUNK NOT RUN",
+      "sha256": "f5e8714a01b01970db9cb54cd8c71311c581f42e06a00ccd2d3ef0320242b1f5"
+    },
+    {
+      "bytes": 1160,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/native/compile-commands.json",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-final-v1/compile-commands.json",
+      "role": "One actual native compiler/assembler build original; HUNK NOT RUN",
+      "sha256": "c7d8b9c7355ebc4506ad08989fce86127d50248298da32e38b680cf7d274ddff"
+    },
+    {
+      "bytes": 7189,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/native/compiler-target-help.log",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-final-v1/compiler-target-help.log",
+      "role": "One actual native compiler/assembler build original; HUNK NOT RUN",
+      "sha256": "f49f0114a73ba557163318b0fdad968b33b41a939e5766a83460468bda9c7a79"
+    },
+    {
+      "bytes": 247,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/native/compiler-version.log",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-final-v1/compiler-version.log",
+      "role": "One actual native compiler/assembler build original; HUNK NOT RUN",
+      "sha256": "5946ce0c1a43a84e1c7af8cfaa306b2f4bd276dd02164560d5674bcc91250d0b"
+    },
+    {
+      "bytes": 9582,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/native/dependencies-00.log",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-final-v1/dependencies-00.log",
+      "role": "One actual native compiler/assembler build original; HUNK NOT RUN",
+      "sha256": "a8cc56bd1190829a5b9fdf4c4343bbdb1601cee8d51bf5c91ba1d7635de07297"
+    },
+    {
+      "bytes": 2726,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/native/dependencies-01.log",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-final-v1/dependencies-01.log",
+      "role": "One actual native compiler/assembler build original; HUNK NOT RUN",
+      "sha256": "d847f8bdde5f2cbfdbb571986355c8b5294ba64ca3bfd4a636f9865af1cb4914"
+    },
+    {
+      "bytes": 2677,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/native/dependencies-02.log",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-final-v1/dependencies-02.log",
+      "role": "One actual native compiler/assembler build original; HUNK NOT RUN",
+      "sha256": "7649b08c78af4bc4cb103d1549be8cee06ac757e10a5b6578a43a16049038361"
+    },
+    {
+      "bytes": 59,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/native/dependencies-03.log",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-final-v1/dependencies-03.log",
+      "role": "One actual native compiler/assembler build original; HUNK NOT RUN",
+      "sha256": "cc3989d187e60c6de440930060ae462d518555a227759d7f875a479e19fe8b8d"
+    },
+    {
+      "bytes": 36555,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/native/manifest.json",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-final-v1/manifest.json",
+      "role": "One actual native compiler/assembler build original; HUNK NOT RUN",
+      "sha256": "7337005e609922264384ef58fa2e21fc74a9d2be8bf8e5483493c8f29bd0cd99"
+    },
+    {
+      "bytes": 557168,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/native/preprocessed-fixture.log",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-final-v1/preprocessed-fixture.log",
+      "role": "One actual native compiler/assembler build original; HUNK NOT RUN",
+      "sha256": "778bd3f0d4f1913f8456b0c87c12b5c65cc534602f26ee078731326c36cc77a5"
+    },
+    {
+      "bytes": 156,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/native/runtime-libamiga-a.log",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-final-v1/runtime-libamiga-a.log",
+      "role": "One actual native compiler/assembler build original; HUNK NOT RUN",
+      "sha256": "c2c8e44936c32e01094e9de761e57c62c7bb834fbf6cabd464465bf3b17090c4"
+    },
+    {
+      "bytes": 125,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/native/runtime-libgcc-a.log",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-final-v1/runtime-libgcc-a.log",
+      "role": "One actual native compiler/assembler build original; HUNK NOT RUN",
+      "sha256": "b1912e77c4c1160ce749ca74fbe6edabd5896c2291188e718a9cdfd72c84d57a"
+    },
+    {
+      "bytes": 121,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/native/runtime-libnix-a.log",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-final-v1/runtime-libnix-a.log",
+      "role": "One actual native compiler/assembler build original; HUNK NOT RUN",
+      "sha256": "1ca0a83ef891770cbbe671647c7aad9f925ed0b9756c8f85aca35c84961e202a"
+    },
+    {
+      "bytes": 123,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/native/runtime-libnix20-a.log",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-final-v1/runtime-libnix20-a.log",
+      "role": "One actual native compiler/assembler build original; HUNK NOT RUN",
+      "sha256": "9060e4a22ea9e716b8f9cf85b5fe5e11a9e6c88ef938b9111d189acc2df8465b"
+    },
+    {
+      "bytes": 125,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/native/runtime-libnixmain-a.log",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-final-v1/runtime-libnixmain-a.log",
+      "role": "One actual native compiler/assembler build original; HUNK NOT RUN",
+      "sha256": "dd28b9a8319d35bd81f76cd9479f889e7e5628be07a45ef138f35a729c640add"
+    },
+    {
+      "bytes": 156,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/native/runtime-libstubs-a.log",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-final-v1/runtime-libstubs-a.log",
+      "role": "One actual native compiler/assembler build original; HUNK NOT RUN",
+      "sha256": "8ce0c56c26f8f09a8af8b76d62c4d380cbfbe8efde13fa64884d8e9e6c93027f"
+    },
+    {
+      "bytes": 120,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/native/runtime-ncrt0-o.log",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-final-v1/runtime-ncrt0-o.log",
+      "role": "One actual native compiler/assembler build original; HUNK NOT RUN",
+      "sha256": "1562950e2e8cb15a51238fddb72e6e26f0ff2d5a774543473aba0d274a19c45f"
+    },
+    {
+      "bytes": 0,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/probe/baseline-compile.log",
+      "path": "/private/tmp/protracker-cia-aperture-owner-probe-final-8cku0nh5/baseline-compile.log",
+      "role": "Identical running-mask probe original: baseline expected RC20, corrected RC0",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 4639,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/probe/baseline-dependencies.log",
+      "path": "/private/tmp/protracker-cia-aperture-owner-probe-final-8cku0nh5/baseline-dependencies.log",
+      "role": "Identical running-mask probe original: baseline expected RC20, corrected RC0",
+      "sha256": "733db54d6403bc121f27a4a333343ac19b91615368eca87538c9f82a7f471625"
+    },
+    {
+      "bytes": 99856,
+      "derivation": "exact original bytes",
+      "mode": 493,
+      "name": "records/probe/baseline-probe",
+      "path": "/private/tmp/protracker-cia-aperture-owner-probe-final-8cku0nh5/baseline-probe",
+      "role": "Identical running-mask probe original: baseline expected RC20, corrected RC0",
+      "sha256": "a7d7c39b4c22158e0e4a304cd0b40de5487918664e5e4f484ac161a9cbe7cf1c"
+    },
+    {
+      "bytes": 117,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/probe/baseline-runtime.log",
+      "path": "/private/tmp/protracker-cia-aperture-owner-probe-final-8cku0nh5/baseline-runtime.log",
+      "role": "Identical running-mask probe original: baseline expected RC20, corrected RC0",
+      "sha256": "221270ed44d1b164a188b90f3b5b5b0259cc01a7d6155bf65dd8cfd3d85797d8"
+    },
+    {
+      "bytes": 0,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/probe/candidate-compile.log",
+      "path": "/private/tmp/protracker-cia-aperture-owner-probe-final-8cku0nh5/candidate-compile.log",
+      "role": "Identical running-mask probe original: baseline expected RC20, corrected RC0",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 4639,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/probe/candidate-dependencies.log",
+      "path": "/private/tmp/protracker-cia-aperture-owner-probe-final-8cku0nh5/candidate-dependencies.log",
+      "role": "Identical running-mask probe original: baseline expected RC20, corrected RC0",
+      "sha256": "733db54d6403bc121f27a4a333343ac19b91615368eca87538c9f82a7f471625"
+    },
+    {
+      "bytes": 100160,
+      "derivation": "exact original bytes",
+      "mode": 493,
+      "name": "records/probe/candidate-probe",
+      "path": "/private/tmp/protracker-cia-aperture-owner-probe-final-8cku0nh5/candidate-probe",
+      "role": "Identical running-mask probe original: baseline expected RC20, corrected RC0",
+      "sha256": "7d4fa2366403a01eb1686892ef9de6361cb0131a25e510b9d5693cf9849e16c7"
+    },
+    {
+      "bytes": 117,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/probe/candidate-runtime.log",
+      "path": "/private/tmp/protracker-cia-aperture-owner-probe-final-8cku0nh5/candidate-runtime.log",
+      "role": "Identical running-mask probe original: baseline expected RC20, corrected RC0",
+      "sha256": "bdd953993ee2741aff4799aa4fede0509e18eba4a9ea1bdea0d71c4eb32afa65"
+    },
+    {
+      "bytes": 53,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/probe/compiler-resource.log",
+      "path": "/private/tmp/protracker-cia-aperture-owner-probe-final-8cku0nh5/compiler-resource.log",
+      "role": "Identical running-mask probe original: baseline expected RC20, corrected RC0",
+      "sha256": "ae4dc8a8a83fdae4897a378fbf33fe0a98ae67d92cb9d6da17ac13eafbe7405b"
+    },
+    {
+      "bytes": 158,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/probe/compiler-version.log",
+      "path": "/private/tmp/protracker-cia-aperture-owner-probe-final-8cku0nh5/compiler-version.log",
+      "role": "Identical running-mask probe original: baseline expected RC20, corrected RC0",
+      "sha256": "a856ec74c559401131ad608625ef252fb2db6c78bc0c480c1c4c782ee4896db1"
+    },
+    {
+      "bytes": 26758,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "records/probe/result.json",
+      "path": "/private/tmp/protracker-cia-aperture-owner-probe-final-8cku0nh5/result.json",
+      "role": "Identical running-mask probe original: baseline expected RC20, corrected RC0",
+      "sha256": "a7a65ed5302c7d536685eb8485db6f87a437ffe063cfacced3ccb3f93ec269c6"
+    },
+    {
+      "bytes": 4701,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "reviews/protracker-cia-aperture-builder-abi-independent-review-1791073285715125000.json",
+      "path": "/private/tmp/protracker-cia-aperture-builder-abi-independent-review-1791073285715125000.json",
+      "role": "Independent saved read-only scope/source/proof review",
+      "sha256": "4d0e5af9dfb7f9d943c8369312bee6facf0936163eaa4810e830761c046a9d88"
+    },
+    {
+      "bytes": 7668,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "reviews/protracker-cia-aperture-draft-independent-review-1791073447403275000.json",
+      "path": "/private/tmp/protracker-cia-aperture-draft-independent-review-1791073447403275000.json",
+      "role": "Independent saved read-only scope/source/proof review",
+      "sha256": "a3bf31975747d66397652886dfd706453b0cfa7c6eb5974e84ac42a30922c6ef"
+    },
+    {
+      "bytes": 10780,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "reviews/protracker-cia-aperture-host-export-independent-review-1791074061624341000.json",
+      "path": "/private/tmp/protracker-cia-aperture-host-export-independent-review-1791074061624341000.json",
+      "role": "Independent saved read-only scope/source/proof review",
+      "sha256": "0b4062a5dc5beeb31d6f786dcd6ef63f2864ee5d236ba9b5b8454f7d0a8b0197"
+    },
+    {
+      "bytes": 44943,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "reviews/protracker-cia-aperture-host-independent-review-1791074060205070000.json",
+      "path": "/private/tmp/protracker-cia-aperture-host-independent-review-1791074060205070000.json",
+      "role": "Independent saved read-only scope/source/proof review",
+      "sha256": "174e7d3928162a47b7b04fe50003b47323d309bb8da0ec4fba3b1401851bafae"
+    },
+    {
+      "bytes": 16150,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "reviews/protracker-cia-aperture-native-actual-independent-review-1791074286094090000.json",
+      "path": "/private/tmp/protracker-cia-aperture-native-actual-independent-review-1791074286094090000.json",
+      "role": "Independent saved read-only scope/source/proof review",
+      "sha256": "33d8b9a2d6cba9a52800d1d09800fc00cf1fd4bcd4c7358836faf4671454ca60"
+    },
+    {
+      "bytes": 1128,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "root/native-build-root-invocation.json",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-build-root-invocation.json",
+      "role": "Root fresh current-85a export/build attribution or actual compiler invocation",
+      "sha256": "3150043a7b1339daa016bef59faab513ec553ded8d04c30bf387439c023c796d"
+    },
+    {
+      "bytes": 276,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "root/native-build-root.log",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/native-build-root.log",
+      "role": "Root fresh current-85a export/build attribution or actual compiler invocation",
+      "sha256": "af4b1b2e426f2de1bd58851263cd9b98b18ab55cf367554c24d9dd28bd8768e7"
+    },
+    {
+      "bytes": 1574,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "root/root-export-review.json",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/root-export-review.json",
+      "role": "Root fresh current-85a export/build attribution or actual compiler invocation",
+      "sha256": "13df7981d094d07a6b73317eeb6ace761704d0c7ddf12a22c99ea88adc9d6d02"
+    },
+    {
+      "bytes": 1097352,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "root/source-manifest-native.json",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/source-manifest-native.json",
+      "role": "Root fresh current-85a export/build attribution or actual compiler invocation",
+      "sha256": "a521ff335a42508d53aefaf872db972b1ead7b1a05352080b6cd930899f7d919"
+    },
+    {
+      "bytes": 3688,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "root/toolchain-pins.json",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/toolchain-pins.json",
+      "role": "Root fresh current-85a export/build attribution or actual compiler invocation",
+      "sha256": "616f4c3acde58210144ec3fb81128ac440075630c8cb5d6eff38bae512e29ec3"
+    },
+    {
+      "bytes": 8326,
+      "derivation": "exact original bytes",
+      "mode": 292,
+      "name": "source/host-final/docs/CIA_APERTURE_DIAGNOSTIC.md",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/source-final/docs/CIA_APERTURE_DIAGNOSTIC.md",
+      "role": "Exact final host/own source or executed Python declaration",
+      "sha256": "33bc5acf743b2e07e3a077ec045eb6cfd363b28a3019acc3923b6747e1504b65"
+    },
+    {
+      "bytes": 3917,
+      "derivation": "exact original bytes",
+      "mode": 292,
+      "name": "source/host-final/src/core/elapsed_clock.c",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/source-final/src/core/elapsed_clock.c",
+      "role": "Exact final host/own source or executed Python declaration",
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8"
+    },
+    {
+      "bytes": 1659,
+      "derivation": "exact original bytes",
+      "mode": 292,
+      "name": "source/host-final/src/core/elapsed_clock.h",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/source-final/src/core/elapsed_clock.h",
+      "role": "Exact final host/own source or executed Python declaration",
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e"
+    },
+    {
+      "bytes": 5747,
+      "derivation": "exact original bytes",
+      "mode": 292,
+      "name": "source/host-final/tests/cia_aperture_model.c",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/source-final/tests/cia_aperture_model.c",
+      "role": "Exact final host/own source or executed Python declaration",
+      "sha256": "90552420d691caa8ed0d2b9b3570f837ef3336595d17c114c98d3b153463d2ad"
+    },
+    {
+      "bytes": 3298,
+      "derivation": "exact original bytes",
+      "mode": 292,
+      "name": "source/host-final/tests/cia_aperture_model.h",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/source-final/tests/cia_aperture_model.h",
+      "role": "Exact final host/own source or executed Python declaration",
+      "sha256": "d3977817e699c28aeb4034e7236ec0c9300b6b715a388671d7260a513069a0e7"
+    },
+    {
+      "bytes": 10012,
+      "derivation": "exact original bytes",
+      "mode": 292,
+      "name": "source/host-final/tests/cia_aperture_test.c",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/source-final/tests/cia_aperture_test.c",
+      "role": "Exact final host/own source or executed Python declaration",
+      "sha256": "1227f1083be0d2a6cb0c4f0740cd4ebe10392e9dda0e7271a1dbd25d44d93b87"
+    },
+    {
+      "bytes": 9410,
+      "derivation": "exact original bytes",
+      "mode": 292,
+      "name": "source/host-final/tests/cia_owner_test.c",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/source-final/tests/cia_owner_test.c",
+      "role": "Exact final host/own source or executed Python declaration",
+      "sha256": "30dca8d0ce2ec21a99dcd5052995ac41e42504888fedc0bcdacb01741bdf5b29"
+    },
+    {
+      "bytes": 989,
+      "derivation": "exact original bytes",
+      "mode": 292,
+      "name": "source/host-final/tests/native_cia_aperture_irq.s",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/source-final/tests/native_cia_aperture_irq.s",
+      "role": "Exact final host/own source or executed Python declaration",
+      "sha256": "9b9e801650a5a188327f0a42850b0e4e3493b287bb027dcdf6fda5d186de00ac"
+    },
+    {
+      "bytes": 6720,
+      "derivation": "exact original bytes",
+      "mode": 292,
+      "name": "source/host-final/tests/native_cia_owner.h",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/source-final/tests/native_cia_owner.h",
+      "role": "Exact final host/own source or executed Python declaration",
+      "sha256": "bfcaaf1db54605f48691cead30a3907458c81af56d66e0a655ccc3090f346178"
+    },
+    {
+      "bytes": 13614,
+      "derivation": "exact original bytes",
+      "mode": 292,
+      "name": "source/host-final/tests/native_exec_cia_aperture_test.c",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/source-final/tests/native_exec_cia_aperture_test.c",
+      "role": "Exact final host/own source or executed Python declaration",
+      "sha256": "58c43ee734ec49002599e9f958caa30b0c5b28bb144257def004c9b98b2b9c92"
+    },
+    {
+      "bytes": 663,
+      "derivation": "exact original bytes",
+      "mode": 292,
+      "name": "source/host-final/tests/test_cia_aperture.py",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/source-final/tests/test_cia_aperture.py",
+      "role": "Exact final host/own source or executed Python declaration",
+      "sha256": "9888a7e199f5e8bcbd48a31f67ab25e559ebca6087f8b1504b35c1c2361b96fc"
+    },
+    {
+      "bytes": 514,
+      "derivation": "exact original bytes",
+      "mode": 292,
+      "name": "source/host-final/tests/test_cia_owner.py",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/source-final/tests/test_cia_owner.py",
+      "role": "Exact final host/own source or executed Python declaration",
+      "sha256": "150169609f7bd513b00e93c3deb7ae98abeda94d1b87c0373d0ae402b1c2ba02"
+    },
+    {
+      "bytes": 15718,
+      "derivation": "exact original bytes",
+      "mode": 292,
+      "name": "source/host-final/tools/build_cia_aperture_diagnostic.py",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/source-final/tools/build_cia_aperture_diagnostic.py",
+      "role": "Exact final host/own source or executed Python declaration",
+      "sha256": "b7dd684126f38f2845fdddf54471fddcfea2b435392e9cb289536c3871ed193b"
+    },
+    {
+      "bytes": 38970,
+      "derivation": "exact original bytes",
+      "mode": 292,
+      "name": "source/host-final/tools/build_core_tests.py",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/source-final/tools/build_core_tests.py",
+      "role": "Accepted-source original recipe/declaration; never executed for shared native build",
+      "sha256": "1948232ab42449eb518e49ee55276542b102d7461f0f58d8aa273588a20a0d55"
+    },
+    {
+      "bytes": 5879,
+      "derivation": "exact original bytes",
+      "mode": 292,
+      "name": "source/host-final/tools/build_diagnostic.py",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/source-final/tools/build_diagnostic.py",
+      "role": "Accepted-source original recipe/declaration; never executed for shared native build",
+      "sha256": "a5a42c8a811eb4e5ce744157afd2715de8f4c9c7d392b3b7b40f1dc6f459a805"
+    },
+    {
+      "bytes": 8326,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/native-final/docs/CIA_APERTURE_DIAGNOSTIC.md",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/source-final-native/docs/CIA_APERTURE_DIAGNOSTIC.md",
+      "role": "Exact fresh native canonical closure/AST recipe or own input",
+      "sha256": "33bc5acf743b2e07e3a077ec045eb6cfd363b28a3019acc3923b6747e1504b65"
+    },
+    {
+      "bytes": 3917,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/native-final/src/core/elapsed_clock.c",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/source-final-native/src/core/elapsed_clock.c",
+      "role": "Exact fresh native canonical closure/AST recipe or own input",
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8"
+    },
+    {
+      "bytes": 1659,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/native-final/src/core/elapsed_clock.h",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/source-final-native/src/core/elapsed_clock.h",
+      "role": "Exact fresh native canonical closure/AST recipe or own input",
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e"
+    },
+    {
+      "bytes": 2213,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/native-final/src/native/eclock.h",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/source-final-native/src/native/eclock.h",
+      "role": "Exact fresh native canonical closure/AST recipe or own input",
+      "sha256": "12b0a505ac670356ca4f2729f940159f2608584e2a425ef558e08a68dbdb46c6"
+    },
+    {
+      "bytes": 3872,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/native-final/src/native/eclock_alarm.h",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/source-final-native/src/native/eclock_alarm.h",
+      "role": "Exact fresh native canonical closure/AST recipe or own input",
+      "sha256": "1171c061501a03ddb32a3d661650a7f682aaed9b76749a67778e723c7d64e79e"
+    },
+    {
+      "bytes": 1694,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/native-final/src/native/master_memory.h",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/source-final-native/src/native/master_memory.h",
+      "role": "Exact fresh native canonical closure/AST recipe or own input",
+      "sha256": "ac898368849ec2d1892717d425b90c398da37a8799d536366a898e2e219e184a"
+    },
+    {
+      "bytes": 5747,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/native-final/tests/cia_aperture_model.c",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/source-final-native/tests/cia_aperture_model.c",
+      "role": "Exact fresh native canonical closure/AST recipe or own input",
+      "sha256": "90552420d691caa8ed0d2b9b3570f837ef3336595d17c114c98d3b153463d2ad"
+    },
+    {
+      "bytes": 3298,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/native-final/tests/cia_aperture_model.h",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/source-final-native/tests/cia_aperture_model.h",
+      "role": "Exact fresh native canonical closure/AST recipe or own input",
+      "sha256": "d3977817e699c28aeb4034e7236ec0c9300b6b715a388671d7260a513069a0e7"
+    },
+    {
+      "bytes": 10012,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/native-final/tests/cia_aperture_test.c",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/source-final-native/tests/cia_aperture_test.c",
+      "role": "Exact fresh native canonical closure/AST recipe or own input",
+      "sha256": "1227f1083be0d2a6cb0c4f0740cd4ebe10392e9dda0e7271a1dbd25d44d93b87"
+    },
+    {
+      "bytes": 9410,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/native-final/tests/cia_owner_test.c",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/source-final-native/tests/cia_owner_test.c",
+      "role": "Exact fresh native canonical closure/AST recipe or own input",
+      "sha256": "30dca8d0ce2ec21a99dcd5052995ac41e42504888fedc0bcdacb01741bdf5b29"
+    },
+    {
+      "bytes": 989,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/native-final/tests/native_cia_aperture_irq.s",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/source-final-native/tests/native_cia_aperture_irq.s",
+      "role": "Exact fresh native canonical closure/AST recipe or own input",
+      "sha256": "9b9e801650a5a188327f0a42850b0e4e3493b287bb027dcdf6fda5d186de00ac"
+    },
+    {
+      "bytes": 6720,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/native-final/tests/native_cia_owner.h",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/source-final-native/tests/native_cia_owner.h",
+      "role": "Exact fresh native canonical closure/AST recipe or own input",
+      "sha256": "bfcaaf1db54605f48691cead30a3907458c81af56d66e0a655ccc3090f346178"
+    },
+    {
+      "bytes": 13614,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/native-final/tests/native_exec_cia_aperture_test.c",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/source-final-native/tests/native_exec_cia_aperture_test.c",
+      "role": "Exact fresh native canonical closure/AST recipe or own input",
+      "sha256": "58c43ee734ec49002599e9f958caa30b0c5b28bb144257def004c9b98b2b9c92"
+    },
+    {
+      "bytes": 1506,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/native-final/tests/native_exec_memory.h",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/source-final-native/tests/native_exec_memory.h",
+      "role": "Exact fresh native canonical closure/AST recipe or own input",
+      "sha256": "ce0f2b696ce7767c0da8a2a44ac7730bc207f81e4f6b86bfd172353989e664b9"
+    },
+    {
+      "bytes": 663,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/native-final/tests/test_cia_aperture.py",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/source-final-native/tests/test_cia_aperture.py",
+      "role": "Exact fresh native canonical closure/AST recipe or own input",
+      "sha256": "9888a7e199f5e8bcbd48a31f67ab25e559ebca6087f8b1504b35c1c2361b96fc"
+    },
+    {
+      "bytes": 514,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/native-final/tests/test_cia_owner.py",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/source-final-native/tests/test_cia_owner.py",
+      "role": "Exact fresh native canonical closure/AST recipe or own input",
+      "sha256": "150169609f7bd513b00e93c3deb7ae98abeda94d1b87c0373d0ae402b1c2ba02"
+    },
+    {
+      "bytes": 15718,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/native-final/tools/build_cia_aperture_diagnostic.py",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/source-final-native/tools/build_cia_aperture_diagnostic.py",
+      "role": "Exact fresh native canonical closure/AST recipe or own input",
+      "sha256": "b7dd684126f38f2845fdddf54471fddcfea2b435392e9cb289536c3871ed193b"
+    },
+    {
+      "bytes": 38970,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/native-final/tools/build_core_tests.py",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/source-final-native/tools/build_core_tests.py",
+      "role": "Exact fresh native canonical closure/AST recipe or own input",
+      "sha256": "1948232ab42449eb518e49ee55276542b102d7461f0f58d8aa273588a20a0d55"
+    },
+    {
+      "bytes": 5879,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/native-final/tools/build_diagnostic.py",
+      "path": "/private/tmp/protracker-cia-aperture-current-native-243nfher/source-final-native/tools/build_diagnostic.py",
+      "role": "Exact fresh native canonical closure/AST recipe or own input",
+      "sha256": "a5a42c8a811eb4e5ce744157afd2715de8f4c9c7d392b3b7b40f1dc6f459a805"
+    },
+    {
+      "bytes": 8305,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/probe-baseline/tests/cia_owner_test.c",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/baseline/tests/cia_owner_test.c",
+      "role": "Exact original source used by expected-failure baseline probe",
+      "sha256": "2427327839b3c5293c28638b457c5dfb7ac40762ccd19a0bd51fb2c130b1169f"
+    },
+    {
+      "bytes": 6659,
+      "derivation": "exact original bytes",
+      "mode": 420,
+      "name": "source/probe-baseline/tests/native_cia_owner.h",
+      "path": "/private/tmp/protracker-cia-aperture-8cku0nh5/baseline/tests/native_cia_owner.h",
+      "role": "Exact original source used by expected-failure baseline probe",
+      "sha256": "b8434ac3bdbfa5720814912f7af635fa4150b4d91d5e89a07384f8409bc6ac1e"
+    }
+  ],
+  "members_count": 133,
+  "omitted": "Full source export trees, SDK/compiler/runtime trees and unreferenced probe dSYM directories; exact inventories and pin controls remain",
+  "original_member_bytes": 7863260,
+  "payload": {
+    "bytes": 1958038,
+    "path": "payload.tar.gz",
+    "sha256": "dbea6e3a8457339f563b2c53ebe691c4a05e1e88fbbbd54d86ddedfb6823a941"
+  },
+  "schema": 1,
+  "scope": "CIA aperture host-model/ownership correction and one native compile/link only; native diagnostic NOT RUN",
+  "source_inventories": {
+    "accepted_baseline": 8012,
+    "derived_committed_85a": 8017,
+    "fresh_native_final": 8025,
+    "host_final": 8020,
+    "own_modified": 2,
+    "own_new": 8
+  }
+}

@@ -60,8 +60,8 @@ int main(void)
     assert(enabled[0]==0x1c && pending[0]==0x1c && pt_diagnostic_cia_close(&t) && !depth);++cases;
     reset();t=(struct pt_diagnostic_cia){0};host_hardware[0].ciacra=1;
     assert(pt_diagnostic_cia_acquire(&t,handler,&data) && t.bit==1);
-    assert(host_hardware[0].ciacra==1 && !writes && removes==1 && !vectors[0][0]);
-    assert(pt_diagnostic_cia_close(&t) && removes==2 && host_hardware[0].ciacra==1);++cases;
+    assert(host_hardware[0].ciacra==1 && !writes && removes==0 && adds==1 && !vectors[0][0]);
+    assert(pt_diagnostic_cia_close(&t) && removes==1 && host_hardware[0].ciacra==1);++cases;
     reset();t=(struct pt_diagnostic_cia){0};missing=1;host_hardware[1].ciacra=0xc0;
     assert(pt_diagnostic_cia_acquire(&t,handler,&data) && t.chip==1 && t.bit==0);
     assert(pt_diagnostic_cia_arm(&t,65535) && host_hardware[1].ciacra==0xd9);
@@ -83,11 +83,26 @@ int main(void)
     reset();t=(struct pt_diagnostic_cia){0};
     host_hardware[0]=(struct CIA){0xc1,0x81,1,2,3,4};
     host_hardware[1]=(struct CIA){0xc1,0x81,5,6,7,8};
+    /* Enabled free-vector running timers are preserved refused candidates; even
+     * the resource Add/Rem pair would erase their originally enabled mask. */
+    enabled[0]=0x1f;enabled[1]=0x1d;pending[0]=0x1f;pending[1]=0x1d;
     memcpy(before,host_hardware,sizeof(before));
     assert(!pt_diagnostic_cia_acquire(&t,handler,&data));
-    assert(adds==4 && removes==4 && !writes && !memcmp(before,host_hardware,sizeof(before)));
-    assert(pending[0]==0x1c && pending[1]==0x1c && enabled[0]==0x1c && enabled[1]==0x1c);
+    assert(!adds && !removes && !changes && !writes && !memcmp(before,host_hardware,sizeof(before)));
+    assert(pending[0]==0x1f && pending[1]==0x1d && enabled[0]==0x1f && enabled[1]==0x1d);
     assert(!vectors[0][0] && !vectors[0][1] && !vectors[1][0] && !vectors[1][1]);
+    assert(pt_diagnostic_cia_close(&t) && !depth);++cases;
+    /* A stopped timer with a foreign vector still refuses before mask/control
+     * changes; running candidates are skipped without querying their vectors. */
+    reset();t=(struct pt_diagnostic_cia){0};
+    host_hardware[0]=(struct CIA){0xc1,0x80,1,2,3,4};
+    host_hardware[1]=(struct CIA){0xc1,0x81,5,6,7,8};
+    enabled[0]=0x1f;enabled[1]=0x1d;pending[0]=0x1f;pending[1]=0x1d;vectors[0][1]=&foreign;
+    memcpy(before,host_hardware,sizeof(before));
+    assert(!pt_diagnostic_cia_acquire(&t,handler,&data));
+    assert(adds==1 && !removes && !changes && !writes && !memcmp(before,host_hardware,sizeof(before)));
+    assert(pending[0]==0x1f && pending[1]==0x1d && enabled[0]==0x1f && enabled[1]==0x1d);
+    assert(!vectors[0][0] && vectors[0][1]==&foreign && !vectors[1][0] && !vectors[1][1]);
     assert(pt_diagnostic_cia_close(&t) && !depth);++cases;
     /* Actual sample after setup; bad clocks/expired targets never write latches
      * or start hardware, and retain the vector with its interrupt masked. */

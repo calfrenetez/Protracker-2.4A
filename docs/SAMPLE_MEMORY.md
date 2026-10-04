@@ -5081,3 +5081,16 @@ No forced release/unload/retry/config change was performed. Both windows safely
 returned to emulator and released. Direct PCM testing requires a separate choice
 about temporarily unloading the unused AHI subdriver versus keeping AHI service
 resident. See `../evidence/enhanced-editor/amigus-idle-driver/`.
+
+## Native activation feasibility prerequisite — 4 October 2026
+
+Exact scheduling remains selected. A separate CIA timer/software diagnostic now
+prepares immutable shadow events and models bounded clock-read admission for a RAM
+shadow write in the unchanged original frame window. The existing timer owner helper was corrected to
+refuse a running timer before vector/mask effects. Two host sanitizer groups and an
+identical baseline/corrected stub probe pass; a pinned compiler/assembler portability
+build passes. The diagnostic remains native NOT RUN and installs no output backend.
+Persistent master/cache ownership, actual device-domain transfer, IRQ/task exclusion,
+DMA-fetch/voice-stop, hardware timing and audio/listening retain separate gates.
+See [CIA deadline-aperture contract](CIA_APERTURE_DIAGNOSTIC.md) and
+[evidence](../evidence/enhanced-editor/cia-aperture-diagnostic/README.md).

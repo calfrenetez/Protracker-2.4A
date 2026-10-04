@@ -462,3 +462,133 @@ int pt_paula_readers_close(struct pt_paula_readers_pool *p)
  p->busy=1;p->closing=1;if(!pt_sampler_paula_close(&p->bridge)){p->busy=0;return 0;}
  a=p->allocator;a.release(a.context,p);return 1;
 }
+
+/* Initial setup is deliberately separate from the legacy synchronous entry.
+ * This private bridge constructor is reachable only after this workspace's
+ * actual checked validation completion; it is not a public trusted flag. */
+static void preparation_bridge(struct pt_sampler_paula *b,struct pt_sampler *s,
+    struct pt_project *p,const struct pt_paula_readers_config *c)
+{
+    unsigned i;
+    b->sampler=s;b->project=p;b->version=1;
+    pt_cache_init(&b->cache,c->chip_context,c->chip_allocate,c->chip_release,c->chip_budget);
+    b->table=p->samples;b->count=p->sample_count;b->generation=s->generation;b->channels=p->channels.count;
+    for(i=0;i<PT_CHANNEL_LIMIT;++i)b->routes[i]=p->channels.track[i].route;
+}
+static enum pt_paula_readers_result preparation_result(enum pt_project_result r)
+{
+    if(r==PT_PROJECT_OK)return PT_PAULA_READERS_OK;
+    if(r==PT_PROJECT_PENDING)return PT_PAULA_READERS_PENDING;
+    if(r==PT_PROJECT_STALE)return PT_PAULA_READERS_STALE;
+    return PT_PAULA_READERS_INVALID;
+}
+/* Fixed control checks and validator current/header checks precede all borrowed
+ * descriptor/span walks, including after arrays have been replaced/freed. */
+static enum pt_paula_readers_result preparation_current(const struct pt_paula_readers_preparation *j,
+    uint32_t revision)
+{
+    struct pt_sampler *s=j->sampler;
+    if(j->failed)return PT_PAULA_READERS_INVALID;
+    if(!s || s->generation!=j->generation || s->table!=j->table ||
+       s->table_original!=j->table_original || s->table_bytes!=j->table_bytes ||
+       s->allocator.context!=j->sampler_allocator.context ||
+       s->allocator.allocate!=j->sampler_allocator.allocate || s->allocator.release!=j->sampler_allocator.release)
+        return PT_PAULA_READERS_STALE;
+    return preparation_result(pt_project_validation_get(&j->validation,revision,s->generation,NULL));
+}
+static int preparation_apart(const struct pt_paula_readers_preparation *j,const void *out,size_t n)
+{
+    return disjoint(out,n,j,sizeof(*j)) &&
+        disjoint(out,n,j->allocator_source,sizeof(*j->allocator_source)) &&
+        disjoint(out,n,j->config_source,sizeof(*j->config_source)) &&
+        pt_sampler_output_disjoint(j->sampler,out,n) && project_disjoint(j->validation.project,out,n);
+}
+static int preparation_reentry(struct pt_paula_readers_preparation *j)
+{
+    if(j->busy){j->failed=1;return 1;}return 0;
+}
+enum pt_paula_readers_result pt_paula_readers_prepare_begin(struct pt_paula_readers_preparation *j,
+    const struct pt_allocator *a,struct pt_sampler *s,struct pt_project *p,
+    const struct pt_paula_readers_config *c,uint32_t revision)
+{
+    struct pt_paula_readers_preparation next;enum pt_project_result r;
+    if(!valid_span(j,sizeof(*j)) || !valid_span(a,sizeof(*a)) ||
+       !valid_span(s,sizeof(*s)) || !valid_span(p,sizeof(*p)) || !valid_span(c,sizeof(*c)))
+        return PT_PAULA_READERS_INVALID;
+    /* Reject known source aliases before inspecting workspace contents. */
+    if(!disjoint(j,sizeof(*j),a,sizeof(*a)) || !disjoint(j,sizeof(*j),c,sizeof(*c)) ||
+       !pt_sampler_output_disjoint(s,j,sizeof(*j)))return PT_PAULA_READERS_INVALID;
+    /* The validator first checks source geometry/full extents. A staged local
+     * begin can be moved; it retains no pointer to its own workspace. */
+    memset(&next,0,sizeof(next));
+    r=pt_project_validation_begin(&next.validation,p,revision,s->generation);
+    if(r!=PT_PROJECT_OK)return preparation_result(r);
+    if(!project_disjoint(p,j,sizeof(*j)))return PT_PAULA_READERS_INVALID;
+    if(preparation_reentry(j))return PT_PAULA_READERS_BUSY;
+    if(j->state)return PT_PAULA_READERS_BUSY;
+    if(!a->allocate || !a->release || !s->allocator.allocate || !s->allocator.release ||
+       !c->chip_allocate || !c->chip_release || !c->generation ||
+       !c->maximum_commands || c->maximum_commands>PT_PAULA_READERS_COMMANDS ||
+       !c->maximum_readers || c->maximum_readers>PT_PAULA_READERS_PERSISTENT)
+        return PT_PAULA_READERS_INVALID;
+    next.allocator=*a;next.sampler_allocator=s->allocator;next.config=*c;
+    next.allocator_source=a;next.config_source=c;
+    next.sampler=s;next.generation=s->generation;next.table=s->table;
+    next.table_original=s->table_original;next.table_bytes=s->table_bytes;next.state=1;
+    memcpy(j,&next,sizeof(next));return PT_PAULA_READERS_OK;
+}
+enum pt_paula_readers_result pt_paula_readers_prepare_step(struct pt_paula_readers_preparation *j,
+    uint32_t revision,unsigned work)
+{
+    enum pt_paula_readers_result r;
+    if(!valid_span(j,sizeof(*j)))return PT_PAULA_READERS_INVALID;
+    if(preparation_reentry(j))return PT_PAULA_READERS_BUSY;
+    if(!j->state || !work || work>PT_PROJECT_VALIDATION_WORK_MAX)return PT_PAULA_READERS_INVALID;
+    r=preparation_current(j,revision);
+    if(r!=PT_PAULA_READERS_PENDING && r!=PT_PAULA_READERS_OK)return r;
+    if(r==PT_PAULA_READERS_OK)return r;
+    r=preparation_result(pt_project_validation_step(&j->validation,revision,j->generation,work));
+    if(r==PT_PAULA_READERS_OK)j->state=2;
+    return r;
+}
+enum pt_paula_readers_result pt_paula_readers_prepare_transfer(struct pt_paula_readers_preparation *j,
+    uint32_t revision,struct pt_paula_readers_pool **out)
+{
+    struct pt_paula_readers_pool *p;enum pt_paula_readers_result r;int8_t map[PT_CHANNEL_LIMIT];unsigned i;
+    if(!valid_span(j,sizeof(*j)) || !valid_span(out,sizeof(*out)))return PT_PAULA_READERS_INVALID;
+    if(!disjoint(out,sizeof(*out),j,sizeof(*j)))return PT_PAULA_READERS_INVALID;
+    if(preparation_reentry(j))return PT_PAULA_READERS_BUSY;
+    if(!j->state)return PT_PAULA_READERS_INVALID;
+    r=preparation_current(j,revision);
+    if(r!=PT_PAULA_READERS_OK)return r;
+    if(!preparation_apart(j,out,sizeof(*out)))return PT_PAULA_READERS_INVALID;
+    if(j->config.control_budget<sizeof(*p))return PT_PAULA_READERS_CAPACITY;
+    if(pt_channels_paula_map(&j->validation.project->channels,NULL,map)!=PT_CHANNEL_OK)
+        return PT_PAULA_READERS_INVALID;
+    j->busy=1;
+    p=j->allocator.allocate(j->allocator.context,sizeof(*p));
+    /* No old table is traversed until the original fixed identity is checked
+     * again after the callback. Do not rebase onto callback-mutated inputs. */
+    r=preparation_current(j,revision);
+    if(!p){j->busy=0;return r==PT_PAULA_READERS_OK?PT_PAULA_READERS_CAPACITY:r;}
+    if(r!=PT_PAULA_READERS_OK || !preparation_apart(j,out,sizeof(*out)) ||
+       !preparation_apart(j,p,sizeof(*p)) || !disjoint(p,sizeof(*p),out,sizeof(*out))) {
+        j->allocator.release(j->allocator.context,p);j->busy=0;
+        return j->failed?PT_PAULA_READERS_INVALID:(r==PT_PAULA_READERS_OK?PT_PAULA_READERS_INVALID:r);
+    }
+    memset(p,0,sizeof(*p));p->allocator=j->allocator;p->config=j->config;
+    p->sampler=j->sampler;p->project=(struct pt_project *)j->validation.project;
+    memcpy(&p->header,p->project,sizeof(p->header));
+    if(p->project->sample_count)
+        memcpy(p->original,p->project->samples,p->project->sample_count*sizeof(*p->original));
+    for(i=0;i<p->project->sample_count;++i)p->original_external[i]=j->sampler->current[i]==NULL;
+    p->generation=j->generation;p->bytes=sizeof(*p);memcpy(p->map,map,sizeof(map));
+    preparation_bridge(&p->bridge,j->sampler,p->project,&j->config);
+    *out=p;memset(j,0,sizeof(*j));return PT_PAULA_READERS_OK;
+}
+enum pt_paula_readers_result pt_paula_readers_prepare_cancel(struct pt_paula_readers_preparation *j)
+{
+    if(!valid_span(j,sizeof(*j)))return PT_PAULA_READERS_INVALID;
+    if(preparation_reentry(j))return PT_PAULA_READERS_BUSY;
+    memset(j,0,sizeof(*j));return PT_PAULA_READERS_OK;
+}

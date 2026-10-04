@@ -7,8 +7,9 @@ separate optional selective signed8 Chip representation cache; it does not insta
 or qualify a native activation backend.
 
 The pool has independent bounded command and persistent-reader handle capacities
-(1..8 each), a control-allocation budget and a Chip-cache budget. Initial project
-validation and bounded control allocation are synchronous. Each preparation step
+(1..8 each), a control-allocation budget and a Chip-cache budget. The legacy
+`pt_paula_readers_open` still validates and allocates synchronously. Optional
+initial setup now uses the cancellable workspace described below. Each command preparation step
 performs one transition/action, copies at most 4096 master bytes, or converts/copies
 at most 256 Chip bytes. A TRIGGER retains one genuine master pin and one exact cache
 lease. It preserves authoritative 8/16/24-bit mono/stereo data and low bits; stereo
@@ -83,6 +84,42 @@ Each fixture ends with zero owned allocations and budgets. Host tests do not pro
 physical Fast/Chip classification, installed backend reference transfer, hardware
 voice-stop, actual scheduling, DMA/IRQ/audio or human listening acceptance.
 
+## Optional cancellable initial setup
+
+Zero-initialize a caller-owned `pt_paula_readers_preparation`, then call
+`prepare_begin`, `prepare_step`, and `prepare_transfer` with the same current
+project revision. Begin inspects metadata and returns OK for initialization;
+it does not validate the semantic PCM or publish a pool. Step accepts a work
+budget from 1 through 4096 and returns PENDING until the entire current project
+passes. Each call advances at most that many validator items, with additional
+fixed metadata checks. Pending and completed validation own no pool, master pin,
+Chip allocation, cache lease or backend resource. Call `prepare_cancel` at any
+point between calls to clear the workspace without reading former source arrays.
+
+Only transfer of a complete, current workspace performs the fixed pool allocation
+and initializes the private bridge. It avoids repeating either synchronous PCM
+scan. Allocation failure leaves completed preparation retryable; successful
+transfer consumes the workspace. A fixed-header or sampler identity change
+refuses before source traversal, including after the allocator callback. Callback
+reentry latches failure and releases any returned unpublished pool. Ordinary
+refusals leave the caller's pool output unchanged.
+
+Keep the project, full-capacity masters, tables, sampler, original allocator and
+configuration objects, and opaque callback contexts alive through transfer or
+cancellation. Source values and metadata must remain immutable within every call,
+including callbacks. Between calls every edit must change the caller revision or
+sampler generation; a valid channel-selection cursor is exempt. Scalar revision
+arguments cannot detect an arbitrary in-place edit during a callback. Workspace,
+outputs and callback contexts must remain disjoint from borrowed source and control
+storage. The guards include unused master capacity. There is no public unchecked
+bind or reusable validation certificate.
+
+This is opt-in task-side preparation, not editor PLAY integration. Fixed pool
+allocation, metadata checks and final publication remain synchronous; the work
+budget is not a native wall-clock or interrupt latency guarantee. Existing
+synchronous APIs, command/readers ownership and the original musical grid remain
+unchanged.
+
 ## Current validation status
 
 The frozen shared fixture passes one ASan/UBSan host group with 21 full dependency
@@ -97,3 +134,27 @@ One pinned 68k portability build passes 32 command records and produces a
 backend, actual device-domain transfer, Fast/Chip memory-class qualification,
 IRQ/DMA, timing, audio or listening acceptance follows.
 See [saved host/compiler records](../evidence/enhanced-editor/sampler-paula-readers/README.md).
+
+The separate 4 October initial-setup qualification passes the final startup
+ASan/UBSan fixture, the unchanged genuine-reader ownership fixture, and three
+affected Paula/validator/scheduled-reader regression groups. The final setup
+fixture tests 18 format/work combinations, poisoned semantic storage at begin
+and completed transfer, all observable cancellation phases, late invalid values,
+stale/freed former tables, full-capacity aliases, allocation refusal/retry,
+callback identity changes/reentry, empty projects and 20 zero-owner lifecycles.
+The host workspace is 2384 bytes. Earlier preparation/parser refusals and the
+passing version before the empty-project guard are retained separately.
+
+Current pinned compiler-only builds produce `PTPaulaReadersTest` (168816 bytes)
+and `PTPaulaReadersStartupTest` (155792 bytes). Both preserve enabled assertions,
+68000/software-float flags and unchanged source closures; each remains native
+NOT RUN. These are ordinary injected-allocation fixtures, not Exec or hardware
+memory-placement tests. They supersede the older portability products for this
+source without changing their saved historical evidence.
+
+One same-workload Mac CPU observation on an 8 MiB stereo24 master changed the
+largest setup call from 20.276 ms to 0.085 ms, across 1 versus 515 calls. Total
+observed setup CPU was 20.276 versus 15.210 ms; requested heap payload stayed
+28472 bytes, with one pool allocation, no Chip calls and zero final owned bytes.
+This is not 030 elapsed latency, a worst-case bound, RSS or physical acceptance.
+See [the scoped startup evidence](../evidence/enhanced-editor/sampler-paula-readers-startup/README.md).

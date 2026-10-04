@@ -95,6 +95,15 @@ replay retain their prior contracts. The separate opt-in `sampler_paula_readers`
 master pins and selective Chip cache leases to these domains. Its host fixture
 retains them through 20 controls with command capacity two, cancellation and
 independent retirement races; one pinned portability build passes, native NOT RUN.
+The same binding now offers optional cancellable initial project validation,
+with metadata-only begin and at most 4096 semantic items per step. It publishes
+no pool or master/cache ownership while pending. Complete/current transfer does
+one fixed control allocation and privately initializes the checked bridge without
+rescanning PCM. Legacy synchronous open/bind remain unchanged. Borrowed storage
+stays immutable within calls and alive through transfer/cancel; between-call edits
+must change revision or sampler generation. This software preparation adds no
+editor PLAY or native activation integration. Its execution on Amiberry and the
+real A1200 remains NOT RUN.
 Backend reference transfer, IRQ/DMA activation, native song playback and physical
 timing/audio/listening remain unfinished. See
 [binding](SAMPLER_PAULA_READERS.md) and

@@ -27,9 +27,57 @@ struct pt_paula_readers_view {
 /* New independent bounded pool. Borrowed sampler/project/allocator/queue stay
  * alive through close. No owner casts/copies, in-place source edits or reentry.
  * Caller inputs/outputs stay disjoint from opaque queue/backend/allocator/Chip
- * callback context extents that this adapter cannot discover. Initial static
- * project validation and allocation remain synchronous. No activation/backend
+ * callback context extents that this adapter cannot discover. Legacy open
+ * performs synchronous initial project validation and allocation. No activation/backend
  * implementation or native DMA/IRQ/ref-transfer qualification is implied. */
+/* Optional cancellable initial setup, task-side only. Zero-initialize this
+ * caller-owned workspace; its fields are private and it owns no allocations.
+ * begin OK means initialized, never semantically validated. step returns
+ * PENDING until the complete current project passes, then OK without creating a
+ * pool. work must be 1..PT_PROJECT_VALIDATION_WORK_MAX; each step charges at most
+ * work validator items (no wall-clock promise). No pool, pin, Chip allocation,
+ * cache lease, or backend call occurs before transfer.
+ * Keep project/tables/full master capacities, sampler, allocator/config objects
+ * and callback contexts alive through transfer/cancel. Borrowed source metadata
+ * and values remain immutable during every call, including callbacks. Between
+ * calls every edit changes revision or sampler generation,
+ * except a valid channel-selection cursor. Header/table/count/tag changes refuse
+ * STALE before former tables are read; a resumed descriptor is checked as well.
+ * Workspace and transfer output must be disjoint from all known source/control
+ * spans, including unused master capacity. Opaque callback contexts additionally
+ * stay caller-disjoint. Wrapped spans and aliases refuse without publication.
+ * transfer requires completed/current validation and does one fixed pool
+ * allocation synchronously. Callback mutation/reentry is rechecked before any
+ * source traversal/publication. This detects fixed-header/generation changes,
+ * not arbitrary in-place edits made in violation of the immutable-call rule.
+ * CAPACITY leaves a ready job retryable; ordinary
+ * refusals preserve output, and callback reentry latches INVALID until cancel.
+ * Successful transfer consumes/zeros the workspace. cancel reads no former
+ * source tables and frees nothing; while a callback is active it refuses BUSY
+ * and latches failure. Do not copy/modify a live workspace or reuse it before
+ * cancel/success. Configuration generation is the uint64 scheduler domain,
+ * distinct from caller revision and captured sampler generation.
+ * No general validation certificate or unchecked public bridge bind is exposed.
+ */
+struct pt_paula_readers_preparation {
+    struct pt_project_validation validation;
+    struct pt_allocator allocator,sampler_allocator;
+    struct pt_paula_readers_config config;
+    const struct pt_allocator *allocator_source;
+    const struct pt_paula_readers_config *config_source;
+    struct pt_sampler *sampler;
+    struct pt_sample *table,*table_original;
+    size_t table_bytes;
+    unsigned generation,state,busy,failed;
+};
+enum pt_paula_readers_result pt_paula_readers_prepare_begin(struct pt_paula_readers_preparation *,
+    const struct pt_allocator *,struct pt_sampler *,struct pt_project *,
+    const struct pt_paula_readers_config *,uint32_t revision);
+enum pt_paula_readers_result pt_paula_readers_prepare_step(struct pt_paula_readers_preparation *,
+    uint32_t revision,unsigned work);
+enum pt_paula_readers_result pt_paula_readers_prepare_transfer(struct pt_paula_readers_preparation *,
+    uint32_t revision,struct pt_paula_readers_pool **);
+enum pt_paula_readers_result pt_paula_readers_prepare_cancel(struct pt_paula_readers_preparation *);
 enum pt_paula_readers_result pt_paula_readers_open(const struct pt_allocator *,struct pt_sampler *,
     struct pt_project *,const struct pt_paula_readers_config *,struct pt_paula_readers_pool **);
 enum pt_paula_readers_result pt_paula_readers_begin(struct pt_paula_readers_pool *,struct pt_readers_output *,

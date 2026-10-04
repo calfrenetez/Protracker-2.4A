@@ -46,12 +46,13 @@ struct pt_event_resource_job {
     const struct pt_project *project;
     struct pt_project snapshot;
     struct pt_flow initial,flow,checkpoint;
+    struct pt_flow_preparation preparation;
     struct pt_pitch pitch;
     struct pt_event_resource_result result;
     struct pt_event_resource_origin last_source;
     uint64_t power,length;
     uint32_t revision,generation,limit;
-    unsigned initialized,validated,ready,seen,selection,checkpoint_instrument;
+    unsigned initialized,validated,preparing,ready,seen,selection,checkpoint_instrument;
 };
 /* Explicit instruments (including empty slots, instrument-only/portamento rows)
  * are immediate, as are empty/detached events. Begin scans metadata spans only.
@@ -67,14 +68,19 @@ struct pt_event_resource_job {
 enum pt_event_resource_status pt_event_resource_begin(struct pt_event_resource_job *,
     const struct pt_project *,const struct pt_event_resource_origin *,
     uint32_t revision,uint32_t generation,uint32_t tick_limit);
-/* <=256 completed engine ticks per call. First preparation after a changed
- * version uses audited pt_flow_init: its full project/PCM validation remains
- * synchronous (NOT a wall-clock bound). A same-version reset state is cached,
- * so repeated navigation does not rescan PCM. ready=1 only for a final result.
+/* A call performs either bounded metadata-only flow begin, <=4096 validation
+ * work items, or <=256 completed engine ticks. Validation-completion returns
+ * before tick replay; work budgets are never combined. First inherited history
+ * after a changed version validates incrementally, and may be cancelled between
+ * any calls. A same-version audited reset is cached, so repeated navigation does
+ * not rescan PCM. No wall-clock or active-reader lifetime guarantee. Borrowed
+ * source must remain immutable/alive. ready=1 only for a final result.
  * Wrong version/header returns STALE before walking former tables; INVALID and
  * STALE preserve caller ready. Invalid step size does not advance the job. */
 enum pt_event_resource_status pt_event_resource_step(struct pt_event_resource_job *,
     uint32_t revision,uint32_t generation,unsigned ticks,unsigned *ready);
+/* Cancel clears genuine workspace/cache without former source dereferences. */
+void pt_event_resource_cancel(struct pt_event_resource_job *);
 /* Refuses pending/stale/aliased outputs without changing them. */
 enum pt_event_resource_status pt_event_resource_get(const struct pt_event_resource_job *,
     uint32_t revision,uint32_t generation,struct pt_event_resource_result *);

@@ -38,7 +38,7 @@ static struct pt_event_resource_result resolve(struct pt_event_resource_job *j,s
 {
     struct pt_event_resource_result out;unsigned ready=0,calls=0;uint32_t before;
     assert(pt_event_resource_begin(j,&f->p,&o,11,22,limit)==PT_EVENT_RESOURCE_OK);
-    while(!ready && calls++<limit+1) {
+    while(!ready && calls++<limit+8) {
         before=j->flow.ticks;
         assert(pt_event_resource_step(j,11,22,17,&ready)==PT_EVENT_RESOURCE_OK);
         assert(j->flow.ticks-before<=17);
@@ -209,32 +209,99 @@ static void stale_alias_and_protocol(void)
     assert(pt_event_resource_begin(&j,&f->p,&o,12,22,100)==PT_EVENT_RESOURCE_INVALID);
     free(before);free(f);
 }
+static void bounded_validation_and_cancel(void)
+{
+    enum { VALUES=12288 };
+    struct fixture *f=calloc(1,sizeof(*f));int32_t *pcm=calloc(VALUES+64,sizeof(*pcm));
+    struct pt_event_resource_job j={0},save;struct pt_event_resource_result out,before;
+    struct pt_event_resource_origin o=origin(0,1,0,0);unsigned ready,calls,phase;
+    assert(f && pcm);init(f,4,1,1);
+    f->samples[0].pcm=(struct pt_pcm){pcm,VALUES+64,VALUES,8287,1,8};
+    event(f,0,0,0)->instrument=1;event(f,0,1,0)->kind=PT_NOTE_PERIOD;event(f,0,1,0)->pitch=428;
+    event(f,0,2,0)->effect=15;pcm[VALUES]=INT32_MAX;
+    assert(sizeof(j)<16384);
+    /* Starting preparation and validation completion never perform replay ticks. */
+    assert(pt_event_resource_begin(&j,&f->p,&o,11,22,1)==PT_EVENT_RESOURCE_OK);
+    ready=99;
+    assert(pt_event_resource_step(&j,11,22,1,&ready)==PT_EVENT_RESOURCE_OK && !ready && !j.flow.ticks);
+    calls=0;
+    while(!j.validated && calls++<8) {
+        assert(pt_event_resource_step(&j,11,22,1,&ready)==PT_EVENT_RESOURCE_OK && !ready && !j.flow.ticks);
+        assert(j.preparation.validation.last_work<=4096);
+    }
+    assert(j.validated && calls>=4);
+    assert(pt_event_resource_step(&j,11,22,1,&ready)==PT_EVENT_RESOURCE_OK && !ready && j.flow.ticks==1);
+    assert(pt_event_resource_step(&j,11,22,1,&ready)==PT_EVENT_RESOURCE_OK && ready);
+    assert(pt_event_resource_get(&j,11,22,&out)==PT_EVENT_RESOURCE_OK && out.reason==PT_EVENT_RESOURCE_TICK_BUDGET);
+    /* Genuine same-version reset caching avoids every subsequent PCM read. */
+    assert(pt_event_resource_begin(&j,&f->p,&o,11,22,100)==PT_EVENT_RESOURCE_OK && j.validated);
+    assert(pt_event_resource_step(&j,11,22,1,&ready)==PT_EVENT_RESOURCE_OK && j.flow.ticks==1);
+    pt_event_resource_cancel(&j);
+    assert(!j.project && !j.validated && !j.preparing);
+    /* Initial/each pending/complete validation phases can be abandoned safely. */
+    memset(&before,0xa5,sizeof(before));
+    for(phase=0;phase<7;++phase) {
+        assert(pt_event_resource_begin(&j,&f->p,&o,11,22,100)==PT_EVENT_RESOURCE_OK);
+        for(calls=0;calls<phase;++calls)assert(pt_event_resource_step(&j,11,22,1,&ready)==PT_EVENT_RESOURCE_OK);
+        f->p.samples=NULL;f->p.events=NULL;f->p.orders=NULL;
+        ready=99;out=before;
+        assert(pt_event_resource_step(&j,11,22,1,&ready)==PT_EVENT_RESOURCE_STALE && ready==99);
+        assert(pt_event_resource_get(&j,11,22,&out)==PT_EVENT_RESOURCE_STALE && !memcmp(&out,&before,sizeof(out)));
+        pt_event_resource_cancel(&j);
+        assert(!j.project && !j.preparation.validation.project);
+        assert(pt_event_resource_step(&j,11,22,1,&ready)==PT_EVENT_RESOURCE_STALE && ready==99);
+        f->p.samples=f->samples;f->p.events=f->events;f->p.orders=f->orders;
+    }
+    pcm[VALUES-1]=128;
+    assert(pt_event_resource_begin(&j,&f->p,&o,11,22,100)==PT_EVENT_RESOURCE_OK);
+    assert(pt_event_resource_step(&j,11,22,1,&ready)==PT_EVENT_RESOURCE_OK && !ready);
+    assert(pt_event_resource_step(&j,11,22,1,&ready)==PT_EVENT_RESOURCE_OK && !ready);
+    save=j;ready=99;
+    assert(pt_event_resource_step(&j,12,22,1,&ready)==PT_EVENT_RESOURCE_STALE && ready==99 && !memcmp(&j,&save,sizeof(j)));
+    calls=0;
+    while(calls++<8) {
+        enum pt_event_resource_status result=pt_event_resource_step(&j,11,22,1,&ready);
+        if(result==PT_EVENT_RESOURCE_INVALID)break;
+        assert(result==PT_EVENT_RESOURCE_OK && !ready && !j.flow.ticks);
+    }
+    assert(calls<8 && !j.validated && !j.flow.ticks && pcm[VALUES-1]==128 && pcm[VALUES]==INT32_MAX);
+    ready=99;
+    assert(pt_event_resource_step(&j,11,22,1,&ready)==PT_EVENT_RESOURCE_INVALID && ready==99);
+    pt_event_resource_cancel(&j);free(pcm);free(f);
+}
 #ifdef PT_EVENT_RESOURCE_PROFILE
 static void validation_profile(void)
 {
     struct fixture *f=calloc(1,sizeof(*f));struct pt_event_resource_job j={0};
-    struct pt_event_resource_origin o=origin(0,1,0,0);unsigned ready=0;clock_t start,first,cached;
+    struct pt_event_resource_origin o=origin(0,1,0,0);unsigned ready=0,calls=0,max_work=0;
+    clock_t start,total=0,maximum=0,cached;
     const size_t values=8UL*1024*1024;int32_t *master=calloc(values,sizeof(*master));
     assert(f && master);init(f,4,1,1);
     f->samples[0].pcm=(struct pt_pcm){master,values,(uint32_t)values,8287,1,8};
     event(f,0,0,0)->instrument=1;event(f,0,1,0)->kind=PT_NOTE_PERIOD;event(f,0,1,0)->pitch=428;
     event(f,0,2,0)->effect=15;
     assert(pt_event_resource_begin(&j,&f->p,&o,11,22,100)==PT_EVENT_RESOURCE_OK);
-    start=clock();assert(pt_event_resource_step(&j,11,22,1,&ready)==PT_EVENT_RESOURCE_OK);first=clock()-start;
+    while(!j.validated && calls++<values/4096+8) {
+        clock_t elapsed;
+        start=clock();assert(pt_event_resource_step(&j,11,22,1,&ready)==PT_EVENT_RESOURCE_OK && !ready && !j.flow.ticks);
+        elapsed=clock()-start;total+=elapsed;if(elapsed>maximum)maximum=elapsed;
+        if(j.preparation.validation.last_work>max_work)max_work=j.preparation.validation.last_work;
+    }
+    assert(j.validated && max_work<=4096 && calls>=values/4096);
     assert(pt_event_resource_begin(&j,&f->p,&o,11,22,100)==PT_EVENT_RESOURCE_OK && j.validated);
     start=clock();assert(pt_event_resource_step(&j,11,22,1,&ready)==PT_EVENT_RESOURCE_OK);cached=clock()-start;
-    printf("EVENT RESOURCE HOST PROFILE: master_values=%lu first_validation_cpu_s=%.6f cached_step_cpu_s=%.6f; host observation only, no030 latency claim\n",
-        (unsigned long)values,(double)first/CLOCKS_PER_SEC,(double)cached/CLOCKS_PER_SEC);
-    free(master);free(f);
+    printf("EVENT RESOURCE HOST PROFILE: master_values=%lu validation_calls=%u validation_max_work=%u validation_total_cpu_s=%.6f validation_max_step_cpu_s=%.6f cached_step_cpu_s=%.6f workspace_bytes=%lu; host observations only, no030 latency or WCET claim\n",
+        (unsigned long)values,calls,max_work,(double)total/CLOCKS_PER_SEC,(double)maximum/CLOCKS_PER_SEC,(double)cached/CLOCKS_PER_SEC,(unsigned long)sizeof(j));
+    pt_event_resource_cancel(&j);free(master);free(f);
 }
 #endif
 int main(void)
 {
     explicit_empty_and_routes();deterministic_orders_and_repeats();jumps_delays_and_loops();
-    cycles_and_budget();engine_modes();stale_alias_and_protocol();
+    cycles_and_budget();engine_modes();stale_alias_and_protocol();bounded_validation_and_cancel();
 #ifdef PT_EVENT_RESOURCE_PROFILE
     validation_profile();
 #endif
-    puts("EVENT RESOURCE PASS: explicit and bounded audited inheritance, repeated-order/control-flow ambiguity,16 routes, stale and full-capacity refusal; no playback or MIDI sends");
+    puts("EVENT RESOURCE PASS: explicit and bounded validated inheritance, cancellation, repeated-order/control-flow ambiguity,16 routes, stale and full-capacity refusal; no playback or MIDI sends");
     return 0;
 }

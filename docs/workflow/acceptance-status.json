@@ -1,0 +1,451 @@
+{
+  "kind": "acceptance_coverage_and_run_status",
+  "package_id": "PT24G-030-WORKFLOW-v1",
+  "planning_template": "package-v1/TEST_MATRIX.json",
+  "baseline_commit": "c61bd55595ca9a92ec502c2d4e96f8e89920fe4a",
+  "scope": "Required36-case acceptance status; related host groups are not emulator/physical acceptance. Original template remains unchanged.",
+  "tests": [
+    {
+      "test_id": "BASE-01",
+      "title": "Clean pre-feature and candidate builds",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "project",
+        "document",
+        "editor"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "BASE-02",
+      "title": "Read-only operation sequence",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "editor_workflow",
+        "editor_guard"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "BASE-03",
+      "title": "Failure and undo-budget injection",
+      "required_environment": "Emulator fault injection; benign low-memory case on hardware",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "sampler_workflow",
+        "sampler_copy_range_boundaries"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "BASE-04",
+      "title": "UI action/keymap check",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "editor_workflow",
+        "workflow_view",
+        "editor"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "SM-01",
+      "title": "Small known reference graph",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "sample_usage",
+        "editor_workflow"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "SM-02",
+      "title": "Unordered patterns and instrument-only events",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "sample_usage",
+        "editor_workflow"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "SM-03",
+      "title": "Persistent indirect/protected resources",
+      "required_environment": "Emulator; available project structures on hardware",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "sample_usage",
+        "sampler_workflow"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "SM-04",
+      "title": "View sort/filter and audition",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "editor_workflow",
+        "workflow_view"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "SM-05",
+      "title": "Stale cleanup preview",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "sample_usage",
+        "sampler_workflow"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "SM-06",
+      "title": "Preview/cancel/apply/undo/redo",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "sampler_workflow",
+        "editor_workflow"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "SM-07",
+      "title": "Transport/preview active",
+      "required_environment": "Emulator + real A1200, no physical recording required",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "editor_workflow",
+        "editor_capture",
+        "sampler_pin_job"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "SM-08",
+      "title": "Undo-retained memory",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "sampler_workflow",
+        "workflow_performance"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "SM-09",
+      "title": "Clipboard/current editor/cache owners",
+      "required_environment": "Emulator; safe workflow on hardware",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "sampler_workflow",
+        "sampler_paula",
+        "sampler_wavetable"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "SM-10",
+      "title": "Save/reload cleaned song",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "editor_workflow",
+        "project",
+        "document"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "LP-01",
+      "title": "Valid loop including final boundary",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "sample_range",
+        "editor_workflow"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "LP-02",
+      "title": "No loop, empty sample and invalid metadata",
+      "required_environment": "Emulator; valid empty/no-loop cases on hardware",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "sample_range",
+        "editor_workflow"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "LP-03",
+      "title": "Stale clipboard adversary",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "editor_workflow",
+        "sampler_copy_range_boundaries"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "LP-04",
+      "title": "Selection boundaries and units",
+      "required_environment": "Emulator + representative formats on real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "sampler_copy_range_boundaries",
+        "sampler_workflow"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "LP-05",
+      "title": "Contained and partial source loop",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "sampler_workflow",
+        "sampler_copy_range_boundaries"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "LP-06",
+      "title": "No genuinely free slot",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "sample_usage",
+        "sampler_workflow"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "LP-07",
+      "title": "Copy/edit independence and undo",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "sampler_workflow",
+        "sampler",
+        "slots"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "LP-08",
+      "title": "Revision race, cancellation and partial allocation",
+      "required_environment": "Emulator; user cancellation on real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "sampler_workflow",
+        "sampler_copy_range_boundaries"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "LP-09",
+      "title": "Backend cache invalidation",
+      "required_environment": "Emulator + available Paula/AmiGUS hardware",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "sampler_paula",
+        "sampler_wavetable"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "NV-01",
+      "title": "Explicit and instrument-only event",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "event_resource",
+        "editor_workflow"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "NV-02",
+      "title": "Deterministic inherited instrument",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "event_resource",
+        "flow"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "NV-03",
+      "title": "Repeated/detached pattern ambiguity",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "event_resource"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "NV-04",
+      "title": "Portamento and sounding-voice distinction",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "event_resource"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "NV-05",
+      "title": "MIDI resource destination",
+      "required_environment": "Emulator + real A1200/MIDI monitor where available",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "event_resource",
+        "editor_workflow"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "NV-06",
+      "title": "Resolver cache and route edits",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "event_resource",
+        "editor_workflow"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "NV-07",
+      "title": "Origin/return and event propagation",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "editor_workflow",
+        "editor_guard"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "PERF-01",
+      "title": "030 interaction measurements",
+      "required_environment": "Real A1200 mandatory; emulator supplementary",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "workflow_performance"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "PERF-02",
+      "title": "Chip/Fast low-memory behaviour",
+      "required_environment": "Emulator stress + benign real A1200 case",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "sampler_workflow",
+        "sampler_copy_range_boundaries"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "PERF-03",
+      "title": "Repeated edit/cleanup cycles",
+      "required_environment": "Emulator + real A1200",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "sampler_workflow",
+        "workflow_performance"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "PERF-04",
+      "title": "Playback coexistence",
+      "required_environment": "Emulator + real A1200 mandatory",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "editor_guard"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "INT-01",
+      "title": "Supported format/route matrix",
+      "required_environment": "Emulator + real A1200/available peripherals",
+      "status": "NOT_RUN",
+      "actual_acceptance_evidence": [],
+      "related_host_groups": [
+        "project",
+        "document",
+        "sampler_paula",
+        "sampler_wavetable"
+      ],
+      "reason_or_limitation": "Host coverage is related implementation evidence only. Required native interactions/performance/playback or final artifact review have not run for the current candidate."
+    },
+    {
+      "test_id": "INT-02",
+      "title": "Pristine evidence and artifact review",
+      "required_environment": "Host review",
+      "status": "PASS",
+      "actual_acceptance_evidence": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-responsive-hxlqain9/independent-combined-review.json",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-responsive-hxlqain9/host-clean/report.json",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-responsive-hxlqain9/host-overlay/report.json",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-responsive-hxlqain9/native-clean/core-build.json",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-responsive-hxlqain9/native-overlay/core-build.json",
+        "responsiveness-validation.json"
+      ],
+      "related_host_groups": [],
+      "reason_or_limitation": "Host diff/artifact/keymap/fixture/history preservation review passed. All16 unrelated paths are byte-exact and original package planning inputs are unchanged. This is the host-only INT-02 case; it does not qualify native interaction, device, timing or listening gates."
+    }
+  ],
+  "reviewed_at_utc": "2026-10-04T14:22:47.282680+00:00",
+  "review_scope": "Current owned candidate host artifact review; current emulator/physical tests not run."
+}

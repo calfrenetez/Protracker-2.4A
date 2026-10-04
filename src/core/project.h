@@ -60,7 +60,8 @@ struct pt_project {
 };
 enum pt_project_result { PT_PROJECT_OK, PT_PROJECT_INVALID, PT_PROJECT_TRUNCATED,
                          PT_PROJECT_UNSUPPORTED, PT_PROJECT_CAPACITY,
-                         PT_PROJECT_CHECKSUM, PT_PROJECT_ALIAS };
+                         PT_PROJECT_CHECKSUM, PT_PROJECT_ALIAS,
+                         PT_PROJECT_PENDING, PT_PROJECT_STALE };
 struct pt_project_requirements {
     size_t events, pcm_values, slices, extension_bytes;
     uint16_t orders, samples, extensions;
@@ -89,6 +90,54 @@ int pt_project_event_valid(const struct pt_project *,const struct pt_event *);
  * Existing validation remains synchronous; these guards scan metadata only and
  * allocate nothing. NULL validation caps retains the ordinary validation path. */
 enum pt_project_result pt_project_validate(const struct pt_project *, uint32_t *);
+/* Incremental task-side validation, not an IRQ/audio scheduling primitive.
+ * Caller owns this small workspace; never modify its fields or use completion as
+ * a general validation certificate. Storage is borrowed, never allocated/pinned.
+ * Keep the project/tables/PCM/metadata alive and immutable through cancel or the
+ * next begin. Every in-place edit must change revision or generation; an ordinary
+ * valid channels.selected cursor change alone is permitted. Header/table/count
+ * and tag changes refuse STALE before borrowed arrays are traversed. A resumed
+ * sample descriptor is also checked before its PCM/slices are read.
+ * Begin does finite metadata-only full-span preflight (<=255 samples and <=4090
+ * extensions), no PCM values. Each step performs fixed header/current-sample
+ * comparisons plus <=work items: one MIDI endpoint/order/sample descriptor/PCM
+ * value/slice/event/extension descriptor. No spare PCM capacity is read.
+ * Work items contain bounded fixed fields; this is not a wall-clock guarantee.
+ * The workspace and published caps must be disjoint from the project, tables,
+ * markers, extensions and full declared PCM capacity; wrapped spans fail closed.
+ * Begin checks these publication spans before the incremental semantic body;
+ * unrepresentable/missing positive declared storage therefore refuses ALIAS.
+ * ALIAS/STALE/invalid work preserve caller workspace and published outputs.
+ * Semantic validation failures are sticky until begin/cancel; partial caps stay
+ * private. Existing pt_project_validate remains the synchronous oracle.
+ * Begin OK means initialized only, never validated: get immediately returns
+ * PENDING. Step/get OK means the complete current semantic pass has succeeded.
+ */
+#define PT_PROJECT_VALIDATION_WORK_MAX 4096U
+struct pt_project_validation {
+    const struct pt_project *project;
+    struct pt_project snapshot;
+    struct pt_sample sample;
+    uint16_t slice_limits[PT_PROJECT_SAMPLES];
+    size_t index, value, values;
+    uint32_t revision, generation, capabilities, previous_slice;
+    int32_t low, high;
+    unsigned phase, sample_index, last_work;
+    enum pt_project_result result;
+};
+enum pt_project_result pt_project_validation_begin(struct pt_project_validation *,
+    const struct pt_project *, uint32_t revision, uint32_t generation);
+enum pt_project_result pt_project_validation_step(struct pt_project_validation *,
+    uint32_t revision, uint32_t generation, unsigned work);
+/* NULL caps is a checked status/current query, with no transitive output-span
+ * scan: PENDING while current unfinished, OK only complete, STALE on changed
+ * identity. Non-NULL caps publishes only complete/current, otherwise untouched. */
+enum pt_project_result pt_project_validation_get(const struct pt_project_validation *,
+    uint32_t revision, uint32_t generation, uint32_t *caps);
+/* Genuine caller-owned workspace only; reads no former source storage. NULL or
+ * wrapped workspace spans are ignored without dereferencing them. */
+void pt_project_validation_cancel(struct pt_project_validation *);
+
 enum pt_project_result pt_project_size(const struct pt_project *, size_t *);
 enum pt_project_result pt_project_encode(const struct pt_project *, uint8_t *, size_t, size_t *);
 /* Bounded synchronous serialization, byte-identical to encode. Validates before

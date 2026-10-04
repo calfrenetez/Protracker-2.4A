@@ -34,9 +34,13 @@ recovery result. Do not retarget another task's connection.
    resolver through edits. MIDI opens existing routing only and emits nothing.
    Return restores the captured order/pattern/row/track/field without moving
    transport or creating musical undo entries.
-6. Measure long-sample overview/copy initial work, step times, total latency,
+6. Measure long-sample overview/copy initial work, validation/copy step times, total latency,
    cancellation response and peak Fast/Chip usage on the actual 030. Repeated
-   selection/status redraw must reuse a completed overview. Repeat open/copy/
+   selection/status redraw must reuse a completed overview. Cancel during validation and copying; activate capture while usage and copy
+   work are pending and require immediate safe cancellation. Confirm first
+   inherited-event validation remains stopped-only and does not share a poll with
+   replay or overview PCM work. Measure the atomic bulk-reference pass separately.
+   Repeat open/copy/
    cleanup/undo/redo/history release and verify resource reclamation. Host CPU
    or allocator counters cannot substitute for these observations.
 7. In a separately authorized compatible playback run, compare the same retained
@@ -52,7 +56,8 @@ recovery result. Do not retarget another task's connection.
    uncertain ownership/restoration or a new physical failure; do not retry it
    automatically. Physical tests follow the exact emulator qualification.
 
-The missing companion `ACCEPTANCE_TESTS.md` may add required cases. Reconcile it
-before declaring completion. Existing unfinished enhanced live output and device
+The complete companion [ACCEPTANCE_TESTS.md](package-v1/ACCEPTANCE_TESTS.md) and
+its 36-case [planning matrix](package-v1/TEST_MATRIX.json) are now available.
+Reconcile each required test ID with actual run records before declaring completion. Existing unfinished enhanced live output and device
 capacity/ordering/completion gates remain open; do not qualify them through this
 RAM-only fixture or infer them from a successful editor launch.

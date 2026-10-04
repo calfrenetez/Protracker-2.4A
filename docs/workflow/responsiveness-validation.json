@@ -1,0 +1,135 @@
+{
+  "kind": "responsive_workflow_host_and_crossbuild_evidence",
+  "base_commit": "c61bd55595ca9a92ec502c2d4e96f8e89920fe4a",
+  "branch": "feat/hardware-independent-core",
+  "tested_code_sha256": {
+    "src/core/event_resource.c": "77b4dd85cd2240c8ac0aa9037a5acfcbccc3fa7c70ae5e548c406fe063846970",
+    "src/core/event_resource.h": "f0f446bff489a6107ee2d44b904a395c6ab2e4738d8d4f4cff2ac8db070b4d9b",
+    "src/core/flow.c": "c1850d6202a01805876ce6afa903ac4ae145757410e7597d70f2601903e79783",
+    "src/core/flow.h": "db5a78efb5344d95f145d70a6c26c664a832410b8ea741c56f0de831d4163046",
+    "src/core/project.c": "be3094ffb8a57df8e0f7a58a946f7f20978715f17d2103234027824af882b094",
+    "src/core/project.h": "e1a749800258b1f1db1dedcd7d5d36970abbf7494279cb3669212757f982e21a",
+    "src/editor/sampler.c": "c12592eda47b39b5a7792061c9f94b38e510ea8d018899b8541d58a66ee05819",
+    "src/editor/sampler_workflow.h": "a1eff0addfd1fded1185029f68bd9d6d885d5a421b702b40f76cb28af63fac1a",
+    "src/editor/workflow.c": "9f1d0f51835d0e67264a2f6f30aa447d635a9affdbec99ba82f15b62492fe76b",
+    "src/editor/workflow.h": "1b8519a6152d636e2ddf2bb63221e03f9ffb03aa462363c0ae7edd5f95d0889e",
+    "tests/editor_workflow_test.c": "97f8e6448445ec6b5de9d9ccae0330837de2ea679b089a537ac519895b9e235b",
+    "tests/event_resource_test.c": "817ae6500c18dc8c096c039e0580c4435305ff3b32544e9842bc5468d13eac82",
+    "tests/flow_test.c": "d9c053596bd54ea40a2d9be11f06f2d2847a64a60298332dc607e7dac024bf52",
+    "tests/project_validation_test.c": "404955ed48a694eb58d2f99cb18ae5e117885365a8d1cebf8ff144bafcdc1e8e",
+    "tests/sampler_workflow_test.c": "ce7bd3d5b66e22b73ece4fbb0ed8486579b304fc536da3efba93f0d6cb703058",
+    "tests/test_project_validation.py": "e7acdea572b54344d61cb512fb9be5e4ac0cbd97300dc39c53e9da2b2b6efe7f",
+    "tests/test_sampler_workflow.py": "7dce637408ed459fb7224a87cc912ad2cd1711d8dbb40d84ba7674cf67697c38",
+    "tests/workflow_performance_test.c": "a225b3ca12bac630455e630e11a33915a2024999dc0684680aadf82b46805a5f",
+    "tools/test_workflow_host.py": "5fe968698308623318547657744f671aa2db739e29479ee4efed01cf6ad67ff8"
+  },
+  "evidence_root": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-responsive-hxlqain9",
+  "host_clean": {
+    "groups": 24,
+    "passed": true,
+    "source_unchanged": true,
+    "report": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-responsive-hxlqain9/host-clean/report.json"
+  },
+  "host_preserved_overlay": {
+    "groups": 6,
+    "passed": true,
+    "source_unchanged": true,
+    "report": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-responsive-hxlqain9/host-overlay/report.json"
+  },
+  "preserved_unrelated_paths": {
+    "count": 16,
+    "unchanged": true,
+    "before_snapshot": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-responsive-hxlqain9/before-state.json"
+  },
+  "performance": {
+    "before": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-responsive-hxlqain9/performance-before/record.json",
+    "after": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-responsive-hxlqain9/performance-after/record.json",
+    "scope": "single-run Mac processCPU and requested payload; total CPU increased, maximum observed copy idle smaller; no native latency or RSS inference"
+  },
+  "crossbuilds": {
+    "clean": {
+      "scope": "Crossbuild only; no native execution",
+      "returncode": 0,
+      "source_unchanged": true,
+      "source_before": "native-clean-source-before.json",
+      "compiler": "m68k-amigaos-gcc (GCC) 6.5.0b 20260807212032",
+      "binaries": {
+        "PT24GEdit": {
+          "sha256": "a34b60666e1d103edf3e9a0afc556849e111c4749a842e7594fa05e830157a07",
+          "bytes": 310288
+        },
+        "PTWorkflowTest": {
+          "sha256": "8d719d838e523c193e68c0d44760095c017296b9879be99241a0a3150acd0aa2",
+          "bytes": 210032
+        },
+        "PTGuardTest": {
+          "sha256": "908722556a4bc3033b1dcc107b9b8ba28c5dfc44f75195b00336828e0e292a0b",
+          "bytes": 1660
+        }
+      },
+      "build_command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "tools/build_core_tests.py",
+        "--cc",
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "--target",
+        "PT24GEdit",
+        "--target",
+        "PTWorkflowTest"
+      ],
+      "manifest": "native-clean/core-build.json"
+    },
+    "preserved_display_overlay": {
+      "scope": "Crossbuild of original preserved display overlay plus owned follow-up; no native execution",
+      "returncode": 0,
+      "source_unchanged": true,
+      "protected16_unchanged": true,
+      "source_before": "native-overlay-source-before.json",
+      "compiler": "m68k-amigaos-gcc (GCC) 6.5.0b 20260807212032",
+      "binaries": {
+        "PT24GEdit": {
+          "sha256": "2d65bb41890090e6b1c6dd072b8c0f164e59b23b316bc1c8702b8b2938f43636",
+          "bytes": 314620
+        },
+        "PTWorkflowTest": {
+          "sha256": "ddc33ab9299e071b4a291b01fd3717cd21ccd92848ac7754d7b5b4db5ef29722",
+          "bytes": 210544
+        },
+        "PTGuardTest": {
+          "sha256": "908722556a4bc3033b1dcc107b9b8ba28c5dfc44f75195b00336828e0e292a0b",
+          "bytes": 1660
+        }
+      },
+      "build_command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "tools/build_core_tests.py",
+        "--cc",
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "--target",
+        "PT24GEdit",
+        "--target",
+        "PTWorkflowTest"
+      ],
+      "manifest": "native-overlay/core-build.json"
+    }
+  },
+  "component_proof_archives": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-responsive-hxlqain9/component-proof-archives.json",
+  "native_acceptance": {
+    "amiberry": "NOT_RUN",
+    "real_a1200": "NOT_RUN",
+    "devices_audio_timing_listening": "NOT_QUALIFIED",
+    "coordination": "Pending explicit separate-task messaging permission and resolution of peer-reported failed recovery hold; no target access attempted"
+  },
+  "remaining_synchronous": [
+    "metadata/allocator begin",
+    "atomic stored-event reference pass",
+    "existing legacy mutation/save/journal paths"
+  ],
+  "independent_review": {
+    "status": "CLEAR",
+    "receipt": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/workflow-responsive-hxlqain9/independent-combined-review.json",
+    "sha256": "ed7787d6905005af0cfa6de322d72b06e1f3c5190eaa9c5af6014c9b71f20733"
+  }
+}

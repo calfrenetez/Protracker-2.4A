@@ -308,7 +308,7 @@ int pt_editor_workflow_click(struct pt_editor *e,int x,int y,enum pt_editor_acti
     }
     return 1;
 }
-static int wave_idle(struct pt_editor *e)
+static int wave_idle(struct pt_editor *e,unsigned advance)
 {
     struct pt_editor_workflow *w=&e->workflow;struct pt_sample_range view;unsigned ready=0,slot;
     const struct pt_project *p;uint64_t generation;
@@ -327,6 +327,9 @@ static int wave_idle(struct pt_editor *e)
         if(pt_wave_summary_begin(&w->wave_job,p,slot-1,generation,&view,w->wave_bins[staging],PT_WAVE_SUMMARY_BINS)!=PT_WAVE_SUMMARY_OK)return 0;
         w->wave_building=1;
     }
+    /* Metadata-only scheduling may coexist with a primary phase; PCM reads wait
+     * until the next input interval without transaction/resolver work. */
+    if(!advance)return 0;
     {enum pt_wave_summary_result result=pt_wave_summary_step(&w->wave_job,generation,&ready);
     if(result!=PT_WAVE_SUMMARY_OK && result!=PT_WAVE_SUMMARY_PENDING) {pt_wave_summary_cancel(&w->wave_job);w->wave_building=0;return 0;}}
     if(ready) {
@@ -338,10 +341,14 @@ static int wave_idle(struct pt_editor *e)
 int pt_editor_workflow_idle(struct pt_editor *e)
 {
     struct pt_editor_workflow *w=&e->workflow;unsigned ready=0;enum pt_edit_result edit;
-    int changed=0;
+    int changed=0;unsigned primary=0;
+    /* Ownership cancellation is checked every idle, independently of which
+     * bounded phase is selected below. It does not inspect former source data. */
+    if(w->busy && active(e)) {cancel_input(e);return 1;}
     if(e->panel==PT_WORKFLOW_MANAGER && (w->view_sample_count!=e->project->sample_count || w->view_table!=e->project->samples)) {rebuild_view(e);++e->sample_ui;changed=1;}
     if(w->usage_valid && !current(e)) {w->usage_valid=0;memset(w->usage.selected,0,sizeof(w->usage.selected));++e->sample_ui;changed=1;}
     if(w->scanning) {
+        primary=1;
         if(pt_sample_usage_step(&w->scan,e->project,e->history.revision,e->sampler.generation,&w->usage,&ready)!=PT_USAGE_OK) {
             w->scanning=0;w->pending_apply=0;status(e,"USAGE SCAN STALE/REFUSED - REFRESH / NO CHANGE");changed=1;
         } else if(ready) {
@@ -350,9 +357,8 @@ int pt_editor_workflow_idle(struct pt_editor *e)
             if(w->scan_for_copy)copy_begin_ready(e);
         }
     }
-    if(w->busy) {
-        if(active(e)) {cancel_input(e);return 1;}
-        edit=pt_sampler_workflow_step(w->transaction,&ready);
+    if(w->busy && !primary) {
+        primary=1;edit=pt_sampler_workflow_step(w->transaction,&ready);
         if(edit!=PT_EDIT_OK) {pt_sampler_workflow_cancel(&w->transaction);w->busy=w->pending_apply=0;transaction_result(e,edit);changed=1;}
         else if(ready) {
             if(!pt_editor_prepare_change(e)) {pt_sampler_workflow_cancel(&w->transaction);w->busy=w->pending_apply=0;return 1;}
@@ -369,7 +375,8 @@ int pt_editor_workflow_idle(struct pt_editor *e)
             changed=1;
         }
     }
-    if(w->resolving) {
+    if(w->resolving && !primary) {
+        primary=1;
         /* A first engine validation can scan PCM. Keep it out of an active
          * performance; cached same-version navigation remains bounded ticks. */
         if(e->playback.active && !w->resolver.validated) {
@@ -383,5 +390,5 @@ int pt_editor_workflow_idle(struct pt_editor *e)
             }changed=1;
         }
     }
-    return wave_idle(e)||changed;
+    return wave_idle(e,!primary)||changed;
 }

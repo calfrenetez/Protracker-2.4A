@@ -1,8 +1,9 @@
 # Requirement / implementation / test map
 
-The supplied addendum is authoritative; its missing companion acceptance suite
-remains an open input. The tests below are derived directly from the detailed
-requirements, not a replacement claim for the absent suite.
+The supplied addendum is authoritative. The complete original package, including
+its36-case acceptance specification and unexecuted planning matrix, is preserved
+in [package-v1](package-v1/README_FIRST.md). The production/test map below remains
+implementation coverage, not a claim that mandatory native acceptance has passed.
 
 | Requirement | Production seam | Focused tests |
 |---|---|---|

@@ -1,5 +1,6 @@
 #include <string.h>
 #include "project.h"
+#include "pcm_internal.h"
 
 #define TAG(a,b,c,d) ((uint32_t)(a)<<24 | (uint32_t)(b)<<16 | (uint32_t)(c)<<8 | (d))
 static const uint32_t tags[6] = {TAG('H','E','A','D'),TAG('C','H','A','N'),TAG('O','R','D','R'),
@@ -195,6 +196,157 @@ static int source_alias(const struct pt_project *p,const void *out,size_t n)
     for(i=0;i<p->extension_count;++i)if(span_alias(out,n,p->extensions[i].data,p->extensions[i].length,1))return 1;
     return 0;
 }
+
+enum validation_phase {
+    VALIDATION_IDLE, VALIDATION_MIDI, VALIDATION_ORDERS, VALIDATION_SAMPLE,
+    VALIDATION_PCM, VALIDATION_SLICES, VALIDATION_EVENTS, VALIDATION_EXTENSIONS,
+    VALIDATION_DONE, VALIDATION_FAILED
+};
+/* The immutable-borrow contract covers in-place table/data edits. Header and
+ * tags are checked without walking those tables, including after replacement.
+ * selected is a cursor, not a musical/source identity field. */
+static int validation_current(const struct pt_project_validation *v,
+    uint32_t revision,uint32_t generation)
+{
+    const struct pt_project *p=v->project;
+    const size_t cursor=offsetof(struct pt_project,channels)+offsetof(struct pt_channels,selected);
+    const unsigned char *a=(const unsigned char *)p,*b=(const unsigned char *)&v->snapshot;
+    if(!p || revision!=v->revision || generation!=v->generation ||
+       p->channels.selected>=p->channels.count || memcmp(a,b,cursor) ||
+       memcmp(a+cursor+sizeof(p->channels.selected),b+cursor+sizeof(p->channels.selected),
+           sizeof(*p)-cursor-sizeof(p->channels.selected)))return 0;
+    if((v->phase==VALIDATION_PCM || v->phase==VALIDATION_SLICES) &&
+       memcmp(&p->samples[v->sample_index],&v->sample,sizeof(v->sample)))return 0;
+    return 1;
+}
+enum pt_project_result pt_project_validation_begin(struct pt_project_validation *v,
+    const struct pt_project *p,uint32_t revision,uint32_t generation)
+{
+    struct pt_project_validation next;
+    if(!v || !p)return PT_PROJECT_INVALID;
+    if(sizeof(*v)>UINTPTR_MAX-(uintptr_t)v || sizeof(*p)>UINTPTR_MAX-(uintptr_t)p)
+        return PT_PROJECT_ALIAS;
+    if(!basic(p) || !p->orders || !p->events || (p->sample_count && !p->samples) ||
+       p->extension_count>4090 || (p->extension_count && !p->extensions))return PT_PROJECT_INVALID;
+    /* Table spans are checked before source_alias reads their descriptors. */
+    if(source_alias(p,v,sizeof(*v)))return PT_PROJECT_ALIAS;
+    memset(&next,0,sizeof(next));
+    next.project=p;memcpy(&next.snapshot,p,sizeof(*p));
+    next.revision=revision;next.generation=generation;
+    next.capabilities=project_caps(p);next.phase=VALIDATION_MIDI;
+    next.result=PT_PROJECT_PENDING;memcpy(v,&next,sizeof(next));
+    return PT_PROJECT_OK;
+}
+static enum pt_project_result validation_invalid(struct pt_project_validation *v)
+{
+    v->phase=VALIDATION_FAILED;v->result=PT_PROJECT_INVALID;
+    return PT_PROJECT_INVALID;
+}
+enum pt_project_result pt_project_validation_step(struct pt_project_validation *v,
+    uint32_t revision,uint32_t generation,unsigned work)
+{
+    const struct pt_project *p;
+    if(!v)return PT_PROJECT_INVALID;
+    if(sizeof(*v)>UINTPTR_MAX-(uintptr_t)v)return PT_PROJECT_ALIAS;
+    if(!work || work>PT_PROJECT_VALIDATION_WORK_MAX ||
+       v->phase==VALIDATION_IDLE || v->phase>VALIDATION_FAILED)return PT_PROJECT_INVALID;
+    if(v->phase==VALIDATION_FAILED)return v->result;
+    if(!validation_current(v,revision,generation))return PT_PROJECT_STALE;
+    p=&v->snapshot;v->last_work=0;
+    while(v->last_work<work) {
+        switch(v->phase) {
+        case VALIDATION_MIDI:
+            if(v->index==p->channels.count) {
+                v->index=0;v->phase=VALIDATION_ORDERS;break;
+            }
+            ++v->last_work;
+            if(!terminated(p->midi_output[v->index++],64))return validation_invalid(v);
+            break;
+        case VALIDATION_ORDERS:
+            if(v->index==p->order_count) {
+                v->index=0;v->phase=VALIDATION_SAMPLE;break;
+            }
+            ++v->last_work;
+            if(p->orders[v->index++]>=p->pattern_count)return validation_invalid(v);
+            break;
+        case VALIDATION_SAMPLE:
+            if(v->sample_index==p->sample_count) {
+                v->index=0;v->phase=VALIDATION_EVENTS;break;
+            }
+            ++v->last_work;
+            memcpy(&v->sample,&p->samples[v->sample_index],sizeof(v->sample));
+            if(!sample_meta(&v->sample) || pt_pcm_shape(&v->sample.pcm)!=PT_PCM_OK ||
+               (v->sample.slice_count && !v->sample.slices))return validation_invalid(v);
+            v->slice_limits[v->sample_index]=v->sample.slice_count;
+            v->values=(size_t)v->sample.pcm.frames*v->sample.pcm.channels;
+            v->value=0;v->index=0;v->previous_slice=0;
+            v->high=((int32_t)1<<(v->sample.pcm.bits-1))-1;v->low=-v->high-1;
+            v->phase=VALIDATION_PCM;break;
+        case VALIDATION_PCM:
+            if(v->value==v->values) {v->phase=VALIDATION_SLICES;break;}
+            else {
+                int32_t value=v->sample.pcm.data[v->value];++v->last_work;
+                if(value<v->low || value>v->high)return validation_invalid(v);
+                ++v->value;break;
+            }
+        case VALIDATION_SLICES:
+            if(v->index==v->sample.slice_count) {
+                v->capabilities|=sample_caps(&v->sample);++v->sample_index;
+                v->phase=VALIDATION_SAMPLE;break;
+            } else {
+                uint32_t slice=v->sample.slices[v->index];++v->last_work;
+                if(slice>=v->sample.pcm.frames || (v->index && slice<=v->previous_slice))
+                    return validation_invalid(v);
+                v->previous_slice=slice;++v->index;break;
+            }
+        case VALIDATION_EVENTS:
+            if(v->index==(size_t)p->pattern_count*64*p->channels.count) {
+                v->index=0;v->phase=VALIDATION_EXTENSIONS;break;
+            } else {
+                const struct pt_event *e=&p->events[v->index];uint16_t limit=0;
+                ++v->last_work;
+                if(e->instrument && e->instrument<=p->sample_count)
+                    limit=v->slice_limits[e->instrument-1];
+                if(!event_valid(e,p->sample_count,limit))return validation_invalid(v);
+                v->capabilities|=event_caps(e);++v->index;break;
+            }
+        case VALIDATION_EXTENSIONS:
+            if(v->index==p->extension_count) {
+                v->phase=VALIDATION_DONE;v->result=PT_PROJECT_OK;return PT_PROJECT_OK;
+            } else {
+                const struct pt_extension *e=&p->extensions[v->index++];++v->last_work;
+                if(known(e->id)>=0 || (e->length && !e->data))return validation_invalid(v);
+                break;
+            }
+        case VALIDATION_DONE:return PT_PROJECT_OK;
+        default:return validation_invalid(v);
+        }
+    }
+    /* Completion transitions do no body work, but are deliberately deferred
+     * when the final item exactly consumes the caller's budget. */
+    return PT_PROJECT_PENDING;
+}
+enum pt_project_result pt_project_validation_get(const struct pt_project_validation *v,
+    uint32_t revision,uint32_t generation,uint32_t *caps)
+{
+    if(!v)return PT_PROJECT_INVALID;
+    if(sizeof(*v)>UINTPTR_MAX-(uintptr_t)v)return PT_PROJECT_ALIAS;
+    if(v->phase==VALIDATION_IDLE || v->phase>VALIDATION_FAILED)return PT_PROJECT_INVALID;
+    if(v->phase==VALIDATION_FAILED)return v->result;
+    if(!validation_current(v,revision,generation))return PT_PROJECT_STALE;
+    if(v->phase!=VALIDATION_DONE)return PT_PROJECT_PENDING;
+    if(caps) {
+        if(overlap(v,sizeof(*v),caps,sizeof(*caps)) || source_alias(v->project,caps,sizeof(*caps)))
+            return PT_PROJECT_ALIAS;
+        *caps=v->capabilities;
+    }
+    return PT_PROJECT_OK;
+}
+void pt_project_validation_cancel(struct pt_project_validation *v)
+{
+    if(v && sizeof(*v)<=UINTPTR_MAX-(uintptr_t)v)memset(v,0,sizeof(*v));
+}
+
 enum pt_project_result pt_project_encode(const struct pt_project *p,uint8_t *out,size_t capacity,size_t *written)
 {
     size_t lengths[6],n,pos=32,i,j;unsigned k;uint32_t caps;uint8_t *q;

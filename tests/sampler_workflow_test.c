@@ -6,6 +6,9 @@
 #include "../src/editor/sampler_internal.h"
 #include "../src/editor/sampler_paula.h"
 #include "mod_project.h"
+#ifdef PT_SAMPLER_WORKFLOW_PROFILE
+size_t pt_sampler_workflow_reference_visits;
+#endif
 struct memory {size_t live,bytes,calls,fail,mutate_at;void *arena;void (*mutate)(void *);void *mutate_context;};
 struct allocation {size_t bytes;};
 static void *allocate(void *context,size_t bytes)
@@ -273,5 +276,96 @@ static void retained_pin_cache(void)
     assert(pt_sampler_paula_unpin(&pool,lease));assert(pt_sampler_paula_close(&pool));pt_sampler_unpin(token);
     free(saved);free(v);destroy(f);
 }
+static void incremental_validation_refusal(void)
+{
+    unsigned kind;
+    for(kind=0;kind<2;++kind) {
+        struct fixture *f=fixture(24,2);struct pt_sample_usage_preview *v;
+        struct pt_sampler_workflow *job=NULL;struct pt_sampler_workflow_stats stats,oldstats;
+        struct pt_sample samples[6];struct pt_pattern_history history=f->history;
+        int32_t master[3][5208];unsigned ready=77,n=0;uint8_t selected[255]={0};enum pt_edit_result r;
+        if(!kind)f->pcm[2][5199]=8388608; /* Invalid final active value, not spare capacity. */
+        else f->markers[2][3]=2400; /* Duplicate final marker. */
+        v=scan(f);memcpy(samples,f->samples,sizeof(samples));memcpy(master,f->pcm,sizeof(master));
+        memset(&stats,0x39,sizeof(stats));oldstats=stats;selected[1]=selected[2]=1;
+        assert(pt_sampler_cleanup_begin(&f->sampler,&f->p,&f->history,v,selected,1,&job)==PT_EDIT_OK && job);
+        /* Begin is metadata-only; semantic refusal arrives in the bounded phase. */
+        do {
+            ready=77;r=pt_sampler_workflow_step(job,&ready);assert(++n<=12);
+            if(r==PT_EDIT_OK)assert(!ready);
+        }while(r==PT_EDIT_OK);
+        assert(r==PT_EDIT_INVALID && ready==77 && n>1);
+        assert(!memcmp(samples,f->samples,sizeof(samples)) && !memcmp(master,f->pcm,sizeof(master)));
+        assert(!memcmp(&history,&f->history,sizeof(history)) && !f->sampler.current[1] && !f->sampler.current[2]);
+        assert(pt_sampler_workflow_commit(&job,1,&stats)==PT_EDIT_INVALID && job && !memcmp(&stats,&oldstats,sizeof(stats)));
+        ready=77;assert(pt_sampler_workflow_step(job,&ready)==PT_EDIT_INVALID && ready==77);
+        pt_sampler_workflow_cancel(&job);assert(!job && !f->sampler.bytes && !f->memory.live);
+        assert(!memcmp(samples,f->samples,sizeof(samples)) && !memcmp(master,f->pcm,sizeof(master)));
+        free(v);destroy(f);
+    }
+}
+static void bulk_reference_map(void)
+{
+    struct fixture *f=fixture(24,2);struct pt_sample *samples=calloc(PT_PROJECT_SAMPLES,sizeof(*samples));
+    struct pt_sample *before=malloc(PT_PROJECT_SAMPLES*sizeof(*before));
+    size_t events=(size_t)PT_PROJECT_PATTERNS*PT_PROJECT_ROWS*PT_CHANNEL_LIMIT;
+    struct pt_event *stored=calloc(events,sizeof(*stored));struct pt_sample_usage_scan *usage=calloc(1,sizeof(*usage));
+    struct pt_sample_usage_preview *preview=calloc(1,sizeof(*preview));struct pt_sample_usage_options options={0};
+    struct pt_sampler_workflow *job=NULL;struct pt_sampler_workflow_stats stats,oldstats;
+    struct pt_pattern_history history;unsigned i,ready=0,steps=0;uint8_t selected[PT_PROJECT_SAMPLES]={0};
+    assert(samples && before && stored && usage && preview);
+    for(i=0;i<PT_PROJECT_SAMPLES;++i) {empty(samples+i);strcpy(samples[i].name,"CONFIGURED EMPTY");if(i)selected[i]=1;}
+    f->p.sample_count=PT_PROJECT_SAMPLES;f->p.pattern_count=PT_PROJECT_PATTERNS;f->p.samples=samples;f->p.events=stored;
+    f->p.channels.track[15].muted=1;stored[events-1].instrument=1; /* Off-order, muted, instrument-only retained reference. */
+    assert(pt_pattern_history_init(&f->history,&f->p,f->commands,8,f->changes,32)==PT_EDIT_OK);
+    assert(pt_sample_usage_begin(usage,&f->p,&options)==PT_USAGE_OK);
+    do {assert(pt_sample_usage_step(usage,&f->p,0,0,preview,&ready)==PT_USAGE_OK);assert(++steps<=1024);}while(!ready);
+    assert(preview->rows[0].references==1 && !(preview->rows[0].flags&PT_USAGE_ELIGIBLE));
+    memcpy(before,samples,PT_PROJECT_SAMPLES*sizeof(*before));history=f->history;
+    assert(pt_sampler_cleanup_begin(&f->sampler,&f->p,&f->history,preview,selected,1,&job)==PT_EDIT_OK);
+    ready=steps=0;
+    do {assert(pt_sampler_workflow_step(job,&ready)==PT_EDIT_OK);assert(++steps<=80);}while(!ready);
+    memset(&stats,0x62,sizeof(stats));oldstats=stats;
+    stored[events-2].instrument=255; /* Fresh final atomic reference guard, even without a caller tag. */
+#ifdef PT_SAMPLER_WORKFLOW_PROFILE
+    pt_sampler_workflow_reference_visits=0;
+#endif
+    assert(pt_sampler_workflow_commit(&job,1,&stats)==PT_EDIT_CONFLICT && job);
+#ifdef PT_SAMPLER_WORKFLOW_PROFILE
+    assert(pt_sampler_workflow_reference_visits==events);
+#endif
+    assert(!memcmp(before,samples,PT_PROJECT_SAMPLES*sizeof(*before)) && !memcmp(&history,&f->history,sizeof(history)) && !memcmp(&stats,&oldstats,sizeof(stats)));
+    stored[events-2].instrument=0;
+#ifdef PT_SAMPLER_WORKFLOW_PROFILE
+    pt_sampler_workflow_reference_visits=0;
+#endif
+    assert(pt_sampler_workflow_commit(&job,1,&stats)==PT_EDIT_OK && !job && stats.affected_slots==254 && stats.slots_freed==254);
+#ifdef PT_SAMPLER_WORKFLOW_PROFILE
+    assert(pt_sampler_workflow_reference_visits==events);
+    printf("BULK REFERENCE MAP PASS: selected=254 stored_events=%lu visits=%lu per atomic apply\n",(unsigned long)events,(unsigned long)pt_sampler_workflow_reference_visits);
+#endif
+    assert(f->p.sample_count==255 && !memcmp(samples,before,sizeof(*before)) && f->history.count==1);
+    for(i=1;i<255;++i)assert(!samples[i].name[0] && !samples[i].pcm.frames && samples[i].pcm.bits==8);
+    assert(pt_pattern_undo(&f->p,&f->history,-1)==PT_EDIT_OK);
+    for(i=0;i<255;++i)assert(!memcmp(samples+i,before+i,sizeof(*before)));
+    stored[events-2].instrument=2;
+#ifdef PT_SAMPLER_WORKFLOW_PROFILE
+    pt_sampler_workflow_reference_visits=0;
+#endif
+    assert(pt_pattern_undo(&f->p,&f->history,1)==PT_EDIT_CONFLICT && f->history.cursor==0);
+#ifdef PT_SAMPLER_WORKFLOW_PROFILE
+    assert(pt_sampler_workflow_reference_visits==events);
+#endif
+    for(i=0;i<255;++i)assert(!memcmp(samples+i,before+i,sizeof(*before)));
+    stored[events-2].instrument=0;
+#ifdef PT_SAMPLER_WORKFLOW_PROFILE
+    pt_sampler_workflow_reference_visits=0;
+#endif
+    assert(pt_pattern_undo(&f->p,&f->history,1)==PT_EDIT_OK && f->history.cursor==1);
+#ifdef PT_SAMPLER_WORKFLOW_PROFILE
+    assert(pt_sampler_workflow_reference_visits==events);
+#endif
+    free(usage);free(preview);destroy(f);free(stored);free(before);free(samples);
+}
 int main(void)
-{cleanup_matrix();cancel_fail_stale();copy_matrix();callback_rebase();borrowed_handle_alias();private_handle_alias();capacity_reserved_unknown();retained_pin_cache();puts("SAMPLER WORKFLOW PASS: sixformats selective atomic cleanup/copy, one undo, metadata/lowbits/master preservation, gaps/append/loop/slices, cancellation/fault/stale/fulljournal and zero resources");return 0;}
+{cleanup_matrix();cancel_fail_stale();copy_matrix();callback_rebase();borrowed_handle_alias();private_handle_alias();capacity_reserved_unknown();retained_pin_cache();incremental_validation_refusal();bulk_reference_map();puts("SAMPLER WORKFLOW PASS: sixformats selective atomic cleanup/copy, one undo, metadata/lowbits/master preservation, gaps/append/loop/slices, cancellation/fault/stale/fulljournal and zero resources");return 0;}

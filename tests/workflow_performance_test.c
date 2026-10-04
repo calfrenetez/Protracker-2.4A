@@ -110,9 +110,14 @@ int main(void)
     while(e->workflow.scanning || e->workflow.busy) {
         t=now();(void)pt_editor_workflow_idle(e);t=now()-t;
         if(t>copy_max)copy_max=t;
-        assert(++copy_steps<=VALUES/2/(PT_SAMPLER_PIN_CHUNK/sizeof(int32_t))+64);
+        /* Initial full-master validation now yields between bounded steps,
+         * separately from the exact selected-range copy and input polls. */
+        assert(++copy_steps<=VALUES/PT_PROJECT_VALIDATION_WORK_MAX+
+            VALUES/2/(PT_SAMPLER_PIN_CHUNK/sizeof(int32_t))+128);
     }
     copy_total=now()-start;
+    assert(copy_steps>=VALUES/PT_PROJECT_VALIDATION_WORK_MAX+
+        VALUES/2/(PT_SAMPLER_PIN_CHUNK/sizeof(int32_t)));
     assert(e->sample==2 && e->history.count==1 && e->sampler.generation==1);
     assert(!memcmp(&original,d.project.samples,sizeof(original)) && !e->sampler.current[0]);
     {const struct pt_sample *copied=d.project.samples+1;

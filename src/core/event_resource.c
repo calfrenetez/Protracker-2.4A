@@ -146,9 +146,22 @@ enum pt_event_resource_status pt_event_resource_step(struct pt_event_resource_jo
     if(!geometry(j->project) || !disjoint(j->project,ready,sizeof(*ready)))return PT_EVENT_RESOURCE_INVALID;
     if(j->ready) {*ready=1;return PT_EVENT_RESOURCE_OK;}
     if(!j->validated) {
-        if(pt_flow_init(&j->initial,j->project,j->result.origin.flow_mode,j->result.origin.start_order,j->limit)!=PT_FLOW_TICK)
-            return PT_EVENT_RESOURCE_INVALID;
-        j->flow=j->initial;j->validated=1;pt_pitch_init(&j->pitch);checkpoint(j);
+        if(!j->preparing) {
+            status=pt_flow_begin(&j->preparation,j->project,j->result.origin.flow_mode,
+                j->result.origin.start_order,j->limit,revision,generation);
+            if(status!=PT_FLOW_PENDING)return status==PT_FLOW_STALE?PT_EVENT_RESOURCE_STALE:PT_EVENT_RESOURCE_INVALID;
+            j->preparing=1;
+        } else {
+            status=pt_flow_prepare(&j->preparation,revision,generation,PT_PROJECT_VALIDATION_WORK_MAX);
+            if(status!=PT_FLOW_PENDING && status!=PT_FLOW_TICK)
+                return status==PT_FLOW_STALE?PT_EVENT_RESOURCE_STALE:PT_EVENT_RESOURCE_INVALID;
+            if(status==PT_FLOW_TICK) {
+                status=pt_flow_get(&j->preparation,revision,generation,&j->initial);
+                if(status!=PT_FLOW_TICK)return status==PT_FLOW_STALE?PT_EVENT_RESOURCE_STALE:PT_EVENT_RESOURCE_INVALID;
+                j->flow=j->initial;j->validated=1;pt_pitch_init(&j->pitch);checkpoint(j);
+            }
+        }
+        *ready=0;return PT_EVENT_RESOURCE_OK;
     }
     ch=j->result.origin.track;
     for(i=0;i<ticks;++i) {
@@ -185,6 +198,10 @@ enum pt_event_resource_status pt_event_resource_step(struct pt_event_resource_jo
         if(j->length==j->power) {checkpoint(j);j->power*=2;j->length=0;}
     }
     *ready=j->ready;return PT_EVENT_RESOURCE_OK;
+}
+void pt_event_resource_cancel(struct pt_event_resource_job *j)
+{
+    if(j && span(j,sizeof(*j)))memset(j,0,sizeof(*j));
 }
 enum pt_event_resource_status pt_event_resource_get(const struct pt_event_resource_job *j,
     uint32_t revision,uint32_t generation,struct pt_event_resource_result *out)

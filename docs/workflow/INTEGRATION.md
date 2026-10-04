@@ -40,10 +40,12 @@ active performance. Read-only selection and navigation do not invoke that barrie
 
 Read `docs/handover/2026-09-18-v2/README_FIRST.md`, its referenced
 `CODEX_KICKOFF.txt`, repository/parent instructions, the current checkpoint,
-`docs/SAMPLE_MEMORY.md` and shared harness onboarding. `CODEX_START_HERE.txt` and
-the attachment's mandatory `ACCEPTANCE_TESTS.md`, `SOURCES.md` and JSON planning
-companion were not found in the supplied project/iCloud locations. Their location
-has been requested; no companion contents or acceptance pass is invented.
+`docs/SAMPLE_MEMORY.md` and shared harness onboarding. The human supplied the
+complete package folder on 4 October 2026; its README_FIRST.md, CODEX_START_HERE.txt,
+ACCEPTANCE_TESTS.md, SOURCES.md and TEST_MATRIX.json are now read and preserved
+byte-for-byte in [package-v1](package-v1/README_FIRST.md). All six manifest hashes
+match; the main addendum is identical to the previously adopted file. The missing
+document input is resolved. The planning matrix's 36 NOT_RUN rows are not test results.
 
 Pre-edit HEAD: `61f3b01e1bd45539bbaf85c8769cd8d5a46aca48`, branch
 `feat/hardware-independent-core`. Sixteen dirty display/editor/harness paths were
@@ -68,3 +70,19 @@ then separately scoped real A1200 workflow and playback-coexistence tests with
 installed configuration recorded and guarded cleanup/release. Starting a binary
 is not feature acceptance. Existing native output/timing failures and unfinished
 AmiGUS device-capacity/order/completion and listening gates remain unchanged.
+
+## Incremental validation follow-up (4 October 2026)
+
+The human authorized the proposed responsiveness follow-up on existing c61bd55.
+A caller-owned project validator now checks the full semantic body in bounded
+steps while the existing synchronous validator remains the compatibility oracle.
+Sampler cleanup/copy and first inherited-event flow preparation use it without
+unchecked validation certificates or altered music serialization. Publication
+rechecks source identity, revision/generation, stopped ownership and journal
+capacity. Cancellation discards private work without reading released sources.
+
+Bulk cleanup uses one fresh stored-event reference map per atomic application.
+The editor advances one primary usage/transaction/resolver or overview PCM phase
+per idle poll; ownership cancellation runs first even if a usage scan is pending.
+The original16 unrelated display/editor/harness paths remain protected. See
+[responsive validation evidence and limits](RESPONSIVENESS.md).

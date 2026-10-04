@@ -572,6 +572,7 @@ struct workflow_span {const void *data;size_t bytes;};
 struct pt_sampler_workflow {
     struct pt_sampler *owner;struct pt_project *project;struct pt_pattern_history *history;
     struct pt_project snapshot;struct pt_pattern_history history_snapshot;
+    struct pt_project_validation validation;
     struct pt_sample copy_source;unsigned source_slot;
     unsigned generation,count,kind,ready,initialized,first_apply;
     unsigned append,copy_started,copy_done,table_owned;
@@ -686,6 +687,7 @@ static struct pt_sample_version *workflow_version_allocate(struct pt_sampler *s,
 static void workflow_discard(void *context)
 {
     struct pt_sampler_workflow *c=context;struct pt_sampler *s=c->owner;unsigned i;
+    pt_project_validation_cancel(&c->validation);
     for(i=0;i<c->count;++i) {release_version(c->entries[i].before);release_version(c->entries[i].after);}
     if(c->table_owned) {
         size_t n=PT_PROJECT_SAMPLES*sizeof(*c->table_after);
@@ -732,7 +734,15 @@ static struct pt_sampler_workflow *workflow_allocate(struct pt_sampler *s,struct
         workflow_span_add(c,p->samples[i].slices,p->samples[i].slice_count*sizeof(uint32_t));
     }
     for(i=0;i<p->extension_count;++i)workflow_span_add(c,p->extensions[i].data,p->extensions[i].length);
-    c->reserved_bytes=s->bytes;s->bytes+=bytes;return c;
+    c->reserved_bytes=s->bytes;s->bytes+=bytes;
+    {
+        enum pt_project_result validation=pt_project_validation_begin(&c->validation,p,h->revision,generation);
+        if(validation!=PT_PROJECT_OK) {
+            *result=validation==PT_PROJECT_ALIAS?PT_EDIT_ALIAS:PT_EDIT_INVALID;
+            workflow_discard(c);return NULL;
+        }
+    }
+    return c;
 }
 static int workflow_before(struct pt_sampler_workflow *c,unsigned i,unsigned slot,
     struct pt_sampler_workflow **out,enum pt_edit_result *result)
@@ -762,8 +772,6 @@ static enum pt_edit_result workflow_begin_valid(struct pt_sampler *s,struct pt_p
     if(!workflow_external_apart(s,p,h,out,sizeof(*out)))return PT_EDIT_ALIAS;
     if(*out)return PT_EDIT_INVALID;
     if(!workflow_history_room(p,h))return PT_EDIT_CAPACITY;
-    /* Initial full validation is synchronous, as in existing sampler mutations. */
-    if(pt_project_validate(p,NULL)!=PT_PROJECT_OK)return PT_EDIT_INVALID;
     if(s->table && p->samples!=s->table && p->samples!=s->table_original)return PT_EDIT_CONFLICT;
     return PT_EDIT_OK;
 }
@@ -876,10 +884,18 @@ static int workflow_copy_before(struct workflow_entry *e)
 }
 enum pt_edit_result pt_sampler_workflow_step(struct pt_sampler_workflow *c,unsigned *ready)
 {
-    unsigned i;size_t n;
+    unsigned i;size_t n;enum pt_project_result validation;
     if(!c || !ready || c->initialized)return PT_EDIT_INVALID;
     if(!workflow_apart(c,ready,sizeof(*ready)))return PT_EDIT_ALIAS;
     if(!workflow_current(c))return PT_EDIT_CONFLICT;
+    validation=pt_project_validation_get(&c->validation,c->history->revision,c->owner->generation,NULL);
+    if(validation==PT_PROJECT_PENDING) {
+        validation=pt_project_validation_step(&c->validation,c->history->revision,c->owner->generation,
+            PT_PROJECT_VALIDATION_WORK_MAX);
+        if(validation==PT_PROJECT_OK || validation==PT_PROJECT_PENDING) {*ready=0;return PT_EDIT_OK;}
+    }
+    if(validation!=PT_PROJECT_OK)return validation==PT_PROJECT_STALE?PT_EDIT_CONFLICT:
+        validation==PT_PROJECT_ALIAS?PT_EDIT_ALIAS:PT_EDIT_INVALID;
     if(c->ready) {*ready=1;return PT_EDIT_OK;}
     for(i=0;i<c->count;++i)if(c->entries[i].before && !workflow_copy_before(c->entries+i)) {*ready=0;return PT_EDIT_OK;}
     if(c->kind==2) {
@@ -900,24 +916,40 @@ enum pt_edit_result pt_sampler_workflow_step(struct pt_sampler_workflow *c,unsig
 }
 static void workflow_empty(struct pt_sample *sample)
 {memset(sample,0,sizeof(*sample));sample->pcm.bits=8;sample->pcm.channels=1;sample->pcm.rate=PT_CLASSIC_RATE;}
-static int workflow_referenced(const struct pt_sampler_workflow *c,unsigned slot)
+/* One conservative pass over every retained pattern/track, including off-order
+ * instrument-only events. This atomic journal boundary remains synchronous. */
+#ifdef PT_SAMPLER_WORKFLOW_PROFILE
+extern size_t pt_sampler_workflow_reference_visits;
+#endif
+static void workflow_reference_map(const struct pt_project *p,uint8_t referenced[PT_PROJECT_SAMPLES])
 {
-    size_t i,n=(size_t)c->project->pattern_count*PT_PROJECT_ROWS*c->project->channels.count;
-    for(i=0;i<n;++i)if(c->project->events[i].instrument==slot+1)return 1;
-    return 0;
+    size_t i,n=(size_t)p->pattern_count*PT_PROJECT_ROWS*p->channels.count;
+    memset(referenced,0,PT_PROJECT_SAMPLES);
+    for(i=0;i<n;++i) {
+#ifdef PT_SAMPLER_WORKFLOW_PROFILE
+        ++pt_sampler_workflow_reference_visits;
+#endif
+        if(p->events[i].instrument)referenced[p->events[i].instrument-1]=1;
+    }
 }
 static int workflow_apply(void *context,struct pt_project *p,int direction)
 {
     struct pt_sampler_workflow *c=context;struct pt_sampler *s=c->owner;struct pt_sample empty;
-    unsigned i;struct pt_sample *table;unsigned expected_count=c->snapshot.sample_count;
+    unsigned i,need_references;uint8_t referenced[PT_PROJECT_SAMPLES];
+    struct pt_sample *table;unsigned expected_count=c->snapshot.sample_count;
     if(p!=c->project || (direction!=-1 && direction!=1) || !c->ready)return 0;
     if(c->append && direction<0)++expected_count;
     if(p->sample_count!=expected_count || p->events!=c->snapshot.events || p->pattern_count!=c->snapshot.pattern_count ||
        p->channels.count!=c->snapshot.channels.count || s->generation==UINT_MAX)return 0;
-    if(!c->initialized) {if(direction<0 || !workflow_current(c))return 0;}
+    if(!c->initialized) {
+        if(direction<0 || !workflow_current(c) ||
+           pt_project_validation_get(&c->validation,c->history->revision,s->generation,NULL)!=PT_PROJECT_OK)return 0;
+    }
     workflow_empty(&empty);
     table=c->append?(direction>0?c->snapshot.samples:c->table_after):c->snapshot.samples;
     if(p->samples!=table)return 0;
+    need_references=(direction>0 && (!c->append || c->kind==1)) || (c->append && direction<0);
+    if(need_references)workflow_reference_map(p,referenced);
     for(i=0;i<c->count;++i) {
         struct workflow_entry *e=c->entries+i;const struct pt_sample *expected;
         struct pt_sample_version *expected_version;
@@ -930,8 +962,7 @@ static int workflow_apply(void *context,struct pt_project *p,int direction)
             } else {expected=e->after?&e->after->sample:&empty;expected_version=e->after;}
             if(memcmp(p->samples+e->slot,expected,sizeof(*expected)) || s->current[e->slot]!=expected_version)return 0;
         }
-        if((direction>0 && (!c->append || c->kind==1)) || (c->append && direction<0))
-            if(workflow_referenced(c,e->slot))return 0;
+        if(need_references && referenced[e->slot])return 0;
         if((direction>0?e->after:e->before) && (direction>0?e->after:e->before)->references==UINT_MAX)return 0;
     }
     if(c->append) {
@@ -949,7 +980,7 @@ static int workflow_apply(void *context,struct pt_project *p,int direction)
         else if(e->slot<c->snapshot.sample_count)workflow_empty(p->samples+e->slot);
     }
     p->sample_count=(uint16_t)(c->snapshot.sample_count+(c->append && direction>0));
-    ++s->generation;c->initialized=1;return 1;
+    ++s->generation;c->initialized=1;pt_project_validation_cancel(&c->validation);return 1;
 }
 enum pt_edit_result pt_sampler_workflow_commit(struct pt_sampler_workflow **job,unsigned stopped,
     struct pt_sampler_workflow_stats *stats)
@@ -958,7 +989,8 @@ enum pt_edit_result pt_sampler_workflow_commit(struct pt_sampler_workflow **job,
     if(!job || !(c=*job) || !stats || c->initialized || !c->ready)return PT_EDIT_INVALID;
     if(!workflow_apart(c,job,sizeof(*job)) || !workflow_apart(c,stats,sizeof(*stats)) ||
        output_overlap(job,sizeof(*job),stats,sizeof(*stats)))return PT_EDIT_ALIAS;
-    if(!stopped || !workflow_current(c))return PT_EDIT_CONFLICT;
+    if(!stopped || !workflow_current(c) ||
+       pt_project_validation_get(&c->validation,c->history->revision,c->owner->generation,NULL)!=PT_PROJECT_OK)return PT_EDIT_CONFLICT;
     if(!workflow_history_room(c->project,c->history) || c->owner->generation==UINT_MAX)return PT_EDIT_CAPACITY;
     resource=(struct pt_edit_resource){c,workflow_apply,workflow_discard};
     result=pt_pattern_resource_apply(c->project,c->history,&resource);

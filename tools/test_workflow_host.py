@@ -6,7 +6,7 @@ ROOT=Path(__file__).resolve().parents[1]
 GROUPS=('sample_usage','sampler_workflow','sampler_copy_range_boundaries','sample_range','wave_summary','event_resource',
         'editor_workflow','workflow_performance','workflow_view','sampler','slots','editor','pattern','song',
         'slices','flow','editor_guard','editor_capture','sampler_pin_job',
-        'sampler_paula','sampler_wavetable','project','document')
+        'sampler_paula','sampler_wavetable','project','project_validation','document')
 def sources():
     files=[p for folder in ('src','tests') for p in (ROOT/folder).rglob('*')
            if p.is_file() and p.suffix in ('.c','.h','.py')]

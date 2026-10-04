@@ -16,6 +16,82 @@ static uint8_t *read_file(const char *name,size_t *bytes)
 }
 static void tick_n(struct pt_flow *s,unsigned count)
 {while(count--)assert(pt_flow_tick(s)==PT_FLOW_TICK);}
+static void bounded_preparation(void)
+{
+    enum { VALUES=10240, CAPACITY=12288 };
+    union storage {int32_t values[CAPACITY];struct {int32_t active[VALUES];struct pt_flow output;} parts;} *master;
+    struct pt_project p,snapshot;struct pt_sample sample;struct pt_event events[64*4];uint16_t order=0;
+    struct pt_flow_preparation prep={0},saved;struct pt_flow sync,out,before;
+    unsigned ready_calls,bits,ch;enum pt_flow_result result;size_t i;
+    master=calloc(1,sizeof(*master));assert(master);
+    memset(&p,0,sizeof(p));memset(&sample,0,sizeof(sample));memset(events,0,sizeof(events));
+    pt_channels_init(&p.channels);p.orders=&order;p.events=events;p.samples=&sample;
+    p.order_count=p.pattern_count=p.sample_count=1;p.speed=6;p.bpm=125;sample.volume=64;
+    assert(sizeof(prep)<8192);
+    for(bits=8;bits<=24;bits+=8)for(ch=1;ch<=2;++ch) {
+        sample.pcm=(struct pt_pcm){master->values,CAPACITY,VALUES/ch,8287,(uint8_t)ch,(uint8_t)bits};
+        for(i=0;i<VALUES;++i)master->values[i]=(int32_t)(i%127)-63;
+        master->values[VALUES-1]=(int32_t)((1UL<<(bits-1))-1);
+        master->values[VALUES]=INT32_MAX; /* capacity padding is not a PCM value */
+        snapshot=p;memset(&out,0xa5,sizeof(out));before=out;
+        assert(pt_flow_init(&sync,&p,PT_FLOW_CLASSIC128,0,100)==PT_FLOW_TICK);
+        assert(pt_flow_begin(&prep,&p,PT_FLOW_CLASSIC128,0,100,3,5)==PT_FLOW_PENDING);
+        assert(pt_flow_get(&prep,3,5,&out)==PT_FLOW_PENDING && !memcmp(&out,&before,sizeof(out)));
+        assert(pt_flow_get(&prep,3,5,&master->parts.output)==PT_FLOW_INVALID && master->values[VALUES]==INT32_MAX);
+        assert(pt_flow_get(&prep,3,5,&prep.initial)==PT_FLOW_INVALID);
+        saved=prep;
+        assert(pt_flow_prepare(&prep,3,5,0)==PT_FLOW_INVALID && !memcmp(&prep,&saved,sizeof(prep)));
+        assert(pt_flow_prepare(&prep,3,5,4097)==PT_FLOW_INVALID && !memcmp(&prep,&saved,sizeof(prep)));
+        assert(pt_flow_prepare(&prep,4,5,4096)==PT_FLOW_STALE && !memcmp(&prep,&saved,sizeof(prep)));
+        result=PT_FLOW_PENDING;ready_calls=0;
+        while(result==PT_FLOW_PENDING && ready_calls++<8) {
+            result=pt_flow_prepare(&prep,3,5,4096);
+            assert(prep.validation.last_work<=4096);
+            assert(!prep.initial.ticks);
+        }
+        assert(result==PT_FLOW_TICK && ready_calls>=3 && !memcmp(&p,&snapshot,sizeof(p)));
+        assert(pt_flow_get(&prep,3,5,&out)==PT_FLOW_TICK && !memcmp(&out,&sync,sizeof(out)));
+        assert(pt_flow_get(&prep,3,5,&prep.initial)==PT_FLOW_INVALID);
+        assert(pt_flow_get(&prep,3,5,(struct pt_flow *)&prep.validation)==PT_FLOW_INVALID);
+        assert(pt_flow_get(&prep,3,5,&master->parts.output)==PT_FLOW_INVALID && master->values[VALUES]==INT32_MAX);
+        assert(pt_flow_get(&prep,3,5,(struct pt_flow *)(UINTPTR_MAX-1))==PT_FLOW_INVALID);
+        assert(pt_flow_begin((struct pt_flow_preparation *)master->values,&p,PT_FLOW_CLASSIC128,0,100,3,5)==PT_FLOW_INVALID);
+        assert(pt_flow_init((struct pt_flow *)master->values,&p,PT_FLOW_CLASSIC128,0,100)==PT_FLOW_INVALID);
+        p.samples=NULL;out=before;
+        assert(pt_flow_get(&prep,3,5,&out)==PT_FLOW_STALE && !memcmp(&out,&before,sizeof(out)));
+        pt_flow_cancel(&prep);
+        assert(!prep.initialized && !prep.validation.project);
+        assert(pt_flow_prepare(&prep,3,5,4096)==PT_FLOW_INVALID);
+        assert(pt_flow_get(&prep,3,5,&out)==PT_FLOW_INVALID && !memcmp(&out,&before,sizeof(out)));
+        p.samples=&sample;
+    }
+    /* A late invalid active value is not scanned at begin or in one early chunk. */
+    sample.pcm=(struct pt_pcm){master->values,CAPACITY,VALUES,8287,1,8};
+    memset(master->values,0,VALUES*sizeof(*master->values));master->values[VALUES-1]=128;
+    assert(pt_flow_begin(&prep,&p,PT_FLOW_CLASSIC128,0,100,3,5)==PT_FLOW_PENDING);
+    assert(pt_flow_prepare(&prep,3,5,4096)==PT_FLOW_PENDING && !prep.ready);
+    assert(pt_flow_prepare(&prep,3,5,4096)==PT_FLOW_PENDING && !prep.ready);
+    out=before;
+    assert(pt_flow_prepare(&prep,3,5,4096)==PT_FLOW_INVALID && !prep.ready);
+    assert(pt_flow_get(&prep,3,5,&out)==PT_FLOW_INVALID && !memcmp(&out,&before,sizeof(out)));
+    assert(master->values[VALUES-1]==128);
+    /* Cancellation at each pending chunk and after readiness is source-free. */
+    master->values[VALUES-1]=127;
+    for(ready_calls=0;ready_calls<4;++ready_calls) {
+        unsigned step;
+        assert(pt_flow_begin(&prep,&p,PT_FLOW_CLASSIC128,0,100,3,5)==PT_FLOW_PENDING);
+        for(step=0;step<ready_calls;++step) {
+            result=pt_flow_prepare(&prep,3,5,4096);
+            assert(result==PT_FLOW_PENDING || result==PT_FLOW_TICK);
+        }
+        p.samples=NULL;p.events=NULL;p.orders=NULL;
+        pt_flow_cancel(&prep);out=before;
+        assert(pt_flow_get(&prep,3,5,&out)==PT_FLOW_INVALID && !memcmp(&out,&before,sizeof(out)));
+        p.samples=&sample;p.events=events;p.orders=&order;
+    }
+    free(master);
+    puts("FLOW PREPARATION PASS: bounded validation, synchronous reset parity, cancel/stale/late-invalid and full-capacity refusal");
+}
 static void boundaries(void)
 {
     struct pt_project p;struct pt_flow s,before;struct pt_event events[2*64*16];uint16_t orders[256];unsigned ch;
@@ -67,7 +143,7 @@ int main(int argc,char **argv)
 {
     struct pt_allocator allocator={NULL,allocate,release};struct pt_document doc;struct pt_flow s,before;
     uint8_t *input,*trace,b[30];size_t bytes,n,i;unsigned budget;enum pt_flow_result result;
-    if(argc==1) {boundaries();return 0;}
+    if(argc==1) {boundaries();bounded_preparation();return 0;}
     assert(argc==4);budget=(unsigned)strtoul(argv[3],NULL,10);assert(budget);
     input=read_file(argv[1],&bytes);trace=read_file(argv[2],&n);assert(n%36==0);
     pt_document_init(&doc,&allocator);assert(pt_document_load(&doc,input,bytes,SIZE_MAX)==PT_PROJECT_OK);

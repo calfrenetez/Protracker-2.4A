@@ -7,7 +7,12 @@
 #define PT_WORKFLOW_TOOLBOX 13
 #define PT_WORKFLOW_ROWS 10
 /* Embedded in the editor: native editor allocation is authoritative Fast RAM.
- * All jobs run on the owner task between input polls, never in audio interrupts. */
+ * All jobs run on the owner task between input polls, never in audio interrupts.
+ * busy includes incremental project validation and private copy preparation;
+ * input remains cancellable and each idle rechecks transport/capture ownership.
+ * An idle advances at most one usage/transaction/resolver phase; overview PCM reads
+ * wait for an input interval without that primary work. Metadata-only overview
+ * scheduling remains permitted so a completed primary job cannot lose refresh. */
 struct pt_editor_workflow {
     struct pt_sample_usage_scan scan;
     struct pt_sample_usage_preview usage;

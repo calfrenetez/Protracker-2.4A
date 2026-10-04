@@ -7,7 +7,8 @@
  * hardware access. Extended mode preserves ascending 1..16 track processing and
  * uses all 256 order positions; classic mode preserves the native 7-bit wrap. */
 enum pt_flow_mode { PT_FLOW_CLASSIC128, PT_FLOW_EXTENDED256 };
-enum pt_flow_result { PT_FLOW_TICK, PT_FLOW_STOPPED, PT_FLOW_LIMIT, PT_FLOW_INVALID };
+enum pt_flow_result { PT_FLOW_TICK, PT_FLOW_STOPPED, PT_FLOW_LIMIT, PT_FLOW_INVALID,
+                      PT_FLOW_PENDING, PT_FLOW_STALE };
 struct pt_flow {
     const struct pt_project *project;
     /* positions counts order transitions; returns counts destinations <= the
@@ -24,6 +25,36 @@ struct pt_flow {
  * the project's speed/BPM. Both retain the native initial speed-tick lead-in. */
 enum pt_flow_result pt_flow_init(struct pt_flow *out,const struct pt_project *,
                                enum pt_flow_mode,unsigned start_order,uint32_t tick_limit);
+/* Bounded task-side preparation owns validation and publishes no unchecked
+ * validation certificate. Zero-initialize once; never modify workspace fields.
+ * Borrowed project/storage must remain immutable/alive through cancel or next
+ * begin. Any in-place edit changes revision/generation; normal channel cursor
+ * selection alone is permitted. No allocation, pins, hardware or active-reader
+ * ownership is supplied here. Never use this API from an interrupt.
+ */
+struct pt_flow_preparation {
+    struct pt_project_validation validation;
+    struct pt_flow initial;
+    uint32_t revision,generation,limit;
+    unsigned initialized,mode,start_order,ready;
+};
+/* Metadata-only begin preserves prep on refusal. Classic reset constraints
+ * match pt_flow_init. No PCM value is read and no reset flow is published. */
+enum pt_flow_result pt_flow_begin(struct pt_flow_preparation *,const struct pt_project *,
+    enum pt_flow_mode,unsigned start_order,uint32_t tick_limit,
+    uint32_t revision,uint32_t generation);
+/* Each call charges <=work (1..4096) validation items, plus fixed metadata/tag
+ * guards. PT_FLOW_TICK means complete reset preparation, not a played tick.
+ * No pt_flow_tick is performed. STALE/invalid work does not advance the job. */
+enum pt_flow_result pt_flow_prepare(struct pt_flow_preparation *,
+    uint32_t revision,uint32_t generation,unsigned work);
+/* Pending/cancelled/stale/aliased outputs remain untouched; complete/current
+ * reset only. Output must be disjoint from prep, project/tables/metadata and all
+ * declared PCM capacities, including unused padding. Wrapped spans refuse. */
+enum pt_flow_result pt_flow_get(const struct pt_flow_preparation *,
+    uint32_t revision,uint32_t generation,struct pt_flow *);
+/* Genuine workspace only: no former project/table/PCM dereference. */
+void pt_flow_cancel(struct pt_flow_preparation *);
 /* PT_FLOW_TICK publishes one completed tick, including the F00 tick. Inspect
  * fresh/delayed and played vs next cursor separately. The next call reports
  * STOPPED or LIMIT without changing state. No successful-song-end inference:

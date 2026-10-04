@@ -70,6 +70,21 @@ int main(void)
     assert(e->history.revision==revision && !d.project.samples[3].pcm.frames);
     /* Current selection copy bypasses clipboard and skips named/referenced slots. */
     e->sample_start=1;e->sample_end=7;e->clipboard.rows=1;e->clipboard.events[0].instrument=31;
+    owned=e->sampler.bytes;revision=e->history.revision;
+    e->wave_slot=1;e->wave_frames=8;e->wave_start=0;e->wave_end=8;
+    assert(pt_editor_key(e,0x33,0)==PT_UI_NONE && e->workflow.busy && e->workflow.transaction);
+    (void)pt_editor_workflow_idle(e);
+    assert(e->workflow.busy && e->workflow.transaction && !d.project.samples[3].pcm.frames);
+    assert(e->workflow.wave_building && !e->workflow.wave_job.last_values); /* Metadata scheduling, no second PCM phase. */
+    {struct pt_sample_usage_options options={0};
+     options.revision=e->history.revision;options.generation=e->sampler.generation;
+     assert(pt_sample_usage_begin(&e->workflow.scan,e->project,&options)==PT_USAGE_OK);e->workflow.scanning=1;}
+    recording=1;(void)pt_editor_workflow_idle(e);recording=0;
+    assert(!e->workflow.busy && !e->workflow.transaction && e->sampler.bytes==owned);
+    assert(e->history.revision==revision && !memcmp(&original,&d.project.samples[0],sizeof(original)));
+    assert(pt_editor_key(e,0x33,0)==PT_UI_NONE && e->workflow.busy);
+    assert(pt_editor_key(e,0x45,0)==PT_UI_NONE && !e->workflow.busy && !e->workflow.transaction);
+    assert(e->sampler.bytes==owned && e->history.revision==revision && !d.project.samples[3].pcm.frames);
     assert(pt_editor_key(e,0x33,0)==PT_UI_NONE);idle(e);
     assert(e->sample==4 && e->history.count==1 && e->sampler.generation==1);
     assert(d.project.samples[3].pcm.frames==6 && d.project.samples[3].pcm.bits==24 && d.project.samples[3].pcm.channels==2);

@@ -1,0 +1,39 @@
+{
+  "package_id": "PT24G-030-WORKFLOW-v1",
+  "issued": "2026-10-03",
+  "description": "Native Amiga ProTracker 2.4G, three approved 030-friendly workflow additions.",
+  "contents_type": "Requirements, references and unexecuted acceptance-test templates only.",
+  "manifest_note": "Hashes cover every other file in this package; this manifest is not self-hashed.",
+  "files": [
+    {
+      "path": "ACCEPTANCE_TESTS.md",
+      "bytes": 17504,
+      "sha256": "640f6fcc36e5954aa80247e04b7f44b581e35c2208ab8446f827e87d7ff8aaea"
+    },
+    {
+      "path": "CODEX_START_HERE.txt",
+      "bytes": 2506,
+      "sha256": "99fd57d7f057ebeec94ad3c50f05148164187d354ff0c70687803fdc3701a62b"
+    },
+    {
+      "path": "PT24G_030_WORKFLOW_ADDENDUM.md",
+      "bytes": 23729,
+      "sha256": "41900a674a0024b4f83b6ff0bcf78d73d2f9153f2a4852c1ec98b3e79c4d9fb6"
+    },
+    {
+      "path": "README_FIRST.md",
+      "bytes": 3169,
+      "sha256": "182ed83e0d566e4b76d9806989a89a4b6d76564670e321e95f56ddae636b74f5"
+    },
+    {
+      "path": "SOURCES.md",
+      "bytes": 3842,
+      "sha256": "3fcf50d2c9dcb14e71790067e901dcf903c93b4f0b3fd107c0fcc9f3c0fe1a5b"
+    },
+    {
+      "path": "TEST_MATRIX.json",
+      "bytes": 17923,
+      "sha256": "13d8f72510dd9cebf9dd1407ecdfd74707e8563acc661e32fb19a68cf67d8b62"
+    }
+  ]
+}

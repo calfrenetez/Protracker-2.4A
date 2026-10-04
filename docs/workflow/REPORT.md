@@ -28,7 +28,7 @@ qualified after actual execution. The broader six-format, allocation-failure,
 cancellation, marker, alias and lease tests are host fixtures; the native fixture
 does not substitute for that whole matrix or for interactive editor testing.
 
-## Final host and build results
+## Original three-feature host and build results (historical c61bd55)
 
 All 22 scoped regression groups passed on clean HEAD plus owned feature changes.
 After the final manager sort optimization, all six affected editor/guard/capture/
@@ -47,7 +47,7 @@ working-layout golden pass. One final working guard invocation took 326.245s
 externally while unittest reported 6.727s; the full outer delay is retained in
 its log/JSON and does not establish a native CPU or response-time result.
 
-| Exact final candidate | PT24GEdit bytes / SHA256 | PTWorkflowTest bytes / SHA256 |
+| Historical c61bd55 candidate | PT24GEdit bytes / SHA256 | PTWorkflowTest bytes / SHA256 |
 |---|---|---|
 | Clean committed source | 306276 / `24f84a4092b3224a3607ea228e5e5eb2d5496a44e8b70afc2e60b9ceb585496c` | 204808 / `0e0c658aa1f8375ffe58fd079d81971ea57839b4979d00b3c0c698ff9ed1966d` |
 | Preserved display overlay | 310608 / `a2c286fa47512e4276f8828a56445a7aa7db6dc7449c6d398b50ac12c36292b5` | 205320 / `5c562c6e69d3c0aff6b8afa669561fac873ad01c72a29d8560bdca15f315e5b4` |
@@ -60,7 +60,7 @@ The selected working candidate includes the pre-existing uncommitted display
 layer; it must not be confused with the clean commit or its binary.
 
 Exact commands are recorded in [validation.json](validation.json). The final
-host runner supports `--group` for affected checks; omitting it runs all23 groups:
+host runner supports `--group` for affected checks; omitting it now runs all24 groups, including incremental project validation:
 
 ```sh
 /opt/homebrew/opt/python@3.14/bin/python3.14 -B tools/test_workflow_host.py --evidence-dir /private/tmp/pt-workflow-new-host-evidence
@@ -84,6 +84,18 @@ Overview: 512 steps, at most 4096 actual value reads per step; 15.085ms total ho
 
 Peak tracked requested payload: 12,797,530 bytes; undo retained 12,797,530 bytes for redo. Disposal released all tracked requests (0 bytes, 0 allocations). The accounting includes fixture editor/document/master/private sampler payloads and excludes allocator headers, runtime and RSS. No native Chip/Fast peak or availability is inferred.
 
+## Current responsiveness follow-up
+
+The 4 October continuation adds cancellable incremental project/PCM validation
+and a single reference-map pass for bulk cleanup. All 24 current scoped host
+groups and six affected preserved-overlay groups pass; both exact current 68k
+editor/controller candidates crossbuild. Details, measured before/after host CPU,
+remaining synchronous boundaries and current hashes are in
+[RESPONSIVENESS.md](RESPONSIVENESS.md) and
+[responsiveness-validation.json](responsiveness-validation.json). Historical
+c61bd55 results above remain preserved and are not the new candidate hashes.
+Native acceptance remains NOT_RUN.
+
 ## Memory and work bounds
 
 The editor owns two fixed overview buffers, each 1,240 signed min/max bins.
@@ -93,10 +105,13 @@ bounded chunks, using fixed 255-slot previews and conservative owner masks.
 Manager sorting/filtering and waveform drawing never create playback caches or
 upload hardware audio. Changed view summaries publish only when complete.
 
-Initial transaction project/PCM validation is synchronous and requires stopped
-transport, recording and affected previews. Initial inherited-event flow
-validation may scan PCM; the frontend refuses that first validation during an
-active performance, while same-version cached navigation uses bounded ticks.
+The current transaction and first inherited-event project/PCM validation yield
+in steps of at most4096 validation items, separately from copying or replay.
+Transactions still require stopped transport, recording and affected previews.
+The frontend still refuses first uncached inherited-event validation during an
+active performance; same-version cached navigation uses bounded ticks. Initial
+metadata/allocator callbacks and atomic commit/undo checks remain synchronous.
+See [current responsiveness work](RESPONSIVENESS.md) for exact evidence and limits.
 No measured 030 response-time or Chip/Fast peak is claimed by these bounds.
 Cleanup can free slots while undo still owns masters: immediate released master
 bytes are reported as zero. A full journal or sampler budget refuses the operation
@@ -104,11 +119,13 @@ without silently purging history or downgrading precision.
 
 ## Open inputs and target gates
 
-`README_FIRST.md` and its referenced `CODEX_KICKOFF.txt` were read.
-`CODEX_START_HERE.txt`, mandatory `ACCEPTANCE_TESTS.md`, `SOURCES.md` and the JSON
-planning companion were absent from the supplied/scoped project and iCloud paths;
-their location has been requested. The tests in this change are derived from the
-supplied detailed addendum, and no missing companion suite is represented as passed.
+The initial standalone addendum lacked its companion files. The human supplied
+the complete package folder on 4 October 2026; its README_FIRST.md and
+CODEX_START_HERE.txt,36-case ACCEPTANCE_TESTS.md, SOURCES.md and TEST_MATRIX.json
+are now read and preserved in [package-v1](package-v1/README_FIRST.md). All six
+manifest entries match; the adopted main addendum is byte-identical. This resolves
+the missing-document input. The original matrix remains 36 NOT_RUN planning rows;
+its applicable emulator/physical acceptance has not been executed.
 
 The established shared harness must qualify the exact editor/controller candidate
 in Amiberry first, then separately scope real A1200 workflow and playback tests.

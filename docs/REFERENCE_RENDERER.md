@@ -716,3 +716,22 @@ queued private playback. Backpressure, consumer-held blocks, stop-before-edit,
 undo and full restart preserve exact PCM and master serialization. See
 `evidence/enhanced-editor/invert-editor-reference/`; this does not enable native
 Studio PLAY or qualify a device output path.
+
+## Optional opaque initial sequence setup — 5 October 2026
+
+`pt_render_sequence_setup_begin/step/get/take/cancel` provides cancellable genuine
+initial validation and budgeted used-pattern, offset and eligibility phases. Its
+private completed flow can create a checked immutable sequence; callers cannot
+supply a validated flag or copied-flow certificate. The original full project
+validates before any pattern-only view. Reset relinks the retained flow to the
+actual renderer view and reuses the complete offset mask, preserving the original
+schedule without semantic rescans at measurement restart/rewind.
+
+The optional checked path protects full declared capacities and allocator/output
+controls. Fixed captured extents support cancellation after stale headers without
+reading former descriptor/payload arrays. Existing synchronous/mutating paths
+retain their behavior; ordinary checked sequence close reentry refuses, while
+existing lookahead keeps its sequence-outlives-workspace obligation. Eight focused
+host sanitizer groups and two portable compiler fixtures pass; both fixtures
+remain native NOT RUN. No native elapsed-time, stack, activation or audio claim.
+See [the exact evidence](../evidence/enhanced-editor/paula-preflight-startup/README.md).

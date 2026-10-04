@@ -80,4 +80,90 @@ enum pt_render_result pt_render_measure_allocated(const struct pt_project *,cons
     pt_render_progress,void *,struct pt_render_report *,const struct pt_allocator *);
 enum pt_render_result pt_render_stream_allocated(const struct pt_project *,const struct pt_render_options *,
     pt_render_sink,void *,pt_render_progress,void *,struct pt_render_report *,const struct pt_allocator *);
+/* Optional task-side initial setup. The opaque owner contains the ONLY genuine
+ * project/flow validation workspace; no caller certificate or validation flag is
+ * consumed. Begin scans bounded metadata/full source extents and owns one fixed
+ * control allocation, but reads no PCM/order/event/slice values. Borrow p and all
+ * source storage plus the original o/a argument structs immutable/alive through
+ * cancel/take, including allocator callbacks. Callback contexts must be disjoint
+ * from known storage; arbitrary opaque context extents cannot be guessed here.
+ * Revision/generation are source tags, not a timestamp backend generation.
+ */
+enum pt_render_setup_result { PT_RENDER_SETUP_PENDING, PT_RENDER_SETUP_READY,
+    PT_RENDER_SETUP_INVALID, PT_RENDER_SETUP_STALE, PT_RENDER_SETUP_ALIAS,
+    PT_RENDER_SETUP_CAPACITY, PT_RENDER_SETUP_BUSY, PT_RENDER_SETUP_FAILED };
+enum pt_render_setup_phase { PT_RENDER_SETUP_VALIDATE, PT_RENDER_SETUP_USED,
+    PT_RENDER_SETUP_OFFSETS, PT_RENDER_SETUP_EFFECTS, PT_RENDER_SETUP_COMPLETE };
+struct pt_render_setup_report {
+    enum pt_render_result render_result;
+    enum pt_render_setup_phase phase;
+    unsigned last_work;
+};
+#define PT_RENDER_SETUP_GUARDS 8U
+struct pt_render_setup_guard {const void *data;size_t bytes;};
+struct pt_render_sequence_setup;
+struct pt_render_sequence;
+enum pt_render_setup_result pt_render_sequence_setup_begin(const struct pt_project *,
+    const struct pt_render_options *, const struct pt_allocator *, uint32_t revision,
+    uint32_t generation, const struct pt_render_setup_guard *, unsigned guard_count,
+    struct pt_render_sequence_setup **);
+/* One phase/call, <=work charged validation or metadata items (1..4096).
+ * Fixed header/currentness comparisons and finite metadata output-span checks
+ * are outside charged items; item counts are not a wall-clock/IRQ guarantee.
+ * READY means only initial setup; the returned sequence still needs its complete
+ * bounded timeline measurement before next(). Invalid work/stale/alias refusal
+ * never advances. Result/report is not authorization to construct another owner.
+ */
+enum pt_render_setup_result pt_render_sequence_setup_step(struct pt_render_sequence_setup *,
+    uint32_t revision, uint32_t generation, unsigned work);
+/* NULL report is a checked current/status query. No partial PCM/source mask.
+ * Non-NULL report must be disjoint; stale/alias output remains untouched. */
+enum pt_render_setup_result pt_render_sequence_setup_get(struct pt_render_sequence_setup *,
+    uint32_t revision, uint32_t generation, struct pt_render_setup_report *);
+/* Consumes genuine completed startup; allocates the actual opaque sequence,
+ * initially awaiting measurement. No semantic rescan. CAPACITY retains completed
+ * startup for explicit retry; success releases startup, never retains its address.
+ * Output/handle slots are distinct/disjoint from startup, original options and
+ * allocator, and project/source storage; the guard descriptor array is immutable
+ * and also disjoint. Reserved parent spans may contain legitimate parent-owned
+ * slots: those spans protect new allocation initialization, not slot publication.
+ * Parent wrappers separately guard their actual external caller output/handle.
+ * Ordinary pending/alias/capacity refusal preserves both. A release callback
+ * failure after consuming startup clears that handle, publishes no sequence and
+ * releases the private candidate; explicit cancel/restart is required. Callback-
+ * mutated slots are not overwritten; only an unchanged genuine owner is cleared.
+ */
+/* Optional parent guards protect actual full caller controls/input extents before
+ * allocation initialization. Their descriptor array is also protected; count<=8.
+ * Array entries may name parent private publisher slots; the descriptor array
+ * itself must not overlap either publishing slot. No guard/report bypasses genuine
+ * completed-current progress. */
+enum pt_render_setup_result pt_render_sequence_setup_take(struct pt_render_sequence_setup **,
+    uint32_t revision, uint32_t generation, const struct pt_render_setup_guard *,
+    unsigned guard_count, struct pt_render_sequence **);
+/* Read-only checked span query for a parent control allocation. This is never a
+ * semantic certificate: constructor/take independently checks actual progress. */
+int pt_render_sequence_setup_output_disjoint(struct pt_render_sequence_setup *,
+    uint32_t revision, uint32_t generation, const void *, size_t);
+/* Fixed original control/header/table/input extents only, usable after STALE
+ * without reading former descriptors. This classifies known ambiguous allocator
+ * aliases before cleanup, not validation/currentness or semantic permission. */
+int pt_render_sequence_setup_control_output_disjoint(const struct pt_render_sequence_setup *,
+    const void *, size_t);
+/* Genuine owner handle only. Cancel reads no former source arrays; caller handle
+ * storage must outlive the owner and be disjoint from borrowed source storage.
+ * Allocators must return fresh disjoint storage. A returned known live/source
+ * alias is refused WITHOUT release: ownership of overlapping memory was never
+ * acquired. Concurrent source destruction or a freeing invalid-allocator callback
+ * cannot be made safe by span checks and violates the borrowing contract.
+ * Begin callbacks must remain serialized (no owner exists yet); same-slot handle
+ * publication or observable input changes are refused, but recursive begin-and-
+ * cancel with no observable change cannot be detected. Subsequent take/release
+ * callbacks keep the existing owner BUSY; observed reentry latches failure.
+ */
+enum pt_render_setup_result pt_render_sequence_setup_cancel(struct pt_render_sequence_setup **);
+/* Parent owner close guard: fixed control/captured-table spans when header is
+ * stale, current full capacities otherwise. No former descriptor reads. Genuine
+ * external handle storage must separately remain disjoint from borrowed storage. */
+int pt_render_sequence_control_output_disjoint(const struct pt_render_sequence *,const void *,size_t);
 #endif

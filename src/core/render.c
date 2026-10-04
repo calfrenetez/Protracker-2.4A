@@ -5,6 +5,7 @@
 #include "pitch.h"
 #include "document.h"
 #include <string.h>
+#include <stddef.h>
 struct run {
     struct pt_project view;
     uint16_t order;
@@ -467,7 +468,333 @@ struct pt_render_sequence {
     struct pt_render_command_state commands;
     uint32_t remaining;unsigned pending,end,done,failed,consumed,preparing;uint64_t interval;
     struct pt_render_mutation mutation;
+    struct pt_flow checked_initial;struct pt_project checked_header;
+    uint16_t checked_offsets;unsigned checked_reset,checked_closing;
 };
+
+/* Opaque initial control: this is the only owner of its genuinely progressed
+ * validator/flow. No caller-provided validation or copied-flow certificate. */
+struct pt_render_sequence_setup {
+    struct pt_flow_preparation flow;
+    struct pt_flow initial;
+    struct pt_allocator allocator;
+    const struct pt_allocator *allocator_source;
+    const struct pt_render_options *options_source;
+    struct pt_render_options options;
+    struct pt_render_setup_report report;
+    uint32_t revision,generation;
+    size_t index,total;
+    uint16_t offsets;
+    uint8_t used[PT_PROJECT_PATTERNS];
+    unsigned busy,failed;unsigned *callback_failure;
+};
+static int setup_span(const void *p,size_t n)
+{return !n||(p&&n<=UINTPTR_MAX-(uintptr_t)p);}
+static int setup_apart(const void *a,size_t an,const void *b,size_t bn)
+{
+    uintptr_t x=(uintptr_t)a,y=(uintptr_t)b;
+    return setup_span(a,an)&&setup_span(b,bn)&&(!an||!bn||x>=y+bn||y>=x+an);
+}
+/* Full declared storage, including padding; descriptor metadata only. Table
+ * extents are checked before any descriptor walk. No semantic payload reads. */
+static int setup_source_apart(const struct pt_project *p,const void *out,size_t n)
+{
+    unsigned i;
+    if(!setup_span(p,sizeof(*p))||!setup_span(out,n)||!p->channels.count||p->channels.count>PT_CHANNEL_LIMIT||
+       !p->order_count||p->order_count>PT_PROJECT_ORDERS||!p->pattern_count||p->pattern_count>PT_PROJECT_PATTERNS||
+       p->sample_count>PT_PROJECT_SAMPLES||p->extension_count>4090||
+       !setup_apart(p,sizeof(*p),out,n)||!setup_apart(p->orders,p->order_count*sizeof(*p->orders),out,n)||
+       !setup_apart(p->events,(size_t)p->pattern_count*64*p->channels.count*sizeof(*p->events),out,n)||
+       !setup_apart(p->samples,p->sample_count*sizeof(*p->samples),out,n)||
+       !setup_apart(p->extensions,p->extension_count*sizeof(*p->extensions),out,n))return 0;
+    for(i=0;i<p->sample_count;++i){const struct pt_sample *v=p->samples+i;
+        if(v->pcm.capacity>SIZE_MAX/sizeof(*v->pcm.data)||v->slice_count>PT_PROJECT_SLICES||
+           !setup_apart(v->pcm.data,v->pcm.capacity*sizeof(*v->pcm.data),out,n)||
+           !setup_apart(v->slices,v->slice_count*sizeof(*v->slices),out,n))return 0;
+    }
+    for(i=0;i<p->extension_count;++i)
+        if(!setup_apart(p->extensions[i].data,p->extensions[i].length,out,n))return 0;
+    return 1;
+}
+static int setup_header_current(const struct pt_render_sequence_setup *j,uint32_t revision,uint32_t generation)
+{
+    const struct pt_project *p=j->flow.validation.project;
+    const struct pt_project *q=&j->flow.validation.snapshot;
+    size_t k=offsetof(struct pt_project,channels)+offsetof(struct pt_channels,selected);
+    return revision==j->revision&&generation==j->generation&&p&&p->channels.selected<p->channels.count&&
+        !memcmp(p,q,k)&&!memcmp((const unsigned char *)p+k+sizeof(p->channels.selected),
+        (const unsigned char *)q+k+sizeof(p->channels.selected),sizeof(*p)-k-sizeof(p->channels.selected))&&
+        !memcmp(j->options_source,&j->options,sizeof(j->options))&&
+        !memcmp(j->allocator_source,&j->allocator,sizeof(j->allocator));
+}
+static enum pt_render_setup_result setup_current(struct pt_render_sequence_setup *j,uint32_t revision,uint32_t generation)
+{
+    enum pt_project_result r;
+    if(!setup_header_current(j,revision,generation))return PT_RENDER_SETUP_STALE;
+    if(j->failed)return PT_RENDER_SETUP_FAILED;
+    r=pt_project_validation_get(&j->flow.validation,revision,generation,NULL);
+    if(r==PT_PROJECT_STALE)return PT_RENDER_SETUP_STALE;
+    if(r!=PT_PROJECT_OK&&r!=PT_PROJECT_PENDING)return PT_RENDER_SETUP_FAILED;
+    return j->report.phase==PT_RENDER_SETUP_COMPLETE?PT_RENDER_SETUP_READY:PT_RENDER_SETUP_PENDING;
+}
+/* Fixed original table/control extents only, safe even after header replacement.
+ * A returned pointer overlapping a known live/borrowed extent is NOT a fresh
+ * allocation: never call release on such an ambiguous result. */
+static int setup_fixed_source_apart(const struct pt_project *q,const struct pt_project *actual,const void *out,size_t n)
+{
+    return setup_apart(actual,sizeof(*actual),out,n)&&
+        setup_apart(q->orders,q->order_count*sizeof(*q->orders),out,n)&&
+        setup_apart(q->events,(size_t)q->pattern_count*64*q->channels.count*sizeof(*q->events),out,n)&&
+        setup_apart(q->samples,q->sample_count*sizeof(*q->samples),out,n)&&
+        setup_apart(q->extensions,q->extension_count*sizeof(*q->extensions),out,n);
+}
+static int setup_fixed_output_apart(const struct pt_render_sequence_setup *j,const void *out,size_t n)
+{
+    return setup_apart(j,sizeof(*j),out,n)&&setup_apart(j->options_source,sizeof(*j->options_source),out,n)&&
+        setup_apart(j->allocator_source,sizeof(*j->allocator_source),out,n)&&
+        setup_fixed_source_apart(&j->flow.validation.snapshot,j->flow.validation.project,out,n);
+}
+static int setup_output_apart(const struct pt_render_sequence_setup *j,const void *out,size_t n)
+{
+    return setup_apart(j,sizeof(*j),out,n)&&setup_apart(j->options_source,sizeof(*j->options_source),out,n)&&
+        setup_apart(j->allocator_source,sizeof(*j->allocator_source),out,n)&&
+        setup_source_apart(j->flow.validation.project,out,n);
+}
+static enum pt_render_setup_result setup_enter(struct pt_render_sequence_setup *j)
+{
+    if(!setup_span(j,sizeof(*j)))return PT_RENDER_SETUP_INVALID;
+    if(j->busy){j->failed=1;if(j->callback_failure)*j->callback_failure=1;return PT_RENDER_SETUP_BUSY;}
+    return PT_RENDER_SETUP_PENDING;
+}
+static enum pt_render_setup_result setup_fail(struct pt_render_sequence_setup *j,enum pt_render_result r)
+{j->failed=1;j->report.render_result=r;return PT_RENDER_SETUP_FAILED;}
+static int setup_options(const struct pt_project *p,const struct pt_render_options *o)
+{
+    return o->tick_limit&&o->frame_limit&&(o->rate==44100||o->rate==48000)&&
+        (o->bits==16||o->bits==24)&&o->tracks&&!(o->tracks>>p->channels.count)&&o->gain_q16<=65536&&
+        o->pattern_only<=1&&o->include_lead_in<=1&&o->row_range<=1&&
+        (!o->row_range||(o->pattern_only&&!o->include_lead_in&&o->row_first<o->row_end&&o->row_end<=64))&&
+        (o->pattern_only?o->pattern<p->pattern_count:o->start_order<p->order_count);
+}
+static enum pt_render_result setup_event(const struct pt_render_sequence_setup *j,const struct pt_event *e,unsigned ch)
+{
+    const struct pt_project *p=j->flow.validation.project;
+    if(!(j->options.tracks&(1U<<ch)))return PT_RENDER_OK;
+    if(e->kind==PT_NOTE_MIDI||(e->instrument&&e->kind!=PT_NOTE_PERIOD&&e->kind!=PT_NOTE_NONE)||
+       (e->kind==PT_NOTE_NONE&&e->slice))return PT_RENDER_EFFECT;
+    if(!(e->effect<=13||e->effect==15||(e->effect==14&&(e->parameter>>4)>=1&&(e->parameter>>4)<=14)))
+        return PT_RENDER_EFFECT;
+    if(((e->effect==3||e->effect==5)&&e->slice)||((j->offsets&(1U<<ch))&&e->slice))return PT_RENDER_EFFECT;
+    if(e->instrument){const struct pt_sample *v=p->samples+e->instrument-1;
+        if((j->offsets&(1U<<ch))&&(v->pcm.bits!=8||v->pcm.channels!=1||v->pcm.frames<2||
+           v->pcm.frames>131070||(v->pcm.frames&1)||v->loop>PT_LOOP_FORWARD||
+           (v->loop&&((v->loop_start|v->loop_end)&1))))return PT_RENDER_SAMPLE;
+        if(v->loop==PT_LOOP_CROSSFADE)return PT_RENDER_SAMPLE;
+    }
+    return PT_RENDER_OK;
+}
+static int setup_guards_valid(const struct pt_render_setup_guard *,unsigned);
+static int setup_guards_apart(const struct pt_render_setup_guard *,unsigned,const void *,size_t);
+enum pt_render_setup_result pt_render_sequence_setup_begin(const struct pt_project *p,
+    const struct pt_render_options *o,const struct pt_allocator *a,uint32_t revision,uint32_t generation,
+    const struct pt_render_setup_guard *guards,unsigned count,struct pt_render_sequence_setup **out)
+{
+    struct pt_render_sequence_setup next,*j;enum pt_flow_result f;
+    struct pt_render_setup_guard saved[PT_RENDER_SETUP_GUARDS];
+    if(!setup_span(p,sizeof(*p))||!setup_span(o,sizeof(*o))||!setup_span(a,sizeof(*a))||
+       !setup_span(out,sizeof(*out))||!a->allocate||!a->release||!setup_guards_valid(guards,count))return PT_RENDER_SETUP_INVALID;
+    if(!setup_apart(out,sizeof(*out),guards,count*sizeof(*guards)))return PT_RENDER_SETUP_ALIAS;
+    if(!setup_source_apart(p,out,sizeof(*out))||!setup_apart(out,sizeof(*out),o,sizeof(*o))||
+       !setup_apart(out,sizeof(*out),a,sizeof(*a)))return PT_RENDER_SETUP_ALIAS;
+    if(*out)return PT_RENDER_SETUP_INVALID;
+    memset(&next,0,sizeof(next));memcpy(&next.options,o,sizeof(*o));memcpy(&next.allocator,a,sizeof(*a));
+    next.options_source=o;next.allocator_source=a;next.revision=revision;next.generation=generation;
+    f=pt_flow_begin(&next.flow,p,PT_FLOW_EXTENDED256,o->pattern_only?0:o->start_order,o->tick_limit,revision,generation);
+    if(f!=PT_FLOW_PENDING)return PT_RENDER_SETUP_INVALID;
+    next.report.phase=PT_RENDER_SETUP_VALIDATE;next.report.render_result=PT_RENDER_OK;
+    if(count)memcpy(saved,guards,count*sizeof(*guards));
+    j=a->allocate(a->context,sizeof(*j));
+    if(j&&(!setup_fixed_output_apart(&next,j,sizeof(*j))||!setup_apart(j,sizeof(*j),out,sizeof(*out))||
+       !setup_guards_apart(saved,count,j,sizeof(*j))||!setup_apart(j,sizeof(*j),guards,count*sizeof(*guards))||
+       !setup_apart(j,sizeof(*j),saved,sizeof(saved))))
+        return PT_RENDER_SETUP_ALIAS;
+    if(!setup_header_current(&next,revision,generation)||*out||(count&&memcmp(saved,guards,count*sizeof(*guards)))){if(j)next.allocator.release(next.allocator.context,j);return PT_RENDER_SETUP_STALE;}
+    if(!j)return PT_RENDER_SETUP_CAPACITY;
+    if(!setup_output_apart(&next,j,sizeof(*j))||!setup_apart(j,sizeof(*j),out,sizeof(*out))||
+       !setup_source_apart(p,out,sizeof(*out))||!setup_guards_apart(guards,count,j,sizeof(*j))||
+       !setup_apart(j,sizeof(*j),saved,sizeof(saved)))
+        {return PT_RENDER_SETUP_ALIAS;}
+    memcpy(j,&next,sizeof(next));*out=j;return PT_RENDER_SETUP_PENDING;
+}
+enum pt_render_setup_result pt_render_sequence_setup_step(struct pt_render_sequence_setup *j,
+    uint32_t revision,uint32_t generation,unsigned work)
+{
+    enum pt_render_setup_result r=setup_enter(j);enum pt_flow_result f;const struct pt_project *p;
+    unsigned n=0,ch;size_t i,pat,per;
+    if(r!=PT_RENDER_SETUP_PENDING)return r;
+    if(!work||work>PT_PROJECT_VALIDATION_WORK_MAX)return PT_RENDER_SETUP_INVALID;
+    r=setup_current(j,revision,generation);if(r!=PT_RENDER_SETUP_PENDING)return r;
+    p=j->flow.validation.project;
+    if(j->report.phase==PT_RENDER_SETUP_VALIDATE){
+        f=pt_flow_prepare(&j->flow,revision,generation,work);j->report.last_work=j->flow.validation.last_work;
+        if(f==PT_FLOW_STALE)return PT_RENDER_SETUP_STALE;
+        if(f!=PT_FLOW_PENDING&&f!=PT_FLOW_TICK)return setup_fail(j,PT_RENDER_INVALID);
+        if(f==PT_FLOW_TICK){if(!setup_options(p,&j->options))return setup_fail(j,PT_RENDER_INVALID);
+            j->report.phase=PT_RENDER_SETUP_USED;j->index=0;
+            j->total=(size_t)p->pattern_count*64*p->channels.count;}
+        return PT_RENDER_SETUP_PENDING;
+    }
+    j->report.last_work=0;
+    if(j->report.phase==PT_RENDER_SETUP_USED){
+        if(j->options.pattern_only){j->used[j->options.pattern]=1;n=1;j->index=p->order_count;}
+        else while(n<work&&j->index<p->order_count){j->used[p->orders[j->index++]]=1;++n;}
+        if(j->index==p->order_count){j->report.phase=PT_RENDER_SETUP_OFFSETS;j->index=0;}
+    }else if(j->report.phase==PT_RENDER_SETUP_OFFSETS||j->report.phase==PT_RENDER_SETUP_EFFECTS){
+        per=(size_t)64*p->channels.count;
+        while(n<work&&j->index<j->total){
+            const struct pt_event *e;i=j->index++;pat=i/per;ch=(unsigned)(i%p->channels.count);++n;
+            if(!j->used[pat])continue;
+            e=p->events+i;
+            if(j->report.phase==PT_RENDER_SETUP_OFFSETS){
+                if(e->effect==9||(e->effect==14&&((e->parameter>>4)==9||
+                   ((e->parameter>>4)==13&&e->kind==PT_NOTE_PERIOD))))j->offsets|=(uint16_t)(1U<<ch);
+            }else {enum pt_render_result er=setup_event(j,e,ch);if(er!=PT_RENDER_OK){j->report.last_work=n;return setup_fail(j,er);}}
+        }
+        j->report.last_work=n;
+        if(j->index==j->total){
+            if(j->report.phase==PT_RENDER_SETUP_OFFSETS){
+                j->offsets&=j->options.tracks;
+                for(ch=0;ch<p->channels.count;++ch)if((j->options.tracks&(1U<<ch))&&p->channels.track[ch].route==PT_MIDI)
+                    return setup_fail(j,PT_RENDER_ROUTE);
+                j->report.phase=PT_RENDER_SETUP_EFFECTS;j->index=0;
+            }else{
+                if(pt_flow_get(&j->flow,revision,generation,&j->initial)!=PT_FLOW_TICK)return setup_fail(j,PT_RENDER_INVALID);
+                j->report.phase=PT_RENDER_SETUP_COMPLETE;
+            }
+        }
+    }
+    j->report.last_work=n;return j->report.phase==PT_RENDER_SETUP_COMPLETE?PT_RENDER_SETUP_READY:PT_RENDER_SETUP_PENDING;
+}
+enum pt_render_setup_result pt_render_sequence_setup_get(struct pt_render_sequence_setup *j,
+    uint32_t revision,uint32_t generation,struct pt_render_setup_report *out)
+{
+    enum pt_render_setup_result r=setup_enter(j);if(r!=PT_RENDER_SETUP_PENDING)return r;
+    r=setup_current(j,revision,generation);if(r==PT_RENDER_SETUP_STALE)return r;
+    if(out){if(!setup_output_apart(j,out,sizeof(*out)))return PT_RENDER_SETUP_ALIAS;*out=j->report;}
+    return r;
+}
+int pt_render_sequence_setup_output_disjoint(struct pt_render_sequence_setup *j,uint32_t revision,
+    uint32_t generation,const void *out,size_t n)
+{
+    enum pt_render_setup_result r=setup_enter(j);if(r!=PT_RENDER_SETUP_PENDING)return 0;
+    r=setup_current(j,revision,generation);
+    return (r==PT_RENDER_SETUP_PENDING||r==PT_RENDER_SETUP_READY)&&setup_output_apart(j,out,n);
+}
+int pt_render_sequence_setup_control_output_disjoint(const struct pt_render_sequence_setup *j,
+    const void *out,size_t n)
+{
+    return setup_span(j,sizeof(*j))&&setup_fixed_output_apart(j,out,n);
+}
+/* Fixed checked reset for NEW immutable sequences only. Derive pattern view only
+ * AFTER entire original validation, and relink the copied flow to actual run.view. */
+static int sequence_checked_current(const struct pt_render_sequence *s)
+{
+    const struct pt_project *p=s->project,*q=&s->checked_header;
+    size_t k=offsetof(struct pt_project,channels)+offsetof(struct pt_channels,selected);
+    return p&&p->channels.selected<p->channels.count&&!memcmp(p,q,k)&&
+        !memcmp((const unsigned char *)p+k+sizeof(p->channels.selected),
+        (const unsigned char *)q+k+sizeof(p->channels.selected),sizeof(*p)-k-sizeof(p->channels.selected));
+}
+static int sequence_checked_reset(struct pt_render_sequence *s)
+{
+    struct run *r=&s->run;const struct pt_render_options *o=&s->options;
+    memset(r,0,sizeof(*r));memcpy(&r->view,s->project,sizeof(r->view));r->started=o->include_lead_in;
+    r->capturing=!o->row_range;r->row_range=o->row_range;r->row_first=o->row_first;r->row_end=o->row_end;
+    r->tracks=o->tracks;r->offset_tracks=s->checked_offsets;pt_pitch_init(&r->pitch);
+    if(o->pattern_only){r->order=o->pattern;r->view.orders=&r->order;r->view.order_count=1;}
+    r->timeline.flow=s->checked_initial;r->timeline.flow.project=&r->view;
+    if(o->pattern_only)r->timeline.flow.order=r->timeline.flow.played_order=0;
+    return pt_frame_clock_init(&r->timeline.clock,o->rate,o->frame_limit)==PT_CLOCK_OK;
+}
+static int setup_guards_valid(const struct pt_render_setup_guard *g,unsigned count)
+{
+    unsigned i;if(count>PT_RENDER_SETUP_GUARDS||!setup_span(g,count*sizeof(*g)))return 0;
+    for(i=0;i<count;++i)if(!setup_span(g[i].data,g[i].bytes))return 0;
+    return 1;
+}
+static int setup_guards_apart(const struct pt_render_setup_guard *g,unsigned count,const void *p,size_t n)
+{
+    unsigned i;if(!setup_apart(g,count*sizeof(*g),p,n))return 0;
+    for(i=0;i<count;++i)if(!setup_apart(g[i].data,g[i].bytes,p,n))return 0;
+    return 1;
+}
+enum pt_render_setup_result pt_render_sequence_setup_take(struct pt_render_sequence_setup **owner,
+    uint32_t revision,uint32_t generation,const struct pt_render_setup_guard *guards,unsigned count,
+    struct pt_render_sequence **out)
+{
+    struct pt_render_sequence_setup *j;struct pt_render_sequence *s;
+    struct pt_render_setup_guard saved[PT_RENDER_SETUP_GUARDS];struct pt_allocator a;enum pt_render_setup_result r;
+    struct pt_render_sequence_setup captured={0};unsigned callback_failure=0;
+    struct pt_render_sequence *original_out;
+    if(!setup_span(owner,sizeof(*owner))||!setup_span(out,sizeof(*out))||!setup_apart(owner,sizeof(*owner),out,sizeof(*out))||
+       !setup_guards_valid(guards,count))return PT_RENDER_SETUP_INVALID;
+    if(!setup_apart(owner,sizeof(*owner),guards,count*sizeof(*guards))||
+       !setup_apart(out,sizeof(*out),guards,count*sizeof(*guards)))return PT_RENDER_SETUP_ALIAS;
+    j=*owner;r=setup_enter(j);if(r!=PT_RENDER_SETUP_PENDING)return r;
+    r=setup_current(j,revision,generation);if(r!=PT_RENDER_SETUP_READY)return r;
+    if(!setup_output_apart(j,owner,sizeof(*owner))||!setup_output_apart(j,out,sizeof(*out)))return PT_RENDER_SETUP_ALIAS;
+    if(!setup_apart(j,sizeof(*j),guards,count*sizeof(*guards)))return PT_RENDER_SETUP_ALIAS;
+    original_out=*out;
+    if(count)memcpy(saved,guards,count*sizeof(*guards));
+    a=j->allocator;j->busy=1;j->callback_failure=&callback_failure;
+    s=a.allocate(a.context,sizeof(*s));
+    if(s&&(!setup_fixed_output_apart(j,s,sizeof(*s))||!setup_apart(s,sizeof(*s),owner,sizeof(*owner))||
+       !setup_apart(s,sizeof(*s),out,sizeof(*out))||!setup_guards_apart(saved,count,s,sizeof(*s))||
+       !setup_apart(s,sizeof(*s),guards,count*sizeof(*guards))||
+       !setup_apart(s,sizeof(*s),saved,sizeof(saved))||!setup_apart(s,sizeof(*s),&a,sizeof(a))||
+       !setup_apart(s,sizeof(*s),&captured,sizeof(captured))||
+       !setup_apart(s,sizeof(*s),&callback_failure,sizeof(callback_failure)))){
+        j->busy=0;j->callback_failure=NULL;return j->failed?PT_RENDER_SETUP_FAILED:PT_RENDER_SETUP_ALIAS;
+    }
+    r=setup_current(j,revision,generation);
+    if(r!=PT_RENDER_SETUP_READY||*owner!=j||*out!=original_out||(count&&memcmp(saved,guards,count*sizeof(*guards)))){
+        if(s)a.release(a.context,s);
+        j->busy=0;j->callback_failure=NULL;
+        return j->failed?PT_RENDER_SETUP_FAILED:PT_RENDER_SETUP_STALE;
+    }
+    if(!s){j->busy=0;j->callback_failure=NULL;return PT_RENDER_SETUP_CAPACITY;}
+    if(!setup_output_apart(j,s,sizeof(*s))||!setup_apart(s,sizeof(*s),owner,sizeof(*owner))||
+       !setup_apart(s,sizeof(*s),out,sizeof(*out))||!setup_guards_apart(guards,count,s,sizeof(*s))||
+       !setup_apart(s,sizeof(*s),saved,sizeof(saved))||!setup_apart(s,sizeof(*s),&captured,sizeof(captured))||
+       !setup_apart(s,sizeof(*s),&callback_failure,sizeof(callback_failure))||
+       !setup_output_apart(j,out,sizeof(*out))){
+        j->busy=0;j->callback_failure=NULL;
+        return j->failed?PT_RENDER_SETUP_FAILED:PT_RENDER_SETUP_ALIAS;}
+    memset(s,0,sizeof(*s));s->allocator=a;memcpy(&s->options,&j->options,sizeof(s->options));
+    s->project=j->flow.validation.project;memcpy(&s->checked_header,s->project,sizeof(s->checked_header));s->checked_initial=j->initial;s->checked_offsets=j->offsets;s->checked_reset=1;
+    if(!sequence_checked_reset(s)){a.release(a.context,s);j->busy=0;j->callback_failure=NULL;return setup_fail(j,PT_RENDER_INVALID);}
+    s->preparing=1;pt_render_commands_init(&s->commands);
+    /* Release callback may refuse/reenter/mutate: the owner remains busy and no
+     * caller output is published until it finishes. It may not edit borrowed inputs. */
+    memcpy(&captured,j,sizeof(captured));a.release(a.context,j);
+    if(*owner!=j||*out!=original_out||(count&&memcmp(saved,guards,count*sizeof(*guards))))callback_failure=1;
+    if(*owner==j)*owner=NULL;
+    if(callback_failure||!setup_header_current(&captured,revision,generation)){
+        a.release(a.context,s);return callback_failure?PT_RENDER_SETUP_FAILED:PT_RENDER_SETUP_STALE;
+    }
+    *out=s;return PT_RENDER_SETUP_READY;
+}
+enum pt_render_setup_result pt_render_sequence_setup_cancel(struct pt_render_sequence_setup **owner)
+{
+    struct pt_render_sequence_setup *j;struct pt_allocator a;enum pt_render_setup_result r;unsigned callback_failure=0;
+    if(!setup_span(owner,sizeof(*owner)))return PT_RENDER_SETUP_INVALID;
+    if(!*owner)return PT_RENDER_SETUP_READY;
+    j=*owner;r=setup_enter(j);if(r!=PT_RENDER_SETUP_PENDING)return r;
+    if(!setup_fixed_output_apart(j,owner,sizeof(*owner)))return PT_RENDER_SETUP_ALIAS;
+    a=j->allocator;j->busy=1;j->callback_failure=&callback_failure;a.release(a.context,j);
+    if(*owner==j)*owner=NULL;else callback_failure=1;
+    return callback_failure?PT_RENDER_SETUP_FAILED:PT_RENDER_SETUP_READY;
+}
 static int preparation_overlap(const void *a,size_t an,const void *b,size_t bn)
 {
     uintptr_t x=(uintptr_t)a,y=(uintptr_t)b;
@@ -493,9 +820,18 @@ static int project_output_disjoint(const struct pt_project *p,const void *out,si
 }
 int pt_render_sequence_output_disjoint(const struct pt_render_sequence *s,const void *out,size_t bytes)
 {
+    if(s&&s->checked_reset)return !s->checked_closing&&sequence_checked_current(s)&&out&&
+        setup_apart(out,bytes,s,sizeof(*s))&&setup_source_apart(s->project,out,bytes);
     return s && out && !preparation_overlap(out,bytes,s,sizeof(*s)) &&
         project_output_disjoint(s->project,out,bytes) &&
         (!s->mutation.playback || project_output_disjoint(s->mutation.playback,out,bytes));
+}
+int pt_render_sequence_control_output_disjoint(const struct pt_render_sequence *s,const void *out,size_t n)
+{
+    if(!s||!setup_span(s,sizeof(*s))||!setup_span(out,n)||!setup_apart(s,sizeof(*s),out,n))return 0;
+    if(s->checked_reset)return setup_fixed_source_apart(&s->checked_header,s->project,out,n)&&
+        (!sequence_checked_current(s)||setup_source_apart(s->project,out,n));
+    return setup_apart(s->project,sizeof(*s->project),out,n);
 }
 static enum pt_render_result sequence_begin(const struct pt_project *p,const struct pt_render_options *o,
     const struct pt_allocator *a,struct pt_render_sequence **out,const struct pt_render_mutation *mutation)
@@ -525,7 +861,7 @@ enum pt_render_result pt_render_sequence_prepare(struct pt_render_sequence *s,un
         result=next_tick(&s->run,&span,&end);
         if(result!=PT_RENDER_OK){s->failed=1;return result;}
         if(end) {
-            if(!start_run(&s->run,s->project,&s->options,s->mutation.tick!=NULL)) {s->failed=1;return PT_RENDER_INVALID;}
+            if(!(s->checked_reset?sequence_checked_reset(s):start_run(&s->run,s->project,&s->options,s->mutation.tick!=NULL))) {s->failed=1;return PT_RENDER_INVALID;}
             s->preparing=0;*ready=1;return PT_RENDER_OK;
         }
     }
@@ -587,6 +923,7 @@ enum pt_render_result pt_render_mutating_sequence_complete(struct pt_render_sequ
 enum pt_render_result pt_render_sequence_next(struct pt_render_sequence *s,struct pt_render_interval *out)
 {
     struct pt_tick_span span;enum pt_render_result result;
+    if(s&&s->checked_reset&&!pt_render_sequence_output_disjoint(s,out,sizeof(*out)))return PT_RENDER_INVALID;
     if(!s || !out || s->preparing || s->pending || s->done || s->failed || s->interval==UINT64_MAX)return PT_RENDER_INVALID;
     result=next_tick(&s->run,&span,&s->end);
     if(result!=PT_RENDER_OK) {s->failed=1;return result;}
@@ -595,6 +932,7 @@ enum pt_render_result pt_render_sequence_next(struct pt_render_sequence *s,struc
 }
 enum pt_render_result pt_render_sequence_consume(struct pt_render_sequence *s,uint32_t frames)
 {
+    if(s&&s->checked_reset&&(s->checked_closing||!sequence_checked_current(s)))return PT_RENDER_INVALID;
     if(!s || s->mutation.tick || !s->pending || s->failed || !frames || frames>256 || frames>s->remaining)return PT_RENDER_INVALID;
     if(pt_voice_advance(s->commands.voice,s->project->channels.count,frames)!=PT_PCM_OK) {s->failed=1;return PT_RENDER_SAMPLE;}
     s->remaining-=frames;s->consumed=1;return PT_RENDER_OK;
@@ -602,6 +940,7 @@ enum pt_render_result pt_render_sequence_consume(struct pt_render_sequence *s,ui
 enum pt_render_result pt_render_sequence_complete(struct pt_render_sequence *s,struct pt_render_plan *plan)
 {
     enum pt_render_result result;
+    if(s&&s->checked_reset&&!pt_render_sequence_output_disjoint(s,plan,sizeof(*plan)))return PT_RENDER_INVALID;
     if(!plan)return PT_RENDER_INVALID;
     plan->count=0;
     if(!s || s->mutation.tick || !s->pending || s->remaining || s->failed)return PT_RENDER_INVALID;
@@ -613,6 +952,7 @@ enum pt_render_result pt_render_sequence_complete(struct pt_render_sequence *s,s
 }
 enum pt_render_result pt_render_sequence_snapshot(const struct pt_render_sequence *s,struct pt_render_snapshot *out)
 {
+    if(s&&s->checked_reset&&!pt_render_sequence_output_disjoint(s,out,sizeof(*out)))return PT_RENDER_INVALID;
     if(!s || !out || s->mutation.tick || !s->pending || s->consumed || s->failed)return PT_RENDER_INVALID;
     memset(out,0,sizeof(*out));out->channels=s->project->channels.count;
     memcpy(out->voice,s->commands.voice,sizeof(out->voice));
@@ -620,13 +960,19 @@ enum pt_render_result pt_render_sequence_snapshot(const struct pt_render_sequenc
 }
 enum pt_render_result pt_render_sequence_rewind(struct pt_render_sequence *s)
 {
+    if(s&&s->checked_reset&&(s->checked_closing||!sequence_checked_current(s)))return PT_RENDER_INVALID;
     if(!s || s->mutation.tick || !s->done || s->failed || s->pending || s->preparing)return PT_RENDER_INVALID;
-    if(!start_run(&s->run,s->project,&s->options,0)){s->failed=1;return PT_RENDER_INVALID;}
+    if(!(s->checked_reset?sequence_checked_reset(s):start_run(&s->run,s->project,&s->options,0))){s->failed=1;return PT_RENDER_INVALID;}
     pt_render_commands_init(&s->commands);s->remaining=0;s->end=s->done=s->consumed=0;
     return PT_RENDER_OK;
 }
 void pt_render_sequence_close(struct pt_render_sequence *s)
-{if(s) {struct pt_allocator a=s->allocator;a.release(a.context,s);}}
+{
+    if(s){struct pt_allocator a;
+        if(s->checked_reset){if(s->checked_closing)return;s->checked_closing=1;}
+        a=s->allocator;a.release(a.context,s);
+    }
+}
 
 static int lookahead_current(const struct pt_render_lookahead *w)
 {

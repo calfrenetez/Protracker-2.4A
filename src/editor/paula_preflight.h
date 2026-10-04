@@ -65,4 +65,50 @@ enum pt_paula_capability pt_paula_preflight_begin(const struct pt_project *,cons
 enum pt_paula_capability pt_paula_preflight_step(struct pt_paula_preflight *,struct pt_paula_preflight_report *);
 int pt_paula_preflight_transfer(struct pt_paula_preflight *,struct pt_render_sequence **);
 void pt_paula_preflight_close(struct pt_paula_preflight **);
+/* Optional opaque INITIAL setup, distinct from the complete capability audit.
+ * Begin is metadata-only and owns exactly two fixed ordinary task controls (analysis plus
+ * renderer startup); no pins/cache/Chip/backend. Original p/o/caps/a/previous-map
+ * storage and callback contexts remain immutable/alive through transfer/cancel.
+ * Source revision/generation change for every in-place edit between calls; source
+ * and metadata remain immutable DURING calls, including allocator callbacks.
+ * Known full declared capacities are protected; opaque callback context extents
+ * remain a caller disjointness obligation. Normal valid selected cursor is allowed.
+ */
+struct pt_paula_preflight_setup;
+enum pt_render_setup_result pt_paula_preflight_setup_begin(const struct pt_project *,
+    const struct pt_render_options *, const int8_t *previous,
+    const struct pt_paula_render_caps *, unsigned controls,
+    const struct pt_allocator *, uint32_t revision, uint32_t generation,
+    struct pt_paula_preflight_setup **);
+enum pt_render_setup_result pt_paula_preflight_setup_step(struct pt_paula_preflight_setup *,
+    uint32_t revision, uint32_t generation, unsigned work);
+enum pt_render_setup_result pt_paula_preflight_setup_get(struct pt_paula_preflight_setup *,
+    uint32_t revision, uint32_t generation, struct pt_render_setup_report *);
+/* READY is initial validation/static readiness only, NEVER COMPATIBLE or a used
+ * source mask. Transfer consumes actual setup and publishes actual preflight work
+ * still PENDING. Existing step audits the entire timeline; existing transfer then
+ * moves the SAME audited sequence. New reset/restart/rewind uses private checked
+ * templates without semantic rescans. Old synchronous/mutating paths stay old.
+ * Transfer makes one fixed allocation for the actual sequence. CAPACITY preserves
+ * READY setup for explicit retry. Across success there are three total allocation
+ * calls/transient three live controls; renderer startup is then released, leaving
+ * the usual analysis+sequence owners. Known returned aliases are refused without
+ * release (not fresh owned memory). Observable callback failure may consume the
+ * inner startup, leaving this outer handle failed and cancellable; no partial
+ * preflight owner is published. Begin callbacks must be serialized; no owner-busy
+ * detection is claimed before publication. No automatic retry or rebase.
+ * After successful transfer, the actual audit owns option/cap/map/allocator copies;
+ * original setup argument controls are no longer borrowed. Project/source storage
+ * remains borrowed immutable through actual audit/sequence close. After the audited
+ * sequence is transferred, closing the now-empty actual audit still releases it.
+ * Copied allocator callback functions/context remain callable/alive until ALL
+ * actual audit/sequence owners close, even after original argument structs expire.
+ * Checked actual-audit step/transfer/close and ordinary sequence entrypoints
+ * reject closing reentry. Existing lookahead workspaces still require their
+ * sequence/project/source to outlive cancellation/commit; no broader lookahead
+ * reentry guard is claimed. Callbacks must not free live controls before callback.
+ */
+enum pt_render_setup_result pt_paula_preflight_setup_transfer(struct pt_paula_preflight_setup **,
+    uint32_t revision, uint32_t generation, struct pt_paula_preflight **);
+enum pt_render_setup_result pt_paula_preflight_setup_cancel(struct pt_paula_preflight_setup **);
 #endif

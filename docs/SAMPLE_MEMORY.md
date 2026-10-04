@@ -5114,3 +5114,17 @@ Persistent master/cache ownership, actual device-domain transfer, IRQ/task exclu
 DMA-fetch/voice-stop, hardware timing and audio/listening retain separate gates.
 See [CIA deadline-aperture contract](CIA_APERTURE_DIAGNOSTIC.md) and
 [evidence](../evidence/enhanced-editor/cia-aperture-diagnostic/README.md).
+
+## Cancellable initial renderer/Paula setup — 5 October 2026
+
+Optional opaque initial preparation now validates the original 8/16/24-bit masters
+in bounded semantic steps and retains private flow/reset templates for the same
+audited sequence. Declared full capacities, including unused padding, remain
+protected. Initial READY is separate from complete Paula compatibility. This
+setup acquires no master pins, Chip cache or card RAM; project/source remains
+borrowed immutable through retained audit/sequence close. The future song producer
+must retain genuine immutable current master versions before lowering playback
+boundaries; pin promotion that changes source descriptors cannot occur during the
+borrowed audited sequence lifetime. Host sanitizer and portable compiler evidence
+passes; Amiberry/real A1200 execution and actual output remain untested for this
+new candidate. See [evidence](../evidence/enhanced-editor/paula-preflight-startup/README.md).

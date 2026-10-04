@@ -77,3 +77,34 @@ confirm device closure and26 Fast allocationszero. Both windows were explicitly
 released. See `../evidence/enhanced-editor/paula-incremental/`. These are software
 preparation/ownership and silent emulator device checks, not musical timing,
 frontend PLAY, physical-device or listening acceptance.
+
+## Optional cancellable initial setup — 5 October 2026
+
+`pt_paula_preflight_setup` owns genuine full-project flow validation and advances
+one initial phase per call, charging at most 4096 semantic/metadata items. Fixed
+header, span, allocation and cleanup work is additional. The full original project
+validates before a pattern-only view is derived; the complete offset mask precedes
+event eligibility. No public caller-supplied validation certificate is accepted.
+
+Initial READY is not COMPATIBLE. Transfer publishes an actual audit owner still
+PENDING; the complete timeline must pass before its same sequence can transfer.
+Private checked reset templates avoid repeated semantic/offset scans at
+measurement restart and rewind. Existing synchronous and mutating paths remain
+their existing implementations. Successful setup uses three fixed allocation
+calls/transient owners, then retains the ordinary audit and sequence owners.
+
+Initial borrowed inputs are immutable during calls/callbacks; between-call edits
+change tags. After transfer, project/source remains immutable until all audit and
+sequence owners close. Original setup controls can be reused immediately, while
+copied allocator callbacks/context must outlive every retained owner. Full declared
+capacities, callback alias/reentry refusal and stale cleanup are guarded. Existing
+lookahead keeps its sequence-outlives-workspace contract.
+
+Eight focused ASan/UBSan groups pass on the corrected frozen candidate. The first
+revision stopped at a compiler warning before an executable was produced; its
+original diagnostic and source are retained. Exact assertion-enabled 68000
+compiler products are PTRenderStartupTest (88152 bytes) and
+PTPaulaPreflightStartupTest (112012 bytes), each built once. Both remain native
+NOT RUN. These checks add no editor PLAY, master/cache ownership, backend
+activation, native stack/placement, musical deadline, audio or listening acceptance.
+See [saved proof and limits](../evidence/enhanced-editor/paula-preflight-startup/README.md).

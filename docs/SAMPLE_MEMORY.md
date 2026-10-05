@@ -123,6 +123,66 @@ software-ownership tests pass; the adapter does not provide song transport,
 native activation, DMA/IRQ or a timing guarantee. See the
 [boundary contract](SAMPLER_PAULA_READERS.md#optional-renderer-boundary-lowering).
 
+## Optional whole-song Paula producer and constructor workspace — 5 October 2026
+
+The separate opt-in `paula_readers_song` producer now owns genuine cancellable
+INITIAL preparation, the full original-project timeline audit and the SAME
+sequence/lookahead. It retains already-current immutable masters and lowers
+mono 8/16/24-bit one-shot boundaries into two recyclable command holders and
+eight independent readers. Continuing CONTROL/STOP requires positively observed
+ACTIVE original reader keys. Pressure preserves the original boundary; explicit
+publication, command detachment and reader retirement remain separate. Renderer
+DONE establishes neither STOP nor retirement. Desired terminal STOP is explicit;
+release still requires independent DETACHED/RETIRED proofs and zero referencing
+commands. Cancellation never invents STOP or forces submitted ownership free.
+
+Its optional `begin_in_workspace` entry point uses caller-owned construction
+scratch. It guards the entire declared capacity and known source/control extents
+before writes or callbacks, captures inputs before allocation, and clears every
+transient scratch reference before publishing the actual producer. Scratch is
+immediately reusable/free after begin and is budgeted separately from controls
+and playback representations. The large-stack compatibility constructor remains.
+
+Host ASan/UBSan song, ownership, scratch lifetime and refusal checks pass, and
+pinned 68000/software-float compiler builds pass. Native, Amiberry and real-A1200
+execution of these new producer/workspace fixtures remains **NOT RUN**. Separate
+compiler frame annotations do not establish total call-chain stack or clear the
+64 KiB launcher; the compatibility constructor alone reports a 70,352-byte local
+frame for the recorded ABI. This is optional software preparation and ownership,
+with no editor PLAY hookup, native activation backend, DMA/IRQ, exact output
+timing, audio or listening acceptance. Exact scheduling remains selected.
+See [producer](PAULA_READERS_SONG.md),
+[workspace](PAULA_READERS_SONG_WORKSPACE.md) and their separately scoped evidence.
+
+## Separate compact song ownership diagnostic — 5 October 2026
+
+A separate heap-state fixture exercises the caller-workspace producer with
+mono 8/16/24-bit masters, two continuing controls, command pressure and slot reuse,
+explicit terminal STOP, independent command detachment/reader retirement in both
+orders, exact master before-images, budget refusal and initial cancellation.
+Constructor scratch is overwritten and freed before the genuine subsequent
+preflight/audit/SAME sequence lifetime. The fixture uses a serialized synthetic
+backend and the actual private registration seam; it is not an activation driver.
+It is a narrower diagnostic, not a replacement for the comprehensive suites.
+
+Its first host run preserved an assertion failure: the fixture rounded the
+first/last frame-clock thresholds down. The corrected independent ceiling oracle
+also checks four literal original windows, without changing production or rebasing
+the musical frames. The corrected fixture passed once under ASan/UBSan; each of
+three precision cases completed in 212 bounded steps and all owned resources
+closed. Original failed sources, executable and logs remain separate.
+
+One pinned assertion-enabled 68000/software-float build produced a 215,480-byte
+HUNK (SHA256 e768d1c5d89fd493c51a93a76eca7eb5b187bbf3c8e273edb3458721ea052b3f).
+The optional wrapper compiles Fast-only master and reserve-checked Chip allocator
+assertions. It has **NOT RUN** in Amiberry or on the real A1200. The source avoids
+calling the large compatibility constructor and stores substantial test records
+on the heap; total native call-chain stack remains unknown and a 64 KiB launch
+is **NOT CLEARED**. Compiler annotations are separately prepared, unexecuted.
+No RAM placement, DMA/IRQ, voice-stop, card RAM capacity/transfer, output timing,
+audio or listening acceptance follows. See the
+[compact evidence](../evidence/enhanced-editor/paula-readers-song-compact/README.md).
+
 ## Scheduled output ownership foundation — 3 October 2026
 
 The new portable queue retains independently held sample owners for bounded future

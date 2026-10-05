@@ -1,0 +1,2072 @@
+{
+  "scope": "Separate compact caller-workspace software-ownership diagnostic; exact saved bytes",
+  "payload": {
+    "bytes": 3034906,
+    "sha256": "1c567b308de5488d76089f3fb3352f068d955af60ee3d9a4912ee87d262c8a06"
+  },
+  "members": {
+    "author-v1/source-and-stack-plan-v1.json": {
+      "bytes": 19335,
+      "sha256": "af22a62fd1dcad7678e1b013e39dd006f8d798f9117e44e222883fac2cc6cf84",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/source-and-stack-plan-v1.json"
+    },
+    "author-v1/source-seal-v1.json": {
+      "bytes": 1737,
+      "sha256": "027a2d11de688ab74f479d86a28d992c5b274bed264580bdff255bda9fa7d9b7",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/source-seal-v1.json"
+    },
+    "author-v1/tests/native_exec_paula_readers_song_compact_test.c": {
+      "bytes": 1748,
+      "sha256": "4d155819a585d65e8348edb95431b48e1cbb23a3b6979c470aa52f33ce5ed4ae",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/tests/native_exec_paula_readers_song_compact_test.c"
+    },
+    "author-v1/tests/paula_readers_song_compact_test.c": {
+      "bytes": 25731,
+      "sha256": "f685a650b0c182a8f16106479b7136d4a02558fb437c91debf61f6d4ef269d9d",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/tests/paula_readers_song_compact_test.c"
+    },
+    "author-v1/tests/test_paula_readers_song_compact.py": {
+      "bytes": 1785,
+      "sha256": "8f67d86337b109b56d7ac7d7bfab2768bf3b4a4f411d7873ec75917961cd3e4b",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/tests/test_paula_readers_song_compact.py"
+    },
+    "author-v2/dedicated-allocation-context-v2.patch": {
+      "bytes": 12645,
+      "sha256": "f4dcb8d35c679b0ba5d886b353252922e4f95066823f0bc03cdd074f9ce19b4d",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/source-revision-v2/dedicated-allocation-context-v2.patch"
+    },
+    "author-v2/source-only-refinement-v2.json": {
+      "bytes": 4664,
+      "sha256": "767ce289431e51aeccdaa5dca37ec5d528f75e9026370285d51e49522f7893f4",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/source-revision-v2/source-only-refinement-v2.json"
+    },
+    "author-v2/source-seal-v2.json": {
+      "bytes": 1981,
+      "sha256": "1b2bd1d5610a340a6b90fefc16bf5357093e9af3bc9fab99140e959a09d55322",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/source-revision-v2/source-seal-v2.json"
+    },
+    "author-v2/tests/native_exec_paula_readers_song_compact_test.c": {
+      "bytes": 1748,
+      "sha256": "4d155819a585d65e8348edb95431b48e1cbb23a3b6979c470aa52f33ce5ed4ae",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/source-revision-v2/tests/native_exec_paula_readers_song_compact_test.c"
+    },
+    "author-v2/tests/paula_readers_song_compact_test.c": {
+      "bytes": 27125,
+      "sha256": "8ca869c727adebaca546ceb22a2e977bda8c70ee03c09e65958ab4e2b8edf055",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/source-revision-v2/tests/paula_readers_song_compact_test.c"
+    },
+    "author-v2/tests/test_paula_readers_song_compact.py": {
+      "bytes": 1785,
+      "sha256": "8f67d86337b109b56d7ac7d7bfab2768bf3b4a4f411d7873ec75917961cd3e4b",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/source-revision-v2/tests/test_paula_readers_song_compact.py"
+    },
+    "controls/SAMPLE_MEMORY.compact-final-draft.md": {
+      "bytes": 339176,
+      "sha256": "0b14eb33e4a988251371516f434bdd907fa82dcc5f9178f8803674570e1a5a66",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/SAMPLE_MEMORY.compact-final-draft.md"
+    },
+    "controls/SAMPLE_MEMORY.updated-draft-v2.md": {
+      "bytes": 337233,
+      "sha256": "dc73aac03836aef0e388423e70820c3d1c3d1390559b4e21a6f88440ad0420c3",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/SAMPLE_MEMORY.updated-draft-v2.md"
+    },
+    "controls/approved-host-controls-v2.json": {
+      "bytes": 3050,
+      "sha256": "cab0cfefe905e5f952e0d933747241d27624968648ddd5a2d070fd52e855375d",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/approved-host-controls-v2.json"
+    },
+    "controls/approved-host-controls-v3.json": {
+      "bytes": 3300,
+      "sha256": "3ec6832030405a35eedaec026035cb1db080f723b51e87c4883925c1acb9a34e",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/approved-host-controls-v3.json"
+    },
+    "controls/approved-native-controls-v3.json": {
+      "bytes": 2768,
+      "sha256": "38f9f1fb76f2d3b08f3dbf9134d7004734bdb2854d61e27f34c5ff1e93cdb8cc",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/approved-native-controls-v3.json"
+    },
+    "controls/before-state.json": {
+      "bytes": 3474,
+      "sha256": "64ed3d6743bd965659a6b4db4519093e3c60eea4bba0f587bd6b8e7c51df1497",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/before-state.json"
+    },
+    "controls/frozen-source-v2.json": {
+      "bytes": 1107412,
+      "sha256": "65ddcac8a37d4ba859401524817f393df7e74a96b204225db017db8a93ff19e8",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/frozen-source-v2.json"
+    },
+    "controls/frozen-source-v3.json": {
+      "bytes": 1107425,
+      "sha256": "13f12989555e4cad71319ff975c9b7f5ff855567b1df377c96b917cccf71a231",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/frozen-source-v3.json"
+    },
+    "controls/host-driver-stderr-v2.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-driver-stderr-v2.txt"
+    },
+    "controls/host-driver-stderr-v3.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-driver-stderr-v3.txt"
+    },
+    "controls/host-driver-stdout-v2.txt": {
+      "bytes": 278,
+      "sha256": "7164fca76ea13a67d3bfe0f139543be17ccf5bc975ac563fb6fd4b495f6b946f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-driver-stdout-v2.txt"
+    },
+    "controls/host-driver-stdout-v3.txt": {
+      "bytes": 276,
+      "sha256": "dd1367534bf30b69f1098e3e90a61e8dd58d57a1f9700c75ca773c2fdb0d2fb9",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-driver-stdout-v3.txt"
+    },
+    "controls/host-execution-v2.json": {
+      "bytes": 19558,
+      "sha256": "e64f524493178bb641e08ea5dceaebead0528afce280830578793bd25e8d9034",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-execution-v2.json"
+    },
+    "controls/host-execution-v3.json": {
+      "bytes": 19559,
+      "sha256": "72027568b1a4d2a0a3c7977809ecb3235e78a85e96210a05da60da025ede41cd",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-execution-v3.json"
+    },
+    "controls/independent-compact-host-failure-review-v2.json": {
+      "bytes": 7766,
+      "sha256": "ce4e23e52ff61ffc6f794ea51794abd85ffde5dbf2252f657f75e40699a7ff50",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/independent-compact-host-failure-review-v2.json"
+    },
+    "controls/independent-compact-host-review-v3.json": {
+      "bytes": 13218,
+      "sha256": "03bfe4e073e2aac160617ff4efc84313463a52b310675cebaba2ffeaa0eefd94",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/independent-compact-host-review-v3.json"
+    },
+    "controls/independent-compact-source-correction-review-v3.json": {
+      "bytes": 6927,
+      "sha256": "fd6a1f710bda0367db42deafe048104a25fe2fadc4cafa5c13b027f1cbb8ee7c",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/independent-compact-source-correction-review-v3.json"
+    },
+    "controls/independent-compact-source-review-v2.json": {
+      "bytes": 9956,
+      "sha256": "188cbc8825d80f281928a186f4d2855e96d9d27b84697acc03ad8530ca99bb30",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/independent-compact-source-review-v2.json"
+    },
+    "controls/independent-sample-memory-overlay-review-v2.json": {
+      "bytes": 4204,
+      "sha256": "3d50f4b363402820f06eb0306c9911ea23f63c10947fee83b5cce60ffbff9be5",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/independent-sample-memory-overlay-review-v2.json"
+    },
+    "controls/independent-saved-native-assert-count-clarification-v1.json": {
+      "bytes": 2354,
+      "sha256": "14e828140fb16d5dd0a0d961f5101427a2006e494e16fe55cc85f7cf99847715",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/independent-saved-native-assert-count-clarification-v1.json"
+    },
+    "controls/independent-saved-native-proof-review-v3.json": {
+      "bytes": 49000,
+      "sha256": "ed0a8509cac69b22f42c8997623e242eb21cb1dfe890744e7cc3c3788953d6c0",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/independent-saved-native-proof-review-v3.json"
+    },
+    "controls/native-assert-count-clarification-v1.json": {
+      "bytes": 808,
+      "sha256": "f36a82f0ea41e975c3dc9e04deb1edff45e60ea8b7e69c837a98ab4db075f7b3",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-assert-count-clarification-v1.json"
+    },
+    "controls/native-driver-stderr-v3.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-driver-stderr-v3.txt"
+    },
+    "controls/native-driver-stdout-v3.txt": {
+      "bytes": 247,
+      "sha256": "35e3ab9b6eb4bebf84ab8d7cd48d8129c1ac0529b2bfd840ad7003bf93a65625",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-driver-stdout-v3.txt"
+    },
+    "controls/native-execution-v3.json": {
+      "bytes": 24449,
+      "sha256": "aa5799f0e73c42f585453f80db57b6a852da7754b2ac76d17bad998904191631",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-execution-v3.json"
+    },
+    "controls/native-saved-reader-assumption-refusal-v1.json": {
+      "bytes": 657,
+      "sha256": "a332f66f58bb44c1012e1e6722a6f5cc3b0366f20afaff0f6f0d2ae9f9f0b267",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-saved-reader-assumption-refusal-v1.json"
+    },
+    "controls/root-host-v2-failure-classification.json": {
+      "bytes": 3926,
+      "sha256": "f5914b7c834504b20825df43b556c3e2b1b186dfd12653cc3240f594e49bba7c",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/root-host-v2-failure-classification.json"
+    },
+    "controls/root-saved-host-v3-review.json": {
+      "bytes": 2389,
+      "sha256": "0b7ea71d0ed6252df0abda203deacb354c94c0a4938ae8c691629f1883313dac",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/root-saved-host-v3-review.json"
+    },
+    "controls/root-saved-native-v3-review.json": {
+      "bytes": 2017,
+      "sha256": "d789cc6c1ec6f92c6f33053605905ed0b3d09f25ab3e3d05466cbf470733c4ea",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/root-saved-native-v3-review.json"
+    },
+    "controls/run_compact_host_once_v2.py": {
+      "bytes": 2336,
+      "sha256": "946cba487fe41bf7bc0a66b1f0ee44edd092191faaa88c04bdf37733eb89468c",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/run_compact_host_once_v2.py"
+    },
+    "controls/run_compact_host_once_v3.py": {
+      "bytes": 2339,
+      "sha256": "10edea4f416614e72648d0e35736803a0b3e6b213fca5566622b22cf4eb9bb96",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/run_compact_host_once_v3.py"
+    },
+    "controls/run_compact_native_once_v3.py": {
+      "bytes": 2540,
+      "sha256": "b92113546bc10d23051670034a9ecdd67d29a3eb7ec8343a42065ecbb109f5f4",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/run_compact_native_once_v3.py"
+    },
+    "failed-v2-source/tests/native_exec_paula_readers_song_compact_test.c": {
+      "bytes": 1748,
+      "sha256": "4d155819a585d65e8348edb95431b48e1cbb23a3b6979c470aa52f33ce5ed4ae",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate/tests/native_exec_paula_readers_song_compact_test.c"
+    },
+    "failed-v2-source/tests/paula_readers_song_compact_test.c": {
+      "bytes": 27125,
+      "sha256": "8ca869c727adebaca546ceb22a2e977bda8c70ee03c09e65958ab4e2b8edf055",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate/tests/paula_readers_song_compact_test.c"
+    },
+    "failed-v2-source/tests/test_paula_readers_song_compact.py": {
+      "bytes": 1785,
+      "sha256": "8f67d86337b109b56d7ac7d7bfab2768bf3b4a4f411d7873ec75917961cd3e4b",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate/tests/test_paula_readers_song_compact.py"
+    },
+    "host-final-v2/c001-dependencies-00.txt": {
+      "bytes": 9728,
+      "sha256": "df34248772c8d0737c403a24adac4c719b9e7cb64dbe35e5253d9662e115d182",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-00.txt"
+    },
+    "host-final-v2/c001-dependencies-01.txt": {
+      "bytes": 4968,
+      "sha256": "56d0a0912aa8809ea143f19e0356de9403be2f5a6f7a7a4d4dd537712025ec76",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-01.txt"
+    },
+    "host-final-v2/c001-dependencies-02.txt": {
+      "bytes": 4819,
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-02.txt"
+    },
+    "host-final-v2/c001-dependencies-03.txt": {
+      "bytes": 4529,
+      "sha256": "88b1bb1c44d211001353a424da05c63dfba54f0e3f5600ed3900c4272f92cc4b",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-03.txt"
+    },
+    "host-final-v2/c001-dependencies-04.txt": {
+      "bytes": 4335,
+      "sha256": "42c7499b25b2aea510723679cd8c3b05f6579288e42e053ab8a31328255e114d",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-04.txt"
+    },
+    "host-final-v2/c001-dependencies-05.txt": {
+      "bytes": 2838,
+      "sha256": "0d6b05f35ca82da6de57db65097facdd70fae8bf742cf9d96d4e5cbb45299210",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-05.txt"
+    },
+    "host-final-v2/c001-dependencies-06.txt": {
+      "bytes": 5899,
+      "sha256": "b3ae31b876d78ff52c1d9d56826ea148dbf58e01dd39a5de3889e9245eb06039",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-06.txt"
+    },
+    "host-final-v2/c001-dependencies-07.txt": {
+      "bytes": 4540,
+      "sha256": "31a0d850205f57f2b83679a08ed5070ba55a6cfd9e2e915122e5c1dd42a208ad",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-07.txt"
+    },
+    "host-final-v2/c001-dependencies-08.txt": {
+      "bytes": 4354,
+      "sha256": "d33c386d36eec7f20a1eda63b048189b771560fc5a8a980c94652a4efe2b729f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-08.txt"
+    },
+    "host-final-v2/c001-dependencies-09.txt": {
+      "bytes": 4333,
+      "sha256": "d1d791f84ac8c81a831534cfc8c6d72c61b775c3c0c3a190d57b9c9fcb948435",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-09.txt"
+    },
+    "host-final-v2/c001-dependencies-10.txt": {
+      "bytes": 4379,
+      "sha256": "33b9be1b32562414c717d241d46b436efd376a24fc584b14cc128c9d01729e10",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-10.txt"
+    },
+    "host-final-v2/c001-dependencies-11.txt": {
+      "bytes": 4448,
+      "sha256": "713687508744f2c15e4089e7bd17b56e758928af2034a189a66c3c20a2834fd9",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-11.txt"
+    },
+    "host-final-v2/c001-dependencies-12.txt": {
+      "bytes": 4312,
+      "sha256": "c958df8c7ad062ad68feeca55fac66c08da7b811c9ecace81ce41009f4a9f397",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-12.txt"
+    },
+    "host-final-v2/c001-dependencies-13.txt": {
+      "bytes": 4388,
+      "sha256": "4b2f23840e82c3ed7b170604ccdf4fb098da015945d4ddf799cdd6b2f8b99af8",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-13.txt"
+    },
+    "host-final-v2/c001-dependencies-14.txt": {
+      "bytes": 4418,
+      "sha256": "88a7a868d906166af8c42b771e4f3abbee1c72ff86f049979e30ba55645b7004",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-14.txt"
+    },
+    "host-final-v2/c001-dependencies-15.txt": {
+      "bytes": 4329,
+      "sha256": "021af1b93d018969b3bda1b8897e7cc21f794c69d90006a430b9fce413356dfe",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-15.txt"
+    },
+    "host-final-v2/c001-dependencies-16.txt": {
+      "bytes": 3665,
+      "sha256": "b4b8d9d6597c3710564b2567ea428238ed80aae5b571f2b95fb659af6dd18097",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-16.txt"
+    },
+    "host-final-v2/c001-dependencies-17.txt": {
+      "bytes": 3268,
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-17.txt"
+    },
+    "host-final-v2/c001-dependencies-18.txt": {
+      "bytes": 4324,
+      "sha256": "d03d1303964f1fe8dddabcb3eb7913a443af83492768ad61241ce22fdead2404",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-18.txt"
+    },
+    "host-final-v2/c001-dependencies-19.txt": {
+      "bytes": 4324,
+      "sha256": "4b81a96da592d7feab5caf463e99aac11b345cab3930035783a3998cd2d3468f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-19.txt"
+    },
+    "host-final-v2/c001-dependencies-20.txt": {
+      "bytes": 2772,
+      "sha256": "0a7021bf58bae5096f7938e17aee23e62a6b3498f4ef1c4e8bcaf43898da5453",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-20.txt"
+    },
+    "host-final-v2/c001-dependencies-21.txt": {
+      "bytes": 5285,
+      "sha256": "f137c05c93908e20c606c29894364ab648c18d63e2d75c2960eed9472886bfa8",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-21.txt"
+    },
+    "host-final-v2/c001-dependencies-22.txt": {
+      "bytes": 4621,
+      "sha256": "0b0662d59a6279e67c909280f6b4069d76a31f445ba30603f4e6bb6e10065e54",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-22.txt"
+    },
+    "host-final-v2/c001-dependencies-23.txt": {
+      "bytes": 4417,
+      "sha256": "d61688465780e43e63df8f80ede679fbf2857f51a938695224fbdcc90821d279",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-23.txt"
+    },
+    "host-final-v2/c001-dependencies-24.txt": {
+      "bytes": 4425,
+      "sha256": "3d08d510660b3bc662a0d88d29515a6b1e70e1261bbc0b1aa699514b12146aad",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-24.txt"
+    },
+    "host-final-v2/c001-dependencies-25.txt": {
+      "bytes": 2781,
+      "sha256": "80d9badaf71d360872b098bf084a5a72127b9204dc1190a978a70b726d37c066",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-25.txt"
+    },
+    "host-final-v2/c001-dependencies-26.txt": {
+      "bytes": 4366,
+      "sha256": "95f56b038f01e14e4e1b74b96e5e544ab59f13fccc5045e8a423a1e722a4b69d",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-26.txt"
+    },
+    "host-final-v2/c001-dependencies-27.txt": {
+      "bytes": 4384,
+      "sha256": "86b3b72f434fe39a2c963ad6c7d7479cfd2712179d970ceaac05a7583be95de0",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-27.txt"
+    },
+    "host-final-v2/c001-dependencies-28.txt": {
+      "bytes": 5716,
+      "sha256": "e5c8ed940dd9ac82da1ab00fb76d793ac1cb17293c54b50d009e8cf84175503d",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-28.txt"
+    },
+    "host-final-v2/c001-dependencies-29.txt": {
+      "bytes": 5738,
+      "sha256": "334a3b9f771bfc1ae7f51396f9b8d3cd7f06b308338c3818e39009996ab6095f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-29.txt"
+    },
+    "host-final-v2/c001-product.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-product.log"
+    },
+    "host-final-v2/c002-product.log": {
+      "bytes": 167,
+      "sha256": "769a79d014de9e83fc1d12c6cca16c6cce82dc2a05f62fc643980caf4c558518",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c002-product.log"
+    },
+    "host-final-v2/host-checks.json": {
+      "bytes": 86082,
+      "sha256": "8b000ae157ca613a031434f81124e00fc0853cf20407f53abf012de4c6b3855e",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/host-checks.json"
+    },
+    "host-final-v2/host-checks.log": {
+      "bytes": 1527,
+      "sha256": "254606933d76ea9db87ee608a172c41bc14e364771bba603cd1ac7092c4e96f8",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/host-checks.log"
+    },
+    "host-final-v2/products/c001-executable-94dfea106e797186-test": {
+      "bytes": 2432888,
+      "sha256": "94dfea106e79718609dca2b6bee4e8be3419ab0a3d20e74476b8bab2d690d8ca",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/products/c001-executable-94dfea106e797186-test"
+    },
+    "host-final-v3/c001-dependencies-00.txt": {
+      "bytes": 9728,
+      "sha256": "df34248772c8d0737c403a24adac4c719b9e7cb64dbe35e5253d9662e115d182",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-00.txt"
+    },
+    "host-final-v3/c001-dependencies-01.txt": {
+      "bytes": 4968,
+      "sha256": "56d0a0912aa8809ea143f19e0356de9403be2f5a6f7a7a4d4dd537712025ec76",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-01.txt"
+    },
+    "host-final-v3/c001-dependencies-02.txt": {
+      "bytes": 4819,
+      "sha256": "45015fc1f645a612585472c44faaa33c214f12a0d4464978075fcc3e8e499b73",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-02.txt"
+    },
+    "host-final-v3/c001-dependencies-03.txt": {
+      "bytes": 4529,
+      "sha256": "88b1bb1c44d211001353a424da05c63dfba54f0e3f5600ed3900c4272f92cc4b",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-03.txt"
+    },
+    "host-final-v3/c001-dependencies-04.txt": {
+      "bytes": 4335,
+      "sha256": "42c7499b25b2aea510723679cd8c3b05f6579288e42e053ab8a31328255e114d",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-04.txt"
+    },
+    "host-final-v3/c001-dependencies-05.txt": {
+      "bytes": 2838,
+      "sha256": "0d6b05f35ca82da6de57db65097facdd70fae8bf742cf9d96d4e5cbb45299210",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-05.txt"
+    },
+    "host-final-v3/c001-dependencies-06.txt": {
+      "bytes": 5899,
+      "sha256": "b3ae31b876d78ff52c1d9d56826ea148dbf58e01dd39a5de3889e9245eb06039",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-06.txt"
+    },
+    "host-final-v3/c001-dependencies-07.txt": {
+      "bytes": 4540,
+      "sha256": "31a0d850205f57f2b83679a08ed5070ba55a6cfd9e2e915122e5c1dd42a208ad",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-07.txt"
+    },
+    "host-final-v3/c001-dependencies-08.txt": {
+      "bytes": 4354,
+      "sha256": "d33c386d36eec7f20a1eda63b048189b771560fc5a8a980c94652a4efe2b729f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-08.txt"
+    },
+    "host-final-v3/c001-dependencies-09.txt": {
+      "bytes": 4333,
+      "sha256": "d1d791f84ac8c81a831534cfc8c6d72c61b775c3c0c3a190d57b9c9fcb948435",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-09.txt"
+    },
+    "host-final-v3/c001-dependencies-10.txt": {
+      "bytes": 4379,
+      "sha256": "33b9be1b32562414c717d241d46b436efd376a24fc584b14cc128c9d01729e10",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-10.txt"
+    },
+    "host-final-v3/c001-dependencies-11.txt": {
+      "bytes": 4448,
+      "sha256": "713687508744f2c15e4089e7bd17b56e758928af2034a189a66c3c20a2834fd9",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-11.txt"
+    },
+    "host-final-v3/c001-dependencies-12.txt": {
+      "bytes": 4312,
+      "sha256": "c958df8c7ad062ad68feeca55fac66c08da7b811c9ecace81ce41009f4a9f397",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-12.txt"
+    },
+    "host-final-v3/c001-dependencies-13.txt": {
+      "bytes": 4388,
+      "sha256": "4b2f23840e82c3ed7b170604ccdf4fb098da015945d4ddf799cdd6b2f8b99af8",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-13.txt"
+    },
+    "host-final-v3/c001-dependencies-14.txt": {
+      "bytes": 4418,
+      "sha256": "88a7a868d906166af8c42b771e4f3abbee1c72ff86f049979e30ba55645b7004",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-14.txt"
+    },
+    "host-final-v3/c001-dependencies-15.txt": {
+      "bytes": 4329,
+      "sha256": "021af1b93d018969b3bda1b8897e7cc21f794c69d90006a430b9fce413356dfe",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-15.txt"
+    },
+    "host-final-v3/c001-dependencies-16.txt": {
+      "bytes": 3665,
+      "sha256": "b4b8d9d6597c3710564b2567ea428238ed80aae5b571f2b95fb659af6dd18097",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-16.txt"
+    },
+    "host-final-v3/c001-dependencies-17.txt": {
+      "bytes": 3268,
+      "sha256": "f2dd204859c3e6097d70b8d8aa9d3ae8bf65e34ff3896c6f30fe7d07a529f3d2",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-17.txt"
+    },
+    "host-final-v3/c001-dependencies-18.txt": {
+      "bytes": 4324,
+      "sha256": "d03d1303964f1fe8dddabcb3eb7913a443af83492768ad61241ce22fdead2404",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-18.txt"
+    },
+    "host-final-v3/c001-dependencies-19.txt": {
+      "bytes": 4324,
+      "sha256": "4b81a96da592d7feab5caf463e99aac11b345cab3930035783a3998cd2d3468f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-19.txt"
+    },
+    "host-final-v3/c001-dependencies-20.txt": {
+      "bytes": 2772,
+      "sha256": "0a7021bf58bae5096f7938e17aee23e62a6b3498f4ef1c4e8bcaf43898da5453",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-20.txt"
+    },
+    "host-final-v3/c001-dependencies-21.txt": {
+      "bytes": 5285,
+      "sha256": "f137c05c93908e20c606c29894364ab648c18d63e2d75c2960eed9472886bfa8",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-21.txt"
+    },
+    "host-final-v3/c001-dependencies-22.txt": {
+      "bytes": 4621,
+      "sha256": "0b0662d59a6279e67c909280f6b4069d76a31f445ba30603f4e6bb6e10065e54",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-22.txt"
+    },
+    "host-final-v3/c001-dependencies-23.txt": {
+      "bytes": 4417,
+      "sha256": "d61688465780e43e63df8f80ede679fbf2857f51a938695224fbdcc90821d279",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-23.txt"
+    },
+    "host-final-v3/c001-dependencies-24.txt": {
+      "bytes": 4425,
+      "sha256": "3d08d510660b3bc662a0d88d29515a6b1e70e1261bbc0b1aa699514b12146aad",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-24.txt"
+    },
+    "host-final-v3/c001-dependencies-25.txt": {
+      "bytes": 2781,
+      "sha256": "80d9badaf71d360872b098bf084a5a72127b9204dc1190a978a70b726d37c066",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-25.txt"
+    },
+    "host-final-v3/c001-dependencies-26.txt": {
+      "bytes": 4366,
+      "sha256": "95f56b038f01e14e4e1b74b96e5e544ab59f13fccc5045e8a423a1e722a4b69d",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-26.txt"
+    },
+    "host-final-v3/c001-dependencies-27.txt": {
+      "bytes": 4384,
+      "sha256": "86b3b72f434fe39a2c963ad6c7d7479cfd2712179d970ceaac05a7583be95de0",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-27.txt"
+    },
+    "host-final-v3/c001-dependencies-28.txt": {
+      "bytes": 5716,
+      "sha256": "e5c8ed940dd9ac82da1ab00fb76d793ac1cb17293c54b50d009e8cf84175503d",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-28.txt"
+    },
+    "host-final-v3/c001-dependencies-29.txt": {
+      "bytes": 5738,
+      "sha256": "334a3b9f771bfc1ae7f51396f9b8d3cd7f06b308338c3818e39009996ab6095f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-29.txt"
+    },
+    "host-final-v3/c001-product.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-product.log"
+    },
+    "host-final-v3/c002-product.log": {
+      "bytes": 551,
+      "sha256": "649739a019d2a0e9b6f9379b56c0acbdb367136c432f9435cfaccc87f1f81bde",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c002-product.log"
+    },
+    "host-final-v3/host-checks.json": {
+      "bytes": 85954,
+      "sha256": "c951c3cfe07ee1d3b864ba3a53c2be0be9730747e3963db65921c874422470c9",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/host-checks.json"
+    },
+    "host-final-v3/host-checks.log": {
+      "bytes": 835,
+      "sha256": "eec1759194034d8836e58f908cca7ed0532440287393175c272125692e70cb41",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/host-checks.log"
+    },
+    "host-final-v3/products/c001-executable-dfe385bf61a6f7a9-test": {
+      "bytes": 2449864,
+      "sha256": "dfe385bf61a6f7a99b6bfe1dfd73057a6f9bfbf07ace53e3dc9d97acc24d9211",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/products/c001-executable-dfe385bf61a6f7a9-test"
+    },
+    "host-tools-v1/host_provenance.py": {
+      "bytes": 14119,
+      "sha256": "fa3502e9417e3d30f471ab07190f7f41134309d5ed518e7cae69536e2155bddb",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-tools-v1/host_provenance.py"
+    },
+    "host-tools-v1/provenance_common.py": {
+      "bytes": 11124,
+      "sha256": "78e28229f0f132c73153606be3a40d750a4013f5ea1bbb5af7c15e117e62cdb5",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-tools-v1/provenance_common.py"
+    },
+    "host-tools-v1/toolchain-pins.json": {
+      "bytes": 2709,
+      "sha256": "ff17d0203323a814a9310fd1f3c1b2cb9e4612abe33f21f33d54e94f1cf2644d",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-tools-v1/toolchain-pins.json"
+    },
+    "native-final-v3/PTPaulaReadersSongCompactTest": {
+      "bytes": 215480,
+      "sha256": "e768d1c5d89fd493c51a93a76eca7eb5b187bbf3c8e273edb3458721ea052b3f",
+      "mode": 493,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/PTPaulaReadersSongCompactTest"
+    },
+    "native-final-v3/PTPaulaReadersSongCompactTest.build.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/PTPaulaReadersSongCompactTest.build.log"
+    },
+    "native-final-v3/compile-commands.json": {
+      "bytes": 2803,
+      "sha256": "c997e59c41c4a21d6e8cccee7c7399016ea841524f1aeaaada7532a1ea5a8195",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/compile-commands.json"
+    },
+    "native-final-v3/compiler-target-help.log": {
+      "bytes": 7189,
+      "sha256": "f49f0114a73ba557163318b0fdad968b33b41a939e5766a83460468bda9c7a79",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/compiler-target-help.log"
+    },
+    "native-final-v3/compiler-version.log": {
+      "bytes": 247,
+      "sha256": "5946ce0c1a43a84e1c7af8cfaa306b2f4bd276dd02164560d5674bcc91250d0b",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/compiler-version.log"
+    },
+    "native-final-v3/dependencies-00.log": {
+      "bytes": 7738,
+      "sha256": "67964e733f6808bdef554755f76d12d1b2a851981eeaa947c98090542a2124a0",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-00.log"
+    },
+    "native-final-v3/dependencies-01.log": {
+      "bytes": 3329,
+      "sha256": "a48dba34e0041f01a5a244832c13ae6728bbba974dd87219df385d21d9f7d192",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-01.log"
+    },
+    "native-final-v3/dependencies-02.log": {
+      "bytes": 2935,
+      "sha256": "92ec819ff7d6e393804022b7c06ea0558e530db37a234dd44bc0a333b0bbb928",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-02.log"
+    },
+    "native-final-v3/dependencies-03.log": {
+      "bytes": 2868,
+      "sha256": "29b3f6cd229dfc310a8352b1ace422b53297267c479f637c556fc0110cfa1cb6",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-03.log"
+    },
+    "native-final-v3/dependencies-04.log": {
+      "bytes": 2677,
+      "sha256": "7649b08c78af4bc4cb103d1549be8cee06ac757e10a5b6578a43a16049038361",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-04.log"
+    },
+    "native-final-v3/dependencies-05.log": {
+      "bytes": 1047,
+      "sha256": "4ff5bed5dafd828328ca674aaffdee0ba7aad01f11d1748ec792fa07510f87d9",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-05.log"
+    },
+    "native-final-v3/dependencies-06.log": {
+      "bytes": 3608,
+      "sha256": "dbc58e04e0ec2f4c88622e0275b17be2c562296ad1760d318e4ea1c195af29c6",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-06.log"
+    },
+    "native-final-v3/dependencies-07.log": {
+      "bytes": 2877,
+      "sha256": "6d965099f3d42fe6e1d3f339e33832baa6cfbfba2504c2d0d0ef07c1f94db8b4",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-07.log"
+    },
+    "native-final-v3/dependencies-08.log": {
+      "bytes": 2691,
+      "sha256": "ecfca1c53587ed34fc179bac0275d99ba44e46c144f39ca6e722c4b08bbbeb46",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-08.log"
+    },
+    "native-final-v3/dependencies-09.log": {
+      "bytes": 2674,
+      "sha256": "6eca9be45c2f9e1b81b0d88fa1ccd7ab10c728f6d1a8b8290d29176b9f5d3271",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-09.log"
+    },
+    "native-final-v3/dependencies-10.log": {
+      "bytes": 2719,
+      "sha256": "0a6f724c52f97951e0cc34b50a4aae9db35c2a99d21128cc6f38f72dc4ba32e5",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-10.log"
+    },
+    "native-final-v3/dependencies-11.log": {
+      "bytes": 2787,
+      "sha256": "1f192fe62ece619be6d88a2eb02b0a026130d9d8ee2387791ab4e545a29b5a20",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-11.log"
+    },
+    "native-final-v3/dependencies-12.log": {
+      "bytes": 2653,
+      "sha256": "6b987584a6c74fb8817a7124512d83b18df1c43a53f40741061c14a0343ad866",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-12.log"
+    },
+    "native-final-v3/dependencies-13.log": {
+      "bytes": 2724,
+      "sha256": "e4aea7b8ba66c48b8d57c86bded28f6e6bcd657d0c725ff79d36a6d28525b982",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-13.log"
+    },
+    "native-final-v3/dependencies-14.log": {
+      "bytes": 2754,
+      "sha256": "e4faeae096c9ec48ef2fc5ad7099505e81e7e2ce0fe48974860884543a80b668",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-14.log"
+    },
+    "native-final-v3/dependencies-15.log": {
+      "bytes": 2671,
+      "sha256": "c7ba9b4659696523b158251b58782db04ab261cbaa3ba9c8a33a76f1e25d7f57",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-15.log"
+    },
+    "native-final-v3/dependencies-16.log": {
+      "bytes": 2665,
+      "sha256": "e6d857bcb44c2f2752e7795df3426c8312bd2bd7d6ad93177da0fc47597b1cc5",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-16.log"
+    },
+    "native-final-v3/dependencies-17.log": {
+      "bytes": 1767,
+      "sha256": "01c3547804956b0748114b63f1de3c6d9d5093feac2a7ff56dfeb2e0290c867a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-17.log"
+    },
+    "native-final-v3/dependencies-18.log": {
+      "bytes": 2665,
+      "sha256": "30fc4d262f9607a81b3b62ef30564262161af272e84a2320ac95cf8fd56cc5fb",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-18.log"
+    },
+    "native-final-v3/dependencies-19.log": {
+      "bytes": 2665,
+      "sha256": "3ec39f4b71cc8765d576a56a9b4c058099052b7c3f21a3643f8dbb0f08bea835",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-19.log"
+    },
+    "native-final-v3/dependencies-20.log": {
+      "bytes": 982,
+      "sha256": "153faaede332c2e41619a5bd53c34e720a48f4d8135fb16442b2c5d1f1462628",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-20.log"
+    },
+    "native-final-v3/dependencies-21.log": {
+      "bytes": 3390,
+      "sha256": "165055af098e162d5968385ea9f8d5e399771a453e61917d4314ee73507152ad",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-21.log"
+    },
+    "native-final-v3/dependencies-22.log": {
+      "bytes": 2958,
+      "sha256": "06442321ede1324aa786b79e13e66873db108783bdee5649e95dfcc17d91feed",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-22.log"
+    },
+    "native-final-v3/dependencies-23.log": {
+      "bytes": 2756,
+      "sha256": "ffaf5a837c558e6504f307fcccce64f260be66d37893e7cd7825b436ccee6f33",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-23.log"
+    },
+    "native-final-v3/dependencies-24.log": {
+      "bytes": 2764,
+      "sha256": "79330e9c1518bd06b309ced78bd3ce6804b54c60b338dddfab37f418de96df62",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-24.log"
+    },
+    "native-final-v3/dependencies-25.log": {
+      "bytes": 991,
+      "sha256": "23413c9f68029d2c575aeb384af67a2f0bfd1f2481b90bc01024f739ed8384d5",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-25.log"
+    },
+    "native-final-v3/dependencies-26.log": {
+      "bytes": 2710,
+      "sha256": "04360b4cb214983e2526501108452c4162a19b3dfeb727a5477015ed010c2564",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-26.log"
+    },
+    "native-final-v3/dependencies-27.log": {
+      "bytes": 2724,
+      "sha256": "9e6da72ba29b2969c2f5e604460a2a5f540c8148cb11142006a2f8f2e877fa94",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-27.log"
+    },
+    "native-final-v3/dependencies-28.log": {
+      "bytes": 3846,
+      "sha256": "6870e6dbcb583de4c76bc8cdc052c3c060e8cda585a77532afdfbbc7ea1bb06e",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-28.log"
+    },
+    "native-final-v3/dependencies-29.log": {
+      "bytes": 3905,
+      "sha256": "e52925f7078915154e980f3fbfcabebf51e5ff0c2467a6fb309774e6926c33af",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-29.log"
+    },
+    "native-final-v3/manifest.json": {
+      "bytes": 63411,
+      "sha256": "5fce95c776d6528a09689172150a450e5d2180f1141da31e9155ef8a084292fb",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/manifest.json"
+    },
+    "native-final-v3/preprocessed-fixture.log": {
+      "bytes": 383111,
+      "sha256": "7389d36ecc90a97469d291521cda8957953ff114750041de39738d83da4942ee",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/preprocessed-fixture.log"
+    },
+    "native-final-v3/runtime-libamiga-a.log": {
+      "bytes": 156,
+      "sha256": "c2c8e44936c32e01094e9de761e57c62c7bb834fbf6cabd464465bf3b17090c4",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/runtime-libamiga-a.log"
+    },
+    "native-final-v3/runtime-libgcc-a.log": {
+      "bytes": 125,
+      "sha256": "b1912e77c4c1160ce749ca74fbe6edabd5896c2291188e718a9cdfd72c84d57a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/runtime-libgcc-a.log"
+    },
+    "native-final-v3/runtime-libnix-a.log": {
+      "bytes": 121,
+      "sha256": "1ca0a83ef891770cbbe671647c7aad9f925ed0b9756c8f85aca35c84961e202a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/runtime-libnix-a.log"
+    },
+    "native-final-v3/runtime-libnix20-a.log": {
+      "bytes": 123,
+      "sha256": "9060e4a22ea9e716b8f9cf85b5fe5e11a9e6c88ef938b9111d189acc2df8465b",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/runtime-libnix20-a.log"
+    },
+    "native-final-v3/runtime-libnixmain-a.log": {
+      "bytes": 125,
+      "sha256": "dd28b9a8319d35bd81f76cd9479f889e7e5628be07a45ef138f35a729c640add",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/runtime-libnixmain-a.log"
+    },
+    "native-final-v3/runtime-libstubs-a.log": {
+      "bytes": 156,
+      "sha256": "8ce0c56c26f8f09a8af8b76d62c4d380cbfbe8efde13fa64884d8e9e6c93027f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/runtime-libstubs-a.log"
+    },
+    "native-final-v3/runtime-ncrt0-o.log": {
+      "bytes": 120,
+      "sha256": "1562950e2e8cb15a51238fddb72e6e26f0ff2d5a774543473aba0d274a19c45f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/runtime-ncrt0-o.log"
+    },
+    "native-preparation/PTPaulaReadersSongCompactTest-contract-v2.json": {
+      "bytes": 1437,
+      "sha256": "92384e6a36490f87a39a857b82e06c3b7e1cb97a07220fd07681213bf267c1ba",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-preparation/PTPaulaReadersSongCompactTest-contract-v2.json"
+    },
+    "native-preparation/build_song_readers_compact_portability.py": {
+      "bytes": 21138,
+      "sha256": "fad8b5d5d18917ec0bb52d451d5a369b3b49068f3dd0f105e08d1af10dc40ef0",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-preparation/build_song_readers_compact_portability.py"
+    },
+    "native-preparation/build_song_readers_compact_portability_v2.py": {
+      "bytes": 22892,
+      "sha256": "2b29ab511fa9265b0076f89b134a0057a49035e89ab2ea6c9428ab515117011f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-preparation/build_song_readers_compact_portability_v2.py"
+    },
+    "native-preparation/compact-helper-preparation-v1.json": {
+      "bytes": 1941,
+      "sha256": "873a18ad078b2396eef42c42149d3a3533d5ed5a202c94bdbe8e6e24c490009e",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-preparation/compact-helper-preparation-v1.json"
+    },
+    "native-preparation/compact-helper-source-binding-source-v2.json": {
+      "bytes": 4083,
+      "sha256": "705c8789f6263e4ee38c1c04cdad1c7c1db72798790b82456a45ebca8a5974d3",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-preparation/compact-helper-source-binding-source-v2.json"
+    },
+    "native-preparation/compact-helper-source-binding-source-v3.json": {
+      "bytes": 4226,
+      "sha256": "da65ffe9f08d3f6a252a386b9a509925de05e9815592255eb6ed04f5590a78c7",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-preparation/compact-helper-source-binding-source-v3.json"
+    },
+    "native-preparation/compact-helper-source-binding-v2.json": {
+      "bytes": 7089,
+      "sha256": "7eb1b0e417c61bf1a14b0b0fbb8eb7469915db706cbc6a7d4c4c7efaa7b58af2",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-preparation/compact-helper-source-binding-v2.json"
+    },
+    "native-preparation/compact-helper-source-binding-v2.patch": {
+      "bytes": 5768,
+      "sha256": "76b6825bf4823881c12ee5a6c614e9754f1cf7b64f00bc683a29c872989b3e5b",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-preparation/compact-helper-source-binding-v2.patch"
+    },
+    "native-preparation/origin-build_song_readers_workspace_portability.py": {
+      "bytes": 25128,
+      "sha256": "51004cae31ac1efb10968598e8661ed5ade4661cae443adb73d6adaa93297740",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-preparation/origin-build_song_readers_workspace_portability.py"
+    },
+    "native-preparation/toolchain-pins.json": {
+      "bytes": 2730,
+      "sha256": "22ac81cd691e00c5ee75a10b855966eed23a52edf741fcc624a907b37cf0b461",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-preparation/toolchain-pins.json"
+    },
+    "source-revision-v3/ceiling-boundary-oracle-v3.patch": {
+      "bytes": 2156,
+      "sha256": "43d263cb2fafe3008ac0840f0a2e43bf2fe8f02258ecab1a64e4c4e005a1c6a3",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/source-revision-v3/ceiling-boundary-oracle-v3.patch"
+    },
+    "source-revision-v3/source-only-correction-v3.json": {
+      "bytes": 7778,
+      "sha256": "07265363c5b33a467fe16691b9cba1398ae862e6fa477ad15c068a36ee42479c",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/source-revision-v3/source-only-correction-v3.json"
+    },
+    "source-revision-v3/source-seal-v3.json": {
+      "bytes": 3188,
+      "sha256": "b873fed594d11f461ac626dd0e998c94aee1e8e2ae7581c7b2f316b148791d11",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/source-revision-v3/source-seal-v3.json"
+    },
+    "source-revision-v3/tests/native_exec_paula_readers_song_compact_test.c": {
+      "bytes": 1748,
+      "sha256": "4d155819a585d65e8348edb95431b48e1cbb23a3b6979c470aa52f33ce5ed4ae",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/source-revision-v3/tests/native_exec_paula_readers_song_compact_test.c"
+    },
+    "source-revision-v3/tests/paula_readers_song_compact_test.c": {
+      "bytes": 27698,
+      "sha256": "939001fd147e955acdf4922e003da56b2dca64cfdcae58b31bfc94cc2784d3a3",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/source-revision-v3/tests/paula_readers_song_compact_test.c"
+    },
+    "source-revision-v3/tests/test_paula_readers_song_compact.py": {
+      "bytes": 1785,
+      "sha256": "8f67d86337b109b56d7ac7d7bfab2768bf3b4a4f411d7873ec75917961cd3e4b",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/source-revision-v3/tests/test_paula_readers_song_compact.py"
+    },
+    "source/src/core/amigus_reservation.h": {
+      "bytes": 3404,
+      "sha256": "ee57be55b9865fd19d14b27b22af6e2aa6b0466b7f21da5b313016efe9a0b646",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/amigus_reservation.h"
+    },
+    "source/src/core/amigus_sample_ram.h": {
+      "bytes": 2813,
+      "sha256": "005111323eb1884112230ea415fbfb75e01d560618326148e08790d4f23fadf6",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/amigus_sample_ram.h"
+    },
+    "source/src/core/amigus_wavetable_cache.h": {
+      "bytes": 3792,
+      "sha256": "8c449f009eac14807a9521d16a756345dd531e47b50312a3cabf96ee7ea2ee9c",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/amigus_wavetable_cache.h"
+    },
+    "source/src/core/channels.c": {
+      "bytes": 6996,
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/channels.c"
+    },
+    "source/src/core/channels.h": {
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/channels.h"
+    },
+    "source/src/core/document.c": {
+      "bytes": 9127,
+      "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/document.c"
+    },
+    "source/src/core/document.h": {
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/document.h"
+    },
+    "source/src/core/elapsed_clock.c": {
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/elapsed_clock.c"
+    },
+    "source/src/core/elapsed_clock.h": {
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/elapsed_clock.h"
+    },
+    "source/src/core/flow.c": {
+      "bytes": 8904,
+      "sha256": "c1850d6202a01805876ce6afa903ac4ae145757410e7597d70f2601903e79783",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/flow.c"
+    },
+    "source/src/core/flow.h": {
+      "bytes": 3803,
+      "sha256": "db5a78efb5344d95f145d70a6c26c664a832410b8ea741c56f0de831d4163046",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/flow.h"
+    },
+    "source/src/core/frame_clock.c": {
+      "bytes": 1209,
+      "sha256": "e5d9c6c9dc7ea48daf6d099dc5ade8ec2260d8009f40eebd26fa32bd06490a22",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/frame_clock.c"
+    },
+    "source/src/core/frame_clock.h": {
+      "bytes": 884,
+      "sha256": "77bb574a681a492967a6dc938e5eab7e5f28c70f73fd18189de6ed379ccbc54c",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/frame_clock.h"
+    },
+    "source/src/core/mod_inspect.c": {
+      "bytes": 3513,
+      "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/mod_inspect.c"
+    },
+    "source/src/core/mod_inspect.h": {
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/mod_inspect.h"
+    },
+    "source/src/core/mod_project.c": {
+      "bytes": 23640,
+      "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/mod_project.c"
+    },
+    "source/src/core/mod_project.h": {
+      "bytes": 5051,
+      "sha256": "c28407161729fc0fea2398f79341a866f03913b092769674bd871bb23adb59ee",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/mod_project.h"
+    },
+    "source/src/core/pattern.c": {
+      "bytes": 15753,
+      "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pattern.c"
+    },
+    "source/src/core/pattern.h": {
+      "bytes": 3642,
+      "sha256": "f8c9abde09c4fe495ae77f25c070da647eab038845729edc83adec08c5678d53",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pattern.h"
+    },
+    "source/src/core/paula_render_voice.c": {
+      "bytes": 1997,
+      "sha256": "c037e6d3e59d6c898e78ebba05036d960ced3a2758a08cf36adbdcd4780ecc82",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/paula_render_voice.c"
+    },
+    "source/src/core/paula_render_voice.h": {
+      "bytes": 1642,
+      "sha256": "11126de4c05368ab1acdcfe1f92b56df03b8233f7e2ec0c304c9d5922e913c77",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/paula_render_voice.h"
+    },
+    "source/src/core/pcm.c": {
+      "bytes": 7061,
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pcm.c"
+    },
+    "source/src/core/pcm.h": {
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pcm.h"
+    },
+    "source/src/core/pcm_filtered.c": {
+      "bytes": 4604,
+      "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pcm_filtered.c"
+    },
+    "source/src/core/pcm_internal.h": {
+      "bytes": 615,
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pcm_internal.h"
+    },
+    "source/src/core/pitch.c": {
+      "bytes": 6193,
+      "sha256": "9088859aa6a2812510b3a28334420030add960afa5f2cca3b41946018f0c04d5",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pitch.c"
+    },
+    "source/src/core/pitch.h": {
+      "bytes": 794,
+      "sha256": "7ec69432c14acb87bc3ba357fe1031023942ebe4ce35e2193d46c16f7068f8b4",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pitch.h"
+    },
+    "source/src/core/pitch_tables.h": {
+      "bytes": 2787,
+      "sha256": "436cb7721c10ef2ef010d7fa6c2b0e46ccec2a4dfc2f7ce9af76a2bb0eb7812a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pitch_tables.h"
+    },
+    "source/src/core/playback_internal.h": {
+      "bytes": 1893,
+      "sha256": "5d76f20f2c9a7eda89c3543a897f053c97f9460a847d2d70b32b8b71c14775e2",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/playback_internal.h"
+    },
+    "source/src/core/playback_pcm.c": {
+      "bytes": 11344,
+      "sha256": "f00995c1ca81176fc244968b4276b41624767f42c2963eb90482f23953d09a1f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/playback_pcm.c"
+    },
+    "source/src/core/playback_pcm.h": {
+      "bytes": 6034,
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/playback_pcm.h"
+    },
+    "source/src/core/pp20.c": {
+      "bytes": 7187,
+      "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pp20.c"
+    },
+    "source/src/core/pp20.h": {
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pp20.h"
+    },
+    "source/src/core/project.c": {
+      "bytes": 46481,
+      "sha256": "be3094ffb8a57df8e0f7a58a946f7f20978715f17d2103234027824af882b094",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/project.c"
+    },
+    "source/src/core/project.h": {
+      "bytes": 8827,
+      "sha256": "e1a749800258b1f1db1dedcd7d5d36970abbf7494279cb3669212757f982e21a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/project.h"
+    },
+    "source/src/core/raw.c": {
+      "bytes": 3920,
+      "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/raw.c"
+    },
+    "source/src/core/raw.h": {
+      "bytes": 1171,
+      "sha256": "f9f47added4df41bb7b15aa3b1b7a4d8131a2c4aa19266436318483a41bc0f3b",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/raw.h"
+    },
+    "source/src/core/render.c": {
+      "bytes": 63044,
+      "sha256": "4b355e1319e10ff3ba0a26d8dc652b7d05faef2f57afc6f85925ba826ba1686f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/render.c"
+    },
+    "source/src/core/render.h": {
+      "bytes": 11891,
+      "sha256": "50bca0c9fd47be061c3b0c027388f5c1bdbe4316a1caed3f33a696f7527812ea",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/render.h"
+    },
+    "source/src/core/render_commands.h": {
+      "bytes": 9193,
+      "sha256": "ea176e8382ea808929d11571396d6214bb40d2fce8defc9b19569c1bb5c30d14",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/render_commands.h"
+    },
+    "source/src/core/render_lookahead.h": {
+      "bytes": 1954,
+      "sha256": "6ecdad4402eb721aad8d3b55d6d8fc87a9f8135962c8638f0f1919527c4fbf03",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/render_lookahead.h"
+    },
+    "source/src/core/sample_cache.c": {
+      "bytes": 4018,
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/sample_cache.c"
+    },
+    "source/src/core/sample_cache.h": {
+      "bytes": 1999,
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/sample_cache.h"
+    },
+    "source/src/core/sample_usage.h": {
+      "bytes": 3167,
+      "sha256": "0ed540356b9ff1bd2ae651de2ee183b6c0c45af84f352eb02fab07d9155565a0",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/sample_usage.h"
+    },
+    "source/src/core/scheduled_output.h": {
+      "bytes": 6515,
+      "sha256": "3289945d9446b373d8aa1897cb2c432f08ef253b443a81cd4dde39230df9b9da",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/scheduled_output.h"
+    },
+    "source/src/core/scheduled_readers.c": {
+      "bytes": 27301,
+      "sha256": "d357f179171d996f714b49d046f2749a3251d8ee1534138cfe84ca690f328778",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/scheduled_readers.c"
+    },
+    "source/src/core/scheduled_readers.h": {
+      "bytes": 8810,
+      "sha256": "f6dd9354a65ee501d30ba2934f837d39c6b3e5ba1c92bee370a3468fe5ea3f3e",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/scheduled_readers.h"
+    },
+    "source/src/core/sinc_kernel.h": {
+      "bytes": 28756,
+      "sha256": "058629396a0b22daa67f75c909adf9181fc4e52bfc668890fe2abc3231c3a185",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/sinc_kernel.h"
+    },
+    "source/src/core/slices.c": {
+      "bytes": 6060,
+      "sha256": "2951045844f6fdebdd80afe12fe7a5afc1f37bf837c2f49d840f14867835342f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/slices.c"
+    },
+    "source/src/core/slices.h": {
+      "bytes": 2003,
+      "sha256": "31cd82785c2b86c41d9cde1f7a29056c9d70ec41fb7a9bfb1a5679ba762c24f7",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/slices.h"
+    },
+    "source/src/core/svx.c": {
+      "bytes": 7817,
+      "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/svx.c"
+    },
+    "source/src/core/svx.h": {
+      "bytes": 1442,
+      "sha256": "824541cd25b72b5820e091cfc9f4e6a5f41351fd0630dddc09aefc0405036814",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/svx.h"
+    },
+    "source/src/core/timeline.c": {
+      "bytes": 1598,
+      "sha256": "2296df1f1d13336bacb40cd867268dbd1c52d1ed0353256f5022da536516effd",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/timeline.c"
+    },
+    "source/src/core/timeline.h": {
+      "bytes": 1150,
+      "sha256": "ef1640b5c7dd9e48e1e13a9963c21c53b913d062b172a988e91abb7532defa64",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/timeline.h"
+    },
+    "source/src/core/voice.c": {
+      "bytes": 11427,
+      "sha256": "9da52c6a82f9ea753655ed4d196946198316cb5327078ffbf354a6dc66e48c68",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/voice.c"
+    },
+    "source/src/core/voice.h": {
+      "bytes": 4184,
+      "sha256": "386b10545fb8ae615b5a45718d90be60b0999b2d63fffd835b6be540d7dca479",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/voice.h"
+    },
+    "source/src/core/voice_internal.h": {
+      "bytes": 934,
+      "sha256": "02f7f0af75f1a60a7907fbdcbfa754f3d2a06e9073d2bb5e4888f36a66ce5973",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/voice_internal.h"
+    },
+    "source/src/core/wav.c": {
+      "bytes": 7200,
+      "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/wav.c"
+    },
+    "source/src/core/wav.h": {
+      "bytes": 1384,
+      "sha256": "8dd0f4454304babb53eef5ecb97cde7bfe6569d292cc0e9a0f204c4a587f2028",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/wav.h"
+    },
+    "source/src/editor/paula_preflight.c": {
+      "bytes": 22069,
+      "sha256": "0e4a6f90cdec366856b0a2325502185746f9a2bab0ff3118d6c5f346dde5a82d",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/paula_preflight.c"
+    },
+    "source/src/editor/paula_preflight.h": {
+      "bytes": 8400,
+      "sha256": "3fd4d9096a3592f53503d1c1e2599dea33873b1fd508b41826d8715f6604f67d",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/paula_preflight.h"
+    },
+    "source/src/editor/paula_readers_song.c": {
+      "bytes": 48927,
+      "sha256": "576f0ea6461d31d55a32606b1535a7c503b8c343a317c79accaaca1e94bb597d",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/paula_readers_song.c"
+    },
+    "source/src/editor/paula_readers_song.h": {
+      "bytes": 10485,
+      "sha256": "5bc7540e93e52177332344d292172bdaa931d10c7f436767c8f8439a6019aaf7",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/paula_readers_song.h"
+    },
+    "source/src/editor/project_snapshot.h": {
+      "bytes": 1203,
+      "sha256": "dbb1206c1e8bfd317b515086f9d064c6eacd2450228893bb394f278ed6c0b2df",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/project_snapshot.h"
+    },
+    "source/src/editor/sampler.c": {
+      "bytes": 61777,
+      "sha256": "c12592eda47b39b5a7792061c9f94b38e510ea8d018899b8541d58a66ee05819",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/sampler.c"
+    },
+    "source/src/editor/sampler.h": {
+      "bytes": 6264,
+      "sha256": "d19465c8b3866cfb67cfaca98457c2201165675cc3a4f45804d3c00b17284433",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/sampler.h"
+    },
+    "source/src/editor/sampler_internal.h": {
+      "bytes": 3679,
+      "sha256": "8ce04909cd657d0caa6598416cfce2ee91109bf8fde782fc7795d35b116ac3e2",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/sampler_internal.h"
+    },
+    "source/src/editor/sampler_paula.c": {
+      "bytes": 7401,
+      "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/sampler_paula.c"
+    },
+    "source/src/editor/sampler_paula.h": {
+      "bytes": 2718,
+      "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/sampler_paula.h"
+    },
+    "source/src/editor/sampler_paula_internal.h": {
+      "bytes": 3013,
+      "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/sampler_paula_internal.h"
+    },
+    "source/src/editor/sampler_paula_readers.c": {
+      "bytes": 45259,
+      "sha256": "63a92310c3e4949b7807ddc9d65b3c525698ad40f5c810ec0238c619204f84ff",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/sampler_paula_readers.c"
+    },
+    "source/src/editor/sampler_paula_readers.h": {
+      "bytes": 9761,
+      "sha256": "c59fb4022270b6880ef3a430859ee064436f6f1bf4ba3674f546e958ceddc85c",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/sampler_paula_readers.h"
+    },
+    "source/src/editor/sampler_workflow.h": {
+      "bytes": 4356,
+      "sha256": "a1eff0addfd1fded1185029f68bd9d6d885d5a421b702b40f76cb28af63fac1a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/sampler_workflow.h"
+    },
+    "source/src/editor/slots.c": {
+      "bytes": 3233,
+      "sha256": "60ab6a784d4bc47285bb436b975cdd6ee0bad4743bdf9f0817837d818645f7fa",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/slots.c"
+    },
+    "source/src/native/master_memory.h": {
+      "bytes": 1694,
+      "sha256": "ac898368849ec2d1892717d425b90c398da37a8799d536366a898e2e219e184a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/native/master_memory.h"
+    },
+    "source/src/native/paula_memory.h": {
+      "bytes": 1036,
+      "sha256": "c547e70bfb300a25b737eeb16f3ac83a65ef20b1a0c6e42d5564cd2e700f098b",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/native/paula_memory.h"
+    },
+    "source/tests/native_exec_memory.h": {
+      "bytes": 1506,
+      "sha256": "ce0f2b696ce7767c0da8a2a44ac7730bc207f81e4f6b86bfd172353989e664b9",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/tests/native_exec_memory.h"
+    },
+    "source/tests/native_exec_paula_readers_song_compact_test.c": {
+      "bytes": 1748,
+      "sha256": "4d155819a585d65e8348edb95431b48e1cbb23a3b6979c470aa52f33ce5ed4ae",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/tests/native_exec_paula_readers_song_compact_test.c"
+    },
+    "source/tests/paula_readers_song_compact_test.c": {
+      "bytes": 27698,
+      "sha256": "939001fd147e955acdf4922e003da56b2dca64cfdcae58b31bfc94cc2784d3a3",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/tests/paula_readers_song_compact_test.c"
+    },
+    "source/tests/test_paula_readers_song_compact.py": {
+      "bytes": 1785,
+      "sha256": "8f67d86337b109b56d7ac7d7bfab2768bf3b4a4f411d7873ec75917961cd3e4b",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/tests/test_paula_readers_song_compact.py"
+    },
+    "source/tools/build_core_tests.py": {
+      "bytes": 39656,
+      "sha256": "7ce83c91408a6192774ed779335d4c04e4e78229321cfa9d5d1f8af03b035069",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/tools/build_core_tests.py"
+    },
+    "source/tools/build_diagnostic.py": {
+      "bytes": 5879,
+      "sha256": "a5a42c8a811eb4e5ce744157afd2715de8f4c9c7d392b3b7b40f1dc6f459a805",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/tools/build_diagnostic.py"
+    },
+    "stack-preparation/compact-annotation-plan-v1.json": {
+      "bytes": 56256,
+      "sha256": "2a57af85cd6bad1c404ec4a05e435c04202164f71c1ca595d92dc65d58d049eb",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/stack-preparation/compact-annotation-plan-v1.json"
+    }
+  },
+  "path_members": {
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/SAMPLE_MEMORY.compact-final-draft.md": "controls/SAMPLE_MEMORY.compact-final-draft.md",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/SAMPLE_MEMORY.updated-draft-v2.md": "controls/SAMPLE_MEMORY.updated-draft-v2.md",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/approved-host-controls-v2.json": "controls/approved-host-controls-v2.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/approved-host-controls-v3.json": "controls/approved-host-controls-v3.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/approved-native-controls-v3.json": "controls/approved-native-controls-v3.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/before-state.json": "controls/before-state.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/amigus_reservation.h": "source/src/core/amigus_reservation.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/amigus_sample_ram.h": "source/src/core/amigus_sample_ram.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/amigus_wavetable_cache.h": "source/src/core/amigus_wavetable_cache.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/channels.c": "source/src/core/channels.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/channels.h": "source/src/core/channels.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/document.c": "source/src/core/document.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/document.h": "source/src/core/document.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/elapsed_clock.c": "source/src/core/elapsed_clock.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/elapsed_clock.h": "source/src/core/elapsed_clock.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/flow.c": "source/src/core/flow.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/flow.h": "source/src/core/flow.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/frame_clock.c": "source/src/core/frame_clock.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/frame_clock.h": "source/src/core/frame_clock.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/mod_inspect.c": "source/src/core/mod_inspect.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/mod_inspect.h": "source/src/core/mod_inspect.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/mod_project.c": "source/src/core/mod_project.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/mod_project.h": "source/src/core/mod_project.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pattern.c": "source/src/core/pattern.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pattern.h": "source/src/core/pattern.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/paula_render_voice.c": "source/src/core/paula_render_voice.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/paula_render_voice.h": "source/src/core/paula_render_voice.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pcm.c": "source/src/core/pcm.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pcm.h": "source/src/core/pcm.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pcm_filtered.c": "source/src/core/pcm_filtered.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pcm_internal.h": "source/src/core/pcm_internal.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pitch.c": "source/src/core/pitch.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pitch.h": "source/src/core/pitch.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pitch_tables.h": "source/src/core/pitch_tables.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/playback_internal.h": "source/src/core/playback_internal.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/playback_pcm.c": "source/src/core/playback_pcm.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/playback_pcm.h": "source/src/core/playback_pcm.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pp20.c": "source/src/core/pp20.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/pp20.h": "source/src/core/pp20.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/project.c": "source/src/core/project.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/project.h": "source/src/core/project.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/raw.c": "source/src/core/raw.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/raw.h": "source/src/core/raw.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/render.c": "source/src/core/render.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/render.h": "source/src/core/render.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/render_commands.h": "source/src/core/render_commands.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/render_lookahead.h": "source/src/core/render_lookahead.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/sample_cache.c": "source/src/core/sample_cache.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/sample_cache.h": "source/src/core/sample_cache.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/sample_usage.h": "source/src/core/sample_usage.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/scheduled_output.h": "source/src/core/scheduled_output.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/scheduled_readers.c": "source/src/core/scheduled_readers.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/scheduled_readers.h": "source/src/core/scheduled_readers.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/sinc_kernel.h": "source/src/core/sinc_kernel.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/slices.c": "source/src/core/slices.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/slices.h": "source/src/core/slices.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/svx.c": "source/src/core/svx.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/svx.h": "source/src/core/svx.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/timeline.c": "source/src/core/timeline.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/timeline.h": "source/src/core/timeline.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/voice.c": "source/src/core/voice.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/voice.h": "source/src/core/voice.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/voice_internal.h": "source/src/core/voice_internal.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/wav.c": "source/src/core/wav.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/core/wav.h": "source/src/core/wav.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/paula_preflight.c": "source/src/editor/paula_preflight.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/paula_preflight.h": "source/src/editor/paula_preflight.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/paula_readers_song.c": "source/src/editor/paula_readers_song.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/paula_readers_song.h": "source/src/editor/paula_readers_song.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/project_snapshot.h": "source/src/editor/project_snapshot.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/sampler.c": "source/src/editor/sampler.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/sampler.h": "source/src/editor/sampler.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/sampler_internal.h": "source/src/editor/sampler_internal.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/sampler_paula.c": "source/src/editor/sampler_paula.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/sampler_paula.h": "source/src/editor/sampler_paula.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/sampler_paula_internal.h": "source/src/editor/sampler_paula_internal.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/sampler_paula_readers.c": "source/src/editor/sampler_paula_readers.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/sampler_paula_readers.h": "source/src/editor/sampler_paula_readers.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/sampler_workflow.h": "source/src/editor/sampler_workflow.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/editor/slots.c": "source/src/editor/slots.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/native/master_memory.h": "source/src/native/master_memory.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/src/native/paula_memory.h": "source/src/native/paula_memory.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/tests/native_exec_memory.h": "source/tests/native_exec_memory.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/tests/native_exec_paula_readers_song_compact_test.c": "source/tests/native_exec_paula_readers_song_compact_test.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/tests/paula_readers_song_compact_test.c": "source/tests/paula_readers_song_compact_test.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/tests/test_paula_readers_song_compact.py": "source/tests/test_paula_readers_song_compact.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/tools/build_core_tests.py": "source/tools/build_core_tests.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate-v3/tools/build_diagnostic.py": "source/tools/build_diagnostic.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate/tests/native_exec_paula_readers_song_compact_test.c": "failed-v2-source/tests/native_exec_paula_readers_song_compact_test.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate/tests/paula_readers_song_compact_test.c": "failed-v2-source/tests/paula_readers_song_compact_test.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/candidate/tests/test_paula_readers_song_compact.py": "failed-v2-source/tests/test_paula_readers_song_compact.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/frozen-source-v2.json": "controls/frozen-source-v2.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/frozen-source-v3.json": "controls/frozen-source-v3.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-driver-stderr-v2.txt": "controls/host-driver-stderr-v2.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-driver-stderr-v3.txt": "controls/host-driver-stderr-v3.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-driver-stdout-v2.txt": "controls/host-driver-stdout-v2.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-driver-stdout-v3.txt": "controls/host-driver-stdout-v3.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-execution-v2.json": "controls/host-execution-v2.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-execution-v3.json": "controls/host-execution-v3.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-00.txt": "host-final-v2/c001-dependencies-00.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-01.txt": "host-final-v2/c001-dependencies-01.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-02.txt": "host-final-v2/c001-dependencies-02.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-03.txt": "host-final-v2/c001-dependencies-03.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-04.txt": "host-final-v2/c001-dependencies-04.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-05.txt": "host-final-v2/c001-dependencies-05.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-06.txt": "host-final-v2/c001-dependencies-06.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-07.txt": "host-final-v2/c001-dependencies-07.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-08.txt": "host-final-v2/c001-dependencies-08.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-09.txt": "host-final-v2/c001-dependencies-09.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-10.txt": "host-final-v2/c001-dependencies-10.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-11.txt": "host-final-v2/c001-dependencies-11.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-12.txt": "host-final-v2/c001-dependencies-12.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-13.txt": "host-final-v2/c001-dependencies-13.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-14.txt": "host-final-v2/c001-dependencies-14.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-15.txt": "host-final-v2/c001-dependencies-15.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-16.txt": "host-final-v2/c001-dependencies-16.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-17.txt": "host-final-v2/c001-dependencies-17.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-18.txt": "host-final-v2/c001-dependencies-18.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-19.txt": "host-final-v2/c001-dependencies-19.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-20.txt": "host-final-v2/c001-dependencies-20.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-21.txt": "host-final-v2/c001-dependencies-21.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-22.txt": "host-final-v2/c001-dependencies-22.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-23.txt": "host-final-v2/c001-dependencies-23.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-24.txt": "host-final-v2/c001-dependencies-24.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-25.txt": "host-final-v2/c001-dependencies-25.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-26.txt": "host-final-v2/c001-dependencies-26.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-27.txt": "host-final-v2/c001-dependencies-27.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-28.txt": "host-final-v2/c001-dependencies-28.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-dependencies-29.txt": "host-final-v2/c001-dependencies-29.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c001-product.log": "host-final-v2/c001-product.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/c002-product.log": "host-final-v2/c002-product.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/host-checks.json": "host-final-v2/host-checks.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/host-checks.log": "host-final-v2/host-checks.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v2/products/c001-executable-94dfea106e797186-test": "host-final-v2/products/c001-executable-94dfea106e797186-test",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-00.txt": "host-final-v3/c001-dependencies-00.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-01.txt": "host-final-v3/c001-dependencies-01.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-02.txt": "host-final-v3/c001-dependencies-02.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-03.txt": "host-final-v3/c001-dependencies-03.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-04.txt": "host-final-v3/c001-dependencies-04.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-05.txt": "host-final-v3/c001-dependencies-05.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-06.txt": "host-final-v3/c001-dependencies-06.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-07.txt": "host-final-v3/c001-dependencies-07.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-08.txt": "host-final-v3/c001-dependencies-08.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-09.txt": "host-final-v3/c001-dependencies-09.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-10.txt": "host-final-v3/c001-dependencies-10.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-11.txt": "host-final-v3/c001-dependencies-11.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-12.txt": "host-final-v3/c001-dependencies-12.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-13.txt": "host-final-v3/c001-dependencies-13.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-14.txt": "host-final-v3/c001-dependencies-14.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-15.txt": "host-final-v3/c001-dependencies-15.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-16.txt": "host-final-v3/c001-dependencies-16.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-17.txt": "host-final-v3/c001-dependencies-17.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-18.txt": "host-final-v3/c001-dependencies-18.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-19.txt": "host-final-v3/c001-dependencies-19.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-20.txt": "host-final-v3/c001-dependencies-20.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-21.txt": "host-final-v3/c001-dependencies-21.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-22.txt": "host-final-v3/c001-dependencies-22.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-23.txt": "host-final-v3/c001-dependencies-23.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-24.txt": "host-final-v3/c001-dependencies-24.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-25.txt": "host-final-v3/c001-dependencies-25.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-26.txt": "host-final-v3/c001-dependencies-26.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-27.txt": "host-final-v3/c001-dependencies-27.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-28.txt": "host-final-v3/c001-dependencies-28.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-dependencies-29.txt": "host-final-v3/c001-dependencies-29.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c001-product.log": "host-final-v3/c001-product.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/c002-product.log": "host-final-v3/c002-product.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/host-checks.json": "host-final-v3/host-checks.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/host-checks.log": "host-final-v3/host-checks.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-final-v3/products/c001-executable-dfe385bf61a6f7a9-test": "host-final-v3/products/c001-executable-dfe385bf61a6f7a9-test",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-tools-v1/host_provenance.py": "host-tools-v1/host_provenance.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-tools-v1/provenance_common.py": "host-tools-v1/provenance_common.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/host-tools-v1/toolchain-pins.json": "host-tools-v1/toolchain-pins.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/independent-compact-host-failure-review-v2.json": "controls/independent-compact-host-failure-review-v2.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/independent-compact-host-review-v3.json": "controls/independent-compact-host-review-v3.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/independent-compact-source-correction-review-v3.json": "controls/independent-compact-source-correction-review-v3.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/independent-compact-source-review-v2.json": "controls/independent-compact-source-review-v2.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/independent-sample-memory-overlay-review-v2.json": "controls/independent-sample-memory-overlay-review-v2.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/independent-saved-native-assert-count-clarification-v1.json": "controls/independent-saved-native-assert-count-clarification-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/independent-saved-native-proof-review-v3.json": "controls/independent-saved-native-proof-review-v3.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-assert-count-clarification-v1.json": "controls/native-assert-count-clarification-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-driver-stderr-v3.txt": "controls/native-driver-stderr-v3.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-driver-stdout-v3.txt": "controls/native-driver-stdout-v3.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-execution-v3.json": "controls/native-execution-v3.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/PTPaulaReadersSongCompactTest": "native-final-v3/PTPaulaReadersSongCompactTest",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/PTPaulaReadersSongCompactTest.build.log": "native-final-v3/PTPaulaReadersSongCompactTest.build.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/compile-commands.json": "native-final-v3/compile-commands.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/compiler-target-help.log": "native-final-v3/compiler-target-help.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/compiler-version.log": "native-final-v3/compiler-version.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-00.log": "native-final-v3/dependencies-00.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-01.log": "native-final-v3/dependencies-01.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-02.log": "native-final-v3/dependencies-02.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-03.log": "native-final-v3/dependencies-03.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-04.log": "native-final-v3/dependencies-04.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-05.log": "native-final-v3/dependencies-05.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-06.log": "native-final-v3/dependencies-06.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-07.log": "native-final-v3/dependencies-07.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-08.log": "native-final-v3/dependencies-08.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-09.log": "native-final-v3/dependencies-09.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-10.log": "native-final-v3/dependencies-10.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-11.log": "native-final-v3/dependencies-11.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-12.log": "native-final-v3/dependencies-12.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-13.log": "native-final-v3/dependencies-13.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-14.log": "native-final-v3/dependencies-14.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-15.log": "native-final-v3/dependencies-15.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-16.log": "native-final-v3/dependencies-16.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-17.log": "native-final-v3/dependencies-17.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-18.log": "native-final-v3/dependencies-18.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-19.log": "native-final-v3/dependencies-19.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-20.log": "native-final-v3/dependencies-20.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-21.log": "native-final-v3/dependencies-21.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-22.log": "native-final-v3/dependencies-22.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-23.log": "native-final-v3/dependencies-23.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-24.log": "native-final-v3/dependencies-24.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-25.log": "native-final-v3/dependencies-25.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-26.log": "native-final-v3/dependencies-26.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-27.log": "native-final-v3/dependencies-27.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-28.log": "native-final-v3/dependencies-28.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/dependencies-29.log": "native-final-v3/dependencies-29.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/manifest.json": "native-final-v3/manifest.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/preprocessed-fixture.log": "native-final-v3/preprocessed-fixture.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/runtime-libamiga-a.log": "native-final-v3/runtime-libamiga-a.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/runtime-libgcc-a.log": "native-final-v3/runtime-libgcc-a.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/runtime-libnix-a.log": "native-final-v3/runtime-libnix-a.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/runtime-libnix20-a.log": "native-final-v3/runtime-libnix20-a.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/runtime-libnixmain-a.log": "native-final-v3/runtime-libnixmain-a.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/runtime-libstubs-a.log": "native-final-v3/runtime-libstubs-a.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-final-v3/runtime-ncrt0-o.log": "native-final-v3/runtime-ncrt0-o.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-preparation/PTPaulaReadersSongCompactTest-contract-v2.json": "native-preparation/PTPaulaReadersSongCompactTest-contract-v2.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-preparation/build_song_readers_compact_portability.py": "native-preparation/build_song_readers_compact_portability.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-preparation/build_song_readers_compact_portability_v2.py": "native-preparation/build_song_readers_compact_portability_v2.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-preparation/compact-helper-preparation-v1.json": "native-preparation/compact-helper-preparation-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-preparation/compact-helper-source-binding-source-v2.json": "native-preparation/compact-helper-source-binding-source-v2.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-preparation/compact-helper-source-binding-source-v3.json": "native-preparation/compact-helper-source-binding-source-v3.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-preparation/compact-helper-source-binding-v2.json": "native-preparation/compact-helper-source-binding-v2.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-preparation/compact-helper-source-binding-v2.patch": "native-preparation/compact-helper-source-binding-v2.patch",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-preparation/origin-build_song_readers_workspace_portability.py": "native-preparation/origin-build_song_readers_workspace_portability.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-preparation/toolchain-pins.json": "native-preparation/toolchain-pins.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/native-saved-reader-assumption-refusal-v1.json": "controls/native-saved-reader-assumption-refusal-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/root-host-v2-failure-classification.json": "controls/root-host-v2-failure-classification.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/root-saved-host-v3-review.json": "controls/root-saved-host-v3-review.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/root-saved-native-v3-review.json": "controls/root-saved-native-v3-review.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/run_compact_host_once_v2.py": "controls/run_compact_host_once_v2.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/run_compact_host_once_v3.py": "controls/run_compact_host_once_v3.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/run_compact_native_once_v3.py": "controls/run_compact_native_once_v3.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/source-revision-v3/ceiling-boundary-oracle-v3.patch": "source-revision-v3/ceiling-boundary-oracle-v3.patch",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/source-revision-v3/source-only-correction-v3.json": "source-revision-v3/source-only-correction-v3.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/source-revision-v3/source-seal-v3.json": "source-revision-v3/source-seal-v3.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/source-revision-v3/tests/native_exec_paula_readers_song_compact_test.c": "source-revision-v3/tests/native_exec_paula_readers_song_compact_test.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/source-revision-v3/tests/paula_readers_song_compact_test.c": "source-revision-v3/tests/paula_readers_song_compact_test.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/source-revision-v3/tests/test_paula_readers_song_compact.py": "source-revision-v3/tests/test_paula_readers_song_compact.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-compact-8iftv2vr/stack-preparation/compact-annotation-plan-v1.json": "stack-preparation/compact-annotation-plan-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/source-and-stack-plan-v1.json": "author-v1/source-and-stack-plan-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/source-revision-v2/dedicated-allocation-context-v2.patch": "author-v2/dedicated-allocation-context-v2.patch",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/source-revision-v2/source-only-refinement-v2.json": "author-v2/source-only-refinement-v2.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/source-revision-v2/source-seal-v2.json": "author-v2/source-seal-v2.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/source-revision-v2/tests/native_exec_paula_readers_song_compact_test.c": "author-v2/tests/native_exec_paula_readers_song_compact_test.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/source-revision-v2/tests/paula_readers_song_compact_test.c": "author-v2/tests/paula_readers_song_compact_test.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/source-revision-v2/tests/test_paula_readers_song_compact.py": "author-v2/tests/test_paula_readers_song_compact.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/source-seal-v1.json": "author-v1/source-seal-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/tests/native_exec_paula_readers_song_compact_test.c": "author-v1/tests/native_exec_paula_readers_song_compact_test.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/tests/paula_readers_song_compact_test.c": "author-v1/tests/paula_readers_song_compact_test.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/song-workspace-1nyr8qlf/next-native-compact-draft/tests/test_paula_readers_song_compact.py": "author-v1/tests/test_paula_readers_song_compact.py",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-00.txt": "host-final-v2/c001-dependencies-00.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-01.txt": "host-final-v2/c001-dependencies-01.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-02.txt": "host-final-v2/c001-dependencies-02.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-03.txt": "host-final-v2/c001-dependencies-03.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-04.txt": "host-final-v2/c001-dependencies-04.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-05.txt": "host-final-v2/c001-dependencies-05.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-06.txt": "host-final-v2/c001-dependencies-06.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-07.txt": "host-final-v2/c001-dependencies-07.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-08.txt": "host-final-v2/c001-dependencies-08.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-09.txt": "host-final-v2/c001-dependencies-09.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-10.txt": "host-final-v2/c001-dependencies-10.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-11.txt": "host-final-v2/c001-dependencies-11.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-12.txt": "host-final-v2/c001-dependencies-12.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-13.txt": "host-final-v2/c001-dependencies-13.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-14.txt": "host-final-v2/c001-dependencies-14.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-15.txt": "host-final-v2/c001-dependencies-15.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-16.txt": "host-final-v2/c001-dependencies-16.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-17.txt": "host-final-v2/c001-dependencies-17.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-18.txt": "host-final-v2/c001-dependencies-18.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-19.txt": "host-final-v2/c001-dependencies-19.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-20.txt": "host-final-v2/c001-dependencies-20.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-21.txt": "host-final-v2/c001-dependencies-21.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-22.txt": "host-final-v2/c001-dependencies-22.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-23.txt": "host-final-v2/c001-dependencies-23.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-24.txt": "host-final-v2/c001-dependencies-24.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-25.txt": "host-final-v2/c001-dependencies-25.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-26.txt": "host-final-v2/c001-dependencies-26.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-27.txt": "host-final-v2/c001-dependencies-27.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-28.txt": "host-final-v2/c001-dependencies-28.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-dependencies-29.txt": "host-final-v2/c001-dependencies-29.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c001-product.log": "host-final-v2/c001-product.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/c002-product.log": "host-final-v2/c002-product.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/host-checks.json": "host-final-v2/host-checks.json",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/host-checks.log": "host-final-v2/host-checks.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v2/products/c001-executable-94dfea106e797186-test": "host-final-v2/products/c001-executable-94dfea106e797186-test",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-00.txt": "host-final-v3/c001-dependencies-00.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-01.txt": "host-final-v3/c001-dependencies-01.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-02.txt": "host-final-v3/c001-dependencies-02.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-03.txt": "host-final-v3/c001-dependencies-03.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-04.txt": "host-final-v3/c001-dependencies-04.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-05.txt": "host-final-v3/c001-dependencies-05.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-06.txt": "host-final-v3/c001-dependencies-06.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-07.txt": "host-final-v3/c001-dependencies-07.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-08.txt": "host-final-v3/c001-dependencies-08.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-09.txt": "host-final-v3/c001-dependencies-09.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-10.txt": "host-final-v3/c001-dependencies-10.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-11.txt": "host-final-v3/c001-dependencies-11.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-12.txt": "host-final-v3/c001-dependencies-12.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-13.txt": "host-final-v3/c001-dependencies-13.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-14.txt": "host-final-v3/c001-dependencies-14.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-15.txt": "host-final-v3/c001-dependencies-15.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-16.txt": "host-final-v3/c001-dependencies-16.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-17.txt": "host-final-v3/c001-dependencies-17.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-18.txt": "host-final-v3/c001-dependencies-18.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-19.txt": "host-final-v3/c001-dependencies-19.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-20.txt": "host-final-v3/c001-dependencies-20.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-21.txt": "host-final-v3/c001-dependencies-21.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-22.txt": "host-final-v3/c001-dependencies-22.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-23.txt": "host-final-v3/c001-dependencies-23.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-24.txt": "host-final-v3/c001-dependencies-24.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-25.txt": "host-final-v3/c001-dependencies-25.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-26.txt": "host-final-v3/c001-dependencies-26.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-27.txt": "host-final-v3/c001-dependencies-27.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-28.txt": "host-final-v3/c001-dependencies-28.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-dependencies-29.txt": "host-final-v3/c001-dependencies-29.txt",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c001-product.log": "host-final-v3/c001-product.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/c002-product.log": "host-final-v3/c002-product.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/host-checks.json": "host-final-v3/host-checks.json",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/host-checks.log": "host-final-v3/host-checks.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-host-v3/products/c001-executable-dfe385bf61a6f7a9-test": "host-final-v3/products/c001-executable-dfe385bf61a6f7a9-test",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/PTPaulaReadersSongCompactTest": "native-final-v3/PTPaulaReadersSongCompactTest",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/PTPaulaReadersSongCompactTest.build.log": "native-final-v3/PTPaulaReadersSongCompactTest.build.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/compile-commands.json": "native-final-v3/compile-commands.json",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/compiler-target-help.log": "native-final-v3/compiler-target-help.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/compiler-version.log": "native-final-v3/compiler-version.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-00.log": "native-final-v3/dependencies-00.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-01.log": "native-final-v3/dependencies-01.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-02.log": "native-final-v3/dependencies-02.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-03.log": "native-final-v3/dependencies-03.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-04.log": "native-final-v3/dependencies-04.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-05.log": "native-final-v3/dependencies-05.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-06.log": "native-final-v3/dependencies-06.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-07.log": "native-final-v3/dependencies-07.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-08.log": "native-final-v3/dependencies-08.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-09.log": "native-final-v3/dependencies-09.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-10.log": "native-final-v3/dependencies-10.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-11.log": "native-final-v3/dependencies-11.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-12.log": "native-final-v3/dependencies-12.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-13.log": "native-final-v3/dependencies-13.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-14.log": "native-final-v3/dependencies-14.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-15.log": "native-final-v3/dependencies-15.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-16.log": "native-final-v3/dependencies-16.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-17.log": "native-final-v3/dependencies-17.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-18.log": "native-final-v3/dependencies-18.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-19.log": "native-final-v3/dependencies-19.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-20.log": "native-final-v3/dependencies-20.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-21.log": "native-final-v3/dependencies-21.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-22.log": "native-final-v3/dependencies-22.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-23.log": "native-final-v3/dependencies-23.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-24.log": "native-final-v3/dependencies-24.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-25.log": "native-final-v3/dependencies-25.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-26.log": "native-final-v3/dependencies-26.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-27.log": "native-final-v3/dependencies-27.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-28.log": "native-final-v3/dependencies-28.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/dependencies-29.log": "native-final-v3/dependencies-29.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/manifest.json": "native-final-v3/manifest.json",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/preprocessed-fixture.log": "native-final-v3/preprocessed-fixture.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/runtime-libamiga-a.log": "native-final-v3/runtime-libamiga-a.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/runtime-libgcc-a.log": "native-final-v3/runtime-libgcc-a.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/runtime-libnix-a.log": "native-final-v3/runtime-libnix-a.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/runtime-libnix20-a.log": "native-final-v3/runtime-libnix20-a.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/runtime-libnixmain-a.log": "native-final-v3/runtime-libnixmain-a.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/runtime-libstubs-a.log": "native-final-v3/runtime-libstubs-a.log",
+    "/private/tmp/pt-song-compact-8iftv2vr-native-v3/runtime-ncrt0-o.log": "native-final-v3/runtime-ncrt0-o.log"
+  },
+  "source_members": {
+    "src/core/amigus_reservation.h": "source/src/core/amigus_reservation.h",
+    "src/core/amigus_sample_ram.h": "source/src/core/amigus_sample_ram.h",
+    "src/core/amigus_wavetable_cache.h": "source/src/core/amigus_wavetable_cache.h",
+    "src/core/channels.c": "source/src/core/channels.c",
+    "src/core/channels.h": "source/src/core/channels.h",
+    "src/core/document.c": "source/src/core/document.c",
+    "src/core/document.h": "source/src/core/document.h",
+    "src/core/elapsed_clock.c": "source/src/core/elapsed_clock.c",
+    "src/core/elapsed_clock.h": "source/src/core/elapsed_clock.h",
+    "src/core/flow.c": "source/src/core/flow.c",
+    "src/core/flow.h": "source/src/core/flow.h",
+    "src/core/frame_clock.c": "source/src/core/frame_clock.c",
+    "src/core/frame_clock.h": "source/src/core/frame_clock.h",
+    "src/core/mod_inspect.c": "source/src/core/mod_inspect.c",
+    "src/core/mod_inspect.h": "source/src/core/mod_inspect.h",
+    "src/core/mod_project.c": "source/src/core/mod_project.c",
+    "src/core/mod_project.h": "source/src/core/mod_project.h",
+    "src/core/pattern.c": "source/src/core/pattern.c",
+    "src/core/pattern.h": "source/src/core/pattern.h",
+    "src/core/paula_render_voice.c": "source/src/core/paula_render_voice.c",
+    "src/core/paula_render_voice.h": "source/src/core/paula_render_voice.h",
+    "src/core/pcm.c": "source/src/core/pcm.c",
+    "src/core/pcm.h": "source/src/core/pcm.h",
+    "src/core/pcm_filtered.c": "source/src/core/pcm_filtered.c",
+    "src/core/pcm_internal.h": "source/src/core/pcm_internal.h",
+    "src/core/pitch.c": "source/src/core/pitch.c",
+    "src/core/pitch.h": "source/src/core/pitch.h",
+    "src/core/pitch_tables.h": "source/src/core/pitch_tables.h",
+    "src/core/playback_internal.h": "source/src/core/playback_internal.h",
+    "src/core/playback_pcm.c": "source/src/core/playback_pcm.c",
+    "src/core/playback_pcm.h": "source/src/core/playback_pcm.h",
+    "src/core/pp20.c": "source/src/core/pp20.c",
+    "src/core/pp20.h": "source/src/core/pp20.h",
+    "src/core/project.c": "source/src/core/project.c",
+    "src/core/project.h": "source/src/core/project.h",
+    "src/core/raw.c": "source/src/core/raw.c",
+    "src/core/raw.h": "source/src/core/raw.h",
+    "src/core/render.c": "source/src/core/render.c",
+    "src/core/render.h": "source/src/core/render.h",
+    "src/core/render_commands.h": "source/src/core/render_commands.h",
+    "src/core/render_lookahead.h": "source/src/core/render_lookahead.h",
+    "src/core/sample_cache.c": "source/src/core/sample_cache.c",
+    "src/core/sample_cache.h": "source/src/core/sample_cache.h",
+    "src/core/sample_usage.h": "source/src/core/sample_usage.h",
+    "src/core/scheduled_output.h": "source/src/core/scheduled_output.h",
+    "src/core/scheduled_readers.c": "source/src/core/scheduled_readers.c",
+    "src/core/scheduled_readers.h": "source/src/core/scheduled_readers.h",
+    "src/core/sinc_kernel.h": "source/src/core/sinc_kernel.h",
+    "src/core/slices.c": "source/src/core/slices.c",
+    "src/core/slices.h": "source/src/core/slices.h",
+    "src/core/svx.c": "source/src/core/svx.c",
+    "src/core/svx.h": "source/src/core/svx.h",
+    "src/core/timeline.c": "source/src/core/timeline.c",
+    "src/core/timeline.h": "source/src/core/timeline.h",
+    "src/core/voice.c": "source/src/core/voice.c",
+    "src/core/voice.h": "source/src/core/voice.h",
+    "src/core/voice_internal.h": "source/src/core/voice_internal.h",
+    "src/core/wav.c": "source/src/core/wav.c",
+    "src/core/wav.h": "source/src/core/wav.h",
+    "src/editor/paula_preflight.c": "source/src/editor/paula_preflight.c",
+    "src/editor/paula_preflight.h": "source/src/editor/paula_preflight.h",
+    "src/editor/paula_readers_song.c": "source/src/editor/paula_readers_song.c",
+    "src/editor/paula_readers_song.h": "source/src/editor/paula_readers_song.h",
+    "src/editor/project_snapshot.h": "source/src/editor/project_snapshot.h",
+    "src/editor/sampler.c": "source/src/editor/sampler.c",
+    "src/editor/sampler.h": "source/src/editor/sampler.h",
+    "src/editor/sampler_internal.h": "source/src/editor/sampler_internal.h",
+    "src/editor/sampler_paula.c": "source/src/editor/sampler_paula.c",
+    "src/editor/sampler_paula.h": "source/src/editor/sampler_paula.h",
+    "src/editor/sampler_paula_internal.h": "source/src/editor/sampler_paula_internal.h",
+    "src/editor/sampler_paula_readers.c": "source/src/editor/sampler_paula_readers.c",
+    "src/editor/sampler_paula_readers.h": "source/src/editor/sampler_paula_readers.h",
+    "src/editor/sampler_workflow.h": "source/src/editor/sampler_workflow.h",
+    "src/editor/slots.c": "source/src/editor/slots.c",
+    "src/native/master_memory.h": "source/src/native/master_memory.h",
+    "src/native/paula_memory.h": "source/src/native/paula_memory.h",
+    "tests/native_exec_memory.h": "source/tests/native_exec_memory.h",
+    "tests/native_exec_paula_readers_song_compact_test.c": "source/tests/native_exec_paula_readers_song_compact_test.c",
+    "tests/paula_readers_song_compact_test.c": "source/tests/paula_readers_song_compact_test.c",
+    "tests/test_paula_readers_song_compact.py": "source/tests/test_paula_readers_song_compact.py",
+    "tools/build_core_tests.py": "source/tools/build_core_tests.py",
+    "tools/build_diagnostic.py": "source/tools/build_diagnostic.py"
+  },
+  "source_manifest": "controls/frozen-source-v3.json",
+  "host_proof": "host-final-v3/host-checks.json",
+  "native_proof": "native-final-v3/manifest.json",
+  "failed_host_proof": "host-final-v2/host-checks.json",
+  "host_runtime_lines": [
+    "COMPACT SONG mono8 PASS: scratch released; original frame grid; 2 controls; STOP; independent domains; steps=212",
+    "COMPACT SONG mono16 PASS: scratch released; original frame grid; 2 controls; STOP; independent domains; steps=212",
+    "COMPACT SONG mono24 PASS: scratch released; original frame grid; 2 controls; STOP; independent domains; steps=212",
+    "COMPACT SONG budget/cancel PASS: no backend publication or representation allocation",
+    "PAULA READERS SONG COMPACT PASS: caller workspace; genuine same-sequence software ownership; no DMA or hardware timing proof"
+  ],
+  "native_CPP_HUNK_markers": [
+    "COMPACT SONG budget/cancel PASS: no backend publication or representation allocation",
+    "PAULA READERS SONG COMPACT PASS: caller workspace; genuine same-sequence software ownership; no DMA or hardware timing proof",
+    "EXEC COMPACT CHIP PASS: %u Chip-only allocations, zero owned bytes; no DMA"
+  ],
+  "acceptance": {
+    "host": "PASS",
+    "native_build": "PASS",
+    "native_execution": "NOT_RUN",
+    "emulator": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "launcher_65536": "NOT_CLEARED",
+    "total_stack": "UNKNOWN",
+    "annotation_plan": "PREPARED_NOT_RUN",
+    "audio": "NOT_TESTED",
+    "timing": "NOT_TESTED"
+  },
+  "history": "V1 author/source-only and V2 source-only refinement preserved; V2 actual host SIGABRT retained; only V3 oracle correction executed. No production delta. Reader expectation refusals do not change the original native compiler PASS."
+}

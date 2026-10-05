@@ -1,0 +1,11 @@
+This packet preserves the optional copied-value activation ledger, public-only genuine host fixture and exact saved evidence. The core ABI2 queue and original scheduling windows are unchanged. A separately qualified autonomous port is required; no native activation port is implemented or qualified here.
+
+The first successful host revision passed one ASan/UBSan group, two compile/runtime commands and 32 full dependency queries. It exercised genuine immutable mono8/16/24 master/preflight/workspace lifecycles, four original readers, 24 continuing controls and independent shutdown in a software model. The separate first native build passed 43 compiler/link commands with 32 translation units; its HUNK was never run. The required original+durable files, compiled source/SDK/tool/runtime bytes, actual reviews and assertion/full-marker evidence are retained.
+
+The original first compiler failure, subsequent fixture runtime abort, authored V1–V4 corrections and native pre-dispatch preparation refusal remain separate. The refusal launched no compiler. The failed abort ordinal was not logged; the saved source diagnosis is an inference. Current success never replaces those original records.
+
+Final documentation overlays are stored separately from the immutable compiled source map. Only the compiled source closure and clean recipe references are in source_members; full source inventories are hash maps, not an assertion that all 8152 source files are embedded.
+
+Run verify.py only as a saved-byte reader. It does not extract files, import build/test helpers, compile, run products, or access targets. It validates the archive bindings and retained scope; the independently authored saved-proof reviews carry the fuller command/query reconstruction. No native execution, emulator, physical device, IRQ/WCET, DMA/audio/listening or native memory-placement result is established. Aggregate stack is UNKNOWN and a 65536-byte launcher is NOT_CLEARED. Caller synchronization, clock honesty and the injected port's all-or-none guarantees still require separate qualification.
+
+Offline SDK checks bind archived full-query outputs, resolved dependency maps and saved reviews. This reader does not reconstruct the original filesystem’s lexical-to-resolved SDK path mapping.

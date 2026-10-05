@@ -214,6 +214,38 @@ stop/order/completion/timing/audio/listening remain separate unfinished work.
 See [registration contract](READERS_BACKEND_REGISTRATION.md) and
 [saved evidence](../evidence/enhanced-editor/readers-backend-registration/README.md).
 
+## Optional copied activation backend — 5 October 2026
+
+A separate opt-in ABI2 `readers_activation` backend now copies prepared commands,
+original absolute frame windows and all four expected voice keys into fixed
+two-command/eight-reader/four-slot storage. One ledger serves one publishing queue.
+Actual activation traverses no original event, domain, metadata vector or holder
+and calls no core queue or owner callback. It checks the entire expected registry
+and actual clock before effects, then requires positive whole-batch adoption and
+a still-valid actual clock after effects. Early observation retains the original
+window; late, partial, uncertain or changed-key/frequency results fail while
+preserving possible owners. No immediate start, catch-up or rebase is approved.
+
+Command detachment and reader retirement remain independently proved; replacement
+and STOP never free old readers merely by slot or command completion. Close
+requires all copied API queues and autonomous callback sources to end first,
+including empty queues. A separately qualified injected port remains required.
+Capability declarations and a software-model commit are not native qualification.
+
+The genuine workspace/master/render fixture passes once under ASan/UBSan for
+mono8/16/24, 24 controls at two-command capacity, original windows, four-slot
+identity checks, refusal/retry, uncertainty and independent release. Original
+compiler/fixture failures are preserved. The new 32-TU portability build passes
+once and produces a 245,972-byte HUNK, SHA256
+593787f043bf74e4fd11888210b48eb959dda4bb50a353ea7e6bc644a7cd4c15.
+Its assertions and complete software-only footer remain compiled. This ordinary
+malloc model has native/emulator/physical execution NOT_RUN; aggregate stack
+is UNKNOWN and the 65,536-byte launcher NOT_CLEARED. It adds no editor PLAY route,
+autonomous native driver, IRQ/WCET/residency, Fast/Chip placement, Paula DMA,
+AmiGUS sample-RAM capacity/order/completion, exact hardware timing, audio or
+listening acceptance. See [contract](READERS_ACTIVATION.md) and
+[evidence](../evidence/enhanced-editor/readers-activation/README.md).
+
 ## Optional native readers RAM diagnostic — 5 October 2026
 
 A distinct Exec wrapper now builds the unchanged public ABI2 registration fixture

@@ -1,0 +1,18 @@
+{
+  "run_id": "9a686987c5d1754656a69a616793634e",
+  "target": "amiberry-030",
+  "fence": 33,
+  "externally_verified": true,
+  "records": {
+    "authorization": "8662335c1ee7eb6cce61293139fdb0b438e18ab1b30abcaacbf7c630ec9b6a9e",
+    "restoration": "ebd9e255fa57a4e1dc5ce22cf94c799aae85a865006209c5250c4acfe7f5c795",
+    "absence": "a26436cbe90b54201eaabeb69bc292d484631d7ddeca49fd6c6a4de708afce79",
+    "cleanup": "2bc42aece04387e31e3c2ff525de184303f3aedbe5f80c236d7846dd870b71b6"
+  },
+  "facts": {
+    "authorization": true,
+    "restoration": true,
+    "absence": true,
+    "cleanup": true
+  }
+}

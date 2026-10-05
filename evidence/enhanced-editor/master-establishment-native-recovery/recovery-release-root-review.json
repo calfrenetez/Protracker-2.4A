@@ -1,0 +1,6 @@
+{
+  "status": "ROOT_SOURCE_REVIEWED_NOT_EXECUTED",
+  "script_sha256": "aa43c8ef27e393c110afe3d8a54b941ed82404aa6c90efa004af0fface9711f7",
+  "scope": "Explicit approval plus completed exact one-SIGTERM closure required. Independent no-emulator/listener/disconnected/source/custody checks under locks; original HOLD33 exact own lease, four bound records and ordinary release archive toEMPTY34 only. No target requests, retry, forced release/reset or physical action",
+  "kind": "root self review"
+}

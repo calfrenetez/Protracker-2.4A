@@ -1,0 +1,48 @@
+{
+  "files": {
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/emulator.py": {
+      "bytes": 6727,
+      "sha256": "affc09288da935db73a21713a45eed13072988e6783c5839e4175aa39217b242"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/launcher_guard.py": {
+      "bytes": 24567,
+      "sha256": "eea1cb76cf3b9a2bcd13be4fb673d857dd9c013b51891833f85675736de7df14"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/launcher_access.py": {
+      "bytes": 10374,
+      "sha256": "2ebf8503b79ca4c57108cbee52830c1f3ea208c8838831bf6d5b9cca70ba8787"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/launcher_server.py": {
+      "bytes": 22139,
+      "sha256": "c6795792d94a42344cab6ec58eeac1a832132dc00fb0eaf8589f9155f7c4dad7"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/shared_guest.py": {
+      "bytes": 3286,
+      "sha256": "2b3991d33fe39a4fa6945c69e68a12ba721bf932be0301738ba35fdeda1545a0"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/bridge_checks.py": {
+      "bytes": 1521,
+      "sha256": "e68e3a8844b44d1ee07784225a34b665544f91b890643b3f7b38bce35227bbfd"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/mcp-call.py": {
+      "bytes": 1183,
+      "sha256": "8abc72b5e49e7e77d749cae6e3013e5ecfe678cdb40ce4b29531d2541ed60d76"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/config/emulator.json": {
+      "bytes": 504,
+      "sha256": "b2ee225b992d738da64e350fbef9bea4940a04a3f23b37e41d19d0d0d73f2251"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/config/devbench.toml": {
+      "bytes": 823,
+      "sha256": "eddf003461f883082570a0552b70f131fe0940fed88a1c316064ed09f8122bfe"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae": {
+      "bytes": 4828,
+      "sha256": "894aa5a61a2bf6267b461c6774a0bdc913a96e7f581ea7e4e3762c4d71709a30"
+    },
+    "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry": {
+      "bytes": 46443704,
+      "sha256": "0b2011f7b7e5ba5bc60adf6ac925a202bf97f75e97ac5c8192953e784e4acf3d"
+    }
+  }
+}

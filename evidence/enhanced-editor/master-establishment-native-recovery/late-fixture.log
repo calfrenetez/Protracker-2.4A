@@ -1,0 +1,2 @@
+MIXED OWNER PASS: full255 host scenarios, incremental analysis cancellation/failure, master/cache/staging/commit/sequence/deadline/schedule ownership; no native clock
+ESTABLISH PASS:6 mono/stereo8/16/24 exact save/PCM cases;6 owned-master reuse cases;81 cancellation/alias/late-validation/budget/reentry/stale/partial-copy cases;3 actual established mixed handoffs;255 original owner regressions; host callbacks only

@@ -1,0 +1,9 @@
+{
+  "revision": 17,
+  "cursor": "d968e7b1-f556-4768-a35e-e032db61c38d:17",
+  "thread": "01a02122-c34e-72f0-95cc-e36ce3d73629",
+  "peer": "No contention reported in refreshed peer records; Scott and soundcard idle. AmiConnect owns nothing and remains hands-off. Separately approved exact PID32716/HOLD33/run9a686987c5d1754656a69a616793634e recovery scope acknowledged; fresh local guards mandatory. No retry, force kill, reset, guest request, service restart or physical operation.",
+  "humanApproval": "explicit-recovery-approval.json",
+  "atUTC": "2026-10-05T22:19:42.066749+00:00",
+  "priorPendingCoordinationSHA256": "55c80208ff7a58ac1cf29f88601409adaf0c6bc6a7a2cb495dcff19eb642b86a"
+}

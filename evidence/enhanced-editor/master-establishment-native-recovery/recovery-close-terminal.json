@@ -1,0 +1,202 @@
+{
+  "status": "PASS_OWNED_EMULATOR_RECOVERY_HOLD_RETAINED",
+  "sigtermCalls": 1,
+  "forcedKills": 0,
+  "guestRequests": 0,
+  "deletions": 0,
+  "guardReleaseCalls": 0,
+  "atUTC": "2026-10-05T22:19:46.718763+00:00",
+  "guardBefore": {
+    "archives": [
+      {
+        "bytes": 2034,
+        "fence": 5,
+        "name": "release-0000000000000005.json",
+        "sha256": "7f14fb8ffe7df2de1aed8beda774d083c9a717fec97ba575733fe0561422efcb"
+      },
+      {
+        "bytes": 2027,
+        "fence": 10,
+        "name": "release-000000000000000a.json",
+        "sha256": "565d842aadbb4f6ebaaf52143fce4f161da5996606c03adcd679eb1d67e355d3"
+      },
+      {
+        "bytes": 2674,
+        "fence": 18,
+        "name": "release-0000000000000012.json",
+        "sha256": "51040dc9dbe88c4fd07ab0168e154d2d1508b457605373d8fd38b3f12b5c80e8"
+      },
+      {
+        "bytes": 1574,
+        "fence": 28,
+        "name": "release-000000000000001c.json",
+        "sha256": "497beef52132b167956e5a9abfd0da5c60f95309a020b025a4c69f9564a8bb1f"
+      }
+    ],
+    "authorization": {
+      "approved": true,
+      "legacy_holds_verified": true,
+      "mode": "host-provisioning",
+      "record_sha256": "820445ecb68cd63db257e203686d2df63fca2e66f4d6048f59f5939771fce568"
+    },
+    "fence": 33,
+    "holds": [
+      {
+        "fence": 33,
+        "inflight": {
+          "action": "One exact master establishment fixture",
+          "fence": 32,
+          "may_leave_running": true,
+          "target": "amiberry-030"
+        },
+        "reason": "operation raised ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)"
+      }
+    ],
+    "inflight": null,
+    "potential_resident": true,
+    "reservation": {
+      "binding": {
+        "candidateBytes": 291740,
+        "candidateSHA256": "06cb163c7a5fe0c16c92f5e328267ce731d77f3098ecf6a60df3d20b81e43d4a",
+        "evidence": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/master-establishment-next/native-window-v1",
+        "sourceCommit": "67a42a578a8a8e75cd8bd4e5515648641d9d2411"
+      },
+      "controller": "ProTracker root01a0b5ae-c04f-7661-8859-e89df20c3290",
+      "lease": {
+        "run_id": "9a686987c5d1754656a69a616793634e"
+      },
+      "purpose": "Human authorized exact master-establishment software qualification; ACK12",
+      "target": "amiberry-030"
+    },
+    "version": 1,
+    "phase": "HOLD"
+  },
+  "ownedProcess": [
+    32716,
+    "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+  ],
+  "originalFailedResult": {
+    "bytes": 4021,
+    "sha256": "921b61fb3aba9072a550d40c13570a9e31234a5dd3934a242ee4f4df1ad9a91b"
+  },
+  "healthAfter": {
+    "status": "ok",
+    "serial": {
+      "connected": false,
+      "mode": "tcp",
+      "logCount": 77,
+      "varCount": 0,
+      "lastHeartbeat": {
+        "type": "HB",
+        "tick": 213,
+        "freeChip": 1926976,
+        "freeFast": 131651784,
+        "timestamp": "2026-10-05T22:19:43.116007+00:00"
+      },
+      "serialConnectedAt": 1791237579.0085099,
+      "lastBridgeMessageAt": 1791238783.116032,
+      "lastHeartbeatAt": 1791238783.116034,
+      "bridgeSilentSec": 3.9,
+      "host": "127.0.0.1",
+      "port": 2345
+    }
+  },
+  "emulatorAbsent": true,
+  "listenerAbsent": true,
+  "custody": {
+    "original": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/PT-master-establish-20261005-v1",
+    "directory": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/master-establishment-next/native-window-v1/failed-stage-custody",
+    "files": {
+      "complete.flag": {
+        "bytes": 9,
+        "sha256": "a4bccf5c13ef5ff8311e59b34d492bc7072a55298723601a6a9c127053aee8fc"
+      },
+      "Run-once": {
+        "bytes": 208,
+        "sha256": "60cbb6f0f104bcebf54a1332cad3063caf2cc5cfd105f334f76f595578fb8b2c"
+      },
+      "fixture.log": {
+        "bytes": 417,
+        "sha256": "e308a2dff8cfe13bbb65575a61465ac513643d0616230f7a1a2276117c76fceb"
+      },
+      "PTMasterEstablishTest": {
+        "bytes": 291740,
+        "sha256": "06cb163c7a5fe0c16c92f5e328267ce731d77f3098ecf6a60df3d20b81e43d4a"
+      },
+      "launcher.log": {
+        "bytes": 8,
+        "sha256": "fc1b7c019962b238d1a6ada645907789172d70040e961b64ef50e0f42710c35f"
+      },
+      "fixture.rc": {
+        "bytes": 2,
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    }
+  },
+  "guardAfter": {
+    "archives": [
+      {
+        "bytes": 2034,
+        "fence": 5,
+        "name": "release-0000000000000005.json",
+        "sha256": "7f14fb8ffe7df2de1aed8beda774d083c9a717fec97ba575733fe0561422efcb"
+      },
+      {
+        "bytes": 2027,
+        "fence": 10,
+        "name": "release-000000000000000a.json",
+        "sha256": "565d842aadbb4f6ebaaf52143fce4f161da5996606c03adcd679eb1d67e355d3"
+      },
+      {
+        "bytes": 2674,
+        "fence": 18,
+        "name": "release-0000000000000012.json",
+        "sha256": "51040dc9dbe88c4fd07ab0168e154d2d1508b457605373d8fd38b3f12b5c80e8"
+      },
+      {
+        "bytes": 1574,
+        "fence": 28,
+        "name": "release-000000000000001c.json",
+        "sha256": "497beef52132b167956e5a9abfd0da5c60f95309a020b025a4c69f9564a8bb1f"
+      }
+    ],
+    "authorization": {
+      "approved": true,
+      "legacy_holds_verified": true,
+      "mode": "host-provisioning",
+      "record_sha256": "820445ecb68cd63db257e203686d2df63fca2e66f4d6048f59f5939771fce568"
+    },
+    "fence": 33,
+    "holds": [
+      {
+        "fence": 33,
+        "inflight": {
+          "action": "One exact master establishment fixture",
+          "fence": 32,
+          "may_leave_running": true,
+          "target": "amiberry-030"
+        },
+        "reason": "operation raised ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)"
+      }
+    ],
+    "inflight": null,
+    "potential_resident": true,
+    "reservation": {
+      "binding": {
+        "candidateBytes": 291740,
+        "candidateSHA256": "06cb163c7a5fe0c16c92f5e328267ce731d77f3098ecf6a60df3d20b81e43d4a",
+        "evidence": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/master-establishment-next/native-window-v1",
+        "sourceCommit": "67a42a578a8a8e75cd8bd4e5515648641d9d2411"
+      },
+      "controller": "ProTracker root01a0b5ae-c04f-7661-8859-e89df20c3290",
+      "lease": {
+        "run_id": "9a686987c5d1754656a69a616793634e"
+      },
+      "purpose": "Human authorized exact master-establishment software qualification; ACK12",
+      "target": "amiberry-030"
+    },
+    "version": 1,
+    "phase": "HOLD"
+  },
+  "completedUTC": "2026-10-05T22:19:47.082020+00:00"
+}

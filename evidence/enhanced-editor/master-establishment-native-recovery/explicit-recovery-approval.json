@@ -1,0 +1,13 @@
+{
+  "approved": true,
+  "pid": 32716,
+  "fence": 33,
+  "scope": "one SIGTERM, exact failed-stage custody, independent verified release; no candidate rerun or physical action",
+  "human_response": "go ahead",
+  "provenance": "Direct human reply in this task on 5 October 2026 to the concrete prepared recovery question; applies only to root-owned emulator closure and verified HOLD release",
+  "recordedUTC": "2026-10-05T22:19:29.220048+00:00",
+  "scripts": {
+    "recover_owned_once.py": "71c0957a7eaec189c6557ac6e20e1b0b3e64fcace7ca2db82898a8feb96ed53f",
+    "verify_release_once.py": "aa43c8ef27e393c110afe3d8a54b941ed82404aa6c90efa004af0fface9711f7"
+  }
+}

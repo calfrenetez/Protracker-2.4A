@@ -1,0 +1,39 @@
+{
+  "sigtermCalls": 1,
+  "forcedKills": 0,
+  "deletions": 0,
+  "failedStageCustody": {
+    "original": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/PT-master-establish-20261005-v1",
+    "directory": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/master-establishment-next/native-window-v1/failed-stage-custody",
+    "files": {
+      "complete.flag": {
+        "bytes": 9,
+        "sha256": "a4bccf5c13ef5ff8311e59b34d492bc7072a55298723601a6a9c127053aee8fc"
+      },
+      "Run-once": {
+        "bytes": 208,
+        "sha256": "60cbb6f0f104bcebf54a1332cad3063caf2cc5cfd105f334f76f595578fb8b2c"
+      },
+      "fixture.log": {
+        "bytes": 417,
+        "sha256": "e308a2dff8cfe13bbb65575a61465ac513643d0616230f7a1a2276117c76fceb"
+      },
+      "PTMasterEstablishTest": {
+        "bytes": 291740,
+        "sha256": "06cb163c7a5fe0c16c92f5e328267ce731d77f3098ecf6a60df3d20b81e43d4a"
+      },
+      "launcher.log": {
+        "bytes": 8,
+        "sha256": "fc1b7c019962b238d1a6ada645907789172d70040e961b64ef50e0f42710c35f"
+      },
+      "fixture.rc": {
+        "bytes": 2,
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    }
+  },
+  "firstFailureAndHostSnapshotsPreserved": true,
+  "candidateRetried": false,
+  "guardStillHeld": true,
+  "qualification": "Original attempt remains FAILED, not a late or native pass"
+}

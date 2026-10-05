@@ -5626,3 +5626,29 @@ Passive host files neither prove task/reader quiet nor clear the HOLD. All sourc
 and exact first results remain preserved. No physical DMA/AmiGUS/audio output
 or memory-placement/total-stack/musical timing/device/listening acceptance follows.
 See [first-attempt evidence](../evidence/enhanced-editor/master-establishment-native-first-attempt/README.md).
+
+
+## Approved owned-session recovery — HOLD released, first failure preserved
+
+The human approved the concrete recovery on5 October2026. Fresh AmiConnect ACK17
+covered only exact root-owned PID32716/HOLD33 closure and verified release. The
+unchanged reviewed scripts rechecked three locks, all11 pinned inputs, exact
+process/command/profile/runtime/private lease and full guard. One SIGTERM closed
+the owned emulator within5seconds. No force kill, guest request, deletion, reset,
+service restart, candidate retry or physical action occurred. After positive
+absence, all six failed-stage files were preserved intact in private custody.
+
+A separate locked readback independently verified emulator/listener absence,
+healthy disconnected DevBench, all input/custody hashes and the unchanged original
+failure. Normal four-record guard.release returned EMPTY fence34, no reservation,
+inflight, HOLD or potential resident. Both ACK12 and ACK17 windows were explicitly
+released and acknowledged by AmiConnect ACK18. Earlier retained-HOLD and pending
+approval text describes the historical first-attempt snapshot, not current state.
+
+Late custody files contain RC0, COMPLETE and both fixture PASS messages. Their
+completion time and cause of the original60second observation failure are not
+established. Original empty logs and wrapper failure remain exact; qualification
+remains FAILED, not a late pass. Physical NOT_RUN. Recovery does not qualify
+memory placement, total stack, musical timing/IRQ/deadlines, real backend/device
+completion/stop, audio or listening. Fresh coordination/live guards remain required
+for any future target operation. See [recovery evidence](../evidence/enhanced-editor/master-establishment-native-recovery/README.md).

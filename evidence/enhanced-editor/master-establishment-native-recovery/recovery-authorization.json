@@ -1,0 +1,16 @@
+{
+  "humanSource": "go ahead",
+  "explicitApproval": {
+    "bytes": 659,
+    "sha256": "dd534358b562ebcd6a966f3b54f45f58644b34a434d8ce4c9a5f55f0e2aa5190"
+  },
+  "scope": "Separate reversible closure of only this fresh root-owned emulator, exact failed-stage custody, independent absence/restoration and ordinary bound release; no app rerun, physical/audio action or forced kill",
+  "plan": {
+    "bytes": 1479,
+    "sha256": "ab22cf958f5ac39b8acac81873c7b2640f6e2d113a2ab835ea4785ee2ace7f3f"
+  },
+  "coordination": {
+    "bytes": 689,
+    "sha256": "ed739e4393a5b354b59da5ff7598e9f2dc2b9a571a3c467367c87dfcdf621e06"
+  }
+}

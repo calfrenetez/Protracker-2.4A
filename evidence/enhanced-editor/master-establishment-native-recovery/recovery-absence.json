@@ -1,0 +1,8 @@
+{
+  "exactOwnedEmulator32716Absent": true,
+  "allEmulatorsAbsent": true,
+  "port2345ListenerAbsent": true,
+  "DevBenchDisconnected": true,
+  "virtualGuestAndItsReadersGoneWithOwnedProcess": true,
+  "physicalGuestTouched": false
+}

@@ -1,0 +1,25 @@
+{
+  "status": "ROOT_SAVED_OUTCOME_REVIEW_CLEAR",
+  "independentReview": false,
+  "hostGroups": 2,
+  "hostCalls": 4,
+  "nativeCalls": 48,
+  "nativeUnits": 39,
+  "nativeDependencies": 122,
+  "sourceFilesStable": 885,
+  "firstFailures": 0,
+  "rawStderrEmpty": true,
+  "originalSamplerFixtureUnchanged": true,
+  "renderAndSamplerExistingBodiesUnchanged": true,
+  "projectChildAliasesNeverRecordedOrReleased": true,
+  "product": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/project-prepare-memory-next/native-v1/PTPrepareProjectTest",
+    "bytes": 213424,
+    "sha256": "161887c9ad476a9bbcbcb569b1cb819e831360a528175e2befd214f8435e835f"
+  },
+  "nativeExecution": "NOT_RUN",
+  "emulatorExecution": "NOT_RUN",
+  "physicalExecution": "NOT_RUN",
+  "targetRequests": 0,
+  "sharedMutations": 0
+}

@@ -1,0 +1,24 @@
+{
+  "status": "PASS_SCOPED_SOURCE_DIFF",
+  "changed": [
+    "src/core/render.c"
+  ],
+  "added": [
+    "src/core/render_storage_internal.h",
+    "src/editor/sampler_prepare_project.c",
+    "src/editor/sampler_prepare_project.h",
+    "tests/sampler_prepare_project_test.c",
+    "tests/test_sampler_prepare_project.py"
+  ],
+  "originalRenderBodyExactAfterRemovingTwoAdditions": true,
+  "originalSamplerGuardExact": true,
+  "codePaths": [
+    "src/core/render.c",
+    "src/core/render_storage_internal.h",
+    "src/editor/sampler_prepare_project.c",
+    "src/editor/sampler_prepare_project.h",
+    "tests/sampler_prepare_project_test.c",
+    "tests/test_sampler_prepare_project.py"
+  ],
+  "targetRequests": 0
+}

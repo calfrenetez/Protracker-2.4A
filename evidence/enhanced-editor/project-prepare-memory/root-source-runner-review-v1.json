@@ -1,0 +1,17 @@
+{
+  "status": "ROOT_SOURCE_AND_RECORDER_REVIEW_CLEAR_BEFORE_EXECUTION",
+  "scope": "Metadata project layer and fixture; original renderer/sampler helper bodies preserved",
+  "sourceSeal": "769204a207f6e6e2b58a60e0919a0e2846bc2435172e94f065b8c9c2c7f30708",
+  "checks": [
+    "New query wraps genuine existing bounded descriptor-only setup_source_apart; no duplicate validator or payload scans",
+    "Project guard classifies original and currently named source spans before underlying sampler child bookkeeping",
+    "Whole layered control is an automatic parent span; sampler guard remains the sole exact child ownership registry",
+    "No project-table promotion, retain, backend callback, PLAY wiring or target operation",
+    "Alive immutable descriptor contract; in-place or destructive mutation unsupported; header changes fault",
+    "Known alias never released; safe fresh stale return released exactly once by sampler guard",
+    "Existing child releases traverse neither project nor sampler sources",
+    "Fixtures include unpromoted project alias rejection without orphan child records, poisoned semantic inputs, genuine mixed audit transfer, stale aliases/fresh release, cursor and malformed extent checks",
+    "Host recorder has two groups and four first calls; native uses successful first new group with pinned existing compiler/runtime"
+  ],
+  "independentReview": false
+}

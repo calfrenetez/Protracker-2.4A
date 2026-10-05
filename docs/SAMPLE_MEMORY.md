@@ -5453,3 +5453,46 @@ remains native/emulator/physical NOT_RUN. Reviews are root self-reviews. See
 [saved preparation-memory evidence](../evidence/enhanced-editor/sampler-prepare-memory/README.md).
 No placement, aggregate stack, wall-clock bound, IRQ/device/output or listening
 acceptance follows. Exact musical scheduling is unchanged.
+
+
+## Optional complete project preparation allocation guard
+
+A private layer now protects the complete borrowed project before the existing
+sampler preparation allocator can record a child. It includes orders, every
+pattern/event and sample descriptor, unpromoted and unused full PCM capacities,
+markers, unknown extension descriptors/payloads, and the whole layered control.
+The metadata query reuses the renderer's original bounded storage checks. No
+semantic payload values, master promotion/retention, backend calls or validation
+certificates are introduced. The existing sampler guard remains the sole child
+ownership registry; its implementation and all prior renderer bodies are exact.
+
+This is an opt-in private allocator for subsequent owner integration. Project
+storage and descriptor tables must remain alive and immutable until zero-child
+finish; in-place/destructive callback changes cannot be made safe. A valid
+channel selection cursor change alone is permitted. Captured and currently
+named live project spans are classified before stale cleanup. Known aliases
+never become children and are not initialized or released. Safe fresh returns
+after observable header changes/reentry are released once by the original
+sampler guard. Previously recorded children remain releasable without source
+traversal. Malformed callback source spans conservatively retain an ambiguous
+result. One parent slot protects the whole layer, leaving fifteen caller spans.
+The base allocator still supplies alignment, byte budgeting and reserve; no
+Fast/Chip placement or aggregate byte budget is established by child counts.
+
+One host ASan/UBSan run passed two groups/four compile-run calls: 30 new
+project/control/parent aliases (including unpromoted unused capacity and unknown
+extensions) acquired no child ownership and triggered no release; three genuine
+8/16/24-bit initial validation/full mixed audit/checked sequence transfers passed;
+seven source-header/reentry fault cases and capacity/cursor/begin/wrapped-span
+checks passed. Semantic values were poisoned during metadata-only admission.
+The prior 33-scenario sampler allocation fixture also passed unchanged. One
+pinned portable m68000/soft-float compile/link passed 48 commands, 39 units and
+122 resolved dependencies. The 213,424-byte PTPrepareProjectTest HUNK SHA256
+`161887c9ad476a9bbcbcb569b1cb819e831360a528175e2befd214f8435e835f`
+has NEVER executed. Root reviews are self-reviews. See
+[saved project preparation evidence](../evidence/enhanced-editor/project-prepare-memory/README.md).
+
+Editor PLAY and mixed-owner wiring remain unfinished. No runtime, aggregate
+stack, placement, practical latency, IRQ/deadline, device ordering/completion,
+voice-stop, audio output or listening acceptance follows. Exact scheduling and
+master/save architecture are preserved.

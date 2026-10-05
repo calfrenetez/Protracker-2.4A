@@ -1,4 +1,5 @@
 #include "render.h"
+#include "render_storage_internal.h"
 #include "render_commands.h"
 #include "render_lookahead.h"
 #include "voice_internal.h"
@@ -516,6 +517,8 @@ static int setup_source_apart(const struct pt_project *p,const void *out,size_t 
         if(!setup_apart(p->extensions[i].data,p->extensions[i].length,out,n))return 0;
     return 1;
 }
+int pt_render_project_storage_output_disjoint(const struct pt_project *p,const void *out,size_t n)
+{return setup_source_apart(p,out,n);}
 static int setup_header_current(const struct pt_render_sequence_setup *j,uint32_t revision,uint32_t generation)
 {
     const struct pt_project *p=j->flow.validation.project;

@@ -1,0 +1,6 @@
+test_borrowed_project_storage_before_child_ownership (test_sampler_prepare_project.SamplerPrepareProject.test_borrowed_project_storage_before_child_ownership) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 8.772s
+
+OK

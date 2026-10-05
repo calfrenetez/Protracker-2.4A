@@ -8,6 +8,7 @@
 #include <setjmp.h>
 #define PT_PRIVATE_NATIVE_ENTRY_HOST_MODEL 1
 uintptr_t entry_model_live_sp(void);
+uintptr_t entry_model_task_sample_sp(unsigned);
 #define PT_PRIVATE_CIA_ADAPTER_STUB 1
 #define PT_PRIVATE_NATIVE_RAM_IRQ_LAYOUT_H 1
 #include "../src/native/readers_ram/native_ram_port.h"
@@ -17,7 +18,7 @@ typedef uint32_t ULONG; typedef int32_t LONG;
 typedef void *APTR; typedef intptr_t BPTR;
 struct Node {UBYTE ln_Type; BYTE ln_Pri; char *ln_Name;};
 struct Library {uint16_t lib_Version;};
-struct ExecBase {struct Library LibNode;};
+struct ExecBase {struct Library LibNode;void *SysStkLower,*SysStkUpper;};
 struct Device {struct Library dd_Library;};
 struct Task {struct Node tc_Node; ULONG tc_SigAlloc; void *tc_SPLower,*tc_SPUpper;};
 struct Process {struct Task pr_Task;};
@@ -35,7 +36,28 @@ struct pt_private_ram_irq {
     volatile struct pt_private_ram_eclock before; volatile uint32_t before_frequency;
     volatile struct pt_private_ram_eclock after; volatile uint32_t after_frequency;
     volatile int32_t dispatch_result;
+    /* Synthetic host tail: no native offset/layout assertion is applied. */
+    volatile uint32_t stack_version;
+    uintptr_t system_lower,system_upper;
+    volatile uintptr_t entry_sp,sampled_low_sp,exit_sp;
+    volatile uint32_t stack_status,stack_samples;
 };
+#define PT_PRIVATE_RAM_STACK_VERSION 1U
+#define PT_PRIVATE_RAM_STACK_SAMPLE_LIMIT 7U
+#define PT_PRIVATE_RAM_STACK_BAD_BOUNDS 1U
+#define PT_PRIVATE_RAM_STACK_BAD_SAMPLE 2U
+#define PT_PRIVATE_RAM_STACK_BAD_COUNT 4U
+#define PT_PRIVATE_RAM_STACK_BAD_PHASE 8U
+#define PT_PRIVATE_RAM_STACK_BAD_VERSION 16U
+#define PT_PRIVATE_RAM_STACK_ERRORS 31U
+#define PT_PRIVATE_RAM_STACK_ENTRY 0x0100U
+#define PT_PRIVATE_RAM_STACK_SAVED 0x0200U
+#define PT_PRIVATE_RAM_STACK_DISPATCH_BEFORE 0x0400U
+#define PT_PRIVATE_RAM_STACK_DISPATCH_AFTER 0x0800U
+#define PT_PRIVATE_RAM_STACK_AFTER_CLOCK 0x1000U
+#define PT_PRIVATE_RAM_STACK_AFTER_SIGNAL 0x2000U
+#define PT_PRIVATE_RAM_STACK_EXIT 0x4000U
+#define PT_PRIVATE_RAM_STACK_PHASES 0x7f00U
 #define NT_PROCESS 13U
 #define NT_INTERRUPT 2U
 #define MEMF_PUBLIC 1U
@@ -91,6 +113,9 @@ enum entry_model_event {
     E_WAIT,E_SIGNAL,E_DELAY,E_DISABLE,E_ENABLE,E_RESOURCE,E_ADD,E_REMOVE,
     E_MASK,E_PENDING,E_CONTROL,E_CLOCK,E_HOLD
 };
+struct entry_model_stack_record {
+    uint32_t version,status,samples;uintptr_t lower,upper,entry,low,exit;
+};
 struct entry_model_trace {unsigned event,index; uintptr_t pointer; uint64_t value;};
 struct entry_model_block {void *pointer; size_t bytes; unsigned live;};
 struct entry_model_os_request {struct timerequest value; unsigned live,opened,pending,complete,waited,unit;};
@@ -108,7 +133,16 @@ struct entry_model {
     unsigned abort_calls,waitio_calls,check_calls,delay_one,disable_depth,maximum_depth;
     unsigned adds,removes,signals,waits,irq_mode,source_exposed,hold,hold_trace;
     char output[8192]; size_t output_bytes;
-    uintptr_t live_sp; unsigned stack_reads; /* explicitly synthetic host SP */
+    uintptr_t live_sp; unsigned stack_reads; /* original bootstrap seam only */
+    /* Additional fixed model observations do not change the old76 counters. */
+    union {uintptr_t alignment;unsigned char bytes[4096];} system_storage;
+    struct ExecBase alternate_exec;
+    unsigned stack_group,stack_case,task_sample_reads,irq_sample_reads;
+    unsigned available_calls;
+    unsigned task_sample_phases[3],irq_sample_phases[7];
+    struct pt_private_ram_irq *sample_irq;
+    struct entry_model_stack_record irq_record;
+    uintptr_t task_sample_min;
     jmp_buf sink;
 };
 extern struct entry_model entry_model;

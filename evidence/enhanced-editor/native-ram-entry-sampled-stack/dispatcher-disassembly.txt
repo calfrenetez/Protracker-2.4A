@@ -1,0 +1,9 @@
+00005cec <_pt_private_native_ram_dispatch>:
+    5cec:	4e55 0000      	linkw a5,#0
+    5cf0:	206d 0008      	moveal a5@(8),a0
+    5cf4:	2028 0010      	movel a0@(16),d0
+    5cf8:	5280           	addql #1,d0
+    5cfa:	2140 0010      	movel d0,a0@(16)
+    5cfe:	2b68 0014 0008 	movel a0@(20),a5@(8)
+    5d04:	4e5d           	unlk a5
+    5d06:	4ef9 0000 5a40 	jmp 5a40 <_pt_private_ram_dispatch>

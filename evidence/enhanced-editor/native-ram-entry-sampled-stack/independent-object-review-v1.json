@@ -1,0 +1,275 @@
+{
+  "status": "CLEAR_SAVED_COMPILER_OBJECT_EVIDENCE_ONLY",
+  "reviewer": "native_entry_review",
+  "findings": [],
+  "scope": "Passive stable saved source/build/object/disassembly audit. No project imports, models/tests, compiler/inspection-tool/product execution, Git, service or target operation.",
+  "controls": {
+    "native-ram-entry-sampled-stack-private-source-binding-v1.json": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-source-binding-v1.json",
+      "bytes": 29006,
+      "mode": 420,
+      "sha256": "efd1f777dbaab4d06fd5c358e5913213080a2c9eb8fad67a2e66a101c5790461"
+    },
+    "native-ram-entry-sampled-stack-private-build-approval-v1.json": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-approval-v1.json",
+      "bytes": 31267,
+      "mode": 420,
+      "sha256": "1d35838aa4759d31ea72c5b60316482c09dc2cad0ba4b650b4d0f302af2be902"
+    },
+    "source-seal-v1.json": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-implementation-v1/source-seal-v1.json",
+      "bytes": 8854,
+      "mode": 420,
+      "sha256": "90f052133315c428e9098b9e825ec252db917b236574794b6a91638249405f1e"
+    },
+    "independent-source-review-v1.json": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-implementation-v1/independent-source-review-v1.json",
+      "bytes": 11565,
+      "mode": 420,
+      "sha256": "88f1b0cbce6c83ddc51829aa5468a029e2aad00f02947b38919b40a8e880cb27"
+    }
+  },
+  "evidence": {
+    "manifest": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/manifest.json",
+      "bytes": 275123,
+      "mode": 420,
+      "sha256": "436bb1dea25700bfde5dfb367ffc0003926cf6c03dfd048c6dc0489eef34dadb"
+    },
+    "initial_object_comparison_refusal": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-object-v1/inspection.json",
+      "bytes": 4516,
+      "mode": 420,
+      "sha256": "d251c64c31d01cac56d2450b567b9fd79f0f79573f4048927f94f7ffd3074f12"
+    },
+    "manual_hex_preparation_refusal": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-object-v1/analysis-v2-preparation-refusal.json",
+      "bytes": 306,
+      "mode": 420,
+      "sha256": "79046b01b36939b4e2b32a432efa31d75dddffca6f551d6eb81139e07c950595"
+    },
+    "final_saved_byte_analysis": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-object-v1/analysis-v3.json",
+      "bytes": 8702,
+      "mode": 420,
+      "sha256": "8c86c8ae5de700ddeb4cf2cdafb6594ba952d17e0ef5b5d5156615a640db165b"
+    },
+    "IRQ_object_disassembly": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-object-v1/irq-object.txt",
+      "bytes": 15070,
+      "mode": 420,
+      "sha256": "b632b86bd7fe0271be5c3f05f81d38992fa10ce551f6970f92f8d8818d03702b"
+    },
+    "linked_disassembly": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-object-v1/linked.txt",
+      "bytes": 854737,
+      "mode": 420,
+      "sha256": "0d7d85d44bc893bbe6674a137bfe672a0a76d7d7b7a8cdbd7f3ca1355580d49b"
+    },
+    "bounded_dispatcher_excerpt": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-object-v1/dispatcher-exact32B.txt",
+      "bytes": 392,
+      "mode": 420,
+      "sha256": "cd2237af8b5617b34c819e9d31874b111bd1b1f98efd26bb88c54b6b7a6eca99"
+    },
+    "product": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/PTExecReadersRamEntryTest",
+      "resolved_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/PTExecReadersRamEntryTest",
+      "bytes": 63248,
+      "mode": 493,
+      "sha256": "424e5a3e6c2330151d7cace7b515d398637cfe5ef77bad5b4aa402d292d17aea"
+    },
+    "link_map": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/PTExecReadersRamEntryTest.map",
+      "resolved_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/PTExecReadersRamEntryTest.map",
+      "bytes": 26087,
+      "mode": 420,
+      "sha256": "cb3df5033f5b837f59eaaaa77a65a5f6c5315a8664bc381837d7f2221d3b6256"
+    }
+  },
+  "bindings": {
+    "finite_records_bytes_modes_hashes_match": true,
+    "records_checked": {
+      "selected_native26": 26,
+      "native-ram-entry-sampled-stack-private-build-approval-v1.json": 76,
+      "source-seal-v1.json": 19,
+      "independent-source-review-v1.json": 17,
+      "manifest": 493,
+      "inspection": 9,
+      "analysis-v3": 20
+    },
+    "selected_native26_equal_before_after": true,
+    "eight_C_one_GAS": true,
+    "commands22_completed_RC0": true,
+    "all22_stderr_empty": true,
+    "retained_raw_logs44": true,
+    "retained_build_files71": true,
+    "dependency_literal93_resolved88_occurrences286": true,
+    "no_hostSDK_or_test_dependency": true,
+    "real_NDK_used": true,
+    "local_SU_files8_rows113": true
+  },
+  "layout": {
+    "compiled_active_native_offsets": {
+      "timer": 0,
+      "task": 4,
+      "signal": 8,
+      "armed": 12,
+      "calls": 16,
+      "port": 20,
+      "before": 28,
+      "before_frequency": 36,
+      "after": 40,
+      "after_frequency": 48,
+      "dispatch_result": 52,
+      "stack_version": 56,
+      "system_lower": 60,
+      "system_upper": 64,
+      "entry_sp": 68,
+      "sampled_low_sp": 72,
+      "exit_sp": 76,
+      "stack_status": 80,
+      "stack_samples": 84
+    },
+    "original_prefix_offsets11": true,
+    "new_tail_fields8_bytes32": true,
+    "native_compiled_size88": true,
+    "qualification": "Exact header in native dependency closure, active negative-array typedefs and RC0 compilation enforce layout; no IRQ execution inferred."
+  },
+  "IRQ_shape": {
+    "instruction_rows": 296,
+    "ordered_calls": [
+      {
+        "PC": "0x188",
+        "operation": "jsr a6@(-60)"
+      },
+      {
+        "PC": "0x24a",
+        "operation": "jsr 0 <_pt_private_native_ram_dispatch>"
+      },
+      {
+        "PC": "0x314",
+        "operation": "jsr a6@(-60)"
+      },
+      {
+        "PC": "0x3e4",
+        "operation": "jsr a6@(-324)"
+      }
+    ],
+    "only_explicit_pushes": [
+      {
+        "PC": "0x2",
+        "operation": "moveml d2-d7/a2-a6,sp@-"
+      },
+      {
+        "PC": "0x190",
+        "operation": "movel a2,sp@-"
+      }
+    ],
+    "register_save44_argument4": true,
+    "no_added_call_push_alloc_log_notification": true,
+    "live_SP_sample_PCs": [
+      "0x0",
+      "0xca",
+      "0x192",
+      "0x254",
+      "0x31c",
+      "0x3e8",
+      "0x4a6"
+    ],
+    "seven_phase_blocks": [
+      {
+        "PC": "0x46",
+        "operation": "oril #256,a2@(80)"
+      },
+      {
+        "PC": "0xfe",
+        "operation": "oril #512,a2@(80)"
+      },
+      {
+        "PC": "0x1c6",
+        "operation": "oril #1024,a2@(80)"
+      },
+      {
+        "PC": "0x288",
+        "operation": "oril #2048,a2@(80)"
+      },
+      {
+        "PC": "0x350",
+        "operation": "oril #4096,a2@(80)"
+      },
+      {
+        "PC": "0x41c",
+        "operation": "oril #8192,a2@(80)"
+      },
+      {
+        "PC": "0x4de",
+        "operation": "oril #16384,a0@(80)"
+      }
+    ],
+    "unarmed_path": "tstl12 then branch0xc\u21920x566 restore/moveq0/RTS; no diagnostic tail or calls.",
+    "dispatch_boundaries": "Argument push0x190, beforeSP0x192, JSR0x24a, D0 store0x250, afterSP0x254, existing argument pop0x30c.",
+    "exit_path": "A2\u2192A0 at0x4a0; original restore0x4a2; liveSP0x4a6 stored viaA0 at0x4a8. D2\u2013D7/A2\u2013A6 restored; scratch D0/D1/A0 only after restore. Both paths RTS, no RTE.",
+    "callee_peak": "UNKNOWN; caller-boundary samples exclude transient call frames and callee maxima."
+  },
+  "dispatcher": {
+    "whole_objects_equal": false,
+    "unit_path_difference_only": true,
+    "validated_unit_names": [
+      {
+        "object": {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu02.o",
+          "bytes": 288,
+          "mode": 420,
+          "sha256": "dfe4600bcbf5b9540a9436c22245bb07be1708883dc46161a13bcda9d7efe391"
+        },
+        "unit_name": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu02.o",
+        "prefix_end": 144
+      },
+      {
+        "object": {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu02.o",
+          "bytes": 288,
+          "mode": 420,
+          "sha256": "52328ac01ebc6418336d1dcc87311c844343b1fa21ed8537db0da2676a298a36"
+        },
+        "unit_name": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu02.o",
+        "prefix_end": 144
+      }
+    ],
+    "all144_bytes_after_unit_equal": true,
+    "after_unit_SHA256": "06cd532038b8003c437e6e09ebe4024fc545fb1a0f033b24068e8c9b5fd194ed",
+    "HUNK_CODE_bytes": 32,
+    "code_SHA256": "f8401653e8962780356968f0ae5cb02830248733d1b864c012c21d63f607372b",
+    "shape": "Original LINK A5,#0/load argument/increment calls/replace argument/UNLK/tail JMP, no added C sampler/save.",
+    "linked_range": "0x5cec..0x5d0c exclusive; later unsymbolized instructions are not dispatcher.",
+    "local_SU": "0 static local annotation; existing LINK/return frames and downstream callchain are separate."
+  },
+  "refusal_history": {
+    "first_object_comparison": "Initial whole-object assertion included expected different HUNK_UNIT names. Both original objdump calls RC0 with retained output.",
+    "manual_hex": "Saved V2 manually transcribed32B expectation had two excess bytes; final V3 derives HUNK_CODE. No tool/compiler/product replay.",
+    "reviewer_data_schema_and_scope": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-object-v1/independent-audit-schema-scope-disposition-v1.json",
+      "bytes": 1773,
+      "mode": 420,
+      "sha256": "1c5f54597a18e31d6f0fd735b8e0e4fe53683b8925cf61ec7ccd81d1f819296c"
+    }
+  },
+  "limits": {
+    "changed_candidate_host_models": "PENDING_SEPARATE_QUALIFICATION",
+    "native_product_execution": "NOT_RUN",
+    "emulator": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "task_system_IRQ_total_stack": "UNKNOWN_NOT_CLEARED",
+    "OS_library_startup_callee_peak": "UNKNOWN_NOT_CLEARED",
+    "WCET_and_schedule_timing": "UNKNOWN_NOT_CLEARED",
+    "launcher65536": "NOT_CLEARED",
+    "launch_permission": "NOT_GRANTED",
+    "hardware_RAM_audio_voice_stop_listening_acceptance": "NOT_GRANTED"
+  },
+  "final_revalidation": {
+    "manifest_same_as_root_analysis": true,
+    "native_source_tool_runtime_dependency_object_disassembly_pins_unchanged": true,
+    "original_repository_seal_inputs_match": true
+  }
+}

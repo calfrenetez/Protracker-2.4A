@@ -38,6 +38,10 @@ void entry_model_start(enum entry_model_mode mode,unsigned ordinal,const void *s
     assert(x>64U*1024U*1024U&&x<UINTPTR_MAX-64U*1024U*1024U);
     x&=~(uintptr_t)1U; /* word alignment is modeled, not measured native SP */
     m->live_sp=x;
+    SysBase=&m->exec;
+    memset(m->system_storage.bytes,0xb3,sizeof(m->system_storage.bytes));
+    m->exec.SysStkLower=m->system_storage.bytes;
+    m->exec.SysStkUpper=m->system_storage.bytes+sizeof(m->system_storage.bytes);
     m->process.pr_Task.tc_SPLower=(void *)(x-64U*1024U*1024U);
     m->process.pr_Task.tc_SPUpper=(void *)(x+64U*1024U*1024U);
     m->original_signals=(UINT32_C(1)<<7)|SIGBREAKF_CTRL_C;
@@ -55,20 +59,76 @@ void entry_model_start(enum entry_model_mode mode,unsigned ordinal,const void *s
 }
 uintptr_t entry_model_live_sp(void)
 {++entry_model.stack_reads;return entry_model.live_sp;}
+uintptr_t entry_model_task_sample_sp(unsigned phase)
+{
+    struct entry_model *m=&entry_model;uintptr_t pointer=m->live_sp;
+    task();assert(m->task_sample_reads<3);
+    assert(phase==2U||phase==4U||phase==8U);
+    m->task_sample_phases[m->task_sample_reads++]=phase;
+    if(m->stack_group==36U){
+        if((m->stack_case==16U&&phase==2U)||(m->stack_case==17U&&phase==4U)||
+           (m->stack_case==18U&&phase==8U))pointer=0;
+        if(m->stack_case==19U&&phase==4U)
+            m->exec.SysStkLower=(void *)((uintptr_t)m->exec.SysStkLower+2U);
+        if(m->stack_case==20U)pointer-=phase==2U?16U:(phase==4U?32U:8U);
+    }
+    if(pointer&&(!m->task_sample_min||pointer<m->task_sample_min))m->task_sample_min=pointer;
+    return pointer;
+}
+/* Logical GAS boundary observations only; not a production C sampling seam. */
+static uintptr_t model_boundary_sp(unsigned phase)
+{
+    struct entry_model *m=&entry_model;struct pt_private_ram_irq *irq=m->sample_irq;
+    uintptr_t pointer;
+    assert(m->irq_mode&&irq&&m->irq_sample_reads<7);
+    m->irq_sample_phases[m->irq_sample_reads++]=phase;
+    if(phase==PT_PRIVATE_RAM_STACK_ENTRY)pointer=irq->system_lower+1024U;
+    else if(phase==PT_PRIVATE_RAM_STACK_DISPATCH_BEFORE||phase==PT_PRIVATE_RAM_STACK_DISPATCH_AFTER)
+        pointer=irq->entry_sp-48U;
+    else if(phase==PT_PRIVATE_RAM_STACK_EXIT)pointer=irq->entry_sp;
+    else{
+        assert(phase==PT_PRIVATE_RAM_STACK_SAVED||
+               phase==PT_PRIVATE_RAM_STACK_AFTER_CLOCK||phase==PT_PRIVATE_RAM_STACK_AFTER_SIGNAL);
+        pointer=irq->entry_sp-44U;
+    }
+    if(m->stack_group==36U){
+        if(m->stack_case==1U&&phase==PT_PRIVATE_RAM_STACK_DISPATCH_AFTER)pointer=irq->system_lower;
+        if(m->stack_case==2U&&phase==PT_PRIVATE_RAM_STACK_DISPATCH_AFTER)pointer=irq->system_upper;
+        if(m->stack_case==3U&&phase==PT_PRIVATE_RAM_STACK_DISPATCH_AFTER)pointer|=1U;
+        if(m->stack_case==4U&&phase==PT_PRIVATE_RAM_STACK_DISPATCH_AFTER)pointer=0;
+        if(m->stack_case==5U&&phase==PT_PRIVATE_RAM_STACK_DISPATCH_AFTER)pointer=irq->system_lower-2U;
+        if(m->stack_case==14U&&phase==PT_PRIVATE_RAM_STACK_EXIT)pointer+=2U;
+        if(m->stack_case==15U&&phase!=PT_PRIVATE_RAM_STACK_ENTRY)pointer=irq->entry_sp;
+    }
+    return pointer;
+}
 struct Task *FindTask(void *name){assert(!name);return entry_model.task;}
 ULONG AvailMem(ULONG flags)
-{task();if(entry_model.mode==EM_NO_FAST&&(flags&MEMF_FAST))return 0;return 8U*1024U*1024U;}
+{task();++entry_model.available_calls;if(entry_model.mode==EM_NO_FAST&&(flags&MEMF_FAST))return 0;return 8U*1024U*1024U;}
 APTR AllocMem(ULONG bytes,ULONG flags)
 {
     struct entry_model *m=&entry_model;unsigned i;void *p;
     task();assert(!m->source_exposed);assert(bytes&&flags==(MEMF_FAST|MEMF_PUBLIC));
     ++m->alloc_calls;
+    if(m->stack_group==35U&&
+       ((m->alloc_calls==1U&&m->stack_case>=9U&&m->stack_case<=11U)||
+        (m->alloc_calls==2U&&(m->stack_case==12U||m->stack_case==13U)))){
+        p=m->stack_case==9U||m->stack_case==12U?(void *)&m->exec:
+          (m->stack_case==11U?(void *)((uintptr_t)m->exec.SysStkUpper-sizeof(uintptr_t)):m->exec.SysStkLower);
+        note(E_ALLOC,m->alloc_calls,p,bytes);return p;
+    }
     if(m->mode==EM_ALLOC_NULL&&m->alloc_calls==m->ordinal){note(E_ALLOC,m->alloc_calls,NULL,bytes);return NULL;}
     if(m->mode==EM_ALIAS_LIVE&&m->alloc_calls==2){assert(m->block[0].live);note(E_ALLOC,m->alloc_calls,m->block[0].pointer,bytes);return m->block[0].pointer;}
     for(i=0;i<32;++i)if(!m->block[i].live)break;
     assert(i<32);
     p=malloc(bytes);assert(p);memset(p,0xa7,bytes);
-    m->block[i]=(struct entry_model_block){p,bytes,1};note(E_ALLOC,m->alloc_calls,p,bytes);return p;
+    m->block[i]=(struct entry_model_block){p,bytes,1};note(E_ALLOC,m->alloc_calls,p,bytes);
+    if(m->stack_group==35U&&m->alloc_calls==1U){
+        if(m->stack_case==14U){m->alternate_exec=m->exec;SysBase=&m->alternate_exec;}
+        if(m->stack_case==15U)m->exec.SysStkLower=(void *)((uintptr_t)m->exec.SysStkLower+2U);
+        if(m->stack_case==16U)m->exec.SysStkUpper=(void *)((uintptr_t)m->exec.SysStkUpper-2U);
+    }
+    return p;
 }
 void FreeMem(APTR p,ULONG bytes)
 {
@@ -280,6 +340,28 @@ ULONG entry_model_read_eclock(struct Device *timer,struct EClockVal *out)
  * body, library-vector calling convention, offsets and interrupt stack do not
  * execute here. Registered actual is_Data supplies the genuine port/ledger.
  */
+static void model_boundary_sample(struct pt_private_ram_irq *irq,unsigned phase)
+{
+    uintptr_t pointer=model_boundary_sp(phase),lower=irq->system_lower,upper=irq->system_upper;
+    /* Source-derived logical tail stores, not native assembly execution. The
+     * original C dispatcher compiles separately and has no sampling addition. */
+    if(irq->stack_samples>=PT_PRIVATE_RAM_STACK_SAMPLE_LIMIT)
+        irq->stack_status|=PT_PRIVATE_RAM_STACK_BAD_COUNT;
+    else ++irq->stack_samples;
+    if(irq->stack_status&phase)irq->stack_status|=PT_PRIVATE_RAM_STACK_BAD_PHASE;
+    irq->stack_status|=phase;
+    if(irq->stack_version!=PT_PRIVATE_RAM_STACK_VERSION)
+        irq->stack_status|=PT_PRIVATE_RAM_STACK_BAD_VERSION;
+    if(phase==PT_PRIVATE_RAM_STACK_ENTRY)irq->entry_sp=pointer;
+    if(phase==PT_PRIVATE_RAM_STACK_EXIT)irq->exit_sp=pointer;
+    if(!lower||upper<=lower||((lower|upper)&1U)){
+        irq->stack_status|=PT_PRIVATE_RAM_STACK_BAD_BOUNDS;return;
+    }
+    if(!pointer||(pointer&1U)||pointer<lower||pointer>=upper){
+        irq->stack_status|=PT_PRIVATE_RAM_STACK_BAD_SAMPLE;return;
+    }
+    if(!irq->sampled_low_sp||pointer<irq->sampled_low_sp)irq->sampled_low_sp=pointer;
+}
 void pt_private_native_ram_irq(void)
 {
     struct entry_model *m=&entry_model;struct pt_private_ram_irq *irq=NULL;unsigned i,j;struct EClockVal v;
@@ -287,10 +369,33 @@ void pt_private_native_ram_irq(void)
         assert(!irq);irq=m->resource[i].vector[j]->is_Data;
     }
     assert(irq&&irq->armed&&irq->task==&m->process.pr_Task);
+    m->sample_irq=irq;
+    if(m->stack_group==36U){
+        if(m->stack_case==7U)irq->stack_version=0;
+        if(m->stack_case==9U)irq->stack_status|=PT_PRIVATE_RAM_STACK_ENTRY;
+        if(m->stack_case==10U)irq->stack_samples=UINT32_MAX;
+        if(m->stack_case==12U)irq->stack_status|=PT_PRIVATE_RAM_STACK_BAD_SAMPLE;
+    }
+    model_boundary_sample(irq,PT_PRIVATE_RAM_STACK_ENTRY);
+    model_boundary_sample(irq,PT_PRIVATE_RAM_STACK_SAVED);
     irq->before_frequency=entry_model_read_eclock(irq->timer,&v);irq->before.hi=v.ev_hi;irq->before.lo=v.ev_lo;
+    model_boundary_sample(irq,PT_PRIVATE_RAM_STACK_DISPATCH_BEFORE);
     irq->dispatch_result=pt_private_native_ram_dispatch(irq);
+    model_boundary_sample(irq,PT_PRIVATE_RAM_STACK_DISPATCH_AFTER);
     irq->after_frequency=entry_model_read_eclock(irq->timer,&v);irq->after.hi=v.ev_hi;irq->after.lo=v.ev_lo;
+    model_boundary_sample(irq,PT_PRIVATE_RAM_STACK_AFTER_CLOCK);
     irq->armed=0;Signal(irq->task,irq->signal);
+    if(!(m->stack_group==36U&&m->stack_case==8U))
+        model_boundary_sample(irq,PT_PRIVATE_RAM_STACK_AFTER_SIGNAL);
+    model_boundary_sample(irq,PT_PRIVATE_RAM_STACK_EXIT);
+    if(m->stack_group==36U){
+        if(m->stack_case==6U){irq->stack_samples=0;irq->stack_status=0;irq->entry_sp=0;irq->sampled_low_sp=0;irq->exit_sp=0;}
+        if(m->stack_case==11U)irq->stack_samples=6;
+        if(m->stack_case==13U)irq->system_lower+=2U;
+    }
+    m->irq_record=(struct entry_model_stack_record){irq->stack_version,irq->stack_status,irq->stack_samples,
+        irq->system_lower,irq->system_upper,irq->entry_sp,irq->sampled_low_sp,irq->exit_sp};
+    m->sample_irq=NULL; /* Only copied integers remain after the IRQ model returns. */
 }
 void entry_model_assert_result(int result)
 {

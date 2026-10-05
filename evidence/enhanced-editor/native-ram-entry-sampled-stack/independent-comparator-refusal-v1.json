@@ -1,0 +1,7 @@
+{
+  "status": "REFUSED_SAVED_DATA_AUDIT_BEFORE_ANY_PRODUCER_REPLAY",
+  "failure": "Recursive file-record check treated a historical repository before-image identity from source-seal-v1.json as a required current repository identity. Current native_ram_entry.c differs; private selected sources and all493 build-manifest records already matched in the previous passive pass.",
+  "corrected_scope": "Historical repository before-images will be checked against immutable saved origin copies, while actual selected sources/build/object/tool/dependency/runtime/disassembly records remain current revalidation inputs.",
+  "new_compiler_model_tool_product_Git_target_service_operations": 0,
+  "review_receipt_written_before_refusal": false
+}

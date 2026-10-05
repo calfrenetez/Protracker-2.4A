@@ -1,0 +1,81 @@
+{
+  "status": "FIRST_OBJECT_COMPARISON_REFUSAL_RETAINED",
+  "inputs_before": {
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-objdump": {
+      "path": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-objdump",
+      "bytes": 1226264,
+      "sha256": "f5f8cb3d10dcfa205c968556fe6afe070ddaf59294bb6dce0f6f7cf319002686",
+      "mode": 493
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/PTExecReadersRamEntryTest": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/PTExecReadersRamEntryTest",
+      "bytes": 63248,
+      "sha256": "424e5a3e6c2330151d7cace7b515d398637cfe5ef77bad5b4aa402d292d17aea",
+      "mode": 493
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu08.o": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu08.o",
+      "bytes": 1652,
+      "sha256": "e24ceeaa5629ad82558170c3e37625bb14ebe0e5952fc345aeb009f7e69cc03b",
+      "mode": 420
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu02.o": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu02.o",
+      "bytes": 288,
+      "sha256": "dfe4600bcbf5b9540a9436c22245bb07be1708883dc46161a13bcda9d7efe391",
+      "mode": 420
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu02.o": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu02.o",
+      "bytes": 288,
+      "sha256": "52328ac01ebc6418336d1dcc87311c844343b1fa21ed8537db0da2676a298a36",
+      "mode": 420
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-objdump",
+        "-d",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/PTExecReadersRamEntryTest"
+      ],
+      "returncode": 0,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-object-v1/linked.txt",
+        "bytes": 854737,
+        "sha256": "0d7d85d44bc893bbe6674a137bfe672a0a76d7d7b7a8cdbd7f3ca1355580d49b",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-object-v1/linked.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-objdump",
+        "-dr",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu08.o"
+      ],
+      "returncode": 0,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-object-v1/irq-object.txt",
+        "bytes": 15070,
+        "sha256": "b632b86bd7fe0271be5c3f05f81d38992fa10ce551f6970f92f8d8818d03702b",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-object-v1/irq-object.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    }
+  ],
+  "product_execution": false,
+  "native_emulator_physical": "NOT_RUN",
+  "failure": "Whole dispatcher object byte-exact comparison failed; two read-only disassemblies completed RC0. No additional tool/model/native operation follows this refusal.",
+  "dispatcher_object_byte_exact_prior": false
+}

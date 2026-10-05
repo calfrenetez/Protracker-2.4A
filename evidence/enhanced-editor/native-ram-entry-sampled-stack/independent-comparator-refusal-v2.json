@@ -1,0 +1,18 @@
+{
+  "status": "REFUSED_SAVED_DATA_SCOPE_COMPARISON_BEFORE_ANY_REPLAY",
+  "failure": "Generic verifier treated pending separate host-model overlay source records as immutable native build inputs. Selected host exec/execbase.h differs from pre-overlay binding; native build manifest includes no host SDK or tests.",
+  "expected": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-source-v1/tests/native_entry_host_sdk/exec/execbase.h",
+    "bytes": 114,
+    "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+    "mode": 420
+  },
+  "observed": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-source-v1/tests/native_entry_host_sdk/exec/execbase.h",
+    "bytes": 217,
+    "sha256": "aad331cbf393f0734a5af26e85cf6a00e60af26cc71cf44bbe4442d8f04b7482",
+    "mode": 420
+  },
+  "native_manifest_scope": "26 production source files only; all verified separately against stable native build manifest.",
+  "new_compiler_model_tool_product_Git_target_service_operations": 0
+}

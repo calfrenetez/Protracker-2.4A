@@ -1,0 +1,157 @@
+{
+  "status": "CLEAR_SOURCE_PREPARATION_ONLY",
+  "scope": "Passive final sealed-source, AST and byte review only. No compiler, model, project import or target invocation.",
+  "source_seal": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-model-preparation-v1/source-seal-v1.json",
+    "bytes": 8585,
+    "sha256": "db55fa69b3c0bd62df9fe0ac1207c2b42d4e39daca3c69abe2b116301a82c4c6",
+    "mode": "0644"
+  },
+  "sources": {
+    "tests/native_entry_host_sdk/exec/execbase.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-model-preparation-v1/source/tests/native_entry_host_sdk/exec/execbase.h",
+      "bytes": 217,
+      "sha256": "aad331cbf393f0734a5af26e85cf6a00e60af26cc71cf44bbe4442d8f04b7482",
+      "mode": "0644"
+    },
+    "tests/native_ram_entry_host_stubs.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-model-preparation-v1/source/tests/native_ram_entry_host_stubs.c",
+      "bytes": 24494,
+      "sha256": "f7dbb339aa718abeccbfe07019da9bed6e38497868d43766632f5c219199a013",
+      "mode": "0644"
+    },
+    "tests/native_ram_entry_host_stubs.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-model-preparation-v1/source/tests/native_ram_entry_host_stubs.h",
+      "bytes": 8001,
+      "sha256": "ba4583a6e4bd555f31635b9e6202e851a23cab4a0d84e4b7216dc1fc43c4dfae",
+      "mode": "0644"
+    },
+    "tests/native_ram_entry_model_test.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-model-preparation-v1/source/tests/native_ram_entry_model_test.c",
+      "bytes": 15874,
+      "sha256": "75940d89efc39434877105cb8bb52b7ae654aeabf564890e2eb736eda4f8c858",
+      "mode": "0644"
+    },
+    "tests/test_native_ram_entry_model.py": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-model-preparation-v1/source/tests/test_native_ram_entry_model.py",
+      "bytes": 3574,
+      "sha256": "190518bf56fd10f0fc5e7ea9a4b8c1450d4711cc621f21c611f3555845f3d5ee",
+      "mode": "0644"
+    }
+  },
+  "production_seal": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-implementation-v1/source-seal-v1.json",
+    "bytes": 8854,
+    "sha256": "90f052133315c428e9098b9e825ec252db917b236574794b6a91638249405f1e",
+    "mode": "0644"
+  },
+  "production_source_review": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-implementation-v1/independent-source-review-v1.json",
+    "bytes": 11565,
+    "sha256": "88f1b0cbce6c83ddc51829aa5468a029e2aad00f02947b38919b40a8e880cb27",
+    "mode": "0644"
+  },
+  "controls": {
+    "source-contract-v1.json": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-model-preparation-v1/source-contract-v1.json",
+      "bytes": 13481,
+      "sha256": "9b15c0d3949c0e0f4b85654b3d008d2049b151e710692bf020f2771365c1dd40",
+      "mode": "0644"
+    },
+    "source-preservation-checks-v1.json": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-model-preparation-v1/source-preservation-checks-v1.json",
+      "bytes": 4800,
+      "sha256": "ac75f189518fbb2be206337e9aeab36676d0b762584547b877b767ad77c237d9",
+      "mode": "0644"
+    },
+    "model-extension-v1.patch": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-model-preparation-v1/model-extension-v1.patch",
+      "bytes": 26342,
+      "sha256": "81effdc2fcb0ec698d358279fbf3441ce4452f15fe1a109b789a80bae28d915c",
+      "mode": "0644"
+    },
+    "README.md": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-model-preparation-v1/README.md",
+      "bytes": 1633,
+      "sha256": "3e13691d62afba55b025e8b99c6978261808f9959226ddb755396346a59fc7ab",
+      "mode": "0644"
+    },
+    "extension-plan-v1.json": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-model-preparation-v1/extension-plan-v1.json",
+      "bytes": 8171,
+      "sha256": "558e6ae63d42754ef6889138dfbf7a95efac431f018127c749481773c04fb9a7",
+      "mode": "0644"
+    }
+  },
+  "checks": {
+    "all_declared_source_original_production_control_sizes_hashes_regular_modes_verified": true,
+    "original_four_copies_equal_current_repository_bytes": true,
+    "original_resource_oracle_and_task_stack_case_bodies_byte_exact": true,
+    "original_main_exact_after_removing_only_two_added_mode_routes": true,
+    "both_original_enums_byte_exact": true,
+    "original_recipe_prefix_through_76_cases_and_ordered_10_TUs_byte_exact": true,
+    "original_ASan_UBSan_Werror_UNDEBUG_flags_preserved": true,
+    "first_failed_case_stops_check_true_no_subTest": true,
+    "original_bootstrap_getter_counter_separate_from_new_task_samples": true,
+    "synthetic_tail_numeric_constants_match_final_native_header": true,
+    "production_dispatcher_byte_exact_and_GAS_boundaries_not_C_internal_minima": true,
+    "system_trailing_alias_aligned_and_full_extent_beforeimages_present": true,
+    "retention_oracles_distinguish_early_faults_from_completed_domain_teardown": true
+  },
+  "prospective_execution": {
+    "groups": 1,
+    "compile_commands": 1,
+    "fresh_process_cases": 114,
+    "subprocess_calls": 115,
+    "original_cases": 76,
+    "system_cases": 17,
+    "sample_cases": 21,
+    "timeout_seconds_per_case": 20,
+    "ordered_TUs": [
+      "tests/native_ram_entry_model_test.c",
+      "tests/native_ram_entry_host_stubs.c",
+      "src/diagnostic/native_ram_entry.c",
+      "src/native/readers_ram/native_ram_port.c",
+      "src/native/readers_ram/native_ram_irq_dispatch.c",
+      "src/native/readers_ram/native_cia_ram_adapter.c",
+      "src/native/native_checked_memory.c",
+      "src/core/elapsed_clock.c",
+      "src/core/scheduled_readers.c",
+      "src/core/readers_activation.c"
+    ]
+  },
+  "coverage_assessment": [
+    "System cases cover malformed/null/reversed/wrapped/odd bounds, tiny numeric span, positive route, full ExecBase/system-span aliases from first and second allocations, and callback identity changes. Alias before-images cover the complete synthetic ExecBase and 4096 system bytes.",
+    "First allocation aliases retain no OS resources. Cases12/13 honestly retain two acquired ports, requests, devices and signal ownership, no vector or notification, and do not initialize/free ambiguous storage.",
+    "Seven logical GAS boundary stores preserve phase order: entry, saved, dispatcher-before/after, after-clock, after-signal, exit. Both dispatcher boundaries observe entry minus48 (44 existing saves plus4 argument), not C/library internal peaks.",
+    "Sample cases cover invalid range/alignment, missing/version/count/phase/status/bounds/exit/descent and task observation failures; four task phases1/2/4/8 use an independent seam while original bootstrap getter assertions remain unchanged.",
+    "HOLD oracles inspect exact registry blocks, port/request/device/signal ownership, foreign mask/pending bits and absence of later effects before fixture-only arena disposal. Early/IRQ/phase4 faults expect18 allocations/1 release/17 live; phase8 expects17 releases and bootstrap block0 only after genuine independent domain teardown.",
+    "Actual separate production C TUs provide currentness, protected-span and quiet-before-record validation. No public core owner/key/receipt is forged."
+  ],
+  "resolved_unsealed_findings": [
+    "Late alias cases12/13 were corrected to acquired OS-world retention rather than a false pre-acquisition zero-resource assertion.",
+    "Trailing alias is upper minus sizeof(uintptr_t), so host alignment permits the full extent-overlap guard to be exercised.",
+    "Late teardown retention has explicit allocation registry/OS landmarks and does not pretend already retired domains remain held."
+  ],
+  "findings": [],
+  "limitations": [
+    "Actual GAS execution and native register/offset/SDK behavior",
+    "Unarmed GAS branch",
+    "BAD_BOUNDS record-tail fuzzing (initial system bounds are covered separately)",
+    "C or library internal stack minima, higher-priority IRQ nesting, whole system/task high-water or aggregate stack bound",
+    "Native launcher stack eligibility, real resources/placement/quiet, emulator/physical/audio",
+    "Forced host pointer-width SDK layout and C trampoline are synthetic; native GAS/offset/register behavior is not executed.",
+    "HOLD is observed through fake DOS Delay/output trapping; final fixture arena disposal is not native quiet/cleanup proof.",
+    "Compilation,114 outcomes, runtime closure and sanitizer result remain NOT_RUN in this source-only receipt; root owns the first invocation.",
+    "No complete stack bound, WCET,65536 launch clearance, real placement/resources/vector/timer/device/audio acceptance follows."
+  ],
+  "review_reader_note": "An initial pure audit assumed untagged C enums and stopped before writing a receipt; tagged-enum source comparison corrected that reader assumption. No project/model/compiler execution occurred.",
+  "actions": {
+    "project_imports": 0,
+    "compiler_invocations": 0,
+    "model_test_invocations": 0,
+    "Git_operations": 0,
+    "target_operations": 0,
+    "shared_source_edits": 0
+  }
+}

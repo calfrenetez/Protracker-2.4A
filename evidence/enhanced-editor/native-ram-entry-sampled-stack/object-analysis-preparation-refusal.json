@@ -1,0 +1,6 @@
+{
+  "status": "REFUSED_SAVED_BYTES_ANALYSIS_BEFORE_NEW_TOOL_OR_PRODUCT",
+  "failure": "Manual32-byte dispatcher hex expectation did not match; generated-body equality passed and will be audited using validated HUNK records rather than hand transcription.",
+  "new_calls": 0,
+  "product_execution": false
+}

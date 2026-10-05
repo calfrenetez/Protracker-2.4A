@@ -1,0 +1,183 @@
+{
+  "status": "ROOT_SAVED_BYTES_OBJECT_REVIEW_CLEAR_NO_REPLAY",
+  "first_inspection": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-object-v1/inspection.json",
+    "bytes": 4516,
+    "sha256": "d251c64c31d01cac56d2450b567b9fd79f0f79573f4048927f94f7ffd3074f12",
+    "mode": 420
+  },
+  "saved_byte_preparation_refusal": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-object-v1/analysis-v2-preparation-refusal.json",
+    "bytes": 306,
+    "sha256": "79046b01b36939b4e2b32a432efa31d75dddffca6f551d6eb81139e07c950595",
+    "mode": 420
+  },
+  "build_manifest": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/manifest.json",
+    "bytes": 275123,
+    "sha256": "436bb1dea25700bfde5dfb367ffc0003926cf6c03dfd048c6dc0489eef34dadb",
+    "mode": 420
+  },
+  "inputs_after": {
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-objdump": {
+      "path": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-objdump",
+      "bytes": 1226264,
+      "sha256": "f5f8cb3d10dcfa205c968556fe6afe070ddaf59294bb6dce0f6f7cf319002686",
+      "mode": 493
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/PTExecReadersRamEntryTest": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/PTExecReadersRamEntryTest",
+      "bytes": 63248,
+      "sha256": "424e5a3e6c2330151d7cace7b515d398637cfe5ef77bad5b4aa402d292d17aea",
+      "mode": 493
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu08.o": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu08.o",
+      "bytes": 1652,
+      "sha256": "e24ceeaa5629ad82558170c3e37625bb14ebe0e5952fc345aeb009f7e69cc03b",
+      "mode": 420
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu02.o": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu02.o",
+      "bytes": 288,
+      "sha256": "dfe4600bcbf5b9540a9436c22245bb07be1708883dc46161a13bcda9d7efe391",
+      "mode": 420
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu02.o": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu02.o",
+      "bytes": 288,
+      "sha256": "52328ac01ebc6418336d1dcc87311c844343b1fa21ed8537db0da2676a298a36",
+      "mode": 420
+    }
+  },
+  "dispatcher": {
+    "original": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu02.o",
+      "bytes": 288,
+      "sha256": "52328ac01ebc6418336d1dcc87311c844343b1fa21ed8537db0da2676a298a36",
+      "mode": 420
+    },
+    "current": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu02.o",
+      "bytes": 288,
+      "sha256": "dfe4600bcbf5b9540a9436c22245bb07be1708883dc46161a13bcda9d7efe391",
+      "mode": 420
+    },
+    "whole_object_equal": false,
+    "HUNK_UNIT_name_only_diff": true,
+    "all_bytes_after_HUNK_UNIT_equal": true,
+    "text_code_bytes": 32,
+    "text_code_sha256": "f8401653e8962780356968f0ae5cb02830248733d1b864c012c21d63f607372b",
+    "exact_excerpt": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-object-v1/dispatcher-exact32B.txt",
+      "bytes": 392,
+      "sha256": "cd2237af8b5617b34c819e9d31874b111bd1b1f98efd26bb88c54b6b7a6eca99",
+      "mode": 420
+    }
+  },
+  "IRQ": {
+    "record": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-object-v1/irq-object.txt",
+      "bytes": 15070,
+      "sha256": "b632b86bd7fe0271be5c3f05f81d38992fa10ce551f6970f92f8d8818d03702b",
+      "mode": 420
+    },
+    "four_original_jsrs": [
+      "jsr a6@(-60)",
+      "jsr 0 <_pt_private_native_ram_dispatch>",
+      "jsr a6@(-60)",
+      "jsr a6@(-324)"
+    ],
+    "only_original_executed_stack_pushes": [
+      "moveml d2-d7/a2-a6,sp@-",
+      "movel a2,sp@-"
+    ],
+    "save44_argument4": true,
+    "both_dispatch_boundaries_after_argument_push_before_pop": true,
+    "dispatch_result_store_precedes_after_sample": true,
+    "exit_payload_in_A0_after_finalSignal_beforeMOVEM_restore": true,
+    "unarmed_branch_to_separate_epilogue_before_tail": true,
+    "seven_sample_blocks_with_phase_count_flags": true,
+    "original19_layout_assertions_compile_and_size88": true,
+    "rts_not_rte": true
+  },
+  "local_stack_annotations": {
+    "tu00.su": {
+      "record": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu00.su",
+        "bytes": 1513,
+        "sha256": "518bb8f14f27ca13d14a435015bfc45ff069e1c3dba239f102be65d51a1b2215",
+        "mode": 420
+      },
+      "local_rows": 26
+    },
+    "tu01.su": {
+      "record": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu01.su",
+        "bytes": 679,
+        "sha256": "77bdef3ac380326c7a1b769b16381d06d0c729831aa6117be0035c26aa8531ba",
+        "mode": 420
+      },
+      "local_rows": 12
+    },
+    "tu02.su": {
+      "record": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu02.su",
+        "bytes": 70,
+        "sha256": "5a9da3e30f6cfd6b304f38500263512f9345e9acc4ef5be38f48e2a07eba15f3",
+        "mode": 420
+      },
+      "local_rows": 1
+    },
+    "tu03.su": {
+      "record": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu03.su",
+        "bytes": 639,
+        "sha256": "2149a982a98400d95fae3b19421fad691f4ccdb7568f927725ffa5bcbabe2c8c",
+        "mode": 420
+      },
+      "local_rows": 9
+    },
+    "tu04.su": {
+      "record": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu04.su",
+        "bytes": 1043,
+        "sha256": "f5868503fea17e3c95667f5985d664d185c164b26ecd0c60f52ca26eb284dd5c",
+        "mode": 420
+      },
+      "local_rows": 15
+    },
+    "tu05.su": {
+      "record": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu05.su",
+        "bytes": 188,
+        "sha256": "8ca1cf1efa21323668e405508e5289f895a00f275d82901713ead6408698a332",
+        "mode": 420
+      },
+      "local_rows": 3
+    },
+    "tu06.su": {
+      "record": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu06.su",
+        "bytes": 1610,
+        "sha256": "6e5960ac7830230aac03ccbc1602648b516f28a73caef853edc551d4ca6eb6e4",
+        "mode": 420
+      },
+      "local_rows": 27
+    },
+    "tu07.su": {
+      "record": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu07.su",
+        "bytes": 1203,
+        "sha256": "32bc29716dd56bdd443fe054434bf9de41499f93e910658b5933722335dfa1b0",
+        "mode": 420
+      },
+      "local_rows": 20
+    }
+  },
+  "local_stack_rows": 113,
+  "first_comparison_disposition": "Whole-object comparison included expected HUNK_UNIT output-name bytes. Saved code/relocation/symbol body compared after validating exact names; manual hex transcription refusal retained separately. No compiler/tool/model/product rerun or source change.",
+  "native_product_execution": false,
+  "total_stack_WCET_65536": "UNKNOWN_NOT_CLEARED",
+  "emulator_physical": "NOT_RUN"
+}

@@ -1,0 +1,153 @@
+{
+  "status": "CLEAR_SAVED_HOST_RESULT_ONLY",
+  "execution": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/execution.json",
+    "bytes": 161413,
+    "sha256": "817ca153bfac5d64869974df6261cbbdec0c77c3dc58aefdfdb88da5709f6f51",
+    "mode": 420
+  },
+  "frozen_controls": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-source-controls-v1.json",
+    "bytes": 17969,
+    "sha256": "4c081b731f3007a6bc652749348240b2088363d1a9167d6299f68fa79021920a",
+    "mode": 420
+  },
+  "final_source_binding": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-source-final-binding-v1.json",
+    "bytes": 16404,
+    "sha256": "a5f39132d290f10b0b7e5ba5402f507b52baba0b7030633eccd1762e2aa6e22e",
+    "mode": 420
+  },
+  "model_seal": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-model-preparation-v1/source-seal-v1.json",
+    "bytes": 8585,
+    "sha256": "db55fa69b3c0bd62df9fe0ac1207c2b42d4e39daca3c69abe2b116301a82c4c6",
+    "mode": 420
+  },
+  "production_seal": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-implementation-v1/source-seal-v1.json",
+    "bytes": 8854,
+    "sha256": "90f052133315c428e9098b9e825ec252db917b236574794b6a91638249405f1e",
+    "mode": 420
+  },
+  "model_source_review": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-model-preparation-v1/model-source-review-v1.json",
+    "bytes": 9722,
+    "sha256": "b4c8a9fd0dc7c68f19c7c71f50067a156e53887befae827fbec157fc69ba315c",
+    "mode": 420
+  },
+  "recorder": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/run_sampled_stack_host_once_v1.py",
+    "bytes": 7282,
+    "sha256": "fd3f62d6d5cf215d5f4d1b185db9fb235d1c7a8aa724bf35e83c98cc6682a5e6",
+    "mode": 420
+  },
+  "compiler": {
+    "path": "/usr/bin/cc",
+    "bytes": 200560,
+    "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+    "mode": 493
+  },
+  "product": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/work/entry-host-model",
+    "bytes": 903776,
+    "sha256": "4d3f9b54866aff8b21cfb351693efc52a2a0e5f2e9039f54909465a96cc9c308",
+    "mode": 493
+  },
+  "suite_stdout": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/suite.stdout",
+    "bytes": 34121,
+    "sha256": "b8f81838a19e95657510888378db041b58975f8dde23d535d1e78e7f8f31db7f",
+    "mode": 420
+  },
+  "suite_stderr": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/suite.stderr",
+    "bytes": 98,
+    "sha256": "6d48de558397b20610d513b1ce5924bd0dcffe1e247721d207b934ba032ce17b",
+    "mode": 420
+  },
+  "counts": {
+    "stable_selected_inputs": 44,
+    "ordered_C_TUs": 10,
+    "actual_compile_calls": 1,
+    "actual_fresh_host_cases": 114,
+    "actual_recorded_subprocess_calls": 115,
+    "all_returncode_zero": 115,
+    "verified_per_call_logs": 230,
+    "common_footer": 114,
+    "task_stack_footer": 22,
+    "system_stack_footer": 17,
+    "sampled_stack_footer": 21
+  },
+  "case_outcomes": {
+    "original54": {
+      "0": 3,
+      "20": 30,
+      "-1": 21
+    },
+    "34": {
+      "20": 19,
+      "0": 3
+    },
+    "35": {
+      "20": 8,
+      "0": 1,
+      "-1": 8
+    },
+    "36": {
+      "0": 3,
+      "-1": 18
+    }
+  },
+  "outcome_meaning": "Every fresh child returned0 because its assertions matched its intended result. Internal diagnostic result0 means modeled successful cleanup,20 means intentional admission/refusal,-1 means intentional retained HOLD. None is native qualification.",
+  "checks": {
+    "all44_current_source_records_equal_before_after_controls_and_frozen_binding": true,
+    "sealed_five_model_and_four_production_overlays_match_exact_frozen_inputs": true,
+    "all_control_seal_and_source_review_pins_verified": true,
+    "recorded_exact10TU_compile_sanitizers_Werror_UNDEBUG": true,
+    "all115_commands_unique_expected_order_complete_RC0": true,
+    "all230_logs_exact_size_hash_mode_verified_and_case_stderr_empty": true,
+    "no_ASan_or_UBSan_diagnostics_in_any_case": true,
+    "aggregate_stdout_equals_all114_case_stdout_concatenated": true,
+    "unittest_one_method_OK_and_first_failure_recipe_preserved": true,
+    "new38_case_result_hold_allocation_and_sample_fields_match_source_oracles": true
+  },
+  "log_record_inventory_sha256": "c1d829b883e2431fc8bfca45b0277f6ceaad3b8890146782a3e5d27339485c60",
+  "original76_comparison": {
+    "execution": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-host-v1/execution.json",
+      "bytes": 114157,
+      "sha256": "652e319314e4211f6eb727ba736eb9286646a1c1e2760ba25a9c9d0975852314",
+      "mode": 420
+    },
+    "fresh_cases": 76,
+    "stdout_and_stderr_byte_identical_for_each_case": true,
+    "ordered_mode_ordinal_arguments_identical": true,
+    "concatenated_original76_stdout_sha256": "5c5d6067bc334976f3a21b417650e63c74652a3c60f1ace1a9b5c37cf23187a3",
+    "original54_result_counts": {
+      "0": 3,
+      "20": 30,
+      "-1": 21
+    },
+    "original22_admission_result_counts": {
+      "20": 19,
+      "0": 3
+    }
+  },
+  "qualification_limits": [
+    "Saved host software/ownership/arithmetic outcomes only. Synthetic SDK/layout and C trampoline do not execute GAS or prove native register/offset behavior.",
+    "Seven IRQ boundaries and task SP values are injected synthetic observations, not measured native peaks, overflow prevention or aggregate stack bound.",
+    "HOLD trapping and post-assertion fixture-arena teardown do not prove native task/device/vector quiet. Existing original76 oracles remain byte-identical; new ownership retention distinctions are source-backed host assertions.",
+    "This recorder has a fixed44-source map and literal10TU compile; no separate full-M/compiler-stack/native-link evidence is claimed by this host result.",
+    "Native/emulator/physical NOT_RUN; total stack/WCET/65536 launch eligibility, placement, resources/timer/IRQ/device/audio acceptance remain UNKNOWN/NOT_CLEARED."
+  ],
+  "actions_in_this_review": {
+    "project_imports": 0,
+    "compiler_or_tool_invocations": 0,
+    "model_test_product_replays": 0,
+    "Git_operations": 0,
+    "target_service_operations": 0,
+    "shared_source_mutations": 0
+  },
+  "findings": []
+}

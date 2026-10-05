@@ -1,0 +1,128 @@
+tu00.su
+native_ram_entry.c:100:12:entry_span	0	static
+native_ram_entry.c:107:12:entry_fast	24	dynamic,bounded
+native_ram_entry.c:114:13:entry_write	12	static
+native_ram_entry.c:116:13:entry_hex	48	dynamic,bounded
+native_ram_entry.c:124:13:entry_hold	20	dynamic,bounded
+native_ram_entry.c:140:12:entry_task_current	8	static
+native_ram_entry.c:149:13:entry_require_task	4	dynamic,bounded
+native_ram_entry.c:151:12:entry_memory_good	0	static
+native_ram_entry.c:168:12:entry_key_same	8	static
+native_ram_entry.c:173:12:entry_source_same	12	static
+native_ram_entry.c:181:12:entry_current	20	dynamic,bounded
+native_ram_entry.c:190:13:entry_terminal	20	dynamic,bounded
+native_ram_entry.c:201:13:entry_release	40	dynamic,bounded
+native_ram_entry.c:225:14:entry_allocate	28	dynamic,bounded
+native_ram_entry.c:235:12:entry_drop	20	dynamic,bounded
+native_ram_entry.c:244:14:entry_allocator_allocate	20	dynamic,bounded
+native_ram_entry.c:253:13:entry_allocator_release	20	dynamic,bounded
+native_ram_entry.c:297:13:entry_task_record	8	static
+native_ram_entry.c:311:13:entry_task_sample	24	dynamic,bounded
+native_ram_entry.c:324:12:entry_irq_stack_good	12	static
+native_ram_entry.c:399:14:entry_accept_port	8	dynamic,bounded
+native_ram_entry.c:591:13:entry_source_end	68	dynamic,bounded
+native_ram_entry.c:799:13:entry_require_port	8	dynamic,bounded
+native_ram_entry.c:810:29:entry_termination_poll	32	dynamic,bounded
+native_ram_entry.c:974:5:main	364	dynamic,bounded
+native_ram_entry.c:102:12:entry_apart.constprop	20	dynamic,bounded
+
+tu01.su
+native_ram_port.c:9:12:key_same	8	static
+native_ram_port.c:26:12:expected_same	28	dynamic,bounded
+native_ram_port.c:35:38:reader_find	32	dynamic,bounded
+native_ram_port.c:39:12:actual_clock	44	dynamic,bounded
+native_ram_port.c:51:12:publish	72	dynamic,bounded
+native_ram_port.c:71:12:commit	96	dynamic,bounded
+native_ram_port.c:111:12:command_quiet	36	dynamic,bounded
+native_ram_port.c:124:12:reader_quiet	56	dynamic,bounded
+native_ram_port.c:152:5:pt_private_ram_init	52	dynamic,bounded
+native_ram_port.c:162:35:pt_private_ram_api	0	static
+native_ram_port.c:165:5:pt_private_ram_dispatch	80	dynamic,bounded
+native_ram_port.c:193:5:pt_private_ram_source_close	12	dynamic,bounded
+
+tu02.su
+native_ram_irq_dispatch.c:7:5:pt_private_native_ram_dispatch	0	static
+
+tu03.su
+native_cia_ram_adapter.c:10:12:current	16	static
+native_cia_ram_adapter.c:26:12:stopped_masked_pending_clear	20	static
+native_cia_ram_adapter.c:47:5:pt_private_cia_ram_clock	28	static
+native_cia_ram_adapter.c:56:5:pt_private_cia_ram_acquire	52	dynamic,bounded
+native_cia_ram_adapter.c:93:5:pt_private_cia_ram_arm_at	72	dynamic,bounded
+native_cia_ram_adapter.c:127:5:pt_private_cia_ram_disarm	24	dynamic,bounded
+native_cia_ram_adapter.c:137:5:pt_private_cia_ram_ticket_quiet	32	dynamic,bounded
+native_cia_ram_adapter.c:159:5:pt_private_cia_ram_source_close	20	dynamic,bounded
+native_cia_ram_adapter.c:178:31:pt_private_cia_ram_api	0	static
+
+tu04.su
+native_checked_memory.c:11:12:memory_span	0	static
+native_checked_memory.c:16:12:memory_apart	28	dynamic,bounded
+native_checked_memory.c:23:12:memory_context	12	dynamic,bounded
+native_checked_memory.c:37:12:memory_enter	8	dynamic,bounded
+native_checked_memory.c:46:12:memory_guarded	44	dynamic,bounded
+native_checked_memory.c:57:12:memory_accounted	40	dynamic,bounded
+native_checked_memory.c:72:12:memory_fast	12	static
+native_checked_memory.c:89:5:pt_private_native_memory_init	512	dynamic,bounded
+native_checked_memory.c:124:7:pt_private_native_allocate	40	dynamic,bounded
+native_checked_memory.c:201:5:pt_private_native_release_checked	40	dynamic,bounded
+native_checked_memory.c:234:6:pt_private_native_release	0	static
+native_checked_memory.c:238:5:pt_private_native_memory_seal	12	dynamic,bounded
+native_checked_memory.c:247:5:pt_private_native_memory_retain	8	dynamic,bounded
+native_checked_memory.c:252:5:pt_private_native_memory_finish	12	dynamic,bounded
+native_checked_memory.c:263:5:pt_private_native_memory_stats	64	dynamic,bounded
+
+tu05.su
+elapsed_clock.c:4:24:pt_elapsed_clock_init	52	static
+elapsed_clock.c:11:24:pt_elapsed_clock_advance	104	dynamic,bounded
+elapsed_clock.c:40:24:pt_elapsed_clock_deadline	104	dynamic,bounded
+
+tu06.su
+scheduled_readers.c:24:12:span	0	static
+scheduled_readers.c:26:12:apart	28	dynamic,bounded
+scheduled_readers.c:30:12:equal_key	8	static
+scheduled_readers.c:34:29:reader	28	dynamic,bounded
+scheduled_readers.c:36:29:key_reader	24	dynamic,bounded
+scheduled_readers.c:40:12:output_apart	52	dynamic,bounded
+scheduled_readers.c:52:12:control_valid	12	dynamic,bounded
+scheduled_readers.c:56:12:current	24	dynamic,bounded
+scheduled_readers.c:58:12:active	36	static
+scheduled_readers.c:71:26:pt_readers_open	96	dynamic,bounded
+scheduled_readers.c:121:26:pt_readers_enqueue	7008	dynamic,bounded
+scheduled_readers.c:180:26:pt_readers_publish	76	dynamic,bounded
+scheduled_readers.c:198:13:reader_release	44	dynamic,bounded
+scheduled_readers.c:204:13:command_release	96	dynamic,bounded
+scheduled_readers.c:216:12:reader_state_valid	4	static
+scheduled_readers.c:276:33:command_check	32	dynamic,bounded
+scheduled_readers.c:299:26:pt_readers_poll_command	20	dynamic,bounded
+scheduled_readers.c:301:26:pt_readers_cancel_command	20	dynamic,bounded
+scheduled_readers.c:313:33:reader_check	152	dynamic,bounded
+scheduled_readers.c:329:26:pt_readers_poll_reader	32	dynamic,bounded
+scheduled_readers.c:331:26:pt_readers_cancel_reader	32	dynamic,bounded
+scheduled_readers.c:333:26:pt_readers_reader_key	40	dynamic,bounded
+scheduled_readers.c:342:26:pt_readers_stop	32	dynamic,bounded
+scheduled_readers.c:349:10:pt_readers_commands_held	0	static
+scheduled_readers.c:350:10:pt_readers_readers_held	0	static
+scheduled_readers.c:351:5:pt_readers_close	8	dynamic,bounded
+scheduled_readers.c:276:33:command_check.part.5	496	dynamic,bounded
+
+tu07.su
+readers_activation.c:34:12:extent	0	static
+readers_activation.c:36:12:apart	28	dynamic,bounded
+readers_activation.c:38:12:key_equal	8	static
+readers_activation.c:42:12:enter	0	static
+readers_activation.c:45:12:output_apart	48	dynamic,bounded
+readers_activation.c:61:34:find_reader	32	dynamic,bounded
+readers_activation.c:65:12:clock_read	44	dynamic,bounded
+readers_activation.c:72:12:backend_clock	40	dynamic,bounded
+readers_activation.c:158:12:backend_submit	196	dynamic,bounded
+readers_activation.c:186:13:reader_closed	36	dynamic,bounded
+readers_activation.c:192:35:pt_readers_activation_fire	308	dynamic,bounded
+readers_activation.c:232:30:command_probe	436	dynamic,bounded
+readers_activation.c:257:30:poll_command	20	dynamic,bounded
+readers_activation.c:259:30:cancel_command	20	dynamic,bounded
+readers_activation.c:261:30:reader_probe	152	dynamic,bounded
+readers_activation.c:303:30:poll_reader	16	dynamic,bounded
+readers_activation.c:305:30:cancel_reader	16	dynamic,bounded
+readers_activation.c:307:26:pt_readers_activation_open	164	dynamic,bounded
+readers_activation.c:319:26:pt_readers_activation_api	20	dynamic,bounded
+readers_activation.c:327:5:pt_readers_activation_close	28	dynamic,bounded

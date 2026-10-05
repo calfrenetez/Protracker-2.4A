@@ -1,0 +1,33 @@
+{
+  "status": "CLEAR_SAVED_COMPILER_OBJECT_EVIDENCE_ONLY",
+  "scope": "Additive exact-count and final-selection binding clarification; preserves completed V1 finite native build/object audit without producer/tool/model/target replay.",
+  "previous_receipt": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-object-v1/independent-build-object-review-v1.json",
+    "bytes": 11744,
+    "mode": 420,
+    "sha256": "27b180fcc392c6b18ba25cb14d2e573173c2ef77f492195f232c504e82b19f89"
+  },
+  "final_selected_source_binding": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-source-final-binding-v1.json",
+    "bytes": 16404,
+    "mode": 420,
+    "sha256": "a5f39132d290f10b0b7e5ba5402f507b52baba0b7030633eccd1762e2aa6e22e"
+  },
+  "counts": {
+    "immutable_original_selected_records": 44,
+    "final_selected_records": 44,
+    "native_build_production_records": 26,
+    "native26_exact_final_binding_and_current_bytes_modes_hashes_equal": true,
+    "tests_or_hostSDK_in_native_dependencies": 0
+  },
+  "erratum": "The V1 schema/scope disposition described 48 pre-overlay files. The exact original and final selection bindings each have44 records. This prose count was incorrect; all native26 checks, dependency counts, object shapes, results and limits in V1 remain unchanged.",
+  "host_model_scope": "Five separately overlaid model files remain outside this native/compiler receipt; final binding is provenance only, not model execution acceptance.",
+  "findings": [],
+  "limits": {
+    "native_execution": "NOT_RUN",
+    "emulator_physical": "NOT_RUN",
+    "total_stack_WCET_65536": "UNKNOWN_NOT_CLEARED",
+    "launch_permission": "NOT_GRANTED"
+  },
+  "reviewer_new_project_import_model_test_compiler_tool_product_Git_service_target_operations": 0
+}

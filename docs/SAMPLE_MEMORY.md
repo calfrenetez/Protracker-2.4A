@@ -5353,11 +5353,14 @@ evidence reviews cover each exact lane separately.
 PREPARE, irreversible sealing/retention and exact zero-ownership finish remain
 separate from source shutdown, command detachment and reader retirement. The
 helper is not wired to editor PLAY. The separate [native RAM entry](NATIVE_RAM_ENTRY.md)
-is published with a 76-case host matrix and compiler/link evidence; its current
-59,992-byte HUNK is native NOT RUN. It checks actual m68k SP against declared
+now has a 114-case host matrix and compiler/link evidence; its current
+63,248-byte HUNK is native NOT RUN. It checks actual m68k SP against declared
 usable bounds and a 32 KiB diagnostic headroom policy before explicit resource
-acquisition; this is not total stack clearance. The original 54-case/59,924-byte
-candidate evidence remains separate. Heap retention alone does not preserve
+acquisition. ExecBase/system spans join protected allocation guards, and fixed
+task/IRQ observations retain exact ownership on invalid records. These are
+samples, not total stack clearance or initial overflow prevention. The original
+54-case/59,924-byte and 76-case/59,992-byte candidates remain separate.
+See [sampled-stack evidence](../evidence/enhanced-editor/native-ram-entry-sampled-stack/README.md). Heap retention alone does not preserve
 process/code/library/stack lifetime. Native execution, Amiberry/physical runs, full task and
 IRQ/system stack, WCET and 65,536-byte launch remain unqualified. No DMA/audio or
 listening acceptance follows. See [checked allocator contract](NATIVE_CHECKED_MEMORY.md).

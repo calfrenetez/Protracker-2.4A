@@ -1,0 +1,361 @@
+
+/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/tu08.o:     file format amiga
+
+
+Disassembly of section .text:
+
+00000000 <_pt_private_native_ram_irq>:
+   0:	200f           	movel sp,d0
+   2:	48e7 3f3e      	moveml d2-d7/a2-a6,sp@-
+   6:	2449           	moveal a1,a2
+   8:	4aaa 000c      	tstl a2@(12)
+   c:	6700 0558      	beqw 566 <_pt_private_native_ram_irq+0x566>
+  10:	2540 0044      	movel d0,a2@(68)
+  14:	0caa 0000 0007 	cmpil #7,a2@(84)
+  1a:	0054 
+  1c:	6400 000a      	bccw 28 <_pt_private_native_ram_irq+0x28>
+  20:	52aa 0054      	addql #1,a2@(84)
+  24:	6000 000a      	braw 30 <_pt_private_native_ram_irq+0x30>
+  28:	00aa 0000 0004 	oril #4,a2@(80)
+  2e:	0050 
+  30:	222a 0050      	movel a2@(80),d1
+  34:	0281 0000 0100 	andil #256,d1
+  3a:	6700 000a      	beqw 46 <_pt_private_native_ram_irq+0x46>
+  3e:	00aa 0000 0008 	oril #8,a2@(80)
+  44:	0050 
+  46:	00aa 0000 0100 	oril #256,a2@(80)
+  4c:	0050 
+  4e:	0caa 0000 0001 	cmpil #1,a2@(56)
+  54:	0038 
+  56:	6700 000a      	beqw 62 <_pt_private_native_ram_irq+0x62>
+  5a:	00aa 0000 0010 	oril #16,a2@(80)
+  60:	0050 
+  62:	222a 003c      	movel a2@(60),d1
+  66:	6700 004e      	beqw b6 <_pt_private_native_ram_irq+0xb6>
+  6a:	0801 0000      	btst #0,d1
+  6e:	6600 0046      	bnew b6 <_pt_private_native_ram_irq+0xb6>
+  72:	222a 0040      	movel a2@(64),d1
+  76:	0801 0000      	btst #0,d1
+  7a:	6600 003a      	bnew b6 <_pt_private_native_ram_irq+0xb6>
+  7e:	b2aa 003c      	cmpl a2@(60),d1
+  82:	6300 0032      	blsw b6 <_pt_private_native_ram_irq+0xb6>
+  86:	0800 0000      	btst #0,d0
+  8a:	6600 0036      	bnew c2 <_pt_private_native_ram_irq+0xc2>
+  8e:	b0aa 003c      	cmpl a2@(60),d0
+  92:	6500 002e      	bcsw c2 <_pt_private_native_ram_irq+0xc2>
+  96:	b0aa 0040      	cmpl a2@(64),d0
+  9a:	6400 0026      	bccw c2 <_pt_private_native_ram_irq+0xc2>
+  9e:	4aaa 0048      	tstl a2@(72)
+  a2:	6700 000a      	beqw ae <_pt_private_native_ram_irq+0xae>
+  a6:	b0aa 0048      	cmpl a2@(72),d0
+  aa:	6400 001e      	bccw ca <_pt_private_native_ram_irq+0xca>
+  ae:	2540 0048      	movel d0,a2@(72)
+  b2:	6000 0016      	braw ca <_pt_private_native_ram_irq+0xca>
+  b6:	00aa 0000 0001 	oril #1,a2@(80)
+  bc:	0050 
+  be:	6000 000a      	braw ca <_pt_private_native_ram_irq+0xca>
+  c2:	00aa 0000 0002 	oril #2,a2@(80)
+  c8:	0050 
+  ca:	200f           	movel sp,d0
+  cc:	0caa 0000 0007 	cmpil #7,a2@(84)
+  d2:	0054 
+  d4:	6400 000a      	bccw e0 <_pt_private_native_ram_irq+0xe0>
+  d8:	52aa 0054      	addql #1,a2@(84)
+  dc:	6000 000a      	braw e8 <_pt_private_native_ram_irq+0xe8>
+  e0:	00aa 0000 0004 	oril #4,a2@(80)
+  e6:	0050 
+  e8:	222a 0050      	movel a2@(80),d1
+  ec:	0281 0000 0200 	andil #512,d1
+  f2:	6700 000a      	beqw fe <_pt_private_native_ram_irq+0xfe>
+  f6:	00aa 0000 0008 	oril #8,a2@(80)
+  fc:	0050 
+  fe:	00aa 0000 0200 	oril #512,a2@(80)
+ 104:	0050 
+ 106:	0caa 0000 0001 	cmpil #1,a2@(56)
+ 10c:	0038 
+ 10e:	6700 000a      	beqw 11a <_pt_private_native_ram_irq+0x11a>
+ 112:	00aa 0000 0010 	oril #16,a2@(80)
+ 118:	0050 
+ 11a:	222a 003c      	movel a2@(60),d1
+ 11e:	6700 004e      	beqw 16e <_pt_private_native_ram_irq+0x16e>
+ 122:	0801 0000      	btst #0,d1
+ 126:	6600 0046      	bnew 16e <_pt_private_native_ram_irq+0x16e>
+ 12a:	222a 0040      	movel a2@(64),d1
+ 12e:	0801 0000      	btst #0,d1
+ 132:	6600 003a      	bnew 16e <_pt_private_native_ram_irq+0x16e>
+ 136:	b2aa 003c      	cmpl a2@(60),d1
+ 13a:	6300 0032      	blsw 16e <_pt_private_native_ram_irq+0x16e>
+ 13e:	0800 0000      	btst #0,d0
+ 142:	6600 0036      	bnew 17a <_pt_private_native_ram_irq+0x17a>
+ 146:	b0aa 003c      	cmpl a2@(60),d0
+ 14a:	6500 002e      	bcsw 17a <_pt_private_native_ram_irq+0x17a>
+ 14e:	b0aa 0040      	cmpl a2@(64),d0
+ 152:	6400 0026      	bccw 17a <_pt_private_native_ram_irq+0x17a>
+ 156:	4aaa 0048      	tstl a2@(72)
+ 15a:	6700 000a      	beqw 166 <_pt_private_native_ram_irq+0x166>
+ 15e:	b0aa 0048      	cmpl a2@(72),d0
+ 162:	6400 001e      	bccw 182 <_pt_private_native_ram_irq+0x182>
+ 166:	2540 0048      	movel d0,a2@(72)
+ 16a:	6000 0016      	braw 182 <_pt_private_native_ram_irq+0x182>
+ 16e:	00aa 0000 0001 	oril #1,a2@(80)
+ 174:	0050 
+ 176:	6000 000a      	braw 182 <_pt_private_native_ram_irq+0x182>
+ 17a:	00aa 0000 0002 	oril #2,a2@(80)
+ 180:	0050 
+ 182:	2c52           	moveal a2@,a6
+ 184:	41ea 001c      	lea a2@(28),a0
+ 188:	4eae ffc4      	jsr a6@(-60)
+ 18c:	2540 0024      	movel d0,a2@(36)
+ 190:	2f0a           	movel a2,sp@-
+ 192:	200f           	movel sp,d0
+ 194:	0caa 0000 0007 	cmpil #7,a2@(84)
+ 19a:	0054 
+ 19c:	6400 000a      	bccw 1a8 <_pt_private_native_ram_irq+0x1a8>
+ 1a0:	52aa 0054      	addql #1,a2@(84)
+ 1a4:	6000 000a      	braw 1b0 <_pt_private_native_ram_irq+0x1b0>
+ 1a8:	00aa 0000 0004 	oril #4,a2@(80)
+ 1ae:	0050 
+ 1b0:	222a 0050      	movel a2@(80),d1
+ 1b4:	0281 0000 0400 	andil #1024,d1
+ 1ba:	6700 000a      	beqw 1c6 <_pt_private_native_ram_irq+0x1c6>
+ 1be:	00aa 0000 0008 	oril #8,a2@(80)
+ 1c4:	0050 
+ 1c6:	00aa 0000 0400 	oril #1024,a2@(80)
+ 1cc:	0050 
+ 1ce:	0caa 0000 0001 	cmpil #1,a2@(56)
+ 1d4:	0038 
+ 1d6:	6700 000a      	beqw 1e2 <_pt_private_native_ram_irq+0x1e2>
+ 1da:	00aa 0000 0010 	oril #16,a2@(80)
+ 1e0:	0050 
+ 1e2:	222a 003c      	movel a2@(60),d1
+ 1e6:	6700 004e      	beqw 236 <_pt_private_native_ram_irq+0x236>
+ 1ea:	0801 0000      	btst #0,d1
+ 1ee:	6600 0046      	bnew 236 <_pt_private_native_ram_irq+0x236>
+ 1f2:	222a 0040      	movel a2@(64),d1
+ 1f6:	0801 0000      	btst #0,d1
+ 1fa:	6600 003a      	bnew 236 <_pt_private_native_ram_irq+0x236>
+ 1fe:	b2aa 003c      	cmpl a2@(60),d1
+ 202:	6300 0032      	blsw 236 <_pt_private_native_ram_irq+0x236>
+ 206:	0800 0000      	btst #0,d0
+ 20a:	6600 0036      	bnew 242 <_pt_private_native_ram_irq+0x242>
+ 20e:	b0aa 003c      	cmpl a2@(60),d0
+ 212:	6500 002e      	bcsw 242 <_pt_private_native_ram_irq+0x242>
+ 216:	b0aa 0040      	cmpl a2@(64),d0
+ 21a:	6400 0026      	bccw 242 <_pt_private_native_ram_irq+0x242>
+ 21e:	4aaa 0048      	tstl a2@(72)
+ 222:	6700 000a      	beqw 22e <_pt_private_native_ram_irq+0x22e>
+ 226:	b0aa 0048      	cmpl a2@(72),d0
+ 22a:	6400 001e      	bccw 24a <_pt_private_native_ram_irq+0x24a>
+ 22e:	2540 0048      	movel d0,a2@(72)
+ 232:	6000 0016      	braw 24a <_pt_private_native_ram_irq+0x24a>
+ 236:	00aa 0000 0001 	oril #1,a2@(80)
+ 23c:	0050 
+ 23e:	6000 000a      	braw 24a <_pt_private_native_ram_irq+0x24a>
+ 242:	00aa 0000 0002 	oril #2,a2@(80)
+ 248:	0050 
+ 24a:	4eb9 0000 0000 	jsr 0 <_pt_private_native_ram_dispatch>
+			24c: RELOC32	_pt_private_native_ram_dispatch
+ 250:	2540 0034      	movel d0,a2@(52)
+ 254:	200f           	movel sp,d0
+ 256:	0caa 0000 0007 	cmpil #7,a2@(84)
+ 25c:	0054 
+ 25e:	6400 000a      	bccw 26a <_pt_private_native_ram_irq+0x26a>
+ 262:	52aa 0054      	addql #1,a2@(84)
+ 266:	6000 000a      	braw 272 <_pt_private_native_ram_irq+0x272>
+ 26a:	00aa 0000 0004 	oril #4,a2@(80)
+ 270:	0050 
+ 272:	222a 0050      	movel a2@(80),d1
+ 276:	0281 0000 0800 	andil #2048,d1
+ 27c:	6700 000a      	beqw 288 <_pt_private_native_ram_irq+0x288>
+ 280:	00aa 0000 0008 	oril #8,a2@(80)
+ 286:	0050 
+ 288:	00aa 0000 0800 	oril #2048,a2@(80)
+ 28e:	0050 
+ 290:	0caa 0000 0001 	cmpil #1,a2@(56)
+ 296:	0038 
+ 298:	6700 000a      	beqw 2a4 <_pt_private_native_ram_irq+0x2a4>
+ 29c:	00aa 0000 0010 	oril #16,a2@(80)
+ 2a2:	0050 
+ 2a4:	222a 003c      	movel a2@(60),d1
+ 2a8:	6700 004e      	beqw 2f8 <_pt_private_native_ram_irq+0x2f8>
+ 2ac:	0801 0000      	btst #0,d1
+ 2b0:	6600 0046      	bnew 2f8 <_pt_private_native_ram_irq+0x2f8>
+ 2b4:	222a 0040      	movel a2@(64),d1
+ 2b8:	0801 0000      	btst #0,d1
+ 2bc:	6600 003a      	bnew 2f8 <_pt_private_native_ram_irq+0x2f8>
+ 2c0:	b2aa 003c      	cmpl a2@(60),d1
+ 2c4:	6300 0032      	blsw 2f8 <_pt_private_native_ram_irq+0x2f8>
+ 2c8:	0800 0000      	btst #0,d0
+ 2cc:	6600 0036      	bnew 304 <_pt_private_native_ram_irq+0x304>
+ 2d0:	b0aa 003c      	cmpl a2@(60),d0
+ 2d4:	6500 002e      	bcsw 304 <_pt_private_native_ram_irq+0x304>
+ 2d8:	b0aa 0040      	cmpl a2@(64),d0
+ 2dc:	6400 0026      	bccw 304 <_pt_private_native_ram_irq+0x304>
+ 2e0:	4aaa 0048      	tstl a2@(72)
+ 2e4:	6700 000a      	beqw 2f0 <_pt_private_native_ram_irq+0x2f0>
+ 2e8:	b0aa 0048      	cmpl a2@(72),d0
+ 2ec:	6400 001e      	bccw 30c <_pt_private_native_ram_irq+0x30c>
+ 2f0:	2540 0048      	movel d0,a2@(72)
+ 2f4:	6000 0016      	braw 30c <_pt_private_native_ram_irq+0x30c>
+ 2f8:	00aa 0000 0001 	oril #1,a2@(80)
+ 2fe:	0050 
+ 300:	6000 000a      	braw 30c <_pt_private_native_ram_irq+0x30c>
+ 304:	00aa 0000 0002 	oril #2,a2@(80)
+ 30a:	0050 
+ 30c:	588f           	addql #4,sp
+ 30e:	2c52           	moveal a2@,a6
+ 310:	41ea 0028      	lea a2@(40),a0
+ 314:	4eae ffc4      	jsr a6@(-60)
+ 318:	2540 0030      	movel d0,a2@(48)
+ 31c:	200f           	movel sp,d0
+ 31e:	0caa 0000 0007 	cmpil #7,a2@(84)
+ 324:	0054 
+ 326:	6400 000a      	bccw 332 <_pt_private_native_ram_irq+0x332>
+ 32a:	52aa 0054      	addql #1,a2@(84)
+ 32e:	6000 000a      	braw 33a <_pt_private_native_ram_irq+0x33a>
+ 332:	00aa 0000 0004 	oril #4,a2@(80)
+ 338:	0050 
+ 33a:	222a 0050      	movel a2@(80),d1
+ 33e:	0281 0000 1000 	andil #4096,d1
+ 344:	6700 000a      	beqw 350 <_pt_private_native_ram_irq+0x350>
+ 348:	00aa 0000 0008 	oril #8,a2@(80)
+ 34e:	0050 
+ 350:	00aa 0000 1000 	oril #4096,a2@(80)
+ 356:	0050 
+ 358:	0caa 0000 0001 	cmpil #1,a2@(56)
+ 35e:	0038 
+ 360:	6700 000a      	beqw 36c <_pt_private_native_ram_irq+0x36c>
+ 364:	00aa 0000 0010 	oril #16,a2@(80)
+ 36a:	0050 
+ 36c:	222a 003c      	movel a2@(60),d1
+ 370:	6700 004e      	beqw 3c0 <_pt_private_native_ram_irq+0x3c0>
+ 374:	0801 0000      	btst #0,d1
+ 378:	6600 0046      	bnew 3c0 <_pt_private_native_ram_irq+0x3c0>
+ 37c:	222a 0040      	movel a2@(64),d1
+ 380:	0801 0000      	btst #0,d1
+ 384:	6600 003a      	bnew 3c0 <_pt_private_native_ram_irq+0x3c0>
+ 388:	b2aa 003c      	cmpl a2@(60),d1
+ 38c:	6300 0032      	blsw 3c0 <_pt_private_native_ram_irq+0x3c0>
+ 390:	0800 0000      	btst #0,d0
+ 394:	6600 0036      	bnew 3cc <_pt_private_native_ram_irq+0x3cc>
+ 398:	b0aa 003c      	cmpl a2@(60),d0
+ 39c:	6500 002e      	bcsw 3cc <_pt_private_native_ram_irq+0x3cc>
+ 3a0:	b0aa 0040      	cmpl a2@(64),d0
+ 3a4:	6400 0026      	bccw 3cc <_pt_private_native_ram_irq+0x3cc>
+ 3a8:	4aaa 0048      	tstl a2@(72)
+ 3ac:	6700 000a      	beqw 3b8 <_pt_private_native_ram_irq+0x3b8>
+ 3b0:	b0aa 0048      	cmpl a2@(72),d0
+ 3b4:	6400 001e      	bccw 3d4 <_pt_private_native_ram_irq+0x3d4>
+ 3b8:	2540 0048      	movel d0,a2@(72)
+ 3bc:	6000 0016      	braw 3d4 <_pt_private_native_ram_irq+0x3d4>
+ 3c0:	00aa 0000 0001 	oril #1,a2@(80)
+ 3c6:	0050 
+ 3c8:	6000 000a      	braw 3d4 <_pt_private_native_ram_irq+0x3d4>
+ 3cc:	00aa 0000 0002 	oril #2,a2@(80)
+ 3d2:	0050 
+ 3d4:	42aa 000c      	clrl a2@(12)
+ 3d8:	226a 0004      	moveal a2@(4),a1
+ 3dc:	202a 0008      	movel a2@(8),d0
+ 3e0:	2c78 0004      	moveal 4 <_pt_private_native_ram_irq+0x4>,a6
+ 3e4:	4eae febc      	jsr a6@(-324)
+ 3e8:	200f           	movel sp,d0
+ 3ea:	0caa 0000 0007 	cmpil #7,a2@(84)
+ 3f0:	0054 
+ 3f2:	6400 000a      	bccw 3fe <_pt_private_native_ram_irq+0x3fe>
+ 3f6:	52aa 0054      	addql #1,a2@(84)
+ 3fa:	6000 000a      	braw 406 <_pt_private_native_ram_irq+0x406>
+ 3fe:	00aa 0000 0004 	oril #4,a2@(80)
+ 404:	0050 
+ 406:	222a 0050      	movel a2@(80),d1
+ 40a:	0281 0000 2000 	andil #8192,d1
+ 410:	6700 000a      	beqw 41c <_pt_private_native_ram_irq+0x41c>
+ 414:	00aa 0000 0008 	oril #8,a2@(80)
+ 41a:	0050 
+ 41c:	00aa 0000 2000 	oril #8192,a2@(80)
+ 422:	0050 
+ 424:	0caa 0000 0001 	cmpil #1,a2@(56)
+ 42a:	0038 
+ 42c:	6700 000a      	beqw 438 <_pt_private_native_ram_irq+0x438>
+ 430:	00aa 0000 0010 	oril #16,a2@(80)
+ 436:	0050 
+ 438:	222a 003c      	movel a2@(60),d1
+ 43c:	6700 004e      	beqw 48c <_pt_private_native_ram_irq+0x48c>
+ 440:	0801 0000      	btst #0,d1
+ 444:	6600 0046      	bnew 48c <_pt_private_native_ram_irq+0x48c>
+ 448:	222a 0040      	movel a2@(64),d1
+ 44c:	0801 0000      	btst #0,d1
+ 450:	6600 003a      	bnew 48c <_pt_private_native_ram_irq+0x48c>
+ 454:	b2aa 003c      	cmpl a2@(60),d1
+ 458:	6300 0032      	blsw 48c <_pt_private_native_ram_irq+0x48c>
+ 45c:	0800 0000      	btst #0,d0
+ 460:	6600 0036      	bnew 498 <_pt_private_native_ram_irq+0x498>
+ 464:	b0aa 003c      	cmpl a2@(60),d0
+ 468:	6500 002e      	bcsw 498 <_pt_private_native_ram_irq+0x498>
+ 46c:	b0aa 0040      	cmpl a2@(64),d0
+ 470:	6400 0026      	bccw 498 <_pt_private_native_ram_irq+0x498>
+ 474:	4aaa 0048      	tstl a2@(72)
+ 478:	6700 000a      	beqw 484 <_pt_private_native_ram_irq+0x484>
+ 47c:	b0aa 0048      	cmpl a2@(72),d0
+ 480:	6400 001e      	bccw 4a0 <_pt_private_native_ram_irq+0x4a0>
+ 484:	2540 0048      	movel d0,a2@(72)
+ 488:	6000 0016      	braw 4a0 <_pt_private_native_ram_irq+0x4a0>
+ 48c:	00aa 0000 0001 	oril #1,a2@(80)
+ 492:	0050 
+ 494:	6000 000a      	braw 4a0 <_pt_private_native_ram_irq+0x4a0>
+ 498:	00aa 0000 0002 	oril #2,a2@(80)
+ 49e:	0050 
+ 4a0:	204a           	moveal a2,a0
+ 4a2:	4cdf 7cfc      	moveml sp@+,d2-d7/a2-a6
+ 4a6:	200f           	movel sp,d0
+ 4a8:	2140 004c      	movel d0,a0@(76)
+ 4ac:	0ca8 0000 0007 	cmpil #7,a0@(84)
+ 4b2:	0054 
+ 4b4:	6400 000a      	bccw 4c0 <_pt_private_native_ram_irq+0x4c0>
+ 4b8:	52a8 0054      	addql #1,a0@(84)
+ 4bc:	6000 000a      	braw 4c8 <_pt_private_native_ram_irq+0x4c8>
+ 4c0:	00a8 0000 0004 	oril #4,a0@(80)
+ 4c6:	0050 
+ 4c8:	2228 0050      	movel a0@(80),d1
+ 4cc:	0281 0000 4000 	andil #16384,d1
+ 4d2:	6700 000a      	beqw 4de <_pt_private_native_ram_irq+0x4de>
+ 4d6:	00a8 0000 0008 	oril #8,a0@(80)
+ 4dc:	0050 
+ 4de:	00a8 0000 4000 	oril #16384,a0@(80)
+ 4e4:	0050 
+ 4e6:	0ca8 0000 0001 	cmpil #1,a0@(56)
+ 4ec:	0038 
+ 4ee:	6700 000a      	beqw 4fa <_pt_private_native_ram_irq+0x4fa>
+ 4f2:	00a8 0000 0010 	oril #16,a0@(80)
+ 4f8:	0050 
+ 4fa:	2228 003c      	movel a0@(60),d1
+ 4fe:	6700 004e      	beqw 54e <_pt_private_native_ram_irq+0x54e>
+ 502:	0801 0000      	btst #0,d1
+ 506:	6600 0046      	bnew 54e <_pt_private_native_ram_irq+0x54e>
+ 50a:	2228 0040      	movel a0@(64),d1
+ 50e:	0801 0000      	btst #0,d1
+ 512:	6600 003a      	bnew 54e <_pt_private_native_ram_irq+0x54e>
+ 516:	b2a8 003c      	cmpl a0@(60),d1
+ 51a:	6300 0032      	blsw 54e <_pt_private_native_ram_irq+0x54e>
+ 51e:	0800 0000      	btst #0,d0
+ 522:	6600 0036      	bnew 55a <_pt_private_native_ram_irq+0x55a>
+ 526:	b0a8 003c      	cmpl a0@(60),d0
+ 52a:	6500 002e      	bcsw 55a <_pt_private_native_ram_irq+0x55a>
+ 52e:	b0a8 0040      	cmpl a0@(64),d0
+ 532:	6400 0026      	bccw 55a <_pt_private_native_ram_irq+0x55a>
+ 536:	4aa8 0048      	tstl a0@(72)
+ 53a:	6700 000a      	beqw 546 <_pt_private_native_ram_irq+0x546>
+ 53e:	b0a8 0048      	cmpl a0@(72),d0
+ 542:	6400 001e      	bccw 562 <_pt_private_native_ram_irq+0x562>
+ 546:	2140 0048      	movel d0,a0@(72)
+ 54a:	6000 0016      	braw 562 <_pt_private_native_ram_irq+0x562>
+ 54e:	00a8 0000 0001 	oril #1,a0@(80)
+ 554:	0050 
+ 556:	6000 000a      	braw 562 <_pt_private_native_ram_irq+0x562>
+ 55a:	00a8 0000 0002 	oril #2,a0@(80)
+ 560:	0050 
+ 562:	7000           	moveq #0,d0
+ 564:	4e75           	rts
+ 566:	4cdf 7cfc      	moveml sp@+,d2-d7/a2-a6
+ 56a:	7000           	moveq #0,d0
+ 56c:	4e75           	rts
+	...

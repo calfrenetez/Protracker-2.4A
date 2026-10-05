@@ -1,0 +1,279 @@
+{
+  "ABI_source_checks": {
+    "actual_native_layout": "NOT_COMPILED; fresh assertions/object inspection required",
+    "append_tail_offsets": [
+      [
+        "stack_version",
+        "56"
+      ],
+      [
+        "system_lower",
+        "60"
+      ],
+      [
+        "system_upper",
+        "64"
+      ],
+      [
+        "entry_sp",
+        "68"
+      ],
+      [
+        "sampled_low_sp",
+        "72"
+      ],
+      [
+        "exit_sp",
+        "76"
+      ],
+      [
+        "stack_status",
+        "80"
+      ],
+      [
+        "stack_samples",
+        "84"
+      ]
+    ],
+    "original11_offset_literals": [
+      [
+        "timer",
+        "0"
+      ],
+      [
+        "task",
+        "4"
+      ],
+      [
+        "signal",
+        "8"
+      ],
+      [
+        "armed",
+        "12"
+      ],
+      [
+        "calls",
+        "16"
+      ],
+      [
+        "port",
+        "20"
+      ],
+      [
+        "before",
+        "28"
+      ],
+      [
+        "before_frequency",
+        "36"
+      ],
+      [
+        "after",
+        "40"
+      ],
+      [
+        "after_frequency",
+        "48"
+      ],
+      [
+        "dispatch_result",
+        "52"
+      ]
+    ],
+    "original_struct_prefix": "BYTE_EXACT through dispatch_result",
+    "proposed_native_size": 88,
+    "tail_bytes": 32
+  },
+  "IRQ_source_checks": {
+    "arithmetic": "Unsigned bounds/sample/min comparisons; word alignment; saturating seven-count failure; duplicate phase/version/error bits stay latched; final exact phase/count/version/range/entry==exit gate after source quiet",
+    "armed_path": "Entry A7 captured into caller-clobbered D0 before original MOVEM; A2 owns payload; dispatch result saved before sample scratch clobber; A0 retains payload across restoration for actual exit sample; each path executes one restore",
+    "caller_boundaries": "Dispatcher before/after both sampled with existing argument still on caller stack; source check known48B sampled descent; callee/nested/library peaks remain unknown",
+    "native_register_and_object_shape": "NOT_COMPILED_NOT_CLEARED",
+    "samples": [
+      [
+        "0x0100",
+        "%a2"
+      ],
+      [
+        "0x0200",
+        "%a2"
+      ],
+      [
+        "0x0400",
+        "%a2"
+      ],
+      [
+        "0x0800",
+        "%a2"
+      ],
+      [
+        "0x1000",
+        "%a2"
+      ],
+      [
+        "0x2000",
+        "%a2"
+      ],
+      [
+        "0x4000",
+        "%a0"
+      ]
+    ],
+    "save": "One existing d2-d7/a2-a6 MOVEM44B; one existing4B argument push/pop",
+    "source_jsr_inventory": [
+      "jsr -60(%a6)",
+      "jsr _pt_private_native_ram_dispatch",
+      "jsr -60(%a6)",
+      "jsr -324(%a6)"
+    ],
+    "tail_write_scope": "All added assembly stores target owned tail fields56..84; no OS stack paint/read, new explicit push/JSR, allocation/log/library operation/notification",
+    "unarmed_path": "Branches to original epilogue before any tail read/write, clock, dispatch or notification; added entry SP capture touches D0 only"
+  },
+  "binding_checks": {
+    "all_four_origin_copies_equal_current_repository": "BYTE_EXACT",
+    "all_seal_records_bytes_modes_hashes": "MATCH",
+    "original_dispatcher": "BYTE_EXACT459B; original tail-return opportunity retained",
+    "source_model_or_test_acceptance": "NOT_RUN_NOT_REVIEWED_HERE"
+  },
+  "dependency_facts": [
+    {
+      "bytes": 7130,
+      "mode": 384,
+      "path": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/exec/execbase.h",
+      "sha256": "5f8900b9b2c6d9f8cad62e19dc7fe13d4f611729660dcff14e16811492e49dee"
+    },
+    {
+      "bytes": 2912,
+      "mode": 384,
+      "path": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/exec/tasks.h",
+      "sha256": "bf2ad632d96e84b302af9ab1f28cbbe2cf7c34d88089abbc0f2d8b8783c29a33"
+    },
+    {
+      "bytes": 6180,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/native_checked_memory.h",
+      "sha256": "a1ad6f4dedcd8cd670867fc93dd65eb2d05bcc5049acdb70738e7286512d398a"
+    },
+    {
+      "bytes": 11795,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/native_checked_memory.c",
+      "sha256": "3febf3daf5187b58208bc7a0f1c5814615cff61f6923b28ede52263807ae6f6a"
+    }
+  ],
+  "derivation_patch": {
+    "bytes": 18277,
+    "mode": 420,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-implementation-v1/sampled-stack.patch",
+    "sha256": "5a7f1bf462a7732690752c313f912838a68b17b49b982e14765fa3ca665deff7"
+  },
+  "design_contract": {
+    "bytes": 4092,
+    "mode": 420,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-implementation-v1/design-contract.md",
+    "sha256": "13dbc360fbf420bdfaf420899c98ec46c5fb289e235d842af13cea19fcf3b19c"
+  },
+  "entry_source_checks": [
+    "Initial SysBase null/representable-extent/version refusal before capture; ordered nonnull word-aligned system span and unchanged32768 task/raw-upper\u22122 admission before availability/resource allocation",
+    "Original SysBase/SystemLower/SystemUpper plus Task identity/bounds retained and rechecked before/after dependent Task operations through positive source close and teardown",
+    "Pre-memset bootstrap control rejection adds full ExecBase and captured system-stack range; nonnull ambiguous allocation retains complete world without dereferencing/freeing suspect control",
+    "Checked-memory guard vector adds those same fixed extents:9 of16; compile-time minimum capacity added; existing memory allocation checks returned spans against every guard",
+    "IRQ tail version/bounds initialized in owned checked IRQ allocation before CIA vector acquisition; no temporary sample pointer/address escapes",
+    "Task samples use original bootstrap SP getter once plus separate host-only task seam; native later getter reads live SP; monotone sampled minimum and count/phase/range failures lead existing passive HOLD",
+    "Exact source close remains Disable/owned-close/Enable with positive identity/invariants before task/IRQ observation reporting; samples create no source-quiet/command-detach/reader-retirement/release authority",
+    "Original epoch/frame/first/last/aperture/read/residency/policy defines byte-exact; no immediate firing, rebasing, lateness compensation, catch-up or retry introduced"
+  ],
+  "findings": [],
+  "limits": [
+    "No real stack storage measured; CRT/main/getter first demand occurs before or between observations",
+    "Seven IRQ and four task samples are finite workload observations, not aggregate high-water or initial overflow prevention",
+    "Local44B save and48B sampled descent do not clear total task/system/IRQ capacity, 65536, system reserve, nested IRQ, quiet, timing or WCET",
+    "Normal-task/stack provenance and library-entry convention remain obligations; no physical/emulator acceptance"
+  ],
+  "owned_candidates": [
+    {
+      "bytes": 54575,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-implementation-v1/src/diagnostic/native_ram_entry.c",
+      "sha256": "e642c44a5853ae93d0db74d6f8ca8e5f1d42f189b4d920045dd86c8f524d8bea"
+    },
+    {
+      "bytes": 3084,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-implementation-v1/src/native/readers_ram/native_ram_irq_layout.h",
+      "sha256": "8cc3ae4dd41ec81f0618ee130912188be828b4653cf4f423fc6c1e95de4ba15d"
+    },
+    {
+      "bytes": 3587,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-implementation-v1/src/native/readers_ram/native_ram_irq.s",
+      "sha256": "70220a8510cae6c98358224900a300659cc299b3e31ffabebbcde84eadadf381"
+    },
+    {
+      "bytes": 459,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-implementation-v1/src/native/readers_ram/native_ram_irq_dispatch.c",
+      "sha256": "9db4447cb8c6114dbc17732dad40144b86a5f1270e079d24b63c6e2e16a91703"
+    }
+  ],
+  "owned_inputs": [
+    {
+      "bytes": 48700,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/diagnostic/native_ram_entry.c",
+      "sha256": "df092aa3cce85a165cec6eed5d2ceed88f2814f68d9714fd473a8aa7cea2c0e4"
+    },
+    {
+      "bytes": 1530,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_ram_irq_layout.h",
+      "sha256": "3f544a24350070d95118d15c4741bec48ecd388af5451123169e0858990ccc94"
+    },
+    {
+      "bytes": 1062,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_ram_irq.s",
+      "sha256": "bf6ad045ca13189c8df8e5ba2438388589a60a4af3c11ad1eeaaf499d11b079c"
+    },
+    {
+      "bytes": 459,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_ram_irq_dispatch.c",
+      "sha256": "9db4447cb8c6114dbc17732dad40144b86a5f1270e079d24b63c6e2e16a91703"
+    }
+  ],
+  "plan": {
+    "bytes": 9134,
+    "mode": 420,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-next-plan-v1.json",
+    "sha256": "b4e4080ceadca9f79804683f7600d777f870a434b1e3ddf664228be57fca6369"
+  },
+  "required_next_checks": [
+    "Root-owned finite host models must preserve all76 old vectors/oracles and cover added system-span/sample faults",
+    "Fresh pinned native compiler and object check of all19 offsets/size88, actual A7/register preservation, unchanged dispatcher shape and no additional executed pushes/calls",
+    "No launch until separately authorized exact-candidate/shared ownership and genuine lifetime gates; this source receipt grants none"
+  ],
+  "resolved_preseal_issue": {
+    "classification": "Removed unexecuted approach reconstructed from edits, explicitly not a frozen before-image or actual execution",
+    "fact": "C sampling after dispatch would remove original tail return and may add compiler saves/frame",
+    "history": {
+      "bytes": 791,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-implementation-v1/draft-history/classification.json",
+      "sha256": "e87bbf5453e5a06952e4d8bc3b19881e21d7a620c2f086873b5c0df424022e02"
+    },
+    "resolution": "Exact original dispatcher restored; seven samples solely in GAS including explicitly named caller boundaries"
+  },
+  "reviewer": "native_entry_review",
+  "reviewer_execution_count": 0,
+  "scope": "Finite passive source comparison of the four stable private production copies, pinned plan/contract and actual memory/NDK dependencies only; no import/model/test/compiler/Git/service/target operation",
+  "source_seal": {
+    "bytes": 8854,
+    "mode": 420,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-implementation-v1/source-seal-v1.json",
+    "sha256": "90f052133315c428e9098b9e825ec252db917b236574794b6a91638249405f1e"
+  },
+  "status": "CLEAR_SOURCE_PREPARATION_ONLY",
+  "version": 1
+}

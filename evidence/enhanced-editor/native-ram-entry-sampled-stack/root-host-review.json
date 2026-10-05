@@ -1,0 +1,2087 @@
+{
+  "status": "ROOT_SAVED_114_HOST_CASES_REVIEW_CLEAR",
+  "execution": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/execution.json",
+    "bytes": 161413,
+    "sha256": "817ca153bfac5d64869974df6261cbbdec0c77c3dc58aefdfdb88da5709f6f51",
+    "mode": 420
+  },
+  "cases": 114,
+  "calls_RC0": 115,
+  "compile_calls": 1,
+  "counts": {
+    "success": 10,
+    "clean_refusal": 57,
+    "retained_HOLD": 47
+  },
+  "added38_counts": {
+    "clean_refusal": 8,
+    "success": 4,
+    "retained_HOLD": 26
+  },
+  "original76_results_byte_identical": true,
+  "stable_selected_source_records": 44,
+  "case_results": [
+    {
+      "mode": 0,
+      "ordinal": 0,
+      "result": 0,
+      "class": "success",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c001.stdout",
+        "bytes": 245,
+        "sha256": "cb46c6d5fa3955a7027436690fba6472f209b3a61a39e7df1e2384bc45cdb745",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c001.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 1,
+      "ordinal": 0,
+      "result": 0,
+      "class": "success",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c002.stdout",
+        "bytes": 245,
+        "sha256": "c703fc49312f383c8126081c27fbc32c6486aa6b52d8162a6a4168f81178b617",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c002.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 6,
+      "ordinal": 0,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c003.stdout",
+        "bytes": 243,
+        "sha256": "b2a491627212641d0455bb23df052c701720d2e268a8a26ec117f9ef984fa9ac",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c003.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 7,
+      "ordinal": 0,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c004.stdout",
+        "bytes": 242,
+        "sha256": "b2014bf0ab0d0b8a17363a8c2f310ef22c1934367572eeefb5fedf7b993e49f6",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c004.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 8,
+      "ordinal": 0,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c005.stdout",
+        "bytes": 242,
+        "sha256": "11856729b9d7ec9f8ad6d66ba360be06a70b7b1f2e8cf838254095afe512a0f5",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c005.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 9,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c006.stdout",
+        "bytes": 242,
+        "sha256": "5e05ee347694aaa98712fbce78a7fad2038edcc589ab9e04e62a21176a9ec3c0",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c006.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 10,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c007.stdout",
+        "bytes": 243,
+        "sha256": "a106c8d08d592662ee3699ab0342c501a8a8f14c13909a45f19638eb90a5a78c",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c007.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 11,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c008.stdout",
+        "bytes": 243,
+        "sha256": "004990bd069c6d0a88375c43a71558b2449f6624054cc75e0723b63eb368be43",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c008.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 12,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c009.stdout",
+        "bytes": 243,
+        "sha256": "f1c647392cbc339974c8b7aa9581d1c56ada9f91cfd575995cec072b3859c1b5",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c009.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 13,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c010.stdout",
+        "bytes": 243,
+        "sha256": "91736421ec43f7fc3772b41abc236e87804b73111bb49e123fa53369e076047d",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c010.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 14,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c011.stdout",
+        "bytes": 243,
+        "sha256": "49e30911442fc497194da354aa00fb8c6db3e0047cbab4b67feaf620dc9ff311",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c011.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 15,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c012.stdout",
+        "bytes": 243,
+        "sha256": "d6eeca0766526ab9e3b091b1956370b3f484d4d85ebdd1a4afa8063307d8c159",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c012.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 16,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c013.stdout",
+        "bytes": 243,
+        "sha256": "de1f09f7102be43949a12df139b25447328f3fd0b392baa52fd6ec44ead7109f",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c013.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 17,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c014.stdout",
+        "bytes": 247,
+        "sha256": "1f66813e3193f50438a63d5cbce37fc6bbf06e72f552e197a52bb3d10615eb70",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c014.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 18,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c015.stdout",
+        "bytes": 244,
+        "sha256": "fc14fc60fa1f775d184ab6cf98b28c10352395df8d4a077e40a7035a1b1520cc",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c015.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 19,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c016.stdout",
+        "bytes": 243,
+        "sha256": "88d4cf9c332f7533677d681379d485f127cea3dcf50f626e0a23d27a8ab93fbd",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c016.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 20,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c017.stdout",
+        "bytes": 247,
+        "sha256": "6289b8207e495ac56c5aa2e65bddf66ad00e8432064484cc50b8cba122bb8c49",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c017.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 21,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c018.stdout",
+        "bytes": 248,
+        "sha256": "4ff403d2b3ccc2b892cf956dd7aa5f044fbf87abbd9c12f7a54acf37f589ba24",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c018.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 22,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c019.stdout",
+        "bytes": 247,
+        "sha256": "0c32740a601bb8ea4ca239687d3c40bbe4354adc593bb930930d9580d7b22df9",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c019.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 23,
+      "ordinal": 0,
+      "result": 0,
+      "class": "success",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c020.stdout",
+        "bytes": 246,
+        "sha256": "733473ba64bde4b0413aebbde76860323f0471affb07b92dfbd51ee7b33173f9",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c020.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 24,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c021.stdout",
+        "bytes": 247,
+        "sha256": "7d9b70e6ac5bf0d2260776cf81313743e431356540db6934a6c3edf33642d0da",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c021.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 25,
+      "ordinal": 0,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c022.stdout",
+        "bytes": 246,
+        "sha256": "67e36a6e6ab8a8a8f5f5bc69f0a83e6367101362835ea1ec783fe48c2cf659e2",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c022.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 26,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c023.stdout",
+        "bytes": 245,
+        "sha256": "1b9b408462d07f2834ddb0fe7c3dd24840c0a502bb35514bbe68f21c53562abe",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c023.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 27,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c024.stdout",
+        "bytes": 245,
+        "sha256": "87811927cf68472f3e083ab0ca3524707431b126d06dd3743df0964b6b331cf5",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c024.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 28,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c025.stdout",
+        "bytes": 246,
+        "sha256": "efad279303257902cab14aa67bdea9b8aa24580ace91dac7db9a390262098d7d",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c025.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 29,
+      "ordinal": 0,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c026.stdout",
+        "bytes": 246,
+        "sha256": "cfbaadec63603a333f5150e7214c669eea764edf44e88f7f5f4a0be070335db2",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c026.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 30,
+      "ordinal": 0,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c027.stdout",
+        "bytes": 246,
+        "sha256": "ca8b2fe52798c63266b86e10d541e6c60bd0275555240e15a82192e46f4a7421",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c027.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 31,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c028.stdout",
+        "bytes": 245,
+        "sha256": "e2e8e05612bce94b616b9062a2a55f564b0424a2c844c7a78b34234cc2215c58",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c028.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 32,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c029.stdout",
+        "bytes": 246,
+        "sha256": "47acdc4358efc7061a76bd26a31c027ac971c0c825b74b5d36e309fe7402d0d7",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c029.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 33,
+      "ordinal": 0,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c030.stdout",
+        "bytes": 245,
+        "sha256": "1b9afa10218a2fbd40f0fb5343751a71c78683e75a07961a9d6226083837db88",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c030.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 2,
+      "ordinal": 1,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c031.stdout",
+        "bytes": 242,
+        "sha256": "e0acd260c8e4cd84decc73cccdc7c3d10d5781509701edb03e77052cfd1328c7",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c031.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 2,
+      "ordinal": 2,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c032.stdout",
+        "bytes": 243,
+        "sha256": "34eba8117d8b96bd0dde807a3f8d4446ad1c92978b2758a4b653fb9d4120b6cf",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c032.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 2,
+      "ordinal": 3,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c033.stdout",
+        "bytes": 243,
+        "sha256": "e76b5b5a9fe196e179b59dca154bed3b69e3a1f58b6122c0b2cd780afe2cfae6",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c033.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 2,
+      "ordinal": 4,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c034.stdout",
+        "bytes": 243,
+        "sha256": "13ff171d691a3a85a580ef39f091257dd83240f33c99060893520008b872ef35",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c034.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 2,
+      "ordinal": 5,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c035.stdout",
+        "bytes": 243,
+        "sha256": "5dc2168a5f77cf15d2517d56bac9100f7828a83812ffe1c98bc5eb43599ba953",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c035.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 2,
+      "ordinal": 6,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c036.stdout",
+        "bytes": 243,
+        "sha256": "1f44e414f16818c89a13730612c14368d562564769e771377fe652b5661fbb2b",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c036.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 2,
+      "ordinal": 7,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c037.stdout",
+        "bytes": 243,
+        "sha256": "fc354f342cc728a7ba79d808a1f9a34156f62dba3249cd8b5ca4d03c19c00712",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c037.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 2,
+      "ordinal": 8,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c038.stdout",
+        "bytes": 243,
+        "sha256": "349db213dc834255ec7d183c0d8126f0ee0fffec34d3c1765cddf5afa036d186",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c038.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 2,
+      "ordinal": 9,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c039.stdout",
+        "bytes": 243,
+        "sha256": "a1c3490e77ff48edfbe94690a73553f4fa6ac8d1915b3fbb64c83df66e2bc900",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c039.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 2,
+      "ordinal": 10,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c040.stdout",
+        "bytes": 245,
+        "sha256": "6687e4d8ead64630d4387b0f96c42d6f22127dde469da84c67f869c27ec6f956",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c040.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 2,
+      "ordinal": 11,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c041.stdout",
+        "bytes": 246,
+        "sha256": "e296507a8978dea2da18e2b12bb7320d2153f4cdb6428b2583be1db253142a4f",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c041.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 2,
+      "ordinal": 12,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c042.stdout",
+        "bytes": 246,
+        "sha256": "50ab1953d3916f6d8f613b042125df442614c4e6f2771f0a8128b6c0619b70c9",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c042.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 2,
+      "ordinal": 13,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c043.stdout",
+        "bytes": 246,
+        "sha256": "29db0a999c4175111915b78b9eee9fd00fb5f5a92606bd4ef8bea2c3c34e1df4",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c043.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 2,
+      "ordinal": 14,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c044.stdout",
+        "bytes": 246,
+        "sha256": "40aa4136a62f2e207b68c6d8d9d24028de5fadcf29ec839492fb115fba756186",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c044.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 2,
+      "ordinal": 15,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c045.stdout",
+        "bytes": 246,
+        "sha256": "6b44fd56106546a724f0a802471656278e7bcb25f2da007d319932cef395d04c",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c045.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 2,
+      "ordinal": 16,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c046.stdout",
+        "bytes": 246,
+        "sha256": "9139343d56f1935341d5ee000b784b4649eb7ecb05b2b36459cfa78e281b03fc",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c046.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 2,
+      "ordinal": 17,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c047.stdout",
+        "bytes": 246,
+        "sha256": "e5d1ec65fa182ae549a0596f361133581a0e53ce55f8da6878a0cbf499a5eeab",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c047.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 2,
+      "ordinal": 18,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c048.stdout",
+        "bytes": 246,
+        "sha256": "c27b2033305787f8b18d726ff8f851004fef631ca6971457b6b0e7aab65f9015",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c048.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 3,
+      "ordinal": 1,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c049.stdout",
+        "bytes": 242,
+        "sha256": "720fbdd475ccffffbe3d7a9d78b53e41e17f50e3248211ee4bf5fbf2b296ccf1",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c049.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 3,
+      "ordinal": 2,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c050.stdout",
+        "bytes": 242,
+        "sha256": "5a1518af5372beaf6671be663033009c6cb55b2c29306971983a840685764c97",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c050.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 4,
+      "ordinal": 1,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c051.stdout",
+        "bytes": 242,
+        "sha256": "957ec6e8363bd3a1085b43bbdc69a4fda6528a08f0655bc59eb791e41524b1aa",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c051.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 4,
+      "ordinal": 2,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c052.stdout",
+        "bytes": 243,
+        "sha256": "e07a79b9f008f2ab177f16369dd63810a642289eb82aa656fc9b7a9bd67305d0",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c052.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 5,
+      "ordinal": 1,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c053.stdout",
+        "bytes": 242,
+        "sha256": "b2aea0381c85270981acf62928b63ec76fd9c5a911646087c3438ea8312ef495",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c053.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 5,
+      "ordinal": 2,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c054.stdout",
+        "bytes": 243,
+        "sha256": "be602756ba8ed8a14cd4bfbf6491842a45b1ffec7ec48f33e5f4dcbfc7518ebc",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c054.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 0,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c055.stdout",
+        "bytes": 310,
+        "sha256": "8df5a921ef68a5aed110ac664469619e659c25f51ef8f11786ff11623d6dd42e",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c055.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 1,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c056.stdout",
+        "bytes": 310,
+        "sha256": "27a44b39187b9f8bb5dcdb9a431da02475f811da306efb018983b182271dc54d",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c056.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 2,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c057.stdout",
+        "bytes": 310,
+        "sha256": "a47c0150fe2921f42df07690366838fa742dd6b5aefeb0065556d03678df93a6",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c057.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 3,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c058.stdout",
+        "bytes": 310,
+        "sha256": "ccabbaeead0ac49bb579577050446d56de56961851348ec03c804398e0393e6c",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c058.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 4,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c059.stdout",
+        "bytes": 310,
+        "sha256": "e4dfece348702a76ae9488bb899c2e053a18bd5d58e6c64137374f3c49c6b692",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c059.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 5,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c060.stdout",
+        "bytes": 310,
+        "sha256": "cfa2f1604c17e67461714f0400e9086593c99629c1b4572e34b449b2ea6c7f1a",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c060.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 6,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c061.stdout",
+        "bytes": 310,
+        "sha256": "0535aede2ba3116d5ecb2d1336a74dd46e772f6280f0dda17d7b874a806cbef0",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c061.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 7,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c062.stdout",
+        "bytes": 310,
+        "sha256": "220a2e767c9f1658f0b52ebab69dd30dd7e518ce67efcee214c75f86148119c4",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c062.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 8,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c063.stdout",
+        "bytes": 310,
+        "sha256": "70e4a02703a4cf15ec39488e01f291d0611749e03157f294525cdbb4170b3a59",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c063.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 9,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c064.stdout",
+        "bytes": 310,
+        "sha256": "95e67d143927e81f6860a473e3f416c5ec76038bc37fc00d88806de281b8622e",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c064.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 10,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c065.stdout",
+        "bytes": 311,
+        "sha256": "391dc5115c2bd8d256754fe28bcbeeb765d4db74ccfe11f1ae3cc2e7f26d42d7",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c065.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 11,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c066.stdout",
+        "bytes": 311,
+        "sha256": "f9c539d673579d201373d62918c656162cb2fe224a1746dac713a34b5f29f6e9",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c066.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 12,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c067.stdout",
+        "bytes": 311,
+        "sha256": "94c9d0cfb791870c8eb63c0ab2963872fdbe63143723630deed2579fa77ef035",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c067.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 13,
+      "result": 0,
+      "class": "success",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c068.stdout",
+        "bytes": 312,
+        "sha256": "3d6ccb155daf6b435d4d415fa426c9e394f99f59b2a4f8ff16f378d8ab27dd18",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c068.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 14,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c069.stdout",
+        "bytes": 311,
+        "sha256": "906c07b88aecb8e0689652ed9719c0c3b842a11b0e22554e3c34a118ba96e695",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c069.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 15,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c070.stdout",
+        "bytes": 311,
+        "sha256": "1f2c34467853b75cdc9e978d6b18d4f07dd4a828f05f5db30c56588ac661f591",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c070.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 16,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c071.stdout",
+        "bytes": 311,
+        "sha256": "b722ee8a0142932598893657f5799074d2c3e1b68ca139098a91f804545f2df3",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c071.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 17,
+      "result": 0,
+      "class": "success",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c072.stdout",
+        "bytes": 312,
+        "sha256": "cc5cf16884d3a4ba7ac8325c905914cf877a78d03dd97141e760c18912576a9b",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c072.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 18,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c073.stdout",
+        "bytes": 311,
+        "sha256": "9f27702da0f341e60f594e903e6007f9f47a127ec0d30c2772f4139fb3453e76",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c073.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 19,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c074.stdout",
+        "bytes": 311,
+        "sha256": "2b8649c14a6a00376cfa4a811828311600b3474e48430fecc69ef540cd727bb4",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c074.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 20,
+      "result": 0,
+      "class": "success",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c075.stdout",
+        "bytes": 312,
+        "sha256": "7123920cc2e7a8610f807cc65684fcd5256f955ee1cab6356a8d1b06556932ff",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c075.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 34,
+      "ordinal": 21,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c076.stdout",
+        "bytes": 311,
+        "sha256": "9794711e5513a8f5f05f85a9c37c5aee0a66bae724aa91f06bf7139b3d734843",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c076.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 35,
+      "ordinal": 0,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c077.stdout",
+        "bytes": 351,
+        "sha256": "040a46df8a53cd9ae4d3336aedb95eb2b58ab4b225ee0cc34831476d1bc6f702",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c077.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 35,
+      "ordinal": 1,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c078.stdout",
+        "bytes": 351,
+        "sha256": "60e1c55ef4b9d99913d8d56d492b3a3e8a9c603b63a54c4a3e2dc707d257a81e",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c078.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 35,
+      "ordinal": 2,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c079.stdout",
+        "bytes": 351,
+        "sha256": "5aa1fab5f1317cf5dfa5418b6c686209a71b29afb9d0f0a56ab0cd61b181472f",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c079.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 35,
+      "ordinal": 3,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c080.stdout",
+        "bytes": 351,
+        "sha256": "1cf118e59f5e95b96bdf59a746dd9ea6a93f64c20e1a1476096f1bc9615795d5",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c080.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 35,
+      "ordinal": 4,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c081.stdout",
+        "bytes": 351,
+        "sha256": "aa76adbc1fca080806e45ce5ff005735e57aa3163dc875bd85bcfcf143747a9d",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c081.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 35,
+      "ordinal": 5,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c082.stdout",
+        "bytes": 351,
+        "sha256": "2710bf73a37ce8300346620a6cdba2f12cef77e456fd53532671ada275fab6b7",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c082.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 35,
+      "ordinal": 6,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c083.stdout",
+        "bytes": 351,
+        "sha256": "57eddf61979511ec5552cf2cab15b4934a655b24b31e3eb7df9bfa2db2550463",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c083.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 35,
+      "ordinal": 7,
+      "result": 20,
+      "class": "clean_refusal",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c084.stdout",
+        "bytes": 351,
+        "sha256": "f1d5a29875a8d2b074b250df16919d2bee645f640a100c171d94698a1f90d4d3",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c084.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 35,
+      "ordinal": 8,
+      "result": 0,
+      "class": "success",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c085.stdout",
+        "bytes": 354,
+        "sha256": "39c84f6f2b5b8c58ea69c8620da47f1ddec3d3c3ec6fb416d4ef87a49898b2de",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c085.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 35,
+      "ordinal": 9,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c086.stdout",
+        "bytes": 351,
+        "sha256": "b5e1c292c1d509e3a7dc68653d6c4d165e8a54edd3c10b56bbce4b4627749b0c",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c086.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 35,
+      "ordinal": 10,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c087.stdout",
+        "bytes": 352,
+        "sha256": "f0e72929d3f38d1ff93b5aa0cf827e83d0cb3b4ae0a244401c937bc767a01e04",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c087.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 35,
+      "ordinal": 11,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c088.stdout",
+        "bytes": 352,
+        "sha256": "202800ff4a9923b3ab56b919635a4325740fef9a24b738429fd5b615873364b4",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c088.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 35,
+      "ordinal": 12,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c089.stdout",
+        "bytes": 353,
+        "sha256": "53e51c5a3eb583b36352268eed2163b3f3959628cd4881cd9042980ac0b485fd",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c089.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 35,
+      "ordinal": 13,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c090.stdout",
+        "bytes": 353,
+        "sha256": "55be6855dd10d06b7a6e38c99eb73ed09c5f783a00b2e6d0fecbe838361d8832",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c090.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 35,
+      "ordinal": 14,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c091.stdout",
+        "bytes": 352,
+        "sha256": "a02270eac0e3cec0c0e665a7df9975ac092b9ce863889c44bec2dd4b82756ba8",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c091.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 35,
+      "ordinal": 15,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c092.stdout",
+        "bytes": 352,
+        "sha256": "209e721fda618227b2391716419eae2f5c0aaad1e3f330e564b553c5e14471cf",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c092.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 35,
+      "ordinal": 16,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c093.stdout",
+        "bytes": 352,
+        "sha256": "fb0280f4355e083cdafcbd9a4c80cd35ab69829cd171a55ccc91aee563f26e62",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c093.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 0,
+      "result": 0,
+      "class": "success",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c094.stdout",
+        "bytes": 385,
+        "sha256": "582574375a75aa66dd352c8edfd97c83b314c9b470e97440bcf4c03830397e2b",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c094.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 1,
+      "result": 0,
+      "class": "success",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c095.stdout",
+        "bytes": 385,
+        "sha256": "44a0259e0b0bde5a56d8b262c87c634a6bf5a83814493ec8536bed25fa5c5f42",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c095.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 2,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c096.stdout",
+        "bytes": 386,
+        "sha256": "3ef9d2164afb57d052d09898a9869293f9c4f3c3157454ba0b99176be422a63d",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c096.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 3,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c097.stdout",
+        "bytes": 386,
+        "sha256": "d593714ddef9388faaabfbf7bcb31f3360a3a07a82884ab649aea8a84e16bcb9",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c097.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 4,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c098.stdout",
+        "bytes": 386,
+        "sha256": "fafbbbe89c3fe50bc97f5404e201571be16ad8df9ea40c5911d58c027d2788b3",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c098.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 5,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c099.stdout",
+        "bytes": 386,
+        "sha256": "b16d1f7101b348419c32b35c91f6e134f34f01300382c3b1db2be5fc2116a5ea",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c099.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 6,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c100.stdout",
+        "bytes": 382,
+        "sha256": "0a3b3286c50229897a6a6a89bd4e4c71fd5f553e7a706c963bed935828fe8795",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c100.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 7,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c101.stdout",
+        "bytes": 386,
+        "sha256": "1d5d25bba349c535354050e0d0dd742b2988b224cf494463231d4528f81c9394",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c101.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 8,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c102.stdout",
+        "bytes": 386,
+        "sha256": "2f31f461b2f407f2c3ca28361f708f0f40b693e13c3cf37c2613dd57923894aa",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c102.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 9,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c103.stdout",
+        "bytes": 386,
+        "sha256": "89cb03fec286ff01f8e117a23e008420aa1d5a58001427219a1f104de1c0493f",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c103.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 10,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c104.stdout",
+        "bytes": 396,
+        "sha256": "3361cffa1a16de31a1750761ec69608fcb0cbc12e7abb2b8f046e4d1ae745f99",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c104.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 11,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c105.stdout",
+        "bytes": 387,
+        "sha256": "53b362be1e0f0a8ec230d5cb550e97d657e68353d81443654cf3e15fc1c8f822",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c105.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 12,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c106.stdout",
+        "bytes": 387,
+        "sha256": "70a72cd5bd44e0beb9117ca091c51335c66e871e9c8807fbb58f84ba09348832",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c106.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 13,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c107.stdout",
+        "bytes": 387,
+        "sha256": "a07108daf1c566803e56673db3acc74995c9e28abc26aaba007b4f323dce7097",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c107.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 14,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c108.stdout",
+        "bytes": 387,
+        "sha256": "699623c22ac64c5a37f65db06f9f6cac787143cb1d853ba36664941ba86371dd",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c108.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 15,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c109.stdout",
+        "bytes": 387,
+        "sha256": "64d553427bd0d7d426e21e39861fad6bd21c42510db650ab3cddac552139c61b",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c109.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 16,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c110.stdout",
+        "bytes": 383,
+        "sha256": "426e275984f0fb1bb3162a3c036c2755a5c1a6c1c3c00494d385dfc7a102441c",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c110.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 17,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c111.stdout",
+        "bytes": 387,
+        "sha256": "7a97312b346180066457aa73326cacb3b5f11eacc345c82811024a318f6ec7cb",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c111.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 18,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c112.stdout",
+        "bytes": 387,
+        "sha256": "3a40166bc9e99e72cb136e8d4d016200d8902599c686058381232205badd1396",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c112.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 19,
+      "result": -1,
+      "class": "retained_HOLD",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c113.stdout",
+        "bytes": 387,
+        "sha256": "b28cdd0845be5c24ad7582b06652ae936df30731a2416469a743fba5a4c83c71",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c113.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "mode": 36,
+      "ordinal": 20,
+      "result": 0,
+      "class": "success",
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c114.stdout",
+        "bytes": 386,
+        "sha256": "1d659556e9ca11605a5e7759913c0b5025ba795490c6c3ef27ad7e201715c00b",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-host-v1/c114.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    }
+  ],
+  "model_source_review": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-model-preparation-v1/model-source-review-v1.json",
+    "bytes": 9722,
+    "sha256": "b4c8a9fd0dc7c68f19c7c71f50067a156e53887befae827fbec157fc69ba315c",
+    "mode": 420
+  },
+  "no_sanitizer_errors": true,
+  "native_emulator_physical": "NOT_RUN",
+  "targets_contacted": false
+}

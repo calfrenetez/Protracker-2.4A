@@ -1,0 +1,107 @@
+{
+  "status": "CLEAR_SOURCE_ONLY_RECORDER_REVIEW",
+  "scope": "Passive source/AST/hash review only. Recorder/test/model/compiler were not imported or invoked. Separate model-source review remains outside this receipt.",
+  "recorder": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/run_sampled_stack_host_once_v1.py",
+    "bytes": 7282,
+    "sha256": "fd3f62d6d5cf215d5f4d1b185db9fb235d1c7a8aa724bf35e83c98cc6682a5e6",
+    "mode": 420
+  },
+  "final_source_binding": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-source-final-binding-v1.json",
+    "bytes": 16404,
+    "sha256": "a5f39132d290f10b0b7e5ba5402f507b52baba0b7030633eccd1762e2aa6e22e",
+    "mode": 420
+  },
+  "model_seal": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-model-preparation-v1/source-seal-v1.json",
+    "bytes": 8585,
+    "sha256": "db55fa69b3c0bd62df9fe0ac1207c2b42d4e39daca3c69abe2b116301a82c4c6",
+    "mode": 420
+  },
+  "model_recipe": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-stack-model-preparation-v1/source/tests/test_native_ram_entry_model.py",
+    "bytes": 3574,
+    "sha256": "190518bf56fd10f0fc5e7ea9a4b8c1450d4711cc621f21c611f3555845f3d5ee",
+    "mode": 420
+  },
+  "compiler_current_file_pin": {
+    "path": "/usr/bin/cc",
+    "bytes": 200560,
+    "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+    "mode": 493
+  },
+  "source_records_count": 44,
+  "planned_cases": {
+    "original": 76,
+    "system": 17,
+    "sampled": 21,
+    "total": 114,
+    "planned_subprocesses": 115,
+    "sequence_SHA256": "68683233d60c8108c32d76c1f6397d044c0301cd472dab5de490c5f5fd3ed9dd"
+  },
+  "literal_ordered_units": [
+    "tests/native_ram_entry_model_test.c",
+    "tests/native_ram_entry_host_stubs.c",
+    "src/diagnostic/native_ram_entry.c",
+    "src/native/readers_ram/native_ram_port.c",
+    "src/native/readers_ram/native_ram_irq_dispatch.c",
+    "src/native/readers_ram/native_cia_ram_adapter.c",
+    "src/native/native_checked_memory.c",
+    "src/core/elapsed_clock.c",
+    "src/core/scheduled_readers.c",
+    "src/core/readers_activation.c"
+  ],
+  "literal_string_compile_arguments": [
+    "-std=c99",
+    "-O1",
+    "-g",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fsanitize=address,undefined",
+    "-fno-omit-frame-pointer",
+    "-UNDEBUG",
+    "-Isrc/core",
+    "-Isrc/native",
+    "-Itests/native_entry_host_sdk",
+    "-include",
+    "tests/native_ram_entry_host_stubs.h",
+    "-Dmain=pt_entry_model_main",
+    "-o"
+  ],
+  "checks": {
+    "exact_10_ordered_TUs_match_sealed_recipe": true,
+    "literal_sanitizer_assertion_compile_flags_match_sealed_recipe": true,
+    "original_76_case_sequence_preserved_before_17_plus_21_additions": true,
+    "planned_115_calls_one_compile_plus_114_fresh_process_cases": true,
+    "all_44_current_source_records_equal_final_binding": true,
+    "five_model_and_four_production_inputs_match_final_seals": true,
+    "compiler_SHA_is_checked_before_dispatch": true,
+    "fresh_OUT_and_work_created_without_reuse_or_cleanup": true,
+    "fixed_product_path_in_retained_work": true,
+    "STARTED_argv_and_cwd_persisted_before_each_dispatch": true,
+    "ordinal_and_exact_argv_gate_refuses_repeated_or_unplanned_subprocess": true,
+    "compile_120s_and_case_20s_bounded": true,
+    "first_nonzero_RC_keeps_raw_stdout_stderr_and_raises_without_next_call": true,
+    "timeout_keeps_partial_raw_bytes_and_FIRST_TIMEOUT_row": true,
+    "BaseException_keeps_FAILED_FIRST_OUTCOME_and_started_rows_without_retry": true,
+    "callback_TemporaryDirectory_sys_argv_and_CC_restored_in_finally": true,
+    "suite_raw_text_and_manifest_retained_for_success_and_failure": true,
+    "no_target_service_or_transport_dispatch_path": true,
+    "native_emulator_physical_explicitly_NOT_RUN": true
+  },
+  "approval_preconditions": {
+    "control_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-source-controls-v1.json",
+    "currently_present": false,
+    "required_status": "ROOT_SOURCE_REVIEW_APPROVED_HOST_ONLY",
+    "required_selected_records": "Exact equality to final binding selected_records; root must create/bind its control and retain recorder identity before invocation."
+  },
+  "finite_limits": [
+    "This recorder saves compiler/raw outcome and source inventory. It is not the larger SDK/full-M provenance framework.",
+    "On failure/timeout the first output folder and started/completed command rows remain; product/source_after metadata is only published by the PASS branch, so failure review must inspect retained bytes independently.",
+    "This source-only review does not establish runtime PASS, native ABI/placement/quiet, aggregate/system/task stack clearance, emulator or physical acceptance."
+  ],
+  "findings": [],
+  "author_execution": "Filesystem/AST/hash reads and newly authored review receipt only; no producer or target invocation."
+}

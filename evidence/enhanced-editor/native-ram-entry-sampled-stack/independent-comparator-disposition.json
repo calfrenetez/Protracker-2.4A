@@ -1,0 +1,35 @@
+{
+  "status": "CORRECTED_REVIEWER_DATA_SCHEMA_SCOPE_ONLY_NO_REPLAY",
+  "preserved_refusals": [
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-object-v1/independent-audit-preparation-refusal-v1.json",
+      "bytes": 735,
+      "mode": 420,
+      "sha256": "323055669fae63e16d3c7d9c64c96dcc9c16af666da0bc7e0552f53a93f95ae1"
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-object-v1/independent-audit-preparation-refusal-v2.json",
+      "bytes": 1162,
+      "mode": 420,
+      "sha256": "f843caa1e3a0daebc14c28766e130a4cbe6ea395212cddd323e63740c132cc28"
+    }
+  ],
+  "mode_schema": {
+    "expected_tuple": [
+      48700,
+      "0644",
+      "df092aa3cce85a165cec6eed5d2ceed88f2814f68d9714fd473a8aa7cea2c0e4"
+    ],
+    "actual_tuple": [
+      48700,
+      420,
+      "df092aa3cce85a165cec6eed5d2ceed88f2814f68d9714fd473a8aa7cea2c0e4"
+    ],
+    "cause": "Octal string0644 versus numeric420 caused comparator refusal. Bytes/hash equal throughout; prior suggestion of repository source drift was incorrect. All original repository seal inputs now match after explicit mode normalization."
+  },
+  "model_overlay_scope": {
+    "cause": "Pre-overlay selection binding records48 files including separately changing host SDK/model files; the actual native build consumes26 production sources and zero tests/host SDK paths.",
+    "resolution": "Compare current native26 to exact selection binding and stable manifest; pending host overlay files are outside this native receipt and receive separate qualification."
+  },
+  "new_compiler_model_tool_product_Git_service_target_operations": 0
+}

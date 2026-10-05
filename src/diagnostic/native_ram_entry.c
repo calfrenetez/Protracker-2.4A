@@ -26,6 +26,11 @@
 #define ENTRY_READS 64U
 /* Diagnostic admission policy only; not a total task/IRQ stack bound. */
 #define ENTRY_TASK_MIN_HEADROOM 32768U
+#define ENTRY_TASK_STACK_BOOT 1U
+#define ENTRY_TASK_STACK_BEFORE_SOURCE 2U
+#define ENTRY_TASK_STACK_SOURCE_CLOSED 4U
+#define ENTRY_TASK_STACK_TEARDOWN 8U
+#define ENTRY_TASK_STACK_SAMPLE_LIMIT 4U
 
 struct entry_watch {
     struct pt_private_native_memory *memory;
@@ -70,8 +75,12 @@ struct entry_state {
  */
 struct entry_bootstrap {
     struct Task *task;
+    struct ExecBase *exec;
+    void *system_lower,*system_upper;
     void *stack_lower,*stack_upper; /* raw upper retained for Task identity */
     void *stack_usable_upper;
+    uintptr_t task_entry_sp,task_sampled_low_sp;
+    unsigned task_stack_status,task_stack_samples,task_stack_phases;
     ULONG original_signals,completion_mask,termination_mask,clock_mask;
     BYTE priority;
     LONG completion_signal;
@@ -86,6 +95,7 @@ struct entry_bootstrap {
 };
 static struct entry_bootstrap bootstrap;
 struct entry_control_alignment {char byte;struct pt_private_native_memory value;};
+typedef char entry_stack_guard_capacity[(PT_PRIVATE_MEMORY_GUARDS>=9)?1:-1];
 
 static int entry_span(const void *p,size_t n)
 {return !n||(p&&n<=UINTPTR_MAX-(uintptr_t)p);}
@@ -129,7 +139,9 @@ static void entry_hold(const char *reason)
 }
 static int entry_task_current(void)
 {
-    return bootstrap.task&&FindTask(NULL)==bootstrap.task&&
+    return bootstrap.exec&&SysBase==bootstrap.exec&&
+        SysBase->SysStkLower==bootstrap.system_lower&&SysBase->SysStkUpper==bootstrap.system_upper&&
+        bootstrap.task&&FindTask(NULL)==bootstrap.task&&
         bootstrap.task->tc_Node.ln_Pri==bootstrap.priority&&
         bootstrap.task->tc_SPLower==bootstrap.stack_lower&&
         bootstrap.task->tc_SPUpper==bootstrap.stack_upper;
@@ -273,6 +285,73 @@ static int entry_task_stack_admitted(uintptr_t lower,uintptr_t raw_upper,uintptr
     if(upper<=lower||pointer<lower||pointer>=upper)return 0;
     return pointer-lower>=ENTRY_TASK_MIN_HEADROOM;
 }
+static int entry_system_span(void *lower,void *upper)
+{
+    uintptr_t first=(uintptr_t)lower,last=(uintptr_t)upper;
+    return first&&last>first&&!((first|last)&1U)&&entry_span(lower,last-first);
+}
+/* Fixed task samples are observations of this getter's live-SP location.
+ * Only initial admission applies the 32768-byte policy. Later samples neither
+ * measure all callees nor prove remaining total-stack demand.
+ */
+static void entry_task_record(uintptr_t pointer,unsigned phase)
+{
+    uintptr_t lower=(uintptr_t)bootstrap.stack_lower,upper=(uintptr_t)bootstrap.stack_usable_upper;
+    if(bootstrap.task_stack_samples>=ENTRY_TASK_STACK_SAMPLE_LIMIT)
+        bootstrap.task_stack_status|=PT_PRIVATE_RAM_STACK_BAD_COUNT;
+    else ++bootstrap.task_stack_samples;
+    if(bootstrap.task_stack_phases&phase)bootstrap.task_stack_status|=PT_PRIVATE_RAM_STACK_BAD_PHASE;
+    bootstrap.task_stack_phases|=phase;
+    if(!pointer||(pointer&1U)||pointer<lower||pointer>=upper){
+        bootstrap.task_stack_status|=PT_PRIVATE_RAM_STACK_BAD_SAMPLE;return;
+    }
+    if(!bootstrap.task_sampled_low_sp||pointer<bootstrap.task_sampled_low_sp)
+        bootstrap.task_sampled_low_sp=pointer;
+}
+static void entry_task_sample(unsigned phase)
+{
+    uintptr_t pointer;
+    entry_require_task("original Task/ExecBase stack identity changed before task sample");
+#ifdef PT_PRIVATE_NATIVE_ENTRY_HOST_MODEL
+    pointer=entry_model_task_sample_sp(phase);
+#else
+    pointer=entry_live_sp();
+#endif
+    entry_require_task("original Task/ExecBase stack identity changed during task sample");
+    entry_task_record(pointer,phase);
+    if(bootstrap.task_stack_status)entry_hold("sampled task stack record is invalid; no total-stack inference");
+}
+static int entry_irq_stack_good(const struct pt_private_ram_irq *irq)
+{
+    uintptr_t lower=(uintptr_t)bootstrap.system_lower,upper=(uintptr_t)bootstrap.system_upper;
+    uintptr_t first=irq->entry_sp,low=irq->sampled_low_sp,last=irq->exit_sp;
+    return irq->stack_version==PT_PRIVATE_RAM_STACK_VERSION&&
+        irq->system_lower==lower&&irq->system_upper==upper&&
+        irq->stack_status==PT_PRIVATE_RAM_STACK_PHASES&&irq->stack_samples==PT_PRIVATE_RAM_STACK_SAMPLE_LIMIT&&
+        first>=lower&&first<upper&&last==first&&low>=lower&&low<upper&&
+        !((first|low|last)&1U)&&first-lower>=48U&&low<=first-48U;
+}
+static void entry_irq_stack_report(const struct pt_private_ram_irq *irq)
+{
+    /* Called only after independently positive exact source close. These are
+     * bounded samples, not an IRQ overflow guard or nested-call high-water.
+     */
+    entry_write("NATIVE RAM ENTRY SAMPLED IRQ STACK: lower=");entry_hex(irq->system_lower);
+    entry_write(" upper=");entry_hex(irq->system_upper);entry_write(" entry=");entry_hex(irq->entry_sp);
+    entry_write(" low=");entry_hex(irq->sampled_low_sp);entry_write(" exit=");entry_hex(irq->exit_sp);
+    entry_write(" status=");entry_hex(irq->stack_status);entry_write(" samples=");entry_hex(irq->stack_samples);
+    entry_write("; sampled workload only, total/system reserve/WCET UNKNOWN\n");
+}
+static void entry_task_stack_report(void)
+{
+    entry_write("NATIVE RAM ENTRY SAMPLED TASK STACK: lower=");entry_hex((uintptr_t)bootstrap.stack_lower);
+    entry_write(" usable-upper=");entry_hex((uintptr_t)bootstrap.stack_usable_upper);
+    entry_write(" entry=");entry_hex(bootstrap.task_entry_sp);entry_write(" low=");entry_hex(bootstrap.task_sampled_low_sp);
+    entry_write(" downward-headroom=");entry_hex(bootstrap.task_sampled_low_sp-(uintptr_t)bootstrap.stack_lower);
+    entry_write(" status=");entry_hex(bootstrap.task_stack_status);entry_write(" phases=");entry_hex(bootstrap.task_stack_phases);
+    entry_write(" samples=");entry_hex(bootstrap.task_stack_samples);
+    entry_write("; admission policy 32768, sampled workload only, aggregate stack UNKNOWN\n");
+}
 
 /* Independent bootstrap ownership has no prepended allocation header, copied
  * owner or self-allocation. Any ambiguous non-NULL return is retained in the
@@ -281,7 +360,8 @@ static int entry_task_stack_admitted(uintptr_t lower,uintptr_t raw_upper,uintptr
 static int entry_bootstrap_open(void)
 {
     struct pt_master_memory policy;uintptr_t stack_pointer;void *p;size_t n=sizeof(struct pt_private_native_memory),stack_n;
-    if(SysBase->LibNode.lib_Version<36)return 0;
+    if(!SysBase||!entry_span(SysBase,sizeof(*SysBase))||SysBase->LibNode.lib_Version<36)return 0;
+    bootstrap.exec=SysBase;bootstrap.system_lower=SysBase->SysStkLower;bootstrap.system_upper=SysBase->SysStkUpper;
     bootstrap.task=FindTask(NULL);
     if(!bootstrap.task||bootstrap.task->tc_Node.ln_Type!=NT_PROCESS)return 0;
     bootstrap.priority=bootstrap.task->tc_Node.ln_Pri;bootstrap.original_signals=bootstrap.task->tc_SigAlloc;
@@ -291,7 +371,9 @@ static int entry_bootstrap_open(void)
          (uintptr_t)bootstrap.stack_upper,stack_pointer))return 0;
     bootstrap.stack_usable_upper=(void *)((uintptr_t)bootstrap.stack_upper-2U);
     stack_n=(uintptr_t)bootstrap.stack_usable_upper-(uintptr_t)bootstrap.stack_lower;
-    if(!entry_span(bootstrap.stack_lower,stack_n))return 0;
+    if(!entry_span(bootstrap.stack_lower,stack_n)||
+       !entry_system_span(bootstrap.system_lower,bootstrap.system_upper))return 0;
+    bootstrap.task_entry_sp=stack_pointer;entry_task_record(stack_pointer,ENTRY_TASK_STACK_BOOT);
     pt_master_memory_init(&policy);
     entry_require_task("original task changed during bootstrap availability queries");
     if(policy.flags!=MEMF_FAST||policy.limit<n)return 0;
@@ -301,6 +383,8 @@ static int entry_bootstrap_open(void)
     if(!p)return 0;
     if(!entry_span(p,n)||(uintptr_t)p%offsetof(struct entry_control_alignment,value)||
        !entry_apart(p,n,&bootstrap,sizeof(bootstrap))||
+       !entry_apart(p,n,bootstrap.exec,sizeof(*bootstrap.exec))||
+       !entry_apart(p,n,bootstrap.system_lower,(uintptr_t)bootstrap.system_upper-(uintptr_t)bootstrap.system_lower)||
        !entry_apart(p,n,bootstrap.task,sizeof(struct Process))||
        !entry_apart(p,n,bootstrap.stack_lower,stack_n)||!entry_fast(p,n))entry_hold("bootstrap control return ambiguous");
     entry_require_task("original task changed during bootstrap placement checks");
@@ -388,6 +472,9 @@ static int entry_memory_open(void)
     bootstrap.guard[i++]=(struct pt_private_memory_span){&bootstrap,sizeof(bootstrap)};
     bootstrap.guard[i++]=(struct pt_private_memory_span){bootstrap.task,sizeof(struct Process)};
     bootstrap.guard[i++]=(struct pt_private_memory_span){bootstrap.stack_lower,stack_n};
+    bootstrap.guard[i++]=(struct pt_private_memory_span){bootstrap.exec,sizeof(*bootstrap.exec)};
+    bootstrap.guard[i++]=(struct pt_private_memory_span){bootstrap.system_lower,
+        (uintptr_t)bootstrap.system_upper-(uintptr_t)bootstrap.system_lower};
     bootstrap.guard[i++]=(struct pt_private_memory_span){bootstrap.clock.port,sizeof(*bootstrap.clock.port)};
     bootstrap.guard[i++]=(struct pt_private_memory_span){bootstrap.clock.request,sizeof(*bootstrap.clock.request)};
     bootstrap.guard[i++]=(struct pt_private_memory_span){bootstrap.termination.port,sizeof(*bootstrap.termination.port)};
@@ -467,6 +554,8 @@ static int entry_core_open(struct entry_state *s)
     s->cia->frequency=s->grid.frequency;
     s->irq->timer=s->cia->timer;s->irq->task=bootstrap.task;
     s->irq->signal=bootstrap.completion_mask;s->irq->port=s->port;
+    s->irq->stack_version=PT_PRIVATE_RAM_STACK_VERSION;
+    s->irq->system_lower=(uintptr_t)bootstrap.system_lower;s->irq->system_upper=(uintptr_t)bootstrap.system_upper;
     adapter=pt_private_cia_ram_api(s->cia);
     if(!pt_private_ram_init(s->port,s->session,ENTRY_GENERATION,s->grid.frequency,
        &adapter,ENTRY_EARLY,ENTRY_RESIDENCY,ENTRY_READS))return 0;
@@ -514,6 +603,12 @@ static void entry_source_end(struct entry_state *s)
     bootstrap.source_closed=1;
     if(s->cia->phase!=PT_PRIVATE_CIA_CLOSED||s->cia->vector_owned||s->irq->armed||
        !s->port->source_closed||s->port->dispatching)entry_hold("positive source-close invariants changed");
+    entry_task_sample(ENTRY_TASK_STACK_SOURCE_CLOSED);
+    if(s->irq->calls||s->irq->stack_samples){
+        entry_irq_stack_report(s->irq);
+        if(s->irq->calls!=1||!entry_irq_stack_good(s->irq))
+            entry_hold("sampled IRQ stack record invalid after source quiet; complete world retained");
+    }
 }
 static int entry_arm_publish(struct entry_state *s)
 {
@@ -532,6 +627,7 @@ static int entry_arm_publish(struct entry_state *s)
     if(!pt_native_eclock_read(&bootstrap.clock,&now,&frequency)||frequency!=s->grid.frequency||
        now<s->grid.epoch||now>=s->first-ENTRY_EARLY)return 0;
     entry_require_task("original task changed before source acquisition");
+    entry_task_sample(ENTRY_TASK_STACK_BEFORE_SOURCE);
     acquired=pt_private_cia_ram_acquire(s->cia,bootstrap.clock.request->tr_node.io_Device,s->irq,s->grid.frequency);
     entry_require_task("original task changed during source acquisition");
     if(acquired==0)return 0;
@@ -566,7 +662,7 @@ static int entry_actual(struct entry_state *s)
     struct pt_private_ram_port *p=s->port;struct pt_private_ram_irq *irq=s->irq;unsigned i,readers=0;
     uint64_t before=((uint64_t)irq->before.hi<<32)|irq->before.lo;
     uint64_t after=((uint64_t)irq->after.hi<<32)|irq->after.lo;
-    if(!entry_task_current()||!bootstrap.source_closed||irq->calls!=1||
+    if(!entry_task_current()||!bootstrap.source_closed||irq->calls!=1||!entry_irq_stack_good(irq)||
        irq->dispatch_result!=PT_READERS_ACTIVATION_COMMITTED||p->dispatch_result!=PT_READERS_ACTIVATION_COMMITTED||
        p->ledger_result!=PT_READERS_ACTIVATION_COMMITTED||p->entries!=1||p->fires!=1||p->commits!=1||p->effects!=4||
        p->mask!=15U||p->trace_count<3||p->trace_count>ENTRY_READS||
@@ -804,6 +900,8 @@ static void entry_os_end(void)
 {
     unsigned n=0;enum pt_alarm_result result;
     entry_require_task("original task changed before allocator or OS teardown");
+    entry_task_sample(ENTRY_TASK_STACK_TEARDOWN);
+    entry_task_stack_report();
     /* Finish precedes deletion of guarded OS extents. It does not certify
      * source quiet or OS restoration; any later uncertain close holds the
      * complete still-live original process/bootstrap/library world.

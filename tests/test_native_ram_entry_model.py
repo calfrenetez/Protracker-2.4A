@@ -41,6 +41,11 @@ class NativeEntryModelTest(unittest.TestCase):
             # New independent stack-admission matrix; original54 vectors stay exact.
             cases += [(34, n) for n in range(22)]
             self.assertEqual(len(cases), 76)
+            # Original76 vectors/oracles above remain unchanged. New fixed
+            # system-span and sampled-boundary cases use their own two modes.
+            cases += [(35, n) for n in range(17)]
+            cases += [(36, n) for n in range(21)]
+            self.assertEqual(len(cases), 114)
             # Stop at the first failed fresh-process case; preserve that result
             # before root considers any separately scoped source correction.
             for mode, ordinal in cases:
@@ -51,6 +56,10 @@ class NativeEntryModelTest(unittest.TestCase):
                 self.assertNotIn('runtime error:', run.stderr)
                 if mode == 34:
                     self.assertEqual(run.stdout.count('NATIVE ENTRY TASK STACK MODEL PASS:'), 1)
+                if mode == 35:
+                    self.assertEqual(run.stdout.count('NATIVE ENTRY SYSTEM STACK MODEL PASS:'), 1)
+                if mode == 36:
+                    self.assertEqual(run.stdout.count('NATIVE ENTRY SAMPLED STACK MODEL PASS:'), 1)
                 print(run.stdout, end='')
 
 if __name__ == '__main__':

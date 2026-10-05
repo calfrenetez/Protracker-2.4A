@@ -1,0 +1,37 @@
+{
+  "status": "ROOT_SAVED_NATIVE_COMPILER_ONLY_REVIEW_CLEAR",
+  "manifest": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/manifest.json",
+    "bytes": 275123,
+    "sha256": "436bb1dea25700bfde5dfb367ffc0003926cf6c03dfd048c6dc0489eef34dadb",
+    "mode": 420
+  },
+  "commands_RC0": 22,
+  "stable_source_records": 26,
+  "lexical_dependency_paths": 93,
+  "physical_dependency_files": 88,
+  "product": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/PTExecReadersRamEntryTest",
+    "resolved_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/PTExecReadersRamEntryTest",
+    "bytes": 63248,
+    "mode": 493,
+    "sha256": "424e5a3e6c2330151d7cace7b515d398637cfe5ef77bad5b4aa402d292d17aea"
+  },
+  "local_stack_rows": 113,
+  "object_review": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-object-v1/analysis-v3.json",
+    "bytes": 8702,
+    "sha256": "8c86c8ae5de700ddeb4cf2cdafb6594ba952d17e0ef5b5d5156615a640db165b",
+    "mode": 420
+  },
+  "independent_native_review": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-object-v1/independent-build-object-review-v2.json",
+    "bytes": 1915,
+    "sha256": "c0b4d029fb276854905d2287a3f6074a6410e187260b4f3325ab7fd8a4595959",
+    "mode": 420
+  },
+  "host_SDK_or_model_in_native_dependencies": false,
+  "native_product_execution": false,
+  "task_system_IRQ_total_stack_WCET_65536": "UNKNOWN_NOT_CLEARED",
+  "target_acceptance": "NOT_RUN"
+}

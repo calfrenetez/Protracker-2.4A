@@ -5418,3 +5418,38 @@ are self-reviews; no independent review is claimed for this slice. See
 [saved metadata evidence](../evidence/enhanced-editor/wavetable-bridge-metadata/README.md).
 No hardware ownership/capacity/order/completion/voice-stop, memory placement,
 timing or listening qualification follows.
+
+
+## Optional sampler preparation allocation guard
+
+A private ordinary-memory allocator helper copies up to sixteen parent spans
+and tracks eight exact live child pointer/size records. It protects the whole
+sampler, owned table, every current version header and flat backing, full
+PCM/marker capacities (including unused sources), its own control and existing
+children before any new child initialization. Both captured and current genuine
+source spans are classified before stale cleanup. It reads no payload values,
+promotes no master and performs no backend/device callbacks. Parent identities
+and extents stay stable while their owner may update controlled contents.
+
+Known live aliases are refused without release. Observable sampler changes or
+allocator/finish reentry poison the current lifetime; fresh candidates are
+released once, and exact previous children remain releasable without source
+traversal. Zero-owner finish is required. This borrows genuine live version
+storage; it cannot make destructive callbacks safe. The base allocator supplies
+ordinary C alignment, byte budgeting and reserve policy: eight slots alone are
+not a byte budget. Existing master budget/accounting and every existing
+production body remain unchanged. No mixed-owner or editor PLAY path is wired.
+
+One changed-fixture ASan/UBSan run passed 33 scenarios: 21 known alias cases,
+three genuine complete checked mixed transfers, seven fault-cleanup cases,
+capacity/begin refusal and a newly named genuine source alias. Semantic payloads
+were ASan-poisoned during metadata-only allocation admission. The first compile
+failed for nested test `main` macros; that exact source/result remains separate
+and never produced or executed a binary. One portable m68000 compile/link passed
+47 commands and 38 translation units against 119 dependency records. The
+213,000-byte HUNK SHA256
+`362b79ba1b4e2ffcec5fbbcc0aa1cfa466886981722192b3327d4ad33ee16ef7`
+remains native/emulator/physical NOT_RUN. Reviews are root self-reviews. See
+[saved preparation-memory evidence](../evidence/enhanced-editor/sampler-prepare-memory/README.md).
+No placement, aggregate stack, wall-clock bound, IRQ/device/output or listening
+acceptance follows. Exact musical scheduling is unchanged.

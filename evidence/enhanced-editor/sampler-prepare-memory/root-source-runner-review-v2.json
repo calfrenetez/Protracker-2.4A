@@ -1,0 +1,43 @@
+{
+  "status": "ROOT_REVIEW_CLEARED_V2_SOURCE_AND_RUNNERS_NOT_RUN",
+  "reviewer": "Root self-review; no independent review",
+  "selected": {
+    "src/editor/sampler_prepare_memory.c": {
+      "bytes": 3564,
+      "sha256": "436b914d96c53db6280c2b1e77d954f94a634be4534e1cfc0f6035786bf33a89"
+    },
+    "src/editor/sampler_prepare_memory.h": {
+      "bytes": 2884,
+      "sha256": "9fdcf4f9ebc9cae45da0a4e61208ff2b06ca0621aa6873b00dc4bbf47ad65146"
+    },
+    "tests/sampler_prepare_memory_test.c": {
+      "bytes": 12001,
+      "sha256": "e78a8fedc577af5b292769930c3040deb250bd7fb44d8af9cfae3bacb944a69c"
+    },
+    "tests/test_sampler_prepare_memory.py": {
+      "bytes": 699,
+      "sha256": "4024e163469a11c155dbddf92d7de4f638353edf495828172d04f525aa388479"
+    }
+  },
+  "runners": {
+    "run_host_once.py": {
+      "bytes": 5606,
+      "sha256": "52bf7b7d61edd442932424ae9bbfecca96ffce9e20b84efef815647daba7adba"
+    },
+    "build_native_once.py": {
+      "bytes": 5011,
+      "sha256": "74cb22cab04c36b2689bb3864f87ae8fe9b9de7b148a994611e4ec3b9abedd79"
+    }
+  },
+  "findings": [
+    "All existing source bodies unchanged; four new paths only",
+    "Sixteen copied parent spans/eight live child slots; base supplies byte budget/alignment",
+    "Fixed original sampler snapshot plus live callback-changed genuine storage guards classify aliases before cleanup; no PCM/marker values or promotion",
+    "Known aliases never released; fresh stale/reentrant candidate released once; exact existing children remain releasable after fault",
+    "Zero-owner finish required; version/header/backing storage must remain alive, immutable metadata; unobservable destruction is not made safe",
+    "21 ASan-poison alias cases,three actual checked mixed transfers,seven cleanup faults,capacity/init refusal and changed-source alias",
+    "Private optional allocator helper; no owner/PLAY/device path switched",
+    "Pre-execution header-wording seal refusal preserved; no producer had run"
+  ],
+  "target": "NOT_RUN"
+}

@@ -1,0 +1,26 @@
+{
+  "status": "ROOT_CHANGED_FIXTURE_REVIEW_CLEARED_NOT_RUN",
+  "reviewer": "Root self-review",
+  "selected": {
+    "src/editor/sampler_prepare_memory.c": {
+      "bytes": 3564,
+      "sha256": "436b914d96c53db6280c2b1e77d954f94a634be4534e1cfc0f6035786bf33a89"
+    },
+    "src/editor/sampler_prepare_memory.h": {
+      "bytes": 2884,
+      "sha256": "9fdcf4f9ebc9cae45da0a4e61208ff2b06ca0621aa6873b00dc4bbf47ad65146"
+    },
+    "tests/sampler_prepare_memory_test.c": {
+      "bytes": 12726,
+      "sha256": "27a56210815cfe0a7c23e403bbc53fe367111bfe19674cf0846a81f6dc11d2c8"
+    },
+    "tests/test_sampler_prepare_memory.py": {
+      "bytes": 699,
+      "sha256": "4024e163469a11c155dbddf92d7de4f638353edf495828172d04f525aa388479"
+    }
+  },
+  "change": "Include only genuine renderer fixture with one main rename; local mixed helpers invoke real opaque mixed setup. No production change.",
+  "first_host": "V2 compile failed for nested main macros; retained exactly, no binary/execution",
+  "producer_retry": "Changed fixture only, separate host-v2 evidence; no unchanged failure replay",
+  "target": "NOT_RUN"
+}

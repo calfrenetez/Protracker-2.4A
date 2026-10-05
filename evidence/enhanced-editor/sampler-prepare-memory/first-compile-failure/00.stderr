@@ -1,0 +1,14 @@
+In file included from tests/sampler_prepare_memory_test.c:3:
+tests/mixed_preflight_startup_test.c:3:9: error: 'main' macro redefined [-Werror,-Wmacro-redefined]
+    3 | #define main inherited_render_startup_fixture_main
+      |         ^
+tests/sampler_prepare_memory_test.c:2:9: note: previous definition is here
+    2 | #define main inherited_prepare_memory_mixed_main
+      |         ^
+tests/sampler_prepare_memory_test.c:187:5: error: redefinition of 'main'
+  187 | int main(void)
+      |     ^
+tests/mixed_preflight_startup_test.c:500:5: note: previous definition is here
+  500 | int main(void)
+      |     ^
+2 errors generated.

@@ -1,0 +1,8 @@
+{
+  "status": "PRE_EXECUTION_SOURCE_SEAL_MISMATCH",
+  "path": "src/editor/sampler_prepare_memory.h",
+  "reason": "Documentation-only allocator/finish reentry wording clarified while passive copy finished",
+  "host": "NOT_RUN",
+  "native": "NOT_RUN",
+  "action": "Preserve original prepared seals/recorder/header; bind corrected wording before first producer"
+}

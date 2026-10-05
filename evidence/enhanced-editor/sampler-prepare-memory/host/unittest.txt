@@ -1,0 +1,6 @@
+test_real_sampler_storage_and_checked_mixed_children (test_sampler_prepare_memory.SamplerPrepareMemory.test_real_sampler_storage_and_checked_mixed_children) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 7.908s
+
+OK

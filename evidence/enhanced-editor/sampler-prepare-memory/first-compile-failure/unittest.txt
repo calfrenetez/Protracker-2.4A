@@ -1,0 +1,19 @@
+test_real_sampler_storage_and_checked_mixed_children (test_sampler_prepare_memory.SamplerPrepareMemory.test_real_sampler_storage_and_checked_mixed_children) ... ERROR
+
+======================================================================
+ERROR: test_real_sampler_storage_and_checked_mixed_children (test_sampler_prepare_memory.SamplerPrepareMemory.test_real_sampler_storage_and_checked_mixed_children)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/sampler-prepare-memory-next/candidate/tests/test_sampler_prepare_memory.py", line 10, in test_real_sampler_storage_and_checked_mixed_children
+    subprocess.run(['cc','-std=c99','-O1','-g','-Wall','-Wextra','-Werror',
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    '-fsanitize=address,undefined','-Isrc/core',*SOURCES,'-o',str(exe)],cwd=ROOT,check=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/sampler-prepare-memory-next/run_host_once.py", line 82, in retained_run
+    raise subprocess.CalledProcessError(completed.returncode, argv)
+subprocess.CalledProcessError: Command '['/usr/bin/cc', '-UNDEBUG', '-std=c99', '-O1', '-g', '-Wall', '-Wextra', '-Werror', '-fsanitize=address,undefined', '-Isrc/core', 'tests/sampler_prepare_memory_test.c', 'src/editor/sampler_prepare_memory.c', 'src/editor/mixed_preflight.c', 'src/editor/paula_preflight.c', 'src/core/paula_render_voice.c', 'src/core/render.c', 'src/core/pitch.c', 'src/core/timeline.c', 'src/core/frame_clock.c', 'src/core/flow.c', 'src/core/voice.c', 'src/core/project.c', 'src/core/channels.c', 'src/core/pcm.c', 'src/core/elapsed_clock.c', 'src/editor/wavetable_song.c', 'src/editor/wavetable_voices.c', 'src/editor/wavetable_dispatch.c', 'src/core/amigus_voice_plan.c', 'src/core/amigus_render_voice.c', 'src/editor/sampler_wavetable.c', 'src/core/amigus_reservation.c', 'src/core/amigus_wavetable_cache.c', 'src/core/amigus_sample_ram.c', 'src/core/sample_cache.c', 'src/core/playback_pcm.c', 'src/editor/sampler.c', 'src/editor/slots.c', 'src/core/pcm_filtered.c', 'src/core/slices.c', 'src/core/pattern.c', 'src/core/document.c', 'src/core/pp20.c', 'src/core/mod_project.c', 'src/core/mod_inspect.c', 'src/core/wav.c', 'src/core/svx.c', 'src/core/raw.c', '-o', '/Users/james1/Documents/Codex/2026-09-18/rev/outputs/sampler-prepare-memory-next/host-v1/test_sampler_prepare_memory/work/test']' returned non-zero exit status 1.
+
+----------------------------------------------------------------------
+Ran 1 test in 7.384s
+
+FAILED (errors=1)

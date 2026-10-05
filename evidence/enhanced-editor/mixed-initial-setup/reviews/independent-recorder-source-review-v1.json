@@ -1,0 +1,89 @@
+{
+  "status": "CLEAR_RECORDER_SOURCE_ONLY_PENDING_CANDIDATE_SEAL",
+  "scope": "Passive source/AST review of root-owned fixed host recording recipe only; no reviewed module imports or fixture/compiler/model/tool/product execution, Git, service or target access.",
+  "recorder": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/run_host_once.py",
+    "bytes": 5517,
+    "mode": 420,
+    "sha256": "ae45136b3cd1b1983d34836a38826850a50ca8d59af052495261255ab57b3e3d"
+  },
+  "findings": [],
+  "fixed_recipe": {
+    "groups": [
+      "test_mixed_preflight_startup",
+      "test_mixed_preflight",
+      "test_mixed_owner",
+      "test_paula_preflight_startup",
+      "test_render_sequence_startup"
+    ],
+    "success_requires_group_tests": 1,
+    "success_requires_calls_per_group": 2,
+    "success_requires_total_groups": 5,
+    "success_requires_total_calls": 10,
+    "compile": "Exact cc label mapped to /usr/bin/cc with -UNDEBUG and required ASan/UBSan; single -o destination beneath active group/work; timeout120s.",
+    "execution": "Only single retained output executable; each successful group must execute its own just-recorded compiler product; timeout45s.",
+    "environment": "Rejects compiler include/library and sanitizer override variables named in code. This is a finite reviewed fixture recipe, not a general arbitrary-command security boundary.",
+    "raw_retention": "stdout/stderr files opened before each call, argv/cwd/group/timeout saved before effect, elapsed/result/failure saved in finally; products kept in persistent group/work and hash recorded after successful compile.",
+    "temporary_directories": "Replacement owns one persistent directory per fixture group; no cleanup on exit.",
+    "first_failure": "First failing group/command aborts later groups, retains report/raw outputs/products and restores patched APIs; no retry loop.",
+    "source_binding": "Full candidate inventory must equal pending source-controls manifest before any fixture import and again after run; source change changes report status and process exits1.",
+    "imports": "sys.dont_write_bytecode=True before any candidate imports prevents cache files from changing the exact inventory; root has additionally specified -B invocation.",
+    "restoration": "subprocess.run and TemporaryDirectory restored in finally before source-after report.",
+    "unittest": "Per-group complete verbose unittest result retained; only one successful discovered test and exact compile/product pair can advance."
+  },
+  "resolved_preseal_observations": [
+    "Added dont_write_bytecode before imports.",
+    "Added nonPASS/source-changed explicit exit1.",
+    "Added exact one-test/two-call/same-product-per-group and total5/10 success gates."
+  ],
+  "existing_fixture_source_checks": [
+    {
+      "record": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/candidate/tests/test_mixed_preflight.py",
+        "bytes": 848,
+        "mode": 420,
+        "sha256": "22452468a07f4de93cf17d4a1255af5ac61fdc71d7d1457eb31b5d39f0187d86"
+      },
+      "method": "test_one_global_sequence_and_atomic_refusal",
+      "subprocess_calls": 2
+    },
+    {
+      "record": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/candidate/tests/test_mixed_owner.py",
+        "bytes": 780,
+        "mode": 420,
+        "sha256": "f51ebed2b0fe03ba0143ead18129a5d45e0ba2fe742474f9adf70ba1f460298f"
+      },
+      "method": "test_union_pins_and_both_reader_barrier",
+      "subprocess_calls": 2
+    },
+    {
+      "record": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/candidate/tests/test_paula_preflight_startup.py",
+        "bytes": 1038,
+        "mode": 420,
+        "sha256": "e19ca1eeaa8c7a55a02e69bbae5879790dfae4d769c8bd26ddc4789134c42281"
+      },
+      "method": "test_initial_readiness_then_actual_timeline_audit",
+      "subprocess_calls": 2
+    },
+    {
+      "record": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/candidate/tests/test_render_sequence_startup.py",
+        "bytes": 912,
+        "mode": 420,
+        "sha256": "cca5175ab5b480b2f1e84f9975fa7ffa64a606dc327eaa0e0bed2ac74df09d3c"
+      },
+      "method": "test_actual_cancellable_setup_and_checked_reset",
+      "subprocess_calls": 2
+    }
+  ],
+  "pending": {
+    "candidate_seal": "NOT_YET_PROVIDED",
+    "new_startup_fixture": "NOT_YET_COPIED_OR_REVIEWED",
+    "source_controls": "MUST_BE_FROZEN_AND_REVIEWED_BEFORE_ROOT_ONCE_INVOCATION",
+    "actual_host_results": "NOT_RUN",
+    "native_emulator_physical": "NOT_RUN",
+    "launch_or_timing_permission": "NOT_GRANTED_BY_THIS_RECEIPT"
+  }
+}

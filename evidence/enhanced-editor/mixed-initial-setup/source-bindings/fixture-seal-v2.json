@@ -1,0 +1,99 @@
+{
+  "status": "SEALED_SOURCE_ONLY_V2_NOT_RUN",
+  "files": {
+    "tests/mixed_preflight_startup_test.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/tests/source-revision-v2/mixed_preflight_startup_test.c",
+      "bytes": 36028,
+      "sha256": "c09322fd9933377c6ac12e82ccce806e6ea2adc169692e17b70d7df9d20407d5",
+      "mode": 420
+    },
+    "tests/test_mixed_preflight_startup.py": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/tests/source-revision-v2/test_mixed_preflight_startup.py",
+      "bytes": 928,
+      "sha256": "ccddc8213bb134a427fb155277e4094c26009edbd1ee31d3637d9b22569bbb92",
+      "mode": 420
+    }
+  },
+  "marker": "MIXED STARTUP PASS: cancellable initial validation, complete two-route audit and same checked sequence transfer; host software only",
+  "include_chain": [
+    "tests/mixed_preflight_startup_test.c -> tests/render_sequence_startup_test.c (main renamed; inherited main not invoked)",
+    "tests/mixed_preflight_startup_test.c -> src/editor/mixed_preflight.h"
+  ],
+  "source_recipe": "SOURCES = [new fixture, *test_mixed_preflight.SOURCES[1:]]; each genuine production TU once",
+  "reused_inputs": {
+    "tests/render_sequence_startup_test.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/render_sequence_startup_test.c",
+      "bytes": 26099,
+      "sha256": "4c54ae64627d0ff77ae781155f8247fcb387ead0e03858e4a06fd96e1fb07f06",
+      "mode": 420
+    },
+    "tests/paula_preflight_startup_test.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/paula_preflight_startup_test.c",
+      "bytes": 26184,
+      "sha256": "f55181bb9b065237fca6b39c09852107a73f2823013bfd0226bb351fd7cc9ed8",
+      "mode": 420
+    },
+    "tests/test_mixed_preflight.py": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/test_mixed_preflight.py",
+      "bytes": 848,
+      "sha256": "22452468a07f4de93cf17d4a1255af5ac61fdc71d7d1457eb31b5d39f0187d86",
+      "mode": 420
+    }
+  },
+  "meaningful_scope": [
+    "18 legacy/report/complete-plan parity combinations: master8/16/24, cache8/16, song/lead-in/pattern modes",
+    "Budget1/7/4096 and work0/4097 refusal; genuine phase report last_work bound",
+    "Metadata-only begin and completed setup transfer under poisoned semantic values; audit measurement and checked rewind avoid rescans",
+    "Whole-project semantic errors including unselected source/order/event/slice and later unsupported effect; immutable MIDI route refusal is static, not late",
+    "Genuine late stereo trigger refusal in each backend, with global action/channel diagnostics and both partial source masks hidden",
+    "Cancellation at all five startup phases and five actual timeline landmarks; zero allocated owners",
+    "First/second allocation failure, READY take CAPACITY with explicit retry, callback allocation/release/cancel reentry",
+    "Revision/generation/caps/map/allocator/format/header staleness; freed former order storage and poisoned former sample table cleanup",
+    "Before-images across caps/format/map, whole actual parent/startup/trailing spans and declared master capacity aliases; ambiguous alias never released as fresh ownership",
+    "Original caps/format/map reuse after successful transfer, exact same sequence identity, one take, no allocation/remeasurement",
+    "Guarded actual audit close/sequence close reentry and callback-mutated begin/actual publication slots preserved"
+  ],
+  "limits": [
+    "No test/model/module/compiler or native product invoked by author",
+    "No mixed_owner, promotion, native/editor PLAY or backend activation integration",
+    "No cache allocation/upload, Fast/Chip/card placement, emulator/physical/timing/listening proof",
+    "Opaque callback-context extents remain caller-disjoint and immutable borrowing is a contract, not arbitrary concurrent mutation detection",
+    "Static MIDI routing refusal is not claimed as late mutable-route coverage"
+  ],
+  "prior_seal": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/tests/source-seal-v1.json",
+    "bytes": 4019,
+    "sha256": "55c816a8a9931963892dc5c7093babf6ae26af2fc13147606e581d85488e9a47",
+    "mode": 420
+  },
+  "preserved_v1": {
+    "mixed_preflight_startup_test.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/tests/source-revision-v1/mixed_preflight_startup_test.c",
+      "bytes": 34763,
+      "sha256": "eac7bbe8d1b0e9cacd17d9cad100608b7bca4f4431388946ae5be53d4eb45d5b",
+      "mode": 420
+    },
+    "source-seal-v1.json": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/tests/source-revision-v1/source-seal-v1.json",
+      "bytes": 4019,
+      "sha256": "55c816a8a9931963892dc5c7093babf6ae26af2fc13147606e581d85488e9a47",
+      "mode": 420
+    },
+    "test_mixed_preflight_startup.py": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/tests/source-revision-v1/test_mixed_preflight_startup.py",
+      "bytes": 928,
+      "sha256": "ccddc8213bb134a427fb155277e4094c26009edbd1ee31d3637d9b22569bbb92",
+      "mode": 420
+    }
+  },
+  "derivation": {
+    "patch": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/tests/source-revision-v2/fixture-rate-correction-v2.patch",
+      "bytes": 2407,
+      "sha256": "8c2493b7cbc29397677c1515ec7d55e790991256d5d1b4c6413fa037bb8e18a8",
+      "mode": 420
+    },
+    "only_change": "Unsupported22050 oracle moved from metadata INVALID/zero allocation to initial PENDING, bounded complete project validation FAILED, unchanged actual output/no sequence allocation and zero-owner cancellation. Recipe byte-exact; production not edited.",
+    "preparation_history": "The original C is still34763B/eac7bbe8 and matches its seal exactly. Additional local preparation between the earlier384-line WIP observation and seal added finite metadata/full-capacity/publication regressions; nothing changed after V1seal."
+  }
+}

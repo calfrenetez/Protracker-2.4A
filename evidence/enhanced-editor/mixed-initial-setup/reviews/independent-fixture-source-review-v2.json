@@ -1,0 +1,87 @@
+{
+  "status": "CLEAR_FIXTURE_SOURCE_ONLY",
+  "findings": [],
+  "method": "Complete V1 C and recipe read, exact narrow V2 unified delta read and equality check, passive inherited genuine helper source and core phase read. Standard-library data/AST/hash inspection only; no module import, test/model/compiler/helper/product/Git/service/target invocation.",
+  "fixture_seal": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/tests/source-revision-v2/source-seal-v2.json",
+    "bytes": 6120,
+    "sha256": "ccfe061d6344ee529dff5ed77bf33c9e3c8cb338702d073541230cf3fb0f766f",
+    "mode": 420
+  },
+  "files": {
+    "tests/mixed_preflight_startup_test.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/tests/source-revision-v2/mixed_preflight_startup_test.c",
+      "bytes": 36028,
+      "sha256": "c09322fd9933377c6ac12e82ccce806e6ea2adc169692e17b70d7df9d20407d5",
+      "mode": 420
+    },
+    "tests/test_mixed_preflight_startup.py": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/tests/source-revision-v2/test_mixed_preflight_startup.py",
+      "bytes": 928,
+      "sha256": "ccddc8213bb134a427fb155277e4094c26009edbd1ee31d3637d9b22569bbb92",
+      "mode": 420
+    }
+  },
+  "exact_derivation": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/tests/source-revision-v2/fixture-rate-correction-v2.patch",
+    "bytes": 2407,
+    "sha256": "8c2493b7cbc29397677c1515ec7d55e790991256d5d1b4c6413fa037bb8e18a8",
+    "mode": 420
+  },
+  "preserved_v1": {
+    "mixed_preflight_startup_test.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/tests/source-revision-v1/mixed_preflight_startup_test.c",
+      "bytes": 34763,
+      "sha256": "eac7bbe8d1b0e9cacd17d9cad100608b7bca4f4431388946ae5be53d4eb45d5b",
+      "mode": 420
+    },
+    "source-seal-v1.json": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/tests/source-revision-v1/source-seal-v1.json",
+      "bytes": 4019,
+      "sha256": "55c816a8a9931963892dc5c7093babf6ae26af2fc13147606e581d85488e9a47",
+      "mode": 420
+    },
+    "test_mixed_preflight_startup.py": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/tests/source-revision-v1/test_mixed_preflight_startup.py",
+      "bytes": 928,
+      "sha256": "ccddc8213bb134a427fb155277e4094c26009edbd1ee31d3637d9b22569bbb92",
+      "mode": 420
+    }
+  },
+  "prior_seal": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/tests/source-seal-v1.json",
+    "bytes": 4019,
+    "sha256": "55c816a8a9931963892dc5c7093babf6ae26af2fc13147606e581d85488e9a47",
+    "mode": 420
+  },
+  "production_review": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/independent-production-source-review-v1.json",
+    "bytes": 7685,
+    "sha256": "00412109d046b9152a19a81fd38d680391ba787ca96131287dde866b655120fe",
+    "mode": 420
+  },
+  "finite_bindings": "All V2 fixture, recipe, three reused inputs, preserved V1 C/recipe/seal, prior seal and derivation records match bytes/hash/numeric mode. Recipe is byte-exact V1. Unified patch reproduces all V1-to-V2 changes and is confined to the unsupported-rate oracle.",
+  "corrected_oracle": "22050 begins genuine PENDING with two controls, completes bounded whole-project validation to FAILED without any third sequence allocation, preserves actual audit sentinel, and cancellation releases both controls. No READY flag or validator certificate is forged.",
+  "coverage_review": [
+    "18 independent legacy-report and complete-plan/voice/gain comparisons cover master 8/16/24, cache format 8/16, ordinary/lead-in/pattern modes, 48000/44100 and budgets 1/7/4096; work 0/4097 refuse.",
+    "Genuine metadata-only begin, completed transfer and checked rewind are enclosed by semantic ASan poison; measurement poison distinguishes required played-flow reads from offset/unused-pattern rescans. All PCM before-images and master bit depths are preserved.",
+    "Whole-source semantic negatives include unselected sample/order/event/slice and unsupported later effects. Separate late stereo triggers reject each backend with global action/channel identity and zero partial source masks; MIDI routing is correctly described as initial static refusal.",
+    "Cancellation observes all five real startup phases and five actual timeline landmarks. First/second allocation refusal, third-allocation CAPACITY and explicit retry, allocation/release/cancel callback reentry, stale borrowed controls/tags, freed former orders and poisoned former sample table cleanup are finite genuine cases.",
+    "Alias cases compare caps/format/map and whole/trailing opaque controls plus full declared master capacity before-images; ambiguous allocation returns never gain fresh ownership. Second-allocation alias cancellation releases the one genuine inner owner, not the alias twice.",
+    "Original borrowed controls can be reused after successful transfer; actual report parity, same third allocation sequence identity, one take, no audit allocation, and nested actual/sequence closing reentry are checked. Callback-mutated external publication slots are preserved."
+  ],
+  "recipe_review": {
+    "test_methods": [
+      "test_initial_readiness_then_complete_two_route_audit"
+    ],
+    "actual_subprocess_sites": 2,
+    "closure": "New C fixture then existing mixed test source closure [1:] supplies each production TU once; included renderer fixture has renamed main that is compiled but not invoked. No assertion-suppression flag; root recorder separately supplies -UNDEBUG and retained products/logs."
+  },
+  "limits": [
+    "This is source-only qualification; author and reviewer have not executed the fixture. Root owns the first actual host/native invocation and final candidate bindings.",
+    "ASan poison is effective only in the sanitizer host build and becomes deliberate no-op in the native compile-only fixture; native compilation alone cannot promote poison or runtime coverage.",
+    "No mixed_owner/promotion/editor PLAY/backend activation integration, hardware placement/cache upload, emulator/physical acceptance, timing or listening test is supplied.",
+    "Finite mutation/refusal cases do not prove arbitrary concurrent-source mutation detection. Serial immutable borrowing and opaque callback-context disjointness remain contracts.",
+    "Initial READY remains distinct from complete mixed capability and source masks. Synchronous mixed_owner initial scans and source descriptor promotion remain deferred."
+  ]
+}

@@ -1,0 +1,6 @@
+test_initial_readiness_then_complete_two_route_audit (test_mixed_preflight_startup.MixedPreflightStartup.test_initial_readiness_then_complete_two_route_audit) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 15.298s
+
+OK

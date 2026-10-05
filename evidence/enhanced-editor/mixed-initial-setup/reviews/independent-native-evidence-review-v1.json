@@ -1,0 +1,209 @@
+{
+  "status": "CLEAR_SAVED_COMPILER_LINK_EVIDENCE_ONLY",
+  "findings": [],
+  "method": "Passive saved manifest/argv/raw output and exact product header/byte inspection; standard-library file/hash/JSON/dependency text analysis only. No tool/compiler/linker/test/model/module import, native product, Git, service, transport or target invocation.",
+  "manifest": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/native-v1/manifest.json",
+    "bytes": 291995,
+    "sha256": "ed2c3fdde150c2cb788c585a235c8e0ae011f9ae8938808e1b600cb9cc89170e",
+    "mode": 420
+  },
+  "source_controls": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/source-controls-v1.json",
+    "bytes": 109988,
+    "sha256": "80075890ab8028efa7dcbfb01ab82b3d23042f217acda30892a9df145aac7ad7",
+    "mode": 420
+  },
+  "host_execution": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/execution.json",
+    "bytes": 229114,
+    "sha256": "2c4fed31e4a34b0a56684ab315a52565cd6223eef7d391bbb7a42d51408e7da1",
+    "mode": 420
+  },
+  "host_independent_review": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/independent-host-evidence-review-v1.json",
+    "bytes": 16686,
+    "sha256": "7728f651ce87cb392fd388927f8b88c3d3ea6ca93765769aa6de8c6e4f3f1900",
+    "mode": 420
+  },
+  "builder": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/build_native_once.py",
+    "bytes": 5009,
+    "sha256": "9c32291b9159dfd0c0810c7a8e52c31c0287ead07e87aa40273af7aae7c9f153",
+    "mode": 420
+  },
+  "validation": {
+    "actual_calls": 46,
+    "version_calls": 1,
+    "runtime_queries": 7,
+    "full_M_dependency_calls": 37,
+    "single_compile_link_calls": 1,
+    "all_rc": 0,
+    "all_stderr_empty": true,
+    "compile_link_stdout_empty": true,
+    "literal_flags": [
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-fbbb=-"
+    ],
+    "units": 37,
+    "unique_resolved_dependencies": 117,
+    "dependency_tokens_across_all_M_outputs": 1093,
+    "candidate_source_dependencies": 85,
+    "external_native_header_dependencies": 32,
+    "source_records": 1018,
+    "before_after_host_controls_current_candidate_match": true,
+    "five_tools_seven_runtime_origins_and_current_bytes_modes_match": true,
+    "dependencies_current_bytes_match": true,
+    "no_host_sdk_or_old_private_port_closure": true
+  },
+  "tool_pins": {
+    "compiler": {
+      "path": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+      "resolved_path": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+      "bytes": 821944,
+      "mode": 493,
+      "sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f"
+    },
+    "cc1": {
+      "path": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/libexec/gcc/m68k-amigaos/6.5.0b/cc1",
+      "resolved_path": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/libexec/gcc/m68k-amigaos/6.5.0b/cc1",
+      "bytes": 12240624,
+      "mode": 493,
+      "sha256": "283c793f4033761ff96d5534d3a44be192097181458d4029b462597148424f05"
+    },
+    "as": {
+      "path": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/bin/as",
+      "resolved_path": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/bin/as",
+      "bytes": 1023048,
+      "mode": 493,
+      "sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f"
+    },
+    "ld": {
+      "path": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/bin/ld",
+      "resolved_path": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/bin/ld",
+      "bytes": 1027624,
+      "mode": 493,
+      "sha256": "b50c8aa31ff322825ddf90602b50871e30410724fadfda5eb60ffde193b9a9dc"
+    },
+    "collect2": {
+      "path": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/libexec/gcc/m68k-amigaos/6.5.0b/collect2",
+      "resolved_path": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/libexec/gcc/m68k-amigaos/6.5.0b/collect2",
+      "bytes": 461384,
+      "mode": 493,
+      "sha256": "24c609f362f0d54478dffb9b92b51034e10ce0c5e85534acf1b8b72203bc9bb8"
+    }
+  },
+  "runtime_query_results": [
+    {
+      "name": "ncrt0.o",
+      "saved_query": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/native-v1/runtime-ncrt0-o.stdout",
+        "bytes": 120,
+        "sha256": "1562950e2e8cb15a51238fddb72e6e26f0ff2d5a774543473aba0d274a19c45f",
+        "mode": 420
+      },
+      "resolved_sha256": "6fe4b6088899bd53efae1ea1e4783b7deab07b13f3d40cff7b46285907f19804"
+    },
+    {
+      "name": "libnix20.a",
+      "saved_query": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/native-v1/runtime-libnix20-a.stdout",
+        "bytes": 123,
+        "sha256": "9060e4a22ea9e716b8f9cf85b5fe5e11a9e6c88ef938b9111d189acc2df8465b",
+        "mode": 420
+      },
+      "resolved_sha256": "0731c54ad32272f5ab0d5ecd3f1f93d7aa4fc7c6ac0a5923eb26125633556e8c"
+    },
+    {
+      "name": "libnixmain.a",
+      "saved_query": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/native-v1/runtime-libnixmain-a.stdout",
+        "bytes": 125,
+        "sha256": "dd28b9a8319d35bd81f76cd9479f889e7e5628be07a45ef138f35a729c640add",
+        "mode": 420
+      },
+      "resolved_sha256": "ad54158e95516aa6f3b04a8b3d835a48ecbaaea962cd178d5fb66995dcef19df"
+    },
+    {
+      "name": "libnix.a",
+      "saved_query": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/native-v1/runtime-libnix-a.stdout",
+        "bytes": 121,
+        "sha256": "1ca0a83ef891770cbbe671647c7aad9f925ed0b9756c8f85aca35c84961e202a",
+        "mode": 420
+      },
+      "resolved_sha256": "d64619bc74933ac5312ef6db0f8d4cd62b3918f9f4a5805863e7d15536fcb144"
+    },
+    {
+      "name": "libstubs.a",
+      "saved_query": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/native-v1/runtime-libstubs-a.stdout",
+        "bytes": 156,
+        "sha256": "8ce0c56c26f8f09a8af8b76d62c4d380cbfbe8efde13fa64884d8e9e6c93027f",
+        "mode": 420
+      },
+      "resolved_sha256": "55dbd0626cb472d89ab5d1bd234e6013df178f2cd3b83266bf4b82c68f1a79de"
+    },
+    {
+      "name": "libamiga.a",
+      "saved_query": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/native-v1/runtime-libamiga-a.stdout",
+        "bytes": 156,
+        "sha256": "c2c8e44936c32e01094e9de761e57c62c7bb834fbf6cabd464465bf3b17090c4",
+        "mode": 420
+      },
+      "resolved_sha256": "10d78b6d303a99677c0bf29a8e1653d62669f69f395691646393020325084021"
+    },
+    {
+      "name": "libgcc.a",
+      "saved_query": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/native-v1/runtime-libgcc-a.stdout",
+        "bytes": 125,
+        "sha256": "b1912e77c4c1160ce749ca74fbe6edabd5896c2291188e718a9cdfd72c84d57a",
+        "mode": 420
+      },
+      "resolved_sha256": "8bed858c8a5797471c3bc130df341824121c5d0f0908345dfe6ce0ceccc3569b"
+    }
+  ],
+  "raw_log_binding": {
+    "files": 92,
+    "inventory_definition": "Call order, then stdout and stderr; records each absolute path, bytes, SHA256 and numeric mode. SHA is canonical json(sort_keys=True,separators=(comma,colon)) of that ordered inventory.",
+    "inventory_sha256": "7ad5b335314cdb333d57219443b62623b15e8a7fe7a7617a6d262af49c3284bb"
+  },
+  "product": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/native-v1/PTMixedSetupTest",
+    "bytes": 226688,
+    "sha256": "171f3b7b42b659093bc24b410d6affb96668527dbeb624efb1a2251b18b97530",
+    "mode": 493
+  },
+  "header": {
+    "magic": "0x000003f3",
+    "resident_name_terminator": 0,
+    "table_size": 3,
+    "first_hunk": 0,
+    "last_hunk": 2,
+    "hunk_size_words": [
+      51939,
+      90,
+      29
+    ],
+    "interpretation": "Only executable HUNK header structure is inspected. No memory class, stack reservation, actual runtime layout or execution acceptance is inferred."
+  },
+  "before_after_provenance": "Reviewed builder verifies compiler SHA before every call; all five tool and seven runtime SHA values are checked before and after compile/link. Manifest stores the prior immutable provenance records and PASS result rather than distinct raw timestamped before/after observations. Those exact records, selected runtime path query outputs, current bytes/modes and full saved dependency outputs independently agree.",
+  "limits": [
+    "This is the one retained native compiler/link invocation only; no HUNK execution, emulator or physical window, marker/RC from a target or test acceptance occurred.",
+    "HUNK header and compilation do not qualify stack/task/system/IRQ spans, memory placement, WCET, timing/scheduling, caches/card RAM or actual audio/listening.",
+    "Native sanitizer poison helpers deliberately become no-op; host ASan/UBSan assertion acceptance remains a separate earlier evidence tier.",
+    "Mixed owner initial sync scans/pin promotion, editor PLAY and backend activation remain unintegrated. No native launch permission or recovery/ownership clearance is conveyed.",
+    "The former native-builder preparation schema refusal remains historical; it preceded actual compiler invocation and is not treated as a failed build or replay."
+  ]
+}

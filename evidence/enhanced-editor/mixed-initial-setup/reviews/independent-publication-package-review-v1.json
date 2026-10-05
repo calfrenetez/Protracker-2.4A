@@ -1,0 +1,120 @@
+{
+  "status": "CLEAR_V2_DOCUMENT_SOURCE_REVIEW_ROOT_COPY_EVIDENCE_SEPARATE",
+  "findings": [],
+  "method": "Passive full additions/README/manifest semantic review, V2-versus-preserved-V1 literal text and current original-prefix comparisons. No reviewed-module import, test/model/compiler/product/Git/service/target operation.",
+  "documents": [
+    {
+      "name": "MIXED_PREFLIGHT.md",
+      "unchanged_original": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/docs/MIXED_PREFLIGHT.md",
+        "bytes": 2730,
+        "sha256": "11cc60745739f75e1bc540fed9affb0570354213bc490f8e1ea3be92f2e73cef",
+        "mode": 420
+      },
+      "preserved_v1": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/publication-docs-v1/MIXED_PREFLIGHT.md",
+        "bytes": 7301,
+        "sha256": "84435e25f223db372c2ed0423fb2fa120a35765af9ae404b0d9d1cc372620892",
+        "mode": 420
+      },
+      "final_v2": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/publication-docs-v2/MIXED_PREFLIGHT.md",
+        "bytes": 7314,
+        "sha256": "26e87a29fe7d45c9ebfb7effd68315c67102b049d63073a931576893cc10381a",
+        "mode": 420
+      },
+      "append_bytes": 4584,
+      "append_sha256": "87a46a370d51def19fe29a940e7b3c07836fb285dbb3ecb7096ba0447f596296",
+      "append_only": true
+    },
+    {
+      "name": "SAMPLE_MEMORY.md",
+      "unchanged_original": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/docs/SAMPLE_MEMORY.md",
+        "bytes": 349064,
+        "sha256": "cea28e3c65f40fc8d743423352ab81e222bc957ba196ca966962f29113f83a3f",
+        "mode": 420
+      },
+      "preserved_v1": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/publication-docs-v1/SAMPLE_MEMORY.md",
+        "bytes": 350655,
+        "sha256": "08bb6df2553a89af86a540ecfdf56213a43981a3f92519d5c0b077e53ea16d47",
+        "mode": 420
+      },
+      "final_v2": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/publication-docs-v2/SAMPLE_MEMORY.md",
+        "bytes": 350655,
+        "sha256": "08bb6df2553a89af86a540ecfdf56213a43981a3f92519d5c0b077e53ea16d47",
+        "mode": 420
+      },
+      "append_bytes": 1591,
+      "append_sha256": "f9fae30f856a7ff3d705ebd951757955f03512c8dd06b69891aa92fd2132a07b",
+      "append_only": true
+    }
+  ],
+  "package_readme": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/publication-evidence-v1/README.md",
+    "bytes": 2259,
+    "sha256": "fcb803127e67ec4a6aa24b48c9fdd6620b5ac6a6de62e96bf84cd2cd3de7c157",
+    "mode": 420
+  },
+  "package_inventory": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/publication-evidence-v1/package-files.json",
+    "bytes": 20320,
+    "sha256": "edbbd05b2318e6edb1f513fa9e37186062f927fe671baeb5cb63b19d6b317a0f",
+    "mode": 420
+  },
+  "claims_review": [
+    "Five host ASan/UBSan groups and ten actual compile/run commands match independently reviewed first outcomes. The 18 new fixture combinations are now accurately named master-depth/cache-format/mode, with budgets/cancellation/currentness/ownership and same-sequence checks.",
+    "The separate 46-command/37-TU/117-dependency compiler-link result and 226688-byte HUNK identity match the saved native evidence. HUNK remains intentionally absent from the publication package and native/emulator/physical NOT_RUN.",
+    "Initial READY is distinct from mixed compatibility and backend source masks. Genuine startup is consumed into PENDING actual mixed audit, and full successful audit moves the same once-rewound sequence.",
+    "Borrowed project/master lifetimes, capacity/refusal/cancellation guards and copied callback-context obligations are stated. mixed_owner/editor PLAY/promotion remain unchanged and require separate immutable-source integration.",
+    "No item/allocation count is promoted to stack, wall-clock/IRQ, memory placement, exact scheduling backend, native/hardware output, or listening acceptance. Existing target recovery and cleanup obligations remain separate.",
+    "README explicitly labels copied recorders as provenance for private layout rather than generic executable launchers, and external SDK/runtime/host/native products as uncopied. V1 incorrect rate oracle is described as preserved NOT_RUN, corrected before any actual invocation."
+  ],
+  "completed_saved_evidence_reviews": {
+    "host": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/independent-host-evidence-review-v1.json",
+      "bytes": 16686,
+      "sha256": "7728f651ce87cb392fd388927f8b88c3d3ea6ca93765769aa6de8c6e4f3f1900",
+      "mode": 420
+    },
+    "native": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/independent-native-evidence-review-v1.json",
+      "bytes": 9949,
+      "sha256": "fa0cae2e6abcd267fa442848d4573434e33180afd8ec3a8a2b42b7954c3820a8",
+      "mode": 420
+    },
+    "production": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/independent-production-source-review-v1.json",
+      "bytes": 7685,
+      "sha256": "00412109d046b9152a19a81fd38d680391ba787ca96131287dde866b655120fe",
+      "mode": 420
+    },
+    "fixture_v2": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/independent-fixture-source-review-v2.json",
+      "bytes": 6687,
+      "sha256": "9382f20fed3ef05d858c8101e3b0e6ee6cfb58ba67433c78f1e28a861a5511fb",
+      "mode": 420
+    }
+  },
+  "package_copy_validation": {
+    "root_reported_construction": "Root reports first package construction RC0 once: every copied file immediately read back byte-equal to its original; all 133 byte/hash records saved in package-files.json. This is root evidence, not a completed independent redundant sweep.",
+    "finite_manifest_categories": {
+      "compiler_records_logs": 93,
+      "host_records_logs_unittest": 26,
+      "reviews": 6,
+      "source_bindings": 5,
+      "recorder_sources": 2,
+      "readme": 1
+    },
+    "independent_original_sweep": "UNREPORTED. One passive read/hash/copy-equality sweep yielded without captured output/session identity. It was not restarted; no pass/fail inference is made from it and no test/compiler/model was run.",
+    "root_import_prerequisite": "Root retains a finite package/import inventory guard before repository import; this receipt does not substitute for that guard.",
+    "claim_tiers_unchanged": true
+  },
+  "limits": [
+    "Publication-source review and byte provenance do not qualify target handling, native launch, stack/placement/WCET, backend activation or physical acceptance.",
+    "Only V2 docs are the final additive candidates. Preserved V1 and historical failed/unexecuted scopes remain separate.",
+    "The incomplete independent redundant package sweep is not represented as clear, failed, or a reason to alter actual host/compiler evidence."
+  ]
+}

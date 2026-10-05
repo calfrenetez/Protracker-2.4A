@@ -1,0 +1,6 @@
+test_union_pins_and_both_reader_barrier (test_mixed_owner.MixedOwner.test_union_pins_and_both_reader_barrier) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 10.277s
+
+OK

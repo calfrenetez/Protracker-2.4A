@@ -1,0 +1,119 @@
+{
+  "status": "CLEAR_PRODUCTION_SOURCE_ONLY",
+  "findings": [],
+  "method": "Complete passive source, contract, literal derivation patch and genuine core dependency review; standard-library file/hash/JSON and text comparisons only. No project module import, test/model/compiler/helper/product/Git/service/transport/target invocation.",
+  "source_seal": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/source-seal-v1.json",
+    "bytes": 5150,
+    "sha256": "2e2ac73f1f6f1d693a613257da341aeb56a6406df543566926e16694dcf1bc75",
+    "mode": 420
+  },
+  "production_files": {
+    "src/editor/mixed_preflight.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/src/editor/mixed_preflight.c",
+      "bytes": 22982,
+      "sha256": "394994b3129933cd99008bcefbdd9b4e02db5f5576634886857ac6c944b6b893",
+      "mode": 420
+    },
+    "src/editor/mixed_preflight.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/src/editor/mixed_preflight.h",
+      "bytes": 7968,
+      "sha256": "805c75ef06d417787cf930a3344dd207f8e34b758e651469aa685599f67afbd2",
+      "mode": 420
+    }
+  },
+  "derivation_patch": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/mixed-startup-v1.patch",
+    "bytes": 23694,
+    "sha256": "0bd918f59e009b08000d0d45b4487eb76fa46afc10c38170a3144d81294ee67c",
+    "mode": 420
+  },
+  "contract": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/implementation-contract-v1.json",
+    "bytes": 3775,
+    "sha256": "85d9507527effa122f096697cbc36d1e90c768b126e9768789762c7e9486e6c7",
+    "mode": 420
+  },
+  "finite_seal_check": "Both owned and original files, nine explicitly inherited inputs, baseline, patch and contract match their saved byte/hash/numeric-mode records.",
+  "legacy": {
+    "exact_bodies": [
+      "init",
+      "report",
+      "batch",
+      "pt_mixed_preflight_begin",
+      "pt_mixed_preflight"
+    ],
+    "step_body_after_removing_two_checked_guards": "EXACT",
+    "take_body_after_removing_two_checked_guards": "EXACT",
+    "close": "Checked-owner branches are conditional; zero checked_setup retains sequence-before-parent release and NULL publication. The opaque parent allocation grows, with no legacy API or route change.",
+    "mixed_owner_baseline_files_unchanged": [
+      {
+        "relative": "src/editor/mixed_owner.c",
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/candidate/src/editor/mixed_owner.c",
+        "bytes": 33604,
+        "sha256": "16594abae7147fb032d9c4118d2357ed8e32dd539c35b16fef879834360301ce",
+        "mode": 420
+      },
+      {
+        "relative": "src/editor/mixed_owner.h",
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/candidate/src/editor/mixed_owner.h",
+        "bytes": 7816,
+        "sha256": "3edb67e1b911e799a91afa59afe7bccbbcbbae9e1e8c009da83e80a02a56f631",
+        "mode": 420
+      },
+      {
+        "relative": "src/editor/mixed_owner_internal.h",
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/candidate/src/editor/mixed_owner_internal.h",
+        "bytes": 2569,
+        "sha256": "512c9f5e6c88f869ccc5df0e60122ad5e37ae6c8d558905b7a0cbb3ee72b673f",
+        "mode": 420
+      },
+      {
+        "relative": "tests/mixed_owner_test.c",
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/candidate/tests/mixed_owner_test.c",
+        "bytes": 79882,
+        "sha256": "6441676e964aaf74c5d7d942dea6839dece4684f944de7f246fa97d91abeaa9f",
+        "mode": 420
+      },
+      {
+        "relative": "tests/native_exec_mixed_owner_test.c",
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/candidate/tests/native_exec_mixed_owner_test.c",
+        "bytes": 827,
+        "sha256": "9034443d19ff85be3a41e43ca0ab2693901a605f546a617020fbd2e5e443c996",
+        "mode": 420
+      },
+      {
+        "relative": "tests/test_mixed_owner.py",
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/candidate/tests/test_mixed_owner.py",
+        "bytes": 780,
+        "sha256": "f51ebed2b0fe03ba0143ead18129a5d45e0ba2fe742474f9adf70ba1f460298f",
+        "mode": 420
+      }
+    ]
+  },
+  "semantic_review": [
+    "Begin copies caps/format/previous-map/allocator and gives eight guards to the genuine opaque renderer constructor; no payload values or forged readiness/certificates. Second returned parent storage is classified against retained startup and original fixed controls before stale cleanup, then full live source extents before initialization.",
+    "Step charges only the actual renderer startup with work 1..4096. Source revision/generation, immutable header/options/allocator and caps/format/map currentness precede semantic progress. Valid selection cursor changes remain allowed.",
+    "Transfer requires real READY, limits mixed whole-song rates/routes/range/map, guards entire parent plus five external controls, consumes genuine startup once and publishes the same parent still PT_MIXED_PENDING. Capacity leaves READY available for explicit retry; callback failures remain cancellable without partial audit publication.",
+    "The unchanged actual mixed step performs complete timeline traversal and both backend checks; source masks stay hidden on pending/failure. Checked output guards include full declared PCM capacity and the actual retained sequence. Take rewinds once and transfers that same sequence without a new allocation or semantic remeasurement.",
+    "Busy callbacks cannot reenter setup transfer/cancel or checked actual close/take/step as live work. Fixed-capture cancel and stale close avoid former arrays. Source/owners/callbacks must still obey the documented serial, immutable lifetime and genuine external slot obligations.",
+    "After transfer original caps/format/map/options/allocator argument structs cease borrowing; copied callback functions/context and project/source remain alive through all resulting sequence owners. Source descriptor replacement by pin promotion is deliberately excluded."
+  ],
+  "fixture_v1_disposition": {
+    "seal": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/tests/source-seal-v1.json",
+      "bytes": 4019,
+      "sha256": "55c816a8a9931963892dc5c7093babf6ae26af2fc13147606e581d85488e9a47",
+      "mode": 420
+    },
+    "status": "NOT_CLEARED_FOR_EXECUTION_PENDING_V2",
+    "known_correction": "The sealed V1 metadata fixture expected rate 22050 to refuse immediately. Actual core validates options after bounded project validation, so the replacement must exercise genuine PENDING then FAILED rather than forge READY. Root and author identified this before any execution. Current draft changes are not covered by V1 seal.",
+    "reviewed_scope": "Full V1 fixture read; no additional fixture defect found apart from the rate oracle requiring the forthcoming corrected seal."
+  },
+  "limits": [
+    "Source review is not host sanitizer, native build, emulator, physical, memory placement, measured latency or listening acceptance.",
+    "Initial READY is not mixed capability, used-source masks, owner preparation, pin promotion, editor PLAY or backend activation.",
+    "Bounded semantic work is not a wall-clock or IRQ bound. Callback opaque context extents and arbitrary concurrent payload mutations remain caller obligations.",
+    "mixed_owner synchronous initial scans and descriptor promotion remain deferred; no whole-play responsiveness or scheduling change is claimed."
+  ]
+}

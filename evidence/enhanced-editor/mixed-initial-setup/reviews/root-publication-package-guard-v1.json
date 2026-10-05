@@ -1,0 +1,7 @@
+{
+  "status": "PACKAGE_BYTE_GUARD_CLEAR_FOR_SCOPED_IMPORT",
+  "files": 133,
+  "package_inventory_sha256": "edbbd05b2318e6edb1f513fa9e37186062f927fe671baeb5cb63b19d6b317a0f",
+  "method": "Standard-library finite hash checks only; no producer or target. Exact copy construction already compared all pairs byte-for-byte.",
+  "docs": "Publication-docs-v2 changed only tested-dimension phrase from V1, not code or test fixture"
+}

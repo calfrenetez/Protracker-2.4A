@@ -1,0 +1,351 @@
+{
+  "status": "CLEAR_SAVED_HOST_EVIDENCE_ONLY",
+  "findings": [],
+  "method": "Saved JSON/raw log/unittest/product-byte inspection plus standard-library passive AST of five recipe files; no replay, reviewed-module import, test/model/compiler/native product/Git/service/target invocation.",
+  "execution": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/execution.json",
+    "bytes": 229114,
+    "sha256": "2c4fed31e4a34b0a56684ab315a52565cd6223eef7d391bbb7a42d51408e7da1",
+    "mode": 420
+  },
+  "controls": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/source-controls-v1.json",
+    "bytes": 109988,
+    "sha256": "80075890ab8028efa7dcbfb01ab82b3d23042f217acda30892a9df145aac7ad7",
+    "mode": 420
+  },
+  "exact_selected_inputs": {
+    "src/editor/mixed_preflight.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/src/editor/mixed_preflight.c",
+      "bytes": 22982,
+      "sha256": "394994b3129933cd99008bcefbdd9b4e02db5f5576634886857ac6c944b6b893",
+      "mode": 420
+    },
+    "src/editor/mixed_preflight.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/src/editor/mixed_preflight.h",
+      "bytes": 7968,
+      "sha256": "805c75ef06d417787cf930a3344dd207f8e34b758e651469aa685599f67afbd2",
+      "mode": 420
+    },
+    "tests/mixed_preflight_startup_test.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/tests/source-revision-v2/mixed_preflight_startup_test.c",
+      "bytes": 36028,
+      "sha256": "c09322fd9933377c6ac12e82ccce806e6ea2adc169692e17b70d7df9d20407d5",
+      "mode": 420
+    },
+    "tests/test_mixed_preflight_startup.py": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/tests/source-revision-v2/test_mixed_preflight_startup.py",
+      "bytes": 928,
+      "sha256": "ccddc8213bb134a427fb155277e4094c26009edbd1ee31d3637d9b22569bbb92",
+      "mode": 420
+    }
+  },
+  "prior_reviews": [
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/independent-production-source-review-v1.json",
+      "bytes": 7685,
+      "sha256": "00412109d046b9152a19a81fd38d680391ba787ca96131287dde866b655120fe",
+      "mode": 420
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/independent-fixture-source-review-v2.json",
+      "bytes": 6687,
+      "sha256": "9382f20fed3ef05d858c8101e3b0e6ee6cfb58ba67433c78f1e28a861a5511fb",
+      "mode": 420
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/independent-recorder-source-review-v1.json",
+      "bytes": 4737,
+      "sha256": "b3c4a9fbfe43970c316b7b1ad7178fb026b2f8000bd3faf972f78319f8c90c7c",
+      "mode": 420
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/independent-native-builder-source-review-v1.json",
+      "bytes": 3914,
+      "sha256": "1ded61c9da7e8c6073de8431f0620e91cfb81c0d56b11031f568a744f0d12772",
+      "mode": 420
+    }
+  ],
+  "validation": {
+    "actual_groups": 5,
+    "actual_calls": 10,
+    "tests_per_group": 1,
+    "all_returncodes": 0,
+    "all_compile_and_run_pairs_match": true,
+    "source_before_after_controls_and_current_candidate_match": true,
+    "source_records": 1018,
+    "compile_stdout_stderr_empty": true,
+    "run_stderr_empty": true,
+    "exact_single_line_markers": true,
+    "no_added_reviewer_execution": true
+  },
+  "groups": [
+    {
+      "name": "test_mixed_preflight_startup",
+      "unittest_method": "test_initial_readiness_then_complete_two_route_audit",
+      "tests": 1,
+      "actual_calls": 2,
+      "translation_units": 37,
+      "compiler": "/usr/bin/cc with -UNDEBUG and ASan/UBSan",
+      "compile_run_rc": [
+        0,
+        0
+      ],
+      "product": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_mixed_preflight_startup/work/mixed-startup",
+        "bytes": 2309616,
+        "sha256": "e892a66c8db9a2d4295f3a8591e6d758579720a50245d0ca6272490c90e0506f",
+        "mode": 493
+      },
+      "logs": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_mixed_preflight_startup/00.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        },
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_mixed_preflight_startup/00.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        },
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_mixed_preflight_startup/01.stdout",
+          "bytes": 132,
+          "sha256": "0e135a9a5ee309b80681fc85b67a1ce2380faa7d4fa03526d9796d6aa05ea4cc",
+          "mode": 420
+        },
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_mixed_preflight_startup/01.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        }
+      ],
+      "unittest": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_mixed_preflight_startup/unittest.txt",
+        "bytes": 264,
+        "sha256": "46b4044c30b183bfed7d04c6af46357df78a36334be81b17170867614ca461ae",
+        "mode": 420
+      },
+      "stdout_marker": "MIXED STARTUP PASS: cancellable initial validation, complete two-route audit and same checked sequence transfer; host software only"
+    },
+    {
+      "name": "test_mixed_preflight",
+      "unittest_method": "test_one_global_sequence_and_atomic_refusal",
+      "tests": 1,
+      "actual_calls": 2,
+      "translation_units": 37,
+      "compiler": "/usr/bin/cc with -UNDEBUG and ASan/UBSan",
+      "compile_run_rc": [
+        0,
+        0
+      ],
+      "product": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_mixed_preflight/work/test",
+        "bytes": 2090568,
+        "sha256": "3a88f9d0ee3a3ab0311f5d939b3661e7933bd4b639c08208df3e4558420cf9c6",
+        "mode": 493
+      },
+      "logs": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_mixed_preflight/02.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        },
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_mixed_preflight/02.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        },
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_mixed_preflight/03.stdout",
+          "bytes": 165,
+          "sha256": "d2d3245572426a203781079a92b58dd2b76da5f7fdf14f94a30cbeb7265a4b4e",
+          "mode": 420
+        },
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_mixed_preflight/03.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        }
+      ],
+      "unittest": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_mixed_preflight/unittest.txt",
+        "bytes": 231,
+        "sha256": "3cc99651a7d15a2c53a5d570622be66e450c7f0abdbdc6190317c66e914179a1",
+        "mode": 420
+      },
+      "stdout_marker": "MIXED PREFLIGHT PASS: incremental/synchronous parity, bounded steps, hidden partial masks, one sequence transfer, cancellation and late refusal cleanup; no dispatch"
+    },
+    {
+      "name": "test_mixed_owner",
+      "unittest_method": "test_union_pins_and_both_reader_barrier",
+      "tests": 1,
+      "actual_calls": 2,
+      "translation_units": 42,
+      "compiler": "/usr/bin/cc with -UNDEBUG and ASan/UBSan",
+      "compile_run_rc": [
+        0,
+        0
+      ],
+      "product": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_mixed_owner/work/test",
+        "bytes": 2711384,
+        "sha256": "71ff7a1deb2440f05e825910589c70452d36d832029e4428581a9f8ce7205b4f",
+        "mode": 493
+      },
+      "logs": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_mixed_owner/04.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        },
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_mixed_owner/04.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        },
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_mixed_owner/05.stdout",
+          "bytes": 167,
+          "sha256": "eaf1fd5324c754499962513fe34053d382e5f454ec160562d54694f18b260433",
+          "mode": 420
+        },
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_mixed_owner/05.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        }
+      ],
+      "unittest": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_mixed_owner/unittest.txt",
+        "bytes": 215,
+        "sha256": "345fe6d3b8de5aaa99d6bf4cbb9d34b82de6211532c19a832f76a00341e76d40",
+        "mode": 420
+      },
+      "stdout_marker": "MIXED OWNER PASS: full255 host scenarios, incremental analysis cancellation/failure, master/cache/staging/commit/sequence/deadline/schedule ownership; no native clock"
+    },
+    {
+      "name": "test_paula_preflight_startup",
+      "unittest_method": "test_initial_readiness_then_actual_timeline_audit",
+      "tests": 1,
+      "actual_calls": 2,
+      "translation_units": 12,
+      "compiler": "/usr/bin/cc with -UNDEBUG and ASan/UBSan",
+      "compile_run_rc": [
+        0,
+        0
+      ],
+      "product": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_paula_preflight_startup/work/paula-startup",
+        "bytes": 1061312,
+        "sha256": "e360534cda9064ad100251720f81c915a6121a8ae56fb42b8f2b653e98f504f4",
+        "mode": 493
+      },
+      "logs": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_paula_preflight_startup/06.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        },
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_paula_preflight_startup/06.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        },
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_paula_preflight_startup/07.stdout",
+          "bytes": 118,
+          "sha256": "4e28a91762c21541c9cc1c8b918165d6dbf46a05f4392da9868a03feeb438916",
+          "mode": 420
+        },
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_paula_preflight_startup/07.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        }
+      ],
+      "unittest": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_paula_preflight_startup/unittest.txt",
+        "bytes": 257,
+        "sha256": "1ae837945ce924f5f72ff739d96ae8c1e3a14b1915e13405d9b817aa25d85814",
+        "mode": 420
+      },
+      "stdout_marker": "PAULA STARTUP PASS: initial readiness, complete timeline audit and same checked sequence transfer; host software only"
+    },
+    {
+      "name": "test_render_sequence_startup",
+      "unittest_method": "test_actual_cancellable_setup_and_checked_reset",
+      "tests": 1,
+      "actual_calls": 2,
+      "translation_units": 10,
+      "compiler": "/usr/bin/cc with -UNDEBUG and ASan/UBSan",
+      "compile_run_rc": [
+        0,
+        0
+      ],
+      "product": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_render_sequence_startup/work/render-startup",
+        "bytes": 905616,
+        "sha256": "89e497895f09f253dc15e466d4d4efa32af62ff6ad08e94f1b4118acefe0d272",
+        "mode": 493
+      },
+      "logs": [
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_render_sequence_startup/08.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        },
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_render_sequence_startup/08.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        },
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_render_sequence_startup/09.stdout",
+          "bytes": 117,
+          "sha256": "0566f9006fa1ec0440b0ae0f074bb2a9da731dd8b533a62ea071aa222e54bb53",
+          "mode": 420
+        },
+        {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_render_sequence_startup/09.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        }
+      ],
+      "unittest": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/host-v1/test_render_sequence_startup/unittest.txt",
+        "bytes": 253,
+        "sha256": "7a7cb1f0991cf35f40ce0ba29b10666b3307ec8dee02a15a9cbcd1f672f2dd4a",
+        "mode": 420
+      },
+      "stdout_marker": "RENDER STARTUP PASS: bounded original validation, exact legacy plans and scan-free checked reset; host software only"
+    }
+  ],
+  "supported_claims": [
+    "The newly sealed genuine mixed setup fixture passed its actual assertions once under host ASan/UBSan. This covers initial cancellation, readiness/actual capability separation, complete two-route audit, source/alias/callback guards, exact legacy/report/plan parity and same checked sequence transfer.",
+    "Four existing group fixtures also passed once against the exact selected production bytes: ordinary mixed preflight, unchanged mixed owner, Paula startup and renderer startup. Their output markers are retained separately; passing mixed_owner regression does not install the optional new initial setup into that owner.",
+    "All five compiler products remain at their recorded retained paths and byte identities; every run executed the matching product only, with no target or native product run in this host scope.",
+    "The selected source controls bind exact production V1, corrected fixture V2 and unchanged recipe; all 1018 before/after/current candidate source records agree. Original V1 rate-oracle history and independent source receipts remain separate."
+  ],
+  "limits": [
+    "Host-only first invocation evidence. No native build result, emulator or physical execution, placement, cache/device effects, measured target latency or listening acceptance is inferred.",
+    "ASan/UBSan apply to host products; compile-only native products do not promote the poison assertions or runtime coverage.",
+    "The optional setup remains separate from mixed_owner/editor PLAY/pin promotion/backend activation; no complete responsive playback integration or exact native scheduling gate is cleared.",
+    "Test-reported scenario markers are evidence of those finite fixtures, not an independent claim about arbitrary source mutations or real hardware."
+  ]
+}

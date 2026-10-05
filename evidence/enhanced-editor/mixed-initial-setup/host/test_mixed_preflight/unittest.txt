@@ -1,0 +1,6 @@
+test_one_global_sequence_and_atomic_refusal (test_mixed_preflight.MixedPreflight.test_one_global_sequence_and_atomic_refusal) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 10.992s
+
+OK

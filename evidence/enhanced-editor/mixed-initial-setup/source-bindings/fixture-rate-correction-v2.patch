@@ -1,0 +1,38 @@
+--- source-revision-v1/mixed_preflight_startup_test.c
++++ source-revision-v2/mixed_preflight_startup_test.c
+@@ -391,7 +391,7 @@
+ static void startup_mixed_metadata_and_capacity(void)
+ {
+     unsigned kind;
+-    for(kind=0;kind<8;++kind){
++    for(kind=0;kind<7;++kind){
+         struct startup_fixture *f=malloc(sizeof(*f));struct pt_mixed_preflight_setup *j=NULL;
+         struct pt_paula_render_caps caps=startup_caps;struct pt_playback_format format=startup_format;
+         unsigned pc=1,ac=1;assert(f);startup_mixed_init(f,24,1);
+@@ -402,10 +402,25 @@
+         if(kind==4)caps.minimum_period=0;
+         if(kind==5)pc=2;
+         if(kind==6)ac=2;
+-        if(kind==7)f->options.rate=22050;
+         assert(pt_mixed_preflight_setup_begin(&f->project,&f->options,NULL,&caps,&format,pc,ac,&f->allocator,
+             STARTUP_REVISION,STARTUP_GENERATION,&j)==PT_RENDER_SETUP_INVALID);
+         assert(!j&&!f->memory.calls&&!f->memory.live);free(f);
++    }
++    {
++        struct startup_fixture *f=malloc(sizeof(*f));struct pt_mixed_preflight_setup *j=NULL;
++        struct pt_mixed_preflight *audit=(void *)(uintptr_t)1;enum pt_render_setup_result result;
++        unsigned n=0;assert(f);startup_mixed_init(f,24,1);f->options.rate=22050;
++        /* Renderer option compatibility is checked only after genuine complete
++         * incremental project validation. Metadata begin has no semantic scan. */
++        assert(pt_mixed_preflight_setup_begin(&f->project,&f->options,NULL,&startup_caps,&startup_format,1,1,&f->allocator,
++            STARTUP_REVISION,STARTUP_GENERATION,&j)==PT_RENDER_SETUP_PENDING);
++        assert(j&&f->memory.calls==2&&f->memory.live==2);
++        do {result=pt_mixed_preflight_setup_step(j,STARTUP_REVISION,STARTUP_GENERATION,7);assert(++n<20000);}
++        while(result==PT_RENDER_SETUP_PENDING);
++        assert(result==PT_RENDER_SETUP_FAILED&&n>1&&f->memory.calls==2&&f->memory.live==2);
++        assert(pt_mixed_preflight_setup_transfer(&j,STARTUP_REVISION,STARTUP_GENERATION,&audit)==PT_RENDER_SETUP_FAILED);
++        assert(j&&audit==(void *)(uintptr_t)1&&f->memory.calls==2); /* No actual sequence or partial masks published. */
++        assert(pt_mixed_preflight_setup_cancel(&j)==PT_RENDER_SETUP_READY&&!j&&!f->memory.live);free(f);
+     }
+     for(kind=0;kind<5;++kind){
+         struct startup_fixture *f=malloc(sizeof(*f));struct pt_mixed_preflight_setup *j=NULL;

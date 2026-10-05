@@ -5367,3 +5367,28 @@ listening acceptance follows. See [checked allocator contract](NATIVE_CHECKED_ME
 Saved evidence and its byte-only verifier are under
 `evidence/enhanced-editor/native-checked-memory`; external tool/runtime and
 host-SDK hashes remain uncopied provenance.
+
+## Optional bounded mixed initial setup
+
+An additive `mixed_preflight_setup` path stages complete original-project
+validation and renderer metadata in genuine opaque work 1..4096 steps.
+Metadata-only begin owns two ordinary controls without master pins, cache/upload
+or backend effects. READY is initial readiness, not mixed compatibility or
+published Paula/AmiGUS source masks. Transfer consumes that actual startup into
+a still-pending two-route audit; successful audit take transfers the SAME checked
+sequence without semantic rescans. Known full capacities and setup controls are
+guarded, with retryable capacity refusal and cancellable ownership.
+
+Project/master storage remains borrowed immutable through sequence close; pin
+promotion that replaces descriptors must precede this lifetime. Legacy mixed
+initial scans remain synchronous. `mixed_owner` and editor PLAY are not wired to
+this new API: their initial scans and post-audit promotion need a separate
+immutable-borrow solution. Original deadlines and scheduling remain unchanged.
+See [mixed preparation contract](MIXED_PREFLIGHT.md).
+
+Evidence: five actual ASan/UBSan groups and one pinned portable m68000
+compile/link passed against the same four sealed additions. The 226,688-byte
+HUNK SHA256 `171f3b7b42b659093bc24b410d6affb96668527dbeb624efb1a2251b18b97530`
+remains native/emulator/physical NOT_RUN. Saved first results and source bindings
+are in `evidence/enhanced-editor/mixed-initial-setup/`. No wall-clock/IRQ bound, memory placement,
+backend activation, native/emulator/physical output or hardware acceptance follows.

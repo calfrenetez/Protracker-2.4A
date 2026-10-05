@@ -1,0 +1,6 @@
+test_actual_cancellable_setup_and_checked_reset (test_render_sequence_startup.RenderSequenceStartup.test_actual_cancellable_setup_and_checked_reset) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 4.325s
+
+OK

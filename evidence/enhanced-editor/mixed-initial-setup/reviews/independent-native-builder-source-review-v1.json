@@ -1,0 +1,61 @@
+{
+  "status": "CLEAR_NATIVE_BUILDER_SOURCE_ONLY_PENDING_HOST_AND_CANDIDATE",
+  "scope": "Passive source/AST/saved-schema review of finite root-owned compile/link recorder; no builder/compiler/module/test/product execution, Git, services or target operations.",
+  "builder": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/build_native_once.py",
+    "bytes": 5009,
+    "mode": 420,
+    "sha256": "9c32291b9159dfd0c0810c7a8e52c31c0287ead07e87aa40273af7aae7c9f153"
+  },
+  "pins_manifest": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/manifest.json",
+    "bytes": 275123,
+    "mode": 420,
+    "sha256": "436bb1dea25700bfde5dfb367ffc0003926cf6c03dfd048c6dc0489eef34dadb"
+  },
+  "pre_execution_schema_observation": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/native-builder-preparation-v1.json",
+    "bytes": 304,
+    "mode": 420,
+    "sha256": "cad2b6fd0ed06709fcedbf7450e5094eac44d159e8022c15b380d268e685c43b"
+  },
+  "findings": [],
+  "checks": {
+    "original_output_required_absent": true,
+    "candidate_binding": "Current full candidate hash inventory must equal source-controls AND actual successful host source_before/source_after, before any compiler command.",
+    "fixture_source_binding": "Uses qualified actual host first group source list, requires new startup fixture first and unique units. Final source list remains pending until fixture source/host receipt exist.",
+    "toolchain": "Existing manifest tools.compiler schema; checks all five expected current tool hashes before calls and all after successful link. Each call rechecks compiler.",
+    "runtime": "Queries seven fixed prior runtime inputs with m68000/msoft-float/nix20 selection; actual resolved paths and hashes must match prior pins, all checked after link.",
+    "flags": [
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-fbbb=-"
+    ],
+    "full_dependency_closure": "One compiler -M per recorded host unit, decoded make dependency paths saved with byte size and SHA256 before compile-link; all dependency hashes checked again after link.",
+    "compile_link": "Exactly one compile/link command combines the same recorded host fixture source units using the fixed flags into retained PTMixedSetupTest.",
+    "product": "Reads HUNK magic0x3F3 and records product size/hash; never invokes the product. HUNK structural, placement, stack or runtime acceptance is not inferred.",
+    "command_bounds": "Version1 + runtime7 + per-unit dependencyN + compile/link1; each timeout120s. No retry loop.",
+    "first_outcome_retention": "Running record/argv/cwd/label saved before each subprocess, raw stdout/stderr retained, elapsed/status/failure saved even on BaseException; first failure aborts later commands and preserves output tree.",
+    "final_status": "Source-after inventory checked; nonPASS/source-change exits1 after final manifest write.",
+    "pre_execution_schema_refusal": "Saved native-builder-preparation-v1.json documents root initial saved-schema KeyError; no compiler, builder, test or product was invoked for that observation."
+  },
+  "resolved_preseal_observation": "Added exact current==controls==host.source_before==host.source_after comparison, preventing a new candidate from consuming stale host PASS.",
+  "pending_and_limits": {
+    "candidate_source_seal": "PENDING",
+    "new_fixture_source_and_actual_host_PASS": "PENDING",
+    "native_compiler_execution": "NOT_RUN",
+    "product_execution": "NOT_RUN",
+    "emulator_physical": "NOT_RUN",
+    "stack_WCET_timing_placement_capacity": "NOT_QUALIFIED",
+    "launch_permission": "NOT_GRANTED_BY_THIS_RECEIPT"
+  },
+  "reviewer_execution_count": 0
+}

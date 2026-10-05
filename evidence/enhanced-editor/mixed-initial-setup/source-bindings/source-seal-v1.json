@@ -1,0 +1,121 @@
+{
+  "status": "SOURCE_ONLY_READY_FOR_REVIEW",
+  "execution": "NOT_RUN",
+  "baseline_binding": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/baseline-v1.json",
+    "bytes": 169889,
+    "sha256": "46c0832a586c2f13b08d9303fd5b4b49c92158d292c05a10225b8e76719a6f78",
+    "mode": 420
+  },
+  "owned_files": {
+    "src/editor/mixed_preflight.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/src/editor/mixed_preflight.c",
+      "bytes": 22982,
+      "sha256": "394994b3129933cd99008bcefbdd9b4e02db5f5576634886857ac6c944b6b893",
+      "mode": 420
+    },
+    "src/editor/mixed_preflight.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/src/editor/mixed_preflight.h",
+      "bytes": 7968,
+      "sha256": "805c75ef06d417787cf930a3344dd207f8e34b758e651469aa685599f67afbd2",
+      "mode": 420
+    }
+  },
+  "original_files": {
+    "src/editor/mixed_preflight.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/origin-files/src/editor/mixed_preflight.c",
+      "bytes": 7276,
+      "sha256": "1d0b782f5beebc55b9af7b0331fc8ad71365ef4e22df81509fdc5e3fbbe81948",
+      "mode": 420
+    },
+    "src/editor/mixed_preflight.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/origin-files/src/editor/mixed_preflight.h",
+      "bytes": 3402,
+      "sha256": "9be305caeb925d6bc806c0d9fcb2e31cb8e414bb5b12c86fde8750493d651b34",
+      "mode": 420
+    }
+  },
+  "inherited_inputs": {
+    "src/editor/paula_preflight.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/candidate/src/editor/paula_preflight.c",
+      "bytes": 22069,
+      "sha256": "0e4a6f90cdec366856b0a2325502185746f9a2bab0ff3118d6c5f346dde5a82d",
+      "mode": 420
+    },
+    "src/editor/paula_preflight.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/candidate/src/editor/paula_preflight.h",
+      "bytes": 8400,
+      "sha256": "3fd4d9096a3592f53503d1c1e2599dea33873b1fd508b41826d8715f6604f67d",
+      "mode": 420
+    },
+    "src/core/render.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/candidate/src/core/render.c",
+      "bytes": 63044,
+      "sha256": "4b355e1319e10ff3ba0a26d8dc652b7d05faef2f57afc6f85925ba826ba1686f",
+      "mode": 420
+    },
+    "src/core/render.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/candidate/src/core/render.h",
+      "bytes": 11891,
+      "sha256": "50bca0c9fd47be061c3b0c027388f5c1bdbe4316a1caed3f33a696f7527812ea",
+      "mode": 420
+    },
+    "src/core/project.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/candidate/src/core/project.h",
+      "bytes": 8827,
+      "sha256": "e1a749800258b1f1db1dedcd7d5d36970abbf7494279cb3669212757f982e21a",
+      "mode": 420
+    },
+    "src/core/channels.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/candidate/src/core/channels.c",
+      "bytes": 6996,
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+      "mode": 420
+    },
+    "src/core/channels.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/candidate/src/core/channels.h",
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": 420
+    },
+    "src/core/playback_pcm.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/candidate/src/core/playback_pcm.h",
+      "bytes": 6034,
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65",
+      "mode": 420
+    },
+    "src/core/paula_render_voice.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/candidate/src/core/paula_render_voice.h",
+      "bytes": 1642,
+      "sha256": "11126de4c05368ab1acdcfe1f92b56df03b8233f7e2ec0c304c9d5922e913c77",
+      "mode": 420
+    }
+  },
+  "patch": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/mixed-startup-v1.patch",
+    "bytes": 23694,
+    "sha256": "0bd918f59e009b08000d0d45b4487eb76fa46afc10c38170a3144d81294ee67c",
+    "mode": 420
+  },
+  "contract": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-startup-next/implementation-contract-v1.json",
+    "bytes": 3775,
+    "sha256": "85d9507527effa122f096697cbc36d1e90c768b126e9768789762c7e9486e6c7",
+    "mode": 420
+  },
+  "self_review": {
+    "exact_legacy_functions": [
+      "init",
+      "report",
+      "batch",
+      "pt_mixed_preflight_begin",
+      "pt_mixed_preflight"
+    ],
+    "step_and_take_original_body_identity": true,
+    "legacy_close_conditional_only": true,
+    "new_block_no_sync_validation_or_flow_certificate": true,
+    "begin_guard_count": 8,
+    "take_guard_count": 6
+  },
+  "scope": "Two private editor source files only; candidate, shared checkout, legacy mixed_owner, hardware and build inputs untouched."
+}

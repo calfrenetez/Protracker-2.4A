@@ -1,0 +1,6 @@
+test_initial_readiness_then_actual_timeline_audit (test_paula_preflight_startup.PaulaPreflightStartup.test_initial_readiness_then_actual_timeline_audit) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 4.485s
+
+OK

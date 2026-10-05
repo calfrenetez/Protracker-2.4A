@@ -1,0 +1,12 @@
+{
+  "kind": "root self review; no independent reviewer",
+  "source_files": 899,
+  "changes": "Default hooks no-op; unchanged assertion workload; separately named wrapper uses flushed BEGIN/END and684 strict case boundaries. No assertion removed or hardware callbacks introduced. Observer validates finite342case exact prefix and preserves nested errors; not qualification by itself",
+  "workload": {
+    "OWNER": 255,
+    "MASTER": 6,
+    "FAULT": 81
+  },
+  "plannedNativeBoundSeconds": 420,
+  "qualification": "ordinary-memory software fixture only; no native clock/audio/backend/device activation"
+}

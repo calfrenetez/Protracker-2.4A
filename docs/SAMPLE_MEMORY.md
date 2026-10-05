@@ -5652,3 +5652,21 @@ remains FAILED, not a late pass. Physical NOT_RUN. Recovery does not qualify
 memory placement, total stack, musical timing/IRQ/deadlines, real backend/device
 completion/stop, audio or listening. Fresh coordination/live guards remain required
 for any future target operation. See [recovery evidence](../evidence/enhanced-editor/master-establishment-native-recovery/README.md).
+
+
+## Observable master-establishment regression candidate
+
+The separately named PTMasterProgressTest preserves the full 342 assertion cases
+(255 owner, 6 master precision/save/reuse, 81 failure/cancel/alias) and adds flushed
+per-case boundaries. Optional test hooks remain no-ops in default fixtures. No
+production source, backend callbacks or exact musical scheduling changed.
+
+One host sanitizer run passed two groups/four compile-run calls with empty stderr
+and 899 stable source identities. Real output passed the strict 684-record audit.
+Three offline parser/error tests passed. One pinned portable m68000 build passed
+55 calls/145 dependencies; the changed 292912-byte product SHA2562c88205c has never
+executed on a target at this snapshot. Native observation will use an absolute
+420-second workload bound and preserve nested errors without automatic replay.
+This is not a musical deadline allowance. Prior60s failure and recovery stay exact.
+No native/physical/timing/stack/placement/device/audio/listening acceptance follows.
+See [observable fixture evidence](../evidence/enhanced-editor/master-observable-fixture/README.md).

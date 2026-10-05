@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "/opt/homebrew/bin/python3.14",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "candidate/tests",
+    "-p",
+    "test_native_fixture_observation.py",
+    "-v"
+  ],
+  "returncode": 0,
+  "elapsedSeconds": 0.07694558300136123,
+  "scope": "offline diagnostic parser/nested-error tests; no target call"
+}

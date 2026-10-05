@@ -6,6 +6,9 @@
 #include "../src/editor/mixed_owner_internal.h"
 #include "../src/editor/mixed_transport.h"
 #include "../src/editor/paula_internal.h"
+#ifndef PT_TEST_CASE_PROGRESS
+#define PT_TEST_CASE_PROGRESS(group,phase,bits,mode) ((void)0)
+#endif
 #ifdef PT_TEST_MIXED_NATIVE_COST
 #include "../src/editor/sampler_internal.h"
 #include "../src/core/render_lookahead.h"
@@ -64,6 +67,7 @@ static uint32_t pump_signal(void *context)
 {struct pump_timer *t=context;assert(!t->alarm_closed);return t->pending?32:0;}
 static void owner_fixture(unsigned bits,unsigned mode)
 {
+    PT_TEST_CASE_PROGRESS("OWNER","BEGIN",bits,mode);
     struct pt_allocator a={NULL,counted_fast,fast_free};struct pt_document doc;struct pt_sampler sampler;
     struct pt_sampler_paula pb={0};struct pt_sampler_wavetable ab={0};
     struct pt_paula_voices pv={0};struct pt_wavetable_voices av={0};
@@ -960,6 +964,7 @@ detached:
     assert(pt_amigus_wavetable_cache_detach(&f->cache));assert(pt_amigus_reservation_close(&f->reservation));
     assert(doc.project.samples[0].pcm.bits==bits && doc.project.samples[0].pcm.data[0]==1);
     pt_sampler_release(&sampler);assert(!sampler.bytes);pt_document_release(&doc);free(plan);free(batch);free(f);
+    PT_TEST_CASE_PROGRESS("OWNER","END",bits,mode);
 }
 static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wavetable_fixture_main;
 #ifdef PT_TEST_MIXED_NATIVE_COMPONENTS

@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "files": {
+    "README.md": {
+      "bytes": 2145,
+      "sha256": "7f6e3d107f70ab8d0cdc7678ee7c6e393bd8d56b81a63c414c86c1463cd224ac"
+    },
+    "build_native_once.py": {
+      "bytes": 5016,
+      "sha256": "aba37dd6cb98e45f0ad9dd09eafd3d946c867b2c0b1c85171691771ea643bec8"
+    },
+    "first-custody-metadata-observation.json": {
+      "bytes": 1600,
+      "sha256": "0884d3f86118f92f2987e631c82e8c4be87b1ee75ba4193ba5b21bf98ec47f7e"
+    },
+    "first-preparation-failure.json": {
+      "bytes": 405,
+      "sha256": "4901988fe333ca8efdc2a09b6df6658a2359dd9a5d04baedbef353ae779b1ecd"
+    },
+    "host-execution.json": {
+      "bytes": 194766,
+      "sha256": "56daa4f39d1e6f14f2426399b86a631cb5a56fc2771c23c4e2cbdd73734009e3"
+    },
+    "host-progress-audit-v1.json": {
+      "bytes": 551,
+      "sha256": "69900855857b872e9254c71bc10966be6828255d49394b86c957bc80c92eabbd"
+    },
+    "host-progress.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "host-progress.stdout": {
+      "bytes": 21939,
+      "sha256": "f1d9e1af93cc942b61c0311f988bef2e277311640054d4c8651aa4d2825eb293"
+    },
+    "host-sampler.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "host-sampler.stdout": {
+      "bytes": 987,
+      "sha256": "c26ad399507a103c7e2edbec697c8db1a4b160f360d6e26f42e97844a53a9ce5"
+    },
+    "native-manifest.json": {
+      "bytes": 285349,
+      "sha256": "1a5b7e89fbd70697cf23da36ecc6c88e927068f7200d604457ea435a5c1a3cb0"
+    },
+    "observation-tests-v1.json": {
+      "bytes": 337,
+      "sha256": "5070e0aa8552a3d63014c39cee8aed098bcbaa6f8410f0c108a2348b811f242f"
+    },
+    "observation-tests-v1.stderr": {
+      "bytes": 547,
+      "sha256": "f3f33aeced948eda4f31f408c9b6a32ecd30a9037255f43ba81f80fca28a70d6"
+    },
+    "observation-tests-v1.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "root-preexecution-review-v1.json": {
+      "bytes": 602,
+      "sha256": "483f690791744c52d537b9bfc6e79d4424a348ae306d5ef90a02f85b8949728b"
+    },
+    "run_host_once.py": {
+      "bytes": 5626,
+      "sha256": "3be35b550374ff26bea224975b58343af04156feee839791a8d1ebc8f66f278e"
+    },
+    "source-controls-v1.json": {
+      "bytes": 96481,
+      "sha256": "f7974054e00ebed9a743a219744b5233c27ca12dc5335be768fc06238b2db530"
+    },
+    "verify_saved.py": {
+      "bytes": 1582,
+      "sha256": "020fc82088db60dbe053ed5d3b18f77be862fcad9990818f6df9d6f40702bd43"
+    }
+  }
+}

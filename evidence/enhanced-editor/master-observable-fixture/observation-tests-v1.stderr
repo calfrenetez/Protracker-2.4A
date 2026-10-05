@@ -1,0 +1,8 @@
+test_exact_full_and_partial_workload (test_native_fixture_observation.Observation.test_exact_full_and_partial_workload) ... ok
+test_missing_gap_reorder_duplicate_or_false_completion_refuses (test_native_fixture_observation.Observation.test_missing_gap_reorder_duplicate_or_false_completion_refuses) ... ok
+test_nested_failure_keeps_leaf_and_traceback (test_native_fixture_observation.Observation.test_nested_failure_keeps_leaf_and_traceback) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.004s
+
+OK

@@ -1,0 +1,7 @@
+{
+  "status": "PREPARATION_FAILURE_NO_COMPILER_OR_CANDIDATE",
+  "error": "FileNotFoundError copying tools/native_fixture_observation.py: inherited fixture snapshot had no tools directory",
+  "followup": "Runner file did not exist and Python refused entry; no test or target execution",
+  "preserved": "preparation-v1-not-run",
+  "correction": "Create copied destination parent before copying new files"
+}

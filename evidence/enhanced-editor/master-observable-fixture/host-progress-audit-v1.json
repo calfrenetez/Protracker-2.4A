@@ -1,0 +1,23 @@
+{
+  "status": "PASS_EXACT_HOST_PROGRESS_WORKLOAD",
+  "snapshot": {
+    "begun": true,
+    "ended": true,
+    "progressRecords": 684,
+    "completedCases": 342,
+    "totalCases": 342,
+    "lastRecord": [
+      "FAULT",
+      "END",
+      24,
+      26
+    ],
+    "bytes": 21939
+  },
+  "log": {
+    "bytes": 21939,
+    "sha256": "f1d9e1af93cc942b61c0311f988bef2e277311640054d4c8651aa4d2825eb293"
+  },
+  "sourceIdentities": 899,
+  "scope": "flushed diagnostics and full assertions with host ASan/UBSan; no native elapsed time/backend/target acceptance"
+}

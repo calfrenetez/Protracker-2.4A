@@ -1,0 +1,44 @@
+{
+  "basis": "Host filesystem metadata after exact recovery; not native clock/timing/quiet proof",
+  "files": [
+    {
+      "name": "PTMasterEstablishTest",
+      "mtimeUTC": "2026-10-05T22:00:57.735156+00:00",
+      "bytes": 291740,
+      "sha256": "06cb163c7a5fe0c16c92f5e328267ce731d77f3098ecf6a60df3d20b81e43d4a"
+    },
+    {
+      "name": "Run-once",
+      "mtimeUTC": "2026-10-05T22:00:57.735403+00:00",
+      "bytes": 208,
+      "sha256": "60cbb6f0f104bcebf54a1332cad3063caf2cc5cfd105f334f76f595578fb8b2c"
+    },
+    {
+      "name": "complete.flag",
+      "mtimeUTC": "2026-10-05T22:04:36.307943+00:00",
+      "bytes": 9,
+      "sha256": "a4bccf5c13ef5ff8311e59b34d492bc7072a55298723601a6a9c127053aee8fc"
+    },
+    {
+      "name": "fixture.log",
+      "mtimeUTC": "2026-10-05T22:04:36.267989+00:00",
+      "bytes": 417,
+      "sha256": "e308a2dff8cfe13bbb65575a61465ac513643d0616230f7a1a2276117c76fceb"
+    },
+    {
+      "name": "fixture.rc",
+      "mtimeUTC": "2026-10-05T22:04:36.272535+00:00",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "name": "launcher.log",
+      "mtimeUTC": "2026-10-05T22:01:00.614851+00:00",
+      "bytes": 8,
+      "sha256": "fc1b7c019962b238d1a6ada645907789172d70040e961b64ef50e0f42710c35f"
+    }
+  ],
+  "inference": "Final log/RC/COMPLETE mtime around22:04:36 versus launch acknowledgement around22:01:00 consistent with longer-than60s runtime; cause not proven",
+  "originalResult": "FAILED60second bound; original evidence unchanged",
+  "atUTC": "2026-10-05T22:28:40.801749+00:00"
+}

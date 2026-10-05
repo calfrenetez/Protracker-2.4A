@@ -128,6 +128,7 @@ static void handoff(struct establishment_fixture *g)
 }
 static void success(unsigned bits,unsigned channels)
 {
+    PT_TEST_CASE_PROGRESS("MASTER","BEGIN",bits,channels);
     struct establishment_fixture *g=make_fixture(bits,channels);struct pt_project *p=&g->document.project;
     size_t bytes,done;uint8_t *before,*after;enum pt_establish_result r;unsigned n=0,i;
     assert(pt_project_size(p,&bytes)==PT_PROJECT_OK);before=malloc(bytes);after=malloc(bytes);assert(before&&after);
@@ -148,9 +149,11 @@ static void success(unsigned bits,unsigned channels)
     assert(pt_project_encode(p,after,bytes,&done)==PT_PROJECT_OK&&done==bytes&&!memcmp(before,after,bytes));
     if(channels==1)handoff(g);
     free(before);free(after);drop_fixture(g);
+    PT_TEST_CASE_PROGRESS("MASTER","END",bits,channels);
 }
 static void faults(unsigned bits,unsigned mode)
 {
+    PT_TEST_CASE_PROGRESS("FAULT","BEGIN",bits,mode);
     struct establishment_fixture *g=make_fixture(bits,1);enum pt_establish_result r;unsigned n=0;struct pt_sample before[3];size_t used;
     memcpy(before,g->document.project.samples,sizeof(before));
     if(mode==0){g->alias=&g->c;r=pt_sampler_establish_begin(&g->c,&g->sampler,&g->document.project,&g->control_allocator,&g->parent,1,123);assert(r==PT_ESTABLISH_ALIAS&&!g->live_controls&&!g->alias_releases);goto end;}
@@ -191,11 +194,15 @@ static void faults(unsigned bits,unsigned mode)
 end:
     if(!g->sampler.current[0])assert(!memcmp(before,g->document.project.samples,sizeof(before)));
     assert(!g->alias_releases);drop_fixture(g);
+    PT_TEST_CASE_PROGRESS("FAULT","END",bits,mode);
 }
-int main(void)
+static int sampler_establish_fixture(void)
 {
     unsigned bits,mode;assert(!mixed_owner_fixture());
     for(bits=8;bits<=24;bits+=8){success(bits,1);success(bits,2);for(mode=0;mode<=26;++mode)faults(bits,mode);}
     puts("ESTABLISH PASS:6 mono/stereo8/16/24 exact save/PCM cases;6 owned-master reuse cases;81 cancellation/alias/late-validation/budget/reentry/stale/partial-copy cases;3 actual established mixed handoffs;255 original owner regressions; host callbacks only");
     return 0;
 }
+#ifndef PT_TEST_ESTABLISH_INCLUDED
+int main(void){return sampler_establish_fixture();}
+#endif

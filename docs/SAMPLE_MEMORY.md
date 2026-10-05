@@ -5325,3 +5325,38 @@ activation backend, editor PLAY, device timing, DMA/IRQ/audio or listening accep
 is installed or established. Earlier evidence and acceptance tiers remain intact.
 See [producer contract](PAULA_READERS_SONG.md) and
 [saved evidence](../evidence/enhanced-editor/paula-readers-song/README.md).
+## Checked native allocator prerequisite — 5 October 2026
+
+An optional task-side helper records 32 exact pointer/size allocations and 16
+copied guard spans, with reserve-aware Fast-only refusal, payload-only charging
+and no release-header probe. Guard descriptor identities/extents are immutable;
+known pointee extents stay alive and stable through finish or whole-process hold.
+Controlled contents may change through their own serialized owner APIs; sample
+bytes keep their independent immutable contract. The independently owned helper
+control must remain disjoint from guards. Unlisted opaque extents remain caller
+responsibility.
+
+The lean eight-path code/test layout uses the existing unchanged master-memory
+policy. Its current clarified-header integrated host V2 passes once: one group,
+one test, 14 unconditional ASan/UBSan cases, three TUs/full dependency queries,
+nine stable source files, eight canonical/69 SDK inputs and eight exact saved
+pairs. This host model is not real Exec placement or source-quiet qualification.
+The original 17-path model and old-header object proof remain historical scopes.
+Old-header native V1 passed 18 commands/39 pairs with 15 local stack rows; the
+largest 512-byte initialization frame is per-function only.
+Current-header native V2 independently passed once: 18 commands, five stable
+inputs, three canonical/39 real-NDK dependencies, 39 pairs and 15 local stack
+rows. The 3,268-byte ordinary object differs from V1 only in one output-path
+metadata byte; no executable was linked or run. Root and independent saved
+evidence reviews cover each exact lane separately.
+
+PREPARE, irreversible sealing/retention and exact zero-ownership finish remain
+separate from source shutdown, command detachment and reader retirement. The
+helper is not wired to editor PLAY. A separate native entry is an unimported
+source draft under review; heap retention alone does not preserve process/code/
+library/stack lifetime. Native execution, Amiberry/physical runs, full task and
+IRQ/system stack, WCET and 65,536-byte launch remain unqualified. No DMA/audio or
+listening acceptance follows. See [checked allocator contract](NATIVE_CHECKED_MEMORY.md).
+Saved evidence and its byte-only verifier are under
+`evidence/enhanced-editor/native-checked-memory`; external tool/runtime and
+host-SDK hashes remain uncopied provenance.

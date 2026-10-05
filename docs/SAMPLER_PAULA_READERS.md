@@ -209,3 +209,38 @@ Exec memory-placement, native stack adequacy, backend transfer, DMA/IRQ, exact
 hardware scheduling, physical device, audio or human listening acceptance follows.
 No target window, lock, control or queued target action was acquired for this slice.
 See [saved boundary proof](../evidence/enhanced-editor/sampler-paula-readers-boundary/README.md).
+
+## Optional whole-song producer over this binding — 5 October 2026
+
+`paula_readers_song.c/.h` adds an optional owner around this genuine boundary binding.
+It drives actual opaque initial preparation, complete Paula audit, the same
+transferred sequence and lookahead before explicit publication. Current nonempty
+master versions must exist before begin; no PCM promotion occurs while the sequence
+borrows them. Its private fresh pool/queue use exactly 2 command and 8 reader records,
+while this binding's generic 1..8 APIs and historical qualification retain their scope.
+
+The owner preserves each original absolute boundary through WAIT_ACTIVE and pressure.
+Only a positively observed exact prospective original authorizes CONTROL/STOP; a
+future replacement can reject old-key admission before backend activation. Explicit
+service uses actual retained tickets/actions and independently drains exact command
+and reader proofs, including after sticky failure. DONE, explicit terminal STOP,
+detachment and retirement keep separate meanings. Cancel/close do not implicitly
+poll, emit musical STOP or force release. Close needs a real live typed owner slot;
+poisoned bytes are not an owner handle.
+
+Frozen production-v2/fixture-v5 passes three ASan/UBSan host groups once each,
+six compile/run commands/70 full dependency queries, 82 canonical/107 SDK inputs,
+three saved products and no generated inputs. One pinned assertion-enabled
+68000/software-float build passes 40 commands / 29 full queries,79 canonical/32 SDK
+inputs and seven exact runtimes; both markers survive. Its 263416-byte HUNK
+`PTPaulaReadersSongTest` is never executed. Independent saved host/compiler-proof
+reviews pass within their scope. The host fixture exercises whole-song parity,
+2/8 pressure, selected uncertainty/
+malformed-domain drains, original overflow/LATE and callback closure cases. All
+frozen failed v1-v4 versions remain preserved; unused PCM-padding close and exhaustive
+fault/alias/budget matrices remain uncovered. Its serialized model is software
+ownership evidence only. Constructor metadata structurally exceeds a nominal
+65536-byte 32-bit stack; no native stack adequacy, backend activation, physical memory class,
+DMA/IRQ/timing/audio or listening acceptance follows. Existing editor PLAY and native
+backend paths are untouched. See [producer contract](PAULA_READERS_SONG.md) and
+[saved evidence](../evidence/enhanced-editor/paula-readers-song/README.md).

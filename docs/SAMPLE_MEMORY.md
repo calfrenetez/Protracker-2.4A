@@ -5128,3 +5128,38 @@ boundaries; pin promotion that changes source descriptors cannot occur during th
 borrowed audited sequence lifetime. Host sanitizer and portable compiler evidence
 passes; Amiberry/real A1200 execution and actual output remain untested for this
 new candidate. See [evidence](../evidence/enhanced-editor/paula-preflight-startup/README.md).
+
+## Optional whole-song persistent-reader producer — 5 October 2026
+
+The additive `paula_readers_song` software producer owns genuine opaque initial
+setup, full Paula audit, the same audited sequence/lookahead, and independent queue
+and sampler/readers domains at fixed capacities 2/8. Every nonempty master must
+already have a genuine matching current sampler version before begin. It retains
+existing versions; it never promotes or edits borrowed master descriptors during
+audit/sequence lifetime. Authoritative 8/16/24-bit PCM, low bits and full capacities
+remain immutable. Chip representations stay derived and independently leased.
+
+Steps prepare exact original absolute boundaries without implicit submit or poll.
+Explicit publication, positive actual ACTIVE, command detachment and independent
+reader retirement remain separate. Empty DONE sends no implicit STOP; explicit
+terminal STOP keeps its original frame and deadline. Uncertain/malformed ownership
+retains storage until independently exact domain proofs; cancellation performs no
+musical STOP or force-unpin. Close requires a real live owner handle slot and may
+consume it to NULL while reporting release-callback failure.
+
+Frozen production-v2/fixture-v5 passes three ASan/UBSan host groups once each,
+six compile/run commands and 70 full dependency queries (82 canonical/107 SDK inputs,
+three saved products, no generated inputs). One pinned 68000/software-float
+compiler-only build passes 40 commands / 29 full queries (79 canonical/32 SDK inputs,
+seven exact runtimes), with enabled assertions and both fixture markers. The
+263416-byte `PTPaulaReadersSongTest` remains native/emulator/physical NOT_RUN;
+independent saved host/compiler-proof reviews pass within their scoped evidence.
+Original v1-v4 failed fixture versions/results remain preserved separately. The
+corrected host fixture exercises genuine whole-song and selected fault/lifetime cases;
+unused PCM-padding close, exhaustive callback/alias/fault/budget variants and native
+stack remain uncovered. Native constructor metadata structurally exceeds a nominal
+65536-byte 32-bit stack; existing launcher size is not adequacy proof. No native
+activation backend, editor PLAY, device timing, DMA/IRQ/audio or listening acceptance
+is installed or established. Earlier evidence and acceptance tiers remain intact.
+See [producer contract](PAULA_READERS_SONG.md) and
+[saved evidence](../evidence/enhanced-editor/paula-readers-song/README.md).

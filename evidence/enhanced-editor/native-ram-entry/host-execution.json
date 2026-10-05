@@ -1,0 +1,1986 @@
+{
+  "status": "PASS_INTEGRATED_HOST_MODEL_ONLY",
+  "source_before": {
+    "docs/NATIVE_RAM_ENTRY.md": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/docs/NATIVE_RAM_ENTRY.md",
+      "bytes": 3931,
+      "sha256": "8d8fb583760cb946ea13b498949a0ba411c58d611733f3624ee9faf58e3c5969",
+      "mode": 420
+    },
+    "src/core/channels.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.h",
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": 420
+    },
+    "src/core/document.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.h",
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": 420
+    },
+    "src/core/elapsed_clock.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c",
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "mode": 420
+    },
+    "src/core/elapsed_clock.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.h",
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "mode": 420
+    },
+    "src/core/mod_inspect.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.h",
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": 420
+    },
+    "src/core/pcm.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.h",
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": 420
+    },
+    "src/core/pp20.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.h",
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": 420
+    },
+    "src/core/project.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.h",
+      "bytes": 8827,
+      "sha256": "e1a749800258b1f1db1dedcd7d5d36970abbf7494279cb3669212757f982e21a",
+      "mode": 420
+    },
+    "src/core/readers_activation.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/readers_activation.c",
+      "bytes": 24353,
+      "sha256": "7254863b4bf0221a67ab87b8870c226060e668276d1109971a7d0bd26362280e",
+      "mode": 420
+    },
+    "src/core/readers_activation.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/readers_activation.h",
+      "bytes": 6955,
+      "sha256": "4174c11e2e65a6c0210a13810acf6f24b07828a62a9c8b7481334ecd00a2717d",
+      "mode": 420
+    },
+    "src/core/scheduled_output.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/scheduled_output.h",
+      "bytes": 6515,
+      "sha256": "3289945d9446b373d8aa1897cb2c432f08ef253b443a81cd4dde39230df9b9da",
+      "mode": 292
+    },
+    "src/core/scheduled_readers.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/scheduled_readers.c",
+      "bytes": 28153,
+      "sha256": "d0b038022fc5d6b76c589af3094bda338374b2e151143a81a071f803e1e879f0",
+      "mode": 292
+    },
+    "src/core/scheduled_readers.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/scheduled_readers.h",
+      "bytes": 9906,
+      "sha256": "5a63c3da2c4b08eb9329d33c3679776c8554f6f96bb56bc3590f4afd9fd5e52c",
+      "mode": 292
+    },
+    "src/diagnostic/native_ram_entry.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/diagnostic/native_ram_entry.c",
+      "bytes": 47468,
+      "sha256": "a85385a88101bb574eb1c899104502aaa9a0290000649c5bdaa966f40d9bf570",
+      "mode": 420
+    },
+    "src/native/eclock.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/eclock.h",
+      "bytes": 2213,
+      "sha256": "12b0a505ac670356ca4f2729f940159f2608584e2a425ef558e08a68dbdb46c6",
+      "mode": 420
+    },
+    "src/native/eclock_alarm.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/eclock_alarm.h",
+      "bytes": 3872,
+      "sha256": "1171c061501a03ddb32a3d661650a7f682aaed9b76749a67778e723c7d64e79e",
+      "mode": 420
+    },
+    "src/native/master_memory.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/master_memory.h",
+      "bytes": 1694,
+      "sha256": "ac898368849ec2d1892717d425b90c398da37a8799d536366a898e2e219e184a",
+      "mode": 420
+    },
+    "src/native/native_checked_memory.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/native_checked_memory.c",
+      "bytes": 11795,
+      "sha256": "3febf3daf5187b58208bc7a0f1c5814615cff61f6923b28ede52263807ae6f6a",
+      "mode": 420
+    },
+    "src/native/native_checked_memory.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/native_checked_memory.h",
+      "bytes": 6180,
+      "sha256": "a1ad6f4dedcd8cd670867fc93dd65eb2d05bcc5049acdb70738e7286512d398a",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_cia_ram_adapter.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_cia_ram_adapter.c",
+      "bytes": 10477,
+      "sha256": "63b6eb3589eea6d729d8ff350ba08174ff5916d1e88d04f7a8225e6fadf85eaf",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_cia_ram_adapter.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_cia_ram_adapter.h",
+      "bytes": 4853,
+      "sha256": "08a0e16e33afd938a72b514b57f689523416ce81724060accd2b409511152199",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_ram_irq.s": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_ram_irq.s",
+      "bytes": 1062,
+      "sha256": "bf6ad045ca13189c8df8e5ba2438388589a60a4af3c11ad1eeaaf499d11b079c",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_ram_irq_dispatch.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_ram_irq_dispatch.c",
+      "bytes": 459,
+      "sha256": "9db4447cb8c6114dbc17732dad40144b86a5f1270e079d24b63c6e2e16a91703",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_ram_irq_layout.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_ram_irq_layout.h",
+      "bytes": 1530,
+      "sha256": "3f544a24350070d95118d15c4741bec48ecd388af5451123169e0858990ccc94",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_ram_port.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_ram_port.c",
+      "bytes": 11727,
+      "sha256": "8c6542df4c7ff471f5ac87a6321587e320b1570876e8c34d003b4343af53e9cf",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_ram_port.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_ram_port.h",
+      "bytes": 4062,
+      "sha256": "3defa9b18a2545ee81bba3b32356b01d6d39e2d3ed9c36d1fa0894ba07003ffd",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/devices/timer.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/devices/timer.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/dos/dos.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/dos/dos.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/dos/dosextens.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/dos/dosextens.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/exec/errors.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/exec/errors.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/exec/execbase.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/exec/execbase.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/exec/interrupts.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/exec/interrupts.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/exec/memory.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/exec/memory.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/exec/tasks.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/exec/tasks.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/hardware/cia.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/hardware/cia.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/proto/cia.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/proto/cia.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/proto/dos.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/proto/dos.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/proto/exec.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/proto/exec.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/proto/timer.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/proto/timer.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_ram_entry_host_stubs.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_ram_entry_host_stubs.c",
+      "bytes": 18460,
+      "sha256": "9ac095ae69bb0da2db53ca469ee32d92776765c3c425b405bc1d70e59b8e5e72",
+      "mode": 420
+    },
+    "tests/native_ram_entry_host_stubs.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_ram_entry_host_stubs.h",
+      "bytes": 6200,
+      "sha256": "3242b6b80da4844713d375ff63824a0ece165456d78a85227a8ccdd7b7829af8",
+      "mode": 420
+    },
+    "tests/native_ram_entry_model_test.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_ram_entry_model_test.c",
+      "bytes": 1359,
+      "sha256": "6fe7255ddd28f9d5cfe848f7ef02e2c03239bebb36ab758d21d6a67fb9465e5e",
+      "mode": 420
+    },
+    "tests/test_native_ram_entry_model.py": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/test_native_ram_entry_model.py",
+      "bytes": 2701,
+      "sha256": "ca5059c5165efecc93457b43f46819cdec718547eac365c67af6b2fb374ee978",
+      "mode": 420
+    },
+    "tools/build_native_ram_entry.py": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/build_native_ram_entry.py",
+      "bytes": 9533,
+      "sha256": "7ef9b4bbb3fec2b77ec3ee069320978f2cca9845d76eb521e4670d14f6c005b5",
+      "mode": 420
+    }
+  },
+  "compiler": {
+    "path": "/usr/bin/cc",
+    "bytes": 200560,
+    "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+    "mode": 493
+  },
+  "module": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/test_native_ram_entry_model.py",
+    "bytes": 2701,
+    "sha256": "ca5059c5165efecc93457b43f46819cdec718547eac365c67af6b2fb374ee978",
+    "mode": 420
+  },
+  "argv": [
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/test_native_ram_entry_model.py"
+  ],
+  "subprocesses": [
+    {
+      "index": 0,
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-fno-omit-frame-pointer",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Itests/native_entry_host_sdk",
+        "-include",
+        "tests/native_ram_entry_host_stubs.h",
+        "-Dmain=pt_entry_model_main",
+        "tests/native_ram_entry_model_test.c",
+        "tests/native_ram_entry_host_stubs.c",
+        "src/diagnostic/native_ram_entry.c",
+        "src/native/readers_ram/native_ram_port.c",
+        "src/native/readers_ram/native_ram_irq_dispatch.c",
+        "src/native/readers_ram/native_cia_ram_adapter.c",
+        "src/native/native_checked_memory.c",
+        "src/core/elapsed_clock.c",
+        "src/core/scheduled_readers.c",
+        "src/core/readers_activation.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 2652947375,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c000.stdout.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c000.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 1,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "0",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 243722042,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c001.stdout.bin",
+        "bytes": 245,
+        "sha256": "cb46c6d5fa3955a7027436690fba6472f209b3a61a39e7df1e2384bc45cdb745",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c001.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 2,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "1",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 16283209,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c002.stdout.bin",
+        "bytes": 245,
+        "sha256": "c703fc49312f383c8126081c27fbc32c6486aa6b52d8162a6a4168f81178b617",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c002.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 3,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "6",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15947958,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c003.stdout.bin",
+        "bytes": 243,
+        "sha256": "b2a491627212641d0455bb23df052c701720d2e268a8a26ec117f9ef984fa9ac",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c003.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 4,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "7",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15514292,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c004.stdout.bin",
+        "bytes": 242,
+        "sha256": "b2014bf0ab0d0b8a17363a8c2f310ef22c1934367572eeefb5fedf7b993e49f6",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c004.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 5,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "8",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15565709,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c005.stdout.bin",
+        "bytes": 242,
+        "sha256": "11856729b9d7ec9f8ad6d66ba360be06a70b7b1f2e8cf838254095afe512a0f5",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c005.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 6,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "9",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15188083,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c006.stdout.bin",
+        "bytes": 242,
+        "sha256": "5e05ee347694aaa98712fbce78a7fad2038edcc589ab9e04e62a21176a9ec3c0",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c006.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 7,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "10",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15468792,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c007.stdout.bin",
+        "bytes": 243,
+        "sha256": "a106c8d08d592662ee3699ab0342c501a8a8f14c13909a45f19638eb90a5a78c",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c007.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 8,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "11",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15741417,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c008.stdout.bin",
+        "bytes": 243,
+        "sha256": "004990bd069c6d0a88375c43a71558b2449f6624054cc75e0723b63eb368be43",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c008.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 9,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "12",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 14895709,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c009.stdout.bin",
+        "bytes": 243,
+        "sha256": "f1c647392cbc339974c8b7aa9581d1c56ada9f91cfd575995cec072b3859c1b5",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c009.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 10,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "13",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 14609625,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c010.stdout.bin",
+        "bytes": 243,
+        "sha256": "91736421ec43f7fc3772b41abc236e87804b73111bb49e123fa53369e076047d",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c010.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 11,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "14",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15869583,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c011.stdout.bin",
+        "bytes": 243,
+        "sha256": "49e30911442fc497194da354aa00fb8c6db3e0047cbab4b67feaf620dc9ff311",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c011.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 12,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "15",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15203834,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c012.stdout.bin",
+        "bytes": 243,
+        "sha256": "d6eeca0766526ab9e3b091b1956370b3f484d4d85ebdd1a4afa8063307d8c159",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c012.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 13,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "16",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15499333,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c013.stdout.bin",
+        "bytes": 243,
+        "sha256": "de1f09f7102be43949a12df139b25447328f3fd0b392baa52fd6ec44ead7109f",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c013.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 14,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "17",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 16149250,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c014.stdout.bin",
+        "bytes": 247,
+        "sha256": "1f66813e3193f50438a63d5cbce37fc6bbf06e72f552e197a52bb3d10615eb70",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c014.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 15,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "18",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15005500,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c015.stdout.bin",
+        "bytes": 244,
+        "sha256": "fc14fc60fa1f775d184ab6cf98b28c10352395df8d4a077e40a7035a1b1520cc",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c015.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 16,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "19",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 14914791,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c016.stdout.bin",
+        "bytes": 243,
+        "sha256": "88d4cf9c332f7533677d681379d485f127cea3dcf50f626e0a23d27a8ab93fbd",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c016.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 17,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "20",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15860708,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c017.stdout.bin",
+        "bytes": 247,
+        "sha256": "6289b8207e495ac56c5aa2e65bddf66ad00e8432064484cc50b8cba122bb8c49",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c017.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 18,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "21",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15373583,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c018.stdout.bin",
+        "bytes": 248,
+        "sha256": "4ff403d2b3ccc2b892cf956dd7aa5f044fbf87abbd9c12f7a54acf37f589ba24",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c018.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 19,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "22",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 16341708,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c019.stdout.bin",
+        "bytes": 247,
+        "sha256": "0c32740a601bb8ea4ca239687d3c40bbe4354adc593bb930930d9580d7b22df9",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c019.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 20,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "23",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15304458,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c020.stdout.bin",
+        "bytes": 246,
+        "sha256": "733473ba64bde4b0413aebbde76860323f0471affb07b92dfbd51ee7b33173f9",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c020.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 21,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "24",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15612333,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c021.stdout.bin",
+        "bytes": 247,
+        "sha256": "7d9b70e6ac5bf0d2260776cf81313743e431356540db6934a6c3edf33642d0da",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c021.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 22,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "25",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15308334,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c022.stdout.bin",
+        "bytes": 246,
+        "sha256": "67e36a6e6ab8a8a8f5f5bc69f0a83e6367101362835ea1ec783fe48c2cf659e2",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c022.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 23,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "26",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 16547791,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c023.stdout.bin",
+        "bytes": 245,
+        "sha256": "1b9b408462d07f2834ddb0fe7c3dd24840c0a502bb35514bbe68f21c53562abe",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c023.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 24,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "27",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15428084,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c024.stdout.bin",
+        "bytes": 245,
+        "sha256": "87811927cf68472f3e083ab0ca3524707431b126d06dd3743df0964b6b331cf5",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c024.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 25,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "28",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15535292,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c025.stdout.bin",
+        "bytes": 246,
+        "sha256": "efad279303257902cab14aa67bdea9b8aa24580ace91dac7db9a390262098d7d",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c025.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 26,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "29",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 14649833,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c026.stdout.bin",
+        "bytes": 246,
+        "sha256": "cfbaadec63603a333f5150e7214c669eea764edf44e88f7f5f4a0be070335db2",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c026.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 27,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "30",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 14942500,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c027.stdout.bin",
+        "bytes": 246,
+        "sha256": "ca8b2fe52798c63266b86e10d541e6c60bd0275555240e15a82192e46f4a7421",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c027.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 28,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "31",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 14372083,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c028.stdout.bin",
+        "bytes": 245,
+        "sha256": "e2e8e05612bce94b616b9062a2a55f564b0424a2c844c7a78b34234cc2215c58",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c028.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 29,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "32",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 14259875,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c029.stdout.bin",
+        "bytes": 246,
+        "sha256": "47acdc4358efc7061a76bd26a31c027ac971c0c825b74b5d36e309fe7402d0d7",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c029.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 30,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "33",
+        "0"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15122584,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c030.stdout.bin",
+        "bytes": 245,
+        "sha256": "1b9afa10218a2fbd40f0fb5343751a71c78683e75a07961a9d6226083837db88",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c030.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 31,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "2",
+        "1"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 13506625,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c031.stdout.bin",
+        "bytes": 242,
+        "sha256": "e0acd260c8e4cd84decc73cccdc7c3d10d5781509701edb03e77052cfd1328c7",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c031.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 32,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "2",
+        "2"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 14681417,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c032.stdout.bin",
+        "bytes": 243,
+        "sha256": "34eba8117d8b96bd0dde807a3f8d4446ad1c92978b2758a4b653fb9d4120b6cf",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c032.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 33,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "2",
+        "3"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15171292,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c033.stdout.bin",
+        "bytes": 243,
+        "sha256": "e76b5b5a9fe196e179b59dca154bed3b69e3a1f58b6122c0b2cd780afe2cfae6",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c033.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 34,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "2",
+        "4"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 14958041,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c034.stdout.bin",
+        "bytes": 243,
+        "sha256": "13ff171d691a3a85a580ef39f091257dd83240f33c99060893520008b872ef35",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c034.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 35,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "2",
+        "5"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 17168875,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c035.stdout.bin",
+        "bytes": 243,
+        "sha256": "5dc2168a5f77cf15d2517d56bac9100f7828a83812ffe1c98bc5eb43599ba953",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c035.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 36,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "2",
+        "6"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 18423292,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c036.stdout.bin",
+        "bytes": 243,
+        "sha256": "1f44e414f16818c89a13730612c14368d562564769e771377fe652b5661fbb2b",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c036.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 37,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "2",
+        "7"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15427958,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c037.stdout.bin",
+        "bytes": 243,
+        "sha256": "fc354f342cc728a7ba79d808a1f9a34156f62dba3249cd8b5ca4d03c19c00712",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c037.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 38,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "2",
+        "8"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15139042,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c038.stdout.bin",
+        "bytes": 243,
+        "sha256": "349db213dc834255ec7d183c0d8126f0ee0fffec34d3c1765cddf5afa036d186",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c038.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 39,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "2",
+        "9"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15536125,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c039.stdout.bin",
+        "bytes": 243,
+        "sha256": "a1c3490e77ff48edfbe94690a73553f4fa6ac8d1915b3fbb64c83df66e2bc900",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c039.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 40,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "2",
+        "10"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 14927000,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c040.stdout.bin",
+        "bytes": 245,
+        "sha256": "6687e4d8ead64630d4387b0f96c42d6f22127dde469da84c67f869c27ec6f956",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c040.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 41,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "2",
+        "11"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 14551958,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c041.stdout.bin",
+        "bytes": 246,
+        "sha256": "e296507a8978dea2da18e2b12bb7320d2153f4cdb6428b2583be1db253142a4f",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c041.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 42,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "2",
+        "12"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 18565916,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c042.stdout.bin",
+        "bytes": 246,
+        "sha256": "50ab1953d3916f6d8f613b042125df442614c4e6f2771f0a8128b6c0619b70c9",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c042.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 43,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "2",
+        "13"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 14995084,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c043.stdout.bin",
+        "bytes": 246,
+        "sha256": "29db0a999c4175111915b78b9eee9fd00fb5f5a92606bd4ef8bea2c3c34e1df4",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c043.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 44,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "2",
+        "14"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 29815334,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c044.stdout.bin",
+        "bytes": 246,
+        "sha256": "40aa4136a62f2e207b68c6d8d9d24028de5fadcf29ec839492fb115fba756186",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c044.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 45,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "2",
+        "15"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15117542,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c045.stdout.bin",
+        "bytes": 246,
+        "sha256": "6b44fd56106546a724f0a802471656278e7bcb25f2da007d319932cef395d04c",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c045.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 46,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "2",
+        "16"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15705500,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c046.stdout.bin",
+        "bytes": 246,
+        "sha256": "9139343d56f1935341d5ee000b784b4649eb7ecb05b2b36459cfa78e281b03fc",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c046.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 47,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "2",
+        "17"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 15344625,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c047.stdout.bin",
+        "bytes": 246,
+        "sha256": "e5d1ec65fa182ae549a0596f361133581a0e53ce55f8da6878a0cbf499a5eeab",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c047.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 48,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "2",
+        "18"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 16183292,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c048.stdout.bin",
+        "bytes": 246,
+        "sha256": "c27b2033305787f8b18d726ff8f851004fef631ca6971457b6b0e7aab65f9015",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c048.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 49,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "3",
+        "1"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 17786083,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c049.stdout.bin",
+        "bytes": 242,
+        "sha256": "720fbdd475ccffffbe3d7a9d78b53e41e17f50e3248211ee4bf5fbf2b296ccf1",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c049.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 50,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "3",
+        "2"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 65450500,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c050.stdout.bin",
+        "bytes": 242,
+        "sha256": "5a1518af5372beaf6671be663033009c6cb55b2c29306971983a840685764c97",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c050.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 51,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "4",
+        "1"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 14671667,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c051.stdout.bin",
+        "bytes": 242,
+        "sha256": "957ec6e8363bd3a1085b43bbdc69a4fda6528a08f0655bc59eb791e41524b1aa",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c051.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 52,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "4",
+        "2"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 14239334,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c052.stdout.bin",
+        "bytes": 243,
+        "sha256": "e07a79b9f008f2ab177f16369dd63810a642289eb82aa656fc9b7a9bd67305d0",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c052.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 53,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "5",
+        "1"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 17083875,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c053.stdout.bin",
+        "bytes": 242,
+        "sha256": "b2aea0381c85270981acf62928b63ec76fd9c5a911646087c3438ea8312ef495",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c053.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "index": 54,
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+        "5",
+        "2"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+      "state": "COMPLETED",
+      "returncode": 0,
+      "error": null,
+      "elapsed_ns": 14890166,
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c054.stdout.bin",
+        "bytes": 243,
+        "sha256": "be602756ba8ed8a14cd4bfbf6491842a45b1ffec7ec48f33e5f4dcbfc7518ebc",
+        "mode": 420
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/c054.stderr.bin",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    }
+  ],
+  "native_emulator_physical": "NOT_RUN",
+  "returncode": 0,
+  "error": null,
+  "source_after": {
+    "docs/NATIVE_RAM_ENTRY.md": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/docs/NATIVE_RAM_ENTRY.md",
+      "bytes": 3931,
+      "sha256": "8d8fb583760cb946ea13b498949a0ba411c58d611733f3624ee9faf58e3c5969",
+      "mode": 420
+    },
+    "src/core/channels.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.h",
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": 420
+    },
+    "src/core/document.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.h",
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": 420
+    },
+    "src/core/elapsed_clock.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c",
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "mode": 420
+    },
+    "src/core/elapsed_clock.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.h",
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "mode": 420
+    },
+    "src/core/mod_inspect.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.h",
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": 420
+    },
+    "src/core/pcm.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.h",
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": 420
+    },
+    "src/core/pp20.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.h",
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": 420
+    },
+    "src/core/project.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.h",
+      "bytes": 8827,
+      "sha256": "e1a749800258b1f1db1dedcd7d5d36970abbf7494279cb3669212757f982e21a",
+      "mode": 420
+    },
+    "src/core/readers_activation.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/readers_activation.c",
+      "bytes": 24353,
+      "sha256": "7254863b4bf0221a67ab87b8870c226060e668276d1109971a7d0bd26362280e",
+      "mode": 420
+    },
+    "src/core/readers_activation.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/readers_activation.h",
+      "bytes": 6955,
+      "sha256": "4174c11e2e65a6c0210a13810acf6f24b07828a62a9c8b7481334ecd00a2717d",
+      "mode": 420
+    },
+    "src/core/scheduled_output.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/scheduled_output.h",
+      "bytes": 6515,
+      "sha256": "3289945d9446b373d8aa1897cb2c432f08ef253b443a81cd4dde39230df9b9da",
+      "mode": 292
+    },
+    "src/core/scheduled_readers.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/scheduled_readers.c",
+      "bytes": 28153,
+      "sha256": "d0b038022fc5d6b76c589af3094bda338374b2e151143a81a071f803e1e879f0",
+      "mode": 292
+    },
+    "src/core/scheduled_readers.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/scheduled_readers.h",
+      "bytes": 9906,
+      "sha256": "5a63c3da2c4b08eb9329d33c3679776c8554f6f96bb56bc3590f4afd9fd5e52c",
+      "mode": 292
+    },
+    "src/diagnostic/native_ram_entry.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/diagnostic/native_ram_entry.c",
+      "bytes": 47468,
+      "sha256": "a85385a88101bb574eb1c899104502aaa9a0290000649c5bdaa966f40d9bf570",
+      "mode": 420
+    },
+    "src/native/eclock.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/eclock.h",
+      "bytes": 2213,
+      "sha256": "12b0a505ac670356ca4f2729f940159f2608584e2a425ef558e08a68dbdb46c6",
+      "mode": 420
+    },
+    "src/native/eclock_alarm.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/eclock_alarm.h",
+      "bytes": 3872,
+      "sha256": "1171c061501a03ddb32a3d661650a7f682aaed9b76749a67778e723c7d64e79e",
+      "mode": 420
+    },
+    "src/native/master_memory.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/master_memory.h",
+      "bytes": 1694,
+      "sha256": "ac898368849ec2d1892717d425b90c398da37a8799d536366a898e2e219e184a",
+      "mode": 420
+    },
+    "src/native/native_checked_memory.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/native_checked_memory.c",
+      "bytes": 11795,
+      "sha256": "3febf3daf5187b58208bc7a0f1c5814615cff61f6923b28ede52263807ae6f6a",
+      "mode": 420
+    },
+    "src/native/native_checked_memory.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/native_checked_memory.h",
+      "bytes": 6180,
+      "sha256": "a1ad6f4dedcd8cd670867fc93dd65eb2d05bcc5049acdb70738e7286512d398a",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_cia_ram_adapter.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_cia_ram_adapter.c",
+      "bytes": 10477,
+      "sha256": "63b6eb3589eea6d729d8ff350ba08174ff5916d1e88d04f7a8225e6fadf85eaf",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_cia_ram_adapter.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_cia_ram_adapter.h",
+      "bytes": 4853,
+      "sha256": "08a0e16e33afd938a72b514b57f689523416ce81724060accd2b409511152199",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_ram_irq.s": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_ram_irq.s",
+      "bytes": 1062,
+      "sha256": "bf6ad045ca13189c8df8e5ba2438388589a60a4af3c11ad1eeaaf499d11b079c",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_ram_irq_dispatch.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_ram_irq_dispatch.c",
+      "bytes": 459,
+      "sha256": "9db4447cb8c6114dbc17732dad40144b86a5f1270e079d24b63c6e2e16a91703",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_ram_irq_layout.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_ram_irq_layout.h",
+      "bytes": 1530,
+      "sha256": "3f544a24350070d95118d15c4741bec48ecd388af5451123169e0858990ccc94",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_ram_port.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_ram_port.c",
+      "bytes": 11727,
+      "sha256": "8c6542df4c7ff471f5ac87a6321587e320b1570876e8c34d003b4343af53e9cf",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_ram_port.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_ram_port.h",
+      "bytes": 4062,
+      "sha256": "3defa9b18a2545ee81bba3b32356b01d6d39e2d3ed9c36d1fa0894ba07003ffd",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/devices/timer.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/devices/timer.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/dos/dos.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/dos/dos.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/dos/dosextens.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/dos/dosextens.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/exec/errors.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/exec/errors.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/exec/execbase.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/exec/execbase.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/exec/interrupts.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/exec/interrupts.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/exec/memory.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/exec/memory.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/exec/tasks.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/exec/tasks.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/hardware/cia.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/hardware/cia.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/proto/cia.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/proto/cia.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/proto/dos.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/proto/dos.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/proto/exec.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/proto/exec.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/proto/timer.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/proto/timer.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_ram_entry_host_stubs.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_ram_entry_host_stubs.c",
+      "bytes": 18460,
+      "sha256": "9ac095ae69bb0da2db53ca469ee32d92776765c3c425b405bc1d70e59b8e5e72",
+      "mode": 420
+    },
+    "tests/native_ram_entry_host_stubs.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_ram_entry_host_stubs.h",
+      "bytes": 6200,
+      "sha256": "3242b6b80da4844713d375ff63824a0ece165456d78a85227a8ccdd7b7829af8",
+      "mode": 420
+    },
+    "tests/native_ram_entry_model_test.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_ram_entry_model_test.c",
+      "bytes": 1359,
+      "sha256": "6fe7255ddd28f9d5cfe848f7ef02e2c03239bebb36ab758d21d6a67fb9465e5e",
+      "mode": 420
+    },
+    "tests/test_native_ram_entry_model.py": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/test_native_ram_entry_model.py",
+      "bytes": 2701,
+      "sha256": "ca5059c5165efecc93457b43f46819cdec718547eac365c67af6b2fb374ee978",
+      "mode": 420
+    },
+    "tools/build_native_ram_entry.py": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/build_native_ram_entry.py",
+      "bytes": 9533,
+      "sha256": "7ef9b4bbb3fec2b77ec3ee069320978f2cca9845d76eb521e4670d14f6c005b5",
+      "mode": 420
+    }
+  },
+  "source_unchanged": true,
+  "product": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+    "bytes": 815104,
+    "sha256": "796f52937abba538b835b9d8472121f90c607115d0db42242c0fcca6e84d9ee4",
+    "mode": 493
+  },
+  "suite_stdout": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/suite.stdout.txt",
+    "bytes": 13192,
+    "sha256": "0af3e42b388cf62c543723a2749277450dcdf68ebb9cbd81a97a48a64f2a1ff6",
+    "mode": 420
+  },
+  "suite_stderr": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/suite.stderr.txt",
+    "bytes": 98,
+    "sha256": "47f293c092a222a2df61a1fa70c6ef2f621a4d57d91b1b18b4526ac801a04330",
+    "mode": 420
+  }
+}

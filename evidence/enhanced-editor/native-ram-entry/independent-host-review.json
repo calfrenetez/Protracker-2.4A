@@ -1,0 +1,147 @@
+{
+  "status": "CLEAR_SAVED_HOST_PUBLICATION_ONLY",
+  "execution": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/execution.json",
+    "bytes": 85753,
+    "sha256": "dde2b1216c6992f0fd77336cc624f76d7ba64cb6109c2dc59df38c0aa30e1d37",
+    "mode": 420
+  },
+  "method": "Actual saved JSON/raw logs/product/source bytes, pure AST declaration and Mach-O symbol-table parsing; no import or replay",
+  "counts": {
+    "commands_RC0": 55,
+    "compiler_RC0": 1,
+    "fresh_process_case_RC0": 54,
+    "production_C_TUs": 8,
+    "model_C_TUs": 2,
+    "raw_empty_stderrs": 55,
+    "complete_full_markers": 54,
+    "identical_before_after_source_records": 45,
+    "model_results": {
+      "model_success": 3,
+      "model_clean_refusal": 30,
+      "model_HOLD": 21
+    },
+    "ASan_symbol_entries": 1181,
+    "UBSan_symbol_entries": 9,
+    "active_assertion_symbol_entries": 1
+  },
+  "literal_compile_source_order": [
+    "tests/native_ram_entry_model_test.c",
+    "tests/native_ram_entry_host_stubs.c",
+    "src/diagnostic/native_ram_entry.c",
+    "src/native/readers_ram/native_ram_port.c",
+    "src/native/readers_ram/native_ram_irq_dispatch.c",
+    "src/native/readers_ram/native_cia_ram_adapter.c",
+    "src/native/native_checked_memory.c",
+    "src/core/elapsed_clock.c",
+    "src/core/scheduled_readers.c",
+    "src/core/readers_activation.c"
+  ],
+  "literal_compile_flags": [
+    "-std=c99",
+    "-O1",
+    "-g",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fsanitize=address,undefined",
+    "-fno-omit-frame-pointer",
+    "-UNDEBUG",
+    "-Isrc/core",
+    "-Isrc/native",
+    "-Itests/native_entry_host_sdk",
+    "-include",
+    "tests/native_ram_entry_host_stubs.h",
+    "-Dmain=pt_entry_model_main"
+  ],
+  "compiler": {
+    "path": "/usr/bin/cc",
+    "bytes": 200560,
+    "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+    "mode": 493
+  },
+  "command_case_binding": "Actual compile argv equals declaration/flags/product;54exact product-path, source-cwd, case-order mode/ordinal argv and output envelopes; suite stdout equals ordered concatenation of raw outputs",
+  "case_matrix": "30 ordinary modes,18 successive NULL injection ordinals,6 port/request/device ordinals",
+  "meaningful_oracles": [
+    "Result/HOLD matches every compiled mode oracle; bounded trace4096/alloc18/abort1/wait1/delay50",
+    "No-Fast refusal has zero trace and allocation/release/abort/wait effects",
+    "All NULL injection cases release every successful allocation; the grouped four-control allocation phase continues bounded allocations before checking all pointers",
+    "Foreign CheckIO neither aborts nor waits; pending AbortIO attempts once then50 polls and no WaitIO; already completed request waits once without abort",
+    "Live-pointer alias remains retained without free; compiled assertions preserve unrelated signal/foreign CIA bits/vectors and test exact cleanup versus retained owners",
+    "HOLD source records freeze before model-only arena disposal; no fake native residency/quiet receipt inferred"
+  ],
+  "product": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/retained-model/entry-host-model",
+    "bytes": 815104,
+    "sha256": "796f52937abba538b835b9d8472121f90c607115d0db42242c0fcca6e84d9ee4",
+    "mode": 493
+  },
+  "suite_stdout": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/suite.stdout.txt",
+    "bytes": 13192,
+    "sha256": "0af3e42b388cf62c543723a2749277450dcdf68ebb9cbd81a97a48a64f2a1ff6",
+    "mode": 420
+  },
+  "suite_stderr": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/suite.stderr.txt",
+    "bytes": 98,
+    "sha256": "47f293c092a222a2df61a1fa70c6ef2f621a4d57d91b1b18b4526ac801a04330",
+    "mode": 420
+  },
+  "stderr_scope": "All55raw command stderrs empty; suite stderr is normal unittest one-test OK text",
+  "current_source_binding": {
+    "44_non_documentation_records_match_repo": true,
+    "doc_only_postvalidation_difference": [
+      {
+        "name": "docs/NATIVE_RAM_ENTRY.md",
+        "tested": {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/docs/NATIVE_RAM_ENTRY.md",
+          "bytes": 3931,
+          "sha256": "8d8fb583760cb946ea13b498949a0ba411c58d611733f3624ee9faf58e3c5969",
+          "mode": 420
+        },
+        "current": {
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/docs/NATIVE_RAM_ENTRY.md",
+          "bytes": 4219,
+          "sha256": "1c3eb48096d9c587f8045fe04c2ab1f8d32001c86f78225f9016153d88ff769e",
+          "mode": 420
+        }
+      }
+    ],
+    "tested45_record_snapshot_unchanged": true
+  },
+  "pure_audit_assumption_corrections": [
+    {
+      "initial": "trace>0",
+      "correct": "zero valid for clean no-Fast refusal; explicit zero-effect oracle checked"
+    },
+    {
+      "initial": "NULL ordinal always equals total allocation calls",
+      "correct": "ordinals4/5/6 are in the grouped four-control allocation phase; each has7calls/6releases, matching actual entry_storage and free_calls==alloc_calls-1",
+      "observed": [
+        {
+          "ordinal": 4,
+          "allocations": 7,
+          "releases": 6
+        },
+        {
+          "ordinal": 5,
+          "allocations": 7,
+          "releases": 6
+        },
+        {
+          "ordinal": 6,
+          "allocations": 7,
+          "releases": 6
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Host software-resource model only; native/emulator/physical remain NOT_RUN; no actual ABI/Exec placement/real IRQ/CIA/timer/stack/audio clearance",
+    "No full-M lane here;45explicit records do not establish external host SDK closure",
+    "Model-only arena disposal is not native sourcequiet or Process/HUNK return evidence; no central lifecycle authorization",
+    "Separate reviewer owns native build/source audit; no duplication or target clearance"
+  ],
+  "no_test_compiler_product_import_Git_or_target_replay": true
+}

@@ -1,0 +1,131 @@
+{
+  "status": "CLEAR_SAVED_INTEGRATED_NATIVE_BUILD_AND_SOURCE_MAPPING_ONLY",
+  "scope": "Passive source and saved compiler JSON/raw log/dependency/SU/file inspection. Host actual audit is delegated separately to workflow_native_plan. No helper, test, compiler, linker, model, product, Git or target replay.",
+  "source_mapping_review": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-integration-v1/source-revision-v2/independent-integration-source-review-v2.json",
+    "bytes": 8361,
+    "mode": 420,
+    "sha256": "4c58244d08e0000f9f281058bfe5ec5cf7f3ecd59c340fbbb26a92d20cc9713a"
+  },
+  "V3_manifest": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-integration-v1/source-revision-v3/integration-manifest-v3.json",
+    "bytes": 13298,
+    "mode": 420,
+    "sha256": "f039a5d9079e4d59d04fdd72040426ecc0395d44580bafde5fd7c6137c5ed01f"
+  },
+  "root_V3_review": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-integration-v1/source-revision-v3/root-source-review-v3.json",
+    "bytes": 1247,
+    "mode": 420,
+    "sha256": "e33e2a1f49de0371fdd5c16afb5c8c92b191cf1d3200adca78af3f3e60695d67"
+  },
+  "import_receipt": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-publication-v1/import-receipt.json",
+    "bytes": 14750,
+    "mode": 420,
+    "sha256": "4d995c524f0e2d3b71bb234d97a297cb711c60b03f8323f036a86825b8e35fda"
+  },
+  "native_manifest": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-build-v1/manifest.json",
+    "bytes": 254281,
+    "mode": 420,
+    "sha256": "5c344072634a5dd7782149147793b6d0681339735bff4a6f970e2db0533c5576"
+  },
+  "root_native_review": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-build-v1/root-execution-review.json",
+    "bytes": 1146,
+    "mode": 420,
+    "sha256": "621e623c5707c8f01307e99dda7391d0592ded51f694ce61e277e829ee4e2157"
+  },
+  "source_facts": {
+    "candidate_files": 26,
+    "non_builder_files_byte_exact_V2_to_V3": 25,
+    "actual_import_matches_V3_except_two_exact_literal_comment_corrections": true,
+    "builder": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/build_native_ram_entry.py",
+      "resolved_path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/build_native_ram_entry.py",
+      "bytes": 9533,
+      "mode": 420,
+      "sha256": "7ef9b4bbb3fec2b77ec3ee069320978f2cca9845d76eb521e4670d14f6c005b5"
+    },
+    "V3_delta_review": "Three hunks only: append and persist STARTED argv/cwd before each invocation; query/pin collect2; catch BaseException and retain first failure. No retry, product execution or cleanup.",
+    "protected_existing_files": 16,
+    "distinct_records_bytes_modes_hashes_checked": 243,
+    "executable_production_tokens_unchanged": true,
+    "model_mapping_preserved": "V2 independent review pins the current MP3 54-case model; integrated host execution is separately reviewed."
+  },
+  "native_saved_facts": {
+    "status": "PASS_COMPILE_LINK_ONLY_PRODUCT_NEVER_EXECUTED",
+    "source_before_after_exact": true,
+    "quoted_source_closure_count": 26,
+    "literal_command_count": 22,
+    "all_commands_completed_RC0": true,
+    "all_command_stderr_empty": true,
+    "compile_link_stdout_empty": true,
+    "C_units": 8,
+    "GAS_units": 1,
+    "MD_distinct_lexical_dependency_path_records": 93,
+    "MD_distinct_resolved_physical_files": 88,
+    "include_aliases_are_the_five_count_difference": true,
+    "all_MD_saved_names_match_recorded_full_closure": true,
+    "real_NDK_headers_and_no_test_headers": true,
+    "tools": [
+      "compiler",
+      "cc1",
+      "as",
+      "ld",
+      "collect2"
+    ],
+    "runtime_pin_count": 7,
+    "local_SU_files": 8,
+    "local_SU_rows": 109,
+    "unbounded_SU_rows": 0,
+    "retained_files": 71,
+    "product": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-build-v1/PTExecReadersRamEntryTest",
+      "resolved_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-build-v1/PTExecReadersRamEntryTest",
+      "bytes": 59924,
+      "mode": 493,
+      "sha256": "357dd3898d209370ff96ac7ea5dc0fd04546df792e252258fe28fddd1b7447cc"
+    },
+    "link_map": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-build-v1/PTExecReadersRamEntryTest.map",
+      "resolved_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-build-v1/PTExecReadersRamEntryTest.map",
+      "bytes": 25746,
+      "mode": 420,
+      "sha256": "83ab3a215fe02e987dcc5d321d624f05cb406a6c6dde06c11b2cad3530c897cc"
+    },
+    "exact_product_bytes_match_previously_independently_parsed_HUNK": true,
+    "prior_HUNK_review": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-linked-v1/independent-link-execution-review-v1.json",
+      "bytes": 9379,
+      "mode": 420,
+      "sha256": "fa86a189b5e902e459f6ff0698b77cee3d17e0da25164328eaa8bdf2391c51dd"
+    }
+  },
+  "findings": [],
+  "documentation_scope": {
+    "imported_document_pin_is_historical": true,
+    "current_document": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/docs/NATIVE_RAM_ENTRY.md",
+      "bytes": 4219,
+      "mode": 420,
+      "sha256": "1c3eb48096d9c587f8045fe04c2ab1f8d32001c86f78225f9016153d88ff769e"
+    },
+    "not_part_of_native_compiler_closure": true,
+    "note": "Root added later evidence to the documentation after the historical import receipt; this review does not promote that documentation edit into native-source drift."
+  },
+  "limits": {
+    "native_execution": "NOT_RUN",
+    "emulator": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "active_CIA_IRQ": "NOT_RUN",
+    "central_hold_and_Process_full_HUNK_lifetime": "NOT_ENFORCED_BY_THIS_REVIEW",
+    "task_stack_total": "UNKNOWN_NOT_CLEARED",
+    "system_IRQ_stack_total": "UNKNOWN_NOT_CLEARED",
+    "65536": "NOT_CLEARED",
+    "timing_WCET": "UNKNOWN_NOT_CLEARED",
+    "SU_or_identical_HUNK_is_aggregate_or_launch_acceptance": false
+  },
+  "reviewer_audit_notes": "Passive review syntax and lexical-versus-resolved dependency-count assumptions were corrected; historical documentation was scoped out of native closure. No candidate/tool invocation or original artifact alteration occurred. Original MP2 failure and prior private receipts remain preserved."
+}

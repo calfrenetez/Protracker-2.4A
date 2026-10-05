@@ -1,0 +1,108 @@
+NATIVE ENTRY HOST CASE: mode=0 ordinal=0 result=0 hold=0 trace=139 allocations=18 releases=18 abort=1 waitio=1 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=1 ordinal=0 result=0 hold=0 trace=139 allocations=18 releases=18 abort=1 waitio=1 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=6 ordinal=0 result=20 hold=0 trace=15 allocations=1 releases=1 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=7 ordinal=0 result=20 hold=0 trace=0 allocations=0 releases=0 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=8 ordinal=0 result=20 hold=0 trace=8 allocations=1 releases=1 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=9 ordinal=0 result=-1 hold=1 trace=3 allocations=1 releases=0 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=10 ordinal=0 result=-1 hold=1 trace=3 allocations=1 releases=0 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=11 ordinal=0 result=-1 hold=1 trace=3 allocations=1 releases=0 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=12 ordinal=0 result=-1 hold=1 trace=6 allocations=1 releases=0 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=13 ordinal=0 result=-1 hold=1 trace=9 allocations=1 releases=0 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=14 ordinal=0 result=-1 hold=1 trace=9 allocations=1 releases=0 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=15 ordinal=0 result=-1 hold=1 trace=5 allocations=1 releases=0 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=16 ordinal=0 result=-1 hold=1 trace=3 allocations=1 releases=0 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=17 ordinal=0 result=-1 hold=1 trace=131 allocations=18 releases=17 abort=1 waitio=1 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=18 ordinal=0 result=-1 hold=1 trace=10 allocations=2 releases=0 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=19 ordinal=0 result=-1 hold=1 trace=2 allocations=1 releases=0 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=20 ordinal=0 result=-1 hold=1 trace=128 allocations=18 releases=17 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=21 ordinal=0 result=-1 hold=1 trace=230 allocations=18 releases=17 abort=1 waitio=0 delay=50
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=22 ordinal=0 result=-1 hold=1 trace=131 allocations=18 releases=17 abort=1 waitio=1 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=23 ordinal=0 result=0 hold=0 trace=138 allocations=18 releases=18 abort=0 waitio=1 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=24 ordinal=0 result=-1 hold=1 trace=134 allocations=18 releases=17 abort=1 waitio=1 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=25 ordinal=0 result=20 hold=0 trace=68 allocations=18 releases=18 abort=1 waitio=1 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=26 ordinal=0 result=-1 hold=1 trace=52 allocations=18 releases=1 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=27 ordinal=0 result=-1 hold=1 trace=73 allocations=18 releases=1 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=28 ordinal=0 result=-1 hold=1 trace=111 allocations=18 releases=1 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=29 ordinal=0 result=20 hold=0 trace=59 allocations=18 releases=18 abort=1 waitio=1 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=30 ordinal=0 result=20 hold=0 trace=48 allocations=16 releases=16 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=31 ordinal=0 result=-1 hold=1 trace=78 allocations=18 releases=1 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=32 ordinal=0 result=-1 hold=1 trace=111 allocations=18 releases=1 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=33 ordinal=0 result=-1 hold=1 trace=74 allocations=18 releases=1 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=2 ordinal=1 result=20 hold=0 trace=1 allocations=1 releases=0 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=2 ordinal=2 result=20 hold=0 trace=18 allocations=2 releases=1 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=2 ordinal=3 result=20 hold=0 trace=20 allocations=3 releases=2 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=2 ordinal=4 result=20 hold=0 trace=28 allocations=7 releases=6 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=2 ordinal=5 result=20 hold=0 trace=28 allocations=7 releases=6 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=2 ordinal=6 result=20 hold=0 trace=28 allocations=7 releases=6 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=2 ordinal=7 result=20 hold=0 trace=28 allocations=7 releases=6 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=2 ordinal=8 result=20 hold=0 trace=30 allocations=8 releases=7 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=2 ordinal=9 result=20 hold=0 trace=32 allocations=9 releases=8 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=2 ordinal=10 result=20 hold=0 trace=34 allocations=10 releases=9 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=2 ordinal=11 result=20 hold=0 trace=36 allocations=11 releases=10 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=2 ordinal=12 result=20 hold=0 trace=38 allocations=12 releases=11 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=2 ordinal=13 result=20 hold=0 trace=40 allocations=13 releases=12 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=2 ordinal=14 result=20 hold=0 trace=42 allocations=14 releases=13 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=2 ordinal=15 result=20 hold=0 trace=44 allocations=15 releases=14 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=2 ordinal=16 result=20 hold=0 trace=46 allocations=16 releases=15 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=2 ordinal=17 result=20 hold=0 trace=49 allocations=17 releases=16 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=2 ordinal=18 result=20 hold=0 trace=51 allocations=18 releases=17 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=3 ordinal=1 result=20 hold=0 trace=3 allocations=1 releases=1 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=3 ordinal=2 result=20 hold=0 trace=9 allocations=1 releases=1 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=4 ordinal=1 result=20 hold=0 trace=5 allocations=1 releases=1 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=4 ordinal=2 result=20 hold=0 trace=11 allocations=1 releases=1 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=5 ordinal=1 result=20 hold=0 trace=7 allocations=1 releases=1 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification
+NATIVE ENTRY HOST CASE: mode=5 ordinal=2 result=20 hold=0 trace=13 allocations=1 releases=1 abort=0 waitio=0 delay=0
+NATIVE ENTRY HOST MODEL CASE PASS: software resource oracle only; no native ABI, placement, IRQ, timer or stack qualification

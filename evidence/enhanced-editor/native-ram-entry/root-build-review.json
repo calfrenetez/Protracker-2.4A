@@ -1,0 +1,26 @@
+{
+  "status": "CLEAR_SAVED_INTEGRATED_BUILD_ONLY",
+  "report": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-build-v1/manifest.json",
+    "bytes": 254281,
+    "sha256": "5c344072634a5dd7782149147793b6d0681339735bff4a6f970e2db0533c5576",
+    "mode": 420
+  },
+  "command_count": 22,
+  "C_units": 8,
+  "GAS_units": 1,
+  "source_closure_count": 26,
+  "compiled_dependency_count": 93,
+  "local_stack_rows": 109,
+  "dynamic_unbounded": false,
+  "product": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-build-v1/PTExecReadersRamEntryTest",
+    "resolved_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-build-v1/PTExecReadersRamEntryTest",
+    "bytes": 59924,
+    "mode": 493,
+    "sha256": "357dd3898d209370ff96ac7ea5dc0fd04546df792e252258fe28fddd1b7447cc"
+  },
+  "same_product_as_private_qualified_link": true,
+  "execution": "NOT_RUN",
+  "stack_and_WCET": "UNKNOWN; annotations and HUNK equality are compiler evidence only"
+}

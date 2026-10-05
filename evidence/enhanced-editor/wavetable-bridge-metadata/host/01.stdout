@@ -1,0 +1,6 @@
+amigus reservation lifecycle: PASS (fake library, no hardware)
+WAVETABLE UPLOAD JOB PASS: bounded steps, cancellation, unpublished leases, partial words, live ownership loss and hit transfer; injected only
+AMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only
+SAMPLER UPLOAD JOB PASS: exact8/16/24 pins, stable descriptor, bounded steps, release/edit/history/cancel guards, hits and memory refusal; injected only
+SAMPLER METADATA PASS:8/16/24 source-only query, poisoned payload not scanned, stale refusal preserves active cache, zero callback/allocation/write; backend ownership remains separate; fake bus only
+SAMPLER WAVETABLE PASS: revision rebuilds, edits/undo/table changes, pinned old playback, master save and failure cleanup; fake bus only

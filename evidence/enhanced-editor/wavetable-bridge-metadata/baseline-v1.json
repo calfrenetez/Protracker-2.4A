@@ -1,0 +1,18 @@
+{
+  "head": "bb6efeb936b989acdfd15bf9f5e4b6eae5185be0",
+  "source_files": {
+    "src/editor/sampler_wavetable.c": {
+      "bytes": 6285,
+      "sha256": "53e7ed0491234ffeed5cb9be8f20d33da2059e8a9ecf335a59040a0245ab579e"
+    },
+    "src/editor/sampler_wavetable_internal.h": {
+      "bytes": 853,
+      "sha256": "518929f618b6eb182df9bef4b9d307bad064c53895708a92bf870068e37494b2"
+    },
+    "tests/sampler_wavetable_test.c": {
+      "bytes": 13960,
+      "sha256": "2ba19ed1fe23f0932823c91aec05ddd706481f6f8489ddec9a51387e64f15a37"
+    }
+  },
+  "scope": "Additive private bridge metadata query only. Public and existing prepared upload paths unchanged. No live backend callback, pin, promotion, synchronization or hardware effects."
+}

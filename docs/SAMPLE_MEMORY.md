@@ -5392,3 +5392,29 @@ HUNK SHA256 `171f3b7b42b659093bc24b410d6affb96668527dbeb624efb1a2251b18b97530`
 remains native/emulator/physical NOT_RUN. Saved first results and source bindings
 are in `evidence/enhanced-editor/mixed-initial-setup/`. No wall-clock/IRQ bound, memory placement,
 backend activation, native/emulator/physical output or hardware acceptance follows.
+
+
+## Source metadata and AmiGUS ownership remain separate
+
+The private `pt_sampler_wavetable_prepared_metadata_current` query reads only
+fixed live bridge/sampler controls and project sample-table/count metadata under
+an already-validated immutable-source contract. It performs no PCM/order/event
+scans, allocation, pin promotion, cache retirement, upload or backend callbacks.
+Matching metadata is not complete project validation or device availability: it
+can still match a faulted, closing or unowned backend. The existing live
+`pt_amigus_wavetable_cache_current` gate remains separate and unchanged; it calls
+the ownership callback and may latch an ownership fault. Existing public and
+prepared upload, mixed-owner and editor PLAY paths are unchanged.
+
+One actual ASan/UBSan fixture passed, including three 8/16/24-bit genuine-master
+scenarios that preserve active cache/RAM/master resources, refuse a stale
+generation, avoid callbacks and deliberately expose the distinction from full
+semantic validation and live ownership. Payload poison was test-only and restored
+before normal consumption. A pinned portable m68000 compile/link passed once:
+22 translation units, 31 commands and 83 dependency records. The 156,404-byte
+HUNK SHA256 `8457636eac645decf89122a6874c921c2324a82af88fe009444dcd612a89f9f3`
+remains native/emulator/physical NOT_RUN. Root source and saved-result reviews
+are self-reviews; no independent review is claimed for this slice. See
+[saved metadata evidence](../evidence/enhanced-editor/wavetable-bridge-metadata/README.md).
+No hardware ownership/capacity/order/completion/voice-stop, memory placement,
+timing or listening qualification follows.

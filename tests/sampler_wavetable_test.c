@@ -89,6 +89,61 @@ static void sampler_upload_fixture(void)
     }
     free(f);puts("SAMPLER UPLOAD JOB PASS: exact8/16/24 pins, stable descriptor, bounded steps, release/edit/history/cancel guards, hits and memory refusal; injected only");
 }
+static unsigned metadata_owned_calls;
+static int metadata_owned(void *context)
+{++metadata_owned_calls;return bus_owned(context);}
+static void sampler_metadata_fixture(void)
+{
+    struct fixture *f=malloc(sizeof(*f));struct pt_allocator a={NULL,allocate_master,release_master};
+    struct pt_document d;struct pt_sampler sampler;struct pt_sampler_wavetable bridge={0};
+    struct pt_cache_lease lease;struct pt_sample_version *master;
+    uint8_t cache_before[sizeof(struct pt_sample_cache)],ram_before[4096];
+    int32_t data[4],value;uint16_t order;unsigned bits,writes,held_allocations,generation;
+    size_t held_bytes;
+    assert(f);
+    for(bits=8;bits<=24;bits+=8) {
+        data[0]=bits==8?127:bits==16?32767:8388607;data[1]=-data[0]-1;data[2]=1;data[3]=-1;
+        init(f,PT_AMIGUS_WAVETABLE);
+        assert(pt_amigus_wavetable_cache_attach(&f->cache,&f->reservation,16,112,112,f,bus_owned,bus_write));
+        pt_document_init(&d,&a);assert(pt_document_new(&d,4,SIZE_MAX)==PT_PROJECT_OK);
+        d.project.samples[0].pcm=(struct pt_pcm){data,4,4,48000,1,bits};
+        pt_sampler_init(&sampler,&a,1024*1024);
+        assert(pt_sampler_wavetable_bind(&bridge,&sampler,&d.project,&f->cache));
+        assert(sample_load(&bridge,0,&lease)==PT_CACHE_LOAD);
+        master=sampler.current[0];assert(master);
+        held_bytes=sampler.bytes;held_allocations=allocations;writes=f->writes;generation=sampler.generation;
+        memcpy(cache_before,&f->cache.cache,sizeof(cache_before));memcpy(ram_before,f->ram,sizeof(ram_before));
+        f->cache.owned=metadata_owned;metadata_owned_calls=0;
+        assert(pt_sampler_wavetable_prepared_metadata_current(&bridge));
+        /* Intentional test-only poison: this query is NOT a semantic validator.
+         * Restore before any ordinary source consumer or cleanup. */
+        value=d.project.samples[0].pcm.data[0];order=d.project.orders[0];
+        d.project.samples[0].pcm.data[0]=INT32_MAX;d.project.orders[0]=UINT16_MAX;
+        assert(pt_project_validate(&d.project,NULL)!=PT_PROJECT_OK);
+        assert(pt_sampler_wavetable_prepared_metadata_current(&bridge));
+        d.project.samples[0].pcm.data[0]=value;d.project.orders[0]=order;
+        ++sampler.generation;
+        assert(!pt_sampler_wavetable_prepared_metadata_current(&bridge));
+        sampler.generation=generation;
+        /* Matching source metadata cannot authorize even a currently unowned
+         * fake backend. No ownership callback or sticky fault is touched. */
+        f->healthy=0;
+        assert(pt_sampler_wavetable_prepared_metadata_current(&bridge));
+        assert(!metadata_owned_calls && !f->cache.faulted);
+        assert(!memcmp(cache_before,&f->cache.cache,sizeof(cache_before)));
+        assert(!memcmp(ram_before,f->ram,sizeof(ram_before)) && f->writes==writes);
+        assert(sampler.current[0]==master && sampler.bytes==held_bytes && allocations==held_allocations);
+        /* The original live gate still invokes ownership and latches a fault. */
+        assert(!pt_amigus_wavetable_cache_current(&f->cache));
+        assert(metadata_owned_calls==1 && f->cache.faulted);
+        assert(pt_sampler_wavetable_prepared_metadata_current(&bridge) && metadata_owned_calls==1);
+        assert(!memcmp(cache_before,&f->cache.cache,sizeof(cache_before)));
+        assert(pt_sampler_wavetable_unpin(&bridge,lease));
+        assert(pt_sampler_wavetable_close(&bridge) && pt_amigus_reservation_close(&f->reservation));
+        pt_sampler_release(&sampler);pt_document_release(&d);assert(!sampler.bytes && !allocations);
+    }
+    free(f);puts("SAMPLER METADATA PASS:8/16/24 source-only query, poisoned payload not scanned, stale refusal preserves active cache, zero callback/allocation/write; backend ownership remains separate; fake bus only");
+}
 static int sampler_fixture_main(void)
 {
     struct fixture *f=malloc(sizeof(*f));
@@ -99,7 +154,7 @@ static int sampler_fixture_main(void)
     struct pt_cache_lease old,newer,hit,undo,redo,metadata,grown,out={31,999};
     int32_t data[]={257,-513,1025,-2049};uint8_t *saved,held[8];size_t size,used;
     uint32_t address,bytes;unsigned writes;uint64_t version;
-    assert(f);assert(wavetable_fixture_main()==0);sampler_upload_fixture();init(f,PT_AMIGUS_WAVETABLE);
+    assert(f);assert(wavetable_fixture_main()==0);sampler_upload_fixture();sampler_metadata_fixture();init(f,PT_AMIGUS_WAVETABLE);
     assert(pt_amigus_wavetable_cache_attach(&f->cache,&f->reservation,16,112,112,f,bus_owned,bus_write));
     pt_document_init(&document,&allocator);assert(pt_document_new(&document,4,SIZE_MAX)==PT_PROJECT_OK);
     document.project.samples[0].pcm=(struct pt_pcm){data,4,4,48000,1,24};

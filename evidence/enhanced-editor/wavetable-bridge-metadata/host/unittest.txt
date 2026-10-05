@@ -1,0 +1,6 @@
+test_revision_and_master_lifetime (test_sampler_wavetable.SamplerWavetable.test_revision_and_master_lifetime) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 5.484s
+
+OK

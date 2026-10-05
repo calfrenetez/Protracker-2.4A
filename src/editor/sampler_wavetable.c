@@ -12,6 +12,14 @@ int pt_sampler_wavetable_bind(struct pt_sampler_wavetable *s,struct pt_sampler *
     s->table=project->samples;s->count=project->sample_count;s->generation=sampler->generation;s->version=1;
     return 1;
 }
+int pt_sampler_wavetable_prepared_metadata_current(const struct pt_sampler_wavetable *s)
+{
+    /* Deliberately do not call cache_current: it invokes owned() and can fault. */
+    return s && s->sampler && s->project && s->backend && s->version &&
+        s->generation==s->sampler->generation && s->table==s->project->samples &&
+        s->count==s->project->sample_count && s->count<=PT_PROJECT_SAMPLES &&
+        (!s->count || s->table);
+}
 int pt_sampler_wavetable_sync(struct pt_sampler_wavetable *s)
 {
     struct pt_project *p;

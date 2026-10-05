@@ -1,0 +1,20 @@
+{
+  "status": "SOURCE_AND_FIXTURE_NOT_RUN",
+  "files": {
+    "src/editor/sampler_wavetable.c": {
+      "bytes": 6727,
+      "sha256": "98784fff3238d96b91685f43a2b41f7bc93fd3be49f91eda5599a9089f3e634b"
+    },
+    "src/editor/sampler_wavetable_internal.h": {
+      "bytes": 1671,
+      "sha256": "def1ef4ed705a4b2d3af3030e1072dc7e74bd238bb9f23fbc701241b339fa4df"
+    },
+    "tests/sampler_wavetable_test.c": {
+      "bytes": 17774,
+      "sha256": "3143c24d299d3454563ec9cc110c2a4c347090c467d09d306edfe82a5d7bb75c"
+    }
+  },
+  "scope": "Three actual8/16/24 fake-bus scenarios preserve genuine active cache lease/master resources and prove no callback/allocation/write/semantic validation. Original backend current gate is explicitly exercised separately and still latches failure.",
+  "legacy": "New source function only; all pre-existing production bodies unchanged. Existing fixture calls new scenario after inherited fixtures.",
+  "limits": "Private already-validated immutable-caller contract; payload poison is test-only instrumentation, not permitted application mutation. Metadata is not backend ownership or validation. No mixed owner/PLAY integration, native/runtime/physical acceptance."
+}

@@ -1,0 +1,311 @@
+{
+  "status": "HOST_COMPILER_TASK_ADMISSION_ONLY_NATIVE_NOT_RUN",
+  "parent": "421220049c4959addd32b4001b2d2ead9c82ad6e",
+  "current_sources": {
+    "src/core/channels.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.h",
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": 420
+    },
+    "src/core/document.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.h",
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": 420
+    },
+    "src/core/elapsed_clock.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c",
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "mode": 420
+    },
+    "src/core/elapsed_clock.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.h",
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "mode": 420
+    },
+    "src/core/mod_inspect.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.h",
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": 420
+    },
+    "src/core/pcm.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.h",
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": 420
+    },
+    "src/core/pp20.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.h",
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": 420
+    },
+    "src/core/project.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.h",
+      "bytes": 8827,
+      "sha256": "e1a749800258b1f1db1dedcd7d5d36970abbf7494279cb3669212757f982e21a",
+      "mode": 420
+    },
+    "src/core/readers_activation.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/readers_activation.c",
+      "bytes": 24353,
+      "sha256": "7254863b4bf0221a67ab87b8870c226060e668276d1109971a7d0bd26362280e",
+      "mode": 420
+    },
+    "src/core/readers_activation.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/readers_activation.h",
+      "bytes": 6955,
+      "sha256": "4174c11e2e65a6c0210a13810acf6f24b07828a62a9c8b7481334ecd00a2717d",
+      "mode": 420
+    },
+    "src/core/scheduled_output.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/scheduled_output.h",
+      "bytes": 6515,
+      "sha256": "3289945d9446b373d8aa1897cb2c432f08ef253b443a81cd4dde39230df9b9da",
+      "mode": 292
+    },
+    "src/core/scheduled_readers.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/scheduled_readers.c",
+      "bytes": 28153,
+      "sha256": "d0b038022fc5d6b76c589af3094bda338374b2e151143a81a071f803e1e879f0",
+      "mode": 292
+    },
+    "src/core/scheduled_readers.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/scheduled_readers.h",
+      "bytes": 9906,
+      "sha256": "5a63c3da2c4b08eb9329d33c3679776c8554f6f96bb56bc3590f4afd9fd5e52c",
+      "mode": 292
+    },
+    "src/diagnostic/native_ram_entry.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/diagnostic/native_ram_entry.c",
+      "bytes": 48700,
+      "sha256": "df092aa3cce85a165cec6eed5d2ceed88f2814f68d9714fd473a8aa7cea2c0e4",
+      "mode": 420
+    },
+    "src/native/eclock.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/eclock.h",
+      "bytes": 2213,
+      "sha256": "12b0a505ac670356ca4f2729f940159f2608584e2a425ef558e08a68dbdb46c6",
+      "mode": 420
+    },
+    "src/native/eclock_alarm.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/eclock_alarm.h",
+      "bytes": 3872,
+      "sha256": "1171c061501a03ddb32a3d661650a7f682aaed9b76749a67778e723c7d64e79e",
+      "mode": 420
+    },
+    "src/native/master_memory.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/master_memory.h",
+      "bytes": 1694,
+      "sha256": "ac898368849ec2d1892717d425b90c398da37a8799d536366a898e2e219e184a",
+      "mode": 420
+    },
+    "src/native/native_checked_memory.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/native_checked_memory.c",
+      "bytes": 11795,
+      "sha256": "3febf3daf5187b58208bc7a0f1c5814615cff61f6923b28ede52263807ae6f6a",
+      "mode": 420
+    },
+    "src/native/native_checked_memory.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/native_checked_memory.h",
+      "bytes": 6180,
+      "sha256": "a1ad6f4dedcd8cd670867fc93dd65eb2d05bcc5049acdb70738e7286512d398a",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_cia_ram_adapter.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_cia_ram_adapter.c",
+      "bytes": 10477,
+      "sha256": "63b6eb3589eea6d729d8ff350ba08174ff5916d1e88d04f7a8225e6fadf85eaf",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_cia_ram_adapter.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_cia_ram_adapter.h",
+      "bytes": 4853,
+      "sha256": "08a0e16e33afd938a72b514b57f689523416ce81724060accd2b409511152199",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_ram_irq.s": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_ram_irq.s",
+      "bytes": 1062,
+      "sha256": "bf6ad045ca13189c8df8e5ba2438388589a60a4af3c11ad1eeaaf499d11b079c",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_ram_irq_dispatch.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_ram_irq_dispatch.c",
+      "bytes": 459,
+      "sha256": "9db4447cb8c6114dbc17732dad40144b86a5f1270e079d24b63c6e2e16a91703",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_ram_irq_layout.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_ram_irq_layout.h",
+      "bytes": 1530,
+      "sha256": "3f544a24350070d95118d15c4741bec48ecd388af5451123169e0858990ccc94",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_ram_port.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_ram_port.c",
+      "bytes": 11727,
+      "sha256": "8c6542df4c7ff471f5ac87a6321587e320b1570876e8c34d003b4343af53e9cf",
+      "mode": 420
+    },
+    "src/native/readers_ram/native_ram_port.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/native/readers_ram/native_ram_port.h",
+      "bytes": 4062,
+      "sha256": "3defa9b18a2545ee81bba3b32356b01d6d39e2d3ed9c36d1fa0894ba07003ffd",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/devices/timer.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/devices/timer.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/dos/dos.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/dos/dos.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/dos/dosextens.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/dos/dosextens.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/exec/errors.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/exec/errors.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/exec/execbase.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/exec/execbase.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/exec/interrupts.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/exec/interrupts.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/exec/memory.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/exec/memory.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/exec/tasks.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/exec/tasks.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/hardware/cia.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/hardware/cia.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/proto/cia.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/proto/cia.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/proto/dos.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/proto/dos.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/proto/exec.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/proto/exec.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_entry_host_sdk/proto/timer.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_entry_host_sdk/proto/timer.h",
+      "bytes": 114,
+      "sha256": "1f90a1aeb2ab80fe82e88167d0a4a016073042fb4d94916d61b7f1d975348fb7",
+      "mode": 420
+    },
+    "tests/native_ram_entry_host_stubs.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_ram_entry_host_stubs.c",
+      "bytes": 18649,
+      "sha256": "98595f4ce51d78f205e8ce11e7be6e5f00b22738f07c8f6ed54d96876af85800",
+      "mode": 420
+    },
+    "tests/native_ram_entry_host_stubs.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_ram_entry_host_stubs.h",
+      "bytes": 6362,
+      "sha256": "280b1539898908a21eea92ca733afe4a44a3cf8f0e53951890475f31bcbc9b29",
+      "mode": 420
+    },
+    "tests/native_ram_entry_model_test.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_ram_entry_model_test.c",
+      "bytes": 4565,
+      "sha256": "40df722ba827c13383eec2e53c0bd185801416dbf7d3d1010e8d332410874e57",
+      "mode": 420
+    },
+    "tests/test_native_ram_entry_model.py": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/test_native_ram_entry_model.py",
+      "bytes": 3014,
+      "sha256": "d2ef90e152ed5ba3fdddf666a2d547a3c046511c49ede808eb8f7516f02fbb56",
+      "mode": 420
+    }
+  },
+  "owned_code_changes": [
+    "src/diagnostic/native_ram_entry.c",
+    "tests/native_ram_entry_host_stubs.c",
+    "tests/native_ram_entry_host_stubs.h",
+    "tests/native_ram_entry_model_test.c",
+    "tests/test_native_ram_entry_model.py"
+  ],
+  "documentation_after_checks": {
+    "docs/NATIVE_RAM_ENTRY.md": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/docs/NATIVE_RAM_ENTRY.md",
+      "bytes": 5503,
+      "sha256": "df65aeda67ed95defd8f4785dd0d44be2dbbe67ab33bbd17ed129cd4815a4e65",
+      "mode": 420
+    },
+    "docs/SAMPLE_MEMORY.md": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/docs/SAMPLE_MEMORY.md",
+      "bytes": 348785,
+      "sha256": "578d2ef9a26692ba9be260d90d91d4d19c88a0d3bfc26b5d95bd1d97864449b0",
+      "mode": 420
+    }
+  },
+  "builder": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tools/build_native_ram_entry.py",
+    "bytes": 9533,
+    "sha256": "7ef9b4bbb3fec2b77ec3ee069320978f2cca9845d76eb521e4670d14f6c005b5",
+    "mode": 420
+  },
+  "source_origin": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-v1/source-revision-v2/source-seal-v2.json",
+    "bytes": 4049,
+    "sha256": "d7b307a59c99d870957c0faec2456471e7bda73a6889a00a45ea0e3a6b6a484d",
+    "mode": 420
+  },
+  "host_receipt": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-host-v1/execution.json",
+    "bytes": 114157,
+    "sha256": "652e319314e4211f6eb727ba736eb9286646a1c1e2760ba25a9c9d0975852314",
+    "mode": 420
+  },
+  "native_receipt": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/manifest.json",
+    "bytes": 258417,
+    "sha256": "773ff225447e555ee6ebeba80b40bd3c1d54f93aabe71160ca692470ec09e1ac",
+    "mode": 420
+  },
+  "protected16_unchanged": true,
+  "actual_native_execution": "NOT_RUN"
+}

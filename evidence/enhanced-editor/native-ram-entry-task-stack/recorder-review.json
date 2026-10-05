@@ -1,0 +1,115 @@
+{
+  "status": "CLEAR_SOURCE_RECORDER_ONLY",
+  "scope": "Finite passive recorder/control/source-pin review; no invocation, import, compiler, model, test, product, Git or target replay.",
+  "recorder": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-recorder-v1/source-revision-v2/run_task_stack_host_once.py",
+    "bytes": 8704,
+    "mode": 420,
+    "sha256": "8ff4ef93bdbf4d410d3e75f0eecea50dc6d5ae5949e646e5c1bc2cb2880a865a"
+  },
+  "seal": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-recorder-v1/source-revision-v2/source-seal-v2.json",
+    "bytes": 1346,
+    "mode": 420,
+    "sha256": "bee55de2797a0e3e7e9fe318c4feafe241d686f4c14eae2d2cbca62e2c8d0f26"
+  },
+  "preparation": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-recorder-v1/source-revision-v2/preparation-v2.json",
+    "bytes": 5213,
+    "mode": 420,
+    "sha256": "f5ea3dd9a2a109075de92469c33199b9498671d13d5b4ee70d9b341708f038a5"
+  },
+  "patch": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-recorder-v1/source-revision-v2/selected-source-root-and-reference-mode-only-v2.patch",
+    "bytes": 4612,
+    "mode": 420,
+    "sha256": "37f0b71c56fb9b91b9ad51bb5b0eebc2e527694081b244647cdcbe47662de925"
+  },
+  "prior_recorder": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-recorder-v1/run_task_stack_host_once.py",
+    "bytes": 7677,
+    "mode": 420,
+    "sha256": "feb082d9b137a9b6c296c512f8a4861102f9209f7f304d59a6caebd54ee71947"
+  },
+  "task_stack_source_review": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-v1/source-revision-v2/independent-source-review.json",
+    "bytes": 9062,
+    "mode": 420,
+    "sha256": "8585c1d5d7fa735e1f45892ba6c7eacc9c519c4c115aea9b86cecbf72da18814"
+  },
+  "selected_source_controls": {
+    "source-seal-v2.json": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-v1/source-revision-v2/source-seal-v2.json",
+      "bytes": 4049,
+      "sha256": "d7b307a59c99d870957c0faec2456471e7bda73a6889a00a45ea0e3a6b6a484d",
+      "mode": 420
+    },
+    "source-manifest-v2.json": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-v1/source-revision-v2/source-manifest-v2.json",
+      "bytes": 36700,
+      "sha256": "2a16a85c0f01a633f4d97ebe53957c9c33ae1f5d0344616b6636bec5b0f8a0ac",
+      "mode": 420
+    },
+    "host-recipe-v2.json": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-v1/source-revision-v2/host-recipe-v2.json",
+      "bytes": 3228,
+      "sha256": "9056462bd56401c8dc0740a864e64cd35d32e6c72c5326888b12ca1366ecdee1",
+      "mode": 420
+    },
+    "contract-v2.json": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-v1/source-revision-v2/contract-v2.json",
+      "bytes": 5090,
+      "sha256": "d92dad127945336d62790ac64957455f9f9dd3fc444705654ae5fa6d713f68ca",
+      "mode": 420
+    }
+  },
+  "compiler": {
+    "path": "/usr/bin/cc",
+    "bytes": 200560,
+    "mode": 493,
+    "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2"
+  },
+  "checks": {
+    "V1_to_V2_patch_exact": true,
+    "observe_and_restoration_suffix_bytes_unchanged": true,
+    "allowed_source_roots": "Only exact private V2 source or repository absolute path; root and ancestors reject symlinks",
+    "selected_source_count": 43,
+    "owned_exact_hash_length_mode0644": 5,
+    "references_exact_hash_length_sealed_or0444_mode": 38,
+    "current_repository_selected_sources_match": true,
+    "no_unrelated_repository_capture": true,
+    "root_approval_gate": "Required APPROVED_FIRST_ONCE_HOST_ONLY plus exact recorder/seal SHA and complete pinned independent CLEAR source-review record before output allocation or dispatch",
+    "compiler_sha_pinned_before_after": true,
+    "recipe": "Exact 10 C TUs and unchanged sanitizer/assertion flags; no native GAS",
+    "compile_calls": 1,
+    "legacy_case_calls": 54,
+    "additional_mode34_calls": 22,
+    "case_calls": 76,
+    "maximum_total_calls": 77,
+    "pass_markers_required": 76,
+    "full_stack_markers_required": 22,
+    "command_and_keyword_arguments_exact_interception": true,
+    "each_case_timeout_seconds": 20,
+    "product_hash_checked_before_each_child": true,
+    "STARTED_argv_cwd_saved_before_subprocess": true,
+    "raw_stdout_stderr_saved_even_after_BaseException": true,
+    "first_failure_stops_unittest_scope_no_retry": true,
+    "temporary_directory_cleanup_disabled": "Dedicated kept directory and no-op exit/cleanup; successful and partial product files remain on disk",
+    "normal_and_exception_restoration": "subprocess.run, TemporaryDirectory, sys.argv and original CC restored in finally",
+    "final_PASS_requires": "RC0, no outer error, 77 RC0 commands without exception, 76 common and 22 stack full markers, unchanged selected source records and compiler"
+  },
+  "findings": [],
+  "limits": {
+    "actual_host_execution": "NOT_RUN_BY_REVIEWER",
+    "partial_compile_product": "Retained physically in known directory; product metadata is populated only after successful compile",
+    "journal_fsync_or_power_loss_durability": "NOT_CLAIMED",
+    "native_assembly_ABI_execution": "NOT_QUALIFIED",
+    "aggregate_task_system_IRQ_stack": "UNKNOWN_NOT_CLEARED",
+    "65536_WCET_timing": "NOT_CLEARED",
+    "central_hold_Process_HUNK_launch": "NOT_ENFORCED",
+    "emulator_physical": "NOT_RUN"
+  },
+  "root_only_future_approval_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-recorder-v1/source-revision-v2/root-approval.json",
+  "output_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-host-v1",
+  "attribution": "Preserved V1 uninvoked. V2 changes only source-root/mode selection and corresponding provenance. The task gate is independently reviewed source, not aggregate native stack proof."
+}

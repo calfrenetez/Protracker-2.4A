@@ -6,6 +6,8 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <setjmp.h>
+#define PT_PRIVATE_NATIVE_ENTRY_HOST_MODEL 1
+uintptr_t entry_model_live_sp(void);
 #define PT_PRIVATE_CIA_ADAPTER_STUB 1
 #define PT_PRIVATE_NATIVE_RAM_IRQ_LAYOUT_H 1
 #include "../src/native/readers_ram/native_ram_port.h"
@@ -106,6 +108,7 @@ struct entry_model {
     unsigned abort_calls,waitio_calls,check_calls,delay_one,disable_depth,maximum_depth;
     unsigned adds,removes,signals,waits,irq_mode,source_exposed,hold,hold_trace;
     char output[8192]; size_t output_bytes;
+    uintptr_t live_sp; unsigned stack_reads; /* explicitly synthetic host SP */
     jmp_buf sink;
 };
 extern struct entry_model entry_model;

@@ -1,0 +1,37 @@
+    2326:	220f           	movel sp,d1
+    2328:	2039 0000 0008 	movel 8 <__stext+0x8>,d0
+    232e:	6700 1e82      	beqw 41b2 <_main+0x1f74>
+    2332:	2839 0000 000c 	movel c <__stext+0xc>,d4
+    2338:	7a01           	moveq #1,d5
+    233a:	ba84           	cmpl d4,d5
+    233c:	6400 1e74      	bccw 41b2 <_main+0x1f74>
+    2340:	4a81           	tstl d1
+    2342:	6700 1e6e      	beqw 41b2 <_main+0x1f74>
+    2346:	2a04           	movel d4,d5
+    2348:	8a80           	orl d0,d5
+    234a:	8a81           	orl d1,d5
+    234c:	0805 0000      	btst #0,d5
+    2350:	6600 1e60      	bnew 41b2 <_main+0x1f74>
+    2354:	5584           	subql #2,d4
+    2356:	b880           	cmpl d0,d4
+    2358:	6300 1e58      	blsw 41b2 <_main+0x1f74>
+    235c:	b081           	cmpl d1,d0
+    235e:	6200 1e52      	bhiw 41b2 <_main+0x1f74>
+    2362:	b881           	cmpl d1,d4
+    2364:	6300 1e4c      	blsw 41b2 <_main+0x1f74>
+    2368:	9280           	subl d0,d1
+    236a:	0c81 0000 7fff 	cmpil #32767,d1
+    2370:	6300 1e40      	blsw 41b2 <_main+0x1f74>
+    2374:	23c4 0000 0010 	movel d4,10 <__stext+0x10>
+    237a:	9880           	subl d0,d4
+    237c:	6700 1e08      	beqw 4186 <_main+0x1f48>
+    2380:	4a80           	tstl d0
+    2382:	6700 1e2e      	beqw 41b2 <_main+0x1f74>
+    2386:	4680           	notl d0
+    2388:	b084           	cmpl d4,d0
+    238a:	6500 1e26      	bcsw 41b2 <_main+0x1f74>
+    238e:	6000 1df6      	braw 4186 <_main+0x1f48>
+    2392:	7a02           	moveq #2,d5
+    2394:	2c79 0000 0000 	moveal 0 <__stext>,a6
+    239a:	2205           	movel d5,d1
+    239c:	4eae ff28      	jsr a6@(-216)

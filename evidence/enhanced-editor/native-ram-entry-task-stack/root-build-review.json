@@ -1,0 +1,33 @@
+{
+  "status": "CLEAR_SAVED_COMPILE_LINK_AND_LIVE_SP_INSTRUCTION_ONLY",
+  "commands": 22,
+  "C_units": 8,
+  "GAS_units": 1,
+  "source_unchanged": true,
+  "local_stack_rows": 109,
+  "unbounded_rows": 0,
+  "product": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/PTExecReadersRamEntryTest",
+    "resolved_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/PTExecReadersRamEntryTest",
+    "bytes": 59992,
+    "mode": 493,
+    "sha256": "b2e473d9e162358976dfddae8ca1651f1874e5687f8eba88187c9db1d7e18d36"
+  },
+  "linked_inspection": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/linked-inspection.json",
+    "bytes": 1659,
+    "sha256": "4f99d2611e6fe7be4e5f05faff242a92e219df797e3b66c2967ee33732f310c3",
+    "mode": 420
+  },
+  "finite_admission_excerpt": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/task-admission-disassembly.txt",
+    "bytes": 1595,
+    "sha256": "cf036004c0e757a939f5b50e9ba7e37c670d58a747c32d601a0c2775eb1dbe59",
+    "mode": 420
+  },
+  "live_SP": "PC2326 movel sp,d1",
+  "usable_upper": "PC2354 subql #2,d4",
+  "threshold": "PC236a cmpil #32767,d1; PC2370 unsigned bls to refusal",
+  "later_availability_query": "PC239c LVO-216",
+  "limits": "No product execution. Aggregate task/system/IRQ stack, actual placement, scheduling and launch retention remain unqualified."
+}

@@ -36,6 +36,8 @@ void entry_model_start(enum entry_model_mode mode,unsigned ordinal,const void *s
      * Production guards only compare this interval; no stack bytes are read.
      */
     assert(x>64U*1024U*1024U&&x<UINTPTR_MAX-64U*1024U*1024U);
+    x&=~(uintptr_t)1U; /* word alignment is modeled, not measured native SP */
+    m->live_sp=x;
     m->process.pr_Task.tc_SPLower=(void *)(x-64U*1024U*1024U);
     m->process.pr_Task.tc_SPUpper=(void *)(x+64U*1024U*1024U);
     m->original_signals=(UINT32_C(1)<<7)|SIGBREAKF_CTRL_C;
@@ -51,6 +53,8 @@ void entry_model_start(enum entry_model_mode mode,unsigned ordinal,const void *s
         for(j=0;j<2;++j)if(mode==EM_CIA_BUSY)m->resource[i].vector[j]=&m->foreign[i][j];
     }
 }
+uintptr_t entry_model_live_sp(void)
+{++entry_model.stack_reads;return entry_model.live_sp;}
 struct Task *FindTask(void *name){assert(!name);return entry_model.task;}
 ULONG AvailMem(ULONG flags)
 {task();if(entry_model.mode==EM_NO_FAST&&(flags&MEMF_FAST))return 0;return 8U*1024U*1024U;}

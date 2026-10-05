@@ -1,0 +1,23 @@
+{
+  "status": "CLEAR_SAVED_76_HOST_CASES_ONLY",
+  "report": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-host-v1/execution.json",
+    "bytes": 114157,
+    "sha256": "652e319314e4211f6eb727ba736eb9286646a1c1e2760ba25a9c9d0975852314",
+    "mode": 420
+  },
+  "command_count": 77,
+  "case_count": 76,
+  "original_cases": 54,
+  "new_stack_cases": 22,
+  "new_refusals": 19,
+  "new_admissions": 3,
+  "unchanged_source": true,
+  "product": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-host-v1/retained-model/entry-host-model",
+    "bytes": 817696,
+    "sha256": "844866f2ebf1a8512323811cdd755273f2240853cc87e326940203ef161fb307",
+    "mode": 493
+  },
+  "target_execution": "NOT_RUN"
+}

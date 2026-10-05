@@ -1,0 +1,7 @@
+# Native RAM entry task admission
+
+The current opt-in diagnostic checks live m68k SP before explicit availability/allocation/timer acquisition. It requires an ordinary DOS Process, nonzero ordered word-aligned usable stack bounds and at least 32,768 bytes of declared downward headroom. Raw Task upper remains its identity; usable upper excludes the documented plus-two convention. This is an admission policy, not actual capacity or aggregate stack proof.
+
+One integrated ASan/UBSan matrix passed 76 fresh processes: the unchanged 54 lifetime cases plus 22 new stack cases, including 19 refusals with zero acquisition effects and three valid threshold admissions. The host SP is explicitly synthetic. The native builder passed 22 commands, 8 C+1 GAS units, with 109 bounded local stack annotations. The 59,992-byte HUNK SHA256 is b2e473d9e162358976dfddae8ca1651f1874e5687f8eba88187c9db1d7e18d36. One pinned read-only disassembly confirms actual native SP capture and unsigned threshold before the availability query.
+
+No HUNK was executed. Amiberry, physical A1200, live CIA/IRQ, aggregate task/system/IRQ stacks, residency, timing and listening remain NOT RUN or UNKNOWN. Shared durable launcher enforcement and recovery holds remain separate prerequisites. Old evidence remains at ../native-ram-entry; no earlier failed candidate or scope was retried unchanged. Raw host product/logs, objects, dependency/SU files and complete linked disassembly remain at the exact retained paths in these receipts.

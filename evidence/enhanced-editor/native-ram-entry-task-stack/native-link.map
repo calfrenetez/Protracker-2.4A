@@ -1,0 +1,336 @@
+Archive member included to satisfy reference by file (symbol)
+
+/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix20.a(__mulsi3.o)
+                              /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu00.o (__mulsi3)
+/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix20.a(__nocommandline.o)
+                              /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o (__nocommandline)
+/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix20.a(__udivsi3.o)
+                              /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu05.o (__umodsi3)
+/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnixmain.a(__stdiowin.o)
+                              /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix20.a(__nocommandline.o) (__stdiowin)
+/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix.a(__initcpp.o)
+                              /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o (__initcpp)
+/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix.a(__initlibraries.o)
+                              /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o (__initlibraries)
+/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix.a(memcpy.o)
+                              /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu04.o (memcpy)
+/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix.a(memset.o)
+                              /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu00.o (memset)
+/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix.a(strlen.o)
+                              /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix.a(__initlibraries.o) (strlen)
+/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/lib//libstubs.a(dos.o)
+                              /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu00.o (DOSBase)
+/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/lib//libstubs.a(utility.o)
+                              /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix20.a(__mulsi3.o) (UtilityBase)
+/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/lib/gcc/m68k-amigaos/6.5.0b/libgcc.a(_muldi3.o)
+                              /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu05.o (__muldi3)
+/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/lib/gcc/m68k-amigaos/6.5.0b/libgcc.a(_udivdi3.o)
+                              /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu00.o (__udivdi3)
+/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/lib/gcc/m68k-amigaos/6.5.0b/libgcc.a(_umoddi3.o)
+                              /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu05.o (__umoddi3)
+/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/lib/gcc/m68k-amigaos/6.5.0b/libgcc.a(_clz.o)
+                              /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/lib/gcc/m68k-amigaos/6.5.0b/libgcc.a(_udivdi3.o) (__clz_tab)
+
+Allocating common symbols
+Common symbol       size              file
+
+_WBenchMsg          0x4               /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o
+__argv              0x4               /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o
+__commandlen        0x4               /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o
+__commandline       0x4               /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o
+__env               0x4               /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o
+__argc              0x4               /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o
+
+There are no discarded input sections
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o
+LOAD /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu00.o
+LOAD /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu01.o
+LOAD /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu02.o
+LOAD /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu03.o
+LOAD /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu04.o
+LOAD /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu05.o
+LOAD /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu06.o
+LOAD /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu07.o
+LOAD /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu08.o
+START GROUP
+LOAD /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix20.a
+LOAD /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnixmain.a
+LOAD /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix.a
+LOAD /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/lib//libstubs.a
+LOAD /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/lib//libamiga.a
+LOAD /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/lib/gcc/m68k-amigaos/6.5.0b/libgcc.a
+END GROUP
+                [!provide]                        PROVIDE (___machtype = 0x0)
+                0x00000000                        . = 0x0
+
+.text           0x00000000     0xd3f8
+                0x00000000                        __stext = .
+ *(.text)
+ .text          0x00000000       0xd8 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o
+                0x00000000                start
+                0x00000064                _exit
+                0x00000064                exit
+                0x0000007c                _Exit
+                0x0000007c                ___exit
+                0x000000d4                __main
+ .text          0x000000d8     0x4438 /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu00.o
+                0x0000223e                main
+ .text          0x00004510      0x1d0 /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu00.o
+ .text          0x000046e0      0xf5c /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu01.o
+                0x00005266                pt_private_ram_init
+                0x00005346                pt_private_ram_api
+                0x00005390                pt_private_ram_dispatch
+                0x0000557a                pt_private_ram_source_close
+ .text          0x0000563c       0x20 /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu02.o
+                0x0000563c                pt_private_native_ram_dispatch
+ .text          0x0000565c      0xa54 /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu03.o
+                0x0000583e                pt_private_cia_ram_clock
+                0x00005900                pt_private_cia_ram_acquire
+                0x00005b5e                pt_private_cia_ram_arm_at
+                0x00005da0                pt_private_cia_ram_disarm
+                0x00005e4e                pt_private_cia_ram_ticket_quiet
+                0x00005f7a                pt_private_cia_ram_source_close
+                0x00006080                pt_private_cia_ram_api
+ .text          0x000060b0      0xa34 /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu04.o
+                0x00006346                pt_private_native_memory_init
+                0x00006554                pt_private_native_allocate
+                0x000067b2                pt_private_native_release_checked
+                0x00006906                pt_private_native_release
+                0x00006910                pt_private_native_memory_seal
+                0x00006968                pt_private_native_memory_retain
+                0x000069a4                pt_private_native_memory_finish
+                0x00006a1c                pt_private_native_memory_stats
+ .text          0x00006ae4      0x600 /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu05.o
+                0x00006ae4                pt_elapsed_clock_init
+                0x00006b60                pt_elapsed_clock_advance
+                0x00006e18                pt_elapsed_clock_deadline
+ .text          0x000070e4     0x256c /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu06.o
+                0x000074fc                pt_readers_open
+                0x000077ee                pt_readers_enqueue
+                0x000084b4                pt_readers_publish
+                0x000089e6                pt_readers_poll_command
+                0x00008a04                pt_readers_cancel_command
+                0x00008d46                pt_readers_poll_reader
+                0x00008d76                pt_readers_cancel_reader
+                0x00008da8                pt_readers_reader_key
+                0x00008e74                pt_readers_stop
+                0x00008efe                pt_readers_commands_held
+                0x00008f18                pt_readers_readers_held
+                0x00008f32                pt_readers_close
+ .text          0x00009650       0x4c /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu06.o
+ .text          0x0000969c     0x1e50 /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu07.o
+                0x0000a5f0                pt_readers_activation_fire
+                0x0000b0f6                pt_readers_activation_open
+                0x0000b38c                pt_readers_activation_api
+                0x0000b44c                pt_readers_activation_close
+ .text          0x0000b4ec       0x54 /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu08.o
+                0x0000b4ec                pt_private_native_ram_irq
+ .text          0x0000b540       0x10 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix20.a(__mulsi3.o)
+                0x0000b540                __mulsi3
+ .text          0x0000b550      0x48c /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix20.a(__nocommandline.o)
+                0x0000b550                __nocommandline
+                0x0000b8f4                __exitcommandline
+ .text          0x0000b9dc       0x1c /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix20.a(__udivsi3.o)
+                0x0000b9dc                __umodsi3
+                0x0000b9e8                __udivsi3
+ .text          0x0000b9f8       0x1c /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnixmain.a(__stdiowin.o)
+ .text          0x0000ba14       0x6c /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix.a(__initcpp.o)
+                0x0000ba14                __initcpp
+                0x0000ba54                __exitcpp
+ .text          0x0000ba80      0x168 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix.a(__initlibraries.o)
+                0x0000bb42                __initlibraries
+                0x0000bb9e                __exitlibraries
+ .text          0x0000bbe8       0x3c /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix.a(memcpy.o)
+                0x0000bbe8                memcpy
+ .text          0x0000bc24       0xd8 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix.a(memset.o)
+                0x0000bc24                memset
+ .text          0x0000bcfc       0x34 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix.a(strlen.o)
+                0x0000bcfc                strlen
+ .text          0x0000bd30        0xc /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/lib//libstubs.a(dos.o)
+ .text          0x0000bd3c       0x10 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/lib//libstubs.a(utility.o)
+ .text          0x0000bd4c       0xc8 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/lib/gcc/m68k-amigaos/6.5.0b/libgcc.a(_muldi3.o)
+                0x0000bd4c                __muldi3
+ .text          0x0000be14      0xa50 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/lib/gcc/m68k-amigaos/6.5.0b/libgcc.a(_udivdi3.o)
+                0x0000be14                __udivdi3
+ .text          0x0000c864      0xa50 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/lib/gcc/m68k-amigaos/6.5.0b/libgcc.a(_umoddi3.o)
+                0x0000c864                __umoddi3
+ .text          0x0000d2b4      0x100 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/lib/gcc/m68k-amigaos/6.5.0b/libgcc.a(_clz.o)
+                0x0000d2b4                __clz_tab
+ *(.text.main)
+ *(.text*)
+ *(_*)
+ *(.rodata*)
+ *(.data.rel.ro*)
+ *(.gnu.linkonce.t.*)
+ *(.gnu.linkonce.r.*)
+ *(.gcc_except_table*)
+ *(SORT_BY_NAME(.list___EH_FRAME*))
+ *(SORT_BY_NAME(.list_*))
+ .list___CTOR_LIST__
+                0x0000d3b4        0x4 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o
+                0x0000d3b4                __CTOR_LIST__
+ .list___DTOR_LIST__
+                0x0000d3b8        0x4 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o
+                0x0000d3b8                __DTOR_LIST__
+ .list___EXIT_LIST__
+                0x0000d3bc        0x4 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o
+                0x0000d3bc                __EXIT_LIST__
+ .list___EXIT_LIST__
+                0x0000d3c0        0x8 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix20.a(__nocommandline.o)
+ .list___EXIT_LIST__
+                0x0000d3c8        0x8 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix.a(__initcpp.o)
+ .list___EXIT_LIST__
+                0x0000d3d0        0x8 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix.a(__initlibraries.o)
+ .list___INIT_LIST__
+                0x0000d3d8        0x4 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o
+                0x0000d3d8                __INIT_LIST__
+ .list___INIT_LIST__
+                0x0000d3dc        0x8 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix20.a(__nocommandline.o)
+ .list___INIT_LIST__
+                0x0000d3e4        0x8 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix.a(__initcpp.o)
+ .list___INIT_LIST__
+                0x0000d3ec        0x8 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix.a(__initlibraries.o)
+ *(.end_of_lists)
+ .end_of_lists  0x0000d3f4        0x4 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o
+                0x0000d3f8                        ___datadata_relocs = .
+                0x0000d3f8                        __etext = .
+                0x0000d3f8                        ___text_size = SIZEOF (.text)
+                0x0000d3f8                        . = ALIGN (0x0)
+
+.data           0x0000d3f8       0x30
+                0x0000d3f8                        __sdata = .
+ *(.data)
+ .data          0x0000d3f8        0xc /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o
+                0x0000d3f8                SysBase
+                0x0000d3fc                __SaveSP
+ .data          0x0000d404        0x8 /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu00.o
+ .data          0x0000d40c        0x4 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnixmain.a(__stdiowin.o)
+                0x0000d40c                __stdiowin
+ *(SORT_BY_NAME(.data.*))
+ *(SORT_BY_NAME(.dlist___EH_FRAME_OBJECT*))
+ *(SORT_BY_NAME(.dlist_*))
+ .dlist___LIB_LIST__
+                0x0000d410        0x4 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o
+                0x0000d410                __LIB_LIST__
+ .dlist___LIB_LIST__
+                0x0000d414        0x8 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/lib//libstubs.a(dos.o)
+                0x0000d414                DOSBase
+ .dlist___LIB_LIST__
+                0x0000d41c        0x8 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/lib//libstubs.a(utility.o)
+                0x0000d41c                UtilityBase
+ *(.end_of_dlists)
+ .end_of_dlists
+                0x0000d424        0x4 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o
+ *(.data.__EH_FRAME_OBJECT__*)
+ *(.gnu.linkonce.d.*)
+                0x0000d428                        __edata = .
+                0x00000030                        ___data_size = SIZEOF (.data)
+
+.bss            0x0000d428      0x12c
+                0x0000d428                        __bss_start = .
+ *(.bss)
+ .bss           0x0000d428        0x4 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o
+ .bss           0x0000d42c      0x104 /Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/tu00.o
+ .bss           0x0000d530        0xc /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix20.a(__nocommandline.o)
+ *(.bss.*)
+ *(COMMON)
+ COMMON         0x0000d53c       0x18 /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o
+                0x0000d53c                _WBenchMsg
+                0x0000d540                __argv
+                0x0000d544                __commandlen
+                0x0000d548                __commandline
+                0x0000d54c                __env
+                0x0000d550                __argc
+                0x0000d554                        __end = .
+                0x0000012c                        ___bss_size = SIZEOF (.bss)
+
+.datachip
+ *(.datachip)
+
+.bsschip
+ *(.bsschip)
+
+.debug_frame    0x0000d554        0x0
+                0x0000d554                        __debug_frame_start = .
+ *(.debug_frame)
+                0x0000d554                        __debug_frame_end = .
+
+.debug_info     0x0000d554        0x0
+                0x0000d554                        __debug_info_start = .
+ *(.debug_info)
+ *(.gnu.linkonce.wi.*)
+                0x0000d554                        __debug_info_end = .
+
+.debug_abbrev   0x0000d554        0x0
+                0x0000d554                        __debug_abbrev_start = .
+ *(.debug_abbrev)
+                0x0000d554                        __debug_abbrev_end = .
+
+.debug_loclists
+                0x0000d554        0x0
+                0x0000d554                        __debug_loclists_start = .
+ *(.debug_loclists)
+                0x0000d554                        __debug_loclists_end = .
+
+.debug_aranges  0x0000d554        0x0
+                0x0000d554                        __debug_aranges_start = .
+ *(.debug_aranges)
+                0x0000d554                        __debug_aranges_end = .
+
+.debug_rnglists
+                0x0000d554        0x0
+                0x0000d554                        __debug_rnglists_start = .
+ *(.debug_rnglists)
+                0x0000d554                        __debug_rnglists_end = .
+
+.debug_line     0x0000d554        0x0
+                0x0000d554                        __debug_line_start = .
+ *(.debug_line)
+ *(.debug_line.*)
+                0x0000d554                        __debug_line_end = .
+
+.debug_str      0x0000d554        0x0
+                0x0000d554                        __debug_str_start = .
+ *(.debug_str)
+                0x0000d554                        __debug_str_end = .
+
+.debug_line_str
+                0x0000d554        0x0
+                0x0000d554                        __debug_line_str_start = .
+ *(.debug_line_str)
+                0x0000d554                        __debug_line_str_end = .
+
+.debug_types    0x0000d554        0x0
+                0x0000d554                        __debug_types_start = .
+ *(.debug_types)
+                0x0000d554                        __debug_types_end = .
+
+.debug_macro    0x0000d554        0x0
+                0x0000d554                        __debug_macro_start = .
+ *(.debug_macro)
+                0x0000d554                        __debug_macro_end = .
+
+.debug_ranges   0x0000d554        0x0
+                0x0000d554                        __debug_ranges_start = .
+ *(.debug_ranges)
+                0x0000d554                        __debug_ranges_end = .
+
+.debug_addr     0x0000d554        0x0
+                0x0000d554                        __debug_addr_start = .
+ *(.debug_addr)
+                0x0000d554                        __debug_addr_end = .
+
+.debug_str_offsets
+                0x0000d554        0x0
+                0x0000d554                        __debug_str_offsets_start = .
+ *(.debug_str_offsets)
+                0x0000d554                        __debug_str_offsets_end = .
+OUTPUT(/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/PTExecReadersRamEntryTest amiga)

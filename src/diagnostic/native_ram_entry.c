@@ -24,6 +24,8 @@
 #define ENTRY_EARLY 128U
 #define ENTRY_RESIDENCY 256U
 #define ENTRY_READS 64U
+/* Diagnostic admission policy only; not a total task/IRQ stack bound. */
+#define ENTRY_TASK_MIN_HEADROOM 32768U
 
 struct entry_watch {
     struct pt_private_native_memory *memory;
@@ -68,7 +70,8 @@ struct entry_state {
  */
 struct entry_bootstrap {
     struct Task *task;
-    void *stack_lower,*stack_upper;
+    void *stack_lower,*stack_upper; /* raw upper retained for Task identity */
+    void *stack_usable_upper;
     ULONG original_signals,completion_mask,termination_mask,clock_mask;
     BYTE priority;
     LONG completion_signal;
@@ -245,22 +248,50 @@ static void entry_allocator_release(void *context,void *p)
     if(result!=PT_PRIVATE_MEMORY_OK)entry_hold("core checked release refused");
 }
 
+/* Only the forced host-model build injects a synthetic pointer. Native code
+ * observes the running m68k SP; tc_SPReg and addresses of locals are not SP.
+ * CRT/main/getter frames already exist, so this cannot rescue a bad launcher.
+ */
+static uintptr_t entry_live_sp(void)
+{
+#ifdef PT_PRIVATE_NATIVE_ENTRY_HOST_MODEL
+    return entry_model_live_sp();
+#else
+    uintptr_t pointer;
+    __asm__ volatile ("move.l %%sp,%0" : "=r" (pointer) : : "memory");
+    return pointer;
+#endif
+}
+static int entry_task_stack_admitted(uintptr_t lower,uintptr_t raw_upper,uintptr_t pointer)
+{
+    uintptr_t upper;
+    /* Pinned Task header describes tc_SPUpper as upper bound + 2. Exclude
+     * those two bytes and use checked subtraction before any span arithmetic.
+     */
+    if(!lower||!raw_upper||!pointer||raw_upper<2U||((lower|raw_upper|pointer)&1U))return 0;
+    upper=raw_upper-2U;
+    if(upper<=lower||pointer<lower||pointer>=upper)return 0;
+    return pointer-lower>=ENTRY_TASK_MIN_HEADROOM;
+}
+
 /* Independent bootstrap ownership has no prepended allocation header, copied
  * owner or self-allocation. Any ambiguous non-NULL return is retained in the
  * static bootstrap record without dereferencing/freeing the suspect control.
  */
 static int entry_bootstrap_open(void)
 {
-    struct pt_master_memory policy;unsigned char stack_byte;void *p;size_t n=sizeof(struct pt_private_native_memory),stack_n;
+    struct pt_master_memory policy;uintptr_t stack_pointer;void *p;size_t n=sizeof(struct pt_private_native_memory),stack_n;
     if(SysBase->LibNode.lib_Version<36)return 0;
     bootstrap.task=FindTask(NULL);
     if(!bootstrap.task||bootstrap.task->tc_Node.ln_Type!=NT_PROCESS)return 0;
     bootstrap.priority=bootstrap.task->tc_Node.ln_Pri;bootstrap.original_signals=bootstrap.task->tc_SigAlloc;
     bootstrap.stack_lower=bootstrap.task->tc_SPLower;bootstrap.stack_upper=bootstrap.task->tc_SPUpper;
-    if((uintptr_t)bootstrap.stack_upper<=(uintptr_t)bootstrap.stack_lower)return 0;
-    stack_n=(uintptr_t)bootstrap.stack_upper-(uintptr_t)bootstrap.stack_lower;
-    if(!entry_span(bootstrap.stack_lower,stack_n)||(uintptr_t)&stack_byte<(uintptr_t)bootstrap.stack_lower||
-       (uintptr_t)&stack_byte>=(uintptr_t)bootstrap.stack_upper)return 0;
+    stack_pointer=entry_live_sp();
+    if(!entry_task_stack_admitted((uintptr_t)bootstrap.stack_lower,
+         (uintptr_t)bootstrap.stack_upper,stack_pointer))return 0;
+    bootstrap.stack_usable_upper=(void *)((uintptr_t)bootstrap.stack_upper-2U);
+    stack_n=(uintptr_t)bootstrap.stack_usable_upper-(uintptr_t)bootstrap.stack_lower;
+    if(!entry_span(bootstrap.stack_lower,stack_n))return 0;
     pt_master_memory_init(&policy);
     entry_require_task("original task changed during bootstrap availability queries");
     if(policy.flags!=MEMF_FAST||policy.limit<n)return 0;
@@ -351,7 +382,7 @@ static int entry_os_open(void)
 }
 static int entry_memory_open(void)
 {
-    size_t stack_n=(uintptr_t)bootstrap.stack_upper-(uintptr_t)bootstrap.stack_lower;
+    size_t stack_n=(uintptr_t)bootstrap.stack_usable_upper-(uintptr_t)bootstrap.stack_lower;
     unsigned i=0;int result;
     entry_require_task("original task changed before checked-memory initialization");
     bootstrap.guard[i++]=(struct pt_private_memory_span){&bootstrap,sizeof(bootstrap)};

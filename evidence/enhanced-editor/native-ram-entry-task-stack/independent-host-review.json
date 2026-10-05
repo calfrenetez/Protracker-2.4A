@@ -1,0 +1,124 @@
+{
+  "status": "CLEAR_SAVED_TASK_STACK_HOST_MODEL_ONLY",
+  "execution": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-host-v1/execution.json",
+    "bytes": 114157,
+    "sha256": "652e319314e4211f6eb727ba736eb9286646a1c1e2760ba25a9c9d0975852314",
+    "mode": 420
+  },
+  "method": "Passive actual saved JSON/raw-log/source/product reads, pure AST and Mach-O symbol-table parsing; no producer replay/import",
+  "counts": {
+    "commands_RC0": 77,
+    "compile_RC0": 1,
+    "case_processes_RC0": 76,
+    "production_C_TUs": 8,
+    "model_C_TUs": 2,
+    "raw_empty_stderr_files": 77,
+    "complete_common_markers": 76,
+    "complete_stack_markers": 22,
+    "exact_before_after_current_source_records": 43,
+    "original_case_results": {
+      "success": 3,
+      "clean_refusal": 30,
+      "retained_HOLD": 21
+    },
+    "new_stack_case_results": {
+      "pre_resource_zero_effect_refusal": 19,
+      "policy_admission_full_model_success": 3
+    },
+    "ASan_symbol_table_entries": 1241,
+    "UBSan_symbol_table_entries": 9,
+    "active_assertion_symbol_entries": 1
+  },
+  "literal_source_order": [
+    "tests/native_ram_entry_model_test.c",
+    "tests/native_ram_entry_host_stubs.c",
+    "src/diagnostic/native_ram_entry.c",
+    "src/native/readers_ram/native_ram_port.c",
+    "src/native/readers_ram/native_ram_irq_dispatch.c",
+    "src/native/readers_ram/native_cia_ram_adapter.c",
+    "src/native/native_checked_memory.c",
+    "src/core/elapsed_clock.c",
+    "src/core/scheduled_readers.c",
+    "src/core/readers_activation.c"
+  ],
+  "literal_flags": [
+    "-std=c99",
+    "-O1",
+    "-g",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fsanitize=address,undefined",
+    "-fno-omit-frame-pointer",
+    "-UNDEBUG",
+    "-Isrc/core",
+    "-Isrc/native",
+    "-Itests/native_entry_host_sdk",
+    "-include",
+    "tests/native_ram_entry_host_stubs.h",
+    "-Dmain=pt_entry_model_main"
+  ],
+  "compiler": {
+    "path": "/usr/bin/cc",
+    "bytes": 200560,
+    "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+    "mode": 493
+  },
+  "source_identity": {
+    "selected_root": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+    "owned5_exact_0644": true,
+    "refs38_exact_SHA_bytes_current_mode_0644_or_0444": true,
+    "selected_controls_exact": true,
+    "root_approval_and_independent_source_review_exact": true,
+    "recorder_argv_SHA_exact": true,
+    "all43_current_records_match_saved_before_after": true
+  },
+  "actual_compile_product_case_edges_exact": true,
+  "original54_raw_stdout_matches_prior_qualified_host_lane_byte_exact": true,
+  "original_proof": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-integrated-host-v1/execution.json",
+    "bytes": 85753,
+    "sha256": "dde2b1216c6992f0fd77336cc624f76d7ba64cb6109c2dc59df38c0aa30e1d37",
+    "mode": 420
+  },
+  "new_oracles": {
+    "policy_admitted_ordinals": [
+      13,
+      17,
+      20
+    ],
+    "pre_resource_refusals": 19,
+    "refusal_resource_trace": 0,
+    "refusal_compiled_assertions": "No hold/allocation/free/port/request/open/close/abort/wait/check/delay/CIA add/remove/signal/wait/disable effects; original signal mask/notification unchanged; non-DOS case does not capture SP",
+    "admission_compiled_assertions": "Exactly one synthetic SP capture then genuine full software-resource model oracle, full ownership cleanup and result0",
+    "boundary_scope": "Malformed/null/wrapped/misaligned bounds/SP, usable rawUpper-2 exclusion, policy32768 threshold and last usable aligned SP. SP and bounds are synthetic host inputs."
+  },
+  "product": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-host-v1/retained-model/entry-host-model",
+    "bytes": 817696,
+    "sha256": "844866f2ebf1a8512323811cdd755273f2240853cc87e326940203ef161fb307",
+    "mode": 493
+  },
+  "suite_stdout": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-host-v1/suite.stdout.txt",
+    "bytes": 20027,
+    "sha256": "5c5d6067bc334976f3a21b417650e63c74652a3c60f1ace1a9b5c37cf23187a3",
+    "mode": 420
+  },
+  "suite_stderr": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-host-v1/suite.stderr.txt",
+    "bytes": 98,
+    "sha256": "e93d57628f1f423c068c04199746c275a73ae49e9f6b5d9b373d4e57b5c31b35",
+    "mode": 420
+  },
+  "suite_stderr_scope": "Only normal unittest1OK summary; all77raw command stderrs empty",
+  "attribution": "Seven unchanged production C files plus the intentionally changed entry; the inherited recipe all8-byte-exact sentence is not adopted. Eight production files were compiled separately with two model TUs.",
+  "limits": [
+    "No native SP instruction/ABI execution, actual native stack capacity/aggregate/task or system-stack safety/IRQ/CIA/timing/WCET/65536 or launch clearance",
+    "No GAS in this host suite and no full-M external host SDK closure claim",
+    "Source guard is a pre-resource admission policy; existing CRT/main/getter frames and future OS/IRQ stack remain separate",
+    "No target/transport/central-HOLD ownership evidence inferred from modeled retained HOLD or success"
+  ],
+  "no_helper_recipe_model_compiler_product_import_Git_or_target_invocation": true
+}

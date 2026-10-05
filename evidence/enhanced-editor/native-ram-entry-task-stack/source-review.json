@@ -1,0 +1,160 @@
+{
+  "status": "CLEAR_SOURCE_TASK_STACK_ADMISSION_ONLY",
+  "scope": "Independent source-only review. No compiler, test, model, candidate import, helper, Git, target or shared harness operation.",
+  "source_seal": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-v1/source-revision-v2/source-seal-v2.json",
+    "bytes": 4049,
+    "mode": 420,
+    "sha256": "d7b307a59c99d870957c0faec2456471e7bda73a6889a00a45ea0e3a6b6a484d"
+  },
+  "source_manifest": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-v1/source-revision-v2/source-manifest-v2.json",
+    "bytes": 36700,
+    "mode": 420,
+    "sha256": "2a16a85c0f01a633f4d97ebe53957c9c33ae1f5d0344616b6636bec5b0f8a0ac"
+  },
+  "contract": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-v1/source-revision-v2/contract-v2.json",
+    "bytes": 5090,
+    "mode": 420,
+    "sha256": "d92dad127945336d62790ac64957455f9f9dd3fc444705654ae5fa6d713f68ca"
+  },
+  "host_recipe": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-v1/source-revision-v2/host-recipe-v2.json",
+    "bytes": 3228,
+    "mode": 420,
+    "sha256": "9056462bd56401c8dc0740a864e64cd35d32e6c72c5326888b12ca1366ecdee1"
+  },
+  "V1_to_V2_patch": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-v1/source-revision-v2/usable-stack-span-v2.patch",
+    "bytes": 1501,
+    "mode": 420,
+    "sha256": "3e8730df3deb9d51c6924807bb08a59584ded5257aa7e52b077aff446118bc0a"
+  },
+  "owned_candidate_files": {
+    "src/diagnostic/native_ram_entry.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-v1/source-revision-v2/source/src/diagnostic/native_ram_entry.c",
+      "bytes": 48700,
+      "mode": 420,
+      "sha256": "df092aa3cce85a165cec6eed5d2ceed88f2814f68d9714fd473a8aa7cea2c0e4"
+    },
+    "tests/native_ram_entry_host_stubs.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-v1/source-revision-v2/source/tests/native_ram_entry_host_stubs.c",
+      "bytes": 18649,
+      "mode": 420,
+      "sha256": "98595f4ce51d78f205e8ce11e7be6e5f00b22738f07c8f6ed54d96876af85800"
+    },
+    "tests/native_ram_entry_host_stubs.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-v1/source-revision-v2/source/tests/native_ram_entry_host_stubs.h",
+      "bytes": 6362,
+      "mode": 420,
+      "sha256": "280b1539898908a21eea92ca733afe4a44a3cf8f0e53951890475f31bcbc9b29"
+    },
+    "tests/native_ram_entry_model_test.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-v1/source-revision-v2/source/tests/native_ram_entry_model_test.c",
+      "bytes": 4565,
+      "mode": 420,
+      "sha256": "40df722ba827c13383eec2e53c0bd185801416dbf7d3d1010e8d332410874e57"
+    },
+    "tests/test_native_ram_entry_model.py": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-v1/source-revision-v2/source/tests/test_native_ram_entry_model.py",
+      "bytes": 3014,
+      "mode": 420,
+      "sha256": "d2ef90e152ed5ba3fdddf666a2d547a3c046511c49ede808eb8f7516f02fbb56"
+    }
+  },
+  "actual_current_repository_baseline": {
+    "src/diagnostic/native_ram_entry.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/diagnostic/native_ram_entry.c",
+      "bytes": 47468,
+      "mode": 420,
+      "sha256": "a85385a88101bb574eb1c899104502aaa9a0290000649c5bdaa966f40d9bf570"
+    },
+    "tests/native_ram_entry_host_stubs.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_ram_entry_host_stubs.c",
+      "bytes": 18460,
+      "mode": 420,
+      "sha256": "9ac095ae69bb0da2db53ca469ee32d92776765c3c425b405bc1d70e59b8e5e72"
+    },
+    "tests/native_ram_entry_host_stubs.h": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_ram_entry_host_stubs.h",
+      "bytes": 6200,
+      "mode": 420,
+      "sha256": "3242b6b80da4844713d375ff63824a0ece165456d78a85227a8ccdd7b7829af8"
+    },
+    "tests/native_ram_entry_model_test.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/native_ram_entry_model_test.c",
+      "bytes": 1359,
+      "mode": 420,
+      "sha256": "6fe7255ddd28f9d5cfe848f7ef02e2c03239bebb36ab758d21d6a67fb9465e5e"
+    },
+    "tests/test_native_ram_entry_model.py": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/test_native_ram_entry_model.py",
+      "bytes": 2701,
+      "mode": 420,
+      "sha256": "ca5059c5165efecc93457b43f46819cdec718547eac365c67af6b2fb374ee978"
+    }
+  },
+  "pinned_Task_header": {
+    "path": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/exec/tasks.h",
+    "resolved_path": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/ndk-include/exec/tasks.h",
+    "bytes": 2912,
+    "mode": 384,
+    "sha256": "bf2ad632d96e84b302af9ab1f28cbbe2cf7c34d88089abbc0f2d8b8783c29a33"
+  },
+  "checks": {
+    "sealed_source_count": 43,
+    "owned_paths": 5,
+    "unchanged_reference_bytes_against_current_repository": 38,
+    "seven_other_production_C_plus_GAS_layout_unchanged": true,
+    "V2_changes_only_entry_against_preserved_V1": true,
+    "V1_to_V2_patch_exact": true,
+    "native_live_SP": "volatile m68k move.l SP to uintptr_t with compiler memory barrier; no saved tc_SPReg or address-of-local surrogate",
+    "host_SP": "explicit forced model macro only, synthetic value and read count",
+    "Process_type_checked_before_SP_capture": true,
+    "nonnull_word_aligned_ordered_bounds_and_SP_checked": true,
+    "raw_upper_minus_two_subtraction_checked_before_use": true,
+    "SP_interval": "[tc_SPLower, captured tc_SPUpper - 2)",
+    "headroom_test": "SP - tc_SPLower >= 32768 after containment and ordered bounds",
+    "raw_upper_current_Task_identity_function_unchanged": true,
+    "derived_usable_upper_controls_both_borrowed_stack_guards": true,
+    "admission_precedes_first_master_availability_query_AllocMem_or_OS_resource_acquisition": true,
+    "refusal_returns20_directly_before_cleanup": true,
+    "32768_declared_policy_only_not_total_stack_proof": true
+  },
+  "test_source_checks": {
+    "original_54_vector_recipe_AST_unchanged_after_removing_only_additive_22case_statements": true,
+    "original_result_hold_ownership_oracle_function_bytes_exact": true,
+    "original_C_main_suffix_bytes_exact_after_single_new_mode34_branch_removal": true,
+    "generic_model_setup_only_adds_word_aligned_synthetic_SP_and_getter": true,
+    "additional_case_count": 22,
+    "admitted_ordinals": [
+      13,
+      17,
+      20
+    ],
+    "refusal_count": 19,
+    "meaningful_boundaries": "NULL/reversed/equal/wrapped/empty bounds, raw upper subtraction/odd values, zero/odd/outside SP, excluded usable upper, aligned policy-2, exact policy, above policy, zero headroom, last aligned usable SP, non-Process",
+    "refusal_oracle": "result20, no hold/trace/allocation/free/OS ownership/wait/CIA effects, unchanged signals; one SP read except zero for non-Process",
+    "admission_oracle": "full entry plus unchanged exact PAL cleanup/zero-ownership oracle",
+    "recipe_TUs_and_flags_unchanged": true,
+    "fresh_process_cases": 76,
+    "prospective_compile_plus_child_calls": 77,
+    "first_failure_recipe_unchanged": true,
+    "NOT_RUN": true
+  },
+  "provenance_clarification": "The preserved original-owned stubs header and Python runner use the earlier private MP3 include/TU namespace. They are historical origins, not byte-exact current repository baseline. The five current repository files are independently bound above; differences from the current files are the reviewed admission/model additions only. Root must bind the eventual actual export/current baseline separately.",
+  "findings": [],
+  "limits": {
+    "read_only_availability_query_absence": "Established by source order here; new model refusals count acquisition effects, not AvailMem calls.",
+    "native_inline_assembly_or_ABI": "NOT_COMPILED_NOT_RUN",
+    "native_actual_bound_allocation_capacity_or_placement": "NOT_QUALIFIED",
+    "CRT_main_getter_frames_before_admission": "Already exist; the check cannot rescue an invalid launcher",
+    "aggregate_task_stack": "UNKNOWN_NOT_CLEARED",
+    "system_IRQ_stack": "UNKNOWN_NOT_CLEARED",
+    "65536": "NOT_CLEARED",
+    "WCET_timing": "UNKNOWN_NOT_CLEARED",
+    "central_hold_Process_HUNK_launch": "NOT_ENFORCED",
+    "emulator_physical": "NOT_RUN"
+  }
+}

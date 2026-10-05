@@ -1,0 +1,97 @@
+{
+  "status": "CLEAR_SAVED_TASK_STACK_NATIVE_COMPILER_EVIDENCE_ONLY",
+  "scope": "Passive saved manifest, raw logs, dependency/SU file, tool/product hash and finite saved disassembly inspection. No compiler, objdump, model, HUNK/product, Git or target replay.",
+  "native_manifest": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/manifest.json",
+    "bytes": 258417,
+    "mode": 420,
+    "sha256": "773ff225447e555ee6ebeba80b40bd3c1d54f93aabe71160ca692470ec09e1ac"
+  },
+  "root_build_review": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/root-build-review.json",
+    "bytes": 1668,
+    "mode": 420,
+    "sha256": "0f10473e24b07e98c83a27dfe29ce5a575ada5b474676e54f034fe01c4e593e3"
+  },
+  "source_review": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-task-stack-v1/source-revision-v2/independent-source-review.json",
+    "bytes": 9062,
+    "mode": 420,
+    "sha256": "8585c1d5d7fa735e1f45892ba6c7eacc9c519c4c115aea9b86cecbf72da18814"
+  },
+  "linked_inspection": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/linked-inspection.json",
+    "bytes": 1659,
+    "mode": 420,
+    "sha256": "4f99d2611e6fe7be4e5f05faff242a92e219df797e3b66c2967ee33732f310c3"
+  },
+  "disassembly": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/linked-disassembly.txt",
+    "bytes": 813770,
+    "sha256": "8992beccd6e9a13bef75ce24801d1d52d44dea6d24fc173a30ffe409c3441371",
+    "mode": 420
+  },
+  "product": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/PTExecReadersRamEntryTest",
+    "resolved_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/PTExecReadersRamEntryTest",
+    "bytes": 59992,
+    "mode": 493,
+    "sha256": "b2e473d9e162358976dfddae8ca1651f1874e5687f8eba88187c9db1d7e18d36"
+  },
+  "map": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/PTExecReadersRamEntryTest.map",
+    "resolved_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/native-ram-entry-task-stack-integrated-build-v1/PTExecReadersRamEntryTest.map",
+    "bytes": 26087,
+    "mode": 420,
+    "sha256": "44c4eaa9e82770e78a6f380a84d1291ba75b7f40a7b1c39a31f30da4f23bffb5"
+  },
+  "build_facts": {
+    "literal_command_count": 22,
+    "all_commands_completed_RC0": true,
+    "all_command_stderr_empty": true,
+    "compile_link_stdout_empty": true,
+    "source26_before_after_exact": true,
+    "selected_source_bytes_match_reviewed_guard_V2": true,
+    "C_units": 8,
+    "GAS_units": 1,
+    "MD_distinct_lexical_dependency_paths": 93,
+    "MD_distinct_resolved_physical_files": 88,
+    "all_eight_full_MD_closures_match_saved_records": true,
+    "real_NDK_headers_no_test_headers": true,
+    "local_SU_files": 8,
+    "local_SU_rows": 109,
+    "unbounded_SU_rows": 0,
+    "compiler_cc1_as_ld_collect2_pinned": true,
+    "runtime_pin_count": 7,
+    "retained_files": 71,
+    "distinct_file_identities_verified": 182,
+    "HUNK_HEADER": 1011,
+    "changed_product": "59,992 bytes; distinct from prior 59,924-byte product, both preserved"
+  },
+  "finite_machine_instruction_facts": {
+    "inspection_only_RC0": true,
+    "FindTask": "PC22ea jsr a6@(-294), before capture",
+    "Process_type": "PC22fc cmpib #13 at Task Node type, followed by refusal branch",
+    "live_SP": "PC2326 opcode220f: movel sp,d1",
+    "bounds": "Loads SPLower/SPUpper at Task offsets58/62 before capture; rejects null, upper<2, odd or out-of-span values",
+    "usable_upper": "PC2354 opcode5584: subql #2,d4",
+    "headroom": "PC2368 subtracts lower from captured SP; PC236a cmpil #32767,d1 and PC2370 blsw refusal implement >=32768 admission",
+    "first_availability_query": "PC239c jsr a6@(-216) occurs in the availability block after the admission path",
+    "excerpt_start_PC": "22e8",
+    "excerpt_end_PC_exclusive": "23a0",
+    "excerpt_sha256": "cd0952b123c7bd4cdd1881711975c60ae1bb5345d037d9493fbfac7f06ecc2f5",
+    "not_runtime_observation": true
+  },
+  "findings": [],
+  "limits": {
+    "native_actual_SP_bounds_placement_or_capacity": "NOT_RUN_NOT_QUALIFIED",
+    "32768": "Diagnostic admission policy only; not measured safe remaining call-chain stack",
+    "aggregate_task_stack": "UNKNOWN_NOT_CLEARED",
+    "system_IRQ_stack": "UNKNOWN_NOT_CLEARED",
+    "65536": "NOT_CLEARED",
+    "WCET_timing": "UNKNOWN_NOT_CLEARED",
+    "central_hold_Process_HUNK_launch": "NOT_ENFORCED",
+    "emulator_physical": "NOT_RUN",
+    "local_SU_annotations_or_compiled_gate": "Do not qualify launcher, OS/library/startup/IRQ call chains."
+  }
+}

@@ -5352,9 +5352,13 @@ evidence reviews cover each exact lane separately.
 
 PREPARE, irreversible sealing/retention and exact zero-ownership finish remain
 separate from source shutdown, command detachment and reader retirement. The
-helper is not wired to editor PLAY. A separate native entry is an unimported
-source draft under review; heap retention alone does not preserve process/code/
-library/stack lifetime. Native execution, Amiberry/physical runs, full task and
+helper is not wired to editor PLAY. The separate [native RAM entry](NATIVE_RAM_ENTRY.md)
+is published with a 76-case host matrix and compiler/link evidence; its current
+59,992-byte HUNK is native NOT RUN. It checks actual m68k SP against declared
+usable bounds and a 32 KiB diagnostic headroom policy before explicit resource
+acquisition; this is not total stack clearance. The original 54-case/59,924-byte
+candidate evidence remains separate. Heap retention alone does not preserve
+process/code/library/stack lifetime. Native execution, Amiberry/physical runs, full task and
 IRQ/system stack, WCET and 65,536-byte launch remain unqualified. No DMA/audio or
 listening acceptance follows. See [checked allocator contract](NATIVE_CHECKED_MEMORY.md).
 Saved evidence and its byte-only verifier are under

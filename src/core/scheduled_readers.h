@@ -2,7 +2,7 @@
 #define PT_SCHEDULED_READERS_H
 #include "scheduled_output.h"
 /* New opt-in reference-domain contract. flags7 and lineage-v1 are unchanged. */
-#define PT_READERS_VERSION 1U
+#define PT_READERS_VERSION 2U
 #define PT_READERS_CONDITIONAL 1U
 #define PT_READERS_SPLIT_DOMAINS 2U
 #define PT_READERS_REQUIRED 3U
@@ -15,15 +15,30 @@ struct pt_readers_key {
     uint64_t session,generation,trigger,owner,serial;
     unsigned action,slot;
 };
+/* Version2 publishes opaque identity bindings so a separately compiled backend
+ * can name the exact full holder extent in a receipt. Copied from the already
+ * staged genuine control metadata before publication; never a borrowed control
+ * declaration or a validation/activation certificate. Backends may copy these
+ * identity values, never dereference, mutate, copy or release owner storage or
+ * invoke its callbacks. No current/release/terminal callback is exposed. */
+struct pt_readers_binding {void *context;size_t context_bytes;};
 /* Immutable registered reader descriptor. Never aliases a command slot. All
- * sample/loop geometry must lie inside its full declared spans. */
+ * sample/loop geometry must lie inside its full declared spans. Core storage
+ * remains owned until independently exact retirement AND zero command refs.
+ * Backend borrowing ends at retirement: before reporting READER_RETIRED it
+ * must drop every persistent reference, even if core storage is still retained
+ * for commands. Remaining command metadata cannot revive a retired reader. */
 struct pt_readers_domain {
     struct pt_readers_key key;const struct pt_scheduled_span *spans;unsigned count;
+    struct pt_readers_binding binding;
 };
 struct pt_readers_event {
     const struct pt_readers_output *queue;uint64_t session,command_owner;
     struct pt_scheduled_event scheduled;
     const struct pt_readers_domain *reader[PT_READERS_ACTIONS];
+    /* Immutable command-only binding, valid through exact COMMAND_DETACHED.
+     * It never grants access to the independently retained reader holders. */
+    struct pt_readers_binding binding;
 };
 enum pt_readers_command {PT_READERS_WAITING,PT_READERS_ISSUED,
     PT_READERS_CANCELLED_BEFORE,PT_READERS_CANCELLED_AFTER,PT_READERS_FAILED,PT_READERS_UNKNOWN};

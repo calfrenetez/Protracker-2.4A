@@ -155,12 +155,13 @@ enum pt_scheduled_result pt_readers_enqueue(struct pt_readers_output *q,const st
     for(i=0;i<q->commands;++i)if(!q->command[i].held)break;
     e=q->command+i;memset(e,0,sizeof(*e));e->held=1;e->owner=*control;ticket=++q->tickets;
     e->event.queue=q;e->event.session=q->session;e->event.command_owner=control->token;
+    e->event.binding=(struct pt_readers_binding){control->context,control->context_bytes};
     e->event.scheduled=(struct pt_scheduled_event){ticket,first,last,*b};
     for(i=0;i<b->count;++i){
         struct reader_entry *r=q->reader+indices[i];e->reader[i]=indices[i];
         if(b->action[i].kind==PT_SCHEDULED_TRIGGER){
             memset(r,0,sizeof(*r));r->held=1;r->owner=owners[i];memcpy(r->spans,owners[i].spans,owners[i].count*sizeof(*r->spans));r->owner.spans=r->spans;
-            r->domain=(struct pt_readers_domain){{q,q->session,q->grid.generation,ticket,owners[i].control.token,++q->serial,i,b->action[i].slot},r->spans,owners[i].count};
+            r->domain=(struct pt_readers_domain){{q,q->session,q->grid.generation,ticket,owners[i].control.token,++q->serial,i,b->action[i].slot},r->spans,owners[i].count,{owners[i].control.context,owners[i].control.context_bytes}};
             r->frame=b->frame;r->first=first;r->last=last;r->state=PT_READERS_RESERVED;r->valid=1;++q->reader_count;
         }else if(b->action[i].kind==PT_SCHEDULED_STOP)r->closed=1;
         ++r->references;e->event.reader[i]=&r->domain;

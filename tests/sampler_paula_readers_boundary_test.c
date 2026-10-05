@@ -52,7 +52,7 @@ static void boundary_init(struct fixture *f,unsigned bits)
  config=(struct pt_paula_readers_config){2,8,1024*1024,131072,7,&f->chip,chip_allocate,chip_release};
  assert(pt_paula_readers_open(&f->allocator,&f->sampler,p,&config,&f->pool)==PT_PAULA_READERS_OK);
  f->backend.pool=f->pool;f->backend.now=100;
- b=(struct pt_readers_backend){&f->backend,sizeof(f->backend),{7,8,4},1,3,8,boundary_clock,submit,poll_command,cancel_command,poll_reader,cancel_reader};
+ b=(struct pt_readers_backend){&f->backend,sizeof(f->backend),{7,8,4},PT_READERS_VERSION,3,8,boundary_clock,submit,poll_command,cancel_command,poll_reader,cancel_reader};
  assert(pt_readers_open(&f->allocator,&grid,1001,&b,2,8,&f->queue)==PT_SCHEDULED_OK);
 }
 static struct pt_render_sequence *boundary_sequence(struct fixture *f,struct pt_paula_preflight_report *report)

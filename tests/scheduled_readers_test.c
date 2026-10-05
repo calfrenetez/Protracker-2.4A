@@ -111,7 +111,7 @@ static enum pt_readers_reply poll_reader(void *v,const struct pt_readers_domain 
 static enum pt_readers_reply cancel_reader(void *v,const struct pt_readers_domain *d,struct pt_readers_reader_receipt *out)
 {struct backend *b=v;++b->cancels;return poll_reader(v,d,out);}
 static struct pt_readers_backend api(struct backend *b)
-{return (struct pt_readers_backend){b,sizeof(*b),{7,8,4},1,3,8,read_clock,submit,poll_command,cancel_command,poll_reader,cancel_reader};}
+{return (struct pt_readers_backend){b,sizeof(*b),{7,8,4},PT_READERS_VERSION,3,8,read_clock,submit,poll_command,cancel_command,poll_reader,cancel_reader};}
 static void setup_grid(unsigned commands,unsigned readers,uint64_t session,uint32_t frequency,uint32_t rate)
 {
     struct pt_allocator a;struct pt_scheduled_grid g={100,7,frequency,rate};struct pt_readers_backend b;unsigned i,j;

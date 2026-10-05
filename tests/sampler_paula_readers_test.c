@@ -170,7 +170,7 @@ static void init(struct fixture *f,unsigned bits,unsigned channels,unsigned read
  c=(struct pt_paula_readers_config){2,readers,1024*1024,chipbudget,7,&f->chip,chip_allocate,chip_release};
  assert(pt_paula_readers_open(&f->allocator,&f->sampler,&f->document.project,&c,&f->pool)==PT_PAULA_READERS_OK);
  f->backend.pool=f->pool;f->backend.now=100;
- b=(struct pt_readers_backend){&f->backend,sizeof(f->backend),{7,8,4},1,3,readers,clock_read,submit,poll_command,cancel_command,poll_reader,cancel_reader};
+ b=(struct pt_readers_backend){&f->backend,sizeof(f->backend),{7,8,4},PT_READERS_VERSION,3,readers,clock_read,submit,poll_command,cancel_command,poll_reader,cancel_reader};
  assert(pt_readers_open(&f->allocator,&grid,1001,&b,2,readers,&f->queue)==PT_SCHEDULED_OK);
 }
 static void finish(struct fixture *f)

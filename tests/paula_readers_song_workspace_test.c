@@ -168,7 +168,7 @@ static struct song_oracle *song_oracle_open(unsigned bits)
  c=(struct pt_paula_readers_config){2,8,1024*1024,131072,7,&f->chip,chip_allocate,chip_release};
  assert(pt_paula_readers_open(&f->allocator,&f->sampler,&f->document.project,&c,&f->pool)==PT_PAULA_READERS_OK);
  f->backend.pool=f->pool;
- b=(struct pt_readers_backend){&f->backend,sizeof(f->backend),{7,8,4},1,3,8,fixture_song_clock,submit,poll_command,cancel_command,poll_reader,cancel_reader};
+ b=(struct pt_readers_backend){&f->backend,sizeof(f->backend),{7,8,4},PT_READERS_VERSION,3,8,fixture_song_clock,submit,poll_command,cancel_command,poll_reader,cancel_reader};
  assert(pt_readers_open(&f->allocator,&grid,1001,&b,2,8,&f->queue)==PT_SCHEDULED_OK);
  assert(pt_paula_preflight_take(&f->document.project,&options,NULL,&song_caps,1,&f->allocator,&o->report,&o->sequence)==PT_PAULA_COMPATIBLE&&o->sequence);
  return o;
@@ -238,7 +238,7 @@ static struct pt_paula_readers_song_config fixture_song_config(struct song_fixtu
  c.render=song_options();c.caps=song_caps;
  c.readers=(struct pt_paula_readers_config){2,8,1024*1024,131072,7,&f->chip,chip_allocate,chip_release};
  c.grid=(struct pt_scheduled_grid){100,7,SONG_FREQUENCY,SONG_RATE};
- c.backend=(struct pt_readers_backend){&f->backend,sizeof(f->backend),{7,8,4},1,3,8,fixture_song_hook_clock,fixture_song_fault_submit,fixture_poll_command,fixture_cancel_command,fixture_poll_reader,fixture_cancel_reader};
+ c.backend=(struct pt_readers_backend){&f->backend,sizeof(f->backend),{7,8,4},PT_READERS_VERSION,3,8,fixture_song_hook_clock,fixture_song_fault_submit,fixture_poll_command,fixture_cancel_command,fixture_poll_reader,fixture_cancel_reader};
  c.session=1001;c.absolute_start=SONG_START;c.control_budget=4*1024*1024;return c;
 }
 

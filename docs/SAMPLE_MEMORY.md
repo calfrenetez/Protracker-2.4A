@@ -183,6 +183,37 @@ No RAM placement, DMA/IRQ, voice-stop, card RAM capacity/transfer, output timing
 audio or listening acceptance follows. See the
 [compact evidence](../evidence/enhanced-editor/paula-readers-song-compact/README.md).
 
+## Public backend registration identities — 5 October 2026
+
+The optional readers descriptor contract now uses version2 and publishes copied
+opaque command and persistent-reader context/extent identities. This lets a
+separately compiled backend form the exact receipts already required by the core;
+it exposes no owner current/release/terminal callbacks or storage-access right.
+Version1 backends are refused before allocation/callbacks. The original frame,
+private envelope, positive ACTIVE and independent release rules remain unchanged.
+Before reporting detachment or retirement the backend drops every corresponding
+reference. Core reader storage separately waits for exact retirement and zero
+referencing commands; surviving commands cannot revive a retired reader.
+
+Seven affected ASan/UBSan host groups pass once:14 compile/run RC0,172 full-M,
+84 canonical/105 SDK dependencies and7 products. The public-header-only fixture
+uses genuine current mono8/16/24 masters and public identities only, two commands,
+explicit original STOP and independent retirement orders. Old-version refusal,
+forged contexts/extents, uncertain accepted submission, unchanged caller outputs
+and alias refusal before either backend poll callback run through the final
+assertion footer. These are synthetic software results, with no activation driver.
+
+The separate ordinary-malloc public31-TU HUNK builds once:42RC0/75canonical32SDK/
+seven pinned runtimes, enabled assertions and one complete CPP/HUNK marker.
+PTReadersBackendRegistrationTest216820B/SHA72b40262c3c6c54351f7b1fe94042d8672f4a8a4a99e19ed99d60402bfebbf9f
+is native/emulator/physical NOT_RUN. Fast/Chip placement, total stack and65536
+launcher remain unqualified. Older compact protocol1 compiler evidence stays in
+its exact historical scope; it does not qualify these version2 descriptors.
+Mixed AmiGUS formats/card addresses, editor PLAY, native activation/IRQ/device
+stop/order/completion/timing/audio/listening remain separate unfinished work.
+See [registration contract](READERS_BACKEND_REGISTRATION.md) and
+[saved evidence](../evidence/enhanced-editor/readers-backend-registration/README.md).
+
 ## Scheduled output ownership foundation — 3 October 2026
 
 The new portable queue retains independently held sample owners for bounded future

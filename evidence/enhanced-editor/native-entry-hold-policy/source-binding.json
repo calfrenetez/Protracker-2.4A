@@ -1,0 +1,87 @@
+{
+  "actual_scope": {
+    "central_enforcement": false,
+    "integrated_cases": 28,
+    "native_emulator_physical": "NOT_RUN",
+    "native_launch_clearance": false,
+    "private_cases": 28,
+    "return_codes": [
+      0,
+      0
+    ]
+  },
+  "baseline": "cc0b7f427f6baca3fadc9443a84b9623d1bdc9da",
+  "prepared_utc": "2026-10-05T12:15:28.924741+00:00",
+  "published_document_change": "Only qualification paragraph/evidence link updated after integrated run; executable source/test bytes exact to saved scope.",
+  "saved_outputs": {
+    "evidence/enhanced-editor/native-entry-hold-policy/integrated-execution.json": {
+      "bytes": 3442,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/entry-hold-policy-publication-v1/candidate/evidence/enhanced-editor/native-entry-hold-policy/integrated-execution.json",
+      "sha256": "4e941039f1c94e6f523aa3dbf3eeca8a32f57e81ab541cbda4957bce1ae45b6a"
+    },
+    "evidence/enhanced-editor/native-entry-hold-policy/integrated-independent-review.json": {
+      "bytes": 6071,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/entry-hold-policy-publication-v1/candidate/evidence/enhanced-editor/native-entry-hold-policy/integrated-independent-review.json",
+      "sha256": "48717a69b2d703d60c7aeaf69ecab666ff0bd1e5d9001b7569e7bf8f5d548858"
+    },
+    "evidence/enhanced-editor/native-entry-hold-policy/integrated-stderr.txt": {
+      "bytes": 4869,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/entry-hold-policy-publication-v1/candidate/evidence/enhanced-editor/native-entry-hold-policy/integrated-stderr.txt",
+      "sha256": "ab02aa1f06138c89d20e1ed4f9d8ef2284380a48477cd9068175e5feb80b9bef"
+    },
+    "evidence/enhanced-editor/native-entry-hold-policy/integrated-stdout.txt": {
+      "bytes": 138,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/entry-hold-policy-publication-v1/candidate/evidence/enhanced-editor/native-entry-hold-policy/integrated-stdout.txt",
+      "sha256": "30aa405d33da9feab98f39a24deac770dbb2b450b2570417bd48df43e9c55c7a"
+    },
+    "evidence/enhanced-editor/native-entry-hold-policy/private-execution.json": {
+      "bytes": 3879,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/entry-hold-policy-publication-v1/candidate/evidence/enhanced-editor/native-entry-hold-policy/private-execution.json",
+      "sha256": "0d247363d7fe8bc94649beb09fbb69a3ea140ecb49b80aeeff1b963f0d431072"
+    },
+    "evidence/enhanced-editor/native-entry-hold-policy/private-independent-review.json": {
+      "bytes": 6702,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/entry-hold-policy-publication-v1/candidate/evidence/enhanced-editor/native-entry-hold-policy/private-independent-review.json",
+      "sha256": "5e4f959981b862a9971da95c9f2a1df41416276b71969ec8e4d8417767ee9dab"
+    },
+    "evidence/enhanced-editor/native-entry-hold-policy/private-stderr.txt": {
+      "bytes": 4869,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/entry-hold-policy-publication-v1/candidate/evidence/enhanced-editor/native-entry-hold-policy/private-stderr.txt",
+      "sha256": "343caab267e2fa038e836d8313fca5669e99d38a4e0e7dcd02ad5f3c4193014d"
+    },
+    "evidence/enhanced-editor/native-entry-hold-policy/private-stdout.txt": {
+      "bytes": 138,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/entry-hold-policy-publication-v1/candidate/evidence/enhanced-editor/native-entry-hold-policy/private-stdout.txt",
+      "sha256": "30aa405d33da9feab98f39a24deac770dbb2b450b2570417bd48df43e9c55c7a"
+    }
+  },
+  "source_bindings": {
+    "docs/NATIVE_ENTRY_HOLD_POLICY.md": {
+      "bytes": 2647,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/entry-hold-policy-publication-v1/candidate/docs/NATIVE_ENTRY_HOLD_POLICY.md",
+      "sha256": "466020f917c337e1b7e3eebf436547d48e6a3a843b462275aee0d229f4337c7e"
+    },
+    "tests/test_entry_hold_policy.py": {
+      "bytes": 27645,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/entry-hold-policy-publication-v1/candidate/tests/test_entry_hold_policy.py",
+      "sha256": "8436d27cb8c4033fd73387116d97496323beedfab799feac3a6930107d6ad2fa"
+    },
+    "tools/entry_hold_policy.py": {
+      "bytes": 28578,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/entry-hold-policy-publication-v1/candidate/tools/entry_hold_policy.py",
+      "sha256": "407496a00e3a1e5d928e16f0fb567e765c7491b6b82e2a26951aa3e306fdf3b4"
+    }
+  },
+  "status": "LOCAL_HOST_POLICY_ONLY"
+}

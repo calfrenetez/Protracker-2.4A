@@ -1,0 +1,135 @@
+{
+  "approval_python": {
+    "bytes": 52448,
+    "mode": 493,
+    "path": "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+    "sha256": "60ab7f8bb944386c0022689716e405a77117111d65110532a1889d713dddf757"
+  },
+  "checks": {
+    "actual_saved_return_code": 0,
+    "actual_saved_status": "PASS_LOCAL_HOST_POLICY_ONLY",
+    "automatic_retry": false,
+    "case_names_match_AST_and_contract": true,
+    "completed_source_review_statuses": {
+      "independent-source-review-v2.json": "CLEAR_SOURCE_ONLY",
+      "root-source-review-v2.json": "CLEAR_SOURCE_PREPARATION_ONLY"
+    },
+    "exact_28_case_names_each_once_and_ok_in_stderr": true,
+    "exact_complete_MODEL_footer_once_in_stdout": true,
+    "four_review_seal_contract_controls_current": true,
+    "saved_ended_utc": "2026-10-05T12:02:04.699039+00:00",
+    "saved_started_utc": "2026-10-05T12:02:04.124581+00:00",
+    "snapshot_contains_exact_two_regular_source_files": true,
+    "source_before_after_and_approval_pins_identical": true,
+    "timeout": false,
+    "two_copied_source_files_equal_sealed_original_bytes_hash_modes": true,
+    "unittest_Ran_28_and_OK_complete": true
+  },
+  "exact_approved_command": [
+    "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "-B",
+    "test_entry_hold_policy.py"
+  ],
+  "exact_approved_working_directory": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-hold-policy-test-v2/source",
+  "executed_original_snapshot_pairs": [
+    {
+      "executed_snapshot": {
+        "bytes": 28578,
+        "mode": 420,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-hold-policy-test-v2/source/entry_hold_policy.py",
+        "sha256": "407496a00e3a1e5d928e16f0fb567e765c7491b6b82e2a26951aa3e306fdf3b4"
+      },
+      "sealed_original": {
+        "bytes": 28578,
+        "mode": 420,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-hold-policy-v1/source-revision-v2/entry_hold_policy.py",
+        "sha256": "407496a00e3a1e5d928e16f0fb567e765c7491b6b82e2a26951aa3e306fdf3b4"
+      }
+    },
+    {
+      "executed_snapshot": {
+        "bytes": 27585,
+        "mode": 420,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-hold-policy-test-v2/source/test_entry_hold_policy.py",
+        "sha256": "d36083104cb9961c4ddf2582b46162a902a1f923d0d090e76434873d4bdece7f"
+      },
+      "sealed_original": {
+        "bytes": 27585,
+        "mode": 420,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-hold-policy-v1/source-revision-v2/test_entry_hold_policy.py",
+        "sha256": "d36083104cb9961c4ddf2582b46162a902a1f923d0d090e76434873d4bdece7f"
+      }
+    }
+  ],
+  "execution": {
+    "bytes": 3879,
+    "mode": 420,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-hold-policy-test-v2/execution.json",
+    "sha256": "0d247363d7fe8bc94649beb09fbb69a3ea140ecb49b80aeeff1b963f0d431072"
+  },
+  "findings": [],
+  "limits": {
+    "Process_HUNK_code_owner_retention": "NOT_QUALIFIED",
+    "WCET_residency": "UNKNOWN",
+    "authentic_target_evidence": "NOT_VERIFIED",
+    "central_enforcement": false,
+    "launcher65536": "NOT_CLEARED",
+    "local_RELEASED_record_or_absent_slot_does_not_clear_external_hold": true,
+    "native_emulator_physical": "NOT_RUN",
+    "native_launch_clearance": false,
+    "previous_V1_NEEDS_CORRECTION_and_V2_source_reviews_preserved": true,
+    "real_crash_power_loss_or_storage_latency_durability": "NOT_QUALIFIED",
+    "reviewer_test_model_import_or_execution": false,
+    "system_IRQ_stack_total": "UNKNOWN",
+    "task_stack_total": "UNKNOWN"
+  },
+  "preserved_V2_source_controls": [
+    {
+      "bytes": 3438,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-hold-policy-v1/source-revision-v2/source-seal-v2.json",
+      "sha256": "28b7bdca86e813961b2e96f11285c3d995b2675d7a0a969cd54bfbdba8a703fb"
+    },
+    {
+      "bytes": 2754,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-hold-policy-v1/source-revision-v2/root-source-review-v2.json",
+      "sha256": "3a2360954c85d08347b661bb0085fa8462ea4c167264492acbf75055cad20a76"
+    },
+    {
+      "bytes": 8235,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-hold-policy-v1/source-revision-v2/independent-source-review-v2.json",
+      "sha256": "148f27b89f2e1d07de3278bd5587027a633f009f50dad9d0c8d0ac32e6679c25"
+    },
+    {
+      "bytes": 4208,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-hold-policy-v1/source-revision-v2/test-contract-v2.json",
+      "sha256": "899de51004aa9b15afc19228ff038f3333ca74bd6f3e93904bc2d2876fd2dedb"
+    }
+  ],
+  "qualification": "The saved outcome supports the tested synthetic local journal/reservation/refusal/preservation mechanics, including repeated uncertainty, corruption latch cases26/27 and release commit-window case28. It does not authenticate any Amiga observation or enforce a shared target lifecycle barrier.",
+  "review_completed_utc": "2026-10-05T12:05:30.279769+00:00",
+  "reviewer": "independent /root/native_entry_review",
+  "root_once_approval": {
+    "bytes": 2640,
+    "mode": 420,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-hold-policy-test-v2/root-once-approval.json",
+    "sha256": "796969194600d279eb3e2d0e261671eca4ce548536a5c0c1f167f2a15f16e577"
+  },
+  "scope": "Passive saved-outcome inspection of root-approved HP2 local model test. No policy/test import or rerun, compiler, Git, target or transport operation by this reviewer.",
+  "status": "CLEAR_LOCAL_HOST_POLICY_EVIDENCE_ONLY",
+  "stderr": {
+    "bytes": 4869,
+    "mode": 420,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-hold-policy-test-v2/stderr.txt",
+    "sha256": "343caab267e2fa038e836d8313fca5669e99d38a4e0e7dcd02ad5f3c4193014d"
+  },
+  "stdout": {
+    "bytes": 138,
+    "mode": 420,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-hold-policy-test-v2/stdout.txt",
+    "sha256": "30aa405d33da9feab98f39a24deac770dbb2b450b2570417bd48df43e9c55c7a"
+  }
+}

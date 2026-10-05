@@ -1,0 +1,117 @@
+{
+  "status": "CLEAR_SAVED_INTEGRATED_LOCAL_HOST_POLICY_ONLY",
+  "reviewer": "paula_preflight_impl",
+  "execution": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integrated-test-v1/execution.json",
+    "bytes": 3442,
+    "sha256": "4e941039f1c94e6f523aa3dbf3eeca8a32f57e81ab541cbda4957bce1ae45b6a",
+    "mode": 420
+  },
+  "approval": {
+    "bytes": 2000,
+    "mode": 420,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integrated-test-v1/root-once-approval.json",
+    "sha256": "1428359b8e20c7e9211537f48216b475b4817ffb316864e7bb27369ebe6c01a1"
+  },
+  "integration_manifest": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integration-v1/source-manifest-v1.json",
+    "bytes": 4557,
+    "sha256": "77460410198fee85c7bbf115b7fc2ff526ea985e7cfe82a57424c1bd52bdfa96",
+    "mode": 420
+  },
+  "integration_seal": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integration-v1/source-seal-v1.json",
+    "bytes": 5107,
+    "sha256": "251809ad93a720e78645879fafa5da1aaf5edc35380a6ce8a003a2318f8e06f2",
+    "mode": 420
+  },
+  "root_source_review": {
+    "bytes": 603,
+    "mode": 420,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integration-v1/root-source-review-v1.json",
+    "sha256": "9a5ec26e31de036f201e8ae48487b61a47a34d6802fbbcc9745c46fdd95e0858"
+  },
+  "literal_derivation_patch": {
+    "bytes": 3104,
+    "mode": 420,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integration-v1/literal-derivation-v1.patch",
+    "sha256": "09a97ea35def6efba2863af73e7eb879343f792c3498835edd6e3fb62b413ad3"
+  },
+  "source_count": 3,
+  "integrated_sources": [
+    {
+      "bytes": 2410,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integrated-test-v1/source/docs/NATIVE_ENTRY_HOLD_POLICY.md",
+      "sha256": "d15833b7046c41b4926d5c5bc6c40a604f996e891ebf12d7f87426e84b55bcd3"
+    },
+    {
+      "bytes": 27645,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integrated-test-v1/source/tests/test_entry_hold_policy.py",
+      "sha256": "8436d27cb8c4033fd73387116d97496323beedfab799feac3a6930107d6ad2fa"
+    },
+    {
+      "bytes": 28578,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integrated-test-v1/source/tools/entry_hold_policy.py",
+      "sha256": "407496a00e3a1e5d928e16f0fb567e765c7491b6b82e2a26951aa3e306fdf3b4"
+    }
+  ],
+  "private_V2_policy": {
+    "bytes": 28578,
+    "mode": 420,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-hold-policy-v1/source-revision-v2/entry_hold_policy.py",
+    "sha256": "407496a00e3a1e5d928e16f0fb567e765c7491b6b82e2a26951aa3e306fdf3b4"
+  },
+  "private_V2_test": {
+    "bytes": 27585,
+    "mode": 420,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-hold-policy-v1/source-revision-v2/test_entry_hold_policy.py",
+    "sha256": "d36083104cb9961c4ddf2582b46162a902a1f923d0d090e76434873d4bdece7f"
+  },
+  "private_V2_prior_execution": {
+    "bytes": 3879,
+    "mode": 420,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-hold-policy-test-v2/execution.json",
+    "sha256": "0d247363d7fe8bc94649beb09fbb69a3ea140ecb49b80aeeff1b963f0d431072"
+  },
+  "private_V2_prior_review": {
+    "bytes": 6702,
+    "mode": 420,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-native-entry-hold-policy-test-v2/independent-actual-review.json",
+    "sha256": "5e4f959981b862a9971da95c9f2a1df41416276b71969ec8e4d8417767ee9dab"
+  },
+  "result": {
+    "returncode": 0,
+    "cases": 28,
+    "all28_named_ok_lines_match_actual_AST_methods": true,
+    "complete_footer_once": true,
+    "stdout": {
+      "bytes": 138,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integrated-test-v1/stdout.txt",
+      "sha256": "30aa405d33da9feab98f39a24deac770dbb2b450b2570417bd48df43e9c55c7a"
+    },
+    "stderr": {
+      "bytes": 4869,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integrated-test-v1/stderr.txt",
+      "sha256": "ab02aa1f06138c89d20e1ed4f9d8ef2284380a48477cd9068175e5feb80b9bef"
+    },
+    "wall_seconds": 0.719695
+  },
+  "checks": [
+    "All three actual source byte/mode records match before/after and sealed integration candidate; no extra source files",
+    "Reusable policy byte-exact preserved privateV2; test text differs only removal of Unexecuted prefix and tools path insertion",
+    "HoldPolicyModel AST/class and all28 case/helper bodies unchanged; named saved success log contains each actual test exactly once",
+    "Root once approval binds exact command/cwd/source3/seal/source review; actual RC0 and complete footer are saved",
+    "All referenced preserved privateV2 origins and original outcome/review hashes verified"
+  ],
+  "limits": [
+    "Saved-result audit only; no policy/test import, local model rerun, compiler, product, Git, shared repository or target action",
+    "Synthetic local journal/reservation observations do not authenticate Amiga ownership, callback return, cleanup, recovery or central barrier release",
+    "Central lifecycle enforcement and native launch remain false; emulator/physical NOT_RUN; native timing/placement/task/system/IRQ stack/WCET/65536 remain unqualified"
+  ],
+  "findings": []
+}

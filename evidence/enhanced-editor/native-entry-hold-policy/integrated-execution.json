@@ -1,0 +1,77 @@
+{
+  "approval": {
+    "bytes": 2000,
+    "mode": 420,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integrated-test-v1/root-once-approval.json",
+    "sha256": "1428359b8e20c7e9211537f48216b475b4817ffb316864e7bb27369ebe6c01a1"
+  },
+  "automatic_retry": false,
+  "cases": 28,
+  "central_enforcement": false,
+  "command": [
+    "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "-B",
+    "tests/test_entry_hold_policy.py"
+  ],
+  "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integrated-test-v1/source",
+  "end_utc": "2026-10-05T12:13:40.712261+00:00",
+  "native_emulator_physical": "NOT_RUN",
+  "native_launch_clearance": false,
+  "returncode": 0,
+  "source_after": [
+    {
+      "bytes": 2410,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integrated-test-v1/source/docs/NATIVE_ENTRY_HOLD_POLICY.md",
+      "sha256": "d15833b7046c41b4926d5c5bc6c40a604f996e891ebf12d7f87426e84b55bcd3"
+    },
+    {
+      "bytes": 27645,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integrated-test-v1/source/tests/test_entry_hold_policy.py",
+      "sha256": "8436d27cb8c4033fd73387116d97496323beedfab799feac3a6930107d6ad2fa"
+    },
+    {
+      "bytes": 28578,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integrated-test-v1/source/tools/entry_hold_policy.py",
+      "sha256": "407496a00e3a1e5d928e16f0fb567e765c7491b6b82e2a26951aa3e306fdf3b4"
+    }
+  ],
+  "source_before": [
+    {
+      "bytes": 2410,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integrated-test-v1/source/docs/NATIVE_ENTRY_HOLD_POLICY.md",
+      "sha256": "d15833b7046c41b4926d5c5bc6c40a604f996e891ebf12d7f87426e84b55bcd3"
+    },
+    {
+      "bytes": 27645,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integrated-test-v1/source/tests/test_entry_hold_policy.py",
+      "sha256": "8436d27cb8c4033fd73387116d97496323beedfab799feac3a6930107d6ad2fa"
+    },
+    {
+      "bytes": 28578,
+      "mode": 420,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integrated-test-v1/source/tools/entry_hold_policy.py",
+      "sha256": "407496a00e3a1e5d928e16f0fb567e765c7491b6b82e2a26951aa3e306fdf3b4"
+    }
+  ],
+  "source_unchanged": true,
+  "start_utc": "2026-10-05T12:13:39.992566+00:00",
+  "status": "PASS_INTEGRATED_LOCAL_HOST_POLICY_ONLY",
+  "stderr": {
+    "bytes": 4869,
+    "mode": 420,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integrated-test-v1/stderr.txt",
+    "sha256": "ab02aa1f06138c89d20e1ed4f9d8ef2284380a48477cd9068175e5feb80b9bef"
+  },
+  "stdout": {
+    "bytes": 138,
+    "mode": 420,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-activation-1rr1yyrp/next-entry-hold-policy-integrated-test-v1/stdout.txt",
+    "sha256": "30aa405d33da9feab98f39a24deac770dbb2b450b2570417bd48df43e9c55c7a"
+  },
+  "timeout": false
+}

@@ -214,6 +214,23 @@ stop/order/completion/timing/audio/listening remain separate unfinished work.
 See [registration contract](READERS_BACKEND_REGISTRATION.md) and
 [saved evidence](../evidence/enhanced-editor/readers-backend-registration/README.md).
 
+## Optional native readers RAM diagnostic — 5 October 2026
+
+A distinct Exec wrapper now builds the unchanged public ABI2 registration fixture
+with real bounded Fast-only master/control/workspace allocation and selective
+reserve-checked Chip-only cache allocation. First/once cross-build passes: 42 RC0 commands,
+31 ordered full-M queries, 79 canonical and 49 SDK dependencies, seven pinned
+runtimes and all 129 expanded assertions and three complete CPP/HUNK footers remain enabled. Its
+218,724-byte HUNK is SHA256 91c595486224b7fa583a6caedb79688488c5e43e062ad2c8b803d6a6c902f0f5.
+The shared seven-group host proof remains bound to unchanged compiled sources;
+this new native wrapper was not executed by those host checks.
+
+Amiberry/physical execution and actual Fast/Chip placement remain NOT_RUN. Total
+native stack is UNKNOWN; 65,536 bytes NOT_CLEARED. No DMA/audio/card/activation/timing or
+listening qualification follows. Current shared recovery holds remain in force.
+See [native RAM diagnostic](READERS_EXEC_RAM_QUALIFICATION.md) and its separate
+[saved compiler evidence](../evidence/enhanced-editor/readers-exec-ram/README.md).
+
 ## Scheduled output ownership foundation — 3 October 2026
 
 The new portable queue retains independently held sample owners for bounded future

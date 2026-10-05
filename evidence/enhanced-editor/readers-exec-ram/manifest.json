@@ -1,0 +1,1389 @@
+{
+  "scope": "Optional ABI2 genuine reader fixture with Exec Fast/Chip RAM adapters; exact compile/link only",
+  "base_commit": "0f4f9e91336debaa5ab8d13d11dc9b3b197bbd5c",
+  "base_tree": "22f7b1a459b50f96ceb3292184b9aa45ae79a618",
+  "payload": {
+    "bytes": 1319081,
+    "sha256": "277522951f9735f7d3cccab730cea327bc975fb17692399a0025c5b63ab20af7"
+  },
+  "members": {
+    "controls/READERS_EXEC_RAM_QUALIFICATION.final.md": {
+      "bytes": 3623,
+      "sha256": "3d34f9ee7fef93256f0e38509a32522e9e7ccd09022ef7e6ffcc767572b9a0fc",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/READERS_EXEC_RAM_QUALIFICATION.final.md"
+    },
+    "controls/SAMPLE_MEMORY.exec-final.md": {
+      "bytes": 342462,
+      "sha256": "eb40a87257acdcd3007f0d97add998b223b0b7d4d658d6dc6773832f6f67e04e",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/SAMPLE_MEMORY.exec-final.md"
+    },
+    "controls/approved-native-controls-v1.json": {
+      "bytes": 3059,
+      "sha256": "3215823d40f4b0772926c331e0f3261ece081f1d4f6f2bbdf6bd4e3e672c2ef4",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/approved-native-controls-v1.json"
+    },
+    "controls/baseline-manifest.json": {
+      "bytes": 1107942,
+      "sha256": "d0bd9c28674bc5d547c22d00f79ac000b526e6bfe18fb57f11008a937b71b682",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/baseline-manifest.json"
+    },
+    "controls/before-state.json": {
+      "bytes": 3473,
+      "sha256": "253225a129f52695d4093566cc479a25b6dae8091d2749f851aa66f77b0a657e",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/before-state.json"
+    },
+    "controls/documentation-overlays-v1.json": {
+      "bytes": 808,
+      "sha256": "1cf9f742f4454921d043edc6a1a529d99e899047612d071fa4c6f0936847cde4",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/documentation-overlays-v1.json"
+    },
+    "controls/final-documentation-review-v1.json": {
+      "bytes": 5280,
+      "sha256": "c8a6c13b32a7c41adc360903feadb5fedb0fc718c20ee1673b63dc2bc83a469d",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/final-documentation-review-v1.json"
+    },
+    "controls/final-frozen-source-review-v1.json": {
+      "bytes": 6069,
+      "sha256": "89acf2a78a71f83be2f844aacaff2bc750d135ed684994ff6f3e9bf7815a9310",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/final-frozen-source-review-v1.json"
+    },
+    "controls/frozen-source-v1.json": {
+      "bytes": 1108490,
+      "sha256": "a3e86772e10a861ae613ed142485fc03815d3a9baf16ec57201257f35b077b4f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/frozen-source-v1.json"
+    },
+    "controls/independent-saved-native-review-v1.json": {
+      "bytes": 27894,
+      "sha256": "a409e94d09ede300b578df63f622facee4d0d3fe2fff125e8fb3d3e0c672a79a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/independent-saved-native-review-v1.json"
+    },
+    "controls/inputs.json": {
+      "bytes": 396,
+      "sha256": "4a7147fd1406789b313788b1cc29e551d240353a263cc6e6b69f15f278dc5f3f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/inputs.json"
+    },
+    "controls/native-driver-stderr-v1.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-driver-stderr-v1.txt"
+    },
+    "controls/native-driver-stdout-v1.txt": {
+      "bytes": 301,
+      "sha256": "9f033ad7d23c6bb5d4d0358ae61c0ecfaec1de073ec0fe0c78c07abaa0e50b80",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-driver-stdout-v1.txt"
+    },
+    "controls/native-execution-v1.json": {
+      "bytes": 26371,
+      "sha256": "cbe0d9cd67b584c736704f9b0e239b232d8a98c827b544c12f6c3d139b0129ec",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-execution-v1.json"
+    },
+    "controls/review_saved_native_v1.py": {
+      "bytes": 4208,
+      "sha256": "629a0c5bedebb309654dec1ab3a1e9d62bf45d1d51de4b3169b613998fc08a62",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/review_saved_native_v1.py"
+    },
+    "controls/root-saved-native-review-v1.json": {
+      "bytes": 1817,
+      "sha256": "14f5155e517200e0397556677f446532b8e6c41107c123a1531575079d7db036",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/root-saved-native-review-v1.json"
+    },
+    "controls/run_native_once_v1.py": {
+      "bytes": 4169,
+      "sha256": "faeebe402b4aa73f33ebd4c8d22c9181f85e8773f7841bc8cb572c36e0440a4a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/run_native_once_v1.py"
+    },
+    "native-final-v1/PTExecReadersBackendRegistrationTest": {
+      "bytes": 218724,
+      "sha256": "91c595486224b7fa583a6caedb79688488c5e43e062ad2c8b803d6a6c902f0f5",
+      "mode": 493,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/PTExecReadersBackendRegistrationTest"
+    },
+    "native-final-v1/PTExecReadersBackendRegistrationTest.build.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/PTExecReadersBackendRegistrationTest.build.log"
+    },
+    "native-final-v1/compile-commands.json": {
+      "bytes": 2905,
+      "sha256": "3f1d986915ceb2f74037a66d21bdc4105c7f444fe0fbc6b398d5a2cefb1a0f5b",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/compile-commands.json"
+    },
+    "native-final-v1/compiler-target-help.log": {
+      "bytes": 7189,
+      "sha256": "f49f0114a73ba557163318b0fdad968b33b41a939e5766a83460468bda9c7a79",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/compiler-target-help.log"
+    },
+    "native-final-v1/compiler-version.log": {
+      "bytes": 247,
+      "sha256": "5946ce0c1a43a84e1c7af8cfaa306b2f4bd276dd02164560d5674bcc91250d0b",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/compiler-version.log"
+    },
+    "native-final-v1/dependencies-00.log": {
+      "bytes": 7649,
+      "sha256": "7346e927c8df43a9d80e301965ae8a10a30743f10b14b2215d968d79f4843e8c",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-00.log"
+    },
+    "native-final-v1/dependencies-01.log": {
+      "bytes": 3329,
+      "sha256": "a48dba34e0041f01a5a244832c13ae6728bbba974dd87219df385d21d9f7d192",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-01.log"
+    },
+    "native-final-v1/dependencies-02.log": {
+      "bytes": 2935,
+      "sha256": "92ec819ff7d6e393804022b7c06ea0558e530db37a234dd44bc0a333b0bbb928",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-02.log"
+    },
+    "native-final-v1/dependencies-03.log": {
+      "bytes": 2868,
+      "sha256": "29b3f6cd229dfc310a8352b1ace422b53297267c479f637c556fc0110cfa1cb6",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-03.log"
+    },
+    "native-final-v1/dependencies-04.log": {
+      "bytes": 2677,
+      "sha256": "7649b08c78af4bc4cb103d1549be8cee06ac757e10a5b6578a43a16049038361",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-04.log"
+    },
+    "native-final-v1/dependencies-05.log": {
+      "bytes": 2867,
+      "sha256": "4cd5d434f990b47e5bcac544a05a2a1f1910ad12e51e1ca67e93c01abaadf83f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-05.log"
+    },
+    "native-final-v1/dependencies-06.log": {
+      "bytes": 1047,
+      "sha256": "4ff5bed5dafd828328ca674aaffdee0ba7aad01f11d1748ec792fa07510f87d9",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-06.log"
+    },
+    "native-final-v1/dependencies-07.log": {
+      "bytes": 3608,
+      "sha256": "dbc58e04e0ec2f4c88622e0275b17be2c562296ad1760d318e4ea1c195af29c6",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-07.log"
+    },
+    "native-final-v1/dependencies-08.log": {
+      "bytes": 2877,
+      "sha256": "6d965099f3d42fe6e1d3f339e33832baa6cfbfba2504c2d0d0ef07c1f94db8b4",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-08.log"
+    },
+    "native-final-v1/dependencies-09.log": {
+      "bytes": 2691,
+      "sha256": "ecfca1c53587ed34fc179bac0275d99ba44e46c144f39ca6e722c4b08bbbeb46",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-09.log"
+    },
+    "native-final-v1/dependencies-10.log": {
+      "bytes": 2674,
+      "sha256": "6eca9be45c2f9e1b81b0d88fa1ccd7ab10c728f6d1a8b8290d29176b9f5d3271",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-10.log"
+    },
+    "native-final-v1/dependencies-11.log": {
+      "bytes": 2719,
+      "sha256": "0a6f724c52f97951e0cc34b50a4aae9db35c2a99d21128cc6f38f72dc4ba32e5",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-11.log"
+    },
+    "native-final-v1/dependencies-12.log": {
+      "bytes": 2787,
+      "sha256": "1f192fe62ece619be6d88a2eb02b0a026130d9d8ee2387791ab4e545a29b5a20",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-12.log"
+    },
+    "native-final-v1/dependencies-13.log": {
+      "bytes": 2653,
+      "sha256": "6b987584a6c74fb8817a7124512d83b18df1c43a53f40741061c14a0343ad866",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-13.log"
+    },
+    "native-final-v1/dependencies-14.log": {
+      "bytes": 2724,
+      "sha256": "e4aea7b8ba66c48b8d57c86bded28f6e6bcd657d0c725ff79d36a6d28525b982",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-14.log"
+    },
+    "native-final-v1/dependencies-15.log": {
+      "bytes": 2754,
+      "sha256": "e4faeae096c9ec48ef2fc5ad7099505e81e7e2ce0fe48974860884543a80b668",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-15.log"
+    },
+    "native-final-v1/dependencies-16.log": {
+      "bytes": 2671,
+      "sha256": "c7ba9b4659696523b158251b58782db04ab261cbaa3ba9c8a33a76f1e25d7f57",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-16.log"
+    },
+    "native-final-v1/dependencies-17.log": {
+      "bytes": 2665,
+      "sha256": "e6d857bcb44c2f2752e7795df3426c8312bd2bd7d6ad93177da0fc47597b1cc5",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-17.log"
+    },
+    "native-final-v1/dependencies-18.log": {
+      "bytes": 1767,
+      "sha256": "01c3547804956b0748114b63f1de3c6d9d5093feac2a7ff56dfeb2e0290c867a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-18.log"
+    },
+    "native-final-v1/dependencies-19.log": {
+      "bytes": 2665,
+      "sha256": "30fc4d262f9607a81b3b62ef30564262161af272e84a2320ac95cf8fd56cc5fb",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-19.log"
+    },
+    "native-final-v1/dependencies-20.log": {
+      "bytes": 2665,
+      "sha256": "3ec39f4b71cc8765d576a56a9b4c058099052b7c3f21a3643f8dbb0f08bea835",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-20.log"
+    },
+    "native-final-v1/dependencies-21.log": {
+      "bytes": 982,
+      "sha256": "153faaede332c2e41619a5bd53c34e720a48f4d8135fb16442b2c5d1f1462628",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-21.log"
+    },
+    "native-final-v1/dependencies-22.log": {
+      "bytes": 3390,
+      "sha256": "165055af098e162d5968385ea9f8d5e399771a453e61917d4314ee73507152ad",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-22.log"
+    },
+    "native-final-v1/dependencies-23.log": {
+      "bytes": 2958,
+      "sha256": "06442321ede1324aa786b79e13e66873db108783bdee5649e95dfcc17d91feed",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-23.log"
+    },
+    "native-final-v1/dependencies-24.log": {
+      "bytes": 2756,
+      "sha256": "ffaf5a837c558e6504f307fcccce64f260be66d37893e7cd7825b436ccee6f33",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-24.log"
+    },
+    "native-final-v1/dependencies-25.log": {
+      "bytes": 2764,
+      "sha256": "79330e9c1518bd06b309ced78bd3ce6804b54c60b338dddfab37f418de96df62",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-25.log"
+    },
+    "native-final-v1/dependencies-26.log": {
+      "bytes": 991,
+      "sha256": "23413c9f68029d2c575aeb384af67a2f0bfd1f2481b90bc01024f739ed8384d5",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-26.log"
+    },
+    "native-final-v1/dependencies-27.log": {
+      "bytes": 2710,
+      "sha256": "04360b4cb214983e2526501108452c4162a19b3dfeb727a5477015ed010c2564",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-27.log"
+    },
+    "native-final-v1/dependencies-28.log": {
+      "bytes": 2724,
+      "sha256": "9e6da72ba29b2969c2f5e604460a2a5f540c8148cb11142006a2f8f2e877fa94",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-28.log"
+    },
+    "native-final-v1/dependencies-29.log": {
+      "bytes": 3846,
+      "sha256": "6870e6dbcb583de4c76bc8cdc052c3c060e8cda585a77532afdfbbc7ea1bb06e",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-29.log"
+    },
+    "native-final-v1/dependencies-30.log": {
+      "bytes": 3905,
+      "sha256": "e52925f7078915154e980f3fbfcabebf51e5ff0c2467a6fb309774e6926c33af",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-30.log"
+    },
+    "native-final-v1/manifest.json": {
+      "bytes": 67147,
+      "sha256": "8cf4759217b37ced1d34b6f561c4697a3ac4ca10305f38f71e865e6c35780471",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/manifest.json"
+    },
+    "native-final-v1/preprocessed-fixture.log": {
+      "bytes": 375483,
+      "sha256": "ca47dfff6bfa7600f524b12b750f64fbdfa81b1d2a81e661e47289519639049b",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/preprocessed-fixture.log"
+    },
+    "native-final-v1/runtime-libamiga-a.log": {
+      "bytes": 156,
+      "sha256": "c2c8e44936c32e01094e9de761e57c62c7bb834fbf6cabd464465bf3b17090c4",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/runtime-libamiga-a.log"
+    },
+    "native-final-v1/runtime-libgcc-a.log": {
+      "bytes": 125,
+      "sha256": "b1912e77c4c1160ce749ca74fbe6edabd5896c2291188e718a9cdfd72c84d57a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/runtime-libgcc-a.log"
+    },
+    "native-final-v1/runtime-libnix-a.log": {
+      "bytes": 121,
+      "sha256": "1ca0a83ef891770cbbe671647c7aad9f925ed0b9756c8f85aca35c84961e202a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/runtime-libnix-a.log"
+    },
+    "native-final-v1/runtime-libnix20-a.log": {
+      "bytes": 123,
+      "sha256": "9060e4a22ea9e716b8f9cf85b5fe5e11a9e6c88ef938b9111d189acc2df8465b",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/runtime-libnix20-a.log"
+    },
+    "native-final-v1/runtime-libnixmain-a.log": {
+      "bytes": 125,
+      "sha256": "dd28b9a8319d35bd81f76cd9479f889e7e5628be07a45ef138f35a729c640add",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/runtime-libnixmain-a.log"
+    },
+    "native-final-v1/runtime-libstubs-a.log": {
+      "bytes": 156,
+      "sha256": "8ce0c56c26f8f09a8af8b76d62c4d380cbfbe8efde13fa64884d8e9e6c93027f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/runtime-libstubs-a.log"
+    },
+    "native-final-v1/runtime-ncrt0-o.log": {
+      "bytes": 120,
+      "sha256": "1562950e2e8cb15a51238fddb72e6e26f0ff2d5a774543473aba0d274a19c45f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/runtime-ncrt0-o.log"
+    },
+    "native-preparation-v1/PTExecReadersBackendRegistrationTest-contract-v1.json": {
+      "bytes": 1472,
+      "sha256": "4144c3c621e7253790a89faf30933c4799a677e16a354d84992aef7b1468de9f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/PTExecReadersBackendRegistrationTest-contract-v1.json"
+    },
+    "native-preparation-v1/build_exec_readers_backend_registration_test.py": {
+      "bytes": 24798,
+      "sha256": "ffe6a0bf795b7d7ff9a8a0c5a17929bd7e0311fa62bcd5df911eb76ca3be484f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/build_exec_readers_backend_registration_test.py"
+    },
+    "native-preparation-v1/compact-native-v2-to-exec-public-registration-v1.patch": {
+      "bytes": 22726,
+      "sha256": "46f96b62cfb7cf443790bfa973eb003835b8748970ece7ff4f2a7c3eb84858bc",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/compact-native-v2-to-exec-public-registration-v1.patch"
+    },
+    "native-preparation-v1/independent-helper-review-v1.json": {
+      "bytes": 11073,
+      "sha256": "32d9fd8d7ce9dfd0c67c97f1ca17abba5f3881584df16474fb5cb3f1ad4113f5",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/independent-helper-review-v1.json"
+    },
+    "native-preparation-v1/origins/PTExecReadersBackendRegistrationTest-contract-plan-v1.json": {
+      "bytes": 1472,
+      "sha256": "4144c3c621e7253790a89faf30933c4799a677e16a354d84992aef7b1468de9f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/origins/PTExecReadersBackendRegistrationTest-contract-plan-v1.json"
+    },
+    "native-preparation-v1/origins/PTPaulaReadersSongCompactTest-contract-v2.json": {
+      "bytes": 1437,
+      "sha256": "92384e6a36490f87a39a857b82e06c3b7e1cb97a07220fd07681213bf267c1ba",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/origins/PTPaulaReadersSongCompactTest-contract-v2.json"
+    },
+    "native-preparation-v1/origins/build_song_readers_compact_portability_v2.py": {
+      "bytes": 22892,
+      "sha256": "2b29ab511fa9265b0076f89b134a0057a49035e89ab2ea6c9428ab515117011f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/origins/build_song_readers_compact_portability_v2.py"
+    },
+    "native-preparation-v1/origins/source-seal-v1.json": {
+      "bytes": 3225,
+      "sha256": "93bd2415cbec9fab41b517a95ac053e851d7a4e91691218100054b659bce24e3",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/origins/source-seal-v1.json"
+    },
+    "native-preparation-v1/origins/toolchain-pins.json": {
+      "bytes": 2730,
+      "sha256": "22ac81cd691e00c5ee75a10b855966eed23a52edf741fcc624a907b37cf0b461",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/origins/toolchain-pins.json"
+    },
+    "native-preparation-v1/prepared-files-v1.json": {
+      "bytes": 3859,
+      "sha256": "a88ffb18d1c58eabb24f24521386356ee38a4b73c1f5b10a9509c79be19e1548",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/prepared-files-v1.json"
+    },
+    "native-preparation-v1/source-only-review-v1.json": {
+      "bytes": 12667,
+      "sha256": "dc80d37e9c7ec816e280146c4f95124a9b17738a396f7a02585477e6a0092d9a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/source-only-review-v1.json"
+    },
+    "native-preparation-v1/toolchain-pins.json": {
+      "bytes": 2730,
+      "sha256": "22ac81cd691e00c5ee75a10b855966eed23a52edf741fcc624a907b37cf0b461",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/toolchain-pins.json"
+    },
+    "prior-shared-qualification/host-final-v1/host-checks.json": {
+      "bytes": 396455,
+      "sha256": "0dbd26c3e127a84c9a5b1bd3577c3da602c640dcdd881c7f9fc4ec7c540c51f9",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/host-final-v1/host-checks.json"
+    },
+    "prior-shared-qualification/independent-saved-host-review-v1.json": {
+      "bytes": 11171,
+      "sha256": "1e92235e02676531fcb3ebbe1e7a007f3715b8094e409703f8a68929f0da1599",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/independent-saved-host-review-v1.json"
+    },
+    "prior-shared-qualification/independent-saved-native-review-v1.json": {
+      "bytes": 16581,
+      "sha256": "8666525c36684fbb1b719e81dba88fd065e77e1cfec914bc3a0809cf4965d917",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/independent-saved-native-review-v1.json"
+    },
+    "prior-shared-qualification/native-final-v1/manifest.json": {
+      "bytes": 61059,
+      "sha256": "4feffa98e1b5345019d4aab49dd7940fbfcae479e7ccc97e803d2a1dce20ad62",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/native-final-v1/manifest.json"
+    },
+    "source/src/core/amigus_reservation.h": {
+      "bytes": 3404,
+      "sha256": "ee57be55b9865fd19d14b27b22af6e2aa6b0466b7f21da5b313016efe9a0b646",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/amigus_reservation.h"
+    },
+    "source/src/core/amigus_sample_ram.h": {
+      "bytes": 2813,
+      "sha256": "005111323eb1884112230ea415fbfb75e01d560618326148e08790d4f23fadf6",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/amigus_sample_ram.h"
+    },
+    "source/src/core/amigus_wavetable_cache.h": {
+      "bytes": 3792,
+      "sha256": "8c449f009eac14807a9521d16a756345dd531e47b50312a3cabf96ee7ea2ee9c",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/amigus_wavetable_cache.h"
+    },
+    "source/src/core/channels.c": {
+      "bytes": 6996,
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/channels.c"
+    },
+    "source/src/core/channels.h": {
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/channels.h"
+    },
+    "source/src/core/document.c": {
+      "bytes": 9127,
+      "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/document.c"
+    },
+    "source/src/core/document.h": {
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/document.h"
+    },
+    "source/src/core/elapsed_clock.c": {
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/elapsed_clock.c"
+    },
+    "source/src/core/elapsed_clock.h": {
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/elapsed_clock.h"
+    },
+    "source/src/core/flow.c": {
+      "bytes": 8904,
+      "sha256": "c1850d6202a01805876ce6afa903ac4ae145757410e7597d70f2601903e79783",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/flow.c"
+    },
+    "source/src/core/flow.h": {
+      "bytes": 3803,
+      "sha256": "db5a78efb5344d95f145d70a6c26c664a832410b8ea741c56f0de831d4163046",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/flow.h"
+    },
+    "source/src/core/frame_clock.c": {
+      "bytes": 1209,
+      "sha256": "e5d9c6c9dc7ea48daf6d099dc5ade8ec2260d8009f40eebd26fa32bd06490a22",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/frame_clock.c"
+    },
+    "source/src/core/frame_clock.h": {
+      "bytes": 884,
+      "sha256": "77bb574a681a492967a6dc938e5eab7e5f28c70f73fd18189de6ed379ccbc54c",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/frame_clock.h"
+    },
+    "source/src/core/mod_inspect.c": {
+      "bytes": 3513,
+      "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/mod_inspect.c"
+    },
+    "source/src/core/mod_inspect.h": {
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/mod_inspect.h"
+    },
+    "source/src/core/mod_project.c": {
+      "bytes": 23640,
+      "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/mod_project.c"
+    },
+    "source/src/core/mod_project.h": {
+      "bytes": 5051,
+      "sha256": "c28407161729fc0fea2398f79341a866f03913b092769674bd871bb23adb59ee",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/mod_project.h"
+    },
+    "source/src/core/pattern.c": {
+      "bytes": 15753,
+      "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pattern.c"
+    },
+    "source/src/core/pattern.h": {
+      "bytes": 3642,
+      "sha256": "f8c9abde09c4fe495ae77f25c070da647eab038845729edc83adec08c5678d53",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pattern.h"
+    },
+    "source/src/core/paula_render_voice.c": {
+      "bytes": 1997,
+      "sha256": "c037e6d3e59d6c898e78ebba05036d960ced3a2758a08cf36adbdcd4780ecc82",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/paula_render_voice.c"
+    },
+    "source/src/core/paula_render_voice.h": {
+      "bytes": 1642,
+      "sha256": "11126de4c05368ab1acdcfe1f92b56df03b8233f7e2ec0c304c9d5922e913c77",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/paula_render_voice.h"
+    },
+    "source/src/core/pcm.c": {
+      "bytes": 7061,
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pcm.c"
+    },
+    "source/src/core/pcm.h": {
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pcm.h"
+    },
+    "source/src/core/pcm_filtered.c": {
+      "bytes": 4604,
+      "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pcm_filtered.c"
+    },
+    "source/src/core/pcm_internal.h": {
+      "bytes": 615,
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pcm_internal.h"
+    },
+    "source/src/core/pitch.c": {
+      "bytes": 6193,
+      "sha256": "9088859aa6a2812510b3a28334420030add960afa5f2cca3b41946018f0c04d5",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pitch.c"
+    },
+    "source/src/core/pitch.h": {
+      "bytes": 794,
+      "sha256": "7ec69432c14acb87bc3ba357fe1031023942ebe4ce35e2193d46c16f7068f8b4",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pitch.h"
+    },
+    "source/src/core/pitch_tables.h": {
+      "bytes": 2787,
+      "sha256": "436cb7721c10ef2ef010d7fa6c2b0e46ccec2a4dfc2f7ce9af76a2bb0eb7812a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pitch_tables.h"
+    },
+    "source/src/core/playback_internal.h": {
+      "bytes": 1893,
+      "sha256": "5d76f20f2c9a7eda89c3543a897f053c97f9460a847d2d70b32b8b71c14775e2",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/playback_internal.h"
+    },
+    "source/src/core/playback_pcm.c": {
+      "bytes": 11344,
+      "sha256": "f00995c1ca81176fc244968b4276b41624767f42c2963eb90482f23953d09a1f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/playback_pcm.c"
+    },
+    "source/src/core/playback_pcm.h": {
+      "bytes": 6034,
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/playback_pcm.h"
+    },
+    "source/src/core/pp20.c": {
+      "bytes": 7187,
+      "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pp20.c"
+    },
+    "source/src/core/pp20.h": {
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pp20.h"
+    },
+    "source/src/core/project.c": {
+      "bytes": 46481,
+      "sha256": "be3094ffb8a57df8e0f7a58a946f7f20978715f17d2103234027824af882b094",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/project.c"
+    },
+    "source/src/core/project.h": {
+      "bytes": 8827,
+      "sha256": "e1a749800258b1f1db1dedcd7d5d36970abbf7494279cb3669212757f982e21a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/project.h"
+    },
+    "source/src/core/raw.c": {
+      "bytes": 3920,
+      "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/raw.c"
+    },
+    "source/src/core/raw.h": {
+      "bytes": 1171,
+      "sha256": "f9f47added4df41bb7b15aa3b1b7a4d8131a2c4aa19266436318483a41bc0f3b",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/raw.h"
+    },
+    "source/src/core/render.c": {
+      "bytes": 63044,
+      "sha256": "4b355e1319e10ff3ba0a26d8dc652b7d05faef2f57afc6f85925ba826ba1686f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/render.c"
+    },
+    "source/src/core/render.h": {
+      "bytes": 11891,
+      "sha256": "50bca0c9fd47be061c3b0c027388f5c1bdbe4316a1caed3f33a696f7527812ea",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/render.h"
+    },
+    "source/src/core/render_commands.h": {
+      "bytes": 9193,
+      "sha256": "ea176e8382ea808929d11571396d6214bb40d2fce8defc9b19569c1bb5c30d14",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/render_commands.h"
+    },
+    "source/src/core/render_lookahead.h": {
+      "bytes": 1954,
+      "sha256": "6ecdad4402eb721aad8d3b55d6d8fc87a9f8135962c8638f0f1919527c4fbf03",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/render_lookahead.h"
+    },
+    "source/src/core/sample_cache.c": {
+      "bytes": 4018,
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/sample_cache.c"
+    },
+    "source/src/core/sample_cache.h": {
+      "bytes": 1999,
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/sample_cache.h"
+    },
+    "source/src/core/sample_usage.h": {
+      "bytes": 3167,
+      "sha256": "0ed540356b9ff1bd2ae651de2ee183b6c0c45af84f352eb02fab07d9155565a0",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/sample_usage.h"
+    },
+    "source/src/core/scheduled_output.h": {
+      "bytes": 6515,
+      "sha256": "3289945d9446b373d8aa1897cb2c432f08ef253b443a81cd4dde39230df9b9da",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/scheduled_output.h"
+    },
+    "source/src/core/scheduled_readers.c": {
+      "bytes": 27452,
+      "sha256": "4df38547aa4752bfc4c8c2910156bd800f485412e39991af2e0840672d60f2a0",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/scheduled_readers.c"
+    },
+    "source/src/core/scheduled_readers.h": {
+      "bytes": 9906,
+      "sha256": "5a63c3da2c4b08eb9329d33c3679776c8554f6f96bb56bc3590f4afd9fd5e52c",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/scheduled_readers.h"
+    },
+    "source/src/core/sinc_kernel.h": {
+      "bytes": 28756,
+      "sha256": "058629396a0b22daa67f75c909adf9181fc4e52bfc668890fe2abc3231c3a185",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/sinc_kernel.h"
+    },
+    "source/src/core/slices.c": {
+      "bytes": 6060,
+      "sha256": "2951045844f6fdebdd80afe12fe7a5afc1f37bf837c2f49d840f14867835342f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/slices.c"
+    },
+    "source/src/core/slices.h": {
+      "bytes": 2003,
+      "sha256": "31cd82785c2b86c41d9cde1f7a29056c9d70ec41fb7a9bfb1a5679ba762c24f7",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/slices.h"
+    },
+    "source/src/core/svx.c": {
+      "bytes": 7817,
+      "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/svx.c"
+    },
+    "source/src/core/svx.h": {
+      "bytes": 1442,
+      "sha256": "824541cd25b72b5820e091cfc9f4e6a5f41351fd0630dddc09aefc0405036814",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/svx.h"
+    },
+    "source/src/core/timeline.c": {
+      "bytes": 1598,
+      "sha256": "2296df1f1d13336bacb40cd867268dbd1c52d1ed0353256f5022da536516effd",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/timeline.c"
+    },
+    "source/src/core/timeline.h": {
+      "bytes": 1150,
+      "sha256": "ef1640b5c7dd9e48e1e13a9963c21c53b913d062b172a988e91abb7532defa64",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/timeline.h"
+    },
+    "source/src/core/voice.c": {
+      "bytes": 11427,
+      "sha256": "9da52c6a82f9ea753655ed4d196946198316cb5327078ffbf354a6dc66e48c68",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/voice.c"
+    },
+    "source/src/core/voice.h": {
+      "bytes": 4184,
+      "sha256": "386b10545fb8ae615b5a45718d90be60b0999b2d63fffd835b6be540d7dca479",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/voice.h"
+    },
+    "source/src/core/voice_internal.h": {
+      "bytes": 934,
+      "sha256": "02f7f0af75f1a60a7907fbdcbfa754f3d2a06e9073d2bb5e4888f36a66ce5973",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/voice_internal.h"
+    },
+    "source/src/core/wav.c": {
+      "bytes": 7200,
+      "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/wav.c"
+    },
+    "source/src/core/wav.h": {
+      "bytes": 1384,
+      "sha256": "8dd0f4454304babb53eef5ecb97cde7bfe6569d292cc0e9a0f204c4a587f2028",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/wav.h"
+    },
+    "source/src/editor/paula_dispatch.h": {
+      "bytes": 3087,
+      "sha256": "6775ee73d41e615c3a125d3ed1e0a9258496a86dfd7552a2373f044acdc844df",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/paula_dispatch.h"
+    },
+    "source/src/editor/paula_preflight.c": {
+      "bytes": 22069,
+      "sha256": "0e4a6f90cdec366856b0a2325502185746f9a2bab0ff3118d6c5f346dde5a82d",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/paula_preflight.c"
+    },
+    "source/src/editor/paula_preflight.h": {
+      "bytes": 8400,
+      "sha256": "3fd4d9096a3592f53503d1c1e2599dea33873b1fd508b41826d8715f6604f67d",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/paula_preflight.h"
+    },
+    "source/src/editor/paula_readers_song.c": {
+      "bytes": 48927,
+      "sha256": "576f0ea6461d31d55a32606b1535a7c503b8c343a317c79accaaca1e94bb597d",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/paula_readers_song.c"
+    },
+    "source/src/editor/paula_readers_song.h": {
+      "bytes": 10485,
+      "sha256": "5bc7540e93e52177332344d292172bdaa931d10c7f436767c8f8439a6019aaf7",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/paula_readers_song.h"
+    },
+    "source/src/editor/paula_song.h": {
+      "bytes": 10127,
+      "sha256": "5bf76551766e162289eef522c430d0f601a63aa57285f61f369172e1bc0322e7",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/paula_song.h"
+    },
+    "source/src/editor/paula_voices.h": {
+      "bytes": 4411,
+      "sha256": "493358f90435bdc7d99e31ed81d76fd17f720cfe174c244a9f766bd4a8d9039d",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/paula_voices.h"
+    },
+    "source/src/editor/project_snapshot.h": {
+      "bytes": 1203,
+      "sha256": "dbb1206c1e8bfd317b515086f9d064c6eacd2450228893bb394f278ed6c0b2df",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/project_snapshot.h"
+    },
+    "source/src/editor/sampler.c": {
+      "bytes": 61777,
+      "sha256": "c12592eda47b39b5a7792061c9f94b38e510ea8d018899b8541d58a66ee05819",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/sampler.c"
+    },
+    "source/src/editor/sampler.h": {
+      "bytes": 6264,
+      "sha256": "d19465c8b3866cfb67cfaca98457c2201165675cc3a4f45804d3c00b17284433",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/sampler.h"
+    },
+    "source/src/editor/sampler_internal.h": {
+      "bytes": 3679,
+      "sha256": "8ce04909cd657d0caa6598416cfce2ee91109bf8fde782fc7795d35b116ac3e2",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/sampler_internal.h"
+    },
+    "source/src/editor/sampler_paula.c": {
+      "bytes": 7401,
+      "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/sampler_paula.c"
+    },
+    "source/src/editor/sampler_paula.h": {
+      "bytes": 2718,
+      "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/sampler_paula.h"
+    },
+    "source/src/editor/sampler_paula_internal.h": {
+      "bytes": 3013,
+      "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/sampler_paula_internal.h"
+    },
+    "source/src/editor/sampler_paula_readers.c": {
+      "bytes": 45259,
+      "sha256": "63a92310c3e4949b7807ddc9d65b3c525698ad40f5c810ec0238c619204f84ff",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/sampler_paula_readers.c"
+    },
+    "source/src/editor/sampler_paula_readers.h": {
+      "bytes": 9761,
+      "sha256": "c59fb4022270b6880ef3a430859ee064436f6f1bf4ba3674f546e958ceddc85c",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/sampler_paula_readers.h"
+    },
+    "source/src/editor/sampler_workflow.h": {
+      "bytes": 4356,
+      "sha256": "a1eff0addfd1fded1185029f68bd9d6d885d5a421b702b40f76cb28af63fac1a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/sampler_workflow.h"
+    },
+    "source/src/editor/slots.c": {
+      "bytes": 3233,
+      "sha256": "60ab6a784d4bc47285bb436b975cdd6ee0bad4743bdf9f0817837d818645f7fa",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/slots.c"
+    },
+    "source/src/native/master_memory.h": {
+      "bytes": 1694,
+      "sha256": "ac898368849ec2d1892717d425b90c398da37a8799d536366a898e2e219e184a",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/native/master_memory.h"
+    },
+    "source/src/native/paula_memory.h": {
+      "bytes": 1036,
+      "sha256": "c547e70bfb300a25b737eeb16f3ac83a65ef20b1a0c6e42d5564cd2e700f098b",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/native/paula_memory.h"
+    },
+    "source/tests/native_exec_memory.h": {
+      "bytes": 1506,
+      "sha256": "ce0f2b696ce7767c0da8a2a44ac7730bc207f81e4f6b86bfd172353989e664b9",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tests/native_exec_memory.h"
+    },
+    "source/tests/native_exec_readers_backend_registration_test.c": {
+      "bytes": 2010,
+      "sha256": "ca9aff1aaba05a1bf31d5d1600a1dea5a7f44cb009bbe863b517499c45fc4a8f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tests/native_exec_readers_backend_registration_test.c"
+    },
+    "source/tests/paula_readers_song_compact_test.c": {
+      "bytes": 27698,
+      "sha256": "939001fd147e955acdf4922e003da56b2dca64cfdcae58b31bfc94cc2784d3a3",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tests/paula_readers_song_compact_test.c"
+    },
+    "source/tests/paula_readers_song_test.c": {
+      "bytes": 56917,
+      "sha256": "30459a4eb24074c57ea17704a6bd3b3aca84b9b244992d0c5d038bed4ecdbf05",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tests/paula_readers_song_test.c"
+    },
+    "source/tests/paula_readers_song_workspace_test.c": {
+      "bytes": 72605,
+      "sha256": "ebecbe7d4617173daa8e785f19fe00c0a1ac61e1e45ee5c252704d9cb69180f0",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tests/paula_readers_song_workspace_test.c"
+    },
+    "source/tests/readers_backend_registration_test.c": {
+      "bytes": 32611,
+      "sha256": "e0bd19f0d1cd7576155cec5f3683a20bb9adb8ed196f27a13342acdfe0a29f67",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tests/readers_backend_registration_test.c"
+    },
+    "source/tests/sampler_paula_readers_boundary_test.c": {
+      "bytes": 20629,
+      "sha256": "552d86b02d30b02ebe3977cdb9ad7ac378bf4be866f4956dbf98f291e203c2cb",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tests/sampler_paula_readers_boundary_test.c"
+    },
+    "source/tests/sampler_paula_readers_test.c": {
+      "bytes": 35587,
+      "sha256": "2aabb1d2e0b18c72496c9a7c967228a7a009c4d492e26de0da5a7addd42406f5",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tests/sampler_paula_readers_test.c"
+    },
+    "source/tests/scheduled_readers_test.c": {
+      "bytes": 37149,
+      "sha256": "8cc472331fbe20d0ff51bc78da490906c2261f849d7da4c4c79bad7c750a7e35",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tests/scheduled_readers_test.c"
+    },
+    "source/tests/test_readers_backend_registration.py": {
+      "bytes": 1753,
+      "sha256": "fbd5dd4dceb099b2166289154e1850c58f985119999268859cf9100703776c60",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tests/test_readers_backend_registration.py"
+    },
+    "source/tools/build_core_tests.py": {
+      "bytes": 39656,
+      "sha256": "7ce83c91408a6192774ed779335d4c04e4e78229321cfa9d5d1f8af03b035069",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tools/build_core_tests.py"
+    },
+    "source/tools/build_diagnostic.py": {
+      "bytes": 5879,
+      "sha256": "a5a42c8a811eb4e5ce744157afd2715de8f4c9c7d392b3b7b40f1dc6f459a805",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tools/build_diagnostic.py"
+    },
+    "wrapper-preparation/PTExecReadersBackendRegistrationTest-contract-plan-v1.json": {
+      "bytes": 1472,
+      "sha256": "4144c3c621e7253790a89faf30933c4799a677e16a354d84992aef7b1468de9f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/PTExecReadersBackendRegistrationTest-contract-plan-v1.json"
+    },
+    "wrapper-preparation/independent-source-review-v1.json": {
+      "bytes": 5695,
+      "sha256": "da9bbc5953eb30877a896534405f3960cfc036630faf8040e1e9dd124f571b39",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/independent-source-review-v1.json"
+    },
+    "wrapper-preparation/source-only-plan-v1.json": {
+      "bytes": 21876,
+      "sha256": "d13c57b1d86cdc7832d98d61f9dcb029f9c7b7b86892f2fb593c9ea66c136bbe",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/source-only-plan-v1.json"
+    },
+    "wrapper-preparation/source-seal-v1.json": {
+      "bytes": 3225,
+      "sha256": "93bd2415cbec9fab41b517a95ac053e851d7a4e91691218100054b659bce24e3",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/source-seal-v1.json"
+    },
+    "wrapper-preparation/tests/native_exec_readers_backend_registration_test.c": {
+      "bytes": 2010,
+      "sha256": "ca9aff1aaba05a1bf31d5d1600a1dea5a7f44cb009bbe863b517499c45fc4a8f",
+      "mode": 420,
+      "original_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/tests/native_exec_readers_backend_registration_test.c"
+    }
+  },
+  "path_members": {
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/READERS_EXEC_RAM_QUALIFICATION.final.md": "controls/READERS_EXEC_RAM_QUALIFICATION.final.md",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/SAMPLE_MEMORY.exec-final.md": "controls/SAMPLE_MEMORY.exec-final.md",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/approved-native-controls-v1.json": "controls/approved-native-controls-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/baseline-manifest.json": "controls/baseline-manifest.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/before-state.json": "controls/before-state.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/amigus_reservation.h": "source/src/core/amigus_reservation.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/amigus_sample_ram.h": "source/src/core/amigus_sample_ram.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/amigus_wavetable_cache.h": "source/src/core/amigus_wavetable_cache.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/channels.c": "source/src/core/channels.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/channels.h": "source/src/core/channels.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/document.c": "source/src/core/document.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/document.h": "source/src/core/document.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/elapsed_clock.c": "source/src/core/elapsed_clock.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/elapsed_clock.h": "source/src/core/elapsed_clock.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/flow.c": "source/src/core/flow.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/flow.h": "source/src/core/flow.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/frame_clock.c": "source/src/core/frame_clock.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/frame_clock.h": "source/src/core/frame_clock.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/mod_inspect.c": "source/src/core/mod_inspect.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/mod_inspect.h": "source/src/core/mod_inspect.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/mod_project.c": "source/src/core/mod_project.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/mod_project.h": "source/src/core/mod_project.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pattern.c": "source/src/core/pattern.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pattern.h": "source/src/core/pattern.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/paula_render_voice.c": "source/src/core/paula_render_voice.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/paula_render_voice.h": "source/src/core/paula_render_voice.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pcm.c": "source/src/core/pcm.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pcm.h": "source/src/core/pcm.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pcm_filtered.c": "source/src/core/pcm_filtered.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pcm_internal.h": "source/src/core/pcm_internal.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pitch.c": "source/src/core/pitch.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pitch.h": "source/src/core/pitch.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pitch_tables.h": "source/src/core/pitch_tables.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/playback_internal.h": "source/src/core/playback_internal.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/playback_pcm.c": "source/src/core/playback_pcm.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/playback_pcm.h": "source/src/core/playback_pcm.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pp20.c": "source/src/core/pp20.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/pp20.h": "source/src/core/pp20.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/project.c": "source/src/core/project.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/project.h": "source/src/core/project.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/raw.c": "source/src/core/raw.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/raw.h": "source/src/core/raw.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/render.c": "source/src/core/render.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/render.h": "source/src/core/render.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/render_commands.h": "source/src/core/render_commands.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/render_lookahead.h": "source/src/core/render_lookahead.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/sample_cache.c": "source/src/core/sample_cache.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/sample_cache.h": "source/src/core/sample_cache.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/sample_usage.h": "source/src/core/sample_usage.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/scheduled_output.h": "source/src/core/scheduled_output.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/scheduled_readers.c": "source/src/core/scheduled_readers.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/scheduled_readers.h": "source/src/core/scheduled_readers.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/sinc_kernel.h": "source/src/core/sinc_kernel.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/slices.c": "source/src/core/slices.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/slices.h": "source/src/core/slices.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/svx.c": "source/src/core/svx.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/svx.h": "source/src/core/svx.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/timeline.c": "source/src/core/timeline.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/timeline.h": "source/src/core/timeline.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/voice.c": "source/src/core/voice.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/voice.h": "source/src/core/voice.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/voice_internal.h": "source/src/core/voice_internal.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/wav.c": "source/src/core/wav.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/core/wav.h": "source/src/core/wav.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/paula_dispatch.h": "source/src/editor/paula_dispatch.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/paula_preflight.c": "source/src/editor/paula_preflight.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/paula_preflight.h": "source/src/editor/paula_preflight.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/paula_readers_song.c": "source/src/editor/paula_readers_song.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/paula_readers_song.h": "source/src/editor/paula_readers_song.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/paula_song.h": "source/src/editor/paula_song.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/paula_voices.h": "source/src/editor/paula_voices.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/project_snapshot.h": "source/src/editor/project_snapshot.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/sampler.c": "source/src/editor/sampler.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/sampler.h": "source/src/editor/sampler.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/sampler_internal.h": "source/src/editor/sampler_internal.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/sampler_paula.c": "source/src/editor/sampler_paula.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/sampler_paula.h": "source/src/editor/sampler_paula.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/sampler_paula_internal.h": "source/src/editor/sampler_paula_internal.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/sampler_paula_readers.c": "source/src/editor/sampler_paula_readers.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/sampler_paula_readers.h": "source/src/editor/sampler_paula_readers.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/sampler_workflow.h": "source/src/editor/sampler_workflow.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/editor/slots.c": "source/src/editor/slots.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/native/master_memory.h": "source/src/native/master_memory.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/src/native/paula_memory.h": "source/src/native/paula_memory.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tests/native_exec_memory.h": "source/tests/native_exec_memory.h",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tests/native_exec_readers_backend_registration_test.c": "source/tests/native_exec_readers_backend_registration_test.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tests/paula_readers_song_compact_test.c": "source/tests/paula_readers_song_compact_test.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tests/paula_readers_song_test.c": "source/tests/paula_readers_song_test.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tests/paula_readers_song_workspace_test.c": "source/tests/paula_readers_song_workspace_test.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tests/readers_backend_registration_test.c": "source/tests/readers_backend_registration_test.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tests/sampler_paula_readers_boundary_test.c": "source/tests/sampler_paula_readers_boundary_test.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tests/sampler_paula_readers_test.c": "source/tests/sampler_paula_readers_test.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tests/scheduled_readers_test.c": "source/tests/scheduled_readers_test.c",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tests/test_readers_backend_registration.py": "source/tests/test_readers_backend_registration.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tools/build_core_tests.py": "source/tools/build_core_tests.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/candidate/tools/build_diagnostic.py": "source/tools/build_diagnostic.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/documentation-overlays-v1.json": "controls/documentation-overlays-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/final-documentation-review-v1.json": "controls/final-documentation-review-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/final-frozen-source-review-v1.json": "controls/final-frozen-source-review-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/frozen-source-v1.json": "controls/frozen-source-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/independent-saved-native-review-v1.json": "controls/independent-saved-native-review-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/inputs.json": "controls/inputs.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-driver-stderr-v1.txt": "controls/native-driver-stderr-v1.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-driver-stdout-v1.txt": "controls/native-driver-stdout-v1.txt",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-execution-v1.json": "controls/native-execution-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/PTExecReadersBackendRegistrationTest": "native-final-v1/PTExecReadersBackendRegistrationTest",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/PTExecReadersBackendRegistrationTest.build.log": "native-final-v1/PTExecReadersBackendRegistrationTest.build.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/compile-commands.json": "native-final-v1/compile-commands.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/compiler-target-help.log": "native-final-v1/compiler-target-help.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/compiler-version.log": "native-final-v1/compiler-version.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-00.log": "native-final-v1/dependencies-00.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-01.log": "native-final-v1/dependencies-01.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-02.log": "native-final-v1/dependencies-02.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-03.log": "native-final-v1/dependencies-03.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-04.log": "native-final-v1/dependencies-04.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-05.log": "native-final-v1/dependencies-05.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-06.log": "native-final-v1/dependencies-06.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-07.log": "native-final-v1/dependencies-07.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-08.log": "native-final-v1/dependencies-08.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-09.log": "native-final-v1/dependencies-09.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-10.log": "native-final-v1/dependencies-10.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-11.log": "native-final-v1/dependencies-11.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-12.log": "native-final-v1/dependencies-12.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-13.log": "native-final-v1/dependencies-13.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-14.log": "native-final-v1/dependencies-14.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-15.log": "native-final-v1/dependencies-15.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-16.log": "native-final-v1/dependencies-16.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-17.log": "native-final-v1/dependencies-17.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-18.log": "native-final-v1/dependencies-18.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-19.log": "native-final-v1/dependencies-19.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-20.log": "native-final-v1/dependencies-20.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-21.log": "native-final-v1/dependencies-21.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-22.log": "native-final-v1/dependencies-22.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-23.log": "native-final-v1/dependencies-23.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-24.log": "native-final-v1/dependencies-24.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-25.log": "native-final-v1/dependencies-25.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-26.log": "native-final-v1/dependencies-26.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-27.log": "native-final-v1/dependencies-27.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-28.log": "native-final-v1/dependencies-28.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-29.log": "native-final-v1/dependencies-29.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/dependencies-30.log": "native-final-v1/dependencies-30.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/manifest.json": "native-final-v1/manifest.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/preprocessed-fixture.log": "native-final-v1/preprocessed-fixture.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/runtime-libamiga-a.log": "native-final-v1/runtime-libamiga-a.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/runtime-libgcc-a.log": "native-final-v1/runtime-libgcc-a.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/runtime-libnix-a.log": "native-final-v1/runtime-libnix-a.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/runtime-libnix20-a.log": "native-final-v1/runtime-libnix20-a.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/runtime-libnixmain-a.log": "native-final-v1/runtime-libnixmain-a.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/runtime-libstubs-a.log": "native-final-v1/runtime-libstubs-a.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/native-final-v1/runtime-ncrt0-o.log": "native-final-v1/runtime-ncrt0-o.log",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/review_saved_native_v1.py": "controls/review_saved_native_v1.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/root-saved-native-review-v1.json": "controls/root-saved-native-review-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-exec-jg14dwcs/run_native_once_v1.py": "controls/run_native_once_v1.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/host-final-v1/host-checks.json": "prior-shared-qualification/host-final-v1/host-checks.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/independent-saved-host-review-v1.json": "prior-shared-qualification/independent-saved-host-review-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/independent-saved-native-review-v1.json": "prior-shared-qualification/independent-saved-native-review-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/native-final-v1/manifest.json": "prior-shared-qualification/native-final-v1/manifest.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/PTExecReadersBackendRegistrationTest-contract-plan-v1.json": "wrapper-preparation/PTExecReadersBackendRegistrationTest-contract-plan-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/independent-source-review-v1.json": "wrapper-preparation/independent-source-review-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/PTExecReadersBackendRegistrationTest-contract-v1.json": "native-preparation-v1/PTExecReadersBackendRegistrationTest-contract-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/build_exec_readers_backend_registration_test.py": "native-preparation-v1/build_exec_readers_backend_registration_test.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/compact-native-v2-to-exec-public-registration-v1.patch": "native-preparation-v1/compact-native-v2-to-exec-public-registration-v1.patch",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/independent-helper-review-v1.json": "native-preparation-v1/independent-helper-review-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/origins/PTExecReadersBackendRegistrationTest-contract-plan-v1.json": "native-preparation-v1/origins/PTExecReadersBackendRegistrationTest-contract-plan-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/origins/PTPaulaReadersSongCompactTest-contract-v2.json": "native-preparation-v1/origins/PTPaulaReadersSongCompactTest-contract-v2.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/origins/build_song_readers_compact_portability_v2.py": "native-preparation-v1/origins/build_song_readers_compact_portability_v2.py",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/origins/source-seal-v1.json": "native-preparation-v1/origins/source-seal-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/origins/toolchain-pins.json": "native-preparation-v1/origins/toolchain-pins.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/prepared-files-v1.json": "native-preparation-v1/prepared-files-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/source-only-review-v1.json": "native-preparation-v1/source-only-review-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/native-preparation-v1/toolchain-pins.json": "native-preparation-v1/toolchain-pins.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/source-only-plan-v1.json": "wrapper-preparation/source-only-plan-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/source-seal-v1.json": "wrapper-preparation/source-seal-v1.json",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/readers-registration-x0i881jw/next-exec-wrapper-draft-v1/tests/native_exec_readers_backend_registration_test.c": "wrapper-preparation/tests/native_exec_readers_backend_registration_test.c",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/PTExecReadersBackendRegistrationTest": "native-final-v1/PTExecReadersBackendRegistrationTest",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/PTExecReadersBackendRegistrationTest.build.log": "native-final-v1/PTExecReadersBackendRegistrationTest.build.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/compile-commands.json": "native-final-v1/compile-commands.json",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/compiler-target-help.log": "native-final-v1/compiler-target-help.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/compiler-version.log": "native-final-v1/compiler-version.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-00.log": "native-final-v1/dependencies-00.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-01.log": "native-final-v1/dependencies-01.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-02.log": "native-final-v1/dependencies-02.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-03.log": "native-final-v1/dependencies-03.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-04.log": "native-final-v1/dependencies-04.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-05.log": "native-final-v1/dependencies-05.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-06.log": "native-final-v1/dependencies-06.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-07.log": "native-final-v1/dependencies-07.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-08.log": "native-final-v1/dependencies-08.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-09.log": "native-final-v1/dependencies-09.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-10.log": "native-final-v1/dependencies-10.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-11.log": "native-final-v1/dependencies-11.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-12.log": "native-final-v1/dependencies-12.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-13.log": "native-final-v1/dependencies-13.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-14.log": "native-final-v1/dependencies-14.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-15.log": "native-final-v1/dependencies-15.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-16.log": "native-final-v1/dependencies-16.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-17.log": "native-final-v1/dependencies-17.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-18.log": "native-final-v1/dependencies-18.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-19.log": "native-final-v1/dependencies-19.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-20.log": "native-final-v1/dependencies-20.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-21.log": "native-final-v1/dependencies-21.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-22.log": "native-final-v1/dependencies-22.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-23.log": "native-final-v1/dependencies-23.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-24.log": "native-final-v1/dependencies-24.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-25.log": "native-final-v1/dependencies-25.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-26.log": "native-final-v1/dependencies-26.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-27.log": "native-final-v1/dependencies-27.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-28.log": "native-final-v1/dependencies-28.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-29.log": "native-final-v1/dependencies-29.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/dependencies-30.log": "native-final-v1/dependencies-30.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/manifest.json": "native-final-v1/manifest.json",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/preprocessed-fixture.log": "native-final-v1/preprocessed-fixture.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/runtime-libamiga-a.log": "native-final-v1/runtime-libamiga-a.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/runtime-libgcc-a.log": "native-final-v1/runtime-libgcc-a.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/runtime-libnix-a.log": "native-final-v1/runtime-libnix-a.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/runtime-libnix20-a.log": "native-final-v1/runtime-libnix20-a.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/runtime-libnixmain-a.log": "native-final-v1/runtime-libnixmain-a.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/runtime-libstubs-a.log": "native-final-v1/runtime-libstubs-a.log",
+    "/private/tmp/pt-readers-exec-jg14dwcs-native-v1/runtime-ncrt0-o.log": "native-final-v1/runtime-ncrt0-o.log"
+  },
+  "source_members": {
+    "src/core/amigus_reservation.h": "source/src/core/amigus_reservation.h",
+    "src/core/amigus_sample_ram.h": "source/src/core/amigus_sample_ram.h",
+    "src/core/amigus_wavetable_cache.h": "source/src/core/amigus_wavetable_cache.h",
+    "src/core/channels.c": "source/src/core/channels.c",
+    "src/core/channels.h": "source/src/core/channels.h",
+    "src/core/document.c": "source/src/core/document.c",
+    "src/core/document.h": "source/src/core/document.h",
+    "src/core/elapsed_clock.c": "source/src/core/elapsed_clock.c",
+    "src/core/elapsed_clock.h": "source/src/core/elapsed_clock.h",
+    "src/core/flow.c": "source/src/core/flow.c",
+    "src/core/flow.h": "source/src/core/flow.h",
+    "src/core/frame_clock.c": "source/src/core/frame_clock.c",
+    "src/core/frame_clock.h": "source/src/core/frame_clock.h",
+    "src/core/mod_inspect.c": "source/src/core/mod_inspect.c",
+    "src/core/mod_inspect.h": "source/src/core/mod_inspect.h",
+    "src/core/mod_project.c": "source/src/core/mod_project.c",
+    "src/core/mod_project.h": "source/src/core/mod_project.h",
+    "src/core/pattern.c": "source/src/core/pattern.c",
+    "src/core/pattern.h": "source/src/core/pattern.h",
+    "src/core/paula_render_voice.c": "source/src/core/paula_render_voice.c",
+    "src/core/paula_render_voice.h": "source/src/core/paula_render_voice.h",
+    "src/core/pcm.c": "source/src/core/pcm.c",
+    "src/core/pcm.h": "source/src/core/pcm.h",
+    "src/core/pcm_filtered.c": "source/src/core/pcm_filtered.c",
+    "src/core/pcm_internal.h": "source/src/core/pcm_internal.h",
+    "src/core/pitch.c": "source/src/core/pitch.c",
+    "src/core/pitch.h": "source/src/core/pitch.h",
+    "src/core/pitch_tables.h": "source/src/core/pitch_tables.h",
+    "src/core/playback_internal.h": "source/src/core/playback_internal.h",
+    "src/core/playback_pcm.c": "source/src/core/playback_pcm.c",
+    "src/core/playback_pcm.h": "source/src/core/playback_pcm.h",
+    "src/core/pp20.c": "source/src/core/pp20.c",
+    "src/core/pp20.h": "source/src/core/pp20.h",
+    "src/core/project.c": "source/src/core/project.c",
+    "src/core/project.h": "source/src/core/project.h",
+    "src/core/raw.c": "source/src/core/raw.c",
+    "src/core/raw.h": "source/src/core/raw.h",
+    "src/core/render.c": "source/src/core/render.c",
+    "src/core/render.h": "source/src/core/render.h",
+    "src/core/render_commands.h": "source/src/core/render_commands.h",
+    "src/core/render_lookahead.h": "source/src/core/render_lookahead.h",
+    "src/core/sample_cache.c": "source/src/core/sample_cache.c",
+    "src/core/sample_cache.h": "source/src/core/sample_cache.h",
+    "src/core/sample_usage.h": "source/src/core/sample_usage.h",
+    "src/core/scheduled_output.h": "source/src/core/scheduled_output.h",
+    "src/core/scheduled_readers.c": "source/src/core/scheduled_readers.c",
+    "src/core/scheduled_readers.h": "source/src/core/scheduled_readers.h",
+    "src/core/sinc_kernel.h": "source/src/core/sinc_kernel.h",
+    "src/core/slices.c": "source/src/core/slices.c",
+    "src/core/slices.h": "source/src/core/slices.h",
+    "src/core/svx.c": "source/src/core/svx.c",
+    "src/core/svx.h": "source/src/core/svx.h",
+    "src/core/timeline.c": "source/src/core/timeline.c",
+    "src/core/timeline.h": "source/src/core/timeline.h",
+    "src/core/voice.c": "source/src/core/voice.c",
+    "src/core/voice.h": "source/src/core/voice.h",
+    "src/core/voice_internal.h": "source/src/core/voice_internal.h",
+    "src/core/wav.c": "source/src/core/wav.c",
+    "src/core/wav.h": "source/src/core/wav.h",
+    "src/editor/paula_dispatch.h": "source/src/editor/paula_dispatch.h",
+    "src/editor/paula_preflight.c": "source/src/editor/paula_preflight.c",
+    "src/editor/paula_preflight.h": "source/src/editor/paula_preflight.h",
+    "src/editor/paula_readers_song.c": "source/src/editor/paula_readers_song.c",
+    "src/editor/paula_readers_song.h": "source/src/editor/paula_readers_song.h",
+    "src/editor/paula_song.h": "source/src/editor/paula_song.h",
+    "src/editor/paula_voices.h": "source/src/editor/paula_voices.h",
+    "src/editor/project_snapshot.h": "source/src/editor/project_snapshot.h",
+    "src/editor/sampler.c": "source/src/editor/sampler.c",
+    "src/editor/sampler.h": "source/src/editor/sampler.h",
+    "src/editor/sampler_internal.h": "source/src/editor/sampler_internal.h",
+    "src/editor/sampler_paula.c": "source/src/editor/sampler_paula.c",
+    "src/editor/sampler_paula.h": "source/src/editor/sampler_paula.h",
+    "src/editor/sampler_paula_internal.h": "source/src/editor/sampler_paula_internal.h",
+    "src/editor/sampler_paula_readers.c": "source/src/editor/sampler_paula_readers.c",
+    "src/editor/sampler_paula_readers.h": "source/src/editor/sampler_paula_readers.h",
+    "src/editor/sampler_workflow.h": "source/src/editor/sampler_workflow.h",
+    "src/editor/slots.c": "source/src/editor/slots.c",
+    "src/native/master_memory.h": "source/src/native/master_memory.h",
+    "src/native/paula_memory.h": "source/src/native/paula_memory.h",
+    "tests/native_exec_memory.h": "source/tests/native_exec_memory.h",
+    "tests/native_exec_readers_backend_registration_test.c": "source/tests/native_exec_readers_backend_registration_test.c",
+    "tests/paula_readers_song_compact_test.c": "source/tests/paula_readers_song_compact_test.c",
+    "tests/paula_readers_song_test.c": "source/tests/paula_readers_song_test.c",
+    "tests/paula_readers_song_workspace_test.c": "source/tests/paula_readers_song_workspace_test.c",
+    "tests/readers_backend_registration_test.c": "source/tests/readers_backend_registration_test.c",
+    "tests/sampler_paula_readers_boundary_test.c": "source/tests/sampler_paula_readers_boundary_test.c",
+    "tests/sampler_paula_readers_test.c": "source/tests/sampler_paula_readers_test.c",
+    "tests/scheduled_readers_test.c": "source/tests/scheduled_readers_test.c",
+    "tests/test_readers_backend_registration.py": "source/tests/test_readers_backend_registration.py",
+    "tools/build_core_tests.py": "source/tools/build_core_tests.py",
+    "tools/build_diagnostic.py": "source/tools/build_diagnostic.py"
+  },
+  "source_manifest": "controls/frozen-source-v1.json",
+  "native_proof": "native-final-v1/manifest.json",
+  "prior_host_proof": "prior-shared-qualification/host-final-v1/host-checks.json",
+  "prior_host_scope": "References existing seven-group actual shared proof only. This packet does not contain or rerun its seven host binaries; current unchanged shared source binding and prior authored saved reviews are retained.",
+  "post_build_overlays": {
+    "docs/READERS_EXEC_RAM_QUALIFICATION.md": "controls/READERS_EXEC_RAM_QUALIFICATION.final.md",
+    "docs/SAMPLE_MEMORY.md": "controls/SAMPLE_MEMORY.exec-final.md"
+  },
+  "acceptance": {
+    "native_build": "PASS",
+    "native_execution": "NOT_RUN",
+    "emulator": "NOT_RUN",
+    "physical": "NOT_RUN",
+    "stack": "UNKNOWN",
+    "launcher_65536": "NOT_CLEARED",
+    "Fast_Chip_placement": "NOT_RUN",
+    "activation": "NOT_IMPLEMENTED",
+    "DMA_card_IRQ_timing_audio_listening": "NOT_TESTED"
+  },
+  "history": "First/once new Exec-wrapper build passed; no product execution/retry. Ordinary-malloc ABI2 and old compact ABI1 proofs remain distinct. Shared peer recovery/hold details and restricted older receipt are excluded."
+}

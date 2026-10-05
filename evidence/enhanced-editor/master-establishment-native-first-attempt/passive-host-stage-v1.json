@@ -1,0 +1,22 @@
+{
+  "scope": "Passive host files only; no target request and no pass/release inferred",
+  "atUTC": "2026-10-05T22:03:49.866506+00:00",
+  "files": {
+    "PTMasterEstablishTest": {
+      "bytes": 291740,
+      "sha256": "06cb163c7a5fe0c16c92f5e328267ce731d77f3098ecf6a60df3d20b81e43d4a"
+    },
+    "Run-once": {
+      "bytes": 208,
+      "sha256": "60cbb6f0f104bcebf54a1332cad3063caf2cc5cfd105f334f76f595578fb8b2c"
+    },
+    "fixture.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "launcher.log": {
+      "bytes": 8,
+      "sha256": "fc1b7c019962b238d1a6ada645907789172d70040e961b64ef50e0f42710c35f"
+    }
+  }
+}

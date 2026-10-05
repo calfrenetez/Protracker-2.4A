@@ -1,0 +1,7 @@
+{
+  "status": "ROOT_SOURCE_REVIEW_BEFORE_FIRST_DISPATCH",
+  "script_sha256": "71799a24a43da35ebcf0c655ceb557b1d4ba03aef7546fb9ea0459fd1c9ae78c",
+  "scope": "one guarded exact candidate; both CPU/memory/AGA/livePID and inactiveDMA guards, guestCRC+size, stage ownership, one bounded launch, exact RC0/markers/actual Status FULL; separate settlement required",
+  "limits": "No test RAM class, musical timing, IRQ/device output/listening acceptance",
+  "kind": "root self review"
+}

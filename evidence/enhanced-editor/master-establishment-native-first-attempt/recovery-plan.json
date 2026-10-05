@@ -1,0 +1,21 @@
+{
+  "status": "PREPARED_SEPARATE_RECOVERY_NOT_EXECUTED",
+  "authorization": "Current explicit recovery question is pending; ACK14 requires approval before target-affecting closure",
+  "target": "amiberry-030",
+  "pid": 32716,
+  "hold_fence": 33,
+  "inflight": null,
+  "native_result": "FIRST_FAILURE;60second completion bound missed; no completion/RC/pass at bound. Not diagnosed code failure",
+  "steps": [
+    "Fresh pin/hash/lease/HOLD/PID-command-runtime identity and test/Safari/transport locks",
+    "One SIGTERM to exact root-owned32716; max5second wait; no forced kill, guest query or retry",
+    "Require emulator and2345listener absent, DevBench disconnected, original profile/source/config bytes unchanged",
+    "Only after positive absence, snapshot all exact failed stage bytes and rename to evidence custody; no deletion and preserve first snapshots",
+    "Separate locked independent host absence/custody/readback and four bound authorization/restoration/absence/cleanup records",
+    "Normal exact-fence guard.release archives original HOLD; no initialize/reset or force-release",
+    "Explicitly release original and recovery coordination windows; native/physical qualification remains failed/NOT_RUN"
+  ],
+  "failure": "Retain HOLD/state; no extra target request, signal or cleanup",
+  "scope_limits": "No physical device or audio, candidate retry, source-code acceptance upgrade, running service restart or target API while HOLD",
+  "approval_pending": true
+}

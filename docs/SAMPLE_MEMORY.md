@@ -5601,3 +5601,28 @@ exact musical scheduling is unchanged. No target/service/guard operation occurre
 Scott's reported production HOLD fence4 and sole-controller recovery scope remain;
 AmiConnect revision11 acknowledges hands-off independent host work only. Positive
 release/fresh coordination/exact-candidate checks precede any target operation.
+
+
+## First master-establishment 030 attempt — failure retained
+
+After the original software publication67a42a5, the exact291740B
+PTMasterEstablishTest06cb163c was attempted once under fresh AmiConnect ACK12.
+Owned030 startup and exact product/profile/live CPU/memory/AGA/noaudio guards,
+guest candidate/launcher CRC+size and one launch acknowledgement passed. The
+60second completion bound elapsed without RC/completion/PASS. The outer MCP
+TaskGroup recorded a generic ExceptionGroup without its full inner trace.
+This is FAILED qualification; neither a native pass nor a diagnosed code failure.
+First raw outputs, empty fixture log and[CLI5] launcher output remain preserved.
+No unchanged retry or physical run followed. Original host/compiler evidence
+is unchanged and explicitly predates this attempted runtime qualification.
+
+ProTracker now owns the retained reservation/HOLD fence33, no inflight,
+potential_resident=true, exact fresh PID32716 and failed-stage custody obligation.
+No post-failure target query/cleanup/signal/disconnect/stop/reset/release occurred.
+A separate bounded owned-session recovery plan is source-reviewed, NOT executed.
+AmiConnect ACK14 requires fresh human recovery approval because the test window
+excluded recovery. The concrete approval question is pending at this snapshot.
+Passive host files neither prove task/reader quiet nor clear the HOLD. All source
+and exact first results remain preserved. No physical DMA/AmiGUS/audio output
+or memory-placement/total-stack/musical timing/device/listening acceptance follows.
+See [first-attempt evidence](../evidence/enhanced-editor/master-establishment-native-first-attempt/README.md).

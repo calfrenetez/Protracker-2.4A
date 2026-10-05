@@ -1,0 +1,71 @@
+{
+  "status": "BOUND_SAVED_PEER_RELEASE_VERIFIED",
+  "bindings": {
+    "/Users/james1/Documents/Codex/2026-09-26/scott-chocolate-amiga-port/outputs/refill-native-20261005-004/release-authorization.json": {
+      "bytes": 416,
+      "sha256": "ff0b05ddc54d34d0f6c3cc772632ffe8fde9582049207354e2c351fde70a4ad6"
+    },
+    "/Users/james1/Documents/Codex/2026-09-26/scott-chocolate-amiga-port/outputs/refill-native-20261005-004/release-restoration.json": {
+      "bytes": 499,
+      "sha256": "b2190b5ca4f92d45660f6a26501c256dbff975945cb65843f1c267153ab6dfdb"
+    },
+    "/Users/james1/Documents/Codex/2026-09-26/scott-chocolate-amiga-port/outputs/refill-native-20261005-004/release-absence.json": {
+      "bytes": 904,
+      "sha256": "b02a27404c29f3872597734c0e948e51712a97f0f46473a0a3a3ba6e793c4876"
+    },
+    "/Users/james1/Documents/Codex/2026-09-26/scott-chocolate-amiga-port/outputs/refill-native-20261005-004/release-cleanup.json": {
+      "bytes": 11172,
+      "sha256": "91e8b9cef96945e3e876a467eafceb8b6a942a0bdb40d5260c662d272fabf525"
+    },
+    "/Users/james1/Documents/Codex/2026-09-26/scott-chocolate-amiga-port/outputs/refill-native-20261005-004/settlement-terminal.json": {
+      "bytes": 15089,
+      "sha256": "7d654b6217c2fe1aa132da30b8b1a5ef51f9ac8c07ce1c6853da9567f6f37825"
+    },
+    "/Users/james1/Documents/Codex/2026-09-26/scott-chocolate-amiga-port/outputs/refill-native-20261005-004/root-verified-release.json": {
+      "bytes": 2058,
+      "sha256": "19c193ee7172df1a945f0dd30bc4998a25e780701bfd430262d49fcf7f01fa4c"
+    }
+  },
+  "peer_guard_snapshot": {
+    "archives": [
+      {
+        "bytes": 2034,
+        "fence": 5,
+        "name": "release-0000000000000005.json",
+        "sha256": "7f14fb8ffe7df2de1aed8beda774d083c9a717fec97ba575733fe0561422efcb"
+      },
+      {
+        "bytes": 2027,
+        "fence": 10,
+        "name": "release-000000000000000a.json",
+        "sha256": "565d842aadbb4f6ebaaf52143fce4f161da5996606c03adcd679eb1d67e355d3"
+      },
+      {
+        "bytes": 2674,
+        "fence": 18,
+        "name": "release-0000000000000012.json",
+        "sha256": "51040dc9dbe88c4fd07ab0168e154d2d1508b457605373d8fd38b3f12b5c80e8"
+      },
+      {
+        "bytes": 1574,
+        "fence": 28,
+        "name": "release-000000000000001c.json",
+        "sha256": "497beef52132b167956e5a9abfd0da5c60f95309a020b025a4c69f9564a8bb1f"
+      }
+    ],
+    "authorization": {
+      "approved": true,
+      "legacy_holds_verified": true,
+      "mode": "host-provisioning",
+      "record_sha256": "820445ecb68cd63db257e203686d2df63fca2e66f4d6048f59f5939771fce568"
+    },
+    "fence": 28,
+    "holds": [],
+    "inflight": null,
+    "potential_resident": false,
+    "reservation": null,
+    "version": 1,
+    "phase": "EMPTY"
+  },
+  "limits": "Saved peer receipts only; no fresh target availability or root lease inferred"
+}

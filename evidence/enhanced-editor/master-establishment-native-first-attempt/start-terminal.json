@@ -1,0 +1,143 @@
+{
+  "status": "PASS_ONE_OWNED_030_START",
+  "reserveCalls": 1,
+  "startCalls": 1,
+  "atUTC": "2026-10-05T21:59:08.117114+00:00",
+  "target": "amiberry-030",
+  "scope": "one exact ordinary-memory qualification; no physical/audio/device activation",
+  "guardBefore": {
+    "archives": [
+      {
+        "bytes": 2034,
+        "fence": 5,
+        "name": "release-0000000000000005.json",
+        "sha256": "7f14fb8ffe7df2de1aed8beda774d083c9a717fec97ba575733fe0561422efcb"
+      },
+      {
+        "bytes": 2027,
+        "fence": 10,
+        "name": "release-000000000000000a.json",
+        "sha256": "565d842aadbb4f6ebaaf52143fce4f161da5996606c03adcd679eb1d67e355d3"
+      },
+      {
+        "bytes": 2674,
+        "fence": 18,
+        "name": "release-0000000000000012.json",
+        "sha256": "51040dc9dbe88c4fd07ab0168e154d2d1508b457605373d8fd38b3f12b5c80e8"
+      },
+      {
+        "bytes": 1574,
+        "fence": 28,
+        "name": "release-000000000000001c.json",
+        "sha256": "497beef52132b167956e5a9abfd0da5c60f95309a020b025a4c69f9564a8bb1f"
+      }
+    ],
+    "authorization": {
+      "approved": true,
+      "legacy_holds_verified": true,
+      "mode": "host-provisioning",
+      "record_sha256": "820445ecb68cd63db257e203686d2df63fca2e66f4d6048f59f5939771fce568"
+    },
+    "fence": 28,
+    "holds": [],
+    "inflight": null,
+    "potential_resident": false,
+    "reservation": null,
+    "version": 1,
+    "phase": "EMPTY"
+  },
+  "healthBefore": {
+    "status": "ok",
+    "serial": {
+      "connected": false,
+      "mode": "tcp",
+      "logCount": 71,
+      "varCount": 0,
+      "lastHeartbeat": {
+        "type": "HB",
+        "tick": 94,
+        "freeChip": 1926976,
+        "freeFast": 131645360,
+        "timestamp": "2026-10-05T21:51:31.932705+00:00"
+      },
+      "serialConnectedAt": null,
+      "lastBridgeMessageAt": null,
+      "lastHeartbeatAt": null,
+      "bridgeSilentSec": null,
+      "host": "127.0.0.1",
+      "port": 2345
+    }
+  },
+  "bridgeFlagBefore": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "candidate": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/master-establishment-next/native-v1/PTMasterEstablishTest",
+    "bytes": 291740,
+    "sha256": "06cb163c7a5fe0c16c92f5e328267ce731d77f3098ecf6a60df3d20b81e43d4a"
+  },
+  "pinnedFiles": 11,
+  "returncode": 0,
+  "ownedProcess": [
+    [
+      32716,
+      "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+    ]
+  ],
+  "guardAfter": {
+    "archives": [
+      {
+        "bytes": 2034,
+        "fence": 5,
+        "name": "release-0000000000000005.json",
+        "sha256": "7f14fb8ffe7df2de1aed8beda774d083c9a717fec97ba575733fe0561422efcb"
+      },
+      {
+        "bytes": 2027,
+        "fence": 10,
+        "name": "release-000000000000000a.json",
+        "sha256": "565d842aadbb4f6ebaaf52143fce4f161da5996606c03adcd679eb1d67e355d3"
+      },
+      {
+        "bytes": 2674,
+        "fence": 18,
+        "name": "release-0000000000000012.json",
+        "sha256": "51040dc9dbe88c4fd07ab0168e154d2d1508b457605373d8fd38b3f12b5c80e8"
+      },
+      {
+        "bytes": 1574,
+        "fence": 28,
+        "name": "release-000000000000001c.json",
+        "sha256": "497beef52132b167956e5a9abfd0da5c60f95309a020b025a4c69f9564a8bb1f"
+      }
+    ],
+    "authorization": {
+      "approved": true,
+      "legacy_holds_verified": true,
+      "mode": "host-provisioning",
+      "record_sha256": "820445ecb68cd63db257e203686d2df63fca2e66f4d6048f59f5939771fce568"
+    },
+    "fence": 31,
+    "holds": [],
+    "inflight": null,
+    "potential_resident": true,
+    "reservation": {
+      "binding": {
+        "candidateBytes": 291740,
+        "candidateSHA256": "06cb163c7a5fe0c16c92f5e328267ce731d77f3098ecf6a60df3d20b81e43d4a",
+        "evidence": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/master-establishment-next/native-window-v1",
+        "sourceCommit": "67a42a578a8a8e75cd8bd4e5515648641d9d2411"
+      },
+      "controller": "ProTracker root01a0b5ae-c04f-7661-8859-e89df20c3290",
+      "lease": {
+        "run_id": "9a686987c5d1754656a69a616793634e"
+      },
+      "purpose": "Human authorized exact master-establishment software qualification; ACK12",
+      "target": "amiberry-030"
+    },
+    "version": 1,
+    "phase": "READY"
+  },
+  "completedUTC": "2026-10-05T21:59:39.217192+00:00"
+}

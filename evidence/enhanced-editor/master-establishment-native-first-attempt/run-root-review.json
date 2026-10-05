@@ -1,0 +1,8 @@
+{
+  "status": "ROOT_SOURCE_REVIEW_BEFORE_FIRST_DISPATCH",
+  "script_sha256": "b42171be42f77a936e0bdd66dfdad1d353e5be7538929cb9f76bfc5239b0a2ad",
+  "scope": "one guarded exact candidate; both CPU/memory/AGA/livePID and inactiveDMA guards, guestCRC+size, stage ownership, one bounded launch, exact RC0/markers/actual Status FULL; separate settlement required",
+  "limits": "No test RAM class, musical timing, IRQ/device output/listening acceptance",
+  "kind": "root self review",
+  "preexecution_note": "Empty optional launcher diagnostics accepted; required fixture/RC/completion logs stay nonempty. Original recorder/review preserved. No producer dispatch before this change."
+}

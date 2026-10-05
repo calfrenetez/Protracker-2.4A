@@ -1,0 +1,8 @@
+{
+  "status": "ROOT_SOURCE_REVIEWED_BEFORE_DISPATCH",
+  "script_sha256": "170bf5d40e7bd8aabc6131c16859469a451e509568867d55d5600fe910ba7d0b",
+  "pins": 11,
+  "scope": "existing protected shared030 wrapper one start; fresh EMPTY/lock/no process/disconnected health and exact product admission; no target operations yet",
+  "failure": "preserve first outcome/HOLD, no target diagnostics or automatic cleanup/retry",
+  "kind": "root self review"
+}

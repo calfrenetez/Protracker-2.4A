@@ -1,0 +1,8 @@
+{
+  "status": "ROOT_SEPARATE_SOURCE_REVIEW_BEFORE_RECOVERY",
+  "script_sha256": "71c0957a7eaec189c6557ac6e20e1b0b3e64fcace7ca2db82898a8feb96ed53f",
+  "kind": "root self review, no independent review",
+  "scope": "One SIGTERM only after exact root owned PID/command/runtime/private lease/HOLD and three locks; no guest API, forcekill/reset or retry; all stage bytes preserved only after virtual guest absence",
+  "authorization": "Explicit fresh human recovery approval now required by ACK14 scope: prepared and reviewed, NOT dispatched",
+  "release": "Separate independent readback and exact four-record proof required, HOLD retained by this script"
+}

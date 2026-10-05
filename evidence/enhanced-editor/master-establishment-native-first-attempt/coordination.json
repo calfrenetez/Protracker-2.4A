@@ -1,0 +1,9 @@
+{
+  "thread": "01a02122-c34e-72f0-95cc-e36ce3d73629",
+  "revision": 12,
+  "cursor": "d968e7b1-f556-4768-a35e-e032db61c38d:12",
+  "scope": "ACK one emulator-only exact PTMasterEstablishTest291740B06cb163c; fresh guards, one wrapper start, one exact run, separate completed cleanup/independent absence/disconnected-stopped return/release",
+  "no_competing_claim": "No competing claim or unresolved recovery HOLD reported in checked records; not live clearance",
+  "amiconnect_disposition": "hands-off until explicit verified release",
+  "physical": "not included"
+}

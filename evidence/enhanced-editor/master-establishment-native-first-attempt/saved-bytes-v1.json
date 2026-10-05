@@ -1,0 +1,101 @@
+{
+  "scope": "First failed qualification and prepared recovery only; private lease/product excluded",
+  "files": {
+    "README.md": {
+      "bytes": 2782,
+      "sha256": "c23c126db98c1fe1e3442ce353d073c12186ef73f4b4e3d9dc0772e26d896ccd"
+    },
+    "coordination.json": {
+      "bytes": 564,
+      "sha256": "de9f9d84b7c457f4857049208a555305eec276f388e682096335c2c29ba46b71"
+    },
+    "failure-fixture.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "failure-launcher.log": {
+      "bytes": 8,
+      "sha256": "fc1b7c019962b238d1a6ada645907789172d70040e961b64ef50e0f42710c35f"
+    },
+    "passive-fixture.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "passive-host-stage-v1.json": {
+      "bytes": 684,
+      "sha256": "6a0f6ee3427ef03f5755de72f4ea89b7ca733e7bcd40b5f5401981b67d1cb1d9"
+    },
+    "passive-launcher.log": {
+      "bytes": 8,
+      "sha256": "fc1b7c019962b238d1a6ada645907789172d70040e961b64ef50e0f42710c35f"
+    },
+    "pins.json": {
+      "bytes": 2374,
+      "sha256": "bdde253de68a9f42bea5af5af2db172796036aeca18c8934035815eb50d93819"
+    },
+    "preflight.json": {
+      "bytes": 2352,
+      "sha256": "456111acc57a5f146fe232157f77ff0146df00fd400185fd145650c4be532c61"
+    },
+    "recovery-coordination.json": {
+      "bytes": 391,
+      "sha256": "55c80208ff7a58ac1cf29f88601409adaf0c6bc6a7a2cb495dcff19eb642b86a"
+    },
+    "recovery-plan.json": {
+      "bytes": 1479,
+      "sha256": "ab22cf958f5ac39b8acac81873c7b2640f6e2d113a2ab835ea4785ee2ace7f3f"
+    },
+    "recovery-root-review.json": {
+      "bytes": 652,
+      "sha256": "4f200b124d0eae49eba8fbf1a949108a8ebf98d16bc22525311576fd40b95f2b"
+    },
+    "run-preexecution-v1.py": {
+      "bytes": 6400,
+      "sha256": "71799a24a43da35ebcf0c655ceb557b1d4ba03aef7546fb9ea0459fd1c9ae78c"
+    },
+    "run-root-review-preexecution-v1.json": {
+      "bytes": 479,
+      "sha256": "7a8df4ee19a791bae8d7071059fd02a93d7a35f61cac555f798fbeee6e841ed9"
+    },
+    "run-root-review.json": {
+      "bytes": 679,
+      "sha256": "2834d247d52f4d02eaff29d415e5674f1ff0078c982c0f7e5f4b865e8bae1ddc"
+    },
+    "run-terminal.json": {
+      "bytes": 4021,
+      "sha256": "921b61fb3aba9072a550d40c13570a9e31234a5dd3934a242ee4f4df1ad9a91b"
+    },
+    "run_once.py": {
+      "bytes": 6454,
+      "sha256": "b42171be42f77a936e0bdd66dfdad1d353e5be7538929cb9f76bfc5239b0a2ad"
+    },
+    "scott-release-read-v1.json": {
+      "bytes": 2852,
+      "sha256": "e5d69d8f44814b089465ffc3fa56b74eda89ba6bd0ccc90560976e73739c851f"
+    },
+    "start-root-review.json": {
+      "bytes": 444,
+      "sha256": "ff4fd20cbb2b16a3baec922e9aafa1024889c1f89e548cfec7c5a5329ba415bd"
+    },
+    "start-terminal.json": {
+      "bytes": 4610,
+      "sha256": "56fa2723aa892f9c45b8edaf9c9f1acecaae75771843961411d6e771259d9811"
+    },
+    "start.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "start.stdout": {
+      "bytes": 69,
+      "sha256": "b9c48f7a853c9f72c05f9f1e23b07cd2b4b356bc27b6c81e57843b2659967ab4"
+    },
+    "start_once.py": {
+      "bytes": 4380,
+      "sha256": "170bf5d40e7bd8aabc6131c16859469a451e509568867d55d5600fe910ba7d0b"
+    },
+    "verify_saved.py": {
+      "bytes": 1298,
+      "sha256": "719ec129142b687a20fcb6826e8cac9d532f0f2a3f82acd272b5321428c8496f"
+    }
+  }
+}

@@ -2,12 +2,25 @@
 #include "sampler_internal.h"
 #include "project_snapshot.h"
 #include <limits.h>
+#include <stddef.h>
 #include <string.h>
 
 /* Fixed heap metadata, not a semantic certificate or activation-time state. */
 #define SONG_SPANS 6144U
 #define SONG_ALLOCS 64U
 struct song_span {const void *data;size_t bytes;};
+/* Scratch only: populated from actual inputs before the first allocation.
+ * No caller-written completion state is ever consumed. */
+struct song_begin_workspace {
+    struct pt_allocator allocator;
+    struct pt_sampler sampler;
+    struct pt_project header;
+    struct pt_paula_readers_song_config config;
+    struct pt_sample sample[PT_PROJECT_SAMPLES];
+    struct song_span spans[SONG_SPANS];
+    unsigned count;
+};
+struct song_begin_alignment {char byte;struct song_begin_workspace workspace;};
 struct song_allocation {void *data;size_t bytes;unsigned chip;};
 struct song_command {
     struct pt_paula_readers_command *holder;
@@ -28,6 +41,8 @@ struct pt_paula_readers_song {
     struct pt_sample sample[PT_PROJECT_SAMPLES];
     struct pt_sample_version *pins[PT_PROJECT_SAMPLES];
     struct song_span source[SONG_SPANS];unsigned source_count;
+    /* Constructor-only borrowed guards; cleared before publishing this owner. */
+    struct song_span begin_control[5];unsigned begin_control_count;
     struct song_allocation allocation[SONG_ALLOCS];size_t control_bytes,chip_bytes;
     struct song_allocator_context allocator_context;
     struct song_allocator_context backend_context;
@@ -73,42 +88,54 @@ static int song_add_span(struct song_span *spans,unsigned *count,const void *p,s
     if(!song_span_valid(p,n))return 0;
     if(!n)return 1;
     if(*count==SONG_SPANS)return 0;
-    spans[*count]=(struct song_span){p,n};++*count;return 1;
+    if(spans)spans[*count]=(struct song_span){p,n};
+    ++*count;return 1;
+}
+static int song_source_span(struct song_span *spans,unsigned *count,
+    const void *guard,size_t guard_bytes,const void *p,size_t n)
+{
+    if(guard_bytes&&!song_apart(guard,guard_bytes,p,n))return 0;
+    return song_add_span(spans,count,p,n);
 }
 /* Captures addresses/extents, never values. They remain numeric guards after
- * stale header replacement, so cancellation never walks a former table. */
+ * stale header replacement, so cancellation never walks a former table.
+ * A NULL destination streams the same complete enumeration without a ledger.
+ * The optional guard refuses any overlap before a caller workspace is written. */
 static int song_source_spans(struct song_span *spans,unsigned *count,
-    const struct pt_project *p,const struct pt_sampler *s)
+    const struct pt_project *p,const struct pt_sampler *s,
+    const void *guard,size_t guard_bytes)
 {
     unsigned i,j,n;size_t events;
-    struct pt_sampler_storage_span version[PT_SAMPLER_VERSION_SPANS];
+    struct pt_sampler_storage_span version[PT_SAMPLER_VERSION_SPANS]={0};
+    if(guard_bytes&&!song_apart(guard,guard_bytes,version,sizeof(version)))return 0;
     if(!song_span_valid(p,sizeof(*p))||!song_span_valid(s,sizeof(*s))||
        p->sample_count>PT_PROJECT_SAMPLES||p->pattern_count>PT_PROJECT_PATTERNS||
        p->order_count>PT_PROJECT_ORDERS||p->extension_count>4090||
        !p->channels.count||p->channels.count>PT_CHANNEL_LIMIT)return 0;
     events=(size_t)p->pattern_count*PT_PROJECT_ROWS*p->channels.count;
     *count=0;
-    if(!song_add_span(spans,count,p,sizeof(*p))||!song_add_span(spans,count,s,sizeof(*s))||
-       !song_add_span(spans,count,p->samples,(size_t)p->sample_count*sizeof(*p->samples))||
-       !song_add_span(spans,count,p->orders,(size_t)p->order_count*sizeof(*p->orders))||
-       !song_add_span(spans,count,p->events,events*sizeof(*p->events))||
-       !song_add_span(spans,count,p->extensions,(size_t)p->extension_count*sizeof(*p->extensions))||
-       !song_add_span(spans,count,s->table,s->table?s->table_bytes:0))return 0;
+    if(!song_source_span(spans,count,guard,guard_bytes,p,sizeof(*p))||
+       !song_source_span(spans,count,guard,guard_bytes,s,sizeof(*s))||
+       !song_source_span(spans,count,guard,guard_bytes,p->samples,(size_t)p->sample_count*sizeof(*p->samples))||
+       !song_source_span(spans,count,guard,guard_bytes,p->orders,(size_t)p->order_count*sizeof(*p->orders))||
+       !song_source_span(spans,count,guard,guard_bytes,p->events,events*sizeof(*p->events))||
+       !song_source_span(spans,count,guard,guard_bytes,p->extensions,(size_t)p->extension_count*sizeof(*p->extensions))||
+       !song_source_span(spans,count,guard,guard_bytes,s->table,s->table?s->table_bytes:0))return 0;
     for(i=0;i<p->sample_count;++i) {
         const struct pt_sample *v=p->samples+i;
         if(v->pcm.capacity>SIZE_MAX/sizeof(int32_t)||v->slice_count>PT_PROJECT_SLICES||
-           !song_add_span(spans,count,v->pcm.data,v->pcm.capacity*sizeof(int32_t))||
-           !song_add_span(spans,count,v->slices,(size_t)v->slice_count*sizeof(uint32_t)))return 0;
+           !song_source_span(spans,count,guard,guard_bytes,v->pcm.data,v->pcm.capacity*sizeof(int32_t))||
+           !song_source_span(spans,count,guard,guard_bytes,v->slices,(size_t)v->slice_count*sizeof(uint32_t)))return 0;
         /* Current ownership remains with the immutable borrowed sampler until
          * our independent retain succeeds. No private version layout is used. */
         if(v->pcm.frames&&!s->current[i])return 0;
     }
     for(i=0;i<PT_PROJECT_SAMPLES;++i)if(s->current[i]) {
         if(!pt_sampler_version_spans(s->current[i],version,PT_SAMPLER_VERSION_SPANS,&n))return 0;
-        for(j=0;j<n;++j)if(!song_add_span(spans,count,version[j].data,version[j].bytes))return 0;
+        for(j=0;j<n;++j)if(!song_source_span(spans,count,guard,guard_bytes,version[j].data,version[j].bytes))return 0;
     }
     for(i=0;i<p->extension_count;++i)
-        if(!song_add_span(spans,count,p->extensions[i].data,p->extensions[i].length))return 0;
+        if(!song_source_span(spans,count,guard,guard_bytes,p->extensions[i].data,p->extensions[i].length))return 0;
     return 1;
 }
 static int song_spans_apart(const struct song_span *s,unsigned count,const void *p,size_t n)
@@ -135,6 +162,7 @@ static int song_output_apart(const struct pt_paula_readers_song *s,const void *o
     unsigned i;
     if(!n||!song_apart(out,n,s,sizeof(*s))||
        !song_spans_apart(s->source,s->source_count,out,n)||
+       !song_spans_apart(s->begin_control,s->begin_control_count,out,n)||
        !song_apart(out,n,s->config.backend.context,s->config.backend.context_bytes))return 0;
     for(i=0;i<SONG_ALLOCS;++i)if(s->allocation[i].data&&
        !song_apart(out,n,s->allocation[i].data,s->allocation[i].bytes))return 0;
@@ -267,31 +295,41 @@ static struct pt_paula_readers_song_status song_status(const struct pt_paula_rea
 }
 size_t pt_paula_readers_song_control_size(void){return sizeof(struct pt_paula_readers_song);}
 
-enum pt_paula_readers_song_result pt_paula_readers_song_begin(const struct pt_allocator *a,
+size_t pt_paula_readers_song_begin_workspace_size(void)
+{return sizeof(struct song_begin_workspace);}
+size_t pt_paula_readers_song_begin_workspace_alignment(void)
+{return offsetof(struct song_begin_alignment,workspace);}
+
+static enum pt_paula_readers_song_result song_begin_in_workspace(const struct pt_allocator *a,
     struct pt_sampler *sampler,struct pt_project *project,
     const struct pt_paula_readers_song_config *config,uint32_t revision,
-    struct pt_paula_readers_song **out)
+    void *memory,size_t capacity,struct pt_paula_readers_song **out)
 {
-    struct {
-        struct pt_allocator allocator;struct pt_sampler sampler;
-        struct pt_project header;struct pt_paula_readers_song_config config;
-        struct pt_sample sample[PT_PROJECT_SAMPLES];
-        struct song_span spans[SONG_SPANS];unsigned count;
-    } saved={0};
+    struct song_begin_workspace *saved=NULL;unsigned count;
     struct pt_paula_readers_song *s;enum pt_render_setup_result r;
     struct pt_elapsed_clock clock={0};
     if(!song_span_valid(a,sizeof(*a))||!song_span_valid(config,sizeof(*config))||
        !song_span_valid(out,sizeof(*out))||!a->allocate||!a->release||
-       !song_source_spans(saved.spans,&saved.count,project,sampler))return PT_PAULA_READERS_SONG_INVALID;
-    if(!song_spans_apart(saved.spans,saved.count,out,sizeof(*out))||
-       !song_apart(out,sizeof(*out),a,sizeof(*a))||!song_apart(out,sizeof(*out),config,sizeof(*config))||
-       !song_apart(out,sizeof(*out),config->backend.context,config->backend.context_bytes))
+       !song_span_valid(memory,capacity)||!memory||
+       (uintptr_t)memory%pt_paula_readers_song_begin_workspace_alignment())
+        return PT_PAULA_READERS_SONG_INVALID;
+    if(capacity<sizeof(struct song_begin_workspace))return PT_PAULA_READERS_SONG_CAPACITY;
+    /* Complete streaming guards before ANY caller-workspace write. No callback
+     * or semantic PCM/order/event/slice read occurs during these enumerations. */
+    if(!song_apart(memory,capacity,a,sizeof(*a))||
+       !song_apart(memory,capacity,&clock,sizeof(clock))||
+       !song_apart(memory,capacity,config,sizeof(*config))||
+       !song_apart(memory,capacity,out,sizeof(*out))||
+       !song_apart(memory,capacity,config->backend.context,config->backend.context_bytes)||
+       !song_source_spans(NULL,&count,project,sampler,memory,capacity))
+        return PT_PAULA_READERS_SONG_INVALID;
+    if(!song_apart(out,sizeof(*out),a,sizeof(*a))||
+       !song_apart(out,sizeof(*out),&clock,sizeof(clock))||
+       !song_apart(out,sizeof(*out),config,sizeof(*config))||
+       !song_apart(out,sizeof(*out),config->backend.context,config->backend.context_bytes)||
+       !song_source_spans(NULL,&count,project,sampler,out,sizeof(*out)))
         return PT_PAULA_READERS_SONG_INVALID;
     if(*out)return PT_PAULA_READERS_SONG_INVALID;
-    memcpy(&saved.allocator,a,sizeof(saved.allocator));memcpy(&saved.sampler,sampler,sizeof(saved.sampler));
-    memcpy(&saved.header,project,sizeof(saved.header));memcpy(&saved.config,config,sizeof(saved.config));
-    if(project->sample_count)memcpy(saved.sample,project->samples,
-        (size_t)project->sample_count*sizeof(*saved.sample));
     if(!config->session||config->absolute_start==UINT64_MAX||!config->grid.generation||
        config->grid.frequency<config->grid.rate||
        config->grid.generation!=config->readers.generation||config->render.rate!=config->grid.rate||
@@ -305,27 +343,43 @@ enum pt_paula_readers_song_result pt_paula_readers_song_begin(const struct pt_al
        !config->backend.context_bytes||!song_span_valid(config->backend.context,config->backend.context_bytes)||
        pt_elapsed_clock_init(&clock,config->grid.frequency,config->grid.rate,config->grid.epoch,0)!=PT_ELAPSED_OK)
         return PT_PAULA_READERS_SONG_INVALID;
+    saved=memory;
+    memset(saved,0,sizeof(*saved));
+    memcpy(&saved->allocator,a,sizeof(saved->allocator));
+    memcpy(&saved->sampler,sampler,sizeof(saved->sampler));
+    memcpy(&saved->header,project,sizeof(saved->header));
+    memcpy(&saved->config,config,sizeof(saved->config));
+    if(saved->header.sample_count)memcpy(saved->sample,project->samples,
+        (size_t)saved->header.sample_count*sizeof(*saved->sample));
+    if(!song_source_spans(saved->spans,&saved->count,project,sampler,NULL,0))
+        return PT_PAULA_READERS_SONG_INVALID;
     if(config->control_budget<sizeof(*s))return PT_PAULA_READERS_SONG_CAPACITY;
-    s=saved.allocator.allocate(saved.allocator.context,sizeof(*s));
+    s=saved->allocator.allocate(saved->allocator.context,sizeof(*s));
     if(!s)return PT_PAULA_READERS_SONG_CAPACITY;
-    if(!song_spans_apart(saved.spans,saved.count,s,sizeof(*s))||
-       !song_apart(s,sizeof(*s),&saved,sizeof(saved))||!song_apart(s,sizeof(*s),&clock,sizeof(clock))||
+    if(!song_spans_apart(saved->spans,saved->count,s,sizeof(*s))||
+       !song_apart(s,sizeof(*s),memory,capacity)||!song_apart(s,sizeof(*s),&clock,sizeof(clock))||
        !song_apart(s,sizeof(*s),out,sizeof(*out))||!song_apart(s,sizeof(*s),a,sizeof(*a))||
        !song_apart(s,sizeof(*s),config,sizeof(*config))||
-       !song_apart(s,sizeof(*s),saved.config.backend.context,saved.config.backend.context_bytes))
+       !song_apart(s,sizeof(*s),saved->config.backend.context,saved->config.backend.context_bytes))
         return PT_PAULA_READERS_SONG_INVALID;
-    if(memcmp(a,&saved.allocator,sizeof(*a))||memcmp(config,&saved.config,sizeof(*config))||
-       memcmp(sampler,&saved.sampler,sizeof(*sampler))||
-       !pt_project_snapshot_equal(project,&saved.header)||
-       (saved.header.sample_count&&memcmp(project->samples,saved.sample,
-        (size_t)saved.header.sample_count*sizeof(*saved.sample)))||*out) {
-        saved.allocator.release(saved.allocator.context,s);return PT_PAULA_READERS_SONG_STALE;
+    if(memcmp(a,&saved->allocator,sizeof(*a))||memcmp(config,&saved->config,sizeof(*config))||
+       memcmp(sampler,&saved->sampler,sizeof(*sampler))||
+       !pt_project_snapshot_equal(project,&saved->header)||
+       (saved->header.sample_count&&memcmp(project->samples,saved->sample,
+        (size_t)saved->header.sample_count*sizeof(*saved->sample)))||*out) {
+        saved->allocator.release(saved->allocator.context,s);return PT_PAULA_READERS_SONG_STALE;
     }
-    memset(s,0,sizeof(*s));s->original_allocator=saved.allocator;s->config=saved.config;
-    s->project=project;s->header=saved.header;s->sampler=sampler;s->sampler_header=saved.sampler;
-    s->generation=sampler->generation;s->revision=revision;s->source_count=saved.count;
-    memcpy(s->source,saved.spans,saved.count*sizeof(*s->source));
-    if(saved.header.sample_count)memcpy(s->sample,saved.sample,(size_t)saved.header.sample_count*sizeof(*s->sample));
+    memset(s,0,sizeof(*s));s->original_allocator=saved->allocator;s->config=saved->config;
+    s->project=project;s->header=saved->header;s->sampler=sampler;s->sampler_header=saved->sampler;
+    s->generation=sampler->generation;s->revision=revision;s->source_count=saved->count;
+    memcpy(s->source,saved->spans,saved->count*sizeof(*s->source));
+    if(saved->header.sample_count)memcpy(s->sample,saved->sample,(size_t)saved->header.sample_count*sizeof(*s->sample));
+    s->begin_control[0]=(struct song_span){memory,capacity};
+    s->begin_control[1]=(struct song_span){a,sizeof(*a)};
+    s->begin_control[2]=(struct song_span){config,sizeof(*config)};
+    s->begin_control[3]=(struct song_span){out,sizeof(*out)};
+    s->begin_control[4]=(struct song_span){&clock,sizeof(clock)};
+    s->begin_control_count=5;
     s->control_bytes=sizeof(*s);s->allocator_context.owner=s;
     s->allocator=(struct pt_allocator){&s->allocator_context,song_allocate,song_release};
     s->pool_config=s->config.readers;s->pool_config.chip_context=&s->allocator_context;
@@ -341,13 +395,33 @@ enum pt_paula_readers_song_result pt_paula_readers_song_begin(const struct pt_al
         &s->allocator,revision,s->generation,&s->startup);
     s->busy=0;
     if(r!=PT_RENDER_SETUP_PENDING||s->failed||!song_current(s,revision)||
-       memcmp(a,&saved.allocator,sizeof(*a))||memcmp(config,&saved.config,sizeof(*config))||*out) {
+       memcmp(a,&saved->allocator,sizeof(*a))||memcmp(config,&saved->config,sizeof(*config))||*out) {
         s->busy=1;
         if(s->startup)pt_paula_preflight_setup_cancel(&s->startup);
-        saved.allocator.release(saved.allocator.context,s);
+        saved->allocator.release(saved->allocator.context,s);
         return r==PT_RENDER_SETUP_CAPACITY?PT_PAULA_READERS_SONG_CAPACITY:PT_PAULA_READERS_SONG_INVALID;
     }
+    memset(s->begin_control,0,sizeof(s->begin_control));s->begin_control_count=0;
     *out=s;return PT_PAULA_READERS_SONG_PENDING;
+}
+
+enum pt_paula_readers_song_result pt_paula_readers_song_begin_in_workspace(
+    const struct pt_allocator *a,struct pt_sampler *sampler,struct pt_project *project,
+    const struct pt_paula_readers_song_config *config,uint32_t revision,
+    void *memory,size_t capacity,struct pt_paula_readers_song **out)
+{
+    return song_begin_in_workspace(a,sampler,project,config,revision,memory,capacity,out);
+}
+
+/* Compatibility route only: this local snapshot is intentionally large.
+ * The workspace entrypoint above contains no such ledger/sample array. */
+enum pt_paula_readers_song_result pt_paula_readers_song_begin(const struct pt_allocator *a,
+    struct pt_sampler *sampler,struct pt_project *project,
+    const struct pt_paula_readers_song_config *config,uint32_t revision,
+    struct pt_paula_readers_song **out)
+{
+    struct song_begin_workspace saved={0};
+    return song_begin_in_workspace(a,sampler,project,config,revision,&saved,sizeof(saved),out);
 }
 
 /* Closing genuine retired handles is metadata/allocator work only. A refusal

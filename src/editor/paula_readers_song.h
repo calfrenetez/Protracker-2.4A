@@ -66,14 +66,49 @@ struct pt_paula_readers_song_status {
  * Allocator/Chip opaque context extents remain caller-disjoint obligations.
  * Explicit backend context_bytes is guarded. All known full source capacities,
  * live controls and tracked allocation extents are protected before writes.
- * An overlapping returned arena is not fresh ownership and is never released.
+ * A returned arena recognized as overlapping a guarded extent is not released
+ * as fresh ownership. Allocators must return fresh, disjoint storage;
+ * unenumerated opaque extents remain caller responsibility.
  * Begin snapshots bounded metadata spans (<=6144), no PCM/order/event/slice
  * values. It owns one fixed ordinary control plus the actual startup controls;
  * fixed allocator/metadata work is not a wall-clock guarantee.
- * The first constructor also uses a bounded local metadata snapshot; native
- * stack adequacy (including a 65536-byte stack) is NOT qualified by this API.
+ * The compatibility begin below also uses a large local metadata snapshot;
+ * native stack adequacy (including a 65536-byte stack) is NOT qualified by this
+ * API. Use begin_in_workspace to keep that snapshot off the constructor stack.
  */
 size_t pt_paula_readers_song_control_size(void);
+/* Construction scratch, not a public validator, prepared owner or certificate.
+ * Size/alignment queries are for this exact build/ABI. Supply addressable ordinary
+ * storage of at least size() bytes, aligned to alignment(); the WHOLE declared
+ * capacity is guarded, including spare bytes. Short capacity returns CAPACITY;
+ * NULL, misalignment, wrapped or known overlapping spans return INVALID.
+ * No semantic payload reads or allocator/backend calls precede the snapshots.
+ * Initial metadata/alias refusals leave scratch/source/out unchanged. Once its
+ * private snapshot is populated, scratch contents are unspecified on return.
+ *
+ * Caller owns scratch separately from config.control_budget (producer-created
+ * controls) and readers.chip_budget (representations), and must budget their
+ * combined peak. Scratch is exclusively borrowed through this call/callbacks,
+ * never retained on return, and immediately reusable/free afterward. It must be
+ * disjoint from all borrowed controls/source/full capacities/backend context and
+ * opaque callback contexts; its bytes may not be changed during callbacks.
+ * Same-workspace constructor calls must be serialized, including first allocator
+ * callback reentry before a parent exists. No caller-provided completion fields
+ * are read: begin builds every snapshot itself before any allocation callback.
+ *
+ * Removing this large local snapshot is not a native total-call-chain stack,
+ * timing or Fast-placement qualification. Fixed streaming metadata guard passes
+ * and nested real startup constructors remain separately bounded task work.
+ */
+size_t pt_paula_readers_song_begin_workspace_size(void);
+size_t pt_paula_readers_song_begin_workspace_alignment(void);
+enum pt_paula_readers_song_result pt_paula_readers_song_begin_in_workspace(
+    const struct pt_allocator *,struct pt_sampler *,struct pt_project *,
+    const struct pt_paula_readers_song_config *,uint32_t revision,
+    void *workspace,size_t workspace_capacity,struct pt_paula_readers_song **);
+/* Large-stack compatibility wrapper around the same constructor. Its metadata
+ * snapshot alone exceeds 64KiB under the stated ordinary32-bit ABI assumption;
+ * no adequate native launcher stack is claimed. */
 enum pt_paula_readers_song_result pt_paula_readers_song_begin(const struct pt_allocator *,
     struct pt_sampler *,struct pt_project *,const struct pt_paula_readers_song_config *,
     uint32_t revision,struct pt_paula_readers_song **);

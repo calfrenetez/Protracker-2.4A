@@ -1,0 +1,33 @@
+{
+  "status": "ROOT_SOURCE_REVIEW_COMPLETE_BEFORE_FIRST_PRODUCER",
+  "kind": "root self review; no independent review",
+  "files": {
+    "src/editor/sampler.c": "91a8025e8ba74d8211f97037285177d0f0412d3c76fa1422ed2b48df0351ff4e",
+    "src/editor/sampler_establish.c": "66e2129b1a0c53bc6e4ee68d3a8ce32bb1965f43d702c78856f7e4f3d0479f00",
+    "src/editor/sampler_establish.h": "1f1b051fc0132eaa2bb195afe395d12bbaa7d468d58848460d230e9d8ca30009",
+    "src/editor/sampler_master_guard_internal.h": "f691504b22dd9250a3442953527470e4dd813a4d8eea900412b2afe1d3ab9a7a",
+    "tests/sampler_establish_test.c": "b0bd821439ab93856d9d3b632413669bb89d5a1975a9ba203ab44c864e436310",
+    "tests/test_sampler_establish.py": "3d8ce5f3c91a129302ac8c7715033b6f932cef7d376f21f0a182897ef602a6eb"
+  },
+  "findings": [
+    "Legacy sampler source is an exact prefix: no old implementation body changed; private seam retains standalone sampler dependency closure",
+    "Actual cancellable project validation ends before first master allocation; no public certificate and no promotion within a borrowed checked sequence",
+    "Source and named parent extents, original full PCM capacity after promotion, evolving masters, job and descriptor block classified before allocation initialization",
+    "Only proved fresh callback stale/fault returns released by copied exact base; ambiguous aliases are never initialized or released",
+    "Existing atomic pin job charges full sampler budget, copies at most caller work bytes, and keeps completed masters on partial failure/cancellation",
+    "All storage lifetimes genuine and serialized; metadata current checks do not detect in-place PCM writes forbidden by contract",
+    "Genuine metadata snapshots use two bounded sample descriptor arrays and one extension descriptor array; no permanent parallel master ledger",
+    "Fixture six depth/channel combinations retain low precision bits/save bytes, six actual reuse passes,81 negative cases and three downstream full-audit handoffs; inherited255 old owner regressions",
+    "Root host/source work only: no target services, guard reset, bridge connection, transport, device or musical event execution"
+  ],
+  "checks": [
+    "Original16 bytes/modes/status unchanged; index empty",
+    "No inherited static helper name collisions",
+    "No null zero-count metadata memcmp; defensive latched fault cannot report READY"
+  ],
+  "limits": [
+    "No Fast/Chip placement proof",
+    "No native execution/aggregate stack/wallclock/IRQ/Paula/AmiGUS/listening acceptance",
+    "No native or UI PLAY orchestration"
+  ]
+}

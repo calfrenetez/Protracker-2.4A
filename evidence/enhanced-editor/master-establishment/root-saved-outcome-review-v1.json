@@ -1,0 +1,27 @@
+{
+  "status": "ROOT_SAVED_OUTCOME_REVIEW_PASS",
+  "kind": "root self review; no independent review",
+  "host_groups": 2,
+  "host_calls": 4,
+  "native_calls": 55,
+  "native_units": 46,
+  "native_dependencies": 144,
+  "stable_sources": 895,
+  "product": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/master-establishment-next/native-v1/PTMasterEstablishTest",
+    "bytes": 291740,
+    "sha256": "06cb163c7a5fe0c16c92f5e328267ce731d77f3098ecf6a60df3d20b81e43d4a"
+  },
+  "cases": {
+    "depth_channel_save_pcm": 6,
+    "owned_master_reuse": 6,
+    "failure_cancel_alias_stale_budget_reentry": 81,
+    "actual_checked_mixed_handoffs": 3,
+    "original_owner_regressions": 255
+  },
+  "standalone_sampler_link": "PASS including existing budget/journal/edit/save cases with no renderer dependency",
+  "producer_failures": 0,
+  "retries": 0,
+  "source_prefix_exact": true,
+  "limits": "Host and compiler/link only; native/emulator/physical NEVER_EXECUTED; no placement/stack/timing/hardware/output/listening evidence"
+}

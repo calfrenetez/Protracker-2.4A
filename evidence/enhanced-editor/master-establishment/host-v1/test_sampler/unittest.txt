@@ -1,0 +1,6 @@
+test_owned_versions_and_journal (test_sampler.Sampler.test_owned_versions_and_journal) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 4.059s
+
+OK

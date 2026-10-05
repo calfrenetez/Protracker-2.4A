@@ -1,0 +1,9 @@
+{
+  "scope": "Peer reports only, root makes no target/service/guard/lifecycle/control/transport action",
+  "amiconnect_thread": "01a02122-c34e-72f0-95cc-e36ce3d73629",
+  "cursor": "d968e7b1-f556-4768-a35e-e032db61c38d:11",
+  "revision": 11,
+  "report": "Acknowledged Scott production HOLD fence4, potential_resident=true, no inflight; no application staged/launched; AmiConnect owns no connection/lock/reservation/queued action and remains hands-off",
+  "root_disposition": "Independent host work only; no retries/cleanup/restart/force-release/guard reset; fresh positive release and exact-candidate coordination required",
+  "heartbeat": "PAUSED"
+}

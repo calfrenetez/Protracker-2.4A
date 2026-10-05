@@ -997,3 +997,41 @@ enum pt_edit_result pt_sampler_workflow_commit(struct pt_sampler_workflow **job,
     if(result!=PT_EDIT_OK)return result;
     *stats=c->stats;*job=NULL;return PT_EDIT_OK;
 }
+
+/* Additive guarded promotion seam; all legacy sampler bodies stay exact. */
+#include "sampler_master_guard_internal.h"
+static struct pt_sample_version *master_guard_version_allocate(struct pt_sampler *s,const struct pt_sample *sample,
+    pt_sampler_master_guard_allocate guard,void *context)
+{
+    size_t values,bytes,slices;struct pt_sample_version *v;
+    if(sample->pcm.frames>SIZE_MAX/sizeof(int32_t)/sample->pcm.channels)return NULL;
+    values=(size_t)sample->pcm.frames*sample->pcm.channels;slices=(size_t)sample->slice_count*sizeof(uint32_t);
+    if(values>(SIZE_MAX-sizeof(*v)-slices)/sizeof(int32_t))return NULL;
+    bytes=sizeof(*v)+values*sizeof(int32_t)+slices;
+    if(s->bytes>s->budget || bytes>s->budget-s->bytes)return NULL;
+    v=guard(context,&s->allocator,bytes);if(!v)return NULL;
+    memset(v,0,sizeof(*v));v->owner=s;v->bytes=bytes;v->references=1;v->sample=*sample;
+    v->sample.pcm.data=(int32_t *)(v+1);v->sample.pcm.capacity=values;
+    v->sample.slices=(uint32_t *)(v->sample.pcm.data+values);
+    s->bytes+=bytes;return v;
+}
+enum pt_edit_result pt_sampler_pin_job_begin_guarded(struct pt_sampler_pin_job *j,struct pt_sampler *s,
+    struct pt_project *p,unsigned slot,unsigned generation,
+    pt_sampler_master_guard_allocate guard,void *context)
+{
+    struct pt_sample_version *v;const struct pt_sample *source;
+    if(!guard || !j || j->value || !s || !s->allocator.allocate || !s->allocator.release ||
+       !p || !p->samples || p->sample_count>PT_PROJECT_SAMPLES || slot>=p->sample_count)return PT_EDIT_INVALID;
+    if(generation!=s->generation)return PT_EDIT_CONFLICT;
+    source=p->samples+slot;
+    if(pt_pcm_shape(&source->pcm)!=PT_PCM_OK || source->slice_count>PT_PROJECT_SLICES ||
+       (source->slice_count && !source->slices))return PT_EDIT_INVALID;
+    v=s->current[slot];
+    if(v && (!same_storage(&v->sample,source) || v->references==UINT_MAX))return PT_EDIT_CONFLICT;
+    if(v)retain(v);
+    else {v=master_guard_version_allocate(s,source,guard,context);if(!v)return PT_EDIT_CAPACITY;}
+    memset(j,0,sizeof(*j));j->owner=s;j->project=p;j->table=p->samples;j->count=p->sample_count;
+    j->slot=slot;j->generation=generation;j->source=*source;j->previous=s->current[slot];j->value=v;
+    j->values=(size_t)source->pcm.frames*source->pcm.channels*sizeof(int32_t);
+    return PT_EDIT_OK;
+}

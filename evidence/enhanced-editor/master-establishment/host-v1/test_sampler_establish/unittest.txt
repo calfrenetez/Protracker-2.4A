@@ -1,0 +1,6 @@
+test_validation_then_guarded_atomic_masters_before_mixed_borrow (test_sampler_establish.EstablishMasters.test_validation_then_guarded_atomic_masters_before_mixed_borrow) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 10.279s
+
+OK

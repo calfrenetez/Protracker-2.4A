@@ -5546,3 +5546,58 @@ wall-clock bounds, IRQ/timing, device capacity/order/completion/voice-stop, audi
 or listening acceptance follows. No target/service/guard action was made. Shared
 service recovery remains under Scott's fresh sole-controller window; independent
 host qualification neither clears that window nor admits a target candidate.
+
+
+## Optional pre-borrow sample master establishment
+
+A private cancellable controller now establishes all project sample slots BEFORE
+any playback/setup/audit/checked-sequence borrow. Its genuine project validator
+finishes and is cancelled before the first guarded master reservation. The next
+established-master owner still performs its own full validation and mixed audit;
+no reusable semantic certificate is exposed. Begin protects metadata/control
+spans and reserves one separately bounded ordinary descriptor block without
+payload reads, master copies, pins, cache/backend work or device operations.
+
+Work1..4096 steps copy bounded descriptor counts, advance actual validation,
+reserve one complete budgeted master, or copy bounded PCM/marker bytes through
+the existing atomic pin job. Finite current/source/alias metadata checks are
+separate and are not wall-clock bounds. Initial and expected sample descriptors
+plus extension metadata retain original full capacity protection after pointers
+move. Spare capacity is guarded but not treated as audio. Exact sampler allocator,
+future release binding and master-budget accounting remain unchanged. All legacy
+sampler bodies are exact; the additive guarded seam preserves sampler-only link
+closure. No temporary replacement allocator or parallel persistent master ledger.
+
+Whole control/project/sampler/current master/unpublished job/original and current
+source/parent extents are classified BEFORE initialization. Known or ambiguous
+aliases are refused without release. Proved fresh callback-stale/fault returns
+are released once by the copied exact base. Caller keeps every genuine original
+and current extent alive and immutable until cancellation, except controlled
+completed publication and valid selection movement; destructive/in-place callbacks
+are unsupported. Up to14 caller parent extents plus the allocator argument and
+parent-vector extents stay named/alive. Completed slots remain sampler-owned on
+failure or cancellation; the unpublished partial copy is discarded. Cancellation
+is not undo. Canonical PCM precision, markers and save bytes remain unchanged.
+
+One root host ASan/UBSan run passed two groups/four compile-run calls:6 mono/stereo
+8/16/24 exact PCM/save cases,6 genuine owned-master reuse passes,81 failure/cancel/
+alias/late-validation/budget/reentry/stale/partial-copy cases and3 subsequent
+actual established-master mixed validation/audit/sequence handoffs. All255 old
+mixed-owner regressions and the original standalone sampler budget/history/edit/
+save fixture also passed. Semantic values were poisoned during metadata-only
+admission; master allocator assertions confirmed the actual validator was cancelled
+before every allocation. All895 private source identities stayed stable; stderr
+was empty. No producer failures/retries. One pinned portable m68000/soft-float
+compile/link passed55 commands,46 units,144 dependencies and stable five tools/
+seven runtime origins. PTMasterEstablishTest is291740 bytes, SHA256
+`06cb163c7a5fe0c16c92f5e328267ce731d77f3098ecf6a60df3d20b81e43d4a`.
+It has NEVER executed. Root reviews are self-reviews, no independent review.
+See [saved establishment evidence](../evidence/enhanced-editor/master-establishment/README.md).
+
+No native/emulator/physical execution, Fast/Chip placement, aggregate stack,
+latency/IRQ/deadline, backend capacity/order/completion/voice-stop, audio or
+listening acceptance follows. UI PLAY and native activation remain separate;
+exact musical scheduling is unchanged. No target/service/guard operation occurred.
+Scott's reported production HOLD fence4 and sole-controller recovery scope remain;
+AmiConnect revision11 acknowledges hands-off independent host work only. Positive
+release/fresh coordination/exact-candidate checks precede any target operation.

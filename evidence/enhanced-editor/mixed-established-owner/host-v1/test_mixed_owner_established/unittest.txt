@@ -1,0 +1,6 @@
+test_checked_sequence_retains_established_masters (test_mixed_owner_established.EstablishedMixedOwner.test_checked_sequence_retains_established_masters) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 13.267s
+
+OK

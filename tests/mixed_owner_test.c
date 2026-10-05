@@ -993,6 +993,6 @@ static int mixed_owner_fixture(void){unsigned bits,mode;(void)fixture;(void)wave
 #endif
     return 0;}
 
-#ifndef PT_TEST_MIXED_EXEC
+#if !defined(PT_TEST_MIXED_EXEC) && !defined(PT_TEST_MIXED_OWNER_INCLUDED)
 int main(void){return mixed_owner_fixture();}
 #endif

@@ -1,0 +1,25 @@
+{
+  "kind": "root self review; no independent reviewer",
+  "status": "PASS_SAVED_RESULTS_ONLY",
+  "host_groups": 2,
+  "host_calls": 4,
+  "all_returncodes": 0,
+  "empty_raw_stderr": true,
+  "stable_source_inputs": 890,
+  "native_units": 45,
+  "native_calls": 54,
+  "native_dependencies": 141,
+  "native_tools": 5,
+  "runtime_origins": 7,
+  "product": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-established-owner-next/native-v1/PTMixedEstablishedTest",
+    "bytes": 285612,
+    "sha256": "030a935788a357cade922d55bc82aac024135926e8c7bd3f8370a3af980cfcae"
+  },
+  "native_execution": "NOT_RUN",
+  "emulator_execution": "NOT_RUN",
+  "physical_execution": "NOT_RUN",
+  "first_producer_failures": 0,
+  "producer_retries": 0,
+  "scope": "Actual root source review and saved result/byte checks; no playback/hardware/latency/aggregate-stack claim"
+}

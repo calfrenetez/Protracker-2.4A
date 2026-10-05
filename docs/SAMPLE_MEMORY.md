@@ -5496,3 +5496,53 @@ Editor PLAY and mixed-owner wiring remain unfinished. No runtime, aggregate
 stack, placement, practical latency, IRQ/deadline, device ordering/completion,
 voice-stop, audio output or listening acceptance follows. Exact scheduling and
 master/save architecture are preserved.
+
+
+## Optional established-master mixed preparation owner
+
+The private opt-in `pt_mixed_owner_established_begin` now claims both idle bound
+engines through the complete project/sampler child-allocation guard. Named parent
+spans include engines, bridges, backend/reservation, options/caps/format/allocator,
+publisher and complete caller control; at most three further opaque-context spans
+are supplied explicitly. These controls/storage stay alive and immutable through
+owner close and zero-child finish. Begin allocates one ordinary fixed owner with
+metadata checks only. It calls neither synchronous bridge sync nor live backend
+ownership and performs no initial semantic validation, pins, promotion or cache
+work. The base allocator still provides alignment and a byte budget/reserve.
+
+Ordinary prepare on this owner advances genuine cancellable INITIAL validation
+(work1..4096), transfers into the full two-route audit, and takes the SAME completed
+checked sequence. Only successful complete masks retain current established
+masters, one required union slot per call. Missing required versions refuse;
+post-audit pin-job promotion and replacement of borrowed descriptors are excluded.
+No master copy or derived cache work occurs during this preparation. The separate
+live backend ownership gate remains checked. Report and numerical/interval output
+aliases refuse before publication/advancement. Observable preparation/cleanup
+reentry faults without freeing a live call. Caller callbacks remain serialized,
+immutable and non-reentrant; destructive/in-place writes are unsupported.
+
+Failure/close cancel actual startup/audit/sequence and unstarted work. ALL source
+pins and both engine tokens remain until BOTH drains and interrupt clearance.
+Original legacy begin/promotion and editor PLAY remain unchanged; the genuine
+owner now has optional hooks/shared private layout. Existing exact scheduling
+rules are preserved, including late/unready refusal with no rebasing or catch-up.
+Pre-borrow promotion and editor/native activation remain separate unfinished work.
+
+One first host ASan/UBSan run passed two groups/four calls: 66 new8/16/24 cases,
+all255 original owner regressions and the unchanged project guard fixture.
+It covered poisoned semantic values during metadata admission,27 known allocator
+aliases, allocation/source/reentry failures, cancellation/partial work, complete
+actual audit/sequence/union pins, missing masters, output aliases, simulated staged
+output, delayed two-backend drain and exact late-start refusal. All890 private
+source hashes remained stable; raw stderr was empty. One pinned portable
+m68000/soft-float build passed54 commands,45 units and141 dependencies with stable
+five tools/seven runtime origins. PTMixedEstablishedTest is285612 bytes, SHA256
+`030a935788a357cade922d55bc82aac024135926e8c7bd3f8370a3af980cfcae`.
+It has NEVER executed. Reviews are root self-reviews, no independent review.
+See [saved established-master owner evidence](../evidence/enhanced-editor/mixed-established-owner/README.md).
+
+No native/emulator/physical execution, aggregate stack, Fast/Chip placement,
+wall-clock bounds, IRQ/timing, device capacity/order/completion/voice-stop, audio
+or listening acceptance follows. No target/service/guard action was made. Shared
+service recovery remains under Scott's fresh sole-controller window; independent
+host qualification neither clears that window nor admits a target candidate.

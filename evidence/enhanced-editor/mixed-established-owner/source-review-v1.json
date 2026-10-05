@@ -1,0 +1,22 @@
+{
+  "kind": "root self review; no independent reviewer",
+  "scope": "Opt-in actual mixed owner; legacy bodies except conditional hooks/layout extraction/output checks unchanged",
+  "checks": [
+    "Full source/parent protection precedes owner child initialization",
+    "No synchronous bridge sync in opt-in begin",
+    "No pin job/promotions during checked lifetime",
+    "Same genuine setup/audit/sequence path",
+    "Union pins only after successful full audit",
+    "Two drains and interrupt-clear precede every pin/token retirement",
+    "Known output/allocator aliases refuse",
+    "Observable preparation/close allocation callback reentry cannot free live owner",
+    "Legacy-only builds acquire no new external symbols",
+    "Portable compile is not native execution or timing evidence"
+  ],
+  "tests_planned": [
+    "66 new 8/16/24 cases",
+    "original full255 owner cases in same binary",
+    "unchanged full project guard fixture"
+  ],
+  "status": "REVIEWED_FOR_FIRST_HOST_RUN"
+}

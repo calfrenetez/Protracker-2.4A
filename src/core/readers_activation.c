@@ -279,7 +279,13 @@ static enum pt_readers_reply reader_probe(void *context,const struct pt_readers_
                     b->command[i].command=PT_READERS_CANCELLED_BEFORE;
                     {unsigned k;for(k=0;k<b->command[i].packet.count;++k){b->command[i].packet.action[k].data=NULL;b->command[i].packet.action[k].words=0;}}
                 }
-                b->command[i].state[j]=PT_READERS_RETIRED;
+                /* A never-issued TRIGGER command has no reader-adoption fact.
+                 * Its independent reader receipt below can prove retirement
+                 * while this historical command snapshot remains NONE. */
+                if(b->command[i].command==PT_READERS_CANCELLED_BEFORE&&
+                   b->command[i].packet.action[j].kind==PT_SCHEDULED_TRIGGER&&
+                   !b->command[i].adopted[j])b->command[i].state[j]=PT_READERS_NONE;
+                else b->command[i].state[j]=PT_READERS_RETIRED;
             }
         if((b->active_mask&(1U<<r->key.slot))&&key_equal(b->slot+r->key.slot,&r->key)){
             b->active_mask&=~(1U<<r->key.slot);memset(b->slot+r->key.slot,0,sizeof(*b->slot));

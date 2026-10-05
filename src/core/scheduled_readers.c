@@ -223,12 +223,24 @@ static int reader_state_valid(const struct reader_entry *r,enum pt_readers_state
     if(adoption==PT_READERS_UNADOPTED&&state!=PT_READERS_NONE&&state!=PT_READERS_RESERVED&&state!=PT_READERS_RETIRED)return 0;
     return 1;
 }
+static int command_reader_state_valid(const struct reader_entry *r,
+    const struct pt_readers_action_receipt *a,enum pt_scheduled_kind kind)
+{
+    /* Independent positive reader retirement does not rewrite a cancelled,
+     * never-issued TRIGGER command's NONE+UNADOPTED snapshot. It also cannot
+     * detach that command, revive the reader, or create adoption/timing. */
+    if(kind==PT_SCHEDULED_TRIGGER&&a->command==PT_READERS_CANCELLED_BEFORE&&
+       a->reader==PT_READERS_NONE&&a->adoption==PT_READERS_UNADOPTED&&
+       !a->observed&&!a->issued&&r->retired&&r->state==PT_READERS_RETIRED&&
+       r->valid&&!r->adopted&&!r->timed)return 1;
+    return reader_state_valid(r,a->reader,a->adoption);
+}
 static int command_valid(const struct pt_readers_output *q,const struct command_entry *e,const struct pt_readers_command_receipt *receipt,int detached)
 {
     unsigned i;
     for(i=0;i<receipt->count;++i){
         const struct pt_readers_action_receipt *a=receipt->action+i,*old=e->last.action+i;const struct reader_entry *r=q->reader+e->reader[i];enum pt_scheduled_kind kind=e->event.scheduled.batch.action[i].kind;
-        if((unsigned)a->command>PT_READERS_CANCELLED_AFTER||a->command!=receipt->action[0].command||!equal_key(&a->key,&r->domain.key)||!reader_state_valid(r,a->reader,a->adoption))return 0;
+        if((unsigned)a->command>PT_READERS_CANCELLED_AFTER||a->command!=receipt->action[0].command||!equal_key(&a->key,&r->domain.key)||!command_reader_state_valid(r,a,kind))return 0;
         if(issued(a->command)){
             if(a->observed<e->event.scheduled.first||a->observed>a->issued||a->issued>=e->event.scheduled.last)return 0;
             if(kind==PT_SCHEDULED_STOP&&(a->reader!=PT_READERS_DRAINING&&a->reader!=PT_READERS_RETIRED))return 0;

@@ -3,7 +3,7 @@
 This additive opt-in ABI2 backend has one ordinary fixed allocation, two command
 records, eight independently retained reader histories and four physical slots.
 It is not an editor PLAY route, device backend or native activation qualification.
-The existing queue, reader adapter, song producer and ABI2 sources are unchanged.
+The reader adapter, song producer and ABI2 interface retain their existing contracts.
 
 Open with a fresh session, original grid and explicitly injected qualified port;
 obtain the copied ABI2 backend and give it to one publishing queue/producer. The
@@ -118,3 +118,47 @@ aggregate call-chain stack/64KiB adequacy; every allocator/header/output alias a
 callback reentry variant; all malformed receipt/frequency/partial-effect
 combinations; exhaustive concurrent/cancellation matrices; multi-queue publication.
 The software model does not qualify any native timing, audio, DMA or target run.
+
+## Reader-first cancellation of an unissued trigger
+
+A positively retired reserved reader can arrive before its original command is
+independently detached. For a never-issued TRIGGER, the cancelled command retains
+its historical NONE + UNADOPTED action, with zero issue/observation ticks. The
+separate reader receipt retains RETIRED. The command-only validator accepts that
+exact combination only when the genuine reader is already valid, retired,
+unadopted and untimed. It never revives the reader, infers command quiet from
+reader quiet, or releases storage while a referencing command remains.
+
+Full command/domain identity and all eight reader-key fields still match.
+Continuing CONTROL/STOP and actually issued TRIGGER snapshots retain their prior
+adoption/timestamp requirements. Replaying the earlier genuine WAITING command
+snapshot after reader retirement fails sticky and preserves outputs and owners.
+Original scheduling, ABI2, activation windows and uncertainty rules are unchanged.
+
+Four affected ASan/UBSan groups passed once: scheduled readers, full copied
+activation with mono8/16/24 masters and 24 controls, the new focused RAM-port
+model, and the new retirement regression. All eight compile/run commands returned
+zero; 44 ordered full-M queries bind 83 canonical/105 SDK inputs, all 225 frozen
+files remained unchanged, and 58 exact original/durable pairs match. The focused
+cases exercise genuine public holder lifetimes, four-slot RAM adoption,
+replacement, early/late/refusal/uncertain-close handling, reader-first pending
+cancellation, sibling retirement, mixed continuing CONTROL/STOP, and the genuine
+stale-command rejection. Shared RAM fixture support is compiled into the new
+regression but its renamed entry is not called there; the separate RAM group
+actually runs it. Exhaustive forged timestamps/adoption combinations remain open.
+
+The unchanged 32-TU whole-song fixture cross-built once with the corrected two
+production C files: 43 commands returned zero, 78 canonical/32 SDK inputs, seven
+pinned runtimes and 46 exact saved pairs. PTReadersActivationTest is 246,096 bytes,
+SHA256 ec8e5a7a3b3f9d202cd38592c108bc31a3b4451bcc0a22a4a9953ad3791a5cda.
+Its enabled assertions and software-only marker remain compiled. The earlier
+source-inventory schema refusal occurred before output creation or a compiler
+call and remains preserved. The new RAM and retirement fixtures are native
+NOT_BUILT; this HUNK has NEVER EXECUTED. Ordinary heap allocation and injected
+software clocks/source callbacks do not prove Exec placement or CIA behavior.
+The test-only RAM scaffold declares stricter cancellation/source obligations;
+any future real CIA adapter requires its own reviewed contract and qualification.
+Native IRQ/residency/WCET, system and task stack, 65,536-byte launch adequacy,
+Amiberry/physical execution, DMA/audio/timing and listening remain unqualified.
+
+See the [correction evidence](../evidence/enhanced-editor/readers-trigger-retirement/README.md).

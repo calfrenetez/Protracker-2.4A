@@ -246,6 +246,28 @@ AmiGUS sample-RAM capacity/order/completion, exact hardware timing, audio or
 listening acceptance. See [contract](READERS_ACTIVATION.md) and
 [evidence](../evidence/enhanced-editor/readers-activation/README.md).
 
+## Reader-first pending cancellation correction — 5 October 2026
+
+The copied activation ledger and scheduled-reader validator now preserve separate
+histories when a never-issued TRIGGER reader positively retires before command
+quiet. Its cancelled command remains NONE + UNADOPTED with zero timestamps;
+independent reader state remains RETIRED, and zero referencing commands is still
+required before release. Full identities, issued CONTROL/STOP/TRIGGER handling,
+exact scheduling and sticky uncertainty remain unchanged. Genuine stale WAITING
+command replay refuses with outputs and owners retained.
+
+Four affected host sanitizer groups pass once, including the genuine mono8/16/24
+whole-song path, focused software RAM port, and retirement regressions. The
+existing 32-TU fixture cross-build passes with the corrected production C files;
+its 246,096-byte HUNK ec8e5a7a3b3f9d202cd38592c108bc31a3b4451bcc0a22a4a9953ad3791a5cda
+has NEVER EXECUTED. New RAM/retirement fixtures are native NOT_BUILT. Model clocks,
+source quiet and RAM adoption prove software ownership only. Native autonomous
+activation/IRQ/WCET/system and task stack/65,536-byte launch, memory placement,
+Amiberry/physical execution, device capacity/order/completion/voice-stop,
+exact output timing, audio and listening retain separate unqualified gates.
+See [contract](READERS_ACTIVATION.md#reader-first-cancellation-of-an-unissued-trigger)
+and [saved evidence](../evidence/enhanced-editor/readers-trigger-retirement/README.md).
+
 ## Optional native readers RAM diagnostic — 5 October 2026
 
 A distinct Exec wrapper now builds the unchanged public ABI2 registration fixture

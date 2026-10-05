@@ -1,0 +1,7 @@
+{
+  "revision": 23,
+  "cursor": "d968e7b1-f556-4768-a35e-e032db61c38d:23",
+  "peer": "ACK20 window and HOLD40 retained. Candidate not staged/launched; recovery awaits direct human approval. AmiConnect hands-off; Scott later probe unreserved pending verified release/fresh coordination.",
+  "approval": false,
+  "recoveryDispatched": false
+}

@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "files": {
+    "README.md": {
+      "bytes": 2519,
+      "sha256": "2b79e223b191a64040a0bacd9da30c0125b54d04c2a242f60becc78f4dc948aa"
+    },
+    "coordination.json": {
+      "bytes": 432,
+      "sha256": "16733ffe4ee43c4bf3dd4faa6f522593a2c9ab5c0e208829da23db961930fa78"
+    },
+    "host-only-failure-identity-v1.json": {
+      "bytes": 764,
+      "sha256": "7581e9ff9cc344b748782a23cc4965b1eb8a0a575d594de71ffd87f7d33bc166"
+    },
+    "pins.json": {
+      "bytes": 2374,
+      "sha256": "bdde253de68a9f42bea5af5af2db172796036aeca18c8934035815eb50d93819"
+    },
+    "preflight.json": {
+      "bytes": 2586,
+      "sha256": "d7627760641874f45c4421c8e823e71c8fc0ed96c39ead3c95a0592af673cb69"
+    },
+    "recover_startup_once.py": {
+      "bytes": 5379,
+      "sha256": "66b870f12e59a7769fc52fcf67d630f9268129293ed8c99d17c1131cac6f3734"
+    },
+    "root-preexecution-review-v1.json": {
+      "bytes": 1213,
+      "sha256": "a315ea39ab68cbf468f1b9b7d77ae71d0fb61c4f363ef1a3473a09d3493d7f64"
+    },
+    "run_once.py": {
+      "bytes": 7333,
+      "sha256": "abed8fccfa63662063162fb4f6d374894b59c44d7bcd219aa3ecb1831c863df6"
+    },
+    "scope-plan.json": {
+      "bytes": 908,
+      "sha256": "d03afa4073f21f428cd796dee8bf0a46c1763d1311ad638a9cf5c886a6c012b7"
+    },
+    "settle_once.py": {
+      "bytes": 4567,
+      "sha256": "9d7d188f946c5cb1166795cdd7a57e4b0ded82b4624c238af6ab9787a5a55c92"
+    },
+    "start-terminal.json": {
+      "bytes": 5943,
+      "sha256": "4b7ad2e4648c5ad313277c4683671eac1e58e69ce19025e55a820050933ed264"
+    },
+    "start.stderr": {
+      "bytes": 4452,
+      "sha256": "75d50e5b808941f1f6c4d180c0e2127798ec098b28f6b3ed91f3ab07980f2152"
+    },
+    "start.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "start_once.py": {
+      "bytes": 4419,
+      "sha256": "7216ca5f6c550b92b14f71d162131f2b605676509b9896c3fd06b9f9d961445d"
+    },
+    "startup-failure-source-review-v1.json": {
+      "bytes": 803,
+      "sha256": "fd0a74090eeba899ae0dfccd24df91793b9943fb09c7fe7cdd8e209060ca7742"
+    },
+    "startup-recovery-plan.json": {
+      "bytes": 794,
+      "sha256": "e8842500e421d2344e0e089150e5b4023c6cfb00320183210a9cdeab057d69d3"
+    },
+    "startup-recovery-root-review.json": {
+      "bytes": 777,
+      "sha256": "1814b379d551a3201713d70542565c855489089e176232a90c21e1224b8c9f39"
+    },
+    "verify_release_once.py": {
+      "bytes": 5228,
+      "sha256": "97ed8fdf57142dcd14aef2ace5fc1cd8c6b17b49bfda9633adc3ff0f0236614b"
+    },
+    "verify_saved.py": {
+      "bytes": 1761,
+      "sha256": "048262ad9714f5e610a1729fe3dfce4968d7636ef993a623ebdb6e8e493b3fb3"
+    },
+    "verify_startup_recovery_release_once.py": {
+      "bytes": 3800,
+      "sha256": "490a683826f62a2e19b95ecbbbf1b21c88704a88637b77d58e1b55859198d0d8"
+    },
+    "recovery-pending-coordination-v1.json": {
+      "bytes": 341,
+      "sha256": "af6931b137f580ccaed852693b8972c8e2bdcb52ee9dcbc2d8133f5d18704950"
+    }
+  }
+}

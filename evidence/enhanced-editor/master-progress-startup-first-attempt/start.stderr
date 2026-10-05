@@ -1,0 +1,61 @@
+  + Exception Group Traceback (most recent call last):
+  |   File "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/emulator.py", line 108, in <module>
+  |     asyncio.run(main())
+  |     ~~~~~~~~~~~^^^^^^^^
+  |   File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/runners.py", line 204, in run
+  |     return runner.run(main)
+  |            ~~~~~~~~~~^^^^^^
+  |   File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/runners.py", line 127, in run
+  |     return self._loop.run_until_complete(task)
+  |            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  |   File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/base_events.py", line 719, in run_until_complete
+  |     return future.result()
+  |            ~~~~~~~~~~~~~^^
+  |   File "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/emulator.py", line 57, in main
+  |     return await _main(a)
+  |            ^^^^^^^^^^^^^^
+  |   File "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/launcher_access.py", line 144, in wrapped
+  |     return await fn(*args, **kwargs)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/emulator.py", line 96, in _main
+  |     async with streamable_http_client('http://127.0.0.1:3000/mcp') as (rd,wr,_):
+  |                ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/lib/python3.14/contextlib.py", line 235, in __aexit__
+  |     await self.gen.athrow(value)
+  |   File "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/.venv/lib/python3.14/site-packages/mcp/client/streamable_http.py", line 672, in streamable_http_client
+  |     async with anyio.create_task_group() as tg:
+  |                ~~~~~~~~~~~~~~~~~~~~~~~^^
+  |   File "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 847, in __aexit__
+  |     raise BaseExceptionGroup(
+  |         "unhandled errors in a TaskGroup", self._exceptions
+  |     ) from None
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Exception Group Traceback (most recent call last):
+    |   File "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/.venv/lib/python3.14/site-packages/mcp/client/streamable_http.py", line 695, in streamable_http_client
+    |     yield (
+    |     ...<3 lines>...
+    |     )
+    |   File "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/emulator.py", line 97, in _main
+    |     async with ClientSession(rd,wr) as s:
+    |                ~~~~~~~~~~~~~^^^^^^^
+    |   File "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/.venv/lib/python3.14/site-packages/mcp/shared/session.py", line 238, in __aexit__
+    |     return await self._task_group.__aexit__(exc_type, exc_val, exc_tb)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/.venv/lib/python3.14/site-packages/anyio/_backends/_asyncio.py", line 847, in __aexit__
+    |     raise BaseExceptionGroup(
+    |         "unhandled errors in a TaskGroup", self._exceptions
+    |     ) from None
+    | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+    +-+---------------- 1 ----------------
+      | Traceback (most recent call last):
+      |   File "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/emulator.py", line 99, in _main
+      |     v=await s.call_tool('amiga_connect',{'mode':'tcp','host':'127.0.0.1','port':2345})
+      |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      |   File "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/launcher_access.py", line 181, in call
+      |     reject_uncertain(result)
+      |     ~~~~~~~~~~~~~~~~^^^^^^^^
+      |   File "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/launcher_access.py", line 157, in reject_uncertain
+      |     raise GuardRefused("Target tool reported an error")
+      | launcher_guard.GuardRefused: Target tool reported an error
+      +------------------------------------

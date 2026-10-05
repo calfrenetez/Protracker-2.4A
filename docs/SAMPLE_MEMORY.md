@@ -5670,3 +5670,24 @@ executed on a target at this snapshot. Native observation will use an absolute
 This is not a musical deadline allowance. Prior60s failure and recovery stay exact.
 No native/physical/timing/stack/placement/device/audio/listening acceptance follows.
 See [observable fixture evidence](../evidence/enhanced-editor/master-observable-fixture/README.md).
+
+
+## Changed progress fixture startup failed before execution
+
+After diagnostic source commit120e51d, fresh AmiConnect ACK20 and exact admission
+guards permitted one protected030 startup. Its DevBench amiga_connect reported an
+error, preserving a full nested GuardRefused trace. Underlying tool error detail
+was not captured, so no product/hardware diagnosis follows. The candidate was
+never staged or launched. One connection call exists in the wrapper; multiple
+nested HOLD records are not evidence of retries. No startup replay followed.
+
+Root now owns HOLD40/no inflight/potentially resident reservation and exact owned
+PID35970. Host-only runtime/process inspection verified identity and absent
+candidate namespace. No post-failure target query, signal, cleanup, disconnect,
+reset, service restart, release or physical action occurred. The ACK20 window
+remains retained. A concrete one-SIGTERM/five-second owned recovery and separate
+independent four-record normal release are prepared, NOT executed. Direct human
+scoped approval is pending because failed-target cleanup was excluded from the
+window. Original source/tests, first startup trace and earlier failure/recovery
+remain preserved. Candidate native execution and physical testing remain NOT_RUN.
+See [startup first-attempt evidence](../evidence/enhanced-editor/master-progress-startup-first-attempt/README.md).

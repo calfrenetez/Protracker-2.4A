@@ -1,0 +1,17 @@
+{
+  "scope": "host-only process listing and saved runtime/failure records; no target/service/status/socket request",
+  "ownedProcess": [
+    [
+      35970,
+      "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+    ]
+  ],
+  "runtime": {
+    "pid": 35970,
+    "target": "amiberry-030",
+    "profile": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae"
+  },
+  "stageExists": false,
+  "runTerminalExists": false,
+  "atUTC": "2026-10-05T22:35:54.722136+00:00"
+}

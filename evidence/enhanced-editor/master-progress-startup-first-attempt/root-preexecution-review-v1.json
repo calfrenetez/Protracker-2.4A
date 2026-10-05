@@ -1,0 +1,17 @@
+{
+  "kind": "root self-review, no independent review",
+  "scripts": {
+    "run_once.py": "abed8fccfa63662063162fb4f6d374894b59c44d7bcd219aa3ecb1831c863df6",
+    "settle_once.py": "9d7d188f946c5cb1166795cdd7a57e4b0ded82b4624c238af6ab9787a5a55c92",
+    "start_once.py": "7216ca5f6c550b92b14f71d162131f2b605676509b9896c3fd06b9f9d961445d"
+  },
+  "facts": [
+    "Protected existing start/run/settle controls reused with exact changed product/source/namespace",
+    "Only host progress observation added; fixed420s deadline never extends on progress",
+    "No phase/query/cleanup after failed run; nested traceback preserved",
+    "Completed-only settlement still checks quiet/DMA/liveidentity/exact stage bytes before custody/disconnect/owned SIGTERM",
+    "Separate independent release remains required; scope excludes any physical/audio action"
+  ],
+  "separateReleaseScript": "97ed8fdf57142dcd14aef2ace5fc1cd8c6b17b49bfda9633adc3ff0f0236614b",
+  "releaseReview": "Completed-run-only; separate nonblocking test/Safari locks and fresh identity/absence/hash readback; transport acquired internally by normal exact fence release. Four record hashes bound; no reset, lease disclosure, guest query or physical action."
+}

@@ -1,0 +1,10 @@
+{
+  "status": "HOST_SOURCE_INSPECTION_AFTER_START_FAILURE",
+  "startup": "One reserve/start wrapper; connection error before candidate stage/launch",
+  "actualWrapperSource": "Exactly one amiga_connect call, no retry loop. Multiple HOLD entries are nested guard latches, not evidence of multiple target requests",
+  "underlyingToolError": "Not captured by shared reject_uncertain; no cause diagnosis",
+  "firstTraceSHA256": "75d50e5b808941f1f6c4d180c0e2127798ec098b28f6b3ed91f3ab07980f2152",
+  "postFailureActions": "host-only saved records/localprocess/source inspection and recovery preparation; no target/service request/signal/reset/disconnect/retry/physical action",
+  "native": "NOT_RUN; emulator infrastructure startup FAILED",
+  "recovery": "PID35970/HOLD40 prepared, direct approval pending"
+}

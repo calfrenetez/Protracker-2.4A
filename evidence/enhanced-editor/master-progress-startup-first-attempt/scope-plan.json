@@ -1,0 +1,23 @@
+{
+  "target": "amiberry-030",
+  "candidate": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/master-observation-next/native-v1/PTMasterProgressTest",
+    "bytes": 292912,
+    "sha256": "2c88205c370a3ab8d68a0f5beecc851d0d9e44e9e90a95d590a74185d03348e8"
+  },
+  "sourceCommit": "120e51d6b90303484f6108a1c6b8ff5f2e6d10cb",
+  "oneLaunch": true,
+  "absoluteWorkloadSeconds": 420,
+  "scope": "ordinary-memory software assertions only, per-case host progress, exact guest checks and completed-only settlement/independent verified release",
+  "exclusions": [
+    "physical target",
+    "audio/DMA/register/device/nativeIRQ activation",
+    "service restart",
+    "guard reset",
+    "forced kill",
+    "automatic retry",
+    "failed-target cleanup"
+  ],
+  "failure": "retain first result and HOLD; stop target actions, no unchanged retry",
+  "originalFailure": "Unchanged; no late-log promotion"
+}

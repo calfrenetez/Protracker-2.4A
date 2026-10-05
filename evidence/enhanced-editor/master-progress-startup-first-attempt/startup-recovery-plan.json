@@ -1,0 +1,17 @@
+{
+  "status": "PREPARED_NOT_EXECUTED_APPROVAL_PENDING",
+  "pid": 35970,
+  "fence": 40,
+  "scope": "one SIGTERM of own failed-start emulator, independent verified release; no candidate retry or physical action",
+  "steps": [
+    "fresh three locks/exact PID-command-runtime/private lease/guard/source pins",
+    "one SIGTERM,max5s,no force kill or guest request",
+    "require emulator/listener absence and healthy disconnected unchanged DevBench endpoint",
+    "preserve all first records; no candidate staged so no deletion/custody move",
+    "separate locked independent absence/restoration/original hashes",
+    "normal exact four-record guard.release to EMPTY41",
+    "explicit coordinated window release"
+  ],
+  "failure": "retain HOLD/state; no extra action/retry",
+  "approved": false
+}

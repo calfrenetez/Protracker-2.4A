@@ -6102,3 +6102,35 @@ toolchain, log collections and the unexecuted binary remain separate.
 This supplies individual request-driven editor batches. Whole-song production,
 native PLAY, a qualified real port, actual memory placement, aggregate runtime
 stack, exact activation/IRQ timing, physical card/audio and listening remain open.
+
+Separate controller compiler stack metadata and independent saved-result review
+pass: 78 raw tables contain 1,281 per-function rows, including 234 static and
+1,047 dynamic bounded rows. The largest frame observation is 16,572 bytes;
+activation fire is 4,692 bytes. The
+[small saved stack projection](../evidence/enhanced-editor/editor-mixed-readers-stack/README.md)
+passes its offline byte verifier. These are compiler observations, not measured
+total stack, library/interrupt call-chain, runtime or native acceptance. The
+510,392-byte controller candidate remains unexecuted.
+
+## Exact paired boundary geometry — 6 October 2026
+
+The additive `mixed_readers_plan_normalize` is implemented and passes its complete
+host ASan/UBSan fixture and independent saved-result review: 941 source inputs,
+38 units and six full markers. It reduces a complete renderer boundary into at
+most 16 exact supported factory records in global track order. It performs no
+allocation, cache preparation, upload, enqueue or activation. Its logical origins
+and READY geometry do not grant master ownership or runtime ACTIVE keys.
+Complete source/context/unused extents, original owner slot, stale tags and
+cancellation remain guarded. The fixture includes established 24-bit master,
+same-sequence/render parity and exact saved master bytes.
+
+The first runtime attempt remains a saved fixture failure on a misaligned typed
+alias-pointer byte snapshot. The corrected fixture changes byte handling and
+alignment expectations; production code stays unchanged. Exact canonical gains
+outside the legacy AmiGUS volume/pan domain still refuse without approximation.
+The separate explicit-level helper and genuine tagged factory integration are
+under development. Whole-song strict audit, master-owning producer and composite
+editor barrier remain subsequent implementation work. Native, emulator, physical,
+memory placement, device completion/stop, timing and listening are untested by
+this module. See the [geometry contract](MIXED_READERS_PLAN_NORMALIZE.md) and
+[saved host projection](../evidence/enhanced-editor/mixed-readers-plan-normalize-host/README.md).

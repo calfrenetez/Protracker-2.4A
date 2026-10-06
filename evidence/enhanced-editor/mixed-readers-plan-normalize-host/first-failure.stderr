@@ -1,0 +1,16 @@
+tests/mixed_readers_plan_normalize_test.c:367:23: runtime error: load of misaligned address 0x6340023d8544 for type 'struct pt_mixed_plan_normalizer **', which requires 8 byte alignment
+0x6340023d8544: note: pointer points here
+  00 00 00 00 00 00 01 00  00 00 02 00 00 00 03 00  00 00 04 00 00 00 05 00  00 00 fb ff 00 00 fc ff
+              ^ 
+==14526==WARNING: external symbolizer didn't start up correctly!
+==14526==WARNING: Can't read from symbolizer at fd 3
+==14526==WARNING: atos failed to symbolize address "0x10420a2dc"
+==14526==WARNING: Can't read from symbolizer at fd 3
+==14526==WARNING: atos failed to symbolize address "0x1041fde84"
+==14526==WARNING: Can't read from symbolizer at fd 3
+==14526==WARNING: atos failed to symbolize address "0x199bb7e7c"
+    #0 0x00010420a2dc in alias_stale_and_cancel+0x564 (/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-plan-normalizer/v1/attempt-93fx22w8/normalizer:arm64+0x10000e2dc)
+    #1 0x0001041fde84 in main+0x1604 (/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-plan-normalizer/v1/attempt-93fx22w8/normalizer:arm64+0x100001e84)
+    #2 0x000199bb7e7c in start+0x1a1c (/usr/lib/dyld:arm64e+0x31e7c)
+
+SUMMARY: UndefinedBehaviorSanitizer: undefined-behavior tests/mixed_readers_plan_normalize_test.c:367:23 

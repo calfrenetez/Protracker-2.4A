@@ -78,6 +78,13 @@ entry, Amiberry or physical execution is qualified yet. The
 records the successful corrected build and original failure separately. Its
 offline verifier checks the published projections and final logs; complete
 source, toolchain, log collections and binary remain private.
+Separate compiler stack metadata and independent saved-result review also pass:
+78 tables contain 1,281 per-function rows, with a largest frame of 16,572 bytes
+and an activation-fire frame of 4,692 bytes. The
+[saved stack observations](../evidence/enhanced-editor/editor-mixed-readers-stack/README.md)
+publish a small verified projection. These observations do not measure total
+runtime stack, a complete library/interrupt call chain or execution time. They
+do not execute or qualify the native candidate.
 The earlier combined factory and activation
 fixture remains a separate immutable compiler candidate; its source and evidence
 do not qualify this controller or failure seam.

@@ -1,0 +1,181 @@
+{
+  "schema": 1,
+  "packet": "EDITOR_PAIRED_COMPILER_STACK_OBSERVATIONS",
+  "evidence_tier": "HOST_COMPILER_PER_FUNCTION_METADATA_ONLY",
+  "status": "PASSED_SAVED_METADATA_REVIEW_CANDIDATE_NEVER_EXECUTED",
+  "counts": {
+    "source_inputs": 937,
+    "translation_units": 78,
+    "saved_dependencies": 223,
+    "compiler_driver_calls": 90,
+    "driver_lookups": 12,
+    "unit_compile_calls": 78,
+    "read_only_git_readbacks": 8,
+    "pre_post_input_checks": 180,
+    "raw_stack_usage_tables": 78,
+    "frame_row_observations": 1281,
+    "static_rows": 234,
+    "dynamic_bounded_rows": 1047,
+    "unbounded_dynamic_rows": 0,
+    "retained_files_without_manifest": 355,
+    "files_including_manifest": 356,
+    "pinned_tools": 5,
+    "pinned_runtime_inputs": 7
+  },
+  "recorded_host_times_seconds": {
+    "metadata_attempt_elapsed": 67.73527683300199,
+    "largest_compiler_call_elapsed": 0.8846877500036499,
+    "largest_git_readback_elapsed": 0.023907124996185303,
+    "offline_verifier_elapsed": 2.629556291998597,
+    "meaning": "Recorded host process elapsed times; no musical scheduling, IRQ or target execution bound."
+  },
+  "top_five_frame_row_observations": [
+    {
+      "compiled_unit": "src/core/pcm_filtered.c",
+      "row": 3,
+      "function_location": "pcm_filtered.c:8:20:pt_pcm_resample_filtered_progress.part.0",
+      "source_location": "pcm_filtered.c",
+      "line": 8,
+      "column": 20,
+      "function": "pt_pcm_resample_filtered_progress.part.0",
+      "frame_bytes": 16572,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "compiled_unit": "src/core/render.c",
+      "row": 23,
+      "function_location": "render.c:438:23:pt_render_stream",
+      "source_location": "render.c",
+      "line": 438,
+      "column": 23,
+      "function": "pt_render_stream",
+      "frame_bytes": 5536,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "compiled_unit": "src/core/mixed_readers_activation.c",
+      "row": 22,
+      "function_location": "mixed_readers_activation.c:262:33:pt_mixed_activation_fire",
+      "source_location": "mixed_readers_activation.c",
+      "line": 262,
+      "column": 33,
+      "function": "pt_mixed_activation_fire",
+      "frame_bytes": 4692,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "compiled_unit": "tests/editor_mixed_readers_prepare_test.c",
+      "row": 66,
+      "function_location": "sampler_mixed_readers_test.c:640:13:smf_live_expired",
+      "source_location": "sampler_mixed_readers_test.c",
+      "line": 640,
+      "column": 13,
+      "function": "smf_live_expired",
+      "frame_bytes": 4384,
+      "qualifier": "dynamic,bounded"
+    },
+    {
+      "compiled_unit": "src/platform/pp20_import.c",
+      "row": 4,
+      "function_location": "pp20_import.c:39:24:pt_pp20_file_load",
+      "source_location": "pp20_import.c",
+      "line": 39,
+      "column": 24,
+      "function": "pt_pp20_file_load",
+      "frame_bytes": 4168,
+      "qualifier": "dynamic,bounded"
+    }
+  ],
+  "candidate": {
+    "name": "PTEditorMixedReadersPrepareTest",
+    "bytes": 510392,
+    "sha256": "f0a35094b0e7c9f806f653155b6bfffcb875da9155a5f955691ba1263beb92a7",
+    "execution": "NEVER_EXECUTED"
+  },
+  "source_origin": {
+    "baseline": "a02d53f2047753fd8673cbcc377d772da1ceb531",
+    "overlay_count": 9,
+    "meaning": "Immutable saved controller source origin; distinct from the recorded repository admission HEAD."
+  },
+  "recorded_admission": {
+    "head": "375cda12f49f3b15d75a69b48601443fbb010589",
+    "index_empty_in_saved_before_after_readbacks": true,
+    "live_git_refresh_by_public_verifier": false,
+    "shared_target_authority": false
+  },
+  "private_review_checks": {
+    "protected_paths": 16,
+    "current_overlay_paths": 9,
+    "preserved_history_directories": 17,
+    "saved_whole_custody_passed": true,
+    "all_driver_receipts_rc0_empty_stderr_reaped_and_quiet": true,
+    "link_calls": 0,
+    "new_executables": 0,
+    "qualification_replays": 0,
+    "public_packet_contains_complete_private_custody": false
+  },
+  "provenance": {
+    "metadata_manifest": {
+      "bytes": 1565636,
+      "sha256": "22faceb843e0490c73c2344d2ac48edcbd7b36fecaaff2285c72acbfc0dafd3a"
+    },
+    "independent_final_review": {
+      "bytes": 14575,
+      "sha256": "a8d2ba9e8e1034ed827cb43f9845ee0f13331a0fef27a1332a7637cd9ea4cdb8"
+    },
+    "offline_driver_receipt": {
+      "bytes": 1152,
+      "sha256": "6198e72a0c4c727cb765f444186868aa529f2a1b2dbfd6447db42c9c56796907"
+    },
+    "offline_verifier_stdout": {
+      "bytes": 637,
+      "sha256": "20051fbdc1a18aada3fc8665faeb1b8c5c43449439dc2b2b5f5afe615127de98"
+    }
+  },
+  "offline_verifier_observation": {
+    "status": "PASS_INDEPENDENT_OFFLINE_SAVED_STACK_METADATA_ONLY",
+    "once_only": true,
+    "returncode": 0,
+    "stderr_bytes": 0,
+    "stdout_bytes": 637,
+    "stdout_sha256": "20051fbdc1a18aada3fc8665faeb1b8c5c43449439dc2b2b5f5afe615127de98",
+    "driver_reaped_and_owned_group_quiet": true
+  },
+  "preserved_reviewer_checker_refusal": {
+    "classification": "REVIEWER_RELOCATED_REFERENCE_COMPARISON_ERROR",
+    "candidate_failure": false,
+    "first_report": {
+      "bytes": 2787,
+      "sha256": "464d07ea88396bfba5480c16da13ff53890593fee508f1bf08ad2affe64977b5"
+    },
+    "resolution": "Original reviewer refusal retained privately; copied references then checked by exact bytes and full mode. No candidate, caller or metadata attempt was replayed."
+  },
+  "scope_limits": [
+    "Per-function compiler frame observations only; row count is not a unique-function or call-chain count.",
+    "No measured stack high-water or complete call-chain, library or interrupt stack bound.",
+    "No target ABI/layout, WCET, musical timing, Paula/AmiGUS placement, device completion or voice-stop acceptance.",
+    "No Amiberry, real A1200, native execution, hardware or listening acceptance.",
+    "Public verification checks only these projections and the two bound packet files; it does not recheck omitted private sources, dependencies, tools, raw tables, logs or whole custody."
+  ],
+  "omitted_private_bodies": [
+    "Source pool and SDK/runtime inputs",
+    "Compiler binary and controller candidate binary",
+    "Raw stack tables and compiler/Git logs",
+    "Complete manifests, review custody inventories, private absolute paths and process identities",
+    "Private freeze, shared ownership and target authority records"
+  ],
+  "bindings": {
+    "README.md": {
+      "bytes": 2743,
+      "sha256": "2088669416a7da661a2b4318ec10a32462809d1a9dab8cf7a0b454748c8f2f83",
+      "mode": 420,
+      "full_mode": 33188
+    },
+    "verify_saved_observations.py": {
+      "bytes": 14089,
+      "sha256": "dc36958cd3f658eb1478b4d2e3de1e321ded1dd10ec6f4aafb7afb0f0315a76c",
+      "mode": 420,
+      "full_mode": 33188
+    }
+  }
+}

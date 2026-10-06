@@ -1,0 +1,158 @@
+{
+  "schema": 1,
+  "status": "PASS_CORRECTED_V4_HOST_GEOMETRY_ONLY",
+  "qualification_date": "2026-10-06",
+  "counts": {
+    "archive_files": 936,
+    "overlays": 4,
+    "generated_font": 1,
+    "source_inputs": 941,
+    "translation_units": 38,
+    "readonly_git_calls": 12,
+    "compiler_product_calls": 2,
+    "complete_markers": 6
+  },
+  "source_origin": {
+    "baseline": "375cda12f49f3b15d75a69b48601443fbb010589",
+    "source_version": "v4",
+    "overlays": {
+      "src/editor/mixed_readers_plan_normalize.h": {
+        "bytes": 6551,
+        "sha256": "3dc592aca0d7664f153fe0c91804d4ba4adadbf1fe01f9ea58d4bfb047ef596c",
+        "mode": 33188
+      },
+      "src/editor/mixed_readers_plan_normalize.c": {
+        "bytes": 24276,
+        "sha256": "de7c4d4508685e8091e82caa2131cb539c873a91b59b70a718f2a48b3b05d356",
+        "mode": 33188
+      },
+      "tests/mixed_readers_plan_normalize_test.c": {
+        "bytes": 35587,
+        "sha256": "f4a31f23e3b6226cb3f0d34ccf8114917aa08d5b6a959c84480b39246d1f3f0c",
+        "mode": 33188
+      },
+      "tests/test_mixed_readers_plan_normalize.py": {
+        "bytes": 18590,
+        "sha256": "c61756d302ccab86be93efbbe2e59de89391b806d109bf7281d559ec8420654f",
+        "mode": 33188
+      }
+    }
+  },
+  "current": {
+    "compile_rc": 0,
+    "runtime_rc": 0,
+    "reaped_and_group_quiet": true,
+    "complete_fixture_pass": true,
+    "compile_elapsed_seconds": 8.204676249995828,
+    "runtime_elapsed_seconds": 0.5632118329958757,
+    "whole_qualifier_elapsed_seconds": 10.558391708007548,
+    "host_product": {
+      "bytes": 2428120,
+      "sha256": "2817f68c5f18d4a45adc4cda4bd22412e1778619d6ec7e20b781853653f30417",
+      "mode": 33261
+    },
+    "meaning": "HOST sanitizer product was executed; this is not an Amiga executable or target result."
+  },
+  "first_failure": {
+    "source_version": "v3",
+    "compile_rc": 0,
+    "runtime_rc": -6,
+    "reaped_and_group_quiet": true,
+    "complete_fixture_pass": false,
+    "completed_lines_before_failure": 3,
+    "diagnosis": "UBSan at fixture367 during alignment-sensitive typed alias-pointer byte snapshot; failed iteration stopped before production begin. No production crash inferred.",
+    "repair": "V4 fixture-only void/byte snapshots and correct alignment-specific INVALID/ALIAS, with aligned overlap and full-owner tests preserved.",
+    "first_product": {
+      "bytes": 2427656,
+      "sha256": "48c1a6758241031cb7b884f265319bdf9646eddc6e0c02d04dd19e106144884b",
+      "mode": 33261
+    },
+    "preserved": true
+  },
+  "prior_source_findings": {
+    "F1": "Emitted canonical Paula period/volume equality repaired before first run.",
+    "F2": "Original owner slot captured and guarded before results; exact original close exception repaired before first run.",
+    "v4_stale_inherited_sentence": "All-nine-ALIAS inherited wording is historical metadata only; corrected source uses misaligned begin INVALID, aligned overlap ALIAS, get/report ALIAS."
+  },
+  "provenance": {
+    "current_manifest": {
+      "bytes": 346214,
+      "sha256": "2b20081534f6a60326dca7d1d745bfc07a7c4f2b835bc82ce8a8ad706c0e4608",
+      "mode": 33188
+    },
+    "failed_manifest": {
+      "bytes": 344250,
+      "sha256": "6b7b36fba420e5e95b29711e7ab5742eaa74e216055d0d9b7bce7972962a736a",
+      "mode": 33188
+    },
+    "independent_saved_host_review": {
+      "bytes": 4475,
+      "sha256": "530e62ab4404ce7474253c95b9e6d6177137eb5244c9b8477b5d441e21932e8d",
+      "mode": 33188
+    },
+    "independent_v4_source_review": {
+      "bytes": 7421,
+      "sha256": "e986463c83cfcad05b7d1487c8094fd7e0c8d9c40e04b32d296901bab244b3ce",
+      "mode": 33188
+    },
+    "independent_first_failure_review": {
+      "bytes": 4266,
+      "sha256": "b765bafea991311f4b0ea45ca218dd0c50dcd75bb7b2b26878d8a2b66b53b24a",
+      "mode": 33188
+    },
+    "root_custody": {
+      "bytes": 10189,
+      "sha256": "9a77285a8b79ce0c59a8bed8679dee085d1e1355ded4ae9d83a661929816a4c9",
+      "mode": 33188
+    }
+  },
+  "preserved_unrelated_paths": 16,
+  "legacy_centered_card_gain": "REFUSED_WITHOUT_APPROXIMATION_OR_FALLBACK",
+  "targets": {
+    "normalizer_native_build": "NOT_RUN",
+    "amiberry": "NOT_RUN",
+    "real_a1200": "NOT_RUN",
+    "hardware_timing_audio_listening": "NOT_QUALIFIED"
+  },
+  "target_observation_time": "At this HOST packet freeze; later distinct evidence must qualify its own candidate.",
+  "whole_private_custody_included": false,
+  "shared_target_authority": false,
+  "scope_limits": [
+    "Geometry-only local fixture, no production full-song strict audit/master-owning producer/composite editor barrier.",
+    "No runtime factory admission, cache/key/READY authority, actual enqueue ticket/effects or real scheduled output.",
+    "No native build/runtime/stack, physical memory placement/capacity/order/completion/voice-stop, IRQ timing/audio/listening.",
+    "Selected projection verification only; complete private sources/tools/driver collections/reviews remain separate."
+  ],
+  "bindings": {
+    "README.md": {
+      "bytes": 3353,
+      "sha256": "d9544e20f370e69b4b02a1e2f1865e1c1637c3b1e204578dc0c2788f7a166134",
+      "mode": 33188
+    },
+    "current.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "current.stdout": {
+      "bytes": 899,
+      "sha256": "02851866a360bc64be60302a3ff13f8a8d3be457dcb5fd60a27e891c2465be1c",
+      "mode": 33188
+    },
+    "first-failure.stderr": {
+      "bytes": 1286,
+      "sha256": "0ded53283b00accce2df5404176a8a6e2b7482745b26445a1f707e1159ce97e3",
+      "mode": 33188
+    },
+    "first-failure.stdout": {
+      "bytes": 446,
+      "sha256": "8694bd5db0cc82b2109fd37d9e64969bf208d0155a311173ec0e893821087a18",
+      "mode": 33188
+    },
+    "verify_saved_observations.py": {
+      "bytes": 4630,
+      "sha256": "5a492d8d2882e89ed252f8d51624f4f77371059e299935152ca64e995cafd3ba",
+      "mode": 33188
+    }
+  }
+}

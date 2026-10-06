@@ -1,0 +1,9 @@
+This is selected saved compiler/link metadata for the explicit quantized normalizer. The exact Q candidate compiled and linked once from 949 saved inputs and 39 units. Independent parsing of the 39 actual raw dependency queries found 123 dependency bodies. All 52 compiler calls, eight inner Git readbacks and ten root calls returned RC0, with empty stderr and recorded reaping/quiescence within their bounds. The 236,648-byte HUNK remains **NEVER_EXECUTED**.
+
+Saved source origin `5a8c6401f8ac802558b73b7ec5df881ccaa131e3` plus the exact four Q overlays is distinct from actual committed admission `f441db27ddfe7650cb297ae5f6b9398bc0fe3ca1`. This resolves the earlier source-only preparation's unknown dependency count and unsupplied admission for this one compiler result. It does not change the historical source origin.
+
+[observations.json](observations.json) records selected original private pins and the independent saved-only review. This two-file projection omits source/archive/font/SDK/tool/runtime/product/private-authority bodies and all 140 raw driver streams. Original pins do not make those omitted bodies publicly verified; no complete private reconstruction, new verifier or publisher is claimed.
+
+The exact prior twelve-line HOST stdout is only a future native oracle. The HUNK header and twelve embedded strings are static checks, not native assertion results. See the separate [HOST packet](../mixed-readers-plan-quantized-host/README.md) for software geometry evidence. The older legacy-normalizer HUNK is a different candidate.
+
+No native runtime/entry/stack, Amiberry/A1200, editor/factory/facade/whole-song integration, genuine master/cache/queue ownership, device behavior, exact musical timing, audio or listening acceptance is supplied. Normal recorded cleanup does not qualify injected failures or hard filesystem deadlines.

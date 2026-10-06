@@ -1,0 +1,192 @@
+{
+  "schema": "pt24g-mixed-readers-plan-quantized-selected-portable-observations-v1",
+  "status": "PASS_COMPILER_LINK_ONLY_NEVER_EXECUTED",
+  "scope": "Small selected saved compiler/link metadata projection. Complete private qualification remains separately retained; omitted private bodies are not reconstructed or publicly verified by this projection.",
+  "source": {
+    "origin_commit": "5a8c6401f8ac802558b73b7ec5df881ccaa131e3",
+    "overlay": "Exact four Q files from the separately passing first HOST attempt",
+    "overlay_pins": {
+      "src/editor/mixed_readers_plan_normalize.c": {
+        "bytes": 27173,
+        "mode": 33188,
+        "sha256": "2e1e2628e7230f8fc2e06137b7861ff9b7332e4a8d24c30c55de3124d1c8f6fd"
+      },
+      "src/editor/mixed_readers_plan_normalize.h": {
+        "bytes": 8385,
+        "mode": 33188,
+        "sha256": "306fe15de7fb39c8e045279f42963f773d96746767b432e5597a57a16c73a220"
+      },
+      "tests/mixed_readers_plan_quantized_test.c": {
+        "bytes": 20004,
+        "mode": 33188,
+        "sha256": "fa3be0e0ffddf588c97943654015500f4c201ff8a2b0a8d5709d599d86ea72b9"
+      },
+      "tests/test_mixed_readers_plan_quantized.py": {
+        "bytes": 25180,
+        "mode": 33188,
+        "sha256": "c728d80ece79211fc7a8db69a0c267fda28f6db697a9c7322d2420af91fd1e66"
+      }
+    },
+    "saved_inputs": 949,
+    "translation_units": 39,
+    "actual_raw_M_dependency_union": 123,
+    "source_origin_distinct_from_invocation_admission": true,
+    "actual_committed_admission": "f441db27ddfe7650cb297ae5f6b9398bc0fe3ca1"
+  },
+  "actual_saved_qualification": {
+    "phase": "COMPLETE",
+    "first_failure": null,
+    "compiler_calls": 52,
+    "inner_Git_readbacks": 8,
+    "root_calls": 10,
+    "owned_driver_records": 70,
+    "inner_actual_raw_streams": 120,
+    "root_actual_raw_streams": 20,
+    "retained_excluding_manifest": 1074,
+    "retained_including_manifest": 1075,
+    "all_RC0_PASS": true,
+    "all_stderr_empty": true,
+    "final_compile_stdout_empty": true,
+    "all_recorded_drivers_reaped_owned_groups_quiescent": true,
+    "cleanup_signals_observed": [],
+    "inner_elapsed_seconds": 9.223896249997779,
+    "root_elapsed_seconds": 10.326999666998745,
+    "compile_link_elapsed_seconds": 3.625410833003116
+  },
+  "bounds": {
+    "inner": {
+      "cleanup_reserve_seconds": 5,
+      "driver_seconds": 120,
+      "git_seconds": 30,
+      "overall_seconds": 600
+    },
+    "root": {
+      "compiler_caller_seconds": 610,
+      "git_seconds": 30,
+      "overall_seconds": 900,
+      "owned_cleanup_reserve_seconds": 5
+    },
+    "all_measured_calls_within_recorded_effective_limits": true,
+    "injected_cleanup_failure_qualified": false
+  },
+  "product": {
+    "logical_name": "PTMixedReadersPlanQuantizedTest",
+    "bytes": 236648,
+    "mode": 33261,
+    "sha256": "0cdf76ac70a67fd5dc63d3ad09c9950ab6cc967b039d91d34416e9b41903f989",
+    "observed_header": "HUNK_HEADER 0x000003f3",
+    "twelve_expected_strings_present_as_static_bytes": true,
+    "execution": "NEVER_EXECUTED",
+    "published_body": false
+  },
+  "future_runtime_oracle": {
+    "logical_name": "expected-native.stdout",
+    "bytes": 1006,
+    "mode": 33188,
+    "sha256": "3c3682a357c1d9d758fce35b9e22b88e480133e896db7779b5c8afbce9d4fa22",
+    "expected_lines": 12,
+    "classification": "Exact prior HOST output, retained only as a future native expected-output oracle. Embedded strings are static bytes, not12 native runtime results.",
+    "published_body": false
+  },
+  "selected_original_private_record_pins": {
+    "actual_compiler_manifest": {
+      "bytes": 687893,
+      "mode": 33188,
+      "sha256": "035bb7b8f4c58defbacfbfb4dd02d5d530946dc5a3cf9c3a6395c3880f707133"
+    },
+    "root_receipt": {
+      "bytes": 24740,
+      "mode": 33188,
+      "sha256": "9057c952631be85c1f1aa0eed0be99db26787641e2c6f3df181e50ca68e87e97"
+    },
+    "root_execution_freeze": {
+      "bytes": 220524,
+      "mode": 33188,
+      "sha256": "6fc2addaa907120e88487ca86a31f37fd9f78fe494880f7e7dda8bbf0d052962"
+    },
+    "compiler_pins_metadata": {
+      "bytes": 4556,
+      "mode": 33188,
+      "sha256": "be906ae63a3abad2bcf8d4222a718d4447f3cd6eb95d0905d3365e0bbc10d5e8"
+    },
+    "actual_HOST_manifest": {
+      "bytes": 358497,
+      "mode": 33188,
+      "sha256": "12f03a7aa7f4f88cf7741479d71b41ef8bc5b80991276ee880068db95fa38ed3"
+    },
+    "accepted_HOST_review": {
+      "bytes": 4207,
+      "mode": 33188,
+      "sha256": "a5362caab0551bed1743cfb740312e538a1bfb2f50ee3343be40e29185921899"
+    },
+    "compiler_caller": {
+      "bytes": 29767,
+      "mode": 33188,
+      "sha256": "6465b160bd8c336e1ddc85abf3f4cf0b104a1f0b0bd38d7e80d2804cadb1c6ea"
+    },
+    "accepted_caller_SOURCE_review": {
+      "bytes": 4736,
+      "mode": 33188,
+      "sha256": "801217557e62d1eb16ea68576897e8046667581fdf1af921e71fe6dbe87eb271"
+    },
+    "independent_saved_compiler_review": {
+      "bytes": 4666,
+      "mode": 33188,
+      "sha256": "d42ba7792737da3b0d9cfda7530725195ac0f795e8799ca0bcc640f3641fc698"
+    },
+    "independent_saved_compiler_verification": {
+      "bytes": 21062,
+      "mode": 33188,
+      "sha256": "7e009c1603e4e96793aaecbcb23bc3d691fc7ac753e97dc665b458c8f2d00233"
+    }
+  },
+  "independent_saved_review": {
+    "status": "PASS_SAVED_COMPILER_ONLY_NO_REPLAY",
+    "findings": [],
+    "checked": "Exact949 input bodies/fullmodes/member set,39 units, independently parsed123 actual dependencies, tools/runtime/Python/Git,140 raw streams,70 process records,1074 retained bodies, HUNK bytes/mode/header/static strings and completed current controls. No replay."
+  },
+  "history_and_admission": {
+    "earlier_SOURCE_review": "SOURCE-only preparation left actual native dependencies unknown and invocation admission unsupplied. The separately supplied root execution freeze and actual records now resolve those facts.",
+    "actual_admission_source_count": 1165,
+    "completed_current_control_count": 39,
+    "protected16_match": true,
+    "current_state_scope": "The reviewer completed original f441 source/control readbacks before releasing the hold. Any later intentional adoption is separate from saved compiler custody.",
+    "earlier_HOST_scope": "The passing Q HOST fixture and its864 numeric rows/2592 relocated assertions are independent software geometry evidence, not native runtime or genuine retained master/cache/queue integration.",
+    "older_legacy_native_scope": "Earlier220840-byte legacy-normalizer HUNK does not qualify the Q candidate; this236648-byte candidate remains separately never executed."
+  },
+  "execution": {
+    "candidate": "NEVER_EXECUTED",
+    "emulator": "NEVER_EXECUTED",
+    "native": "NEVER_EXECUTED",
+    "physical": "NEVER_EXECUTED",
+    "target": "NEVER_EXECUTED"
+  },
+  "target_operations": 0,
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-UNDEBUG",
+    "-Isrc/core",
+    "-I.",
+    "-fbbb=-"
+  ],
+  "selected_tool_closure": {
+    "tool_bodies_checked": 5,
+    "runtime_bodies_checked": 7,
+    "explicit_Python_Git_pins_checked": true,
+    "complete_SDK_dynamic_host_library_or_linker_member_closure_qualified": false
+  },
+  "projection_limits": [
+    "Only this JSON and README are selected. Original private pins are distinct from the later public projection bytes.",
+    "All949 source bodies, archive/font bodies,140 raw driver streams, SDK/tool/runtime/product/private-authority bodies remain omitted. The full private custody is not publicly reconstructed or reverified.",
+    "No new verifier/publisher or runtime result is provided.",
+    "No native entry/stack, emulator/A1200, editor/factory/facade/whole-song integration, genuine master/cache/ACTIVE-key/queue ownership, device RAM/order/completion/stop, exact musical timing/audio/listening acceptance is supplied.",
+    "Recorded normal reaping/quiescence is not injected exceptional cleanup qualification or a hard filesystem deadline."
+  ]
+}

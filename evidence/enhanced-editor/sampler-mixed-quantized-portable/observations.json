@@ -1,0 +1,209 @@
+{
+  "schema": "pt24g-sampler-mixed-quantized-selected-portable-observations-v1",
+  "scope": "Selected saved compiler/link metadata projection. Full private qualification remains separately retained; this packet does not reconstruct or independently verify the omitted private bodies.",
+  "status": "PASS_COMPILER_LINK_ONLY_NEVER_EXECUTED",
+  "source": {
+    "origin_commit": "b39cdce1f47ff3506333d9397ddf185efa568b33",
+    "overlay_version": "factory V5, four exact files",
+    "overlay_pins": {
+      "src/editor/sampler_mixed_readers.c": {
+        "bytes": 44694,
+        "mode": 33188,
+        "sha256": "d5f2d5f4e7574f28b0a9bc70921e4b037802cd837ce60153bb10e09dc591c921"
+      },
+      "src/editor/sampler_mixed_readers.h": {
+        "bytes": 11621,
+        "mode": 33188,
+        "sha256": "2a3135a5282721a0452032a220d9f5ba764f1dfc3c192d63720d78baa086e28e"
+      },
+      "tests/sampler_mixed_quantized_test.c": {
+        "bytes": 34620,
+        "mode": 33188,
+        "sha256": "5e13f252b61758522bf098343b259e2addcdf709e40bc24edae642a0c767ca14"
+      },
+      "tests/test_sampler_mixed_quantized.py": {
+        "bytes": 26048,
+        "mode": 33188,
+        "sha256": "4e4536d21d28b9fed7d314188bb2636745d5969122d8ade9d68e90d10917c47d"
+      }
+    },
+    "saved_source_inputs": 947,
+    "ordered_translation_units": 28,
+    "actual_raw_M_dependency_union": 99,
+    "source_origin_distinct_from_admission": true,
+    "committed_admission": "5a8c6401f8ac802558b73b7ec5df881ccaa131e3"
+  },
+  "actual_saved_result": {
+    "phase": "COMPLETE",
+    "first_failure": null,
+    "compiler_driver_calls": 41,
+    "inner_Git_readbacks": 8,
+    "root_wrapper_calls": 10,
+    "actual_raw_streams_inner": 98,
+    "actual_raw_streams_root": 20,
+    "retained_members_excluding_manifest": 1050,
+    "retained_members_including_manifest": 1051,
+    "inner_elapsed_seconds": 8.12786349999078,
+    "root_elapsed_seconds": 9.343794542000978,
+    "compile_link_elapsed_seconds": 3.186888291995274,
+    "all_returncodes_zero": true,
+    "all_stderr_empty": true,
+    "final_compile_stdout_empty": true,
+    "all_owned_drivers_reaped_and_groups_quiescent": true,
+    "cleanup_signals_observed": []
+  },
+  "bounds": {
+    "inner": {
+      "cleanup_reserve_seconds": 5,
+      "driver_seconds": 120,
+      "git_seconds": 30,
+      "overall_seconds": 600
+    },
+    "root": {
+      "compiler_caller_seconds": 610,
+      "git_seconds": 30,
+      "overall_seconds": 900,
+      "owned_cleanup_reserve_seconds": 5
+    },
+    "measured_within_recorded_effective_limits": true,
+    "injected_cleanup_failure_qualified": false
+  },
+  "product": {
+    "logical_name": "PTSamplerMixedQuantizedTest",
+    "bytes": 258296,
+    "mode": 33261,
+    "sha256": "fdbcc815f2a7810e8920abb08465849f568db40f43231dbb72d54c6df65fa320",
+    "format_observed": "HUNK_HEADER 0x000003f3",
+    "execution": "NEVER_EXECUTED",
+    "published": false
+  },
+  "future_runtime_oracle": {
+    "logical_name": "expected-native.stdout",
+    "bytes": 2385,
+    "mode": 33188,
+    "sha256": "8f3746e35c19fefbda94496764009bc165c5297daa6732942331edacc85dae88",
+    "complete_expected_lines": 9,
+    "classification": "Future runtime oracle only, not an observed native run. It is a separate retained file in addition to the98 actual inner driver streams.",
+    "published_body": false
+  },
+  "selected_original_private_record_pins": {
+    "compiler_manifest": {
+      "bytes": 658750,
+      "mode": 33188,
+      "sha256": "65bd4a54b9cbaa53b097cb14111279080fffd622eb8f93035e5cfc731a78f488"
+    },
+    "root_compiler_receipt": {
+      "bytes": 24778,
+      "mode": 33188,
+      "sha256": "82099db76244cb78b3c3bded29a83f812d0b1fb63bee394c8e86b7a590d1880a"
+    },
+    "root_execution_freeze": {
+      "bytes": 395584,
+      "mode": 33188,
+      "sha256": "8888f3c3d96907bd4e326276d9aac2f57d17cbd0702657c1781090b22b58fb31"
+    },
+    "compiler_pins_metadata": {
+      "bytes": 4556,
+      "mode": 33188,
+      "sha256": "be906ae63a3abad2bcf8d4222a718d4447f3cd6eb95d0905d3365e0bbc10d5e8"
+    },
+    "compiler_caller": {
+      "bytes": 28794,
+      "mode": 33188,
+      "sha256": "aad24994eab01aa5b9b1567512dedfeb39a32b80133f3c6bca5536ef70d50534"
+    },
+    "source_only_caller_review": {
+      "bytes": 7917,
+      "mode": 33188,
+      "sha256": "97926716ec9624cfc5893f1ed8ad3ce4a9f3776fce4574250e0f507453e9186b"
+    },
+    "actual_V5_HOST_manifest": {
+      "bytes": 355708,
+      "mode": 33188,
+      "sha256": "435d371e7f43dd45d32cd3742d33b8d8eefa50484e5064a0326313eb156496eb"
+    },
+    "independent_V5_HOST_review": {
+      "bytes": 5957,
+      "mode": 33188,
+      "sha256": "7d8b657cd258577635708cf79c1209e68fa480327529638e6e9aa826d09eb501"
+    },
+    "independent_saved_compiler_review": {
+      "bytes": 5224,
+      "mode": 33188,
+      "sha256": "09fd4d92f975f8af81534a3917e3dca3f5870c9b78314d0019bd214d38e7ed85"
+    },
+    "independent_saved_compiler_verification": {
+      "bytes": 21752,
+      "mode": 33188,
+      "sha256": "585df83f195ae7ccf65c0c546fc90ac57de06d15de45917d885db55cc3b71fe0"
+    }
+  },
+  "independent_saved_review": {
+    "status": "PASS_SAVED_COMPILER_ONLY_NO_REPLAY",
+    "findings": [],
+    "reviewed": "947 saved source bodies,28 ordered units,99 independently parsed raw-M dependencies, selected tools/runtime pins, all118 raw snapshots, all1050 retained bodies, exact product and completed current controls. No candidate replay."
+  },
+  "historical_context": {
+    "earlier_source_only_caller_review_status": "PASS_SOURCE_ONLY_CALLER_REVIEW_PENDING_HOST_AND_ADMISSION",
+    "resolution": "The actual execution freeze separately supplied passing V5 HOST provenance and committed5a8 admission. Historical pending wording does not describe the later compiler result.",
+    "preserved_actual_HOST_failures": [
+      {
+        "version": "V2",
+        "manifest": {
+          "bytes": 344473,
+          "mode": 33188,
+          "sha256": "098c88fc6c43bab519dc5c817e40a5b6975222fde5894795fe15ffe73054cdc2"
+        },
+        "status": "FAIL",
+        "classification": "CompilerRC1; no product runtime."
+      },
+      {
+        "version": "V3",
+        "manifest": {
+          "bytes": 351062,
+          "mode": 33188,
+          "sha256": "1559354bdb10a3bb445f1c51258d73a7c8de6b882469146cf99347247a3314e7"
+        },
+        "status": "FAIL",
+        "classification": "CompilerRC0, HOST runtimeRC-6 lifetime assertion. The original exact parameter tuple/assertion clause remains unknown."
+      }
+    ],
+    "V4": "Two source-only fixture findings; never executed. Corrected V5 HOST PASS and this subsequent compiler/link result are distinct.",
+    "later_Q_adoption": "The original5a8 current-state readbacks completed before intentional Q adoption; later root-confirmed615ce383 is distinct from this frozen compiler admission and source."
+  },
+  "execution": {
+    "candidate": "NEVER_EXECUTED",
+    "emulator": "NEVER_EXECUTED",
+    "native": "NEVER_EXECUTED",
+    "physical": "NEVER_EXECUTED",
+    "target": "NEVER_EXECUTED"
+  },
+  "target_operations": 0,
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-UNDEBUG",
+    "-Isrc/core",
+    "-I.",
+    "-fbbb=-"
+  ],
+  "selected_tool_controls": {
+    "tool_bodies_checked": 5,
+    "runtime_bodies_checked": 7,
+    "explicit_Python_and_Git_pins_checked": true,
+    "full_SDK_or_dynamic_host_library_closure_qualified": false
+  },
+  "public_projection_limits": [
+    "Only this metadata JSON and README are selected. Original pins describe private records, not the projected public bytes.",
+    "Source/archive/font/SDK/tool/runtime/product/private authority bodies and98 inner+20 root raw stream bodies are omitted.",
+    "No pure verifier/publisher implementation is supplied and no complete private custody reconstruction is claimed.",
+    "No native runtime/entry/stack, emulator/A1200, card RAM/device ordering/completion/stop, controller/whole-song, exact musical timing/audio/listening acceptance is supplied.",
+    "Earlier actual failures stay separately retained; this metadata does not overwrite or relabel them."
+  ]
+}

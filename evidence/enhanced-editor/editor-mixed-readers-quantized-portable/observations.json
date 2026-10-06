@@ -1,0 +1,254 @@
+{
+  "actual_saved_compiler_result": {
+    "actual_dependencies": 226,
+    "additive_files": 2,
+    "archive_files": 948,
+    "candidate": {
+      "bytes": 535248,
+      "execution": "NEVER_EXECUTED",
+      "mode": 33261,
+      "relative_path": "native/PTEditorMixedReadersQuantizedTest",
+      "sha256": "7d0554338ebf23752a8539eadbcd02a6bcf5e0bf9e08e67c7455cfc45a997994"
+    },
+    "cleanup_signals": [],
+    "compiler_drivers": 92,
+    "copied_source_dependencies": 183,
+    "current_admitted_src_tests_files": 1167,
+    "environment": {
+      "LANG": "C",
+      "LC_ALL": "C",
+      "PATH": "/usr/bin:/bin",
+      "TMPDIR": "/private/tmp"
+    },
+    "first_failure": null,
+    "flags": [
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-"
+    ],
+    "generated_font_header_bytes": 1630,
+    "generated_font_raw_bytes": 580,
+    "inner_bounds_seconds": {
+      "cleanup_reserve_seconds": 5,
+      "driver_seconds": 120,
+      "git_seconds": 30,
+      "overall_seconds": 600
+    },
+    "inner_git_readbacks": 8,
+    "measured_inner_seconds": 16.95151616599469,
+    "measured_root_seconds": 18.089440291005303,
+    "ordered_units": 79,
+    "overlays": 5,
+    "phase": "COMPLETE",
+    "raw_inner_streams": 200,
+    "raw_root_streams": 20,
+    "recorded_calls_rc0_reaped_quiescent_owned_new_session": 110,
+    "recorded_stderr_empty": true,
+    "retained_inner_files_excluding_manifest": 1157,
+    "root_bounds_seconds": {
+      "compiler_caller_seconds": 610,
+      "git_seconds": 30,
+      "overall_seconds": 900,
+      "owned_cleanup_reserve_seconds": 5
+    },
+    "root_drivers": 10,
+    "saved_before_after_git_equal": true,
+    "saved_protected_display_editor_paths": 16,
+    "saved_staging_empty": true,
+    "selected_sdk_dependencies": 43,
+    "source_files": 951,
+    "static_markers": {
+      "complete_lines": 11,
+      "each_full_line_occurs_once": true,
+      "meaning": "Static HUNK strings only; no native assertions observed.",
+      "total_expected_stdout_bytes": 3490
+    }
+  },
+  "execution_tiers_for_current_candidate": {
+    "Amiberry": "NOT_RUN",
+    "IRQ_exclusion_residency_WCET": "NOT_RUN",
+    "audio_human_listening": "NOT_RUN",
+    "candidate": "NEVER_EXECUTED",
+    "compiler_link": "PASS_SAVED_ONLY",
+    "device_capacity_upload_completion_order_voice_stop": "NOT_RUN",
+    "injected_exceptional_cleanup": "NOT_RUN",
+    "native_entry": "NOT_RUN",
+    "physical_memory_placement": "NOT_RUN",
+    "real_A1200": "NOT_RUN",
+    "saved_HOST_fixture": "PASS_RECORDED_SEPARATELY_NO_REPLAY",
+    "scheduled_port_timing": "NOT_RUN",
+    "stack_metadata_runtime_stack": "NOT_RUN",
+    "whole_song_producer_execution": "NOT_RUN"
+  },
+  "independent_saved_review": {
+    "findings": [],
+    "method": "Read all saved member/source/dependency/tool bytes, raw logs, source/argv/control metadata and current scoped file pins; no replay/import/compiler/test/Git/network/target action.",
+    "report": {
+      "bytes": 3694,
+      "mode": 33188,
+      "private_original": "independent-saved-portable-review-v4/report.md",
+      "sha256": "d58ea617ab93ee81b88155006157a9cfdfded14de357813333c5083c5c86c645"
+    },
+    "review": {
+      "bytes": 9806,
+      "mode": 33188,
+      "private_original": "independent-saved-portable-review-v4/review.json",
+      "sha256": "6d006c015f1c62ea46c0bbef04aefdbe90311eab9837c298118eeba2d1c20ccf"
+    },
+    "status": "PASS_SAVED_COMPILER_ONLY_NO_REPLAY"
+  },
+  "limits": [
+    "Recorded successful process custody is not injected cleanup-fault qualification.",
+    "Selected five tools, seven runtime bodies and actual dependency union are not every dynamic host library or the entire SDK.",
+    "Measured compiler durations are not candidate runtime timing or WCET.",
+    "Historical legacy controller compiler/stack evidence and original HOST fixture failures remain separate; this metadata does not replace them.",
+    "No target packet, shared reservation, browser control or hardware action exists for this compiler result."
+  ],
+  "original_private_evidence": {
+    "caller": {
+      "bytes": 34248,
+      "mode": 33188,
+      "private_original": "portable-preparation-v4/build_native_once.py",
+      "sha256": "dad443c3ad002f477bdd894ad18460ebccd2b7c65eac2a7a8cc62a1bd590ca6f"
+    },
+    "candidate_freeze": {
+      "bytes": 10704,
+      "mode": 33188,
+      "private_original": "draft-source-v3/source-freeze-v3.json",
+      "sha256": "cecb2b6a6acf7ac0cac2ae1bf42eb3bc1acb255e29c19429cdedfccb8526656c"
+    },
+    "candidate_review": {
+      "bytes": 8340,
+      "mode": 33188,
+      "private_original": "independent-source-review-v3/readback.json",
+      "sha256": "89dc096c57e0675f5ba9cb40e9755d2e37f86b9df68504652c0336f708518838"
+    },
+    "compiler_pins": {
+      "bytes": 4556,
+      "mode": 33188,
+      "private_original": "portable-compiler-first-v4/compiler-pins.json",
+      "sha256": "be906ae63a3abad2bcf8d4222a718d4447f3cd6eb95d0905d3365e0bbc10d5e8"
+    },
+    "host_review": {
+      "bytes": 1666,
+      "mode": 33188,
+      "private_original": "independent-portable-source-review-v3/host-acceptance-projection-v1.json",
+      "sha256": "74a06a171749d4668d6bf08229613d5128a7e5792e4f61d432cad93d693f7bf1"
+    },
+    "host_run": {
+      "bytes": 362803,
+      "mode": 33188,
+      "private_original": "host-qualification/attempt-first-v3/run.json",
+      "sha256": "b5d9510aea55f3e5ef8e70e5c778b99770124e2b558002673fdc5ad109a289ed"
+    },
+    "host_source_freeze": {
+      "bytes": 169481,
+      "mode": 33188,
+      "private_original": "root-compiler-preparation-v4/actual-host-source-freeze.json",
+      "sha256": "df273b08ccd2b66562ce62c8110096899390a76e4614b8741c88a17536abad09"
+    },
+    "manifest": {
+      "bytes": 791107,
+      "mode": 33188,
+      "private_original": "portable-compiler-first-v4/manifest.json",
+      "sha256": "6697e3af4dabda5f8bdb02a278a9a71d576032cd2e9b7c95a852606bb6329372"
+    },
+    "policy": {
+      "bytes": 19862,
+      "mode": 33188,
+      "private_original": "portable-preparation-v4/source-policy.json",
+      "sha256": "978aba72cc1b042909f5b2128d18d8eaeb7b2b1636e84437b40bfb3fee334f60"
+    },
+    "preserved_v3_manifest": {
+      "bytes": 1451,
+      "mode": 33188,
+      "private_original": "portable-compiler-first-v3/manifest.json",
+      "sha256": "68883099a3fa9c0fa474a2aeff76a5fe8b483b155cf064ac3d584efa5225f8fe"
+    },
+    "preserved_v3_root_receipt": {
+      "bytes": 18672,
+      "mode": 33188,
+      "private_original": "root-portable-build-v3/receipt.json",
+      "sha256": "306f3423eb01797f6cf51fc5a1a97c0f7dd4cd2e5c73fb73def5f045b7a8e0a5"
+    },
+    "prior_v3_source_acceptance": {
+      "bytes": 7450,
+      "mode": 33188,
+      "private_original": "independent-portable-source-review-v3/review.json",
+      "sha256": "94a5d37ee395a5f16c70691649bc36345e0069212e981a511b62c026e6f1d41d"
+    },
+    "root_freeze": {
+      "bytes": 221435,
+      "mode": 33188,
+      "private_original": "root-portable-build-v4/root-freeze.json",
+      "sha256": "de0ae39c5646430ea157ff37ccbf1142f2829cae47b2dcdd06ba75919b5d9f93"
+    },
+    "root_receipt": {
+      "bytes": 24958,
+      "mode": 33188,
+      "private_original": "root-portable-build-v4/receipt.json",
+      "sha256": "ad7785e0ac0724857ba07b8efb809f971fd444651cb0b11077a0e18f1a332583"
+    },
+    "source_review_v4": {
+      "bytes": 14944,
+      "mode": 33188,
+      "private_original": "independent-portable-source-review-v4/review.json",
+      "sha256": "87e814a2ea2ac7c6f3647540ef01e19be5ec05da1f7f0b066a43e148f81bf3ff"
+    }
+  },
+  "preserved_first_v3_refusal": {
+    "error": "literal unit declaration bytes/full mode changed",
+    "inner_compiler_calls": 0,
+    "inner_git_calls": 0,
+    "meaning": "Original preparation refused complete declaration-body binding before inner calls. The distinct V4 caller pins saved/current bodies separately and compares literal values. Original manifest, receipt and SOURCE acceptance are unchanged.",
+    "phase": "PREPARATION",
+    "product": "NOT_CREATED",
+    "root_drivers": 6,
+    "status": "FIRST_FAILURE_RETAINED_NO_RETRY"
+  },
+  "schema": "pt24g-editor-mixed-readers-quantized-portable-selected-observations-v4",
+  "scope": "Two metadata files describe one saved compiler/link result; no source archive, source body, caller, raw log, compiler, verifier or candidate is published.",
+  "source_identity": {
+    "actual_compiler_invocation_admission": "4446ad1601535e45e2eac072f66fc4eebe441a0f",
+    "actual_host_archive_baseline": "19f710571919e5ea96ecd1a97ca27ea024be13d7",
+    "five_candidate_paths": {
+      "src/editor/editor_mixed_readers_prepare.c": {
+        "bytes": 48184,
+        "mode": 33188,
+        "sha256": "7af1fcd063c4eb6eabc490a8711e03ff132f7f81b460e818737e856734b670b1"
+      },
+      "src/editor/editor_mixed_readers_prepare.h": {
+        "bytes": 10643,
+        "mode": 33188,
+        "sha256": "a796f1279f36a2878b4e3b32e642cd81659b8c1c504eb088abf6064085288018"
+      },
+      "tests/editor_mixed_readers_prepare_test.c": {
+        "bytes": 39185,
+        "mode": 33188,
+        "sha256": "ddf2e13cc4e4a9104e344b514aa0a9a6b207f98950835b83b00dba16f2a36178"
+      },
+      "tests/editor_mixed_readers_quantized_test.c": {
+        "bytes": 30664,
+        "mode": 33188,
+        "sha256": "d78ff47cd4aa65e388cad57e4b885c7c156dfa0d512b378400971a6914ebaad1"
+      },
+      "tests/test_editor_mixed_readers_quantized.py": {
+        "bytes": 29731,
+        "mode": 33188,
+        "sha256": "1be6673a7f0cb662d56cf18f6fd794afec59eb5de9e4af0c60618b4276b79044"
+      }
+    },
+    "historical_controller_source_origin": "5a8c6401f8ac802558b73b7ec5df881ccaa131e3",
+    "saved_original_declarations_current_references": "Complete bodies pinned separately, exact literal source lists equal. Saved test_editor.py is 1992 bytes; protected current is 2002 bytes; neither replaces the other."
+  },
+  "status": "PASS_COMPILER_LINK_ONLY_NEVER_EXECUTED"
+}

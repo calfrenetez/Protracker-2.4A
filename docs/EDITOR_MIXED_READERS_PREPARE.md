@@ -107,3 +107,12 @@ Corrected first-v3 passed ASan/UBSan HOST qualification:951 saved inputs, five o
 Two original runtime failures remain preserved after successful compilation: V1 allocator-shim alias restoration and V2 destructive barrier mixed into positive drain. Their original failing tuples/returns were not recorded. Production guards and positive OK assertions were retained in the fixture repairs. See the [selected HOST projection](../evidence/enhanced-editor/editor-mixed-readers-quantized-host/README.md).
 
 This updates the controller request/ref integration status. Historical legacy compiler/stack evidence above is separate and does not qualify the new five-overlay candidate. No native compile/stack, emulator, real-A1200, physical memory/device completion/stop, IRQ/timing/audio/listening or whole-song producer acceptance is supplied by this HOST result.
+
+
+## Quantized controller compiler/link — 6 October 2026
+
+The current five-path quantized controller candidate now passes a distinct portable compiler/link attempt: 951 saved HOST source files, 79 ordered units, 92 compiler drivers, eight inner Git readbacks, ten root wrapper calls and 226 actual dependencies. Independent saved-result review found no findings. The 535,248-byte HUNK has SHA256 `7d0554338ebf23752a8539eadbcd02a6bcf5e0bf9e08e67c7455cfc45a997994` and remains NEVER_EXECUTED. Eleven expected lines are present as static strings only.
+
+The original V3 PREPARATION refusal remains preserved: a complete declaration-body binding failed before inner Git/compiler calls, producing no candidate. V4 pins original saved and current protected declaration bodies separately and checks equal literal unit lists. The [two-file compiler metadata](../evidence/enhanced-editor/editor-mixed-readers-quantized-portable/README.md) records the separate failure/pass identities and actual admission `4446ad1601535e45e2eac072f66fc4eebe441a0f`, HOST archive baseline `19f710571919e5ea96ecd1a97ca27ea024be13d7` and historical source origin `5a8c6401f8ac802558b73b7ec5df881ccaa131e3`.
+
+This updates only the current quantized controller's compile/link status stated above. Native entry, Amiberry, real-A1200, physical memory/device behavior, current-candidate stack metadata/runtime stack, IRQ exclusion/residency/WCET, scheduled-port timing, audio/listening and whole-song producer execution remain NOT RUN. Historical legacy compiler/stack results and the saved HOST fixture remain separate; no strict whole-song audit or native PLAY integration is qualified here.

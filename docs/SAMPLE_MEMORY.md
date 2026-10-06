@@ -5770,3 +5770,47 @@ acceptance. Root recovery was released EMPTY41; latest coordinator report instea
 places the shared target under Scott's separate HOLD44 with recovery approval
 pending. Root is hands-off with no target action queued. Fresh coordination and
 exact-candidate emulator qualification must precede any physical run.
+
+
+## Optional metadata-only bridge admission — 6 October 2026
+
+The remaining synchronous bridge/voice binding gap now has an optional callable
+`editor_mixed_bridges` path for the actual attached editor and idle dedicated
+backend. It initializes both caches/voice owners and quiescence callbacks without
+calling public bind/sync or repeating complete project validation. Whole output
+is guarded against all project/sampler storage, editor/binding/backend/reservation,
+input/vector and up to8 named opaque context extents before any write. Context
+start pointers inside output also refuse; unlisted extents stay caller-disjoint.
+A compile-time ABI check ensures all four existing checked-owner input control
+spans cover the whole new bridge object. No allocation, pin/promotion, ownership
+predicate, semantic-value read or backend/device callback occurs at binding.
+Refusal preserves output and inputs. This produces no readiness certificate:
+actual checked owner INITIAL validation/two-route audit still precede playback,
+and live backend ownership remains separately checked. Ordinary public bind/sync
+and exact scheduling stay unchanged; native PLAY/event-loop wiring is still open.
+
+Three ASan/UBSan groups/six calls passed with empty stderr/909 exact source files:
+9 poisoned-metadata/checked-validation/ownership/live-drain cases and75 aliases/
+admission refusals across8/16/24, original39+18+15 cases inside the changed fixture
+and separately, original66+255 owner cases. Invalid events failed complete later
+validation before any start; ownership loss failed the separate live gate. Valid
+work reached both injected outputs and retained editor changes through both drains,
+alarm/counter and zero-child finish. Completed masters stayed sampler-owned. The
+first9+60 version and its compile pass remain preserved privately; changed v2adds
+pointer-start and ABI coverage guards and has its own first PASS. No target retry.
+Portable m68000/softfloat compile/link90calls/231deps PASS: PTEditorBridgesTest385144B,
+SHA25621c5efc7fe5d066f56e81ea8cbcea8bc7e95892e8af0a55608a1410d882d9b1e.
+Both products NEVER staged/launched; emulator/physical NOT_RUN. Root review self-only.
+See [saved metadata binding evidence](../evidence/enhanced-editor/editor-metadata-bridges/README.md).
+No placement/totalstack/realDMA/Chip/cachecapacity/deviceordering/completion/voice-stop/
+IRQ/exact live timing/audio/listening proof inferred. Existing16 work paths preserved.
+
+Shared disposition changed independently: Scott reported verified EMPTY45 release
+of his approved HOLD44 recovery, then sought a new benchmark/readiness window;
+root supplied fresh recipient-specific hands-off through that separate window.
+Latest AmiConnect turn01a1104a-5347-79f0-9df2-27010bbda485 reports its connection-stage
+failure and retained new002 window, benchmark NOTstaged/run, exact new guard/PID
+pending. No shared cause is established. Root owns no target window/hold/lock/
+control/inflight/queued action and remains host-only. Target qualification needs
+independent peer recovery/release and a new explicitly scoped window/live guards;
+old EMPTY45 is not current free-target proof or physical transport clearance.

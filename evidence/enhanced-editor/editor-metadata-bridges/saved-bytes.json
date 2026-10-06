@@ -1,0 +1,93 @@
+{
+  "scope": "Retained records only; private leases and binaries excluded",
+  "files": {
+    "README.md": {
+      "bytes": 4223,
+      "sha256": "b3bb67dd61934efe0c1dfe4886e911c09ed31339af609319c3fbb76ccb576cc3"
+    },
+    "bridges-compile.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "bridges-compile.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "bridges-run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "bridges-run.stdout": {
+      "bytes": 624,
+      "sha256": "80a8a9731ef96568d0356de80dfdf5299ee7bef777cc0a8e7a5d038ead11d80a"
+    },
+    "build_native_once.py": {
+      "bytes": 5039,
+      "sha256": "835e5974eb325a9c0ec117405b536bf6d0f0b350aa561659bda1f35c3c70b82c"
+    },
+    "checked-standalone-compile.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checked-standalone-compile.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checked-standalone-run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "checked-standalone-run.stdout": {
+      "bytes": 407,
+      "sha256": "4a0cd66e19f2cb8e7fae0758ebd2379c1a8795a6d589419106a55080ad88b4d4"
+    },
+    "host-execution.json": {
+      "bytes": 200909,
+      "sha256": "5a952f1700447953cc20a54bee7814ceef3c5b2b94641df498c4c82b819a7bad"
+    },
+    "native-log-audit.json": {
+      "bytes": 25248,
+      "sha256": "e6f91fcc8cd72d548467dd56ed1494c28cf9d1e2e8f591a2167b1eecf5656ee2"
+    },
+    "native-manifest.json": {
+      "bytes": 345909,
+      "sha256": "9cc69187775861526ca07c9ca873ffc970dfd10990dbfcdbd7c9fb51c67e8b97"
+    },
+    "original-established-compile.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "original-established-compile.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "original-established-run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "original-established-run.stdout": {
+      "bytes": 392,
+      "sha256": "2ace68268c607885c4e5810d845ca110059c262487afd456d246f4d3f03ace78"
+    },
+    "prior-version-summary.json": {
+      "bytes": 1167,
+      "sha256": "f3fdd1daf3210b1fbfec016851c702427ed7d8ca897e570f9d9d47053bac4895"
+    },
+    "run_host_once.py": {
+      "bytes": 3564,
+      "sha256": "a3ece4fbc66ed42302e41082a8f7509fa4497e444613cb7de51a2093af1016a7"
+    },
+    "source-controls.json": {
+      "bytes": 97823,
+      "sha256": "1d16f7dd3f4f5400ad0ca1d1d28727a766348248eaf517c25e68e77970c2b7d4"
+    },
+    "source-review.json": {
+      "bytes": 1124,
+      "sha256": "d7a460d76ef73fa61129a7918aa4f109625570d8ca4376c4d7a28c1dfe53608a"
+    },
+    "verify_saved.py": {
+      "bytes": 2426,
+      "sha256": "92aa7ea405566ff68cd37fee2b794568be4673aca4a32ea3e7dd910dedd3c80d"
+    }
+  }
+}

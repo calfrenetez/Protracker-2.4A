@@ -180,10 +180,13 @@ static void checked_editor_alias(unsigned bits,unsigned mode)
     assert(g->binding->owner_finish_context==g->control&&g->binding->owner_finish);
     g->alias=NULL;g->checked=0;checked_editor_drop(g);
 }
-int main(void)
+static int editor_checked_fixture(void)
 {
     unsigned bits,mode;assert(!editor_mixed_fixture());
     for(bits=8;bits<=24;bits+=8){for(mode=0;mode<13;++mode)checked_editor_case(bits,mode);
         for(mode=0;mode<6;++mode)checked_editor_alias(bits,mode);}
     puts("EDITOR CHECKED PASS:39 actual establishment/editor/checked-owner lifecycle cases;18 whole-control allocator-alias and unchanged public-admission cases;15 legacy transport regressions; host injected clocks/voices only");return 0;
 }
+#ifndef PT_TEST_EDITOR_CHECKED_EXEC
+int main(void){return editor_checked_fixture();}
+#endif

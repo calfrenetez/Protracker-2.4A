@@ -1,0 +1,27 @@
+{
+  "scope": "Immutable private v1 observations, no target run or retry",
+  "host_status": "PASS_HOST_ONLY",
+  "host_calls": 6,
+  "native_status": "PASS_COMPILER_LINK_ONLY_NEVER_EXECUTED",
+  "native_calls": 90,
+  "product": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v1/native/PTEditorBridgesTest",
+    "bytes": 384972,
+    "sha256": "36145c77147751c1b270cf9ade5c7bb5cf2f12250c13e308d2378c7b7bbe0b58"
+  },
+  "retained_records": {
+    "outputs/editor-metadata-bridges/v1/source-controls.json": {
+      "bytes": 97600,
+      "sha256": "22ea9721eb1cc32496b8fcdbe3fcf332a6fe67dff169bd251f3c1851234e0998"
+    },
+    "outputs/editor-metadata-bridges/v1/host/execution.json": {
+      "bytes": 200906,
+      "sha256": "dd4174bc8ff724fa80abfe935cac0b80b1d9a43c1ce0093754c7131d161dc03c"
+    },
+    "outputs/editor-metadata-bridges/v1/native/manifest.json": {
+      "bytes": 345914,
+      "sha256": "add0af1d77504a0268bddfddc768ff2117a6f5fefb9c802d93467b0e3347f707"
+    }
+  },
+  "change": "v2 adds five callback-start alias modes and compile-time whole-control guard coverage; original9+60 and all prior regressions passed v1"
+}

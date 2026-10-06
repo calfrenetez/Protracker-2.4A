@@ -1,0 +1,81 @@
+{
+  "status": "PREPARED_HOST_PROTOCOL_PASS_NOT_ADMITTED",
+  "atUTC": "2026-10-06T10:14:35.234333+00:00",
+  "candidate": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/native/PTEditorBridgesTest",
+    "bytes": 385144,
+    "sha256": "21c5efc7fe5d066f56e81ea8cbcea8bc7e95892e8af0a55608a1410d882d9b1e"
+  },
+  "sourceCommit": "5771d3ce1fcc3dee1967ec0c728e1fa654954bba",
+  "requiredExactEmulatorStatus": "PASS_EXACT_030_SOFTWARE_FIXTURE_SETTLEMENT_PENDING plus independent verified release",
+  "requiredExactLog": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/host/bridges-run.stdout",
+    "sha256": "80a8a9731ef96568d0356de80dfdf5299ee7bef777cc0a8e7a5d038ead11d80a"
+  },
+  "freshNamespacePattern": "RAM:PT-editor-bridges-<fresh-run-id>",
+  "oneLaunch": true,
+  "absoluteExecutionSeconds": 420,
+  "stackBytes": 65536,
+  "scope": "Portable editor legacy15/checked39/control-alias18/metadata-bridge9/admission75 assertions using ordinary allocations and injected timers/voices/ordinary-RAM fakebus callbacks. Physical CPU/software execution only; no real device sample RAM/MMIO/DMA/IRQ/audio.",
+  "prerequisites": [
+    "exact unchanged candidate emulatorPASS and separately verified normalrelease",
+    "fresh AmiConnect/Scott/AmiGUS physical and sharedtransport clearance, all targetholds absent",
+    "live privatelease target real-a1200 and three locks",
+    "actual authenticated Safari access; use no other chat connection; release control to ViewOnly",
+    "fresh physical CPU/network identity plus established bridge CRC/size",
+    "no active candidate/player/test; physical identity must be current afterreboots",
+    "RAM-only exact candidate/launcher/log/RC/complete file manifest and bounded protocol supported",
+    "original endpoint/profile/service/guest baseline restore and separate independent absence/readback/four-recordrelease"
+  ],
+  "ordering": "Fresh own physical phase only after independent Scott EMPTY78 release plus fresh all-peer clearance; shared transport remains globally exclusive through the separately admitted 030 return phase.",
+  "failure": "Preserve first physical failure/HOLD and stop target actions; no automaticretry/recovery/reset or inferred cleanup",
+  "acceptanceExclusions": [
+    "realFast/Chip allocation placement",
+    "hardware cachecapacity/order/completion/allvoicestop",
+    "real clock/IRQ/deadline/exactmusical timing",
+    "physical audible/human listening acceptance",
+    "full native UI PLAY/eventloop or wholeapplication release"
+  ],
+  "emulator": "PASS_EXACT_ONCE_PLUS_INDEPENDENT_RELEASE",
+  "physical": "NOT_RUN",
+  "queuedPhysicalOperation": false,
+  "protocol": {
+    "bytes": 10981,
+    "sha256": "b18fb18b17b49fabc2719f9c8e282ac8899cd727d51b0521475723e9fd44a862"
+  },
+  "hostQualification": {
+    "bytes": 1765,
+    "sha256": "f05fe0c643c3da985ffa288e3d4af4ead295e67c6f0104562ecfe1a5a8d0e6ec"
+  },
+  "savedNativeProof": {
+    "candidate": {
+      "bytes": 385144,
+      "sha256": "21c5efc7fe5d066f56e81ea8cbcea8bc7e95892e8af0a55608a1410d882d9b1e"
+    },
+    "expectedStdout": {
+      "bytes": 624,
+      "sha256": "80a8a9731ef96568d0356de80dfdf5299ee7bef777cc0a8e7a5d038ead11d80a"
+    },
+    "nativeRecord": {
+      "bytes": 22339,
+      "sha256": "1e965f90a9692f37da3dd7d3b635f9bca3eaa43880ce0fdec1a32de8308f699e"
+    },
+    "independentRelease": {
+      "bytes": 3672,
+      "sha256": "48395f93058af9f8fc32839bfc7678c93f0acb44b60c2475ce28ba9f48271425"
+    },
+    "passed": true
+  },
+  "phasePlan": [
+    {
+      "target": "real-a1200",
+      "scope": "One separately admitted physical lease; original endpoint/profile saved; actual Safari authenticated ViewOnly identity; fresh physical CPU/network/bridge CRC and no active candidate/player/test; one fresh RAM namespace and exact fixture; absolute420s; completion and six exact host custody files; separate completed-only idle/CRC/cleanup/independent absence; admitted disconnect and independent physical-scope normal release. Physical-only restoration receipt must explicitly retain the outstanding original030 endpoint return obligation."
+    },
+    {
+      "target": "amiberry-030",
+      "scope": "NEW private return lease only after verified physical-scope release; one owned original030 startup/idle/profile verification/original endpoint selection, separate disconnect/bounded normal own stop/independent full final release. No candidate replay, physical access or automatic continuation after any failure."
+    }
+  ],
+  "phaseBoundary": "No reservation is retargeted. Peer hands-off spans both phases. A physical-scope release alone is NOT a completed restoration of the shared transport; overall status stays pending until original030 return is independently verified. Do not attest full restoration before that.",
+  "wrappers": "NOT_PREPARED; shared phase-boundary review needed before physical admission"
+}

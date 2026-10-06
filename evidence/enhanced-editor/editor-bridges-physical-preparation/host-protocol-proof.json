@@ -1,0 +1,51 @@
+{
+  "status": "PASS_HOST_PHYSICAL_PROTOCOL_BOUNDARIES_AND_SAVED_PROMOTION",
+  "atUTC": "2026-10-06T10:14:35.234333+00:00",
+  "testsRun": 26,
+  "testReturnCode": 0,
+  "testedSources": {
+    "tools/editor_fixture_physical_protocol.py": {
+      "bytes": 10981,
+      "sha256": "b18fb18b17b49fabc2719f9c8e282ac8899cd727d51b0521475723e9fd44a862"
+    },
+    "tests/test_editor_fixture_physical_protocol.py": {
+      "bytes": 19436,
+      "sha256": "0d3c38debda22f1dff05bf95e55eef945e604ab0103889f88afedff65b403b7f"
+    }
+  },
+  "logs": {
+    "host-tests.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "host-tests.stderr": {
+      "bytes": 4401,
+      "sha256": "4a420ea6fbbadb4a51810230b92c45dd84c5cb4b0fa641d0cc58c738b1c3edbe"
+    }
+  },
+  "actualSavedPromotion": {
+    "candidate": {
+      "bytes": 385144,
+      "sha256": "21c5efc7fe5d066f56e81ea8cbcea8bc7e95892e8af0a55608a1410d882d9b1e"
+    },
+    "expectedStdout": {
+      "bytes": 624,
+      "sha256": "80a8a9731ef96568d0356de80dfdf5299ee7bef777cc0a8e7a5d038ead11d80a"
+    },
+    "nativeRecord": {
+      "bytes": 22339,
+      "sha256": "1e965f90a9692f37da3dd7d3b635f9bca3eaa43880ce0fdec1a32de8308f699e"
+    },
+    "independentRelease": {
+      "bytes": 3672,
+      "sha256": "48395f93058af9f8fc32839bfc7678c93f0acb44b60c2475ce28ba9f48271425"
+    },
+    "passed": true
+  },
+  "unitProduct": "small host-only stand-in product, actual saved stdout; no native executable shipped with test",
+  "targetCalls": 0,
+  "newReservation": false,
+  "physical": "NOT_RUN",
+  "newNativeExecution": false,
+  "scope": "Protocol fault boundaries and saved exact-candidate promotion only; no target transport/device/timing/placement/listening acceptance"
+}

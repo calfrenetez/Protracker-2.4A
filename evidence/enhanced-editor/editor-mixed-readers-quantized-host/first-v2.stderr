@@ -1,0 +1,1 @@
+Assertion failed: (pt_editor_mixed_readers_prepare_service_command(&f->control,f->command[ci],0,NULL)==PT_MIXED_READERS_OK), function emp_drain, file editor_mixed_readers_prepare_test.c, line 251.

@@ -530,7 +530,10 @@ static void emp_slot_reuse(void)
         assert(pt_editor_mixed_readers_prepare_batch_begin(&f->control,2880,&x,1,&out)==PT_EDITOR_MIXED_READERS_INVALID);}
     assert(out.serial==999);emp_drain(f,0,0,16,1);emp_same(f);emp_drop(f,0);
 }
-int main(void)
+#ifndef PT_EDITOR_MIXED_READERS_TEST_MAIN
+#define PT_EDITOR_MIXED_READERS_TEST_MAIN main
+#endif
+int PT_EDITOR_MIXED_READERS_TEST_MAIN(void)
 {
     unsigned bits,cache,little,phase,mode,order,i;
     for(bits=8;bits<=24;bits+=8)for(cache=8;cache<=16;cache+=8)for(little=0;little<2;++little)

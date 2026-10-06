@@ -56,6 +56,13 @@ struct pt_editor_mixed_readers_request {
             uint32_t rate;uint16_t left,right;} amigus;
     } geometry;
 };
+/* Explicit fixed16 editor request/ref batch. Uses the genuine factory's tagged
+ * final register levels; this type is not a plan or ownership certificate. */
+struct pt_editor_mixed_readers_quantized_batch {
+    unsigned count;
+    struct pt_editor_mixed_readers_request action[PT_SAMPLER_MIXED_ACTIONS];
+    struct pt_sampler_mixed_trigger_levels levels[PT_SAMPLER_MIXED_ACTIONS];
+};
 struct pt_editor_mixed_command_record {
     struct pt_sampler_mixed_command_handle handle;
     uint64_t serial,ticket;
@@ -133,6 +140,22 @@ enum pt_editor_mixed_readers_result pt_editor_mixed_readers_prepare_advance_vali
 enum pt_editor_mixed_readers_result pt_editor_mixed_readers_prepare_batch_begin(
     struct pt_editor_mixed_readers_prepare *,uint64_t,const struct pt_editor_mixed_readers_request *,unsigned,
     struct pt_editor_mixed_command_ref *);
+/* Count1..16; guard the WHOLE original fixed batch before any field read or
+ * writable entry/fault. Unused action/ref fields are semantically zero and
+ * unused levels are LEGACY/0/0. Active LEGACY requires levels0/0; QUANTIZED is
+ * AmiGUS TRIGGER only with nested legacy volume/pan0. Paula/CONTROL/STOP use
+ * LEGACY/0/0. Requests and reader refs are copied before callbacks; CONTROL/
+ * STOP resolve genuine original ACTIVE keys internally. No supplied READY/key.
+ * Both this entry and legacy batch_begin guard their original complete declared
+ * input and command-ref output against allocator returns throughout callbacks.
+ * Two captured guard slots must remain free; exactly this invocation's pair
+ * retires by verified compaction preserving all later guards before publication.
+ * All existing genuine handle/transfer/proof/cancel/close/hook contracts apply.
+ * Queried factory workspace/pool/command sizes, not old hardcoded bytes, apply.
+ */
+enum pt_editor_mixed_readers_result pt_editor_mixed_readers_prepare_batch_begin_quantized(
+    struct pt_editor_mixed_readers_prepare *,uint64_t,
+    const struct pt_editor_mixed_readers_quantized_batch *,struct pt_editor_mixed_command_ref *);
 enum pt_editor_mixed_readers_result pt_editor_mixed_readers_prepare_batch_advance(
     struct pt_editor_mixed_readers_prepare *,struct pt_editor_mixed_command_ref);
 enum pt_mixed_readers_result pt_editor_mixed_readers_prepare_enqueue(

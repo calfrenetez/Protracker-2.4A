@@ -94,3 +94,16 @@ Fast/Chip placement, total runtime stack, IRQ exclusion/residency/WCET, card
 capacity/upload completion/ordering/voice stop, timing, audio and human listening
 remain separate work. This module installs no timer and permits no deadline rebase
 or jitter fallback.
+
+
+## Quantized request/ref batches — 6 October 2026
+
+The additive `pt_editor_mixed_readers_prepare_batch_begin_quantized` now carries a fixed16 batch of genuine editor requests and reader references into the tagged factory. AmiGUS TRIGGER may use exact uint16 register levels; Paula, CONTROL, STOP and unused tags remain LEGACY/0/0. Original ACTIVE keys still come from genuine held readers. No supplied READY/key or approximate gain fallback is accepted.
+
+Both this entry and the legacy batch entry retain their complete original input and command-ref output guards across allocator/getter callbacks. Two guard slots are reserved before writable work, refs are copied before callbacks, and only the positively matched temporary pair retires by compaction preserving every later guard. Actual admitted command/reader handles remain registered even after an outer callback fault. Existing control layouts and non-batch lifetime/proof/close hooks remain unchanged.
+
+Corrected first-v3 passed ASan/UBSan HOST qualification:951 saved inputs, five overlays,79 units,28 successful owned drivers and11 complete lines totaling3490 bytes. Independent saved-source/result review found no findings. The fixture distinguishes48 positive lifetime cases from eight destructive quantized edit/undo/route/dispose veto cases. The14 begin allocation-return alias cases are ordinary memory; Chip conversion/allocation belongs to later advance. The veto cases explicitly retain CANCELLED/BACKEND replies and genuine proof/source-quiet ownership.
+
+Two original runtime failures remain preserved after successful compilation: V1 allocator-shim alias restoration and V2 destructive barrier mixed into positive drain. Their original failing tuples/returns were not recorded. Production guards and positive OK assertions were retained in the fixture repairs. See the [selected HOST projection](../evidence/enhanced-editor/editor-mixed-readers-quantized-host/README.md).
+
+This updates the controller request/ref integration status. Historical legacy compiler/stack evidence above is separate and does not qualify the new five-overlay candidate. No native compile/stack, emulator, real-A1200, physical memory/device completion/stop, IRQ/timing/audio/listening or whole-song producer acceptance is supplied by this HOST result.

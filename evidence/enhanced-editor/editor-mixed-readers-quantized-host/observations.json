@@ -1,0 +1,236 @@
+{
+  "schema": "pt24g-controller-quantized-host-selected-observations-v1",
+  "status": "PASS_SAVED_HOST_ONLY_NO_REPLAY",
+  "scope": "Selected factual HOST projection; this packet does not reproduce the complete private custody audit.",
+  "actual_admission_baseline": "19f710571919e5ea96ecd1a97ca27ea024be13d7",
+  "historical_source_origin": "5a8c6401f8ac802558b73b7ec5df881ccaa131e3",
+  "current_attempt": {
+    "id": "first-v3",
+    "source_version": "v3",
+    "status": "PASS",
+    "phase": "COMPLETE",
+    "first_failure": null,
+    "saved_inputs": 951,
+    "committed_archive_inputs": 948,
+    "modified_overlays": 3,
+    "additive_overlays": 2,
+    "total_overlays": 5,
+    "translation_units": 79,
+    "inner_preparation_drivers": 16,
+    "actual_compiler_runtime_drivers": 2,
+    "outer_wrapper_drivers": 10,
+    "total_successful_owned_drivers": 28,
+    "raw_streams_reviewed_privately": 56,
+    "all_recorded_drivers_RC0_empty_stderr_reaped_quiet": true,
+    "compile_seconds": 19.603750666996348,
+    "runtime_seconds": 1.527447625005152,
+    "inner_seconds": 23.421783041994786,
+    "root_seconds": 24.805120541001088,
+    "expected_and_actual_stdout": {
+      "bytes": 3490,
+      "sha256": "bcea5c920941919cb480e5b2f685c0cbd87ddf5e29be58f5bafc7ac192b268a5",
+      "mode": 33188
+    },
+    "actual_stdout_lines": 11,
+    "runtime_stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compiler_flags": [
+      "-std=c99",
+      "-O1",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-fsanitize=address,undefined",
+      "-Isrc/core",
+      "-I."
+    ],
+    "original_manifest": {
+      "bytes": 362803,
+      "sha256": "b5d9510aea55f3e5ef8e70e5c778b99770124e2b558002673fdc5ad109a289ed",
+      "mode": 33188
+    },
+    "original_root_receipt": {
+      "bytes": 229644,
+      "sha256": "fbeacc654e12dbed2b6ec5657426305570737e8b8098844c70bb56838baad360",
+      "mode": 33188
+    },
+    "source_freeze": {
+      "bytes": 10704,
+      "sha256": "cecb2b6a6acf7ac0cac2ae1bf42eb3bc1acb255e29c19429cdedfccb8526656c",
+      "mode": 33188
+    },
+    "private_HOST_product": {
+      "pin": {
+        "bytes": 5958736,
+        "sha256": "35d0fd64e2e59b6bc0d6e61d62d51d1a02a99a7b3e818a88946d93d2341cef56",
+        "mode": 33261
+      },
+      "public_body": false,
+      "native_binary": false
+    }
+  },
+  "five_qualified_overlays": {
+    "src/editor/editor_mixed_readers_prepare.h": {
+      "bytes": 10643,
+      "sha256": "a796f1279f36a2878b4e3b32e642cd81659b8c1c504eb088abf6064085288018",
+      "mode": 33188
+    },
+    "src/editor/editor_mixed_readers_prepare.c": {
+      "bytes": 48184,
+      "sha256": "7af1fcd063c4eb6eabc490a8711e03ff132f7f81b460e818737e856734b670b1",
+      "mode": 33188
+    },
+    "tests/editor_mixed_readers_prepare_test.c": {
+      "bytes": 39185,
+      "sha256": "ddf2e13cc4e4a9104e344b514aa0a9a6b207f98950835b83b00dba16f2a36178",
+      "mode": 33188
+    },
+    "tests/editor_mixed_readers_quantized_test.c": {
+      "bytes": 30664,
+      "sha256": "d78ff47cd4aa65e388cad57e4b885c7c156dfa0d512b378400971a6914ebaad1",
+      "mode": 33188
+    },
+    "tests/test_editor_mixed_readers_quantized.py": {
+      "bytes": 29731,
+      "sha256": "1be6673a7f0cb662d56cf18f6fd794afec59eb5de9e4af0c60618b4276b79044",
+      "mode": 33188
+    }
+  },
+  "source_assertion_groups": {
+    "inherited_complete_markers": 7,
+    "fixed16_semantic_span_refusals": 44,
+    "ordinary_begin_allocator_alias_cases": 14,
+    "Chip_begin_allocator_alias_cases_claimed": 0,
+    "reserve_two_refusals": 4,
+    "exact_two_slot_admissions": 2,
+    "numeric_suffix_publication_oracles": 4,
+    "positive_lifetime_cases": 48,
+    "positive_lifetime_dimensions": "3master widths \u00d72cache widths \u00d72endians \u00d72route layouts \u00d72proof orders",
+    "separate_destructive_quantized_veto_cases": 8,
+    "veto_dimensions": "edit/undo/route/dispose \u00d72genuine proof orders",
+    "callback_reentry_cases": 2,
+    "CONTROL_STOP_authority_groups": 5,
+    "incremental_unpublished_cancel_cases": 24,
+    "genuine_odd8_geometry_refusals": 2,
+    "queried_budget_workspace_refusals": 2,
+    "actual_enqueue_transfer_under_callback_fault": true
+  },
+  "preserved_failed_attempts": [
+    {
+      "attempt": "first-v1",
+      "source_version": "v1",
+      "status": "FAIL_RUNTIME_ASSERTION",
+      "compile_RC": 0,
+      "runtime_RC": -6,
+      "diagnostic_location": "emq_suffix line233",
+      "original_parameter_and_return": "UNKNOWN_NOT_RECORDED",
+      "original_manifest": {
+        "bytes": 358157,
+        "sha256": "7468a92245d726d30a0110e268f97469cb9c5e92593156306db47bd8c3353f42",
+        "mode": 33188
+      },
+      "original_root_receipt": {
+        "bytes": 223500,
+        "sha256": "793a95b8c09fbee0b680ef9c1ff5780494a60c2609a9f5487029d422bd0ff036",
+        "mode": 33188
+      },
+      "runtime_stdout": {
+        "bytes": 2273,
+        "sha256": "b3afac00b309d959418568141eb81a0977fabfbfdfde3eaa7688b1d2167ff22e",
+        "mode": 33188
+      },
+      "runtime_stderr": {
+        "bytes": 254,
+        "sha256": "c59ed8e724ac4907bda0e9eba9b14d726d226cee06a050eecf3d4c665787dbdb",
+        "mode": 33188
+      },
+      "runtime_stdout_in_public_packet": false,
+      "runtime_stderr_in_public_packet": "first-v1.stderr",
+      "original_runtime_assertion_preserved": true
+    },
+    {
+      "attempt": "first-v2",
+      "source_version": "v2",
+      "status": "FAIL_RUNTIME_ASSERTION",
+      "compile_RC": 0,
+      "runtime_RC": -6,
+      "diagnostic_location": "emp_drain line251",
+      "original_parameter_and_return": "UNKNOWN_NOT_RECORDED",
+      "original_manifest": {
+        "bytes": 358164,
+        "sha256": "e2f8129576900ec8839f31f52b501e15895644427b241aafd4fc04cdce4f167d",
+        "mode": 33188
+      },
+      "original_root_receipt": {
+        "bytes": 223501,
+        "sha256": "4b1868bf49435a99fc91c1ddf96d70e00314ee91b88a5925c93a31cd7234e52e",
+        "mode": 33188
+      },
+      "runtime_stdout": {
+        "bytes": 2589,
+        "sha256": "de5e784b8c40f3692167be6afb46f0427aed1b90959ee20e85a75a1d06ed41f4",
+        "mode": 33188
+      },
+      "runtime_stderr": {
+        "bytes": 197,
+        "sha256": "91929e6fd027a5b841d7e5c2d3d85a30e6ddef2141f81623b0439d7a754e1ab7",
+        "mode": 33188
+      },
+      "runtime_stdout_in_public_packet": false,
+      "runtime_stderr_in_public_packet": "first-v2.stderr",
+      "original_runtime_assertion_preserved": true
+    }
+  ],
+  "independent_saved_review": {
+    "status": "PASS_SAVED_HOST_ONLY_NO_REPLAY",
+    "findings": [],
+    "original_review_pin": {
+      "bytes": 4905,
+      "sha256": "ed03fe1dd08daafdbf8168fcbf4b874ea5cd99e969afe9e4bf7caef23de0fe74",
+      "mode": 33188
+    },
+    "original_verification_pin": {
+      "bytes": 24301,
+      "sha256": "2dbff0076d17e4ef3119c415f29eec7748720a21ac1bf24a2b20997e6b00cb58",
+      "mode": 33188
+    },
+    "reviewer_did_not_replay": true,
+    "current_1165_source_controls_read_before_adoption": true,
+    "protected16_and39_source_controls_match": true
+  },
+  "published_exact_output_bodies": {
+    "current.stdout": {
+      "bytes": 3490,
+      "sha256": "bcea5c920941919cb480e5b2f685c0cbd87ddf5e29be58f5bafc7ac192b268a5",
+      "mode": 33188
+    },
+    "current.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "first-v1.stderr": {
+      "bytes": 254,
+      "sha256": "c59ed8e724ac4907bda0e9eba9b14d726d226cee06a050eecf3d4c665787dbdb",
+      "mode": 33188
+    },
+    "first-v2.stderr": {
+      "bytes": 197,
+      "sha256": "91929e6fd027a5b841d7e5c2d3d85a30e6ddef2141f81623b0439d7a754e1ab7",
+      "mode": 33188
+    }
+  },
+  "scope_limits": [
+    "HOST AddressSanitizer/UndefinedBehaviorSanitizer software only.",
+    "No new controller native compile/stack, Amiberry/A1200 or physical memory placement, card RAM/capacity/completion/ordering/voice-stop/IRQ/timing/audio/listening qualification.",
+    "No whole-song strict audit, SAME-sequence master-owning producer, composite normalizer-to-editor facade or qualified real scheduled port.",
+    "All original sources, archive/font bodies, private tools, complete rawlogs and HOST product remain private; only named output bodies are public.",
+    "Recorded normal process cleanup passed; injected cleanup failures were not tested.",
+    "Source/mock gain, ownership and source-quiet assertions are not real device completion/stop proofs."
+  ]
+}

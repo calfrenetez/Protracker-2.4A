@@ -427,55 +427,205 @@ static int command_close(struct pt_editor_mixed_readers_prepare *s,unsigned inde
  if(!h.address&&!h.token)memset(s->command+index,0,sizeof(s->command[index]));
  return r&&!h.address&&!h.token;
 }
-enum pt_editor_mixed_readers_result pt_editor_mixed_readers_prepare_batch_begin(
- struct pt_editor_mixed_readers_prepare *s,uint64_t frame,const struct pt_editor_mixed_readers_request *in,
- unsigned count,struct pt_editor_mixed_command_ref *out)
+/* The two original external spans survive all callbacks, not just admission.
+ * A callback may append captured numeric guards behind this invocation's pair;
+ * remove only our positively matched entries and preserve the whole suffix. */
+struct batch_pair {unsigned index;struct pt_sampler_storage_span input,output;};
+struct batch_scratch {
+ struct pt_sampler_mixed_quantized_batch lower;
+ struct pt_editor_mixed_reader_ref refs[PT_SAMPLER_MIXED_ACTIONS];
+ struct pt_sampler_mixed_command_handle handle;
+ struct pt_sampler_mixed_reader_handle readers[PT_SAMPLER_MIXED_ACTIONS];
+ struct pt_mixed_readers_key key;struct batch_pair pair;
+};
+static int batch_spans(struct pt_editor_mixed_readers_prepare *s,const void *in,size_t bytes,
+ struct pt_editor_mixed_command_ref *out,uintptr_t local,size_t local_bytes)
 {
- struct pt_sampler_mixed_request x[PT_SAMPLER_MIXED_ACTIONS];struct pt_sampler_mixed_command_handle h={NULL,0};
- struct pt_sampler_mixed_reader_handle handles[PT_SAMPLER_MIXED_ACTIONS];
- struct pt_editor_mixed_command_record *c;struct pt_editor_mixed_reader_record *rr;
- struct pt_mixed_readers_key key;enum pt_sampler_mixed_result fr;enum pt_editor_mixed_readers_result r;
- unsigned i,ci,free_readers=0,needed=0;size_t bytes;
- if(!s||!s->phase||s->phase==PT_EDITOR_MIXED_READERS_FINISHED||!count||count>PT_SAMPLER_MIXED_ACTIONS)return PT_EDITOR_MIXED_READERS_INVALID;
- bytes=(size_t)count*sizeof(*in);
- if(!output_apart(s,in,bytes)||!output_apart(s,out,sizeof(*out))||!apart(in,bytes,out,sizeof(*out))||
-    !output_apart(s,x,sizeof(x))||!output_apart(s,&h,sizeof(h))||
-    !output_apart(s,handles,sizeof(handles))||!local_apart(s,(uintptr_t)&key,sizeof(key)))return PT_EDITOR_MIXED_READERS_INVALID;
- r=pt_editor_mixed_readers_prepare_get(s);if(r!=PT_EDITOR_MIXED_READERS_OPEN||s->first_error)return r;
+ if(s->guard_count>PT_EDITOR_MIXED_READERS_GUARDS||
+    (uintptr_t)out%ALIGN_OF(struct pt_editor_mixed_command_ref)||
+    !output_apart(s,in,bytes)||!output_apart(s,out,sizeof(*out))||
+    !apart(in,bytes,out,sizeof(*out))||!local_apart(s,local,local_bytes)||
+    !apart((const void *)local,local_bytes,in,bytes)||
+    !apart((const void *)local,local_bytes,out,sizeof(*out)))return 0;
+ return 1;
+}
+static void batch_pair_begin(struct pt_editor_mixed_readers_prepare *s,
+ const void *in,size_t bytes,struct pt_editor_mixed_command_ref *out,struct batch_pair *pair)
+{
+ pair->index=s->guard_count;
+ pair->input=(struct pt_sampler_storage_span){in,bytes};
+ pair->output=(struct pt_sampler_storage_span){out,sizeof(*out)};
+ s->guards[s->guard_count++]=pair->input;
+ s->guards[s->guard_count++]=pair->output;
+}
+static int batch_pair_end(struct pt_editor_mixed_readers_prepare *s,const struct batch_pair *pair)
+{
+ unsigned i,n=s->guard_count;
+ if(n>PT_EDITOR_MIXED_READERS_GUARDS||pair->index>PT_EDITOR_MIXED_READERS_GUARDS-2||
+    n<pair->index+2||s->guards[pair->index].data!=pair->input.data||
+    s->guards[pair->index].bytes!=pair->input.bytes||
+    s->guards[pair->index+1].data!=pair->output.data||
+    s->guards[pair->index+1].bytes!=pair->output.bytes){
+    fail(s,PT_EDITOR_MIXED_READERS_FAULT);return 0;
+ }
+ for(i=pair->index+2;i<n;++i)s->guards[i-2]=s->guards[i];
+ s->guards[n-2]=(struct pt_sampler_storage_span){NULL,0};
+ s->guards[n-1]=(struct pt_sampler_storage_span){NULL,0};
+ s->guard_count=n-2;return 1;
+}
+static int batch_voice_zero(const struct pt_amigus_voice_request *v)
+{return !v->rate_numerator&&!v->rate_denominator&&!v->offset&&!v->volume&&!v->pan;}
+static int batch_request_zero(const struct pt_editor_mixed_readers_request *x)
+{return !x->kind&&!x->track&&!x->sample&&!x->channel&&!x->expected&&
+ !x->reader.slot&&!x->reader.serial&&!x->geometry.amigus.bits&&
+ !x->geometry.amigus.little_endian&&batch_voice_zero(&x->geometry.amigus.trigger)&&
+ !x->geometry.amigus.rate&&!x->geometry.amigus.left&&!x->geometry.amigus.right;}
+/* Read only admitted input and fixed captured controller metadata. No former
+ * sample table walks or positive ACTIVE getter callbacks happen here. */
+static int batch_quantized_metadata(struct pt_editor_mixed_readers_prepare *s,
+ const struct pt_editor_mixed_readers_request *in,unsigned count,
+ const struct pt_sampler_mixed_trigger_levels *levels,uint64_t frame)
+{
+ unsigned i,seen=0;
+ if(!count||count>PT_SAMPLER_MIXED_ACTIONS||frame==UINT64_MAX)return 0;
+ for(i=count;i<PT_SAMPLER_MIXED_ACTIONS;++i)
+    if(!batch_request_zero(in+i)||levels[i].mode!=PT_SAMPLER_MIXED_TRIGGER_LEGACY||
+       levels[i].left||levels[i].right)return 0;
+ for(i=0;i<count;++i){const struct pt_editor_mixed_readers_request *x=in+i;
+    const struct pt_sampler_mixed_trigger_levels *l=levels+i;
+    struct pt_editor_mixed_reader_record *r;unsigned route;
+    if(x->track>=s->project_header.channels.count||x->track>=PT_SAMPLER_MIXED_ACTIONS||
+       x->sample>=s->project_header.sample_count||(seen&(1U<<x->track)))return 0;
+    seen|=1U<<x->track;route=s->project_header.channels.track[x->track].route;
+    if(route!=PT_PAULA&&route!=PT_AMIGUS)return 0;
+    if(l->mode==PT_SAMPLER_MIXED_TRIGGER_LEGACY){if(l->left||l->right)return 0;}
+    else if(l->mode!=PT_SAMPLER_MIXED_TRIGGER_QUANTIZED||route!=PT_AMIGUS||
+       x->kind!=PT_MIXED_READERS_TRIGGER||x->geometry.amigus.trigger.volume||
+       x->geometry.amigus.trigger.pan)return 0;
+    if(x->kind==PT_MIXED_READERS_TRIGGER){
+       if(!x->expected||x->expected!=s->sampler_header.current[x->sample]||x->reader.slot||x->reader.serial)return 0;
+       if(route==PT_PAULA){if(!x->geometry.paula.period||x->geometry.paula.volume>64)return 0;}
+       else if((x->geometry.amigus.bits!=8&&x->geometry.amigus.bits!=16)||x->geometry.amigus.little_endian>1||
+          !x->geometry.amigus.trigger.rate_numerator||!x->geometry.amigus.trigger.rate_denominator||
+          x->geometry.amigus.trigger.volume>64||x->geometry.amigus.trigger.pan>256||
+          x->geometry.amigus.rate||x->geometry.amigus.left||x->geometry.amigus.right)return 0;
+    }else{
+       if((x->kind!=PT_MIXED_READERS_CONTROL&&x->kind!=PT_MIXED_READERS_STOP)||x->expected||
+          !(r=reader(s,x->reader))||r->track!=x->track||r->sample!=x->sample||r->channel!=x->channel||!r->ticket)return 0;
+       if(route==PT_AMIGUS&&(x->geometry.amigus.bits||x->geometry.amigus.little_endian||
+          !batch_voice_zero(&x->geometry.amigus.trigger)))return 0;
+       if(x->kind==PT_MIXED_READERS_STOP){
+          if(route==PT_PAULA){if(x->geometry.paula.period||x->geometry.paula.volume)return 0;}
+          else if(x->geometry.amigus.rate||x->geometry.amigus.left||x->geometry.amigus.right)return 0;
+       }else if(route==PT_PAULA){if(!x->geometry.paula.period||x->geometry.paula.volume>64)return 0;}
+       else if(!x->geometry.amigus.rate||x->geometry.amigus.rate>0x40000000UL)return 0;
+    }
+ }
+ return 1;
+}
+/* Called only AFTER fixed_current positively verified the fixed controls. */
+static int batch_quantized_sources(struct pt_editor_mixed_readers_prepare *s,
+ const struct pt_editor_mixed_readers_request *in,unsigned count)
+{
+ unsigned i;
+ for(i=0;i<count;++i)if(in[i].kind==PT_MIXED_READERS_TRIGGER){
+    const struct pt_sample *a=s->project_header.samples+in[i].sample;
+    if(in[i].channel>=a->pcm.channels)return 0;
+    if(s->project_header.channels.track[in[i].track].route==PT_PAULA&&
+       (a->loop!=PT_LOOP_NONE||!a->pcm.frames||a->pcm.frames>131070))return 0;
+ }
+ return 1;
+}
+static enum pt_editor_mixed_readers_result batch_begin_private(
+ struct pt_editor_mixed_readers_prepare *s,uint64_t frame,const struct pt_editor_mixed_readers_request *in,
+ unsigned count,const struct pt_sampler_mixed_trigger_levels *levels,const void *original,size_t bytes,
+ struct pt_editor_mixed_command_ref *out)
+{
+ struct batch_scratch b;struct pt_editor_mixed_command_record *c;
+ struct pt_editor_mixed_reader_record *rr;enum pt_sampler_mixed_result fr;
+ enum pt_editor_mixed_readers_result r;unsigned i,ci,free_readers=0,needed=0;
+ if(!s||!s->phase||s->phase==PT_EDITOR_MIXED_READERS_FINISHED||!count||count>PT_SAMPLER_MIXED_ACTIONS||
+    !batch_spans(s,original,bytes,out,(uintptr_t)&b,sizeof(b)))return PT_EDITOR_MIXED_READERS_INVALID;
+ /* Reserve BEFORE scratch writes, writable reentry/fault or callback entry. */
+ if(s->guard_count>PT_EDITOR_MIXED_READERS_GUARDS-2)return PT_EDITOR_MIXED_READERS_CAPACITY;
+ if(levels){
+    if(!batch_quantized_metadata(s,in,count,levels,frame))return PT_EDITOR_MIXED_READERS_INVALID;
+    if(!fixed_current(s)){if(reentry(s))return s->result;return fail(s,PT_EDITOR_MIXED_READERS_STALE);}
+    if(!batch_quantized_sources(s,in,count))return PT_EDITOR_MIXED_READERS_INVALID;
+ }
+ r=pt_editor_mixed_readers_prepare_get(s);
+ if(r!=PT_EDITOR_MIXED_READERS_OPEN||s->first_error)return r;
  for(ci=0;ci<PT_SAMPLER_MIXED_COMMANDS&&s->command[ci].handle.address;++ci){}
  for(i=0;i<PT_SAMPLER_MIXED_READERS;++i)if(!s->reader[i].handle.address)++free_readers;
  for(i=0;i<count;++i)if(in[i].kind==PT_MIXED_READERS_TRIGGER)++needed;
  if(ci==PT_SAMPLER_MIXED_COMMANDS||needed>free_readers||s->serial>UINT64_MAX-needed-1)return PT_EDITOR_MIXED_READERS_CAPACITY;
- memset(x,0,sizeof(x));memset(handles,0,sizeof(handles));
- for(i=0;i<count;++i){x[i].kind=in[i].kind;x[i].track=in[i].track;x[i].sample=in[i].sample;x[i].channel=in[i].channel;
-    x[i].expected=in[i].expected;memcpy(&x[i].geometry,&in[i].geometry,sizeof(x[i].geometry));
-    if(in[i].kind==PT_MIXED_READERS_TRIGGER){if(in[i].reader.serial||in[i].reader.slot)return PT_EDITOR_MIXED_READERS_INVALID;}
-    else if(in[i].expected||!(rr=reader(s,in[i].reader))||rr->track!=in[i].track||rr->sample!=in[i].sample||
+ memset(&b,0,sizeof(b));b.lower.count=count;
+ for(i=0;i<count;++i){b.lower.action[i].kind=in[i].kind;b.lower.action[i].track=in[i].track;
+    b.lower.action[i].sample=in[i].sample;b.lower.action[i].channel=in[i].channel;
+    b.lower.action[i].expected=in[i].expected;
+    memcpy(&b.lower.action[i].geometry,&in[i].geometry,sizeof(b.lower.action[i].geometry));
+    b.refs[i]=in[i].reader;
+    if(in[i].kind==PT_MIXED_READERS_TRIGGER){if(b.refs[i].serial||b.refs[i].slot)return PT_EDITOR_MIXED_READERS_INVALID;}
+    else if(in[i].expected||!(rr=reader(s,b.refs[i]))||rr->track!=in[i].track||rr->sample!=in[i].sample||
        rr->channel!=in[i].channel||!rr->ticket)return PT_EDITOR_MIXED_READERS_INVALID;
  }
- s->busy=1;
- /* Positive current ACTIVE keys are obtained here, never accepted externally. */
- for(i=0;i<count;++i)if(x[i].kind!=PT_MIXED_READERS_TRIGGER){
-    rr=reader(s,in[i].reader);
-    if(pt_sampler_mixed_reader_key(s->pool,rr->handle,&key)!=PT_MIXED_READERS_OK||!post(s)){
-       s->busy=0;return s->first_error?s->result:PT_EDITOR_MIXED_READERS_INVALID;}
-    memcpy(&x[i].key,&key,sizeof(key));}
- fr=pt_sampler_mixed_begin(s->pool,s->revision,frame,x,count,&h);
- /* An admitted genuine handle is recorded even after outer callback fault. */
- if(h.address){c=s->command+ci;memset(c,0,sizeof(*c));c->handle=h;c->serial=++s->serial;c->count=count;
+ if(levels)memcpy(b.lower.levels,levels,sizeof(b.lower.levels));
+ s->busy=1;batch_pair_begin(s,original,bytes,out,&b.pair);
+ /* Every ref was copied before the first genuine getter/current callback. */
+ for(i=0;i<count;++i)if(b.lower.action[i].kind!=PT_MIXED_READERS_TRIGGER){
+    rr=reader(s,b.refs[i]);
+    if(!rr){r=PT_EDITOR_MIXED_READERS_INVALID;goto complete;}
+    {enum pt_mixed_readers_result key_result=pt_sampler_mixed_reader_key(s->pool,rr->handle,&b.key);
+     int current=post(s);
+     if(key_result!=PT_MIXED_READERS_OK||!current){
+       r=s->first_error?s->result:PT_EDITOR_MIXED_READERS_INVALID;goto complete;
+     }
+    }
+    memcpy(&b.lower.action[i].key,&b.key,sizeof(b.key));
+ }
+ if(levels)fr=pt_sampler_mixed_begin_quantized(s->pool,s->revision,frame,&b.lower,&b.handle);
+ else fr=pt_sampler_mixed_begin(s->pool,s->revision,frame,b.lower.action,count,&b.handle);
+ /* Actual admitted handles remain registered after an outer callback fault. */
+ if(b.handle.address){c=s->command+ci;memset(c,0,sizeof(*c));c->handle=b.handle;c->serial=++s->serial;c->count=count;
     for(i=0;i<count;++i)c->reader[i]=NO_READER;
-    for(i=0;i<count;++i)if(x[i].kind==PT_MIXED_READERS_TRIGGER){unsigned ri;
-       if(pt_sampler_mixed_reader(s->pool,h,i,handles+i)!=PT_SAMPLER_MIXED_OK){fail(s,PT_EDITOR_MIXED_READERS_FAULT);break;}
+    for(i=0;i<count;++i)if(b.lower.action[i].kind==PT_MIXED_READERS_TRIGGER){unsigned ri;
+       if(pt_sampler_mixed_reader(s->pool,b.handle,i,b.readers+i)!=PT_SAMPLER_MIXED_OK){fail(s,PT_EDITOR_MIXED_READERS_FAULT);break;}
        for(ri=0;ri<PT_SAMPLER_MIXED_READERS&&s->reader[ri].handle.address;++ri){}
        if(ri==PT_SAMPLER_MIXED_READERS){fail(s,PT_EDITOR_MIXED_READERS_FAULT);break;}
-       rr=s->reader+ri;memset(rr,0,sizeof(*rr));rr->handle=handles[i];rr->serial=++s->serial;
-       rr->action=i;rr->track=x[i].track;rr->sample=x[i].sample;rr->channel=x[i].channel;c->reader[i]=ri;
+       rr=s->reader+ri;memset(rr,0,sizeof(*rr));rr->handle=b.readers[i];rr->serial=++s->serial;
+       rr->action=i;rr->track=b.lower.action[i].track;rr->sample=b.lower.action[i].sample;
+       rr->channel=b.lower.action[i].channel;c->reader[i]=ri;
     }
  }
  if(!post(s))r=s->result;else r=factory_result(s,fr);
- if(h.address&&!s->first_error&&r==PT_EDITOR_MIXED_READERS_PENDING&&output_apart(s,out,sizeof(*out)))
-    *out=(struct pt_editor_mixed_command_ref){ci,s->command[ci].serial};
+complete:
+ if(!batch_pair_end(s,&b.pair))r=s->result;
+ if(b.handle.address&&!s->first_error&&r==PT_EDITOR_MIXED_READERS_PENDING){
+    if(output_apart(s,out,sizeof(*out)))*out=(struct pt_editor_mixed_command_ref){ci,s->command[ci].serial};
+    else r=fail(s,PT_EDITOR_MIXED_READERS_FAULT);
+ }
  s->busy=0;return r;
+}
+enum pt_editor_mixed_readers_result pt_editor_mixed_readers_prepare_batch_begin(
+ struct pt_editor_mixed_readers_prepare *s,uint64_t frame,const struct pt_editor_mixed_readers_request *in,
+ unsigned count,struct pt_editor_mixed_command_ref *out)
+{
+ if(!count||count>PT_SAMPLER_MIXED_ACTIONS||(uintptr_t)in%ALIGN_OF(struct pt_editor_mixed_readers_request))
+    return PT_EDITOR_MIXED_READERS_INVALID;
+ return batch_begin_private(s,frame,in,count,NULL,in,(size_t)count*sizeof(*in),out);
+}
+enum pt_editor_mixed_readers_result pt_editor_mixed_readers_prepare_batch_begin_quantized(
+ struct pt_editor_mixed_readers_prepare *s,uint64_t frame,
+ const struct pt_editor_mixed_readers_quantized_batch *batch,struct pt_editor_mixed_command_ref *out)
+{
+ /* No batch field is read before its actual full original extent is guarded. */
+ if(!s||!s->phase||s->phase==PT_EDITOR_MIXED_READERS_FINISHED||
+    s->guard_count>PT_EDITOR_MIXED_READERS_GUARDS||
+    (uintptr_t)batch%ALIGN_OF(struct pt_editor_mixed_readers_quantized_batch)||
+    (uintptr_t)out%ALIGN_OF(struct pt_editor_mixed_command_ref)||
+    !output_apart(s,batch,sizeof(*batch))||!output_apart(s,out,sizeof(*out))||
+    !apart(batch,sizeof(*batch),out,sizeof(*out)))return PT_EDITOR_MIXED_READERS_INVALID;
+ return batch_begin_private(s,frame,batch->action,batch->count,batch->levels,batch,sizeof(*batch),out);
 }
 enum pt_editor_mixed_readers_result pt_editor_mixed_readers_prepare_batch_advance(
  struct pt_editor_mixed_readers_prepare *s,struct pt_editor_mixed_command_ref ref)

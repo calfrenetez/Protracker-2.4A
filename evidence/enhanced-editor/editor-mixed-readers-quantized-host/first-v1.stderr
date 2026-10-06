@@ -1,0 +1,1 @@
+Assertion failed: (pt_editor_mixed_readers_prepare_batch_begin(&f->control,960,f->request,5,&out)== (alias_output?PT_EDITOR_MIXED_READERS_FAULT:PT_EDITOR_MIXED_READERS_PENDING)), function emq_suffix, file editor_mixed_readers_quantized_test.c, line 233.

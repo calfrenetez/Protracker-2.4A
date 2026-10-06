@@ -1,0 +1,796 @@
+{
+  "schema": 1,
+  "status": "PASS_SELECTED_SAVED_QUANTIZED_NORMALIZER_HOST_PROJECTION",
+  "scope": "Explicit quantized boundary geometry/lifetime HOST only; unchanged legacy fixture included once.",
+  "supplied_committed_admission": "5a8c6401f8ac802558b73b7ec5df881ccaa131e3",
+  "historical_D1_source_origin_only": "b39cdce1f47ff3506333d9397ddf185efa568b33",
+  "qualification_preceded_later_source_adoption": true,
+  "attempt": "first-v1",
+  "source_freeze": {
+    "bytes": 9281,
+    "sha256": "960a087e727791384df5d84da6feb8f8fb175ce204ad1c83197aadc7c89c906a",
+    "mode": 33188
+  },
+  "source_only_review": {
+    "bytes": 3498,
+    "sha256": "787966f8bd6b0395109732290cd736bc94613fffd97d0daffb17688fd4c064c6",
+    "mode": 33188
+  },
+  "actual_run": {
+    "bytes": 358497,
+    "mode": 33188,
+    "sha256": "12f03a7aa7f4f88cf7741479d71b41ef8bc5b80991276ee880068db95fa38ed3"
+  },
+  "root_receipt": {
+    "bytes": 20308,
+    "mode": 33188,
+    "sha256": "5308327200afc0097795fefb9fc774d1f96e6261fa315e50985de1e25f662c01"
+  },
+  "independent_saved_HOST_review": {
+    "bytes": 4207,
+    "mode": 33188,
+    "sha256": "a5362caab0551bed1743cfb740312e538a1bfb2f50ee3343be40e29185921899"
+  },
+  "complete_private_verification": {
+    "bytes": 542973,
+    "mode": 33188,
+    "sha256": "3ede87c9771ad996ff71a8dc7772407cba26b21ec266b9c512530693f9aa00ff"
+  },
+  "complete_private_verification_published": false,
+  "actual_counts": {
+    "committed_archive_source_files": 946,
+    "saved_source_inputs": 949,
+    "replacement_sources": 2,
+    "new_fixture_runner_sources": 2,
+    "generated_font": 1,
+    "units": 39,
+    "markers": 12,
+    "legacy_markers": 6,
+    "quantized_markers": 6,
+    "stdout_bytes_total": 1006,
+    "numeric_rows_asserted_at_runtime": 864,
+    "relocated_seven_field_oracles_asserted_at_runtime": 2592,
+    "qualifier_preparation_drivers": 16,
+    "compile_runtime_drivers": 2,
+    "root_drivers": 8,
+    "all_owned_driver_records": 26
+  },
+  "numeric_assertions": {
+    "basis": "Assertions enabled by -UNDEBUG. Exact frozen fixture reaches rows==864 and oracles==2592 assertions before printing QMODE-NUMERIC PASS; individual numeric rows are not separately logged.",
+    "source_bits": [
+      8,
+      16,
+      24
+    ],
+    "cache_bits": [
+      8,
+      16
+    ],
+    "endian_modes": [
+      0,
+      1
+    ],
+    "output_rates": [
+      44100,
+      48000
+    ],
+    "loop_interpolation_cases": 2,
+    "rate_step_cases": 3,
+    "gain_pairs": 6,
+    "relocation_addresses": [
+      0,
+      64,
+      24576
+    ],
+    "canonical_center_levels": [
+      32639,
+      32895
+    ],
+    "legacy_center_refusal_candidates": 16449
+  },
+  "private_qualified_overlays": {
+    "src/editor/mixed_readers_plan_normalize.h": {
+      "bytes": 8385,
+      "sha256": "306fe15de7fb39c8e045279f42963f773d96746767b432e5597a57a16c73a220",
+      "mode": 33188
+    },
+    "src/editor/mixed_readers_plan_normalize.c": {
+      "bytes": 27173,
+      "sha256": "2e1e2628e7230f8fc2e06137b7861ff9b7332e4a8d24c30c55de3124d1c8f6fd",
+      "mode": 33188
+    },
+    "tests/mixed_readers_plan_quantized_test.c": {
+      "bytes": 20004,
+      "sha256": "fa3be0e0ffddf588c97943654015500f4c201ff8a2b0a8d5709d599d86ea72b9",
+      "mode": 33188
+    },
+    "tests/test_mixed_readers_plan_quantized.py": {
+      "bytes": 25180,
+      "sha256": "c728d80ece79211fc7a8db69a0c267fda28f6db697a9c7322d2420af91fd1e66",
+      "mode": 33188
+    }
+  },
+  "compile_flags": [
+    "-std=c99",
+    "-O1",
+    "-g",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-UNDEBUG",
+    "-fsanitize=address,undefined",
+    "-Isrc/core",
+    "-I."
+  ],
+  "ordered_units": [
+    "tests/mixed_readers_plan_quantized_test.c",
+    "src/editor/mixed_readers_plan_normalize.c",
+    "src/core/amigus_trigger_levels.c",
+    "src/editor/mixed_preflight.c",
+    "src/editor/paula_preflight.c",
+    "src/core/paula_render_voice.c",
+    "src/core/render.c",
+    "src/core/pitch.c",
+    "src/core/timeline.c",
+    "src/core/frame_clock.c",
+    "src/core/flow.c",
+    "src/core/voice.c",
+    "src/core/project.c",
+    "src/core/channels.c",
+    "src/core/pcm.c",
+    "src/core/elapsed_clock.c",
+    "src/editor/wavetable_song.c",
+    "src/editor/wavetable_voices.c",
+    "src/editor/wavetable_dispatch.c",
+    "src/core/amigus_voice_plan.c",
+    "src/core/amigus_render_voice.c",
+    "src/editor/sampler_wavetable.c",
+    "src/core/amigus_reservation.c",
+    "src/core/amigus_wavetable_cache.c",
+    "src/core/amigus_sample_ram.c",
+    "src/core/sample_cache.c",
+    "src/core/playback_pcm.c",
+    "src/editor/sampler.c",
+    "src/editor/slots.c",
+    "src/core/pcm_filtered.c",
+    "src/core/slices.c",
+    "src/core/pattern.c",
+    "src/core/document.c",
+    "src/core/pp20.c",
+    "src/core/mod_project.c",
+    "src/core/mod_inspect.c",
+    "src/core/wav.c",
+    "src/core/svx.c",
+    "src/core/raw.c"
+  ],
+  "HOST_product_metadata_only": {
+    "bytes": 2561832,
+    "sha256": "1c4eac3ca90c2e2a300d652d537ed8f1b24f5e2f22e1a098ca8978fa811d4ce0",
+    "mode": 33261
+  },
+  "elapsed_seconds": {
+    "compile": 8.642475041007856,
+    "runtime": 1.0967629170045257,
+    "qualifier": 12.036177584013785,
+    "root": 12.355765000000247
+  },
+  "streams": {
+    "current.stdout": {
+      "bytes": 1006,
+      "mode": 33188,
+      "sha256": "3c3682a357c1d9d758fce35b9e22b88e480133e896db7779b5c8afbce9d4fa22"
+    },
+    "current.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "full_actual_marker_lines": [
+    "PAIRED NORMALIZER SHAPES PASS: whole64 input,32 to16 exact fold, fresh4/12 and0/16 identities, atomic duplicate/kind/fold refusal",
+    "PAIRED NORMALIZER GEOMETRY PASS: exact canonical/factory oracle,8/16/24 masters,8/16 endian caches, whole Paula and strict card bounds/interpolation refusal",
+    "PAIRED NORMALIZER RATES PASS: literal min/max rational equality, finite exact gains and nonrepresentable pan refusal, logical origins without ACTIVE authority",
+    "PAIRED NORMALIZER GUARDS PASS: complete unused/spare/context/workspace spans, poisoned former sources, selection/tags, every phase and bounded candidate cancellation",
+    "PAIRED NORMALIZER RENDERER PASS: genuine established24-bit masters/setup/same audit sequence/lookahead parity, literal original frames and exact master-save bytes; fixture only",
+    "PAIRED PLAN NORMALIZER PASS: geometry-only software, no pins/keys/queue/activation/device or timing authority",
+    "QMODE-CENTRE PASS",
+    "QMODE-NUMERIC PASS",
+    "QMODE-SPANS PASS",
+    "QMODE-STALE PASS",
+    "QMODE-CANCEL PASS",
+    "QMODE-LEGACY PASS"
+  ],
+  "selected_driver_metadata": [
+    {
+      "scope": "qualifier_preparation",
+      "label": "prepare-head",
+      "returncode": 0,
+      "elapsed_seconds": 0.022828416011179797,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 41,
+        "sha256": "19e1e314928b5d8661ad4c1bad3018585da195eeb0e46276b481e77404db4916",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "qualifier_preparation",
+      "label": "prepare-index",
+      "returncode": 0,
+      "elapsed_seconds": 0.023238584006321616,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 1213496,
+        "sha256": "a1dd2407dcf871b33e766f2bfbb0919ec7d7de8e769fdb1e0d467ce692bd46c0",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "qualifier_preparation",
+      "label": "prepare-staged",
+      "returncode": 0,
+      "elapsed_seconds": 0.022604583005886525,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "qualifier_preparation",
+      "label": "prepare-status",
+      "returncode": 0,
+      "elapsed_seconds": 0.0407715829933295,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 415,
+        "sha256": "683b0b2b900a5b87a36555bf6dfa11d8a7eac816e652cc40a157833b641b63a0",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "qualifier_preparation",
+      "label": "prepare-archive",
+      "returncode": 0,
+      "elapsed_seconds": 0.08235658300691284,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 6328320,
+        "sha256": "5bcd6c4bc51d4d25a5ce20e7a2378230d18bd755b09da5ef3f95fb450912fc45",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "qualifier_preparation",
+      "label": "prepare-font",
+      "returncode": 0,
+      "elapsed_seconds": 0.02230079199944157,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 580,
+        "sha256": "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "qualifier_preparation",
+      "label": "precompile-head",
+      "returncode": 0,
+      "elapsed_seconds": 0.024627417005831376,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 41,
+        "sha256": "19e1e314928b5d8661ad4c1bad3018585da195eeb0e46276b481e77404db4916",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "qualifier_preparation",
+      "label": "precompile-index",
+      "returncode": 0,
+      "elapsed_seconds": 0.025828375000855885,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 1213496,
+        "sha256": "a1dd2407dcf871b33e766f2bfbb0919ec7d7de8e769fdb1e0d467ce692bd46c0",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "qualifier_preparation",
+      "label": "postcompile-head",
+      "returncode": 0,
+      "elapsed_seconds": 0.026318582997191697,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 41,
+        "sha256": "19e1e314928b5d8661ad4c1bad3018585da195eeb0e46276b481e77404db4916",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "qualifier_preparation",
+      "label": "postcompile-index",
+      "returncode": 0,
+      "elapsed_seconds": 0.02601541599142365,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 1213496,
+        "sha256": "a1dd2407dcf871b33e766f2bfbb0919ec7d7de8e769fdb1e0d467ce692bd46c0",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "qualifier_preparation",
+      "label": "prerun-head",
+      "returncode": 0,
+      "elapsed_seconds": 0.02377304100082256,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 41,
+        "sha256": "19e1e314928b5d8661ad4c1bad3018585da195eeb0e46276b481e77404db4916",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "qualifier_preparation",
+      "label": "prerun-index",
+      "returncode": 0,
+      "elapsed_seconds": 0.02634508299524896,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 1213496,
+        "sha256": "a1dd2407dcf871b33e766f2bfbb0919ec7d7de8e769fdb1e0d467ce692bd46c0",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "qualifier_preparation",
+      "label": "postrun-head",
+      "returncode": 0,
+      "elapsed_seconds": 0.024399124988121912,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 41,
+        "sha256": "19e1e314928b5d8661ad4c1bad3018585da195eeb0e46276b481e77404db4916",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "qualifier_preparation",
+      "label": "postrun-index",
+      "returncode": 0,
+      "elapsed_seconds": 0.03209012499428354,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 1213496,
+        "sha256": "a1dd2407dcf871b33e766f2bfbb0919ec7d7de8e769fdb1e0d467ce692bd46c0",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "qualifier_preparation",
+      "label": "verify-head",
+      "returncode": 0,
+      "elapsed_seconds": 0.02479566699184943,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 41,
+        "sha256": "19e1e314928b5d8661ad4c1bad3018585da195eeb0e46276b481e77404db4916",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "qualifier_preparation",
+      "label": "verify-index",
+      "returncode": 0,
+      "elapsed_seconds": 0.024042667006142437,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 1213496,
+        "sha256": "a1dd2407dcf871b33e766f2bfbb0919ec7d7de8e769fdb1e0d467ce692bd46c0",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "compile_runtime",
+      "label": "quantized-normalizer-compile",
+      "returncode": 0,
+      "elapsed_seconds": 8.642475041007856,
+      "whole_limit_seconds": 120,
+      "effective_remaining_seconds": 120.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "compile_runtime",
+      "label": "quantized-normalizer-run",
+      "returncode": 0,
+      "elapsed_seconds": 1.0967629170045257,
+      "whole_limit_seconds": 180,
+      "effective_remaining_seconds": 180.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 1006,
+        "sha256": "3c3682a357c1d9d758fce35b9e22b88e480133e896db7779b5c8afbce9d4fa22",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "root",
+      "label": "before-head",
+      "returncode": 0,
+      "elapsed_seconds": 0.022781208012020215,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 41,
+        "sha256": "19e1e314928b5d8661ad4c1bad3018585da195eeb0e46276b481e77404db4916",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "root",
+      "label": "before-branch",
+      "returncode": 0,
+      "elapsed_seconds": 0.023395374999381602,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 31,
+        "sha256": "218f389b3beebe94baeef4f4a8f7447956c3b3471d5890c8aabad0d9bf3eb3f9",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "root",
+      "label": "before-staged",
+      "returncode": 0,
+      "elapsed_seconds": 0.022776666010031477,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "root",
+      "label": "before-index",
+      "returncode": 0,
+      "elapsed_seconds": 0.022391374994185753,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 1213496,
+        "sha256": "a1dd2407dcf871b33e766f2bfbb0919ec7d7de8e769fdb1e0d467ce692bd46c0",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "root",
+      "label": "first-qualifier",
+      "returncode": 0,
+      "elapsed_seconds": 12.163201834002393,
+      "whole_limit_seconds": 610,
+      "effective_remaining_seconds": 610.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 143,
+        "sha256": "cde91836fbf688c230d283f678aeeac25b90ddbd39615a73d8fb610fcaa4313f",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "root",
+      "label": "after-head",
+      "returncode": 0,
+      "elapsed_seconds": 0.021584916990832426,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 41,
+        "sha256": "19e1e314928b5d8661ad4c1bad3018585da195eeb0e46276b481e77404db4916",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "root",
+      "label": "after-index",
+      "returncode": 0,
+      "elapsed_seconds": 0.041834165996988304,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 1213496,
+        "sha256": "a1dd2407dcf871b33e766f2bfbb0919ec7d7de8e769fdb1e0d467ce692bd46c0",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    {
+      "scope": "root",
+      "label": "after-staged",
+      "returncode": 0,
+      "elapsed_seconds": 0.021030416988651268,
+      "whole_limit_seconds": 30,
+      "effective_remaining_seconds": 30.0,
+      "cleanup_reserve_seconds": 5,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "completion_within_effective_deadline": true,
+      "stdout": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    }
+  ],
+  "independent_review": {
+    "status": "PASS_INDEPENDENT_SAVED_QUANTIZED_NORMALIZER_HOST_EVIDENCE_ONLY",
+    "findings": [],
+    "readback_file_count": 1971,
+    "no_replay": true,
+    "retained_reviewer_data_checker_refusal": {
+      "bytes": 664,
+      "mode": 33188,
+      "sha256": "16dac2cffbdd1bb6c5be92e3139d4f0273d626f6f20f27b24b4252eb9c488a27"
+    },
+    "checker_correction": "Raw tar0664 versus data-filtered saved0644; bytes/hash identical. Corrected pure metadata comparison only, not a candidate or HOST failure."
+  },
+  "limits": [
+    "This four-file packet is selected metadata plus complete runtime stdout/stderr, not the full private source/log/archive/tool custody proof. No standalone verifier, publisher or binary is supplied.",
+    "No factory/facade, genuine master/cache/ACTIVE-key/queue ownership, whole-song acceptance, native build/execution, Amiberry, A1200/AmiGUS, capacity/order/completion/voice-stop, exact live timing, audio or listening acceptance for this candidate.",
+    "Successful normal cleanup is not exceptional timeout injection, hard filesystem bound, full toolchain dependency closure, total native stack or WCET proof.",
+    "Action63 is complete guarded immutable storage; a64-action shape attempt refuses at duplicate32 before semantic reach63.",
+    "Historical earlier failures and legacy portable/HOST evidence remain separate."
+  ]
+}

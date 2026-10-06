@@ -44,6 +44,17 @@ struct pt_mixed_plan_batch {
     struct pt_mixed_plan_origin next[PT_MIXED_PLAN_RECORDS];
     uint8_t samples[2][PT_PROJECT_SAMPLES];
 };
+/* Explicit final register levels. This normalizer type has no factory ABI or
+ * owner dependency. Only card TRIGGER is QUANTIZED; every other/unused tag is
+ * LEGACY/0/0. The legacy batch and inputs remain unchanged. */
+enum pt_mixed_plan_level_mode {PT_MIXED_PLAN_LEVEL_LEGACY=0,PT_MIXED_PLAN_LEVEL_QUANTIZED=1};
+struct pt_mixed_plan_trigger_levels {
+    enum pt_mixed_plan_level_mode mode;uint16_t left,right;
+};
+struct pt_mixed_plan_quantized_batch {
+    struct pt_mixed_plan_batch normalized;
+    struct pt_mixed_plan_trigger_levels levels[PT_MIXED_PLAN_RECORDS];
+};
 enum pt_mixed_plan_result {
     PT_MIXED_PLAN_INVALID=0,PT_MIXED_PLAN_PENDING,PT_MIXED_PLAN_READY,
     PT_MIXED_PLAN_REFUSED,PT_MIXED_PLAN_STALE,PT_MIXED_PLAN_ALIAS
@@ -97,6 +108,16 @@ size_t pt_mixed_plan_normalizer_workspace_size(void);
 size_t pt_mixed_plan_normalizer_workspace_alignment(void);
 enum pt_mixed_plan_result pt_mixed_plan_normalizer_begin_in_workspace(
     void *,size_t,const struct pt_mixed_plan_inputs *,struct pt_mixed_plan_normalizer **);
+/* Explicit opt-in geometry route. Identical source/channel/shape/rate admission
+ * and lifetime guards, but card TRIGGER carries final canonical uint16 levels
+ * without the legacy volume/pan search or fallback. The queried private workspace
+ * grows; caller uses its actual size/alignment, not cross-version sizeof guesses.
+ * Job identity captures the mode. Neither getter may strip/reinterpret the other
+ * mode, including NULL queries: INVALID unchanged after complete output guards.
+ * Descriptive origins/image/levels remain numeric only, never factory authority.
+ */
+enum pt_mixed_plan_result pt_mixed_plan_normalizer_begin_quantized_in_workspace(
+    void *,size_t,const struct pt_mixed_plan_inputs *,struct pt_mixed_plan_normalizer **);
 /* work1..256 charges a raw action/origin/source/record/conversion or one exact
  * volume/pan candidate. This bound is not a latency, IRQ or native stack proof. */
 enum pt_mixed_plan_result pt_mixed_plan_normalizer_step(
@@ -105,6 +126,14 @@ enum pt_mixed_plan_result pt_mixed_plan_normalizer_step(
  * query. Full16 result/tentative vectors and all64 input action slots are guarded. */
 enum pt_mixed_plan_result pt_mixed_plan_normalizer_get(
     struct pt_mixed_plan_normalizer *,uint32_t revision,uint32_t generation,struct pt_mixed_plan_batch *);
+/* Full16 records/origins/tags/masks publish once only on READY. Unused records
+ * and tags have zero declared semantic fields; C padding is not authority. The
+ * complete new output and every local D1 child object are guarded before writes.
+ * Legacy get refuses this job; this get refuses legacy jobs. No pins/callbacks.
+ */
+enum pt_mixed_plan_result pt_mixed_plan_normalizer_get_quantized(
+    struct pt_mixed_plan_normalizer *,uint32_t revision,uint32_t generation,
+    struct pt_mixed_plan_quantized_batch *);
 /* Numeric-capture-only diagnostic query, safe after source expiration. No partial
  * batch/origins/masks. NULL checked query. Does not walk former source arrays. */
 enum pt_mixed_plan_result pt_mixed_plan_normalizer_report(

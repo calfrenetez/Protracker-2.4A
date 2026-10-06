@@ -80,3 +80,14 @@ static marker strings do not qualify native assertions. Amiberry and real-A1200
 execution, stack/WCET, real placement/device behavior, timing and audio remain
 untested for this candidate. See the
 [selected compiler facts](../evidence/enhanced-editor/mixed-readers-plan-normalize-portable/README.md).
+
+
+## Explicit quantized trigger mode — 6 October 2026
+
+The separate `pt_mixed_plan_normalizer_begin_quantized_in_workspace` and `pt_mixed_plan_normalizer_get_quantized` route supplies canonical final AmiGUS register levels directly. It complements the legacy contract above: existing inputs/batch declarations and finite volume/pan search stay unchanged. The captured mode refuses the other getter, including NULL queries, without changing state or stripping tags. Queried private workspace grows; complete supplied capacity, local D1 request/plan scratch and the entire new fixed16 output remain guarded.
+
+Only card TRIGGER carries QUANTIZED levels. Paula, CONTROL, STOP and unused tags remain LEGACY/0/0. D1 receives nested volume/pan zero and must match all seven canonical fields at numeric origin zero. The centred `32639/32895` pair succeeds exactly in this explicit mode; legacy still refuses after 16,449 candidates. Strict mono/channel-zero geometry, fresh mappings, logical-origin rules, bounded work, expiry and original-owner cancellation remain in force. Geometry and tags grant no cache, ACTIVE-key or queue authority.
+
+One first-v1 ASan/UBSan HOST run of the private four-source overlay passed against committed baseline `5a8c6401f8ac802558b73b7ec5df881ccaa131e3`: 949 saved inputs, 39 units, 12 complete markers and 26 successful quiet owned drivers. The assertion fixture completed 864 numeric rows and 2,592 relocated seven-field comparisons separately from those markers. Independent saved-only review passed without candidate findings or replay. See the [selected HOST packet](../evidence/enhanced-editor/mixed-readers-plan-quantized-host/README.md).
+
+This supersedes the earlier in-development status of the explicit normalizer extension. The genuine tagged factory is qualified separately; connecting both through a master-owning whole-song producer and composite editor barrier remains unfinished. This quantized candidate has no native build/execution, Amiberry or physical acceptance. The earlier 220,840-byte portable HUNK qualifies only compilation of the legacy candidate; it supplies no evidence for this extension or live device/timing/listening behavior.

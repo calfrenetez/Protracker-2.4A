@@ -3,15 +3,17 @@
 #include <string.h>
 #include "mixed_readers_plan_normalize.h"
 #include "../core/amigus_render_voice.h"
+#include "../core/amigus_trigger_levels.h"
 #include "../core/render_storage_internal.h"
 
 #define PLAN_MAGIC UINT64_C(0x50544d504c414e31)
+#define PLAN_QUANTIZED_MAGIC UINT64_C(0x50544d504c414e51)
 #define PLAN_EXTENSIONS 4090U
 /* 5 project/header tables +510 sample extents +4090 payloads +6 named
  * inputs/vectors +32 extra context spans +1 known owner slot =4644. */
 #define PLAN_GUARDS 4656U
 struct pt_mixed_plan_normalizer {
-    uint64_t magic;size_t capacity;
+    uint64_t magic;enum pt_mixed_plan_level_mode mode;size_t capacity;
     struct pt_mixed_plan_normalizer **owner;unsigned owner_guard;
     const struct pt_mixed_plan_inputs *inputs;
     struct pt_mixed_plan_inputs saved;
@@ -24,7 +26,7 @@ struct pt_mixed_plan_normalizer {
     struct pt_playback_format format;
     struct pt_mixed_plan_span contexts[PT_MIXED_PLAN_CONTEXTS];
     struct pt_mixed_plan_span guards[PLAN_GUARDS];unsigned guard_count;
-    struct pt_mixed_plan_batch batch;
+    struct pt_mixed_plan_quantized_batch batch;
     struct pt_mixed_plan_report report;
     int first[PT_MIXED_PLAN_RECORDS],control[PT_MIXED_PLAN_RECORDS];
     int8_t slots[PT_MIXED_PLAN_RECORDS];
@@ -38,6 +40,8 @@ struct scratch {
     struct pt_paula_render_plan paula;
     struct pt_amigus_voice_plan card;
     struct pt_amigus_voice_request request;
+    struct pt_amigus_trigger_levels_request quantized;
+    struct pt_amigus_voice_plan levels_plan;
 };
 static int span(const void *p,size_t n)
 {return !n||(p&&n<=UINTPTR_MAX-(uintptr_t)p);}
@@ -99,7 +103,9 @@ static int initial_apart(const struct pt_mixed_plan_inputs *v,const void *out,si
 }
 static int valid(const struct pt_mixed_plan_normalizer *j)
 {return span(j,sizeof(*j))&&!((uintptr_t)j%_Alignof(struct pt_mixed_plan_normalizer))&&
-    j->magic==PLAN_MAGIC&&j->capacity>=sizeof(*j)&&span(j,j->capacity);}
+    ((j->mode==PT_MIXED_PLAN_LEVEL_LEGACY&&j->magic==PLAN_MAGIC)||
+     (j->mode==PT_MIXED_PLAN_LEVEL_QUANTIZED&&j->magic==PLAN_QUANTIZED_MAGIC))&&
+    j->capacity>=sizeof(*j)&&span(j,j->capacity);}
 static int initial_local_apart(const struct pt_mixed_plan_inputs *v,uintptr_t address,size_t n)
 {return initial_apart(v,(const void *)address,n);}
 static int output_apart(const struct pt_mixed_plan_normalizer *j,const void *out,size_t n)
@@ -176,8 +182,9 @@ static int current(const struct pt_mixed_plan_normalizer *j,uint32_t revision,ui
 }
 size_t pt_mixed_plan_normalizer_workspace_size(void){return sizeof(struct pt_mixed_plan_normalizer);}
 size_t pt_mixed_plan_normalizer_workspace_alignment(void){return _Alignof(struct pt_mixed_plan_normalizer);}
-enum pt_mixed_plan_result pt_mixed_plan_normalizer_begin_in_workspace(
-    void *storage,size_t capacity,const struct pt_mixed_plan_inputs *v,struct pt_mixed_plan_normalizer **out)
+static enum pt_mixed_plan_result begin_mode(
+    void *storage,size_t capacity,const struct pt_mixed_plan_inputs *v,
+    struct pt_mixed_plan_normalizer **out,enum pt_mixed_plan_level_mode mode)
 {
     struct pt_mixed_plan_normalizer *j=storage;int8_t map[PT_MIXED_PLAN_RECORDS];
     const uint8_t *bytes=storage;size_t i;unsigned card=0;
@@ -188,7 +195,7 @@ enum pt_mixed_plan_result pt_mixed_plan_normalizer_begin_in_workspace(
     /* Genuine existing workspace reuse is refused with numeric capture guards;
      * no incoming source walk, zeroing or mutation of an adopted job. Only the
      * exact original owner slot preserves INVALID after all other guards. */
-    if(j->magic==PLAN_MAGIC){
+    if(j->magic==PLAN_MAGIC||j->magic==PLAN_QUANTIZED_MAGIC){
         if(!valid(j)||!apart(j,j->capacity,v,sizeof(*v))||
            (out==j->owner?!close_apart(j,out):!output_apart(j,out,sizeof(*out))))
             return PT_MIXED_PLAN_ALIAS;
@@ -205,22 +212,29 @@ enum pt_mixed_plan_result pt_mixed_plan_normalizer_begin_in_workspace(
        v->format->word_pad||v->format->little_endian>1||
        pt_channels_paula_map(&v->project->channels,NULL,map)!=PT_CHANNEL_OK)return PT_MIXED_PLAN_INVALID;
     for(i=0;i<sizeof(*j);++i)if(bytes[i])return PT_MIXED_PLAN_INVALID;
-    memset(j,0,sizeof(*j));j->capacity=capacity;j->owner=out;
+    memset(j,0,sizeof(*j));j->mode=mode;j->capacity=capacity;j->owner=out;
     j->inputs=v;j->saved=*v;j->header=*v->project;
     memcpy(&j->plan,v->plan,sizeof(j->plan));memcpy(j->origins,v->origins,sizeof(j->origins));
     j->caps=*v->caps;j->format=*v->format;
     if(v->project->sample_count)memcpy(j->samples,v->project->samples,v->project->sample_count*sizeof(*j->samples));
     if(v->project->extension_count)memcpy(j->extensions,v->project->extensions,v->project->extension_count*sizeof(*j->extensions));
     if(v->context_count)memcpy(j->contexts,v->contexts,v->context_count*sizeof(*j->contexts));
-    memcpy(j->batch.next,j->origins,sizeof(j->origins));j->batch.frame=v->frame;
+    memcpy(j->batch.normalized.next,j->origins,sizeof(j->origins));j->batch.normalized.frame=v->frame;
     for(i=0;i<PT_MIXED_PLAN_RECORDS;++i){j->first[i]=j->control[i]=-1;j->slots[i]=map[i];
         if(i<v->project->channels.count&&v->project->channels.track[i].route==PT_AMIGUS)
             j->slots[i]=(int8_t)card++;
     }
     sources(j);j->report.result=PT_MIXED_PLAN_PENDING;j->report.phase=PT_MIXED_PLAN_SHAPES;
-    j->report.action=j->report.track=j->report.kind=UINT_MAX;j->magic=PLAN_MAGIC;
+    j->report.action=j->report.track=j->report.kind=UINT_MAX;
+    j->magic=mode==PT_MIXED_PLAN_LEVEL_LEGACY?PLAN_MAGIC:PLAN_QUANTIZED_MAGIC;
     *out=j;return PT_MIXED_PLAN_PENDING;
 }
+enum pt_mixed_plan_result pt_mixed_plan_normalizer_begin_in_workspace(
+    void *storage,size_t capacity,const struct pt_mixed_plan_inputs *v,struct pt_mixed_plan_normalizer **out)
+{return begin_mode(storage,capacity,v,out,PT_MIXED_PLAN_LEVEL_LEGACY);}
+enum pt_mixed_plan_result pt_mixed_plan_normalizer_begin_quantized_in_workspace(
+    void *storage,size_t capacity,const struct pt_mixed_plan_inputs *v,struct pt_mixed_plan_normalizer **out)
+{return begin_mode(storage,capacity,v,out,PT_MIXED_PLAN_LEVEL_QUANTIZED);}
 static enum pt_mixed_plan_result refuse(struct pt_mixed_plan_normalizer *j,enum pt_mixed_plan_reason reason)
 {j->report.reason=reason;j->report.result=PT_MIXED_PLAN_REFUSED;return j->report.result;}
 static int same_voice(const struct pt_voice *a,const struct pt_voice *b)
@@ -249,16 +263,16 @@ static void effective(struct pt_mixed_plan_normalizer *j,struct scratch *s)
 }
 static void accepted(struct pt_mixed_plan_normalizer *j)
 {
-    struct pt_mixed_plan_record *r=j->batch.record+j->batch.count;
+    struct pt_mixed_plan_record *r=j->batch.normalized.record+j->batch.normalized.count;
     if(r->kind==PT_MIXED_PLAN_TRIGGER){
-        j->batch.next[r->track]=(struct pt_mixed_plan_origin){1,r->sample,r->channel,j->saved.frame};
-        j->batch.samples[r->route==PT_PAULA?0:1][r->sample]=1;
-    }else if(r->kind==PT_MIXED_PLAN_STOP)memset(j->batch.next+r->track,0,sizeof(*j->batch.next));
-    ++j->batch.count;++j->track;j->report.phase=PT_MIXED_PLAN_RECORD;
+        j->batch.normalized.next[r->track]=(struct pt_mixed_plan_origin){1,r->sample,r->channel,j->saved.frame};
+        j->batch.normalized.samples[r->route==PT_PAULA?0:1][r->sample]=1;
+    }else if(r->kind==PT_MIXED_PLAN_STOP)memset(j->batch.normalized.next+r->track,0,sizeof(*j->batch.normalized.next));
+    ++j->batch.normalized.count;++j->track;j->report.phase=PT_MIXED_PLAN_RECORD;
 }
 static void one(struct pt_mixed_plan_normalizer *j,struct scratch *s)
 {
-    struct pt_mixed_plan_record *r=j->batch.record+j->batch.count;
+    struct pt_mixed_plan_record *r=j->batch.normalized.record+j->batch.normalized.count;
     const struct pt_render_action *a;const struct pt_sample *sample;
     const struct pt_mixed_plan_origin *origin;unsigned k;uint64_t bytes,numerator;
     switch(j->report.phase){
@@ -348,6 +362,19 @@ static void one(struct pt_mixed_plan_normalizer *j,struct scratch *s)
         s->request=r->geometry.amigus.trigger;s->request.volume=0;s->request.pan=0;
         if(!pt_amigus_voice_plan_prepare(sample,&j->format,&s->request,0,(uint32_t)bytes,&s->card)||
            !same_bounds(&r->image,&s->card)){refuse(j,PT_MIXED_PLAN_REASON_AMIGUS);break;}
+        if(j->mode==PT_MIXED_PLAN_LEVEL_QUANTIZED){
+            /* Entire scratch was guarded before initialization/entry. D1 receives
+             * distinct whole local children, never an embedded job output. */
+            s->quantized.geometry=s->request;
+            s->quantized.left=r->image.left;s->quantized.right=r->image.right;
+            if(!pt_amigus_trigger_levels_prepare(sample,&j->format,&s->quantized,0,
+                    (uint32_t)bytes,&s->levels_plan)||!same_image(&r->image,&s->levels_plan)){
+                refuse(j,PT_MIXED_PLAN_REASON_AMIGUS);break;}
+            r->geometry.amigus.trigger=s->request;
+            j->batch.levels[j->batch.normalized.count]=(struct pt_mixed_plan_trigger_levels){
+                PT_MIXED_PLAN_LEVEL_QUANTIZED,r->image.left,r->image.right};
+            accepted(j);break;
+        }
         j->candidate=0;j->report.phase=PT_MIXED_PLAN_GAINS;break;
     case PT_MIXED_PLAN_GAINS:
         if(j->candidate==PT_MIXED_PLAN_GAIN_CANDIDATES){refuse(j,PT_MIXED_PLAN_REASON_GAINS);break;}
@@ -383,6 +410,21 @@ enum pt_mixed_plan_result pt_mixed_plan_normalizer_get(
 {
     if(!valid(j))return PT_MIXED_PLAN_INVALID;
     if(out&&((uintptr_t)out%_Alignof(struct pt_mixed_plan_batch)||!output_apart(j,out,sizeof(*out))))return PT_MIXED_PLAN_ALIAS;
+    if(j->mode!=PT_MIXED_PLAN_LEVEL_LEGACY)return PT_MIXED_PLAN_INVALID;
+    if(j->busy)return PT_MIXED_PLAN_INVALID;
+    if(j->report.result==PT_MIXED_PLAN_REFUSED||j->report.result==PT_MIXED_PLAN_STALE)return j->report.result;
+    if(!current(j,revision,generation)){j->report.result=PT_MIXED_PLAN_STALE;return j->report.result;}
+    if(j->report.result==PT_MIXED_PLAN_READY&&out)memcpy(out,&j->batch.normalized,sizeof(*out));
+    return j->report.result;
+}
+enum pt_mixed_plan_result pt_mixed_plan_normalizer_get_quantized(
+    struct pt_mixed_plan_normalizer *j,uint32_t revision,uint32_t generation,
+    struct pt_mixed_plan_quantized_batch *out)
+{
+    if(!valid(j))return PT_MIXED_PLAN_INVALID;
+    if(out&&((uintptr_t)out%_Alignof(struct pt_mixed_plan_quantized_batch)||
+        !output_apart(j,out,sizeof(*out))))return PT_MIXED_PLAN_ALIAS;
+    if(j->mode!=PT_MIXED_PLAN_LEVEL_QUANTIZED)return PT_MIXED_PLAN_INVALID;
     if(j->busy)return PT_MIXED_PLAN_INVALID;
     if(j->report.result==PT_MIXED_PLAN_REFUSED||j->report.result==PT_MIXED_PLAN_STALE)return j->report.result;
     if(!current(j,revision,generation)){j->report.result=PT_MIXED_PLAN_STALE;return j->report.result;}

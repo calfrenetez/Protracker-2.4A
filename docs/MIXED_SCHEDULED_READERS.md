@@ -39,8 +39,11 @@ declarations cover complete master/cache capacities and supporting controls;
 card declarations retain reservation/cache identity, version, serial, format,
 logical length and full capacity. Upload temporary-pin completion does not end
 a playback reader's persistent pins. The core checks declarations and lifetime
-rules but cannot prove real pin provenance from a caller record. A production
-genuine-holder adapter remains unfinished.
+rules but cannot prove real pin provenance from a caller record. The additive
+`sampler_mixed_readers` factory now creates genuine independently
+pinned holders; its contract and isolated evidence are recorded in
+[SAMPLER_MIXED_READERS.md](SAMPLER_MIXED_READERS.md). Product editor/song wiring
+and native target qualification remain unfinished.
 
 Command detachment and exact per-reader retirement are separate proofs.
 `COMMAND_DETACHED` releases only the command domain. A reader releases only after
@@ -90,8 +93,14 @@ the close-0/NULL case are asserted. Program markers say SOFTWARE_ONLY; the saved
 runner scope is HOST_ONLY. See the [saved host evidence](../evidence/enhanced-editor/mixed-scheduled-readers/README.md)
 and independent final source/fixture/custody review. This does not imply native execution.
 
-Production genuine-holder adapters, paired song/editor lowering, a real atomic
-backend and native UI/PLAY integration remain later work. Device capacity,
+The callable [genuine holder factory](SAMPLER_MIXED_READERS.md) and
+[copied activation owner](MIXED_READERS_ACTIVATION.md) are implemented software
+components. Their isolated and combined host qualifiers and independent reviews
+pass; see the [paired host evidence](../evidence/enhanced-editor/paired-sampler-activation-host/README.md).
+The new complete combined fixture has separate
+[compiler evidence](../evidence/enhanced-editor/paired-sampler-activation-portable/README.md)
+and has never been executed. Paired song/editor lowering, a qualified real atomic port and native
+UI/PLAY integration remain later work. Device capacity,
 upload ordering/completion, actual all-voice stop, MMIO/DMA, placement, aggregate
 stack, task/IRQ timing, exact activation on hardware, physical audio and listening
 remain separate open gates. The separate [portable build packet](../evidence/enhanced-editor/mixed-scheduled-readers-portable/README.md)

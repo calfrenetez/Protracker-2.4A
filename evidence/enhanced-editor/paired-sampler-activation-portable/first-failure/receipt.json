@@ -1,0 +1,9 @@
+{
+  "status": "FIRST_FAILURE_RETAINED",
+  "compiler_calls": 0,
+  "failure": "RuntimeError('Git readback failed: head-before')",
+  "readback_RC": 0,
+  "diagnosis": "Controlled environment lacked TMPDIR. Mac Git emitted confstr warning, so the retained stderr gate refused before GCC. V3 explicitly supplies /private/tmp; no warning suppression or bound expansion.",
+  "product": "NONE",
+  "target_operations": 0
+}

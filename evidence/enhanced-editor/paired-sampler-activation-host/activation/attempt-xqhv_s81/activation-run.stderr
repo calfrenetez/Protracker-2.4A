@@ -1,0 +1,1 @@
+Assertion failed: (pt_mixed_readers_commands_held(c->trial->queue)==1&&pt_mixed_readers_readers_held(c->trial->queue)==6&& !memcmp(&before,c->trial->reader,sizeof(before))&&!pt_mixed_activation_close(&c->owner)&&c->memory.live==2), function a_faulting_refusal, file mixed_readers_activation_test.c, line 368.

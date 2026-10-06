@@ -357,6 +357,10 @@ static void advance(struct pt_mixed_readers_output *q,const struct command_entry
         if(a->reader>=PT_MIXED_READER_STOP_PENDING)r->closed=1;
     }
 }
+int pt_mixed_readers_output_disjoint(const struct pt_mixed_readers_output *q,const void *out,size_t bytes)
+{return q&&output_apart(q,out,bytes);}
+int pt_mixed_readers_admission_valid(struct pt_mixed_readers_output *q,const struct pt_mixed_readers_inputs *input,uint64_t *out)
+{unsigned count;return q&&inputs(q,input,out,&count);}
 static enum pt_mixed_readers_result command_check(struct pt_mixed_readers_output *q,uint64_t t,struct pt_mixed_readers_command_receipt *out,int cancel)
 {
     struct command_entry *e;struct pt_mixed_readers_command_receipt receipt;enum pt_mixed_readers_reply reply;int good;

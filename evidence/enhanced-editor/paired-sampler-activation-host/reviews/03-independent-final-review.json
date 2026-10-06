@@ -1,0 +1,238 @@
+{
+  "schema": "mixed-readers-activation-independent-final-review/v2",
+  "overall": "PASS",
+  "source_review": "PASS",
+  "recorded_host_integrity": "PASS",
+  "coverage_review": "PASS",
+  "findings": [],
+  "reviewer": "paula_reader_controller independent read-only review",
+  "review_execution": "Read previous/current frozen source diff and saved artifacts; pure stdlib saved-byte/relationship checks only. No tests, builds, operational imports, Git mutations or targets.",
+  "baseline": "c4cbc0419a920e70ed4db1194373a75a6b1a871e",
+  "current_run": "outputs/mixed-readers-activation/v1/attempt-r0b5wm1i/run.json",
+  "source_controls": {
+    "bytes": 7327,
+    "sha256": "1cd19513bc1e3b29bd127094a2354f2f8cbb3f84d255ee3c5fc329f58bfb8dd3",
+    "mode": 420
+  },
+  "overlays": {
+    "src/core/mixed_readers_activation.h": {
+      "bytes": 9661,
+      "sha256": "d7309330627b606209c44b2759bcfbb35000ace4813d9acb938562376ce3ba35",
+      "mode": 420
+    },
+    "src/core/mixed_readers_activation.c": {
+      "bytes": 39399,
+      "sha256": "f4e608ef7f80a8635417fe78c68ac4852e9e404faf3c4b4d896dae5942965571",
+      "mode": 420
+    },
+    "tests/mixed_readers_activation_test.c": {
+      "bytes": 35980,
+      "sha256": "4fde3ecacc4bf321bf90cae14bdbeb4e4d44cec0b3f21a1f018335585af800a1",
+      "mode": 420
+    },
+    "tests/test_mixed_readers_activation.py": {
+      "bytes": 6336,
+      "sha256": "b1f54c645d7228e637e2594ec5adac1359b444a56d7a33134b1df72f77acb6fd",
+      "mode": 420
+    },
+    "src/core/mixed_scheduled_readers.c": {
+      "bytes": 33825,
+      "sha256": "6c0e5b7851056b0cdb72cdad0c408b15efdc6ba21d1357609edfa3fb9cd15de4",
+      "mode": 420
+    },
+    "src/core/mixed_scheduled_readers.h": {
+      "bytes": 11330,
+      "sha256": "da39231a26d4629b6707ace68a58ddb3b6e38a1be354e2700d28f4a79f37aed5",
+      "mode": 420
+    }
+  },
+  "integrity_report": {
+    "bytes": 12825,
+    "sha256": "f135acc76fbcf269f72b390ae6a647ea57095566bdbf3c427e5a2d48c269e1d8",
+    "mode": 420
+  },
+  "recorded_call_count": 6,
+  "saved_source_count": 927,
+  "ordered_activation_units": [
+    "tests/mixed_readers_activation_test.c",
+    "src/core/mixed_readers_activation.c",
+    "src/core/mixed_scheduled_readers.c",
+    "src/core/elapsed_clock.c",
+    "src/editor/sampler_paula.c",
+    "src/editor/sampler_wavetable.c",
+    "src/core/amigus_voice_plan.c",
+    "src/editor/sampler.c",
+    "src/editor/slots.c",
+    "src/core/pcm_filtered.c",
+    "src/core/slices.c",
+    "src/core/pattern.c",
+    "src/core/document.c",
+    "src/core/pp20.c",
+    "src/core/project.c",
+    "src/core/mod_project.c",
+    "src/core/mod_inspect.c",
+    "src/core/channels.c",
+    "src/core/pcm.c",
+    "src/core/wav.c",
+    "src/core/svx.c",
+    "src/core/raw.c",
+    "src/core/amigus_reservation.c",
+    "src/core/amigus_wavetable_cache.c",
+    "src/core/amigus_sample_ram.c",
+    "src/core/sample_cache.c",
+    "src/core/playback_pcm.c"
+  ],
+  "resolved_findings": [
+    {
+      "id": "R1",
+      "status": "RESOLVED",
+      "correction": "Header explicitly distinguishes clean nonfaulting0 from a faulted raw0; private command record retains publication_outcome before result classification changes. Both proof-order fixtures invoke actual publish0+consumed NEW reentry hook, assert zero commits/effects/actual model command+reader refs, protect genuine holders apart from permitted current-call counter, preserve caller key output and pin counts through pending probes, then explicitly independently prove actual absent registration quiet to drain both domains. Historical opaque registration is copied only for exact identity comparison; no accepted packet/sample/reader reference is invented.",
+      "source_evidence": [
+        "src/core/mixed_readers_activation.c:19",
+        "src/core/mixed_readers_activation.c:232",
+        "src/core/mixed_readers_activation.h:55",
+        "tests/mixed_readers_activation_test.c:a_faulting_refusal"
+      ],
+      "execution_evidence": "Current r0b5wm1i activation-run passed actual two raw0+NEW-fault proof orders, with all stderr empty."
+    },
+    {
+      "id": "R2",
+      "status": "RESOLVED",
+      "correction": "Injected publish model copies full packet with memcpy before full-object commit memcmp. Full holder/input/key byte snapshots used by these checks also use memcpy, avoiding unspecified structure-assignment padding.",
+      "source_evidence": [
+        "tests/mixed_readers_activation_test.c:a_publish",
+        "tests/mixed_readers_activation_test.c:a_faulting_refusal",
+        "tests/mixed_readers_activation_test.c:a_pure_guard_queries"
+      ]
+    }
+  ],
+  "reviewed_lifetime_and_timing_properties": [
+    {
+      "property": "New quiet callback faults retain independent domains",
+      "evidence": "backend_command/reader compare fault serial and byte-exact identity snapshots before producing exact proof. New fault returns uncertainty without deleting own records, even actual probe1; fixture checks genuine holders and caller receipts unchanged, later NULL probes drain separately."
+    },
+    {
+      "property": "Preexisting-failure NULL drainage",
+      "evidence": "Wrapper permits NULL output; backend permits unchanged exact quiet1 after a preexisting fault, keeps command and reader proof tags distinct, and marks invalid classification without inventing active ownership."
+    },
+    {
+      "property": "Source lifetime",
+      "evidence": "Actual core close uses disjoint local slot and registered borrow releases on NULL consumption, including close0. Source_close attempted once, later explicit source_quiet is distinct read-only callback, identity/new-fault/malformed probes retain owner; final allocator release uses local latch and NULL slot before callback."
+    },
+    {
+      "property": "Copied activation and original windows",
+      "evidence": "Fire uses own command/reader records and copied packet values, validates all20 original keys and exact original[first,last), checks pre/post actual clocks and resulting registry, performs one declared paired commit. Early preserves window; late/partial/unknown retains possible effects and pins; poisoned-descriptor ASan fixture confirms no core/source traversal in activation."
+    },
+    {
+      "property": "Guard ordering and authoritative enqueue transfer",
+      "evidence": "Two root pure core queries guard incoming/raw unpublished/live full source outputs before task_busy faults. Original caller output is passed through genuine core guards; actual core enqueueOK remains authority even a separately latched owner fault. Owner/queue alignment and full capacity context alias checks precede initialization/callbacks."
+    },
+    {
+      "property": "Evidence integrity and scoped overlays",
+      "evidence": "Pure checker verified current/saved bytes and modes of all6 overlays,927 full saved input bytes/modes, baseline unchanged source bytes with ordinary archive-mode normalization, generated font, all6 RC0/empty stderr,12 logs,27 actual ordered units and protected16. Two actual first failures and previous PASS remain separate."
+    }
+  ],
+  "preserved_history": {
+    "previous_blocker": {
+      "bytes": 8421,
+      "sha256": "46cd3ebcd7198eee84d0b5eb992a8da5f90749afedcfebc390da32f41bc538ba",
+      "mode": 420
+    },
+    "previous_ready": {
+      "bytes": 5348,
+      "sha256": "a626197b38dfe41e137400f02e2219e7e5ea1facb62888bc4d87612be1a4dd20",
+      "mode": 420
+    },
+    "previous_reviewer_mode_refusal": {
+      "bytes": 801,
+      "sha256": "5794a58c3dcd17435b94893254ae1576291d9afa25a1936e2365704b8b2e782e",
+      "mode": 420
+    },
+    "historical_passes": [
+      "outputs/mixed-readers-activation/v1/attempt-e6wnd6cm/run.json",
+      "outputs/mixed-readers-activation/v1/attempt-gmiebl3y/run.json"
+    ],
+    "actual_first_failures": [
+      {
+        "attempt": "outputs/mixed-readers-activation/v1/attempt-5xdsy_5d",
+        "status": "FAIL",
+        "diagnosis": "FIRST_COMPILE_FAILURE: nested fixture main macro collision, explicit alias typing and local scratch address-only warning",
+        "files": {
+          "activation-compile.stderr": {
+            "bytes": 2418,
+            "sha256": "a68832bdd7a3c2ef73b6f98419de43beb0d4ecd887647224a3010f65f4218c97"
+          },
+          "activation-compile.stdout": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "run.json": {
+            "bytes": 161634,
+            "sha256": "d01cf53494677180386549c0600ad3e048cf70afea3797918e67580080b88c06"
+          }
+        }
+      },
+      {
+        "attempt": "outputs/mixed-readers-activation/v1/attempt-ip42gedj",
+        "status": "FAIL",
+        "diagnosis": "FIRST_RUNTIME_FAILURE: fixture final-owner allocator hook incorrectly fired on preceding queue release",
+        "files": {
+          "activation-compile.stderr": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "activation-compile.stdout": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "activation-run.stderr": {
+            "bytes": 184,
+            "sha256": "11a40e48a569f2a7b39ecca2688b48e3e9aa1ef87a52cc39d4b826ba507675a5"
+          },
+          "activation-run.stdout": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "run.json": {
+            "bytes": 161941,
+            "sha256": "dfa889c7e08b2652291269df37b8e4e457c455e33ecc3a8165da206df2a9011c"
+          }
+        }
+      },
+      {
+        "attempt": "outputs/mixed-readers-activation/v1/attempt-xqhv_s81",
+        "status": "FAIL",
+        "diagnosis": "RAW0_TEST_FIRST_FAILURE: byte snapshot expected unchanged genuine current-call counter despite legitimate core publish revalidation; persistent pin/lease/terminal/release bytes remain protected",
+        "files": {
+          "activation-compile.stderr": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "activation-compile.stdout": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "activation-run.stderr": {
+            "bytes": 309,
+            "sha256": "14d9d8950e1ce592b0e715b1e8a5ef88d642e7383cb1e409119df5c478b30ecc"
+          },
+          "activation-run.stdout": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "run.json": {
+            "bytes": 161941,
+            "sha256": "bc70717825adcab24fcb36b331221dc928aa053c25e843a28f7391eba72611c2"
+          }
+        }
+      }
+    ]
+  },
+  "qualification_limits": [
+    "PASS is bound to exact current six overlays and actual recorded six HOST_ONLY sanitizer calls only.",
+    "No new source/test execution was performed by reviewer.",
+    "Factory integration/combined qualification remains separate.",
+    "No native execution, installed timer, IRQ/residency/WCET/stack, actual card geometry/capacity/order/completion/voice stop, MMIO/DMA, physical/audio/listening acceptance.",
+    "Flags are backend declarations, not device acceptance."
+  ]
+}

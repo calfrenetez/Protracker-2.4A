@@ -1,0 +1,19 @@
+src/editor/sampler_mixed_readers.c:362:2: error: misleading indentation; statement is not part of the previous 'for' [-Werror,-Wmisleading-indentation]
+  362 | }if(!r||r->track!=x[i].track||r->sample!=x[i].sample||r->channel!=x[i].channel||r->frame>=frame)return 0;
+      |  ^
+src/editor/sampler_mixed_readers.c:360:1: note: previous statement is here
+  360 | for(j=0;j<p->config.maximum_readers;++j)if(p->readers[j]&&p->readers[j]->state==LIVE&&p->readers[j]->key_seen&&key_same(&p->readers[j]->key,&x[i].key)){r=p->readers[j];
+      | ^
+src/editor/sampler_mixed_readers.c:697:2: error: misleading indentation; statement is not part of the previous 'for' [-Werror,-Wmisleading-indentation]
+  697 | }*out=ticket;
+      |  ^
+src/editor/sampler_mixed_readers.c:693:1: note: previous statement is here
+  693 | for(i=0;i<c->count;++i)if(c->source[i].reader){struct pt_sampler_mixed_reader *r=c->source[i].reader;
+      | ^
+src/editor/sampler_mixed_readers.c:788:2: error: misleading indentation; statement is not part of the previous 'for' [-Werror,-Wmisleading-indentation]
+  788 | }p->busy=0;
+      |  ^
+src/editor/sampler_mixed_readers.c:786:1: note: previous statement is here
+  786 | for(i=0;i<p->config.maximum_commands;++i)if(p->commands[i]&&p->commands[i]->state!=LIVE&&p->commands[i]->state!=RETIRED){partial(p->commands[i],0);
+      | ^
+3 errors generated.

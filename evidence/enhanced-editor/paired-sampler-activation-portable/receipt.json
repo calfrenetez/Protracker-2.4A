@@ -1,0 +1,155 @@
+{
+  "status": "PASS_SAVED_COMPILER_LINK_ONLY_NEVER_EXECUTED",
+  "baseline": "c4cbc0419a920e70ed4db1194373a75a6b1a871e",
+  "profile": "combined",
+  "source_count": 933,
+  "unit_count": 28,
+  "dependency_count": 99,
+  "compiler_call_count": 41,
+  "overall_elapsed_seconds": 8.718507416007924,
+  "bounds": {
+    "overall_seconds": 600,
+    "each_compiler_call_seconds": 120,
+    "each_git_readback_seconds": 20,
+    "first_failure": "RETAINED_NO_RETRY"
+  },
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-UNDEBUG",
+    "-Isrc/core",
+    "-I.",
+    "-fbbb=-"
+  ],
+  "ordered_units": [
+    "tests/sampler_mixed_activation_test.c",
+    "src/editor/sampler_mixed_readers.c",
+    "src/core/mixed_readers_activation.c",
+    "src/core/mixed_scheduled_readers.c",
+    "src/core/elapsed_clock.c",
+    "src/editor/sampler_paula.c",
+    "src/editor/sampler_wavetable.c",
+    "src/core/amigus_voice_plan.c",
+    "src/editor/sampler.c",
+    "src/editor/slots.c",
+    "src/core/pcm_filtered.c",
+    "src/core/slices.c",
+    "src/core/pattern.c",
+    "src/core/document.c",
+    "src/core/pp20.c",
+    "src/core/project.c",
+    "src/core/mod_project.c",
+    "src/core/mod_inspect.c",
+    "src/core/channels.c",
+    "src/core/pcm.c",
+    "src/core/wav.c",
+    "src/core/svx.c",
+    "src/core/raw.c",
+    "src/core/amigus_reservation.c",
+    "src/core/amigus_wavetable_cache.c",
+    "src/core/amigus_sample_ram.c",
+    "src/core/sample_cache.c",
+    "src/core/playback_pcm.c"
+  ],
+  "product": {
+    "bytes": 266204,
+    "sha256": "f4c5eeac8cfc6a5ebd4081eceff8ea33691bc2ce3fe5dccfbcb99984f9ca8342",
+    "mode": 493,
+    "format": "HUNK",
+    "execution": "NEVER_EXECUTED"
+  },
+  "expected_stdout": {
+    "bytes": 1760,
+    "sha256": "84bebd4a722df63a1a49bbd27a4668b48cfa08f2831c69e7f74178d76989c8c9",
+    "mode": 420
+  },
+  "markers": [
+    "SAMPLER MIXED FACTORY PASS",
+    "SAMPLER MIXED ACTIVATION PASS",
+    "MIXED READERS PASS",
+    "amigus reservation lifecycle",
+    "WAVETABLE UPLOAD JOB PASS",
+    "AMIGUS WAVETABLE OWNER PASS"
+  ],
+  "tools": {
+    "compiler": {
+      "bytes": 821944,
+      "sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+      "mode": 493
+    },
+    "cc1": {
+      "bytes": 12240624,
+      "sha256": "283c793f4033761ff96d5534d3a44be192097181458d4029b462597148424f05",
+      "mode": 493
+    },
+    "as": {
+      "bytes": 1023048,
+      "sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f",
+      "mode": 493
+    },
+    "ld": {
+      "bytes": 1027624,
+      "sha256": "b50c8aa31ff322825ddf90602b50871e30410724fadfda5eb60ffde193b9a9dc",
+      "mode": 493
+    },
+    "collect2": {
+      "bytes": 461384,
+      "sha256": "24c609f362f0d54478dffb9b92b51034e10ce0c5e85534acf1b8b72203bc9bb8",
+      "mode": 493
+    }
+  },
+  "runtime_inputs": {
+    "ncrt0.o": {
+      "bytes": 1712,
+      "sha256": "6fe4b6088899bd53efae1ea1e4783b7deab07b13f3d40cff7b46285907f19804",
+      "mode": 420
+    },
+    "libnix20.a": {
+      "bytes": 28720,
+      "sha256": "0731c54ad32272f5ab0d5ecd3f1f93d7aa4fc7c6ac0a5923eb26125633556e8c",
+      "mode": 420
+    },
+    "libnixmain.a": {
+      "bytes": 156,
+      "sha256": "ad54158e95516aa6f3b04a8b3d835a48ecbaaea962cd178d5fb66995dcef19df",
+      "mode": 420
+    },
+    "libnix.a": {
+      "bytes": 87468,
+      "sha256": "d64619bc74933ac5312ef6db0f8d4cd62b3918f9f4a5805863e7d15536fcb144",
+      "mode": 420
+    },
+    "libstubs.a": {
+      "bytes": 11992,
+      "sha256": "55dbd0626cb472d89ab5d1bd234e6013df178f2cd3b83266bf4b82c68f1a79de",
+      "mode": 420
+    },
+    "libamiga.a": {
+      "bytes": 297694,
+      "sha256": "10d78b6d303a99677c0bf29a8e1653d62669f69f395691646393020325084021",
+      "mode": 493
+    },
+    "libgcc.a": {
+      "bytes": 90908,
+      "sha256": "8bed858c8a5797471c3bc130df341824121c5d0f0908345dfe6ce0ceccc3569b",
+      "mode": 420
+    }
+  },
+  "helper_selection_evidence": "DRIVER_LOOKUP_ONLY_NOT_HELPER_INVOCATION",
+  "compiler_process_policy": {
+    "compiler_session": "OWNED_NEW_SESSION_PER_DRIVER_CALL",
+    "failure_cleanup": "TERMINATE_REAP_OWNED_COMPILER_PROCESS_GROUP_ONLY",
+    "helper_selection": "DRIVER_LOOKUP_ONLY_NOT_HELPER_INVOCATION",
+    "cleanup_reserve_seconds": 5
+  },
+  "native_execution": "NOT_RUN",
+  "emulator_execution": "NOT_RUN",
+  "physical_execution": "NOT_RUN",
+  "scope": "Compiler/link and offline saved-byte proof only; no target ownership, timing, device or audio acceptance."
+}

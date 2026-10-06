@@ -1,0 +1,1 @@
+Assertion failed: (pt_sampler_mixed_advance(f->pool,f->revision,f->command[0],NULL)==PT_SAMPLER_MIXED_PENDING), function smf_cancel_phase, file sampler_mixed_readers_test.c, line 110.

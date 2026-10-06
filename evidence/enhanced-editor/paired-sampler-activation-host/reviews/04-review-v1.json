@@ -1,0 +1,99 @@
+{
+  "status": "SOURCE_ONLY_CHANGES_REQUIRED",
+  "execution": "NOT_RUN: no compiler/test/caller/target/Git action by reviewer",
+  "reviewed": {
+    "tests/sampler_mixed_activation_test.c": {
+      "bytes": 23743,
+      "sha256": "63c4fb92ea195b634ab4624b8433cbf423ee756ffc9e324d8860c4e0e526906a"
+    },
+    "tests/test_sampler_mixed_activation.py": {
+      "bytes": 6320,
+      "sha256": "32ec40e3195ed2d3e625c1a3a7d3dffd4eaf674220087c941492fe692b34e6e1"
+    },
+    "src/core/mixed_readers_activation.c": {
+      "bytes": 39349,
+      "sha256": "b958ef6eb2f156a15b112f6d0a11dd6f55499419cdbfdd82f3598dadccc629c2"
+    },
+    "src/core/mixed_readers_activation.h": {
+      "bytes": 9422,
+      "sha256": "e45b5bf951a594004ba1efd37ac323d5e9c1247ee63a058df529ecb239a9c753"
+    },
+    "src/editor/sampler_mixed_readers.h": {
+      "bytes": 9694,
+      "sha256": "77477f67b51c8284099b611c720ae1a7c5d136774484fa049745e76c129a635e"
+    },
+    "src/editor/sampler_mixed_readers.c": {
+      "bytes": 40675,
+      "sha256": "5c1eaa92dbf2912d122e11eb3819abf996d0a39139c9f5b59f260ecba7635021"
+    },
+    "tests/sampler_mixed_readers_test.c": {
+      "bytes": 41970,
+      "sha256": "205bcf033f69c8d8a1eab296e0f35449ba4249ef5f06aa20d07524266c8e937d"
+    }
+  },
+  "findings": [
+    {
+      "id": "R1",
+      "severity": "blocking_before_current_source_proof_claim",
+      "path": "tests/sampler_mixed_activation_test.c",
+      "lines": [
+        90,
+        91,
+        174,
+        175,
+        176
+      ],
+      "issue": "source_quiet writes callback_owner=NULL when quiet_result==1. The claimed read-only independent observation itself performs the MODEL source shutdown after unknown source_close.",
+      "fix": "Move the separate MODEL callback-source shutdown transition outside source_quiet. The callback must verify exact registration, no future callback_owner, no live command/reader reference and return observed proof without mutation; retain at 0/-1/malformed otherwise. Keep source_close once and preserve the unknown result."
+    },
+    {
+      "id": "R2",
+      "severity": "blocking_before_reader_first_drainage_claim",
+      "path": "tests/sampler_mixed_activation_test.c",
+      "lines": [
+        64,
+        67,
+        70,
+        76,
+        77
+      ],
+      "issue": "reader_quiet removes the entire command record during cancellation. A subsequent independent command quiet for that genuine backend command asserts c, so valid reader-first proof ordering cannot drain. Current combined lifetimes only detach command before retiring readers.",
+      "fix": "Preserve copied command identity/cancelled state, erase all geometry/card references and prevent activation; later command_quiet supplies its own exact independent proof. Alternatively exact absent-command positive proof needs explicit genuine identity history. Add combined reader-first cancellation/drainage, preserving pins until both domains release."
+    },
+    {
+      "id": "R3",
+      "severity": "strengthen_fixture_contract",
+      "path": "tests/sampler_mixed_activation_test.c",
+      "lines": [
+        33,
+        40,
+        47,
+        51,
+        53,
+        54,
+        55,
+        56,
+        67,
+        73
+      ],
+      "issue": "Port callbacks compare only portions of registration identity; commit validates each action inside the effect loop and does not compare the complete submitted packet to the port publication copy. Genuine current callers provide the expected values, but the fixture has weaker gates than the frozen port contract.",
+      "fix": "Check full registration owner/queue/session/generation in publish and quiet callbacks; compare full copied packet and prevalidate every touched key, slot, live retained geometry and unique slot before any software effect. Keep intentional partial=-1 injection explicit after those admission checks."
+    }
+  ],
+  "coherent_existing_wiring": [
+    "Exactly one actual typed queue is created by activation owner and borrowed into factory; dormant original fixture queue is only restored for independent teardown. No second queue from owned backend.",
+    "Factory receives complete activation/underlying allocator/paired-port context extents; own full queue and holder guards remain in force.",
+    "Caller expected master pins expire only after factory own preparation completes; independently retained masters and Chip/card leases carry the transfers.",
+    "CONTROL/STOP use original positive getter keys with expected=NULL and preserve reader handles after detached command closure.",
+    "Early fire preserves original frame/window; one paired copied software operation applies control or stop; no event/domain/span/holder traversal in model fire.",
+    "Partial commit returns -1 after one software effect, retaining all sixteen genuine queue readers until explicit separate quiet; no automatic reset/retry.",
+    "Factory handles/pool are explicitly closed before owner q close/source shutdown; q identity remains opaque after consumption."
+  ],
+  "qualification_limits": [
+    "Source inspection only: no execution evidence from this review.",
+    "Combined runner freezes twelve overlays on c4cbc0419a920e70ed4db1194373a75a6b1a871e; two actual bounded compiler/test calls, saved source bytes and before-after source/protected/index checks are specified.",
+    "Independent frozen activation qualification remains separate; combined C includes factory constructor and inherited typed queue fixture, not the standalone activation constructor.",
+    "No timer/native MMIO/DMA, physical capacity/order/completion/voice stop, true timestamps, audio or listening acceptance."
+  ],
+  "human_decision_required": false
+}

@@ -1,0 +1,8 @@
+raw.o: src/core/raw.c src/core/raw.h src/core/pcm.h \
+ $SDK/lib/gcc/m68k-amigaos/6.5.0b/include/stddef.h \
+ $SDK/m68k-amigaos/sys-include/stdint.h \
+ $SDK/m68k-amigaos/sys-include/machine/_default_types.h \
+ $SDK/m68k-amigaos/sys-include/sys/features.h \
+ $SDK/m68k-amigaos/libnix/include/_newlib_version.h \
+ $SDK/m68k-amigaos/sys-include/sys/_intsup.h \
+ $SDK/m68k-amigaos/sys-include/sys/_stdint.h

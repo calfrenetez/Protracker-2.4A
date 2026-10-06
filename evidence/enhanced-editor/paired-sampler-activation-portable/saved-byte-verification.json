@@ -1,0 +1,19 @@
+{
+  "status": "PASS_INDEPENDENT_OFFLINE_SAVED_BYTES_PORTABLE_NEVER_EXECUTED",
+  "checks": [
+    "Exact root freeze, caller/verifier and five tools/seven runtime bytes remain ordinary and pinned",
+    "All frozen host/source inputs, exact successful host-call evidence, exact module overlays and protected 16 files match",
+    "Saved c4 HEAD/empty-index records and independent archive plus exact overlays/font reconstruction match; no live Git query",
+    "Exact once-only compiler/link argv/logs RC0/empty stderr, sanitized environment and saved group-quiescence records; parsed helper/runtime lookups and complete dependency union match pinned bodies; helper selection is lookup only, no helper invocation or product execution claim"
+  ],
+  "source_count": 933,
+  "unit_count": 28,
+  "observed_compiler_calls": 41,
+  "dependency_count": 99,
+  "product": {
+    "bytes": 266204,
+    "sha256": "f4c5eeac8cfc6a5ebd4081eceff8ea33691bc2ce3fe5dccfbcb99984f9ca8342",
+    "mode": 493
+  },
+  "scope": "Pure offline saved-byte verification. No compiler/product/target replay."
+}

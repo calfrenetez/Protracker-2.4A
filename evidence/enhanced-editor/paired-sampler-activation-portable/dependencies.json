@@ -1,0 +1,497 @@
+{
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/tests/sampler_mixed_activation_test.c": {
+    "bytes": 27118,
+    "sha256": "43ac611f5ccec110002931386e07152af09b0a335eb23f138ce12dc6dde2ad03",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/tests/sampler_mixed_readers_test.c": {
+    "bytes": 41970,
+    "sha256": "205bcf033f69c8d8a1eab296e0f35449ba4249ef5f06aa20d07524266c8e937d",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/tests/mixed_scheduled_readers_test.c": {
+    "bytes": 42472,
+    "sha256": "1ae794701271d3551c9d852f820a6a827d4d02b517483630fcfa3e23073ebca2",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/tests/amigus_wavetable_cache_test.c": {
+    "bytes": 13852,
+    "sha256": "0dfb01bd967669b0661ea01cdcec22800dc98f6c0476a83d3995975b83c18eef",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/tests/amigus_reservation_test.c": {
+    "bytes": 5856,
+    "sha256": "dad17211f55fa80908f0a01f0f5482a1148946b324267fbd872caeab79205572",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/amigus_reservation.h": {
+    "bytes": 3404,
+    "sha256": "ee57be55b9865fd19d14b27b22af6e2aa6b0466b7f21da5b313016efe9a0b646",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/sys-include/assert.h": {
+    "bytes": 1192,
+    "sha256": "1bd08ced27ea4e39a158a209f89e72a3aa0979aae45b84e753e519a80e018a7b",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/sys-include/_ansi.h": {
+    "bytes": 2625,
+    "sha256": "5c6403b471ee897c9a6c12e00a58617247804eb3ee72d7baeb7c08616090dd1d",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/sys-include/newlib.h": {
+    "bytes": 7208,
+    "sha256": "2aba2f7be6a870f4f71d4a87bc2d42c058e7ffdfa651ca9aebae30b081cf3e1c",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/libnix/include/_newlib_version.h": {
+    "bytes": 139,
+    "sha256": "c1b40b9eb9ce7f7b1581f01fa3c2cb95b7e9f6d86212dab7af887c260b8c234f",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/sys-include/sys/config.h": {
+    "bytes": 7091,
+    "sha256": "8c41585c4d6f2e504ea8f7deb6df8ae91a0e81d4b6df4260d0ab540e24ba6291",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/sys-include/machine/ieeefp.h": {
+    "bytes": 9750,
+    "sha256": "1fac67951c04e67e4ea09753a1c7ea9c444f63e851e85fafa165212b581c0caa",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/sys-include/sys/features.h": {
+    "bytes": 15825,
+    "sha256": "bea5c315d5ca2c0187cd61eab0cac07dbe6e25a79a6124f4f1d290430b76a1d0",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/libnix/include/stdio.h": {
+    "bytes": 9585,
+    "sha256": "303faa533d6fa8a4a1cffe94c9e9e2503106979a62bfdb136f9efba546675247",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/libnix/include/string.h": {
+    "bytes": 2742,
+    "sha256": "e3892b819de58d43abad679017e5902d9ba91fd65c176e28df258cc7919b2db3",
+    "mode": 493
+  },
+  "$SDK/m68k-amigaos/sys-include/sys/cdefs.h": {
+    "bytes": 23387,
+    "sha256": "48d785331f1018c30119cfffb51060cba4133c5bbf0d88d0be27ab1f3a443d3b",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/sys-include/machine/_default_types.h": {
+    "bytes": 6650,
+    "sha256": "5d8f9f7ead7927e4b8b7ed00172e84f2ae82ea7f5f6ba3240ff813a9236771b3",
+    "mode": 420
+  },
+  "$SDK/lib/gcc/m68k-amigaos/6.5.0b/include/stddef.h": {
+    "bytes": 13776,
+    "sha256": "08af5ba7d8fd43d802efcb43a20c03155e89ec82722671876a5eb5209c9f6aa9",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/sys-include/sys/types.h": {
+    "bytes": 6448,
+    "sha256": "92a05e633c6b9ab96e778ecfc95a68d26b95f686ecf74c3aac023a4f015ceeca",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/sys-include/machine/_types.h": {
+    "bytes": 112,
+    "sha256": "44544ecbbc10c8aa58ca2da6d0617ffeee5af847af24515ab108c8218d6d92c8",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/sys-include/sys/_types.h": {
+    "bytes": 4965,
+    "sha256": "6bd87e7bde70bf3506e9470ae6499daa2a3acea075915e1ddf573eddca2528c0",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/sys-include/sys/lock.h": {
+    "bytes": 2555,
+    "sha256": "76842985d0c09740ece1920efa93c1f68c2160a7a81656c5fff26da9094f0d11",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/sys-include/sys/_stdint.h": {
+    "bytes": 1824,
+    "sha256": "49f8328943afa2a83ed4a35fcb808ed08b8c9fcb55373c786fb1b1d3a21952d7",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/sys-include/sys/_pthreadtypes.h": {
+    "bytes": 8381,
+    "sha256": "515128c9c933673f5273d0b0ff6e0f5e170ba949957e25bc4ee89c3e73169b5e",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/sys-include/machine/types.h": {
+    "bytes": 231,
+    "sha256": "2979fad7fe3ef1fc01bd06640841114f0a0f3b5d33ada20e35a2bd38c27a4931",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/libnix/include/strsup.h": {
+    "bytes": 1790,
+    "sha256": "1d15d972c1c9d168ffac1fa16cc2cb2f159d3e12d56af4bcaab070a3ba5a0725",
+    "mode": 420
+  },
+  "$SDK/lib/gcc/m68k-amigaos/6.5.0b/include/stdarg.h": {
+    "bytes": 4072,
+    "sha256": "422dc8918c30cc1752b2c185f751f9f836cce2b65ca60fb0777f0dd527c33a47",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/libnix/include/stdlib.h": {
+    "bytes": 44,
+    "sha256": "f51e103cc93590a591ea65efd1bf5545657f1eab34ba106dcc6f9de739ab2747",
+    "mode": 493
+  },
+  "$SDK/m68k-amigaos/sys-include/stdlib.h": {
+    "bytes": 13044,
+    "sha256": "c5a89c784fa1a750f1d2362093ddd29fcffc99490403a2b74c85fcda01cede12",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/libnix/include/errno.h": {
+    "bytes": 304,
+    "sha256": "c1bc488a81c2856da4597e6b09ce447db404a0f20acba0b661e8a04302a07b2b",
+    "mode": 493
+  },
+  "$SDK/m68k-amigaos/libnix/include/sys/errno.h": {
+    "bytes": 67,
+    "sha256": "afd599e47b4775649d57c614e39f12a0e50cd041862cdd282ab0674193b3e17f",
+    "mode": 493
+  },
+  "$SDK/m68k-amigaos/sys-include/sys/errno.h": {
+    "bytes": 7923,
+    "sha256": "43bcd99e6b52f224ad141adbdeff70a53d9ebcb7eb01028a79df323cf07bab97",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/libnix/include/sys/reent.h": {
+    "bytes": 219,
+    "sha256": "04f3c1df7cf2814753eba6afade64bd09f3d2cb23df5baac56a526d455d95a27",
+    "mode": 493
+  },
+  "$SDK/m68k-amigaos/sys-include/machine/stdlib.h": {
+    "bytes": 138,
+    "sha256": "43552e520d412993325ba62cb496839cd03fd46b0df67149a5ccbe1b95c45fdd",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/playback_internal.h": {
+    "bytes": 1893,
+    "sha256": "5d76f20f2c9a7eda89c3543a897f053c97f9460a847d2d70b32b8b71c14775e2",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/amigus_wavetable_cache.h": {
+    "bytes": 3792,
+    "sha256": "8c449f009eac14807a9521d16a756345dd531e47b50312a3cabf96ee7ea2ee9c",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/amigus_sample_ram.h": {
+    "bytes": 2813,
+    "sha256": "005111323eb1884112230ea415fbfb75e01d560618326148e08790d4f23fadf6",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/sample_cache.h": {
+    "bytes": 1999,
+    "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/sys-include/stdint.h": {
+    "bytes": 12838,
+    "sha256": "92ab9407509d5e6ba084ba7b71900496d6f860b9e85552fe6583ab256aed6e7e",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/sys-include/sys/_intsup.h": {
+    "bytes": 5640,
+    "sha256": "bafd67248df6ebffd5455a8c8f9aa9fcb572e84ffb88d89824115705764b3198",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/playback_pcm.h": {
+    "bytes": 6034,
+    "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/pcm.h": {
+    "bytes": 2494,
+    "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/mixed_scheduled_readers.h": {
+    "bytes": 11330,
+    "sha256": "da39231a26d4629b6707ace68a58ddb3b6e38a1be354e2700d28f4a79f37aed5",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/document.h": {
+    "bytes": 1965,
+    "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/project.h": {
+    "bytes": 8827,
+    "sha256": "e1a749800258b1f1db1dedcd7d5d36970abbf7494279cb3669212757f982e21a",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/channels.h": {
+    "bytes": 1818,
+    "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/mod_inspect.h": {
+    "bytes": 1240,
+    "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/pp20.h": {
+    "bytes": 966,
+    "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/elapsed_clock.h": {
+    "bytes": 1659,
+    "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/amigus_voice_plan.h": {
+    "bytes": 1701,
+    "sha256": "0910081dcb6cd26709c8fc1b5028aa2b0e693a8b48789173dac491b3a511c850",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/editor/sampler_paula.h": {
+    "bytes": 2718,
+    "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/editor/sampler.h": {
+    "bytes": 6264,
+    "sha256": "d19465c8b3866cfb67cfaca98457c2201165675cc3a4f45804d3c00b17284433",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/pattern.h": {
+    "bytes": 3642,
+    "sha256": "f8c9abde09c4fe495ae77f25c070da647eab038845729edc83adec08c5678d53",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/slices.h": {
+    "bytes": 2003,
+    "sha256": "31cd82785c2b86c41d9cde1f7a29056c9d70ec41fb7a9bfb1a5679ba762c24f7",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/svx.h": {
+    "bytes": 1442,
+    "sha256": "824541cd25b72b5820e091cfc9f4e6a5f41351fd0630dddc09aefc0405036814",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/raw.h": {
+    "bytes": 1171,
+    "sha256": "f9f47added4df41bb7b15aa3b1b7a4d8131a2c4aa19266436318483a41bc0f3b",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/editor/sampler_wavetable.h": {
+    "bytes": 4278,
+    "sha256": "5b64c95994f3837834b39e3918847f811c1f037cc5a5ba4467031f753783561d",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/editor/sampler_internal.h": {
+    "bytes": 3679,
+    "sha256": "8ce04909cd657d0caa6598416cfce2ee91109bf8fde782fc7795d35b116ac3e2",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/editor/sampler_mixed_readers.h": {
+    "bytes": 9694,
+    "sha256": "77477f67b51c8284099b611c720ae1a7c5d136774484fa049745e76c129a635e",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/mixed_readers_activation.h": {
+    "bytes": 9661,
+    "sha256": "d7309330627b606209c44b2759bcfbb35000ace4813d9acb938562376ce3ba35",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/editor/sampler_mixed_readers.c": {
+    "bytes": 40675,
+    "sha256": "5c1eaa92dbf2912d122e11eb3819abf996d0a39139c9f5b59f260ecba7635021",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/editor/sampler_paula_internal.h": {
+    "bytes": 3013,
+    "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/editor/sampler_wavetable_internal.h": {
+    "bytes": 1671,
+    "sha256": "def1ef4ed705a4b2d3af3030e1072dc7e74bd238bb9f23fbc701241b339fa4df",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/editor/project_snapshot.h": {
+    "bytes": 1203,
+    "sha256": "dbb1206c1e8bfd317b515086f9d064c6eacd2450228893bb394f278ed6c0b2df",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/sys-include/limits.h": {
+    "bytes": 3918,
+    "sha256": "a3b9dc330bf7ac4f0cec2911064a529be1cfb0b9692a9d25365f34580d85b75d",
+    "mode": 420
+  },
+  "$SDK/m68k-amigaos/sys-include/machine/limits.h": {
+    "bytes": 3776,
+    "sha256": "50a2c0d11af5c27ca1c1877992e0ea11eaec55f38f47bdbd070a46462b01653d",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/mixed_readers_activation.c": {
+    "bytes": 39399,
+    "sha256": "f4e608ef7f80a8635417fe78c68ac4852e9e404faf3c4b4d896dae5942965571",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/mixed_scheduled_readers.c": {
+    "bytes": 33825,
+    "sha256": "6c0e5b7851056b0cdb72cdad0c408b15efdc6ba21d1357609edfa3fb9cd15de4",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/elapsed_clock.c": {
+    "bytes": 3917,
+    "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/editor/sampler_paula.c": {
+    "bytes": 7401,
+    "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/editor/sampler_wavetable.c": {
+    "bytes": 6727,
+    "sha256": "98784fff3238d96b91685f43a2b41f7bc93fd3be49f91eda5599a9089f3e634b",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/amigus_voice_plan.c": {
+    "bytes": 2018,
+    "sha256": "289c7c3a6b8b1932d219bc61602ba6bd925cbfd3b24e95cbc8aa6f1642134964",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/editor/sampler.c": {
+    "bytes": 64117,
+    "sha256": "91a8025e8ba74d8211f97037285177d0f0412d3c76fa1422ed2b48df0351ff4e",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/pcm_internal.h": {
+    "bytes": 615,
+    "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/wav.h": {
+    "bytes": 1384,
+    "sha256": "8dd0f4454304babb53eef5ecb97cde7bfe6569d292cc0e9a0f204c4a587f2028",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/editor/sampler_workflow.h": {
+    "bytes": 4356,
+    "sha256": "a1eff0addfd1fded1185029f68bd9d6d885d5a421b702b40f76cb28af63fac1a",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/sample_usage.h": {
+    "bytes": 3167,
+    "sha256": "0ed540356b9ff1bd2ae651de2ee183b6c0c45af84f352eb02fab07d9155565a0",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/mod_project.h": {
+    "bytes": 5051,
+    "sha256": "c28407161729fc0fea2398f79341a866f03913b092769674bd871bb23adb59ee",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/editor/sampler_master_guard_internal.h": {
+    "bytes": 1059,
+    "sha256": "f691504b22dd9250a3442953527470e4dd813a4d8eea900412b2afe1d3ab9a7a",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/editor/slots.c": {
+    "bytes": 3233,
+    "sha256": "60ab6a784d4bc47285bb436b975cdd6ee0bad4743bdf9f0817837d818645f7fa",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/pcm_filtered.c": {
+    "bytes": 4604,
+    "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/sinc_kernel.h": {
+    "bytes": 28756,
+    "sha256": "058629396a0b22daa67f75c909adf9181fc4e52bfc668890fe2abc3231c3a185",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/slices.c": {
+    "bytes": 6060,
+    "sha256": "2951045844f6fdebdd80afe12fe7a5afc1f37bf837c2f49d840f14867835342f",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/pattern.c": {
+    "bytes": 15753,
+    "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/document.c": {
+    "bytes": 9127,
+    "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/pp20.c": {
+    "bytes": 7187,
+    "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/project.c": {
+    "bytes": 46481,
+    "sha256": "be3094ffb8a57df8e0f7a58a946f7f20978715f17d2103234027824af882b094",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/mod_project.c": {
+    "bytes": 23640,
+    "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/mod_inspect.c": {
+    "bytes": 3513,
+    "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/channels.c": {
+    "bytes": 6996,
+    "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/pcm.c": {
+    "bytes": 7061,
+    "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/wav.c": {
+    "bytes": 7200,
+    "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/svx.c": {
+    "bytes": 7817,
+    "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/raw.c": {
+    "bytes": 3920,
+    "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/amigus_reservation.c": {
+    "bytes": 3456,
+    "sha256": "9d448f569e2f86331085343626e2b653e45c1fb96aaaf6c709f0eefe168e1e27",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/amigus_wavetable_cache.c": {
+    "bytes": 6165,
+    "sha256": "c634faa6c6c6af0086ec62a92e49ee2d6b2f90adbb0ebd0acabb901c497cae8d",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/amigus_sample_ram.c": {
+    "bytes": 3973,
+    "sha256": "5c25d93bf9166b568fccf599b392a4ca11c24923efc915f0dd4e4dfad7e1fa9a",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/sample_cache.c": {
+    "bytes": 4018,
+    "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+    "mode": 420
+  },
+  "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/source/src/core/playback_pcm.c": {
+    "bytes": 11344,
+    "sha256": "f00995c1ca81176fc244968b4276b41624767f42c2963eb90482f23953d09a1f",
+    "mode": 420
+  }
+}

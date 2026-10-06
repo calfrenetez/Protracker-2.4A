@@ -1,0 +1,1146 @@
+[
+  {
+    "group": "factory",
+    "attempt": "attempt-2gbkbccx",
+    "status": "FAIL",
+    "current": false,
+    "record_original_pin": {
+      "bytes": 160806,
+      "sha256": "11db7a7d5e9c9f895c6f3901246737e8b0d99e8a76d52e4feca6c09b18420359"
+    },
+    "input_count": 927,
+    "calls": [
+      {
+        "label": "factory-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 7.023174250003649,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "factory-run",
+        "status": "FAIL",
+        "returncode": -6,
+        "elapsed_seconds": 0.39368300000205636,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 154,
+          "sha256": "97a6c8c2770c67e2ff3ee6cb846e28ed59d424dcd78b3fc95ad898548e0d8751"
+        }
+      }
+    ],
+    "error": "RuntimeError('factory-run first failure preserved')"
+  },
+  {
+    "group": "factory",
+    "attempt": "attempt-bctzmzsz",
+    "status": "PASS",
+    "current": false,
+    "record_original_pin": {
+      "bytes": 163327,
+      "sha256": "9c8ed8798e777c0e1fa88ae3eeb4afe4a1a395a3ada5965855eddf4b2163aea2"
+    },
+    "input_count": 927,
+    "calls": [
+      {
+        "label": "factory-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 7.056265833001817,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "factory-run",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 0.5965062089962885,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 1164,
+          "sha256": "d22375bbcd976b8be1b00b94803dfe16920e40d5976150b5db82800ecfdc478c"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "paired-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 5.660886290992494,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "paired-run",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 0.3913155000045663,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 725,
+          "sha256": "1b285024f5e96e22849f7228540fc8f461cb2eb5a8fd1f8338ce588fad5f6d9b"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "abi2-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 1.0649339579977095,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "abi2-run",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 0.16470208299870137,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 120,
+          "sha256": "38012f6e8d7e0ca9be8b79f52c5cb9156e801916bab4c082190a598332aa26d6"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    ]
+  },
+  {
+    "group": "factory",
+    "attempt": "attempt-bix8xcys",
+    "status": "FAIL",
+    "current": false,
+    "record_original_pin": {
+      "bytes": 160805,
+      "sha256": "64ac19fd9ee13c2eaa8d46313116adbefe813a711755f47d331485a10850a2dd"
+    },
+    "input_count": 927,
+    "calls": [
+      {
+        "label": "factory-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 7.386049499997171,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "factory-run",
+        "status": "FAIL",
+        "returncode": -6,
+        "elapsed_seconds": 0.5417717919917777,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 157,
+          "sha256": "2e3fcf7f59fd159271e942a7eeaf6f835e85dd33d9bd2e0d3c688948a86e9c7f"
+        }
+      }
+    ],
+    "error": "RuntimeError('factory-run first failure preserved')"
+  },
+  {
+    "group": "factory",
+    "attempt": "attempt-bq2n1ll9",
+    "status": "FAIL",
+    "current": false,
+    "record_original_pin": {
+      "bytes": 160506,
+      "sha256": "772488c8833c885d6b9a7ed0e160971842247a923d6d7f0122117db2a259fcf9"
+    },
+    "input_count": 927,
+    "calls": [
+      {
+        "label": "factory-compile",
+        "status": "FAIL",
+        "returncode": 1,
+        "elapsed_seconds": 6.036937249999028,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 1363,
+          "sha256": "98245c6ff42218879edd502a114f593f6024462349debc8afb66c410d28f1108"
+        }
+      }
+    ],
+    "error": "RuntimeError('factory-compile first failure preserved')"
+  },
+  {
+    "group": "factory",
+    "attempt": "attempt-dgng72gv",
+    "status": "FAIL",
+    "current": false,
+    "record_original_pin": {
+      "bytes": 160805,
+      "sha256": "e0a72915ad0285f88fccfd757cc442f3f700ab6d788aba537d53928ae88bc85c"
+    },
+    "input_count": 927,
+    "calls": [
+      {
+        "label": "factory-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 7.624115250000614,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "factory-run",
+        "status": "FAIL",
+        "returncode": -6,
+        "elapsed_seconds": 0.5892224999988684,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 157,
+          "sha256": "0325b1bcbd2e13d6eeb1c3511e8dc84f759772ebdd9395916b7df1905ecf30e7"
+        }
+      }
+    ],
+    "error": "RuntimeError('factory-run first failure preserved')"
+  },
+  {
+    "group": "factory",
+    "attempt": "attempt-g2k6au4m",
+    "status": "PASS",
+    "current": true,
+    "record_original_pin": {
+      "bytes": 163328,
+      "sha256": "10fdd5480289d99e01a3d6bca817a43f35ea0be666253ed143750138fd39cec1"
+    },
+    "input_count": 927,
+    "calls": [
+      {
+        "label": "factory-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 7.891274666995741,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "factory-run",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 0.7656701670057373,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 1280,
+          "sha256": "b564b11df35e43afc52c5f558a320ee38a4f4d9ca260319f1378dd10b7b411d7"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "paired-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 6.118650833013817,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "paired-run",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 0.41487675000098534,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 725,
+          "sha256": "1b285024f5e96e22849f7228540fc8f461cb2eb5a8fd1f8338ce588fad5f6d9b"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "abi2-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 1.1946309579943772,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "abi2-run",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 0.16514733400254045,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 120,
+          "sha256": "38012f6e8d7e0ca9be8b79f52c5cb9156e801916bab4c082190a598332aa26d6"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    ]
+  },
+  {
+    "group": "factory",
+    "attempt": "attempt-gqksxtqf",
+    "status": "FAIL",
+    "current": false,
+    "record_original_pin": {
+      "bytes": 160805,
+      "sha256": "25545b475a45b03e9a442eafebde3c13b33dbbd91d23005c5bc06346fa719715"
+    },
+    "input_count": 927,
+    "calls": [
+      {
+        "label": "factory-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 7.700264166996931,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "factory-run",
+        "status": "FAIL",
+        "returncode": -6,
+        "elapsed_seconds": 0.4681014999951003,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 175,
+          "sha256": "f8d409b3b856e559af218b4c17d55da0d8141fb4b04f2e2845162b3b2caaff8b"
+        }
+      }
+    ],
+    "error": "RuntimeError('factory-run first failure preserved')"
+  },
+  {
+    "group": "factory",
+    "attempt": "attempt-l6x7h3v3",
+    "status": "FAIL",
+    "current": false,
+    "record_original_pin": {
+      "bytes": 160806,
+      "sha256": "b2a8c28d6582f3fcb8a42f54b0af5a492dccbef685a94625ee6a3f2213a3e7f4"
+    },
+    "input_count": 927,
+    "calls": [
+      {
+        "label": "factory-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 8.048047040996607,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "factory-run",
+        "status": "FAIL",
+        "returncode": -6,
+        "elapsed_seconds": 0.45183279099001084,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 184,
+          "sha256": "22827e7f732bd84107f96719f1a6f24d979af5240dacf805e54a2607c5d0b187"
+        }
+      }
+    ],
+    "error": "RuntimeError('factory-run first failure preserved')"
+  },
+  {
+    "group": "factory",
+    "attempt": "attempt-s7qizuw8",
+    "status": "FAIL",
+    "current": false,
+    "record_original_pin": {
+      "bytes": 160805,
+      "sha256": "90b43df97444a526aaa780a5593c565c34ef2dc871f3c51a70ce980fc276b8c6"
+    },
+    "input_count": 927,
+    "calls": [
+      {
+        "label": "factory-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 8.089964625003631,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "factory-run",
+        "status": "FAIL",
+        "returncode": -6,
+        "elapsed_seconds": 0.3286504169955151,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 190,
+          "sha256": "1514714b738d33111a30622ae4fb1c03f56b3a864208cfc907c6f84f63fbff54"
+        }
+      }
+    ],
+    "error": "RuntimeError('factory-run first failure preserved')"
+  },
+  {
+    "group": "factory",
+    "attempt": "attempt-tko23a4t",
+    "status": "FAIL",
+    "current": false,
+    "record_original_pin": {
+      "bytes": 160806,
+      "sha256": "8dd5f36aebac2ac9f0a347c64d66d4429bbaeaa3302a8b36ee3b339f39c8b1c0"
+    },
+    "input_count": 927,
+    "calls": [
+      {
+        "label": "factory-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 7.791916832997231,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "factory-run",
+        "status": "FAIL",
+        "returncode": -6,
+        "elapsed_seconds": 0.42346504201123025,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 158,
+          "sha256": "935c7cfb32822a632a0d91bdd5276293f19dc6e94c856949f01eecae3894e087"
+        }
+      }
+    ],
+    "error": "RuntimeError('factory-run first failure preserved')"
+  },
+  {
+    "group": "factory",
+    "attempt": "attempt-zcec8pkm",
+    "status": "FAIL",
+    "current": false,
+    "record_original_pin": {
+      "bytes": 160806,
+      "sha256": "a6a19c572e8ffc8e63a6ecbbab5ddcf9feff933c71ee3a8b0ecdb8795b999114"
+    },
+    "input_count": 927,
+    "calls": [
+      {
+        "label": "factory-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 7.936161833000369,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "factory-run",
+        "status": "FAIL",
+        "returncode": -6,
+        "elapsed_seconds": 0.25192245800280944,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 136,
+          "sha256": "f2e9c59a97a2425fc400dfe434986ef4ce4b6a556dffb26d4d739a012b0318c5"
+        }
+      }
+    ],
+    "error": "RuntimeError('factory-run first failure preserved')"
+  },
+  {
+    "group": "activation",
+    "attempt": "attempt-5xdsy_5d",
+    "status": "FAIL",
+    "current": false,
+    "record_original_pin": {
+      "bytes": 161634,
+      "sha256": "d01cf53494677180386549c0600ad3e048cf70afea3797918e67580080b88c06"
+    },
+    "input_count": 927,
+    "calls": [
+      {
+        "label": "activation-compile",
+        "status": "FAIL",
+        "returncode": 1,
+        "elapsed_seconds": 4.5463709169998765,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 2418,
+          "sha256": "a68832bdd7a3c2ef73b6f98419de43beb0d4ecd887647224a3010f65f4218c97"
+        }
+      }
+    ],
+    "error": "RuntimeError('activation-compile first failure preserved')"
+  },
+  {
+    "group": "activation",
+    "attempt": "attempt-e6wnd6cm",
+    "status": "PASS",
+    "current": false,
+    "record_original_pin": {
+      "bytes": 164474,
+      "sha256": "fa6e6e80c7e28ebf314eca561b8f7fda54b18eeedc1e37e3c6d2f4052771c0d9"
+    },
+    "input_count": 927,
+    "calls": [
+      {
+        "label": "activation-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 6.5758970829920145,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "activation-run",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 0.4831674169981852,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 1113,
+          "sha256": "39847339da93b6ae674107f75429b657e144346de26a221e0129a107ed707f69"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "paired-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 5.642638167002588,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "paired-run",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 0.37966408299689647,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 725,
+          "sha256": "1b285024f5e96e22849f7228540fc8f461cb2eb5a8fd1f8338ce588fad5f6d9b"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "abi2-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 1.0912642500043148,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "abi2-run",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 0.15553108300082386,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 120,
+          "sha256": "38012f6e8d7e0ca9be8b79f52c5cb9156e801916bab4c082190a598332aa26d6"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    ]
+  },
+  {
+    "group": "activation",
+    "attempt": "attempt-gmiebl3y",
+    "status": "PASS",
+    "current": false,
+    "record_original_pin": {
+      "bytes": 164471,
+      "sha256": "f30af11ca8df78650245f3e87254021a914ecfc2af0df880aa77b1f49012acc3"
+    },
+    "input_count": 927,
+    "calls": [
+      {
+        "label": "activation-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 6.966052249990753,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "activation-run",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 0.5498351249989355,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 1234,
+          "sha256": "898d80d3631741bbbd455c1971ea83ff8efed2c58759b25d1d72be9f7f5b6a81"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "paired-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 5.776151540994761,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "paired-run",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 0.39963124999485444,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 725,
+          "sha256": "1b285024f5e96e22849f7228540fc8f461cb2eb5a8fd1f8338ce588fad5f6d9b"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "abi2-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 1.151731625010143,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "abi2-run",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 0.1760248749924358,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 120,
+          "sha256": "38012f6e8d7e0ca9be8b79f52c5cb9156e801916bab4c082190a598332aa26d6"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    ]
+  },
+  {
+    "group": "activation",
+    "attempt": "attempt-ip42gedj",
+    "status": "FAIL",
+    "current": false,
+    "record_original_pin": {
+      "bytes": 161941,
+      "sha256": "dfa889c7e08b2652291269df37b8e4e457c455e33ecc3a8165da206df2a9011c"
+    },
+    "input_count": 927,
+    "calls": [
+      {
+        "label": "activation-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 6.674945207996643,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "activation-run",
+        "status": "FAIL",
+        "returncode": -6,
+        "elapsed_seconds": 0.2768729999952484,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 184,
+          "sha256": "11a40e48a569f2a7b39ecca2688b48e3e9aa1ef87a52cc39d4b826ba507675a5"
+        }
+      }
+    ],
+    "error": "RuntimeError('activation-run first failure preserved')"
+  },
+  {
+    "group": "activation",
+    "attempt": "attempt-r0b5wm1i",
+    "status": "PASS",
+    "current": true,
+    "record_original_pin": {
+      "bytes": 164472,
+      "sha256": "cac77e161bf68ecf9dc11c287afb2c5d4b287ada76304a2fa024e7db0b7fabd3"
+    },
+    "input_count": 927,
+    "calls": [
+      {
+        "label": "activation-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 7.017277250008192,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "activation-run",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 0.5402911249984754,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 1313,
+          "sha256": "b1614c205f3fe1b972d127320549487ce1ee520d592346f859c1cc9153e06ad8"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "paired-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 5.919094041993958,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "paired-run",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 0.4075799169950187,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 725,
+          "sha256": "1b285024f5e96e22849f7228540fc8f461cb2eb5a8fd1f8338ce588fad5f6d9b"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "abi2-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 1.1510635830054525,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "abi2-run",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 0.18051333399489522,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 120,
+          "sha256": "38012f6e8d7e0ca9be8b79f52c5cb9156e801916bab4c082190a598332aa26d6"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    ]
+  },
+  {
+    "group": "activation",
+    "attempt": "attempt-xqhv_s81",
+    "status": "FAIL",
+    "current": false,
+    "record_original_pin": {
+      "bytes": 161941,
+      "sha256": "bc70717825adcab24fcb36b331221dc928aa053c25e843a28f7391eba72611c2"
+    },
+    "input_count": 927,
+    "calls": [
+      {
+        "label": "activation-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 7.039902292002807,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "activation-run",
+        "status": "FAIL",
+        "returncode": -6,
+        "elapsed_seconds": 0.4558710410055937,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 309,
+          "sha256": "14d9d8950e1ce592b0e715b1e8a5ef88d642e7383cb1e409119df5c478b30ecc"
+        }
+      }
+    ],
+    "error": "RuntimeError('activation-run first failure preserved')"
+  },
+  {
+    "group": "combined",
+    "attempt": "attempt-_6o00oxv",
+    "status": "FAIL",
+    "current": false,
+    "record_original_pin": {
+      "bytes": 165044,
+      "sha256": "b9ae7cdc59edddba7138b812e7cc2eef347fa3bb23abc0fba7f81500a6897e23"
+    },
+    "input_count": 933,
+    "calls": [
+      {
+        "label": "combined-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 8.606011625000974,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "combined-run",
+        "status": "FAIL",
+        "returncode": -6,
+        "elapsed_seconds": 0.5619787089963211,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 555,
+          "sha256": "ad0eab04978b088ca861eaf237248418e111267c7d6c42ce5930f9fb9f238c6d"
+        },
+        "stderr": {
+          "bytes": 154,
+          "sha256": "240246ae34d748c192f3c290f3d4b6eea0661ef57058630060930e1410860738"
+        }
+      }
+    ],
+    "error": "RuntimeError('combined-run first failure preserved')"
+  },
+  {
+    "group": "combined",
+    "attempt": "attempt-ln2dk4t_",
+    "status": "PASS",
+    "current": true,
+    "record_original_pin": {
+      "bytes": 164976,
+      "sha256": "86f48b4507322035542f94e874ae813a1a7436870bf93fabb58c6827dddf8977"
+    },
+    "input_count": 933,
+    "calls": [
+      {
+        "label": "combined-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 8.664954624997335,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "combined-run",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 0.7404247499944177,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 1760,
+          "sha256": "84bebd4a722df63a1a49bbd27a4668b48cfa08f2831c69e7f74178d76989c8c9"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    ]
+  },
+  {
+    "group": "combined",
+    "attempt": "attempt-x6zqhsw4",
+    "status": "FAIL",
+    "current": false,
+    "record_original_pin": {
+      "bytes": 165044,
+      "sha256": "3ac2b433489eddb667bbfada835562a5bcda04cc53295d5b67b9ea35fa0b4dda"
+    },
+    "input_count": 933,
+    "calls": [
+      {
+        "label": "combined-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "elapsed_seconds": 8.927798042001086,
+        "timeout_seconds": 120,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "combined-run",
+        "status": "FAIL",
+        "returncode": -6,
+        "elapsed_seconds": 0.4862657919875346,
+        "timeout_seconds": 180,
+        "stdout": {
+          "bytes": 555,
+          "sha256": "ad0eab04978b088ca861eaf237248418e111267c7d6c42ce5930f9fb9f238c6d"
+        },
+        "stderr": {
+          "bytes": 154,
+          "sha256": "240246ae34d748c192f3c290f3d4b6eea0661ef57058630060930e1410860738"
+        }
+      }
+    ],
+    "error": "RuntimeError('combined-run first failure preserved')"
+  }
+]

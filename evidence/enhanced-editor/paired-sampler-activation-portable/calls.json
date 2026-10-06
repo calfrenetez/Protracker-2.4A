@@ -1,0 +1,1752 @@
+[
+  {
+    "label": "compiler-version",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "--version"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.08325062500080094,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 247,
+      "sha256": "5946ce0c1a43a84e1c7af8cfaa306b2f4bd276dd02164560d5674bcc91250d0b",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "helper-cc1",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-print-prog-name=cc1"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.026268749992595986,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 124,
+      "sha256": "205fe15aad932059a81f40630960d8ba4f38aa9f01c8fabbfa8e8f2b60d2f01c",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "helper-as",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-print-prog-name=as"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.02560562500730157,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 148,
+      "sha256": "f5e8714a01b01970db9cb54cd8c71311c581f42e06a00ccd2d3ef0320242b1f5",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "helper-ld",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-print-prog-name=ld"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.014568167011020705,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 148,
+      "sha256": "b1023244920d9e1dc4a56a48c5b94931397aa780b6a95f06f0f8bfb961e31bff",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "helper-collect2",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-print-prog-name=collect2"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.02456420799717307,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 129,
+      "sha256": "6043e120ce0007bca9c5d8590313291dcabaf4f2deeef54c6fdf81008222e01a",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "runtime-ncrt0-o",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-print-file-name=ncrt0.o"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.014257916001952253,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 120,
+      "sha256": "1562950e2e8cb15a51238fddb72e6e26f0ff2d5a774543473aba0d274a19c45f",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "runtime-libnix20-a",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-print-file-name=libnix20.a"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.014095540987909772,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 123,
+      "sha256": "9060e4a22ea9e716b8f9cf85b5fe5e11a9e6c88ef938b9111d189acc2df8465b",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "runtime-libnixmain-a",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-print-file-name=libnixmain.a"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.015980958007276058,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 125,
+      "sha256": "dd28b9a8319d35bd81f76cd9479f889e7e5628be07a45ef138f35a729c640add",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "runtime-libnix-a",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-print-file-name=libnix.a"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.015262833010638133,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 121,
+      "sha256": "1ca0a83ef891770cbbe671647c7aad9f925ed0b9756c8f85aca35c84961e202a",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "runtime-libstubs-a",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-print-file-name=libstubs.a"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.015430458006449044,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 156,
+      "sha256": "8ce0c56c26f8f09a8af8b76d62c4d380cbfbe8efde13fa64884d8e9e6c93027f",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "runtime-libamiga-a",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-print-file-name=libamiga.a"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.015447999991010875,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 156,
+      "sha256": "c2c8e44936c32e01094e9de761e57c62c7bb834fbf6cabd464465bf3b17090c4",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "runtime-libgcc-a",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-print-file-name=libgcc.a"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.014267916994867846,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 125,
+      "sha256": "b1912e77c4c1160ce749ca74fbe6edabd5896c2291188e718a9cdfd72c84d57a",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-00",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "tests/sampler_mixed_activation_test.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.08388158399611712,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 5370,
+      "sha256": "ebe89bb538be1027a96bb5848fdfe8bff18a3edb7556d520fcd096ffe22533f2",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-01",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/editor/sampler_mixed_readers.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.04544725001323968,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 3866,
+      "sha256": "efd00d9e7a59480095819f836a613451a7445dbe3840de7388174fa5204084a7",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-02",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/mixed_readers_activation.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.041775874997256324,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 2978,
+      "sha256": "b1253ad42b8fe84bff0920df41517ab3add178567fc1dfb2811e6069c9cc4b71",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-03",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/mixed_scheduled_readers.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.04620070800592657,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 2940,
+      "sha256": "54442e8a67692be6edad20d27e3662acbbb2dc73aad58ad7b23736aa99263dfd",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-04",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/elapsed_clock.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.04615629200998228,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 2677,
+      "sha256": "7649b08c78af4bc4cb103d1549be8cee06ac757e10a5b6578a43a16049038361",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-05",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/editor/sampler_paula.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.04735537500528153,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 3329,
+      "sha256": "a48dba34e0041f01a5a244832c13ae6728bbba974dd87219df385d21d9f7d192",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-06",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/editor/sampler_wavetable.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.0504374170122901,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 3296,
+      "sha256": "8ab387f52ec047dd21c4d25bc30de61482b7b92dbd1f44e8253f94fe143938b0",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-07",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/amigus_voice_plan.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.05827020799915772,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 1120,
+      "sha256": "40b681e805f4ee6e72b24d0444c05feab7f718791d29c100705903048feb421b",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-08",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/editor/sampler.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.05173349998949561,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 3651,
+      "sha256": "82e6ec5116a74613741712d56d70f100eae3773c14b2b0a7a0f2e66aaefbf5e4",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-09",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/editor/slots.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.042280500012566335,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 2877,
+      "sha256": "6d965099f3d42fe6e1d3f339e33832baa6cfbfba2504c2d0d0ef07c1f94db8b4",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-10",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/pcm_filtered.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.045426333002978936,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 2691,
+      "sha256": "ecfca1c53587ed34fc179bac0275d99ba44e46c144f39ca6e722c4b08bbbeb46",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-11",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/slices.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.04678554199927021,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 2674,
+      "sha256": "6eca9be45c2f9e1b81b0d88fa1ccd7ab10c728f6d1a8b8290d29176b9f5d3271",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-12",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/pattern.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.039750167008605786,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 2719,
+      "sha256": "0a6f724c52f97951e0cc34b50a4aae9db35c2a99d21128cc6f38f72dc4ba32e5",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-13",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/document.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.04731683399586473,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 2787,
+      "sha256": "1f192fe62ece619be6d88a2eb02b0a026130d9d8ee2387791ab4e545a29b5a20",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-14",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/pp20.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.050830624997615814,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 2653,
+      "sha256": "6b987584a6c74fb8817a7124512d83b18df1c43a53f40741061c14a0343ad866",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-15",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/project.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.05084816699672956,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 2724,
+      "sha256": "e4aea7b8ba66c48b8d57c86bded28f6e6bcd657d0c725ff79d36a6d28525b982",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-16",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/mod_project.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.044510499996249564,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 2754,
+      "sha256": "e4faeae096c9ec48ef2fc5ad7099505e81e7e2ce0fe48974860884543a80b668",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-17",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/mod_inspect.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.04806762500084005,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 2671,
+      "sha256": "c7ba9b4659696523b158251b58782db04ab261cbaa3ba9c8a33a76f1e25d7f57",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-18",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/channels.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.04786704100843053,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 2665,
+      "sha256": "e6d857bcb44c2f2752e7795df3426c8312bd2bd7d6ad93177da0fc47597b1cc5",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-19",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/pcm.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.046835165994707495,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 1767,
+      "sha256": "01c3547804956b0748114b63f1de3c6d9d5093feac2a7ff56dfeb2e0290c867a",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-20",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/wav.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.049659791999147274,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 2665,
+      "sha256": "30fc4d262f9607a81b3b62ef30564262161af272e84a2320ac95cf8fd56cc5fb",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-21",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/svx.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.04832345798786264,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 2665,
+      "sha256": "3ec39f4b71cc8765d576a56a9b4c058099052b7c3f21a3643f8dbb0f08bea835",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-22",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/raw.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.04678579200117383,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 982,
+      "sha256": "153faaede332c2e41619a5bd53c34e720a48f4d8135fb16442b2c5d1f1462628",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-23",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/amigus_reservation.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.050361415997031145,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 2440,
+      "sha256": "6e3688b0a932bb1bffd9173468fe4f563c95087c0ef8f0bdd8f1ce3897e04bef",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-24",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/amigus_wavetable_cache.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.05217799999809358,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 2938,
+      "sha256": "5c01c3de5a00b74ae23e85c939af97a188bfc03f09baa3cb6caff384337caef4",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-25",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/amigus_sample_ram.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.05121024999243673,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 2829,
+      "sha256": "85cd7ee4ffc8d164690fa61f5872740ed7ee6c1251e9963894465c8f2ea2fd6a",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-26",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/sample_cache.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.043781082989880815,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 2935,
+      "sha256": "92ec819ff7d6e393804022b7c06ea0558e530db37a234dd44bc0a333b0bbb928",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "dependency-27",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "-M",
+      "src/core/playback_pcm.c"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 0.047911500005284324,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 2868,
+      "sha256": "29b3f6cd229dfc310a8352b1ace422b53297267c479f637c556fc0110cfa1cb6",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  },
+  {
+    "label": "compile-link",
+    "argv": [
+      "$SDK/bin/m68k-amigaos-gcc",
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-",
+      "tests/sampler_mixed_activation_test.c",
+      "src/editor/sampler_mixed_readers.c",
+      "src/core/mixed_readers_activation.c",
+      "src/core/mixed_scheduled_readers.c",
+      "src/core/elapsed_clock.c",
+      "src/editor/sampler_paula.c",
+      "src/editor/sampler_wavetable.c",
+      "src/core/amigus_voice_plan.c",
+      "src/editor/sampler.c",
+      "src/editor/slots.c",
+      "src/core/pcm_filtered.c",
+      "src/core/slices.c",
+      "src/core/pattern.c",
+      "src/core/document.c",
+      "src/core/pp20.c",
+      "src/core/project.c",
+      "src/core/mod_project.c",
+      "src/core/mod_inspect.c",
+      "src/core/channels.c",
+      "src/core/pcm.c",
+      "src/core/wav.c",
+      "src/core/svx.c",
+      "src/core/raw.c",
+      "src/core/amigus_reservation.c",
+      "src/core/amigus_wavetable_cache.c",
+      "src/core/amigus_sample_ram.c",
+      "src/core/sample_cache.c",
+      "src/core/playback_pcm.c",
+      "-o",
+      "$PRIVATE/outputs/mixed-readers-portable/combined-portable-v3/native/PTSamplerMixedActivationTest"
+    ],
+    "timeout_seconds": 115,
+    "call_budget_seconds": 120,
+    "elapsed_seconds": 3.2236870000051567,
+    "status": "PASS",
+    "returncode": 0,
+    "product_execution": "NEVER_EXECUTED",
+    "execution_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "process_session": "OWNED_NEW_SESSION",
+    "driver_reaped": true,
+    "compiler_process_group_quiescent": true,
+    "stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    }
+  }
+]

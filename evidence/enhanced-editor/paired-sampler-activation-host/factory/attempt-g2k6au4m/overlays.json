@@ -1,0 +1,22 @@
+{
+  "src/editor/sampler_mixed_readers.h": {
+    "bytes": 9694,
+    "sha256": "77477f67b51c8284099b611c720ae1a7c5d136774484fa049745e76c129a635e",
+    "mode": 420
+  },
+  "src/editor/sampler_mixed_readers.c": {
+    "bytes": 40675,
+    "sha256": "5c1eaa92dbf2912d122e11eb3819abf996d0a39139c9f5b59f260ecba7635021",
+    "mode": 420
+  },
+  "tests/sampler_mixed_readers_test.c": {
+    "bytes": 41970,
+    "sha256": "205bcf033f69c8d8a1eab296e0f35449ba4249ef5f06aa20d07524266c8e937d",
+    "mode": 420
+  },
+  "tests/test_sampler_mixed_readers.py": {
+    "bytes": 5573,
+    "sha256": "843d41aa19bb06772e8a294dd868ff011cb1d79fdce01f54255f6dc662060cbb",
+    "mode": 420
+  }
+}

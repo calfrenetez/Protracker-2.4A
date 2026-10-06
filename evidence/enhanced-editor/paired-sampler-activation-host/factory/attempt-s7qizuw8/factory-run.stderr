@@ -1,0 +1,1 @@
+Assertion failed: (pt_sampler_mixed_open(&f->config,f->revision,f->workspace,f->capacity,&f->pool)==PT_SAMPLER_MIXED_PENDING), function smf_open, file sampler_mixed_readers_test.c, line 69.

@@ -1,0 +1,471 @@
+{
+  "schema": "sampler-mixed-activation-final-review/v1",
+  "overall": "BOUNDED_PASS",
+  "source_review": "PASS",
+  "recorded_host_integrity": "PASS",
+  "findings": [],
+  "reviewed_at_utc": "2026-10-06T16:44:47.066578+00:00",
+  "repository": "$PRIVATE/work/Protracker-2.4A",
+  "baseline": "c4cbc0419a920e70ed4db1194373a75a6b1a871e",
+  "review_execution": "Independent source and saved-byte review. Pure stdlib evidence checks and read-only Git archive/show/rev-parse/ls-files only. No compiler/test runner/fixture/native/emulator/device/caller/product/target execution or Git mutation. Only this report directory written.",
+  "run": "outputs/sampler-mixed-activation/v1/attempt-ln2dk4t_/run.json",
+  "run_pin": {
+    "bytes": 164976,
+    "sha256": "86f48b4507322035542f94e874ae813a1a7436870bf93fabb58c6827dddf8977",
+    "mode": 420
+  },
+  "root_integrity_pin": {
+    "bytes": 2929,
+    "sha256": "fbae4f3820dc4550ebf25c5310b72528df68b773a01ff0f994fd064ca5d1b03d",
+    "mode": 420
+  },
+  "current_overlays": {
+    "src/editor/sampler_mixed_readers.h": {
+      "bytes": 9694,
+      "sha256": "77477f67b51c8284099b611c720ae1a7c5d136774484fa049745e76c129a635e",
+      "mode": 420
+    },
+    "src/editor/sampler_mixed_readers.c": {
+      "bytes": 40675,
+      "sha256": "5c1eaa92dbf2912d122e11eb3819abf996d0a39139c9f5b59f260ecba7635021",
+      "mode": 420
+    },
+    "tests/sampler_mixed_readers_test.c": {
+      "bytes": 41970,
+      "sha256": "205bcf033f69c8d8a1eab296e0f35449ba4249ef5f06aa20d07524266c8e937d",
+      "mode": 420
+    },
+    "tests/test_sampler_mixed_readers.py": {
+      "bytes": 5573,
+      "sha256": "843d41aa19bb06772e8a294dd868ff011cb1d79fdce01f54255f6dc662060cbb",
+      "mode": 420
+    },
+    "src/core/mixed_readers_activation.h": {
+      "bytes": 9661,
+      "sha256": "d7309330627b606209c44b2759bcfbb35000ace4813d9acb938562376ce3ba35",
+      "mode": 420
+    },
+    "src/core/mixed_readers_activation.c": {
+      "bytes": 39399,
+      "sha256": "f4e608ef7f80a8635417fe78c68ac4852e9e404faf3c4b4d896dae5942965571",
+      "mode": 420
+    },
+    "tests/mixed_readers_activation_test.c": {
+      "bytes": 35980,
+      "sha256": "4fde3ecacc4bf321bf90cae14bdbeb4e4d44cec0b3f21a1f018335585af800a1",
+      "mode": 420
+    },
+    "tests/test_mixed_readers_activation.py": {
+      "bytes": 6336,
+      "sha256": "b1f54c645d7228e637e2594ec5adac1359b444a56d7a33134b1df72f77acb6fd",
+      "mode": 420
+    },
+    "src/core/mixed_scheduled_readers.h": {
+      "bytes": 11330,
+      "sha256": "da39231a26d4629b6707ace68a58ddb3b6e38a1be354e2700d28f4a79f37aed5",
+      "mode": 420
+    },
+    "src/core/mixed_scheduled_readers.c": {
+      "bytes": 33825,
+      "sha256": "6c0e5b7851056b0cdb72cdad0c408b15efdc6ba21d1357609edfa3fb9cd15de4",
+      "mode": 420
+    },
+    "tests/sampler_mixed_activation_test.c": {
+      "bytes": 27118,
+      "sha256": "43ac611f5ccec110002931386e07152af09b0a335eb23f138ce12dc6dde2ad03",
+      "mode": 420
+    },
+    "tests/test_sampler_mixed_activation.py": {
+      "bytes": 6365,
+      "sha256": "5ad19cd4cbcd6ef02a9f7378b4b073aed1307734e354145a7c6adebad90f2616",
+      "mode": 420
+    }
+  },
+  "saved_calls": [
+    {
+      "label": "combined-compile",
+      "argv": [
+        "cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-I.",
+        "tests/sampler_mixed_activation_test.c",
+        "src/editor/sampler_mixed_readers.c",
+        "src/core/mixed_readers_activation.c",
+        "src/core/mixed_scheduled_readers.c",
+        "src/core/elapsed_clock.c",
+        "src/editor/sampler_paula.c",
+        "src/editor/sampler_wavetable.c",
+        "src/core/amigus_voice_plan.c",
+        "src/editor/sampler.c",
+        "src/editor/slots.c",
+        "src/core/pcm_filtered.c",
+        "src/core/slices.c",
+        "src/core/pattern.c",
+        "src/core/document.c",
+        "src/core/pp20.c",
+        "src/core/project.c",
+        "src/core/mod_project.c",
+        "src/core/mod_inspect.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "src/core/wav.c",
+        "src/core/svx.c",
+        "src/core/raw.c",
+        "src/core/amigus_reservation.c",
+        "src/core/amigus_wavetable_cache.c",
+        "src/core/amigus_sample_ram.c",
+        "src/core/sample_cache.c",
+        "src/core/playback_pcm.c",
+        "-o",
+        "$PRIVATE/outputs/sampler-mixed-activation/v1/attempt-ln2dk4t_/combined"
+      ],
+      "timeout_seconds": 120,
+      "status": "PASS",
+      "returncode": 0,
+      "elapsed_seconds": 8.664954624997335
+    },
+    {
+      "label": "combined-run",
+      "argv": [
+        "$PRIVATE/outputs/sampler-mixed-activation/v1/attempt-ln2dk4t_/combined"
+      ],
+      "timeout_seconds": 180,
+      "status": "PASS",
+      "returncode": 0,
+      "elapsed_seconds": 0.7404247499944177
+    }
+  ],
+  "logs": {
+    "combined-compile.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    },
+    "combined-compile.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    },
+    "combined-run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    },
+    "combined-run.stdout": {
+      "bytes": 1760,
+      "sha256": "84bebd4a722df63a1a49bbd27a4668b48cfa08f2831c69e7f74178d76989c8c9",
+      "mode": 420
+    }
+  },
+  "combined_binary": {
+    "bytes": 2762200,
+    "sha256": "c6571d797ba0c6232e3ddb10ea13e1c9277fd5ff170833998a68043b9a0f4952",
+    "mode": 493
+  },
+  "integrity": {
+    "saved_source_count": 933,
+    "saved_source_fingerprints": "All 933 exact bytes, SHA256 and mode match inputs ledger; no extra saved files.",
+    "baseline_archive_files": 922,
+    "baseline_match": "Non-overlay source/test bytes and executable bits match git archive of the fixed baseline. Ordinary archive permission normalization is not an executable-mode change.",
+    "expected_source_set": "Exactly baseline src/tests union twelve overlays union generated pt_font.h.",
+    "generated_font": "580 pinned baseline ptfont.raw bytes; generated header text exact.",
+    "current_overlays": "All twelve current byte/mode fingerprints match saved run and copied source.",
+    "protected_count": 16,
+    "protected_current_match": true,
+    "ordered_units_count": 28,
+    "ordered_units_match": "Independently reconstructed frozen sampler SOURCES plus explicit combined/core units; argv and flags exactly match the saved calls.",
+    "actual_call_count": 2,
+    "compile_timeout_seconds": 120,
+    "run_timeout_seconds": 180,
+    "returns": "Both saved calls RC0 and PASS; both stderr files empty; compile stdout empty; combined stdout 1760 bytes SHA256 84bebd4a722df63a1a49bbd27a4668b48cfa08f2831c69e7f74178d76989c8c9.",
+    "current_head_match": true,
+    "current_index_sha256": "7cf2d2696787770b9bf98baf9eaa820568ad386bc9027c2bb2d648c4951b7303",
+    "before_after_head_index": "Successful frozen runner asserts exact HEAD and raw git ls-files --stage equality between its own pre/post snapshots; current HEAD independently matches. This review has no independent pre-run index copy.",
+    "frozen_module_relationships": {
+      "factory_four": "Combined copied/current four factory files byte-match outputs/sampler-mixed-readers/v1/attempt-g2k6au4m/source; its final review is BOUNDED_PASS.",
+      "activation_four_and_root_core_two": "Combined copied/current six activation/core files byte-match outputs/mixed-readers-activation/v1/attempt-r0b5wm1i/source; independent-final-review v2 is PASS."
+    }
+  },
+  "resolved_prior_findings": [
+    {
+      "id": "R1",
+      "status": "RESOLVED",
+      "prior_review": "outputs/sampler-mixed-activation/v1/activation-wiring-review/review-v1.json",
+      "source": "tests/sampler_mixed_activation_test.c:237 and :458",
+      "evidence": "source_quiet checks the full copied registration, callback_owner absence and no live command/readers. It does not shut down the callback source or erase references. sma_partial performs a separate explicit MODEL callback_owner=NULL transition between close probes, retaining the owner after close_result=-1 and quiet_result=0. The shutdown is attempted once; later explicit quiet drains."
+    },
+    {
+      "id": "R2",
+      "status": "RESOLVED",
+      "source": "tests/sampler_mixed_activation_test.c:185 and :466",
+      "evidence": "Reader cancellation erases the complete copied waiting packet, retaining only registration/ticket and a terminal command record. It independently removes the exact reader and cannot revive geometry. sma_reader_first cancels five readers while the queue still retains five domains and handle close refuses, then gets separate command quiet; only then all handles and owners close."
+    },
+    {
+      "id": "R3",
+      "status": "RESOLVED",
+      "source": "tests/sampler_mixed_activation_test.c:76, :118, :175 and :217",
+      "evidence": "Registration equality covers owner/queue/session/generation in publication, commit and quiet callbacks. The published packet is memcpy-copied and commit byte-compares the complete packet. All twenty expected slots and active mask precede effects. The complete batch prevalidation requires unique valid touched slots, route/slot-key agreement, a retained exact reader, CONTROL/STOP current identity, and trigger geometry/card admission before the effect loop. Intentional partial=-1 is injected only after that admission."
+    }
+  ],
+  "combined_wiring_review": [
+    {
+      "source": "tests/sampler_mixed_activation_test.c:254",
+      "property": "One actual activation-owned genuine typed queue is borrowed into the factory. The dormant inherited fixture queue is restored only for its independent teardown; no second queue is created from the owner backend."
+    },
+    {
+      "source": "tests/sampler_mixed_activation_test.c:277",
+      "property": "Factory context registration includes the full activation owner, underlying allocator and port extents in addition to genuine sampler/cache/Chip contexts and actual queue guards."
+    },
+    {
+      "source": "tests/sampler_mixed_activation_test.c:336 and :362",
+      "property": "Twelve 8/16/24 master \u00d7 card8/16 \u00d7 endian groups prepare sixteen actual readers, expire caller master pins after preparation, verify literal conversion/channel/endian/odd padding/full card capacity, preserve saved masters, and prove persistent independently held reader keys after command detachment."
+    },
+    {
+      "source": "tests/sampler_mixed_activation_test.c:293 and :118",
+      "property": "Preparation causes no activation clock/publication/commit/quiet callbacks. Early explicit fire preserves original window; one copied software commit applies all admitted route values without event/domain/span/holder traversal. CONTROL/STOP use original keys with expected master pins absent."
+    },
+    {
+      "source": "tests/sampler_mixed_activation_test.c:431",
+      "property": "Partial software commit returns unknown after one actual effect; command and all sixteen genuine reader domains remain held until distinct explicit quiet proofs. Reader pending refuses handle close. No automatic recovery or shutdown retry is introduced."
+    },
+    {
+      "source": "tests/sampler_mixed_activation_test.c:497",
+      "property": "Two generations fill all thirty-two reader controls. The next begin returns CAPACITY without allocator/clock movement. Exact cancellation of the old sixteen readers preserves the current replacement key registry; new reader keys remain pending/current until their own cancellation."
+    },
+    {
+      "source": "tests/sampler_mixed_activation_test.c:554",
+      "property": "Fragmented card geometry is checked using genuine pt_cache_data resource identity: cache slot2 resolves to arena block0, logical6/full8/address0, exact numeric end6 and literal channel bytes."
+    },
+    {
+      "source": "tests/sampler_mixed_activation_test.c:604",
+      "property": "Six unpublished enqueue output aliases (owner, port, queue, command, reader and full source PCM) preserve the entire protected byte span and no clock/publication/commit/allocator effects. Corrected explicit CANCEL\u2192five reader-handle closes\u2192command close respects the untransferred factory lifecycle."
+    },
+    {
+      "source": "tests/sampler_mixed_activation_test.c:284",
+      "property": "Every factory handle and pool closes before activation-owned queue/source shutdown and final allocator release. Source registration queue pointer is treated only as opaque identity after consumption."
+    }
+  ],
+  "actual_first_failures_preserved": [
+    {
+      "attempt": "outputs/sampler-mixed-activation/v1/attempt-_6o00oxv/run.json",
+      "status": "FAIL",
+      "diagnosis": "Unpublished aliases group cancelled an untransferred command, closed that command (which freed its CANCELLED reader controls), then incorrectly tried to close stale external reader handles. This was a fixture lifetime expectation failure; no production regression is established.",
+      "calls": [
+        {
+          "label": "combined-compile",
+          "argv": [
+            "cc",
+            "-std=c99",
+            "-O1",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-UNDEBUG",
+            "-fsanitize=address,undefined",
+            "-Isrc/core",
+            "-I.",
+            "tests/sampler_mixed_activation_test.c",
+            "src/editor/sampler_mixed_readers.c",
+            "src/core/mixed_readers_activation.c",
+            "src/core/mixed_scheduled_readers.c",
+            "src/core/elapsed_clock.c",
+            "src/editor/sampler_paula.c",
+            "src/editor/sampler_wavetable.c",
+            "src/core/amigus_voice_plan.c",
+            "src/editor/sampler.c",
+            "src/editor/slots.c",
+            "src/core/pcm_filtered.c",
+            "src/core/slices.c",
+            "src/core/pattern.c",
+            "src/core/document.c",
+            "src/core/pp20.c",
+            "src/core/project.c",
+            "src/core/mod_project.c",
+            "src/core/mod_inspect.c",
+            "src/core/channels.c",
+            "src/core/pcm.c",
+            "src/core/wav.c",
+            "src/core/svx.c",
+            "src/core/raw.c",
+            "src/core/amigus_reservation.c",
+            "src/core/amigus_wavetable_cache.c",
+            "src/core/amigus_sample_ram.c",
+            "src/core/sample_cache.c",
+            "src/core/playback_pcm.c",
+            "-o",
+            "$PRIVATE/outputs/sampler-mixed-activation/v1/attempt-_6o00oxv/combined"
+          ],
+          "timeout_seconds": 120,
+          "status": "PASS",
+          "returncode": 0,
+          "elapsed_seconds": 8.606011625000974
+        },
+        {
+          "label": "combined-run",
+          "argv": [
+            "$PRIVATE/outputs/sampler-mixed-activation/v1/attempt-_6o00oxv/combined"
+          ],
+          "timeout_seconds": 180,
+          "status": "FAIL",
+          "returncode": -6,
+          "elapsed_seconds": 0.5619787089963211
+        }
+      ],
+      "run_pin": {
+        "bytes": 165044,
+        "sha256": "b9ae7cdc59edddba7138b812e7cc2eef347fa3bb23abc0fba7f81500a6897e23",
+        "mode": 420
+      },
+      "fixture_pin": {
+        "bytes": 27118,
+        "sha256": "6bab35f3cbcfa835ca19a1a81ee1bf1c1b03258fd33d5251b770b41c1daab66f",
+        "mode": 420
+      },
+      "logs": {
+        "combined-compile.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        },
+        "combined-compile.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        },
+        "combined-run.stderr": {
+          "bytes": 154,
+          "sha256": "240246ae34d748c192f3c290f3d4b6eea0661ef57058630060930e1410860738",
+          "mode": 420
+        },
+        "combined-run.stdout": {
+          "bytes": 555,
+          "sha256": "ad0eab04978b088ca861eaf237248418e111267c7d6c42ce5930f9fb9f238c6d",
+          "mode": 420
+        }
+      },
+      "saved_source_fingerprints_still_exact": true
+    },
+    {
+      "attempt": "outputs/sampler-mixed-activation/v1/attempt-x6zqhsw4/run.json",
+      "status": "FAIL",
+      "diagnosis": "The attempted fixture order repair matched the earlier already-RETIRED reader-first group instead of sma_unpublished_aliases. The executed aliases group retained the old wrong order and hit the same stale-handle assertion. No claim that this attempt fixed the failing path.",
+      "calls": [
+        {
+          "label": "combined-compile",
+          "argv": [
+            "cc",
+            "-std=c99",
+            "-O1",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-UNDEBUG",
+            "-fsanitize=address,undefined",
+            "-Isrc/core",
+            "-I.",
+            "tests/sampler_mixed_activation_test.c",
+            "src/editor/sampler_mixed_readers.c",
+            "src/core/mixed_readers_activation.c",
+            "src/core/mixed_scheduled_readers.c",
+            "src/core/elapsed_clock.c",
+            "src/editor/sampler_paula.c",
+            "src/editor/sampler_wavetable.c",
+            "src/core/amigus_voice_plan.c",
+            "src/editor/sampler.c",
+            "src/editor/slots.c",
+            "src/core/pcm_filtered.c",
+            "src/core/slices.c",
+            "src/core/pattern.c",
+            "src/core/document.c",
+            "src/core/pp20.c",
+            "src/core/project.c",
+            "src/core/mod_project.c",
+            "src/core/mod_inspect.c",
+            "src/core/channels.c",
+            "src/core/pcm.c",
+            "src/core/wav.c",
+            "src/core/svx.c",
+            "src/core/raw.c",
+            "src/core/amigus_reservation.c",
+            "src/core/amigus_wavetable_cache.c",
+            "src/core/amigus_sample_ram.c",
+            "src/core/sample_cache.c",
+            "src/core/playback_pcm.c",
+            "-o",
+            "$PRIVATE/outputs/sampler-mixed-activation/v1/attempt-x6zqhsw4/combined"
+          ],
+          "timeout_seconds": 120,
+          "status": "PASS",
+          "returncode": 0,
+          "elapsed_seconds": 8.927798042001086
+        },
+        {
+          "label": "combined-run",
+          "argv": [
+            "$PRIVATE/outputs/sampler-mixed-activation/v1/attempt-x6zqhsw4/combined"
+          ],
+          "timeout_seconds": 180,
+          "status": "FAIL",
+          "returncode": -6,
+          "elapsed_seconds": 0.4862657919875346
+        }
+      ],
+      "run_pin": {
+        "bytes": 165044,
+        "sha256": "3ac2b433489eddb667bbfada835562a5bcda04cc53295d5b67b9ea35fa0b4dda",
+        "mode": 420
+      },
+      "fixture_pin": {
+        "bytes": 27118,
+        "sha256": "36a9d58237d60884f1d2d6f4c0f9d2797c12237c2da23d401800a3b271cdf9d0",
+        "mode": 420
+      },
+      "logs": {
+        "combined-compile.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        },
+        "combined-compile.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 420
+        },
+        "combined-run.stderr": {
+          "bytes": 154,
+          "sha256": "240246ae34d748c192f3c290f3d4b6eea0661ef57058630060930e1410860738",
+          "mode": 420
+        },
+        "combined-run.stdout": {
+          "bytes": 555,
+          "sha256": "ad0eab04978b088ca861eaf237248418e111267c7d6c42ce5930f9fb9f238c6d",
+          "mode": 420
+        }
+      },
+      "saved_source_fingerprints_still_exact": true
+    }
+  ],
+  "final_fixture_repair": {
+    "source": "tests/sampler_mixed_activation_test.c:633",
+    "evidence": "Third snapshot and current source have CANCEL\u2192five reader closes\u2192command close specifically inside sma_unpublished_aliases. The earlier harmless RETIRED reader-first order change remains. Final third execution reached all combined groups and complete PASS stdout.",
+    "scope": "Only root combined fixture lifetime order changed after first failures; no production/core/factory/activation API or source repair."
+  },
+  "qualification_limits": [
+    "BOUNDED_PASS covers exact frozen third recorded combined HOST software run and source wiring only.",
+    "Combined executable includes factory constructor and inherited queued-reader main plus its own combined constructor. Standalone activation constructor is not in this executable; its separate r0b5 qualification remains independent.",
+    "The paired port, clock ticks, signed8 Chip storage and numeric card RAM are injected ordinary-memory models. Genuine sampler masters/pins/cache leases/typed queue controls do not make these models physical backends.",
+    "No full editor/product execution, emulator/native target, installed timer, IRQ, placement/residency/WCET/stack, physical atomicity/capacity/order/completion/voice stop, DMA/MMIO, true timestamps, audio or listening qualification.",
+    "Port version/flags declare a contract; source-only finite callback bodies and sanitizers do not prove real-time or device acceptance.",
+    "No targets/resources were acquired; root target ownership remains absent and Scott priority is respected."
+  ]
+}

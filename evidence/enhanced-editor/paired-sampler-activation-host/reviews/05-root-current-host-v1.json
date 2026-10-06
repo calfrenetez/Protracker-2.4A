@@ -1,0 +1,88 @@
+{
+  "status": "PASS_ROOT_SAVED_COMBINED_HOST_CUSTODY",
+  "run": "$PRIVATE/outputs/sampler-mixed-activation/v1/attempt-ln2dk4t_/run.json",
+  "run_pin": {
+    "bytes": 164976,
+    "sha256": "86f48b4507322035542f94e874ae813a1a7436870bf93fabb58c6827dddf8977",
+    "mode": 420
+  },
+  "sources": 933,
+  "ordered_units": 28,
+  "overlays": {
+    "src/editor/sampler_mixed_readers.h": {
+      "bytes": 9694,
+      "sha256": "77477f67b51c8284099b611c720ae1a7c5d136774484fa049745e76c129a635e",
+      "mode": 420
+    },
+    "src/editor/sampler_mixed_readers.c": {
+      "bytes": 40675,
+      "sha256": "5c1eaa92dbf2912d122e11eb3819abf996d0a39139c9f5b59f260ecba7635021",
+      "mode": 420
+    },
+    "tests/sampler_mixed_readers_test.c": {
+      "bytes": 41970,
+      "sha256": "205bcf033f69c8d8a1eab296e0f35449ba4249ef5f06aa20d07524266c8e937d",
+      "mode": 420
+    },
+    "tests/test_sampler_mixed_readers.py": {
+      "bytes": 5573,
+      "sha256": "843d41aa19bb06772e8a294dd868ff011cb1d79fdce01f54255f6dc662060cbb",
+      "mode": 420
+    },
+    "src/core/mixed_readers_activation.h": {
+      "bytes": 9661,
+      "sha256": "d7309330627b606209c44b2759bcfbb35000ace4813d9acb938562376ce3ba35",
+      "mode": 420
+    },
+    "src/core/mixed_readers_activation.c": {
+      "bytes": 39399,
+      "sha256": "f4e608ef7f80a8635417fe78c68ac4852e9e404faf3c4b4d896dae5942965571",
+      "mode": 420
+    },
+    "tests/mixed_readers_activation_test.c": {
+      "bytes": 35980,
+      "sha256": "4fde3ecacc4bf321bf90cae14bdbeb4e4d44cec0b3f21a1f018335585af800a1",
+      "mode": 420
+    },
+    "tests/test_mixed_readers_activation.py": {
+      "bytes": 6336,
+      "sha256": "b1f54c645d7228e637e2594ec5adac1359b444a56d7a33134b1df72f77acb6fd",
+      "mode": 420
+    },
+    "src/core/mixed_scheduled_readers.h": {
+      "bytes": 11330,
+      "sha256": "da39231a26d4629b6707ace68a58ddb3b6e38a1be354e2700d28f4a79f37aed5",
+      "mode": 420
+    },
+    "src/core/mixed_scheduled_readers.c": {
+      "bytes": 33825,
+      "sha256": "6c0e5b7851056b0cdb72cdad0c408b15efdc6ba21d1357609edfa3fb9cd15de4",
+      "mode": 420
+    },
+    "tests/sampler_mixed_activation_test.c": {
+      "bytes": 27118,
+      "sha256": "43ac611f5ccec110002931386e07152af09b0a335eb23f138ce12dc6dde2ad03",
+      "mode": 420
+    },
+    "tests/test_sampler_mixed_activation.py": {
+      "bytes": 6365,
+      "sha256": "5ad19cd4cbcd6ef02a9f7378b4b073aed1307734e354145a7c6adebad90f2616",
+      "mode": 420
+    }
+  },
+  "stdout": {
+    "bytes": 1760,
+    "sha256": "84bebd4a722df63a1a49bbd27a4668b48cfa08f2831c69e7f74178d76989c8c9",
+    "mode": 420
+  },
+  "stderr": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mode": 420
+  },
+  "first_failures": [
+    "attempt-_6o00oxv",
+    "attempt-x6zqhsw4"
+  ],
+  "scope": "Saved HOST software proof, no new fixture/compiler invocation, native/target NOT_RUN"
+}

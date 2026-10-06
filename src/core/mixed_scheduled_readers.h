@@ -140,6 +140,15 @@ size_t pt_mixed_readers_workspace_size(void);
 size_t pt_mixed_readers_workspace_alignment(void);
 size_t pt_mixed_readers_control_size(void);
 enum pt_mixed_readers_result pt_mixed_readers_open(const struct pt_mixed_readers_config *,void *,size_t,struct pt_mixed_readers_output **);
+/* Read-only task-side guards for wrappers around a genuine live queue. They
+ * perform no writes, callbacks, clock reads, transfer or reentry fault. Current
+ * held controls and complete retained source capacities are included, even
+ * before publication. admission_valid repeats the existing bounded declaration
+ * checks only; its positive result is not provenance, readiness, budget/clock
+ * acceptance or lasting authorization. Final enqueue repeats all checks and
+ * alone transfers ownership. Never use either query in the activation path. */
+int pt_mixed_readers_output_disjoint(const struct pt_mixed_readers_output *,const void *,size_t);
+int pt_mixed_readers_admission_valid(struct pt_mixed_readers_output *,const struct pt_mixed_readers_inputs *,uint64_t *);
 /* Copies full declarations/spans into private admission scratch before callbacks.
  * Its scratch contents are unspecified after an attempt; refusal preserves all
  * external owners, inputs, outputs and live registrations. Unique(route,slot),

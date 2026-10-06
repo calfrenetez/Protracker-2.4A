@@ -6001,9 +6001,61 @@ emulator and physical execution remain NOT_RUN. The earlier portable freeze
 was withdrawn before any compiler call and remains a separate zero-call record.
 See the [compiler evidence](../evidence/enhanced-editor/mixed-scheduled-readers-portable/README.md).
 
-Public holder records cannot prove genuine pin provenance. A production holder
-factory, paired editor/song lowering and an atomic scheduled backend remain
-unfinished. Native PLAY/UI integration, real Fast/Chip placement, aggregate stack
+Public holder records cannot prove genuine pin provenance. The callable
+genuine paired factory and copied activation owner described below now provide
+that software composition; paired editor/song lowering and a qualified real
+atomic scheduled port remain unfinished. Native PLAY/UI integration, real Fast/Chip placement, aggregate stack
 and step latency, card capacity/upload ordering/completion/all-voice stop,
 MMIO/DMA, exact activation and IRQ/task timing, physical audio and listening
 remain open. Host and compiler evidence do not qualify those requirements.
+
+
+## Genuine paired holders and copied activation — 6 October 2026
+
+The additive `sampler_mixed_readers` factory now owns real independent master
+pins and optional selective Chip8 or card8/16 leases through reader retirement.
+It uses private cancellable validation and bounded preparation jobs, an aggregate
+pool/control budget and a separate exact Chip allocation ledger. Fragmented card
+lease slot2 resolves by actual resource identity to arena block0; full reserved
+capacity remains separate from logical bytes. The borrowed genuine queue is
+factory-exclusive and remains alive until every handle and pool closes. Source
+edits require the revision/generation discipline; no editor revision supplier or
+edit-barrier attachment is supplied by this module.
+
+`mixed_readers_activation` owns one genuine typed queue and copies bounded paired
+packets into its two-command/32-reader/20-slot state. Explicit activation preserves
+original windows and all original keys with one declared whole-paired operation.
+The software port is injected and flags are declarations, not hardware proof.
+New callback faults or identity changes retain domains even after a claimed quiet
+one; previously latched failure drains only with later explicit independent exact
+proof. Final disposal requires actual queue-pointer consumption, at most one
+source shutdown attempt and later separate read-only source proof if uncertain.
+
+Isolated factory `g2k6au4m` and activation `r0b5wm1i` each pass six ASan/UBSan
+compile/run calls with empty stderr, 927 saved inputs and 27 main fixture units.
+Their separate frozen source/evidence reviews pass. Combined `ln2dk4t_` passes two
+ASan/UBSan calls with empty stderr, 933 inputs and 28 units. Its genuine wiring
+covers twelve sixteen-reader precision/cache lifetimes, exact saves/conversion
+bytes, original CONTROL/STOP, caller-pin expiry, independent proof orders, partial
+effects, source uncertainty, 32-reader replacement pressure, fragmented cache and
+full unpublished output guards. Earlier actual failures and historical passes
+remain preserved. These results are HOST software evidence.
+
+See [factory contract](SAMPLER_MIXED_READERS.md),
+[activation contract](MIXED_READERS_ACTIVATION.md) and the
+[saved host evidence](../evidence/enhanced-editor/paired-sampler-activation-host/README.md).
+
+The complete combined fixture cross-compiles and links in 41 successful calls
+across 28 units and 99 dependencies. The exact 266,204-byte HUNK candidate has
+SHA256 `f4c5eeac8cfc6a5ebd4081eceff8ea33691bc2ce3fe5dccfbcb99984f9ca8342`.
+Independent offline saved-byte verification passes. The candidate has never been
+executed: native entry, emulator and physical execution remain NOT_RUN. The
+earlier actual Git readback warning, with zero compiler calls, is preserved
+separately from the successful corrected compiler invocation. See the
+[compiler evidence](../evidence/enhanced-editor/paired-sampler-activation-portable/README.md).
+
+Paired editor/song lowering, native PLAY and the real port remain unfinished.
+Physical Fast/Chip placement, aggregate stack/step latency, card capacity/upload
+order/completion/all-voice stop, exact activation and IRQ timing, physical audio
+and listening remain open. The accepted classic layout and sixteen unrelated
+display/editor paths are preserved.

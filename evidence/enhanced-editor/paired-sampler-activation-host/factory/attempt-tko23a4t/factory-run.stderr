@@ -1,0 +1,1 @@
+Assertion failed: (pt_mixed_readers_stop(f->inherited->queue)==PT_MIXED_READERS_OK), function smf_queue_effects, file sampler_mixed_readers_test.c, line 142.

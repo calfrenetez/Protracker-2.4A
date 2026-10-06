@@ -1,0 +1,1 @@
+Assertion failed: (f->inherited->resources->card.cache.cache.entry[0].valid==2), function smf_retired_cache, file sampler_mixed_readers_test.c, line 784.

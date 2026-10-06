@@ -1,0 +1,1 @@
+Assertion failed: (!pt_mixed_activation_close(&c->owner)&&!c->owner&&!c->memory.live&&c->memory.hooks==1), function a_borrow_and_close, file mixed_readers_activation_test.c, line 294.

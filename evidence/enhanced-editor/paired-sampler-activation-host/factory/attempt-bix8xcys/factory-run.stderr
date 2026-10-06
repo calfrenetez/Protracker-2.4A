@@ -1,0 +1,1 @@
+Assertion failed: (pt_pattern_undo(f->config.project,&history,0)==PT_EDIT_OK), function smf_new_master_outputs, file sampler_mixed_readers_test.c, line 183.

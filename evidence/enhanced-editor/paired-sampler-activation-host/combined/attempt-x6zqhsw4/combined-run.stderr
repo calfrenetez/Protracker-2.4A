@@ -1,0 +1,1 @@
+Assertion failed: (pt_sampler_mixed_reader_close(f->pool,f->reader+i)), function sma_unpublished_aliases, file sampler_mixed_activation_test.c, line 637.

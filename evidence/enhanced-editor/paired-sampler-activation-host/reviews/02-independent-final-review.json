@@ -1,0 +1,144 @@
+{
+  "schema": "mixed-readers-activation-independent-final-review/v1",
+  "overall": "BLOCKER",
+  "recorded_host_integrity": "PASS",
+  "state_machine_review": "No additional concrete ownership/timing blocker found in reviewed current code; intentional faulted publication0 policy needs explicit documentation/coverage/diagnostic correction.",
+  "reviewer": "paula_reader_controller independent read-only review",
+  "review_execution": "Read source and saved artifacts; pure stdlib byte/relationship checks only. No tests/builds/imported operational modules/Git mutations/targets.",
+  "baseline": "c4cbc0419a920e70ed4db1194373a75a6b1a871e",
+  "current_run": "outputs/mixed-readers-activation/v1/attempt-gmiebl3y/run.json",
+  "overlays": {
+    "src/core/mixed_readers_activation.h": {
+      "bytes": 9422,
+      "sha256": "e45b5bf951a594004ba1efd37ac323d5e9c1247ee63a058df529ecb239a9c753",
+      "mode": 420
+    },
+    "src/core/mixed_readers_activation.c": {
+      "bytes": 39349,
+      "sha256": "b958ef6eb2f156a15b112f6d0a11dd6f55499419cdbfdd82f3598dadccc629c2",
+      "mode": 420
+    },
+    "tests/mixed_readers_activation_test.c": {
+      "bytes": 33356,
+      "sha256": "4ae6bb1ad3ca407e528b1b3a2417b5e6348ddc9809a8eb574d9be81345d155d7",
+      "mode": 420
+    },
+    "tests/test_mixed_readers_activation.py": {
+      "bytes": 6336,
+      "sha256": "b1f54c645d7228e637e2594ec5adac1359b444a56d7a33134b1df72f77acb6fd",
+      "mode": 420
+    },
+    "src/core/mixed_scheduled_readers.c": {
+      "bytes": 33825,
+      "sha256": "6c0e5b7851056b0cdb72cdad0c408b15efdc6ba21d1357609edfa3fb9cd15de4",
+      "mode": 420
+    },
+    "src/core/mixed_scheduled_readers.h": {
+      "bytes": 11330,
+      "sha256": "da39231a26d4629b6707ace68a58ddb3b6e38a1be354e2700d28f4a79f37aed5",
+      "mode": 420
+    }
+  },
+  "integrity_report": {
+    "bytes": 95004,
+    "sha256": "c4cd4dd802a0cc6727a04369a499834fc205caa27542c731c260dba8eaf2400c",
+    "mode": 420
+  },
+  "first_reviewer_checker_refusal": {
+    "bytes": 801,
+    "sha256": "5794a58c3dcd17435b94893254ae1576291d9afa25a1936e2365704b8b2e782e",
+    "mode": 420
+  },
+  "recorded_call_count": 6,
+  "saved_source_count": 927,
+  "ordered_activation_units": [
+    "tests/mixed_readers_activation_test.c",
+    "src/core/mixed_readers_activation.c",
+    "src/core/mixed_scheduled_readers.c",
+    "src/core/elapsed_clock.c",
+    "src/editor/sampler_paula.c",
+    "src/editor/sampler_wavetable.c",
+    "src/core/amigus_voice_plan.c",
+    "src/editor/sampler.c",
+    "src/editor/slots.c",
+    "src/core/pcm_filtered.c",
+    "src/core/slices.c",
+    "src/core/pattern.c",
+    "src/core/document.c",
+    "src/core/pp20.c",
+    "src/core/project.c",
+    "src/core/mod_project.c",
+    "src/core/mod_inspect.c",
+    "src/core/channels.c",
+    "src/core/pcm.c",
+    "src/core/wav.c",
+    "src/core/svx.c",
+    "src/core/raw.c",
+    "src/core/amigus_reservation.c",
+    "src/core/amigus_wavetable_cache.c",
+    "src/core/amigus_sample_ram.c",
+    "src/core/sample_cache.c",
+    "src/core/playback_pcm.c"
+  ],
+  "findings": [
+    {
+      "id": "R1",
+      "priority": "P1",
+      "kind": "Contract diagnostic and missing meaningful callback-path coverage",
+      "locations": [
+        "src/core/mixed_readers_activation.h:53",
+        "src/core/mixed_readers_activation.c:232",
+        "src/core/mixed_readers_activation.c:238",
+        "tests/mixed_readers_activation_test.c:63"
+      ],
+      "finding": "The code conservatively treats port publish0 after a fresh callback exclusion/identity fault as uncertain, intentionally retaining both domains. Header currently describes0 unconditionally as no references/effects; no fixture combines actual publish_result0 and the publish reentry hook. Current model returns0 before copying registration, while quiet probes assume a matching copied registration. The raw port publication return is only local and later overwritten with-1, unlike the retained quiet_outcome diagnostics.",
+      "root_policy_confirmation": "Root confirmed conservative uncertainty on a newly violated publication exclusion is intentional; a faulted claimed0 cannot establish absence. Do not describe it as accepted. Actual raw outcome should remain diagnostic. Later independent exact command/reader quiet may prove absence even when port never registered references.",
+      "required_change": "Clarify nonfaulting0 qualification in header, retain actual raw publication outcome, and add a real consumed-hook/callback-count fixture for faulted0 retaining pins and outputs followed by separately proven absent-registration domain drains. Use distinct saved qualifier; preserve current PASS as historical.",
+      "observed_execution_failure": "None; this is source/contract/coverage review of an untested meaningful combination."
+    },
+    {
+      "id": "R2",
+      "priority": "P2",
+      "kind": "C99 fixture object-representation portability",
+      "locations": [
+        "tests/mixed_readers_activation_test.c:67",
+        "tests/mixed_readers_activation_test.c:79"
+      ],
+      "finding": "The injected port uses struct assignment to copy a packet, then compares the full packet object representation with memcmp during commit. C struct assignment need not preserve padding, so a conforming compiler may classify an unchanged semantic packet as different.",
+      "required_change": "Use a byte-preserving memcpy for this model packet snapshot before the full-object memcmp, as production snapshots already do.",
+      "observed_execution_failure": "None; current saved host run passes."
+    }
+  ],
+  "reviewed_properties": [
+    {
+      "property": "New quiet callback faults retain independent domains",
+      "evidence": "backend_command/reader compare fault serial and byte-exact identity snapshots before producing exact proof. New fault returns uncertainty without deleting own records, even actual probe1; fixture checks genuine holders and caller receipts unchanged, later NULL probes drain separately."
+    },
+    {
+      "property": "Preexisting-failure NULL drainage",
+      "evidence": "Wrapper permits NULL output; backend permits unchanged exact quiet1 after a preexisting fault, keeps command and reader proof tags distinct, and marks invalid classification without inventing active ownership."
+    },
+    {
+      "property": "Source lifetime",
+      "evidence": "Actual core close uses disjoint local slot and registered borrow releases on NULL consumption, including close0. Source_close attempted once, later explicit source_quiet is distinct read-only callback, identity/new-fault/malformed probes retain owner; final allocator release uses local latch and NULL slot before callback."
+    },
+    {
+      "property": "Copied activation and original windows",
+      "evidence": "Fire uses own command/reader records and copied packet values, validates all20 original keys and exact original[first,last), checks pre/post actual clocks and resulting registry, performs one declared paired commit. Early preserves window; late/partial/unknown retains possible effects and pins; poisoned-descriptor ASan fixture confirms no core/source traversal in activation."
+    },
+    {
+      "property": "Guard ordering and authoritative enqueue transfer",
+      "evidence": "Two root pure core queries guard incoming/raw unpublished/live full source outputs before task_busy faults. Original caller output is passed through genuine core guards; actual core enqueueOK remains authority even a separately latched owner fault. Owner/queue alignment and full capacity context alias checks precede initialization/callbacks."
+    },
+    {
+      "property": "Evidence integrity and scoped overlays",
+      "evidence": "Pure checker verified current/saved bytes and modes of all6 overlays,927 full saved input bytes/modes, baseline unchanged source bytes with ordinary archive-mode normalization, generated font, all6 RC0/empty stderr,12 logs,27 actual ordered units and protected16. Two actual first failures and previous PASS remain separate."
+    }
+  ],
+  "limitations": [
+    "Current host passing execution establishes injected software behavior only.",
+    "No combined factory qualification was reviewed or inferred.",
+    "No native executable execution, timer installation, IRQ/stack/WCET/residency, real card capacity/order/completion/voice stop, MMIO/DMA, physical/audio/listening acceptance.",
+    "No source or fixture change was made by this reviewer."
+  ]
+}

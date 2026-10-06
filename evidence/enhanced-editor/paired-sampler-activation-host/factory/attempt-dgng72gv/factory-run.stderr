@@ -1,0 +1,1 @@
+Assertion failed: (!pt_sampler_mixed_command_close(f->pool,(void *)pcm.data)), function smf_new_master_outputs, file sampler_mixed_readers_test.c, line 182.

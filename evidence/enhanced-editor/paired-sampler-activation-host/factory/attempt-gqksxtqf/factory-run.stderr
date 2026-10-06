@@ -1,0 +1,1 @@
+Assertion failed: (pt_sampler_mixed_service_command(f->pool,ticket,1,NULL)==PT_MIXED_READERS_BACKEND), function smf_live_expired, file sampler_mixed_readers_test.c, line 168.

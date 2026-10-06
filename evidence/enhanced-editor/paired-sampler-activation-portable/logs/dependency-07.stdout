@@ -1,0 +1,11 @@
+amigus_voice_plan.o: src/core/amigus_voice_plan.c \
+ src/core/amigus_voice_plan.h src/core/project.h src/core/channels.h \
+ $SDK/m68k-amigaos/sys-include/stdint.h \
+ $SDK/m68k-amigaos/sys-include/machine/_default_types.h \
+ $SDK/m68k-amigaos/sys-include/sys/features.h \
+ $SDK/m68k-amigaos/libnix/include/_newlib_version.h \
+ $SDK/m68k-amigaos/sys-include/sys/_intsup.h \
+ $SDK/m68k-amigaos/sys-include/sys/_stdint.h \
+ src/core/pcm.h \
+ $SDK/lib/gcc/m68k-amigaos/6.5.0b/include/stddef.h \
+ src/core/playback_pcm.h src/core/sample_cache.h

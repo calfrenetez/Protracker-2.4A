@@ -1,0 +1,31 @@
+In file included from tests/mixed_readers_activation_test.c:3:
+In file included from tests/mixed_scheduled_readers_test.c:2:
+tests/amigus_wavetable_cache_test.c:1:9: error: 'main' macro redefined [-Werror,-Wmacro-redefined]
+    1 | #define main reservation_fixture_main
+      |         ^
+tests/mixed_readers_activation_test.c:2:9: note: previous definition is here
+    2 | #define main inherited_mixed_readers_main
+      |         ^
+tests/mixed_readers_activation_test.c:364:78: error: incompatible pointer types passing 'int32_t *' (aka 'int *') to parameter of type 'uint64_t *' (aka 'unsigned long long *') [-Werror,-Wincompatible-pointer-types]
+  364 |     assert(!pt_mixed_readers_admission_valid(c->trial->queue,c->trial->input,c->trial->reader[0].pcm.data));
+      |                                                                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/assert.h:72:25: note: expanded from macro 'assert'
+   72 |     (__builtin_expect(!(e), 0) ? __assert_rtn(__func__, __ASSERT_FILE_NAME, __LINE__, #e) : (void)0)
+      |                         ^
+tests/../src/core/mixed_scheduled_readers.h:151:120: note: passing argument to parameter here
+  151 | int pt_mixed_readers_admission_valid(struct pt_mixed_readers_output *,const struct pt_mixed_readers_inputs *,uint64_t *);
+      |                                                                                                                        ^
+tests/mixed_readers_activation_test.c:409:5: error: redefinition of 'main'
+  409 | int main(void)
+      |     ^
+tests/mixed_scheduled_readers_test.c:513:5: note: previous definition is here
+  513 | int main(void)
+      |     ^
+tests/mixed_readers_activation_test.c:418:12: error: call to undeclared function 'inherited_mixed_readers_main'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+  418 |     return inherited_mixed_readers_main();
+      |            ^
+4 errors generated.
+src/core/mixed_readers_activation.c:390:16: error: variable 'qconfig' is uninitialized when passed as a const pointer argument here [-Werror,-Wuninitialized-const-pointer]
+  390 |        !apart(&qconfig,sizeof(qconfig),c->allocator_context.data,c->allocator_context.bytes)||!apart(&qconfig,sizeof(qconfig),c->port.context,c->port.context_bytes)||
+      |                ^~~~~~~
+1 error generated.

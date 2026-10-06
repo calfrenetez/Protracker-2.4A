@@ -1,0 +1,487 @@
+{
+  "files": {
+    "README.md": {
+      "bytes": 2385,
+      "mode": 420,
+      "sha256": "3af928fb9299d3badc4a04431eb1f2562e3083b0b09eed3c55781bbd32514d93"
+    },
+    "compiler/build.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/build.stdout": {
+      "bytes": 706,
+      "mode": 420,
+      "sha256": "67b454d65ab9c5596dcbf10a78d4820b9e92fc259c8569e783a1a7ee254ed9c3"
+    },
+    "compiler/build_native_once.py.reference": {
+      "bytes": 16452,
+      "mode": 420,
+      "sha256": "0700e8fcf700a04082a6f3e3eb98023bd79dfaefd42b633f2b7915d4e5fcb21e"
+    },
+    "compiler/logs/compile-link.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/compile-link.stdout": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/compiler-version.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/compiler-version.stdout": {
+      "bytes": 247,
+      "mode": 420,
+      "sha256": "5946ce0c1a43a84e1c7af8cfaa306b2f4bd276dd02164560d5674bcc91250d0b"
+    },
+    "compiler/logs/dependency-00.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-00.stdout": {
+      "bytes": 5094,
+      "mode": 420,
+      "sha256": "6e9a99d019b9913f56537155a2ed49c4ca5910b75da78e61ee81e69912d824d1"
+    },
+    "compiler/logs/dependency-01.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-01.stdout": {
+      "bytes": 2940,
+      "mode": 420,
+      "sha256": "54442e8a67692be6edad20d27e3662acbbb2dc73aad58ad7b23736aa99263dfd"
+    },
+    "compiler/logs/dependency-02.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-02.stdout": {
+      "bytes": 2677,
+      "mode": 420,
+      "sha256": "7649b08c78af4bc4cb103d1549be8cee06ac757e10a5b6578a43a16049038361"
+    },
+    "compiler/logs/dependency-03.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-03.stdout": {
+      "bytes": 3329,
+      "mode": 420,
+      "sha256": "a48dba34e0041f01a5a244832c13ae6728bbba974dd87219df385d21d9f7d192"
+    },
+    "compiler/logs/dependency-04.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-04.stdout": {
+      "bytes": 3296,
+      "mode": 420,
+      "sha256": "8ab387f52ec047dd21c4d25bc30de61482b7b92dbd1f44e8253f94fe143938b0"
+    },
+    "compiler/logs/dependency-05.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-05.stdout": {
+      "bytes": 1120,
+      "mode": 420,
+      "sha256": "40b681e805f4ee6e72b24d0444c05feab7f718791d29c100705903048feb421b"
+    },
+    "compiler/logs/dependency-06.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-06.stdout": {
+      "bytes": 3651,
+      "mode": 420,
+      "sha256": "82e6ec5116a74613741712d56d70f100eae3773c14b2b0a7a0f2e66aaefbf5e4"
+    },
+    "compiler/logs/dependency-07.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-07.stdout": {
+      "bytes": 2877,
+      "mode": 420,
+      "sha256": "6d965099f3d42fe6e1d3f339e33832baa6cfbfba2504c2d0d0ef07c1f94db8b4"
+    },
+    "compiler/logs/dependency-08.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-08.stdout": {
+      "bytes": 2691,
+      "mode": 420,
+      "sha256": "ecfca1c53587ed34fc179bac0275d99ba44e46c144f39ca6e722c4b08bbbeb46"
+    },
+    "compiler/logs/dependency-09.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-09.stdout": {
+      "bytes": 2674,
+      "mode": 420,
+      "sha256": "6eca9be45c2f9e1b81b0d88fa1ccd7ab10c728f6d1a8b8290d29176b9f5d3271"
+    },
+    "compiler/logs/dependency-10.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-10.stdout": {
+      "bytes": 2719,
+      "mode": 420,
+      "sha256": "0a6f724c52f97951e0cc34b50a4aae9db35c2a99d21128cc6f38f72dc4ba32e5"
+    },
+    "compiler/logs/dependency-11.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-11.stdout": {
+      "bytes": 2787,
+      "mode": 420,
+      "sha256": "1f192fe62ece619be6d88a2eb02b0a026130d9d8ee2387791ab4e545a29b5a20"
+    },
+    "compiler/logs/dependency-12.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-12.stdout": {
+      "bytes": 2653,
+      "mode": 420,
+      "sha256": "6b987584a6c74fb8817a7124512d83b18df1c43a53f40741061c14a0343ad866"
+    },
+    "compiler/logs/dependency-13.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-13.stdout": {
+      "bytes": 2724,
+      "mode": 420,
+      "sha256": "e4aea7b8ba66c48b8d57c86bded28f6e6bcd657d0c725ff79d36a6d28525b982"
+    },
+    "compiler/logs/dependency-14.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-14.stdout": {
+      "bytes": 2754,
+      "mode": 420,
+      "sha256": "e4faeae096c9ec48ef2fc5ad7099505e81e7e2ce0fe48974860884543a80b668"
+    },
+    "compiler/logs/dependency-15.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-15.stdout": {
+      "bytes": 2671,
+      "mode": 420,
+      "sha256": "c7ba9b4659696523b158251b58782db04ab261cbaa3ba9c8a33a76f1e25d7f57"
+    },
+    "compiler/logs/dependency-16.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-16.stdout": {
+      "bytes": 2665,
+      "mode": 420,
+      "sha256": "e6d857bcb44c2f2752e7795df3426c8312bd2bd7d6ad93177da0fc47597b1cc5"
+    },
+    "compiler/logs/dependency-17.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-17.stdout": {
+      "bytes": 1767,
+      "mode": 420,
+      "sha256": "01c3547804956b0748114b63f1de3c6d9d5093feac2a7ff56dfeb2e0290c867a"
+    },
+    "compiler/logs/dependency-18.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-18.stdout": {
+      "bytes": 2665,
+      "mode": 420,
+      "sha256": "30fc4d262f9607a81b3b62ef30564262161af272e84a2320ac95cf8fd56cc5fb"
+    },
+    "compiler/logs/dependency-19.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-19.stdout": {
+      "bytes": 2665,
+      "mode": 420,
+      "sha256": "3ec39f4b71cc8765d576a56a9b4c058099052b7c3f21a3643f8dbb0f08bea835"
+    },
+    "compiler/logs/dependency-20.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-20.stdout": {
+      "bytes": 982,
+      "mode": 420,
+      "sha256": "153faaede332c2e41619a5bd53c34e720a48f4d8135fb16442b2c5d1f1462628"
+    },
+    "compiler/logs/dependency-21.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-21.stdout": {
+      "bytes": 2440,
+      "mode": 420,
+      "sha256": "6e3688b0a932bb1bffd9173468fe4f563c95087c0ef8f0bdd8f1ce3897e04bef"
+    },
+    "compiler/logs/dependency-22.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-22.stdout": {
+      "bytes": 2938,
+      "mode": 420,
+      "sha256": "5c01c3de5a00b74ae23e85c939af97a188bfc03f09baa3cb6caff384337caef4"
+    },
+    "compiler/logs/dependency-23.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-23.stdout": {
+      "bytes": 2829,
+      "mode": 420,
+      "sha256": "85cd7ee4ffc8d164690fa61f5872740ed7ee6c1251e9963894465c8f2ea2fd6a"
+    },
+    "compiler/logs/dependency-24.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-24.stdout": {
+      "bytes": 2935,
+      "mode": 420,
+      "sha256": "92ec819ff7d6e393804022b7c06ea0558e530db37a234dd44bc0a333b0bbb928"
+    },
+    "compiler/logs/dependency-25.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/dependency-25.stdout": {
+      "bytes": 2868,
+      "mode": 420,
+      "sha256": "29b3f6cd229dfc310a8352b1ace422b53297267c479f637c556fc0110cfa1cb6"
+    },
+    "compiler/logs/runtime-libamiga-a.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/runtime-libamiga-a.stdout": {
+      "bytes": 156,
+      "mode": 420,
+      "sha256": "c2c8e44936c32e01094e9de761e57c62c7bb834fbf6cabd464465bf3b17090c4"
+    },
+    "compiler/logs/runtime-libgcc-a.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/runtime-libgcc-a.stdout": {
+      "bytes": 125,
+      "mode": 420,
+      "sha256": "b1912e77c4c1160ce749ca74fbe6edabd5896c2291188e718a9cdfd72c84d57a"
+    },
+    "compiler/logs/runtime-libnix-a.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/runtime-libnix-a.stdout": {
+      "bytes": 121,
+      "mode": 420,
+      "sha256": "1ca0a83ef891770cbbe671647c7aad9f925ed0b9756c8f85aca35c84961e202a"
+    },
+    "compiler/logs/runtime-libnix20-a.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/runtime-libnix20-a.stdout": {
+      "bytes": 123,
+      "mode": 420,
+      "sha256": "9060e4a22ea9e716b8f9cf85b5fe5e11a9e6c88ef938b9111d189acc2df8465b"
+    },
+    "compiler/logs/runtime-libnixmain-a.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/runtime-libnixmain-a.stdout": {
+      "bytes": 125,
+      "mode": 420,
+      "sha256": "dd28b9a8319d35bd81f76cd9479f889e7e5628be07a45ef138f35a729c640add"
+    },
+    "compiler/logs/runtime-libstubs-a.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/runtime-libstubs-a.stdout": {
+      "bytes": 156,
+      "mode": 420,
+      "sha256": "8ce0c56c26f8f09a8af8b76d62c4d380cbfbe8efde13fa64884d8e9e6c93027f"
+    },
+    "compiler/logs/runtime-ncrt0-o.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/logs/runtime-ncrt0-o.stdout": {
+      "bytes": 120,
+      "mode": 420,
+      "sha256": "1562950e2e8cb15a51238fddb72e6e26f0ff2d5a774543473aba0d274a19c45f"
+    },
+    "compiler/manifest.json": {
+      "bytes": 1254461,
+      "mode": 420,
+      "sha256": "37ffd1c7bcf5157011b647760951e5dc562cfbbdf160e07ab9919ddaea1a5614"
+    },
+    "compiler/qualified-builder.py.reference": {
+      "bytes": 16516,
+      "mode": 420,
+      "sha256": "432e808cca4f2a00161fee788464788c13e7b1721430c8423710a079a2ee72c3"
+    },
+    "compiler/saved-byte-verification.json": {
+      "bytes": 281977,
+      "mode": 420,
+      "sha256": "bbf676b225bb636f005d4d464aea45ac934629d71d84b05f19de3bc49ee4bb0c"
+    },
+    "compiler/saved-verification.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler/saved-verification.stdout": {
+      "bytes": 576,
+      "mode": 420,
+      "sha256": "8184a245922ca45a15bda951c5add92b44df0ee36521794935e1b803206a2dcf"
+    },
+    "compiler/tool-pins.json": {
+      "bytes": 275123,
+      "mode": 420,
+      "sha256": "436bb1dea25700bfde5dfb367ffc0003926cf6c03dfd048c6dc0489eef34dadb"
+    },
+    "compiler/verify_saved_bytes.py.reference": {
+      "bytes": 8526,
+      "mode": 420,
+      "sha256": "58237fb94053efe8b5e363b7f1975c66fd2620acd4a8dfa717aef87ccd94c846"
+    },
+    "expected-native.stdout": {
+      "bytes": 725,
+      "mode": 420,
+      "sha256": "1b285024f5e96e22849f7228540fc8f461cb2eb5a8fd1f8338ce588fad5f6d9b"
+    },
+    "host/abi2-compile.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "host/abi2-compile.stdout": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "host/abi2-run.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "host/abi2-run.stdout": {
+      "bytes": 120,
+      "mode": 420,
+      "sha256": "38012f6e8d7e0ca9be8b79f52c5cb9156e801916bab4c082190a598332aa26d6"
+    },
+    "host/current-source-v2.json": {
+      "bytes": 1478,
+      "mode": 420,
+      "sha256": "eb5a7a56b66fa478a5874ae30e4e50984829b2dc756af70ecf1fac8a366f16cb"
+    },
+    "host/independent-final-host-review.json": {
+      "bytes": 20774,
+      "mode": 420,
+      "sha256": "619a5aaee2e0cf40d628c2a3853acc8a349af36b5fc5385d731037da80fbe5dd"
+    },
+    "host/paired-compile.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "host/paired-compile.stdout": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "host/paired-run.stderr": {
+      "bytes": 0,
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "host/paired-run.stdout": {
+      "bytes": 725,
+      "mode": 420,
+      "sha256": "1b285024f5e96e22849f7228540fc8f461cb2eb5a8fd1f8338ce588fad5f6d9b"
+    },
+    "host/run.json": {
+      "bytes": 160886,
+      "mode": 420,
+      "sha256": "a3ac5d6a88ca48c563a5f28e964fbc734804db85e5bf88aa4b022af7b6bc0e11"
+    },
+    "prior/build_native_once.py.reference": {
+      "bytes": 16449,
+      "mode": 420,
+      "sha256": "d49138c4e475fb4d2d743cecd5f889d9d81558a1618fcefb43decd294788d3d7"
+    },
+    "prior/precompiler-withdrawal.json": {
+      "bytes": 1138,
+      "mode": 420,
+      "sha256": "a114af4080fda67bd41f9c35eeb7c715f54715cd3a834ac36b0d334c5f9c0e64"
+    },
+    "verify_saved.py": {
+      "bytes": 5894,
+      "mode": 420,
+      "sha256": "a3c710b02ad5c2658aece31762ae4b354d7f377896589ae8a6c1a2e72a8d0c29"
+    }
+  },
+  "productIncluded": false,
+  "status": "FROZEN_PUBLIC_COMPILER_CUSTODY_NEVER_EXECUTED",
+  "targetExecution": "NOT_RUN"
+}

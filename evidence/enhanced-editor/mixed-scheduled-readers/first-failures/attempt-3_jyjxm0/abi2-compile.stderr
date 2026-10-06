@@ -1,0 +1,38 @@
+duplicate symbol '_pt_readers_poll_command' in:
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers-4d109f.o
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers_test-e34cee.o
+duplicate symbol '_pt_readers_close' in:
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers-4d109f.o
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers_test-e34cee.o
+duplicate symbol '_pt_readers_publish' in:
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers-4d109f.o
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers_test-e34cee.o
+duplicate symbol '_pt_readers_enqueue' in:
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers-4d109f.o
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers_test-e34cee.o
+duplicate symbol '_pt_readers_stop' in:
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers-4d109f.o
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers_test-e34cee.o
+duplicate symbol '_pt_readers_cancel_reader' in:
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers-4d109f.o
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers_test-e34cee.o
+duplicate symbol '_pt_readers_open' in:
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers-4d109f.o
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers_test-e34cee.o
+duplicate symbol '_pt_readers_cancel_command' in:
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers-4d109f.o
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers_test-e34cee.o
+duplicate symbol '_pt_readers_poll_reader' in:
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers-4d109f.o
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers_test-e34cee.o
+duplicate symbol '_pt_readers_commands_held' in:
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers-4d109f.o
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers_test-e34cee.o
+duplicate symbol '_pt_readers_readers_held' in:
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers-4d109f.o
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers_test-e34cee.o
+duplicate symbol '_pt_readers_reader_key' in:
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers-4d109f.o
+    /private/var/folders/ps/1p2ls2fx3bv1j0mkqvc9w2g40000gp/T/scheduled_readers_test-e34cee.o
+ld: 12 duplicate symbols
+clang: error: linker command failed with exit code 1 (use -v to see invocation)

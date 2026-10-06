@@ -1,0 +1,16 @@
+{
+  "status": "WITHDRAWN_BEFORE_COMPILER_SOURCE_CORRECTION_PENDING",
+  "atUTC": "2026-10-06T14:33:52.739202+00:00",
+  "historicalControls": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/current-source.json",
+    "bytes": 1198,
+    "sha256": "00ade4e173686115f3173210cb101b96d2699735f2d7d1092e6c20290e9dbf2a"
+  },
+  "observedRootReadback": "The then-current four matched saved ASan/UBSan PASS attempt-gi0vqwpn, all923 frozen source inputs and protected16 were independently read byteexact.",
+  "reason": "Writer subsequently found the full new-holder input/output alias admission needed to precede nested enqueue reentry fault, plus constructor capability/budget refusal ordering. Corrections and concrete regression tests require a fresh matching host run and final independent review.",
+  "compilerCalls": 0,
+  "productCreated": false,
+  "productExecution": false,
+  "targetActions": 0,
+  "continuation": "Preserve these observed historical controls and unexecuted portable-v1 builder. Use distinct portable-v2 with future current-source-v2.json; no first compiler failure is claimed."
+}

@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "baseline": "c6783d79ea679bdc8acff3d38ee1c66f1564c9ed",
+  "run": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-oxjh_ms9/run.json",
+  "files": {
+    "src/core/mixed_scheduled_readers.h": {
+      "bytes": 10560,
+      "sha256": "39cfe1b89604d851d975c6c34a2f30df8bed0b244a69cadb420146a24c22b596",
+      "mode": 420,
+      "saved_equal": true
+    },
+    "src/core/mixed_scheduled_readers.c": {
+      "bytes": 33494,
+      "sha256": "8efb581095b936059fbf2e3a92fb02261ef9323496f813408f82fc98a2c55b84",
+      "mode": 420,
+      "saved_equal": true
+    },
+    "tests/mixed_scheduled_readers_test.c": {
+      "bytes": 42472,
+      "sha256": "1ae794701271d3551c9d852f820a6a827d4d02b517483630fcfa3e23073ebca2",
+      "mode": 420,
+      "saved_equal": true
+    },
+    "tests/test_mixed_scheduled_readers.py": {
+      "bytes": 5461,
+      "sha256": "a24491f99e645e5933725a3cb1beaccc25a2301fd7419857b6f5fb840c60a11d",
+      "mode": 420,
+      "saved_equal": true
+    }
+  },
+  "source_count": 923,
+  "finalReview": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/reviews/independent-final-host-review.json",
+    "bytes": 20774,
+    "sha256": "619a5aaee2e0cf40d628c2a3853acc8a349af36b5fc5385d731037da80fbe5dd"
+  },
+  "scope": "Root current saved-byte host qualification and independent review readback; no native/target admission",
+  "atUTC": "2026-10-06T14:37:38.948712+00:00"
+}

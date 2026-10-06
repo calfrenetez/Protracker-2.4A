@@ -1,0 +1,312 @@
+"""One host-only portable crossbuild of the complete frozen paired reader fixture.
+
+Derived from the qualified queued-Paula portable-v2 workflow.  No
+candidate, target, guard, service, network or shared lifecycle is executed here.
+"""
+from pathlib import Path
+import hashlib
+import io
+import json
+import shlex
+import shutil
+import stat
+import struct
+import subprocess
+import sys
+import tarfile
+import time
+
+BASE = Path(__file__).resolve().parent
+ROOT = BASE.parents[2]
+REPO = ROOT / 'work/Protracker-2.4A'
+CONTROL = BASE.parent / 'v1/current-source-v2.json'
+HOST = None  # Exact successful attempt is supplied in frozen root controls below.
+INPUT = None  # Resolved only after immutable successful host controls.
+SOURCE = BASE / 'source'
+OUTPUT = BASE / 'native'
+PROTECTED = ROOT / 'outputs/editor-metadata-bridges/v2/source-controls.json'
+PINS = ROOT / 'outputs/readers-activation-1rr1yyrp/native-ram-entry-sampled-stack-private-build-v1/manifest.json'
+REFERENCE = ROOT / 'outputs/editor-paula-readers-prepare/portable-v2/build_native_once.py'
+HEAD = 'c6783d79ea679bdc8acff3d38ee1c66f1564c9ed'
+OWN = ['src/core/mixed_scheduled_readers.h',
+       'src/core/mixed_scheduled_readers.c',
+       'tests/mixed_scheduled_readers_test.c',
+       'tests/test_mixed_scheduled_readers.py']
+FLAGS = ['-std=c99', '-m68000', '-msoft-float', '-mcrt=nix20', '-Os',
+         '-Wall', '-Wextra', '-Werror', '-UNDEBUG', '-Isrc/core', '-I.', '-fbbb=-']
+started_overall = time.monotonic()
+DEADLINE = started_overall + 600
+MANIFEST = BASE / 'manifest.json'
+assert not MANIFEST.exists(), 'Refuse replay of an existing attempt.'
+result = {
+    'status': 'PREPARING_HOST_COMPILER_ONLY_NEVER_EXECUTED',
+    'scope': 'Host compiler/link only; paired reader main plus inherited genuine wavetable fixture. No product execution, target, emulator, physical, UI PLAY, placement, stack, wallclock, audio or device acceptance.',
+    'target_execution': 'NEVER_EXECUTED', 'emulator_execution': 'NEVER_EXECUTED',
+    'physical_execution': 'NEVER_EXECUTED', 'native_execution': 'NEVER_EXECUTED',
+    'host_baseline': HEAD, 'publication': 'Four exact additive overlays over committed c678 baseline; publication pending separately.',
+    'overlay_files': OWN, 'flags': FLAGS, 'calls': [], 'local_readbacks': [],
+    'correction': 'New separately qualified paired reader fixture; all host failures retained in their original attempts.',
+    'launch_log_snapshot': 'Parent redirect build.stdout/build.stderr remain open during finally; excluded from manifest retained snapshot and independently read after closure.',
+    'dependencies': {}, 'retained_files': {},
+    'bounds': {'overall_seconds': 600, 'each_compiler_call_seconds': 120,
+               'each_git_readback_seconds': 20,
+               'behavior': 'First failure retained; no retry or product execution'},
+}
+
+
+def save():
+    MANIFEST.write_text(json.dumps(result, indent=2) + '\n')
+
+
+def record(path):
+    path = Path(path)
+    before = path.lstat()
+    assert stat.S_ISREG(before.st_mode), 'Nonordinary file: ' + str(path)
+    assert not (getattr(before, 'st_flags', 0) & 0x40000000), 'Dataless file: ' + str(path)
+    data = path.read_bytes()
+    after = path.lstat()
+    assert (before.st_dev, before.st_ino, before.st_mode, before.st_size, before.st_mtime_ns,
+            getattr(before, 'st_flags', 0)) == (after.st_dev, after.st_ino, after.st_mode,
+            after.st_size, after.st_mtime_ns, getattr(after, 'st_flags', 0)), 'Read changed identity: ' + str(path)
+    assert len(data) == before.st_size
+    return {'path': str(path), 'resolved_path': str(path.resolve()), 'bytes': len(data),
+            'mode': stat.S_IMODE(before.st_mode), 'full_mode': before.st_mode,
+            'device': before.st_dev, 'inode': before.st_ino,
+            'flags': getattr(before, 'st_flags', 0), 'mtime_ns': before.st_mtime_ns,
+            'ordinary_resident': True, 'sha256': hashlib.sha256(data).hexdigest()}
+
+
+def compact(data):
+    return {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
+
+
+def inventory(root):
+    records = {}
+    for path in sorted(root.rglob('*')):
+        mode = path.lstat().st_mode
+        assert stat.S_ISDIR(mode) or stat.S_ISREG(mode), 'Nonordinary inventory member: ' + str(path)
+        if stat.S_ISREG(mode):
+            pin = record(path)
+            records[path.relative_to(root).as_posix()] = {'bytes': pin['bytes'], 'sha256': pin['sha256']}
+    return records
+
+
+def same_bytes(path, pin):
+    actual = record(path)
+    assert actual['sha256'] == pin['sha256'] and actual['bytes'] == pin['bytes'], 'Changed bytes: ' + str(path)
+    return actual
+
+
+def check_tools():
+    for pin in [*pins['tools'].values(), *pins['runtime_inputs'].values()]:
+        actual = same_bytes(pin['path'], pin)
+        assert actual['resolved_path'] == pin['resolved_path'] and actual['mode'] == pin['mode']
+
+
+def read_git(args, label):
+    remaining = DEADLINE - time.monotonic()
+    assert remaining > 0, 'Overall 600-second deadline exceeded.'
+    timeout = min(20, remaining)
+    entry = {'argv': ['git', *args], 'label': label, 'cwd': str(REPO),
+             'timeout_seconds': timeout, 'scope': 'Local read-only Git bytes'}
+    result['local_readbacks'].append(entry)
+    save()
+    started = time.monotonic()
+    completed = subprocess.run(entry['argv'], cwd=REPO, stdout=subprocess.PIPE,
+                               stderr=subprocess.PIPE, timeout=timeout, check=False)
+    entry.update(returncode=completed.returncode, elapsed_seconds=time.monotonic()-started,
+                 stdout=compact(completed.stdout), stderr=compact(completed.stderr))
+    save()
+    assert completed.returncode == 0 and not completed.stderr, 'Read-only Git check failed: ' + label
+    return completed.stdout
+
+
+def call(argv, label):
+    check_tools()
+    remaining = DEADLINE - time.monotonic()
+    assert remaining > 0, 'Overall 600-second build deadline exceeded.'
+    timeout = min(120, remaining)
+    entry = {'argv': argv, 'cwd': str(SOURCE), 'label': label,
+             'timeout_seconds': timeout, 'product_execution': 'NEVER_EXECUTED'}
+    result['calls'].append(entry)
+    save()
+    started = time.monotonic()
+    outpath, errpath = OUTPUT / (label + '.stdout'), OUTPUT / (label + '.stderr')
+    try:
+        with outpath.open('xb') as out, errpath.open('xb') as err:
+            completed = subprocess.run(argv, cwd=SOURCE, stdout=out, stderr=err,
+                                       timeout=timeout, check=False)
+        entry['returncode'] = completed.returncode
+        entry['status'] = 'PASS' if completed.returncode == 0 else 'FIRST_FAILURE_RETAINED'
+        if completed.returncode:
+            raise subprocess.CalledProcessError(completed.returncode, argv)
+        return outpath.read_text()
+    except BaseException as failure:
+        entry['failure'] = repr(failure)
+        entry.setdefault('status', 'FIRST_FAILURE_RETAINED')
+        raise
+    finally:
+        entry['elapsed_seconds'] = time.monotonic() - started
+        entry['stdout'] = record(outpath) if outpath.exists() else None
+        entry['stderr'] = record(errpath) if errpath.exists() else None
+        save()
+
+
+failure = None
+try:
+    assert not SOURCE.exists() and not OUTPUT.exists(), 'Do not overwrite a prior build.'
+    result['builder'] = record(__file__)
+    result['qualified_builder_reference'] = record(REFERENCE)
+    result['python'] = {'version': sys.version, 'invoked_executable': sys.executable,
+                        'executable': record(Path(sys.executable).resolve())}
+    control_pin = record(CONTROL)
+    controls = json.loads(CONTROL.read_text())
+    result['current_source_control'] = control_pin
+    assert controls['baseline'] == HEAD and controls['status'] == 'PASS'
+    HOST = Path(controls['run']).parent
+    INPUT = HOST / 'source'
+    assert HOST.parent == BASE.parent / 'v1' and HOST.name.startswith('attempt-')
+    assert Path(controls['run']) == HOST / 'run.json'
+    assert list(controls['files']) == OWN and all(p['saved_equal'] for p in controls['files'].values())
+    host = json.loads((HOST / 'run.json').read_text())
+    assert host['status'] == 'PASS' and host['head'] == HEAD
+    assert len(host['calls']) == 4 and all(c['status'] == 'PASS' and c['returncode'] == 0 for c in host['calls'])
+    assert all(record(HOST / (c['label'] + '.stderr'))['bytes'] == 0 for c in host['calls'])
+    original_source = inventory(INPUT)
+    host_byte_pins = {name: {'bytes': pin['bytes'], 'sha256': pin['sha256']}
+                      for name, pin in host['inputs'].items()}
+    assert original_source == host_byte_pins and len(original_source) == 923
+    host_modes = {name: pin['mode'] for name, pin in host['inputs'].items()}
+    assert all(record(INPUT / name)['mode'] == mode for name, mode in host_modes.items())
+    result['host_source_modes'] = host_modes
+    host_custody = inventory(HOST)
+    units = [arg for arg in next(c for c in host['calls'] if c['label'] == 'paired-compile')['argv'] if arg.endswith('.c')]
+    assert len(units) >= 8 and len(units) == len(set(units))
+    assert units[0] == 'tests/mixed_scheduled_readers_test.c'
+    assert units[1] == 'src/core/mixed_scheduled_readers.c'
+    assert 'tests/sampler_wavetable_test.c' not in units, 'Inherited genuine wavetable fixture is included once by the new main.'
+    for relative, pin in controls['files'].items():
+        same_bytes(REPO / relative, pin)
+        same_bytes(INPUT / relative, pin)
+    result['current_own_four'] = controls['files']
+    result['source_before'] = original_source
+    result['source_count'] = len(original_source)
+    result['ordered_units'] = units
+    result['unit_count'] = len(units)
+    result['host_evidence'] = record(HOST / 'run.json')
+    result['host_attempt_custody'] = host_custody
+    protected = json.loads(PROTECTED.read_text())['protected']
+    assert len(protected) == 16
+    result['protected_16_before'] = protected
+    result['protected_control_source'] = record(PROTECTED)
+    for relative, pin in protected.items():
+        actual = record(REPO / relative)
+        assert actual['sha256'] == pin['sha256'] and actual['full_mode'] == pin['mode']
+    assert read_git(['rev-parse', 'HEAD'], 'baseline-head').decode().strip() == HEAD
+    index_before = read_git(['ls-files', '--stage'], 'index-before')
+    assert read_git(['diff', '--cached', '--name-only'], 'empty-index') == b''
+    archive = read_git(['archive', HEAD, 'src', 'tests'], 'committed-src-tests-archive')
+    committed = {}
+    with tarfile.open(fileobj=io.BytesIO(archive)) as stream:
+        for member in stream.getmembers():
+            if member.isfile():
+                data = stream.extractfile(member).read()
+                committed[member.name] = compact(data)
+    font = read_git(['show', HEAD + ':vendor/pt23f/raw/ptfont.raw'], 'committed-font')
+    assert len(font) == 580
+    committed['pt_font.h'] = compact(('static const unsigned char pt_font[580] = {' + ','.join(str(b) for b in font) + '};\n').encode())
+    for relative, pin in controls['files'].items():
+        committed[relative] = {'bytes': pin['bytes'], 'sha256': pin['sha256']}
+    assert committed == original_source, 'Complete frozen source must equal c678 plus exact four overlays and committed generated font.'
+    result['frozen_c678_plus_four_verified'] = True
+    pins = json.loads(PINS.read_text())
+    result['compiler_pin_source'] = record(PINS)
+    result['tools'] = pins['tools']
+    result['runtime_inputs'] = pins['runtime_inputs']
+    result['compiler'] = pins['tools']['compiler']
+    check_tools()
+    shutil.copytree(INPUT, SOURCE)
+    assert inventory(SOURCE) == original_source
+    assert all(record(SOURCE / name)['mode'] == mode for name, mode in host_modes.items())
+    OUTPUT.mkdir()
+    shutil.copyfile(HOST / 'run.json', BASE / 'host-run.json')
+    shutil.copyfile(CONTROL, BASE / 'current-source.json')
+    shutil.copyfile(HOST / 'paired-run.stdout', BASE / 'expected-native.stdout')
+    shutil.copyfile(PINS, BASE / 'prior-compiler-pins.json')
+    shutil.copyfile(REFERENCE, BASE / 'qualified-builder.py.reference')
+    expected = (BASE / 'expected-native.stdout').read_bytes()
+    assert expected == (HOST / 'paired-run.stdout').read_bytes()
+    assert expected.startswith(b'MIXED READERS PASS:') and b'SOFTWARE_ONLY' in expected
+    assert len(expected.splitlines()) >= 2 and expected.endswith(b'\n')
+    result['expected_stdout'] = record(BASE / 'expected-native.stdout')
+    result['complete_expected_markers'] = len(expected.splitlines())
+    result['status'] = 'RUNNING_COMPILER_ONLY_NEVER_EXECUTED'
+    save()
+    compiler = pins['tools']['compiler']
+    call([compiler['path'], '--version'], 'compiler-version')
+    for name, pin in pins['runtime_inputs'].items():
+        runtime_path = Path(call([compiler['path'], '-m68000', '-msoft-float', '-mcrt=nix20',
+                                 '-print-file-name=' + name], 'runtime-' + name.replace('.', '-')).strip())
+        assert runtime_path.resolve() == Path(pin['path']).resolve()
+        same_bytes(runtime_path, pin)
+    for index, unit in enumerate(units):
+        text = call([compiler['path'], *FLAGS, '-M', unit], 'dependency-%02d' % index)
+        raw_paths = shlex.split(text.replace('\\\n', ' ').split(':', 1)[1])
+        assert raw_paths
+        for raw in raw_paths:
+            path = (SOURCE / raw).resolve() if not Path(raw).is_absolute() else Path(raw).resolve()
+            result['dependencies'][str(path)] = record(path)
+    assert inventory(SOURCE) == original_source
+    for path, pin in result['dependencies'].items():
+        same_bytes(path, pin)
+    binary = OUTPUT / 'PTMixedScheduledReadersTest'
+    call([compiler['path'], *FLAGS, *units, '-o', str(binary)], 'compile-link')
+    assert struct.unpack('>I', binary.read_bytes()[:4])[0] == 0x3F3, 'Expected Amiga HUNK.'
+    result['product'] = {**record(binary), 'execution': 'NEVER_EXECUTED'}
+    for path, pin in result['dependencies'].items():
+        same_bytes(path, pin)
+    check_tools()
+    assert inventory(HOST) == host_custody
+    assert all(record(INPUT / name)['mode'] == mode and
+               record(SOURCE / name)['mode'] == mode for name, mode in host_modes.items())
+    same_bytes(CONTROL, control_pin)
+    for relative, pin in controls['files'].items():
+        same_bytes(REPO / relative, pin)
+    for relative, pin in protected.items():
+        actual = record(REPO / relative)
+        assert actual['sha256'] == pin['sha256'] and actual['full_mode'] == pin['mode']
+    assert read_git(['rev-parse', 'HEAD'], 'final-head').decode().strip() == HEAD
+    assert read_git(['ls-files', '--stage'], 'index-after') == index_before
+    result['protected_16_stable'] = True
+    result['original_host_evidence_stable'] = True
+    result['four_overlays_stable'] = True
+    result['git_head_index_stable'] = True
+    result['status'] = 'PASS_COMPILER_LINK_ONLY_NEVER_EXECUTED'
+except BaseException as error:
+    failure = error
+    result['status'] = 'FIRST_FAILURE_RETAINED'
+    result['failure'] = repr(error)
+finally:
+    if SOURCE.exists():
+        try:
+            result['source_after'] = inventory(SOURCE)
+            result['source_stable'] = result.get('source_before') == result['source_after']
+            if not result['source_stable']:
+                result['status'] = 'SOURCE_CHANGED_FIRST_FAILURE_RETAINED'
+        except BaseException as error:
+            result['source_inventory_failure'] = repr(error)
+            result['status'] = 'SOURCE_CHANGED_FIRST_FAILURE_RETAINED'
+    result['dependency_count'] = len(result['dependencies'])
+    result['compiler_call_count'] = len(result['calls'])
+    result['overall_elapsed_seconds'] = time.monotonic() - started_overall
+    result['retained_files'] = {path.relative_to(BASE).as_posix(): record(path)
+                                for path in sorted(BASE.rglob('*'))
+                                if path.is_file() and path != MANIFEST
+                                and path.name not in ('build.stdout', 'build.stderr')}
+    save()
+print(json.dumps({'status': result['status'], 'source_count': result.get('source_count'),
+                  'unit_count': result.get('unit_count'), 'calls': len(result['calls']),
+                  'dependencies': len(result['dependencies']), 'failure': result.get('failure'),
+                  'product': result.get('product')}))
+if failure is not None or result['status'] != 'PASS_COMPILER_LINK_ONLY_NEVER_EXECUTED':
+    raise SystemExit(1)

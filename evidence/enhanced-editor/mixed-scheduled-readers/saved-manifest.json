@@ -1,0 +1,1308 @@
+{
+  "schema": "mixed-scheduled-readers-host-saved-manifest/v1",
+  "status": "HOST_ONLY_PASS",
+  "excludedSelfAndResult": [
+    "saved-manifest.json",
+    "verification.json"
+  ],
+  "files": {
+    "README.md": {
+      "savedCopy": {
+        "bytes": 7120,
+        "sha256": "7262d03c9609a188482fafb776ac41603c267aed497da63ecd990c832febfc97",
+        "mode": 420
+      },
+      "role": "generated packet metadata/verifier"
+    },
+    "contract.md": {
+      "savedCopy": {
+        "bytes": 7066,
+        "sha256": "a7517734ea1cae0c400c6badd4b02542d15b3fb29fc9da0c0bf605b8ad32c248",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/docs/MIXED_SCHEDULED_READERS.md",
+      "sourceFingerprint": {
+        "bytes": 7066,
+        "sha256": "a7517734ea1cae0c400c6badd4b02542d15b3fb29fc9da0c0bf605b8ad32c248",
+        "mode": 420
+      },
+      "role": "public contract snapshot"
+    },
+    "current/abi2-compile.stderr": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-oxjh_ms9/abi2-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "current log"
+    },
+    "current/abi2-compile.stdout": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-oxjh_ms9/abi2-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "current log"
+    },
+    "current/abi2-run.stderr": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-oxjh_ms9/abi2-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "current log"
+    },
+    "current/abi2-run.stdout": {
+      "savedCopy": {
+        "bytes": 120,
+        "sha256": "38012f6e8d7e0ca9be8b79f52c5cb9156e801916bab4c082190a598332aa26d6",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-oxjh_ms9/abi2-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 120,
+        "sha256": "38012f6e8d7e0ca9be8b79f52c5cb9156e801916bab4c082190a598332aa26d6",
+        "mode": 420
+      },
+      "role": "current log"
+    },
+    "current/current-source-v2.json": {
+      "savedCopy": {
+        "bytes": 1478,
+        "sha256": "eb5a7a56b66fa478a5874ae30e4e50984829b2dc756af70ecf1fac8a366f16cb",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/current-source-v2.json",
+      "sourceFingerprint": {
+        "bytes": 1478,
+        "sha256": "eb5a7a56b66fa478a5874ae30e4e50984829b2dc756af70ecf1fac8a366f16cb",
+        "mode": 420
+      },
+      "role": "root current controls"
+    },
+    "current/independent-final-host-review.json": {
+      "savedCopy": {
+        "bytes": 20774,
+        "sha256": "619a5aaee2e0cf40d628c2a3853acc8a349af36b5fc5385d731037da80fbe5dd",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/reviews/independent-final-host-review.json",
+      "sourceFingerprint": {
+        "bytes": 20774,
+        "sha256": "619a5aaee2e0cf40d628c2a3853acc8a349af36b5fc5385d731037da80fbe5dd",
+        "mode": 420
+      },
+      "role": "independent final review"
+    },
+    "current/paired-compile.stderr": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-oxjh_ms9/paired-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "current log"
+    },
+    "current/paired-compile.stdout": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-oxjh_ms9/paired-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "current log"
+    },
+    "current/paired-run.stderr": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-oxjh_ms9/paired-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "current log"
+    },
+    "current/paired-run.stdout": {
+      "savedCopy": {
+        "bytes": 725,
+        "sha256": "1b285024f5e96e22849f7228540fc8f461cb2eb5a8fd1f8338ce588fad5f6d9b",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-oxjh_ms9/paired-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 725,
+        "sha256": "1b285024f5e96e22849f7228540fc8f461cb2eb5a8fd1f8338ce588fad5f6d9b",
+        "mode": 420
+      },
+      "role": "current log"
+    },
+    "current/run.json": {
+      "savedCopy": {
+        "bytes": 160886,
+        "sha256": "a3ac5d6a88ca48c563a5f28e964fbc734804db85e5bf88aa4b022af7b6bc0e11",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-oxjh_ms9/run.json",
+      "sourceFingerprint": {
+        "bytes": 160886,
+        "sha256": "a3ac5d6a88ca48c563a5f28e964fbc734804db85e5bf88aa4b022af7b6bc0e11",
+        "mode": 420
+      },
+      "role": "current run"
+    },
+    "current/source/src/core/mixed_scheduled_readers.c": {
+      "savedCopy": {
+        "bytes": 33494,
+        "sha256": "8efb581095b936059fbf2e3a92fb02261ef9323496f813408f82fc98a2c55b84",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-oxjh_ms9/source/src/core/mixed_scheduled_readers.c",
+      "sourceFingerprint": {
+        "bytes": 33494,
+        "sha256": "8efb581095b936059fbf2e3a92fb02261ef9323496f813408f82fc98a2c55b84",
+        "mode": 420
+      },
+      "role": "current overlay"
+    },
+    "current/source/src/core/mixed_scheduled_readers.h": {
+      "savedCopy": {
+        "bytes": 10560,
+        "sha256": "39cfe1b89604d851d975c6c34a2f30df8bed0b244a69cadb420146a24c22b596",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-oxjh_ms9/source/src/core/mixed_scheduled_readers.h",
+      "sourceFingerprint": {
+        "bytes": 10560,
+        "sha256": "39cfe1b89604d851d975c6c34a2f30df8bed0b244a69cadb420146a24c22b596",
+        "mode": 420
+      },
+      "role": "current overlay"
+    },
+    "current/source/tests/mixed_scheduled_readers_test.c": {
+      "savedCopy": {
+        "bytes": 42472,
+        "sha256": "1ae794701271d3551c9d852f820a6a827d4d02b517483630fcfa3e23073ebca2",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-oxjh_ms9/source/tests/mixed_scheduled_readers_test.c",
+      "sourceFingerprint": {
+        "bytes": 42472,
+        "sha256": "1ae794701271d3551c9d852f820a6a827d4d02b517483630fcfa3e23073ebca2",
+        "mode": 420
+      },
+      "role": "current overlay"
+    },
+    "current/source/tests/test_mixed_scheduled_readers.py": {
+      "savedCopy": {
+        "bytes": 5461,
+        "sha256": "a24491f99e645e5933725a3cb1beaccc25a2301fd7419857b6f5fb840c60a11d",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-oxjh_ms9/source/tests/test_mixed_scheduled_readers.py",
+      "sourceFingerprint": {
+        "bytes": 5461,
+        "sha256": "a24491f99e645e5933725a3cb1beaccc25a2301fd7419857b6f5fb840c60a11d",
+        "mode": 420
+      },
+      "role": "current overlay"
+    },
+    "first-failures/attempt-321gfdq1/paired-compile.stderr": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-321gfdq1/paired-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "first failure log"
+    },
+    "first-failures/attempt-321gfdq1/paired-compile.stdout": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-321gfdq1/paired-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "first failure log"
+    },
+    "first-failures/attempt-321gfdq1/paired-run.stderr": {
+      "savedCopy": {
+        "bytes": 132,
+        "sha256": "69027517185b4457f22f5f12bb06935aff4f3db173a5831f879c016b05b849ec",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-321gfdq1/paired-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 132,
+        "sha256": "69027517185b4457f22f5f12bb06935aff4f3db173a5831f879c016b05b849ec",
+        "mode": 420
+      },
+      "role": "first failure log"
+    },
+    "first-failures/attempt-321gfdq1/paired-run.stdout": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-321gfdq1/paired-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "first failure log"
+    },
+    "first-failures/attempt-321gfdq1/run.json": {
+      "savedCopy": {
+        "bytes": 160063,
+        "sha256": "985a3dd5aec01736c8c3cd323d9dd5a37f8ec71edca7e8379e251786681f239f",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-321gfdq1/run.json",
+      "sourceFingerprint": {
+        "bytes": 160063,
+        "sha256": "985a3dd5aec01736c8c3cd323d9dd5a37f8ec71edca7e8379e251786681f239f",
+        "mode": 420
+      },
+      "role": "first failure run"
+    },
+    "first-failures/attempt-321gfdq1/source/src/core/mixed_scheduled_readers.c": {
+      "savedCopy": {
+        "bytes": 33556,
+        "sha256": "f7b574538ff3c2ce984e9be8c7d62b87c2ef7340f3822bf41d8157432b191dbc",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-321gfdq1/source/src/core/mixed_scheduled_readers.c",
+      "sourceFingerprint": {
+        "bytes": 33556,
+        "sha256": "f7b574538ff3c2ce984e9be8c7d62b87c2ef7340f3822bf41d8157432b191dbc",
+        "mode": 420
+      },
+      "role": "first failure overlay"
+    },
+    "first-failures/attempt-321gfdq1/source/src/core/mixed_scheduled_readers.h": {
+      "savedCopy": {
+        "bytes": 10560,
+        "sha256": "39cfe1b89604d851d975c6c34a2f30df8bed0b244a69cadb420146a24c22b596",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-321gfdq1/source/src/core/mixed_scheduled_readers.h",
+      "sourceFingerprint": {
+        "bytes": 10560,
+        "sha256": "39cfe1b89604d851d975c6c34a2f30df8bed0b244a69cadb420146a24c22b596",
+        "mode": 420
+      },
+      "role": "first failure overlay"
+    },
+    "first-failures/attempt-321gfdq1/source/tests/mixed_scheduled_readers_test.c": {
+      "savedCopy": {
+        "bytes": 37853,
+        "sha256": "553f2edc65dc99075ccb8d1d851d5d096eb80d809dfe13830205a46ae2d45b2b",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-321gfdq1/source/tests/mixed_scheduled_readers_test.c",
+      "sourceFingerprint": {
+        "bytes": 37853,
+        "sha256": "553f2edc65dc99075ccb8d1d851d5d096eb80d809dfe13830205a46ae2d45b2b",
+        "mode": 420
+      },
+      "role": "first failure overlay"
+    },
+    "first-failures/attempt-321gfdq1/source/tests/test_mixed_scheduled_readers.py": {
+      "savedCopy": {
+        "bytes": 5461,
+        "sha256": "a24491f99e645e5933725a3cb1beaccc25a2301fd7419857b6f5fb840c60a11d",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-321gfdq1/source/tests/test_mixed_scheduled_readers.py",
+      "sourceFingerprint": {
+        "bytes": 5461,
+        "sha256": "a24491f99e645e5933725a3cb1beaccc25a2301fd7419857b6f5fb840c60a11d",
+        "mode": 420
+      },
+      "role": "first failure overlay"
+    },
+    "first-failures/attempt-3_jyjxm0/abi2-compile.stderr": {
+      "savedCopy": {
+        "bytes": 2821,
+        "sha256": "0411882bad9e30eb62352197806f46c7f8a336f49bcdc716b1014b7ea3fad473",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-3_jyjxm0/abi2-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 2821,
+        "sha256": "0411882bad9e30eb62352197806f46c7f8a336f49bcdc716b1014b7ea3fad473",
+        "mode": 420
+      },
+      "role": "first failure log"
+    },
+    "first-failures/attempt-3_jyjxm0/abi2-compile.stdout": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-3_jyjxm0/abi2-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "first failure log"
+    },
+    "first-failures/attempt-3_jyjxm0/paired-compile.stderr": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-3_jyjxm0/paired-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "first failure log"
+    },
+    "first-failures/attempt-3_jyjxm0/paired-compile.stdout": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-3_jyjxm0/paired-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "first failure log"
+    },
+    "first-failures/attempt-3_jyjxm0/paired-run.stderr": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-3_jyjxm0/paired-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "first failure log"
+    },
+    "first-failures/attempt-3_jyjxm0/paired-run.stdout": {
+      "savedCopy": {
+        "bytes": 608,
+        "sha256": "5f6854773df076a79ae0513b7b1422531175c24f2337f7265d4365a9f8f7b4b3",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-3_jyjxm0/paired-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 608,
+        "sha256": "5f6854773df076a79ae0513b7b1422531175c24f2337f7265d4365a9f8f7b4b3",
+        "mode": 420
+      },
+      "role": "first failure log"
+    },
+    "first-failures/attempt-3_jyjxm0/run.json": {
+      "savedCopy": {
+        "bytes": 160692,
+        "sha256": "dc8f00cd4ec7c8b2945cf723759928d35ab639d48ed2b0042c86c3e38239f966",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-3_jyjxm0/run.json",
+      "sourceFingerprint": {
+        "bytes": 160692,
+        "sha256": "dc8f00cd4ec7c8b2945cf723759928d35ab639d48ed2b0042c86c3e38239f966",
+        "mode": 420
+      },
+      "role": "first failure run"
+    },
+    "first-failures/attempt-3_jyjxm0/source/src/core/mixed_scheduled_readers.c": {
+      "savedCopy": {
+        "bytes": 33464,
+        "sha256": "e8ca438e534e06f1765b42c5cbabfbf4f1bd4e6a2ce3b2b5f28024634fce4bb8",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-3_jyjxm0/source/src/core/mixed_scheduled_readers.c",
+      "sourceFingerprint": {
+        "bytes": 33464,
+        "sha256": "e8ca438e534e06f1765b42c5cbabfbf4f1bd4e6a2ce3b2b5f28024634fce4bb8",
+        "mode": 420
+      },
+      "role": "first failure overlay"
+    },
+    "first-failures/attempt-3_jyjxm0/source/src/core/mixed_scheduled_readers.h": {
+      "savedCopy": {
+        "bytes": 10560,
+        "sha256": "39cfe1b89604d851d975c6c34a2f30df8bed0b244a69cadb420146a24c22b596",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-3_jyjxm0/source/src/core/mixed_scheduled_readers.h",
+      "sourceFingerprint": {
+        "bytes": 10560,
+        "sha256": "39cfe1b89604d851d975c6c34a2f30df8bed0b244a69cadb420146a24c22b596",
+        "mode": 420
+      },
+      "role": "first failure overlay"
+    },
+    "first-failures/attempt-3_jyjxm0/source/tests/mixed_scheduled_readers_test.c": {
+      "savedCopy": {
+        "bytes": 32469,
+        "sha256": "ddf29f4c730ec0d1d40ae3edec40ce48a32033066761fa1b618085ca66c6180a",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-3_jyjxm0/source/tests/mixed_scheduled_readers_test.c",
+      "sourceFingerprint": {
+        "bytes": 32469,
+        "sha256": "ddf29f4c730ec0d1d40ae3edec40ce48a32033066761fa1b618085ca66c6180a",
+        "mode": 420
+      },
+      "role": "first failure overlay"
+    },
+    "first-failures/attempt-3_jyjxm0/source/tests/test_mixed_scheduled_readers.py": {
+      "savedCopy": {
+        "bytes": 5493,
+        "sha256": "c87f98b75cbc77d64d1e0bee1ba536d39477ac067360740f987310eb09baa4d8",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-3_jyjxm0/source/tests/test_mixed_scheduled_readers.py",
+      "sourceFingerprint": {
+        "bytes": 5493,
+        "sha256": "c87f98b75cbc77d64d1e0bee1ba536d39477ac067360740f987310eb09baa4d8",
+        "mode": 420
+      },
+      "role": "first failure overlay"
+    },
+    "first-failures/attempt-hqv5gp1b/paired-compile.stderr": {
+      "savedCopy": {
+        "bytes": 245,
+        "sha256": "6173d89b8b2121de21c8842898b5ec4bdbc504f207554f1d461e0b0b24eabfe8",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-hqv5gp1b/paired-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 245,
+        "sha256": "6173d89b8b2121de21c8842898b5ec4bdbc504f207554f1d461e0b0b24eabfe8",
+        "mode": 420
+      },
+      "role": "first failure log"
+    },
+    "first-failures/attempt-hqv5gp1b/paired-compile.stdout": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-hqv5gp1b/paired-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "first failure log"
+    },
+    "first-failures/attempt-hqv5gp1b/run.json": {
+      "savedCopy": {
+        "bytes": 159764,
+        "sha256": "b9f318cee3055ff8f9e5df314a778c880c9013bd8f3a622a086df5902af1087c",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-hqv5gp1b/run.json",
+      "sourceFingerprint": {
+        "bytes": 159764,
+        "sha256": "b9f318cee3055ff8f9e5df314a778c880c9013bd8f3a622a086df5902af1087c",
+        "mode": 420
+      },
+      "role": "first failure run"
+    },
+    "first-failures/attempt-hqv5gp1b/source/src/core/mixed_scheduled_readers.c": {
+      "savedCopy": {
+        "bytes": 33445,
+        "sha256": "134b899193144dae51b8b30f89f62cd25631976fa4df6b345b9465bdf150c212",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-hqv5gp1b/source/src/core/mixed_scheduled_readers.c",
+      "sourceFingerprint": {
+        "bytes": 33445,
+        "sha256": "134b899193144dae51b8b30f89f62cd25631976fa4df6b345b9465bdf150c212",
+        "mode": 420
+      },
+      "role": "first failure overlay"
+    },
+    "first-failures/attempt-hqv5gp1b/source/src/core/mixed_scheduled_readers.h": {
+      "savedCopy": {
+        "bytes": 10560,
+        "sha256": "39cfe1b89604d851d975c6c34a2f30df8bed0b244a69cadb420146a24c22b596",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-hqv5gp1b/source/src/core/mixed_scheduled_readers.h",
+      "sourceFingerprint": {
+        "bytes": 10560,
+        "sha256": "39cfe1b89604d851d975c6c34a2f30df8bed0b244a69cadb420146a24c22b596",
+        "mode": 420
+      },
+      "role": "first failure overlay"
+    },
+    "first-failures/attempt-hqv5gp1b/source/tests/mixed_scheduled_readers_test.c": {
+      "savedCopy": {
+        "bytes": 19547,
+        "sha256": "c6776bdcda285d454ac06864e8ce87af0d86547effddc6e9fef3d5a617180801",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-hqv5gp1b/source/tests/mixed_scheduled_readers_test.c",
+      "sourceFingerprint": {
+        "bytes": 19547,
+        "sha256": "c6776bdcda285d454ac06864e8ce87af0d86547effddc6e9fef3d5a617180801",
+        "mode": 420
+      },
+      "role": "first failure overlay"
+    },
+    "first-failures/attempt-hqv5gp1b/source/tests/test_mixed_scheduled_readers.py": {
+      "savedCopy": {
+        "bytes": 5493,
+        "sha256": "c87f98b75cbc77d64d1e0bee1ba536d39477ac067360740f987310eb09baa4d8",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-hqv5gp1b/source/tests/test_mixed_scheduled_readers.py",
+      "sourceFingerprint": {
+        "bytes": 5493,
+        "sha256": "c87f98b75cbc77d64d1e0bee1ba536d39477ac067360740f987310eb09baa4d8",
+        "mode": 420
+      },
+      "role": "first failure overlay"
+    },
+    "first-failures/attempt-k2v46kfo/paired-compile.stderr": {
+      "savedCopy": {
+        "bytes": 3679,
+        "sha256": "10a3e419eb87dc045ac49d62f823dce9ffe2b8e9fdd18d2400127a5a2817eff4",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-k2v46kfo/paired-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 3679,
+        "sha256": "10a3e419eb87dc045ac49d62f823dce9ffe2b8e9fdd18d2400127a5a2817eff4",
+        "mode": 420
+      },
+      "role": "first failure log"
+    },
+    "first-failures/attempt-k2v46kfo/paired-compile.stdout": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-k2v46kfo/paired-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "first failure log"
+    },
+    "first-failures/attempt-k2v46kfo/run.json": {
+      "savedCopy": {
+        "bytes": 159764,
+        "sha256": "71ce5e48558d70f6c897bcf04177c76fcb9cddbde28ac72665c7a17ae7b1782e",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-k2v46kfo/run.json",
+      "sourceFingerprint": {
+        "bytes": 159764,
+        "sha256": "71ce5e48558d70f6c897bcf04177c76fcb9cddbde28ac72665c7a17ae7b1782e",
+        "mode": 420
+      },
+      "role": "first failure run"
+    },
+    "first-failures/attempt-k2v46kfo/source/src/core/mixed_scheduled_readers.c": {
+      "savedCopy": {
+        "bytes": 33388,
+        "sha256": "f14289b1f6a02e77a2fac0cf34b268e42586fca2da8c35dd731533fe381fbf6a",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-k2v46kfo/source/src/core/mixed_scheduled_readers.c",
+      "sourceFingerprint": {
+        "bytes": 33388,
+        "sha256": "f14289b1f6a02e77a2fac0cf34b268e42586fca2da8c35dd731533fe381fbf6a",
+        "mode": 420
+      },
+      "role": "first failure overlay"
+    },
+    "first-failures/attempt-k2v46kfo/source/src/core/mixed_scheduled_readers.h": {
+      "savedCopy": {
+        "bytes": 10555,
+        "sha256": "249c263c9ec1a0e63f3061f34f5f8f9e4e73162aa28265bf16fbfab2d9ac006b",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-k2v46kfo/source/src/core/mixed_scheduled_readers.h",
+      "sourceFingerprint": {
+        "bytes": 10555,
+        "sha256": "249c263c9ec1a0e63f3061f34f5f8f9e4e73162aa28265bf16fbfab2d9ac006b",
+        "mode": 420
+      },
+      "role": "first failure overlay"
+    },
+    "first-failures/attempt-k2v46kfo/source/tests/mixed_scheduled_readers_test.c": {
+      "savedCopy": {
+        "bytes": 19566,
+        "sha256": "557569307c2ae7f8c3571f8d940b34bc5b8a1babe5e2c99f492bb52331ece7b6",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-k2v46kfo/source/tests/mixed_scheduled_readers_test.c",
+      "sourceFingerprint": {
+        "bytes": 19566,
+        "sha256": "557569307c2ae7f8c3571f8d940b34bc5b8a1babe5e2c99f492bb52331ece7b6",
+        "mode": 420
+      },
+      "role": "first failure overlay"
+    },
+    "first-failures/attempt-k2v46kfo/source/tests/test_mixed_scheduled_readers.py": {
+      "savedCopy": {
+        "bytes": 5493,
+        "sha256": "c87f98b75cbc77d64d1e0bee1ba536d39477ac067360740f987310eb09baa4d8",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-k2v46kfo/source/tests/test_mixed_scheduled_readers.py",
+      "sourceFingerprint": {
+        "bytes": 5493,
+        "sha256": "c87f98b75cbc77d64d1e0bee1ba536d39477ac067360740f987310eb09baa4d8",
+        "mode": 420
+      },
+      "role": "first failure overlay"
+    },
+    "historical/attempt-5vr2zibc/abi2-compile.stderr": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-5vr2zibc/abi2-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-5vr2zibc/abi2-compile.stdout": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-5vr2zibc/abi2-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-5vr2zibc/abi2-run.stderr": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-5vr2zibc/abi2-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-5vr2zibc/abi2-run.stdout": {
+      "savedCopy": {
+        "bytes": 120,
+        "sha256": "38012f6e8d7e0ca9be8b79f52c5cb9156e801916bab4c082190a598332aa26d6",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-5vr2zibc/abi2-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 120,
+        "sha256": "38012f6e8d7e0ca9be8b79f52c5cb9156e801916bab4c082190a598332aa26d6",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-5vr2zibc/paired-compile.stderr": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-5vr2zibc/paired-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-5vr2zibc/paired-compile.stdout": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-5vr2zibc/paired-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-5vr2zibc/paired-run.stderr": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-5vr2zibc/paired-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-5vr2zibc/paired-run.stdout": {
+      "savedCopy": {
+        "bytes": 666,
+        "sha256": "d362161f562fbc6bca2b259514eece4e8708ba943ba6ff7464671e84ebc1275f",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-5vr2zibc/paired-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 666,
+        "sha256": "d362161f562fbc6bca2b259514eece4e8708ba943ba6ff7464671e84ebc1275f",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-5vr2zibc/run.json": {
+      "savedCopy": {
+        "bytes": 160885,
+        "sha256": "23bd80efe39feeeae1678c1fe69732b72dd3fbd3074b3006f98239ad0d18ba64",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-5vr2zibc/run.json",
+      "sourceFingerprint": {
+        "bytes": 160885,
+        "sha256": "23bd80efe39feeeae1678c1fe69732b72dd3fbd3074b3006f98239ad0d18ba64",
+        "mode": 420
+      },
+      "role": "historical PASS run"
+    },
+    "historical/attempt-5vr2zibc/source/src/core/mixed_scheduled_readers.c": {
+      "savedCopy": {
+        "bytes": 33469,
+        "sha256": "93307099b6c5fba27720e17d6b57eaec3b891a8af505c28e155010de1c8e95a5",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-5vr2zibc/source/src/core/mixed_scheduled_readers.c",
+      "sourceFingerprint": {
+        "bytes": 33469,
+        "sha256": "93307099b6c5fba27720e17d6b57eaec3b891a8af505c28e155010de1c8e95a5",
+        "mode": 420
+      },
+      "role": "historical PASS overlay"
+    },
+    "historical/attempt-5vr2zibc/source/src/core/mixed_scheduled_readers.h": {
+      "savedCopy": {
+        "bytes": 10560,
+        "sha256": "39cfe1b89604d851d975c6c34a2f30df8bed0b244a69cadb420146a24c22b596",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-5vr2zibc/source/src/core/mixed_scheduled_readers.h",
+      "sourceFingerprint": {
+        "bytes": 10560,
+        "sha256": "39cfe1b89604d851d975c6c34a2f30df8bed0b244a69cadb420146a24c22b596",
+        "mode": 420
+      },
+      "role": "historical PASS overlay"
+    },
+    "historical/attempt-5vr2zibc/source/tests/mixed_scheduled_readers_test.c": {
+      "savedCopy": {
+        "bytes": 34862,
+        "sha256": "355d812f4ff07ac59f29e7ca363db4e1218aaf8c17784f397e4d311fbd7f12ea",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-5vr2zibc/source/tests/mixed_scheduled_readers_test.c",
+      "sourceFingerprint": {
+        "bytes": 34862,
+        "sha256": "355d812f4ff07ac59f29e7ca363db4e1218aaf8c17784f397e4d311fbd7f12ea",
+        "mode": 420
+      },
+      "role": "historical PASS overlay"
+    },
+    "historical/attempt-5vr2zibc/source/tests/test_mixed_scheduled_readers.py": {
+      "savedCopy": {
+        "bytes": 5461,
+        "sha256": "a24491f99e645e5933725a3cb1beaccc25a2301fd7419857b6f5fb840c60a11d",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-5vr2zibc/source/tests/test_mixed_scheduled_readers.py",
+      "sourceFingerprint": {
+        "bytes": 5461,
+        "sha256": "a24491f99e645e5933725a3cb1beaccc25a2301fd7419857b6f5fb840c60a11d",
+        "mode": 420
+      },
+      "role": "historical PASS overlay"
+    },
+    "historical/attempt-gi0vqwpn/abi2-compile.stderr": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-gi0vqwpn/abi2-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-gi0vqwpn/abi2-compile.stdout": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-gi0vqwpn/abi2-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-gi0vqwpn/abi2-run.stderr": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-gi0vqwpn/abi2-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-gi0vqwpn/abi2-run.stdout": {
+      "savedCopy": {
+        "bytes": 120,
+        "sha256": "38012f6e8d7e0ca9be8b79f52c5cb9156e801916bab4c082190a598332aa26d6",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-gi0vqwpn/abi2-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 120,
+        "sha256": "38012f6e8d7e0ca9be8b79f52c5cb9156e801916bab4c082190a598332aa26d6",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-gi0vqwpn/paired-compile.stderr": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-gi0vqwpn/paired-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-gi0vqwpn/paired-compile.stdout": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-gi0vqwpn/paired-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-gi0vqwpn/paired-run.stderr": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-gi0vqwpn/paired-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-gi0vqwpn/paired-run.stdout": {
+      "savedCopy": {
+        "bytes": 725,
+        "sha256": "1b285024f5e96e22849f7228540fc8f461cb2eb5a8fd1f8338ce588fad5f6d9b",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-gi0vqwpn/paired-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 725,
+        "sha256": "1b285024f5e96e22849f7228540fc8f461cb2eb5a8fd1f8338ce588fad5f6d9b",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-gi0vqwpn/run.json": {
+      "savedCopy": {
+        "bytes": 160884,
+        "sha256": "8c4ecf92944cc90f5d9c34afc547ceb900662c7e27c5fc808caffeb0540b0062",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-gi0vqwpn/run.json",
+      "sourceFingerprint": {
+        "bytes": 160884,
+        "sha256": "8c4ecf92944cc90f5d9c34afc547ceb900662c7e27c5fc808caffeb0540b0062",
+        "mode": 420
+      },
+      "role": "historical PASS run"
+    },
+    "historical/attempt-gi0vqwpn/source/src/core/mixed_scheduled_readers.c": {
+      "savedCopy": {
+        "bytes": 33582,
+        "sha256": "9ad1a03160a5663f8ff48e85b71c5f8357de76a57969ebc988163685dcaa6714",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-gi0vqwpn/source/src/core/mixed_scheduled_readers.c",
+      "sourceFingerprint": {
+        "bytes": 33582,
+        "sha256": "9ad1a03160a5663f8ff48e85b71c5f8357de76a57969ebc988163685dcaa6714",
+        "mode": 420
+      },
+      "role": "historical PASS overlay"
+    },
+    "historical/attempt-gi0vqwpn/source/src/core/mixed_scheduled_readers.h": {
+      "savedCopy": {
+        "bytes": 10560,
+        "sha256": "39cfe1b89604d851d975c6c34a2f30df8bed0b244a69cadb420146a24c22b596",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-gi0vqwpn/source/src/core/mixed_scheduled_readers.h",
+      "sourceFingerprint": {
+        "bytes": 10560,
+        "sha256": "39cfe1b89604d851d975c6c34a2f30df8bed0b244a69cadb420146a24c22b596",
+        "mode": 420
+      },
+      "role": "historical PASS overlay"
+    },
+    "historical/attempt-gi0vqwpn/source/tests/mixed_scheduled_readers_test.c": {
+      "savedCopy": {
+        "bytes": 41769,
+        "sha256": "ec0e76fe32bf50675433cd808b88ff06346e873de3cd383ee987cab2a11e653c",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-gi0vqwpn/source/tests/mixed_scheduled_readers_test.c",
+      "sourceFingerprint": {
+        "bytes": 41769,
+        "sha256": "ec0e76fe32bf50675433cd808b88ff06346e873de3cd383ee987cab2a11e653c",
+        "mode": 420
+      },
+      "role": "historical PASS overlay"
+    },
+    "historical/attempt-gi0vqwpn/source/tests/test_mixed_scheduled_readers.py": {
+      "savedCopy": {
+        "bytes": 5461,
+        "sha256": "a24491f99e645e5933725a3cb1beaccc25a2301fd7419857b6f5fb840c60a11d",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-gi0vqwpn/source/tests/test_mixed_scheduled_readers.py",
+      "sourceFingerprint": {
+        "bytes": 5461,
+        "sha256": "a24491f99e645e5933725a3cb1beaccc25a2301fd7419857b6f5fb840c60a11d",
+        "mode": 420
+      },
+      "role": "historical PASS overlay"
+    },
+    "historical/attempt-zwnluj00/abi2-compile.stderr": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-zwnluj00/abi2-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-zwnluj00/abi2-compile.stdout": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-zwnluj00/abi2-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-zwnluj00/abi2-run.stderr": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-zwnluj00/abi2-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-zwnluj00/abi2-run.stdout": {
+      "savedCopy": {
+        "bytes": 120,
+        "sha256": "38012f6e8d7e0ca9be8b79f52c5cb9156e801916bab4c082190a598332aa26d6",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-zwnluj00/abi2-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 120,
+        "sha256": "38012f6e8d7e0ca9be8b79f52c5cb9156e801916bab4c082190a598332aa26d6",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-zwnluj00/paired-compile.stderr": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-zwnluj00/paired-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-zwnluj00/paired-compile.stdout": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-zwnluj00/paired-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-zwnluj00/paired-run.stderr": {
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-zwnluj00/paired-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-zwnluj00/paired-run.stdout": {
+      "savedCopy": {
+        "bytes": 725,
+        "sha256": "2f3b3314e4fefd1bbadd4f8dc29a5f3f1d069d70cd33334f8283ea568535435e",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-zwnluj00/paired-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 725,
+        "sha256": "2f3b3314e4fefd1bbadd4f8dc29a5f3f1d069d70cd33334f8283ea568535435e",
+        "mode": 420
+      },
+      "role": "historical PASS log"
+    },
+    "historical/attempt-zwnluj00/run.json": {
+      "savedCopy": {
+        "bytes": 160886,
+        "sha256": "1faa1fbd7b5e20fdd89a4ec11ede086c233b5570aa05b2db1361650fa5c51332",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-zwnluj00/run.json",
+      "sourceFingerprint": {
+        "bytes": 160886,
+        "sha256": "1faa1fbd7b5e20fdd89a4ec11ede086c233b5570aa05b2db1361650fa5c51332",
+        "mode": 420
+      },
+      "role": "historical PASS run"
+    },
+    "historical/attempt-zwnluj00/source/src/core/mixed_scheduled_readers.c": {
+      "savedCopy": {
+        "bytes": 33556,
+        "sha256": "f7b574538ff3c2ce984e9be8c7d62b87c2ef7340f3822bf41d8157432b191dbc",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-zwnluj00/source/src/core/mixed_scheduled_readers.c",
+      "sourceFingerprint": {
+        "bytes": 33556,
+        "sha256": "f7b574538ff3c2ce984e9be8c7d62b87c2ef7340f3822bf41d8157432b191dbc",
+        "mode": 420
+      },
+      "role": "historical PASS overlay"
+    },
+    "historical/attempt-zwnluj00/source/src/core/mixed_scheduled_readers.h": {
+      "savedCopy": {
+        "bytes": 10560,
+        "sha256": "39cfe1b89604d851d975c6c34a2f30df8bed0b244a69cadb420146a24c22b596",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-zwnluj00/source/src/core/mixed_scheduled_readers.h",
+      "sourceFingerprint": {
+        "bytes": 10560,
+        "sha256": "39cfe1b89604d851d975c6c34a2f30df8bed0b244a69cadb420146a24c22b596",
+        "mode": 420
+      },
+      "role": "historical PASS overlay"
+    },
+    "historical/attempt-zwnluj00/source/tests/mixed_scheduled_readers_test.c": {
+      "savedCopy": {
+        "bytes": 38229,
+        "sha256": "0dd927f7e0d6ad68bc1c088d87d40539682684f819f580a37b0eb654c0877b5c",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-zwnluj00/source/tests/mixed_scheduled_readers_test.c",
+      "sourceFingerprint": {
+        "bytes": 38229,
+        "sha256": "0dd927f7e0d6ad68bc1c088d87d40539682684f819f580a37b0eb654c0877b5c",
+        "mode": 420
+      },
+      "role": "historical PASS overlay"
+    },
+    "historical/attempt-zwnluj00/source/tests/test_mixed_scheduled_readers.py": {
+      "savedCopy": {
+        "bytes": 5461,
+        "sha256": "a24491f99e645e5933725a3cb1beaccc25a2301fd7419857b6f5fb840c60a11d",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-zwnluj00/source/tests/test_mixed_scheduled_readers.py",
+      "sourceFingerprint": {
+        "bytes": 5461,
+        "sha256": "a24491f99e645e5933725a3cb1beaccc25a2301fd7419857b6f5fb840c60a11d",
+        "mode": 420
+      },
+      "role": "historical PASS overlay"
+    },
+    "historical/current-source.json": {
+      "savedCopy": {
+        "bytes": 1198,
+        "sha256": "00ade4e173686115f3173210cb101b96d2699735f2d7d1092e6c20290e9dbf2a",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/current-source.json",
+      "sourceFingerprint": {
+        "bytes": 1198,
+        "sha256": "00ade4e173686115f3173210cb101b96d2699735f2d7d1092e6c20290e9dbf2a",
+        "mode": 420
+      },
+      "role": "historical root controls"
+    },
+    "historical/precompiler-withdrawal.json": {
+      "savedCopy": {
+        "bytes": 1138,
+        "sha256": "a114af4080fda67bd41f9c35eeb7c715f54715cd3a834ac36b0d334c5f9c0e64",
+        "mode": 420
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/portable-v1/precompiler-withdrawal.json",
+      "sourceFingerprint": {
+        "bytes": 1138,
+        "sha256": "a114af4080fda67bd41f9c35eeb7c715f54715cd3a834ac36b0d334c5f9c0e64",
+        "mode": 420
+      },
+      "role": "actual precompiler withdrawal"
+    },
+    "summary.json": {
+      "savedCopy": {
+        "bytes": 41227,
+        "sha256": "40ffc5dde7a448cd2209f82a4391f6fc396be6b5edb5e6b43d187c15bcf7fa3d",
+        "mode": 420
+      },
+      "role": "generated packet metadata/verifier"
+    },
+    "verify_saved.py": {
+      "savedCopy": {
+        "bytes": 12880,
+        "sha256": "35aa0667a1b1237bb8d8d9e61deab9ff30205f1b54c462b3e5d9a870a98b444f",
+        "mode": 420
+      },
+      "role": "generated packet metadata/verifier"
+    }
+  }
+}

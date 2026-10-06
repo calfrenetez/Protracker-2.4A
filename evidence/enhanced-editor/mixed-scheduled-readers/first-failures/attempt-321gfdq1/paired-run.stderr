@@ -1,0 +1,1 @@
+Assertion failed: (result==PT_CACHE_PENDING||result==PT_CACHE_HIT), function source, file mixed_scheduled_readers_test.c, line 100.

@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "baseline": "c6783d79ea679bdc8acff3d38ee1c66f1564c9ed",
+  "run": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/mixed-scheduled-readers/v1/attempt-gi0vqwpn/run.json",
+  "files": {
+    "src/core/mixed_scheduled_readers.h": {
+      "bytes": 10560,
+      "sha256": "39cfe1b89604d851d975c6c34a2f30df8bed0b244a69cadb420146a24c22b596",
+      "mode": 420,
+      "saved_equal": true
+    },
+    "src/core/mixed_scheduled_readers.c": {
+      "bytes": 33582,
+      "sha256": "9ad1a03160a5663f8ff48e85b71c5f8357de76a57969ebc988163685dcaa6714",
+      "mode": 420,
+      "saved_equal": true
+    },
+    "tests/mixed_scheduled_readers_test.c": {
+      "bytes": 41769,
+      "sha256": "ec0e76fe32bf50675433cd808b88ff06346e873de3cd383ee987cab2a11e653c",
+      "mode": 420,
+      "saved_equal": true
+    },
+    "tests/test_mixed_scheduled_readers.py": {
+      "bytes": 5461,
+      "sha256": "a24491f99e645e5933725a3cb1beaccc25a2301fd7419857b6f5fb840c60a11d",
+      "mode": 420,
+      "saved_equal": true
+    }
+  },
+  "source_count": 923,
+  "scope": "Root ordinary saved-byte host qualification readback only; no native/target admission",
+  "atUTC": "2026-10-06T14:32:14.823756+00:00"
+}

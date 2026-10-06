@@ -1,0 +1,100 @@
+"""Independent HOST_ONLY saved-byte audit. Never imports builder or runs product."""
+from pathlib import Path
+import hashlib,io,json,stat,struct,subprocess,tarfile
+BASE=Path(__file__).resolve().parent
+ROOT=BASE.parents[2]
+REPO=ROOT/'work/Protracker-2.4A'
+OUT=BASE/'saved-byte-verification.json'
+assert not OUT.exists(), 'Do not overwrite a terminal audit.'
+def record(p):
+ p=Path(p);s=p.lstat();assert stat.S_ISREG(s.st_mode) and not(getattr(s,'st_flags',0)&0x40000000)
+ data=p.read_bytes();a=p.lstat();assert (s.st_dev,s.st_ino,s.st_mode,s.st_size,s.st_mtime_ns,getattr(s,'st_flags',0))==(a.st_dev,a.st_ino,a.st_mode,a.st_size,a.st_mtime_ns,getattr(a,'st_flags',0))
+ assert len(data)==s.st_size
+ return {'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),'full_mode':s.st_mode,'mode':stat.S_IMODE(s.st_mode),'inode':s.st_ino,'flags':getattr(s,'st_flags',0),'ordinary_resident':True}
+def compact(data):return {'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()}
+def inventory(folder):
+ result={}
+ for p in sorted(folder.rglob('*')):
+  s=p.lstat();assert stat.S_ISDIR(s.st_mode) or stat.S_ISREG(s.st_mode)
+  if stat.S_ISREG(s.st_mode):
+   r=record(p);result[p.relative_to(folder).as_posix()]={k:r[k] for k in ['bytes','sha256']}
+ return result
+def matches(p,pin,mode=False):
+ a=record(p);assert all(a[k]==pin[k] for k in ['bytes','sha256'])
+ if mode:assert a['mode']==pin['mode']
+ return a
+def git(*args):return subprocess.check_output(['git',*args],cwd=REPO,timeout=20)
+m=json.loads((BASE/'manifest.json').read_text());checks=[]
+assert m['status']=='PASS_COMPILER_LINK_ONLY_NEVER_EXECUTED' and m['source_stable']
+assert m['frozen_c678_plus_four_verified'] and m['protected_16_stable'] and m['original_host_evidence_stable'] and m['four_overlays_stable'] and m['git_head_index_stable']
+assert len(m['source_before'])==923 and inventory(BASE/'source')==m['source_before']==m['source_after'];checks.append('all 923 frozen saved inputs identical before/after and current')
+host=Path(m['host_evidence']['path']).parent
+assert inventory(host)==m['host_attempt_custody'];checks.append('full corrected four-call host PASS evidence unchanged')
+hostrun=json.loads((host/'run.json').read_text());assert hostrun['status']=='PASS'
+assert all(record(host/'source'/name)['mode']==mode and record(BASE/'source'/name)['mode']==mode for name,mode in m['host_source_modes'].items())
+checks.append('all923 saved host/copied-source permission modes match')
+assert len(hostrun['calls'])==4 and all(c['status']=='PASS' and c['returncode']==0 for c in hostrun['calls'])
+assert all(record(host/(c['label']+'.stderr'))['bytes']==0 for c in hostrun['calls'])
+assert len(m['ordered_units'])==26 and len(set(m['ordered_units']))==26
+assert m['ordered_units']==[a for a in next(c for c in hostrun['calls'] if c['label']=='paired-compile')['argv'] if a.endswith('.c')]
+assert m['ordered_units'][:2]==['tests/mixed_scheduled_readers_test.c','src/core/mixed_scheduled_readers.c']
+assert 'tests/amigus_wavetable_cache_test.c' not in m['ordered_units']
+fixture=(BASE/'source/tests/mixed_scheduled_readers_test.c').read_text()
+assert '#include "amigus_wavetable_cache_test.c"' in fixture and 'int main(void)' in fixture
+assert 'MIXED READERS PASS:' in fixture and '78 callback/effect/proof cases' in fixture
+checks.append('26 actual ordered complete fixture units and inherited genuine wavetable test body retained')
+assert m['flags']==['-std=c99','-m68000','-msoft-float','-mcrt=nix20','-Os','-Wall','-Wextra','-Werror','-UNDEBUG','-Isrc/core','-I.','-fbbb=-']
+assert len(m['calls'])==35 and all(c['status']=='PASS' and c['returncode']==0 for c in m['calls'])
+assert m['calls'][-1]['label']=='compile-link'
+for c in m['calls']:
+ matches(c['stdout']['path'],c['stdout']);matches(c['stderr']['path'],c['stderr']);assert c['stderr']['bytes']==0
+ assert c['timeout_seconds']<=120 and c['product_execution']=='NEVER_EXECUTED'
+assert len(m['dependencies'])==93
+for p,pin in m['dependencies'].items():matches(p,pin)
+checks.append('all35 compiler calls RC0 with empty stderr and all93 resident dependencies unchanged')
+for p,pin in m['current_own_four'].items():matches(REPO/p,pin)
+checks.append('four corrected uncommitted overlays remain exactly frozen')
+for p,pin in m['protected_16_before'].items():
+ a=record(REPO/p);assert a['sha256']==pin['sha256'] and a['full_mode']==pin['mode']
+checks.append('all 16 unrelated protected working files unchanged')
+assert len(m['tools'])==5 and len(m['runtime_inputs'])==7
+for pin in [*m['tools'].values(),*m['runtime_inputs'].values()]:matches(pin['path'],pin,True)
+checks.append('five compiler tools and seven nix20 runtime inputs ordinary resident and unchanged')
+head=git('rev-parse','HEAD').decode().strip();assert head==m['host_baseline']
+index=git('ls-files','--stage');assert compact(index)==next(r for r in m['local_readbacks'] if r['label']=='index-before')['stdout']
+assert git('diff','--cached','--name-only')==b''
+committed={}
+with tarfile.open(fileobj=io.BytesIO(git('archive',head,'src','tests'))) as ar:
+ for member in ar.getmembers():
+  if member.isfile():committed[member.name]=compact(ar.extractfile(member).read())
+font=git('show',head+':vendor/pt23f/raw/ptfont.raw');assert len(font)==580
+committed['pt_font.h']=compact(('static const unsigned char pt_font[580] = {'+','.join(str(b) for b in font)+'};\n').encode())
+for p,pin in m['current_own_four'].items():committed[p]={k:pin[k] for k in ['bytes','sha256']}
+assert committed==m['source_before']
+checks.append('independent reconstruction of c678 archive plus four overlays and committed font equals all 923 inputs; HEAD/empty index unchanged')
+prior=BASE.parent/'portable-v1'
+assert json.loads((prior/'precompiler-withdrawal.json').read_text())['compilerCalls']==0
+assert not (prior/'manifest.json').exists()
+checks.append('portable-v1 was withdrawn beforecompiler; no compilerfailure/product is claimed')
+expected=matches(BASE/'expected-native.stdout',m['expected_stdout']);expectedbytes=(BASE/'expected-native.stdout').read_bytes()
+assert expectedbytes==(host/'paired-run.stdout').read_bytes() and len(expectedbytes.splitlines())==4
+assert len(expectedbytes)==725 and hashlib.sha256(expectedbytes).hexdigest()=='1b285024f5e96e22849f7228540fc8f461cb2eb5a8fd1f8338ce588fad5f6d9b'
+for marker in [b'MIXED READERS PASS:',b'amigus reservation lifecycle: PASS',b'WAVETABLE UPLOAD JOB PASS:',b'AMIGUS WAVETABLE OWNER PASS:']:assert marker in expectedbytes
+checks.append('complete725-byte expected stdout retains allfour exact host markers')
+product=matches(m['product']['path'],m['product'],True);productbytes=Path(m['product']['path']).read_bytes()
+assert len(productbytes)==187332 and hashlib.sha256(productbytes).hexdigest()=='8ea8dae1da8ba6f4bfc4e0e64adc7a550dd903c2baf09f37eb956933c3dd3e05'
+assert struct.unpack('>I',productbytes[:4])[0]==0x3f3
+for marker in [b'MIXED READERS PASS:',b'amigus reservation lifecycle: PASS',b'WAVETABLE UPLOAD JOB PASS:',b'AMIGUS WAVETABLE OWNER PASS:']:assert marker in productbytes
+checks.append('exact saved HUNK product readback with allfour assertion output strings; no runtime acceptance')
+assert m['overall_elapsed_seconds']<600 and m['bounds']['overall_seconds']==600 and m['bounds']['each_compiler_call_seconds']==120
+assert all(m[k]=='NEVER_EXECUTED' for k in ['target_execution','emulator_execution','physical_execution','native_execution']) and m['product']['execution']=='NEVER_EXECUTED'
+retained={}
+for rel,pin in m['retained_files'].items():retained[rel]=matches(BASE/rel,pin)
+assert 'build.stdout' not in retained and 'build.stderr' not in retained
+proof={'status':'PASS_INDEPENDENT_SAVED_BYTES_COMPLETE_PORTABLE_FIXTURE_NEVER_EXECUTED','scope':'HOST_ONLY readback and local Git inspection; no product, target, guard, service, network, peer or transport action',
+ 'manifest':record(BASE/'manifest.json'),'host_baseline':head,'source_count':923,'unit_count':26,'dependency_count':93,'compiler_calls':35,'compiler_stderr':'ALL_EMPTY',
+ 'product':product,'product_path':m['product']['path'],'product_execution':'NEVER_EXECUTED','expected_stdout':expected,
+ 'bounds':m['bounds'],'overall_elapsed_seconds':m['overall_elapsed_seconds'],'checks':checks,'frozen_retained_file_readbacks':retained,
+ 'closed_launch_logs':{n:record(BASE/n) for n in ['build.stdout','build.stderr']},'observer':record(__file__)}
+OUT.write_text(json.dumps(proof,indent=2)+'\n')
+print(json.dumps({k:proof[k] for k in ['status','source_count','unit_count','dependency_count','compiler_calls','product','expected_stdout']}))

@@ -5969,3 +5969,41 @@ native UI/PLAY and real backend integration. Physical Fast/Chip placement, total
 stack and step latency, device capacity/upload ordering/completion, all-voice
 stop, exact scheduled activation, IRQ timing, audio and listening remain open.
 The human's exact scheduling choice remains authoritative.
+
+## Typed paired scheduled readers — 6 October 2026
+
+The optional `mixed_scheduled_readers` queue now provides one typed Paula/AmiGUS
+batch under the original common clock window. It bounds two command batches,
+sixteen unique route/slot actions per batch and thirty-two persistent reader
+histories. Paula CPU spans and AmiGUS numeric card geometry remain separate.
+Command detachment and exact reader retirement are independent proofs; each
+reader also requires zero command references before releasing its pins. Issued
+but unadopted readers retain ownership without granting CONTROL/STOP authority.
+Explicit services, local cancellation and failure drains add no automatic timer,
+retry, deadline rebasing, catch-up or forced release.
+
+The current four-call ASan/UBSan qualifier passes with empty stderr using 923
+byte/mode-bound inputs from committed c678 plus four additive files and the
+derived font. Genuine independent 8/16/24-bit master pins, selective Chip caches
+and the existing AmiGUS reservation/cache/upload model remain live through
+reader retirement. Literal schedule/conversion oracles, exact master saves and
+inherited Paula ABI2 regressions pass. Independent final source/fixture/custody
+review passes. Four actual first failures and three superseded host passes are
+preserved separately. See the [queue contract](MIXED_SCHEDULED_READERS.md) and
+[host evidence](../evidence/enhanced-editor/mixed-scheduled-readers/README.md).
+
+The complete portable fixture compiles and links in 35 calls across 26 ordered
+units and 93 dependencies. Its 187,332-byte HUNK candidate has SHA256
+`8ea8dae1da8ba6f4bfc4e0e64adc7a550dd903c2baf09f37eb956933c3dd3e05`;
+all four expected software markers total 725 bytes. Independent saved-byte
+checks pass. The product has never been executed: native entry, constructor,
+emulator and physical execution remain NOT_RUN. The earlier portable freeze
+was withdrawn before any compiler call and remains a separate zero-call record.
+See the [compiler evidence](../evidence/enhanced-editor/mixed-scheduled-readers-portable/README.md).
+
+Public holder records cannot prove genuine pin provenance. A production holder
+factory, paired editor/song lowering and an atomic scheduled backend remain
+unfinished. Native PLAY/UI integration, real Fast/Chip placement, aggregate stack
+and step latency, card capacity/upload ordering/completion/all-voice stop,
+MMIO/DMA, exact activation and IRQ/task timing, physical audio and listening
+remain open. Host and compiler evidence do not qualify those requirements.

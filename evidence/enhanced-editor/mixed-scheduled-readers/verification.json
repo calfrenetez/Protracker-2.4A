@@ -1,0 +1,19 @@
+{
+  "status": "PASS_SAVED_BYTES_AND_RELATIONSHIPS",
+  "scope": "saved HOST_ONLY artifacts; no compilation, execution, operational imports or target action",
+  "filesVerified": 94,
+  "attemptsVerified": 8,
+  "actualCallsVerified": 23,
+  "currentCallsPassed": 4,
+  "firstFailureRecordsPreserved": 4,
+  "historicalPassRecordsPreserved": 3,
+  "sourceInputsPerAttempt": 923,
+  "ownSourceOverlaysPerAttempt": 4,
+  "protectedControlsPerAttempt": 16,
+  "orderedPairedUnits": 26,
+  "manifest": {
+    "bytes": 52915,
+    "sha256": "82d6d75d9c565d5ebc0c796314127e29889dba77cd5f9f964f7016596ce5fa26",
+    "mode": 420
+  }
+}

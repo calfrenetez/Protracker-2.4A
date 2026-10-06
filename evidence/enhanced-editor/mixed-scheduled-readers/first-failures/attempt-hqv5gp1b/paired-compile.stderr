@@ -1,0 +1,4 @@
+tests/mixed_scheduled_readers_test.c:216:13: error: unused function 'unused_drop' [-Werror,-Wunused-function]
+  216 | static void unused_drop(struct trial *t,unsigned count,unsigned generation)
+      |             ^~~~~~~~~~~
+1 error generated.

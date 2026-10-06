@@ -1,0 +1,47 @@
+In file included from tests/mixed_scheduled_readers_test.c:2:
+tests/amigus_wavetable_cache_test.c:1:9: error: 'main' macro redefined [-Werror,-Wmacro-redefined]
+    1 | #define main reservation_fixture_main
+      |         ^
+tests/mixed_scheduled_readers_test.c:1:9: note: previous definition is here
+    1 | #define main baseline_card_cache_main
+      |         ^
+In file included from tests/mixed_scheduled_readers_test.c:4:
+tests/../src/core/mixed_scheduled_readers.h:107:56: error: redefinition of enumerator 'PT_MIXED_READER_RETIRED'
+  107 |     PT_MIXED_OBSERVATION=1,PT_MIXED_COMMAND_DETACHED=2,PT_MIXED_READER_RETIRED=3};
+      |                                                        ^
+tests/../src/core/mixed_scheduled_readers.h:86:5: note: previous definition is here
+   86 |     PT_MIXED_READER_RETIRED,PT_MIXED_READER_UNKNOWN};
+      |     ^
+tests/mixed_scheduled_readers_test.c:184:16: error: implicit conversion from enumeration type 'enum pt_mixed_readers_state' to different enumeration type 'enum pt_mixed_readers_reply' [-Werror,-Wimplicit-enum-enum-cast]
+  184 |  return cancel?PT_MIXED_READER_RETIRED:PT_MIXED_OBSERVATION;}
+      |  ~~~~~~        ^~~~~~~~~~~~~~~~~~~~~~~
+tests/mixed_scheduled_readers_test.c:236:5: error: redefinition of 'main'
+  236 | int main(void)
+      |     ^
+tests/amigus_wavetable_cache_test.c:241:5: note: previous definition is here
+  241 | int main(void) {return wavetable_fixture_main();}
+      |     ^
+tests/mixed_scheduled_readers_test.c:240:9: error: call to undeclared function 'baseline_card_cache_main'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+  240 |  return baseline_card_cache_main();}
+      |         ^
+5 errors generated.
+In file included from src/core/mixed_scheduled_readers.c:1:
+src/core/mixed_scheduled_readers.h:107:56: error: redefinition of enumerator 'PT_MIXED_READER_RETIRED'
+  107 |     PT_MIXED_OBSERVATION=1,PT_MIXED_COMMAND_DETACHED=2,PT_MIXED_READER_RETIRED=3};
+      |                                                        ^
+src/core/mixed_scheduled_readers.h:86:5: note: previous definition is here
+   86 |     PT_MIXED_READER_RETIRED,PT_MIXED_READER_UNKNOWN};
+      |     ^
+src/core/mixed_scheduled_readers.c:398:43: error: comparison of different enumeration types ('enum pt_mixed_readers_reply' and 'enum pt_mixed_readers_state') [-Werror,-Wenum-compare]
+  398 |     if((reply!=PT_MIXED_OBSERVATION&&reply!=PT_MIXED_READER_RETIRED)||!reader_envelope(r,&receipt)){q->failed=1;return PT_MIXED_READERS_BACKEND;}
+      |                                      ~~~~~^ ~~~~~~~~~~~~~~~~~~~~~~~
+src/core/mixed_scheduled_readers.c:399:39: error: comparison of different enumeration types ('enum pt_mixed_readers_reply' and 'enum pt_mixed_readers_state') [-Werror,-Wenum-compare]
+  399 |     good=reader_valid(r,&receipt,reply==PT_MIXED_READER_RETIRED);if(!good)q->failed=1;
+      |                                  ~~~~~^ ~~~~~~~~~~~~~~~~~~~~~~~
+src/core/mixed_scheduled_readers.c:401:13: error: comparison of different enumeration types ('enum pt_mixed_readers_reply' and 'enum pt_mixed_readers_state') [-Werror,-Wenum-compare]
+  401 |     if(reply==PT_MIXED_READER_RETIRED){r->retired=1;r->closed=1;r->valid=r->valid&&(unsigned)good;reader_release(q,r);}
+      |        ~~~~~^ ~~~~~~~~~~~~~~~~~~~~~~~
+src/core/mixed_scheduled_readers.c:404:17: error: comparison of different enumeration types ('enum pt_mixed_readers_reply' and 'enum pt_mixed_readers_state') [-Werror,-Wenum-compare]
+  404 |     return reply==PT_MIXED_READER_RETIRED?PT_MIXED_READERS_OK:PT_MIXED_READERS_PENDING;
+      |            ~~~~~^ ~~~~~~~~~~~~~~~~~~~~~~~
+5 errors generated.

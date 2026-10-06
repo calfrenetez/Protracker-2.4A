@@ -1,0 +1,188 @@
+{
+  "HOST_source_origin": "ee9aa13ca24e1a7a0784f150d9f98d6b7bc330fe",
+  "actual_counts": {
+    "SDK_dependencies": 32,
+    "compiler": 90,
+    "dependencies": 124,
+    "drivers": 108,
+    "inner_git": 8,
+    "inner_members_excluding_manifest": 1275,
+    "local_rows": 604,
+    "objects": 39,
+    "qualifiers": {
+      "dynamic,bounded": 487,
+      "static": 117
+    },
+    "raw_streams": 216,
+    "root": 10,
+    "source": 955,
+    "source_dependencies": 92,
+    "su": 39
+  },
+  "actual_invocation_admission": "d1d3844d1f736e2bcdc53eeae5aad47f30f34818",
+  "actual_times_seconds": {
+    "inner": 12.699261207992095,
+    "root": 13.812866250009392
+  },
+  "aggregate_stack": "UNKNOWN",
+  "custody": {
+    "all_108_RC0_empty_stderr_reaped_owned_groups_quiet": true,
+    "all_216_raw_stream_pins_match": true,
+    "controls47_protected16_unchanged": true,
+    "inner_retained1275_match": true,
+    "saved_admission_index_status_unchanged_staging_empty": true,
+    "source1171_unchanged": true
+  },
+  "execution": {
+    "candidate": "NEVER_EXECUTED",
+    "emulator": "NEVER_EXECUTED",
+    "native": "NEVER_EXECUTED",
+    "physical": "NEVER_EXECUTED",
+    "target": "NEVER_EXECUTED"
+  },
+  "first_failure": null,
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-UNDEBUG",
+    "-Isrc/core",
+    "-I.",
+    "-fbbb=-",
+    "-fstack-usage",
+    "-c"
+  ],
+  "historical_artifacts_preserved": {
+    "v1_SOURCE": {
+      "bytes": 8726,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/independent-source-review-v1/review.json",
+      "sha256": "4b80e27e87d240eebb4ad98798a76c17d7eb825409d044b575429275f4ba2d81"
+    },
+    "v2": {
+      "bytes": 348841,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/host-qualification/attempt-first-v2/run.json",
+      "sha256": "a43c326d39986d5506c99761a0d8146d06af8b4dade5ffbd636d051b9b470f21"
+    },
+    "v3": {
+      "bytes": 355427,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/host-qualification/attempt-first-v3/run.json",
+      "sha256": "b519babd9a4325e19fcbe6e7ec888dbfa612578a645d437cf3a2ae9beb9a6844"
+    },
+    "v4": {
+      "bytes": 360098,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/host-qualification/attempt-first-v4/run.json",
+      "sha256": "9c3cbf701db5c2939d7c83e060ffc0c600943b56b86cd2464e0e1078ca72d7d9"
+    }
+  },
+  "limitations": [
+    "Local compiler rows are not aggregate call-chain, callback/library/assembly/IRQ/OS stack bounds or a qualified Amiga Stack setting.",
+    "Original linked HUNK remains NEVER_EXECUTED; no object/HUNK byte equivalence, native assertions, emulator or real-A1200 acceptance.",
+    "No physical placement, device capacity/order/completion/stop, exact live timing, audio or human listening acceptance.",
+    "Metadata projection only; full source/object/su/raw/dependency evidence remains in its original separately pinned private saved packet."
+  ],
+  "link_calls": 0,
+  "native_Stack": "UNSUPPLIED",
+  "new_executables": 0,
+  "original_compiler_admission": "641c281c43054a63612b001897cb6676e2a5e04d",
+  "original_independent_saved_review": {
+    "bytes": 11909,
+    "mode": 33188,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/independent-saved-stack-review-v1/review.json",
+    "sha256": "d5cea8171890a7ff8afa1b1e1a3bb7ee7d131d1cf5db93150bdc4162016cfd58"
+  },
+  "original_linked_HUNK": {
+    "bytes": 232864,
+    "execution": "NEVER_EXECUTED",
+    "mode": 33261,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/portable-compiler-first-v1/native/PTMixedQuantizedAuditTest",
+    "sha256": "58b3b9eb2f02ffc1d6c081f8773dbb8df438111addf5bab3a74da18dbe63e840"
+  },
+  "original_root_freeze": {
+    "bytes": 222910,
+    "mode": 33188,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/root-stack-build-v1/root-freeze.json",
+    "sha256": "624bbc1dba84fafc3f8d1237296157c5d4ffe3fbd2e53b3616749a6e649c19da"
+  },
+  "original_root_receipt": {
+    "bytes": 26943,
+    "mode": 33188,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/root-stack-build-v1/receipt.json",
+    "sha256": "ce5c6802a156393b8687b554fefdeff89e53ee3fdd0a365b696554b7755c6d0b"
+  },
+  "original_saved_manifest": {
+    "bytes": 978795,
+    "mode": 33188,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/stack-metadata-first-v1/manifest.json",
+    "sha256": "f5b5450657789c3ec09a149fcda7d15683a90eed354510285e161006b7968063"
+  },
+  "schema": "pt24g-strict-quantized-audit-selected-stack-observations-v1",
+  "selected_local_rows": {
+    "maximum": {
+      "bytes": 16572,
+      "column": 20,
+      "function": "pt_pcm_resample_filtered_progress.part.0",
+      "line": 8,
+      "location": "pcm_filtered.c:8:20:pt_pcm_resample_filtered_progress.part.0",
+      "qualifier": "dynamic,bounded",
+      "source": "pcm_filtered.c",
+      "translation_unit": "src/core/pcm_filtered.c"
+    },
+    "qualifiers": {
+      "dynamic,bounded": 487,
+      "static": 117
+    },
+    "selected_rows": [
+      {
+        "bytes": 4572,
+        "column": 13,
+        "function": "qa_same_sequence",
+        "line": 342,
+        "location": "mixed_quantized_audit_test.c:342:13:qa_same_sequence",
+        "qualifier": "dynamic,bounded",
+        "source": "mixed_quantized_audit_test.c",
+        "translation_unit": "tests/mixed_quantized_audit_test.c"
+      },
+      {
+        "bytes": 4720,
+        "column": 38,
+        "function": "pt_mixed_quantized_audit_step.part.12",
+        "line": 349,
+        "location": "mixed_quantized_audit.c:349:38:pt_mixed_quantized_audit_step.part.12",
+        "qualifier": "dynamic,bounded",
+        "source": "mixed_quantized_audit.c",
+        "translation_unit": "tests/mixed_quantized_audit_test.c"
+      },
+      {
+        "bytes": 4684,
+        "column": 38,
+        "function": "pt_mixed_quantized_audit_close.part.17",
+        "line": 500,
+        "location": "mixed_quantized_audit.c:500:38:pt_mixed_quantized_audit_close.part.17",
+        "qualifier": "dynamic,bounded",
+        "source": "mixed_quantized_audit.c",
+        "translation_unit": "tests/mixed_quantized_audit_test.c"
+      },
+      {
+        "bytes": 5536,
+        "column": 23,
+        "function": "pt_render_stream",
+        "line": 438,
+        "location": "render.c:438:23:pt_render_stream",
+        "qualifier": "dynamic,bounded",
+        "source": "render.c",
+        "translation_unit": "src/core/render.c"
+      }
+    ]
+  },
+  "source_annotations": "All604 compiler rows retain original location/function/bytes/qualifier. Original declarations are associated without changing cloned names or proving path execution; pcm_filtered.c:11 declares int32_t weights[4098].",
+  "status": "PASS_SAVED_LOCAL_OBJECT_STACK_METADATA_ONLY"
+}

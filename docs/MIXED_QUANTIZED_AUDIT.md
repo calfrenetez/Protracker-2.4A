@@ -118,3 +118,35 @@ acceptance. Whole-song master ownership and composite editor PLAY remain
 unfinished. Original SOURCE and HOST failure histories remain immutable; no
 failed attempt was replayed. See the separate
 [compiler-only packet](../evidence/enhanced-editor/mixed-quantized-audit-compiler/README.md).
+
+## Separate local stack metadata qualification
+
+A separate first object-only attempt at committed admission
+`d1d3844d1f736e2bcdc53eeae5aad47f30f34818` compiled the exact saved 955-input
+pool and 39 ordered units using the original portable flags plus
+`-fstack-usage -c`. It did not link or create an executable. Independent saved-only
+review confirms 39 objects, 39 `.su` files and all 604 local rows: 117 `static` and
+487 `dynamic,bounded`. The actual raw-M union is 124 dependencies (92 source,
+32 selected SDK). All 1,275 retained inner members, 90 compiler/eight inner Git/
+ten root drivers and 216 raw streams match. Recorded drivers returned zero with
+empty stderr, were reaped and left their owned groups quiet. The full 1,171-source
+map, 47 controls/protected16 and before/after saved admission/index/status agree;
+staging was empty. Inner/root times were 12.699/13.813 seconds.
+
+The largest local row is 16,572 bytes for
+`pt_pcm_resample_filtered_progress.part.0`, whose source declares automatic
+`int32_t weights[4098]`. Presence in the compiled pool does not establish fixture
+path execution. Other selected local rows are `pt_render_stream` 5,536,
+`pt_mixed_quantized_audit_step.part.12` 4,720,
+`pt_mixed_quantized_audit_close.part.17` 4,684 and `qa_same_sequence` 4,572 bytes;
+all are `dynamic,bounded`. Compiler clones and separate wrapper rows are retained
+as separate observations. Source associations are annotations only.
+
+This adds local compiler evidence to the earlier qualifications. Aggregate
+call-chain, callbacks, library/assembly, IRQ and OS stack remain UNKNOWN; native
+Amiga `Stack` is UNSUPPLIED. It supplies no object/HUNK equivalence or runtime
+assertion result. The original 232,864-byte linked HUNK remains NEVER_EXECUTED.
+Amiberry/A1200, Fast/Chip placement, launcher/device capacity/order/completion/stop,
+exact live output timing, audio and listening remain separate. Historical
+SOURCE/HOST failures and V3's unknown return/tuple remain intact. See the
+[local stack metadata packet](../evidence/enhanced-editor/mixed-quantized-audit-stack/README.md).

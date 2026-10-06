@@ -6235,3 +6235,29 @@ acceptance is supplied. Exact master-owning producer work remains separate.
 Original failed SOURCE/HOST attempts and V3 unknown returned enum/tuple remain
 preserved. See `docs/MIXED_QUANTIZED_AUDIT.md` and the separate
 `evidence/enhanced-editor/mixed-quantized-audit-compiler/` metadata packet.
+
+### Standalone strict quantized audit: separate local stack metadata
+
+The first object-only stack attempt passed at committed admission
+`d1d3844d1f736e2bcdc53eeae5aad47f30f34818`, using the same saved 955-input
+pool and 39 units with original portable flags plus `-fstack-usage -c`. Independent
+saved-only review confirms 39 objects/39 `.su` files, 604 local rows (117 `static`,
+487 `dynamic,bounded`), actual 124 raw-M dependencies (92 source/32 SDK), all 1,275
+retained inner members and 108 drivers/216 raw streams. Drivers returned zero with
+empty stderr and quiet reaped owned groups. All 47 controls/protected16 and the
+full 1,171-source map remain unchanged; saved admission/index/status agree and
+staging is empty. Inner/root times were 12.699/13.813 seconds.
+
+Selected local rows are filtered resampler 16,572, renderer stream 5,536, audit
+step 4,720, audit close 4,684 and SAME-sequence fixture 4,572 bytes, preserving
+compiler clone names and `dynamic,bounded` qualifiers. The largest row is
+associated with automatic `int32_t weights[4098]`; its compiled presence does not
+prove that this fixture exercises it. These source associations are descriptive.
+
+Aggregate call-chain/callback/library/assembly/IRQ/OS stack and a native Amiga
+`Stack` setting remain unqualified. No object/HUNK equivalence or runtime result
+is inferred; the prior 232,864-byte linked HUNK remains NEVER_EXECUTED. Native
+assertions, Amiberry/A1200, placement/launcher/device/timing/audio/listening remain
+separate. Original SOURCE/HOST failures, unknown V3 returned tuple and earlier
+HOST/compiler successes are preserved. See `docs/MIXED_QUANTIZED_AUDIT.md` and
+`evidence/enhanced-editor/mixed-quantized-audit-stack/` metadata packet.

@@ -1,0 +1,26 @@
+{
+  "status": "PASS_HOST_ONLY_PREFLIGHT_NO_TARGET",
+  "pins": 275,
+  "candidate": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/native/PTEditorBridgesTest",
+    "bytes": 385144,
+    "sha256": "21c5efc7fe5d066f56e81ea8cbcea8bc7e95892e8af0a55608a1410d882d9b1e"
+  },
+  "markers": {
+    "markerLines": 3,
+    "editorLegacy": 15,
+    "editorCheckedLifecycle": 39,
+    "wholeControlAliases": 18,
+    "bridgeLifecycle": 9,
+    "bridgeAliasesAndAdmission": 75,
+    "completeStdout": {
+      "bytes": 624,
+      "sha256": "80a8a9731ef96568d0356de80dfdf5299ee7bef777cc0a8e7a5d038ead11d80a"
+    },
+    "scope": "Actual portable assertion bodies on target CPU with injected clocks, voices and ordinary-RAM bus callbacks only"
+  },
+  "sourceIdentities": 909,
+  "protected": 16,
+  "allWrappersParsed": true,
+  "callsToTarget": 0
+}

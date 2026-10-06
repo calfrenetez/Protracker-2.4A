@@ -1,0 +1,29 @@
+{
+  "status": "FRESH_ROOT_SCOPE_ALL_PEERS_HANDS_OFF",
+  "atUTC": "2026-10-06T09:42:48.509430+00:00",
+  "scope": {
+    "bytes": 1162,
+    "sha256": "1a4226a19b71e6944147e7b9ce90f8090aa0c74d6d38202a3e3d06829f43d3c3"
+  },
+  "peers": {
+    "AmiConnect": {
+      "admissionConfirmed": true,
+      "turn": "01a11079-bb9b-71a0-b96f-55c226b0460c",
+      "message": "msg_052d99eb5846a575016ac4bad7f49087d0b981f131fc7042f6",
+      "confirmationText": "ProTracker exact fixture first, Scott after independently verified release; AmiConnect hands-off; fresh peer deferral required and now obtained"
+    },
+    "Scott": {
+      "admissionConfirmed": true,
+      "sourceThread": "01a0dfd5-555f-77a0-9c62-3b745192b44d",
+      "confirmationText": "Explicit sequencing ACK received directly this turn: defer hud-native-20261006-001 until exact PTEditorBridgesTest completes and independently released; host-only/no reservation/lock/connection/action/queueddispatch; hands-off through root silent420s scope"
+    },
+    "AmiGUS": {
+      "admissionConfirmed": true,
+      "turn": "01a11096-d59d-7063-bd7d-3bfd159f1da6",
+      "message": "msg_04f9738d260c2de2016ac4c25c74a887d2ba4173116d88be6b",
+      "confirmationText": "No competing target/service/source operation, reservation, owned lock or connection, recovery hold or queueddispatch; hands-off until root verified release; physical playback paused"
+    }
+  },
+  "notGlobalAdmission": true,
+  "rootLiveGuardsStillRequired": true
+}

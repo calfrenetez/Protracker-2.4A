@@ -1,0 +1,23 @@
+{
+  "status": "PASS_CHANGED_HOST_ONLY_RELEASE_SELF_REVIEW",
+  "script": {
+    "bytes": 6177,
+    "sha256": "67e5e4fb8955ee791409dc864c60ce04a5465919622685439e2c63210b25876f"
+  },
+  "originalVerifier": {
+    "bytes": 5541,
+    "sha256": "d2e2f35b9d3ecfd31c69becdb0b3da5897d5b06b90fe1381af4c47b61f2aace3"
+  },
+  "firstRefusal": {
+    "bytes": 982,
+    "sha256": "28779d42c521e1c23a36439658ba4c96b6e662eae2b18e3c9e5870e2a5fa509f"
+  },
+  "change": "Keep test/physical locks; check and close thirdlock probe before normalrelease which atomically acquires transport itself. Recheck all275originalpins and exactcurrent settlement guard, absentprocess/listener, originaldisconnectedhealthyendpoint/missingowner403, custody/markers/protected16. Save separately bound v2fourrecords/proof. Originalscript/pins/records/refusal untouched.",
+  "targetRequests": 0,
+  "signals": 0,
+  "cleanup": 0,
+  "retryOfOriginalScript": false,
+  "retryOfTarget": false,
+  "sharedSourceChanges": 0,
+  "reviewer": "root self-only"
+}

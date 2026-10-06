@@ -1,0 +1,23 @@
+{
+  "status": "FAILED_HOST_RELEASE_REFUSAL_PRESERVED",
+  "atUTC": "2026-10-06T09:49:12.945232+00:00",
+  "script": {
+    "bytes": 5541,
+    "sha256": "d2e2f35b9d3ecfd31c69becdb0b3da5897d5b06b90fe1381af4c47b61f2aace3"
+  },
+  "exitCode": 1,
+  "exception": "launcher_guard.GuardRefused: active transport or release lock unavailable",
+  "cause": "The root verifier held launcher-transport.lock while LauncherGuard.release independently attempted to acquire that same lock; own conflicting FD caused Errno35. No target action or shared-source failure inferred.",
+  "recordAlreadySaved": [
+    "release-authorization.json",
+    "release-restoration.json",
+    "release-absence.json",
+    "release-cleanup.json",
+    "release-proof.json"
+  ],
+  "normalReleaseConfirmed": false,
+  "targetTestReplayed": false,
+  "targetSettlementReplayed": false,
+  "firstTest": "PASS_EXACT_030_SOFTWARE_FIXTURE_SETTLEMENT_PENDING",
+  "firstSettlement": "PASS_COMPLETED_FIXTURE_SETTLEMENT_RELEASE_PENDING"
+}

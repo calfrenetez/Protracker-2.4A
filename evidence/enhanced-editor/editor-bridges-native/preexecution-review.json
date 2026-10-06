@@ -1,0 +1,43 @@
+{
+  "status": "PASS_ROOT_SELF_PREEXECUTION_REVIEW",
+  "reviewer": "root self-only, no independent reviewer claim",
+  "utc": "2026-10-06T09:42:48.510452+00:00",
+  "scope": {
+    "bytes": 1162,
+    "sha256": "1a4226a19b71e6944147e7b9ce90f8090aa0c74d6d38202a3e3d06829f43d3c3"
+  },
+  "scripts": {
+    "run_once.py": {
+      "bytes": 6956,
+      "sha256": "9e5bc585dda947431e0f5af2e7a4b9dcb1c5c4bca20075cb105d5e85799edce5"
+    },
+    "settle_once.py": {
+      "bytes": 5133,
+      "sha256": "f00e4979622e55722074ae80980ab58f07cfab7c3e83b4637966a94bc3b3d191"
+    },
+    "start_once.py": {
+      "bytes": 4670,
+      "sha256": "3ca5497e272be7b8b0717578afb84dbd6df6a4897e0451c84b135254750d67c4"
+    },
+    "verify_release_once.py": {
+      "bytes": 5541,
+      "sha256": "d2e2f35b9d3ecfd31c69becdb0b3da5897d5b06b90fe1381af4c47b61f2aace3"
+    },
+    "window_common.py": {
+      "bytes": 2692,
+      "sha256": "860eb23a57f4f9688ccd37f3e7e1fd5e8b748735de68d700f7b7338db3746831"
+    }
+  },
+  "reviewed": [
+    "exact source/product/host/dependency/protected16/index guards",
+    "fresh explicit peer deferral and liveEMPTY60 three-lock checks",
+    "one reserve/start, no source/service changes",
+    "guestCRC/size beforeone launch, three exact finalassertion lines andRC0 withinabsolute420s",
+    "onanyfailure HOLD/no target cleanup/retry",
+    "completed-only sixfile custody, StatusFULL/audioquiet/CPU-RAM-AGA/OS screenshot",
+    "admitteddisconnect and boundedsharedownstop only",
+    "separate process/listener/originalendpoint/missingownership403/custody/pins/fourrecordrelease"
+  ],
+  "emulator": "NOT_RUN",
+  "physical": "NOT_RUN"
+}

@@ -5814,3 +5814,34 @@ pending. No shared cause is established. Root owns no target window/hold/lock/
 control/inflight/queued action and remains host-only. Target qualification needs
 independent peer recovery/release and a new explicitly scoped window/live guards;
 old EMPTY45 is not current free-target proof or physical transport clearance.
+
+## Exact editor bridge fixture on 68030 — 6 October 2026
+
+The exact metadata bridge product above later passed once in the shared
+68030/no-FPU/AGA emulator with 2 MiB Chip and 128 MiB Fast configured. Complete
+624-byte stdout matched all three host markers, guest CRC/size matched, and
+return code was zero within 213.214 seconds of the single launch under the fixed
+420-second bound. This ran the existing 15 editor cases, 39 checked lifecycle
+cases, 18 control aliases and nine bridge lifecycle plus 75 bridge alias/admission
+cases across 8/16/24 bits. The ordinary-RAM bus and clocks/voices/quiet predicates
+remain injected; actual native PLAY/event-loop, real output, allocation placement,
+stack usage, device ordering/completion/stop, timing/audio/listening and physical
+acceptance are not qualified. Configured stack was 65536 bytes.
+
+Completed-only settlement preserved all six stage files, confirmed candidate
+absence and audio DMA off, recorded unchanged CPU/RAM/AGA and OS state, then
+disconnected and closed the owned emulator. The first host-only release verifier
+refused because it held the lock that the release API itself acquires. Its first
+failure and original script/proof remain preserved. A distinct corrected verifier
+checked and closed that lock probe, freshly verified all 275 pinned inputs,
+909 source identities, protected work, custody, process/listener absence and the
+original disconnected service, then completed normal four-record release to
+EMPTY68. The test and settlement were not repeated; shared sources/services were
+not changed. All peers received explicit release. Root review was self-only.
+See [saved native fixture evidence](../evidence/enhanced-editor/editor-bridges-native/README.md).
+
+Historical NOT_RUN/held-peer text above remains the original evidence state.
+This later exact fixture has emulator software qualification; real A1200 execution
+is still NOT_RUN. The earlier failed progress fixture and its unexecuted product
+are unchanged. A separately prepared physical RAM-only run needs fresh ownership,
+Safari/control and shared transport coordination after the peer's next window.

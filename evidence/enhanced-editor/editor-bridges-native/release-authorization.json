@@ -1,0 +1,17 @@
+{
+  "humanSource": "Direct instruction to keep working until a decision is needed, plus prior development/test/commit/push authorization",
+  "coordination": {
+    "bytes": 1467,
+    "sha256": "06601264311288a7383d294287b944ef2c8bba627b01e34bf736aa0f0a4788da"
+  },
+  "scope": {
+    "bytes": 1162,
+    "sha256": "1a4226a19b71e6944147e7b9ce90f8090aa0c74d6d38202a3e3d06829f43d3c3"
+  },
+  "candidate": {
+    "bytes": 385144,
+    "sha256": "21c5efc7fe5d066f56e81ea8cbcea8bc7e95892e8af0a55608a1410d882d9b1e"
+  },
+  "sourceCommit": "5771d3ce1fcc3dee1967ec0c728e1fa654954bba",
+  "originalFailurePreserved": true
+}

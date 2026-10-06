@@ -1,0 +1,1105 @@
+{
+  "scope": "Immutable exact preparation/harness/current profile/dependency/product pins; no guard journal/privatelease",
+  "files": {
+    "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry": {
+      "bytes": 46443704,
+      "sha256": "0b2011f7b7e5ba5bc60adf6ac925a202bf97f75e97ac5c8192953e784e4acf3d"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc": {
+      "bytes": 821944,
+      "sha256": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/lib/gcc/m68k-amigaos/6.5.0b/../../../../m68k-amigaos/lib/libamiga.a": {
+      "bytes": 297694,
+      "sha256": "10d78b6d303a99677c0bf29a8e1653d62669f69f395691646393020325084021"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/lib/gcc/m68k-amigaos/6.5.0b/../../../../m68k-amigaos/lib/libstubs.a": {
+      "bytes": 11992,
+      "sha256": "55dbd0626cb472d89ab5d1bd234e6013df178f2cd3b83266bf4b82c68f1a79de"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/lib/gcc/m68k-amigaos/6.5.0b/include/stdarg.h": {
+      "bytes": 4072,
+      "sha256": "422dc8918c30cc1752b2c185f751f9f836cce2b65ca60fb0777f0dd527c33a47"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/lib/gcc/m68k-amigaos/6.5.0b/include/stddef.h": {
+      "bytes": 13776,
+      "sha256": "08af5ba7d8fd43d802efcb43a20c03155e89ec82722671876a5eb5209c9f6aa9"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/lib/gcc/m68k-amigaos/6.5.0b/libgcc.a": {
+      "bytes": 90908,
+      "sha256": "8bed858c8a5797471c3bc130df341824121c5d0f0908345dfe6ce0ceccc3569b"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/libexec/gcc/m68k-amigaos/6.5.0b/cc1": {
+      "bytes": 12240624,
+      "sha256": "283c793f4033761ff96d5534d3a44be192097181458d4029b462597148424f05"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/libexec/gcc/m68k-amigaos/6.5.0b/collect2": {
+      "bytes": 461384,
+      "sha256": "24c609f362f0d54478dffb9b92b51034e10ce0c5e85534acf1b8b72203bc9bb8"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/bin/as": {
+      "bytes": 1023048,
+      "sha256": "6ade12a1a33c54e09d74c546edc406c207c61b3096ebe6020f5137a368e9266f"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/bin/ld": {
+      "bytes": 1027624,
+      "sha256": "b50c8aa31ff322825ddf90602b50871e30410724fadfda5eb60ffde193b9a9dc"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/_newlib_version.h": {
+      "bytes": 139,
+      "sha256": "c1b40b9eb9ce7f7b1581f01fa3c2cb95b7e9f6d86212dab7af887c260b8c234f"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/ctype.h": {
+      "bytes": 6401,
+      "sha256": "9601ced3f0f6f0662b65f53ac6518574b439114553307dfe36d2c5ffc06131af"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/errno.h": {
+      "bytes": 304,
+      "sha256": "c1bc488a81c2856da4597e6b09ce447db404a0f20acba0b661e8a04302a07b2b"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/stdio.h": {
+      "bytes": 9585,
+      "sha256": "303faa533d6fa8a4a1cffe94c9e9e2503106979a62bfdb136f9efba546675247"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/stdlib.h": {
+      "bytes": 44,
+      "sha256": "f51e103cc93590a591ea65efd1bf5545657f1eab34ba106dcc6f9de739ab2747"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/string.h": {
+      "bytes": 2742,
+      "sha256": "e3892b819de58d43abad679017e5902d9ba91fd65c176e28df258cc7919b2db3"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/strsup.h": {
+      "bytes": 1790,
+      "sha256": "1d15d972c1c9d168ffac1fa16cc2cb2f159d3e12d56af4bcaab070a3ba5a0725"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/sys/errno.h": {
+      "bytes": 67,
+      "sha256": "afd599e47b4775649d57c614e39f12a0e50cd041862cdd282ab0674193b3e17f"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/sys/reent.h": {
+      "bytes": 219,
+      "sha256": "04f3c1df7cf2814753eba6afade64bd09f3d2cb23df5baac56a526d455d95a27"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix.a": {
+      "bytes": 87468,
+      "sha256": "d64619bc74933ac5312ef6db0f8d4cd62b3918f9f4a5805863e7d15536fcb144"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnix20.a": {
+      "bytes": 28720,
+      "sha256": "0731c54ad32272f5ab0d5ecd3f1f93d7aa4fc7c6ac0a5923eb26125633556e8c"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/libnixmain.a": {
+      "bytes": 156,
+      "sha256": "ad54158e95516aa6f3b04a8b3d835a48ecbaaea962cd178d5fb66995dcef19df"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/lib/ncrt0.o": {
+      "bytes": 1712,
+      "sha256": "6fe4b6088899bd53efae1ea1e4783b7deab07b13f3d40cff7b46285907f19804"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/_ansi.h": {
+      "bytes": 2625,
+      "sha256": "5c6403b471ee897c9a6c12e00a58617247804eb3ee72d7baeb7c08616090dd1d"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/assert.h": {
+      "bytes": 1192,
+      "sha256": "1bd08ced27ea4e39a158a209f89e72a3aa0979aae45b84e753e519a80e018a7b"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/fcntl.h": {
+      "bytes": 23,
+      "sha256": "637889253928e98bc028dbdcd58560492aed8e981eff349c43a8e7e6a45f75f5"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/limits.h": {
+      "bytes": 3918,
+      "sha256": "a3b9dc330bf7ac4f0cec2911064a529be1cfb0b9692a9d25365f34580d85b75d"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/machine/_default_types.h": {
+      "bytes": 6650,
+      "sha256": "5d8f9f7ead7927e4b8b7ed00172e84f2ae82ea7f5f6ba3240ff813a9236771b3"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/machine/_types.h": {
+      "bytes": 112,
+      "sha256": "44544ecbbc10c8aa58ca2da6d0617ffeee5af847af24515ab108c8218d6d92c8"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/machine/ieeefp.h": {
+      "bytes": 9750,
+      "sha256": "1fac67951c04e67e4ea09753a1c7ea9c444f63e851e85fafa165212b581c0caa"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/machine/limits.h": {
+      "bytes": 3776,
+      "sha256": "50a2c0d11af5c27ca1c1877992e0ea11eaec55f38f47bdbd070a46462b01653d"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/machine/stdlib.h": {
+      "bytes": 138,
+      "sha256": "43552e520d412993325ba62cb496839cd03fd46b0df67149a5ccbe1b95c45fdd"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/machine/time.h": {
+      "bytes": 394,
+      "sha256": "34b0ffc6c87538b71187448a08fd7815c06a6804dc028d0cc7524146f54ee702"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/machine/types.h": {
+      "bytes": 231,
+      "sha256": "2979fad7fe3ef1fc01bd06640841114f0a0f3b5d33ada20e35a2bd38c27a4931"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/newlib.h": {
+      "bytes": 7208,
+      "sha256": "2aba2f7be6a870f4f71d4a87bc2d42c058e7ffdfa651ca9aebae30b081cf3e1c"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/stdint.h": {
+      "bytes": 12838,
+      "sha256": "92ab9407509d5e6ba084ba7b71900496d6f860b9e85552fe6583ab256aed6e7e"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/stdlib.h": {
+      "bytes": 13044,
+      "sha256": "c5a89c784fa1a750f1d2362093ddd29fcffc99490403a2b74c85fcda01cede12"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/_default_fcntl.h": {
+      "bytes": 7301,
+      "sha256": "0e4559f3d299541d6b60fe4ed8c29df9385d059ffc282f7916fd25294371abdc"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/_intsup.h": {
+      "bytes": 5640,
+      "sha256": "bafd67248df6ebffd5455a8c8f9aa9fcb572e84ffb88d89824115705764b3198"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/_pthreadtypes.h": {
+      "bytes": 8381,
+      "sha256": "515128c9c933673f5273d0b0ff6e0f5e170ba949957e25bc4ee89c3e73169b5e"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/_stdint.h": {
+      "bytes": 1824,
+      "sha256": "49f8328943afa2a83ed4a35fcb808ed08b8c9fcb55373c786fb1b1d3a21952d7"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/_timespec.h": {
+      "bytes": 2070,
+      "sha256": "5441000af785218d81879835ed0531582fb9723e01f478533e13a174389763bf"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/_types.h": {
+      "bytes": 4965,
+      "sha256": "6bd87e7bde70bf3506e9470ae6499daa2a3acea075915e1ddf573eddca2528c0"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/cdefs.h": {
+      "bytes": 23387,
+      "sha256": "48d785331f1018c30119cfffb51060cba4133c5bbf0d88d0be27ab1f3a443d3b"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/config.h": {
+      "bytes": 7091,
+      "sha256": "8c41585c4d6f2e504ea8f7deb6df8ae91a0e81d4b6df4260d0ab540e24ba6291"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/errno.h": {
+      "bytes": 7923,
+      "sha256": "43bcd99e6b52f224ad141adbdeff70a53d9ebcb7eb01028a79df323cf07bab97"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/fcntl.h": {
+      "bytes": 83,
+      "sha256": "471e655eee7e30a4a8c5c34a465c0891c85a0bed33a26bd555d7538a91bd6e9b"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/features.h": {
+      "bytes": 15825,
+      "sha256": "bea5c315d5ca2c0187cd61eab0cac07dbe6e25a79a6124f4f1d290430b76a1d0"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/lock.h": {
+      "bytes": 2555,
+      "sha256": "76842985d0c09740ece1920efa93c1f68c2160a7a81656c5fff26da9094f0d11"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/stat.h": {
+      "bytes": 5916,
+      "sha256": "069e626d430e45a49bb1a75ad0e729c74ccfd52bd0fead46582a421b6d3d51b5"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/timespec.h": {
+      "bytes": 2411,
+      "sha256": "c2c2dfdcf9deacccb8919ff633f212afa455e4779a2d12c47b9afa0eff7d73c1"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/types.h": {
+      "bytes": 6448,
+      "sha256": "92a05e633c6b9ab96e778ecfc95a68d26b95f686ecf74c3aac023a4f015ceeca"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/unistd.h": {
+      "bytes": 23818,
+      "sha256": "83efd3c087c89409d3641d251c6a8908ea208d32559847ec8b551b7bbb4a83e6"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/time.h": {
+      "bytes": 7978,
+      "sha256": "53e6e8c49c69e61ccd8813993c21d5b5ef3ffda7fb0cb048dc68514f01c8ab60"
+    },
+    "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/unistd.h": {
+      "bytes": 89,
+      "sha256": "19f31553182c4d649dd0d6301ffdbb5b4d7903b28373dd070a553798b41f524f"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-window-v1/authorization.json": {
+      "bytes": 1640,
+      "sha256": "da0b802d2f3a9da9001c9192ffeb3008807a1aeb0cd28ded29a080e2b0d8a5e5"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-window-v1/coordination.json": {
+      "bytes": 1467,
+      "sha256": "06601264311288a7383d294287b944ef2c8bba627b01e34bf736aa0f0a4788da"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-window-v1/preexecution-review.json": {
+      "bytes": 1631,
+      "sha256": "328b3b6ab804a246f28295c8c9542aabe4455c425c731ad8edf09950f904e77d"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-window-v1/prior-release.json": {
+      "bytes": 2500,
+      "sha256": "1005eb9c81264e28de1f752979684e4b143a92fccf1da4bb62b31b7ca6ef5c23"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-window-v1/run_once.py": {
+      "bytes": 6956,
+      "sha256": "9e5bc585dda947431e0f5af2e7a4b9dcb1c5c4bca20075cb105d5e85799edce5"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-window-v1/scope-plan.json": {
+      "bytes": 1162,
+      "sha256": "1a4226a19b71e6944147e7b9ce90f8090aa0c74d6d38202a3e3d06829f43d3c3"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-window-v1/settle_once.py": {
+      "bytes": 5133,
+      "sha256": "f00e4979622e55722074ae80980ab58f07cfab7c3e83b4637966a94bc3b3d191"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-window-v1/start_once.py": {
+      "bytes": 4670,
+      "sha256": "3ca5497e272be7b8b0717578afb84dbd6df6a4897e0451c84b135254750d67c4"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-window-v1/verify_release_once.py": {
+      "bytes": 5541,
+      "sha256": "d2e2f35b9d3ecfd31c69becdb0b3da5897d5b06b90fe1381af4c47b61f2aace3"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-window-v1/window_common.py": {
+      "bytes": 2692,
+      "sha256": "860eb23a57f4f9688ccd37f3e7e1fd5e8b748735de68d700f7b7338db3746831"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/amigus_fifo.c": {
+      "bytes": 1529,
+      "sha256": "5c14614a81f05cdac1820be120700b9d9ed29750d1e26cc621fb1f6fadad2cef"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/amigus_fifo.h": {
+      "bytes": 1633,
+      "sha256": "b218313c6b243a678bf3fd12bc290ea12ff6d28aa9179677c9c5aec628020db2"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/amigus_pcm_pack.c": {
+      "bytes": 1364,
+      "sha256": "3464933782918baab33ee8e1ca76a7e959897284b98e24015625707cefdfcac9"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/amigus_pcm_pack.h": {
+      "bytes": 1184,
+      "sha256": "d0648c43fef1e70ffe92c7540be04e9c70e219bb2ee4cda9bf2ef1357e9b89bb"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/amigus_render_voice.c": {
+      "bytes": 3763,
+      "sha256": "b777facd29ca03e8e247697cec4b71f69af0d71cd6e9508eee7270be3c98ca3a"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/amigus_render_voice.h": {
+      "bytes": 2215,
+      "sha256": "aa3304c76a09c13bddc8476cb1e929f6ee224cc4024f5e9b90ed9ff61b152c77"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/amigus_reservation.c": {
+      "bytes": 3456,
+      "sha256": "9d448f569e2f86331085343626e2b653e45c1fb96aaaf6c709f0eefe168e1e27"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/amigus_reservation.h": {
+      "bytes": 3404,
+      "sha256": "ee57be55b9865fd19d14b27b22af6e2aa6b0466b7f21da5b313016efe9a0b646"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/amigus_sample_ram.c": {
+      "bytes": 3973,
+      "sha256": "5c25d93bf9166b568fccf599b392a4ca11c24923efc915f0dd4e4dfad7e1fa9a"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/amigus_sample_ram.h": {
+      "bytes": 2813,
+      "sha256": "005111323eb1884112230ea415fbfb75e01d560618326148e08790d4f23fadf6"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/amigus_session.c": {
+      "bytes": 4299,
+      "sha256": "672fc5b6e2b720fb74db90040be6951eb92fc894e78351b8ab6c5a9917113460"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/amigus_session.h": {
+      "bytes": 2830,
+      "sha256": "43b5a5ab74dcff269c692013fca4feb7145d1c6f20c0971a80321749c6ec047c"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/amigus_voice_plan.c": {
+      "bytes": 2018,
+      "sha256": "289c7c3a6b8b1932d219bc61602ba6bd925cbfd3b24e95cbc8aa6f1642134964"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/amigus_voice_plan.h": {
+      "bytes": 1701,
+      "sha256": "0910081dcb6cd26709c8fc1b5028aa2b0e693a8b48789173dac491b3a511c850"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/amigus_wavetable_cache.c": {
+      "bytes": 6165,
+      "sha256": "c634faa6c6c6af0086ec62a92e49ee2d6b2f90adbb0ebd0acabb901c497cae8d"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/amigus_wavetable_cache.h": {
+      "bytes": 3792,
+      "sha256": "8c449f009eac14807a9521d16a756345dd531e47b50312a3cabf96ee7ea2ee9c"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/channels.c": {
+      "bytes": 6996,
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/channels.h": {
+      "bytes": 1818,
+      "sha256": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/document.c": {
+      "bytes": 9127,
+      "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/document.h": {
+      "bytes": 1965,
+      "sha256": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/elapsed_clock.c": {
+      "bytes": 3917,
+      "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/elapsed_clock.h": {
+      "bytes": 1659,
+      "sha256": "d5db62de2b938228edb95b1f3efb520d58c5e37a7f10f0b6cca1fc5d8e9ec37e"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/event_resource.c": {
+      "bytes": 11524,
+      "sha256": "77b4dd85cd2240c8ac0aa9037a5acfcbccc3fa7c70ae5e548c406fe063846970"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/event_resource.h": {
+      "bytes": 4736,
+      "sha256": "f0f446bff489a6107ee2d44b904a395c6ab2e4738d8d4f4cff2ac8db070b4d9b"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/flow.c": {
+      "bytes": 8904,
+      "sha256": "c1850d6202a01805876ce6afa903ac4ae145757410e7597d70f2601903e79783"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/flow.h": {
+      "bytes": 3803,
+      "sha256": "db5a78efb5344d95f145d70a6c26c664a832410b8ea741c56f0de831d4163046"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/frame_clock.c": {
+      "bytes": 1209,
+      "sha256": "e5d9c6c9dc7ea48daf6d099dc5ade8ec2260d8009f40eebd26fa32bd06490a22"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/frame_clock.h": {
+      "bytes": 884,
+      "sha256": "77bb574a681a492967a6dc938e5eab7e5f28c70f73fd18189de6ed379ccbc54c"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/invert_bank.c": {
+      "bytes": 6792,
+      "sha256": "b374b4e88ead336b6c7566038c5a2f090552fc3e562751f9ef7ec2a931005d5f"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/invert_bank.h": {
+      "bytes": 2207,
+      "sha256": "5d55e42986389b2b8f6d9d3b80fa8d51603a6e9e00e014d185aaae21ef53d377"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/invert_loop.c": {
+      "bytes": 887,
+      "sha256": "3df53bcdf5851e16aae2bdd34d2ee97c7c0b4ae4fd1333c53b4994f0a3c0e852"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/invert_loop.h": {
+      "bytes": 981,
+      "sha256": "bce84104f8850fa8272ab20f614be7fa226e51be5ea243ec7d7c32afdae9d90a"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/invert_pcm.c": {
+      "bytes": 4485,
+      "sha256": "f9b6b4259468f27cab2064831d1d62efd28c751c51de59073baf4b39e59c7404"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/invert_pcm.h": {
+      "bytes": 2426,
+      "sha256": "d521c050aafee6e808d3312d81ecaa958ac957ef61f5f98f41678d1f4070174d"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/invert_sequence.c": {
+      "bytes": 2132,
+      "sha256": "f290f38c685ba81b0b2503e52ae43071021d25f00c6c8ecc8eda12f95086fa51"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/invert_sequence.h": {
+      "bytes": 739,
+      "sha256": "2b8c74b91ac2ad8d15b54f3ee73a7945668794c9218850aeaa6f11f3ed9302ef"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/mod_inspect.c": {
+      "bytes": 3513,
+      "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/mod_inspect.h": {
+      "bytes": 1240,
+      "sha256": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/mod_project.c": {
+      "bytes": 23640,
+      "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/mod_project.h": {
+      "bytes": 5051,
+      "sha256": "c28407161729fc0fea2398f79341a866f03913b092769674bd871bb23adb59ee"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/pattern.c": {
+      "bytes": 15753,
+      "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/pattern.h": {
+      "bytes": 3642,
+      "sha256": "f8c9abde09c4fe495ae77f25c070da647eab038845729edc83adec08c5678d53"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/paula_render_voice.c": {
+      "bytes": 1997,
+      "sha256": "c037e6d3e59d6c898e78ebba05036d960ced3a2758a08cf36adbdcd4780ecc82"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/paula_render_voice.h": {
+      "bytes": 1642,
+      "sha256": "11126de4c05368ab1acdcfe1f92b56df03b8233f7e2ec0c304c9d5922e913c77"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/pcm.c": {
+      "bytes": 7061,
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/pcm.h": {
+      "bytes": 2494,
+      "sha256": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/pcm_filtered.c": {
+      "bytes": 4604,
+      "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/pcm_internal.h": {
+      "bytes": 615,
+      "sha256": "1abbf89dfc2b640624d3f2cb16c2c715d818deb4a88f5284383d386a35c0188b"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/pitch.c": {
+      "bytes": 6193,
+      "sha256": "9088859aa6a2812510b3a28334420030add960afa5f2cca3b41946018f0c04d5"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/pitch.h": {
+      "bytes": 794,
+      "sha256": "7ec69432c14acb87bc3ba357fe1031023942ebe4ce35e2193d46c16f7068f8b4"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/pitch_tables.h": {
+      "bytes": 2787,
+      "sha256": "436cb7721c10ef2ef010d7fa6c2b0e46ccec2a4dfc2f7ce9af76a2bb0eb7812a"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/playback.h": {
+      "bytes": 302,
+      "sha256": "e1dc3eca74ac19e73c79b8bc5c793dde3ec367fafb5b8632bf176fef98e3b6a2"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/playback_internal.h": {
+      "bytes": 1893,
+      "sha256": "5d76f20f2c9a7eda89c3543a897f053c97f9460a847d2d70b32b8b71c14775e2"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/playback_pcm.c": {
+      "bytes": 11344,
+      "sha256": "f00995c1ca81176fc244968b4276b41624767f42c2963eb90482f23953d09a1f"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/playback_pcm.h": {
+      "bytes": 6034,
+      "sha256": "b5056427354dc20c166cd6da424b211b206835840555bbd8423b2858bc7d0e65"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/pp20.c": {
+      "bytes": 7187,
+      "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/pp20.h": {
+      "bytes": 966,
+      "sha256": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/project.c": {
+      "bytes": 46481,
+      "sha256": "be3094ffb8a57df8e0f7a58a946f7f20978715f17d2103234027824af882b094"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/project.h": {
+      "bytes": 8827,
+      "sha256": "e1a749800258b1f1db1dedcd7d5d36970abbf7494279cb3669212757f982e21a"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/raw.c": {
+      "bytes": 3920,
+      "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/raw.h": {
+      "bytes": 1171,
+      "sha256": "f9f47added4df41bb7b15aa3b1b7a4d8131a2c4aa19266436318483a41bc0f3b"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/recent.h": {
+      "bytes": 1216,
+      "sha256": "6324b8256d1348ecd3e85d2142da28fcae2a7f8f1f5ce10fb7a1b812dcb6136b"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/render.c": {
+      "bytes": 63218,
+      "sha256": "9253ab8bda1b9fd7c652a094615180edb14abf983265a8591754d982d4a17a94"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/render.h": {
+      "bytes": 11891,
+      "sha256": "50bca0c9fd47be061c3b0c027388f5c1bdbe4316a1caed3f33a696f7527812ea"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/render_commands.h": {
+      "bytes": 9193,
+      "sha256": "ea176e8382ea808929d11571396d6214bb40d2fce8defc9b19569c1bb5c30d14"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/render_invert.c": {
+      "bytes": 11294,
+      "sha256": "aa36e316b315c85d357ab8e8ce9cd54d810899481c4ffafe313272d8bf34bc81"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/render_invert.h": {
+      "bytes": 4182,
+      "sha256": "9d66ec381257454dc816d39ba0ee5b07db4d1f09f326cdcdbd8abbf66285e6d5"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/render_lookahead.h": {
+      "bytes": 1954,
+      "sha256": "6ecdad4402eb721aad8d3b55d6d8fc87a9f8135962c8638f0f1919527c4fbf03"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/render_storage_internal.h": {
+      "bytes": 662,
+      "sha256": "ca1eb7fea1a37cba6ebfedd2e91f6e31a0c6d3f02feee383d184e982fad3953e"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/sample_cache.c": {
+      "bytes": 4018,
+      "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/sample_cache.h": {
+      "bytes": 1999,
+      "sha256": "df19898830aa7696c38898feae15e3b437679af23d5ea3b69e8aa923e927e5c6"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/sample_usage.c": {
+      "bytes": 8253,
+      "sha256": "14520084e266041ea257bc7e1b5145f9322c5549e4e4377f5b962232f089b160"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/sample_usage.h": {
+      "bytes": 3167,
+      "sha256": "0ed540356b9ff1bd2ae651de2ee183b6c0c45af84f352eb02fab07d9155565a0"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/sinc_kernel.h": {
+      "bytes": 28756,
+      "sha256": "058629396a0b22daa67f75c909adf9181fc4e52bfc668890fe2abc3231c3a185"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/slices.c": {
+      "bytes": 6060,
+      "sha256": "2951045844f6fdebdd80afe12fe7a5afc1f37bf837c2f49d840f14867835342f"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/slices.h": {
+      "bytes": 2003,
+      "sha256": "31cd82785c2b86c41d9cde1f7a29056c9d70ec41fb7a9bfb1a5679ba762c24f7"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/studio_consumer.c": {
+      "bytes": 2276,
+      "sha256": "fe871a573e0746205a80adf051252ec8429ffc013f00c20d4980f5d9ee324573"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/studio_consumer.h": {
+      "bytes": 1890,
+      "sha256": "2b081296f92f2f49961b16d09c18bf169795ba598797d4cec088b3f4f890750e"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/studio_internal.h": {
+      "bytes": 1649,
+      "sha256": "728e1116526c7ae0132049c0d649b1d06585fb0119491077c904f85fa6a0595e"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/studio_mix.c": {
+      "bytes": 7456,
+      "sha256": "21b58fce2a7fe58ee0f21b9cfde987a9480018921cacfd96181ca583a42cf3d1"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/studio_mix.h": {
+      "bytes": 3328,
+      "sha256": "48e81a08035fcadbb71b23c4e096039e47ea3ba482b1f539538d8c170c0dcdc3"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/studio_plan.c": {
+      "bytes": 3484,
+      "sha256": "f594a572f7a33af7f5167f2223c61e894b7a5ea7d8289e1910667d41279da5fe"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/studio_plan.h": {
+      "bytes": 1149,
+      "sha256": "4fbd66a0c7d7c08d6324242f00488e0a3a017f925ce8010ae9f8b11d19f33bdc"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/studio_pump.c": {
+      "bytes": 1829,
+      "sha256": "c62e46bbff6556ef89197f75383c885c81a96bd9dc8b393b1a1e9539f38d2d4d"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/studio_pump.h": {
+      "bytes": 1507,
+      "sha256": "679d0b48d09696c11cfdfd5fe4033fb7c2f4ea8784073fadb13604d0331aae16"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/studio_queue.c": {
+      "bytes": 2270,
+      "sha256": "31a58a5e514bce52606e875e642865db42676cec0dc84d3aae3c4b5e46b5b7e5"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/studio_queue.h": {
+      "bytes": 1804,
+      "sha256": "891f680cb1cce81943e864cf73592a6b65643203762218c7676073935bc4bb04"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/studio_song.c": {
+      "bytes": 8819,
+      "sha256": "8271adb666712681e8cb31730dc2e548437039f3001baafd087b2e0684350b43"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/studio_song.h": {
+      "bytes": 3711,
+      "sha256": "57e7c0d2b240263ffe79e86fcc4daaf31bcf9149fa19d0fe7ddab8bf944cd57d"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/svx.c": {
+      "bytes": 7817,
+      "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/svx.h": {
+      "bytes": 1442,
+      "sha256": "824541cd25b72b5820e091cfc9f4e6a5f41351fd0630dddc09aefc0405036814"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/timeline.c": {
+      "bytes": 1598,
+      "sha256": "2296df1f1d13336bacb40cd867268dbd1c52d1ed0353256f5022da536516effd"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/timeline.h": {
+      "bytes": 1150,
+      "sha256": "ef1640b5c7dd9e48e1e13a9963c21c53b913d062b172a988e91abb7532defa64"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/voice.c": {
+      "bytes": 11427,
+      "sha256": "9da52c6a82f9ea753655ed4d196946198316cb5327078ffbf354a6dc66e48c68"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/voice.h": {
+      "bytes": 4184,
+      "sha256": "386b10545fb8ae615b5a45718d90be60b0999b2d63fffd835b6be540d7dca479"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/voice_internal.h": {
+      "bytes": 934,
+      "sha256": "02f7f0af75f1a60a7907fbdcbfa754f3d2a06e9073d2bb5e4888f36a66ce5973"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/wav.c": {
+      "bytes": 7200,
+      "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/core/wav.h": {
+      "bytes": 1384,
+      "sha256": "8dd0f4454304babb53eef5ecb97cde7bfe6569d292cc0e9a0f204c4a587f2028"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/editor.c": {
+      "bytes": 69195,
+      "sha256": "d5b00f3eb9b46db2b4f31ccf0784cf2a2cef00ff33dde4d9c386f250ff06d407"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/editor.h": {
+      "bytes": 6622,
+      "sha256": "2ca5a23e52a324c58436d8d52997e0443fe17583036426d0f11dfbd1fa2ab697"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/editor_mixed.c": {
+      "bytes": 3538,
+      "sha256": "cd175345384d5aa2f498249d23bc660624820423c734e9d63cb86c7ee0122f25"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/editor_mixed.h": {
+      "bytes": 2577,
+      "sha256": "36e0c16de159751432870114804ce02e1f53d3eb3cf0860cea49bce35e8b58ce"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/editor_mixed_bridges.c": {
+      "bytes": 4451,
+      "sha256": "95007dc1c350def24801797bc116d17d6a2f7811e44ec39166be6ba66e99810a"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/editor_mixed_bridges.h": {
+      "bytes": 2677,
+      "sha256": "8065a9b60264dbefacb84b9456bca2caff569eb54005aa6413574f9c02acd7bd"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/editor_mixed_checked.c": {
+      "bytes": 3301,
+      "sha256": "7cd114a8fc1aeed4c3d06bf20c43cb98efeb04e4d7961da63beafca02289e77d"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/editor_mixed_checked.h": {
+      "bytes": 1925,
+      "sha256": "76d52c7f16bb9d9ffc05e8534694d9564f2d031a54a9824621815e98cacfd799"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/editor_mixed_establish.c": {
+      "bytes": 2798,
+      "sha256": "11d4ea87c65d61ba57a01ff3e88eb0d45bfb7463f164dce82a1314a9d68b2e2f"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/editor_mixed_establish.h": {
+      "bytes": 2037,
+      "sha256": "14e144f9053753be5d84e43962abe6f28237a72e15d966d871ba0fa552dfa7fb"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/editor_mixed_internal.h": {
+      "bytes": 242,
+      "sha256": "e376d55fe260d2048210ec491484d6580cce9d61266947b0ef5b269a182fb7b9"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/editor_studio.c": {
+      "bytes": 14145,
+      "sha256": "4a7a98f4fc6f8c5e77c4856a0ebb30360ca0c32bc3ea00930a9b53de27df2c7d"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/editor_studio.h": {
+      "bytes": 7927,
+      "sha256": "eca7c1d52084755edd0b239060114ef8455142ed5d5f840b5b1e8709691265c4"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/editor_wavetable.c": {
+      "bytes": 5133,
+      "sha256": "17bc84e6cca8767179aa8a106822539cf9a589d94fd8839fc9734966df2b4ec9"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/editor_wavetable.h": {
+      "bytes": 3928,
+      "sha256": "875be33ae99dabd218ec0b577ffeef0205d3ae933ebe6a9ed48b084034c787b8"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/mixed_owner.c": {
+      "bytes": 33320,
+      "sha256": "580721245098717a884936c4b0e084d1d1e1453d876c82c1fdc1a92a0cb0b4fb"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/mixed_owner.h": {
+      "bytes": 7816,
+      "sha256": "3edb67e1b911e799a91afa59afe7bccbbcbbae9e1e8c009da83e80a02a56f631"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/mixed_owner_established.c": {
+      "bytes": 13204,
+      "sha256": "b06082364074cd7afcda869ad2ec40a9a374b85fa693157b35a8a6ce24ded9d6"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/mixed_owner_established.h": {
+      "bytes": 2687,
+      "sha256": "f00e162e78b3d26028d4e8d9e4bf708bf5f93db80ae63cdd5af0a0b2684a2dac"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/mixed_owner_established_internal.h": {
+      "bytes": 1110,
+      "sha256": "0217f4ebe23ba47f434647495ad813ebd80feb90c9d169bcd02ef4f91699db7a"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/mixed_owner_internal.h": {
+      "bytes": 2569,
+      "sha256": "512c9f5e6c88f869ccc5df0e60122ad5e37ae6c8d558905b7a0cbb3ee72b673f"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/mixed_owner_state_internal.h": {
+      "bytes": 2767,
+      "sha256": "613cab0637234b1309c5adbb96f6d9eaa551a1776c3fae9f2d0f951b6931527a"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/mixed_preflight.c": {
+      "bytes": 22982,
+      "sha256": "394994b3129933cd99008bcefbdd9b4e02db5f5576634886857ac6c944b6b893"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/mixed_preflight.h": {
+      "bytes": 7968,
+      "sha256": "805c75ef06d417787cf930a3344dd207f8e34b758e651469aa685599f67afbd2"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/mixed_transport.c": {
+      "bytes": 3140,
+      "sha256": "ec84da17e583b92c217bbd65485177180a895d2db22098fcea69ecf53f64f37d"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/mixed_transport.h": {
+      "bytes": 2889,
+      "sha256": "802b95f83f4185bafd5dbfce0b481375d32c4874885195c8292a818493d935f8"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/paula_dispatch.c": {
+      "bytes": 16681,
+      "sha256": "f8cba540ddb8a7f4dc6551aa217abc2e791f567101e57f975198b80c8f468e1a"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/paula_dispatch.h": {
+      "bytes": 3087,
+      "sha256": "6775ee73d41e615c3a125d3ed1e0a9258496a86dfd7552a2373f044acdc844df"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/paula_internal.h": {
+      "bytes": 2152,
+      "sha256": "c7cb98c9136a5a4cd39bf9a5dc7c9eaf22d689019f6785c951455fa4d5135734"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/paula_preflight.c": {
+      "bytes": 22069,
+      "sha256": "0e4a6f90cdec366856b0a2325502185746f9a2bab0ff3118d6c5f346dde5a82d"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/paula_preflight.h": {
+      "bytes": 8400,
+      "sha256": "3fd4d9096a3592f53503d1c1e2599dea33873b1fd508b41826d8715f6604f67d"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/paula_voices.c": {
+      "bytes": 6268,
+      "sha256": "fc7cc40e8549b2857f6b703e7521a30b6f85761b42fe13ae049c1a4c82feef86"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/paula_voices.h": {
+      "bytes": 4411,
+      "sha256": "493358f90435bdc7d99e31ed81d76fd17f720cfe174c244a9f766bd4a8d9039d"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/project_snapshot.h": {
+      "bytes": 1203,
+      "sha256": "dbb1206c1e8bfd317b515086f9d064c6eacd2450228893bb394f278ed6c0b2df"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sample_range.c": {
+      "bytes": 5626,
+      "sha256": "694e14d1a665f2a9b5c844a40e79a27ad1c56eedd5a2c6e379aace8f235980c4"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sample_range.h": {
+      "bytes": 1980,
+      "sha256": "4ceff1c3611c278ef56b9ead9a3674471d0d18ae1d67c4a032593cd8ee211dd8"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler.c": {
+      "bytes": 64117,
+      "sha256": "91a8025e8ba74d8211f97037285177d0f0412d3c76fa1422ed2b48df0351ff4e"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler.h": {
+      "bytes": 6264,
+      "sha256": "d19465c8b3866cfb67cfaca98457c2201165675cc3a4f45804d3c00b17284433"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_establish.c": {
+      "bytes": 10116,
+      "sha256": "66e2129b1a0c53bc6e4ee68d3a8ce32bb1965f43d702c78856f7e4f3d0479f00"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_establish.h": {
+      "bytes": 3518,
+      "sha256": "1f1b051fc0132eaa2bb195afe395d12bbaa7d468d58848460d230e9d8ca30009"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_internal.h": {
+      "bytes": 3679,
+      "sha256": "8ce04909cd657d0caa6598416cfce2ee91109bf8fde782fc7795d35b116ac3e2"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_invert_song.c": {
+      "bytes": 5941,
+      "sha256": "5aef31d4ea1bef6f122712702234469527b403ad724afa1822588c39101ca5a9"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_invert_song.h": {
+      "bytes": 3150,
+      "sha256": "2d6fad60faf1803755adf91b1952df41ab9b7367a73514038337767f7a3aac14"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_master_guard_internal.h": {
+      "bytes": 1059,
+      "sha256": "f691504b22dd9250a3442953527470e4dd813a4d8eea900412b2afe1d3ab9a7a"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_paula.c": {
+      "bytes": 7401,
+      "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_paula.h": {
+      "bytes": 2718,
+      "sha256": "3f25fa64f67c4f6115cbbefd109e6d17e8f648fe9ba955917a6e05f6158a4890"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_paula_internal.h": {
+      "bytes": 3013,
+      "sha256": "fdef77b3f4f00b9c89b4ec05f3915e0334d4aa340673b0dc640eaadef8cf75eb"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_prepare_memory.c": {
+      "bytes": 3564,
+      "sha256": "436b914d96c53db6280c2b1e77d954f94a634be4534e1cfc0f6035786bf33a89"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_prepare_memory.h": {
+      "bytes": 2884,
+      "sha256": "9fdcf4f9ebc9cae45da0a4e61208ff2b06ca0621aa6873b00dc4bbf47ad65146"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_prepare_project.c": {
+      "bytes": 3193,
+      "sha256": "3bf03c11c789640424dedeb9465476be4c68235cd166501ac717c98557b7db2e"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_prepare_project.h": {
+      "bytes": 2393,
+      "sha256": "5fd452e8ad652d356a3e3a46c04cebcf6c217277cca59edbf70937b8a62827be"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_song.c": {
+      "bytes": 8188,
+      "sha256": "ebba4a380a76b9a367fe28d84c5854de765e89b527c4220c48906946b681d0aa"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_song.h": {
+      "bytes": 3043,
+      "sha256": "0e74dbc5cfc6a5371420ad789f551f2e8d1e9f1ef48424efa768059f57281d26"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_studio.c": {
+      "bytes": 679,
+      "sha256": "33849a9ebd51025135c25f0e96f5d31a3f5a9d507176e343a02dbe973439fbab"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_studio.h": {
+      "bytes": 508,
+      "sha256": "894dc0198f7c1f01f1be82eae671efb6e2f6abaeeb6bd1bb25415b6114108874"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_wavetable.c": {
+      "bytes": 6727,
+      "sha256": "98784fff3238d96b91685f43a2b41f7bc93fd3be49f91eda5599a9089f3e634b"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_wavetable.h": {
+      "bytes": 4278,
+      "sha256": "5b64c95994f3837834b39e3918847f811c1f037cc5a5ba4467031f753783561d"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_wavetable_internal.h": {
+      "bytes": 1671,
+      "sha256": "def1ef4ed705a4b2d3af3030e1072dc7e74bd238bb9f23fbc701241b339fa4df"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/sampler_workflow.h": {
+      "bytes": 4356,
+      "sha256": "a1eff0addfd1fded1185029f68bd9d6d885d5a421b702b40f76cb28af63fac1a"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/slots.c": {
+      "bytes": 3233,
+      "sha256": "60ab6a784d4bc47285bb436b975cdd6ee0bad4743bdf9f0817837d818645f7fa"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/song.c": {
+      "bytes": 8937,
+      "sha256": "0e6c75429891da87865e3e2242057401db81129b87a4963dc3730f3f1786559c"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/song.h": {
+      "bytes": 1584,
+      "sha256": "fdcc808b738049b0e47ab8b87bcf556b064511c5da17022f84a33e9d5948e1b2"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/view.c": {
+      "bytes": 42956,
+      "sha256": "87dcf36230617d18b757b4acbe5dcc2ffac38d6c5d1d091463408eb8bccc15b2"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/view.h": {
+      "bytes": 1731,
+      "sha256": "1ce9950cfa9efa124e5a887dc6db36bebc43c91b410dfbc9ce8dd60c1b324d6c"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/wave_summary.c": {
+      "bytes": 8496,
+      "sha256": "3e4501324e5888cf6c7b3497c7c6dcb60ef8dcf75e4a53d4d57b1222ae06ff34"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/wave_summary.h": {
+      "bytes": 3711,
+      "sha256": "4a3a18cbd568f953c0078be936c43ae468ed264251eb9600bb4297e6df6c8684"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/wavetable_dispatch.c": {
+      "bytes": 19317,
+      "sha256": "ebeadff7f05217af3f66bbe514053022638195e806a70b25c7e73a2ed636ea64"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/wavetable_dispatch.h": {
+      "bytes": 8248,
+      "sha256": "2318260d9e94c14826b381b5b339c472e0127564129d578db71414ce89910540"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/wavetable_internal.h": {
+      "bytes": 2752,
+      "sha256": "1f865c465e581dc6e762b356454cda3937c91936f741f610985f86c96d5a5c4b"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/wavetable_song.c": {
+      "bytes": 34130,
+      "sha256": "baeca221d22d3a34732860fbf0cb79150d7947a40bc3d678c60bf8941c6ffc9c"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/wavetable_song.h": {
+      "bytes": 13992,
+      "sha256": "8eddcb4b14a0b53337e5d62de5aef53ff737bdaf10b904432e5f0a8b8f547d01"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/wavetable_voices.c": {
+      "bytes": 4387,
+      "sha256": "46768220e60a19fdddfa6a45d6d7d91928b0d40db00c1bceb45bc7aac22d1cd4"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/wavetable_voices.h": {
+      "bytes": 4028,
+      "sha256": "90469885b32f35487c868e4cbcafb01c5abe802eee115bb565fa9918991d06af"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/workflow.c": {
+      "bytes": 24518,
+      "sha256": "9f1d0f51835d0e67264a2f6f30aa447d635a9affdbec99ba82f15b62492fe76b"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/editor/workflow.h": {
+      "bytes": 1942,
+      "sha256": "1b8519a6152d636e2ddf2bb63221e03f9ffb03aa462363c0ae7edd5f95d0889e"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/platform/mod_import.c": {
+      "bytes": 1860,
+      "sha256": "855e2d3633e83397cf3232aba83c89f044f64f0f09aa5345a9208a638ff870ba"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/platform/mod_import.h": {
+      "bytes": 208,
+      "sha256": "a4e0607155f5c3b3420c6e9767668a9583e9e16e17960903286dc6ec3185c6db"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/platform/pp20_import.c": {
+      "bytes": 2149,
+      "sha256": "1dcf59769e988a0ab802dbc808e45b8097f47cd46f53510dd4fd391c5c535822"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/platform/pp20_import.h": {
+      "bytes": 212,
+      "sha256": "da66dc8b7f278cd9a9acd40347a0c8e42ed1b9f6672e02f7712a94e12e6b2e96"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/platform/raw_import.c": {
+      "bytes": 5153,
+      "sha256": "a4286e55accb510e4deedbb4f1a749c7a74010b3c3adb8318c3fbbf9be93c848"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/platform/raw_import.h": {
+      "bytes": 798,
+      "sha256": "f33944e9c16ed119eaceecb4074575ad5d26a5917a009d52ffd671b7dd8814e5"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/platform/sample_import.c": {
+      "bytes": 1903,
+      "sha256": "f609332bb26f4abab4bdd85d084b98ae1fba329f9ad918478aad809f97526f2b"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/src/platform/sample_import.h": {
+      "bytes": 271,
+      "sha256": "0bcc406620337cb3063976b501ebc362301370b91302c0ddfed170ef7961c2aa"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/tests/amigus_reservation_test.c": {
+      "bytes": 5856,
+      "sha256": "dad17211f55fa80908f0a01f0f5482a1148946b324267fbd872caeab79205572"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/tests/amigus_wavetable_cache_test.c": {
+      "bytes": 13852,
+      "sha256": "0dfb01bd967669b0661ea01cdcec22800dc98f6c0476a83d3995975b83c18eef"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/tests/editor_mixed_bridges_test.c": {
+      "bytes": 9540,
+      "sha256": "82da2dcaa13d75547bc51038b1bac262af44418c080557e7518eaeaadd9f8454"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/tests/editor_mixed_checked_test.c": {
+      "bytes": 13949,
+      "sha256": "ca793443f359312bd5483e0d33da9475010f3b0180aa1e07f85454cefc84460b"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/tests/editor_mixed_test.c": {
+      "bytes": 12567,
+      "sha256": "26836aab616e5121b79c1e31a71f8f8402e56d5297be9af593a08fdae81b9fec"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/tests/mixed_owner_test.c": {
+      "bytes": 80136,
+      "sha256": "bdd7487f90b2c376eac0f18206a4ec549809dff1ebd0ec41d46ac7b55908b123"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/candidate/tests/paula_voices_test.c": {
+      "bytes": 12246,
+      "sha256": "356816d90879b1a10a30e8046475ad754e4bc900b74389f8c4e4192757a1c2d1"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/host/bridges-run.stdout": {
+      "bytes": 624,
+      "sha256": "80a8a9731ef96568d0356de80dfdf5299ee7bef777cc0a8e7a5d038ead11d80a"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/host/execution.json": {
+      "bytes": 200909,
+      "sha256": "5a952f1700447953cc20a54bee7814ceef3c5b2b94641df498c4c82b819a7bad"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/native/PTEditorBridgesTest": {
+      "bytes": 385144,
+      "sha256": "21c5efc7fe5d066f56e81ea8cbcea8bc7e95892e8af0a55608a1410d882d9b1e"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/native/manifest.json": {
+      "bytes": 345909,
+      "sha256": "9cc69187775861526ca07c9ca873ffc970dfd10990dbfcdbd7c9fb51c67e8b97"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/publication-receipt.json": {
+      "bytes": 6509,
+      "sha256": "f356210bffa928a8ea75e149bfbd36a695ef12cc93505b9b9fb50e1262d36a32"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/source-controls.json": {
+      "bytes": 97823,
+      "sha256": "1d16f7dd3f4f5400ad0ca1d1d28727a766348248eaf517c25e68e77970c2b7d4"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/config/devbench.toml": {
+      "bytes": 823,
+      "sha256": "eddf003461f883082570a0552b70f131fe0940fed88a1c316064ed09f8122bfe"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/config/emulator.json": {
+      "bytes": 504,
+      "sha256": "b2ee225b992d738da64e350fbef9bea4940a04a3f23b37e41d19d0d0d73f2251"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/config/local.codex.amiga-devbench.plist": {
+      "bytes": 1254,
+      "sha256": "7e4f2c8c2981ac5689d879a9fa242bdb94d765d200ab967f71d0356bad384716"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/docs/LAUNCHER_GUARD.md": {
+      "bytes": 6978,
+      "sha256": "e52317959ce61e3a0ee7d8c00104ed4e3c2582a70a913f8d6d5957aa0a5dc6b1"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/docs/PROJECT_ONBOARDING.md": {
+      "bytes": 5971,
+      "sha256": "c36b463bd6b24babc9553d72f925344d964ebc5646a11aaa9b9980a90324a20f"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae": {
+      "bytes": 4828,
+      "sha256": "894aa5a61a2bf6267b461c6774a0bdc913a96e7f581ea7e4e3762c4d71709a30"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/amiberry-mcp.py": {
+      "bytes": 650,
+      "sha256": "a7633be17c7f9b5e541f7037cef7cbdbde21e08512814935f61fbab91a42b343"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/bridge_checks.py": {
+      "bytes": 1521,
+      "sha256": "e68e3a8844b44d1ee07784225a34b665544f91b890643b3f7b38bce35227bbfd"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/devbench-local.py": {
+      "bytes": 826,
+      "sha256": "719d4a017745cbce58dbf01f37204d91a6e1a98ba93430d01a42e3e0705260dc"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/emulator.py": {
+      "bytes": 6924,
+      "sha256": "9f79c268a1539598ed235217f1d0bc7ce707cab58b2018c8cd7f5d2d08b31a25"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/launcher_access.py": {
+      "bytes": 10374,
+      "sha256": "2ebf8503b79ca4c57108cbee52830c1f3ea208c8838831bf6d5b9cca70ba8787"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/launcher_guard.py": {
+      "bytes": 24567,
+      "sha256": "eea1cb76cf3b9a2bcd13be4fb673d857dd9c013b51891833f85675736de7df14"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/launcher_server.py": {
+      "bytes": 28480,
+      "sha256": "f0489ae37790712bb297ae1a75c9784f8f94dda464712faf6f1ab107cab50f01"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/shared_guest.py": {
+      "bytes": 3286,
+      "sha256": "2b3991d33fe39a4fa6945c69e68a12ba721bf932be0301738ba35fdeda1545a0"
+    },
+    "/Users/james1/Library/LaunchAgents/local.codex.amiga-devbench.plist": {
+      "bytes": 1254,
+      "sha256": "7e4f2c8c2981ac5689d879a9fa242bdb94d765d200ab967f71d0356bad384716"
+    }
+  }
+}

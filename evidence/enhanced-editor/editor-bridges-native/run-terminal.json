@@ -1,0 +1,1002 @@
+{
+  "status": "PASS_EXACT_030_SOFTWARE_FIXTURE_SETTLEMENT_PENDING",
+  "target": "amiberry-030",
+  "launches": 1,
+  "stage": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/PT-editor-bridges-20261006-v1",
+  "atUTC": "2026-10-06T09:43:46.105222+00:00",
+  "scope": "ordinary-memory software fixture with fake backend callbacks; no audio/device/nativeIRQ activation",
+  "ownedProcess": [
+    [
+      81010,
+      "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+    ]
+  ],
+  "cpu": {
+    "model": "68030",
+    "name": "686803",
+    "fpu": "0",
+    "24bit": "false",
+    "compatible": "true",
+    "cycle_exact": "true"
+  },
+  "memory": {
+    "chip": "2048KB",
+    "fast": "0KB",
+    "bogo": "0KB",
+    "z3": "131072KB",
+    "rtg": "0KB"
+  },
+  "chipset": [
+    7,
+    "AGA"
+  ],
+  "dmaBefore": {
+    "DMACON": "23F0",
+    "master": "1",
+    "blitter_priority": "0",
+    "blitter": "1",
+    "copper": "1",
+    "bitplane": "1",
+    "sprite": "1",
+    "disk": "1",
+    "audio0": "0",
+    "audio1": "0",
+    "audio2": "0",
+    "audio3": "0"
+  },
+  "statusBefore": "OK\tPaused=false\tConfig=autosave",
+  "candidate": {
+    "bytes": 385144,
+    "sha256": "21c5efc7fe5d066f56e81ea8cbcea8bc7e95892e8af0a55608a1410d882d9b1e"
+  },
+  "launcher": {
+    "bytes": 204,
+    "sha256": "27beea386fa0fa1393fece502640777a3fa43b88ea2b5ebbc985bb13e5407239"
+  },
+  "pingBefore": "Amiga alive - clients: 0, chip: 1926976 bytes, fast: 131652640 bytes",
+  "launchReply": "[OK] (no output)",
+  "logObservations": [
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 0.6349678330007009
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 1.6919356669968693
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 2.742575124997529
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 3.7961124170033145
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 4.8483876250029425
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 5.9067297500005225
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 6.963614749998669
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 8.017492749997473
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 9.072304957997403
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 10.12664795800083
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 11.18228345800162
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 12.239138832999743
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 13.291925874997105
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 14.349066082999343
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 15.40215129200078
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 16.459638874999655
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 17.51633812500222
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 18.57418229200266
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 19.633326417002536
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 20.687134583000443
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 21.74425679200067
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 22.802219582998077
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 23.86549216700223
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 24.924750958001823
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 25.99666391700157
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 27.04798920799658
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 28.102908499997284
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 29.15660499999649
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 30.213217249998706
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 31.269094791998214
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 32.32341229199665
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 33.37849904200266
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 34.43164925000019
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 35.48327933299879
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 36.53915658299957
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 37.597371042000304
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 38.65620391700213
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 39.71318308299669
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 40.771107125001436
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 41.8299168750018
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 42.887825833000534
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 43.94149954200111
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 44.99995016700268
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 46.054843249999976
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 47.10557958300342
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 48.159882833002484
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 49.21971995799686
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 50.28219800000079
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 51.34333820799657
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 52.403236792000826
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 53.465837582996755
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 54.52154724999855
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 55.58145274999697
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 56.640567333000945
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 57.69687816700025
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 58.75238258299942
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 59.80634716700297
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 60.859160833002534
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 61.92125600000145
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 62.98579316699761
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 64.0619050000023
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 65.12304445799964
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 66.17640341699735
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 67.229292582997
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 68.28559162499732
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 69.34539683299954
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 70.40775370800111
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 71.46857741699932
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 72.53188816700276
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 73.58833920799952
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 74.64176616699842
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 75.70183391700266
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 76.75850241699663
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 77.82087716700335
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 78.88057283299713
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 79.93677341700095
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 80.99366212500172
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 82.04655808299867
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 83.10610191700107
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 84.16185716699692
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 85.21962008300034
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 86.27583729199978
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 87.33177525000065
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 88.38624987500225
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 89.44021541700204
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 90.49335250000149
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 91.55323274999682
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 92.60958625000058
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 93.66540837499633
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 94.72159287500108
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 95.7771972499977
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 96.83110766699974
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 97.88418045800063
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 98.94346016700001
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 99.99903162499686
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 101.05566487499891
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 102.11653474999912
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 103.17567854200024
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 104.23490670799947
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 105.29360658299993
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 106.3557562499991
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 107.41526883299957
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 108.4705971250005
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 109.53465270799643
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 110.59239812500164
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 111.64642941700004
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 112.69947445800062
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 113.75487095800054
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 114.8169821670017
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 115.86819120799919
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 116.9280314580028
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 117.98248837499705
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 119.04096633299923
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 120.10095508299855
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 121.15962395800307
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 122.22035795800184
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 123.28276216700033
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 124.34473229199648
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 125.40931891700166
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 126.46319629200298
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 127.51973745800206
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 128.58088070800295
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 129.63440566699865
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 130.69215000000258
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 131.74488949999795
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 132.80471954200038
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 133.86132279199956
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 134.9200995420033
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 135.97941116699803
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 137.04042212499917
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 138.09785337500216
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 139.15694308299862
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 140.21242720799637
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 141.27592416699918
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 142.33179316700262
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 143.38344816699828
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 144.44534808299795
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 145.50705249999737
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 146.56310549999762
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 147.62612166700274
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 148.68511641700024
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 149.74972208299732
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 150.81053037499805
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 151.86996179199923
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 152.92262366700015
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 153.98071999999956
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 155.0384597079974
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 156.09107870799926
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 157.14944429200114
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 158.2042417499979
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 159.26490899999772
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 160.3219737920008
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 161.38303683300182
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 162.43838966699695
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 163.498072082999
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 164.55314508300216
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 165.60880166699644
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 166.66738545800035
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 167.72975083300116
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 168.78757029199915
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 169.85282929200184
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 170.91420112500055
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 171.9704772920013
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 173.02654829200037
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 174.0846510420015
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 175.14412804199674
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 176.20171349999873
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 177.25876516699645
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 178.3223397499969
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 179.3849600829999
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 180.44379849999677
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 181.50556620799762
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 182.56556141700275
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 183.6270711670004
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 184.6805552079968
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 185.73487141700025
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 186.78914858299686
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 187.84128887500265
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 188.89255825000146
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 189.95224779199634
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 191.00367258299957
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 192.06933391700295
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 193.12361108299956
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 194.18107787500048
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 195.23653179199755
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 196.29612991699832
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 197.35565416699683
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 198.4137388329982
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 199.47010237500217
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 200.5362737079995
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 201.59446537499753
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 202.64725091699802
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 203.70362458300224
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 204.75617179199617
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 205.812645375001
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 206.87356308299786
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 207.92559529199934
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 208.9795882920007
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 210.03344191700307
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 211.09141991700017
+    },
+    {
+      "bytes": 0,
+      "hostObservedSeconds": 212.15147350000188
+    },
+    {
+      "bytes": 624,
+      "hostObservedSeconds": 213.21352070799912
+    }
+  ],
+  "completeAssertions": {
+    "markerLines": 3,
+    "editorLegacy": 15,
+    "editorCheckedLifecycle": 39,
+    "wholeControlAliases": 18,
+    "bridgeLifecycle": 9,
+    "bridgeAliasesAndAdmission": 75,
+    "completeStdout": {
+      "bytes": 624,
+      "sha256": "80a8a9731ef96568d0356de80dfdf5299ee7bef777cc0a8e7a5d038ead11d80a"
+    },
+    "scope": "Actual portable assertion bodies on target CPU with injected clocks, voices and ordinary-RAM bus callbacks only"
+  },
+  "elapsedSeconds": 213.21426566699665,
+  "downloadedLogs": {
+    "fixture.log": {
+      "bytes": 624,
+      "sha256": "80a8a9731ef96568d0356de80dfdf5299ee7bef777cc0a8e7a5d038ead11d80a"
+    },
+    "fixture.rc": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "complete.flag": {
+      "bytes": 9,
+      "sha256": "a4bccf5c13ef5ff8311e59b34d492bc7072a55298723601a6a9c127053aee8fc"
+    },
+    "launcher.log": {
+      "bytes": 8,
+      "sha256": "fc1b7c019962b238d1a6ada645907789172d70040e961b64ef50e0f42710c35f"
+    }
+  },
+  "tasksAfter": "[OK]\nProcess  1: stk 16384, gv 150, pri   0 Loaded as command: Status\nProcess  2: stk 65536, gv 150, pri   0 Loaded as command: Dev:AmigaBridge/amiga-bridge\nProcess  3: stk  4096, gv 150, pri  20 Loaded as command: C:TankMouse.driver\nProcess  4: stk  8000, gv 150, pri   1 Loaded as command: Workbench",
+  "dmaAfter": {
+    "DMACON": "23F0",
+    "master": "1",
+    "blitter_priority": "0",
+    "blitter": "1",
+    "copper": "1",
+    "bitplane": "1",
+    "sprite": "1",
+    "disk": "1",
+    "audio0": "0",
+    "audio1": "0",
+    "audio2": "0",
+    "audio3": "0"
+  },
+  "guardAfter": {
+    "archives": [
+      {
+        "bytes": 2034,
+        "fence": 5,
+        "name": "release-0000000000000005.json",
+        "sha256": "7f14fb8ffe7df2de1aed8beda774d083c9a717fec97ba575733fe0561422efcb"
+      },
+      {
+        "bytes": 2027,
+        "fence": 10,
+        "name": "release-000000000000000a.json",
+        "sha256": "565d842aadbb4f6ebaaf52143fce4f161da5996606c03adcd679eb1d67e355d3"
+      },
+      {
+        "bytes": 2674,
+        "fence": 18,
+        "name": "release-0000000000000012.json",
+        "sha256": "51040dc9dbe88c4fd07ab0168e154d2d1508b457605373d8fd38b3f12b5c80e8"
+      },
+      {
+        "bytes": 1574,
+        "fence": 28,
+        "name": "release-000000000000001c.json",
+        "sha256": "497beef52132b167956e5a9abfd0da5c60f95309a020b025a4c69f9564a8bb1f"
+      },
+      {
+        "bytes": 1548,
+        "fence": 34,
+        "name": "release-0000000000000022.json",
+        "sha256": "469c89a882db17a9aa686e703957d1770463de43ba8eb7a6e5b04e7e2cca33a8"
+      },
+      {
+        "bytes": 2189,
+        "fence": 41,
+        "name": "release-0000000000000029.json",
+        "sha256": "5df4c72f0992e4470b8664cc15c9245093d58b7afeb69f7b682ffba267cfc4eb"
+      },
+      {
+        "bytes": 1930,
+        "fence": 45,
+        "name": "release-000000000000002d.json",
+        "sha256": "3e95de456c1f74f8a72c7cf88af645a756686dc38fe3f866c16d7d25f8218faa"
+      },
+      {
+        "bytes": 2568,
+        "fence": 52,
+        "name": "release-0000000000000034.json",
+        "sha256": "7c5aaf39710163c8b4dbc1b44a987d727a8e045f20d013809308b997dfa958c7"
+      },
+      {
+        "bytes": 1692,
+        "fence": 60,
+        "name": "release-000000000000003c.json",
+        "sha256": "263825cc34f324aac80d3f0457cf1627ab6c6a03771a15e267cb9857f9792748"
+      }
+    ],
+    "authorization": {
+      "approved": true,
+      "legacy_holds_verified": true,
+      "mode": "host-provisioning",
+      "record_sha256": "820445ecb68cd63db257e203686d2df63fca2e66f4d6048f59f5939771fce568"
+    },
+    "fence": 65,
+    "holds": [],
+    "inflight": null,
+    "potential_resident": true,
+    "reservation": {
+      "binding": {
+        "candidateBytes": 385144,
+        "candidateSHA256": "21c5efc7fe5d066f56e81ea8cbcea8bc7e95892e8af0a55608a1410d882d9b1e",
+        "coordinationSHA256": "06601264311288a7383d294287b944ef2c8bba627b01e34bf736aa0f0a4788da",
+        "evidence": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-window-v1",
+        "scopeSHA256": "1a4226a19b71e6944147e7b9ce90f8090aa0c74d6d38202a3e3d06829f43d3c3",
+        "sourceCommit": "5771d3ce1fcc3dee1967ec0c728e1fa654954bba"
+      },
+      "controller": "ProTracker root01a0b5ae-c04f-7661-8859-e89df20c3290",
+      "lease": {
+        "run_id": "b157dad07c88018a64e82a727efbdcd2"
+      },
+      "purpose": "Human authorized exact portable editor bridge and checked-lifetime qualification; fresh sole-controller scope",
+      "target": "amiberry-030"
+    },
+    "version": 1,
+    "phase": "READY"
+  },
+  "completedUTC": "2026-10-06T09:47:24.363568+00:00"
+}

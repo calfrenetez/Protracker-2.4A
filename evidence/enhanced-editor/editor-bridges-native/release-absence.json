@@ -1,0 +1,7 @@
+{
+  "allEmulatorsAbsent": true,
+  "port2345ListenerAbsent": true,
+  "DevBenchDisconnected": true,
+  "candidateAbsentInPriorGuestStatusAndOwnedProcessGone": true,
+  "physicalTouched": false
+}

@@ -1,0 +1,30 @@
+{
+  "target": "amiberry-030",
+  "candidate": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/native/PTEditorBridgesTest",
+    "bytes": 385144,
+    "sha256": "21c5efc7fe5d066f56e81ea8cbcea8bc7e95892e8af0a55608a1410d882d9b1e"
+  },
+  "sourceCommit": "5771d3ce1fcc3dee1967ec0c728e1fa654954bba",
+  "oneStart": true,
+  "oneLaunch": true,
+  "absoluteWorkloadSeconds": 420,
+  "configuredGuestStackBytes": 65536,
+  "scope": "Portable actual editor legacy/checked owner/metadata bridges assertion bodies on030 with injected clocks/voices and ordinary-RAM bus callbacks only",
+  "acceptanceMarkers": {
+    "bytes": 624,
+    "sha256": "80a8a9731ef96568d0356de80dfdf5299ee7bef777cc0a8e7a5d038ead11d80a"
+  },
+  "exclusions": [
+    "physical operations",
+    "audio or device register/IRQ activation",
+    "realFast/Chip placement acceptance",
+    "deviceRAM capacity/uploadordering/voice-stop/exacttiming qualification",
+    "service changes",
+    "guard reset",
+    "forced kill",
+    "retry",
+    "failed-target cleanup"
+  ],
+  "failure": "First failure retained, HOLD; no automatic additional target request/recovery/retry"
+}

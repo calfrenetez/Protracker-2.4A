@@ -1,0 +1,42 @@
+{
+  "status": "PREPARED_NOT_RUN_NOT_ADMITTED",
+  "atUTC": "2026-10-06T09:45:56.911703+00:00",
+  "candidate": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/native/PTEditorBridgesTest",
+    "bytes": 385144,
+    "sha256": "21c5efc7fe5d066f56e81ea8cbcea8bc7e95892e8af0a55608a1410d882d9b1e"
+  },
+  "sourceCommit": "5771d3ce1fcc3dee1967ec0c728e1fa654954bba",
+  "requiredExactEmulatorStatus": "PASS_EXACT_030_SOFTWARE_FIXTURE_SETTLEMENT_PENDING plus independent verified release",
+  "requiredExactLog": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/host/bridges-run.stdout",
+    "sha256": "80a8a9731ef96568d0356de80dfdf5299ee7bef777cc0a8e7a5d038ead11d80a"
+  },
+  "freshNamespacePattern": "RAM:PT-editor-bridges-<fresh-run-id>",
+  "oneLaunch": true,
+  "absoluteExecutionSeconds": 420,
+  "stackBytes": 65536,
+  "scope": "Portable editor legacy15/checked39/control-alias18/metadata-bridge9/admission75 assertions using ordinary allocations and injected timers/voices/ordinary-RAM fakebus callbacks. Physical CPU/software execution only; no real device sample RAM/MMIO/DMA/IRQ/audio.",
+  "prerequisites": [
+    "exact unchanged candidate emulatorPASS and separately verified normalrelease",
+    "fresh AmiConnect/Scott/AmiGUS physical and sharedtransport clearance, all targetholds absent",
+    "live privatelease target real-a1200 and three locks",
+    "actual authenticated Safari access; use no other chat connection; release control to ViewOnly",
+    "fresh physical CPU/network identity plus established bridge CRC/size",
+    "no active candidate/player/test; physical identity must be current afterreboots",
+    "RAM-only exact candidate/launcher/log/RC/complete file manifest and bounded protocol supported",
+    "original endpoint/profile/service/guest baseline restore and separate independent absence/readback/four-recordrelease"
+  ],
+  "ordering": "Scott renderedcomparison is already deferred behind root emulatorrelease; physical operation must separately coordinate sharedtransport and cannot overlap Scott ownership merely because Safari is visible",
+  "failure": "Preserve first physical failure/HOLD and stop target actions; no automaticretry/recovery/reset or inferred cleanup",
+  "acceptanceExclusions": [
+    "realFast/Chip allocation placement",
+    "hardware cachecapacity/order/completion/allvoicestop",
+    "real clock/IRQ/deadline/exactmusical timing",
+    "physical audible/human listening acceptance",
+    "full native UI PLAY/eventloop or wholeapplication release"
+  ],
+  "emulator": "IN_PROGRESS",
+  "physical": "NOT_RUN",
+  "queuedPhysicalOperation": false
+}

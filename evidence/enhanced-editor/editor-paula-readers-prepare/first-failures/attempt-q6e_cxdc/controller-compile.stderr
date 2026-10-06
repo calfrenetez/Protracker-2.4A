@@ -1,0 +1,17 @@
+In file included from tests/editor_paula_readers_prepare_test.c:4:
+tests/paula_readers_song_test.c:3:9: error: 'main' macro redefined [-Werror,-Wmacro-redefined]
+    3 | #define main inherited_readers_fixture_main
+      |         ^
+tests/editor_paula_readers_prepare_test.c:3:9: note: previous definition is here
+    3 | #define main inherited_song_main
+      |         ^
+tests/editor_paula_readers_prepare_test.c:195:33: error: call to undeclared function 'pt_scheduled_grid_window'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+  195 |     {uint64_t first,last;assert(pt_scheduled_grid_window(&f->input.config.grid,boundary,&first,&last)==PT_SCHEDULED_OK);
+      |                                 ^
+tests/editor_paula_readers_prepare_test.c:250:5: error: redefinition of 'main'
+  250 | int main(void)
+      |     ^
+tests/paula_readers_song_test.c:744:5: note: previous definition is here
+  744 | int main(void)
+      |     ^
+3 errors generated.

@@ -1,0 +1,38 @@
+{
+  "status": "PASS_PUBLIC_SAVED_BYTES_AND_RELATIONSHIPS_ONLY",
+  "scope": "Pure stdlib local bundled bytes only; no candidate execution or external input access.",
+  "packet_manifest": {
+    "bytes": 127406,
+    "sha256": "71fd962b5d681fab4c66d726a6cb56fc857eb4f9032440e176e7235b0e34575b"
+  },
+  "asset_count": 405,
+  "asset_bytes": 4651325,
+  "baseline": "86cb65fdef27a19082a4d469acee8aa3bb39e0bb",
+  "source_count_per_attempt": 919,
+  "ordered_units_per_attempt": 80,
+  "dependencies_per_attempt": 230,
+  "compiler_calls_per_attempt": 89,
+  "host_calls_total": 12,
+  "product_metadata": {
+    "bytes": 469568,
+    "sha256": "971dda5d3c3670375e6f518f6728e6452cbbb51ad4131b937985052f679f875c"
+  },
+  "product_bundled": false,
+  "native_entry": "NOT_RUN",
+  "constructor_execution": "NOT_RUN",
+  "expected_stdout": {
+    "bytes": 755,
+    "sha256": "facfb3c2fe6d7c70cb89b496cb92bdb5830dfde8266ad227641671405c998e3d"
+  },
+  "bounds": {
+    "each_compiler_call_seconds": 120,
+    "overall_seconds": 600
+  },
+  "checks": [
+    "All declared ordinary saved assets match exact bytes; no executable, object, SDK headers or source pool bundled.",
+    "first-failure: complete six-call host record, 80 ordered units, 919 inputs, 230 dependencies, 89 compiler argv/log pairs and all three expected markers match.",
+    "corrected-current: complete six-call host record, 80 ordered units, 919 inputs, 230 dependencies, 89 compiler argv/log pairs and all three expected markers match.",
+    "Original four-site compiler failure remains distinct; corrected C/test are the only changed frozen inputs and compiler dependencies; all 1111 prior files retain saved custody.",
+    "Candidate fingerprint agrees across original PASS build, independent audit and packet; native constructor/entry/emulator/physical remain NOT_RUN. No candidate bytes are bundled or opened."
+  ]
+}

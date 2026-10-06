@@ -1,0 +1,6 @@
+{
+  "status": "FIRST_HOST_PROMOTION_FAILURE_RETAINED_NO_RETRY",
+  "errorType": "AssertionError",
+  "error": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/.venv/lib/python3.14/site-packages/amiberry_mcp/common.py",
+  "targetActions": 0
+}

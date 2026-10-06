@@ -1,0 +1,24 @@
+{
+  "humanSource": "Direct instruction to keep working until a decision is needed, plus prior development/test/commit/push authorization",
+  "coordination": {
+    "bytes": 3648,
+    "sha256": "071b24a8483d481197e8a4b73e8904fee2b637b8d3d6e856eec0ff31ca7de649"
+  },
+  "scope": {
+    "bytes": 1572,
+    "sha256": "0674b1d9535b1e340ead4de119a1b5d54c4d4a45f78e097ddc605f33942b840c"
+  },
+  "candidate": {
+    "bytes": 395508,
+    "sha256": "b9b9a71351a012f20b5dc67228604f2f6e02d7dce93d07b2fed28fcb8cf83d10"
+  },
+  "sourceCommit": "86cb65fdef27a19082a4d469acee8aa3bb39e0bb",
+  "changedHostVerifier": {
+    "bytes": 6332,
+    "sha256": "4eb86779e604826eca1e42919cef505e216159edbc585c06322392a8c28e7572"
+  },
+  "changedVerifierReview": {
+    "bytes": 576,
+    "sha256": "d253107a9189c8ecbaa0e90f4ae0c8168771fe5c520052b983fa90955dd63c0e"
+  }
+}

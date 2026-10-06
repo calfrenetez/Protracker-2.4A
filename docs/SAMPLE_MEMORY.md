@@ -5922,3 +5922,50 @@ fcb1006996dfaae779f1fec79928d05013a9b9935d7b11d835482fa808f93199.
 See [portable session evidence](../evidence/enhanced-editor/editor-prepare-session-portable/README.md).
 Freshhost-only nativewindow preparation underway; Scottnextsharedwindowpriority
 preserved, rootownsno targetrequest/admission/connection/control.
+
+
+## Editor session emulator and Paula reader composition — 6 October 2026
+
+The exact source86 preparation-session fixture subsequently passed once in
+Amiberry on68030/no-FPU/AGA, configured2MiB Chip/128MiB Fast. Full portable bodies
+cover102 session lifetimes,78 admissions and3 expired-terminal cases across
+8/16/24, plus unchanged checked39/18/editor15. All692 stdout bytes, RC0 and
+COMPLETE matched in343.511seconds under unchanged420seconds. Injected clocks,
+voices and ordinary-memory bus callbacks only; no output activation or hardware
+qualification. Separate exact-six-file custody, idle/audioDMA0 original guest
+checks, disconnect/normal owned stop and independent2386pin/four-record release
+passed EMPTY108. All three peers explicitly released; no remaining owned window.
+Historical compiler NEVER_EXECUTED/earlier NOT_RUN records describe their earlier
+evidence tier and remain intact. Exact current coordinator physical NOT_RUN.
+See [session emulator evidence](../evidence/enhanced-editor/editor-prepare-session-native/README.md).
+
+New opt-in `editor_paula_readers_prepare` composes genuine attached-editor
+master establishment with the existing opaque ABI2 song producer. Preparation
+cancels behind the editor barrier; queued command and reader ownership drain
+separately before the hook expires. Explicit publish/services preserve the
+original musical grid, session, timestamps and terminal STOP. No automatic
+poll, timer, retry, forced release or classic PLAY/event-loop wiring is added.
+A bounded66extent ledger protects producer/child/Chip allocations against
+output aliases; the genuine producer retains ownership and source authority.
+Completed8/16/24 masters remain sampler-owned and saves preserve exact bytes.
+
+The corrected host controller qualification passes6 ASan/UBSan calls with empty
+stderr and919 frozen inputs:72 lifetimes,81 admissions,24 ABI2 cases, three full
+oracle schedules including WAIT_ACTIVE/pressure/original terminal STOP, three
+output-alias groups, poisoned former tables and expired terminal controls. The
+initial command callback case did not invoke its armed hook; independent review
+preserved that blocker. A distinct correction invokes actual poll, asserts one
+reentry/hook consumption, exact positive keys, unchanged external receipt and
+later NULL drains. Fresh matching host run and distinct final review pass.
+Current portable fixture compiles/links469568B SHA256
+971dda5d3c3670375e6f518f6728e6452cbbb51ad4131b937985052f679f875c,
+all89 calls/80units/230deps/919sources under120s/call600s overall. First GCC
+formatting refusal is preserved separately; native constructor/full-marker
+execution of this new controller remains NOT_RUN, as does physical execution.
+See [controller contract](EDITOR_PAULA_READERS_PREPARE.md).
+
+Implemented callable software composition is separate from unfinished full
+native UI/PLAY and real backend integration. Physical Fast/Chip placement, total
+stack and step latency, device capacity/upload ordering/completion, all-voice
+stop, exact scheduled activation, IRQ timing, audio and listening remain open.
+The human's exact scheduling choice remains authoritative.

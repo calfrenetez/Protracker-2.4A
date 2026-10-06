@@ -1,0 +1,28 @@
+{
+  "baseline": "86cb65fdef27a19082a4d469acee8aa3bb39e0bb",
+  "run": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-seyoypo8/run.json",
+  "status": "PASS",
+  "scope": "HOST_ONLY ASan/UBSan",
+  "files": {
+    "src/editor/editor_paula_readers_prepare.h": {
+      "bytes": 5463,
+      "sha256": "9addce76226bbed3f371b02ac4fa5a5355fe7d1ae605439a5021dd48c1e89b85",
+      "saved_equal": true
+    },
+    "src/editor/editor_paula_readers_prepare.c": {
+      "bytes": 22160,
+      "sha256": "c761cbf9554a618598fbd91b8d1eadee0eab4b81c981c3c611b0dae979a7fc11",
+      "saved_equal": true
+    },
+    "tests/editor_paula_readers_prepare_test.c": {
+      "bytes": 29038,
+      "sha256": "c9059e2f4ab0cb10403d715070eb3902eab0446a373b7f747900287df7372fe9",
+      "saved_equal": true
+    },
+    "tests/test_editor_paula_readers_prepare.py": {
+      "bytes": 6759,
+      "sha256": "cc5b308250cb4a227bb762eeb347b21718b0cd87d00a140354b891ea39f77232",
+      "saved_equal": true
+    }
+  }
+}

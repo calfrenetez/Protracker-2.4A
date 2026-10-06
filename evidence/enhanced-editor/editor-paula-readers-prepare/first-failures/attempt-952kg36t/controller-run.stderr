@@ -1,0 +1,1 @@
+Assertion failed: (!memcmp(masters,f->editor->sampler.current,sizeof(masters))&&f->fast.live==2), function editor_reader_lifecycle, file editor_paula_readers_prepare_test.c, line 146.

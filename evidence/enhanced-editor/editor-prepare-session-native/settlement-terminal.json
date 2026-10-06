@@ -1,0 +1,219 @@
+{
+  "status": "PASS_COMPLETED_FIXTURE_SETTLEMENT_RELEASE_PENDING",
+  "atUTC": "2026-10-06T13:37:55.011167+00:00",
+  "deletions": 0,
+  "forcedKills": 0,
+  "failureTargetRequests": 0,
+  "tasksAfter": "[OK]\nProcess  1: stk 16384, gv 150, pri   0 Loaded as command: Status\nProcess  2: stk 65536, gv 150, pri   0 Loaded as command: Dev:AmigaBridge/amiga-bridge\nProcess  3: stk  4096, gv 150, pri  20 Loaded as command: C:TankMouse.driver\nProcess  4: stk  8000, gv 150, pri   1 Loaded as command: Workbench",
+  "cpu": {
+    "model": "68030",
+    "name": "686803",
+    "fpu": "0",
+    "24bit": "false",
+    "compatible": "true",
+    "cycle_exact": "true"
+  },
+  "memory": {
+    "chip": "2048KB",
+    "fast": "0KB",
+    "bogo": "0KB",
+    "z3": "131072KB",
+    "rtg": "0KB"
+  },
+  "chipset": [
+    7,
+    "AGA"
+  ],
+  "dma": {
+    "DMACON": "23F0",
+    "master": "1",
+    "blitter_priority": "0",
+    "blitter": "1",
+    "copper": "1",
+    "bitplane": "1",
+    "sprite": "1",
+    "disk": "1",
+    "audio0": "0",
+    "audio1": "0",
+    "audio2": "0",
+    "audio3": "0"
+  },
+  "statusBeforeClose": "OK\tPaused=false\tConfig=autosave",
+  "custody": {
+    "original": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tests/PT-editor-prepare-session-20261006-v3",
+    "directory": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/native-window-v3/stage-custody",
+    "files": {
+      "PTEditorPrepareSessionTest": {
+        "bytes": 395508,
+        "sha256": "b9b9a71351a012f20b5dc67228604f2f6e02d7dce93d07b2fed28fcb8cf83d10"
+      },
+      "Run-once": {
+        "bytes": 219,
+        "sha256": "7005e7031a6dcd971b05476dd8292f1676ed6705e070762d20ad018656dc90a6"
+      },
+      "fixture.log": {
+        "bytes": 692,
+        "sha256": "c415b67357117e9e8286309309f2d5e260b50a4bf2bd82ee4124676f030c0f36"
+      },
+      "fixture.rc": {
+        "bytes": 2,
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "complete.flag": {
+        "bytes": 9,
+        "sha256": "a4bccf5c13ef5ff8311e59b34d492bc7072a55298723601a6a9c127053aee8fc"
+      },
+      "launcher.log": {
+        "bytes": 8,
+        "sha256": "fc1b7c019962b238d1a6ada645907789172d70040e961b64ef50e0f42710c35f"
+      }
+    },
+    "stageAbsent": true
+  },
+  "disconnect": "Disconnected",
+  "healthAfterDisconnect": {
+    "status": "ok",
+    "serial": {
+      "connected": false,
+      "mode": "tcp",
+      "logCount": 197,
+      "varCount": 0,
+      "lastHeartbeat": {
+        "type": "HB",
+        "tick": 94,
+        "freeChip": 1926976,
+        "freeFast": 131652616,
+        "timestamp": "2026-10-06T13:37:55.557731+00:00"
+      },
+      "serialConnectedAt": null,
+      "lastBridgeMessageAt": null,
+      "lastHeartbeatAt": null,
+      "bridgeSilentSec": null,
+      "host": "127.0.0.1",
+      "port": 2345
+    }
+  },
+  "ownedProcessClosed": [
+    [
+      25146,
+      "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+    ]
+  ],
+  "guardAfter": {
+    "archives": [
+      {
+        "bytes": 2034,
+        "fence": 5,
+        "name": "release-0000000000000005.json",
+        "sha256": "7f14fb8ffe7df2de1aed8beda774d083c9a717fec97ba575733fe0561422efcb"
+      },
+      {
+        "bytes": 2027,
+        "fence": 10,
+        "name": "release-000000000000000a.json",
+        "sha256": "565d842aadbb4f6ebaaf52143fce4f161da5996606c03adcd679eb1d67e355d3"
+      },
+      {
+        "bytes": 2674,
+        "fence": 18,
+        "name": "release-0000000000000012.json",
+        "sha256": "51040dc9dbe88c4fd07ab0168e154d2d1508b457605373d8fd38b3f12b5c80e8"
+      },
+      {
+        "bytes": 1574,
+        "fence": 28,
+        "name": "release-000000000000001c.json",
+        "sha256": "497beef52132b167956e5a9abfd0da5c60f95309a020b025a4c69f9564a8bb1f"
+      },
+      {
+        "bytes": 1548,
+        "fence": 34,
+        "name": "release-0000000000000022.json",
+        "sha256": "469c89a882db17a9aa686e703957d1770463de43ba8eb7a6e5b04e7e2cca33a8"
+      },
+      {
+        "bytes": 2189,
+        "fence": 41,
+        "name": "release-0000000000000029.json",
+        "sha256": "5df4c72f0992e4470b8664cc15c9245093d58b7afeb69f7b682ffba267cfc4eb"
+      },
+      {
+        "bytes": 1930,
+        "fence": 45,
+        "name": "release-000000000000002d.json",
+        "sha256": "3e95de456c1f74f8a72c7cf88af645a756686dc38fe3f866c16d7d25f8218faa"
+      },
+      {
+        "bytes": 2568,
+        "fence": 52,
+        "name": "release-0000000000000034.json",
+        "sha256": "7c5aaf39710163c8b4dbc1b44a987d727a8e045f20d013809308b997dfa958c7"
+      },
+      {
+        "bytes": 1692,
+        "fence": 60,
+        "name": "release-000000000000003c.json",
+        "sha256": "263825cc34f324aac80d3f0457cf1627ab6c6a03771a15e267cb9857f9792748"
+      },
+      {
+        "bytes": 1479,
+        "fence": 68,
+        "name": "release-0000000000000044.json",
+        "sha256": "812d96fee65d7a48d36678c4f951816292adf3b3d0b2dd279b9e95fe4174b9da"
+      },
+      {
+        "bytes": 2118,
+        "fence": 78,
+        "name": "release-000000000000004e.json",
+        "sha256": "53b5806aae1e3fc0495eebdf743d546dbb00dbc62b668e16bb298c5b1af0ea9e"
+      },
+      {
+        "bytes": 1747,
+        "fence": 86,
+        "name": "release-0000000000000056.json",
+        "sha256": "59db108a525d88ea475077087c706ed4635bacf78b2922373ec419baa432d9bf"
+      },
+      {
+        "bytes": 1454,
+        "fence": 94,
+        "name": "release-000000000000005e.json",
+        "sha256": "aa1042ad4379e5f434aff7596012d59287fa1aa4dccd47a3b3ff9e3dcbfcf1bb"
+      },
+      {
+        "bytes": 1445,
+        "fence": 100,
+        "name": "release-0000000000000064.json",
+        "sha256": "a1ffa393122dc1ba0a39a70bb3d0c61979487ffb14334f8cdc540fedfd2774c0"
+      }
+    ],
+    "authorization": {
+      "approved": true,
+      "legacy_holds_verified": true,
+      "mode": "host-provisioning",
+      "record_sha256": "820445ecb68cd63db257e203686d2df63fca2e66f4d6048f59f5939771fce568"
+    },
+    "fence": 107,
+    "holds": [],
+    "inflight": null,
+    "potential_resident": true,
+    "reservation": {
+      "binding": {
+        "candidateBytes": 395508,
+        "candidateSHA256": "b9b9a71351a012f20b5dc67228604f2f6e02d7dce93d07b2fed28fcb8cf83d10",
+        "coordinationSHA256": "071b24a8483d481197e8a4b73e8904fee2b637b8d3d6e856eec0ff31ca7de649",
+        "evidence": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/native-window-v3",
+        "scopeSHA256": "0674b1d9535b1e340ead4de119a1b5d54c4d4a45f78e097ddc605f33942b840c",
+        "sourceCommit": "86cb65fdef27a19082a4d469acee8aa3bb39e0bb"
+      },
+      "controller": "ProTracker root01a0b5ae-c04f-7661-8859-e89df20c3290",
+      "lease": {
+        "run_id": "585bdce93ea6f1a90c0468fb79380739"
+      },
+      "purpose": "Human authorized exact portable editor preparation session and checked-lifetime qualification; fresh sole-controller scope",
+      "target": "amiberry-030"
+    },
+    "version": 1,
+    "phase": "READY"
+  },
+  "completedUTC": "2026-10-06T13:37:56.996143+00:00"
+}

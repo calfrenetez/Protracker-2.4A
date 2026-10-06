@@ -1,0 +1,84 @@
+{
+  "status": "PASS_HOST_V3_CUSTODY_STATIC_AND_27_ISOLATED_TESTS_TARGET_NOT_RUN",
+  "scripts": {
+    "window_common.py": {
+      "bytes": 5847,
+      "sha256": "aebce56617f8b87b2e648ae20f78fa3edc1aef52f758aceb9aec22a4fbdbcbb8"
+    },
+    "start_once.py": {
+      "bytes": 4985,
+      "sha256": "8ce369f95794baec4390393c5457e320f72e75fdb3f74aa703aa0334f0edbb76"
+    },
+    "run_once.py": {
+      "bytes": 7291,
+      "sha256": "e47108ab37e6e821a8a54f973796b72e768eaffab50e08b268a43f41c8b0070c"
+    },
+    "settle_once.py": {
+      "bytes": 5288,
+      "sha256": "7b14637ecf273e437afaa394f1fc7afca3891ce81df2a7bf9ea685e05eae1fd5"
+    },
+    "verify_release_once.py": {
+      "bytes": 6332,
+      "sha256": "4eb86779e604826eca1e42919cef505e216159edbc585c06322392a8c28e7572"
+    },
+    "promote_once.py": {
+      "bytes": 9561,
+      "sha256": "8ab393ac67a6726f1beac814b6c5aee41509be8d6ea90587d80f51b7a92984e6"
+    },
+    "caller_guards.py": {
+      "bytes": 2146,
+      "sha256": "c139027ebb0d47263034bcff168ef435b7867d2a3461ed11487a214abffff5e0"
+    },
+    "test_caller_guards_host.py": {
+      "bytes": 14069,
+      "sha256": "f1989a8356999a0acc4a5a789f752222af87b9a2b14a7355713d252a3054a73b"
+    },
+    "verify_packet_host.py": {
+      "bytes": 5697,
+      "sha256": "abdc24489883bd3faebe149928e486c33bf3a1a73ea82409ee492602dd10a05d"
+    }
+  },
+  "pinnedFiles": 2386,
+  "candidate": {
+    "bytes": 395508,
+    "sha256": "b9b9a71351a012f20b5dc67228604f2f6e02d7dce93d07b2fed28fcb8cf83d10"
+  },
+  "expectedMarkers": {
+    "bytes": 692,
+    "sha256": "c415b67357117e9e8286309309f2d5e260b50a4bf2bd82ee4124676f030c0f36"
+  },
+  "isolatedHostTests": {
+    "bytes": 4402,
+    "sha256": "39a02c61456154e29997d42e4ac5671953f8fd975abf55773518260a37ff9678"
+  },
+  "v2Custody": {
+    "bytes": 4608,
+    "sha256": "d4411de258a4ea45f26519d7641444dcc4b0eef61de45aec0a7ede1b1f6522af"
+  },
+  "scopePlanBytesUnchanged": {
+    "bytes": 1572,
+    "sha256": "0674b1d9535b1e340ead4de119a1b5d54c4d4a45f78e097ddc605f33942b840c"
+  },
+  "corrections": [
+    "Startup failures use only this attempt actual local reserve result and exact target/controller/run/source/candidate binding",
+    "No local lease cannot borrow stale environment or private-file ownership",
+    "Copied bytes and staged fingerprint equal promoted candidate before checksum/launch",
+    "Settlement and release candidate records equal promoted candidate before accepting proof"
+  ],
+  "unchangedBounds": {
+    "startupSeconds": 110,
+    "workloadSeconds": 420,
+    "callbackSeconds": 20,
+    "configuredStackBytes": 65536,
+    "starts": 1,
+    "launches": 1,
+    "custodyFiles": 6
+  },
+  "targetActions": 0,
+  "targetExecution": "NOT_RUN",
+  "stillRequired": [
+    "Independent corrected caller/root preexecution/release reviews",
+    "Fresh all-three root coordination and prior normal release",
+    "Live exact target/process/ownership/health checks at admission"
+  ]
+}

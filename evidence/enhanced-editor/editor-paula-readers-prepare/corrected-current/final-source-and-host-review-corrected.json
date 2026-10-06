@@ -1,0 +1,258 @@
+{
+  "schema": "editor-paula-readers-prepare-final-source-and-host-review/v1",
+  "status": "PASS",
+  "source_review_status": "PASS",
+  "recorded_host_integrity_status": "PASS",
+  "coverage_status": "PASS",
+  "reviewer": "reader_controller_review",
+  "scope": "HOST_ONLY source and recorded ASan/UBSan evidence review; no new execution",
+  "reviewer_execution": {
+    "tests_run": false,
+    "source_edits": false,
+    "git_operations": false,
+    "native_target_actions": false,
+    "network_actions": false,
+    "guard_or_peer_actions": false,
+    "output_write_only": "reviews/final-source-and-host-review-corrected.json"
+  },
+  "source_findings": [],
+  "source_review": [
+    "Complete declared control/context/workspace capacity guards and original callback admission precede writes and callbacks.",
+    "Confirmed establishment stop precedes no-yield producer construction; private hook exists before first producer allocator callback. Completed masters remain sampler-owned.",
+    "Clock fault suppresses submit. Actual submit and exact independent proof replies are forwarded while first_error suppresses new production and caller outputs.",
+    "Bounded66 numeric extent registry guards all recorded producer/root/ordinary/Chip arenas before caller writes; forget follows actual saved release callback. Genuine producer retains ownership and saved source authority.",
+    "Fixed editor/project identity and headers precede source walks; failed step exits before output checks. NULL drain remains possible. FINISHED get/step/close avoid former controls.",
+    "close0 with NULL producer retains hook for explicit later close. Original grid/session/absolute_start and existing bounded step/service semantics remain unchanged."
+  ],
+  "coverage": {
+    "new_controller": {
+      "lifecycle_cases": 72,
+      "admission_cases": 81,
+      "domain_case_dispatches": 24,
+      "full_song_oracle_cases": 3,
+      "registered_allocation_output_alias_groups": 3,
+      "poisoned_former_table_cases": 3,
+      "expired_terminal_cases": 3
+    },
+    "references": {
+      "lifecycle": "tests/editor_paula_readers_prepare_test.c:119",
+      "admission": "tests/editor_paula_readers_prepare_test.c:178",
+      "output_aliases": "tests/editor_paula_readers_prepare_test.c:209",
+      "domain_cases": "tests/editor_paula_readers_prepare_test.c:227",
+      "full_oracle": "tests/editor_paula_readers_prepare_test.c:299",
+      "terminal": "tests/editor_paula_readers_prepare_test.c:366",
+      "stale_tables": "tests/editor_paula_readers_prepare_test.c:381"
+    },
+    "meaningful_assertions": [
+      "Every actual full-song batch/frame compares to independent genuine oracle; WAIT_ACTIVE and pressure preserve boundary; DONE never auto-submits; explicit STOP uses original terminal frame.",
+      "Real APIs reject each registered allocation output alias plus fixed/source/workspace-tail spans while preserving controller and causing no submit.",
+      "Consumed close asserts close0, NULL producer and retained hook, then confirms distinct next close.",
+      "Stale and expired-control cases poison former metadata/input; recorded controller binary contains ASan poison symbol.",
+      "Independent reader retirement cannot detach referencing command; detached command cannot retire reader. Services assert at most one backend callback.",
+      "Corrected mode6 directly verifies consumed poll hook, exactly one reentry, FAULT latch, unchanged caller receipt, exact positive ACTIVE keys in the actual queue, and later NULL-output independent drain."
+    ],
+    "limits": [
+      "Output aliases enumerate actual registered arenas with a minimum count; source review confirms successful allocation paths register. This is not a66-slot saturation stress."
+    ],
+    "inherited": {
+      "song_top_level_dispatches_per_run": 21,
+      "song_dispatches_across_controller_and_workspace": 42,
+      "workspace_specific_top_level_groups": 4,
+      "editor_establish_cases": 27,
+      "editor_establish_allocator_alias_cases": 24,
+      "legacy_editor_mixed_regressions": 15,
+      "note": "Entry-point dispatch/group counts, not flattened nested assertion totals. Included genuine baseline main executes after new HOST_ONLY constructor; workspace separately executes genuine song regressions."
+    }
+  },
+  "blockers": [],
+  "limits": [
+    "Source review and existing recorded host evidence only; reviewer did not compile or run tests.",
+    "No native aggregate-stack, Fast/Chip placement, timing, backend activation/MMIO/DMA, audio/listening, physical-device, editor PLAY/UI, installation or publication acceptance.",
+    "Recorded arguments, logs and binary symbols do not independently attest a fresh execution."
+  ],
+  "reviewed_at_utc": "2026-10-06T13:41:22.370Z",
+  "baseline_recorded": "86cb65fdef27a19082a4d469acee8aa3bb39e0bb",
+  "files": {
+    "src/editor/editor_paula_readers_prepare.h": {
+      "bytes": 5463,
+      "sha256": "9addce76226bbed3f371b02ac4fa5a5355fe7d1ae605439a5021dd48c1e89b85",
+      "current_equals_frozen": true,
+      "current_equals_saved_run": true,
+      "current_equals_run_manifest": true
+    },
+    "src/editor/editor_paula_readers_prepare.c": {
+      "bytes": 22184,
+      "sha256": "e532997750fccb046eeb36b607811769cca431b51e69fa6f77af48fe7b2ff721",
+      "current_equals_frozen": true,
+      "current_equals_saved_run": true,
+      "current_equals_run_manifest": true
+    },
+    "tests/editor_paula_readers_prepare_test.c": {
+      "bytes": 29934,
+      "sha256": "3dd596b2afda2d558ab03b07bf3b910902e8dd0e9abc607806d2b36adeaf40a0",
+      "current_equals_frozen": true,
+      "current_equals_saved_run": true,
+      "current_equals_run_manifest": true
+    },
+    "tests/test_editor_paula_readers_prepare.py": {
+      "bytes": 6759,
+      "sha256": "cc5b308250cb4a227bb762eeb347b21718b0cd87d00a140354b891ea39f77232",
+      "current_equals_frozen": true,
+      "current_equals_saved_run": true,
+      "current_equals_run_manifest": true
+    }
+  },
+  "evidence": {
+    "manifest": "current-source.json",
+    "run": "attempt-rlzcu7ln/run.json",
+    "manifest_fingerprints": [
+      {
+        "path": "current-source.json",
+        "bytes": 1136,
+        "sha256": "494ee5617e1875cdbc599a0213e35d39cacabbc4c2709dad5b8e4b96184bb9f2"
+      },
+      {
+        "path": "attempt-rlzcu7ln/run.json",
+        "bytes": 146773,
+        "sha256": "138b3f73420330836126b9e954247f81fbc199daedea98cf090c97ca9e9e6f3e"
+      }
+    ],
+    "saved_inputs_checked": 919,
+    "saved_inputs_all_match": true,
+    "calls": [
+      {
+        "label": "controller-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout": ""
+      },
+      {
+        "label": "controller-run",
+        "status": "PASS",
+        "returncode": 0,
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout": "EDITOR PAULA READERS PREPARE PASS:72 genuine8/16/24 establishment/handoff/edit-undo-dispose/cancel/failure/reentry/exact-save lifetimes;81 full-span control/context/workspace/callback admissions;24 real ABI2 exact-grid late/uncertain/callback-reentry/separate command-reader drain cases;3 full song/oracle WAIT_ACTIVE/pressure/original terminal STOP schedules;3 complete producer/child/representation output-alias groups;3 poisoned former-table and3 expired-terminal cases; no timer or native voice start\nPAULA READERS SONG PASS: exact whole-song schedule, independent actual domains and immutable retained masters; host software only\nPAULA READERS SONG FAULTS PASS: explicit acceptance, independent fault drain and original deadlines; host software only\n"
+      },
+      {
+        "label": "workspace-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout": ""
+      },
+      {
+        "label": "workspace-run",
+        "status": "PASS",
+        "returncode": 0,
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout": "PAULA READERS SONG PASS: exact whole-song schedule, independent actual domains and immutable retained masters; host software only\nPAULA READERS SONG FAULTS PASS: explicit acceptance, independent fault drain and original deadlines; host software only\nPAULA READERS SONG WORKSPACE PASS: guarded caller scratch released before genuine exact scheduling and independent domain ownership; host software only\n"
+      },
+      {
+        "label": "establish-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout": ""
+      },
+      {
+        "label": "establish-run",
+        "status": "PASS",
+        "returncode": 0,
+        "stderr_bytes": 0,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout": "EDITOR MIXED PASS:15 binding scenarios; preparation/live/timer-failure/DONE, edits/import/undo/disposal veto and alarm/reader/counter retention; injected timers/voices, no UI/output binding\nEDITOR ESTABLISH PASS:27 actual editor cancellation/reentry/exact-save/master-retention cases;24 allocator control-alias cases;15 legacy transport regressions; host only, no checked owner/UI/native output acceptance\n"
+      }
+    ],
+    "binaries_read_without_execution": [
+      {
+        "name": "controller",
+        "bytes": 5279528,
+        "sha256": "91c6765e84769bcbb8e54b6d81086ab29767538a04229f4faa05b0d3773ec62a",
+        "asan_init_symbol": true,
+        "ubsan_symbol": true,
+        "asan_poison_symbol": true
+      },
+      {
+        "name": "workspace",
+        "bytes": 2830888,
+        "sha256": "2d69adbd50e8f053a3e19415d9cf019a4edc9afe6b643ca851432c0acf76255a",
+        "asan_init_symbol": true,
+        "ubsan_symbol": true,
+        "asan_poison_symbol": false
+      },
+      {
+        "name": "establish",
+        "bytes": 4172328,
+        "sha256": "82e403f7989e39ada4ab69e9291ba47b01e67c5e68be4321625d3ef0534be6d1",
+        "asan_init_symbol": true,
+        "ubsan_symbol": true,
+        "asan_poison_symbol": false
+      }
+    ],
+    "changed_saved_inputs_relative_to_prior_qualified_snapshot": [
+      "src/editor/editor_paula_readers_prepare.c",
+      "tests/editor_paula_readers_prepare_test.c"
+    ]
+  },
+  "prior_review": {
+    "path": "reviews/final-source-and-host-review.json",
+    "status": "BLOCKER",
+    "bytes": 11225,
+    "sha256": "c054281448e6be00465da4ddcb3c97e99b887650f31fb8796928e8526bd8634e",
+    "preserved_unchanged": true,
+    "resolution_applies_only_to_new_qualified_snapshot": true
+  },
+  "addressed_blockers": [
+    {
+      "id": "COMMAND_CALLBACK_REENTRY_NOT_INVOKED",
+      "status": "RESOLVED",
+      "qualified_run": "attempt-rlzcu7ln/run.json",
+      "reference": "tests/editor_paula_readers_prepare_test.c:251-260",
+      "evidence": [
+        "Mode6 now arms the configured command poll hook and calls service_command with cancel0 and a real sentinel receipt.",
+        "Test asserts hook consumed, exactly one reentry, first_error FAULT, external receipt byte-unchanged, and real command holder retained.",
+        "Four genuine positive ACTIVE reader keys resolve through the actual pool/queue and match all original backend keys; proof is forwarded despite outer controller fault.",
+        "Distinct later NULL-output services detach command, retire readers and allow confirmed close; callback counter remains exactly one for command service."
+      ],
+      "cases": 3,
+      "pcm_bits": [
+        8,
+        16,
+        24
+      ]
+    }
+  ],
+  "formatting_edits": {
+    "count": 4,
+    "sites": [
+      {
+        "path": "src/editor/editor_paula_readers_prepare.c",
+        "line": 17,
+        "change": "Expand fail assignments and return onto separate lines."
+      },
+      {
+        "path": "src/editor/editor_paula_readers_prepare.c",
+        "line": 304,
+        "change": "Separate close NULL and reentry guards."
+      },
+      {
+        "path": "tests/editor_paula_readers_prepare_test.c",
+        "line": 371,
+        "change": "Separate terminal master-free loop and sampler release."
+      },
+      {
+        "path": "tests/editor_paula_readers_prepare_test.c",
+        "line": 402,
+        "change": "Separate domain loop and full-song call."
+      }
+    ],
+    "controller_same_non_whitespace": true,
+    "test_outside_targeted_domain_correction_same_non_whitespace": true
+  }
+}

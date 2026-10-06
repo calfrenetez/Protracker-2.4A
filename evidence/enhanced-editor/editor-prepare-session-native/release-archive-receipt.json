@@ -1,0 +1,12 @@
+{
+  "status": "PASS_ROOT_PRIVATE_RELEASE_ARCHIVE_BYTE_READBACK",
+  "file": {
+    "bytes": 1499,
+    "fence": 108,
+    "name": "release-000000000000006c.json",
+    "sha256": "017659311e09004a95da712568a48aac3619d24d64fd2afccb3453350bba1c42"
+  },
+  "canonicalInternalDigestVerified": true,
+  "privateEnvelopeNotPublished": true,
+  "scope": "Metadata receipt only; original private archive remains unchanged"
+}

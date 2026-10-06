@@ -1,0 +1,7 @@
+{
+  "status": "FIRST_HOST_STATIC_SUBSTRING_REFUSAL_PRESERVED",
+  "diagnosis": "Original host-only check used substring _main(, which incorrectly also matched the valid public alias emulator_main(. Corrected verifier uses Python AST import/call identity. No caller or promoted pin changed.",
+  "originalVerifierSHA256": "93e5a272d1e18cb3708e0d5193644a379c5abf1831eaf07e8d48d2c1b5441698",
+  "stderrSHA256": "5641003f416a2b59d47f445a4a5c5cc5947f872b8617be42cfdd5d7955c4a456",
+  "targetActions": 0
+}

@@ -1,0 +1,17 @@
+{
+  "status": "PASS_EXACT_HOST_PROMOTION_NOT_EXECUTED",
+  "binding": {
+    "bytes": 706,
+    "sha256": "e0e4a244b61b9ed9d69bd98c2263a9342b644cf50b41270964135de077628ac7"
+  },
+  "pins": {
+    "bytes": 598929,
+    "sha256": "12ba418ec931db447718daf1f47351d479724d87daf8146cc8109982c5e690cb"
+  },
+  "currentHead": "86cb65fdef27a19082a4d469acee8aa3bb39e0bb",
+  "committedFrozenFiles": 914,
+  "targetActions": 0,
+  "missing": [
+    "Fresh all-three coordination/prior release/root preexecution and release reviews"
+  ]
+}

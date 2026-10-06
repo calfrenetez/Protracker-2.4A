@@ -1,0 +1,20 @@
+{
+  "status": "EXACT_HOST_PROMOTION_NO_TARGET_EXECUTION",
+  "sourceCommit": "86cb65fdef27a19082a4d469acee8aa3bb39e0bb",
+  "sourceCount": 915,
+  "candidate": {
+    "bytes": 395508,
+    "sha256": "b9b9a71351a012f20b5dc67228604f2f6e02d7dce93d07b2fed28fcb8cf83d10"
+  },
+  "expectedStdout": {
+    "bytes": 692,
+    "sha256": "c415b67357117e9e8286309309f2d5e260b50a4bf2bd82ee4124676f030c0f36"
+  },
+  "python": "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/.venv/bin/python",
+  "profile": "A1200-030-DEV",
+  "target": "amiberry-030",
+  "completeAssertions": "editor15 + checked39/alias18 + session102/alias78/terminal3",
+  "compiledUnits": 82,
+  "compilerDependencies": 233,
+  "compilerCalls": 91
+}

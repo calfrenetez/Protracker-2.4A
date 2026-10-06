@@ -1,0 +1,180 @@
+{
+  "status": "BLOCKED_READ_ONLY_HOST_CALLER_REVIEW_NO_TARGET_ADMISSION",
+  "atUTC": "2026-10-06T13:12:11.975627+00:00",
+  "reviewer": "root/recovery_final_review",
+  "scope": "Ordinary source/AST and saved sanitized evidence only; no imports of target wrappers, execution, process/network/guard/peer actions, private lease reads or Git/index actions. Only this new review record was created.",
+  "sourceCommitSuppliedByPromotion": "86cb65fdef27a19082a4d469acee8aa3bb39e0bb",
+  "candidate": {
+    "bytes": 395508,
+    "sha256": "b9b9a71351a012f20b5dc67228604f2f6e02d7dce93d07b2fed28fcb8cf83d10"
+  },
+  "expectedStdout": {
+    "bytes": 692,
+    "sha256": "c415b67357117e9e8286309309f2d5e260b50a4bf2bd82ee4124676f030c0f36"
+  },
+  "pins": {
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/native-window-v2/window_common.py": {
+      "bytes": 5847,
+      "sha256": "258a6c0c3363eb460cad6fc2adc0beb16c6304b4664d70878758e501d13fabf0"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/native-window-v2/start_once.py": {
+      "bytes": 4741,
+      "sha256": "74383faf2f73f6c434d9731b7ba0d7f11e0d8faf3d760a340b56056aea5e4bbb"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/native-window-v2/run_once.py": {
+      "bytes": 7059,
+      "sha256": "a115d29500b577c81bb9a59639d3e50ea5f98aa787f20c39434f7e23aab56508"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/native-window-v2/settle_once.py": {
+      "bytes": 5161,
+      "sha256": "0503dd7b7d6553102af83bfa5868d4ae9cbc4ea44a7a76a45086b3aed8728ab9"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/native-window-v2/verify_release_once.py": {
+      "bytes": 6214,
+      "sha256": "60ed0577ba031d1112d7920773fdc6464708dd32e0735416a71a9df5406190a6"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/native-window-v2/promote_once.py": {
+      "bytes": 8966,
+      "sha256": "dd1fe471c8adf7a40f942096597447f927df9fc09cd769d6776e259dd3d66535"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/native-window-v2/verify_packet_host.py": {
+      "bytes": 3082,
+      "sha256": "93e5a272d1e18cb3708e0d5193644a379c5abf1831eaf07e8d48d2c1b5441698"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/native-window-v2/verify_packet_host_v2.py": {
+      "bytes": 3741,
+      "sha256": "f612373c57e28a66ebfb816e2e23af45641c3c5c8d58756d0932498c3db411a3"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/docs/PROJECT_ONBOARDING.md": {
+      "bytes": 5971,
+      "sha256": "c36b463bd6b24babc9553d72f925344d964ebc5646a11aaa9b9980a90324a20f"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/docs/LAUNCHER_GUARD.md": {
+      "bytes": 6978,
+      "sha256": "e52317959ce61e3a0ee7d8c00104ed4e3c2582a70a913f8d6d5957aa0a5dc6b1"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/launcher_access.py": {
+      "bytes": 10374,
+      "sha256": "2ebf8503b79ca4c57108cbee52830c1f3ea208c8838831bf6d5b9cca70ba8787"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/launcher_guard.py": {
+      "bytes": 24567,
+      "sha256": "eea1cb76cf3b9a2bcd13be4fb673d857dd9c013b51891833f85675736de7df14"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/launcher_server.py": {
+      "bytes": 28480,
+      "sha256": "f0489ae37790712bb297ae1a75c9784f8f94dda464712faf6f1ab107cab50f01"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/shared_guest.py": {
+      "bytes": 3286,
+      "sha256": "2b3991d33fe39a4fa6945c69e68a12ba721bf932be0301738ba35fdeda1545a0"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/emulator.py": {
+      "bytes": 6924,
+      "sha256": "9f79c268a1539598ed235217f1d0bc7ce707cab58b2018c8cd7f5d2d08b31a25"
+    },
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/bridge_checks.py": {
+      "bytes": 1521,
+      "sha256": "e68e3a8844b44d1ee07784225a34b665544f91b890643b3f7b38bce35227bbfd"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/native-window-v2/scope-plan.json": {
+      "bytes": 1572,
+      "sha256": "0674b1d9535b1e340ead4de119a1b5d54c4d4a45f78e097ddc605f33942b840c"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/native-window-v2/binding.json": {
+      "bytes": 706,
+      "sha256": "e0e4a244b61b9ed9d69bd98c2263a9342b644cf50b41270964135de077628ac7"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/native-window-v2/promotion.json": {
+      "bytes": 516,
+      "sha256": "07c2e39cd9eeeaab13130e7c7c2dffbf707e7e0bff16870d2b27463874e830e1"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/native-window-v2/pins.json": {
+      "bytes": 593798,
+      "sha256": "4923632ce236e4c2427058534747e3f66c7a7dcdd14803750e19dd176f619e51"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/native-window-v2/preparation-status.json": {
+      "bytes": 2641,
+      "sha256": "e5cd19a9ccb0a8023132266edbb4d298a386647b3253903c10a6703e0b3710d6"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/native-window-v2/host-packet-verification-v2.json": {
+      "bytes": 2449,
+      "sha256": "801a5be8ae614419fcbe1435a653964d74f101e192b62e86abbf4f0cb27a3b0d"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/native-window-v2/host-static-first-refusal.json": {
+      "bytes": 496,
+      "sha256": "aeb67843bd11731e98c5f4b76f3fb1c40942a589dcd71fb44492b1a9da7b707c"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/native-window-v2/v1-custody.json": {
+      "bytes": 1669,
+      "sha256": "9bc560fcdd0a0a4db1a7623ae61da7d08725c72bc5b11b4de9cbf74b4c320f1d"
+    }
+  },
+  "promotedPinVerification": {
+    "count": 2365,
+    "mismatches": [],
+    "status": "PASS"
+  },
+  "astParsedCallers": [
+    "window_common.py",
+    "start_once.py",
+    "run_once.py",
+    "settle_once.py",
+    "verify_release_once.py",
+    "promote_once.py",
+    "verify_packet_host.py",
+    "verify_packet_host_v2.py"
+  ],
+  "blockers": [
+    {
+      "id": "START_FAILURE_HOLD_USES_WRONG_ENVIRONMENT",
+      "locations": [
+        "start_once.py:44",
+        "start_once.py:47",
+        "start_once.py:48",
+        "start_once.py:52",
+        "start_once.py:61",
+        "window_common.py:107",
+        "scripts/launcher_access.py:28"
+      ],
+      "finding": "The starter retains the actual new lease locally, but passes its private-file path only to the child environment. Its parent failure latch reads AMIGA_LAUNCH_LEASE from the parent environment. A failure after reserve but before/after private-file serialization, preflight save, or successful child return can therefore fail HOLD confirmation or select an inherited lease. The durable reservation remains and grants no new owner; nevertheless the explicit first-failure HOLD contract is not met.",
+      "requiredCorrection": "In a distinct packet, latch failure using the actual locally reserved lease after verifying current reservation target/run identity/controller and exact source/candidate binding match. Refuse foreign or uncertain state. Do not rely solely on environment or readable private serialization, and do not print tokens.",
+      "smallestTests": "Temporary-root injected/no-target failures immediately after reserve before serialization, during serialization, after serialization/preflight save, and after a synthetic successful lifecycle return; verify own HOLD, retained reservation, zero foreign-state modification and zero target effects."
+    },
+    {
+      "id": "COPIED_CANDIDATE_NOT_REBOUND_TO_PROMOTION",
+      "locations": [
+        "run_once.py:30",
+        "run_once.py:42",
+        "run_once.py:45",
+        "run_once.py:46",
+        "run_once.py:53",
+        "settle_once.py:27",
+        "settle_once.py:46",
+        "verify_release_once.py:35",
+        "verify_release_once.py:47"
+      ],
+      "finding": "Custody hashes the candidate before later byte acquisition. The run then records the staged fingerprint without comparing the actual acquired/staged bytes to immutable binding.candidate. Guest checksums compare with those newly acquired bytes, while settlement/release trust run.candidate. A changed byte stream between custody and acquisition could remain self-consistent through those later records and still be called exact.",
+      "requiredCorrection": "In a distinct packet, verify in-memory byte count/hash and staged fingerprint equal the immutable promoted candidate before guest checksum or launch. Reassert run.candidate equals binding.candidate in settlement and release before accepting their proof.",
+      "smallestTests": "Host-only injected candidate-byte/stage-fingerprint divergence refuses before dispatch; altered run candidate refuses settlement and release; unchanged exact bytes pass the comparisons. Preserve v2 callers and first evidence."
+    }
+  ],
+  "acceptedPatterns": [
+    "The transient startup lock probe ends before reserve; reserve atomically refuses an intervening global owner and the actual lifecycle child takes test.lock. Holding the parent lock through that child would conflict.",
+    "Grouped read-only IPC metadata calls still use install_ipc operation/transport and exact durable lease/nonce revalidation after awaited connection, immediately before write and before success. Caller admission verifies CPU/FPU/memory/AGA/DMA/paused; live checks owned PID/profile plus connected endpoint before staging and MCP effects. No full-metadata-per-query requirement was found.",
+    "Single recorded launch, fixed420-second observable completion bound, exact complete three-line stdout/RC0/COMPLETE, all6-file custody, completed-passing-only settlement, and first-failure no automatic cleanup/retry are explicit.",
+    "Settlement imports public emulator.main and invokes exactly [stop,--target,amiberry-030]; underlying wrapper uses profile-checked bounded SIGTERM only.",
+    "Independent release verifies process/listener/connection absence and exact custody/pins, binds four records, and closes the transport probe FD before guard.release owns the validated transport lock.",
+    "Physical/audio/timing/placement/native UI and measured stack remain explicitly unqualified; selected installed-interface pinning is not full service/package qualification."
+  ],
+  "remainingAdmissionObligations": [
+    "Fresh all-three coordination honoring Scott priority",
+    "Prior independently verified normal release",
+    "Root preexecution and release caller reviews",
+    "Fresh live guard/target/process/health/lock checks at admission"
+  ],
+  "targetExecution": "NOT_RUN",
+  "targetActions": 0,
+  "approvalOrAdmissionGranted": false,
+  "preservation": "Current promoted v2 callers, original v1 promotion failure/partial binding and v2 static-substring failure records were not changed."
+}

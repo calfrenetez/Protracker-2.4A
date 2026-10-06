@@ -1,0 +1,4 @@
+src/editor/editor_paula_readers_prepare.c:35:9: error: call to undeclared function 'pt_project_snapshot_equal'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+   35 |        !pt_project_snapshot_equal(o->editor->project,&header))return 0;}
+      |         ^
+1 error generated.

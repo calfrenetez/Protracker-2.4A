@@ -1,0 +1,70 @@
+"""Independent local saved-byte observation; never imports the builder or executes a product."""
+from pathlib import Path
+import hashlib,json,stat,subprocess,time
+BASE=Path(__file__).resolve().parent
+ROOT=BASE.parents[2]
+REPO=ROOT/'work/Protracker-2.4A'
+OUT=BASE/'first-failure-verification.json'
+assert not OUT.exists(), 'Do not overwrite a prior observation.'
+def record(p):
+ p=Path(p);s=p.lstat();assert stat.S_ISREG(s.st_mode) and not(getattr(s,'st_flags',0)&0x40000000)
+ data=p.read_bytes();after=p.lstat();assert (s.st_dev,s.st_ino,s.st_mode,s.st_size,s.st_mtime_ns,getattr(s,'st_flags',0))==(after.st_dev,after.st_ino,after.st_mode,after.st_size,after.st_mtime_ns,getattr(after,'st_flags',0))
+ return {'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),'full_mode':s.st_mode,'mode':stat.S_IMODE(s.st_mode),'inode':s.st_ino,'flags':getattr(s,'st_flags',0),'ordinary_resident':True}
+def inventory(root):
+ result={}
+ for p in sorted(root.rglob('*')):
+  s=p.lstat();assert stat.S_ISDIR(s.st_mode) or stat.S_ISREG(s.st_mode)
+  if stat.S_ISREG(s.st_mode):
+   r=record(p);result[p.relative_to(root).as_posix()]={k:r[k] for k in ['bytes','sha256']}
+ return result
+def matches(p,pin,mode=False):
+ actual=record(p);assert all(actual[k]==pin[k] for k in ['bytes','sha256'])
+ if mode:assert actual['mode']==pin['mode']
+ return actual
+m=json.loads((BASE/'manifest.json').read_text());checks=[]
+assert m['status']=='FIRST_FAILURE_RETAINED' and m['source_stable']
+assert len(m['source_before'])==919 and inventory(BASE/'source')==m['source_before']==m['source_after'];checks.append('919 saved frozen inputs identical before/after and current')
+host=Path(m['host_evidence']['path']).parent
+assert inventory(host)==m['host_attempt_custody'];checks.append('all original six-call host evidence retained unchanged')
+assert len(m['ordered_units'])==80 and len(set(m['ordered_units']))==80
+host_run=json.loads((host/'run.json').read_text())
+assert m['ordered_units']==[a for a in next(c for c in host_run['calls'] if c['label']=='controller-compile')['argv'] if a.endswith('.c')];checks.append('all 80 ordered complete fixture units derived from actual saved compile argv')
+assert len(m['calls'])==89 and all(c['status']=='PASS' and c['returncode']==0 for c in m['calls'][:-1])
+last=m['calls'][-1];assert last['label']=='compile-link' and last['status']=='FIRST_FAILURE_RETAINED' and last['returncode']==1
+for c in m['calls']:
+ matches(c['stdout']['path'],c['stdout']);matches(c['stderr']['path'],c['stderr'])
+ assert c['timeout_seconds']<=120 and c['product_execution']=='NEVER_EXECUTED'
+assert len(m['dependencies'])==230
+for p,pin in m['dependencies'].items():matches(p,pin)
+checks.append('230 exact ordinary resident compiler dependencies and all 89 compiler call logs unchanged')
+for p,pin in m['current_own_four'].items():matches(REPO/p,pin)
+checks.append('all four uncommitted source86 overlays still exactly frozen')
+for p,pin in m['protected_16_before'].items():
+ actual=record(REPO/p);assert actual['sha256']==pin['sha256'] and actual['full_mode']==pin['mode']
+checks.append('all 16 unrelated protected working paths unchanged')
+for pin in [*m['tools'].values(),*m['runtime_inputs'].values()]:matches(pin['path'],pin,True)
+checks.append('five actual compiler tools and seven runtime input bytes/modes resident and unchanged')
+head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=REPO,timeout=20).decode().strip();assert head==m['host_baseline']
+index=subprocess.check_output(['git','ls-files','--stage'],cwd=REPO,timeout=20)
+assert hashlib.sha256(index).hexdigest()==next(r for r in m['local_readbacks'] if r['label']=='index-before')['stdout']['sha256']
+assert subprocess.check_output(['git','diff','--cached','--name-only'],cwd=REPO,timeout=20)==b''
+checks.append('source86 committed HEAD and unchanged empty index read back')
+expected=matches(BASE/'expected-native.stdout',m['expected_stdout']);assert (BASE/'expected-native.stdout').read_bytes()==(host/'controller-run.stdout').read_bytes()
+assert len((BASE/'expected-native.stdout').read_bytes().splitlines())==3;checks.append('complete three-marker expected native stdout equals genuine host controller plus inherited producer output')
+assert not (BASE/'native/PTEditorPaulaReadersPrepareTest').exists() and 'product' not in m
+checks.append('no native candidate bytes were produced; no execution or retry')
+assert m['overall_elapsed_seconds']<600
+assert all(m[k]=='NEVER_EXECUTED' for k in ['target_execution','emulator_execution','physical_execution','native_execution'])
+retained_current={};late_summary=[]
+for rel,pin in m['retained_files'].items():
+ current=record(BASE/rel);retained_current[rel]=current
+ if current['bytes']!=pin['bytes'] or current['sha256']!=pin['sha256']:
+  assert rel=='build.stdout' and pin['bytes']==0
+  late_summary.append({'path':rel,'manifest_snapshot':pin,'after_builder_print_closed':current,'explanation':'The parent redirect receives the builder terminal summary after the finally snapshot; retain both identities without modifying the first manifest.'})
+proof={'status':'PASS_INDEPENDENT_FIRST_FAILURE_CUSTODY_NO_CANDIDATE','scope':'HOST_ONLY local readback; product NEVER_EXECUTED; no target, guard, transport or peer operation',
+ 'manifest':record(BASE/'manifest.json'),'host_baseline':head,'source_count':919,'unit_count':80,'dependency_count':230,'successful_compiler_calls':88,'attempted_compiler_calls':89,
+ 'first_failure':{'label':'compile-link','returncode':1,'diagnostic':record(BASE/'native/compile-link.stderr'),'path':str(BASE/'native/compile-link.stderr')},
+ 'expected_stdout':expected,'bounds':m['bounds'],'overall_elapsed_seconds':m['overall_elapsed_seconds'],'checks':checks,'candidate':'ABSENT_NEVER_EXECUTED','late_closed_summary_observation':late_summary,
+ 'current_retained_file_records':retained_current,'observer':record(__file__)}
+OUT.write_text(json.dumps(proof,indent=2)+'\n')
+print(json.dumps({k:proof[k] for k in ['status','source_count','unit_count','dependency_count','successful_compiler_calls','attempted_compiler_calls','expected_stdout']}))

@@ -1,0 +1,56 @@
+editor_paula_readers_prepare.o: src/editor/editor_paula_readers_prepare.c \
+ src/editor/editor_paula_readers_prepare.h \
+ src/editor/editor_mixed_establish.h src/editor/editor_mixed.h \
+ src/editor/editor.h src/core/pattern.h src/core/project.h \
+ src/core/channels.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/stdint.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/machine/_default_types.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/features.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/_newlib_version.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/_intsup.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/_stdint.h \
+ src/core/pcm.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/lib/gcc/m68k-amigaos/6.5.0b/include/stddef.h \
+ src/core/playback.h src/editor/sampler.h src/core/document.h \
+ src/core/mod_inspect.h src/core/pp20.h src/core/slices.h src/core/svx.h \
+ src/core/raw.h src/editor/song.h src/core/render.h src/core/timeline.h \
+ src/core/flow.h src/core/frame_clock.h src/core/voice.h \
+ src/core/recent.h src/editor/workflow.h src/editor/sampler_workflow.h \
+ src/editor/../core/sample_usage.h src/editor/../core/project.h \
+ src/editor/../core/event_resource.h src/editor/../core/pitch.h \
+ src/editor/../core/flow.h src/editor/wave_summary.h \
+ src/editor/sample_range.h src/editor/../core/project.h \
+ src/editor/mixed_transport.h src/editor/mixed_owner.h \
+ src/editor/mixed_preflight.h src/editor/paula_preflight.h \
+ src/editor/../core/render_commands.h src/editor/../core/render.h \
+ src/editor/../core/paula_render_voice.h src/editor/../core/voice.h \
+ src/editor/../core/document.h src/editor/wavetable_dispatch.h \
+ src/editor/wavetable_voices.h src/editor/sampler_wavetable.h \
+ src/editor/../core/amigus_wavetable_cache.h \
+ src/editor/../core/amigus_reservation.h \
+ src/editor/../core/amigus_sample_ram.h src/editor/../core/sample_cache.h \
+ src/editor/../core/playback_pcm.h src/editor/../core/pcm.h \
+ src/editor/../core/amigus_voice_plan.h src/editor/paula_voices.h \
+ src/editor/sampler_paula.h src/editor/../core/playback_pcm.h \
+ src/editor/sampler_establish.h \
+ src/editor/sampler_master_guard_internal.h src/editor/sampler_internal.h \
+ src/editor/paula_readers_song.h src/editor/sampler_paula_readers.h \
+ src/editor/../core/scheduled_readers.h \
+ src/editor/../core/scheduled_output.h src/editor/../core/elapsed_clock.h \
+ src/editor/../core/render_lookahead.h \
+ src/editor/../core/render_commands.h src/editor/editor_mixed_internal.h \
+ src/editor/project_snapshot.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/string.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/cdefs.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/types.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/_ansi.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/newlib.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/config.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/machine/ieeefp.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/machine/_types.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/_types.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/lock.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/_pthreadtypes.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/machine/types.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/strsup.h \
+ src/editor/../core/render_storage_internal.h

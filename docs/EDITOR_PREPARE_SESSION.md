@@ -40,12 +40,17 @@ both independent drains and retained children are covered. The new preparation
 body asserts zero voice starts, timer calls and sample-bus uploads.
 See [saved host evidence](../evidence/enhanced-editor/editor-prepare-session/README.md).
 
-The new coordinator has not yet run in Amiberry or on the real A1200.
 Its exact full fixture compiles/links for m68000/softfloat/nix20,395508 bytes;
 see [portable compiler evidence](../evidence/enhanced-editor/editor-prepare-session-portable/README.md).
-Compilation is not execution. Earlier
-physical qualification covers the separate frozen editor-bridge fixture, not
-this new coordinator. Native UI/event-loop/PLAY integration, real backend cache
+The exact source86 fixture subsequently passed once in Amiberry: all three
+692-byte stdout markers, RC0 and COMPLETE in343.511 seconds under the unchanged
+420-second limit. It executed the full portable assertion bodies with injected
+callbacks on68030/no-FPU/AGA. Separate completed settlement and independent release
+confirmed all2386 pins, retained six-file custody, original disconnected endpoint,
+process/listener absence and EMPTY108. All three peers were explicitly released.
+See [saved emulator evidence](../evidence/enhanced-editor/editor-prepare-session-native/README.md).
+The real A1200 has not yet run this coordinator. Earlier physical qualification
+covers the separate frozen editor-bridge fixture. Native UI/event-loop/PLAY integration, real backend cache
 completion/stop and exact scheduled activation remain unfinished. No physical
 allocation placement, total stack, device capacity/order/completion, IRQ, audio
 or listening acceptance is inferred from the host tests.

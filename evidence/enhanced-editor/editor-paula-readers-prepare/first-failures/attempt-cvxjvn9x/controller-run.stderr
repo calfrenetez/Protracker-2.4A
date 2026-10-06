@@ -1,0 +1,1 @@
+Assertion failed: (pt_editor_paula_readers_prepare_get(&f->control)==PT_EDITOR_READERS_FAULT), function editor_reader_reentry, file editor_paula_readers_prepare_test.c, line 22.

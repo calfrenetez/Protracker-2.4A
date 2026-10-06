@@ -1,0 +1,1 @@
+Assertion failed: (r==PT_EDITOR_READERS_PENDING&&!f->backend.submissions&&!fixture_command_polls&&!fixture_reader_polls), function editor_reader_lifecycle, file editor_paula_readers_prepare_test.c, line 102.

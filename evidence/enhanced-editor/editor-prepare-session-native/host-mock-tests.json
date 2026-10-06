@@ -1,0 +1,160 @@
+{
+  "status": "PASS_ISOLATED_HOST_27_CASES_NO_PRODUCTION_ACTIONS",
+  "cases": [
+    {
+      "case": "reserve-before-serialization",
+      "kind": "actual-start-try/except-fragment",
+      "syntheticLifecycleCalls": 0,
+      "ownedHoldCalls": 1
+    },
+    {
+      "case": "serialization-write",
+      "kind": "actual-start-try/except-fragment",
+      "syntheticLifecycleCalls": 0,
+      "ownedHoldCalls": 1
+    },
+    {
+      "case": "serialized-before-preflight",
+      "kind": "actual-start-try/except-fragment",
+      "syntheticLifecycleCalls": 0,
+      "ownedHoldCalls": 1
+    },
+    {
+      "case": "lifecycle-exception",
+      "kind": "actual-start-try/except-fragment",
+      "syntheticLifecycleCalls": 1,
+      "ownedHoldCalls": 1
+    },
+    {
+      "case": "lifecycle-nonzero",
+      "kind": "actual-start-try/except-fragment",
+      "syntheticLifecycleCalls": 1,
+      "ownedHoldCalls": 1
+    },
+    {
+      "case": "lifecycle-success-owned-check",
+      "kind": "actual-start-try/except-fragment",
+      "syntheticLifecycleCalls": 1,
+      "ownedHoldCalls": 1
+    },
+    {
+      "case": "foreign-before-reserve",
+      "kind": "actual-start-try/except-fragment",
+      "syntheticLifecycleCalls": 0,
+      "ownedHoldCalls": 0
+    },
+    {
+      "case": "foreign-after-reserve-target",
+      "kind": "actual-start-try/except-fragment",
+      "syntheticLifecycleCalls": 0,
+      "ownedHoldCalls": 0
+    },
+    {
+      "case": "foreign-after-reserve-controller",
+      "kind": "actual-start-try/except-fragment",
+      "syntheticLifecycleCalls": 0,
+      "ownedHoldCalls": 0
+    },
+    {
+      "case": "foreign-after-reserve-run",
+      "kind": "actual-start-try/except-fragment",
+      "syntheticLifecycleCalls": 0,
+      "ownedHoldCalls": 0
+    },
+    {
+      "case": "foreign-after-reserve-binding",
+      "kind": "actual-start-try/except-fragment",
+      "syntheticLifecycleCalls": 0,
+      "ownedHoldCalls": 0
+    },
+    {
+      "case": "success",
+      "kind": "actual-start-try/except-fragment",
+      "syntheticLifecycleCalls": 1,
+      "ownedHoldCalls": 0
+    },
+    {
+      "case": "none-local/stale-env",
+      "kind": "no-file/no-environment-borrow",
+      "guardStatusCalls": 0
+    },
+    {
+      "case": "none-local/no-env",
+      "kind": "no-file/no-environment-borrow",
+      "guardStatusCalls": 0
+    },
+    {
+      "case": "full-token-atomic-refusal",
+      "kind": "guard.hold-exact-lease",
+      "foreignModifications": 0
+    },
+    {
+      "case": "exact-bytes-and-stage-pass",
+      "kind": "immutable-candidate-comparison"
+    },
+    {
+      "case": "mutated-acquisition",
+      "kind": "refusal-before-checksum-or-launch",
+      "dispatches": 0
+    },
+    {
+      "case": "short-acquisition",
+      "kind": "refusal-before-checksum-or-launch",
+      "dispatches": 0
+    },
+    {
+      "case": "staged-fingerprint-mismatch",
+      "kind": "refusal-before-checksum-or-launch",
+      "dispatches": 0
+    },
+    {
+      "case": "run_once.py-exact-passes",
+      "kind": "actual-caller-candidate-gate",
+      "targetEffects": 0
+    },
+    {
+      "case": "run_once.py-changed-refuses",
+      "kind": "actual-caller-candidate-gate",
+      "targetEffects": 0
+    },
+    {
+      "case": "settle_once.py-exact-passes",
+      "kind": "actual-caller-candidate-gate",
+      "targetEffects": 0
+    },
+    {
+      "case": "settle_once.py-changed-refuses",
+      "kind": "actual-caller-candidate-gate",
+      "targetEffects": 0
+    },
+    {
+      "case": "verify_release_once.py-exact-passes",
+      "kind": "actual-caller-candidate-gate",
+      "targetEffects": 0
+    },
+    {
+      "case": "verify_release_once.py-changed-refuses",
+      "kind": "actual-caller-candidate-gate",
+      "targetEffects": 0
+    },
+    {
+      "case": "actual-run-acquisition-exact-passes",
+      "kind": "actual-before-staging-byte-gate",
+      "targetEffects": 0
+    },
+    {
+      "case": "actual-run-acquisition-changed-refuses",
+      "kind": "actual-before-staging-byte-gate",
+      "targetEffects": 0
+    }
+  ],
+  "scope": "Actual AST fragments/pure helpers in isolated host mocks; production imports/actions forbidden",
+  "effects": {
+    "productionGuard": 0,
+    "target": 0,
+    "network": 0,
+    "process": 0,
+    "privateLeaseRead": 0
+  },
+  "temporaryMockRootPreserved": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/native-window-v3/mock-root-4yhdywij"
+}

@@ -1,0 +1,35 @@
+{
+  "status": "CORRECTED_HOST_PACKET_NOT_RUN_PROMOTION_PENDING",
+  "target": "amiberry-030",
+  "profile": "A1200-030-DEV",
+  "candidateSuppliedByRoot": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/portable-v2/native/PTEditorPrepareSessionTest",
+    "bytes": 395508,
+    "sha256": "b9b9a71351a012f20b5dc67228604f2f6e02d7dce93d07b2fed28fcb8cf83d10"
+  },
+  "expectedStdoutSuppliedByRoot": {
+    "bytes": 692,
+    "sha256": "c415b67357117e9e8286309309f2d5e260b50a4bf2bd82ee4124676f030c0f36"
+  },
+  "sourceCommit": "86cb65fdef27a19082a4d469acee8aa3bb39e0bb",
+  "oneStart": true,
+  "oneLaunch": true,
+  "absoluteWorkloadSeconds": 420,
+  "configuredGuestStackBytes": 65536,
+  "fullCustodyFiles": [
+    "PTEditorPrepareSessionTest",
+    "Run-once",
+    "fixture.log",
+    "fixture.rc",
+    "complete.flag",
+    "launcher.log"
+  ],
+  "scope": "Complete portable session102, admission78, terminal3 plus actual checked39/alias18/editor15 assertions; ordinary RAM, injected backend/timer/voice callbacks only",
+  "priority": "Scott next window first; root coordinates AmiConnect, Scott and AmiGUS after packet review",
+  "failure": "First failure/cancellation HOLD, no retry, recovery, failed-target cleanup, restoration or forced kill",
+  "missing": [
+    "Corrected host-only promotion and static saved-custody verification",
+    "Fresh root all-three coordination, prior independent normal release, preexecution and release-caller reviews"
+  ],
+  "priorHostRefusalPreserved": "../native-window-v1/promotion-first-failure.json"
+}

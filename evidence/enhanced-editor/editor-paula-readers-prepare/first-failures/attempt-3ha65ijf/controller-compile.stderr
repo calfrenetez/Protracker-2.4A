@@ -1,0 +1,7 @@
+src/editor/editor_paula_readers_prepare.c:46:70: error: misleading indentation; statement is not part of the previous 'for' [-Werror,-Wmisleading-indentation]
+   46 |     s->allocation[i]=(struct pt_sampler_storage_span){p,n};return 1;}return 0;}
+      |                                                                      ^
+src/editor/editor_paula_readers_prepare.c:45:28: note: previous statement is here
+   45 | {unsigned i;if(!p)return 1;for(i=0;i<PT_EDITOR_READERS_ALLOCATIONS;++i)if(!s->allocation[i].data){
+      |                            ^
+1 error generated.

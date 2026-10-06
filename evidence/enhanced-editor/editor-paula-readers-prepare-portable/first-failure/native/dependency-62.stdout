@@ -1,0 +1,7 @@
+invert_loop.o: src/core/invert_loop.c src/core/invert_loop.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/stdint.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/machine/_default_types.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/features.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/libnix/include/_newlib_version.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/_intsup.h \
+ /Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/m68k-amigaos/sys-include/sys/_stdint.h

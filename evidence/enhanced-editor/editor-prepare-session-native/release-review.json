@@ -1,0 +1,13 @@
+{
+  "status": "PASS_ROOT_SEPARATE_RELEASE_CALLER_REVIEW",
+  "script": {
+    "bytes": 6332,
+    "sha256": "4eb86779e604826eca1e42919cef505e216159edbc585c06322392a8c28e7572"
+  },
+  "independentReview": {
+    "bytes": 8292,
+    "sha256": "e95595ee8fd4355555eed364430d5c5adbf536a6c1f04c9fff5638ba479edbde"
+  },
+  "constraints": "Completed-only settlement; independent process/listener/connection absence, exact six custody and pins, four bound records, transport probe closed before public guard.release; no target recovery/force",
+  "atUTC": "2026-10-06T13:27:46.306089+00:00"
+}

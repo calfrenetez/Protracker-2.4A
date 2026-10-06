@@ -1,0 +1,791 @@
+{
+  "status": "PASS_SAVED_BYTE_CUSTODY_ONLY",
+  "baseline": "86cb65fdef27a19082a4d469acee8aa3bb39e0bb",
+  "current_attempt": "attempt-rlzcu7ln",
+  "files": {
+    "README.md": {
+      "kind": "generated",
+      "savedCopy": {
+        "bytes": 6443,
+        "sha256": "cba0ae17b8bcb2a422951c5edbd498d9fbfb29e994fa2b7836dec4c32c1eada3"
+      }
+    },
+    "contract_snapshot.md": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/docs/EDITOR_PAULA_READERS_PREPARE.md",
+      "sourceFingerprint": {
+        "bytes": 4739,
+        "sha256": "a76185d7f568e360ac351edb5b09fc8e02c788a3fb9ef9a06efbd0dcc90c47f1"
+      },
+      "savedCopy": {
+        "bytes": 4739,
+        "sha256": "a76185d7f568e360ac351edb5b09fc8e02c788a3fb9ef9a06efbd0dcc90c47f1"
+      }
+    },
+    "controller-compile.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-seyoypo8/controller-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "controller-compile.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-seyoypo8/controller-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "controller-run.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-seyoypo8/controller-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "controller-run.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-seyoypo8/controller-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 755,
+        "sha256": "facfb3c2fe6d7c70cb89b496cb92bdb5830dfde8266ad227641671405c998e3d"
+      },
+      "savedCopy": {
+        "bytes": 755,
+        "sha256": "facfb3c2fe6d7c70cb89b496cb92bdb5830dfde8266ad227641671405c998e3d"
+      }
+    },
+    "corrected-current/controller-compile.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-rlzcu7ln/controller-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "corrected-current/controller-compile.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-rlzcu7ln/controller-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "corrected-current/controller-run.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-rlzcu7ln/controller-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "corrected-current/controller-run.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-rlzcu7ln/controller-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 755,
+        "sha256": "facfb3c2fe6d7c70cb89b496cb92bdb5830dfde8266ad227641671405c998e3d"
+      },
+      "savedCopy": {
+        "bytes": 755,
+        "sha256": "facfb3c2fe6d7c70cb89b496cb92bdb5830dfde8266ad227641671405c998e3d"
+      }
+    },
+    "corrected-current/current-source.json": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/current-source.json",
+      "sourceFingerprint": {
+        "bytes": 1136,
+        "sha256": "494ee5617e1875cdbc599a0213e35d39cacabbc4c2709dad5b8e4b96184bb9f2"
+      },
+      "savedCopy": {
+        "bytes": 1136,
+        "sha256": "494ee5617e1875cdbc599a0213e35d39cacabbc4c2709dad5b8e4b96184bb9f2"
+      }
+    },
+    "corrected-current/establish-compile.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-rlzcu7ln/establish-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "corrected-current/establish-compile.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-rlzcu7ln/establish-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "corrected-current/establish-run.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-rlzcu7ln/establish-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "corrected-current/establish-run.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-rlzcu7ln/establish-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 406,
+        "sha256": "c151b1a39bd6b72091b6bd789d07a2c59624aca0dd19f22dbc782ce82252543b"
+      },
+      "savedCopy": {
+        "bytes": 406,
+        "sha256": "c151b1a39bd6b72091b6bd789d07a2c59624aca0dd19f22dbc782ce82252543b"
+      }
+    },
+    "corrected-current/final-source-and-host-review-corrected.json": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/reviews/final-source-and-host-review-corrected.json",
+      "sourceFingerprint": {
+        "bytes": 12700,
+        "sha256": "a86879a22e749226227c5e10d9adc25e940681b5414afbb16bc6c3b164c1483d"
+      },
+      "savedCopy": {
+        "bytes": 12700,
+        "sha256": "a86879a22e749226227c5e10d9adc25e940681b5414afbb16bc6c3b164c1483d"
+      }
+    },
+    "corrected-current/run.json": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-rlzcu7ln/run.json",
+      "sourceFingerprint": {
+        "bytes": 146773,
+        "sha256": "138b3f73420330836126b9e954247f81fbc199daedea98cf090c97ca9e9e6f3e"
+      },
+      "savedCopy": {
+        "bytes": 146773,
+        "sha256": "138b3f73420330836126b9e954247f81fbc199daedea98cf090c97ca9e9e6f3e"
+      }
+    },
+    "corrected-current/source/src/editor/editor_paula_readers_prepare.c": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-rlzcu7ln/source/src/editor/editor_paula_readers_prepare.c",
+      "sourceFingerprint": {
+        "bytes": 22184,
+        "sha256": "e532997750fccb046eeb36b607811769cca431b51e69fa6f77af48fe7b2ff721"
+      },
+      "savedCopy": {
+        "bytes": 22184,
+        "sha256": "e532997750fccb046eeb36b607811769cca431b51e69fa6f77af48fe7b2ff721"
+      }
+    },
+    "corrected-current/source/src/editor/editor_paula_readers_prepare.h": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-rlzcu7ln/source/src/editor/editor_paula_readers_prepare.h",
+      "sourceFingerprint": {
+        "bytes": 5463,
+        "sha256": "9addce76226bbed3f371b02ac4fa5a5355fe7d1ae605439a5021dd48c1e89b85"
+      },
+      "savedCopy": {
+        "bytes": 5463,
+        "sha256": "9addce76226bbed3f371b02ac4fa5a5355fe7d1ae605439a5021dd48c1e89b85"
+      }
+    },
+    "corrected-current/source/tests/editor_paula_readers_prepare_test.c": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-rlzcu7ln/source/tests/editor_paula_readers_prepare_test.c",
+      "sourceFingerprint": {
+        "bytes": 29934,
+        "sha256": "3dd596b2afda2d558ab03b07bf3b910902e8dd0e9abc607806d2b36adeaf40a0"
+      },
+      "savedCopy": {
+        "bytes": 29934,
+        "sha256": "3dd596b2afda2d558ab03b07bf3b910902e8dd0e9abc607806d2b36adeaf40a0"
+      }
+    },
+    "corrected-current/source/tests/test_editor_paula_readers_prepare.py": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-rlzcu7ln/source/tests/test_editor_paula_readers_prepare.py",
+      "sourceFingerprint": {
+        "bytes": 6759,
+        "sha256": "cc5b308250cb4a227bb762eeb347b21718b0cd87d00a140354b891ea39f77232"
+      },
+      "savedCopy": {
+        "bytes": 6759,
+        "sha256": "cc5b308250cb4a227bb762eeb347b21718b0cd87d00a140354b891ea39f77232"
+      }
+    },
+    "corrected-current/workspace-compile.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-rlzcu7ln/workspace-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "corrected-current/workspace-compile.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-rlzcu7ln/workspace-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "corrected-current/workspace-run.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-rlzcu7ln/workspace-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "corrected-current/workspace-run.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-rlzcu7ln/workspace-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 402,
+        "sha256": "93d739515a113408847f74544bc6afbb7eea7b4d6129e8d20f0e0ce8b63cbfae"
+      },
+      "savedCopy": {
+        "bytes": 402,
+        "sha256": "93d739515a113408847f74544bc6afbb7eea7b4d6129e8d20f0e0ce8b63cbfae"
+      }
+    },
+    "current-source.json": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/current-source-initial.json",
+      "sourceFingerprint": {
+        "bytes": 1015,
+        "sha256": "8efc51d6bc54acd347f7f3da56ae295baaa093333937c77af79c3d3cd246ad11"
+      },
+      "savedCopy": {
+        "bytes": 1015,
+        "sha256": "8efc51d6bc54acd347f7f3da56ae295baaa093333937c77af79c3d3cd246ad11"
+      }
+    },
+    "establish-compile.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-seyoypo8/establish-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "establish-compile.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-seyoypo8/establish-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "establish-run.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-seyoypo8/establish-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "establish-run.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-seyoypo8/establish-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 406,
+        "sha256": "c151b1a39bd6b72091b6bd789d07a2c59624aca0dd19f22dbc782ce82252543b"
+      },
+      "savedCopy": {
+        "bytes": 406,
+        "sha256": "c151b1a39bd6b72091b6bd789d07a2c59624aca0dd19f22dbc782ce82252543b"
+      }
+    },
+    "first-failures/attempt-3ha65ijf/controller-compile.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-3ha65ijf/controller-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 571,
+        "sha256": "f5fd065e2586192ec67c50f969da420f7f6f148a5693648c499a3f8019ce0b6a"
+      },
+      "savedCopy": {
+        "bytes": 571,
+        "sha256": "f5fd065e2586192ec67c50f969da420f7f6f148a5693648c499a3f8019ce0b6a"
+      }
+    },
+    "first-failures/attempt-3ha65ijf/controller-compile.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-3ha65ijf/controller-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "first-failures/attempt-3ha65ijf/run.json": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-3ha65ijf/run.json",
+      "sourceFingerprint": {
+        "bytes": 141122,
+        "sha256": "fbb611442d05a01393e6d271e2a73454364e2eaf3cad8e57e6ed22896c73b48c"
+      },
+      "savedCopy": {
+        "bytes": 141122,
+        "sha256": "fbb611442d05a01393e6d271e2a73454364e2eaf3cad8e57e6ed22896c73b48c"
+      }
+    },
+    "first-failures/attempt-952kg36t/controller-compile.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-952kg36t/controller-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "first-failures/attempt-952kg36t/controller-compile.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-952kg36t/controller-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "first-failures/attempt-952kg36t/controller-run.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-952kg36t/controller-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 184,
+        "sha256": "44e3e15a3cac3990ec8f1367d16e0bc691a13dc97253d84c56ec202bcf1b8035"
+      },
+      "savedCopy": {
+        "bytes": 184,
+        "sha256": "44e3e15a3cac3990ec8f1367d16e0bc691a13dc97253d84c56ec202bcf1b8035"
+      }
+    },
+    "first-failures/attempt-952kg36t/controller-run.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-952kg36t/controller-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "first-failures/attempt-952kg36t/run.json": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-952kg36t/run.json",
+      "sourceFingerprint": {
+        "bytes": 141435,
+        "sha256": "cf31f8e28c572187dd8b8f8c959f0c1bd636942bf80c2cf28c5292960db79e17"
+      },
+      "savedCopy": {
+        "bytes": 141435,
+        "sha256": "cf31f8e28c572187dd8b8f8c959f0c1bd636942bf80c2cf28c5292960db79e17"
+      }
+    },
+    "first-failures/attempt-cvxjvn9x/controller-compile.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-cvxjvn9x/controller-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "first-failures/attempt-cvxjvn9x/controller-compile.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-cvxjvn9x/controller-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "first-failures/attempt-cvxjvn9x/controller-run.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-cvxjvn9x/controller-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 178,
+        "sha256": "67d7e1db1f0164d4177fe954065cc0be09c62f5e830499fa6f54c5864d7689a8"
+      },
+      "savedCopy": {
+        "bytes": 178,
+        "sha256": "67d7e1db1f0164d4177fe954065cc0be09c62f5e830499fa6f54c5864d7689a8"
+      }
+    },
+    "first-failures/attempt-cvxjvn9x/controller-run.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-cvxjvn9x/controller-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "first-failures/attempt-cvxjvn9x/run.json": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-cvxjvn9x/run.json",
+      "sourceFingerprint": {
+        "bytes": 141435,
+        "sha256": "ffde2c86153238fd1ababe148df2b6bb438808e27e30549b6c580a96297f2188"
+      },
+      "savedCopy": {
+        "bytes": 141435,
+        "sha256": "ffde2c86153238fd1ababe148df2b6bb438808e27e30549b6c580a96297f2188"
+      }
+    },
+    "first-failures/attempt-fvjwo9oo/controller-compile.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-fvjwo9oo/controller-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "first-failures/attempt-fvjwo9oo/controller-compile.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-fvjwo9oo/controller-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "first-failures/attempt-fvjwo9oo/controller-run.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-fvjwo9oo/controller-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 208,
+        "sha256": "4f5ba6e8c5757bcda02bbc14eb5e48d7abe03a8d9bb261efbddfc874e5626f79"
+      },
+      "savedCopy": {
+        "bytes": 208,
+        "sha256": "4f5ba6e8c5757bcda02bbc14eb5e48d7abe03a8d9bb261efbddfc874e5626f79"
+      }
+    },
+    "first-failures/attempt-fvjwo9oo/controller-run.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-fvjwo9oo/controller-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "first-failures/attempt-fvjwo9oo/run.json": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-fvjwo9oo/run.json",
+      "sourceFingerprint": {
+        "bytes": 141435,
+        "sha256": "bd6e9ad41ee9d831774c9489441eb49c72d973bce188434b29296b081a254c33"
+      },
+      "savedCopy": {
+        "bytes": 141435,
+        "sha256": "bd6e9ad41ee9d831774c9489441eb49c72d973bce188434b29296b081a254c33"
+      }
+    },
+    "first-failures/attempt-q6e_cxdc/controller-compile.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-q6e_cxdc/controller-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 1000,
+        "sha256": "7e25431ff571b77904d1341aabff950f9b9b334a58ef87fee112d44686c159ce"
+      },
+      "savedCopy": {
+        "bytes": 1000,
+        "sha256": "7e25431ff571b77904d1341aabff950f9b9b334a58ef87fee112d44686c159ce"
+      }
+    },
+    "first-failures/attempt-q6e_cxdc/controller-compile.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-q6e_cxdc/controller-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "first-failures/attempt-q6e_cxdc/run.json": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-q6e_cxdc/run.json",
+      "sourceFingerprint": {
+        "bytes": 141122,
+        "sha256": "a74b1c4c753c4881b135fa64808b9ea747cb8e9d7fcc919df3d0818f28d9fc5e"
+      },
+      "savedCopy": {
+        "bytes": 141122,
+        "sha256": "a74b1c4c753c4881b135fa64808b9ea747cb8e9d7fcc919df3d0818f28d9fc5e"
+      }
+    },
+    "first-failures/attempt-u8wb_erb/controller-compile.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-u8wb_erb/controller-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 328,
+        "sha256": "44651c52244caa260b6fb9a7a8b044a1e56de1c78a8e91a8e934930d17abe2e9"
+      },
+      "savedCopy": {
+        "bytes": 328,
+        "sha256": "44651c52244caa260b6fb9a7a8b044a1e56de1c78a8e91a8e934930d17abe2e9"
+      }
+    },
+    "first-failures/attempt-u8wb_erb/controller-compile.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-u8wb_erb/controller-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "first-failures/attempt-u8wb_erb/run.json": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-u8wb_erb/run.json",
+      "sourceFingerprint": {
+        "bytes": 141122,
+        "sha256": "ab3d56972efafc6840f73a3f0c6a7de8e50fefae78585cf2041f07d0876a6dfe"
+      },
+      "savedCopy": {
+        "bytes": 141122,
+        "sha256": "ab3d56972efafc6840f73a3f0c6a7de8e50fefae78585cf2041f07d0876a6dfe"
+      }
+    },
+    "future-publication-paths.txt": {
+      "kind": "generated",
+      "savedCopy": {
+        "bytes": 6700,
+        "sha256": "c63b86b96846aacd36d871b8051f3e51e01ca509886a1a38a934af597ddfa06d"
+      }
+    },
+    "initial-review/final-source-and-host-review.json": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/reviews/final-source-and-host-review.json",
+      "sourceFingerprint": {
+        "bytes": 11225,
+        "sha256": "c054281448e6be00465da4ddcb3c97e99b887650f31fb8796928e8526bd8634e"
+      },
+      "savedCopy": {
+        "bytes": 11225,
+        "sha256": "c054281448e6be00465da4ddcb3c97e99b887650f31fb8796928e8526bd8634e"
+      }
+    },
+    "run.json": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-seyoypo8/run.json",
+      "sourceFingerprint": {
+        "bytes": 146771,
+        "sha256": "07384f4aaaa20e46392b5437b6af3916a47f07376fc7d6afa203be4e755ae0fc"
+      },
+      "savedCopy": {
+        "bytes": 146771,
+        "sha256": "07384f4aaaa20e46392b5437b6af3916a47f07376fc7d6afa203be4e755ae0fc"
+      }
+    },
+    "source/src/editor/editor_paula_readers_prepare.c": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-seyoypo8/source/src/editor/editor_paula_readers_prepare.c",
+      "sourceFingerprint": {
+        "bytes": 22160,
+        "sha256": "c761cbf9554a618598fbd91b8d1eadee0eab4b81c981c3c611b0dae979a7fc11"
+      },
+      "savedCopy": {
+        "bytes": 22160,
+        "sha256": "c761cbf9554a618598fbd91b8d1eadee0eab4b81c981c3c611b0dae979a7fc11"
+      }
+    },
+    "source/src/editor/editor_paula_readers_prepare.h": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-seyoypo8/source/src/editor/editor_paula_readers_prepare.h",
+      "sourceFingerprint": {
+        "bytes": 5463,
+        "sha256": "9addce76226bbed3f371b02ac4fa5a5355fe7d1ae605439a5021dd48c1e89b85"
+      },
+      "savedCopy": {
+        "bytes": 5463,
+        "sha256": "9addce76226bbed3f371b02ac4fa5a5355fe7d1ae605439a5021dd48c1e89b85"
+      }
+    },
+    "source/tests/editor_paula_readers_prepare_test.c": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-seyoypo8/source/tests/editor_paula_readers_prepare_test.c",
+      "sourceFingerprint": {
+        "bytes": 29038,
+        "sha256": "c9059e2f4ab0cb10403d715070eb3902eab0446a373b7f747900287df7372fe9"
+      },
+      "savedCopy": {
+        "bytes": 29038,
+        "sha256": "c9059e2f4ab0cb10403d715070eb3902eab0446a373b7f747900287df7372fe9"
+      }
+    },
+    "source/tests/test_editor_paula_readers_prepare.py": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-seyoypo8/source/tests/test_editor_paula_readers_prepare.py",
+      "sourceFingerprint": {
+        "bytes": 6759,
+        "sha256": "cc5b308250cb4a227bb762eeb347b21718b0cd87d00a140354b891ea39f77232"
+      },
+      "savedCopy": {
+        "bytes": 6759,
+        "sha256": "cc5b308250cb4a227bb762eeb347b21718b0cd87d00a140354b891ea39f77232"
+      }
+    },
+    "summary.json": {
+      "kind": "generated",
+      "savedCopy": {
+        "bytes": 5350,
+        "sha256": "b02eb565d6c931b23f3a2ded010ac92f16c88adc28ef1e7b67a50c382fe4b117"
+      }
+    },
+    "verify_saved.py": {
+      "kind": "generated",
+      "savedCopy": {
+        "bytes": 7884,
+        "sha256": "f81506505398124aa8b472648e130f98218b7c72a3220582b4eaed4597159c3f"
+      }
+    },
+    "workspace-compile.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-seyoypo8/workspace-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "workspace-compile.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-seyoypo8/workspace-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "workspace-run.stderr": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-seyoypo8/workspace-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "workspace-run.stdout": {
+      "kind": "savedCopy",
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-paula-readers-prepare/v1/attempt-seyoypo8/workspace-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 402,
+        "sha256": "93d739515a113408847f74544bc6afbb7eea7b4d6129e8d20f0e0ce8b63cbfae"
+      },
+      "savedCopy": {
+        "bytes": 402,
+        "sha256": "93d739515a113408847f74544bc6afbb7eea7b4d6129e8d20f0e0ce8b63cbfae"
+      }
+    }
+  }
+}

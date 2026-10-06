@@ -1,0 +1,144 @@
+{
+  "status": "PASS",
+  "baseline": "86cb65fdef27a19082a4d469acee8aa3bb39e0bb",
+  "scope": "HOST_ONLY ASan/UBSan; saved bytes and relationships only",
+  "current_run": "corrected-current/run.json",
+  "current_attempt": "attempt-rlzcu7ln",
+  "saved_inputs": 919,
+  "own_inputs": {
+    "src/editor/editor_paula_readers_prepare.h": {
+      "bytes": 5463,
+      "sha256": "9addce76226bbed3f371b02ac4fa5a5355fe7d1ae605439a5021dd48c1e89b85"
+    },
+    "src/editor/editor_paula_readers_prepare.c": {
+      "bytes": 22184,
+      "sha256": "e532997750fccb046eeb36b607811769cca431b51e69fa6f77af48fe7b2ff721"
+    },
+    "tests/editor_paula_readers_prepare_test.c": {
+      "bytes": 29934,
+      "sha256": "3dd596b2afda2d558ab03b07bf3b910902e8dd0e9abc607806d2b36adeaf40a0"
+    },
+    "tests/test_editor_paula_readers_prepare.py": {
+      "bytes": 6759,
+      "sha256": "cc5b308250cb4a227bb762eeb347b21718b0cd87d00a140354b891ea39f77232"
+    }
+  },
+  "calls": [
+    {
+      "label": "controller-compile",
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "label": "controller-run",
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "label": "workspace-compile",
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "label": "workspace-run",
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "label": "establish-compile",
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "label": "establish-run",
+      "status": "PASS",
+      "returncode": 0
+    }
+  ],
+  "review_file": "corrected-current/final-source-and-host-review-corrected.json",
+  "review_status": "PASS",
+  "initial_review_file": "initial-review/final-source-and-host-review.json",
+  "initial_review_status": "BLOCKER_PRESERVED",
+  "initial_host_runtime_status": "PASS_WITH_REVIEWED_COVERAGE_GAP",
+  "new_cases": {
+    "lifetimes": 72,
+    "admission": 81,
+    "domain_dispatches": 24,
+    "full_oracle_songs": 3,
+    "allocation_output_alias_groups": 3,
+    "poisoned_former_tables": 3,
+    "expired_terminals": 3,
+    "master_bits": [
+      8,
+      16,
+      24
+    ]
+  },
+  "corrected_command_reentry": "Actual live poll hook consumed once, exact positive ACTIVE proof applied, external receipt unchanged after FAULT, later NULL-output independent drains",
+  "production_c_change": "Formatting only at two GCC indentation refusal sites",
+  "test_c_changes": "Actual command reentry coverage and two GCC indentation refusal sites",
+  "first_failures": {
+    "attempt-q6e_cxdc": {
+      "status": "FAIL",
+      "failed_call": "controller-compile",
+      "diagnostic": "first-failures/attempt-q6e_cxdc/controller-compile.stderr"
+    },
+    "attempt-fvjwo9oo": {
+      "status": "FAIL",
+      "failed_call": "controller-run",
+      "diagnostic": "first-failures/attempt-fvjwo9oo/controller-run.stderr"
+    },
+    "attempt-952kg36t": {
+      "status": "FAIL",
+      "failed_call": "controller-run",
+      "diagnostic": "first-failures/attempt-952kg36t/controller-run.stderr"
+    },
+    "attempt-u8wb_erb": {
+      "status": "FAIL",
+      "failed_call": "controller-compile",
+      "diagnostic": "first-failures/attempt-u8wb_erb/controller-compile.stderr"
+    },
+    "attempt-cvxjvn9x": {
+      "status": "FAIL",
+      "failed_call": "controller-run",
+      "diagnostic": "first-failures/attempt-cvxjvn9x/controller-run.stderr"
+    },
+    "attempt-3ha65ijf": {
+      "status": "FAIL",
+      "failed_call": "controller-compile",
+      "diagnostic": "first-failures/attempt-3ha65ijf/controller-compile.stderr"
+    }
+  },
+  "native_execution": "NOT_RUN",
+  "physical_execution": "NOT_RUN",
+  "portable_compile_claim": "NOT_CLAIMED_SEPARATE_WORK",
+  "contract_fingerprint": {
+    "bytes": 4739,
+    "sha256": "a76185d7f568e360ac351edb5b09fc8e02c788a3fb9ef9a06efbd0dcc90c47f1"
+  },
+  "limits": [
+    "No product or producer replay by saved verifier.",
+    "No new-controller target/native PLAY/UI/device/MMIO/DMA/placement/aggregate stack/task/IRQ/exact activation/audio/listening qualification.",
+    "The alias group enumerates actual live arenas; it does not prove66-slot saturation.",
+    "No full private source pool, executable/product artifact or private lease included."
+  ],
+  "assembly_refusals": [
+    {
+      "classification": "ASSEMBLY_REFUSAL_NOT_SOURCE_OR_TEST_FAILURE",
+      "source": "Reported root tool receipt during active packet assembly",
+      "command": "python3 -B evidence/enhanced-editor/editor-paula-readers-prepare/verify_saved.py",
+      "reported_traceback_location": "verify_saved.py line34, fingerprint(HERE / name) == item['savedCopy']",
+      "observed_assertion": "AssertionError: verify_saved.py",
+      "circumstances": "Invocation ran while verifier, documentation and manifest edits were explicitly still active. A later separate session-native verifier PASS and compound shell final return code do not describe this invocation.",
+      "original_logs_saved": false,
+      "original_returncode": "NOT_SAVED",
+      "custody_limit": "No original individual log bytes, missing fingerprints or numeric verifier return code are reconstructed."
+    }
+  ],
+  "separate_portable_packet": {
+    "readme": "../editor-paula-readers-prepare-portable/README.md",
+    "status": "PASS_SEPARATE_COMPILER_LINK_AND_SAVED_BYTE_VERIFICATION",
+    "native_entry": "NOT_RUN",
+    "constructor_execution": "NOT_RUN"
+  }
+}

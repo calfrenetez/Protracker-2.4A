@@ -1,3 +1,4 @@
+#include "../core/amigus_trigger_levels.h"
 #include "sampler_mixed_readers.h"
 #include "sampler_internal.h"
 #include "sampler_paula_internal.h"
@@ -12,6 +13,7 @@ struct ledger {void *data;
 size_t bytes;
 };
 struct source {struct pt_sampler_mixed_request request;
+struct pt_sampler_mixed_trigger_levels levels;
 struct pt_sampler_mixed_reader *reader;
 uint64_t token;
 };
@@ -65,6 +67,7 @@ struct pt_sampler_mixed_reader *readers[PT_SAMPLER_MIXED_READERS];
 size_t bytes,chip_bytes;
 uint64_t serial;
  struct pt_sampler_mixed_request scratch[PT_SAMPLER_MIXED_ACTIONS];
+struct pt_sampler_mixed_trigger_levels level_scratch[PT_SAMPLER_MIXED_ACTIONS];
 unsigned *release_fault;
 };
 struct workspace {struct pt_sampler_mixed_pool pool;
@@ -112,6 +115,10 @@ if(!n||!span(o,n)||!apart(o,n,p,sizeof(*p))||!pt_sampler_output_disjoint(p->conf
  for(i=0;i<p->config.maximum_readers;++i)if(p->readers[i]&&!apart(o,n,p->readers[i],sizeof(*p->readers[i])))return 0;
  for(i=0;i<PT_CACHE_SLOTS;++i)if(!apart(o,n,p->chip[i].data,p->chip[i].bytes))return 0;
  return 1;
+}
+/* Numeric scratch address: the guard reads no uninitialized child bytes. */
+static int output_address_apart(struct pt_sampler_mixed_pool *p,uintptr_t address,size_t bytes)
+{return output_apart(p,(const void *)address,bytes);
 }
 static int context_covered(const struct pt_sampler_mixed_config *c,const void *v)
 {unsigned i;
@@ -343,16 +350,36 @@ static unsigned route(struct pt_sampler_mixed_pool *p,unsigned track)
 }
 static int voice_zero(const struct pt_amigus_voice_request *v)
 {return !v->rate_numerator&&!v->rate_denominator&&!v->offset&&!v->volume&&!v->pan;}
-static int request_valid(struct pt_sampler_mixed_pool *p,const struct pt_sampler_mixed_request *x,unsigned n,uint64_t frame,unsigned *triggers)
+/* Semantic unused fields only: no memcmp of C padding. The unused union
+ * has a canonical amigus view containing every declared geometry field. */
+static int request_zero(const struct pt_sampler_mixed_request *x)
+{return !x->kind&&!x->track&&!x->sample&&!x->channel&&!x->expected&&key_zero(&x->key)&&
+ !x->geometry.amigus.bits&&!x->geometry.amigus.little_endian&&
+ voice_zero(&x->geometry.amigus.trigger)&&!x->geometry.amigus.rate&&
+ !x->geometry.amigus.left&&!x->geometry.amigus.right;
+}
+static int levels_valid(const struct pt_sampler_mixed_trigger_levels *l,unsigned rt,
+    const struct pt_sampler_mixed_request *x)
+{
+ if(!l)return 1; /* Legacy entry's internally canonical vector. */
+ if(l->mode==PT_SAMPLER_MIXED_TRIGGER_LEGACY)return !l->left&&!l->right;
+ return l->mode==PT_SAMPLER_MIXED_TRIGGER_QUANTIZED&&
+   rt==PT_MIXED_READERS_AMIGUS&&x->kind==PT_MIXED_READERS_TRIGGER&&
+   !x->geometry.amigus.trigger.volume&&!x->geometry.amigus.trigger.pan;
+}
+static int request_valid(struct pt_sampler_mixed_pool *p,const struct pt_sampler_mixed_request *x,unsigned n,uint64_t frame,unsigned *triggers,const struct pt_sampler_mixed_trigger_levels *levels)
 {
  unsigned i,seen=0;
 *triggers=0;
 if(!n||n>PT_SAMPLER_MIXED_ACTIONS||frame==UINT64_MAX)return 0;
+ if(levels)for(i=n;i<PT_SAMPLER_MIXED_ACTIONS;++i)
+ if(!request_zero(x+i)||levels[i].mode!=PT_SAMPLER_MIXED_TRIGGER_LEGACY||levels[i].left||levels[i].right)return 0;
  for(i=0;i<n;++i){unsigned rt,sl;
 if(x[i].track>=p->header.channels.count||x[i].sample>=p->header.sample_count)return 0;
 rt=route(p,x[i].track);
 sl=(unsigned)p->slot[x[i].track];
 if(p->header.channels.track[x[i].track].route!=PT_PAULA&&p->header.channels.track[x[i].track].route!=PT_AMIGUS)return 0;
+if(!levels_valid(levels?levels+i:NULL,rt,x+i))return 0;
 if(seen&(1U<<x[i].track))return 0;
 seen|=1U<<x[i].track;
  if(x[i].kind==PT_MIXED_READERS_TRIGGER){const struct pt_sample *a=p->samples+x[i].sample;
@@ -427,25 +454,34 @@ if(dispose){reader_free(p,r);
 c->source[i].reader=NULL;
 c->source[i].token=0;
 }}}}
-enum pt_sampler_mixed_result pt_sampler_mixed_begin(struct pt_sampler_mixed_pool *p,uint32_t revision,uint64_t frame,const struct pt_sampler_mixed_request *x,unsigned n,struct pt_sampler_mixed_command_handle *out)
+static enum pt_sampler_mixed_result begin_private(struct pt_sampler_mixed_pool *p,uint32_t revision,
+ uint64_t frame,const struct pt_sampler_mixed_request *x,unsigned n,
+ const struct pt_sampler_mixed_trigger_levels *levels,const void *input,size_t input_bytes,
+ struct pt_sampler_mixed_command_handle *out)
 {
  unsigned i,ci,rc=0,free_readers=0,triggers;
 size_t request_bytes;
 struct pt_sampler_mixed_command *c;
  if(!p||n>PT_SAMPLER_MIXED_ACTIONS||!n)return PT_SAMPLER_MIXED_INVALID;
 request_bytes=(size_t)n*sizeof(*x);
- if(!output_apart(p,x,request_bytes)||!output_apart(p,out,sizeof(*out))||!apart(out,sizeof(*out),x,request_bytes)||!fixed_current(p,revision)||p->state!=OPEN||!request_valid(p,x,n,frame,&triggers))return PT_SAMPLER_MIXED_INVALID;
+ if(!output_apart(p,input,input_bytes)||!output_apart(p,out,sizeof(*out))||
+ !apart(out,sizeof(*out),input,input_bytes)||!fixed_current(p,revision)||p->state!=OPEN||
+ !request_valid(p,x,n,frame,&triggers,levels))return PT_SAMPLER_MIXED_INVALID;
  for(ci=0;ci<p->config.maximum_commands&&p->commands[ci];++ci){}
 for(i=0;i<p->config.maximum_readers;++i)if(!p->readers[i])free_readers++;
  if(ci==p->config.maximum_commands||free_readers<triggers||p->serial>UINT64_MAX-triggers-1||sizeof(*c)>p->config.control_budget-p->bytes||triggers>(p->config.control_budget-p->bytes-sizeof(*c))/sizeof(struct pt_sampler_mixed_reader))return PT_SAMPLER_MIXED_CAPACITY;
  if(reentry(p))return PT_SAMPLER_MIXED_BUSY;
 p->busy=1;
 memcpy(p->scratch,x,request_bytes);
+/* Every legacy admission resets the WHOLE vector, including slots reused after
+ * an exact command. New admission copies every previously validated tail. */
+if(levels)memcpy(p->level_scratch,levels,sizeof(p->level_scratch));
+else memset(p->level_scratch,0,sizeof(p->level_scratch));
  if(!current(p,revision,1)){p->failed=1;
 p->busy=0;
 return PT_SAMPLER_MIXED_STALE;
 }
- c=allocate(p,sizeof(*c),x,request_bytes,out,sizeof(*out));
+ c=allocate(p,sizeof(*c),input,input_bytes,out,sizeof(*out));
 if(!c){p->busy=0;
 return p->failed?PT_SAMPLER_MIXED_STALE:PT_SAMPLER_MIXED_CAPACITY;
 }
@@ -457,8 +493,9 @@ c->count=n;
 p->commands[ci]=c;
  for(i=0;i<n;++i){struct pt_sampler_mixed_reader *r;
 c->source[i].request=p->scratch[i];
+c->source[i].levels=p->level_scratch[i];
 if(p->scratch[i].kind!=PT_MIXED_READERS_TRIGGER)continue;
-for(rc=0;rc<p->config.maximum_readers&&p->readers[rc];++rc){}r=allocate(p,sizeof(*r),x,request_bytes,out,sizeof(*out));
+for(rc=0;rc<p->config.maximum_readers&&p->readers[rc];++rc){}r=allocate(p,sizeof(*r),input,input_bytes,out,sizeof(*out));
 if(!r){partial(c,1);
 command_free(p,c);
 p->busy=0;
@@ -481,6 +518,21 @@ c->source[i].token=r->token;
 out->token=c->token;
 p->busy=0;
 return PT_SAMPLER_MIXED_PENDING;
+}
+enum pt_sampler_mixed_result pt_sampler_mixed_begin(struct pt_sampler_mixed_pool *p,uint32_t revision,
+ uint64_t frame,const struct pt_sampler_mixed_request *x,unsigned n,struct pt_sampler_mixed_command_handle *out)
+{
+ if(!p||!n||n>PT_SAMPLER_MIXED_ACTIONS)return PT_SAMPLER_MIXED_INVALID;
+ return begin_private(p,revision,frame,x,n,NULL,x,(size_t)n*sizeof(*x),out);
+}
+enum pt_sampler_mixed_result pt_sampler_mixed_begin_quantized(struct pt_sampler_mixed_pool *p,uint32_t revision,
+ uint64_t frame,const struct pt_sampler_mixed_quantized_batch *batch,struct pt_sampler_mixed_command_handle *out)
+{
+ /* Numeric complete-input/output guards precede the first batch field read. */
+ if(!p||(uintptr_t)batch%_Alignof(struct pt_sampler_mixed_quantized_batch)||
+ !output_apart(p,batch,sizeof(*batch))||!output_apart(p,out,sizeof(*out))||
+ !apart(batch,sizeof(*batch),out,sizeof(*out)))return PT_SAMPLER_MIXED_INVALID;
+ return begin_private(p,revision,frame,batch->action,batch->count,batch->levels,batch,sizeof(*batch),out);
 }
 static int source_current(struct pt_sampler_mixed_reader *r)
 {
@@ -599,7 +651,23 @@ unsigned j;
 uint32_t address,bytes;
 if(!v)return 0;
 for(j=0;j<PT_CACHE_SLOTS&&v!=&b->arena.block[j];++j){}
-if(j==PT_CACHE_SLOTS||!pt_amigus_sample_ram_location(&b->arena,v,&address,&bytes)||b->arena.block[j].reserved<bytes||!pt_amigus_voice_plan_prepare(&r->original,&r->format,&x->geometry.amigus.trigger,address,bytes,&a->geometry.amigus))return 0;
+if(j==PT_CACHE_SLOTS||!pt_amigus_sample_ram_location(&b->arena,v,&address,&bytes)||b->arena.block[j].reserved<bytes)return 0;
+if(s->levels.mode==PT_SAMPLER_MIXED_TRIGGER_QUANTIZED){
+ struct pt_amigus_trigger_levels_request request;
+ struct pt_amigus_voice_plan plan;
+ /* Guard complete local child objects against all captured/owned contexts and
+  * each other BEFORE initialization. No existing typed-action member is passed
+  * as D1 output. The real held original/format and matched resource alone lower. */
+ if(!output_address_apart(p,(uintptr_t)&request,sizeof(request))||
+ !output_address_apart(p,(uintptr_t)&plan,sizeof(plan))||
+ !apart((const void *)(uintptr_t)&request,sizeof(request),(const void *)(uintptr_t)&plan,sizeof(plan)))return 0;
+ request.geometry=x->geometry.amigus.trigger;
+ request.left=s->levels.left;
+ request.right=s->levels.right;
+ if(!pt_amigus_trigger_levels_prepare(&r->original,&r->format,&request,address,bytes,&plan))return 0;
+ a->geometry.amigus=plan;
+}else if(s->levels.mode!=PT_SAMPLER_MIXED_TRIGGER_LEGACY||
+ !pt_amigus_voice_plan_prepare(&r->original,&r->format,&x->geometry.amigus.trigger,address,bytes,&a->geometry.amigus))return 0;
 r->resource.reservation=b->reservation;
 r->resource.cache=&b->cache;
 r->resource.version=b->cache.entry[r->lease.slot].version;

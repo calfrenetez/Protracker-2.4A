@@ -1,0 +1,1 @@
+Assertion failed: (result==PT_SAMPLER_MIXED_OK&&completed==16&& !memcmp(&before,&f->inherited->model,sizeof(before))), function d2_lifetime, file sampler_mixed_quantized_test.c, line 150.

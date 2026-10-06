@@ -67,3 +67,16 @@ implementation gates. Native stack, memory placement, real scheduled output,
 IRQ timing, card completion/ordering/voice stop, audio and listening require
 their own evidence. The existing paired controller's tests do not qualify this
 new adapter.
+
+
+## Portable compiler qualification — 6 October 2026
+
+The exact current geometry fixture also has one assertion-enabled 68000 /
+software-float compiler build: 941 saved inputs, 38 units and 120 actual selected
+dependency bodies. All 51 compiler and eight admission-query records pass with
+empty stderr and positive reap/group quiet. The private 220,840-byte HUNK remains
+**NEVER_EXECUTED**. Independent saved-byte verification and final review pass;
+static marker strings do not qualify native assertions. Amiberry and real-A1200
+execution, stack/WCET, real placement/device behavior, timing and audio remain
+untested for this candidate. See the
+[selected compiler facts](../evidence/enhanced-editor/mixed-readers-plan-normalize-portable/README.md).

@@ -6154,3 +6154,11 @@ geometry proof does not qualify master/cache ownership, whole-song production,
 native/Amiberry, physical capacity/completion/stop, exact live timing or audio and
 listening. See the [helper contract](AMIGUS_TRIGGER_LEVELS.md) and
 [selected host projection](../evidence/enhanced-editor/amigus-trigger-levels-host/README.md).
+
+## Tagged explicit levels in genuine sampler owners — 6 October 2026
+
+The subsequent D2 factory extension supersedes the earlier private-factory status above. `pt_sampler_mixed_begin_quantized` accepts an explicit fixed16 batch of tagged legacy or uint16 register-level requests. It retains the existing request/queue/proof contracts, genuine 8/16/24-bit masters, independent selective signed8 Paula and 8/16-bit card caches, exact saves, bounded incremental preparation and complete captured alias guards. D1 geometry runs only at the held original/format and matched card resource; no gain approximation or geometry relaxation is introduced.
+
+Corrected V5 passed its distinct ASan/UBSan HOST attempt: 947 saved inputs, four overlays, 28 units, nine full2,385-byte lines and26 completed owned-driver records. Independent saved review passed without findings. The original V2 compile failure and V3 runtime assertion failure remain separate; the original V3 tuple/clause is unknown. V4 was never executed and its two fixture ownership findings were repaired in V5. The selected packet publishes observations and six exact output bodies, not the complete private custody archive.
+
+This supplies genuine tagged factory ownership, not a controller/normalizer facade or whole-song producer. Native/compiler stack/Amiberry/A1200, physical memory/device completion/stop, exact live timing, audio and listening remain separate. See the [extension contract](SAMPLER_MIXED_QUANTIZED.md) and [selected HOST projection](../evidence/enhanced-editor/sampler-mixed-quantized-host/README.md).

@@ -48,6 +48,21 @@ struct pt_sampler_mixed_request {
         } amigus;
     } geometry;
 };
+/* Explicit final register levels, never Q16 gain or an implicit override.
+ * The existing request/config/key/action/receipt layouts remain unchanged. */
+enum pt_sampler_mixed_trigger_level_mode {
+    PT_SAMPLER_MIXED_TRIGGER_LEGACY=0,
+    PT_SAMPLER_MIXED_TRIGGER_QUANTIZED=1
+};
+struct pt_sampler_mixed_trigger_levels {
+    enum pt_sampler_mixed_trigger_level_mode mode;
+    uint16_t left,right;
+};
+struct pt_sampler_mixed_quantized_batch {
+    unsigned count;
+    struct pt_sampler_mixed_request action[PT_SAMPLER_MIXED_ACTIONS];
+    struct pt_sampler_mixed_trigger_levels levels[PT_SAMPLER_MIXED_ACTIONS];
+};
 /* Opt-in owner-thread software factory. No casts/copies of legacy owners, no
  * public validation/READY certificate, promotion, timer, voice/DMA/MMIO/PLAY,
  * song/editor integration, production backend or hardware acceptance.
@@ -95,6 +110,23 @@ enum pt_sampler_mixed_result pt_sampler_mixed_advance_validation(struct pt_sampl
  */
 enum pt_sampler_mixed_result pt_sampler_mixed_begin(struct pt_sampler_mixed_pool *,uint32_t,
     uint64_t frame,const struct pt_sampler_mixed_request *,unsigned,struct pt_sampler_mixed_command_handle *);
+/* Explicit opt-in fixed16 batch, guarded as ONE complete original extent
+ * before count/field reads, entry/failure writes or callbacks. Count1..16.
+ * Unused action slots require all declared fields zero; the inactive union is
+ * canonically checked through its amigus fields, not padding bytes. Unused
+ * levels require LEGACY/0/0. Active LEGACY also requires levels0/0 and follows
+ * the existing request semantics. QUANTIZED is card TRIGGER only, any uint16
+ * pair including0/0, with nested trigger.volume/pan zero. Paula and CONTROL/
+ * STOP require LEGACY/0/0. No raw plans, Q16 values, fallback or extra CONTROL.
+ * Full requests and all16 tags/levels are copied before the first callback and
+ * expire on return. Copies live with their genuine command/source until close.
+ * Queried pool/workspace/command sizes grow; budgets must use current queries.
+ * No cross-version binary or hardcoded sizeof compatibility is promised.
+ * Genuine pins/cache resources and all existing queue/proof/release contracts
+ * above/below apply unchanged. D1 geometry runs only at the actual held resource.
+ */
+enum pt_sampler_mixed_result pt_sampler_mixed_begin_quantized(struct pt_sampler_mixed_pool *,uint32_t,
+    uint64_t frame,const struct pt_sampler_mixed_quantized_batch *,struct pt_sampler_mixed_command_handle *);
 /* One transition/action OR <=256 derived cache bytes, never bulk promotion.
  * Each persistent master pin is distinct from prepared-job TEMP pins. HIT/LOAD,
  * completion/cancel of the TEMP job cannot retire the persistent pin.

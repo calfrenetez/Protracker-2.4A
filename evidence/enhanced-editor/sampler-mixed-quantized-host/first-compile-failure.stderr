@@ -1,0 +1,7 @@
+src/editor/sampler_mixed_readers.c:657:47: error: variable 'request' is uninitialized when passed as a const pointer argument here [-Werror,-Wuninitialized-const-pointer]
+  657 |  if(!output_apart(p,(const void *)(uintptr_t)&request,sizeof(request))||
+      |                                               ^~~~~~~
+src/editor/sampler_mixed_readers.c:658:44: error: variable 'plan' is uninitialized when passed as a const pointer argument here [-Werror,-Wuninitialized-const-pointer]
+  658 |  !output_apart(p,(const void *)(uintptr_t)&plan,sizeof(plan))||
+      |                                            ^~~~
+2 errors generated.

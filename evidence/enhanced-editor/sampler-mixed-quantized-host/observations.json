@@ -1,0 +1,943 @@
+{
+  "schema": "pt24g-d2-selected-saved-host-projection-v1",
+  "status": "SELECTED_SAVED_HOST_PASS_PROJECTION",
+  "scope": "Exact tagged genuine sampler factory D2 software ASan/UBSan only. This selected projection is not a rerun or a replacement for complete private saved custody review.",
+  "source_origin": {
+    "committed_D1_baseline": "b39cdce1f47ff3506333d9397ddf185efa568b33",
+    "exact_four_factory_overlays": {
+      "src/editor/sampler_mixed_readers.h": {
+        "bytes": 11621,
+        "sha256": "2a3135a5282721a0452032a220d9f5ba764f1dfc3c192d63720d78baa086e28e",
+        "mode": 33188
+      },
+      "src/editor/sampler_mixed_readers.c": {
+        "bytes": 44694,
+        "sha256": "d5f2d5f4e7574f28b0a9bc70921e4b037802cd837ce60153bb10e09dc591c921",
+        "mode": 33188
+      },
+      "tests/sampler_mixed_quantized_test.c": {
+        "bytes": 34620,
+        "sha256": "5e13f252b61758522bf098343b259e2addcdf709e40bc24edae642a0c767ca14",
+        "mode": 33188
+      },
+      "tests/test_sampler_mixed_quantized.py": {
+        "bytes": 26048,
+        "sha256": "4e4536d21d28b9fed7d314188bb2636745d5969122d8ade9d68e90d10917c47d",
+        "mode": 33188
+      }
+    },
+    "source_inventory_count": 947,
+    "source_inventory_canonical_sha256_from_private_review": "7c500ccf3b8a42e3259221116b546f549a32df48e80d03d2ff16770693654038",
+    "archive_count": 944,
+    "generated_font_include_count": 1,
+    "modified_overlays": 2,
+    "additive_overlays": 2,
+    "ordered_units": [
+      "tests/sampler_mixed_quantized_test.c",
+      "src/editor/sampler_mixed_readers.c",
+      "src/core/amigus_trigger_levels.c",
+      "src/core/mixed_scheduled_readers.c",
+      "src/core/elapsed_clock.c",
+      "src/editor/sampler_paula.c",
+      "src/editor/sampler_wavetable.c",
+      "src/core/amigus_voice_plan.c",
+      "src/editor/sampler.c",
+      "src/editor/slots.c",
+      "src/core/pcm_filtered.c",
+      "src/core/slices.c",
+      "src/core/pattern.c",
+      "src/core/document.c",
+      "src/core/pp20.c",
+      "src/core/project.c",
+      "src/core/mod_project.c",
+      "src/core/mod_inspect.c",
+      "src/core/channels.c",
+      "src/core/pcm.c",
+      "src/core/wav.c",
+      "src/core/svx.c",
+      "src/core/raw.c",
+      "src/core/amigus_reservation.c",
+      "src/core/amigus_wavetable_cache.c",
+      "src/core/amigus_sample_ram.c",
+      "src/core/sample_cache.c",
+      "src/core/playback_pcm.c"
+    ],
+    "unit_count": 28
+  },
+  "current": {
+    "version": "v5",
+    "status": "PASS",
+    "phase": "COMPLETE",
+    "compile_returncode": 0,
+    "run_returncode": 0,
+    "compile_seconds": 8.607488875000854,
+    "run_seconds": 1.145659333007643,
+    "qualifier_seconds": 12.073029833991313,
+    "root_seconds": 12.389752125003724,
+    "compiler_runtime_stderr_bytes": 0,
+    "marker_count": 9,
+    "marker_bytes": 2385,
+    "whole_qualifier_budget_seconds": 600,
+    "compile_budget_seconds": 120,
+    "run_budget_seconds": 180,
+    "cleanup_reserve_seconds": 5,
+    "all_saved_drivers_reaped_group_quiet": true,
+    "driver_count": 26,
+    "preparation_driver_count": 16,
+    "compiler_runtime_driver_count": 2,
+    "root_driver_count": 8,
+    "driver_records": [
+      {
+        "layer": "qualifier-preparation",
+        "label": "prepare-head",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.024313417001394555,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 41,
+          "sha256": "8834cfde8c17c703109b06b1a5b8eb235592cda0b7f978c39877bd5b739b3a4d",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "qualifier-preparation",
+        "label": "prepare-index",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.026293999995687045,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 1211979,
+          "sha256": "9d7a06864652ac59a0ff72cf0083c48959a6dd88b5eacb8e831d4060ad865ce1",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "qualifier-preparation",
+        "label": "prepare-staged",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.023407124986988492,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "qualifier-preparation",
+        "label": "prepare-status",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.04342120799992699,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 415,
+          "sha256": "683b0b2b900a5b87a36555bf6dfa11d8a7eac816e652cc40a157833b641b63a0",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "qualifier-preparation",
+        "label": "prepare-archive",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.08596987499913666,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 6256640,
+          "sha256": "091edf6cf00580023f5b8175895a4c532b6bdb3da70d0014036203dc378f9c93",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "qualifier-preparation",
+        "label": "prepare-font",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.02090995799517259,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 580,
+          "sha256": "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "qualifier-preparation",
+        "label": "precompile-head",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.024750124997808598,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 41,
+          "sha256": "8834cfde8c17c703109b06b1a5b8eb235592cda0b7f978c39877bd5b739b3a4d",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "qualifier-preparation",
+        "label": "precompile-index",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.02969133300939575,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 1211979,
+          "sha256": "9d7a06864652ac59a0ff72cf0083c48959a6dd88b5eacb8e831d4060ad865ce1",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "qualifier-preparation",
+        "label": "postcompile-head",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.01788433300680481,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 41,
+          "sha256": "8834cfde8c17c703109b06b1a5b8eb235592cda0b7f978c39877bd5b739b3a4d",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "qualifier-preparation",
+        "label": "postcompile-index",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.027576250009587966,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 1211979,
+          "sha256": "9d7a06864652ac59a0ff72cf0083c48959a6dd88b5eacb8e831d4060ad865ce1",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "qualifier-preparation",
+        "label": "prerun-head",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.02480916600325145,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 41,
+          "sha256": "8834cfde8c17c703109b06b1a5b8eb235592cda0b7f978c39877bd5b739b3a4d",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "qualifier-preparation",
+        "label": "prerun-index",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.02733383399026934,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 1211979,
+          "sha256": "9d7a06864652ac59a0ff72cf0083c48959a6dd88b5eacb8e831d4060ad865ce1",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "qualifier-preparation",
+        "label": "postrun-head",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.02308295799593907,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 41,
+          "sha256": "8834cfde8c17c703109b06b1a5b8eb235592cda0b7f978c39877bd5b739b3a4d",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "qualifier-preparation",
+        "label": "postrun-index",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.029436374999932013,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 1211979,
+          "sha256": "9d7a06864652ac59a0ff72cf0083c48959a6dd88b5eacb8e831d4060ad865ce1",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "qualifier-preparation",
+        "label": "verify-head",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.025164000006043352,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 41,
+          "sha256": "8834cfde8c17c703109b06b1a5b8eb235592cda0b7f978c39877bd5b739b3a4d",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "qualifier-preparation",
+        "label": "verify-index",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.027933959005167708,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 1211979,
+          "sha256": "9d7a06864652ac59a0ff72cf0083c48959a6dd88b5eacb8e831d4060ad865ce1",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "compiler-runtime",
+        "label": "sampler-quantized-compile",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 8.607488875000854,
+        "whole_seconds": 120,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "compiler-runtime",
+        "label": "sampler-quantized-run",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 1.145659333007643,
+        "whole_seconds": 180,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 2385,
+          "sha256": "8f3746e35c19fefbda94496764009bc165c5297daa6732942331edacc85dae88",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "root-wrapper",
+        "label": "before-head",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.04440812498796731,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 41,
+          "sha256": "8834cfde8c17c703109b06b1a5b8eb235592cda0b7f978c39877bd5b739b3a4d",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "root-wrapper",
+        "label": "before-branch",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.023203999997349456,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 31,
+          "sha256": "218f389b3beebe94baeef4f4a8f7447956c3b3471d5890c8aabad0d9bf3eb3f9",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "root-wrapper",
+        "label": "before-staged",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.023354499993729405,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "root-wrapper",
+        "label": "before-index",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.024853166993125342,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 1211979,
+          "sha256": "9d7a06864652ac59a0ff72cf0083c48959a6dd88b5eacb8e831d4060ad865ce1",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "root-wrapper",
+        "label": "first-qualifier",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 12.182139499986079,
+        "whole_seconds": 610,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 130,
+          "sha256": "176fcf218e131b9ccae5e3b41d2740d2d6bf562152795673098b4cba71ec58b6",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "root-wrapper",
+        "label": "after-head",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.02061033301288262,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 41,
+          "sha256": "8834cfde8c17c703109b06b1a5b8eb235592cda0b7f978c39877bd5b739b3a4d",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "root-wrapper",
+        "label": "after-index",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.022764665991417132,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 1211979,
+          "sha256": "9d7a06864652ac59a0ff72cf0083c48959a6dd88b5eacb8e831d4060ad865ce1",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "layer": "root-wrapper",
+        "label": "after-staged",
+        "status": "PASS",
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "owned_new_session": true,
+        "elapsed_seconds": 0.022617000009631738,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "stdout_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr_original_pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      }
+    ],
+    "flags": [
+      "-std=c99",
+      "-O1",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-fsanitize=address,undefined",
+      "-Isrc/core",
+      "-I."
+    ],
+    "tools_byte_pins": {
+      "interpreter": {
+        "bytes": 52448,
+        "sha256": "60ab7f8bb944386c0022689716e405a77117111d65110532a1889d713dddf757",
+        "mode": 33261
+      },
+      "compiler": {
+        "bytes": 200560,
+        "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+        "mode": 33261
+      },
+      "git": {
+        "bytes": 200560,
+        "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+        "mode": 33261
+      }
+    },
+    "private_HOST_product_pin": {
+      "bytes": 2609440,
+      "sha256": "4ae7783529e89737b662a8fa7c3e743d59c55ebcbbdc8b7e4f0909bb6fb2b289",
+      "mode": 33261
+    },
+    "product_body_in_packet": false,
+    "run_manifest_original_pin": {
+      "bytes": 355708,
+      "sha256": "435d371e7f43dd45d32cd3742d33b8d8eefa50484e5064a0326313eb156496eb",
+      "mode": 33188
+    },
+    "root_receipt_original_pin": {
+      "bytes": 18906,
+      "sha256": "bbb360a3efd34388aba5f6b95bd4fdecddb14aa02ea47fe6743f027b190df5aa",
+      "mode": 33188
+    }
+  },
+  "earlier_actual_failures": [
+    {
+      "version": "v2",
+      "status": "FAIL",
+      "phase": "COMPILE",
+      "source_inputs": 947,
+      "unit_count": 28,
+      "compiler_runtime_records": [
+        {
+          "layer": "compiler-runtime",
+          "label": "sampler-quantized-compile",
+          "status": "FAIL",
+          "returncode": 1,
+          "driver_reaped": true,
+          "group_quiescent": true,
+          "owned_new_session": true,
+          "elapsed_seconds": 7.341814040992176,
+          "whole_seconds": 120,
+          "cleanup_reserve_seconds": 5,
+          "stdout_original_pin": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "mode": 33188
+          },
+          "stderr_original_pin": {
+            "bytes": 630,
+            "sha256": "d8b786e26e13be0c678b4bfee6dfdd5591d89e550e615c3dfce702d3f17fbd08",
+            "mode": 33188
+          }
+        }
+      ],
+      "driver_count": 14,
+      "run_manifest_original_pin": {
+        "bytes": 344473,
+        "sha256": "098c88fc6c43bab519dc5c817e40a5b6975222fde5894795fe15ffe73054cdc2",
+        "mode": 33188
+      },
+      "root_receipt_original_pin": {
+        "bytes": 15017,
+        "sha256": "d0b4bc8395577e6004fa3a36c17e6c8b68fac834f03ca82b20619d6f65ff9f9a",
+        "mode": 33188
+      },
+      "observation": "Compile failed on two uninitialized-const-pointer diagnostics before any product run. The distinct V3 numeric-address helper corrected the source without initializing scratch before full guards or suppressing warnings."
+    },
+    {
+      "version": "v3",
+      "status": "FAIL",
+      "phase": "RUN",
+      "source_inputs": 947,
+      "unit_count": 28,
+      "compiler_runtime_records": [
+        {
+          "layer": "compiler-runtime",
+          "label": "sampler-quantized-compile",
+          "status": "PASS",
+          "returncode": 0,
+          "driver_reaped": true,
+          "group_quiescent": true,
+          "owned_new_session": true,
+          "elapsed_seconds": 8.05385304200172,
+          "whole_seconds": 120,
+          "cleanup_reserve_seconds": 5,
+          "stdout_original_pin": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "mode": 33188
+          },
+          "stderr_original_pin": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "mode": 33188
+          }
+        },
+        {
+          "layer": "compiler-runtime",
+          "label": "sampler-quantized-run",
+          "status": "FAIL",
+          "returncode": -6,
+          "driver_reaped": true,
+          "group_quiescent": true,
+          "owned_new_session": true,
+          "elapsed_seconds": 1.0102968749997672,
+          "whole_seconds": 180,
+          "cleanup_reserve_seconds": 5,
+          "stdout_original_pin": {
+            "bytes": 1547,
+            "sha256": "d6237e5d6c54f798d7f4f807658231c59b49c62128b18faf85acf0b76fcc5735",
+            "mode": 33188
+          },
+          "stderr_original_pin": {
+            "bytes": 188,
+            "sha256": "15e33139cc3d9aee445db6b71d707f3a346412f4c6e27da9c5914cb636e6abcd",
+            "mode": 33188
+          }
+        }
+      ],
+      "driver_count": 19,
+      "run_manifest_original_pin": {
+        "bytes": 351062,
+        "sha256": "1559354bdb10a3bb445f1c51258d73a7c8de6b882469146cf99347247a3314e7",
+        "mode": 33188
+      },
+      "root_receipt_original_pin": {
+        "bytes": 15031,
+        "sha256": "bbcc5deddc9b7e5ca50070515f58770eba0940329446490779c08f56c03cbe0e",
+        "mode": 33188
+      },
+      "observation": "Compile passed, then runtime aborted on the d2_lifetime result/completed/model conjunction after six partial lines. Exact original tuple and failing clause were not recorded. Unsupported odd positive geometry was identified by source, not by an observed tuple trace."
+    }
+  ],
+  "unexecuted_v4_source_refusal": {
+    "status": "CHANGES_REQUIRED_SOURCE_ONLY_NOT_COMPILED_OR_RUN",
+    "source_review_original_pin": {
+      "bytes": 5008,
+      "sha256": "537a044d3ddcbadf0d575b5bfe478a7415a24aac0c5f9c1e6bc9994745afaf30",
+      "mode": 33188
+    },
+    "findings": [
+      "Odd negative metadata was changed after genuine promotion, so stale metadata could satisfy the refusal for the wrong reason.",
+      "A registered failed untransferred command prevented the asserted pool consumption."
+    ],
+    "distinct_v5_repair": "Odd metadata precedes genuine promotion; command close returns0 with cleared handle, then pool close returns1 with NULL. V4 was never executed."
+  },
+  "independent_reviews": {
+    "current_saved_HOST_review_original_pin": {
+      "bytes": 5957,
+      "sha256": "7d8b657cd258577635708cf79c1209e68fa480327529638e6e9aa826d09eb501",
+      "mode": 33188
+    },
+    "current_saved_HOST_verification_original_pin": {
+      "bytes": 43746,
+      "sha256": "6ae5bc9603a3e0fdd83aeaceecbaa75aa1fd60847dc4ea143bff121dfe65ddec",
+      "mode": 33188
+    },
+    "current_source_review_original_pin": {
+      "bytes": 6267,
+      "sha256": "4454c1ff366f8e66a23b36362ec718dbc1359d3c15a066b79c5f98cd9c8a2245",
+      "mode": 33188
+    },
+    "current_source_freeze_original_pin": {
+      "bytes": 18626,
+      "sha256": "e165b93e66db02a66a28e894a40ab2dcd4daf3449ba9540b9d5995fb404f065f",
+      "mode": 33188
+    },
+    "saved_HOST_review_status": "PASS_SAVED_HOST_ONLY_NO_REPLAY",
+    "saved_HOST_findings": [],
+    "reviews_and_complete_private_bodies_in_packet": false
+  },
+  "selected_raw_bodies": {
+    "current.stdout": {
+      "original_pin": {
+        "bytes": 2385,
+        "sha256": "8f3746e35c19fefbda94496764009bc165c5297daa6732942331edacc85dae88",
+        "mode": 33188
+      },
+      "packet_pin": {
+        "bytes": 2385,
+        "sha256": "8f3746e35c19fefbda94496764009bc165c5297daa6732942331edacc85dae88",
+        "mode": 33188
+      },
+      "exact_copy": true
+    },
+    "current.stderr": {
+      "original_pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      },
+      "packet_pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      },
+      "exact_copy": true
+    },
+    "first-compile-failure.stdout": {
+      "original_pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      },
+      "packet_pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      },
+      "exact_copy": true
+    },
+    "first-compile-failure.stderr": {
+      "original_pin": {
+        "bytes": 630,
+        "sha256": "d8b786e26e13be0c678b4bfee6dfdd5591d89e550e615c3dfce702d3f17fbd08",
+        "mode": 33188
+      },
+      "packet_pin": {
+        "bytes": 630,
+        "sha256": "d8b786e26e13be0c678b4bfee6dfdd5591d89e550e615c3dfce702d3f17fbd08",
+        "mode": 33188
+      },
+      "exact_copy": true
+    },
+    "first-runtime-failure.stdout": {
+      "original_pin": {
+        "bytes": 1547,
+        "sha256": "d6237e5d6c54f798d7f4f807658231c59b49c62128b18faf85acf0b76fcc5735",
+        "mode": 33188
+      },
+      "packet_pin": {
+        "bytes": 1547,
+        "sha256": "d6237e5d6c54f798d7f4f807658231c59b49c62128b18faf85acf0b76fcc5735",
+        "mode": 33188
+      },
+      "exact_copy": true
+    },
+    "first-runtime-failure.stderr": {
+      "original_pin": {
+        "bytes": 188,
+        "sha256": "15e33139cc3d9aee445db6b71d707f3a346412f4c6e27da9c5914cb636e6abcd",
+        "mode": 33188
+      },
+      "packet_pin": {
+        "bytes": 188,
+        "sha256": "15e33139cc3d9aee445db6b71d707f3a346412f4c6e27da9c5914cb636e6abcd",
+        "mode": 33188
+      },
+      "exact_copy": true
+    }
+  },
+  "limits": [
+    "Original manifest/review/product/source/archive/font/toolchain and complete raw-log collections remain private; their pins here do not make those bodies publicly reverified.",
+    "Public packet contains only selected observations and six exact output bodies. No supplied compiler, product or verifier is executed by publication.",
+    "Fake ordinary-memory/card models establish software master/cache ownership and conversion oracles. No controller/normalizer facade, whole-song producer, native compiler/stack/emulator/A1200/device capacity/completion/ordering/stop, exact musical scheduling, audio or listening acceptance.",
+    "Original V3 failing tuple/clause is unknown. No silent retry, retrospective tuple inference or V4 runtime failure is claimed."
+  ]
+}

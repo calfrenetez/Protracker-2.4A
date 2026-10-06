@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "projection": "failure_independent_review",
+  "origin": {
+    "private_file": "portable-preparation-v1/review-failure-v1/review.json",
+    "original_pin": {
+      "bytes": 6323,
+      "sha256": "5bfdcb928de8e8c65b4eb4bb3be161f24387f51c096215c88298c7eb7637be40"
+    }
+  },
+  "public_bodies_verified": "Only the allowlisted public projection/log bodies; original whole manifests/source/tools/runtime/dependency/log bodies remain private",
+  "status": "BOUNDED_PASS_FAILURE_CUSTODY_ONLY",
+  "findings": [],
+  "compiler_result": "FIRST_FAILURE_RETAINED",
+  "native_qualification": "NOT_QUALIFIED_NO_PRODUCT",
+  "checks": [
+    {
+      "check": "Actual first failure and honest diagnostics",
+      "result": "VERIFIED_FAILURE",
+      "evidence": "The exact2065287-byte manifest SHAcd7b1bba3acdb58ba65b05d857023fff59f058a034341b822ca7d23832242fca remains FIRST_FAILURE_RETAINED. Recorded91 ordered GCC driver calls consist of90 RC0/empty-stderr version/helper/runtime/dependency calls followed by the once-only compile-link RC1. Last stdout is empty;3261-byte stderr SHAbc3ba81125fe2df83e350b22c6b6c37e1926b3147241ad67e00dce1eef9386c3 contains six misleading-indentation errors in two controller C/test files. Compiler failure prevented a successful link. Product field is absent/null and exact prospective product path is independently absent; no product execution occurred."
+    },
+    {
+      "check": "Exact frozen failed source and retained packet",
+      "result": "PASS_CUSTODY_ONLY",
+      "evidence": "All937 saved files match source_before/source_after and the qualified v4 root freeze, with source_stable true. Saved a02 archive932 + generated committed font1 + nine overlays (five replacements/four additions) independently reconstruct the complete failed source bytes. All1147 retained files plus manifest match whole1148-file inventory, ordinary modes, bytes and hashes.78 complete ordered units, exact argv/cwd/flags/environment, frozen original host stdout2273 bytes/seven full software markers, caller/verifier/interpreter and five tools/seven runtime pins match. No saved-byte verifier was replayed."
+    },
+    {
+      "check": "Honest dependencies and execution records",
+      "result": "PASS_CUSTODY_ONLY",
+      "evidence": "Independent parsing of all78 raw -M outputs derives the exact223-path dependency union, with all saved dependency bodies matching their pins. Four helper selections are driver lookups only, not independent helper invocations; seven runtime lookup resolutions match pinned ordinary inputs. Every91 recorded compiler entry has own new-session PID=PGID, positive driver_reaped and compiler_process_group_quiescent, with empty scoped cleanup list. The last recorded driver PID84908 is reaped/quiescent in evidence. All recorded waits preserve120s envelopes/5s cleanup reserve; whole recorded run16.976287958s is below600. No timeout/TERM/KILL branch is qualified and no live process/target query occurred."
+    },
+    {
+      "check": "Original evidence remains separate",
+      "result": "PASS_CUSTODY_ONLY",
+      "evidence": "Original ASan/UBSan host attempt-exq1v9l8 full inventory/manifest remains PASS with unchanged v4 source and exact seven-line stdout. Both earlier host compile-only failures remain FAIL/RC1 with original948-file inventories and exact original logs; their saved copies in this failed packet match. Three independent source/host/portable preparation review pins and root failure-custody receipt match. The separate266204-byte old PTSamplerMixedActivationTest f4c5eeac8cfc6a5ebd4081eceff8ea33691bc2ce3fe5dccfbcb99984f9ca8342 remains unchanged and is not promoted or substituted."
+    },
+    {
+      "check": "Current work and admission boundaries",
+      "result": "PASS_CUSTODY_ONLY",
+      "evidence": "Seven unchanged current overlay files match failed v4 pins, and all16 protected paths match current exact bytes/full modes. The two actively revised controller C/test paths are deliberately excluded from current-v4 equivalence; this report binds their failed saved v4 copies only and provides no v5 semantic/qualification claim. Three read-only Git queries confirm fixed a02 HEAD, exact1197014-byte index SHA1601e89645535bd9c804ebdca7488f865c5492dbeaa97740c9cbd31dcd96ef85 and empty staged diff. Failed manifest contains eight precompiler local readbacks only; it does not invent successful postfailure Git checks. Reviewer performed no target/private-guard/peer operations."
+    }
+  ],
+  "limitations": [
+    "Failure custody verifies recorded compiler completion/group quiescence and retained bytes; it is not independent live process absence or cleanup-failure branch qualification.",
+    "No successful HUNK product, native/emulator/A1200 execution, target availability/admission, real memory/card capacity/upload order/voice stop, stack/WCET/timing or listening acceptance is established.",
+    "The corrected current v5 source is outside this failed-v4 qualification and needs its own reviewed source freeze and distinct authorized checks. No retry or old-candidate promotion is authorized by this report."
+  ],
+  "edits_complete": true,
+  "manifest": {
+    "bytes": 2065287,
+    "sha256": "cd7b1bba3acdb58ba65b05d857023fff59f058a034341b822ca7d23832242fca",
+    "mode": 420,
+    "full_mode": 33188
+  },
+  "verification_pin": {
+    "bytes": 4102,
+    "sha256": "6f37c5650e08460e9752ddb00f47e38a02d1807e073c3e6c13afbdaa488a73ab"
+  }
+}

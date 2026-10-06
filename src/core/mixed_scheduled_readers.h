@@ -103,7 +103,7 @@ struct pt_mixed_readers_reader_receipt {
     enum pt_mixed_readers_state state;enum pt_mixed_readers_adoption adoption;
     uint64_t observed,issued; /* actual ORIGINAL trigger timing */
 };
-enum pt_mixed_readers_reply {PT_MIXED_UNCERTAIN=-1,PT_MIXED_PENDING=0,
+enum pt_mixed_readers_reply {PT_MIXED_UNCERTAIN=-1,PT_MIXED_REPLY_PENDING=0,
     PT_MIXED_OBSERVATION=1,PT_MIXED_COMMAND_DETACHED=2,PT_MIXED_READER_RETIRE_PROOF=3};
 /* One separately declared backend for the complete paired batch. No two-route
  * immediate callback wrapper satisfies this contract. Actual publication and

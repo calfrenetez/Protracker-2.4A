@@ -38,9 +38,11 @@ The caller keeps source values immutable during calls and changes the supplied
 revision or sampler generation for every edit between calls. Publish/key/service
 APIs use the captured revision rather than obtaining an editor revision: there
 is no attached editor or revision supplier. An edit that changes only an external
-editor counter is therefore not observable here. A future editor adapter must
-cancel and drain behind its edit barrier before changing such borrowed source
-values. The queue remains factory-exclusive for admission/services, and its owner,
+editor counter is therefore not observable here. The request-driven
+`editor_mixed_readers_prepare` controller now supplies this enclosing barrier for
+individual batches. It cancels and drains before changing borrowed source values;
+whole-song paired lowering remains separate. The queue remains factory-exclusive
+for admission/services, and its owner,
 sampler fixed control and callbacks remain alive through all drains and closes.
 
 Command detach and reader retirement are independent exact proofs. Both proofs
@@ -75,6 +77,6 @@ records 41 successful calls and independent offline saved-byte verification.
 That candidate has never been executed. Native entry, emulator and physical
 execution, placement/device timing/audio and listening remain separate.
 
-Paired song/editor lowering, native PLAY and a qualified real atomic activation
+Whole-song paired lowering, native PLAY and a qualified real atomic activation
 port remain unfinished. Neither this factory nor an injected RAM model qualifies
 physical card capacity, upload ordering/completion or actual voice stop.

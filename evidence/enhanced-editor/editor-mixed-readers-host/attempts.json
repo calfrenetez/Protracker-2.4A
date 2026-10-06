@@ -1,0 +1,110 @@
+[
+  {
+    "attempt": "attempt-lvqgmuc5",
+    "status": "FAIL",
+    "current": false,
+    "historical_pass": false,
+    "manifest_original": {
+      "bytes": 174039,
+      "sha256": "a226ce6b7b201dc8bc7ade4780cbd5d0df1dd4d9ae16cc3f4a6f3ca37f7ab357"
+    },
+    "manifest_published": {
+      "bytes": 173427,
+      "sha256": "53e6f79460a402ee2d108dd5264cf713e24ccf7fb0fb65afe04273e87c580648"
+    },
+    "published_logs": [
+      "attempt-lvqgmuc5/prepare-head.stdout",
+      "attempt-lvqgmuc5/prepare-head.stderr",
+      "attempt-lvqgmuc5/prepare-index.stdout",
+      "attempt-lvqgmuc5/prepare-index.stderr",
+      "attempt-lvqgmuc5/prepare-archive.stderr",
+      "attempt-lvqgmuc5/prepare-font.stderr",
+      "attempt-lvqgmuc5/controller-compile.stdout",
+      "attempt-lvqgmuc5/controller-compile.stderr"
+    ]
+  },
+  {
+    "attempt": "attempt-vnbghqxd",
+    "status": "FAIL",
+    "current": false,
+    "historical_pass": false,
+    "manifest_original": {
+      "bytes": 174565,
+      "sha256": "61b6320cb0a7e2b1648e63eeb55713525c99153afdc2f554bf8b1bfff97246d3"
+    },
+    "manifest_published": {
+      "bytes": 173953,
+      "sha256": "5d9477be4078a35e5d11ab735c52af282d15d2d9b368affe354601b8f2b2af5e"
+    },
+    "published_logs": [
+      "attempt-vnbghqxd/prepare-head.stdout",
+      "attempt-vnbghqxd/prepare-head.stderr",
+      "attempt-vnbghqxd/prepare-index.stdout",
+      "attempt-vnbghqxd/prepare-index.stderr",
+      "attempt-vnbghqxd/prepare-archive.stderr",
+      "attempt-vnbghqxd/prepare-font.stderr",
+      "attempt-vnbghqxd/controller-compile.stdout",
+      "attempt-vnbghqxd/controller-compile.stderr"
+    ]
+  },
+  {
+    "attempt": "attempt-exq1v9l8",
+    "status": "PASS",
+    "current": false,
+    "historical_pass": true,
+    "manifest_original": {
+      "bytes": 177756,
+      "sha256": "c1ba9deeedfde6f45cb27b1fca4cf236362c99f4af9666fdca3c1cd39642f568"
+    },
+    "manifest_published": {
+      "bytes": 176784,
+      "sha256": "7275b62ef58b46bd21788c2060436d1173a80b7ec89e7b0b474735b23afcf3d5"
+    },
+    "published_logs": [
+      "attempt-exq1v9l8/prepare-head.stdout",
+      "attempt-exq1v9l8/prepare-head.stderr",
+      "attempt-exq1v9l8/prepare-index.stdout",
+      "attempt-exq1v9l8/prepare-index.stderr",
+      "attempt-exq1v9l8/prepare-archive.stderr",
+      "attempt-exq1v9l8/prepare-font.stderr",
+      "attempt-exq1v9l8/verify-head.stdout",
+      "attempt-exq1v9l8/verify-head.stderr",
+      "attempt-exq1v9l8/verify-index.stdout",
+      "attempt-exq1v9l8/verify-index.stderr",
+      "attempt-exq1v9l8/controller-compile.stdout",
+      "attempt-exq1v9l8/controller-compile.stderr",
+      "attempt-exq1v9l8/controller-run.stdout",
+      "attempt-exq1v9l8/controller-run.stderr"
+    ]
+  },
+  {
+    "attempt": "attempt-abu1j_nf",
+    "status": "PASS",
+    "current": true,
+    "historical_pass": false,
+    "manifest_original": {
+      "bytes": 177755,
+      "sha256": "70631a4bf0e49efa9ced9f34e879cd6ec248f3cf31e668bdf43b1533a2c6ce1e"
+    },
+    "manifest_published": {
+      "bytes": 176783,
+      "sha256": "693fd30f66a16a23379db7046d4756a271fa85bc3e4aab3253029bdeff0356f2"
+    },
+    "published_logs": [
+      "attempt-abu1j_nf/prepare-head.stdout",
+      "attempt-abu1j_nf/prepare-head.stderr",
+      "attempt-abu1j_nf/prepare-index.stdout",
+      "attempt-abu1j_nf/prepare-index.stderr",
+      "attempt-abu1j_nf/prepare-archive.stderr",
+      "attempt-abu1j_nf/prepare-font.stderr",
+      "attempt-abu1j_nf/verify-head.stdout",
+      "attempt-abu1j_nf/verify-head.stderr",
+      "attempt-abu1j_nf/verify-index.stdout",
+      "attempt-abu1j_nf/verify-index.stderr",
+      "attempt-abu1j_nf/controller-compile.stdout",
+      "attempt-abu1j_nf/controller-compile.stderr",
+      "attempt-abu1j_nf/controller-run.stdout",
+      "attempt-abu1j_nf/controller-run.stderr"
+    ]
+  }
+]

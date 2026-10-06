@@ -1,0 +1,771 @@
+{
+  "status": "SAVED_V5_HOST_BINDINGS_PASS_NO_REPLAY",
+  "run_manifest": {
+    "bytes": 177755,
+    "sha256": "70631a4bf0e49efa9ced9f34e879cd6ec248f3cf31e668bdf43b1533a2c6ce1e",
+    "mode": 33188
+  },
+  "head": "a02d53f2047753fd8673cbcc377d772da1ceb531",
+  "index_sha256": "1601e89645535bd9c804ebdca7488f865c5492dbeaa97740c9cbd31dcd96ef85",
+  "empty_staged_diff": true,
+  "source_file_count": 937,
+  "source_count_derivation": {
+    "baseline_archive_regular_files": 932,
+    "new_overlays": [
+      "src/editor/editor_mixed_readers_prepare.c",
+      "src/editor/editor_mixed_readers_prepare.h",
+      "tests/editor_mixed_readers_prepare_test.c",
+      "tests/test_editor_mixed_readers_prepare.py"
+    ],
+    "replaced_overlays": 5,
+    "font_files": 1
+  },
+  "overlays": {
+    "src/editor/editor_mixed_readers_prepare.h": {
+      "bytes": 9059,
+      "sha256": "3ab02131a83d89457fe2f0a898b41b6281fb059b137798e174e6167238e19c80",
+      "mode": 33188
+    },
+    "src/editor/editor_mixed_readers_prepare.c": {
+      "bytes": 39676,
+      "sha256": "156ed4305ea13aba140fbd36b149a358f03b3aa370cdda1f37afc4f9db126004",
+      "mode": 33188
+    },
+    "tests/editor_mixed_readers_prepare_test.c": {
+      "bytes": 39060,
+      "sha256": "15b3a0bf93a60bee65b94df6f5ae3a7d7adacfdb073fc9d08e364d393909c28c",
+      "mode": 33188
+    },
+    "tests/test_editor_mixed_readers_prepare.py": {
+      "bytes": 14109,
+      "sha256": "fbccf17297f79ecd8e6f3868053e6d49271b0f4822d2964a9e615b8e038a4161",
+      "mode": 33188
+    },
+    "src/core/mixed_readers_activation.h": {
+      "bytes": 10423,
+      "sha256": "64edd461b1413fc5b896f7b972b41421c22f04f327c66a21dfbc9b7043394ab5",
+      "mode": 33188
+    },
+    "src/core/mixed_readers_activation.c": {
+      "bytes": 39498,
+      "sha256": "edd96b2ebc4b076e66a865eeaa637e25e0cfe56e480d46c0c4b6746a028d456c",
+      "mode": 33188
+    },
+    "src/core/mixed_scheduled_readers.h": {
+      "bytes": 11336,
+      "sha256": "b24b9e762906bae10d5a511cd949c547715aada7893156e932aeab4315af70c4",
+      "mode": 33188
+    },
+    "src/core/mixed_scheduled_readers.c": {
+      "bytes": 33837,
+      "sha256": "2808fbbaf081d48c8ab70c36b57f2882d5bb0677aeb6f218c7a89d3bd0b570df",
+      "mode": 33188
+    },
+    "tests/mixed_scheduled_readers_test.c": {
+      "bytes": 42588,
+      "sha256": "18a0bc644ecdec004d23e00aa1a3714d78650151afccf914df24514cc79295fe",
+      "mode": 33188
+    }
+  },
+  "protected16": {
+    "AGENTS.md": {
+      "bytes": 789,
+      "sha256": "57dcd76709e95cd29c3d17c545a992bb924c629566de1e84a69db97701f5633b",
+      "mode": 33188
+    },
+    "amiga-test.json": {
+      "bytes": 5485,
+      "sha256": "2cc0b2707151467680193ad087903804a0c8e937ce97f5e229d90fed34a8be22",
+      "mode": 33188
+    },
+    "src/editor/editor.c": {
+      "bytes": 69155,
+      "sha256": "46d908ba5d89742fcdb8da337d01fe4af4decfeac9bfb883a21eb2920bc4b092",
+      "mode": 33188
+    },
+    "src/editor/editor.h": {
+      "bytes": 6675,
+      "sha256": "4de713afd3be0306eef784d421281596d2624bfbed176fd26ef571c26a865a9f",
+      "mode": 33188
+    },
+    "src/editor/view.c": {
+      "bytes": 44209,
+      "sha256": "a23ecde830cd23edcc332c93b924bf470161f0114415bece02d82fab2390cbdb",
+      "mode": 33188
+    },
+    "src/editor/view.h": {
+      "bytes": 2032,
+      "sha256": "44cdc9126cd9331d8cb0e428286f6fe1165187fb68c79a809cc6df54852a59b2",
+      "mode": 33188
+    },
+    "src/native/editor_main.c": {
+      "bytes": 46819,
+      "sha256": "ed49163c893660b75d3a63f00be2ff0acd2048c54d101051c26ce87fa446dc06",
+      "mode": 33188
+    },
+    "src/native/pattern_display.c": {
+      "bytes": 6888,
+      "sha256": "de7b6be91c29e2153fc61b9a2cfc22c7f730b049b68bf2d5e4ed87f1bf73959d",
+      "mode": 33188
+    },
+    "src/native/pattern_display.h": {
+      "bytes": 1519,
+      "sha256": "469f62be960d912258a37982504da75a7e38691ce13d4363a13b5e84cb9eaee1",
+      "mode": 33188
+    },
+    "tests/editor_test.c": {
+      "bytes": 53428,
+      "sha256": "946ee1a0667e8b43a7752ea7a0cf9590de781daffc7c73503efd9024dd690b65",
+      "mode": 33188
+    },
+    "tests/native_prepared_test.c": {
+      "bytes": 5858,
+      "sha256": "ad3041b508483482c0ff280a1c4f37576ec37a01eb421a230984bd3e6cb950a7",
+      "mode": 33188
+    },
+    "tests/test_editor.py": {
+      "bytes": 2002,
+      "sha256": "539fe7284a082781e2dead541e67b6d0f9e75ead179b631bfa8369ee4d1f9f82",
+      "mode": 33188
+    },
+    "tools/build_core_tests.py": {
+      "bytes": 39844,
+      "sha256": "081976b3831c518e7d757d934f2106c8aa072298dc3bd5ce74651188fd3a86b6",
+      "mode": 33188
+    },
+    "tools/test_sampler_emulator.py": {
+      "bytes": 8918,
+      "sha256": "cc84cf3098d10fa6901f45aaf93cecdbdf2fd55e39e6e36647c55d36a9c7f36c",
+      "mode": 33188
+    },
+    "tools/shared_infra_sampler.py": {
+      "bytes": 900,
+      "sha256": "5be11d68d4409baed36551165005c584ffec81a2c45f742e258cce74d1eba36d",
+      "mode": 33188
+    },
+    "tools/shared_infra_ui.py": {
+      "bytes": 3754,
+      "sha256": "9492cf59997857a1d69c1d6dbe4180ab83727d047cd456a9ba78221c1f6f5987",
+      "mode": 33188
+    }
+  },
+  "source_inventory937_matches_saved": true,
+  "baseline_archive_and_other927_bytes_equal": true,
+  "archive_data_filter_modes": "Verified standard data-filter normalization; stored archive0664 becomes expected0644",
+  "font580_exact": true,
+  "archive": {
+    "bytes": 6010880,
+    "sha256": "f29582d0804a9bd9990d70981c7ffd51cbc6269cd7c3e047a73dc38791244d90",
+    "mode": 33188
+  },
+  "font": {
+    "bytes": 580,
+    "sha256": "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091",
+    "mode": 33188
+  },
+  "controller_after_execution_snapshot": {
+    "bytes": 5751544,
+    "sha256": "e1bb717e84bd70009559bee1d4f936840c401c01c2a03dfc89006ffc178817a9",
+    "mode": 33261
+  },
+  "v5_changes": {
+    "src/editor/editor_mixed_readers_prepare.c": {
+      "old": {
+        "bytes": 39668,
+        "sha256": "d801d28d99ede3847732fa82a913bd8d8c8c9ef2218d3f3c812d82b9bee1f79b",
+        "mode": 33188
+      },
+      "new": {
+        "bytes": 39676,
+        "sha256": "156ed4305ea13aba140fbd36b149a358f03b3aa370cdda1f37afc4f9db126004",
+        "mode": 33188
+      },
+      "exact_newline_substitution_count": 4,
+      "exact_reconstruction": true,
+      "nonwhitespace_bytes_identical": true
+    },
+    "tests/editor_mixed_readers_prepare_test.c": {
+      "old": {
+        "bytes": 39046,
+        "sha256": "c7449524a2aae19930a63f99c50178969892ac200e51ed34480ffffdc15b5dee",
+        "mode": 33188
+      },
+      "new": {
+        "bytes": 39060,
+        "sha256": "15b3a0bf93a60bee65b94df6f5ae3a7d7adacfdb073fc9d08e364d393909c28c",
+        "mode": 33188
+      },
+      "exact_newline_substitution_count": 2,
+      "exact_reconstruction": true,
+      "nonwhitespace_bytes_identical": true
+    }
+  },
+  "exact_six_newline_only_substitutions": true,
+  "other_seven_overlays_unchanged": true,
+  "authorization": {
+    "bytes": 2396,
+    "sha256": "797fbe58c26d83377bc99d3bf91707f292d856c1f3df574be27c4602328885bb",
+    "mode": 33188
+  },
+  "authorization_referenced_freeze_and_review_exact": true,
+  "source_freeze": {
+    "bytes": 2517,
+    "sha256": "a91d7fa448b26a042a3ccc9511a45d9e9d122c6312309a7790cbfe7afbeb4451",
+    "mode": 33188
+  },
+  "root_v5_source_review": {
+    "bytes": 861,
+    "sha256": "6bbe23e7dcc649b9902474640efdaba92f7ffc20fd8fc475f65eeccef5a0c1ef",
+    "mode": 33188
+  },
+  "reviewer_compiler_test_product_target_replays": 0,
+  "reviewer_project_source_git_mutations": 0,
+  "ordered_units": [
+    "tests/editor_mixed_readers_prepare_test.c",
+    "src/editor/editor_mixed_readers_prepare.c",
+    "src/editor/sampler_mixed_readers.c",
+    "src/core/mixed_readers_activation.c",
+    "src/core/mixed_scheduled_readers.c",
+    "src/core/elapsed_clock.c",
+    "src/editor/sampler_paula.c",
+    "src/editor/sampler_wavetable.c",
+    "src/core/amigus_voice_plan.c",
+    "src/editor/sampler.c",
+    "src/editor/slots.c",
+    "src/core/pcm_filtered.c",
+    "src/core/slices.c",
+    "src/core/pattern.c",
+    "src/core/document.c",
+    "src/core/pp20.c",
+    "src/core/project.c",
+    "src/core/mod_project.c",
+    "src/core/mod_inspect.c",
+    "src/core/channels.c",
+    "src/core/pcm.c",
+    "src/core/wav.c",
+    "src/core/svx.c",
+    "src/core/raw.c",
+    "src/editor/editor.c",
+    "src/editor/song.c",
+    "src/editor/view.c",
+    "src/editor/workflow.c",
+    "src/editor/sample_range.c",
+    "src/editor/wave_summary.c",
+    "src/core/sample_usage.c",
+    "src/core/event_resource.c",
+    "src/core/flow.c",
+    "src/core/pitch.c",
+    "src/core/amigus_reservation.c",
+    "src/editor/sampler_invert_song.c",
+    "src/core/render_invert.c",
+    "src/core/invert_bank.c",
+    "src/core/invert_sequence.c",
+    "src/core/invert_pcm.c",
+    "src/core/invert_loop.c",
+    "src/core/amigus_session.c",
+    "src/core/amigus_fifo.c",
+    "src/core/amigus_pcm_pack.c",
+    "src/core/studio_consumer.c",
+    "src/core/studio_pump.c",
+    "src/core/studio_queue.c",
+    "src/editor/editor_studio.c",
+    "src/editor/sampler_song.c",
+    "src/editor/sampler_studio.c",
+    "src/core/studio_song.c",
+    "src/core/studio_plan.c",
+    "src/core/render.c",
+    "src/core/timeline.c",
+    "src/core/frame_clock.c",
+    "src/core/studio_mix.c",
+    "src/core/voice.c",
+    "src/editor/wavetable_song.c",
+    "src/editor/wavetable_voices.c",
+    "src/editor/wavetable_dispatch.c",
+    "src/core/amigus_render_voice.c",
+    "src/editor/paula_preflight.c",
+    "src/core/paula_render_voice.c",
+    "src/core/amigus_wavetable_cache.c",
+    "src/core/amigus_sample_ram.c",
+    "src/core/sample_cache.c",
+    "src/core/playback_pcm.c",
+    "src/editor/editor_mixed.c",
+    "src/editor/mixed_owner.c",
+    "src/editor/mixed_transport.c",
+    "src/editor/mixed_preflight.c",
+    "src/editor/paula_voices.c",
+    "src/editor/paula_dispatch.c",
+    "src/editor/editor_wavetable.c",
+    "src/platform/sample_import.c",
+    "src/platform/raw_import.c",
+    "src/platform/mod_import.c",
+    "src/platform/pp20_import.c"
+  ],
+  "ordered_unit_count": 78,
+  "calls": [
+    {
+      "label": "prepare-head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "$PRIVATE/work/Protracker-2.4A",
+      "whole_call_seconds": 30,
+      "cleanup_reserve_seconds": 5,
+      "elapsed_seconds": 0.017120291988248937,
+      "pid": 86722,
+      "pgid": 86722,
+      "owned_new_session": true,
+      "returncode": 0,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "stdout_snapshot": {
+        "bytes": 41,
+        "sha256": "918f0008f33c464fe54006cfead307e5935759a1422c6e451b2474c1a9b1e061",
+        "mode": 420
+      },
+      "stderr_snapshot": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "label": "prepare-index",
+      "argv": [
+        "git",
+        "ls-files",
+        "--stage"
+      ],
+      "cwd": "$PRIVATE/work/Protracker-2.4A",
+      "whole_call_seconds": 30,
+      "cleanup_reserve_seconds": 5,
+      "elapsed_seconds": 0.029622834001202136,
+      "pid": 86723,
+      "pgid": 86723,
+      "owned_new_session": true,
+      "returncode": 0,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "stdout_snapshot": {
+        "bytes": 1197014,
+        "sha256": "1601e89645535bd9c804ebdca7488f865c5492dbeaa97740c9cbd31dcd96ef85",
+        "mode": 420
+      },
+      "stderr_snapshot": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "label": "prepare-archive",
+      "argv": [
+        "git",
+        "archive",
+        "a02d53f2047753fd8673cbcc377d772da1ceb531",
+        "src",
+        "tests"
+      ],
+      "cwd": "$PRIVATE/work/Protracker-2.4A",
+      "whole_call_seconds": 30,
+      "cleanup_reserve_seconds": 5,
+      "elapsed_seconds": 0.14587554200261366,
+      "pid": 86724,
+      "pgid": 86724,
+      "owned_new_session": true,
+      "returncode": 0,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "stdout_snapshot": {
+        "bytes": 6010880,
+        "sha256": "f29582d0804a9bd9990d70981c7ffd51cbc6269cd7c3e047a73dc38791244d90",
+        "mode": 420
+      },
+      "stderr_snapshot": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "label": "prepare-font",
+      "argv": [
+        "git",
+        "show",
+        "a02d53f2047753fd8673cbcc377d772da1ceb531:vendor/pt23f/raw/ptfont.raw"
+      ],
+      "cwd": "$PRIVATE/work/Protracker-2.4A",
+      "whole_call_seconds": 30,
+      "cleanup_reserve_seconds": 5,
+      "elapsed_seconds": 0.014064999995753169,
+      "pid": 86725,
+      "pgid": 86725,
+      "owned_new_session": true,
+      "returncode": 0,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "stdout_snapshot": {
+        "bytes": 580,
+        "sha256": "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091",
+        "mode": 420
+      },
+      "stderr_snapshot": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "label": "verify-head",
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "$PRIVATE/work/Protracker-2.4A",
+      "whole_call_seconds": 30,
+      "cleanup_reserve_seconds": 5,
+      "elapsed_seconds": 0.01759033399866894,
+      "pid": 86881,
+      "pgid": 86881,
+      "owned_new_session": true,
+      "returncode": 0,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "stdout_snapshot": {
+        "bytes": 41,
+        "sha256": "918f0008f33c464fe54006cfead307e5935759a1422c6e451b2474c1a9b1e061",
+        "mode": 420
+      },
+      "stderr_snapshot": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "label": "verify-index",
+      "argv": [
+        "git",
+        "ls-files",
+        "--stage"
+      ],
+      "cwd": "$PRIVATE/work/Protracker-2.4A",
+      "whole_call_seconds": 30,
+      "cleanup_reserve_seconds": 5,
+      "elapsed_seconds": 0.020913125001243316,
+      "pid": 86882,
+      "pgid": 86882,
+      "owned_new_session": true,
+      "returncode": 0,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "stdout_snapshot": {
+        "bytes": 1197014,
+        "sha256": "1601e89645535bd9c804ebdca7488f865c5492dbeaa97740c9cbd31dcd96ef85",
+        "mode": 420
+      },
+      "stderr_snapshot": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "label": "controller-compile",
+      "argv": [
+        "cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-I.",
+        "tests/editor_mixed_readers_prepare_test.c",
+        "src/editor/editor_mixed_readers_prepare.c",
+        "src/editor/sampler_mixed_readers.c",
+        "src/core/mixed_readers_activation.c",
+        "src/core/mixed_scheduled_readers.c",
+        "src/core/elapsed_clock.c",
+        "src/editor/sampler_paula.c",
+        "src/editor/sampler_wavetable.c",
+        "src/core/amigus_voice_plan.c",
+        "src/editor/sampler.c",
+        "src/editor/slots.c",
+        "src/core/pcm_filtered.c",
+        "src/core/slices.c",
+        "src/core/pattern.c",
+        "src/core/document.c",
+        "src/core/pp20.c",
+        "src/core/project.c",
+        "src/core/mod_project.c",
+        "src/core/mod_inspect.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "src/core/wav.c",
+        "src/core/svx.c",
+        "src/core/raw.c",
+        "src/editor/editor.c",
+        "src/editor/song.c",
+        "src/editor/view.c",
+        "src/editor/workflow.c",
+        "src/editor/sample_range.c",
+        "src/editor/wave_summary.c",
+        "src/core/sample_usage.c",
+        "src/core/event_resource.c",
+        "src/core/flow.c",
+        "src/core/pitch.c",
+        "src/core/amigus_reservation.c",
+        "src/editor/sampler_invert_song.c",
+        "src/core/render_invert.c",
+        "src/core/invert_bank.c",
+        "src/core/invert_sequence.c",
+        "src/core/invert_pcm.c",
+        "src/core/invert_loop.c",
+        "src/core/amigus_session.c",
+        "src/core/amigus_fifo.c",
+        "src/core/amigus_pcm_pack.c",
+        "src/core/studio_consumer.c",
+        "src/core/studio_pump.c",
+        "src/core/studio_queue.c",
+        "src/editor/editor_studio.c",
+        "src/editor/sampler_song.c",
+        "src/editor/sampler_studio.c",
+        "src/core/studio_song.c",
+        "src/core/studio_plan.c",
+        "src/core/render.c",
+        "src/core/timeline.c",
+        "src/core/frame_clock.c",
+        "src/core/studio_mix.c",
+        "src/core/voice.c",
+        "src/editor/wavetable_song.c",
+        "src/editor/wavetable_voices.c",
+        "src/editor/wavetable_dispatch.c",
+        "src/core/amigus_render_voice.c",
+        "src/editor/paula_preflight.c",
+        "src/core/paula_render_voice.c",
+        "src/core/amigus_wavetable_cache.c",
+        "src/core/amigus_sample_ram.c",
+        "src/core/sample_cache.c",
+        "src/core/playback_pcm.c",
+        "src/editor/editor_mixed.c",
+        "src/editor/mixed_owner.c",
+        "src/editor/mixed_transport.c",
+        "src/editor/mixed_preflight.c",
+        "src/editor/paula_voices.c",
+        "src/editor/paula_dispatch.c",
+        "src/editor/editor_wavetable.c",
+        "src/platform/sample_import.c",
+        "src/platform/raw_import.c",
+        "src/platform/mod_import.c",
+        "src/platform/pp20_import.c",
+        "-o",
+        "$PRIVATE/outputs/editor-mixed-readers-prepare/v1/attempt-abu1j_nf/controller"
+      ],
+      "cwd": "$PRIVATE/outputs/editor-mixed-readers-prepare/v1/attempt-abu1j_nf/source",
+      "whole_call_seconds": 120,
+      "cleanup_reserve_seconds": 5,
+      "elapsed_seconds": 18.14952891699795,
+      "pid": 86726,
+      "pgid": 86726,
+      "owned_new_session": true,
+      "returncode": 0,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "stdout_snapshot": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "stderr_snapshot": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    },
+    {
+      "label": "controller-run",
+      "argv": [
+        "$PRIVATE/outputs/editor-mixed-readers-prepare/v1/attempt-abu1j_nf/controller"
+      ],
+      "cwd": "$PRIVATE/outputs/editor-mixed-readers-prepare/v1/attempt-abu1j_nf/source",
+      "whole_call_seconds": 180,
+      "cleanup_reserve_seconds": 5,
+      "elapsed_seconds": 1.0411473330023,
+      "pid": 86880,
+      "pgid": 86880,
+      "owned_new_session": true,
+      "returncode": 0,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "stdout_snapshot": {
+        "bytes": 2273,
+        "sha256": "b3afac00b309d959418568141eb81a0977fabfbfdfde3eaa7688b1d2167ff22e",
+        "mode": 420
+      },
+      "stderr_snapshot": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      }
+    }
+  ],
+  "full_stdout_markers": [
+    "SAMPLER MIXED FACTORY PASS:24 genuine16-reader paired8/16/24 master lifetimes; real private validation and persistent/TEMP pins; selective signed8 Chip and8/16 card literal endian/channel/padding oracles; exact saves/grid/independent proof orders; constructor/admission/all-phase cancel/source expiry/alias/reentry/fragmented cache-slot2 arena-block0; factory queued effects/unadopted pins/CONTROL+STOP/output guards/budget;6 released caller/current persistent-pin lifetimes;32-reader replacement/pressure and malformed exact-domain drains; SOFTWARE_ONLY",
+    "SAMPLER MIXED ACTIVATION PASS:12 genuine16-reader8/16/24 master/Chip8/card8+16 paired lifetimes; copied whole-packet exact-window activation, CONTROL and STOP; caller-pin expiry, literal precision/endian/channel/padding and exact saves; independent quiet/persistent retention, partial effects and one shutdown with later independent source proof;32-reader replacement pressure preserves new keys, fragmented slot2/block0 and six unpublished full-span output guards; SOFTWARE_ONLY",
+    "EDITOR MIXED READERS PREPARE PASS:12 genuine paired editor 8/16/24 master/Chip8/card8+16 precision/channel/endian lifetimes; original-window CONTROL/STOP only from positive ACTIVE keys; actual edit/undo/route/dispose veto until independent C/R and source quiet; construction/action cancellation, revision-only stale and poisoned former tables, complete unpublished/spare output/input guards, authoritative enqueue transfer, callback faults/partial effects, slot serial reuse and exact master saves; SOFTWARE_ONLY",
+    "MIXED READERS PASS:12 genuine16-action paired lifetimes;20 constructor/180 typed admissions;78 callback/effect/proof cases;24 explicit clock/refusal/pending/cancellation groups;6 malformed-reader envelopes;18 endian/loop/padding groups;6 full alias,32-reader capacity/replacement and control/STOP groups; expired controls/consumed close0; exact common grid/master saves; SOFTWARE_ONLY",
+    "amigus reservation lifecycle: PASS (fake library, no hardware)",
+    "WAVETABLE UPLOAD JOB PASS: bounded steps, cancellation, unpublished leases, partial words, live ownership loss and hit transfer; injected only",
+    "AMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only"
+  ],
+  "full_stdout": {
+    "bytes": 2273,
+    "sha256": "b3afac00b309d959418568141eb81a0977fabfbfdfde3eaa7688b1d2167ff22e",
+    "mode": 33188
+  },
+  "source_review_history": {
+    "review-v1.json": {
+      "bytes": 5011,
+      "sha256": "c018316d478926a09cb3a145e26aceecf65a16894a59f673f9cf76e199ab5578",
+      "mode": 33188
+    },
+    "review-v1-supplement.json": {
+      "bytes": 2377,
+      "sha256": "1efd13b07059bdf4b1e4236e61ccf746906ef6e8e1b54821104856bd5d7f3d89",
+      "mode": 33188
+    },
+    "review-v2.json": {
+      "bytes": 8712,
+      "sha256": "1f5b58c019abee7d66f9078816b2ef749a4eb7142dd2393cf1377f87ce2be208",
+      "mode": 33188
+    },
+    "review-v3.json": {
+      "bytes": 10052,
+      "sha256": "8e2d079df18da985722d72edaf5807febd41b0585598be527ada23b855dd3d2d",
+      "mode": 33188
+    },
+    "review-v4.json": {
+      "bytes": 7858,
+      "sha256": "5ae92518d493af7d30ee9e09dc2ebbfc087a8c26e29bd156703a002dd288a399",
+      "mode": 33188
+    }
+  },
+  "historical_v4_host": {
+    "run": {
+      "bytes": 177756,
+      "sha256": "c1ba9deeedfde6f45cb27b1fca4cf236362c99f4af9666fdca3c1cd39642f568",
+      "mode": 33188
+    },
+    "review": {
+      "bytes": 15095,
+      "sha256": "35078616098561386178b7bf15beff2c7b153b9c017d136dd6c444d9233911e3",
+      "mode": 33188
+    },
+    "verification": {
+      "bytes": 19774,
+      "sha256": "e3f2081ec13729f572bf4a8be668a651cc6761f7ab6bbc836fa733eccfd298e5",
+      "mode": 33188
+    },
+    "source937_all_raw_logs_product_unchanged": true
+  },
+  "preserved_prior_actual_failures": [
+    {
+      "attempt": "attempt-lvqgmuc5",
+      "run": {
+        "bytes": 174039,
+        "sha256": "a226ce6b7b201dc8bc7ade4780cbd5d0df1dd4d9ae16cc3f4a6f3ca37f7ab357",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 6196,
+        "sha256": "d131016fc8f0ccb83ebeed9affcf0803816ecb738a03c64274feb82f3306deaa",
+        "mode": 33188
+      },
+      "source937_exact": true,
+      "compile_only_rc1": true,
+      "no_run_call": true,
+      "driver_reaped_group_quiescent": true
+    },
+    {
+      "attempt": "attempt-vnbghqxd",
+      "run": {
+        "bytes": 174565,
+        "sha256": "61b6320cb0a7e2b1648e63eeb55713525c99153afdc2f554bf8b1bfff97246d3",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 2397,
+        "sha256": "ad70d630a3b3fbb970ea106d6b23cee7f13f6b3fa092045b4510ef2c362c30ac",
+        "mode": 33188
+      },
+      "source937_exact": true,
+      "compile_only_rc1": true,
+      "no_run_call": true,
+      "driver_reaped_group_quiescent": true
+    }
+  ],
+  "preserved_portable_v1_failure": {
+    "manifest": {
+      "bytes": 2065287,
+      "sha256": "cd7b1bba3acdb58ba65b05d857023fff59f058a034341b822ca7d23832242fca",
+      "mode": 33188
+    },
+    "compile_link_stderr": {
+      "bytes": 3261,
+      "sha256": "bc3ba81125fe2df83e350b22c6b6c37e1926b3147241ad67e00dce1eef9386c3",
+      "mode": 33188
+    },
+    "source937_exact_v4": true,
+    "calls": 91,
+    "dependencies": 223,
+    "retained_files": 1147,
+    "all_bytes_full_modes_and_raw_logs_unchanged": true,
+    "product_absent": true,
+    "all_drivers_reaped_groups_quiescent": true,
+    "execution": "NEVER_EXECUTED"
+  },
+  "publication_v1_frozen_historical": {
+    "prepare_saved_host.py": {
+      "bytes": 10785,
+      "sha256": "53c25888e104b66375f8cf43e4d6b078c64da4e89540fc712703a0e618637374",
+      "mode": 33188
+    },
+    "verify_host_packet.py": {
+      "bytes": 10124,
+      "sha256": "bd825c8f011600912141dc96fc6f3b0203f6400eaa711249cf77495195517886",
+      "mode": 33188
+    }
+  },
+  "observations": {
+    "current-observation.json": {
+      "bytes": 7452,
+      "sha256": "29be6c5f2efa0aeff2c8b4411451f05f9cd33ba1506a8b5a419df1b0a60fa197",
+      "mode": 33188
+    },
+    "calls-observation.json": {
+      "bytes": 14925,
+      "sha256": "e583589a6b317f8391c2047fca26afd6ff7cdc36890bba90645bfbf90de3ead1",
+      "mode": 33188
+    },
+    "history-observation.json": {
+      "bytes": 3464,
+      "sha256": "abc17d6ab07f7a65a31a60f7b77256479b347a6ca9256cd61fa3a713bfc16e4a",
+      "mode": 33188
+    }
+  },
+  "final_current_nine_protected16_head_index_recheck": true,
+  "limitations": [
+    "The saved host success qualifies these genuine software paths with ordinary-memory fake card/library/port callbacks. It does not establish device upload capacity/order/completion, hardware voice stop, real Fast/Chip placement, DMA, IRQ, native runtime stack, exact live timing, emulator/physical execution, audio or listening acceptance.",
+    "The v5 candidate has no portable/native crossbuild or target evidence in this review. The immutable v4 portable-v1 compile failure remains FIRST_FAILURE_RETAINED and its expected stdout file is preparation only.",
+    "Eight recorded successful calls positively bind raw logs, owned new sessions, reaped drivers and quiescent process groups. No forced timeout/descendant cleanup failure path occurred in this run; no replay of those paths was performed.",
+    "The original host runner records source, compile/run path, logs and custody, but has no separate pre-execution binary fingerprint. This report binds the currently saved post-execution binary snapshot.",
+    "Historical source freeze and correction documents retain their original SOURCE_ONLY/NOT_RUN statuses. The distinct v5 HOST execution is bound by this separate final report; no history or first failure was rewritten.",
+    "Publication-v1 callers remain frozen and source-only, selecting historical attempt-exq1v9l8. No publication, caller import or execution occurred during this review."
+  ]
+}

@@ -138,6 +138,16 @@ enum pt_mixed_readers_result pt_mixed_activation_service_reader(struct pt_mixed_
 enum pt_mixed_readers_result pt_mixed_activation_reader_key(struct pt_mixed_readers_activation *,
     uint64_t,unsigned,struct pt_mixed_readers_key *);
 enum pt_mixed_readers_result pt_mixed_activation_stop(struct pt_mixed_readers_activation *);
+/* Task-side veto for a fault observed by an enclosing guarded controller.
+ * Caller must hold whole-entry task/activation exclusion and positively know
+ * that this is its still-live genuine owner. NULL is a no-op. This only latches
+ * failure, advances its fault serial and notifies an existing release latch;
+ * no queue walk, clock, callback, cancellation, release or hardware effect.
+ * May be called within a serialized task-port callback while busy/task_busy;
+ * never from an IRQ, a concurrent caller or after actual owner consumption.
+ * It prevents later fire, but proves no command/reader/source quiet and never
+ * changes an actual callback reply or transfers ownership. */
+void pt_mixed_activation_fail_closed(struct pt_mixed_readers_activation *);
 /* Independently scheduled exact-ticket invocation, never an automatic timer.
  * Fire traverses copied values only; early preserves original invocation,
  * late/uncertainty/reentry latch failure without erasing possible effects. */

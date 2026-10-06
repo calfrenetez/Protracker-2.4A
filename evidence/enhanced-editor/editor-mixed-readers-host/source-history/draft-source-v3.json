@@ -1,0 +1,66 @@
+{
+  "status": "DRAFT_SOURCE_ONLY_NOT_COMPILED_NOT_RUN",
+  "baseline": "a02d53f2047753fd8673cbcc377d772da1ceb531",
+  "overlays": {
+    "src/editor/editor_mixed_readers_prepare.h": {
+      "bytes": 9059,
+      "sha256": "3ab02131a83d89457fe2f0a898b41b6281fb059b137798e174e6167238e19c80",
+      "mode": 33188
+    },
+    "src/editor/editor_mixed_readers_prepare.c": {
+      "bytes": 39218,
+      "sha256": "5c62bf54508f3a84ced0f7858758752125cee831ce5b96c9e3556d9fe6b86f34",
+      "mode": 33188
+    },
+    "tests/editor_mixed_readers_prepare_test.c": {
+      "bytes": 39046,
+      "sha256": "c7449524a2aae19930a63f99c50178969892ac200e51ed34480ffffdc15b5dee",
+      "mode": 33188
+    },
+    "tests/test_editor_mixed_readers_prepare.py": {
+      "bytes": 14109,
+      "sha256": "fbccf17297f79ecd8e6f3868053e6d49271b0f4822d2964a9e615b8e038a4161",
+      "mode": 33188
+    },
+    "src/core/mixed_readers_activation.h": {
+      "bytes": 10423,
+      "sha256": "64edd461b1413fc5b896f7b972b41421c22f04f327c66a21dfbc9b7043394ab5",
+      "mode": 33188
+    },
+    "src/core/mixed_readers_activation.c": {
+      "bytes": 39498,
+      "sha256": "edd96b2ebc4b076e66a865eeaa637e25e0cfe56e480d46c0c4b6746a028d456c",
+      "mode": 33188
+    },
+    "src/core/mixed_scheduled_readers.h": {
+      "bytes": 11336,
+      "sha256": "b24b9e762906bae10d5a511cd949c547715aada7893156e932aeab4315af70c4",
+      "mode": 33188
+    },
+    "src/core/mixed_scheduled_readers.c": {
+      "bytes": 33837,
+      "sha256": "2808fbbaf081d48c8ab70c36b57f2882d5bb0677aeb6f218c7a89d3bd0b570df",
+      "mode": 33188
+    },
+    "tests/mixed_scheduled_readers_test.c": {
+      "bytes": 42588,
+      "sha256": "18a0bc644ecdec004d23e00aa1a3714d78650151afccf914df24514cc79295fe",
+      "mode": 33188
+    }
+  },
+  "overlay_count": 9,
+  "source_file_count_expected": 937,
+  "source_python_ast": "PARSED_ONLY_NOT_EXECUTED",
+  "index_sha256": "1601e89645535bd9c804ebdca7488f865c5492dbeaa97740c9cbd31dcd96ef85",
+  "supersedes": "draft-source-v2.json",
+  "preserved_actual_first_failure": "attempt-lvqgmuc5",
+  "corrections": [
+    "Public controller includes defining sampler_internal.h for complete storage span",
+    "Nested inherited fixture uses PT_MIXED_READERS_TEST_MAIN foundation entry hook instead of overwritten main macro",
+    "Three compiler indentation diagnostics fixed without control-flow change",
+    "Nine controlled overlays include unique typed PT_MIXED_REPLY_PENDING numeric0 canonical root correction and exact fixture hook",
+    "Five exact root pins checked before compilation; source inventory remains937"
+  ],
+  "qualifier": "NOT_RUN_WAITING_ROOT_SOURCE_AUDIT",
+  "scope": "Request-driven HOST draft only; no native, target, timer, DMA, MMIO, audio."
+}

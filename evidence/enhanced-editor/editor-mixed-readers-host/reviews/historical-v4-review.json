@@ -1,0 +1,190 @@
+{
+  "review_status": "BOUNDED_PASS_SAVED_HOST_QUALIFICATION",
+  "findings": [],
+  "scope": "Independent inspection of saved actual host ASan/UBSan results and exact source/custody; no compiler or fixture replay and no targets.",
+  "baseline": "a02d53f2047753fd8673cbcc377d772da1ceb531",
+  "qualified_attempt": "attempt-exq1v9l8",
+  "actual_run_manifest": {
+    "bytes": 177756,
+    "sha256": "c1ba9deeedfde6f45cb27b1fca4cf236362c99f4af9666fdca3c1cd39642f568",
+    "mode": 33188
+  },
+  "verification": "verification.json",
+  "verification_sha256": "e3f2081ec13729f572bf4a8be668a651cc6761f7ab6bbc836fa733eccfd298e5",
+  "execution_result": {
+    "status": "PASS_COMPLETE",
+    "compile_returncode": 0,
+    "run_returncode": 0,
+    "compile_seconds": 17.39998087499407,
+    "run_seconds": 0.9982051249971846,
+    "compiler_and_run_stderr": "EMPTY",
+    "assertions": "-UNDEBUG in exact C99/O1/Wall/Wextra/Werror/ASan/UBSan compiler argv",
+    "source_files": 937,
+    "overlays": 9,
+    "ordered_translation_units": 78,
+    "calls": 8,
+    "driver_reaped_and_owned_group_quiescent_for_all_calls": true,
+    "stdout_bytes": 2273,
+    "stdout_sha256": "b3afac00b309d959418568141eb81a0977fabfbfdfde3eaa7688b1d2167ff22e",
+    "full_software_marker_count": 7,
+    "full_software_markers": [
+      "SAMPLER MIXED FACTORY PASS:24 genuine16-reader paired8/16/24 master lifetimes; real private validation and persistent/TEMP pins; selective signed8 Chip and8/16 card literal endian/channel/padding oracles; exact saves/grid/independent proof orders; constructor/admission/all-phase cancel/source expiry/alias/reentry/fragmented cache-slot2 arena-block0; factory queued effects/unadopted pins/CONTROL+STOP/output guards/budget;6 released caller/current persistent-pin lifetimes;32-reader replacement/pressure and malformed exact-domain drains; SOFTWARE_ONLY",
+      "SAMPLER MIXED ACTIVATION PASS:12 genuine16-reader8/16/24 master/Chip8/card8+16 paired lifetimes; copied whole-packet exact-window activation, CONTROL and STOP; caller-pin expiry, literal precision/endian/channel/padding and exact saves; independent quiet/persistent retention, partial effects and one shutdown with later independent source proof;32-reader replacement pressure preserves new keys, fragmented slot2/block0 and six unpublished full-span output guards; SOFTWARE_ONLY",
+      "EDITOR MIXED READERS PREPARE PASS:12 genuine paired editor 8/16/24 master/Chip8/card8+16 precision/channel/endian lifetimes; original-window CONTROL/STOP only from positive ACTIVE keys; actual edit/undo/route/dispose veto until independent C/R and source quiet; construction/action cancellation, revision-only stale and poisoned former tables, complete unpublished/spare output/input guards, authoritative enqueue transfer, callback faults/partial effects, slot serial reuse and exact master saves; SOFTWARE_ONLY",
+      "MIXED READERS PASS:12 genuine16-action paired lifetimes;20 constructor/180 typed admissions;78 callback/effect/proof cases;24 explicit clock/refusal/pending/cancellation groups;6 malformed-reader envelopes;18 endian/loop/padding groups;6 full alias,32-reader capacity/replacement and control/STOP groups; expired controls/consumed close0; exact common grid/master saves; SOFTWARE_ONLY",
+      "amigus reservation lifecycle: PASS (fake library, no hardware)",
+      "WAVETABLE UPLOAD JOB PASS: bounded steps, cancellation, unpublished leases, partial words, live ownership loss and hit transfer; injected only",
+      "AMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only"
+    ]
+  },
+  "custody_checks": [
+    {
+      "check": "Actual saved source = frozen/current candidate",
+      "result": "PASS",
+      "evidence": "All937 saved source files match run manifest bytes/hashes/modes. All nine overlays match current root checkout and exact v4 frozen copies in bytes/full modes. Five root paths replace existing baseline entries; four writer paths add entries. Saved Git archive is byte-identical to read-only a02d archive, its other927 file bytes match source with explicit data-filter regular-file664-to644 normalization. Exact580-byte committed font reproduces saved header. Source932+new4+font1 derives937."
+    },
+    {
+      "check": "Exact complete 78-unit translation/link list",
+      "result": "PASS",
+      "evidence": "Independently derived unit list from saved fixture and AST-only constants from saved sampler/editor/Studio/dispatch/preflight runners equals actual ordered78 list and compiler argv. The resulting attempt-owned controller is exactly the path in the one recorded run argv. No import or execution was used for this derivation."
+    },
+    {
+      "check": "Owned bounded calls and raw evidence",
+      "result": "PASS",
+      "evidence": "Six recorded Git preparation/verification calls and compiler/run calls are all RC0 with empty stderr, positive driver_reaped/group_quiescent and own session PGID. Exact actual stdout/stderr file fingerprints match all eight calls. Compiler120s/run180s bounds and5s cleanup reserve remain unchanged. No timeout or cleanup failure branch occurred."
+    },
+    {
+      "check": "Root admission and prior reviews/failures",
+      "result": "PASS",
+      "evidence": "root-corrected-qualifier-authorization-v3.json pins v4 source freeze and source review-v4 bytes/hashes exactly, names separate controlled host-only attempt and preserves both prior failures. Source reviews v1/supplement/v2/v3/v4 remain separate. Both original failed937 inventories/manifests/logs are exact, retain RC1 compile-only status and no run, with original6196/2397-byte stderr. Current success does not rewrite prior failures."
+    },
+    {
+      "check": "Protected existing work and Git state",
+      "result": "PASS",
+      "evidence": "All16 original protected paths match baseline custody controls and run before/after bytes/modes. Current HEAD remains a02d; index SHA1601e89645535bd9c804ebdca7488f865c5492dbeaa97740c9cbd31dcd96ef85 matches recorded pre/post Git outputs, with empty staged diff. Reviewer writes only its scoped final report directory."
+    }
+  ],
+  "qualified_assertion_checks": [
+    {
+      "check": "Genuine established masters, factory, activation and barrier",
+      "result": "BOUNDED_HOST_PASS",
+      "evidence": "Saved fixture uses actual pt_document_new/editor_init/sampler pin, genuine pt_sampler_mixed factory and owned pt_mixed_activation queue, actual pt_editor_mixed_attach and change barrier. emp_open asserts actual hook and zero allocations immediately after begin; allocator asserts hook ownership before every allocation. It executes already-established8/16/24-bit masters with12 paired16-action precision/cache/endian groups; card bus/library and hardware port are ordinary-memory fakes."
+    },
+    {
+      "check": "Independent C/R/source quiet and actual editor veto",
+      "result": "BOUNDED_HOST_PASS",
+      "evidence": "emp_barrier invokes actual edit, undo, route and dispose APIs in8 combinations and preserves revision/generation/event/route with hook retained. Command and reader services drain independently in both orders; consumed pool and still-live activation retain hook. Source_close called once, source_quiet0 keeps veto, distinct source_quiet1 releases hook only after exact callback owner and all command/reader absences. Cancelled unpublished jobs at23 preparation steps and3 construction phases allocate no further resources or invent proof."
+    },
+    {
+      "check": "Captured stale addresses, adopted reentry and live-owner fault seam",
+      "result": "BOUNDED_HOST_PASS",
+      "evidence": "emp_revision_poison mutates revision and/or poisons former project arrays, then get/advance/refusal and NULL independent service drain without former-table reads; actual consumed0/NULL is recorded. emp_adopted_begin_poison covers aliased busy begin readonly refusal and admitted original input reentry fault before source walk; subsequent nonbusy reuse remains readonly. The exact root task-only seam latches existing failure/fault serial only; controller exact ordinary registration checks and release-consumption retirement precede user release/free/reentry, preventing stale-owner seam use."
+    },
+    {
+      "check": "Copied-only fire and actual original windows",
+      "result": "BOUNDED_HOST_PASS",
+      "evidence": "emp_geometry compares copied first/last to independent literal-grid oracle100+ceil(frame*709379/48000), and fake commit asserts ticks in original [first,last). emp_issue invokes existing fire directly at actual admitted ticket. Clock revision-only return0 AND1 after earlier WAITING publication preserve tickets and transfer, fail task publication then prohibit old direct fire commit without editor-walking fire wrappers. Clock/commit forwarders read copied original callbacks only;11 fault groups include one partial actual mask that is retained for independent shutdown."
+    },
+    {
+      "check": "Positive ACTIVE keys and actual transfer identity",
+      "result": "BOUNDED_HOST_PASS",
+      "evidence": "CONTROL before positive ACTIVE proof is refused. Controller obtains exact positive original key internally through genuine reader_key; a detached C does not erase R ownership, then CONTROL/STOP operate independently. Callback fault during enqueue still returns real admitted OK/ticket and retains transferred state. Slot-reuse tests reject expired C/R serials without changing sentinel outputs."
+    },
+    {
+      "check": "Full spans, unknown ownership and consumed close",
+      "result": "BOUNDED_HOST_PASS",
+      "evidence": "emp_aliases tests12 control/source/context/workspace/cache spans and whole unused PCM capacity/workspace tails through enqueue/ref/get/service aliases, with exact byte preservation, unchanged sentinel/callback counts and no artificial fault. Inherited factory/activation fixtures include unpublished complete reader/cache spans and retired/persistent masters. Seven local scratch guards retain whole sizeof and pre-write admission through uintptr_t helper. emp_drop proves actual pool/activation/queue NULL; if firstclose0, distinct hook-drain close repeats no allocation/release/source close/quiet callbacks and never retries freed child storage. Final ordinary/Chip/master ledgers all empty."
+    },
+    {
+      "check": "Authoritative master preservation and complete inherited suites",
+      "result": "BOUNDED_HOST_PASS",
+      "evidence": "emp_same encodes project with actual pt_project_size/encode and compares complete original bytes; it retains actual master depth and signed PCM samples across cache formats, cancellation and proof lifetimes. Output contains real factory/activation constructor markers and explicit new controller/foundation/wavetable/reservation/upload markers from unchanged inherited bodies, seven complete lines total. Assertions remained enabled and run RC0 with empty sanitizer stderr."
+    }
+  ],
+  "limitations": [
+    "Saved host qualification covers the listed actual fixtures only. Reviewer performed no replay and does not infer exhaustive correctness or arbitrary invalid-pointer/concurrent/IRQ safety beyond genuine immutable/exclusion caller contracts.",
+    "Ordinary recorded process completion and positive group absence do not qualify timeout/TERM/KILL/exception cleanup failure branches; none occurred in this successful attempt.",
+    "Runner binds exact saved source, compile/run argv and attempt-owned executable path; it did not hash the executable immediately before execution. Reviewer records a separate after-execution product snapshot5751544B SHAea742eb2cb364444a8be0258e1b11530fa85e25a513e3df7eb11ce1dfa5a6d7a without claiming pre-run binary attestation.",
+    "This is a request-driven host controller for genuine already-established masters. No song lowering, classic PLAY integration or production activation port/timer is delivered by this slice.",
+    "Card RAM/library/ports are ordinary-memory fakes. No real Fast/Chip placement, card capacity/upload completion/order, DMA/voice stop, native aggregate stack, IRQ/WCET, real elapsed scheduling or clock timing is qualified.",
+    "No native/emulator/real-A1200 operation, target cleanup, hardware control, audible output or human listening acceptance occurred. Shared transport admission is still a separate workflow.",
+    "Both compiler failures remain explicit preserved failures; corrected host PASS does not promote earlier immutable native candidates or their stack metadata."
+  ],
+  "prior_actual_failures": [
+    {
+      "attempt": "attempt-lvqgmuc5",
+      "run": {
+        "bytes": 174039,
+        "sha256": "a226ce6b7b201dc8bc7ade4780cbd5d0df1dd4d9ae16cc3f4a6f3ca37f7ab357",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 6196,
+        "sha256": "d131016fc8f0ccb83ebeed9affcf0803816ecb738a03c64274feb82f3306deaa",
+        "mode": 33188
+      },
+      "source937_exact": true,
+      "compile_only_rc1": true,
+      "no_run_call": true,
+      "driver_reaped_group_quiescent": true
+    },
+    {
+      "attempt": "attempt-vnbghqxd",
+      "run": {
+        "bytes": 174565,
+        "sha256": "61b6320cb0a7e2b1648e63eeb55713525c99153afdc2f554bf8b1bfff97246d3",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 2397,
+        "sha256": "ad70d630a3b3fbb970ea106d6b23cee7f13f6b3fa092045b4510ef2c362c30ac",
+        "mode": 33188
+      },
+      "source937_exact": true,
+      "compile_only_rc1": true,
+      "no_run_call": true,
+      "driver_reaped_group_quiescent": true
+    }
+  ],
+  "root_authorization": {
+    "bytes": 965,
+    "sha256": "746d41d3381f60fbee045ee1c667cff7fbf3602bc1c8daaecab5954acd663231",
+    "mode": 33188
+  },
+  "prior_source_review_history": {
+    "review-v1.json": {
+      "bytes": 5011,
+      "sha256": "c018316d478926a09cb3a145e26aceecf65a16894a59f673f9cf76e199ab5578",
+      "mode": 33188
+    },
+    "review-v1-supplement.json": {
+      "bytes": 2377,
+      "sha256": "1efd13b07059bdf4b1e4236e61ccf746906ef6e8e1b54821104856bd5d7f3d89",
+      "mode": 33188
+    },
+    "review-v2.json": {
+      "bytes": 8712,
+      "sha256": "1f5b58c019abee7d66f9078816b2ef749a4eb7142dd2393cf1377f87ce2be208",
+      "mode": 33188
+    },
+    "review-v3.json": {
+      "bytes": 10052,
+      "sha256": "8e2d079df18da985722d72edaf5807febd41b0585598be527ada23b855dd3d2d",
+      "mode": 33188
+    },
+    "review-v4.json": {
+      "bytes": 7858,
+      "sha256": "5ae92518d493af7d30ee9e09dc2ebbfc087a8c26e29bd156703a002dd288a399",
+      "mode": 33188
+    }
+  },
+  "performed": [
+    "Read saved actual host manifest and all eight raw log pairs",
+    "Read saved assertion fixture/genuine barrier/factory/activation controls without executing them",
+    "Verify current/frozen/saved9 and full937 inventory, exact archive/font/78-unit AST derivation, protected16/HEAD/index",
+    "Bind root authorization/source review and preserve both failed manifests/logs/source inventories",
+    "Write only final private report and verification files"
+  ],
+  "reviewer_compiler_test_product_target_replays": 0,
+  "edits_complete": true
+}

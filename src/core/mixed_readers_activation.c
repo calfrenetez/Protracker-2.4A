@@ -69,6 +69,8 @@ static int slot_index(unsigned route,unsigned slot,unsigned *index)
  if(route==PT_MIXED_READERS_AMIGUS&&slot<16){*index=4+slot;return 1;}return 0;}
 static void fault(struct pt_mixed_readers_activation *b)
 {b->failed=1;++b->faults;if(b->release_latch)*b->release_latch=1;}
+void pt_mixed_activation_fail_closed(struct pt_mixed_readers_activation *b)
+{if(b)fault(b);}
 static int enter(struct pt_mixed_readers_activation *b)
 {if(b->busy){fault(b);return 0;}b->busy=1;return 1;}
 static int task_enter(struct pt_mixed_readers_activation *b)
@@ -348,7 +350,7 @@ static enum pt_mixed_readers_reply backend_reader(void *context,const struct pt_
         for(i=0;i<PT_MIXED_ACTIVATION_COMMANDS;++i)if(b->command[i].held)
             for(j=0;j<b->command[i].packet.count;++j)if(key_equal(b->command[i].packet.key+j,&r->identity.key)){
                 struct activation_command *c=b->command+i;
-                if(c->command==PT_MIXED_COMMAND_WAITING){if(!cancel){b->busy=0;return PT_MIXED_PENDING;}c->command=PT_MIXED_COMMAND_CANCELLED_BEFORE;geometry_drop(c);}
+                if(c->command==PT_MIXED_COMMAND_WAITING){if(!cancel){b->busy=0;return PT_MIXED_REPLY_PENDING;}c->command=PT_MIXED_COMMAND_CANCELLED_BEFORE;geometry_drop(c);}
                 if(c->command==PT_MIXED_COMMAND_CANCELLED_BEFORE&&c->packet.action[j].kind==PT_MIXED_READERS_TRIGGER&&!c->adopted[j])c->state[j]=PT_MIXED_READER_NONE;
                 else c->state[j]=PT_MIXED_READER_RETIRED;
             }

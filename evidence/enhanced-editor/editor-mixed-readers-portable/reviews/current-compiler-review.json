@@ -1,0 +1,127 @@
+{
+  "schema": 1,
+  "projection": "current_independent_review",
+  "origin": {
+    "private_file": "portable-preparation-v2/review-final-v1/review.json",
+    "original_pin": {
+      "bytes": 11306,
+      "sha256": "d36bb2e96266534e95e0e3d2fd5204ce2aa7754a56290e5a1a710a932b51cfc1"
+    }
+  },
+  "public_bodies_verified": "Only the allowlisted public projection/log bodies; original whole manifests/source/tools/runtime/dependency/log bodies remain private",
+  "status": "PASS_INDEPENDENT_SAVED_COMPILER_LINK_ONLY_NEVER_EXECUTED",
+  "review_status": "BOUNDED_PASS_SAVED_COMPILER_QUALIFICATION",
+  "findings": [],
+  "baseline": "a02d53f2047753fd8673cbcc377d772da1ceb531",
+  "qualified_attempt": "controller-portable-v2",
+  "compiler_result": {
+    "status": "PASS_COMPILER_LINK_ONLY_NEVER_EXECUTED",
+    "compiler_driver_calls": 91,
+    "all_returncode_zero": true,
+    "all_stderr_empty": true,
+    "all_recorded_driver_reaped_and_owned_group_quiescent": true,
+    "compile_link_seconds": 7.676245750000817,
+    "overall_seconds": 25.660566916994867,
+    "source_files": 937,
+    "ordered_translation_units": 78,
+    "independently_parsed_actual_dependency_paths": 223,
+    "retained_members": 1164,
+    "current_total_packet_members_including_manifest_verifier": 1166,
+    "configured_flags": [
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-I.",
+      "-fbbb=-"
+    ],
+    "explicit_environment": {
+      "PATH": "/usr/bin:/bin",
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TMPDIR": "/private/tmp"
+    },
+    "bounds": {
+      "overall_seconds": 600,
+      "each_compiler_call_seconds": 120,
+      "each_git_readback_seconds": 20,
+      "first_failure": "RETAINED_NO_RETRY"
+    }
+  },
+  "checks": [
+    {
+      "check": "Exact compiler/link product and once-only sequence",
+      "result": "BOUNDED_COMPILER_PASS",
+      "evidence": "Actual2479762-byte terminal manifest959351939d9b5c332cb27df69a86a6a56d4e63f6a801553ee9eacd8cfb1e38ae binds exactly91 driver calls: one version, four helper lookups, seven runtime lookups,78 dependency calls, one compile/link. Independently matched every label, complete argv, source cwd, explicit environment, raw stdout/stderr descriptor, RC0 and empty stderr. New510392-byte0755 productf0a35094b0e7c9f806f653155b6bfffcb875da9155a5f955691ba1263beb92a7 has Amiga HUNK magic0x3f3 and all seven complete expected software assertion strings. This is byte/compiler provenance; no native stdout or execution result is produced by these reads."
+    },
+    {
+      "check": "Exact qualified source and root admission freeze",
+      "result": "PASS_CUSTODY",
+      "evidence": "Root freeze1121689B/82aca3756eceaf9e056342a16ed58b38b50fd051c744d4bae85241fabf56e16c matches its original and saved copy, qualified schema/profile/baseline and source-only review pin. Complete937 saved source before/after inventories match freeze/current-v5 HOST inputs and modes, with exact78 ordered translation units. Independent saved archive932 src/tests files plus generated580-byte committed font plus nine v5 overlays (five replacements/four additions) reconstructs all source bytes. All nine current/saved/frozen byte+mode overlay pins match; no protected uncommitted display files are adopted as candidate overlays."
+    },
+    {
+      "check": "Compiler, interpreter and actual dependency/runtime bodies",
+      "result": "PASS_CUSTODY",
+      "evidence": "Read1278 distinct ordinary descriptor paths without candidate import. Pinned explicit Python interpreter, reviewed builder/verifier references, five compiler/helper tools and seven runtime inputs match bytes/modes/paths. Independently parsed four raw -print-prog-name outputs and seven -print-file-name outputs; resolutions and driver-lookup-only helper facts match pins. All78 new raw -M outputs independently derive the actual223-path union and every dependency body/pin matches.223 was measured anew, not inferred from preserved failed-v1 counts."
+    },
+    {
+      "check": "Bounds and recorded positive completion",
+      "result": "PASS_SAVED_RECORDS",
+      "evidence": "All91 entries preserve OWNED_NEW_SESSION, exact positive PID=owned PGID, positive driver_reaped/group_quiescent, empty cleanup lists and\u2264115s wait inside120s call envelope with5s reserve. Recorded25.660566916994867s total is under600. Eleven exact read-only Git before/at-compiler/after argv/log records are RC0/empty stderr, with identical a02 HEAD and index bodies and empty staged diffs. No timeout, helper-survival, TERM/KILL or failed cleanup branch occurred here; no live process absence query was used."
+    },
+    {
+      "check": "Actual saved HOST and correction controls remain separate",
+      "result": "PASS_CUSTODY",
+      "evidence": "Distinct attempt-abu1j_nf remains the existing ASan/UBSan HOST PASS with exact full source/host inventory, eight complete recorded preparation/compiler/run calls and its final-v2 review/verification. Frozen v5 source/correction/root review/host authorization match all recorded current controls. Full2273-byte expected-native.stdout b3afac00b309d959418568141eb81a0977fabfbfdfde3eaa7688b1d2167ff22e equals actual saved HOST stdout and seven full lines; it is expected native output only. The crossbuild does not turn it into a native run result."
+    },
+    {
+      "check": "Earlier failures/results retained without promotion",
+      "result": "PASS_CUSTODY",
+      "evidence": "Both original HOST RC1 compile-only failures retain complete original inventories and exact copied report/stdout/stderr. Historical exq1v9l8 HOST PASS retains full separate958-file inventory and historical review. First controller-portable-v1 remains FIRST_FAILURE_RETAINED with exact1148-file inventory,937 v4 source files,91 calls/223 actual dependencies/1147 retained members and final RC1 empty stdout/exact3261-byte stderr; its product remains absent and failure-only review/verification/root receipt match. Every uniquely named preserved-v4-history copy matches its original mode/hash bytes. Old266204-byte native candidate stays unchanged and separate."
+    },
+    {
+      "check": "Offline verifier, full packet, current protected work",
+      "result": "PASS_CUSTODY",
+      "evidence": "Root offline verifier receipt3841B/01b821e2acf1d1b656b09ddbeb7eb823c80b094ea209e3623ffbed7acae3a2f2 matches exact manifest/product/source/unit/call/dependency pins and PASS_INDEPENDENT_OFFLINE_SAVED_BYTES_PORTABLE_NEVER_EXECUTED with six checks, zero compiler/subprocess calls. Reviewer did not invoke it again. All1164 retained members plus manifest and that sole verifier result form exactly1166 current ordinary files; no extra packet member is unbound. Current16 protected byte/full-mode pins and nine overlays match. Three live read-only Git queries independently confirm fixed a02 HEAD, exact1197014-byte index SHA1601e89645535bd9c804ebdca7488f865c5492dbeaa97740c9cbd31dcd96ef85 and empty staged diff."
+    }
+  ],
+  "evidence_tiers": {
+    "source_only_preparation": "Previously bounded source-only PASS for exact v2 callers; this audit did not import them.",
+    "host_execution": "Existing saved v5 ASan/UBSan PASS, separately reviewed; not replayed.",
+    "compiler_link": "This exact new product qualified only as successful compiler/link with saved-byte provenance.",
+    "native_execution": "NOT_RUN_NEVER_EXECUTED",
+    "emulator_execution": "NOT_RUN",
+    "physical_A1200_execution": "NOT_RUN",
+    "hardware_capability_or_audio_listening": "NOT_QUALIFIED"
+  },
+  "limitations": [
+    "Saved positive compiler driver/group completion records are exact; reviewer did not probe current processes. No timeout/TERM/KILL/cleanup-error path is runtime qualified by this successful attempt.",
+    "HUNK magic, full assertion-string presence and exact build provenance do not prove full native runtime behavior, aggregate stack fit/high-water, target pointer layout, CPU/WCET or real elapsed scheduling.",
+    "This fixture uses ordinary-memory fake ports/library/card bus. Crossbuild establishes no real Fast/Chip placement, card RAM capacity/upload completion/order, physical DMA/voice-stop, actual musical clock/timer/IRQ activation or listening acceptance.",
+    "No emulator/A1200 target was operated or admitted. Future exact-candidate native qualification needs fresh independently scoped ownership/holds/live guards and its established target workflow.",
+    "The seven full software lines are actual saved HOST output and expected native output. No native output or native test PASS is inferred. Earlier v4 HOST PASS, native-v1 RC1 failure and old product remain separate; no automatic target retry/cleanup is authorized."
+  ],
+  "edits_complete": true,
+  "actual_manifest": {
+    "bytes": 2479762,
+    "sha256": "959351939d9b5c332cb27df69a86a6a56d4e63f6a801553ee9eacd8cfb1e38ae",
+    "mode": 420,
+    "full_mode": 33188
+  },
+  "product": {
+    "bytes": 510392,
+    "sha256": "f0a35094b0e7c9f806f653155b6bfffcb875da9155a5f955691ba1263beb92a7",
+    "mode": 493,
+    "full_mode": 33261
+  },
+  "verification_pin": {
+    "bytes": 4486,
+    "sha256": "3981d0d745264891cbd8149593a1d00ac2ca490594121e6fc53087c984036581"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "projection": "current_offline_verification",
+  "origin": {
+    "private_file": "controller-portable-v2/saved-byte-verification-root-v1.json",
+    "original_pin": {
+      "bytes": 3841,
+      "sha256": "01b821e2acf1d1b656b09ddbeb7eb823c80b094ea209e3623ffbed7acae3a2f2"
+    }
+  },
+  "public_bodies_verified": "Only the allowlisted public projection/log bodies; original whole manifests/source/tools/runtime/dependency/log bodies remain private",
+  "status": "PASS_INDEPENDENT_OFFLINE_SAVED_BYTES_PORTABLE_NEVER_EXECUTED",
+  "compiler_calls": 0,
+  "subprocess_calls": 0,
+  "product_execution": "NEVER_EXECUTED",
+  "native_execution": "NEVER_EXECUTED",
+  "emulator_execution": "NEVER_EXECUTED",
+  "physical_execution": "NEVER_EXECUTED",
+  "target_execution": "NEVER_EXECUTED",
+  "checks": [
+    "Exact root freeze, caller/verifier and five tools/seven runtime bytes remain ordinary and pinned",
+    "Distinct v5 host binds all eight raw calls and exact nine source pins; old v4 host PASS and complete937/1148/91/223 native first failure remain separately pinned, never retroqualified",
+    "Both original RC1 compile failures remain failures with exact complete custody and saved diagnostics; old266204-byte native candidate stays separate",
+    "All frozen host/source inputs, exact successful host-call evidence, exact module overlays and protected 16 files match",
+    "Saved a02 HEAD/empty-index records and independent archive plus exact overlays/font reconstruction match; no live Git query",
+    "Exact once-only compiler/link argv/logs RC0/empty stderr, sanitized environment and saved group-quiescence records; parsed helper/runtime lookups and complete dependency union match pinned bodies; helper selection is lookup only, no helper invocation or product execution claim"
+  ],
+  "profile": "controller",
+  "baseline": "a02d53f2047753fd8673cbcc377d772da1ceb531",
+  "source_count": 937,
+  "unit_count": 78,
+  "observed_compiler_calls": 91,
+  "dependency_count": 223,
+  "bounds": {
+    "overall_seconds": 600,
+    "each_compiler_call_seconds": 120,
+    "each_git_readback_seconds": 20,
+    "first_failure": "RETAINED_NO_RETRY"
+  },
+  "overall_elapsed_seconds": 25.660566916994867,
+  "manifest": {
+    "bytes": 2479762,
+    "sha256": "959351939d9b5c332cb27df69a86a6a56d4e63f6a801553ee9eacd8cfb1e38ae",
+    "mode": 420,
+    "full_mode": 33188
+  },
+  "product": {
+    "bytes": 510392,
+    "sha256": "f0a35094b0e7c9f806f653155b6bfffcb875da9155a5f955691ba1263beb92a7",
+    "mode": 493,
+    "full_mode": 33261
+  },
+  "expected_stdout": {
+    "bytes": 2273,
+    "sha256": "b3afac00b309d959418568141eb81a0977fabfbfdfde3eaa7688b1d2167ff22e",
+    "mode": 420,
+    "full_mode": 33188
+  }
+}

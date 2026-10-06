@@ -1,0 +1,278 @@
+{
+  "review_status": "BOUNDED_PASS_SAVED_HOST_QUALIFICATION",
+  "findings": [],
+  "scope": "Independent SAVED v5 HOST evidence and exact formatting correction review only. No compiler/test/product/caller import or replay, no source/Git/index/target operations. The first portable-v1 failure remains separate.",
+  "baseline": "a02d53f2047753fd8673cbcc377d772da1ceb531",
+  "qualified_attempt": "attempt-abu1j_nf",
+  "actual_run_manifest": {
+    "bytes": 177755,
+    "sha256": "70631a4bf0e49efa9ced9f34e879cd6ec248f3cf31e668bdf43b1533a2c6ce1e",
+    "mode": 33188
+  },
+  "verification": {
+    "bytes": 27719,
+    "sha256": "85aee0b4db1ed3e25c8ef260351cd5f92188fa3d4b401fca2d11f960aee8b37f",
+    "mode": 33188
+  },
+  "verification_sha256": "85aee0b4db1ed3e25c8ef260351cd5f92188fa3d4b401fca2d11f960aee8b37f",
+  "execution_result": {
+    "saved_compile_returncode": 0,
+    "saved_compile_elapsed_seconds": 18.14952891699795,
+    "saved_run_returncode": 0,
+    "saved_run_elapsed_seconds": 1.0411473330023,
+    "all_eight_raw_call_logs_bound": true,
+    "all_eight_drivers_reaped_and_owned_groups_quiescent": true,
+    "all_stderr_empty": true,
+    "assertions_enabled": true,
+    "sanitizers": "address,undefined",
+    "ordered_translation_units": 78,
+    "source_file_count": 937,
+    "overlay_count": 9,
+    "full_stdout": {
+      "bytes": 2273,
+      "sha256": "b3afac00b309d959418568141eb81a0977fabfbfdfde3eaa7688b1d2167ff22e",
+      "mode": 33188
+    },
+    "full_seven_lines": [
+      "SAMPLER MIXED FACTORY PASS:24 genuine16-reader paired8/16/24 master lifetimes; real private validation and persistent/TEMP pins; selective signed8 Chip and8/16 card literal endian/channel/padding oracles; exact saves/grid/independent proof orders; constructor/admission/all-phase cancel/source expiry/alias/reentry/fragmented cache-slot2 arena-block0; factory queued effects/unadopted pins/CONTROL+STOP/output guards/budget;6 released caller/current persistent-pin lifetimes;32-reader replacement/pressure and malformed exact-domain drains; SOFTWARE_ONLY",
+      "SAMPLER MIXED ACTIVATION PASS:12 genuine16-reader8/16/24 master/Chip8/card8+16 paired lifetimes; copied whole-packet exact-window activation, CONTROL and STOP; caller-pin expiry, literal precision/endian/channel/padding and exact saves; independent quiet/persistent retention, partial effects and one shutdown with later independent source proof;32-reader replacement pressure preserves new keys, fragmented slot2/block0 and six unpublished full-span output guards; SOFTWARE_ONLY",
+      "EDITOR MIXED READERS PREPARE PASS:12 genuine paired editor 8/16/24 master/Chip8/card8+16 precision/channel/endian lifetimes; original-window CONTROL/STOP only from positive ACTIVE keys; actual edit/undo/route/dispose veto until independent C/R and source quiet; construction/action cancellation, revision-only stale and poisoned former tables, complete unpublished/spare output/input guards, authoritative enqueue transfer, callback faults/partial effects, slot serial reuse and exact master saves; SOFTWARE_ONLY",
+      "MIXED READERS PASS:12 genuine16-action paired lifetimes;20 constructor/180 typed admissions;78 callback/effect/proof cases;24 explicit clock/refusal/pending/cancellation groups;6 malformed-reader envelopes;18 endian/loop/padding groups;6 full alias,32-reader capacity/replacement and control/STOP groups; expired controls/consumed close0; exact common grid/master saves; SOFTWARE_ONLY",
+      "amigus reservation lifecycle: PASS (fake library, no hardware)",
+      "WAVETABLE UPLOAD JOB PASS: bounded steps, cancellation, unpublished leases, partial words, live ownership loss and hit transfer; injected only",
+      "AMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only"
+    ],
+    "controller_post_execution_snapshot": {
+      "bytes": 5751544,
+      "sha256": "e1bb717e84bd70009559bee1d4f936840c401c01c2a03dfc89006ffc178817a9",
+      "mode": 33261
+    }
+  },
+  "custody_checks": [
+    "Exact current/frozen v5 nine byte+full-mode overlays bind root source review861B and root authorization-v4; distinct actual run177755B binds saved source and eight calls.",
+    "Baseline932 regular src/tests files plus four new overlays and font produce937; five baseline overlays replace existing paths. All937 recorded input bytes/modes and all927 nonoverlay archive bytes/data-filter modes match; raw archive and committed580B font independently cross-bound by read-only Git.",
+    "Independently reconstructed exactly six newline substitutions: four controller occurrences (add, reader_close, command_close, close), two fixture occurrences (spare initializer and fault loop). Other seven overlays unchanged; no diagnostic suppression or pre-guard initialization.",
+    "Independent AST-only literal-list derivation produces exact78 ordered translation units. Actual compiler uses C99/O1/Wall/Wextra/Werror/UNDEBUG and ASan/UBSan; saved run invokes that attempt-owned product path only.",
+    "Actual six Git preparation/postcondition rows and two compile/run rows match exact expected argv, source/repo cwd, 30/120/180s whole bounds with5s cleanup reserve, exact label.stream raw files, return codes and stored log snapshots.",
+    "All16 protected display/editor/harness paths and modes match existing controls; current genuine source full modes, a02 HEAD and empty index are unchanged at final recheck.",
+    "Historical v4 exq1v9l8 pass, final-v1 review and verification, full937 source/raw logs/product and prior source reviews remain unchanged. First HOST failures lvqgmuc5/vnbghqxd retain original937 inventories and6196B/2397B stderr with no runtime calls.",
+    "Portable-v1 first native compile-link RC1 retains exact v4 source937,91 saved compiler calls,223 dependencies,1147 retained file byte/full-mode pins, original3261B six-diagnostic stderr, product absence and all recorded driver/group quiescence. No execution tier was changed.",
+    "Publication-v1 corrected callers remain exact original corrected pins and historical selection; no edits, import or publication."
+  ],
+  "qualified_assertion_checks": [
+    {
+      "check": "Genuine established masters, factory, activation and barrier",
+      "result": "BOUNDED_HOST_PASS",
+      "evidence": "Saved fixture uses actual pt_document_new/editor_init/sampler pin, genuine pt_sampler_mixed factory and owned pt_mixed_activation queue, actual pt_editor_mixed_attach and change barrier. emp_open asserts actual hook and zero allocations immediately after begin; allocator asserts hook ownership before every allocation. It executes already-established8/16/24-bit masters with12 paired16-action precision/cache/endian groups; card bus/library and hardware port are ordinary-memory fakes.",
+      "inherited_evidence_binding": "Previously independently inspected v4 full assertion bodies; exact six newline substitutions reconstruct v5 production/fixture text and other seven overlays are byte+mode identical. Actual v5 ASan/UBSan RC0 seven-line run executes the unchanged inherited main/constructor chain."
+    },
+    {
+      "check": "Independent C/R/source quiet and actual editor veto",
+      "result": "BOUNDED_HOST_PASS",
+      "evidence": "emp_barrier invokes actual edit, undo, route and dispose APIs in8 combinations and preserves revision/generation/event/route with hook retained. Command and reader services drain independently in both orders; consumed pool and still-live activation retain hook. Source_close called once, source_quiet0 keeps veto, distinct source_quiet1 releases hook only after exact callback owner and all command/reader absences. Cancelled unpublished jobs at23 preparation steps and3 construction phases allocate no further resources or invent proof.",
+      "inherited_evidence_binding": "Previously independently inspected v4 full assertion bodies; exact six newline substitutions reconstruct v5 production/fixture text and other seven overlays are byte+mode identical. Actual v5 ASan/UBSan RC0 seven-line run executes the unchanged inherited main/constructor chain."
+    },
+    {
+      "check": "Captured stale addresses, adopted reentry and live-owner fault seam",
+      "result": "BOUNDED_HOST_PASS",
+      "evidence": "emp_revision_poison mutates revision and/or poisons former project arrays, then get/advance/refusal and NULL independent service drain without former-table reads; actual consumed0/NULL is recorded. emp_adopted_begin_poison covers aliased busy begin readonly refusal and admitted original input reentry fault before source walk; subsequent nonbusy reuse remains readonly. The exact root task-only seam latches existing failure/fault serial only; controller exact ordinary registration checks and release-consumption retirement precede user release/free/reentry, preventing stale-owner seam use.",
+      "inherited_evidence_binding": "Previously independently inspected v4 full assertion bodies; exact six newline substitutions reconstruct v5 production/fixture text and other seven overlays are byte+mode identical. Actual v5 ASan/UBSan RC0 seven-line run executes the unchanged inherited main/constructor chain."
+    },
+    {
+      "check": "Copied-only fire and actual original windows",
+      "result": "BOUNDED_HOST_PASS",
+      "evidence": "emp_geometry compares copied first/last to independent literal-grid oracle100+ceil(frame*709379/48000), and fake commit asserts ticks in original [first,last). emp_issue invokes existing fire directly at actual admitted ticket. Clock revision-only return0 AND1 after earlier WAITING publication preserve tickets and transfer, fail task publication then prohibit old direct fire commit without editor-walking fire wrappers. Clock/commit forwarders read copied original callbacks only;11 fault groups include one partial actual mask that is retained for independent shutdown.",
+      "inherited_evidence_binding": "Previously independently inspected v4 full assertion bodies; exact six newline substitutions reconstruct v5 production/fixture text and other seven overlays are byte+mode identical. Actual v5 ASan/UBSan RC0 seven-line run executes the unchanged inherited main/constructor chain."
+    },
+    {
+      "check": "Positive ACTIVE keys and actual transfer identity",
+      "result": "BOUNDED_HOST_PASS",
+      "evidence": "CONTROL before positive ACTIVE proof is refused. Controller obtains exact positive original key internally through genuine reader_key; a detached C does not erase R ownership, then CONTROL/STOP operate independently. Callback fault during enqueue still returns real admitted OK/ticket and retains transferred state. Slot-reuse tests reject expired C/R serials without changing sentinel outputs.",
+      "inherited_evidence_binding": "Previously independently inspected v4 full assertion bodies; exact six newline substitutions reconstruct v5 production/fixture text and other seven overlays are byte+mode identical. Actual v5 ASan/UBSan RC0 seven-line run executes the unchanged inherited main/constructor chain."
+    },
+    {
+      "check": "Full spans, unknown ownership and consumed close",
+      "result": "BOUNDED_HOST_PASS",
+      "evidence": "emp_aliases tests12 control/source/context/workspace/cache spans and whole unused PCM capacity/workspace tails through enqueue/ref/get/service aliases, with exact byte preservation, unchanged sentinel/callback counts and no artificial fault. Inherited factory/activation fixtures include unpublished complete reader/cache spans and retired/persistent masters. Seven local scratch guards retain whole sizeof and pre-write admission through uintptr_t helper. emp_drop proves actual pool/activation/queue NULL; if firstclose0, distinct hook-drain close repeats no allocation/release/source close/quiet callbacks and never retries freed child storage. Final ordinary/Chip/master ledgers all empty.",
+      "inherited_evidence_binding": "Previously independently inspected v4 full assertion bodies; exact six newline substitutions reconstruct v5 production/fixture text and other seven overlays are byte+mode identical. Actual v5 ASan/UBSan RC0 seven-line run executes the unchanged inherited main/constructor chain."
+    },
+    {
+      "check": "Authoritative master preservation and complete inherited suites",
+      "result": "BOUNDED_HOST_PASS",
+      "evidence": "emp_same encodes project with actual pt_project_size/encode and compares complete original bytes; it retains actual master depth and signed PCM samples across cache formats, cancellation and proof lifetimes. Output contains real factory/activation constructor markers and explicit new controller/foundation/wavetable/reservation/upload markers from unchanged inherited bodies, seven complete lines total. Assertions remained enabled and run RC0 with empty sanitizer stderr.",
+      "inherited_evidence_binding": "Previously independently inspected v4 full assertion bodies; exact six newline substitutions reconstruct v5 production/fixture text and other seven overlays are byte+mode identical. Actual v5 ASan/UBSan RC0 seven-line run executes the unchanged inherited main/constructor chain."
+    }
+  ],
+  "source_correction": {
+    "src/editor/editor_mixed_readers_prepare.c": {
+      "old": {
+        "bytes": 39668,
+        "sha256": "d801d28d99ede3847732fa82a913bd8d8c8c9ef2218d3f3c812d82b9bee1f79b",
+        "mode": 33188
+      },
+      "new": {
+        "bytes": 39676,
+        "sha256": "156ed4305ea13aba140fbd36b149a358f03b3aa370cdda1f37afc4f9db126004",
+        "mode": 33188
+      },
+      "exact_newline_substitution_count": 4,
+      "exact_reconstruction": true,
+      "nonwhitespace_bytes_identical": true
+    },
+    "tests/editor_mixed_readers_prepare_test.c": {
+      "old": {
+        "bytes": 39046,
+        "sha256": "c7449524a2aae19930a63f99c50178969892ac200e51ed34480ffffdc15b5dee",
+        "mode": 33188
+      },
+      "new": {
+        "bytes": 39060,
+        "sha256": "15b3a0bf93a60bee65b94df6f5ae3a7d7adacfdb073fc9d08e364d393909c28c",
+        "mode": 33188
+      },
+      "exact_newline_substitution_count": 2,
+      "exact_reconstruction": true,
+      "nonwhitespace_bytes_identical": true
+    }
+  },
+  "root_source_review": {
+    "bytes": 861,
+    "sha256": "6bbe23e7dcc649b9902474640efdaba92f7ffc20fd8fc475f65eeccef5a0c1ef",
+    "mode": 33188
+  },
+  "root_authorization": {
+    "bytes": 2396,
+    "sha256": "797fbe58c26d83377bc99d3bf91707f292d856c1f3df574be27c4602328885bb",
+    "mode": 33188
+  },
+  "prior_source_review_history": {
+    "review-v1.json": {
+      "bytes": 5011,
+      "sha256": "c018316d478926a09cb3a145e26aceecf65a16894a59f673f9cf76e199ab5578",
+      "mode": 33188
+    },
+    "review-v1-supplement.json": {
+      "bytes": 2377,
+      "sha256": "1efd13b07059bdf4b1e4236e61ccf746906ef6e8e1b54821104856bd5d7f3d89",
+      "mode": 33188
+    },
+    "review-v2.json": {
+      "bytes": 8712,
+      "sha256": "1f5b58c019abee7d66f9078816b2ef749a4eb7142dd2393cf1377f87ce2be208",
+      "mode": 33188
+    },
+    "review-v3.json": {
+      "bytes": 10052,
+      "sha256": "8e2d079df18da985722d72edaf5807febd41b0585598be527ada23b855dd3d2d",
+      "mode": 33188
+    },
+    "review-v4.json": {
+      "bytes": 7858,
+      "sha256": "5ae92518d493af7d30ee9e09dc2ebbfc087a8c26e29bd156703a002dd288a399",
+      "mode": 33188
+    }
+  },
+  "historical_v4_host": {
+    "run": {
+      "bytes": 177756,
+      "sha256": "c1ba9deeedfde6f45cb27b1fca4cf236362c99f4af9666fdca3c1cd39642f568",
+      "mode": 33188
+    },
+    "review": {
+      "bytes": 15095,
+      "sha256": "35078616098561386178b7bf15beff2c7b153b9c017d136dd6c444d9233911e3",
+      "mode": 33188
+    },
+    "verification": {
+      "bytes": 19774,
+      "sha256": "e3f2081ec13729f572bf4a8be668a651cc6761f7ab6bbc836fa733eccfd298e5",
+      "mode": 33188
+    },
+    "source937_all_raw_logs_product_unchanged": true
+  },
+  "prior_actual_failures": [
+    {
+      "attempt": "attempt-lvqgmuc5",
+      "run": {
+        "bytes": 174039,
+        "sha256": "a226ce6b7b201dc8bc7ade4780cbd5d0df1dd4d9ae16cc3f4a6f3ca37f7ab357",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 6196,
+        "sha256": "d131016fc8f0ccb83ebeed9affcf0803816ecb738a03c64274feb82f3306deaa",
+        "mode": 33188
+      },
+      "source937_exact": true,
+      "compile_only_rc1": true,
+      "no_run_call": true,
+      "driver_reaped_group_quiescent": true
+    },
+    {
+      "attempt": "attempt-vnbghqxd",
+      "run": {
+        "bytes": 174565,
+        "sha256": "61b6320cb0a7e2b1648e63eeb55713525c99153afdc2f554bf8b1bfff97246d3",
+        "mode": 33188
+      },
+      "stderr": {
+        "bytes": 2397,
+        "sha256": "ad70d630a3b3fbb970ea106d6b23cee7f13f6b3fa092045b4510ef2c362c30ac",
+        "mode": 33188
+      },
+      "source937_exact": true,
+      "compile_only_rc1": true,
+      "no_run_call": true,
+      "driver_reaped_group_quiescent": true
+    }
+  ],
+  "preserved_portable_v1_failure": {
+    "manifest": {
+      "bytes": 2065287,
+      "sha256": "cd7b1bba3acdb58ba65b05d857023fff59f058a034341b822ca7d23832242fca",
+      "mode": 33188
+    },
+    "compile_link_stderr": {
+      "bytes": 3261,
+      "sha256": "bc3ba81125fe2df83e350b22c6b6c37e1926b3147241ad67e00dce1eef9386c3",
+      "mode": 33188
+    },
+    "source937_exact_v4": true,
+    "calls": 91,
+    "dependencies": 223,
+    "retained_files": 1147,
+    "all_bytes_full_modes_and_raw_logs_unchanged": true,
+    "product_absent": true,
+    "all_drivers_reaped_groups_quiescent": true,
+    "execution": "NEVER_EXECUTED"
+  },
+  "publication_v1_frozen_historical": {
+    "prepare_saved_host.py": {
+      "bytes": 10785,
+      "sha256": "53c25888e104b66375f8cf43e4d6b078c64da4e89540fc712703a0e618637374",
+      "mode": 33188
+    },
+    "verify_host_packet.py": {
+      "bytes": 10124,
+      "sha256": "bd825c8f011600912141dc96fc6f3b0203f6400eaa711249cf77495195517886",
+      "mode": 33188
+    }
+  },
+  "limitations": [
+    "The saved host success qualifies these genuine software paths with ordinary-memory fake card/library/port callbacks. It does not establish device upload capacity/order/completion, hardware voice stop, real Fast/Chip placement, DMA, IRQ, native runtime stack, exact live timing, emulator/physical execution, audio or listening acceptance.",
+    "The v5 candidate has no portable/native crossbuild or target evidence in this review. The immutable v4 portable-v1 compile failure remains FIRST_FAILURE_RETAINED and its expected stdout file is preparation only.",
+    "Eight recorded successful calls positively bind raw logs, owned new sessions, reaped drivers and quiescent process groups. No forced timeout/descendant cleanup failure path occurred in this run; no replay of those paths was performed.",
+    "The original host runner records source, compile/run path, logs and custody, but has no separate pre-execution binary fingerprint. This report binds the currently saved post-execution binary snapshot.",
+    "Historical source freeze and correction documents retain their original SOURCE_ONLY/NOT_RUN statuses. The distinct v5 HOST execution is bound by this separate final report; no history or first failure was rewritten.",
+    "Publication-v1 callers remain frozen and source-only, selecting historical attempt-exq1v9l8. No publication, caller import or execution occurred during this review."
+  ],
+  "performed": [
+    "standard-library read-only saved JSON/hash/full-mode inspection",
+    "read-only Git HEAD/index/staged-diff/archive/font checks",
+    "AST literal inspection only; no project imports",
+    "owned report writes under review-final-v2 only"
+  ],
+  "reviewer_compiler_test_product_target_replays": 0,
+  "reviewer_project_source_git_mutations": 0,
+  "edits_complete": true
+}

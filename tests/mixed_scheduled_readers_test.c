@@ -171,7 +171,7 @@ static void fire(struct model *m,uint64_t ticket)
  c->issued=1;}
 static enum pt_mixed_readers_reply model_command_service(void *context,uint64_t ticket,unsigned cancel,struct pt_mixed_readers_command_receipt *out)
 {struct model *m=context;struct model_command *c=model_command(m,ticket);const struct pt_mixed_readers_event *e;unsigned i;
- ++m->command_calls;assert(c&&c->reference);model_hook(m,3);if(m->command_pending)return PT_MIXED_PENDING;
+ ++m->command_calls;assert(c&&c->reference);model_hook(m,3);if(m->command_pending)return PT_MIXED_REPLY_PENDING;
  if(cancel){c->cancelled=1;}
  e=c->reference;memset(out,0,sizeof(*out));
  out->domain=PT_MIXED_COMMAND_DOMAIN;out->queue=e->queue;out->session=e->session;out->generation=e->batch.generation;
@@ -189,7 +189,7 @@ static enum pt_mixed_readers_reply model_command_service(void *context,uint64_t 
  return PT_MIXED_OBSERVATION;}
 static enum pt_mixed_readers_reply model_reader_service(void *context,const struct pt_mixed_readers_domain *d,unsigned cancel,struct pt_mixed_readers_reader_receipt *out)
 {struct model *m=context;struct model_reader *r=model_reader(m,&d->key);unsigned index;
- ++m->reader_calls;assert(r);model_hook(m,4);if(m->reader_pending)return PT_MIXED_PENDING;
+ ++m->reader_calls;assert(r);model_hook(m,4);if(m->reader_pending)return PT_MIXED_REPLY_PENDING;
  memset(out,0,sizeof(*out));out->domain=PT_MIXED_READER_DOMAIN;out->key=d->key;out->reference=d;out->binding=d->binding;
  if(cancel){r->state=PT_MIXED_READER_RETIRED;r->retired=1;r->reference=NULL;
   index=d->key.route==PT_MIXED_READERS_PAULA?d->key.slot:4+d->key.slot;
@@ -510,7 +510,10 @@ static void expired_and_release(void)
  assert(pt_mixed_readers_publish(t->queue,ticket)==PT_MIXED_READERS_OK);fire(&t->model,ticket);drain(t,ticket,5,1,0);
  t->allocator.hook=1;assert(!pt_mixed_readers_close(&t->queue)&&!t->queue);
  assert(t->allocator.consumed==1&&!t->allocator.hook&&pt_mixed_readers_close(&t->queue));trial_drop(t);}
-int main(void)
+#ifndef PT_MIXED_READERS_TEST_MAIN
+#define PT_MIXED_READERS_TEST_MAIN main
+#endif
+int PT_MIXED_READERS_TEST_MAIN(void)
 {unsigned bits,cache_bits,order,mode;
  for(mode=0;mode<20;++mode)constructor_admission(mode);
  for(bits=8;bits<=24;bits+=8)for(cache_bits=8;cache_bits<=16;cache_bits+=8){

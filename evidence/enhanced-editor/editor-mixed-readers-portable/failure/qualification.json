@@ -1,0 +1,138 @@
+{
+  "schema": 1,
+  "projection": "qualification",
+  "origin": {
+    "private_file": "controller-portable-v1/manifest.json",
+    "original_pin": {
+      "bytes": 2065287,
+      "sha256": "cd7b1bba3acdb58ba65b05d857023fff59f058a034341b822ca7d23832242fca"
+    }
+  },
+  "public_bodies_verified": "Only the allowlisted public projection/log bodies; original whole manifests/source/tools/runtime/dependency/log bodies remain private",
+  "status": "FIRST_FAILURE_RETAINED",
+  "baseline": "a02d53f2047753fd8673cbcc377d772da1ceb531",
+  "profile": "controller",
+  "flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-UNDEBUG",
+    "-Isrc/core",
+    "-I.",
+    "-fbbb=-"
+  ],
+  "execution_environment": {
+    "PATH": "/usr/bin:/bin",
+    "LC_ALL": "C",
+    "LANG": "C",
+    "TMPDIR": "/private/tmp"
+  },
+  "bounds": {
+    "overall_seconds": 600,
+    "each_compiler_call_seconds": 120,
+    "each_git_readback_seconds": 20,
+    "first_failure": "RETAINED_NO_RETRY"
+  },
+  "subprocess_policy": {
+    "compiler_session": "OWNED_NEW_SESSION_PER_DRIVER_CALL",
+    "failure_cleanup": "TERMINATE_REAP_OWNED_COMPILER_PROCESS_GROUP_ONLY",
+    "helper_selection": "DRIVER_LOOKUP_ONLY_NOT_HELPER_INVOCATION",
+    "cleanup_reserve_seconds": 5
+  },
+  "product_execution": "NEVER_EXECUTED",
+  "native_execution": "NEVER_EXECUTED",
+  "emulator_execution": "NEVER_EXECUTED",
+  "physical_execution": "NEVER_EXECUTED",
+  "target_execution": "NEVER_EXECUTED",
+  "source_count": 937,
+  "unit_count": 78,
+  "compiler_call_count": 91,
+  "dependency_count": 223,
+  "overall_elapsed_seconds": 16.97628795800847,
+  "source_stable": true,
+  "compiler_groups_quiescent": true,
+  "private_retained_members": 1147,
+  "expected_native_stdout": {
+    "bytes": 2273,
+    "sha256": "b3afac00b309d959418568141eb81a0977fabfbfdfde3eaa7688b1d2167ff22e",
+    "mode": 420,
+    "full_mode": 33188
+  },
+  "product_pin": null,
+  "product_available": false,
+  "overlay_pins": {
+    "src/editor/editor_mixed_readers_prepare.h": {
+      "bytes": 9059,
+      "sha256": "3ab02131a83d89457fe2f0a898b41b6281fb059b137798e174e6167238e19c80",
+      "mode": 420,
+      "full_mode": 33188
+    },
+    "src/editor/editor_mixed_readers_prepare.c": {
+      "bytes": 39668,
+      "sha256": "d801d28d99ede3847732fa82a913bd8d8c8c9ef2218d3f3c812d82b9bee1f79b",
+      "mode": 420,
+      "full_mode": 33188
+    },
+    "tests/editor_mixed_readers_prepare_test.c": {
+      "bytes": 39046,
+      "sha256": "c7449524a2aae19930a63f99c50178969892ac200e51ed34480ffffdc15b5dee",
+      "mode": 420,
+      "full_mode": 33188
+    },
+    "tests/test_editor_mixed_readers_prepare.py": {
+      "bytes": 14109,
+      "sha256": "fbccf17297f79ecd8e6f3868053e6d49271b0f4822d2964a9e615b8e038a4161",
+      "mode": 420,
+      "full_mode": 33188
+    },
+    "src/core/mixed_readers_activation.h": {
+      "bytes": 10423,
+      "sha256": "64edd461b1413fc5b896f7b972b41421c22f04f327c66a21dfbc9b7043394ab5",
+      "mode": 420,
+      "full_mode": 33188
+    },
+    "src/core/mixed_readers_activation.c": {
+      "bytes": 39498,
+      "sha256": "edd96b2ebc4b076e66a865eeaa637e25e0cfe56e480d46c0c4b6746a028d456c",
+      "mode": 420,
+      "full_mode": 33188
+    },
+    "src/core/mixed_scheduled_readers.h": {
+      "bytes": 11336,
+      "sha256": "b24b9e762906bae10d5a511cd949c547715aada7893156e932aeab4315af70c4",
+      "mode": 420,
+      "full_mode": 33188
+    },
+    "src/core/mixed_scheduled_readers.c": {
+      "bytes": 33837,
+      "sha256": "2808fbbaf081d48c8ab70c36b57f2882d5bb0677aeb6f218c7a89d3bd0b570df",
+      "mode": 420,
+      "full_mode": 33188
+    },
+    "tests/mixed_scheduled_readers_test.c": {
+      "bytes": 42588,
+      "sha256": "18a0bc644ecdec004d23e00aa1a3714d78650151afccf914df24514cc79295fe",
+      "mode": 420,
+      "full_mode": 33188
+    }
+  },
+  "expected_output_role": "EXPECTED_NATIVE_ONLY_NOT_AN_EXECUTION_RESULT",
+  "last_compile_returncode": 1,
+  "last_compile_stdout_original": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mode": 420,
+    "full_mode": 33188
+  },
+  "last_compile_stderr_original": {
+    "bytes": 3261,
+    "sha256": "bc3ba81125fe2df83e350b22c6b6c37e1926b3147241ad67e00dce1eef9386c3",
+    "mode": 420,
+    "full_mode": 33188
+  }
+}

@@ -370,7 +370,7 @@ static enum pt_mixed_readers_result command_check(struct pt_mixed_readers_output
     if(!(e=command(q,t)))return PT_MIXED_READERS_INVALID;
     if(!e->published)return PT_MIXED_READERS_INVALID;
     memset(&receipt,0,sizeof(receipt));q->busy=1;reply=q->backend.command(q->backend.context,t,(unsigned)cancel,&receipt);q->busy=0;
-    if(reply==PT_MIXED_PENDING&&!q->failed)return PT_MIXED_READERS_PENDING;
+    if(reply==PT_MIXED_REPLY_PENDING&&!q->failed)return PT_MIXED_READERS_PENDING;
     if((reply!=PT_MIXED_OBSERVATION&&reply!=PT_MIXED_COMMAND_DETACHED)||!command_envelope(q,e,&receipt)){q->failed=1;return PT_MIXED_READERS_BACKEND;}
     good=command_valid(q,e,&receipt,reply==PT_MIXED_COMMAND_DETACHED);if(!good)q->failed=1;
     if(good)advance(q,e,&receipt);
@@ -401,7 +401,7 @@ static enum pt_mixed_readers_result reader_check(struct pt_mixed_readers_output 
     if(!(r=reader(q,t,i))||!r->submitted)return PT_MIXED_READERS_INVALID;
     if(cancel){r->closed=1;r->cancel_requested=1;}
     memset(&receipt,0,sizeof(receipt));q->busy=1;reply=q->backend.reader(q->backend.context,&r->domain,(unsigned)cancel,&receipt);q->busy=0;
-    if(reply==PT_MIXED_PENDING&&!q->failed)return PT_MIXED_READERS_PENDING;
+    if(reply==PT_MIXED_REPLY_PENDING&&!q->failed)return PT_MIXED_READERS_PENDING;
     if((reply!=PT_MIXED_OBSERVATION&&reply!=PT_MIXED_READER_RETIRE_PROOF)||!reader_envelope(r,&receipt)){q->failed=1;return PT_MIXED_READERS_BACKEND;}
     good=reader_valid(r,&receipt,reply==PT_MIXED_READER_RETIRE_PROOF);if(!good)q->failed=1;
     if(good){r->state=receipt.state;if(receipt.adoption==PT_MIXED_ADOPTED){r->adopted=1;r->timed=1;r->observed=receipt.observed;r->issued=receipt.issued;for(j=0;j<q->readers;++j)if(q->reader[j].held&&q->reader[j].frame<r->frame&&q->reader[j].domain.key.route==r->domain.key.route&&q->reader[j].domain.key.slot==r->domain.key.slot){q->reader[j].closed=1;q->reader[j].superseded=1;}}if(receipt.state>=PT_MIXED_READER_STOP_PENDING)r->closed=1;}

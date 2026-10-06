@@ -1,0 +1,172 @@
+{
+  "status": "ROOT_SAVED_V5_HOST_CUSTODY_AND_INDEPENDENT_REVIEW_PASS",
+  "manifest": {
+    "bytes": 177755,
+    "sha256": "70631a4bf0e49efa9ced9f34e879cd6ec248f3cf31e668bdf43b1533a2c6ce1e",
+    "mode": 420
+  },
+  "source_freeze": {
+    "bytes": 2517,
+    "sha256": "a91d7fa448b26a042a3ccc9511a45d9e9d122c6312309a7790cbfe7afbeb4451",
+    "mode": 420
+  },
+  "source_count": 937,
+  "overlay_count": 9,
+  "ordered_unit_count": 78,
+  "calls": [
+    {
+      "label": "prepare-head",
+      "stdout": {
+        "bytes": 41,
+        "sha256": "918f0008f33c464fe54006cfead307e5935759a1422c6e451b2474c1a9b1e061",
+        "mode": 420
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "elapsed_seconds": 0.017120291988248937,
+      "driver_reaped": true,
+      "group_quiescent": true
+    },
+    {
+      "label": "prepare-index",
+      "stdout": {
+        "bytes": 1197014,
+        "sha256": "1601e89645535bd9c804ebdca7488f865c5492dbeaa97740c9cbd31dcd96ef85",
+        "mode": 420
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "elapsed_seconds": 0.029622834001202136,
+      "driver_reaped": true,
+      "group_quiescent": true
+    },
+    {
+      "label": "prepare-archive",
+      "stdout": {
+        "bytes": 6010880,
+        "sha256": "f29582d0804a9bd9990d70981c7ffd51cbc6269cd7c3e047a73dc38791244d90",
+        "mode": 420
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "elapsed_seconds": 0.14587554200261366,
+      "driver_reaped": true,
+      "group_quiescent": true
+    },
+    {
+      "label": "prepare-font",
+      "stdout": {
+        "bytes": 580,
+        "sha256": "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091",
+        "mode": 420
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "elapsed_seconds": 0.014064999995753169,
+      "driver_reaped": true,
+      "group_quiescent": true
+    },
+    {
+      "label": "verify-head",
+      "stdout": {
+        "bytes": 41,
+        "sha256": "918f0008f33c464fe54006cfead307e5935759a1422c6e451b2474c1a9b1e061",
+        "mode": 420
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "elapsed_seconds": 0.01759033399866894,
+      "driver_reaped": true,
+      "group_quiescent": true
+    },
+    {
+      "label": "verify-index",
+      "stdout": {
+        "bytes": 1197014,
+        "sha256": "1601e89645535bd9c804ebdca7488f865c5492dbeaa97740c9cbd31dcd96ef85",
+        "mode": 420
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "elapsed_seconds": 0.020913125001243316,
+      "driver_reaped": true,
+      "group_quiescent": true
+    },
+    {
+      "label": "controller-compile",
+      "stdout": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "elapsed_seconds": 18.14952891699795,
+      "driver_reaped": true,
+      "group_quiescent": true
+    },
+    {
+      "label": "controller-run",
+      "stdout": {
+        "bytes": 2273,
+        "sha256": "b3afac00b309d959418568141eb81a0977fabfbfdfde3eaa7688b1d2167ff22e",
+        "mode": 420
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 420
+      },
+      "elapsed_seconds": 1.0411473330023,
+      "driver_reaped": true,
+      "group_quiescent": true
+    }
+  ],
+  "stdout": {
+    "bytes": 2273,
+    "sha256": "b3afac00b309d959418568141eb81a0977fabfbfdfde3eaa7688b1d2167ff22e",
+    "mode": 420
+  },
+  "complete_software_lines": 7,
+  "protected_count": 16,
+  "protected_full_modes_preserved": true,
+  "head": "a02d53f2047753fd8673cbcc377d772da1ceb531",
+  "index_empty": true,
+  "original_actual_failures": [
+    "attempt-lvqgmuc5",
+    "attempt-vnbghqxd"
+  ],
+  "historical_host_pass": "attempt-exq1v9l8",
+  "preserved_actual_native_failure": "controller-portable-v1",
+  "independent_review": {
+    "bytes": 19685,
+    "sha256": "55b392241186f25ffa94525eee74b68497fdf089d96c264d639555b3e9f7871a",
+    "mode": 420
+  },
+  "independent_verification": {
+    "bytes": 27719,
+    "sha256": "85aee0b4db1ed3e25c8ef260351cd5f92188fa3d4b401fca2d11f960aee8b37f",
+    "mode": 420
+  }
+}

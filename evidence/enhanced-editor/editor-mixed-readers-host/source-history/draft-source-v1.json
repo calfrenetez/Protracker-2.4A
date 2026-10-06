@@ -1,0 +1,33 @@
+{
+  "status": "DRAFT_SOURCE_ONLY_NOT_COMPILED_NOT_RUN",
+  "baseline": "a02d53f2047753fd8673cbcc377d772da1ceb531",
+  "owned_files": {
+    "src/editor/editor_mixed_readers_prepare.h": {
+      "bytes": 9029,
+      "sha256": "39cbf7b58ef5cbd575b1a7f2817db13e0f2d3fe6f2323b1adce5b0658734f3b4",
+      "mode": 33188
+    },
+    "src/editor/editor_mixed_readers_prepare.c": {
+      "bytes": 38550,
+      "sha256": "70f7199f0ac3b2f6a1a205611459e71b05983487c2ce13cc41aa4a443178f8dd",
+      "mode": 33188
+    },
+    "tests/editor_mixed_readers_prepare_test.c": {
+      "bytes": 33130,
+      "sha256": "27ab1064e10ab078788c1435e2c063ea8f8307ac3dbd695ce69b28c0842a573d",
+      "mode": 33188
+    },
+    "tests/test_editor_mixed_readers_prepare.py": {
+      "bytes": 7316,
+      "sha256": "de087a25b2f8aaa7582abc42d8452cf46acb32afdc6945a78bd7d3a06a15516b",
+      "mode": 33188
+    }
+  },
+  "root_core_overlays": [
+    "src/core/mixed_readers_activation.h",
+    "src/core/mixed_readers_activation.c"
+  ],
+  "new_root_seam": "pt_mixed_activation_fail_closed",
+  "qualifier": "NOT_RUN_WAITING_ROOT_SOURCE_AUDIT",
+  "scope": "Request-driven HOST draft only; no native/targets/timers/DMA/MMIO/audio."
+}

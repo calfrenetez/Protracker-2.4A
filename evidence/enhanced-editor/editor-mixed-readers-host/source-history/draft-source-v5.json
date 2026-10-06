@@ -1,0 +1,67 @@
+{
+  "status": "DRAFT_SOURCE_ONLY_NOT_COMPILED_NOT_RUN",
+  "baseline": "a02d53f2047753fd8673cbcc377d772da1ceb531",
+  "overlays": {
+    "src/editor/editor_mixed_readers_prepare.h": {
+      "bytes": 9059,
+      "sha256": "3ab02131a83d89457fe2f0a898b41b6281fb059b137798e174e6167238e19c80",
+      "mode": 33188
+    },
+    "src/editor/editor_mixed_readers_prepare.c": {
+      "bytes": 39676,
+      "sha256": "156ed4305ea13aba140fbd36b149a358f03b3aa370cdda1f37afc4f9db126004",
+      "mode": 33188
+    },
+    "tests/editor_mixed_readers_prepare_test.c": {
+      "bytes": 39060,
+      "sha256": "15b3a0bf93a60bee65b94df6f5ae3a7d7adacfdb073fc9d08e364d393909c28c",
+      "mode": 33188
+    },
+    "tests/test_editor_mixed_readers_prepare.py": {
+      "bytes": 14109,
+      "sha256": "fbccf17297f79ecd8e6f3868053e6d49271b0f4822d2964a9e615b8e038a4161",
+      "mode": 33188
+    },
+    "src/core/mixed_readers_activation.h": {
+      "bytes": 10423,
+      "sha256": "64edd461b1413fc5b896f7b972b41421c22f04f327c66a21dfbc9b7043394ab5",
+      "mode": 33188
+    },
+    "src/core/mixed_readers_activation.c": {
+      "bytes": 39498,
+      "sha256": "edd96b2ebc4b076e66a865eeaa637e25e0cfe56e480d46c0c4b6746a028d456c",
+      "mode": 33188
+    },
+    "src/core/mixed_scheduled_readers.h": {
+      "bytes": 11336,
+      "sha256": "b24b9e762906bae10d5a511cd949c547715aada7893156e932aeab4315af70c4",
+      "mode": 33188
+    },
+    "src/core/mixed_scheduled_readers.c": {
+      "bytes": 33837,
+      "sha256": "2808fbbaf081d48c8ab70c36b57f2882d5bb0677aeb6f218c7a89d3bd0b570df",
+      "mode": 33188
+    },
+    "tests/mixed_scheduled_readers_test.c": {
+      "bytes": 42588,
+      "sha256": "18a0bc644ecdec004d23e00aa1a3714d78650151afccf914df24514cc79295fe",
+      "mode": 33188
+    }
+  },
+  "overlay_count": 9,
+  "source_file_count_expected": 937,
+  "source_python_ast": "PARSED_ONLY_NOT_EXECUTED",
+  "index_sha256": "1601e89645535bd9c804ebdca7488f865c5492dbeaa97740c9cbd31dcd96ef85",
+  "supersedes": "draft-source-v4.json",
+  "corrections": [
+    "Six native GCC misleading-indentation diagnostics corrected by only separating statements onto new lines; no nonwhitespace byte/control-flow changes"
+  ],
+  "qualifier": "NOT_RUN_WAITING_ROOT_SOURCE_AUDIT",
+  "scope": "Request-driven HOST draft only; no native, target, timer, DMA, MMIO, audio.",
+  "preserved_actual_failures": [
+    "attempt-lvqgmuc5",
+    "attempt-vnbghqxd"
+  ],
+  "preserved_actual_host_pass": "attempt-exq1v9l8",
+  "preserved_actual_native_failure": "controller-portable-v1"
+}

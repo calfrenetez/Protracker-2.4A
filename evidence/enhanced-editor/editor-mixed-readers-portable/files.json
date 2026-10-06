@@ -1,0 +1,86 @@
+{
+  "README.md": {
+    "bytes": 2330,
+    "sha256": "d52dcab8b523169d0048922238dd18ffd630e25d51344c1eee5f5dc0533caa0b"
+  },
+  "current/compile-link.stderr": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "current/compile-link.stdout": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "current/compiler-calls.json": {
+    "bytes": 151099,
+    "sha256": "6174f9a4211952ceec4d2dea1c9f8e3d9e3de610918b4b012a96092d0596c687"
+  },
+  "current/ordered-units.json": {
+    "bytes": 2962,
+    "sha256": "6bb8f6ec08cce9fe2bbf55f5f81d0cfb4183a7eb755f0fe02c56199294b3a4b4"
+  },
+  "current/qualification.json": {
+    "bytes": 4481,
+    "sha256": "4495aafdc62ad86369dae73e75d6207abdb8f96804e6f971332196efd7dc693c"
+  },
+  "current/source-inventory.json": {
+    "bytes": 158387,
+    "sha256": "e15884c23a31fad07c5381506b9308de712b86a7da9d4c62af748d9c4e956f0e"
+  },
+  "current/tool-runtime-dependency-pins.json": {
+    "bytes": 60478,
+    "sha256": "2ec67a6f0d79767d8fb4729f894ea3837ea9044aef171a2e0b005999925c692f"
+  },
+  "expected-native.stdout": {
+    "bytes": 2273,
+    "sha256": "b3afac00b309d959418568141eb81a0977fabfbfdfde3eaa7688b1d2167ff22e"
+  },
+  "failure/compile-link.stderr": {
+    "bytes": 3261,
+    "sha256": "bc3ba81125fe2df83e350b22c6b6c37e1926b3147241ad67e00dce1eef9386c3"
+  },
+  "failure/compile-link.stdout": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "failure/compiler-calls.json": {
+    "bytes": 151191,
+    "sha256": "f515626e9ec2888cd21ac23e95c987cafbf6d3a37b3fb6da13a20a3e1794f9cc"
+  },
+  "failure/ordered-units.json": {
+    "bytes": 2962,
+    "sha256": "cad545a4cd5e35ac98917dcc3d5c52d76230163c7768b74479621273af9ee10e"
+  },
+  "failure/qualification.json": {
+    "bytes": 4324,
+    "sha256": "7bb0cc8e6eb4b79c116ea08faa2834b32d8f558b5342b65814d3fdb266383358"
+  },
+  "failure/source-inventory.json": {
+    "bytes": 158387,
+    "sha256": "926bb4c54be7e509d04b432e889f0bfa6439468a43025cff8b51446d8a516ced"
+  },
+  "failure/tool-runtime-dependency-pins.json": {
+    "bytes": 60478,
+    "sha256": "b067de9a832a929b69748825cb56d1b9f7423ac96309d7e2a9f88827195f9581"
+  },
+  "original-bindings.json": {
+    "bytes": 7685,
+    "sha256": "5d7781a230ac4a7d8a4ca77f48407f97041af15feb75612849726fcba85d8f07"
+  },
+  "reviews/current-compiler-review.json": {
+    "bytes": 9258,
+    "sha256": "14e6a41addad63b57ab19e57aee370d0e52d1c887f29332925d854ac7326b645"
+  },
+  "reviews/current-offline-verification.json": {
+    "bytes": 2703,
+    "sha256": "505dd69dd3421e3a2e047bf80f290118d5923566c2c433a797a4e193a4b11d27"
+  },
+  "reviews/failure-custody-review.json": {
+    "bytes": 5426,
+    "sha256": "b1cc07c983f18c34f4fe2213c3964389ac0c104e02dc17b680062dd9d0487ddb"
+  },
+  "verify_packet.py": {
+    "bytes": 19612,
+    "sha256": "c0ffa82c57bd9c93d3ced3e546a8d8ebacdc8bcf55028026f9103a42d5064ccb"
+  }
+}

@@ -1,0 +1,44 @@
+tests/editor_mixed_readers_prepare_test.c: In function 'emp_make':
+tests/editor_mixed_readers_prepare_test.c:180:9: error: this 'for' clause does not guard... [-Werror=misleading-indentation]
+         for(i=0;i<64;++i)values[i]=(int32_t)i;spare=(struct pt_pcm){values,64,1,8000,1,24};
+         ^~~
+tests/editor_mixed_readers_prepare_test.c:180:47: note: ...this statement, but the latter is misleadingly indented as if it is guarded by the 'for'
+         for(i=0;i<64;++i)values[i]=(int32_t)i;spare=(struct pt_pcm){values,64,1,8000,1,24};
+                                               ^~~~~
+tests/editor_mixed_readers_prepare_test.c: In function 'main':
+tests/editor_mixed_readers_prepare_test.c:542:5: error: this 'for' clause does not guard... [-Werror=misleading-indentation]
+     for(i=1;i<=11;++i)emp_fault(i);emp_slot_reuse();
+     ^~~
+tests/editor_mixed_readers_prepare_test.c:542:36: note: ...this statement, but the latter is misleadingly indented as if it is guarded by the 'for'
+     for(i=1;i<=11;++i)emp_fault(i);emp_slot_reuse();
+                                    ^~~~~~~~~~~~~~
+cc1: all warnings being treated as errors
+src/editor/editor_mixed_readers_prepare.c: In function 'add':
+src/editor/editor_mixed_readers_prepare.c:61:2: error: this 'if' clause does not guard... [-Werror=misleading-indentation]
+  if(n)s->guards[s->guard_count++]=(struct pt_sampler_storage_span){p,n};return 1;}
+  ^~
+src/editor/editor_mixed_readers_prepare.c:61:73: note: ...this statement, but the latter is misleadingly indented as if it is guarded by the 'if'
+  if(n)s->guards[s->guard_count++]=(struct pt_sampler_storage_span){p,n};return 1;}
+                                                                         ^~~~~~
+src/editor/editor_mixed_readers_prepare.c: In function 'reader_close':
+src/editor/editor_mixed_readers_prepare.c:412:2: error: this 'if' clause does not guard... [-Werror=misleading-indentation]
+  if(!h.address)return 1;if(!output_apart(s,&h,sizeof(h)))return 0;
+  ^~
+src/editor/editor_mixed_readers_prepare.c:412:25: note: ...this statement, but the latter is misleadingly indented as if it is guarded by the 'if'
+  if(!h.address)return 1;if(!output_apart(s,&h,sizeof(h)))return 0;
+                         ^~
+src/editor/editor_mixed_readers_prepare.c: In function 'command_close':
+src/editor/editor_mixed_readers_prepare.c:421:2: error: this 'if' clause does not guard... [-Werror=misleading-indentation]
+  if(!h.address)return 1;if(!output_apart(s,&h,sizeof(h)))return 0;
+  ^~
+src/editor/editor_mixed_readers_prepare.c:421:25: note: ...this statement, but the latter is misleadingly indented as if it is guarded by the 'if'
+  if(!h.address)return 1;if(!output_apart(s,&h,sizeof(h)))return 0;
+                         ^~
+src/editor/editor_mixed_readers_prepare.c: In function 'pt_editor_mixed_readers_prepare_close':
+src/editor/editor_mixed_readers_prepare.c:611:2: error: this 'if' clause does not guard... [-Werror=misleading-indentation]
+  if(!s)return 0;if(reentry(s))return 0;
+  ^~
+src/editor/editor_mixed_readers_prepare.c:611:17: note: ...this statement, but the latter is misleadingly indented as if it is guarded by the 'if'
+  if(!s)return 0;if(reentry(s))return 0;
+                 ^~
+cc1: all warnings being treated as errors

@@ -6054,8 +6054,51 @@ earlier actual Git readback warning, with zero compiler calls, is preserved
 separately from the successful corrected compiler invocation. See the
 [compiler evidence](../evidence/enhanced-editor/paired-sampler-activation-portable/README.md).
 
-Paired editor/song lowering, native PLAY and the real port remain unfinished.
+Whole-song paired lowering, native PLAY and the real port remain unfinished.
 Physical Fast/Chip placement, aggregate stack/step latency, card capacity/upload
 order/completion/all-voice stop, exact activation and IRQ timing, physical audio
 and listening remain open. The accepted classic layout and sixteen unrelated
 display/editor paths are preserved.
+
+## Request-driven paired editor batches — 6 October 2026
+
+The additive `editor_mixed_readers_prepare` controller retains an attached
+editor preparation barrier before its first allocation or callback. It composes
+the genuine bounded sampler factory and copied activation owner, preserves
+original 8/16/24-bit masters and literal scheduled windows, and resolves CONTROL
+and STOP only through positive current ACTIVE keys. Its two command and
+thirty-two reader registrations remain internal; controller-issued slot/serial
+references cannot substitute an external queue key. Incremental work is bounded
+to one phase or at most 256 derived bytes per step.
+
+Edits, undo, route mutation and disposal stay vetoed through separate command,
+reader and callback-source retirement. Captured complete extents and live
+allocation ledgers guard input/output aliases before writable faults. Stale
+fixed tags drain without traversing former tables. A small task-side activation
+failure seam closes the enclosing revision-fault path only for a still-live
+genuine owner; independently invoked fire retains its copied-only behavior.
+
+Revised host attempt `abu1j_nf` passes ASan/UBSan: 937 saved sources, nine exact
+overlays, 78 units, eight successful preparation/compiler/run calls and seven
+complete software pass lines. Independent saved-source/fixture/result review
+reports a bounded pass without findings. Both earlier actual host compile failures
+and the historical `exq1v9l8` pass remain preserved. The first controller Amiga
+compile/link failed on six formatting warnings; six newline-only corrections are
+covered by the revised host pass. A distinct corrected compiler/link run passes
+91 calls, 78 units and 223 actual dependencies. Its 510,392-byte HUNK candidate
+has SHA256 `f0a35094b0e7c9f806f653155b6bfffcb875da9155a5f955691ba1263beb92a7`.
+Offline saved-byte verification and independent saved compiler/custody review
+pass. No timeout-cleanup failure path was
+exercised. The binary has NEVER_EXECUTED; native entry, Amiberry and physical
+execution remain NOT_RUN.
+See [controller contract](EDITOR_MIXED_READERS_PREPARE.md).
+The [saved controller host evidence](../evidence/enhanced-editor/editor-mixed-readers-host/README.md)
+preserves current and historical passes separately from the actual failures.
+The [controller compiler evidence](../evidence/enhanced-editor/editor-mixed-readers-portable/README.md)
+publishes source hashes, ordered units, call metadata and final compiler logs.
+The public verifier checks those selected projections; complete private sources,
+toolchain, log collections and the unexecuted binary remain separate.
+
+This supplies individual request-driven editor batches. Whole-song production,
+native PLAY, a qualified real port, actual memory placement, aggregate runtime
+stack, exact activation/IRQ timing, physical card/audio and listening remain open.

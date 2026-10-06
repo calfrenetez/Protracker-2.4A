@@ -1,0 +1,22 @@
+src/editor/editor_mixed_readers_prepare.c:351:53: error: variable 'f' is uninitialized when passed as a const pointer argument here [-Werror,-Wuninitialized-const-pointer]
+  351 |  if(!output_apart(s,&a,sizeof(a))||!output_apart(s,&f,sizeof(f))||
+      |                                                     ^
+src/editor/editor_mixed_readers_prepare.c:351:22: error: variable 'a' is uninitialized when passed as a const pointer argument here [-Werror,-Wuninitialized-const-pointer]
+  351 |  if(!output_apart(s,&a,sizeof(a))||!output_apart(s,&f,sizeof(f))||
+      |                      ^
+src/editor/editor_mixed_readers_prepare.c:435:64: error: variable 'key' is uninitialized when passed as a const pointer argument here [-Werror,-Wuninitialized-const-pointer]
+  435 |     !output_apart(s,handles,sizeof(handles))||!output_apart(s,&key,sizeof(key)))return PT_EDITOR_MIXED_READERS_INVALID;
+      |                                                                ^~~
+src/editor/editor_mixed_readers_prepare.c:532:36: error: variable 'receipt' is uninitialized when passed as a const pointer argument here [-Werror,-Wuninitialized-const-pointer]
+  532 |  if(cancel>1||!s||!output_apart(s,&receipt,sizeof(receipt))||!service_enter(s,out,sizeof(*out)))return PT_MIXED_READERS_INVALID;
+      |                                    ^~~~~~~
+src/editor/editor_mixed_readers_prepare.c:547:36: error: variable 'receipt' is uninitialized when passed as a const pointer argument here [-Werror,-Wuninitialized-const-pointer]
+  547 |  if(cancel>1||!s||!output_apart(s,&receipt,sizeof(receipt))||!service_enter(s,out,sizeof(*out)))return PT_MIXED_READERS_INVALID;
+      |                                    ^~~~~~~
+src/editor/editor_mixed_readers_prepare.c:577:59: error: variable 'activation' is uninitialized when passed as a const pointer argument here [-Werror,-Wuninitialized-const-pointer]
+  577 |  if(!output_apart(s,&pool,sizeof(pool))||!output_apart(s,&activation,sizeof(activation)))return 0;
+      |                                                           ^~~~~~~~~~
+src/editor/editor_mixed_readers_prepare.c:577:22: error: variable 'pool' is uninitialized when passed as a const pointer argument here [-Werror,-Wuninitialized-const-pointer]
+  577 |  if(!output_apart(s,&pool,sizeof(pool))||!output_apart(s,&activation,sizeof(activation)))return 0;
+      |                      ^~~~
+7 errors generated.

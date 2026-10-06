@@ -1,0 +1,236 @@
+[
+  {
+    "published": "current/qualification.json",
+    "original_pin": {
+      "bytes": 2479762,
+      "sha256": "959351939d9b5c332cb27df69a86a6a56d4e63f6a801553ee9eacd8cfb1e38ae"
+    },
+    "public_pin": {
+      "bytes": 4481,
+      "sha256": "4495aafdc62ad86369dae73e75d6207abdb8f96804e6f971332196efd7dc693c"
+    },
+    "recipe": "qualification",
+    "private_source": "controller-portable-v2/manifest.json"
+  },
+  {
+    "published": "current/source-inventory.json",
+    "original_pin": {
+      "bytes": 2479762,
+      "sha256": "959351939d9b5c332cb27df69a86a6a56d4e63f6a801553ee9eacd8cfb1e38ae"
+    },
+    "public_pin": {
+      "bytes": 158387,
+      "sha256": "e15884c23a31fad07c5381506b9308de712b86a7da9d4c62af748d9c4e956f0e"
+    },
+    "recipe": "source_hash_inventory",
+    "private_source": "controller-portable-v2/manifest.json"
+  },
+  {
+    "published": "current/ordered-units.json",
+    "original_pin": {
+      "bytes": 2479762,
+      "sha256": "959351939d9b5c332cb27df69a86a6a56d4e63f6a801553ee9eacd8cfb1e38ae"
+    },
+    "public_pin": {
+      "bytes": 2962,
+      "sha256": "6bb8f6ec08cce9fe2bbf55f5f81d0cfb4183a7eb755f0fe02c56199294b3a4b4"
+    },
+    "recipe": "ordered_units",
+    "private_source": "controller-portable-v2/manifest.json"
+  },
+  {
+    "published": "current/compiler-calls.json",
+    "original_pin": {
+      "bytes": 2479762,
+      "sha256": "959351939d9b5c332cb27df69a86a6a56d4e63f6a801553ee9eacd8cfb1e38ae"
+    },
+    "public_pin": {
+      "bytes": 151099,
+      "sha256": "6174f9a4211952ceec4d2dea1c9f8e3d9e3de610918b4b012a96092d0596c687"
+    },
+    "recipe": "compiler_call_metadata",
+    "private_source": "controller-portable-v2/manifest.json"
+  },
+  {
+    "published": "current/tool-runtime-dependency-pins.json",
+    "original_pin": {
+      "bytes": 2479762,
+      "sha256": "959351939d9b5c332cb27df69a86a6a56d4e63f6a801553ee9eacd8cfb1e38ae"
+    },
+    "public_pin": {
+      "bytes": 60478,
+      "sha256": "2ec67a6f0d79767d8fb4729f894ea3837ea9044aef171a2e0b005999925c692f"
+    },
+    "recipe": "tool_runtime_dependency_pins",
+    "private_source": "controller-portable-v2/manifest.json"
+  },
+  {
+    "published": "current/compile-link.stdout",
+    "original_pin": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "public_pin": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "recipe": "raw",
+    "private_source": "controller-portable-v2/native/compile-link.stdout"
+  },
+  {
+    "published": "current/compile-link.stderr",
+    "original_pin": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "public_pin": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "recipe": "raw",
+    "private_source": "controller-portable-v2/native/compile-link.stderr"
+  },
+  {
+    "published": "failure/qualification.json",
+    "original_pin": {
+      "bytes": 2065287,
+      "sha256": "cd7b1bba3acdb58ba65b05d857023fff59f058a034341b822ca7d23832242fca"
+    },
+    "public_pin": {
+      "bytes": 4324,
+      "sha256": "7bb0cc8e6eb4b79c116ea08faa2834b32d8f558b5342b65814d3fdb266383358"
+    },
+    "recipe": "qualification",
+    "private_source": "controller-portable-v1/manifest.json"
+  },
+  {
+    "published": "failure/source-inventory.json",
+    "original_pin": {
+      "bytes": 2065287,
+      "sha256": "cd7b1bba3acdb58ba65b05d857023fff59f058a034341b822ca7d23832242fca"
+    },
+    "public_pin": {
+      "bytes": 158387,
+      "sha256": "926bb4c54be7e509d04b432e889f0bfa6439468a43025cff8b51446d8a516ced"
+    },
+    "recipe": "source_hash_inventory",
+    "private_source": "controller-portable-v1/manifest.json"
+  },
+  {
+    "published": "failure/ordered-units.json",
+    "original_pin": {
+      "bytes": 2065287,
+      "sha256": "cd7b1bba3acdb58ba65b05d857023fff59f058a034341b822ca7d23832242fca"
+    },
+    "public_pin": {
+      "bytes": 2962,
+      "sha256": "cad545a4cd5e35ac98917dcc3d5c52d76230163c7768b74479621273af9ee10e"
+    },
+    "recipe": "ordered_units",
+    "private_source": "controller-portable-v1/manifest.json"
+  },
+  {
+    "published": "failure/compiler-calls.json",
+    "original_pin": {
+      "bytes": 2065287,
+      "sha256": "cd7b1bba3acdb58ba65b05d857023fff59f058a034341b822ca7d23832242fca"
+    },
+    "public_pin": {
+      "bytes": 151191,
+      "sha256": "f515626e9ec2888cd21ac23e95c987cafbf6d3a37b3fb6da13a20a3e1794f9cc"
+    },
+    "recipe": "compiler_call_metadata",
+    "private_source": "controller-portable-v1/manifest.json"
+  },
+  {
+    "published": "failure/tool-runtime-dependency-pins.json",
+    "original_pin": {
+      "bytes": 2065287,
+      "sha256": "cd7b1bba3acdb58ba65b05d857023fff59f058a034341b822ca7d23832242fca"
+    },
+    "public_pin": {
+      "bytes": 60478,
+      "sha256": "b067de9a832a929b69748825cb56d1b9f7423ac96309d7e2a9f88827195f9581"
+    },
+    "recipe": "tool_runtime_dependency_pins",
+    "private_source": "controller-portable-v1/manifest.json"
+  },
+  {
+    "published": "failure/compile-link.stdout",
+    "original_pin": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "public_pin": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "recipe": "raw",
+    "private_source": "controller-portable-v1/native/compile-link.stdout"
+  },
+  {
+    "published": "failure/compile-link.stderr",
+    "original_pin": {
+      "bytes": 3261,
+      "sha256": "bc3ba81125fe2df83e350b22c6b6c37e1926b3147241ad67e00dce1eef9386c3"
+    },
+    "public_pin": {
+      "bytes": 3261,
+      "sha256": "bc3ba81125fe2df83e350b22c6b6c37e1926b3147241ad67e00dce1eef9386c3"
+    },
+    "recipe": "raw",
+    "private_source": "controller-portable-v1/native/compile-link.stderr"
+  },
+  {
+    "published": "expected-native.stdout",
+    "original_pin": {
+      "bytes": 2273,
+      "sha256": "b3afac00b309d959418568141eb81a0977fabfbfdfde3eaa7688b1d2167ff22e"
+    },
+    "public_pin": {
+      "bytes": 2273,
+      "sha256": "b3afac00b309d959418568141eb81a0977fabfbfdfde3eaa7688b1d2167ff22e"
+    },
+    "recipe": "raw",
+    "private_source": "controller-portable-v2/expected-native.stdout"
+  },
+  {
+    "published": "reviews/current-compiler-review.json",
+    "original_pin": {
+      "bytes": 11306,
+      "sha256": "d36bb2e96266534e95e0e3d2fd5204ce2aa7754a56290e5a1a710a932b51cfc1"
+    },
+    "public_pin": {
+      "bytes": 9258,
+      "sha256": "14e6a41addad63b57ab19e57aee370d0e52d1c887f29332925d854ac7326b645"
+    },
+    "recipe": "current_independent_review",
+    "private_source": "portable-preparation-v2/review-final-v1/review.json"
+  },
+  {
+    "published": "reviews/current-offline-verification.json",
+    "original_pin": {
+      "bytes": 3841,
+      "sha256": "01b821e2acf1d1b656b09ddbeb7eb823c80b094ea209e3623ffbed7acae3a2f2"
+    },
+    "public_pin": {
+      "bytes": 2703,
+      "sha256": "505dd69dd3421e3a2e047bf80f290118d5923566c2c433a797a4e193a4b11d27"
+    },
+    "recipe": "current_offline_verification",
+    "private_source": "controller-portable-v2/saved-byte-verification-root-v1.json"
+  },
+  {
+    "published": "reviews/failure-custody-review.json",
+    "original_pin": {
+      "bytes": 6323,
+      "sha256": "5bfdcb928de8e8c65b4eb4bb3be161f24387f51c096215c88298c7eb7637be40"
+    },
+    "public_pin": {
+      "bytes": 5426,
+      "sha256": "b1cc07c983f18c34f4fe2213c3964389ac0c104e02dc17b680062dd9d0487ddb"
+    },
+    "recipe": "failure_independent_review",
+    "private_source": "portable-preparation-v1/review-failure-v1/review.json"
+  }
+]

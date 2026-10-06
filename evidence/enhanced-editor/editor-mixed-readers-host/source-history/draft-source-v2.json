@@ -1,0 +1,49 @@
+{
+  "status": "DRAFT_SOURCE_ONLY_NOT_COMPILED_NOT_RUN",
+  "baseline": "a02d53f2047753fd8673cbcc377d772da1ceb531",
+  "overlays": {
+    "src/editor/editor_mixed_readers_prepare.h": {
+      "bytes": 9029,
+      "sha256": "39cbf7b58ef5cbd575b1a7f2817db13e0f2d3fe6f2323b1adce5b0658734f3b4",
+      "mode": 33188
+    },
+    "src/editor/editor_mixed_readers_prepare.c": {
+      "bytes": 39205,
+      "sha256": "3cd72c9706a727807928fd15e0206612dcdc58a55b69fb4e7d441338ac19c004",
+      "mode": 33188
+    },
+    "tests/editor_mixed_readers_prepare_test.c": {
+      "bytes": 39002,
+      "sha256": "104e35b6a58b9fc7afd4538a9a48bbec84273e4612b73eae3909331645fe3a74",
+      "mode": 33188
+    },
+    "tests/test_editor_mixed_readers_prepare.py": {
+      "bytes": 13663,
+      "sha256": "6f6c3a6605e7932ea59ce5a8d49676bf9b8dae9ebf01bbe02f83f03056b3f7c2",
+      "mode": 33188
+    },
+    "src/core/mixed_readers_activation.h": {
+      "bytes": 10423,
+      "sha256": "64edd461b1413fc5b896f7b972b41421c22f04f327c66a21dfbc9b7043394ab5",
+      "mode": 33188
+    },
+    "src/core/mixed_readers_activation.c": {
+      "bytes": 39492,
+      "sha256": "5624dfc982f086ed64c028059e89b83815e0f5d6e757ec423dc25b5a36f79968",
+      "mode": 33188
+    }
+  },
+  "source_file_count_expected": 937,
+  "source_python_ast": "PARSED_ONLY_NOT_EXECUTED",
+  "index_sha256": "1601e89645535bd9c804ebdca7488f865c5492dbeaa97740c9cbd31dcd96ef85",
+  "supersedes": "draft-source-v1.json",
+  "corrections": [
+    "Close0 actual child NULL consumption followed by separate hook draining close without child retry",
+    "Both revision-only clock return0 and return1 after prior WAITING publication",
+    "Adopted begin numeric input/fixed hook guards before former table or workspace reads, with poisoned-header callback regression",
+    "Owned new-session PGID cleanup with 5s reserve inside unchanged120/180 and positive driver/group quiescence",
+    "Persistent preparation first failure plus complete partial stdout/stderr/error files"
+  ],
+  "qualifier": "NOT_RUN_WAITING_ROOT_SOURCE_AUDIT",
+  "scope": "Request-driven HOST draft only; no native, target, timer, DMA, MMIO, audio."
+}

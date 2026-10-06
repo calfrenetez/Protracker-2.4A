@@ -102,6 +102,11 @@ struct pt_render_setup_report {
 #define PT_RENDER_SETUP_GUARDS 8U
 struct pt_render_setup_guard {const void *data;size_t bytes;};
 struct pt_render_sequence_setup;
+/* Descriptive actual opaque control extents only. No validity/progress proof. */
+size_t pt_render_sequence_setup_control_size(void);
+size_t pt_render_sequence_setup_control_alignment(void);
+size_t pt_render_sequence_control_size(void);
+size_t pt_render_sequence_control_alignment(void);
 struct pt_render_sequence;
 enum pt_render_setup_result pt_render_sequence_setup_begin(const struct pt_project *,
     const struct pt_render_options *, const struct pt_allocator *, uint32_t revision,

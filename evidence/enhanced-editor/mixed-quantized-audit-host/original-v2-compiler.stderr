@@ -1,0 +1,80 @@
+In file included from tests/mixed_quantized_audit_test.c:4:
+tests/../src/editor/mixed_quantized_audit.c:26:58: error: field has incomplete type 'struct pt_allocator'
+   26 |     struct pt_playback_format format;struct pt_allocator base,wrapped;
+      |                                                          ^
+tests/../src/editor/../core/render.h:78:8: note: forward declaration of 'struct pt_allocator'
+   78 | struct pt_allocator;
+      |        ^
+In file included from tests/mixed_quantized_audit_test.c:4:
+tests/../src/editor/mixed_quantized_audit.c:26:63: error: field has incomplete type 'struct pt_allocator'
+   26 |     struct pt_playback_format format;struct pt_allocator base,wrapped;
+      |                                                               ^
+tests/../src/editor/../core/render.h:78:8: note: forward declaration of 'struct pt_allocator'
+   78 | struct pt_allocator;
+      |        ^
+In file included from tests/mixed_quantized_audit_test.c:4:
+tests/../src/editor/mixed_quantized_audit.c:100:33: error: invalid application of 'sizeof' to an incomplete type 'const struct pt_allocator'
+  100 |        !span(v->allocator,sizeof(*v->allocator))||(uintptr_t)v->allocator%_Alignof(struct pt_allocator)||
+      |                                 ^~~~~~~~~~~~~~~
+tests/../src/editor/../core/render.h:78:8: note: forward declaration of 'struct pt_allocator'
+   78 | struct pt_allocator;
+      |        ^
+In file included from tests/mixed_quantized_audit_test.c:4:
+tests/../src/editor/mixed_quantized_audit.c:100:75: error: invalid application of 'alignof' to an incomplete type 'struct pt_allocator'
+  100 |        !span(v->allocator,sizeof(*v->allocator))||(uintptr_t)v->allocator%_Alignof(struct pt_allocator)||
+      |                                                                           ^       ~~~~~~~~~~~~~~~~~~~~~
+tests/../src/editor/../core/render.h:78:8: note: forward declaration of 'struct pt_allocator'
+   78 | struct pt_allocator;
+      |        ^
+In file included from tests/mixed_quantized_audit_test.c:4:
+tests/../src/editor/mixed_quantized_audit.c:106:34: error: invalid application of 'sizeof' to an incomplete type 'const struct pt_allocator'
+  106 |        !apart(v->allocator,sizeof(*v->allocator),out,n)||
+      |                                  ^~~~~~~~~~~~~~~
+tests/../src/editor/../core/render.h:78:8: note: forward declaration of 'struct pt_allocator'
+   78 | struct pt_allocator;
+      |        ^
+In file included from tests/mixed_quantized_audit_test.c:4:
+tests/../src/editor/mixed_quantized_audit.c:248:81: error: incomplete definition of type 'const struct pt_allocator'
+  248 |     const struct pt_render_options *o=v->options;unsigned i,covered=v->allocator->context==NULL;
+      |                                                                     ~~~~~~~~~~~~^
+tests/../src/editor/../core/render.h:78:8: note: forward declaration of 'struct pt_allocator'
+   78 | struct pt_allocator;
+      |        ^
+In file included from tests/mixed_quantized_audit_test.c:4:
+tests/../src/editor/mixed_quantized_audit.c:250:21: error: incomplete definition of type 'const struct pt_allocator'
+  250 |     if(!v->allocator->allocate||!v->allocator->release||!v->ordinary_byte_budget||
+      |         ~~~~~~~~~~~~^
+tests/../src/editor/../core/render.h:78:8: note: forward declaration of 'struct pt_allocator'
+   78 | struct pt_allocator;
+      |        ^
+In file included from tests/mixed_quantized_audit_test.c:4:
+tests/../src/editor/mixed_quantized_audit.c:250:46: error: incomplete definition of type 'const struct pt_allocator'
+  250 |     if(!v->allocator->allocate||!v->allocator->release||!v->ordinary_byte_budget||
+      |                                  ~~~~~~~~~~~~^
+tests/../src/editor/../core/render.h:78:8: note: forward declaration of 'struct pt_allocator'
+   78 | struct pt_allocator;
+      |        ^
+In file included from tests/mixed_quantized_audit_test.c:4:
+tests/../src/editor/mixed_quantized_audit.c:256:105: error: incomplete definition of type 'const struct pt_allocator'
+  256 |     for(i=0;i<v->context_count;++i){uintptr_t x=(uintptr_t)v->contexts[i].data,c=(uintptr_t)v->allocator->context;
+      |                                                                                             ~~~~~~~~~~~~^
+tests/../src/editor/../core/render.h:78:8: note: forward declaration of 'struct pt_allocator'
+   78 | struct pt_allocator;
+      |        ^
+In file included from tests/mixed_quantized_audit_test.c:4:
+tests/../src/editor/mixed_quantized_audit.c:306:16: error: variable has incomplete type 'struct pt_allocator'
+  306 |     j->wrapped=(struct pt_allocator){j,allocate,release};j->result=v->result_storage;
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tests/../src/editor/../core/render.h:78:8: note: forward declaration of 'struct pt_allocator'
+   78 | struct pt_allocator;
+      |        ^
+tests/mixed_quantized_audit_test.c:531:66: error: pointer type mismatch ('struct pt_mixed_quantized_audit **' and 'uint8_t *' (aka 'unsigned char *')) [-Werror,-Wpointer-type-mismatch]
+  531 |         target=which==0?qa_spare_span(f,bytes,alignment):which==1?f->owner:
+      |                                                                  ^~~~~~~~~
+  532 |             which==2?(uint8_t *)f->workspace+pt_mixed_quantized_audit_workspace_size():
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  533 |             which==3?(uint8_t *)f->normalizer+pt_mixed_plan_normalizer_workspace_size():
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  534 |             (uint8_t *)f->result+pt_mixed_quantized_audit_result_size();
+      |             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+11 errors generated.

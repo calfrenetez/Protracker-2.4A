@@ -489,6 +489,10 @@ struct pt_render_sequence_setup {
     uint8_t used[PT_PROJECT_PATTERNS];
     unsigned busy,failed;unsigned *callback_failure;
 };
+size_t pt_render_sequence_setup_control_size(void){return sizeof(struct pt_render_sequence_setup);}
+size_t pt_render_sequence_setup_control_alignment(void){return _Alignof(struct pt_render_sequence_setup);}
+size_t pt_render_sequence_control_size(void){return sizeof(struct pt_render_sequence);}
+size_t pt_render_sequence_control_alignment(void){return _Alignof(struct pt_render_sequence);}
 static int setup_span(const void *p,size_t n)
 {return !n||(p&&n<=UINTPTR_MAX-(uintptr_t)p);}
 static int setup_apart(const void *a,size_t an,const void *b,size_t bn)

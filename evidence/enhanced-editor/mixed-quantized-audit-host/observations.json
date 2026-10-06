@@ -1,0 +1,215 @@
+{
+  "schema": "pt24g-mixed-quantized-audit-host-public-projection-v4",
+  "status": "PASS_HOST_ONLY",
+  "scope": "Standalone every-completed-boundary quantized geometry audit; no owning whole-song producer/editor PLAY/device/activation integration.",
+  "actual_qualification": {
+    "admission_commit": "ee9aa13ca24e1a7a0784f150d9f98d6b7bc330fe",
+    "source_origin_marker": "PROPOSAL_SOURCE_PINS_ONLY_NOT_ADMISSION",
+    "archive_files": 950,
+    "source_files": 955,
+    "ordered_translation_units": 39,
+    "drivers_inner": 18,
+    "drivers_root": 10,
+    "raw_streams": 56,
+    "markers": 7,
+    "stdout_bytes": 1553,
+    "compiler_seconds": 8.836089792006533,
+    "runtime_seconds": 0.5393863750068704,
+    "inner_seconds": 12.019412249996094,
+    "root_seconds": 13.17258170900459,
+    "product": {
+      "bytes": 2534480,
+      "sha256": "90f0c4949ea5155358c71aa388716ce4612bada6190762890b48f8c5f1141e8f",
+      "mode": 33261
+    }
+  },
+  "actual_run": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/host-qualification/attempt-first-v4/run.json",
+    "bytes": 360098,
+    "sha256": "9c3cbf701db5c2939d7c83e060ffc0c600943b56b86cd2464e0e1078ca72d7d9",
+    "mode": 33188
+  },
+  "root_receipt": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/root-host-preparation-v4/execution-first-v4/receipt.json",
+    "bytes": 230529,
+    "sha256": "4c67094cee1faeccacce161a55948c75404286b9f3a0144e9d0161ca3bee911e",
+    "mode": 33188
+  },
+  "independent_saved_review": {
+    "status": "ACCEPT_SAVED_HOST_ONLY_NO_REPLAY",
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/independent-host-review-v4/review.json",
+    "bytes": 5263,
+    "sha256": "1354f42f202ad8297f9c8e2a53b903e2e86b1aaf055a7f48758aecec24cade3a",
+    "mode": 33188
+  },
+  "independent_verification": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/independent-host-review-v4/verification.json",
+    "bytes": 55277,
+    "sha256": "62e4e8645f5c4c59abdd81426b1f99b8e4a17d3a2efa2ae8fd51e07d03702d18",
+    "mode": 33188
+  },
+  "independent_readback": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/independent-host-review-v4/readback.json",
+    "bytes": 1410,
+    "sha256": "fb1c184b0b0b417837238309e9c49da62c17a7d476c503ba8fbe619e94fae558",
+    "mode": 33188
+  },
+  "source_freeze": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/implementation-v4/source-freeze-v4.json",
+    "bytes": 20737,
+    "sha256": "1584c42a5e984f14c48a93e22f12c65e99d7e18f3669064608edef87ef6cfb57",
+    "mode": 33188
+  },
+  "six_source_pins": {
+    "src/core/render.c": {
+      "bytes": 63608,
+      "mode": 33188,
+      "sha256": "acc53af54275d5ec481ca2128dcf72fde305bf91ed28295fd781a81f42966936"
+    },
+    "src/core/render.h": {
+      "bytes": 12179,
+      "mode": 33188,
+      "sha256": "aa531e26bcf3d3fbe6ddfb61a3ea86ae2c1aeb90016e41c4649076a33793bc2f"
+    },
+    "src/editor/mixed_quantized_audit.c": {
+      "bytes": 31119,
+      "mode": 33188,
+      "sha256": "24a642896358f49e38d492bbedcbc3d4f6ada083e7f06adc47cbd6cfa4b607d6"
+    },
+    "src/editor/mixed_quantized_audit.h": {
+      "bytes": 5672,
+      "mode": 33188,
+      "sha256": "8ddec0873a6131d4a258845412ea7b69b9d7e6e40562dc1802e63fc992ca9733"
+    },
+    "tests/mixed_quantized_audit_test.c": {
+      "bytes": 36372,
+      "mode": 33188,
+      "sha256": "6696985872dcd22aeb3a2684b516466fd5bed7de30f3b830126d20d64f180cac"
+    },
+    "tests/test_mixed_quantized_audit.py": {
+      "bytes": 26296,
+      "mode": 33188,
+      "sha256": "e45550a2c00d8da9b44809ba26e88487a7df670f4518be2177262e54a8f4c6b0"
+    }
+  },
+  "source_archive_closure": {
+    "archive_files": 950,
+    "saved_inputs": 955,
+    "additive": 4,
+    "modified_renderer_queries": 2,
+    "committed_font_bytes": 580,
+    "generated_font_header_bytes": 1630,
+    "complete_inputs_canonical_map_sha256": "8eeffb535c923b2f078e13647b81210d341ef4964066e7d8e9917d178d035662",
+    "complete_archive_filtered_map_sha256": "a658f620cd50d8828fef0cffeaf3e9b90cb2d781b607e2829c102574c9c8913c"
+  },
+  "source_custody": {
+    "current_source_files": 1167,
+    "controls": 41,
+    "protected_display_editor_paths": 16,
+    "raw_indices_unchanged_and_unstaged": true,
+    "scoped_status_protected16_only": true
+  },
+  "actual_assertion_coverage": [
+    {
+      "name": "schedule",
+      "actual_asserted": "12 genuine pinned8/16/24 Paula/card trim/lead lifetimes; literal10 boundaries7175/9095; seven image fields/centre32639/32895; once rewind/SAME pointer/save byte equality; empty three-boundary DONE."
+    },
+    {
+      "name": "full16",
+      "actual_asserted": "Four8/16/endian format cases; genuine16 channels/four Paula+twelve card; raw32->16 normalized records; origins0..15 atframe0 retained through empty DONE; SAME sequence."
+    },
+    {
+      "name": "late_refusal",
+      "actual_asserted": "Old genuine preflight accepts renderer-valid Paula901 at3840/five intervals; strict current audit refuses at2880 with Paula/action0/track0, masks zero and no sequence transfer."
+    },
+    {
+      "name": "guards_budget",
+      "actual_asserted": "Genuine append_owned adopted65536-byte16frame master; eight complete aliases; copied close; five capacity/budget/wrap and four scope refusals; READY aliases; full master/save identity; queried extents/alignment; bounded work."
+    },
+    {
+      "name": "cancel",
+      "actual_asserted": "All13 phase cancellations with former table pointer1 (not OS-unmapped proof), revision stale before former table walks and selection permitted; numeric drain."
+    },
+    {
+      "name": "callbacks",
+      "actual_asserted": "Ten known allocator alias refusals/no ambiguous release; eight allocating reentry/stale/read-only groups with admitted mode4 alias; actual positive sequence retained after setup-release fault; transferred BUSY release; two exact-request NULL/no retry."
+    },
+    {
+      "name": "cleanup",
+      "actual_asserted": "Genuine Q/renderer children drain before unpin/current release; transferred sequence keeps audit workspace alive until wrapped release retires original ledger; zero live master/control resources after teardown."
+    }
+  ],
+  "historical_failures": {
+    "V1_SOURCE": {
+      "status": "CHANGES_REQUIRED_FIXTURE_SPARE_OWNERSHIP",
+      "review": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/independent-source-review-v1/review.json",
+        "bytes": 8726,
+        "sha256": "4b80e27e87d240eebb4ad98798a76c17d7eb825409d044b575429275f4ba2d81",
+        "mode": 33188
+      }
+    },
+    "V2_COMPILE": {
+      "status": "FAIL_COMPILE_NO_PRODUCT_NO_RUNTIME",
+      "run": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/host-qualification/attempt-first-v2/run.json",
+        "bytes": 348841,
+        "sha256": "a43c326d39986d5506c99761a0d8146d06af8b4dade5ffbd636d051b9b470f21",
+        "mode": 33188
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/host-qualification/attempt-first-v2/strict-qaudit-compile.stderr",
+        "bytes": 5803,
+        "sha256": "f78f60e8578e98e55e28013e8b844e369c3203552d670066db8f8db17a8d8abc",
+        "mode": 33188
+      }
+    },
+    "V3_RUNTIME": {
+      "status": "COMPILE_PASS_RUNTIME_RC_MINUS6_AFTER_FIVE1127_BYTES",
+      "run": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/host-qualification/attempt-first-v3/run.json",
+        "bytes": 355427,
+        "sha256": "b519babd9a4325e19fcbe6e7ec888dbfa612578a645d437cf3a2ae9beb9a6844",
+        "mode": 33188
+      },
+      "stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/host-qualification/attempt-first-v3/strict-qaudit-run.stdout",
+        "bytes": 1127,
+        "sha256": "fe1018867a8be12ed0edc05c95a61f271f2863e2898aef9adb20804deb44c160",
+        "mode": 33188
+      },
+      "stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/host-qualification/attempt-first-v3/strict-qaudit-run.stderr",
+        "bytes": 167,
+        "sha256": "9003ca259698eb7104ba23987ca9442480439b6f361fb39443fc000dfecc0e7d",
+        "mode": 33188
+      },
+      "original_return_enum_and_callback_tuple": "UNKNOWN_NOT_RECORDED",
+      "source_diagnosis": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/independent-runtime-source-diagnosis-v3/review.json",
+        "bytes": 3572,
+        "sha256": "d78dadec5c3574b9bfc435543fddf2d17c11424fa747b93a7468238c0b3213da",
+        "mode": 33188
+      }
+    }
+  },
+  "tiers": {
+    "HOST": "PASS_EXACT_PRIVATE_V4",
+    "native_compiler": "NOT_RUN",
+    "native_runtime": "NOT_RUN",
+    "Amiberry": "NOT_RUN",
+    "real_A1200": "NOT_RUN",
+    "physical_RAM_placement": "NOT_RUN",
+    "total_stack_and_launcher": "NOT_QUALIFIED",
+    "device_capacity_order_completion_voice_stop": "NOT_QUALIFIED",
+    "exact_live_output_timing_audio_listening": "NOT_RUN"
+  },
+  "limits": [
+    "Actual HOST software qualification of this exact private source/fixture only; observed bounds are host custody, not WCET/IRQ/hardware timing.",
+    "Masks/origins/quantized images are descriptive; no reader/cache/key/queue/card upload/audio authority or editor PLAY hookup is supplied.",
+    "No exact-ABI native compiler, emulator, real-A1200 execution, placement/total stack/launcher/device capacity/order/completion/stop/musical output timing/audio/listening acceptance.",
+    "V1 source finding, V2 compiler failure and V3 runtime failure remain separate; V3 actual returned enum and callback tuple remain unknown.",
+    "Reviewer read saved artifacts only; no candidate execution or qualification replay."
+  ],
+  "public_packet": "Small metadata/selected exact outputs/original failure stderr only; no source archive or compiler product adopted."
+}

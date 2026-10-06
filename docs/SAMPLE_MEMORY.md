@@ -6182,3 +6182,34 @@ Corrected first-v3 passed HOST ASan/UBSan:951 saved inputs, five overlays,79 uni
 The original first-v1 and first-v2 runtime failures remain immutable; both compiled successfully. Their fixture repairs remove allocator-shim contamination and separate real barrier cancellation from positive OK drains. Original unrecorded tuples/returns remain unknown. See the [controller contract](EDITOR_MIXED_READERS_PREPARE.md) and [selected HOST projection](../evidence/enhanced-editor/editor-mixed-readers-quantized-host/README.md).
 
 This supersedes earlier private/unintegrated controller status. The geometry normalizer and this master-owning request/ref route still need the strict whole-song audit and SAME-sequence producer for their facade. No new controller native compile/stack, Amiberry/A1200, physical placement/device RAM/completion/order/stop, IRQ, exact live timing, audio or human listening acceptance is inferred.
+
+
+## Strict whole-song quantized geometry audit — 6 October 2026
+
+The separate `mixed_quantized_audit` now visits every completed genuine renderer
+boundary through the quantized normalizer, including zero-frame starts and empty
+DONE. It uses three disjoint caller buffers, full-capacity/control guards, bounded
+work, exactly two genuine renderer control allocations and actual consumed frame
+totals. Complete/current masks and origins are descriptive; they grant no master
+pin, cache, ACTIVE key or queue authority. One take rewinds once and transfers the
+SAME sequence. Its real wrapped allocator continues to borrow the audit workspace
+until actual sequence release retires the original ledger; close waits for that
+ownership before consuming the original audit slot. No source promotion, editor
+hook, device operation, gain approximation or jitter fallback is added.
+
+Exact first-v4 HOST ASan/UBSan qualification passed:955 saved inputs from950
+archive members/four additions/generated font, six overlays,39 units,28 successful
+quiet owned drivers and seven full1553-byte lines. Assertions cover pinned8/16/24
+masters with exact saves,12 schedule cases,four full16 mixed cases, late Paula901
+refusal, complete aliases/budgets,13 cancellation phases and genuine callback
+consumption/retained identities. Independent saved-only review passed without
+replay. Original V1 SOURCE, V2 compile and V3 runtime failures remain intact;
+V3's unrecorded return enum/callback tuple remains unknown.
+
+This supersedes the audit's earlier pending status, while the master-owning
+whole-song producer and composite editor PLAY path remain unfinished. Native
+compiler/runtime, Amiberry/A1200, physical placement/total stack/launcher,
+device RAM/order/completion/voice stop, exact live output timing/audio/listening
+remain NOT RUN or unqualified for this audit candidate. See the
+[contract](MIXED_QUANTIZED_AUDIT.md) and
+[selected HOST packet](../evidence/enhanced-editor/mixed-quantized-audit-host/README.md).

@@ -1,0 +1,16 @@
+{
+  "originalHealthyDisconnectedEndpoint": {
+    "host": "127.0.0.1",
+    "port": 2345,
+    "connected": false
+  },
+  "bridgeFlagUnchanged": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "savedOriginalIdleSnapshot": {
+    "bytes": 7348,
+    "sha256": "5cdbc43f3e93527f9a1474f7914fa7d24d5bc255f36fdfed2662f61c361867f8"
+  },
+  "physicalBrowserUntouched": true
+}

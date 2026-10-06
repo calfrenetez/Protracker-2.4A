@@ -1,0 +1,220 @@
+{
+  "status": "PASS_ONE_ORIGINAL030_RETURN_START_IDLE_CHECK_PENDING",
+  "reserveCalls": 1,
+  "startCalls": 1,
+  "target": "amiberry-030",
+  "atUTC": "2026-10-06T12:38:08.764756+00:00",
+  "overallRestoration": "PENDING_ORIGINAL030_RETURN",
+  "guardBefore": {
+    "archives": [
+      {
+        "bytes": 2034,
+        "fence": 5,
+        "name": "release-0000000000000005.json",
+        "sha256": "7f14fb8ffe7df2de1aed8beda774d083c9a717fec97ba575733fe0561422efcb"
+      },
+      {
+        "bytes": 2027,
+        "fence": 10,
+        "name": "release-000000000000000a.json",
+        "sha256": "565d842aadbb4f6ebaaf52143fce4f161da5996606c03adcd679eb1d67e355d3"
+      },
+      {
+        "bytes": 2674,
+        "fence": 18,
+        "name": "release-0000000000000012.json",
+        "sha256": "51040dc9dbe88c4fd07ab0168e154d2d1508b457605373d8fd38b3f12b5c80e8"
+      },
+      {
+        "bytes": 1574,
+        "fence": 28,
+        "name": "release-000000000000001c.json",
+        "sha256": "497beef52132b167956e5a9abfd0da5c60f95309a020b025a4c69f9564a8bb1f"
+      },
+      {
+        "bytes": 1548,
+        "fence": 34,
+        "name": "release-0000000000000022.json",
+        "sha256": "469c89a882db17a9aa686e703957d1770463de43ba8eb7a6e5b04e7e2cca33a8"
+      },
+      {
+        "bytes": 2189,
+        "fence": 41,
+        "name": "release-0000000000000029.json",
+        "sha256": "5df4c72f0992e4470b8664cc15c9245093d58b7afeb69f7b682ffba267cfc4eb"
+      },
+      {
+        "bytes": 1930,
+        "fence": 45,
+        "name": "release-000000000000002d.json",
+        "sha256": "3e95de456c1f74f8a72c7cf88af645a756686dc38fe3f866c16d7d25f8218faa"
+      },
+      {
+        "bytes": 2568,
+        "fence": 52,
+        "name": "release-0000000000000034.json",
+        "sha256": "7c5aaf39710163c8b4dbc1b44a987d727a8e045f20d013809308b997dfa958c7"
+      },
+      {
+        "bytes": 1692,
+        "fence": 60,
+        "name": "release-000000000000003c.json",
+        "sha256": "263825cc34f324aac80d3f0457cf1627ab6c6a03771a15e267cb9857f9792748"
+      },
+      {
+        "bytes": 1479,
+        "fence": 68,
+        "name": "release-0000000000000044.json",
+        "sha256": "812d96fee65d7a48d36678c4f951816292adf3b3d0b2dd279b9e95fe4174b9da"
+      },
+      {
+        "bytes": 2118,
+        "fence": 78,
+        "name": "release-000000000000004e.json",
+        "sha256": "53b5806aae1e3fc0495eebdf743d546dbb00dbc62b668e16bb298c5b1af0ea9e"
+      },
+      {
+        "bytes": 1747,
+        "fence": 86,
+        "name": "release-0000000000000056.json",
+        "sha256": "59db108a525d88ea475077087c706ed4635bacf78b2922373ec419baa432d9bf"
+      },
+      {
+        "bytes": 1454,
+        "fence": 94,
+        "name": "release-000000000000005e.json",
+        "sha256": "aa1042ad4379e5f434aff7596012d59287fa1aa4dccd47a3b3ff9e3dcbfcf1bb"
+      }
+    ],
+    "authorization": {
+      "approved": true,
+      "legacy_holds_verified": true,
+      "mode": "host-provisioning",
+      "record_sha256": "820445ecb68cd63db257e203686d2df63fca2e66f4d6048f59f5939771fce568"
+    },
+    "fence": 94,
+    "holds": [],
+    "inflight": null,
+    "potential_resident": false,
+    "reservation": null,
+    "version": 1,
+    "phase": "EMPTY"
+  },
+  "returncode": 0,
+  "ownedProcess": [
+    [
+      7926,
+      "/Users/james1/Documents/Codex/2026-08-18/open-calfrenetez-amicontinuity-read-codex-start/work/amicontinuity/tools/amiberry/local/Amiberry-8.3.0-fixed.app/Contents/MacOS/Amiberry -f /Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/amiberry/Configurations/A1200-030-DEV.uae -G"
+    ]
+  ],
+  "guardAfter": {
+    "archives": [
+      {
+        "bytes": 2034,
+        "fence": 5,
+        "name": "release-0000000000000005.json",
+        "sha256": "7f14fb8ffe7df2de1aed8beda774d083c9a717fec97ba575733fe0561422efcb"
+      },
+      {
+        "bytes": 2027,
+        "fence": 10,
+        "name": "release-000000000000000a.json",
+        "sha256": "565d842aadbb4f6ebaaf52143fce4f161da5996606c03adcd679eb1d67e355d3"
+      },
+      {
+        "bytes": 2674,
+        "fence": 18,
+        "name": "release-0000000000000012.json",
+        "sha256": "51040dc9dbe88c4fd07ab0168e154d2d1508b457605373d8fd38b3f12b5c80e8"
+      },
+      {
+        "bytes": 1574,
+        "fence": 28,
+        "name": "release-000000000000001c.json",
+        "sha256": "497beef52132b167956e5a9abfd0da5c60f95309a020b025a4c69f9564a8bb1f"
+      },
+      {
+        "bytes": 1548,
+        "fence": 34,
+        "name": "release-0000000000000022.json",
+        "sha256": "469c89a882db17a9aa686e703957d1770463de43ba8eb7a6e5b04e7e2cca33a8"
+      },
+      {
+        "bytes": 2189,
+        "fence": 41,
+        "name": "release-0000000000000029.json",
+        "sha256": "5df4c72f0992e4470b8664cc15c9245093d58b7afeb69f7b682ffba267cfc4eb"
+      },
+      {
+        "bytes": 1930,
+        "fence": 45,
+        "name": "release-000000000000002d.json",
+        "sha256": "3e95de456c1f74f8a72c7cf88af645a756686dc38fe3f866c16d7d25f8218faa"
+      },
+      {
+        "bytes": 2568,
+        "fence": 52,
+        "name": "release-0000000000000034.json",
+        "sha256": "7c5aaf39710163c8b4dbc1b44a987d727a8e045f20d013809308b997dfa958c7"
+      },
+      {
+        "bytes": 1692,
+        "fence": 60,
+        "name": "release-000000000000003c.json",
+        "sha256": "263825cc34f324aac80d3f0457cf1627ab6c6a03771a15e267cb9857f9792748"
+      },
+      {
+        "bytes": 1479,
+        "fence": 68,
+        "name": "release-0000000000000044.json",
+        "sha256": "812d96fee65d7a48d36678c4f951816292adf3b3d0b2dd279b9e95fe4174b9da"
+      },
+      {
+        "bytes": 2118,
+        "fence": 78,
+        "name": "release-000000000000004e.json",
+        "sha256": "53b5806aae1e3fc0495eebdf743d546dbb00dbc62b668e16bb298c5b1af0ea9e"
+      },
+      {
+        "bytes": 1747,
+        "fence": 86,
+        "name": "release-0000000000000056.json",
+        "sha256": "59db108a525d88ea475077087c706ed4635bacf78b2922373ec419baa432d9bf"
+      },
+      {
+        "bytes": 1454,
+        "fence": 94,
+        "name": "release-000000000000005e.json",
+        "sha256": "aa1042ad4379e5f434aff7596012d59287fa1aa4dccd47a3b3ff9e3dcbfcf1bb"
+      }
+    ],
+    "authorization": {
+      "approved": true,
+      "legacy_holds_verified": true,
+      "mode": "host-provisioning",
+      "record_sha256": "820445ecb68cd63db257e203686d2df63fca2e66f4d6048f59f5939771fce568"
+    },
+    "fence": 97,
+    "holds": [],
+    "inflight": null,
+    "potential_resident": true,
+    "reservation": {
+      "binding": {
+        "candidateSHA256": "21c5efc7fe5d066f56e81ea8cbcea8bc7e95892e8af0a55608a1410d882d9b1e",
+        "coordinationSHA256": "9e03ea681bf1f7f3a34c26715fe851825825bc3be1e96efd9d436e749a54f7db",
+        "pinsSHA256": "6976dda7918872696aebb3a6c417226e04c53fa59153fe52cf779acaed83bf3b",
+        "scopeSHA256": "8e40200594ad6af1b8dbe36c89372819d0093e11cdea7c9c095fd9305544c5d1",
+        "sourceCommit": "b13d6e70bcecb6813ad59ea43b0673df0280b942"
+      },
+      "controller": "ProTracker root01a0b5ae-c04f-7661-8859-e89df20c3290",
+      "lease": {
+        "run_id": "0e6e220077eeb9a6f41d9c4eaad141d6"
+      },
+      "purpose": "Separate return-only original030 profile/endpoint/idle verification after completed physical RAM fixture; no candidate replay",
+      "target": "amiberry-030"
+    },
+    "version": 1,
+    "phase": "READY"
+  },
+  "completedUTC": "2026-10-06T12:38:40.282743+00:00"
+}

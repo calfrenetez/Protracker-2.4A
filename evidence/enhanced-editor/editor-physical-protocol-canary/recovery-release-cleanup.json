@@ -1,0 +1,102 @@
+{
+  "oneExactOwnSIGTERM": 93129,
+  "forcedKills": 0,
+  "guestRequests": 0,
+  "deletions": 0,
+  "savedCompletedOnlyExactSixFileCleanup": "[OK]\nPT-CLEAN",
+  "allFirstRecordsPreserved": {
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/start-terminal.json": {
+      "bytes": 6847,
+      "sha256": "ddb6fd98410b36127c553529256cf71e5df8163be09006186bf7c21b5efe10a2"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/start.stdout": {
+      "bytes": 69,
+      "sha256": "1c085e09bf1ab0e1d45678eb0890816463f738a8518f7c2c5611eabc7caa0d01"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/start.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/run-terminal.json": {
+      "bytes": 12035,
+      "sha256": "ae01947da808ae97313007459222d5c722ff3f641578c59d3dd0f534dbadc33c"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/settlement-terminal.json": {
+      "bytes": 9606,
+      "sha256": "78fb4ae2baef3c71b383c011145fba632db4915af551063a3738981f912506ef"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/host-only-failure-identity-v1.json": {
+      "bytes": 5564,
+      "sha256": "5931f283ed99d7967335b6d3f8bf61896a34504a002cb71f6359dab08a03f6b5"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/original030-idle.png": {
+      "bytes": 7348,
+      "sha256": "5cdbc43f3e93527f9a1474f7914fa7d24d5bc255f36fdfed2662f61c361867f8"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/pins.json": {
+      "bytes": 70274,
+      "sha256": "cb204591f17ae0c96cb1341371fa4b8631f462a091a2221335c382738ac37de5"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/recovery-plan.json": {
+      "bytes": 1216,
+      "sha256": "dfe5768c7ab5fdbc13355f2982d2f15e11c2f380546130d2db85052d24f965b4"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/recover_close_once.py": {
+      "bytes": 3529,
+      "sha256": "b51c9a67cec9a4be815a2c1be08b7dce052afc53f89f0886248a9e16528f8ddc"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/verify_recovery_release_once.py": {
+      "bytes": 3326,
+      "sha256": "358720d11860f2b78186f06978afd74733ab2c479fab1f8200b153ebe7d03828"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/canary-custody/PTEditorBridgesTest": {
+      "bytes": 34,
+      "sha256": "985fb61e8bf4f4203bdb110e563ec3ad3d85286837559221c3fa870975b5aedd"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/canary-custody/Run-once": {
+      "bytes": 176,
+      "sha256": "b47d4086157b71a0ba9523dfdade88de14b9f223dace42b6df3d718371d99893"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/canary-custody/fixture.log": {
+      "bytes": 23,
+      "sha256": "a77f53758be02b983e36a180a52a0e73964155587bb6c8020f657c153099e9a4"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/canary-custody/fixture.rc": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/canary-custody/complete.flag": {
+      "bytes": 9,
+      "sha256": "a4bccf5c13ef5ff8311e59b34d492bc7072a55298723601a6a9c127053aee8fc"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/canary-custody/launcher.log": {
+      "bytes": 8,
+      "sha256": "fc1b7c019962b238d1a6ada645907789172d70040e961b64ef50e0f42710c35f"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/recovery-pins-before-approval.json": {
+      "bytes": 4296,
+      "sha256": "d74f4463f1c2c5a21af368c7fec1f6b265b94591f65f7ef5e573700456fe6ac4"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/recovery-final-review.json": {
+      "bytes": 596,
+      "sha256": "670faf58a10a5fa5a9f828445b8dabe9beb7bd1406b8240c8e28e846093465b3"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/recovery-coordination.json": {
+      "bytes": 1579,
+      "sha256": "2167ba3fb8418400e801129833360bae4cf1921e4a8a29bb550a43437093e460"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/explicit-recovery-approval.json": {
+      "bytes": 400,
+      "sha256": "b60b6b5966d70d273df9d2960e4437b2b604b96d7c426f3e72295bd72705aeb7"
+    },
+    "/Users/james1/Documents/Codex/2026-09-26/scott-chocolate-amiga-port/outputs/recovery-native-preparation-20261006-001/protracker-recovery-recipient-clearance.json": {
+      "bytes": 1264,
+      "sha256": "261c009159becd04ce18bee6121556a6b9205aae328981b84dbd42c487b41afe"
+    }
+  },
+  "closure": {
+    "bytes": 13686,
+    "sha256": "579f95ab4a66ddd3fd2cb87fb1bdf4b68022a68ae66eacc794a62a0db0d971c3"
+  },
+  "canaryReplay": false
+}

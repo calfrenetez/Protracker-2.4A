@@ -1,0 +1,8 @@
+FailAt 21
+Stack 65536
+CD RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0
+PTEditorBridgesTest >fixture.log
+Set PTEditorResult $RC
+Echo $PTEditorResult >fixture.rc
+Echo COMPLETE >complete.flag
+Quit $PTEditorResult

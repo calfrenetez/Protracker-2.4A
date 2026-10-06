@@ -1,0 +1,470 @@
+{
+  "status": "PASS_SAVED_BYTE_CUSTODY_ONLY",
+  "sourceCommit": "5771d3ce1fcc3dee1967ec0c728e1fa654954bba",
+  "physicalCallerCommit": "b13d6e70bcecb6813ad59ea43b0673df0280b942",
+  "files": {
+    "scope-plan.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/scope-plan.json",
+      "sourceFingerprint": {
+        "bytes": 7934,
+        "sha256": "8e40200594ad6af1b8dbe36c89372819d0093e11cdea7c9c095fd9305544c5d1"
+      },
+      "savedCopy": {
+        "bytes": 7934,
+        "sha256": "8e40200594ad6af1b8dbe36c89372819d0093e11cdea7c9c095fd9305544c5d1"
+      }
+    },
+    "coordination.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/coordination.json",
+      "sourceFingerprint": {
+        "bytes": 2513,
+        "sha256": "9e03ea681bf1f7f3a34c26715fe851825825bc3be1e96efd9d436e749a54f7db"
+      },
+      "savedCopy": {
+        "bytes": 2513,
+        "sha256": "9e03ea681bf1f7f3a34c26715fe851825825bc3be1e96efd9d436e749a54f7db"
+      }
+    },
+    "pins.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/pins.json",
+      "sourceFingerprint": {
+        "bytes": 75809,
+        "sha256": "6976dda7918872696aebb3a6c417226e04c53fa59153fe52cf779acaed83bf3b"
+      },
+      "savedCopy": {
+        "bytes": 75809,
+        "sha256": "6976dda7918872696aebb3a6c417226e04c53fa59153fe52cf779acaed83bf3b"
+      }
+    },
+    "prior-release.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/prior-release.json",
+      "sourceFingerprint": {
+        "bytes": 3138,
+        "sha256": "bbe727f91f30ef2bee0d74849289503c677788da6f28a2222aef4dd0146949be"
+      },
+      "savedCopy": {
+        "bytes": 3138,
+        "sha256": "bbe727f91f30ef2bee0d74849289503c677788da6f28a2222aef4dd0146949be"
+      }
+    },
+    "native-transport-gate.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/native-transport-gate.json",
+      "sourceFingerprint": {
+        "bytes": 1557,
+        "sha256": "b77f5de6fde8b8fcf648c6805370f337a5b2837e976fefd66e5e51163bcf3866"
+      },
+      "savedCopy": {
+        "bytes": 1557,
+        "sha256": "b77f5de6fde8b8fcf648c6805370f337a5b2837e976fefd66e5e51163bcf3866"
+      }
+    },
+    "preexecution-review.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/preexecution-review.json",
+      "sourceFingerprint": {
+        "bytes": 2961,
+        "sha256": "cf1458eafb1b4c49300652b70fb584f09a1482e57e7a560f542e8e5e738ed7f5"
+      },
+      "savedCopy": {
+        "bytes": 2961,
+        "sha256": "cf1458eafb1b4c49300652b70fb584f09a1482e57e7a560f542e8e5e738ed7f5"
+      }
+    },
+    "static-caller-review.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/static-caller-review.json",
+      "sourceFingerprint": {
+        "bytes": 2063,
+        "sha256": "795439c71c73fbb5858bb08223a5ecf9daefd6cf6da8be8b245850b84601f75d"
+      },
+      "savedCopy": {
+        "bytes": 2063,
+        "sha256": "795439c71c73fbb5858bb08223a5ecf9daefd6cf6da8be8b245850b84601f75d"
+      }
+    },
+    "safari-before.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/safari-before.json",
+      "sourceFingerprint": {
+        "bytes": 564,
+        "sha256": "42cba883f824f4cbeecfd786455362668592cee0afc28ebf28d2ee23647f1cec"
+      },
+      "savedCopy": {
+        "bytes": 564,
+        "sha256": "42cba883f824f4cbeecfd786455362668592cee0afc28ebf28d2ee23647f1cec"
+      }
+    },
+    "safari-after.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/safari-after.json",
+      "sourceFingerprint": {
+        "bytes": 578,
+        "sha256": "944008c00b899b1da8f4188ad85dbae8df112780fc5fa5f2197017a2b2b0d166"
+      },
+      "savedCopy": {
+        "bytes": 578,
+        "sha256": "944008c00b899b1da8f4188ad85dbae8df112780fc5fa5f2197017a2b2b0d166"
+      }
+    },
+    "physical-admission.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-admission.json",
+      "sourceFingerprint": {
+        "bytes": 6825,
+        "sha256": "2d4109da8a548ecd77823fcd7f50aeeab249a7cce78d6939cbc2d7cd40ff25e5"
+      },
+      "savedCopy": {
+        "bytes": 6825,
+        "sha256": "2d4109da8a548ecd77823fcd7f50aeeab249a7cce78d6939cbc2d7cd40ff25e5"
+      }
+    },
+    "physical-run.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-run.json",
+      "sourceFingerprint": {
+        "bytes": 26365,
+        "sha256": "0c8fc220c370053c95376ef274e7f96105bce1d0ce3bf92b19da56f29a182add"
+      },
+      "savedCopy": {
+        "bytes": 26365,
+        "sha256": "0c8fc220c370053c95376ef274e7f96105bce1d0ce3bf92b19da56f29a182add"
+      }
+    },
+    "physical-settlement.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-settlement.json",
+      "sourceFingerprint": {
+        "bytes": 9334,
+        "sha256": "7f90ad1dfb2b90cd87c2718e1c140b34817d9e669d293ef94816a9871ccc871b"
+      },
+      "savedCopy": {
+        "bytes": 9334,
+        "sha256": "7f90ad1dfb2b90cd87c2718e1c140b34817d9e669d293ef94816a9871ccc871b"
+      }
+    },
+    "physical-verified-release.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-verified-release.json",
+      "sourceFingerprint": {
+        "bytes": 5421,
+        "sha256": "5cf0cf2dfd57efcecacdcd164387336d03c6a74b56347295b71bc05bbe74bb32"
+      },
+      "savedCopy": {
+        "bytes": 5421,
+        "sha256": "5cf0cf2dfd57efcecacdcd164387336d03c6a74b56347295b71bc05bbe74bb32"
+      }
+    },
+    "return-start.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/return-start.json",
+      "sourceFingerprint": {
+        "bytes": 7366,
+        "sha256": "ee082f375751dd74120891001061da7656dedadf23781fa6f91877085ef199d2"
+      },
+      "savedCopy": {
+        "bytes": 7366,
+        "sha256": "ee082f375751dd74120891001061da7656dedadf23781fa6f91877085ef199d2"
+      }
+    },
+    "return-idle.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/return-idle.json",
+      "sourceFingerprint": {
+        "bytes": 6335,
+        "sha256": "6bcf49e9000d75b90afc8980aa0780d9cd9c768f123faea26df0a2157451f0c0"
+      },
+      "savedCopy": {
+        "bytes": 6335,
+        "sha256": "6bcf49e9000d75b90afc8980aa0780d9cd9c768f123faea26df0a2157451f0c0"
+      }
+    },
+    "root-verified-release.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/root-verified-release.json",
+      "sourceFingerprint": {
+        "bytes": 4140,
+        "sha256": "b941f1fe2e8402bdedfb8a485c2ec7b4229adba5c4bc0d23d783754f0c2bd95e"
+      },
+      "savedCopy": {
+        "bytes": 4140,
+        "sha256": "b941f1fe2e8402bdedfb8a485c2ec7b4229adba5c4bc0d23d783754f0c2bd95e"
+      }
+    },
+    "original030-idle.png": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/original030-idle.png",
+      "sourceFingerprint": {
+        "bytes": 7348,
+        "sha256": "5cdbc43f3e93527f9a1474f7914fa7d24d5bc255f36fdfed2662f61c361867f8"
+      },
+      "savedCopy": {
+        "bytes": 7348,
+        "sha256": "5cdbc43f3e93527f9a1474f7914fa7d24d5bc255f36fdfed2662f61c361867f8"
+      }
+    },
+    "return-start.stdout": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/return-start.stdout",
+      "sourceFingerprint": {
+        "bytes": 69,
+        "sha256": "ed3c22e9137821eaa0454c1ab057798ce032c1e5d9e03d6299a489efdaa42575"
+      },
+      "savedCopy": {
+        "bytes": 69,
+        "sha256": "ed3c22e9137821eaa0454c1ab057798ce032c1e5d9e03d6299a489efdaa42575"
+      }
+    },
+    "return-start.stderr": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/return-start.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "window_common.py": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/window_common.py",
+      "sourceFingerprint": {
+        "bytes": 8740,
+        "sha256": "04fec74ef6ec1ba10e8536b03a7ade8d4e3cbc1bbc171de21c270eaba3cb6bca"
+      },
+      "savedCopy": {
+        "bytes": 8740,
+        "sha256": "04fec74ef6ec1ba10e8536b03a7ade8d4e3cbc1bbc171de21c270eaba3cb6bca"
+      }
+    },
+    "admit_physical_once.py": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/admit_physical_once.py",
+      "sourceFingerprint": {
+        "bytes": 1540,
+        "sha256": "c3e4f1147558c8c8743e3fda6404efa0cea192c2a61fe28141308d62636109ba"
+      },
+      "savedCopy": {
+        "bytes": 1540,
+        "sha256": "c3e4f1147558c8c8743e3fda6404efa0cea192c2a61fe28141308d62636109ba"
+      }
+    },
+    "run_physical_once.py": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/run_physical_once.py",
+      "sourceFingerprint": {
+        "bytes": 3195,
+        "sha256": "e5731bf7ec199f2c8ecf4b4681d6e0c78164ec024d308ec054734f5992a48560"
+      },
+      "savedCopy": {
+        "bytes": 3195,
+        "sha256": "e5731bf7ec199f2c8ecf4b4681d6e0c78164ec024d308ec054734f5992a48560"
+      }
+    },
+    "settle_physical_once.py": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/settle_physical_once.py",
+      "sourceFingerprint": {
+        "bytes": 1913,
+        "sha256": "692011a782bcae6c879f14707652fbd1e1a2d87ffbf56fa7e3733ab8c948cff9"
+      },
+      "savedCopy": {
+        "bytes": 1913,
+        "sha256": "692011a782bcae6c879f14707652fbd1e1a2d87ffbf56fa7e3733ab8c948cff9"
+      }
+    },
+    "verify_physical_release_once.py": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/verify_physical_release_once.py",
+      "sourceFingerprint": {
+        "bytes": 3251,
+        "sha256": "726d587a8643ff794266b522ea98a0f030721d5f61cd2f94abc1b33fd7836500"
+      },
+      "savedCopy": {
+        "bytes": 3251,
+        "sha256": "726d587a8643ff794266b522ea98a0f030721d5f61cd2f94abc1b33fd7836500"
+      }
+    },
+    "admit_return_once.py": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/admit_return_once.py",
+      "sourceFingerprint": {
+        "bytes": 2131,
+        "sha256": "26a056b0e9c099218d03c861deeca7982d07363ee7e3efe87d3d4b0572696fc8"
+      },
+      "savedCopy": {
+        "bytes": 2131,
+        "sha256": "26a056b0e9c099218d03c861deeca7982d07363ee7e3efe87d3d4b0572696fc8"
+      }
+    },
+    "verify_return_idle_once.py": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/verify_return_idle_once.py",
+      "sourceFingerprint": {
+        "bytes": 3033,
+        "sha256": "5f8a1e6b2b03ba36e2ebd5b1f5fa40303333e95c5ac9752812de43e2ba28617b"
+      },
+      "savedCopy": {
+        "bytes": 3033,
+        "sha256": "5f8a1e6b2b03ba36e2ebd5b1f5fa40303333e95c5ac9752812de43e2ba28617b"
+      }
+    },
+    "verify_final_release_once.py": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/verify_final_release_once.py",
+      "sourceFingerprint": {
+        "bytes": 2878,
+        "sha256": "a0c2a2ba46aa57495b4b2245f8e787906e5fda2f1154fb95dcd9d92307ec0aec"
+      },
+      "savedCopy": {
+        "bytes": 2878,
+        "sha256": "a0c2a2ba46aa57495b4b2245f8e787906e5fda2f1154fb95dcd9d92307ec0aec"
+      }
+    },
+    "physical-release-authorization.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-release-authorization.json",
+      "sourceFingerprint": {
+        "bytes": 288,
+        "sha256": "ea00cc1f84f60dcbb09838cdd641c44ed2ab57cfb422243032e0fa808311160e"
+      },
+      "savedCopy": {
+        "bytes": 288,
+        "sha256": "ea00cc1f84f60dcbb09838cdd641c44ed2ab57cfb422243032e0fa808311160e"
+      }
+    },
+    "physical-release-restoration.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-release-restoration.json",
+      "sourceFingerprint": {
+        "bytes": 820,
+        "sha256": "b1c45863f0bef2bbb0ab01f6724629d3cc3ea215ea75db9a2807f5c51487aafc"
+      },
+      "savedCopy": {
+        "bytes": 820,
+        "sha256": "b1c45863f0bef2bbb0ab01f6724629d3cc3ea215ea75db9a2807f5c51487aafc"
+      }
+    },
+    "physical-release-absence.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-release-absence.json",
+      "sourceFingerprint": {
+        "bytes": 154,
+        "sha256": "8aac74f2c3bca724b62fdefca85a0a726611ac8767da36c3e4787ea6f580f713"
+      },
+      "savedCopy": {
+        "bytes": 154,
+        "sha256": "8aac74f2c3bca724b62fdefca85a0a726611ac8767da36c3e4787ea6f580f713"
+      }
+    },
+    "physical-release-cleanup.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-release-cleanup.json",
+      "sourceFingerprint": {
+        "bytes": 1012,
+        "sha256": "89ec1d2d32bdf859d27e71129ae9ebdca8209eb269496898bd597d21672af004"
+      },
+      "savedCopy": {
+        "bytes": 1012,
+        "sha256": "89ec1d2d32bdf859d27e71129ae9ebdca8209eb269496898bd597d21672af004"
+      }
+    },
+    "physical-release-proof.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-release-proof.json",
+      "sourceFingerprint": {
+        "bytes": 595,
+        "sha256": "0fd5f52662b78f12886ffa8a4a8c6820185125842e3d21158da48fd6a638de3e"
+      },
+      "savedCopy": {
+        "bytes": 595,
+        "sha256": "0fd5f52662b78f12886ffa8a4a8c6820185125842e3d21158da48fd6a638de3e"
+      }
+    },
+    "final-release-authorization.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/final-release-authorization.json",
+      "sourceFingerprint": {
+        "bytes": 302,
+        "sha256": "db61a4a648579ccbc5c24ce82a68aaa0e01c1591f98c8ef164de50dc45a137bb"
+      },
+      "savedCopy": {
+        "bytes": 302,
+        "sha256": "db61a4a648579ccbc5c24ce82a68aaa0e01c1591f98c8ef164de50dc45a137bb"
+      }
+    },
+    "final-release-restoration.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/final-release-restoration.json",
+      "sourceFingerprint": {
+        "bytes": 973,
+        "sha256": "fdb2845bfe46ed8e254101d5cd2d4a692da0218f30da45103a7b02ecd445044d"
+      },
+      "savedCopy": {
+        "bytes": 973,
+        "sha256": "fdb2845bfe46ed8e254101d5cd2d4a692da0218f30da45103a7b02ecd445044d"
+      }
+    },
+    "final-release-absence.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/final-release-absence.json",
+      "sourceFingerprint": {
+        "bytes": 238,
+        "sha256": "28a360847cc089e1c18988463398b77b2adfa21ff1d61f07dedd3919b30e357c"
+      },
+      "savedCopy": {
+        "bytes": 238,
+        "sha256": "28a360847cc089e1c18988463398b77b2adfa21ff1d61f07dedd3919b30e357c"
+      }
+    },
+    "final-release-cleanup.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/final-release-cleanup.json",
+      "sourceFingerprint": {
+        "bytes": 1154,
+        "sha256": "0fe247ef0dc7928c81c6e9906b932d6565cbe0382f834a9a83d63fc18b0e32fe"
+      },
+      "savedCopy": {
+        "bytes": 1154,
+        "sha256": "0fe247ef0dc7928c81c6e9906b932d6565cbe0382f834a9a83d63fc18b0e32fe"
+      }
+    },
+    "final-release-proof.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/final-release-proof.json",
+      "sourceFingerprint": {
+        "bytes": 597,
+        "sha256": "52630481fb1b006ca965cd12980303c80753f4f74fa4297598978115f10c4f8a"
+      },
+      "savedCopy": {
+        "bytes": 597,
+        "sha256": "52630481fb1b006ca965cd12980303c80753f4f74fa4297598978115f10c4f8a"
+      }
+    },
+    "Run-once": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-custody/Run-once",
+      "sourceFingerprint": {
+        "bytes": 219,
+        "sha256": "8a9de6956786e4f2755f6b7c8cf1c53aaf43e7fd0c72b71fc43696617d6de73d"
+      },
+      "savedCopy": {
+        "bytes": 219,
+        "sha256": "8a9de6956786e4f2755f6b7c8cf1c53aaf43e7fd0c72b71fc43696617d6de73d"
+      }
+    },
+    "fixture.log": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-custody/fixture.log",
+      "sourceFingerprint": {
+        "bytes": 624,
+        "sha256": "80a8a9731ef96568d0356de80dfdf5299ee7bef777cc0a8e7a5d038ead11d80a"
+      },
+      "savedCopy": {
+        "bytes": 624,
+        "sha256": "80a8a9731ef96568d0356de80dfdf5299ee7bef777cc0a8e7a5d038ead11d80a"
+      }
+    },
+    "fixture.rc": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-custody/fixture.rc",
+      "sourceFingerprint": {
+        "bytes": 2,
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "savedCopy": {
+        "bytes": 2,
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      }
+    },
+    "complete.flag": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-custody/complete.flag",
+      "sourceFingerprint": {
+        "bytes": 9,
+        "sha256": "a4bccf5c13ef5ff8311e59b34d492bc7072a55298723601a6a9c127053aee8fc"
+      },
+      "savedCopy": {
+        "bytes": 9,
+        "sha256": "a4bccf5c13ef5ff8311e59b34d492bc7072a55298723601a6a9c127053aee8fc"
+      }
+    },
+    "launcher.log": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-custody/launcher.log",
+      "sourceFingerprint": {
+        "bytes": 8,
+        "sha256": "8456e5e83a5263e7341f44ec31b83cdc3e97abf6fc004e8fc44f5873905c8676"
+      },
+      "savedCopy": {
+        "bytes": 8,
+        "sha256": "8456e5e83a5263e7341f44ec31b83cdc3e97abf6fc004e8fc44f5873905c8676"
+      }
+    }
+  },
+  "privateLeaseAndProductExcluded": true
+}

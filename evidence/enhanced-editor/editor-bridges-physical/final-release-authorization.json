@@ -1,0 +1,11 @@
+{
+  "humanStandingDevelopmentTestingAuthorization": true,
+  "scope": {
+    "bytes": 7934,
+    "sha256": "8e40200594ad6af1b8dbe36c89372819d0093e11cdea7c9c095fd9305544c5d1"
+  },
+  "coordination": {
+    "bytes": 2513,
+    "sha256": "9e03ea681bf1f7f3a34c26715fe851825825bc3be1e96efd9d436e749a54f7db"
+  }
+}

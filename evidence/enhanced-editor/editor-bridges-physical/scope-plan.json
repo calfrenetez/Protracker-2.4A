@@ -1,0 +1,126 @@
+{
+  "status": "PREPARED_CORRECTED_CALLER_NOT_ADMITTED_NOT_RUN",
+  "atUTC": "2026-10-06T10:29:31.770778+00:00",
+  "candidate": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/native/PTEditorBridgesTest",
+    "bytes": 385144,
+    "sha256": "21c5efc7fe5d066f56e81ea8cbcea8bc7e95892e8af0a55608a1410d882d9b1e"
+  },
+  "sourceCommit": "5771d3ce1fcc3dee1967ec0c728e1fa654954bba",
+  "requiredExactEmulatorStatus": "PASS_EXACT_030_SOFTWARE_FIXTURE_SETTLEMENT_PENDING plus independent verified release",
+  "requiredExactLog": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/host/bridges-run.stdout",
+    "sha256": "80a8a9731ef96568d0356de80dfdf5299ee7bef777cc0a8e7a5d038ead11d80a"
+  },
+  "freshNamespacePattern": "RAM:PT-editor-bridges-<fresh-run-id>",
+  "oneLaunch": true,
+  "absoluteExecutionSeconds": 420,
+  "stackBytes": 65536,
+  "scope": "Portable editor legacy15/checked39/control-alias18/metadata-bridge9/admission75 assertions using ordinary allocations and injected timers/voices/ordinary-RAM fakebus callbacks. Physical CPU/software execution only; no real device sample RAM/MMIO/DMA/IRQ/audio.",
+  "prerequisites": [
+    "exact unchanged candidate emulatorPASS and separately verified normalrelease",
+    "fresh AmiConnect/Scott/AmiGUS physical and sharedtransport clearance, all targetholds absent",
+    "live privatelease target real-a1200 and three locks",
+    "actual authenticated Safari access; use no other chat connection; release control to ViewOnly",
+    "fresh physical CPU/network identity plus established bridge CRC/size",
+    "no active candidate/player/test; physical identity must be current afterreboots",
+    "RAM-only exact candidate/launcher/log/RC/complete file manifest and bounded protocol supported",
+    "original endpoint/profile/service/guest baseline restore and separate independent absence/readback/four-recordrelease"
+  ],
+  "ordering": "Fresh own physical phase only after independent approved root canary/recovery EMPTY86 release plus fresh all-peer clearance and actual liveEMPTY; shared transport remains globally exclusive through separately admitted original030return.",
+  "failure": "Preserve first physical failure/HOLD and stop target actions; no automaticretry/recovery/reset or inferred cleanup",
+  "acceptanceExclusions": [
+    "realFast/Chip allocation placement",
+    "hardware cachecapacity/order/completion/allvoicestop",
+    "real clock/IRQ/deadline/exactmusical timing",
+    "physical audible/human listening acceptance",
+    "full native UI PLAY/eventloop or wholeapplication release"
+  ],
+  "emulator": "PASS_EXACT_ONCE_PLUS_INDEPENDENT_RELEASE",
+  "physical": "NOT_RUN",
+  "queuedPhysicalOperation": false,
+  "protocol": {
+    "bytes": 10981,
+    "sha256": "b18fb18b17b49fabc2719f9c8e282ac8899cd727d51b0521475723e9fd44a862"
+  },
+  "hostQualification": {
+    "bytes": 1765,
+    "sha256": "f05fe0c643c3da985ffa288e3d4af4ead295e67c6f0104562ecfe1a5a8d0e6ec"
+  },
+  "savedNativeProof": {
+    "candidate": {
+      "bytes": 385144,
+      "sha256": "21c5efc7fe5d066f56e81ea8cbcea8bc7e95892e8af0a55608a1410d882d9b1e"
+    },
+    "expectedStdout": {
+      "bytes": 624,
+      "sha256": "80a8a9731ef96568d0356de80dfdf5299ee7bef777cc0a8e7a5d038ead11d80a"
+    },
+    "nativeRecord": {
+      "bytes": 22339,
+      "sha256": "1e965f90a9692f37da3dd7d3b635f9bca3eaa43880ce0fdec1a32de8308f699e"
+    },
+    "independentRelease": {
+      "bytes": 3672,
+      "sha256": "48395f93058af9f8fc32839bfc7678c93f0acb44b60c2475ce28ba9f48271425"
+    },
+    "passed": true
+  },
+  "phasePlan": [
+    {
+      "target": "real-a1200",
+      "scope": "One separately admitted physical lease; original endpoint/profile saved; actual Safari authenticated ViewOnly identity; fresh physical CPU/network/bridge CRC and no active candidate/player/test; one fresh RAM namespace and exact fixture; absolute420s; completion and six exact host custody files; separate completed-only idle/CRC/cleanup/independent absence; admitted disconnect and independent physical-scope normal release. Physical-only restoration receipt must explicitly retain the outstanding original030 endpoint return obligation."
+    },
+    {
+      "target": "amiberry-030",
+      "scope": "NEW private return lease only after verified physical-scope release; one owned original030 startup/idle/profile verification/original endpoint selection, separate disconnect/bounded normal own stop/independent full final release. No candidate replay, physical access or automatic continuation after any failure."
+    }
+  ],
+  "phaseBoundary": "No reservation is retargeted. Peer hands-off spans both phases. A physical-scope release alone is NOT a completed restoration of the shared transport; overall status stays pending until original030 return is independently verified. Do not attest full restoration before that.",
+  "wrappers": "8 private scripts/common prepared; review and fresh peer/Safari/live admission remain required",
+  "protocolNativeRoute": "Exact program passed030 fixture once. Literal newRAM create/WAIT/COMPLETE/CRC/custody/cleanup/absence passed separate030transportcanary once; first host shutdown TypeError preserved and separateapproved closure independently released EMPTY86. Physical transport/software qualification remains NOT_RUN.",
+  "wrapperScripts": 8,
+  "callerVersion": "physical-window-v2",
+  "preparedWrappers": "8 parsed and root-reviewed; separate read-only review found no executable blocker; finalpins/freshpeer/Safari/liveadmission remain required",
+  "nativeTransportGate": {
+    "files": {
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/run-terminal.json": {
+        "bytes": 12035,
+        "sha256": "ae01947da808ae97313007459222d5c722ff3f641578c59d3dd0f534dbadc33c"
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/settlement-terminal.json": {
+        "bytes": 9606,
+        "sha256": "78fb4ae2baef3c71b383c011145fba632db4915af551063a3738981f912506ef"
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/recovery-terminal.json": {
+        "bytes": 13686,
+        "sha256": "579f95ab4a66ddd3fd2cb87fb1bdf4b68022a68ae66eacc794a62a0db0d971c3"
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/recovery-root-verified-release.json": {
+        "bytes": 6426,
+        "sha256": "0d8512673bb8e3544dc79e9ff37a9f39f8c20e1bf85397500707db65af03b12c"
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1/original030-idle.png": {
+        "bytes": 7348,
+        "sha256": "5cdbc43f3e93527f9a1474f7914fa7d24d5bc255f36fdfed2662f61c361867f8"
+      }
+    },
+    "directory": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/native-protocol-window-v1",
+    "scope": "Actual literal new protocol030transport/custody/completed-only cleanup; original host closure failure plus separately approved verified recovery, no canary rerun"
+  },
+  "priorOriginalStopFailure": "Preserved native-canary first host TypeError before SIGTERM; explicit approved recovery independently released EMPTY86, no canary rerun",
+  "stopCorrection": {
+    "from": "SimpleNamespace argument to emulator.main (before dispatch TypeError)",
+    "to": [
+      "stop",
+      "--target",
+      "amiberry-030"
+    ],
+    "hostEvidence": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v1/return-stop-host-proof.json",
+    "sharedLifecycleEntryIntercepted": true,
+    "sharedSourcesUnchanged": true
+  },
+  "queuedTargetDispatch": false,
+  "callerSourceCommit": "b13d6e70bcecb6813ad59ea43b0673df0280b942",
+  "descriptionUpdatedUTC": "2026-10-06T12:19:43.408048+00:00"
+}

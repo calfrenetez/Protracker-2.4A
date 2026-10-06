@@ -1,0 +1,19 @@
+{
+  "status": "PASS_ROOT_SELF_RECOVERY_PREPARATION_ONLY",
+  "atUTC": "2026-10-06T11:48:36.553208+00:00",
+  "review": "Root self-review only",
+  "parsedScripts": 2,
+  "inputsPinned": 17,
+  "pid": 93129,
+  "fence": 85,
+  "targetCalls": 0,
+  "signals": 0,
+  "releaseCalls": 0,
+  "approvalPending": true,
+  "scope": "Exact host SIGTERM-only closure then separate independent normal four-record release; no guest operation/canary replay/physical/source/service mutation",
+  "recoveryPlan": {
+    "bytes": 1216,
+    "sha256": "dfe5768c7ab5fdbc13355f2982d2f15e11c2f380546130d2db85052d24f965b4"
+  },
+  "remaining": "Direct human exact recovery approval and fresh all-peer/live guard/identity recheck before either wrapper; prepared wrappers NOT_RUN"
+}

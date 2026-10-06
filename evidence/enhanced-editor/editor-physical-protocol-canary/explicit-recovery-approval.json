@@ -1,0 +1,12 @@
+{
+  "approved": true,
+  "pid": 93129,
+  "fence": 85,
+  "plan": {
+    "bytes": 1216,
+    "sha256": "dfe5768c7ab5fdbc13355f2982d2f15e11c2f380546130d2db85052d24f965b4"
+  },
+  "humanText": "approved",
+  "atUTC": "2026-10-06T12:13:44.300161+00:00",
+  "scope": "Exact prepared one SIGTERM-only own completed-canary closure and separate independent normal release only; no test replay or physical action"
+}

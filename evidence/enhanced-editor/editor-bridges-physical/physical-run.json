@@ -1,0 +1,575 @@
+{
+  "status": "PASS_EXACT_PHYSICAL_SOFTWARE_FIXTURE_SETTLEMENT_PENDING",
+  "connectCalls": 1,
+  "target": "real-a1200",
+  "launches": 1,
+  "calls": [
+    {
+      "tool": "amiga_ping",
+      "arguments": {},
+      "status": "REPLY_OBSERVED",
+      "response": "Amiga alive - clients: 0, chip: 1942376 bytes, fast: 129748224 bytes",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Version\nCPU\nAvail\nVersion bsdsocket.library\nShowNetStatus\n",
+        "timeout": 20
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nKickstart 47.115, Workbench 47.5\nSystem: 68030  68030-MMU no FastROM (INST: Cache Burst) (DATA: Cache NoBurst)\nType  Available    In-Use   Maximum   Largest\nchip    1942376    150680   2093056   1942240\nfast  129719472   3449680 133169152 128646024\ntotal 131661848   3600360 135262208 128646024\nbsdsocket.library 4.364\nNetwork status summary\nLocal host address         = 192.168.0.156 (on interface 'plipbox')\nDefault gateway address    = 192.168.0.1\nDomain name system servers = 192.168.0.1, 192.168.0.1",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Status FULL",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nProcess  1: stk 16384, gv 150, pri   0 Loaded as command: Status\nProcess  2: stk  4096, gv 150, pri   0 Loaded as command: NetLogViewer\nProcess  3: stk  4000, gv 150, pri   0 Loaded as command: TCP/IP Superserver\nProcess  4: stk 16384, gv 150, pri   0 Loaded as command: SYS:Utilities/AmiConnect/AmiConnect\nProcess  5: stk 65536, gv 150, pri   0 Loaded as command: Work:AmigaDev-20260923/amiga-bridge\nProcess  6: stk  8000, gv 150, pri   1 Loaded as command: Workbench",
+      "isError": false
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "Work:AmigaDev-20260923/amiga-bridge"
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "File: Work:AmigaDev-20260923/amiga-bridge\nCRC32: D75C2355\nSize: 150192 bytes",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "FailAt 21\nIf EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0\n Echo PT-EXISTS\nElse\n MakeDir RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0\n If WARN\n  Quit 20\n EndIf\n Echo PT-CREATED\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-CREATED",
+      "isError": false
+    },
+    {
+      "tool": "amiga_push_file",
+      "arguments": {
+        "local_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-custody/PTEditorBridgesTest",
+        "amiga_path": "RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/PTEditorBridgesTest"
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "Transferred 385144 bytes in 129.8s (2968 B/s), 377 chunks, CRC32 verified",
+      "isError": false
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/PTEditorBridgesTest"
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "File: RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/PTEditorBridgesTest\nCRC32: 8B617705\nSize: 385144 bytes",
+      "isError": false
+    },
+    {
+      "tool": "amiga_push_file",
+      "arguments": {
+        "local_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-custody/Run-once",
+        "amiga_path": "RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/Run-once"
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "Transferred 219 bytes in 0.2s (1157 B/s), 1 chunks, CRC32 verified",
+      "isError": false
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/Run-once"
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "File: RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/Run-once\nCRC32: 66B634B3\nSize: 219 bytes",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "Run >RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/launcher.log <NIL: Execute RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/Run-once",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK] (no output)",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-WAIT",
+      "isError": false
+    },
+    {
+      "tool": "amiga_run_script",
+      "arguments": {
+        "script": "If EXISTS RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\n Echo PT-COMPLETE\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\n Type RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nElse\n Echo PT-WAIT\nEndIf\n",
+        "timeout": 10
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "[OK]\nPT-COMPLETE\n0\nCOMPLETE",
+      "isError": false
+    },
+    {
+      "tool": "amiga_pull_file",
+      "arguments": {
+        "amiga_path": "RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.log",
+        "local_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-custody/fixture.log"
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "Downloaded 624 bytes in 0.4s (1465 B/s), 1 chunks, CRC32 verified",
+      "isError": false
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.log"
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "File: RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.log\nCRC32: 71173A94\nSize: 624 bytes",
+      "isError": false
+    },
+    {
+      "tool": "amiga_pull_file",
+      "arguments": {
+        "amiga_path": "RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc",
+        "local_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-custody/fixture.rc"
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "Downloaded 2 bytes in 0.3s (7 B/s), 1 chunks, CRC32 verified",
+      "isError": false
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc"
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "File: RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/fixture.rc\nCRC32: 7E4ACD12\nSize: 2 bytes",
+      "isError": false
+    },
+    {
+      "tool": "amiga_pull_file",
+      "arguments": {
+        "amiga_path": "RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag",
+        "local_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-custody/complete.flag"
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "Downloaded 9 bytes in 0.2s (43 B/s), 1 chunks, CRC32 verified",
+      "isError": false
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag"
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "File: RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/complete.flag\nCRC32: EF5E2E16\nSize: 9 bytes",
+      "isError": false
+    },
+    {
+      "tool": "amiga_pull_file",
+      "arguments": {
+        "amiga_path": "RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/launcher.log",
+        "local_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-custody/launcher.log"
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "Downloaded 8 bytes in 0.2s (35 B/s), 1 chunks, CRC32 verified",
+      "isError": false
+    },
+    {
+      "tool": "amiga_checksum",
+      "arguments": {
+        "path": "RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/launcher.log"
+      },
+      "status": "REPLY_OBSERVED",
+      "response": "File: RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0/launcher.log\nCRC32: 5B22391E\nSize: 8 bytes",
+      "isError": false
+    }
+  ],
+  "atUTC": "2026-10-06T12:26:12.284950+00:00",
+  "connectFirstReply": "Connected via TCP to 192.168.0.156:2345",
+  "connectFirstIsError": false,
+  "connectResponse": "Connected via TCP to 192.168.0.156:2345",
+  "pingBefore": "Amiga alive - clients: 0, chip: 1942376 bytes, fast: 129748224 bytes",
+  "identity": "[OK]\nKickstart 47.115, Workbench 47.5\nSystem: 68030  68030-MMU no FastROM (INST: Cache Burst) (DATA: Cache NoBurst)\nType  Available    In-Use   Maximum   Largest\nchip    1942376    150680   2093056   1942240\nfast  129719472   3449680 133169152 128646024\ntotal 131661848   3600360 135262208 128646024\nbsdsocket.library 4.364\nNetwork status summary\nLocal host address         = 192.168.0.156 (on interface 'plipbox')\nDefault gateway address    = 192.168.0.1\nDomain name system servers = 192.168.0.1, 192.168.0.1",
+  "tasksBefore": "[OK]\nProcess  1: stk 16384, gv 150, pri   0 Loaded as command: Status\nProcess  2: stk  4096, gv 150, pri   0 Loaded as command: NetLogViewer\nProcess  3: stk  4000, gv 150, pri   0 Loaded as command: TCP/IP Superserver\nProcess  4: stk 16384, gv 150, pri   0 Loaded as command: SYS:Utilities/AmiConnect/AmiConnect\nProcess  5: stk 65536, gv 150, pri   0 Loaded as command: Work:AmigaDev-20260923/amiga-bridge\nProcess  6: stk  8000, gv 150, pri   1 Loaded as command: Workbench",
+  "bridge": {
+    "bytes": 150192,
+    "sha256": "e5c8b4ad13776e59d7792c00b0ea664ca2e4f47fe0a2478ef133839b40f2df8c"
+  },
+  "elapsedSeconds": 230.12712787499913,
+  "observations": 25,
+  "namespace": "RAM:PT-editor-bridges-95d754169ba5e62e879893b30b968bf0",
+  "files": {
+    "PTEditorBridgesTest": {
+      "bytes": 385144,
+      "sha256": "21c5efc7fe5d066f56e81ea8cbcea8bc7e95892e8af0a55608a1410d882d9b1e"
+    },
+    "Run-once": {
+      "bytes": 219,
+      "sha256": "8a9de6956786e4f2755f6b7c8cf1c53aaf43e7fd0c72b71fc43696617d6de73d"
+    },
+    "fixture.log": {
+      "bytes": 624,
+      "sha256": "80a8a9731ef96568d0356de80dfdf5299ee7bef777cc0a8e7a5d038ead11d80a"
+    },
+    "fixture.rc": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "complete.flag": {
+      "bytes": 9,
+      "sha256": "a4bccf5c13ef5ff8311e59b34d492bc7072a55298723601a6a9c127053aee8fc"
+    },
+    "launcher.log": {
+      "bytes": 8,
+      "sha256": "8456e5e83a5263e7341f44ec31b83cdc3e97abf6fc004e8fc44f5873905c8676"
+    }
+  },
+  "scope": "Physical CPU/software with injected timers/voices/ordinary-RAM callbacks; no device/audio/placement/timing proof",
+  "custodyDirectory": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/physical-window-v2/physical-custody",
+  "overallRestoration": "PENDING_ORIGINAL030_RETURN",
+  "guardAfter": {
+    "archives": [
+      {
+        "bytes": 2034,
+        "fence": 5,
+        "name": "release-0000000000000005.json",
+        "sha256": "7f14fb8ffe7df2de1aed8beda774d083c9a717fec97ba575733fe0561422efcb"
+      },
+      {
+        "bytes": 2027,
+        "fence": 10,
+        "name": "release-000000000000000a.json",
+        "sha256": "565d842aadbb4f6ebaaf52143fce4f161da5996606c03adcd679eb1d67e355d3"
+      },
+      {
+        "bytes": 2674,
+        "fence": 18,
+        "name": "release-0000000000000012.json",
+        "sha256": "51040dc9dbe88c4fd07ab0168e154d2d1508b457605373d8fd38b3f12b5c80e8"
+      },
+      {
+        "bytes": 1574,
+        "fence": 28,
+        "name": "release-000000000000001c.json",
+        "sha256": "497beef52132b167956e5a9abfd0da5c60f95309a020b025a4c69f9564a8bb1f"
+      },
+      {
+        "bytes": 1548,
+        "fence": 34,
+        "name": "release-0000000000000022.json",
+        "sha256": "469c89a882db17a9aa686e703957d1770463de43ba8eb7a6e5b04e7e2cca33a8"
+      },
+      {
+        "bytes": 2189,
+        "fence": 41,
+        "name": "release-0000000000000029.json",
+        "sha256": "5df4c72f0992e4470b8664cc15c9245093d58b7afeb69f7b682ffba267cfc4eb"
+      },
+      {
+        "bytes": 1930,
+        "fence": 45,
+        "name": "release-000000000000002d.json",
+        "sha256": "3e95de456c1f74f8a72c7cf88af645a756686dc38fe3f866c16d7d25f8218faa"
+      },
+      {
+        "bytes": 2568,
+        "fence": 52,
+        "name": "release-0000000000000034.json",
+        "sha256": "7c5aaf39710163c8b4dbc1b44a987d727a8e045f20d013809308b997dfa958c7"
+      },
+      {
+        "bytes": 1692,
+        "fence": 60,
+        "name": "release-000000000000003c.json",
+        "sha256": "263825cc34f324aac80d3f0457cf1627ab6c6a03771a15e267cb9857f9792748"
+      },
+      {
+        "bytes": 1479,
+        "fence": 68,
+        "name": "release-0000000000000044.json",
+        "sha256": "812d96fee65d7a48d36678c4f951816292adf3b3d0b2dd279b9e95fe4174b9da"
+      },
+      {
+        "bytes": 2118,
+        "fence": 78,
+        "name": "release-000000000000004e.json",
+        "sha256": "53b5806aae1e3fc0495eebdf743d546dbb00dbc62b668e16bb298c5b1af0ea9e"
+      },
+      {
+        "bytes": 1747,
+        "fence": 86,
+        "name": "release-0000000000000056.json",
+        "sha256": "59db108a525d88ea475077087c706ed4635bacf78b2922373ec419baa432d9bf"
+      }
+    ],
+    "authorization": {
+      "approved": true,
+      "legacy_holds_verified": true,
+      "mode": "host-provisioning",
+      "record_sha256": "820445ecb68cd63db257e203686d2df63fca2e66f4d6048f59f5939771fce568"
+    },
+    "fence": 89,
+    "holds": [],
+    "inflight": null,
+    "potential_resident": true,
+    "reservation": {
+      "binding": {
+        "candidateSHA256": "21c5efc7fe5d066f56e81ea8cbcea8bc7e95892e8af0a55608a1410d882d9b1e",
+        "coordinationSHA256": "9e03ea681bf1f7f3a34c26715fe851825825bc3be1e96efd9d436e749a54f7db",
+        "pinsSHA256": "6976dda7918872696aebb3a6c417226e04c53fa59153fe52cf779acaed83bf3b",
+        "scopeSHA256": "8e40200594ad6af1b8dbe36c89372819d0093e11cdea7c9c095fd9305544c5d1",
+        "sourceCommit": "b13d6e70bcecb6813ad59ea43b0673df0280b942"
+      },
+      "controller": "ProTracker root01a0b5ae-c04f-7661-8859-e89df20c3290",
+      "lease": {
+        "run_id": "95d754169ba5e62e879893b30b968bf0"
+      },
+      "purpose": "Human-authorized exact RAM-only editor bridge fixture, physical-scope release followed by separate original030 return; full window retained",
+      "target": "real-a1200"
+    },
+    "version": 1,
+    "phase": "READY"
+  },
+  "completedUTC": "2026-10-06T12:32:34.497734+00:00"
+}

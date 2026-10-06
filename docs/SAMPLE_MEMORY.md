@@ -5845,3 +5845,35 @@ This later exact fixture has emulator software qualification; real A1200 executi
 is still NOT_RUN. The earlier failed progress fixture and its unexecuted product
 are unchanged. A separately prepared physical RAM-only run needs fresh ownership,
 Safari/control and shared transport coordination after the peer's next window.
+
+
+## Exact editor bridge fixture on real A1200 — 6 October 2026
+
+The exact385144B/21c5efc7...9b1e source5771d3c fixture qualified above on030
+subsequently passed once on the real68030 A1200, complete624B three markers/RC0/
+COMPLETE within230.127s/420s. It executes actual portable editor/checked/bridge
+software across8/16/24 masters, with injected clocks/voices/quiet callbacks and
+ordinary-RAM fakebus. Actual CPU/plipbox/installedbridgeCRC-size were verified
+before upload. Stack65536 configured, not measured; this proves neither physical
+allocation placement nor realoutput/cardRAM/capacity/order/completion/allvoice
+stop/IRQ/exactactivation/audio/listening/fullnativePLAY/eventloop acceptance.
+
+Fresh allthree recipient hands-off covered physical+original030return, liveguards
+and319ordinarypins/909source identities/protected16 preceded admitted actions.
+Separate completed-only allsixguestCRC/custody/exactnonrecursive cleanup and
+independent physicaltask/namespaceabsence/disconnect passed. Physical-only release
+EMPTY94 expressly retained fullrestorationpending. SeparateNEW030lease/start
+verifiedoriginalCPU/RAM/AGA/endpoint/idle/audioDMA0, snapshot, disconnect and
+normalSIGTERM-onlystop. Independenthostallabsence/custody/originalendpoint/four
+recordfinalrelease passedEMPTY100. No retry/forcekill/failurecleanup/sharedchange.
+ActualSafari remained authenticatedViewOnly, noinput/control. Allthreepeers
+explicitlyreceived FULLtwo-phase release. Savedrelease is not liveavailability.
+
+The earlier inertprotocolcanary firsthostshutdown TypeError/HOLD85 is preserved
+FAILED, followed by separatelyapproved ownprocess closure and independentEMPTY86
+release; no firstfailure rewritten. HistoricalNOT_RUN entries remain intact.
+See [physical CPU/software evidence](../evidence/enhanced-editor/editor-bridges-physical/README.md)
+and [canary/failure/recovery custody](../evidence/enhanced-editor/editor-physical-protocol-canary/README.md).
+
+Next contained work is opt-in cancellable editorpreparation-session composition
+from master establishment to checked preparation; classicPLAY/UI unchanged.

@@ -1,0 +1,61 @@
+{
+  "status": "PASS_ROOT_SELF_PREEXECUTION_REVIEW",
+  "atUTC": "2026-10-06T12:24:58.441697+00:00",
+  "sourceCommit": "b13d6e70bcecb6813ad59ea43b0673df0280b942",
+  "scope": {
+    "bytes": 7934,
+    "sha256": "8e40200594ad6af1b8dbe36c89372819d0093e11cdea7c9c095fd9305544c5d1"
+  },
+  "coordination": {
+    "bytes": 2513,
+    "sha256": "9e03ea681bf1f7f3a34c26715fe851825825bc3be1e96efd9d436e749a54f7db"
+  },
+  "review": "Root review plus separate read-only agent /root/recovery_final_review; no executableblocker found, onlytwo stale descriptions corrected withoriginal preserved",
+  "scripts": {
+    "admit_physical_once.py": {
+      "bytes": 1540,
+      "sha256": "c3e4f1147558c8c8743e3fda6404efa0cea192c2a61fe28141308d62636109ba"
+    },
+    "admit_return_once.py": {
+      "bytes": 2131,
+      "sha256": "26a056b0e9c099218d03c861deeca7982d07363ee7e3efe87d3d4b0572696fc8"
+    },
+    "run_physical_once.py": {
+      "bytes": 3195,
+      "sha256": "e5731bf7ec199f2c8ecf4b4681d6e0c78164ec024d308ec054734f5992a48560"
+    },
+    "settle_physical_once.py": {
+      "bytes": 1913,
+      "sha256": "692011a782bcae6c879f14707652fbd1e1a2d87ffbf56fa7e3733ab8c948cff9"
+    },
+    "verify_final_release_once.py": {
+      "bytes": 2878,
+      "sha256": "a0c2a2ba46aa57495b4b2245f8e787906e5fda2f1154fb95dcd9d92307ec0aec"
+    },
+    "verify_physical_release_once.py": {
+      "bytes": 3251,
+      "sha256": "726d587a8643ff794266b522ea98a0f030721d5f61cd2f94abc1b33fd7836500"
+    },
+    "verify_return_idle_once.py": {
+      "bytes": 3033,
+      "sha256": "5f8a1e6b2b03ba36e2ebd5b1f5fa40303333e95c5ac9752812de43e2ba28617b"
+    },
+    "window_common.py": {
+      "bytes": 8740,
+      "sha256": "04fec74ef6ec1ba10e8536b03a7ade8d4e3cbc1bbc171de21c270eaba3cb6bca"
+    }
+  },
+  "checks": [
+    "exactunchanged385144B nativeprogram624BstdoutRC0/flag + independentrelease",
+    "actualnewRAMprotocol nativecanary sixcustody/cleanup/absence + originalhostshutdownfailure and approvedindependentEMPTY86recovery preserved",
+    "corrected publicemulator.main argv actualparser positive/negativecontrols with lifecycleintercepted",
+    "three-lock/privatelease/liveexactendpoint/source/protectedwork beforetargetexchanges",
+    "onephysicalfixture absolute420s, full6filecustody/CRC beforecompleted-only exactcleanup; firstfailure stops",
+    "physical-only independentrelease keeps fullwindow/original030return pending; newreturnlease, oneownedstart110s, idleprofile, admitteddisconnect/normalSIGTERM-only5s, independentfullrelease",
+    "Safari actualAuthViewOnly freshlyverified beforephysicaladmission/release, noinput/control acquired",
+    "no registerDMA/audio/cardRAM/IRQ/timing/listening/placement/fullUI acceptance"
+  ],
+  "admission": "This record does not reserve/connect. FreshSafari <=180s, actualmatchingEMPTY86, absentemulator/listener, healthyoriginaldisconnectedendpoint and locks still required atomically beforephysicallease",
+  "targetCalls": 0,
+  "reservation": false
+}

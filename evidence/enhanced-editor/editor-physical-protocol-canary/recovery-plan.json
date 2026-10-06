@@ -1,0 +1,22 @@
+{
+  "status": "PREPARED_NOT_EXECUTED_HUMAN_RECOVERY_DECISION_PENDING",
+  "atUTC": "2026-10-06T11:48:36.548330+00:00",
+  "pid": 93129,
+  "fence": 85,
+  "target": "amiberry-030",
+  "scope": "One SIGTERM-only closure of own completed transport-canary emulator; separate independent normal four-record release, no guest request/replay or physical action",
+  "steps": [
+    "fresh exact HOLD85/private lease/PID-command-runtime/candidate source pins and three nonblocking locks",
+    "all saved six-file custody and completed cleanup/independent guest absence/idle/DMA-off/disconnect proofs unchanged",
+    "one SIGTERM to exact own PID93129,max5seconds,no force kill",
+    "host process/listener absence and unchanged healthy disconnected original DevBench endpoint and bridge flag",
+    "separate independently locked readback and normal release preserving original first failure/HOLD archive",
+    "explicit release to all three peers; any later physical window separately renewed"
+  ],
+  "failure": "Retain HOLD and first result; no automatic follow-up/retry or forced closure",
+  "approved": false,
+  "guestRequests": 0,
+  "physicalTouched": false,
+  "canaryReplay": false,
+  "sharedSourcesServicesChanged": false
+}

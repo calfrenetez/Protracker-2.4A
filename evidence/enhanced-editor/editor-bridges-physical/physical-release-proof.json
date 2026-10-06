@@ -1,0 +1,18 @@
+{
+  "run_id": "95d754169ba5e62e879893b30b968bf0",
+  "target": "real-a1200",
+  "fence": 93,
+  "externally_verified": true,
+  "records": {
+    "authorization": "ea00cc1f84f60dcbb09838cdd641c44ed2ab57cfb422243032e0fa808311160e",
+    "restoration": "b1c45863f0bef2bbb0ab01f6724629d3cc3ea215ea75db9a2807f5c51487aafc",
+    "absence": "8aac74f2c3bca724b62fdefca85a0a726611ac8767da36c3e4787ea6f580f713",
+    "cleanup": "89ec1d2d32bdf859d27e71129ae9ebdca8209eb269496898bd597d21672af004"
+  },
+  "facts": {
+    "authorization": true,
+    "restoration": true,
+    "absence": true,
+    "cleanup": true
+  }
+}

@@ -1,0 +1,7 @@
+FailAt 21
+Stack 65536
+CD RAM:PT-editor-bridges-711e217b9039ed16ab84bc8ee7097a08
+Echo PT-RAM-PROTOCOL-CANARY >fixture.log
+Echo 0 >fixture.rc
+Echo COMPLETE >complete.flag
+Quit 0

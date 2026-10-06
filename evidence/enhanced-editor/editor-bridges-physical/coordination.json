@@ -1,0 +1,45 @@
+{
+  "status": "FRESH_ROOT_TWO_PHASE_SCOPE_ALL_PEERS_HANDS_OFF",
+  "atUTC": "2026-10-06T12:24:58.439719+00:00",
+  "scope": {
+    "bytes": 7934,
+    "sha256": "8e40200594ad6af1b8dbe36c89372819d0093e11cdea7c9c095fd9305544c5d1"
+  },
+  "phaseBoundary": "Physical-scope release retains whole window and original030return obligation; new030lease only after physicalrelease. No automaticphasecontinuation onfailure",
+  "peers": {
+    "Scott": {
+      "admissionConfirmed": true,
+      "receipt": "/Users/james1/Documents/Codex/2026-09-26/scott-chocolate-amiga-port/outputs/recovery-native-preparation-20261006-001/protracker-physical-window-v2-recipient-clearance.json",
+      "fingerprint": {
+        "bytes": 2343,
+        "sha256": "e2f8ecca34971abe7f085bc4328ff827670dbb6223a16e28e5b495ad6383b76d"
+      },
+      "planBinding": {
+        "bytes": 7934,
+        "sha256": "8e40200594ad6af1b8dbe36c89372819d0093e11cdea7c9c095fd9305544c5d1"
+      }
+    },
+    "AmiConnect": {
+      "admissionConfirmed": true,
+      "thread": "01a02122-c34e-72f0-95cc-e36ce3d73629",
+      "turn": "01a11126-3b39-7ba3-99b1-545f4602caf6",
+      "message": "msg_052d99eb5846a575016ac4e6fbd6dc87d0b749a0f8b051c65c",
+      "text": "No competing ownership, connection, lock, HOLD, browser control or queued dispatch; hands-off through full physical-plus-030-return verified release. Physical-only release does not clear window; fresh guards eachphase; anyfailure stops/noautomaticrestoration.",
+      "correctedDescriptionAcknowledgmentTurn": "01a11127-da88-7a71-97df-1317f269ff19",
+      "peerPlanBytesReadOrHashed": false
+    },
+    "AmiGUS": {
+      "admissionConfirmed": true,
+      "thread": "01a0f8d1-5987-7921-b578-0728051354ce",
+      "turn": "01a11126-525f-7e81-9496-c9ac0556b05a",
+      "message": "msg_04f9738d260c2de2016ac4e70aafcc87d2b0f3c0e28b0b223e",
+      "text": "No competing ownership, owned transport connection/lock, recovery hold, browser control or queued dispatch; hands-off through bothphases untilfullverifiedrelease; playbackpaused."
+    }
+  },
+  "rootReviewAndBinding": "Root read/reviewed currentcorrected plan bytes, nativepromotion/canary/recovery/rawsource gates. Peerstatements give recipienthands-off only; do notreplacefresh liveownershipadmission",
+  "humanAuthority": "Standing physicalA1200/AmiGUS softwaretesting and explicitcontinue; latestdirectapproved limitedcanaryrecovery completed separately",
+  "reservation": false,
+  "targetCalls": 0,
+  "physical": "NOT_RUN",
+  "queuedTargetDispatch": false
+}

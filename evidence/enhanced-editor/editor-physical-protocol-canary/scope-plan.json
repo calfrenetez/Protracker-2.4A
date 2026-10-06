@@ -1,0 +1,42 @@
+{
+  "status": "PREPARED_NOT_ADMITTED_NOT_RUN",
+  "atUTC": "2026-10-06T11:09:06.196548+00:00",
+  "target": "amiberry-030",
+  "purpose": "Qualify new RAM transfer and AmigaDOS create/WAIT/COMPLETE/cleanup grammar before physical use; exact native application fixture already qualified separately once",
+  "oneOwnedStartup": true,
+  "namespace": "RAM:PT-editor-bridges-<fresh-private-run-id>",
+  "inertPayload": "small ordinary marker file named PTEditorBridgesTest, explicitly NEVER executed",
+  "oneBackgroundShellCanary": "own Run-once emits a distinct CANARY marker, RC0 and COMPLETE; no ProTracker executable/device/audio/IRQ activated",
+  "scriptFunctions": [
+    "create_script",
+    "poll_script",
+    "cleanup_script",
+    "absence_script"
+  ],
+  "fixedFiles": [
+    "PTEditorBridgesTest",
+    "Run-once",
+    "fixture.log",
+    "fixture.rc",
+    "complete.flag",
+    "launcher.log"
+  ],
+  "completionBoundSeconds": 60,
+  "checks": [
+    "fresh sole-controller all-peer scope/liveEMPTY/process/listener/disconnectedoriginalendpoint/3locks/source pins",
+    "literal create refuses existing private namespace",
+    "bounded file push/pull and guestCRCsize",
+    "positive WAIT before backgroundlaunch and complete exactRC0/COMPLETE forms",
+    "six full host custody files before completed-only exact cleanup",
+    "independent absence/originalidle/disconnect/bounded ownedstop/separate normal four-record release"
+  ],
+  "exclusions": [
+    "no new program runtime acceptance",
+    "no physical acceptance",
+    "no device/audio/register/IRQ/timing/capacity/voice-stop/listening or full-editor output"
+  ],
+  "failure": "stop/retain first result/HOLD; no failed cleanup/recovery/retry",
+  "wrappers": "PREPARING_NOT_ADMITTED",
+  "queuedTargetDispatch": false,
+  "physical": "NOT_RUN"
+}

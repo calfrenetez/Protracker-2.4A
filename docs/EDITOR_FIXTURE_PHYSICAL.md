@@ -1,9 +1,10 @@
-# Editor bridge fixture: bounded physical preparation
+# Editor bridge fixture: bounded physical protocol and qualification
 
 The exact `PTEditorBridgesTest` passed once in shared Amiberry030. This adapter
 prepares the same portable assertions for a separately coordinated RAM-only
-real-A1200 run. Physical execution is **NOT RUN**. It does not launch the full
-editor or qualify real audio devices.
+real-A1200 run. The exact physical CPU/software fixture subsequently passed once
+on 6 October 2026, with separate cleanup, original030 return and independent full
+release. It does not launch the full editor or qualify real audio devices.
 
 | Saved qualification | Result |
 | --- | --- |
@@ -11,6 +12,8 @@ editor or qualify real audio devices.
 | Source commit | `5771d3ce1fcc3dee1967ec0c728e1fa654954bba` |
 | Amiberry result | One launch, complete 624-byte stdout, RC0; 213.214 seconds within 420 seconds |
 | Independent release | Normal verified release to EMPTY68; first host release-script refusal preserved separately |
+| Physical result | Same exact product; one launch, complete 624-byte stdout, RC0; 230.127 seconds within 420 seconds |
+| Physical full release | Independent physical-only EMPTY94, separate original030 return and final EMPTY100; both phases complete |
 | Assertions | Legacy editor15; checked lifetime39/control alias18; metadata bridge9/admission alias75 |
 | Host adapter checks | 26 tests, including every transport failure boundary, cancellation and absolute deadline |
 
@@ -20,6 +23,9 @@ The compiler-only record remains historical; it was not rewritten as runtime
 evidence. Timers, voices and the bus are injected; the bus uses ordinary RAM.
 No physical memory placement, MMIO/sample-RAM completion, voice stop, IRQ,
 musical timing, audio or listening acceptance follows from these results.
+The later physical evidence is in
+[`editor-bridges-physical`](../evidence/enhanced-editor/editor-bridges-physical/README.md).
+The earlier native record's physical NOT_RUN statement remains historical.
 
 ## Adapter contract
 
@@ -69,7 +75,8 @@ phases under continuous peer hands-off:
    disconnect, bounded owned emulator stop and independent final release.
 
 The phase-boundary plan requires shared coordination/review before admission.
-It is not an executed wrapper or a global availability claim. No next phase is
+The saved 6 October caller and both executed phases are archived in the physical
+packet; neither the plan nor the release receipt claims current availability. No next phase is
 automatically dispatched after any failure. Actual authenticated Safari access
 and fresh physical ownership/recovery checks remain required; viewing Safari
 does not clear another task's central DevBench session. Any acquired browser

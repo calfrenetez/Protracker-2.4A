@@ -1,0 +1,9 @@
+{
+  "allEmulatorsAbsent": true,
+  "port2345ListenerAbsent": true,
+  "DevBenchDisconnected": true,
+  "independentPhysicalRelease": {
+    "bytes": 5421,
+    "sha256": "5cf0cf2dfd57efcecacdcd164387336d03c6a74b56347295b71bc05bbe74bb32"
+  }
+}

@@ -1,0 +1,6 @@
+AMIGUS VOICE PLAN PASS: byte bounds, alignment, loops, rational rate, volume, refusal atomicity; no I/O
+AMIGUS DIRECT LEVELS LEGACY PASS: 16705 volume/pan pairs and144 source/cache/endian/channel/loop/interpolation geometries retain unchanged legacy fields
+AMIGUS DIRECT LEVELS CANONICAL PASS: actual mono renderer centre32639/32895 equals all seven explicit fields; legacy64/128 remains32768/32768; min/max rate and relocation exact
+AMIGUS DIRECT LEVELS DOMAIN PASS: all65536 individual register values, silent/asymmetric/independent maxima, no gain defaults/clamps or PCM/slice value reads
+AMIGUS DIRECT LEVELS GUARDS PASS: complete request/descriptors/PCM spare/slices, wrapped/missing/misaligned storage and delegated geometry refuse with exact byte preservation
+AMIGUS DIRECT LEVELS PASS: D1 pure software only; no factory/controller/normalizer integration, native/card capacity/stop/timing/audio authority

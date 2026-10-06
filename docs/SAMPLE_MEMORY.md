@@ -6134,3 +6134,23 @@ editor barrier remain subsequent implementation work. Native, emulator, physical
 memory placement, device completion/stop, timing and listening are untested by
 this module. See the [geometry contract](MIXED_READERS_PLAN_NORMALIZE.md) and
 [saved host projection](../evidence/enhanced-editor/mixed-readers-plan-normalize-host/README.md).
+
+## Explicit quantized AmiGUS levels — 6 October 2026
+
+The additive pure `amigus_trigger_levels` helper preserves exact `uint16_t`
+left/right register levels and delegates all five geometry fields to the
+unchanged legacy converter. Its corrected D1 v3 host ASan/UBSan fixture passes:
+945 saved inputs, 17 units, six complete lines and 26 completed owned-driver
+records across preparation, compiler/runtime and the root wrapper. The original
+D1 v2 compile failure remains separate; its fixture-only macro namespace repair
+changes no production helper, qualifier or expected output. Independent saved
+host review passes without findings. This helper does not allocate,
+scan sample values or access a device; complete declared PCM/slice and output
+spans remain guarded, and every refusal preserves the result bytes. Canonical
+mono centred levels `32639/32895` are exact while legacy `64/128` retains
+`32768/32768`. Genuine factory/controller/normalizer integration is not yet
+supplied by this helper; the tagged factory extension remains private. Host
+geometry proof does not qualify master/cache ownership, whole-song production,
+native/Amiberry, physical capacity/completion/stop, exact live timing or audio and
+listening. See the [helper contract](AMIGUS_TRIGGER_LEVELS.md) and
+[selected host projection](../evidence/enhanced-editor/amigus-trigger-levels-host/README.md).

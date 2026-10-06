@@ -1,0 +1,1255 @@
+{
+  "schema": "pt24g-amigus-trigger-levels-selected-host-projection-v1",
+  "scope": "D1_PURE_NUMERIC_HELPER_HOST_ONLY",
+  "projection_notice": "Selected saved metadata and four complete raw streams. Full private sources, archive/font bodies, tools, complete raw-process collection, host product and custody remain separate. Omitted bodies are not independently verified by this public packet.",
+  "current": {
+    "attempt": "first-v3",
+    "status": "PASS",
+    "phase": "COMPLETE",
+    "baseline": "55626a72ef7cb41fb4d4721023915cfce891f6fa",
+    "private_run_pin": {
+      "bytes": 352428,
+      "sha256": "52d9900f3f92c0872f1f67bd0fa6d8724229133308ec5aede0cf8e6ca5aaf8b5",
+      "mode": 33188
+    },
+    "private_root_receipt_pin": {
+      "bytes": 19450,
+      "sha256": "a48c1a1aa3f6bd87257e9ebab57a7c03ce7156412b324d34aaec9c92a3d05933",
+      "mode": 33188
+    },
+    "archived_source_file_count": 940,
+    "saved_source_file_count": 945,
+    "source_count_formula": "940 committed archive files +4 private D1 overlays +1 generated same-commit font =945",
+    "translation_unit_count": 17,
+    "ordered_units": [
+      "tests/amigus_trigger_levels_test.c",
+      "src/core/amigus_trigger_levels.c",
+      "src/core/amigus_voice_plan.c",
+      "src/core/amigus_render_voice.c",
+      "src/core/render.c",
+      "src/core/pitch.c",
+      "src/core/timeline.c",
+      "src/core/frame_clock.c",
+      "src/core/flow.c",
+      "src/core/voice.c",
+      "src/core/project.c",
+      "src/core/channels.c",
+      "src/core/pcm.c",
+      "src/core/document.c",
+      "src/core/pp20.c",
+      "src/core/mod_project.c",
+      "src/core/mod_inspect.c"
+    ],
+    "flags": [
+      "-std=c99",
+      "-O1",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-fsanitize=address,undefined",
+      "-Isrc/core",
+      "-I."
+    ],
+    "qualifier_elapsed_seconds": 6.867936959009967,
+    "overall_completion_within_budget": true,
+    "root_elapsed_seconds": 7.146699582997826,
+    "compiler_elapsed_seconds": 3.9646835000021383,
+    "product_elapsed_seconds": 0.5567357919935603,
+    "host_product_pin": {
+      "bytes": 1046368,
+      "sha256": "30be19e07e65ff1a58f6bdb5e39bf8d9ae69800fc155f3a669ed1f70c2ab9777",
+      "mode": 33261
+    },
+    "host_product_state": "EXECUTED_ON_HOST_ONLY_BODY_OMITTED",
+    "exact_stdout_bytes": 912,
+    "exact_stdout_lines": 6,
+    "preparation_call_count": 16,
+    "compile_and_runtime_call_count": 2,
+    "root_wrapper_call_count": 8,
+    "completed_owned_driver_records": 26,
+    "qualifier_records": [
+      {
+        "label": "prepare-head",
+        "status": "PASS",
+        "pid": 25108,
+        "pgid": 25108,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.04222091700648889,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 41,
+          "sha256": "4ac304d8b67a4c671c6c6047b8aed9c77c198835f12b79895c782b99db607b8f",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "prepare-index",
+        "status": "PASS",
+        "pid": 25115,
+        "pgid": 25115,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.05134366700076498,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 1210713,
+          "sha256": "2be7616194e84f346162f0c2f85d3f0e43e8e5418bf5bc9fac8e76672c771a46",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "prepare-staged",
+        "status": "PASS",
+        "pid": 25116,
+        "pgid": 25116,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.032480458001373336,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "prepare-status",
+        "status": "PASS",
+        "pid": 25120,
+        "pgid": 25120,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.05979295799625106,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 415,
+          "sha256": "683b0b2b900a5b87a36555bf6dfa11d8a7eac816e652cc40a157833b641b63a0",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "prepare-archive",
+        "status": "PASS",
+        "pid": 25121,
+        "pgid": 25121,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.0808708340045996,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 6205440,
+          "sha256": "dba62aabffe9926a603e1a61f535ac40fc1ddff7823e27a2103f9c5962b2b71a",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "prepare-font",
+        "status": "PASS",
+        "pid": 25159,
+        "pgid": 25159,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.022272832997259684,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 580,
+          "sha256": "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "precompile-head",
+        "status": "PASS",
+        "pid": 25160,
+        "pgid": 25160,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.025196167000103742,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 41,
+          "sha256": "4ac304d8b67a4c671c6c6047b8aed9c77c198835f12b79895c782b99db607b8f",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "precompile-index",
+        "status": "PASS",
+        "pid": 25161,
+        "pgid": 25161,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.024135665997164324,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 1210713,
+          "sha256": "2be7616194e84f346162f0c2f85d3f0e43e8e5418bf5bc9fac8e76672c771a46",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "postcompile-head",
+        "status": "PASS",
+        "pid": 25227,
+        "pgid": 25227,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.024866958992788568,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 41,
+          "sha256": "4ac304d8b67a4c671c6c6047b8aed9c77c198835f12b79895c782b99db607b8f",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "postcompile-index",
+        "status": "PASS",
+        "pid": 25228,
+        "pgid": 25228,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.026235583005473018,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 1210713,
+          "sha256": "2be7616194e84f346162f0c2f85d3f0e43e8e5418bf5bc9fac8e76672c771a46",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "prerun-head",
+        "status": "PASS",
+        "pid": 25229,
+        "pgid": 25229,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.024397875007707626,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 41,
+          "sha256": "4ac304d8b67a4c671c6c6047b8aed9c77c198835f12b79895c782b99db607b8f",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "prerun-index",
+        "status": "PASS",
+        "pid": 25230,
+        "pgid": 25230,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.025162833990179934,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 1210713,
+          "sha256": "2be7616194e84f346162f0c2f85d3f0e43e8e5418bf5bc9fac8e76672c771a46",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "postrun-head",
+        "status": "PASS",
+        "pid": 25233,
+        "pgid": 25233,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.025064625006052665,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 41,
+          "sha256": "4ac304d8b67a4c671c6c6047b8aed9c77c198835f12b79895c782b99db607b8f",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "postrun-index",
+        "status": "PASS",
+        "pid": 25234,
+        "pgid": 25234,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.030216625003959052,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 1210713,
+          "sha256": "2be7616194e84f346162f0c2f85d3f0e43e8e5418bf5bc9fac8e76672c771a46",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "verify-head",
+        "status": "PASS",
+        "pid": 25237,
+        "pgid": 25237,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.023716833005892113,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 41,
+          "sha256": "4ac304d8b67a4c671c6c6047b8aed9c77c198835f12b79895c782b99db607b8f",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "verify-index",
+        "status": "PASS",
+        "pid": 25238,
+        "pgid": 25238,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.02641083300113678,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 1210713,
+          "sha256": "2be7616194e84f346162f0c2f85d3f0e43e8e5418bf5bc9fac8e76672c771a46",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "trigger-levels-compile",
+        "status": "PASS",
+        "pid": 25164,
+        "pgid": 25164,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 120,
+        "effective_remaining_seconds": 120.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 3.9646835000021383,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "trigger-levels-run",
+        "status": "PASS",
+        "pid": 25231,
+        "pgid": 25231,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 180,
+        "effective_remaining_seconds": 180.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.5567357919935603,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 912,
+          "sha256": "7abb2a0547eda8c0c7008b511f9a6844583d204cc55e97721e8075c782904604",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      }
+    ],
+    "root_records": [
+      {
+        "label": "before-head",
+        "status": "PASS",
+        "pid": 25099,
+        "pgid": 25099,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.02430412500689272,
+        "stdout": {
+          "bytes": 41,
+          "sha256": "4ac304d8b67a4c671c6c6047b8aed9c77c198835f12b79895c782b99db607b8f",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "before-branch",
+        "status": "PASS",
+        "pid": 25100,
+        "pgid": 25100,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.02309649999369867,
+        "stdout": {
+          "bytes": 31,
+          "sha256": "218f389b3beebe94baeef4f4a8f7447956c3b3471d5890c8aabad0d9bf3eb3f9",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "before-staged",
+        "status": "PASS",
+        "pid": 25101,
+        "pgid": 25101,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.023681541002588347,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "before-index",
+        "status": "PASS",
+        "pid": 25103,
+        "pgid": 25103,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.026356834001489915,
+        "stdout": {
+          "bytes": 1210713,
+          "sha256": "2be7616194e84f346162f0c2f85d3f0e43e8e5418bf5bc9fac8e76672c771a46",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "first-qualifier",
+        "status": "PASS",
+        "pid": 25104,
+        "pgid": 25104,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_seconds": 610,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 6.959216459013987,
+        "stdout": {
+          "bytes": 122,
+          "sha256": "027e8dce2fa3e4c7999a1d594b3a0eb3439394697112900e3dadae222c308a6c",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "after-head",
+        "status": "PASS",
+        "pid": 25239,
+        "pgid": 25239,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.02177012500760611,
+        "stdout": {
+          "bytes": 41,
+          "sha256": "4ac304d8b67a4c671c6c6047b8aed9c77c198835f12b79895c782b99db607b8f",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "after-index",
+        "status": "PASS",
+        "pid": 25240,
+        "pgid": 25240,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.024638957998831756,
+        "stdout": {
+          "bytes": 1210713,
+          "sha256": "2be7616194e84f346162f0c2f85d3f0e43e8e5418bf5bc9fac8e76672c771a46",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "after-staged",
+        "status": "PASS",
+        "pid": 25241,
+        "pgid": 25241,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.023248208992299624,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      }
+    ],
+    "first_failure": null
+  },
+  "first_compile_failure": {
+    "attempt": "first-v2",
+    "status": "FAIL",
+    "phase": "COMPILE",
+    "baseline": "55626a72ef7cb41fb4d4721023915cfce891f6fa",
+    "private_run_pin": {
+      "bytes": 341351,
+      "sha256": "03c2ed90a6c639eaa8926ac081a49e0c0e5f5cb7ed7874ab97bed0ac04dd7dd3",
+      "mode": 33188
+    },
+    "private_root_receipt_pin": {
+      "bytes": 15547,
+      "sha256": "4e1daea415fe72f0a000ee5348ca631c0da9728cb500ed6f25e6866b7872427e",
+      "mode": 33188
+    },
+    "preparation_call_count": 8,
+    "compiler_call_count": 1,
+    "root_wrapper_call_count": 5,
+    "runtime_call_count": 0,
+    "saved_source_file_count": 945,
+    "translation_unit_count": 17,
+    "first_failure": {
+      "label": "trigger-levels-compile",
+      "error": "RuntimeError('trigger-levels-compile nonzero return or stderr')",
+      "exception_type": "RuntimeError"
+    },
+    "compiler_returncode": 1,
+    "qualifier_elapsed_seconds": 5.479328958012047,
+    "root_elapsed_seconds": 5.684365500012063,
+    "qualifier_records": [
+      {
+        "label": "prepare-head",
+        "status": "PASS",
+        "pid": 21828,
+        "pgid": 21828,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.025971834009396844,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 41,
+          "sha256": "4ac304d8b67a4c671c6c6047b8aed9c77c198835f12b79895c782b99db607b8f",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "prepare-index",
+        "status": "PASS",
+        "pid": 21831,
+        "pgid": 21831,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.04285966599127278,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 1210713,
+          "sha256": "2be7616194e84f346162f0c2f85d3f0e43e8e5418bf5bc9fac8e76672c771a46",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "prepare-staged",
+        "status": "PASS",
+        "pid": 21833,
+        "pgid": 21833,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.02800020900031086,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "prepare-status",
+        "status": "PASS",
+        "pid": 21834,
+        "pgid": 21834,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.043992665989208035,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 415,
+          "sha256": "683b0b2b900a5b87a36555bf6dfa11d8a7eac816e652cc40a157833b641b63a0",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "prepare-archive",
+        "status": "PASS",
+        "pid": 21836,
+        "pgid": 21836,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.07855637499596924,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 6205440,
+          "sha256": "dba62aabffe9926a603e1a61f535ac40fc1ddff7823e27a2103f9c5962b2b71a",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "prepare-font",
+        "status": "PASS",
+        "pid": 21847,
+        "pgid": 21847,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.020887291990220547,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 580,
+          "sha256": "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "precompile-head",
+        "status": "PASS",
+        "pid": 21848,
+        "pgid": 21848,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.02454737499647308,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 41,
+          "sha256": "4ac304d8b67a4c671c6c6047b8aed9c77c198835f12b79895c782b99db607b8f",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "precompile-index",
+        "status": "PASS",
+        "pid": 21849,
+        "pgid": 21849,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 30,
+        "effective_remaining_seconds": 30.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.026606750005157664,
+        "completion_within_effective_deadline": true,
+        "stdout": {
+          "bytes": 1210713,
+          "sha256": "2be7616194e84f346162f0c2f85d3f0e43e8e5418bf5bc9fac8e76672c771a46",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "trigger-levels-compile",
+        "status": "FAIL",
+        "pid": 21853,
+        "pgid": 21853,
+        "owned_new_session": true,
+        "returncode": 1,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_call_seconds": 120,
+        "effective_remaining_seconds": 120.0,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 4.088225208004587,
+        "completion_within_effective_deadline": true,
+        "error": "RuntimeError('trigger-levels-compile nonzero return or stderr')",
+        "exception_type": "RuntimeError",
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 405,
+          "sha256": "130aedc44415d19dec873641557aafde5a06d725670af8cbc75cf925cb942b95",
+          "mode": 33188
+        }
+      }
+    ],
+    "root_records": [
+      {
+        "label": "before-head",
+        "status": "PASS",
+        "pid": 21823,
+        "pgid": 21823,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.0257285829866305,
+        "stdout": {
+          "bytes": 41,
+          "sha256": "4ac304d8b67a4c671c6c6047b8aed9c77c198835f12b79895c782b99db607b8f",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "before-branch",
+        "status": "PASS",
+        "pid": 21824,
+        "pgid": 21824,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.021928583009866998,
+        "stdout": {
+          "bytes": 31,
+          "sha256": "218f389b3beebe94baeef4f4a8f7447956c3b3471d5890c8aabad0d9bf3eb3f9",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "before-staged",
+        "status": "PASS",
+        "pid": 21825,
+        "pgid": 21825,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.024619999996502884,
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "before-index",
+        "status": "PASS",
+        "pid": 21826,
+        "pgid": 21826,
+        "owned_new_session": true,
+        "returncode": 0,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_seconds": 30,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 0.02500220799993258,
+        "stdout": {
+          "bytes": 1210713,
+          "sha256": "2be7616194e84f346162f0c2f85d3f0e43e8e5418bf5bc9fac8e76672c771a46",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      {
+        "label": "first-qualifier",
+        "status": "FAIL",
+        "pid": 21827,
+        "pgid": 21827,
+        "owned_new_session": true,
+        "returncode": 1,
+        "driver_reaped": true,
+        "group_quiescent": true,
+        "whole_seconds": 610,
+        "cleanup_reserve_seconds": 5,
+        "elapsed_seconds": 5.572126958009903,
+        "error": "RC/stderr/reaping/quiescence/observed elapsed failure",
+        "stdout": {
+          "bytes": 122,
+          "sha256": "9e306952daf0353a29c9c5a7463c5e8d8f51a024e55c0b4d97ee8a94664091e7",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 829,
+          "sha256": "134b18c0294e46bcbc16d62bc127fdfcf1bec4d410449eb87af927028736e45a",
+          "mode": 33188
+        }
+      }
+    ],
+    "host_product_state": "NOT_CREATED_NOT_RUN",
+    "cause": "Fixture-local REFUSE macro redefined the included unchanged legacy REFUSE under Werror. Corrected v3 renames fixture-local RESET/REFUSE to D1_RESET/D1_REFUSE; no production H/C, qualifier, assertions or expected output change."
+  },
+  "source_four_current": {
+    "src/core/amigus_trigger_levels.h": {
+      "bytes": 1886,
+      "sha256": "f1db99e67a4b1e2c05ddfe666dc4c69ee640cd5837de33a01bbe88c1f521f6b0",
+      "mode": 33188
+    },
+    "src/core/amigus_trigger_levels.c": {
+      "bytes": 3763,
+      "sha256": "f5a5ecc8e3a5f2583ea01421a8cff66eef11ece2f1987a6f3e04479de63baaf3",
+      "mode": 33188
+    },
+    "tests/amigus_trigger_levels_test.c": {
+      "bytes": 16223,
+      "sha256": "a64502130b44e4f4325beffc029207ba1c8ec4b09b41e59887b7bc9b7bcfdaa4",
+      "mode": 33188
+    },
+    "tests/test_amigus_trigger_levels.py": {
+      "bytes": 22524,
+      "sha256": "0d9554affc294dacf08d35a5d23c5e28298da376f5438657058ffd20c9956bab",
+      "mode": 33188
+    }
+  },
+  "source_four_first_failure": {
+    "src/core/amigus_trigger_levels.h": {
+      "bytes": 1886,
+      "sha256": "f1db99e67a4b1e2c05ddfe666dc4c69ee640cd5837de33a01bbe88c1f521f6b0",
+      "mode": 33188
+    },
+    "src/core/amigus_trigger_levels.c": {
+      "bytes": 3763,
+      "sha256": "f5a5ecc8e3a5f2583ea01421a8cff66eef11ece2f1987a6f3e04479de63baaf3",
+      "mode": 33188
+    },
+    "tests/amigus_trigger_levels_test.c": {
+      "bytes": 15959,
+      "sha256": "fee3c3ebc8db5aaf9e7ca19d88449308937a96ad5f31c9b2e8c80bb8618b27ab",
+      "mode": 33188
+    },
+    "tests/test_amigus_trigger_levels.py": {
+      "bytes": 22524,
+      "sha256": "0d9554affc294dacf08d35a5d23c5e28298da376f5438657058ffd20c9956bab",
+      "mode": 33188
+    }
+  },
+  "independent_source_review": {
+    "status": "PASS_SOURCE_ONLY_NAMESPACE_CORRECTION_NOT_COMPILED_OR_RUN",
+    "private_report_pin": {
+      "bytes": 4805,
+      "sha256": "50e2298cb21d47e5d5b89296112d34b529ca6e1642c58adc7af5f2053e550984",
+      "mode": 33188
+    }
+  },
+  "independent_saved_host_review": {
+    "status": "PASS_INDEPENDENT_SAVED_D1_HOST_EVIDENCE_ONLY",
+    "private_report_pin": {
+      "bytes": 7726,
+      "sha256": "d15c5f4a2875aab4ec0208fd9763b1af383987bb6506f9a0adb00aa48a6011a2",
+      "mode": 33188
+    },
+    "private_verification_pin": {
+      "bytes": 14039236,
+      "sha256": "039f793db7841132aa28370ef54607fe5c4b0a5297866526786c2f8ee18e90f8",
+      "mode": 33188
+    },
+    "findings": [],
+    "accepted_source_freeze_pin": {
+      "bytes": 14548,
+      "mode": 33188,
+      "sha256": "ebffc1e85d0191be78990077a6653f6c0db10f31ef0c1f70add91b57771f97a6"
+    },
+    "accepted_source_review_pin": {
+      "bytes": 4805,
+      "mode": 33188,
+      "sha256": "50e2298cb21d47e5d5b89296112d34b529ca6e1642c58adc7af5f2053e550984"
+    },
+    "actual_numeric_assertion_coverage": {
+      "actual_mono_canonical_converter_cases": 768,
+      "additional_independent_level_pairs": 10,
+      "canonical_q16_centre": [
+        32639,
+        32896
+      ],
+      "canonical_register_centre": [
+        32639,
+        32895
+      ],
+      "individual_uint16_complement_pairs": 65536,
+      "legacy_64_128_centre": [
+        32768,
+        32768
+      ],
+      "legacy_volume_pan_pairs": 16705,
+      "selected_channel_geometry_cases": 144
+    },
+    "limitations": [
+      "Independent saved-data audit only: no qualifier, compiler, product or previous verifier was imported, invoked or replayed. Saved positive reaping and group-quiescence records were checked as data; current PID liveness was not probed.",
+      "Success exercised ordinary compile/product completion only. Timeout, interruption, creation/persistence failure, TERM/KILL cleanup and cleanup refusal paths remain source-reviewed designs and were not demonstrated by this successful run.",
+      "Saved HEAD/index/branch/archive provenance and stage-zero blob bytes were checked without Git commands. Current ordinary source byte/full-mode custody was freshly re-read; current live Git HEAD/index was not independently queried.",
+      "Pinned /usr/bin/cc and /usr/bin/git are Xcode wrapper binaries; actual compiler/linker/SDK/ASan/dyld runtime closure is not completely fingerprinted by this packet.",
+      "Sampled elapsed admission records do not preempt synchronous filesystem or final persistence latency. They do not establish WCET, timing jitter tolerance or exact musical scheduling.",
+      "The six numeric output markers support D1 host fixture assertions only. Canonical renderer parity is mono only; selected stereo channels occur in legacy numeric geometry checks. Complete readable ordinary descriptor/storage accessibility and unknown enclosing caller contexts remain caller obligations.",
+      "One whole-plan assignment means logical refusal atomicity, not CPU/thread/device atomicity. No hardware sample-RAM capacity, completion/order, all-voice stop, audio or human listening inference is made.",
+      "D1 overlays remain private. No D2/factory/controller/normalizer integration, genuine master pins/arenas/leases/provenance, whole-song preparation, native/Amiberry/real-A1200 execution, native stack, queued activation or product UI acceptance is qualified."
+    ],
+    "body_copied": false
+  },
+  "process_bounds": {
+    "qualifier_overall_seconds": 600,
+    "git_call_seconds": 30,
+    "compiler_call_seconds": 120,
+    "product_call_seconds": 180,
+    "owned_cleanup_reserve_seconds": 5,
+    "root_qualifier_call_seconds": 610,
+    "completion_acceptance": "Observed effective call and final overall elapsed refusal; required successful raw stdout and complete custody read before PASS. Earlier failure preserved. Synchronous filesystem latency is not preempted; no hard real-time claim.",
+    "failure_cleanup_path_exercised": "Compiler RC1 and enclosing qualifier/root failure recorded with driver reaping and group quiescence. No timeout, signal escalation or uncertain-cleanup failure was exercised."
+  },
+  "authority": {
+    "factory_controller_normalizer_integration": false,
+    "genuine_cache_or_master_ownership": false,
+    "queue_or_activation": false,
+    "whole_song": false,
+    "native_build": false,
+    "native_execution": false,
+    "amiberry": false,
+    "physical_device": false,
+    "sample_ram_capacity": false,
+    "ordering_completion_stop": false,
+    "live_exact_timing": false,
+    "audio_or_listening": false,
+    "target_operations": 0
+  },
+  "raw_streams": {
+    "current.stdout": {
+      "bytes": 912,
+      "sha256": "7abb2a0547eda8c0c7008b511f9a6844583d204cc55e97721e8075c782904604",
+      "mode": 33188
+    },
+    "current.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "first-compile-failure.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "first-compile-failure.stderr": {
+      "bytes": 405,
+      "sha256": "130aedc44415d19dec873641557aafde5a06d725670af8cbc75cf925cb942b95",
+      "mode": 33188
+    }
+  },
+  "subsequent_exact_source_adoption": {
+    "private_receipt_pin": {
+      "bytes": 1161,
+      "sha256": "16a7b5b0779b6761b84012e83c6fa99cdbe48e409336a7f5a6af435a46a1f010",
+      "mode": 33188
+    },
+    "source_four_same_bytes": true,
+    "qualification_preceded_adoption": true,
+    "additional_tests_or_targets": false,
+    "notice": "The frozen host attempt used four private overlays on the historical committed baseline; root later copied exactly those four source bytes. This is a separate source adoption, not a new qualification."
+  }
+}

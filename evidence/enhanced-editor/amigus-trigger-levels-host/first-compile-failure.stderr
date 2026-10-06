@@ -1,0 +1,7 @@
+tests/amigus_trigger_levels_test.c:136:9: error: 'REFUSE' macro redefined [-Werror,-Wmacro-redefined]
+  136 | #define REFUSE() refusal(&x,256,32)
+      |         ^
+tests/amigus_voice_plan_test.c:26:9: note: previous definition is here
+   26 | #define REFUSE() do {assert(!pt_amigus_voice_plan_prepare(&s,&f,&r,256,24,&p));assert(!memcmp(&p,&old,sizeof(p)));} while(0)
+      |         ^
+1 error generated.

@@ -1,0 +1,15 @@
+--- portable-v1/tests/editor_mixed_prepare_session_test.c
++++ fresh-host/tests/editor_mixed_prepare_session_test.c
+@@ -295,7 +295,10 @@
+ int main(void)
+ {
+     unsigned bits,mode;assert(!editor_checked_fixture());
+-    for(bits=8;bits<=24;bits+=8){for(mode=0;mode<34;++mode)session_lifecycle(bits,mode);
+-        for(mode=0;mode<26;++mode)session_admission(bits,mode);session_terminal(bits);}
++    for(bits=8;bits<=24;bits+=8){
++        for(mode=0;mode<34;++mode)session_lifecycle(bits,mode);
++        for(mode=0;mode<26;++mode)session_admission(bits,mode);
++        session_terminal(bits);
++    }
+     puts("EDITOR PREPARE SESSION PASS:102 master/handoff/checked/edit-undo-dispose/cancel/reentry/retained-close/exact-save lifetimes;78 admission/control/context aliases and3 expired-terminal cases across8/16/24; prior checked39+18/editor15 unchanged; zero voice starts/timer calls/bus uploads");return 0;
+ }

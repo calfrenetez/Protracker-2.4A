@@ -1,0 +1,10 @@
+{
+  "status": "FAILED_BEFORE_COMPILER_OR_EXECUTABLE",
+  "error": "ValueError: malformed node or string on line 8: ast.Starred",
+  "source": "test_mixed_preflight.py SOURCES contains starred imported constants; literal_eval refused",
+  "preserved_source_exports": [
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-98d3jvyr/source"
+  ],
+  "code_changed": "Own standalone runner resolves the same four literal source lists explicitly; existing helpers untouched",
+  "target_calls": 0
+}

@@ -1,0 +1,22 @@
+{
+  "status": "PASS_SAVED_FIRST_FAILURE_CUSTODY_ONLY",
+  "utc": "2026-10-06T12:49:00.256458+00:00",
+  "manifest": {
+    "bytes": 1098534,
+    "sha256": "1465c4a6eea60276636a2741a3e9596cb10a54c0d57d3db040f6fe9be46df0bf"
+  },
+  "checks": {
+    "first_failure_preserved": true,
+    "frozen_source": true,
+    "original_host_source": true,
+    "original_host_run": true,
+    "expected_stdout_copy": true,
+    "compiler_tools": true,
+    "compiler_runtime": true,
+    "compiler_dependencies": true,
+    "protected_16": true,
+    "no_product": true,
+    "never_executed": true
+  },
+  "scope": "Read-only saved-file verification; no compiler retry, product execution, target, emulator, network, bridge, process, shared-source/service or Git mutation."
+}

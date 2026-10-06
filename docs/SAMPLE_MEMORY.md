@@ -5877,3 +5877,48 @@ and [canary/failure/recovery custody](../evidence/enhanced-editor/editor-physica
 
 Next contained work is opt-in cancellable editorpreparation-session composition
 from master establishment to checked preparation; classicPLAY/UI unchanged.
+
+
+## Optional editor preparation-session composition — 6 October 2026
+
+New callable editor_mixed_prepare_session composes existingcancellable8/16/24
+masterestablishment with confirmedstop + metadata-only bridgebind + checkedowner
+adoption inoneserializedadvance, then boundedexisting fullvalidation/audit/
+selectivepreparation. Failure/cancellation latch; explicitclose retainsidlebound
+engines oncheckedadmissionrefusal, ownerclose/bothindependentdrains/zerochildfinish
+beforehookexpiry. Completedmasters remainauthoritative/samplerowned. Oneordinary
+compositeextent contains session andallopaquecontexts, othercontrolsseparate;
+originalinputbytes immutable/lifetime throughclose1. Wholealiasguards precede
+writablebusyfault; terminalget/close/advance avoidexpiredformercontrols.
+NativePLAY/UI/eventloop unchanged, no timers/voicestarts/dispatch/uploads added.
+
+ThreeASan/UBSan groups/6calls RC0/emptystderr,915savedinputs PASS:102lifetimes/
+78admissionaliases/3expiredterminal across8/16/24; actualedit+undo/dispose, exactsave,
+allphasecancel/reentry/allocfailure, bothdrains andchildretention. Priorchecked
+39+18/editor15, establishment27+24/editor15, established66/baseowner255 unchanged.
+Newprep asserts0voicestarts/timercalls/busuploads. Rootsourceidentity verification
+and separatefinalread-onlyreview PASS. TwofirstASTpreparationrefusals andfirst
+fixtureadmissionassertion preserved, correctedlaterhostrun distinct. Protected16
+hashes/modes preserved, baselinecommitted sources used ratherthanadoptingdisplay
+work. See [session contract](EDITOR_PREPARE_SESSION.md) and
+[saved host session evidence](../evidence/enhanced-editor/editor-prepare-session/README.md).
+Newcoordinator emulator/physicalNOT_RUN, portablecrossbuild inhostpreparation.
+PriorphysicaleditorbridgePASS doesnotqualifythisnewcandidate. Physicalplacement/
+stack/stepwallclock/devicecapacity/order/completion/voicestop/exactactivation/IRQ/
+audio/listening/fullnativeUI remainopen; exactschedule requirementunchanged.
+
+
+Subsequentcurrentfixture qualification: firstportable GCC -Werror misleading
+indentation refusal preserved FIRST_FAILURE/noHUNK. Separatereviewed formatting
+onlytestcorrection, fresh6callASan/UBSan/915sourcePASS on d57baseline/4overlays,
+identical3stdoutmarkers. Distinctportable-v2 fullfixture m68000/softfloat/nix20
+compile/link91successfulcalls/82units/233deps/5tools/7runtimeinputs PASS under
+120s/call600s overall,15.648s actual. ExactPTEditorPrepareSessionTest395508B
+SHA256b9b9a71351a012f20b5dc67228604f2f6e02d7dce93d07b2fed28fcb8cf83d10;
+expectedhoststdout692B SHA256c415b67357117e9e8286309309f2d5e260b50a4bf2bd82ee4124676f030c0f36.
+1105retainedbyte/tool/runtime/dependency/protected16verification PASS. Product
+NEVER_EXECUTED; exactruntime030/physicalremainNOT_RUN. Currentcorrectedtesthash
+fcb1006996dfaae779f1fec79928d05013a9b9935d7b11d835482fa808f93199.
+See [portable session evidence](../evidence/enhanced-editor/editor-prepare-session-portable/README.md).
+Freshhost-only nativewindow preparation underway; Scottnextsharedwindowpriority
+preserved, rootownsno targetrequest/admission/connection/control.

@@ -1,0 +1,370 @@
+{
+  "status": "PASS_SAVED_BYTE_CUSTODY_ONLY",
+  "files": {
+    "run.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-_llz_hw2/run.json",
+      "sourceFingerprint": {
+        "bytes": 148249,
+        "sha256": "09ee23fe3e4a9d0b849a8b85adb8d91a070d3ddbcaab0caca2d67b90374ef2ef"
+      },
+      "savedCopy": {
+        "bytes": 148249,
+        "sha256": "09ee23fe3e4a9d0b849a8b85adb8d91a070d3ddbcaab0caca2d67b90374ef2ef"
+      }
+    },
+    "summary.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/final-evidence-summary.json",
+      "sourceFingerprint": {
+        "bytes": 6275,
+        "sha256": "940185057047afa9c0579b32367ee080575df0f9b37c71ace1154a8e584c2374"
+      },
+      "savedCopy": {
+        "bytes": 6275,
+        "sha256": "940185057047afa9c0579b32367ee080575df0f9b37c71ace1154a8e584c2374"
+      }
+    },
+    "session-compile.stdout": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-_llz_hw2/session-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "session-compile.stderr": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-_llz_hw2/session-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "session-run.stdout": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-_llz_hw2/session-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 692,
+        "sha256": "c415b67357117e9e8286309309f2d5e260b50a4bf2bd82ee4124676f030c0f36"
+      },
+      "savedCopy": {
+        "bytes": 692,
+        "sha256": "c415b67357117e9e8286309309f2d5e260b50a4bf2bd82ee4124676f030c0f36"
+      }
+    },
+    "session-run.stderr": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-_llz_hw2/session-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "establish-compile.stdout": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-_llz_hw2/establish-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "establish-compile.stderr": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-_llz_hw2/establish-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "establish-run.stdout": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-_llz_hw2/establish-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 406,
+        "sha256": "c151b1a39bd6b72091b6bd789d07a2c59624aca0dd19f22dbc782ce82252543b"
+      },
+      "savedCopy": {
+        "bytes": 406,
+        "sha256": "c151b1a39bd6b72091b6bd789d07a2c59624aca0dd19f22dbc782ce82252543b"
+      }
+    },
+    "establish-run.stderr": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-_llz_hw2/establish-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "established-compile.stdout": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-_llz_hw2/established-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "established-compile.stderr": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-_llz_hw2/established-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "established-run.stdout": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-_llz_hw2/established-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 392,
+        "sha256": "2ace68268c607885c4e5810d845ca110059c262487afd456d246f4d3f03ace78"
+      },
+      "savedCopy": {
+        "bytes": 392,
+        "sha256": "2ace68268c607885c4e5810d845ca110059c262487afd456d246f4d3f03ace78"
+      }
+    },
+    "established-run.stderr": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-_llz_hw2/established-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "first-refusals/preparation-first-refusal.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/preparation-first-refusal.json",
+      "sourceFingerprint": {
+        "bytes": 533,
+        "sha256": "59f74fa855cfb3c234ee916fc4177523ba3199901a15708cbd470e6c274c2b71"
+      },
+      "savedCopy": {
+        "bytes": 533,
+        "sha256": "59f74fa855cfb3c234ee916fc4177523ba3199901a15708cbd470e6c274c2b71"
+      }
+    },
+    "first-refusals/second-run.stdout": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/second-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "first-refusals/second-run.stderr": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/second-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 1405,
+        "sha256": "70f1d08930382367b88efe48f26de68f9e082042e8983dda4a32a76fffcd279a"
+      },
+      "savedCopy": {
+        "bytes": 1405,
+        "sha256": "70f1d08930382367b88efe48f26de68f9e082042e8983dda4a32a76fffcd279a"
+      }
+    },
+    "first-fixture/run.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-tttgl_zt/run.json",
+      "sourceFingerprint": {
+        "bytes": 140861,
+        "sha256": "529c00fd0f178fef63eff97bd45ae1ebac1621938ba7028062b1bceb26858815"
+      },
+      "savedCopy": {
+        "bytes": 140861,
+        "sha256": "529c00fd0f178fef63eff97bd45ae1ebac1621938ba7028062b1bceb26858815"
+      }
+    },
+    "first-fixture/session-run.stdout": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-tttgl_zt/session-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 407,
+        "sha256": "4a0cd66e19f2cb8e7fae0758ebd2379c1a8795a6d589419106a55080ad88b4d4"
+      },
+      "savedCopy": {
+        "bytes": 407,
+        "sha256": "4a0cd66e19f2cb8e7fae0758ebd2379c1a8795a6d589419106a55080ad88b4d4"
+      }
+    },
+    "first-fixture/session-run.stderr": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-tttgl_zt/session-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 136,
+        "sha256": "eed097542fffd568a5c7eb89beeebcf463a2382dff7e7aa6df029b510973630e"
+      },
+      "savedCopy": {
+        "bytes": 136,
+        "sha256": "eed097542fffd568a5c7eb89beeebcf463a2382dff7e7aa6df029b510973630e"
+      }
+    },
+    "post-format-host/run.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-9vc22i93/run.json",
+      "sourceFingerprint": {
+        "bytes": 148248,
+        "sha256": "4eb1b2cd74112926bd3169192f102c61d7def34086cbcb4c31d0b1dee63d9642"
+      },
+      "savedCopy": {
+        "bytes": 148248,
+        "sha256": "4eb1b2cd74112926bd3169192f102c61d7def34086cbcb4c31d0b1dee63d9642"
+      }
+    },
+    "post-format-host/session-compile.stdout": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-9vc22i93/session-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "post-format-host/session-compile.stderr": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-9vc22i93/session-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "post-format-host/session-run.stdout": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-9vc22i93/session-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 692,
+        "sha256": "c415b67357117e9e8286309309f2d5e260b50a4bf2bd82ee4124676f030c0f36"
+      },
+      "savedCopy": {
+        "bytes": 692,
+        "sha256": "c415b67357117e9e8286309309f2d5e260b50a4bf2bd82ee4124676f030c0f36"
+      }
+    },
+    "post-format-host/session-run.stderr": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-9vc22i93/session-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "post-format-host/establish-compile.stdout": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-9vc22i93/establish-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "post-format-host/establish-compile.stderr": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-9vc22i93/establish-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "post-format-host/establish-run.stdout": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-9vc22i93/establish-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 406,
+        "sha256": "c151b1a39bd6b72091b6bd789d07a2c59624aca0dd19f22dbc782ce82252543b"
+      },
+      "savedCopy": {
+        "bytes": 406,
+        "sha256": "c151b1a39bd6b72091b6bd789d07a2c59624aca0dd19f22dbc782ce82252543b"
+      }
+    },
+    "post-format-host/establish-run.stderr": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-9vc22i93/establish-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "post-format-host/established-compile.stdout": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-9vc22i93/established-compile.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "post-format-host/established-compile.stderr": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-9vc22i93/established-compile.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "post-format-host/established-run.stdout": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-9vc22i93/established-run.stdout",
+      "sourceFingerprint": {
+        "bytes": 392,
+        "sha256": "2ace68268c607885c4e5810d845ca110059c262487afd456d246f4d3f03ace78"
+      },
+      "savedCopy": {
+        "bytes": 392,
+        "sha256": "2ace68268c607885c4e5810d845ca110059c262487afd456d246f4d3f03ace78"
+      }
+    },
+    "post-format-host/established-run.stderr": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-9vc22i93/established-run.stderr",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "hostOnly": true,
+  "executablesAndPrivateSourceSnapshotsExcluded": true
+}

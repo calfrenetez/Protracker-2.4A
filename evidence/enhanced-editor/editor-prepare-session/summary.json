@@ -1,0 +1,181 @@
+{
+  "status": "PASS",
+  "test_head": "b13d6e70bcecb6813ad59ea43b0673df0280b942",
+  "final_run": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-_llz_hw2/run.json",
+  "scope": "New callable opt-in preparation session only; host ASan/UBSan. No new UI/native PLAY wiring, target execution or device qualification.",
+  "own_inputs": {
+    "src/editor/editor_mixed_prepare_session.c": {
+      "bytes": 12167,
+      "sha256": "af121e34e9a951f3108d8779c21b2e37e444ee53645a26a7a067f56bcdabac68",
+      "matches_saved_test_input": true
+    },
+    "src/editor/editor_mixed_prepare_session.h": {
+      "bytes": 4923,
+      "sha256": "722163aaa951949bef34264799a55185b3a9404dbdfd211e298517b0235eabe3",
+      "matches_saved_test_input": true
+    },
+    "tests/editor_mixed_prepare_session_test.c": {
+      "bytes": 19209,
+      "sha256": "f70f695604cb216212d93d5d9c63b724030e241ac985a2d3d75fc37be764f295",
+      "matches_saved_test_input": true
+    },
+    "tests/test_editor_mixed_prepare_session.py": {
+      "bytes": 6344,
+      "sha256": "fa8a8584bb434d18f2e7d10e68ddcdfd6550aa93f910c2887b449f17a7afba69",
+      "matches_saved_test_input": true
+    }
+  },
+  "groups": [
+    {
+      "label": "session-compile",
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "label": "session-run",
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "label": "establish-compile",
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "label": "establish-run",
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "label": "established-compile",
+      "status": "PASS",
+      "returncode": 0
+    },
+    {
+      "label": "established-run",
+      "status": "PASS",
+      "returncode": 0
+    }
+  ],
+  "new_session_cases": {
+    "lifetimes": 102,
+    "admission_aliases": 78,
+    "expired_terminal": 3,
+    "master_bits": [
+      8,
+      16,
+      24
+    ]
+  },
+  "unchanged_regressions": {
+    "editor_checked_lifetimes": 39,
+    "editor_checked_aliases": 18,
+    "editor_mixed": 15,
+    "editor_establish_lifetimes": 27,
+    "editor_establish_aliases": 24,
+    "established_owner": 66,
+    "base_mixed_owner": 255
+  },
+  "no_output_observed": {
+    "voice_starts": 0,
+    "timer_calls": 0,
+    "bus_uploads": 0
+  },
+  "all_six_stderr_empty": true,
+  "protected_source_check": {
+    "basis": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-metadata-bridges/v2/source-controls.json",
+    "all16_match": true,
+    "checks": {
+      "src/editor/editor.c": {
+        "sha256_match": true,
+        "mode_match": true
+      },
+      "src/editor/editor.h": {
+        "sha256_match": true,
+        "mode_match": true
+      },
+      "src/editor/view.c": {
+        "sha256_match": true,
+        "mode_match": true
+      },
+      "src/editor/view.h": {
+        "sha256_match": true,
+        "mode_match": true
+      },
+      "src/native/editor_main.c": {
+        "sha256_match": true,
+        "mode_match": true
+      },
+      "tests/editor_test.c": {
+        "sha256_match": true,
+        "mode_match": true
+      },
+      "tests/test_editor.py": {
+        "sha256_match": true,
+        "mode_match": true
+      },
+      "tools/build_core_tests.py": {
+        "sha256_match": true,
+        "mode_match": true
+      },
+      "tools/test_sampler_emulator.py": {
+        "sha256_match": true,
+        "mode_match": true
+      },
+      "AGENTS.md": {
+        "sha256_match": true,
+        "mode_match": true
+      },
+      "amiga-test.json": {
+        "sha256_match": true,
+        "mode_match": true
+      },
+      "src/native/pattern_display.c": {
+        "sha256_match": true,
+        "mode_match": true
+      },
+      "src/native/pattern_display.h": {
+        "sha256_match": true,
+        "mode_match": true
+      },
+      "tests/native_prepared_test.c": {
+        "sha256_match": true,
+        "mode_match": true
+      },
+      "tools/shared_infra_sampler.py": {
+        "sha256_match": true,
+        "mode_match": true
+      },
+      "tools/shared_infra_ui.py": {
+        "sha256_match": true,
+        "mode_match": true
+      }
+    }
+  },
+  "first_failures_preserved": [
+    {
+      "record": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/preparation-first-refusal.json",
+      "kind": "AST starred source-list refusal before compile/run",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-98d3jvyr/source"
+    },
+    {
+      "stdout": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/second-run.stdout",
+      "stderr": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/second-run.stderr",
+      "kind": "AST computed wavetable source-list refusal before compile/run",
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-rpj1hz4s/source"
+    },
+    {
+      "record": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-tttgl_zt/run.json",
+      "stdout": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-tttgl_zt/session-run.stdout",
+      "stderr": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/v1/attempt-tttgl_zt/session-run.stderr",
+      "kind": "First fixture admission assertion: callback context began at session storage; fixture composite was rearranged. No target involved."
+    }
+  ],
+  "limitations": [
+    "No new-session Amiberry or physical run; root physical editor-bridge evidence belongs to frozen prior candidate.",
+    "No measured per-step wall-clock bound, stack/Fast/Chip residency, real RAM capacity/order/completion, voice-stop, audio or listening proof.",
+    "No timer-open, voice-start, dispatch, upload or exact-schedule relaxation path.",
+    "One stable ordinary composite callback context with separate external controls; original input bytes immutable through confirmed close."
+  ],
+  "changes_by_this_subagent": "Only the four new own source/test paths and this scoped output directory. No existing source, docs, checkpoint, Git HEAD/index, shared tools/services, target, peer, process or network action."
+}

@@ -1,0 +1,37 @@
+{
+  "status": "PASS_SAVED_BYTES_ONLY_NEVER_EXECUTED",
+  "utc": "2026-10-06T12:52:34.650126+00:00",
+  "manifest": {
+    "bytes": 1096054,
+    "sha256": "1ae0ec1591d775d7c6d4c57f30639ab2203487141401839ecccaca4b077af7be"
+  },
+  "product": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/portable-v2/native/PTEditorPrepareSessionTest",
+    "resolved_path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/portable-v2/native/PTEditorPrepareSessionTest",
+    "bytes": 395508,
+    "mode": 493,
+    "sha256": "b9b9a71351a012f20b5dc67228604f2f6e02d7dce93d07b2fed28fcb8cf83d10",
+    "execution": "NEVER_EXECUTED"
+  },
+  "checks": {
+    "compiler_only_pass": true,
+    "all_compiler_calls": true,
+    "all_compiler_stderr_empty": true,
+    "frozen_source": true,
+    "original_host_source": true,
+    "original_host_run": true,
+    "all_six_host_stderr_empty": true,
+    "expected_stdout_copy": true,
+    "compiler_tools": true,
+    "compiler_runtime": true,
+    "compiler_dependencies": true,
+    "all_retained_files": true,
+    "protected_16": true,
+    "current_own_four": true,
+    "prior_portable_v1_unchanged": true,
+    "hunk_magic": true,
+    "candidate_exact_bytes": true,
+    "never_executed": true
+  },
+  "scope": "Independent ordinary-file readback only; no product execution, compiler replay, emulator, physical, network, target process, production/shared-source/service or Git mutation."
+}

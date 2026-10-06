@@ -1,0 +1,116 @@
+{
+  "status": "PASS_SAVED_BYTE_CUSTODY_ONLY",
+  "files": {
+    "manifest.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/portable-v2/manifest.json",
+      "sourceFingerprint": {
+        "bytes": 1096054,
+        "sha256": "1ae0ec1591d775d7c6d4c57f30639ab2203487141401839ecccaca4b077af7be"
+      },
+      "savedCopy": {
+        "bytes": 1096054,
+        "sha256": "1ae0ec1591d775d7c6d4c57f30639ab2203487141401839ecccaca4b077af7be"
+      }
+    },
+    "saved-byte-verification.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/portable-v2/saved-byte-verification.json",
+      "sourceFingerprint": {
+        "bytes": 1477,
+        "sha256": "dbda4477dfefe893b5abc6d6ef416823f618a61b3c450c4981a070862cebeb4a"
+      },
+      "savedCopy": {
+        "bytes": 1477,
+        "sha256": "dbda4477dfefe893b5abc6d6ef416823f618a61b3c450c4981a070862cebeb4a"
+      }
+    },
+    "build_native_once.py": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/portable-v2/build_native_once.py",
+      "sourceFingerprint": {
+        "bytes": 9949,
+        "sha256": "06e35013550ac1c603a3c20da9d5e0daaf8159a3cfd4c2f98f078ddeca2c0f25"
+      },
+      "savedCopy": {
+        "bytes": 9949,
+        "sha256": "06e35013550ac1c603a3c20da9d5e0daaf8159a3cfd4c2f98f078ddeca2c0f25"
+      }
+    },
+    "fresh-host-controls.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/portable-v2/fresh-host-controls.json",
+      "sourceFingerprint": {
+        "bytes": 171985,
+        "sha256": "977c61635516e8caf498523c858ecf2217145adbd1fd203ca375da04488d6e39"
+      },
+      "savedCopy": {
+        "bytes": 171985,
+        "sha256": "977c61635516e8caf498523c858ecf2217145adbd1fd203ca375da04488d6e39"
+      }
+    },
+    "formatting-only.diff": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/portable-v2/formatting-only.diff",
+      "sourceFingerprint": {
+        "bytes": 909,
+        "sha256": "0f43ca67094ffc77c00ceeff1468ab5002fbd4e43755f960c382eb773674c96e"
+      },
+      "savedCopy": {
+        "bytes": 909,
+        "sha256": "0f43ca67094ffc77c00ceeff1468ab5002fbd4e43755f960c382eb773674c96e"
+      }
+    },
+    "expected-native.stdout": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/portable-v2/expected-native.stdout",
+      "sourceFingerprint": {
+        "bytes": 692,
+        "sha256": "c415b67357117e9e8286309309f2d5e260b50a4bf2bd82ee4124676f030c0f36"
+      },
+      "savedCopy": {
+        "bytes": 692,
+        "sha256": "c415b67357117e9e8286309309f2d5e260b50a4bf2bd82ee4124676f030c0f36"
+      }
+    },
+    "first-portable-failure/manifest.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/portable-v1/manifest.json",
+      "sourceFingerprint": {
+        "bytes": 1098534,
+        "sha256": "1465c4a6eea60276636a2741a3e9596cb10a54c0d57d3db040f6fe9be46df0bf"
+      },
+      "savedCopy": {
+        "bytes": 1098534,
+        "sha256": "1465c4a6eea60276636a2741a3e9596cb10a54c0d57d3db040f6fe9be46df0bf"
+      }
+    },
+    "first-portable-failure/first-failure-custody.json": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/portable-v1/first-failure-custody.json",
+      "sourceFingerprint": {
+        "bytes": 747,
+        "sha256": "1136135f5fb95fce0b4ba758ec38ac14d4952c29700944a580787f634852e0de"
+      },
+      "savedCopy": {
+        "bytes": 747,
+        "sha256": "1136135f5fb95fce0b4ba758ec38ac14d4952c29700944a580787f634852e0de"
+      }
+    },
+    "first-portable-failure/compile-link.stdout": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/portable-v1/native/compile-link.stdout",
+      "sourceFingerprint": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "savedCopy": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "first-portable-failure/compile-link.stderr": {
+      "sourcePath": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/editor-mixed-prepare-session/portable-v1/native/compile-link.stderr",
+      "sourceFingerprint": {
+        "bytes": 650,
+        "sha256": "485a8fe3b19bcd3ad579a451faaa7d822f7877a61072cebd60dd0cb6f3a0ef3c"
+      },
+      "savedCopy": {
+        "bytes": 650,
+        "sha256": "485a8fe3b19bcd3ad579a451faaa7d822f7877a61072cebd60dd0cb6f3a0ef3c"
+      }
+    }
+  },
+  "productAndPrivateSourceSnapshotsExcluded": true
+}

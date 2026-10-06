@@ -1,0 +1,1 @@
+Assertion failed: (r==PT_EDITOR_MIXED_SESSION_PENDING), function session_lifecycle, file editor_mixed_prepare_session_test.c, line 126.

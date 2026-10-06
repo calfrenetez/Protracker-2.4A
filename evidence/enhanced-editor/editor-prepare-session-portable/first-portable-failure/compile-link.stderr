@@ -1,0 +1,8 @@
+tests/editor_mixed_prepare_session_test.c: In function 'main':
+tests/editor_mixed_prepare_session_test.c:299:9: error: this 'for' clause does not guard... [-Werror=misleading-indentation]
+         for(mode=0;mode<26;++mode)session_admission(bits,mode);session_terminal(bits);}
+         ^~~
+tests/editor_mixed_prepare_session_test.c:299:64: note: ...this statement, but the latter is misleadingly indented as if it is guarded by the 'for'
+         for(mode=0;mode<26;++mode)session_admission(bits,mode);session_terminal(bits);}
+                                                                ^~~~~~~~~~~~~~~~
+cc1: all warnings being treated as errors

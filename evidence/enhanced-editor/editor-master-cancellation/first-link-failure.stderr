@@ -1,0 +1,20 @@
+Undefined symbols for architecture arm64:
+  "_pt_editor_event_resource", referenced from:
+      _pt_editor_key in editor-d89f2f.o
+      _pt_editor_key in editor-d89f2f.o
+      _pt_editor_click in editor-d89f2f.o
+  "_pt_editor_workflow_cancel", referenced from:
+      _pt_editor_dispose in editor-d89f2f.o
+  "_pt_editor_workflow_click", referenced from:
+      _pt_editor_click in editor-d89f2f.o
+  "_pt_editor_workflow_key", referenced from:
+      _pt_editor_key in editor-d89f2f.o
+  "_pt_editor_workflow_loop", referenced from:
+      _pt_editor_key in editor-d89f2f.o
+      _loop_edit in editor-d89f2f.o
+  "_pt_sample_usage_current", referenced from:
+      _pt_editor_draw in view-835567.o
+  "_pt_wave_summary_current", referenced from:
+      _draw_sample in view-835567.o
+ld: symbol(s) not found for architecture arm64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)

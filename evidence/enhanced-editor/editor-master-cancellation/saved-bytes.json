@@ -1,0 +1,69 @@
+{
+  "scope": "Saved host/compiler evidence only; no replay",
+  "files": {
+    "README.md": {
+      "bytes": 2626,
+      "sha256": "ffe17b866ad24fd4c0597c617f0f1eae347ee43f1437d041cbba1ef5ac5ef959"
+    },
+    "establishment-compile.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "establishment-compile.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "establishment-run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "establishment-run.stdout": {
+      "bytes": 406,
+      "sha256": "c151b1a39bd6b72091b6bd789d07a2c59624aca0dd19f22dbc782ce82252543b"
+    },
+    "first-link-failure.json": {
+      "bytes": 191176,
+      "sha256": "2fb51608c27c07e00d729c7f9c2777ebfcdd9aeb29109b272bcc22bc30e069d0"
+    },
+    "first-link-failure.stderr": {
+      "bytes": 900,
+      "sha256": "d5e5905e187295d3c241d5ff3c5b1e587c97e84ed58e4b425cd3a29dc976c9f1"
+    },
+    "host-execution.json": {
+      "bytes": 195630,
+      "sha256": "e8d64bf6ef9a88cca7495733b0cccbe5532c1b0171d77b9a16bf2d12e793963a"
+    },
+    "legacy-link-compile.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "legacy-link-compile.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "legacy-link-run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "legacy-link-run.stdout": {
+      "bytes": 190,
+      "sha256": "8e003e25b1a502f30902969cd8864defc09d54926492d8043290b7f2cce2f9c9"
+    },
+    "native-manifest.json": {
+      "bytes": 339422,
+      "sha256": "796cd989c35b22f88dfb96267fff8b1fde1f94de382f25fff840c1be9b73ab27"
+    },
+    "root-review.json": {
+      "bytes": 1109,
+      "sha256": "5010c63fd490dc3d69a1d587babd607f6557b368462661105f08f0e3eb028662"
+    },
+    "runner-import-refusal.json": {
+      "bytes": 289,
+      "sha256": "1c466cb72aa84af251b514828ee0e87c67412f6a3f7772a4c79852fb7b6234c6"
+    },
+    "source-controls.json": {
+      "bytes": 96775,
+      "sha256": "f0b7f8be1a0f546755935965870c1c1f3d3c7fc65643c87f38c7433a16512bc3"
+    }
+  }
+}

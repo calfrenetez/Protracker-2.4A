@@ -5691,3 +5691,31 @@ scoped approval is pending because failed-target cleanup was excluded from the
 window. Original source/tests, first startup trace and earlier failure/recovery
 remain preserved. Candidate native execution and physical testing remain NOT_RUN.
 See [startup first-attempt evidence](../evidence/enhanced-editor/master-progress-startup-first-attempt/README.md).
+
+## Optional editor cancellation of pre-borrow master preparation
+
+The opt-in `editor_mixed_establish` adapter now adopts the existing all-slot
+establishment job through the actual editor change barrier before the first
+allocator callback. Edit/dispose/stop cancels unfinished validation, partial
+unpublished master copies and metadata before source mutation; completed masters
+remain sampler-owned. Reentrant allocator callbacks veto changes and retain
+adoption until an explicit later stop. The whole controller/editor/binding and
+named opaque contexts are guarded before initialization of returned allocations.
+READY still borrows source storage: stop must confirm before downstream bridge
+binding or checked-owner construction. Legacy linkage has no new job dependency.
+
+Host ASan/UBSan checks passed 27 cancellation/reentry/exact-save/master-retention
+and 24 control-alias cases across 8/16/24 bits, 15 legacy lifetime cases, plus a
+separate legacy compile/run without the new adapter. One pinned m68000/softfloat
+build passed; native and physical execution are NOT_RUN. Initial test dependency
+link failure and runner import refusal remain preserved separately. The 16
+unrelated display/editor/harness paths stayed exact. See
+[saved cancellation evidence](../evidence/enhanced-editor/editor-master-cancellation/README.md).
+
+This is a callable preparation binding, with no UI/native PLAY wiring. Integration
+of the downstream checked owner through both drains, timer clearance and zero-child
+finish remains unfinished. Existing synchronous bridge bind, exact musical
+schedule and backend behavior remain unchanged. No timing/IRQ/device/audio,
+native placement or total stack acceptance follows. Target ACK20/HOLD40 and the
+original scoped recovery approval remain pending; this host work neither clears
+the hold nor authorizes target recovery or replay.

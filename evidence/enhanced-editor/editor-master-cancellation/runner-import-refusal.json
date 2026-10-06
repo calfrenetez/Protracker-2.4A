@@ -1,0 +1,8 @@
+{
+  "status": "HOST_RUNNER_IMPORT_REFUSAL",
+  "error": "ModuleNotFoundError: build_editor_wavetable",
+  "compile_calls": 0,
+  "candidate_calls": 0,
+  "target_calls": 0,
+  "correction": "Read WORKFLOW constant with AST; avoid importing indexed test runner/tools from source-only export."
+}

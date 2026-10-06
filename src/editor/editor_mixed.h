@@ -9,10 +9,14 @@
 struct pt_editor_mixed {
     struct pt_editor *editor;struct pt_mixed_owner *owner;
     struct pt_mixed_transport *transport;
+    /* Private opt-in preparation adapter. Never set/copy/edit these directly.
+     * Kept through refused cancellation; no new dependency in legacy binding. */
+    int (*preparation_close)(void *);void *preparation_context;
 };
 int pt_editor_mixed_attach(struct pt_editor_mixed *,struct pt_editor *);
 /* One bounded close attempt. Uncertain alarm/readers/counter retain the binding
- * and veto editor changes. Explicit later close required; never force release. */
+ * and veto editor changes. Cancels adopted pre-borrow preparation first; completed
+ * masters stay sampler-owned. Explicit later close required; never force release. */
 int pt_editor_mixed_stop(struct pt_editor_mixed *);
 int pt_editor_mixed_detach(struct pt_editor_mixed *);
 /* Both idle bound engines must use THIS editor's sampler/project. Begin uses its

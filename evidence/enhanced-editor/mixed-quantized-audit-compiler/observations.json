@@ -1,0 +1,120 @@
+{
+  "acceptance_tiers": {
+    "Amiberry": "NOT_RUN",
+    "Fast_Chip_placement": "NOT_QUALIFIED",
+    "HOST": "PASS_ORIGINAL_V4_SAVED_ONLY",
+    "SOURCE": "PASS_SEPARATELY_REVIEWED",
+    "native_assertions": "NOT_RUN",
+    "portable_compiler_link": "PASS_ACTUAL_FIRST_ATTEMPT",
+    "product_static_header_and_markers": "PASS_BYTES_ONLY",
+    "real_A1200": "NOT_RUN",
+    "stack_IRQ_launcher_device_timing_audio_listening": "NOT_QUALIFIED",
+    "whole_song_master_ownership_composite_editor_PLAY": "UNFINISHED"
+  },
+  "actual_counts": {
+    "actual_dependencies": 124,
+    "archived_files": 950,
+    "compiler_calls": 52,
+    "controls": 47,
+    "current_admission_src_tests_files": 1171,
+    "dependency_SDK_files": 32,
+    "dependency_source_files": 92,
+    "inner_Git_calls": 8,
+    "ordered_units": 39,
+    "overlays": 6,
+    "protected_paths": 16,
+    "raw_streams": 140,
+    "retained_excluding_manifest": 1081,
+    "root_calls": 10,
+    "source_files": 955,
+    "total_drivers": 70
+  },
+  "actual_elapsed_seconds": {
+    "inner": 9.711017665991676,
+    "link_driver": 3.689129416990909,
+    "root": 10.73015720800322,
+    "root_compiler_caller": 9.785765959008131
+  },
+  "all1081retained_inner_members_match": true,
+  "all140raw_streams_match": true,
+  "all70drivers_RC0_empty_stderr_reaped_quiet": true,
+  "dependency_scope": "Actual 124 paths (92 copied source / 32 selected SDK); not the entire SDK, dynamic host libraries or full linker closure.",
+  "exact_saved_references": {
+    "independent_caller_SOURCE_review": {
+      "bytes": 13121,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/independent-portable-source-review-v1/review.json",
+      "sha256": "491351b6bd89a3fb08f383daac3d8ad2f896f64a8bd6bf879e7cb1063281a2b2"
+    },
+    "independent_root_wrapper_SOURCE_review": {
+      "bytes": 5031,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/independent-root-wrapper-source-review-v1/report.json",
+      "sha256": "df0a870374987e5242c0a69449d40b5fa989536f10b194dd3646409274657f22"
+    },
+    "independent_saved_compiler_readback": {
+      "bytes": 1398,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/independent-saved-portable-review-v1/readback.json",
+      "sha256": "ca94deed72f9dc8258a8df143987178c2c953ddab997cccdaefea553c08cdf9b"
+    },
+    "independent_saved_compiler_review": {
+      "bytes": 6661,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/independent-saved-portable-review-v1/review.json",
+      "sha256": "2d8ef1a164890b3b6381bb06d6c0eb99b296f4d441283e3ef6761f1b440975ca"
+    },
+    "manifest": {
+      "bytes": 692125,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/portable-compiler-first-v1/manifest.json",
+      "sha256": "52382de3ac54bf3f224d8b10868fec82726d5317767162a00011521d5af4fd90"
+    },
+    "root_receipt": {
+      "bytes": 25983,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-strict-audit/v1/root-portable-build-v1/receipt.json",
+      "sha256": "0551d3944bd70eedbb4e9aac1b243126ffe2aafada0250fb37a534e285c96230"
+    }
+  },
+  "history": "V1 SOURCE / V2 HOST compile / V3 HOST runtime preserved separately; V3 unrecorded return/tuple UNKNOWN. No replay.",
+  "product": {
+    "bytes": 232864,
+    "execution": "NEVER_EXECUTED",
+    "mode": 33261,
+    "relative_path": "native/PTMixedQuantizedAuditTest",
+    "sha256": "58b3b9eb2f02ffc1d6c081f8773dbb8df438111addf5bab3a74da18dbe63e840"
+  },
+  "publication": "DRAFT_ROOT_REVIEW_AND_ADOPTION_REQUIRED",
+  "root_TMPDIR_scratch": "Ordinary opaque xcrun_db separately pinned in private independent review; no candidate or fullhost-runtime acceptance.",
+  "schema": "pt24g-strict-quantized-audit-public-compiler-observations-v1",
+  "scope": "Metadata only for the actual once-only saved portable compiler attempt; no executable/source/archive/raw stream adoption.",
+  "selected_flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-UNDEBUG",
+    "-Isrc/core",
+    "-I.",
+    "-fbbb=-"
+  ],
+  "source_origins": {
+    "Git_scope": "Saved raw readbacks inspected only; reviewer made no Git call.",
+    "actual_compiler_invocation_admission": "641c281c43054a63612b001897cb6676e2a5e04d",
+    "actual_saved_HOST_archive_commit": "ee9aa13ca24e1a7a0784f150d9f98d6b7bc330fe",
+    "historical_label": "PROPOSAL_SOURCE_PINS_ONLY_NOT_ADMISSION"
+  },
+  "static_checks": {
+    "HUNK_HEADER": "0x3f3",
+    "all_markers_present": true,
+    "complete_lines": 7,
+    "expected_stdout_bytes": 1553,
+    "result": "STATIC_BYTES_ONLY_NEVER_EXECUTED"
+  },
+  "status": "PASS_COMPILER_LINK_ONLY_NEVER_EXECUTED"
+}

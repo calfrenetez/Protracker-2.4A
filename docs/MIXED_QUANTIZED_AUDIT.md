@@ -89,3 +89,32 @@ launcher admission, device capacity/order/completion/voice stop, exact live outp
 timing, audio and listening remain unqualified by this candidate. It supplies no
 whole-song master-owning producer or composite editor PLAY integration. See the
 [saved HOST packet](../evidence/enhanced-editor/mixed-quantized-audit-host/README.md).
+
+## Separate portable compiler qualification
+
+The preceding HOST qualification records the earlier stage. A separate first
+compiler/link attempt now passes at committed admission
+`641c281c43054a63612b001897cb6676e2a5e04d`. Its copied source pool is the exact
+955 inputs from the accepted saved HOST run, reconstructed from 950 archived
+files, six overlays and the generated font. The genuine audit C remains included
+by the fixture, with 39 ordered translation units. Assertion-enabled C99,
+`-m68000 -msoft-float -mcrt=nix20 -Os -Wall -Wextra -Werror -UNDEBUG` compiled
+and linked a 232,864-byte HUNK product, SHA256
+`58b3b9eb2f02ffc1d6c081f8773dbb8df438111addf5bab3a74da18dbe63e840`.
+
+Independent saved-only review checks all 1,081 retained inner files, the actual
+124-path raw `-M` union (92 copied source files and 32 selected SDK files),
+52 compiler drivers, eight inner Git readbacks and ten root drivers with all
+140 raw streams. Recorded drivers returned zero with empty stderr, were reaped
+and left their owned groups quiet. Complete current source controls, protected
+16 paths, empty staging and before/after saved Git admission match. Recorded
+inner/root times are 9.711/10.730 seconds within their 600/900-second envelopes.
+
+The product is NEVER_EXECUTED. HUNK header and all seven complete marker strings
+are static byte checks, not native assertion results. This compiler milestone
+supplies no Amiberry or real-A1200 runtime, memory placement, stack/IRQ/launcher,
+device capacity/order/completion/voice-stop, live schedule, audio or listening
+acceptance. Whole-song master ownership and composite editor PLAY remain
+unfinished. Original SOURCE and HOST failure histories remain immutable; no
+failed attempt was replayed. See the separate
+[compiler-only packet](../evidence/enhanced-editor/mixed-quantized-audit-compiler/README.md).

@@ -6213,3 +6213,25 @@ device RAM/order/completion/voice stop, exact live output timing/audio/listening
 remain NOT RUN or unqualified for this audit candidate. See the
 [contract](MIXED_QUANTIZED_AUDIT.md) and
 [selected HOST packet](../evidence/enhanced-editor/mixed-quantized-audit-host/README.md).
+
+### Standalone strict quantized audit: separate portable compiler/link evidence
+
+The first compiler-only attempt for `mixed_quantized_audit` passed at committed
+admission `641c281c43054a63612b001897cb6676e2a5e04d`, using the exact saved HOST
+955-input pool and 39 units. Independent saved-only audit confirms 1,081 retained
+inner files, the actual 124 raw-M dependencies (92 source/32 SDK), 52 compiler
+plus eight inner Git and ten root drivers, and all 140 raw streams. All recorded
+drivers returned zero with empty stderr and were reaped with quiet owned groups;
+47 source controls and all protected 16 paths match, with empty staging and
+unchanged saved admission/source inventory. Recorded inner/root times were
+9.711/10.730 seconds.
+
+The portable soft-float/nix20 HUNK is 232,864 bytes, SHA256
+`58b3b9eb2f02ffc1d6c081f8773dbb8df438111addf5bab3a74da18dbe63e840`; it is
+NEVER_EXECUTED. Header 0x3f3 and seven complete marker strings from the 1,553-byte expected
+stdout are static checks only. No native assertions, Amiberry/physical execution, Fast/Chip
+placement, stack/IRQ/launcher/device/timing/audio/listening or composite PLAY
+acceptance is supplied. Exact master-owning producer work remains separate.
+Original failed SOURCE/HOST attempts and V3 unknown returned enum/tuple remain
+preserved. See `docs/MIXED_QUANTIZED_AUDIT.md` and the separate
+`evidence/enhanced-editor/mixed-quantized-audit-compiler/` metadata packet.

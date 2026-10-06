@@ -1,0 +1,30 @@
+{
+  "sigtermCalls": 1,
+  "forcedKills": 0,
+  "deletions": 0,
+  "allFirstRecordsPreserved": {
+    "start-terminal.json": {
+      "bytes": 5943,
+      "sha256": "4b7ad2e4648c5ad313277c4683671eac1e58e69ce19025e55a820050933ed264"
+    },
+    "start.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "start.stderr": {
+      "bytes": 4452,
+      "sha256": "75d50e5b808941f1f6c4d180c0e2127798ec098b28f6b3ed91f3ab07980f2152"
+    },
+    "preflight.json": {
+      "bytes": 2586,
+      "sha256": "d7627760641874f45c4421c8e823e71c8fc0ed96c39ead3c95a0592af673cb69"
+    },
+    "host-only-failure-identity-v1.json": {
+      "bytes": 764,
+      "sha256": "7581e9ff9cc344b748782a23cc4965b1eb8a0a575d594de71ffd87f7d33bc166"
+    }
+  },
+  "candidateRetry": false,
+  "stageAbsentNoCleanupRequired": true,
+  "guardStillHeld": true
+}

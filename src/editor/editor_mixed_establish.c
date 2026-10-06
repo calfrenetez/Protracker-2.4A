@@ -21,6 +21,7 @@ enum pt_establish_result pt_editor_mixed_establish_begin(struct pt_editor_mixed_
        !apart(c,sizeof(*c),extra,count*sizeof(*extra)))return PT_ESTABLISH_INVALID;
     e=o->editor;
     if(c->binding||c->job.active||c->job.busy||o->owner||o->transport||o->preparation_close||o->preparation_context||
+       o->owner_finish||o->owner_finish_context||
        !apart(c,sizeof(*c),e,sizeof(*e))||!apart(o,sizeof(*o),e,sizeof(*e))||
        !pt_sampler_output_disjoint(&e->sampler,c,sizeof(*c))||
        !pt_sampler_output_disjoint(&e->sampler,o,sizeof(*o))||

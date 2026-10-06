@@ -1,0 +1,77 @@
+{
+  "status": "PASS_EXACT_FAILED_START_RECOVERY_RELEASE",
+  "release": {
+    "released": true,
+    "fence": 41,
+    "archive": "release-0000000000000029.json"
+  },
+  "guardAfter": {
+    "archives": [
+      {
+        "bytes": 2034,
+        "fence": 5,
+        "name": "release-0000000000000005.json",
+        "sha256": "7f14fb8ffe7df2de1aed8beda774d083c9a717fec97ba575733fe0561422efcb"
+      },
+      {
+        "bytes": 2027,
+        "fence": 10,
+        "name": "release-000000000000000a.json",
+        "sha256": "565d842aadbb4f6ebaaf52143fce4f161da5996606c03adcd679eb1d67e355d3"
+      },
+      {
+        "bytes": 2674,
+        "fence": 18,
+        "name": "release-0000000000000012.json",
+        "sha256": "51040dc9dbe88c4fd07ab0168e154d2d1508b457605373d8fd38b3f12b5c80e8"
+      },
+      {
+        "bytes": 1574,
+        "fence": 28,
+        "name": "release-000000000000001c.json",
+        "sha256": "497beef52132b167956e5a9abfd0da5c60f95309a020b025a4c69f9564a8bb1f"
+      },
+      {
+        "bytes": 1548,
+        "fence": 34,
+        "name": "release-0000000000000022.json",
+        "sha256": "469c89a882db17a9aa686e703957d1770463de43ba8eb7a6e5b04e7e2cca33a8"
+      },
+      {
+        "bytes": 2189,
+        "fence": 41,
+        "name": "release-0000000000000029.json",
+        "sha256": "5df4c72f0992e4470b8664cc15c9245093d58b7afeb69f7b682ffba267cfc4eb"
+      }
+    ],
+    "authorization": {
+      "approved": true,
+      "legacy_holds_verified": true,
+      "mode": "host-provisioning",
+      "record_sha256": "820445ecb68cd63db257e203686d2df63fca2e66f4d6048f59f5939771fce568"
+    },
+    "fence": 41,
+    "holds": [],
+    "inflight": null,
+    "potential_resident": false,
+    "reservation": null,
+    "version": 1,
+    "phase": "EMPTY"
+  },
+  "records": {
+    "authorization": "ed4911d9188a9ff984ba1e9c580f679986b4ee2a8fe19898d622b184ddb7753d",
+    "restoration": "d4dc943eccf1a73de9a5b11dee7850cafa66723128c1036bb3060baf414c10a0",
+    "absence": "e64e04382fb591545d72ce7bbb26134ccff5485625f4c5e79de825d1163fbc11",
+    "cleanup": "c818043352f3d5a301a99c6dca8c7f4825cf28a5a8de682e2edb03a1ace2e27b"
+  },
+  "independentReadback": {
+    "allEmulatorsAbsent": true,
+    "listenerAbsent": true,
+    "DevBenchDisconnected": true,
+    "pinnedInputsUnchanged": 11,
+    "allFirstRecordsPreserved": true,
+    "candidateNeverStagedOrLaunched": true
+  },
+  "physical": "NOT_RUN",
+  "atUTC": "2026-10-06T07:29:31.701957+00:00"
+}

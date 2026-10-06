@@ -1,4 +1,5 @@
 #include "mixed_owner_established.h"
+#include "mixed_owner_established_internal.h"
 #include "mixed_owner_state_internal.h"
 #include "sampler_paula_internal.h"
 #include "sampler_wavetable_internal.h"
@@ -94,19 +95,21 @@ static enum pt_mixed_owner_result prepare(struct pt_mixed_owner *s,struct pt_mix
 }
 /* Small exact admission snapshots; backend cache payload is neither copied nor
  * scanned here. Arbitrary destructive callbacks cannot be classified safely. */
-enum pt_mixed_owner_result pt_mixed_owner_established_begin(struct pt_mixed_established *c,
+static enum pt_mixed_owner_result begin(struct pt_mixed_established *c,
     struct pt_paula_voices *p,struct pt_wavetable_voices *w,
     const struct pt_render_options *o,const struct pt_paula_render_caps *caps,const struct pt_playback_format *f,
-    const struct pt_allocator *a,const struct pt_sampler_storage_span *extra,unsigned count,
+    const struct pt_allocator *a,const void *container,size_t container_bytes,
+    const struct pt_sampler_storage_span *extra,unsigned count,
     uint32_t revision,unsigned work,struct pt_mixed_owner **out)
 {
     struct pt_sampler_storage_span parents[15];struct pt_paula_voices ps;struct pt_wavetable_voices ws;
     struct pt_sampler_paula pb;struct pt_sampler_wavetable ab;
     struct pt_render_options options;struct pt_paula_render_caps limits;struct pt_playback_format format;
-    struct pt_amigus_reservation reservation;struct pt_mixed_owner *s;unsigned i;
+    struct pt_amigus_reservation reservation;struct pt_mixed_owner *s;unsigned i,total=12;
     if(!c||!p||!w||!p->bridge||!w->bridge||!w->bridge->backend||!w->bridge->backend->reservation||
        !o||!caps||!f||!a||!a->allocate||!a->release||!out||*out||
-       c->storage.memory.active||c->startup||c->starting||count>3||!span(extra,count*sizeof(*extra))||
+       c->storage.memory.active||c->startup||c->starting||count>(container?2U:3U)||!span(extra,count*sizeof(*extra))||
+       ((!container)!=(container_bytes==0))||
        !work||work>4096||p->song_owner||w->song_owner||p->closing||w->closing||
        p->bridge->sampler!=w->bridge->sampler||p->bridge->project!=w->bridge->project||
        !pt_sampler_paula_prepared_current(p->bridge)||!pt_sampler_wavetable_prepared_metadata_current(w->bridge)||
@@ -129,13 +132,22 @@ enum pt_mixed_owner_result pt_mixed_owner_established_begin(struct pt_mixed_esta
     parents[11]=(struct pt_sampler_storage_span){c,sizeof(*c)};
     for(i=0;i<11;++i)if(!apart(c,sizeof(*c),parents[i].data,parents[i].bytes))return PT_MIXED_OWNER_INVALID;
     for(i=0;i<10;++i)if(!apart(out,sizeof(*out),parents[i].data,parents[i].bytes))return PT_MIXED_OWNER_INVALID;
-    for(i=0;i<count;++i){parents[12+i]=extra[i];
+    if(container) {
+        if(!span(container,container_bytes)||container_bytes<sizeof(*out)||
+           (uintptr_t)out<(uintptr_t)container||(uintptr_t)out-(uintptr_t)container>container_bytes-sizeof(*out)||
+           !apart(c,sizeof(*c),container,container_bytes)||
+           !pt_render_project_storage_output_disjoint(p->bridge->project,container,container_bytes)||
+           !pt_sampler_output_disjoint(p->bridge->sampler,container,container_bytes))return PT_MIXED_OWNER_INVALID;
+        for(i=0;i<10;++i)if(!apart(container,container_bytes,parents[i].data,parents[i].bytes))return PT_MIXED_OWNER_INVALID;
+        parents[total++]=(struct pt_sampler_storage_span){container,container_bytes};
+    }
+    for(i=0;i<count;++i){parents[total+i]=extra[i];
         if(!apart(out,sizeof(*out),extra[i].data,extra[i].bytes)||
            !apart(c,sizeof(*c),extra[i].data,extra[i].bytes))return PT_MIXED_OWNER_INVALID;}
     if(!pt_render_project_storage_output_disjoint(p->bridge->project,out,sizeof(*out))||
        !pt_sampler_output_disjoint(p->bridge->sampler,out,sizeof(*out))||
        !apart(c,sizeof(*c),extra,count*sizeof(*extra))||
-       !pt_sampler_prepare_project_begin(&c->storage,p->bridge->sampler,p->bridge->project,a,parents,12+count))return PT_MIXED_OWNER_INVALID;
+       !pt_sampler_prepare_project_begin(&c->storage,p->bridge->sampler,p->bridge->project,a,parents,total+count))return PT_MIXED_OWNER_INVALID;
     memcpy(&ps,p,sizeof(ps));memcpy(&ws,w,sizeof(ws));
     memcpy(&pb,p->bridge,sizeof(pb));memcpy(&ab,w->bridge,sizeof(ab));
     memcpy(&reservation,ab.backend->reservation,sizeof(reservation));
@@ -159,6 +171,17 @@ enum pt_mixed_owner_result pt_mixed_owner_established_begin(struct pt_mixed_esta
     s->report.result=PT_MIXED_PENDING;
     c->starting=0;p->song_owner=s;w->song_owner=s;*out=s;return PT_MIXED_OWNER_PREPARING;
 }
+enum pt_mixed_owner_result pt_mixed_owner_established_begin(struct pt_mixed_established *c,
+    struct pt_paula_voices *p,struct pt_wavetable_voices *w,const struct pt_render_options *o,
+    const struct pt_paula_render_caps *caps,const struct pt_playback_format *f,const struct pt_allocator *a,
+    const struct pt_sampler_storage_span *extra,unsigned count,uint32_t revision,unsigned work,struct pt_mixed_owner **out)
+{return begin(c,p,w,o,caps,f,a,NULL,0,extra,count,revision,work,out);}
+enum pt_mixed_owner_result pt_mixed_owner_established_begin_bound(struct pt_mixed_established *c,
+    struct pt_paula_voices *p,struct pt_wavetable_voices *w,const struct pt_render_options *o,
+    const struct pt_paula_render_caps *caps,const struct pt_playback_format *f,const struct pt_allocator *a,
+    const void *container,size_t bytes,const struct pt_sampler_storage_span *extra,unsigned count,
+    uint32_t revision,unsigned work,struct pt_mixed_owner **out)
+{return container&&bytes?begin(c,p,w,o,caps,f,a,container,bytes,extra,count,revision,work,out):PT_MIXED_OWNER_INVALID;}
 int pt_mixed_owner_established_finish(struct pt_mixed_established *c)
 {
     if(!c)return 0;

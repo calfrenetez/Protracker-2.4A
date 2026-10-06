@@ -1,0 +1,10 @@
+{
+  "approved_scope": true,
+  "threadId": "01a02122-c34e-72f0-95cc-e36ce3d73629",
+  "turnId": "01a1101c-11c1-71f1-b6be-51130b3c417a",
+  "replyId": "msg_052d99eb5846a575016ac4a2e83c9487d0b023fa1e9d91e5f6",
+  "scope": "Exact PID35970 SIGTERM max5s, original evidence preservation, independent restoration/absence and normal verified HOLD40 release. No guest/retry/service/reset/deletion/physical/test.",
+  "peerReadback": "Scott waiting unreserved; soundcard no ownership/queued action; AmiConnect hands-off; no visible competing claim.",
+  "window": "separately approved recovery-only; original ACK20 retained until verified release",
+  "atUTC": "2026-10-06T07:29:10.276016+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "review": "root self-review, not independent reviewer",
+  "scope": "nine own source/test paths on indexed baseline",
+  "findings": [],
+  "checks": [
+    "finalizer adopted before first allocator callback",
+    "preparation cancellation before transport, owner and zero-child finish",
+    "refused alarm/readers/counter/owner/child closure retains context and vetoes edit/dispose",
+    "genuine checked control remains separate from guarded whole binding/editor/context extents",
+    "existing public constructor keeps original no-output-overlap extras and count limit",
+    "private container must contain exact publisher and cannot overlap control or other construction inputs",
+    "bounded parent vector stays within 15 plus project guard control",
+    "only confirmed finalization clears hook/context; no duplicate master registry or promotion",
+    "legacy binding does not acquire checked module linkage dependency",
+    "no backend/UI/native PLAY/schedule changes; named contexts and lifetime caller contract remain explicit"
+  ]
+}

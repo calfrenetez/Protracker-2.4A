@@ -1,0 +1,11 @@
+{
+  "directApproval": {
+    "bytes": 524,
+    "sha256": "b7042cbf7062b839d4fb43d5165040888a2194ac30ee50cedbba63edfdecec85"
+  },
+  "coordination": {
+    "bytes": 682,
+    "sha256": "12bea96626176572becc2b86eaa27cf1752c87f29a8c6e5bd616f82dd6a909c4"
+  },
+  "scope": "one exact owned failed-start closure and independent normal release only"
+}

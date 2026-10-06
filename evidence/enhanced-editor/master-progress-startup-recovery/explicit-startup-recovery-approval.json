@@ -1,0 +1,10 @@
+{
+  "approved": true,
+  "pid": 35970,
+  "fence": 40,
+  "scope": "one SIGTERM of own failed-start emulator, independent verified release; no candidate retry or physical action",
+  "directUserText": "go ahead",
+  "directContext": "Immediately following the plan naming scoped failed-session recovery and independent release; explicitly acknowledged by root in commentary.",
+  "corroboration": "Scott relayed direct human approved for the same recovery; no duplicate dispatch.",
+  "atUTC": "2026-10-06T07:29:10.275874+00:00"
+}

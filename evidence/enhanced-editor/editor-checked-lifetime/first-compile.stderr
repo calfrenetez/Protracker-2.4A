@@ -1,0 +1,7 @@
+tests/editor_mixed_checked_test.c:143:45: error: incompatible pointer to integer conversion assigning to 'unsigned int' from 'void *' [-Wint-conversion]
+  143 |     if(mode==8){g->bus.reservation.interrupt=(void *)&g->reentries;
+      |                                             ^~~~~~~~~~~~~~~~~~~~~~
+tests/editor_mixed_checked_test.c:144:136: error: incompatible pointer to integer conversion assigning to 'unsigned int' from 'void *' [-Wint-conversion]
+  144 |         assert(!pt_editor_prepare_change(g->editor)&&g->binding->owner&&g->control->storage.memory.active);g->bus.reservation.interrupt=NULL;}
+      |                                                                                                                                        ^~~~~
+2 errors generated.

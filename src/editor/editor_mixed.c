@@ -11,7 +11,12 @@ int pt_editor_mixed_stop(struct pt_editor_mixed *o)
         if(!pt_mixed_transport_close(o->transport))return 0;
         o->transport=NULL;
     }
-    return pt_mixed_owner_close(&o->owner);
+    if(!pt_mixed_owner_close(&o->owner))return 0;
+    if(o->owner_finish) {
+        if(!o->owner_finish(o->owner_finish_context))return 0;
+        o->owner_finish=NULL;o->owner_finish_context=NULL;
+    } else if(o->owner_finish_context)return 0;
+    return 1;
 }
 static int barrier(void *context){return pt_editor_mixed_stop(context);}
 int pt_editor_mixed_attached(const struct pt_editor_mixed *o)
@@ -19,6 +24,7 @@ int pt_editor_mixed_attached(const struct pt_editor_mixed *o)
 int pt_editor_mixed_attach(struct pt_editor_mixed *o,struct pt_editor *e)
 {
     if(!o || o->editor || o->owner || o->transport || o->preparation_close || o->preparation_context ||
+       o->owner_finish || o->owner_finish_context ||
        !pt_editor_change_barrier(e,barrier,o))return 0;
     o->editor=e;return 1;
 }
@@ -33,6 +39,7 @@ enum pt_mixed_owner_result pt_editor_mixed_begin(struct pt_editor_mixed *o,
     const struct pt_paula_render_caps *caps,const struct pt_playback_format *format)
 {
     if(!pt_editor_mixed_attached(o) || o->owner || o->transport || o->preparation_close || o->preparation_context ||
+       o->owner_finish || o->owner_finish_context ||
        !p || !w || !p->bridge || !w->bridge ||
        p->bridge->sampler!=&o->editor->sampler || w->bridge->sampler!=&o->editor->sampler ||
        p->bridge->project!=o->editor->project || w->bridge->project!=o->editor->project)

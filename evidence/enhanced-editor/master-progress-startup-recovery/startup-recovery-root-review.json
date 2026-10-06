@@ -1,0 +1,10 @@
+{
+  "kind": "root self review, no independent review",
+  "scripts": {
+    "recover_startup_once.py": "66b870f12e59a7769fc52fcf67d630f9268129293ed8c99d17c1131cac6f3734",
+    "verify_startup_recovery_release_once.py": "490a683826f62a2e19b95ecbbbf1b21c88704a88637b77d58e1b55859198d0d8"
+  },
+  "approvalGate": "Direct human scoped approval required before any signal; no approval file created",
+  "runtimeProof": "Fresh three locks, original exact startup guard, one exact owned PID/profile/runtime, private lease. First startup records and absent candidate namespace preserved. Separate fresh readback before ordinary exact-fence release. No forcekill/deletion/reset/target query/physical/retry",
+  "limits": "Prepared/AST/source reviewed only; no recovery or release executed"
+}

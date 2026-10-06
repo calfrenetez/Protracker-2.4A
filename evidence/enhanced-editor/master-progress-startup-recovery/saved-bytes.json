@@ -1,0 +1,60 @@
+{
+  "files": {
+    "README.md": {
+      "bytes": 1503,
+      "sha256": "db1f4737376b84866dfe0f24b5ca89360bfdf83cc534a61cf98832ca983211b0"
+    },
+    "explicit-startup-recovery-approval.json": {
+      "bytes": 524,
+      "sha256": "b7042cbf7062b839d4fb43d5165040888a2194ac30ee50cedbba63edfdecec85"
+    },
+    "recover_startup_once.py": {
+      "bytes": 5379,
+      "sha256": "66b870f12e59a7769fc52fcf67d630f9268129293ed8c99d17c1131cac6f3734"
+    },
+    "startup-recovery-absence.json": {
+      "bytes": 178,
+      "sha256": "e64e04382fb591545d72ce7bbb26134ccff5485625f4c5e79de825d1163fbc11"
+    },
+    "startup-recovery-authorization.json": {
+      "bytes": 340,
+      "sha256": "ed4911d9188a9ff984ba1e9c580f679986b4ee2a8fe19898d622b184ddb7753d"
+    },
+    "startup-recovery-cleanup.json": {
+      "bytes": 883,
+      "sha256": "c818043352f3d5a301a99c6dca8c7f4825cf28a5a8de682e2edb03a1ace2e27b"
+    },
+    "startup-recovery-coordination.json": {
+      "bytes": 682,
+      "sha256": "12bea96626176572becc2b86eaa27cf1752c87f29a8c6e5bd616f82dd6a909c4"
+    },
+    "startup-recovery-preflight.json": {
+      "bytes": 4397,
+      "sha256": "57f3e3e403b1027716bbf7070be756b5884aab9a3e21fd41a5b9668a4a2a52cd"
+    },
+    "startup-recovery-restoration.json": {
+      "bytes": 145,
+      "sha256": "d4dc943eccf1a73de9a5b11dee7850cafa66723128c1036bb3060baf414c10a0"
+    },
+    "startup-recovery-root-review.json": {
+      "bytes": 777,
+      "sha256": "1814b379d551a3201713d70542565c855489089e176232a90c21e1224b8c9f39"
+    },
+    "startup-recovery-terminal.json": {
+      "bytes": 8286,
+      "sha256": "6e9e40847bf6831a92565348750c72204863385fa2ab931e1cca89f4f4a54ca8"
+    },
+    "startup-release-proof.json": {
+      "bytes": 597,
+      "sha256": "0a947b7f3188fb9dc86fc896d982e52eb916f3465dcce0197464fdad3078fdb2"
+    },
+    "startup-root-verified-release.json": {
+      "bytes": 2423,
+      "sha256": "61fad84dec796dcd8dfba4b947fd7b2a4728b0fc9f95f36c428da988dbf7629c"
+    },
+    "verify_startup_recovery_release_once.py": {
+      "bytes": 3800,
+      "sha256": "490a683826f62a2e19b95ecbbbf1b21c88704a88637b77d58e1b55859198d0d8"
+    }
+  }
+}

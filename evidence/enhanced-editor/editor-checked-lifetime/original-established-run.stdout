@@ -1,0 +1,2 @@
+MIXED OWNER PASS: full255 host scenarios, incremental analysis cancellation/failure, master/cache/staging/commit/sequence/deadline/schedule ownership; no native clock
+ESTABLISHED OWNER PASS:66 8/16/24 scenarios; cancellable actual setup/audit/same sequence; source-preserving required union pins; aliases/reentry/cancel/dual drain; unchanged exact late-start refusal; injected callbacks only

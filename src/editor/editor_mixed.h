@@ -12,6 +12,9 @@ struct pt_editor_mixed {
     /* Private opt-in preparation adapter. Never set/copy/edit these directly.
      * Kept through refused cancellation; no new dependency in legacy binding. */
     int (*preparation_close)(void *);void *preparation_context;
+    /* Private checked-owner adapter: finish only after owner AND pump close.
+     * Never set/copy/edit directly; refusal retains the complete control. */
+    int (*owner_finish)(void *);void *owner_finish_context;
 };
 int pt_editor_mixed_attach(struct pt_editor_mixed *,struct pt_editor *);
 /* One bounded close attempt. Uncertain alarm/readers/counter retain the binding

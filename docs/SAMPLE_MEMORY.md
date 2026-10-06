@@ -5719,3 +5719,54 @@ schedule and backend behavior remain unchanged. No timing/IRQ/device/audio,
 native placement or total stack acceptance follows. Target ACK20/HOLD40 and the
 original scoped recovery approval remain pending; this host work neither clears
 the hold nor authorizes target recovery or replay.
+
+## Approved failed-start recovery completed — 6 October 2026
+
+The human approved the exact prepared recovery; fresh AmiConnect coordination
+confirmed exclusive recovery-only access. Unchanged scripts checked full HOLD40,
+exact owned PID35970/command/profile/runtime/private lease, three locks and 11
+pins. One SIGTERM closed the owned emulator within five seconds, with no force
+kill, guest request, deletion, reset, service restart, retry or physical action.
+A separate locked independent readback verified emulator/listener absence,
+healthy disconnected original DevBench endpoint, unchanged pins/bridge flag and
+all first records. Normal four-record release returned EMPTY41; root explicitly
+released ACK20 and the recovery window to AmiConnect. Duplicate human approval
+relayed by Scott caused no second dispatch. Later target access needs fresh
+coordination; the release is no permanent availability claim.
+
+Historical pending-approval/HOLD40 text above is superseded as current root
+recovery disposition only. Original startup failure remains FAILED; the progress
+candidate was never staged/launched, and native/physical qualification is NOT_RUN.
+See [saved recovery evidence](../evidence/enhanced-editor/master-progress-startup-recovery/README.md).
+
+
+## Optional editor checked-owner lifetime — 6 October 2026
+
+The downstream callable binding described as unfinished above is now implemented
+by `editor_mixed_checked`. It adopts the existing checked control before the first
+allocation and uses the actual editor sampler/project/revision. Whole editor,
+binding/publisher, separate control and optional composite context extents are
+protected. The private publisher-container constructor preserves the original
+public constructor's stricter extra-span admission rules and legacy linkage.
+Stop/edit/dispose retains the adopted control through refused alarm/readers/counter
+closure, both output drains, owner closure and zero-child guard finish. Completed
+8/16/24-bit masters remain authoritative and sampler-owned; exact save is retained.
+
+Three host ASan/UBSan groups/six calls passed with empty stderr and 905 exact source
+identities: 39 lifecycle plus 18 alias/public-admission cases and 15 legacy editor
+regressions; prior 27 establishment plus 24 alias cases and 15 regressions; original
+66 checked-owner plus 255 owner cases. The first fixture scalar-flag compile error
+is preserved separately and caused no executable run. Portable m68000/softfloat
+compile/link passed 89 calls/228 dependencies; PTEditorCheckedTest378988B,
+SHA256f37fef467d74e4684a6663350f25fd8ba7c30f8e43056e48896351af6faf2469.
+Emulator/physical execution is NOT_RUN. Saved-byte checks are not producer replay.
+See [checked lifetime evidence](../evidence/enhanced-editor/editor-checked-lifetime/README.md).
+
+Native PLAY/UI/event-loop integration and real timer/output backend qualification
+remain unfinished. Synchronous bridge binding is separate, exact scheduling stays
+mandatory, and injected quiet predicates prove no hardware DMA/voice-stop/IRQ,
+RAM placement/capacity, total stack, device ordering/completion, audio or listening
+acceptance. Root recovery was released EMPTY41; latest coordinator report instead
+places the shared target under Scott's separate HOLD44 with recovery approval
+pending. Root is hands-off with no target action queued. Fresh coordination and
+exact-candidate emulator qualification must precede any physical run.

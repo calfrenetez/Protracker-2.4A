@@ -1,0 +1,171 @@
+{
+  "scope": "SAVED_ONLY_CAUSAL_PUBLICATION_HOST_FIRST_V1_AUDIT",
+  "passed": true,
+  "findings": [],
+  "input_files": {
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-publication-host-first-v1/receipt.json": {
+      "bytes": 848972,
+      "sha256": "6a03da93ab1b1bcacc5fbdbeea36d7094cc704a0d9519c612b63cc68d7dd88e1",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-publication-host-first-v1.py": {
+      "bytes": 6058,
+      "sha256": "1537e2634c3a60017a981ac9ba63dc71cf725185cb230c931e2ebfd024aa1ccb",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-causal-publication-v1-source-review.json": {
+      "bytes": 5816,
+      "sha256": "fba2c6923e78ca8093ed6c292ec5cf7326f72ec8395eaf9e431dd0ea2c5452b7",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-publication-source-proposal-v1/pins.json": {
+      "bytes": 2373,
+      "sha256": "8a460ce8bff525dd0b01b6852b44135ec9aaff15b4ebf912cf7fa625620dad88",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-publication-source-proposal-v1/new-tests.patch": {
+      "bytes": 22513,
+      "sha256": "741269c7ff3595a93e1f230af7278a31d74696796495e45cb3f6553ca0770043",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-publication-host-first-v1/mixed-causal": {
+      "bytes": 2387552,
+      "sha256": "6292dc30d6678e8c6f71522b4395c9200abb6b00b1dd8e12bb1d89288e6f9cc7",
+      "mode": 33261
+    }
+  },
+  "streams": {
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-publication-host-first-v1/compile.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-publication-host-first-v1/compile.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-publication-host-first-v1/run.stdout": {
+      "bytes": 404,
+      "sha256": "20614a7624f7eae0259da6590fa3826b8f5beb1b006b887c251fce14a6a2e74e",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-publication-host-first-v1/run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    }
+  },
+  "checks": [
+    {
+      "name": "exact ROOT supplied first actual receipt",
+      "passed": true
+    },
+    {
+      "name": "actual PASS56 scope and no target/retry",
+      "passed": true
+    },
+    {
+      "name": "exact accepted independent source review bound",
+      "passed": true
+    },
+    {
+      "name": "only actual strict compile and actual executable run",
+      "passed": true
+    },
+    {
+      "name": "27 unique actual production-linked units",
+      "passed": true
+    },
+    {
+      "name": "actual strict sanitizer and enabled assertions",
+      "passed": true
+    },
+    {
+      "name": "actual separate compile120/run30 bounds",
+      "passed": true
+    },
+    {
+      "name": "both recorded RC0 and positive reap/group absence",
+      "passed": true
+    },
+    {
+      "name": "four complete streams match all receipt pins",
+      "passed": true
+    },
+    {
+      "name": "compiler streams and runtime stderr exactly empty",
+      "passed": true
+    },
+    {
+      "name": "exact sole full404-byte original oracle",
+      "passed": true
+    },
+    {
+      "name": "actual host binary exact saved executable pin",
+      "passed": true
+    },
+    {
+      "name": "saved binary contains ASan and UBSan linkage evidence",
+      "passed": true
+    },
+    {
+      "name": "fail-fast sanitizer environment is in executed collector source",
+      "passed": true
+    },
+    {
+      "name": "compiler provider pin unchanged current",
+      "passed": true
+    },
+    {
+      "name": "1196 repository source files unchanged saved/current",
+      "passed": true
+    },
+    {
+      "name": "1198 isolated source files unchanged saved/current",
+      "passed": true
+    },
+    {
+      "name": "isolated overlay is precisely the two reviewed new tests",
+      "passed": true
+    },
+    {
+      "name": "three proposal sources unchanged current and accepted final pins",
+      "passed": true
+    },
+    {
+      "name": "16 protected display/editor paths unchanged",
+      "passed": true
+    },
+    {
+      "name": "eight adopted production/helper donor pins exact",
+      "passed": true
+    }
+  ],
+  "observations": {
+    "actual_compile_pid": 26654,
+    "actual_run_pid": 26695,
+    "compile_seconds": 7.716205042001093,
+    "run_seconds": 0.4256609999865759,
+    "source_units": 27,
+    "cases": 56,
+    "stdout_bytes": 404,
+    "repository_files": 1196,
+    "isolated_source_files": 1198,
+    "proposal_files": 3,
+    "protected_files": 16,
+    "donor_files": 8,
+    "executable": {
+      "bytes": 2387552,
+      "sha256": "6292dc30d6678e8c6f71522b4395c9200abb6b00b1dd8e12bb1d89288e6f9cc7",
+      "mode": 33261
+    }
+  },
+  "evidence_limits": [
+    "No rerun, candidate or collector import, compilation, live process probe, target, guard, lease, network or Git operation occurred in this audit.",
+    "Positive HOST process quiet is saved evidence from the actual collector, not a new live probe or target task absence.",
+    "This qualifies the separate portable56 publication/constructor/release fixture only. Accepted26/default fixtures were not rerun.",
+    "Native, real Fast/Chip, scheduled source/timer/CIA/IRQ, device/card ordering/completion, physical audio/listening and recovery acceptance remain separate.",
+    "HOLD1143 and the original native deadline failure remain untouched; this audit grants no release or recovery authority."
+  ]
+}

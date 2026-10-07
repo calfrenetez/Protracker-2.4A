@@ -51,3 +51,5 @@ nonempty imported registry and all 20 slots simultaneously active remain open.
 No timing, DMA, card RAM capacity/order/completion, voice-stop, audio or listening
 acceptance follows from these tests. The separate one-armed native RAM fixture's
 deadline failure and recovery hold remain preserved.
+
+The separate [publication and cleanup qualification](MIXED_READERS_CAUSAL_PUBLICATION.md) adds 56 HOST failure/lifetime cases without changing this production core or its original 26-case fixture.

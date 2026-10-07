@@ -1,0 +1,144 @@
+{
+  "status": "PASS_56_GENUINE_PUBLICATION_CASES_ASAN_UBSAN_HOST_ONLY",
+  "scope": "HOST_ONLY",
+  "baseline": "aa33b5ce010e139b90d46c9cb2f553f401a3e8c3",
+  "actual_receipt": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-publication-host-first-v1/receipt.json",
+    "bytes": 848972,
+    "sha256": "6a03da93ab1b1bcacc5fbdbeea36d7094cc704a0d9519c612b63cc68d7dd88e1",
+    "mode": 33188
+  },
+  "source_review": {
+    "bytes": 5816,
+    "sha256": "fba2c6923e78ca8093ed6c292ec5cf7326f72ec8395eaf9e431dd0ea2c5452b7",
+    "mode": 33188
+  },
+  "fixture_and_driver": {
+    "tests/mixed_readers_causal_publication_test.c": {
+      "bytes": 18918,
+      "sha256": "7f83187ca8529202a46b52403ab5695ec1302899500668a0844615cfed4e3857",
+      "mode": 33188
+    },
+    "tests/test_mixed_readers_causal_publication.py": {
+      "bytes": 3038,
+      "sha256": "5885e54f8eb800481415775db76abe3f9219c33b08d514cca19538eca8b41d63",
+      "mode": 33188
+    }
+  },
+  "commands": [
+    {
+      "label": "compile",
+      "args": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-I.",
+        "tests/mixed_readers_causal_publication_test.c",
+        "src/core/mixed_readers_causal.c",
+        "src/core/mixed_scheduled_readers.c",
+        "src/core/elapsed_clock.c",
+        "src/editor/sampler_paula.c",
+        "src/editor/sampler_wavetable.c",
+        "src/core/amigus_voice_plan.c",
+        "src/editor/sampler.c",
+        "src/editor/slots.c",
+        "src/core/pcm_filtered.c",
+        "src/core/slices.c",
+        "src/core/pattern.c",
+        "src/core/document.c",
+        "src/core/pp20.c",
+        "src/core/project.c",
+        "src/core/mod_project.c",
+        "src/core/mod_inspect.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "src/core/wav.c",
+        "src/core/svx.c",
+        "src/core/raw.c",
+        "src/core/amigus_reservation.c",
+        "src/core/amigus_wavetable_cache.c",
+        "src/core/amigus_sample_ram.c",
+        "src/core/sample_cache.c",
+        "src/core/playback_pcm.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-publication-host-first-v1/mixed-causal"
+      ],
+      "timeout_seconds": 120,
+      "passed": true,
+      "pid": 26654,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "elapsed_seconds": 7.716205042001093,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      }
+    },
+    {
+      "label": "run",
+      "args": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-publication-host-first-v1/mixed-causal"
+      ],
+      "timeout_seconds": 30,
+      "passed": true,
+      "pid": 26695,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "elapsed_seconds": 0.4256609999865759,
+      "streams": {
+        "stdout": {
+          "bytes": 404,
+          "sha256": "20614a7624f7eae0259da6590fa3826b8f5beb1b006b887c251fce14a6a2e74e",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      }
+    }
+  ],
+  "actual_oracle": "MIXED CAUSAL PUBLICATION PASS:56 genuine heap cases;48 first/successor raw0/-1/malformed identity/full-copy/reentry/fault/late publication paths;independent C/R proof orders;faulting raw0 retains pins and unchanged outputs until exact later proofs;6 real allocation/reentry/fail-closed constructors;2 actual consumed-close0 release lifetimes;bound original registration;master beforeimages;SOFTWARE_ONLY\n",
+  "sanitizer_environment": {
+    "ASAN_OPTIONS": "halt_on_error=1:abort_on_error=1",
+    "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1"
+  },
+  "executable": {
+    "bytes": 2387552,
+    "sha256": "6292dc30d6678e8c6f71522b4395c9200abb6b00b1dd8e12bb1d89288e6f9cc7",
+    "mode": 33261
+  },
+  "protected_count": 16,
+  "selected_source_count": 1198,
+  "repository_before_after_exact": true,
+  "selected_before_after_exact": true,
+  "proposal_before_after_exact": true,
+  "native": "NOT_RUN",
+  "physical": "NOT_RUN",
+  "target_operation": false,
+  "automatic_retry": false,
+  "limitations": [
+    "No production repair or enhanced PLAY integration.",
+    "No source timing/IRQ/device/audio/listening qualification.",
+    "Defensive retained-newborn-queue constructor branch remains unqualified.",
+    "Original native deadline failure and HOLD recovery approval remain separate."
+  ]
+}

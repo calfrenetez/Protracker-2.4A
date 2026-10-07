@@ -1,0 +1,139 @@
+{
+  "scope": "SOURCE_ONLY",
+  "passed": true,
+  "findings": [],
+  "files": {
+    "tests/mixed_readers_causal_publication_test.c": {
+      "bytes": 18918,
+      "sha256": "7f83187ca8529202a46b52403ab5695ec1302899500668a0844615cfed4e3857",
+      "mode": 33188
+    },
+    "tests/test_mixed_readers_causal_publication.py": {
+      "bytes": 3038,
+      "sha256": "5885e54f8eb800481415775db76abe3f9219c33b08d514cca19538eca8b41d63",
+      "mode": 33188
+    },
+    "README.md": {
+      "bytes": 8800,
+      "sha256": "30d552a6b00582b3728940be80e6e5706ba2cd00e4e7f701057c45f5d10c26db",
+      "mode": 33188
+    }
+  },
+  "packet_support_files": {
+    "pins.json": {
+      "bytes": 2373,
+      "sha256": "8a460ce8bff525dd0b01b6852b44135ec9aaff15b4ebf912cf7fa625620dad88",
+      "mode": 33188
+    },
+    "new-tests.patch": {
+      "bytes": 22513,
+      "sha256": "741269c7ff3595a93e1f230af7278a31d74696796495e45cb3f6553ca0770043",
+      "mode": 33188
+    }
+  },
+  "adopted_donor_files": {
+    "src/core/mixed_readers_causal.c": {
+      "bytes": 51779,
+      "sha256": "b6fce6f08e9b63d0453407d43db16a3425b83339969b00e147e7522a7cf1dacd",
+      "mode": 33188
+    },
+    "src/core/mixed_readers_causal.h": {
+      "bytes": 12863,
+      "sha256": "520cc4375986f9cf203295686389408cbc040bde43c98ec3e32b4980f5dbfa72",
+      "mode": 33188
+    },
+    "src/core/mixed_readers_causal_queue_internal.h": {
+      "bytes": 1655,
+      "sha256": "96a47bf5494157524eb1e71e379caae3131d970da712ab815f98f9553cd8ee3e",
+      "mode": 33188
+    },
+    "src/core/mixed_scheduled_readers.c": {
+      "bytes": 45150,
+      "sha256": "2bf59e3f756a8f7fa924b743c16ad99067d7c533d108cc668859fd13b8f4b463",
+      "mode": 33188
+    },
+    "tests/mixed_readers_causal_test.c": {
+      "bytes": 21400,
+      "sha256": "da7ac70ecf1e889743bc911df16a2ad6ec36539a1c7f019d7b3be729d3e2f63c",
+      "mode": 33188
+    },
+    "tests/mixed_scheduled_readers_test.c": {
+      "bytes": 42588,
+      "sha256": "18a0bc644ecdec004d23e00aa1a3714d78650151afccf914df24514cc79295fe",
+      "mode": 33188
+    },
+    "tests/amigus_wavetable_cache_test.c": {
+      "bytes": 13852,
+      "sha256": "0dfb01bd967669b0661ea01cdcec22800dc98f6c0476a83d3995975b83c18eef",
+      "mode": 33188
+    },
+    "tests/test_mixed_readers_causal.py": {
+      "bytes": 3191,
+      "sha256": "8221399d7e0e72306b371778222e576afbeaa3b5e3c049692576e965ffdbee6f",
+      "mode": 33188
+    }
+  },
+  "checks": [
+    {
+      "name": "three exact final packet source pins",
+      "passed": true
+    },
+    {
+      "name": "eight adopted donor source/helper files unchanged",
+      "passed": true
+    },
+    {
+      "name": "full two-new-test patch byte-identical",
+      "passed": true
+    },
+    {
+      "name": "only renamed accepted helper entry included",
+      "passed": true
+    },
+    {
+      "name": "no fixture core source inclusion or opaque owner mirror",
+      "passed": true
+    },
+    {
+      "name": "driver 27 actual unique independently linked units",
+      "passed": true
+    },
+    {
+      "name": "strict bounded standalone host recipe",
+      "passed": true
+    },
+    {
+      "name": "fixture and driver exact sole 56-case oracle",
+      "passed": true
+    },
+    {
+      "name": "finite 48 publication plus six constructor plus two release cases",
+      "passed": true
+    },
+    {
+      "name": "original registration bound before enqueue/publication",
+      "passed": true
+    },
+    {
+      "name": "source-only boundaries explicit",
+      "passed": true
+    }
+  ],
+  "review": {
+    "publication": "Read both complete publication callbacks and exact adopted backend_submit restoration/classification. Raw callback result is recorded independently; faulting zero retains genuine ownership, full-copy mutation affects actual packet fields and late post-clock remains unknown.",
+    "ownership": "Read actual queue_release/open/close and consumed-slot ordering. Constructor cases 0-5 use exact initialized allocator blocks and genuine queue-before-owner cleanup; final release reentry observes actual consumed caller slot rather than assuming zero counts.",
+    "resources": "Full holder beforeimages permit only current-check counters; explicit independent C/R proofs exercise both orders and exact release counts, no commit/effects/source shutdown before quiet, master saves remain exact.",
+    "recipe": "Driver and README use the same 27 unique real linked source units, enabled strict assertions/ASan/UBSan, compile120/run30, exact one-line oracle and empty error streams. The accepted old causal26 entry is renamed and uncalled; no constructor-attribute activation fixture is included.",
+    "patch": "Read complete 22,513-byte patch; regenerated against empty files and exact source text byte-for-byte. It adds only the two test files; README is a private proposal document.",
+    "baseline": "The eight actual adopted donor bytes and modes match pins.json/current repository. aa33b5c is the ROOT supplied adopted identity; no Git command was used by this source review."
+  },
+  "optional_strengthening": [
+    "Free or poison expired workspace/config before the later NULL close to exercise the already source-visible terminal path. Not required for this bounded packet; no change requested."
+  ],
+  "evidence_limits": [
+    "This review performed only source/saved-byte reads and private JSON write/readback; no candidate import, compile, run, tests, process, target, network, guard, lease or Git operation.",
+    "All new 56 cases remain NOT RUN at review time. HOST/native/physical, exact scheduling/IRQ/device/audio acceptance remain separate.",
+    "No conforming route to defensive retained-newborn-queue constructor recovery was demonstrated; that branch remains explicitly unqualified.",
+    "No HOLD release, recovery authority or native candidate retry is implied."
+  ]
+}

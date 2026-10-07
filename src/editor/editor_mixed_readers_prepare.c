@@ -639,6 +639,12 @@ int pt_editor_mixed_source_allocation_disjoint(struct pt_editor_mixed_readers_pr
  for(i=0;i<PT_EDITOR_MIXED_READERS_CHIP;++i)if(!source_query_extent(p,n,s->chip+i,1))return 0;
  return 1;
 }
+/* Admit the whole uninitialized local slot numerically before its first write.
+ * This SOURCE guard includes captured mutable/full-capacity spans and never
+ * reads or writes the pointed-to local bytes. */
+static int source_local_apart(struct pt_editor_mixed_readers_prepare *s,
+ const struct pt_editor_mixed_source_borrow *b,uintptr_t address,size_t n)
+{return pt_editor_mixed_source_allocation_disjoint(s,b,(const void *)address,n);}
 static int source_query_command_zero(const struct pt_editor_mixed_command_record *c)
 {
  unsigned i;if(c->handle.address||c->handle.token||c->serial||c->ticket||c->count||c->transferred)return 0;
@@ -764,10 +770,11 @@ enum pt_editor_mixed_readers_result pt_editor_mixed_readers_prepare_advance_vali
     f.control_budget=s->saved.factory_budget;f.chip_budget=s->saved.chip_budget;
     f.generation=s->saved.activation.grid.generation;
     f.maximum_commands=PT_SAMPLER_MIXED_COMMANDS;f.maximum_readers=PT_SAMPLER_MIXED_READERS;
-    f.context_count=4;f.contexts[0]=(struct pt_mixed_readers_span){s->saved.contexts.data,s->saved.contexts.bytes};
+    f.context_count=5;f.contexts[0]=(struct pt_mixed_readers_span){s->saved.contexts.data,s->saved.contexts.bytes};
     f.contexts[1]=(struct pt_mixed_readers_span){s->activation,pt_mixed_activation_control_size()};
     f.contexts[2]=(struct pt_mixed_readers_span){s->saved.backend,sizeof(*s->saved.backend)};
     f.contexts[3]=(struct pt_mixed_readers_span){s->saved.backend->reservation,sizeof(*s->saved.backend->reservation)};
+    f.contexts[4]=(struct pt_mixed_readers_span){s->saved.activation_workspace,s->saved.activation_capacity};
     fr=pt_sampler_mixed_open(&f,s->revision,s->saved.factory_workspace,s->saved.factory_capacity,&pool);
     s->pool=pool;
     if(!post(s))r=s->result;
@@ -822,6 +829,34 @@ static int reader_close(struct pt_editor_mixed_readers_prepare *s,unsigned index
  memcpy(&s->reader[index].handle,&h,sizeof(h));
  if(!h.address&&!h.token)memset(s->reader+index,0,sizeof(s->reader[index]));
  return r&&!h.address&&!h.token;
+}
+struct pt_mixed_reader_retirement pt_editor_mixed_source_retire_original_reader(
+ struct pt_editor_mixed_readers_prepare *s,const struct pt_editor_mixed_source_borrow *b,
+ struct pt_editor_mixed_reader_ref ref,unsigned cancel)
+{
+ struct pt_mixed_reader_retirement out={PT_MIXED_READERS_INVALID,0};
+ struct pt_editor_mixed_reader_record *rr;struct pt_sampler_mixed_reader_handle h;
+ /* Original scope/ref and bounded captured SOURCE/pool/queue/allocation/cache
+  * spans precede writable fault paths or initialization of this whole slot.
+  * Copied/stale refs never turn into a release or fault permission. */
+ if(cancel>1||source_query_scope(s,b)!=PT_EDITOR_MIXED_SOURCE_SCOPE_HELD||
+    pt_editor_mixed_source_reader_registration(s,b,ref)!=PT_EDITOR_MIXED_SOURCE_REGISTRATION_PRESENT||
+    !source_local_apart(s,b,(uintptr_t)&h,sizeof(h)))return out;
+ if(!(rr=reader(s,ref))||!rr->ticket||!rr->handle.token)return out;
+ if(reentry(s)){out.result=PT_MIXED_READERS_BACKEND;return out;}
+ if(!s->phase||s->phase==PT_EDITOR_MIXED_READERS_FINISHED||
+    !s->source_activated||!s->pool||!s->queue)return out;
+ /* Captured controls remain readable during cleanup; fixed_current and post
+  * inspect fixed headers only. Sticky error does not erase independent proof
+  * consumption or forbid draining the actual retained original owner. */
+ if(!fixed_current(s))fail(s,PT_EDITOR_MIXED_READERS_STALE);
+ s->busy=1;h=rr->handle;
+ out=pt_sampler_mixed_retire_original_reader(s->pool,&h,cancel);
+ memcpy(&rr->handle,&h,sizeof(h));
+ if(!h.address&&!h.token)memset(rr,0,sizeof(*rr));
+ (void)post(s);s->busy=0;
+ if(s->first_error)out.result=PT_MIXED_READERS_BACKEND;
+ return out;
 }
 static int command_close(struct pt_editor_mixed_readers_prepare *s,unsigned index)
 {

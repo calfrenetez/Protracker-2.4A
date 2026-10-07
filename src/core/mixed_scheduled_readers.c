@@ -413,6 +413,75 @@ static enum pt_mixed_readers_result reader_check(struct pt_mixed_readers_output 
 }
 enum pt_mixed_readers_result pt_mixed_readers_service_reader(struct pt_mixed_readers_output *q,uint64_t t,unsigned action,unsigned cancel,struct pt_mixed_readers_reader_receipt *out)
 {if(cancel>1)return PT_MIXED_READERS_INVALID;return reader_check(q,t,action,out,(int)cancel);}
+static int retirement_controls(const struct pt_mixed_readers_output *q)
+{
+    unsigned i,j,commands=0,readers=0;
+    if(!q||!span(q,sizeof(*q))||(uintptr_t)q%queue_alignment()||
+       q->commands!=PT_MIXED_READERS_COMMANDS||q->readers!=PT_MIXED_READERS_PERSISTENT||
+       q->command_count>q->commands||q->reader_count>q->readers||!q->session||
+       !q->grid.generation||!q->allocator.release||!capable(&q->backend)||!q->allocator_context.bytes||
+       !span(q->allocator_context.data,q->allocator_context.bytes)||
+       !q->backend.context_bytes||!span(q->backend.context,q->backend.context_bytes))return 0;
+    for(i=0;i<q->commands;++i){const struct command_entry *c=q->command+i;
+        if(c->held>1)return 0;if(!c->held)continue;++commands;
+        if(!control_valid(&c->owner)||!c->event.batch.count||
+           c->event.batch.count>PT_MIXED_READERS_ACTIONS||!c->event.ticket||
+           c->event.ticket>q->tickets||c->event.queue!=q||c->event.session!=q->session)return 0;
+        for(j=0;j<c->event.batch.count;++j)if(c->reader[j]>=q->readers)return 0;
+    }
+    for(i=0;i<q->readers;++i){const struct reader_entry *r=q->reader+i;
+        if(r->held>1)return 0;if(!r->held)continue;++readers;
+        if(!control_valid(&r->owner.control)||!r->owner.count||
+           r->owner.count>PT_MIXED_READERS_SPANS||r->owner.spans!=r->spans||
+           r->domain.spans!=r->spans||r->domain.count!=r->owner.count||
+           r->domain.key.queue!=q||r->domain.key.session!=q->session||
+           r->domain.key.generation!=q->grid.generation||!r->domain.key.trigger||
+           r->domain.key.trigger>q->tickets||!r->domain.key.serial||
+           r->domain.key.serial>q->serial||r->domain.key.action>=PT_MIXED_READERS_ACTIONS||
+           r->references>PT_MIXED_READERS_COMMANDS*PT_MIXED_READERS_ACTIONS||
+           r->submitted>1||r->retired>1||r->valid>1||
+           r->domain.key.owner!=r->owner.control.token||
+           r->domain.binding.context!=r->owner.control.context||
+           r->domain.binding.context_bytes!=r->owner.control.context_bytes)return 0;
+        for(j=0;j<r->owner.count;++j)if(!r->spans[j].data||!r->spans[j].bytes||
+            !span(r->spans[j].data,r->spans[j].bytes))return 0;
+    }
+    return commands==q->command_count&&readers==q->reader_count;
+}
+int pt_mixed_readers_retirement_slot_disjoint(
+    const struct pt_mixed_readers_output *q,const void *slot,size_t bytes)
+{
+    unsigned i,j;
+    if(!bytes||!retirement_controls(q)||!apart(slot,bytes,q,sizeof(*q))||
+       !apart(slot,bytes,q->allocator_context.data,q->allocator_context.bytes)||
+       !apart(slot,bytes,q->backend.context,q->backend.context_bytes))return 0;
+    for(i=0;i<q->commands;++i)if(q->command[i].held&&
+       !apart(slot,bytes,q->command[i].owner.context,q->command[i].owner.context_bytes))return 0;
+    for(i=0;i<q->readers;++i)if(q->reader[i].held){const struct reader_entry *r=q->reader+i;
+        if(!apart(slot,bytes,r->owner.control.context,r->owner.control.context_bytes))return 0;
+        for(j=0;j<r->owner.count;++j)if(!apart(slot,bytes,r->spans[j].data,r->spans[j].bytes))return 0;
+    }
+    return 1;
+}
+struct pt_mixed_reader_retirement pt_mixed_readers_retire_original(
+    struct pt_mixed_readers_output *q,uint64_t ticket,unsigned action,unsigned cancel)
+{
+    struct pt_mixed_reader_retirement out={PT_MIXED_READERS_INVALID,0};struct reader_entry *r;
+    if(!ticket||action>=PT_MIXED_READERS_ACTIONS||cancel>1||!retirement_controls(q)||
+       !(r=reader(q,ticket,action))||!r->submitted)return out;
+    /* Exact original retained identity precedes the writable reentry fault.
+     * A consumed R-first settlement is never requested from the backend again. */
+    if(reentry(q)){out.result=PT_MIXED_READERS_BACKEND;out.retirement_consumed=r->retired;return out;}
+    if(r->retired){out.retirement_consumed=1;
+        out.result=q->failed||!r->valid?PT_MIXED_READERS_BACKEND:PT_MIXED_READERS_OK;return out;}
+    out.result=reader_check(q,ticket,action,NULL,(int)cancel);
+    /* r is an embedded queue entry, not a freed external holder. Existing
+     * reader_release clears it only after actual retirement consumption; the
+     * queue remains owned. A good envelope with bad semantic proof still sets
+     * retired (or clears this entry), retaining BACKEND and consumed together. */
+    out.retirement_consumed=(unsigned)(!r->held||r->retired);
+    return out;
+}
 enum pt_mixed_readers_result pt_mixed_readers_reader_key(struct pt_mixed_readers_output *q,uint64_t t,unsigned i,struct pt_mixed_readers_key *out)
 {
     struct reader_entry *r;

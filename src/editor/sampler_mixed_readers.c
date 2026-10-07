@@ -917,6 +917,113 @@ reader_free(p,r);
 p->busy=0;
 return !p->failed;
 }
+static int retirement_guard_has(const struct pt_sampler_mixed_pool *p,const void *v,size_t n)
+{
+ unsigned i;
+ for(i=0;i<p->guard_count;++i){
+    if(p->guards[i].data==v&&p->guards[i].bytes==n)return 1;
+ }
+ return 0;
+}
+static int retirement_extent_apart(const void *slot,size_t n,const void *v,size_t bytes)
+{return (!v&&!bytes)||(v&&bytes&&span(v,bytes)&&apart(slot,n,v,bytes));}
+/* This is admission of one narrowly private original retirement handle SLOT,
+ * never an exception to public output_apart or a caller release certificate.
+ * No sampler_output_disjoint/current-version body is followed after staleness.
+ * Card cache data are opaque RAM-block identities, not CPU pointers of logical
+ * sample length: their full arena/cache controls are inside captured backend.
+ * Paula cache allocations and Chip ledgers use their actual full CPU capacity. */
+static int retirement_slot_apart(struct pt_sampler_mixed_pool *p,
+ const struct pt_sampler_mixed_reader_handle *slot)
+{
+ unsigned i,commands=0,readers=0;size_t n=sizeof(*slot),total;
+ if(!p||!span(p,sizeof(*p))||(uintptr_t)p%_Alignof(struct pt_sampler_mixed_pool)||
+    !slot||!span(slot,n)||(uintptr_t)slot%_Alignof(struct pt_sampler_mixed_reader_handle)||
+    !apart(slot,n,p,sizeof(*p))||!p->guard_count||p->guard_count>GUARDS||
+    !p->config.maximum_commands||p->config.maximum_commands>PT_SAMPLER_MIXED_COMMANDS||
+    !p->config.maximum_readers||p->config.maximum_readers>PT_SAMPLER_MIXED_READERS||
+    p->config.context_count>PT_SAMPLER_MIXED_CONTEXTS||p->header.sample_count>PT_PROJECT_SAMPLES||
+    p->header.channels.count>PT_CHANNEL_LIMIT||p->header.pattern_count>PT_PROJECT_PATTERNS||
+    p->header.order_count>PT_PROJECT_ORDERS||p->header.extension_count>4090||
+    !p->serial||p->bytes<sizeof(*p)||p->bytes>p->config.control_budget||
+    p->chip_bytes>p->config.chip_budget||!p->config.allocator.release)return 0;
+ /* All captured extents are admitted before any owned-pointer header read. */
+ for(i=0;i<p->guard_count;++i)if(!p->guards[i].data||!p->guards[i].bytes||
+    !retirement_extent_apart(slot,n,p->guards[i].data,p->guards[i].bytes))return 0;
+ for(i=0;i<PT_SAMPLER_MIXED_CONTEXTS;++i)
+    if(i<p->config.context_count?(!p->config.contexts[i].data||!p->config.contexts[i].bytes||
+       !retirement_extent_apart(slot,n,p->config.contexts[i].data,p->config.contexts[i].bytes)):
+       (p->config.contexts[i].data||p->config.contexts[i].bytes))return 0;
+ if(!retirement_guard_has(p,p->config.queue,pt_mixed_readers_control_size())||
+    !retirement_guard_has(p,p->config.backend,sizeof(*p->config.backend))||
+    !retirement_guard_has(p,p->backend_header.reservation,sizeof(*p->backend_header.reservation))||
+    !retirement_guard_has(p,p->config.sampler,sizeof(*p->config.sampler))||
+    !retirement_guard_has(p,p->config.project,sizeof(*p->config.project)))return 0;
+ for(i=0;i<PT_SAMPLER_MIXED_COMMANDS;++i)if(p->commands[i]){
+    if(i>=p->config.maximum_commands||!span(p->commands[i],sizeof(*p->commands[i]))||
+       (uintptr_t)p->commands[i]%_Alignof(struct pt_sampler_mixed_command)||
+       !apart(slot,n,p->commands[i],sizeof(*p->commands[i]))){return 0;}
+    ++commands;
+ }
+ for(i=0;i<PT_SAMPLER_MIXED_READERS;++i)if(p->readers[i]){
+    if(i>=p->config.maximum_readers||!span(p->readers[i],sizeof(*p->readers[i]))||
+       (uintptr_t)p->readers[i]%_Alignof(struct pt_sampler_mixed_reader)||
+       !apart(slot,n,p->readers[i],sizeof(*p->readers[i]))){return 0;}
+    ++readers;
+ }
+ total=sizeof(*p)+commands*sizeof(struct pt_sampler_mixed_command)+readers*sizeof(struct pt_sampler_mixed_reader);
+ if(total!=p->bytes)return 0;
+ for(i=0;i<PT_CACHE_SLOTS;++i){const struct pt_cache_entry *c=p->paula.cache.entry+i;
+    if(!retirement_extent_apart(slot,n,p->chip[i].data,p->chip[i].bytes)||
+       !retirement_extent_apart(slot,n,c->data,c->bytes)||c->valid>2)return 0;
+ }
+ return pt_mixed_readers_retirement_slot_disjoint(p->config.queue,slot,n);
+}
+/* Readable captured fixed headers only; never dereference former sample tables,
+ * version bodies, event arrays, extension arrays or unknown cache RAM pointers. */
+static int retirement_headers_current(struct pt_sampler_mixed_pool *p)
+{
+ struct pt_sampler *s=p->config.sampler;struct pt_project h;unsigned i;
+ if(s->generation!=p->generation||s->table!=p->table||s->table_original!=p->table_original||
+    s->table_bytes!=p->table_bytes||s->allocator.context!=p->sampler_allocator.context||
+    s->allocator.allocate!=p->sampler_allocator.allocate||s->allocator.release!=p->sampler_allocator.release)return 0;
+ memcpy(&h,&p->header,sizeof(h));h.channels.selected=p->config.project->channels.selected;
+ if(!pt_project_snapshot_equal(p->config.project,&h)||!backend_fixed(p))return 0;
+ for(i=0;i<p->header.sample_count;++i)if(s->current[i]!=p->masters[i])return 0;
+ return 1;
+}
+struct pt_mixed_reader_retirement pt_sampler_mixed_retire_original_reader(
+ struct pt_sampler_mixed_pool *p,struct pt_sampler_mixed_reader_handle *slot,unsigned cancel)
+{
+ struct pt_mixed_reader_retirement out={PT_MIXED_READERS_INVALID,0};
+ struct pt_sampler_mixed_reader *r;struct pt_sampler_mixed_reader_handle original;unsigned stale;
+ if(cancel>1||!retirement_slot_apart(p,slot))return out;
+ original=*slot;
+ if(!original.address||!original.token||original.token>p->serial||!(r=reader(p,original))||
+    r->pool!=p||!r->ticket||r->action>=PT_MIXED_READERS_ACTIONS||
+    (r->state!=LIVE&&r->state!=RETIRED)||r->terminal>1||r->released>1||r->valid>1||
+    r->leased>1||r->span_count>PT_MIXED_READERS_SPANS||
+    (r->state==RETIRED&&(!r->terminal||!r->released))||
+    (r->state==LIVE&&(r->terminal||r->released)))return out;
+ if(reentry(p)){out.result=PT_MIXED_READERS_BACKEND;return out;}
+ stale=(unsigned)!retirement_headers_current(p);p->busy=1;
+ if(r->state==RETIRED){out.retirement_consumed=1;
+    out.result=r->valid?PT_MIXED_READERS_OK:PT_MIXED_READERS_BACKEND;
+ }else{p->queue_call=1;
+    out=pt_mixed_readers_retire_original(p->config.queue,r->ticket,r->action,cancel);
+    p->queue_call=0;
+ }
+ /* Core consumed R may still be retained by C; only actual terminal release
+  * makes this holder closeable. Clear the real admitted slot BEFORE free.
+  * Do not follow r after its allocator callback, even if that callback faults. */
+ if(r->state==RETIRED&&r->terminal==1&&r->released==1){
+    if(!out.retirement_consumed){out.result=PT_MIXED_READERS_BACKEND;out.retirement_consumed=1;}
+    slot->address=NULL;slot->token=0;reader_free(p,r);
+ }
+ if(p->failed)out.result=PT_MIXED_READERS_BACKEND;
+ else if(stale||!retirement_headers_current(p))out.result=PT_MIXED_READERS_STALE;
+ p->busy=0;return out;
+}
 int pt_sampler_mixed_command_close(struct pt_sampler_mixed_pool *p,struct pt_sampler_mixed_command_handle *h)
 {struct pt_sampler_mixed_command *c;
 unsigned i;

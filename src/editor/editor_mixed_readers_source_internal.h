@@ -1,6 +1,7 @@
 #ifndef PT_EDITOR_MIXED_READERS_SOURCE_INTERNAL_H
 #define PT_EDITOR_MIXED_READERS_SOURCE_INTERNAL_H
 #include "editor_mixed_readers_prepare.h"
+#include "../core/mixed_scheduled_readers_internal.h"
 
 /* Private owner-thread seam, not a public producer/validation certificate.
  * The constructor installs the controller's existing static editor hook before
@@ -126,4 +127,17 @@ enum pt_mixed_readers_result pt_editor_mixed_source_reader_readiness(
     struct pt_editor_mixed_readers_prepare *,
     const struct pt_editor_mixed_source_borrow *original,
     struct pt_editor_mixed_reader_ref original_reader);
+/* Genuine bounded task operation, including original cleanup after sticky
+ * cancellation/stale failure. Exact borrow/ref and complete captured local
+ * handle span precede callbacks. Normal errors remain errors while the by-value
+ * bit preserves actual consumed retirement, including genuine local unpublished
+ * queue retirement with no backend R call. It asserts no envelope validity.
+ * R-first bit does not consume C or
+ * the retained factory owner: only its later actual NULL clears registration.
+ * No receipt/key/validity/ACTIVE/quiet/source-stop/native certificate. No former
+ * source arrays are followed. Do not wrap this controller call in source_enter. */
+struct pt_mixed_reader_retirement pt_editor_mixed_source_retire_original_reader(
+    struct pt_editor_mixed_readers_prepare *,
+    const struct pt_editor_mixed_source_borrow *original,
+    struct pt_editor_mixed_reader_ref original_reader,unsigned cancel);
 #endif

@@ -257,7 +257,10 @@ static void err_issued_unadopted(void)
     trial_drop(t);
 }
 
-int main(void)
+#ifndef PT_EDITOR_MIXED_READER_READINESS_TEST_MAIN
+#define PT_EDITOR_MIXED_READER_READINESS_TEST_MAIN main
+#endif
+int PT_EDITOR_MIXED_READER_READINESS_TEST_MAIN(void)
 {
     unsigned bits,cache,little,mode;
     assert(err_query_main()==0);

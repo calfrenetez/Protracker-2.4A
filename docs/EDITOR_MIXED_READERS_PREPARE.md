@@ -231,3 +231,10 @@ or a readiness commit. Faulted idempotent retirement, complete SAME-sequence
 whole-song production and native PLAY remain separate increments. No native/
 emulator/physical stack/timing/device capacity, upload ordering/completion/
 voice-stop/audio/listening acceptance is inferred.
+
+
+### Genuine private reader retirement and whole-slot admission — V6 HOST evidence
+
+The private core→factory→SOURCE retirement service returns the normal result and retirement_consumed separately. Actual original settlement suppresses a repeated reader retirement call while retaining errors; original NULL sole-owner release and C/R/SOURCE quiet remain separate. The full saved activation workspace is captured as a factory context so the entire caller slot is admitted before dereference or mutation, including spare capacity and both allocation boundaries.
+
+The exact single V6 HOST attempt passed strict -Werror compilation with ASan/UBSan and all 28 complete fixture lines (9,005 bytes); the independent saved-only audit was accepted. Genuine malformed-envelope, R/C-order, sticky-error, copied/stale identity and whole-slot refusal checks preserve actual ownership and callback/release evidence. Prior V3/V4 compilation failures and V5 ASan runtime failure remain preserved. These HOST results do not qualify emulator or real A1200/AmiGUS behavior, native voice-stop, DMA/device completion, paired producer integration, exact musical timing or listening. Exact evidence is retained in docs/evidence/reader-retirement-v6-host/.

@@ -1,0 +1,1683 @@
+{
+  "schema": "pt24g-reader-retirement-v6-saved-HOST-observations",
+  "status": "ACCEPTED_SINGLE_V6_HOST_ONLY_NOT_ADOPTED",
+  "baseline": "059145bc4abc7f5619e21c91927cec62110ba243",
+  "source_freeze": {
+    "bytes": 233737,
+    "mode": 33060,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-implementation-v6/freeze.json",
+    "sha256": "ddaff7ccc555b944ea86e74bb72b1de738c97d0343b32b5381fde520c1fc7bf4"
+  },
+  "actual_root_receipt": {
+    "bytes": 236418,
+    "mode": 33188,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/receipt.json",
+    "sha256": "4aa3187f7507ef97d8b9924733786bc07e9418a69bdb714c7218b3d3a5934dbe"
+  },
+  "actual_inner_run": {
+    "bytes": 374626,
+    "mode": 33188,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/run.json",
+    "sha256": "872e0609c87a24fa8ac25d54a82872aba8f83a1b0a99ebc74dd3276209ad4071"
+  },
+  "actual_source_review": {
+    "bytes": 14674,
+    "mode": 33188,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-reader-retirement-review-v6/review.json",
+    "sha256": "996e09e36ec033c1624280fb4c2de6d3954993710f488717926789cd5cefb6df"
+  },
+  "actual_outer_SOURCE_review": {
+    "bytes": 22298,
+    "mode": 33188,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-reader-retirement-outer-review-v6/review.json",
+    "sha256": "968542ebc8d24bc052f12fa32e238ef123ac257d47e9b9b6c4f0a7d345bef272"
+  },
+  "actual_saved_audit": {
+    "report": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-reader-retirement-first-v6-host-audit-v1/review.json",
+      "bytes": 7843,
+      "mode": 33188,
+      "sha256": "ecf3428752f5824103eaab41d11b67daae2febb689ab384cff2a95f787f9343f",
+      "status": "PASS_SAVED_READER_RETIREMENT_FIRST_V6_HOST_ONLY"
+    },
+    "verification": {
+      "bytes": 1232040,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-reader-retirement-first-v6-host-audit-v1/verification.json",
+      "sha256": "e77d5bfb02a57fbe0e0517be4f363c505d707253494b3ddf3c8402f54c3d9371"
+    },
+    "readback": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-reader-retirement-first-v6-host-audit-v1/readback.json",
+      "bytes": 1869,
+      "mode": 33188,
+      "sha256": "d0f67166b28a31eae8183ea5bb732817f5a80f8396281f4011d434ffdbbc6fd9"
+    }
+  },
+  "root_acceptance": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-retirement-v6-actual-host-acceptance-v1.json",
+    "bytes": 1882,
+    "mode": 33188,
+    "sha256": "9d83d022ac2c895b93b20992b66d2818c2bd7944faf6d77cf9496ddf52a7b555",
+    "status": "ROOT_ACCEPTED_SINGLE_V6_HOST_AND_SAVED_AUDIT_HOST_ONLY"
+  },
+  "actual_source_root_from_compile_cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/source",
+  "actual_Host_facts": {
+    "actual_total_driver_count": 28,
+    "additive_overlays": 2,
+    "all_driver_stderr_bytes": 0,
+    "archive_body_count": 963,
+    "compile_elapsed_seconds": 20.40507616600371,
+    "compile_returncode": 0,
+    "compile_stdout_bytes": 0,
+    "complete_rawstream_count": 56,
+    "first_failure_outer_and_inner": null,
+    "inner_elapsed_seconds": 24.92474183399463,
+    "inner_phase": "COMPLETE",
+    "inner_status": "PASS",
+    "marker_count": 28,
+    "modified_overlays": 7,
+    "ordered_unique_units": 79,
+    "outer_elapsed_seconds": 26.962296625002637,
+    "outer_status": "PASS_FIRST_PRIVATE_READER_RETIREMENT_HOST_ONLY",
+    "prepared_actual_input_body_count": 966,
+    "product": {
+      "bytes": 6689496,
+      "mode": 33261,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/editor-reader-retirement",
+      "sha256": "b5be93c564eec094a139a1a79cb5fdbf39f2c9610a7117c379da54b36cde1fd9"
+    },
+    "runtime_elapsed_seconds": 2.2023462500073947,
+    "runtime_returncode": 0,
+    "runtime_stdout": {
+      "bytes": 9005,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/editor-reader-retirement-run.stdout",
+      "sha256": "6dedd817eaef84641c9ebf88244202272bf0625ee4806a783a3b8909258f0ee6"
+    },
+    "saved_all_28_owned_PID_equal_PGID_distinct_reaped_quiet_within_deadlines": true,
+    "strict_flags": [
+      "-std=c99",
+      "-O1",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-fsanitize=address,undefined",
+      "-Isrc/core",
+      "-I."
+    ],
+    "whole_oracle_bytes": 9005
+  },
+  "actual_whole_driver_rows28": [
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "--no-optional-locks",
+          "-c",
+          "core.fsmonitor=false",
+          "-c",
+          "core.untrackedCache=false",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.03857162500207778,
+        "environment": {
+          "GIT_CONFIG_GLOBAL": "/dev/null",
+          "GIT_CONFIG_NOSYSTEM": "1",
+          "GIT_OPTIONAL_LOCKS": "0",
+          "LANG": "C",
+          "LC_ALL": "C",
+          "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TMPDIR": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/tmp"
+        },
+        "group_quiescent": true,
+        "label": "before-head",
+        "owned_new_session": true,
+        "pgid": 24433,
+        "pid": 24433,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 41,
+          "mode": 33188,
+          "sha256": "aafffe4bfc7c6ad4507c915e9a29ef0fa8208d7e60db57062384ba50079e71f0"
+        },
+        "whole_seconds": 30
+      },
+      "scope": "outer"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "--no-optional-locks",
+          "-c",
+          "core.fsmonitor=false",
+          "-c",
+          "core.untrackedCache=false",
+          "branch",
+          "--show-current"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.01570729100785684,
+        "environment": {
+          "GIT_CONFIG_GLOBAL": "/dev/null",
+          "GIT_CONFIG_NOSYSTEM": "1",
+          "GIT_OPTIONAL_LOCKS": "0",
+          "LANG": "C",
+          "LC_ALL": "C",
+          "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TMPDIR": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/tmp"
+        },
+        "group_quiescent": true,
+        "label": "before-branch",
+        "owned_new_session": true,
+        "pgid": 24434,
+        "pid": 24434,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 31,
+          "mode": 33188,
+          "sha256": "218f389b3beebe94baeef4f4a8f7447956c3b3471d5890c8aabad0d9bf3eb3f9"
+        },
+        "whole_seconds": 30
+      },
+      "scope": "outer"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "--no-optional-locks",
+          "-c",
+          "core.fsmonitor=false",
+          "-c",
+          "core.untrackedCache=false",
+          "ls-files",
+          "--stage",
+          "-z"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.029606875003082678,
+        "environment": {
+          "GIT_CONFIG_GLOBAL": "/dev/null",
+          "GIT_CONFIG_NOSYSTEM": "1",
+          "GIT_OPTIONAL_LOCKS": "0",
+          "LANG": "C",
+          "LC_ALL": "C",
+          "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TMPDIR": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/tmp"
+        },
+        "group_quiescent": true,
+        "label": "before-index",
+        "owned_new_session": true,
+        "pgid": 24435,
+        "pid": 24435,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 1219061,
+          "mode": 33188,
+          "sha256": "f91bd0a04bf4191d43e0a6b3f30e376313136cdf920c7284bdf261953e3b4cb0"
+        },
+        "whole_seconds": 30
+      },
+      "scope": "outer"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "--no-optional-locks",
+          "-c",
+          "core.fsmonitor=false",
+          "-c",
+          "core.untrackedCache=false",
+          "diff",
+          "--cached",
+          "--name-only",
+          "-z"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.024587874999269843,
+        "environment": {
+          "GIT_CONFIG_GLOBAL": "/dev/null",
+          "GIT_CONFIG_NOSYSTEM": "1",
+          "GIT_OPTIONAL_LOCKS": "0",
+          "LANG": "C",
+          "LC_ALL": "C",
+          "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TMPDIR": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/tmp"
+        },
+        "group_quiescent": true,
+        "label": "before-staged",
+        "owned_new_session": true,
+        "pgid": 24436,
+        "pid": 24436,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "whole_seconds": 30
+      },
+      "scope": "outer"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "--no-optional-locks",
+          "-c",
+          "core.fsmonitor=false",
+          "-c",
+          "core.untrackedCache=false",
+          "status",
+          "--porcelain=v1",
+          "-z",
+          "--untracked-files=all",
+          "--",
+          "src",
+          "tests",
+          "tools",
+          "AGENTS.md",
+          "amiga-test.json"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.045678874987061135,
+        "environment": {
+          "GIT_CONFIG_GLOBAL": "/dev/null",
+          "GIT_CONFIG_NOSYSTEM": "1",
+          "GIT_OPTIONAL_LOCKS": "0",
+          "LANG": "C",
+          "LC_ALL": "C",
+          "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TMPDIR": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/tmp"
+        },
+        "group_quiescent": true,
+        "label": "before-status",
+        "owned_new_session": true,
+        "pgid": 24437,
+        "pid": 24437,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 415,
+          "mode": 33188,
+          "sha256": "683b0b2b900a5b87a36555bf6dfa11d8a7eac816e652cc40a157833b641b63a0"
+        },
+        "whole_seconds": 30
+      },
+      "scope": "outer"
+    },
+    {
+      "row": {
+        "argv": [
+          "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+          "-B",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-implementation-v6/tests/test_editor_mixed_reader_retirement.py",
+          "--baseline",
+          "059145bc4abc7f5619e21c91927cec62110ba243",
+          "--attempt-id",
+          "first-v6"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 610,
+        "elapsed_seconds": 25.02823729199008,
+        "environment": {
+          "GIT_CONFIG_GLOBAL": "/dev/null",
+          "GIT_CONFIG_NOSYSTEM": "1",
+          "GIT_OPTIONAL_LOCKS": "0",
+          "LANG": "C",
+          "LC_ALL": "C",
+          "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TMPDIR": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/tmp"
+        },
+        "group_quiescent": true,
+        "label": "first-qualifier",
+        "owned_new_session": true,
+        "pgid": 24438,
+        "pid": 24438,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 150,
+          "mode": 33188,
+          "sha256": "55dfa2599f8dec702f26472b9d7f34b6c0b618b17d0735136a9d808055611500"
+        },
+        "whole_seconds": 610
+      },
+      "scope": "outer"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "--no-optional-locks",
+          "-c",
+          "core.fsmonitor=false",
+          "-c",
+          "core.untrackedCache=false",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.027239832998020574,
+        "environment": {
+          "GIT_CONFIG_GLOBAL": "/dev/null",
+          "GIT_CONFIG_NOSYSTEM": "1",
+          "GIT_OPTIONAL_LOCKS": "0",
+          "LANG": "C",
+          "LC_ALL": "C",
+          "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TMPDIR": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/tmp"
+        },
+        "group_quiescent": true,
+        "label": "after-head",
+        "owned_new_session": true,
+        "pgid": 24601,
+        "pid": 24601,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 41,
+          "mode": 33188,
+          "sha256": "aafffe4bfc7c6ad4507c915e9a29ef0fa8208d7e60db57062384ba50079e71f0"
+        },
+        "whole_seconds": 30
+      },
+      "scope": "outer"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "--no-optional-locks",
+          "-c",
+          "core.fsmonitor=false",
+          "-c",
+          "core.untrackedCache=false",
+          "ls-files",
+          "--stage",
+          "-z"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.03015354200033471,
+        "environment": {
+          "GIT_CONFIG_GLOBAL": "/dev/null",
+          "GIT_CONFIG_NOSYSTEM": "1",
+          "GIT_OPTIONAL_LOCKS": "0",
+          "LANG": "C",
+          "LC_ALL": "C",
+          "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TMPDIR": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/tmp"
+        },
+        "group_quiescent": true,
+        "label": "after-index",
+        "owned_new_session": true,
+        "pgid": 24602,
+        "pid": 24602,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 1219061,
+          "mode": 33188,
+          "sha256": "f91bd0a04bf4191d43e0a6b3f30e376313136cdf920c7284bdf261953e3b4cb0"
+        },
+        "whole_seconds": 30
+      },
+      "scope": "outer"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "--no-optional-locks",
+          "-c",
+          "core.fsmonitor=false",
+          "-c",
+          "core.untrackedCache=false",
+          "status",
+          "--porcelain=v1",
+          "-z",
+          "--untracked-files=all",
+          "--",
+          "src",
+          "tests",
+          "tools",
+          "AGENTS.md",
+          "amiga-test.json"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.04504016600549221,
+        "environment": {
+          "GIT_CONFIG_GLOBAL": "/dev/null",
+          "GIT_CONFIG_NOSYSTEM": "1",
+          "GIT_OPTIONAL_LOCKS": "0",
+          "LANG": "C",
+          "LC_ALL": "C",
+          "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TMPDIR": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/tmp"
+        },
+        "group_quiescent": true,
+        "label": "after-status",
+        "owned_new_session": true,
+        "pgid": 24603,
+        "pid": 24603,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 415,
+          "mode": 33188,
+          "sha256": "683b0b2b900a5b87a36555bf6dfa11d8a7eac816e652cc40a157833b641b63a0"
+        },
+        "whole_seconds": 30
+      },
+      "scope": "outer"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "--no-optional-locks",
+          "-c",
+          "core.fsmonitor=false",
+          "-c",
+          "core.untrackedCache=false",
+          "diff",
+          "--cached",
+          "--name-only",
+          "-z"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.024893666006391868,
+        "environment": {
+          "GIT_CONFIG_GLOBAL": "/dev/null",
+          "GIT_CONFIG_NOSYSTEM": "1",
+          "GIT_OPTIONAL_LOCKS": "0",
+          "LANG": "C",
+          "LC_ALL": "C",
+          "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TMPDIR": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/tmp"
+        },
+        "group_quiescent": true,
+        "label": "after-staged",
+        "owned_new_session": true,
+        "pgid": 24604,
+        "pid": 24604,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "whole_seconds": 30
+      },
+      "scope": "outer"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.024625875012134202,
+        "group_quiescent": true,
+        "label": "prepare-head",
+        "owned_new_session": true,
+        "pgid": 24439,
+        "pid": 24439,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-head.stderr",
+        "stderr_snapshot": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-head.stdout",
+        "stdout_snapshot": {
+          "bytes": 41,
+          "mode": 33188,
+          "sha256": "aafffe4bfc7c6ad4507c915e9a29ef0fa8208d7e60db57062384ba50079e71f0"
+        },
+        "whole_call_seconds": 30
+      },
+      "scope": "inner"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "ls-files",
+          "--stage"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.02795575000345707,
+        "group_quiescent": true,
+        "label": "prepare-index",
+        "owned_new_session": true,
+        "pgid": 24440,
+        "pid": 24440,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-index.stderr",
+        "stderr_snapshot": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-index.stdout",
+        "stdout_snapshot": {
+          "bytes": 1219061,
+          "mode": 33188,
+          "sha256": "fb3187f7317b9194e3c10137c114017ea8d8dca935fac5662a9d5ad54c9ef97c"
+        },
+        "whole_call_seconds": 30
+      },
+      "scope": "inner"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "diff",
+          "--cached",
+          "--name-only",
+          "-z"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.026556666009128094,
+        "group_quiescent": true,
+        "label": "prepare-staged",
+        "owned_new_session": true,
+        "pgid": 24444,
+        "pid": 24444,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-staged.stderr",
+        "stderr_snapshot": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-staged.stdout",
+        "stdout_snapshot": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "whole_call_seconds": 30
+      },
+      "scope": "inner"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "status",
+          "--porcelain=v1",
+          "-z",
+          "--untracked-files=all",
+          "--",
+          "src",
+          "tests",
+          "AGENTS.md",
+          "amiga-test.json",
+          "tools"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.02771920799568761,
+        "group_quiescent": true,
+        "label": "prepare-status",
+        "owned_new_session": true,
+        "pgid": 24445,
+        "pid": 24445,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-status.stderr",
+        "stderr_snapshot": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-status.stdout",
+        "stdout_snapshot": {
+          "bytes": 415,
+          "mode": 33188,
+          "sha256": "683b0b2b900a5b87a36555bf6dfa11d8a7eac816e652cc40a157833b641b63a0"
+        },
+        "whole_call_seconds": 30
+      },
+      "scope": "inner"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "archive",
+          "059145bc4abc7f5619e21c91927cec62110ba243",
+          "src",
+          "tests"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.09270687500247732,
+        "group_quiescent": true,
+        "label": "prepare-archive",
+        "owned_new_session": true,
+        "pgid": 24446,
+        "pid": 24446,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-archive.stderr",
+        "stderr_snapshot": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-archive.stdout",
+        "stdout_snapshot": {
+          "bytes": 6799360,
+          "mode": 33188,
+          "sha256": "b36d79ed8cdcab14e00b89563696cd8630fa6defec437c18762e8e7b029bacbd"
+        },
+        "whole_call_seconds": 30
+      },
+      "scope": "inner"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "show",
+          "059145bc4abc7f5619e21c91927cec62110ba243:vendor/pt23f/raw/ptfont.raw"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.025845540993032046,
+        "group_quiescent": true,
+        "label": "prepare-font",
+        "owned_new_session": true,
+        "pgid": 24458,
+        "pid": 24458,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-font.stderr",
+        "stderr_snapshot": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-font.stdout",
+        "stdout_snapshot": {
+          "bytes": 580,
+          "mode": 33188,
+          "sha256": "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091"
+        },
+        "whole_call_seconds": 30
+      },
+      "scope": "inner"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.016949374999967404,
+        "group_quiescent": true,
+        "label": "precompile-head",
+        "owned_new_session": true,
+        "pgid": 24459,
+        "pid": 24459,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/precompile-head.stderr",
+        "stderr_snapshot": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/precompile-head.stdout",
+        "stdout_snapshot": {
+          "bytes": 41,
+          "mode": 33188,
+          "sha256": "aafffe4bfc7c6ad4507c915e9a29ef0fa8208d7e60db57062384ba50079e71f0"
+        },
+        "whole_call_seconds": 30
+      },
+      "scope": "inner"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "ls-files",
+          "--stage"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.028136000008089468,
+        "group_quiescent": true,
+        "label": "precompile-index",
+        "owned_new_session": true,
+        "pgid": 24460,
+        "pid": 24460,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/precompile-index.stderr",
+        "stderr_snapshot": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/precompile-index.stdout",
+        "stdout_snapshot": {
+          "bytes": 1219061,
+          "mode": 33188,
+          "sha256": "fb3187f7317b9194e3c10137c114017ea8d8dca935fac5662a9d5ad54c9ef97c"
+        },
+        "whole_call_seconds": 30
+      },
+      "scope": "inner"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.025942124993889593,
+        "group_quiescent": true,
+        "label": "postcompile-head",
+        "owned_new_session": true,
+        "pgid": 24592,
+        "pid": 24592,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/postcompile-head.stderr",
+        "stderr_snapshot": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/postcompile-head.stdout",
+        "stdout_snapshot": {
+          "bytes": 41,
+          "mode": 33188,
+          "sha256": "aafffe4bfc7c6ad4507c915e9a29ef0fa8208d7e60db57062384ba50079e71f0"
+        },
+        "whole_call_seconds": 30
+      },
+      "scope": "inner"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "ls-files",
+          "--stage"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.030445625001448207,
+        "group_quiescent": true,
+        "label": "postcompile-index",
+        "owned_new_session": true,
+        "pgid": 24593,
+        "pid": 24593,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/postcompile-index.stderr",
+        "stderr_snapshot": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/postcompile-index.stdout",
+        "stdout_snapshot": {
+          "bytes": 1219061,
+          "mode": 33188,
+          "sha256": "fb3187f7317b9194e3c10137c114017ea8d8dca935fac5662a9d5ad54c9ef97c"
+        },
+        "whole_call_seconds": 30
+      },
+      "scope": "inner"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.017796540996641852,
+        "group_quiescent": true,
+        "label": "prerun-head",
+        "owned_new_session": true,
+        "pgid": 24594,
+        "pid": 24594,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prerun-head.stderr",
+        "stderr_snapshot": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prerun-head.stdout",
+        "stdout_snapshot": {
+          "bytes": 41,
+          "mode": 33188,
+          "sha256": "aafffe4bfc7c6ad4507c915e9a29ef0fa8208d7e60db57062384ba50079e71f0"
+        },
+        "whole_call_seconds": 30
+      },
+      "scope": "inner"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "ls-files",
+          "--stage"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.030654292000690475,
+        "group_quiescent": true,
+        "label": "prerun-index",
+        "owned_new_session": true,
+        "pgid": 24595,
+        "pid": 24595,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prerun-index.stderr",
+        "stderr_snapshot": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prerun-index.stdout",
+        "stdout_snapshot": {
+          "bytes": 1219061,
+          "mode": 33188,
+          "sha256": "fb3187f7317b9194e3c10137c114017ea8d8dca935fac5662a9d5ad54c9ef97c"
+        },
+        "whole_call_seconds": 30
+      },
+      "scope": "inner"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.028065332997357473,
+        "group_quiescent": true,
+        "label": "postrun-head",
+        "owned_new_session": true,
+        "pgid": 24597,
+        "pid": 24597,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/postrun-head.stderr",
+        "stderr_snapshot": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/postrun-head.stdout",
+        "stdout_snapshot": {
+          "bytes": 41,
+          "mode": 33188,
+          "sha256": "aafffe4bfc7c6ad4507c915e9a29ef0fa8208d7e60db57062384ba50079e71f0"
+        },
+        "whole_call_seconds": 30
+      },
+      "scope": "inner"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "ls-files",
+          "--stage"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.03030012499948498,
+        "group_quiescent": true,
+        "label": "postrun-index",
+        "owned_new_session": true,
+        "pgid": 24598,
+        "pid": 24598,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/postrun-index.stderr",
+        "stderr_snapshot": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/postrun-index.stdout",
+        "stdout_snapshot": {
+          "bytes": 1219061,
+          "mode": 33188,
+          "sha256": "fb3187f7317b9194e3c10137c114017ea8d8dca935fac5662a9d5ad54c9ef97c"
+        },
+        "whole_call_seconds": 30
+      },
+      "scope": "inner"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.016855417008628137,
+        "group_quiescent": true,
+        "label": "verify-head",
+        "owned_new_session": true,
+        "pgid": 24599,
+        "pid": 24599,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/verify-head.stderr",
+        "stderr_snapshot": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/verify-head.stdout",
+        "stdout_snapshot": {
+          "bytes": 41,
+          "mode": 33188,
+          "sha256": "aafffe4bfc7c6ad4507c915e9a29ef0fa8208d7e60db57062384ba50079e71f0"
+        },
+        "whole_call_seconds": 30
+      },
+      "scope": "inner"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/git",
+          "ls-files",
+          "--stage"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 30,
+        "elapsed_seconds": 0.02795870800036937,
+        "group_quiescent": true,
+        "label": "verify-index",
+        "owned_new_session": true,
+        "pgid": 24600,
+        "pid": 24600,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/verify-index.stderr",
+        "stderr_snapshot": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/verify-index.stdout",
+        "stdout_snapshot": {
+          "bytes": 1219061,
+          "mode": 33188,
+          "sha256": "fb3187f7317b9194e3c10137c114017ea8d8dca935fac5662a9d5ad54c9ef97c"
+        },
+        "whole_call_seconds": 30
+      },
+      "scope": "inner"
+    },
+    {
+      "row": {
+        "argv": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-Isrc/core",
+          "-I.",
+          "tests/editor_mixed_reader_retirement_test.c",
+          "src/editor/editor_mixed_readers_prepare.c",
+          "src/editor/sampler_mixed_readers.c",
+          "src/core/mixed_readers_activation.c",
+          "src/core/amigus_trigger_levels.c",
+          "src/core/mixed_scheduled_readers.c",
+          "src/core/elapsed_clock.c",
+          "src/editor/sampler_paula.c",
+          "src/editor/sampler_wavetable.c",
+          "src/core/amigus_voice_plan.c",
+          "src/editor/sampler.c",
+          "src/editor/slots.c",
+          "src/core/pcm_filtered.c",
+          "src/core/slices.c",
+          "src/core/pattern.c",
+          "src/core/document.c",
+          "src/core/pp20.c",
+          "src/core/project.c",
+          "src/core/mod_project.c",
+          "src/core/mod_inspect.c",
+          "src/core/channels.c",
+          "src/core/pcm.c",
+          "src/core/wav.c",
+          "src/core/svx.c",
+          "src/core/raw.c",
+          "src/editor/editor.c",
+          "src/editor/song.c",
+          "src/editor/view.c",
+          "src/editor/workflow.c",
+          "src/editor/sample_range.c",
+          "src/editor/wave_summary.c",
+          "src/core/sample_usage.c",
+          "src/core/event_resource.c",
+          "src/core/flow.c",
+          "src/core/pitch.c",
+          "src/core/amigus_reservation.c",
+          "src/editor/sampler_invert_song.c",
+          "src/core/render_invert.c",
+          "src/core/invert_bank.c",
+          "src/core/invert_sequence.c",
+          "src/core/invert_pcm.c",
+          "src/core/invert_loop.c",
+          "src/core/amigus_session.c",
+          "src/core/amigus_fifo.c",
+          "src/core/amigus_pcm_pack.c",
+          "src/core/studio_consumer.c",
+          "src/core/studio_pump.c",
+          "src/core/studio_queue.c",
+          "src/editor/editor_studio.c",
+          "src/editor/sampler_song.c",
+          "src/editor/sampler_studio.c",
+          "src/core/studio_song.c",
+          "src/core/studio_plan.c",
+          "src/core/render.c",
+          "src/core/timeline.c",
+          "src/core/frame_clock.c",
+          "src/core/studio_mix.c",
+          "src/core/voice.c",
+          "src/editor/wavetable_song.c",
+          "src/editor/wavetable_voices.c",
+          "src/editor/wavetable_dispatch.c",
+          "src/core/amigus_render_voice.c",
+          "src/editor/paula_preflight.c",
+          "src/core/paula_render_voice.c",
+          "src/core/amigus_wavetable_cache.c",
+          "src/core/amigus_sample_ram.c",
+          "src/core/sample_cache.c",
+          "src/core/playback_pcm.c",
+          "src/editor/editor_mixed.c",
+          "src/editor/mixed_owner.c",
+          "src/editor/mixed_transport.c",
+          "src/editor/mixed_preflight.c",
+          "src/editor/paula_voices.c",
+          "src/editor/paula_dispatch.c",
+          "src/editor/editor_wavetable.c",
+          "src/platform/sample_import.c",
+          "src/platform/raw_import.c",
+          "src/platform/mod_import.c",
+          "src/platform/pp20_import.c",
+          "-o",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/editor-reader-retirement"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/source",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 120,
+        "elapsed_seconds": 20.40507616600371,
+        "group_quiescent": true,
+        "label": "editor-reader-retirement-compile",
+        "owned_new_session": true,
+        "pgid": 24461,
+        "pid": 24461,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/editor-reader-retirement-compile.stderr",
+        "stderr_snapshot": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/editor-reader-retirement-compile.stdout",
+        "stdout_snapshot": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "whole_call_seconds": 120
+      },
+      "scope": "inner"
+    },
+    {
+      "row": {
+        "argv": [
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/editor-reader-retirement"
+        ],
+        "cleanup_reserve_seconds": 5,
+        "completion_within_effective_deadline": true,
+        "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/source",
+        "driver_reaped": true,
+        "effective_remaining_seconds": 180,
+        "elapsed_seconds": 2.2023462500073947,
+        "group_quiescent": true,
+        "label": "editor-reader-retirement-run",
+        "owned_new_session": true,
+        "pgid": 24596,
+        "pid": 24596,
+        "returncode": 0,
+        "status": "PASS",
+        "stderr": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/editor-reader-retirement-run.stderr",
+        "stderr_snapshot": {
+          "bytes": 0,
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/editor-reader-retirement-run.stdout",
+        "stdout_snapshot": {
+          "bytes": 9005,
+          "mode": 33188,
+          "sha256": "6dedd817eaef84641c9ebf88244202272bf0625ee4806a783a3b8909258f0ee6"
+        },
+        "whole_call_seconds": 180
+      },
+      "scope": "inner"
+    }
+  ],
+  "actual_raw_stream_pins56": {
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/after-head.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/after-head.stdout": {
+      "bytes": 41,
+      "mode": 33188,
+      "sha256": "aafffe4bfc7c6ad4507c915e9a29ef0fa8208d7e60db57062384ba50079e71f0"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/after-index.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/after-index.stdout": {
+      "bytes": 1219061,
+      "mode": 33188,
+      "sha256": "f91bd0a04bf4191d43e0a6b3f30e376313136cdf920c7284bdf261953e3b4cb0"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/after-staged.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/after-staged.stdout": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/after-status.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/after-status.stdout": {
+      "bytes": 415,
+      "mode": 33188,
+      "sha256": "683b0b2b900a5b87a36555bf6dfa11d8a7eac816e652cc40a157833b641b63a0"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/before-branch.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/before-branch.stdout": {
+      "bytes": 31,
+      "mode": 33188,
+      "sha256": "218f389b3beebe94baeef4f4a8f7447956c3b3471d5890c8aabad0d9bf3eb3f9"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/before-head.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/before-head.stdout": {
+      "bytes": 41,
+      "mode": 33188,
+      "sha256": "aafffe4bfc7c6ad4507c915e9a29ef0fa8208d7e60db57062384ba50079e71f0"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/before-index.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/before-index.stdout": {
+      "bytes": 1219061,
+      "mode": 33188,
+      "sha256": "f91bd0a04bf4191d43e0a6b3f30e376313136cdf920c7284bdf261953e3b4cb0"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/before-staged.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/before-staged.stdout": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/before-status.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/before-status.stdout": {
+      "bytes": 415,
+      "mode": 33188,
+      "sha256": "683b0b2b900a5b87a36555bf6dfa11d8a7eac816e652cc40a157833b641b63a0"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/first-qualifier.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-preparation-v6/execution-first-v6/first-qualifier.stdout": {
+      "bytes": 150,
+      "mode": 33188,
+      "sha256": "55dfa2599f8dec702f26472b9d7f34b6c0b618b17d0735136a9d808055611500"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/editor-reader-retirement-compile.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/editor-reader-retirement-compile.stdout": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/editor-reader-retirement-run.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/editor-reader-retirement-run.stdout": {
+      "bytes": 9005,
+      "mode": 33188,
+      "sha256": "6dedd817eaef84641c9ebf88244202272bf0625ee4806a783a3b8909258f0ee6"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/postcompile-head.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/postcompile-head.stdout": {
+      "bytes": 41,
+      "mode": 33188,
+      "sha256": "aafffe4bfc7c6ad4507c915e9a29ef0fa8208d7e60db57062384ba50079e71f0"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/postcompile-index.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/postcompile-index.stdout": {
+      "bytes": 1219061,
+      "mode": 33188,
+      "sha256": "fb3187f7317b9194e3c10137c114017ea8d8dca935fac5662a9d5ad54c9ef97c"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/postrun-head.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/postrun-head.stdout": {
+      "bytes": 41,
+      "mode": 33188,
+      "sha256": "aafffe4bfc7c6ad4507c915e9a29ef0fa8208d7e60db57062384ba50079e71f0"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/postrun-index.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/postrun-index.stdout": {
+      "bytes": 1219061,
+      "mode": 33188,
+      "sha256": "fb3187f7317b9194e3c10137c114017ea8d8dca935fac5662a9d5ad54c9ef97c"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/precompile-head.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/precompile-head.stdout": {
+      "bytes": 41,
+      "mode": 33188,
+      "sha256": "aafffe4bfc7c6ad4507c915e9a29ef0fa8208d7e60db57062384ba50079e71f0"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/precompile-index.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/precompile-index.stdout": {
+      "bytes": 1219061,
+      "mode": 33188,
+      "sha256": "fb3187f7317b9194e3c10137c114017ea8d8dca935fac5662a9d5ad54c9ef97c"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-archive.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-archive.stdout": {
+      "bytes": 6799360,
+      "mode": 33188,
+      "sha256": "b36d79ed8cdcab14e00b89563696cd8630fa6defec437c18762e8e7b029bacbd"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-font.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-font.stdout": {
+      "bytes": 580,
+      "mode": 33188,
+      "sha256": "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-head.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-head.stdout": {
+      "bytes": 41,
+      "mode": 33188,
+      "sha256": "aafffe4bfc7c6ad4507c915e9a29ef0fa8208d7e60db57062384ba50079e71f0"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-index.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-index.stdout": {
+      "bytes": 1219061,
+      "mode": 33188,
+      "sha256": "fb3187f7317b9194e3c10137c114017ea8d8dca935fac5662a9d5ad54c9ef97c"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-staged.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-staged.stdout": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-status.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prepare-status.stdout": {
+      "bytes": 415,
+      "mode": 33188,
+      "sha256": "683b0b2b900a5b87a36555bf6dfa11d8a7eac816e652cc40a157833b641b63a0"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prerun-head.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prerun-head.stdout": {
+      "bytes": 41,
+      "mode": 33188,
+      "sha256": "aafffe4bfc7c6ad4507c915e9a29ef0fa8208d7e60db57062384ba50079e71f0"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prerun-index.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/prerun-index.stdout": {
+      "bytes": 1219061,
+      "mode": 33188,
+      "sha256": "fb3187f7317b9194e3c10137c114017ea8d8dca935fac5662a9d5ad54c9ef97c"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/verify-head.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/verify-head.stdout": {
+      "bytes": 41,
+      "mode": 33188,
+      "sha256": "aafffe4bfc7c6ad4507c915e9a29ef0fa8208d7e60db57062384ba50079e71f0"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/verify-index.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-retirement-host-qualification/attempt-first-v6/verify-index.stdout": {
+      "bytes": 1219061,
+      "mode": 33188,
+      "sha256": "fb3187f7317b9194e3c10137c114017ea8d8dca935fac5662a9d5ad54c9ef97c"
+    }
+  },
+  "actual_source_input_count": 966,
+  "actual_ordered_unit_count": 79,
+  "actual_flags": [
+    "-std=c99",
+    "-O1",
+    "-g",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-UNDEBUG",
+    "-fsanitize=address,undefined",
+    "-Isrc/core",
+    "-I."
+  ],
+  "actual_saved_archive_mode_note": "Saved extraction effective modes follow selected stdlib data filter; header0664 becomes0644. Reviewer read complete tar bodies in memory and extracted no files.",
+  "prior_failures_preserved": {
+    "V3": "FAILED_COMPILE; product NOT RUN",
+    "V4": "FAILED_COMPILE; product NOT RUN",
+    "V5": "Strict compile passed; ASan RUN failed after only 26 lines, never qualified"
+  },
+  "no_qualifier_replay": true,
+  "publication_entries_invoked": false,
+  "repository_adoption": false,
+  "limitations": [
+    "No native/m68k emulator or physical A1200/AmiGUS operation occurred in this HOST evidence.",
+    "No device capacity/completion/ordering, audio/voice-stop/quiet, source readiness authority, exact musical scheduling, IRQ/WCET/stack placement or human listening certificate follows.",
+    "Original V3/V4 COMPILE failures and V5 strict compile pass followed by ASan RUN failure remain immutable separate evidence; V6 success does not retrospectively clear them.",
+    "Raw process IDs describe completed saved owned sessions only; reviewer did not poll or probe them."
+  ]
+}

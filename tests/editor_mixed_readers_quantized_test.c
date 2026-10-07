@@ -368,7 +368,10 @@ static void emq_enqueue_fault(void)
         f->control.command[f->command[0].slot].transferred&&f->control.first_error==PT_EDITOR_MIXED_READERS_FAULT&&!f->port.publishes);
     emp_same(f);emp_drop(f,0);
 }
-int main(void)
+#ifndef PT_EDITOR_MIXED_READERS_QUANTIZED_TEST_MAIN
+#define PT_EDITOR_MIXED_READERS_QUANTIZED_TEST_MAIN main
+#endif
+int PT_EDITOR_MIXED_READERS_QUANTIZED_TEST_MAIN(void)
 {
     unsigned i,bits,cache,little,all_card,order,quantized;
     assert(emq_legacy_main()==0); /* Complete pre-existing positive/ownership suite exactly once. */

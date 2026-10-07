@@ -1,4 +1,5 @@
 #include "editor_mixed_readers_prepare.h"
+#include "editor_mixed_readers_source_internal.h"
 #include "editor_mixed_internal.h"
 #include "project_snapshot.h"
 #include "sampler_internal.h"
@@ -19,6 +20,9 @@ static int inside(struct pt_sampler_storage_span s,const void *p,size_t n)
 static int zero(const void *p,size_t n)
 {const unsigned char *b=p;size_t i;for(i=0;i<n;++i)if(b[i])return 0;return 1;}
 static int finish(void *);
+static int source_identity(struct pt_editor_mixed_readers_prepare *);
+static int source_descriptor(struct pt_editor_mixed_readers_prepare *);
+static int source_fixed(struct pt_editor_mixed_readers_prepare *);
 static int activation_live(const struct pt_editor_mixed_readers_prepare *s)
 {unsigned i;if(!s->activation)return 0;
  for(i=0;i<PT_EDITOR_MIXED_READERS_ORDINARY;++i)
@@ -26,13 +30,14 @@ static int activation_live(const struct pt_editor_mixed_readers_prepare *s)
  return 0;}
 static enum pt_editor_mixed_readers_result fail(struct pt_editor_mixed_readers_prepare *s,
  enum pt_editor_mixed_readers_result r)
-{if(!s->first_error)s->first_error=r;s->result=s->first_error;
+{if(s->source_mode)s->source_cancel_requested=1;
+ if(!s->first_error)s->first_error=r;s->result=s->first_error;
  if((r==PT_EDITOR_MIXED_READERS_FAULT||r==PT_EDITOR_MIXED_READERS_STALE)&&activation_live(s))
     pt_mixed_activation_fail_closed(s->activation);
  if(s->phase!=PT_EDITOR_MIXED_READERS_FINISHED)s->phase=PT_EDITOR_MIXED_READERS_FAILED;
  return s->result;}
 static int reentry(struct pt_editor_mixed_readers_prepare *s)
-{if(!s->busy)return 0;++s->reentries;fail(s,PT_EDITOR_MIXED_READERS_FAULT);return 1;}
+{if(!s->busy&&!s->source_busy)return 0;++s->reentries;fail(s,PT_EDITOR_MIXED_READERS_FAULT);return 1;}
 static int idle(const struct pt_editor_mixed *o)
 {return !o->owner&&!o->transport&&!o->preparation_close&&!o->preparation_context&&
  !o->owner_finish&&!o->owner_finish_context;}
@@ -40,6 +45,7 @@ static int idle(const struct pt_editor_mixed *o)
 static int fixed_current(struct pt_editor_mixed_readers_prepare *s)
 {
  struct pt_editor_mixed *o=s->saved.binding;struct pt_project h;
+ if(s->source_mode&&(!source_descriptor(s)||!s->source_activated))return 0;
  if(o->editor!=s->editor||s->editor->project!=s->project||!pt_editor_mixed_attached(o)||
     o->owner||o->transport||o->owner_finish||o->owner_finish_context||
     o->preparation_close!=finish||o->preparation_context!=s||
@@ -57,34 +63,45 @@ static int callback_covered(const struct pt_editor_mixed_readers_prepare_inputs 
 {return inside(v->contexts,p,n)||inside((struct pt_sampler_storage_span){v->backend,sizeof(*v->backend)},p,n)||
  inside((struct pt_sampler_storage_span){v->backend->reservation,sizeof(*v->backend->reservation)},p,n);}
 static int add(struct pt_editor_mixed_readers_prepare *s,const void *p,size_t n)
-{if(!span(p,n)||s->guard_count>=PT_EDITOR_MIXED_READERS_GUARDS)return 0;
+{unsigned i;if(!span(p,n))return 0;
+ /* Early source capture survives promotion. Retain every old complete extent
+  * while avoiding duplicate numeric recapture of large extension/context sets.
+  * This changes no standalone capture or temporary batch-pair placement. */
+ if(n&&s->source_mode)for(i=0;i<s->guard_count;++i)
+    if(s->guards[i].data==p&&s->guards[i].bytes==n)return 1;
+ if(s->guard_count>=PT_EDITOR_MIXED_READERS_GUARDS)return 0;
  if(n)s->guards[s->guard_count++]=(struct pt_sampler_storage_span){p,n};
  return 1;}
-static int capture(struct pt_editor_mixed_readers_prepare *s)
+static int capture_sources(struct pt_editor_mixed_readers_prepare *s,unsigned require_current)
 {
  struct pt_project *p=s->project;struct pt_sampler *m=&s->editor->sampler;
  struct pt_sampler_storage_span v[PT_SAMPLER_VERSION_SPANS];unsigned i,j,count;
- if(!add(s,p,sizeof(*p))||!add(s,s->editor,sizeof(*s->editor))||
-    !add(s,s->saved.binding,sizeof(*s->saved.binding))||
-    !add(s,s->inputs,sizeof(*s->inputs))||!add(s,s->saved.contexts.data,s->saved.contexts.bytes)||
-    !add(s,s->saved.activation_workspace,s->saved.activation_capacity)||
-    !add(s,s->saved.factory_workspace,s->saved.factory_capacity)||
-    !add(s,s->saved.backend,sizeof(*s->saved.backend))||
-    !add(s,s->saved.backend->reservation,sizeof(*s->saved.backend->reservation))||
-    !add(s,p->samples,(size_t)p->sample_count*sizeof(*p->samples))||
+ if(!add(s,p->samples,(size_t)p->sample_count*sizeof(*p->samples))||
     !add(s,p->orders,(size_t)p->order_count*sizeof(*p->orders))||
     !add(s,p->events,(size_t)p->pattern_count*PT_PROJECT_ROWS*p->channels.count*sizeof(*p->events))||
     !add(s,p->extensions,(size_t)p->extension_count*sizeof(*p->extensions))||
     !add(s,m->table,m->table_bytes)||
     !add(s,m->table_original,m->table_original?(size_t)p->sample_count*sizeof(*p->samples):0))return 0;
  for(i=0;i<p->sample_count;++i){const struct pt_sample *a=p->samples+i;
-    if(!m->current[i]||a->pcm.capacity>SIZE_MAX/sizeof(int32_t)||
+    if((require_current&&!m->current[i])||a->pcm.capacity>SIZE_MAX/sizeof(int32_t)||
        !add(s,a->pcm.data,a->pcm.capacity*sizeof(int32_t))||
        !add(s,a->slices,(size_t)a->slice_count*sizeof(uint32_t)))return 0;}
  for(i=0;i<p->extension_count;++i)if(!add(s,p->extensions[i].data,p->extensions[i].length))return 0;
  for(i=0;i<PT_PROJECT_SAMPLES;++i)if(m->current[i]){
     if(!pt_sampler_version_spans(m->current[i],v,PT_SAMPLER_VERSION_SPANS,&count))return 0;
     for(j=0;j<count;++j)if(!add(s,v[j].data,v[j].bytes))return 0;}
+ return 1;
+}
+static int capture(struct pt_editor_mixed_readers_prepare *s)
+{
+ struct pt_project *p=s->project;
+ if(!add(s,p,sizeof(*p))||!add(s,s->editor,sizeof(*s->editor))||
+    !add(s,s->saved.binding,sizeof(*s->saved.binding))||
+    !add(s,s->inputs,sizeof(*s->inputs))||!add(s,s->saved.contexts.data,s->saved.contexts.bytes)||
+    !add(s,s->saved.activation_workspace,s->saved.activation_capacity)||
+    !add(s,s->saved.factory_workspace,s->saved.factory_capacity)||
+    !add(s,s->saved.backend,sizeof(*s->saved.backend))||
+    !add(s,s->saved.backend->reservation,sizeof(*s->saved.backend->reservation))||!capture_sources(s,1))return 0;
  return 1;
 }
 /* Numeric captured guards remain readable after source staleness. No master,
@@ -98,6 +115,13 @@ static int output_apart(struct pt_editor_mixed_readers_prepare *s,const void *p,
  for(i=0;i<PT_EDITOR_MIXED_READERS_CHIP;++i)
     if(!apart(p,n,s->chip[i].data,s->chip[i].bytes))return 0;
  return !s->queue||pt_mixed_readers_output_disjoint(s->queue,p,n);
+}
+static int allocation_apart(struct pt_editor_mixed_readers_prepare *s,const void *p,size_t n)
+{
+ unsigned i;if(!output_apart(s,p,n))return 0;
+ for(i=0;i<s->source_mutable_count;++i)
+    if(!apart(p,n,s->source_mutable[i].data,s->source_mutable[i].bytes))return 0;
+ return 1;
 }
 /* Local scratch is not initialized before its whole span is admitted. Accept
  * only the numeric address value, then use the identical full-width readonly
@@ -118,7 +142,7 @@ static void *guard_allocate(void *context,size_t n)
  if(!s->busy||s->closing||s->first_error||!fixed_current(s))return NULL;
  p=s->saved.activation.allocator.allocate(s->saved.activation.allocator.context,n);
  if(!p)return NULL;
- if(!output_apart(s,p,n)){fail(s,PT_EDITOR_MIXED_READERS_FAULT);return NULL;}
+ if(!allocation_apart(s,p,n)){fail(s,PT_EDITOR_MIXED_READERS_FAULT);return NULL;}
  if(!remember(s->ordinary,PT_EDITOR_MIXED_READERS_ORDINARY,p,n)){
     fail(s,PT_EDITOR_MIXED_READERS_FAULT);
     s->saved.activation.allocator.release(s->saved.activation.allocator.context,p);return NULL;}
@@ -147,7 +171,7 @@ static void *guard_chip_allocate(void *context,size_t n)
  struct pt_editor_mixed_readers_prepare *s=context;void *p;unsigned before=s->reentries;
  if(!s->busy||s->closing||s->first_error||!fixed_current(s))return NULL;
  p=s->saved.chip_allocate(s->saved.chip_context,n);if(!p)return NULL;
- if(!output_apart(s,p,n)){fail(s,PT_EDITOR_MIXED_READERS_FAULT);return NULL;}
+ if(!allocation_apart(s,p,n)){fail(s,PT_EDITOR_MIXED_READERS_FAULT);return NULL;}
  if(!remember(s->chip,PT_EDITOR_MIXED_READERS_CHIP,p,n)){
     fail(s,PT_EDITOR_MIXED_READERS_FAULT);s->saved.chip_release(s->saved.chip_context,p,n);return NULL;}
  if(before!=s->reentries||s->first_error||!fixed_current(s)){
@@ -166,7 +190,7 @@ static void guard_chip_release(void *context,void *p,size_t n)
 }
 static int hook_owned(struct pt_editor_mixed_readers_prepare *s)
 {struct pt_editor_mixed *o=s->saved.binding;
- return o->editor==s->editor&&pt_editor_mixed_attached(o)&&!o->owner&&!o->transport&&
+ return (!s->source_mode||source_identity(s))&&o->editor==s->editor&&pt_editor_mixed_attached(o)&&!o->owner&&!o->transport&&
  !o->owner_finish&&!o->owner_finish_context&&o->preparation_close==finish&&o->preparation_context==s;}
 static int post(struct pt_editor_mixed_readers_prepare *s)
 {if(!fixed_current(s)){fail(s,PT_EDITOR_MIXED_READERS_STALE);return 0;}return !s->first_error;}
@@ -253,24 +277,13 @@ static enum pt_editor_mixed_readers_result factory_result(struct pt_editor_mixed
  case PT_SAMPLER_MIXED_STALE:return fail(s,PT_EDITOR_MIXED_READERS_STALE);
  default:return fail(s,PT_EDITOR_MIXED_READERS_FAULT);}}
 
-enum pt_editor_mixed_readers_result pt_editor_mixed_readers_prepare_begin(
- struct pt_editor_mixed_readers_prepare *s,const struct pt_editor_mixed_readers_prepare_inputs *in)
+static int prepare_admit(struct pt_editor_mixed_readers_prepare *s,
+ const struct pt_editor_mixed_readers_prepare_inputs *in)
 {
  struct pt_editor_mixed_readers_prepare_inputs v;struct pt_editor_mixed *o;
  struct pt_sampler_storage_span control[5];const void *opaque[7];size_t sizes[7];unsigned i,j;
  if(!span(s,sizeof(*s))||!s||(uintptr_t)s%ALIGN_OF(struct pt_editor_mixed_readers_prepare)||
-    !span(in,sizeof(*in))||!in||!apart(s,sizeof(*s),in,sizeof(*in)))return PT_EDITOR_MIXED_READERS_INVALID;
- /* An adopted genuine controller has already captured its complete input
-  * extent. Refuse reuse without touching expired source arrays or workspaces.
-  * Only the admitted original input may enter the busy reentry fault path,
-  * after its exact captured numeric extent and live fixed hook are checked. */
- if(s->phase){unsigned captured=0;
-    if(!s->busy||in!=s->inputs||!s->hook||s->guard_count>PT_EDITOR_MIXED_READERS_GUARDS)
-       return PT_EDITOR_MIXED_READERS_INVALID;
-    for(i=0;i<s->guard_count;++i)if(s->guards[i].data==in&&s->guards[i].bytes==sizeof(*in))captured=1;
-    if(!captured||!hook_owned(s))return PT_EDITOR_MIXED_READERS_INVALID;
-    (void)reentry(s);return s->result;
- }
+    !span(in,sizeof(*in))||!in||!apart(s,sizeof(*s),in,sizeof(*in)))return 0;
  memcpy(&v,in,sizeof(v));o=v.binding;
  if(!span(o,sizeof(*o))||!o||(uintptr_t)o%ALIGN_OF(struct pt_editor_mixed)||
     !span(o->editor,sizeof(*o->editor))||!o->editor||(uintptr_t)o->editor%ALIGN_OF(struct pt_editor)||
@@ -303,27 +316,291 @@ enum pt_editor_mixed_readers_result pt_editor_mixed_readers_prepare_begin(
     !apart(v.activation_workspace,v.activation_capacity,v.contexts.data,v.contexts.bytes)||
     !apart(v.factory_workspace,v.factory_capacity,v.contexts.data,v.contexts.bytes)||
     !zero(v.activation_workspace,pt_mixed_activation_workspace_size())||
-    !zero(v.factory_workspace,pt_sampler_mixed_workspace_size()))return PT_EDITOR_MIXED_READERS_INVALID;
+    !zero(v.factory_workspace,pt_sampler_mixed_workspace_size()))return 0;
  control[0]=(struct pt_sampler_storage_span){o,sizeof(*o)};
  control[1]=(struct pt_sampler_storage_span){o->editor,sizeof(*o->editor)};
  control[2]=(struct pt_sampler_storage_span){v.backend,sizeof(*v.backend)};
  control[3]=(struct pt_sampler_storage_span){v.backend->reservation,sizeof(*v.backend->reservation)};
  control[4]=(struct pt_sampler_storage_span){in,sizeof(*in)};
  for(i=0;i<5;++i){
-    if(i<4&&!apart(v.contexts.data,v.contexts.bytes,control[i].data,control[i].bytes))return PT_EDITOR_MIXED_READERS_INVALID;
+    if(i<4&&!apart(v.contexts.data,v.contexts.bytes,control[i].data,control[i].bytes))return 0;
     if(!apart(v.activation_workspace,v.activation_capacity,control[i].data,control[i].bytes)||
-       !apart(v.factory_workspace,v.factory_capacity,control[i].data,control[i].bytes))return PT_EDITOR_MIXED_READERS_INVALID;
-    for(j=i+1;j<5;++j)if(!apart(control[i].data,control[i].bytes,control[j].data,control[j].bytes))return PT_EDITOR_MIXED_READERS_INVALID;}
+       !apart(v.factory_workspace,v.factory_capacity,control[i].data,control[i].bytes))return 0;
+    for(j=i+1;j<5;++j)if(!apart(control[i].data,control[i].bytes,control[j].data,control[j].bytes))return 0;}
  opaque[0]=v.activation.allocator.context;opaque[1]=o->editor->sampler.allocator.context;
  opaque[2]=o->editor->sampler.progress_context;opaque[3]=v.chip_context;
  opaque[4]=v.activation.port.context;opaque[5]=v.backend->context;opaque[6]=v.backend->reservation->api.context;
  for(i=0;i<7;++i){sizes[i]=i==4?v.activation.port.context_bytes:1;
     if(opaque[i]&&(!(i>=5?callback_covered(&v,opaque[i],sizes[i]):inside(v.contexts,opaque[i],sizes[i]))||
-       !apart(opaque[i],sizes[i],s,sizeof(*s))||!apart(opaque[i],sizes[i],in,sizeof(*in))))return PT_EDITOR_MIXED_READERS_INVALID;}
+       !apart(opaque[i],sizes[i],s,sizeof(*s))||!apart(opaque[i],sizes[i],in,sizeof(*in))))return 0;}
  if(v.backend->arena.context&&(!callback_covered(&v,v.backend->arena.context,1)||
-    !apart(v.backend->arena.context,1,s,sizeof(*s))||!apart(v.backend->arena.context,1,in,sizeof(*in))))return PT_EDITOR_MIXED_READERS_INVALID;
+    !apart(v.backend->arena.context,1,s,sizeof(*s))||!apart(v.backend->arena.context,1,in,sizeof(*in))))return 0;
  if(v.backend->cache.context&&(!callback_covered(&v,v.backend->cache.context,1)||
-    !apart(v.backend->cache.context,1,s,sizeof(*s))||!apart(v.backend->cache.context,1,in,sizeof(*in))))return PT_EDITOR_MIXED_READERS_INVALID;
+    !apart(v.backend->cache.context,1,s,sizeof(*s))||!apart(v.backend->cache.context,1,in,sizeof(*in))))return 0;
+ return 1;
+}
+
+/* Fixed controller-issued source identity. No outer callback or external
+ * establishment/audit/producer symbol is linked by this controller. */
+static uint64_t source_next_serial=1;
+static int source_identity(struct pt_editor_mixed_readers_prepare *s)
+{
+ const struct pt_editor_mixed_source_borrow *b=s->source_publisher;
+ if(!s->source_mode||!s->source_serial||!b||s->saved.binding!=s->source_binding)return 0;
+ if(s->source_held)return !s->source_released&&b->address==s&&b->serial==s->source_serial;
+ return s->source_released&&!b->address&&!b->serial;
+}
+static int source_original(struct pt_editor_mixed_readers_prepare *s,
+ const struct pt_editor_mixed_source_borrow *b)
+{return s&&b&&b==s->source_publisher&&s->source_held&&source_identity(s)&&hook_owned(s);}
+static int source_descriptor(struct pt_editor_mixed_readers_prepare *s)
+{
+ const struct pt_editor_mixed_source_inputs *v=s->source_inputs;
+ if(!source_identity(s)||!v||v->binding!=s->source_binding||
+    v->preparation!=s->source_preparation||v->contexts.data!=s->source_contexts.data||
+    v->contexts.bytes!=s->source_contexts.bytes||
+    v->activation_workspace.data!=s->source_activation_workspace.data||
+    v->activation_workspace.bytes!=s->source_activation_workspace.bytes||
+    v->factory_workspace.data!=s->source_factory_workspace.data||
+    v->factory_workspace.bytes!=s->source_factory_workspace.bytes||
+    v->backend_parent.data!=s->source_backend_parent.data||
+    v->backend_parent.bytes!=s->source_backend_parent.bytes||
+    v->immutable_count!=s->source_immutable_count||
+    v->mutable_count!=s->source_mutable_count||
+    memcmp(v->immutable,s->source_immutable,sizeof(s->source_immutable))||
+    memcmp(v->mutable,s->source_mutable,sizeof(s->source_mutable)))return 0;
+ return 1;
+}
+static int source_fixed(struct pt_editor_mixed_readers_prepare *s)
+{
+ struct pt_editor_mixed *o=s->source_binding;struct pt_sampler m;struct pt_project h;unsigned i;
+ if(!source_descriptor(s)||!o||!hook_owned(s)||o->editor!=s->editor||
+    s->editor->project!=s->project||s->editor->history.revision!=s->revision||
+    s->editor->sampler.generation!=s->generation)return 0;
+ if(s->source_activated)return fixed_current(s);
+ /* Only genuine producer calls may establish previously absent current slots.
+  * The seam permits their header changes; it does not certify their semantics.
+  * Existing current identities and all fixed allocator/table/budget fields stay.
+  * No former descriptor table or value is traversed by this fixed check. */
+ memcpy(&m,&s->editor->sampler,sizeof(m));
+ if(m.bytes<s->sampler_header.bytes||m.bytes>m.budget)return 0;
+ for(i=0;i<PT_PROJECT_SAMPLES;++i){
+    if(s->sampler_header.current[i]&&m.current[i]!=s->sampler_header.current[i])return 0;
+    m.current[i]=s->sampler_header.current[i];}
+ m.bytes=s->sampler_header.bytes;
+ if(memcmp(&m,&s->sampler_header,sizeof(m)))return 0;
+ memcpy(&h,&s->project_header,sizeof(h));h.channels.selected=s->project->channels.selected;
+ return pt_project_snapshot_equal(s->project,&h);
+}
+static int source_empty(struct pt_editor_mixed_readers_prepare *s)
+{
+ unsigned i;if(s->activation||s->queue||s->pool)return 0;
+ for(i=0;i<PT_SAMPLER_MIXED_COMMANDS;++i)if(s->command[i].handle.address||s->command[i].handle.token)return 0;
+ for(i=0;i<PT_SAMPLER_MIXED_READERS;++i)if(s->reader[i].handle.address||s->reader[i].handle.token)return 0;
+ for(i=0;i<PT_EDITOR_MIXED_READERS_ORDINARY;++i)if(s->ordinary[i].data||s->ordinary[i].bytes)return 0;
+ for(i=0;i<PT_EDITOR_MIXED_READERS_CHIP;++i)if(s->chip[i].data||s->chip[i].bytes)return 0;
+ return 1;
+}
+/* Named full immutable roles are the only construction-storage exemptions.
+ * No future preparation fields or pointed-to backend/reservation bytes are read
+ * at SOURCE begin. A full parent is never replaced by a typed child extent. */
+static int source_role_declared(const struct pt_editor_mixed_source_inputs *v,
+ struct pt_sampler_storage_span role)
+{
+ unsigned i;if(!role.bytes||!span(role.data,role.bytes))return 0;
+ for(i=0;i<v->immutable_count;++i)if(v->immutable[i].data==role.data&&v->immutable[i].bytes==role.bytes)return 1;
+ return 0;
+}
+static int source_role_apart(struct pt_editor_mixed_readers_prepare *s,const void *p,size_t bytes,
+ struct pt_sampler_storage_span permitted)
+{
+ unsigned i;if(s->guard_count>PT_EDITOR_MIXED_READERS_GUARDS||
+    !inside(permitted,p,bytes)||!apart(p,bytes,s,sizeof(*s)))return 0;
+ for(i=0;i<s->guard_count;++i){const struct pt_sampler_storage_span *g=s->guards+i;
+    if(g->data==permitted.data&&g->bytes==permitted.bytes)continue;
+    if(!apart(p,bytes,g->data,g->bytes))return 0;}
+ for(i=0;i<s->source_mutable_count;++i)
+    if(!apart(p,bytes,s->source_mutable[i].data,s->source_mutable[i].bytes))return 0;
+ return 1;
+}
+static int source_roles_current(struct pt_editor_mixed_readers_prepare *s,
+ const struct pt_editor_mixed_readers_prepare_inputs *in)
+{
+ struct pt_amigus_wavetable_cache *backend=in->backend;
+ struct pt_amigus_reservation *reservation;
+ /* Exact whole workspace identities precede the old zero-read admission.
+  * Admit the backend object numerically before its reservation pointer read. */
+ if(in->activation_workspace!=s->source_activation_workspace.data||
+    in->activation_capacity!=s->source_activation_workspace.bytes||
+    in->factory_workspace!=s->source_factory_workspace.data||
+    in->factory_capacity!=s->source_factory_workspace.bytes||
+    !source_role_apart(s,in->activation_workspace,in->activation_capacity,s->source_activation_workspace)||
+    !source_role_apart(s,in->factory_workspace,in->factory_capacity,s->source_factory_workspace)||
+    !backend||(uintptr_t)backend%ALIGN_OF(struct pt_amigus_wavetable_cache)||
+    !source_role_apart(s,backend,sizeof(*backend),s->source_backend_parent))return 0;
+ reservation=backend->reservation;
+ return reservation&&!((uintptr_t)reservation%ALIGN_OF(struct pt_amigus_reservation))&&
+    source_role_apart(s,reservation,sizeof(*reservation),s->source_backend_parent);
+}
+enum pt_editor_mixed_readers_result pt_editor_mixed_source_begin(
+ struct pt_editor_mixed_readers_prepare *s,const struct pt_editor_mixed_source_inputs *in,
+ struct pt_editor_mixed_source_borrow *out)
+{
+ struct pt_editor_mixed_source_inputs v;struct pt_editor_mixed *o;
+ struct pt_sampler_storage_span declared[PT_EDITOR_MIXED_SOURCE_SPANS];unsigned i,j,n;
+ if(!s||!in||!out||!span(s,sizeof(*s))||!span(in,sizeof(*in))||!span(out,sizeof(*out))||
+    (uintptr_t)s%ALIGN_OF(struct pt_editor_mixed_readers_prepare)||
+    (uintptr_t)in%ALIGN_OF(struct pt_editor_mixed_source_inputs)||
+    (uintptr_t)out%ALIGN_OF(struct pt_editor_mixed_source_borrow)||
+    !apart(s,sizeof(*s),in,sizeof(*in))||!apart(s,sizeof(*s),out,sizeof(*out))||
+    !apart(in,sizeof(*in),out,sizeof(*out))||!zero(s,sizeof(*s))||out->address||out->serial||
+    !source_next_serial||source_next_serial==UINT64_MAX)return PT_EDITOR_MIXED_READERS_INVALID;
+ memcpy(&v,in,sizeof(v));o=v.binding;
+ if(!o||!span(o,sizeof(*o))||(uintptr_t)o%ALIGN_OF(struct pt_editor_mixed)||!o->editor||
+    !span(o->editor,sizeof(*o->editor))||(uintptr_t)o->editor%ALIGN_OF(struct pt_editor)||
+    !pt_editor_mixed_attached(o)||!idle(o)||!v.preparation||!span(v.preparation,sizeof(*v.preparation))||
+    (uintptr_t)v.preparation%ALIGN_OF(struct pt_editor_mixed_readers_prepare_inputs)||
+    !inside(v.contexts,s,sizeof(*s))||!source_apart(o,v.contexts.data,v.contexts.bytes)||
+    !source_apart(o,in,sizeof(*in))||!source_apart(o,out,sizeof(*out))||
+    !source_apart(o,v.preparation,sizeof(*v.preparation))||
+    !apart(v.contexts.data,v.contexts.bytes,in,sizeof(*in))||
+    !apart(v.contexts.data,v.contexts.bytes,out,sizeof(*out))||
+    !apart(v.preparation,sizeof(*v.preparation),s,sizeof(*s))||
+    !apart(v.preparation,sizeof(*v.preparation),in,sizeof(*in))||
+    !apart(v.preparation,sizeof(*v.preparation),out,sizeof(*out))||
+    (!inside(v.contexts,v.preparation,sizeof(*v.preparation))&&
+      !apart(v.contexts.data,v.contexts.bytes,v.preparation,sizeof(*v.preparation)))||
+    v.immutable_count>PT_EDITOR_MIXED_SOURCE_SPANS||
+    v.mutable_count>PT_EDITOR_MIXED_SOURCE_SPANS-v.immutable_count)return PT_EDITOR_MIXED_READERS_INVALID;
+ if(o->editor->sampler.allocator.context&&
+    (!inside(v.contexts,o->editor->sampler.allocator.context,1)||
+     !apart(o->editor->sampler.allocator.context,1,s,sizeof(*s))))return PT_EDITOR_MIXED_READERS_INVALID;
+ if(o->editor->sampler.progress_context&&
+    (!inside(v.contexts,o->editor->sampler.progress_context,1)||
+     !apart(o->editor->sampler.progress_context,1,s,sizeof(*s))))return PT_EDITOR_MIXED_READERS_INVALID;
+ n=v.immutable_count+v.mutable_count;
+ for(i=0;i<PT_EDITOR_MIXED_SOURCE_SPANS;++i){
+    if(i>=v.immutable_count&&(v.immutable[i].data||v.immutable[i].bytes))return PT_EDITOR_MIXED_READERS_INVALID;
+    if(i>=v.mutable_count&&(v.mutable[i].data||v.mutable[i].bytes))return PT_EDITOR_MIXED_READERS_INVALID;}
+ for(i=0;i<n;++i){declared[i]=i<v.immutable_count?v.immutable[i]:v.mutable[i-v.immutable_count];
+    if(!declared[i].bytes||!source_apart(o,declared[i].data,declared[i].bytes)||
+       !apart(declared[i].data,declared[i].bytes,v.contexts.data,v.contexts.bytes)||
+       !apart(declared[i].data,declared[i].bytes,in,sizeof(*in))||
+       !apart(declared[i].data,declared[i].bytes,out,sizeof(*out))||
+       !apart(declared[i].data,declared[i].bytes,v.preparation,sizeof(*v.preparation)))return PT_EDITOR_MIXED_READERS_INVALID;
+    for(j=0;j<i;++j)if(!apart(declared[i].data,declared[i].bytes,declared[j].data,declared[j].bytes))return PT_EDITOR_MIXED_READERS_INVALID;}
+ if(!source_role_declared(&v,v.activation_workspace)||!source_role_declared(&v,v.factory_workspace)||
+    !source_role_declared(&v,v.backend_parent)||
+    !apart(v.activation_workspace.data,v.activation_workspace.bytes,v.factory_workspace.data,v.factory_workspace.bytes)||
+    !apart(v.activation_workspace.data,v.activation_workspace.bytes,v.backend_parent.data,v.backend_parent.bytes)||
+    !apart(v.factory_workspace.data,v.factory_workspace.bytes,v.backend_parent.data,v.backend_parent.bytes))return PT_EDITOR_MIXED_READERS_INVALID;
+ s->source_mode=s->source_held=1;s->source_inputs=in;s->source_preparation=v.preparation;
+ s->source_publisher=out;s->source_binding=o;s->source_contexts=v.contexts;
+ s->source_activation_workspace=v.activation_workspace;s->source_factory_workspace=v.factory_workspace;
+ s->source_backend_parent=v.backend_parent;
+ s->source_immutable_count=v.immutable_count;s->source_mutable_count=v.mutable_count;
+ memcpy(s->source_immutable,v.immutable,sizeof(v.immutable));memcpy(s->source_mutable,v.mutable,sizeof(v.mutable));
+ s->saved.binding=o;s->editor=o->editor;s->project=o->editor->project;
+ memcpy(&s->project_header,s->project,sizeof(s->project_header));
+ memcpy(&s->sampler_header,&s->editor->sampler,sizeof(s->sampler_header));
+ s->revision=s->editor->history.revision;s->generation=s->editor->sampler.generation;
+ if(!add(s,s->project,sizeof(*s->project))||!add(s,s->editor,sizeof(*s->editor))||
+    !add(s,o,sizeof(*o))||!add(s,in,sizeof(*in))||!add(s,v.contexts.data,v.contexts.bytes)||
+    !add(s,v.preparation,sizeof(*v.preparation))||!capture_sources(s,0))goto refused;
+ for(i=0;i<v.immutable_count;++i)if(!add(s,v.immutable[i].data,v.immutable[i].bytes))goto refused;
+ s->source_publisher_guard=s->guard_count;if(!add(s,out,sizeof(*out)))goto refused;
+ s->source_serial=source_next_serial++;s->phase=PT_EDITOR_MIXED_READERS_SOURCE;
+ s->result=PT_EDITOR_MIXED_READERS_PENDING;s->hook=1;
+ o->preparation_close=finish;o->preparation_context=s;
+ out->address=s;out->serial=s->source_serial;
+ return s->result;
+refused:
+ memset(s,0,sizeof(*s));return PT_EDITOR_MIXED_READERS_INVALID;
+}
+enum pt_editor_mixed_readers_result pt_editor_mixed_source_activate(
+ struct pt_editor_mixed_readers_prepare *s,const struct pt_editor_mixed_source_borrow *b,
+ const struct pt_editor_mixed_readers_prepare_inputs *in)
+{
+ struct pt_editor_mixed_readers_prepare_inputs old;unsigned count;
+ if(!source_original(s,b)||in!=s->source_preparation)return PT_EDITOR_MIXED_READERS_INVALID;
+ if(reentry(s))return s->result;
+ if(s->source_activated||s->source_cancel_requested||s->first_error||
+    !source_fixed(s)||!source_roles_current(s,in)||!prepare_admit(s,in)||in->binding!=s->source_binding||
+    in->contexts.data!=s->source_contexts.data||in->contexts.bytes!=s->source_contexts.bytes)
+    return PT_EDITOR_MIXED_READERS_INVALID;
+ /* Earlier immutable/mutable buffer guards must not be weakened by a later
+  * constructor. Workspaces/card/reservation are admitted full original spans. */
+ if(!inside(s->source_contexts,in,sizeof(*in))&&
+    !apart(in,sizeof(*in),s->source_contexts.data,s->source_contexts.bytes))return PT_EDITOR_MIXED_READERS_INVALID;
+ count=s->guard_count;memcpy(&old,&s->saved,sizeof(old));s->inputs=in;memcpy(&s->saved,in,sizeof(s->saved));
+ if(!capture(s)){s->guard_count=count;s->inputs=NULL;memcpy(&s->saved,&old,sizeof(old));return PT_EDITOR_MIXED_READERS_INVALID;}
+ memcpy(&s->project_header,s->project,sizeof(s->project_header));
+ memcpy(&s->sampler_header,&s->editor->sampler,sizeof(s->sampler_header));
+ s->allocator=(struct pt_allocator){s,guard_allocate,guard_release};s->callback.owner=s;
+ s->source_activated=1;s->source_drained=0;s->phase=PT_EDITOR_MIXED_READERS_ACTIVATION;
+ s->result=PT_EDITOR_MIXED_READERS_PENDING;return s->result;
+}
+int pt_editor_mixed_source_children_closed(struct pt_editor_mixed_readers_prepare *s,
+ const struct pt_editor_mixed_source_borrow *b)
+{return source_original(s,b)&&!s->busy&&!s->source_busy&&!s->closing&&source_empty(s);}
+int pt_editor_mixed_source_enter(const struct pt_editor_mixed_source_borrow *b)
+{
+ struct pt_editor_mixed_readers_prepare *s;
+ if(!b||!b->address||!(s=b->address)||!source_original(s,b))return 0;
+ if(reentry(s))return 0;
+ if(!source_fixed(s))fail(s,PT_EDITOR_MIXED_READERS_STALE);
+ s->source_busy=1;return 1;
+}
+int pt_editor_mixed_source_leave(const struct pt_editor_mixed_source_borrow *b)
+{
+ struct pt_editor_mixed_readers_prepare *s;
+ if(!b||!b->address||!(s=b->address)||!source_original(s,b)||!s->source_busy)return 0;
+ /* Clear only the exact original active latch. Actual external outcomes must
+  * already be retained; no callback/child cleanup/source traversal occurs. */
+ s->source_busy=0;if(!source_fixed(s))fail(s,PT_EDITOR_MIXED_READERS_STALE);
+ return 1;
+}
+int pt_editor_mixed_source_borrow_close(struct pt_editor_mixed_source_borrow *b)
+{
+ struct pt_editor_mixed_readers_prepare *s;unsigned i;
+ if(!b||!span(b,sizeof(*b))||(uintptr_t)b%ALIGN_OF(struct pt_editor_mixed_source_borrow))return 0;
+ if(!b->address&&!b->serial)return 1;
+ s=b->address;if(!source_original(s,b)||!pt_editor_mixed_source_children_closed(s,b)||
+    s->source_publisher_guard>=s->guard_count)return 0;
+ /* Exempt exactly the original separately admitted publisher, never its parent
+  * or another guard. Stale cleanup uses only the captured numeric extents. */
+ if(s->guards[s->source_publisher_guard].data!=b||s->guards[s->source_publisher_guard].bytes!=sizeof(*b)||
+    !apart(b,sizeof(*b),s,sizeof(*s)))return 0;
+ for(i=0;i<s->guard_count;++i)if(i!=s->source_publisher_guard&&
+    !apart(b,sizeof(*b),s->guards[i].data,s->guards[i].bytes))return 0;
+ for(i=0;i<s->source_mutable_count;++i)if(!apart(b,sizeof(*b),s->source_mutable[i].data,s->source_mutable[i].bytes))return 0;
+ /* Closure cannot reopen preparation after the producer releases its pins.
+  * Actual children are already empty: this is a local cancellation latch only. */
+ fail(s,PT_EDITOR_MIXED_READERS_CANCELLED);
+ s->source_held=0;s->source_released=s->source_drained=1;
+ b->address=NULL;b->serial=0;return 1;
+}
+
+enum pt_editor_mixed_readers_result pt_editor_mixed_readers_prepare_begin(
+ struct pt_editor_mixed_readers_prepare *s,const struct pt_editor_mixed_readers_prepare_inputs *in)
+{
+ struct pt_editor_mixed_readers_prepare_inputs v;struct pt_editor_mixed *o;
+ unsigned i;
+ if(!span(s,sizeof(*s))||!s||(uintptr_t)s%ALIGN_OF(struct pt_editor_mixed_readers_prepare)||
+    !span(in,sizeof(*in))||!in||!apart(s,sizeof(*s),in,sizeof(*in)))return PT_EDITOR_MIXED_READERS_INVALID;
+ /* An adopted genuine controller has already captured its complete input
+  * extent. Refuse reuse without touching expired source arrays or workspaces.
+  * Only the admitted original input may enter the busy reentry fault path,
+  * after its exact captured numeric extent and live fixed hook are checked. */
+ if(s->phase){unsigned captured=0;
+    if(!s->busy||in!=s->inputs||!s->hook||s->guard_count>PT_EDITOR_MIXED_READERS_GUARDS)
+       return PT_EDITOR_MIXED_READERS_INVALID;
+    for(i=0;i<s->guard_count;++i)if(s->guards[i].data==in&&s->guards[i].bytes==sizeof(*in))captured=1;
+    if(!captured||!hook_owned(s))return PT_EDITOR_MIXED_READERS_INVALID;
+    (void)reentry(s);return s->result;
+ }
+ if(!prepare_admit(s,in))return PT_EDITOR_MIXED_READERS_INVALID;
+ memcpy(&v,in,sizeof(v));o=v.binding;
  if(!idle(o)||!zero(s,sizeof(*s)))return PT_EDITOR_MIXED_READERS_INVALID;
  s->inputs=in;memcpy(&s->saved,&v,sizeof(v));s->editor=o->editor;s->project=o->editor->project;
  memcpy(&s->project_header,s->project,sizeof(s->project_header));
@@ -342,6 +619,7 @@ enum pt_editor_mixed_readers_result pt_editor_mixed_readers_prepare_get(struct p
 {if(!s||!s->phase)return PT_EDITOR_MIXED_READERS_INVALID;
  if(reentry(s))return s->result;
  if(s->phase==PT_EDITOR_MIXED_READERS_FINISHED)return s->result;
+ if(s->source_mode&&!s->source_activated)return PT_EDITOR_MIXED_READERS_INVALID;
  if(!fixed_current(s))return fail(s,PT_EDITOR_MIXED_READERS_STALE);
  return s->first_error?s->result:(s->phase==PT_EDITOR_MIXED_READERS_REQUESTS?PT_EDITOR_MIXED_READERS_OPEN:PT_EDITOR_MIXED_READERS_PENDING);}
 
@@ -544,7 +822,8 @@ static enum pt_editor_mixed_readers_result batch_begin_private(
  struct batch_scratch b;struct pt_editor_mixed_command_record *c;
  struct pt_editor_mixed_reader_record *rr;enum pt_sampler_mixed_result fr;
  enum pt_editor_mixed_readers_result r;unsigned i,ci,free_readers=0,needed=0;
- if(!s||!s->phase||s->phase==PT_EDITOR_MIXED_READERS_FINISHED||!count||count>PT_SAMPLER_MIXED_ACTIONS||
+ if(!s||!s->phase||s->phase==PT_EDITOR_MIXED_READERS_FINISHED||
+    (s->source_mode&&!s->source_activated)||!count||count>PT_SAMPLER_MIXED_ACTIONS||
     !batch_spans(s,original,bytes,out,(uintptr_t)&b,sizeof(b)))return PT_EDITOR_MIXED_READERS_INVALID;
  /* Reserve BEFORE scratch writes, writable reentry/fault or callback entry. */
  if(s->guard_count>PT_EDITOR_MIXED_READERS_GUARDS-2)return PT_EDITOR_MIXED_READERS_CAPACITY;
@@ -674,7 +953,8 @@ enum pt_mixed_readers_result pt_editor_mixed_readers_prepare_publish(
 }
 static int service_enter(struct pt_editor_mixed_readers_prepare *s,const void *out,size_t n)
 {
- if(!s||!s->phase||s->phase==PT_EDITOR_MIXED_READERS_FINISHED||!s->pool)return 0;
+ if(!s||!s->phase||s->phase==PT_EDITOR_MIXED_READERS_FINISHED||
+    (s->source_mode&&!s->source_activated)||!s->pool)return 0;
  if(out&&!output_apart(s,out,n))return 0;
  if(reentry(s)||!hook_owned(s))return 0;
  if(!fixed_current(s))fail(s,PT_EDITOR_MIXED_READERS_STALE);
@@ -730,7 +1010,8 @@ static int finish(void *context)
 {
  struct pt_editor_mixed_readers_prepare *s=context;struct pt_sampler_mixed_pool *pool;
  struct pt_mixed_readers_activation *activation;unsigned outer=s->busy,before=s->reentries,i;int all=1,r;
- if(s->closing||(s->busy&&!s->close_call)){++s->reentries;fail(s,PT_EDITOR_MIXED_READERS_FAULT);return 0;}
+ if(s->source_mode)s->source_cancel_requested=1;
+ if(s->source_busy||s->closing||(s->busy&&!s->close_call)){++s->reentries;fail(s,PT_EDITOR_MIXED_READERS_FAULT);return 0;}
  if(!hook_owned(s))return 0;
  if(!local_apart(s,(uintptr_t)&pool,sizeof(pool))||!local_apart(s,(uintptr_t)&activation,sizeof(activation)))return 0;
  if(!s->close_call)fail(s,PT_EDITOR_MIXED_READERS_CANCELLED);
@@ -754,6 +1035,7 @@ static int finish(void *context)
  if(before!=s->reentries)all=0;
  s->closing=0;s->busy=outer;
  if(!all||s->pool||s->activation)return 0;
+ if(s->source_mode){s->source_drained=1;if(s->source_held)return 0;}
  s->phase=PT_EDITOR_MIXED_READERS_FINISHED;s->hook=0;
  if(!s->first_error)s->result=PT_EDITOR_MIXED_READERS_CLOSED;
  return 1;

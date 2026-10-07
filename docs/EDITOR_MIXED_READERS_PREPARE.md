@@ -116,3 +116,42 @@ The current five-path quantized controller candidate now passes a distinct porta
 The original V3 PREPARATION refusal remains preserved: a complete declaration-body binding failed before inner Git/compiler calls, producing no candidate. V4 pins original saved and current protected declaration bodies separately and checks equal literal unit lists. The [two-file compiler metadata](../evidence/enhanced-editor/editor-mixed-readers-quantized-portable/README.md) records the separate failure/pass identities and actual admission `4446ad1601535e45e2eac072f66fc4eebe441a0f`, HOST archive baseline `19f710571919e5ea96ecd1a97ca27ea024be13d7` and historical source origin `5a8c6401f8ac802558b73b7ec5df881ccaa131e3`.
 
 This updates only the current quantized controller's compile/link status stated above. Native entry, Amiberry, real-A1200, physical memory/device behavior, current-candidate stack metadata/runtime stack, IRQ exclusion/residency/WCET, scheduled-port timing, audio/listening and whole-song producer execution remain NOT RUN. Historical legacy compiler/stack results and the saved HOST fixture remain separate; no strict whole-song audit or native PLAY integration is qualified here.
+
+
+## Early SOURCE ownership before master establishment — 7 October 2026
+
+The additive SOURCE entry installs the existing editor preparation hook before
+genuine external master-establishment callbacks. The standalone entry described
+above still requires established masters. The caller must retain its actual
+external jobs, results and independent current pins under SOURCE scope; the seam
+does not establish masters, acquire those pins or close those jobs. It supplies
+captured full immutable/mutable parent extents, exact disjoint
+activation/factory/backend roles and cancellation/fault latches. Later activation
+captures the genuinely promoted current storage. Existing enum values, standalone
+entry behavior and link dependencies remain unchanged.
+
+Command detach, reader retirement and source quiet drain independently. A
+reentrant positive quiet callback retains the owner; a later stable quiet call
+must consume the actual original slot. Only actual empty child ownership permits
+original SOURCE borrow release, followed by a separate positive editor-hook
+close. Numeric allocation identity checks describe retirement and grant no quiet
+proof. The caller must also drain its external jobs and release its pins before
+closing that borrow.
+
+Exact first-V7 passed HOST ASan/UBSan: 958 saved inputs, six overlays, 79 units,
+28 completed quiet owned-driver records, 56 raw streams and 15 full lines totaling
+4,932 bytes. Independent saved-only review found no findings or replay. Historical
+V1 SOURCE refusal, V2 compile failure, V3/V6 runtime failures and unexecuted V4/V5
+candidates remain preserved; unrecorded failed operands remain unknown. V7
+repairs the fixture's quiet-proof sequence while preserving production, qualifier
+and expected output. The preserved script is this once-only private-overlay
+qualification driver, with recorded admission/source pins; it grants no native,
+target or replay authority. See the
+[selected HOST evidence](../evidence/enhanced-editor/editor-mixed-source-borrow-host/README.md).
+
+No new SOURCE-seam native build, Amiberry or real-A1200 result is supplied. The
+earlier 535,248-byte controller and 232,864-byte strict-audit HUNKs remain separate
+and NEVER_EXECUTED. Physical placement, device capacity/order/completion/voice
+stop, aggregate stack, IRQ/exact live timing, audio and listening remain
+unqualified for this seam. Private queries, the SAME-sequence whole-song producer
+and native PLAY integration remain unfinished.

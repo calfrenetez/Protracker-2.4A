@@ -9,6 +9,9 @@
 #define PT_EDITOR_MIXED_READERS_CHIP 32U
 #define PT_EDITOR_MIXED_READERS_GUARDS 8192U
 struct pt_editor_mixed_readers_prepare;
+struct pt_editor_mixed_source_inputs;
+struct pt_editor_mixed_source_borrow;
+#define PT_EDITOR_MIXED_SOURCE_SPANS 14U
 /* Controller-issued identity, never a factory handle, queue key or ACTIVE
  * certificate. A consumed registration cannot authorize a reused slot. */
 struct pt_editor_mixed_command_ref {unsigned slot;uint64_t serial;};
@@ -23,7 +26,7 @@ enum pt_editor_mixed_readers_phase {
     PT_EDITOR_MIXED_READERS_EMPTY=0,PT_EDITOR_MIXED_READERS_ACTIVATION,
     PT_EDITOR_MIXED_READERS_FACTORY,PT_EDITOR_MIXED_READERS_VALIDATION,
     PT_EDITOR_MIXED_READERS_REQUESTS,PT_EDITOR_MIXED_READERS_FAILED,
-    PT_EDITOR_MIXED_READERS_FINISHED
+    PT_EDITOR_MIXED_READERS_FINISHED,PT_EDITOR_MIXED_READERS_SOURCE
 };
 struct pt_editor_mixed_readers_prepare_inputs {
     struct pt_editor_mixed *binding;
@@ -131,6 +134,22 @@ struct pt_editor_mixed_readers_prepare {
     uint64_t serial;uint32_t revision,generation;
     unsigned phase,busy,closing,close_call,reentries,hook;
     enum pt_editor_mixed_readers_result result,first_error;
+    /* Private early-source ownership. Never a READY/validation/quiet token.
+     * The internal constructor alone issues the exact original publisher and
+     * serial; complete mutable spans guard allocations, not legitimate outputs.
+     * Standalone begin leaves this appended scope zero and keeps its old path. */
+    const struct pt_editor_mixed_source_inputs *source_inputs;
+    const struct pt_editor_mixed_readers_prepare_inputs *source_preparation;
+    struct pt_editor_mixed_source_borrow *source_publisher;
+    struct pt_editor_mixed *source_binding;
+    struct pt_sampler_storage_span source_contexts;
+    struct pt_sampler_storage_span source_activation_workspace,source_factory_workspace,source_backend_parent;
+    struct pt_sampler_storage_span source_immutable[PT_EDITOR_MIXED_SOURCE_SPANS];
+    struct pt_sampler_storage_span source_mutable[PT_EDITOR_MIXED_SOURCE_SPANS];
+    uint64_t source_serial;
+    unsigned source_mode,source_held,source_released,source_activated,source_busy;
+    unsigned source_cancel_requested,source_drained,source_publisher_guard;
+    unsigned source_immutable_count,source_mutable_count;
 };
 enum pt_editor_mixed_readers_result pt_editor_mixed_readers_prepare_begin(
     struct pt_editor_mixed_readers_prepare *,const struct pt_editor_mixed_readers_prepare_inputs *);

@@ -1,0 +1,188 @@
+{
+  "schema": "pt24g-editor-mixed-source-borrow-selected-host-v7",
+  "status": "PASS_FIRST_V7_HOST_SELECTED_METADATA",
+  "scope": "Exact early SOURCE ownership/exclusion seam and genuine software fixture only. This selected projection does not include raw custody archives or qualify a whole-song producer, native PLAY or target execution.",
+  "source_candidate": {
+    "version": "V7",
+    "freeze": {
+      "bytes": 5332,
+      "sha256": "b148cc6eab8e084e48b6b1bb99a16bf4061ab3662e8f1f05fbd05bb4bfaad75d",
+      "mode": 33060
+    },
+    "source_origin_commit": "ee9aa13ca24e1a7a0784f150d9f98d6b7bc330fe",
+    "required_adopted_audit_origin": "641c281c43054a63612b001897cb6676e2a5e04d",
+    "published_source6_pins": {
+      "src/editor/editor_mixed_readers_prepare.h": {
+        "bytes": 11926,
+        "sha256": "587047d8f65374f1c361082f8dfbce3150915e537a757f9f51f422981b26d1de",
+        "mode": 33188
+      },
+      "src/editor/editor_mixed_readers_prepare.c": {
+        "bytes": 65725,
+        "sha256": "b8fb10c2b8fc32aa40de71a2be7b945d754001a6a5d4be393e412cb0248e7814",
+        "mode": 33188
+      },
+      "tests/editor_mixed_readers_quantized_test.c": {
+        "bytes": 30819,
+        "sha256": "0e5af87bb819658508766d87f4f8e0565190c2cfaee6bdb2ccba6dcef7eb38a5",
+        "mode": 33188
+      },
+      "src/editor/editor_mixed_readers_source_internal.h": {
+        "bytes": 4505,
+        "sha256": "1e7fb1f2cba3f8a996f819fdf9516e65baa21dc3448d6a94a9220e23910049cc",
+        "mode": 33188
+      },
+      "tests/editor_mixed_source_borrow_test.c": {
+        "bytes": 40821,
+        "sha256": "572199c8319119cf56b52c4e77ef39f82e1d61fe8b8939cb0f2d19abfb4bc31e",
+        "mode": 33188
+      },
+      "tests/test_editor_mixed_source_borrow.py": {
+        "bytes": 32887,
+        "sha256": "f2bafef93c22e47a4b391f9a10bf4e1531172c5b02545f51e68f3c6e7dec9893",
+        "mode": 33188
+      }
+    },
+    "modified_three": [
+      "src/editor/editor_mixed_readers_prepare.h",
+      "src/editor/editor_mixed_readers_prepare.c",
+      "tests/editor_mixed_readers_quantized_test.c"
+    ],
+    "additive_three": [
+      "src/editor/editor_mixed_readers_source_internal.h",
+      "tests/editor_mixed_source_borrow_test.c",
+      "tests/test_editor_mixed_source_borrow.py"
+    ],
+    "production_three_unchanged_from_v6": true,
+    "only_v6_to_v7_fixture_function_change": "esb_paired_pending",
+    "qualifier_and_other_five_overlays_unchanged_from_v6": true
+  },
+  "actual_host": {
+    "baseline_argument": "736271e8e2193c205c0ca38aaaeb5f2792e5d4e2",
+    "run": {
+      "bytes": 367731,
+      "sha256": "e27924c1850e24bc4aada6027c86a09442a8012998095b9e9845e8ed81770430",
+      "mode": 33188
+    },
+    "root_receipt": {
+      "bytes": 232473,
+      "sha256": "d6908051f17e797e9c622a46103d4016c1121022957c98bf3ecaf7798733dee8",
+      "mode": 33188
+    },
+    "source_inputs": 958,
+    "archived_source_files": 954,
+    "additive_source_files": 3,
+    "generated_font_files": 1,
+    "overlay_count": 6,
+    "ordered_unit_count": 79,
+    "recorded_driver_count": 28,
+    "inner_driver_count": 18,
+    "root_driver_count": 10,
+    "raw_stream_count": 56,
+    "compile_returncode": 0,
+    "runtime_returncode": 0,
+    "runtime_markers": 15,
+    "runtime_stdout": {
+      "bytes": 4932,
+      "sha256": "3c630bb08f21369019aa70648776cbdbb92b5d09d080e0749b75e7bd325c9942",
+      "mode": 33188
+    },
+    "runtime_stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "flags": [
+      "-std=c99",
+      "-O1",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-fsanitize=address,undefined",
+      "-Isrc/core",
+      "-I."
+    ],
+    "elapsed_seconds": {
+      "compile": 19.643082709008013,
+      "inner": 23.777763791993493,
+      "outer": 24.810454625010607,
+      "runtime": 1.8896460410032887
+    },
+    "recorded_driver_completion": "All recorded rows RC0, within budget, reaped and owned groups quiet; saved-only audited, no live probe or replay.",
+    "host_product": {
+      "bytes": 6282536,
+      "sha256": "6636fb2f20cd222e8bd73858720cae3d8304151af48c40c3841e802ec1d9d6dd",
+      "mode": 33261
+    }
+  },
+  "independent_saved_only_review": {
+    "review": {
+      "bytes": 7074,
+      "sha256": "9ac4072b85275ffcd4ba9fdf9566a37e1955afcba2d5bea588e3458abcc19c20",
+      "mode": 33188
+    },
+    "verification": {
+      "bytes": 48270,
+      "sha256": "74ca5764e1b64a3890d84dd3dc198a558122c86d8be8204767ec26109fb7f078",
+      "mode": 33188
+    },
+    "status": "PASS_SAVED_FIRST_V7_HOST_ONLY",
+    "findings": [],
+    "candidate_compiler_qualifier_replay": 0,
+    "retained_inner_files": 1001,
+    "retained_outer_files": 22,
+    "five_ancillary_host_debug_cache_files": "Supplementary opaque HOST compiler/tool artifacts only; no native, SDK or device authority."
+  },
+  "implementation": [
+    "The seam installs the existing editor hook before genuine external master-establishment callbacks and retains full captured guards and exact disjoint roles.",
+    "The caller retains and drains actual external jobs/results and independent current pins; the seam does not establish masters, acquire those external pins or close those jobs.",
+    "Later controller activation captures the genuinely promoted current storage.",
+    "Actual independent C/R/source quiet consumption precedes original SOURCE borrow close and a separate positive final editor-hook close.",
+    "Reentrant positive quiet retains the owner; V7 checks a distinct stable quiet and actual NULL owner consumption.",
+    "Existing standalone enum values, entry behavior, link dependencies and copied-only activation fire remain unchanged."
+  ],
+  "qualifier_scope": "Preserved once-only private-overlay qualification driver with recorded baseline/source-origin pins. It is not a new native/target runner and grants no replay or target authority.",
+  "history": {
+    "V1": "Historical SOURCE refusals remain NOT RUN.",
+    "V2": "Actual first-V2 COMPILE failure remains preserved.",
+    "V3": "Actual first-V3 compile RC0/runtime -6 remains failure; individual failed operands UNKNOWN_NOT_RECORDED.",
+    "V4_V5": "Unused unexecuted freezes and prospective V5 SOURCE refusal remain preserved.",
+    "V6": "Actual first-V6 compile RC0/runtime -6 remains failure at line 386; individual failed operands UNKNOWN_NOT_RECORDED.",
+    "V7": "One distinct actual first-V7 compile/runtime passed; no older attempt is retroactively qualified."
+  },
+  "saved_attempt_preservation_before_adoption": {
+    "source_controls": 47,
+    "protected_paths": 16,
+    "source_inventory_count": 1171,
+    "source_inventory_sha256": "c0010a7b5d485c72d789b7bc6851a5f9149af210b8e21302f090176b551ea3c0",
+    "all_saved_controls_and_source_exact": true
+  },
+  "evidence_boundaries": {
+    "new_seam_native_build": "NOT RUN",
+    "new_seam_native_execution": "NOT RUN",
+    "amiberry": "NOT RUN",
+    "real_a1200": "NOT RUN",
+    "physical_placement_device_capacity_order_completion_voice_stop": "UNQUALIFIED",
+    "aggregate_runtime_stack_irq_exact_live_timing": "UNQUALIFIED",
+    "audio_human_listening": "UNQUALIFIED",
+    "prior_quantized_controller_hunk": {
+      "bytes": 535248,
+      "sha256": "7d0554338ebf23752a8539eadbcd02a6bcf5e0bf9e08e67c7455cfc45a997994",
+      "execution": "NEVER_EXECUTED",
+      "qualification_for_new_seam": false
+    },
+    "standalone_strict_audit_hunk": {
+      "bytes": 232864,
+      "sha256": "58b3b9eb2f02ffc1d6c081f8773dbb8df438111addf5bab3a74da18dbe63e840",
+      "execution": "NEVER_EXECUTED",
+      "qualification_for_new_seam": false
+    }
+  },
+  "unfinished": [
+    "Private read-only query increment",
+    "SAME-sequence master-owning whole-song producer",
+    "Composite editor native PLAY integration"
+  ]
+}

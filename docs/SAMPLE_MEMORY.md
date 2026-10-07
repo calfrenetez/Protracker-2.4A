@@ -6261,3 +6261,38 @@ assertions, Amiberry/A1200, placement/launcher/device/timing/audio/listening rem
 separate. Original SOURCE/HOST failures, unknown V3 returned tuple and earlier
 HOST/compiler successes are preserved. See `docs/MIXED_QUANTIZED_AUDIT.md` and
 `evidence/enhanced-editor/mixed-quantized-audit-stack/` metadata packet.
+
+
+## Early editor SOURCE ownership seam — 7 October 2026
+
+The additive SOURCE entry holds the existing editor preparation hook before
+genuine external master-establishment callbacks. The caller retains and drains
+its actual jobs, results and independent current pins under that scope. The seam
+provides full immutable/mutable captured guards, exact disjoint
+activation/factory/backend roles and cancellation/fault latches; it does not
+establish masters, acquire those pins or close external jobs. Later activation
+captures the genuinely promoted storage. The old standalone entry continues to
+require established masters and keeps its existing behavior.
+
+Independent command/reader retirement and stable source quiet must consume actual
+child ownership before original SOURCE borrow release and a separate positive
+hook close. The caller must also close its external jobs and release its pins.
+A positive quiet callback that reenters retains the owner; its raw result cannot
+replace the later stable proof. V7 checks both refusal and subsequent actual NULL
+consumption without changing production code from V6.
+
+Exact first-V7 passed HOST ASan/UBSan: 958 saved inputs, six overlays, 79 units,
+28 completed quiet owned drivers, 56 raw streams and 15 full lines totaling 4,932 bytes.
+Independent saved-only review passed without findings or replay. Original V1
+SOURCE refusal, V2 compile failure, V3/V6 runtime failures and V4/V5 NOT RUN
+candidates remain separate; unknown failed operands remain unknown. The preserved
+script remains the recorded once-only private-overlay qualification driver,
+without native, target or replay authority. See the
+[controller contract](EDITOR_MIXED_READERS_PREPARE.md) and
+[selected HOST packet](../evidence/enhanced-editor/editor-mixed-source-borrow-host/README.md).
+
+No new seam native build or execution exists. The separate older 535,248-byte
+controller and 232,864-byte strict-audit HUNKs remain NEVER_EXECUTED. Amiberry,
+real-A1200, physical memory/device behavior, aggregate stack, IRQ/exact live
+timing, audio and listening are unqualified for this seam. Private queries,
+whole-song production using the SAME sequence and native PLAY remain unfinished.

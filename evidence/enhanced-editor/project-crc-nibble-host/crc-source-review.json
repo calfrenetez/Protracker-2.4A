@@ -1,0 +1,118 @@
+{
+  "scope": "SOURCE_ONLY",
+  "passed": true,
+  "findings": [],
+  "files": [
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-project-crc-nibble-source-proposal-v1/src/core/project.c",
+      "bytes": 47003,
+      "sha256": "f1bad97dc044e3976936be95c4e42051e8b7a79aab643a1c984a14a1dd24c75a",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-project-crc-nibble-source-proposal-v1/tests/project_crc_nibble_test.c",
+      "bytes": 8146,
+      "sha256": "119ef69ea5d8a78f5fc13a0beae798d18a85cc164bc43adaea1c0cc0142affb3",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-project-crc-nibble-source-proposal-v1/tests/test_project_crc_nibble.py",
+      "bytes": 3413,
+      "sha256": "4664632fd002f9d196df6023ce003093ceb3ab967289c2c10e53f1dacd0a304e",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-project-crc-nibble-source-proposal-v1/PLAN.md",
+      "bytes": 7188,
+      "sha256": "111b01809bb91ca3f044a9e683415daadeaa5244d48c7ea851f1ab1aa5f12614",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-project-crc-nibble-source-proposal-v1/project.c.diff",
+      "bytes": 2796,
+      "sha256": "695c25d6afef5995d8da246f804ad6279228590c805af5ac0d763a380608d9d0",
+      "mode": 33188
+    }
+  ],
+  "donor_and_recipe_dependencies": [
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.c",
+      "bytes": 46481,
+      "sha256": "be3094ffb8a57df8e0f7a58a946f7f20978715f17d2103234027824af882b094",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.h",
+      "bytes": 8827,
+      "sha256": "e1a749800258b1f1db1dedcd7d5d36970abbf7494279cb3669212757f982e21a",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.c",
+      "bytes": 6996,
+      "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.c",
+      "bytes": 7061,
+      "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/project_test.c",
+      "bytes": 16576,
+      "sha256": "8d99592bc5e60ce0b384017d4955733f0ab2e95e6522f3c33ccb7f489e95cf70",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/project_stream_test.c",
+      "bytes": 3465,
+      "sha256": "0c4208a38286d9eb7ab370618b7d067d49ceb238c0a7644228618b51d06330b7",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/project_reader_test.c",
+      "bytes": 4197,
+      "sha256": "0c8dc750c8a3cf71eb9cb6ec037e15c427903b05bd3e67875bded5b852aad407",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/render_read_faults.c",
+      "bytes": 459,
+      "sha256": "47418b2ce00e2968a06749c21dbbc80c7ca3247808fe5350961d836f9644f9fe",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/fixtures/project-v1/mixed.ptg",
+      "bytes": 26416,
+      "sha256": "e373b2abdfd931d86727672ce31a8fea890edcdb53b254a93b8b03b7a7b6a831",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/fixtures/project-v1/song.ptg",
+      "bytes": 6780,
+      "sha256": "c1de3e61ef286cb71dcd5be570f179d6bc960b804e965d2b937111886b067377",
+      "mode": 33188
+    }
+  ],
+  "checks": [
+    "Full selected project.c, focused C test, explicit recipe, PLAN and exact donor-to-proposal diff reviewed as source; no candidate imported or invoked.",
+    "Delivered diff exactly reproduces current donor->proposal and only adds immutable sixteen-entry uint32 reflected IEEE transitions/private byte helper plus replacement of the contiguous, stream-first-pass and positional CRC loops.",
+    "Two nibble shifts/lookups operate on uint32 state and uint8 input, bounded indices 0..15; no allocation, mutable initialization, aligned wide load, public API, endian dependency or additional link unit.",
+    "Header offsets20..23 contribute zero at the same absolute positions; initial/final xor0xffffffff, byte traversal, reader block<=1024/callback refusal and output publication stay intact.",
+    "All existing validation, capacity, PCM/metadata, alias/transactional/publication and serialization source outside that exact diff is unchanged; repeated validation and all master/save assertions are not reduced.",
+    "Focused test expected values retain original eight-bit recurrence, independently deriving sixteen nibble transitions; all256 bytes are compared for varied states and all32 state-bit bases, with empty/123456789 fixed vectors.",
+    "Actual three checksum seams are exercised through boundary/split continuation through4097 bytes, absolute hole and adjacent-byte mutations, complete arbitrary-input beforeimages and refusal at each positional checksum read with preserved output sentinel.",
+    "Pinned mixed.ptg and song.ptg are genuine preserved inputs; both stored CRCs compare with independent bitwise reference, positional probe/decode and full encoded/stream byte identity are required.",
+    "Focused translation unit includes project.c exactly once and links only channels.c/pcm.c; unchanged project/stream/read-fault/reader groups each explicitly link project.c once with established dependencies.",
+    "Proposed recipe contains five strict C99 O1 -Wall/-Wextra/-Werror/-UNDEBUG ASan/UBSan compile/run groups with120/30second bounds, before/after golden hashes and complete generated-mixed-vs-fixed input comparison.",
+    "PLAN correctly keeps HOST, crossbuild and admitted runtime tiers separate; original native90 failure/late output remains failed, native deadline/stack/diagnostic grammar stay unchanged and no speed or hardware claim is made."
+  ],
+  "limits": [
+    "SOURCE review establishes no actual test, native instruction count, timing, stack sufficiency, hardware behavior or performance improvement. No compiler/test/import/target/Git/service/process/health/guard/lease/lock operation occurred.",
+    "CRC_ORACLE in the recipe is declarative; Root's external qualification collector must still require all complete actual pass lines, genuine goldens/source/protected before-after and positive process reap/quiet.",
+    "The original genuine mixed-RAM65 fixture must be separately qualified once with the selected overlay and all assertions/oracle unchanged before any crossbuild/target decision.",
+    "A later exact native candidate requires fresh coordination and existing unchanged admission/watchdog/lifecycle; no automatic retry or deadline extension is authorized by this review."
+  ]
+}

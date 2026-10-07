@@ -1,0 +1,404 @@
+{
+  "scope": "SAVED_ONLY_CRC_HOST_FIRST_FAILURE_AUDIT_NOT_OVERALL_TEST_PASS",
+  "passed": true,
+  "findings": [],
+  "inputs": [
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/receipt.json",
+      "bytes": 439061,
+      "sha256": "efa7a5fe8383f36de0464dfea5c48d4ab802b1ced7530666982aa501fb1ea620",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1.py",
+      "bytes": 8761,
+      "sha256": "56822af341ffe1478a94300db7309745bfd1fdf71f6b8e0e0f50f6de7542b768",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/focused-compile.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/focused-compile.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/focused-run.stdout",
+      "bytes": 197,
+      "sha256": "2a6895b7028be1de7be486ce77fd2f8c683ecae1308fe293d7df4537032ad2d5",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/focused-run.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/project-compile.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/project-compile.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/project-run.stdout",
+      "bytes": 141,
+      "sha256": "28d24b18aba68a616642198eab85cc8f063a5d9c5e69cb59c936ff63d1dcf443",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/project-run.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/stream-compile.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/stream-compile.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/stream-run.stdout",
+      "bytes": 122,
+      "sha256": "96501c23f133919e14e559cae5a06fc34fd34fd254b63996be021263c29b4e6a",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/stream-run.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/stream-faults-compile.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/stream-faults-compile.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/stream-faults-run.stdout",
+      "bytes": 122,
+      "sha256": "96501c23f133919e14e559cae5a06fc34fd34fd254b63996be021263c29b4e6a",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/stream-faults-run.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/reader-compile.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/reader-compile.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/reader-run.stdout",
+      "bytes": 198,
+      "sha256": "e634a96dfc30fb75077dd1430babaaafc7662a4c1524328d5a9f96e0f383dc9e",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/reader-run.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/mixed65-compile.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/mixed65-compile.stderr",
+      "bytes": 200,
+      "sha256": "42cf1ab6b75f302d85f36a3bb7e0c64b7ed9783ef689eee65b4cd77fb61d3474",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/focused",
+      "bytes": 367352,
+      "sha256": "edf90eb772b42d043adcc859f7ab18987a01c56f6dd3970b67b4895b704d21f3",
+      "mode": 33261
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/project",
+      "bytes": 375624,
+      "sha256": "34c575de5f8c65a3500c5fcc8978e7b403990f5d319512c137d3587223f61c7c",
+      "mode": 33261
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/stream",
+      "bytes": 434840,
+      "sha256": "c3c17d70a35e9e4d097ccefd915a633d94f1dfe41b66192132df1a21a6cde242",
+      "mode": 33261
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/stream-faults",
+      "bytes": 435648,
+      "sha256": "23cba93fa298db9dec8c7617ce2a766b65d4e371fdcca53083d9187308b0e81c",
+      "mode": 33261
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/reader",
+      "bytes": 346664,
+      "sha256": "341c9fbde46709f60d6cd2c07f8289a75ee211c1945d846ef6d28ebf9cb610a5",
+      "mode": 33261
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/mixed.ptg",
+      "bytes": 26416,
+      "sha256": "e373b2abdfd931d86727672ce31a8fea890edcdb53b254a93b8b03b7a7b6a831",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-project-crc-nibble-source-v1-review.json",
+      "bytes": 7376,
+      "sha256": "2004464b0678e6180902fb5b78f304215749ecb034ff50a3d983a68784f68cf2",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/tree/src/core/project.c",
+      "bytes": 47003,
+      "sha256": "f1bad97dc044e3976936be95c4e42051e8b7a79aab643a1c984a14a1dd24c75a",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/tree/tests/native_mixed_ram_port_test.c",
+      "bytes": 29613,
+      "sha256": "e6c7b332d0d8d8effc799486ce2167e94b8df271fb5e818dc72120e0a117dc7a",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/tree/src/native/readers_ram/native_mixed_ram_port.h",
+      "bytes": 5500,
+      "sha256": "36e462ed7d76119379840f09b8d6f9ffd65a51dc7bee92a0c3833c364e85bc8a",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-project-crc-nibble-host-first-v1/tree/tests/test_native_mixed_ram_port.py",
+      "bytes": 2118,
+      "sha256": "1ecaeea4d5d7ec19e20693c1aab6f3688a88f93b59eccc30723312b55d2838d4",
+      "mode": 33188
+    }
+  ],
+  "checks": [
+    "Exact first receipt pinned",
+    "Overall first attempt remains failed without retry/target operation",
+    "Exactly first five compile/run pairs and failed mixed65 compile, no mixed65 run",
+    "focused-compile records positive reaping/group absence and no capture/ownership errors",
+    "focused-compile actual return/status agrees with attempt position",
+    "focused-compile.stdout exact full stream pin",
+    "focused-compile.stderr exact full stream pin",
+    "focused-compile exact strict sanitizer flags and120s bound",
+    "focused-run records positive reaping/group absence and no capture/ownership errors",
+    "focused-run actual return/status agrees with attempt position",
+    "focused-run.stdout exact full stream pin",
+    "focused-run.stderr exact full stream pin",
+    "focused-run30s bound and empty actual stderr",
+    "project-compile records positive reaping/group absence and no capture/ownership errors",
+    "project-compile actual return/status agrees with attempt position",
+    "project-compile.stdout exact full stream pin",
+    "project-compile.stderr exact full stream pin",
+    "project-compile exact strict sanitizer flags and120s bound",
+    "project-run records positive reaping/group absence and no capture/ownership errors",
+    "project-run actual return/status agrees with attempt position",
+    "project-run.stdout exact full stream pin",
+    "project-run.stderr exact full stream pin",
+    "project-run30s bound and empty actual stderr",
+    "stream-compile records positive reaping/group absence and no capture/ownership errors",
+    "stream-compile actual return/status agrees with attempt position",
+    "stream-compile.stdout exact full stream pin",
+    "stream-compile.stderr exact full stream pin",
+    "stream-compile exact strict sanitizer flags and120s bound",
+    "stream-run records positive reaping/group absence and no capture/ownership errors",
+    "stream-run actual return/status agrees with attempt position",
+    "stream-run.stdout exact full stream pin",
+    "stream-run.stderr exact full stream pin",
+    "stream-run30s bound and empty actual stderr",
+    "stream-faults-compile records positive reaping/group absence and no capture/ownership errors",
+    "stream-faults-compile actual return/status agrees with attempt position",
+    "stream-faults-compile.stdout exact full stream pin",
+    "stream-faults-compile.stderr exact full stream pin",
+    "stream-faults-compile exact strict sanitizer flags and120s bound",
+    "stream-faults-run records positive reaping/group absence and no capture/ownership errors",
+    "stream-faults-run actual return/status agrees with attempt position",
+    "stream-faults-run.stdout exact full stream pin",
+    "stream-faults-run.stderr exact full stream pin",
+    "stream-faults-run30s bound and empty actual stderr",
+    "reader-compile records positive reaping/group absence and no capture/ownership errors",
+    "reader-compile actual return/status agrees with attempt position",
+    "reader-compile.stdout exact full stream pin",
+    "reader-compile.stderr exact full stream pin",
+    "reader-compile exact strict sanitizer flags and120s bound",
+    "reader-run records positive reaping/group absence and no capture/ownership errors",
+    "reader-run actual return/status agrees with attempt position",
+    "reader-run.stdout exact full stream pin",
+    "reader-run.stderr exact full stream pin",
+    "reader-run30s bound and empty actual stderr",
+    "mixed65-compile records positive reaping/group absence and no capture/ownership errors",
+    "mixed65-compile actual return/status agrees with attempt position",
+    "mixed65-compile.stdout exact full stream pin",
+    "mixed65-compile.stderr exact full stream pin",
+    "mixed65-compile exact strict sanitizer flags and120s bound",
+    "focused complete stdout matches recorded oracle",
+    "focused saved executable matches actual pin",
+    "project complete stdout matches recorded oracle",
+    "project saved executable matches actual pin",
+    "stream complete stdout matches recorded oracle",
+    "stream saved executable matches actual pin",
+    "stream-faults complete stdout matches recorded oracle",
+    "stream-faults saved executable matches actual pin",
+    "reader complete stdout matches recorded oracle",
+    "reader saved executable matches actual pin",
+    "stream complete single dynamic workspace observation",
+    "stream-faults complete single dynamic workspace observation",
+    "Only complete200byte missing-header compile diagnostic, stdout empty",
+    "Current saved1200file selected tree matches recorded before image",
+    "Current1198file repository readback matches recorded before image",
+    "All5 frozen proposal files still exact",
+    "All16 protected paths still exact",
+    "Compiler and accepted source review still exact",
+    "Selected tree differs only project overlay and two new CRC tests",
+    "mixed.ptg actual saved and repo golden remain exact",
+    "song.ptg actual saved and repo golden remain exact",
+    "Generated mixed output exact complete golden identity",
+    "Receipt truthfully lacks unfinished success/after qualification"
+  ],
+  "actual_attempt": {
+    "status": "FIRST_FAILURE_RETAINED_NO_RETRY",
+    "five_crc_groups_passed": true,
+    "mixed65_compile_returncode": 1,
+    "mixed65_run": "NOT_RUN",
+    "error": "tests/native_mixed_ram_port_test.c:6:10: fatal error: 'native_mixed_ram_port.h' file not found\n    6 | #include \"native_mixed_ram_port.h\"\n      |          ^~~~~~~~~~~~~~~~~~~~~~~~~\n1 error generated.\n",
+    "commands": [
+      {
+        "label": "focused-compile",
+        "returncode": 0,
+        "saved_reaped": true,
+        "saved_group_absent": true,
+        "elapsed_seconds": 1.977495999977691
+      },
+      {
+        "label": "focused-run",
+        "returncode": 0,
+        "saved_reaped": true,
+        "saved_group_absent": true,
+        "elapsed_seconds": 0.3497037079941947
+      },
+      {
+        "label": "project-compile",
+        "returncode": 0,
+        "saved_reaped": true,
+        "saved_group_absent": true,
+        "elapsed_seconds": 1.5540461250056978
+      },
+      {
+        "label": "project-run",
+        "returncode": 0,
+        "saved_reaped": true,
+        "saved_group_absent": true,
+        "elapsed_seconds": 0.3081539580016397
+      },
+      {
+        "label": "stream-compile",
+        "returncode": 0,
+        "saved_reaped": true,
+        "saved_group_absent": true,
+        "elapsed_seconds": 1.7218860419816338
+      },
+      {
+        "label": "stream-run",
+        "returncode": 0,
+        "saved_reaped": true,
+        "saved_group_absent": true,
+        "elapsed_seconds": 0.24695895798504353
+      },
+      {
+        "label": "stream-faults-compile",
+        "returncode": 0,
+        "saved_reaped": true,
+        "saved_group_absent": true,
+        "elapsed_seconds": 1.6044924169837032
+      },
+      {
+        "label": "stream-faults-run",
+        "returncode": 0,
+        "saved_reaped": true,
+        "saved_group_absent": true,
+        "elapsed_seconds": 0.2407262909982819
+      },
+      {
+        "label": "reader-compile",
+        "returncode": 0,
+        "saved_reaped": true,
+        "saved_group_absent": true,
+        "elapsed_seconds": 1.3304409999982454
+      },
+      {
+        "label": "reader-run",
+        "returncode": 0,
+        "saved_reaped": true,
+        "saved_group_absent": true,
+        "elapsed_seconds": 2.249449833005201
+      },
+      {
+        "label": "mixed65-compile",
+        "returncode": 1,
+        "saved_reaped": true,
+        "saved_group_absent": true,
+        "elapsed_seconds": 5.995469832996605
+      }
+    ]
+  },
+  "readback_counts": {
+    "selected_tree": 1200,
+    "repository": 1198,
+    "proposal": 5,
+    "protected": 16,
+    "changed_selected_paths": [
+      "src/core/project.c",
+      "tests/project_crc_nibble_test.c",
+      "tests/test_project_crc_nibble.py"
+    ]
+  },
+  "limits": [
+    "Audit PASS means saved evidence is internally consistent; the overall first HOST attempt remains FAILED at mixed65 compile and is not relabeled.",
+    "The failed receipt contains before pins only: after checkpoints were not reached. This audit separately read back current saved tree/repository/proposal/protected/compiler/goldens and found all exact; it does not invent collector-recorded after facts.",
+    "Five actual strict sanitizer CRC/project/stream/reader groups completed with exact oracles and saved quiet/reap facts. The original genuine mixed65 test was not compiled or run in this attempt.",
+    "Workspace7184 is a HOST observation, not native ABI/stack acceptance. No native performance cause, target, physical, timing, IRQ/audio or listening success inferred.",
+    "No candidate module import, compiler/test/rerun, live process/health/guard/lease/lock/target/Git/service operation occurred in this saved audit."
+  ]
+}

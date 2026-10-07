@@ -144,3 +144,18 @@ Fast/Chip allocation footers, RC0 and done. The original 90-second admission
 remains FAILED. There was no retry, deadline enlargement or physical promotion.
 Loaded DevBench connection eligibility remains a separate maintenance gate.
 See the [finished recovery and release records](../evidence/enhanced-editor/native-mixed-ram-port/approved-recovery/README.md).
+
+
+## Project checksum update: HOST qualification
+
+The project checksum now uses a shared immutable64-byte nibble table across its
+three private contiguous/stream/positional paths. The format, exact golden bytes,
+all validation and master/save assertions are unchanged. Five focused/baseline
+HOST sanitizer groups and the unchanged genuine65-case mixed RAM fixture passed.
+The original missing-header-path compile failure is preserved; a distinct narrow
+command correction completed only the remaining65 group. See the
+[complete HOST evidence](../evidence/enhanced-editor/project-crc-nibble-host/README.md).
+
+No updated native crossbuild or exact target execution has occurred. The old
+deadline failure staysFAILED; this change establishes no cause or measured native
+speedup. Native90/stack131072 and all diagnostic success markers remain required.

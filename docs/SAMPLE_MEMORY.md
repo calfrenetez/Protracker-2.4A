@@ -6475,3 +6475,16 @@ remains FAILED. No retry, physical promotion, device/timing/audio acceptance or
 master/cache architecture change follows. Loaded DevBench connection eligibility
 requires separate maintenance disposition. See the
 [approved recovery packet](../evidence/enhanced-editor/native-mixed-ram-port/approved-recovery/README.md).
+
+
+## Project checksum compatibility — 7 October 2026
+
+Project save/load CRC paths share an immutable16-entry/64-byte nibble table.
+The original polynomial, header-hole handling, golden serialized bytes, full
+validation, transaction/refusal guards and master PCM checks are preserved. Five
+HOST sanitizer groups plus the unchanged genuine65 mixed RAM cases passed; an
+initial compile-command missing include failure stays recorded separately from
+its corrected remaining-group success. [Saved HOST evidence](../evidence/enhanced-editor/project-crc-nibble-host/README.md)
+binds full oracles, fixed goldens and before/after source/protected custody.
+This is no native speed/failure-cause, Fast/Chip target, hardware or timing proof.
+Updated native crossbuild, exact emulator and physical qualification remain pending.

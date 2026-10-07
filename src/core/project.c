@@ -24,13 +24,26 @@ static int known(uint32_t tag)
     int i; for(i=0;i<6;++i) if(tags[i]==tag) return i;
     return -1;
 }
+/* Immutable reflected IEEE CRC32 nibble transitions. No allocation, lazy
+ * initialization, byte-order dependency or mutable shared state. The three
+ * project paths keep their own exact header-hole/initial/final handling. */
+static const uint32_t project_crc32_nibble[16] = {
+    0x00000000UL,0x1db71064UL,0x3b6e20c8UL,0x26d930acUL,
+    0x76dc4190UL,0x6b6b51f4UL,0x4db26158UL,0x5005713cUL,
+    0xedb88320UL,0xf00f9344UL,0xd6d6a3e8UL,0xcb61b38cUL,
+    0x9b64c2b0UL,0x86d3d2d4UL,0xa00ae278UL,0xbdbdf21cUL
+};
+static uint32_t project_crc32_byte(uint32_t crc,uint8_t value)
+{
+    crc^=value;
+    crc=(crc>>4)^project_crc32_nibble[crc&15U];
+    return (crc>>4)^project_crc32_nibble[crc&15U];
+}
 static uint32_t checksum(const uint8_t *p, size_t n)
 {
-    uint32_t crc=0xffffffffUL; size_t i; unsigned j;
-    for(i=0;i<n;++i) {
-        crc^=i>=20 && i<24 ? 0 : p[i];
-        for(j=0;j<8;++j) crc=(crc>>1)^((crc&1)?0xedb88320UL:0);
-    }
+    uint32_t crc=0xffffffffUL; size_t i;
+    for(i=0;i<n;++i)
+        crc=project_crc32_byte(crc,(uint8_t)(i>=20 && i<24 ? 0 : p[i]));
     return crc^0xffffffffUL;
 }
 static int terminated(const char *s,size_t n) { return memchr(s,0,n)!=NULL; }
@@ -408,12 +421,10 @@ struct stream_writer {
 };
 static int stream_bytes(struct stream_writer *w,const void *data,size_t n)
 {
-    const uint8_t *p=data;size_t i;unsigned j;
+    const uint8_t *p=data;size_t i;
     if(!w->sink) {
-        for(i=0;i<n;++i,++w->pos) {
-            w->crc^=w->pos>=20 && w->pos<24?0:p[i];
-            for(j=0;j<8;++j)w->crc=(w->crc>>1)^((w->crc&1)?0xedb88320UL:0);
-        }
+        for(i=0;i<n;++i,++w->pos)
+            w->crc=project_crc32_byte(w->crc,(uint8_t)(w->pos>=20 && w->pos<24?0:p[i]));
         return 1;
     }
     while(n) {
@@ -649,14 +660,12 @@ static int reader_bytes(pt_project_read read,void *context,size_t length,size_t 
 {return offset<=length && count<=length-offset && (!count || read(context,offset,out,count)==1);}
 static int reader_checksum(pt_project_read read,void *context,size_t length,uint32_t *out)
 {
-    uint8_t block[1024];size_t pos=0,i;unsigned j;uint32_t crc=0xffffffffUL;
+    uint8_t block[1024];size_t pos=0,i;uint32_t crc=0xffffffffUL;
     while(pos<length) {
         size_t count=length-pos;if(count>sizeof(block))count=sizeof(block);
         if(!reader_bytes(read,context,length,pos,block,count))return 0;
-        for(i=0;i<count;++i) {
-            crc^=pos+i>=20 && pos+i<24?0:block[i];
-            for(j=0;j<8;++j)crc=(crc>>1)^((crc&1)?0xedb88320UL:0);
-        }
+        for(i=0;i<count;++i)
+            crc=project_crc32_byte(crc,(uint8_t)(pos+i>=20 && pos+i<24?0:block[i]));
         pos+=count;
     }
     *out=crc^0xffffffffUL;return 1;

@@ -1,0 +1,4 @@
+tests/native_mixed_ram_port_test.c:6:10: fatal error: 'native_mixed_ram_port.h' file not found
+    6 | #include "native_mixed_ram_port.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

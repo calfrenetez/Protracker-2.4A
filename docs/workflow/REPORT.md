@@ -106,7 +106,7 @@ Manager sorting/filtering and waveform drawing never create playback caches or
 upload hardware audio. Changed view summaries publish only when complete.
 
 The current transaction and first inherited-event project/PCM validation yield
-in steps of at most4096 validation items, separately from copying or replay.
+in steps of at most 4096 validation items, separately from copying or replay.
 Transactions still require stopped transport, recording and affected previews.
 The frontend still refuses first uncached inherited-event validation during an
 active performance; same-version cached navigation uses bounded ticks. Initial
@@ -135,13 +135,36 @@ ownership/recovery guards, configuration, candidate hashes, completion, exact
 cleanup and explicit release remain required. No target operation, control,
 reservation or recovery hold was created by this integration work.
 
-Automatic approval review rejected the attempted AmiConnect coordination status
-message because explicit authorization to message that separate task was pending.
-The requested messaging permission remains unanswered; it has not been bypassed.
-Consequently native emulator/physical acceptance remains open. Existing output
-scheduling, device RAM capacity/order/completion and listening gates are unchanged.
-The addendum is not complete until the mandatory suite and critical real 030
-workflows plus playback coexistence pass.
+The earlier automatic approval review rejected an AmiConnect coordination message
+while destination permission was pending. That historical result remains preserved.
+The user subsequently authorized coordination messages to AmiConnect, Scott and
+AmiGUS, and the manual A500 session was confirmed closed. Scott's guarded release
+is reported complete. None of those records grants a new ProTracker target window:
+fresh candidate, peer ownership, recovery and live harness guards remain required.
+Native emulator/physical acceptance remains open. Output scheduling, device RAM
+capacity/order/completion and listening gates are unchanged. The addendum is not
+complete until its mandatory suite and critical real 030 workflows plus playback
+coexistence pass.
 
 See [native acceptance plan](NATIVE_TEST_PLAN.md), [usage/keymap](USAGE.md), [requirement map](REQUIREMENTS.md) and
 [integration contracts](INTEGRATION.md).
+
+
+## Current scoped HOST refresh — 7 October 2026
+
+At committed baseline d4966fa, 14 clean and 8 preserved-display-overlay groups
+passed once with original sanitizer/assertion/output contracts. All 40 recorded
+drivers returned 0 and were reaped/quiet; 80 complete raw streams and the independent
+saved audit were verified. Both editor goldens and the four workflow-view image
+assertions per variant remain unchanged. The 132 clean and 139 preserved-overlay
+providers retain the same protected 16 originals. This is a 22-execution scoped
+refresh; it is not a new all 24-group run or native/physical acceptance.
+
+The long stereo fixture again retained 24-bit masters and bounded work: 512 overview
+steps, at most 4096 values per step, a 4,194,304-byte copy and zero final requested
+bytes/allocations. Exact one-run HOST CPU/requested-payload observations and
+evidence tiers are recorded in
+[current refresh evidence](../evidence/workflow-current-host-d4966fa/README.md).
+Native 030 responsiveness, real A1200 workflows, playback coexistence and listening
+remain untested for this exact refresh. Historical measurements above retain
+their original candidates and scope.

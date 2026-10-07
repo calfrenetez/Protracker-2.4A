@@ -72,3 +72,34 @@ Native entry, aggregate stack, IRQ exclusion/residency/latency, actual activatio
 timing, MMIO/DMA, card capacity/upload completion/ordering/voice stop, physical
 audio and human listening remain open. This callable software owner supplies no
 real hardware port and is not connected to native PLAY.
+
+
+## Packet backup in existing owner scratch — 7 October 2026
+
+Publication and fire now keep the full packet before-image in the already owned
+staging packet under the existing serialized busy-entry contract. They restore
+all bytes before any following packet walk if a callback changes the packet,
+latch failure and clear only that transient packet after use. The automatic
+actual-slot result stays local. No owner layout, allocation budget, public API,
+C/R proof, sample precision or musical window changes.
+
+The separate whole-song and dedicated activation fixtures pass with ASan/UBSan,
+assertions and strict warnings. The latter exercises 192 combinations of publish
+or commit mutation, eight fields including the untouched 20th key and unused
+tail geometry, raw 0/1/-1, reentry and both independent proof orders. Complete
+packet restoration, no residual backup, retained uncertain owners, unchanged
+masters and consecutive reuse are asserted.
+
+Three strict 68000/software-float object compiles and saved disassembly complete.
+Native layout values remain unchanged: packet 3456, actual 1128 and owner 72252 bytes.
+Function-local compiler stack annotations change from fire 4692 to 1236 and
+publication 3704 to 252 bytes. Command service remains 1504. These values exclude
+callees, library/helpers, indirect callbacks, trampoline and the complete IRQ or
+task stack; they clear no launcher or real-time deadline. The first validation
+runner still records failure because 91 lexical controller dependencies resolve
+to 80 exact providers. Independent saved admission and one separate objdump
+completed inspection without compiler replay; the failed receipt remains failed.
+
+See [scoped source/HOST/object evidence](evidence/activation-packet-scratch-v3/README.md).
+Native PLAY, Amiberry/physical execution, IRQ residency/latency/WCET, whole stack,
+card completion/ordering/voice stop, exact output timing and listening remain open.

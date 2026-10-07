@@ -1,0 +1,1541 @@
+{
+  "schema": "pt24g-current-workflow-first-v1-nonoperative-publication-observations",
+  "status": "ACCEPTED_CURRENT_WORKFLOW_HOST_OBSERVATIONS_NONOPERATIVE_SUPPLEMENT",
+  "authority": {
+    "root_saved_acceptance": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-workflow-first-v1-saved-acceptance.json",
+      "bytes": 1716,
+      "sha256": "764c620bffbb5eb8df664c3f123bc77e5073111d3f268dfe3a6e9dfe7297c0cc",
+      "mode": 33188
+    },
+    "actual_receipt": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/workflow-current-host-runner-final-v1/execution-first-v1/receipt.json",
+      "bytes": 154585,
+      "sha256": "2dff8d37c97c58537152135b6848149ea285ff6763365a268928374985f9add0",
+      "mode": 33188
+    },
+    "independent_saved_review": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-workflow-first-v1-saved-audit-v1/review.json",
+      "bytes": 17182,
+      "sha256": "3cbda0a840225ef474763b85bd119c8a038d59c4bcc56968d723c179339a1912",
+      "mode": 33188
+    },
+    "independent_saved_verification": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-workflow-first-v1-saved-audit-v1/verification.json",
+      "bytes": 14169,
+      "sha256": "530ccf87dbc2180995dc359a1bc4899bae3cf34ad08531d3595412f5adc43b06",
+      "mode": 33188
+    },
+    "independent_saved_readback": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-workflow-first-v1-saved-audit-v1/readback.json",
+      "bytes": 661,
+      "sha256": "4f4eb2523b0a127785a511f699c9aa3962f1cf0f938b3e208b307d691e185373",
+      "mode": 33188
+    },
+    "external_launch": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-workflow-final-v1-launch.json",
+      "bytes": 2294,
+      "sha256": "d20bdb156631757407abd2859a424d28f85c5d82dcbeaae8224be34629991db6",
+      "mode": 33188
+    },
+    "selected_runner": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/workflow-current-host-runner-final-v1/root-workflow-host.py",
+      "bytes": 23754,
+      "sha256": "360c39d7f1ea3b854cbc844a1ba310775f3c9901d6b254bc425fe7a16fb2ebf0",
+      "mode": 33060
+    },
+    "selected_policy": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/workflow-current-host-runner-final-v1/selected-inputs.json",
+      "bytes": 127431,
+      "sha256": "64672621b294026d316cbaca7c67365fb6bd4e44e231e7084fd416976578a7ca",
+      "mode": 33060
+    }
+  },
+  "actual_result": {
+    "status": "PASS_CURRENT_WORKFLOW_14CLEAN_8OVERLAY_HOST_ONLY",
+    "baseline": "d4966faddbd30a23c9562003b8b2aed397ec2813",
+    "elapsed_seconds": 167.34912179198,
+    "groups": 22,
+    "clean_groups": 14,
+    "overlay_groups": 8,
+    "drivers": 40,
+    "raw_streams": 80,
+    "first_failure": null,
+    "overall_completion_within_budget": true,
+    "target_operations": 0,
+    "owned_child_reaping_and_group_quiescence": "All40 recorded RC0/owned/reaped/quiet; saved evidence only, no completed PID probe by this author."
+  },
+  "scope": {
+    "qualification": "HOST assertions and complete original-output/unittest contracts for exactly14 clean+8 preserved-overlay group executions.",
+    "all24_suite_refresh": false,
+    "feature_complete": false,
+    "new_feature_or_flag_or_golden_change": false,
+    "native_build_or_runtime_acceptance": false,
+    "amiberry_acceptance": false,
+    "physical_A1200_or_AmiGUS_acceptance": false,
+    "device_RAM_capacity_order_completion_voice_stop_acceptance": false,
+    "live_musical_schedule_audio_listening_acceptance": false,
+    "human_visual_acceptance": false,
+    "target_window_or_control_granted_by_this_package": false
+  },
+  "source_inventories": {
+    "encoding": "UTF-8 json.dumps(actual receipt pin map, sort_keys=True, separators=(comma,colon)); no trailing newline; each row includes bytes, SHA256 and full stat.st_mode.",
+    "clean": {
+      "count": 132,
+      "canonical_bytes": 17289,
+      "canonical_pin_map_sha256": "401ae3c1b6efc9384adc456f73a67d0095d18d039c3c958483ed744d8ac1ea25",
+      "receipt_map_field": "clean_inputs",
+      "full_regular_file_mode_counts": {
+        "33204": 132
+      }
+    },
+    "overlay": {
+      "count": 139,
+      "canonical_bytes": 18197,
+      "canonical_pin_map_sha256": "6ed396863445be8fbff0a78c5d3fcc3cb37cd24c1eae8cc68fefb36d77805130",
+      "receipt_map_field": "overlay_inputs",
+      "full_regular_file_mode_counts": {
+        "33188": 16,
+        "33204": 123
+      }
+    },
+    "archive": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/workflow-current-host-runner-final-v1/execution-first-v1/committed-clean.tar",
+      "bytes": 1136640,
+      "sha256": "bdc2dd70aec79bd6a8999ee92171abf9d7a3e422ae5d62d46cd766c8166b4f89",
+      "mode": 33188
+    },
+    "clean_selection": "132 committed tracked providers. Seven untracked preserved originals have no committed preimage and are excluded.",
+    "overlay_selection": "Same132-provider basis with nine tracked original-body replacements plus seven untracked preserved additions;139 total.",
+    "tracked_replacement_paths": [
+      "src/editor/editor.c",
+      "src/editor/editor.h",
+      "src/editor/view.c",
+      "src/editor/view.h",
+      "src/native/editor_main.c",
+      "tests/editor_test.c",
+      "tests/test_editor.py",
+      "tools/build_core_tests.py",
+      "tools/test_sampler_emulator.py"
+    ],
+    "untracked_addition_paths": [
+      "AGENTS.md",
+      "amiga-test.json",
+      "src/native/pattern_display.c",
+      "src/native/pattern_display.h",
+      "tests/native_prepared_test.c",
+      "tools/shared_infra_sampler.py",
+      "tools/shared_infra_ui.py"
+    ],
+    "saved_project_custody": {
+      "source_inventory": {
+        "count": 1186,
+        "canonical_pin_map_sha256": "3ce419a3c513b477beaf4d1af7176bfe5fecf539c1141d881da042ae370771e9"
+      },
+      "controls": 68,
+      "protected": 16,
+      "before_after_head_index_status_and_empty_staged_checked": true,
+      "root_live_repository_modified_by_evidence_author": false
+    }
+  },
+  "groups": [
+    {
+      "variant": "clean",
+      "group": "sampler",
+      "provider_class": "Sampler",
+      "provider_method": "test_owned_versions_and_journal",
+      "driver": "clean-sampler",
+      "elapsed_seconds": 4.3073158750194125,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "clean-sampler.stdout",
+      "stderr": "clean-sampler.stderr"
+    },
+    {
+      "variant": "clean",
+      "group": "slots",
+      "provider_class": "Slots",
+      "provider_method": "test_sample_table_growth_and_shared_undo",
+      "driver": "clean-slots",
+      "elapsed_seconds": 6.344514541997341,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "clean-slots.stdout",
+      "stderr": "clean-slots.stderr"
+    },
+    {
+      "variant": "clean",
+      "group": "song",
+      "provider_class": "Song",
+      "provider_method": "test_growth_and_shared_history",
+      "driver": "clean-song",
+      "elapsed_seconds": 8.90141154101002,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "clean-song.stdout",
+      "stderr": "clean-song.stderr"
+    },
+    {
+      "variant": "clean",
+      "group": "sampler_workflow",
+      "provider_class": "SamplerWorkflow",
+      "provider_method": "test_atomic_cleanup_and_range_copy",
+      "driver": "clean-sampler_workflow",
+      "elapsed_seconds": 4.946169792005094,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "clean-sampler_workflow.stdout",
+      "stderr": "clean-sampler_workflow.stderr"
+    },
+    {
+      "variant": "clean",
+      "group": "sampler_copy_range_boundaries",
+      "provider_class": "SamplerCopyRangeBoundaries",
+      "provider_method": "test_private_copy_failure_boundaries",
+      "driver": "clean-sampler_copy_range_boundaries",
+      "elapsed_seconds": 5.047801166016143,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "clean-sampler_copy_range_boundaries.stdout",
+      "stderr": "clean-sampler_copy_range_boundaries.stderr"
+    },
+    {
+      "variant": "clean",
+      "group": "sampler_pin_job",
+      "provider_class": "SamplerPinJob",
+      "provider_method": "test_bounded_promotion",
+      "driver": "clean-sampler_pin_job",
+      "elapsed_seconds": 3.9099513749824837,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "clean-sampler_pin_job.stdout",
+      "stderr": "clean-sampler_pin_job.stderr"
+    },
+    {
+      "variant": "clean",
+      "group": "sampler_paula",
+      "provider_class": "SamplerPaula",
+      "provider_method": "test_selected_revision_and_lease_ownership",
+      "driver": "clean-sampler_paula",
+      "elapsed_seconds": 5.754635666991817,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "clean-sampler_paula.stdout",
+      "stderr": "clean-sampler_paula.stderr"
+    },
+    {
+      "variant": "clean",
+      "group": "sampler_wavetable",
+      "provider_class": "SamplerWavetable",
+      "provider_method": "test_revision_and_master_lifetime",
+      "driver": "clean-sampler_wavetable",
+      "elapsed_seconds": 5.219733916979749,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "clean-sampler_wavetable.stdout",
+      "stderr": "clean-sampler_wavetable.stderr"
+    },
+    {
+      "variant": "clean",
+      "group": "editor",
+      "provider_class": "Editor",
+      "provider_method": "test_native_shared_controller_and_planar_display",
+      "driver": "clean-editor",
+      "elapsed_seconds": 11.309122541017132,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "clean-editor.stdout",
+      "stderr": "clean-editor.stderr"
+    },
+    {
+      "variant": "clean",
+      "group": "editor_workflow",
+      "provider_class": "Workflow",
+      "provider_method": "test_integrated_controller_ownership_and_silent_navigation",
+      "driver": "clean-editor_workflow",
+      "elapsed_seconds": 6.906684041983681,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "clean-editor_workflow.stdout",
+      "stderr": "clean-editor_workflow.stderr"
+    },
+    {
+      "variant": "clean",
+      "group": "editor_guard",
+      "provider_class": "EditorGuard",
+      "provider_method": "test_before_mutation",
+      "driver": "clean-editor_guard",
+      "elapsed_seconds": 6.834149458009051,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "clean-editor_guard.stdout",
+      "stderr": "clean-editor_guard.stderr"
+    },
+    {
+      "variant": "clean",
+      "group": "editor_capture",
+      "provider_class": "EditorCapture",
+      "provider_method": "test_recording_barrier_and_publication",
+      "driver": "clean-editor_capture",
+      "elapsed_seconds": 6.557141583005432,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "clean-editor_capture.stdout",
+      "stderr": "clean-editor_capture.stderr"
+    },
+    {
+      "variant": "clean",
+      "group": "workflow_view",
+      "provider_class": "WorkflowView",
+      "provider_method": "test_planar_secondary_pages",
+      "driver": "clean-workflow_view",
+      "elapsed_seconds": 7.083158499997808,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "clean-workflow_view.stdout",
+      "stderr": "clean-workflow_view.stderr"
+    },
+    {
+      "variant": "clean",
+      "group": "workflow_performance",
+      "provider_class": "WorkflowPerformance",
+      "provider_method": "test_long_stereo_master_observations",
+      "driver": "clean-workflow_performance",
+      "elapsed_seconds": 7.0684702080034185,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "clean-workflow_performance.stdout",
+      "stderr": "clean-workflow_performance.stderr"
+    },
+    {
+      "variant": "overlay",
+      "group": "slots",
+      "provider_class": "Slots",
+      "provider_method": "test_sample_table_growth_and_shared_undo",
+      "driver": "overlay-slots",
+      "elapsed_seconds": 6.096261625003535,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "overlay-slots.stdout",
+      "stderr": "overlay-slots.stderr"
+    },
+    {
+      "variant": "overlay",
+      "group": "song",
+      "provider_class": "Song",
+      "provider_method": "test_growth_and_shared_history",
+      "driver": "overlay-song",
+      "elapsed_seconds": 8.334738167002797,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "overlay-song.stdout",
+      "stderr": "overlay-song.stderr"
+    },
+    {
+      "variant": "overlay",
+      "group": "editor",
+      "provider_class": "Editor",
+      "provider_method": "test_native_shared_controller_and_planar_display",
+      "driver": "overlay-editor",
+      "elapsed_seconds": 10.59417729199049,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "overlay-editor.stdout",
+      "stderr": "overlay-editor.stderr"
+    },
+    {
+      "variant": "overlay",
+      "group": "editor_workflow",
+      "provider_class": "Workflow",
+      "provider_method": "test_integrated_controller_ownership_and_silent_navigation",
+      "driver": "overlay-editor_workflow",
+      "elapsed_seconds": 7.099686165980529,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "overlay-editor_workflow.stdout",
+      "stderr": "overlay-editor_workflow.stderr"
+    },
+    {
+      "variant": "overlay",
+      "group": "editor_guard",
+      "provider_class": "EditorGuard",
+      "provider_method": "test_before_mutation",
+      "driver": "overlay-editor_guard",
+      "elapsed_seconds": 6.994337207986973,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "overlay-editor_guard.stdout",
+      "stderr": "overlay-editor_guard.stderr"
+    },
+    {
+      "variant": "overlay",
+      "group": "editor_capture",
+      "provider_class": "EditorCapture",
+      "provider_method": "test_recording_barrier_and_publication",
+      "driver": "overlay-editor_capture",
+      "elapsed_seconds": 6.571730333002051,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "overlay-editor_capture.stdout",
+      "stderr": "overlay-editor_capture.stderr"
+    },
+    {
+      "variant": "overlay",
+      "group": "workflow_view",
+      "provider_class": "WorkflowView",
+      "provider_method": "test_planar_secondary_pages",
+      "driver": "overlay-workflow_view",
+      "elapsed_seconds": 7.023688374989433,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "overlay-workflow_view.stdout",
+      "stderr": "overlay-workflow_view.stderr"
+    },
+    {
+      "variant": "overlay",
+      "group": "workflow_performance",
+      "provider_class": "WorkflowPerformance",
+      "provider_method": "test_long_stereo_master_observations",
+      "driver": "overlay-workflow_performance",
+      "elapsed_seconds": 6.841248417011229,
+      "complete_stdout_and_single_test_OK_stderr_contract": true,
+      "stdout": "overlay-workflow_performance.stdout",
+      "stderr": "overlay-workflow_performance.stderr"
+    }
+  ],
+  "drivers": [
+    {
+      "label": "before-head",
+      "status": "PASS_DRIVER",
+      "returncode": 0,
+      "elapsed_seconds": 0.04042429200490005,
+      "whole_seconds": 30,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 57879,
+      "pgid": 57879,
+      "stdout": "before-head.stdout",
+      "stderr": "before-head.stderr"
+    },
+    {
+      "label": "before-branch",
+      "status": "PASS_DRIVER",
+      "returncode": 0,
+      "elapsed_seconds": 0.026440790999913588,
+      "whole_seconds": 30,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 57880,
+      "pgid": 57880,
+      "stdout": "before-branch.stdout",
+      "stderr": "before-branch.stderr"
+    },
+    {
+      "label": "before-index",
+      "status": "PASS_DRIVER",
+      "returncode": 0,
+      "elapsed_seconds": 0.027940875006606802,
+      "whole_seconds": 30,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 57881,
+      "pgid": 57881,
+      "stdout": "before-index.stdout",
+      "stderr": "before-index.stderr"
+    },
+    {
+      "label": "before-staged",
+      "status": "PASS_DRIVER",
+      "returncode": 0,
+      "elapsed_seconds": 0.02218762499978766,
+      "whole_seconds": 30,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 57882,
+      "pgid": 57882,
+      "stdout": "before-staged.stdout",
+      "stderr": "before-staged.stderr"
+    },
+    {
+      "label": "before-status",
+      "status": "PASS_DRIVER",
+      "returncode": 0,
+      "elapsed_seconds": 0.02692404101253487,
+      "whole_seconds": 30,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 57883,
+      "pgid": 57883,
+      "stdout": "before-status.stdout",
+      "stderr": "before-status.stderr"
+    },
+    {
+      "label": "archive-clean",
+      "status": "PASS_DRIVER",
+      "returncode": 0,
+      "elapsed_seconds": 0.08793345800950192,
+      "whole_seconds": 30,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 57884,
+      "pgid": 57884,
+      "stdout": "archive-clean.stdout",
+      "stderr": "archive-clean.stderr"
+    },
+    {
+      "label": "before-tests-selected-clang",
+      "status": "PASS_DRIVER",
+      "returncode": 0,
+      "elapsed_seconds": 0.016316041990648955,
+      "whole_seconds": 30,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 57885,
+      "pgid": 57885,
+      "stdout": "before-tests-selected-clang.stdout",
+      "stderr": "before-tests-selected-clang.stderr"
+    },
+    {
+      "label": "before-tests-selected-cc",
+      "status": "PASS_DRIVER",
+      "returncode": 0,
+      "elapsed_seconds": 0.015838166000321507,
+      "whole_seconds": 30,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 57886,
+      "pgid": 57886,
+      "stdout": "before-tests-selected-cc.stdout",
+      "stderr": "before-tests-selected-cc.stderr"
+    },
+    {
+      "label": "before-tests-selected-sdk",
+      "status": "PASS_DRIVER",
+      "returncode": 0,
+      "elapsed_seconds": 0.01572983298683539,
+      "whole_seconds": 30,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 57887,
+      "pgid": 57887,
+      "stdout": "before-tests-selected-sdk.stdout",
+      "stderr": "before-tests-selected-sdk.stderr"
+    },
+    {
+      "label": "before-tests-selected-developer",
+      "status": "PASS_DRIVER",
+      "returncode": 0,
+      "elapsed_seconds": 0.015291459014406428,
+      "whole_seconds": 30,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 57889,
+      "pgid": 57889,
+      "stdout": "before-tests-selected-developer.stdout",
+      "stderr": "before-tests-selected-developer.stderr"
+    },
+    {
+      "label": "clean-sampler",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 4.3073158750194125,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 57893,
+      "pgid": 57893,
+      "stdout": "clean-sampler.stdout",
+      "stderr": "clean-sampler.stderr"
+    },
+    {
+      "label": "clean-slots",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 6.344514541997341,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 57955,
+      "pgid": 57955,
+      "stdout": "clean-slots.stdout",
+      "stderr": "clean-slots.stderr"
+    },
+    {
+      "label": "clean-song",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 8.90141154101002,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 58126,
+      "pgid": 58126,
+      "stdout": "clean-song.stdout",
+      "stderr": "clean-song.stderr"
+    },
+    {
+      "label": "clean-sampler_workflow",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 4.946169792005094,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 58251,
+      "pgid": 58251,
+      "stdout": "clean-sampler_workflow.stdout",
+      "stderr": "clean-sampler_workflow.stderr"
+    },
+    {
+      "label": "clean-sampler_copy_range_boundaries",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 5.047801166016143,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 58304,
+      "pgid": 58304,
+      "stdout": "clean-sampler_copy_range_boundaries.stdout",
+      "stderr": "clean-sampler_copy_range_boundaries.stderr"
+    },
+    {
+      "label": "clean-sampler_pin_job",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 3.9099513749824837,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 58380,
+      "pgid": 58380,
+      "stdout": "clean-sampler_pin_job.stdout",
+      "stderr": "clean-sampler_pin_job.stderr"
+    },
+    {
+      "label": "clean-sampler_paula",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 5.754635666991817,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 58409,
+      "pgid": 58409,
+      "stdout": "clean-sampler_paula.stdout",
+      "stderr": "clean-sampler_paula.stderr"
+    },
+    {
+      "label": "clean-sampler_wavetable",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 5.219733916979749,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 58507,
+      "pgid": 58507,
+      "stdout": "clean-sampler_wavetable.stdout",
+      "stderr": "clean-sampler_wavetable.stderr"
+    },
+    {
+      "label": "clean-editor",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 11.309122541017132,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 58580,
+      "pgid": 58580,
+      "stdout": "clean-editor.stdout",
+      "stderr": "clean-editor.stderr"
+    },
+    {
+      "label": "clean-editor_workflow",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 6.906684041983681,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 58756,
+      "pgid": 58756,
+      "stdout": "clean-editor_workflow.stdout",
+      "stderr": "clean-editor_workflow.stderr"
+    },
+    {
+      "label": "clean-editor_guard",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 6.834149458009051,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 58809,
+      "pgid": 58809,
+      "stdout": "clean-editor_guard.stdout",
+      "stderr": "clean-editor_guard.stderr"
+    },
+    {
+      "label": "clean-editor_capture",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 6.557141583005432,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 58863,
+      "pgid": 58863,
+      "stdout": "clean-editor_capture.stdout",
+      "stderr": "clean-editor_capture.stderr"
+    },
+    {
+      "label": "clean-workflow_view",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 7.083158499997808,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 58930,
+      "pgid": 58930,
+      "stdout": "clean-workflow_view.stdout",
+      "stderr": "clean-workflow_view.stderr"
+    },
+    {
+      "label": "clean-workflow_performance",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 7.0684702080034185,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 58990,
+      "pgid": 58990,
+      "stdout": "clean-workflow_performance.stdout",
+      "stderr": "clean-workflow_performance.stderr"
+    },
+    {
+      "label": "overlay-slots",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 6.096261625003535,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 59095,
+      "pgid": 59095,
+      "stdout": "overlay-slots.stdout",
+      "stderr": "overlay-slots.stderr"
+    },
+    {
+      "label": "overlay-song",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 8.334738167002797,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 59126,
+      "pgid": 59126,
+      "stdout": "overlay-song.stdout",
+      "stderr": "overlay-song.stderr"
+    },
+    {
+      "label": "overlay-editor",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 10.59417729199049,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 59194,
+      "pgid": 59194,
+      "stdout": "overlay-editor.stdout",
+      "stderr": "overlay-editor.stderr"
+    },
+    {
+      "label": "overlay-editor_workflow",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 7.099686165980529,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 59267,
+      "pgid": 59267,
+      "stdout": "overlay-editor_workflow.stdout",
+      "stderr": "overlay-editor_workflow.stderr"
+    },
+    {
+      "label": "overlay-editor_guard",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 6.994337207986973,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 59319,
+      "pgid": 59319,
+      "stdout": "overlay-editor_guard.stdout",
+      "stderr": "overlay-editor_guard.stderr"
+    },
+    {
+      "label": "overlay-editor_capture",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 6.571730333002051,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 59380,
+      "pgid": 59380,
+      "stdout": "overlay-editor_capture.stdout",
+      "stderr": "overlay-editor_capture.stderr"
+    },
+    {
+      "label": "overlay-workflow_view",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 7.023688374989433,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 59431,
+      "pgid": 59431,
+      "stdout": "overlay-workflow_view.stdout",
+      "stderr": "overlay-workflow_view.stderr"
+    },
+    {
+      "label": "overlay-workflow_performance",
+      "status": "PASS_ASSERTIONS_AND_OUTPUT",
+      "returncode": 0,
+      "elapsed_seconds": 6.841248417011229,
+      "whole_seconds": 600,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 59501,
+      "pgid": 59501,
+      "stdout": "overlay-workflow_performance.stdout",
+      "stderr": "overlay-workflow_performance.stderr"
+    },
+    {
+      "label": "after-tests-selected-clang",
+      "status": "PASS_DRIVER",
+      "returncode": 0,
+      "elapsed_seconds": 0.01526741700945422,
+      "whole_seconds": 30,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 59547,
+      "pgid": 59547,
+      "stdout": "after-tests-selected-clang.stdout",
+      "stderr": "after-tests-selected-clang.stderr"
+    },
+    {
+      "label": "after-tests-selected-cc",
+      "status": "PASS_DRIVER",
+      "returncode": 0,
+      "elapsed_seconds": 0.014364833012223244,
+      "whole_seconds": 30,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 59548,
+      "pgid": 59548,
+      "stdout": "after-tests-selected-cc.stdout",
+      "stderr": "after-tests-selected-cc.stderr"
+    },
+    {
+      "label": "after-tests-selected-sdk",
+      "status": "PASS_DRIVER",
+      "returncode": 0,
+      "elapsed_seconds": 0.014125083020189777,
+      "whole_seconds": 30,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 59549,
+      "pgid": 59549,
+      "stdout": "after-tests-selected-sdk.stdout",
+      "stderr": "after-tests-selected-sdk.stderr"
+    },
+    {
+      "label": "after-tests-selected-developer",
+      "status": "PASS_DRIVER",
+      "returncode": 0,
+      "elapsed_seconds": 0.00922295800410211,
+      "whole_seconds": 30,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 59550,
+      "pgid": 59550,
+      "stdout": "after-tests-selected-developer.stdout",
+      "stderr": "after-tests-selected-developer.stderr"
+    },
+    {
+      "label": "after-head",
+      "status": "PASS_DRIVER",
+      "returncode": 0,
+      "elapsed_seconds": 0.024918374983826652,
+      "whole_seconds": 30,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 59551,
+      "pgid": 59551,
+      "stdout": "after-head.stdout",
+      "stderr": "after-head.stderr"
+    },
+    {
+      "label": "after-index",
+      "status": "PASS_DRIVER",
+      "returncode": 0,
+      "elapsed_seconds": 0.026319832977605984,
+      "whole_seconds": 30,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 59552,
+      "pgid": 59552,
+      "stdout": "after-index.stdout",
+      "stderr": "after-index.stderr"
+    },
+    {
+      "label": "after-status",
+      "status": "PASS_DRIVER",
+      "returncode": 0,
+      "elapsed_seconds": 0.0424885000102222,
+      "whole_seconds": 30,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 59553,
+      "pgid": 59553,
+      "stdout": "after-status.stdout",
+      "stderr": "after-status.stderr"
+    },
+    {
+      "label": "after-staged",
+      "status": "PASS_DRIVER",
+      "returncode": 0,
+      "elapsed_seconds": 0.02476562501396984,
+      "whole_seconds": 30,
+      "completion_within_effective_deadline": true,
+      "owned_new_session": true,
+      "driver_reaped": true,
+      "group_quiescent": true,
+      "pid": 59554,
+      "pgid": 59554,
+      "stdout": "after-staged.stdout",
+      "stderr": "after-staged.stderr"
+    }
+  ],
+  "raw_stream_root": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/workflow-current-host-runner-final-v1/execution-first-v1",
+  "raw_streams": {
+    "before-head.stdout": {
+      "bytes": 41,
+      "sha256": "d82be8ba7e43f83f37e63f6c10513e90564a03417f7a59f8db91f30f41412258",
+      "mode": 33188
+    },
+    "before-head.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "before-branch.stdout": {
+      "bytes": 31,
+      "sha256": "218f389b3beebe94baeef4f4a8f7447956c3b3471d5890c8aabad0d9bf3eb3f9",
+      "mode": 33188
+    },
+    "before-branch.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "before-index.stdout": {
+      "bytes": 1219992,
+      "sha256": "a7cbfd34a292b0ebd5c269ef388863c54356676a1a72c682e1882c7adde7db0e",
+      "mode": 33188
+    },
+    "before-index.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "before-staged.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "before-staged.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "before-status.stdout": {
+      "bytes": 415,
+      "sha256": "683b0b2b900a5b87a36555bf6dfa11d8a7eac816e652cc40a157833b641b63a0",
+      "mode": 33188
+    },
+    "before-status.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "archive-clean.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "archive-clean.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "before-tests-selected-clang.stdout": {
+      "bytes": 50,
+      "sha256": "4a277db848a60259d4c4dbd77c3cb2762818869641697e64fdbdd025002e3bb9",
+      "mode": 33188
+    },
+    "before-tests-selected-clang.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "before-tests-selected-cc.stdout": {
+      "bytes": 47,
+      "sha256": "2ada953f982b5411371bbdc01a06c8b9f22cff3d9cf17e07a1127d3d5618bc36",
+      "mode": 33188
+    },
+    "before-tests-selected-cc.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "before-tests-selected-sdk.stdout": {
+      "bytes": 52,
+      "sha256": "71d2d22cf2f2d1a4606d2b131f4f1cc22ab8f2f05df7e76fb6298e428ace92e6",
+      "mode": 33188
+    },
+    "before-tests-selected-sdk.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "before-tests-selected-developer.stdout": {
+      "bytes": 36,
+      "sha256": "a8044fec385da5d3d686b9c06000917f00d0f27ca72b7db5b47bfc277f748301",
+      "mode": 33188
+    },
+    "before-tests-selected-developer.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "clean-sampler.stdout": {
+      "bytes": 987,
+      "sha256": "c26ad399507a103c7e2edbec697c8db1a4b160f360d6e26f42e97844a53a9ce5",
+      "mode": 33188
+    },
+    "clean-sampler.stderr": {
+      "bytes": 191,
+      "sha256": "9e08575993618a81f2cb9070ff0c63291857e707ae0d536d1b4646c0a0de7831",
+      "mode": 33188
+    },
+    "clean-slots.stdout": {
+      "bytes": 174,
+      "sha256": "5647d57ff8b899feba2473776789bf4ff8820fda39b05726c770166bdfb5d636",
+      "mode": 33188
+    },
+    "clean-slots.stderr": {
+      "bytes": 205,
+      "sha256": "2e1844aa99be4b3c3fe54c95fdc4d55b19ec726ed2ed5b3efe49250f2f26d1fa",
+      "mode": 33188
+    },
+    "clean-song.stdout": {
+      "bytes": 172,
+      "sha256": "38f1f8ecfa3fc2b6df0816f3a5c15af8e3ee0df73faf55325453aefbef68be6e",
+      "mode": 33188
+    },
+    "clean-song.stderr": {
+      "bytes": 183,
+      "sha256": "0e43ea9ebed1caa7097f50fc4b112d954e9379588bdf9fc1db3d455b136f524d",
+      "mode": 33188
+    },
+    "clean-sampler_workflow.stdout": {
+      "bytes": 284,
+      "sha256": "ecc8f94b4c668a8919ed481664875072dc97a7cd399f121d554aa8cd7609efe7",
+      "mode": 33188
+    },
+    "clean-sampler_workflow.stderr": {
+      "bytes": 214,
+      "sha256": "86c1311834dd3c21675f31907e339699286c0d39c0b31615f9268cafe886144d",
+      "mode": 33188
+    },
+    "clean-sampler_copy_range_boundaries.stdout": {
+      "bytes": 108,
+      "sha256": "5c9811036be403522fd8aa0902bf6281d20ba2b7d7ba3134d037adc61d49e2be",
+      "mode": 33188
+    },
+    "clean-sampler_copy_range_boundaries.stderr": {
+      "bytes": 242,
+      "sha256": "99758ad66b5d80605719cb04128b14c0983ca3110583f2b9f8cbabab768149f8",
+      "mode": 33188
+    },
+    "clean-sampler_pin_job.stdout": {
+      "bytes": 132,
+      "sha256": "b35e6e439d8f00d0cec5ab4cc401d594f8e6e2244505839038c4bc5532cf99db",
+      "mode": 33188
+    },
+    "clean-sampler_pin_job.stderr": {
+      "bytes": 187,
+      "sha256": "a98c4554fef17723f176e8b1d104f7c2f6b5a291eb9231b734c84e99cfd76f9b",
+      "mode": 33188
+    },
+    "clean-sampler_paula.stdout": {
+      "bytes": 341,
+      "sha256": "54b1ae94ac42582d801d59011ea5742d7df6c05ae8c04ac67b161cb0a1dad878",
+      "mode": 33188
+    },
+    "clean-sampler_paula.stderr": {
+      "bytes": 224,
+      "sha256": "f7130d979444629c6dacaba3dc8bc3451b7235187f24b1d70343fc1805cea082",
+      "mode": 33188
+    },
+    "clean-sampler_wavetable.stdout": {
+      "bytes": 829,
+      "sha256": "8763b89703b8eb05ead20524db55e1039c877ee981321e7d026d7a68c44366ba",
+      "mode": 33188
+    },
+    "clean-sampler_wavetable.stderr": {
+      "bytes": 214,
+      "sha256": "4c277d2220c4a6518d15ab8532bdb97c9134e4d6095328bf11ad14e837339077",
+      "mode": 33188
+    },
+    "clean-editor.stdout": {
+      "bytes": 182,
+      "sha256": "2dcc19c76a846bb620f486c450ef20adb95942a4c5cf5850cfb8b0c888e40b40",
+      "mode": 33188
+    },
+    "clean-editor.stderr": {
+      "bytes": 224,
+      "sha256": "c48d21ae39e7d79778ba63d12cce4786a1ec5a072ba161493f5aa842c181105d",
+      "mode": 33188
+    },
+    "clean-editor_workflow.stdout": {
+      "bytes": 167,
+      "sha256": "0cc6b71b834d0b903c983a6866e19e0b66b817609706d94fe6f8b750c986e249",
+      "mode": 33188
+    },
+    "clean-editor_workflow.stderr": {
+      "bytes": 254,
+      "sha256": "70e89f411083642c3c7bf3217620cb08e9be416e397a763df0ab8a8267e6e5b7",
+      "mode": 33188
+    },
+    "clean-editor_guard.stdout": {
+      "bytes": 99,
+      "sha256": "f13d6d7023dde65ed789f98f44b887e4e3567a3da302817d1250325204f434a9",
+      "mode": 33188
+    },
+    "clean-editor_guard.stderr": {
+      "bytes": 178,
+      "sha256": "649b797f488b214f4e2164c6faf9b7c7568fa8c7f0016f106306a25b3b765b85",
+      "mode": 33188
+    },
+    "clean-editor_capture.stdout": {
+      "bytes": 580,
+      "sha256": "c1908e047dc68ee148942adabb1fb1e961948bbb1062d7eacb728e7524b0c952",
+      "mode": 33188
+    },
+    "clean-editor_capture.stderr": {
+      "bytes": 218,
+      "sha256": "94d5b3a16ccbeef20bcaab528282ac496c4022ce1a5b2a011ef7dc32890a5321",
+      "mode": 33188
+    },
+    "clean-workflow_view.stdout": {
+      "bytes": 70,
+      "sha256": "ed39f81485158d5e982c9bf4a405509c50fb6aeda4b26c1f6ddba6c9363221de",
+      "mode": 33188
+    },
+    "clean-workflow_view.stderr": {
+      "bytes": 194,
+      "sha256": "fe85121d3672e7c4f64ceb03334d86957503e4f443c161bebdcf59c0745881a5",
+      "mode": 33188
+    },
+    "clean-workflow_performance.stdout": {
+      "bytes": 1069,
+      "sha256": "80ef0c11d5483a8a884c7161affd5ee4f5fe07a80f1a51a8484d8bb9433f2904",
+      "mode": 33188
+    },
+    "clean-workflow_performance.stderr": {
+      "bytes": 226,
+      "sha256": "c648c3234c7d7e3244c23eca2951c4518c2c6a120f49c5b221a5b2ee55cf91e2",
+      "mode": 33188
+    },
+    "overlay-slots.stdout": {
+      "bytes": 174,
+      "sha256": "5647d57ff8b899feba2473776789bf4ff8820fda39b05726c770166bdfb5d636",
+      "mode": 33188
+    },
+    "overlay-slots.stderr": {
+      "bytes": 205,
+      "sha256": "ed4fc1c2ff5d65bb26e82aaef03fd194b04fdc6b2c6ef7c93876055240179cb7",
+      "mode": 33188
+    },
+    "overlay-song.stdout": {
+      "bytes": 172,
+      "sha256": "38f1f8ecfa3fc2b6df0816f3a5c15af8e3ee0df73faf55325453aefbef68be6e",
+      "mode": 33188
+    },
+    "overlay-song.stderr": {
+      "bytes": 183,
+      "sha256": "72690291f8a3abd4c4a9fc8ace3958ed193036edb91cbf6bd973a197c00cdfb4",
+      "mode": 33188
+    },
+    "overlay-editor.stdout": {
+      "bytes": 182,
+      "sha256": "2dcc19c76a846bb620f486c450ef20adb95942a4c5cf5850cfb8b0c888e40b40",
+      "mode": 33188
+    },
+    "overlay-editor.stderr": {
+      "bytes": 224,
+      "sha256": "39f2f05351781a3d30f0662acf1df6dd348145e6628bc830b7d978393d783252",
+      "mode": 33188
+    },
+    "overlay-editor_workflow.stdout": {
+      "bytes": 167,
+      "sha256": "0cc6b71b834d0b903c983a6866e19e0b66b817609706d94fe6f8b750c986e249",
+      "mode": 33188
+    },
+    "overlay-editor_workflow.stderr": {
+      "bytes": 254,
+      "sha256": "79cdba365311b2d1ed007f66dc729b56dd159bf3c8dff71b7509ea4e3759f18f",
+      "mode": 33188
+    },
+    "overlay-editor_guard.stdout": {
+      "bytes": 99,
+      "sha256": "f13d6d7023dde65ed789f98f44b887e4e3567a3da302817d1250325204f434a9",
+      "mode": 33188
+    },
+    "overlay-editor_guard.stderr": {
+      "bytes": 178,
+      "sha256": "6f15d58fa6b3b114a3a7923a13bf43b692c89d8cf7e577456f5be42200787637",
+      "mode": 33188
+    },
+    "overlay-editor_capture.stdout": {
+      "bytes": 580,
+      "sha256": "c1908e047dc68ee148942adabb1fb1e961948bbb1062d7eacb728e7524b0c952",
+      "mode": 33188
+    },
+    "overlay-editor_capture.stderr": {
+      "bytes": 218,
+      "sha256": "426cd218681640937af3e635678ad2d54b6be26e3ce64edd1d8307d5fc804c7f",
+      "mode": 33188
+    },
+    "overlay-workflow_view.stdout": {
+      "bytes": 70,
+      "sha256": "ed39f81485158d5e982c9bf4a405509c50fb6aeda4b26c1f6ddba6c9363221de",
+      "mode": 33188
+    },
+    "overlay-workflow_view.stderr": {
+      "bytes": 194,
+      "sha256": "ee672efec81f590ae45fb20b45c858889a9d6f70c646c986a0142f90b95b76a4",
+      "mode": 33188
+    },
+    "overlay-workflow_performance.stdout": {
+      "bytes": 1069,
+      "sha256": "0e89f44464e607c63e6d8fa5f27f742334b739290a113dd79a67699632e5b105",
+      "mode": 33188
+    },
+    "overlay-workflow_performance.stderr": {
+      "bytes": 226,
+      "sha256": "67887b6e61f51c8c7386c34636b15c4d0ac2202a81c3086357d1e3a3d2490777",
+      "mode": 33188
+    },
+    "after-tests-selected-clang.stdout": {
+      "bytes": 50,
+      "sha256": "4a277db848a60259d4c4dbd77c3cb2762818869641697e64fdbdd025002e3bb9",
+      "mode": 33188
+    },
+    "after-tests-selected-clang.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "after-tests-selected-cc.stdout": {
+      "bytes": 47,
+      "sha256": "2ada953f982b5411371bbdc01a06c8b9f22cff3d9cf17e07a1127d3d5618bc36",
+      "mode": 33188
+    },
+    "after-tests-selected-cc.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "after-tests-selected-sdk.stdout": {
+      "bytes": 52,
+      "sha256": "71d2d22cf2f2d1a4606d2b131f4f1cc22ab8f2f05df7e76fb6298e428ace92e6",
+      "mode": 33188
+    },
+    "after-tests-selected-sdk.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "after-tests-selected-developer.stdout": {
+      "bytes": 36,
+      "sha256": "a8044fec385da5d3d686b9c06000917f00d0f27ca72b7db5b47bfc277f748301",
+      "mode": 33188
+    },
+    "after-tests-selected-developer.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "after-head.stdout": {
+      "bytes": 41,
+      "sha256": "d82be8ba7e43f83f37e63f6c10513e90564a03417f7a59f8db91f30f41412258",
+      "mode": 33188
+    },
+    "after-head.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "after-index.stdout": {
+      "bytes": 1219992,
+      "sha256": "a7cbfd34a292b0ebd5c269ef388863c54356676a1a72c682e1882c7adde7db0e",
+      "mode": 33188
+    },
+    "after-index.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "after-status.stdout": {
+      "bytes": 415,
+      "sha256": "683b0b2b900a5b87a36555bf6dfa11d8a7eac816e652cc40a157833b641b63a0",
+      "mode": 33188
+    },
+    "after-status.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "after-staged.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "after-staged.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    }
+  },
+  "unchanged_image_assertions": {
+    "clean_editor_PPM_SHA256": "87ebf44ea470be133f7d47931f04210e5b883b90e3b882a256f1f641bd7450eb",
+    "preserved_overlay_editor_PPM_SHA256": "3889e8d4db96566f120b3053e5e58054cddaffb8ebe2c9147efd1f4b88a8d139",
+    "workflow_view_PPM_header": "P6\n640 512\n255\n",
+    "workflow_view_each_PPM_bytes": 983055,
+    "performance_fixed_fields": {
+      "master_active_bytes": 8388608,
+      "master_capacity_bytes": 8388864,
+      "frames": 1048576,
+      "summary_steps": 512,
+      "summary_reads": 2097152,
+      "summary_max_values": 4096,
+      "warm_calls": 128,
+      "copy_active_bytes": 4194304
+    },
+    "performance_copy_idle_assertion_range": [
+      1536,
+      1664
+    ],
+    "no_test_golden_or_flag_edit": true,
+    "workflow_view_images_per_variant": 4,
+    "execution_evidence": "Existing fixture assertions and complete saved streams/one-test OK passed. Original tests removed temporary PPMs and binaries.",
+    "retained_PPM_or_product_artifact_proof": false,
+    "human_visual_acceptance": false
+  },
+  "performance_observations": {
+    "clean": {
+      "exact_raw_decimal_tokens": {
+        "master_active_bytes": "8388608",
+        "master_capacity_bytes": "8388864",
+        "frames": "1048576",
+        "bits": "24",
+        "channels": "2",
+        "summary_steps": "512",
+        "summary_reads": "2097152",
+        "summary_max_values": "4096",
+        "summary_begin_cpu_s": "0.000018000",
+        "summary_total_cpu_s": "0.014159000",
+        "summary_max_step_cpu_s": "0.000035000",
+        "warm_calls": "128",
+        "warm_cpu_s": "0.000052000",
+        "copy_active_bytes": "4194304",
+        "copy_idle_calls": "1543",
+        "copy_request_cpu_s": "0.000055000",
+        "copy_idle_total_cpu_s": "0.020019000",
+        "copy_max_idle_cpu_s": "0.000188000",
+        "undo_cpu_s": "0.000031000",
+        "redo_cpu_s": "0.000003000",
+        "dispose_cpu_s": "0.000031000",
+        "allocator_base_bytes": "8602170",
+        "allocator_copy_live_bytes": "12802114",
+        "allocator_undo_live_bytes": "12802114",
+        "sampler_retained_bytes": "4199944",
+        "copy_allocations": "3",
+        "allocator_peak_requested_bytes": "12802114",
+        "allocator_largest_request": "8388864",
+        "allocator_requests": "8",
+        "allocator_cumulative_requested_bytes": "12802114",
+        "final_live_allocations": "0",
+        "final_requested_bytes": "0"
+      },
+      "stdout": "clean-workflow_performance.stdout",
+      "measurement_scope": "Original sanitized HOST fixture process CPU seconds and tracked requested payload bytes; one run, not wall latency/RSS/native030/WCET/device acceptance."
+    },
+    "overlay": {
+      "exact_raw_decimal_tokens": {
+        "master_active_bytes": "8388608",
+        "master_capacity_bytes": "8388864",
+        "frames": "1048576",
+        "bits": "24",
+        "channels": "2",
+        "summary_steps": "512",
+        "summary_reads": "2097152",
+        "summary_max_values": "4096",
+        "summary_begin_cpu_s": "0.000026000",
+        "summary_total_cpu_s": "0.017704000",
+        "summary_max_step_cpu_s": "0.000043000",
+        "warm_calls": "128",
+        "warm_cpu_s": "0.000063000",
+        "copy_active_bytes": "4194304",
+        "copy_idle_calls": "1543",
+        "copy_request_cpu_s": "0.000032000",
+        "copy_idle_total_cpu_s": "0.021541000",
+        "copy_max_idle_cpu_s": "0.000286000",
+        "undo_cpu_s": "0.000032000",
+        "redo_cpu_s": "0.000003000",
+        "dispose_cpu_s": "0.000048000",
+        "allocator_base_bytes": "8602170",
+        "allocator_copy_live_bytes": "12802114",
+        "allocator_undo_live_bytes": "12802114",
+        "sampler_retained_bytes": "4199944",
+        "copy_allocations": "3",
+        "allocator_peak_requested_bytes": "12802114",
+        "allocator_largest_request": "8388864",
+        "allocator_requests": "8",
+        "allocator_cumulative_requested_bytes": "12802114",
+        "final_live_allocations": "0",
+        "final_requested_bytes": "0"
+      },
+      "stdout": "overlay-workflow_performance.stdout",
+      "measurement_scope": "Original sanitized HOST fixture process CPU seconds and tracked requested payload bytes; one run, not wall latency/RSS/native030/WCET/device acceptance."
+    }
+  },
+  "performance_interpretation": {
+    "copy_idle_calls": 1543,
+    "unchanged_copy_idle_assertion_range": [
+      1536,
+      1664
+    ],
+    "peak_and_undo_retained_requested_payload_bytes": 12802114,
+    "final_live_allocations": 0,
+    "final_requested_bytes": 0,
+    "allocator_accounting": "Fixture editor/document/master/private sampler tracked requested payloads; excludes allocator headers, runtime and RSS.",
+    "native_latency_or_Chip_Fast_availability_inferred": false,
+    "historical_REPORT_numbers": "Preserved earlier run figures are separate observations; these exact values supplement them and do not replace their evidence."
+  },
+  "recorded_execution_bounds": {
+    "overall_seconds": 15000,
+    "actual_elapsed_seconds": 167.34912179198,
+    "clean_phase_seconds": 9000,
+    "overlay_phase_seconds": 5400,
+    "preparation_driver_seconds": 30,
+    "test_driver_seconds": 600,
+    "cleanup_reserve_within_driver_seconds": 5,
+    "max_observed_driver_seconds": 11.309122541017132,
+    "all_recorded_call_completion_flags_true": true,
+    "scope": "600 seconds covers the driver/wait/cleanup/primary persistence. Pre/post admission uses phase/global bounds. Filesystem/spawn latency is not guaranteed; emergency/failure persistence limitations remain disclosed in the selected runner/policy.",
+    "saved_only_no_completed_process_probe": true
+  },
+  "coordination_supersession_note": {
+    "historical_REPORT_reference": "The pre-adoption REPORT recorded the earlier rejected coordination message while destination permission was pending. The proposed REPORT retains that rejection as history and explicitly marks later human authorization and reported manual-session closure as superseding the old pending-permission statement; fresh test-window guards remain required.",
+    "messaging_permission": "The later direct human Allow coordination messages answer supersedes the historical unanswered-permission statement. The old automatic-review rejection remains part of its original history.",
+    "manual_session_closure": "Human manual-A500 closure is reported confirmed by root; earlier unconfirmed notes are superseded.",
+    "latest_guarded_release": "Root handoff subsequently reports Scott guarded full release after its silent emulator BODY test, with passive AmiConnect corroboration and no visible Scott/AmiGUS next claim. This author has not independently observed the guest or transport.",
+    "root_ownership": "NONE",
+    "external_replay_priority": "Not checked; messaging that destination was not authorized.",
+    "remaining_admission": "Fresh exact-candidate shared peer/live ownership, recovery, target identity and established harness guards remain required before any target or service operation. A past release, Safari View Only, messaging permission and this HOST package grant no target window.",
+    "provenance": "Direct human task authorization and root coordination handoff; checkpoint heading Current workflow HOST refresh passed; shared manual closure now confirmed is an earlier saved record, not a fresh target observation."
+  },
+  "authoring_method": {
+    "mode": "Saved-only stdlib JSON/stat/hash/text materialization; no candidate import/invocation, test replay, compiler, Git, target, process probe or repository edit.",
+    "resampled_inputs": "Accepted root/audit/receipt bindings, runner/policy, archive and all80 complete raw streams.132/139 maps summarized by digest, not duplicated; no970 or historical659 closure clone.",
+    "trusted_metadata_refusal_preserved": "One initial read-only inspector assumed every driver status was PASS_DRIVER and refused before writing. Actual22 test rows are PASS_ASSERTIONS_AND_OUTPUT and18 preparation/metadata rows PASS_DRIVER; corrected exact predicate accepted both classified groups. No candidate action or result changed."
+  },
+  "limitations": [
+    "This two-file private supplement has no executable entry, adoption/commit/launch authority or new acceptance of native/hardware work.",
+    "Scoped22 executions do not assert a new all24-group suite pass. Original broader or older results remain separately preserved.",
+    "No retained executable/PPM artifact, human visual, live playback, precise native schedule, device capacity/order/completion, stop or listening acceptance is implied.",
+    "Saved release/authorization provenance cannot establish current shared target ownership or transport availability; fresh scoped guards remain necessary.",
+    "No sources, goldens, flags,16 protected paths or repository documentation were changed by this evidence author."
+  ]
+}

@@ -30,6 +30,10 @@ struct paired_ram {
     int publish_result,commit_result,source_result,quiet_override;
     unsigned publications,commits,effects,command_probes,reader_probes,source_probes,quiet_probes,clock_reads;
     unsigned hook,hooks,late,publish_late,malformed,command_pending,reader_pending,closed,identity_mutation;
+    /* Explicit adversarial observations; expire before every quiet proof. */
+    unsigned packet_observation,packet_phase,packet_mutation,packet_reentry,packet_mutations;
+    const struct pt_mixed_activation_packet *observed_packet;
+    struct pt_mixed_activation_packet original_packet;
 };
 struct paired_allocator {
     void *block[4],*base[4];size_t bytes[4];unsigned calls,releases,live,fail_at,alias_at,misaligned_at,hook,hooks;
@@ -58,7 +62,7 @@ static int a_expected(struct paired_ram *p,const struct pt_mixed_activation_pack
  if(p->registration.owner&&!a_registration_same(&p->registration,&b->registration))return 0;
  for(i=0;i<20;++i)if(!keys_equal(b->expected+i,p->slot+i))return 0;
  return 1;}
-static int a_publish(void *context,struct pt_mixed_readers_activation *owner,const struct pt_mixed_activation_packet *b)
+static int a_publish_model(void *context,struct pt_mixed_readers_activation *owner,const struct pt_mixed_activation_packet *b)
 {
     struct paired_ram *p=context;unsigned i,before=p->hooks;++p->publications;a_hook(p,2);
     if(!p->publish_result){if(p->hooks!=before)p->registration=b->registration;return 0;}
@@ -70,7 +74,7 @@ static int a_publish(void *context,struct pt_mixed_readers_activation *owner,con
 }
 static void a_drop_packet(struct paired_ram_command *c)
 {unsigned i;for(i=0;i<c->packet.count;++i){memset(&c->packet.action[i].geometry,0,sizeof(c->packet.action[i].geometry));memset(c->packet.card+i,0,sizeof(c->packet.card[i]));}}
-static int a_commit(void *context,const struct pt_mixed_activation_packet *b,struct pt_mixed_activation_actual *actual)
+static int a_commit_model(void *context,const struct pt_mixed_activation_packet *b,struct pt_mixed_activation_actual *actual)
 {
     struct paired_ram *p=context;struct paired_ram_command *c=a_command(p,b->ticket);
     unsigned i,j,used=0,selected=0,placement[16]={0};++p->commits;a_hook(p,3);
@@ -107,10 +111,60 @@ static int a_commit(void *context,const struct pt_mixed_activation_packet *b,str
     if(p->late)p->ticks=b->last;
     return p->commit_result;
 }
+/* An intentionally faulty port casts away const after its genuine MODEL
+ * operation. Production must restore its original packet before any walk.
+ * The pointer and copied oracle exist only in explicit observation cases,
+ * and both expire before the first subsequent successful quiet proof. */
+static void a_packet_fault(struct paired_ram *p,const struct pt_mixed_activation_packet *b,unsigned phase)
+{
+    struct pt_mixed_activation_packet *w=(struct pt_mixed_activation_packet *)(void *)b;
+    if(p->packet_phase!=phase)return;
+    assert(p->packet_observation&&p->observed_packet==b);
+    ++p->packet_mutations;
+    if(phase==1)p->registration=p->original_packet.registration;
+    switch(p->packet_mutation){
+    case 0:w->expected[19].serial^=1;break; /* Untouched twentieth original key. */
+    case 1:w->card[4].serial^=1;break;
+    case 2:w->action[0].geometry.paula.words^=1;break;
+    case 3:w->ticket^=1;break;
+    case 4:w->count=PT_MIXED_READERS_ACTIONS+1;break;
+    case 5:w->action[5].geometry.amigus.end_exclusive^=2;break;
+    case 6:w->action[PT_MIXED_READERS_ACTIONS-1].geometry.amigus.rate^=1;break;
+    case 7:w->registration.session^=1;break;
+    }
+    if(p->packet_reentry){++p->hooks;
+        assert(pt_mixed_activation_fire(p->owner,p->original_packet.ticket)==PT_MIXED_ACTIVATION_INVALID);}
+}
+static int a_publish(void *context,struct pt_mixed_readers_activation *owner,const struct pt_mixed_activation_packet *b)
+{
+    struct paired_ram *p=context;int raw;
+    if(p->packet_observation){memcpy(&p->original_packet,b,sizeof(*b));p->observed_packet=b;}
+    raw=a_publish_model(context,owner,b);a_packet_fault(p,b,1);return raw;
+}
+static int a_commit(void *context,const struct pt_mixed_activation_packet *b,struct pt_mixed_activation_actual *actual)
+{
+    struct paired_ram *p=context;int raw;
+    if(p->packet_observation){memcpy(&p->original_packet,b,sizeof(*b));p->observed_packet=b;}
+    raw=a_commit_model(context,b,actual);a_packet_fault(p,b,2);return raw;
+}
+/* No observer reference may survive a genuine command/reader/source proof. */
+static void a_packet_observation_expire(struct paired_ram *p)
+{
+    p->packet_observation=0;p->packet_phase=0;p->packet_reentry=0;p->observed_packet=NULL;
+    memset(&p->original_packet,0,sizeof(p->original_packet));
+}
+static int a_packet_observation_empty(const struct paired_ram *p)
+{
+    const uint8_t *bytes=(const uint8_t *)(const void *)&p->original_packet;size_t i;
+    if(p->packet_observation||p->observed_packet)return 0;
+    for(i=0;i<sizeof(p->original_packet);++i)if(bytes[i])return 0;
+    return 1;
+}
 static int a_command_quiet(void *context,const struct pt_mixed_activation_command_identity *identity,unsigned cancel)
 {
     struct paired_ram *p=context;struct paired_ram_command *c=a_command(p,identity->ticket);++p->command_probes;a_hook(p,4);
     if(p->command_pending)return 0;
+    assert(a_packet_observation_empty(p));
     assert(a_registration_same(&identity->registration,&p->registration));
     if(!c)return 1;
     if(!c->finished&&!cancel)return 0;
@@ -122,6 +176,7 @@ static int a_reader_quiet(void *context,const struct pt_mixed_activation_reader_
 {
     struct paired_ram *p=context;struct paired_ram_reader *r=a_reader(p,&identity->key);unsigned i,j,index;
     ++p->reader_probes;a_hook(p,5);if(p->reader_pending)return 0;
+    assert(a_packet_observation_empty(p));
     assert(a_registration_same(&identity->registration,&p->registration));
     if(r&&r->active&&!cancel)return 0;
     for(i=0;i<2;++i){struct paired_ram_command *c=p->command+i;unsigned names=0;
@@ -138,6 +193,7 @@ static int a_reader_quiet(void *context,const struct pt_mixed_activation_reader_
 static int a_source_close(void *context,const struct pt_mixed_activation_registration *registration)
 {
     struct paired_ram *p=context;unsigned i;++p->source_probes;a_hook(p,6);
+    assert(a_packet_observation_empty(p));
     assert(registration->owner==p->owner&&registration->queue&&registration->session==19&&registration->generation==17);
     if(p->registration.owner)assert(a_registration_same(registration,&p->registration));
     for(i=0;i<2;++i)assert(!p->command[i].live);
@@ -149,6 +205,7 @@ static int a_source_close(void *context,const struct pt_mixed_activation_registr
 static int a_source_quiet(void *context,const struct pt_mixed_activation_registration *registration)
 {
     struct paired_ram *p=context;unsigned i;++p->quiet_probes;
+    assert(a_packet_observation_empty(p));
     assert(registration->owner&&registration->queue&&registration->session==19&&registration->generation==17);
     if(p->registration.owner)assert(a_registration_same(registration,&p->registration));
     if(p->hook==7){p->hook=0;++p->hooks;assert(pt_mixed_activation_fire((struct pt_mixed_readers_activation *)registration->owner,1)==PT_MIXED_ACTIVATION_INVALID);}
@@ -480,9 +537,92 @@ static void a_controls_and_replacements(unsigned order)
     for(i=0;i<6;++i)assert(pt_mixed_activation_service_reader(c->owner,third,i,1,NULL)==PT_MIXED_READERS_OK);
     assert(pt_mixed_activation_close(&c->owner));a_destroy(c);
 }
+/* Observe our genuine allocator's still-live ordinary owner block, without
+ * a private struct mirror, guessed offset, added product API or mutation.
+ * A retained full backup would create a second byte-identical packet. The
+ * SOURCE packet-only memset establishes that the entire scratch packet is0. */
+static unsigned a_owner_packet_copies(const struct activation_case *c,const struct pt_mixed_activation_packet *p)
+{
+    const uint8_t *bytes=(const uint8_t *)(const void *)c->owner;
+    size_t i,capacity=pt_mixed_activation_control_size();unsigned copies=0;
+    assert(c->owner&&c->memory.live==2&&capacity>=sizeof(*p));
+    for(i=0;i<=capacity-sizeof(*p);++i)copies+=!memcmp(bytes+i,p,sizeof(*p));
+    return copies;
+}
+static void a_packet_mutation_case(unsigned phase,unsigned mode,int raw,unsigned reentry,unsigned order)
+{
+    struct activation_case *c=a_make(24,16);uint64_t ticket;size_t n;
+    uint8_t *saved=save(c->trial->resources,&n);
+    struct pt_mixed_readers_key sentinel,key;
+    a_open(c);ticket=a_enqueue(c,6,0,960);
+    c->ram.packet_observation=1;c->ram.packet_phase=phase;c->ram.packet_mutation=mode;c->ram.packet_reentry=reentry;
+    if(phase==1){c->ram.publish_result=raw;
+        assert(pt_mixed_activation_publish(c->owner,ticket)==PT_MIXED_READERS_BACKEND);
+        assert(!c->ram.commits&&!c->ram.effects&&c->ram.publications==1);
+    }else{
+        assert(pt_mixed_activation_publish(c->owner,ticket)==PT_MIXED_READERS_OK);
+        c->ram.commit_result=raw;c->ram.ticks=oracle(960);
+        assert(pt_mixed_activation_fire(c->owner,ticket)==PT_MIXED_ACTIVATION_FAILED);
+        assert(c->ram.commits==1&&c->ram.effects==(raw==0?0U:raw<0?1U:6U));
+    }
+    assert(c->ram.packet_mutations==1&&c->ram.hooks==reentry);
+    assert(!memcmp(c->ram.observed_packet,&c->ram.original_packet,sizeof(c->ram.original_packet)));
+    assert(a_owner_packet_copies(c,&c->ram.original_packet)==1);
+    assert(pt_mixed_readers_commands_held(c->trial->queue)==1&&pt_mixed_readers_readers_held(c->trial->queue)==6);
+    assert(!pt_mixed_activation_close(&c->owner)&&c->memory.live==2&&!c->ram.source_probes);
+    memset(&sentinel,0xa5,sizeof(sentinel));memcpy(&key,&sentinel,sizeof(key));
+    assert(pt_mixed_activation_reader_key(c->owner,ticket,0,&key)!=PT_MIXED_READERS_OK&&!memcmp(&key,&sentinel,sizeof(key)));
+    c->ram.command_pending=c->ram.reader_pending=1;
+    assert(pt_mixed_activation_service_command(c->owner,ticket,1,NULL)==PT_MIXED_READERS_BACKEND);
+    assert(pt_mixed_activation_service_reader(c->owner,ticket,0,1,NULL)==PT_MIXED_READERS_BACKEND);
+    assert(pt_mixed_readers_commands_held(c->trial->queue)==1&&pt_mixed_readers_readers_held(c->trial->queue)==6);
+    assert(!memcmp(c->ram.observed_packet,&c->ram.original_packet,sizeof(c->ram.original_packet)));
+    assert(a_owner_packet_copies(c,&c->ram.original_packet)==1);same_save(c->trial->resources,saved,n);
+    /* Mutated raw0 is not absence. Only subsequent independent unchanged exact
+     * command AND reader proofs drain either real or possible MODEL references. */
+    a_packet_observation_expire(&c->ram);assert(a_packet_observation_empty(&c->ram));
+    c->ram.command_pending=c->ram.reader_pending=0;a_drain(c,ticket,6,order,1);
+    assert(pt_mixed_activation_close(&c->owner));
+    same_save(c->trial->resources,saved,n);free(saved);a_destroy(c);
+}
+static void a_packet_consecutive_reuse(void)
+{
+    struct activation_case *c=a_make(16,16);uint64_t first,second;unsigned i;size_t n;
+    uint8_t *saved=save(c->trial->resources,&n);
+    a_open(c);first=a_enqueue(c,6,0,960);c->ram.publish_result=0;c->ram.packet_observation=1;
+    assert(pt_mixed_activation_publish(c->owner,first)==PT_MIXED_READERS_PENDING);
+    assert(a_owner_packet_copies(c,&c->ram.original_packet)==0&&!c->ram.effects);
+    c->ram.publish_result=1;
+    assert(pt_mixed_activation_publish(c->owner,first)==PT_MIXED_READERS_OK);
+    assert(a_owner_packet_copies(c,&c->ram.original_packet)==1);
+    c->ram.ticks=oracle(960)-1;
+    assert(pt_mixed_activation_fire(c->owner,first)==PT_MIXED_ACTIVATION_EARLY);
+    assert(a_owner_packet_copies(c,&c->ram.original_packet)==1&&!c->ram.effects);
+    c->ram.ticks=oracle(960);
+    assert(pt_mixed_activation_fire(c->owner,first)==PT_MIXED_ACTIVATION_COMMITTED);
+    assert(a_owner_packet_copies(c,&c->ram.original_packet)==0&&c->ram.effects==6);
+    a_packet_observation_expire(&c->ram);assert(a_packet_observation_empty(&c->ram));
+    assert(pt_mixed_activation_service_command(c->owner,first,0,NULL)==PT_MIXED_READERS_OK);
+    second=a_enqueue(c,6,1,1920);c->ram.packet_observation=1;
+    assert(pt_mixed_activation_publish(c->owner,second)==PT_MIXED_READERS_OK);
+    assert(a_owner_packet_copies(c,&c->ram.original_packet)==1);
+    c->ram.ticks=oracle(1920);
+    assert(pt_mixed_activation_fire(c->owner,second)==PT_MIXED_ACTIVATION_COMMITTED);
+    assert(a_owner_packet_copies(c,&c->ram.original_packet)==0&&c->ram.effects==12);
+    a_packet_observation_expire(&c->ram);assert(a_packet_observation_empty(&c->ram));
+    assert(pt_mixed_activation_service_command(c->owner,second,0,NULL)==PT_MIXED_READERS_OK);
+    for(i=0;i<6;++i)assert(pt_mixed_activation_service_reader(c->owner,first,i,1,NULL)==PT_MIXED_READERS_OK);
+    for(i=0;i<6;++i)assert(pt_mixed_activation_service_reader(c->owner,second,i,1,NULL)==PT_MIXED_READERS_OK);
+    assert(pt_mixed_activation_close(&c->owner));
+    same_save(c->trial->resources,saved,n);free(saved);a_destroy(c);
+}
 static void __attribute__((constructor)) mixed_activation_fixture(void)
 {
-    unsigned bits,cache_bits,order,mode;
+    unsigned bits,cache_bits,order,mode,phase,reentry;int raw;
+    for(phase=1;phase<=2;++phase)for(mode=0;mode<8;++mode)
+        for(raw=-1;raw<=1;++raw)for(reentry=0;reentry<2;++reentry)for(order=0;order<2;++order)
+            a_packet_mutation_case(phase,mode,raw,reentry,order);
+    a_packet_consecutive_reuse();
     for(mode=0;mode<23;++mode)a_constructor(mode);
     for(bits=8;bits<=24;bits+=8)for(cache_bits=8;cache_bits<=16;cache_bits+=8)for(order=0;order<2;++order)a_success(bits,cache_bits,order);
     for(mode=0;mode<12;++mode)for(order=0;order<2;++order)a_failures(mode,order);

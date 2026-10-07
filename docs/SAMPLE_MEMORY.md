@@ -6391,3 +6391,31 @@ Selective Paula and AmiGUS reader preparation continues through the existing con
 The sole V4 host qualification compiles the complete 970-file private source closure into 83 ordered units under strict warnings, assertions and AddressSanitizer/UndefinedBehaviorSanitizer; the product returns zero with the complete twelve-line, 4,035-byte oracle. The scoped evidence records the independent saved audit and custody separately. Earlier failures and the final qualifier's disclosed stale V3a NOT_RUN limitation remain preserved; that descriptive sentence does not replace the actual failed V3a evidence.
 
 This is an implemented private software producer with host qualification. The architecture's authoritative Fast-RAM 8/16/24-bit masters, selective playback caches, master-preserving export and direct 24-bit Studio mixing remain governed by the existing component contracts and acceptance records. This increment does not wire native/classic PLAY, add row-range/pattern-only/stereo-live or deferred ZooperTracker features, or change the accepted layout. Native 030, Amiberry, physical A1200/AmiGUS, IRQ timing/stack, device completion/voice-stop and listening acceptance still require their own subsequent evidence.
+
+
+## Paired packet scratch and native object measurements — 7 October 2026
+
+The copied paired activation owner reuses its existing staging packet for the
+full callback before-image during serialized publication/fire. All bytes are
+restored before subsequent walks after mutation; only transient packet storage
+is cleared. It adds no allocation and changes no authoritative 8/16/24-bit master,
+cache precision, allocation budget, active-reader retirement, save/export or
+Studio mixing contract. A braces-only sticky-error statement correction also
+allows the unchanged strict native compiler flags.
+
+The whole-song and separate activation sanitizer fixtures pass; the dedicated
+fixture checks 192 adversarial combinations plus consecutive use, complete packet
+restoration, uncertain C/R retention and master before-images. Three strict native
+objects were compiled once, with exact dependency admission and full saved
+disassembly. Layout/owner bytes are unchanged. Local compiler stack annotations
+fall from 4692 to 1236 in fire and 3704 to 252 in publication. These are function-local
+measurements; total IRQ/task/callback/helper stack, residency and WCET remain
+unknown. The original dependency-validator failure is preserved; completion uses
+a separate saved-object inspection, with no compiler or product replay.
+
+This increment implements the scratch correction and qualifies software tests
+and object measurements only. The separate typed mixed RAM port, genuine native
+registration/source binding and native/classic PLAY integration remain unfinished.
+No new emulator or physical A1200/AmiGUS, device stop/completion/order/capacity,
+exact live output timing, audio or listening result is inferred. See
+[the scoped records](evidence/activation-packet-scratch-v3/README.md).

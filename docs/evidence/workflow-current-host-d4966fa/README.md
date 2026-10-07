@@ -1,0 +1,29 @@
+# Current workflow HOST refresh — accepted evidence supplement
+
+The single `execution-first-v1` refresh passed **14 clean and 8 preserved-overlay groups** at baseline `d4966faddbd30a23c9562003b8b2aed397ec2813` in **167.34912179198 seconds**. Root accepted the independent saved audit. All **40 recorded drivers** returned RC0 with owned-child reaping and group quiescence; all **80 complete raw stdout/stderr streams** were checked. This scoped evidence records that accepted HOST result. It contains no runner or launch authority; preparation read only saved records before root adopted this documentation.
+
+[observations.json](observations.json) contains the exact 22 group records, 40 driver records, 80 stream byte/SHA256/full-mode pins and compact authority/inventory references. The original [receipt](/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/workflow-current-host-runner-final-v1/execution-first-v1/receipt.json), [independent saved audit](/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-workflow-first-v1-saved-audit-v1/review.json) and [root acceptance](/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-workflow-first-v1-saved-acceptance.json) remain the evidence authority; no test was replayed to prepare this supplement.
+
+| Variant | Actual groups |
+| --- | --- |
+| Clean (14) | sampler; slots; song; sampler_workflow; sampler_copy_range_boundaries; sampler_pin_job; sampler_paula; sampler_wavetable; editor; editor_workflow; editor_guard; editor_capture; workflow_view; workflow_performance |
+| Preserved overlay (8) | slots; song; editor; editor_workflow; editor_guard; editor_capture; workflow_view; workflow_performance |
+
+These are **22 scoped group executions**, not a new claim that the complete 24-group convenience suite ran. The original tests, compiler/assertion/sanitizer flags and golden comparisons were unchanged. The clean editor golden remains `87ebf44ea470be133f7d47931f04210e5b883b90e3b882a256f1f641bd7450eb`; the preserved overlay golden remains `3889e8d4db96566f120b3053e5e58054cddaffb8ebe2c9147efd1f4b88a8d139`. Each variant also passed the original four workflow-view PPM assertions (640×512, 983,055 bytes each). The tests removed their temporary executables and PPMs, so their assertions and saved streams do not supply retained images, binaries or human visual acceptance.
+
+The clean inventory contains **132 committed tracked providers**. The overlay contains **139 providers**: the same basis with nine preserved tracked-body replacements and seven preserved untracked additions. The canonical full-pin digests are respectively `401ae3c1b6efc9384adc456f73a67d0095d18d039c3c958483ed744d8ac1ea25` and `6ed396863445be8fbff0a78c5d3fcc3cb37cd24c1eae8cc68fefb36d77805130`. They encode each actual receipt map's bytes, SHA256 and full regular-file mode as sorted compact UTF-8 JSON with no trailing newline. The original maps remain in the receipt; this supplement duplicates no prepared source closure. The accepted run/audit checked the current 1,186-file source inventory, 68 controls, all 16 protected originals and before/after Git custody.
+
+| HOST CPU observation (seconds) | Clean | Overlay |
+| --- | ---: | ---: |
+| Overview begin | 0.000018000 | 0.000026000 |
+| Overview total / maximum step | 0.014159000 / 0.000035000 | 0.017704000 / 0.000043000 |
+| 128 warm calls | 0.000052000 | 0.000063000 |
+| Copy request | 0.000055000 | 0.000032000 |
+| Copy idle total / maximum idle | 0.020019000 / 0.000188000 | 0.021541000 / 0.000286000 |
+| Undo / redo / disposal | 0.000031000 / 0.000003000 / 0.000031000 | 0.000032000 / 0.000003000 / 0.000048000 |
+
+Both variants used 1,048,576 frames of 24-bit stereo PCM: 8,388,608 active master bytes in 8,388,864 bytes of capacity. The overview used 512 steps / 2,097,152 value reads, at most 4,096 values per step. The 4,194,304-byte copy took 1,543 idle calls, within the unchanged 1,536–1,664 assertion. Tracked requested payload peaked at **12,802,114 bytes**, remained at that amount for undo, and ended with **zero live allocations / zero requested bytes** after disposal. Exact allocator/request counters and raw decimal CPU tokens are in `observations.json` and the two original performance streams. These are one-run HOST process CPU and requested payload observations; they exclude allocator headers, runtime and RSS, and establish no native 030 wall latency, Chip/Fast availability or WCET. Historical REPORT figures remain separate earlier observations.
+
+The historical paragraph in `docs/workflow/REPORT.md` said permission to message AmiConnect was unanswered. The later direct human authorization **Allow coordination messages** supersedes that permission statement; the earlier rejected attempt remains preserved history. Root also reports the manual A500 session closed and, subsequently, Scott's guarded full release after its silent emulator BODY test, corroborated by a passive AmiConnect read. Earlier unconfirmed closure/release notes are therefore historical. This author performed no independent guest/transport observation. Root owns **NONE** of the shared targets, control, transport, services, locks, reservations or holds. External replay priority was not checked. A new ProTracker test still requires fresh exact-candidate peer/live ownership and recovery checks through the established shared harness. Messaging permission, a prior release and Safari View Only grant no target window.
+
+This refresh supplies **HOST acceptance only** for the stated groups. Native builds/runs, Amiberry, real A1200/AmiGUS workflows, device RAM capacity/order/completion, active-voice stop, exact live musical scheduling, audio/playback/listening, native responsiveness and completion of the three workflow additions remain separate gates. No native measurement or unrelated scratch-test result is promoted into this package.

@@ -32,7 +32,8 @@ static int activation_live(const struct pt_editor_mixed_readers_prepare *s)
 static enum pt_editor_mixed_readers_result fail(struct pt_editor_mixed_readers_prepare *s,
  enum pt_editor_mixed_readers_result r)
 {if(s->source_mode)s->source_cancel_requested=1;
- if(!s->first_error)s->first_error=r;s->result=s->first_error;
+ if(!s->first_error){s->first_error=r;}
+ s->result=s->first_error;
  if((r==PT_EDITOR_MIXED_READERS_FAULT||r==PT_EDITOR_MIXED_READERS_STALE)&&activation_live(s))
     pt_mixed_activation_fail_closed(s->activation);
  if(s->phase!=PT_EDITOR_MIXED_READERS_FINISHED)s->phase=PT_EDITOR_MIXED_READERS_FAILED;

@@ -1,0 +1,957 @@
+{
+  "schema": "pt24g-activation-packet-scratch-v3-object-evidence",
+  "status": "HOST_PASS_AND_SAVED_NATIVE_OBJECT_MEASUREMENTS_ONLY",
+  "baseline": "d4966faddbd30a23c9562003b8b2aed397ec2813",
+  "source": {
+    "src/core/mixed_readers_activation.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/packet-scratch-publication-v2/proposed/src/core/mixed_readers_activation.c",
+      "bytes": 39764,
+      "sha256": "a66ccb01a54c1d0e6fd72d011cbc64a0811e5dce7d640e0910d22ee83326f2b8",
+      "mode": 33188
+    },
+    "src/editor/editor_mixed_readers_prepare.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/packet-scratch-publication-v2/proposed/src/editor/editor_mixed_readers_prepare.c",
+      "bytes": 75417,
+      "sha256": "1dd9910938f9786d34849733f8eaefd23a9d8100530476fa77caf043ffdced08",
+      "mode": 33188
+    },
+    "tests/mixed_readers_activation_test.c": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/packet-scratch-publication-v2/proposed/tests/mixed_readers_activation_test.c",
+      "bytes": 44781,
+      "sha256": "48484b52b5bb232a2d042eda5b12685d4041b1a154cd2ffd5e1ebfb9b16a0854",
+      "mode": 33188
+    }
+  },
+  "host_acceptance": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-v3a-host-audit-acceptance.json",
+    "bytes": 1817,
+    "sha256": "344ddf33aada1938f3552364a2d638a6a71fd404dc607281b07cd45f31a696d3",
+    "mode": 33188
+  },
+  "native_acceptance": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-native-scratch-v3a-combined-saved-acceptance.json",
+    "bytes": 3098,
+    "sha256": "da76e7aa1a284a7f2491b56c586f9b6883d11d845914d31261f446cf084d1178",
+    "mode": 33188
+  },
+  "independent_audit": {
+    "bytes": 4023,
+    "mode": 33188,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-native-scratch-v3a-combined-saved-audit-v2/review.json",
+    "sha256": "518c680c46ac2438640765808a84f11f1958fa9cf88643ffd1dfee1866ad353d"
+  },
+  "verification": {
+    "bytes": 42221,
+    "mode": 33188,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-native-scratch-v3a-combined-saved-audit-v2/verification.json",
+    "sha256": "86296531b8ecc7a505dc49e4f52f8017e8afd8c95abb42d5fd599af37171a793"
+  },
+  "failed_original_receipt": {
+    "bytes": 238384,
+    "mode": 33188,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/receipt.json",
+    "sha256": "550dcf54c116dd11a4b053acd719855325187411bd39c92648083592413d1f9d"
+  },
+  "failed_original_status": "FIRST_FAILURE_RETAINED",
+  "failure": "Duplicate canonical controller dependencies rejected by the original validator. No compiler replay.",
+  "separate_saved_objdump": {
+    "bytes": 28034,
+    "mode": 33188,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-native-controller-saved-objdump-first-v1/receipt.json",
+    "sha256": "3602ac829bf99c5dad07bdbf18ae0433ec8115059fb833839a17b109acfa1d21"
+  },
+  "counts": {
+    "drivers": 6,
+    "object_disassemblies": 3,
+    "providers": 82,
+    "raw_streams": 12,
+    "sources": 970,
+    "successful_compiles": 3,
+    "tools_runtime": 13
+  },
+  "dependencies": {
+    "mixed-activation": {
+      "raw_count": 33,
+      "canonical_count": 33,
+      "expected_count": 33,
+      "membership_exact": true,
+      "duplicate_groups": {}
+    },
+    "mixed-controller": {
+      "raw_count": 91,
+      "canonical_count": 80,
+      "expected_count": 80,
+      "membership_exact": true,
+      "duplicate_groups": {
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-host-first-v3a/source/src/core/amigus_voice_plan.h": [
+          "src/editor/../core/amigus_voice_plan.h",
+          "src/editor/../core/amigus_voice_plan.h"
+        ],
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-host-first-v3a/source/src/core/document.h": [
+          "src/core/document.h",
+          "src/editor/../core/document.h",
+          "src/editor/../core/document.h"
+        ],
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-host-first-v3a/source/src/core/flow.h": [
+          "src/core/flow.h",
+          "src/editor/../core/flow.h"
+        ],
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-host-first-v3a/source/src/core/mixed_scheduled_readers.h": [
+          "src/editor/../core/mixed_scheduled_readers.h",
+          "src/editor/../core/mixed_scheduled_readers.h"
+        ],
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-host-first-v3a/source/src/core/pcm.h": [
+          "src/core/pcm.h",
+          "src/editor/../core/pcm.h"
+        ],
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-host-first-v3a/source/src/core/playback_pcm.h": [
+          "src/editor/../core/playback_pcm.h",
+          "src/editor/../core/playback_pcm.h"
+        ],
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-host-first-v3a/source/src/core/project.h": [
+          "src/core/project.h",
+          "src/editor/../core/project.h",
+          "src/editor/../core/project.h"
+        ],
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-host-first-v3a/source/src/core/render.h": [
+          "src/core/render.h",
+          "src/editor/../core/render.h"
+        ],
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-host-first-v3a/source/src/core/voice.h": [
+          "src/core/voice.h",
+          "src/editor/../core/voice.h"
+        ]
+      }
+    },
+    "paired-layout": {
+      "raw_count": 26,
+      "canonical_count": 26,
+      "expected_count": 26,
+      "membership_exact": true,
+      "duplicate_groups": {}
+    }
+  },
+  "objects": {
+    "mixed-activation": {
+      "d": {
+        "bytes": 3097,
+        "mode": 33188,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/mixed-activation.d",
+        "sha256": "dca0d778d7f297ee44c91ed2f138aa566328820fb548d1705173690e96f34abd"
+      },
+      "o": {
+        "bytes": 13924,
+        "mode": 33188,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/mixed-activation.o",
+        "sha256": "cd4733d945e8cd57b2549893d097dae73fd42b53f8e8f1409ea24e7b55e0f03d"
+      },
+      "su": {
+        "bytes": 2598,
+        "mode": 33188,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/mixed-activation.su",
+        "sha256": "93397329c9e1d20f61cb8b210b2b0e44e9124a09afb83b40603217743cf568db"
+      }
+    },
+    "mixed-controller": {
+      "d": {
+        "bytes": 5161,
+        "mode": 33188,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/mixed-controller.d",
+        "sha256": "467f066928c8bf0947a787689d95ed4080d59a4f5994dd20670883188521dcee"
+      },
+      "o": {
+        "bytes": 25832,
+        "mode": 33188,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/mixed-controller.o",
+        "sha256": "5eeea9477cd131b9451a87cdcdd0ee1ee171e0a92cf97e59d5ab40c35e0b61a0"
+      },
+      "su": {
+        "bytes": 6119,
+        "mode": 33188,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/mixed-controller.su",
+        "sha256": "16446d60df7ccd80c37648481a0322e839341613b45279be60be319f6829e6e3"
+      }
+    },
+    "paired-layout": {
+      "d": {
+        "bytes": 2301,
+        "mode": 33188,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/paired-layout.d",
+        "sha256": "8136fdfe1b59afe5a7fdf971dbd2b9059ecee2021d931f813837afb664aadc5d"
+      },
+      "o": {
+        "bytes": 604,
+        "mode": 33188,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/paired-layout.o",
+        "sha256": "9ec9e152e33861279248d41cc84beb157c270598810332f0df1c2a7c35cf9fd8"
+      },
+      "su": {
+        "bytes": 0,
+        "mode": 33188,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/paired-layout.su",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "streams": [
+    {
+      "bytes": 0,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/compile-paired-layout.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/compile-paired-layout.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1791,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/objdump-paired-layout.stdout",
+      "sha256": "d83b98781acff93463fc4e2f411a20500bcebb18afac98d0c2433c8cd5ebfb95"
+    },
+    {
+      "bytes": 0,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/objdump-paired-layout.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/compile-mixed-activation.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/compile-mixed-activation.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 179359,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/objdump-mixed-activation.stdout",
+      "sha256": "002f61989d8ea13b112ea00f9a23144621bd69c8510d0b4e3ec2c119854fd0ad"
+    },
+    {
+      "bytes": 0,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/objdump-mixed-activation.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/compile-mixed-controller.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/compile-mixed-controller.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 324826,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-native-controller-saved-objdump-first-v1/objdump-saved-mixed-controller.stdout",
+      "sha256": "8904a7ee198bbb364b99b233e15a198d03697c82266f4da0cc3054c37a7d3921"
+    },
+    {
+      "bytes": 0,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-native-controller-saved-objdump-first-v1/objdump-saved-mixed-controller.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "drivers": [
+    {
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-Ibuild/dev",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/paired-layout.d",
+        "-c",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-paired-ram-abi-inspection-plan-v1/paired_layout_probe.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/paired-layout.o"
+      ],
+      "cleanup_reserve_seconds": 5,
+      "completion_within_effective_deadline": true,
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-host-first-v3a/source",
+      "driver_reaped": true,
+      "effective_remaining_seconds": 120.0,
+      "elapsed_seconds": 0.1864097910001874,
+      "group_quiescent": true,
+      "label": "compile-paired-layout",
+      "owned_new_session": true,
+      "returncode": 0,
+      "status": "PASS_DRIVER",
+      "whole_seconds": 120
+    },
+    {
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-objdump",
+        "-h",
+        "-s",
+        "-t",
+        "-r",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/paired-layout.o"
+      ],
+      "cleanup_reserve_seconds": 5,
+      "completion_within_effective_deadline": true,
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-host-first-v3a/source",
+      "driver_reaped": true,
+      "effective_remaining_seconds": 30.0,
+      "elapsed_seconds": 0.009137291985098273,
+      "group_quiescent": true,
+      "label": "objdump-paired-layout",
+      "owned_new_session": true,
+      "returncode": 0,
+      "status": "PASS_DRIVER",
+      "whole_seconds": 30
+    },
+    {
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-Ibuild/dev",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/mixed-activation.d",
+        "-c",
+        "src/core/mixed_readers_activation.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/mixed-activation.o"
+      ],
+      "cleanup_reserve_seconds": 5,
+      "completion_within_effective_deadline": true,
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-host-first-v3a/source",
+      "driver_reaped": true,
+      "effective_remaining_seconds": 120.0,
+      "elapsed_seconds": 0.23824604199035093,
+      "group_quiescent": true,
+      "label": "compile-mixed-activation",
+      "owned_new_session": true,
+      "returncode": 0,
+      "status": "PASS_DRIVER",
+      "whole_seconds": 120
+    },
+    {
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-objdump",
+        "-dr",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/mixed-activation.o"
+      ],
+      "cleanup_reserve_seconds": 5,
+      "completion_within_effective_deadline": true,
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-host-first-v3a/source",
+      "driver_reaped": true,
+      "effective_remaining_seconds": 30.0,
+      "elapsed_seconds": 0.015530500008026138,
+      "group_quiescent": true,
+      "label": "objdump-mixed-activation",
+      "owned_new_session": true,
+      "returncode": 0,
+      "status": "PASS_DRIVER",
+      "whole_seconds": 30
+    },
+    {
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-Ibuild/dev",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/mixed-controller.d",
+        "-c",
+        "src/editor/editor_mixed_readers_prepare.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/mixed-controller.o"
+      ],
+      "cleanup_reserve_seconds": 5,
+      "completion_within_effective_deadline": true,
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-host-first-v3a/source",
+      "driver_reaped": true,
+      "effective_remaining_seconds": 120.0,
+      "elapsed_seconds": 0.35484774998622015,
+      "group_quiescent": true,
+      "label": "compile-mixed-controller",
+      "owned_new_session": true,
+      "returncode": 0,
+      "status": "PASS_DRIVER",
+      "whole_seconds": 120
+    },
+    {
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-objdump",
+        "-dr",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-native-first-v3a/mixed-controller.o"
+      ],
+      "cleanup_reserve_seconds": 5,
+      "completion_within_effective_deadline": true,
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-packet-scratch-host-first-v3a/source",
+      "driver_reaped": true,
+      "effective_remaining_seconds": 30.0,
+      "elapsed_seconds": 0.08320554098463617,
+      "group_quiescent": true,
+      "label": "objdump-saved-mixed-controller",
+      "owned_new_session": true,
+      "returncode": 0,
+      "status": "PASS_DRIVER",
+      "whole_seconds": 30
+    }
+  ],
+  "layout": {
+    "all_words": [
+      {
+        "index": 0,
+        "name": "magic",
+        "value": 1347701809
+      },
+      {
+        "index": 1,
+        "name": "schema_version",
+        "value": 1
+      },
+      {
+        "index": 2,
+        "name": "pointer_bytes",
+        "value": 4
+      },
+      {
+        "index": 3,
+        "name": "unsigned_bytes",
+        "value": 4
+      },
+      {
+        "index": 4,
+        "name": "size_t_bytes",
+        "value": 4
+      },
+      {
+        "index": 5,
+        "name": "uint64_bytes",
+        "value": 8
+      },
+      {
+        "index": 6,
+        "name": "enum_kind_bytes",
+        "value": 4
+      },
+      {
+        "index": 7,
+        "name": "commands",
+        "value": 2
+      },
+      {
+        "index": 8,
+        "name": "readers",
+        "value": 32
+      },
+      {
+        "index": 9,
+        "name": "slots",
+        "value": 20
+      },
+      {
+        "index": 10,
+        "name": "actions",
+        "value": 16
+      },
+      {
+        "index": 11,
+        "name": "spans",
+        "value": 128
+      },
+      {
+        "index": 12,
+        "name": "registration_bytes",
+        "value": 24
+      },
+      {
+        "index": 13,
+        "name": "registration_alignment",
+        "value": 2
+      },
+      {
+        "index": 14,
+        "name": "registration_owner_offset",
+        "value": 0
+      },
+      {
+        "index": 15,
+        "name": "registration_queue_offset",
+        "value": 4
+      },
+      {
+        "index": 16,
+        "name": "registration_session_offset",
+        "value": 8
+      },
+      {
+        "index": 17,
+        "name": "registration_generation_offset",
+        "value": 16
+      },
+      {
+        "index": 18,
+        "name": "key_bytes",
+        "value": 56
+      },
+      {
+        "index": 19,
+        "name": "key_alignment",
+        "value": 2
+      },
+      {
+        "index": 20,
+        "name": "key_queue_offset",
+        "value": 0
+      },
+      {
+        "index": 21,
+        "name": "key_session_offset",
+        "value": 4
+      },
+      {
+        "index": 22,
+        "name": "key_generation_offset",
+        "value": 12
+      },
+      {
+        "index": 23,
+        "name": "key_trigger_offset",
+        "value": 20
+      },
+      {
+        "index": 24,
+        "name": "key_owner_offset",
+        "value": 28
+      },
+      {
+        "index": 25,
+        "name": "key_serial_offset",
+        "value": 36
+      },
+      {
+        "index": 26,
+        "name": "key_action_offset",
+        "value": 44
+      },
+      {
+        "index": 27,
+        "name": "key_route_offset",
+        "value": 48
+      },
+      {
+        "index": 28,
+        "name": "key_slot_offset",
+        "value": 52
+      },
+      {
+        "index": 29,
+        "name": "card_bytes",
+        "value": 52
+      },
+      {
+        "index": 30,
+        "name": "card_alignment",
+        "value": 2
+      },
+      {
+        "index": 31,
+        "name": "card_reservation_offset",
+        "value": 0
+      },
+      {
+        "index": 32,
+        "name": "card_cache_offset",
+        "value": 4
+      },
+      {
+        "index": 33,
+        "name": "card_version_offset",
+        "value": 8
+      },
+      {
+        "index": 34,
+        "name": "card_serial_offset",
+        "value": 16
+      },
+      {
+        "index": 35,
+        "name": "card_cache_slot_offset",
+        "value": 24
+      },
+      {
+        "index": 36,
+        "name": "card_bits_offset",
+        "value": 28
+      },
+      {
+        "index": 37,
+        "name": "card_little_endian_offset",
+        "value": 32
+      },
+      {
+        "index": 38,
+        "name": "card_source_channel_offset",
+        "value": 36
+      },
+      {
+        "index": 39,
+        "name": "card_address_offset",
+        "value": 40
+      },
+      {
+        "index": 40,
+        "name": "card_logical_bytes_offset",
+        "value": 44
+      },
+      {
+        "index": 41,
+        "name": "card_full_capacity_offset",
+        "value": 48
+      },
+      {
+        "index": 42,
+        "name": "action_bytes",
+        "value": 34
+      },
+      {
+        "index": 43,
+        "name": "action_alignment",
+        "value": 2
+      },
+      {
+        "index": 44,
+        "name": "action_route_offset",
+        "value": 0
+      },
+      {
+        "index": 45,
+        "name": "action_slot_offset",
+        "value": 4
+      },
+      {
+        "index": 46,
+        "name": "action_kind_offset",
+        "value": 8
+      },
+      {
+        "index": 47,
+        "name": "action_geometry_offset",
+        "value": 12
+      },
+      {
+        "index": 48,
+        "name": "packet_bytes",
+        "value": 3456
+      },
+      {
+        "index": 49,
+        "name": "packet_alignment",
+        "value": 2
+      },
+      {
+        "index": 50,
+        "name": "packet_registration_offset",
+        "value": 0
+      },
+      {
+        "index": 51,
+        "name": "packet_ticket_offset",
+        "value": 24
+      },
+      {
+        "index": 52,
+        "name": "packet_frame_offset",
+        "value": 32
+      },
+      {
+        "index": 53,
+        "name": "packet_first_offset",
+        "value": 40
+      },
+      {
+        "index": 54,
+        "name": "packet_last_offset",
+        "value": 48
+      },
+      {
+        "index": 55,
+        "name": "packet_count_offset",
+        "value": 56
+      },
+      {
+        "index": 56,
+        "name": "packet_expected_mask_offset",
+        "value": 60
+      },
+      {
+        "index": 57,
+        "name": "packet_expected_offset",
+        "value": 64
+      },
+      {
+        "index": 58,
+        "name": "packet_key_offset",
+        "value": 1184
+      },
+      {
+        "index": 59,
+        "name": "packet_action_offset",
+        "value": 2080
+      },
+      {
+        "index": 60,
+        "name": "packet_card_offset",
+        "value": 2624
+      },
+      {
+        "index": 61,
+        "name": "actual_bytes",
+        "value": 1128
+      },
+      {
+        "index": 62,
+        "name": "actual_alignment",
+        "value": 2
+      },
+      {
+        "index": 63,
+        "name": "actual_active_mask_offset",
+        "value": 0
+      },
+      {
+        "index": 64,
+        "name": "actual_adopted_mask_offset",
+        "value": 4
+      },
+      {
+        "index": 65,
+        "name": "actual_slot_offset",
+        "value": 8
+      },
+      {
+        "index": 66,
+        "name": "port_bytes",
+        "value": 44
+      },
+      {
+        "index": 67,
+        "name": "port_alignment",
+        "value": 2
+      },
+      {
+        "index": 68,
+        "name": "port_context_offset",
+        "value": 0
+      },
+      {
+        "index": 69,
+        "name": "port_context_bytes_offset",
+        "value": 4
+      },
+      {
+        "index": 70,
+        "name": "port_version_offset",
+        "value": 8
+      },
+      {
+        "index": 71,
+        "name": "port_flags_offset",
+        "value": 12
+      },
+      {
+        "index": 72,
+        "name": "port_read_clock_offset",
+        "value": 16
+      },
+      {
+        "index": 73,
+        "name": "port_publish_offset",
+        "value": 20
+      },
+      {
+        "index": 74,
+        "name": "port_commit_offset",
+        "value": 24
+      },
+      {
+        "index": 75,
+        "name": "port_command_quiet_offset",
+        "value": 28
+      },
+      {
+        "index": 76,
+        "name": "port_reader_quiet_offset",
+        "value": 32
+      },
+      {
+        "index": 77,
+        "name": "port_source_close_offset",
+        "value": 36
+      },
+      {
+        "index": 78,
+        "name": "port_source_quiet_offset",
+        "value": 40
+      },
+      {
+        "index": 79,
+        "name": "fire_full_snapshots_bytes",
+        "value": 4584
+      },
+      {
+        "index": 80,
+        "name": "packet_expected_element_bytes",
+        "value": 56
+      },
+      {
+        "index": 81,
+        "name": "packet_action_element_bytes",
+        "value": 34
+      },
+      {
+        "index": 82,
+        "name": "packet_card_element_bytes",
+        "value": 52
+      }
+    ],
+    "endian": "big",
+    "equal_original": true,
+    "raw_code_bytes": 336,
+    "raw_code_offset": 172,
+    "symbols": [
+      {
+        "name": "_pt_private_paired_layout_word_count",
+        "offset": 0
+      },
+      {
+        "name": "_pt_private_paired_layout_words",
+        "offset": 4
+      }
+    ],
+    "word_count": 83
+  },
+  "owner": {
+    "bytes": 72252,
+    "exact_disassembly": "00000134 <_pt_mixed_activation_control_size>:\n     134:\t4e55 0000      \tlinkw a5,#0\n     138:\t203c 0001 1a3c \tmovel #72252,d0\n     13e:\t4e5d           \tunlk a5\n     140:\t4e75           \trts",
+    "raw_unique_machine_bytes": "4e550000203c00011a3c4e5d4e75"
+  },
+  "local_stack": {
+    "backend_command.part.4": {
+      "after": {
+        "bytes": 1504,
+        "classification": "dynamic,bounded"
+      },
+      "before": 1504,
+      "decrease_bytes": 0
+    },
+    "backend_submit": {
+      "after": {
+        "bytes": 252,
+        "classification": "dynamic,bounded"
+      },
+      "before": 3704,
+      "decrease_bytes": 3452
+    },
+    "pt_mixed_activation_fire": {
+      "after": {
+        "bytes": 1236,
+        "classification": "dynamic,bounded"
+      },
+      "before": 4692,
+      "decrease_bytes": 3456
+    }
+  },
+  "controller_largest_local_frames": {
+    "batch_begin_private.part.18": {
+      "bytes": 2492,
+      "classification": "dynamic,bounded"
+    },
+    "callback_fault": {
+      "bytes": 2800,
+      "classification": "dynamic,bounded"
+    },
+    "fixed_current": {
+      "bytes": 1540,
+      "classification": "dynamic,bounded"
+    },
+    "guard_port_command": {
+      "bytes": 2812,
+      "classification": "dynamic,bounded"
+    },
+    "guard_port_publish": {
+      "bytes": 2812,
+      "classification": "dynamic,bounded"
+    },
+    "guard_port_reader": {
+      "bytes": 2812,
+      "classification": "dynamic,bounded"
+    },
+    "guard_port_source_close": {
+      "bytes": 2808,
+      "classification": "dynamic,bounded"
+    },
+    "guard_port_source_quiet": {
+      "bytes": 2808,
+      "classification": "dynamic,bounded"
+    },
+    "pt_editor_mixed_readers_prepare_service_command": {
+      "bytes": 1448,
+      "classification": "dynamic,bounded"
+    },
+    "source_fixed": {
+      "bytes": 2620,
+      "classification": "dynamic,bounded"
+    }
+  },
+  "scope": "SAVED-only object/layout and compiler function-local stack evidence. Original failed validation remains failed. No linked native executable, target execution, total IRQ/task/callback/library stack, residency, WCET, exact scheduling, card capacity/order/completion, voice-stop, audio or listening acceptance.",
+  "target_operations": 0,
+  "link_calls": 0,
+  "compiler_replays": 0
+}

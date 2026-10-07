@@ -215,7 +215,7 @@ static int candidate_guard(const struct pt_mixed_readers_activation *b,const str
 static int backend_submit(void *context,const struct pt_mixed_readers_event *e)
 {
     struct pt_mixed_readers_activation *b=context;struct activation_command *c;
-    struct pt_mixed_activation_packet before;unsigned i,j,index=PT_MIXED_ACTIVATION_COMMANDS,n=0,free_count=0;
+    unsigned i,j,index=PT_MIXED_ACTIVATION_COMMANDS,n=0,free_count=0;
     unsigned assigned[PT_MIXED_READERS_ACTIONS];uint64_t now,after;int result;
     if(!b)return -1;
     if(!candidate_guard(b,e))return 0;
@@ -231,8 +231,10 @@ static int backend_submit(void *context,const struct pt_mixed_readers_event *e)
     staged_clear(b);
     if(!clock_read(b,&now)||now>=c->packet.first){c->unknown=1;c->command=PT_MIXED_COMMAND_UNKNOWN;b->failed=1;b->busy=0;return -1;}
     c->port_refs=1;for(i=0;i<n;++i)b->reader[assigned[i]].port_refs=1;
-    memcpy(&before,&c->packet,sizeof(before));result=b->port.publish(b->port.context,b,&c->packet);c->publication_outcome=result;
-    if(memcmp(&before,&c->packet,sizeof(before))){memcpy(&c->packet,&before,sizeof(before));fault(b);}
+    /* Staging is already transferred and cleared; busy excludes reuse. */
+    memcpy(&b->staged.packet,&c->packet,sizeof(c->packet));result=b->port.publish(b->port.context,b,&c->packet);
+    if(memcmp(&b->staged.packet,&c->packet,sizeof(c->packet))){memcpy(&c->packet,&b->staged.packet,sizeof(c->packet));fault(b);}
+    memset(&b->staged.packet,0,sizeof(b->staged.packet));c->publication_outcome=result;
     if(result==0&&!b->failed){for(i=0;i<n;++i)memset(b->reader+assigned[i],0,sizeof(b->reader[i]));memset(c,0,sizeof(*c));b->busy=0;return 0;}
     b->ordered=1;b->last_frame=c->packet.frame;
     /* Accepted/unknown publication may already own a future callback. A late
@@ -261,7 +263,7 @@ static void reader_closed(struct pt_mixed_readers_activation *b,struct activatio
 }
 enum pt_mixed_activation_result pt_mixed_activation_fire(struct pt_mixed_readers_activation *b,uint64_t ticket)
 {
-    struct activation_command *c;struct pt_mixed_activation_actual actual;struct pt_mixed_activation_packet before;
+    struct activation_command *c;struct pt_mixed_activation_actual actual;
     uint64_t observed,issued;unsigned i,j,index;int result;
     if(!b)return PT_MIXED_ACTIVATION_INVALID;
     if(b->task_busy){fault(b);return PT_MIXED_ACTIVATION_INVALID;}
@@ -272,8 +274,10 @@ enum pt_mixed_activation_result pt_mixed_activation_fire(struct pt_mixed_readers
     if(observed<c->packet.first){b->busy=0;return PT_MIXED_ACTIVATION_EARLY;}
     if(observed>=c->packet.last)goto failed;
     for(i=0;i<c->packet.count;++i){struct activation_reader *r=find_reader(b,c->packet.key+i);if(!r||r->cancelled)goto failed;}
-    memset(&actual,0,sizeof(actual));memcpy(&before,&c->packet,sizeof(before));result=b->port.commit(b->port.context,&c->packet,&actual);
-    if(memcmp(&before,&c->packet,sizeof(before))){memcpy(&c->packet,&before,sizeof(before));fault(b);}
+    /* Keep actual automatic; only the complete packet backup uses scratch. */
+    memset(&actual,0,sizeof(actual));memcpy(&b->staged.packet,&c->packet,sizeof(c->packet));result=b->port.commit(b->port.context,&c->packet,&actual);
+    if(memcmp(&b->staged.packet,&c->packet,sizeof(c->packet))){memcpy(&c->packet,&b->staged.packet,sizeof(c->packet));fault(b);}
+    memset(&b->staged.packet,0,sizeof(b->staged.packet));
     if(result!=1||!clock_read(b,&issued)||issued>=c->packet.last||actual.active_mask&~0xFFFFFU||
        actual.adopted_mask!=actual.active_mask)goto failed;
     for(i=0;i<c->packet.count;++i){unsigned bit;

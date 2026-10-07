@@ -1,0 +1,199 @@
+{
+  "status": "PASS_SAVED_26_CASE_CAUSAL_HOST_AUDIT",
+  "scope": "SAVED_ONLY; no candidate import/invocation/compiler/test/process/target/guard/lease/health/Git or repository changes",
+  "auditor": "workflow_publication_review_completion",
+  "inputs": {
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-focused-host-first-v2/receipt.json": {
+      "bytes": 430658,
+      "sha256": "55b4880d730e0126fe2b687f96a328db1792ee8737a804ae578b3a3e6167aac1",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-focused-host-first-v2/compile.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-focused-host-first-v2/compile.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-focused-host-first-v2/run.stdout": {
+      "bytes": 521,
+      "sha256": "296f5ae9a539b3d0ddfed133858c2ac1f4d5f66dd769b0745845135b9e99864f",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-focused-host-first-v2/run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-focused-host-first-v2/mixed-causal": {
+      "bytes": 2273600,
+      "sha256": "e72f0722e9ac451f0c3ebf08106559ce77220faa52e386fcf9603f8eea864d21",
+      "mode": 33261
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-focused-host-first-v2.py": {
+      "bytes": 6169,
+      "sha256": "68973e117591aeb487ba8bb74c291957c16c112ab82c6bc15215f6a9a7b2be0c",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-two-trigger-source-review-v2.json": {
+      "bytes": 3596,
+      "sha256": "c2225bda00a37cec4f309d86e083138d267c378628f0f21d08f52438eaa45796",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-two-trigger-source-proposal-v2/tests/test_mixed_readers_causal.py": {
+      "bytes": 3191,
+      "sha256": "8221399d7e0e72306b371778222e576afbeaa3b5e3c049692576e965ffdbee6f",
+      "mode": 33188
+    },
+    "/usr/bin/cc": {
+      "bytes": 200560,
+      "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+      "mode": 33261
+    }
+  },
+  "manifests": {
+    "source": "All full byte/SHA256/mode manifests reside in pinned ROOT receipt; independently recomputed from actual saved files.",
+    "proposal_paths": 7,
+    "tested_overlay_paths": 6,
+    "selected_tree_files": 1196,
+    "protected_repository_paths": 16,
+    "selected_tree_manifest_sha256": "ad1da8a831b0237db7e23530451026859235539abdf73b5cc7220b4cdea8b40d",
+    "extra_selected_tree_files": [],
+    "mismatches": [],
+    "proposal_paths_pins": {
+      "src/core/mixed_readers_causal.c": {
+        "bytes": 51779,
+        "sha256": "b6fce6f08e9b63d0453407d43db16a3425b83339969b00e147e7522a7cf1dacd",
+        "mode": 33188
+      },
+      "src/core/mixed_readers_causal.h": {
+        "bytes": 12863,
+        "sha256": "520cc4375986f9cf203295686389408cbc040bde43c98ec3e32b4980f5dbfa72",
+        "mode": 33188
+      },
+      "src/core/mixed_readers_causal_queue_internal.h": {
+        "bytes": 1655,
+        "sha256": "96a47bf5494157524eb1e71e379caae3131d970da712ab815f98f9553cd8ee3e",
+        "mode": 33188
+      },
+      "src/core/mixed_scheduled_readers.c": {
+        "bytes": 45150,
+        "sha256": "2bf59e3f756a8f7fa924b743c16ad99067d7c533d108cc668859fd13b8f4b463",
+        "mode": 33188
+      },
+      "tests/mixed_readers_causal_test.c": {
+        "bytes": 21400,
+        "sha256": "da7ac70ecf1e889743bc911df16a2ad6ec36539a1c7f019d7b3be729d3e2f63c",
+        "mode": 33188
+      },
+      "tests/test_mixed_readers_causal.py": {
+        "bytes": 3191,
+        "sha256": "8221399d7e0e72306b371778222e576afbeaa3b5e3c049692576e965ffdbee6f",
+        "mode": 33188
+      },
+      "README.md": {
+        "bytes": 8291,
+        "sha256": "eb5275373dd2df8c5fa9c915fccef97342e3f87bcc68a3b2653addb9c2dcba73",
+        "mode": 33188
+      }
+    }
+  },
+  "checks": [
+    {
+      "name": "receipt actual completed HOST-only status",
+      "passed": true
+    },
+    {
+      "name": "recorded source review exact and SOURCE-only accepted",
+      "passed": true
+    },
+    {
+      "name": "exact strict assertions plus ASan/UBSan command vector",
+      "passed": true
+    },
+    {
+      "name": "exact executable only invocation",
+      "passed": true
+    },
+    {
+      "name": "compile recorded RC0/reaped/group absence/bounded",
+      "passed": true
+    },
+    {
+      "name": "compile full stdout/stderr pins",
+      "passed": true
+    },
+    {
+      "name": "run recorded RC0/reaped/group absence/bounded",
+      "passed": true
+    },
+    {
+      "name": "run full stdout/stderr pins",
+      "passed": true
+    },
+    {
+      "name": "actual compiler streams empty",
+      "passed": true
+    },
+    {
+      "name": "actual run stderr empty",
+      "passed": true
+    },
+    {
+      "name": "complete 521-byte single-line26-case oracle",
+      "passed": true
+    },
+    {
+      "name": "actual executable and current compiler pins",
+      "passed": true
+    },
+    {
+      "name": "saved executable includes sanitizer and poison runtime references",
+      "passed": true
+    },
+    {
+      "name": "recorded beforeafter source/proposal/protected exact",
+      "passed": true
+    },
+    {
+      "name": "all seven proposal pins current and unchanged",
+      "passed": true
+    },
+    {
+      "name": "full selected src/tests tree pins match with no extra files",
+      "passed": true
+    },
+    {
+      "name": "selected tree has only regular nonsymlink source files",
+      "passed": true
+    },
+    {
+      "name": "all16 protected repository path pins unchanged",
+      "passed": true
+    },
+    {
+      "name": "six tested overlay paths exactly match reviewed proposal",
+      "passed": true
+    },
+    {
+      "name": "fixture case count/assertion and complete oracle source agree",
+      "passed": true
+    },
+    {
+      "name": "qualifier preserves sanitizer halt options source",
+      "passed": true
+    }
+  ],
+  "finding": "Actual saved ROOT compile and sole product invocation both returned0 with full streams, positive host group quiet/reaping and no recorded sanitizer diagnostics. Exact27-unit strict ASan/UBSan build produced the pinned executable; complete521-byte26-case oracle matches driver, fixture and receipt. Reviewed six-path overlay, entire selected tree, seven-path proposal and16 protected paths remain exact.",
+  "evidence_limits": [
+    "This audit checks saved records and source pins only; no fresh process or runtime observation.",
+    "Software model paired port, genuine heap masters/cache/reservation/pins and queue qualification only; no native Exec/Fast/Chip target allocation, CIA/IRQ/source timing, physical DMA/device transfer/completion/voice-stop/card capacity, musical timing, audio or listening acceptance.",
+    "Focused26-case fixture does not qualify publication raw0/-1/malformed/fault, exceptional failed-constructor recovery, general rolling scheduling, nonempty imported registry or all20 slots simultaneously active.",
+    "ROOT source sets sanitizer halt options, but environment was not separately saved as a runtime receipt; flags, executable references, RC0/full oracle and empty runtime stderr are independently checked.",
+    "Existing source proposal/review NOT_RUN labels predate this distinct ROOT HOST execution and remain author/source history; they do not imply a target pass.",
+    "Prior one-armed native target deadline failure and saved HOLD1143 remain separate evidence; no hold recovery/release or native candidate retry is implied."
+  ]
+}

@@ -6442,3 +6442,22 @@ live exact scheduling. Exceptional retained failed-constructor recovery, total
 stack/IRQ/WCET, real device transfer,
 voice stop, musical timing, audio and listening remain separate. See the
 [diagnostic contract and current evidence tiers](NATIVE_MIXED_RAM_PORT.md).
+
+
+## Opt-in two-TRIGGER dependency core — 7 October 2026
+
+`mixed_readers_causal` now prepares one genuine mixed Paula/AmiGUS TRIGGER and
+one later dependent TRIGGER before the first deadline. Both sides derive expected
+keys internally; only actual first commit/adoption, unchanged original timing and
+the complete actual registry can enable the successor. Two commands/32 readers
+remain bounded, with disposed predecessor command storage and independently held
+reader lifetimes. Default activation and existing shared queue bodies are unchanged.
+Three host sanitizer groups pass:26 genuine causal cases plus original queue and
+activation regressions. Native/physical execution, paired source/timer binding,
+whole-song producer/frontend integration and actual editor PLAY remain open.
+Publication-fault/exceptional-constructor cases and imported/all20-active registry
+qualification remain open. See [contract](MIXED_READERS_CAUSAL.md) and
+[actual host evidence](../evidence/enhanced-editor/mixed-readers-causal-host/README.md).
+The separate one-armed Fast/Chip candidate failed native90s completion; its HOLD
+and failed evidence are retained pending separately approved recovery. No native
+timing, DMA/card transfer/completion/stop, audio or listening acceptance follows.

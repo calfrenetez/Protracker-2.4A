@@ -1,0 +1,381 @@
+{
+  "scope": "HOST_SOFTWARE_ONLY",
+  "status": "PASS",
+  "native": "NOT_RUN",
+  "physical": "NOT_RUN",
+  "protected16_unchanged": true,
+  "original_queue_body_unchanged": true,
+  "focused": {
+    "status": "PASS_26_GENUINE_CASES_ASAN_UBSAN_HOST_ONLY",
+    "commands": [
+      {
+        "label": "compile",
+        "args": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-Isrc/core",
+          "-I.",
+          "tests/mixed_readers_causal_test.c",
+          "src/core/mixed_readers_causal.c",
+          "src/core/mixed_scheduled_readers.c",
+          "src/core/elapsed_clock.c",
+          "src/editor/sampler_paula.c",
+          "src/editor/sampler_wavetable.c",
+          "src/core/amigus_voice_plan.c",
+          "src/editor/sampler.c",
+          "src/editor/slots.c",
+          "src/core/pcm_filtered.c",
+          "src/core/slices.c",
+          "src/core/pattern.c",
+          "src/core/document.c",
+          "src/core/pp20.c",
+          "src/core/project.c",
+          "src/core/mod_project.c",
+          "src/core/mod_inspect.c",
+          "src/core/channels.c",
+          "src/core/pcm.c",
+          "src/core/wav.c",
+          "src/core/svx.c",
+          "src/core/raw.c",
+          "src/core/amigus_reservation.c",
+          "src/core/amigus_wavetable_cache.c",
+          "src/core/amigus_sample_ram.c",
+          "src/core/sample_cache.c",
+          "src/core/playback_pcm.c",
+          "-o",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-focused-host-first-v2/mixed-causal"
+        ],
+        "timeout_seconds": 120,
+        "passed": true,
+        "pid": 15075,
+        "returncode": 0,
+        "reaped": true,
+        "group_absent": true,
+        "elapsed_seconds": 7.785715207981411,
+        "streams": {
+          "stdout": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "mode": 33188
+          },
+          "stderr": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "mode": 33188
+          }
+        }
+      },
+      {
+        "label": "run",
+        "args": [
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-focused-host-first-v2/mixed-causal"
+        ],
+        "timeout_seconds": 30,
+        "passed": true,
+        "pid": 15132,
+        "returncode": 0,
+        "reaped": true,
+        "group_absent": true,
+        "elapsed_seconds": 0.613375167013146,
+        "streams": {
+          "stdout": {
+            "bytes": 521,
+            "sha256": "296f5ae9a539b3d0ddfed133858c2ac1f4d5f66dd769b0745845135b9e99864f",
+            "mode": 33188
+          },
+          "stderr": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "mode": 33188
+          }
+        }
+      }
+    ],
+    "proposal_before": {
+      "src/core/mixed_readers_causal.c": {
+        "bytes": 51779,
+        "sha256": "b6fce6f08e9b63d0453407d43db16a3425b83339969b00e147e7522a7cf1dacd",
+        "mode": 33188
+      },
+      "src/core/mixed_readers_causal.h": {
+        "bytes": 12863,
+        "sha256": "520cc4375986f9cf203295686389408cbc040bde43c98ec3e32b4980f5dbfa72",
+        "mode": 33188
+      },
+      "src/core/mixed_readers_causal_queue_internal.h": {
+        "bytes": 1655,
+        "sha256": "96a47bf5494157524eb1e71e379caae3131d970da712ab815f98f9553cd8ee3e",
+        "mode": 33188
+      },
+      "src/core/mixed_scheduled_readers.c": {
+        "bytes": 45150,
+        "sha256": "2bf59e3f756a8f7fa924b743c16ad99067d7c533d108cc668859fd13b8f4b463",
+        "mode": 33188
+      },
+      "tests/mixed_readers_causal_test.c": {
+        "bytes": 21400,
+        "sha256": "da7ac70ecf1e889743bc911df16a2ad6ec36539a1c7f019d7b3be729d3e2f63c",
+        "mode": 33188
+      },
+      "tests/test_mixed_readers_causal.py": {
+        "bytes": 3191,
+        "sha256": "8221399d7e0e72306b371778222e576afbeaa3b5e3c049692576e965ffdbee6f",
+        "mode": 33188
+      },
+      "README.md": {
+        "bytes": 8291,
+        "sha256": "eb5275373dd2df8c5fa9c915fccef97342e3f87bcc68a3b2653addb9c2dcba73",
+        "mode": 33188
+      }
+    },
+    "actual_oracle": "MIXED CAUSAL TWO TRIGGER PASS:26 genuine heap cases;12 two16 mixed4/12 8/16/24-master cache8/16 lifetimes;internally derived all20 prediction;early successor before/after completion;actual original clocks/adoption/tombstone;poisoned disposed predecessor C;32-reader and third admission bounds;CONTROL/STOP/wrong predecessor refusal;raw first partial/zero/malformed/late/reentry and wrong fire order suppression;expected-only R and unknown second proof;once shutdown then read-only quiet;master beforeimages;SOFTWARE_ONLY\n",
+    "executable": {
+      "bytes": 2273600,
+      "sha256": "e72f0722e9ac451f0c3ebf08106559ce77220faa52e386fcf9603f8eea864d21",
+      "mode": 33261
+    },
+    "compiler_before": {
+      "bytes": 200560,
+      "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+      "mode": 33261
+    }
+  },
+  "default_regressions": {
+    "status": "PASS_QUEUE_AND_DEFAULT_ACTIVATION_ASAN_UBSAN_HOST_ONLY",
+    "commands": [
+      {
+        "label": "queue-compile",
+        "args": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-Isrc/core",
+          "-I.",
+          "tests/mixed_scheduled_readers_test.c",
+          "src/core/mixed_scheduled_readers.c",
+          "src/core/elapsed_clock.c",
+          "src/editor/sampler_paula.c",
+          "src/editor/sampler_wavetable.c",
+          "src/core/amigus_voice_plan.c",
+          "src/editor/sampler.c",
+          "src/editor/slots.c",
+          "src/core/pcm_filtered.c",
+          "src/core/slices.c",
+          "src/core/pattern.c",
+          "src/core/document.c",
+          "src/core/pp20.c",
+          "src/core/project.c",
+          "src/core/mod_project.c",
+          "src/core/mod_inspect.c",
+          "src/core/channels.c",
+          "src/core/pcm.c",
+          "src/core/wav.c",
+          "src/core/svx.c",
+          "src/core/raw.c",
+          "src/core/amigus_reservation.c",
+          "src/core/amigus_wavetable_cache.c",
+          "src/core/amigus_sample_ram.c",
+          "src/core/sample_cache.c",
+          "src/core/playback_pcm.c",
+          "-o",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-default-regressions-first-v1/queue"
+        ],
+        "timeout_seconds": 120,
+        "passed": true,
+        "pid": 16902,
+        "returncode": 0,
+        "reaped": true,
+        "group_absent": true,
+        "elapsed_seconds": 6.251870333013358,
+        "streams": {
+          "stdout": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "mode": 33188
+          },
+          "stderr": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "mode": 33188
+          }
+        }
+      },
+      {
+        "label": "queue-run",
+        "args": [
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-default-regressions-first-v1/queue"
+        ],
+        "timeout_seconds": 30,
+        "passed": true,
+        "pid": 16951,
+        "returncode": 0,
+        "reaped": true,
+        "group_absent": true,
+        "elapsed_seconds": 0.5896196249814238,
+        "streams": {
+          "stdout": {
+            "bytes": 725,
+            "sha256": "1b285024f5e96e22849f7228540fc8f461cb2eb5a8fd1f8338ce588fad5f6d9b",
+            "mode": 33188
+          },
+          "stderr": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "mode": 33188
+          }
+        }
+      },
+      {
+        "label": "activation-compile",
+        "args": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-Isrc/core",
+          "-I.",
+          "tests/mixed_readers_activation_test.c",
+          "src/core/mixed_readers_activation.c",
+          "src/core/mixed_scheduled_readers.c",
+          "src/core/elapsed_clock.c",
+          "src/editor/sampler_paula.c",
+          "src/editor/sampler_wavetable.c",
+          "src/core/amigus_voice_plan.c",
+          "src/editor/sampler.c",
+          "src/editor/slots.c",
+          "src/core/pcm_filtered.c",
+          "src/core/slices.c",
+          "src/core/pattern.c",
+          "src/core/document.c",
+          "src/core/pp20.c",
+          "src/core/project.c",
+          "src/core/mod_project.c",
+          "src/core/mod_inspect.c",
+          "src/core/channels.c",
+          "src/core/pcm.c",
+          "src/core/wav.c",
+          "src/core/svx.c",
+          "src/core/raw.c",
+          "src/core/amigus_reservation.c",
+          "src/core/amigus_wavetable_cache.c",
+          "src/core/amigus_sample_ram.c",
+          "src/core/sample_cache.c",
+          "src/core/playback_pcm.c",
+          "-o",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-default-regressions-first-v1/activation"
+        ],
+        "timeout_seconds": 120,
+        "passed": true,
+        "pid": 16952,
+        "returncode": 0,
+        "reaped": true,
+        "group_absent": true,
+        "elapsed_seconds": 7.682480916992063,
+        "streams": {
+          "stdout": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "mode": 33188
+          },
+          "stderr": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "mode": 33188
+          }
+        }
+      },
+      {
+        "label": "activation-run",
+        "args": [
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-default-regressions-first-v1/activation"
+        ],
+        "timeout_seconds": 30,
+        "passed": true,
+        "pid": 16998,
+        "returncode": 0,
+        "reaped": true,
+        "group_absent": true,
+        "elapsed_seconds": 2.7712138340284582,
+        "streams": {
+          "stdout": {
+            "bytes": 1313,
+            "sha256": "b1614c205f3fe1b972d127320549487ce1ee520d592346f859c1cc9153e06ad8",
+            "mode": 33188
+          },
+          "stderr": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "mode": 33188
+          }
+        }
+      }
+    ],
+    "actual_oracles": {
+      "queue": "MIXED READERS PASS:12 genuine16-action paired lifetimes;20 constructor/180 typed admissions;78 callback/effect/proof cases;24 explicit clock/refusal/pending/cancellation groups;6 malformed-reader envelopes;18 endian/loop/padding groups;6 full alias,32-reader capacity/replacement and control/STOP groups; expired controls/consumed close0; exact common grid/master saves; SOFTWARE_ONLY\namigus reservation lifecycle: PASS (fake library, no hardware)\nWAVETABLE UPLOAD JOB PASS: bounded steps, cancellation, unpublished leases, partial words, live ownership loss and hit transfer; injected only\nAMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only\n",
+      "activation": "MIXED ACTIVATION PASS:12 genuine8/16/24 paired16-action activations;23 guarded constructors;24 exact refusal/clock/partial/late/key/reentry proof orders;2 raw publish0+NEW reentry faults retain pins until independent absence proofs;4 new quiet identity/reentry faults retain exact pins/outputs then independent drains;3 source close/quiet faults retain;raw/unpublished pure guards;paired CONTROL/STOP/replacement;owned nonempty queue registration and consumed-close0;source pending/unknown/malformed retained then independent quiet;poisoned descriptors/copy-only activation;SOFTWARE_ONLY\nMIXED READERS PASS:12 genuine16-action paired lifetimes;20 constructor/180 typed admissions;78 callback/effect/proof cases;24 explicit clock/refusal/pending/cancellation groups;6 malformed-reader envelopes;18 endian/loop/padding groups;6 full alias,32-reader capacity/replacement and control/STOP groups; expired controls/consumed close0; exact common grid/master saves; SOFTWARE_ONLY\namigus reservation lifecycle: PASS (fake library, no hardware)\nWAVETABLE UPLOAD JOB PASS: bounded steps, cancellation, unpublished leases, partial words, live ownership loss and hit transfer; injected only\nAMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only\n"
+    },
+    "executables": {
+      "queue": {
+        "bytes": 1906760,
+        "sha256": "c992849842c8f485f6b2cecacd396676edcefea07301f66b211915dd67b96244",
+        "mode": 33261
+      },
+      "activation": {
+        "bytes": 2355976,
+        "sha256": "9576b92f94e63f5959ceadd762311bf3373cd1be780622357f48a676027d8c65",
+        "mode": 33261
+      }
+    },
+    "compiler_before": {
+      "bytes": 200560,
+      "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+      "mode": 33261
+    },
+    "source_unchanged": true,
+    "protected16_unchanged": true
+  },
+  "preserved_private_records": {
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-focused-host-first-v2/receipt.json": {
+      "bytes": 430658,
+      "sha256": "55b4880d730e0126fe2b687f96a328db1792ee8737a804ae578b3a3e6167aac1",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-default-regressions-first-v1/receipt.json": {
+      "bytes": 217869,
+      "sha256": "e1947dc981e2cfeddc8bdff3fcd591830566ecf009f72e70610cd3b9b1c73b1c",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-focused-host-first-v1/receipt.json": {
+      "bytes": 215834,
+      "sha256": "52e3cae5dd641bb412e1540ad5b7e4f658f1cda3b96699dd3d3a64a3a4d478ae",
+      "mode": 33188
+    }
+  },
+  "first_v1_compile_failure_preserved": true,
+  "target_operations": false,
+  "limits": [
+    "Injected ordinary-memory paired port; no native activation/IRQ/timer/DMA/device operations.",
+    "Publication fault and failed-constructor recovery cases, nonempty imported registry and all20 slots simultaneously active remain unqualified.",
+    "No rolling refill, CONTROL/STOP scheduling, live editor PLAY integration or timing/audio/listening acceptance.",
+    "Full selected src/tests manifest is preserved in the pinned private focused and regression receipts. Compiler environment closure is not fully captured.",
+    "Original one-armed Fast/Chip emulator candidate failed its native90 deadline; root HOLD1143 remains, recovery not yet approved."
+  ]
+}

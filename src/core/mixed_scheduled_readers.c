@@ -1,5 +1,6 @@
 #include "mixed_scheduled_readers.h"
 #include "mixed_scheduled_readers_internal.h"
+#include "mixed_readers_causal_queue_internal.h"
 #include "document.h"
 #include <string.h>
 #include <stddef.h>
@@ -555,4 +556,73 @@ int pt_mixed_readers_close(struct pt_mixed_readers_output **slot)
     if(reentry(q)||q->command_count||q->reader_count)return 0;
     a=q->allocator;q->busy=1;q->release_fault=&fault;*slot=NULL;
     a.release(a.context,q);return !fault&&!*slot;
+}
+
+/* Additive private task seam. Every v1 entry and validator above is unchanged.
+ * No ACTIVE/adoption promotion and no fire-side traversal occurs here. */
+enum pt_mixed_readers_result pt_mixed_readers_causal_validate(
+    struct pt_mixed_readers_output *q,const struct pt_mixed_causal_queue_basis *basis,
+    uint64_t successor)
+{
+    struct pt_mixed_causal_queue_basis saved;struct command_entry *first,*second=NULL;
+    unsigned i,index,seen=0,owners=0;struct reader_entry *r;
+    if(!q||!basis||!output_apart(q,basis,sizeof(*basis)))return PT_MIXED_READERS_INVALID;
+    if(reentry(q))return PT_MIXED_READERS_BACKEND;
+    if(q->closing||q->failed||!retirement_controls(q))return PT_MIXED_READERS_INVALID;
+    memcpy(&saved,basis,sizeof(saved));
+    first=command(q,saved.ticket);
+    if(!first||!first->published||q->command_count!=(successor?2U:1U)||
+       saved.backend_owner!=q->backend.context||saved.event!=&first->event||
+       saved.session!=q->session||saved.generation!=q->grid.generation||
+       saved.command_owner!=first->owner.token||
+       saved.command_binding.context!=first->owner.context||
+       saved.command_binding.context_bytes!=first->owner.context_bytes||
+       saved.frame!=first->event.batch.frame||saved.first!=first->event.first||
+       saved.last!=first->event.last||saved.count!=first->event.batch.count||
+       !saved.count||saved.count>16||saved.expected_mask&~0xFFFFFU)return PT_MIXED_READERS_INVALID;
+    for(i=0;i<20;++i){
+        if(!(saved.expected_mask&(1U<<i))){if(!zero_key(saved.expected+i))return PT_MIXED_READERS_INVALID;continue;}
+        r=key_reader(q,saved.expected+i);
+        if(!r||!r->valid||!r->submitted||r->retired||r->cancel_requested||r->superseded||
+           (r->domain.key.route==PT_MIXED_READERS_PAULA?r->domain.key.slot:4+r->domain.key.slot)!=i)
+            return PT_MIXED_READERS_INVALID;
+        owners|=1U<<(unsigned)(r-q->reader);
+    }
+    for(i=0;i<16;++i){
+        if(i>=saved.count){
+            struct pt_mixed_readers_action zero;memset(&zero,0,sizeof(zero));
+            if(!zero_key(saved.key+i)||saved.reference[i]||saved.binding[i].context||
+               saved.binding[i].context_bytes||memcmp(saved.action+i,&zero,sizeof(zero)))return PT_MIXED_READERS_INVALID;
+            continue;
+        }
+        r=q->reader+first->reader[i];
+        if(first->event.batch.action[i].kind!=PT_MIXED_READERS_TRIGGER||
+           memcmp(saved.action+i,first->event.batch.action+i,sizeof(saved.action[i]))||
+           !r->held||!r->valid||!r->submitted||r->retired||r->cancel_requested||
+           r->domain.key.trigger!=saved.ticket||r->domain.key.action!=i||
+           !equal_key(saved.key+i,&r->domain.key)||saved.reference[i]!=&r->domain||
+           saved.binding[i].context!=r->owner.control.context||
+           saved.binding[i].context_bytes!=r->owner.control.context_bytes)return PT_MIXED_READERS_INVALID;
+        index=r->domain.key.route==PT_MIXED_READERS_PAULA?r->domain.key.slot:4+r->domain.key.slot;
+        if(index>=20||(seen&(1U<<index)))return PT_MIXED_READERS_INVALID;
+        seen|=1U<<index;owners|=1U<<(unsigned)(r-q->reader);
+    }
+    if(successor){
+        second=command(q,successor);
+        if(!second||second==first||second->published||second->event.batch.frame<=saved.frame||
+           !second->event.batch.count||second->event.batch.count>16)return PT_MIXED_READERS_INVALID;
+        for(i=0;i<second->event.batch.count;++i){
+            r=q->reader+second->reader[i];
+            if(second->event.batch.action[i].kind!=PT_MIXED_READERS_TRIGGER||!r->held||!r->valid||
+               r->submitted||r->retired||r->cancel_requested||r->domain.key.trigger!=successor||
+               r->domain.key.action!=i)return PT_MIXED_READERS_INVALID;
+            owners|=1U<<(unsigned)(r-q->reader);
+        }
+    }
+    for(i=0;i<q->readers;++i)if((owners&(1U<<i))&&!current(q,&q->reader[i].owner.control))
+        return q->stale?PT_MIXED_READERS_STALE:PT_MIXED_READERS_BACKEND;
+    if(!current(q,&first->owner)||(second&&!current(q,&second->owner)))
+        return q->stale?PT_MIXED_READERS_STALE:PT_MIXED_READERS_BACKEND;
+    if(memcmp(basis,&saved,sizeof(saved))){q->failed=1;return PT_MIXED_READERS_BACKEND;}
+    return q->failed?PT_MIXED_READERS_BACKEND:PT_MIXED_READERS_OK;
 }

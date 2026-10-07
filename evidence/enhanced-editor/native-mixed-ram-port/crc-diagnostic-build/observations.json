@@ -1,0 +1,1908 @@
+{
+  "scope": "HOST_SANITIZER_AND_AMIGA_CROSSBUILD_ONLY",
+  "baseline": "b288a728a53e0575daa62caef1e218e058966f27",
+  "host_receipt": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-host-first-v1/receipt.json",
+    "bytes": 891922,
+    "sha256": "56c641c02190387db75d90d8f46b982faee0beb78383813802d6e76d259e76a5",
+    "mode": 33188
+  },
+  "host_outer": {
+    "bytes": 1022,
+    "sha256": "bced1ea5a59609f43c6e2186d6b49a51dffb26a9206e93888b3ade6129d2c7e7",
+    "mode": 33152
+  },
+  "native_build_receipt": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/receipt.json",
+    "bytes": 1230631,
+    "sha256": "b0f58c4ac74f1aaafbc7f4e93376929644d1dca22dd83828cdc489582369deb4",
+    "mode": 33188
+  },
+  "native_build_outer": {
+    "bytes": 1210,
+    "sha256": "0f1af576e5da95da74bbdea4fe4bb1f0b64e2c1b27ac10af9eb6199e782e2def",
+    "mode": 33152
+  },
+  "host_status": "PASS_CRC_PLUS_UNCHANGED_DIAGNOSTIC65_ASAN_UBSAN_HOST_ONLY",
+  "host_commands": [
+    {
+      "label": "compile",
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "tests/native_mixed_ram_port_test.c",
+        "src/native/readers_ram/native_mixed_ram_port.c",
+        "src/core/mixed_readers_activation.c",
+        "src/core/mixed_scheduled_readers.c",
+        "src/core/elapsed_clock.c",
+        "src/editor/sampler_paula.c",
+        "src/editor/sampler_wavetable.c",
+        "src/core/amigus_voice_plan.c",
+        "src/editor/sampler.c",
+        "src/editor/slots.c",
+        "src/core/pcm_filtered.c",
+        "src/core/slices.c",
+        "src/core/pattern.c",
+        "src/core/document.c",
+        "src/core/pp20.c",
+        "src/core/project.c",
+        "src/core/mod_project.c",
+        "src/core/mod_inspect.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "src/core/wav.c",
+        "src/core/svx.c",
+        "src/core/raw.c",
+        "src/core/amigus_reservation.c",
+        "src/core/amigus_wavetable_cache.c",
+        "src/core/amigus_sample_ram.c",
+        "src/core/sample_cache.c",
+        "src/core/playback_pcm.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-host-first-v1/diagnostic-portable"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-host-first-v1/tree",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 55208,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 7.3117106670106295
+    },
+    {
+      "label": "run",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-host-first-v1/diagnostic-portable"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-host-first-v1/tree",
+      "limit_seconds": 30,
+      "passed": true,
+      "errors": [],
+      "pid": 55258,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 446,
+          "sha256": "a6432616859df06b9b7fd9cc4f051a6c546420fe45c1c4a4aca97773c0165529",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.626869791012723
+    }
+  ],
+  "actual_host_oracle": "NATIVE MIXED RAM PORT PASS:65 genuine heap cases;24 mixed4/12 or16-card8/16/24-master/cache proof-order lifetimes;32-reader replacement pressure;all20 original keys;expected-only dependent command records including second-proof uncertainty;second armed publication refusal;paired CONTROL/STOP;raw arm/source outcomes and reentry;once shutdown then independent read-only quiet;exact clocks/retained late adoption/master beforeimages;SOFTWARE_ONLY\n",
+  "native_status": "PASS_STRICT_28_UNIT_CRC_DIAGNOSTIC_NATIVE_CROSSBUILD_HOST_ONLY_NOT_RUN",
+  "native_candidate": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/PTMixedRamFastChipTest",
+    "bytes": 239724,
+    "sha256": "e263add279617ba08393eeb7f7d809ff759f85d1ea4165b1a5e85ed97dc37144",
+    "mode": 33261
+  },
+  "native_units": [
+    "tests/native_exec_mixed_ram_port_fast_chip_test.c",
+    "src/native/readers_ram/native_mixed_ram_port.c",
+    "src/core/mixed_readers_activation.c",
+    "src/core/mixed_scheduled_readers.c",
+    "src/core/elapsed_clock.c",
+    "src/editor/sampler_paula.c",
+    "src/editor/sampler_wavetable.c",
+    "src/core/amigus_voice_plan.c",
+    "src/editor/sampler.c",
+    "src/editor/slots.c",
+    "src/core/pcm_filtered.c",
+    "src/core/slices.c",
+    "src/core/pattern.c",
+    "src/core/document.c",
+    "src/core/pp20.c",
+    "src/core/project.c",
+    "src/core/mod_project.c",
+    "src/core/mod_inspect.c",
+    "src/core/channels.c",
+    "src/core/pcm.c",
+    "src/core/wav.c",
+    "src/core/svx.c",
+    "src/core/raw.c",
+    "src/core/amigus_reservation.c",
+    "src/core/amigus_wavetable_cache.c",
+    "src/core/amigus_sample_ram.c",
+    "src/core/sample_cache.c",
+    "src/core/playback_pcm.c"
+  ],
+  "native_flags": [
+    "-std=c99",
+    "-m68000",
+    "-msoft-float",
+    "-mcrt=nix20",
+    "-Os",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-UNDEBUG",
+    "-Isrc/core",
+    "-Isrc/native",
+    "-Isrc/native/readers_ram",
+    "-I.",
+    "-fbbb=-"
+  ],
+  "native_environment": {
+    "PATH": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "LANG": "C",
+    "LC_ALL": "C",
+    "TMPDIR": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tmp"
+  },
+  "native_calls": [
+    {
+      "label": "preprocess-wrapper",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-E",
+        "-dD",
+        "tests/native_exec_mixed_ram_port_fast_chip_test.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/wrapper.i"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 60980,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.31322445897967555
+    },
+    {
+      "label": "wrapper-macros",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-dM",
+        "-E",
+        "tests/native_exec_mixed_ram_port_fast_chip_test.c"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 60986,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 100455,
+          "sha256": "a1d1bbf57b4699befa635042fc60869681e3a85624f92625ff2fc8b203cd0f7f",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.0512514169968199
+    },
+    {
+      "label": "compile-00",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu00.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu00.o",
+        "-c",
+        "tests/native_exec_mixed_ram_port_fast_chip_test.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu00.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 60988,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.5438915000122506
+    },
+    {
+      "label": "compile-01",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu01.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu01.o",
+        "-c",
+        "src/native/readers_ram/native_mixed_ram_port.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu01.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 60991,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.15103341700159945
+    },
+    {
+      "label": "compile-02",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu02.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu02.o",
+        "-c",
+        "src/core/mixed_readers_activation.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu02.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 60994,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.20651495800120756
+    },
+    {
+      "label": "compile-03",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu03.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu03.o",
+        "-c",
+        "src/core/mixed_scheduled_readers.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu03.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 60997,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.25510066701099277
+    },
+    {
+      "label": "compile-04",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu04.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu04.o",
+        "-c",
+        "src/core/elapsed_clock.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu04.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61002,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08697800000663847
+    },
+    {
+      "label": "compile-05",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu05.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu05.o",
+        "-c",
+        "src/editor/sampler_paula.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu05.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61008,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08914795800228603
+    },
+    {
+      "label": "compile-06",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu06.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu06.o",
+        "-c",
+        "src/editor/sampler_wavetable.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu06.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61011,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08150958298938349
+    },
+    {
+      "label": "compile-07",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu07.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu07.o",
+        "-c",
+        "src/core/amigus_voice_plan.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu07.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61014,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08915766602149233
+    },
+    {
+      "label": "compile-08",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu08.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu08.o",
+        "-c",
+        "src/editor/sampler.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu08.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61017,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.30485845799557865
+    },
+    {
+      "label": "compile-09",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu09.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu09.o",
+        "-c",
+        "src/editor/slots.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu09.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61020,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08522154201637022
+    },
+    {
+      "label": "compile-10",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu10.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu10.o",
+        "-c",
+        "src/core/pcm_filtered.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu10.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61023,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08759254199685529
+    },
+    {
+      "label": "compile-11",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu11.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu11.o",
+        "-c",
+        "src/core/slices.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu11.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61026,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08324195898603648
+    },
+    {
+      "label": "compile-12",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu12.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu12.o",
+        "-c",
+        "src/core/pattern.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu12.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61029,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.14559995898162015
+    },
+    {
+      "label": "compile-13",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu13.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu13.o",
+        "-c",
+        "src/core/document.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu13.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61032,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08677504200022668
+    },
+    {
+      "label": "compile-14",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu14.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu14.o",
+        "-c",
+        "src/core/pp20.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu14.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61037,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08531104199937545
+    },
+    {
+      "label": "compile-15",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu15.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu15.o",
+        "-c",
+        "src/core/project.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu15.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61046,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.310768209019443
+    },
+    {
+      "label": "compile-16",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu16.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu16.o",
+        "-c",
+        "src/core/mod_project.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu16.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61062,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.20850949999294244
+    },
+    {
+      "label": "compile-17",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu17.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu17.o",
+        "-c",
+        "src/core/mod_inspect.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu17.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61068,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08544770898879506
+    },
+    {
+      "label": "compile-18",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu18.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu18.o",
+        "-c",
+        "src/core/channels.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu18.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61071,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.0861674580082763
+    },
+    {
+      "label": "compile-19",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu19.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu19.o",
+        "-c",
+        "src/core/pcm.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu19.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61077,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08054308302234858
+    },
+    {
+      "label": "compile-20",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu20.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu20.o",
+        "-c",
+        "src/core/wav.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu20.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61080,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.09221595898270607
+    },
+    {
+      "label": "compile-21",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu21.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu21.o",
+        "-c",
+        "src/core/svx.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu21.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61083,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.13963691701064818
+    },
+    {
+      "label": "compile-22",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu22.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu22.o",
+        "-c",
+        "src/core/raw.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu22.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61088,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08418166701449081
+    },
+    {
+      "label": "compile-23",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu23.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu23.o",
+        "-c",
+        "src/core/amigus_reservation.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu23.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61095,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.07633312500547618
+    },
+    {
+      "label": "compile-24",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu24.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu24.o",
+        "-c",
+        "src/core/amigus_wavetable_cache.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu24.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61098,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08591687498847023
+    },
+    {
+      "label": "compile-25",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu25.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu25.o",
+        "-c",
+        "src/core/amigus_sample_ram.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu25.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61101,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08232862502336502
+    },
+    {
+      "label": "compile-26",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu26.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu26.o",
+        "-c",
+        "src/core/sample_cache.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu26.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61104,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08931324997683987
+    },
+    {
+      "label": "compile-27",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "-fstack-usage",
+        "-MD",
+        "-MF",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu27.d",
+        "-MQ",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu27.o",
+        "-c",
+        "src/core/playback_pcm.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu27.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61107,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.14185883299796842
+    },
+    {
+      "label": "link",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-gcc",
+        "-std=c99",
+        "-m68000",
+        "-msoft-float",
+        "-mcrt=nix20",
+        "-Os",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-Isrc/core",
+        "-Isrc/native",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "-fbbb=-",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu00.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu01.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu02.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu03.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu04.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu05.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu06.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu07.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu08.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu09.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu10.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu11.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu12.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu13.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu14.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu15.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu16.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu17.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu18.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu19.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu20.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu21.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu22.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu23.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu24.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu25.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu26.o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu27.o",
+        "-Wl,-Map,/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/link.map",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/PTMixedRamFastChipTest"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 61110,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08343616701313294
+    },
+    {
+      "label": "symbols",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-nm",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/PTMixedRamFastChipTest"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 30,
+      "passed": true,
+      "errors": [],
+      "pid": 61113,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 11577,
+          "sha256": "030119a38abc1b60f01e5ba06500cc577e59d540083f027f3ac15e373b85fee1",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.0443692909902893
+    },
+    {
+      "label": "sections",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-objdump",
+        "-h",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/PTMixedRamFastChipTest"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 30,
+      "passed": true,
+      "errors": [],
+      "pid": 61114,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 579,
+          "sha256": "2f6346ccfab0592ef331bd2d3809b82a1fed51a9c6332e7d9b50b22a4d5c477b",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.01744095899630338
+    },
+    {
+      "label": "port-disassembly",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin/m68k-amigaos-objdump",
+        "-dr",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tu01.o"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/source",
+      "limit_seconds": 30,
+      "passed": true,
+      "errors": [],
+      "pid": 61115,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 104870,
+          "sha256": "3dbc77ddced1fe079644b929b312b7be2c3cfb1f8130ea062930b55bc1e87d93",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.013613666989840567
+    }
+  ],
+  "only_source_overlay": "src/core/project.c",
+  "copied_public_evidence": {
+    "host-audit.json": {
+      "bytes": 8016,
+      "sha256": "a4de2a0684233c8b345d8bcce1f0776c50d7412b930acdf06b941f9e18039460",
+      "mode": 33188
+    },
+    "host-compile.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "host-compile.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "host-run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "host-run.stdout": {
+      "bytes": 446,
+      "sha256": "a6432616859df06b9b7fd9cc4f051a6c546420fe45c1c4a4aca97773c0165529",
+      "mode": 33188
+    },
+    "native-build-audit.json": {
+      "bytes": 26812,
+      "sha256": "9f71825c76d719d84038d497c0b6aa696edc4c03c426e1d103b6203cbda25a1a",
+      "mode": 33188
+    }
+  },
+  "source881_unchanged": true,
+  "repository1200_unchanged": true,
+  "protected16_unchanged": true,
+  "emulator": "NOT_RUN_FOR_THIS_CANDIDATE",
+  "physical": "NOT_RUN_FOR_THIS_CANDIDATE",
+  "target_execution": false,
+  "original_native_90s_result": "FAILED_PRESERVED_SEPARATELY_WITH_COMPLETED_RECOVERY_AND_EXPLICIT_RELEASE",
+  "limitations": [
+    "No native performance or original failure-cause diagnosis.",
+    "No native typed causal facade, enhanced PLAY, timing/IRQ/whole-stack/WCET qualification.",
+    "No physical DMA, card RAM capacity/upload order/completion/voice-stop, audio or listening acceptance.",
+    "A separate reviewed runner binds this candidate; service maintenance and fresh target coordination remain separate prerequisites."
+  ]
+}

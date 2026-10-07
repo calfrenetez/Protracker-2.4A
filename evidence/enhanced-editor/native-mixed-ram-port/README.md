@@ -9,7 +9,13 @@ See observations.json for actual flags, source/product/receipt pins and all comm
 This is an ordinary-RAM ownership diagnostic with one armed ticket. Native memory placement, cleanup, exact live musical scheduling, IRQ/whole-stack/WCET, physical device properties, audio and listening remain separate acceptance.
 
 The [first emulator failure](emulator-first-failure/observations.json) preserves
-available raw launch response, partial native stdout and runner stderr. The
-failed run remains held; cleanup, retry, disconnect, stop, restoration and
-release were not attempted. Cause is unknown, and no target quiet or memory
-placement/release acceptance follows from the partial output.
+available raw launch response, partial native stdout and runner stderr. That
+record describes the held state at failure capture. The separately approved
+[recovery and explicit release](approved-recovery/README.md) subsequently passed;
+the original deadline result remains failed. Cause is unknown, and no memory
+placement/release acceptance follows from the original partial output.
+
+The separate [CRC diagnostic composition](crc-diagnostic-build/README.md) passed
+the genuine 65-case host fixture and strict 28-unit Amiga crossbuild. Its new
+candidate remains unexecuted in Amiberry and on the A1200; this build is not a
+retry or reclassification of the original failed operation.

@@ -1,0 +1,194 @@
+{
+  "verdict": "PASS_INDEPENDENT_SAVED_CRC_DIAGNOSTIC65_HOST_COMPOSITION_ONLY",
+  "scope": "Full saved receipts, six actual captured streams and selected source/custody read without replay, import, compiler/test invocation, Git or process/target probes.",
+  "findings": [],
+  "receipt_pins": {
+    "root-mixed-ram-crc-diagnostic-host-first-v1/receipt.json": {
+      "bytes": 891922,
+      "sha256": "56c641c02190387db75d90d8f46b982faee0beb78383813802d6e76d259e76a5",
+      "mode": 33188
+    },
+    "root-mixed-ram-crc-diagnostic-host-outer-first-v1/receipt.json": {
+      "bytes": 1022,
+      "sha256": "bced1ea5a59609f43c6e2186d6b49a51dffb26a9206e93888b3ade6129d2c7e7",
+      "mode": 33152
+    }
+  },
+  "packet_pins": {
+    "native-mixed-ram-crc-diagnostic-build-source-proposal-v1/host-first.py": {
+      "bytes": 10701,
+      "sha256": "fe3aa85bc54094e4fce1084664b0ed62dea85ec4e475e234f7c79d77a15183f2",
+      "mode": 33060
+    },
+    "native-mixed-ram-crc-diagnostic-build-source-proposal-v1/PLAN.md": {
+      "bytes": 7695,
+      "sha256": "fccc7f7ab4136c80f5b13a5f5d98d65fdd448dc00e91006a437d7d7858ff25de",
+      "mode": 33060
+    },
+    "native-mixed-ram-crc-diagnostic-build-source-proposal-v1/pins.json": {
+      "bytes": 9735,
+      "sha256": "233410b53363c55e5d8890dcb1ddbc4de1a7675a59ab4881f92f386fa63a0813",
+      "mode": 33060
+    }
+  },
+  "actual_commands": [
+    {
+      "label": "compile",
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-Isrc/native/readers_ram",
+        "-I.",
+        "tests/native_mixed_ram_port_test.c",
+        "src/native/readers_ram/native_mixed_ram_port.c",
+        "src/core/mixed_readers_activation.c",
+        "src/core/mixed_scheduled_readers.c",
+        "src/core/elapsed_clock.c",
+        "src/editor/sampler_paula.c",
+        "src/editor/sampler_wavetable.c",
+        "src/core/amigus_voice_plan.c",
+        "src/editor/sampler.c",
+        "src/editor/slots.c",
+        "src/core/pcm_filtered.c",
+        "src/core/slices.c",
+        "src/core/pattern.c",
+        "src/core/document.c",
+        "src/core/pp20.c",
+        "src/core/project.c",
+        "src/core/mod_project.c",
+        "src/core/mod_inspect.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "src/core/wav.c",
+        "src/core/svx.c",
+        "src/core/raw.c",
+        "src/core/amigus_reservation.c",
+        "src/core/amigus_wavetable_cache.c",
+        "src/core/amigus_sample_ram.c",
+        "src/core/sample_cache.c",
+        "src/core/playback_pcm.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-host-first-v1/diagnostic-portable"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-host-first-v1/tree",
+      "limit_seconds": 120,
+      "elapsed_seconds": 7.3117106670106295,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": [],
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      }
+    },
+    {
+      "label": "run",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-host-first-v1/diagnostic-portable"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-host-first-v1/tree",
+      "limit_seconds": 30,
+      "elapsed_seconds": 0.626869791012723,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": [],
+      "streams": {
+        "stdout": {
+          "bytes": 446,
+          "sha256": "a6432616859df06b9b7fd9cc4f051a6c546420fe45c1c4a4aca97773c0165529",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      }
+    }
+  ],
+  "outer": {
+    "returncode": 0,
+    "reaped": true,
+    "group_absent": true,
+    "errors": [],
+    "stdout": {
+      "bytes": 144,
+      "sha256": "c830d787c2b602300faf2e65e5b125deb6069ff58db23239551c34a34d5c3e88",
+      "mode": 33152
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33152
+    },
+    "helper_before_after_exact": true
+  },
+  "qualification": {
+    "strict_flags": [
+      "-std=c99",
+      "-O1",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-fsanitize=address,undefined"
+    ],
+    "sanitizer_options": {
+      "ASAN_OPTIONS": "halt_on_error=1:abort_on_error=1",
+      "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1"
+    },
+    "actual_unit_vector": "28 unique genuine units; recorded compile argv exactly matches frozen host_flags plus host_units and selected isolated output.",
+    "oracle": {
+      "bytes": 446,
+      "sha256": "a6432616859df06b9b7fd9cc4f051a6c546420fe45c1c4a4aca97773c0165529",
+      "value": "NATIVE MIXED RAM PORT PASS:65 genuine heap cases;24 mixed4/12 or16-card8/16/24-master/cache proof-order lifetimes;32-reader replacement pressure;all20 original keys;expected-only dependent command records including second-proof uncertainty;second armed publication refusal;paired CONTROL/STOP;raw arm/source outcomes and reentry;once shutdown then independent read-only quiet;exact clocks/retained late adoption/master beforeimages;SOFTWARE_ONLY\n",
+      "same_as_original_portable": true
+    },
+    "streams": "Compile stdout/stderr and run stderr empty. Full run stdout is the unchanged sole 65-case oracle; outer stdout is exactly the result path and outer stderr is empty.",
+    "executable": {
+      "bytes": 2404736,
+      "sha256": "60cb2ded4a8f1523279850baf7370e9313b0dfa0d01484f90f615dbb19efb213",
+      "mode": 33261
+    },
+    "source_composition": "881 selected files copied from original diagnostic portable tree; identical key set and only src/core/project.c differs. Original donor retains bitwise CRC; selected overlay is the exact reviewed immutable nibble CRC. All fixture/helper bodies and assertions unchanged.",
+    "overlay": {
+      "bytes": 47003,
+      "sha256": "f1bad97dc044e3976936be95c4e42051e8b7a79aab643a1c984a14a1dd24c75a",
+      "mode": 33188
+    },
+    "custody": "Saved before/after maps equal for packet3, donors20, repository1200, selected tree881, protected16 and compiler. Every current mapped file resampled exact; original portable source881 also resampled exact. No custody errors.",
+    "retained_native_contract": {
+      "prospective_launcher_stack": 131072,
+      "native_deadline_seconds": 90,
+      "target_operation": false,
+      "native_compiler_invoked": false,
+      "automatic_retry": false
+    }
+  },
+  "limits": [
+    "This is genuine portable HOST execution with default diagnostic hooks; it does not execute the Fast/Chip wrapper or validate actual native diagnostic markers/ABI values.",
+    "Saved process reaping and positive group absence are reviewed collector observations; this auditor performed no live process probes.",
+    "HOST elapsed values do not establish native speed, CRC as the cause of the previous delay, deadline acceptance, device RAM/ordering, DMA, IRQ timing, physical or listening acceptance.",
+    "Original native 90-second failed gate and late evidence are not superseded by this distinct composition.",
+    "Receipt provides file custody, not Git HEAD/status observations; this audit makes no Git claim."
+  ]
+}

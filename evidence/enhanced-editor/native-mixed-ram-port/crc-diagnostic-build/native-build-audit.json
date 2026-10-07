@@ -1,0 +1,864 @@
+{
+  "scope": "INDEPENDENT_SAVED_ONLY_NO_EXECUTION_NO_TARGET_OR_SERVICE",
+  "status": "PASS_INDEPENDENT_SAVED_CRC_DIAGNOSTIC_NATIVE_CROSSBUILD_HOST_ONLY_NOT_RUN",
+  "passed": true,
+  "findings": [],
+  "inputs": {
+    "inner": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/receipt.json",
+      "bytes": 1230631,
+      "sha256": "b0f58c4ac74f1aaafbc7f4e93376929644d1dca22dd83828cdc489582369deb4",
+      "mode": 33188
+    },
+    "outer": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-outer-first-v1/receipt.json",
+      "bytes": 1210,
+      "sha256": "0f1af576e5da95da74bbdea4fe4bb1f0b64e2c1b27ac10af9eb6199e782e2def",
+      "mode": 33152
+    },
+    "source_review": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-native-mixed-ram-crc-diagnostic-native-source-review-v1.json",
+      "bytes": 3299,
+      "sha256": "3c6819852dedfcbe9e628bb324e0703b503b13cf6d8a7d8689a74dd8e338fba9",
+      "mode": 33188
+    },
+    "packet": {
+      "build-first.py": {
+        "bytes": 14090,
+        "sha256": "c814eeb2c3706a060f63416867f630bb8d9bb5d49e01a532be50b2103bad0a91",
+        "mode": 33060
+      },
+      "PLAN.md": {
+        "bytes": 7645,
+        "sha256": "08c6f777ce60cf891d65d1b773c574800b14156a21ef5c5d647cd99b7a7d89fd",
+        "mode": 33060
+      },
+      "pins.json": {
+        "bytes": 5470,
+        "sha256": "b4d0e686de001462f27ae46863609e841dea99b2c6583f2b335acc2c1814161d",
+        "mode": 33060
+      }
+    },
+    "accepted_host_receipt": {
+      "bytes": 891922,
+      "sha256": "56c641c02190387db75d90d8f46b982faee0beb78383813802d6e76d259e76a5",
+      "mode": 33188
+    },
+    "accepted_host_audit": {
+      "bytes": 8016,
+      "sha256": "a4de2a0684233c8b345d8bcce1f0776c50d7412b930acdf06b941f9e18039460",
+      "mode": 33188
+    },
+    "accepted_host_outer": {
+      "bytes": 1022,
+      "sha256": "bced1ea5a59609f43c6e2186d6b49a51dffb26a9206e93888b3ade6129d2c7e7",
+      "mode": 33152
+    },
+    "template_receipt": {
+      "bytes": 459009,
+      "sha256": "0163ed677bbd0a1dcc6fe96b95bacc8e17d58dd68f36aae7e8b23d9264d1cc10",
+      "mode": 33188
+    }
+  },
+  "binary": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/PTMixedRamFastChipTest",
+    "bytes": 239724,
+    "sha256": "e263add279617ba08393eeb7f7d809ff759f85d1ea4165b1a5e85ed97dc37144",
+    "mode": 33261,
+    "header_hex": "000003f3",
+    "diagnostic_markers": [
+      "EXEC MIXED RAM CASE BEGIN",
+      "EXEC MIXED RAM CASE END",
+      "EXEC MIXED RAM PHASE"
+    ]
+  },
+  "actual_calls": [
+    {
+      "label": "preprocess-wrapper",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.31322445897967555,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "wrapper-macros",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.0512514169968199,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-00",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.5438915000122506,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-01",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.15103341700159945,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-02",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.20651495800120756,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-03",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.25510066701099277,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-04",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.08697800000663847,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-05",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.08914795800228603,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-06",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.08150958298938349,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-07",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.08915766602149233,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-08",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.30485845799557865,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-09",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.08522154201637022,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-10",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.08759254199685529,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-11",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.08324195898603648,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-12",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.14559995898162015,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-13",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.08677504200022668,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-14",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.08531104199937545,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-15",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.310768209019443,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-16",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.20850949999294244,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-17",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.08544770898879506,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-18",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.0861674580082763,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-19",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.08054308302234858,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-20",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.09221595898270607,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-21",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.13963691701064818,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-22",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.08418166701449081,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-23",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.07633312500547618,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-24",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.08591687498847023,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-25",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.08232862502336502,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-26",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.08931324997683987,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "compile-27",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.14185883299796842,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "link",
+      "limit_seconds": 120,
+      "elapsed_seconds": 0.08343616701313294,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "symbols",
+      "limit_seconds": 30,
+      "elapsed_seconds": 0.0443692909902893,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "sections",
+      "limit_seconds": 30,
+      "elapsed_seconds": 0.01744095899630338,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    },
+    {
+      "label": "port-disassembly",
+      "limit_seconds": 30,
+      "elapsed_seconds": 0.013613666989840567,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "errors": []
+    }
+  ],
+  "actual_full_streams": {
+    "preprocess-wrapper.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "preprocess-wrapper.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "wrapper-macros.stdout": {
+      "bytes": 100455,
+      "sha256": "a1d1bbf57b4699befa635042fc60869681e3a85624f92625ff2fc8b203cd0f7f",
+      "mode": 33188
+    },
+    "wrapper-macros.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-00.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-00.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-01.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-01.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-02.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-02.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-03.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-03.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-04.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-04.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-05.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-05.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-06.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-06.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-07.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-07.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-08.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-08.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-09.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-09.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-10.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-10.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-11.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-11.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-12.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-12.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-13.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-13.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-14.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-14.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-15.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-15.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-16.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-16.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-17.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-17.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-18.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-18.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-19.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-19.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-20.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-20.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-21.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-21.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-22.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-22.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-23.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-23.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-24.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-24.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-25.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-25.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-26.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-26.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-27.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "compile-27.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "link.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "link.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "symbols.stdout": {
+      "bytes": 11577,
+      "sha256": "030119a38abc1b60f01e5ba06500cc577e59d540083f027f3ac15e373b85fee1",
+      "mode": 33188
+    },
+    "symbols.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "sections.stdout": {
+      "bytes": 579,
+      "sha256": "2f6346ccfab0592ef331bd2d3809b82a1fed51a9c6332e7d9b50b22a4d5c477b",
+      "mode": 33188
+    },
+    "sections.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "port-disassembly.stdout": {
+      "bytes": 104870,
+      "sha256": "3dbc77ddced1fe079644b929b312b7be2c3cfb1f8130ea062930b55bc1e87d93",
+      "mode": 33188
+    },
+    "port-disassembly.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    }
+  },
+  "qualification": {
+    "strict_flags": [
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-Isrc/core",
+      "-Isrc/native",
+      "-Isrc/native/readers_ram",
+      "-I.",
+      "-fbbb=-"
+    ],
+    "actual_units": [
+      "tests/native_exec_mixed_ram_port_fast_chip_test.c",
+      "src/native/readers_ram/native_mixed_ram_port.c",
+      "src/core/mixed_readers_activation.c",
+      "src/core/mixed_scheduled_readers.c",
+      "src/core/elapsed_clock.c",
+      "src/editor/sampler_paula.c",
+      "src/editor/sampler_wavetable.c",
+      "src/core/amigus_voice_plan.c",
+      "src/editor/sampler.c",
+      "src/editor/slots.c",
+      "src/core/pcm_filtered.c",
+      "src/core/slices.c",
+      "src/core/pattern.c",
+      "src/core/document.c",
+      "src/core/pp20.c",
+      "src/core/project.c",
+      "src/core/mod_project.c",
+      "src/core/mod_inspect.c",
+      "src/core/channels.c",
+      "src/core/pcm.c",
+      "src/core/wav.c",
+      "src/core/svx.c",
+      "src/core/raw.c",
+      "src/core/amigus_reservation.c",
+      "src/core/amigus_wavetable_cache.c",
+      "src/core/amigus_sample_ram.c",
+      "src/core/sample_cache.c",
+      "src/core/playback_pcm.c"
+    ],
+    "argv_mapping": "Every actual argv equals its pinned original diagnostic argv with only the owned template prefix changed to the new output/source prefix; cwd and per-call limits exact.",
+    "environment": {
+      "PATH": "/Users/james1/Documents/Codex/2026-08-20/work-from-the-design-spec-v1/repo/.cache/amiga/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+      "LANG": "C",
+      "LC_ALL": "C",
+      "TMPDIR": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-crc-diagnostic-native-build-first-v1/tmp"
+    },
+    "preprocess": "One genuine named fixture definition and one wrapper main; VERSION1U present, NDEBUG and leaked entry hook absent.",
+    "symbols": "Exactly one main, named genuine fixture and each of four production private mixed-RAM entry symbols in complete saved nm output.",
+    "sections": "Saved object inspection reports Amiga text/data/bss; complete port-disassembly stream retained. No disassembler invoked by reviewer.",
+    "products": {
+      "records": 86,
+      "canonical_json_sha256": "ccd580f4ecf126eac2a50fb41599944ab4b487f7dc3b6892c820036e906e4352"
+    },
+    "dependencies": {
+      "fingerprint": {
+        "records": 120,
+        "canonical_json_sha256": "e7544954866d0df24e54b6ad9b55455163707b1792b2114c756dc061ac6f6723"
+      },
+      "selected_internal": 71,
+      "unchanged_external": 49,
+      "all28_dependency_files_parsed": true
+    },
+    "provider_records": {
+      "records": 75,
+      "canonical_json_sha256": "f42f2b6f8310624af4092ac3801c3a0aa8afc4da3a1ceebfe210eb04be4c7140"
+    },
+    "source881": {
+      "records": 881,
+      "canonical_json_sha256": "c1c812a49e69e266f3676f5d9699097d5fbc0dd5ac0b972f771c3a8bd0f25195"
+    },
+    "repository1200": {
+      "records": 1200,
+      "canonical_json_sha256": "48d9d683705157f5b25e98b5c2d6f25fd53ae2d8ac52dac76fd7d607da0446a1"
+    },
+    "protected16": {
+      "records": 16,
+      "canonical_json_sha256": "647dfe3c16605303ed83886ac26659e5dedeaf531c7317809596476c3cfd65b5"
+    },
+    "packet": {
+      "records": 3,
+      "canonical_json_sha256": "cd824084d4c91283412a55c4ba99c546a2bcef676710571478f80102ccff2347"
+    },
+    "donors": {
+      "records": 10,
+      "canonical_json_sha256": "2d47dbd632bc46e0abb547334dce1ad45e902dc8ebb39d1cb62251f0540867bc"
+    },
+    "donor74streams": {
+      "records": 74,
+      "canonical_json_sha256": "04360e19a72d24a655ffa5f25a7731b64894500274ed537f64fdd51172538cdb"
+    },
+    "only_diagnostic_source_overlay": {
+      "path": "src/core/project.c",
+      "bytes": 47003,
+      "sha256": "f1bad97dc044e3976936be95c4e42051e8b7a79aab643a1c984a14a1dd24c75a",
+      "mode": 33188
+    },
+    "original_fixture_helpers_and_assertions": "Current copied source equals the accepted HOST tree; all original diagnostic files byte-identical to the original diagnostic native source except the exact reviewed project CRC overlay.",
+    "custody": "Every saved before/after dictionary and every current mapped file matches; original donor trees, receipts and all74 donor streams unchanged; custody_errors empty."
+  },
+  "outer": {
+    "scope": "HOST_ONLY_ONE_FROZEN_NATIVE_CROSSBUILD_FIRST_INVOCATION_NO_TARGET",
+    "argv": [
+      "python3",
+      "-B",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-ram-crc-diagnostic-native-source-proposal-v1/build-first.py"
+    ],
+    "returncode": 0,
+    "reaped": true,
+    "group_absent": true,
+    "errors": [],
+    "full_stdout": {
+      "bytes": 152,
+      "sha256": "00eccc5476545f6d6d5ee910f679d327a188eb44cd8c48d7f65bf6732cfbbf19",
+      "mode": 33152
+    },
+    "full_stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33152
+    },
+    "elapsed_seconds": 6.766904,
+    "source_before_after_exact": true
+  },
+  "limits": [
+    "All complete saved receipts/streams/products/dependency and source maps were read or hash-resampled. This is file evidence, not a live process absence probe.",
+    "Reviewer did not import/invoke the collector, run compiler/tests/Git, execute the HUNK, or probe network/process/service/health/guard/lease/lock/target.",
+    "Only this private audit report is created; no product, donor, proposal, repository, checkpoint, memory, service or target mutation occurred.",
+    "The new239724-byte HUNK remains NATIVE_NOT_RUN. Stack131072/native90/296-line grammar are preserved prospective settings, not new runtime observations.",
+    "The original237320/ec4dbf native90 deadline failure remains FAILED. Late original output and this CRC crossbuild do not qualify the failure cause or target performance.",
+    "No emulator, physical Fast/Chip, card upload/completion/voice-stop, exact musical timing/CIA/IRQ, audio or listening acceptance is inferred. The separate idle service maintenance question remains outside this crossbuild scope."
+  ]
+}

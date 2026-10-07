@@ -6419,3 +6419,26 @@ registration/source binding and native/classic PLAY integration remain unfinishe
 No new emulator or physical A1200/AmiGUS, device stop/completion/order/capacity,
 exact live output timing, audio or listening result is inferred. See
 [the scoped records](evidence/activation-packet-scratch-v3/README.md).
+
+## Private typed mixed RAM diagnostic — 7 October 2026
+
+The separate `native_mixed_ram_port` copies paired Paula geometry and numeric
+AmiGUS cache facts into bounded ordinary RAM, with original one-time registration,
+complete 20-slot comparison and independent C/R/source quiet. Unknown references
+remain retained; master pins and derived playback representations follow the
+existing ownership contracts. It changes no authoritative 8/16/24-bit precision,
+save/export or direct 24-bit Studio mixing behavior.
+
+The selected V4 HOST fixture passes 65 genuine cases under strict assertions and
+ASan/UBSan, with the full oracle, zero runtime stderr and independent saved audit.
+The original V3 reader-key assertion failure remains preserved. The compiled
+unchanged Fast/Chip Exec wrapper binds V4 once. The first native build stopped at
+two inherited strict indentation warnings; its partial failure is preserved. A
+separate whitespace-only correction preserves the C tokens; the corrected HOST
+fixture passes the same 65 cases and the distinct strict 28-unit native build
+links successfully. These are software/compiler results only. Amiberry and real-A1200 remain NOT_RUN.
+The port admits one armed ticket only, not two simultaneous future callbacks or
+live exact scheduling. Exceptional retained failed-constructor recovery, total
+stack/IRQ/WCET, real device transfer,
+voice stop, musical timing, audio and listening remain separate. See the
+[diagnostic contract and current evidence tiers](NATIVE_MIXED_RAM_PORT.md).

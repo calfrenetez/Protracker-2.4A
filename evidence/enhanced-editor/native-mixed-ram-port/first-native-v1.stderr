@@ -1,0 +1,14 @@
+src/core/mixed_scheduled_readers.c: In function 'retirement_controls':
+src/core/mixed_scheduled_readers.c:426:9: error: this 'if' clause does not guard... [-Werror=misleading-indentation]
+         if(c->held>1)return 0;if(!c->held)continue;++commands;
+         ^~
+src/core/mixed_scheduled_readers.c:426:31: note: ...this statement, but the latter is misleadingly indented as if it is guarded by the 'if'
+         if(c->held>1)return 0;if(!c->held)continue;++commands;
+                               ^~
+src/core/mixed_scheduled_readers.c:433:9: error: this 'if' clause does not guard... [-Werror=misleading-indentation]
+         if(r->held>1)return 0;if(!r->held)continue;++readers;
+         ^~
+src/core/mixed_scheduled_readers.c:433:31: note: ...this statement, but the latter is misleadingly indented as if it is guarded by the 'if'
+         if(r->held>1)return 0;if(!r->held)continue;++readers;
+                               ^~
+cc1: all warnings being treated as errors

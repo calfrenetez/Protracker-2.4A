@@ -1,0 +1,1 @@
+Assertion failed: (pt_mixed_activation_reader_key(c->owner,ticket,i,&key)==PT_MIXED_READERS_OK&&key.route==(all_card||i>=4?PT_MIXED_READERS_AMIGUS:PT_MIXED_READERS_PAULA)), function nr_success, file native_mixed_ram_port_test.c, line 141.

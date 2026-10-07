@@ -423,14 +423,18 @@ static int retirement_controls(const struct pt_mixed_readers_output *q)
        !span(q->allocator_context.data,q->allocator_context.bytes)||
        !q->backend.context_bytes||!span(q->backend.context,q->backend.context_bytes))return 0;
     for(i=0;i<q->commands;++i){const struct command_entry *c=q->command+i;
-        if(c->held>1)return 0;if(!c->held)continue;++commands;
+        if(c->held>1)return 0;
+        if(!c->held)continue;
+        ++commands;
         if(!control_valid(&c->owner)||!c->event.batch.count||
            c->event.batch.count>PT_MIXED_READERS_ACTIONS||!c->event.ticket||
            c->event.ticket>q->tickets||c->event.queue!=q||c->event.session!=q->session)return 0;
         for(j=0;j<c->event.batch.count;++j)if(c->reader[j]>=q->readers)return 0;
     }
     for(i=0;i<q->readers;++i){const struct reader_entry *r=q->reader+i;
-        if(r->held>1)return 0;if(!r->held)continue;++readers;
+        if(r->held>1)return 0;
+        if(!r->held)continue;
+        ++readers;
         if(!control_valid(&r->owner.control)||!r->owner.count||
            r->owner.count>PT_MIXED_READERS_SPANS||r->owner.spans!=r->spans||
            r->domain.spans!=r->spans||r->domain.count!=r->owner.count||

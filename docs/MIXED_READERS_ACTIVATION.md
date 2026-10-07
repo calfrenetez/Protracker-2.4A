@@ -103,3 +103,26 @@ completed inspection without compiler replay; the failed receipt remains failed.
 See [scoped source/HOST/object evidence](evidence/activation-packet-scratch-v3/README.md).
 Native PLAY, Amiberry/physical execution, IRQ residency/latency/WCET, whole stack,
 card completion/ordering/voice stop, exact output timing and listening remain open.
+
+## Separate typed RAM port — 7 October 2026
+
+The private `native_mixed_ram_port` now provides a bounded ordinary-RAM
+implementation of this port contract. It binds the genuine original owner/queue
+before exposure, compares all 20 expected keys, prevalidates whole-batch adoption
+and preserves independent command, reader and source proofs. It retains raw
+unknown/fault diagnostics and possible references without retry or forced release.
+A finished command plus one pending callback fits its two records; a second armed
+ticket refuses. This does not implement live two-deadline scheduling or native PLAY.
+
+V4's 65-case genuine HOST fixture passes with strict warnings, assertions and
+ASan/UBSan; its full oracle and clean runtime stderr have an accepted saved audit.
+V3's first premature key-query failure is preserved. V4 uses genuine noncancelling
+ACTIVE observations before the affected queries, without changing C/R retirement.
+The unchanged Fast/Chip Exec wrapper crossbuilds successfully. Its first native build stopped at
+two inherited strict indentation warnings, with no target run; that partial
+failure is preserved. A separate whitespace-only correction preserves C tokens. The corrected HOST
+fixture passes the same 65 cases and its strict 28-unit native build links
+successfully; emulator/physical execution remains NOT_RUN.
+The exceptional retained failed-constructor recovery path and native
+timing/device/stack/listening gates remain unqualified. See
+[the separate diagnostic contract](NATIVE_MIXED_RAM_PORT.md).

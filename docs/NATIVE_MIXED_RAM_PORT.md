@@ -81,8 +81,8 @@ Run the selected portable fixture with `python3 -B tests/test_native_mixed_ram_p
 | --- | --- |
 | V4 HOST software ownership | PASS, 65 genuine cases |
 | Corrected HOST software ownership | PASS, same 65 cases after formatting-only core correction |
-| Distinct native Fast/Chip crossbuild | PASS, 28 strict m68000/soft-float units; HUNK not executed |
-| Exact Amiberry execution | NOT_RUN |
+| Distinct native Fast/Chip crossbuild | PASS, 28 strict m68000/soft-float units; compiler evidence only |
+| First exact Amiberry attempt | FAILED: native 90-second completion deadline; partial entry output only |
 | Exact real-A1200 execution | NOT_RUN |
 | Live timing, IRQ/WCET/whole stack, device/audio/listening | Not qualified |
 
@@ -109,3 +109,21 @@ transfer ordering/completion, voice stop, DMA, audio and human listening remain
 separate acceptance gates. Saved host and compiler evidence is in
 [evidence/enhanced-editor/native-mixed-ram-port](../evidence/enhanced-editor/native-mixed-ram-port/README.md).
 Update target acceptance only from subsequent actual saved target results.
+
+## First exact emulator attempt: completion deadline failure
+
+On 7 October 2026 the exact HUNK above ran once after a guarded shared 030
+startup. It entered the native wrapper and reported stack 131072/guard 131070,
+priority 0 and an Exec Fast allocation pool. The 90-second native deadline expired
+without a return code, terminal marker or 65-case oracle. The host runner exited
+1 after 93.283 seconds; its parent was reaped and its process group was absent.
+The cause remains unknown. The saved stdout has no per-case progress and guest
+stderr was not independently captured.
+
+The failure was retained with its run files and persistent ownership hold. No
+cleanup, retry, disconnect, emulator stop, restoration or release was attempted.
+Those obligations require separately approved recovery and actual verification.
+Physical execution remains NOT_RUN. Host and crossbuild results above remain
+separate from this failed runtime gate. See the saved
+[first-attempt evidence](../evidence/enhanced-editor/native-mixed-ram-port/emulator-first-failure/observations.json)
+and its available raw output.

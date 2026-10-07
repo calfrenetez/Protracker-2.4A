@@ -1,0 +1,82 @@
+{
+  "status": "FIRST_AMIBERRY_ATTEMPT_FAILED_COMPLETION_DEADLINE",
+  "candidate": {
+    "bytes": 237320,
+    "sha256": "ec4dbf52210eb0a7ec3ce026400ee885aeb8b0315cbec79328b7184ce5ddc30a",
+    "mode": 33261
+  },
+  "target": "amiberry-030",
+  "native_deadline_seconds": 90,
+  "host_watchdog_seconds": 180,
+  "actual_host_elapsed_seconds": 93.28317791700829,
+  "actual_host_returncode": 1,
+  "native_started": true,
+  "native_rc_observed": false,
+  "native_terminal_marker_observed": false,
+  "native_full65_oracle_observed": false,
+  "native_cause": "UNKNOWN",
+  "native_stderr_independently_captured": false,
+  "startup_once_passed": true,
+  "startup_elapsed_seconds": 31.832057374995202,
+  "startup_pid": 7941,
+  "host_parent_reaped": true,
+  "host_group_absent": true,
+  "cleanup_attempted": false,
+  "run_files_cleaned": false,
+  "retry_attempted": false,
+  "disconnect_stop_restoration_release_attempted": false,
+  "persistent_hold_at_failure": {
+    "fence": 1143,
+    "phase": "HOLD",
+    "potential_resident": true
+  },
+  "physical_execution": "NOT_RUN",
+  "private_saved_inputs": {
+    "startup": {
+      "relative_to_outputs_paired_quantized_song_producer_v1": "root-mixed-ram-startup-first-v1/result.json",
+      "bytes": 4752,
+      "sha256": "d88c1f0abf686acb80c9e2dd987737c1e862e66a260e3af938596456f7a4cefb"
+    },
+    "startup_watchdog": {
+      "relative_to_outputs_paired_quantized_song_producer_v1": "root-mixed-ram-startup-watchdog-first-v1/receipt.json",
+      "bytes": 6932,
+      "sha256": "a0c3c71113e69d266556a83a13ecdce31ec832503dd7911f7e66892ecfae4ac7"
+    },
+    "fixture": {
+      "relative_to_outputs_paired_quantized_song_producer_v1": "native-mixed-fast-chip-emulator-runner-source-proposal-v2/render-files-mixed-fast-chip-1791375018175239000/result.json",
+      "bytes": 4852,
+      "sha256": "669e24692bca8fe2d361b31e1b23bf90af499615d2a6bc46fdaad7a8ee308164"
+    },
+    "fixture_watchdog": {
+      "relative_to_outputs_paired_quantized_song_producer_v1": "root-mixed-ram-emulator-watchdog-first-v1/receipt.json",
+      "bytes": 7216,
+      "sha256": "38d421184d9584531be6db467563795e1536cb194f774769c86b8c2236655e9a"
+    },
+    "failure_snapshot": {
+      "relative_to_outputs_paired_quantized_song_producer_v1": "root-mixed-ram-first-failure-host-snapshot-v1/receipt.json",
+      "bytes": 2308,
+      "sha256": "1444e19bd7d5f7806892793ec3da0b58768decc5ea0b65b1b883ab6a5a87736a"
+    }
+  },
+  "raw_public_files": {
+    "launch-response.json": {
+      "bytes": 236,
+      "sha256": "2da539d575b3326341d040f2a976fb36e2f7d9aff5595c8334a5e44e1ee6f8e2"
+    },
+    "native-stdout-snapshot.txt": {
+      "bytes": 282,
+      "sha256": "8cd625cb73af9367d200c27b7f1ee59b57d95fc3d319f5e1472185fb221918b7"
+    },
+    "runner-stderr.txt": {
+      "bytes": 892,
+      "sha256": "96c1c7ebb2e33ccbd384e944a673b0ca64c26144aa9e3211ec3612c0f8cfd57c"
+    }
+  },
+  "inference_limits": "Startup runningCPU68030/noFPU/Chip2MiB/Fast128MiB/DMA0 was observed. Native BEGIN/context/ExecFast pool are a partial entry observation. No65-case success, actual Chip release/zero ownership, target quiet, musical timing, device/audio or listening acceptance.",
+  "independent_saved_audit": {
+    "file": "independent-saved-audit.json",
+    "bytes": 9083,
+    "sha256": "c61899f614c0083045114e51c42fe804de03d0316135daec18252cbc8f6b8b88",
+    "mode": 33188
+  }
+}

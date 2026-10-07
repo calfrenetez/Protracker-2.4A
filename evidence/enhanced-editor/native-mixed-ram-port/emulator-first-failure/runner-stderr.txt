@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-fast-chip-emulator-runner-source-proposal-v2/run.py", line 192, in <module>
+    main()
+    ~~~~^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-fast-chip-emulator-runner-source-proposal-v2/run.py", line 153, in main
+    require(time.monotonic() < deadline, 'Native fixture deadline; preserve run without retry')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-fast-chip-emulator-runner-source-proposal-v2/run.py", line 39, in require
+    raise RuntimeError(reason)
+RuntimeError: Native fixture deadline; preserve run without retry

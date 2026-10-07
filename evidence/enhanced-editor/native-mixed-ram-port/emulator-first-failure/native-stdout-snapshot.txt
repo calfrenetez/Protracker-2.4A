@@ -1,0 +1,3 @@
+EXEC MIXED FAST CHIP BEGIN: genuine fixture; bounded Fast masters/control; selective Chip copies; scripted clock; no IRQ/DMA/device/audio
+EXEC MIXED RAM CONTEXT: reported_stack_bytes=131072 guard_stack_bytes=131070 priority=0
+EXEC MEMORY pool_limit=131011184 reserve=262144 flags=4

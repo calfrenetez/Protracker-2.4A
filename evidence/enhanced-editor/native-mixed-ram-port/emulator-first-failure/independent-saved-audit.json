@@ -1,0 +1,234 @@
+{
+  "status": "PASS_SAVED_FIRST_FAILURE_BOUNDARY_AUDIT",
+  "scope": "SAVED_ONLY; no candidate execution/import/compiler/test/live process/target/network/Git or source mutations",
+  "auditor": "workflow_publication_review_completion",
+  "inputs": {
+    "root-mixed-ram-startup-first-v1/result.json": {
+      "bytes": 4752,
+      "sha256": "d88c1f0abf686acb80c9e2dd987737c1e862e66a260e3af938596456f7a4cefb",
+      "mode": 33188
+    },
+    "root-mixed-ram-startup-watchdog-first-v1/receipt.json": {
+      "bytes": 6932,
+      "sha256": "a0c3c71113e69d266556a83a13ecdce31ec832503dd7911f7e66892ecfae4ac7",
+      "mode": 33188
+    },
+    "root-mixed-ram-startup-watchdog-first-v1/stdout": {
+      "bytes": 200,
+      "sha256": "f7f1f59c8cafe5310c3fa69893c7ff3262317e63a32f2537f42e32ffa063b86e",
+      "mode": 33188
+    },
+    "root-mixed-ram-startup-watchdog-first-v1/stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "native-mixed-fast-chip-emulator-runner-source-proposal-v2/render-files-mixed-fast-chip-1791375018175239000/result.json": {
+      "bytes": 4852,
+      "sha256": "669e24692bca8fe2d361b31e1b23bf90af499615d2a6bc46fdaad7a8ee308164",
+      "mode": 33188
+    },
+    "root-mixed-ram-emulator-watchdog-first-v1/receipt.json": {
+      "bytes": 7216,
+      "sha256": "38d421184d9584531be6db467563795e1536cb194f774769c86b8c2236655e9a",
+      "mode": 33188
+    },
+    "root-mixed-ram-emulator-watchdog-first-v1/stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "root-mixed-ram-emulator-watchdog-first-v1/stderr": {
+      "bytes": 892,
+      "sha256": "96c1c7ebb2e33ccbd384e944a673b0ca64c26144aa9e3211ec3612c0f8cfd57c",
+      "mode": 33188
+    },
+    "root-mixed-ram-first-failure-host-snapshot-v1/receipt.json": {
+      "bytes": 2308,
+      "sha256": "1444e19bd7d5f7806892793ec3da0b58768decc5ea0b65b1b883ab6a5a87736a",
+      "mode": 33188
+    },
+    "root-mixed-ram-first-failure-host-snapshot-v1/0-launch.log": {
+      "bytes": 236,
+      "sha256": "2da539d575b3326341d040f2a976fb36e2f7d9aff5595c8334a5e44e1ee6f8e2",
+      "mode": 33188
+    },
+    "root-mixed-ram-first-failure-host-snapshot-v1/1-launch.script": {
+      "bytes": 272,
+      "sha256": "012b50e439327a036593862250233281ee1b735147a9ddee6b7149031140c56f",
+      "mode": 33188
+    },
+    "root-mixed-ram-first-failure-host-snapshot-v1/2-test.log": {
+      "bytes": 282,
+      "sha256": "8cd625cb73af9367d200c27b7f1ee59b57d95fc3d319f5e1472185fb221918b7",
+      "mode": 33188
+    },
+    "native-mixed-fast-chip-emulator-runner-source-proposal-v2/render-files-mixed-fast-chip-1791375018175239000/launch.log": {
+      "bytes": 236,
+      "sha256": "2da539d575b3326341d040f2a976fb36e2f7d9aff5595c8334a5e44e1ee6f8e2",
+      "mode": 33188
+    },
+    "native-mixed-fast-chip-emulator-runner-source-proposal-v2/render-files-mixed-fast-chip-1791375018175239000/launch.script": {
+      "bytes": 272,
+      "sha256": "012b50e439327a036593862250233281ee1b735147a9ddee6b7149031140c56f",
+      "mode": 33188
+    },
+    "native-mixed-fast-chip-emulator-runner-source-proposal-v2/render-files-mixed-fast-chip-1791375018175239000/guest-candidate-checksum.json": {
+      "bytes": 452,
+      "sha256": "fdf091d4dadd7750843a450301ba9ba195694519b48d1e81e09d8582d1a5a715",
+      "mode": 33188
+    },
+    "native-mixed-fast-chip-emulator-runner-source-proposal-v2/render-files-mixed-fast-chip-1791375018175239000/guest-status-before-staging.json": {
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859",
+      "mode": 33188
+    },
+    "native-mixed-fast-chip-emulator-runner-source-proposal-v2/render-files-mixed-fast-chip-1791375018175239000/guest-status-before-checksum.json": {
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859",
+      "mode": 33188
+    },
+    "native-mixed-fast-chip-emulator-runner-source-proposal-v2/render-files-mixed-fast-chip-1791375018175239000/guest-status-before-launch.json": {
+      "bytes": 52,
+      "sha256": "979c335e382fa1489256c2fc0e789783d0609b457dfcac86a73a916e4a9a2859",
+      "mode": 33188
+    },
+    "root-native-mixed-ram-fast-chip-build-first-v2/receipt.json": {
+      "bytes": 300390,
+      "sha256": "0a0c3317cb98e14a1e2088f263dc610b2d6be0650129993de752df721afa5dd0",
+      "mode": 33188
+    },
+    "root-native-mixed-ram-fast-chip-build-first-v2/PTMixedRamFastChipTest": {
+      "bytes": 237320,
+      "sha256": "ec4dbf52210eb0a7ec3ce026400ee885aeb8b0315cbec79328b7184ce5ddc30a",
+      "mode": 33261
+    },
+    "root-native-mixed-ram-host-first-v5/receipt.json": {
+      "bytes": 165400,
+      "sha256": "0b5f0b1a10b1e6a3d1ba102596fb46528f23b50123c6ef765c0edfea5df0832e",
+      "mode": 33188
+    },
+    "native-mixed-fast-chip-emulator-runner-source-proposal-v2/run.py": {
+      "bytes": 10666,
+      "sha256": "884cea3ec6262eef27f2d4bad7d5a51494c3aab4d8800ed39ab86cffcb9b5192",
+      "mode": 33188
+    },
+    "root-mixed-ram-lifecycle-source-proposal-v1/lifecycle.py": {
+      "bytes": 14230,
+      "sha256": "29ac46332787a601f223d3bde8860760df0ee8f1658a8d6635f492df1aa20c2e",
+      "mode": 33188
+    }
+  },
+  "checks": [
+    {
+      "name": "same scoped lease in startup/native/watchdogs",
+      "passed": true
+    },
+    {
+      "name": "exact host native candidate matches build and run",
+      "passed": true
+    },
+    {
+      "name": "exact native and HOST admission receipts",
+      "passed": true
+    },
+    {
+      "name": "saved guest checksum matches host bytes",
+      "passed": true
+    },
+    {
+      "name": "positive startup with actual identity and fixed bridge",
+      "passed": true
+    },
+    {
+      "name": "startup saved running 030 no FPU memory and DMA idle",
+      "passed": true
+    },
+    {
+      "name": "same original native identity and profile",
+      "passed": true
+    },
+    {
+      "name": "saved guest-status-before-staging.json",
+      "passed": true
+    },
+    {
+      "name": "saved guest-status-before-checksum.json",
+      "passed": true
+    },
+    {
+      "name": "saved guest-status-before-launch.json",
+      "passed": true
+    },
+    {
+      "name": "all saved native admission endpoint observations fixed",
+      "passed": true
+    },
+    {
+      "name": "90-second native deadline failure not watchdog timeout",
+      "passed": true
+    },
+    {
+      "name": "positive saved host child quiet/reap with no finalization errors",
+      "passed": true
+    },
+    {
+      "name": "root-mixed-ram-startup-watchdog-first-v1 full recorded streams match actual saved bytes",
+      "passed": true
+    },
+    {
+      "name": "root-mixed-ram-emulator-watchdog-first-v1 full recorded streams match actual saved bytes",
+      "passed": true
+    },
+    {
+      "name": "runner and lifecycle before/after pins match saved source",
+      "passed": true
+    },
+    {
+      "name": "raw host launch reply copies exact",
+      "passed": true
+    },
+    {
+      "name": "saved launch accepted only transport [OK] no output",
+      "passed": true
+    },
+    {
+      "name": "snapshot copy 0-launch.log",
+      "passed": true
+    },
+    {
+      "name": "snapshot copy 1-launch.script",
+      "passed": true
+    },
+    {
+      "name": "snapshot copy 2-test.log",
+      "passed": true
+    },
+    {
+      "name": "snapshot records RC and done absent",
+      "passed": true
+    },
+    {
+      "name": "only persisted startup/context/memory lines no oracle",
+      "passed": true
+    },
+    {
+      "name": "no cleanup or reservation release or restore recorded",
+      "passed": true
+    },
+    {
+      "name": "saved HOLD1143 potential resident same reservation retained",
+      "passed": true
+    }
+  ],
+  "conclusion": {
+    "startup": "Positive saved once-start, PID7941, fixed connected bridge and running030/DMA-idle replies. These are historical observations, not current live checks.",
+    "native": "Exact237320-byte ec4dbf candidate launch accepted, but failed its90s completion deadline. Only BEGIN/context/memory startup lines available; no RC/done/full65 oracle/zero-live census.",
+    "host": "Both owned watchdog child groups recorded positively reaped/absent; no host finalization errors. Host quiet does not prove guest fixture absence.",
+    "streams": "Full recorded host watchdog streams and launch transport reply are preserved and match pins. Available282-byte target stdout copied exactly at snapshot time; target stderr is NOT independently captured. Success-only native.rc/native.stdout/transport split products were never reached and are not fabricated.",
+    "retention": "No guest cleanup/disconnect/stop/metadata restoration/release/retry recorded. Saved fence1143 HOLD and potential_resident true with scoped reservation retained.",
+    "runtime_acceptance": false,
+    "cause": "UNKNOWN; separate source diagnosis remains a hypothesis record, not runtime acceptance.",
+    "current_live_state": "NOT CHECKED; this audit reads saved artifacts only."
+  }
+}

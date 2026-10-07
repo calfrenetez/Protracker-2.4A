@@ -155,3 +155,39 @@ and NEVER_EXECUTED. Physical placement, device capacity/order/completion/voice
 stop, aggregate stack, IRQ/exact live timing, audio and listening remain
 unqualified for this seam. Private queries, the SAME-sequence whole-song producer
 and native PLAY integration remain unfinished.
+
+
+## Private SOURCE ownership diagnostics — 7 October 2026
+
+`pt_editor_mixed_source_observe` returns by value the exact original readable
+publisher's scope, existing error/cancellation/busy diagnostics and fixed-tag
+status. A semantic ZERO is readable even after controller expiry because it does
+not follow that controller, but it does not authenticate an original close.
+Copied, partial or stale positive publisher/ref identities refuse before any
+writable reentry or fault path.
+
+`pt_editor_mixed_source_allocation_disjoint` checks the full caller-supplied
+allocation against captured control, caller, guard and ordinary/Chip allocation
+extents. It validates bounds and partial records before numeric loops. It does
+not walk former tables, master contents or descriptors, discover arbitrary
+external allocation history, or authenticate dishonestly narrowed capacity.
+Genuine activation captures promoted storage before it becomes query-visible.
+
+The separate command and reader registration queries classify exact retained
+original refs as INVALID, ABSENT or PRESENT. Original issuer provenance remains
+a caller obligation. PRESENT during a lower release callback or an R-first
+consumed proof can persist through genuine command references until actual
+controller NULL consumption. Neither query grants READY/ACTIVE, proof, quiet,
+command detach, valid retirement or permission to repeat a consumed backend
+proof. Existing child consumption, source quiet, original borrow release and
+final positive hook close remain independent.
+
+The first V3 HOST attempt at `0269c20` compiled 79 ordered units and passed 19 full
+lines totaling 6,068 bytes with ASan/UBSan, empty stderr and owned reaped/quiet
+drivers. Existing suites execute once through the dedicated inherited seam
+entry selector. Selected metadata and raw private evidence are retained; no
+replay occurred. All existing production function bodies, public headers,
+layouts, owners, hooks and link dependencies remain unchanged. Separate genuine
+readiness, faulted retirement and whole-song producer work remain unfinished.
+This is software HOST acceptance only; native/emulator/physical/stack/live
+timing/audio/listening acceptance is not supplied.

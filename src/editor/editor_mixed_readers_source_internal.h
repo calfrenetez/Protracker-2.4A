@@ -63,4 +63,56 @@ int pt_editor_mixed_source_leave(const struct pt_editor_mixed_source_borrow *ori
  * terminal even when a child returned failure. Borrow release keeps hook and
  * storage alive until separate final positive prepare_close/mixed_stop. */
 int pt_editor_mixed_source_borrow_close(struct pt_editor_mixed_source_borrow *original);
+/* Private owner-thread diagnostic values only. No writable output parameter,
+ * caller READY/ACTIVE/quiet assertion or child ownership/work authority. Queries
+ * never fault, change latches, refresh/capture storage or invoke callbacks. The
+ * genuine caller stores returned values in its own separately admitted outputs.
+ * ZERO describes a readable zero publisher pair without touching controller;
+ * it does not authenticate prior issuance, final closure or a copied publisher.
+ * Positive scopes retain all original fixed controls through actual hook close. */
+enum pt_editor_mixed_source_scope_observation {
+    PT_EDITOR_MIXED_SOURCE_SCOPE_INVALID=0,
+    PT_EDITOR_MIXED_SOURCE_SCOPE_ZERO,
+    PT_EDITOR_MIXED_SOURCE_SCOPE_HELD
+};
+struct pt_editor_mixed_source_observation {
+    enum pt_editor_mixed_source_scope_observation scope;
+    enum pt_editor_mixed_readers_result result,first_error;
+    unsigned cancel_requested,source_busy,controller_busy,fixed_tags_current;
+};
+struct pt_editor_mixed_source_observation pt_editor_mixed_source_observe(
+    struct pt_editor_mixed_readers_prepare *,
+    const struct pt_editor_mixed_source_borrow *original);
+/* Numeric captured-only disjointness, not allocation provenance/ownership.
+ * full_bytes is the actual complete callback request/returned capacity. This
+ * predicate cannot authenticate an unknown allocation's caller-supplied length.
+ * No source descriptor, former/current table, master body or queue is followed.
+ * Newly promoted capacities join numeric guards at activate only; genuine
+ * establish/sampler guards protect earlier promotion. Only establish metadata
+ * precedes promotion; the two audit allocations follow that one refresh.
+ * External retired extents remain in the producer's separate request ledger. */
+int pt_editor_mixed_source_allocation_disjoint(
+    struct pt_editor_mixed_readers_prepare *,
+    const struct pt_editor_mixed_source_borrow *original,
+    const void *candidate,size_t full_bytes);
+enum pt_editor_mixed_source_registration_observation {
+    PT_EDITOR_MIXED_SOURCE_REGISTRATION_INVALID=0,
+    PT_EDITOR_MIXED_SOURCE_REGISTRATION_ABSENT,
+    PT_EDITOR_MIXED_SOURCE_REGISTRATION_PRESENT
+};
+/* Keep original refs actually issued by this controller scope. Slot/serial
+ * cannot authenticate arbitrary past issuance after a record is cleared.
+ * ABSENT prunes only that genuinely retained ref after actual NULL consumption
+ * or later serial reuse; it certifies neither independent proof nor source quiet.
+ * Partial records refuse INVALID. No handle address or child key is followed. */
+enum pt_editor_mixed_source_registration_observation
+pt_editor_mixed_source_command_registration(
+    struct pt_editor_mixed_readers_prepare *,
+    const struct pt_editor_mixed_source_borrow *original,
+    struct pt_editor_mixed_command_ref);
+enum pt_editor_mixed_source_registration_observation
+pt_editor_mixed_source_reader_registration(
+    struct pt_editor_mixed_readers_prepare *,
+    const struct pt_editor_mixed_source_borrow *original,
+    struct pt_editor_mixed_reader_ref);
 #endif

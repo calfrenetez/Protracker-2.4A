@@ -1,0 +1,205 @@
+{
+  "schema": "pt24g-source-query-selected-host-observations-v3",
+  "scope": "HOST software-only; not native/producer/readiness/device authority",
+  "baseline": "0269c20bf97db83f0996d92ed75bd4ff6ab2fe40",
+  "source_freeze": {
+    "bytes": 5959,
+    "sha256": "3d1aae1d81deed56abc355d9eff1bfdbfafebaa2a9a53fa4ddf5ac2ac2340a47",
+    "mode": 33060
+  },
+  "source_review": {
+    "bytes": 8171,
+    "sha256": "8e516c446378505e20595c824242d8a8b34fbff9dfe14f5f67d6be58ab94aaac",
+    "mode": 33188
+  },
+  "root_receipt": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/source-query-host-preparation-v3/execution-first-v3/receipt.json",
+    "bytes": 233378,
+    "sha256": "06c99df1eb79f3952479a7490c00d8a386276d875e5e5a20a40c9eff10d87f51",
+    "mode": 33188,
+    "status": "PASS_FIRST_PRIVATE_SOURCE_QUERY_HOST_ONLY"
+  },
+  "actual_run": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/source-query-host-qualification/attempt-first-v3/run.json",
+    "bytes": 368953,
+    "sha256": "67a25a0bd440d73ff1cc1d2e0e14e1f033022e3bb872e155b4970446e91cf6a3",
+    "mode": 33188,
+    "status": "PASS",
+    "phase": "COMPLETE"
+  },
+  "wrapper_source_review": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-query-root-wrapper-review-v3/review.json",
+    "bytes": 11816,
+    "sha256": "4d71c1a306c4f2eefdddcac6ea3061711ccc5f316b7bd8b6aed66847831f8c85",
+    "mode": 33188
+  },
+  "overlays": {
+    "src/editor/editor_mixed_readers_prepare.c": {
+      "bytes": 71938,
+      "sha256": "6425261f71c0a9db60bd4e05a081c9edbf6e4d220f1ed8a01ed0510de4dd8671",
+      "mode": 33060
+    },
+    "src/editor/editor_mixed_readers_source_internal.h": {
+      "bytes": 7570,
+      "sha256": "bce9e1c4122cb58554def887e2d587c0106132175c912a1a100bc489db1b2060",
+      "mode": 33060
+    },
+    "tests/editor_mixed_source_borrow_test.c": {
+      "bytes": 40964,
+      "sha256": "9a24bfeb3bf7f310270622ccda97ae23729f7b8636907d2fbf4798ad009b7aab",
+      "mode": 33060
+    },
+    "tests/editor_mixed_source_query_test.c": {
+      "bytes": 28192,
+      "sha256": "b56fc95a6fecc719c1124430413072c34390e0f65f3e8b8c336ee9535ca8d9b3",
+      "mode": 33060
+    },
+    "tests/test_editor_mixed_source_query.py": {
+      "bytes": 34647,
+      "sha256": "56d5abf49ec169ea29b47d1247950950fa0c53d0446343d28296af4b8a936dd3",
+      "mode": 33060
+    }
+  },
+  "compiler": {
+    "path": "/usr/bin/cc",
+    "bytes": 200560,
+    "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+    "mode": 33261
+  },
+  "product": {
+    "bytes": 6433088,
+    "sha256": "8248c0a2647a3ee01fef1a5bfa7a33c55d5365c457464d14dabedc0becb97ee7",
+    "mode": 33261
+  },
+  "input_count": 960,
+  "committed_archive_count": 957,
+  "additive_overlay_count": 2,
+  "modified_overlay_count": 3,
+  "unit_count": 79,
+  "flags": [
+    "-std=c99",
+    "-O1",
+    "-g",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-UNDEBUG",
+    "-fsanitize=address,undefined",
+    "-Isrc/core",
+    "-I."
+  ],
+  "expected_stdout": {
+    "bytes": 6068,
+    "sha256": "87690532ba57f16efeb09f6aa6adaefe75df846e389a68fb2e153071baa9e094"
+  },
+  "marker_count": 19,
+  "compiler_seconds": 20.09390595900186,
+  "runtime_seconds": 1.9420788749994244,
+  "inner_seconds": 24.273931374991662,
+  "root_seconds": 25.557065333996434,
+  "all28_recorded_drivers_RC0_reaped_quiet": true,
+  "recorded_driver_count": 28,
+  "complete_live_source_inventory": {
+    "count": 1174,
+    "canonical_pin_map_sha256": "4d0a72ded44a5f11360232127c4105af30ee425e4e6471862b8e6fa7f624963d"
+  },
+  "protected16": {
+    "AGENTS.md": {
+      "bytes": 789,
+      "sha256": "57dcd76709e95cd29c3d17c545a992bb924c629566de1e84a69db97701f5633b",
+      "mode": 33188
+    },
+    "amiga-test.json": {
+      "bytes": 5485,
+      "sha256": "2cc0b2707151467680193ad087903804a0c8e937ce97f5e229d90fed34a8be22",
+      "mode": 33188
+    },
+    "src/editor/editor.c": {
+      "bytes": 69155,
+      "sha256": "46d908ba5d89742fcdb8da337d01fe4af4decfeac9bfb883a21eb2920bc4b092",
+      "mode": 33188
+    },
+    "src/editor/editor.h": {
+      "bytes": 6675,
+      "sha256": "4de713afd3be0306eef784d421281596d2624bfbed176fd26ef571c26a865a9f",
+      "mode": 33188
+    },
+    "src/editor/view.c": {
+      "bytes": 44209,
+      "sha256": "a23ecde830cd23edcc332c93b924bf470161f0114415bece02d82fab2390cbdb",
+      "mode": 33188
+    },
+    "src/editor/view.h": {
+      "bytes": 2032,
+      "sha256": "44cdc9126cd9331d8cb0e428286f6fe1165187fb68c79a809cc6df54852a59b2",
+      "mode": 33188
+    },
+    "src/native/editor_main.c": {
+      "bytes": 46819,
+      "sha256": "ed49163c893660b75d3a63f00be2ff0acd2048c54d101051c26ce87fa446dc06",
+      "mode": 33188
+    },
+    "src/native/pattern_display.c": {
+      "bytes": 6888,
+      "sha256": "de7b6be91c29e2153fc61b9a2cfc22c7f730b049b68bf2d5e4ed87f1bf73959d",
+      "mode": 33188
+    },
+    "src/native/pattern_display.h": {
+      "bytes": 1519,
+      "sha256": "469f62be960d912258a37982504da75a7e38691ce13d4363a13b5e84cb9eaee1",
+      "mode": 33188
+    },
+    "tests/editor_test.c": {
+      "bytes": 53428,
+      "sha256": "946ee1a0667e8b43a7752ea7a0cf9590de781daffc7c73503efd9024dd690b65",
+      "mode": 33188
+    },
+    "tests/native_prepared_test.c": {
+      "bytes": 5858,
+      "sha256": "ad3041b508483482c0ff280a1c4f37576ec37a01eb421a230984bd3e6cb950a7",
+      "mode": 33188
+    },
+    "tests/test_editor.py": {
+      "bytes": 2002,
+      "sha256": "539fe7284a082781e2dead541e67b6d0f9e75ead179b631bfa8369ee4d1f9f82",
+      "mode": 33188
+    },
+    "tools/build_core_tests.py": {
+      "bytes": 39844,
+      "sha256": "081976b3831c518e7d757d934f2106c8aa072298dc3bd5ce74651188fd3a86b6",
+      "mode": 33188
+    },
+    "tools/test_sampler_emulator.py": {
+      "bytes": 8918,
+      "sha256": "cc84cf3098d10fa6901f45aaf93cecdbdf2fd55e39e6e36647c55d36a9c7f36c",
+      "mode": 33188
+    },
+    "tools/shared_infra_sampler.py": {
+      "bytes": 900,
+      "sha256": "5be11d68d4409baed36551165005c584ffec81a2c45f742e258cce74d1eba36d",
+      "mode": 33188
+    },
+    "tools/shared_infra_ui.py": {
+      "bytes": 3754,
+      "sha256": "9492cf59997857a1d69c1d6dbe4180ab83727d047cd456a9ba78221c1f6f5987",
+      "mode": 33188
+    }
+  },
+  "controls50_count": 50,
+  "selected_saved_audit": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-source-query-host-review-v3/review.json",
+    "bytes": 19077,
+    "sha256": "73d6cbe66c92026d4d8a0182d66242ca894e48bf79c4bdd70cb40ca8e55fcfd1",
+    "mode": 33188,
+    "status": "PASS_INDEPENDENT_SAVED_SOURCE_QUERY_HOST_V3",
+    "findings": [],
+    "verification": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-source-query-host-review-v3/verification.json",
+      "bytes": 34452,
+      "sha256": "9ed33c2ee714debfd69ccb3226aae6592daaaf202b4ded5174d32d9f17add847",
+      "mode": 33188
+    }
+  },
+  "preserved_history": "Query V1/V2 SOURCE findings remain NOT RUN; V3 metadata-only history correction. Actual earlier seam V2 compile and V3/V6 runtime failures, unrun V4/V5 and V7 success remain distinct. No replay.",
+  "limitations": "No native build/run/emulator/physical/stack/live-timing/audio/listening authority. Readiness, idempotent faulted retirement and complete whole-song producer/native PLAY remain unfinished."
+}

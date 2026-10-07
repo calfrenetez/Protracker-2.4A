@@ -6296,3 +6296,38 @@ controller and 232,864-byte strict-audit HUNKs remain NEVER_EXECUTED. Amiberry,
 real-A1200, physical memory/device behavior, aggregate stack, IRQ/exact live
 timing, audio and listening are unqualified for this seam. Private queries,
 whole-song production using the SAME sequence and native PLAY remain unfinished.
+
+
+### Captured SOURCE ownership queries — 7 October 2026
+
+Four private inert queries now expose original SOURCE diagnostics, full-span
+captured allocation disjointness and separate command/reader registration.
+They change no sample representation, authoritative master, allocation budget,
+cache precision, active-voice owner, save/export path, mixing path or musical
+schedule. Existing production function bodies, public headers, layouts, owners,
+hooks and link dependencies remain unchanged.
+
+The original readable publisher is checked before following a positive
+controller. Semantic ZERO never follows an expired controller and remains an
+unauthenticated diagnostic, not proof of original close. Full capacities and
+genuinely issued refs are caller obligations. Captured numeric checks do not
+discover retired external allocations or authenticate narrowed capacities;
+genuine activation records new promoted storage. Registration PRESENT during
+actual release or an R-first consumed proof may remain through C references.
+It grants no READY/ACTIVE, valid retirement, quiet, voice-stop or permission to
+repeat a consumed proof. Actual NULL consumption and separate source quiet
+remain required before releasing the original borrow and final editor hook.
+
+The first selected V3 HOST attempt ran once at `0269c20`: 960 actual input files
+(957 committed archive members plus two query additions and generated font),
+five overlays, 79 ordered units, 19 full lines totaling 6,068 bytes, ASan/UBSan,
+compiler/runtime RC0, empty stderr and owned reaped/quiet drivers. All 16 unrelated
+display/editor paths were preserved. V1/V2 query SOURCE findings are NOT RUN;
+V3 code equals V2 and corrects only metadata history. Original earlier seam
+failures and unrun packets remain separately retained.
+
+This qualifies software ownership-query behavior. Separate genuine reader
+readiness, idempotent faulted retirement, SAME-sequence whole-song preparation
+and native PLAY integration remain unfinished. No new native build/execution,
+Amiberry/real-A1200 acceptance, device capacity, upload completion/ordering,
+voice-stop, aggregate stack, exact live timing, audio or listening is inferred.

@@ -541,7 +541,10 @@ static void esb_future_unset(void)
  f->input=original;esb_promote(e);esb_activate(e,1);
  assert(!pt_editor_mixed_readers_prepare_close(&f->control));esb_release(e);emp_same(f);esb_drop(e);
 }
-int main(void)
+#ifndef PT_EDITOR_MIXED_SOURCE_BORROW_TEST_MAIN
+#define PT_EDITOR_MIXED_SOURCE_BORROW_TEST_MAIN main
+#endif
+int PT_EDITOR_MIXED_SOURCE_BORROW_TEST_MAIN(void)
 {
     unsigned i,bits;
     assert(esb_quantized_main()==0);

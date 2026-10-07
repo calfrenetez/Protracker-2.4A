@@ -581,6 +581,112 @@ int pt_editor_mixed_source_borrow_close(struct pt_editor_mixed_source_borrow *b)
  b->address=NULL;b->serial=0;return 1;
 }
 
+/* No mutation/reentry/fault path belongs in these owner-thread queries. First
+ * admit the readable original publisher. A zero pair never follows controller,
+ * including after its actual terminal lifetime; zero is not issuer proof. */
+static enum pt_editor_mixed_source_scope_observation source_query_scope(
+ struct pt_editor_mixed_readers_prepare *s,const struct pt_editor_mixed_source_borrow *b)
+{
+ if(!b||!span(b,sizeof(*b))||(uintptr_t)b%ALIGN_OF(struct pt_editor_mixed_source_borrow))
+    return PT_EDITOR_MIXED_SOURCE_SCOPE_INVALID;
+ if(!b->address&&!b->serial)return PT_EDITOR_MIXED_SOURCE_SCOPE_ZERO;
+ if(!b->address||!b->serial||b->address!=s||!s||!span(s,sizeof(*s))||
+    (uintptr_t)s%ALIGN_OF(struct pt_editor_mixed_readers_prepare))return PT_EDITOR_MIXED_SOURCE_SCOPE_INVALID;
+ /* Exact original pointer/serial and copied numeric identities precede binding
+  * or descriptor checks. A copied publisher/controller cannot touch the latch. */
+ if(s->source_publisher!=b||s->source_mode!=1||s->source_held!=1||s->source_released||
+    !s->source_serial||s->source_serial!=b->serial||!s->hook||
+    !s->source_binding||s->saved.binding!=s->source_binding||!hook_owned(s))
+    return PT_EDITOR_MIXED_SOURCE_SCOPE_INVALID;
+ return PT_EDITOR_MIXED_SOURCE_SCOPE_HELD;
+}
+struct pt_editor_mixed_source_observation pt_editor_mixed_source_observe(
+ struct pt_editor_mixed_readers_prepare *s,const struct pt_editor_mixed_source_borrow *b)
+{
+ struct pt_editor_mixed_source_observation out={0};
+ out.scope=source_query_scope(s,b);
+ if(out.scope==PT_EDITOR_MIXED_SOURCE_SCOPE_HELD){
+    out.result=s->result;out.first_error=s->first_error;
+    out.cancel_requested=s->source_cancel_requested;out.source_busy=s->source_busy;
+    out.controller_busy=s->busy;out.fixed_tags_current=source_fixed(s)?1U:0U;
+ }
+ return out;
+}
+static int source_query_extent(const void *p,size_t n,const struct pt_sampler_storage_span *g,
+ unsigned empty_allowed)
+{
+ if(!g->data&&!g->bytes)return empty_allowed!=0;
+ return g->data&&g->bytes&&span(g->data,g->bytes)&&apart(p,n,g->data,g->bytes);
+}
+int pt_editor_mixed_source_allocation_disjoint(struct pt_editor_mixed_readers_prepare *s,
+ const struct pt_editor_mixed_source_borrow *b,const void *p,size_t n)
+{
+ unsigned i;
+ if(source_query_scope(s,b)!=PT_EDITOR_MIXED_SOURCE_SCOPE_HELD||!p||!n||!span(p,n)||
+    !apart(p,n,s,sizeof(*s))||!s->guard_count||s->guard_count>PT_EDITOR_MIXED_READERS_GUARDS||
+    s->source_immutable_count>PT_EDITOR_MIXED_SOURCE_SPANS||
+    s->source_mutable_count>PT_EDITOR_MIXED_SOURCE_SPANS-s->source_immutable_count||
+    s->source_publisher_guard>=s->guard_count||
+    s->guards[s->source_publisher_guard].data!=b||
+    s->guards[s->source_publisher_guard].bytes!=sizeof(*b))return 0;
+ /* Numeric extents already captured at begin/activate survive tag staleness.
+  * Do not call output_apart/allocation_apart: their queue query is wider than
+  * this private captured-only predicate. No full vector/control stack copy. */
+ for(i=0;i<s->guard_count;++i)if(!source_query_extent(p,n,s->guards+i,0))return 0;
+ for(i=0;i<s->source_mutable_count;++i)if(!source_query_extent(p,n,s->source_mutable+i,0))return 0;
+ for(i=0;i<PT_EDITOR_MIXED_READERS_ORDINARY;++i)if(!source_query_extent(p,n,s->ordinary+i,1))return 0;
+ for(i=0;i<PT_EDITOR_MIXED_READERS_CHIP;++i)if(!source_query_extent(p,n,s->chip+i,1))return 0;
+ return 1;
+}
+static int source_query_command_zero(const struct pt_editor_mixed_command_record *c)
+{
+ unsigned i;if(c->handle.address||c->handle.token||c->serial||c->ticket||c->count||c->transferred)return 0;
+ for(i=0;i<PT_SAMPLER_MIXED_ACTIONS;++i)if(c->reader[i])return 0;
+ return 1;
+}
+static int source_query_reader_zero(const struct pt_editor_mixed_reader_record *r)
+{return !r->handle.address&&!r->handle.token&&!r->serial&&!r->ticket&&
+ !r->action&&!r->track&&!r->sample&&!r->channel;}
+static enum pt_editor_mixed_source_registration_observation source_query_registration(
+ uint64_t ref,uint64_t maximum,uint64_t actual,const void *address,uint64_t token,int empty)
+{
+ if(!ref||ref>maximum)return PT_EDITOR_MIXED_SOURCE_REGISTRATION_INVALID;
+ if(empty)return PT_EDITOR_MIXED_SOURCE_REGISTRATION_ABSENT;
+ if(!address||!token||!actual||actual>maximum||actual<ref)
+    return PT_EDITOR_MIXED_SOURCE_REGISTRATION_INVALID;
+ return actual==ref?PT_EDITOR_MIXED_SOURCE_REGISTRATION_PRESENT:PT_EDITOR_MIXED_SOURCE_REGISTRATION_ABSENT;
+}
+enum pt_editor_mixed_source_registration_observation pt_editor_mixed_source_command_registration(
+ struct pt_editor_mixed_readers_prepare *s,const struct pt_editor_mixed_source_borrow *b,
+ struct pt_editor_mixed_command_ref ref)
+{
+ const struct pt_editor_mixed_command_record *c;unsigned i;int empty;
+ if(source_query_scope(s,b)!=PT_EDITOR_MIXED_SOURCE_SCOPE_HELD||
+    ref.slot>=PT_SAMPLER_MIXED_COMMANDS||!ref.serial||ref.serial>s->serial)
+    return PT_EDITOR_MIXED_SOURCE_REGISTRATION_INVALID;
+ c=s->command+ref.slot;empty=source_query_command_zero(c);
+ if(!empty){
+    if(!c->count||c->count>PT_SAMPLER_MIXED_ACTIONS||c->transferred>1||
+       (c->transferred?!c->ticket:c->ticket!=0))return PT_EDITOR_MIXED_SOURCE_REGISTRATION_INVALID;
+    for(i=0;i<PT_SAMPLER_MIXED_ACTIONS;++i)if(c->reader[i]>NO_READER)
+       return PT_EDITOR_MIXED_SOURCE_REGISTRATION_INVALID;
+ }
+ return source_query_registration(ref.serial,s->serial,c->serial,c->handle.address,c->handle.token,empty);
+}
+enum pt_editor_mixed_source_registration_observation pt_editor_mixed_source_reader_registration(
+ struct pt_editor_mixed_readers_prepare *s,const struct pt_editor_mixed_source_borrow *b,
+ struct pt_editor_mixed_reader_ref ref)
+{
+ const struct pt_editor_mixed_reader_record *r;int empty;
+ if(source_query_scope(s,b)!=PT_EDITOR_MIXED_SOURCE_SCOPE_HELD||
+    ref.slot>=PT_SAMPLER_MIXED_READERS||!ref.serial||ref.serial>s->serial)
+    return PT_EDITOR_MIXED_SOURCE_REGISTRATION_INVALID;
+ r=s->reader+ref.slot;empty=source_query_reader_zero(r);
+ if(!empty&&(r->action>=PT_SAMPLER_MIXED_ACTIONS||r->track>=PT_SAMPLER_MIXED_ACTIONS||
+    r->sample>=PT_PROJECT_SAMPLES||r->channel>1))return PT_EDITOR_MIXED_SOURCE_REGISTRATION_INVALID;
+ return source_query_registration(ref.serial,s->serial,r->serial,r->handle.address,r->handle.token,empty);
+}
+
 enum pt_editor_mixed_readers_result pt_editor_mixed_readers_prepare_begin(
  struct pt_editor_mixed_readers_prepare *s,const struct pt_editor_mixed_readers_prepare_inputs *in)
 {

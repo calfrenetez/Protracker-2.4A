@@ -1,0 +1,98 @@
+{
+  "scope": "NORMAL_SHARED_RELEASE_NOT_NATIVE_ACCEPTANCE",
+  "completed": true,
+  "release_invoked": true,
+  "proof": {
+    "bytes": 599,
+    "sha256": "86e6dd399fbe4d91155a0b4039b97fc1384226c5cc9b26f8d886b66e70d23d75",
+    "mode": 33188
+  },
+  "target_commands": false,
+  "service_restart": false,
+  "test_retry": false,
+  "before": {
+    "args": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-B",
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/launcher.py",
+      "status"
+    ],
+    "invoked": true,
+    "completed": true,
+    "errors": [],
+    "owned_host_pid": 43592,
+    "returncode": 0,
+    "parent_reaped": true,
+    "owned_host_group_absent": true,
+    "stdout": {
+      "bytes": 5534,
+      "sha256": "033312345acac06fbf24937dd87826b3af13870bed3b0a8d860f57b402bfa979",
+      "mode": 33188
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    }
+  },
+  "release": {
+    "args": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-B",
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/launcher.py",
+      "release",
+      "--target",
+      "amiberry-030",
+      "--proof",
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-release-packet-first-v1/proof.json"
+    ],
+    "invoked": true,
+    "completed": true,
+    "errors": [],
+    "owned_host_pid": 43594,
+    "returncode": 0,
+    "parent_reaped": true,
+    "owned_host_group_absent": true,
+    "stdout": {
+      "bytes": 78,
+      "sha256": "339444cd8071b75d1e3d6c08402befa16006d7b785fd2ee0b5080633f6a4664a",
+      "mode": 33188
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    }
+  },
+  "after": {
+    "args": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-B",
+      "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/scripts/launcher.py",
+      "status"
+    ],
+    "invoked": true,
+    "completed": true,
+    "errors": [],
+    "owned_host_pid": 43595,
+    "returncode": 0,
+    "parent_reaped": true,
+    "owned_host_group_absent": true,
+    "stdout": {
+      "bytes": 5142,
+      "sha256": "f2c6ad0e7af7dca642e70eb60d09826a2b44411438992fab2cb00d7019e8262b",
+      "mode": 33188
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    }
+  },
+  "release_result": {
+    "released": true,
+    "fence": 1144,
+    "archive": "release-0000000000000478.json"
+  },
+  "guard_after_phase": "EMPTY"
+}

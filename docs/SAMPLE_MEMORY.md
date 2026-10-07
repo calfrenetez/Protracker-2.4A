@@ -6461,3 +6461,17 @@ qualification remain open. See [contract](MIXED_READERS_CAUSAL.md) and
 The separate one-armed Fast/Chip candidate failed native90s completion; its HOLD
 and failed evidence are retained pending separately approved recovery. No native
 timing, DMA/card transfer/completion/stop, audio or listening acceptance follows.
+
+
+## Mixed RAM failed-run recovery disposition — 7 October 2026
+
+Freshly approved exact-owner HOST recovery and separate read-only verification
+passed; the original HUNK/run/launcher/late files remain preserved in custody.
+Normal four-record release completed at EMPTY fence1144 with no reservation,
+HOLD or potential resident, and AmiConnect acknowledged the exact window.
+Independent saved recovery/release audits pass30/21 checks. The late log contains
+full65 RAM-only oracles and RC0/done, but originalnative90 deadline admission
+remains FAILED. No retry, physical promotion, device/timing/audio acceptance or
+master/cache architecture change follows. Loaded DevBench connection eligibility
+requires separate maintenance disposition. See the
+[approved recovery packet](../evidence/enhanced-editor/native-mixed-ram-port/approved-recovery/README.md).

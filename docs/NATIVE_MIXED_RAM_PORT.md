@@ -82,7 +82,7 @@ Run the selected portable fixture with `python3 -B tests/test_native_mixed_ram_p
 | V4 HOST software ownership | PASS, 65 genuine cases |
 | Corrected HOST software ownership | PASS, same 65 cases after formatting-only core correction |
 | Distinct native Fast/Chip crossbuild | PASS, 28 strict m68000/soft-float units; compiler evidence only |
-| First exact Amiberry attempt | FAILED: native 90-second completion deadline; partial entry output only |
+| First exact Amiberry attempt | FAILED: native 90-second completion deadline; late full log preserved after approved recovery |
 | Exact real-A1200 execution | NOT_RUN |
 | Live timing, IRQ/WCET/whole stack, device/audio/listening | Not qualified |
 
@@ -127,3 +127,20 @@ Physical execution remains NOT_RUN. Host and crossbuild results above remain
 separate from this failed runtime gate. See the saved
 [first-attempt evidence](../evidence/enhanced-editor/native-mixed-ram-port/emulator-first-failure/observations.json)
 and its available raw output.
+
+
+## Approved recovery and explicit release
+
+After fresh human approval, the reviewed exact-owner HOST recovery and separate
+read-only verification passed once. The original failed run/launcher and all
+late artifacts were preserved in private custody; both known startup metadata
+files restored exact beforeimages. Independent saved audits passed 30 recovery
+and 21 release checks. Normal four-record release completed at EMPTY fence 1144,
+with no remaining reservation/HOLD/potential resident; AmiConnect acknowledged
+the exact window's reported verified release.
+
+The preserved late log has the complete 65 RAM-only oracles, zero owned
+Fast/Chip allocation footers, RC0 and done. The original 90-second admission
+remains FAILED. There was no retry, deadline enlargement or physical promotion.
+Loaded DevBench connection eligibility remains a separate maintenance gate.
+See the [finished recovery and release records](../evidence/enhanced-editor/native-mixed-ram-port/approved-recovery/README.md).

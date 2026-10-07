@@ -1,0 +1,173 @@
+{
+  "archives": [
+    {
+      "bytes": 2034,
+      "fence": 5,
+      "name": "release-0000000000000005.json",
+      "sha256": "7f14fb8ffe7df2de1aed8beda774d083c9a717fec97ba575733fe0561422efcb"
+    },
+    {
+      "bytes": 2027,
+      "fence": 10,
+      "name": "release-000000000000000a.json",
+      "sha256": "565d842aadbb4f6ebaaf52143fce4f161da5996606c03adcd679eb1d67e355d3"
+    },
+    {
+      "bytes": 2674,
+      "fence": 18,
+      "name": "release-0000000000000012.json",
+      "sha256": "51040dc9dbe88c4fd07ab0168e154d2d1508b457605373d8fd38b3f12b5c80e8"
+    },
+    {
+      "bytes": 1574,
+      "fence": 28,
+      "name": "release-000000000000001c.json",
+      "sha256": "497beef52132b167956e5a9abfd0da5c60f95309a020b025a4c69f9564a8bb1f"
+    },
+    {
+      "bytes": 1548,
+      "fence": 34,
+      "name": "release-0000000000000022.json",
+      "sha256": "469c89a882db17a9aa686e703957d1770463de43ba8eb7a6e5b04e7e2cca33a8"
+    },
+    {
+      "bytes": 2189,
+      "fence": 41,
+      "name": "release-0000000000000029.json",
+      "sha256": "5df4c72f0992e4470b8664cc15c9245093d58b7afeb69f7b682ffba267cfc4eb"
+    },
+    {
+      "bytes": 1930,
+      "fence": 45,
+      "name": "release-000000000000002d.json",
+      "sha256": "3e95de456c1f74f8a72c7cf88af645a756686dc38fe3f866c16d7d25f8218faa"
+    },
+    {
+      "bytes": 2568,
+      "fence": 52,
+      "name": "release-0000000000000034.json",
+      "sha256": "7c5aaf39710163c8b4dbc1b44a987d727a8e045f20d013809308b997dfa958c7"
+    },
+    {
+      "bytes": 1692,
+      "fence": 60,
+      "name": "release-000000000000003c.json",
+      "sha256": "263825cc34f324aac80d3f0457cf1627ab6c6a03771a15e267cb9857f9792748"
+    },
+    {
+      "bytes": 1479,
+      "fence": 68,
+      "name": "release-0000000000000044.json",
+      "sha256": "812d96fee65d7a48d36678c4f951816292adf3b3d0b2dd279b9e95fe4174b9da"
+    },
+    {
+      "bytes": 2118,
+      "fence": 78,
+      "name": "release-000000000000004e.json",
+      "sha256": "53b5806aae1e3fc0495eebdf743d546dbb00dbc62b668e16bb298c5b1af0ea9e"
+    },
+    {
+      "bytes": 1747,
+      "fence": 86,
+      "name": "release-0000000000000056.json",
+      "sha256": "59db108a525d88ea475077087c706ed4635bacf78b2922373ec419baa432d9bf"
+    },
+    {
+      "bytes": 1454,
+      "fence": 94,
+      "name": "release-000000000000005e.json",
+      "sha256": "aa1042ad4379e5f434aff7596012d59287fa1aa4dccd47a3b3ff9e3dcbfcf1bb"
+    },
+    {
+      "bytes": 1445,
+      "fence": 100,
+      "name": "release-0000000000000064.json",
+      "sha256": "a1ffa393122dc1ba0a39a70bb3d0c61979487ffb14334f8cdc540fedfd2774c0"
+    },
+    {
+      "bytes": 1499,
+      "fence": 108,
+      "name": "release-000000000000006c.json",
+      "sha256": "017659311e09004a95da712568a48aac3619d24d64fd2afccb3453350bba1c42"
+    },
+    {
+      "bytes": 4323,
+      "fence": 132,
+      "name": "release-0000000000000084.json",
+      "sha256": "b2e84cb6e60ee7060834715442507f8b5a375920d2d4bd986140438caaf69b64"
+    },
+    {
+      "bytes": 3174,
+      "fence": 140,
+      "name": "release-000000000000008c.json",
+      "sha256": "4006ae45e726c3756efa47f53e158631a8ad0a401565ab10d681854d25b57313"
+    },
+    {
+      "bytes": 3693,
+      "fence": 264,
+      "name": "release-0000000000000108.json",
+      "sha256": "1f3cd32c7f57cf5b983ed3c1cb543722ddb21e19b4201d06954a58763c36f8c3"
+    },
+    {
+      "bytes": 3700,
+      "fence": 268,
+      "name": "release-000000000000010c.json",
+      "sha256": "313a9925e9d8591b550bba2e993d2a704256fd77788d34e11758d52e799295b5"
+    },
+    {
+      "bytes": 3952,
+      "fence": 346,
+      "name": "release-000000000000015a.json",
+      "sha256": "ab56c7f82a10dfd5ae737d75afad2f23ef454eac8b2f93c6d98802a8280ab154"
+    },
+    {
+      "bytes": 3450,
+      "fence": 392,
+      "name": "release-0000000000000188.json",
+      "sha256": "09eba6502e779fb87cc2a32a24f4b55fe5ea34b1ce66f2f1567676b044bbba1e"
+    },
+    {
+      "bytes": 3732,
+      "fence": 518,
+      "name": "release-0000000000000206.json",
+      "sha256": "84d785d99e7c7332ac2fca1ea653509f1da070a1a4df082ba575643bee6bdd96"
+    },
+    {
+      "bytes": 3447,
+      "fence": 590,
+      "name": "release-000000000000024e.json",
+      "sha256": "45e22d60696c2f7c3e3770c71b8298e8f5cd43e075979e0457d171d17e365c94"
+    },
+    {
+      "bytes": 3455,
+      "fence": 1130,
+      "name": "release-000000000000046a.json",
+      "sha256": "3d433bf2f12cf15f1ae0612792cfb8d100b8363679b2f5d0a068952b08731b8c"
+    },
+    {
+      "bytes": 1565,
+      "fence": 1138,
+      "name": "release-0000000000000472.json",
+      "sha256": "1fdb6ae9d310ec1e1005f956fc49637542b05f7546bdca9d5f2aaf36d9e8c91e"
+    },
+    {
+      "bytes": 1256,
+      "fence": 1144,
+      "name": "release-0000000000000478.json",
+      "sha256": "051f03d06380825a5dd6b66dcaea110584b443a5d08ad934ad7b9513eaa38d73"
+    }
+  ],
+  "authorization": {
+    "approved": true,
+    "legacy_holds_verified": true,
+    "mode": "host-provisioning",
+    "record_sha256": "820445ecb68cd63db257e203686d2df63fca2e66f4d6048f59f5939771fce568"
+  },
+  "fence": 1144,
+  "holds": [],
+  "inflight": null,
+  "potential_resident": false,
+  "reservation": null,
+  "version": 1,
+  "phase": "EMPTY"
+}

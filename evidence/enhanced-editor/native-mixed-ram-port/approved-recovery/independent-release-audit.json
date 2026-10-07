@@ -1,0 +1,142 @@
+{
+  "scope": "SAVED_ONLY_NORMAL_HELD_RECOVERY_RELEASE_AUDIT_NOT_NATIVE_ACCEPTANCE",
+  "passed": true,
+  "findings": [],
+  "inputs": [
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-normal-release-first-v2/receipt.json",
+      "bytes": 2708,
+      "sha256": "54e3d58e04ab7732e04bf279d5f8b44521a9121bf3d2e2c89bac7e9d601f77cc",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-normal-release-first-v2/before.stdout",
+      "bytes": 5534,
+      "sha256": "033312345acac06fbf24937dd87826b3af13870bed3b0a8d860f57b402bfa979",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-normal-release-first-v2/before.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-normal-release-first-v2/release.stdout",
+      "bytes": 78,
+      "sha256": "339444cd8071b75d1e3d6c08402befa16006d7b785fd2ee0b5080633f6a4664a",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-normal-release-first-v2/release.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-normal-release-first-v2/after.stdout",
+      "bytes": 5142,
+      "sha256": "f2c6ad0e7af7dca642e70eb60d09826a2b44411438992fab2cb00d7019e8262b",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-normal-release-first-v2/after.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-normal-release-first-v2.py",
+      "bytes": 4801,
+      "sha256": "c750d76c5b2ba8c56dd5aa77210381e3aea9e421e1b75c90217276492b7153cb",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-release-packet-first-v1/proof.json",
+      "bytes": 599,
+      "sha256": "86e6dd399fbe4d91155a0b4039b97fc1384226c5cc9b26f8d886b66e70d23d75",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-release-packet-first-v1/authorization.json",
+      "bytes": 1488,
+      "sha256": "b7aecc76fd0f8585673f4060ba8f6de697da249650ff4726395f2d48e2b557b7",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-release-packet-first-v1/restoration.json",
+      "bytes": 4390,
+      "sha256": "77e43623e2691078d5c912856af53e69e50385fccf97aa035338e5a181522d15",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-release-packet-first-v1/absence.json",
+      "bytes": 1264,
+      "sha256": "d3c4a1d28ef1c0fe8ab14321eca65fada87b4b36670742f87cd94b2d8e4fa220",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-release-packet-first-v1/cleanup.json",
+      "bytes": 1300,
+      "sha256": "e15003cce0feadee10f9cb412a93a22c64aaa9d307c14fa501d166220a8815c8",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-normal-release-collector-first-v2-source-review.json",
+      "bytes": 3100,
+      "sha256": "81ed9905021020a18b4e0471ea33eb911310e5f2942722f4660218f0b620a36a",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-release-packet-source-saved-review-v1.json",
+      "bytes": 5067,
+      "sha256": "74a00dd6b410da410c31935be141769c8ef8a90b67266bc7b27f3dbbea368649",
+      "mode": 33188
+    },
+    {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-held-recovery-first-v1-saved-audit.json",
+      "bytes": 11909,
+      "sha256": "e2583fa84151a3e5d1c08697cf6b6e2c0aa4b4834dbd93251cfb4a5da09c59bd",
+      "mode": 33188
+    }
+  ],
+  "checks": [
+    "Exact reviewed V2 collector bytes remain unchanged",
+    "Saved receipt declares completed normal release, with no target/service/retry claim",
+    "before has RC0, positive saved reap/group absence, no errors",
+    "before.stdout full capture matches receipt bytes/hash/mode",
+    "before.stderr full capture matches receipt bytes/hash/mode",
+    "before stderr is empty",
+    "release has RC0, positive saved reap/group absence, no errors",
+    "release.stdout full capture matches receipt bytes/hash/mode",
+    "release.stderr full capture matches receipt bytes/hash/mode",
+    "release stderr is empty",
+    "after has RC0, positive saved reap/group absence, no errors",
+    "after.stdout full capture matches receipt bytes/hash/mode",
+    "after.stderr full capture matches receipt bytes/hash/mode",
+    "after stderr is empty",
+    "Three local CLI child identities are distinct and persist the fixed status/release/status argv",
+    "Exact accepted proof and all four verified record hashes remain intact",
+    "Saved before state byte-matches approved packet and has exact held run/fence",
+    "Actual saved release result is exact true/1144/archive0478",
+    "Actual saved after state is EMPTY1144 with no ownership/hold/resident state",
+    "After preserves all prior 25 archive summaries and adds exactly archive0478",
+    "All three bound preceding SOURCE/SAVED reviews remain passed with no findings"
+  ],
+  "observed_release": {
+    "before_phase": "HOLD",
+    "before_fence": 1143,
+    "after_phase": "EMPTY",
+    "after_fence": 1144,
+    "archive": "release-0000000000000478.json",
+    "archive_count_before": 25,
+    "archive_count_after": 26,
+    "three_saved_cli_calls_rc0_and_quiet": true
+  },
+  "limits": [
+    "Only finished saved public receipt/streams, proof/records, source and preceding reviews were read. No private lease or raw history archive was read.",
+    "No live process, health, guard, lease, lock, target, service or test operation was performed by the reviewer.",
+    "HOST release closes the approved recovery reservation/hold. It does not establish guest completion or device cleanup; original native90 admission remains FAILED despite late custody output.",
+    "No physical, musical timing, IRQ, sample-RAM capacity/order/completion or listening qualification is inferred."
+  ]
+}

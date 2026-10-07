@@ -1,0 +1,205 @@
+{
+  "scope": "HOST_RECOVERY_NOT_TARGET_ACCEPTANCE",
+  "action": "recover",
+  "completed": true,
+  "phase": "HOST_RECOVERY_OBSERVED_NOT_RELEASED",
+  "source": {
+    "bytes": 25305,
+    "sha256": "f7ba30589d220bf42772b0ea497b68810ca1e079955c0404124a2924d51eb26b",
+    "mode": 33188
+  },
+  "lease_run_id": "40404d805e705c3b3327ef0a62cc5f51",
+  "hold_fence": 1143,
+  "signal_attempted": true,
+  "custody_started": true,
+  "metadata_restoration_started": true,
+  "guard_mutation": false,
+  "reservation_release": false,
+  "target_commands": false,
+  "automatic_retry": false,
+  "guest_or_audio_acceptance": false,
+  "guard_state_sha256": "8fa8773cc47dfa28cfec9f75e8978da6da29f2808f876111f5b2e053dffe1499",
+  "process_creation_interval": {
+    "observed_seconds": 1791374951,
+    "lower": 1791374930,
+    "upper": 1791374953,
+    "endpoint_tolerance_seconds": 1,
+    "saved_original_os_token": false
+  },
+  "before_signal_passive_health": {
+    "status": "ok",
+    "serial": {
+      "connected": true,
+      "mode": "tcp",
+      "logCount": 225,
+      "varCount": 0,
+      "lastHeartbeat": {
+        "type": "HB",
+        "tick": 1576,
+        "freeChip": 1926976,
+        "freeFast": 131652240,
+        "timestamp": "2026-10-07T14:35:29.068748+00:00"
+      },
+      "serialConnectedAt": 1791374982.1303198,
+      "lastBridgeMessageAt": 1791383729.068765,
+      "lastHeartbeatAt": 1791383729.068768,
+      "bridgeSilentSec": 1.0,
+      "host": "127.0.0.1",
+      "port": 2345
+    }
+  },
+  "after_signal_passive_health": {
+    "status": "ok",
+    "serial": {
+      "connected": false,
+      "mode": "tcp",
+      "logCount": 225,
+      "varCount": 0,
+      "lastHeartbeat": {
+        "type": "HB",
+        "tick": 1576,
+        "freeChip": 1926976,
+        "freeFast": 131652240,
+        "timestamp": "2026-10-07T14:35:29.068748+00:00"
+      },
+      "serialConnectedAt": 1791374982.1303198,
+      "lastBridgeMessageAt": 1791383729.068765,
+      "lastHeartbeatAt": 1791383729.068768,
+      "bridgeSilentSec": 1.2,
+      "host": "127.0.0.1",
+      "port": 2345
+    }
+  },
+  "custody": {
+    "run": {
+      "directory_mode": 16877,
+      "files": {
+        "PTMixedRamFastChipTest": {
+          "bytes": 237320,
+          "sha256": "ec4dbf52210eb0a7ec3ce026400ee885aeb8b0315cbec79328b7184ce5ddc30a",
+          "mode": 33261,
+          "mtime_ns": 1791371168892064932
+        },
+        "done": {
+          "bytes": 49,
+          "sha256": "b27e0c3e8cdb54f5e302ceaca05dde44f016d14a8793311363f3c8fd380e0d8a",
+          "mode": 33188,
+          "mtime_ns": 1791375232204969000
+        },
+        "test.log": {
+          "bytes": 1075,
+          "sha256": "3efc52060ce5757cb0664f2bad7cc701eaaa6b27774a563f381e6aa3a7d6df66",
+          "mode": 33188,
+          "mtime_ns": 1791375232169392000
+        },
+        "test.rc": {
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+          "mode": 33188,
+          "mtime_ns": 1791375232184853000
+        }
+      }
+    },
+    "launcher": {
+      "exists": true,
+      "bytes": 272,
+      "sha256": "012b50e439327a036593862250233281ee1b735147a9ddee6b7149031140c56f",
+      "data_base64": "RmFpbEF0IDIxClN0YWNrIDEzMTA3MgpDRCBEZXY6VGVzdHMvcmVuZGVyLWZpbGVzLW1peGVkLWZhc3QtY2hpcC0xNzkxMzc1MDE4MTc1MjM5MDAwClBUTWl4ZWRSYW1GYXN0Q2hpcFRlc3QgPnRlc3QubG9nCkVjaG8gJFJDID50ZXN0LnJjCkZhaWxBdCAxCkNEIFJBTToKRWNobyByZW5kZXItZmlsZXMtbWl4ZWQtZmFzdC1jaGlwLTE3OTEzNzUwMTgxNzUyMzkwMDAgPkRldjpUZXN0cy9yZW5kZXItZmlsZXMtbWl4ZWQtZmFzdC1jaGlwLTE3OTEzNzUwMTgxNzUyMzkwMDAvZG9uZQo=",
+      "mode": 33188,
+      "mtime_ns": 1791375021187481636
+    }
+  },
+  "run_renamed": true,
+  "launcher_renamed": true,
+  "restored_paths": [
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tools/bridge-enabled",
+    "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/emulator.json"
+  ],
+  "observations": [
+    {
+      "health": {
+        "status": "ok",
+        "serial": {
+          "connected": false,
+          "mode": "tcp",
+          "logCount": 225,
+          "varCount": 0,
+          "lastHeartbeat": {
+            "type": "HB",
+            "tick": 1576,
+            "freeChip": 1926976,
+            "freeFast": 131652240,
+            "timestamp": "2026-10-07T14:35:29.068748+00:00"
+          },
+          "serialConnectedAt": 1791374982.1303198,
+          "lastBridgeMessageAt": 1791383729.068765,
+          "lastHeartbeatAt": 1791383729.068768,
+          "bridgeSilentSec": 1.6,
+          "host": "127.0.0.1",
+          "port": 2345
+        }
+      },
+      "restored_metadata": {
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tools/bridge-enabled": {
+          "exists": true,
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "data_base64": "",
+          "mode": 33188,
+          "mtime_ns": 1791360779030611000
+        },
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/emulator.json": {
+          "exists": true,
+          "bytes": 163,
+          "sha256": "76f2fd1f5c7fca52af81989cab670ae5db653f1dc79533f438dc82e738634bb1",
+          "data_base64": "eyJwaWQiOiA2MDYxOCwgInRhcmdldCI6ICJhbWliZXJyeS0wMzAiLCAicHJvZmlsZSI6ICIvVXNlcnMvamFtZXMxL0RvY3VtZW50cy9Db2RleC9zaGFyZWQtdG9vbHMvYW1pZ2EtZGV2LWluZnJhL3J1bnRpbWUvYW1pYmVycnkvQ29uZmlndXJhdGlvbnMvQTEyMDAtMDMwLURFVi51YWUifQ==",
+          "mode": 33188,
+          "mtime_ns": 1791360779041293956
+        }
+      }
+    },
+    {
+      "health": {
+        "status": "ok",
+        "serial": {
+          "connected": false,
+          "mode": "tcp",
+          "logCount": 225,
+          "varCount": 0,
+          "lastHeartbeat": {
+            "type": "HB",
+            "tick": 1576,
+            "freeChip": 1926976,
+            "freeFast": 131652240,
+            "timestamp": "2026-10-07T14:35:29.068748+00:00"
+          },
+          "serialConnectedAt": 1791374982.1303198,
+          "lastBridgeMessageAt": 1791383729.068765,
+          "lastHeartbeatAt": 1791383729.068768,
+          "bridgeSilentSec": 1.9,
+          "host": "127.0.0.1",
+          "port": 2345
+        }
+      },
+      "restored_metadata": {
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tools/bridge-enabled": {
+          "exists": true,
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "data_base64": "",
+          "mode": 33188,
+          "mtime_ns": 1791360779030611000
+        },
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/emulator.json": {
+          "exists": true,
+          "bytes": 163,
+          "sha256": "76f2fd1f5c7fca52af81989cab670ae5db653f1dc79533f438dc82e738634bb1",
+          "data_base64": "eyJwaWQiOiA2MDYxOCwgInRhcmdldCI6ICJhbWliZXJyeS0wMzAiLCAicHJvZmlsZSI6ICIvVXNlcnMvamFtZXMxL0RvY3VtZW50cy9Db2RleC9zaGFyZWQtdG9vbHMvYW1pZ2EtZGV2LWluZnJhL3J1bnRpbWUvYW1pYmVycnkvQ29uZmlndXJhdGlvbnMvQTEyMDAtMDMwLURFVi51YWUifQ==",
+          "mode": 33188,
+          "mtime_ns": 1791360779041293956
+        }
+      }
+    }
+  ],
+  "guard_unchanged": true
+}

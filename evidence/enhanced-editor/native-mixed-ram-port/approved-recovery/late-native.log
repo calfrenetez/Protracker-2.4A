@@ -1,0 +1,7 @@
+EXEC MIXED FAST CHIP BEGIN: genuine fixture; bounded Fast masters/control; selective Chip copies; scripted clock; no IRQ/DMA/device/audio
+EXEC MIXED RAM CONTEXT: reported_stack_bytes=131072 guard_stack_bytes=131070 priority=0
+EXEC MEMORY pool_limit=131011184 reserve=262144 flags=4
+NATIVE MIXED RAM PORT PASS:65 genuine heap cases;24 mixed4/12 or16-card8/16/24-master/cache proof-order lifetimes;32-reader replacement pressure;all20 original keys;expected-only dependent command records including second-proof uncertainty;second armed publication refusal;paired CONTROL/STOP;raw arm/source outcomes and reentry;once shutdown then independent read-only quiet;exact clocks/retained late adoption/master beforeimages;SOFTWARE_ONLY
+EXEC MIXED CHIP MEMORY PASS: 65 bindings, 90 Chip allocations, first/final-byte checks, zero owned Chip bytes; no DMA
+EXEC MEMORY PASS: 2612 Fast allocations, zero owned bytes, budget refusal without Chip fallback
+EXEC MIXED FAST CHIP PASS: genuine fixture once; Fast/Chip extents checked; zero owned bytes; original task/stack/priority; RAM_ONLY

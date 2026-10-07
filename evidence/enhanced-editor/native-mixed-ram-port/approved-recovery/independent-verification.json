@@ -1,0 +1,110 @@
+{
+  "scope": "HOST_RECOVERY_NOT_TARGET_ACCEPTANCE",
+  "action": "verify",
+  "completed": true,
+  "phase": "HOST_RECOVERY_OBSERVED_NOT_RELEASED",
+  "source": {
+    "bytes": 25305,
+    "sha256": "f7ba30589d220bf42772b0ea497b68810ca1e079955c0404124a2924d51eb26b",
+    "mode": 33188
+  },
+  "lease_run_id": "40404d805e705c3b3327ef0a62cc5f51",
+  "hold_fence": 1143,
+  "signal_attempted": false,
+  "custody_started": false,
+  "metadata_restoration_started": false,
+  "guard_mutation": false,
+  "reservation_release": false,
+  "target_commands": false,
+  "automatic_retry": false,
+  "guest_or_audio_acceptance": false,
+  "guard_state_sha256": "8fa8773cc47dfa28cfec9f75e8978da6da29f2808f876111f5b2e053dffe1499",
+  "recovery_receipt_sha256": "d5301e19e252ee8686d89d796028724ad0bc2cba07169d919f45d8012f161dfe",
+  "observations": [
+    {
+      "health": {
+        "status": "ok",
+        "serial": {
+          "connected": false,
+          "mode": "tcp",
+          "logCount": 225,
+          "varCount": 0,
+          "lastHeartbeat": {
+            "type": "HB",
+            "tick": 1576,
+            "freeChip": 1926976,
+            "freeFast": 131652240,
+            "timestamp": "2026-10-07T14:35:29.068748+00:00"
+          },
+          "serialConnectedAt": 1791374982.1303198,
+          "lastBridgeMessageAt": 1791383729.068765,
+          "lastHeartbeatAt": 1791383729.068768,
+          "bridgeSilentSec": 24.8,
+          "host": "127.0.0.1",
+          "port": 2345
+        }
+      },
+      "restored_metadata": {
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tools/bridge-enabled": {
+          "exists": true,
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "data_base64": "",
+          "mode": 33188,
+          "mtime_ns": 1791360779030611000
+        },
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/emulator.json": {
+          "exists": true,
+          "bytes": 163,
+          "sha256": "76f2fd1f5c7fca52af81989cab670ae5db653f1dc79533f438dc82e738634bb1",
+          "data_base64": "eyJwaWQiOiA2MDYxOCwgInRhcmdldCI6ICJhbWliZXJyeS0wMzAiLCAicHJvZmlsZSI6ICIvVXNlcnMvamFtZXMxL0RvY3VtZW50cy9Db2RleC9zaGFyZWQtdG9vbHMvYW1pZ2EtZGV2LWluZnJhL3J1bnRpbWUvYW1pYmVycnkvQ29uZmlndXJhdGlvbnMvQTEyMDAtMDMwLURFVi51YWUifQ==",
+          "mode": 33188,
+          "mtime_ns": 1791360779041293956
+        }
+      }
+    },
+    {
+      "health": {
+        "status": "ok",
+        "serial": {
+          "connected": false,
+          "mode": "tcp",
+          "logCount": 225,
+          "varCount": 0,
+          "lastHeartbeat": {
+            "type": "HB",
+            "tick": 1576,
+            "freeChip": 1926976,
+            "freeFast": 131652240,
+            "timestamp": "2026-10-07T14:35:29.068748+00:00"
+          },
+          "serialConnectedAt": 1791374982.1303198,
+          "lastBridgeMessageAt": 1791383729.068765,
+          "lastHeartbeatAt": 1791383729.068768,
+          "bridgeSilentSec": 25.1,
+          "host": "127.0.0.1",
+          "port": 2345
+        }
+      },
+      "restored_metadata": {
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/Dev/Tools/bridge-enabled": {
+          "exists": true,
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "data_base64": "",
+          "mode": 33188,
+          "mtime_ns": 1791360779030611000
+        },
+        "/Users/james1/Documents/Codex/shared-tools/amiga-dev-infra/runtime/emulator.json": {
+          "exists": true,
+          "bytes": 163,
+          "sha256": "76f2fd1f5c7fca52af81989cab670ae5db653f1dc79533f438dc82e738634bb1",
+          "data_base64": "eyJwaWQiOiA2MDYxOCwgInRhcmdldCI6ICJhbWliZXJyeS0wMzAiLCAicHJvZmlsZSI6ICIvVXNlcnMvamFtZXMxL0RvY3VtZW50cy9Db2RleC9zaGFyZWQtdG9vbHMvYW1pZ2EtZGV2LWluZnJhL3J1bnRpbWUvYW1pYmVycnkvQ29uZmlndXJhdGlvbnMvQTEyMDAtMDMwLURFVi51YWUifQ==",
+          "mode": 33188,
+          "mtime_ns": 1791360779041293956
+        }
+      }
+    }
+  ],
+  "guard_unchanged": true
+}

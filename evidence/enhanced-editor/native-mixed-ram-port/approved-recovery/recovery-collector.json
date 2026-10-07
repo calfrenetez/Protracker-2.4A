@@ -1,0 +1,48 @@
+{
+  "scope": "HOST_HELPER_COLLECTOR_NOT_TARGET_ACCEPTANCE",
+  "completed": true,
+  "source": {
+    "bytes": 25305,
+    "sha256": "f7ba30589d220bf42772b0ea497b68810ca1e079955c0404124a2924d51eb26b",
+    "mode": 33188
+  },
+  "review": {
+    "bytes": 3346,
+    "sha256": "42bfadc661a534c1258f65f6e08691a80be19991d912e790b1c88baec3305a29",
+    "mode": 33188
+  },
+  "args": [
+    "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "-B",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-held-owner-recovery-source-v1/recovery.py",
+    "recover",
+    "--approval",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-held-owner-recovery-human-approval-first-v1.json",
+    "--approval-sha256",
+    "78e7ce521f6034b8a64c79def251116f0e8e7a11be1b211e3d96132e8f3a1d31"
+  ],
+  "timeout_seconds": 120,
+  "emulator_automatic_signal": false,
+  "target_commands": false,
+  "guard_mutation": false,
+  "reservation_release": false,
+  "automatic_retry": false,
+  "owned_host_pid": 39053,
+  "returncode": 0,
+  "owned_host_parent_reaped": true,
+  "owned_host_group_absent": true,
+  "elapsed_seconds": 1.2168550409842283,
+  "finalization_errors": [],
+  "streams": {
+    "stdout": {
+      "bytes": 144,
+      "sha256": "4a8ee787c0a79b2489fa84e18912a42fb630637579c2b7e6373b7307208a25e5",
+      "mode": 33188
+    },
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    }
+  }
+}

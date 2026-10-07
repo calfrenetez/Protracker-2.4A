@@ -1,0 +1,269 @@
+{
+  "scope": "SAVED_ONLY_HOST_HELD_OWNER_RECOVERY_AUDIT_NOT_TARGET_ACCEPTANCE_NOT_RELEASE",
+  "passed": true,
+  "findings": [],
+  "input_files": {
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-held-owner-recovery-first-v1/receipt.json": {
+      "bytes": 7140,
+      "sha256": "d5301e19e252ee8686d89d796028724ad0bc2cba07169d919f45d8012f161dfe",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-held-owner-recovery-independent-first-v1/receipt.json": {
+      "bytes": 4064,
+      "sha256": "eb1cd647a96e6874efb5faf44502ae2aac83c637d8c1a191096f854edb557bd7",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-recover-host-collector-first-v2/receipt.json": {
+      "bytes": 1553,
+      "sha256": "8d70b32cbd7ae567f92b9657cb5841f6d083b63d16f77a705b782bcb180d1cba",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-verify-host-collector-first-v2/receipt.json": {
+      "bytes": 1374,
+      "sha256": "1b819162ff26b14ef938b8d19a15d09f5b4eacd1dd3b4b69dd1f6de2ccd63851",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-held-owner-recovery-source-v1/recovery.py": {
+      "bytes": 25305,
+      "sha256": "f7ba30589d220bf42772b0ea497b68810ca1e079955c0404124a2924d51eb26b",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-held-owner-recovery-source-v1/inputs.json": {
+      "bytes": 2846,
+      "sha256": "f23c0717e8f40f765d2cd61dbda52ff5e3206a10de9a741313b5d67998ae71ad",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-host-collector-v2.py": {
+      "bytes": 5087,
+      "sha256": "df7f7a0efa90d219255ae5455e9703665b1f72303cb87352a1cf0b5c66758284",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-held-owner-recovery-source-review-v1.json": {
+      "bytes": 3346,
+      "sha256": "42bfadc661a534c1258f65f6e08691a80be19991d912e790b1c88baec3305a29",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-held-recovery-host-collector-v2-source-review.json": {
+      "bytes": 1981,
+      "sha256": "e48aa7fcb6cdf4465786d55c5d03d2e62e5732591b62a8739e4c0e7e635a07ae",
+      "mode": 33188
+    }
+  },
+  "streams": {
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-recover-host-collector-first-v2/stdout": {
+      "bytes": 144,
+      "sha256": "4a8ee787c0a79b2489fa84e18912a42fb630637579c2b7e6373b7307208a25e5",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-recover-host-collector-first-v2/stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-verify-host-collector-first-v2/stdout": {
+      "bytes": 156,
+      "sha256": "a4a752a11358165244255f2f441ede6e2e907c00bfa475351976a783b9e3023b",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-held-recovery-verify-host-collector-first-v2/stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    }
+  },
+  "original_watchdog_streams": {
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-startup-watchdog-first-v1/stdout": {
+      "bytes": 200,
+      "sha256": "f7f1f59c8cafe5310c3fa69893c7ff3262317e63a32f2537f42e32ffa063b86e",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-startup-watchdog-first-v1/stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-emulator-watchdog-first-v1/stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-emulator-watchdog-first-v1/stderr": {
+      "bytes": 892,
+      "sha256": "96c1c7ebb2e33ccbd384e944a673b0ca64c26144aa9e3211ec3612c0f8cfd57c",
+      "mode": 33188
+    }
+  },
+  "custody_files": {
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-held-owner-recovery-first-v1/custody/render-files-mixed-fast-chip-1791375018175239000/PTMixedRamFastChipTest": {
+      "bytes": 237320,
+      "sha256": "ec4dbf52210eb0a7ec3ce026400ee885aeb8b0315cbec79328b7184ce5ddc30a",
+      "mode": 33261
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-held-owner-recovery-first-v1/custody/render-files-mixed-fast-chip-1791375018175239000/done": {
+      "bytes": 49,
+      "sha256": "b27e0c3e8cdb54f5e302ceaca05dde44f016d14a8793311363f3c8fd380e0d8a",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-held-owner-recovery-first-v1/custody/render-files-mixed-fast-chip-1791375018175239000/test.log": {
+      "bytes": 1075,
+      "sha256": "3efc52060ce5757cb0664f2bad7cc701eaaa6b27774a563f381e6aa3a7d6df66",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-held-owner-recovery-first-v1/custody/render-files-mixed-fast-chip-1791375018175239000/test.rc": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-ram-held-owner-recovery-first-v1/custody/launch-render-files-mixed-fast-chip-1791375018175239000": {
+      "bytes": 272,
+      "sha256": "012b50e439327a036593862250233281ee1b735147a9ddee6b7149031140c56f",
+      "mode": 33188
+    }
+  },
+  "checks": [
+    {
+      "name": "exact reviewed helper and collector sources unchanged",
+      "passed": true
+    },
+    {
+      "name": "exact approved inputs file unchanged",
+      "passed": true
+    },
+    {
+      "name": "exact recovery receipt bound by independent verify",
+      "passed": true
+    },
+    {
+      "name": "both completed HOST-only recovery receipts",
+      "passed": true
+    },
+    {
+      "name": "same held ownership identity and saved unchanged guard hash",
+      "passed": true
+    },
+    {
+      "name": "one recovery signal/custody/restoration and readonly independent verify",
+      "passed": true
+    },
+    {
+      "name": "neither helper mutated guard or released reservation/target/retry/audio",
+      "passed": true
+    },
+    {
+      "name": "source-bound exact owner lstart admission retained honest boundary",
+      "passed": true
+    },
+    {
+      "name": "recover collector RC0 positive HOST reap/group quiet",
+      "passed": true
+    },
+    {
+      "name": "recover collector exact helper/review and no target/release actions",
+      "passed": true
+    },
+    {
+      "name": "recover complete captured streams exact and stderr empty",
+      "passed": true
+    },
+    {
+      "name": "verify collector RC0 positive HOST reap/group quiet",
+      "passed": true
+    },
+    {
+      "name": "verify collector exact helper/review and no target/release actions",
+      "passed": true
+    },
+    {
+      "name": "verify complete captured streams exact and stderr empty",
+      "passed": true
+    },
+    {
+      "name": "separate verify vector binds exact recovery hash",
+      "passed": true
+    },
+    {
+      "name": "recorded private human approval pin is exact without disclosing contents",
+      "passed": true
+    },
+    {
+      "name": "all eight original saved record pins remain exact",
+      "passed": true
+    },
+    {
+      "name": "all four static source dependency pins exact",
+      "passed": true
+    },
+    {
+      "name": "all three profile and harness configuration pins unchanged",
+      "passed": true
+    },
+    {
+      "name": "protected16 bytes/modes remain exact",
+      "passed": true
+    },
+    {
+      "name": "original full watchdog stream evidence remains exact",
+      "passed": true
+    },
+    {
+      "name": "all original first-failure raw copies preserved",
+      "passed": true
+    },
+    {
+      "name": "exact four original run artifacts preserved in custody",
+      "passed": true
+    },
+    {
+      "name": "exact original launcher bytes/mode/mtime preserved",
+      "passed": true
+    },
+    {
+      "name": "custody HUNK is original failed candidate",
+      "passed": true
+    },
+    {
+      "name": "late output exact and original incomplete prefix preserved",
+      "passed": true
+    },
+    {
+      "name": "original native90 failure is unchanged despite late files",
+      "passed": true
+    },
+    {
+      "name": "saved fixed bridge transition connected to disconnected",
+      "passed": true
+    },
+    {
+      "name": "two recovery plus two independent restoration/health observations",
+      "passed": true
+    },
+    {
+      "name": "saved restored metadata bytes/hash/mode/mtime internally exact",
+      "passed": true
+    }
+  ],
+  "observations": {
+    "recover_host_seconds": 1.2168550409842283,
+    "verify_host_seconds": 0.549210375000257,
+    "host_group_recovery_pid": 39053,
+    "host_group_verify_pid": 39491,
+    "held_fence_in_saved_receipts": 1143,
+    "saved_guard_unchanged": true,
+    "late_log_bytes": 1075,
+    "late_rc": "0",
+    "original_native90_result": "FAILED_DEADLINE_PRESERVED",
+    "reservation_release_verified": false
+  },
+  "release_requirements_not_yet_audited": [
+    "Normal four bound proof records and the subsequent guarded HOLD-clear/reservation-release transaction are separate ROOT obligations; neither recovery receipt performs them.",
+    "Fresh coordinator release acknowledgment and actual final release state are not present in these recovery receipts."
+  ],
+  "evidence_limits": [
+    "Audit only read completed saved/public evidence, private custody, static source/config/protected files and an approval digest; never read or printed the private lease, and performed no live process/health/guard/lock/target/lease probe or import/execution.",
+    "Approved helper completion is source-bound to one exact-owner HOST SIGTERM, positive host absence/fixed disconnected health assertions, same-filesystem custody and baseline restoration; the helper does not preserve every intermediate ps stdout separately.",
+    "Lstart is constrained to the reviewed one-start interval with1s endpoint tolerance; no original saved OS creation token was available.",
+    "Late seven-line native output, RC0 and done are preserved post-failure artifacts only. Original90s admission remains FAILED; no timing cause, retry, guest completion or qualified native runtime acceptance is inferred.",
+    "HOST process-group quiet and emulator stop do not prove guest task completion, device/audio/listening or release.",
+    "The guard-state hash and HOLD1143 facts describe the saved recovery/verify observations only; no fresh live guard state was read."
+  ]
+}

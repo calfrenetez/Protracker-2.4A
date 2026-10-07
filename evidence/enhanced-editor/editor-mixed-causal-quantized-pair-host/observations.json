@@ -1,0 +1,953 @@
+{
+  "scope": "PUBLISHED_SUMMARY_OF_DISTINCT_ACTUAL_HOST_ONLY_FINITE_PAIR_GROUP",
+  "group": "quantized-causal-pair39",
+  "status": "PASS_ONE_ACTUAL_POST_NINE_CORRECTED_V2_QUANTIZED39_HOST_ENTRY_ASAN_UBSAN",
+  "actual_fixture_status": "PASS_GENUINE_QUANTIZED_CAUSAL_PAIR_ASAN_UBSAN",
+  "host_runtime_passed": true,
+  "independent_saved_admission": {
+    "status": "ACCEPTED_SAVED_HOST_ONLY",
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-causal-quantized-pair-host-first-v2-saved-audit.json",
+    "pin": {
+      "bytes": 173846,
+      "sha256": "106bd7ec7ce6bdac48ded29b68a83dbecdd01523ad122d3f63039366f49be02b",
+      "mode": 33188
+    },
+    "scope": "INDEPENDENT_SAVED_ONLY_CORRECTED_QUANTIZED39_V2_FIRST_HOST_QUALIFICATION_NO_REPLAY",
+    "verdict": "PASS_SAVED_CORRECTED_QUANTIZED39_V2_FULL_HOST_ENTRY_AND_SOFTWARE_GROUP",
+    "qualification_passed": true,
+    "qualification_scope": "Only the distinct corrected V2 39-case HOST ASan/UBSan group and its exact deployable public entry in the admitted post-nine current source; original V1 remains FAILED. No native/emulator/physical/live timing/audio acceptance."
+  },
+  "qualification_scope": "Only this separately run genuine HOST software fixture and exact portable entry in current1207 plus its own selected additions. No combined1213 runtime or hardware/live timing acceptance.",
+  "private_receipts": {
+    "outer": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-quantized-pair-host-first-v2/receipt.json",
+      "pin": {
+        "bytes": 2068446,
+        "sha256": "04e67f4cd123df8b4715422419d1e1fd23c477d54793092c1b205fb636737da3",
+        "mode": 33152
+      }
+    },
+    "nested": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-quantized-pair-host-first-v2/tmp/pt-causal-quantized-pair-ube2eqvx/receipt.json",
+      "pin": {
+        "bytes": 864007,
+        "sha256": "4f248c441990954a610457e8aa9e10c6a21704df89e0fb85aabb68f7aeb05c62",
+        "mode": 33188
+      }
+    }
+  },
+  "actual_public_call": {
+    "label": "deployable-quantized39-entry",
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-B",
+      "tests/test_editor_mixed_causal_quantized_pair.py"
+    ],
+    "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-quantized-pair-host-first-v2/candidate",
+    "limit_seconds": 280,
+    "passed": true,
+    "errors": [],
+    "pid": 22343,
+    "returncode": 0,
+    "reaped": true,
+    "group_absent": true,
+    "streams": {
+      "stdout": {
+        "bytes": 591,
+        "sha256": "67cfcf2bbfdcfa5545a9d9082a682873cbd35ecc769f925bafcf7ac95a62c415",
+        "mode": 33152
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33152
+      }
+    },
+    "elapsed_seconds": 22.541571000008844
+  },
+  "actual_C_calls": [
+    {
+      "label": "quantized-causal-pair39-compile",
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-I.",
+        "tests/editor_mixed_causal_quantized_pair_test.c",
+        "src/editor/editor_mixed_causal_prepare.c",
+        "src/editor/sampler_mixed_readers.c",
+        "src/core/mixed_readers_causal.c",
+        "src/core/amigus_trigger_levels.c",
+        "src/core/mixed_scheduled_readers.c",
+        "src/core/elapsed_clock.c",
+        "src/editor/sampler_paula.c",
+        "src/editor/sampler_wavetable.c",
+        "src/core/amigus_voice_plan.c",
+        "src/editor/sampler.c",
+        "src/editor/slots.c",
+        "src/core/pcm_filtered.c",
+        "src/core/slices.c",
+        "src/core/pattern.c",
+        "src/core/document.c",
+        "src/core/pp20.c",
+        "src/core/project.c",
+        "src/core/mod_project.c",
+        "src/core/mod_inspect.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "src/core/wav.c",
+        "src/core/svx.c",
+        "src/core/raw.c",
+        "src/editor/editor.c",
+        "src/editor/song.c",
+        "src/editor/view.c",
+        "src/editor/workflow.c",
+        "src/editor/sample_range.c",
+        "src/editor/wave_summary.c",
+        "src/core/sample_usage.c",
+        "src/core/event_resource.c",
+        "src/core/flow.c",
+        "src/core/pitch.c",
+        "src/core/amigus_reservation.c",
+        "src/editor/sampler_invert_song.c",
+        "src/core/render_invert.c",
+        "src/core/invert_bank.c",
+        "src/core/invert_sequence.c",
+        "src/core/invert_pcm.c",
+        "src/core/invert_loop.c",
+        "src/core/amigus_session.c",
+        "src/core/amigus_fifo.c",
+        "src/core/amigus_pcm_pack.c",
+        "src/core/studio_consumer.c",
+        "src/core/studio_pump.c",
+        "src/core/studio_queue.c",
+        "src/editor/editor_studio.c",
+        "src/editor/sampler_song.c",
+        "src/editor/sampler_studio.c",
+        "src/core/studio_song.c",
+        "src/core/studio_plan.c",
+        "src/core/render.c",
+        "src/core/timeline.c",
+        "src/core/frame_clock.c",
+        "src/core/studio_mix.c",
+        "src/core/voice.c",
+        "src/editor/wavetable_song.c",
+        "src/editor/wavetable_voices.c",
+        "src/editor/wavetable_dispatch.c",
+        "src/core/amigus_render_voice.c",
+        "src/editor/paula_preflight.c",
+        "src/core/paula_render_voice.c",
+        "src/core/amigus_wavetable_cache.c",
+        "src/core/amigus_sample_ram.c",
+        "src/core/sample_cache.c",
+        "src/core/playback_pcm.c",
+        "src/editor/editor_mixed.c",
+        "src/editor/mixed_owner.c",
+        "src/editor/mixed_transport.c",
+        "src/editor/mixed_preflight.c",
+        "src/editor/paula_voices.c",
+        "src/editor/paula_dispatch.c",
+        "src/editor/editor_wavetable.c",
+        "src/platform/sample_import.c",
+        "src/platform/raw_import.c",
+        "src/platform/mod_import.c",
+        "src/platform/pp20_import.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-quantized-pair-host-first-v2/tmp/pt-causal-quantized-pair-ube2eqvx/quantized-causal-pair39"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-quantized-pair-host-first-v2/tmp/pt-causal-quantized-pair-ube2eqvx/source-mbi0tjs5/tree",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 22352,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 20.02399575000163
+    },
+    {
+      "label": "quantized-causal-pair39-run",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-quantized-pair-host-first-v2/tmp/pt-causal-quantized-pair-ube2eqvx/quantized-causal-pair39"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-quantized-pair-host-first-v2/tmp/pt-causal-quantized-pair-ube2eqvx/source-mbi0tjs5/tree",
+      "limit_seconds": 30,
+      "passed": true,
+      "errors": [],
+      "pid": 22501,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 412,
+          "sha256": "e948e78dd1321554dd61227e6005375a6c7eb2c0f369ea3244b5c5a3ba1d5ea0",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.7298216249910183
+    }
+  ],
+  "actual_group": {
+    "label": "quantized-causal-pair39",
+    "sources": [
+      "tests/editor_mixed_causal_quantized_pair_test.c",
+      "src/editor/editor_mixed_causal_prepare.c",
+      "src/editor/sampler_mixed_readers.c",
+      "src/core/mixed_readers_causal.c",
+      "src/core/amigus_trigger_levels.c",
+      "src/core/mixed_scheduled_readers.c",
+      "src/core/elapsed_clock.c",
+      "src/editor/sampler_paula.c",
+      "src/editor/sampler_wavetable.c",
+      "src/core/amigus_voice_plan.c",
+      "src/editor/sampler.c",
+      "src/editor/slots.c",
+      "src/core/pcm_filtered.c",
+      "src/core/slices.c",
+      "src/core/pattern.c",
+      "src/core/document.c",
+      "src/core/pp20.c",
+      "src/core/project.c",
+      "src/core/mod_project.c",
+      "src/core/mod_inspect.c",
+      "src/core/channels.c",
+      "src/core/pcm.c",
+      "src/core/wav.c",
+      "src/core/svx.c",
+      "src/core/raw.c",
+      "src/editor/editor.c",
+      "src/editor/song.c",
+      "src/editor/view.c",
+      "src/editor/workflow.c",
+      "src/editor/sample_range.c",
+      "src/editor/wave_summary.c",
+      "src/core/sample_usage.c",
+      "src/core/event_resource.c",
+      "src/core/flow.c",
+      "src/core/pitch.c",
+      "src/core/amigus_reservation.c",
+      "src/editor/sampler_invert_song.c",
+      "src/core/render_invert.c",
+      "src/core/invert_bank.c",
+      "src/core/invert_sequence.c",
+      "src/core/invert_pcm.c",
+      "src/core/invert_loop.c",
+      "src/core/amigus_session.c",
+      "src/core/amigus_fifo.c",
+      "src/core/amigus_pcm_pack.c",
+      "src/core/studio_consumer.c",
+      "src/core/studio_pump.c",
+      "src/core/studio_queue.c",
+      "src/editor/editor_studio.c",
+      "src/editor/sampler_song.c",
+      "src/editor/sampler_studio.c",
+      "src/core/studio_song.c",
+      "src/core/studio_plan.c",
+      "src/core/render.c",
+      "src/core/timeline.c",
+      "src/core/frame_clock.c",
+      "src/core/studio_mix.c",
+      "src/core/voice.c",
+      "src/editor/wavetable_song.c",
+      "src/editor/wavetable_voices.c",
+      "src/editor/wavetable_dispatch.c",
+      "src/core/amigus_render_voice.c",
+      "src/editor/paula_preflight.c",
+      "src/core/paula_render_voice.c",
+      "src/core/amigus_wavetable_cache.c",
+      "src/core/amigus_sample_ram.c",
+      "src/core/sample_cache.c",
+      "src/core/playback_pcm.c",
+      "src/editor/editor_mixed.c",
+      "src/editor/mixed_owner.c",
+      "src/editor/mixed_transport.c",
+      "src/editor/mixed_preflight.c",
+      "src/editor/paula_voices.c",
+      "src/editor/paula_dispatch.c",
+      "src/editor/editor_wavetable.c",
+      "src/platform/sample_import.c",
+      "src/platform/raw_import.c",
+      "src/platform/mod_import.c",
+      "src/platform/pp20_import.c"
+    ],
+    "oracle": "EDITOR MIXED CAUSAL QUANTIZED PAIR PASS:39 genuine cases;8 typed pure-TRIGGER quantized pairs and31 bounded refusals;4Paula+12card/16card/count1,8/16/24 masters/cache8+16 BE+LE;literal direct levels/legacy levels/channel bytes/padding and cache HIT identity;original two windows,32 persistent pins,independent C/R/source quiet,full master capacities/exact saves/fixed-span alias/sticky pair scope; SOFTWARE_ONLY\n",
+    "compile_seconds": 120,
+    "run_seconds": 30,
+    "passed": true,
+    "executable": {
+      "bytes": 5992904,
+      "sha256": "d88012ce13a105d209f4253b045a0537932cbc1b9293fdc89d8b7a3abac09f7d",
+      "mode": 33261
+    },
+    "actual_oracle": "EDITOR MIXED CAUSAL QUANTIZED PAIR PASS:39 genuine cases;8 typed pure-TRIGGER quantized pairs and31 bounded refusals;4Paula+12card/16card/count1,8/16/24 masters/cache8+16 BE+LE;literal direct levels/legacy levels/channel bytes/padding and cache HIT identity;original two windows,32 persistent pins,independent C/R/source quiet,full master capacities/exact saves/fixed-span alias/sticky pair scope; SOFTWARE_ONLY\n"
+  },
+  "complete_six_streams": {
+    "public.stdout": {
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-quantized-pair-host-first-v2/entry.stdout",
+      "source_pin": {
+        "bytes": 591,
+        "sha256": "67cfcf2bbfdcfa5545a9d9082a682873cbd35ecc769f925bafcf7ac95a62c415",
+        "mode": 33152
+      },
+      "published_path": "evidence/enhanced-editor/editor-mixed-causal-quantized-pair-host/public.stdout",
+      "published_pin": {
+        "bytes": 591,
+        "sha256": "67cfcf2bbfdcfa5545a9d9082a682873cbd35ecc769f925bafcf7ac95a62c415",
+        "mode": 33188
+      }
+    },
+    "public.stderr": {
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-quantized-pair-host-first-v2/entry.stderr",
+      "source_pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33152
+      },
+      "published_path": "evidence/enhanced-editor/editor-mixed-causal-quantized-pair-host/public.stderr",
+      "published_pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    "compile.stdout": {
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-quantized-pair-host-first-v2/tmp/pt-causal-quantized-pair-ube2eqvx/quantized-causal-pair39-compile.stdout",
+      "source_pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      },
+      "published_path": "evidence/enhanced-editor/editor-mixed-causal-quantized-pair-host/compile.stdout",
+      "published_pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    "compile.stderr": {
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-quantized-pair-host-first-v2/tmp/pt-causal-quantized-pair-ube2eqvx/quantized-causal-pair39-compile.stderr",
+      "source_pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      },
+      "published_path": "evidence/enhanced-editor/editor-mixed-causal-quantized-pair-host/compile.stderr",
+      "published_pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    "run.stdout": {
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-quantized-pair-host-first-v2/tmp/pt-causal-quantized-pair-ube2eqvx/quantized-causal-pair39-run.stdout",
+      "source_pin": {
+        "bytes": 412,
+        "sha256": "e948e78dd1321554dd61227e6005375a6c7eb2c0f369ea3244b5c5a3ba1d5ea0",
+        "mode": 33188
+      },
+      "published_path": "evidence/enhanced-editor/editor-mixed-causal-quantized-pair-host/run.stdout",
+      "published_pin": {
+        "bytes": 412,
+        "sha256": "e948e78dd1321554dd61227e6005375a6c7eb2c0f369ea3244b5c5a3ba1d5ea0",
+        "mode": 33188
+      }
+    },
+    "run.stderr": {
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-quantized-pair-host-first-v2/tmp/pt-causal-quantized-pair-ube2eqvx/quantized-causal-pair39-run.stderr",
+      "source_pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      },
+      "published_path": "evidence/enhanced-editor/editor-mixed-causal-quantized-pair-host/run.stderr",
+      "published_pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    }
+  },
+  "source_custody": {
+    "actual_root_before_after_count": 1207,
+    "actual_root_digest": "c5d3c8e2f3580440f41178093a13d9be9579c8c973801a266e4a85906db28ce0",
+    "separate_candidate_before_after_count": 1209,
+    "separate_candidate_digest": "c6f31702df736a2bb02880886833ac76aa32e7f4b0a051f90f74f8db3c65e6e9",
+    "selected_temporary_before_after_count": 1210,
+    "selected_temporary_digest": "4af0b64b54521a589dda1c7dbf934debb1c57044633f68d60a8317dce44cc385",
+    "selected_providers": {
+      "tests/editor_mixed_causal_quantized_pair_test.c": {
+        "bytes": 25241,
+        "sha256": "b66b409470cf7e58eaad9f76045d79713f1aa59ba00216b1dc3c1bc529087b1d",
+        "mode": 33188
+      },
+      "src/editor/editor_mixed_causal_prepare.c": {
+        "bytes": 77965,
+        "sha256": "d9e39016edfb59a5fc4e65ca97e0a4ff574e18985b3f072b958f0a0c7576e37c",
+        "mode": 33188
+      },
+      "src/editor/sampler_mixed_readers.c": {
+        "bytes": 58438,
+        "sha256": "ac9416b8cabf530c913792dfffd88d0fd8f23af4b6de91c010f391cc2ddca800",
+        "mode": 33188
+      },
+      "src/core/mixed_readers_causal.c": {
+        "bytes": 55184,
+        "sha256": "d2298f135bd7cdcff35da2893dd5d2e6bac808176bd5dc64d017e3ac63a5f5e7",
+        "mode": 33188
+      },
+      "src/core/amigus_trigger_levels.c": {
+        "bytes": 3763,
+        "sha256": "f5a5ecc8e3a5f2583ea01421a8cff66eef11ece2f1987a6f3e04479de63baaf3",
+        "mode": 33188
+      },
+      "src/core/mixed_scheduled_readers.c": {
+        "bytes": 45150,
+        "sha256": "2bf59e3f756a8f7fa924b743c16ad99067d7c533d108cc668859fd13b8f4b463",
+        "mode": 33188
+      },
+      "src/core/elapsed_clock.c": {
+        "bytes": 3917,
+        "sha256": "7db37ec7184235f0776ba773996271641b0d0a8a0efcde3abb1978ab6b414ea8",
+        "mode": 33188
+      },
+      "src/editor/sampler_paula.c": {
+        "bytes": 7401,
+        "sha256": "bbab9cdb221b03d3eb402d615aba0f54a4d4e4a5e8b637c6856b66d04ea3f03e",
+        "mode": 33188
+      },
+      "src/editor/sampler_wavetable.c": {
+        "bytes": 6727,
+        "sha256": "98784fff3238d96b91685f43a2b41f7bc93fd3be49f91eda5599a9089f3e634b",
+        "mode": 33188
+      },
+      "src/core/amigus_voice_plan.c": {
+        "bytes": 2018,
+        "sha256": "289c7c3a6b8b1932d219bc61602ba6bd925cbfd3b24e95cbc8aa6f1642134964",
+        "mode": 33188
+      },
+      "src/editor/sampler.c": {
+        "bytes": 64117,
+        "sha256": "91a8025e8ba74d8211f97037285177d0f0412d3c76fa1422ed2b48df0351ff4e",
+        "mode": 33188
+      },
+      "src/editor/slots.c": {
+        "bytes": 3233,
+        "sha256": "60ab6a784d4bc47285bb436b975cdd6ee0bad4743bdf9f0817837d818645f7fa",
+        "mode": 33188
+      },
+      "src/core/pcm_filtered.c": {
+        "bytes": 4604,
+        "sha256": "198e436dd49fbc3984cc612554961bd70debad6b8ba4b4b9b4daa8020715a5c9",
+        "mode": 33188
+      },
+      "src/core/slices.c": {
+        "bytes": 6060,
+        "sha256": "2951045844f6fdebdd80afe12fe7a5afc1f37bf837c2f49d840f14867835342f",
+        "mode": 33188
+      },
+      "src/core/pattern.c": {
+        "bytes": 15753,
+        "sha256": "0d22aff4b63fae85fa44f063ba6c2eeba37467843e4fcceb493037036366431e",
+        "mode": 33188
+      },
+      "src/core/document.c": {
+        "bytes": 9127,
+        "sha256": "be88c9a4ad7aa31cc6df7446673c0bed972776918b32f31ef2dc6260528b196a",
+        "mode": 33188
+      },
+      "src/core/pp20.c": {
+        "bytes": 7187,
+        "sha256": "3f03dac4f224f54a72437370d94e1cd09ce9222a3748a0e805181ae26c5f1465",
+        "mode": 33188
+      },
+      "src/core/project.c": {
+        "bytes": 47003,
+        "sha256": "f1bad97dc044e3976936be95c4e42051e8b7a79aab643a1c984a14a1dd24c75a",
+        "mode": 33188
+      },
+      "src/core/mod_project.c": {
+        "bytes": 23640,
+        "sha256": "793c9ece248b586dd75e7b3ffefefe446bfbc6d4cc476fc2a61a4a1ce8877b09",
+        "mode": 33188
+      },
+      "src/core/mod_inspect.c": {
+        "bytes": 3513,
+        "sha256": "278f601c17ad72a095e6eb17c4f5bbe321bf342edebacf7598ca830f2743b511",
+        "mode": 33188
+      },
+      "src/core/channels.c": {
+        "bytes": 6996,
+        "sha256": "b6316f4a19e737d3f5a19bd04f22f43b0da72188d2a0623404dc4a27bc9c622d",
+        "mode": 33188
+      },
+      "src/core/pcm.c": {
+        "bytes": 7061,
+        "sha256": "ddb208ff5dd445c73d1b573eac1aed3e74bc654fefc2662627d4c0d760f99266",
+        "mode": 33188
+      },
+      "src/core/wav.c": {
+        "bytes": 7200,
+        "sha256": "499264a12362a271c20dcc13f4e5e38a470aa5a4ddce90a44c5193f4d8be916f",
+        "mode": 33188
+      },
+      "src/core/svx.c": {
+        "bytes": 7817,
+        "sha256": "4712a8d846dd8e5a36fbbdb9b2db7c2fc71ed215be6b114da7d0285cebf69813",
+        "mode": 33188
+      },
+      "src/core/raw.c": {
+        "bytes": 3920,
+        "sha256": "460fe21a893b38f14e4af797022f6409504b125f562509b59efef713dc704377",
+        "mode": 33188
+      },
+      "src/editor/editor.c": {
+        "bytes": 69155,
+        "sha256": "46d908ba5d89742fcdb8da337d01fe4af4decfeac9bfb883a21eb2920bc4b092",
+        "mode": 33188
+      },
+      "src/editor/song.c": {
+        "bytes": 8937,
+        "sha256": "0e6c75429891da87865e3e2242057401db81129b87a4963dc3730f3f1786559c",
+        "mode": 33188
+      },
+      "src/editor/view.c": {
+        "bytes": 44209,
+        "sha256": "a23ecde830cd23edcc332c93b924bf470161f0114415bece02d82fab2390cbdb",
+        "mode": 33188
+      },
+      "src/editor/workflow.c": {
+        "bytes": 24518,
+        "sha256": "9f1d0f51835d0e67264a2f6f30aa447d635a9affdbec99ba82f15b62492fe76b",
+        "mode": 33188
+      },
+      "src/editor/sample_range.c": {
+        "bytes": 5626,
+        "sha256": "694e14d1a665f2a9b5c844a40e79a27ad1c56eedd5a2c6e379aace8f235980c4",
+        "mode": 33188
+      },
+      "src/editor/wave_summary.c": {
+        "bytes": 8496,
+        "sha256": "3e4501324e5888cf6c7b3497c7c6dcb60ef8dcf75e4a53d4d57b1222ae06ff34",
+        "mode": 33188
+      },
+      "src/core/sample_usage.c": {
+        "bytes": 8253,
+        "sha256": "14520084e266041ea257bc7e1b5145f9322c5549e4e4377f5b962232f089b160",
+        "mode": 33188
+      },
+      "src/core/event_resource.c": {
+        "bytes": 11524,
+        "sha256": "77b4dd85cd2240c8ac0aa9037a5acfcbccc3fa7c70ae5e548c406fe063846970",
+        "mode": 33188
+      },
+      "src/core/flow.c": {
+        "bytes": 8904,
+        "sha256": "c1850d6202a01805876ce6afa903ac4ae145757410e7597d70f2601903e79783",
+        "mode": 33188
+      },
+      "src/core/pitch.c": {
+        "bytes": 6193,
+        "sha256": "9088859aa6a2812510b3a28334420030add960afa5f2cca3b41946018f0c04d5",
+        "mode": 33188
+      },
+      "src/core/amigus_reservation.c": {
+        "bytes": 3456,
+        "sha256": "9d448f569e2f86331085343626e2b653e45c1fb96aaaf6c709f0eefe168e1e27",
+        "mode": 33188
+      },
+      "src/editor/sampler_invert_song.c": {
+        "bytes": 5941,
+        "sha256": "5aef31d4ea1bef6f122712702234469527b403ad724afa1822588c39101ca5a9",
+        "mode": 33188
+      },
+      "src/core/render_invert.c": {
+        "bytes": 11294,
+        "sha256": "aa36e316b315c85d357ab8e8ce9cd54d810899481c4ffafe313272d8bf34bc81",
+        "mode": 33188
+      },
+      "src/core/invert_bank.c": {
+        "bytes": 6792,
+        "sha256": "b374b4e88ead336b6c7566038c5a2f090552fc3e562751f9ef7ec2a931005d5f",
+        "mode": 33188
+      },
+      "src/core/invert_sequence.c": {
+        "bytes": 2132,
+        "sha256": "f290f38c685ba81b0b2503e52ae43071021d25f00c6c8ecc8eda12f95086fa51",
+        "mode": 33188
+      },
+      "src/core/invert_pcm.c": {
+        "bytes": 4485,
+        "sha256": "f9b6b4259468f27cab2064831d1d62efd28c751c51de59073baf4b39e59c7404",
+        "mode": 33188
+      },
+      "src/core/invert_loop.c": {
+        "bytes": 887,
+        "sha256": "3df53bcdf5851e16aae2bdd34d2ee97c7c0b4ae4fd1333c53b4994f0a3c0e852",
+        "mode": 33188
+      },
+      "src/core/amigus_session.c": {
+        "bytes": 4299,
+        "sha256": "672fc5b6e2b720fb74db90040be6951eb92fc894e78351b8ab6c5a9917113460",
+        "mode": 33188
+      },
+      "src/core/amigus_fifo.c": {
+        "bytes": 1529,
+        "sha256": "5c14614a81f05cdac1820be120700b9d9ed29750d1e26cc621fb1f6fadad2cef",
+        "mode": 33188
+      },
+      "src/core/amigus_pcm_pack.c": {
+        "bytes": 1364,
+        "sha256": "3464933782918baab33ee8e1ca76a7e959897284b98e24015625707cefdfcac9",
+        "mode": 33188
+      },
+      "src/core/studio_consumer.c": {
+        "bytes": 2276,
+        "sha256": "fe871a573e0746205a80adf051252ec8429ffc013f00c20d4980f5d9ee324573",
+        "mode": 33188
+      },
+      "src/core/studio_pump.c": {
+        "bytes": 1829,
+        "sha256": "c62e46bbff6556ef89197f75383c885c81a96bd9dc8b393b1a1e9539f38d2d4d",
+        "mode": 33188
+      },
+      "src/core/studio_queue.c": {
+        "bytes": 2270,
+        "sha256": "31a58a5e514bce52606e875e642865db42676cec0dc84d3aae3c4b5e46b5b7e5",
+        "mode": 33188
+      },
+      "src/editor/editor_studio.c": {
+        "bytes": 14145,
+        "sha256": "4a7a98f4fc6f8c5e77c4856a0ebb30360ca0c32bc3ea00930a9b53de27df2c7d",
+        "mode": 33188
+      },
+      "src/editor/sampler_song.c": {
+        "bytes": 8188,
+        "sha256": "ebba4a380a76b9a367fe28d84c5854de765e89b527c4220c48906946b681d0aa",
+        "mode": 33188
+      },
+      "src/editor/sampler_studio.c": {
+        "bytes": 679,
+        "sha256": "33849a9ebd51025135c25f0e96f5d31a3f5a9d507176e343a02dbe973439fbab",
+        "mode": 33188
+      },
+      "src/core/studio_song.c": {
+        "bytes": 8819,
+        "sha256": "8271adb666712681e8cb31730dc2e548437039f3001baafd087b2e0684350b43",
+        "mode": 33188
+      },
+      "src/core/studio_plan.c": {
+        "bytes": 3484,
+        "sha256": "f594a572f7a33af7f5167f2223c61e894b7a5ea7d8289e1910667d41279da5fe",
+        "mode": 33188
+      },
+      "src/core/render.c": {
+        "bytes": 63608,
+        "sha256": "acc53af54275d5ec481ca2128dcf72fde305bf91ed28295fd781a81f42966936",
+        "mode": 33188
+      },
+      "src/core/timeline.c": {
+        "bytes": 1598,
+        "sha256": "2296df1f1d13336bacb40cd867268dbd1c52d1ed0353256f5022da536516effd",
+        "mode": 33188
+      },
+      "src/core/frame_clock.c": {
+        "bytes": 1209,
+        "sha256": "e5d9c6c9dc7ea48daf6d099dc5ade8ec2260d8009f40eebd26fa32bd06490a22",
+        "mode": 33188
+      },
+      "src/core/studio_mix.c": {
+        "bytes": 7456,
+        "sha256": "21b58fce2a7fe58ee0f21b9cfde987a9480018921cacfd96181ca583a42cf3d1",
+        "mode": 33188
+      },
+      "src/core/voice.c": {
+        "bytes": 11427,
+        "sha256": "9da52c6a82f9ea753655ed4d196946198316cb5327078ffbf354a6dc66e48c68",
+        "mode": 33188
+      },
+      "src/editor/wavetable_song.c": {
+        "bytes": 34130,
+        "sha256": "baeca221d22d3a34732860fbf0cb79150d7947a40bc3d678c60bf8941c6ffc9c",
+        "mode": 33188
+      },
+      "src/editor/wavetable_voices.c": {
+        "bytes": 4387,
+        "sha256": "46768220e60a19fdddfa6a45d6d7d91928b0d40db00c1bceb45bc7aac22d1cd4",
+        "mode": 33188
+      },
+      "src/editor/wavetable_dispatch.c": {
+        "bytes": 19317,
+        "sha256": "ebeadff7f05217af3f66bbe514053022638195e806a70b25c7e73a2ed636ea64",
+        "mode": 33188
+      },
+      "src/core/amigus_render_voice.c": {
+        "bytes": 3763,
+        "sha256": "b777facd29ca03e8e247697cec4b71f69af0d71cd6e9508eee7270be3c98ca3a",
+        "mode": 33188
+      },
+      "src/editor/paula_preflight.c": {
+        "bytes": 22069,
+        "sha256": "0e4a6f90cdec366856b0a2325502185746f9a2bab0ff3118d6c5f346dde5a82d",
+        "mode": 33188
+      },
+      "src/core/paula_render_voice.c": {
+        "bytes": 1997,
+        "sha256": "c037e6d3e59d6c898e78ebba05036d960ced3a2758a08cf36adbdcd4780ecc82",
+        "mode": 33188
+      },
+      "src/core/amigus_wavetable_cache.c": {
+        "bytes": 6165,
+        "sha256": "c634faa6c6c6af0086ec62a92e49ee2d6b2f90adbb0ebd0acabb901c497cae8d",
+        "mode": 33188
+      },
+      "src/core/amigus_sample_ram.c": {
+        "bytes": 3973,
+        "sha256": "5c25d93bf9166b568fccf599b392a4ca11c24923efc915f0dd4e4dfad7e1fa9a",
+        "mode": 33188
+      },
+      "src/core/sample_cache.c": {
+        "bytes": 4018,
+        "sha256": "ebe0d55d650ae0bc0aed9f5a5628dca942a6914082c25366dfe52dcdddbbf39a",
+        "mode": 33188
+      },
+      "src/core/playback_pcm.c": {
+        "bytes": 11344,
+        "sha256": "f00995c1ca81176fc244968b4276b41624767f42c2963eb90482f23953d09a1f",
+        "mode": 33188
+      },
+      "src/editor/editor_mixed.c": {
+        "bytes": 3538,
+        "sha256": "cd175345384d5aa2f498249d23bc660624820423c734e9d63cb86c7ee0122f25",
+        "mode": 33188
+      },
+      "src/editor/mixed_owner.c": {
+        "bytes": 33320,
+        "sha256": "580721245098717a884936c4b0e084d1d1e1453d876c82c1fdc1a92a0cb0b4fb",
+        "mode": 33188
+      },
+      "src/editor/mixed_transport.c": {
+        "bytes": 3140,
+        "sha256": "ec84da17e583b92c217bbd65485177180a895d2db22098fcea69ecf53f64f37d",
+        "mode": 33188
+      },
+      "src/editor/mixed_preflight.c": {
+        "bytes": 22982,
+        "sha256": "394994b3129933cd99008bcefbdd9b4e02db5f5576634886857ac6c944b6b893",
+        "mode": 33188
+      },
+      "src/editor/paula_voices.c": {
+        "bytes": 6268,
+        "sha256": "fc7cc40e8549b2857f6b703e7521a30b6f85761b42fe13ae049c1a4c82feef86",
+        "mode": 33188
+      },
+      "src/editor/paula_dispatch.c": {
+        "bytes": 16681,
+        "sha256": "f8cba540ddb8a7f4dc6551aa217abc2e791f567101e57f975198b80c8f468e1a",
+        "mode": 33188
+      },
+      "src/editor/editor_wavetable.c": {
+        "bytes": 5133,
+        "sha256": "17bc84e6cca8767179aa8a106822539cf9a589d94fd8839fc9734966df2b4ec9",
+        "mode": 33188
+      },
+      "src/platform/sample_import.c": {
+        "bytes": 1903,
+        "sha256": "f609332bb26f4abab4bdd85d084b98ae1fba329f9ad918478aad809f97526f2b",
+        "mode": 33188
+      },
+      "src/platform/raw_import.c": {
+        "bytes": 5153,
+        "sha256": "a4286e55accb510e4deedbb4f1a749c7a74010b3c3adb8318c3fbbf9be93c848",
+        "mode": 33188
+      },
+      "src/platform/mod_import.c": {
+        "bytes": 1860,
+        "sha256": "855e2d3633e83397cf3232aba83c89f044f64f0f09aa5345a9208a638ff870ba",
+        "mode": 33188
+      },
+      "src/platform/pp20_import.c": {
+        "bytes": 2149,
+        "sha256": "1dcf59769e988a0ab802dbc808e45b8097f47cd46f53510dd4fd391c5c535822",
+        "mode": 33188
+      }
+    },
+    "root_protected16_before_after_exact": true,
+    "candidate_optional_watch16_before_after_exact": true,
+    "raw_font_before_after": {
+      "bytes": 580,
+      "sha256": "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091",
+      "mode": 33188
+    },
+    "compiler_before_after": {
+      "bytes": 200560,
+      "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+      "mode": 33261
+    },
+    "raw_font_exact": true,
+    "compiler_exact": true,
+    "temporary_source_cleanup": "OWNED_CONTEXT_REMOVED",
+    "source_parent_positive_SAVED_absence": true,
+    "root_and_candidate_external_pt_font_h_absent": true
+  },
+  "strict_flags": [
+    "-std=c99",
+    "-O1",
+    "-g",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-UNDEBUG",
+    "-fsanitize=address,undefined",
+    "-Isrc/core",
+    "-I."
+  ],
+  "sanitizer_options": {
+    "ASAN_OPTIONS": "halt_on_error=1:abort_on_error=1",
+    "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1"
+  },
+  "full_oracle": {
+    "text": "EDITOR MIXED CAUSAL QUANTIZED PAIR PASS:39 genuine cases;8 typed pure-TRIGGER quantized pairs and31 bounded refusals;4Paula+12card/16card/count1,8/16/24 masters/cache8+16 BE+LE;literal direct levels/legacy levels/channel bytes/padding and cache HIT identity;original two windows,32 persistent pins,independent C/R/source quiet,full master capacities/exact saves/fixed-span alias/sticky pair scope; SOFTWARE_ONLY\n",
+    "bytes": 412,
+    "sha256": "e948e78dd1321554dd61227e6005375a6c7eb2c0f369ea3244b5c5a3ba1d5ea0"
+  },
+  "recorded_bounds_and_elapsed": {
+    "compile_limit_seconds": 120,
+    "run_limit_seconds": 30,
+    "public_limit_seconds": 280,
+    "overall_success_limit_seconds": 300,
+    "compile_elapsed": 20.02399575000163,
+    "run_elapsed": 0.7298216249910183,
+    "public_elapsed": 22.541571000008844,
+    "outer_elapsed": 26.26612462499179,
+    "whole_helper_limit_not_independently_OS_enforced": true
+  },
+  "private_artifacts_preserved_not_published_raw": {
+    "executable_pin": {
+      "bytes": 5992904,
+      "sha256": "d88012ce13a105d209f4253b045a0537932cbc1b9293fdc89d8b7a3abac09f7d",
+      "mode": 33261
+    },
+    "durable_closure_from_receipt": {
+      "root_mode": 16832,
+      "attempt_name": "pt-causal-quantized-pair-ube2eqvx",
+      "attempt": {
+        "root_mode": 16832,
+        "files": {
+          "quantized-causal-pair39": {
+            "bytes": 5992904,
+            "sha256": "d88012ce13a105d209f4253b045a0537932cbc1b9293fdc89d8b7a3abac09f7d",
+            "mode": 33261
+          },
+          "quantized-causal-pair39-compile.stderr": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "mode": 33188
+          },
+          "quantized-causal-pair39-compile.stdout": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "mode": 33188
+          },
+          "quantized-causal-pair39-run.stderr": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "mode": 33188
+          },
+          "quantized-causal-pair39-run.stdout": {
+            "bytes": 412,
+            "sha256": "e948e78dd1321554dd61227e6005375a6c7eb2c0f369ea3244b5c5a3ba1d5ea0",
+            "mode": 33188
+          },
+          "quantized-causal-pair39.dSYM/Contents/Info.plist": {
+            "bytes": 652,
+            "sha256": "55976423d58ef67f183444bd0073788f368b9713d97c592848094e24a114f53b",
+            "mode": 33188
+          },
+          "quantized-causal-pair39.dSYM/Contents/Resources/DWARF/quantized-causal-pair39": {
+            "bytes": 2451376,
+            "sha256": "1de491fb6b9a1a407a735d44da356f9f76d96b2c74808ffc20912b8ab0ffb7e5",
+            "mode": 33188
+          },
+          "quantized-causal-pair39.dSYM/Contents/Resources/Relocations/aarch64/quantized-causal-pair39.yml": {
+            "bytes": 275,
+            "sha256": "3e856082db2e0457a7c26e0f7aeefac79afb859694f6563aaf80f0c1ce650b32",
+            "mode": 33188
+          },
+          "receipt.json": {
+            "bytes": 864007,
+            "sha256": "4f248c441990954a610457e8aa9e10c6a21704df89e0fb85aabb68f7aeb05c62",
+            "mode": 33188
+          }
+        },
+        "directories": {
+          "quantized-causal-pair39.dSYM": {
+            "mode": 16877
+          },
+          "quantized-causal-pair39.dSYM/Contents": {
+            "mode": 16877
+          },
+          "quantized-causal-pair39.dSYM/Contents/Resources": {
+            "mode": 16877
+          },
+          "quantized-causal-pair39.dSYM/Contents/Resources/DWARF": {
+            "mode": 16877
+          },
+          "quantized-causal-pair39.dSYM/Contents/Resources/Relocations": {
+            "mode": 16877
+          },
+          "quantized-causal-pair39.dSYM/Contents/Resources/Relocations/aarch64": {
+            "mode": 16877
+          }
+        }
+      },
+      "xcrun_db": {
+        "state": "PRESENT",
+        "pin": {
+          "bytes": 495,
+          "sha256": "1865dbfa1feba4ab70a004b4bc7ed034dacbfb87c56b0596a43cdf68f9c907a0",
+          "mode": 33152
+        }
+      }
+    },
+    "no_binary_debug_cache_raw_files_in_this_published_group": true
+  },
+  "original_failures_preserved": {
+    "quantizedV1_rc_minus6_retains_failed_status": true,
+    "earlier_CLI_wrapper_failures_unchanged": true,
+    "one_armed_native90_failure_and_late_recovery_unchanged": true
+  },
+  "limits": [
+    "The full native/emulator/physical/playback pipeline is not tested by this HOST group.",
+    "Saved per-call positive own-group quiet is not a fresh process probe or service/target absence claim.",
+    "Standard HOST allocations are not native Fast/Chip/DMA/device completion qualification.",
+    "Exact live musical scheduling remains a requirement; these original clock/window assertions are software fixture evidence only.",
+    "Before-master song-pair production, rolling/CONTROL/STOP and enhanced PLAY are unfinished."
+  ],
+  "private_full_receipts_and_complete_source_maps_not_bundled": true,
+  "private_absolute_paths_are_local_custody_provenance_only": true
+}

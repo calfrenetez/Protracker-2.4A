@@ -6520,3 +6520,48 @@ Quantized causal pair qualification,before-master genuine producer composition,
 whole-song/native PLAY,paired source/timer binding,whole-stack/WCET/IRQ,real
 Fast/Chip/device completion/stop,exact live timing,audio and listening remain
 separate unfinished work. The user's exact scheduling decision is unchanged.
+
+
+## Finite quantized and two-ticket RAM HOST milestones — 7 October 2026
+
+Two separate focused HOST groups now qualify finite typed pure-TRIGGER pairs
+using already-established masters. The corrected quantized V2 group passed all
+39 genuine cases through 79 real units and the complete 412-byte oracle; its
+original V1 fixture capacity assertion/run RC -6 stays FAILED and preserved.
+The new separate ordinary-RAM causal port passed all 34 genuine cases through
+80 real units and the complete 502-byte oracle. Both public entries and both
+C calls per group passed once under unchanged strict C99/assertions/ASan/UBSan
+flags and compile 120/run 30/public 280/overall 300 bounds, with full streams,
+individual positive process quiet, exact source/font/compiler custody and owned
+temporary source removal. The independent SAVED audits bind that HOST scope.
+
+The quantized coverage checks direct/legacy levels and exact channel bytes,
+padding, cache HIT identity, fixed-span alias refusal, full 8/16/24-bit master
+capacities and exact encoded saves. The RAM source holds two original 960/1920
+tickets and independent two-command/32-reader ownership, preserves EARLY, admits
+the successor only after genuine actual first completion/registry/tombstone and
+never dereferences released predecessor C. All 20 slots and full geometry/card
+tails, expected-only dependencies, uncertain/reentrant retention, late/post-clock
+failures and once source shutdown with separate later read-only quiet remain
+checked. Prediction alone is not ACTIVE authority. Existing one-armed source,
+master allocation, selective Paula/AmiGUS caches, save/export and direct 24-bit
+Studio architecture are unchanged.
+
+See [typed pair contract](EDITOR_MIXED_CAUSAL_PREPARE.md),
+[two-ticket RAM HOST contract](NATIVE_MIXED_RAM_PORT.md),
+[quantized39 evidence](../evidence/enhanced-editor/editor-mixed-causal-quantized-pair-host/README.md)
+and [two-ticket34 evidence](../evidence/enhanced-editor/native-mixed-causal-two-ticket-ram-host/README.md).
+They ran separately from the same actual 1207 source with only their own two/four
+additions. The combined six-path publication projects 1213 and adds no joint
+runtime or historical five-group replay. Earlier CLI V2/V3 wrapper failures and
+the one-armed native 90-second failure/recovery remain unchanged, not promoted to PASS.
+
+Before-master exactly-two song production through this typed causal path is
+still unfinished. Its next implementation must install a genuine early SOURCE
+hook before master mutation, establish/pin/refresh all slots, complete the full
+audit/take-once real EOF replay before cache/publication, preserve original frames
+and retain independent C/R/source ownership through close. The existing default
+whole-song pipeline is unchanged. Whole-song/rolling refill, CONTROL/musical STOP,
+enhanced native PLAY/timer binding, native Fast/Chip/IRQ/WCET/whole stack, physical
+device capacity/completion/stop, exact live timing, audio and listening remain
+unqualified. The user's exact scheduling choice is unchanged.

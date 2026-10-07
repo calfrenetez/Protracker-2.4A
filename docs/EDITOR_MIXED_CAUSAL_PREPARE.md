@@ -107,3 +107,56 @@ facts, failed wrapper statuses and the separate SAVED content admission.
 The frozen V3 source review (`567b904b…`) and accepted saved HOST audit (`9c4dc92c…`) cover the genuine focused43 fixture and original default factory/controller, causal26 and publication56 groups. The actual inner receipt is `f9a0f448…`; all ten calls returned RC0 and the five complete oracles are 337/1280/2273/521/404 bytes. This is the accepted current-tree software qualification. The separate current-entry evidence accepts the composed seven parser observations and the actual clean-baseline focused43/default-controller C integration through full saved-content checks; it does not execute the other three C groups on that baseline. Both the original CLI V2 error-text gate and V3 TMPDIR gate remain FAILED. Keep V1/V2 failures and the distinct native 90-second failure/recovery/build evidence separately; none is relabelled by the V3 result.
 
 The accepted software pass establishes only the exact production-linked assertions, oracles and sanitizer scope. Native ABI/allocator placement, stack/WCET/IRQ behavior and an actual enhanced PLAY caller still require separate work. Exact live musical scheduling requires a deadline-capable source and backend that activate the complete queued pair at the original times; the user's exact-schedule choice remains in force. Card capacity, upload ordering/completion, all-voice stop, physical audio and human listening require their own acceptance. No jitter allowance, forced retry, hardware readiness or deferred ZooperTracker feature follows from this facade.
+
+
+## Finite quantized pair HOST qualification — 7 October 2026
+
+The existing typed quantized pair path now has a separately qualified genuine
+HOST fixture and portable entry,
+`tests/test_editor_mixed_causal_quantized_pair.py`. The corrected V2 fixture
+passed all 39 cases (eight finite pairs and 31 bounded refusals) through 79 real
+linked C units under strict C99, assertions, ASan and UBSan. Its complete
+412-byte oracle checks direct and legacy levels, channel bytes and padding, cache
+HIT identity, original two windows, independent C/R/source lifetimes, full master
+capacities, exact saves, fixed-span alias refusal and the sticky one-pair scope.
+It uses already-established 8/16/24-bit masters and 8/16-bit cache conversions.
+Run this focused entry from the repository root with
+`python3 -B tests/test_editor_mixed_causal_quantized_pair.py`; it does not run
+the inherited 43-case suite.
+
+The first V1 fixture attempt remains FAILED: compile RC0, run RC -6 at a fixture
+caller-capacity precondition, with no full success oracle. The separate V2 changes
+only the unregistered caller-owned test backing before opening the facade, so the
+full fixed batch is genuinely readable when testing alias rejection. Production
+workspace sizes, guards and the intended refusal assertions were unchanged. The
+V2 public entry and both C calls passed with full streams, separate positive
+process quiet and owned temporary source removal. This completes the finite
+quantized HOST coverage; it does not relabel any earlier wrapper/native failure.
+See [quantized pair HOST evidence](../evidence/enhanced-editor/editor-mixed-causal-quantized-pair-host/README.md).
+
+## Separate two-ticket ordinary-RAM source
+
+`native_mixed_causal_ram_port` is a separate opt-in source for the finite genuine
+two-TRIGGER owner. Its 34-case HOST fixture qualifies two original 960/1920 arms,
+EARLY preservation, actual first post-clock/tombstone authority, safe disposed
+predecessor C handling and independent two-command/32-reader proofs. All 20
+registry slots, unused action tails, pending/unknown transfer outcomes and source
+shutdown once followed by separate read-only quiet remain checked. Prediction
+alone grants no ACTIVE authority. The existing one-armed RAM port is unchanged.
+See [two-ticket RAM contract and HOST scope](NATIVE_MIXED_RAM_PORT.md) and
+[separate HOST evidence](../evidence/enhanced-editor/native-mixed-causal-two-ticket-ram-host/README.md).
+
+These two focused groups ran separately from the same 1,207-file source: the
+quantized candidate added only its two test paths; the RAM candidate added only
+its four port/test paths. Each generated the literal font solely in an owned
+temporary tree. Their six-path publication projects 1,213 source/test files, but
+is not a combined-tree runtime or a replay of the earlier five groups.
+
+Both fixtures start with established masters. The new exactly-two pure-TRIGGER
+before-master song producer still needs implementation and qualification: an
+early genuine SOURCE hook, full all-slot establishment/pins/refresh, complete
+audit and take-once real EOF replay before cache/publication, and original-frame
+C/R/source ownership through close. The existing default whole-song producer is
+unchanged. No rolling refill, CONTROL/musical STOP, enhanced PLAY, native paired
+timer/source, physical completion/stop, exact live timing or listening follows
+from these finite HOST passes. The user's exact scheduling choice stays in force.

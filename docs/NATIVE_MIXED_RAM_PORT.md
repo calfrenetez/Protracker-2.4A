@@ -159,3 +159,52 @@ command correction completed only the remaining65 group. See the
 No updated native crossbuild or exact target execution has occurred. The old
 deadline failure staysFAILED; this change establishes no cause or measured native
 speedup. Native90/stack131072 and all diagnostic success markers remain required.
+
+
+## Separate finite two-ticket causal ordinary-RAM port — 7 October 2026
+
+The new `src/native/readers_ram/native_mixed_causal_ram_port.c/.h` is separate
+from the existing one-armed port and its Fast/Chip native fixture above. It binds
+the genuine typed causal owner and exactly two future pure-TRIGGER tickets using
+ordinary HOST RAM, with no timer/CIA/MMIO/PLAY or device callback. Both original
+960/1920 arm records precede effects; an early successor preserves its original
+packet and schedule. Only actual first commit/adoption, matching original clocks,
+the complete registry and genuine causal tombstone enable the successor. A copied
+prediction or disposed predecessor command address is never dereferenced or used
+as a substitute for actual ACTIVE/completion authority.
+
+The genuine 34-case fixture covers 14 finite pair successes plus 20 failures or
+refusals, mixed four-Paula/twelve-card and all-card cases, 8/16/24-bit masters and
+8/16-bit cache conversions. It checks independent two-command/32-reader quiet,
+expected-only second dependencies, clean arm0 versus uncertain/reentrant
+retention, late/post-clock/residency failures, full all-20 registry and unused
+geometry/card tails, full master capacities, exact saves and zero owned ledgers.
+C retirement and persistent R retirement stay separate. Source shutdown is
+attempted once, with any later final quiet observation read-only. Uncertain proof
+retains ownership; it does not imply device completion or force release.
+
+`python3 -B tests/test_native_mixed_causal_ram_port.py` is the portable focused
+entry. Its separate 80-unit strict C99/assertions/ASan/UBSan compile and fixture
+passed once, as did the enclosing public entry. The complete 502-byte oracle,
+all six full streams, actual return codes, individual positive process quiet
+and owned temporary source removal are retained in
+[two-ticket RAM HOST evidence](../evidence/enhanced-editor/native-mixed-causal-two-ticket-ram-host/README.md).
+The original compile 120/run 30/public 280/overall 300 bounds were not extended.
+
+This is finite ordinary-RAM HOST acceptance only. This exact new port/fixture has
+no native crossbuild, Amiberry or real-A1200 qualification. No actual Fast/Chip
+placement, DMA, physical AmiGUS capacity/upload ordering/completion/voice stop,
+IRQ/whole stack/WCET, exact live musical timing, audio or human listening is
+accepted. The original one-armed native 90-second gate stays FAILED, including
+its separately preserved late completion/recovery records. The checksum
+qualification and pending service/transport maintenance remain separate.
+
+The typed quantized 39-case fixture has its own separate
+[HOST evidence](../evidence/enhanced-editor/editor-mixed-causal-quantized-pair-host/README.md).
+Both groups were run against current 1207 plus only their own two/four paths;
+publication of all six paths is a source projection, not a combined runtime.
+The new before-master, complete audited song-pair producer remains unfinished;
+it must install a genuine early SOURCE hook, establish/pin/refresh every slot and
+finish audit/take-once EOF replay before either cache or packet publication.
+Existing masters, selective caches, master-preserving save/export, direct 24-bit
+Studio mixing and the accepted classic layout remain unchanged.

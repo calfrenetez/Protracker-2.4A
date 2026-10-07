@@ -208,3 +208,30 @@ it must install a genuine early SOURCE hook, establish/pin/refresh every slot an
 finish audit/take-once EOF replay before either cache or packet publication.
 Existing masters, selective caches, master-preserving save/export, direct 24-bit
 Studio mixing and the accepted classic layout remain unchanged.
+
+
+## Two-ticket allocation ownership hooks — 8 October 2026
+
+Five test paths add complete carrier checks, aligned Fast allocation bookkeeping
+and selective Chip allocation hooks to the existing genuine 34-case fixture.
+Original pointer, callback context and request size must match before release;
+each case ends with zero owned ledgers. Five reversible fixture edits restore
+the accepted original exactly. Production port behavior is unchanged.
+
+The strict 80-linked-C-unit HOST entry passed once with ASan/UBSan and the full
+4,084-byte output: 34 ordered BEGIN/END pairs, the unchanged 502-byte oracle and
+hook footer. Successful assertions enforce 34 pre-begin bindings and 52
+selective heap-model allocations; those counts are not independent device
+traces. Compile/run/public/overall elapsed times were 17.971/0.646/20.373/23.649
+seconds, within the unchanged 120/30/280/300 bounds. All three saved processes
+were reaped with positive owned-group absence. Full streams and custody are
+preserved; the temporary source tree was removed.
+
+The separate Exec wrapper retains the bounded Fast pool, reserve-checked
+AllocMem/FreeMem for Chip data, TypeOfMem and task/layout/stack checks. Its exact
+native build and runtime are NOT RUN in this evidence. Fake card bytes remain
+ordinary Fast memory. The earlier one-armed native 90-second failure stays
+FAILED. No actual timers, card capacity, ordering, completion, voice stop, DMA,
+audio or listening acceptance follows. The new before-master producer passed a
+separate HOST entry; no joint runtime is claimed. See
+[scoped allocation-hook evidence](../evidence/enhanced-editor/two-ticket-native-allocation-hooks-host/README.md).

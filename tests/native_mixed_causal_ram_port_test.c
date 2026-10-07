@@ -4,6 +4,7 @@
  * All other calloc/free and all production allocator calls remain genuine. */
 #include <stdlib.h>
 #include <stddef.h>
+#define PT_NATIVE_MIXED_CAUSAL_RAM_PORT_TEST_VERSION 1U
 #include "../src/native/readers_ram/native_mixed_causal_ram_port.h"
 static void *cr_calloc(size_t,size_t);
 #define calloc cr_calloc
@@ -11,6 +12,11 @@ static void *cr_calloc(size_t,size_t);
 #include "editor_mixed_causal_prepare_test.c"
 #undef PT_EDITOR_MIXED_CAUSAL_PREPARE_TEST_MAIN
 #undef calloc
+/* Optional wrapper-owned zero allocation, restored only after the genuine
+ * carrier interception. Default HOST expansion remains ordinary calloc. */
+#ifdef PT_NATIVE_MIXED_CAUSAL_RAM_PORT_TEST_CALLOC
+#define calloc PT_NATIVE_MIXED_CAUSAL_RAM_PORT_TEST_CALLOC
+#endif
 
 struct cr_arm {
     struct pt_mixed_causal_registration registration;
@@ -152,6 +158,9 @@ static int cr_bad_packet(void *context,struct pt_mixed_causal_owner *owner,
 static struct cp_trial *cr_make_bound(unsigned bits,unsigned cache_bits,unsigned little,unsigned residency)
 {
     struct cp_trial *f;struct cr_state *s;struct pt_private_mixed_causal_ram_adapter a;
+#ifdef PT_NATIVE_MIXED_CAUSAL_RAM_PORT_CASE_BEGIN
+    PT_NATIVE_MIXED_CAUSAL_RAM_PORT_CASE_BEGIN(cr_cases+1U,bits,cache_bits,little,residency);
+#endif
     assert(!cr_expand);cr_expand=1;f=cp_make(bits,cache_bits,little);
     assert(!cr_expand&&f==&cr_current->trial);++cr_cases;s=&cr_current->state;
     s->trial=f;s->port=&cr_current->port;s->now=100;s->frequency=709379;
@@ -164,7 +173,11 @@ static struct cp_trial *cr_make_bound(unsigned bits,unsigned cache_bits,unsigned
     f->input.contexts.bytes=sizeof(*cr_current);
     f->input.causal.port=pt_private_mixed_causal_ram_api(&cr_current->port);
     f->input.causal.allocator.release=cr_release;f->input.bind_original=cr_bind;
-    assert(f->input.contexts.data==f&&f->input.contexts.bytes==sizeof(*cr_current));return f;
+    assert(f->input.contexts.data==f&&f->input.contexts.bytes==sizeof(*cr_current));
+#ifdef PT_NATIVE_MIXED_CAUSAL_RAM_PORT_CONFIGURE_CHIP
+    PT_NATIVE_MIXED_CAUSAL_RAM_PORT_CONFIGURE_CHIP(f);
+#endif
+    return f;
 }
 static struct cp_trial *cr_make(unsigned bits,unsigned cache_bits,unsigned little)
 {return cr_make_bound(bits,cache_bits,little,64);}
@@ -211,6 +224,9 @@ static void cr_closed(struct cp_trial *f,struct cr_before *b)
         cr_geometry_empty(p->command+i);assert(!f->control.command[i].handle.address);}
     for(i=0;i<32;++i)assert(!f->control.reader[i].handle.address);
     cr_same(f,b);cr_before_drop(b);cp_drop(f);cr_current=NULL;
+#ifdef PT_NATIVE_MIXED_CAUSAL_RAM_PORT_CASE_END
+    PT_NATIVE_MIXED_CAUSAL_RAM_PORT_CASE_END(cr_cases);
+#endif
 }
 static void cr_pair(struct cp_trial *f,unsigned count,uint64_t *first,uint64_t *second)
 {

@@ -1,0 +1,738 @@
+{
+  "scope": "INDEPENDENT_SAVED_ONLY_V5_BEFORE_MASTER_TYPED_CAUSAL_PAIR_HOST_ASAN_UBSAN_AUDIT",
+  "status": "PASS_SAVED_HOST_EVIDENCE",
+  "passed": true,
+  "findings": [],
+  "reviewer": "/root/typed_mixed_ram_port",
+  "actions": {
+    "saved_files_hash_stat_json_AST_only": true,
+    "private_report_write": true,
+    "product_import_or_replay": false,
+    "compiler_process_Git_repo_target_service_operations": false
+  },
+  "root_receipt": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v5/receipt.json",
+    "pin": {
+      "bytes": 1884758,
+      "sha256": "27260fb9fd0b3df956fd4c2960cbffdf9f98648f253629f6da5a2cac7b5d933e",
+      "mode": 33152
+    }
+  },
+  "nested_receipt": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v5/tmp/pt-causal-before-master-pair-_sk7eqf7/receipt.json",
+    "pin": {
+      "bytes": 872805,
+      "sha256": "4380975a140a2283670ce7ec5ff14d62cd299258ac10d85a8dff8ece384f1390",
+      "mode": 33188
+    }
+  },
+  "observer_source": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v5.py",
+    "pin": {
+      "bytes": 15759,
+      "mode": 33188,
+      "sha256": "f10828fc1479cadcf7ad183f8094d19fde6bc8782d3429ec6b89d2aaf68d75fd"
+    }
+  },
+  "observer_source_review": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-root-causal-before-master-song-pair-host-first-v5-observer-source-review.json",
+    "pin": {
+      "bytes": 7955,
+      "sha256": "3eec686bc606521563476b4a50555884f52c978e863b58aa281860fd166cd506",
+      "mode": 33188
+    }
+  },
+  "product_source_review": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-native-mixed-causal-before-master-song-pair-source-v3-clean-refusal-review.json",
+    "pin": {
+      "bytes": 13465,
+      "sha256": "731df459b68bf1707aa939cc2e2966a5c86fd8b1ff5c77b739943c6c4e03d849",
+      "mode": 33188
+    }
+  },
+  "product_packet": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-before-master-song-pair-source-proposal-v3",
+    "manifest_pin": {
+      "bytes": 1151,
+      "sha256": "5c088804b56529886fb28db11822344dbace3b06106a6f93687b1293db90092a",
+      "mode": 33188
+    },
+    "files": {
+      "PLAN.md": {
+        "bytes": 13171,
+        "mode": 33188,
+        "sha256": "ce15c5796b83ef1649a41d4a7c97bb9855b838feab48c9cbaf502353e5cc84d9"
+      },
+      "source-context.json": {
+        "bytes": 90299,
+        "mode": 33188,
+        "sha256": "a9eae779a77ef3108aa5ebbcafa8b89d3f46fa3f9411c0513fdf6a03c3a1e35b"
+      },
+      "source.patch": {
+        "bytes": 125379,
+        "mode": 33188,
+        "sha256": "409bd919adb853ad8e0af1f26de985a03e817c0b7186a7bc8a55fdeabc3b9fde"
+      },
+      "src/editor/editor_mixed_causal_song_pair.c": {
+        "bytes": 48724,
+        "mode": 33188,
+        "sha256": "8a8741aec93caa55ac529dd3de25a802d1475d64dfa002f5b813db0607b928b9"
+      },
+      "src/editor/editor_mixed_causal_song_pair_internal.h": {
+        "bytes": 11607,
+        "mode": 33188,
+        "sha256": "5ced3394fe4c867913e6112c0a6b9a771447c2dd32d5e2d38d460b3c2ce19745"
+      },
+      "tests/editor_mixed_causal_song_pair_test.c": {
+        "bytes": 45678,
+        "mode": 33188,
+        "sha256": "d8cc3e415256c58af809685fddf1ff9fbe9979b9df87ca354a9a82b8089bc79b"
+      },
+      "tests/test_editor_mixed_causal_song_pair.py": {
+        "bytes": 17199,
+        "mode": 33188,
+        "sha256": "c45c50031dab60457efc2872261ec2bd78f0acd80e74263ca27c64b10c12f835"
+      }
+    }
+  },
+  "root_saved_process": {
+    "status": "PASS_FIRST_HOST_BEFORE_MASTER_PAIR_ASAN_UBSAN",
+    "returncode": 0,
+    "reaped": true,
+    "group_absent": true,
+    "public_pid": 44926,
+    "public_elapsed_seconds": 21.690196166018723,
+    "elapsed_seconds": 23.197239250002895,
+    "public_limit_seconds": 280,
+    "overall_limit_seconds": 300,
+    "overall_within_bound": true,
+    "observer_errors": [],
+    "custody_errors": [],
+    "automatic_retry": false,
+    "target_operation": false,
+    "service_operation": false
+  },
+  "two_saved_commands": [
+    {
+      "label": "before-master-causal-pair62-compile",
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-I.",
+        "tests/editor_mixed_causal_song_pair_test.c",
+        "src/editor/editor_mixed_causal_prepare.c",
+        "src/editor/sampler_mixed_readers.c",
+        "src/core/mixed_readers_causal.c",
+        "src/core/amigus_trigger_levels.c",
+        "src/core/mixed_scheduled_readers.c",
+        "src/core/elapsed_clock.c",
+        "src/editor/sampler_paula.c",
+        "src/editor/sampler_wavetable.c",
+        "src/core/amigus_voice_plan.c",
+        "src/editor/sampler.c",
+        "src/editor/slots.c",
+        "src/core/pcm_filtered.c",
+        "src/core/slices.c",
+        "src/core/pattern.c",
+        "src/core/document.c",
+        "src/core/pp20.c",
+        "src/core/project.c",
+        "src/core/mod_project.c",
+        "src/core/mod_inspect.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "src/core/wav.c",
+        "src/core/svx.c",
+        "src/core/raw.c",
+        "src/editor/editor.c",
+        "src/editor/song.c",
+        "src/editor/view.c",
+        "src/editor/workflow.c",
+        "src/editor/sample_range.c",
+        "src/editor/wave_summary.c",
+        "src/core/sample_usage.c",
+        "src/core/event_resource.c",
+        "src/core/flow.c",
+        "src/core/pitch.c",
+        "src/core/amigus_reservation.c",
+        "src/editor/sampler_invert_song.c",
+        "src/core/render_invert.c",
+        "src/core/invert_bank.c",
+        "src/core/invert_sequence.c",
+        "src/core/invert_pcm.c",
+        "src/core/invert_loop.c",
+        "src/core/amigus_session.c",
+        "src/core/amigus_fifo.c",
+        "src/core/amigus_pcm_pack.c",
+        "src/core/studio_consumer.c",
+        "src/core/studio_pump.c",
+        "src/core/studio_queue.c",
+        "src/editor/editor_studio.c",
+        "src/editor/sampler_song.c",
+        "src/editor/sampler_studio.c",
+        "src/core/studio_song.c",
+        "src/core/studio_plan.c",
+        "src/core/render.c",
+        "src/core/timeline.c",
+        "src/core/frame_clock.c",
+        "src/core/studio_mix.c",
+        "src/core/voice.c",
+        "src/editor/wavetable_song.c",
+        "src/editor/wavetable_voices.c",
+        "src/editor/wavetable_dispatch.c",
+        "src/core/amigus_render_voice.c",
+        "src/editor/paula_preflight.c",
+        "src/core/paula_render_voice.c",
+        "src/core/amigus_wavetable_cache.c",
+        "src/core/amigus_sample_ram.c",
+        "src/core/sample_cache.c",
+        "src/core/playback_pcm.c",
+        "src/editor/editor_mixed.c",
+        "src/editor/mixed_owner.c",
+        "src/editor/mixed_transport.c",
+        "src/editor/mixed_preflight.c",
+        "src/editor/paula_voices.c",
+        "src/editor/paula_dispatch.c",
+        "src/editor/editor_wavetable.c",
+        "src/platform/sample_import.c",
+        "src/platform/raw_import.c",
+        "src/platform/mod_import.c",
+        "src/platform/pp20_import.c",
+        "src/editor/editor_mixed_causal_song_pair.c",
+        "src/editor/sampler_establish.c",
+        "src/editor/mixed_quantized_audit.c",
+        "src/editor/mixed_readers_plan_normalize.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v5/tmp/pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v5/tmp/pt-causal-before-master-pair-_sk7eqf7/source-vyy6b7en/tree",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 44933,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 19.030839500017464
+    },
+    {
+      "label": "before-master-causal-pair62-run",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v5/tmp/pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v5/tmp/pt-causal-before-master-pair-_sk7eqf7/source-vyy6b7en/tree",
+      "limit_seconds": 30,
+      "passed": true,
+      "errors": [],
+      "pid": 45165,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 617,
+          "sha256": "108553b93a0b9941faa20954633970a79123468995462226a9675a168f774798",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 1.1512105840083677
+    }
+  ],
+  "genuine_case_scope": {
+    "cases": 62,
+    "successes": 4,
+    "named_phase_cancellations": 31,
+    "bounded_refusals": 27,
+    "donor43_and_donor26_entries": "renamed and uncalled; final real cs_cases62/cp_cases0/ct_cases0 assertion",
+    "source_units": 83,
+    "source_vector_sha256": "fee43d396fa71093341b489f304ffc44839d1226cc1691f8425ec04bc5282ffa",
+    "source_vector": [
+      "tests/editor_mixed_causal_song_pair_test.c",
+      "src/editor/editor_mixed_causal_prepare.c",
+      "src/editor/sampler_mixed_readers.c",
+      "src/core/mixed_readers_causal.c",
+      "src/core/amigus_trigger_levels.c",
+      "src/core/mixed_scheduled_readers.c",
+      "src/core/elapsed_clock.c",
+      "src/editor/sampler_paula.c",
+      "src/editor/sampler_wavetable.c",
+      "src/core/amigus_voice_plan.c",
+      "src/editor/sampler.c",
+      "src/editor/slots.c",
+      "src/core/pcm_filtered.c",
+      "src/core/slices.c",
+      "src/core/pattern.c",
+      "src/core/document.c",
+      "src/core/pp20.c",
+      "src/core/project.c",
+      "src/core/mod_project.c",
+      "src/core/mod_inspect.c",
+      "src/core/channels.c",
+      "src/core/pcm.c",
+      "src/core/wav.c",
+      "src/core/svx.c",
+      "src/core/raw.c",
+      "src/editor/editor.c",
+      "src/editor/song.c",
+      "src/editor/view.c",
+      "src/editor/workflow.c",
+      "src/editor/sample_range.c",
+      "src/editor/wave_summary.c",
+      "src/core/sample_usage.c",
+      "src/core/event_resource.c",
+      "src/core/flow.c",
+      "src/core/pitch.c",
+      "src/core/amigus_reservation.c",
+      "src/editor/sampler_invert_song.c",
+      "src/core/render_invert.c",
+      "src/core/invert_bank.c",
+      "src/core/invert_sequence.c",
+      "src/core/invert_pcm.c",
+      "src/core/invert_loop.c",
+      "src/core/amigus_session.c",
+      "src/core/amigus_fifo.c",
+      "src/core/amigus_pcm_pack.c",
+      "src/core/studio_consumer.c",
+      "src/core/studio_pump.c",
+      "src/core/studio_queue.c",
+      "src/editor/editor_studio.c",
+      "src/editor/sampler_song.c",
+      "src/editor/sampler_studio.c",
+      "src/core/studio_song.c",
+      "src/core/studio_plan.c",
+      "src/core/render.c",
+      "src/core/timeline.c",
+      "src/core/frame_clock.c",
+      "src/core/studio_mix.c",
+      "src/core/voice.c",
+      "src/editor/wavetable_song.c",
+      "src/editor/wavetable_voices.c",
+      "src/editor/wavetable_dispatch.c",
+      "src/core/amigus_render_voice.c",
+      "src/editor/paula_preflight.c",
+      "src/core/paula_render_voice.c",
+      "src/core/amigus_wavetable_cache.c",
+      "src/core/amigus_sample_ram.c",
+      "src/core/sample_cache.c",
+      "src/core/playback_pcm.c",
+      "src/editor/editor_mixed.c",
+      "src/editor/mixed_owner.c",
+      "src/editor/mixed_transport.c",
+      "src/editor/mixed_preflight.c",
+      "src/editor/paula_voices.c",
+      "src/editor/paula_dispatch.c",
+      "src/editor/editor_wavetable.c",
+      "src/platform/sample_import.c",
+      "src/platform/raw_import.c",
+      "src/platform/mod_import.c",
+      "src/platform/pp20_import.c",
+      "src/editor/editor_mixed_causal_song_pair.c",
+      "src/editor/sampler_establish.c",
+      "src/editor/mixed_quantized_audit.c",
+      "src/editor/mixed_readers_plan_normalize.c"
+    ],
+    "oracle_bytes": 617,
+    "oracle_sha256": "108553b93a0b9941faa20954633970a79123468995462226a9675a168f774798",
+    "complete_oracle": "EDITOR MIXED CAUSAL SONG PAIR PASS:62 genuine before-master cases;4 mixed4Paula+12card/16card pure-TRIGGER pairs with24-bit masters/cache16 and independent C/R/source proof orders,31 named-phase cancellations,27 bounded shape/budget/alias/reentry/raw/identity refusals;early SOURCE before establishment and persistent pins,one activate refresh,READY masks/take-once full EOF replay,original960/1920 windows and empty2880 boundary,two copied complete snapshots before bind/factory/cache/publication,actual transfer and retained unknown source,exact saves/full capacities/tails/3 external requests/C2R32; SOFTWARE_ONLY\n"
+  },
+  "six_full_streams": {
+    "before-master-causal-pair62-compile.stdout": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v5/tmp/pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62-compile.stdout",
+      "pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    "before-master-causal-pair62-compile.stderr": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v5/tmp/pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62-compile.stderr",
+      "pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    "before-master-causal-pair62-run.stdout": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v5/tmp/pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62-run.stdout",
+      "pin": {
+        "bytes": 617,
+        "sha256": "108553b93a0b9941faa20954633970a79123468995462226a9675a168f774798",
+        "mode": 33188
+      }
+    },
+    "before-master-causal-pair62-run.stderr": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v5/tmp/pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62-run.stderr",
+      "pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    "public.stdout": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v5/public.stdout",
+      "pin": {
+        "bytes": 809,
+        "sha256": "45eebf4156d9106ffb1d13754275c5bbc72b801c866a4570f979ce801b8e9f13",
+        "mode": 33152
+      }
+    },
+    "public.stderr": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v5/public.stderr",
+      "pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33152
+      }
+    }
+  },
+  "executable": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v5/tmp/pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62",
+    "pin": {
+      "bytes": 6658568,
+      "sha256": "f4e57252c905bf75f5fa0d986549777acd56ed2a8173bbf658dd9fe372552a97",
+      "mode": 33261
+    }
+  },
+  "custody_maps": {
+    "current1213": {
+      "count": 1213,
+      "digest": "d0d1b371c7152adc55247436ee866ffe3a6248d70da460496c01c274d97f7982",
+      "actual_before_after_and_now_equal": true
+    },
+    "protected16": {
+      "count": 16,
+      "digest": "647dfe3c16605303ed83886ac26659e5dedeaf531c7317809596476c3cfd65b5",
+      "actual_before_after_and_now_equal": true
+    },
+    "frozen208": {
+      "count": 208,
+      "digest": "6d01feb2e6cb59fdd3ce8eb8b0c1eac987feadcf1e42ae3bc39bd5d5ecb8b200",
+      "actual_before_after_and_now_equal": true
+    },
+    "candidate1217": {
+      "count": 1217,
+      "digest": "c8bc5b133995c97a3a4b209b6970086b5adafe5f81816eb751751c75719ef2ac",
+      "actual_after_and_now_equal": true
+    },
+    "nested_selected1218_including_font": {
+      "count": 1218,
+      "digest": "fa53d4fddc257f2a6c46eef868e8d8d779335bef170fcc22dbdd060c81fc1436",
+      "actual_before_after_equal": true
+    }
+  },
+  "strict_flags": [
+    "-std=c99",
+    "-O1",
+    "-g",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-UNDEBUG",
+    "-fsanitize=address,undefined",
+    "-Isrc/core",
+    "-I."
+  ],
+  "sanitizer_options": {
+    "ASAN_OPTIONS": "halt_on_error=1:abort_on_error=1",
+    "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1"
+  },
+  "raw_font": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/vendor/pt23f/raw/ptfont.raw",
+    "pin": {
+      "bytes": 580,
+      "sha256": "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091",
+      "mode": 33188
+    }
+  },
+  "generated_temporary_font": {
+    "bytes": 1630,
+    "sha256": "0c77c7d479f4afa90bd053e7fc1390ac8397e14faa976aa76297065a645778d0",
+    "mode": 33188
+  },
+  "compiler": {
+    "path": "/usr/bin/cc",
+    "pin": {
+      "bytes": 200560,
+      "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+      "mode": 33261
+    }
+  },
+  "compiler_nlink": 78,
+  "Python_argv_path": "/opt/homebrew/opt/python@3.14/bin/python3.14",
+  "Python_resolved_binary": {
+    "path": "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+    "pin": {
+      "bytes": 52448,
+      "sha256": "60ab7f8bb944386c0022689716e405a77117111d65110532a1889d713dddf757",
+      "mode": 33261
+    }
+  },
+  "durable_files": {
+    "pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62": {
+      "bytes": 6658568,
+      "sha256": "f4e57252c905bf75f5fa0d986549777acd56ed2a8173bbf658dd9fe372552a97",
+      "mode": 33261
+    },
+    "pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62-compile.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62-compile.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62-run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62-run.stdout": {
+      "bytes": 617,
+      "sha256": "108553b93a0b9941faa20954633970a79123468995462226a9675a168f774798",
+      "mode": 33188
+    },
+    "pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62.dSYM/Contents/Info.plist": {
+      "bytes": 656,
+      "sha256": "b36bf3a34b73ef5afefdb20e0e4a677971895fb4cd059725bd498142c5a4d03f",
+      "mode": 33188
+    },
+    "pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62.dSYM/Contents/Resources/DWARF/before-master-causal-pair62": {
+      "bytes": 2692800,
+      "sha256": "7e0ba37971b4dded5ff70c81c533c578b4eb4110fc0cbfcbf3e188250c456910",
+      "mode": 33188
+    },
+    "pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62.dSYM/Contents/Resources/Relocations/aarch64/before-master-causal-pair62.yml": {
+      "bytes": 292,
+      "sha256": "901cfd52fe9da9940b4bc528676da8876d46cab9d305ee0be1d939517ba96de5",
+      "mode": 33188
+    },
+    "pt-causal-before-master-pair-_sk7eqf7/receipt.json": {
+      "bytes": 872805,
+      "sha256": "4380975a140a2283670ce7ec5ff14d62cd299258ac10d85a8dff8ece384f1390",
+      "mode": 33188
+    }
+  },
+  "durable_directories": {
+    "pt-causal-before-master-pair-_sk7eqf7": 16832,
+    "pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62.dSYM": 16877,
+    "pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62.dSYM/Contents": 16877,
+    "pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62.dSYM/Contents/Resources": 16877,
+    "pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62.dSYM/Contents/Resources/DWARF": 16877,
+    "pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62.dSYM/Contents/Resources/Relocations": 16877,
+    "pt-causal-before-master-pair-_sk7eqf7/before-master-causal-pair62.dSYM/Contents/Resources/Relocations/aarch64": 16877
+  },
+  "darwin_cache": "none present; no cache observation fabricated",
+  "positive_source_absences": {
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v5/tmp/pt-causal-before-master-pair-_sk7eqf7/source-vyy6b7en/tree": true,
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v5/tmp/pt-causal-before-master-pair-_sk7eqf7/source-vyy6b7en": true,
+    "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/pt_font.h": true,
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v5/candidate/pt_font.h": true
+  },
+  "prior_failed_audits_preserved": {
+    "V2": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-root-causal-before-master-song-pair-host-first-v2-saved-failure-audit.json",
+      "pin": {
+        "bytes": 8612,
+        "sha256": "2beb691cbf4cbdb34e5ee9601436da2aed9ed5df1afba3ac25efd0ae4a53b289",
+        "mode": 33188
+      }
+    },
+    "V3": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-root-causal-before-master-song-pair-host-first-v3-saved-compile-failure-audit.json",
+      "pin": {
+        "bytes": 12231,
+        "sha256": "7802cabc60d504c3041ccb803770ec48f508b6ea2e9f36be059ca6350e0c0057",
+        "mode": 33188
+      }
+    },
+    "V4": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-root-causal-before-master-song-pair-host-first-v4-saved-publication-assertion-failure-audit.json",
+      "pin": {
+        "bytes": 14736,
+        "sha256": "fb57af9f535dd968d0e885468c0942588080f25f27597428e5753f85c38ef419",
+        "mode": 33188
+      }
+    }
+  },
+  "prior_failure_inputs_preserved": {
+    "V2:root_receipt": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v2/receipt.json",
+      "pin": {
+        "bytes": 265475,
+        "sha256": "f4bc774485ea063279e64b014b6c1f40ec7b1a05407e8dd1f0de52b8219f7050",
+        "mode": 33152
+      }
+    },
+    "V3:compile_receipt": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v3/tmp/pt-causal-before-master-pair-sbdceefa/receipt.json",
+      "pin": {
+        "bytes": 871173,
+        "mode": 33188,
+        "sha256": "2c60149ddc9f98038f8a69c65cc1d39fdf0274946f2d7f4684eb8ddece8b1358"
+      }
+    },
+    "V3:compile_stderr": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v3/tmp/pt-causal-before-master-pair-sbdceefa/before-master-causal-pair62-compile.stderr",
+      "pin": {
+        "bytes": 1986,
+        "mode": 33188,
+        "sha256": "cab1e17d330044a74f4cd10fa4963d15dcfe0102b100c1df3cc4c281ef234e14"
+      }
+    },
+    "V3:compile_stdout": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v3/tmp/pt-causal-before-master-pair-sbdceefa/before-master-causal-pair62-compile.stdout",
+      "pin": {
+        "bytes": 0,
+        "mode": 33188,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "V3:public_stderr": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v3/public.stderr",
+      "pin": {
+        "bytes": 1517,
+        "mode": 33152,
+        "sha256": "dd1a71c1d4c7b8faaa64fb18eb5e1318922661cb1e4972dc18b1a4a3c919c61b"
+      }
+    },
+    "V3:public_stdout": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v3/public.stdout",
+      "pin": {
+        "bytes": 192,
+        "mode": 33152,
+        "sha256": "7ccb64156b1184c526b23e14aef59551e090317fe559035e43d1edcab6c91986"
+      }
+    },
+    "V3:root_receipt": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v3/receipt.json",
+      "pin": {
+        "bytes": 958945,
+        "mode": 33152,
+        "sha256": "5c06818823bc11faeb22e713cdbfb8324ac05d2c33109fd93c688244c6db9deb"
+      }
+    },
+    "V4:compile_stderr": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v4/tmp/pt-causal-before-master-pair-j3v1cyjd/before-master-causal-pair62-compile.stderr",
+      "pin": {
+        "bytes": 0,
+        "mode": 33188,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "V4:compile_stdout": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v4/tmp/pt-causal-before-master-pair-j3v1cyjd/before-master-causal-pair62-compile.stdout",
+      "pin": {
+        "bytes": 0,
+        "mode": 33188,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "V4:instrumented_executable": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v4/tmp/pt-causal-before-master-pair-j3v1cyjd/before-master-causal-pair62",
+      "pin": {
+        "bytes": 6658104,
+        "mode": 33261,
+        "sha256": "72eb595783b94eb865b6c60a7f262a160f86ed6ff19d69b5caf5d6dc772d2bcc"
+      }
+    },
+    "V4:nested_receipt": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v4/tmp/pt-causal-before-master-pair-j3v1cyjd/receipt.json",
+      "pin": {
+        "bytes": 872412,
+        "mode": 33188,
+        "sha256": "f8c8d572a31eac2f65885a9f7a60e97ec086e68670465e19d38f263dd59d786a"
+      }
+    },
+    "V4:public_stderr": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v4/public.stderr",
+      "pin": {
+        "bytes": 1339,
+        "mode": 33152,
+        "sha256": "0197e7dce670133f5aa0c3c068848644595084d90541ac2ef449973c9d69fd5d"
+      }
+    },
+    "V4:public_stdout": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v4/public.stdout",
+      "pin": {
+        "bytes": 192,
+        "mode": 33152,
+        "sha256": "da5c827fd68719cfb7d63a30868d863f3629ed56b4b8f8555fbf3281245e2150"
+      }
+    },
+    "V4:root_receipt": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v4/receipt.json",
+      "pin": {
+        "bytes": 958946,
+        "mode": 33152,
+        "sha256": "eec66db2e2228657cf1fa869856faaa6f69dc3c93faafed34f13e84e98729b03"
+      }
+    },
+    "V4:run_stderr": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v4/tmp/pt-causal-before-master-pair-j3v1cyjd/before-master-causal-pair62-run.stderr",
+      "pin": {
+        "bytes": 302,
+        "mode": 33188,
+        "sha256": "b66a1952013f590d637ba169616d14d5c19efc9606c422d087b9c27ed7d0fe88"
+      }
+    },
+    "V4:run_stdout": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-before-master-song-pair-host-first-v4/tmp/pt-causal-before-master-pair-j3v1cyjd/before-master-causal-pair62-run.stdout",
+      "pin": {
+        "bytes": 0,
+        "mode": 33188,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "prior_private_product_V2_manifest": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-before-master-song-pair-source-proposal-v2/pins.json",
+    "pin": {
+      "bytes": 1151,
+      "sha256": "c4151d50997fda6d3787f989d79642e1756a37983b1dc3e8e7cd1ccacc68335c",
+      "mode": 33188
+    }
+  },
+  "checks": [
+    "Exactly one public driver invocation, one strict 83-unit compile and one focused run are saved; no unchanged suite replay is inferred.",
+    "All six complete streams and exact 617-byte oracle independently read; compile/runtime/public stderr are genuinely empty.",
+    "Saved RC0/reaped/group_absent flags are verified in records; no live process probe performed by reviewer.",
+    "62 final real cases with 4 before-master24-bit/cache16 pure-pair successes,31 explicit named-phase cancellations,27 actual refusal calls; strict assertions enabled, inherited43/26 entries uncalled.",
+    "Root1213/protected16/frozen208/candidate1217 and nested1218 complete before/after maps checked against current readable retained inputs.",
+    "Original raw580 bytes and literal1630 temporary font preserved; repository/candidate font header and both temporary source context/tree positively absent via lstat.",
+    "Exact 9 regular durable leaves and7 ordinary directories checked, including3 complete dSYM leaves; no symlinks or arbitrary ignored extras.",
+    "Original V2 admission failure,V3 type-tag compile failure,V4 publication assertion failure retained byte/mode exact; V5 does not overwrite or reinterpret them."
+  ],
+  "evidence_limits": [
+    "SAVED HOST software evidence only. No product invocation, compiler, live process/target/service/Git action by reviewer.",
+    "Heap models and ordinary callback timing establish no native Fast/Chip placement,Amiga ABI/stack/WCET,CIA/IRQ/device/MMIO/DMA/audio/listening or live exact scheduling acceptance.",
+    "Producer remains opt-in exactly-two pure-TRIGGER composition with before-master audit/replay; no rolling whole-song PLAY/CONTROL/STOP frontend inferred.",
+    "Original one-armed native90 failure and all other earlier native/physical gates remain independent; no emulator or real-A1200 acceptance in this audit."
+  ]
+}

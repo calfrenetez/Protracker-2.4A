@@ -6565,3 +6565,32 @@ whole-song pipeline is unchanged. Whole-song/rolling refill, CONTROL/musical STO
 enhanced native PLAY/timer binding, native Fast/Chip/IRQ/WCET/whole stack, physical
 device capacity/completion/stop, exact live timing, audio and listening remain
 unqualified. The user's exact scheduling choice is unchanged.
+
+
+## Finite before-master preparation and allocation-hook HOST results — 8 October 2026
+
+The additive opt-in producer now passes its 62-case HOST entry: genuine SOURCE
+ownership precedes master establishment and persistent pins; full READY masks,
+one sequence transfer govern actual replay. Eligible snapshots are copied after
+each actual interval commit during replay; validated EOF totals and exactly two
+snapshots precede controller/cache/publication work. Original timing, independent
+command/reader/source ownership, complete master capacities and exact exports
+are preserved. Clean-zero publication retains pending ownership until explicit
+cancellation. Success coverage here uses 24-bit masters and 16-bit big-endian
+caches; other cancellation coverage is not format playback acceptance.
+
+Separately, the genuine 34-case two-ticket fixture passes its allocation-hook
+HOST wrapper, including exact pointer/context/size releases and zero per-case
+ledgers. Fast/Chip classes in that run are heap models. The authoritative
+8/16/24-bit masters, bounded allocation, optional selective 8-bit Paula Chip
+caches, optional 8/16-bit AmiGUS caches and direct 24-bit Studio contracts remain
+the existing architecture. These additions do not enable default PLAY, rolling
+CONTROL/STOP or deferred ZooperTracker features.
+
+The two accepted HOST runs remain separate. The combined 1,221-file source
+projection is not a combined runtime qualification. Native Fast/Chip placement,
+stack/WCET/timers, physical card capacity/order/completion/voice stop, DMA/audio
+and listening are NOT RUN or unqualified by these results. Original failed
+attempts and the exact-scheduling decision remain preserved. See
+[producer evidence](../evidence/enhanced-editor/before-master-causal-song-pair-host/README.md)
+and [allocation-hook evidence](../evidence/enhanced-editor/two-ticket-native-allocation-hooks-host/README.md).

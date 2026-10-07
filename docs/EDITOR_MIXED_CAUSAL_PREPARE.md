@@ -160,3 +160,29 @@ C/R/source ownership through close. The existing default whole-song producer is
 unchanged. No rolling refill, CONTROL/musical STOP, enhanced PLAY, native paired
 timer/source, physical completion/stop, exact live timing or listening follows
 from these finite HOST passes. The user's exact scheduling choice stays in force.
+
+
+## Audited before-master pair and allocation hooks — 8 October 2026
+
+The opt-in song-pair producer now establishes its genuine SOURCE borrow before
+master establishment, pins all slots, refreshes once and preserves the complete
+READY audit masks before taking the original sequence. It replays every interval
+to actual EOF and requires exactly two increasing, nonempty pure-TRIGGER
+boundaries before opening the controller, constructing caches or publishing.
+Original absolute scheduling is preserved. Deferred clean-zero publication keeps
+the original ticket, command reference, borrow and 16 readers until explicit
+cancellation. Command, reader and source quiet remain independent proofs.
+
+The separate 62-case HOST entry passed with assertions and ASan/UBSan: four
+successes, 31 phase cancellations and 27 refusals. Its success cases preserve
+24-bit masters with 16-bit big-endian caches, full capacities and exact exports.
+Cancellation cases do not imply successful playback qualification for every
+format. This is task-side preparation for a finite pair; it is not wired to
+frontend PLAY or rolling CONTROL/STOP playback.
+
+A separate 34-case HOST wrapper validates original allocation identities and
+zero owned ledgers around the two-ticket RAM fixture. Its Fast/Chip classes are
+heap models. The Exec wrapper is source-prepared only; native placement, stack,
+timers, physical devices and listening remain untested by these results.
+See the [producer evidence](../evidence/enhanced-editor/before-master-causal-song-pair-host/README.md)
+and [allocation-hook evidence](../evidence/enhanced-editor/two-ticket-native-allocation-hooks-host/README.md).

@@ -1,0 +1,242 @@
+{
+  "scope": "SAVED_ONLY_INDEPENDENT_FIRST_HOST_GENUINE34_NATIVE_HOOKS_HEAP_MODELS_AUDIT",
+  "status": "PASS_SAVED_HOST_GENUINE34_NATIVE_HOOKS_FIRST_V2",
+  "passed": true,
+  "findings": [],
+  "actions": {
+    "filesystem_hash_stat_JSON_only": true,
+    "product_test_import_or_invocation": false,
+    "compiler": false,
+    "process_query_or_signal": false,
+    "Git": false,
+    "network_target_service_guard_lease": false,
+    "repository_or_frozen_input_write": false
+  },
+  "root_receipt": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-two-ticket-native-hooks-host-first-v2/receipt.json",
+    "pin": {
+      "bytes": 1811044,
+      "sha256": "4f026d8943a434d076387780e4a3e447a91d4c49c3de643b4c3a83a5719deb3c",
+      "mode": 33152
+    }
+  },
+  "nested_receipt": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-two-ticket-native-hooks-host-first-v2/tmp/pt-causal-two-ticket-native-hooks-bv4cvraw/receipt.json",
+    "pin": {
+      "bytes": 879811,
+      "sha256": "fca1980c9d67abb5c01346d8e67767ce38f61fd9df32db46737bc913365739aa",
+      "mode": 33188
+    }
+  },
+  "source_bindings": {
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-two-ticket-native-hooks-source-proposal-v1/pins.json": {
+      "bytes": 2093,
+      "sha256": "5824c64b0398e5a1543b3584a5a7420a9d377384b138c3606e50d835509ddf66",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-two-ticket-native-hooks-source-proposal-v1/source-context.json": {
+      "bytes": 462094,
+      "sha256": "1eeac06532c51938557bb69269debc2008d7f85424c2511943dfe952a078d293",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-two-ticket-native-hooks-source-proposal-v1/host-contract.json": {
+      "bytes": 11111,
+      "sha256": "2ebadc5acb5edcf5ab5fc53d7a120c9a55ec4ce158036830be3048f84dba6739",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-two-ticket-native-hooks-host-first-v2.py": {
+      "bytes": 16308,
+      "sha256": "9ce4a324a5e3c5bca4cce24595e805d985d988cb7f0abde13abb3d7395dcbdf8",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-two-ticket-native-hooks-host-first-v2-source-pins.json": {
+      "bytes": 1694,
+      "sha256": "1bdbee65e417cbfcd86b0df501dbe7449ae56962931a40fb1ade8b508e1036e2",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-root-causal-two-ticket-native-hooks-host-first-v2-source-review.json": {
+      "bytes": 6034,
+      "sha256": "515ad1fd916daca6816acadd7641a151560e4b620b6fa120a9ad63136a68c232",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-native-mixed-causal-two-ticket-native-hooks-source-v1-review.json": {
+      "bytes": 6455,
+      "sha256": "4f00b748fceadf0ec5687840b727ce9c0b64a4822001902746149f55ac24b8b8",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-root-causal-two-ticket-native-hooks-host-first-v1-source-review-correction.json": {
+      "bytes": 2386,
+      "sha256": "eb954f9517ce45991c48be68def2a4ef1ce6b6d915968ac1e1e8ad80b1a7cf74",
+      "mode": 33188
+    }
+  },
+  "checks": [
+    "Full Root1811044/nested879811 JSON receipts read; embedded nested receipt equals actualdisk/fullpin.",
+    "One public entry/two actualcompile-run records/one genuine34 group; RC0/reaped/positivegroup_absent/emptyerrors under120/30/280/300 savedbounds. Reviewer performs no liveprocess probe.",
+    "All six complete streams read/pinned:4084-byte70-line oracle with34 ordered BEGIN/ENDpairs+original502+hookfooter; publicstdout exactoracle+receiptpath; otherfourstreams empty.",
+    "Source34bindings/52selectivecalls are enforced by successful genuinehook assertions with -UNDEBUG/exactsource/footer, not independently observed allocation traces or nativeplacement.",
+    "Exact80 providers/strictflags/sanitizeroptions/argv/cwd/executable and oneentry checked; no donor/default suite separately replayed.",
+    "Full1213 rootmaps/currentdisk/protected16 exact; projected1217/candidatemap/disk exact; nested1218 adds only literal1630font and selectedbefore-after exact.",
+    "All32 frozen payload/reference inputs fullread match before-after; rawfont/compiler/Python actualpins preserved, compilerordinary78links; candidateprotected16 exact.",
+    "Positive lstat absence of owned temporarycontext/tree and source/candidate pt_font.h; cleanupOWNED_CONTEXT_REMOVED, no expiredtree observation fabricated.",
+    "Full TMPDIR closure9regularleaves/7ordinarydirs:oneattempt/6debugdirs/3debugleaves plus sixmandatoryreceipt/executable/streamleaves. Optionalxcrunabsent in actualrun, no ignoredextras.",
+    "Final full receipts/source/payload/candidate/durable/current readbacks unchanged; sourcepublication and individualHOST result remain distinct."
+  ],
+  "full_streams": {
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-two-ticket-native-hooks-host-first-v2/public.stdout": {
+      "bytes": 4281,
+      "sha256": "759e76310240519169875d2f130da73f0456e199c590e5f2ec74f23ffc23c285",
+      "mode": 33152
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-two-ticket-native-hooks-host-first-v2/public.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33152
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-two-ticket-native-hooks-host-first-v2/tmp/pt-causal-two-ticket-native-hooks-bv4cvraw/two-ticket-causal-native-hooks34-compile.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-two-ticket-native-hooks-host-first-v2/tmp/pt-causal-two-ticket-native-hooks-bv4cvraw/two-ticket-causal-native-hooks34-compile.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-two-ticket-native-hooks-host-first-v2/tmp/pt-causal-two-ticket-native-hooks-bv4cvraw/two-ticket-causal-native-hooks34-run.stdout": {
+      "bytes": 4084,
+      "sha256": "eed7ffeb8cc6ab35ba040fec57f250688716c72706a62216d9cf9d9aaeea7039",
+      "mode": 33188
+    },
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-two-ticket-native-hooks-host-first-v2/tmp/pt-causal-two-ticket-native-hooks-bv4cvraw/two-ticket-causal-native-hooks34-run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    }
+  },
+  "process_records": [
+    {
+      "role": "public",
+      "pid": 40979,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "elapsed_seconds": 20.373242750007194,
+      "limit_seconds": 280
+    },
+    {
+      "label": "two-ticket-causal-native-hooks34-compile",
+      "pid": 40986,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "elapsed_seconds": 17.97063287498895,
+      "limit_seconds": 120
+    },
+    {
+      "label": "two-ticket-causal-native-hooks34-run",
+      "pid": 41129,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "elapsed_seconds": 0.6456009169924073,
+      "limit_seconds": 30
+    }
+  ],
+  "source_maps": {
+    "current_count": 1213,
+    "current_digest": "d0d1b371c7152adc55247436ee866ffe3a6248d70da460496c01c274d97f7982",
+    "candidate_count": 1217,
+    "candidate_digest": "a2c8587abe98407239e3c99367be09049d50cdfeaac2174e52090a27d9f26006",
+    "selected_with_font_count": 1218,
+    "selected_with_font_digest": "c5f5590056d5a9fb85662afcddbd9b12a04b4439dac68827a1a463ff74463faa",
+    "protected_count": 16,
+    "protected_digest": "647dfe3c16605303ed83886ac26659e5dedeaf531c7317809596476c3cfd65b5",
+    "frozen_input_count": 32
+  },
+  "runtime_summary": {
+    "cases": 34,
+    "source_assertion_chip_calls": 52,
+    "source_assertion_chip_bindings": 34,
+    "full_oracle_bytes": 4084,
+    "full_oracle_sha256": "eed7ffeb8cc6ab35ba040fec57f250688716c72706a62216d9cf9d9aaeea7039",
+    "lines": 70,
+    "old_oracle_bytes": 502,
+    "units": 80,
+    "compile_seconds": 17.97063287498895,
+    "run_seconds": 0.6456009169924073,
+    "public_seconds": 20.373242750007194,
+    "overall_seconds": 23.64945087497472,
+    "native_compiler_invoked": false,
+    "target_operation": false,
+    "heap_class_models_only": true
+  },
+  "durable_files": {
+    "pt-causal-two-ticket-native-hooks-bv4cvraw/receipt.json": {
+      "bytes": 879811,
+      "sha256": "fca1980c9d67abb5c01346d8e67767ce38f61fd9df32db46737bc913365739aa",
+      "mode": 33188
+    },
+    "pt-causal-two-ticket-native-hooks-bv4cvraw/two-ticket-causal-native-hooks34": {
+      "bytes": 6258688,
+      "sha256": "6df09e5f13ebf0a922f6d9a15d49773ddf89e5a9b4a4900e6b60a4fcff40b339",
+      "mode": 33261
+    },
+    "pt-causal-two-ticket-native-hooks-bv4cvraw/two-ticket-causal-native-hooks34-compile.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "pt-causal-two-ticket-native-hooks-bv4cvraw/two-ticket-causal-native-hooks34-compile.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "pt-causal-two-ticket-native-hooks-bv4cvraw/two-ticket-causal-native-hooks34-run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 33188
+    },
+    "pt-causal-two-ticket-native-hooks-bv4cvraw/two-ticket-causal-native-hooks34-run.stdout": {
+      "bytes": 4084,
+      "sha256": "eed7ffeb8cc6ab35ba040fec57f250688716c72706a62216d9cf9d9aaeea7039",
+      "mode": 33188
+    },
+    "pt-causal-two-ticket-native-hooks-bv4cvraw/two-ticket-causal-native-hooks34.dSYM/Contents/Info.plist": {
+      "bytes": 661,
+      "sha256": "196785067c09dbf1a9c6403895601360231ca28797c027819b92820991ddf797",
+      "mode": 33188
+    },
+    "pt-causal-two-ticket-native-hooks-bv4cvraw/two-ticket-causal-native-hooks34.dSYM/Contents/Resources/DWARF/two-ticket-causal-native-hooks34": {
+      "bytes": 2556796,
+      "sha256": "6c7c5ea5faf61f85568935b6e9c5f52ccef7436aa7a5e25b09db59d9caca930a",
+      "mode": 33188
+    },
+    "pt-causal-two-ticket-native-hooks-bv4cvraw/two-ticket-causal-native-hooks34.dSYM/Contents/Resources/Relocations/aarch64/two-ticket-causal-native-hooks34.yml": {
+      "bytes": 302,
+      "sha256": "50fab992a5214f95de7605497f6dfb45fffb3d905dce4d2bc8831cb85893ff93",
+      "mode": 33188
+    }
+  },
+  "durable_directories": {
+    "pt-causal-two-ticket-native-hooks-bv4cvraw": 16832,
+    "pt-causal-two-ticket-native-hooks-bv4cvraw/two-ticket-causal-native-hooks34.dSYM": 16877,
+    "pt-causal-two-ticket-native-hooks-bv4cvraw/two-ticket-causal-native-hooks34.dSYM/Contents": 16877,
+    "pt-causal-two-ticket-native-hooks-bv4cvraw/two-ticket-causal-native-hooks34.dSYM/Contents/Resources": 16877,
+    "pt-causal-two-ticket-native-hooks-bv4cvraw/two-ticket-causal-native-hooks34.dSYM/Contents/Resources/DWARF": 16877,
+    "pt-causal-two-ticket-native-hooks-bv4cvraw/two-ticket-causal-native-hooks34.dSYM/Contents/Resources/Relocations": 16877,
+    "pt-causal-two-ticket-native-hooks-bv4cvraw/two-ticket-causal-native-hooks34.dSYM/Contents/Resources/Relocations/aarch64": 16877
+  },
+  "positive_absence": {
+    "temporary_source_context": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-two-ticket-native-hooks-host-first-v2/tmp/pt-causal-two-ticket-native-hooks-bv4cvraw/source-bd3doi9_",
+    "temporary_source_tree": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-two-ticket-native-hooks-host-first-v2/tmp/pt-causal-two-ticket-native-hooks-bv4cvraw/source-bd3doi9_/tree",
+    "repository_font_header": "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/pt_font.h",
+    "candidate_font_header": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-causal-two-ticket-native-hooks-host-first-v2/candidate/pt_font.h"
+  },
+  "limits": [
+    "SAVED_HOST only; no replay or liveprocess/native/emulator/physical operation.",
+    "Heap assertions qualify no actualnativeFast/Chip/TypeOfMem/layout/stack/WCET/device/MMIO/DMA/audio/CIA/IRQ/timer/PLAY/listening.",
+    "Originalone-armed native90 gate staysFAILED; V1hookcollector uninvoked/withdrawnSOURCE admission preserved.",
+    "Before-master62 has noPASS in this audit; originalcompilefailure separate; no combined9pathruntime oradoption inferred."
+  ]
+}

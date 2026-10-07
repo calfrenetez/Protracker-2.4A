@@ -1,0 +1,344 @@
+{
+  "actual_compiler_cwd_source_root": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/song-producer-host-qualification/attempt-first-v4/source",
+  "actual_facts": {
+    "actual_outer_rows": 10,
+    "actual_preparation_rows": 16,
+    "actual_product_rows": 2,
+    "actual_stdout_bytes": 4035,
+    "actual_stdout_lines": 12,
+    "actual_total_drivers": 28,
+    "additive_overlays": 4,
+    "all_saved_owned_distinct_PID_equal_PGID_reaped_quiet_within_deadlines": true,
+    "archive_actual_bodies": 965,
+    "compiler_RC": 0,
+    "compiler_elapsed_seconds": 23.670773999998346,
+    "compiler_flags": [
+      "-std=c99",
+      "-O1",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-UNDEBUG",
+      "-fsanitize=address,undefined",
+      "-Isrc/core",
+      "-I."
+    ],
+    "compiler_stdout_stderr_bytes": 0,
+    "complete_oracle_passed": true,
+    "complete_rawstreams": 56,
+    "first_failure_inner": null,
+    "first_failure_outer": null,
+    "inner_elapsed_seconds": 29.98095066699898,
+    "inner_phase": "COMPLETE",
+    "inner_status": "PASS",
+    "modified_overlays": 0,
+    "ordered_unique_units": 83,
+    "outer_elapsed_seconds": 32.437925249992986,
+    "outer_status": "PASS_FIRST_PRIVATE_SONG_PRODUCER_V4_HOST_ONLY",
+    "postrun_verification_and_outer_after_tail_complete_observed": true,
+    "prepared_actual_bodies": 970,
+    "required_stdout_bytes": 4035,
+    "required_stdout_lines": 12,
+    "runtime_RC": 0,
+    "runtime_elapsed_seconds": 3.357756874989718,
+    "runtime_stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/song-producer-host-qualification/attempt-first-v4/editor-mixed-song-run.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runtime_stdout": {
+      "bytes": 4035,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/song-producer-host-qualification/attempt-first-v4/editor-mixed-song-run.stdout",
+      "sha256": "e665f7c1266bc4ab4896388e754b4206a9689d594730aa972e7a65810425786d"
+    },
+    "saved_product": {
+      "bytes": 7097360,
+      "mode": 33261,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/song-producer-host-qualification/attempt-first-v4/editor-mixed-song",
+      "sha256": "e56b96a991c7ca00efe0b4d1c22ddb00dc77b1a12c89830651bc20670c891c3f"
+    }
+  },
+  "actual_inner_record": {
+    "bytes": 375993,
+    "mode": 33188,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/song-producer-host-qualification/attempt-first-v4/run.json",
+    "sha256": "82635336fde03fdb65c5d20270f7e8a2af4f9cebc92dfdf5ddb2f0d8c6a52a13"
+  },
+  "actual_outer_receipt": {
+    "bytes": 244919,
+    "mode": 33188,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/song-producer-host-preparation-v4/execution-first-v4/receipt.json",
+    "sha256": "74b4b9145ae61b78558140c130068b1d8b8aea3971b6c9a337e51741bae0f5d8"
+  },
+  "actual_saved_audit": {
+    "bytes": 17854,
+    "mode": 33188,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-song-producer-first-v4-host-audit-v1/review.json",
+    "sha256": "74a66dc3aa96ff6fc5364a3deab0df59ee4a2a32708b6380e1f8a6442fbc644d"
+  },
+  "actual_source_provider_derivation": {
+    "committed_prerequisites": 44,
+    "ordered_units": 83,
+    "qualifier_freeze": {
+      "bytes": 121697,
+      "mode": 33060,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/song-producer-host-qualifier-v4/freeze.json",
+      "sha256": "2f07a773b7b60c4af069989170132ecf4c52147528797bbb4b19fcc27d0f48be"
+    },
+    "source_derivation": {
+      "bytes": 41791,
+      "mode": 33060,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/song-producer-host-qualifier-v4/source-derivation.json",
+      "sha256": "a8886897c4e4f201bc7636ad7156927a8e4e59559ce144344e818bfdb259d60d"
+    }
+  },
+  "audit_readback": {
+    "bytes": 3475,
+    "mode": 33188,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-song-producer-first-v4-host-audit-v1/readback.json",
+    "sha256": "2d4b7e8efc5569af3607a756e82474d0356ca0f7f50fb6c20ea74f013ba9f927"
+  },
+  "audit_verification": {
+    "bytes": 91116,
+    "mode": 33188,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-song-producer-first-v4-host-audit-v1/verification.json",
+    "sha256": "e50bdbac67def0a798308ca8357a21b2927cfa335a28aa73ded8031d16f4ea0f"
+  },
+  "baseline": "1196068631900b221f8f8be6c2e77c182a9ea4e8",
+  "bounds": {
+    "inner": {
+      "Git_preparation_call": 30,
+      "compiler": 120,
+      "overall": 600,
+      "owned_cleanup_reserve": 5,
+      "product": 180
+    },
+    "outer": {
+      "Git": 30,
+      "outer_qualifier": 610,
+      "overall": 900,
+      "owned_cleanup_reserve": 5
+    }
+  },
+  "candidate_replays_by_author": 0,
+  "complete_checks": {
+    "actual_before1182_control62_protected16_and_tools_saved_plus_static_currentpins_exact": true,
+    "actual_stdout_exact_entire12line4035_frozen_oracle": true,
+    "all16outer_members294_direct_inputs10candidatepayloads_exact": true,
+    "all28drivers56streams_complete_pins_cwd_environment_ownership_deadlines_RC_checked": true,
+    "all44_actual_prerequisites_match_archive": true,
+    "all4_additive_bodies_exact_and_committed_font580_generated_literal_exact": true,
+    "all659_history_bodies_preserved547_subset_exact": true,
+    "all83_actual_prepared_provider_pins_match_reviewed_derivation": true,
+    "all965_archive_bodies_read_in_memory_not_extracted": true,
+    "all965_prepared_committed_providers_exact_including_protected_committed_baselines": true,
+    "all970_actual_prepared_input_fullpins_exact": true,
+    "baseline1196068_and_readiness_origin_distinct": true,
+    "exact_current_single_P3_bound_notgenericfiltered": true,
+    "full83unit_strict_compile_and_sole_run_argv_exact": true,
+    "original54_fixed104_metadata12_added95_exact_single_overlap_union264": true,
+    "runtime_stderr_empty": true,
+    "saved_full_HEAD_index_staged_status_before_through_postrun_verify_outer_aftertail_exact": true
+  },
+  "evidence_tier": "ordinary-memory private HOST strict compile/sanitizer product; separately accepted saved audit and fresh custody",
+  "full_saved_inputs_reference": {
+    "canonical_pin_map_sha256": "6f53ea628179dd307876c99b188f9739928e81ed76e0f9989f2ccd87e1e156a9",
+    "count": 970,
+    "field": "inputs",
+    "record": {
+      "bytes": 375993,
+      "mode": 33188,
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/song-producer-host-qualification/attempt-first-v4/run.json",
+      "sha256": "82635336fde03fdb65c5d20270f7e8a2af4f9cebc92dfdf5ddb2f0d8c6a52a13"
+    }
+  },
+  "historical_disclosures": {
+    "V3_sealed_metadata_refusal_NOT_RUN": {
+      "effect": "V3 source/overlay pins were correct, but copied unit derivation row was stale; V3 remains frozen NOT_RUN. V3a corrects that row only plus truthful current metadata, with all source bodies unchanged.",
+      "kind": "AUTHOR_SOURCE_METADATA_REFUSAL_NO_CANDIDATE_INVOCATION",
+      "observed_field": "source-derivation.json ordered_unit_pins83/tests/editor_mixed_song_test.c",
+      "preserved_V3_freeze": {
+        "bytes": 85718,
+        "mode": 33060,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/song-producer-host-qualifier-v3/freeze.json",
+        "sha256": "65116618665a19848fb88f67b1ec9ff31a20e02e7628a61b8c5ca440d64cdcf0"
+      },
+      "required_exact_V3_pin": {
+        "bytes": 65603,
+        "mode": 33060,
+        "sha256": "30740cf3de471bbc24e295b1ba443dda9e92e694408d6a30bb2d9e89102df95a"
+      },
+      "root_authorization": "Distinct minimal V3a metadata correction authorized by root; no human policy decision or runtime retry.",
+      "stale_pin": {
+        "bytes": 65218,
+        "mode": 33060,
+        "sha256": "1f98abd37250e658f2c2014cf78780a0aa08f46f544b1d825d5355d71e47c920"
+      }
+    },
+    "actual_V2_failed_RUNTIME_preserved": {
+      "actual_facts": {
+        "compiler_RC": 0,
+        "drivers": 20,
+        "rawstreams": 40,
+        "required_bytes": 4035,
+        "required_lines": 12,
+        "runtime_RC": -6,
+        "stdout_bytes": 3490,
+        "stdout_lines": 11
+      },
+      "audit_report": {
+        "bytes": 10181,
+        "mode": 33188,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-song-producer-first-v2-host-failure-audit-v1/review.json",
+        "sha256": "ca2c21eccd75225af7984d202628cba6bd37d4d56eb4c0ac4e6c35a84bec182e"
+      },
+      "inner_record": {
+        "bytes": 371023,
+        "mode": 33188,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/song-producer-host-qualification/attempt-first-v2/run.json",
+        "sha256": "fc479b38d9475227df4ed9f04143c0c363793754b4eb767a5c9b96d5f3038794"
+      },
+      "original_ENV_warning": {
+        "bytes": 1497,
+        "mode": 33188,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-song-producer-post-run-failure-custody-v2/receipt.json",
+        "sha256": "a76f9dd88bd608def77e5ee536a43061df5ce2e4964a7db11d5fba2b20199b5c"
+      },
+      "outer_receipt": {
+        "bytes": 230806,
+        "mode": 33188,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/song-producer-host-preparation-v2/execution-first-v2/receipt.json",
+        "sha256": "e4d99e48c3f97fe2049aaf9b697a19d4abd06c32cc77a5508fbb923ffcd6dd69"
+      },
+      "root_corrected_custody": {
+        "bytes": 8316,
+        "mode": 33188,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-song-producer-post-run-failure-custody-v2-tmpdir/receipt.json",
+        "sha256": "e91ddc7d675453b461e8509e8023391554f87806988446f7a50551e911c2a035"
+      }
+    },
+    "actual_V3a_failed_RUNTIME_preserved": {
+      "accepted_saved_failure_audit": {
+        "bytes": 15937,
+        "mode": 33188,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-song-producer-first-v3a-host-failure-audit-v1/review.json",
+        "sha256": "9bb0fa3b3a6ee9926f200e8ee795430f753b917c9b49933efd88e29c55963037"
+      },
+      "actual_helper_assertion": "eps_command_services ticket&&published",
+      "actual_lines": 11,
+      "drivers": 20,
+      "inner_receipt": {
+        "bytes": 371155,
+        "mode": 33188,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/song-producer-host-qualification/attempt-first-v3a/run.json",
+        "sha256": "6ae02d5003148af66b5b9b1cab241e247344d7b54e6dc11dad1f41c0cea00092"
+      },
+      "outer_receipt": {
+        "bytes": 236282,
+        "mode": 33188,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/song-producer-host-preparation-v3a/execution-first-v3a/receipt.json",
+        "sha256": "f0e736313a955594944bffeb3282a5c044d348ba59a55b46d22984c018374194"
+      },
+      "raw_streams": 40,
+      "required_lines": 12,
+      "runtime_RC": -6,
+      "separate_postfailure_5driver10stream_custody": {
+        "bytes": 8901,
+        "mode": 33188,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-song-producer-post-run-failure-custody-v3a/receipt.json",
+        "sha256": "2c4f2c120882170369f7ebccb7c80768550dda33937b200afaa9d3192a1fb85d"
+      },
+      "source_caller_only": "SOURCE audit identifies contradictory pre-second-publication blanket helper; generic stderr does not prove caller",
+      "status": "FAILED_RUN_NOT_QUALIFIED",
+      "strict_compiler_RC": 0
+    },
+    "current_exact_nonoperative_source_P3": [
+      {
+        "admission_blocker": false,
+        "claim": "V3a SOURCE only, NOT_RUN; sealed V3 remains NOT_RUN.",
+        "handling": "Preserve the exact final seal and disclose the stale limitation. Root determines admission after reading this exact finding; no automatic waiver, edit or generic P3 filter.",
+        "id": "PRODUCER-QUALIFIER-V4-P3-STALE-V3A-NOT-RUN-LIMITATION",
+        "kind": "descriptive_metadata",
+        "location": {
+          "field": "limitations[1]",
+          "line": 1430,
+          "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/song-producer-host-qualifier-v4/freeze.json"
+        },
+        "observed": "The sole first-V3a HOST actually passed strict compilation and failed RUN (RC-6). This same freeze preserved_actual_V3a_failure, current README and SOURCE-STATUS correctly retain that result as FAILED_RUN_NOT_QUALIFIED; only this inherited limitations sentence still calls V3a NOT_RUN. The sealed original V3 was never run.",
+        "operative": false,
+        "priority": "P3",
+        "program_count_pin_consequences": "No operative script AST, source/provider/pin map, helper, environment, count, oracle, baseline or new first-v4 namespace is changed. The qualifier never reads this limitations field. Full actual failed receipts and separate custody are pinned; no failed V3a result is admitted as qualification."
+      }
+    ],
+    "historical_SOURCE_order_correction_not_runtime_trace": {
+      "F_distinction": "F external guard covers unspecified admitted scratch conservatively; its current sizeof-only clear was not the observed failure.",
+      "correct_source_order": "source_activate521-542 only captures and sets controller ACTIVATION/PENDING; producer398 reaches AUDIT_BEGIN. First fixture eps_same376 precedes construction. Later producer CONTROLLER428 calls advance_validation; controller758 invokes activation_open, which clears full advertised scratch. Second eps_same380 after NEXT necessarily observes the invalid interior E expectation.",
+      "effect": "Operative external E/F guard correction remains sound; old SOURCE trace wording is preserved, not silently edited. Generic actual stderr alone supplies no runtime caller trace.",
+      "historical_wrong_claim": "Frozen V3 diagnosis/README/freeze and independent fixture review said the first eps_same at AUDIT_BEGIN follows actual activation_open.",
+      "status": "CURRENT_SOURCE_ORDER_CORRECTION_PRESERVED_HISTORY_NOT_RUNTIME_TRACE"
+    },
+    "old_V3a_matrix_P3": {
+      "current_correction": "V4 matrix and operative namespace both first-v4",
+      "id": "PRODUCER-QUALIFIER-V3A-P3-MATRIX-ATTEMPT-NAME",
+      "no_runtime_inference": true,
+      "retained_original": "V3a matrix said first-v3 while its operative namespace was first-v3a; frozen original preserved"
+    },
+    "previous_SOURCE_acceptance_not_runtime_PASS": true,
+    "retirement_V3_V4_COMPILE_V5_ASan_RUN_failures_V6_HOST_PASS_distinct": true,
+    "trusted_outer_author_guard_count_refusal_was_not_candidate_failure": true
+  },
+  "limitations": [
+    "The exact private HOST strict compiler/sanitizer runtime and full oracle passed once; no product retry occurred in this audit.",
+    "Current P3 stale V3a NOT_RUN wording is preserved and strictly bound; the actual V3a failure was never reclassified as passing.",
+    "Publication/adoption require root guarded review and execution; this audit performs neither.",
+    "No native68000/030, Amiberry, physical A1200/AmiGUS, IRQ/stack/WCET/exact live schedule/device completion/voice-stop/quiet/audio/listening qualification.",
+    "All process identities are saved completed records; none was polled or probed."
+  ],
+  "native_Amiberry_physical_audio_timing_acceptance": false,
+  "publication_snapshot": {
+    "adoption_done_at_seal": false,
+    "commit_done_at_seal": false,
+    "current_before_source_count": 1182,
+    "current_controls": 62,
+    "planned_owned_paths": 8,
+    "prospective_after_source_count": 1186,
+    "protected_paths": 16,
+    "retained_controls_after_two_doc_appends": 60
+  },
+  "retained_exact_SOURCE_findings": [
+    {
+      "admission_blocker": false,
+      "claim": "V3a SOURCE only, NOT_RUN; sealed V3 remains NOT_RUN.",
+      "handling": "Preserve the exact final seal and disclose the stale limitation. Root determines admission after reading this exact finding; no automatic waiver, edit or generic P3 filter.",
+      "id": "PRODUCER-QUALIFIER-V4-P3-STALE-V3A-NOT-RUN-LIMITATION",
+      "kind": "descriptive_metadata",
+      "location": {
+        "field": "limitations[1]",
+        "line": 1430,
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/song-producer-host-qualifier-v4/freeze.json"
+      },
+      "observed": "The sole first-V3a HOST actually passed strict compilation and failed RUN (RC-6). This same freeze preserved_actual_V3a_failure, current README and SOURCE-STATUS correctly retain that result as FAILED_RUN_NOT_QUALIFIED; only this inherited limitations sentence still calls V3a NOT_RUN. The sealed original V3 was never run.",
+      "operative": false,
+      "priority": "P3",
+      "program_count_pin_consequences": "No operative script AST, source/provider/pin map, helper, environment, count, oracle, baseline or new first-v4 namespace is changed. The qualifier never reads this limitations field. Full actual failed receipts and separate custody are pinned; no failed V3a result is admitted as qualification."
+    }
+  ],
+  "root_HOST_audit_acceptance": {
+    "bytes": 7144,
+    "mode": 33188,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-song-producer-v4-host-audit-acceptance-v1.json",
+    "sha256": "896b20d300120bea51375f915a40a122ffd0045b1b01b4bbe03a1ac82eb15a30"
+  },
+  "schema": "pt24g-song-producer-v4-accepted-HOST-observations",
+  "separate_fresh_postrun_custody": {
+    "bytes": 9047,
+    "mode": 33188,
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-song-producer-postrun-custody-v4/receipt.json",
+    "sha256": "9b7b5982a3916eccad9484d45452716baecb538bd50e6b9b483f3e4f40771102"
+  },
+  "status": "PASS_HOST_ONLY",
+  "target_operations": 0
+}

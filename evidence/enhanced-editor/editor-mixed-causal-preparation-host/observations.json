@@ -1,0 +1,1134 @@
+{
+  "scope": "ACCEPTED_FIVE_GROUP_HOST_SOFTWARE_QUALIFICATION_ONLY_NOT_STANDALONE_CLI_OR_NATIVE",
+  "status": "PASS_V3_FOCUSED43_DEFAULT_FACTORY_CONTROLLER_CAUSAL26_PUBLICATION56_ASAN_UBSAN_HOST_ONLY",
+  "source_baseline": "CURRENT_CHECKOUT_INCLUDING_PRESERVED_UNCOMMITTED_DISPLAY_WORK_WITH_EXACT_TYPED_OVERLAYS; NOT_COMMITTED_ARCHIVE",
+  "inner_receipt": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/receipt.json",
+    "bytes": 1341827,
+    "sha256": "f9a0f4485b066d0717177509cb9d5e997f8166c229c6dff10fd66a6b8b1c6b8e",
+    "mode": 33188
+  },
+  "outer_receipt": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-outer-first-v3/receipt.json",
+    "bytes": 4031,
+    "sha256": "6ecfc7793a493edb540937c28f3b189ee438a08a30ca4c59495bd987fcb9ec9e",
+    "mode": 33152
+  },
+  "accepted_saved_audit": {
+    "bytes": 14137,
+    "sha256": "9c4dc92c5bbacc806541b199335a4929636af9285e8c05e3f05b2e6c3b07734c",
+    "mode": 33188
+  },
+  "accepted_source_review": {
+    "bytes": 10436,
+    "sha256": "567b904b54756d8468be9703b5e3d334171d2b3f7eb64d77a326c3967a8e2695",
+    "mode": 33188
+  },
+  "production_and_fixture_selection": {
+    "src/core/mixed_readers_causal.c": {
+      "bytes": 55184,
+      "sha256": "d2298f135bd7cdcff35da2893dd5d2e6bac808176bd5dc64d017e3ac63a5f5e7",
+      "mode": 33188
+    },
+    "src/core/mixed_readers_causal_factory_internal.h": {
+      "bytes": 1982,
+      "sha256": "2958501d5b7dfc9213e39662f90ab5bc661d454b430a4488ca1733d9e8a33f3f",
+      "mode": 33188
+    },
+    "src/editor/sampler_mixed_readers.c": {
+      "bytes": 58438,
+      "sha256": "ac9416b8cabf530c913792dfffd88d0fd8f23af4b6de91c010f391cc2ddca800",
+      "mode": 33188
+    },
+    "src/editor/sampler_mixed_causal_internal.h": {
+      "bytes": 2546,
+      "sha256": "a859a3f00a46cc97e2fb2cbd98dd7d9def4e818e498643c45b4745b3fa924f20",
+      "mode": 33188
+    },
+    "src/editor/editor_mixed_causal_prepare.c": {
+      "bytes": 77965,
+      "sha256": "d9e39016edfb59a5fc4e65ca97e0a4ff574e18985b3f072b958f0a0c7576e37c",
+      "mode": 33188
+    },
+    "src/editor/editor_mixed_causal_prepare.h": {
+      "bytes": 10191,
+      "sha256": "86e05815d442bff0306d526dc67e8af55f65b446534654a44db15b896b8a393f",
+      "mode": 33188
+    },
+    "src/editor/editor_mixed_causal_source_internal.h": {
+      "bytes": 8944,
+      "sha256": "517d5f25e9986bd9232f6a4bf36964d74325e714afa8cc12d6ab38ff805c59f5",
+      "mode": 33188
+    },
+    "tests/editor_mixed_causal_prepare_test.c": {
+      "bytes": 37410,
+      "sha256": "bd648d4f964e89ed0b56ecb41757b89fab7029130b2b2259bdea5e9ad04cd2f9",
+      "mode": 33188
+    }
+  },
+  "selected_tree_extra_historical_recipes_not_invoked_or_adopted_here": {
+    "tests/test_editor_mixed_causal_current_regressions.py": {
+      "bytes": 11781,
+      "sha256": "aa04b12fd1696420e4c6aff059e66a22877d0a62ed15807156ebe75988413a26",
+      "mode": 33188
+    },
+    "tests/test_editor_mixed_causal_prepare.py": {
+      "bytes": 4323,
+      "sha256": "813f0bdf95308f8cef6cc07b5d337b8d0cd7d8a7bbbf4f02455e55575d94462d",
+      "mode": 33188
+    }
+  },
+  "commands": [
+    {
+      "label": "focused-causal43-compile",
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-I.",
+        "tests/editor_mixed_causal_prepare_test.c",
+        "src/editor/editor_mixed_causal_prepare.c",
+        "src/editor/sampler_mixed_readers.c",
+        "src/core/mixed_readers_causal.c",
+        "src/core/amigus_trigger_levels.c",
+        "src/core/mixed_scheduled_readers.c",
+        "src/core/elapsed_clock.c",
+        "src/editor/sampler_paula.c",
+        "src/editor/sampler_wavetable.c",
+        "src/core/amigus_voice_plan.c",
+        "src/editor/sampler.c",
+        "src/editor/slots.c",
+        "src/core/pcm_filtered.c",
+        "src/core/slices.c",
+        "src/core/pattern.c",
+        "src/core/document.c",
+        "src/core/pp20.c",
+        "src/core/project.c",
+        "src/core/mod_project.c",
+        "src/core/mod_inspect.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "src/core/wav.c",
+        "src/core/svx.c",
+        "src/core/raw.c",
+        "src/editor/editor.c",
+        "src/editor/song.c",
+        "src/editor/view.c",
+        "src/editor/workflow.c",
+        "src/editor/sample_range.c",
+        "src/editor/wave_summary.c",
+        "src/core/sample_usage.c",
+        "src/core/event_resource.c",
+        "src/core/flow.c",
+        "src/core/pitch.c",
+        "src/core/amigus_reservation.c",
+        "src/editor/sampler_invert_song.c",
+        "src/core/render_invert.c",
+        "src/core/invert_bank.c",
+        "src/core/invert_sequence.c",
+        "src/core/invert_pcm.c",
+        "src/core/invert_loop.c",
+        "src/core/amigus_session.c",
+        "src/core/amigus_fifo.c",
+        "src/core/amigus_pcm_pack.c",
+        "src/core/studio_consumer.c",
+        "src/core/studio_pump.c",
+        "src/core/studio_queue.c",
+        "src/editor/editor_studio.c",
+        "src/editor/sampler_song.c",
+        "src/editor/sampler_studio.c",
+        "src/core/studio_song.c",
+        "src/core/studio_plan.c",
+        "src/core/render.c",
+        "src/core/timeline.c",
+        "src/core/frame_clock.c",
+        "src/core/studio_mix.c",
+        "src/core/voice.c",
+        "src/editor/wavetable_song.c",
+        "src/editor/wavetable_voices.c",
+        "src/editor/wavetable_dispatch.c",
+        "src/core/amigus_render_voice.c",
+        "src/editor/paula_preflight.c",
+        "src/core/paula_render_voice.c",
+        "src/core/amigus_wavetable_cache.c",
+        "src/core/amigus_sample_ram.c",
+        "src/core/sample_cache.c",
+        "src/core/playback_pcm.c",
+        "src/editor/editor_mixed.c",
+        "src/editor/mixed_owner.c",
+        "src/editor/mixed_transport.c",
+        "src/editor/mixed_preflight.c",
+        "src/editor/paula_voices.c",
+        "src/editor/paula_dispatch.c",
+        "src/editor/editor_wavetable.c",
+        "src/platform/sample_import.c",
+        "src/platform/raw_import.c",
+        "src/platform/mod_import.c",
+        "src/platform/pp20_import.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/focused-causal43"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/tree",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 71400,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 16.829179499996826
+    },
+    {
+      "label": "focused-causal43-run",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/focused-causal43"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/tree",
+      "limit_seconds": 30,
+      "passed": true,
+      "errors": [],
+      "pid": 71519,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 337,
+          "sha256": "4be6008682f3da87970637b13f676593774ba6534857ea8436139213fb4595fa",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.6086662089801393
+    },
+    {
+      "label": "default-factory-compile",
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-I.",
+        "tests/sampler_mixed_readers_test.c",
+        "src/editor/sampler_mixed_readers.c",
+        "src/core/mixed_readers_causal.c",
+        "src/core/amigus_trigger_levels.c",
+        "src/core/mixed_scheduled_readers.c",
+        "src/core/elapsed_clock.c",
+        "src/editor/sampler_paula.c",
+        "src/editor/sampler_wavetable.c",
+        "src/core/amigus_voice_plan.c",
+        "src/editor/sampler.c",
+        "src/editor/slots.c",
+        "src/core/pcm_filtered.c",
+        "src/core/slices.c",
+        "src/core/pattern.c",
+        "src/core/document.c",
+        "src/core/pp20.c",
+        "src/core/project.c",
+        "src/core/mod_project.c",
+        "src/core/mod_inspect.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "src/core/wav.c",
+        "src/core/svx.c",
+        "src/core/raw.c",
+        "src/core/amigus_reservation.c",
+        "src/core/amigus_wavetable_cache.c",
+        "src/core/amigus_sample_ram.c",
+        "src/core/sample_cache.c",
+        "src/core/playback_pcm.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/default-factory"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/tree",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 71523,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 8.073410542012425
+    },
+    {
+      "label": "default-factory-run",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/default-factory"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/tree",
+      "limit_seconds": 180,
+      "passed": true,
+      "errors": [],
+      "pid": 71566,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 1280,
+          "sha256": "b564b11df35e43afc52c5f558a320ee38a4f4d9ca260319f1378dd10b7b411d7",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.6182075000251643
+    },
+    {
+      "label": "default-controller-compile",
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-I.",
+        "tests/editor_mixed_readers_prepare_test.c",
+        "src/editor/editor_mixed_readers_prepare.c",
+        "src/editor/sampler_mixed_readers.c",
+        "src/core/mixed_readers_causal.c",
+        "src/core/mixed_readers_activation.c",
+        "src/core/amigus_trigger_levels.c",
+        "src/core/mixed_scheduled_readers.c",
+        "src/core/elapsed_clock.c",
+        "src/editor/sampler_paula.c",
+        "src/editor/sampler_wavetable.c",
+        "src/core/amigus_voice_plan.c",
+        "src/editor/sampler.c",
+        "src/editor/slots.c",
+        "src/core/pcm_filtered.c",
+        "src/core/slices.c",
+        "src/core/pattern.c",
+        "src/core/document.c",
+        "src/core/pp20.c",
+        "src/core/project.c",
+        "src/core/mod_project.c",
+        "src/core/mod_inspect.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "src/core/wav.c",
+        "src/core/svx.c",
+        "src/core/raw.c",
+        "src/editor/editor.c",
+        "src/editor/song.c",
+        "src/editor/view.c",
+        "src/editor/workflow.c",
+        "src/editor/sample_range.c",
+        "src/editor/wave_summary.c",
+        "src/core/sample_usage.c",
+        "src/core/event_resource.c",
+        "src/core/flow.c",
+        "src/core/pitch.c",
+        "src/core/amigus_reservation.c",
+        "src/editor/sampler_invert_song.c",
+        "src/core/render_invert.c",
+        "src/core/invert_bank.c",
+        "src/core/invert_sequence.c",
+        "src/core/invert_pcm.c",
+        "src/core/invert_loop.c",
+        "src/core/amigus_session.c",
+        "src/core/amigus_fifo.c",
+        "src/core/amigus_pcm_pack.c",
+        "src/core/studio_consumer.c",
+        "src/core/studio_pump.c",
+        "src/core/studio_queue.c",
+        "src/editor/editor_studio.c",
+        "src/editor/sampler_song.c",
+        "src/editor/sampler_studio.c",
+        "src/core/studio_song.c",
+        "src/core/studio_plan.c",
+        "src/core/render.c",
+        "src/core/timeline.c",
+        "src/core/frame_clock.c",
+        "src/core/studio_mix.c",
+        "src/core/voice.c",
+        "src/editor/wavetable_song.c",
+        "src/editor/wavetable_voices.c",
+        "src/editor/wavetable_dispatch.c",
+        "src/core/amigus_render_voice.c",
+        "src/editor/paula_preflight.c",
+        "src/core/paula_render_voice.c",
+        "src/core/amigus_wavetable_cache.c",
+        "src/core/amigus_sample_ram.c",
+        "src/core/sample_cache.c",
+        "src/core/playback_pcm.c",
+        "src/editor/editor_mixed.c",
+        "src/editor/mixed_owner.c",
+        "src/editor/mixed_transport.c",
+        "src/editor/mixed_preflight.c",
+        "src/editor/paula_voices.c",
+        "src/editor/paula_dispatch.c",
+        "src/editor/editor_wavetable.c",
+        "src/platform/sample_import.c",
+        "src/platform/raw_import.c",
+        "src/platform/mod_import.c",
+        "src/platform/pp20_import.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/default-controller"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/tree",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 71567,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 18.07180299999891
+    },
+    {
+      "label": "default-controller-run",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/default-controller"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/tree",
+      "limit_seconds": 180,
+      "passed": true,
+      "errors": [],
+      "pid": 71712,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 2273,
+          "sha256": "b3afac00b309d959418568141eb81a0977fabfbfdfde3eaa7688b1d2167ff22e",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.9203484999889042
+    },
+    {
+      "label": "causal26-compile",
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-I.",
+        "tests/mixed_readers_causal_test.c",
+        "src/core/mixed_readers_causal.c",
+        "src/core/mixed_scheduled_readers.c",
+        "src/core/elapsed_clock.c",
+        "src/editor/sampler_paula.c",
+        "src/editor/sampler_wavetable.c",
+        "src/core/amigus_voice_plan.c",
+        "src/editor/sampler.c",
+        "src/editor/slots.c",
+        "src/core/pcm_filtered.c",
+        "src/core/slices.c",
+        "src/core/pattern.c",
+        "src/core/document.c",
+        "src/core/pp20.c",
+        "src/core/project.c",
+        "src/core/mod_project.c",
+        "src/core/mod_inspect.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "src/core/wav.c",
+        "src/core/svx.c",
+        "src/core/raw.c",
+        "src/core/amigus_reservation.c",
+        "src/core/amigus_wavetable_cache.c",
+        "src/core/amigus_sample_ram.c",
+        "src/core/sample_cache.c",
+        "src/core/playback_pcm.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/causal26"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/tree",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 71713,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 6.665952083014417
+    },
+    {
+      "label": "causal26-run",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/causal26"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/tree",
+      "limit_seconds": 30,
+      "passed": true,
+      "errors": [],
+      "pid": 71767,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 521,
+          "sha256": "296f5ae9a539b3d0ddfed133858c2ac1f4d5f66dd769b0745845135b9e99864f",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.3187656250083819
+    },
+    {
+      "label": "publication56-compile",
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-I.",
+        "tests/mixed_readers_causal_publication_test.c",
+        "src/core/mixed_readers_causal.c",
+        "src/core/mixed_scheduled_readers.c",
+        "src/core/elapsed_clock.c",
+        "src/editor/sampler_paula.c",
+        "src/editor/sampler_wavetable.c",
+        "src/core/amigus_voice_plan.c",
+        "src/editor/sampler.c",
+        "src/editor/slots.c",
+        "src/core/pcm_filtered.c",
+        "src/core/slices.c",
+        "src/core/pattern.c",
+        "src/core/document.c",
+        "src/core/pp20.c",
+        "src/core/project.c",
+        "src/core/mod_project.c",
+        "src/core/mod_inspect.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "src/core/wav.c",
+        "src/core/svx.c",
+        "src/core/raw.c",
+        "src/core/amigus_reservation.c",
+        "src/core/amigus_wavetable_cache.c",
+        "src/core/amigus_sample_ram.c",
+        "src/core/sample_cache.c",
+        "src/core/playback_pcm.c",
+        "-o",
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/publication56"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/tree",
+      "limit_seconds": 120,
+      "passed": true,
+      "errors": [],
+      "pid": 71768,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 6.8961110829841346
+    },
+    {
+      "label": "publication56-run",
+      "argv": [
+        "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/publication56"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/tree",
+      "limit_seconds": 30,
+      "passed": true,
+      "errors": [],
+      "pid": 71821,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 404,
+          "sha256": "20614a7624f7eae0259da6590fa3826b8f5beb1b006b887c251fce14a6a2e74e",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.38025541699607857
+    }
+  ],
+  "groups": [
+    {
+      "label": "focused-causal43",
+      "sources": [
+        "tests/editor_mixed_causal_prepare_test.c",
+        "src/editor/editor_mixed_causal_prepare.c",
+        "src/editor/sampler_mixed_readers.c",
+        "src/core/mixed_readers_causal.c",
+        "src/core/amigus_trigger_levels.c",
+        "src/core/mixed_scheduled_readers.c",
+        "src/core/elapsed_clock.c",
+        "src/editor/sampler_paula.c",
+        "src/editor/sampler_wavetable.c",
+        "src/core/amigus_voice_plan.c",
+        "src/editor/sampler.c",
+        "src/editor/slots.c",
+        "src/core/pcm_filtered.c",
+        "src/core/slices.c",
+        "src/core/pattern.c",
+        "src/core/document.c",
+        "src/core/pp20.c",
+        "src/core/project.c",
+        "src/core/mod_project.c",
+        "src/core/mod_inspect.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "src/core/wav.c",
+        "src/core/svx.c",
+        "src/core/raw.c",
+        "src/editor/editor.c",
+        "src/editor/song.c",
+        "src/editor/view.c",
+        "src/editor/workflow.c",
+        "src/editor/sample_range.c",
+        "src/editor/wave_summary.c",
+        "src/core/sample_usage.c",
+        "src/core/event_resource.c",
+        "src/core/flow.c",
+        "src/core/pitch.c",
+        "src/core/amigus_reservation.c",
+        "src/editor/sampler_invert_song.c",
+        "src/core/render_invert.c",
+        "src/core/invert_bank.c",
+        "src/core/invert_sequence.c",
+        "src/core/invert_pcm.c",
+        "src/core/invert_loop.c",
+        "src/core/amigus_session.c",
+        "src/core/amigus_fifo.c",
+        "src/core/amigus_pcm_pack.c",
+        "src/core/studio_consumer.c",
+        "src/core/studio_pump.c",
+        "src/core/studio_queue.c",
+        "src/editor/editor_studio.c",
+        "src/editor/sampler_song.c",
+        "src/editor/sampler_studio.c",
+        "src/core/studio_song.c",
+        "src/core/studio_plan.c",
+        "src/core/render.c",
+        "src/core/timeline.c",
+        "src/core/frame_clock.c",
+        "src/core/studio_mix.c",
+        "src/core/voice.c",
+        "src/editor/wavetable_song.c",
+        "src/editor/wavetable_voices.c",
+        "src/editor/wavetable_dispatch.c",
+        "src/core/amigus_render_voice.c",
+        "src/editor/paula_preflight.c",
+        "src/core/paula_render_voice.c",
+        "src/core/amigus_wavetable_cache.c",
+        "src/core/amigus_sample_ram.c",
+        "src/core/sample_cache.c",
+        "src/core/playback_pcm.c",
+        "src/editor/editor_mixed.c",
+        "src/editor/mixed_owner.c",
+        "src/editor/mixed_transport.c",
+        "src/editor/mixed_preflight.c",
+        "src/editor/paula_voices.c",
+        "src/editor/paula_dispatch.c",
+        "src/editor/editor_wavetable.c",
+        "src/platform/sample_import.c",
+        "src/platform/raw_import.c",
+        "src/platform/mod_import.c",
+        "src/platform/pp20_import.c"
+      ],
+      "oracle": "EDITOR MIXED CAUSAL PREPARE PASS:43 genuine typed pure-TRIGGER pair cases; original bind before factory, raw/refusal/reentry retention, literal windows, 4Paula+12card/16card and 8/16/24 masters,32 pinned readers and independent C/R/source quiet, complete guards/actual transfer/sticky pair scope/exact saves/SOURCE borrow; SOFTWARE_ONLY\n",
+      "compile_seconds": 120,
+      "run_seconds": 30,
+      "executable": {
+        "bytes": 5780368,
+        "sha256": "c20faec2a865440522baec9383418cef8da52b0e54f215600ad0d7dcb493e3bb",
+        "mode": 33261
+      },
+      "actual_oracle": "EDITOR MIXED CAUSAL PREPARE PASS:43 genuine typed pure-TRIGGER pair cases; original bind before factory, raw/refusal/reentry retention, literal windows, 4Paula+12card/16card and 8/16/24 masters,32 pinned readers and independent C/R/source quiet, complete guards/actual transfer/sticky pair scope/exact saves/SOURCE borrow; SOFTWARE_ONLY\n",
+      "passed": true
+    },
+    {
+      "label": "default-factory",
+      "sources": [
+        "tests/sampler_mixed_readers_test.c",
+        "src/editor/sampler_mixed_readers.c",
+        "src/core/mixed_readers_causal.c",
+        "src/core/amigus_trigger_levels.c",
+        "src/core/mixed_scheduled_readers.c",
+        "src/core/elapsed_clock.c",
+        "src/editor/sampler_paula.c",
+        "src/editor/sampler_wavetable.c",
+        "src/core/amigus_voice_plan.c",
+        "src/editor/sampler.c",
+        "src/editor/slots.c",
+        "src/core/pcm_filtered.c",
+        "src/core/slices.c",
+        "src/core/pattern.c",
+        "src/core/document.c",
+        "src/core/pp20.c",
+        "src/core/project.c",
+        "src/core/mod_project.c",
+        "src/core/mod_inspect.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "src/core/wav.c",
+        "src/core/svx.c",
+        "src/core/raw.c",
+        "src/core/amigus_reservation.c",
+        "src/core/amigus_wavetable_cache.c",
+        "src/core/amigus_sample_ram.c",
+        "src/core/sample_cache.c",
+        "src/core/playback_pcm.c"
+      ],
+      "oracle": "SAMPLER MIXED FACTORY PASS:24 genuine16-reader paired8/16/24 master lifetimes; real private validation and persistent/TEMP pins; selective signed8 Chip and8/16 card literal endian/channel/padding oracles; exact saves/grid/independent proof orders; constructor/admission/all-phase cancel/source expiry/alias/reentry/fragmented cache-slot2 arena-block0; factory queued effects/unadopted pins/CONTROL+STOP/output guards/budget;6 released caller/current persistent-pin lifetimes;32-reader replacement/pressure and malformed exact-domain drains; SOFTWARE_ONLY\nMIXED READERS PASS:12 genuine16-action paired lifetimes;20 constructor/180 typed admissions;78 callback/effect/proof cases;24 explicit clock/refusal/pending/cancellation groups;6 malformed-reader envelopes;18 endian/loop/padding groups;6 full alias,32-reader capacity/replacement and control/STOP groups; expired controls/consumed close0; exact common grid/master saves; SOFTWARE_ONLY\namigus reservation lifecycle: PASS (fake library, no hardware)\nWAVETABLE UPLOAD JOB PASS: bounded steps, cancellation, unpublished leases, partial words, live ownership loss and hit transfer; injected only\nAMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only\n",
+      "compile_seconds": 120,
+      "run_seconds": 180,
+      "executable": {
+        "bytes": 2781328,
+        "sha256": "68ea6a3ff75348906d00c093bae129b6f0e9843ca720300c0b40f557fc1d5b3d",
+        "mode": 33261
+      },
+      "actual_oracle": "SAMPLER MIXED FACTORY PASS:24 genuine16-reader paired8/16/24 master lifetimes; real private validation and persistent/TEMP pins; selective signed8 Chip and8/16 card literal endian/channel/padding oracles; exact saves/grid/independent proof orders; constructor/admission/all-phase cancel/source expiry/alias/reentry/fragmented cache-slot2 arena-block0; factory queued effects/unadopted pins/CONTROL+STOP/output guards/budget;6 released caller/current persistent-pin lifetimes;32-reader replacement/pressure and malformed exact-domain drains; SOFTWARE_ONLY\nMIXED READERS PASS:12 genuine16-action paired lifetimes;20 constructor/180 typed admissions;78 callback/effect/proof cases;24 explicit clock/refusal/pending/cancellation groups;6 malformed-reader envelopes;18 endian/loop/padding groups;6 full alias,32-reader capacity/replacement and control/STOP groups; expired controls/consumed close0; exact common grid/master saves; SOFTWARE_ONLY\namigus reservation lifecycle: PASS (fake library, no hardware)\nWAVETABLE UPLOAD JOB PASS: bounded steps, cancellation, unpublished leases, partial words, live ownership loss and hit transfer; injected only\nAMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only\n",
+      "passed": true
+    },
+    {
+      "label": "default-controller",
+      "sources": [
+        "tests/editor_mixed_readers_prepare_test.c",
+        "src/editor/editor_mixed_readers_prepare.c",
+        "src/editor/sampler_mixed_readers.c",
+        "src/core/mixed_readers_causal.c",
+        "src/core/mixed_readers_activation.c",
+        "src/core/amigus_trigger_levels.c",
+        "src/core/mixed_scheduled_readers.c",
+        "src/core/elapsed_clock.c",
+        "src/editor/sampler_paula.c",
+        "src/editor/sampler_wavetable.c",
+        "src/core/amigus_voice_plan.c",
+        "src/editor/sampler.c",
+        "src/editor/slots.c",
+        "src/core/pcm_filtered.c",
+        "src/core/slices.c",
+        "src/core/pattern.c",
+        "src/core/document.c",
+        "src/core/pp20.c",
+        "src/core/project.c",
+        "src/core/mod_project.c",
+        "src/core/mod_inspect.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "src/core/wav.c",
+        "src/core/svx.c",
+        "src/core/raw.c",
+        "src/editor/editor.c",
+        "src/editor/song.c",
+        "src/editor/view.c",
+        "src/editor/workflow.c",
+        "src/editor/sample_range.c",
+        "src/editor/wave_summary.c",
+        "src/core/sample_usage.c",
+        "src/core/event_resource.c",
+        "src/core/flow.c",
+        "src/core/pitch.c",
+        "src/core/amigus_reservation.c",
+        "src/editor/sampler_invert_song.c",
+        "src/core/render_invert.c",
+        "src/core/invert_bank.c",
+        "src/core/invert_sequence.c",
+        "src/core/invert_pcm.c",
+        "src/core/invert_loop.c",
+        "src/core/amigus_session.c",
+        "src/core/amigus_fifo.c",
+        "src/core/amigus_pcm_pack.c",
+        "src/core/studio_consumer.c",
+        "src/core/studio_pump.c",
+        "src/core/studio_queue.c",
+        "src/editor/editor_studio.c",
+        "src/editor/sampler_song.c",
+        "src/editor/sampler_studio.c",
+        "src/core/studio_song.c",
+        "src/core/studio_plan.c",
+        "src/core/render.c",
+        "src/core/timeline.c",
+        "src/core/frame_clock.c",
+        "src/core/studio_mix.c",
+        "src/core/voice.c",
+        "src/editor/wavetable_song.c",
+        "src/editor/wavetable_voices.c",
+        "src/editor/wavetable_dispatch.c",
+        "src/core/amigus_render_voice.c",
+        "src/editor/paula_preflight.c",
+        "src/core/paula_render_voice.c",
+        "src/core/amigus_wavetable_cache.c",
+        "src/core/amigus_sample_ram.c",
+        "src/core/sample_cache.c",
+        "src/core/playback_pcm.c",
+        "src/editor/editor_mixed.c",
+        "src/editor/mixed_owner.c",
+        "src/editor/mixed_transport.c",
+        "src/editor/mixed_preflight.c",
+        "src/editor/paula_voices.c",
+        "src/editor/paula_dispatch.c",
+        "src/editor/editor_wavetable.c",
+        "src/platform/sample_import.c",
+        "src/platform/raw_import.c",
+        "src/platform/mod_import.c",
+        "src/platform/pp20_import.c"
+      ],
+      "oracle": "SAMPLER MIXED FACTORY PASS:24 genuine16-reader paired8/16/24 master lifetimes; real private validation and persistent/TEMP pins; selective signed8 Chip and8/16 card literal endian/channel/padding oracles; exact saves/grid/independent proof orders; constructor/admission/all-phase cancel/source expiry/alias/reentry/fragmented cache-slot2 arena-block0; factory queued effects/unadopted pins/CONTROL+STOP/output guards/budget;6 released caller/current persistent-pin lifetimes;32-reader replacement/pressure and malformed exact-domain drains; SOFTWARE_ONLY\nSAMPLER MIXED ACTIVATION PASS:12 genuine16-reader8/16/24 master/Chip8/card8+16 paired lifetimes; copied whole-packet exact-window activation, CONTROL and STOP; caller-pin expiry, literal precision/endian/channel/padding and exact saves; independent quiet/persistent retention, partial effects and one shutdown with later independent source proof;32-reader replacement pressure preserves new keys, fragmented slot2/block0 and six unpublished full-span output guards; SOFTWARE_ONLY\nEDITOR MIXED READERS PREPARE PASS:12 genuine paired editor 8/16/24 master/Chip8/card8+16 precision/channel/endian lifetimes; original-window CONTROL/STOP only from positive ACTIVE keys; actual edit/undo/route/dispose veto until independent C/R and source quiet; construction/action cancellation, revision-only stale and poisoned former tables, complete unpublished/spare output/input guards, authoritative enqueue transfer, callback faults/partial effects, slot serial reuse and exact master saves; SOFTWARE_ONLY\nMIXED READERS PASS:12 genuine16-action paired lifetimes;20 constructor/180 typed admissions;78 callback/effect/proof cases;24 explicit clock/refusal/pending/cancellation groups;6 malformed-reader envelopes;18 endian/loop/padding groups;6 full alias,32-reader capacity/replacement and control/STOP groups; expired controls/consumed close0; exact common grid/master saves; SOFTWARE_ONLY\namigus reservation lifecycle: PASS (fake library, no hardware)\nWAVETABLE UPLOAD JOB PASS: bounded steps, cancellation, unpublished leases, partial words, live ownership loss and hit transfer; injected only\nAMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only\n",
+      "compile_seconds": 120,
+      "run_seconds": 180,
+      "executable": {
+        "bytes": 6280912,
+        "sha256": "63aaf4d073ebb996e090e57e38b0fbcb6166ae81f2787b91ba4d855a4fc2297c",
+        "mode": 33261
+      },
+      "actual_oracle": "SAMPLER MIXED FACTORY PASS:24 genuine16-reader paired8/16/24 master lifetimes; real private validation and persistent/TEMP pins; selective signed8 Chip and8/16 card literal endian/channel/padding oracles; exact saves/grid/independent proof orders; constructor/admission/all-phase cancel/source expiry/alias/reentry/fragmented cache-slot2 arena-block0; factory queued effects/unadopted pins/CONTROL+STOP/output guards/budget;6 released caller/current persistent-pin lifetimes;32-reader replacement/pressure and malformed exact-domain drains; SOFTWARE_ONLY\nSAMPLER MIXED ACTIVATION PASS:12 genuine16-reader8/16/24 master/Chip8/card8+16 paired lifetimes; copied whole-packet exact-window activation, CONTROL and STOP; caller-pin expiry, literal precision/endian/channel/padding and exact saves; independent quiet/persistent retention, partial effects and one shutdown with later independent source proof;32-reader replacement pressure preserves new keys, fragmented slot2/block0 and six unpublished full-span output guards; SOFTWARE_ONLY\nEDITOR MIXED READERS PREPARE PASS:12 genuine paired editor 8/16/24 master/Chip8/card8+16 precision/channel/endian lifetimes; original-window CONTROL/STOP only from positive ACTIVE keys; actual edit/undo/route/dispose veto until independent C/R and source quiet; construction/action cancellation, revision-only stale and poisoned former tables, complete unpublished/spare output/input guards, authoritative enqueue transfer, callback faults/partial effects, slot serial reuse and exact master saves; SOFTWARE_ONLY\nMIXED READERS PASS:12 genuine16-action paired lifetimes;20 constructor/180 typed admissions;78 callback/effect/proof cases;24 explicit clock/refusal/pending/cancellation groups;6 malformed-reader envelopes;18 endian/loop/padding groups;6 full alias,32-reader capacity/replacement and control/STOP groups; expired controls/consumed close0; exact common grid/master saves; SOFTWARE_ONLY\namigus reservation lifecycle: PASS (fake library, no hardware)\nWAVETABLE UPLOAD JOB PASS: bounded steps, cancellation, unpublished leases, partial words, live ownership loss and hit transfer; injected only\nAMIGUS WAVETABLE OWNER PASS: explicit resource, pinned cache lifetime, failure cleanup, lost ownership refusal; fake library/bus only\n",
+      "passed": true
+    },
+    {
+      "label": "causal26",
+      "sources": [
+        "tests/mixed_readers_causal_test.c",
+        "src/core/mixed_readers_causal.c",
+        "src/core/mixed_scheduled_readers.c",
+        "src/core/elapsed_clock.c",
+        "src/editor/sampler_paula.c",
+        "src/editor/sampler_wavetable.c",
+        "src/core/amigus_voice_plan.c",
+        "src/editor/sampler.c",
+        "src/editor/slots.c",
+        "src/core/pcm_filtered.c",
+        "src/core/slices.c",
+        "src/core/pattern.c",
+        "src/core/document.c",
+        "src/core/pp20.c",
+        "src/core/project.c",
+        "src/core/mod_project.c",
+        "src/core/mod_inspect.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "src/core/wav.c",
+        "src/core/svx.c",
+        "src/core/raw.c",
+        "src/core/amigus_reservation.c",
+        "src/core/amigus_wavetable_cache.c",
+        "src/core/amigus_sample_ram.c",
+        "src/core/sample_cache.c",
+        "src/core/playback_pcm.c"
+      ],
+      "oracle": "MIXED CAUSAL TWO TRIGGER PASS:26 genuine heap cases;12 two16 mixed4/12 8/16/24-master cache8/16 lifetimes;internally derived all20 prediction;early successor before/after completion;actual original clocks/adoption/tombstone;poisoned disposed predecessor C;32-reader and third admission bounds;CONTROL/STOP/wrong predecessor refusal;raw first partial/zero/malformed/late/reentry and wrong fire order suppression;expected-only R and unknown second proof;once shutdown then read-only quiet;master beforeimages;SOFTWARE_ONLY\n",
+      "compile_seconds": 120,
+      "run_seconds": 30,
+      "executable": {
+        "bytes": 2291592,
+        "sha256": "e40c5290197ece9e90b1b5b71b5b149b89c3cd0d9c270d89d3145dc6498cee97",
+        "mode": 33261
+      },
+      "actual_oracle": "MIXED CAUSAL TWO TRIGGER PASS:26 genuine heap cases;12 two16 mixed4/12 8/16/24-master cache8/16 lifetimes;internally derived all20 prediction;early successor before/after completion;actual original clocks/adoption/tombstone;poisoned disposed predecessor C;32-reader and third admission bounds;CONTROL/STOP/wrong predecessor refusal;raw first partial/zero/malformed/late/reentry and wrong fire order suppression;expected-only R and unknown second proof;once shutdown then read-only quiet;master beforeimages;SOFTWARE_ONLY\n",
+      "passed": true
+    },
+    {
+      "label": "publication56",
+      "sources": [
+        "tests/mixed_readers_causal_publication_test.c",
+        "src/core/mixed_readers_causal.c",
+        "src/core/mixed_scheduled_readers.c",
+        "src/core/elapsed_clock.c",
+        "src/editor/sampler_paula.c",
+        "src/editor/sampler_wavetable.c",
+        "src/core/amigus_voice_plan.c",
+        "src/editor/sampler.c",
+        "src/editor/slots.c",
+        "src/core/pcm_filtered.c",
+        "src/core/slices.c",
+        "src/core/pattern.c",
+        "src/core/document.c",
+        "src/core/pp20.c",
+        "src/core/project.c",
+        "src/core/mod_project.c",
+        "src/core/mod_inspect.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "src/core/wav.c",
+        "src/core/svx.c",
+        "src/core/raw.c",
+        "src/core/amigus_reservation.c",
+        "src/core/amigus_wavetable_cache.c",
+        "src/core/amigus_sample_ram.c",
+        "src/core/sample_cache.c",
+        "src/core/playback_pcm.c"
+      ],
+      "oracle": "MIXED CAUSAL PUBLICATION PASS:56 genuine heap cases;48 first/successor raw0/-1/malformed identity/full-copy/reentry/fault/late publication paths;independent C/R proof orders;faulting raw0 retains pins and unchanged outputs until exact later proofs;6 real allocation/reentry/fail-closed constructors;2 actual consumed-close0 release lifetimes;bound original registration;master beforeimages;SOFTWARE_ONLY\n",
+      "compile_seconds": 120,
+      "run_seconds": 30,
+      "executable": {
+        "bytes": 2405424,
+        "sha256": "c0261901aa11cd1b8833da674a78484265fae426a28ccceef4061bf915ec0c45",
+        "mode": 33261
+      },
+      "actual_oracle": "MIXED CAUSAL PUBLICATION PASS:56 genuine heap cases;48 first/successor raw0/-1/malformed identity/full-copy/reentry/fault/late publication paths;independent C/R proof orders;faulting raw0 retains pins and unchanged outputs until exact later proofs;6 real allocation/reentry/fail-closed constructors;2 actual consumed-close0 release lifetimes;bound original registration;master beforeimages;SOFTWARE_ONLY\n",
+      "passed": true
+    }
+  ],
+  "flags": [
+    "-std=c99",
+    "-O1",
+    "-g",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-UNDEBUG",
+    "-fsanitize=address,undefined",
+    "-Isrc/core",
+    "-I."
+  ],
+  "sanitizer_options": {
+    "ASAN_OPTIONS": "halt_on_error=1:abort_on_error=1",
+    "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1"
+  },
+  "custody": {
+    "all_saved_before_after_maps_equal": true,
+    "all_current_maps_equal_saved": true,
+    "packet_files": 4,
+    "frozen_files": 37,
+    "saved_failure_inputs": 20,
+    "current_regression_drivers": 2,
+    "repository": {
+      "files": 1200,
+      "canonical_pin_sha256": "48d9d683705157f5b25e98b5c2d6f25fd53ae2d8ac52dac76fd7d607da0446a1"
+    },
+    "protected_files": 16,
+    "failed_v2_selected_donor": {
+      "files": 1209,
+      "canonical_pin_sha256": "cba97ba98db9c984c573ac2d3fcfd6b18c513463adc2df0d7da3c6c9a0cef7cd"
+    },
+    "actual_v3_selected_tree": {
+      "files": 1209,
+      "canonical_pin_sha256": "fbf4aa55f60dffd7ef112f4987dbb046a4ccd74e51b140bbbabc61cafa4c77f7"
+    },
+    "changed_sources": [
+      "tests/editor_mixed_causal_prepare_test.c"
+    ],
+    "source_overlays": {
+      "tests/editor_mixed_causal_prepare_test.c": {
+        "bytes": 37410,
+        "sha256": "bd648d4f964e89ed0b56ecb41757b89fab7029130b2b2259bdea5e9ad04cd2f9",
+        "mode": 33188
+      }
+    },
+    "literal_font_exact": true,
+    "compiler_exact": true,
+    "original_failed_qualifications": {
+      "v1": {
+        "receipt": {
+          "bytes": 881442,
+          "sha256": "349a789ae7931a4a7ba01ea98dc7d652972485c10f04aacde117489d67bea2c4",
+          "mode": 33188
+        },
+        "status": "FIRST_FAILURE_RETAINED_NO_RETRY",
+        "actual_returncodes": [
+          1
+        ],
+        "selected_tree_current_exact": true,
+        "no_later_group_acceptance": true
+      },
+      "v2": {
+        "receipt": {
+          "bytes": 1312262,
+          "sha256": "93553d8f7fab6dce9141587600f2923465be1cda39647d327bb2718bbcd1f079",
+          "mode": 33188
+        },
+        "status": "FIRST_FAILURE_RETAINED_NO_RETRY",
+        "actual_returncodes": [
+          0,
+          -6
+        ],
+        "selected_tree_current_exact": true,
+        "no_later_group_acceptance": true
+      }
+    }
+  },
+  "original_failures": {
+    "v1": {
+      "receipt": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v1/receipt.json",
+        "bytes": 881442,
+        "sha256": "349a789ae7931a4a7ba01ea98dc7d652972485c10f04aacde117489d67bea2c4",
+        "mode": 33188
+      },
+      "status": "FIRST_FAILURE_RETAINED_NO_RETRY",
+      "actual_returncodes": [
+        1
+      ],
+      "streams": {
+        "v1-focused-causal43-compile.stderr": {
+          "bytes": 1449,
+          "sha256": "3ea7c51a06e32f1a0188b440b8101bf51e4b3ab4e18052c57af4078bcbed6d5b",
+          "mode": 33188
+        },
+        "v1-focused-causal43-compile.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      }
+    },
+    "v2": {
+      "receipt": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v2/receipt.json",
+        "bytes": 1312262,
+        "sha256": "93553d8f7fab6dce9141587600f2923465be1cda39647d327bb2718bbcd1f079",
+        "mode": 33188
+      },
+      "status": "FIRST_FAILURE_RETAINED_NO_RETRY",
+      "actual_returncodes": [
+        0,
+        -6
+      ],
+      "streams": {
+        "v2-focused-causal43-compile.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "v2-focused-causal43-compile.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "v2-focused-causal43-run.stderr": {
+          "bytes": 169,
+          "sha256": "1d6ded67237dc9492a69e2977411f3b8dda15673127909818e6541f28812f649",
+          "mode": 33188
+        },
+        "v2-focused-causal43-run.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      }
+    }
+  },
+  "execution_tiers": {
+    "host_selected_source_five_groups": "PASSED",
+    "standalone_driver": "NOT_QUALIFIED_HERE",
+    "native_crossbuild": "NOT_RUN_FOR_TYPED_PREPARATION",
+    "amiberry": "NOT_RUN_FOR_TYPED_PREPARATION",
+    "physical_a1200": "NOT_RUN_FOR_TYPED_PREPARATION",
+    "live_exact_play_audio_listening": "NOT_QUALIFIED"
+  },
+  "publication_preparation_refusal_preserved": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-v3-publication-preparation-v1/partial-refusal.json",
+    "bytes": 7478,
+    "sha256": "cff425e0cef3e13aff811f8d4657e33084c09b2a3acf0d334699cd50a697f640",
+    "mode": 33152
+  },
+  "limits": [
+    "This audit reads saved records, full streams, products and current source-file pins only. It does not rerun or independently live-probe any recorded process. RC/reap/group-absence observations are those captured by the reviewed actual collectors.",
+    "Actual V3 HOST success is distinct from preserved V1 compile failure and V2 runtime failure; those original qualifications remain failed, and their source trees, full receipts and saved failure inputs remain exact.",
+    "Current src/tests and protected16 custody are verified; no Git HEAD, index or status command was issued by this audit. Root-reported publication commit is outside this read-only evidence scope.",
+    "The five software groups qualify their genuine assertion/oracle and sanitizer scope only. They do not qualify native Exec Fast/Chip, full IRQ/task stack or WCET, physical card capacity/order/completion/voice-stop, live exact musical timing, audio or listening.",
+    "No product, source, receipt, target, service, guard, lease, checkpoint, repository or memory was changed by this reviewer. Only this new private report was created."
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "scope": "INDEPENDENT_SOURCE_AND_SAVED_BINDING_REVIEW_ONLY_NO_DRIVER_IMPORT_COMPILER_TEST_PROCESS_GIT_NETWORK_TARGET_SERVICE_GUARD_LEASE_OR_REPOSITORY_ACTION",
+  "verdict": "PASS_SOURCE_PUBLIC_CURRENT_DRIVER_V4_OPTIONAL_PROTECTED_WATCH_AND_CLEAN_BASELINE_SELECTION_NOT_RUN",
+  "findings": [],
+  "driver_pins": {
+    "PLAN.md": {
+      "bytes": 7941,
+      "sha256": "121cc020e6d244a0aedde23d71b35c79d3ef44bce8da51b1948d52a79ce1f36d",
+      "mode": 33188
+    },
+    "donor-pins.json": {
+      "bytes": 5637,
+      "sha256": "392dad1cdb2e532238ddca879be37806949a6431f72eac232419dbcf2f04d535",
+      "mode": 33188
+    },
+    "selection-binding.json": {
+      "bytes": 28576,
+      "sha256": "398f570e227f41fc35e60131fd50a455885427b4b1cce64b1baf26c6ba8e035f",
+      "mode": 33188
+    },
+    "driver.diff": {
+      "bytes": 2156,
+      "sha256": "5decc7793e510bcf89b78617d386e0ccb4eef045ea21882e19902f547cb0b688",
+      "mode": 33188
+    },
+    "tests/test_editor_mixed_causal_current_regressions.py": {
+      "bytes": 27462,
+      "sha256": "3ef08564e8f9f2fa325556d7bb88161abb8b677674d38ff17c29745f2cded66b",
+      "mode": 33188
+    },
+    "source-pins.json": {
+      "bytes": 928,
+      "sha256": "df7958c1c3c59959301a3e351ed78f8f79f2ae6517ea28f844246cd795b2232d",
+      "mode": 33188
+    }
+  },
+  "resolved_prior_finding": {
+    "frozen_v3_preserved": true,
+    "description": "V3 mandatory all16 protected-file existence dependency is replaced by exact optional PRESENT/full-pin or ABSENT observations. No current file is removed or supplied to mask absence."
+  },
+  "bindings": {
+    "baseline_preparation_receipt": {
+      "bytes": 596075,
+      "sha256": "72955631bce6432d7104dfaa4efe720143584275bc48288f4a2f2474b113fb7c",
+      "mode": 33152
+    },
+    "original_archive": {
+      "bytes": 7270400,
+      "sha256": "90f12bbac53e5ccea3dc8f99650386ee1502217fb414ff95e920898b1bcd99fe",
+      "mode": 33152
+    },
+    "original_mode_refusal_receipt": {
+      "bytes": 382168,
+      "sha256": "a6c4c9623db01fb90731958477694821e7c9f1b3a0a8ba89e1656370fa09c04e",
+      "mode": 33152
+    },
+    "current_v3_receipts": {
+      "inner_receipt": {
+        "bytes": 1341827,
+        "sha256": "f9a0f4485b066d0717177509cb9d5e997f8166c229c6dff10fd66a6b8b1c6b8e",
+        "mode": 33188
+      },
+      "outer_receipt": {
+        "bytes": 4031,
+        "sha256": "6ecfc7793a493edb540937c28f3b189ee438a08a30ca4c59495bd987fcb9ec9e",
+        "mode": 33152
+      }
+    },
+    "current_v3_saved_audit": {
+      "bytes": 14137,
+      "sha256": "9c4dc92c5bbacc806541b199335a4929636af9285e8c05e3f05b2e6c3b07734c",
+      "mode": 33188
+    },
+    "committed_baseline": {
+      "commit": "27e7372dc929b214961567aff99b3db608701717",
+      "files": 983,
+      "canonical_pin_sha256": "9eb6a8ce8086353f644915d8dbf1f85d65e3d76dfbf298d97cdf6acdce9e8c93"
+    },
+    "prospective_nine_path_candidate": {
+      "files": 990,
+      "canonical_pin_sha256": "0b0954c8479fb86497820085cede7008147d82a3a9dc166de6b7322334ad5200"
+    },
+    "optional_watch_present": 7,
+    "optional_watch_absent": 9,
+    "original_root_current_source": {
+      "files": 1200,
+      "canonical_pin_sha256": "48d9d683705157f5b25e98b5c2d6f25fd53ae2d8ac52dac76fd7d607da0446a1"
+    },
+    "original_root_protected_files": 16
+  },
+  "source_checks": [
+    "Full V4 PLAN/delta/manifest/donors and changed selection metadata read; full driver behavior inherits byte-exact frozen V3 through an exact reversal of only import stat, protected_snapshot and two protected callbacks. All six current packet pins and nineteen donor pins match.",
+    "protected_snapshot calls lstat on each watch. Only FileNotFoundError records explicit ABSENT. Existing paths must have S_ISREG mode and the prior exact pin; final symlink, broken final symlink, directory/other nonregular type or other filesystem error refuses. Whole before/after dictionary equality detects appearance, disappearance and content/mode/state changes; unknown initial observations cannot pass.",
+    "The optional public watcher does not replace Root mandatory current1200/protected16 custody. Both mandatory original maps match current files and remain separate from the clean candidate seven PRESENT/nine ABSENT projection.",
+    "Entire main, selector/refusal order, five source vectors/full oracles, default pair, flags/options/limits and nested own-HOST call/finalization/custody/context-removal semantics are unchanged V3. Help/list/show-selection and parser refusals precede attempt/source/compile creation by SOURCE control flow; no such branch was executed by this review.",
+    "The actual saved normalized27e7372 baseline has983 src/tests files matching its complete receipt/digest and exact saved archive/refusal pins. Applying the eight exact production/fixture bodies plus this public driver in a dictionary projects exactly990 files and the bound digest. All nine adoption paths are exact; the broken historical focused Python driver remains excluded.",
+    "Candidate optional-watch projection is exactly seven PRESENT full pins/nine ABSENT; no missing task-local placeholder is required. Saved580 font is exact and candidate ROOT pt_font.h is absent in the baseline. Owned temporary-copy font/header and durable stream/product/receipt boundaries remain unchanged.",
+    "Future Root plan selects focused43 then default-controller once, full337+2273 oracles/four actual calls, with unchanged compile120/run30 and compile120/run180 plus600-second outer bound. Different committed editor/view bytes and actual multi-selection justify this scope; the other three currentV3 results do not become clean-baseline acceptance."
+  ],
+  "qualification_plan": {
+    "runtime_groups": [
+      "focused-causal43",
+      "default-controller"
+    ],
+    "source_vector_lengths": [
+      79,
+      80
+    ],
+    "full_oracle_bytes": [
+      337,
+      2273
+    ],
+    "actual_calls_required": 4,
+    "compile_seconds": [
+      120,
+      120
+    ],
+    "run_seconds": [
+      30,
+      180
+    ],
+    "outer_seconds": 600,
+    "driver_or_cli_run_by_reviewer": false,
+    "baseline_preparation_is_a_test_pass": false
+  },
+  "limits": [
+    "This is SOURCE review plus saved binding verification, not public-driver execution or acceptance. Selector/refusal/file-type branches and temporary cleanup remain NOT RUN by this reviewer.",
+    "Root must independently bind the baseline SAVED acceptance and the specific future qualification helper/outer before invocation. The saved normalized baseline copy and exact overlays govern candidate modes; no new Git/archive call or untracked current-source staging is authorized by this report.",
+    "The proposed helper/outer were not part of this review. Fresh exact review path/SHA and driver_pins schema can bind this report; no invocation authority follows merely from PASS_SOURCE.",
+    "Earlier V1/V2 failures and current-source V3 five-group pass retain their distinct scopes. No all-five clean-baseline pass, native Exec Fast/Chip, IRQ/task whole-stack/WCET, physical capacity/order/completion/voice-stop, exact live musical activation, audio or listening acceptance is inferred.",
+    "No proposed module was imported, no tests/compiler/process/Git/network/target/service operation was invoked and no repository/checkpoint/memory was edited. Only this new private report was created."
+  ]
+}

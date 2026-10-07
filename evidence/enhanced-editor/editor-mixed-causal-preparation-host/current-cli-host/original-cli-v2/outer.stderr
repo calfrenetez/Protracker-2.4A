@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v2/host-first.py", line 429, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v2/host-first.py", line 343, in main
+    assert output == b'' and error == usage + ('test_editor_mixed_causal_current_regressions.py: error: ' + endings[label] + '\n').encode('ascii')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

@@ -1,0 +1,5 @@
+usage: test_editor_mixed_causal_current_regressions.py [-h]
+                                                       [--group {default-factory,default-controller,focused-causal43,causal26,publication56} |
+                                                       --all] [--list-groups]
+                                                       [--show-selection]
+test_editor_mixed_causal_current_regressions.py: error: duplicate group refused

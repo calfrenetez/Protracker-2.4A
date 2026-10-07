@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v3/host-first.py", line 562, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v3/host-first.py", line 486, in main
+    assert list(temporary.iterdir()) == [receipt_path.parent]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

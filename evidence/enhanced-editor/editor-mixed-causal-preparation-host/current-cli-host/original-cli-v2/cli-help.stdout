@@ -1,0 +1,17 @@
+usage: test_editor_mixed_causal_current_regressions.py [-h]
+                                                       [--group {default-factory,default-controller,focused-causal43,causal26,publication56} |
+                                                       --all] [--list-groups]
+                                                       [--show-selection]
+
+Current-source HOST regressions in a contained temporary source tree. No
+archive, Git, repository write, native compiler or target operation. The exact
+literal font header is generated only in an owned TemporaryDirectory. Full
+command streams/receipts remain in a separate owned attempt directory. No
+driver imports tests.
+
+options:
+  -h, --help            show this help message and exit
+  --group {default-factory,default-controller,focused-causal43,causal26,publication56}
+  --all                 run all five genuine groups
+  --list-groups         list group bounds; no source access or tests
+  --show-selection      print selected labels; no source access or tests

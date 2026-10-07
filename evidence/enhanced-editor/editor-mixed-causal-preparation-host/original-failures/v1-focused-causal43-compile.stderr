@@ -1,0 +1,23 @@
+tests/editor_mixed_causal_prepare_test.c:19:28: error: array has incomplete element type 'struct ledger_test'
+   19 |     struct ledger_test live[80];
+      |                            ^
+tests/editor_mixed_causal_prepare_test.c:19:12: note: forward declaration of 'struct ledger_test'
+   19 |     struct ledger_test live[80];
+      |            ^
+tests/editor_mixed_causal_prepare_test.c:65:16: error: variable has incomplete type 'struct ledger_test'
+   65 |     m->live[i]=(struct ledger_test){p,n};return p;
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~~
+tests/editor_mixed_causal_prepare_test.c:19:12: note: forward declaration of 'struct ledger_test'
+   19 |     struct ledger_test live[80];
+      |            ^
+tests/editor_mixed_causal_prepare_test.c:71:16: error: variable has incomplete type 'struct ledger_test'
+   71 |     m->live[i]=(struct ledger_test){NULL,0};++m->releases;free(p);
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tests/editor_mixed_causal_prepare_test.c:19:12: note: forward declaration of 'struct ledger_test'
+   19 |     struct ledger_test live[80];
+      |            ^
+3 errors generated.
+src/core/mixed_readers_causal.c:763:25: error: variable 'registration' is uninitialized when passed as a const pointer argument here [-Werror,-Wuninitialized-const-pointer]
+  763 |        !output_apart(b,&registration,sizeof(registration)))return out;
+      |                         ^~~~~~~~~~~~
+1 error generated.

@@ -1,0 +1,1435 @@
+{
+  "scope": "SAVED_ONLY_EXPLICIT_FORMER_GATE_ADJUDICATION_AND_EXACT_NINE_PATH_INPUT_BINDING_NO_REPLAY",
+  "verdict": "PASS_INDEPENDENT_SAVED_CONTENT_COMPLETION_WITH_EXACT_XCRUN_ADMISSION_ORIGINAL_WRAPPERS_FAILED",
+  "passed": true,
+  "findings": [],
+  "original_wrapper_qualification_passed": false,
+  "primary_audit": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-typed-causal-current-cli-host-first-v3-failure-and-saved-completion-audit.json",
+    "pin": {
+      "bytes": 56362,
+      "sha256": "c781a1d21e2d8551d68cb8d2985f4071010e7e0ffc6a23e685d301256648d725",
+      "mode": 33188
+    }
+  },
+  "gate_adjudication": [
+    {
+      "source": "helper",
+      "lines": "479-485",
+      "original": "executed before failure",
+      "saved": "PASS full 337+2273 oracle and one exact owned nested receipt footer/path"
+    },
+    {
+      "source": "helper",
+      "lines": "486",
+      "original": "FAILED exact singleton TMPDIR predicate",
+      "saved": "PASS separate exact two-entry closure: named ordinary attempt directory plus full-pinned xcrun_db495/0600; original predicate remains false"
+    },
+    {
+      "source": "helper",
+      "lines": "487-501",
+      "original": "not reached; no nested receipt summary recorded",
+      "saved": "PASS independently read actual nested receipt/status/groups/all source/font/watch/compiler/strict flags/991 selected-map fields"
+    },
+    {
+      "source": "helper",
+      "lines": "502-504",
+      "original": "not reached",
+      "saved": "PASS actual recorded source-* parent is positively absent, OWNED_CONTEXT_REMOVED preserved"
+    },
+    {
+      "source": "helper",
+      "lines": "505-523",
+      "original": "not reached",
+      "saved": "PASS four actual original compile/run argv/cwd/limits, RC0/reaped/group_absent/errors[], full eight streams and executable pins"
+    },
+    {
+      "source": "helper",
+      "lines": "524-526",
+      "original": "not reached; durable before/after fields absent",
+      "saved": "PASS current complete 17-file/12-directory ordinary closure bounded29<=64, 11 mandatory leaves and only two selected debug roots, two independent saved reads match; no original runtime closure snapshots invented"
+    },
+    {
+      "source": "helper",
+      "lines": "527-535",
+      "original": "not reached; nested/combined summary fields absent",
+      "saved": "PASS derive distinct new summaries from actual records, with three new calls/two new parser observations and five historical calls; original invalid false retained"
+    },
+    {
+      "source": "helper",
+      "lines": "536",
+      "original": "not reached; original status remains FIRST_FAILURE_RETAINED_NO_RETRY",
+      "saved": "not converted to original helper PASS"
+    },
+    {
+      "source": "outer",
+      "lines": "425",
+      "original": "RC0 dispatch branch not entered because actual helper RC1",
+      "saved": "no branch replay or falsified return code"
+    },
+    {
+      "source": "outer",
+      "lines": "427-428",
+      "original": "not reached; helper stderr is complete failed traceback, not empty",
+      "saved": "PASS full receipt-path stdout plus exact saved failure traceback under audit; original empty-stderr success predicate remains false"
+    },
+    {
+      "source": "outer",
+      "lines": "429-439",
+      "original": "not reached; original inner PASS status predicate false",
+      "saved": "PASS actual failed receipt pin, scope, three-call count, empty custody errors/no action flags and header absences; preserve FAILED status"
+    },
+    {
+      "source": "outer",
+      "lines": "440-499",
+      "original": "not reached",
+      "saved": "PASS complete eight composed historical/new records and full streams, exact historical cwd/metadata preserved, all seven parser content records with old invalid false and separate literal adjudication"
+    },
+    {
+      "source": "outer",
+      "lines": "500-531",
+      "original": "not reached",
+      "saved": "PASS complete old/new/current/baseline maps and all saved-prefix/font/compiler/provider72+49/watch/exclusion/debug custody"
+    },
+    {
+      "source": "outer",
+      "lines": "532-538",
+      "original": "not reached; original nested/durable summary fields absent",
+      "saved": "PASS separately derive actual N receipt path/pin and durable path from captured exact integration footer; do not add fields to original receipt"
+    },
+    {
+      "source": "outer",
+      "lines": "539-589",
+      "original": "not reached",
+      "saved": "PASS full actual nested receipt, selected groups, four genuine argv/RC/quiet records, 991 map/header, positive source-parent absence, full strict streams and binary pins"
+    },
+    {
+      "source": "outer",
+      "lines": "590-611",
+      "original": "not reached; original helper durable summary fields absent",
+      "saved": "PASS current complete ordinary bounded closure plus two matching saved readbacks; no fabricated original before/after fields"
+    },
+    {
+      "source": "outer",
+      "lines": "612-623",
+      "original": "not reached; original helper nested_admission absent",
+      "saved": "PASS full integration oracle/footer and new derived summary: four actual C calls/two groups337+2273 and mandatory/debug closure"
+    },
+    {
+      "source": "outer",
+      "lines": "634-637",
+      "original": "executed, FAILED/RC1 preserved",
+      "saved": "not converted to original outer PASS"
+    }
+  ],
+  "exact_inputs": {
+    "frozen_collector4": {
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v3/host-first.py": {
+        "bytes": 36257,
+        "sha256": "5a29f948f9ca3896bda979483e9a0c23496a152a44117cb728940f084b8b7700",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v3/PLAN.md": {
+        "bytes": 9252,
+        "sha256": "c608a9a5bc3cb529f949648576726ee05c0f83942c78493b4cff59606c30fd48",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v3/binding-data.json": {
+        "bytes": 54452,
+        "sha256": "a02f7d0c7dbf33ec88e8e9ca57b3eab5883cdad920660bd68acba7ae3f859bc3",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v3/pins.json": {
+        "bytes": 566,
+        "sha256": "26701bf076ae3f50c67c9a1e7445f7d76f085dafcce78f11afa2c1b4b959086e",
+        "mode": 33188
+      }
+    },
+    "frozen_outer3": {
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-outer-source-proposal-v3/outer.py": {
+        "bytes": 45393,
+        "sha256": "4e41c92b215e64e094b2d3844d3bd9155c95302907f6946bdcd541a6c52ce862",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-outer-source-proposal-v3/PLAN.md": {
+        "bytes": 8939,
+        "sha256": "db9acffc8358a47641bbd5c9ee3e66389dcf4f698a479d6579efa28374189573",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-outer-source-proposal-v3/pins.json": {
+        "bytes": 3559,
+        "sha256": "14c4d61b1ab2a41e834320772ab2fc7159953d3559c0e455c8c819b28d8185ae",
+        "mode": 33188
+      }
+    },
+    "captured_provider72_full_pin_map": {
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v4/PLAN.md": {
+        "bytes": 7941,
+        "sha256": "121cc020e6d244a0aedde23d71b35c79d3ef44bce8da51b1948d52a79ce1f36d",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v4/donor-pins.json": {
+        "bytes": 5637,
+        "sha256": "392dad1cdb2e532238ddca879be37806949a6431f72eac232419dbcf2f04d535",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v4/selection-binding.json": {
+        "bytes": 28576,
+        "sha256": "398f570e227f41fc35e60131fd50a455885427b4b1cce64b1baf26c6ba8e035f",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v4/driver.diff": {
+        "bytes": 2156,
+        "sha256": "5decc7793e510bcf89b78617d386e0ccb4eef045ea21882e19902f547cb0b688",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v4/tests/test_editor_mixed_causal_current_regressions.py": {
+        "bytes": 27462,
+        "sha256": "3ef08564e8f9f2fa325556d7bb88161abb8b677674d38ff17c29745f2cded66b",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v4/source-pins.json": {
+        "bytes": 928,
+        "sha256": "df7958c1c3c59959301a3e351ed78f8f79f2ae6517ea28f844246cd795b2232d",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v2/tests/test_editor_mixed_causal_current_regressions.py": {
+        "bytes": 23039,
+        "sha256": "a520a159d82925fdd08dfc515a6ba4a9645370ef89810af2ee0c7a915665e60b",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v2/source-pins.json": {
+        "bytes": 739,
+        "sha256": "81b081eb89d002725deec74af4fe2749000628364610c447726de2ed35bacf66",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-five-group-host-source-proposal-v3/binding-data.json": {
+        "bytes": 30215,
+        "sha256": "6728a329d227914cd20bd70ad3db8b9a3489c5b3928586ff47cc20f291a41ae0",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-five-group-host-source-proposal-v3/host-first.py": {
+        "bytes": 17589,
+        "sha256": "8081495fff95cc6a237e47604623ec316155b67c519f008c9cfc1074b0609b9a",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v1/source-pins.json": {
+        "bytes": 2423,
+        "sha256": "3d1c1cef9d60de83884b110d783b79b777fa1744960ffca6d7d5186b4f42c41d",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v2/source-pins.json": {
+        "bytes": 895,
+        "sha256": "000c2bce3ee5c0124b1df42c5a773e4d61c518b3dd562b44c5bfaa15814c1575",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v3/source-pins.json": {
+        "bytes": 721,
+        "sha256": "9150ae95e0acaf4a58810434ce990c7dbf1c9f0a0879da71c7a035518f82270d",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/test_mixed_readers_causal.py": {
+        "bytes": 3191,
+        "sha256": "8221399d7e0e72306b371778222e576afbeaa3b5e3c049692576e965ffdbee6f",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/test_mixed_readers_causal_publication.py": {
+        "bytes": 3038,
+        "sha256": "5885e54f8eb800481415775db76abe3f9219c33b08d514cca19538eca8b41d63",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/vendor/pt23f/raw/ptfont.raw": {
+        "bytes": 580,
+        "sha256": "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/receipt.json": {
+        "bytes": 1341827,
+        "sha256": "f9a0f4485b066d0717177509cb9d5e997f8166c229c6dff10fd66a6b8b1c6b8e",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-outer-first-v3/receipt.json": {
+        "bytes": 4031,
+        "sha256": "6ecfc7793a493edb540937c28f3b189ee438a08a30ca4c59495bd987fcb9ec9e",
+        "mode": 33152
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v3/source-pins.json": {
+        "bytes": 903,
+        "sha256": "087f053a5bc63668bacd2be31351b1aea1a846dc064d40363f49c047c556aa11",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v3/tests/test_editor_mixed_causal_current_regressions.py": {
+        "bytes": 26797,
+        "sha256": "db45c16fc59c2a9c60cf6e1d4bbcfa775970ecf1f1eafb1e980e98270a0fed30",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v3/selection-binding.json": {
+        "bytes": 23927,
+        "sha256": "5b69801c55291d5549f96d4190cc05c6e7107402116773a69dc7279f1928779d",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v3/PLAN.md": {
+        "bytes": 6782,
+        "sha256": "447fe834162e0476d28f6b0a94c2cab4072a12b7ca459fe789905e3ea9b7c5e7",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-clean-baseline-preparation-v2/receipt.json": {
+        "bytes": 596075,
+        "sha256": "72955631bce6432d7104dfaa4efe720143584275bc48288f4a2f2474b113fb7c",
+        "mode": 33152
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-clean-baseline-preparation-v1/receipt.json": {
+        "bytes": 382168,
+        "sha256": "a6c4c9623db01fb90731958477694821e7c9f1b3a0a8ba89e1656370fa09c04e",
+        "mode": 33152
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-clean-baseline-preparation-v1/source.tar": {
+        "bytes": 7270400,
+        "sha256": "90f12bbac53e5ccea3dc8f99650386ee1502217fb414ff95e920898b1bcd99fe",
+        "mode": 33152
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v1/receipt.json": {
+        "bytes": 881442,
+        "sha256": "349a789ae7931a4a7ba01ea98dc7d652972485c10f04aacde117489d67bea2c4",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v2/receipt.json": {
+        "bytes": 1312262,
+        "sha256": "93553d8f7fab6dce9141587600f2923465be1cda39647d327bb2718bbcd1f079",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-outer-first-v1/receipt.json": {
+        "bytes": 1192,
+        "sha256": "cedccb0888f4ab0524f820dfd92bf00c867f3fe25858c43dc072e0e3d62f220f",
+        "mode": 33152
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-outer-first-v2/receipt.json": {
+        "bytes": 4042,
+        "sha256": "f2e01376634a0a82fb27fd0f576ce298e059c95e93913e78a1ecc5a40e923a52",
+        "mode": 33152
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v2/focused-causal43-run.stderr": {
+        "bytes": 169,
+        "sha256": "1d6ded67237dc9492a69e2977411f3b8dda15673127909818e6541f28812f649",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-native-mixed-causal-five-group-host-first-v3-saved-audit.json": {
+        "bytes": 14137,
+        "sha256": "9c4dc92c5bbacc806541b199335a4929636af9285e8c05e3f05b2e6c3b07734c",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-typed-causal-clean-baseline-preparation-v2-saved-review.json": {
+        "bytes": 7084,
+        "sha256": "d7f01b873ac297b6f16a6a8b0a3744f828d33c774f0e25e69342ac06c0a8d317",
+        "mode": 33152
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v1/host-first.py": {
+        "bytes": 23230,
+        "sha256": "5a9c97d08154db1ac551bbff332547d278adf5547616403318a37a1458eccc7f",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v1/PLAN.md": {
+        "bytes": 9126,
+        "sha256": "d3eb7873642e9087c25461628f7ef3f33b3c1982807065c4f5487690e8837925",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v1/binding-data.json": {
+        "bytes": 34657,
+        "sha256": "49c749ddbbd8703cc92555d87c9ef3c85b8ac7b58cea8f58cfaf7ad2220361f7",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v1/pins.json": {
+        "bytes": 566,
+        "sha256": "195982407017e54a466c45925ad496e98a6c0762eb44948a1707056f1c7648ef",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-outer-source-proposal-v1/outer.py": {
+        "bytes": 25275,
+        "sha256": "5f877367a8b47e673269935fd3a60ba795310f0a079ed63973c3a5775ac86811",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-outer-source-proposal-v1/PLAN.md": {
+        "bytes": 6841,
+        "sha256": "dad094136f1b852cbb85a045211fd547daa288b1db50aa983d9266422205891c",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-outer-source-proposal-v1/pins.json": {
+        "bytes": 2367,
+        "sha256": "183489a63c7139fe85f2f46bcb6d0b0c1b9799e594e9691a7a9193d14109ce38",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-native-mixed-causal-current-cli-helper-outer-source-v1-correction.json": {
+        "bytes": 6008,
+        "sha256": "0c5e0687741313e4a2c7f0fdd7d9bd45feb84c605cb31daa53f60ecc61580751",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v2/host-first.py": {
+        "bytes": 25222,
+        "sha256": "2f48cf333205587e6dbb332742add19adefbd164732bd42ab640cfb5fd30232a",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v2/PLAN.md": {
+        "bytes": 11399,
+        "sha256": "b28d8e5868ff4f7a9a9f521c3da699a4a00dcb4243cd3aa1283419e450562c51",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v2/binding-data.json": {
+        "bytes": 39926,
+        "sha256": "16ba107e01d99433348af08bf401a5c7a11ddcf413b8874cf35f9d757c153889",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v2/pins.json": {
+        "bytes": 567,
+        "sha256": "00733b169917327579c8aa0506dacab6be716c56c144305ce9abe45f4a517108",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-outer-source-proposal-v2/outer.py": {
+        "bytes": 26871,
+        "sha256": "2b027055cafb160d1bb7ddccd081f06171f02d26836ba39d02008f268c61b4be",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-outer-source-proposal-v2/PLAN.md": {
+        "bytes": 8717,
+        "sha256": "4d833a22bdc3c4761054f43bfbfd2ccd70ea10d11ec74b82ed7cc235b88d531e",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-outer-source-proposal-v2/pins.json": {
+        "bytes": 3104,
+        "sha256": "48f8c95a73619f191bc632554efa2d872652695c07a525bb83352dae1f75417b",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/receipt.json": {
+        "bytes": 1150684,
+        "sha256": "574ff03e955c9b4d9972924bc01f078a35af10c42b10e68aec482cd9786e2764",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-outer-first-v2/receipt.json": {
+        "bytes": 4904,
+        "sha256": "68a5573c73a6f13b109ab5faa0bd3f86295fc8b705fd12335c2c3ec02f82de6a",
+        "mode": 33152
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-help.stdout": {
+        "bytes": 1026,
+        "sha256": "80218ea5965f474ad6e9d418638aabeeaef4d2e9ae92545d29be6270c8ac9036",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-help.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-list.stdout": {
+        "bytes": 237,
+        "sha256": "5d270fb635322fdd0ec9382bcebaf452ce99d1fcb572c9aa888906ad9e90f7fd",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-list.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-default.stdout": {
+        "bytes": 35,
+        "sha256": "5f876ccf1214b790caba3fce94aa5c5ff019e4ab33f46f58f3b72f5ca686368a",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-default.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-all.stdout": {
+        "bytes": 75,
+        "sha256": "177756926351794cc61db4b03aa6292baf7a725c8b17571aef9bb6f08a5b3402",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-all.stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-invalid.stdout": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-invalid.stderr": {
+        "bytes": 552,
+        "sha256": "88809ebf16e0f362743ea58c5e996f5f085422a3f7afe1ef9cda102b6df90a78",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-outer-first-v2/stdout": {
+        "bytes": 144,
+        "sha256": "f0d6564265faa5237697332804287b72f7c0104f3bcff5f8fc024220dbab03c6",
+        "mode": 33152
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-outer-first-v2/stderr": {
+        "bytes": 759,
+        "sha256": "1fd9379aeff3e77dfa262e2fa8401189aa588de3078489fa85b58d289c916f0e",
+        "mode": 33152
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-native-mixed-causal-current-cli-helper-outer-source-v2-review.json": {
+        "bytes": 7879,
+        "sha256": "2ab6b04c31ae4aa252a8a9a5b7af3fef2afad58cbba3d0109ac912adf0c75e77",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-typed-causal-current-cli-host-first-v2-failure-saved-audit.json": {
+        "bytes": 21098,
+        "sha256": "816573c032d5b33c1995d0aff743883826524c0b89290743e3275d750b739963",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-native-mixed-causal-current-driver-source-v4-review.json": {
+        "bytes": 7337,
+        "sha256": "6604096160d60ca1d8d46068168b2d9273f509a92f201f02f3105d6243709c22",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v2/src/core/mixed_readers_causal.c": {
+        "bytes": 55184,
+        "sha256": "d2298f135bd7cdcff35da2893dd5d2e6bac808176bd5dc64d017e3ac63a5f5e7",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v1/src/core/mixed_readers_causal_factory_internal.h": {
+        "bytes": 1982,
+        "sha256": "2958501d5b7dfc9213e39662f90ab5bc661d454b430a4488ca1733d9e8a33f3f",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v1/src/editor/sampler_mixed_readers.c": {
+        "bytes": 58438,
+        "sha256": "ac9416b8cabf530c913792dfffd88d0fd8f23af4b6de91c010f391cc2ddca800",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v1/src/editor/sampler_mixed_causal_internal.h": {
+        "bytes": 2546,
+        "sha256": "a859a3f00a46cc97e2fb2cbd98dd7d9def4e818e498643c45b4745b3fa924f20",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v1/src/editor/editor_mixed_causal_prepare.c": {
+        "bytes": 77965,
+        "sha256": "d9e39016edfb59a5fc4e65ca97e0a4ff574e18985b3f072b958f0a0c7576e37c",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v1/src/editor/editor_mixed_causal_prepare.h": {
+        "bytes": 10191,
+        "sha256": "86e05815d442bff0306d526dc67e8af55f65b446534654a44db15b896b8a393f",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v1/src/editor/editor_mixed_causal_source_internal.h": {
+        "bytes": 8944,
+        "sha256": "517d5f25e9986bd9232f6a4bf36964d74325e714afa8cc12d6ab38ff805c59f5",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v3/tests/editor_mixed_causal_prepare_test.c": {
+        "bytes": 37410,
+        "sha256": "bd648d4f964e89ed0b56ecb41757b89fab7029130b2b2259bdea5e9ad04cd2f9",
+        "mode": 33188
+      }
+    },
+    "original_v2_provider49_full_pin_map": {
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v4/PLAN.md": {
+        "bytes": 7941,
+        "sha256": "121cc020e6d244a0aedde23d71b35c79d3ef44bce8da51b1948d52a79ce1f36d",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v4/donor-pins.json": {
+        "bytes": 5637,
+        "sha256": "392dad1cdb2e532238ddca879be37806949a6431f72eac232419dbcf2f04d535",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v4/selection-binding.json": {
+        "bytes": 28576,
+        "sha256": "398f570e227f41fc35e60131fd50a455885427b4b1cce64b1baf26c6ba8e035f",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v4/driver.diff": {
+        "bytes": 2156,
+        "sha256": "5decc7793e510bcf89b78617d386e0ccb4eef045ea21882e19902f547cb0b688",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v4/tests/test_editor_mixed_causal_current_regressions.py": {
+        "bytes": 27462,
+        "sha256": "3ef08564e8f9f2fa325556d7bb88161abb8b677674d38ff17c29745f2cded66b",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v4/source-pins.json": {
+        "bytes": 928,
+        "sha256": "df7958c1c3c59959301a3e351ed78f8f79f2ae6517ea28f844246cd795b2232d",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v2/tests/test_editor_mixed_causal_current_regressions.py": {
+        "bytes": 23039,
+        "sha256": "a520a159d82925fdd08dfc515a6ba4a9645370ef89810af2ee0c7a915665e60b",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v2/source-pins.json": {
+        "bytes": 739,
+        "sha256": "81b081eb89d002725deec74af4fe2749000628364610c447726de2ed35bacf66",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-five-group-host-source-proposal-v3/binding-data.json": {
+        "bytes": 30215,
+        "sha256": "6728a329d227914cd20bd70ad3db8b9a3489c5b3928586ff47cc20f291a41ae0",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-five-group-host-source-proposal-v3/host-first.py": {
+        "bytes": 17589,
+        "sha256": "8081495fff95cc6a237e47604623ec316155b67c519f008c9cfc1074b0609b9a",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v1/source-pins.json": {
+        "bytes": 2423,
+        "sha256": "3d1c1cef9d60de83884b110d783b79b777fa1744960ffca6d7d5186b4f42c41d",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v2/source-pins.json": {
+        "bytes": 895,
+        "sha256": "000c2bce3ee5c0124b1df42c5a773e4d61c518b3dd562b44c5bfaa15814c1575",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v3/source-pins.json": {
+        "bytes": 721,
+        "sha256": "9150ae95e0acaf4a58810434ce990c7dbf1c9f0a0879da71c7a035518f82270d",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/test_mixed_readers_causal.py": {
+        "bytes": 3191,
+        "sha256": "8221399d7e0e72306b371778222e576afbeaa3b5e3c049692576e965ffdbee6f",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/test_mixed_readers_causal_publication.py": {
+        "bytes": 3038,
+        "sha256": "5885e54f8eb800481415775db76abe3f9219c33b08d514cca19538eca8b41d63",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/vendor/pt23f/raw/ptfont.raw": {
+        "bytes": 580,
+        "sha256": "56be43ae731975ee8530eda153bd9b1b44329d6af4992b2436d3938d38cb9091",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v3/receipt.json": {
+        "bytes": 1341827,
+        "sha256": "f9a0f4485b066d0717177509cb9d5e997f8166c229c6dff10fd66a6b8b1c6b8e",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-outer-first-v3/receipt.json": {
+        "bytes": 4031,
+        "sha256": "6ecfc7793a493edb540937c28f3b189ee438a08a30ca4c59495bd987fcb9ec9e",
+        "mode": 33152
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v3/source-pins.json": {
+        "bytes": 903,
+        "sha256": "087f053a5bc63668bacd2be31351b1aea1a846dc064d40363f49c047c556aa11",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v3/tests/test_editor_mixed_causal_current_regressions.py": {
+        "bytes": 26797,
+        "sha256": "db45c16fc59c2a9c60cf6e1d4bbcfa775970ecf1f1eafb1e980e98270a0fed30",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v3/selection-binding.json": {
+        "bytes": 23927,
+        "sha256": "5b69801c55291d5549f96d4190cc05c6e7107402116773a69dc7279f1928779d",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v3/PLAN.md": {
+        "bytes": 6782,
+        "sha256": "447fe834162e0476d28f6b0a94c2cab4072a12b7ca459fe789905e3ea9b7c5e7",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-clean-baseline-preparation-v2/receipt.json": {
+        "bytes": 596075,
+        "sha256": "72955631bce6432d7104dfaa4efe720143584275bc48288f4a2f2474b113fb7c",
+        "mode": 33152
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-clean-baseline-preparation-v1/receipt.json": {
+        "bytes": 382168,
+        "sha256": "a6c4c9623db01fb90731958477694821e7c9f1b3a0a8ba89e1656370fa09c04e",
+        "mode": 33152
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-clean-baseline-preparation-v1/source.tar": {
+        "bytes": 7270400,
+        "sha256": "90f12bbac53e5ccea3dc8f99650386ee1502217fb414ff95e920898b1bcd99fe",
+        "mode": 33152
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v1/receipt.json": {
+        "bytes": 881442,
+        "sha256": "349a789ae7931a4a7ba01ea98dc7d652972485c10f04aacde117489d67bea2c4",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v2/receipt.json": {
+        "bytes": 1312262,
+        "sha256": "93553d8f7fab6dce9141587600f2923465be1cda39647d327bb2718bbcd1f079",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-outer-first-v1/receipt.json": {
+        "bytes": 1192,
+        "sha256": "cedccb0888f4ab0524f820dfd92bf00c867f3fe25858c43dc072e0e3d62f220f",
+        "mode": 33152
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-outer-first-v2/receipt.json": {
+        "bytes": 4042,
+        "sha256": "f2e01376634a0a82fb27fd0f576ce298e059c95e93913e78a1ecc5a40e923a52",
+        "mode": 33152
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-mixed-causal-preparation-five-group-host-first-v2/focused-causal43-run.stderr": {
+        "bytes": 169,
+        "sha256": "1d6ded67237dc9492a69e2977411f3b8dda15673127909818e6541f28812f649",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-native-mixed-causal-five-group-host-first-v3-saved-audit.json": {
+        "bytes": 14137,
+        "sha256": "9c4dc92c5bbacc806541b199335a4929636af9285e8c05e3f05b2e6c3b07734c",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-typed-causal-clean-baseline-preparation-v2-saved-review.json": {
+        "bytes": 7084,
+        "sha256": "d7f01b873ac297b6f16a6a8b0a3744f828d33c774f0e25e69342ac06c0a8d317",
+        "mode": 33152
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v1/host-first.py": {
+        "bytes": 23230,
+        "sha256": "5a9c97d08154db1ac551bbff332547d278adf5547616403318a37a1458eccc7f",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v1/PLAN.md": {
+        "bytes": 9126,
+        "sha256": "d3eb7873642e9087c25461628f7ef3f33b3c1982807065c4f5487690e8837925",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v1/binding-data.json": {
+        "bytes": 34657,
+        "sha256": "49c749ddbbd8703cc92555d87c9ef3c85b8ac7b58cea8f58cfaf7ad2220361f7",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v1/pins.json": {
+        "bytes": 566,
+        "sha256": "195982407017e54a466c45925ad496e98a6c0762eb44948a1707056f1c7648ef",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-outer-source-proposal-v1/outer.py": {
+        "bytes": 25275,
+        "sha256": "5f877367a8b47e673269935fd3a60ba795310f0a079ed63973c3a5775ac86811",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-outer-source-proposal-v1/PLAN.md": {
+        "bytes": 6841,
+        "sha256": "dad094136f1b852cbb85a045211fd547daa288b1db50aa983d9266422205891c",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-outer-source-proposal-v1/pins.json": {
+        "bytes": 2367,
+        "sha256": "183489a63c7139fe85f2f46bcb6d0b0c1b9799e594e9691a7a9193d14109ce38",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-native-mixed-causal-current-cli-helper-outer-source-v1-correction.json": {
+        "bytes": 6008,
+        "sha256": "0c5e0687741313e4a2c7f0fdd7d9bd45feb84c605cb31daa53f60ecc61580751",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-native-mixed-causal-current-driver-source-v4-review.json": {
+        "bytes": 7337,
+        "sha256": "6604096160d60ca1d8d46068168b2d9273f509a92f201f02f3105d6243709c22",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v2/src/core/mixed_readers_causal.c": {
+        "bytes": 55184,
+        "sha256": "d2298f135bd7cdcff35da2893dd5d2e6bac808176bd5dc64d017e3ac63a5f5e7",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v1/src/core/mixed_readers_causal_factory_internal.h": {
+        "bytes": 1982,
+        "sha256": "2958501d5b7dfc9213e39662f90ab5bc661d454b430a4488ca1733d9e8a33f3f",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v1/src/editor/sampler_mixed_readers.c": {
+        "bytes": 58438,
+        "sha256": "ac9416b8cabf530c913792dfffd88d0fd8f23af4b6de91c010f391cc2ddca800",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v1/src/editor/sampler_mixed_causal_internal.h": {
+        "bytes": 2546,
+        "sha256": "a859a3f00a46cc97e2fb2cbd98dd7d9def4e818e498643c45b4745b3fa924f20",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v1/src/editor/editor_mixed_causal_prepare.c": {
+        "bytes": 77965,
+        "sha256": "d9e39016edfb59a5fc4e65ca97e0a4ff574e18985b3f072b958f0a0c7576e37c",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v1/src/editor/editor_mixed_causal_prepare.h": {
+        "bytes": 10191,
+        "sha256": "86e05815d442bff0306d526dc67e8af55f65b446534654a44db15b896b8a393f",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v1/src/editor/editor_mixed_causal_source_internal.h": {
+        "bytes": 8944,
+        "sha256": "517d5f25e9986bd9232f6a4bf36964d74325e714afa8cc12d6ab38ff805c59f5",
+        "mode": 33188
+      },
+      "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v3/tests/editor_mixed_causal_prepare_test.c": {
+        "bytes": 37410,
+        "sha256": "bd648d4f964e89ed0b56ecb41757b89fab7029130b2b2259bdea5e9ad04cd2f9",
+        "mode": 33188
+      }
+    },
+    "actual_receipts": {
+      "inner": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/receipt.json",
+        "pin": {
+          "bytes": 1546289,
+          "sha256": "19392e4bb10a41f51add1f4b0e405a93ba82c2623d2bd700d51c55fb895c5143",
+          "mode": 33188
+        }
+      },
+      "outer": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-outer-first-v3/receipt.json",
+        "pin": {
+          "bytes": 43734,
+          "sha256": "1f8725f8a7459301608cbc9eb844f43e44b1bc146e44203c1537b1da0ff88f63",
+          "mode": 33152
+        }
+      },
+      "nested": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/tmp/pt-causal-current-regression-tg3u0bed/receipt.json",
+        "pin": {
+          "bytes": 705996,
+          "sha256": "af3470628b4b6795af8c26df2042e13454785487b9b49de588def965e8abab34",
+          "mode": 33188
+        }
+      }
+    },
+    "all28_streams": {
+      "v2:root-typed-causal-current-cli-host-first-v2/cli-help.stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-help.stdout",
+        "pin": {
+          "bytes": 1026,
+          "sha256": "80218ea5965f474ad6e9d418638aabeeaef4d2e9ae92545d29be6270c8ac9036",
+          "mode": 33188
+        }
+      },
+      "v2:root-typed-causal-current-cli-host-first-v2/cli-help.stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-help.stderr",
+        "pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "v2:root-typed-causal-current-cli-host-first-v2/cli-list.stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-list.stdout",
+        "pin": {
+          "bytes": 237,
+          "sha256": "5d270fb635322fdd0ec9382bcebaf452ce99d1fcb572c9aa888906ad9e90f7fd",
+          "mode": 33188
+        }
+      },
+      "v2:root-typed-causal-current-cli-host-first-v2/cli-list.stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-list.stderr",
+        "pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "v2:root-typed-causal-current-cli-host-first-v2/cli-default.stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-default.stdout",
+        "pin": {
+          "bytes": 35,
+          "sha256": "5f876ccf1214b790caba3fce94aa5c5ff019e4ab33f46f58f3b72f5ca686368a",
+          "mode": 33188
+        }
+      },
+      "v2:root-typed-causal-current-cli-host-first-v2/cli-default.stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-default.stderr",
+        "pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "v2:root-typed-causal-current-cli-host-first-v2/cli-all.stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-all.stdout",
+        "pin": {
+          "bytes": 75,
+          "sha256": "177756926351794cc61db4b03aa6292baf7a725c8b17571aef9bb6f08a5b3402",
+          "mode": 33188
+        }
+      },
+      "v2:root-typed-causal-current-cli-host-first-v2/cli-all.stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-all.stderr",
+        "pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "v2:root-typed-causal-current-cli-host-first-v2/cli-invalid.stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-invalid.stdout",
+        "pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "v2:root-typed-causal-current-cli-host-first-v2/cli-invalid.stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-invalid.stderr",
+        "pin": {
+          "bytes": 552,
+          "sha256": "88809ebf16e0f362743ea58c5e996f5f085422a3f7afe1ef9cda102b6df90a78",
+          "mode": 33188
+        }
+      },
+      "v2:root-typed-causal-current-cli-host-outer-first-v2/stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-outer-first-v2/stdout",
+        "pin": {
+          "bytes": 144,
+          "sha256": "f0d6564265faa5237697332804287b72f7c0104f3bcff5f8fc024220dbab03c6",
+          "mode": 33152
+        }
+      },
+      "v2:root-typed-causal-current-cli-host-outer-first-v2/stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-outer-first-v2/stderr",
+        "pin": {
+          "bytes": 759,
+          "sha256": "1fd9379aeff3e77dfa262e2fa8401189aa588de3078489fa85b58d289c916f0e",
+          "mode": 33152
+        }
+      },
+      "v3:cli-duplicate.stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/cli-duplicate.stdout",
+        "pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "v3:cli-duplicate.stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/cli-duplicate.stderr",
+        "pin": {
+          "bytes": 435,
+          "sha256": "bc0d4596763bea93a7724c2155c474ac1d8f2258da8e3b738b56794b8c3f97cb",
+          "mode": 33188
+        }
+      },
+      "v3:cli-conflict.stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/cli-conflict.stdout",
+        "pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "v3:cli-conflict.stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/cli-conflict.stderr",
+        "pin": {
+          "bytes": 461,
+          "sha256": "7f9fc7d28fed2eb94bd898eea0237acb1b5c0b92f152567f8419bb01eb45ba75",
+          "mode": 33188
+        }
+      },
+      "v3:cli-integration.stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/cli-integration.stdout",
+        "pin": {
+          "bytes": 2796,
+          "sha256": "137a753081cd819d0b34c907eb246af62cbaf664eb8a5ff1872ccfcce3b493ec",
+          "mode": 33188
+        }
+      },
+      "v3:cli-integration.stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/cli-integration.stderr",
+        "pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "v3:outer.stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-outer-first-v3/stdout",
+        "pin": {
+          "bytes": 144,
+          "sha256": "a3fee4425ce83747ff1926fa14867cd924793da3f384e3db203690bd5023f54d",
+          "mode": 33152
+        }
+      },
+      "v3:outer.stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-outer-first-v3/stderr",
+        "pin": {
+          "bytes": 589,
+          "sha256": "14c3ba1aebc9636cebd5b92b680ad2de6688648f68b229f85669fa319c34581d",
+          "mode": 33152
+        }
+      },
+      "nested:focused-causal43-compile.stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/tmp/pt-causal-current-regression-tg3u0bed/focused-causal43-compile.stdout",
+        "pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "nested:focused-causal43-compile.stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/tmp/pt-causal-current-regression-tg3u0bed/focused-causal43-compile.stderr",
+        "pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "nested:focused-causal43-run.stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/tmp/pt-causal-current-regression-tg3u0bed/focused-causal43-run.stdout",
+        "pin": {
+          "bytes": 337,
+          "sha256": "4be6008682f3da87970637b13f676593774ba6534857ea8436139213fb4595fa",
+          "mode": 33188
+        }
+      },
+      "nested:focused-causal43-run.stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/tmp/pt-causal-current-regression-tg3u0bed/focused-causal43-run.stderr",
+        "pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "nested:default-controller-compile.stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/tmp/pt-causal-current-regression-tg3u0bed/default-controller-compile.stdout",
+        "pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "nested:default-controller-compile.stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/tmp/pt-causal-current-regression-tg3u0bed/default-controller-compile.stderr",
+        "pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "nested:default-controller-run.stdout": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/tmp/pt-causal-current-regression-tg3u0bed/default-controller-run.stdout",
+        "pin": {
+          "bytes": 2273,
+          "sha256": "b3afac00b309d959418568141eb81a0977fabfbfdfde3eaa7688b1d2167ff22e",
+          "mode": 33188
+        }
+      },
+      "nested:default-controller-run.stderr": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/tmp/pt-causal-current-regression-tg3u0bed/default-controller-run.stderr",
+        "pin": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      }
+    },
+    "primary_saved_audit": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-typed-causal-current-cli-host-first-v3-failure-and-saved-completion-audit.json",
+      "pin": {
+        "bytes": 56362,
+        "sha256": "c781a1d21e2d8551d68cb8d2985f4071010e7e0ffc6a23e685d301256648d725",
+        "mode": 33188
+      }
+    },
+    "exact_xcrun_db": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/tmp/xcrun_db",
+      "pin": {
+        "bytes": 495,
+        "sha256": "1865dbfa1feba4ab70a004b4bc7ed034dacbfb87c56b0596a43cdf68f9c907a0",
+        "mode": 33152
+      }
+    },
+    "current_source_full_map_reference": {
+      "receipt": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/receipt.json",
+        "pin": {
+          "bytes": 1546289,
+          "sha256": "19392e4bb10a41f51add1f4b0e405a93ba82c2623d2bd700d51c55fb895c5143",
+          "mode": 33188
+        }
+      },
+      "field": "repository_before",
+      "count": 1200,
+      "canonical_pin_sha256": "48d9d683705157f5b25e98b5c2d6f25fd53ae2d8ac52dac76fd7d607da0446a1"
+    },
+    "baseline_full_map_reference": {
+      "receipt": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/receipt.json",
+        "pin": {
+          "bytes": 1546289,
+          "sha256": "19392e4bb10a41f51add1f4b0e405a93ba82c2623d2bd700d51c55fb895c5143",
+          "mode": 33188
+        }
+      },
+      "field": "baseline_source_before",
+      "count": 983,
+      "canonical_pin_sha256": "9eb6a8ce8086353f644915d8dbf1f85d65e3d76dfbf298d97cdf6acdce9e8c93"
+    },
+    "new_candidate_full_map_reference": {
+      "receipt": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/receipt.json",
+        "pin": {
+          "bytes": 1546289,
+          "sha256": "19392e4bb10a41f51add1f4b0e405a93ba82c2623d2bd700d51c55fb895c5143",
+          "mode": 33188
+        }
+      },
+      "field": "candidate_source_before",
+      "count": 990,
+      "canonical_pin_sha256": "0b0954c8479fb86497820085cede7008147d82a3a9dc166de6b7322334ad5200"
+    },
+    "old_candidate_full_map_reference": {
+      "receipt": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/receipt.json",
+        "pin": {
+          "bytes": 1150684,
+          "sha256": "574ff03e955c9b4d9972924bc01f078a35af10c42b10e68aec482cd9786e2764",
+          "mode": 33188
+        }
+      },
+      "field": "candidate_source_before",
+      "count": 990,
+      "canonical_pin_sha256": "0b0954c8479fb86497820085cede7008147d82a3a9dc166de6b7322334ad5200"
+    },
+    "protected16_exact_current_pins": {
+      "AGENTS.md": {
+        "bytes": 789,
+        "sha256": "57dcd76709e95cd29c3d17c545a992bb924c629566de1e84a69db97701f5633b",
+        "mode": 33188
+      },
+      "amiga-test.json": {
+        "bytes": 5485,
+        "sha256": "2cc0b2707151467680193ad087903804a0c8e937ce97f5e229d90fed34a8be22",
+        "mode": 33188
+      },
+      "src/editor/editor.c": {
+        "bytes": 69155,
+        "sha256": "46d908ba5d89742fcdb8da337d01fe4af4decfeac9bfb883a21eb2920bc4b092",
+        "mode": 33188
+      },
+      "src/editor/editor.h": {
+        "bytes": 6675,
+        "sha256": "4de713afd3be0306eef784d421281596d2624bfbed176fd26ef571c26a865a9f",
+        "mode": 33188
+      },
+      "src/editor/view.c": {
+        "bytes": 44209,
+        "sha256": "a23ecde830cd23edcc332c93b924bf470161f0114415bece02d82fab2390cbdb",
+        "mode": 33188
+      },
+      "src/editor/view.h": {
+        "bytes": 2032,
+        "sha256": "44cdc9126cd9331d8cb0e428286f6fe1165187fb68c79a809cc6df54852a59b2",
+        "mode": 33188
+      },
+      "src/native/editor_main.c": {
+        "bytes": 46819,
+        "sha256": "ed49163c893660b75d3a63f00be2ff0acd2048c54d101051c26ce87fa446dc06",
+        "mode": 33188
+      },
+      "src/native/pattern_display.c": {
+        "bytes": 6888,
+        "sha256": "de7b6be91c29e2153fc61b9a2cfc22c7f730b049b68bf2d5e4ed87f1bf73959d",
+        "mode": 33188
+      },
+      "src/native/pattern_display.h": {
+        "bytes": 1519,
+        "sha256": "469f62be960d912258a37982504da75a7e38691ce13d4363a13b5e84cb9eaee1",
+        "mode": 33188
+      },
+      "tests/editor_test.c": {
+        "bytes": 53428,
+        "sha256": "946ee1a0667e8b43a7752ea7a0cf9590de781daffc7c73503efd9024dd690b65",
+        "mode": 33188
+      },
+      "tests/native_prepared_test.c": {
+        "bytes": 5858,
+        "sha256": "ad3041b508483482c0ff280a1c4f37576ec37a01eb421a230984bd3e6cb950a7",
+        "mode": 33188
+      },
+      "tests/test_editor.py": {
+        "bytes": 2002,
+        "sha256": "539fe7284a082781e2dead541e67b6d0f9e75ead179b631bfa8369ee4d1f9f82",
+        "mode": 33188
+      },
+      "tools/build_core_tests.py": {
+        "bytes": 39844,
+        "sha256": "081976b3831c518e7d757d934f2106c8aa072298dc3bd5ce74651188fd3a86b6",
+        "mode": 33188
+      },
+      "tools/test_sampler_emulator.py": {
+        "bytes": 8918,
+        "sha256": "cc84cf3098d10fa6901f45aaf93cecdbdf2fd55e39e6e36647c55d36a9c7f36c",
+        "mode": 33188
+      },
+      "tools/shared_infra_sampler.py": {
+        "bytes": 900,
+        "sha256": "5be11d68d4409baed36551165005c584ffec81a2c45f742e258cce74d1eba36d",
+        "mode": 33188
+      },
+      "tools/shared_infra_ui.py": {
+        "bytes": 3754,
+        "sha256": "9492cf59997857a1d69c1d6dbe4180ab83727d047cd456a9ba78221c1f6f5987",
+        "mode": 33188
+      }
+    },
+    "candidate_optional_watches_exact16": {
+      "AGENTS.md": {
+        "state": "ABSENT"
+      },
+      "amiga-test.json": {
+        "state": "ABSENT"
+      },
+      "src/editor/editor.c": {
+        "state": "PRESENT",
+        "pin": {
+          "bytes": 69195,
+          "sha256": "d5b00f3eb9b46db2b4f31ccf0784cf2a2cef00ff33dde4d9c386f250ff06d407",
+          "mode": 33188
+        }
+      },
+      "src/editor/editor.h": {
+        "state": "PRESENT",
+        "pin": {
+          "bytes": 6622,
+          "sha256": "2ca5a23e52a324c58436d8d52997e0443fe17583036426d0f11dfbd1fa2ab697",
+          "mode": 33188
+        }
+      },
+      "src/editor/view.c": {
+        "state": "PRESENT",
+        "pin": {
+          "bytes": 42956,
+          "sha256": "87dcf36230617d18b757b4acbe5dcc2ffac38d6c5d1d091463408eb8bccc15b2",
+          "mode": 33188
+        }
+      },
+      "src/editor/view.h": {
+        "state": "PRESENT",
+        "pin": {
+          "bytes": 1731,
+          "sha256": "1ce9950cfa9efa124e5a887dc6db36bebc43c91b410dfbc9ce8dd60c1b324d6c",
+          "mode": 33188
+        }
+      },
+      "src/native/editor_main.c": {
+        "state": "PRESENT",
+        "pin": {
+          "bytes": 45011,
+          "sha256": "30ba23eec3b0cd833e50280e4acbab98d7267335050f4c09cbd1b7c1522da108",
+          "mode": 33188
+        }
+      },
+      "src/native/pattern_display.c": {
+        "state": "ABSENT"
+      },
+      "src/native/pattern_display.h": {
+        "state": "ABSENT"
+      },
+      "tests/editor_test.c": {
+        "state": "PRESENT",
+        "pin": {
+          "bytes": 53077,
+          "sha256": "db5fa18007b058000c1b1800888e1ffd323793e85c92952857c21366fc5cc084",
+          "mode": 33188
+        }
+      },
+      "tests/native_prepared_test.c": {
+        "state": "ABSENT"
+      },
+      "tests/test_editor.py": {
+        "state": "PRESENT",
+        "pin": {
+          "bytes": 1992,
+          "sha256": "25bd3038978e684758417869762c0549398ebd2c94f3530f752bf3cc280c5473",
+          "mode": 33188
+        }
+      },
+      "tools/build_core_tests.py": {
+        "state": "ABSENT"
+      },
+      "tools/test_sampler_emulator.py": {
+        "state": "ABSENT"
+      },
+      "tools/shared_infra_sampler.py": {
+        "state": "ABSENT"
+      },
+      "tools/shared_infra_ui.py": {
+        "state": "ABSENT"
+      }
+    },
+    "compiled_temporary991_map_reference": {
+      "receipt": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v3/tmp/pt-causal-current-regression-tg3u0bed/receipt.json",
+        "pin": {
+          "bytes": 705996,
+          "sha256": "af3470628b4b6795af8c26df2042e13454785487b9b49de588def965e8abab34",
+          "mode": 33188
+        }
+      },
+      "field": "selected_tree_before",
+      "count": 991,
+      "canonical_pin_sha256": "7aa9a7cd517347ea1294d3f865fbd9c3262de7f53a4a6fd61362226627528e95"
+    },
+    "dynamic_artifact_closure_reference": {
+      "report": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-typed-causal-current-cli-host-first-v3-failure-and-saved-completion-audit.json",
+        "pin": {
+          "bytes": 56362,
+          "sha256": "c781a1d21e2d8551d68cb8d2985f4071010e7e0ffc6a23e685d301256648d725",
+          "mode": 33188
+        }
+      },
+      "field": "dynamic_closure_current_saved_evidence",
+      "two_saved_readbacks_equal": true
+    }
+  },
+  "separate_saved_admission": {
+    "content_passed": true,
+    "not_an_original_helper_or_outer_PASS": true,
+    "old_summary_fields_remain_absent": [
+      "nested_receipt",
+      "durable_attempt",
+      "durable_attempt_after",
+      "nested_admission",
+      "combined_cli_admission"
+    ],
+    "no_process_invocation_needed_or_authorized_for_completion": true,
+    "original_v2_and_v3_failures_remain_immutable": true,
+    "same_new3_cli_and_four_C_calls_no_replay": true,
+    "acceptance": "HOST composed seven parser observations and actual selected clean-baseline focused43/default-controller strict sanitizer groups only",
+    "historical_invalid_raw_false_and_separate552_literal_adjudication": true,
+    "durable17_files12_dirs_exact_two_root_tmp_with495_xcrun_only": true,
+    "unrecorded_runtime_closure_snapshots_not_invented": true
+  },
+  "root_possible_adoption_binding_only": {
+    "source_path_count": 9,
+    "exact_selected_bodies": {
+      "src/core/mixed_readers_causal.c": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v2/src/core/mixed_readers_causal.c",
+        "pin": {
+          "bytes": 55184,
+          "sha256": "d2298f135bd7cdcff35da2893dd5d2e6bac808176bd5dc64d017e3ac63a5f5e7",
+          "mode": 33188
+        }
+      },
+      "src/core/mixed_readers_causal_factory_internal.h": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v1/src/core/mixed_readers_causal_factory_internal.h",
+        "pin": {
+          "bytes": 1982,
+          "sha256": "2958501d5b7dfc9213e39662f90ab5bc661d454b430a4488ca1733d9e8a33f3f",
+          "mode": 33188
+        }
+      },
+      "src/editor/sampler_mixed_readers.c": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v1/src/editor/sampler_mixed_readers.c",
+        "pin": {
+          "bytes": 58438,
+          "sha256": "ac9416b8cabf530c913792dfffd88d0fd8f23af4b6de91c010f391cc2ddca800",
+          "mode": 33188
+        }
+      },
+      "src/editor/sampler_mixed_causal_internal.h": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v1/src/editor/sampler_mixed_causal_internal.h",
+        "pin": {
+          "bytes": 2546,
+          "sha256": "a859a3f00a46cc97e2fb2cbd98dd7d9def4e818e498643c45b4745b3fa924f20",
+          "mode": 33188
+        }
+      },
+      "src/editor/editor_mixed_causal_prepare.c": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v1/src/editor/editor_mixed_causal_prepare.c",
+        "pin": {
+          "bytes": 77965,
+          "sha256": "d9e39016edfb59a5fc4e65ca97e0a4ff574e18985b3f072b958f0a0c7576e37c",
+          "mode": 33188
+        }
+      },
+      "src/editor/editor_mixed_causal_prepare.h": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v1/src/editor/editor_mixed_causal_prepare.h",
+        "pin": {
+          "bytes": 10191,
+          "sha256": "86e05815d442bff0306d526dc67e8af55f65b446534654a44db15b896b8a393f",
+          "mode": 33188
+        }
+      },
+      "src/editor/editor_mixed_causal_source_internal.h": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v1/src/editor/editor_mixed_causal_source_internal.h",
+        "pin": {
+          "bytes": 8944,
+          "sha256": "517d5f25e9986bd9232f6a4bf36964d74325e714afa8cc12d6ab38ff805c59f5",
+          "mode": 33188
+        }
+      },
+      "tests/editor_mixed_causal_prepare_test.c": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-preparation-source-proposal-v3/tests/editor_mixed_causal_prepare_test.c",
+        "pin": {
+          "bytes": 37410,
+          "sha256": "bd648d4f964e89ed0b56ecb41757b89fab7029130b2b2259bdea5e9ad04cd2f9",
+          "mode": 33188
+        }
+      },
+      "tests/test_editor_mixed_causal_current_regressions.py": {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-driver-source-proposal-v4/tests/test_editor_mixed_causal_current_regressions.py",
+        "pin": {
+          "bytes": 27462,
+          "sha256": "3ef08564e8f9f2fa325556d7bb88161abb8b677674d38ff17c29745f2cded66b",
+          "mode": 33188
+        }
+      }
+    },
+    "current_nine_path_before_states": {
+      "src/core/mixed_readers_causal.c": {
+        "state": "PRESENT",
+        "pin": {
+          "bytes": 51779,
+          "sha256": "b6fce6f08e9b63d0453407d43db16a3425b83339969b00e147e7522a7cf1dacd",
+          "mode": 33188
+        }
+      },
+      "src/core/mixed_readers_causal_factory_internal.h": {
+        "state": "ABSENT"
+      },
+      "src/editor/sampler_mixed_readers.c": {
+        "state": "PRESENT",
+        "pin": {
+          "bytes": 52616,
+          "sha256": "de0343e5da616b6481c7bebaf9703ca8b7119abb024f899317f053f73206c908",
+          "mode": 33188
+        }
+      },
+      "src/editor/sampler_mixed_causal_internal.h": {
+        "state": "ABSENT"
+      },
+      "src/editor/editor_mixed_causal_prepare.c": {
+        "state": "ABSENT"
+      },
+      "src/editor/editor_mixed_causal_prepare.h": {
+        "state": "ABSENT"
+      },
+      "src/editor/editor_mixed_causal_source_internal.h": {
+        "state": "ABSENT"
+      },
+      "tests/editor_mixed_causal_prepare_test.c": {
+        "state": "ABSENT"
+      },
+      "tests/test_editor_mixed_causal_current_regressions.py": {
+        "state": "ABSENT"
+      }
+    },
+    "current_source_count_before": 1200,
+    "predicted_source_count_after_exact_nine_only": 1207,
+    "predicted_full_map_sha256_after_exact_nine_only": "c5d3c8e2f3580440f41178093a13d9be9579c8c973801a266e4a85906db28ce0",
+    "projection_is_not_actual_repository_mutation_or_check": true,
+    "protected16_disjoint_from_nine": true,
+    "protected16_required_unchanged": true,
+    "original_wrapper_failure_statuses_must_be_published_truthfully": true,
+    "other_three_clean_baseline_C_groups_not_tested": true,
+    "other_three_current_tree_V3_groups_keep_separate_scope": true,
+    "stale_crc_runner1200_custody_needs_distinct_source_derivative_before_target": true
+  },
+  "reviewer_actions": {
+    "imports_replays_compiler_tests_process_Git_network_service_target_guard_lease_lock_or_repository_mutation": false,
+    "saved_bytes_stat_hash_and_new_private_report_only": true
+  }
+}

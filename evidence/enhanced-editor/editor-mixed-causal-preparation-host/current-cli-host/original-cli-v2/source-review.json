@@ -1,0 +1,117 @@
+{
+  "scope": "SOURCE_SAVED_ONLY_COMBINED_CLI_HELPER_V2_AND_900_SECOND_OUTER_V2_REVIEW_NOT_RUN",
+  "verdict": "PASS_SOURCE_CLI_V2_COMPLETE_DARWIN_DEBUG_CUSTODY_UNCHANGED_GENUINE_QUALIFICATION_NOT_RUN",
+  "findings": [],
+  "collector_pins": {
+    "host-first.py": {
+      "bytes": 25222,
+      "sha256": "2f48cf333205587e6dbb332742add19adefbd164732bd42ab640cfb5fd30232a",
+      "mode": 33188
+    },
+    "PLAN.md": {
+      "bytes": 11399,
+      "sha256": "b28d8e5868ff4f7a9a9f521c3da699a4a00dcb4243cd3aa1283419e450562c51",
+      "mode": 33188
+    },
+    "binding-data.json": {
+      "bytes": 39926,
+      "sha256": "16ba107e01d99433348af08bf401a5c7a11ddcf413b8874cf35f9d757c153889",
+      "mode": 33188
+    },
+    "pins.json": {
+      "bytes": 567,
+      "sha256": "00733b169917327579c8aa0506dacab6be716c56c144305ce9abe45f4a517108",
+      "mode": 33188
+    }
+  },
+  "outer_pins": {
+    "outer.py": {
+      "bytes": 26871,
+      "sha256": "2b027055cafb160d1bb7ddccd081f06171f02d26836ba39d02008f268c61b4be",
+      "mode": 33188
+    },
+    "PLAN.md": {
+      "bytes": 8717,
+      "sha256": "4d833a22bdc3c4761054f43bfbfd2ccd70ea10d11ec74b82ed7cc235b88d531e",
+      "mode": 33188
+    },
+    "pins.json": {
+      "bytes": 3104,
+      "sha256": "48f8c95a73619f191bc632554efa2d872652695c07a525bb83352dae1f75417b",
+      "mode": 33188
+    }
+  },
+  "reviewed_bytes": "Complete helper/outer and both PLAN/manifest/binding files read and parsed as source only; full V1-to-V2 deltas reviewed against frozen originals and current V1 correction. No proposed code imported or executed.",
+  "binding_checks": {
+    "helper_files": 4,
+    "outer_files": 3,
+    "providers_full_pins_match": 49,
+    "V1_outer_donor_and_original_V3_finalizer_pins_match": true,
+    "accepted_public_driver_and_six_file_pins_unchanged": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-native-mixed-causal-current-driver-source-v4-review.json",
+      "pin": {
+        "bytes": 7337,
+        "sha256": "6604096160d60ca1d8d46068168b2d9273f509a92f201f02f3105d6243709c22",
+        "mode": 33188
+      }
+    },
+    "all_old_V1_binding_fields_except_scope_and_added_saved_custody_unchanged": true,
+    "baseline_files": 983,
+    "baseline_digest": "9eb6a8ce8086353f644915d8dbf1f85d65e3d76dfbf298d97cdf6acdce9e8c93",
+    "current_repository_files": 1200,
+    "current_repository_digest": "48d9d683705157f5b25e98b5c2d6f25fd53ae2d8ac52dac76fd7d607da0446a1",
+    "protected_original_paths": 16,
+    "candidate_files": 990,
+    "candidate_digest": "0b0954c8479fb86497820085cede7008147d82a3a9dc166de6b7322334ad5200",
+    "exact_nine_overlays_and_optional7_PRESENT_9_ABSENT_unchanged": true,
+    "original_and_baseline_header_absences_and_raw580_pins_match": true,
+    "saved_selected_debug_regular_files": 6,
+    "saved_selected_debug_directories": 12,
+    "saved_debug_files_and_directory_modes_full_read_match_binding": true,
+    "V1_V2_proposed_outputs_absent_at_review": true,
+    "original_mistaken_PASS_and_correction_preserved": [
+      {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-native-mixed-causal-current-cli-helper-outer-source-v1-review.json",
+        "pin": {
+          "bytes": 8547,
+          "sha256": "2f0e6cfa1a3b5274994bc2dab386726749f86e2363ac62c3767afca23b409353",
+          "mode": 33188
+        },
+        "admission": "WITHDRAWN; preserved mistaken V1 verdict, not authority"
+      },
+      {
+        "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-native-mixed-causal-current-cli-helper-outer-source-v1-correction.json",
+        "pin": {
+          "bytes": 6008,
+          "sha256": "0c5e0687741313e4a2c7f0fdd7d9bd45feb84c605cb31daa53f60ecc61580751",
+          "mode": 33188
+        },
+        "admission": "V1 remains BLOCKED_SOURCE; not rewritten"
+      }
+    ]
+  },
+  "directory_custody_review": [
+    "New entry_inventory requires an ordinary lstat directory root, at most64 unique entries, ordinary directory modes and regular bounded-file bytes/SHA/modes. Every symlink, socket/FIFO/device/nonregular entry refuses. No debug entry is ignored or removed.",
+    "durable_inventory retains exactly11 mandatory receipt/two executables/eight stream leaves, requires both selected focused-causal43.dSYM/default-controller.dSYM roots to be directories, and accepts additional paths only under those roots. Extra top-level files/directories or other bundle roots refuse. Full {files,directories} admission is independently re-read by helper final custody.",
+    "Matching outer independently inventories every new durable entry with the same lstat/ordinary/bound rules and checks full actual map equals helper admitted and final maps. It retains mandatory11 checks and all actual nested executable/stream assertions; old incorrect exact11-total-files constraint is gone.",
+    "Actual old V3 selected two bundles have six regular files and12 directories, all now full-byte/mode bound before/final as preserved SOURCE rationale. Their old relocated debug hashes are not required to equal new output. No debug semantics/native acceptance is inferred from custody."
+  ],
+  "unchanged_execution_and_evidence_contract": [
+    "Public V4 driver, actual source vectors79/80, original strict C99/O1/g/Wall/Wextra/Werror/UNDEBUG/ASan/UBSan options and full337/2273 oracles unchanged. Exactly seven no-compile selectors plus one focused43/default-controller multi-selection CLI call; no additional compiler group or testcase.",
+    "All seven observations retain exact stdout/refusal stderr/expected RC0 or2, actual candidate990 count+digest and empty TMPDIR before/after, independent after attempts even on error. Original/baseline pt_font.h absence, candidate watches/exclusions, current1200/protected16 and every bound provider retain before/final proofs.",
+    "Integration still requires actual four nested compile/run records with compile120/run30 and compile120/run180, complete stdout/stderr, actual executable pins, RC0/reap/own-group-absence/empty errors, immutable990/991 source/font/compiler maps and positive source context removal. Helper or outer exit alone never supplies nested quiet.",
+    "Helper process call/clock/capture/finalization AST is unchanged from V1; complete outer owned-process finalizer text is byte-identical to V1 and original reviewed V3. First failure is sticky, own HOST group signals only, no retry or inferred nested process absence.",
+    "Outer900 seconds, helper seven10 plus integration600, explicit four review arguments and exact review-byte SHA/schema gates remain. Fresh V2 outputs refuse reuse. Full partial streams/receipt/input readbacks survive errors. No imports/Git/archive/target/service/recovery route was added."
+  ],
+  "scope_limits": [
+    "PASS_SOURCE is review evidence only. Root remains sole executor/adopter; no compiler, CLI, test, process probe or runtime acceptance occurred in this review.",
+    "Any later HOST pass qualifies only seven CLI observations plus focused43/default-controller on clean committed27e7372 and exact nine overlays. Other three V3 groups retain their separate current-tree scope; no clean-baseline all-five claim.",
+    "No native/Fast/Chip/emulator/A1200/card capacity/ordering/completion/voice-stop/exact live timing/IRQ stack/WCET/audio/listening or service approval inferred. Original native90 and original typed V1/V2 runtime failures remain preserved."
+  ],
+  "reviewer_operations": [
+    "SOURCE/SAVED file reads and hashes; own static AST/diff comparisons; this fresh private report write/readback only."
+  ],
+  "not_performed": [
+    "No proposed imports or invocation, CLI/compiler/tests, process/health/network/Git/target/service/guard/lease/lock operations, repository/checkpoint/history/memory mutation."
+  ]
+}

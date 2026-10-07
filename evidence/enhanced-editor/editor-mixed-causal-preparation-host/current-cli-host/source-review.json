@@ -1,0 +1,224 @@
+{
+  "scope": "SOURCE_ONLY_INDEPENDENT_COMBINED_V3_CLI_COMPLETION_HELPER_OUTER_REVIEW_NOT_RUN",
+  "verdict": "PASS_SOURCE_V3_CARRY_FIVE_SAVED_PLUS_THREE_NEW_STRICT_CLI_COMPLETION_NOT_RUN",
+  "passed": true,
+  "findings": [],
+  "collector_pins": {
+    "host-first.py": {
+      "bytes": 36257,
+      "sha256": "5a29f948f9ca3896bda979483e9a0c23496a152a44117cb728940f084b8b7700",
+      "mode": 33188
+    },
+    "PLAN.md": {
+      "bytes": 9252,
+      "sha256": "c608a9a5bc3cb529f949648576726ee05c0f83942c78493b4cff59606c30fd48",
+      "mode": 33188
+    },
+    "binding-data.json": {
+      "bytes": 54452,
+      "sha256": "a02f7d0c7dbf33ec88e8e9ca57b3eab5883cdad920660bd68acba7ae3f859bc3",
+      "mode": 33188
+    },
+    "pins.json": {
+      "bytes": 566,
+      "sha256": "26701bf076ae3f50c67c9a1e7445f7d76f085dafcce78f11afa2c1b4b959086e",
+      "mode": 33188
+    }
+  },
+  "outer_pins": {
+    "outer.py": {
+      "bytes": 45393,
+      "sha256": "4e41c92b215e64e094b2d3844d3bd9155c95302907f6946bdcd541a6c52ce862",
+      "mode": 33188
+    },
+    "PLAN.md": {
+      "bytes": 8939,
+      "sha256": "db9acffc8358a47641bbd5c9ee3e66389dcf4f698a479d6579efa28374189573",
+      "mode": 33188
+    },
+    "pins.json": {
+      "bytes": 3559,
+      "sha256": "14c4d61b1ab2a41e834320772ab2fc7159953d3559c0e455c8c819b28d8185ae",
+      "mode": 33188
+    }
+  },
+  "packet_directories": {
+    "collector": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-source-proposal-v3",
+    "outer": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/native-mixed-causal-current-cli-host-outer-source-proposal-v3"
+  },
+  "reviewed_content": [
+    "complete helper source, binding and PLAN",
+    "complete outer source, manifest and PLAN",
+    "complete generated V2-to-V3 helper and outer source differences",
+    "actual preserved V2 receipts and full stream pins, accepted failure audit and selected frozen dependencies"
+  ],
+  "source_delta": {
+    "helper": {
+      "bytes": 19982,
+      "sha256": "eb3046508deba531eb6d8b463c76b40a3781c452d2fc2a1f9c93146a0539eb89"
+    },
+    "outer": {
+      "bytes": 29819,
+      "sha256": "1dc18d61e3780efbc917c00a58f2d9a53f4b0a6f539e5ec38675bff604dea1d6"
+    },
+    "binding_changed_keys": [
+      "scope",
+      "saved_inputs",
+      "saved_prefix"
+    ],
+    "unchanged_helper_call_ast": true,
+    "unchanged_outer_own_group_finalizer_bytes": true,
+    "copied_pure_prefix_functions_ast_identical": true,
+    "public_driver_and_eight_source_fixture_overlays_unchanged": true,
+    "groups_flags_sanitizer_options_oracles_limits_unchanged": true
+  },
+  "preserved_original_failure": {
+    "inner": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/receipt.json",
+      "pin": {
+        "bytes": 1150684,
+        "sha256": "574ff03e955c9b4d9972924bc01f078a35af10c42b10e68aec482cd9786e2764",
+        "mode": 33188
+      }
+    },
+    "outer": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-outer-first-v2/receipt.json",
+      "pin": {
+        "bytes": 4904,
+        "sha256": "68a5573c73a6f13b109ab5faa0bd3f86295fc8b705fd12335c2c3ec02f82de6a",
+        "mode": 33152
+      }
+    },
+    "accepted_failure_audit": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-typed-causal-current-cli-host-first-v2-failure-saved-audit.json",
+      "pin": {
+        "bytes": 21098,
+        "sha256": "816573c032d5b33c1995d0aff743883826524c0b89290743e3275d750b739963",
+        "mode": 33188
+      },
+      "verdict": "PASS_INDEPENDENT_SAVED_AUDIT_OF_FAILED_V2_CLI_QUALIFICATION_NO_REPLAY"
+    },
+    "old_inner_status": "FIRST_FAILURE_RETAINED_NO_RETRY",
+    "old_outer_status": "FAILURE_OR_REFUSAL_RETAINED_NO_RETRY",
+    "raw_call_count": 5,
+    "raw_returns": [
+      0,
+      0,
+      0,
+      0,
+      2
+    ],
+    "raw_observation_passed": [
+      true,
+      true,
+      true,
+      true,
+      false
+    ],
+    "original_gate_remains_failed": true,
+    "old_records_and_streams_never_rewritten": true
+  },
+  "prefix_admission": {
+    "full_twelve_saved_streams_bound": true,
+    "corrected_invalid_stream": {
+      "bytes": 552,
+      "sha256": "88809ebf16e0f362743ea58c5e996f5f085422a3f7afe1ef9cda102b6df90a78",
+      "complete_literal_suffix": "argument --group: invalid choice: 'not-a-group' (choose from default-factory, default-controller, focused-causal43, causal26, publication56)",
+      "separate_adjudication_not_raw_observation_rewrite": true
+    },
+    "historical_cwd_pid_times_returns_and_quiet_records_retained_verbatim": true,
+    "sys_executable_bound_to_saved_historical_path_without_invented_binary_hash": "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "no_saved_prefix_replay": true,
+    "fresh_old_candidate_current_repo_baseline_full_map_proofs_before_and_final": true,
+    "source_counts": {
+      "old_candidate": 990,
+      "current_repo": 1200,
+      "baseline": 983
+    },
+    "original_providers": 49,
+    "protected_paths": 16,
+    "old_temporary_must_remain_empty": true,
+    "old_inner_outer_top_closure_and_raw_fonts_watch_exclusions_header_absences_preserved": true,
+    "known_prefix_leaf_checks_registered_before_first_observation_and_independently_repeated": 23
+  },
+  "new_execution_contract_source_only": {
+    "helper_new_labels": [
+      "cli-duplicate",
+      "cli-conflict",
+      "cli-integration"
+    ],
+    "helper_new_call_count": 3,
+    "new_parser_observation_count": 2,
+    "carried_parser_observation_count": 5,
+    "combined_parser_observation_count": 7,
+    "expected_returns": [
+      2,
+      2,
+      0
+    ],
+    "seconds": [
+      10,
+      10,
+      600
+    ],
+    "outer_seconds": 900,
+    "outer_helper_invocations": 1,
+    "exact_same_new_candidate_990_map_required": true,
+    "no_first_five_new_invocation": true,
+    "exact_complete_duplicate_conflict_stderr_required": true,
+    "sticky_failure_full_capture_positive_own_group_quiet_and_reap": true,
+    "own_new_host_groups_only": true
+  },
+  "nested_c_contract_source_only": {
+    "selected_groups": [
+      "focused-causal43",
+      "default-controller"
+    ],
+    "actual_commands_required": 4,
+    "source_vectors": [
+      79,
+      80
+    ],
+    "oracle_bytes": [
+      337,
+      2273
+    ],
+    "compile_seconds": [
+      120,
+      120
+    ],
+    "run_seconds": [
+      30,
+      180
+    ],
+    "full_actual_argv_cwd_rc_streams_executable_pins_reap_group_absence_required": true,
+    "temporary_selected_map_991_including_exact_generated_header_1630": true,
+    "source_parent_positive_absence_and_owned_context_removed_required": true,
+    "durable_mandatory_regular_leaves": 11,
+    "selected_debug_root_count": 2,
+    "complete_regular_file_directory_closure_bound": 64,
+    "symlinks_nonregular_extra_outside_selected_debug_roots_refused": true,
+    "complete_durable_before_final_maps_required": true
+  },
+  "approval_and_result_boundary": {
+    "root_sole_executor": true,
+    "explicit_combined_review_path_sha_and_exact_public_driver_review_path_sha_required": true,
+    "combined_review_exact_helper4_and_outer3_required": true,
+    "proposed_output_paths_absent_at_source_review": true,
+    "future_pass_scope_only": "five carried historical parser calls plus two new parser calls and one selected focused43/controller HOST integration",
+    "does_not_convert_old_failed_gate_to_pass": true,
+    "does_not_claim_all_five_clean_baseline_C_groups": true,
+    "source_review_is_not_runtime_acceptance": true,
+    "no_native_target_service_or_recovery_authority_inferred": true,
+    "original_native_90_second_failure_unchanged": true
+  },
+  "reviewer_actions": {
+    "proposal_import": false,
+    "compiler_or_test_or_cli_execution": false,
+    "process_or_health_or_network_probe": false,
+    "git": false,
+    "repository_edit": false,
+    "target_service_guard_lease_lock_action": false,
+    "new_private_report_only": true
+  }
+}

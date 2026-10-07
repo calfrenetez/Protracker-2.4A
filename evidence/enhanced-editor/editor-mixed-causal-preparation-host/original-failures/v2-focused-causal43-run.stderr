@@ -1,0 +1,1 @@
+Assertion failed: (pt_mixed_causal_fire(f->control.causal,ticket)==PT_MIXED_CAUSAL_COMMITTED), function cp_real_veto, file editor_mixed_causal_prepare_test.c, line 453.

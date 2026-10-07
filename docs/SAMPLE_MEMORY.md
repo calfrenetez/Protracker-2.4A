@@ -6458,9 +6458,7 @@ whole-song producer/frontend integration and actual editor PLAY remain open.
 Publication-fault/exceptional-constructor cases and imported/all20-active registry
 qualification remain open. See [contract](MIXED_READERS_CAUSAL.md) and
 [actual host evidence](../evidence/enhanced-editor/mixed-readers-causal-host/README.md).
-The separate one-armed Fast/Chip candidate failed native90s completion; its HOLD
-and failed evidence are retained pending separately approved recovery. No native
-timing, DMA/card transfer/completion/stop, audio or listening acceptance follows.
+The separate one-armed Fast/Chip candidate failed native90s completion; its failure-time HOLD and failed evidence are preserved. Subsequent approved HOST recovery and normal release are recorded separately below; the native90 admission remains FAILED. No native timing, DMA/card transfer/completion/stop, audio or listening acceptance follows.
 
 
 ## Mixed RAM failed-run recovery disposition — 7 October 2026
@@ -6487,4 +6485,38 @@ initial compile-command missing include failure stays recorded separately from
 its corrected remaining-group success. [Saved HOST evidence](../evidence/enhanced-editor/project-crc-nibble-host/README.md)
 binds full oracles, fixed goldens and before/after source/protected custody.
 This is no native speed/failure-cause, Fast/Chip target, hardware or timing proof.
-Updated native crossbuild, exact emulator and physical qualification remain pending.
+The separate CRC diagnostic HOST composition and strict native crossbuild are now qualified; the exact239724-byte HUNK remains NOT_RUN in Amiberry and on the A1200. These build results establish no native speed, timeout cause or device/timing/audio acceptance. See [CRC diagnostic build evidence](../evidence/enhanced-editor/native-mixed-ram-port/crc-diagnostic-build/README.md).
+
+## Opt-in typed causal pair preparation
+
+The task-side facade binds the genuine original causal owner/source callback
+before factory/cache construction, prepares at most two pure TRIGGER batches,
+and preserves independent command,reader,cache,master-pin and final SOURCE
+lifetimes. No rolling refill,CONTROL/musical STOP,default/classic PLAY or accepted
+layout change. Existing master8/16/24,selective-cache,save/export and direct24
+Studio contracts stay in force.
+
+Accepted current-tree V3 HOST qualification covers focused43 and original
+factory/controller,causal26/publication56 with ten strict ASan/UBSan calls and
+complete original oracles. Separate current-entry HOST content acceptance
+combines five historical parser observations with two later observations and
+one focused43/default-controller integration:four actual C calls on a fresh
+baseline983+nine overlays. The first five were not rerun and the other three C
+groups were not run on that clean baseline.
+
+Original CLI V2 FAILED/invalidfalse and complete552-byte stderr are unchanged;
+exact full-stream interpretation is separate. V3 also remains FAILED at its
+singleton TMPDIR gate after successful C calls. The independent SAVED audit and
+18-gate supplement accept captured software content with exact495-byte/0600
+`xcrun_db` and complete17-file/12-directory closure. They infer no creator/time
+and invent no missing runtime closure observations. Full historical/later streams
+and original failures remain separate. The reports' source1200 is historical;
+subsequent exact nine-path adoption recorded1207 with all16 protected paths intact.
+
+See [typed pair contract](EDITOR_MIXED_CAUSAL_PREPARE.md),
+[current-tree HOST evidence](../evidence/enhanced-editor/editor-mixed-causal-preparation-host/README.md)
+and [current CLI HOST content evidence](../evidence/enhanced-editor/editor-mixed-causal-preparation-host/current-cli-host/README.md).
+Quantized causal pair qualification,before-master genuine producer composition,
+whole-song/native PLAY,paired source/timer binding,whole-stack/WCET/IRQ,real
+Fast/Chip/device completion/stop,exact live timing,audio and listening remain
+separate unfinished work. The user's exact scheduling decision is unchanged.

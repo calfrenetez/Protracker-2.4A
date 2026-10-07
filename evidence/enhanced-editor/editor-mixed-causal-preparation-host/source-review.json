@@ -1,0 +1,165 @@
+{
+  "scope": "INDEPENDENT_SOURCE_AND_SAVED_REVIEW_ONLY_NO_PROPOSAL_IMPORT_EXECUTION_COMPILER_TEST_PROCESS_GIT_NETWORK_TARGET_SERVICE_GUARD_LOCK_OR_LEASE_ACTION",
+  "verdict": "PASS_SOURCE_TYPED_CAUSAL_V3_PAIRED_VETO_FIXTURE_FIVE_GROUP_COLLECTOR_AND_EXACT_OUTER_NOT_RUN",
+  "findings": [],
+  "collector_pins": {
+    "PLAN.md": {
+      "bytes": 3234,
+      "sha256": "6478122f3d9ff5e6ee657f6ee89bf88d7aa403b481ca9e05788cc6b4ce75fb4c",
+      "mode": 33188
+    },
+    "binding-data.json": {
+      "bytes": 30215,
+      "sha256": "6728a329d227914cd20bd70ad3db8b9a3489c5b3928586ff47cc20f291a41ae0",
+      "mode": 33188
+    },
+    "host-first.py": {
+      "bytes": 17589,
+      "sha256": "8081495fff95cc6a237e47604623ec316155b67c519f008c9cfc1074b0609b9a",
+      "mode": 33188
+    },
+    "pins.json": {
+      "bytes": 547,
+      "sha256": "8ba46e5ae471db569a23eb9ef88bc0ab50e376a71f72cfb47a723ef1410931be",
+      "mode": 33188
+    }
+  },
+  "packet_pins": {
+    "native-mixed-causal-preparation-source-proposal-v3": {
+      "PLAN.md": {
+        "bytes": 2960,
+        "sha256": "0a937dccda210b6a2d4101ace8d80828ca1b08828dc4c7d3e2fd2503710d0956",
+        "mode": 33188
+      },
+      "donor-pins.json": {
+        "bytes": 1856,
+        "sha256": "83b37b0ff9d492e43b8ccef21d5a08851ecdec501e8057eb00e3063e340a61fc",
+        "mode": 33188
+      },
+      "proposal.diff": {
+        "bytes": 3393,
+        "sha256": "d9bb079c636f5d63f5e4a2eab29c3e22450e7e60dd989bdc8078c44c949c522a",
+        "mode": 33188
+      },
+      "tests/editor_mixed_causal_prepare_test.c": {
+        "bytes": 37410,
+        "sha256": "bd648d4f964e89ed0b56ecb41757b89fab7029130b2b2259bdea5e9ad04cd2f9",
+        "mode": 33188
+      },
+      "source-pins.json": {
+        "bytes": 721,
+        "sha256": "9150ae95e0acaf4a58810434ce990c7dbf1c9f0a0879da71c7a035518f82270d",
+        "mode": 33188
+      }
+    },
+    "native-mixed-causal-five-group-host-source-proposal-v3": {
+      "PLAN.md": {
+        "bytes": 3234,
+        "sha256": "6478122f3d9ff5e6ee657f6ee89bf88d7aa403b481ca9e05788cc6b4ce75fb4c",
+        "mode": 33188
+      },
+      "binding-data.json": {
+        "bytes": 30215,
+        "sha256": "6728a329d227914cd20bd70ad3db8b9a3489c5b3928586ff47cc20f291a41ae0",
+        "mode": 33188
+      },
+      "host-first.py": {
+        "bytes": 17589,
+        "sha256": "8081495fff95cc6a237e47604623ec316155b67c519f008c9cfc1074b0609b9a",
+        "mode": 33188
+      },
+      "pins.json": {
+        "bytes": 547,
+        "sha256": "8ba46e5ae471db569a23eb9ef88bc0ab50e376a71f72cfb47a723ef1410931be",
+        "mode": 33188
+      }
+    },
+    "native-mixed-causal-five-group-host-outer-source-proposal-v3": {
+      "outer.py": {
+        "bytes": 11129,
+        "sha256": "d013401daf143a4272d5a8788d7ee36ad6dd04b03329fc88797b8b3eec605e5a",
+        "mode": 33188
+      },
+      "PLAN.md": {
+        "bytes": 4157,
+        "sha256": "d5aa7abcfaf95cad64e44e8d6f15e44bc315f0afda25f75682a1a1dd78a15228",
+        "mode": 33188
+      },
+      "pins.json": {
+        "bytes": 1013,
+        "sha256": "30d5c8ab1598217149142b345c77dde76a11cb83112db97e0102b0e8fe10223b",
+        "mode": 33188
+      }
+    }
+  },
+  "fixture_checks": [
+    "Full V3 fixture, exact saved V2-to-V3 diff, plan and donor/manifest sources read. Diff is byte-exact; all fixture bytes outside cp_real_veto are unchanged, including main case selection, exact337-byte oracle and master-save helpers. V3 has161 assertion sites versus152 in V2; the existing veto/event/revision/generation/source-close/quiet assertions remain or are strengthened.",
+    "The eight real-veto cases now genuinely prepare/enqueue/publish successor1920 and acquire its five independent reader refs before unchanged first960 COMMITTED fire. Both ticket identities are real/distinct, publications equal2, held command/readers equal2/10, ordinary holders equal15, and no commit/effects occur before first fire.",
+    "The genuine owner fire gate requires admitted/published successor before first in-window completion. Setup now satisfies that contract without changing production, original clock/window, default validator/refusal, actual commit/adoption or prediction authority. cp_admit uses actual typed enqueue and publish APIs; no synthetic readiness/ACTIVE state or raw bypass is introduced.",
+    "Exactly one five-action first commit is asserted, with retained holder count unchanged. The genuine edit/undo/route/dispose request still vetoes mutation and retains both command/ref sets. Each existing C-first/R-first branch separately drains command0/1 and readers0..4/16..20 through actual services. Final both-set reader NULL and both command NULL assertions are stronger. The successor is cancelled and never fired.",
+    "Total43 cases and all other continuing-success, refusal, reentry, precision, ownership, output/input guard and SOURCE-borrow cases are unchanged. SOURCE review does not establish that any V3 assertion has passed at runtime."
+  ],
+  "collector_checks": [
+    "Full V3 helper/PLAN/binding/manifest and full actual V2-to-V3 source delta read. All twelve current packet entries across the three packets match byte length/SHA-256/mode. All37 frozen packet entries and20 saved failure inputs match actual saved bytes; V1/V2 failures remain immutable.",
+    "The actual preserved V2 receipt remains FIRST_FAILURE_RETAINED_NO_RETRY: focused compileRC0 with empty streams, focused runtimeRC-6 with zero stdout/169-byte assertion stderr, both reaped/groups absent/errors empty, no later group acceptance. Saved source maps are equal before/after.",
+    "Exact failed V2 selected donor1209 files matches the saved before/after dictionary and canonical digest cba97ba98db9c984c573ac2d3fcfd6b18c513463adc2df0d7da3c6c9a0cef7cd. Current src/tests1200 matches digest48d9d683705157f5b25e98b5c2d6f25fd53ae2d8ac52dac76fd7d607da0446a1; protected16, two current drivers, raw font and compiler pins match. This is source-byte custody, not a Git HEAD/status observation.",
+    "Prospective selected tree remains1209 and differs only at tests/editor_mixed_causal_prepare_test.c; canonical projected digest fbf4aa55f60dffd7ef112f4987dbb046a4ccd74e51b140bbbabc61cafa4c77f7. Every production/core/default file, including the V2 local registration initializer, remains exact donor bytes. Existing literal font is copied, not regenerated.",
+    "All five genuine source vectors equal actual literal recipe selections and preserved V2 groups:79/29/80/27/27 unique units. Full oracle lengths337/1280/2273/521/404 are unchanged. Strict C99/O1/g/Wall/Wextra/Werror/UNDEBUG/ASan+UBSan flags and exact sanitizer options are unchanged; compile120 each, run30/180/180/30/30 remain unchanged.",
+    "The nested call/process/finalization body and final custody body are byte-exact V2. All known input proofs register before comparison; isolated tree single overlay is checked completely; each actual call captures full streams/sticky errors and independently proves RC0/reap/positive own-group absence before progress. First failure stops later groups; every final input observation is attempted independently and custody errors override prospective PASS."
+  ],
+  "outer_checks": [
+    "Full outer/PLAN/manifest read. The V3 source normalizes byte-exactly to V2 with version names/status labels and the exact four-file inner pin assignment only; no ownership, invocation, wait, signal, stream, error, partial receipt or final custody behavior changed.",
+    "Explicit absolute independent SOURCE review path/SHA remains required. Same captured review bytes must have SOURCE scope, PASS_SOURCE verdict, findings[] and collector_pins exactly equal the four V3 entries in this report and the literal EXPECTED_PACKET. Both own packet and supplied review are checked before/after, including failure.",
+    "Outer creates a new private first-V3 directory and refuses existing inner/outer output. It invokes the exact helper once in a new owned HOST session and waits at most1200 seconds; full stdout/stderr and actual RC/reap/positive own-group absence/sticky errors are required. No emulator/service/target PID or operation exists.",
+    "PASS also requires exact receipt-path stdout, empty stderr, complete inner ten-command/five-group PASS and no custody errors. Partial/failed receipts never qualify; full failure evidence remains. No unchanged-source automatic retry is introduced."
+  ],
+  "qualification": {
+    "v3_executed_by_reviewer": false,
+    "case_count": 43,
+    "fixture_assertion_sites_v2": 152,
+    "fixture_assertion_sites_v3": 161,
+    "focused_oracle_bytes": 337,
+    "source_vector_lengths": [
+      79,
+      29,
+      80,
+      27,
+      27
+    ],
+    "full_oracle_bytes": [
+      337,
+      1280,
+      2273,
+      521,
+      404
+    ],
+    "compile_seconds": [
+      120,
+      120,
+      120,
+      120,
+      120
+    ],
+    "run_seconds": [
+      30,
+      180,
+      180,
+      30,
+      30
+    ],
+    "outer_seconds": 1200,
+    "donor_files": 1209,
+    "current_source_files": 1200,
+    "protected_files": 16,
+    "source_overlays": [
+      "tests/editor_mixed_causal_prepare_test.c"
+    ]
+  },
+  "limits": [
+    "This is SOURCE/SAVED review only; no proposed module was imported, compiled, tested or invoked. No process, network, target, service, ownership, guard, lock, lease or Git state was probed or changed; no repository/checkpoint/memory files were edited.",
+    "V1 original compile failure and V2 original runtime failure remain failed qualifications. V3 is a distinct changed-source proposal, not a recovered acceptance or an unchanged retry. Root alone may choose its first HOST invocation after independently adopting exact reviewed bytes.",
+    "The outer signals only its newly created helper group. A forced timeout/termination cannot establish absence or custody completion for separately created inner compiler/fixture groups; partial evidence and missing inner finalization require separate honest investigation.",
+    "The unchanged outer may fail final receipt persistence after prospective success; its actual nonzero exit/captured stderr and full result must govern acceptance rather than trusting a stale saved PASS field alone.",
+    "A future five-group HOST pass establishes software/assertion/sanitizer scope only. It does not qualify native Exec Fast/Chip, whole IRQ/task stack/WCET, hardware card capacity/order/completion/voice-stop, live exact musical scheduling, physical audio or listening."
+  ]
+}

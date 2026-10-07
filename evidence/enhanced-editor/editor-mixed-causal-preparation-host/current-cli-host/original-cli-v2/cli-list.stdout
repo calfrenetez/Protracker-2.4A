@@ -1,0 +1,5 @@
+focused-causal43: 79 sources; compile120s run30s
+default-factory: 29 sources; compile120s run180s
+default-controller: 80 sources; compile120s run180s
+causal26: 27 sources; compile120s run30s
+publication56: 27 sources; compile120s run30s

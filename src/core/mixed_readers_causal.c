@@ -1,5 +1,6 @@
 #include "mixed_readers_causal.h"
 #include "mixed_readers_causal_queue_internal.h"
+#include "mixed_readers_causal_factory_internal.h"
 #include <stddef.h>
 #include <string.h>
 struct activation_reader {
@@ -726,4 +727,68 @@ int pt_mixed_causal_close(struct pt_mixed_causal_owner **out)
     }
     allocator=b->allocator;b->release_latch=&reentry;*out=NULL;allocator.release(allocator.context,b);
     return !reentry&&!*out;
+}
+
+/* Additive private factory seam. Existing admission/fire/default paths above
+ * are unchanged. Genuine caller owns the original live mutable owner. */
+static int factory_empty(const struct pt_mixed_causal_owner *b,
+    const struct pt_mixed_readers_output *queue,uint64_t session,uint64_t generation)
+{
+    unsigned i;
+    if(b->failed||b->construction_alias||b->source_attempted||b->source_closed||
+       b->queue!=queue||b->registration.owner!=b||b->registration.queue!=queue||
+       b->registration.session!=session||b->registration.generation!=generation||
+       b->causal.first||b->causal.successor||b->mask||
+       pt_mixed_readers_commands_held(queue)||pt_mixed_readers_readers_held(queue))return 0;
+    for(i=0;i<PT_MIXED_CAUSAL_COMMANDS;++i)if(b->command[i].held)return 0;
+    for(i=0;i<PT_MIXED_CAUSAL_READERS;++i)if(b->reader[i].held)return 0;
+    return 1;
+}
+int pt_mixed_causal_factory_original_empty(struct pt_mixed_causal_owner *b,
+    struct pt_mixed_readers_output *queue,uint64_t session,uint64_t generation)
+{
+    int ok;
+    if(!b||!queue||!session||!generation)return 0;
+    if(!task_enter(b))return 0;
+    ok=factory_empty(b,queue,session,generation);b->task_busy=0;return ok;
+}
+struct pt_mixed_causal_factory_bind_result pt_mixed_causal_factory_bind_original(
+    struct pt_mixed_causal_owner *b,
+    int (*callback)(void *,const struct pt_mixed_causal_registration *),
+    void *context,size_t context_bytes)
+{
+    struct pt_mixed_causal_factory_bind_result out={0,0,0};
+    struct pt_mixed_causal_registration registration={0};unsigned before;
+    if(!b||!callback||context!=b->port.context||context_bytes!=b->port.context_bytes||
+       !output_apart(b,&registration,sizeof(registration)))return out;
+    if(!task_enter(b))return out;
+    if(!b->queue||!factory_empty(b,b->queue,b->registration.session,b->registration.generation)){
+       b->task_busy=0;return out;}
+    registration=b->registration;before=b->faults;
+    out.raw=callback(context,&registration);out.called=1;
+    if(registration.owner!=b->registration.owner||registration.queue!=b->registration.queue||
+       registration.session!=b->registration.session||registration.generation!=b->registration.generation)
+       fault(b);
+    out.current=before==b->faults&&!b->failed;
+    b->task_busy=0;return out;
+}
+enum pt_mixed_readers_result pt_mixed_causal_factory_reader_readiness(
+    struct pt_mixed_causal_owner *b,uint64_t ticket,unsigned action)
+{
+    enum pt_mixed_readers_result r;
+    if(!b||!ticket||action>=PT_MIXED_READERS_ACTIONS)return PT_MIXED_READERS_INVALID;
+    if(!task_enter(b))return PT_MIXED_READERS_BACKEND;
+    if(!b->queue||b->failed){b->task_busy=0;return PT_MIXED_READERS_BACKEND;}
+    r=pt_mixed_readers_reader_readiness(b->queue,ticket,action);
+    b->task_busy=0;return b->failed?PT_MIXED_READERS_BACKEND:r;
+}
+struct pt_mixed_reader_retirement pt_mixed_causal_factory_retire_original(
+    struct pt_mixed_causal_owner *b,uint64_t ticket,unsigned action,unsigned cancel)
+{
+    struct pt_mixed_reader_retirement r={PT_MIXED_READERS_INVALID,0};
+    if(!b||!ticket||action>=PT_MIXED_READERS_ACTIONS||cancel>1)return r;
+    if(!task_enter(b)){r.result=PT_MIXED_READERS_BACKEND;return r;}
+    if(!b->queue){b->task_busy=0;return r;}
+    r=pt_mixed_readers_retire_original(b->queue,ticket,action,cancel);
+    b->task_busy=0;return r;
 }

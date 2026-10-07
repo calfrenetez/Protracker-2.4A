@@ -1,0 +1,484 @@
+{
+  "scope": "INDEPENDENT_SAVED_ONLY_FIRST_CLI_V2_FAILURE_AUDIT_WITH_SOURCE_ONLY_COMPLETION_ASSESSMENT",
+  "verdict": "PASS_INDEPENDENT_SAVED_AUDIT_OF_FAILED_V2_CLI_QUALIFICATION_NO_REPLAY",
+  "passed": true,
+  "findings": [],
+  "qualification_passed": false,
+  "receipt_pins": {
+    "inner": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/receipt.json",
+      "pin": {
+        "bytes": 1150684,
+        "sha256": "574ff03e955c9b4d9972924bc01f078a35af10c42b10e68aec482cd9786e2764",
+        "mode": 33188
+      }
+    },
+    "outer": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-outer-first-v2/receipt.json",
+      "pin": {
+        "bytes": 4904,
+        "sha256": "68a5573c73a6f13b109ab5faa0bd3f86295fc8b705fd12335c2c3ec02f82de6a",
+        "mode": 33152
+      }
+    }
+  },
+  "collector_pins": {
+    "host-first.py": {
+      "bytes": 25222,
+      "sha256": "2f48cf333205587e6dbb332742add19adefbd164732bd42ab640cfb5fd30232a",
+      "mode": 33188
+    },
+    "PLAN.md": {
+      "bytes": 11399,
+      "sha256": "b28d8e5868ff4f7a9a9f521c3da699a4a00dcb4243cd3aa1283419e450562c51",
+      "mode": 33188
+    },
+    "binding-data.json": {
+      "bytes": 39926,
+      "sha256": "16ba107e01d99433348af08bf401a5c7a11ddcf413b8874cf35f9d757c153889",
+      "mode": 33188
+    },
+    "pins.json": {
+      "bytes": 567,
+      "sha256": "00733b169917327579c8aa0506dacab6be716c56c144305ce9abe45f4a517108",
+      "mode": 33188
+    }
+  },
+  "outer_pins": {
+    "outer.py": {
+      "bytes": 26871,
+      "sha256": "2b027055cafb160d1bb7ddccd081f06171f02d26836ba39d02008f268c61b4be",
+      "mode": 33188
+    },
+    "PLAN.md": {
+      "bytes": 8717,
+      "sha256": "4d833a22bdc3c4761054f43bfbfd2ccd70ea10d11ec74b82ed7cc235b88d531e",
+      "mode": 33188
+    },
+    "pins.json": {
+      "bytes": 3104,
+      "sha256": "48f8c95a73619f191bc632554efa2d872652695c07a525bb83352dae1f75417b",
+      "mode": 33188
+    }
+  },
+  "review_prerequisite": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-native-mixed-causal-current-cli-helper-outer-source-v2-review.json",
+    "pin": {
+      "bytes": 7879,
+      "sha256": "2ab6b04c31ae4aa252a8a9a5b7af3fef2afad58cbba3d0109ac912adf0c75e77",
+      "mode": 33188
+    }
+  },
+  "actual_failure": {
+    "inner_status": "FIRST_FAILURE_RETAINED_NO_RETRY",
+    "inner_error": "AssertionError",
+    "inner_custody_errors": [],
+    "outer_status": "FAILURE_OR_REFUSAL_RETAINED_NO_RETRY",
+    "outer_passed": false,
+    "outer_returncode": 1,
+    "outer_reaped": true,
+    "outer_group_absent": true,
+    "outer_errors": [],
+    "outer_elapsed_seconds": 3.412228041997878,
+    "outer_limit_seconds": 900,
+    "helper_attempts": 1,
+    "helper_invocations": 1,
+    "failed_content_observation": "cli-invalid",
+    "original_invalid_observation_passed": false,
+    "exact_cause": "Actual current argparse emits choose-from names without surrounding quotes; frozen helper expects quotes around all five names. The complete actual552-byte error equals captured help usage plus the exact known unquoted suffix. Incorrect quoted expected is562 bytes; only these ten quote bytes differ. Outer full759-byte stderr shows helper line343 exact assertion; no source/product failure is inferred.",
+    "actual_invalid_suffix": "argument --group: invalid choice: 'not-a-group' (choose from default-factory, default-controller, focused-causal43, causal26, publication56)",
+    "actual_invalid_stderr": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-invalid.stderr",
+      "pin": {
+        "bytes": 552,
+        "sha256": "88809ebf16e0f362743ea58c5e996f5f085422a3f7afe1ef9cda102b6df90a78",
+        "mode": 33188
+      }
+    },
+    "wrong_quoted_expected": {
+      "bytes": 562,
+      "sha256": "21667c623cc8a7f20ed92d535f994f584d011637177a36bb6d96ca551402a1d7"
+    },
+    "strict_gate_remains_failed": true
+  },
+  "actual_calls": [
+    {
+      "label": "cli-help",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "tests/test_editor_mixed_causal_current_regressions.py",
+        "--help"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/candidate",
+      "limit_seconds": 10,
+      "expected_returncode": 0,
+      "passed": true,
+      "errors": [],
+      "pid": 96568,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 1026,
+          "sha256": "80218ea5965f474ad6e9d418638aabeeaef4d2e9ae92545d29be6270c8ac9036",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08142883400432765
+    },
+    {
+      "label": "cli-list",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "tests/test_editor_mixed_causal_current_regressions.py",
+        "--list-groups"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/candidate",
+      "limit_seconds": 10,
+      "expected_returncode": 0,
+      "passed": true,
+      "errors": [],
+      "pid": 96571,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 237,
+          "sha256": "5d270fb635322fdd0ec9382bcebaf452ce99d1fcb572c9aa888906ad9e90f7fd",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08235850001801737
+    },
+    {
+      "label": "cli-default",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "tests/test_editor_mixed_causal_current_regressions.py",
+        "--show-selection"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/candidate",
+      "limit_seconds": 10,
+      "expected_returncode": 0,
+      "passed": true,
+      "errors": [],
+      "pid": 96572,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 35,
+          "sha256": "5f876ccf1214b790caba3fce94aa5c5ff019e4ab33f46f58f3b72f5ca686368a",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08342766700661741
+    },
+    {
+      "label": "cli-all",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "tests/test_editor_mixed_causal_current_regressions.py",
+        "--all",
+        "--show-selection"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/candidate",
+      "limit_seconds": 10,
+      "expected_returncode": 0,
+      "passed": true,
+      "errors": [],
+      "pid": 96574,
+      "returncode": 0,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 75,
+          "sha256": "177756926351794cc61db4b03aa6292baf7a725c8b17571aef9bb6f08a5b3402",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08079529099632055
+    },
+    {
+      "label": "cli-invalid",
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "tests/test_editor_mixed_causal_current_regressions.py",
+        "--group",
+        "not-a-group"
+      ],
+      "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/candidate",
+      "limit_seconds": 10,
+      "expected_returncode": 2,
+      "passed": true,
+      "errors": [],
+      "pid": 96575,
+      "returncode": 2,
+      "reaped": true,
+      "group_absent": true,
+      "streams": {
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": 33188
+        },
+        "stderr": {
+          "bytes": 552,
+          "sha256": "88809ebf16e0f362743ea58c5e996f5f085422a3f7afe1ef9cda102b6df90a78",
+          "mode": 33188
+        }
+      },
+      "elapsed_seconds": 0.08770987499156035
+    }
+  ],
+  "actual_original_observations": [
+    {
+      "label": "cli-help",
+      "passed": true,
+      "errors": [],
+      "candidate_source_before": {
+        "files": 990,
+        "canonical_pin_sha256": "0b0954c8479fb86497820085cede7008147d82a3a9dc166de6b7322334ad5200"
+      },
+      "temporary_before": [],
+      "candidate_source_after": {
+        "files": 990,
+        "canonical_pin_sha256": "0b0954c8479fb86497820085cede7008147d82a3a9dc166de6b7322334ad5200"
+      },
+      "temporary_after": []
+    },
+    {
+      "label": "cli-list",
+      "passed": true,
+      "errors": [],
+      "candidate_source_before": {
+        "files": 990,
+        "canonical_pin_sha256": "0b0954c8479fb86497820085cede7008147d82a3a9dc166de6b7322334ad5200"
+      },
+      "temporary_before": [],
+      "candidate_source_after": {
+        "files": 990,
+        "canonical_pin_sha256": "0b0954c8479fb86497820085cede7008147d82a3a9dc166de6b7322334ad5200"
+      },
+      "temporary_after": []
+    },
+    {
+      "label": "cli-default",
+      "passed": true,
+      "errors": [],
+      "candidate_source_before": {
+        "files": 990,
+        "canonical_pin_sha256": "0b0954c8479fb86497820085cede7008147d82a3a9dc166de6b7322334ad5200"
+      },
+      "temporary_before": [],
+      "candidate_source_after": {
+        "files": 990,
+        "canonical_pin_sha256": "0b0954c8479fb86497820085cede7008147d82a3a9dc166de6b7322334ad5200"
+      },
+      "temporary_after": []
+    },
+    {
+      "label": "cli-all",
+      "passed": true,
+      "errors": [],
+      "candidate_source_before": {
+        "files": 990,
+        "canonical_pin_sha256": "0b0954c8479fb86497820085cede7008147d82a3a9dc166de6b7322334ad5200"
+      },
+      "temporary_before": [],
+      "candidate_source_after": {
+        "files": 990,
+        "canonical_pin_sha256": "0b0954c8479fb86497820085cede7008147d82a3a9dc166de6b7322334ad5200"
+      },
+      "temporary_after": []
+    },
+    {
+      "label": "cli-invalid",
+      "passed": false,
+      "errors": [],
+      "candidate_source_before": {
+        "files": 990,
+        "canonical_pin_sha256": "0b0954c8479fb86497820085cede7008147d82a3a9dc166de6b7322334ad5200"
+      },
+      "temporary_before": [],
+      "candidate_source_after": {
+        "files": 990,
+        "canonical_pin_sha256": "0b0954c8479fb86497820085cede7008147d82a3a9dc166de6b7322334ad5200"
+      },
+      "temporary_after": []
+    }
+  ],
+  "full_actual_streams": {
+    "cli-help.stdout": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-help.stdout",
+      "pin": {
+        "bytes": 1026,
+        "sha256": "80218ea5965f474ad6e9d418638aabeeaef4d2e9ae92545d29be6270c8ac9036",
+        "mode": 33188
+      }
+    },
+    "cli-help.stderr": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-help.stderr",
+      "pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    "cli-list.stdout": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-list.stdout",
+      "pin": {
+        "bytes": 237,
+        "sha256": "5d270fb635322fdd0ec9382bcebaf452ce99d1fcb572c9aa888906ad9e90f7fd",
+        "mode": 33188
+      }
+    },
+    "cli-list.stderr": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-list.stderr",
+      "pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    "cli-default.stdout": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-default.stdout",
+      "pin": {
+        "bytes": 35,
+        "sha256": "5f876ccf1214b790caba3fce94aa5c5ff019e4ab33f46f58f3b72f5ca686368a",
+        "mode": 33188
+      }
+    },
+    "cli-default.stderr": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-default.stderr",
+      "pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    "cli-all.stdout": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-all.stdout",
+      "pin": {
+        "bytes": 75,
+        "sha256": "177756926351794cc61db4b03aa6292baf7a725c8b17571aef9bb6f08a5b3402",
+        "mode": 33188
+      }
+    },
+    "cli-all.stderr": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-all.stderr",
+      "pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    "cli-invalid.stdout": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-invalid.stdout",
+      "pin": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "mode": 33188
+      }
+    },
+    "cli-invalid.stderr": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-first-v2/cli-invalid.stderr",
+      "pin": {
+        "bytes": 552,
+        "sha256": "88809ebf16e0f362743ea58c5e996f5f085422a3f7afe1ef9cda102b6df90a78",
+        "mode": 33188
+      }
+    },
+    "outer.stdout": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-outer-first-v2/stdout",
+      "pin": {
+        "bytes": 144,
+        "sha256": "f0d6564265faa5237697332804287b72f7c0104f3bcff5f8fc024220dbab03c6",
+        "mode": 33152
+      }
+    },
+    "outer.stderr": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-typed-causal-current-cli-host-outer-first-v2/stderr",
+      "pin": {
+        "bytes": 759,
+        "sha256": "1fd9379aeff3e77dfa262e2fa8401189aa588de3078489fa85b58d289c916f0e",
+        "mode": 33152
+      }
+    }
+  },
+  "custody": {
+    "all15_recorded_before_after_pairs_equal": true,
+    "provider_full_pins_fresh_match": 49,
+    "helper4_outer3_and_both_review_pins_before_after_fresh_match": true,
+    "current_repository_source_files": 1200,
+    "baseline_source_files": 983,
+    "candidate_source_files": 990,
+    "candidate_digest": "0b0954c8479fb86497820085cede7008147d82a3a9dc166de6b7322334ad5200",
+    "protected_original_paths": 16,
+    "candidate_and_original_and_baseline_full_source_maps_fresh_read_match_final": true,
+    "raw580_fonts_and_cc_full_pins_fresh_match": true,
+    "original_and_baseline_pt_font_h_absence_true_before_after_and_fresh": true,
+    "candidate_header_and_old_broken_driver_remain_absent": true,
+    "optional7_PRESENT_9_ABSENT_and_exclusions_preserved": true,
+    "saved_debug6_regular_files_12_directories_full_pins_modes_match": true,
+    "each5_actual_observations_source990_before_after_digest_match": true,
+    "each5_actual_observations_TMPDIR_before_after_empty": true,
+    "fresh_TMPDIR_empty": true,
+    "actual_attempt_top_level_exact_candidate_tmp_receipt_and10streams": true,
+    "no_duplicate_conflict_integration_streams_or_records": true,
+    "no_nested_receipt_executable_dSYM_or_generated_header_from_this_attempt": true,
+    "compiler_calls": 0,
+    "C_fixture_calls": 0,
+    "integration_calls": 0,
+    "compiler_absence_basis": "Complete actual5 CLI argv records, empty owned TMPDIR, exact attempt artifact closure and pinned public-driver SOURCE main branches that return/error before any attempt/compiler creation; no live process probe."
+  },
+  "source_only_completion_assessment": {
+    "feasible": true,
+    "scope": "A separate combined-evidence completion packet; original V2 remains failed and untouched, no replay of first five.",
+    "requirements": [
+      "Fresh distinct helper/outer/output and reviewed source bindings. Pin failed inner/outer receipts, all12 full actual streams, accepted V4 driver/current exact source/baseline/font/compiler/guards and this independent audit as preserved inputs before/final. No rewrite/reset/delete of any failedV2 file, candidate, raw record or earlier source verdict.",
+      "Carry five original command and observation records verbatim with source paths/pins, historical cwd/time/PID/RC/quiet. The old invalid passed=false and old whole qualification FAILED remain visible. A separate new adjudication record may accept the already captured complete552-byte invalid refusal only under the corrected exact unquoted literal suffix plus exact captured help usage and RC2/quiet/custody. No regex/quote stripping/substring/tail waiver or fabricated new invocation.",
+      "Revalidate all five actual full streams and original command/order/flags/RC/reap/groupabsence/errors/10s proof, before-after candidate990/source and emptyTMPDIR proofs, original final input custody and fresh immutable saved maps. Do not rely solely on this audit summary or process status fields.",
+      "Prepare only a new owned candidate with the same exact990 source/raw font/optional watches and no ROOT header/task-local paths; immutable failedV2 candidate is preservation input, never a writable test checkout. Distinguish historical candidate cwd from new cwd honestly.",
+      "Exactly three new calls only: duplicate selector RC2 at10s; conflict selector RC2 at10s; one focused43/default-controller integration at600s. Use the exact unchanged accepted driver/source vectors/strict flags/sanitizers/baseline. No replay help/list/default/all/invalid and no other C groups.",
+      "Duplicate/conflict fullstderr must equal the known exact suffix plus captured exactusage; preserve actual fulloutputs/RC/reap/own-groupabsence/errors and per-observation source990/TMPDIR[] before-after. Bind the captured interpreter path/environment provenance, and refuse mismatch rather than generalizing accepted parser styles.",
+      "Integration requires all actual four compile/run records, original337/2273 fulloracles, emptyotherstreams, strict120/30/120/180 limits, positive nested quiet/reap, exact990/991 source/font/master/guards unchanged and literal1630 temporaryfont; complete removed-source proof and durable mandatory11 plus selected two full directory-aware .dSYM bundles \u226464 entries.",
+      "Outer retains900 bound, one newhelper invocation, exact independent review args, full streams/stickyfirstfailure/inputcustody and own-group-only finalization. It independently validates original capturedfive plus actualthree newcalls and actualnestedfour; no inference of old receipt success or new firstfive timestamps.",
+      "Final PASS if earned must explicitly describe carried5 plus new3 composition, source dates/cwds and separatefailedV2 gate. No claim of eight newcalls, successfuloriginalV2, allfiveclean-baseline Cgroups, native/target/service/audio/physical/timing acceptance."
+    ],
+    "not_authorized_by_this_assessment": "No implementation or invocation, no service/target action and no runtime retry. Root chooses concrete separately reviewed completion source."
+  },
+  "preserved_limits": [
+    "Old V2 qualification FAILED, alloriginalinvalidfalse/rawstreams/pins retained; this PASS applies to integrity of the SAVED audit only.",
+    "No live process/target/probe/test/compiler/import/Git/service/guard/lease/lock or repository/checkpoint/history/memory operation performed."
+  ]
+}

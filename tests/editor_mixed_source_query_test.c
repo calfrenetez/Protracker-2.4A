@@ -370,7 +370,10 @@ static void esq_refs(unsigned reader_first,unsigned fault)
     assert(!pt_editor_mixed_readers_prepare_close(&f->control)&&pt_editor_mixed_source_children_closed(&f->control,e->borrow));
     esq_probe(e,1);esb_release(e);emp_same(f);esb_drop(e);
 }
-int main(void)
+#ifndef PT_EDITOR_MIXED_SOURCE_QUERY_TEST_MAIN
+#define PT_EDITOR_MIXED_SOURCE_QUERY_TEST_MAIN main
+#endif
+int PT_EDITOR_MIXED_SOURCE_QUERY_TEST_MAIN(void)
 {
     unsigned bits,order,fault;
     assert(esq_source_main()==0);

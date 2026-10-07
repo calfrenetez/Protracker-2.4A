@@ -191,3 +191,43 @@ layouts, owners, hooks and link dependencies remain unchanged. Separate genuine
 readiness, faulted retirement and whole-song producer work remain unfinished.
 This is software HOST acceptance only; native/emulator/physical/stack/live
 timing/audio/listening acceptance is not supplied.
+
+
+## Genuine private reader readiness — accepted first HOST result, 7 October 2026
+
+`pt_editor_mixed_source_reader_readiness` is a bounded task operation through the
+private factory/core chain. It validates the original held SOURCE borrow and
+issued reader ref, genuine LIVE handle and exact retained ticket/action, with
+the actual retained holder-current callback under normal exclusion and
+post-callback fault checks. It is separate from the four inert ownership queries.
+
+Only clean not-yet-ADOPTED/timed ACTIVE custody returns PENDING, including an
+issued but still RESERVED reader. Closed/cancelled/retired/superseded/stale/
+invalid/uncertain/faulted custody refuses. OK requires the existing complete
+positive ADOPTED/timed ACTIVE gate and actual current check; getter STALE does
+not become a general waiting rule. Explicit real reader observation separately
+advances the existing backend/queue. Readiness drives no clock, submit, service
+or schedule. Actual subsequent CONTROL/STOP batch construction repeats the
+original fresh positive key gate.
+
+The by-value result returns no key/receipt/proof and grants no lasting readiness,
+ACTIVE, valid retirement or quiet certificate. Existing public services/getters,
+query bodies, enums/layouts/owners/hooks and link-unit set remain unchanged.
+C/R ownership, original NULL consumption and source quiet remain independent.
+
+Root's first exact HOST attempt at committed query baseline f08e238 ran once:
+964 actual inputs (959 archive members plus four additions and generated font),
+nine overlays, 79 ordered units, 24 complete stdout lines / 7,585 bytes,
+ASan/UBSan, compiler/product RC0, empty stderr and 28 owned reaped/quiet drivers.
+Independent saved-only audit PASS_SAVED_READER_READINESS_FIRST_V1_HOST_ONLY
+(33,259 bytes / 041a96c6c460646e165e990754857d07cc033dfe2253127652f2bcd80a6de63d)
+has no findings and was FULL-read and accepted by root. It confirms all 18 frozen
+payloads, all 964 actual source bodies and exact whole source closure. Compiler
+20.165522 / product 2.122622 seconds are HOST elapsed observations, not native
+WCET. Exact raw/private receipts, reviews and freezes remain separately pinned.
+
+This selected publication evidence does not itself qualify repository adoption
+or a readiness commit. Faulted idempotent retirement, complete SAME-sequence
+whole-song production and native PLAY remain separate increments. No native/
+emulator/physical stack/timing/device capacity, upload ordering/completion/
+voice-stop/audio/listening acceptance is inferred.

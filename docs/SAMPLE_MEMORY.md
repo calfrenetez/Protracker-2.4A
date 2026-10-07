@@ -6331,3 +6331,44 @@ readiness, idempotent faulted retirement, SAME-sequence whole-song preparation
 and native PLAY integration remain unfinished. No new native build/execution,
 Amiberry/real-A1200 acceptance, device capacity, upload completion/ordering,
 voice-stop, aggregate stack, exact live timing, audio or listening is inferred.
+
+
+### Genuine bounded reader readiness — accepted first HOST result, 7 October 2026
+
+The private readiness task changes no authoritative master representation,
+allocation/budget, cache precision, master-preserving save/export or direct
+Studio mixing. It validates the exact original retained reader through core/
+factory/SOURCE and calls its actual current holder under existing task exclusion.
+It does not walk former project arrays or service the reader automatically.
+
+Only clean not-yet-ADOPTED/timed ACTIVE custody is PENDING. Cancelled, closed,
+retired, superseded, stale, invalid, uncertain and faulted custody refuses.
+OK needs complete original positive ADOPTED/timed ACTIVE plus actual current.
+Getter STALE is not wholesale mapped to waiting; explicit real reader observation
+and a later fresh positive batch key gate remain separate.
+
+The result returns no key/receipt/proof and grants no lasting READY/ACTIVE,
+validity, C/R owner release, source quiet, hardware stop or musical timing
+authority. Actual C/R lifetimes, original NULL consumption, source quiet, borrow
+release and final editor hook remain independently required. Existing four inert
+queries, public service/getter bodies, enums/layouts/owners/hooks and link-unit
+dependencies remain unchanged.
+
+Root's first exact HOST run at committed query baseline f08e238 used 964 inputs
+(959 committed archive members plus four additions and generated font), nine
+overlays (five modified/four additive), 79 ordered units and 24 complete lines /
+7,585 bytes with ASan/UBSan. Compiler/product RC0, empty stderr and 28 reaped/
+quiet owned drivers passed. Independent saved-only audit
+PASS_SAVED_READER_READINESS_FIRST_V1_HOST_ONLY (33,259 bytes /
+041a96c6c460646e165e990754857d07cc033dfe2253127652f2bcd80a6de63d), findings [],
+was FULL-read and accepted by root. All 18 frozen payloads and the whole
+964-source closure match. All 16 unrelated paths and 52 controls were preserved.
+Compiler 20.165522 / product 2.122622 seconds are HOST software observations.
+
+Selected evidence remains separate from raw/private receipts and historical
+SOURCE NOT RUN metadata, refusals, failures and unrun packets. No readiness
+replay occurred. This publication does not itself prove repository adoption or
+a readiness commit. Retirement V2, whole-song producer and native PLAY remain
+separate increments. No native/emulator/physical stack/WCET/exact live timing,
+card-RAM capacity/order/completion/voice-stop, DMA/audio/listening acceptance
+follows from this HOST run.

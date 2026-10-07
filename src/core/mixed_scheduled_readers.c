@@ -1,4 +1,5 @@
 #include "mixed_scheduled_readers.h"
+#include "mixed_scheduled_readers_internal.h"
 #include "document.h"
 #include <string.h>
 #include <stddef.h>
@@ -422,6 +423,46 @@ enum pt_mixed_readers_result pt_mixed_readers_reader_key(struct pt_mixed_readers
     if(!active(q,r,UINT64_MAX,1))return PT_MIXED_READERS_STALE;
     if(!current(q,&r->owner.control))return q->stale?PT_MIXED_READERS_STALE:PT_MIXED_READERS_BACKEND;
     *out=r->domain.key;return PT_MIXED_READERS_OK;
+}
+enum pt_mixed_readers_result pt_mixed_readers_reader_readiness(
+    struct pt_mixed_readers_output *q,uint64_t t,unsigned action)
+{
+    struct reader_entry *r;unsigned i,j;
+    if(!q||!t||action>=PT_MIXED_READERS_ACTIONS)return PT_MIXED_READERS_INVALID;
+    if(reentry(q))return PT_MIXED_READERS_BACKEND;
+    if(q->closing||q->failed||q->stale||!(r=reader(q,t,action)))
+        return q->stale?PT_MIXED_READERS_STALE:PT_MIXED_READERS_INVALID;
+    /* Exact original retained registration, not a caller key or readiness flag.
+     * A queued successor/STOP already closes this admission path even if it
+     * has not yet activated. Do not turn that active() refusal into waiting. */
+    if(!r->valid||r->retired||r->closed||r->superseded||r->cancel_requested||
+       r->frame==UINT64_MAX||r->state>PT_MIXED_READER_ACTIVE)
+        return PT_MIXED_READERS_STALE;
+    for(i=0;i<q->commands;++i)if(q->command[i].held&&
+        q->command[i].event.batch.frame>r->frame&&q->command[i].event.batch.frame<UINT64_MAX)
+        for(j=0;j<q->command[i].event.batch.count;++j){
+            const struct pt_mixed_readers_action *a=q->command[i].event.batch.action+j;
+            if(a->route==r->domain.key.route&&a->slot==r->domain.key.slot&&
+               (a->kind==PT_MIXED_READERS_TRIGGER||a->kind==PT_MIXED_READERS_STOP))
+                return PT_MIXED_READERS_STALE;
+        }
+    /* Only genuine clean pre-adoption states can wait. A valid ISSUED TRIGGER
+     * observation can record timing before adoption; retain that real timing
+     * while waiting for adoption. ACTIVE without adoption is uncertainty. */
+    if(!active(q,r,UINT64_MAX,1)&&
+       (r->adopted||r->state>PT_MIXED_READER_RESERVED||
+        (r->timed&&(!r->submitted||r->observed<r->first||r->observed>r->issued||r->issued>=r->last))))
+        return PT_MIXED_READERS_BACKEND;
+    if(!current(q,&r->owner.control))
+        return q->stale?PT_MIXED_READERS_STALE:PT_MIXED_READERS_BACKEND;
+    /* current() retains callback reentry/fault before classifying either path.
+     * No observation service, proof, receipt or key publication happens here. */
+    if(active(q,r,UINT64_MAX,1))return PT_MIXED_READERS_OK;
+    if(r->held&&r->valid&&!r->retired&&!r->closed&&!r->superseded&&
+       !r->cancel_requested&&!r->adopted&&r->state<=PT_MIXED_READER_RESERVED&&
+       (!r->timed||(r->submitted&&r->observed>=r->first&&r->observed<=r->issued&&r->issued<r->last)))
+        return PT_MIXED_READERS_PENDING;
+    return PT_MIXED_READERS_BACKEND;
 }
 enum pt_mixed_readers_result pt_mixed_readers_stop(struct pt_mixed_readers_output *q)
 {

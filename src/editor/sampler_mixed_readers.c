@@ -1,5 +1,7 @@
 #include "../core/amigus_trigger_levels.h"
 #include "sampler_mixed_readers.h"
+#include "sampler_mixed_readers_internal.h"
+#include "../core/mixed_scheduled_readers_internal.h"
 #include "sampler_internal.h"
 #include "sampler_paula_internal.h"
 #include "sampler_wavetable_internal.h"
@@ -815,6 +817,27 @@ r->key_seen=1;
 }
 p->busy=0;
 return p->failed?PT_MIXED_READERS_BACKEND:result;
+}
+enum pt_mixed_readers_result pt_sampler_mixed_reader_readiness(
+ struct pt_sampler_mixed_pool *p,struct pt_sampler_mixed_reader_handle h)
+{
+ struct pt_sampler_mixed_reader *r;enum pt_mixed_readers_result result;
+ if(!p||!h.address||!h.token||!(r=reader(p,h))||r->state!=LIVE||!r->ticket||
+    r->action>=PT_MIXED_READERS_ACTIONS)return PT_MIXED_READERS_INVALID;
+ if(reentry(p))return PT_MIXED_READERS_BACKEND;
+ if(p->failed)return PT_MIXED_READERS_BACKEND;
+ if(p->closing||p->state!=OPEN)return PT_MIXED_READERS_INVALID;
+ if(!fixed_current(p,p->revision)||!backend_fixed(p))return PT_MIXED_READERS_STALE;
+ p->busy=1;p->queue_call=1;
+ result=pt_mixed_readers_reader_readiness(p->config.queue,r->ticket,r->action);
+ p->queue_call=0;
+ /* Real holder-current callbacks may fault or change fixed controls. Do not
+  * publish clean waiting or OK after that callback outcome. No key/key_seen
+  * is initialized; the actual batch getter still performs that separate work. */
+ if(p->failed)result=PT_MIXED_READERS_BACKEND;
+ else if(!fixed_current(p,p->revision)||!backend_fixed(p))result=PT_MIXED_READERS_STALE;
+ else if(reader(p,h)!=r||r->state!=LIVE)result=PT_MIXED_READERS_INVALID;
+ p->busy=0;return result;
 }
 static int service_ready(struct pt_sampler_mixed_pool *p,const void *out,size_t n)
 {if(!p)return 0;

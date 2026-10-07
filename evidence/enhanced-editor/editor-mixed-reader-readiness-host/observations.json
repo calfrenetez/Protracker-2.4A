@@ -1,0 +1,281 @@
+{
+  "schema": "pt24g-reader-readiness-selected-source-and-accepted-host-observations-v1",
+  "status": "INDEPENDENTLY_ACCEPTED_SAVED_FIRST_READINESS_HOST_ONLY_NOT_ADOPTED",
+  "scope": "Genuine core/factory/SOURCE reader readiness software HOST result; no lasting certificate or target acceptance",
+  "baseline": "f08e238dcb89a427f6785ea29f17a9843d5a8949",
+  "source_freeze": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-readiness-implementation-v1/freeze.json",
+    "bytes": 10524,
+    "sha256": "c3c05e3c01ab5d872158a98e1d9daf2df4f659ebec01034e9581927a98e76593",
+    "mode": 33060
+  },
+  "source_review": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-reader-readiness-review-v1/review.json",
+    "bytes": 12055,
+    "sha256": "e7152d60ab8e54313097e0ff0f54e6c02ab9d489dccf299ea3ac463276ea1f2f",
+    "mode": 33188,
+    "status": "PASS_SOURCE_ONLY_READER_READINESS_V1_NOT_RUN"
+  },
+  "root_receipt": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-readiness-host-preparation-v1/execution-first-v1/receipt.json",
+    "bytes": 234906,
+    "sha256": "2d58ae0e05c0f5e9a693a2b7d5c967d0ef07158a85d7f148cd07fbf670646df4",
+    "mode": 33188,
+    "status": "PASS_FIRST_PRIVATE_READER_READINESS_HOST_ONLY"
+  },
+  "actual_run": {
+    "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-readiness-host-qualification/attempt-first-v1/run.json",
+    "bytes": 372379,
+    "sha256": "e8f887204c15340212cae15640147aa2ae472126aa80da2019c3cdce461b57b7",
+    "mode": 33188,
+    "status": "PASS",
+    "phase": "COMPLETE"
+  },
+  "overlays": {
+    "src/core/mixed_scheduled_readers.c": {
+      "bytes": 36385,
+      "sha256": "fa3836ca8afc8bb839c07fa40cca92d7c9fe499f1ca8dc89a023d48d41fb5ee7",
+      "mode": 33060
+    },
+    "src/core/mixed_scheduled_readers_internal.h": {
+      "bytes": 922,
+      "sha256": "bd240096549be92f9bca5f94dba5e86da614f6f935bcb27c4de84b2da11e76a6",
+      "mode": 33060
+    },
+    "src/editor/editor_mixed_readers_prepare.c": {
+      "bytes": 73200,
+      "sha256": "def14d96432f2b171a5f5f5eabae4128bf18a302e0a7761c3ef7d9e82c3a29aa",
+      "mode": 33060
+    },
+    "src/editor/editor_mixed_readers_source_internal.h": {
+      "bytes": 8360,
+      "sha256": "0dc07d582418380149588bcac4e3cef399b1b713f1e30cb9c488a9dde2110ffb",
+      "mode": 33060
+    },
+    "src/editor/sampler_mixed_readers.c": {
+      "bytes": 45996,
+      "sha256": "53c000e7cfd4eb85b5a358c96c7f8ef17ab9fe6fe29d0afcbd43f5a76572590e",
+      "mode": 33060
+    },
+    "src/editor/sampler_mixed_readers_internal.h": {
+      "bytes": 664,
+      "sha256": "3c303a2b5673b9a237db2a11b9bc6543fd5206d206c98ae6d64bf161dfb6cd89",
+      "mode": 33060
+    },
+    "tests/editor_mixed_reader_readiness_test.c": {
+      "bytes": 20381,
+      "sha256": "fb76d3aef5d6af8c1c761ca02e197e65f4cba8a85a9e4838ac161d53818d8aa4",
+      "mode": 33060
+    },
+    "tests/editor_mixed_source_query_test.c": {
+      "bytes": 28332,
+      "sha256": "3ab5dacedb93af27504b0dc8f2b405495de3b3f498e527b7c67c2113cbaeb01e",
+      "mode": 33060
+    },
+    "tests/test_editor_mixed_reader_readiness.py": {
+      "bytes": 37960,
+      "sha256": "9840a9911378b26e40a1ff26613aece6ecb589f51855a73851bc7e013fe50fee",
+      "mode": 33060
+    }
+  },
+  "compiler": {
+    "path": "/usr/bin/cc",
+    "bytes": 200560,
+    "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2",
+    "mode": 33261
+  },
+  "product": {
+    "bytes": 6545416,
+    "sha256": "97f254a9d8aedeb0e8f81ff8bddc4ebe0f075166810d9b49e1e7a56e92650e18",
+    "mode": 33261
+  },
+  "input_count": 964,
+  "committed_archive_count": 959,
+  "modified_overlay_count": 5,
+  "additive_overlay_count": 4,
+  "unit_count": 79,
+  "flags": [
+    "-std=c99",
+    "-O1",
+    "-g",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-UNDEBUG",
+    "-fsanitize=address,undefined",
+    "-Isrc/core",
+    "-I."
+  ],
+  "expected_stdout": {
+    "bytes": 7585,
+    "sha256": "9bcaa0acf667c8c4c493fac2e7463c04e7ba7204aaa39959756a52d743a147f8"
+  },
+  "marker_count": 24,
+  "compiler_seconds": 20.165521624992834,
+  "runtime_seconds": 2.1226215839997167,
+  "inner_seconds": 24.509445959003642,
+  "root_seconds": 25.570751582999947,
+  "all28_recorded_drivers_RC0_reaped_quiet": true,
+  "recorded_driver_count": 28,
+  "complete_live_source_inventory": {
+    "canonical_pin_map_sha256": "de49a344e9f1bdbb19ab3b05de9cd1f2bed3c73a44cfd8df12f07e14a44c860a",
+    "count": 1176
+  },
+  "protected16": {
+    "AGENTS.md": {
+      "bytes": 789,
+      "mode": 33188,
+      "sha256": "57dcd76709e95cd29c3d17c545a992bb924c629566de1e84a69db97701f5633b"
+    },
+    "amiga-test.json": {
+      "bytes": 5485,
+      "mode": 33188,
+      "sha256": "2cc0b2707151467680193ad087903804a0c8e937ce97f5e229d90fed34a8be22"
+    },
+    "src/editor/editor.c": {
+      "bytes": 69155,
+      "mode": 33188,
+      "sha256": "46d908ba5d89742fcdb8da337d01fe4af4decfeac9bfb883a21eb2920bc4b092"
+    },
+    "src/editor/editor.h": {
+      "bytes": 6675,
+      "mode": 33188,
+      "sha256": "4de713afd3be0306eef784d421281596d2624bfbed176fd26ef571c26a865a9f"
+    },
+    "src/editor/view.c": {
+      "bytes": 44209,
+      "mode": 33188,
+      "sha256": "a23ecde830cd23edcc332c93b924bf470161f0114415bece02d82fab2390cbdb"
+    },
+    "src/editor/view.h": {
+      "bytes": 2032,
+      "mode": 33188,
+      "sha256": "44cdc9126cd9331d8cb0e428286f6fe1165187fb68c79a809cc6df54852a59b2"
+    },
+    "src/native/editor_main.c": {
+      "bytes": 46819,
+      "mode": 33188,
+      "sha256": "ed49163c893660b75d3a63f00be2ff0acd2048c54d101051c26ce87fa446dc06"
+    },
+    "src/native/pattern_display.c": {
+      "bytes": 6888,
+      "mode": 33188,
+      "sha256": "de7b6be91c29e2153fc61b9a2cfc22c7f730b049b68bf2d5e4ed87f1bf73959d"
+    },
+    "src/native/pattern_display.h": {
+      "bytes": 1519,
+      "mode": 33188,
+      "sha256": "469f62be960d912258a37982504da75a7e38691ce13d4363a13b5e84cb9eaee1"
+    },
+    "tests/editor_test.c": {
+      "bytes": 53428,
+      "mode": 33188,
+      "sha256": "946ee1a0667e8b43a7752ea7a0cf9590de781daffc7c73503efd9024dd690b65"
+    },
+    "tests/native_prepared_test.c": {
+      "bytes": 5858,
+      "mode": 33188,
+      "sha256": "ad3041b508483482c0ff280a1c4f37576ec37a01eb421a230984bd3e6cb950a7"
+    },
+    "tests/test_editor.py": {
+      "bytes": 2002,
+      "mode": 33188,
+      "sha256": "539fe7284a082781e2dead541e67b6d0f9e75ead179b631bfa8369ee4d1f9f82"
+    },
+    "tools/build_core_tests.py": {
+      "bytes": 39844,
+      "mode": 33188,
+      "sha256": "081976b3831c518e7d757d934f2106c8aa072298dc3bd5ce74651188fd3a86b6"
+    },
+    "tools/shared_infra_sampler.py": {
+      "bytes": 900,
+      "mode": 33188,
+      "sha256": "5be11d68d4409baed36551165005c584ffec81a2c45f742e258cce74d1eba36d"
+    },
+    "tools/shared_infra_ui.py": {
+      "bytes": 3754,
+      "mode": 33188,
+      "sha256": "9492cf59997857a1d69c1d6dbe4180ab83727d047cd456a9ba78221c1f6f5987"
+    },
+    "tools/test_sampler_emulator.py": {
+      "bytes": 8918,
+      "mode": 33188,
+      "sha256": "cc84cf3098d10fa6901f45aaf93cecdbdf2fd55e39e6e36647c55d36a9c7f36c"
+    }
+  },
+  "controls52_count": 52,
+  "saved_result_audit": {
+    "status": "PASS_SAVED_READER_READINESS_FIRST_V1_HOST_ONLY",
+    "report": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-reader-readiness-host-audit-v1/report.json",
+      "bytes": 33259,
+      "sha256": "041a96c6c460646e165e990754857d07cc033dfe2253127652f2bcd80a6de63d",
+      "mode": 33188
+    },
+    "findings": [],
+    "verification": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-reader-readiness-host-audit-v1/verification.json",
+      "bytes": 822523,
+      "sha256": "f6d47d5e6d6b719f9b0bc6c395e9af8e3633c36444f4337dde7d3b37e40209e6",
+      "mode": 33188
+    },
+    "supplemental_verification": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-reader-readiness-host-audit-v1/supplemental-verification.json",
+      "bytes": 6956,
+      "sha256": "e03d740e644482a00d3e8697f593720aa1b6c09d51e110e9f38305aa4d019c6a",
+      "mode": 33188
+    },
+    "packet_inventory": {
+      "path": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/independent-reader-readiness-host-audit-v1/packet-inventory.json",
+      "bytes": 194086,
+      "sha256": "bfde0542a291c5c28122ebc3257ed15c4c05dc4a290ffdf5b11511647fb7d72e",
+      "mode": 33188
+    },
+    "root_reported_acceptance": "Root FULL-read and accepted this exact saved HOST audit; final publication SOURCE review and fresh root adoption/commit remain separate."
+  },
+  "limitations": "Genuine software reader readiness task behavior only. No retirement/complete SAME-sequence producer/native PLAY integration, native build or run, emulator or physical device, timing or stack/WCET, card-RAM ordering/capacity/voice-stop, audio or listening acceptance. No lasting ACTIVE/key/quiet certificate.",
+  "source_candidate_history": "Nine readiness overlays exact frozen/source-reviewed candidate. Earlier query/seam packets and their separately accepted/failed/unrun evidence remain preserved. No readiness product replay occurred.",
+  "author_actions": {
+    "private_SOURCE_document_and_template_authoring": true,
+    "read_saved_JSON_metadata_without_candidate_import": true,
+    "candidate_import_compiler_product_execution": false,
+    "Git_network_process_probe_target_service": false,
+    "repository_checkpoint_history_memory_edits": false,
+    "adoption": false
+  },
+  "independently_audited_saved_custody": {
+    "frozen_readiness_payload_count": 18,
+    "actual_source_file_count": 964,
+    "entire_derived_source_closure_equal": true,
+    "ordinary_safe_archive_members": 959,
+    "archive_directory_count": 24,
+    "generated_committed_font_include_count": 1,
+    "actual_driver_rows": 28,
+    "complete_raw_streams": 56,
+    "all_stderr_empty": true,
+    "all_RC0_owned_reaped_quiet_and_within_effective_deadlines": true,
+    "saved_execution_packet_file_count": 1029,
+    "saved_audit_scope_only": true
+  },
+  "publication_scope": {
+    "owned_destinations": 13,
+    "source_destinations": 9,
+    "modified_source_paths": 5,
+    "additive_source_paths": 4,
+    "evidence_destinations": 2,
+    "prefix_preserving_doc_appends": 2,
+    "retained_controls": 47,
+    "selected_controls": 52,
+    "protected_unrelated_paths": 16,
+    "after_source_file_count": 1180,
+    "after_source_canonical_pin_map_sha256": "760515281f62e812b52e0962a89cbe34776a96d1c40362b4c8ffa565f9b980c9",
+    "repository_adoption": "NOT_PERFORMED",
+    "commit": "NOT_PERFORMED"
+  },
+  "history_preserved": {
+    "preaudit_packet": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/reader-readiness-publication-preaudit-v1",
+    "same_bytes_hash_full_modes_files": 15,
+    "older_query_SOURCE_refusals_seam_runtime_failures_unrun_packets": "Preserved without reclassification or replay",
+    "frozen_readiness_SOURCE_NOT_RUN_stage": "Original historical freeze remains byte exact; actual HOST evidence and new accepted saved audit are separate."
+  }
+}

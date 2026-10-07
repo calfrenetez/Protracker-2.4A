@@ -115,4 +115,15 @@ pt_editor_mixed_source_reader_registration(
     struct pt_editor_mixed_readers_prepare *,
     const struct pt_editor_mixed_source_borrow *original,
     struct pt_editor_mixed_reader_ref);
+/* Separate bounded genuine TASK operation, unlike the four inert queries.
+ * Exact original held borrow/ref and active work scope precede normal controller
+ * exclusion and a genuine factory/queue holder-current call. Existing failure,
+ * cancellation, staleness and callback reentry are terminal refusals. PENDING
+ * only describes clean not-yet-active custody now. OK is not a key, lasting
+ * ACTIVE/READY authority, quiet/proof or permission to skip fresh batch admission.
+ * Do not wrap this controller operation in source_enter. No output is written. */
+enum pt_mixed_readers_result pt_editor_mixed_source_reader_readiness(
+    struct pt_editor_mixed_readers_prepare *,
+    const struct pt_editor_mixed_source_borrow *original,
+    struct pt_editor_mixed_reader_ref original_reader);
 #endif

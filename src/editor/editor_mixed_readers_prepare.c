@@ -3,6 +3,7 @@
 #include "editor_mixed_internal.h"
 #include "project_snapshot.h"
 #include "sampler_internal.h"
+#include "sampler_mixed_readers_internal.h"
 #include "../core/render_storage_internal.h"
 #include <string.h>
 #include <limits.h>
@@ -791,6 +792,27 @@ static struct pt_editor_mixed_reader_record *reader(struct pt_editor_mixed_reade
 {if(ref.slot>=PT_SAMPLER_MIXED_READERS||!ref.serial||s->reader[ref.slot].serial!=ref.serial||
  !s->reader[ref.slot].handle.address)return NULL;
  return s->reader+ref.slot;}
+enum pt_mixed_readers_result pt_editor_mixed_source_reader_readiness(
+ struct pt_editor_mixed_readers_prepare *s,const struct pt_editor_mixed_source_borrow *b,
+ struct pt_editor_mixed_reader_ref ref)
+{
+ struct pt_editor_mixed_reader_record *rr;enum pt_mixed_readers_result r;
+ /* Original numeric scope/ref admission precedes any writable fault path.
+  * A copied publisher or stale ref cannot fault or clear the genuine latch. */
+ if(source_query_scope(s,b)!=PT_EDITOR_MIXED_SOURCE_SCOPE_HELD||
+    pt_editor_mixed_source_reader_registration(s,b,ref)!=PT_EDITOR_MIXED_SOURCE_REGISTRATION_PRESENT)
+    return PT_MIXED_READERS_INVALID;
+ if(reentry(s))return PT_MIXED_READERS_BACKEND;
+ if(s->first_error)return PT_MIXED_READERS_BACKEND;
+ if(s->source_cancel_requested||s->closing||!s->source_activated||
+    s->phase!=PT_EDITOR_MIXED_READERS_REQUESTS||!s->pool||!s->queue)
+    return PT_MIXED_READERS_INVALID;
+ if(!fixed_current(s)){fail(s,PT_EDITOR_MIXED_READERS_STALE);return PT_MIXED_READERS_STALE;}
+ if(!(rr=reader(s,ref))||!rr->ticket)return PT_MIXED_READERS_INVALID;
+ s->busy=1;r=pt_sampler_mixed_reader_readiness(s->pool,rr->handle);
+ (void)post(s);s->busy=0;
+ return s->first_error?PT_MIXED_READERS_BACKEND:r;
+}
 static int reader_close(struct pt_editor_mixed_readers_prepare *s,unsigned index)
 {
  struct pt_sampler_mixed_reader_handle h=s->reader[index].handle;int r;

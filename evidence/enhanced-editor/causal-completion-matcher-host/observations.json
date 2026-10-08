@@ -1,0 +1,61 @@
+{
+  "scope": "HOST_SOFTWARE_ONLY",
+  "preservation": "EXACT_SAVED_EVIDENCE_COPIES_NOT_A_NEW_TEST",
+  "durable_originals": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-completion-matcher-v5-durable-evidence-v1",
+  "copies": {
+    "raw/compile.stdout": {
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-completion-matcher-v5-durable-evidence-v1/compile.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "raw/compile.stderr": {
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-completion-matcher-v5-durable-evidence-v1/compile.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "raw/run.stdout": {
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-completion-matcher-v5-durable-evidence-v1/run.stdout",
+      "bytes": 842,
+      "sha256": "d07f72df7e36ba1cd973efe43b9266ec5dacc0a0bc270e5968b480e32403bcb1"
+    },
+    "raw/run.stderr": {
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-completion-matcher-v5-durable-evidence-v1/run.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "raw/public.stdout": {
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-completion-matcher-v5-durable-evidence-v1/public.stdout",
+      "bytes": 65,
+      "sha256": "58de440ff7649dd059e13b4425da368bf3480666f299bc077c7764b2b2bfe726"
+    },
+    "raw/public.stderr": {
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-completion-matcher-v5-durable-evidence-v1/public.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outer-receipt.json": {
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-completion-matcher-v5-durable-evidence-v1/outer-receipt.json",
+      "bytes": 11336,
+      "sha256": "5a5d6a1bb90edfbb50abe6c51f994275d97d8354f3185c2806c53a81c94cafb0"
+    },
+    "inner-receipt.json": {
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-completion-matcher-v5-durable-evidence-v1/inner-receipt.json",
+      "bytes": 14576,
+      "sha256": "f9d842346096f0a19497780475af1c0dc3a124f0defa6f4cccd3bcbf2ab33537"
+    },
+    "independent-saved-audit.json": {
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-completion-matcher-v5-durable-evidence-v1/saved-audit.json",
+      "bytes": 9079,
+      "sha256": "6c8176df3b0182a90a2c739dda324db6af4884ba7ec61b13af910d89c45a6000"
+    },
+    "copy-manifest.json": {
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-completion-matcher-v5-durable-evidence-v1/copy-manifest.json",
+      "bytes": 6464,
+      "sha256": "39f47bd05d9c0ce470cf49123b87a25aac5591749f2fc44d5c75d1f1a10e051d"
+    }
+  },
+  "native_build": "NOT_RUN",
+  "amiberry": "NOT_RUN",
+  "real_A1200": "NOT_RUN",
+  "audio_listening": "NOT_QUALIFIED"
+}

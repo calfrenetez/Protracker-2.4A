@@ -6594,3 +6594,32 @@ and listening are NOT RUN or unqualified by these results. Original failed
 attempts and the exact-scheduling decision remain preserved. See
 [producer evidence](../evidence/enhanced-editor/before-master-causal-song-pair-host/README.md)
 and [allocation-hook evidence](../evidence/enhanced-editor/two-ticket-native-allocation-hooks-host/README.md).
+
+## Causal completion matcher and two-event HOST timer model — 8 October 2026
+
+The causal RAM port now checks actual first completion through a scalar-return,
+copied-value matcher. It preserves the genuine post-clock tombstone, retained
+reader and WAITING successor while avoiding the task diagnostic's traversal of
+external queue/event/domain/span metadata. Exact original identities, windows,
+observed/issued ticks, serial, masks and all twenty adopted keys must match.
+The separate task-side diagnostic remains unchanged.
+
+The original 34-case RAM fixture and 219 added matcher checks passed under
+ASan/UBSan. A separate ten-case HOST resource model composes with that matcher:
+resource state selects the copied ticket, both original 960/1920 deadlines are
+retained, early wakes rearm the same absolute deadline, and first completion
+does not discard the second event. Whole task/delivery exclusion, prior-state
+restoration, independent lifetimes, uncertain effects and source quiet are
+modelled. Compilation requires explicit HOST opt-in and refuses Amiga targets.
+
+These are separate accepted host runs; repository integration is not a joint
+runtime qualification. Authoritative masters, bounded Fast allocation,
+selective Chip/AmiGUS caches, save/export and direct 24-bit Studio architecture
+remain unchanged. No default PLAY or deferred features are enabled. An actual
+CIA/Exec provider, native IRQ entry/ABI, exact restoration, full stack/WCET and
+deadline aperture remain unfinished. Amiberry and real-A1200 execution of these
+additions are NOT RUN; device capacity/order/completion/stop, output timing,
+audio and listening remain separately unqualified. See
+[the contract](CAUSAL_COMPLETION_MATCHER.md),
+[matcher evidence](../evidence/enhanced-editor/causal-completion-matcher-host/README.md)
+and [timer-model evidence](../evidence/enhanced-editor/causal-pair-timer-host-model/README.md).

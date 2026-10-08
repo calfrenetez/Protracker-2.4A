@@ -274,7 +274,7 @@ struct pt_mixed_causal_port pt_private_mixed_causal_ram_api(struct pt_private_mi
  read_clock,publish,commit,command_quiet,reader_quiet,source_close,source_quiet,publish_successor};}
 int pt_private_mixed_causal_ram_dispatch(struct pt_private_mixed_causal_ram_port *p,uint64_t ticket)
 {
-    struct pt_private_mixed_causal_ram_command *c,*second;struct pt_mixed_causal_diagnostic diagnostic;
+    struct pt_private_mixed_causal_ram_command *c,*second;struct pt_mixed_causal_first_completion_match completion;
     uint64_t entry;uint32_t frequency;unsigned i,before;int result=PT_MIXED_CAUSAL_INVALID,raw;
     if(!p||!enter(p))return result;
     c=command_find(p,ticket);if(!c||!c->live||!c->armed||c->finished||c->disabled||c->uncertain||p->source_attempted)goto done;
@@ -289,15 +289,22 @@ int pt_private_mixed_causal_ram_dispatch(struct pt_private_mixed_causal_ram_port
         second=p->command+1;
         if(p->pair_used!=2||!second->live||!second->successor||second->uncertain||
            !identity_same(&second->predecessor,&c->identity)||!expected_same(p,&second->packet)||
-           !pt_mixed_causal_diagnostic(c->owner,&diagnostic)||!diagnostic.completed||diagnostic.suppressed||
-           !diagnostic.admitted||!diagnostic.published||!diagnostic.commit_called||diagnostic.commit_outcome!=1||
-           diagnostic.first!=ticket||diagnostic.successor!=second->identity.ticket||diagnostic.serial!=second->serial||
-           diagnostic.observed<c->packet.first||diagnostic.issued<diagnostic.observed||diagnostic.issued>=c->packet.last){
+           p->trace_count!=3||p->trace[0].ticks!=entry||
+           p->trace[0].frequency!=p->frequency||p->trace[1].frequency!=p->frequency||p->trace[2].frequency!=p->frequency){
             result=PT_MIXED_CAUSAL_FAILED;
-        }else{for(i=0;i<20;++i)if(!key_same(p->slot+i,second->packet.expected+i))break;
-            if(i!=20)result=PT_MIXED_CAUSAL_FAILED;
-            else{second->predecessor_completed=1;second->predecessor_observed=diagnostic.observed;
-                second->predecessor_issued=diagnostic.issued;}}
+        }else{
+            memset(&completion,0,sizeof(completion));completion.predecessor=c->identity;
+            completion.successor=second->identity;completion.serial=second->serial;
+            completion.first_tick=c->packet.first;completion.last_tick=c->packet.last;
+            /* Explicit current call graph: entry, actual core pre, actual core
+             * post. These are candidates compared against the genuine tombstone. */
+            completion.observed=p->trace[1].ticks;completion.issued=p->trace[2].ticks;
+            completion.post.active_mask=completion.post.adopted_mask=p->mask;
+            memcpy(completion.post.slot,p->slot,sizeof(p->slot));
+            for(i=0;i<20;++i)if(!key_same(p->slot+i,second->packet.expected+i))break;
+            if(i!=20||!pt_mixed_causal_first_completion_matches(c->owner,completion))result=PT_MIXED_CAUSAL_FAILED;
+            else{second->predecessor_completed=1;second->predecessor_observed=completion.observed;
+                second->predecessor_issued=completion.issued;}}
     }
  ended:
     if(result!=PT_MIXED_CAUSAL_EARLY){c->finished=1;geometry_drop(c);

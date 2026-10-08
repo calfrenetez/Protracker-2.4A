@@ -1,0 +1,531 @@
+{
+  "added_oracle": "CAUSAL COMPLETION MATCHER PASS:2 added genuine cases;219 immutable-owner/port by-value checks;actual first commit before/after poisoned disposed C;18 identity fields,8 original-window/observed-issued,2 serial,3 masks,180 all20-key forgeries;before completion and successor issued/cancelled reject;baseline34 preserved separately; HOST_ONLY\n",
+  "automatic_retry": false,
+  "baseline_oracle": "NATIVE MIXED CAUSAL RAM PORT PASS:34 genuine software cases;14 two-ticket 4Paula+12card/16card 8/16/24-master cache8+16 pairs;original960/1920 arms and EARLY preservation;actual post-clock tombstone and poisoned disposed C;32 persistent readers,independent C/R/expected-only second proofs;clean0 versus unknown/reentrant0 arm retention,late/post-clock/residency failures,once source shutdown then read-only quiet;all20/tail refusals,full master capacities/exact saves/zero owned ledgers; SOFTWARE_ONLY\n",
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-UNDEBUG",
+        "-fsanitize=address,undefined",
+        "-Isrc/core",
+        "-I.",
+        "tests/native_mixed_causal_completion_matcher_test.c",
+        "src/native/readers_ram/native_mixed_causal_ram_port.c",
+        "src/editor/editor_mixed_causal_prepare.c",
+        "src/editor/sampler_mixed_readers.c",
+        "src/core/mixed_readers_causal.c",
+        "src/core/amigus_trigger_levels.c",
+        "src/core/mixed_scheduled_readers.c",
+        "src/core/elapsed_clock.c",
+        "src/editor/sampler_paula.c",
+        "src/editor/sampler_wavetable.c",
+        "src/core/amigus_voice_plan.c",
+        "src/editor/sampler.c",
+        "src/editor/slots.c",
+        "src/core/pcm_filtered.c",
+        "src/core/slices.c",
+        "src/core/pattern.c",
+        "src/core/document.c",
+        "src/core/pp20.c",
+        "src/core/project.c",
+        "src/core/mod_project.c",
+        "src/core/mod_inspect.c",
+        "src/core/channels.c",
+        "src/core/pcm.c",
+        "src/core/wav.c",
+        "src/core/svx.c",
+        "src/core/raw.c",
+        "src/editor/editor.c",
+        "src/editor/song.c",
+        "src/editor/view.c",
+        "src/editor/workflow.c",
+        "src/editor/sample_range.c",
+        "src/editor/wave_summary.c",
+        "src/core/sample_usage.c",
+        "src/core/event_resource.c",
+        "src/core/flow.c",
+        "src/core/pitch.c",
+        "src/core/amigus_reservation.c",
+        "src/editor/sampler_invert_song.c",
+        "src/core/render_invert.c",
+        "src/core/invert_bank.c",
+        "src/core/invert_sequence.c",
+        "src/core/invert_pcm.c",
+        "src/core/invert_loop.c",
+        "src/core/amigus_session.c",
+        "src/core/amigus_fifo.c",
+        "src/core/amigus_pcm_pack.c",
+        "src/core/studio_consumer.c",
+        "src/core/studio_pump.c",
+        "src/core/studio_queue.c",
+        "src/editor/editor_studio.c",
+        "src/editor/sampler_song.c",
+        "src/editor/sampler_studio.c",
+        "src/core/studio_song.c",
+        "src/core/studio_plan.c",
+        "src/core/render.c",
+        "src/core/timeline.c",
+        "src/core/frame_clock.c",
+        "src/core/studio_mix.c",
+        "src/core/voice.c",
+        "src/editor/wavetable_song.c",
+        "src/editor/wavetable_voices.c",
+        "src/editor/wavetable_dispatch.c",
+        "src/core/amigus_render_voice.c",
+        "src/editor/paula_preflight.c",
+        "src/core/paula_render_voice.c",
+        "src/core/amigus_wavetable_cache.c",
+        "src/core/amigus_sample_ram.c",
+        "src/core/sample_cache.c",
+        "src/core/playback_pcm.c",
+        "src/editor/editor_mixed.c",
+        "src/editor/mixed_owner.c",
+        "src/editor/mixed_transport.c",
+        "src/editor/mixed_preflight.c",
+        "src/editor/paula_voices.c",
+        "src/editor/paula_dispatch.c",
+        "src/editor/editor_wavetable.c",
+        "src/platform/sample_import.c",
+        "src/platform/raw_import.c",
+        "src/platform/mod_import.c",
+        "src/platform/pp20_import.c",
+        "-o",
+        "/private/tmp/pt24g-completion-matcher-host-first-v5/matcher-host"
+      ],
+      "cwd": "/private/tmp/pt24g-completion-matcher-host-first-v5/owned-source",
+      "elapsed_seconds": 19.392393207992427,
+      "group_policy": "INHERITS_ROOT_OWNED_PUBLIC_GROUP",
+      "label": "compile",
+      "limit_seconds": 120,
+      "pid": 51475,
+      "reaped": true,
+      "returncode": 0,
+      "streams": {
+        "stderr": {
+          "bytes": 0,
+          "identity": [
+            16777231,
+            206898414,
+            33188,
+            1,
+            0,
+            1791482148976197283,
+            1791482148976221741
+          ],
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 0,
+          "identity": [
+            16777231,
+            206898413,
+            33188,
+            1,
+            0,
+            1791482148976128158,
+            1791482148976153575
+          ],
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "argv": [
+        "/private/tmp/pt24g-completion-matcher-host-first-v5/matcher-host"
+      ],
+      "cwd": "/private/tmp/pt24g-completion-matcher-host-first-v5/owned-source",
+      "elapsed_seconds": 0.6749336249777116,
+      "group_policy": "INHERITS_ROOT_OWNED_PUBLIC_GROUP",
+      "label": "run",
+      "limit_seconds": 30,
+      "pid": 51662,
+      "reaped": true,
+      "returncode": 0,
+      "streams": {
+        "stderr": {
+          "bytes": 0,
+          "identity": [
+            16777231,
+            206899430,
+            33188,
+            1,
+            0,
+            1791482168392872948,
+            1791482168392902906
+          ],
+          "mode": 33188,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 842,
+          "identity": [
+            16777231,
+            206899429,
+            33188,
+            1,
+            842,
+            1791482169014279121,
+            1791482169014279121
+          ],
+          "mode": 33188,
+          "sha256": "d07f72df7e36ba1cd973efe43b9266ec5dacc0a0bc270e5968b480e32403bcb1"
+        }
+      }
+    }
+  ],
+  "compiler": {
+    "bytes": 200560,
+    "identity": [
+      16777231,
+      1152921500312607511,
+      33261,
+      78,
+      200560,
+      1788431650000000000,
+      1788431650000000000
+    ],
+    "mode": 33261,
+    "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2"
+  },
+  "context_pin": {
+    "bytes": 16639,
+    "mode": 33188,
+    "sha256": "dd236ba173ac5d9db85bccb6ccac92140ef9e391ce46a15bca895179e6fe9480"
+  },
+  "elapsed_seconds": 21.999050833983347,
+  "environment": {
+    "ASAN_OPTIONS": "halt_on_error=1:abort_on_error=1",
+    "HOME": "/Users/james1",
+    "LANG": "C",
+    "LC_ALL": "C",
+    "PATH": "/usr/bin:/bin",
+    "TMPDIR": "/private/tmp/pt24g-completion-matcher-host-first-v5",
+    "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1"
+  },
+  "executable": {
+    "bytes": 6213248,
+    "identity": [
+      16777231,
+      206899399,
+      33261,
+      1,
+      6213248,
+      1791482168174872461,
+      1791482168174872461
+    ],
+    "mode": 33261,
+    "sha256": "6b1a4ea36c3f0f68aae622c711e98834adb0a2155b5a5aeeb9f595d4b2a829a8"
+  },
+  "final_custody_phase": "COMPLETE",
+  "input_custody": "COMPLETE_BEFORE_AFTER_EXACT",
+  "native_or_target_operation": false,
+  "owned_source_identity": [
+    16777231,
+    206897129,
+    16832,
+    2,
+    64,
+    1791482148450152004,
+    1791482148450194421
+  ],
+  "owned_source_path": "/private/tmp/pt24g-completion-matcher-host-first-v5/owned-source",
+  "pgid": 51465,
+  "pid": 51465,
+  "protected_before": {
+    "AGENTS.md": {
+      "identity": [
+        16777231,
+        186256412,
+        33188,
+        1,
+        789,
+        1790188385022944450,
+        1790981859540003281
+      ],
+      "pin": {
+        "bytes": 789,
+        "mode": 33188,
+        "sha256": "57dcd76709e95cd29c3d17c545a992bb924c629566de1e84a69db97701f5633b"
+      },
+      "state": "PRESENT"
+    },
+    "amiga-test.json": {
+      "identity": [
+        16777231,
+        183619784,
+        33188,
+        1,
+        5485,
+        1790161042532301416,
+        1790161047204968655
+      ],
+      "pin": {
+        "bytes": 5485,
+        "mode": 33188,
+        "sha256": "2cc0b2707151467680193ad087903804a0c8e937ce97f5e229d90fed34a8be22"
+      },
+      "state": "PRESENT"
+    },
+    "src/editor/editor.c": {
+      "identity": [
+        16777231,
+        181731562,
+        33188,
+        1,
+        69155,
+        1791079517203267345,
+        1791080709751516561
+      ],
+      "pin": {
+        "bytes": 69155,
+        "mode": 33188,
+        "sha256": "46d908ba5d89742fcdb8da337d01fe4af4decfeac9bfb883a21eb2920bc4b092"
+      },
+      "state": "PRESENT"
+    },
+    "src/editor/editor.h": {
+      "identity": [
+        16777231,
+        181731560,
+        33188,
+        1,
+        6675,
+        1791079517213557004,
+        1791218564799630072
+      ],
+      "pin": {
+        "bytes": 6675,
+        "mode": 33188,
+        "sha256": "4de713afd3be0306eef784d421281596d2624bfbed176fd26ef571c26a865a9f"
+      },
+      "state": "PRESENT"
+    },
+    "src/editor/view.c": {
+      "identity": [
+        16777231,
+        181732068,
+        33188,
+        1,
+        44209,
+        1791078546688458373,
+        1791078554510824507
+      ],
+      "pin": {
+        "bytes": 44209,
+        "mode": 33188,
+        "sha256": "a23ecde830cd23edcc332c93b924bf470161f0114415bece02d82fab2390cbdb"
+      },
+      "state": "PRESENT"
+    },
+    "src/editor/view.h": {
+      "identity": [
+        16777231,
+        181732067,
+        33188,
+        1,
+        2032,
+        1790176159359866142,
+        1791222265378573311
+      ],
+      "pin": {
+        "bytes": 2032,
+        "mode": 33188,
+        "sha256": "44cdc9126cd9331d8cb0e428286f6fe1165187fb68c79a809cc6df54852a59b2"
+      },
+      "state": "PRESENT"
+    },
+    "src/native/editor_main.c": {
+      "identity": [
+        16777231,
+        181732622,
+        33188,
+        1,
+        46819,
+        1791077235821362904,
+        1791077241611705965
+      ],
+      "pin": {
+        "bytes": 46819,
+        "mode": 33188,
+        "sha256": "ed49163c893660b75d3a63f00be2ff0acd2048c54d101051c26ce87fa446dc06"
+      },
+      "state": "PRESENT"
+    },
+    "src/native/pattern_display.c": {
+      "identity": [
+        16777231,
+        185873310,
+        33188,
+        1,
+        6888,
+        1790176550467604875,
+        1790176557986265188
+      ],
+      "pin": {
+        "bytes": 6888,
+        "mode": 33188,
+        "sha256": "de7b6be91c29e2153fc61b9a2cfc22c7f730b049b68bf2d5e4ed87f1bf73959d"
+      },
+      "state": "PRESENT"
+    },
+    "src/native/pattern_display.h": {
+      "identity": [
+        16777231,
+        185873308,
+        33188,
+        1,
+        1519,
+        1790176292302271325,
+        1790176313855719761
+      ],
+      "pin": {
+        "bytes": 1519,
+        "mode": 33188,
+        "sha256": "469f62be960d912258a37982504da75a7e38691ce13d4363a13b5e84cb9eaee1"
+      },
+      "state": "PRESENT"
+    },
+    "tests/editor_test.c": {
+      "identity": [
+        16777231,
+        181733425,
+        33188,
+        1,
+        53428,
+        1790176550467057829,
+        1790176558111656902
+      ],
+      "pin": {
+        "bytes": 53428,
+        "mode": 33188,
+        "sha256": "946ee1a0667e8b43a7752ea7a0cf9590de781daffc7c73503efd9024dd690b65"
+      },
+      "state": "PRESENT"
+    },
+    "tests/native_prepared_test.c": {
+      "identity": [
+        16777231,
+        185977288,
+        33188,
+        1,
+        5858,
+        1790188721526271883,
+        1790188725901226419
+      ],
+      "pin": {
+        "bytes": 5858,
+        "mode": 33188,
+        "sha256": "ad3041b508483482c0ff280a1c4f37576ec37a01eb421a230984bd3e6cb950a7"
+      },
+      "state": "PRESENT"
+    },
+    "tests/test_editor.py": {
+      "identity": [
+        16777231,
+        181733427,
+        33188,
+        1,
+        2002,
+        1791077669524344729,
+        1791077678550521449
+      ],
+      "pin": {
+        "bytes": 2002,
+        "mode": 33188,
+        "sha256": "539fe7284a082781e2dead541e67b6d0f9e75ead179b631bfa8369ee4d1f9f82"
+      },
+      "state": "PRESENT"
+    },
+    "tools/build_core_tests.py": {
+      "identity": [
+        16777231,
+        181625355,
+        33188,
+        1,
+        39844,
+        1791078419381894969,
+        1791078432648830186
+      ],
+      "pin": {
+        "bytes": 39844,
+        "mode": 33188,
+        "sha256": "081976b3831c518e7d757d934f2106c8aa072298dc3bd5ce74651188fd3a86b6"
+      },
+      "state": "PRESENT"
+    },
+    "tools/shared_infra_sampler.py": {
+      "identity": [
+        16777231,
+        184388772,
+        33188,
+        1,
+        900,
+        1790161042528511553,
+        1790161050455129244
+      ],
+      "pin": {
+        "bytes": 900,
+        "mode": 33188,
+        "sha256": "5be11d68d4409baed36551165005c584ffec81a2c45f742e258cce74d1eba36d"
+      },
+      "state": "PRESENT"
+    },
+    "tools/shared_infra_ui.py": {
+      "identity": [
+        16777231,
+        183898490,
+        33188,
+        1,
+        3754,
+        1790157309343043670,
+        1790157386688306903
+      ],
+      "pin": {
+        "bytes": 3754,
+        "mode": 33188,
+        "sha256": "9492cf59997857a1d69c1d6dbe4180ab83727d047cd456a9ba78221c1f6f5987"
+      },
+      "state": "PRESENT"
+    },
+    "tools/test_sampler_emulator.py": {
+      "identity": [
+        16777231,
+        182037983,
+        33188,
+        1,
+        8918,
+        1790162027707313941,
+        1790162057039797107
+      ],
+      "pin": {
+        "bytes": 8918,
+        "mode": 33188,
+        "sha256": "cc84cf3098d10fa6901f45aaf93cecdbdf2fd55e39e6e36647c55d36a9c7f36c"
+      },
+      "state": "PRESENT"
+    }
+  },
+  "repository_before": {
+    "count": 1221,
+    "digest": "bb7a8fc20b5cbe068f256f990673e3eae1a4d75ee8656e63a546d05332586dd9"
+  },
+  "root_external_admission_required": true,
+  "scope": "HOST_ONLY_SCALAR_COMPLETION_MATCHER",
+  "selected_tree_before": {
+    "count": 1223,
+    "digest": "f145cd30f1589eb93600281846e36c55c5256b8d96d4dd347ee93cf0360ed678"
+  },
+  "sid": 51465,
+  "source_cleanup": "RETAINED_FOR_ROOT_AFTER_PUBLIC_GROUP_ABSENCE",
+  "status": "PROVISIONAL_PASS_REQUIRES_ROOT_EXTERNAL_ADMISSION",
+  "whole_limit_seconds": 240
+}

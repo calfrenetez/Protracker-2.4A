@@ -1,0 +1,473 @@
+{
+  "after": {
+    "packet": {
+      "PLAN.md": [
+        {
+          "bytes": 11924,
+          "mode": 33188,
+          "sha256": "76b09b6ac553ff44d0bedb948019bce59e660f6a40fd657148fd6b6b56c15598"
+        },
+        [
+          16777231,
+          206893615,
+          33188,
+          1,
+          11924,
+          1791482017874327057,
+          1791482018131983795
+        ]
+      ],
+      "context.json": [
+        {
+          "bytes": 16639,
+          "mode": 33188,
+          "sha256": "dd236ba173ac5d9db85bccb6ccac92140ef9e391ce46a15bca895179e6fe9480"
+        },
+        [
+          16777231,
+          206893616,
+          33188,
+          1,
+          16639,
+          1791482017874033307,
+          1791482018129368959
+        ]
+      ],
+      "pins.json": [
+        {
+          "bytes": 2764,
+          "mode": 33188,
+          "sha256": "6c102f56a6a80eb72b746c60d0c631a93daefb0562e304446ef75e4785c90d69"
+        },
+        [
+          16777231,
+          206893629,
+          33188,
+          1,
+          2764,
+          1791482017876540893,
+          1791482018136498425
+        ]
+      ],
+      "qualify.py": [
+        {
+          "bytes": 19736,
+          "mode": 33188,
+          "sha256": "47de0d1ffc473375142da110cd089bc5e4da34c16e28556bfcf6ce828bde52c1"
+        },
+        [
+          16777231,
+          206893617,
+          33188,
+          1,
+          19736,
+          1791482017870630303,
+          1791482018123821119
+        ]
+      ],
+      "src/core/mixed_readers_causal.c": [
+        {
+          "bytes": 57940,
+          "mode": 33188,
+          "sha256": "04ecde1d24d0c55242db7d93bdd9aee3c36ecdc81612205d801403fcdf5bccf5"
+        },
+        [
+          16777231,
+          206893620,
+          33188,
+          1,
+          57940,
+          1791482017867143966,
+          1791482018091720960
+        ]
+      ],
+      "src/core/mixed_readers_causal.h": [
+        {
+          "bytes": 13986,
+          "mode": 33188,
+          "sha256": "dd1232c86b3c504c0287d71c3ef5e8f1ac2701fcdb5062afea3ae3effb0b084f"
+        },
+        [
+          16777231,
+          206893621,
+          33188,
+          1,
+          13986,
+          1791482017867404049,
+          1791482018096549798
+        ]
+      ],
+      "src/native/readers_ram/native_mixed_causal_ram_port.c": [
+        {
+          "bytes": 24254,
+          "mode": 33188,
+          "sha256": "4a5889ce15589e74924c2c2c8db66fbaa2de391bfa8b754516f8ee6a724e6bc8"
+        },
+        [
+          16777231,
+          206893624,
+          33188,
+          1,
+          24254,
+          1791482017867825425,
+          1791482018105107099
+        ]
+      ],
+      "src/native/readers_ram/native_mixed_causal_ram_port.h": [
+        {
+          "bytes": 4673,
+          "mode": 33188,
+          "sha256": "317c93a5a2d6f5c6f4e06f1eb60f224f3753dc16258a27b76a8088821505b96d"
+        },
+        [
+          16777231,
+          206893625,
+          33188,
+          1,
+          4673,
+          1791482017868103175,
+          1791482018109434979
+        ]
+      ],
+      "tests/native_mixed_causal_completion_matcher_test.c": [
+        {
+          "bytes": 8122,
+          "mode": 33188,
+          "sha256": "e2d94c6d60247165686aa0d924c56a6c37c0736e9e00fa5522516eaa8613dcdc"
+        },
+        [
+          16777231,
+          206893627,
+          33188,
+          1,
+          8122,
+          1791482017868428342,
+          1791482018114467026
+        ]
+      ],
+      "tests/native_mixed_causal_ram_port_test.c": [
+        {
+          "bytes": 42573,
+          "mode": 33188,
+          "sha256": "0784eec1cfd4934f829abae186ccff90d56793c15055d7da88fa7846eab7b62a"
+        },
+        [
+          16777231,
+          206893628,
+          33188,
+          1,
+          42573,
+          1791482017868718801,
+          1791482018121044366
+        ]
+      ]
+    },
+    "python": [
+      {
+        "bytes": 52448,
+        "mode": 33261,
+        "sha256": "60ab7f8bb944386c0022689716e405a77117111d65110532a1889d713dddf757"
+      },
+      [
+        16777231,
+        99971036,
+        33261,
+        1,
+        52448,
+        1760710046397545205,
+        1763734040806305177
+      ]
+    ],
+    "wrapper": [
+      {
+        "bytes": 12925,
+        "mode": 33188,
+        "sha256": "6984bcfebb7fe427431cc57a22d3a349f02fbe0c742eed62ce1a628b7d405862"
+      },
+      [
+        16777231,
+        206894746,
+        33188,
+        1,
+        12925,
+        1791482059950672358,
+        1791482059964252540
+      ]
+    ]
+  },
+  "argv": [
+    "/opt/homebrew/Cellar/python@3.14/3.14.0/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+    "-B",
+    "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/causal-completion-matcher-host-source-v5/qualify.py"
+  ],
+  "automatic_retry": false,
+  "before": {
+    "packet": {
+      "PLAN.md": [
+        {
+          "bytes": 11924,
+          "mode": 33188,
+          "sha256": "76b09b6ac553ff44d0bedb948019bce59e660f6a40fd657148fd6b6b56c15598"
+        },
+        [
+          16777231,
+          206893615,
+          33188,
+          1,
+          11924,
+          1791482017874327057,
+          1791482018131983795
+        ]
+      ],
+      "context.json": [
+        {
+          "bytes": 16639,
+          "mode": 33188,
+          "sha256": "dd236ba173ac5d9db85bccb6ccac92140ef9e391ce46a15bca895179e6fe9480"
+        },
+        [
+          16777231,
+          206893616,
+          33188,
+          1,
+          16639,
+          1791482017874033307,
+          1791482018129368959
+        ]
+      ],
+      "pins.json": [
+        {
+          "bytes": 2764,
+          "mode": 33188,
+          "sha256": "6c102f56a6a80eb72b746c60d0c631a93daefb0562e304446ef75e4785c90d69"
+        },
+        [
+          16777231,
+          206893629,
+          33188,
+          1,
+          2764,
+          1791482017876540893,
+          1791482018136498425
+        ]
+      ],
+      "qualify.py": [
+        {
+          "bytes": 19736,
+          "mode": 33188,
+          "sha256": "47de0d1ffc473375142da110cd089bc5e4da34c16e28556bfcf6ce828bde52c1"
+        },
+        [
+          16777231,
+          206893617,
+          33188,
+          1,
+          19736,
+          1791482017870630303,
+          1791482018123821119
+        ]
+      ],
+      "src/core/mixed_readers_causal.c": [
+        {
+          "bytes": 57940,
+          "mode": 33188,
+          "sha256": "04ecde1d24d0c55242db7d93bdd9aee3c36ecdc81612205d801403fcdf5bccf5"
+        },
+        [
+          16777231,
+          206893620,
+          33188,
+          1,
+          57940,
+          1791482017867143966,
+          1791482018091720960
+        ]
+      ],
+      "src/core/mixed_readers_causal.h": [
+        {
+          "bytes": 13986,
+          "mode": 33188,
+          "sha256": "dd1232c86b3c504c0287d71c3ef5e8f1ac2701fcdb5062afea3ae3effb0b084f"
+        },
+        [
+          16777231,
+          206893621,
+          33188,
+          1,
+          13986,
+          1791482017867404049,
+          1791482018096549798
+        ]
+      ],
+      "src/native/readers_ram/native_mixed_causal_ram_port.c": [
+        {
+          "bytes": 24254,
+          "mode": 33188,
+          "sha256": "4a5889ce15589e74924c2c2c8db66fbaa2de391bfa8b754516f8ee6a724e6bc8"
+        },
+        [
+          16777231,
+          206893624,
+          33188,
+          1,
+          24254,
+          1791482017867825425,
+          1791482018105107099
+        ]
+      ],
+      "src/native/readers_ram/native_mixed_causal_ram_port.h": [
+        {
+          "bytes": 4673,
+          "mode": 33188,
+          "sha256": "317c93a5a2d6f5c6f4e06f1eb60f224f3753dc16258a27b76a8088821505b96d"
+        },
+        [
+          16777231,
+          206893625,
+          33188,
+          1,
+          4673,
+          1791482017868103175,
+          1791482018109434979
+        ]
+      ],
+      "tests/native_mixed_causal_completion_matcher_test.c": [
+        {
+          "bytes": 8122,
+          "mode": 33188,
+          "sha256": "e2d94c6d60247165686aa0d924c56a6c37c0736e9e00fa5522516eaa8613dcdc"
+        },
+        [
+          16777231,
+          206893627,
+          33188,
+          1,
+          8122,
+          1791482017868428342,
+          1791482018114467026
+        ]
+      ],
+      "tests/native_mixed_causal_ram_port_test.c": [
+        {
+          "bytes": 42573,
+          "mode": 33188,
+          "sha256": "0784eec1cfd4934f829abae186ccff90d56793c15055d7da88fa7846eab7b62a"
+        },
+        [
+          16777231,
+          206893628,
+          33188,
+          1,
+          42573,
+          1791482017868718801,
+          1791482018121044366
+        ]
+      ]
+    },
+    "python": [
+      {
+        "bytes": 52448,
+        "mode": 33261,
+        "sha256": "60ab7f8bb944386c0022689716e405a77117111d65110532a1889d713dddf757"
+      },
+      [
+        16777231,
+        99971036,
+        33261,
+        1,
+        52448,
+        1760710046397545205,
+        1763734040806305177
+      ]
+    ],
+    "wrapper": [
+      {
+        "bytes": 12925,
+        "mode": 33188,
+        "sha256": "6984bcfebb7fe427431cc57a22d3a349f02fbe0c742eed62ce1a628b7d405862"
+      },
+      [
+        16777231,
+        206894746,
+        33188,
+        1,
+        12925,
+        1791482059950672358,
+        1791482059964252540
+      ]
+    ]
+  },
+  "cwd": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/causal-completion-matcher-host-source-v5",
+  "elapsed_seconds": 22.219521541002905,
+  "environment": {
+    "HOME": "/Users/james1",
+    "LANG": "C",
+    "LC_ALL": "C",
+    "PATH": "/usr/bin:/bin",
+    "PT_MATCHER_ROOT_GUARD_SECONDS": "240",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "errors": [],
+  "local_receipt": {
+    "bytes": 14576,
+    "identity": [
+      16777231,
+      206899503,
+      33188,
+      1,
+      14576,
+      1791482169653800480,
+      1791482169654448439
+    ],
+    "mode": 33188,
+    "sha256": "f9d842346096f0a19497780475af1c0dc3a124f0defa6f4cccd3bcbf2ab33537"
+  },
+  "native_irq_timer_or_target_qualified": false,
+  "nested_streams": {
+    "compile.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compile.stdout": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "run.stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "run.stdout": {
+      "bytes": 842,
+      "mode": 33188,
+      "sha256": "d07f72df7e36ba1cd973efe43b9266ec5dacc0a0bc270e5968b480e32403bcb1"
+    }
+  },
+  "public": {
+    "RC": 0,
+    "authentic_spawn": true,
+    "group": 51465,
+    "group_absent": true,
+    "pid": 51465,
+    "policy": "NEW_PUBLIC_SESSION_WITH_INHERITED_COMPILE_RUN",
+    "reaped": true
+  },
+  "public_streams": {
+    "stderr": {
+      "bytes": 0,
+      "mode": 33188,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout": {
+      "bytes": 65,
+      "mode": 33188,
+      "sha256": "58de440ff7649dd059e13b4425da368bf3480666f299bc077c7764b2b2bfe726"
+    }
+  },
+  "scope": "HOST_COMPLETION_MATCHER_ONLY",
+  "source_cleanup": "EXACT_OWNED_SOURCE_ABSENT_AFTER_PUBLIC_REAP_GROUP_ABSENCE",
+  "status": "PASS_HOST_COMPLETION_MATCHER_ONLY",
+  "whole_limit_seconds": 240
+}

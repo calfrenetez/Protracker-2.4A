@@ -31,6 +31,7 @@ struct causal_pair {
     struct pt_mixed_causal_actual predicted,completed_post;
     struct pt_mixed_causal_publication publication;
     uint64_t first,successor,serial,observed,issued,publishing;
+    uint64_t completed_first_tick,completed_last_tick;
     unsigned admitted,published,completed,suppressed,commit_called;
     int commit_outcome;
 };
@@ -376,7 +377,9 @@ enum pt_mixed_causal_result pt_mixed_causal_fire(struct pt_mixed_causal_owner *b
         c->state[i]=r->state;c->adopted[i]=r->adopted;
     }
     b->mask=actual.active_mask;memcpy(b->slot,actual.slot,sizeof(b->slot));geometry_drop(c);
-    if(ticket==b->causal.first){memcpy(&b->causal.completed_post,&actual,sizeof(actual));b->causal.issued=issued;b->causal.completed=1;}
+    if(ticket==b->causal.first){memcpy(&b->causal.completed_post,&actual,sizeof(actual));
+        b->causal.completed_first_tick=c->packet.first;b->causal.completed_last_tick=c->packet.last;
+        b->causal.issued=issued;b->causal.completed=1;}
     c->observed=observed;c->issued=issued;c->command=PT_MIXED_COMMAND_ISSUED;b->busy=0;return PT_MIXED_CAUSAL_COMMITTED;
 failed:
     c->unknown=1;b->causal.suppressed=1;b->failed=1;b->busy=0;return PT_MIXED_CAUSAL_FAILED;
@@ -661,6 +664,43 @@ enum pt_mixed_readers_result pt_mixed_causal_publish_successor(
         b->causal.publishing=successor;result=pt_mixed_readers_publish(b->queue,successor);b->causal.publishing=0;
     }
     b->task_busy=0;return b->failed?PT_MIXED_READERS_BACKEND:result;
+}
+static int completion_identity_same(const struct pt_mixed_causal_command_identity *a,
+    const struct pt_mixed_causal_command_identity *b)
+{
+    return a->registration.owner==b->registration.owner&&a->registration.queue==b->registration.queue&&
+        a->registration.session==b->registration.session&&a->registration.generation==b->registration.generation&&
+        a->ticket==b->ticket&&a->owner==b->owner&&a->event==b->event&&
+        a->binding.context==b->binding.context&&a->binding.context_bytes==b->binding.context_bytes;
+}
+int pt_mixed_causal_first_completion_matches(struct pt_mixed_causal_owner *b,
+    struct pt_mixed_causal_first_completion_match copied)
+{
+    const struct causal_pair *p;struct activation_command *successor;unsigned i;int matched;
+    if(!b)return 0;
+    if(b->task_busy){fault(b);return 0;}
+    if(!enter(b))return 0;
+    p=&b->causal;successor=find_command(b,p->successor);
+    matched=!b->failed&&!b->source_closed&&!b->source_attempted&&!b->source_uncertain&&
+        copied.predecessor.registration.owner==b->registration.owner&&
+        copied.predecessor.registration.queue==b->registration.queue&&
+        copied.predecessor.registration.session==b->registration.session&&
+        copied.predecessor.registration.generation==b->registration.generation&&
+        completion_identity_same(&copied.predecessor,&p->predecessor)&&
+        copied.predecessor.ticket==p->first&&copied.successor.ticket==p->successor&&
+        copied.serial&&copied.serial==p->serial&&p->admitted&&p->published&&
+        p->commit_called&&p->commit_outcome==1&&
+        copied.first_tick==p->completed_first_tick&&copied.last_tick==p->completed_last_tick&&
+        copied.first_tick<copied.last_tick&&copied.observed==p->observed&&copied.issued==p->issued&&
+        copied.observed>=copied.first_tick&&copied.issued>=copied.observed&&copied.issued<copied.last_tick&&
+        causal_current(b)&&successor&&successor->command==PT_MIXED_COMMAND_WAITING&&
+        !successor->unknown&&successor->publication_outcome==1&&successor->port_refs&&
+        completion_identity_same(&copied.successor,&successor->identity)&&current_packet(b,&successor->packet)&&
+        copied.post.active_mask==b->mask&&copied.post.active_mask==p->completed_post.active_mask&&
+        copied.post.adopted_mask==copied.post.active_mask&&copied.post.adopted_mask==p->completed_post.adopted_mask;
+    for(i=0;matched&&i<PT_MIXED_CAUSAL_SLOTS;++i)
+        if(!key_equal(copied.post.slot+i,b->slot+i)||!key_equal(copied.post.slot+i,p->completed_post.slot+i))matched=0;
+    b->busy=0;return matched?1:0;
 }
 int pt_mixed_causal_diagnostic(struct pt_mixed_causal_owner *b,struct pt_mixed_causal_diagnostic *out)
 {

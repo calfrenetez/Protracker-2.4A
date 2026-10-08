@@ -169,6 +169,23 @@ struct pt_mixed_causal_diagnostic {
     unsigned admitted,published,completed,suppressed,commit_called;
     int commit_outcome;
 };
+/* Fixed copied completion request. Pointer fields remain opaque; neither
+ * event/domain/queue/span metadata nor argument padding is traversed. */
+struct pt_mixed_causal_first_completion_match {
+    struct pt_mixed_causal_command_identity predecessor,successor;
+    uint64_t serial,first_tick,last_tick,observed,issued;
+    struct pt_mixed_causal_actual post;
+};
+/* Private opt-in scalar completion comparison under the same whole-entry
+ * task/fire/input-edit exclusion as fire. Original genuine owner remains live.
+ * BY VALUE: no caller output, retained request address or arbitrary write span.
+ * 1 matches the actual retained first tombstone AND current WAITING successor;
+ * 0 is mismatch/uncertainty, never quiet, readiness or ownership transfer.
+ * Busy/task_busy reentry latches the existing fault. Regular mismatch has no
+ * effects. No callback, clock read, task-only metadata scan or service occurs.
+ * Native ABI/stack, IRQ eligibility and WCET require separate qualification. */
+int pt_mixed_causal_first_completion_matches(struct pt_mixed_causal_owner *,
+    struct pt_mixed_causal_first_completion_match);
 /* Copied task-only diagnostic, not authority, readiness or quiet evidence. */
 int pt_mixed_causal_diagnostic(struct pt_mixed_causal_owner *,
     struct pt_mixed_causal_diagnostic *);

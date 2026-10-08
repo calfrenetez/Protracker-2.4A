@@ -1,0 +1,214 @@
+{
+  "status": "EXACT_DURABLE_BYTE_COPIES_NOT_A_NEW_TEST",
+  "copies": {
+    "outer-receipt.json": {
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-completion-matcher-host-outer-first-v5/receipt.json",
+      "origin_identity": [
+        16777231,
+        206899535,
+        33152,
+        1,
+        11336,
+        1791482169825323833,
+        1791482170048583658
+      ],
+      "origin_mode": 33152,
+      "bytes": 11336,
+      "sha256": "5a5d6a1bb90edfbb50abe6c51f994275d97d8354f3185c2806c53a81c94cafb0",
+      "copy_mode": 33188
+    },
+    "public.stdout": {
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-completion-matcher-host-outer-first-v5/public.stdout",
+      "origin_identity": [
+        16777231,
+        206897113,
+        33188,
+        1,
+        65,
+        1791482169654669148,
+        1791482169654669148
+      ],
+      "origin_mode": 33188,
+      "bytes": 65,
+      "sha256": "58de440ff7649dd059e13b4425da368bf3480666f299bc077c7764b2b2bfe726",
+      "copy_mode": 33188
+    },
+    "public.stderr": {
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-completion-matcher-host-outer-first-v5/public.stderr",
+      "origin_identity": [
+        16777231,
+        206897114,
+        33188,
+        1,
+        0,
+        1791482147616020892,
+        1791482147672606787
+      ],
+      "origin_mode": 33188,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "copy_mode": 33188
+    },
+    "inner-receipt.json": {
+      "origin": "/private/tmp/pt24g-completion-matcher-host-first-v5/receipt.json",
+      "origin_identity": [
+        16777231,
+        206899503,
+        33188,
+        1,
+        14576,
+        1791482169653800480,
+        1791482169654448439
+      ],
+      "origin_mode": 33188,
+      "bytes": 14576,
+      "sha256": "f9d842346096f0a19497780475af1c0dc3a124f0defa6f4cccd3bcbf2ab33537",
+      "copy_mode": 33188
+    },
+    "compile.stdout": {
+      "origin": "/private/tmp/pt24g-completion-matcher-host-first-v5/compile.stdout",
+      "origin_identity": [
+        16777231,
+        206898413,
+        33188,
+        1,
+        0,
+        1791482148976128158,
+        1791482148976153575
+      ],
+      "origin_mode": 33188,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "copy_mode": 33188
+    },
+    "compile.stderr": {
+      "origin": "/private/tmp/pt24g-completion-matcher-host-first-v5/compile.stderr",
+      "origin_identity": [
+        16777231,
+        206898414,
+        33188,
+        1,
+        0,
+        1791482148976197283,
+        1791482148976221741
+      ],
+      "origin_mode": 33188,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "copy_mode": 33188
+    },
+    "run.stdout": {
+      "origin": "/private/tmp/pt24g-completion-matcher-host-first-v5/run.stdout",
+      "origin_identity": [
+        16777231,
+        206899429,
+        33188,
+        1,
+        842,
+        1791482169014279121,
+        1791482169014279121
+      ],
+      "origin_mode": 33188,
+      "bytes": 842,
+      "sha256": "d07f72df7e36ba1cd973efe43b9266ec5dacc0a0bc270e5968b480e32403bcb1",
+      "copy_mode": 33188
+    },
+    "run.stderr": {
+      "origin": "/private/tmp/pt24g-completion-matcher-host-first-v5/run.stderr",
+      "origin_identity": [
+        16777231,
+        206899430,
+        33188,
+        1,
+        0,
+        1791482168392872948,
+        1791482168392902906
+      ],
+      "origin_mode": 33188,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "copy_mode": 33188
+    },
+    "saved-audit.json": {
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-completion-matcher-v5-saved-audit-v1/AUDIT.json",
+      "origin_identity": [
+        16777231,
+        206916404,
+        33188,
+        1,
+        9079,
+        1791482306773052768,
+        1791482306943405994
+      ],
+      "origin_mode": 33188,
+      "bytes": 9079,
+      "sha256": "6c8176df3b0182a90a2c739dda324db6af4884ba7ec61b13af910d89c45a6000",
+      "copy_mode": 33188
+    },
+    "source-context.json": {
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/causal-completion-matcher-host-source-v5/context.json",
+      "origin_identity": [
+        16777231,
+        206893616,
+        33188,
+        1,
+        16639,
+        1791482017874033307,
+        1791482018129368959
+      ],
+      "origin_mode": 33188,
+      "bytes": 16639,
+      "sha256": "dd236ba173ac5d9db85bccb6ccac92140ef9e391ce46a15bca895179e6fe9480",
+      "copy_mode": 33188
+    },
+    "source-manifest.json": {
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/causal-completion-matcher-host-source-v5/pins.json",
+      "origin_identity": [
+        16777231,
+        206893629,
+        33188,
+        1,
+        2764,
+        1791482017876540893,
+        1791482018136498425
+      ],
+      "origin_mode": 33188,
+      "bytes": 2764,
+      "sha256": "6c102f56a6a80eb72b746c60d0c631a93daefb0562e304446ef75e4785c90d69",
+      "copy_mode": 33188
+    },
+    "outer-source.py": {
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-completion-matcher-host-outer-v5.py",
+      "origin_identity": [
+        16777231,
+        206894746,
+        33188,
+        1,
+        12925,
+        1791482059950672358,
+        1791482059964252540
+      ],
+      "origin_mode": 33188,
+      "bytes": 12925,
+      "sha256": "6984bcfebb7fe427431cc57a22d3a349f02fbe0c742eed62ce1a628b7d405862",
+      "copy_mode": 33188
+    },
+    "qualifier-source.py": {
+      "origin": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/causal-completion-matcher-host-source-v5/qualify.py",
+      "origin_identity": [
+        16777231,
+        206893617,
+        33188,
+        1,
+        19736,
+        1791482017870630303,
+        1791482018123821119
+      ],
+      "origin_mode": 33188,
+      "bytes": 19736,
+      "sha256": "47de0d1ffc473375142da110cd089bc5e4da34c16e28556bfcf6ce828bde52c1",
+      "copy_mode": 33188
+    }
+  },
+  "originals_preserved": true
+}

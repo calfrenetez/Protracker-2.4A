@@ -68,8 +68,10 @@ int pt_private_mixed_causal_ram_bind(struct pt_private_mixed_causal_ram_port *,
 struct pt_mixed_causal_port pt_private_mixed_causal_ram_api(struct pt_private_mixed_causal_ram_port *);
 /* Genuine fire once for this exact original ticket. EARLY retains ticket,
  * callbacks and geometry. No polling, rebasing or predicted ACTIVE. COMMITTED
- * preserves raw adoption separately from a later diagnostic clock failure.
+ * preserves raw adoption separately from a later completion-check failure.
  * A first completion tombstone is accepted only after actual core post-clock
- * result, complete resulting registry and copied diagnostic match. */
+ * result, complete resulting registry and scalar copied-value match against the
+ * genuine tombstone. The current clock trace must contain exactly entry/pre/post
+ * reads; a changed call graph refuses rather than guessing clock phases. */
 int pt_private_mixed_causal_ram_dispatch(struct pt_private_mixed_causal_ram_port *,uint64_t);
 #endif

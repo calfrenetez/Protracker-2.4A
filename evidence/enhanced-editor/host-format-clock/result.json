@@ -1,0 +1,65 @@
+{
+  "schema": "PT_HOST_PAIR_FORMAT_CLOCK_PUBLIC_RESULT_V1",
+  "status": "HOST_PASS",
+  "baseline_commit": "9dd85bc62e8f266ee375a4ed63b8f5572ab84578",
+  "actual_runs": 1,
+  "cases": 18,
+  "master_bits": [
+    8,
+    16,
+    24
+  ],
+  "paula_cache_bits": 8,
+  "card_cache_formats": [
+    "8BE",
+    "16BE",
+    "16LE"
+  ],
+  "clock_models_hz": [
+    709379,
+    715909
+  ],
+  "assertions": {
+    "immutable_completion_matches": 108,
+    "unchanged_output_format_refusals": 36,
+    "low_24_bit_input_edits": 12,
+    "full_master_capacities_and_exact_project_wav_exports": true,
+    "first_command_disposal_retains_reader_successor_source": true,
+    "early_rearm_preserves_original_960_1920_schedule": true
+  },
+  "instrumentation": {
+    "assertions": true,
+    "address_sanitizer": true,
+    "undefined_behavior_sanitizer": true,
+    "leak_sanitizer": false
+  },
+  "compile": {
+    "ordered_units": 81,
+    "c99": true,
+    "strict_warnings": true,
+    "return_code": 0,
+    "stdout_bytes": 0,
+    "stderr_bytes": 0
+  },
+  "runtime": {
+    "return_code": 0,
+    "stdout_bytes": 365,
+    "stdout_sha256": "d6c790817005090afc3b269f2562dc757daeb458a42ba2968486ce3f9f4acf3e",
+    "stderr_bytes": 0
+  },
+  "older_suites_replayed": false,
+  "detailed_audit_retained_locally": true,
+  "not_qualified": [
+    "current dirty editor/display integration",
+    "native ABI and execution",
+    "CIA and IRQ delivery",
+    "physical DMA",
+    "card RAM capacity and upload ordering",
+    "voice stop",
+    "WCET",
+    "exact musical activation",
+    "Amiberry",
+    "real A1200 audio",
+    "human listening"
+  ]
+}

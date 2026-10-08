@@ -1,0 +1,303 @@
+{
+  "cases": [
+    {
+      "compiler_only_argv_verified": true,
+      "label": "no_opt_in",
+      "recorded_RC": 1,
+      "recorded_authenticated_reaped_original_group_absent": true,
+      "recorded_pid_pgid_sid": 29475,
+      "streams": {
+        "stderr": {
+          "EOF_consumed_length_SHA_saved_full7_current_match": true,
+          "bytes": 256,
+          "current_full7_identity": [
+            16777231,
+            207560997,
+            33188,
+            1,
+            256,
+            1791498712175324077,
+            1791498712175324077
+          ],
+          "sha256_key": "opt_in_error"
+        },
+        "stdout": {
+          "EOF_consumed_length_SHA_saved_full7_current_match": true,
+          "bytes": 0,
+          "current_full7_identity": [
+            16777231,
+            207560996,
+            33188,
+            1,
+            0,
+            1791498712123787706,
+            1791498712123816373
+          ],
+          "sha256_key": "empty"
+        }
+      }
+    },
+    {
+      "compiler_only_argv_verified": true,
+      "label": "__m68k__",
+      "recorded_RC": 1,
+      "recorded_authenticated_reaped_original_group_absent": true,
+      "recorded_pid_pgid_sid": 29477,
+      "streams": {
+        "stderr": {
+          "EOF_consumed_length_SHA_saved_full7_current_match": true,
+          "bytes": 313,
+          "current_full7_identity": [
+            16777231,
+            207560999,
+            33188,
+            1,
+            313,
+            1791498712201483431,
+            1791498712201483431
+          ],
+          "sha256_key": "native_error"
+        },
+        "stdout": {
+          "EOF_consumed_length_SHA_saved_full7_current_match": true,
+          "bytes": 0,
+          "current_full7_identity": [
+            16777231,
+            207560998,
+            33188,
+            1,
+            0,
+            1791498712178967139,
+            1791498712179003806
+          ],
+          "sha256_key": "empty"
+        }
+      }
+    },
+    {
+      "compiler_only_argv_verified": true,
+      "label": "__mc68000__",
+      "recorded_RC": 1,
+      "recorded_authenticated_reaped_original_group_absent": true,
+      "recorded_pid_pgid_sid": 29479,
+      "streams": {
+        "stderr": {
+          "EOF_consumed_length_SHA_saved_full7_current_match": true,
+          "bytes": 313,
+          "current_full7_identity": [
+            16777231,
+            207561001,
+            33188,
+            1,
+            313,
+            1791498712226816739,
+            1791498712226816739
+          ],
+          "sha256_key": "native_error"
+        },
+        "stdout": {
+          "EOF_consumed_length_SHA_saved_full7_current_match": true,
+          "bytes": 0,
+          "current_full7_identity": [
+            16777231,
+            207561000,
+            33188,
+            1,
+            0,
+            1791498712204625698,
+            1791498712204662199
+          ],
+          "sha256_key": "empty"
+        }
+      }
+    },
+    {
+      "compiler_only_argv_verified": true,
+      "label": "__amigaos__",
+      "recorded_RC": 1,
+      "recorded_authenticated_reaped_original_group_absent": true,
+      "recorded_pid_pgid_sid": 29481,
+      "streams": {
+        "stderr": {
+          "EOF_consumed_length_SHA_saved_full7_current_match": true,
+          "bytes": 313,
+          "current_full7_identity": [
+            16777231,
+            207561004,
+            33188,
+            1,
+            313,
+            1791498712250263078,
+            1791498712250263078
+          ],
+          "sha256_key": "native_error"
+        },
+        "stdout": {
+          "EOF_consumed_length_SHA_saved_full7_current_match": true,
+          "bytes": 0,
+          "current_full7_identity": [
+            16777231,
+            207561003,
+            33188,
+            1,
+            0,
+            1791498712229693755,
+            1791498712229740838
+          ],
+          "sha256_key": "empty"
+        }
+      }
+    },
+    {
+      "compiler_only_argv_verified": true,
+      "label": "__AMIGA__",
+      "recorded_RC": 1,
+      "recorded_authenticated_reaped_original_group_absent": true,
+      "recorded_pid_pgid_sid": 29483,
+      "streams": {
+        "stderr": {
+          "EOF_consumed_length_SHA_saved_full7_current_match": true,
+          "bytes": 313,
+          "current_full7_identity": [
+            16777231,
+            207561006,
+            33188,
+            1,
+            313,
+            1791498712275780637,
+            1791498712275780637
+          ],
+          "sha256_key": "native_error"
+        },
+        "stdout": {
+          "EOF_consumed_length_SHA_saved_full7_current_match": true,
+          "bytes": 0,
+          "current_full7_identity": [
+            16777231,
+            207561005,
+            33188,
+            1,
+            0,
+            1791498712253929057,
+            1791498712253975765
+          ],
+          "sha256_key": "empty"
+        }
+      }
+    },
+    {
+      "compiler_only_argv_verified": true,
+      "label": "AMIGA",
+      "recorded_RC": 1,
+      "recorded_authenticated_reaped_original_group_absent": true,
+      "recorded_pid_pgid_sid": 29485,
+      "streams": {
+        "stderr": {
+          "EOF_consumed_length_SHA_saved_full7_current_match": true,
+          "bytes": 313,
+          "current_full7_identity": [
+            16777231,
+            207561009,
+            33188,
+            1,
+            313,
+            1791498712300952527,
+            1791498712300952527
+          ],
+          "sha256_key": "native_error"
+        },
+        "stdout": {
+          "EOF_consumed_length_SHA_saved_full7_current_match": true,
+          "bytes": 0,
+          "current_full7_identity": [
+            16777231,
+            207561008,
+            33188,
+            1,
+            0,
+            1791498712279061405,
+            1791498712279108155
+          ],
+          "sha256_key": "empty"
+        }
+      }
+    }
+  ],
+  "clock_boundary": "Saved elapsed-before-receipt and Root-reported tool wall are distinct observations; no equality/comparability or device-timing claim.",
+  "external_root_reported_result": {
+    "Root_full_saved_readback_output": "32ff43",
+    "marker": "SIX NEGATIVE GUARDS PASS",
+    "reported_tool_wall_seconds": 0.114877667,
+    "source": "Root-reported actual caller result, not independently observed or replayed by auditor",
+    "tool_RC": 0,
+    "tool_output": "c32f84"
+  },
+  "guard_literal_values": {
+    "native_error": "Two-lease transaction model is HOST-only; native admission remains closed",
+    "opt_in_error": "Explicit HOST two-lease model opt-in required"
+  },
+  "independent_saved_findings": [
+    "All twelve current ordinary0644/nlink1 raw streams match saved full7 identity, EOF, consumed byte length/hash and saved SHA. Six stdout files are empty. no_opt_in stderr is256 bytes and each native-alias stderr is313 bytes with the expected literal #error and one generated error.",
+    "Six saved records report authenticated PID=PGID=SID, positive direct wait/reap, compilerRC1 and original group absence. Auditor does not observe current processes/groups.",
+    "Saved argv records are compiler-only -fsyntax-only/-include checks. Receipt explicitly records no fixture or native executable run. Guard refusal qualifies HOST/native compile-time isolation only."
+  ],
+  "limits_and_nonclaims": [
+    "No compiler/header/Python/provider/source/controller reread, live process probe or compiler/script/fixture replay by audit.",
+    "No LeakSanitizer/leak check, native/SDK/IRQ/CIA/device/QUIET/disposal/exact-clock/target/listening acceptance.",
+    "V1 failed positive-fixture run remains retained historical evidence; guard refusals do not alter it.",
+    "Root will separately adopt three unchanged validated C/H payloads and scoped docs/evidence. This audit writes no repository paths.",
+    "Root reports matrix18 NOT_RUN and GitV4 uninvoked after protected16 diagnostic timeout; these external states are outside this saved-only audit."
+  ],
+  "receipt_path": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/receipt.json",
+  "receipt_pin": {
+    "bytes": 14954,
+    "identity": [
+      16777231,
+      207561010,
+      33188,
+      1,
+      14954,
+      1791498712305600803,
+      1791498712305600803
+    ],
+    "mode": 33188,
+    "nlink": 1,
+    "sha256": "e518ea729dceac70580a318eee08d6b0d695d60cbb0c06604e9fb31a1addae75"
+  },
+  "saved_elapsed_before_receipt_seconds": 0.18350833401200362,
+  "saved_recorded_source_header_pins": {
+    "header": {
+      "bytes": 5693,
+      "identity": [
+        16777231,
+        207514114,
+        33188,
+        1,
+        5693,
+        1791498042279647956,
+        1791498042279647956
+      ],
+      "sha256": "6b5e6b5e03a9b1b4bbdd2a9f9f0fbefae34928ed249995b095ea87a471afff09"
+    },
+    "source": {
+      "bytes": 9549,
+      "identity": [
+        16777231,
+        207523685,
+        33188,
+        1,
+        9549,
+        1791498541583968175,
+        1791498541583968175
+      ],
+      "sha256": "da5c0505c9347588a12deef28ab8edd3b2c27a9b964bb43a9f15d06e753ec099"
+    }
+  },
+  "scope": "Exact saved receipt and twelve named raw streams only; full reads/stat/hash, no replay or live probe",
+  "shared_SHA256_values": {
+    "empty": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "native_error": "386494ca3fd703cc8a5e668eb4c686dfa43391fc7efa017db1999e866b8436ce",
+    "opt_in_error": "52bddbe7e652347fc2c416a8ed0a9a5c9b8a8234f4ee4ba59428552818ec8965"
+  },
+  "status": "SAVED_SIX_COMPILER_ONLY_GUARD_REFUSALS_CONFIRMED_OUTER_RESULT_ROOT_REPORTED"
+}

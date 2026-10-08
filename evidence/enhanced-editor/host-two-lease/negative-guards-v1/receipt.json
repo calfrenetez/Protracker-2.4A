@@ -1,0 +1,561 @@
+{
+  "compiler": {
+    "bytes": 200560,
+    "identity": [
+      16777231,
+      1152921500312607511,
+      33261,
+      78,
+      200560,
+      1788431650000000000,
+      1788431650000000000
+    ],
+    "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2"
+  },
+  "elapsed_before_receipt": 0.18350833401200362,
+  "fixture_or_native_executable_run": false,
+  "header": {
+    "bytes": 5693,
+    "identity": [
+      16777231,
+      207514114,
+      33188,
+      1,
+      5693,
+      1791498042279647956,
+      1791498042279647956
+    ],
+    "sha256": "6b5e6b5e03a9b1b4bbdd2a9f9f0fbefae34928ed249995b095ea87a471afff09"
+  },
+  "python": {
+    "bytes": 52448,
+    "identity": [
+      16777231,
+      99971036,
+      33261,
+      1,
+      52448,
+      1760710046397545205,
+      1763734040806305177
+    ],
+    "sha256": "60ab7f8bb944386c0022689716e405a77117111d65110532a1889d713dddf757"
+  },
+  "records": [
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-fsyntax-only",
+        "-x",
+        "c",
+        "-include",
+        "/private/tmp/pt24g-two-lease-host-first-v2/source/host_two_lease.h",
+        "/dev/null"
+      ],
+      "authenticated": true,
+      "group_absent": true,
+      "label": "no_opt_in",
+      "pgid": 29475,
+      "pid": 29475,
+      "reaped": true,
+      "returncode": 1,
+      "sid": 29475,
+      "streams": {
+        "stderr": {
+          "EOF": true,
+          "bytes_consumed": 256,
+          "consumed_sha256": "52bddbe7e652347fc2c416a8ed0a9a5c9b8a8234f4ee4ba59428552818ec8965",
+          "creation_identity": [
+            16777231,
+            207560997,
+            33188,
+            1,
+            0,
+            1791498712123871332,
+            1791498712123895624
+          ],
+          "path": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/no_opt_in.stderr",
+          "saved": {
+            "bytes": 256,
+            "identity": [
+              16777231,
+              207560997,
+              33188,
+              1,
+              256,
+              1791498712175324077,
+              1791498712175324077
+            ],
+            "sha256": "52bddbe7e652347fc2c416a8ed0a9a5c9b8a8234f4ee4ba59428552818ec8965"
+          }
+        },
+        "stdout": {
+          "EOF": true,
+          "bytes_consumed": 0,
+          "consumed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "creation_identity": [
+            16777231,
+            207560996,
+            33188,
+            1,
+            0,
+            1791498712123787706,
+            1791498712123816373
+          ],
+          "path": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/no_opt_in.stdout",
+          "saved": {
+            "bytes": 0,
+            "identity": [
+              16777231,
+              207560996,
+              33188,
+              1,
+              0,
+              1791498712123787706,
+              1791498712123816373
+            ],
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-fsyntax-only",
+        "-x",
+        "c",
+        "-DPT_PRIVATE_TWO_LEASE_HOST_MODEL=1",
+        "-D__m68k__=1",
+        "-include",
+        "/private/tmp/pt24g-two-lease-host-first-v2/source/host_two_lease.h",
+        "/dev/null"
+      ],
+      "authenticated": true,
+      "group_absent": true,
+      "label": "__m68k__",
+      "pgid": 29477,
+      "pid": 29477,
+      "reaped": true,
+      "returncode": 1,
+      "sid": 29477,
+      "streams": {
+        "stderr": {
+          "EOF": true,
+          "bytes_consumed": 313,
+          "consumed_sha256": "386494ca3fd703cc8a5e668eb4c686dfa43391fc7efa017db1999e866b8436ce",
+          "creation_identity": [
+            16777231,
+            207560999,
+            33188,
+            1,
+            0,
+            1791498712179055973,
+            1791498712179075556
+          ],
+          "path": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/__m68k__.stderr",
+          "saved": {
+            "bytes": 313,
+            "identity": [
+              16777231,
+              207560999,
+              33188,
+              1,
+              313,
+              1791498712201483431,
+              1791498712201483431
+            ],
+            "sha256": "386494ca3fd703cc8a5e668eb4c686dfa43391fc7efa017db1999e866b8436ce"
+          }
+        },
+        "stdout": {
+          "EOF": true,
+          "bytes_consumed": 0,
+          "consumed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "creation_identity": [
+            16777231,
+            207560998,
+            33188,
+            1,
+            0,
+            1791498712178967139,
+            1791498712179003806
+          ],
+          "path": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/__m68k__.stdout",
+          "saved": {
+            "bytes": 0,
+            "identity": [
+              16777231,
+              207560998,
+              33188,
+              1,
+              0,
+              1791498712178967139,
+              1791498712179003806
+            ],
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-fsyntax-only",
+        "-x",
+        "c",
+        "-DPT_PRIVATE_TWO_LEASE_HOST_MODEL=1",
+        "-D__mc68000__=1",
+        "-include",
+        "/private/tmp/pt24g-two-lease-host-first-v2/source/host_two_lease.h",
+        "/dev/null"
+      ],
+      "authenticated": true,
+      "group_absent": true,
+      "label": "__mc68000__",
+      "pgid": 29479,
+      "pid": 29479,
+      "reaped": true,
+      "returncode": 1,
+      "sid": 29479,
+      "streams": {
+        "stderr": {
+          "EOF": true,
+          "bytes_consumed": 313,
+          "consumed_sha256": "386494ca3fd703cc8a5e668eb4c686dfa43391fc7efa017db1999e866b8436ce",
+          "creation_identity": [
+            16777231,
+            207561001,
+            33188,
+            1,
+            0,
+            1791498712204716616,
+            1791498712204757991
+          ],
+          "path": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/__mc68000__.stderr",
+          "saved": {
+            "bytes": 313,
+            "identity": [
+              16777231,
+              207561001,
+              33188,
+              1,
+              313,
+              1791498712226816739,
+              1791498712226816739
+            ],
+            "sha256": "386494ca3fd703cc8a5e668eb4c686dfa43391fc7efa017db1999e866b8436ce"
+          }
+        },
+        "stdout": {
+          "EOF": true,
+          "bytes_consumed": 0,
+          "consumed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "creation_identity": [
+            16777231,
+            207561000,
+            33188,
+            1,
+            0,
+            1791498712204625698,
+            1791498712204662199
+          ],
+          "path": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/__mc68000__.stdout",
+          "saved": {
+            "bytes": 0,
+            "identity": [
+              16777231,
+              207561000,
+              33188,
+              1,
+              0,
+              1791498712204625698,
+              1791498712204662199
+            ],
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-fsyntax-only",
+        "-x",
+        "c",
+        "-DPT_PRIVATE_TWO_LEASE_HOST_MODEL=1",
+        "-D__amigaos__=1",
+        "-include",
+        "/private/tmp/pt24g-two-lease-host-first-v2/source/host_two_lease.h",
+        "/dev/null"
+      ],
+      "authenticated": true,
+      "group_absent": true,
+      "label": "__amigaos__",
+      "pgid": 29481,
+      "pid": 29481,
+      "reaped": true,
+      "returncode": 1,
+      "sid": 29481,
+      "streams": {
+        "stderr": {
+          "EOF": true,
+          "bytes_consumed": 313,
+          "consumed_sha256": "386494ca3fd703cc8a5e668eb4c686dfa43391fc7efa017db1999e866b8436ce",
+          "creation_identity": [
+            16777231,
+            207561004,
+            33188,
+            1,
+            0,
+            1791498712229800255,
+            1791498712229822922
+          ],
+          "path": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/__amigaos__.stderr",
+          "saved": {
+            "bytes": 313,
+            "identity": [
+              16777231,
+              207561004,
+              33188,
+              1,
+              313,
+              1791498712250263078,
+              1791498712250263078
+            ],
+            "sha256": "386494ca3fd703cc8a5e668eb4c686dfa43391fc7efa017db1999e866b8436ce"
+          }
+        },
+        "stdout": {
+          "EOF": true,
+          "bytes_consumed": 0,
+          "consumed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "creation_identity": [
+            16777231,
+            207561003,
+            33188,
+            1,
+            0,
+            1791498712229693755,
+            1791498712229740838
+          ],
+          "path": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/__amigaos__.stdout",
+          "saved": {
+            "bytes": 0,
+            "identity": [
+              16777231,
+              207561003,
+              33188,
+              1,
+              0,
+              1791498712229693755,
+              1791498712229740838
+            ],
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-fsyntax-only",
+        "-x",
+        "c",
+        "-DPT_PRIVATE_TWO_LEASE_HOST_MODEL=1",
+        "-D__AMIGA__=1",
+        "-include",
+        "/private/tmp/pt24g-two-lease-host-first-v2/source/host_two_lease.h",
+        "/dev/null"
+      ],
+      "authenticated": true,
+      "group_absent": true,
+      "label": "__AMIGA__",
+      "pgid": 29483,
+      "pid": 29483,
+      "reaped": true,
+      "returncode": 1,
+      "sid": 29483,
+      "streams": {
+        "stderr": {
+          "EOF": true,
+          "bytes_consumed": 313,
+          "consumed_sha256": "386494ca3fd703cc8a5e668eb4c686dfa43391fc7efa017db1999e866b8436ce",
+          "creation_identity": [
+            16777231,
+            207561006,
+            33188,
+            1,
+            0,
+            1791498712254034891,
+            1791498712254059891
+          ],
+          "path": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/__AMIGA__.stderr",
+          "saved": {
+            "bytes": 313,
+            "identity": [
+              16777231,
+              207561006,
+              33188,
+              1,
+              313,
+              1791498712275780637,
+              1791498712275780637
+            ],
+            "sha256": "386494ca3fd703cc8a5e668eb4c686dfa43391fc7efa017db1999e866b8436ce"
+          }
+        },
+        "stdout": {
+          "EOF": true,
+          "bytes_consumed": 0,
+          "consumed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "creation_identity": [
+            16777231,
+            207561005,
+            33188,
+            1,
+            0,
+            1791498712253929057,
+            1791498712253975765
+          ],
+          "path": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/__AMIGA__.stdout",
+          "saved": {
+            "bytes": 0,
+            "identity": [
+              16777231,
+              207561005,
+              33188,
+              1,
+              0,
+              1791498712253929057,
+              1791498712253975765
+            ],
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      }
+    },
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-fsyntax-only",
+        "-x",
+        "c",
+        "-DPT_PRIVATE_TWO_LEASE_HOST_MODEL=1",
+        "-DAMIGA=1",
+        "-include",
+        "/private/tmp/pt24g-two-lease-host-first-v2/source/host_two_lease.h",
+        "/dev/null"
+      ],
+      "authenticated": true,
+      "group_absent": true,
+      "label": "AMIGA",
+      "pgid": 29485,
+      "pid": 29485,
+      "reaped": true,
+      "returncode": 1,
+      "sid": 29485,
+      "streams": {
+        "stderr": {
+          "EOF": true,
+          "bytes_consumed": 313,
+          "consumed_sha256": "386494ca3fd703cc8a5e668eb4c686dfa43391fc7efa017db1999e866b8436ce",
+          "creation_identity": [
+            16777231,
+            207561009,
+            33188,
+            1,
+            0,
+            1791498712279174072,
+            1791498712279216614
+          ],
+          "path": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/AMIGA.stderr",
+          "saved": {
+            "bytes": 313,
+            "identity": [
+              16777231,
+              207561009,
+              33188,
+              1,
+              313,
+              1791498712300952527,
+              1791498712300952527
+            ],
+            "sha256": "386494ca3fd703cc8a5e668eb4c686dfa43391fc7efa017db1999e866b8436ce"
+          }
+        },
+        "stdout": {
+          "EOF": true,
+          "bytes_consumed": 0,
+          "consumed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "creation_identity": [
+            16777231,
+            207561008,
+            33188,
+            1,
+            0,
+            1791498712279061405,
+            1791498712279108155
+          ],
+          "path": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/AMIGA.stdout",
+          "saved": {
+            "bytes": 0,
+            "identity": [
+              16777231,
+              207561008,
+              33188,
+              1,
+              0,
+              1791498712279061405,
+              1791498712279108155
+            ],
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      }
+    }
+  ],
+  "source": {
+    "bytes": 9549,
+    "identity": [
+      16777231,
+      207523685,
+      33188,
+      1,
+      9549,
+      1791498541583968175,
+      1791498541583968175
+    ],
+    "sha256": "da5c0505c9347588a12deef28ab8edd3b2c27a9b964bb43a9f15d06e753ec099"
+  },
+  "status": "SIX_NEGATIVE_GUARDS_PASS"
+}

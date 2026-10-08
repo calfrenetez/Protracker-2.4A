@@ -1,0 +1,5 @@
+In file included from <built-in>:1:
+/private/tmp/pt24g-two-lease-host-first-v2/source/host_two_lease.h:10:2: error: "Two-lease transaction model is HOST-only; native admission remains closed"
+   10 | #error "Two-lease transaction model is HOST-only; native admission remains closed"
+      |  ^
+1 error generated.

@@ -1,0 +1,184 @@
+{
+  "audit_operations": "Exact OUTv2 receipt+four raw saved-file reads/stat/hash and private audit writes only. No executable/staged/origin/provider/controller/candidate/import/AST/compiler/runtime/live-process probe/replay/repository/target operation",
+  "clock_boundary": "Saved pre-receipt monotonic elapsed, Root-reported final-marker elapsed and tool wall duration are separate observations; no equality or substituted timing claim.",
+  "external_root_reported_caller_result": {
+    "actual_tool_RC": 0,
+    "actual_tool_output": "00c869",
+    "final_marker": "STANDALONE TWO LEASE HOST CONTROLLER PASS",
+    "root_full_saved_readback_output": "370ae5",
+    "root_reported_final_marker_elapsed_seconds": 1.01704625,
+    "root_reported_tool_wall_seconds": 0.975809292,
+    "source": "Root reported actual caller result; not independently observed/replayed by this saved-only auditor"
+  },
+  "independent_saved_file_findings": [
+    "Exact15941-byte receipt pin verified and entire JSON read. Each of four current raw saved files completely read and SHA/size/mode/nlink/seven-field identity verified against finalized receipt consumed/written/saved fields.",
+    "Runtime stdout is exactly the94-byte two-line11-group oracle, SHA888e9a3379c9440a2e1faf26c9b0717c1f8c0e86f5573b25e211692c45451e4d; both compiler streams and runtime stderr are empty. No sanitizer diagnostics appear on saved raw channels.",
+    "Receipt records both actual child RC0, authenticated PID=PGID=SID, positive wait/reap, original group absence and no cleanup errors. Auditor makes no live process/group probe.",
+    "Receipt internally records identical strict-seven-field staged three-source maps before/after compile/run and identical290760-byte executable pins/identities before/after. Auditor does not read staged sources or executable.",
+    "Receipt internally records six origin before/after objects equal, empty timestamp diagnostics, content/stable5 accepted and old_origin_full7_passed False. Four fixed before/after provider/controller/context records agree. Auditor does not read those sources/providers/controller/context."
+  ],
+  "limits_and_nonclaims": [
+    "Together with Root-reported outerRC0/marker, saved evidence supports the standalone HOST11-group fixture result only; this audit does not independently observe the caller tool result.",
+    "No LeakSanitizer/leak-detection qualification; ASan/UBSan/enabled assertions and strict C99 recipe recorded, with unsupported detect_leaks option absent.",
+    "Retained V1 failure remains unchanged historical evidence; V2 does not retroactively finalize V1 runtime custody or turn V1 into a pass.",
+    "Repository adoption, matrix/context reconciliation and six separate negative compiler guards remain PENDING/NOT_RUN at this creation state.",
+    "No native/IRQ/SDK/CIA/QUIET/disposal/exact-clock/device/target/listening acceptance; implicit Apple compiler/header/runtime closure remains unqualified."
+  ],
+  "raw_streams": {
+    "compile.stderr": {
+      "all_controller_stream_fields_finalized_and_match_current_saved_bytes": true,
+      "bytes": 0,
+      "identity": [
+        16777231,
+        207514120,
+        33188,
+        1,
+        0,
+        1791498042287794586,
+        1791498042287826211
+      ],
+      "mode": 33188,
+      "nlink": 1,
+      "path": "/private/tmp/pt24g-two-lease-host-first-v2/compile.stderr",
+      "raw_ascii": "",
+      "recorded_EOF": true,
+      "recorded_consumed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compile.stdout": {
+      "all_controller_stream_fields_finalized_and_match_current_saved_bytes": true,
+      "bytes": 0,
+      "identity": [
+        16777231,
+        207514119,
+        33188,
+        1,
+        0,
+        1791498042287709752,
+        1791498042287737835
+      ],
+      "mode": 33188,
+      "nlink": 1,
+      "path": "/private/tmp/pt24g-two-lease-host-first-v2/compile.stdout",
+      "raw_ascii": "",
+      "recorded_EOF": true,
+      "recorded_consumed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "run.stderr": {
+      "all_controller_stream_fields_finalized_and_match_current_saved_bytes": true,
+      "bytes": 0,
+      "identity": [
+        16777231,
+        207514190,
+        33188,
+        1,
+        0,
+        1791498043007616750,
+        1791498043007646459
+      ],
+      "mode": 33188,
+      "nlink": 1,
+      "path": "/private/tmp/pt24g-two-lease-host-first-v2/run.stderr",
+      "raw_ascii": "",
+      "recorded_EOF": true,
+      "recorded_consumed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "run.stdout": {
+      "all_controller_stream_fields_finalized_and_match_current_saved_bytes": true,
+      "bytes": 94,
+      "identity": [
+        16777231,
+        207514189,
+        33188,
+        1,
+        94,
+        1791498043278218977,
+        1791498043278218977
+      ],
+      "mode": 33188,
+      "nlink": 1,
+      "path": "/private/tmp/pt24g-two-lease-host-first-v2/run.stdout",
+      "raw_ascii": "HOST two-lease fixture assertion groups: 11\nHOST_TWO_LEASE_TRANSACTION_FIXTURE_SOURCE_V1_PASS\n",
+      "recorded_EOF": true,
+      "recorded_consumed_sha256": "888e9a3379c9440a2e1faf26c9b0717c1f8c0e86f5573b25e211692c45451e4d",
+      "sha256": "888e9a3379c9440a2e1faf26c9b0717c1f8c0e86f5573b25e211692c45451e4d"
+    }
+  },
+  "recorded_children": [
+    {
+      "cleanup_errors": [],
+      "elapsed_seconds": 0.7188827919890173,
+      "group_absent": true,
+      "label": "compile",
+      "pgid": 26129,
+      "pid": 26129,
+      "reaped": true,
+      "returncode": 0,
+      "session_authenticated": true,
+      "sid": 26129
+    },
+    {
+      "cleanup_errors": [],
+      "elapsed_seconds": 0.2753450839954894,
+      "group_absent": true,
+      "label": "run",
+      "pgid": 26135,
+      "pid": 26135,
+      "reaped": true,
+      "returncode": 0,
+      "session_authenticated": true,
+      "sid": 26135
+    }
+  ],
+  "recorded_elapsed_before_receipt_seconds": 1.0150637910119258,
+  "recorded_environment": {
+    "ASAN_OPTIONS": "halt_on_error=1:abort_on_error=1",
+    "LANG": "C",
+    "LC_ALL": "C",
+    "PATH": "/usr/bin:/bin",
+    "TMPDIR": "/private/tmp/pt24g-two-lease-host-first-v2",
+    "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1"
+  },
+  "saved_receipt_pin": {
+    "bytes": 15941,
+    "identity": [
+      16777231,
+      207514201,
+      33188,
+      1,
+      15941,
+      1791498043285755520,
+      1791498043287186903
+    ],
+    "mode": 33188,
+    "nlink": 1,
+    "path": "/private/tmp/pt24g-two-lease-host-first-v2/receipt.json",
+    "sha256": "6c17ef80d683f9b8c093d4223d876460c5738252d449828630f8e70e9e3cbea5"
+  },
+  "saved_recorded_custody_comparisons": {
+    "executable_before_after_equal": true,
+    "executable_recorded_pin": {
+      "bytes": 290760,
+      "identity": [
+        16777231,
+        207514178,
+        33261,
+        1,
+        290760,
+        1791498042980758641,
+        1791498042980758641
+      ],
+      "mode": 33261,
+      "sha256": "3dc7781c645a50c8bb6a8009be8f99439278499ac44619d5ef80c3747cfc7aff"
+    },
+    "fixed_four_before_after_equal": true,
+    "old_origin_full7_passed": false,
+    "origin_six_before_after_equal": true,
+    "origin_timestamp_drift": [],
+    "staged_three_maps_equal": true
+  },
+  "scope": "Exact saved V2 receipt plus four raw streams only; no replay or live state probe",
+  "status": "SAVED_ACTUAL_V2_HOST_EVIDENCE_CONFIRMED_OUTER_RESULT_ROOT_REPORTED"
+}

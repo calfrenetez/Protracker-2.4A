@@ -1,0 +1,5 @@
+In file included from <built-in>:1:
+/private/tmp/pt24g-two-lease-host-first-v2/source/host_two_lease.h:7:2: error: "Explicit HOST two-lease model opt-in required"
+    7 | #error "Explicit HOST two-lease model opt-in required"
+      |  ^
+1 error generated.

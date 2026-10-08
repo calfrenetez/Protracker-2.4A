@@ -1,0 +1,162 @@
+{
+  "audit_operations": "Only exact OUT receipt+four raw saved-file reads/stat/hash and private audit writes. No live group probe, controller/candidate/import/AST/compiler/runtime/repository/origin/provider reread, retry or target action",
+  "conclusions": [
+    "Saved compile record reports RC0 with authenticated PID24619==PGID==SID, positive reap/group absence and fully finalized empty stdout/stderr; independent current saved bytes and seven-field identities match those recorded fields.",
+    "Saved run record reports RC-6 with authenticated PID24625==PGID==SID and positive reap/group absence. Exact saved stdout is empty and stderr is the75-byte unsupported detect_leaks diagnostic.",
+    "Run records EOF and written-file identities, but controller consumed_sha256/pin/saved_identity fields are absent after RC gate first failure. Independent current saved-byte pins do not retrospectively finalize controller runtime custody.",
+    "No executed11-group assertion result or two-line oracle success is established. Whole-run final source/fixed-provider/executable custody remains unfinalized.",
+    "Saved staging-before and after-compile maps agree in the receipt only; this audit does not reread staged files, sources, providers or controller.",
+    "This platform failure establishes no leak-detection qualification or native/device/QUIET/timing/target acceptance."
+  ],
+  "first_failure_retained_exact": {
+    "active": {
+      "operation": "run",
+      "phase": "complete_pipe_capture"
+    },
+    "elapsed": 1.4273004999849945,
+    "reason": "actual child RC is -6",
+    "type": "ValueError"
+  },
+  "raw_streams": {
+    "compile.stderr": {
+      "bytes": 0,
+      "controller_finalized_consumed_sha_pin_saved_identity": true,
+      "mode": 33188,
+      "nlink": 1,
+      "path": "/private/tmp/pt24g-two-lease-host-first-v1/compile.stderr",
+      "raw_ascii": "",
+      "recorded_EOF": true,
+      "recorded_bytes_consumed": 0,
+      "saved_file_identity": [
+        16777231,
+        207500817,
+        33188,
+        1,
+        0,
+        1791497724302236047,
+        1791497724302252589
+      ],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compile.stdout": {
+      "bytes": 0,
+      "controller_finalized_consumed_sha_pin_saved_identity": true,
+      "mode": 33188,
+      "nlink": 1,
+      "path": "/private/tmp/pt24g-two-lease-host-first-v1/compile.stdout",
+      "raw_ascii": "",
+      "recorded_EOF": true,
+      "recorded_bytes_consumed": 0,
+      "saved_file_identity": [
+        16777231,
+        207500816,
+        33188,
+        1,
+        0,
+        1791497724302180838,
+        1791497724302198505
+      ],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "run.stderr": {
+      "bytes": 75,
+      "controller_finalized_consumed_sha_pin_saved_identity": false,
+      "mode": 33188,
+      "nlink": 1,
+      "path": "/private/tmp/pt24g-two-lease-host-first-v1/run.stderr",
+      "raw_ascii": "==24625==AddressSanitizer: detect_leaks is not supported on this platform.\n",
+      "recorded_EOF": true,
+      "recorded_bytes_consumed": 75,
+      "saved_file_identity": [
+        16777231,
+        207500855,
+        33188,
+        1,
+        75,
+        1791497725693958608,
+        1791497725693958608
+      ],
+      "sha256": "238e0d4852f636041cee4b8b230caaa3612e50517c1deae803308b5668618d39"
+    },
+    "run.stdout": {
+      "bytes": 0,
+      "controller_finalized_consumed_sha_pin_saved_identity": false,
+      "mode": 33188,
+      "nlink": 1,
+      "path": "/private/tmp/pt24g-two-lease-host-first-v1/run.stdout",
+      "raw_ascii": "",
+      "recorded_EOF": true,
+      "recorded_bytes_consumed": 0,
+      "saved_file_identity": [
+        16777231,
+        207500854,
+        33188,
+        1,
+        0,
+        1791497725325310164,
+        1791497725325337080
+      ],
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "receipt_pin": {
+    "bytes": 10114,
+    "mode": 33188,
+    "nlink": 1,
+    "path": "/private/tmp/pt24g-two-lease-host-first-v1/receipt.json",
+    "saved_file_identity": [
+      16777231,
+      207500859,
+      33188,
+      1,
+      10114,
+      1791497725720736425,
+      1791497725722546477
+    ],
+    "sha256": "c0b2713685369542ff76dcbcd6661ee7e14be0180b3d8842e286f5ea8f1c8598"
+  },
+  "recorded_children": [
+    {
+      "cleanup_errors": [],
+      "group_absent": true,
+      "label": "compile",
+      "pgid": 24619,
+      "pid": 24619,
+      "reaped": true,
+      "returncode": 0,
+      "session_authenticated": true,
+      "sid": 24619
+    },
+    {
+      "cleanup_errors": [],
+      "group_absent": true,
+      "label": "run",
+      "pgid": 24625,
+      "pid": 24625,
+      "reaped": true,
+      "returncode": -6,
+      "session_authenticated": true,
+      "sid": 24625
+    }
+  ],
+  "root_supplied_outer_evidence_not_independently_replayed": {
+    "actual_tool_RC": 1,
+    "final_output": "0e2841",
+    "launch_output": "9f3d46",
+    "root_saved_readback_output": "6b1609",
+    "session": 12180
+  },
+  "routine_distinct_v2_scope_supplied_by_root": "New private namespace; remove unsupported ASAN detect_leaks=1 option only, retain halt_on_error/abort_on_error, UBSan, strict C99/enabled asserts/fixture/oracle/gates/limits; no leak qualification",
+  "saved_status": "FIRST_FAILURE_RETAINED_NO_RETRY",
+  "scope": "Independent saved-evidence audit of exact receipt and four raw streams only",
+  "status": "SAVED_V1_FIRST_FAILURE_CONFIRMED_NOT_A_HOST_PASS",
+  "unfinalized_or_unknown_final_fields": [
+    "fixture_groups",
+    "origin_after",
+    "fixed_after",
+    "staged_full7_after_run",
+    "executable_after",
+    "executable",
+    "environment"
+  ]
+}

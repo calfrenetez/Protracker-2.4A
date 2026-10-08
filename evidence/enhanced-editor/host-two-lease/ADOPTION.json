@@ -1,0 +1,261 @@
+{
+  "changed_production": false,
+  "elapsed": 0.03710704200784676,
+  "format_clock18_adopted": false,
+  "records": [
+    {
+      "destination": "tests/host_two_lease_model/host_two_lease.h",
+      "pin": {
+        "bytes": 5693,
+        "mode": 33188,
+        "sha256": "6b5e6b5e03a9b1b4bbdd2a9f9f0fbefae34928ed249995b095ea87a471afff09"
+      },
+      "source": "/private/tmp/pt24g-two-lease-host-first-v2/source/host_two_lease.h"
+    },
+    {
+      "destination": "tests/host_two_lease_model/host_two_lease.c",
+      "pin": {
+        "bytes": 14953,
+        "mode": 33188,
+        "sha256": "c5d004bc992f9683768743168109de9658a4905705580783e9330234c7a77ddb"
+      },
+      "source": "/private/tmp/pt24g-two-lease-host-first-v2/source/host_two_lease.c"
+    },
+    {
+      "destination": "tests/host_two_lease_model/test_host_two_lease.c",
+      "pin": {
+        "bytes": 47653,
+        "mode": 33188,
+        "sha256": "5aba3a4e18614cc1725119ce9ed5cc4d7ad5c60c93814de84c36894fdf0e78ee"
+      },
+      "source": "/private/tmp/pt24g-two-lease-host-first-v2/source/test_host_two_lease.c"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/positive-v2/receipt.json",
+      "pin": {
+        "bytes": 15941,
+        "mode": 33188,
+        "sha256": "6c17ef80d683f9b8c093d4223d876460c5738252d449828630f8e70e9e3cbea5"
+      },
+      "source": "/private/tmp/pt24g-two-lease-host-first-v2/receipt.json"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/positive-v2/compile.stdout",
+      "pin": {
+        "bytes": 0,
+        "mode": 33188,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "source": "/private/tmp/pt24g-two-lease-host-first-v2/compile.stdout"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/positive-v2/compile.stderr",
+      "pin": {
+        "bytes": 0,
+        "mode": 33188,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "source": "/private/tmp/pt24g-two-lease-host-first-v2/compile.stderr"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/positive-v2/run.stdout",
+      "pin": {
+        "bytes": 94,
+        "mode": 33188,
+        "sha256": "888e9a3379c9440a2e1faf26c9b0717c1f8c0e86f5573b25e211692c45451e4d"
+      },
+      "source": "/private/tmp/pt24g-two-lease-host-first-v2/run.stdout"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/positive-v2/run.stderr",
+      "pin": {
+        "bytes": 0,
+        "mode": 33188,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "source": "/private/tmp/pt24g-two-lease-host-first-v2/run.stderr"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/first-failure-v1/receipt.json",
+      "pin": {
+        "bytes": 10114,
+        "mode": 33188,
+        "sha256": "c0b2713685369542ff76dcbcd6661ee7e14be0180b3d8842e286f5ea8f1c8598"
+      },
+      "source": "/private/tmp/pt24g-two-lease-host-first-v1/receipt.json"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/first-failure-v1/compile.stdout",
+      "pin": {
+        "bytes": 0,
+        "mode": 33188,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "source": "/private/tmp/pt24g-two-lease-host-first-v1/compile.stdout"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/first-failure-v1/compile.stderr",
+      "pin": {
+        "bytes": 0,
+        "mode": 33188,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "source": "/private/tmp/pt24g-two-lease-host-first-v1/compile.stderr"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/first-failure-v1/run.stdout",
+      "pin": {
+        "bytes": 0,
+        "mode": 33188,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "source": "/private/tmp/pt24g-two-lease-host-first-v1/run.stdout"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/first-failure-v1/run.stderr",
+      "pin": {
+        "bytes": 75,
+        "mode": 33188,
+        "sha256": "238e0d4852f636041cee4b8b230caaa3612e50517c1deae803308b5668618d39"
+      },
+      "source": "/private/tmp/pt24g-two-lease-host-first-v1/run.stderr"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/positive-v2/SAVED_AUDIT.json",
+      "pin": {
+        "bytes": 7735,
+        "mode": 33188,
+        "sha256": "a43ac04d5b73bda8b9f5ec40ed835b1b8cd76fdea66b46fd58ecf5c9d6f1e2d2"
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-two-lease-host-controller-v2-saved-actual-audit-v1/AUDIT.json"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/first-failure-v1/SAVED_AUDIT.json",
+      "pin": {
+        "bytes": 5750,
+        "mode": 33188,
+        "sha256": "77171211682cdb02bc828c9666e679a4bdad293e614222e9759d335eadd5496f"
+      },
+      "source": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/paired-quantized-song-producer/v1/root-two-lease-host-controller-v1-saved-failure-audit-v1/AUDIT.json"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/negative-guards-v1/receipt.json",
+      "pin": {
+        "bytes": 14954,
+        "mode": 33188,
+        "sha256": "e518ea729dceac70580a318eee08d6b0d695d60cbb0c06604e9fb31a1addae75"
+      },
+      "source": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/receipt.json"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/negative-guards-v1/no_opt_in.stdout",
+      "pin": {
+        "bytes": 0,
+        "mode": 33188,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "source": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/no_opt_in.stdout"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/negative-guards-v1/no_opt_in.stderr",
+      "pin": {
+        "bytes": 256,
+        "mode": 33188,
+        "sha256": "52bddbe7e652347fc2c416a8ed0a9a5c9b8a8234f4ee4ba59428552818ec8965"
+      },
+      "source": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/no_opt_in.stderr"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/negative-guards-v1/__m68k__.stdout",
+      "pin": {
+        "bytes": 0,
+        "mode": 33188,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "source": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/__m68k__.stdout"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/negative-guards-v1/__m68k__.stderr",
+      "pin": {
+        "bytes": 313,
+        "mode": 33188,
+        "sha256": "386494ca3fd703cc8a5e668eb4c686dfa43391fc7efa017db1999e866b8436ce"
+      },
+      "source": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/__m68k__.stderr"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/negative-guards-v1/__mc68000__.stdout",
+      "pin": {
+        "bytes": 0,
+        "mode": 33188,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "source": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/__mc68000__.stdout"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/negative-guards-v1/__mc68000__.stderr",
+      "pin": {
+        "bytes": 313,
+        "mode": 33188,
+        "sha256": "386494ca3fd703cc8a5e668eb4c686dfa43391fc7efa017db1999e866b8436ce"
+      },
+      "source": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/__mc68000__.stderr"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/negative-guards-v1/__amigaos__.stdout",
+      "pin": {
+        "bytes": 0,
+        "mode": 33188,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "source": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/__amigaos__.stdout"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/negative-guards-v1/__amigaos__.stderr",
+      "pin": {
+        "bytes": 313,
+        "mode": 33188,
+        "sha256": "386494ca3fd703cc8a5e668eb4c686dfa43391fc7efa017db1999e866b8436ce"
+      },
+      "source": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/__amigaos__.stderr"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/negative-guards-v1/__AMIGA__.stdout",
+      "pin": {
+        "bytes": 0,
+        "mode": 33188,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "source": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/__AMIGA__.stdout"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/negative-guards-v1/__AMIGA__.stderr",
+      "pin": {
+        "bytes": 313,
+        "mode": 33188,
+        "sha256": "386494ca3fd703cc8a5e668eb4c686dfa43391fc7efa017db1999e866b8436ce"
+      },
+      "source": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/__AMIGA__.stderr"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/negative-guards-v1/AMIGA.stdout",
+      "pin": {
+        "bytes": 0,
+        "mode": 33188,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "source": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/AMIGA.stdout"
+    },
+    {
+      "destination": "evidence/enhanced-editor/host-two-lease/negative-guards-v1/AMIGA.stderr",
+      "pin": {
+        "bytes": 313,
+        "mode": 33188,
+        "sha256": "386494ca3fd703cc8a5e668eb4c686dfa43391fc7efa017db1999e866b8436ce"
+      },
+      "source": "/private/tmp/pt24g-two-lease-negative-guards-first-v1/AMIGA.stderr"
+    }
+  ],
+  "status": "THREE_VALIDATED_HOST_PAYLOADS_ADOPTED_UNCHANGED",
+  "target_operations": false
+}

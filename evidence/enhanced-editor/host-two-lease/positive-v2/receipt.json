@@ -1,0 +1,678 @@
+{
+  "automatic_retry": false,
+  "commands": [
+    {
+      "argv": [
+        "/usr/bin/cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-UNDEBUG",
+        "-fsanitize=address,undefined",
+        "-fno-omit-frame-pointer",
+        "-DPT_PRIVATE_TWO_LEASE_HOST_MODEL=1",
+        "-I/private/tmp/pt24g-two-lease-host-first-v2/source",
+        "/private/tmp/pt24g-two-lease-host-first-v2/source/host_two_lease.c",
+        "/private/tmp/pt24g-two-lease-host-first-v2/source/test_host_two_lease.c",
+        "-o",
+        "/private/tmp/pt24g-two-lease-host-first-v2/fixture"
+      ],
+      "cleanup_errors": [],
+      "cwd": "/private/tmp/pt24g-two-lease-host-first-v2/source",
+      "elapsed_seconds": 0.7188827919890173,
+      "group_absent": true,
+      "label": "compile",
+      "launch_attempted": true,
+      "limit_seconds": 120,
+      "pgid": 26129,
+      "pid": 26129,
+      "reaped": true,
+      "returncode": 0,
+      "session_authenticated": true,
+      "sid": 26129,
+      "streams": {
+        "stderr": {
+          "EOF": true,
+          "bytes_consumed": 0,
+          "consumed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "creation_identity": [
+            16777231,
+            207514120,
+            33188,
+            1,
+            0,
+            1791498042287794586,
+            1791498042287826211
+          ],
+          "path": "/private/tmp/pt24g-two-lease-host-first-v2/compile.stderr",
+          "pin": {
+            "bytes": 0,
+            "mode": 33188,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "saved_identity": [
+            16777231,
+            207514120,
+            33188,
+            1,
+            0,
+            1791498042287794586,
+            1791498042287826211
+          ],
+          "written_identity": [
+            16777231,
+            207514120,
+            33188,
+            1,
+            0,
+            1791498042287794586,
+            1791498042287826211
+          ]
+        },
+        "stdout": {
+          "EOF": true,
+          "bytes_consumed": 0,
+          "consumed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "creation_identity": [
+            16777231,
+            207514119,
+            33188,
+            1,
+            0,
+            1791498042287709752,
+            1791498042287737835
+          ],
+          "path": "/private/tmp/pt24g-two-lease-host-first-v2/compile.stdout",
+          "pin": {
+            "bytes": 0,
+            "mode": 33188,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "saved_identity": [
+            16777231,
+            207514119,
+            33188,
+            1,
+            0,
+            1791498042287709752,
+            1791498042287737835
+          ],
+          "written_identity": [
+            16777231,
+            207514119,
+            33188,
+            1,
+            0,
+            1791498042287709752,
+            1791498042287737835
+          ]
+        }
+      }
+    },
+    {
+      "argv": [
+        "/private/tmp/pt24g-two-lease-host-first-v2/fixture"
+      ],
+      "cleanup_errors": [],
+      "cwd": "/private/tmp/pt24g-two-lease-host-first-v2/source",
+      "elapsed_seconds": 0.2753450839954894,
+      "group_absent": true,
+      "label": "run",
+      "launch_attempted": true,
+      "limit_seconds": 30,
+      "pgid": 26135,
+      "pid": 26135,
+      "reaped": true,
+      "returncode": 0,
+      "session_authenticated": true,
+      "sid": 26135,
+      "streams": {
+        "stderr": {
+          "EOF": true,
+          "bytes_consumed": 0,
+          "consumed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "creation_identity": [
+            16777231,
+            207514190,
+            33188,
+            1,
+            0,
+            1791498043007616750,
+            1791498043007646459
+          ],
+          "path": "/private/tmp/pt24g-two-lease-host-first-v2/run.stderr",
+          "pin": {
+            "bytes": 0,
+            "mode": 33188,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "saved_identity": [
+            16777231,
+            207514190,
+            33188,
+            1,
+            0,
+            1791498043007616750,
+            1791498043007646459
+          ],
+          "written_identity": [
+            16777231,
+            207514190,
+            33188,
+            1,
+            0,
+            1791498043007616750,
+            1791498043007646459
+          ]
+        },
+        "stdout": {
+          "EOF": true,
+          "bytes_consumed": 94,
+          "consumed_sha256": "888e9a3379c9440a2e1faf26c9b0717c1f8c0e86f5573b25e211692c45451e4d",
+          "creation_identity": [
+            16777231,
+            207514189,
+            33188,
+            1,
+            0,
+            1791498043007548083,
+            1791498043007570375
+          ],
+          "path": "/private/tmp/pt24g-two-lease-host-first-v2/run.stdout",
+          "pin": {
+            "bytes": 94,
+            "mode": 33188,
+            "sha256": "888e9a3379c9440a2e1faf26c9b0717c1f8c0e86f5573b25e211692c45451e4d"
+          },
+          "saved_identity": [
+            16777231,
+            207514189,
+            33188,
+            1,
+            94,
+            1791498043278218977,
+            1791498043278218977
+          ],
+          "written_identity": [
+            16777231,
+            207514189,
+            33188,
+            1,
+            94,
+            1791498043278218977,
+            1791498043278218977
+          ]
+        }
+      }
+    }
+  ],
+  "compiler": {
+    "bytes": 200560,
+    "identity": [
+      16777231,
+      1152921500312607511,
+      33261,
+      78,
+      200560,
+      1788431650000000000,
+      1788431650000000000
+    ],
+    "mode": 33261,
+    "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2"
+  },
+  "context": {
+    "bytes": 5131,
+    "identity": [
+      16777231,
+      207502551,
+      33188,
+      1,
+      5131,
+      1791497807445815338,
+      1791497807658946243
+    ],
+    "mode": 33188,
+    "sha256": "68620f603f187224e5ae08a6152689b241f73adf4ff7a723eb12bd4941539a3f"
+  },
+  "controller": {
+    "bytes": 25136,
+    "identity": [
+      16777231,
+      207502550,
+      33188,
+      1,
+      25136,
+      1791497807443774785,
+      1791497807655161638
+    ],
+    "mode": 33188,
+    "sha256": "b7b8ca8437cb661a8196fc4adac01d8993b46e8236fe930575be0ae799a91ba7"
+  },
+  "elapsed_before_receipt": 1.0150637910119258,
+  "environment": {
+    "ASAN_OPTIONS": "halt_on_error=1:abort_on_error=1",
+    "LANG": "C",
+    "LC_ALL": "C",
+    "PATH": "/usr/bin:/bin",
+    "TMPDIR": "/private/tmp/pt24g-two-lease-host-first-v2",
+    "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1"
+  },
+  "executable": {
+    "bytes": 290760,
+    "identity": [
+      16777231,
+      207514178,
+      33261,
+      1,
+      290760,
+      1791498042980758641,
+      1791498042980758641
+    ],
+    "mode": 33261,
+    "sha256": "3dc7781c645a50c8bb6a8009be8f99439278499ac44619d5ef80c3747cfc7aff"
+  },
+  "executable_after": {
+    "bytes": 290760,
+    "identity": [
+      16777231,
+      207514178,
+      33261,
+      1,
+      290760,
+      1791498042980758641,
+      1791498042980758641
+    ],
+    "mode": 33261,
+    "sha256": "3dc7781c645a50c8bb6a8009be8f99439278499ac44619d5ef80c3747cfc7aff"
+  },
+  "fixed_after": {
+    "compiler": {
+      "bytes": 200560,
+      "identity": [
+        16777231,
+        1152921500312607511,
+        33261,
+        78,
+        200560,
+        1788431650000000000,
+        1788431650000000000
+      ],
+      "mode": 33261,
+      "sha256": "34129c71a01a74f7f3b2443521519b2e5447553fa187f5fcafaaf8c42cc192e2"
+    },
+    "context": {
+      "bytes": 5131,
+      "identity": [
+        16777231,
+        207502551,
+        33188,
+        1,
+        5131,
+        1791497807445815338,
+        1791497807658946243
+      ],
+      "mode": 33188,
+      "sha256": "68620f603f187224e5ae08a6152689b241f73adf4ff7a723eb12bd4941539a3f"
+    },
+    "controller": {
+      "bytes": 25136,
+      "identity": [
+        16777231,
+        207502550,
+        33188,
+        1,
+        25136,
+        1791497807443774785,
+        1791497807655161638
+      ],
+      "mode": 33188,
+      "sha256": "b7b8ca8437cb661a8196fc4adac01d8993b46e8236fe930575be0ae799a91ba7"
+    },
+    "python": {
+      "bytes": 52448,
+      "identity": [
+        16777231,
+        99971036,
+        33261,
+        1,
+        52448,
+        1760710046397545205,
+        1763734040806305177
+      ],
+      "mode": 33261,
+      "sha256": "60ab7f8bb944386c0022689716e405a77117111d65110532a1889d713dddf757"
+    }
+  },
+  "fixture_groups": 11,
+  "limits": {
+    "compile_seconds": 120,
+    "file_bytes": 16777216,
+    "file_seconds": 5,
+    "first_failure_seconds": 10,
+    "overall_seconds": 250,
+    "runtime_seconds": 30,
+    "startup_seconds": 5,
+    "stream_bytes": 8388608,
+    "whole_seconds": 240
+  },
+  "native_target_or_quiet_authority": false,
+  "no_deletion_cleanup": true,
+  "old_origin_full7_passed": false,
+  "origin_after": {
+    "INPUT_PINS.json": {
+      "bytes": 2828,
+      "identity": [
+        16777231,
+        207419338,
+        33188,
+        1,
+        2828,
+        1791496007260321724,
+        1791496011011280715
+      ],
+      "mode": 33188,
+      "sha256": "e55ba8385130ed30ceef9e9837f7439eee096278eb34c3d1cfc6331928720861"
+    },
+    "MANIFEST.json": {
+      "bytes": 1566,
+      "identity": [
+        16777231,
+        207442626,
+        33188,
+        1,
+        1566,
+        1791496377911925816,
+        1791496381892947026
+      ],
+      "mode": 33188,
+      "sha256": "0e129d492100552cdaf22dddec18e2b86e7ac8b10086b509c3b21ba297c56e00"
+    },
+    "README.md": {
+      "bytes": 8661,
+      "identity": [
+        16777231,
+        207419337,
+        33188,
+        1,
+        8661,
+        1791496185315373803,
+        1791496192542013411
+      ],
+      "mode": 33188,
+      "sha256": "cfc02575bf181fea41276f908bb2d2a44b89fb89bc7330714419b5d51b5c3365"
+    },
+    "host_two_lease.c": {
+      "bytes": 14953,
+      "identity": [
+        16777231,
+        207418251,
+        33188,
+        1,
+        14953,
+        1791496318158005048,
+        1791496324145914679
+      ],
+      "mode": 33188,
+      "sha256": "c5d004bc992f9683768743168109de9658a4905705580783e9330234c7a77ddb"
+    },
+    "host_two_lease.h": {
+      "bytes": 5693,
+      "identity": [
+        16777231,
+        207417375,
+        33188,
+        1,
+        5693,
+        1791495828122561618,
+        1791495833460463556
+      ],
+      "mode": 33188,
+      "sha256": "6b5e6b5e03a9b1b4bbdd2a9f9f0fbefae34928ed249995b095ea87a471afff09"
+    },
+    "test_host_two_lease.c": {
+      "bytes": 47653,
+      "identity": [
+        16777231,
+        207421099,
+        33188,
+        1,
+        47653,
+        1791496318194751493,
+        1791496321623852946
+      ],
+      "mode": 33188,
+      "sha256": "5aba3a4e18614cc1725119ce9ed5cc4d7ad5c60c93814de84c36894fdf0e78ee"
+    }
+  },
+  "origin_before": {
+    "INPUT_PINS.json": {
+      "bytes": 2828,
+      "identity": [
+        16777231,
+        207419338,
+        33188,
+        1,
+        2828,
+        1791496007260321724,
+        1791496011011280715
+      ],
+      "mode": 33188,
+      "sha256": "e55ba8385130ed30ceef9e9837f7439eee096278eb34c3d1cfc6331928720861"
+    },
+    "MANIFEST.json": {
+      "bytes": 1566,
+      "identity": [
+        16777231,
+        207442626,
+        33188,
+        1,
+        1566,
+        1791496377911925816,
+        1791496381892947026
+      ],
+      "mode": 33188,
+      "sha256": "0e129d492100552cdaf22dddec18e2b86e7ac8b10086b509c3b21ba297c56e00"
+    },
+    "README.md": {
+      "bytes": 8661,
+      "identity": [
+        16777231,
+        207419337,
+        33188,
+        1,
+        8661,
+        1791496185315373803,
+        1791496192542013411
+      ],
+      "mode": 33188,
+      "sha256": "cfc02575bf181fea41276f908bb2d2a44b89fb89bc7330714419b5d51b5c3365"
+    },
+    "host_two_lease.c": {
+      "bytes": 14953,
+      "identity": [
+        16777231,
+        207418251,
+        33188,
+        1,
+        14953,
+        1791496318158005048,
+        1791496324145914679
+      ],
+      "mode": 33188,
+      "sha256": "c5d004bc992f9683768743168109de9658a4905705580783e9330234c7a77ddb"
+    },
+    "host_two_lease.h": {
+      "bytes": 5693,
+      "identity": [
+        16777231,
+        207417375,
+        33188,
+        1,
+        5693,
+        1791495828122561618,
+        1791495833460463556
+      ],
+      "mode": 33188,
+      "sha256": "6b5e6b5e03a9b1b4bbdd2a9f9f0fbefae34928ed249995b095ea87a471afff09"
+    },
+    "test_host_two_lease.c": {
+      "bytes": 47653,
+      "identity": [
+        16777231,
+        207421099,
+        33188,
+        1,
+        47653,
+        1791496318194751493,
+        1791496321623852946
+      ],
+      "mode": 33188,
+      "sha256": "5aba3a4e18614cc1725119ce9ed5cc4d7ad5c60c93814de84c36894fdf0e78ee"
+    }
+  },
+  "origin_content_and_stable5_before_after": true,
+  "origin_policy": "EXACT_PAIRED_CONTENT_STABLE5_TIMESTAMPS_DIAGNOSTIC_NOT_OLD_FULL7",
+  "origin_timestamp_drift": [],
+  "python": {
+    "bytes": 52448,
+    "identity": [
+      16777231,
+      99971036,
+      33261,
+      1,
+      52448,
+      1760710046397545205,
+      1763734040806305177
+    ],
+    "mode": 33261,
+    "sha256": "60ab7f8bb944386c0022689716e405a77117111d65110532a1889d713dddf757"
+  },
+  "retained_private_source_and_evidence": true,
+  "scope": "STANDALONE_HOST_TWO_LEASE_FIXTURE",
+  "staged_full7_after_compile": {
+    "directory": [
+      16777231,
+      207514112,
+      16832,
+      5,
+      160,
+      1791498042283900897,
+      1791498042283900897
+    ],
+    "files": {
+      "host_two_lease.c": [
+        16777231,
+        207514115,
+        33188,
+        1,
+        14953,
+        1791498042281911511,
+        1791498042281911511
+      ],
+      "host_two_lease.h": [
+        16777231,
+        207514114,
+        33188,
+        1,
+        5693,
+        1791498042279647956,
+        1791498042279647956
+      ],
+      "test_host_two_lease.c": [
+        16777231,
+        207514117,
+        33188,
+        1,
+        47653,
+        1791498042283994356,
+        1791498042283994356
+      ]
+    }
+  },
+  "staged_full7_after_run": {
+    "directory": [
+      16777231,
+      207514112,
+      16832,
+      5,
+      160,
+      1791498042283900897,
+      1791498042283900897
+    ],
+    "files": {
+      "host_two_lease.c": [
+        16777231,
+        207514115,
+        33188,
+        1,
+        14953,
+        1791498042281911511,
+        1791498042281911511
+      ],
+      "host_two_lease.h": [
+        16777231,
+        207514114,
+        33188,
+        1,
+        5693,
+        1791498042279647956,
+        1791498042279647956
+      ],
+      "test_host_two_lease.c": [
+        16777231,
+        207514117,
+        33188,
+        1,
+        47653,
+        1791498042283994356,
+        1791498042283994356
+      ]
+    }
+  },
+  "staged_full7_before": {
+    "directory": [
+      16777231,
+      207514112,
+      16832,
+      5,
+      160,
+      1791498042283900897,
+      1791498042283900897
+    ],
+    "files": {
+      "host_two_lease.c": [
+        16777231,
+        207514115,
+        33188,
+        1,
+        14953,
+        1791498042281911511,
+        1791498042281911511
+      ],
+      "host_two_lease.h": [
+        16777231,
+        207514114,
+        33188,
+        1,
+        5693,
+        1791498042279647956,
+        1791498042279647956
+      ],
+      "test_host_two_lease.c": [
+        16777231,
+        207514117,
+        33188,
+        1,
+        47653,
+        1791498042283994356,
+        1791498042283994356
+      ]
+    }
+  },
+  "staged_full7_before_after": true,
+  "status": "STANDALONE_TWO_LEASE_HOST_PASS"
+}

@@ -6623,3 +6623,28 @@ audio and listening remain separately unqualified. See
 [the contract](CAUSAL_COMPLETION_MATCHER.md),
 [matcher evidence](../evidence/enhanced-editor/causal-completion-matcher-host/README.md)
 and [timer-model evidence](../evidence/enhanced-editor/causal-pair-timer-host-model/README.md).
+
+## Recovery preferences controller seam — 10 October 2026
+
+`src/native/recovery_preferences.c/.h` implements a copied settings draft,
+Cancel, transactional typed Apply and bounded tracking of the committed song
+source. A changed configuration may bind an unbound controller to an explicitly
+named or Untitled song. Canonical no-op retains the original controller and
+failed-write backoff; an already-bound song is never rebound. Busy, opened or
+owned recovery storage, invalid policy/source, failed binding and non-idle
+publication all refuse without changing the actual controller or draft. The
+caller must serialize document transitions and provide a read-only idle check.
+No ENV write, snapshot, recovery-file deletion or playback stop is added.
+
+The existing binder now rejects empty, control-containing and unterminated
+canonical source names before `stat` or source hashing. Root ran the new seven
+HOST test groups against the actual controller/binder with DOS/stat stubs,
+AddressSanitizer and UndefinedBehaviorSanitizer. Existing typed configuration
+and full-precision recovery snapshot tests also passed. See
+`evidence/enhanced-editor/recovery-preferences-host/results.json`.
+
+Requester layout, input/key dispatch, modal-loop and current-document hookups
+remain **unimplemented**. Native ABI/build, Amiberry and real-A1200 acceptance
+of this new seam are **NOT RUN**. This HOST result does not qualify musical
+timing, hardware ownership, output or listening; the existing sample-memory
+architecture and exact-scheduling requirement are unchanged.

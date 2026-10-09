@@ -1,0 +1,37 @@
+{
+  "scope": "Recovery preferences controller seam and canonical binding regression",
+  "date": "2026-10-10",
+  "status": "HOST_SANITIZER_PASS",
+  "execution": {
+    "native_recovery_configuration_and_preferences": {
+      "command": "python3.14 -B -m unittest discover -s tests -p 'test_native_recovery*.py' -v",
+      "tests": 2,
+      "seconds": 38.598,
+      "returncode": 0
+    },
+    "recovery_master_snapshot": {
+      "command": "python3.14 -B -m unittest discover -s tests -p 'test_recovery_file.py' -v",
+      "tests": 1,
+      "seconds": 23.992,
+      "returncode": 0
+    },
+    "checks": ["AddressSanitizer", "UndefinedBehaviorSanitizer", "warnings treated as errors"],
+    "new_fixture_groups": 7,
+    "new_fixture_stderr": "",
+    "new_fixture_marker_asserted": "NATIVE RECOVERY PREFERENCES HOST PASS: 7 seam groups; draft/cancel, atomic apply/initial bind, source tracking, idle and alias refusal"
+  },
+  "implemented": [
+    "Copied draft open/get/edit/cancel",
+    "Staged typed Apply with first binding only on changed, unbound controller",
+    "Canonical no-op preserves backoff, identity and unbound state",
+    "Named, explicit Untitled and unknown committed-source tracking",
+    "Atomic real-owner refusal for validation, binding and idle failures",
+    "Opened, owned, busy and overlapping storage refusal",
+    "Canonical binder name termination, controls and nonempty validation"
+  ],
+  "test_boundary": "Actual recovery controller/binder and portable recovery components; deterministic DOS/stat stubs, no real ENV or device operations",
+  "not_implemented": ["Requester UI", "Key/input dispatch", "Modal loop", "Current-document frontend hookups"],
+  "not_run": ["Native build/ABI", "Amiberry", "Real A1200"],
+  "not_qualified": ["Exact musical timing", "Hardware voice stop or output", "AmiGUS capacity or upload completion", "Human listening"],
+  "preserved": "Existing sample-memory architecture, exact-scheduling decision, baseline and unrelated display/editor work"
+}

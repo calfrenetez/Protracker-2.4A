@@ -134,7 +134,7 @@ int pt_native_recovery_configure(struct pt_native_recovery *r,const struct pt_al
 }
 int pt_native_recovery_bind(struct pt_native_recovery *r,const char *source)
 {
-    BPTR lock;struct stat st;struct pt_recovery_policy policy;
+    BPTR lock;struct stat st;struct pt_recovery_policy policy;size_t length;
     if(!r || !r->configured)return 0;
     r->bound=0;
     if(r->store.opened && !pt_recovery_store_discard(&r->store)) {r->configured=0;return 0;}
@@ -143,6 +143,7 @@ int pt_native_recovery_bind(struct pt_native_recovery *r,const char *source)
         lock=Lock((STRPTR)source,ACCESS_READ);if(!lock)return 0;
         if(!NameFromLock(lock,(STRPTR)r->info.source,sizeof(r->info.source))) {UnLock(lock);return 0;}
         UnLock(lock);
+        if(!configuration_text(r->info.source,sizeof(r->info.source),&length) || !length)return 0;
         if(stat(r->info.source,&st) || st.st_mtime<0)return 0;
         r->source_timestamp=(uint64_t)st.st_mtime;
     }

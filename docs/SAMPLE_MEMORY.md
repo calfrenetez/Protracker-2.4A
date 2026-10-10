@@ -6780,3 +6780,28 @@ device ordering/completion/voice-stop, exact live timing, audio or listening.
 Producer/controller/native CONTROL binding, prepublished controls, musical STOP,
 third command, rolling refill and default/classic PLAY remain unfinished. See
 [scoped source and test evidence](../evidence/enhanced-editor/causal-after-first-control/README.md).
+
+## 10 October — Optional scheduled STOP retains draining sample ownership
+
+A separate empty-owner STOP capability can prepare one typed successor after a
+genuine first TRIGGER completion and positive ACTIVE observations. Selected keys
+are derived from the original readers; the port independently checks its own
+first completion and twenty-slot registry. Publication closes admission only.
+Exact-frame commit clears selected slots while preserving untargeted readers.
+Original master versions and selective Chip/card cache leases remain DRAINING
+until independent command, reader and source quiet proofs permit retirement;
+positive reader quiet alone cannot release a holder still referenced by a
+command. No new reader/cache/upload is created and deadlines are never rebased.
+
+The exact STOP01 core passed 45 STOP HOST cases, the unchanged 34 CONTROL cases
+and default 26 cases under strict assertions-enabled ASAN/UBSAN checks, with
+empty compiler/runtime error streams and unchanged dependency closures.
+Independent review found no blocker within that scope. Strict pinned m68k
+object compilation and the normal repository driver are recorded separately.
+Numbered fixture failures remain preserved. This is an alternative second
+command; CONTROL followed by STOP as a third command is still unfinished.
+
+Amiberry and real-A1200 execution are **NOT RUN**. Producer/controller/native
+STOP integration, preparation/exclusion/timer aperture, aggregate stack/WCET,
+exact live scheduling, hardware stop/quiet/order/completion and listening remain
+unqualified. See [scoped STOP evidence](../evidence/enhanced-editor/causal-after-first-stop/README.md).

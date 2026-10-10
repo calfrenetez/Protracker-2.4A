@@ -1,0 +1,1306 @@
+{
+  "scope": "Preserved actual private HOST fixture development attempts; no target evidence",
+  "runs": {
+    "control-01": {
+      "summary": {
+        "mode": "control",
+        "sources": [
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/tests/mixed_readers_causal_control_test.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/src/core/mixed_readers_causal.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/slots.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm_filtered.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/slices.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pattern.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/wav.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/svx.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/raw.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_reservation.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_wavetable_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_sample_ram.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.c"
+        ],
+        "flags": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A"
+        ],
+        "host_only": true,
+        "native": "NOT RUN",
+        "physical": "NOT RUN",
+        "dependencies": {
+          "rc": 0,
+          "stdout_bytes": 138268,
+          "stderr_bytes": 0
+        },
+        "compile": {
+          "rc": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        "execute": {
+          "rc": 0,
+          "stdout_bytes": 449,
+          "stderr_bytes": 0
+        },
+        "source_unchanged": true,
+        "elapsed_seconds": 8.83344220800791
+      },
+      "saved_workspace": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/runs/control-01",
+      "log_pins": {
+        "summary.json": {
+          "bytes": 3610,
+          "sha256": "ff0a0cf396a8fc1f5e3c10683571eba1d2e937087060a0c256e79b6206835c73",
+          "mode": "0o644"
+        },
+        "compile.argv.json": {
+          "bytes": 3220,
+          "sha256": "0abef6262511bf7396b5d45eb3d81fcfdabe49e972185762ea7d794dd92cb313",
+          "mode": "0o644"
+        },
+        "execute.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "dependencies.stdout": {
+          "bytes": 138268,
+          "sha256": "d684da93ad3cc9765dfa0dae03ae0d4c99f8d40aa6ad34c1e8b0cedebfa6617d",
+          "mode": "0o644"
+        },
+        "dependencies.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "source_after.json": {
+          "bytes": 12013,
+          "sha256": "9c30b6989541c945c6d4ea532bd23e54179dba2621836679bdf47403a722f821",
+          "mode": "0o644"
+        },
+        "execute.stdout": {
+          "bytes": 449,
+          "sha256": "fbc404dc529eaf0af68f5bf5241c5f58e8cbe86820e8a039405c81032b94b41f",
+          "mode": "0o644"
+        },
+        "compile.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "execute.argv.json": {
+          "bytes": 124,
+          "sha256": "b9569d8f76d7d5df645932be75abf8fb92eb20b6ab523f30101eb7716573feed",
+          "mode": "0o644"
+        },
+        "source_before.json": {
+          "bytes": 12013,
+          "sha256": "9c30b6989541c945c6d4ea532bd23e54179dba2621836679bdf47403a722f821",
+          "mode": "0o644"
+        },
+        "dependencies.argv.json": {
+          "bytes": 3099,
+          "sha256": "075cbef2944c3498bfcb8d390bdd4c5ed75bb1a2c1a0eee3bcfcc92e21629f96",
+          "mode": "0o644"
+        },
+        "compile.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        }
+      }
+    },
+    "legacy-01": {
+      "summary": {
+        "mode": "legacy",
+        "sources": [
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests/mixed_readers_causal_test.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/src/core/mixed_readers_causal.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/slots.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm_filtered.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/slices.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pattern.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/wav.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/svx.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/raw.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_reservation.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_wavetable_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_sample_ram.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.c"
+        ],
+        "flags": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A"
+        ],
+        "host_only": true,
+        "native": "NOT RUN",
+        "physical": "NOT RUN",
+        "dependencies": {
+          "rc": 0,
+          "stdout_bytes": 137811,
+          "stderr_bytes": 0
+        },
+        "compile": {
+          "rc": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        "execute": {
+          "rc": 0,
+          "stdout_bytes": 521,
+          "stderr_bytes": 0
+        },
+        "source_unchanged": true,
+        "elapsed_seconds": 8.45095216698246
+      },
+      "saved_workspace": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/runs/legacy-01",
+      "log_pins": {
+        "summary.json": {
+          "bytes": 3575,
+          "sha256": "15be79eb00ab8d2dea2d0be2dd5899413b9c1cbacc275ca7223c447639b1b3cd",
+          "mode": "0o644"
+        },
+        "compile.argv.json": {
+          "bytes": 3185,
+          "sha256": "50f84b782b66afe033cd471e488fc6c2ebe5dbf72d1a3063a1f5c3e833f32458",
+          "mode": "0o644"
+        },
+        "execute.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "dependencies.stdout": {
+          "bytes": 137811,
+          "sha256": "963ab048b469797016f6e96206fc304dc295c2059e290a3ec6f1ac335e7dfb2f",
+          "mode": "0o644"
+        },
+        "dependencies.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "source_after.json": {
+          "bytes": 11951,
+          "sha256": "29f8baa4b31b25dd922e038c344c013dd8917fcc7a4f4211c22eba80763fa7f2",
+          "mode": "0o644"
+        },
+        "execute.stdout": {
+          "bytes": 521,
+          "sha256": "296f5ae9a539b3d0ddfed133858c2ac1f4d5f66dd769b0745845135b9e99864f",
+          "mode": "0o644"
+        },
+        "compile.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "execute.argv.json": {
+          "bytes": 123,
+          "sha256": "6fad0d6ebe844aa1412f4d25cc83fb049db795bca8ac6c26e6a5e333c61988b7",
+          "mode": "0o644"
+        },
+        "source_before.json": {
+          "bytes": 11951,
+          "sha256": "29f8baa4b31b25dd922e038c344c013dd8917fcc7a4f4211c22eba80763fa7f2",
+          "mode": "0o644"
+        },
+        "dependencies.argv.json": {
+          "bytes": 3065,
+          "sha256": "ffcfe551d02ab84b1a1a93862277eed555c3634b0b72cf1bf8525cdd3410ee7b",
+          "mode": "0o644"
+        },
+        "compile.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        }
+      }
+    },
+    "stop-01": {
+      "summary": {
+        "mode": "stop",
+        "sources": [
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/tests/mixed_readers_causal_stop_test.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/src/core/mixed_readers_causal.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/slots.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm_filtered.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/slices.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pattern.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/wav.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/svx.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/raw.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_reservation.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_wavetable_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_sample_ram.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.c"
+        ],
+        "flags": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A"
+        ],
+        "host_only": true,
+        "native": "NOT RUN",
+        "physical": "NOT RUN",
+        "dependencies": {
+          "rc": 0,
+          "stdout_bytes": 138413,
+          "stderr_bytes": 0
+        },
+        "compile": {
+          "rc": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        "execute": {
+          "rc": -6,
+          "stdout_bytes": 0,
+          "stderr_bytes": 230
+        },
+        "source_unchanged": true,
+        "elapsed_seconds": 8.560329250001814
+      },
+      "saved_workspace": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/runs/stop-01",
+      "log_pins": {
+        "summary.json": {
+          "bytes": 3606,
+          "sha256": "64979164a75d3cc6133cb79a54df5686300e6bcc2d9e39f219b09793ac0fad60",
+          "mode": "0o644"
+        },
+        "compile.argv.json": {
+          "bytes": 3214,
+          "sha256": "447f0e94faf5e88ff7b623d1e23fb8cf15dd0d6f279cdc98679ec5d77c30805a",
+          "mode": "0o644"
+        },
+        "execute.stderr": {
+          "bytes": 230,
+          "sha256": "7a06ef577708c70ea1853cf8460b7fdf5e2d7f4f37a6cfd7f400fa78a4b072ac",
+          "mode": "0o644"
+        },
+        "dependencies.stdout": {
+          "bytes": 138413,
+          "sha256": "e9c8bd3da70b9d1b879628fa9e297d9c6cc90813fc21f8c518bccd9a0f4d5aaf",
+          "mode": "0o644"
+        },
+        "dependencies.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "source_after.json": {
+          "bytes": 12010,
+          "sha256": "2895d504a96daf541ee285f7b6ffe47d35fc5354aa438373ffd7ea076c16293b",
+          "mode": "0o644"
+        },
+        "execute.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "compile.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "execute.argv.json": {
+          "bytes": 121,
+          "sha256": "069148d5906c038bd9d7eb2d6826cb509a1437108242449be9ad46c3f9474742",
+          "mode": "0o644"
+        },
+        "source_before.json": {
+          "bytes": 12010,
+          "sha256": "2895d504a96daf541ee285f7b6ffe47d35fc5354aa438373ffd7ea076c16293b",
+          "mode": "0o644"
+        },
+        "dependencies.argv.json": {
+          "bytes": 3096,
+          "sha256": "21b59623cc1b66c9bceb2707cbd2ae404fd3ce9ecdaf926886adf0dafdeef6d7",
+          "mode": "0o644"
+        },
+        "compile.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        }
+      }
+    },
+    "stop-02": {
+      "summary": {
+        "mode": "stop",
+        "sources": [
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/tests/mixed_readers_causal_stop_test.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/src/core/mixed_readers_causal.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/slots.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm_filtered.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/slices.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pattern.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/wav.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/svx.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/raw.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_reservation.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_wavetable_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_sample_ram.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.c"
+        ],
+        "flags": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A"
+        ],
+        "host_only": true,
+        "native": "NOT RUN",
+        "physical": "NOT RUN",
+        "dependencies": {
+          "rc": 0,
+          "stdout_bytes": 138413,
+          "stderr_bytes": 0
+        },
+        "compile": {
+          "rc": 1,
+          "stdout_bytes": 0,
+          "stderr_bytes": 377
+        },
+        "source_unchanged": true,
+        "elapsed_seconds": 6.314083584002219
+      },
+      "saved_workspace": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/runs/stop-02",
+      "log_pins": {
+        "summary.json": {
+          "bytes": 3527,
+          "sha256": "b42fd4872fc5f14da66b0240d5df6a1359c4427b9fb5522730e7d8bdff6c0f32",
+          "mode": "0o644"
+        },
+        "compile.argv.json": {
+          "bytes": 3214,
+          "sha256": "9a0e094c66b2fc4f1aaf231198faf5341a5f9295a274d69fb28b752df3e59e24",
+          "mode": "0o644"
+        },
+        "dependencies.stdout": {
+          "bytes": 138413,
+          "sha256": "e9c8bd3da70b9d1b879628fa9e297d9c6cc90813fc21f8c518bccd9a0f4d5aaf",
+          "mode": "0o644"
+        },
+        "dependencies.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "source_after.json": {
+          "bytes": 12010,
+          "sha256": "9db4ee8c01a45cbbd01d5635490860342c97581f64dcce2c005d4255ebfe04e4",
+          "mode": "0o644"
+        },
+        "compile.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "source_before.json": {
+          "bytes": 12010,
+          "sha256": "9db4ee8c01a45cbbd01d5635490860342c97581f64dcce2c005d4255ebfe04e4",
+          "mode": "0o644"
+        },
+        "dependencies.argv.json": {
+          "bytes": 3096,
+          "sha256": "21b59623cc1b66c9bceb2707cbd2ae404fd3ce9ecdaf926886adf0dafdeef6d7",
+          "mode": "0o644"
+        },
+        "compile.stderr": {
+          "bytes": 377,
+          "sha256": "b22a8d0b82d3f0bc2b23746e759702cdcc4dd670f2a8f2e805c5c27e029057d6",
+          "mode": "0o644"
+        }
+      }
+    },
+    "stop-03": {
+      "summary": {
+        "mode": "stop",
+        "sources": [
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/tests/mixed_readers_causal_stop_test.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/src/core/mixed_readers_causal.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/slots.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm_filtered.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/slices.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pattern.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/wav.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/svx.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/raw.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_reservation.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_wavetable_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_sample_ram.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.c"
+        ],
+        "flags": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A"
+        ],
+        "host_only": true,
+        "native": "NOT RUN",
+        "physical": "NOT RUN",
+        "dependencies": {
+          "rc": 0,
+          "stdout_bytes": 138413,
+          "stderr_bytes": 0
+        },
+        "compile": {
+          "rc": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        "execute": {
+          "rc": -6,
+          "stdout_bytes": 0,
+          "stderr_bytes": 150
+        },
+        "source_unchanged": true,
+        "elapsed_seconds": 8.566546833026223
+      },
+      "saved_workspace": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/runs/stop-03",
+      "log_pins": {
+        "summary.json": {
+          "bytes": 3606,
+          "sha256": "4382680267ea1d3e6254e9e728fe7a07c63650ca0304d0b96010a66c26bea489",
+          "mode": "0o644"
+        },
+        "compile.argv.json": {
+          "bytes": 3214,
+          "sha256": "bc9377e13021fddd082a75d2a9de39003258538b5be33a0705f7d4dcdcf599ad",
+          "mode": "0o644"
+        },
+        "execute.stderr": {
+          "bytes": 150,
+          "sha256": "f9d27c28b50e3c034f21afcd25a4fd6a309885dcc08bf9690ec04f4e84bbcb0a",
+          "mode": "0o644"
+        },
+        "dependencies.stdout": {
+          "bytes": 138413,
+          "sha256": "e9c8bd3da70b9d1b879628fa9e297d9c6cc90813fc21f8c518bccd9a0f4d5aaf",
+          "mode": "0o644"
+        },
+        "dependencies.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "source_after.json": {
+          "bytes": 12010,
+          "sha256": "3d25b89cca2709b414d728df270706897d8ea8a8e32f9c0e65383c5ceaf7f6f2",
+          "mode": "0o644"
+        },
+        "execute.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "compile.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "execute.argv.json": {
+          "bytes": 121,
+          "sha256": "e723624e3582dea5a4272b3c5f092b208500264fea348b7536e831f32a8d9b19",
+          "mode": "0o644"
+        },
+        "source_before.json": {
+          "bytes": 12010,
+          "sha256": "3d25b89cca2709b414d728df270706897d8ea8a8e32f9c0e65383c5ceaf7f6f2",
+          "mode": "0o644"
+        },
+        "dependencies.argv.json": {
+          "bytes": 3096,
+          "sha256": "21b59623cc1b66c9bceb2707cbd2ae404fd3ce9ecdaf926886adf0dafdeef6d7",
+          "mode": "0o644"
+        },
+        "compile.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        }
+      }
+    },
+    "stop-04": {
+      "summary": {
+        "mode": "stop",
+        "sources": [
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/tests/mixed_readers_causal_stop_test.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/src/core/mixed_readers_causal.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/slots.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm_filtered.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/slices.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pattern.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/wav.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/svx.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/raw.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_reservation.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_wavetable_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_sample_ram.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.c"
+        ],
+        "flags": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A"
+        ],
+        "host_only": true,
+        "native": "NOT RUN",
+        "physical": "NOT RUN",
+        "dependencies": {
+          "rc": 0,
+          "stdout_bytes": 138413,
+          "stderr_bytes": 0
+        },
+        "compile": {
+          "rc": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        "execute": {
+          "rc": -6,
+          "stdout_bytes": 0,
+          "stderr_bytes": 205
+        },
+        "source_unchanged": true,
+        "elapsed_seconds": 8.798794416012242
+      },
+      "saved_workspace": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/runs/stop-04",
+      "log_pins": {
+        "summary.json": {
+          "bytes": 3606,
+          "sha256": "ee176429605c17cef7d18e32e692e0f98559902a0de40c7f31b10e5daf1186f5",
+          "mode": "0o644"
+        },
+        "compile.argv.json": {
+          "bytes": 3214,
+          "sha256": "fa8b68d463c1815b1cd6346df4a9863fe386243c260d2d5a59e64645b9cd8f21",
+          "mode": "0o644"
+        },
+        "execute.stderr": {
+          "bytes": 205,
+          "sha256": "af06d5639c8209f431570e6618cc4abc2ebaebf09925b97ba6a01bff612e3baf",
+          "mode": "0o644"
+        },
+        "dependencies.stdout": {
+          "bytes": 138413,
+          "sha256": "e9c8bd3da70b9d1b879628fa9e297d9c6cc90813fc21f8c518bccd9a0f4d5aaf",
+          "mode": "0o644"
+        },
+        "dependencies.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "source_after.json": {
+          "bytes": 12010,
+          "sha256": "17d83824dbaf9923db0ea470e46817f3ee8e8a0abbc3511f99e8ceddbf22953a",
+          "mode": "0o644"
+        },
+        "execute.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "compile.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "execute.argv.json": {
+          "bytes": 121,
+          "sha256": "1dc640cddcc17482246d1c6e3c7ef3339ffe641818d056ed15300e24855fee6d",
+          "mode": "0o644"
+        },
+        "source_before.json": {
+          "bytes": 12010,
+          "sha256": "17d83824dbaf9923db0ea470e46817f3ee8e8a0abbc3511f99e8ceddbf22953a",
+          "mode": "0o644"
+        },
+        "dependencies.argv.json": {
+          "bytes": 3096,
+          "sha256": "21b59623cc1b66c9bceb2707cbd2ae404fd3ce9ecdaf926886adf0dafdeef6d7",
+          "mode": "0o644"
+        },
+        "compile.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        }
+      }
+    },
+    "stop-05": {
+      "summary": {
+        "mode": "stop",
+        "sources": [
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/tests/mixed_readers_causal_stop_test.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/src/core/mixed_readers_causal.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/slots.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm_filtered.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/slices.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pattern.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/wav.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/svx.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/raw.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_reservation.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_wavetable_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_sample_ram.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.c"
+        ],
+        "flags": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A"
+        ],
+        "host_only": true,
+        "native": "NOT RUN",
+        "physical": "NOT RUN",
+        "dependencies": {
+          "rc": 0,
+          "stdout_bytes": 138413,
+          "stderr_bytes": 0
+        },
+        "compile": {
+          "rc": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        "execute": {
+          "rc": -6,
+          "stdout_bytes": 0,
+          "stderr_bytes": 197
+        },
+        "source_unchanged": true,
+        "elapsed_seconds": 8.596948124992196
+      },
+      "saved_workspace": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/runs/stop-05",
+      "log_pins": {
+        "summary.json": {
+          "bytes": 3606,
+          "sha256": "dec607b32221c68d09897d68837fea8ed57baed5329d86716a6842dd5e6b1834",
+          "mode": "0o644"
+        },
+        "compile.argv.json": {
+          "bytes": 3214,
+          "sha256": "14f35ef2aa9fa18d796e79185fad55ceba11883d48f05ee91a479f82be1af1d4",
+          "mode": "0o644"
+        },
+        "execute.stderr": {
+          "bytes": 197,
+          "sha256": "4ca7bf9854d5367ed6cc1d726424cdb737a061e0ea0ef9b8efe4c1c9f55a6b14",
+          "mode": "0o644"
+        },
+        "dependencies.stdout": {
+          "bytes": 138413,
+          "sha256": "e9c8bd3da70b9d1b879628fa9e297d9c6cc90813fc21f8c518bccd9a0f4d5aaf",
+          "mode": "0o644"
+        },
+        "dependencies.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "source_after.json": {
+          "bytes": 12010,
+          "sha256": "6c44409247cce8be0107a680b1ccd2438343ba6c52af2ed9f587b6fb6687a7d5",
+          "mode": "0o644"
+        },
+        "execute.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "compile.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "execute.argv.json": {
+          "bytes": 121,
+          "sha256": "7b712c1c1ac600aad1041b4a4de37470c2e699fbb413207fff137dde8e11de32",
+          "mode": "0o644"
+        },
+        "source_before.json": {
+          "bytes": 12010,
+          "sha256": "6c44409247cce8be0107a680b1ccd2438343ba6c52af2ed9f587b6fb6687a7d5",
+          "mode": "0o644"
+        },
+        "dependencies.argv.json": {
+          "bytes": 3096,
+          "sha256": "21b59623cc1b66c9bceb2707cbd2ae404fd3ce9ecdaf926886adf0dafdeef6d7",
+          "mode": "0o644"
+        },
+        "compile.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        }
+      }
+    },
+    "stop-06": {
+      "summary": {
+        "mode": "stop",
+        "sources": [
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/tests/mixed_readers_causal_stop_test.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/src/core/mixed_readers_causal.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/slots.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm_filtered.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/slices.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pattern.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/wav.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/svx.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/raw.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_reservation.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_wavetable_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_sample_ram.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.c"
+        ],
+        "flags": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A"
+        ],
+        "host_only": true,
+        "native": "NOT RUN",
+        "physical": "NOT RUN",
+        "dependencies": {
+          "rc": 0,
+          "stdout_bytes": 138413,
+          "stderr_bytes": 0
+        },
+        "compile": {
+          "rc": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        "execute": {
+          "rc": 0,
+          "stdout_bytes": 542,
+          "stderr_bytes": 0
+        },
+        "source_unchanged": true,
+        "elapsed_seconds": 8.477202375011984
+      },
+      "saved_workspace": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/runs/stop-06",
+      "log_pins": {
+        "summary.json": {
+          "bytes": 3605,
+          "sha256": "1fa3d770a4a0d86a569bb60a9bfa0a25cce627ed3a53b394ec7a2c49441768c9",
+          "mode": "0o644"
+        },
+        "compile.argv.json": {
+          "bytes": 3214,
+          "sha256": "2ccd4d0da290ef0688cd4ed28e069cf545170365f71c799f620f3114620a1bd7",
+          "mode": "0o644"
+        },
+        "execute.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "dependencies.stdout": {
+          "bytes": 138413,
+          "sha256": "e9c8bd3da70b9d1b879628fa9e297d9c6cc90813fc21f8c518bccd9a0f4d5aaf",
+          "mode": "0o644"
+        },
+        "dependencies.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "source_after.json": {
+          "bytes": 12010,
+          "sha256": "a4987311f53d2f3cdf6f883d12d85e2e3201f418b12ed7c852f46ee857f46fca",
+          "mode": "0o644"
+        },
+        "execute.stdout": {
+          "bytes": 542,
+          "sha256": "4dfd32306ca905f9fc3e47c24c8c4dfa7a04b61ec5164fbeb4be53bd9e1ba3ce",
+          "mode": "0o644"
+        },
+        "compile.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "execute.argv.json": {
+          "bytes": 121,
+          "sha256": "f8b638562195f113a918951450baa8e798ff136da90e513639f867c71cd8403a",
+          "mode": "0o644"
+        },
+        "source_before.json": {
+          "bytes": 12010,
+          "sha256": "a4987311f53d2f3cdf6f883d12d85e2e3201f418b12ed7c852f46ee857f46fca",
+          "mode": "0o644"
+        },
+        "dependencies.argv.json": {
+          "bytes": 3096,
+          "sha256": "21b59623cc1b66c9bceb2707cbd2ae404fd3ce9ecdaf926886adf0dafdeef6d7",
+          "mode": "0o644"
+        },
+        "compile.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        }
+      }
+    },
+    "stop-07": {
+      "summary": {
+        "mode": "stop",
+        "sources": [
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/tests/mixed_readers_causal_stop_test.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/src/core/mixed_readers_causal.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/slots.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm_filtered.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/slices.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pattern.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/wav.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/svx.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/raw.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_reservation.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_wavetable_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_sample_ram.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.c"
+        ],
+        "flags": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A"
+        ],
+        "host_only": true,
+        "native": "NOT RUN",
+        "physical": "NOT RUN",
+        "dependencies": {
+          "rc": 0,
+          "stdout_bytes": 138413,
+          "stderr_bytes": 0
+        },
+        "compile": {
+          "rc": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        "execute": {
+          "rc": -6,
+          "stdout_bytes": 0,
+          "stderr_bytes": 172
+        },
+        "source_unchanged": true,
+        "elapsed_seconds": 8.667575499974191
+      },
+      "saved_workspace": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/runs/stop-07",
+      "log_pins": {
+        "summary.json": {
+          "bytes": 3606,
+          "sha256": "de9304dac33c0d69976fb414573bc61fd289f9f315826fcf03611c809e8466dd",
+          "mode": "0o644"
+        },
+        "compile.argv.json": {
+          "bytes": 3214,
+          "sha256": "a955ec96541b1997749ce5929672d5f6d5aab9ffaf19cc8d9eb45c042e57d66c",
+          "mode": "0o644"
+        },
+        "execute.stderr": {
+          "bytes": 172,
+          "sha256": "b074b7acf9a2e52c692284c41c16302b761b30cebd2825ab859165e7439ac579",
+          "mode": "0o644"
+        },
+        "dependencies.stdout": {
+          "bytes": 138413,
+          "sha256": "e9c8bd3da70b9d1b879628fa9e297d9c6cc90813fc21f8c518bccd9a0f4d5aaf",
+          "mode": "0o644"
+        },
+        "dependencies.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "source_after.json": {
+          "bytes": 12010,
+          "sha256": "9deaeb744d8a5fde018dc16588f240c07a4acd9cff9f0054434e6a3f45ef9411",
+          "mode": "0o644"
+        },
+        "execute.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "compile.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "execute.argv.json": {
+          "bytes": 121,
+          "sha256": "43006970e7317c4abd0eb98fdc1b0a9c7316ced7c83379213b91762e6af09e00",
+          "mode": "0o644"
+        },
+        "source_before.json": {
+          "bytes": 12010,
+          "sha256": "9deaeb744d8a5fde018dc16588f240c07a4acd9cff9f0054434e6a3f45ef9411",
+          "mode": "0o644"
+        },
+        "dependencies.argv.json": {
+          "bytes": 3096,
+          "sha256": "21b59623cc1b66c9bceb2707cbd2ae404fd3ce9ecdaf926886adf0dafdeef6d7",
+          "mode": "0o644"
+        },
+        "compile.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        }
+      }
+    },
+    "stop-08": {
+      "summary": {
+        "mode": "stop",
+        "sources": [
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/tests/mixed_readers_causal_stop_test.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/src/core/mixed_readers_causal.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mixed_scheduled_readers.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/elapsed_clock.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_paula.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler_wavetable.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_voice_plan.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/sampler.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/editor/slots.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm_filtered.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/slices.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pattern.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/document.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pp20.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_project.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/mod_inspect.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/channels.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/pcm.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/wav.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/svx.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/raw.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_reservation.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_wavetable_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/amigus_sample_ram.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/sample_cache.c",
+          "/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core/playback_pcm.c"
+        ],
+        "flags": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-UNDEBUG",
+          "-fsanitize=address,undefined",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/src/core",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A/tests",
+          "-I/Users/james1/Documents/Codex/2026-09-18/rev/work/Protracker-2.4A"
+        ],
+        "host_only": true,
+        "native": "NOT RUN",
+        "physical": "NOT RUN",
+        "dependencies": {
+          "rc": 0,
+          "stdout_bytes": 138413,
+          "stderr_bytes": 0
+        },
+        "compile": {
+          "rc": 0,
+          "stdout_bytes": 0,
+          "stderr_bytes": 0
+        },
+        "execute": {
+          "rc": 0,
+          "stdout_bytes": 542,
+          "stderr_bytes": 0
+        },
+        "source_unchanged": true,
+        "elapsed_seconds": 8.469683709030505
+      },
+      "saved_workspace": "/Users/james1/Documents/Codex/2026-09-18/rev/outputs/causal-stop-host-prototype-20261010-v1/runs/stop-08",
+      "log_pins": {
+        "summary.json": {
+          "bytes": 3605,
+          "sha256": "c849e9d645761a42c4c6d053c3c388706f5277a0efd3fd61179453df2e379829",
+          "mode": "0o644"
+        },
+        "compile.argv.json": {
+          "bytes": 3214,
+          "sha256": "338ae73cdb816679075bff780d8a1a53a1a544d4b0e79e88e034d2a6fc4496d2",
+          "mode": "0o644"
+        },
+        "execute.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "dependencies.stdout": {
+          "bytes": 138413,
+          "sha256": "e9c8bd3da70b9d1b879628fa9e297d9c6cc90813fc21f8c518bccd9a0f4d5aaf",
+          "mode": "0o644"
+        },
+        "dependencies.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "source_after.json": {
+          "bytes": 12010,
+          "sha256": "fdce2e69041957d7963b65a2ea5add60ed2783b2100d9dd9a80f2e23ca9dc1ec",
+          "mode": "0o644"
+        },
+        "execute.stdout": {
+          "bytes": 542,
+          "sha256": "4f6d720be59c9ca2ca3699995169a2b5865c0607f99521f0528170e9c2863593",
+          "mode": "0o644"
+        },
+        "compile.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        },
+        "execute.argv.json": {
+          "bytes": 121,
+          "sha256": "a20594f65860304ffa7452a1f052b1ea990c118ea0cb579cd4b7e45fa23b84de",
+          "mode": "0o644"
+        },
+        "source_before.json": {
+          "bytes": 12010,
+          "sha256": "fdce2e69041957d7963b65a2ea5add60ed2783b2100d9dd9a80f2e23ca9dc1ec",
+          "mode": "0o644"
+        },
+        "dependencies.argv.json": {
+          "bytes": 3096,
+          "sha256": "21b59623cc1b66c9bceb2707cbd2ae404fd3ce9ecdaf926886adf0dafdeef6d7",
+          "mode": "0o644"
+        },
+        "compile.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "mode": "0o644"
+        }
+      }
+    }
+  },
+  "failures_and_limits": "stop01 assertion C timing vs R original; stop02 receipt field compile; stop03 C-ref R-retirement expectation; stop04 clock-free admission expectation; stop05 exact LATE publication expectation; stop07 selected R retained by STOP C. stop06 historical44 pass; stop08 final45 pass. No production guards weakened; every numbered log retained."
+}

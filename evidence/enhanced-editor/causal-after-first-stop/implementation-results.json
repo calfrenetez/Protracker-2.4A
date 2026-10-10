@@ -1,0 +1,55 @@
+{
+  "freeze": "STOP01",
+  "required_host_results": [
+    {
+      "run": "stop-08",
+      "case_count": 45,
+      "rc": 0,
+      "oracle_bytes": 542,
+      "oracle_sha256": "4f6d720be59c9ca2ca3699995169a2b5865c0607f99521f0528170e9c2863593",
+      "stderr_bytes": 0,
+      "source_paths": 71,
+      "source_unchanged": true,
+      "elapsed_seconds": 8.469683709030505
+    },
+    {
+      "run": "control-01",
+      "case_count": 34,
+      "rc": 0,
+      "oracle_bytes": 449,
+      "oracle_sha256": "fbc404dc529eaf0af68f5bf5241c5f58e8cbe86820e8a039405c81032b94b41f",
+      "stderr_bytes": 0,
+      "source_paths": 71,
+      "source_unchanged": true,
+      "elapsed_seconds": 8.83344220800791
+    },
+    {
+      "run": "legacy-01",
+      "case_count": 26,
+      "rc": 0,
+      "oracle_bytes": 521,
+      "oracle_sha256": "296f5ae9a539b3d0ddfed133858c2ac1f4d5f66dd769b0745845135b9e99864f",
+      "stderr_bytes": 0,
+      "source_paths": 71,
+      "source_unchanged": true,
+      "elapsed_seconds": 8.45095216698246
+    }
+  ],
+  "original_repository_copy_pins_unchanged": {
+    "src/core/mixed_readers_causal.c": true,
+    "src/core/mixed_readers_causal_control_internal.h": true,
+    "src/core/mixed_readers_causal_queue_internal.h": true,
+    "src/core/mixed_readers_causal_factory_internal.h": true,
+    "src/core/mixed_readers_causal.h": true,
+    "tests/mixed_readers_causal_control_test.c": true,
+    "tests/test_mixed_readers_causal_control.py": true,
+    "tests/mixed_readers_causal_test.c": true
+  },
+  "private_original_CONTROL_default_bodies_unchanged": true,
+  "normal_repository_driver": "prepared, AST oracle checked; not executed here because focused overlay uses read-only repository dependencies",
+  "native_compile": "NOT RUN",
+  "emulator": "NOT RUN",
+  "physical": "NOT RUN",
+  "device_stop_quiet_or_audio": "NOT QUALIFIED",
+  "failure_history": "stop01 assertion C timing vs R original; stop02 receipt field compile; stop03 C-ref R-retirement expectation; stop04 clock-free admission expectation; stop05 exact LATE publication expectation; stop07 selected R retained by STOP C. stop06 historical44 pass; stop08 final45 pass. No production guards weakened; every numbered log retained."
+}

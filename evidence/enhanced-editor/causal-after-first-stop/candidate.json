@@ -1,0 +1,27 @@
+{
+  "freeze": "STOP01",
+  "host_only": true,
+  "source_scope": "after-first finite TRIGGER to STOP alternative; not prepublished native exact scheduling",
+  "files": [
+    {
+      "path": "src/core/mixed_readers_causal.c",
+      "bytes": 77804,
+      "sha256": "adc205c1de557ccff2d6537623381a27db6266083cb5580d7cf98c75785d68a7"
+    },
+    {
+      "path": "src/core/mixed_readers_causal_stop_internal.h",
+      "bytes": 3259,
+      "sha256": "70216763b72622013cabe3f61e8a98610637cb6259b2db14e7bdab98bc7e3aac"
+    },
+    {
+      "path": "tests/mixed_readers_causal_stop_test.c",
+      "bytes": 46732,
+      "sha256": "ec2627aa1925605a7d00a49430d6bda80b68947241b4c43b4d4c5cc7ef5efda5"
+    },
+    {
+      "path": "tests/test_mixed_readers_causal_stop.py",
+      "bytes": 3138,
+      "sha256": "8ccbe0853d63f092909ab339acd30ee42abf2a8fb7b5b5340fc0793bf344ab1f"
+    }
+  ]
+}

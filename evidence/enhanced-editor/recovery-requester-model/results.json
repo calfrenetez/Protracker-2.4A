@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-10",
+  "scope": "Portable recovery requester input and transaction model",
+  "status": "HOST_SANITIZER_AND_NATIVE_OBJECT_COMPILE_PASS",
+  "host": {
+    "tests": 1,
+    "assertion_groups": 6,
+    "returncode": 0,
+    "seconds": 42.63,
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "warnings_are_errors": true,
+    "fixture_stdout_asserted": "RECOVERY REQUESTER MODEL HOST PASS: 6 groups; input/focus, caps/cancel, real controller apply/bind/refusal",
+    "fixture_stderr": ""
+  },
+  "native_object": {
+    "returncode": 0,
+    "bytes": 2728,
+    "sha256": "a146c197a6989c7d459bdae1c9f3bdc1a196a97bd21e35aaeb35559be680be2f",
+    "dependency_report_sha256": "6183f86fab0d2194291d80f58007ad983441aa8e4b2fd23397802180858e981d",
+    "flags": "68000, soft-float, nix20, custom optimizer disabled, strict warnings; compile only"
+  },
+  "inputs": {
+    "src/native/recovery_requester.h": {
+      "bytes": 3114,
+      "sha256": "8bead38c04fd4964e895abb107c8c4823de44250fdb5e376ddcd357dc584ed0b"
+    },
+    "src/native/recovery_requester_model.c": {
+      "bytes": 7090,
+      "sha256": "3bc7a03355cae169122861c3903f398317a6aea979b2cbb5eb8aa1f048fb9835"
+    },
+    "tests/native_recovery_requester_model_test.c": {
+      "bytes": 13487,
+      "sha256": "4975211fae31824be5a55934be0158cc86a332e6e90ca0a85dd3b8ec763de128"
+    },
+    "tests/test_native_recovery_requester_model.py": {
+      "bytes": 2402,
+      "sha256": "e6374f1cfab3bd0691e4896fcf7422434ae8a570c4764cfb95cd2dfa9b372c7a"
+    }
+  },
+  "test_boundary": "Actual requester/preferences/controller/binder with deterministic DOS/stat stubs; previous seven-group baseline entry compiled but uncalled. No ENV, snapshot, deletion or playback operation.",
+  "not_tested": [
+    "Native window, IDCMP event translation, rendering or resources",
+    "Editor command/button/shortcut dispatch",
+    "Main timer and modal lifecycle",
+    "Linked editor or runtime ABI",
+    "Amiberry or real A1200"
+  ],
+  "preserved": "Architecture, master precision, exact musical scheduling and all protected display/editor work"
+}

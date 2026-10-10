@@ -6643,8 +6643,32 @@ AddressSanitizer and UndefinedBehaviorSanitizer. Existing typed configuration
 and full-precision recovery snapshot tests also passed. See
 `evidence/enhanced-editor/recovery-preferences-host/results.json`.
 
-Requester layout, input/key dispatch, modal-loop and current-document hookups
-remain **unimplemented**. Native ABI/build, Amiberry and real-A1200 acceptance
+The preferences translation unit also compiled for 68000/soft-float with the
+existing Amiga compiler and warnings treated as errors. This single object
+does not establish a linked application or native ABI/runtime acceptance.
+Requester layout, native input dispatch, modal-loop and current-document hookups
+remain **unimplemented**. Linked application, Amiberry and real-A1200 checks
 of this new seam are **NOT RUN**. This HOST result does not qualify musical
 timing, hardware ownership, output or listening; the existing sample-memory
 architecture and exact-scheduling requirement are unchanged.
+
+## Recovery requester input model — 10 October 2026
+
+`src/native/recovery_requester_model.c` adds seven-control focus traversal,
+bounded directory and numeric interval editing, explicit Apply/Cancel/Escape
+intent, and separate media/removable consent. Editing changes only the local
+draft. Apply uses the tested controller transaction; validation or binding
+refusal leaves the draft available for correction. Return in a text field moves
+focus rather than applying settings.
+
+Six host assertion groups passed with ASan/UBSan against the actual preferences
+controller and binder using DOS/stat stubs. They cover focus/hit bounds,
+Cancel without side effects, text capacity, correction after refusal, explicit
+removable consent, named/Untitled initial binding, no-op/backoff preservation,
+and ownership/alias/final-idle refusal. The model also compiled as a single
+68000/soft-float object with the existing Amiga compiler. See
+`evidence/enhanced-editor/recovery-requester-model/results.json`.
+
+The native window, editor command routing, input-release translation, rendering,
+modal/main-timer lifecycle, linked application, Amiberry and real-A1200 checks
+remain outstanding. These results qualify the portable input model only.

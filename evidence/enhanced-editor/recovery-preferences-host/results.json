@@ -15,7 +15,11 @@
       "seconds": 23.992,
       "returncode": 0
     },
-    "checks": ["AddressSanitizer", "UndefinedBehaviorSanitizer", "warnings treated as errors"],
+    "checks": [
+      "AddressSanitizer",
+      "UndefinedBehaviorSanitizer",
+      "warnings treated as errors"
+    ],
     "new_fixture_groups": 7,
     "new_fixture_stderr": "",
     "new_fixture_marker_asserted": "NATIVE RECOVERY PREFERENCES HOST PASS: 7 seam groups; draft/cancel, atomic apply/initial bind, source tracking, idle and alias refusal"
@@ -30,8 +34,74 @@
     "Canonical binder name termination, controls and nonempty validation"
   ],
   "test_boundary": "Actual recovery controller/binder and portable recovery components; deterministic DOS/stat stubs, no real ENV or device operations",
-  "not_implemented": ["Requester UI", "Key/input dispatch", "Modal loop", "Current-document frontend hookups"],
-  "not_run": ["Native build/ABI", "Amiberry", "Real A1200"],
-  "not_qualified": ["Exact musical timing", "Hardware voice stop or output", "AmiGUS capacity or upload completion", "Human listening"],
-  "preserved": "Existing sample-memory architecture, exact-scheduling decision, baseline and unrelated display/editor work"
+  "not_implemented": [
+    "Native requester window",
+    "Native key/input dispatch",
+    "Modal loop",
+    "Current-document frontend hookups"
+  ],
+  "not_run": [
+    "Linked application/native ABI or runtime",
+    "Amiberry",
+    "Real A1200"
+  ],
+  "not_qualified": [
+    "Exact musical timing",
+    "Hardware voice stop or output",
+    "AmiGUS capacity or upload completion",
+    "Human listening"
+  ],
+  "preserved": "Existing sample-memory architecture, exact-scheduling decision, baseline and unrelated display/editor work",
+  "native_object_compile": {
+    "rc": 0,
+    "source_copies": {
+      "src/native/recovery_preferences.c": "d35cca0f444aeb4c855cf92d85c85758af4d473aab1805fcdd6f3c051db2a887",
+      "src/native/recovery_preferences.h": "418349912d01e0e1b13ff5b5279fe5384bdb278d36b2dbd5fb4ad7a34532e595",
+      "src/native/recovery.h": "0502973dec3b4f60ba1fc6c3b4593192f51e8e7b1e924617338e20d2a169594a",
+      "src/platform/recovery_find.h": "11497e0445681b4778f7fc4899961a37eed9c4339ce164a506ea83815949fc8d",
+      "src/platform/recovery_store.h": "6e3d1b65c25cd944a84fc184a4b8638b926595f5f74aa44a56d1f58594d91f8b",
+      "src/platform/recovery_file.h": "fed054f4047729acc924eb16a30e7e2194dda6acf36b58ad3ea956e6f26634f5",
+      "src/platform/project_import.h": "66745961eee8c4f7b1fbd9fc96f28b67f6746ca1159120fc1111f286ed81b9cf",
+      "src/core/document.h": "f66757baf8d762bf0413afd2b4e7b2e589ad6f6a6e2b59f6f72d9458a3fa279f",
+      "src/core/pp20.h": "d62562e79452f53a0dc9cdc753e7f337d0e305505408199e805f8a43f862dbf6",
+      "src/core/mod_inspect.h": "9b80158f6e9db0ccde95ba16f58a6ed4292ebae056e500796b074842abf8a29f",
+      "src/core/project.h": "e1a749800258b1f1db1dedcd7d5d36970abbf7494279cb3669212757f982e21a",
+      "src/core/pcm.h": "9b6996caf7c81bd53034f53e008e7681885ede2711dddf7c2027c3bab06cb10e",
+      "src/core/channels.h": "9eadeee6befb0f291e62c654a8ccd5ed6c6e7030f8c8c93587566fb06eb99517",
+      "src/platform/project_file.h": "9bc2e3babc4956a2d665d150287c5a405bf0e08f0642620f0f971262b78f7b8f",
+      "src/platform/file_save.h": "0b17cd45c8307aea727fe737196fcf8cd4ce83e4715fe5ba0e900deb6b28d814",
+      "src/core/safe_save.h": "8f184c5af658e2fb81b5f5dec9773cf6767d9e8dcd7de8405cf7d2892a0cac6d",
+      "src/core/recovery.h": "2766d77af8155e4798354640253ffcd79213db678f1bf792cae097514ed0197f"
+    },
+    "compiler_sha256_before": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+    "compiler_sha256_after": "e3bd6818f92fe458e19d46658d2296ba85a7d8b0811571a08bea7030310dc54f",
+    "elapsed_seconds": 23.958921374985948,
+    "native_run": false,
+    "linked_program": false,
+    "full_SDK_or_ABI_acceptance": false,
+    "target_or_shared_operation": false,
+    "object_bytes": 2300,
+    "object_sha256": "82ff0ca95289fb177d8971ddd85ef12467959641fd9cd0261149348b45d78f2b",
+    "dependency_report_sha256": "41b3721d8b4c14015efb008f9f949861bcea27407300a45721a84f4061dd3cf7",
+    "flags": [
+      "-std=c99",
+      "-m68000",
+      "-msoft-float",
+      "-mcrt=nix20",
+      "-fbbb=-",
+      "-Os",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Isrc/core",
+      "-MD",
+      "-MF",
+      "recovery_preferences.d",
+      "-c",
+      "src/native/recovery_preferences.c",
+      "-o",
+      "recovery_preferences.o"
+    ],
+    "scope": "Single copied preferences translation unit compiled for 68000/soft-float; no linked editor, native execution or ABI qualification."
+  }
 }

@@ -256,5 +256,60 @@
     },
     "recovery": "Separate bounded HOST-only recovery proposal prepared; approval pending; not executed",
     "limits": "Startup failure is infrastructure evidence only. It neither fails nor qualifies the requester GUI, native ABI/lifetime, hardware or listening."
+  },
+  "approved_host_recovery_first": {
+    "date": "2026-10-10",
+    "status": "OWNED_EMULATOR_STOPPED_COMPLETION_REFUSED_HOLD_RETAINED",
+    "actual_tool_chunk": "5293e5",
+    "rc": 1,
+    "maximum_seconds": 90,
+    "source": {
+      "bytes": 45526,
+      "sha256": "d0171f6c1ba677c17c42864a51d02552b7a0d1681c75742cfbe68bdcb28cb76d"
+    },
+    "host_pure_gate_groups": 8,
+    "independent_source_review": "Accepted before execution; does not establish recovery completion",
+    "authorization_sha256": "1a8ade2e6b96cf79837e847d318660d9811cfdd26683b5a079fa10cf0e191c83",
+    "issued_unix": 1791621162,
+    "expires_unix": 1791621252,
+    "first_failure": {
+      "code": "CURRENT_OWNED_PIN_DRIFT",
+      "elapsed_seconds": 0.6273315420257859,
+      "path_role": "Final authorization reread before proof publication/release",
+      "initial_ctime_ns": 1791621162221850268,
+      "observed_ctime_ns": 1791621162645855552,
+      "other_shown_identity_fields_equal": true,
+      "failed_read_sha_not_serialized": true,
+      "cause_actor": "UNKNOWN"
+    },
+    "signal_count": 1,
+    "owned_emulator": {
+      "pid": 98937,
+      "birth": "Sat Oct 10 02:30:59 2026",
+      "birth_unix": 1791595859,
+      "exact_command_and_original_boot_correlated": true
+    },
+    "saved_observations": {
+      "commands": 8,
+      "positive_waits_and_both_eofs": true,
+      "exit_independent_and_final_process_absence": true,
+      "independent_and_final_no_2345_listener": true,
+      "original_devbench_pid": 76735,
+      "disconnected_health_observations": 3,
+      "current_or_continuous_readiness": false
+    },
+    "restoration_boundary": "Control flow reached final authorization reread after restoration/check path. Actual local restoration result pins were not retained in the failure report; no complete restoration proof is claimed.",
+    "public_release": false,
+    "guard_hold_retained": true,
+    "automatic_retry": false,
+    "candidate_staged_or_launched": false,
+    "target_exchange": false,
+    "physical_operation": false,
+    "service_mutation": false,
+    "saved_first_failure": {
+      "bytes": 32170,
+      "sha256": "b555b58eadee3a784101e88f63649f0be8bd0b3e0fb9874a759d3125aa48cfaa"
+    },
+    "next": "Separate bounded completion decision; no signal, restoration or target retry. Four peers told HOLD retained and hands off."
   }
 }

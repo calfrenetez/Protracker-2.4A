@@ -6718,3 +6718,15 @@ with the original reservation. No automatic retry, target probe, cleanup or
 release followed. A separately approved bounded host recovery is required
 before another shared operation. This infrastructure failure does not change
 the passing host checks or establish any native acceptance.
+
+
+The approved separate host recovery on 10 October correlated the failed boot's
+exact Amiberry process, sent its single permitted SIGTERM and observed exit,
+then independent and final absence with the original DevBench service and
+disconnected health. It stopped before public release because the final
+authorization reread found a changed ctime. The other shown identity fields
+were equal; the failing read's byte hash and the cause of the change are not
+recorded. Its failure report does not retain the local restoration result
+pins, so complete restoration is not claimed. HOLD remains retained, with
+no automatic retry. A separate bounded completion decision is required; the
+ProTracker requester and real-A1200 tests remain **NOT RUN**.

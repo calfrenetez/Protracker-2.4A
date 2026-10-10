@@ -311,5 +311,98 @@
       "sha256": "b555b58eadee3a784101e88f63649f0be8bd0b3e0fb9874a759d3125aa48cfaa"
     },
     "next": "Separate bounded completion decision; no signal, restoration or target retry. Four peers told HOLD retained and hands off."
+  },
+  "approved_host_completion_first": {
+    "date": "2026-10-10",
+    "status": "APPROVED_HOST_COMPLETION_RELEASED_ONLY",
+    "actual_tool_chunk": "ad7e50",
+    "rc": 0,
+    "maximum_seconds": 45,
+    "elapsed_seconds": 0.4095952089992352,
+    "source": {
+      "bytes": 40930,
+      "sha256": "3a6dc1d62292e775a8419e11d3a496d589779c4308cf16605630c32832b7a3d3"
+    },
+    "authorization": {
+      "bytes": 3852,
+      "sha256": "a933e72ecb600522e2387ea889b5f6efc8a21e97803369c19d15c8a03de97a91",
+      "issued_unix": 1791625557,
+      "expires_unix": 1791625602,
+      "human_literal": "yes"
+    },
+    "saved_receipt": {
+      "bytes": 32305,
+      "sha256": "d2c9cb874451026904a5b7ea4165d724e703ab84c1a9f49544294166122ad323"
+    },
+    "records": {
+      "absence": {
+        "bytes": 945,
+        "sha256": "be4ec2da796921628de6f9bc7f12701bdf4f9950dcdc79d314851de72dd737e2"
+      },
+      "authorization": {
+        "bytes": 17696,
+        "sha256": "e2bf6336a12bc2f33bef1262668a11d60843fb7bd09d7e2244b895dfdb154b1f"
+      },
+      "cleanup": {
+        "bytes": 1481,
+        "sha256": "2b4c0cb4057f27a86425f35920054c28b840980ad0805f46c9cd9bca62cf1358"
+      },
+      "restoration": {
+        "bytes": 1959,
+        "sha256": "9a02239538b65456318ae5882dbff23906db09ff684b0cd0c2d5a94b8fabbb1b"
+      }
+    },
+    "fresh_four_completed_quiet_ack_receipts": {
+      "bytes": 6267,
+      "sha256": "caf4131714d3eb04fa7e82b2f6eec6dcda6b51be9e1efc6cd9203b8b6af6fe0a"
+    },
+    "observations": {
+      "local_commands": 4,
+      "positive_direct_child_waits_and_both_eofs": true,
+      "passive_disconnected_health_reads": 2,
+      "separate_initial_and_final_no_amiberry_or_2345": true,
+      "unchanged_original_devbench_pid": 76735,
+      "birth": "Fri Oct 9 14:46:54 2026",
+      "baseline_verification_only": true,
+      "stage_absent": true,
+      "historical_full7_continuity_accepted": false,
+      "runtime_files_match_saved_before_bytes_and_required_mode_owner_checks": true,
+      "current_gid_captured_and_rechecked": true,
+      "historical_gid_continuity_inferred": false
+    },
+    "public_release": {
+      "archive": "release-00000000000005a0.json",
+      "fence": 1440,
+      "released": true
+    },
+    "in_scope_postrelease_guard": {
+      "phase": "EMPTY",
+      "fence": 1440,
+      "archives": 32,
+      "reservation": false,
+      "inflight": false,
+      "holds": 0,
+      "potential_resident": false
+    },
+    "signal_count": 0,
+    "runtime_write": false,
+    "service_mutation": false,
+    "target_exchange": false,
+    "physical_operation": false,
+    "retry": false,
+    "requester_native_test": "NOT_RUN",
+    "peer_release": "Explicit tagged release sent to all four; all four acknowledged, Scott via coordination message",
+    "limits": [
+      "Saved observations are facts at their recorded times, not future or continuous readiness.",
+      "Original startup and recovery failures remain preserved separately.",
+      "External exec_command returns combined output and RC; separate external stdout/stderr EOF is not provided. Controller child streams have distinct complete EOF/wait evidence.",
+      "No native GUI/ABI/timer/stack, audio, timing, physical or listening acceptance.",
+      "Archive allowance32/32 refuses further reserve; no archive maintenance or new window performed."
+    ],
+    "independent_saved_audit": {
+      "bytes": 10613,
+      "sha256": "8d87e1036585b2a8a318e093469f4efab33e19d3b0d2a841d9fbc440ba9bbbd4",
+      "status": "SAVED_HOST_COMPLETION_RELEASE_ACCEPTED"
+    }
   }
 }

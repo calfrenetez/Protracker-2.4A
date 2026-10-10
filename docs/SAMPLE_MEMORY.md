@@ -6730,3 +6730,24 @@ recorded. Its failure report does not retain the local restoration result
 pins, so complete restoration is not claimed. HOLD remains retained, with
 no automatic retry. A separate bounded completion decision is required; the
 ProTracker requester and real-A1200 tests remain **NOT RUN**.
+
+The distinct completion-only pass approved on 10 October then passed once
+(45-second maximum, 0.410-second tool execution). Four real authorization,
+baseline-verification, absence and cleanup records preceded normal public
+release. Its separate initial/final local observations showed no Amiberry or
+2345 listener, the unchanged original DevBench service and disconnected health.
+Both runtime files matched the complete saved before contents and required
+modes/owner checks; their actual current groups were captured and rechecked.
+Historical group continuity is not inferred from the backup files.
+This completion performed no signal, runtime write, service change or target
+exchange. The in-scope postrelease guard was EMPTY at fence1440, with no
+reservation, hold, inflight operation or resident obligation. All four peers
+received and acknowledged explicit tagged release. These are recorded-time
+facts; they do not establish future readiness or replace the original failures.
+
+The release retained all history and reached the 32-record archive allowance.
+Further reservation requires a separately reviewed evidence-preserving archival
+procedure. No rollover, reset, pruning or new window was performed. The native
+requester and real-A1200 tests remain **NOT RUN**. See the separate completion
+entry in the frontend evidence; architecture and exact-scheduling requirements
+are unchanged.
